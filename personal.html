@@ -139,18 +139,31 @@
         footer p { font-size: 0.55rem; letter-spacing: 5px; color: rgba(255,255,255,0.1); text-transform: uppercase; }
    /* MOBILE FIX: Adds headroom so text starts below the logo */
 @media (max-width: 768px) {
+    /* 1. Centering the Nav and Logo */
+    nav {
+        text-align: center !important; /* Forces the logo to the middle */
+        padding: 30px 0 !important;   /* Tightens the top gap for mobile */
+    }
+
+    .nav-logo {
+        width: 80% !important;        /* Matches the 'Hero' scale from index.html */
+        max-width: 340px;             /* Prevents it from getting too huge on larger phones */
+    }
+
+    /* 2. Adjusting the Hero Content */
     .hero {
-        padding-top: 180px !important; /* Creates the necessary gap */
+        padding-top: 200px !important; /* Pushes text further down to clear the larger centered logo */
         height: auto !important;
-        min-height: 40vh;
+        min-height: 45vh;
         justify-content: flex-start;
     }
 
     h1 {
-        font-size: 2.2rem !important; /* Scales down text for smaller screens */
-        letter-spacing: 6px !important;
+        font-size: 2rem !important;    /* Clean, centered typography */
+        letter-spacing: 4px !important;
         line-height: 1.3;
-        mask-image: none !important; /* Disables the fade-mask on mobile for better legibility */
+        margin-top: 20px;
+        mask-image: none !important;
         -webkit-mask-image: none !important;
     }
 }
