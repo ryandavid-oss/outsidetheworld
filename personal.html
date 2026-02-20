@@ -162,39 +162,46 @@
     </article>
 </section>
     <footer><p>© 2026 OUTSIDE THE WORLD LLC &nbsp; | &nbsp; SYSTEMS & STORIES</p></footer>
-    <script>
+ <script>
 function togglePost() {
     var viewer = document.getElementById('post-viewer');
     var trigger = document.getElementById('current-post-trigger');
     var contentArea = document.getElementById('latest-residue');
-    var beacon = trigger.querySelector('.card-beacon');
 
     if (viewer.style.display === 'none' || viewer.style.display === '') {
         viewer.style.display = 'block';
         contentArea.innerHTML = "<p style='color: #666; letter-spacing: 2px;'>SYNCHRONIZING...</p>";
         
         fetch('./manifest.json')
-            .then(function(res) { return res.json(); })
+            .then(function(res) { 
+                if (!res.ok) throw new Error("Manifest not found");
+                return res.json(); 
+            })
             .then(function(data) {
                 if (data.length > 0) {
-                    var latestPost = data[0]; // The full object from the manifest
+                    var latestPost = data[0]; 
                     var latestFile = latestPost.file;
-                    var latestTitle = latestPost.title; // THE MISSING PIECE
                     
-                    return fetch('./blogger_posts/' + latestFile).then(function(res) {
-                        return res.text().then(function(text) {
-                            // We inject the title manually here so it matches the Archive
-                            var headerHtml = '<h2>' + latestTitle + '</h2>';
-                            var bodyHtml = marked.parse(text);
-                            
-                            contentArea.innerHTML = headerHtml + bodyHtml;
-                            viewer.classList.add('active');
-                            setTimeout(function() { viewer.scrollIntoView({ behavior: 'smooth' }); }, 300);
-                        });
-                    });
+                    return fetch('./blogger_posts/' + latestFile);
                 } else {
                     throw new Error("No entries found in manifest.");
                 }
+            })
+            .then(function(res) { 
+                if (!res.ok) throw new Error("Post file not found");
+                return res.text(); 
+            })
+            .then(function(text) {
+                // THE FIX: We no longer create headerHtml from the manifest.
+                // We let the Markdown file's "# Title" do the work.
+                var bodyHtml = marked.parse(text);
+                
+                contentArea.innerHTML = bodyHtml;
+                viewer.classList.add('active');
+                
+                setTimeout(function() { 
+                    viewer.scrollIntoView({ behavior: 'smooth', block: 'start' }); 
+                }, 300);
             })
             .catch(function(err) {
                 console.error("Archive Error:", err);
