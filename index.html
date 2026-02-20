@@ -22,24 +22,24 @@
             color: white;
         }
 
-        /* 1. NEUTRAL ZONES */
-        /* Change neutral-gutter z-index to 5 so panels can sit on top of it */
-.neutral-gutter {
-    position: absolute;
-    top: 0; left: 42.5%; width: 15%; height: 100%;
-    z-index: 5; /* Lowered from 140 */
-}
+        /* 1. NEUTRAL ZONES (THE GUARDS) */
+        .neutral-top {
+            position: absolute;
+            top: 0; left: 0; width: 100%; 
+            height: 450px; /* Pushes the 'Event Horizon' down */
+            z-index: 1000; /* Shields the logo from mouse triggers */
+        }
+        .neutral-gutter {
+            position: absolute;
+            top: 0; left: 45%; width: 10%; /* Narrowed for better hitbox room */
+            height: 100%;
+            z-index: 1000;
+        }
 
-/* Change neutral-top z-index to 5 */
-.neutral-top {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 280px;
-    z-index: 5; /* Lowered from 150 */
-}
         /* 2. LOGO & INSTRUCTIONS */
         .logo-header {
             position: absolute; top: 50px; left: 50%;
-            transform: translateX(-50%); z-index: 200;
+            transform: translateX(-50%); z-index: 1100; /* Sits above the guards */
             width: 500px; transition: all var(--transition-main);
             pointer-events: none; text-align: center;
         }
@@ -47,6 +47,7 @@
         .instruction {
             margin-top: 40px; font-size: 0.85rem; letter-spacing: 8px;
             text-transform: uppercase; color: #eee; opacity: 0.8;
+            transition: opacity 0.4s ease;
         }
 
         /* Logo Shifting Logic */
@@ -59,13 +60,12 @@
         .panel { position: relative; flex: 1; transition: flex var(--transition-main); overflow: hidden; }
         .panel:hover { flex: 6; }
 
-        /* THE MASSIVE HITBOX: The entire panel is now a link */
-       .panel-link {
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    width: 100%; height: 100%; text-decoration: none; color: inherit;
-    position: relative; 
-    z-index: 500; /* High z-index ensures it's above everything else */
-}
+        .panel-link {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            width: 100%; height: 100%; text-decoration: none; color: inherit;
+            position: relative; 
+            z-index: 500; /* High z-index but below the guards */
+        }
 
         .indicator-node {
             position: absolute; top: 55%; left: 50%; width: 80px; height: 80px;
@@ -93,7 +93,6 @@
 
         .panel:hover h2, .panel:hover .details { opacity: 1; transform: translateY(0); }
 
-        /* "Explore" button styling but now integrated into the hitbox */
         .fake-btn {
             display: inline-block; padding: 16px 55px; border: 1px solid rgba(255,255,255,0.4);
             font-size: 0.7rem; font-weight: 700; letter-spacing: 5px; text-transform: uppercase;
@@ -114,14 +113,13 @@
             .container { flex-direction: column; height: auto; }
             .neutral-gutter, .neutral-top { display: none; }
             
-            .logo-header { position: relative; top: 30px; width: 80%; margin: 0 auto 100px; transform: none; left: auto; }
+            .logo-header { position: relative; top: 30px; width: 80%; margin: 0 auto 60px; transform: none; left: auto; }
             .panel { height: 60vh; flex: none !important; border-bottom: 1px solid rgba(255,255,255,0.1); }
             
-            /* Show content immediately on mobile */
             h2, .details { opacity: 1 !important; transform: none !important; }
             h2 { font-size: 2.5rem; }
             .indicator-node { display: none; }
-            .fake-btn { background: white; color: black; } /* Make the target clear */
+            .fake-btn { background: white; color: black; } 
         }
     </style>
 </head>
