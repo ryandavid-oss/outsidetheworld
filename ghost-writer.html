@@ -215,7 +215,9 @@
     }
 
     // NEW: Inject the title as a Markdown Header (#) at the top of the file
-    const fullMarkdown = `# ${title}\n\n${content}`;
+// This tells the computer: "Every time I hit Enter, add two spaces so the line actually breaks."
+const formattedContent = content.split('\n').map(line => line + '  ').join('\n');
+const fullMarkdown = `# ${title}\n\n${formattedContent}`;
 
     // Arizona Time Logic
     const now = new Date();
