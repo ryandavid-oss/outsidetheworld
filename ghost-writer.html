@@ -10,7 +10,7 @@
         :root {
             --hacker-green: #00ff41;
             --case-color: #1a1a1a;
-            --lcd-bg: #8fb37a; /* Widescreen Green */
+            --lcd-bg: #8fb37a; 
             --lcd-text: #051405; /* High Contrast Dark Font */
         }
 
@@ -23,17 +23,18 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            overflow: hidden;
+            overflow-y: auto; /* Allows scrolling if screen is too small */
+            padding: 20px;
         }
 
         /* --- 1. HACKER LOGIN SCREEN --- */
         #auth-container {
-            width: 400px;
+            width: 100%;
+            max-width: 400px;
             padding: 40px;
             border: 1px solid var(--hacker-green);
             box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
             background: rgba(0, 20, 0, 0.9);
-            text-align: left;
         }
 
         .terminal-header {
@@ -48,17 +49,17 @@
         #passwordInput {
             background: transparent;
             border: none;
-            border-left: 10px solid var(--hacker-green);
+            border-left: 5px solid var(--hacker-green);
             padding: 10px;
             color: var(--hacker-green);
             font-family: 'Fira Code', monospace;
             font-size: 1.2rem;
-            width: 80%;
+            width: 90%;
             outline: none;
+            margin-bottom: 20px;
         }
 
         .login-btn {
-            margin-top: 25px;
             background: var(--hacker-green);
             color: #000;
             border: none;
@@ -69,89 +70,88 @@
             width: 100%;
         }
 
-        .login-btn:hover { background: #00cc33; }
-
-        /* --- 2. WIDESCREEN ORGANIZER (Hidden Initially) --- */
+        /* --- 2. THE WIDESCREEN ORGANIZER --- */
         #main-content {
             display: none;
-            width: 95%;
-            max-width: 1100px;
+            width: 100%;
+            max-width: 1000px;
         }
 
         .sharp-case {
             background-color: var(--case-color);
             border-radius: 12px;
-            padding: 40px;
-            border: 3px solid #333;
+            padding: 30px;
+            border: 2px solid #333;
             box-shadow: 0 30px 60px rgba(0,0,0,0.9);
         }
 
         .case-header { 
             color: #444; 
-            font-size: 0.9rem; 
-            margin-bottom: 15px; 
+            font-size: 0.8rem; 
+            margin-bottom: 10px; 
             text-align: right;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
         }
 
         .lcd-screen-bezel {
             background-color: #000;
-            padding: 25px;
+            padding: 20px;
             border-radius: 4px;
-            box-shadow: inset 0 0 20px rgba(0,0,0,1);
         }
 
         .lcd-screen {
             background-color: var(--lcd-bg);
             color: var(--lcd-text);
-            padding: 40px;
+            padding: 30px;
             min-height: 500px;
+            display: flex;
+            flex-direction: column;
         }
 
         .screen-header {
-            border-bottom: 3px solid var(--lcd-text);
-            margin-bottom: 30px;
-            font-size: 1.4rem;
-            letter-spacing: 1px;
+            border-bottom: 2px solid var(--lcd-text);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
         }
 
-        form { display: flex; flex-direction: column; gap: 25px; }
+        form { display: flex; flex-direction: column; gap: 15px; flex-grow: 1; }
         
-        label { font-size: 1.6rem; font-weight: bold; }
+        label { font-size: 1.3rem; font-weight: bold; }
 
         input#title, textarea#content {
-            background: rgba(0,0,0,0.03);
+            background: rgba(0,0,0,0.05);
             border: none;
-            border-bottom: 2px solid var(--lcd-text);
-            color: var(--lcd-text); /* High contrast font */
+            border-bottom: 1px dashed var(--lcd-text);
+            color: var(--lcd-text);
             font-family: 'VT323', monospace;
-            font-size: 2.2rem; /* Massive, readable font */
+            font-size: 1.8rem;
             outline: none;
             width: 100%;
+            padding: 5px;
         }
 
         textarea#content {
-            height: 350px;
-            border: 2px dashed var(--lcd-text);
+            height: 300px;
+            border: 1px dashed var(--lcd-text);
+        }
+
+        /* THE PUBLISH BUTTON (Now inside the screen) */
+        .digital-publish-btn {
+            margin-top: 25px;
+            background: var(--lcd-text);
+            color: var(--lcd-bg);
+            border: 2px solid var(--lcd-text);
             padding: 15px;
-            line-height: 1.1;
-        }
-
-        .retro-key {
-            margin-top: 40px;
-            width: 100%;
-            padding: 25px;
-            background: #222;
-            color: var(--hacker-green);
             font-family: 'VT323', monospace;
-            font-size: 1.8rem;
-            border: 2px solid var(--hacker-green);
-            border-radius: 8px;
+            font-size: 1.5rem;
             cursor: pointer;
-            box-shadow: 0 0 15px rgba(0, 255, 65, 0.1);
+            text-align: center;
         }
 
-        .retro-key:active { transform: scale(0.98); background: #111; }
+        .digital-publish-btn:active {
+            background: transparent;
+            color: var(--lcd-text);
+        }
     </style>
 </head>
 <body>
@@ -159,74 +159,67 @@
     <div id="auth-container">
         <div class="terminal-header">SYS.LOGON_v2.0</div>
         <div class="terminal-prompt">USER: ADMIN</div>
-        <div class="terminal-prompt">PASSWORD REQUIRED:</div>
+        <div class="terminal-prompt">PASSWORD:</div>
         <input type="password" id="passwordInput" autofocus>
-        <button class="login-btn" onclick="checkPassword()">INITIATE SEQUENCE</button>
+        <button class="login-btn" onclick="checkPassword()">ENTER</button>
     </div>
 
-<div id="main-content">
-    <div class="sharp-case">
-        <div class="case-header">SHARP PERSONAL ORGANIZER | WIDE_LCD</div>
-        
-        <div class="lcd-screen-bezel">
-            <div class="lcd-screen">
-                <div class="screen-header">ESTATE SYNC ACTIVE // 32KB RAM</div>
-                <form id="mdForm">
-                    <label>ENTRY TITLE:</label>
-                    <input type="text" id="title" required placeholder="ENTER TITLE...">
-                    
-                    <label>STORY CONTENT:</label>
-                    <textarea id="content" required placeholder="TYPE YOUR THOUGHTS..."></textarea>
-                </form>
-            </div>
-        </div>
-
-        <div class="keyboard-deck" style="margin-top: 20px; text-align: center;">
-            <button type="button" id="downloadBtn" class="retro-key">
-                [ ENTER / PUBLISH TO ESTATE ]
-            </button>
-            <div class="status-light" style="color: var(--hacker-green); font-size: 0.8rem; margin-top: 10px; opacity: 0.6;">
-                ● DATA CONNECTION ACTIVE
+    <div id="main-content">
+        <div class="sharp-case">
+            <div class="case-header">SHARP ZQ-3000 | ESTATE CONTROL</div>
+            <div class="lcd-screen-bezel">
+                <div class="lcd-screen">
+                    <div class="screen-header">MEMORY: 32KB // STATUS: ONLINE</div>
+                    <form id="mdForm">
+                        <label>ENTRY TITLE:</label>
+                        <input type="text" id="title" required placeholder="...">
+                        
+                        <label>CONTENT:</label>
+                        <textarea id="content" required placeholder="TYPE HERE..."></textarea>
+                        
+                        <button type="button" id="downloadBtn" class="digital-publish-btn">
+                            > EXECUTE_PUBLISH_SEQUENCE
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
     <script>
-        // PASSWORD LOGIC
+        // 1. Password Logic
         function checkPassword() {
             const pass = document.getElementById('passwordInput').value;
             if (pass === 'Stockton12!') {
                 document.getElementById('auth-container').style.display = 'none';
                 document.getElementById('main-content').style.display = 'block';
             } else {
-                alert('CRITICAL ERROR: ACCESS DENIED');
+                alert('ACCESS DENIED');
                 document.getElementById('passwordInput').value = '';
             }
         }
 
-        // Allow "Enter" key to log in
-        document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+        // Allow "Enter" key for login
+        document.getElementById('passwordInput').addEventListener('keypress', (e) => {
             if (e.key === 'Enter') checkPassword();
         });
 
-        // GENERATE MARKDOWN LOGIC
-        document.getElementById('downloadBtn').addEventListener('click', function() {
+        // 2. File Generation Logic
+        document.getElementById('downloadBtn').addEventListener('click', () => {
             const title = document.getElementById('title').value;
             const content = document.getElementById('content').value;
-            
-            if(!title || !content) {
-                alert("FIELDS EMPTY. INPUT REQUIRED.");
+
+            if (!title || !content) {
+                alert("INPUT REQUIRED");
                 return;
             }
 
-            // Arizona Time Logic
+            // ARIZONA TIME LOGIC
             const now = new Date();
             const azOffset = -7 * 60;
             const azTime = new Date(now.getTime() + (azOffset + now.getTimezoneOffset()) * 60000);
             const dateStr = azTime.toISOString().split('T')[0];
 
-            // Sanitize filename
             const cleanTitle = title.toLowerCase().replace(/[^a-z0-9]/g, '-');
             const fileName = `${dateStr}-${cleanTitle}.md`;
 
