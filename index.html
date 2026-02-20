@@ -116,8 +116,18 @@
             .logo-header { position: relative; top: 30px; width: 80%; margin: 0 auto 60px; transform: none; left: auto; }
             .panel { height: 60vh; flex: none !important; border-bottom: 1px solid rgba(255,255,255,0.1); }
             
-/* Updated rules for better mobile fit */
-            h2, .details { opacity: 1 !important; transform: none !important; }
+/* Forces centering and prevents overflow on mobile */
+            h2, .details { 
+                opacity: 1 !important; 
+                transform: none !important; 
+                width: 100%; 
+                text-align: center; /* This pulls the words to the middle */
+            }
+            h2 { 
+                font-size: 2rem !important; 
+                letter-spacing: 3px !important; /* Keeps 'Professional' from breaking */
+                margin-bottom: 10px;
+            }
             h2 { 
                 font-size: 2rem !important; 
                 letter-spacing: 3px !important; /* Tightens the word 'Professional' */
