@@ -1,0 +1,4 @@
+# Xbox 360 failure rate
+Date: July 03, 2007
+
+Joystiq.com just posted an article about the failure rate of the Xbox 360, referencing a DailyTech article that states the actual failure rate is around 33%.  Dang.I happen to know someone who has experienced the lovely "red ring of death", and i'll tell you, it doesn't make me comfortable.  See, we bought ours around the same time and mine has been giving me grief for the past few weeks.Rest assured that if my 360 is visited  by the red ring of death, Microsoft won't hear the end of it.  One out of three Xbox owners have to agree with me.Posted wirelessly!

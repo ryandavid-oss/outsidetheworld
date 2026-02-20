@@ -1,0 +1,4 @@
+# Lost/Found phone
+Date: July 09, 2007
+
+I had the unhappy circumstance of losing my phone today.  The silly thing was that I actually remembered where I left it, but found it missing from that location when I returned. (so, did I really lose it there? Good question  Anyway.)I got 'er back now, so I'm ready to roll.  I'm feeling a bit fuzzy after the weekend, mainly because it was non-stop for the duration.  Man, it feels good to write again though.  Shows me that I need to keep it up.  I have a large blog coming tonight, too.  I did leave it alone for much of the weekend due to the fact that I burned myself up trying to learn Flash on Friday.So it's definitely time for an update.  Check that Blog page soon...you'll be surprised, I promise you that.  I know I was!Posted wirelessly!

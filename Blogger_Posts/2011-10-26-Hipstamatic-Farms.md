@@ -1,0 +1,11 @@
+# Hipstamatic Farms
+Date: October 26, 2011
+
+<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj_XQuiH5BYXnPWI3YwxHncWx2BvS7jkSdTIPRHMb_cDGL0dVKaT6ZA5I7brAXl7rhdymScmKFCm9USjPIpGWJAuOTonqEz5WYnD0hAy0BuBwc-sNLb7N-TQPcIxU97Z2hHw-37Sg/s320/photo+1-757613.JPG"  border="0" alt="" id="BLOGGER_PHOTO_ID_5667918698065244290" />
+<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhQhTBqETmHv7hs6o3-LOlMHhAWBY18x6xDhsYEqlS8fgq4fPe-0xdYIURCyG_reW4hJCoyr2VxGiMNHc3gEir4npY5bb-Af05kQ3-yE2s3UY42QbAMu-uNZHB0fnFiTfQYW_lfYA/s320/image-759428.jpeg"  border="0" alt="" id="BLOGGER_PHOTO_ID_5667918708123179266" />
+<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjTA7D0tmzLuhDmLG6PCRCMmx5ruFoQa0B3zCHbE-BRKigCUmUpaocmmN0KZ5wkFXoF1WH5Dj25Cq1UUsfm2bmOAYn4G0lxLeXls8i-k79gQndEjVA4pwFTST_TJzCtrM2wTKzHyA/s320/photo+2-761776.JPG"  border="0" alt="" id="BLOGGER_PHOTO_ID_5667918714816506962" />
+<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiabOTDkeKoINWCifdZeI3iofMNot62ovGqvXsdv-C2YIanOj90AXqPOPxXRCIoCem47Ob5-Z3y_aZa7Rx2qgvFPSkJDCz8alUgP9Ntzg-cauNTEV2urRQ9n_wdlWfHAW9A-FfrSQ/s320/photo+3-765675.JPG"  border="0" alt="" id="BLOGGER_PHOTO_ID_5667918730831051442" />
+<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhvEcVyCV_8llQyBNmfc6fgZnVlFb5Fbr6qyhpbOSnv752iPz9WWOSaO6oGHcyj1FCSpvpPFGJchYOMwq_wWXo_IqjUnWxaEszEG_bQy3WChH7yJZkQ7KfSbIX8laoGrROI1nDj7g/s320/photo+4-768132.JPG"  border="0" alt="" id="BLOGGER_PHOTO_ID_5667918740810429218" />
+<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiouD4HWhKQm8GzXL5rR9XVZLPIcX_1joqngT5BeG8iuN5MgIOkflBDoui-jA5nX7O8y_hRiAE0j-AhROvRk8Z4SJ4mOFLLFrIfa03tTTq0P40JKwG1ApFvBn2-SIxoslFjI3hvyQ/s320/photo+5-770383.JPG"  border="0" alt="" id="BLOGGER_PHOTO_ID_5667918749577502834" />
+We took a trip to a "farm" in Mesa today. Drawing close to Halloween, I trusted the SuperGrain effect coupled with the warmth of Tejas to bring a spirit of the macabre to all the photos from the day. Lens: Tejas
+Film: BlacKeys SuperGrain

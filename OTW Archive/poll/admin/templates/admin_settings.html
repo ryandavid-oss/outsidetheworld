@@ -1,0 +1,278 @@
+<html>
+<head>
+<title>Advanced Poll $pollvars[poll_version]</title>
+<meta http-equiv="Content-Type" content="text/html; charset=$lang[charset]">
+<style type="text/css">
+<!--
+.td1 {  font-family: "MS Sans Serif"; font-size: 10pt}
+.td2 {  font-family: "MS Sans Serif"; font-size: 9pt}
+.input {  font-family: "MS Sans Serif"; font-size: 9pt; height: 20px}
+.button {  font-family: Arial, Helvetica, sans-serif; font-size: 9pt}
+.select {  font-family: Arial, Helvetica, sans-serif; font-size: 9pt; width: 130px}
+-->
+</style>
+<script language="Javascript">
+<!--
+function trim(value) {
+ startpos=0;
+ while((value.charAt(startpos)==" ")&&(startpos<value.length)) {
+   startpos++;
+ }
+ if(startpos==value.length) {
+   value="";
+ } else {
+   value=value.substring(startpos,value.length);
+   endpos=(value.length)-1;
+   while(value.charAt(endpos)==" ") {
+     endpos--;
+   }
+   value=value.substring(0,endpos+1);
+ }
+ return(value);
+}
+function CheckForm() {
+ var found = 0;
+ for (i=0; i<document.forms[0].elements.length; i++) {
+   document.forms[0].elements[i].value = trim(document.forms[0].elements[i].value);
+   if (document.forms[0].elements[i].value == "") {
+     alert('$lang[SetEmpty]!');
+     document.forms[0].elements[i].focus();
+     found=1;
+     break;
+   }
+ }
+ return (found == 1) ? false : true;
+}
+// -->
+</script>
+</head>
+<body bgcolor="#3A6EA5">
+<table border="1" cellspacing="0" cellpadding="0" align="center" width="750">
+  <tr bgcolor="#C6C3C6" valign="top">
+    <td>
+      <table width="750" border="0" cellspacing="0" cellpadding="1" align="center">
+        <tr bgcolor="#400080">
+          <td height="20" class="td2" bgcolor="#000084"><b><font color="#FFFFFF">
+            &nbsp;Advanced Poll $pollvars[poll_version]</font></b></td>
+          <td height="20" align="right" bgcolor="#000084">
+          <img src="$pollvars[base_gif]/min.gif" width="16" height="14"><img src="$pollvars[base_gif]/max.gif" width="16" height="14">&nbsp;<a href="admin_logout.php?session=$auth[session]&amp;uid=$auth[uid]"><img src="$pollvars[base_gif]/cross.gif" width="16" height="14" border="0" alt="$lang[Logout]"></a></td>
+        </tr>
+        <tr valign="top">
+          <td colspan="2">
+            <table border="0" cellspacing="0" cellpadding="1">
+              <tr>
+                <td colspan="7"><img src="$pollvars[base_gif]/top_line.gif" width="745" height="3"></td>
+              </tr>
+              <tr>
+                <td align="center" rowspan="2" width="5"><img src="$pollvars[base_gif]/v_line.gif" width="5" height="50"></td>
+                <td align="center" width="120"><a href="index.php?session=$auth[session]&amp;uid=$auth[uid]&amp;action=show"><img src="$pollvars[base_gif]/index.gif" width="32" height="32" border="0" alt="$lang[IndexTitle]"></a></td>
+                <td align="center" width="131"><a href="index.php?session=$auth[session]&amp;uid=$auth[uid]&amp;action=new"><img src="$pollvars[base_gif]/new.gif" width="32" height="32" border="0" alt="$lang[NewTitle]"></a></td>
+                <td align="center" width="153"><a href="admin_settings.php?session=$auth[session]&amp;uid=$auth[uid]"><img src="$pollvars[base_gif]/settings.gif" width="32" height="32" border="0" alt="$lang[SetTitle]"></a></td>
+                <td align="center" width="121"><a href="admin_templates.php?session=$auth[session]&amp;uid=$auth[uid]"><img src="$pollvars[base_gif]/templates.gif" width="32" height="32" border="0" alt="$lang[Templates]"></a></td>
+                <td align="center" width="127"><a href="admin_password.php?session=$auth[session]&amp;uid=$auth[uid]"><img src="$pollvars[base_gif]/password.gif" width="32" height="32" border="0" alt="$lang[PwdTitle]"></a></td>
+                <td align="center" width="89"><a href="admin_help.php?session=$auth[session]&amp;uid=$auth[uid]"><img src="$pollvars[base_gif]/howto.gif" width="32" height="32" border="0" alt="$lang[Help]"></a></td>
+              </tr>
+              <tr align="center" valign="top">
+                <td width="120" class="td2">$lang[IndexTitle]</td>
+                <td width="131" class="td2">$lang[NewTitle]</td>
+                <td width="153" class="td2">$lang[SetTitle]</td>
+                <td width="121" class="td2">$lang[Templates]</td>
+                <td width="127" class="td2">$lang[PwdTitle]</td>
+                <td width="89" class="td2">$lang[Help]</td>
+              </tr>
+              <tr align="left">
+                <td colspan="7"><img src="$pollvars[base_gif]/top_line.gif" width="745" height="3"></td>
+              </tr>
+            </table>
+            <form method="post" action="$pollvars[SELF]" name="form">
+              <table width="90%" border="0" cellspacing="0" cellpadding="2" align="center">
+                <tr> 
+                  <td colspan="2" class="td1" height="30"><img src="$pollvars[base_gif]/h_line.gif" width="15" height="18">&nbsp; 
+                    $message&nbsp;<img src="$pollvars[base_gif]/h_line.gif" width="350" height="18"> 
+                  </td>
+                </tr>
+                <tr> 
+                  <td width="27%" class="td2">$lang[SetBURL]</td>
+                  <td width="73%" class="td2"> 
+                    <input type="text" name="cfg[base_url]" value="$pollvars[base_url]" class="input" size="30">
+                  </td>
+                </tr>
+                <tr> 
+                  <td width="27%" class="td2">$lang[SetURL]</td>
+                  <td width="73%" class="td2"> 
+                    <input type="text" name="cfg[base_gif]" value="$pollvars[base_gif]" class="input" size="30">
+                  </td>
+                </tr>
+                <tr> 
+                  <td width="27%" class="td2">$lang[SetLang]</td>
+                  <td width="73%" class="td2"> 
+                    <input type="text" name="cfg[lang]" class="input" value="$pollvars[lang]" size="25">
+                    <select name="lang_file" class="select" onChange="document.forms[0].elements[2].value=options[selectedIndex].value">
+                      <option value="english.php" selected>$lang[SetLang]</option>
+
+                      $langlist
+
+                    </select>
+                  </td>
+                </tr>
+                <tr> 
+                  <td width="27%" class="td2">$lang[SetPoll]</td>
+                  <td width="73%"> 
+                    <input type="text" name="cfg[title]" class="input" value="$pollvars[title]" size="25">
+                  </td>
+                </tr>
+                <tr> 
+                  <td width="27%" class="td2">$lang[SetButton]</td>
+                  <td width="73%"> 
+                    <input type="text" class="input" name="cfg[vote_button]" value="$pollvars[vote_button]" size="25">
+                  </td>
+                </tr>
+                <tr> 
+                  <td width="27%" class="td2">$lang[SetResult]</td>
+                  <td width="73%"> 
+                    <input type="text" class="input" name="cfg[result_text]" value="$pollvars[result_text]" size="25">
+                  </td>
+                </tr>
+                <tr> 
+                  <td width="27%" class="td2">$lang[StatTotal]</td>
+                  <td width="73%"> 
+                    <input type="text" class="input" name="cfg[total_text]" value="$pollvars[total_text]" size="25">
+                  </td>
+                </tr>
+                <tr> 
+                  <td width="27%" class="td2">$lang[SetVoted]</td>
+                  <td width="73%"> 
+                    <input type="text" class="input" name="cfg[voted]" value="$pollvars[voted]" size="25">
+                  </td>
+                </tr>
+                <tr> 
+                  <td width="27%" class="td2">$lang[SetComment]</td>
+                  <td width="73%"> 
+                    <input type="text" class="input" name="cfg[send_com]" value="$pollvars[send_com]" size="25">
+                  </td>
+                </tr>
+                <tr> 
+                  <td colspan="2" class="td1"><img src="$pollvars[base_gif]/h_line.gif" width="15" height="18"> 
+                    $lang[SetOption] <img src="$pollvars[base_gif]/h_line.gif" width="350" height="18"></td>
+                </tr>
+                <tr> 
+                  <td width="27%" class="td2">$lang[SetTab]</td>
+                  <td width="73%"> 
+                    <input type="text" class="input" name="cfg[table_width]" value="$pollvars[table_width]" size="10">
+                  </td>
+                </tr>
+                <tr> 
+                  <td width="27%" class="td2">$lang[SetBarh]</td>
+                  <td width="73%"> 
+                    <input type="text" class="input" name="cfg[img_height]" value="$pollvars[img_height]" size="10">
+                  </td>
+                </tr>
+                <tr> 
+                  <td width="27%" class="td2">$lang[SetBarMax]</td>
+                  <td width="73%"> 
+                    <input type="text" class="input" name="cfg[img_length]" value="$pollvars[img_length]" size="10">
+                  </td>
+                </tr>
+                <tr> 
+                  <td width="27%" class="td2">$lang[SetTabBg]</td>
+                  <td width="73%"> 
+                    <input type="text" class="input" name="cfg[bgcolor_tab]" value="$pollvars[bgcolor_tab]" size="10" maxlength="7">
+                  </td>
+                </tr>
+                <tr> 
+                  <td width="27%" class="td2">$lang[SetFrmCol]</td>
+                  <td width="73%"> 
+                    <input type="text" class="input" name="cfg[bgcolor_fr]" value="$pollvars[bgcolor_fr]" size="10" maxlength="7">
+                  </td>
+                </tr>
+                <tr> 
+                  <td width="27%" class="td2">$lang[SetFontCol]</td>
+                  <td width="73%"> 
+                    <input type="text" class="input" name="cfg[font_color]" value="$pollvars[font_color]" size="10" maxlength="7">
+                  </td>
+                </tr>
+                <tr> 
+                  <td width="27%" class="td2">$lang[SetFace]</td>
+                  <td width="73%"> 
+                    <input type="text" class="input" name="cfg[font_face]" value="$pollvars[font_face]" size="35">
+                  </td>
+                </tr>
+                <tr> 
+                  <td colspan="2" class="td1"><img src="$pollvars[base_gif]/h_line.gif" width="15" height="18"> 
+                    $lang[SetMisc] <img src="$pollvars[base_gif]/h_line.gif" width="400" height="18"></td>
+                </tr>
+                <tr> 
+                  <td width="27%" class="td2">$lang[SetSort]</td>
+                  <td width="73%" class="td2"> 
+                    <select name="cfg[result_order]" class="select">
+                      <option value="usort" $order_usort>$lang[Setusort]</option>
+                      <option value="asc" $order_asc>$lang[SetAsc]</option>
+                      <option value="desc" $order_desc>$lang[SetDesc]</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr> 
+                  <td width="27%" class="td2">$lang[SetCheck]</td>
+                  <td width="73%" class="td2"> 
+                    <select name="cfg[check_ip]" class="select">
+                      <option value="0" $check_ip>$lang[SetNoCheck]</option>
+                      <option value="2" $no_ip_check>$lang[SetIP]</option>
+                    </select>
+                    &nbsp;&nbsp;&nbsp;&nbsp;$lang[SetTime] 
+                    <input type="text" class="input" name="cfg[lock_timeout]" value="$pollvars[lock_timeout]" size="4">
+                    &nbsp;$lang[SetHours]</td>
+                </tr>
+                <tr> 
+                  <td width="27%" class="td2">$lang[SetShow]</td>
+                  <td width="73%" class="td2"> 
+                    <input type="radio" name="cfg[type]" value="percent" $percent>
+                    $lang[SetPerc] 
+                    <input type="radio" name="cfg[type]" value="votes" $votes>
+                    $lang[SetVotes]</td>
+                </tr>
+                <tr> 
+                  <td width="27%" class="td2">$lang[SetOffset]</td>
+                  <td width="73%" class="td2"> 
+                    <input type="text" class="input" name="cfg[time_offset]" value="$pollvars[time_offset]" size="4">
+                    $lang[SetHours] </td>
+                </tr>
+                <tr>
+                  <td width="27%" class="td2">$lang[SetPolls]</td>
+                  <td width="73%" class="td2">
+                    <input type="text" class="input" name="cfg[polls_pp]" value="$pollvars[polls_pp]" size="4">
+                  </td>
+                </tr>
+                <tr> 
+                  <td width="27%" class="td2">$lang[SetEntry]</td>
+                  <td width="73%" class="td2"> 
+                    <input type="text" class="input" name="cfg[entry_pp]" value="$pollvars[entry_pp]" size="4">
+                  </td>
+                </tr>
+                <tr> 
+                  <td width="27%" class="td2">$lang[SetOptions]</td>
+                  <td width="73%" class="td2"> 
+                    <input type="text" class="input" name="cfg[def_options]" value="$pollvars[def_options]" size="4">
+                  </td>
+                </tr>
+                <tr> 
+                  <td width="27%">&nbsp;</td>
+                  <td height="35" width="73%"> 
+                    <input type="submit" value="$lang[SetSubmit]" class="button" onclick="return CheckForm()">
+                    <input type="reset" value="$lang[FormUndo]" class="button">
+                    <input type="hidden" name="action" value="update">
+                    <input type="hidden" name="session" value="$auth[session]">
+                    <input type="hidden" name="uid" value="$auth[uid]">
+                  </td>
+                </tr>
+              </table>
+            </form>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<br>
+<br>
+</body>
+</html>

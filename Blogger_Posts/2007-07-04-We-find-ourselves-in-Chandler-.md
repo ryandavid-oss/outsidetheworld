@@ -1,0 +1,5 @@
+# We find ourselves in Chandler again
+Date: July 04, 2007
+
+<img src="http://photos1.blogger.com/x/blogger2/4201/1199/320/z/980560/img104-784179.jpg" width="320"/>
+I hadn't posted a picture in a while, and this view fit the bill, so I snapped it.  Now, why are we here?  Silly question.  Because they have a Gap?!  I kid, I kid.  I wanted to show the wife the iPhone.  I think she liked it.  And she could use the keyboard immediately, so she's already ahead of about 56% of the population.  But that figures, right?  She's generally more adaptable than I am.  I'm just too stubborn.  Sumner hasn't woken up since we started for home two hours ago.  This may be one of those nights where he sleeps straight through.  Just as well, cause I've got a massive amount of work to do.  Here's hoping your night is cheery! Posted wirelessly!

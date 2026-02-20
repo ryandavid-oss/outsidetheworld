@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal | Outside The World</title>
+    <style>
+        /* THE TEAL STATUS TAG */
+.status-tag {
+    font-size: 0.55rem;
+    letter-spacing: 2px;
+    background: rgba(145,175,179, 0.1); /* Subtle Teal tint */
+    color: #91AFB3; /* The Wayback Teal */
+    padding: 4px 10px;
+    border: 1px solid rgba(145,175,179, 0.3);
+    border-radius: 3px;
+    display: inline-block;
+    margin-bottom: 15px; /* Creates space above the Header */
+    font-weight: 700;
+    text-transform: uppercase;
+}
+/* THE TEAL TAG LOOK */
+.status-tag {
+    font-size: 0.55rem;
+    letter-spacing: 2px;
+    background: rgba(145, 175, 179, 0.1); 
+    color: #91AFB3; /* The Archive Teal */
+    padding: 3px 8px;
+    border: 1px solid rgba(145, 175, 179, 0.3);
+    border-radius: 3px;
+    display: inline-block;
+    margin-bottom: 15px; /* THE PUSH: This gap creates the symmetry */
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+/* THE GHOST: This keeps the gap but hides the words */
+.status-tag.ghost {
+    visibility: hidden;
+    opacity: 0;
+}
+/* Update card behavior to stack items */
+.residue-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* Ensure Header margin is clean */
+.residue-card h3 {
+    margin-top: 0;
+}
+        :root {
+            --brand-blue: #6395EE;
+            --brand-light-blue: #A0BEF5;
+            --bg-dark: #050505;
+            --transition-main: 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        body, html {
+            margin: 0; padding: 0;
+            background-color: var(--bg-dark);
+            color: white;
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        @keyframes pageReveal {
+            from { opacity: 0; transform: translateY(20px); filter: blur(10px); }
+            to { opacity: 1; transform: translateY(0); filter: blur(0); }
+        }
+
+        /* 1. NAVIGATION - 220px LOGO */
+        nav { position: fixed; top: 40px; left: 40px; z-index: 100; }
+        .nav-logo { width: 220px; filter: drop-shadow(0 0 20px rgba(99, 149, 238, 0.3)); transition: 0.4s; }
+
+        /* 2. HERO SECTION */
+        .hero { height: 40vh; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding-bottom: 40px; text-align: center; animation: pageReveal 1.2s ease-out forwards; }
+        h1 { font-size: 3.5rem; font-weight: 900; letter-spacing: 10px; text-transform: uppercase; color: white; text-shadow: 0 0 20px rgba(99, 149, 238, 0.4); }
+
+        /* 3. RECTANGLE GRID */
+        .archive-container { max-width: 1200px; margin: 0 auto 50px; padding: 0 40px; display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 25px; animation: pageReveal 1.2s ease-out 0.4s forwards; opacity: 0; }
+        .residue-card { border: 1px solid rgba(255, 255, 255, 0.05); padding: 35px 40px; background: rgba(255, 255, 255, 0.01); transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); text-decoration: none; color: inherit; position: relative; cursor: pointer; }
+        .residue-card:hover { border-color: var(--brand-blue); background: rgba(99, 149, 238, 0.04); transform: translateX(5px); }
+
+        /* 4. CORNER RETICLE (+ to -) */
+        .card-beacon { position: absolute; top: 25px; right: 25px; width: 20px; height: 20px; color: var(--brand-blue); transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1); }
+        .card-beacon::before, .card-beacon::after { content: ''; position: absolute; background: currentColor; transition: transform 0.6s, opacity 0.4s; }
+        .card-beacon::before { top: 0; left: 9px; width: 2px; height: 20px; } /* Vertical */
+        .card-beacon::after { top: 9px; left: 0; width: 20px; height: 2px; } /* Horizontal */
+
+        /* Minus Sign Logic */
+        .residue-card.active .card-beacon::before { transform: rotate(90deg); opacity: 0; }
+
+.residue-card h3 { 
+    font-size: 1.4rem; /* Significantly larger from the original 0.8rem */
+    font-weight: 900; 
+    letter-spacing: 6px; 
+    text-transform: uppercase; 
+    color: var(--brand-blue); 
+    margin-bottom: 15px;
+    transition: all 0.4s ease;
+}
+        .residue-card p { font-size: 0.85rem; line-height: 1.6; color: #666; margin: 0; transition: color 0.4s ease; max-width: 85%; }
+
+        /* 5. THE EXPLODING POST */
+        #post-viewer { max-width: 900px; margin: 0 auto 100px; padding: 0 40px; height: 0; overflow: hidden; opacity: 0; transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1); }
+        #post-viewer.active { height: auto; opacity: 1; padding-top: 60px; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+        .post-content { background: rgba(255,255,255,0.02); padding: 60px; border-left: 2px solid var(--brand-blue); }
+      .post-content h2 { 
+    font-size: 2.2rem; 
+    letter-spacing: -0.5px; /* Slight negative spacing makes bold titles pop */
+    margin-bottom: 20px; 
+    color: var(--brand-light-blue); 
+    font-weight: 800;
+}
+        .post-content p { 
+    line-height: 1.6; 
+    color: #aaa; 
+    font-size: 1.1rem; 
+    margin-bottom: 25px; /* Adds consistent gaps between paragraphs */
+}
+
+        footer { padding: 60px 0; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
+        footer p { font-size: 0.55rem; letter-spacing: 5px; color: rgba(255,255,255,0.1); text-transform: uppercase; }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <nav><a href="index.html"><img src="images/Equal.svg" alt="Back" class="nav-logo"></a></nav>
+<div class="hero">
+    <h1>A QUARTER-CENTURY OF<br>DIGITAL RESIDUE</h1>
+</div>
+    <main class="archive-container">
+        <a href="wayback.html" class="residue-card">
+    <div class="card-beacon"></div>
+    
+    <span class="status-tag ghost">HIDDEN</span> 
+
+    <h3>THE ARCHIVE</h3>
+    <p>Historical observations and technical residue from 2001 to present.</p>
+</a>
+        <div class="residue-card" id="current-post-trigger" onclick="togglePost()">
+    <div class="card-beacon"></div>
+    
+    <span class="status-tag ghost">HIDDEN</span> 
+
+    <h3>CURRENT POST</h3>
+    <p>Active narratives documenting the journey outside the world.</p>
+</div>
+<div class="residue-card" style="cursor: default;">
+    <div class="card-beacon"></div>
+    <span class="status-tag">COMING SOON</span>
+    <h3>THE FLOTSAM</h3>
+    <p>Digital wreckage and unorganized fragments of the estate's history.</p>
+</div>
+    </main>
+<section id="post-viewer" style="display: none;">
+    <article class="post-content" id="latest-residue">
+        <p style="color: #666; letter-spacing: 2px;">SYNCHRONIZING NARRATIVE...</p>
+    </article>
+</section>
+    <footer><p>© 2026 OUTSIDE THE WORLD LLC &nbsp; | &nbsp; SYSTEMS & STORIES</p></footer>
+    <script>
+function togglePost() {
+    var viewer = document.getElementById('post-viewer');
+    var trigger = document.getElementById('current-post-trigger');
+    var contentArea = document.getElementById('latest-residue');
+    var beacon = trigger.querySelector('.card-beacon');
+
+    if (viewer.style.display === 'none' || viewer.style.display === '') {
+        viewer.style.display = 'block';
+        contentArea.innerHTML = "<p style='color: #666; letter-spacing: 2px;'>SYNCHRONIZING...</p>";
+        
+        fetch('manifest.json')
+            .then(function(res) { return res.json(); })
+            .then(function(data) {
+                if (data.length > 0) {
+                    var latestPost = data[0]; // The full object from the manifest
+                    var latestFile = latestPost.file;
+                    var latestTitle = latestPost.title; // THE MISSING PIECE
+                    
+                    return fetch('blogger_posts/' + latestFile).then(function(res) {
+                        return res.text().then(function(text) {
+                            // We inject the title manually here so it matches the Archive
+                            var headerHtml = '<h2>' + latestTitle + '</h2>';
+                            var bodyHtml = marked.parse(text);
+                            
+                            contentArea.innerHTML = headerHtml + bodyHtml;
+                            viewer.classList.add('active');
+                            setTimeout(function() { viewer.scrollIntoView({ behavior: 'smooth' }); }, 300);
+                        });
+                    });
+                } else {
+                    throw new Error("No entries found in manifest.");
+                }
+            })
+            .catch(function(err) {
+                console.error("Archive Error:", err);
+                contentArea.innerHTML = "<p style='color:red;'>ERROR: " + err.message + "</p>";
+            });
+    } else {
+        viewer.style.display = 'none';
+        viewer.classList.remove('active');
+    }
+}
+    </script>
+</body>
+</html>

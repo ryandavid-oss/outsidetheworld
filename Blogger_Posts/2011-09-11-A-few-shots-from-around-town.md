@@ -1,0 +1,7 @@
+# A few shots from around town
+Date: September 11, 2011
+
+<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjlPrWXbzsVwz-0-jgiNTSGnScw-b2Zb7xGzCZ-cCDr-Q14pCLKOo6fDduBPOGJmaE1HON71lrIPEbxemuNUkTjAtMhaGeTN5p7QyOkKWTwxqdWss1uUEXxIi3vLEPunFkXo7_8HA/s320/photo+1-781423.JPG"  border="0" alt="" id="BLOGGER_PHOTO_ID_5651165419906404386" />
+<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg3JFjl6qN-EzLrMDhY7pvoROOyBYdDyM8tipDYmCCIc1wv8EC1wrlb-kx4zJBmdUl8cxyA2DNRhmTGUEHWD4e5iUaMKijYFA3aBxo5lUmdOv3mB2bWKW0xLv9CnjXhclE1sKpORQ/s320/photo+2-783127.JPG"  border="0" alt="" id="BLOGGER_PHOTO_ID_5651165424821730082" />
+<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg6wJ9M1xCvHmGg4ASRqYsAv5JvncRNlAJ6nJqMH0ezBJxwuFvtxQpk2lfJK84poYp47F76oewqDCGzQpYI9KOdS2G0oi6UUo7MZF8KmsEtbqD9irjcHS6Z3QNE-SfXlnWJ6hvadg/s320/photo+3-784311.JPG"  border="0" alt="" id="BLOGGER_PHOTO_ID_5651165430435937074" />
+<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjUlDmhsT2gsA3HI3s-NX1FYo5G56HzfqIWRSivno9WJLfau_oOW-GzD__O2ND7A8u7_csoLD0_56wD65hEVHR4FUBgzjlZrl3DRqMAlZlUBExopkD_PhSIjCuEaib0BgJ7ic6m1g/s320/photo+4-785415.JPG"  border="0" alt="" id="BLOGGER_PHOTO_ID_5651165433065135362" />

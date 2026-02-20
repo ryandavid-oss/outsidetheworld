@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outside The World | Systems & Stories</title>
+    <style>
+        :root {
+            --brand-blue: #6395EE;
+            --brand-teal: #91AFB3;
+            --brand-light-blue: #A0BEF5;
+            --bg-dark: #050505;
+            --transition-main: 0.9s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        body, html {
+            margin: 0; padding: 0; height: 100%;
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+            background-color: var(--bg-dark);
+            color: white;
+        }
+
+        /* 1. NEUTRAL ZONES */
+        .neutral-top {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 280px;
+            z-index: 150;
+        }
+        .neutral-gutter {
+            position: absolute;
+            top: 0; left: 42.5%; width: 15%; height: 100%;
+            z-index: 140;
+        }
+
+        /* 2. ENTRANCE ANIMATIONS */
+        @keyframes logoGrow {
+            0% { transform: translateX(-50%) scale(0.8); opacity: 0; filter: blur(10px); }
+            100% { transform: translateX(-50%) scale(1); opacity: 1; filter: blur(0); }
+        }
+        @keyframes glowPulse {
+            0% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.1); }
+            100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+        }
+        @keyframes textGlow {
+            from { text-shadow: 0 0 5px rgba(255,255,255,0.1); }
+            to { text-shadow: 0 0 20px rgba(255,255,255,0.5); }
+        }
+
+        /* 3. HERO LOGO & INSTRUCTION */
+        .logo-header {
+            position: absolute;
+            top: 50px; left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            width: 500px; 
+            transition: all var(--transition-main);
+            pointer-events: none;
+            animation: logoGrow 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .logo-header img { width: 100%; height: auto; shape-rendering: geometricPrecision; }
+
+        .instruction {
+            margin-top: 40px;
+            font-size: 0.85rem;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            color: #eee;
+            opacity: 0.8;
+            animation: textGlow 2s infinite alternate ease-in-out;
+            transition: opacity 0.4s ease;
+        }
+
+        /* 4. INTERACTIVE LOGIC */
+        body:has(.neutral-top:hover) .panel,
+        body:has(.neutral-gutter:hover) .panel { flex: 1 !important; }
+
+        body:has(.neutral-top:hover) .logo-header,
+        body:has(.neutral-gutter:hover) .logo-header { left: 50% !important; transform: translateX(-50%) scale(1) !important; }
+
+        body:has(.neutral-top:hover) .instruction,
+        body:has(.neutral-gutter:hover) .instruction { opacity: 1 !important; }
+
+        body:has(.personal:hover) .logo-header { left: 25%; transform: translateX(-50%) scale(0.7); }
+        body:has(.professional:hover) .logo-header { left: 75%; transform: translateX(-50%) scale(0.7); }
+
+        body:has(.panel:hover) .instruction,
+        body:has(.panel:hover) .indicator-node { opacity: 0 !important; }
+
+        /* 5. THE PANELS */
+        .container { display: flex; width: 100vw; height: 100vh; }
+
+        .panel {
+            position: relative;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: flex var(--transition-main);
+            overflow: hidden;
+        }
+        .panel:hover { flex: 6; }
+
+        /* 6. GLOWING PLUS BEACONS */
+        .indicator-node {
+            position: absolute;
+            top: 55%; left: 50%;
+            width: 80px; height: 80px;
+            z-index: 5;
+            transition: all 0.5s ease;
+            animation: glowPulse 2.5s infinite ease-in-out;
+            pointer-events: none;
+        }
+        .indicator-node::before {
+            content: ''; position: absolute; top: 0; left: 38px;
+            width: 4px; height: 80px; background: currentColor; border-radius: 2px;
+        }
+        .indicator-node::after {
+            content: ''; position: absolute; top: 38px; left: 0;
+            width: 80px; height: 4px; background: currentColor; border-radius: 2px;
+        }
+        .personal .indicator-node { color: var(--brand-blue); filter: drop-shadow(0 0 20px var(--brand-blue)); }
+        .professional .indicator-node { color: var(--brand-teal); filter: drop-shadow(0 0 20px var(--brand-teal)); }
+
+        /* 7. THE CONTENT STACK (Fixed "Squish") */
+        .panel-bg-color {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1;
+            opacity: 0;
+            transition: opacity var(--transition-main);
+        }
+        .personal .panel-bg-color { background: radial-gradient(circle at center, rgba(99, 149, 238, 0.2), transparent 70%); }
+        .professional .panel-bg-color { background: radial-gradient(circle at center, rgba(145, 175, 179, 0.2), transparent 70%); }
+        .panel:hover .panel-bg-color { opacity: 1; }
+
+        .content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px; 
+        }
+
+        h2 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin: 0;
+            letter-spacing: 4px; 
+            opacity: 0;
+            filter: blur(20px);
+            transform: translateY(20px);
+            transition: all var(--transition-main);
+            color: white;
+        }
+
+        .details {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px; 
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease 0.2s;
+        }
+
+        .panel:hover h2, .panel:hover .details {
+            opacity: 1; filter: blur(0); transform: translateY(0);
+        }
+
+        .details p {
+            letter-spacing: 6px; font-size: 0.75rem; font-weight: 500;
+            color: var(--brand-light-blue);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 16px 55px;
+            border: 1px solid rgba(255,255,255,0.4);
+            color: white;
+            text-decoration: none;
+            font-size: 0.7rem; font-weight: 700;
+            letter-spacing: 5px; text-transform: uppercase;
+            transition: 0.4s; background: rgba(255,255,255,0.02);
+        }
+        .btn:hover { background: white; color: black; box-shadow: 0 0 35px rgba(255,255,255,0.5); }
+
+        /* 8. DISCREET FOOTER */
+        footer {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+            z-index: 100;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+        footer p {
+            font-size: 0.55rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.15);
+            margin: 0;
+        }
+        body:has(.panel:hover) footer { opacity: 0; }
+
+        .divider {
+            position: absolute;
+            left: 50%; top: 38%; bottom: 38%;
+            width: 1px;
+            background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.15), transparent);
+            z-index: 5;
+        }
+        body:has(.panel:hover) .divider { opacity: 0; }
+
+        @media (max-width: 768px) {
+            .container { flex-direction: column; }
+            .logo-header { width: 340px; }
+            .neutral-gutter { width: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="neutral-top"></div>
+    <div class="neutral-gutter"></div>
+
+    <div class="logo-header">
+        <img src="images/Equal.svg" alt="Outside The World Logo">
+        <div class="instruction">Pick a path forward</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="container">
+        <section class="panel personal">
+            <div class="indicator-node"></div> 
+            <div class="panel-bg-color"></div>
+            <div class="content">
+                <h2>Personal</h2>
+                <div class="details">
+                    <p>THOUGHTS & CREATION</p>
+                    <a href="personal.html" class="btn">Explore</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="panel professional">
+            <div class="indicator-node"></div> 
+            <div class="panel-bg-color"></div>
+            <div class="content">
+                <h2>Professional</h2>
+                <div class="details">
+                    <p>STRATEGY & SOLUTIONS</p>
+                    <a href="professional.html" class="btn">Consult</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>© 2026 OUTSIDE THE WORLD LLC &nbsp; | &nbsp; SYSTEMS & STORIES</p>
+    </footer>
+
+</body>
+</html>

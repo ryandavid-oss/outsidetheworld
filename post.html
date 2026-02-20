@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Observation | Outside The World</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        :root {
+            --brand-blue: #6395EE;
+            --bg-dark: #050505;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: #ccc;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            line-height: 1.8;
+        }
+
+        /* 1. BRAND ANCHOR - 220px Logo */
+        nav {
+            padding: 40px;
+        }
+        .nav-logo {
+            width: 220px;
+            filter: drop-shadow(0 0 20px rgba(99, 149, 238, 0.2));
+        }
+
+        /* 2. THE CONTENT CONTAINER */
+        .post-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 40px 150px;
+        }
+
+        .back-link {
+            text-decoration: none;
+            color: var(--brand-blue);
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 60px;
+        }
+
+        /* 3. MARKDOWN STYLING */
+        #content h1, #content h2, #content h3 {
+            color: white;
+            letter-spacing: 1px;
+            margin-top: 40px;
+        }
+        
+        /* === FIX: CENTERED & ROUNDED IMAGES === */
+        #content img {
+            max-width: 100%;
+            height: auto;
+            display: block; /* Required for centering with margin: auto */
+            margin: 30px auto; /* Centers the image horizontally */
+            border-radius: 8px; /* Adds the subtle, modern rounding */
+            border: 1px solid rgba(255,255,255,0.1); /* Keeps the subtle frame */
+        }
+
+        #content p {
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+        }
+
+        #content a {
+            color: var(--brand-blue);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(99, 149, 238, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="wayback.html">
+            <img src="images/Equal.svg" alt="Back" class="nav-logo">
+        </a>
+    </nav>
+
+    <main class="post-container">
+        <a href="wayback.html" class="back-link">← Return to Wayback</a>
+        <div id="content">Loading residue...</div>
+    </main>
+
+    <script>
+        // Logic to grab the filename from the URL
+        const params = new URLSearchParams(window.location.search);
+        const fileName = params.get('file');
+
+        if (fileName) {
+            fetch('blogger_posts/' + fileName)
+                .then(response => response.text())
+                .then(text => {
+                    document.getElementById('content').innerHTML = marked.parse(text);
+                    // Extract the date from the filename for a subtitle
+                    const dateParts = fileName.split('-');
+                    const dateStr = dateParts[1] + '/' + dateParts[2] + '/' + dateParts[0];
+                    document.title = "Observation: " + dateStr + " | Outside The World";
+                })
+                .catch(err => {
+                    document.getElementById('content').innerHTML = "Error loading post.";
+                });
+        }
+    </script>
+</body>
+</html>

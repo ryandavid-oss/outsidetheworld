@@ -1,0 +1,5 @@
+# Days of travel, past
+Date: February 16, 2022
+
+<img alt="" border="0" height="400" id="BLOGGER_PHOTO_ID_7065333748336141266" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh7nM1kzBPyzcLjRAxwEfhl4oSPm1CsqiVqmQPFPVi2lDnr0t9zjx4Ah65xhIcV5boh7_Iqmm3VaDbw2kUVixxKr16fqNhG4jnPm7BYqnk-iaMmcnn5omgIuTs8pQHI-vpKzyQa/w400-h400/OriginalPhoto-635475759.337284-703487.jpg" width="400" />
+About a year ago, it seemed I was traveling to California every other weekend to see my wife (née fiancé), whether by car or plane.  But my gosh, was air travel ever preferable.  I am reminded that in California, public restrooms have been considered a massive luxury since the pandemic started, so it made the electric driving miles tantamount to medieval torture as I stopped for 20-30 minutes every 200 miles.

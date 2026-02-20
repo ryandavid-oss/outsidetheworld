@@ -1,0 +1,8 @@
+# Rain storm
+Date: March 01, 2022
+
+<img alt="" border="0" height="400" id="BLOGGER_PHOTO_ID_7070276494244865010" src="https://blogger.googleusercontent.com/img/a/AVvXsEhm2VEwULF9ot83yAkb8nStlFUyH7o5on-CtYY-ddpAL0PXXajX4oQCoESyb3pfXxRRTuOZzgVVQvbjmH9AEH9uK5kYZ9goa3UvXTXZN18350qRVQ8IDAso0EuionRBMpp4hgKgqfkIL55NB4INrCfNxf6al7wfR4ihGfdog2VvXhmq5Y4PTQ=w400-h400" width="400" />
+<img alt="" border="0" height="400" id="BLOGGER_PHOTO_ID_7070276507760309634" src="https://blogger.googleusercontent.com/img/a/AVvXsEjDPScSqYrxusMQfRBdQF1kSZDz-DtXs4myFTn4UZTm2c2lt5j0VXE_fWXeYvZGLx8rmbtKftqTM2bJlCN5xS_5ILj5-BUS8ptgTnAfDNg7be9R2apqd2IeVumYVLIB6PDrpdvV2LbIcZraVoE2xo542aAdtA7TdbiD0r6C-QOBPrLUlGrmEg=w400-h400" width="400" />
+Today, while juggling tasks that run the gamut, I expressed my frustration with the non-eponymous phrase "Heavens to Betsy".  Can't say that I can adequately recall the last time I said such an idiom, and saying it out of turn today caused me to race to the Internet to find its etymology.  
+Turns out, it doesn't have a classical definition that fits easily inside traceable history.  Could be an alternative to 'hell's bells", which is another fantastic favorite of mine.  Always makes me think of the raging tank from The Restaurant at the End of the Universe, by Douglas Adams.  
+I may continue to use it.  Nope.  I will continue to use both.  And maybe I will throw a "heavens to murgatroyd" in there for blessed measure.

@@ -1,0 +1,7 @@
+# Blue Ridge Reservoir
+Date: May 08, 2011
+
+<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhRHOsnJVAfb_nQsPPbOUbhdUStYEn9qVe1KvJ2DXdqjFDuHVcYXpg-iDRDZZini23qsL8IRo8FNJfot8-2rPxhrDhh9rATW7NxNKDLxds-Y3s30RzaVYjkBxcculdt3lgOPx6D9A/s320/photo+1-726435.jpg"  border="0" alt="" id="BLOGGER_PHOTO_ID_5604389122051427762" />
+<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEilvQBSrML7hWMBoPJOCWhzZAFq1PhgmuC5J4rvWgqejsVG8gsiqnYV9VbVBVyBr8L3AlD_XsIM9r69ROyWeRaj-Ujw1iBbkbQ-IY1IhiywUfm_BHMj-CRUB_9W34D0xLlEXu4WGw/s320/photo+2-727007.jpg"  border="0" alt="" id="BLOGGER_PHOTO_ID_5604389124984470690" />
+<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjAnBZ2priWBJDiECgTnhfbpQmf5ZFYlPHltG8AyvVu6hq9kmJiJGRAFQLseI9zN9HHu-FNrgRFfE5TZPvieTkN9_IrMr42famHouddWk03PDoeZxLBEFYegpOknLkzvmKcOSFIyw/s320/photo+3-727804.jpg"  border="0" alt="" id="BLOGGER_PHOTO_ID_5604389131089590306" />
+Shortly after arriving at camp, we took a short drive up the road to the Blue Ridge reservoir, hidden off the 87 highway after a very bumpy drive down FR 751. The dam itself is impressive enough; but the area it created is more so. A hike down revealed a rocky area populated by numerous reptiles. We steered clear of the obvious rattlesnake dorms and caught glimpses of quite a few lizards.
