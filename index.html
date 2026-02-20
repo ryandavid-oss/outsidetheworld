@@ -116,8 +116,14 @@
             .logo-header { position: relative; top: 30px; width: 80%; margin: 0 auto 60px; transform: none; left: auto; }
             .panel { height: 60vh; flex: none !important; border-bottom: 1px solid rgba(255,255,255,0.1); }
             
+/* Updated rules for better mobile fit */
             h2, .details { opacity: 1 !important; transform: none !important; }
-            h2 { font-size: 2.5rem; }
+            h2 { 
+                font-size: 2rem !important; 
+                letter-spacing: 3px !important; /* Tightens the word 'Professional' */
+                width: 95%; 
+                margin: 0 auto;
+            }
             .indicator-node { display: none; }
             .fake-btn { background: white; color: black; } 
         }
