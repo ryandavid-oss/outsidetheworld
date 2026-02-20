@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>GAME BOY POCKET | GHOST-WRITER</title>
+    <title>MGB-01 | GHOST-WRITER PRO</title>
     <link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
     <script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
         :root {
-            --gbp-bg: #c4cfa1; /* Silver-grey shell */
-            --gbp-screen: #9bbc0f; /* Olive-silver LCD */
+            --gbp-bg: #c4cfa1; 
+            --gbp-screen: #9bbc0f; 
             --gbp-dark: #306230;
             --gbp-black: #0f380f;
             --gbp-plastic: #d1d1d1;
@@ -21,39 +21,56 @@
             margin: 0; padding: 0; height: 100%;
             background-color: #121212;
             font-family: 'VT323', monospace;
-            display: flex; justify-content: center; overflow: hidden;
+            display: flex; justify-content: center; overflow-y: auto;
         }
 
-        /* 1. THE HARDWARE SHELL */
+        /* 1. THE HARDWARE SHELL - Now widens for Desktop */
         .gb-shell {
             background-color: var(--gbp-plastic);
-            width: 100%; max-width: 450px;
-            height: 100%; display: flex; flex-direction: column;
-            border-left: 4px solid #fff; border-right: 4px solid #888;
-            box-shadow: 0 0 50px rgba(0,0,0,0.8);
-            position: relative; padding: 20px; box-sizing: border-box;
+            width: 100%; max-width: 900px; /* Widened for Desktop scale */
+            min-height: 100vh; display: flex; flex-direction: column;
+            border-left: 6px solid #fff; border-right: 6px solid #888;
+            box-shadow: 0 0 80px rgba(0,0,0,0.9);
+            position: relative; padding: 40px; box-sizing: border-box;
         }
 
         /* 2. THE SCREEN BEZEL */
         .screen-bezel {
             background-color: #333;
-            padding: 30px 15px 10px;
-            border-radius: 10px 10px 50px 10px;
-            box-shadow: inset 0 0 10px #000;
+            padding: 40px 30px 15px;
+            border-radius: 10px 10px 60px 10px;
+            box-shadow: inset 0 0 15px #000;
+            position: relative;
+        }
+
+        /* THE RED POWER LED */
+        .power-light {
+            position: absolute; left: 15px; top: 50%; transform: translateY(-50%);
+            width: 10px; height: 10px; background: #ff0000; /* VIBRANT RED */
+            border-radius: 50%; box-shadow: 0 0 8px #ff0000;
+        }
+        .power-label {
+            position: absolute; left: 30px; top: 50%; transform: translateY(-50%);
+            color: #777; font-size: 0.8rem; font-style: italic;
         }
 
         .lcd-screen {
             background-color: var(--gbp-bg);
-            min-height: 400px; padding: 15px;
-            border: 5px solid #222;
+            min-height: 450px; padding: 20px;
+            border: 8px solid #222;
             display: flex; flex-direction: column;
         }
 
-        /* Branding under screen */
-        .branding {
-            color: #777; font-size: 1.2rem; margin-top: 10px;
-            display: flex; justify-content: space-between; align-items: center;
-            font-style: italic; letter-spacing: 1px;
+        /* "GAME BOY pocket" Centered inside the black bezel */
+        .bezel-branding {
+            text-align: center; color: #777; padding-top: 10px;
+            font-size: 1.1rem; letter-spacing: 1px; font-weight: bold;
+        }
+
+        /* "Nintendo" Centered BELOW the black bezel */
+        .shell-branding {
+            text-align: center; color: #777; font-size: 2rem;
+            margin-top: 15px; font-weight: bold; letter-spacing: 2px;
         }
 
         /* 3. INPUTS & EDITOR */
@@ -61,39 +78,44 @@
             background: transparent; border: none;
             border-bottom: 2px solid var(--gbp-black);
             color: var(--gbp-black); font-family: 'VT323', monospace;
-            outline: none; margin-bottom: 10px; width: 100%;
+            outline: none; margin-bottom: 15px; width: 100%;
         }
-        input#title { font-size: 1.8rem; }
-        input#entryDate { font-size: 1.2rem; }
+        input#title { font-size: 2.2rem; }
+        input#entryDate { font-size: 1.5rem; }
 
         .EasyMDEContainer { font-family: 'VT323', monospace !important; }
-        .CodeMirror { background: transparent !important; color: var(--gbp-black) !important; border: 1px solid var(--gbp-black) !important; height: 280px !important; }
+        .CodeMirror { background: transparent !important; color: var(--gbp-black) !important; border: 2px solid var(--gbp-black) !important; height: 300px !important; font-size: 1.5rem; }
         .editor-toolbar { background: rgba(0,0,0,0.05); border: none; }
 
-        /* 4. PHYSICAL BUTTONS (NON-FUNCTIONAL D-PAD) */
-        .controls { flex-grow: 1; display: grid; grid-template-columns: 1fr 1fr; padding-top: 40px; }
+        /* 4. CONTROLS - Moved D-Pad Down */
+        .controls { flex-grow: 1; display: grid; grid-template-columns: 1fr 1fr; padding-top: 80px; }
         
-        .d-pad { position: relative; width: 100px; height: 100px; margin: 0 auto; }
-        .d-pad-vert, .d-pad-horiz { background: #333; position: absolute; border-radius: 2px; }
-        .d-pad-vert { width: 30px; height: 90px; left: 35px; top: 5px; }
-        .d-pad-horiz { width: 90px; height: 30px; left: 5px; top: 35px; }
+        .d-pad { position: relative; width: 120px; height: 120px; margin: 20px auto 0; }
+        .d-pad-vert, .d-pad-horiz { background: #333; position: absolute; border-radius: 3px; box-shadow: 3px 3px 0px rgba(0,0,0,0.2); }
+        .d-pad-vert { width: 35px; height: 110px; left: 42.5px; top: 5px; }
+        .d-pad-horiz { width: 110px; height: 35px; left: 5px; top: 42.5px; }
 
-        /* FUNCTIONAL SUBMIT BUTTONS (A & B) */
-        .action-buttons { display: flex; gap: 20px; justify-content: center; align-items: center; padding-top: 20px; }
+        .action-column { display: flex; flex-direction: column; align-items: center; justify-content: flex-start; }
+        .action-buttons { display: flex; gap: 30px; margin-bottom: 15px; }
+        
         .btn-circle {
-            width: 60px; height: 60px; background: #8a1d3b; /* Deep red */
-            border-radius: 50%; border: 4px solid #5a1326;
-            color: white; font-size: 1.5rem; display: flex;
+            width: 75px; height: 75px; background: #8a1d3b;
+            border-radius: 50%; border: 5px solid #5a1326;
+            color: white; font-size: 1.8rem; display: flex;
             align-items: center; justify-content: center;
-            cursor: pointer; box-shadow: 4px 4px 0px rgba(0,0,0,0.2);
+            cursor: pointer; box-shadow: 6px 6px 0px rgba(0,0,0,0.2);
             -webkit-tap-highlight-color: transparent;
         }
-        .btn-circle:active { transform: translate(2px, 2px); box-shadow: none; }
+        .btn-circle:active { transform: translate(3px, 3px); box-shadow: none; }
 
-        .start-select { display: flex; gap: 20px; justify-content: center; margin-top: 40px; }
-        .pill { width: 40px; height: 10px; background: #999; border-radius: 10px; transform: rotate(-25deg); }
+        /* LABEL: PRESS ANY KEY TO SAVE */
+        .action-label { color: #888; font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; font-weight: bold; }
 
-        /* 5. LOGIN MODAL OVERLAY */
+        .start-select { display: flex; gap: 30px; justify-content: center; margin-top: 60px; padding-bottom: 40px; }
+        .pill-wrap { text-align: center; }
+        .pill { width: 50px; height: 12px; background: #999; border-radius: 10px; transform: rotate(-25deg); box-shadow: 2px 2px 0px rgba(0,0,0,0.1); }
+        .pill-label { font-size: 0.9rem; color: #777; margin-top: 10px; font-weight: bold; }
+
         #auth-overlay {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background: var(--gbp-bg); z-index: 1000;
@@ -101,12 +123,11 @@
             padding: 40px; box-sizing: border-box;
         }
 
-        /* Responsive scaling for iPhone */
         @media (max-width: 480px) {
-            .gb-shell { border: none; padding: 10px; }
-            .screen-bezel { padding: 20px 10px 5px; }
-            .lcd-screen { min-height: 480px; }
-            .action-buttons { padding-bottom: 20px; }
+            .gb-shell { padding: 20px; border: none; }
+            .lcd-screen { min-height: 520px; }
+            .shell-branding { font-size: 1.5rem; }
+            .controls { padding-top: 40px; }
         }
     </style>
 </head>
@@ -114,11 +135,14 @@
 
     <div class="gb-shell">
         <div class="screen-bezel">
+            <div class="power-light"></div>
+            <div class="power-label">● POWER</div>
+            
             <div id="auth-overlay">
-                <div style="font-size: 2rem; margin-bottom: 30px;">SHARP ZQ-3000</div>
-                <div style="margin-bottom: 10px;">ACCESS CODE:</div>
-                <input type="password" id="passwordInput" style="background:#fff; border:2px solid #000; width:80%; text-align:center; padding:10px;">
-                <p style="font-size: 0.8rem; margin-top: 40px;">PRESS [START] TO INITIALIZE</p>
+                <div style="font-size: 2.5rem; margin-bottom: 40px;">SHARP ZQ-3000</div>
+                <div style="margin-bottom: 10px; letter-spacing: 2px;">ENTER ACCESS CODE:</div>
+                <input type="password" id="passwordInput" style="background:#fff; border:3px solid #000; width:90%; text-align:center; padding:15px; font-size: 1.5rem;">
+                <p style="font-size: 1rem; margin-top: 50px; color: #555;">PRESS [START] TO INITIALIZE</p>
             </div>
 
             <div class="lcd-screen">
@@ -126,31 +150,35 @@
                 <input type="date" id="entryDate">
                 <textarea id="content"></textarea>
             </div>
-            <div class="branding">
-                <span>● POWER</span>
-                <span style="font-family: sans-serif; font-weight: bold;">Nintendo <small style="font-style: normal; font-size: 0.6rem;">GAME BOY <i>pocket</i></small></span>
+            
+            <div class="bezel-branding">
+                Nintendo <span style="font-size: 0.8rem; font-weight: normal; font-style: italic;">GAME BOY</span> <span style="font-style: italic; font-weight: normal;">pocket</span>
             </div>
         </div>
+
+        <div class="shell-branding">Nintendo</div>
 
         <div class="controls">
             <div class="d-pad">
                 <div class="d-pad-vert"></div>
                 <div class="d-pad-horiz"></div>
             </div>
-            <div class="action-buttons">
-                <div class="btn-circle" id="btnB">B</div>
-                <div class="btn-circle" id="btnA">A</div>
+            <div class="action-column">
+                <div class="action-buttons">
+                    <div class="btn-circle" id="btnB">B</div>
+                    <div class="btn-circle" id="btnA">A</div>
+                </div>
+                <div class="action-label">PRESS EITHER KEY TO SAVE</div>
             </div>
         </div>
 
         <div class="start-select">
-            <div><div class="pill" id="startBtn"></div><div style="font-size: 0.7rem; text-align: center; margin-top: 5px;">SELECT</div></div>
-            <div><div class="pill"></div><div style="font-size: 0.7rem; text-align: center; margin-top: 5px;">START</div></div>
+            <div class="pill-wrap"><div class="pill"></div><div class="pill-label">SELECT</div></div>
+            <div class="pill-wrap"><div class="pill" id="startBtn"></div><div class="pill-label">START</div></div>
         </div>
     </div>
 
     <script>
-        // Setup Date
         const now = new Date();
         const azTime = new Date(now.getTime() + (-7 * 60 + now.getTimezoneOffset()) * 60000);
         document.getElementById('entryDate').value = azTime.toISOString().split('T')[0];
@@ -173,7 +201,6 @@
         document.getElementById('passwordInput').addEventListener('keypress', (e) => { if (e.key === 'Enter') login(); });
         document.getElementById('startBtn').addEventListener('click', login);
 
-        // A and B Buttons both trigger the download
         const publish = () => {
             const title = document.getElementById('title').value;
             const chosenDate = document.getElementById('entryDate').value;
