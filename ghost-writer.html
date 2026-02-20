@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TERMINAL | OUTSIDE THE WORLD</title>
+    <link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
+    <script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=VT323&family=Fira+Code:wght@300;500&display=swap');
 
@@ -11,230 +13,131 @@
             --hacker-green: #00ff41;
             --case-color: #1a1a1a;
             --lcd-bg: #8fb37a; 
-            --lcd-text: #051405; /* High Contrast Dark Font */
+            --lcd-text: #051405;
         }
 
         body {
             background-color: #000;
             color: var(--hacker-green);
             font-family: 'VT323', monospace;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            overflow-y: auto; /* Allows scrolling if screen is too small */
-            padding: 20px;
+            display: flex; justify-content: center; align-items: center;
+            min-height: 100vh; margin: 0; overflow-y: auto; padding: 20px;
         }
 
-        /* --- 1. HACKER LOGIN SCREEN --- */
         #auth-container {
-            width: 100%;
-            max-width: 400px;
-            padding: 40px;
+            width: 100%; max-width: 400px; padding: 40px;
             border: 1px solid var(--hacker-green);
-            box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
             background: rgba(0, 20, 0, 0.9);
         }
 
-        .terminal-header {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            border-bottom: 1px solid var(--hacker-green);
-            padding-bottom: 10px;
-        }
-
-        .terminal-prompt { color: var(--hacker-green); margin-bottom: 10px; }
-
         #passwordInput {
-            background: transparent;
-            border: none;
-            border-left: 5px solid var(--hacker-green);
-            padding: 10px;
-            color: var(--hacker-green);
-            font-family: 'Fira Code', monospace;
-            font-size: 1.2rem;
-            width: 90%;
-            outline: none;
-            margin-bottom: 20px;
+            background: transparent; border: none; border-left: 5px solid var(--hacker-green);
+            padding: 10px; color: var(--hacker-green); font-family: 'Fira Code', monospace;
+            font-size: 1.2rem; width: 90%; outline: none; margin-bottom: 20px;
         }
 
         .login-btn {
-            background: var(--hacker-green);
-            color: #000;
-            border: none;
-            padding: 10px 20px;
-            font-family: 'VT323', monospace;
-            font-size: 1.2rem;
-            cursor: pointer;
-            width: 100%;
+            background: var(--hacker-green); color: #000; border: none;
+            padding: 10px 20px; font-family: 'VT323', monospace; font-size: 1.2rem;
+            cursor: pointer; width: 100%;
         }
 
-        /* --- 2. THE WIDESCREEN ORGANIZER --- */
-        #main-content {
-            display: none;
-            width: 100%;
-            max-width: 1000px;
-        }
+        #main-content { display: none; width: 100%; max-width: 1100px; }
 
         .sharp-case {
-            background-color: var(--case-color);
-            border-radius: 12px;
-            padding: 30px;
-            border: 2px solid #333;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.9);
-        }
-
-        .case-header { 
-            color: #444; 
-            font-size: 0.8rem; 
-            margin-bottom: 10px; 
-            text-align: right;
-            letter-spacing: 2px;
-        }
-
-        .lcd-screen-bezel {
-            background-color: #000;
-            padding: 20px;
-            border-radius: 4px;
+            background-color: var(--case-color); border-radius: 12px;
+            padding: 30px; border: 2px solid #333; box-shadow: 0 30px 60px rgba(0,0,0,0.9);
         }
 
         .lcd-screen {
-            background-color: var(--lcd-bg);
-            color: var(--lcd-text);
-            padding: 30px;
-            min-height: 500px;
-            display: flex;
-            flex-direction: column;
+            background-color: var(--lcd-bg); color: var(--lcd-text);
+            padding: 30px; min-height: 600px; display: flex; flex-direction: column;
         }
 
-        .screen-header {
-            border-bottom: 2px solid var(--lcd-text);
-            margin-bottom: 20px;
-            font-size: 1.2rem;
-        }
-
-        form { display: flex; flex-direction: column; gap: 15px; flex-grow: 1; }
+        /* Styling the Editor to look like part of the Sharp Screen */
+        .EasyMDEContainer { font-family: 'VT323', monospace !important; font-size: 1.5rem; }
+        .editor-toolbar { background: rgba(0,0,0,0.1); border: none; border-bottom: 1px solid var(--lcd-text); }
+        .editor-toolbar button { color: var(--lcd-text) !important; }
+        .CodeMirror { background: transparent !important; border: none !important; color: var(--lcd-text) !important; height: 400px; }
         
-        label { font-size: 1.3rem; font-weight: bold; }
-
-        input#title, textarea#content {
-            background: rgba(0,0,0,0.05);
-            border: none;
-            border-bottom: 1px dashed var(--lcd-text);
-            color: var(--lcd-text);
-            font-family: 'VT323', monospace;
-            font-size: 1.8rem;
-            outline: none;
-            width: 100%;
-            padding: 5px;
+        input#title {
+            background: transparent; border: none; border-bottom: 2px solid var(--lcd-text);
+            color: var(--lcd-text); font-family: 'VT323', monospace;
+            font-size: 2rem; outline: none; width: 100%; margin-bottom: 20px;
         }
 
-        textarea#content {
-            height: 300px;
-            border: 1px dashed var(--lcd-text);
-        }
-
-        /* THE PUBLISH BUTTON (Now inside the screen) */
         .digital-publish-btn {
-            margin-top: 25px;
-            background: var(--lcd-text);
-            color: var(--lcd-bg);
-            border: 2px solid var(--lcd-text);
-            padding: 15px;
-            font-family: 'VT323', monospace;
-            font-size: 1.5rem;
-            cursor: pointer;
-            text-align: center;
-        }
-
-        .digital-publish-btn:active {
-            background: transparent;
-            color: var(--lcd-text);
+            margin-top: 25px; background: var(--lcd-text); color: var(--lcd-bg);
+            border: 2px solid var(--lcd-text); padding: 15px;
+            font-family: 'VT323', monospace; font-size: 1.5rem; cursor: pointer;
         }
     </style>
 </head>
 <body>
 
     <div id="auth-container">
-        <div class="terminal-header">SYS.LOGON_v2.0</div>
-        <div class="terminal-prompt">USER: ADMIN</div>
-        <div class="terminal-prompt">PASSWORD:</div>
+        <div style="font-size: 1.5rem; margin-bottom: 20px; border-bottom: 1px solid var(--hacker-green);">SYS.LOGON_v2.0</div>
+        <div style="margin-bottom: 10px;">PASSWORD:</div>
         <input type="password" id="passwordInput" autofocus>
         <button class="login-btn" onclick="checkPassword()">ENTER</button>
     </div>
 
     <div id="main-content">
         <div class="sharp-case">
-            <div class="case-header">SHARP ZQ-3000 | ESTATE CONTROL</div>
-            <div class="lcd-screen-bezel">
-                <div class="lcd-screen">
-                    <div class="screen-header">MEMORY: 32KB // STATUS: ONLINE</div>
-                    <form id="mdForm">
-                        <label>ENTRY TITLE:</label>
-                        <input type="text" id="title" required placeholder="...">
-                        
-                        <label>CONTENT:</label>
-                        <textarea id="content" required placeholder="TYPE HERE..."></textarea>
-                        
-                        <button type="button" id="downloadBtn" class="digital-publish-btn">
-                            > EXECUTE_PUBLISH_SEQUENCE
-                        </button>
-                    </form>
-                </div>
+            <div class="lcd-screen">
+                <input type="text" id="title" placeholder="ENTER TITLE...">
+                <textarea id="content"></textarea>
+                <button type="button" id="downloadBtn" class="digital-publish-btn">> EXECUTE_PUBLISH_SEQUENCE</button>
             </div>
         </div>
     </div>
 
     <script>
-        // 1. Password Logic
+        // Initialize EasyMDE
+        const easyMDE = new EasyMDE({
+            element: document.getElementById('content'),
+            forceSync: true,
+            spellChecker: false,
+            status: false,
+            placeholder: "Type your story or poem here...",
+            toolbar: ["bold", "italic", "heading", "|", "quote", "unordered-list", "ordered-list", "|", "preview", "side-by-side", "fullscreen"]
+        });
+
         function checkPassword() {
-            const pass = document.getElementById('passwordInput').value;
-            if (pass === 'Stockton12!') {
+            if (document.getElementById('passwordInput').value === 'Stockton12!') {
                 document.getElementById('auth-container').style.display = 'none';
                 document.getElementById('main-content').style.display = 'block';
+                easyMDE.codemirror.refresh(); // Refresh editor view
             } else {
                 alert('ACCESS DENIED');
-                document.getElementById('passwordInput').value = '';
             }
         }
 
-        // Allow "Enter" key for login
-        document.getElementById('passwordInput').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') checkPassword();
+        document.getElementById('passwordInput').addEventListener('keypress', (e) => { if (e.key === 'Enter') checkPassword(); });
+
+        document.getElementById('downloadBtn').addEventListener('click', () => {
+            const title = document.getElementById('title').value;
+            const content = easyMDE.value(); // Get text from Rich Editor
+
+            if (!title || !content) { alert("INPUT REQUIRED"); return; }
+
+            // POETRY FIX: Automatically add Markdown line breaks
+            const formattedContent = content.replace(/\n/g, "  \n");
+            const fullMarkdown = `# ${title}\n\n${formattedContent}`;
+
+            const now = new Date();
+            const azOffset = -7 * 60;
+            const azTime = new Date(now.getTime() + (azOffset + now.getTimezoneOffset()) * 60000);
+            const dateStr = azTime.toISOString().split('T')[0];
+
+            const fileName = `${dateStr}-${title.toLowerCase().replace(/[^a-z0-9]/g, '-')}.md`;
+
+            const blob = new Blob([fullMarkdown], { type: 'text/markdown' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = fileName;
+            a.click();
         });
-
-        // 2. File Generation Logic
- document.getElementById('downloadBtn').addEventListener('click', () => {
-    const title = document.getElementById('title').value;
-    const content = document.getElementById('content').value;
-
-    if (!title || !content) {
-        alert("INPUT REQUIRED");
-        return;
-    }
-
-    // NEW: Inject the title as a Markdown Header (#) at the top of the file
-// This tells the computer: "Every time I hit Enter, add two spaces so the line actually breaks."
-const formattedContent = content.split('\n').map(line => line + '  ').join('\n');
-const fullMarkdown = `# ${title}\n\n${formattedContent}`;
-
-    // Arizona Time Logic
-    const now = new Date();
-    const azOffset = -7 * 60;
-    const azTime = new Date(now.getTime() + (azOffset + now.getTimezoneOffset()) * 60000);
-    const dateStr = azTime.toISOString().split('T')[0];
-
-    const cleanTitle = title.toLowerCase().replace(/[^a-z0-9]/g, '-');
-    const fileName = `${dateStr}-${cleanTitle}.md`;
-
-    // Use fullMarkdown instead of just content
-    const blob = new Blob([fullMarkdown], { type: 'text/markdown' });
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = fileName;
-    a.click();
-});
     </script>
 </body>
 </html>
