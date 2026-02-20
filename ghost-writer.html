@@ -164,24 +164,33 @@
         <button class="login-btn" onclick="checkPassword()">INITIATE SEQUENCE</button>
     </div>
 
-    <div id="main-content">
-        <div class="sharp-case">
-            <div class="case-header">SHARP PERSONAL ORGANIZER | WIDE_LCD</div>
-            <div class="lcd-screen-bezel">
-                <div class="lcd-screen">
-                    <div class="screen-header">ESTATE SYNC ACTIVE // 32KB RAM</div>
-                    <form id="mdForm">
-                        <label>ENTRY TITLE:</label>
-                        <input type="text" id="title" required>
-                        
-                        <label>STORY CONTENT:</label>
-                        <textarea id="content" required></textarea>
-                    </form>
-                </div>
+<div id="main-content">
+    <div class="sharp-case">
+        <div class="case-header">SHARP PERSONAL ORGANIZER | WIDE_LCD</div>
+        
+        <div class="lcd-screen-bezel">
+            <div class="lcd-screen">
+                <div class="screen-header">ESTATE SYNC ACTIVE // 32KB RAM</div>
+                <form id="mdForm">
+                    <label>ENTRY TITLE:</label>
+                    <input type="text" id="title" required placeholder="ENTER TITLE...">
+                    
+                    <label>STORY CONTENT:</label>
+                    <textarea id="content" required placeholder="TYPE YOUR THOUGHTS..."></textarea>
+                </form>
             </div>
-            <button type="button" id="downloadBtn" class="retro-key">EXECUTE DOWNLOAD & SYNC</button>
+        </div>
+
+        <div class="keyboard-deck" style="margin-top: 20px; text-align: center;">
+            <button type="button" id="downloadBtn" class="retro-key">
+                [ ENTER / PUBLISH TO ESTATE ]
+            </button>
+            <div class="status-light" style="color: var(--hacker-green); font-size: 0.8rem; margin-top: 10px; opacity: 0.6;">
+                ● DATA CONNECTION ACTIVE
+            </div>
         </div>
     </div>
+</div>
 
     <script>
         // PASSWORD LOGIC
