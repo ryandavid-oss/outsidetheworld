@@ -150,7 +150,7 @@ h1 {
         console.log("Attempting to fetch manifest.json...");
 
         // 1. Fetch using standard function syntax
-        fetch('manifest.json')
+        fetch('./manifest.json')
             .then(function(response) {
                 if (!response.ok) {
                     throw new Error("Could not find manifest.json");
