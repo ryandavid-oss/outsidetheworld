@@ -2,136 +2,157 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SHARP ZQ-3000 | POCKET EDITION</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>GAME BOY POCKET | GHOST-WRITER</title>
     <link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
     <script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=VT323&family=Fira+Code:wght@300;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
-        /* GAMEBOY POCKET MONOCHROME PALETTE */
         :root {
-            --gbp-darkest: #0a0a0a;
-            --gbp-dark: #333333;
-            --gbp-light: #777777;
-            --gbp-lightest: #c4cfa1; /* The classic silver-grey tint */
-            --case-color: #d1d1d1;   /* Light grey plastic */
+            --gbp-bg: #c4cfa1; /* Silver-grey shell */
+            --gbp-screen: #9bbc0f; /* Olive-silver LCD */
+            --gbp-dark: #306230;
+            --gbp-black: #0f380f;
+            --gbp-plastic: #d1d1d1;
         }
 
-        body {
+        body, html {
+            margin: 0; padding: 0; height: 100%;
             background-color: #121212;
-            color: var(--gbp-darkest);
             font-family: 'VT323', monospace;
-            display: flex; justify-content: center; align-items: center;
-            min-height: 100vh; margin: 0; overflow-y: auto; padding: 20px;
+            display: flex; justify-content: center; overflow: hidden;
         }
 
-        /* 1. LOGIN SCREEN - POCKET STYLE */
-        #auth-container {
-            width: 100%; max-width: 400px; padding: 40px;
-            border: 4px solid var(--gbp-darkest);
-            background: var(--gbp-lightest);
-            color: var(--gbp-darkest);
-            box-shadow: 8px 8px 0px var(--gbp-dark);
+        /* 1. THE HARDWARE SHELL */
+        .gb-shell {
+            background-color: var(--gbp-plastic);
+            width: 100%; max-width: 450px;
+            height: 100%; display: flex; flex-direction: column;
+            border-left: 4px solid #fff; border-right: 4px solid #888;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+            position: relative; padding: 20px; box-sizing: border-box;
         }
 
-        #passwordInput {
-            background: rgba(255,255,255,0.3);
-            border: 2px solid var(--gbp-darkest);
-            padding: 10px; color: var(--gbp-darkest);
-            font-family: 'Fira Code', monospace;
-            font-size: 1.2rem; width: 90%; outline: none; margin-bottom: 20px;
-        }
-
-        .login-btn {
-            background: var(--gbp-darkest); color: var(--gbp-lightest); border: none;
-            padding: 10px 20px; font-family: 'VT323', monospace; font-size: 1.2rem;
-            cursor: pointer; width: 100%;
-        }
-
-        /* 2. THE WRITER - POCKET STYLE */
-        #main-content { display: none; width: 100%; max-width: 1100px; }
-
-        .sharp-case {
-            background-color: var(--case-color);
-            border-radius: 15px; padding: 30px;
-            border: 4px solid #999;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
-            position: relative;
+        /* 2. THE SCREEN BEZEL */
+        .screen-bezel {
+            background-color: #333;
+            padding: 30px 15px 10px;
+            border-radius: 10px 10px 50px 10px;
+            box-shadow: inset 0 0 10px #000;
         }
 
         .lcd-screen {
-            background-color: #e0e0e0; /* True Monochrome Silver */
-            color: var(--gbp-darkest);
-            padding: 30px; min-height: 650px;
+            background-color: var(--gbp-bg);
+            min-height: 400px; padding: 15px;
+            border: 5px solid #222;
             display: flex; flex-direction: column;
-            border: 12px solid #222;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
         }
 
-        /* SPRITE DECORATIONS */
-        .sprite-footer {
-            display: flex; justify-content: space-between;
-            padding: 15px 40px 0; opacity: 0.6; filter: grayscale(100%);
+        /* Branding under screen */
+        .branding {
+            color: #777; font-size: 1.2rem; margin-top: 10px;
+            display: flex; justify-content: space-between; align-items: center;
+            font-style: italic; letter-spacing: 1px;
         }
-        .sprite { height: 40px; image-rendering: pixelated; }
 
-        .sharp-input-group { display: flex; gap: 20px; margin-bottom: 20px; }
+        /* 3. INPUTS & EDITOR */
         input#title, input#entryDate {
             background: transparent; border: none;
-            border-bottom: 2px solid var(--gbp-darkest);
-            color: var(--gbp-darkest); font-family: 'VT323', monospace; outline: none;
+            border-bottom: 2px solid var(--gbp-black);
+            color: var(--gbp-black); font-family: 'VT323', monospace;
+            outline: none; margin-bottom: 10px; width: 100%;
         }
-        input#title { font-size: 2.2rem; flex-grow: 1; }
-        input#entryDate { font-size: 1.5rem; width: 180px; text-align: center; border: 1px dashed #999; }
+        input#title { font-size: 1.8rem; }
+        input#entryDate { font-size: 1.2rem; }
 
-        /* EDITOR STYLING */
-        .EasyMDEContainer { font-family: 'VT323', monospace !important; font-size: 1.6rem; }
-        .editor-toolbar { background: #dcdcdc; border: 1px solid var(--gbp-darkest); border-bottom: none; }
-        .editor-toolbar button { color: var(--gbp-darkest) !important; }
-        .CodeMirror { background: transparent !important; border: 1px solid var(--gbp-darkest) !important; color: var(--gbp-darkest) !important; height: 400px; }
+        .EasyMDEContainer { font-family: 'VT323', monospace !important; }
+        .CodeMirror { background: transparent !important; color: var(--gbp-black) !important; border: 1px solid var(--gbp-black) !important; height: 280px !important; }
+        .editor-toolbar { background: rgba(0,0,0,0.05); border: none; }
 
-        .digital-publish-btn {
-            margin-top: 25px; background: var(--gbp-darkest); color: #fff;
-            border: none; padding: 15px;
-            font-family: 'VT323', monospace; font-size: 1.8rem; cursor: pointer;
-            box-shadow: 4px 4px 0px #555;
+        /* 4. PHYSICAL BUTTONS (NON-FUNCTIONAL D-PAD) */
+        .controls { flex-grow: 1; display: grid; grid-template-columns: 1fr 1fr; padding-top: 40px; }
+        
+        .d-pad { position: relative; width: 100px; height: 100px; margin: 0 auto; }
+        .d-pad-vert, .d-pad-horiz { background: #333; position: absolute; border-radius: 2px; }
+        .d-pad-vert { width: 30px; height: 90px; left: 35px; top: 5px; }
+        .d-pad-horiz { width: 90px; height: 30px; left: 5px; top: 35px; }
+
+        /* FUNCTIONAL SUBMIT BUTTONS (A & B) */
+        .action-buttons { display: flex; gap: 20px; justify-content: center; align-items: center; padding-top: 20px; }
+        .btn-circle {
+            width: 60px; height: 60px; background: #8a1d3b; /* Deep red */
+            border-radius: 50%; border: 4px solid #5a1326;
+            color: white; font-size: 1.5rem; display: flex;
+            align-items: center; justify-content: center;
+            cursor: pointer; box-shadow: 4px 4px 0px rgba(0,0,0,0.2);
+            -webkit-tap-highlight-color: transparent;
         }
-        .digital-publish-btn:active { transform: translate(2px, 2px); box-shadow: 0px 0px 0px #555; }
+        .btn-circle:active { transform: translate(2px, 2px); box-shadow: none; }
+
+        .start-select { display: flex; gap: 20px; justify-content: center; margin-top: 40px; }
+        .pill { width: 40px; height: 10px; background: #999; border-radius: 10px; transform: rotate(-25deg); }
+
+        /* 5. LOGIN MODAL OVERLAY */
+        #auth-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--gbp-bg); z-index: 1000;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            padding: 40px; box-sizing: border-box;
+        }
+
+        /* Responsive scaling for iPhone */
+        @media (max-width: 480px) {
+            .gb-shell { border: none; padding: 10px; }
+            .screen-bezel { padding: 20px 10px 5px; }
+            .lcd-screen { min-height: 480px; }
+            .action-buttons { padding-bottom: 20px; }
+        }
     </style>
 </head>
 <body>
 
-    <div id="auth-container">
-        <div style="font-size: 1.8rem; margin-bottom: 20px; border-bottom: 4px solid var(--gbp-darkest);">SHARP | POCKET</div>
-        <div style="margin-bottom: 10px;">USER AUTH REQUIRED:</div>
-        <input type="password" id="passwordInput" autofocus>
-        <button class="login-btn" onclick="checkPassword()">INITIALIZE</button>
-    </div>
+    <div class="gb-shell">
+        <div class="screen-bezel">
+            <div id="auth-overlay">
+                <div style="font-size: 2rem; margin-bottom: 30px;">SHARP ZQ-3000</div>
+                <div style="margin-bottom: 10px;">ACCESS CODE:</div>
+                <input type="password" id="passwordInput" style="background:#fff; border:2px solid #000; width:80%; text-align:center; padding:10px;">
+                <p style="font-size: 0.8rem; margin-top: 40px;">PRESS [START] TO INITIALIZE</p>
+            </div>
 
-    <div id="main-content">
-        <div class="sharp-case">
             <div class="lcd-screen">
-                <div class="sharp-input-group">
-                    <input type="text" id="title" placeholder="ENTRY TITLE...">
-                    <input type="date" id="entryDate">
-                </div>
+                <input type="text" id="title" placeholder="ENTRY TITLE...">
+                <input type="date" id="entryDate">
                 <textarea id="content"></textarea>
-                <button type="button" id="downloadBtn" class="digital-publish-btn">SAVE TO CARTRIDGE</button>
             </div>
-            
-            <div class="sprite-footer">
-                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/red-blue/transparent/25.png" class="sprite" alt="Sprite 1">
-                <div style="font-size: 0.8rem; color: #666; letter-spacing: 2px;">POWER OFF [ ] RECHARGE [x]</div>
-                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/red-blue/transparent/1.png" class="sprite" alt="Sprite 2">
+            <div class="branding">
+                <span>● POWER</span>
+                <span style="font-family: sans-serif; font-weight: bold;">Nintendo <small style="font-style: normal; font-size: 0.6rem;">GAME BOY <i>pocket</i></small></span>
             </div>
+        </div>
+
+        <div class="controls">
+            <div class="d-pad">
+                <div class="d-pad-vert"></div>
+                <div class="d-pad-horiz"></div>
+            </div>
+            <div class="action-buttons">
+                <div class="btn-circle" id="btnB">B</div>
+                <div class="btn-circle" id="btnA">A</div>
+            </div>
+        </div>
+
+        <div class="start-select">
+            <div><div class="pill" id="startBtn"></div><div style="font-size: 0.7rem; text-align: center; margin-top: 5px;">SELECT</div></div>
+            <div><div class="pill"></div><div style="font-size: 0.7rem; text-align: center; margin-top: 5px;">START</div></div>
         </div>
     </div>
 
     <script>
+        // Setup Date
         const now = new Date();
-        const azOffset = -7 * 60;
-        const azTime = new Date(now.getTime() + (azOffset + now.getTimezoneOffset()) * 60000);
+        const azTime = new Date(now.getTime() + (-7 * 60 + now.getTimezoneOffset()) * 60000);
         document.getElementById('entryDate').value = azTime.toISOString().split('T')[0];
 
         const easyMDE = new EasyMDE({
@@ -139,40 +160,40 @@
             forceSync: true,
             spellChecker: false,
             status: false,
-            toolbar: ["bold", "italic", "heading", "|", "quote", "unordered-list", "ordered-list", "|", "preview", "side-by-side", "fullscreen"]
+            toolbar: ["bold", "italic", "quote", "|", "preview"]
         });
 
-        function checkPassword() {
+        function login() {
             if (document.getElementById('passwordInput').value === 'Stockton12!') {
-                document.getElementById('auth-container').style.display = 'none';
-                document.getElementById('main-content').style.display = 'block';
+                document.getElementById('auth-overlay').style.display = 'none';
                 easyMDE.codemirror.refresh();
             } else { alert('ACCESS DENIED'); }
         }
 
-        document.getElementById('passwordInput').addEventListener('keypress', (e) => { if (e.key === 'Enter') checkPassword(); });
+        document.getElementById('passwordInput').addEventListener('keypress', (e) => { if (e.key === 'Enter') login(); });
+        document.getElementById('startBtn').addEventListener('click', login);
 
-        document.getElementById('downloadBtn').addEventListener('click', () => {
+        // A and B Buttons both trigger the download
+        const publish = () => {
             const title = document.getElementById('title').value;
             const chosenDate = document.getElementById('entryDate').value;
             const content = easyMDE.value();
 
-            if (!title || !content || !chosenDate) { alert("ERROR: MISSING DATA"); return; }
-
-            const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
-            const formattedDate = new Date(chosenDate + 'T00:00:00').toLocaleDateString('en-US', dateOptions);
+            if (!title || !content) { alert("DATA MISSING"); return; }
 
             const formattedContent = content.replace(/\n/g, "  \n");
-            const fullMarkdown = `# ${title}\n### ${formattedDate}\n\n---\n\n${formattedContent}`;
+            const fullMarkdown = `# ${title}\n### ${new Date(chosenDate + 'T00:00:00').toLocaleDateString('en-US', {year: 'numeric', month: 'long', day: 'numeric'})}\n\n---\n\n${formattedContent}`;
 
             const fileName = `${chosenDate}-${title.toLowerCase().replace(/[^a-z0-9]/g, '-')}.md`;
-
             const blob = new Blob([fullMarkdown], { type: 'text/markdown' });
             const a = document.createElement('a');
             a.href = URL.createObjectURL(blob);
             a.download = fileName;
             a.click();
-        });
+        };
+
+        document.getElementById('btnA').addEventListener('click', publish);
+        document.getElementById('btnB').addEventListener('click', publish);
     </script>
 </body>
 </html>
