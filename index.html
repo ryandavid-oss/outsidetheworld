@@ -226,6 +226,23 @@
             .logo-header { width: 340px; }
             .neutral-gutter { width: 0; }
         }
+        /* Responsive Tweak for Mobile */
+@media (max-width: 600px) {
+    .main-logo {
+        width: 90% !important; /* Shrink logo to fit screen width */
+        max-width: 350px;
+        height: auto;
+    }
+
+    .container, .post-content {
+        width: 95% !important; /* Give more breathing room on edges */
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 2.5rem !important; /* Shrink headers so they don't wrap weirdly */
+    }
+}
     </style>
 </head>
 <body>
