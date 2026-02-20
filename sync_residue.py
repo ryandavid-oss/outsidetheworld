@@ -1,14 +1,12 @@
 import os
 import json
+import re
 from datetime import datetime, timedelta
 
 # Settings
 posts_folder = 'blogger_posts'
 manifest_file = 'manifest.json'
 
-# --- THE ARIZONA FIX ---
-# This ensures that even if a file is uploaded without a date, 
-# the script knows it's currently UTC-7 in Arizona
 az_time = datetime.utcnow() - timedelta(hours=7)
 current_date_str = az_time.strftime("%Y-%m-%d")
 
@@ -23,8 +21,17 @@ for filename in os.listdir(posts_folder):
         if len(parts) >= 4:
             year = parts[0]
             date = f"{parts[1]}/{parts[2]}"
-            # Convert dashes back to spaces for the title
-            title = " ".join(parts[3:]).capitalize()
+            
+            # --- THE FIX FOR TITLES ---
+            # 1. Join the remaining parts
+            raw_title = " ".join(parts[3:])
+            
+            # 2. Specifically catch common number-sanitization (like 39 for apostrophe)
+            # This regex looks for " 39 " or " 39s " and turns it back into 's
+            raw_title = raw_title.replace(" 39 s", "'s").replace(" 39 ", "'")
+            
+            # 3. Capitalize the first letter only
+            title = raw_title.capitalize()
             
             residue_list.append({
                 "year": year,
@@ -33,11 +40,10 @@ for filename in os.listdir(posts_folder):
                 "file": filename
             })
 
-# Sort by filename (newest first based on the date prefix)
+# Sort by filename (newest first)
 residue_list.sort(key=lambda x: x['file'], reverse=True)
 
-# Save the manifest
 with open(manifest_file, 'w') as f:
     json.dump(residue_list, f, indent=4)
 
-print(f"Estate Synchronized for Arizona Time. {len(residue_list)} entries found.")
+print(f"Estate Synchronized. {len(residue_list)} entries found.")
