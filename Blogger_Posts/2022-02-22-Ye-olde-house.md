@@ -1,0 +1,7 @@
+# Ye olde house
+Date: February 22, 2022
+
+<img alt="" border="0" height="400" id="BLOGGER_PHOTO_ID_7067675914803439282" src="https://blogger.googleusercontent.com/img/a/AVvXsEiaEfDlhRusx0yp78LSeN1xxoopKuJDFaTSoOMY7yYduOCDnGcUllWnH_aW4mRfB4shElG1mc8GHLZTfDg3FaR4QV5SbK2ilqyxWuCRXh1bcOnleJXM5f7GGnTwH99CI_uEY07mi7zcyVJ_o48GrGGmSSeDisng4CAzMdLCvzdSVUn-kwQa3g=w400-h400" width="400" />
+There's a landing midway up the staircase inside my house.  During the day, I find myself looking upward through the blinds to stare at the clouds as they pass overhead.  I angled the shades specifically so I had this view; in an otherwise artificially lighted corridor, it's a welcome relief to have this perspective.
+I love my house.  It means so much more to me than I ever anticipated.  It was a slow ascension, too.  When I moved in as a single father back in 2019, it was all I could afford.  Pickings were so few and far between for my budget.  But I do remember a sensation of familiarity when I walked in the first time.  Rooms and windows were laid about just *so*, as to provide that intimate awareness.  Sure, the paint color was obnoxious, the stucco was (and still is) pock-marked by errant golf balls, and the carpet was abundant with various stains of unknown origin.  But it was mine.
+Some days, I feel we might never leave this house.  But life's only surety is the uncertainty of all things. For my part, I can imagine staring upward at the kaleidoscopic sky for the rest of my life; or at least for as long as my legs will propel me up the stairs.

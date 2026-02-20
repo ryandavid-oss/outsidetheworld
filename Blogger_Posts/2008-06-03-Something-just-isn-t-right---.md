@@ -1,0 +1,6 @@
+# Something just isn't right...
+Date: June 03, 2008
+
+My Moblah'g isn't being very 'Mo' right now.  Severely lacking.  I can't seem to post directly from my iPhone at this time.  I shouldn't expect much, even the finest motor has its spurts when it's not turned over in seven months...
+
+More later.

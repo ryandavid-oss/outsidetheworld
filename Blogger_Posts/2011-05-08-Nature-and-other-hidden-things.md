@@ -1,0 +1,8 @@
+# Nature and other hidden things
+Date: May 08, 2011
+
+<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgSek9jGIlsIm_1ICnZZPjDOd-FMESTPfan1EluDI-RYPutUOSIA2qxd3feUwH7oXoXtw5uZN9h2OPM62G0jnArrImS3uWsgK-k8Hpv2Qqh8Q3-UfZCXwzhS71QvvL7rr7cxPrA4A/s320/photo+1-719370.jpg"  border="0" alt="" id="BLOGGER_PHOTO_ID_5604386085063743538" />
+<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiiopDyJdxQWjbpz2VPmb2h1FJSrXTq7_okamqTBa9F28PXfD60gYq71YOW7Cl5Bg7929Dt-O4I6k-mZIs_ZB4qTqFmS58HLCdPiyZusNoXNXtwwY_oeL5m7KjdBu3JWV_itLDBMg/s320/photo+2-720414.jpg"  border="0" alt="" id="BLOGGER_PHOTO_ID_5604386088312113330" />
+<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgs4JbSEQh4eNdxuJW4GOsBgjy_PxMZYiTWp8EUTveREala0mWiAJFY_sYJzQpZoWec0Bcx7Ukp8cTY9oGkV-WBsC6VYoFy55aUSUc4tknKk9UW4Iqg_xB_mRwkpEWQKWn4Xy8jMA/s320/photo+3-721386.jpg"  border="0" alt="" id="BLOGGER_PHOTO_ID_5604386093918640946" />
+<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiR0jYdJ90Z_xUZ-jF5jHUBCNWnXKrFhUfD6qvVYPrCao6uBsznaW1erztSe2phRzgisHCkVfffgzKcI4aTZiX7_T-n_bfqHS7LC-M2Pg5VdNEqmfsuDtuLNWlPEfj2K77M1Kumhw/s320/photo+4-722545.jpg"  border="0" alt="" id="BLOGGER_PHOTO_ID_5604386095961286098" />
+Climb the mountains and get their good tidings. Nature's peace will flow into you as sunshine flows into trees. The winds will blow their own freshness into you, and the storms their energy, while cares will drop away from you like the leaves of Autumn. - John Muir

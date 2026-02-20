@@ -1,0 +1,4 @@
+# I've been here before
+Date: August 18, 2007
+
+When I was a teenager, my dad and I visited this exact location after camping in Payson for the night.  Being a typical teen, I griped and groused the entire time, upsetting my dad quite a bit.  I don't think we ever made it down under the bridge, as I think I would have remembered such a scene.  I think I get it now.  They say that you get payback for all the things you do to your parents while growing up.  This is something I'd like to avoid, if possible.  My dad's probably snickering as he reads this, as long as he remembers my terrible attitude, that is.    My parents have been blessed with an uncanny ability to toss out those more trying times with me.  But I think it's time my dad and I came back for a little visit.  What do you say, pops?

@@ -1,0 +1,5 @@
+# We're off to see the wizard
+Date: July 25, 2007
+
+Well, not really. See, the battery on my wife's Macbook crapped out while we were in Lake Arrowhead. Yet again, we get to visit a "Mac Genius" to have the dern thing repaired. This now makes for two DVD drives, one wrist rest assembly, one hard drive, AND the battery. I should mention that the one year warranty expired less than a month ago. I shall make my case, nonetheless. I will admit that the folks working at (behind?) the Genius Bar have always been nothing but helpful and kind. But then again, that was when I was under warranty. They could spits fire at me now, as I didn't opt for their touted "AppleCare" warranty. Sheesh. I hate extended warranties. Blah blah blah, it's all been said before. Work calls, the break is over. Till later! 
+Posted wirelessly!

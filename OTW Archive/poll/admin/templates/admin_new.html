@@ -1,0 +1,161 @@
+<html>
+<head>
+<title>Advanced Poll $pollvars[poll_version]</title>
+<meta http-equiv="Content-Type" content="text/html; charset=$lang[charset]">
+<style type="text/css">
+<!--
+.td1 {  font-family: "MS Sans Serif"; font-size: 10pt}
+.td2 {  font-family: "MS Sans Serif"; font-size: 9pt}
+.input {  font-family: "MS Sans Serif"; font-size: 9pt; height: 20px; width: 350px}
+.exp_input {  font-family: "MS Sans Serif"; font-size: 9pt; height: 20px; width: 30px}
+.button {  font-family: Arial, Helvetica, sans-serif; font-size: 9pt}
+.select {  font-family: Arial, Helvetica, sans-serif; font-size: 9pt}
+-->
+</style>
+<script language="JavaScript">
+<!--
+blank = new Image(); blank.src = "$pollvars[base_gif]/blank.gif";
+$java_script
+
+function ChangeBar(sel,img) {
+  eval("document.bar"+img+".src="+sel+".src");
+}
+function trim(value) {
+ startpos=0;
+ while((value.charAt(startpos)==" ")&&(startpos<value.length)) {
+   startpos++;
+ }
+ if(startpos==value.length) {
+   value="";
+ } else {
+   value=value.substring(startpos,value.length);
+   endpos=(value.length)-1;
+   while(value.charAt(endpos)==" ") {
+     endpos--;
+   }
+   value=value.substring(0,endpos+1);
+ }
+ return(value);
+}
+function CheckForm() {
+ document.form.question.value = trim(document.form.question.value);
+ document.form.exp_time.value = trim(document.form.exp_time.value);
+ document.forms[0].elements[2].value = trim(document.forms[0].elements[2].value);
+ if (document.form.question.value == "") {
+   alert('$lang[NewNoQue]!');
+   document.form.question.focus();
+   return false;
+ }
+ if (document.forms[0].elements[2].value == "") {
+   alert('$lang[NewNoOpt]!');
+   document.forms[0].elements[2].focus();
+   return false;
+ }
+ if (document.form.expire.checked == false) {
+   if(!(document.form.exp_time.value >= 0) || document.form.exp_time.value == "") {
+     alert("$lang[SetEmpty]");
+     document.form.exp_time.focus();
+     return false;
+   }
+ }
+}
+
+// -->
+</script>
+</head>
+<body bgcolor="#3A6EA5">
+<table border="1" cellspacing="0" cellpadding="0" align="center" width="750">
+  <tr bgcolor="#C6C3C6" valign="top">
+    <td>
+      <table width="750" border="0" cellspacing="0" cellpadding="1" align="center">
+        <tr bgcolor="#400080">
+          <td height="20" class="td2" bgcolor="#000084"><b><font color="#FFFFFF">
+            &nbsp;Advanced Poll $pollvars[poll_version]</font></b></td>
+          <td height="20" align="right" bgcolor="#000084">
+          <img src="$pollvars[base_gif]/min.gif" width="16" height="14"><img src="$pollvars[base_gif]/max.gif" width="16" height="14">&nbsp;<a href="admin_logout.php?session=$auth[session]&amp;uid=$auth[uid]"><img src="$pollvars[base_gif]/cross.gif" width="16" height="14" border="0" alt="$lang[Logout]"></a></td>
+        </tr>
+        <tr valign="top">
+          <td colspan="2">
+            <table border="0" cellspacing="0" cellpadding="1">
+              <tr>
+                <td colspan="7"><img src="$pollvars[base_gif]/top_line.gif" width="745" height="3"></td>
+              </tr>
+              <tr>
+                <td align="center" rowspan="2" width="5"><img src="$pollvars[base_gif]/v_line.gif" width="5" height="50"></td>
+                <td align="center" width="120"><a href="index.php?session=$auth[session]&amp;uid=$auth[uid]&amp;action=show"><img src="$pollvars[base_gif]/index.gif" width="32" height="32" border="0" alt="$lang[IndexTitle]"></a></td>
+                <td align="center" width="131"><a href="index.php?session=$auth[session]&amp;uid=$auth[uid]&amp;action=new"><img src="$pollvars[base_gif]/new.gif" width="32" height="32" border="0" alt="$lang[NewTitle]"></a></td>
+                <td align="center" width="153"><a href="admin_settings.php?session=$auth[session]&amp;uid=$auth[uid]"><img src="$pollvars[base_gif]/settings.gif" width="32" height="32" border="0" alt="$lang[SetTitle]"></a></td>
+                <td align="center" width="121"><a href="admin_templates.php?session=$auth[session]&amp;uid=$auth[uid]"><img src="$pollvars[base_gif]/templates.gif" width="32" height="32" border="0" alt="$lang[Templates]"></a></td>
+                <td align="center" width="127"><a href="admin_password.php?session=$auth[session]&amp;uid=$auth[uid]"><img src="$pollvars[base_gif]/password.gif" width="32" height="32" border="0" alt="$lang[PwdTitle]"></a></td>
+                <td align="center" width="89"><a href="admin_help.php?session=$auth[session]&amp;uid=$auth[uid]"><img src="$pollvars[base_gif]/howto.gif" width="32" height="32" border="0" alt="$lang[Help]"></a></td>
+              </tr>
+              <tr align="center" valign="top">
+                <td width="120" class="td2">$lang[IndexTitle]</td>
+                <td width="131" class="td2">$lang[NewTitle]</td>
+                <td width="153" class="td2">$lang[SetTitle]</td>
+                <td width="121" class="td2">$lang[Templates]</td>
+                <td width="127" class="td2">$lang[PwdTitle]</td>
+                <td width="89" class="td2">$lang[Help]</td>
+              </tr>
+              <tr align="left">
+                <td colspan="7"><img src="$pollvars[base_gif]/top_line.gif" width="745" height="3"></td>
+              </tr>
+            </table>
+            <form method="post" action="$pollvars[SELF]" name="form">
+              <table width="90%" border="0" cellspacing="0" cellpadding="2" align="center">
+                <tr>
+                  <td colspan="4" class="td1" height="30"><img src="$pollvars[base_gif]/h_line.gif" width="15" height="18">&nbsp;
+                    $message&nbsp;<img src="$pollvars[base_gif]/h_line.gif" width="420" height="18">
+                  </td>
+                </tr>
+                <tr>
+                  <td width="25%" class="td1">$lang[IndexQuest]</td>
+                  <td width="40%">
+                    <input type="text" class="input" name="question" size="38" maxlength="100">
+                  </td>
+                  <td colspan="2" width="35%" class="select">
+                    <select name="logging" class="select">
+                      <option value="0" selected>$lang[EditLgOff]</option>
+                      <option value="1">$lang[EditLgOn]</option>
+                    </select>
+                  </td>
+                </tr>
+
+$poll_options
+
+                <tr>
+                  <td width="25%">&nbsp;</td>
+                  <td colspan="3" height="35" class="td2">
+                   $lang[EditStat]:
+                   <select name="status" class="select">
+                    <option value="0">$lang[EditOff]</option>
+                    <option value="1" selected>$lang[EditOn]</option>
+                    <option value="2">$lang[EditHide]</option>
+                   </select>&nbsp;&nbsp;&nbsp;&nbsp;
+                   $lang[IndexExp]: <input type="text" name="exp_time" class="exp_input" size="4"> $lang[IndexDays]                  
+                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$lang[IndexNever] <input type="checkbox" name="expire" value="0" checked>
+                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$lang[EditCom]<input type="checkbox" name="comments" value="1">
+                  </td>
+                </tr>
+                <tr>
+                  <td width="25%">&nbsp;</td>
+                  <td colspan="3" height="35">
+                    <input class="button" type="submit" value="$lang[NewTitle]" onclick="return CheckForm()">
+                    <input class="button" type="reset" value="$lang[FormUndo]">
+                    <input type="hidden" name="action" value="create">
+                    <input type="hidden" name="session" value="$auth[session]">
+                    <input type="hidden" name="uid" value="$auth[uid]">
+                  </td>
+                </tr>
+              </table>
+            </form>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<br>
+<br>
+</body>
+</html>

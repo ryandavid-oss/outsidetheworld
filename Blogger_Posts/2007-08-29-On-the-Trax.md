@@ -1,0 +1,5 @@
+# On the Trax
+Date: August 29, 2007
+
+<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgbrse1m36UdHtSX1YXNKft44NKhTBCokNFayKkl6ml7WbfL49wv8EUdCLRdGE1CQmtsbbKmT_TbAHb6pkAMsmKiIyH6QdeO1K1HuiNnIToHT7OVQrdzlwVL-xBICAm7EF-oy4k/s320/treo031-797708.jpg"  border="0" alt="" id="BLOGGER_PHOTO_ID_5104161462847820674" />
+We find ourselves on the UTA Trax this morning, en route to Salt Lake City.  We figured we'd save the gas and use the train, but my gosh.  $4.25 for an all day pass?  Yeesh.The train is mostly empty now, but it'll fill up quickly as we follow the track.  Sumner doesn't remember doing this a few years ago, which is sad only because the trip with him as an 18 month old is imprinted on my mind so thoroughly.  I'll keep the memory going for him, then.The train started moving now, and I am in the rear facing seat.  It makes me a bit ill to type in this environment, so I bid you adiue for now.  More pictures as the day progresses!

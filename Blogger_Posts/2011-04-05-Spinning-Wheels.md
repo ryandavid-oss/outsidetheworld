@@ -1,0 +1,8 @@
+# Spinning Wheels
+Date: April 05, 2011
+
+<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg4bVTZXeyBVfdVNDE1n8A9T8YIqgUA4mCPUwNfCyFAu8oSq_1n2IIpwYtzoM6oUE5O1SIaSY0R9R8AnxwCd5Bp-LcHnY_4sNPxpHax9b9dlqrN-sJHmCXEg3VnttFu8eQ4YOJdhg/s320/photo+1-731740.JPG"  border="0" alt="" id="BLOGGER_PHOTO_ID_5591953930369801618" />
+<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg7ySAEjP9JcfwKG_E4ndr09qANpMqSksVE_tDDrW_G42Z3g9UoKOhGzATNJcU6S9uISb1tVmXbvD293LtYxsMbmxTZDCiBkPbIVkw-TbvsKHrwE8UbqmgBmQDc_wPDiYZyfx9OhQ/s320/photo+2-732751.JPG"  border="0" alt="" id="BLOGGER_PHOTO_ID_5591953931828047154" />
+<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjB1tYFZJYYjBuqU2MArZQiwuJ8wYgqsT7n8N5KJtJWUGOTOuxej_iPCQjHd1hNRGBAyuQLtQ2LCexFY0nh5HtWizPA-BST6pPzTw4ziNtEsVQWU9Wz_XgY2tYdhK9VLv5i92h8gw/s320/photo+4-733395.JPG"  border="0" alt="" id="BLOGGER_PHOTO_ID_5591953935070734594" />
+<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjhhCQcuyCYzO-P_kvpiHC3o5jGz4VNwcrsSWLu__1gMXFWlrJrKlawYgghj_4hm3u2yNi1abcPRUqopT7EhyTYQzrAjnch8_iRMK5dHnnaa-w_YZtKq_9vHQyNq0WczydpXnnrrA/s320/photo+5-734253.JPG"  border="0" alt="" id="BLOGGER_PHOTO_ID_5591953939112984834" />
+Another nightly run, another encounter with the carnival occurring down the street from me. White Ladder was my companion as I journeyed, memories of Little Cottonwood fresh in my mind. Enjoy a few selections courtesy of SwankoLab + Slow Shutter.

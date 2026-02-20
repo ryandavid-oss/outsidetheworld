@@ -1,0 +1,124 @@
+<html>
+<head>
+<title>Advanced Poll $pollvars[poll_version]</title>
+<meta http-equiv="Content-Type" content="text/html; charset=$lang[charset]">
+<style type="text/css">
+<!--
+.td1 {  font-family: "MS Sans Serif"; font-size: 10pt}
+.td2 {  font-family: "MS Sans Serif"; font-size: 9pt}
+.code {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; font-weight: normal; height: 200px; width: 600px;; background-color: #E9E9E9}
+.code2 {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; height: 90px; width: 600px; background-color: #E9E9E9}
+-->
+</style>
+</head>
+<body bgcolor="#3A6EA5">
+<table border="1" cellspacing="0" cellpadding="0" align="center" width="750">
+  <tr bgcolor="#C6C3C6" valign="top">
+    <td>
+      <table width="750" border="0" cellspacing="0" cellpadding="1" align="center">
+        <tr bgcolor="#400080">
+          <td height="20" class="td2" bgcolor="#000084"><b><font color="#FFFFFF">
+            &nbsp;Advanced Poll $pollvars[poll_version]</font></b></td>
+          <td height="20" align="right" bgcolor="#000084">
+          <img src="$pollvars[base_gif]/min.gif" width="16" height="14"><img src="$pollvars[base_gif]/max.gif" width="16" height="14">&nbsp;<a href="admin_logout.php?session=$auth[session]&amp;uid=$auth[uid]"><img src="$pollvars[base_gif]/cross.gif" width="16" height="14" border="0" alt="$lang[Logout]"></a></td>
+        </tr>
+        <tr valign="top">
+          <td colspan="2">
+            <table border="0" cellspacing="0" cellpadding="1">
+              <tr>
+                <td colspan="7"><img src="$pollvars[base_gif]/top_line.gif" width="745" height="3"></td>
+              </tr>
+              <tr>
+                <td align="center" rowspan="2" width="5"><img src="$pollvars[base_gif]/v_line.gif" width="5" height="50"></td>
+                <td align="center" width="120"><a href="index.php?session=$auth[session]&amp;uid=$auth[uid]&amp;action=show"><img src="$pollvars[base_gif]/index.gif" width="32" height="32" border="0" alt="$lang[IndexTitle]"></a></td>
+                <td align="center" width="131"><a href="index.php?session=$auth[session]&amp;uid=$auth[uid]&amp;action=new"><img src="$pollvars[base_gif]/new.gif" width="32" height="32" border="0" alt="$lang[NewTitle]"></a></td>
+                <td align="center" width="153"><a href="admin_settings.php?session=$auth[session]&amp;uid=$auth[uid]"><img src="$pollvars[base_gif]/settings.gif" width="32" height="32" border="0" alt="$lang[SetTitle]"></a></td>
+                <td align="center" width="121"><a href="admin_templates.php?session=$auth[session]&amp;uid=$auth[uid]"><img src="$pollvars[base_gif]/templates.gif" width="32" height="32" border="0" alt="$lang[Templates]"></a></td>
+                <td align="center" width="127"><a href="admin_password.php?session=$auth[session]&amp;uid=$auth[uid]"><img src="$pollvars[base_gif]/password.gif" width="32" height="32" border="0" alt="$lang[PwdTitle]"></a></td>
+                <td align="center" width="89"><a href="admin_help.php?session=$auth[session]&amp;uid=$auth[uid]"><img src="$pollvars[base_gif]/howto.gif" width="32" height="32" border="0" alt="$lang[Help]"></a></td>
+              </tr>
+              <tr align="center" valign="top">
+                <td width="120" class="td2">$lang[IndexTitle]</td>
+                <td width="131" class="td2">$lang[NewTitle]</td>
+                <td width="153" class="td2">$lang[SetTitle]</td>
+                <td width="121" class="td2">$lang[Templates]</td>
+                <td width="127" class="td2">$lang[PwdTitle]</td>
+                <td width="89" class="td2">$lang[Help]</td>
+              </tr>
+              <tr align="left">
+                <td colspan="7"><img src="$pollvars[base_gif]/top_line.gif" width="745" height="3"></td>
+              </tr>
+            </table>
+            <form method="post" name="form">
+              <table border="0" cellspacing="0" cellpadding="3" align="center" width="680">
+                <tr> 
+                  <td class="td1"><img src="$pollvars[base_gif]/h_line.gif" width="15" height="18"> 
+                    $lang[Help] <img src="$pollvars[base_gif]/h_line.gif" width="550" height="18"></td>
+                </tr>
+                <tr> 
+                  <td class="td2"><a href="admin_license.php?session=$auth[session]&amp;uid=$auth[uid]">$lang[License]</a></td>
+                </tr>
+                <tr> 
+                  <td class="td2">$lang[HelpSyntax]:</td>
+                </tr>
+                <tr> 
+                  <td> 
+                    <table width="600" border="0" cellspacing="1" cellpadding="4" bgcolor="#E9E9E9" bordercolor="#333333">
+                      <tr> 
+                        <td height="35"><font face="Courier New, Courier, mono" size="2" color="#003366">string</font><font face="Courier New, Courier, mono" size="2"> 
+                          <font color="#009900"><b>poll_process</b></font><b>(</b>mix 
+                          <font color="#996633">var</font><b>)</b></font></td>
+                      </tr>
+                    </table>
+                    <img src="$pollvars[base_gif]/h_line.gif" width="600" height="18"> 
+                    <textarea cols="72" rows="6" wrap="VIRTUAL" class="code2" name="textarea">&lt;?php
+$include_statement &quot;$path/booth.php&quot;;
+echo \$php_poll->poll_process(x);        // x = Poll ID
+?&gt;
+</textarea>
+                  </td>
+                </tr>
+                <tr> 
+                  <td><img src="$pollvars[base_gif]/h_line.gif" width="600" height="18"></td>
+                </tr>
+                <tr> 
+                  <td class="td2">$lang[HelpRand]</td>
+                </tr>
+                <tr> 
+                  <td> 
+                    <textarea cols="72" rows="6" wrap="VIRTUAL" class="code2">&lt;?php
+$include_statement &quot;$path/booth.php&quot;;
+echo \$php_poll->poll_process("random");
+?&gt;
+</textarea>
+                    <br>
+                  </td>
+                </tr>
+                <tr> 
+                  <td><img src="$pollvars[base_gif]/h_line.gif" width="600" height="18"></td>
+                </tr>
+                <tr> 
+                  <td class="td2">$lang[HelpNew]</td>
+                </tr>
+                <tr> 
+                  <td> 
+                    <textarea cols="72" rows="6" wrap="VIRTUAL" class="code2">&lt;?php
+$include_statement &quot;$path/booth.php&quot;;
+echo \$php_poll->poll_process("newest");
+?&gt;
+</textarea>
+                    <br>
+                  </td>
+                </tr>
+              </table>
+            </form>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<br>
+<br>
+</body>
+</html>

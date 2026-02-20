@@ -1,0 +1,202 @@
+<html>
+<head>
+	<title>Outside The World</title>
+	<link rel="stylesheet" href="../style.css">
+
+	</head>
+	
+<body bgcolor="#FFFFFF" text="#000000" vlink="#FF0000" alink="#FF0000" marginheight=0 marginwidth=0 leftmargin=0 topmargin=0>
+
+<script>
+
+//Popup Window Script
+//By JavaScript Kit (http://javascriptkit.com)
+//JavaScript tutorials and over 400+ free scripts
+
+function openpopup(){
+var popurl="pop.htm"
+winpops=window.open(popurl,"","width=300,height=300,")
+}
+
+function get_cookie(Name) {
+  var search = Name + "="
+  var returnvalue = "";
+  if (document.cookie.length > 0) {
+    offset = document.cookie.indexOf(search)
+    if (offset != -1) { // if cookie exists
+      offset += search.length
+      // set index of beginning of value
+      end = document.cookie.indexOf(";", offset);
+      // set index of end of cookie value
+      if (end == -1)
+         end = document.cookie.length;
+      returnvalue=unescape(document.cookie.substring(offset, end))
+      }
+   }
+  return returnvalue;
+}
+
+function loadornot(){
+if (get_cookie('poppedup')==''){
+openpopup()
+document.cookie="poppedup=yes"
+}
+}
+
+loadornot()
+</script>
+
+<div align=center>
+
+	<img src="../pics/spacer.gif" border=0 width=1 height=35><br>
+	<table cellpadding=0 cellspacing=0 border=0 width=705>
+		<tr>
+			<td valign=top>
+			<a href="http://www.outsidetheworld.com">
+			<img border="0" src="../pics/topleft.gif" width="473" height="91"></a></td>
+			<td valign=top>
+				<img src="../pics/index_weather_top_line.gif" border=0 width=222 height=46><br>
+
+				<!-- // Weather Table // -->
+				<table cellpadding=0 cellspacing=0 border=0>
+					<tr>
+						<td valign=top>
+						<img src="../pics/spacer.gif" border=0 width=19 height=1></td>
+						<td valign=top>
+
+							<!-- // Weather Icon // -->
+							<br>
+
+						</td>
+						<td valign=top>
+						<img src="../pics/spacer.gif" border=0 width=12 height=1></td>
+						<td valign=top>
+
+							<!-- // 1st Temp Image // -->
+							<br>
+
+						</td>
+						<td valign=top>
+
+							<!-- // 1st Temp Image // -->
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
+
+						</td>
+						<td valign=top>&nbsp;</td>
+						<td><img src="../pics/spacer.gif" border=0 width=12 height=1></td>
+						<td nowrap>
+
+							<!-- // Temp hi and lo // -->
+							<i><font face="Verdana" color="#800000" size="2">
+          <!--webbot bot="Timestamp" S-Type="EDITED" S-Format="%d %B %Y" startspan -->19 March 2006<!--webbot bot="Timestamp" i-checksum="27327" endspan --></font></i><br>
+							<img src="../pics/spacer.gif" border=0 width=1 height=4><br>
+
+						</td>
+					</tr>
+				</table>
+
+			</td>
+			<td valign=top>
+			<img src="../pics/index_top_right.gif" border=0 width=10 height=91></td>
+		</tr>
+	</table>
+
+	<table cellpadding=0 cellspacing=0 border=0 width=705>
+		<tr>
+			<td valign=top>
+
+				<img border="0" src="../pics/fingers.jpg" width="474" height="336"><br>
+
+			</td>
+			<td valign=top>
+
+				<!-- // Buy Online Links // -->
+				<table cellpadding=0 cellspacing=0 border=0 bgcolor="2A6095">
+					<tr>
+						<td>
+						<img border="0" src="../pics/welcome.gif" width="225" height="48"><br></td>
+					</tr>
+				</table>
+
+				<table cellpadding=0 cellspacing=0 border=0 bgcolor="2A6095" width=225>
+					<tr>
+						<td valign=top width="32">
+						<img border="0" src="../pics/inset.jpg" width="28" height="18"></td>
+						<td valign=top><div class="indexMenu">
+						<b>Home</a></b></div></td>
+						<td valign=top align=right rowspan=6>
+						<img border="0" src="../pics/blnk.gif" width="91" height="118"></a></td>
+					</tr>
+<!--					<tr>
+						<td valign=top><img src="images/index_buy_flake.gif" border=0 width=28 height=18></td>
+						<td valign=top><div class="indexMenu"><a href="">Rental Gear</a></div></td>
+					</tr>-->
+					<tr>
+						<td valign=top width="32">
+						<img border="0" src="../pics/inset.jpg" width="28" height="18"></td>
+						<td valign=top><div class="indexMenu">
+							<a href="products.htm">Products</a></div></td>
+					</tr>
+					<tr>
+						<td valign=top width="32">
+						<img border="0" src="../pics/inset.jpg" width="28" height="18"></td>
+						<td valign=top><div class="indexMenu">
+							<a href="faq.htm">FAQs</a></div></td>
+					</tr>
+					<tr>
+						<td valign=top width="32">
+						<img border="0" src="../pics/inset.jpg" width="28" height="18"></td>
+						<td valign=top><div class="indexMenu">
+							<a href="http://webmail.myotw.net">Web Mail </a><font color="#00FF00">
+							Free!</font></div></td>
+					</tr>
+					<tr>
+						<td valign=top width="32">
+						<img border="0" src="../pics/inset.jpg" width="28" height="18"></td>
+						<td valign=top>
+						<p class="indexMenu">
+							<a href="../contactus.htm">Contact</a></td>
+					</tr>
+				</table>
+
+				<table cellpadding=0 cellspacing=0 border=0 bgcolor="2A6095">
+					<tr>
+						<td>
+						<img src="../pics/index_buy_bottom.gif" border=0 width=225 height=7></td>
+					</tr>
+				</table>
+
+				<!-- // Personal Link // -->
+				<img src="../pics/spacer.gif" border=0 width=1 height=6><br>
+				<a href="http://www.outsidetheworld.com/personal.htm">
+				<img border="0" src="../pics/pers.gif" width="225" height="64"></a><br>
+				
+
+
+				<img src="../pics/spacer.gif" border=0 width=1 height=6><br>
+				<img border="0" src="../pics/select.gif" width="225" height="16"><br>
+
+
+				<!-- // Professional Link // -->
+				<img src="../pics/spacer.gif" border=0 width=1 height=6><br>
+				<a href="http://www.outsidetheworld.com/">
+				<img border="0" src="../pics/pro.gif" width="225" height="64"></a><br>
+
+
+			</td>
+		</tr>
+	</table>
+
+	<img src="../pics/spacer.gif" border=0 width=1 height=25><br>
+
+	Welcome to a whole new professional experience.&nbsp; Outsidetheworld.com<br>
+	Web site design and more.<p><font color="999999">
+		This site best viewed with a MSIE 5+ or Netscape 4.7+ browser<br>
+		©2003 Outside The World</font></p>
+
+
+</div>
+
+
+</body>
+</html>

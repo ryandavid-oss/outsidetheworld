@@ -1,0 +1,12 @@
+     <tr>
+       <td align="center" bgcolor="#E6E6E6"><img src="$image" width="13" height="16" alt="$alt"></td>
+       <td class="td2" bgcolor="#E6E6E6"><a href="admin_edit.php?session=$auth[session]&amp;uid=$auth[uid]&amp;poll_id={poll_id}" title="$lang[EditText]">$question</a></td>
+       <td class="td2" bgcolor="#CCCCCC">{poll_id}</td>
+       <td class="td2" bgcolor="#E6E6E6">$date</td>
+       <td class="td2" bgcolor="#CCCCCC">$days</td>
+       <td class="td2" bgcolor="#E6E6E6">$exp_date</td>
+       <td class="td2" align="center" bgcolor="#CCCCCC"><a href="admin_stats.php?session=$auth[session]&amp;uid=$auth[uid]&amp;poll_id={poll_id}"><img src="$image2" width="16" height="16" border="0" alt="$lang[IndexStat]"></a>&nbsp;&nbsp;
+          <a href="admin_comment.php?session=$auth[session]&amp;uid=$auth[uid]&amp;poll_id={poll_id}"><img src="$image3" width="18" height="18" border="0" alt="$lang[IndexCom]"></a>&nbsp;&nbsp;
+          <a href="admin_embed.php?session=$auth[session]&amp;uid=$auth[uid]&amp;poll_id={poll_id}"><img src="$image4" width="13" height="16" border="0" alt="$lang[Help]"></a></td>
+       <td class="td2" bgcolor="#E6E6E6"><a href="javascript:del_entry({poll_id})">$lang[IndexDel]</a></td>
+     </tr>

@@ -1,0 +1,9 @@
+# Scattered wildflowers
+Date: March 11, 2022
+
+<img alt="" border="0" height="400" id="BLOGGER_PHOTO_ID_7073969578162744098" src="https://blogger.googleusercontent.com/img/a/AVvXsEgifoZIleG-HnSVFbX-FMZsRMbtkT1_At_Ly1kxOMKU9frF2VOumWF39fYqWWYz4WcO03wjLTPKB-D_E7c_j-SsZDnvuZei-i8yb5YVxORAPX0zmvfM_Cwy1UNQJnl15rsB1Mo8PtHgo6Re4AmtUzRGtDWpiSi5wIL9gV7f-g6J-kdFaSCvMA=w400-h400" width="400" />
+Had quite a few interesting conversations with the people who surround my every day life.  My wife, my children, and co-workers represent those who I interact with most often.  We've discussed leadership, photography, religion, politics, food, and many other topics that run the gamut.
+This particular picture came up a few times as I waffled about my next post.  As I am want to do, I like to post a favorite recently taken photo with my meandering thoughts.  I was torn between two very similar shots, and asked several people which spoke to them the most.
+The picture above invariably was the pick of the litter each time (can a litter be a selection of just two? Who knows).  The main difference between this one and the other was the focus; where the flowers in the background here are in focus, the other picture simply had the main flower in focus with the background blurred out.
+When pressed for the "why", one particular person said, "The picture I chose spoke to a sense of community.  It focused on the many, rather than the one".  I loved that, and wondered to myself if that's why the other people I spoke to also chose this picture.  There's often a common thread that runs through our lives, and I like to think the people closest to me have an enduring, visceral ability to empathize, and to look toward others and focus on their needs, wants, and doubts.
+I'm a very lucky person to have these people around me.

@@ -1,0 +1,4 @@
+# It's definitely a Monday
+Date: July 02, 2007
+
+This is definitely a much later post than I prefer.  So far today had been jam packed from the get-go, from getting Sumner up and out the door, dropping him off at school (he didn't cry! Gravy!) and the myriad other things I've accomplished today.I'm happy to take a few minutes out and post a bit.  Anyone else having the typical Monday?  Keep this in mind...the Fourth of July is right around the corner.  Speaking of which, everything is in order for a spectacular Fourth.  I have my secret stash of fireworks ready and waiting.  Weather.com says it will be a ridiculous 115 that day, so the 'works may go off by themselves.  More later! Thanks for visiting. Posted wirelessly!

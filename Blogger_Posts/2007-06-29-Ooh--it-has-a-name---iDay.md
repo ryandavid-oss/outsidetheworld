@@ -1,0 +1,4 @@
+# Ooh, it has a name...iDay
+Date: June 29, 2007
+
+Seriously, we are an anesthetized  nation.  Did you know the bald eagle was taken off the endangered species list yesterday?  Take a look around you and see what else we distract ourselves with needlessly.   I won't point the finger far from home though; I'm guilty too.Too many cameras and not enough food.Ah well.  Change should probably start with me.  Sorry for the downer of an entry...I just feel bad for the people who, instead of waiting for June 29th so that they could spend $600 on a new cell phone, waited outside an underfunded shelter last night because the beds were full.Yes, that's a dramatic swing.  I'll also  sound like a hypocrite at some point int the future, when I pine for the next latest gadget.Hopefully i'll be a bit more balanced out by then, eh?  Hey, it's friday!  Posted.
