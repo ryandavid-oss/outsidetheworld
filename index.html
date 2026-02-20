@@ -23,9 +23,19 @@
         }
 
         /* 1. NEUTRAL ZONES */
-        .neutral-top { position: absolute; top: 0; left: 0; width: 100%; height: 280px; z-index: 150; }
-        .neutral-gutter { position: absolute; top: 0; left: 42.5%; width: 15%; height: 100%; z-index: 140; }
+        /* Change neutral-gutter z-index to 5 so panels can sit on top of it */
+.neutral-gutter {
+    position: absolute;
+    top: 0; left: 42.5%; width: 15%; height: 100%;
+    z-index: 5; /* Lowered from 140 */
+}
 
+/* Change neutral-top z-index to 5 */
+.neutral-top {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 280px;
+    z-index: 5; /* Lowered from 150 */
+}
         /* 2. LOGO & INSTRUCTIONS */
         .logo-header {
             position: absolute; top: 50px; left: 50%;
@@ -50,11 +60,12 @@
         .panel:hover { flex: 6; }
 
         /* THE MASSIVE HITBOX: The entire panel is now a link */
-        .panel-link {
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            width: 100%; height: 100%; text-decoration: none; color: inherit;
-            position: relative; z-index: 100;
-        }
+       .panel-link {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    width: 100%; height: 100%; text-decoration: none; color: inherit;
+    position: relative; 
+    z-index: 500; /* High z-index ensures it's above everything else */
+}
 
         .indicator-node {
             position: absolute; top: 55%; left: 50%; width: 80px; height: 80px;
