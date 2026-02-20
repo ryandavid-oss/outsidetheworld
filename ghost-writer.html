@@ -7,37 +7,113 @@
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
     <style>
-        :root { --brand-blue: #6395EE; --bg-dark: #050505; }
-        body { background: var(--bg-dark); color: white; font-family: 'Inter', sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; }
-        
-        #login-terminal { text-align: center; max-width: 400px; padding: 40px; border: 1px solid rgba(255,255,255,0.05); }
-        input { background: transparent; border: 1px solid #333; color: var(--brand-blue); padding: 15px; width: 100%; font-family: monospace; letter-spacing: 2px; margin-top: 20px; outline: none; }
-        input:focus { border-color: var(--brand-blue); box-shadow: 0 0 15px rgba(99, 149, 238, 0.2); }
-        
-        #editor-terminal { display: none; width: 80%; max-width: 900px; flex-direction: column; gap: 20px; }
-        textarea { background: #0a0a0a; border: 1px solid #222; color: #ccc; padding: 30px; font-family: 'Inter', sans-serif; font-size: 1.1rem; height: 500px; resize: none; outline: none; line-height: 1.6; }
-        .controls { display: flex; justify-content: space-between; align-items: center; }
-        .btn { border: 1px solid var(--brand-blue); background: rgba(99, 149, 238, 0.05); color: var(--brand-blue); padding: 10px 20px; cursor: pointer; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 0.7rem; }
-        .btn:hover { background: var(--brand-blue); color: black; }
-    </style>
+    @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+    :root {
+        --case-color: #3b3b3b;
+        --lcd-bg: #9abf88; /* Classic greenish LCD */
+        --lcd-text: #1a2b1a;
+    }
+
+    body {
+        background-color: #f0a500; /* Matching the orange background in your photo */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+    }
+
+    .sharp-case {
+        background-color: var(--case-color);
+        width: 100%;
+        max-width: 500px;
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        border: 2px solid #222;
+    }
+
+    .case-header { color: #ccc; font-weight: bold; margin-bottom: 8px; }
+
+    .lcd-screen-bezel {
+        background-color: #1a1a1a;
+        padding: 12px;
+        border-radius: 4px;
+    }
+
+    .lcd-screen {
+        background-color: var(--lcd-bg);
+        color: var(--lcd-text);
+        font-family: 'VT323', monospace;
+        padding: 15px;
+        text-transform: uppercase;
+    }
+
+    form { display: flex; flex-direction: column; gap: 8px; }
+    
+    input, textarea {
+        background: transparent;
+        border: none;
+        border-bottom: 1px dashed var(--lcd-text);
+        color: var(--lcd-text);
+        font-family: inherit;
+        font-size: 1.2rem;
+        outline: none;
+    }
+
+    .retro-key {
+        width: 100%;
+        padding: 15px;
+        background: #4a4a4a;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        border-bottom: 5px solid #222;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .retro-key:active {
+        transform: translateY(3px);
+        border-bottom-width: 2px;
+    }
+</style>
 </head>
 <body>
-
-    <div id="login-terminal">
-        <img src="Images/Equal.svg" style="width: 150px; margin-bottom: 20px;">
-        <p style="font-size: 0.7rem; letter-spacing: 4px; color: #666;">IDENTIFICATION REQUIRED</p>
-        <input type="password" id="passkey" placeholder="ENTER YOUR ACCESS CODE..." onkeydown="if(event.key==='Enter') checkPass()">
-    </div>
-
-    <div id="editor-terminal">
-        <div class="controls">
-            <span style="color: var(--brand-blue); font-size: 0.7rem; letter-spacing: 2px; font-weight: 700;">GHOST WRITER V1.0</span>
-            <button class="btn" onclick="saveDraft()">Fling Residue</button>
+<div class="organizer-container">
+    <div class="sharp-case">
+        <div class="case-header">
+            <span class="brand">SHARP</span> <span class="model">ZQ-3000</span>
         </div>
-        <input type="text" id="post-title" placeholder="Observation Title..." style="margin: 0; font-size: 1.5rem; border-bottom: none;">
-        <textarea id="post-content" placeholder="Begin the narrative..."></textarea>
-    </div>
 
+        <div class="lcd-screen-bezel">
+            <div class="lcd-screen">
+                <div class="screen-header">ELECTRONIC ORGANIZER 32KB</div>
+                
+                <form id="mdForm">
+                    <label for="title">TITLE:</label>
+                    <input type="text" id="title" name="title" required placeholder="ENTER TITLE...">
+                    
+                    <label for="date">DATE (OPTIONAL):</label>
+                    <input type="date" id="date" name="date">
+                    
+                    <label for="content">CONTENT:</label>
+                    <textarea id="content" name="content" required placeholder="TYPE YOUR THOUGHTS..."></textarea>
+                </form>
+            </div>
+        </div>
+
+        <div class="keyboard-deck">
+             <div class="fake-button-row">
+                <div class="fake-btn sm">ON</div>
+                <div class="fake-btn sm">OFF</div>
+                <div class="fake-btn lg arrow-pad">SEARCH</div>
+            </div>
+            <button type="button" id="downloadBtn" class="retro-key">ENTER / SAVE</button>
+        </div>
+    </div>
+</div>
     <script>
         function checkPass() {
             const input = document.getElementById('passkey').value;
