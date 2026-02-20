@@ -137,7 +137,24 @@
 
         footer { padding: 60px 0; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
         footer p { font-size: 0.55rem; letter-spacing: 5px; color: rgba(255,255,255,0.1); text-transform: uppercase; }
-    </style>
+   /* MOBILE FIX: Adds headroom so text starts below the logo */
+@media (max-width: 768px) {
+    .hero {
+        padding-top: 180px !important; /* Creates the necessary gap */
+        height: auto !important;
+        min-height: 40vh;
+        justify-content: flex-start;
+    }
+
+    h1 {
+        font-size: 2.2rem !important; /* Scales down text for smaller screens */
+        letter-spacing: 6px !important;
+        line-height: 1.3;
+        mask-image: none !important; /* Disables the fade-mask on mobile for better legibility */
+        -webkit-mask-image: none !important;
+    }
+}
+   </style>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
