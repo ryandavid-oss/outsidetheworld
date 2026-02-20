@@ -205,30 +205,34 @@
         });
 
         // 2. File Generation Logic
-        document.getElementById('downloadBtn').addEventListener('click', () => {
-            const title = document.getElementById('title').value;
-            const content = document.getElementById('content').value;
+ document.getElementById('downloadBtn').addEventListener('click', () => {
+    const title = document.getElementById('title').value;
+    const content = document.getElementById('content').value;
 
-            if (!title || !content) {
-                alert("INPUT REQUIRED");
-                return;
-            }
+    if (!title || !content) {
+        alert("INPUT REQUIRED");
+        return;
+    }
 
-            // ARIZONA TIME LOGIC
-            const now = new Date();
-            const azOffset = -7 * 60;
-            const azTime = new Date(now.getTime() + (azOffset + now.getTimezoneOffset()) * 60000);
-            const dateStr = azTime.toISOString().split('T')[0];
+    // NEW: Inject the title as a Markdown Header (#) at the top of the file
+    const fullMarkdown = `# ${title}\n\n${content}`;
 
-            const cleanTitle = title.toLowerCase().replace(/[^a-z0-9]/g, '-');
-            const fileName = `${dateStr}-${cleanTitle}.md`;
+    // Arizona Time Logic
+    const now = new Date();
+    const azOffset = -7 * 60;
+    const azTime = new Date(now.getTime() + (azOffset + now.getTimezoneOffset()) * 60000);
+    const dateStr = azTime.toISOString().split('T')[0];
 
-            const blob = new Blob([content], { type: 'text/markdown' });
-            const a = document.createElement('a');
-            a.href = URL.createObjectURL(blob);
-            a.download = fileName;
-            a.click();
-        });
+    const cleanTitle = title.toLowerCase().replace(/[^a-z0-9]/g, '-');
+    const fileName = `${dateStr}-${cleanTitle}.md`;
+
+    // Use fullMarkdown instead of just content
+    const blob = new Blob([fullMarkdown], { type: 'text/markdown' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = fileName;
+    a.click();
+});
     </script>
 </body>
 </html>
