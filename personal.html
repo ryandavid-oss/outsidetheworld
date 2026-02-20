@@ -172,7 +172,7 @@ function togglePost() {
         viewer.style.display = 'block';
         contentArea.innerHTML = "<p style='color: #666; letter-spacing: 2px;'>SYNCHRONIZING...</p>";
         
-        fetch('manifest.json')
+        fetch('./manifest.json')
             .then(function(res) { return res.json(); })
             .then(function(data) {
                 if (data.length > 0) {
