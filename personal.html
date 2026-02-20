@@ -90,30 +90,8 @@
 
         /* 2. HERO SECTION */
         .hero { height: 40vh; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding-bottom: 40px; text-align: center; animation: pageReveal 1.2s ease-out forwards; }
-        /* 2. HERO SECTION */
-.hero { 
-    height: 40vh; 
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    justify-content: flex-end; 
-    padding-bottom: 40px; 
-    text-align: center; 
-    animation: pageReveal 1.2s ease-out forwards; 
-}
+        h1 { font-size: 3.5rem; font-weight: 900; letter-spacing: 10px; text-transform: uppercase; color: white; text-shadow: 0 0 20px rgba(99, 149, 238, 0.4); }
 
-h1 { 
-    font-size: 3.5rem; 
-    font-weight: 900; 
-    letter-spacing: 10px; 
-    text-transform: uppercase; 
-    color: white; 
-    text-shadow: 0 0 20px rgba(99, 149, 238, 0.4);
-    
-    /* THE FADE-OUT EFFECT: This masks the top 20% of the text as it scrolls up */
-    mask-image: linear-gradient(to top, white 50%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to top, white 50%, transparent 100%);
-}
         /* 3. RECTANGLE GRID */
         .archive-container { max-width: 1200px; margin: 0 auto 50px; padding: 0 40px; display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 25px; animation: pageReveal 1.2s ease-out 0.4s forwards; opacity: 0; }
         .residue-card { border: 1px solid rgba(255, 255, 255, 0.05); padding: 35px 40px; background: rgba(255, 255, 255, 0.01); transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); text-decoration: none; color: inherit; position: relative; cursor: pointer; }
