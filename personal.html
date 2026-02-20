@@ -180,7 +180,7 @@ function togglePost() {
                     var latestFile = latestPost.file;
                     var latestTitle = latestPost.title; // THE MISSING PIECE
                     
-                    return fetch('blogger_posts/' + latestFile).then(function(res) {
+                    return fetch('./blogger_posts/' + latestFile).then(function(res) {
                         return res.text().then(function(text) {
                             // We inject the title manually here so it matches the Archive
                             var headerHtml = '<h2>' + latestTitle + '</h2>';
