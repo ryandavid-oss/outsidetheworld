@@ -71,9 +71,22 @@
             to { opacity: 1; transform: translateY(0); filter: blur(0); }
         }
 
-        /* 1. NAVIGATION - 220px LOGO */
-        nav { position: fixed; top: 40px; left: 40px; z-index: 100; }
-        .nav-logo { width: 220px; filter: drop-shadow(0 0 20px rgba(99, 149, 238, 0.3)); transition: 0.4s; }
+    nav { 
+    position: fixed; 
+    top: 0; left: 0; width: 100%; 
+    padding: 40px; 
+    z-index: 1000; /* High z-index keeps it on top */
+    /* This creates a subtle glass effect that hides text passing behind the logo */
+    backdrop-filter: blur(10px);
+    background: linear-gradient(to bottom, rgba(5,5,5,1) 0%, rgba(5,5,5,0) 100%);
+    pointer-events: none; /* Allows you to click things 'through' the empty nav space */
+}
+
+.nav-logo { 
+    width: 220px; 
+    pointer-events: auto; /* Re-enables clicking the logo itself */
+    filter: drop-shadow(0 0 20px rgba(99, 149, 238, 0.3)); 
+}
 
         /* 2. HERO SECTION */
         .hero { height: 40vh; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding-bottom: 40px; text-align: center; animation: pageReveal 1.2s ease-out forwards; }

@@ -23,226 +23,95 @@
         }
 
         /* 1. NEUTRAL ZONES */
-        .neutral-top {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 280px;
-            z-index: 150;
-        }
-        .neutral-gutter {
-            position: absolute;
-            top: 0; left: 42.5%; width: 15%; height: 100%;
-            z-index: 140;
-        }
+        .neutral-top { position: absolute; top: 0; left: 0; width: 100%; height: 280px; z-index: 150; }
+        .neutral-gutter { position: absolute; top: 0; left: 42.5%; width: 15%; height: 100%; z-index: 140; }
 
-        /* 2. ENTRANCE ANIMATIONS */
-        @keyframes logoGrow {
-            0% { transform: translateX(-50%) scale(0.8); opacity: 0; filter: blur(10px); }
-            100% { transform: translateX(-50%) scale(1); opacity: 1; filter: blur(0); }
-        }
-        @keyframes glowPulse {
-            0% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
-            50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.1); }
-            100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
-        }
-        @keyframes textGlow {
-            from { text-shadow: 0 0 5px rgba(255,255,255,0.1); }
-            to { text-shadow: 0 0 20px rgba(255,255,255,0.5); }
-        }
-
-        /* 3. HERO LOGO & INSTRUCTION */
+        /* 2. LOGO & INSTRUCTIONS */
         .logo-header {
-            position: absolute;
-            top: 50px; left: 50%;
-            transform: translateX(-50%);
-            z-index: 100;
-            width: 500px; 
-            transition: all var(--transition-main);
-            pointer-events: none;
-            animation: logoGrow 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            position: absolute; top: 50px; left: 50%;
+            transform: translateX(-50%); z-index: 200;
+            width: 500px; transition: all var(--transition-main);
+            pointer-events: none; text-align: center;
         }
-        .logo-header img { width: 100%; height: auto; shape-rendering: geometricPrecision; }
-
+        .logo-header img { width: 100%; height: auto; }
         .instruction {
-            margin-top: 40px;
-            font-size: 0.85rem;
-            letter-spacing: 8px;
-            text-transform: uppercase;
-            color: #eee;
-            opacity: 0.8;
-            animation: textGlow 2s infinite alternate ease-in-out;
-            transition: opacity 0.4s ease;
+            margin-top: 40px; font-size: 0.85rem; letter-spacing: 8px;
+            text-transform: uppercase; color: #eee; opacity: 0.8;
         }
 
-        /* 4. INTERACTIVE LOGIC */
-        body:has(.neutral-top:hover) .panel,
-        body:has(.neutral-gutter:hover) .panel { flex: 1 !important; }
-
-        body:has(.neutral-top:hover) .logo-header,
-        body:has(.neutral-gutter:hover) .logo-header { left: 50% !important; transform: translateX(-50%) scale(1) !important; }
-
-        body:has(.neutral-top:hover) .instruction,
-        body:has(.neutral-gutter:hover) .instruction { opacity: 1 !important; }
-
+        /* Logo Shifting Logic */
         body:has(.personal:hover) .logo-header { left: 25%; transform: translateX(-50%) scale(0.7); }
         body:has(.professional:hover) .logo-header { left: 75%; transform: translateX(-50%) scale(0.7); }
+        body:has(.panel:hover) .instruction { opacity: 0; }
 
-        body:has(.panel:hover) .instruction,
-        body:has(.panel:hover) .indicator-node { opacity: 0 !important; }
-
-        /* 5. THE PANELS */
+        /* 3. THE PANELS & HITBOXES */
         .container { display: flex; width: 100vw; height: 100vh; }
-
-        .panel {
-            position: relative;
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: flex var(--transition-main);
-            overflow: hidden;
-        }
+        .panel { position: relative; flex: 1; transition: flex var(--transition-main); overflow: hidden; }
         .panel:hover { flex: 6; }
 
-        /* 6. GLOWING PLUS BEACONS */
+        /* THE MASSIVE HITBOX: The entire panel is now a link */
+        .panel-link {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            width: 100%; height: 100%; text-decoration: none; color: inherit;
+            position: relative; z-index: 100;
+        }
+
         .indicator-node {
-            position: absolute;
-            top: 55%; left: 50%;
-            width: 80px; height: 80px;
-            z-index: 5;
-            transition: all 0.5s ease;
-            animation: glowPulse 2.5s infinite ease-in-out;
-            pointer-events: none;
+            position: absolute; top: 55%; left: 50%; width: 80px; height: 80px;
+            transform: translate(-50%, -50%); transition: all 0.5s ease;
+            pointer-events: none; opacity: 0.4;
         }
-        .indicator-node::before {
-            content: ''; position: absolute; top: 0; left: 38px;
-            width: 4px; height: 80px; background: currentColor; border-radius: 2px;
+        .indicator-node::before, .indicator-node::after {
+            content: ''; position: absolute; background: currentColor; border-radius: 2px;
         }
-        .indicator-node::after {
-            content: ''; position: absolute; top: 38px; left: 0;
-            width: 80px; height: 4px; background: currentColor; border-radius: 2px;
-        }
-        .personal .indicator-node { color: var(--brand-blue); filter: drop-shadow(0 0 20px var(--brand-blue)); }
-        .professional .indicator-node { color: var(--brand-teal); filter: drop-shadow(0 0 20px var(--brand-teal)); }
+        .indicator-node::before { top: 0; left: 38px; width: 4px; height: 80px; }
+        .indicator-node::after { top: 38px; left: 0; width: 80px; height: 4px; }
+        
+        .personal .indicator-node { color: var(--brand-blue); }
+        .professional .indicator-node { color: var(--brand-teal); }
+        .panel:hover .indicator-node { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
 
-        /* 7. THE CONTENT STACK (Fixed "Squish") */
-        .panel-bg-color {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 1;
-            opacity: 0;
-            transition: opacity var(--transition-main);
-        }
-        .personal .panel-bg-color { background: radial-gradient(circle at center, rgba(99, 149, 238, 0.2), transparent 70%); }
-        .professional .panel-bg-color { background: radial-gradient(circle at center, rgba(145, 175, 179, 0.2), transparent 70%); }
-        .panel:hover .panel-bg-color { opacity: 1; }
-
-        .content {
-            position: relative;
-            z-index: 10;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 30px; 
-        }
-
+        /* 4. CONTENT REVEAL */
         h2 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            margin: 0;
-            letter-spacing: 4px; 
-            opacity: 0;
-            filter: blur(20px);
-            transform: translateY(20px);
+            font-size: 4rem; font-weight: 900; text-transform: uppercase;
+            letter-spacing: 10px; opacity: 0; transform: translateY(30px);
             transition: all var(--transition-main);
-            color: white;
         }
+        .details { opacity: 0; transform: translateY(30px); transition: all 0.6s ease 0.2s; text-align: center; }
+        .details p { letter-spacing: 6px; font-size: 0.8rem; color: var(--brand-light-blue); margin-bottom: 30px; }
 
-        .details {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px; 
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s ease 0.2s;
-        }
+        .panel:hover h2, .panel:hover .details { opacity: 1; transform: translateY(0); }
 
-        .panel:hover h2, .panel:hover .details {
-            opacity: 1; filter: blur(0); transform: translateY(0);
+        /* "Explore" button styling but now integrated into the hitbox */
+        .fake-btn {
+            display: inline-block; padding: 16px 55px; border: 1px solid rgba(255,255,255,0.4);
+            font-size: 0.7rem; font-weight: 700; letter-spacing: 5px; text-transform: uppercase;
+            background: rgba(255,255,255,0.05); transition: 0.4s;
         }
-
-        .details p {
-            letter-spacing: 6px; font-size: 0.75rem; font-weight: 500;
-            color: var(--brand-light-blue);
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 16px 55px;
-            border: 1px solid rgba(255,255,255,0.4);
-            color: white;
-            text-decoration: none;
-            font-size: 0.7rem; font-weight: 700;
-            letter-spacing: 5px; text-transform: uppercase;
-            transition: 0.4s; background: rgba(255,255,255,0.02);
-        }
-        .btn:hover { background: white; color: black; box-shadow: 0 0 35px rgba(255,255,255,0.5); }
-
-        /* 8. DISCREET FOOTER */
-        footer {
-            position: absolute;
-            bottom: 20px;
-            width: 100%;
-            text-align: center;
-            z-index: 100;
-            pointer-events: none;
-            transition: opacity 0.5s ease;
-        }
-        footer p {
-            font-size: 0.55rem;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.15);
-            margin: 0;
-        }
-        body:has(.panel:hover) footer { opacity: 0; }
+        .panel-link:hover .fake-btn { background: white; color: black; box-shadow: 0 0 35px rgba(255,255,255,0.4); }
 
         .divider {
-            position: absolute;
-            left: 50%; top: 38%; bottom: 38%;
-            width: 1px;
+            position: absolute; left: 50%; top: 38%; bottom: 38%; width: 1px;
             background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.15), transparent);
-            z-index: 5;
+            z-index: 5; transition: opacity 0.4s;
         }
         body:has(.panel:hover) .divider { opacity: 0; }
 
+        /* 5. MOBILE OVERHAUL */
         @media (max-width: 768px) {
-            .container { flex-direction: column; }
-            .logo-header { width: 340px; }
-            .neutral-gutter { width: 0; }
+            body, html { overflow-y: auto; }
+            .container { flex-direction: column; height: auto; }
+            .neutral-gutter, .neutral-top { display: none; }
+            
+            .logo-header { position: relative; top: 30px; width: 80%; margin: 0 auto 100px; transform: none; left: auto; }
+            .panel { height: 60vh; flex: none !important; border-bottom: 1px solid rgba(255,255,255,0.1); }
+            
+            /* Show content immediately on mobile */
+            h2, .details { opacity: 1 !important; transform: none !important; }
+            h2 { font-size: 2.5rem; }
+            .indicator-node { display: none; }
+            .fake-btn { background: white; color: black; } /* Make the target clear */
         }
-        /* Responsive Tweak for Mobile */
-@media (max-width: 600px) {
-    .main-logo {
-        width: 90% !important; /* Shrink logo to fit screen width */
-        max-width: 350px;
-        height: auto;
-    }
-
-    .container, .post-content {
-        width: 95% !important; /* Give more breathing room on edges */
-        padding: 10px;
-    }
-
-    h1 {
-        font-size: 2.5rem !important; /* Shrink headers so they don't wrap weirdly */
-    }
-}
     </style>
 </head>
 <body>
@@ -251,7 +120,7 @@
     <div class="neutral-gutter"></div>
 
     <div class="logo-header">
-        <img src="Images/Equal.svg" alt="Outside The World Logo">
+        <img src="Images/Equal.svg" alt="Outside The World">
         <div class="instruction">Pick a path forward</div>
     </div>
 
@@ -259,33 +128,27 @@
 
     <div class="container">
         <section class="panel personal">
-            <div class="indicator-node"></div> 
-            <div class="panel-bg-color"></div>
-            <div class="content">
+            <a href="personal.html" class="panel-link">
+                <div class="indicator-node"></div>
                 <h2>Personal</h2>
                 <div class="details">
                     <p>THOUGHTS & CREATION</p>
-                    <a href="personal.html" class="btn">Explore</a>
+                    <div class="fake-btn">Explore</div>
                 </div>
-            </div>
+            </a>
         </section>
 
         <section class="panel professional">
-            <div class="indicator-node"></div> 
-            <div class="panel-bg-color"></div>
-            <div class="content">
+            <a href="professional.html" class="panel-link">
+                <div class="indicator-node"></div>
                 <h2>Professional</h2>
                 <div class="details">
                     <p>STRATEGY & SOLUTIONS</p>
-                    <a href="professional.html" class="btn">Consult</a>
+                    <div class="fake-btn">Consult</div>
                 </div>
-            </div>
+            </a>
         </section>
     </div>
-
-    <footer>
-        <p>© 2026 OUTSIDE THE WORLD LLC &nbsp; | &nbsp; SYSTEMS & STORIES</p>
-    </footer>
 
 </body>
 </html>
