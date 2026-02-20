@@ -3,147 +3,166 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ghost Writer | Outside The World</title>
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <title>Ghost Writer | ZQ-3000 Edition</title>
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
-    :root {
-        --case-color: #3b3b3b;
-        --lcd-bg: #9abf88; /* Classic greenish LCD */
-        --lcd-text: #1a2b1a;
-    }
+        :root {
+            --case-color: #2a2a2a;
+            --lcd-bg: #8fb37a; /* A deeper, more professional green */
+            --lcd-text: #0d1a0d; /* Darker, high-contrast text */
+        }
 
-    body {
-        background-color: #f0a500; /* Matching the orange background in your photo */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        margin: 0;
-    }
+        body {
+            background-color: #000; /* Pure black background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Courier New', Courier, monospace;
+        }
 
-    .sharp-case {
-        background-color: var(--case-color);
-        width: 100%;
-        max-width: 500px;
-        border-radius: 15px;
-        padding: 20px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        border: 2px solid #222;
-    }
+        /* --- Restore Login Styling --- */
+        #auth-container {
+            background: #1a1a1a;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid #333;
+        }
 
-    .case-header { color: #ccc; font-weight: bold; margin-bottom: 8px; }
+        /* --- The Widescreen Organizer --- */
+        .organizer-container {
+            width: 95%;
+            max-width: 1000px; /* Widescreen expansion */
+        }
 
-    .lcd-screen-bezel {
-        background-color: #1a1a1a;
-        padding: 12px;
-        border-radius: 4px;
-    }
+        .sharp-case {
+            background-color: var(--case-color);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            border: 2px solid #111;
+        }
 
-    .lcd-screen {
-        background-color: var(--lcd-bg);
-        color: var(--lcd-text);
-        font-family: 'VT323', monospace;
-        padding: 15px;
-        text-transform: uppercase;
-    }
+        .case-header { 
+            color: #666; 
+            font-size: 0.8rem; 
+            margin-bottom: 15px; 
+            letter-spacing: 2px;
+        }
 
-    form { display: flex; flex-direction: column; gap: 8px; }
-    
-    input, textarea {
-        background: transparent;
-        border: none;
-        border-bottom: 1px dashed var(--lcd-text);
-        color: var(--lcd-text);
-        font-family: inherit;
-        font-size: 1.2rem;
-        outline: none;
-    }
+        .lcd-screen-bezel {
+            background-color: #050505;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: inset 0 0 15px rgba(0,0,0,1);
+        }
 
-    .retro-key {
-        width: 100%;
-        padding: 15px;
-        background: #4a4a4a;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        border-bottom: 5px solid #222;
-        cursor: pointer;
-        font-weight: bold;
-    }
+        .lcd-screen {
+            background-color: var(--lcd-bg);
+            color: var(--lcd-text);
+            font-family: 'VT323', monospace;
+            padding: 30px;
+            min-height: 400px; /* Larger screen height */
+        }
 
-    .retro-key:active {
-        transform: translateY(3px);
-        border-bottom-width: 2px;
-    }
-</style>
+        .screen-header {
+            border-bottom: 2px solid var(--lcd-text);
+            margin-bottom: 20px;
+            padding-bottom: 5px;
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+
+        form { display: flex; flex-direction: column; gap: 20px; }
+        
+        label { font-size: 1.4rem; font-weight: bold; }
+
+        input, textarea {
+            background: rgba(0,0,0,0.05);
+            border: none;
+            border-bottom: 2px solid var(--lcd-text);
+            color: var(--lcd-text); /* Darker font color */
+            font-family: 'VT323', monospace;
+            font-size: 1.8rem; /* Larger text for readability */
+            outline: none;
+            width: 100%;
+        }
+
+        textarea {
+            height: 250px;
+            line-height: 1.2;
+            border: 2px dashed var(--lcd-text);
+            padding: 10px;
+        }
+
+        input::placeholder, textarea::placeholder {
+            color: var(--lcd-text);
+            opacity: 0.5;
+        }
+
+        .retro-key {
+            margin-top: 30px;
+            width: 100%;
+            padding: 20px;
+            background: #3a3a3a;
+            color: #fff;
+            font-size: 1.2rem;
+            border: none;
+            border-bottom: 6px solid #111;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.1s;
+        }
+
+        .retro-key:active {
+            transform: translateY(4px);
+            border-bottom-width: 2px;
+        }
+    </style>
 </head>
 <body>
-<div class="organizer-container">
-    <div class="sharp-case">
-        <div class="case-header">
-            <span class="brand">SHARP</span> <span class="model">ZQ-3000</span>
-        </div>
 
-        <div class="lcd-screen-bezel">
-            <div class="lcd-screen">
-                <div class="screen-header">ELECTRONIC ORGANIZER 32KB</div>
-                
-                <form id="mdForm">
-                    <label for="title">TITLE:</label>
-                    <input type="text" id="title" name="title" required placeholder="ENTER TITLE...">
-                    
-                    <label for="date">DATE (OPTIONAL):</label>
-                    <input type="date" id="date" name="date">
-                    
-                    <label for="content">CONTENT:</label>
-                    <textarea id="content" name="content" required placeholder="TYPE YOUR THOUGHTS..."></textarea>
-                </form>
-            </div>
-        </div>
+    <div id="auth-container">
+        <h2 style="color: #eee;">SYSTEM ACCESS</h2>
+        <input type="password" id="passwordInput" placeholder="ENTER CODE...">
+        <button onclick="checkPassword()" style="margin-top:10px;">LOGIN</button>
+    </div>
 
-        <div class="keyboard-deck">
-             <div class="fake-button-row">
-                <div class="fake-btn sm">ON</div>
-                <div class="fake-btn sm">OFF</div>
-                <div class="fake-btn lg arrow-pad">SEARCH</div>
+    <div id="main-content" class="organizer-container" style="display: none;">
+        <div class="sharp-case">
+            <div class="case-header">SHARP ZQ-3000 | WIDESCREEN EDITION</div>
+            <div class="lcd-screen-bezel">
+                <div class="lcd-screen">
+                    <div class="screen-header">MEMORY: 32KB AVAILABLE</div>
+                    <form id="mdForm">
+                        <label>TITLE:</label>
+                        <input type="text" id="title" required placeholder="ENTER TITLE...">
+                        
+                        <label>STORY:</label>
+                        <textarea id="content" required placeholder="TYPE YOUR THOUGHTS..."></textarea>
+                    </form>
+                </div>
             </div>
-            <button type="button" id="downloadBtn" class="retro-key">ENTER / SAVE</button>
+            <button type="button" id="downloadBtn" class="retro-key">EXECUTE SAVE & DOWNLOAD</button>
         </div>
     </div>
-</div>
+
     <script>
-        function checkPass() {
-            const input = document.getElementById('passkey').value;
-            // The Access Code you requested
-            if (input === 'Stockton12!') {
-                document.getElementById('login-terminal').style.display = 'none';
-                document.getElementById('editor-terminal').style.display = 'flex';
+        // Ensure your password logic and generateMarkdown logic are here
+        function checkPassword() {
+            const pass = document.getElementById('passwordInput').value;
+            if (pass === 'YOUR_PASSWORD') { // Replace with your actual password
+                document.getElementById('auth-container').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
             } else {
                 alert('ACCESS DENIED');
-                document.getElementById('passkey').value = '';
             }
         }
 
-        function saveDraft() {
-            const title = document.getElementById('post-title').value;
-            const content = document.getElementById('post-content').value;
-            const date = new Date().toISOString().split('T')[0];
-            const safeTitle = title.replace(/\s+/g, '-').toLowerCase();
-            const fileName = `${date}-${safeTitle}.md`;
-
-            // Since we can't save directly to your drive from a browser for security,
-            // this creates a downloadable file you just drop into 'blogger_posts'
-            const element = document.createElement('a');
-            const file = new Blob([content], {type: 'text/markdown'});
-            element.href = URL.createObjectURL(file);
-            element.download = fileName;
-            document.body.appendChild(element);
-            element.click();
-            alert(`Residue prepared: ${fileName}\nDrop this into the 'blogger_posts' folder.`);
-        }
+        // Add your generateMarkdown function from your backup file below!
     </script>
 </body>
 </html>
