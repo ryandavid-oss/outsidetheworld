@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Services | Outside The World New LLC</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+    <style>
+        :root {
+            --brand-blue: #6395EE;
+            --brand-teal: #91AFB3;
+            --brand-light-blue: #A0BEF5;
+            --bg-dark: #0a0a0a;
+            --card-bg: rgba(255, 255, 255, 0.03);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-dark);
+            color: white;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+        }
+
+        /* Navigation Bar */
+        nav {
+            padding: 30px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-logo img {
+    height: 70px; /* Increased size for brand impact */
+    width: auto;
+    display: block;
+    transition: all 0.3s ease; /* This handles the 'grow' and the opacity */
+    opacity: 0.85; /* Softened base state */
+}
+
+.nav-logo img:hover {
+    transform: scale(1.08); /* The 'Grow' effect */
+    opacity: 1; /* Sharpens to full clarity */
+    cursor: pointer;
+}
+
+        .back-link {
+            color: var(--brand-light-blue);
+            text-decoration: none;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+
+        .back-link:hover {
+            color: white;
+            text-shadow: 0 0 10px var(--brand-blue);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 100px 5%;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            letter-spacing: -2px;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #fff, var(--brand-light-blue));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--brand-teal);
+            letter-spacing: 1px;
+            margin-bottom: 40px;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 0 5% 100px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 4px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card:hover {
+            border-color: var(--brand-blue);
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .service-card h3 {
+            color: var(--brand-light-blue);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .service-card p {
+            font-size: 0.95rem;
+            color: #ccc;
+        }
+
+        .service-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--brand-blue);
+            transition: width 0.4s ease;
+        }
+
+        .service-card:hover::after {
+            width: 100%;
+        }
+
+        /* Contact Section */
+        .cta-section {
+            background: linear-gradient(to bottom, transparent, #111);
+            padding: 100px 5%;
+            text-align: center;
+        }
+
+        .contact-btn {
+            display: inline-block;
+            padding: 20px 60px;
+            background: white;
+            color: black;
+            text-decoration: none;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+
+        .contact-btn:hover {
+            background: var(--brand-blue);
+            color: white;
+            box-shadow: 0 0 30px rgba(99, 149, 238, 0.4);
+        }
+
+        footer {
+            padding: 50px 5%;
+            text-align: center;
+            font-size: 0.7rem;
+            color: #555;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+    <div class="nav-logo">
+        <a href="index.html">
+            <img src="Images/Equal.svg" alt="Outside The World">
+        </a>
+    </div>
+    </nav>
+
+    <header class="hero">
+        <h1>Solutions from Outside the World.</h1>
+        <p>Strategic consulting and digital systems for a modern era.</p>
+    </header>
+
+<main class="services-grid">
+        <div class="service-card">
+            <div class="service-number" style="color: var(--brand-blue); font-size: 0.7rem; font-weight: 900; margin-bottom: 10px;">01</div>
+            <h3>Brand Architecture</h3>
+            <p>Moving beyond basic marketing to build resilient brand identities. We leverage a quarter-century of digital insight to help your business find its unique frequency and resonate with the right audience.</p>
+        </div>
+
+        <div class="service-card">
+            <div class="service-number" style="color: var(--brand-teal); font-size: 0.7rem; font-weight: 900; margin-bottom: 10px;">02</div>
+            <h3>Technical Advisory</h3>
+            <p>General technology consultation for the modern SMB. We provide the architectural oversight needed to ensure your software, hardware, and digital workflows are efficient, secure, and future-proof.</p>
+        </div>
+
+        <div class="service-card">
+            <div class="service-number" style="color: var(--brand-light-blue); font-size: 0.7rem; font-weight: 900; margin-bottom: 10px;">03</div>
+            <h3>Intelligent Environments</h3>
+            <p>Smart home and office automation solutions designed for seamless integration. We transform physical spaces into responsive environments that prioritize ease-of-use and operational efficiency.</p>
+        </div>
+    </main>
+<section class="founder-section" style="padding: 100px 5%; max-width: 800px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,0.05);">
+        <h2 style="font-size: 0.8rem; letter-spacing: 5px; color: var(--brand-teal); text-transform: uppercase; margin-bottom: 30px;">The Founder's Perspective</h2>
+        <p style="font-size: 1.5rem; font-weight: 300; color: #eee; line-height: 1.4; margin-bottom: 30px;">
+            Since the year 2000, <span style="color: white; font-weight: 700;">Outside the World</span> has served as a digital vantage point—a place to document, analyze, and anticipate the shifts in our technical and cultural landscape.
+        </p>
+        <div style="font-size: 1rem; color: #999; column-count: 1;">
+            <p style="margin-bottom: 20px;">
+                What began as a personal exploration of the burgeoning web has evolved into a professional mission. Today, <strong>Outside The World New LLC</strong> translates those decades of insight into actionable strategies for small and medium-sized businesses.
+            </p>
+            <p>
+                We don't just implement technology or design brands; we build resilient digital architectures and intelligent environments designed to endure. We operate on the belief that the most effective solutions are found by looking beyond the immediate horizon.
+            </p>
+        </div>
+        <div class="signature" style="margin-top: 40px; border-left: 2px solid var(--brand-blue); padding-left: 20px;">
+            <p style="margin: 0; font-weight: 900; letter-spacing: 2px; text-transform: uppercase;">RyanDavid Burningham</p>
+            <p style="margin: 0; font-size: 0.7rem; color: var(--brand-teal); letter-spacing: 2px;">Founder & Lead Strategist</p>
+        </div>
+    </section>
+    <section class="cta-section">
+        <h2 style="margin-bottom: 30px; font-weight: 300; letter-spacing: 2px;">READY TO START?</h2>
+        <a href="mailto:hello@outsidetheworld.com" class="contact-btn">Inquire Here</a>
+    </section>
+
+    <footer>
+        Outside The World New LLC • Registered Arizona Entity • Since 2000
+    </footer>
+
+</body>
+
+</html>
