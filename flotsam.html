@@ -92,11 +92,15 @@
 
         /* THE TEAL DATE - FORCED COLOR */
         .modal-content h2 {
-            font-family: 'Fira Code', monospace; font-size: 0.95rem;
-            color: var(--brand-teal) !important; /* !important to override Markdown default */
-            letter-spacing: 5px; text-transform: uppercase;
-            margin: 0 0 60px 0; font-weight: 500;
-        }
+    font-family: 'Fira Code', monospace; 
+    font-size: 0.95rem;
+    color: #91AFB3 !important; /* This is the specific Teal Hex code */
+    letter-spacing: 5px; 
+    text-transform: uppercase;
+    margin: 10px 0 60px 0; 
+    font-weight: 500;
+    opacity: 1 !important;
+}
 
         .modal-content img { 
             max-width: 100%; max-height: 75vh; width: auto; height: auto; 
@@ -105,10 +109,14 @@
             display: block;
         }
 
-        .modal-content p {
-            font-size: 1.35rem; line-height: 2.1; color: #ccc;
-            max-width: 750px; margin: 0 auto 30px auto; font-weight: 300;
-        }
+       .modal-content p {
+    font-size: 1.35rem; 
+    line-height: 1.9; 
+    color: #ccc;
+    max-width: 750px; 
+    margin: 0 auto 30px auto; /* Changed to 30px for better breathing room */
+    font-weight: 300;
+}
 
         /* 4. SCROLL HINT & BUTTONS */
         .scroll-hint {
