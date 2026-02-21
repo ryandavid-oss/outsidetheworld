@@ -10,28 +10,27 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Fira+Code:wght@300;500&display=swap');
 
         :root {
-            /* Your 3-Color Brand Schema */
             --brand-blue: #6395EE;
-            --brand-teal: #91AFB3;
+            --brand-teal: #91AFB3; /* The New Outer Background */
             --brand-light-blue: #A0BEF5;
             --bg-dark: #050505;
         }
 
         body {
-            background-color: var(--bg-dark);
+            background-color: var(--brand-teal); /* Full Screen Teal */
             color: white;
             font-family: 'Inter', sans-serif;
             display: flex; justify-content: center; align-items: center;
             min-height: 100vh; margin: 0; padding: 20px;
         }
 
-        /* 1. BRANDED LOGIN SCREEN */
+        /* 1. LOGIN SCREEN */
         #auth-container {
             width: 100%; max-width: 400px; padding: 40px;
-            background: rgba(255, 255, 255, 0.02); 
-            border: 1px solid rgba(99, 149, 238, 0.3); /* Brand Blue Tint */
+            background: var(--bg-dark); 
+            border: 1px solid rgba(255, 255, 255, 0.1);
             text-align: center;
-            backdrop-filter: blur(10px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
         }
 
         #passwordInput {
@@ -46,15 +45,14 @@
             cursor: pointer; width: 100%; text-transform: uppercase; letter-spacing: 4px;
             transition: 0.4s;
         }
-        .btn-action:hover { background: var(--brand-light-blue); box-shadow: 0 0 20px rgba(160, 190, 245, 0.4); }
 
         /* 2. THE WRITER INTERFACE */
         #main-content { display: none; width: 100%; max-width: 1000px; }
 
         .writer-case {
-            background: rgba(255, 255, 255, 0.01);
+            background: var(--bg-dark); /* Keeps the writing area dark for focus */
             padding: 50px; border: 1px solid rgba(255,255,255,0.05);
-            box-shadow: 0 40px 100px rgba(0,0,0,0.8);
+            box-shadow: 0 40px 100px rgba(0,0,0,0.6);
         }
 
         .input-row { display: flex; gap: 30px; margin-bottom: 30px; align-items: center; }
@@ -66,13 +64,12 @@
         }
         
         input#entryDate {
-            background: rgba(145, 175, 179, 0.1); /* Brand Teal Tint */
+            background: rgba(145, 175, 179, 0.1); 
             border: 1px solid var(--brand-teal);
             color: var(--brand-teal); font-family: 'Fira Code', monospace;
             padding: 8px 15px; border-radius: 4px; font-size: 0.9rem; outline: none;
         }
 
-        /* DARK MODE EDITOR THEME */
         .EasyMDEContainer { font-family: 'Inter', sans-serif !important; }
         .CodeMirror { 
             background: transparent !important; color: #ccc !important; 
@@ -81,7 +78,6 @@
         }
         .editor-toolbar { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-bottom: none; }
         .editor-toolbar button { color: #888 !important; }
-        .editor-toolbar button.active, .editor-toolbar button:hover { background: rgba(99, 149, 238, 0.1) !important; color: var(--brand-blue) !important; }
 
         .publish-footer { margin-top: 40px; display: flex; justify-content: flex-end; }
 
@@ -116,12 +112,13 @@
     </div>
 
     <script>
-        // Set Default Date (AZ)
+        // --- FIXED ARIZONA LOCAL DATE LOGIC ---
+        // This ensures that at 8:21 PM on 2/20, it shows 2/20, not 2/21
         const now = new Date();
-        const azTime = new Date(now.getTime() + (-7 * 60 + now.getTimezoneOffset()) * 60000);
-        document.getElementById('entryDate').value = azTime.toISOString().split('T')[0];
+        const offset = now.getTimezoneOffset() * 60000;
+        const localISOTime = new Date(now - offset).toISOString().split('T')[0];
+        document.getElementById('entryDate').value = localISOTime;
 
-        // Initialize Rich Editor with Estate Branding
         const easyMDE = new EasyMDE({
             element: document.getElementById('content'),
             forceSync: true,
