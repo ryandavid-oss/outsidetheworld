@@ -57,13 +57,14 @@
             box-shadow: 0 20px 40px rgba(0,0,0,0.8);
         }
 
-        /* 3. MODAL - RECONFIGURED FOR FULL SCROLLING */
+        /* 3. MODAL - THE SAFARI-PROOF OVERHAUL */
         #modal {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.96); z-index: 4000;
+            background: rgba(0,0,0,0.97); z-index: 4000;
             display: none; 
-            overflow-y: auto; /* Allow the modal itself to scroll */
-            padding: 120px 20px; /* Space for the top buttons and bottom buffer */
+            overflow-x: hidden;
+            overflow-y: scroll; /* Force native scroll */
+            -webkit-overflow-scrolling: touch;
             opacity: 0; transition: opacity 0.5s ease;
         }
 
@@ -73,64 +74,61 @@
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-size: cover; background-position: center;
             filter: blur(80px) brightness(0.2); opacity: 0.7;
-            z-index: -1; transform: scale(1.2);
+            z-index: -1; transform: scale(1.2); pointer-events: none;
         }
 
         .modal-content { 
-            max-width: 900px; width: 100%; margin: 0 auto;
+            max-width: 900px; width: 95%; margin: 100px auto; /* Margin creates the scrollable space */
             text-align: center; position: relative;
         }
 
-        /* GLOWING WHITE TITLE - Targeted at Markdown H1 */
+        /* GLOWING WHITE TITLE */
         .modal-content h1 {
-            font-family: 'Inter', sans-serif; font-weight: 900; font-size: clamp(2rem, 8vw, 4rem);
+            font-family: 'Inter', sans-serif; font-weight: 900; font-size: 3.5rem;
             letter-spacing: 12px; text-transform: uppercase; color: white;
-            text-shadow: 0 0 20px rgba(255,255,255,0.5), 0 0 40px rgba(255,255,255,0.3);
-            margin: 0 0 10px 0;
+            text-shadow: 0 0 20px rgba(255,255,255,0.4), 0 0 40px rgba(255,255,255,0.2);
+            margin-bottom: 5px;
         }
 
-        /* TEAL DATE - Targeted at Markdown H2 */
+        /* THE TEAL DATE - FORCED COLOR */
         .modal-content h2 {
-            font-family: 'Fira Code', monospace; font-size: 1rem;
-            color: var(--brand-teal); letter-spacing: 5px; text-transform: uppercase;
-            margin: 0 0 50px 0; font-weight: 500;
+            font-family: 'Fira Code', monospace; font-size: 0.95rem;
+            color: var(--brand-teal) !important; /* !important to override Markdown default */
+            letter-spacing: 5px; text-transform: uppercase;
+            margin: 0 0 60px 0; font-weight: 500;
         }
 
         .modal-content img { 
-            max-width: 100%; 
-            max-height: 75vh; /* Lock height at 75% for 27" screens */
-            width: auto; height: auto; object-fit: contain;
-            border: 1px solid rgba(255,255,255,0.2); margin: 0 auto 60px auto;
-            box-shadow: 0 40px 80px rgba(0,0,0,0.9); display: block;
+            max-width: 100%; max-height: 75vh; width: auto; height: auto; 
+            object-fit: contain; border: 1px solid rgba(255,255,255,0.2); 
+            margin: 0 auto 60px auto; box-shadow: 0 40px 80px rgba(0,0,0,0.9);
+            display: block;
         }
 
         .modal-content p {
-            font-size: 1.3rem; line-height: 2; color: #ccc;
-            max-width: 750px; margin: 0 auto 20px auto; font-weight: 300;
+            font-size: 1.35rem; line-height: 2.1; color: #ccc;
+            max-width: 750px; margin: 0 auto 30px auto; font-weight: 300;
         }
 
-        /* 4. SCROLL HINT */
+        /* 4. SCROLL HINT & BUTTONS */
         .scroll-hint {
             position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%);
             font-family: 'Fira Code', monospace; font-size: 0.7rem; color: var(--brand-teal);
             letter-spacing: 4px; opacity: 1; animation: hintBounce 2.5s infinite;
             pointer-events: none; text-transform: uppercase; z-index: 5001;
-            background: rgba(0,0,0,0.4); padding: 5px 15px; border-radius: 20px;
         }
 
         @keyframes hintBounce {
             0%, 20%, 50%, 80%, 100% {transform: translateX(-50%) translateY(0);}
             40% {transform: translateX(-50%) translateY(-15px);}
-            60% {transform: translateX(-50%) translateY(-8px);}
         }
 
         .btn-back {
             position: fixed; top: 30px; right: 40px; background: rgba(0,0,0,0.8); border: 1px solid var(--brand-teal);
             color: var(--brand-teal); font-family: 'Fira Code', monospace;
             cursor: pointer; font-size: 0.75rem; letter-spacing: 3px; padding: 12px 24px;
-            z-index: 5000; transition: 0.3s;
+            z-index: 5000;
         }
-        .btn-back:hover { background: var(--brand-teal); color: black; }
     </style>
 </head>
 <body>
@@ -143,7 +141,7 @@
 
     <div class="vault-grid" id="grid"></div>
 
-    <div id="modal" onscroll="handleScroll()" onclick="closeModalOnEmpty(event)">
+    <div id="modal" onscroll="handleScroll(this)" onclick="closeModalOnEmpty(event)">
         <div id="modal-backdrop"></div>
         <button class="btn-back" onclick="closeModal()">[ CLOSE_X ]</button>
         <div class="modal-content" id="modal-inner"></div>
@@ -192,12 +190,10 @@
             document.body.style.overflow = 'hidden';
         }
 
-        function handleScroll() {
-            const modal = document.getElementById('modal');
+        function handleScroll(el) {
             const hint = document.getElementById('scroll-hint');
-            if (modal.scrollTop > 60) {
+            if (el.scrollTop > 50) {
                 hint.style.opacity = '0';
-                hint.style.transition = 'opacity 0.5s ease';
             }
         }
 
