@@ -2,187 +2,113 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>MGB-01 | GHOST-WRITER GOLD</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GHOST-WRITER | MONOCHROME</title>
     <link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
     <script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
         :root {
-            --gbp-bg: #c4cfa1; 
-            --gbp-screen: #9bbc0f; 
-            --gbp-dark: #306230;
-            --gbp-black: #0f380f;
-            --gbp-plastic: #d1d1d1;
+            --lcd-bg: #e0e0e0; /* Clean Monochrome Silver */
+            --lcd-text: #0a0a0a;
+            --border-color: #333;
         }
 
-        body, html {
-            margin: 0; padding: 0; height: 100%;
+        body {
             background-color: #121212;
+            color: var(--lcd-text);
             font-family: 'VT323', monospace;
-            display: flex; justify-content: center; overflow-y: auto;
+            display: flex; justify-content: center; align-items: center;
+            min-height: 100vh; margin: 0; padding: 20px;
         }
 
-        /* 1. THE HARDWARE SHELL - Expanded to 1100px */
-        .gb-shell {
-            background-color: var(--gbp-plastic);
-            width: 100%; max-width: 100%; 
-            min-height: 100vh; display: flex; flex-direction: column;
-            border-left: 6px solid #fff; border-right: 6px solid #888;
-            box-shadow: 0 0 80px rgba(0,0,0,0.9);
-            position: relative; padding: 40px; box-sizing: border-box;
+        /* 1. LOGIN SCREEN */
+        #auth-container {
+            width: 100%; max-width: 400px; padding: 40px;
+            background: var(--lcd-bg); border: 4px solid var(--lcd-text);
+            box-shadow: 10px 10px 0px #000; text-align: center;
         }
 
-        /* 2. THE SCREEN BEZEL */
-        .screen-bezel {
-            background-color: #333;
-            padding: 40px 30px 15px;
-            border-radius: 10px 10px 60px 10px;
-            box-shadow: inset 0 0 15px #000;
-            position: relative;
+        #passwordInput {
+            background: #fff; border: 2px solid var(--lcd-text);
+            padding: 10px; font-size: 1.2rem; width: 80%; text-align: center;
+            outline: none; margin-bottom: 20px; font-family: monospace;
         }
 
-        /* RED POWER LED - Fixed duplication */
-        .power-light {
-            position: absolute; left: 15px; top: 50%; transform: translateY(-50%);
-            width: 10px; height: 10px; background: #ff0000;
-            border-radius: 50%; box-shadow: 0 0 8px #ff0000;
-            z-index: 10;
-        }
-        .power-label {
-            position: absolute; left: 30px; top: 50%; transform: translateY(-50%);
-            color: #777; font-size: 0.8rem; font-style: italic;
+        .btn-action {
+            background: var(--lcd-text); color: var(--lcd-bg); border: none;
+            padding: 12px 24px; font-family: 'VT323', monospace; font-size: 1.2rem;
+            cursor: pointer; width: 100%; text-transform: uppercase;
         }
 
-        .lcd-screen {
-            background-color: var(--gbp-bg);
-            min-height: 480px; padding: 25px;
-            border: 8px solid #222;
-            display: flex; flex-direction: column;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+        /* 2. THE WRITER INTERFACE */
+        #main-content { display: none; width: 100%; max-width: 1000px; }
+
+        .writer-case {
+            background-color: var(--lcd-bg);
+            padding: 40px; border: 6px solid var(--border-color);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
         }
 
-        .bezel-branding {
-            text-align: center; color: #777; padding-top: 10px;
-            font-size: 1.2rem; letter-spacing: 1px; font-weight: bold;
-        }
-
-        .shell-branding {
-            text-align: center; color: #777; font-size: 2.2rem;
-            margin-top: 15px; font-weight: bold; letter-spacing: 2px;
-        }
-
-        /* 3. INPUTS & EDITOR - Restored full controls */
+        .input-row { display: flex; gap: 20px; margin-bottom: 20px; }
+        
         input#title, input#entryDate {
             background: transparent; border: none;
-            border-bottom: 2px solid var(--gbp-black);
-            color: var(--gbp-black); font-family: 'VT323', monospace;
-            outline: none; margin-bottom: 15px; width: 100%;
-        }
-        input#title { font-size: 2.4rem; }
-        input#entryDate { font-size: 1.6rem; }
-
-        .EasyMDEContainer { font-family: 'VT323', monospace !important; }
-        .CodeMirror { background: transparent !important; color: var(--gbp-black) !important; border: 2px solid var(--gbp-black) !important; height: 320px !important; font-size: 1.6rem; }
-        .editor-toolbar { background: rgba(0,0,0,0.05); border: none; border-bottom: 1px solid var(--gbp-black); }
-        .editor-toolbar button { color: var(--gbp-black) !important; }
-
-        /* 4. CONTROLS - Adjusted for background contrast */
-        .controls { flex-grow: 1; display: grid; grid-template-columns: 1fr 1fr; padding-top: 100px; padding-bottom: 20px; }
-        
-        .d-pad { position: relative; width: 140px; height: 140px; margin: 0 auto; }
-        .d-pad-vert, .d-pad-horiz { background: #222; position: absolute; border-radius: 3px; box-shadow: 4px 4px 0px rgba(0,0,0,0.1); }
-        .d-pad-vert { width: 40px; height: 120px; left: 50px; top: 10px; }
-        .d-pad-horiz { width: 120px; height: 40px; left: 10px; top: 50px; }
-
-        .action-column { display: flex; flex-direction: column; align-items: center; justify-content: flex-start; }
-        .action-buttons { display: flex; gap: 40px; margin-bottom: 20px; }
-        
-        .btn-circle {
-            width: 85px; height: 85px; background: #8a1d3b;
-            border-radius: 50%; border: 5px solid #5a1326;
-            color: white; font-size: 2rem; display: flex;
-            align-items: center; justify-content: center;
-            cursor: pointer; box-shadow: 6px 6px 0px rgba(0,0,0,0.2);
-            -webkit-tap-highlight-color: transparent;
-        }
-        .btn-circle:active { transform: translate(3px, 3px); box-shadow: none; }
-
-        .action-label { color: #888; font-size: 1rem; letter-spacing: 2px; text-transform: uppercase; font-weight: bold; }
-
-        .start-select { display: flex; gap: 40px; justify-content: center; padding-bottom: 60px; }
-        .pill-wrap { text-align: center; }
-        .pill { width: 60px; height: 14px; background: #999; border-radius: 10px; transform: rotate(-25deg); box-shadow: 2px 2px 0px rgba(0,0,0,0.1); }
-        .pill-label { font-size: 1rem; color: #777; margin-top: 10px; font-weight: bold; }
-
-        #auth-overlay {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--gbp-bg); z-index: 1000;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            padding: 40px; box-sizing: border-box;
+            border-bottom: 2px solid var(--lcd-text);
+            color: var(--lcd-text); font-family: 'VT323', monospace; outline: none;
         }
 
-        @media (max-width: 480px) {
-            .gb-shell { padding: 20px; border: none; }
-            .lcd-screen { min-height: 520px; }
-            .controls { padding-top: 60px; }
+        input#title { font-size: 2.2rem; flex-grow: 1; }
+        input#entryDate { font-size: 1.5rem; width: 180px; text-align: center; border: 1px dashed #999; }
+
+        /* EDITOR STYLING */
+        .EasyMDEContainer { font-family: 'VT323', monospace !important; font-size: 1.6rem; }
+        .CodeMirror { background: #f5f5f5 !important; color: var(--lcd-text) !important; border: 1px solid var(--lcd-text) !important; height: 450px !important; }
+        .editor-toolbar { background: #dcdcdc; border: 1px solid var(--lcd-text); border-bottom: none; }
+        .editor-toolbar button { color: var(--lcd-text) !important; }
+
+        .publish-footer { margin-top: 30px; text-align: right; }
+
+        /* Responsive Tweak */
+        @media (max-width: 768px) {
+            .writer-case { padding: 20px; }
+            .input-row { flex-direction: column; }
+            input#entryDate { width: 100%; }
+            .CodeMirror { height: 350px !important; }
         }
     </style>
 </head>
 <body>
 
-    <div class="gb-shell">
-        <div class="screen-bezel">
-            <div class="power-light"></div>
-            <div class="power-label">POWER</div>
-            
-            <div id="auth-overlay">
-                <div style="font-size: 2.5rem; margin-bottom: 40px;">SHARP ZQ-3000</div>
-                <div style="margin-bottom: 10px; letter-spacing: 2px;">ENTER ACCESS CODE:</div>
-                <input type="password" id="passwordInput" style="background:#fff; border:3px solid #000; width:90%; text-align:center; padding:15px; font-size: 1.5rem;">
-                <p style="font-size: 1.1rem; margin-top: 50px; color: #555;">PRESS [START] TO INITIALIZE</p>
-            </div>
+    <div id="auth-container">
+        <div style="font-size: 1.8rem; margin-bottom: 20px; border-bottom: 2px solid var(--lcd-text);">IDENTITY REQUIRED</div>
+        <input type="password" id="passwordInput" autofocus>
+        <button class="btn-action" onclick="login()">INITIALIZE</button>
+    </div>
 
-            <div class="lcd-screen">
+    <div id="main-content">
+        <div class="writer-case">
+            <div class="input-row">
                 <input type="text" id="title" placeholder="ENTRY TITLE...">
                 <input type="date" id="entryDate">
-                <textarea id="content"></textarea>
             </div>
             
-            <div class="bezel-branding">
-                Nintendo <span style="font-size: 0.8rem; font-weight: normal; font-style: italic;">GAME BOY</span> <span style="font-style: italic; font-weight: normal;">pocket</span>
-            </div>
-        </div>
+            <textarea id="content"></textarea>
 
-        <div class="shell-branding">Nintendo</div>
-
-        <div class="controls">
-            <div class="d-pad">
-                <div class="d-pad-vert"></div>
-                <div class="d-pad-horiz"></div>
+            <div class="publish-footer">
+                <button type="button" id="downloadBtn" class="btn-action" style="width: auto; padding: 15px 60px;">EXECUTE_PUBLISH_SEQUENCE</button>
             </div>
-            <div class="action-column">
-                <div class="action-buttons">
-                    <div class="btn-circle" id="btnB">B</div>
-                    <div class="btn-circle" id="btnA">A</div>
-                </div>
-                <div class="action-label">PRESS EITHER KEY TO SAVE</div>
-            </div>
-        </div>
-
-        <div class="start-select">
-            <div class="pill-wrap"><div class="pill"></div><div class="pill-label">SELECT</div></div>
-            <div class="pill-wrap"><div class="pill" id="startBtn"></div><div class="pill-label">START</div></div>
         </div>
     </div>
 
     <script>
+        // Set Default Date (AZ)
         const now = new Date();
         const azTime = new Date(now.getTime() + (-7 * 60 + now.getTimezoneOffset()) * 60000);
         document.getElementById('entryDate').value = azTime.toISOString().split('T')[0];
 
-        // Restored full toolbar
+        // Initialize Rich Editor
         const easyMDE = new EasyMDE({
             element: document.getElementById('content'),
             forceSync: true,
@@ -193,23 +119,28 @@
 
         function login() {
             if (document.getElementById('passwordInput').value === 'Stockton12!') {
-                document.getElementById('auth-overlay').style.display = 'none';
+                document.getElementById('auth-container').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
                 easyMDE.codemirror.refresh();
             } else { alert('ACCESS DENIED'); }
         }
 
         document.getElementById('passwordInput').addEventListener('keypress', (e) => { if (e.key === 'Enter') login(); });
-        document.getElementById('startBtn').addEventListener('click', login);
 
-        const publish = () => {
+        document.getElementById('downloadBtn').addEventListener('click', () => {
             const title = document.getElementById('title').value;
             const chosenDate = document.getElementById('entryDate').value;
             const content = easyMDE.value();
 
-            if (!title || !content) { alert("DATA MISSING"); return; }
+            if (!title || !content || !chosenDate) { alert("ERROR: FIELDS INCOMPLETE"); return; }
 
+            // POETRY FIX: Double-spacing for line breaks
             const formattedContent = content.replace(/\n/g, "  \n");
-            const fullMarkdown = `# ${title}\n### ${new Date(chosenDate + 'T00:00:00').toLocaleDateString('en-US', {year: 'numeric', month: 'long', day: 'numeric'})}\n\n---\n\n${formattedContent}`;
+            
+            const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+            const formattedDate = new Date(chosenDate + 'T00:00:00').toLocaleDateString('en-US', dateOptions);
+
+            const fullMarkdown = `# ${title}\n### ${formattedDate}\n\n---\n\n${formattedContent}`;
 
             const fileName = `${chosenDate}-${title.toLowerCase().replace(/[^a-z0-9]/g, '-')}.md`;
             const blob = new Blob([fullMarkdown], { type: 'text/markdown' });
@@ -217,10 +148,7 @@
             a.href = URL.createObjectURL(blob);
             a.download = fileName;
             a.click();
-        };
-
-        document.getElementById('btnA').addEventListener('click', publish);
-        document.getElementById('btnB').addEventListener('click', publish);
+        });
     </script>
 </body>
 </html>
