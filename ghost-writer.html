@@ -135,21 +135,25 @@
             } else { alert('ACCESS DENIED'); }
         }
 
-        document.getElementById('passwordInput').addEventListener('keypress', (e) => { if (e.key === 'Enter') login(); });
-
-        document.getElementById('downloadBtn').addEventListener('click', () => {
-            const title = document.getElementById('title').value;
+     document.getElementById('downloadBtn').addEventListener('click', () => {
+            // 1. Get the values
+            let title = document.getElementById('title').value;
             const chosenDate = document.getElementById('entryDate').value;
-            const content = easyMDE.value();
+            let content = easyMDE.value();
 
             if (!title || !content || !chosenDate) { alert("ERROR: NARRATIVE INCOMPLETE"); return; }
 
-            // POETRY FIX: Double-spacing for line breaks
+            // 2. THE APOSTROPHE ARMOR: Paste these two lines here!
+            title = title.replace(/[\u2018\u2019]/g, "'").replace(/[\u201C\u201D]/g, '"');
+            content = content.replace(/[\u2018\u2019]/g, "'").replace(/[\u201C\u201D]/g, '"');
+
+            // 3. Apply the Poetry Fix
             const formattedContent = content.replace(/\n/g, "  \n");
             
             const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
             const formattedDate = new Date(chosenDate + 'T00:00:00').toLocaleDateString('en-US', dateOptions);
 
+            // 4. Build the file
             const fullMarkdown = `# ${title}\n### ${formattedDate}\n\n---\n\n${formattedContent}`;
 
             const fileName = `${chosenDate}-${title.toLowerCase().replace(/[^a-z0-9]/g, '-')}.md`;
