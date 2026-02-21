@@ -11,13 +11,13 @@
 
         :root {
             --brand-blue: #6395EE;
-            --brand-teal: #91AFB3; /* The New Outer Background */
+            --brand-teal: #91AFB3; 
             --brand-light-blue: #A0BEF5;
             --bg-dark: #050505;
         }
 
         body {
-            background-color: var(--brand-teal); /* Full Screen Teal */
+            background-color: var(--brand-teal); 
             color: white;
             font-family: 'Inter', sans-serif;
             display: flex; justify-content: center; align-items: center;
@@ -50,7 +50,7 @@
         #main-content { display: none; width: 100%; max-width: 1000px; }
 
         .writer-case {
-            background: var(--bg-dark); /* Keeps the writing area dark for focus */
+            background: var(--bg-dark); 
             padding: 50px; border: 1px solid rgba(255,255,255,0.05);
             box-shadow: 0 40px 100px rgba(0,0,0,0.6);
         }
@@ -71,11 +71,17 @@
         }
 
         .EasyMDEContainer { font-family: 'Inter', sans-serif !important; }
+        
+        /* UPDATED CodeMirror with visible blue cursor */
         .CodeMirror { 
             background: transparent !important; color: #ccc !important; 
             border: 1px solid rgba(255,255,255,0.1) !important; height: 500px !important; 
             font-size: 1.1rem; line-height: 1.6;
         }
+        .CodeMirror-cursor { 
+            border-left: 2px solid var(--brand-blue) !important; 
+        }
+
         .editor-toolbar { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-bottom: none; }
         .editor-toolbar button { color: #888 !important; }
 
@@ -113,7 +119,6 @@
 
     <script>
         // --- FIXED ARIZONA LOCAL DATE LOGIC ---
-        // This ensures that at 8:21 PM on 2/20, it shows 2/20, not 2/21
         const now = new Date();
         const offset = now.getTimezoneOffset() * 60000;
         const localISOTime = new Date(now - offset).toISOString().split('T')[0];
@@ -135,25 +140,25 @@
             } else { alert('ACCESS DENIED'); }
         }
 
-     document.getElementById('downloadBtn').addEventListener('click', () => {
-            // 1. Get the values
+        document.getElementById('passwordInput').addEventListener('keypress', (e) => { if (e.key === 'Enter') login(); });
+
+        document.getElementById('downloadBtn').addEventListener('click', () => {
             let title = document.getElementById('title').value;
             const chosenDate = document.getElementById('entryDate').value;
             let content = easyMDE.value();
 
             if (!title || !content || !chosenDate) { alert("ERROR: NARRATIVE INCOMPLETE"); return; }
 
-            // 2. THE APOSTROPHE ARMOR: Paste these two lines here!
+            // APOSTROPHE ARMOR
             title = title.replace(/[\u2018\u2019]/g, "'").replace(/[\u201C\u201D]/g, '"');
             content = content.replace(/[\u2018\u2019]/g, "'").replace(/[\u201C\u201D]/g, '"');
 
-            // 3. Apply the Poetry Fix
+            // POETRY FIX
             const formattedContent = content.replace(/\n/g, "  \n");
             
             const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
             const formattedDate = new Date(chosenDate + 'T00:00:00').toLocaleDateString('en-US', dateOptions);
 
-            // 4. Build the file
             const fullMarkdown = `# ${title}\n### ${formattedDate}\n\n---\n\n${formattedContent}`;
 
             const fileName = `${chosenDate}-${title.toLowerCase().replace(/[^a-z0-9]/g, '-')}.md`;
