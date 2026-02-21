@@ -59,7 +59,6 @@
 
         .artifact-card:hover img { filter: grayscale(0%) contrast(1); transform: scale(1.1); }
 
-        /* Label */
         .artifact-label {
             position: absolute; bottom: 0; left: 0; width: 100%;
             background: linear-gradient(transparent, rgba(0,0,0,0.9));
@@ -67,24 +66,75 @@
         }
 
         .artifact-card:hover .artifact-label { transform: translateY(0); opacity: 1; }
-
         .artifact-title { font-size: 0.8rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* 3. MODAL / EXPLOSION VIEW */
+        /* 3. MODAL / THE "SLOW REVEAL" */
         #modal {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(5,5,5,0.98); z-index: 4000;
-            display: none; justify-content: center; align-items: center; padding: 40px;
+            background: rgba(0,0,0,0.9); z-index: 4000;
+            display: none; justify-content: center; align-items: flex-start;
+            overflow-y: auto; padding: 60px 20px;
+            opacity: 0; transition: opacity 0.4s ease; /* Fade-in effect */
         }
 
-        .modal-content { max-width: 800px; width: 100%; max-height: 90vh; overflow-y: auto; }
-        .modal-content img { width: 100%; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 30px; }
+        #modal.active { display: block; opacity: 1; }
+
+        /* THE "SOFT BACKDROP": This layer sits behind everything and blurs the photo */
+        #modal-backdrop {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover; background-position: center;
+            filter: blur(50px) brightness(0.3); opacity: 0.5;
+            z-index: -1; transform: scale(1.1);
+        }
+
+        .modal-content { 
+            max-width: 900px; 
+            width: 100%; 
+            margin: 0 auto;
+            text-align: center;
+            z-index: 4001;
+            position: relative;
+        }
+
+        /* 4. TYPOGRAPHY FOCUS: THE "BOOK ENTRY" FEEL */
+        .modal-content img { 
+            max-width: 100%; 
+            max-height: 70vh; 
+            width: auto;
+            object-fit: contain;
+            border: 1px solid rgba(255,255,255,0.2); 
+            margin: 30px auto;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+            display: block;
+        }
+
+        .modal-content h1 {
+            font-family: 'Fira Code', monospace;
+            font-size: 1.5rem;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: var(--brand-teal);
+            margin-bottom: 20px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .modal-content p {
+            font-size: 1.2rem; /* Larger font for readability */
+            line-height: 2; /* Wider line spacing */
+            color: #ddd;
+            max-width: 750px;
+            margin: 0 auto 100px auto;
+            font-weight: 300;
+        }
 
         .btn-back {
-            position: fixed; top: 30px; right: 40px; background: none; border: none;
+            position: fixed; top: 30px; right: 40px; background: rgba(0,0,0,0.6); border: 1px solid var(--brand-teal);
             color: var(--brand-teal); font-family: 'Fira Code', monospace;
-            cursor: pointer; font-size: 0.8rem; letter-spacing: 3px;
+            cursor: pointer; font-size: 0.7rem; letter-spacing: 3px; padding: 10px 20px;
+            z-index: 5000; transition: 0.3s;
         }
+
+        .btn-back:hover { background: var(--brand-teal); color: black; }
     </style>
 </head>
 <body>
@@ -95,10 +145,10 @@
         <a href="index.html" style="color: #444; font-size: 0.7rem; text-decoration: none; letter-spacing: 3px; text-transform: uppercase;">Return to Entrance</a>
     </div>
 
-    <div class="vault-grid" id="grid">
-        </div>
+    <div class="vault-grid" id="grid"></div>
 
-    <div id="modal">
+    <div id="modal" onclick="closeModalOnEmpty(event)">
+        <div id="modal-backdrop"></div>
         <button class="btn-back" onclick="closeModal()">[ CLOSE_X ]</button>
         <div class="modal-content" id="modal-inner"></div>
     </div>
@@ -106,35 +156,59 @@
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script>
         async function loadVault() {
-            const response = await fetch('hipsta_manifest.json');
-            const artifacts = await response.json();
-            const grid = document.getElementById('grid');
+            try {
+                const response = await fetch('hipsta_manifest.json');
+                const artifacts = await response.json();
+                const grid = document.getElementById('grid');
 
-            artifacts.forEach(item => {
-                const card = document.createElement('div');
-                card.className = 'artifact-card';
-                card.innerHTML = `
-                    <img src="${item.image}" alt="${item.title}">
-                    <div class="artifact-label">
-                        <div class="artifact-title">${item.title}</div>
-                    </div>
-                `;
-                card.onclick = () => openArtifact(item.file);
-                grid.appendChild(card);
-            });
+                artifacts.forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = 'artifact-card';
+                    card.innerHTML = `
+                        <img src="${item.image}" alt="${item.title}" loading="lazy">
+                        <div class="artifact-label">
+                            <div class="artifact-title">${item.title}</div>
+                        </div>
+                    `;
+                    card.onclick = () => openArtifact(item.file, item.image);
+                    grid.appendChild(card);
+                });
+            } catch (e) {
+                console.error("Manifest load error:", e);
+            }
         }
 
-        async function openArtifact(file) {
+        async function openArtifact(file, imageUrl) {
             const response = await fetch(file);
             const markdown = await response.text();
+            
+            // Set the soft backdrop image
+            document.getElementById('modal-backdrop').style.backgroundImage = `url(${imageUrl})`;
+            
+            // Render the story
             document.getElementById('modal-inner').innerHTML = marked.parse(markdown);
-            document.getElementById('modal').style.display = 'flex';
+            
+            const modal = document.getElementById('modal');
+            modal.style.display = 'block';
+            setTimeout(() => modal.classList.add('active'), 10); // Trigger fade-in
+            modal.scrollTop = 0;
+            
             document.body.style.overflow = 'hidden';
         }
 
         function closeModal() {
-            document.getElementById('modal').style.display = 'none';
-            document.body.style.overflow = 'auto';
+            const modal = document.getElementById('modal');
+            modal.classList.remove('active');
+            setTimeout(() => {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }, 400); // Wait for fade-out
+        }
+
+        function closeModalOnEmpty(event) {
+            if (event.target.id === 'modal' || event.target.id === 'modal-backdrop') {
+                closeModal();
+            }
         }
 
         loadVault();
