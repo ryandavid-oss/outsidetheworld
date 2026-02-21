@@ -92,6 +92,12 @@
             .input-row { flex-direction: column; align-items: flex-start; }
             input#title { font-size: 1.8rem; width: 100%; }
         }
+        .word-count {
+    position: fixed; bottom: 20px; left: 20px;
+    font-family: 'Fira Code', monospace; font-size: 0.7rem;
+    color: var(--brand-teal); opacity: 0.6;
+    letter-spacing: 2px; text-transform: uppercase;
+}
     </style>
 </head>
 <body>
@@ -167,6 +173,16 @@
             a.href = URL.createObjectURL(blob);
             a.download = fileName;
             a.click();
+            // Add the meter to the page
+const meter = document.createElement('div');
+meter.className = 'word-count';
+document.body.appendChild(meter);
+
+// Update count on every keystroke
+easyMDE.codemirror.on("change", () => {
+    const count = easyMDE.value().trim().split(/\s+/).length;
+    meter.innerText = `RESIDUE_DENSITY: ${count} WORDS`;
+});
         });
     </script>
 </body>
