@@ -57,13 +57,15 @@
             box-shadow: 0 20px 40px rgba(0,0,0,0.8);
         }
 
-        /* 3. MODAL & THE GLOW */
+        /* 3. MODAL - FIXING THE SCROLL LOCK */
         #modal {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.92); z-index: 4000;
-            display: none; justify-content: center; align-items: flex-start;
-            overflow-y: auto; padding: 60px 20px;
+            background: rgba(0,0,0,0.95); z-index: 4000;
+            display: none; 
+            overflow-y: scroll; /* Forces scrollability in Safari/Chrome */
+            padding: 100px 20px; /* Padding at top/bottom for breathing room */
             opacity: 0; transition: opacity 0.5s ease;
+            -webkit-overflow-scrolling: touch;
         }
 
         #modal.active { display: block; opacity: 1; }
@@ -77,22 +79,22 @@
 
         .modal-content { 
             max-width: 900px; width: 100%; margin: 0 auto;
-            text-align: center; z-index: 4001; position: relative;
+            text-align: center; position: relative;
         }
 
-        /* THE GLOWING TITLE */
+        /* GLOWING WHITE TITLE */
         .modal-content h1 {
             font-family: 'Inter', sans-serif; font-weight: 900; font-size: 3.5rem;
             letter-spacing: 12px; text-transform: uppercase; color: white;
             text-shadow: 0 0 20px rgba(255,255,255,0.4), 0 0 40px rgba(255,255,255,0.2);
-            margin: 0 0 10px 0;
+            margin: 0;
         }
 
-        /* THE TEAL DATE */
+        /* TEAL DATE */
         .modal-content h2 {
             font-family: 'Fira Code', monospace; font-size: 0.9rem;
             color: var(--brand-teal); letter-spacing: 4px; text-transform: uppercase;
-            margin-bottom: 40px; opacity: 0.8;
+            margin: 10px 0 50px 0; opacity: 1;
         }
 
         .modal-content img { 
@@ -101,18 +103,17 @@
             box-shadow: 0 30px 60px rgba(0,0,0,0.9); display: block;
         }
 
-        /* FIXING LINE GAPS */
         .modal-content p {
             font-size: 1.25rem; line-height: 1.8; color: #bbb;
             max-width: 750px; margin: 0 auto 15px auto; font-weight: 300;
         }
 
-        /* SCROLL INDICATOR */
+        /* SCROLL HINT */
         .scroll-hint {
             position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
             font-family: 'Fira Code', monospace; font-size: 0.6rem; color: var(--brand-teal);
-            letter-spacing: 3px; opacity: 0.5; animation: bounce 2s infinite;
-            pointer-events: none; text-transform: uppercase;
+            letter-spacing: 3px; opacity: 0.8; animation: bounce 2s infinite;
+            pointer-events: none; text-transform: uppercase; z-index: 5001;
         }
 
         @keyframes bounce {
@@ -122,12 +123,11 @@
         }
 
         .btn-back {
-            position: fixed; top: 30px; right: 40px; background: rgba(0,0,0,0.6); border: 1px solid var(--brand-teal);
+            position: fixed; top: 30px; right: 40px; background: rgba(0,0,0,0.8); border: 1px solid var(--brand-teal);
             color: var(--brand-teal); font-family: 'Fira Code', monospace;
             cursor: pointer; font-size: 0.7rem; letter-spacing: 3px; padding: 10px 20px;
             z-index: 5000; transition: 0.3s;
         }
-
         .btn-back:hover { background: var(--brand-teal); color: black; }
     </style>
 </head>
@@ -182,13 +182,17 @@
             const hint = document.getElementById('scroll-hint');
             
             modal.style.display = 'block';
-            hint.style.display = 'block'; // Reset hint
-            setTimeout(() => modal.classList.add('active'), 10);
-            modal.scrollTop = 0;
+            hint.style.opacity = '0.8'; 
             
+            // Trigger Fade-In
+            setTimeout(() => {
+                modal.classList.add('active');
+            }, 10);
+            
+            modal.scrollTop = 0;
             document.body.style.overflow = 'hidden';
 
-            // Hide hint when user starts scrolling
+            // Hide hint on scroll
             modal.onscroll = () => {
                 if (modal.scrollTop > 50) hint.style.opacity = '0';
             };
@@ -204,7 +208,10 @@
         }
 
         function closeModalOnEmpty(event) {
-            if (event.target.id === 'modal' || event.target.id === 'modal-backdrop') closeModal();
+            // Updated to ensure clicks on the backdrop work as intended
+            if (event.target.id === 'modal' || event.target.id === 'modal-backdrop') {
+                closeModal();
+            }
         }
 
         loadVault();
