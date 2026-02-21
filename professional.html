@@ -14,7 +14,12 @@
 
         body, html {
             margin: 0; padding: 0; height: 100%;
-            background-color: var(--bg-dark);
+            /* THE FIX: Applying the 2006 legacy image as a background */
+            background: linear-gradient(rgba(5, 5, 5, 0.85), rgba(5, 5, 5, 0.85)), 
+                        url('Images/center.jpg'); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Keeps the globe steady on scroll */
             color: white;
             font-family: 'Inter', sans-serif;
             display: flex; flex-direction: column;
@@ -67,7 +72,7 @@
         p {
             font-size: 0.9rem;
             letter-spacing: 4px;
-            color: #666;
+            color: #aaa; /* Brightened slightly to stand out against the image */
             text-transform: uppercase;
             max-width: 500px;
             line-height: 1.8;
@@ -79,22 +84,23 @@
             display: inline-block;
             padding: 15px 40px;
             border: 1px solid rgba(255,255,255,0.2);
-            color: #888;
+            color: white;
             text-decoration: none;
             font-size: 0.7rem;
             font-weight: 700;
             letter-spacing: 5px;
             text-transform: uppercase;
             transition: 0.4s;
+            backdrop-filter: blur(5px);
+            background: rgba(255,255,255,0.05);
         }
 
         .btn-back:hover {
             border-color: var(--brand-teal);
             color: white;
-            background: rgba(145, 175, 179, 0.05);
+            background: rgba(145, 175, 179, 0.2);
         }
 
-        /* MOBILE ADJUSTMENTS */
         @media (max-width: 768px) {
             .logo-main { width: 240px; }
             h1 { font-size: 1.5rem; letter-spacing: 6px; }
@@ -116,12 +122,6 @@
 
         <a href="index.html" class="btn-back">Return to Entrance</a>
     </div>
-body {
-    background: linear-gradient(rgba(5, 5, 5, 0.8), rgba(5, 5, 5, 0.8)), 
-                url('Images/center.jpg'); /* Your 2006 memory */
-    background-size: cover;
-    background-position: center;
-    /* ... keep the rest of your flex/centering styles ... */
-}
+
 </body>
 </html>
