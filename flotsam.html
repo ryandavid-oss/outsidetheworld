@@ -57,74 +57,68 @@
             box-shadow: 0 20px 40px rgba(0,0,0,0.8);
         }
 
-        .artifact-card:hover img { filter: grayscale(0%) contrast(1); transform: scale(1.1); }
-
-        .artifact-label {
-            position: absolute; bottom: 0; left: 0; width: 100%;
-            background: linear-gradient(transparent, rgba(0,0,0,0.9));
-            padding: 20px; transform: translateY(10px); opacity: 0; transition: 0.4s;
-        }
-
-        .artifact-card:hover .artifact-label { transform: translateY(0); opacity: 1; }
-        .artifact-title { font-size: 0.8rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; }
-
-        /* 3. MODAL / THE "SLOW REVEAL" */
+        /* 3. MODAL & THE GLOW */
         #modal {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9); z-index: 4000;
+            background: rgba(0,0,0,0.92); z-index: 4000;
             display: none; justify-content: center; align-items: flex-start;
             overflow-y: auto; padding: 60px 20px;
-            opacity: 0; transition: opacity 0.4s ease; /* Fade-in effect */
+            opacity: 0; transition: opacity 0.5s ease;
         }
 
         #modal.active { display: block; opacity: 1; }
 
-        /* THE "SOFT BACKDROP": This layer sits behind everything and blurs the photo */
         #modal-backdrop {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-size: cover; background-position: center;
-            filter: blur(50px) brightness(0.3); opacity: 0.5;
+            filter: blur(60px) brightness(0.2); opacity: 0.6;
             z-index: -1; transform: scale(1.1);
         }
 
         .modal-content { 
-            max-width: 900px; 
-            width: 100%; 
-            margin: 0 auto;
-            text-align: center;
-            z-index: 4001;
-            position: relative;
+            max-width: 900px; width: 100%; margin: 0 auto;
+            text-align: center; z-index: 4001; position: relative;
         }
 
-        /* 4. TYPOGRAPHY FOCUS: THE "BOOK ENTRY" FEEL */
-        .modal-content img { 
-            max-width: 100%; 
-            max-height: 70vh; 
-            width: auto;
-            object-fit: contain;
-            border: 1px solid rgba(255,255,255,0.2); 
-            margin: 30px auto;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.8);
-            display: block;
-        }
-
+        /* THE GLOWING TITLE */
         .modal-content h1 {
-            font-family: 'Fira Code', monospace;
-            font-size: 1.5rem;
-            letter-spacing: 6px;
-            text-transform: uppercase;
-            color: var(--brand-teal);
-            margin-bottom: 20px;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            font-family: 'Inter', sans-serif; font-weight: 900; font-size: 3.5rem;
+            letter-spacing: 12px; text-transform: uppercase; color: white;
+            text-shadow: 0 0 20px rgba(255,255,255,0.4), 0 0 40px rgba(255,255,255,0.2);
+            margin: 0 0 10px 0;
         }
 
+        /* THE TEAL DATE */
+        .modal-content h2 {
+            font-family: 'Fira Code', monospace; font-size: 0.9rem;
+            color: var(--brand-teal); letter-spacing: 4px; text-transform: uppercase;
+            margin-bottom: 40px; opacity: 0.8;
+        }
+
+        .modal-content img { 
+            max-width: 100%; max-height: 75vh; width: auto; object-fit: contain;
+            border: 1px solid rgba(255,255,255,0.2); margin: 0 auto 40px auto;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.9); display: block;
+        }
+
+        /* FIXING LINE GAPS */
         .modal-content p {
-            font-size: 1.2rem; /* Larger font for readability */
-            line-height: 2; /* Wider line spacing */
-            color: #ddd;
-            max-width: 750px;
-            margin: 0 auto 100px auto;
-            font-weight: 300;
+            font-size: 1.25rem; line-height: 1.8; color: #bbb;
+            max-width: 750px; margin: 0 auto 15px auto; font-weight: 300;
+        }
+
+        /* SCROLL INDICATOR */
+        .scroll-hint {
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+            font-family: 'Fira Code', monospace; font-size: 0.6rem; color: var(--brand-teal);
+            letter-spacing: 3px; opacity: 0.5; animation: bounce 2s infinite;
+            pointer-events: none; text-transform: uppercase;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateX(-50%) translateY(0);}
+            40% {transform: translateX(-50%) translateY(-10px);}
+            60% {transform: translateX(-50%) translateY(-5px);}
         }
 
         .btn-back {
@@ -151,6 +145,7 @@
         <div id="modal-backdrop"></div>
         <button class="btn-back" onclick="closeModal()">[ CLOSE_X ]</button>
         <div class="modal-content" id="modal-inner"></div>
+        <div class="scroll-hint" id="scroll-hint">↓ Scroll for Story ↓</div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -173,27 +168,30 @@
                     card.onclick = () => openArtifact(item.file, item.image);
                     grid.appendChild(card);
                 });
-            } catch (e) {
-                console.error("Manifest load error:", e);
-            }
+            } catch (e) { console.error("Manifest load error:", e); }
         }
 
         async function openArtifact(file, imageUrl) {
             const response = await fetch(file);
             const markdown = await response.text();
             
-            // Set the soft backdrop image
             document.getElementById('modal-backdrop').style.backgroundImage = `url(${imageUrl})`;
-            
-            // Render the story
             document.getElementById('modal-inner').innerHTML = marked.parse(markdown);
             
             const modal = document.getElementById('modal');
+            const hint = document.getElementById('scroll-hint');
+            
             modal.style.display = 'block';
-            setTimeout(() => modal.classList.add('active'), 10); // Trigger fade-in
+            hint.style.display = 'block'; // Reset hint
+            setTimeout(() => modal.classList.add('active'), 10);
             modal.scrollTop = 0;
             
             document.body.style.overflow = 'hidden';
+
+            // Hide hint when user starts scrolling
+            modal.onscroll = () => {
+                if (modal.scrollTop > 50) hint.style.opacity = '0';
+            };
         }
 
         function closeModal() {
@@ -202,13 +200,11 @@
             setTimeout(() => {
                 modal.style.display = 'none';
                 document.body.style.overflow = 'auto';
-            }, 400); // Wait for fade-out
+            }, 500);
         }
 
         function closeModalOnEmpty(event) {
-            if (event.target.id === 'modal' || event.target.id === 'modal-backdrop') {
-                closeModal();
-            }
+            if (event.target.id === 'modal' || event.target.id === 'modal-backdrop') closeModal();
         }
 
         loadVault();
