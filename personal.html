@@ -95,8 +95,12 @@
         /* 3. RECTANGLE GRID */
         .archive-container { max-width: 1200px; margin: 0 auto 50px; padding: 0 40px; display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 25px; animation: pageReveal 1.2s ease-out 0.4s forwards; opacity: 0; }
         .residue-card { border: 1px solid rgba(255, 255, 255, 0.05); padding: 35px 40px; background: rgba(255, 255, 255, 0.01); transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); text-decoration: none; color: inherit; position: relative; cursor: pointer; }
-        .residue-card:hover { border-color: var(--brand-blue); background: rgba(99, 149, 238, 0.04); transform: translateX(5px); }
-
+       .residue-card:hover { 
+    border-color: var(--brand-blue); 
+    background: rgba(99, 149, 238, 0.06); 
+    transform: translateY(-5px) scale(1.02); /* Lifts the card up */
+    box-shadow: 0 20px 40px rgba(99, 149, 238, 0.15); /* Adds a blue glow */
+}
         /* 4. CORNER RETICLE (+ to -) */
         .card-beacon { position: absolute; top: 25px; right: 25px; width: 20px; height: 20px; color: var(--brand-blue); transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1); }
         .card-beacon::before, .card-beacon::after { content: ''; position: absolute; background: currentColor; transition: transform 0.6s, opacity 0.4s; }
