@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,111 +6,131 @@
     <title>The Wayback | Outside The World</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <style>
-:root {
-    --brand-blue: #6395EE;
-    --bg-dark: #050505;
-    --text-gray: #666;
-}
+        /* 1. IMPORTING FIRA CODE FOR TERMINAL LOOK */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;900&family=Fira+Code:wght@300;500&display=swap');
 
-body, html {
-    margin: 0; padding: 0;
-    background-color: var(--bg-dark);
-    color: #e0e0e0;
-    font-family: 'Inter', sans-serif;
-    scroll-behavior: smooth;
-}
+        :root {
+            --brand-blue: #6395EE;
+            --brand-teal: #91AFB3;
+            --bg-dark: #050505;
+            --text-gray: #666;
+        }
 
-/* 1. BRAND ANCHOR - 220px Logo */
-.nav-logo { 
-    width: 220px; 
-    margin: 40px 0 60px 40px; 
-    filter: drop-shadow(0 0 20px rgba(99, 149, 238, 0.2));
-    display: block;
-}
+        body, html {
+            margin: 0; padding: 0;
+            background-color: var(--bg-dark);
+            color: #e0e0e0;
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
 
-.archive-container {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 0 40px 100px;
-}
+        /* 2. BRAND ANCHOR - 220px Logo */
+        .nav-logo { 
+            width: 220px; 
+            margin: 40px 0 60px 40px; 
+            filter: drop-shadow(0 0 20px rgba(99, 149, 238, 0.2));
+            display: block;
+        }
 
-/* 2. TYPOGRAPHY */
-h1 { 
-    font-size: 4rem; 
-    font-weight: 900; 
-    color: white; 
-    margin: 0 0 10px 0; 
-    letter-spacing: 2px;
-    text-transform: uppercase;
-}
+        .archive-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 40px 100px;
+        }
 
-.back-link { 
-    text-decoration: none; 
-    color: var(--brand-blue); 
-    font-size: 0.75rem; 
-    font-weight: 700;
-    letter-spacing: 3px; 
-    text-transform: uppercase; 
-    margin-bottom: 20px;
-    display: inline-block;
-}
+        h1 { 
+            font-size: 4rem; 
+            font-weight: 900; 
+            color: white; 
+            margin: 0 0 10px 0; 
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
 
-.tagline { color: #666; letter-spacing: 2px; text-transform: uppercase; font-size: 0.85rem; margin-bottom: 50px; }
+        .back-link { 
+            text-decoration: none; 
+            color: var(--brand-blue); 
+            font-size: 0.75rem; 
+            font-weight: 700;
+            letter-spacing: 3px; 
+            text-transform: uppercase; 
+            margin-bottom: 20px;
+            display: inline-block;
+        }
 
-/* 3. THE YEAR PICKER */
-.year-picker { display: flex; flex-wrap: wrap; gap: 12px; margin: 40px 0; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 30px; }
+        /* 3. TYPEWRITER TAGLINE */
+        .tagline { 
+            color: #666; 
+            letter-spacing: 2px; 
+            text-transform: uppercase; 
+            font-size: 0.85rem; 
+            margin-bottom: 50px; 
+            font-family: 'Fira Code', monospace;
+            min-height: 1.2rem;
+        }
 
-.year-btn { 
-    background: none; border: 1px solid rgba(255,255,255,0.1); color: var(--text-gray); 
-    padding: 12px 22px; cursor: pointer; transition: 0.3s; font-weight: 800; font-size: 0.75rem;
-    font-family: 'Inter', sans-serif;
-}
+        .cursor {
+            display: inline-block;
+            width: 8px;
+            height: 14px;
+            background-color: var(--brand-teal);
+            margin-left: 8px;
+            animation: blink 1s infinite;
+            vertical-align: middle;
+        }
 
-.year-btn:hover, .year-btn.active { 
-    border-color: var(--brand-blue); color: white; background: rgba(99, 149, 238, 0.1); 
-    box-shadow: 0 0 20px rgba(99, 149, 238, 0.15);
-}
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-/* 4. THE LIST ITEMS */
-.archive-item { 
-    padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.03); 
-    display: flex; gap: 30px; align-items: baseline; transition: transform 0.3s ease;
-}
-.archive-item:hover { transform: translateX(10px); }
-.archive-item span { font-family: monospace; color: var(--brand-blue); font-size: 0.85rem; font-weight: 600; }
-.archive-item a { color: #bbb; text-decoration: none; font-size: 1.25rem; font-weight: 500; transition: 0.2s; }
-.archive-item a:hover { color: white; }
-/* THE ACTIVE ERA GLOW */
-.current-era {
-    border-color: var(--brand-blue) !important;
-    color: white !important;
-    box-shadow: 0 0 15px rgba(99, 149, 238, 0.4);
-    position: relative;
-    animation: pulse-glow 3s infinite ease-in-out;
-}
+        /* 4. THE YEAR PICKER */
+        .year-picker { display: flex; flex-wrap: wrap; gap: 12px; margin: 40px 0; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 30px; }
 
-/* Optional: Add a tiny "live" dot next to the text */
-.current-era::after {
-    content: '';
-    display: inline-block;
-    width: 4px;
-    height: 4px;
-    background: var(--brand-blue);
-    border-radius: 50%;
-    margin-left: 8px;
-    vertical-align: middle;
-    box-shadow: 0 0 5px var(--brand-blue);
-}
+        .year-btn { 
+            background: none; border: 1px solid rgba(255,255,255,0.1); color: var(--text-gray); 
+            padding: 12px 22px; cursor: pointer; transition: 0.3s; font-weight: 800; font-size: 0.75rem;
+            font-family: 'Inter', sans-serif;
+        }
 
-@keyframes pulse-glow {
-    0% { box-shadow: 0 0 5px rgba(99, 149, 238, 0.2); }
-    50% { box-shadow: 0 0 20px rgba(99, 149, 238, 0.5); }
-    100% { box-shadow: 0 0 5px rgba(99, 149, 238, 0.2); }
-}
+        .year-btn:hover, .year-btn.active { 
+            border-color: var(--brand-blue); color: white; background: rgba(99, 149, 238, 0.1); 
+            box-shadow: 0 0 20px rgba(99, 149, 238, 0.15);
+        }
+
+        .archive-item { 
+            padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.03); 
+            display: flex; gap: 30px; align-items: baseline; transition: transform 0.3s ease;
+        }
+        .archive-item:hover { transform: translateX(10px); }
+        .archive-item span { font-family: monospace; color: var(--brand-blue); font-size: 0.85rem; font-weight: 600; }
+        .archive-item a { color: #bbb; text-decoration: none; font-size: 1.25rem; font-weight: 500; transition: 0.2s; }
+        .archive-item a:hover { color: white; }
+
+        .current-era {
+            border-color: var(--brand-blue) !important;
+            color: white !important;
+            box-shadow: 0 0 15px rgba(99, 149, 238, 0.4);
+            position: relative;
+            animation: pulse-glow 3s infinite ease-in-out;
+        }
+
+        .current-era::after {
+            content: '';
+            display: inline-block;
+            width: 4px; height: 4px;
+            background: var(--brand-blue);
+            border-radius: 50%;
+            margin-left: 8px;
+            vertical-align: middle;
+            box-shadow: 0 0 5px var(--brand-blue);
+        }
+
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 5px rgba(99, 149, 238, 0.2); }
+            50% { box-shadow: 0 0 20px rgba(99, 149, 238, 0.5); }
+            100% { box-shadow: 0 0 5px rgba(99, 149, 238, 0.2); }
+        }
     </style>
 </head>
 <body>
-    <body>
     <nav>
         <a href="personal.html">
             <img src="Images/Equal.svg" alt="Outside The World" class="nav-logo">
@@ -120,8 +139,8 @@ h1 {
     
     <main class="archive-container">
         <a href="personal.html" class="back-link">← Back to Journal</a>
-        <h1>The Wayback</h1>
-        <p class="tagline">Twenty-six years of digital residue, sorted by era.</p>
+        <h1>The Way back</h1>
+        <p class="tagline"><span id="type-target"></span><span class="cursor"></span></p>
 
         <div class="year-picker">
             <button class="year-btn current-era" onclick="showYear('2026', this)">2026</button>
@@ -142,57 +161,53 @@ h1 {
             <button class="year-btn" onclick="showYear('2003', this)">2003</button>
             <button class="year-btn" onclick="showYear('2002', this)">2002</button>
         </div>
- <div id="archive-content">
-        </div>
+        <div id="archive-content"></div>
+    </main>
 
     <script>
+        // TYPEWRITER EFFECT
+        var taglineText = "Twenty-six years of digital residue, sorted by era.";
+        var target = document.getElementById('type-target');
+        var i = 0;
+
+        function typeWriter() {
+            if (i < taglineText.length) {
+                target.innerHTML += taglineText.charAt(i);
+                i++;
+                setTimeout(typeWriter, 80); // Quick terminal speed
+            }
+        }
+
+        window.onload = function() {
+            setTimeout(typeWriter, 1000); // Decrypting feel delay
+        };
+
         var allResidue = [];
-
-        console.log("Attempting to fetch manifest.json...");
-
-        // 1. Fetch using standard function syntax
         fetch('./manifest.json')
             .then(function(response) {
-                if (!response.ok) {
-                    throw new Error("Could not find manifest.json");
-                }
+                if (!response.ok) throw new Error("Could not find manifest.json");
                 return response.json();
             })
-         .then(function(data) {
-            allResidue = data;
-            console.log("Manifest loaded successfully:", allResidue);
-            
-            // This line tells the page which year to show first
-            // We can hardcode '2026' or let it pick the newest year automatically
-            if (allResidue.length > 0) {
-                showYear('2026'); 
-            }
-        })
-            .catch(function(err) {
-                console.error("Archive Error:", err);
-            });
+            .then(function(data) {
+                allResidue = data;
+                if (allResidue.length > 0) showYear('2026'); 
+            })
+            .catch(function(err) { console.error("Archive Error:", err); });
 
         function showYear(year, btn) {
-            console.log("Filtering for year:", year);
             var container = document.getElementById('archive-content');
             if (!container) return;
-            
             container.innerHTML = ''; 
             var yearString = year.toString();
-            
-            // 2. Filter using traditional loop to avoid JSX confusion
             var yearData = [];
             for (var i = 0; i < allResidue.length; i++) {
                 if (allResidue[i].year.toString() === yearString) {
-                    yearData.append ? yearData.append(allResidue[i]) : yearData.push(allResidue[i]);
+                    yearData.push(allResidue[i]);
                 }
             }
-
             if (yearData.length === 0) {
                 container.innerHTML = '<p style="color:#666; padding: 20px;">No residue found for this era.</p>';
             }
-
-            // 3. Build rows using standard string concatenation
             for (var k = 0; k < yearData.length; k++) {
                 var post = yearData[k];
                 var row = document.createElement('div');
@@ -200,8 +215,6 @@ h1 {
                 row.innerHTML = '<span>' + post.date + '</span><a href="post.html?file=' + post.file + '">' + post.title + '</a>';
                 container.appendChild(row);
             }
-
-            // 4. Update Button Styles
             var buttons = document.getElementsByClassName('year-btn');
             for (var j = 0; j < buttons.length; j++) {
                 buttons[j].classList.remove('active');
