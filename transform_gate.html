@@ -6,7 +6,7 @@
     <title>Decryption Required | Outside The World</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500&family=Inter:wght@900&display=swap');
 
         :root {
             --brand-purple: #9b59b6;
@@ -20,12 +20,13 @@
             margin: 0;
             height: 100vh;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             overflow: hidden;
         }
 
-        /* SCANLINE EFFECT */
+        /* ATMOSPHERIC SCANLINES */
         body::after {
             content: " "; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%),
@@ -33,10 +34,22 @@
             background-size: 100% 3px, 3px 100%; pointer-events: none; z-index: 100; opacity: 0.2;
         }
 
+        /* HERO LOGO AT TOP */
+        .nav-header {
+            position: absolute;
+            top: 60px;
+            text-align: center;
+            width: 100%;
+        }
+        .nav-logo {
+            width: 220px;
+            filter: drop-shadow(0 0 20px rgba(155, 89, 182, 0.4));
+        }
+
         .terminal-box {
-            max-width: 400px;
+            max-width: 450px;
             width: 90%;
-            padding: 40px;
+            padding: 60px 40px;
             border: 1px solid rgba(155, 89, 182, 0.2);
             background: rgba(155, 89, 182, 0.02);
             text-align: center;
@@ -44,12 +57,33 @@
             z-index: 10;
         }
 
-        .terminal-header {
-            font-size: 0.7rem;
-            letter-spacing: 5px;
-            text-transform: uppercase;
+        /* TYPEWRITER STATUS STYLE */
+        .status-container {
+            min-height: 1.5rem;
             margin-bottom: 40px;
-            opacity: 0.8;
+        }
+        #status-text {
+            font-size: 1.1rem; /* Slightly larger as requested */
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 18px;
+            background: var(--brand-purple);
+            margin-left: 5px;
+            animation: blink 1s infinite;
+            vertical-align: middle;
+        }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        /* INPUT AREA */
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
 
         input {
@@ -58,27 +92,39 @@
             color: white;
             font-family: 'Fira Code', monospace;
             font-size: 1rem;
-            padding: 15px;
+            padding: 18px;
             width: 100%;
             box-sizing: border-box;
             outline: none;
             text-align: center;
             transition: 0.4s;
-            letter-spacing: 2px;
+            letter-spacing: 4px;
         }
 
         input:focus {
             border-color: var(--brand-purple);
-            box-shadow: 0 0 20px rgba(155, 89, 182, 0.3);
+            box-shadow: 0 0 20px rgba(155, 89, 182, 0.2);
             background: rgba(155, 89, 182, 0.05);
         }
 
-        .status-msg {
-            font-size: 0.6rem;
-            margin-top: 30px;
-            letter-spacing: 3px;
-            color: #555;
+        /* SUBMIT BUTTON */
+        .submit-btn {
+            background: none;
+            border: 1px solid var(--brand-purple);
+            color: var(--brand-purple);
+            padding: 15px;
+            font-family: 'Fira Code';
             text-transform: uppercase;
+            letter-spacing: 3px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 0.8rem;
+        }
+
+        .submit-btn:hover {
+            background: var(--brand-purple);
+            color: black;
+            box-shadow: 0 0 20px rgba(155, 89, 182, 0.4);
         }
 
         .error-shake {
@@ -103,55 +149,86 @@
             letter-spacing: 2px;
             transition: 0.3s;
         }
-
         .back-link:hover { color: var(--brand-purple); }
     </style>
 </head>
 <body>
 
+    <div class="nav-header">
+        <img src="Images/Equal.svg" alt="Logo" class="nav-logo">
+    </div>
+
     <div class="terminal-box">
-        <div class="terminal-header">UPLINK_ENCRYPTED // AREA_03</div>
+        <div class="status-container">
+            <span id="status-text"></span><span class="cursor"></span>
+        </div>
         
-        <input type="password" id="passkey" placeholder="DECRYPTION_KEY" onkeypress="handleInput(event)">
-        
-        <div class="status-msg" id="status">WAITING_FOR_KEY...</div>
+        <div class="input-group">
+            <input type="password" id="passkey" placeholder="DECRYPTION_KEY" onkeypress="handleKeyPress(event)">
+            <button class="submit-btn" onclick="validateKey()">Initialize_Uplink</button>
+        </div>
 
         <a href="personal.html" class="back-link">[ ABORT_CONNECTION ]</a>
     </div>
 
     <script>
-        // THE DEADBOLT LOGIC
-        // To change your password: Go to any Base64 encoder online, 
-        // type your pass, and replace the string below.
-        const SECRET_HASH = "WW91clBhc3N3b3JkSGVyZQ=="; // Currently: 'YourPasswordHere'
+        // TYPEWRITER CONFIG
+        const statusElement = document.getElementById('status-text');
+        const initialMessage = "WAITING_FOR_KEY...";
+        let i = 0;
 
-        function handleInput(e) {
-            if (e.key === 'Enter') {
-                const input = document.getElementById('passkey');
-                const status = document.getElementById('status');
-                
-                status.innerText = "AUTHENTICATING...";
-
-                setTimeout(() => {
-                    if (btoa(input.value) === SECRET_HASH) {
-                        status.innerText = "ACCESS_GRANTED // DECRYPTING...";
-                        status.style.color = "#2ecc71";
-                        setTimeout(() => {
-                            window.location.href = "transform_zion.html"; 
-                        }, 1000);
-                    } else {
-                        status.innerText = "ACCESS_DENIED // KEY_INVALID";
-                        status.style.color = "#e74c3c";
-                        input.classList.add('error-shake');
-                        input.value = "";
-                        setTimeout(() => {
-                            input.classList.remove('error-shake');
-                            status.innerText = "WAITING_FOR_KEY...";
-                            status.style.color = "#555";
-                        }, 1500);
-                    }
-                }, 800);
+        function typeMessage(message, speed = 100) {
+            statusElement.innerText = "";
+            i = 0;
+            function type() {
+                if (i < message.length) {
+                    statusElement.innerText += message.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
             }
+            type();
+        }
+
+        // STARTUP
+        window.onload = () => {
+            setTimeout(() => typeMessage(initialMessage), 500);
+        };
+
+        // KEY VALIDATION
+        const SECRET_HASH = "WW91clBhc3N3b3JkSGVyZQ=="; // Replace with your Base64 password
+
+        function handleKeyPress(e) {
+            if (e.key === 'Enter') {
+                validateKey();
+            }
+        }
+
+        function validateKey() {
+            const input = document.getElementById('passkey');
+            const status = document.getElementById('status-text');
+            
+            typeMessage("AUTHENTICATING...", 50);
+
+            setTimeout(() => {
+                if (btoa(input.value) === SECRET_HASH) {
+                    typeMessage("ACCESS_GRANTED", 50);
+                    statusElement.style.color = "#2ecc71";
+                    setTimeout(() => {
+                        window.location.href = "transform_zion.html"; 
+                    }, 1000);
+                } else {
+                    typeMessage("ACCESS_DENIED", 50);
+                    statusElement.style.color = "#e74c3c";
+                    input.classList.add('error-shake');
+                    input.value = "";
+                    setTimeout(() => {
+                        input.classList.remove('error-shake');
+                        statusElement.style.color = "var(--brand-purple)";
+                        typeMessage(initialMessage);
+                    }, 1500);
+                }
+            }, 1000);
         }
     </script>
 </body>
