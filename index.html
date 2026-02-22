@@ -22,32 +22,55 @@
             color: white;
         }
 
-        /* 1. NEUTRAL ZONES (THE GUARDS) */
+        /* 1. NEUTRAL ZONES */
         .neutral-top {
             position: absolute;
             top: 0; left: 0; width: 100%; 
-            height: 450px; /* Pushes the 'Event Horizon' down */
-            z-index: 1000; /* Shields the logo from mouse triggers */
+            height: 450px; 
+            z-index: 1000;
         }
         .neutral-gutter {
             position: absolute;
-            top: 0; left: 45%; width: 10%; /* Narrowed for better hitbox room */
+            top: 0; left: 45%; width: 10%; 
             height: 100%;
             z-index: 1000;
         }
 
-        /* 2. LOGO & INSTRUCTIONS */
+        /* 2. LOGO & TYPEWRITER INSTRUCTIONS */
         .logo-header {
             position: absolute; top: 50px; left: 50%;
-            transform: translateX(-50%); z-index: 1100; /* Sits above the guards */
+            transform: translateX(-50%); z-index: 1100;
             width: 500px; transition: all var(--transition-main);
             pointer-events: none; text-align: center;
         }
         .logo-header img { width: 100%; height: auto; }
+        
         .instruction {
-            margin-top: 40px; font-size: 0.85rem; letter-spacing: 8px;
-            text-transform: uppercase; color: #eee; opacity: 0.8;
+            margin-top: 40px; 
+            font-size: 0.85rem; /* Keeping the size you liked */
+            letter-spacing: 8px;
+            text-transform: uppercase; 
+            color: #eee; 
+            opacity: 0.8;
             transition: opacity 0.4s ease;
+            font-family: 'Fira Code', monospace; /* Using mono for the cursor look */
+            min-height: 1.2rem;
+        }
+
+        /* THE BLINKING CURSOR */
+        .cursor {
+            display: inline-block;
+            width: 8px;
+            height: 14px;
+            background-color: var(--brand-teal);
+            margin-left: 10px;
+            animation: blink 1s infinite;
+            vertical-align: middle;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
         }
 
         /* Logo Shifting Logic */
@@ -64,7 +87,7 @@
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             width: 100%; height: 100%; text-decoration: none; color: inherit;
             position: relative; 
-            z-index: 500; /* High z-index but below the guards */
+            z-index: 500;
         }
 
         .indicator-node {
@@ -112,42 +135,24 @@
             body, html { overflow-y: auto; }
             .container { flex-direction: column; height: auto; }
             .neutral-gutter, .neutral-top { display: none; }
-            
             .logo-header { position: relative; top: 30px; width: 80%; margin: 0 auto 60px; transform: none; left: auto; }
             .panel { height: 60vh; flex: none !important; border-bottom: 1px solid rgba(255,255,255,0.1); }
-            
-/* Forces centering and prevents overflow on mobile */
-            h2, .details { 
-                opacity: 1 !important; 
-                transform: none !important; 
-                width: 100%; 
-                text-align: center; /* This pulls the words to the middle */
-            }
-            h2 { 
-                font-size: 2rem !important; 
-                letter-spacing: 3px !important; /* Keeps 'Professional' from breaking */
-                margin-bottom: 10px;
-            }
-            h2 { 
-                font-size: 2rem !important; 
-                letter-spacing: 3px !important; /* Tightens the word 'Professional' */
-                width: 95%; 
-                margin: 0 auto;
-            }
+            h2, .details { opacity: 1 !important; transform: none !important; width: 100%; text-align: center; }
+            h2 { font-size: 2rem !important; letter-spacing: 3px !important; width: 95%; margin: 0 auto;}
             .indicator-node { display: none; }
             .fake-btn { background: white; color: black; } 
         }
+
         body::after {
-    content: " ";
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    /* Subtle horizontal lines */
-    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%),
-                linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
-    background-size: 100% 3px, 3px 100%;
-    pointer-events: none; /* Allows clicks through the overlay */
-    z-index: 3000;
-    opacity: 0.2;
-}
+            content: " ";
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%),
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            background-size: 100% 3px, 3px 100%;
+            pointer-events: none;
+            z-index: 3000;
+            opacity: 0.2;
+        }
     </style>
 </head>
 <body>
@@ -157,7 +162,9 @@
 
     <div class="logo-header">
         <img src="Images/Equal.svg" alt="Outside The World">
-        <div class="instruction">Pick a path forward</div>
+        <div class="instruction">
+            <span id="type-target"></span><span class="cursor"></span>
+        </div>
     </div>
 
     <div class="divider"></div>
@@ -185,8 +192,25 @@
             </a>
         </section>
     </div>
-<footer>
-    <p>© 2026 OUTSIDE THE WORLD LLC &nbsp; | &nbsp; SYSTEMS & STORIES</p>
-</footer>
+
+    <script>
+        // TYPEWRITER FOR INDEX PAGE
+        const textToType = "Pick a path forward";
+        const target = document.getElementById('type-target');
+        let i = 0;
+
+        function typeWriter() {
+            if (i < textToType.length) {
+                target.innerHTML += textToType.charAt(i);
+                i++;
+                setTimeout(typeWriter, 100); // Slightly faster for the home page
+            }
+        }
+
+        // Delay start slightly for that 'Loading System' feel
+        window.onload = () => {
+            setTimeout(typeWriter, 1200);
+        };
+    </script>
 </body>
 </html>
