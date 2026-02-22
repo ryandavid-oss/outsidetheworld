@@ -1,0 +1,5 @@
+# Apr 5, 2012
+
+![Post](Images/Instagram/11192748_1650554028512754_1279376913_n_17842292041024232.jpg)
+
+A #stranger sat next to me during lunch today. His attire was simple and he appeared melancholy at first, but a quick glance in my direction revealed a kind smile and thoughtful eyes behind wire-rim spectacles. Browned leather skin hung loosely from his aged frame, tanned from what appeared to be years of outside labor. I considered him for a moment, and the thought crept into my mind that I ought to introduce myself and explain today's #HipstaDay project. I grew hesitant as I noticed a hearing aide rising above his left ear. Fear overtook me.  After all, I have never before approached a stranger to ask for a picture. What if he didn't hear me?  What if he misunderstood?  It was for naught, after all; he quickly gathered his belongings and strode away. I managed to snap this before he left. Bummer, because I actually wanted to know his name and what his story was.  #Hipstamatic #JohnS #RockBW-11

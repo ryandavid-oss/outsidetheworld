@@ -1,0 +1,5 @@
+# Aug 17, 2012
+
+![Post](Images/Instagram/11190830_947707015252496_1953360672_n_17842854631024232.jpg)
+
+I post today with much sorrow and heaviness of heart. Fate has ordained that the brave soul who dared to soar as high as his imagination would take him has been lost to the sky that he so bravely challenged. This man, @itsmemikeyg, knew from the start that there would be no hope for his recovery. But he also knew that there was hope for mankind in his sacrifice. He laid down his life in mankind's most noble goal: the search for truth and understanding. In his exploration, he stirred the people of the world to feel as one; in his sacrifice, he bound more tightly the brotherhood of man. In ancient days, men looked at stars and saw their heroes in the constellations. In modern times, we do much the same, but now, our hero is a man of flesh and blood. Shine on, @itsmemikeyg #fakeeulogy #partialplagiarism

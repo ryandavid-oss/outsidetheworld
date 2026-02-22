@@ -1,0 +1,5 @@
+# Nov 21, 2013
+
+![Post](Images/Instagram/925995_555607774526932_803241088_n_17843102365024232.jpg)
+
+On November 8th, my dad was almost killed. I'm not trying to be dramatic or crass. I'm stating a fact that my dad, for all intents and purposes, could be dead right now. But he is not. Instead, he continues to be an example to me of hard work in the face of adversity. He has a shattered pelvis. A broken femur. 7 broken ribs. A  broken sternum. A collapsed lung. He tore a hole in the sac surrounding his heart. He was knocked unconscious. His left knee won't move. But here he is, 13 days later, enduring pain, smiling in a picture for me. Glad you're still with me, dad.  And I want to say "thank you" to everyone for their thoughts and prayers during the past two weeks. Believe me; they were felt and appreciated. Miracles happen and prayers are answered.

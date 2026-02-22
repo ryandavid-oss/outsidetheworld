@@ -1,0 +1,11 @@
+# Apr 8, 2019
+
+![Post](Images/Instagram/54512698_420483305422757_8045213892983006141_n_17846766160405213.jpg)
+
+I remember the day so clear, now 15 years past.  I remember rushing to Walgreens to buy a memory card for our digital camera.  iPhones weren’t a thing then.  I remember walking the hallways of the hospital with your mom, she dressed in a yellow robe, hair done perfectly as always.  I remember pure excitement and dizzying nervousness.  Doctors and nurses came in and out of our little room, checking stats, making sure you were ok.  That was my most pressing thought, that both mama and baby were ok.  I was only 9 years older than you are now, mind you. 
+And then the moment came.  In that darkened delivery room, a naive father waited.  Mama was a pro, perfect picture of calm.  But I was a mess.  I vacillated between laughter and tears.  The delivery was normal and by the books.  Until all of the sudden, it wasn’t.  And such is life, my son. 
+You needed to come immediately.  Your doctor was calm, which permeated me and kept me sane.  It happened so quickly.  The tools for a quick delivery were at our side, and your arrival was imminent. 
+Somehow, and selfishly, in that moment I remembered the promise that I could cut the cord.  I was sad that wouldn’t happen, not with the cord wrapped around your neck as many times as it was.  But he quickly and calmly moved; his fingers were placed in between your fragile, tiny neck and the cord which was both keeping you alive, and taking your breath away.  And he said “Cut it now”, and I reacted without thinking. 
+And then you were laid, ever so briefly, on your mama’s chest.  Your eyes were open.  You were here.  You were ours. 
+I’ve never forgotten the circumstances that brought you into this world, Sumner.  I’m proud to have played such a small part of it.  And promise you with all that I have, I will be here for you throughout mortal life and the eternities. 
+I’m always appreciative of your sense of humor.  Thank you for always being our buddy, our sole companion during a formative part of our lives.  Happiest of birthdays to you.  I’m proud to be your dad, and will always be excited for what life brings you next.
