@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal | Outside The World</title>
+    <title>Personal [TEST] | Outside The World</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;900&family=Fira+Code:wght@300;500&display=swap');
@@ -22,7 +22,7 @@
             overflow-x: hidden;
         }
 
-        /* 1. THE ATMOSPHERE */
+        /* 1. ATMOSPHERIC SCANLINES */
         body::after {
             content: " "; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%),
@@ -38,142 +38,153 @@
         .nav-logo { width: 220px; filter: drop-shadow(0 0 20px rgba(99, 149, 238, 0.2)); }
 
         /* 2. THE PRESENT (Hero Section) */
-        .current-feed {
-            height: 70vh;
+        .hero-feed {
+            height: 75vh;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
-            padding-top: 100px;
+            padding: 100px 20px 0;
+            background: radial-gradient(circle at center, rgba(99, 149, 238, 0.05) 0%, transparent 70%);
         }
 
-        .feed-content {
+        .feed-container {
             text-align: center;
-            max-width: 800px;
+            max-width: 900px;
             z-index: 10;
         }
 
-        .feed-label {
+        .status-header {
             font-family: 'Fira Code', monospace;
             font-size: 0.7rem;
             color: var(--brand-teal);
-            letter-spacing: 5px;
-            margin-bottom: 20px;
+            letter-spacing: 6px;
+            margin-bottom: 25px;
             text-transform: uppercase;
         }
 
-        .latest-title {
-            font-size: 4rem;
+        .hero-headline {
+            font-size: clamp(2.5rem, 8vw, 5rem);
             font-weight: 900;
             letter-spacing: -2px;
             margin: 0;
-            line-height: 0.9;
+            line-height: 0.85;
             text-transform: uppercase;
+            background: linear-gradient(to bottom, #fff 0%, #666 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .latest-desc {
+        .hero-subtext {
             font-size: 1.1rem;
             color: #888;
-            margin-top: 30px;
-            line-height: 1.6;
+            margin-top: 40px;
+            line-height: 1.8;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
+            font-weight: 300;
         }
 
         /* 3. THE INTERFACE (Cards) */
         .interface-grid {
             max-width: 1200px;
-            margin: -50px auto 100px;
+            margin: -60px auto 100px;
             padding: 0 40px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
         }
 
         .interface-card {
             border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 40px;
+            padding: 45px;
             background: rgba(255, 255, 255, 0.02);
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             text-decoration: none;
             color: inherit;
             position: relative;
+            overflow: hidden;
         }
 
         .interface-card:hover {
             border-color: var(--brand-teal);
             background: rgba(145, 175, 179, 0.08);
-            transform: translateY(-10px);
-            box-shadow: 0 30px 60px rgba(145, 175, 179, 0.1);
+            transform: translateY(-12px);
+            box-shadow: 0 30px 60px rgba(145, 175, 179, 0.12);
         }
 
-        .card-name {
-            font-size: 1.2rem;
+        .card-title {
+            font-size: 1.4rem;
             font-weight: 900;
-            letter-spacing: 4px;
+            letter-spacing: 5px;
             text-transform: uppercase;
             color: var(--brand-blue);
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             display: block;
             transition: color 0.4s;
         }
 
-        .interface-card:hover .card-name { color: var(--brand-teal); }
+        .interface-card:hover .card-title { color: var(--brand-teal); }
 
-        .card-desc {
+        .card-tagline {
             font-size: 0.8rem;
             color: #555;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            line-height: 1.5;
+            letter-spacing: 2px;
+            line-height: 1.6;
+            transition: color 0.4s;
         }
+        .interface-card:hover .card-tagline { color: #aaa; }
 
-        /* CORNER BEACON */
-        .beacon {
-            position: absolute; top: 25px; right: 25px;
-            width: 12px; height: 12px;
+        /* THE CORNER RETICLE */
+        .reticle {
+            position: absolute; top: 30px; right: 30px;
+            width: 16px; height: 16px;
             border: 1px solid var(--brand-blue);
-            transition: all 0.4s;
+            transition: all 0.5s;
         }
-        .interface-card:hover .beacon {
-            background: var(--brand-teal);
+        .interface-card:hover .reticle {
             border-color: var(--brand-teal);
+            background: var(--brand-teal);
             box-shadow: 0 0 15px var(--brand-teal);
             transform: rotate(45deg);
         }
 
-        /* 4. FUTURE DIRECTIVES */
-        .directives {
+        /* 4. LOGS (Directives) */
+        .directive-section {
             max-width: 1200px;
-            margin: 0 auto 100px;
+            margin: 0 auto 120px;
             padding: 0 40px;
             border-top: 1px solid rgba(255,255,255,0.05);
-            padding-top: 60px;
+            padding-top: 80px;
         }
 
-        .section-label {
+        .directive-label {
             font-family: 'Fira Code', monospace;
             font-size: 0.6rem;
             color: #444;
-            letter-spacing: 8px;
+            letter-spacing: 10px;
             text-transform: uppercase;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
         }
 
-        .future-row {
+        .log-row {
             display: flex;
             justify-content: space-between;
             color: #333;
             font-family: 'Fira Code', monospace;
-            font-size: 0.7rem;
-            padding: 20px 0;
+            font-size: 0.75rem;
+            padding: 25px 0;
             border-bottom: 1px solid rgba(255,255,255,0.03);
+            transition: color 0.3s;
         }
+        .log-row:hover { color: #666; }
 
         @media (max-width: 768px) {
-            .latest-title { font-size: 2.5rem; }
-            .interface-grid { grid-template-columns: 1fr; }
+            .hero-headline { font-size: 3rem; }
+            .interface-grid { grid-template-columns: 1fr; padding: 0 20px; }
+            .hero-feed { height: auto; padding-bottom: 100px; }
         }
     </style>
 </head>
@@ -181,12 +192,12 @@
 
     <nav><a href="index.html"><img src="Images/Equal.svg" alt="Back" class="nav-logo"></a></nav>
 
-    <section class="current-feed">
-        <div class="feed-content">
-            <div class="feed-label">// LATEST_STATUS_UPLOADING</div>
-            <h1 class="latest-title">The First<br>Directive</h1>
-            <p class="latest-desc">
-                Today marks the completion of the 2026 Reclamation Project. The flotsam has been gathered. The residue has been processed. Now, we begin the construction of the living archive.
+    <section class="hero-feed">
+        <div class="feed-container">
+            <div class="status-header">// SYSTEM_UPDATE_ACTIVE</div>
+            <h1 class="hero-headline">The First<br>Directive</h1>
+            <p class="hero-subtext">
+                The architecture of the past is finalized. 539 artifacts have been successfully reclaimed from the Instagram estate. The flotsam is secured. Now, we begin to map what remains.
             </p>
         </div>
     </section>
@@ -194,35 +205,35 @@
     <section class="interface-grid">
         
         <a href="flotsam.html" class="interface-card">
-            <div class="beacon"></div>
-            <span class="card-name">The Flotsam</span>
-            <span class="card-desc">Gateway to reclaimed artifacts, visual vanguard, and social residue.</span>
+            <div class="reticle"></div>
+            <span class="card-title">The Flotsam</span>
+            <span class="card-tagline">Access the digital hub: Hipsta Project, Social Residue, and curated favorites.</span>
         </a>
 
-        <a href="#" class="interface-card" style="opacity: 0.5; cursor: not-allowed;">
-            <div class="beacon"></div>
-            <span class="card-name">Field Logs</span>
-            <span class="card-desc">Chronicles of the ongoing journey toward the edge of the world.</span>
-        </a>
+        <div class="interface-card" style="opacity: 0.4; cursor: not-allowed;">
+            <div class="reticle" style="border-style: dashed;"></div>
+            <span class="card-title">Field Logs</span>
+            <span class="card-tagline">Personal entries and narrative observations. Connection pending.</span>
+        </div>
 
-        <a href="#" class="interface-card" style="opacity: 0.5; cursor: not-allowed;">
-            <div class="beacon"></div>
-            <span class="card-name">Directives</span>
-            <span class="card-desc">Active projects and upcoming architectural expansions.</span>
-        </a>
+        <div class="interface-card" style="opacity: 0.4; cursor: not-allowed;">
+            <div class="reticle" style="border-style: dashed;"></div>
+            <span class="card-title">Wayback</span>
+            <span class="card-tagline">Legacy web audits and discontinued domains. Awaiting decryption.</span>
+        </div>
 
     </section>
 
-    <section class="directives">
-        <div class="section-label">System_Directives_2026</div>
-        <div class="future-row"><span>01. RECLAIM_INSTAGRAM_ESTATE</span><span>[ COMPLETED ]</span></div>
-        <div class="future-row"><span>02. FINALIZE_FLOTSAM_ARCHITECTURE</span><span>[ COMPLETED ]</span></div>
-        <div class="future-row"><span>03. INITIATE_LIVING_LOGS</span><span>[ PENDING_SYNC ]</span></div>
-        <div class="future-row"><span>04. MAP_THE_OUTSIDE_WORLD</span><span>[ LOCKED ]</span></div>
+    <section class="directive-section">
+        <div class="directive-label">Active_Directives_2026</div>
+        <div class="log-row"><span>01. RECLAIM_SOCIAL_RESIDUE</span><span>[ STABLE_RELEASE ]</span></div>
+        <div class="log-row"><span>02. FINALIZE_FLOTSAM_ARCHITECTURE</span><span>[ STABLE_RELEASE ]</span></div>
+        <div class="log-row"><span>03. ESTABLISH_LIVING_INTERFACE</span><span>[ IN_PROGRESS ]</span></div>
+        <div class="log-row"><span>04. MAP_EXTERIOR_TERRAIN</span><span>[ LOCKED ]</span></div>
     </section>
 
     <div style="text-align: center; padding-bottom: 100px;">
-        <a href="index.html" style="color: rgba(255,255,255,0.2); text-decoration: none; font-size: 0.55rem; letter-spacing: 5px; text-transform: uppercase;">Return to Entrance</a>
+        <a href="index.html" style="color: rgba(255,255,255,0.15); text-decoration: none; font-size: 0.6rem; letter-spacing: 6px; text-transform: uppercase;">Exit Interface</a>
     </div>
 
 </body>
