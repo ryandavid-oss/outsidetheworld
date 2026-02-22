@@ -3,262 +3,234 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal | Outside The World</title>
+    <title>Interface | Outside The World</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <style>
-        /* THE TEAL STATUS TAG */
-.status-tag {
-    font-size: 0.55rem;
-    letter-spacing: 2px;
-    background: rgba(145,175,179, 0.1); /* Subtle Teal tint */
-    color: #91AFB3; /* The Wayback Teal */
-    padding: 4px 10px;
-    border: 1px solid rgba(145,175,179, 0.3);
-    border-radius: 3px;
-    display: inline-block;
-    margin-bottom: 15px; /* Creates space above the Header */
-    font-weight: 700;
-    text-transform: uppercase;
-}
-/* THE TEAL TAG LOOK */
-.status-tag {
-    font-size: 0.55rem;
-    letter-spacing: 2px;
-    background: rgba(145, 175, 179, 0.1); 
-    color: #91AFB3; /* The Archive Teal */
-    padding: 3px 8px;
-    border: 1px solid rgba(145, 175, 179, 0.3);
-    border-radius: 3px;
-    display: inline-block;
-    margin-bottom: 15px; /* THE PUSH: This gap creates the symmetry */
-    font-weight: 700;
-    text-transform: uppercase;
-}
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;900&family=Fira+Code:wght@300;500&display=swap');
 
-/* THE GHOST: This keeps the gap but hides the words */
-.status-tag.ghost {
-    visibility: hidden;
-    opacity: 0;
-}
-/* Update card behavior to stack items */
-.residue-card {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-/* Ensure Header margin is clean */
-.residue-card h3 {
-    margin-top: 0;
-}
         :root {
             --brand-blue: #6395EE;
             --brand-light-blue: #A0BEF5;
+            --brand-teal: #91AFB3;
             --bg-dark: #050505;
-            --transition-main: 0.8s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        body, html {
-            margin: 0; padding: 0;
+        body {
             background-color: var(--bg-dark);
-            color: white;
-            font-family: 'Inter', sans-serif;
-            scroll-behavior: smooth;
+            color: white; font-family: 'Inter', sans-serif;
+            margin: 0; padding: 0; overflow-x: hidden;
         }
 
-        @keyframes pageReveal {
-            from { opacity: 0; transform: translateY(20px); filter: blur(10px); }
-            to { opacity: 1; transform: translateY(0); filter: blur(0); }
+        /* 1. ATMOSPHERICS */
+        body::after {
+            content: " "; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%),
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+            background-size: 100% 3px, 3px 100%; pointer-events: none; z-index: 3000; opacity: 0.1;
         }
 
-    nav { 
-    position: fixed; 
-    top: 0; left: 0; width: 100%; 
-    padding: 40px; 
-    z-index: 1000; /* High z-index keeps it on top */
-    /* This creates a subtle glass effect that hides text passing behind the logo */
-    backdrop-filter: blur(10px);
-    background: linear-gradient(to bottom, rgba(5,5,5,1) 0%, rgba(5,5,5,0) 100%);
-    pointer-events: none; /* Allows you to click things 'through' the empty nav space */
-}
+        nav { 
+            position: fixed; top: 0; left: 0; width: 100%; padding: 40px; z-index: 3500; 
+            backdrop-filter: blur(10px);
+            background: linear-gradient(to bottom, rgba(5,5,5,1) 0%, rgba(5,5,5,0) 100%);
+        }
+        .nav-logo { width: 220px; filter: drop-shadow(0 0 20px rgba(99, 149, 238, 0.2)); }
 
-.nav-logo { 
-    width: 220px; 
-    pointer-events: auto; /* Re-enables clicking the logo itself */
-    filter: drop-shadow(0 0 20px rgba(99, 149, 238, 0.3)); 
-}
+        /* 2. CINEMATIC HERO SECTION */
+        .hero { 
+            padding: 180px 20px 60px; text-align: center;
+        }
+        
+        /* CINEMATIC FOGGY LETTERING */
+        h1 { 
+            font-size: clamp(1.8rem, 5vw, 3.5rem); font-weight: 900; letter-spacing: 12px; 
+            margin: 0; line-height: 1.2; text-transform: uppercase;
+            background: linear-gradient(to bottom, #fff 10%, #444 90%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 15px rgba(255,255,255,0.1));
+        }
 
-        /* 2. HERO SECTION */
-        .hero { height: 40vh; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding-bottom: 40px; text-align: center; animation: pageReveal 1.2s ease-out forwards; }
-        h1 { font-size: 3.5rem; font-weight: 900; letter-spacing: 10px; text-transform: uppercase; color: white; text-shadow: 0 0 20px rgba(99, 149, 238, 0.4); }
+        .typing-container {
+            font-family: 'Fira Code', monospace; font-size: 0.75rem; color: var(--brand-teal);
+            letter-spacing: 4px; text-transform: uppercase; margin-top: 30px; min-height: 1rem;
+        }
+        .cursor { display: inline-block; width: 8px; height: 15px; background: var(--brand-teal); margin-left: 5px; animation: blink 1s infinite; vertical-align: middle; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-        /* 3. RECTANGLE GRID */
-        .archive-container { max-width: 1200px; margin: 0 auto 50px; padding: 0 40px; display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 25px; animation: pageReveal 1.2s ease-out 0.4s forwards; opacity: 0; }
-        .residue-card { border: 1px solid rgba(255, 255, 255, 0.05); padding: 35px 40px; background: rgba(255, 255, 255, 0.01); transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); text-decoration: none; color: inherit; position: relative; cursor: pointer; }
-       .residue-card:hover { 
-    border-color: var(--brand-blue); 
-    background: rgba(99, 149, 238, 0.06); 
-    transform: translateY(-5px) scale(1.02); /* Lifts the card up */
-    box-shadow: 0 20px 40px rgba(99, 149, 238, 0.15); /* Adds a blue glow */
-}
-        /* 4. CORNER RETICLE (+ to -) */
-        .card-beacon { position: absolute; top: 25px; right: 25px; width: 20px; height: 20px; color: var(--brand-blue); transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1); }
-        .card-beacon::before, .card-beacon::after { content: ''; position: absolute; background: currentColor; transition: transform 0.6s, opacity 0.4s; }
-        .card-beacon::before { top: 0; left: 9px; width: 2px; height: 20px; } /* Vertical */
-        .card-beacon::after { top: 9px; left: 0; width: 20px; height: 2px; } /* Horizontal */
+        /* 3. ASYMMETRICAL SPLIT LAYOUT */
+        .main-interface {
+            display: flex; max-width: 1400px; margin: 40px auto 100px; padding: 0 40px; gap: 60px;
+        }
 
-        /* Minus Sign Logic */
-        .residue-card.active .card-beacon::before { transform: rotate(90deg); opacity: 0; }
+        /* LEFT: THE NARRATIVE FEED */
+        .feed-column { flex: 2; text-align: left; animation: pageReveal 1.2s ease-out; }
+        
+        #latest-post-area h2 { 
+            font-size: 2.2rem; font-weight: 800; color: var(--brand-light-blue); 
+            margin: 0 0 10px 0; letter-spacing: -0.5px;
+        }
+        
+        /* THE FULL WHITE DATE STYLE */
+        .post-date { 
+            font-family: 'Inter', sans-serif; font-size: 1rem; color: #ffffff; 
+            margin-bottom: 35px; opacity: 1; letter-spacing: 0.5px; font-weight: 400;
+        }
+        
+        #md-render p { line-height: 1.8; color: #aaa; font-size: 1.15rem; font-weight: 300; margin-bottom: 25px; }
 
-.residue-card h3 { 
-    font-size: 1.4rem; /* Significantly larger from the original 0.8rem */
-    font-weight: 900; 
-    letter-spacing: 6px; 
-    text-transform: uppercase; 
-    color: var(--brand-blue); 
-    margin-bottom: 15px;
-    transition: all 0.4s ease;
-}
-        .residue-card p { font-size: 0.85rem; line-height: 1.6; color: #666; margin: 0; transition: color 0.4s ease; max-width: 85%; }
+        /* THE TEAL DIVIDER */
+        .vertical-divider { 
+            width: 1px; background: rgba(145, 175, 179, 0.3); align-self: stretch; 
+            box-shadow: 0 0 15px rgba(145, 175, 179, 0.2); 
+        }
 
-        /* 5. THE EXPLODING POST */
-        #post-viewer { max-width: 900px; margin: 0 auto 100px; padding: 0 40px; height: 0; overflow: hidden; opacity: 0; transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1); }
-        #post-viewer.active { height: auto; opacity: 1; padding-top: 60px; border-top: 1px solid rgba(255, 255, 255, 0.05); }
-        .post-content { background: rgba(255,255,255,0.02); padding: 60px; border-left: 2px solid var(--brand-blue); }
-      .post-content h2 { 
-    font-size: 2.2rem; 
-    letter-spacing: -0.5px; /* Slight negative spacing makes bold titles pop */
-    margin-bottom: 20px; 
-    color: var(--brand-light-blue); 
-    font-weight: 800;
-}
-        .post-content p { 
-    line-height: 1.6; 
-    color: #aaa; 
-    font-size: 1.1rem; 
-    margin-bottom: 25px; /* Adds consistent gaps between paragraphs */
-}
+        /* RIGHT: SYSTEM CARDS */
+        .cards-column { flex: 1; display: flex; flex-direction: column; gap: 20px; }
 
-        footer { padding: 60px 0; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
-        footer p { font-size: 0.55rem; letter-spacing: 5px; color: rgba(255,255,255,0.1); text-transform: uppercase; }
-   /* MOBILE FIX: Adds headroom so text starts below the logo */
-@media (max-width: 768px) {
-    /* 1. Centering the Nav and Logo */
-    nav {
-        text-align: center !important; /* Forces the logo to the middle */
-        padding: 30px 0 !important;   /* Tightens the top gap for mobile */
-    }
+        .archive-card {
+            border: 1px solid rgba(255, 255, 255, 0.05); padding: 35px 40px;
+            background: rgba(255, 255, 255, 0.01); text-decoration: none; color: inherit;
+            position: relative; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
 
-    .nav-logo {
-        width: 80% !important;        /* Matches the 'Hero' scale from index.html */
-        max-width: 340px;             /* Prevents it from getting too huge on larger phones */
-    }
+        .archive-card:hover {
+            border-color: var(--brand-teal); background: rgba(145, 175, 179, 0.08);
+            transform: translateX(10px); box-shadow: 0 20px 40px rgba(145, 175, 179, 0.15);
+        }
 
-    /* 2. Adjusting the Hero Content */
-    .hero {
-        padding-top: 200px !important; /* Pushes text further down to clear the larger centered logo */
-        height: auto !important;
-        min-height: 45vh;
-        justify-content: flex-start;
-    }
+        .archive-card h3 { 
+            font-size: 1.3rem; font-weight: 900; letter-spacing: 5px; 
+            text-transform: uppercase; color: var(--brand-blue); margin: 0 0 10px 0;
+            transition: color 0.4s;
+        }
+        .archive-card:hover h3 { color: var(--brand-teal); }
+        .archive-card p { font-size: 0.75rem; line-height: 1.6; color: #555; text-transform: uppercase; margin: 0; }
 
-    h1 {
-        font-size: 2rem !important;    /* Clean, centered typography */
-        letter-spacing: 4px !important;
-        line-height: 1.3;
-        margin-top: 20px;
-        mask-image: none !important;
-        -webkit-mask-image: none !important;
-    }
-}
-   </style>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+        .card-beacon { 
+            position: absolute; top: 25px; right: 25px; width: 20px; height: 20px; 
+            color: var(--brand-blue); transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1); 
+        }
+        .card-beacon::before, .card-beacon::after { content: ''; position: absolute; background: currentColor; }
+        .card-beacon::before { top: 0; left: 9px; width: 2px; height: 20px; }
+        .card-beacon::after { top: 9px; left: 0; width: 20px; height: 2px; }
+        .archive-card:hover .card-beacon { transform: rotate(90deg); color: var(--brand-teal); }
+
+        footer { padding: 80px 0; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
+        footer p { font-size: 0.55rem; letter-spacing: 5px; color: rgba(255,255,255,0.15); text-transform: uppercase; }
+
+        @keyframes pageReveal { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        @media (max-width: 1024px) {
+            .main-interface { flex-direction: column; }
+            .vertical-divider { width: 100%; height: 1px; margin: 40px 0; }
+        }
+    </style>
 </head>
 <body>
+
     <nav><a href="index.html"><img src="Images/Equal.svg" alt="Back" class="nav-logo"></a></nav>
-<div class="hero">
-    <h1>A QUARTER-CENTURY OF<br>DIGITAL RESIDUE</h1>
-</div>
-    <main class="archive-container">
-        <a href="wayback.html" class="residue-card">
-    <div class="card-beacon"></div>
-    
-    <span class="status-tag ghost">HIDDEN</span> 
 
-    <h3>THE ARCHIVE</h3>
-    <p>Historical observations and technical residue from 2001 to present.</p>
-</a>
-        <div class="residue-card" id="current-post-trigger" onclick="togglePost()">
-    <div class="card-beacon"></div>
-    
-    <span class="status-tag ghost">HIDDEN</span> 
+    <header class="hero">
+        <h1>A QUARTER-CENTURY OF<br>DIGITAL RESIDUE</h1>
+        <div class="typing-container">
+            <span id="typing-text"></span><span class="cursor"></span>
+        </div>
+    </header>
 
-    <h3>CURRENT POST</h3>
-    <p>Active narratives documenting the journey outside the world.</p>
-</div>
-<div class="residue-card" style="cursor: default;">
-    <div class="card-beacon"></div>
-    <span class="status-tag">COMING SOON</span>
-    <h3>THE FLOTSAM</h3>
-    <p>Digital wreckage and unorganized fragments of the estate's history.</p>
-</div>
+    <main class="main-interface">
+        <section class="feed-column">
+            <div id="latest-post-area">
+                <p style="color: #444; letter-spacing: 2px;">POLLING SATELLITE DATA...</p>
+            </div>
+        </section>
+
+        <div class="vertical-divider"></div>
+
+        <aside class="cards-column">
+            <a href="wayback.html" class="archive-card">
+                <div class="card-beacon"></div>
+                <h3>The Archive</h3>
+                <p>Historical residue from 2001 to present.</p>
+            </a>
+
+            <a href="flotsam.html" class="archive-card">
+                <div class="card-beacon"></div>
+                <h3>The Flotsam</h3>
+                <p>Visual vanguard and social residue archives.</p>
+            </a>
+
+            <div class="archive-card" style="opacity: 0.3; cursor: default;">
+                <div class="card-beacon"></div>
+                <h3>The Future</h3>
+                <p>Establishing connection to the exterior. [LOCKED]</p>
+            </div>
+        </aside>
     </main>
-<section id="post-viewer" style="display: none;">
-    <article class="post-content" id="latest-residue">
-        <p style="color: #666; letter-spacing: 2px;">SYNCHRONIZING NARRATIVE...</p>
-    </article>
-</section>
-    <footer><p>© 2026 OUTSIDE THE WORLD LLC &nbsp; | &nbsp; SYSTEMS & STORIES</p></footer>
- <script>
-function togglePost() {
-    var viewer = document.getElementById('post-viewer');
-    var trigger = document.getElementById('current-post-trigger');
-    var contentArea = document.getElementById('latest-residue');
 
-    if (viewer.style.display === 'none' || viewer.style.display === '') {
-        viewer.style.display = 'block';
-        contentArea.innerHTML = "<p style='color: #666; letter-spacing: 2px;'>SYNCHRONIZING...</p>";
-        
-        fetch('./manifest.json')
-            .then(function(res) { 
-                if (!res.ok) throw new Error("Manifest not found");
-                return res.json(); 
-            })
-            .then(function(data) {
-                if (data.length > 0) {
-                    var latestPost = data[0]; 
-                    var latestFile = latestPost.file;
-                    
-                    return fetch('./blogger_posts/' + latestFile);
-                } else {
-                    throw new Error("No entries found in manifest.");
-                }
-            })
-            .then(function(res) { 
-                if (!res.ok) throw new Error("Post file not found");
-                return res.text(); 
-            })
-            .then(function(text) {
-                // THE FIX: We no longer create headerHtml from the manifest.
-                // We let the Markdown file's "# Title" do the work.
-                var bodyHtml = marked.parse(text);
-                
-                contentArea.innerHTML = bodyHtml;
-                viewer.classList.add('active');
-                
-                setTimeout(function() { 
-                    viewer.scrollIntoView({ behavior: 'smooth', block: 'start' }); 
-                }, 300);
-            })
-            .catch(function(err) {
-                console.error("Archive Error:", err);
-                contentArea.innerHTML = "<p style='color:red;'>ERROR: " + err.message + "</p>";
-            });
-    } else {
-        viewer.style.display = 'none';
-        viewer.classList.remove('active');
-    }
-}
+    <footer><p>© 2026 OUTSIDE THE WORLD LLC &nbsp; | &nbsp; SYSTEMS & STORIES</p></footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        const typeTarget = document.getElementById('typing-text');
+        const typeText = "CURRENT_FEED_SYNCHRONIZED";
+        let charIndex = 0;
+
+        function typeWriter() {
+            if (charIndex < typeText.length) {
+                typeTarget.innerHTML += typeText.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeWriter, 120);
+            }
+        }
+
+        function syncLatestPost() {
+            const contentArea = document.getElementById('latest-post-area');
+            fetch('./manifest.json')
+                .then(res => res.json())
+                .then(data => {
+                    if (data.length > 0) {
+                        const latest = data[0];
+                        // We use the full manifest date for our "Main" display
+                        const postDate = latest.date; 
+
+                        fetch('./blogger_posts/' + latest.file)
+                            .then(res => res.text())
+                            .then(text => {
+                                const lines = text.split('\n');
+                                
+                                // 1. Title Extraction
+                                const rawTitle = lines[0].replace('# ', '').trim();
+                                
+                                // 2. DATE SURGERY: Skip the title AND any redundant dates in the file
+                                let bodyStartIndex = 1;
+                                while (lines[bodyStartIndex] !== undefined && 
+                                      (lines[bodyStartIndex].trim() === "" || 
+                                       /\d{4}/.test(lines[bodyStartIndex]) || 
+                                       lines[bodyStartIndex].includes(','))) {
+                                    bodyStartIndex++;
+                                }
+                                
+                                const bodyContent = lines.slice(bodyStartIndex).join('\n');
+
+                                contentArea.innerHTML = `
+                                    <h2>${rawTitle}</h2>
+                                    <div class="post-date">${postDate}</div>
+                                    <div id="md-render"></div>
+                                `;
+                                document.getElementById('md-render').innerHTML = marked.parse(bodyContent);
+                            });
+                    }
+                })
+                .catch(err => {
+                    console.error("Sync Error:", err);
+                    contentArea.innerHTML = "<p>Narrative connection lost.</p>";
+                });
+        }
+
+        window.onload = () => {
+            setTimeout(typeWriter, 1000);
+            syncLatestPost();
+        };
     </script>
 </body>
 </html>
