@@ -41,13 +41,13 @@
             padding: 180px 20px 60px; text-align: center;
         }
         
-        /* Updated Title Logic */
+        /* CINEMATIC FOGGY LETTERING */
         h1 { 
-            font-size: clamp(2rem, 6vw, 4rem); font-weight: 900; letter-spacing: 8px; 
-            margin: 0; line-height: 1.1; text-transform: uppercase;
-            background: linear-gradient(to bottom, #fff 0%, #444 100%);
+            font-size: clamp(1.8rem, 5vw, 3.5rem); font-weight: 900; letter-spacing: 12px; 
+            margin: 0; line-height: 1.2; text-transform: uppercase;
+            background: linear-gradient(to bottom, #fff 10%, #444 90%);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 20px rgba(255,255,255,0.05));
+            filter: drop-shadow(0 0 15px rgba(255,255,255,0.1));
         }
 
         .typing-container {
@@ -66,21 +66,14 @@
         .feed-column { flex: 2; text-align: left; animation: pageReveal 1.2s ease-out; }
         
         #latest-post-area h2 { 
-            font-size: 2.2rem; 
-            font-weight: 800; 
-            color: var(--brand-light-blue); 
-            margin: 0 0 10px 0; 
-            letter-spacing: -0.5px;
+            font-size: 2.2rem; font-weight: 800; color: var(--brand-light-blue); 
+            margin: 0 0 10px 0; letter-spacing: -0.5px;
         }
         
+        /* THE FULL WHITE DATE STYLE */
         .post-date { 
-            font-family: 'Inter', sans-serif; 
-            font-size: 0.9rem; 
-            color: #ffffff; 
-            margin-bottom: 35px; 
-            opacity: 0.9;
-            letter-spacing: 1px;
-            font-weight: 400;
+            font-family: 'Inter', sans-serif; font-size: 1rem; color: #ffffff; 
+            margin-bottom: 35px; opacity: 1; letter-spacing: 0.5px; font-weight: 400;
         }
         
         #md-render p { line-height: 1.8; color: #aaa; font-size: 1.15rem; font-weight: 300; margin-bottom: 25px; }
@@ -145,7 +138,6 @@
     </header>
 
     <main class="main-interface">
-        
         <section class="feed-column">
             <div id="latest-post-area">
                 <p style="color: #444; letter-spacing: 2px;">POLLING SATELLITE DATA...</p>
@@ -173,7 +165,6 @@
                 <p>Establishing connection to the exterior. [LOCKED]</p>
             </div>
         </aside>
-
     </main>
 
     <footer><p>© 2026 OUTSIDE THE WORLD LLC &nbsp; | &nbsp; SYSTEMS & STORIES</p></footer>
@@ -199,7 +190,8 @@
                 .then(data => {
                     if (data.length > 0) {
                         const latest = data[0];
-                        const postDate = latest.date;
+                        // We use the full manifest date for our "Main" display
+                        const postDate = latest.date; 
 
                         fetch('./blogger_posts/' + latest.file)
                             .then(res => res.text())
@@ -209,11 +201,12 @@
                                 // 1. Title Extraction
                                 const rawTitle = lines[0].replace('# ', '').trim();
                                 
-                                // 2. Enhanced Cleanup: Remove extra dates
-                                // We skip the title line AND check if the next line is a date or metadata
+                                // 2. DATE SURGERY: Skip the title AND any redundant dates in the file
                                 let bodyStartIndex = 1;
-                                // Common pattern: Skip the title line and any empty lines or lines matching a date
-                                while (lines[bodyStartIndex] && (lines[bodyStartIndex].trim() === "" || /\d{4}/.test(lines[bodyStartIndex]))) {
+                                while (lines[bodyStartIndex] !== undefined && 
+                                      (lines[bodyStartIndex].trim() === "" || 
+                                       /\d{4}/.test(lines[bodyStartIndex]) || 
+                                       lines[bodyStartIndex].includes(','))) {
                                     bodyStartIndex++;
                                 }
                                 
