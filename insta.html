@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Residue | Outside The World</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;900&family=Fira+Code:wght@300;500&display=swap');
+        :root { --brand-teal: #91AFB3; --brand-blue: #6395EE; --bg-dark: #050505; }
+        
+        body { background-color: var(--bg-dark); color: white; font-family: 'Inter', sans-serif; margin: 0; padding: 160px 20px 60px; }
+        
+        /* NAVIGATION */
+        nav { position: fixed; top: 0; left: 0; width: 100%; padding: 40px; z-index: 3500; backdrop-filter: blur(10px); background: linear-gradient(to bottom, rgba(5,5,5,1) 0%, rgba(5,5,5,0) 100%); pointer-events: none; }
+        .nav-logo { width: 220px; pointer-events: auto; filter: drop-shadow(0 0 20px rgba(145, 175, 179, 0.2)); }
+        
+        /* HEADER */
+        .header-area { text-align: center; margin-bottom: 60px; position: relative; z-index: 10; }
+        .header-area h1 { font-size: clamp(1.2rem, 5vw, 2.5rem); letter-spacing: 15px; text-transform: uppercase; margin-top: 20px; font-weight: 900; }
+        .status-tag { font-family: 'Fira Code', monospace; font-size: 0.6rem; letter-spacing: 4px; color: var(--brand-teal); border: 1px solid rgba(145, 175, 179, 0.3); padding: 6px 15px; display: inline-block; text-transform: uppercase; cursor: help; }
+
+        /* GRID */
+        .vault-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; max-width: 1400px; margin: 0 auto; min-height: 200px; }
+        .artifact-card { background: #111; cursor: pointer; position: relative; aspect-ratio: 1 / 1; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); }
+        .artifact-card img { width: 100%; height: 100%; object-fit: cover; transition: 0.4s; }
+        .artifact-card:hover img { transform: scale(1.1); }
+
+        /* MODAL */
+        #modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); z-index: 4000; display: none; overflow-y: auto; }
+        .modal-content { max-width: 800px; width: 95%; margin: 100px auto; padding-bottom: 100px; }
+        .modal-content h1 { font-family: 'Fira Code'; color: var(--brand-teal); font-size: 1rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; margin-bottom: 30px; }
+        .modal-content img { width: 100%; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 30px; }
+        .modal-content p { line-height: 1.8; color: #ccc; font-size: 1.1rem; }
+
+        /* DEBUG BOX */
+        #debug-log { position: fixed; bottom: 20px; left: 20px; background: red; color: white; padding: 10px; font-family: monospace; font-size: 10px; z-index: 9999; display: none; }
+    </style>
+</head>
+<body>
+    <div id="debug-log"></div>
+    <nav><a href="flotsam.html"><img src="Images/Equal.svg" alt="Back" class="nav-logo"></a></nav>
+    
+    <div class="header-area">
+        <div class="status-tag">TYPE: SOCIAL_RESIDUE // RECLAIMED_2026</div>
+        <h1>Social Residue</h1>
+    </div>
+
+    <div class="vault-grid" id="grid"></div>
+
+    <div id="modal" onclick="if(event.target == this) closeModal()">
+        <div class="modal-content" id="modal-inner"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        const debug = document.getElementById('debug-log');
+        function log(msg) { debug.style.display = 'block'; debug.innerHTML += msg + "<br>"; console.log(msg); }
+
+        async function loadVault() {
+            try {
+                log("Initializing fetch for insta_manifest.json...");
+                // Use a relative path that works on GitHub Pages
+                const res = await fetch('./insta_manifest.json');
+                
+                if (!res.ok) throw new Error("Manifest not found (404)");
+                
+                const artifacts = await res.json();
+                log("Manifest loaded. Posts detected: " + artifacts.length);
+                
+                const grid = document.getElementById('grid');
+                if (!grid) throw new Error("Grid element not found in HTML");
+
+                artifacts.forEach((item, index) => {
+                    const card = document.createElement('div');
+                    card.className = 'artifact-card';
+                    card.innerHTML = `<img src="${item.image}" loading="lazy" onerror="this.src='https://via.placeholder.com/300?text=Missing+Image'">`;
+                    card.onclick = () => openArtifact(item.file, item.image);
+                    grid.appendChild(card);
+                });
+                
+                log("Grid population successful.");
+            } catch (e) {
+                log("CRITICAL ERROR: " + e.message);
+            }
+        }
+
+        async function openArtifact(file, img) {
+            try {
+                const res = await fetch(file);
+                if (!res.ok) throw new Error("Markdown file not found");
+                const md = await res.text();
+                document.getElementById('modal-inner').innerHTML = marked.parse(md);
+                document.getElementById('modal').style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            } catch (e) {
+                alert("Error loading story: " + e.message);
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Run on load
+        window.onload = loadVault;
+    </script>
+</body>
+</html>
