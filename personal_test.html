@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal | Outside The World</title>
+    <title>Interface | Outside The World</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;900&family=Fira+Code:wght@300;500&display=swap');
@@ -36,18 +36,11 @@
         }
         .nav-logo { width: 220px; filter: drop-shadow(0 0 20px rgba(99, 149, 238, 0.2)); }
 
-        /* 2. CINEMATIC HERO (The Present) */
+        /* 2. CINEMATIC HERO SECTION */
         .hero { 
-            min-height: 60vh; display: flex; flex-direction: column; align-items: center; 
-            justify-content: center; text-align: center; padding: 160px 20px 80px;
+            padding: 180px 20px 60px; text-align: center;
         }
         
-        .status-tag {
-            font-family: 'Fira Code', monospace; font-size: 0.6rem; letter-spacing: 4px;
-            color: var(--brand-teal); border: 1px solid rgba(145, 175, 179, 0.3);
-            padding: 6px 15px; display: inline-block; text-transform: uppercase; margin-bottom: 30px;
-        }
-
         h1 { 
             font-size: clamp(2.5rem, 8vw, 5rem); font-weight: 900; letter-spacing: -2px; 
             margin: 0; line-height: 0.85; text-transform: uppercase;
@@ -55,41 +48,49 @@
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
-        /* THE AUTOMATIC POST REVEAL */
-        #latest-post-area {
-            max-width: 800px; margin: 60px auto; padding: 0 40px;
-            border-left: 2px solid var(--brand-blue); animation: fadeIn 2s ease-out;
+        /* TYPEWRITER SUBTITLE */
+        .typing-container {
+            font-family: 'Fira Code', monospace; font-size: 0.75rem; color: var(--brand-teal);
+            letter-spacing: 4px; text-transform: uppercase; margin-top: 30px; min-height: 1rem;
         }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .cursor { display: inline-block; width: 8px; height: 15px; background: var(--brand-teal); margin-left: 5px; animation: blink 1s infinite; vertical-align: middle; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-        #latest-post-area h2 { color: var(--brand-light-blue); font-size: 2.2rem; font-weight: 800; margin-bottom: 20px; }
-        #latest-post-area p { line-height: 1.8; color: #aaa; font-size: 1.1rem; }
-
-        /* 3. INTERFACE CLUSTER (The Past/Archive) */
-        .interface-grid {
-            max-width: 1200px; margin: 100px auto; padding: 0 40px;
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 25px;
+        /* 3. SPLIT INTERFACE LAYOUT */
+        .main-interface {
+            display: flex; max-width: 1400px; margin: 60px auto 100px; padding: 0 40px; gap: 60px;
         }
+
+        /* LEFT: THE FEED */
+        .feed-column { flex: 2; text-align: left; animation: pageReveal 1.2s ease-out; }
+        #latest-post-area h2 { font-size: 2.5rem; font-weight: 800; color: var(--brand-light-blue); margin: 0 0 10px 0; letter-spacing: -1px; }
+        .post-date { font-family: 'Fira Code'; font-size: 0.7rem; color: var(--brand-teal); margin-bottom: 30px; text-transform: uppercase; letter-spacing: 2px; }
+        #latest-post-area p { line-height: 1.8; color: #aaa; font-size: 1.15rem; font-weight: 300; margin-bottom: 25px; }
+
+        /* TEAL DIVIDER */
+        .vertical-divider { width: 1px; background: rgba(145, 175, 179, 0.3); align-self: stretch; box-shadow: 0 0 15px rgba(145, 175, 179, 0.2); }
+
+        /* RIGHT: THE CARDS */
+        .cards-column { flex: 1; display: flex; flex-direction: column; gap: 20px; }
 
         .archive-card {
-            border: 1px solid rgba(255, 255, 255, 0.05); padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.05); padding: 35px 40px;
             background: rgba(255, 255, 255, 0.01); text-decoration: none; color: inherit;
             position: relative; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .archive-card:hover {
             border-color: var(--brand-teal); background: rgba(145, 175, 179, 0.08);
-            transform: translateY(-10px); box-shadow: 0 30px 60px rgba(145, 175, 179, 0.15);
+            transform: translateX(10px); box-shadow: 0 20px 40px rgba(145, 175, 179, 0.15);
         }
 
         .archive-card h3 { 
-            font-size: 1.4rem; font-weight: 900; letter-spacing: 6px; 
-            text-transform: uppercase; color: var(--brand-blue); margin: 0 0 15px 0;
+            font-size: 1.3rem; font-weight: 900; letter-spacing: 5px; 
+            text-transform: uppercase; color: var(--brand-blue); margin: 0 0 10px 0;
             transition: color 0.4s;
         }
         .archive-card:hover h3 { color: var(--brand-teal); }
-
-        .archive-card p { font-size: 0.85rem; line-height: 1.6; color: #666; text-transform: uppercase; margin: 0; }
+        .archive-card p { font-size: 0.75rem; line-height: 1.6; color: #555; text-transform: uppercase; margin: 0; }
 
         /* THE PLUS BEACON (+) */
         .card-beacon { 
@@ -99,15 +100,16 @@
         .card-beacon::before, .card-beacon::after { content: ''; position: absolute; background: currentColor; }
         .card-beacon::before { top: 0; left: 9px; width: 2px; height: 20px; }
         .card-beacon::after { top: 9px; left: 0; width: 20px; height: 2px; }
-
         .archive-card:hover .card-beacon { transform: rotate(90deg); color: var(--brand-teal); }
 
         footer { padding: 80px 0; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
         footer p { font-size: 0.55rem; letter-spacing: 5px; color: rgba(255,255,255,0.15); text-transform: uppercase; }
 
-        @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            .interface-grid { grid-template-columns: 1fr; }
+        @keyframes pageReveal { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        @media (max-width: 1024px) {
+            .main-interface { flex-direction: column; }
+            .vertical-divider { width: 100%; height: 1px; margin: 40px 0; }
         }
     </style>
 </head>
@@ -116,33 +118,41 @@
     <nav><a href="index.html"><img src="Images/Equal.svg" alt="Back" class="nav-logo"></a></nav>
 
     <header class="hero">
-        <div class="status-tag">// CURRENT_FEED_SYNCHRONIZED</div>
-        <h1>The First<br>Directive</h1>
-        
-        <div id="latest-post-area">
-            <p style="color: #444; letter-spacing: 2px;">POLLING SATELLITE DATA...</p>
+        <h1>The First Directive</h1>
+        <div class="typing-container">
+            <span id="typing-text"></span><span class="cursor"></span>
         </div>
     </header>
 
-    <main class="interface-grid">
+    <main class="main-interface">
         
-        <a href="wayback.html" class="archive-card">
-            <div class="card-beacon"></div>
-            <h3>The Archive</h3>
-            <p>Historical observations and technical residue from 2001 to present.</p>
-        </a>
+        <section class="feed-column">
+            <div id="latest-post-area">
+                <p style="color: #444; letter-spacing: 2px;">POLLING SATELLITE DATA...</p>
+            </div>
+        </section>
 
-        <a href="flotsam.html" class="archive-card">
-            <div class="card-beacon"></div>
-            <h3>The Flotsam</h3>
-            <p>Gateway to reclaimed artifacts, visual vanguard, and social residue.</p>
-        </a>
+        <div class="vertical-divider"></div>
 
-        <div class="archive-card" style="opacity: 0.3; cursor: not-allowed;">
-            <div class="card-beacon"></div>
-            <h3>Field Logs</h3>
-            <p>Chronicles of the ongoing journey toward the edge of the world. [LOCKED]</p>
-        </div>
+        <aside class="cards-column">
+            <a href="wayback.html" class="archive-card">
+                <div class="card-beacon"></div>
+                <h3>The Archive</h3>
+                <p>Historical residue from 2001 to present.</p>
+            </a>
+
+            <a href="flotsam.html" class="archive-card">
+                <div class="card-beacon"></div>
+                <h3>The Flotsam</h3>
+                <p>Visual vanguard and social residue archives.</p>
+            </a>
+
+            <div class="archive-card" style="opacity: 0.3; cursor: default;">
+                <div class="card-beacon"></div>
+                <h3>The Future</h3>
+                <p>Establishing connection to the exterior. [LOCKED]</p>
+            </div>
+        </aside>
 
     </main>
 
@@ -150,27 +160,49 @@
 
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script>
-        // Automatic Synchronizer
+        // TYPEWRITER EFFECT
+        const typeTarget = document.getElementById('typing-text');
+        const typeText = "CURRENT_FEED_SYNCHRONIZED";
+        let charIndex = 0;
+
+        function typeWriter() {
+            if (charIndex < typeText.length) {
+                typeTarget.innerHTML += typeText.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeWriter, 120);
+            }
+        }
+
+        // LATEST POST SYNC
         function syncLatestPost() {
             const contentArea = document.getElementById('latest-post-area');
-            
             fetch('./manifest.json')
                 .then(res => res.json())
                 .then(data => {
                     if (data.length > 0) {
-                        return fetch('./blogger_posts/' + data[0].file);
+                        const latest = data[0];
+                        // Render Date and Content
+                        contentArea.innerHTML = `
+                            <h2>${latest.title}</h2>
+                            <div class="post-date">// CAPTURED: ${latest.date}</div>
+                            <div id="md-render"></div>
+                        `;
+                        return fetch('./blogger_posts/' + latest.file);
                     }
                 })
                 .then(res => res.text())
                 .then(text => {
-                    contentArea.innerHTML = marked.parse(text);
+                    document.getElementById('md-render').innerHTML = marked.parse(text);
                 })
                 .catch(err => {
-                    console.error("Sync Error:", err);
-                    contentArea.innerHTML = "<p>Narrative connection lost. Local encryption active.</p>";
+                    contentArea.innerHTML = "<p>Narrative connection lost.</p>";
                 });
         }
-        window.onload = syncLatestPost;
+
+        window.onload = () => {
+            setTimeout(typeWriter, 1000);
+            syncLatestPost();
+        };
     </script>
 </body>
 </html>
