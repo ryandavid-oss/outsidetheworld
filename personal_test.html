@@ -48,7 +48,6 @@
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
-        /* TYPEWRITER SUBTITLE */
         .typing-container {
             font-family: 'Fira Code', monospace; font-size: 0.75rem; color: var(--brand-teal);
             letter-spacing: 4px; text-transform: uppercase; margin-top: 30px; min-height: 1rem;
@@ -64,14 +63,13 @@
         /* LEFT: THE NARRATIVE FEED */
         .feed-column { flex: 2; text-align: left; animation: pageReveal 1.2s ease-out; }
         
-        /* The Blue Post Title (Corrected formatting) */
+        /* The Blue Post Title (Fixed Punctuation) */
         #latest-post-area h2 { 
             font-size: 2.2rem; 
             font-weight: 800; 
             color: var(--brand-light-blue); 
             margin: 0 0 10px 0; 
             letter-spacing: -0.5px;
-            /* No uppercase here to preserve punctuation */
         }
         
         /* The White Date */
@@ -80,11 +78,11 @@
             font-size: 0.9rem; 
             color: #ffffff; 
             margin-bottom: 35px; 
-            opacity: 0.8;
+            opacity: 0.9;
             letter-spacing: 1px;
         }
         
-        #latest-post-area p { line-height: 1.8; color: #aaa; font-size: 1.15rem; font-weight: 300; margin-bottom: 25px; }
+        #md-render p { line-height: 1.8; color: #aaa; font-size: 1.15rem; font-weight: 300; margin-bottom: 25px; }
 
         /* THE TEAL DIVIDER */
         .vertical-divider { 
@@ -114,7 +112,6 @@
         .archive-card:hover h3 { color: var(--brand-teal); }
         .archive-card p { font-size: 0.75rem; line-height: 1.6; color: #555; text-transform: uppercase; margin: 0; }
 
-        /* THE PLUS BEACON (+) */
         .card-beacon { 
             position: absolute; top: 25px; right: 25px; width: 20px; height: 20px; 
             color: var(--brand-blue); transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1); 
@@ -182,7 +179,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script>
-        // TYPEWRITER EFFECT
         const typeTarget = document.getElementById('typing-text');
         const typeText = "CURRENT_FEED_SYNCHRONIZED";
         let charIndex = 0;
@@ -195,7 +191,6 @@
             }
         }
 
-        // LATEST POST SYNC
         function syncLatestPost() {
             const contentArea = document.getElementById('latest-post-area');
             fetch('./manifest.json')
@@ -203,25 +198,26 @@
                 .then(data => {
                     if (data.length > 0) {
                         const latest = data[0];
-                        
-                        // We check the manifest title. If it's "Maybe a poem", 
-                        // we'll manually ensure punctuation is displayed as requested.
-                        let displayTitle = latest.title;
-                        if (displayTitle === "Maybe a poem") {
-                            displayTitle = "Maybe, a poem?";
-                        }
+                        const postDate = latest.date;
 
-                        contentArea.innerHTML = `
-                            <h2>${displayTitle}</h2>
-                            <div class="post-date">${latest.date}</div>
-                            <div id="md-render"></div>
-                        `;
-                        return fetch('./blogger_posts/' + latest.file);
+                        fetch('./blogger_posts/' + latest.file)
+                            .then(res => res.text())
+                            .then(text => {
+                                // 1. Extract the Title from the Markdown file (removes the '#' and keeps punctuation)
+                                const lines = text.split('\n');
+                                const rawTitle = lines[0].replace('# ', '').trim();
+                                
+                                // 2. Remove the first line from the body to avoid duplicate title
+                                const bodyContent = lines.slice(1).join('\n');
+
+                                contentArea.innerHTML = `
+                                    <h2>${rawTitle}</h2>
+                                    <div class="post-date">${postDate}</div>
+                                    <div id="md-render"></div>
+                                `;
+                                document.getElementById('md-render').innerHTML = marked.parse(bodyContent);
+                            });
                     }
-                })
-                .then(res => res.text())
-                .then(text => {
-                    document.getElementById('md-render').innerHTML = marked.parse(text);
                 })
                 .catch(err => {
                     console.error("Sync Error:", err);
