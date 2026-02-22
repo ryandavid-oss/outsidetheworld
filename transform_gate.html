@@ -171,65 +171,71 @@
         <a href="personal.html" class="back-link">[ ABORT_CONNECTION ]</a>
     </div>
 
-    <script>
-        // TYPEWRITER CONFIG
-        const statusElement = document.getElementById('status-text');
-        const initialMessage = "WAITING_FOR_KEY...";
-        let i = 0;
+<script>
+    // 1. TYPEWRITER CONFIG
+    const statusElement = document.getElementById('status-text');
+    const initialMessage = "WAITING_FOR_KEY...";
+    let i = 0;
 
-        function typeMessage(message, speed = 100) {
-            statusElement.innerText = "";
-            i = 0;
-            function type() {
-                if (i < message.length) {
-                    statusElement.innerText += message.charAt(i);
-                    i++;
-                    setTimeout(type, speed);
-                }
-            }
-            type();
-        }
-
-        // STARTUP
-        window.onload = () => {
-            setTimeout(() => typeMessage(initialMessage), 500);
-        };
-
-        // KEY VALIDATION
-        const SECRET_HASH = "WW91clBhc3N3b3JkSGVyZQ=="; // Replace with your Base64 password
-
-        function handleKeyPress(e) {
-            if (e.key === 'Enter') {
-                validateKey();
+    function typeMessage(message, speed = 100) {
+        statusElement.innerText = "";
+        i = 0;
+        function type() {
+            if (i < message.length) {
+                statusElement.innerText += message.charAt(i);
+                i++;
+                setTimeout(type, speed);
             }
         }
+        type();
+    }
 
-        function validateKey() {
-            const input = document.getElementById('passkey');
-            const status = document.getElementById('status-text');
-            
-            typeMessage("AUTHENTICATING...", 50);
+    // Initialize the terminal on load
+    window.onload = () => {
+        setTimeout(() => typeMessage(initialMessage), 500);
+    };
 
-            setTimeout(() => {
-                if (btoa(input.value) === SECRET_HASH) {
-                    typeMessage("ACCESS_GRANTED", 50);
-                    statusElement.style.color = "#2ecc71";
-                    setTimeout(() => {
-                        window.location.href = "transform_zion.html"; 
-                    }, 1000);
-                } else {
-                    typeMessage("ACCESS_DENIED", 50);
-                    statusElement.style.color = "#e74c3c";
-                    input.classList.add('error-shake');
-                    input.value = "";
-                    setTimeout(() => {
-                        input.classList.remove('error-shake');
-                        statusElement.style.color = "var(--brand-purple)";
-                        typeMessage(initialMessage);
-                    }, 1500);
-                }
-            }, 1000);
+    // 2. THE DEADBOLT LOGIC
+    // To change your password: Go to any Base64 encoder online, 
+    // type your pass, and replace the string below.
+    const SECRET_HASH = "WW91clBhc3N3b3JkSGVyZQ=="; // Currently: 'YourPasswordHere'
+
+    function handleKeyPress(e) {
+        if (e.key === 'Enter') {
+            validateKey();
         }
+    }
+
+    function validateKey() {
+        const input = document.getElementById('passkey');
+        
+        // Show authentication status in typewriter
+        typeMessage("AUTHENTICATING...", 50);
+
+        setTimeout(() => {
+            // btoa() converts the input into Base64 to compare against your HASH
+            if (btoa(input.value) === SECRET_HASH) {
+                typeMessage("ACCESS_GRANTED", 50);
+                statusElement.style.color = "#2ecc71"; // Success Green
+                setTimeout(() => {
+                    window.location.href = "transform_zion.html"; 
+                }, 1000);
+            } else {
+                typeMessage("ACCESS_DENIED", 50);
+                statusElement.style.color = "#e74c3c"; // Error Red
+                input.classList.add('error-shake');
+                input.value = "";
+                
+                // Reset after error
+                setTimeout(() => {
+                    input.classList.remove('error-shake');
+                    statusElement.style.color = "var(--brand-purple)";
+                    typeMessage(initialMessage);
+                }, 1500);
+            }
+        }, 1000);
+    }
+</script>
     </script>
 </body>
 </html>
