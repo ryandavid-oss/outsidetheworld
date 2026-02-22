@@ -3,26 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal [TEST] | Outside The World</title>
+    <title>Personal | Outside The World</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;900&family=Fira+Code:wght@300;500&display=swap');
 
         :root {
             --brand-blue: #6395EE;
+            --brand-light-blue: #A0BEF5;
             --brand-teal: #91AFB3;
             --bg-dark: #050505;
         }
 
         body {
             background-color: var(--bg-dark);
-            color: white;
-            font-family: 'Inter', sans-serif;
-            margin: 0; padding: 0;
-            overflow-x: hidden;
+            color: white; font-family: 'Inter', sans-serif;
+            margin: 0; padding: 0; overflow-x: hidden;
         }
 
-        /* 1. ATMOSPHERIC SCANLINES */
+        /* 1. ATMOSPHERICS */
         body::after {
             content: " "; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%),
@@ -37,154 +36,78 @@
         }
         .nav-logo { width: 220px; filter: drop-shadow(0 0 20px rgba(99, 149, 238, 0.2)); }
 
-        /* 2. THE PRESENT (Hero Section) */
-        .hero-feed {
-            height: 75vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            padding: 100px 20px 0;
-            background: radial-gradient(circle at center, rgba(99, 149, 238, 0.05) 0%, transparent 70%);
+        /* 2. CINEMATIC HERO (The Present) */
+        .hero { 
+            min-height: 60vh; display: flex; flex-direction: column; align-items: center; 
+            justify-content: center; text-align: center; padding: 160px 20px 80px;
+        }
+        
+        .status-tag {
+            font-family: 'Fira Code', monospace; font-size: 0.6rem; letter-spacing: 4px;
+            color: var(--brand-teal); border: 1px solid rgba(145, 175, 179, 0.3);
+            padding: 6px 15px; display: inline-block; text-transform: uppercase; margin-bottom: 30px;
         }
 
-        .feed-container {
-            text-align: center;
-            max-width: 900px;
-            z-index: 10;
+        h1 { 
+            font-size: clamp(2.5rem, 8vw, 5rem); font-weight: 900; letter-spacing: -2px; 
+            margin: 0; line-height: 0.85; text-transform: uppercase;
+            background: linear-gradient(to bottom, #fff 0%, #444 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
-        .status-header {
-            font-family: 'Fira Code', monospace;
-            font-size: 0.7rem;
-            color: var(--brand-teal);
-            letter-spacing: 6px;
-            margin-bottom: 25px;
-            text-transform: uppercase;
+        /* THE AUTOMATIC POST REVEAL */
+        #latest-post-area {
+            max-width: 800px; margin: 60px auto; padding: 0 40px;
+            border-left: 2px solid var(--brand-blue); animation: fadeIn 2s ease-out;
         }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        .hero-headline {
-            font-size: clamp(2.5rem, 8vw, 5rem);
-            font-weight: 900;
-            letter-spacing: -2px;
-            margin: 0;
-            line-height: 0.85;
-            text-transform: uppercase;
-            background: linear-gradient(to bottom, #fff 0%, #666 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+        #latest-post-area h2 { color: var(--brand-light-blue); font-size: 2.2rem; font-weight: 800; margin-bottom: 20px; }
+        #latest-post-area p { line-height: 1.8; color: #aaa; font-size: 1.1rem; }
 
-        .hero-subtext {
-            font-size: 1.1rem;
-            color: #888;
-            margin-top: 40px;
-            line-height: 1.8;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            font-weight: 300;
-        }
-
-        /* 3. THE INTERFACE (Cards) */
+        /* 3. INTERFACE CLUSTER (The Past/Archive) */
         .interface-grid {
-            max-width: 1200px;
-            margin: -60px auto 100px;
-            padding: 0 40px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 25px;
+            max-width: 1200px; margin: 100px auto; padding: 0 40px;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 25px;
         }
 
-        .interface-card {
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 45px;
-            background: rgba(255, 255, 255, 0.02);
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            text-decoration: none;
-            color: inherit;
-            position: relative;
-            overflow: hidden;
+        .archive-card {
+            border: 1px solid rgba(255, 255, 255, 0.05); padding: 40px;
+            background: rgba(255, 255, 255, 0.01); text-decoration: none; color: inherit;
+            position: relative; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .interface-card:hover {
-            border-color: var(--brand-teal);
-            background: rgba(145, 175, 179, 0.08);
-            transform: translateY(-12px);
-            box-shadow: 0 30px 60px rgba(145, 175, 179, 0.12);
+        .archive-card:hover {
+            border-color: var(--brand-teal); background: rgba(145, 175, 179, 0.08);
+            transform: translateY(-10px); box-shadow: 0 30px 60px rgba(145, 175, 179, 0.15);
         }
 
-        .card-title {
-            font-size: 1.4rem;
-            font-weight: 900;
-            letter-spacing: 5px;
-            text-transform: uppercase;
-            color: var(--brand-blue);
-            margin-bottom: 12px;
-            display: block;
+        .archive-card h3 { 
+            font-size: 1.4rem; font-weight: 900; letter-spacing: 6px; 
+            text-transform: uppercase; color: var(--brand-blue); margin: 0 0 15px 0;
             transition: color 0.4s;
         }
+        .archive-card:hover h3 { color: var(--brand-teal); }
 
-        .interface-card:hover .card-title { color: var(--brand-teal); }
+        .archive-card p { font-size: 0.85rem; line-height: 1.6; color: #666; text-transform: uppercase; margin: 0; }
 
-        .card-tagline {
-            font-size: 0.8rem;
-            color: #555;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            line-height: 1.6;
-            transition: color 0.4s;
+        /* THE PLUS BEACON (+) */
+        .card-beacon { 
+            position: absolute; top: 25px; right: 25px; width: 20px; height: 20px; 
+            color: var(--brand-blue); transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1); 
         }
-        .interface-card:hover .card-tagline { color: #aaa; }
+        .card-beacon::before, .card-beacon::after { content: ''; position: absolute; background: currentColor; }
+        .card-beacon::before { top: 0; left: 9px; width: 2px; height: 20px; }
+        .card-beacon::after { top: 9px; left: 0; width: 20px; height: 2px; }
 
-        /* THE CORNER RETICLE */
-        .reticle {
-            position: absolute; top: 30px; right: 30px;
-            width: 16px; height: 16px;
-            border: 1px solid var(--brand-blue);
-            transition: all 0.5s;
-        }
-        .interface-card:hover .reticle {
-            border-color: var(--brand-teal);
-            background: var(--brand-teal);
-            box-shadow: 0 0 15px var(--brand-teal);
-            transform: rotate(45deg);
-        }
+        .archive-card:hover .card-beacon { transform: rotate(90deg); color: var(--brand-teal); }
 
-        /* 4. LOGS (Directives) */
-        .directive-section {
-            max-width: 1200px;
-            margin: 0 auto 120px;
-            padding: 0 40px;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            padding-top: 80px;
-        }
-
-        .directive-label {
-            font-family: 'Fira Code', monospace;
-            font-size: 0.6rem;
-            color: #444;
-            letter-spacing: 10px;
-            text-transform: uppercase;
-            margin-bottom: 50px;
-        }
-
-        .log-row {
-            display: flex;
-            justify-content: space-between;
-            color: #333;
-            font-family: 'Fira Code', monospace;
-            font-size: 0.75rem;
-            padding: 25px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.03);
-            transition: color 0.3s;
-        }
-        .log-row:hover { color: #666; }
+        footer { padding: 80px 0; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
+        footer p { font-size: 0.55rem; letter-spacing: 5px; color: rgba(255,255,255,0.15); text-transform: uppercase; }
 
         @media (max-width: 768px) {
-            .hero-headline { font-size: 3rem; }
-            .interface-grid { grid-template-columns: 1fr; padding: 0 20px; }
-            .hero-feed { height: auto; padding-bottom: 100px; }
+            h1 { font-size: 2.5rem; }
+            .interface-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -192,49 +115,62 @@
 
     <nav><a href="index.html"><img src="Images/Equal.svg" alt="Back" class="nav-logo"></a></nav>
 
-    <section class="hero-feed">
-        <div class="feed-container">
-            <div class="status-header">// SYSTEM_UPDATE_ACTIVE</div>
-            <h1 class="hero-headline">The First<br>Directive</h1>
-            <p class="hero-subtext">
-                The architecture of the past is finalized. 539 artifacts have been successfully reclaimed from the Instagram estate. The flotsam is secured. Now, we begin to map what remains.
-            </p>
-        </div>
-    </section>
-
-    <section class="interface-grid">
+    <header class="hero">
+        <div class="status-tag">// CURRENT_FEED_SYNCHRONIZED</div>
+        <h1>The First<br>Directive</h1>
         
-        <a href="flotsam.html" class="interface-card">
-            <div class="reticle"></div>
-            <span class="card-title">The Flotsam</span>
-            <span class="card-tagline">Access the digital hub: Hipsta Project, Social Residue, and curated favorites.</span>
+        <div id="latest-post-area">
+            <p style="color: #444; letter-spacing: 2px;">POLLING SATELLITE DATA...</p>
+        </div>
+    </header>
+
+    <main class="interface-grid">
+        
+        <a href="wayback.html" class="archive-card">
+            <div class="card-beacon"></div>
+            <h3>The Archive</h3>
+            <p>Historical observations and technical residue from 2001 to present.</p>
         </a>
 
-        <div class="interface-card" style="opacity: 0.4; cursor: not-allowed;">
-            <div class="reticle" style="border-style: dashed;"></div>
-            <span class="card-title">Field Logs</span>
-            <span class="card-tagline">Personal entries and narrative observations. Connection pending.</span>
+        <a href="flotsam.html" class="archive-card">
+            <div class="card-beacon"></div>
+            <h3>The Flotsam</h3>
+            <p>Gateway to reclaimed artifacts, visual vanguard, and social residue.</p>
+        </a>
+
+        <div class="archive-card" style="opacity: 0.3; cursor: not-allowed;">
+            <div class="card-beacon"></div>
+            <h3>Field Logs</h3>
+            <p>Chronicles of the ongoing journey toward the edge of the world. [LOCKED]</p>
         </div>
 
-        <div class="interface-card" style="opacity: 0.4; cursor: not-allowed;">
-            <div class="reticle" style="border-style: dashed;"></div>
-            <span class="card-title">Wayback</span>
-            <span class="card-tagline">Legacy web audits and discontinued domains. Awaiting decryption.</span>
-        </div>
+    </main>
 
-    </section>
+    <footer><p>© 2026 OUTSIDE THE WORLD LLC &nbsp; | &nbsp; SYSTEMS & STORIES</p></footer>
 
-    <section class="directive-section">
-        <div class="directive-label">Active_Directives_2026</div>
-        <div class="log-row"><span>01. RECLAIM_SOCIAL_RESIDUE</span><span>[ STABLE_RELEASE ]</span></div>
-        <div class="log-row"><span>02. FINALIZE_FLOTSAM_ARCHITECTURE</span><span>[ STABLE_RELEASE ]</span></div>
-        <div class="log-row"><span>03. ESTABLISH_LIVING_INTERFACE</span><span>[ IN_PROGRESS ]</span></div>
-        <div class="log-row"><span>04. MAP_EXTERIOR_TERRAIN</span><span>[ LOCKED ]</span></div>
-    </section>
-
-    <div style="text-align: center; padding-bottom: 100px;">
-        <a href="index.html" style="color: rgba(255,255,255,0.15); text-decoration: none; font-size: 0.6rem; letter-spacing: 6px; text-transform: uppercase;">Exit Interface</a>
-    </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        // Automatic Synchronizer
+        function syncLatestPost() {
+            const contentArea = document.getElementById('latest-post-area');
+            
+            fetch('./manifest.json')
+                .then(res => res.json())
+                .then(data => {
+                    if (data.length > 0) {
+                        return fetch('./blogger_posts/' + data[0].file);
+                    }
+                })
+                .then(res => res.text())
+                .then(text => {
+                    contentArea.innerHTML = marked.parse(text);
+                })
+                .catch(err => {
+                    console.error("Sync Error:", err);
+                    contentArea.innerHTML = "<p>Narrative connection lost. Local encryption active.</p>";
+                });
+        }
+        window.onload = syncLatestPost;
+    </script>
 </body>
 </html>
