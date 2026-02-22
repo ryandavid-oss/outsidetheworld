@@ -17,7 +17,7 @@
         body {
             background-color: var(--bg-dark);
             color: white; font-family: 'Inter', sans-serif;
-            margin: 0; padding: 120px 20px 60px; /* Top padding to clear the Equal.svg nav */
+            margin: 0; padding: 140px 20px 60px; /* Increased top padding to clear the Equal.svg nav */
         }
 
         /* 1. ATMOSPHERICS */
@@ -28,7 +28,7 @@
             background-size: 100% 3px, 3px 100%; pointer-events: none; z-index: 3000; opacity: 0.1;
         }
 
-        /* 2. NAVIGATION (Matches your other subpages) */
+        /* 2. NAVIGATION (Matches personal.html) */
         nav { 
             position: fixed; top: 0; left: 0; width: 100%; padding: 40px; z-index: 3500; 
             backdrop-filter: blur(10px);
@@ -37,14 +37,27 @@
         }
         .nav-logo { width: 220px; pointer-events: auto; filter: drop-shadow(0 0 20px rgba(99, 149, 238, 0.3)); }
 
-        .header-area { text-align: center; margin-bottom: 60px; }
+        .header-area { text-align: center; margin-bottom: 80px; }
+        
+        /* FIX: Explicit Desktop Header Size */
+        .header-area h1 {
+            font-size: 2.5rem; 
+            letter-spacing: 15px; 
+            text-transform: uppercase; 
+            margin-top: 20px;
+            color: white;
+            font-weight: 900;
+        }
+
         .status-tag {
             font-family: 'Fira Code', monospace; font-size: 0.6rem; letter-spacing: 4px;
             color: var(--brand-teal); border: 1px solid rgba(145, 175, 179, 0.3);
             padding: 6px 15px; display: inline-block; text-transform: uppercase;
+            cursor: help; transition: 0.3s;
         }
+        .status-tag:hover { background: rgba(145, 175, 179, 0.3); color: white; box-shadow: 0 0 15px rgba(145, 175, 179, 0.5); }
 
-        /* 3. THE HIPSTA GRID - DYNAMIC LAYOUT */
+        /* 3. THE HIPSTA GRID */
         .vault-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -83,6 +96,7 @@
 
         .modal-content { max-width: 900px; width: 95%; margin: 100px auto; text-align: center; position: relative; }
 
+        /* Glowing Title in Modal */
         .modal-content h1 {
             font-family: 'Inter', sans-serif; font-weight: 900; font-size: 3.5rem;
             letter-spacing: 12px; text-transform: uppercase; color: white;
@@ -114,28 +128,30 @@
             cursor: pointer; font-size: 0.75rem; letter-spacing: 3px; padding: 12px 24px; z-index: 5000;
         }
 
-        /* 5. MOBILE OVERHAUL: THE "PHOTOS APP" GRID */
+        /* 5. EASTER EGG OVERLAY */
+        #mission-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.98); z-index: 6000;
+            display: none; justify-content: center; align-items: center;
+            padding: 40px; backdrop-filter: blur(20px);
+        }
+        .mission-content { max-width: 700px; font-family: 'Fira Code', monospace; color: var(--brand-teal); line-height: 1.8; text-align: left; }
+        .mission-content h3 { color: white; letter-spacing: 5px; text-transform: uppercase; border-bottom: 1px solid var(--brand-teal); padding-bottom: 10px; margin-bottom: 30px; }
+        .mission-content .highlight { color: white; font-weight: 500; }
+
+        /* 6. MOBILE OVERRIDES: THE PHOTOS APP GRID */
         @media (max-width: 768px) {
             nav { text-align: center !important; padding: 20px 0 !important; }
             .nav-logo { width: 140px !important; }
-            
-            body { padding: 100px 5px 40px; } /* Tighten margins for grid */
-            
-            .header-area h1 { font-size: 1.2rem !important; letter-spacing: 5px !important; }
-            
-            .vault-grid {
-                grid-template-columns: repeat(5, 1fr); /* 5 across! */
-                gap: 2px; /* Super tight "Photos" look */
-            }
-
-            .artifact-card { border: none; } /* Remove borders on tiny thumbnails */
-
-            /* Modal Typography adjustments for mobile */
+            body { padding: 100px 5px 40px; }
+            .header-area { margin-bottom: 30px; }
+            .header-area h1 { font-size: 1.2rem !important; letter-spacing: 5px !important; margin-top: 10px; }
+            .vault-grid { grid-template-columns: repeat(5, 1fr); gap: 2px; }
+            .artifact-card { border: none; }
             .modal-content { margin: 60px auto; }
             .modal-content h1 { font-size: 1.8rem !important; letter-spacing: 5px !important; }
             .modal-content h2 { margin-bottom: 30px; }
             .modal-content p { font-size: 1.1rem; line-height: 1.6; padding: 0 10px; }
-            
             .btn-back { top: 20px; right: 20px; padding: 8px 16px; font-size: 0.6rem; }
         }
     </style>
@@ -146,7 +162,7 @@
 
     <div class="header-area">
         <div class="status-tag">TYPE: VISUAL_RECLAMATION // PROJECT: HIPSTA_2011</div>
-        <h1 style="letter-spacing: 15px; text-transform: uppercase; margin-top: 20px;">Hipsta_Project 2011</h1>
+        <h1>Hipsta_Project 2011</h1>
     </div>
 
     <div class="vault-grid" id="grid"></div>
@@ -155,6 +171,14 @@
         <div id="modal-backdrop"></div>
         <button class="btn-back" onclick="closeModal()">[ CLOSE_X ]</button>
         <div class="modal-content" id="modal-inner"></div>
+    </div>
+
+    <div id="mission-overlay" onclick="closeMission()">
+        <div class="mission-content">
+            <h3>Original Directive: 2011</h3>
+            <div id="mission-type-target"></div>
+            <div style="margin-top: 50px; font-size: 0.7rem; opacity: 0.5;">[ CLICK ANYWHERE TO EXIT_ ]</div>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -168,9 +192,7 @@
                 artifacts.forEach(item => {
                     const card = document.createElement('div');
                     card.className = 'artifact-card';
-                    card.innerHTML = `
-                        <img src="${item.image}" alt="${item.title}" loading="lazy">
-                    `; // Removed artifact-label from mobile view to keep it clean
+                    card.innerHTML = `<img src="${item.image}" alt="${item.title}" loading="lazy">`;
                     card.onclick = () => openArtifact(item.file, item.image);
                     grid.appendChild(card);
                 });
@@ -189,15 +211,45 @@
             document.body.style.overflow = 'hidden';
         }
 
-        function handleScroll(el) { /* Scroll logic preserved */ }
         function closeModal() {
             const modal = document.getElementById('modal');
             modal.classList.remove('active');
             setTimeout(() => { modal.style.display = 'none'; document.body.style.overflow = 'auto'; }, 500);
         }
+
         function closeModalOnEmpty(event) {
             if (event.target.id === 'modal' || event.target.id === 'modal-backdrop') closeModal();
         }
+
+        const manifesto = `> PROJECT_NAME: THE IPHONE PHOTO PROJECT\n\nWith the right circumstances, photography that comes from our phones can be striking. With this in mind, I started this project.\n\nEvery picture you see here comes from an <span class="highlight">iPhone 4 or 4S</span>. The app of choice is <span class="highlight">Hipstamatic</span>, a wonderful, inspiring invention that adds character and depth.\n\n> MY GOAL:\n\nIt's my desire that this archive only adds credibility to the claim that the iPhone is capable of brilliant photography.\n\n> STATUS: RECLAIMED 2026`;
+
+        let isTyping = false;
+        function revealMission() {
+            if (isTyping) return;
+            isTyping = true;
+            const overlay = document.getElementById('mission-overlay');
+            const target = document.getElementById('mission-type-target');
+            overlay.style.display = 'flex';
+            target.innerHTML = "";
+            let i = 0;
+            function typeManifesto() {
+                if (i < manifesto.length) {
+                    if (manifesto.substring(i, i + 1) === '<') {
+                        let tagEnd = manifesto.indexOf('>', i);
+                        target.innerHTML += manifesto.substring(i, tagEnd + 1);
+                        i = tagEnd + 1;
+                    } else {
+                        target.innerHTML += manifesto.charAt(i);
+                        i++;
+                    }
+                    setTimeout(typeManifesto, 25);
+                } else { isTyping = false; }
+            }
+            typeManifesto();
+        }
+        function closeMission() { document.getElementById('mission-overlay').style.display = 'none'; }
+        document.querySelector('.status-tag').onclick = revealMission;
+
         loadVault();
     </script>
 </body>
