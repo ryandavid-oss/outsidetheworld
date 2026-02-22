@@ -3,45 +3,198 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flotsam Hub | Outside The World</title>
+    <title>Flotsam | Outside The World</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;900&family=Fira+Code:wght@300;500&display=swap');
-        
-        body { background: #050505; color: white; font-family: 'Inter', sans-serif; text-align: center; padding: 100px 20px; }
-        .hub-container { max-width: 600px; margin: 0 auto; }
-        h1 { letter-spacing: 15px; text-transform: uppercase; color: white; margin-bottom: 50px; }
-        
-        .project-link {
-            display: block;
-            border: 1px solid rgba(145, 175, 179, 0.3);
-            padding: 30px;
-            margin-bottom: 20px;
-            text-decoration: none;
-            color: #91AFB3;
-            font-family: 'Fira Code', monospace;
-            transition: 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 3px;
+
+        :root {
+            --brand-teal: #91AFB3;
+            --brand-blue: #6395EE;
+            --bg-dark: #050505;
         }
-        
-        .project-link:hover {
-            background: rgba(145, 175, 179, 0.1);
-            border-color: #6395EE;
+
+        body {
+            background-color: var(--bg-dark);
             color: white;
-            transform: translateY(-5px);
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
+
+        /* 1. ATMOSPHERICS & BLUR */
+        .scrolling-blur {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(15, 15, 15, 0.4) 0%, var(--bg-dark) 100%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* 2. HERO AREA */
+        .hero-container {
+            text-align: center;
+            padding-top: 80px;
+            padding-bottom: 40px;
+            /* Collision Fix: ensures header stays clear */
+            background: linear-gradient(to bottom, var(--bg-dark) 60%, transparent);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-logo {
+            width: 120px; /* Adjust based on your actual logo size */
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        /* GLOWING FLOTSAM TITLE */
+        .glow-title {
+            font-size: 1rem; /* Matches 'quarter century' size from personal.html */
+            font-weight: 900;
+            letter-spacing: 12px;
+            text-transform: uppercase;
+            color: white;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.5), 0 0 30px rgba(255, 255, 255, 0.2);
+            margin: 0;
+            display: block;
+        }
+
+        /* 3. TYPING EFFECT */
+        .typing-container {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.75rem;
+            color: var(--brand-teal);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-top: 20px;
+            min-height: 1.2rem;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 8px;
+            height: 15px;
+            background-color: var(--brand-teal);
+            margin-left: 5px;
+            animation: blink 1s infinite;
+            vertical-align: middle;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* 4. ARCHIVE LINKS */
+        .archive-list {
+            max-width: 700px;
+            margin: 60px auto;
+            padding: 0 20px 100px 20px;
+        }
+
+        .archive-item {
+            display: block;
+            text-decoration: none;
+            border: 1px solid rgba(145, 175, 179, 0.2);
+            padding: 40px;
+            margin-bottom: 25px;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .archive-item:hover {
+            border-color: var(--brand-blue);
+            background: rgba(99, 149, 238, 0.05);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .archive-name {
+            font-family: 'Fira Code', monospace;
+            color: white;
+            font-size: 1.1rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .archive-desc {
+            color: #666;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .btn-entrance {
+            margin-top: 60px;
+            display: inline-block;
+            color: #444;
+            text-decoration: none;
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        .btn-entrance:hover { color: var(--brand-teal); }
+
     </style>
 </head>
 <body>
-    <div class="hub-container">
-        <h1>Flotsam</h1>
-        <p style="color: #666; margin-bottom: 40px; font-family: 'Fira Code'; font-size: 0.8rem;">[ SELECT_ARCHIVE ]</p>
-        
-        <a href="hipsta.html" class="project-link">
-            Visual Reclamation: Hipsta 2011
-        </a>
-        
-        <a href="index.html" style="margin-top: 50px; display: inline-block; color: #444; text-decoration: none; font-size: 0.7rem; letter-spacing: 2px;">RETURN TO ENTRANCE</a>
+
+    <div class="scrolling-blur"></div>
+
+    <div class="hero-container">
+        <img src="logo.png" alt="OTW" class="hero-logo">
+        <h1 class="glow-title">Flotsam</h1>
+        <div class="typing-container">
+            <span id="typing-text"></span><span class="cursor"></span>
+        </div>
     </div>
+
+    <div class="archive-list">
+        
+        <a href="hipsta.html" class="archive-item">
+            <span class="archive-name">Visual Reclamation: Hipsta 2011</span>
+            <span class="archive-desc">205 artifacts recovered from the mobile photography vanguard.</span>
+        </a>
+
+        <div class="archive-item" style="opacity: 0.3; cursor: default;">
+            <span class="archive-name">[ DATA_PENDING ]</span>
+            <span class="archive-desc">Additional residue awaits decryption.</span>
+        </div>
+
+        <div style="text-align: center;">
+            <a href="index.html" class="btn-entrance">Return to Entrance</a>
+        </div>
+    </div>
+
+    <script>
+        // TYPEWRITER EFFECT
+        const text = "SELECT_ARCHIVE";
+        const target = document.getElementById('typing-text');
+        let i = 0;
+
+        function typeWriter() {
+            if (i < text.length) {
+                target.innerHTML += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 150);
+            }
+        }
+
+        // Start animation after a short delay
+        window.onload = () => {
+            setTimeout(typeWriter, 1000);
+        };
+    </script>
 </body>
 </html>
