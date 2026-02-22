@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flotsam | Outside The World</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;900&family=Fira+Code:wght@300;500&display=swap');
 
         :root {
-            --brand-teal: #91AFB3;
             --brand-blue: #6395EE;
+            --brand-teal: #91AFB3;
             --bg-dark: #050505;
         }
 
@@ -20,53 +21,48 @@
             margin: 0;
             padding: 0;
             min-height: 100vh;
-            overflow-x: hidden;
         }
 
-        /* 1. ATMOSPHERICS & BLUR */
-        .scrolling-blur {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 50% 50%, rgba(15, 15, 15, 0.4) 0%, var(--bg-dark) 100%);
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        /* 2. HERO AREA */
-        .hero-container {
-            text-align: center;
-            padding-top: 80px;
-            padding-bottom: 40px;
-            /* Collision Fix: ensures header stays clear */
-            background: linear-gradient(to bottom, var(--bg-dark) 60%, transparent);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+        /* 1. NAVIGATION & BLUR (Matches personal.html) */
+        nav { 
+            position: fixed; 
+            top: 0; left: 0; width: 100%; 
+            padding: 40px; 
+            z-index: 1000; 
             backdrop-filter: blur(10px);
+            background: linear-gradient(to bottom, rgba(5,5,5,1) 0%, rgba(5,5,5,0) 100%);
+            pointer-events: none; 
         }
 
-        .hero-logo {
-            width: 120px; /* Adjust based on your actual logo size */
-            margin-bottom: 30px;
-            opacity: 0.9;
+        .nav-logo { 
+            width: 220px; 
+            pointer-events: auto; 
+            filter: drop-shadow(0 0 20px rgba(99, 149, 238, 0.3)); 
         }
 
-        /* GLOWING FLOTSAM TITLE */
-        .glow-title {
-            font-size: 1rem; /* Matches 'quarter century' size from personal.html */
-            font-weight: 900;
-            letter-spacing: 12px;
-            text-transform: uppercase;
-            color: white;
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.5), 0 0 30px rgba(255, 255, 255, 0.2);
+        /* 2. HERO SECTION */
+        .hero { 
+            height: 40vh; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: flex-end; 
+            padding-bottom: 40px; 
+            text-align: center; 
+        }
+
+        /* MATCHED TYPOGRAPHY: 3.5rem + GLOW */
+        h1 { 
+            font-size: 3.5rem; 
+            font-weight: 900; 
+            letter-spacing: 10px; 
+            text-transform: uppercase; 
+            color: white; 
+            text-shadow: 0 0 20px rgba(99, 149, 238, 0.4); 
             margin: 0;
-            display: block;
         }
 
-        /* 3. TYPING EFFECT */
+        /* 3. TYPEWRITER EFFECT */
         .typing-container {
             font-family: 'Fira Code', monospace;
             font-size: 0.75rem;
@@ -87,74 +83,80 @@
             vertical-align: middle;
         }
 
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-        /* 4. ARCHIVE LINKS */
+        /* 4. ARCHIVE LIST (Grid Logic from personal.html) */
         .archive-list {
-            max-width: 700px;
+            max-width: 1200px;
             margin: 60px auto;
-            padding: 0 20px 100px 20px;
+            padding: 0 40px 100px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
         }
 
         .archive-item {
-            display: block;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 35px 40px;
+            background: rgba(255, 255, 255, 0.01);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             text-decoration: none;
-            border: 1px solid rgba(145, 175, 179, 0.2);
-            padding: 40px;
-            margin-bottom: 25px;
-            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-            background: rgba(255, 255, 255, 0.02);
+            color: inherit;
+            position: relative;
         }
 
         .archive-item:hover {
             border-color: var(--brand-blue);
-            background: rgba(99, 149, 238, 0.05);
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            background: rgba(99, 149, 238, 0.06);
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(99, 149, 238, 0.15);
         }
 
         .archive-name {
-            font-family: 'Fira Code', monospace;
-            color: white;
-            font-size: 1.1rem;
-            letter-spacing: 3px;
+            font-size: 1.4rem;
+            font-weight: 900;
+            letter-spacing: 6px;
             text-transform: uppercase;
+            color: var(--brand-blue);
+            margin-bottom: 15px;
             display: block;
-            margin-bottom: 10px;
         }
 
         .archive-desc {
+            font-size: 0.85rem;
+            line-height: 1.6;
             color: #666;
-            font-size: 0.8rem;
-            letter-spacing: 1px;
             text-transform: uppercase;
         }
 
         .btn-entrance {
             margin-top: 60px;
             display: inline-block;
-            color: #444;
+            color: rgba(255,255,255,0.2);
             text-decoration: none;
-            font-size: 0.7rem;
-            letter-spacing: 3px;
+            font-size: 0.55rem;
+            letter-spacing: 5px;
             text-transform: uppercase;
             transition: 0.3s;
         }
 
         .btn-entrance:hover { color: var(--brand-teal); }
 
+        /* 5. MOBILE OVERRIDES */
+        @media (max-width: 768px) {
+            nav { text-align: center !important; padding: 30px 0 !important; }
+            .nav-logo { width: 80% !important; max-width: 340px; }
+            .hero { padding-top: 200px !important; height: auto !important; }
+            h1 { font-size: 2rem !important; letter-spacing: 4px !important; }
+        }
     </style>
 </head>
 <body>
 
-    <div class="scrolling-blur"></div>
+    <nav><a href="index.html"><img src="Images/Equal.svg" alt="Back" class="nav-logo"></a></nav>
 
-    <div class="hero-container">
-        <img src="logo.png" alt="OTW" class="hero-logo">
-        <h1 class="glow-title">Flotsam</h1>
+    <div class="hero">
+        <h1 id="hero-title">Flotsam</h1>
         <div class="typing-container">
             <span id="typing-text"></span><span class="cursor"></span>
         </div>
@@ -163,18 +165,19 @@
     <div class="archive-list">
         
         <a href="hipsta.html" class="archive-item">
-            <span class="archive-name">Visual Reclamation: Hipsta 2011</span>
-            <span class="archive-desc">205 artifacts recovered from the mobile photography vanguard.</span>
+            <span class="archive-name">Hipsta Project</span>
+            <span class="archive-desc">Visual reclamation of the estate's mobile photography vanguard (2011-2012).</span>
         </a>
 
-        <div class="archive-item" style="opacity: 0.3; cursor: default;">
-            <span class="archive-name">[ DATA_PENDING ]</span>
-            <span class="archive-desc">Additional residue awaits decryption.</span>
+        <div class="archive-item" style="cursor: default; opacity: 0.4;">
+            <span class="archive-name">[ PENDING ]</span>
+            <span class="archive-desc">Additional digital residue awaits decryption.</span>
         </div>
 
-        <div style="text-align: center;">
-            <a href="index.html" class="btn-entrance">Return to Entrance</a>
-        </div>
+    </div>
+
+    <div style="text-align: center; padding-bottom: 100px;">
+        <a href="index.html" class="btn-entrance">Return to Entrance</a>
     </div>
 
     <script>
@@ -187,14 +190,11 @@
             if (i < text.length) {
                 target.innerHTML += text.charAt(i);
                 i++;
-                setTimeout(typeWriter, 150);
+                setTimeout(typeWriter, 120);
             }
         }
 
-        // Start animation after a short delay
-        window.onload = () => {
-            setTimeout(typeWriter, 1000);
-        };
+        window.onload = () => { setTimeout(typeWriter, 800); };
     </script>
 </body>
 </html>
