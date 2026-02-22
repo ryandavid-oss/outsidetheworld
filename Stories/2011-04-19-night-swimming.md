@@ -9,6 +9,6 @@ Not me, of course. I'm not likely to put my iPhone in the pool.
 
 Or am I?
 
-Lens: Tejas
+**Lens:** Tejas
 Flash: Cadet Blue Gel
-Film: Ina's 1969
+**Film:** Ina's 1969

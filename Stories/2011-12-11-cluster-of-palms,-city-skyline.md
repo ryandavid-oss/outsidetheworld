@@ -7,4 +7,4 @@
 
 While at Encanto this afternoon, I decided to give the new lens/film combo a whirl. 
 
-Lens: LoftusFilm: DC
+**Lens:** Loftus**Film:** DC

@@ -5,4 +5,4 @@
 
 ![Balboa Island](Images/Hipsta/My+HipstaPrint+0-707817.jpg)
 
-Tons of flowers on Balboa Island. Lens: ChunkyFilm: BlacKeys B+W
+Tons of flowers on Balboa Island. **Lens:** Chunky**Film:** BlacKeys B+W

@@ -5,5 +5,5 @@
 
 ![Illuminated cloud](Images/Hipsta/My+HipstaPrint+888674309-722180.jpg)
 
-Lens: Foxy
-Film: Sugar
+**Lens:** Foxy
+**Film:** Sugar

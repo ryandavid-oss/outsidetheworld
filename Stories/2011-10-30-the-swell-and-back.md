@@ -5,9 +5,9 @@
 
 ![The Swell and Back](Images/Hipsta/IMG_0144-710830.jpeg)
 
-Lens: Tejas
+**Lens:** Tejas
 
-Film: Ina's 1969
+**Film:** Ina's 1969
 
 
 
@@ -37,9 +37,9 @@ There are a variety of lenses and films used here; so much color and beauty alon
 
 
 
-Lens: Tejas
+**Lens:** Tejas
 
-Film: Big Up
+**Film:** Big Up
 
 
 
@@ -71,41 +71,41 @@ Film: Big Up
 
 
 
-Lens: Tejas
+**Lens:** Tejas
 
-Film: Ina's 1969
+**Film:** Ina's 1969
 
 
 
 
 
-Lens: Tejas
+**Lens:** Tejas
 
-Film: Big Up
+**Film:** Big Up
 
 
 
 
 
-Lens: Matty ALN
+**Lens:** Matty ALN
 
-Film: Dream Canvas
+**Film:** Dream Canvas
 
 
 
 
 
-Lens: Watts
+**Lens:** Watts
 
-Film: Blanko
+**Film:** Blanko
 
 
 
 
 
-Lens: John S
+**Lens:** John S
 
-Film: Kodot XGrizzled
+**Film:** Kodot XGrizzled
 
 
 
@@ -151,8 +151,8 @@ Film: Kodot XGrizzled
 
 
 
-Lens: LIbatique 73
+**Lens:** LIbatique 73
 
-Film: Ina's 1969
+**Film:** Ina's 1969
 
  Hope you enjoy the images, one way t'other...

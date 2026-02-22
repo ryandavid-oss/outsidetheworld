@@ -5,4 +5,4 @@
 
 ![Sandy feet](Images/Hipsta/My+HipstaPrint+0-743770.jpg)
 
-The wife, incidentally, has no such aversion to sand. Lens: Helga VikingFilm: Blanko
+The wife, incidentally, has no such aversion to sand. **Lens:** Helga Viking**Film:** Blanko

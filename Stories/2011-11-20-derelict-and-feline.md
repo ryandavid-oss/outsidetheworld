@@ -5,4 +5,4 @@
 
 ![Derelict and Feline](Images/Hipsta/My+HipstaPrint+0-793140.jpg)
 
-There is no shortage of odd things to photograph, even as close as my own lot...Lens: Bettie XLFilm: Rock BW-11
+There is no shortage of odd things to photograph, even as close as my own lot...**Lens:** Bettie XL**Film:** Rock BW-11

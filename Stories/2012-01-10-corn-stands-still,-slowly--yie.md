@@ -8,5 +8,5 @@
 sun, silence and cold.
 
 It's nice to be in the garden, even during January.
-Lens: John S
-Film: DC
+**Lens:** John S
+**Film:** DC
