@@ -36,7 +36,7 @@
         .nav-logo { 
             width: 220px; 
             pointer-events: auto; 
-            filter: drop-shadow(0 0 20px rgba(99, 149, 238, 0.3)); 
+            filter: drop-shadow(0 0 20px rgba(145, 175, 179, 0.2)); 
         }
 
         /* 2. HERO SECTION */
@@ -56,7 +56,7 @@
             letter-spacing: 10px; 
             text-transform: uppercase; 
             color: white; 
-            text-shadow: 0 0 20px rgba(99, 149, 238, 0.4); 
+            text-shadow: 0 0 20px rgba(145, 175, 179, 0.3); 
             margin: 0;
         }
 
@@ -103,19 +103,20 @@
             cursor: pointer;
         }
 
+        /* THE TEAL GLOW FIX */
         .archive-item:hover {
-            border-color: var(--brand-blue);
-            background: rgba(99, 149, 238, 0.06);
+            border-color: var(--brand-teal);
+            background: rgba(145, 175, 179, 0.08);
             transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(99, 149, 238, 0.15);
+            box-shadow: 0 20px 40px rgba(145, 175, 179, 0.15); /* Subtle Teal Glow */
         }
 
-        /* CORNER RETICLE STYLE (+ sign) */
+        /* CORNER RETICLE STYLE (Switched to Teal) */
         .card-beacon { 
             position: absolute; 
             top: 25px; right: 25px; 
             width: 20px; height: 20px; 
-            color: var(--brand-blue); 
+            color: var(--brand-teal); 
             transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1); 
         }
 
@@ -126,8 +127,8 @@
             transition: transform 0.6s, opacity 0.4s; 
         }
 
-        .card-beacon::before { top: 0; left: 9px; width: 2px; height: 20px; } /* Vertical */
-        .card-beacon::after { top: 9px; left: 0; width: 20px; height: 2px; } /* Horizontal */
+        .card-beacon::before { top: 0; left: 9px; width: 2px; height: 20px; }
+        .card-beacon::after { top: 9px; left: 0; width: 20px; height: 2px; }
 
         .archive-item:hover .card-beacon { transform: rotate(90deg); }
 
@@ -136,7 +137,7 @@
             font-weight: 900;
             letter-spacing: 6px;
             text-transform: uppercase;
-            color: var(--brand-blue);
+            color: var(--brand-teal); /* Switched to Teal */
             margin-bottom: 15px;
             display: block;
         }
@@ -148,7 +149,6 @@
             text-transform: uppercase;
         }
 
-        /* 5. MOBILE OVERRIDES */
         @media (max-width: 768px) {
             nav { text-align: center !important; padding: 30px 0 !important; }
             .nav-logo { width: 80% !important; max-width: 340px; }
@@ -182,11 +182,11 @@
             <span class="archive-desc">A curated audit of objects, media, and essentials from 2011.</span>
         </a>
 
-        <div class="archive-item" style="cursor: default; opacity: 0.4;">
-            <div class="card-beacon" style="opacity: 0.3;"></div>
-            <span class="archive-name">[ PENDING ]</span>
-            <span class="archive-desc">Additional digital residue awaits decryption.</span>
-        </div>
+        <a href="insta.html" class="archive-item">
+            <div class="card-beacon"></div> 
+            <span class="archive-name">Social Residue</span>
+            <span class="archive-desc">Reclaimed narratives and digital byproduct from the discontinued Instagram estate (2012-2023).</span>
+        </a>
 
     </div>
 
