@@ -49,7 +49,12 @@
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             filter: drop-shadow(0 0 15px rgba(255,255,255,0.1));
         }
-
+        h1 {
+    /* ... your other styles ... */
+    -webkit-background-clip: text;
+    background-clip: text; /* Add this line to satisfy the warning */
+    -webkit-text-fill-color: transparent;
+}
         .typing-container {
             font-family: 'Fira Code', monospace; font-size: 0.75rem; color: var(--brand-teal);
             letter-spacing: 4px; text-transform: uppercase; margin-top: 30px; min-height: 1rem;
@@ -124,6 +129,28 @@
             .main-interface { flex-direction: column; }
             .vertical-divider { width: 100%; height: 1px; margin: 40px 0; }
         }
+        /* THE TRANSITION CARD STYLE */
+.transition-card:hover {
+    border-color: #9b59b6 !important; /* Amethyst Purple */
+    background: rgba(155, 89, 182, 0.08) !important;
+    transform: translateX(10px);
+    box-shadow: 0 20px 40px rgba(155, 89, 182, 0.2) !important;
+}
+
+.transition-card:hover h3 {
+    color: #9b59b6 !important;
+}
+
+.transition-card:hover .card-beacon {
+    color: #9b59b6 !important;
+}
+
+/* Subtle nod to NB flag in the status tag */
+.tag-nb {
+    background: rgba(155, 89, 182, 0.1);
+    color: #9b59b6;
+    border: 1px solid rgba(155, 89, 182, 0.3);
+}
     </style>
 </head>
 <body>
@@ -158,7 +185,12 @@
                 <h3>The Flotsam</h3>
                 <p>Visual vanguard and social residue archives.</p>
             </a>
-
+            <a href="transform_gate.html" class="archive-card transition-card">
+    <div class="card-beacon"></div>
+    <span class="status-tag tag-nb">SECURE_UPLINK // AREA_03</span>
+    <h3>The Transition</h3>
+    <p>An internal audit of architectural shifts and systemic identity.</p>
+</a>
             <div class="archive-card" style="opacity: 0.3; cursor: default;">
                 <div class="card-beacon"></div>
                 <h3>The Future</h3>
