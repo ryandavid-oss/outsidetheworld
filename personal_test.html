@@ -41,11 +41,13 @@
             padding: 180px 20px 60px; text-align: center;
         }
         
+        /* Updated Title Logic */
         h1 { 
-            font-size: clamp(2.5rem, 8vw, 5rem); font-weight: 900; letter-spacing: -2px; 
-            margin: 0; line-height: 0.85; text-transform: uppercase;
+            font-size: clamp(2rem, 6vw, 4rem); font-weight: 900; letter-spacing: 8px; 
+            margin: 0; line-height: 1.1; text-transform: uppercase;
             background: linear-gradient(to bottom, #fff 0%, #444 100%);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 20px rgba(255,255,255,0.05));
         }
 
         .typing-container {
@@ -63,7 +65,6 @@
         /* LEFT: THE NARRATIVE FEED */
         .feed-column { flex: 2; text-align: left; animation: pageReveal 1.2s ease-out; }
         
-        /* The Blue Post Title (Fixed Punctuation) */
         #latest-post-area h2 { 
             font-size: 2.2rem; 
             font-weight: 800; 
@@ -72,7 +73,6 @@
             letter-spacing: -0.5px;
         }
         
-        /* The White Date */
         .post-date { 
             font-family: 'Inter', sans-serif; 
             font-size: 0.9rem; 
@@ -80,6 +80,7 @@
             margin-bottom: 35px; 
             opacity: 0.9;
             letter-spacing: 1px;
+            font-weight: 400;
         }
         
         #md-render p { line-height: 1.8; color: #aaa; font-size: 1.15rem; font-weight: 300; margin-bottom: 25px; }
@@ -137,7 +138,7 @@
     <nav><a href="index.html"><img src="Images/Equal.svg" alt="Back" class="nav-logo"></a></nav>
 
     <header class="hero">
-        <h1>The First Directive</h1>
+        <h1>A QUARTER-CENTURY OF<br>DIGITAL RESIDUE</h1>
         <div class="typing-container">
             <span id="typing-text"></span><span class="cursor"></span>
         </div>
@@ -203,12 +204,20 @@
                         fetch('./blogger_posts/' + latest.file)
                             .then(res => res.text())
                             .then(text => {
-                                // 1. Extract the Title from the Markdown file (removes the '#' and keeps punctuation)
                                 const lines = text.split('\n');
+                                
+                                // 1. Title Extraction
                                 const rawTitle = lines[0].replace('# ', '').trim();
                                 
-                                // 2. Remove the first line from the body to avoid duplicate title
-                                const bodyContent = lines.slice(1).join('\n');
+                                // 2. Enhanced Cleanup: Remove extra dates
+                                // We skip the title line AND check if the next line is a date or metadata
+                                let bodyStartIndex = 1;
+                                // Common pattern: Skip the title line and any empty lines or lines matching a date
+                                while (lines[bodyStartIndex] && (lines[bodyStartIndex].trim() === "" || /\d{4}/.test(lines[bodyStartIndex]))) {
+                                    bodyStartIndex++;
+                                }
+                                
+                                const bodyContent = lines.slice(bodyStartIndex).join('\n');
 
                                 contentArea.innerHTML = `
                                     <h2>${rawTitle}</h2>
