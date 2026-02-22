@@ -7,5 +7,5 @@
 
 I may run out of subjects at the mall to photograph. That would make me frown. 
 
-Lens: Helga Viking
-Film: BlacKeys SuperGrain
+**Lens:** Helga Viking
+**Film:** BlacKeys SuperGrain

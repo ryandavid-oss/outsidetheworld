@@ -5,4 +5,4 @@
 
 ![Coming and going](Images/Hipsta/My+HipstaPrint+0-773363.jpg)
 
-Where to?  Lens: Helga VikingFilm: Ina's 1935
+Where to?  **Lens:** Helga Viking**Film:** Ina's 1935

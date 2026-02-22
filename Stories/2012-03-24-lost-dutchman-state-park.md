@@ -11,4 +11,4 @@ Got there with plenty of sunlight left. Even took the new bike for a spin around
 
 Also, an iPhoto Journal.  More shots can be found there.  Enjoy!
 
-Lens: Libatique 73Film: Ina's 1935
+**Lens:** Libatique 73**Film:** Ina's 1935

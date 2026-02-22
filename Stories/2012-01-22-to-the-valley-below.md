@@ -9,5 +9,5 @@ Texture and green
 one day to be resurgent
 'neath a snow linen
 
-Lens: Lucifer VI
-Film: DreamCanvas
+**Lens:** Lucifer VI
+**Film:** DreamCanvas

@@ -5,4 +5,4 @@
 
 ![Some update is better than none](Images/Hipsta/My+HipstaPrint+0-716660.jpg)
 
-Even if it's not grammatically correct. Lens: AmericanaFilm: BlacKeys B+W
+Even if it's not grammatically correct. **Lens:** Americana**Film:** BlacKeys B+W

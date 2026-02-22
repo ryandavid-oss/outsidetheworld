@@ -17,8 +17,8 @@ It was for naught, after all; he quickly gathered his belongings and strode away
 
 
 
-Lens: John S
-Film: Rock BW-11
+**Lens:** John S
+**Film:** Rock BW-11
 
 
 

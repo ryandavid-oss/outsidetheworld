@@ -5,4 +5,4 @@
 
 ![Along the path](Images/Hipsta/My+HipstaPrint+0-730370.jpg)
 
-Lens: Helga VikingFilm: BlacKeys B+W
+**Lens:** Helga Viking**Film:** BlacKeys B+W

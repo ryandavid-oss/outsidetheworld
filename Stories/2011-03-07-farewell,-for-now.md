@@ -5,4 +5,4 @@
 
 ![Farewell, for now](Images/Hipsta/My+HipstaPrint+0-729628.jpg)
 
-It was a good trip. Lens: JimmyFilm: Kodot XGrizzled
+It was a good trip. **Lens:** Jimmy**Film:** Kodot XGrizzled

@@ -9,5 +9,5 @@ Taken with the new iPad, no less.
 
 Happy Fourth of July!
 
-Lens: Jane
-Film: Ina's 1982
+**Lens:** Jane
+**Film:** Ina's 1982

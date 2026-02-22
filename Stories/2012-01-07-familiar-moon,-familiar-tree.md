@@ -7,4 +7,4 @@
 
 This isn't the first time this tree has been the subject of a hipstaprint. Back in March of last year, I photo'd it in near full bloom the day we left for California. 
 
-Lens: John SFilm: Ina's 1969
+**Lens:** John S**Film:** Ina's 1969

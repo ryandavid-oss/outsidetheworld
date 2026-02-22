@@ -5,4 +5,4 @@
 
 ![Full moon over the canal](Images/Hipsta/My+HipstaPrint+0-759046.jpg)
 
-Lens: JimmyFilm: Claunch 72 Monochrome
+**Lens:** Jimmy**Film:** Claunch 72 Monochrome

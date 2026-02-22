@@ -8,5 +8,5 @@
 I use and very much like it.
 This rug is on a wood floor, and light from the sun makes it visible to us through our eyes. 
 Here is a photo representation.
-Lens: John S
-Film: Blanko
+**Lens:** John S
+**Film:** Blanko

@@ -19,6 +19,6 @@ Good action.
 
 
 
-Lens: Watts
+**Lens:** Watts
 
-Film: Blanko
+**Film:** Blanko

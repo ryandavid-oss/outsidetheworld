@@ -5,4 +5,4 @@
 
 ![Last breath of color](Images/Hipsta/My+HipstaPrint+0-784955.jpg)
 
-Though, probably not. I've really had my eyes opened up to the amount of fall color in Arizona this year. Lens: John SFilm: Kodot XGrizzled
+Though, probably not. I've really had my eyes opened up to the amount of fall color in Arizona this year. **Lens:** John S**Film:** Kodot XGrizzled

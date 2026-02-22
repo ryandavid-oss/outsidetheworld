@@ -5,4 +5,4 @@
 
 ![@ Thanksgiving Point](Images/Hipsta/My+HipstaPrint+0-761891.jpg)
 
-Lens: JimmyFilm: Big Up
+**Lens:** Jimmy**Film:** Big Up

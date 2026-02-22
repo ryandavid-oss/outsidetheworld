@@ -5,4 +5,4 @@
 
 ![Another shot from the road](Images/Hipsta/My+HipstaPrint+0-765141.jpg)
 
-Enjoy!Lens: Helga VikingFilm: Ina's 1969
+Enjoy!**Lens:** Helga Viking**Film:** Ina's 1969
