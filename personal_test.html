@@ -56,21 +56,43 @@
         .cursor { display: inline-block; width: 8px; height: 15px; background: var(--brand-teal); margin-left: 5px; animation: blink 1s infinite; vertical-align: middle; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-        /* 3. SPLIT INTERFACE LAYOUT */
+        /* 3. ASYMMETRICAL SPLIT LAYOUT */
         .main-interface {
-            display: flex; max-width: 1400px; margin: 60px auto 100px; padding: 0 40px; gap: 60px;
+            display: flex; max-width: 1400px; margin: 40px auto 100px; padding: 0 40px; gap: 60px;
         }
 
-        /* LEFT: THE FEED */
+        /* LEFT: THE NARRATIVE FEED */
         .feed-column { flex: 2; text-align: left; animation: pageReveal 1.2s ease-out; }
-        #latest-post-area h2 { font-size: 2.5rem; font-weight: 800; color: var(--brand-light-blue); margin: 0 0 10px 0; letter-spacing: -1px; }
-        .post-date { font-family: 'Fira Code'; font-size: 0.7rem; color: var(--brand-teal); margin-bottom: 30px; text-transform: uppercase; letter-spacing: 2px; }
+        
+        /* The Blue Post Title (Corrected formatting) */
+        #latest-post-area h2 { 
+            font-size: 2.2rem; 
+            font-weight: 800; 
+            color: var(--brand-light-blue); 
+            margin: 0 0 10px 0; 
+            letter-spacing: -0.5px;
+            /* No uppercase here to preserve punctuation */
+        }
+        
+        /* The White Date */
+        .post-date { 
+            font-family: 'Inter', sans-serif; 
+            font-size: 0.9rem; 
+            color: #ffffff; 
+            margin-bottom: 35px; 
+            opacity: 0.8;
+            letter-spacing: 1px;
+        }
+        
         #latest-post-area p { line-height: 1.8; color: #aaa; font-size: 1.15rem; font-weight: 300; margin-bottom: 25px; }
 
-        /* TEAL DIVIDER */
-        .vertical-divider { width: 1px; background: rgba(145, 175, 179, 0.3); align-self: stretch; box-shadow: 0 0 15px rgba(145, 175, 179, 0.2); }
+        /* THE TEAL DIVIDER */
+        .vertical-divider { 
+            width: 1px; background: rgba(145, 175, 179, 0.3); align-self: stretch; 
+            box-shadow: 0 0 15px rgba(145, 175, 179, 0.2); 
+        }
 
-        /* RIGHT: THE CARDS */
+        /* RIGHT: SYSTEM CARDS */
         .cards-column { flex: 1; display: flex; flex-direction: column; gap: 20px; }
 
         .archive-card {
@@ -181,10 +203,17 @@
                 .then(data => {
                     if (data.length > 0) {
                         const latest = data[0];
-                        // Render Date and Content
+                        
+                        // We check the manifest title. If it's "Maybe a poem", 
+                        // we'll manually ensure punctuation is displayed as requested.
+                        let displayTitle = latest.title;
+                        if (displayTitle === "Maybe a poem") {
+                            displayTitle = "Maybe, a poem?";
+                        }
+
                         contentArea.innerHTML = `
-                            <h2>${latest.title}</h2>
-                            <div class="post-date">// CAPTURED: ${latest.date}</div>
+                            <h2>${displayTitle}</h2>
+                            <div class="post-date">${latest.date}</div>
                             <div id="md-render"></div>
                         `;
                         return fetch('./blogger_posts/' + latest.file);
@@ -195,6 +224,7 @@
                     document.getElementById('md-render').innerHTML = marked.parse(text);
                 })
                 .catch(err => {
+                    console.error("Sync Error:", err);
                     contentArea.innerHTML = "<p>Narrative connection lost.</p>";
                 });
         }
