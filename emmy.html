@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sacred_Record | EMMY</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500;700&family=Inter:wght@300;400;700;900&display=swap');
+
+        :root {
+            --warm-amber: #FFB347;
+            --rose-gold: #E0BFB8;
+            --deep-violet: #1A0B2E; /* The WandaVision Hue */
+            --bg-vault: #0A0510;
+            --border-gold: rgba(212, 175, 55, 0.2);
+        }
+
+        body {
+            background-color: var(--bg-vault);
+            color: #d1c4e9;
+            font-family: 'Inter', sans-serif;
+            margin: 0; padding: 0;
+            overflow-x: hidden;
+            line-height: 1.8;
+        }
+
+        /* ATMOSPHERIC GOLDEN PULSE */
+        body::after {
+            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at center, rgba(255, 179, 71, 0.05) 0%, transparent 70%);
+            pointer-events: none; z-index: 1000;
+        }
+
+        .container { max-width: 900px; margin: 0 auto; padding: 100px 20px; }
+
+        /* CINEMATIC ALIAS FOG */
+        .hero { text-align: center; margin-bottom: 100px; }
+        .fog-alias {
+            font-size: clamp(2rem, 8vw, 5rem);
+            font-weight: 900;
+            letter-spacing: 20px;
+            text-transform: uppercase;
+            background: linear-gradient(to bottom, var(--rose-gold) 20%, var(--warm-amber) 80%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 20px rgba(255, 179, 71, 0.2));
+            animation: aliasCycle 12s infinite;
+        }
+
+        @keyframes aliasCycle {
+            0%, 25% { opacity: 0; filter: blur(10px); letter-spacing: 40px; }
+            30%, 50% { opacity: 1; filter: blur(0); letter-spacing: 15px; }
+            55%, 75% { opacity: 0; filter: blur(10px); letter-spacing: 40px; }
+        }
+
+        .promise-clock {
+            font-family: 'Fira Code';
+            color: var(--warm-amber);
+            font-size: 0.8rem;
+            letter-spacing: 4px;
+            margin-top: 20px;
+            opacity: 0.8;
+        }
+
+        /* NARRATIVE SECTIONS */
+        .dossier-label {
+            font-family: 'Fira Code';
+            color: var(--rose-gold);
+            font-size: 0.7rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            margin: 80px 0 30px;
+            display: flex; align-items: center; gap: 20px;
+        }
+        .dossier-label::after { content: ""; height: 1px; flex-grow: 1; background: var(--border-gold); }
+
+        .prose { font-size: 1.2rem; font-weight: 300; color: #b3a2c7; }
+        .highlight { color: var(--warm-amber); font-weight: 600; }
+
+        /* THE WANDAVISION HEX CARD */
+        .hex-card {
+            border: 1px solid var(--border-gold);
+            padding: 40px;
+            background: rgba(26, 11, 46, 0.4);
+            position: relative;
+            margin: 60px 0;
+            backdrop-filter: blur(10px);
+        }
+        .hex-card::before {
+            content: "CORE_MEMORY // RITUAL_ACTIVE";
+            position: absolute; top: -10px; left: 20px;
+            background: var(--bg-vault); padding: 0 10px;
+            font-family: 'Fira Code'; font-size: 0.6rem; color: var(--warm-amber);
+        }
+
+        .sig-block { margin-top: 100px; text-align: center; }
+        .sig-img { max-width: 280px; filter: invert(1) sepia(1) saturate(5) hue-rotate(-10deg) brightness(1.2); opacity: 0.8; }
+
+        @media (max-width: 768px) {
+            .fog-alias { font-size: 2.5rem; letter-spacing: 10px; }
+            .prose { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <header class="hero">
+            <div class="fog-alias" id="alias-target">EMMY</div>
+            <div class="promise-clock" id="covenant-clock">INITIATING_COVENANT_COUNT...</div>
+        </header>
+
+        <section>
+            <div class="dossier-label">01 // THE_11TH_HOUR</div>
+            <div class="prose">
+                In the aftermath of a fifteen-year collapse, the world had become a cold, aloof desert. I moved through it like a ghost—aloof, self-sabotaging, and resigned to the silence. Then, a quick weekend getaway to California. A longboard on a boardwalk. And a collision of <span class="highlight">search diameters</span>. 
+                <br><br>
+                I left our match "on read" for 6.95 days, waiting for the courage to jump. At the 11th hour, I messaged. What followed was a <span class="highlight">pleasantly violent connection</span>—not a spark, but a knowing. An answering. A calling home after years in the wilderness.
+            </div>
+        </section>
+
+        <section class="hex-card">
+            <div class="prose">
+                Our foundation was forged in the "Hex" of 2021. Between the ritualistic watching of <span class="highlight">WandaVision</span> and the suffocating restrictions of the pandemic, we built a world that the government couldn't touch. Every travel restriction was just another barrier for us to navigate together.
+            </div>
+        </section>
+
+        <section>
+            <div class="dossier-label">02 // THE_CALM_IN_THE_STORM</div>
+            <div class="prose">
+                While so many lights were dimmed by the damage of the past, hers refused to flicker. She brought <span class="highlight">empathy for my journey</span> and a fierce compassion for her own. To watch her with her four girls is to see a limitless capacity for patience—a standard that compels me to approach my own fatherhood with a new intensity.
+            </div>
+        </section>
+
+        <div class="sig-block">
+            <img src="Images/Signature.png" alt="Signature" class="sig-img">
+            <div class="promise-clock" style="margin-top: 20px;">WEDDING_SONG // KINGS & QUEENS</div>
+        </div>
+
+    </div>
+
+    <script>
+        // COVENANT CLOCK (April 17, 2021)
+        function updateCovenant() {
+            const start = new Date("April 17, 2021 00:00:00");
+            const now = new Date();
+            const diff = now - start;
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const mins = Math.floor((diff / (1000 * 60)) % 60);
+            const secs = Math.floor((diff / 1000) % 60);
+            
+            document.getElementById('covenant-clock').textContent = 
+                `PROMISE_ELAPSED // ${days}D:${hours}H:${mins}M:${secs}S`;
+        }
+        setInterval(updateCovenant, 1000);
+
+        // ALIAS CYCLER
+        const aliases = ["EMMY", "ELSA", "EMMY LOU", "EM"];
+        let aliasIdx = 0;
+        const target = document.getElementById('alias-target');
+
+        setInterval(() => {
+            aliasIdx = (aliasIdx + 1) % aliases.length;
+            target.style.opacity = 0;
+            setTimeout(() => {
+                target.textContent = aliases[aliasIdx];
+                target.style.opacity = 1;
+            }, 2000);
+        }, 4000);
+    </script>
+</body>
+</html>
