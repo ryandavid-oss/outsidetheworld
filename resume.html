@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dossier | RyanDavid Burningham</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500;700&family=Inter:wght@300;400;700;900&display=swap');
+
+        :root {
+            --brand-blue: #6395EE;
+            --brand-teal: #91AFB3;
+            --brand-pink: #FF69B4;
+            --bg-dark: #050505;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: #ddd;
+            font-family: 'Inter', sans-serif;
+            margin: 0; padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* ATMOSPHERIC SCANLINES */
+        body::after {
+            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%),
+                        linear-gradient(90deg, rgba(99, 149, 238, 0.02), rgba(99, 149, 238, 0.01), rgba(99, 149, 238, 0.02));
+            background-size: 100% 3px, 3px 100%; pointer-events: none; z-index: 1000; opacity: 0.15;
+        }
+
+        nav { padding: 40px; text-align: left; }
+        .nav-logo { width: 180px; filter: drop-shadow(0 0 15px rgba(99, 149, 238, 0.3)); }
+
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px 100px; }
+
+        /* HERO SECTION */
+        .hero {
+            display: flex; align-items: center; gap: 40px;
+            padding: 60px 0; border-bottom: 1px solid var(--border);
+            opacity: 0; transform: translateY(20px);
+            animation: reveal 0.8s forwards;
+        }
+
+        .profile-img {
+            width: 150px; height: 150px;
+            background: var(--glass);
+            border: 2px solid var(--brand-blue);
+            border-radius: 10px;
+            position: relative; overflow: hidden;
+        }
+
+        /* Profile "Scanning" Effect */
+        .profile-img::after {
+            content: ""; position: absolute; top: -100%; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(transparent, var(--brand-blue), transparent);
+            opacity: 0.3; animation: scan 3s infinite linear;
+        }
+
+        @keyframes scan { 0% { top: -100%; } 100% { top: 100%; } }
+
+        .hero-text h1 { 
+            font-size: 3.5rem; margin: 0; color: white; letter-spacing: -2px; 
+            line-height: 1; font-weight: 900;
+        }
+        .hero-text p { 
+            font-family: 'Fira Code'; color: var(--brand-teal); 
+            text-transform: uppercase; letter-spacing: 3px; margin-top: 10px;
+        }
+
+        /* EXPERIENCE SECTION */
+        .section-title {
+            font-family: 'Fira Code'; color: var(--brand-pink);
+            font-size: 0.8rem; letter-spacing: 5px; text-transform: uppercase;
+            margin: 80px 0 40px; display: flex; align-items: center; gap: 20px;
+        }
+        .section-title::after { content: ""; height: 1px; flex-grow: 1; background: var(--border); }
+
+        .experience-card {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            padding: 40px; margin-bottom: 20px;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .experience-card:hover {
+            border-color: var(--brand-blue);
+            background: rgba(99, 149, 238, 0.05);
+            transform: scale(1.01);
+        }
+
+        .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; }
+        .role { font-size: 1.5rem; color: white; font-weight: 700; margin: 0; }
+        .company { font-family: 'Fira Code'; color: var(--brand-blue); font-size: 0.9rem; }
+        .date { font-family: 'Fira Code'; font-size: 0.75rem; color: #666; }
+
+        /* SKILLS GRID */
+        .skills-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 15px;
+        }
+        .skill-tag {
+            padding: 10px; border: 1px solid var(--border);
+            text-align: center; font-family: 'Fira Code'; font-size: 0.75rem;
+            background: var(--glass); transition: 0.3s;
+        }
+        .skill-tag:hover { color: var(--brand-pink); border-color: var(--brand-pink); }
+
+        @keyframes reveal { to { opacity: 1; transform: translateY(0); } }
+
+        @media (max-width: 768px) {
+            .hero { flex-direction: column; text-align: center; }
+            .hero-text h1 { font-size: 2.5rem; }
+            .card-header { flex-direction: column; gap: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="flotsam.html"><img src="Images/Equal.svg" alt="Back" class="nav-logo"></a>
+    </nav>
+
+    <div class="container">
+        
+        <header class="hero">
+            <div class="profile-img">
+                </div>
+            <div class="hero-text">
+                <h1>RyanDavid Burningham</h1>
+                <p>Digital Strategist // Operations Lead</p>
+            </div>
+        </header>
+
+        <div class="section-title">01_Experience</div>
+
+        <div class="experience-card">
+            <div class="card-header">
+                <div>
+                    <h3 class="role">Inventory Trainer</h3>
+                    <span class="company">Apple Inc.</span>
+                </div>
+                <span class="date">2009 — 2014</span>
+            </div>
+            <p>Led logistical operations and inventory training for flagship store launches, including the 3rd Street Promenade expansion. Managed high-stakes product launches (iPhone/iPad) and optimized inventory control systems.</p>
+        </div>
+
+        <div class="section-title">02_Technical_Arsenal</div>
+
+        <div class="skills-grid">
+            <div class="skill-tag">Logistics</div>
+            <div class="skill-tag">Inventory Control</div>
+            <div class="skill-tag">Team Leadership</div>
+            <div class="skill-tag">HTML/CSS</div>
+            <div class="skill-tag">Strategic Audit</div>
+            <div class="skill-tag">Brand Storytelling</div>
+        </div>
+
+    </div>
+
+</body>
+</html>
