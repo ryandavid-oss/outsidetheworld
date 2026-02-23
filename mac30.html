@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personnel_Log | Mac30 Anniversary</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500;700&display=swap');
+
+        :root {
+            --apple-blue: #6395EE;
+            --bg-dark: #050505;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: #222; /* Dim by default */
+            font-family: 'Fira Code', monospace;
+            margin: 0; padding: 0; overflow: hidden;
+            height: 100vh; display: flex; flex-direction: column;
+        }
+
+        /* ATMOSPHERIC SCANLINES */
+        body::after {
+            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%),
+                        linear-gradient(90deg, rgba(99, 149, 238, 0.02), rgba(99, 149, 238, 0.01), rgba(99, 149, 238, 0.02));
+            background-size: 100% 3px, 3px 100%; pointer-events: none; z-index: 100; opacity: 0.3;
+        }
+
+        header {
+            padding: 60px 40px; text-align: left; z-index: 105;
+            background: linear-gradient(to bottom, var(--bg-dark) 60%, transparent);
+        }
+
+        .back-btn {
+            color: var(--apple-blue); text-decoration: none; font-size: 0.7rem;
+            letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; display: block;
+        }
+
+        h1 { 
+            font-size: 2.5rem; color: #fff; margin: 0; letter-spacing: -1px; 
+            text-transform: uppercase; font-weight: 700;
+        }
+
+        /* THE MATRIX WALL */
+        .matrix-container {
+            flex: 1; position: relative; width: 100%; overflow: hidden;
+            mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+            -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+        }
+
+        #name-wall {
+            display: flex; flex-wrap: wrap; gap: 15px 50px; padding: 60px 40px;
+            justify-content: center; animation: scrollWall 180s linear infinite;
+        }
+
+        .name-entry {
+            font-size: 0.65rem; letter-spacing: 1px; white-space: nowrap; transition: 0.4s;
+            text-transform: uppercase;
+        }
+
+        /* THE SIGNATURE HIGHLIGHT */
+        .highlight {
+            color: var(--apple-blue) !important; font-weight: 700; font-size: 0.9rem;
+            text-shadow: 0 0 15px rgba(99, 149, 238, 0.6);
+        }
+        .highlight::before { content: "⌘ "; }
+
+        @keyframes scrollWall {
+            from { transform: translateY(0); }
+            to { transform: translateY(-50%); }
+        }
+
+        .vignette {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, transparent 30%, var(--bg-dark) 100%);
+            pointer-events: none;
+        }
+
+        footer {
+            padding: 30px 40px; text-align: left; font-size: 0.55rem; color: #333;
+            letter-spacing: 3px; text-transform: uppercase; z-index: 110;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="flotsam.html" class="back-btn">< RE_STATIONS</a>
+        <h1>Infinite_Signatures</h1>
+    </header>
+
+    <main class="matrix-container">
+        <div id="name-wall"></div>
+        <div class="vignette"></div>
+    </main>
+
+    <footer>
+        UPLINK_ESTABLISHED // SOURCE: MACINTOSH_30TH_ANNIVERSARY_COMMEMORATIVE_POSTER // HIRE_CHRONOLOGY_ACTIVE
+    </footer>
+
+    <script>
+        // Foundational badge numbers
+        const legacyNames = [
+            "Steven Jobs", "Steve Wozniak", "Mike Markkula", "Bill Fernandez", 
+            "Rod Holt", "Randy Wigginton", "Michael Scott", "Chris Espinosa", 
+            "Jim Martindale", "Sherry Livingston", "Don Breuner", "Dan Kottke",
+            "Mark Johnson", "Gene Carter", "Tom Whitney", "Wendell Sander",
+            "Jony Ive", "Tim Cook", "Phil Schiller", "Eddy Cue", "Angela Ahrendts"
+        ];
+        
+        const placeholders = ["Badge_9281", "Badge_7721", "Badge_9920", "Staff_Ref_A12", "Badge_0492", "Staff_Ref_X09"];
+        const ME = "RyanDavid Burningham";
+        
+        const wall = document.getElementById('name-wall');
+
+        function generateWall() {
+            let names = [];
+            // Generate a massive pool for seamless scrolling
+            for (let i = 0; i < 600; i++) {
+                if (i % 22 === 0) names.push(ME); 
+                if (i % 14 === 0) names.push(legacyNames[Math.floor(Math.random() * legacyNames.length)]);
+                names.push(placeholders[Math.floor(Math.random() * placeholders.length)]);
+            }
+
+            // Duplicate the array to make the scroll seamless
+            const fullList = [...names, ...names];
+
+            wall.innerHTML = fullList.map(name => {
+                const isMe = name === ME ? 'highlight' : '';
+                return `<span class="name-entry ${isMe}">${name}</span>`;
+            }).join('');
+        }
+
+        generateWall();
+    </script>
+</body>
+</html>

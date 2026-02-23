@@ -9,7 +9,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;900&family=Fira+Code:wght@300;500&display=swap');
 
         :root {
-            --brand-blue: #6395EE;
+            --brand-blue: #6395EE; /* Anniversary Blue */
             --brand-teal: #91AFB3;
             --bg-dark: #050505;
         }
@@ -103,17 +103,29 @@
             cursor: pointer;
         }
 
-        /* HOVER STATE: TRANSITION TO TEAL */
+        /* DEFAULT HOVER (TEAL) */
         .archive-item:hover {
             border-color: var(--brand-teal);
             background: rgba(145, 175, 179, 0.08);
             transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(145, 175, 179, 0.15); /* Teal Glow */
+            box-shadow: 0 20px 40px rgba(145, 175, 179, 0.15);
         }
 
         .archive-item:hover .archive-name,
         .archive-item:hover .card-beacon {
             color: var(--brand-teal);
+        }
+
+        /* MAC 30 SPECIAL HOVER (ANNIVERSARY BLUE) */
+        .mac30-card:hover {
+            border-color: var(--brand-blue) !important;
+            background: rgba(99, 149, 238, 0.08) !important;
+            box-shadow: 0 20px 40px rgba(99, 149, 238, 0.15) !important;
+        }
+
+        .mac30-card:hover .archive-name,
+        .mac30-card:hover .card-beacon {
+            color: var(--brand-blue) !important;
         }
 
         /* CORNER RETICLE STYLE (Blue by default) */
@@ -155,6 +167,16 @@
             text-transform: uppercase;
         }
 
+        /* STATUS TAG STYLE */
+        .status-tag {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.6rem;
+            letter-spacing: 2px;
+            display: block;
+            margin-bottom: 10px;
+            opacity: 0.6;
+        }
+
         @media (max-width: 768px) {
             nav { text-align: center !important; padding: 30px 0 !important; }
             .nav-logo { width: 80% !important; max-width: 340px; }
@@ -176,6 +198,13 @@
 
     <div class="archive-list">
         
+        <a href="mac30.html" class="archive-item mac30-card">
+            <div class="card-beacon"></div> 
+            <span class="status-tag">PERSONNEL_LOG // 1984-2014</span>
+            <span class="archive-name">Infinite Signatures</span>
+            <span class="archive-desc">Chronological hire-order index of the human element behind the machine.</span>
+        </a>
+
         <a href="hipsta.html" class="archive-item">
             <div class="card-beacon"></div> 
             <span class="archive-name">Hipsta Project</span>
