@@ -12,7 +12,7 @@
             --apple-blue: #6395EE;
             --apple-green: #32CD32;
             --apple-pink: #FF69B4;
-            --brand-teal: #91AFB3; /* Specific Teal for Service Record */
+            --brand-teal: #91AFB3; 
             --bg-dark: #050505;
         }
 
@@ -33,7 +33,7 @@
             background-size: 100% 3px, 3px 100%; pointer-events: none; z-index: 1000; opacity: 0.2;
         }
 
-        /* 1. HERO NAVIGATION (Left desktop, Center mobile) */
+        /* 1. HERO NAVIGATION: Left on desktop, centered on mobile */
         nav { 
             position: relative; 
             padding: 40px; 
@@ -47,11 +47,11 @@
             transition: 0.3s;
         }
 
-        /* 2. HEADER & GRADIENT REFINEMENT */
+        /* 2. HEADER: Entrance-style black gradation & Tightened padding */
         header {
-            padding: 20px 40px 10px; /* Reduced bottom padding to close gap */
+            padding: 20px 40px 0; /* Bottom padding 0 to close gap */
             text-align: center;
-            background: linear-gradient(to bottom, rgba(99, 149, 238, 0.08) 0%, transparent 100%);
+            background: linear-gradient(to bottom, rgba(5,5,5,1) 0%, rgba(5,5,5,0) 100%);
         }
 
         h1 { 
@@ -59,12 +59,12 @@
             font-weight: 900; text-transform: uppercase;
         }
 
-        /* 3. TYPEWRITER SERVICE RECORD (Teal, Larger) */
+        /* 3. TYPEWRITER SERVICE RECORD: Teal and Larger */
         .badge-id { 
             font-family: 'Fira Code', monospace; 
-            font-size: 1.15rem; /* Larger font */
+            font-size: 1.25rem; /* Larger font */
             color: var(--brand-teal); /* Teal color */
-            margin-top: 10px;
+            margin: 0; /* Tightened gap */
             min-height: 1.5rem;
             display: inline-block;
         }
@@ -80,10 +80,10 @@
 
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-        /* 4. CONTENT GRID (Tightened gap) */
+        /* 4. CONTENT GRID: Zero top padding to decrease gap */
         .content-grid {
             max-width: 900px; margin: 0 auto; 
-            padding: 10px 20px 60px; /* Reduced top padding */
+            padding: 0 20px 60px; 
         }
 
         .narrative p { margin-bottom: 30px; font-size: 1.1rem; font-weight: 300; }
@@ -142,7 +142,7 @@
         @media (max-width: 768px) { 
             nav { text-align: center; } /* Logo centered on mobile */
             h1 { font-size: 1.8rem; letter-spacing: 0; } 
-            .badge-id { font-size: 0.9rem; }
+            .badge-id { font-size: 1rem; }
             .nav-logo { width: 160px; }
         }
     </style>
@@ -213,7 +213,7 @@
     </footer>
 
     <script>
-        // TYPEWRITER EFFECT
+        // REFINED TYPEWRITER EFFECT
         const typeText = "SERVICE_RECORD // 2009-2014 // RyanDavid Burningham";
         const typeTarget = document.getElementById('typewriter-record');
         let typeIdx = 0;
@@ -226,7 +226,7 @@
             }
         }
 
-        // MATRIX CORE
+        // MATRIX DATA
         const pinkName = "RyanDavid Burningham";
         const blueNames = ["Steve Wozniak", "Steve Jobs", "Mike Markkula", "Bill Fernandez", "Rod Holt", "Randy Wigginton", "Chris Espinosa", "Jim Martindale", "Sherry Livingston", "Don Breuner", "Daniel Kottke", "Mark Johnson", "Gene Carter", "Tom Whitney", "Wendell Sander", "Dick Huston", "Cliff Huston", "Ed Ruder", "Jef Raskin", "Brian Howard", "Bill Atkinson", "Joanna Hoffman", "Burrell Smith", "Bud Tribble", "Bob Belleville", "Steve Capps", "George Crow", "Donn Denman", "Bruce Horn", "Susan Kare", "Larry Kenyon", "Caroline Rose", "Andy Hertzfeld", "Patti Kenyon", "Terry Oyama", "Ronald Nicholson", "Martin Haeberli", "Brian Robertson", "Pamela Wyman", "Bryan Stearns", "Debi Coleman", "Matt Carter", "Colette Askeland", "Linda Wilkin", "Brian Berkeley", "MaryEllen McCammon", "Vicki Milledge", "Bill Bull", "Jerome Coonen", "Bob Bailey", "Dan'l Lewin", "Sam Lyall", "Joe Shelton", "David Beaver", "Mike Collins", "Peter Folley", "Owen Densmore", "Bill Wathen", "J David Egner", "Deborah Bress", "Steve Scheier", "Scott Knaster", "John Casado", "Lynnea Johnson", "Marc LeBrun", "Larry Tesler", "Michael Jurewitz"];
         const greenNames = ["Lindsey Costley", "Andrew Calhoun", "Jenn King", "Toby King", "Chris Krieg", "Jose Fernandez", "Jose Ramirez", "Jose Hernandez", "Karlyn Herring", "Corey Dillier", "Eric Duffy", "Saint", "Ashley Lawson", "Anna Sammons", "Eric Locke", "Maria Nissen", "Bob O'Leary", "Jack Saber", "Scott Snyder", "Eric Stout", "Mike Van Dusen", "Mark Henderson", "Natalie Clifford", "Sean Little", "Brandon Love", "Denise Harris-Kester", "Bryan Beata", "Mario Aldrete", "Mary Lideen", "Stanford Florence", "Gregory Terry", "Chelsey McPeek", "Tyson Brown", "Alex Tighe", "Mike Franzone", "Jake Burger"];
@@ -241,15 +241,13 @@
         function openOverlay(id) { document.getElementById(id).style.display = 'flex'; }
         function closeOverlay(id) { document.getElementById(id).style.display = 'none'; }
         
-        window.onload = () => { generateWall(); setTimeout(typeOut, 1000); };
-        /* --- REPAIRED STARTUP LOGIC --- */
-function initSystem() {
-    generateWall(); // Start the scroll immediately
-    setTimeout(typeOut, 500); // Start typewriter shortly after
-}
+        // REPAIRED STARTUP LOGIC
+        function initSystem() {
+            generateWall(); 
+            setTimeout(typeOut, 500); 
+        }
 
-// Use DOMContentLoaded instead of window.onload for instant names
-document.addEventListener('DOMContentLoaded', initSystem);
+        document.addEventListener('DOMContentLoaded', initSystem);
     </script>
 </body>
 </html>
