@@ -24,7 +24,7 @@
             overflow-x: hidden;
         }
 
-        /* SCANLINE EFFECT */
+        /* SCANLINE OVERLAY */
         body::after {
             content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%),
@@ -32,14 +32,12 @@
             background-size: 100% 3px, 3px 100%; pointer-events: none; z-index: 1000; opacity: 0.2;
         }
 
-        /* NAVIGATION: LEFT JUSTIFIED ON DESKTOP */
         nav { padding: 60px 40px 20px; text-align: left; z-index: 1001; position: relative; }
         .nav-logo { width: 220px; filter: drop-shadow(0 0 20px rgba(99, 149, 238, 0.4)); }
 
-        header { padding: 20px 40px 60px; text-align: center; background: linear-gradient(to bottom, rgba(99, 149, 238, 0.05), transparent); }
+        header { padding: 20px 40px 60px; text-align: center; }
         h1 { font-size: 2.8rem; color: #fff; margin: 0; letter-spacing: -1px; font-weight: 900; text-transform: uppercase; }
 
-        /* TYPEWRITER TERMINAL */
         .typewriter-box { font-family: 'Fira Code', monospace; font-size: 1.2rem; color: var(--apple-blue); margin-top: 15px; min-height: 1.5rem; display: inline-block; }
         .cursor { display: inline-block; width: 10px; height: 18px; background-color: var(--apple-blue); margin-left: 5px; animation: blink 1s infinite; vertical-align: middle; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
@@ -50,34 +48,60 @@
         .blog-extract { background: rgba(255,255,255,0.03); border-left: 3px solid var(--apple-blue); padding: 40px; margin: 40px 0; font-family: 'Fira Code', monospace; font-size: 0.95rem; color: #aaa; }
         .extract-header { color: var(--apple-blue); font-size: 0.75rem; margin-bottom: 20px; display: block; letter-spacing: 2px; }
 
-        /* THE MATRIX WALL (+15% Velocity) */
-        .matrix-section { height: 450px; position: relative; margin: 80px 0; border: 1px solid rgba(255,255,255,0.05); overflow: hidden; mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent); -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent); }
-        #name-wall { display: flex; flex-wrap: wrap; gap: 15px 35px; padding: 40px; justify-content: center; position: absolute; width: calc(100% - 80px); animation: scrollWall 110s linear infinite; }
-        .name-entry { font-family: 'Fira Code'; font-size: 0.65rem; color: #333; text-transform: uppercase; white-space: nowrap; }
-        .pink-name { color: var(--apple-pink) !important; font-weight: 700; font-size: 0.85rem; }
+        /* REPAIRED VERTICAL SCROLL ENGINE */
+        .matrix-section { 
+            height: 500px; 
+            position: relative; 
+            margin: 80px 0; 
+            border: 1px solid rgba(255,255,255,0.05); 
+            overflow: hidden; 
+            mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent); 
+            -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent); 
+        }
+
+        #name-wall { 
+            column-count: 3; 
+            column-gap: 40px; 
+            width: 100%;
+            animation: scrollWall 100s linear infinite; 
+        }
+
+        .name-entry { 
+            display: block; 
+            font-family: 'Fira Code'; 
+            font-size: 0.65rem; 
+            color: #333; 
+            text-transform: uppercase; 
+            margin-bottom: 8px; 
+            white-space: nowrap; 
+        }
+        
+        .pink-name { color: var(--apple-pink) !important; font-weight: 700; font-size: 0.8rem; }
         .blue-name { color: var(--apple-blue) !important; font-weight: 600; }
         .green-name { color: var(--apple-green) !important; font-weight: 600; }
         .highlight::before { content: "⌘ "; }
 
-        @keyframes scrollWall { from { transform: translateY(0); } to { transform: translateY(-50%); } }
+        @keyframes scrollWall { 
+            0% { transform: translateY(0); } 
+            100% { transform: translateY(-50%); } 
+        }
 
-        /* SIGNATURE AUTO-INVERSION */
+        /* SIGNATURE REPAIR */
         .signature-container { margin-top: 50px; text-align: right; }
         .signature-img { 
             max-width: 280px; 
-            filter: invert(1) brightness(2) contrast(150%); /* This turns your black ink white */
+            filter: invert(1) brightness(2); /* Flips black ink to white */
+            mix-blend-mode: screen; /* Effectively removes the black background */
             opacity: 0.9; 
         }
 
-        /* SYSTEM OVERLAYS */
         .system-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 5000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(20px); cursor: zoom-out; }
         .system-overlay img, .system-overlay iframe { max-width: 90%; max-height: 90%; border: 1px solid #333; }
 
         footer { padding: 100px 40px; text-align: center; font-family: 'Fira Code'; font-size: 0.6rem; letter-spacing: 4px; color: #333; }
         .cmd-egg { color: var(--apple-blue); cursor: pointer; transition: 0.3s; margin: 0 15px; }
-        .cmd-egg:hover { text-shadow: 0 0 10px var(--apple-blue); color: #fff; }
 
-        @media (max-width: 768px) { nav { text-align: center; } h1 { font-size: 1.6rem; } .typewriter-box { font-size: 0.9rem; } }
+        @media (max-width: 768px) { #name-wall { column-count: 1; } h1 { font-size: 1.6rem; } }
     </style>
 </head>
 <body>
@@ -107,7 +131,9 @@
             <p>I successfully landed the role of Inventory Trainer late in my career, traveling to California often and leading a team of individuals helping to open the new 3rd Street Promenade store in Santa Monica, CA. I'll never forget those early mornings and late nights, pushing ourselves to get every ounce of effort while we prepped that store for launch. It was nothing short of heaven to be able to walk to the park overlooking the beach on a 15 minute break. I'll always look back on the tail end of my career at Apple fondly.</p>
         </section>
 
-        <section class="matrix-section"><div id="name-wall"></div></section>
+        <section class="matrix-section">
+            <div id="name-wall"></div>
+        </section>
 
         <section class="narrative">
             <p>My first major product launch was the iPhone 3GS. I was there in 2010 when we launched the iPad. I attended Steve Job’s funeral with thousands of others in October of 2011. I celebrated the 30th anniversary of the Macintosh computer, and was lucky enough to have my name emblazoned forever in the halls of 1 Infinite Loop as one of the employees who played a small part in the success of that platform. Those were the major events. There are many less widely known events during that time, but no less important in my mind.</p>
@@ -131,7 +157,9 @@
         function generateWall() {
             let names = [{n: pink, t: 'pink-name highlight'}, ...blue.map(n=>({n, t:'blue-name'})), ...green.map(n=>({n, t:'green-name'})), ...gray.map(n=>({n, t:''}))];
             names.sort(()=>Math.random()-0.5);
-            document.getElementById('name-wall').innerHTML = [...names, ...names, ...names].map(i=>`<span class="name-entry ${i.t}">${i.n}</span>`).join('');
+            // We duplicate the list to ensure the height is large enough for a smooth loop
+            const wall = document.getElementById('name-wall');
+            wall.innerHTML = [...names, ...names].map(i=>`<span class="name-entry ${i.t}">${i.n}</span>`).join('');
         }
 
         const typeT = document.getElementById('typewriter-target');
