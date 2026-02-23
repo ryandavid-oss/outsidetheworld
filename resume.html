@@ -34,65 +34,80 @@
             background-size: 100% 3px, 3px 100%; pointer-events: none; z-index: 1000; opacity: 0.15;
         }
 
+        /* NAVIGATION: Desktop Left, Mobile Center */
         nav { padding: 60px 40px 20px; text-align: left; position: relative; z-index: 1001; }
         .nav-logo { width: 220px; filter: drop-shadow(0 0 20px rgba(99, 149, 238, 0.2)); }
 
-        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px 100px; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px 100px; }
 
-        /* HERO: FOG NAME & INTERACTIVE SCANNER */
+        /* HERO SECTION */
         .hero {
             display: flex; align-items: center; gap: 60px;
-            padding: 80px 0; border-bottom: 1px solid var(--border);
+            padding: 60px 0; border-bottom: 1px solid var(--border);
         }
 
+        /* PORTRAIT ADJUSTMENT: Headroom Fix */
         .scanner-frame {
-            position: relative; width: 200px; height: 200px;
+            position: relative; width: 220px; height: 220px;
             border: 1px solid var(--border); padding: 10px;
-            transition: all 0.5s ease;
+            transition: all 0.5s ease; flex-shrink: 0;
         }
-
         .portrait {
             width: 100%; height: 100%;
             background: #111;
             background-image: url('Images/Profile.jpg');
-            background-size: cover; background-position: center;
+            background-size: cover; 
+            background-position: center 20%; /* Scooched down to prevent head cutoff */
             filter: grayscale(100%) brightness(0.7);
             transition: 0.5s ease;
             position: relative; overflow: hidden;
         }
-
         .scanner-frame:hover .portrait { filter: grayscale(0%) brightness(1); }
-
         .portrait::after {
             content: ""; position: absolute; top: -100%; left: 0; width: 100%; height: 2px;
             background: var(--brand-teal);
             box-shadow: 0 0 15px var(--brand-teal);
             animation: scan 4s infinite linear;
         }
-
         @keyframes scan { 0% { top: 0%; } 100% { top: 100%; } }
 
+        /* FULL NAME FOG REVEAL */
         .fog-name {
-            font-size: 4.5rem; color: white; margin: 0;
-            font-weight: 900; letter-spacing: 15px;
+            font-size: 3.8rem; color: white; margin: 0;
+            font-weight: 900; letter-spacing: 10px;
             text-transform: uppercase; line-height: 1;
             animation: fogReveal 3s forwards;
             text-shadow: 0 0 40px rgba(255,255,255,0);
         }
-
         @keyframes fogReveal {
-            0% { letter-spacing: 40px; filter: blur(20px); opacity: 0; }
-            100% { letter-spacing: -2px; filter: blur(0); opacity: 1; 
+            0% { letter-spacing: 30px; filter: blur(20px); opacity: 0; }
+            100% { letter-spacing: -1px; filter: blur(0); opacity: 1; 
                    text-shadow: 0 0 20px rgba(255,255,255,0.2); }
         }
 
         .job-title {
             font-family: 'Fira Code'; color: var(--brand-teal);
-            letter-spacing: 5px; text-transform: uppercase;
-            margin-top: 20px; font-size: 0.9rem;
+            letter-spacing: 4px; text-transform: uppercase;
+            margin-top: 20px; font-size: 0.85rem;
         }
 
-        /* DOSSIER SECTION STYLING */
+        /* MISSION STATEMENT SECTION */
+        .mission-box {
+            margin: 60px 0; padding: 40px;
+            background: linear-gradient(90deg, var(--glass), transparent);
+            border-left: 2px solid var(--brand-pink);
+        }
+        .mission-box h2 { 
+            font-family: 'Fira Code'; font-size: 0.7rem; 
+            color: var(--brand-pink); letter-spacing: 5px; 
+            margin-bottom: 20px; text-transform: uppercase; 
+        }
+        .mission-box p { 
+            font-size: 1.4rem; font-weight: 300; line-height: 1.6; color: #fff;
+            max-width: 850px;
+        }
+
+        /* EXPERIENCE & DOSSIER STYLING */
         .section-label {
             font-family: 'Fira Code'; color: var(--brand-light-blue);
             font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase;
@@ -100,36 +115,24 @@
         }
         .section-label::after { content: ""; height: 1px; flex-grow: 1; background: var(--border); }
 
-        .experience-entry {
-            margin-bottom: 60px; padding-left: 20px; border-left: 1px solid var(--border);
-            transition: 0.3s;
-        }
-
-        .experience-entry:hover { border-left-color: var(--brand-blue); }
-
+        .experience-entry { margin-bottom: 60px; padding-left: 20px; border-left: 1px solid var(--border); }
         .exp-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 15px; }
         .exp-role { font-size: 1.8rem; color: white; font-weight: 700; margin: 0; }
         .exp-company { font-family: 'Fira Code'; color: var(--brand-blue); font-size: 1rem; }
         .exp-date { font-family: 'Fira Code'; color: #555; font-size: 0.8rem; }
+        .exp-body { font-weight: 300; color: #999; line-height: 1.8; }
 
-        .exp-body { font-weight: 300; color: #999; line-height: 1.8; max-width: 800px; }
-        .exp-body strong { color: var(--brand-light-blue); }
-
-        /* SKILLS */
         .skills-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
         .skill-chip { 
             padding: 5px 12px; border: 1px solid var(--border); 
             font-family: 'Fira Code'; font-size: 0.65rem; color: var(--brand-teal);
         }
 
-        /* MAC30 LINK */
         .believer-link {
-            display: inline-block; margin-top: 20px;
+            display: inline-block; margin-top: 15px;
             color: var(--brand-pink); text-decoration: none;
-            font-family: 'Fira Code'; font-size: 0.7rem; border-bottom: 1px solid transparent;
-            transition: 0.3s;
+            font-family: 'Fira Code'; font-size: 0.7rem;
         }
-        .believer-link:hover { border-bottom-color: var(--brand-pink); }
 
         .uplink-btn {
             display: inline-block; margin-top: 40px;
@@ -138,13 +141,22 @@
             font-family: 'Fira Code'; font-size: 0.8rem; letter-spacing: 2px;
             transition: 0.3s;
         }
-        .uplink-btn:hover { background: var(--brand-blue); color: var(--bg-dark); }
+        .uplink-btn:hover { background: var(--brand-blue); color: var(--bg-dark); box-shadow: 0 0 20px rgba(99, 149, 238, 0.4); }
 
+        /* SIGNATURE */
+        .sig-block { margin-top: 100px; text-align: right; }
+        .sig-img { max-width: 250px; filter: invert(1) brightness(2) contrast(150%); mix-blend-mode: screen; opacity: 0.8; }
+
+        /* MOBILE OPTIMIZATION */
         @media (max-width: 768px) {
-            nav { text-align: center; }
-            .hero { flex-direction: column; text-align: center; gap: 30px; }
-            .fog-name { font-size: 2.5rem; letter-spacing: 5px; }
+            nav { text-align: center; padding: 40px 20px; }
+            .hero { flex-direction: column; text-align: center; gap: 30px; padding: 40px 0; }
+            .fog-name { font-size: 2.2rem; letter-spacing: 4px; }
+            .job-title { font-size: 0.75rem; letter-spacing: 2px; }
+            .mission-box p { font-size: 1.1rem; }
             .exp-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+            .exp-role { font-size: 1.4rem; }
+            .sig-block { text-align: center; }
         }
     </style>
 </head>
@@ -161,11 +173,16 @@
                 <div class="portrait"></div>
             </div>
             <div class="hero-content">
-                <h1 class="fog-name">RyanDavid</h1>
-                <div class="job-title">Assistant Director // Brand Strategy & Tech Logistics</div>
-                <a href="Images/Resume.pdf" class="uplink-btn">⌘ UPLINK_RESUME_PDF</a>
+                <h1 class="fog-name">RyanDavid Burningham</h1>
+                <div class="job-title">Asst. Director of Brand Strategy & Technology Logistics</div>
+                <a href="Images/Resume.pdf" class="uplink-btn">⌘ UPLINK_RESUME_DATA</a>
             </div>
         </header>
+
+        <section class="mission-box">
+            <h2>Core_Directive</h2>
+            <p>Architecting a vivid organizational future by bridging the gap between high-precision technology logistics and youthful, recognizable brand identity. My mission is to transform corporate frameworks into cultural landmarks that attract elite talent and drive operational excellence.</p>
+        </section>
 
         <section id="experience">
             <div class="section-label">01 // ACTIVE_TENURE</div>
@@ -173,22 +190,19 @@
             <div class="experience-entry">
                 <div class="exp-header">
                     <div>
-                        <h3 class="exp-role">Asst. Director of Brand Strategy & Technology Logistics</h3>
+                        <h3 class="exp-role">Asst. Director of Brand Strategy & Tech Logistics</h3>
                         <span class="exp-company">Child & Family Support Services</span>
                     </div>
                     <span class="exp-date">2014 — CURRENT</span>
                 </div>
                 <div class="exp-body">
-                    A multi-phase evolution from high-volume talent acquisition to **Architect of Brand Identity**. Currently spearheading the total reimagining of agency aesthetics, transitioning from corporate standard to a **vivid, youthful vision** synonymous with modern industry leaders. 
-                    <br><br>
-                    Managing the intersection of **Brand Direction** and **Technology Logistics**: overseeing web infrastructure, telemedicine deployment, social marketing, and the end-to-end support of 500+ employees. Instrumental in crafting a brand mark that serves as a beacon for elite recruiting and organizational pride.
+                    A dual-track leadership role managing the intersection of **Brand Evolution** and **Infrastructure Reliability**. Currently spearheading a total agency rebrand, moving from traditional corporate aesthetics to a vivid, high-energy visual vision. Managing end-to-end technology logistics for 500+ employees, ensuring telemedicine, EHR, and network uptime meet the standard of a premier behavioral health institution.
                 </div>
                 <div class="skills-grid">
                     <div class="skill-chip">Brand Architecture</div>
-                    <div class="skill-chip">IT Administration</div>
-                    <div class="skill-chip">Web Development</div>
-                    <div class="skill-chip">Strategic Marketing</div>
-                    <div class="skill-chip">EHR/EMR Support</div>
+                    <div class="skill-chip">IT Systems Admin</div>
+                    <div class="skill-chip">Technology Procurement</div>
+                    <div class="skill-chip">Marketing Strategy</div>
                 </div>
             </div>
 
@@ -197,28 +211,15 @@
             <div class="experience-entry">
                 <div class="exp-header">
                     <div>
-                        <h3 class="exp-role">Inventory Control Lead & Regional Trainer</h3>
+                        <h3 class="exp-role">Inventory Control Lead & Trainer</h3>
                         <span class="exp-company">Apple Inc.</span>
                     </div>
                     <span class="exp-date">2009 — 2014</span>
                 </div>
                 <div class="exp-body">
-                    Mastered the "Human Element" behind the retail machine. Managed logistics for elite-tier launches (3rd Street Promenade) while maintaining a **.10% shrink rate** and **99.85% inventory accuracy**. Acted as a Regional Trainer, cultivating professional excellence across the Southwest.
+                    Pioneered logistical frameworks for high-profile retail launches including the **3rd Street Promenade** flagship. Achieved a regional-best **.10% shrink rate** and maintained 99%+ inventory precision. 
                     <br>
-                    <a href="mac30.html" class="believer-link">⌘ VIEW_PERSONNEL_LOG_06/30/07</a>
-                </div>
-            </div>
-
-            <div class="experience-entry">
-                <div class="exp-header">
-                    <div>
-                        <h3 class="exp-role">E-Care Team Leader</h3>
-                        <span class="exp-company">Cox Communications</span>
-                    </div>
-                    <span class="exp-date">2001 — 2009</span>
-                </div>
-                <div class="exp-body">
-                    Led a 20+ member digital response team through the first major era of online technical support. Bridged the gap between local operations and international outsourced partners in Panama, ensuring brand standards were maintained across a global support footprint.
+                    <a href="mac30.html" class="believer-link">⌘ ACCESS_MAC30_PERSONNEL_ARCHIVE</a>
                 </div>
             </div>
 
@@ -231,7 +232,7 @@
                     <span class="exp-date">2000 — 2001</span>
                 </div>
                 <div class="exp-body">
-                    Operated within high-alpine, extreme environments to ensure a secure footprint across 2,500+ acres of terrain. Acted as a primary medical first responder, managing complex triage and high-altitude emergency protocols under severe weather conditions. Bridged the gap between local law enforcement, medical services, and guest safety.
+                    Served as a high-altitude emergency responder for a 2,500-acre alpine footprint. Managed complex triage and tactical security protocols in extreme weather environments, acting as a critical link between guest services and law enforcement.
                 </div>
             </div>
         </section>
@@ -243,14 +244,16 @@
                 <div class="skill-chip">Cisco Meraki</div>
                 <div class="skill-chip">Mosyle MDM</div>
                 <div class="skill-chip">Google Workspace</div>
-                <div class="skill-chip">Microsoft 365</div>
                 <div class="skill-chip">Ubiquiti Unifi</div>
                 <div class="skill-chip">Bilingual (Spanish)</div>
-                <div class="skill-chip">Kana CRM</div>
             </div>
         </section>
 
+        <div class="sig-block">
+            <img src="Images/Signature.png" alt="Signature" class="sig-img">
+        </div>
+
     </div>
 
-    </body>
+</body>
 </html>
