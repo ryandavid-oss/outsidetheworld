@@ -158,22 +158,15 @@
         .sig-block { margin-top: 80px; text-align: right; }
         .sig-img { max-width: 250px; filter: invert(1) brightness(2) contrast(150%); mix-blend-mode: screen; opacity: 0.8; }
 
-        /* --- PRINT REPAIR: NO INVISIBLE TEXT --- */
+        /* PRINT SYSTEM REPAIR */
         @media print {
             * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
             nav, .sig-block, body::after, .cursor, .portrait::after { display: none !important; }
             body { background: #000 !important; color: #fff !important; }
             .container { padding: 0 !important; margin: 0 !important; max-width: 100% !important; }
-            .fog-name { 
-                background: none !important; 
-                -webkit-text-fill-color: #fff !important; 
-                opacity: 1 !important; 
-                filter: none !important;
-                letter-spacing: 2px !important; 
-            }
+            .fog-name { background: none !important; -webkit-text-fill-color: #fff !important; opacity: 1 !important; filter: none !important; letter-spacing: 2px !important; }
             .exp-role, .mission-box p, .edu-school { color: #fff !important; }
-            .exp-body, .skills-grid, .skill-chip { color: #ccc !important; border-color: #333 !important; }
-            .portrait { filter: grayscale(0%) !important; border: 1px solid var(--brand-blue); }
+            .exp-body, .skill-chip { color: #ccc !important; }
             .experience-entry, .award-entry, .mission-box { page-break-inside: avoid; border-color: #333 !important; }
         }
 
@@ -181,7 +174,6 @@
             nav { text-align: center; }
             .hero { flex-direction: column; text-align: center; gap: 30px; }
             .section-label { flex-direction: column; align-items: flex-start; gap: 10px; }
-            .live-counter { margin-left: 0; }
         }
     </style>
 </head>
@@ -225,7 +217,7 @@
                     <span class="exp-date">2014 — CURRENT</span>
                 </div>
                 <div class="exp-body">
-                    Spearheading an agency-wide aesthetic revolution, transitioning from corporate standards to a high-impact, youthful brand mark. Managing comprehensive technology logistics for a 500+ member workforce, overseeing telemedicine, asset procurement, and cross-departmental network infrastructure. 
+                    Spearheading an agency-wide aesthetic revolution, transitioning from corporate standards to a high-impact brand mark. Managing comprehensive technology logistics for a 500+ member workforce, overseeing telemedicine, asset procurement, and network infrastructure. 
                 </div>
             </div>
 
@@ -239,48 +231,36 @@
                     <span class="exp-date">2009 — 2014</span>
                 </div>
                 <div class="exp-body">
-                    Orchestrated logistical launch protocols for the 3rd Street Promenade flagship. Maintained elite-tier inventory precision (99.85%) and mentored regional operational talent through the Southwest training circuit.
-                    <br><a href="mac30.html" style="color: var(--brand-pink); text-decoration: none; font-family: 'Fira Code'; font-size: 0.7rem; margin-top: 10px; display: inline-block;">[ ⌘ ACCESS_MAC30_ARCHIVE ]</a>
+                    Orchestrated logistical launch protocols for the 3rd Street Promenade flagship. Maintained elite-tier inventory precision (99.85%) and mentored regional operational talent through the Southwest.
                 </div>
             </div>
         </section>
 
-        <section id="arsenal">
-            <div class="section-label">03 // TACTICAL_ARSENAL</div>
-            <div class="arsenal-grid">
-                <div class="arsenal-cat">
-                    <h4>Ops & Logistics</h4>
-                    <div class="skills-grid">
-                        <div class="skill-chip">Global Inventory Control</div><div class="skill-chip">Shrink Management (.10%)</div>
-                        <div class="skill-chip">Asset Lifecycle Management</div><div class="skill-chip">Vendor Relations</div>
-                    </div>
-                </div>
-                <div class="arsenal-cat">
-                    <h4>Brand & Strategy</h4>
-                    <div class="skills-grid">
-                        <div class="skill-chip">Visual Identity Design</div><div class="skill-chip">Digital Transformation</div>
-                        <div class="skill-chip">Social Media Marketing</div><div class="skill-chip">Brand Storytelling</div>
-                    </div>
-                </div>
-                <div class="arsenal-cat">
-                    <h4>Tech Infrastructure</h4>
-                    <div class="skills-grid">
-                        <div class="skill-chip">Cisco Meraki</div><div class="skill-chip">Mosyle MDM</div><div class="skill-chip">Ubiquiti Unifi</div>
-                        <div class="skill-chip">Adobe Creative Studio</div><div class="skill-chip">Telemedicine Deployment</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="commendations">
-            <div class="section-label">04 // COMMENDATIONS</div>
+        <section id="awards">
+            <div class="section-label">03 // COMMENDATIONS</div>
             <div class="award-entry">
                 <div class="award-meta">SYSTEM_HONOR // MIKE TERKELTAUB AWARD // 2023</div>
                 <div class="exp-body">
-                    Recognized for embodying the "Whatever it Takes" spirit. Catalyst for technological evolution and organizational morale, ensuring families and teammates have the tools required for excellence.
+                    Recognized for embodying the "Whatever it Takes" spirit. Catalyst for technological evolution and organizational morale, ensuring teams have the tools required for excellence.
                 </div>
                 <div class="award-quote">
-                    "RD is one of those people that just makes people’s lives better every day... Truly the definition of going above and beyond."
+                    "RD is one of those people that just makes people’s lives better every day... he exudes going above and beyond."
+                </div>
+            </div>
+        </section>
+
+        <section id="education">
+            <div class="section-label">04 // ACADEMIC_TENURE</div>
+            <div class="experience-entry">
+                <div class="exp-header">
+                    <div>
+                        <h3 class="exp-role">Business Management & Operational Strategy</h3>
+                        <span class="exp-company">Ottawa University // Rio Salado // BYU-Idaho</span>
+                    </div>
+                    <span class="exp-date">90+ CREDIT HOURS</span>
+                </div>
+                <div class="exp-body">
+                    Focused study in high-level management frameworks, organizational behavior, and strategic planning. Accumulated professional-tier credit volume focused on the mechanics of successful business operations.
                 </div>
             </div>
         </section>
@@ -292,29 +272,21 @@
                     <h4>Endurance & Navigation</h4>
                     <div class="skills-grid">
                         <div class="skill-chip">Tactical Mountain Biking</div><div class="skill-chip">High-Altitude Hiking</div>
-                        <div class="skill-chip">Trail Running</div><div class="skill-chip">Emergency Response (Alumni)</div>
+                        <div class="skill-chip">Trail Running</div>
                     </div>
                 </div>
                 <div class="arsenal-cat">
                     <h4>Media & Archaeology</h4>
                     <div class="skills-grid">
                         <div class="skill-chip">Legacy System Gaming</div><div class="skill-chip">Narrative Writing</div>
-                        <div class="skill-chip">Eclectic Auditory Data</div><div class="skill-chip">Digital Archiving</div>
+                        <div class="skill-chip">Digital Archiving</div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="education">
-            <div class="section-label">06 // ACADEMIC_TENURE</div>
-            <div class="edu-item">
-                <div class="edu-school">Ottawa University // Rio Salado // BYU-Idaho</div>
-                <div class="edu-details">90+ Credit Hours accumulated in Business Management & Operational Strategy</div>
-            </div>
-        </section>
-
         <section id="contact">
-            <div class="section-label">07 // COMMUNICATION_HUB</div>
+            <div class="section-label">06 // COMMUNICATION_HUB</div>
             <div class="comm-hub">
                 <div style="margin-bottom: 15px;">
                     <span class="hub-label">[ SIGNAL ]</span>
@@ -337,17 +309,14 @@
     </div>
 
     <script>
-        // TYPEWRITER ENGINE
         const text = "Asst. Director of Brand Strategy & Tech Logistics";
         const target = document.getElementById('typewriter-record');
         let i = 0;
         function type() { if (i < text.length) { target.textContent += text.charAt(i++); setTimeout(type, 60); } }
 
-        // TENURE CLOCK ENGINE
         function updateTenure() {
             const startDate = new Date("March 1, 2014 00:00:00");
             const now = new Date();
-            
             let years = now.getFullYear() - startDate.getFullYear();
             let months = now.getMonth() - startDate.getMonth();
             let days = now.getDate() - startDate.getDate();
