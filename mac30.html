@@ -9,9 +9,9 @@
         @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500;700&family=Inter:wght@300;400;700;900&display=swap');
 
         :root {
-            --apple-blue: #6395EE;
-            --apple-green: #32CD32;
-            --apple-pink: #FF69B4;
+            --apple-blue: #6395EE;   /* FOUNDERS & PIONEERS */
+            --apple-green: #32CD32;  /* CO-WORKERS */
+            --apple-pink: #FF69B4;   /* RYAN_DAVID */
             --bg-dark: #050505;
         }
 
@@ -32,22 +32,22 @@
             background-size: 100% 3px, 3px 100%; pointer-events: none; z-index: 1000; opacity: 0.2;
         }
 
-        /* HERO NAVIGATION */
+        /* NAVIGATION: LEFT JUSTIFIED ON DESKTOP */
         nav { 
             position: relative; 
-            padding: 40px; 
-            text-align: center;
+            padding: 60px 40px 20px; 
+            text-align: left; /* Desktop Default */
             z-index: 1001; 
         }
 
         .nav-logo { 
             width: 220px; 
             filter: drop-shadow(0 0 20px rgba(99, 149, 238, 0.4)); 
-            transition: 0.3s;
         }
 
         header {
-            padding: 20px 40px 60px; text-align: center;
+            padding: 20px 40px 60px;
+            text-align: center;
             background: linear-gradient(to bottom, rgba(99, 149, 238, 0.05), transparent);
         }
 
@@ -55,14 +55,32 @@
             font-size: 3rem; color: #fff; margin: 0; letter-spacing: -1px; 
             font-weight: 900; text-transform: uppercase;
         }
-        .badge-id { font-family: 'Fira Code'; font-size: 0.8rem; color: var(--apple-blue); opacity: 0.6; margin-top: 10px; }
+
+        /* TYPEWRITER SERVICE RECORD */
+        .typewriter-box {
+            font-family: 'Fira Code', monospace;
+            font-size: 1.1rem; /* Slightly larger */
+            color: var(--apple-blue);
+            margin-top: 15px;
+            min-height: 1.5rem;
+            display: inline-block;
+        }
+        .cursor {
+            display: inline-block;
+            width: 10px; height: 18px;
+            background-color: var(--apple-blue);
+            margin-left: 5px;
+            animation: blink 1s infinite;
+            vertical-align: middle;
+        }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
         .content-grid {
             max-width: 900px; margin: 0 auto; padding: 60px 20px;
         }
 
-        /* NARRATIVE STYLING */
-        .narrative p { margin-bottom: 30px; font-size: 1.1rem; font-weight: 300; }
+        /* NARRATIVE & BLOG STYLING */
+        .narrative p { margin-bottom: 30px; font-size: 1.15rem; font-weight: 300; }
         
         .blog-extract {
             background: rgba(255,255,255,0.03);
@@ -73,7 +91,7 @@
         }
         .extract-header { color: var(--apple-blue); font-size: 0.75rem; margin-bottom: 20px; display: block; letter-spacing: 2px; }
 
-        /* THE MATRIX WALL SECTION */
+        /* THE MATRIX WALL (15% Speed Increase) */
         .matrix-section {
             height: 500px; position: relative; margin: 80px 0;
             border: 1px solid rgba(255,255,255,0.05); overflow: hidden;
@@ -83,16 +101,28 @@
 
         #name-wall {
             display: flex; flex-wrap: wrap; gap: 15px 40px; padding: 40px;
-            justify-content: center; animation: scrollWall 200s linear infinite;
+            justify-content: center; 
+            animation: scrollWall 130s linear infinite; /* Increased velocity */
         }
 
-        .name-entry { font-family: 'Fira Code'; font-size: 0.65rem; color: #555; text-transform: uppercase; }
+        .name-entry { font-family: 'Fira Code'; font-size: 0.65rem; color: #333; text-transform: uppercase; }
         .pink-name { color: var(--apple-pink) !important; font-weight: 700; font-size: 0.85rem; }
-        .green-name { color: var(--apple-green) !important; font-weight: 600; }
-        .blue-name { color: var(--apple-blue) !important; }
+        .blue-name { color: var(--apple-blue) !important; font-weight: 600; }
+        .green-name { color: var(--apple-green) !important; }
         .highlight::before { content: "⌘ "; }
 
         @keyframes scrollWall { from { transform: translateY(0); } to { transform: translateY(-50%); } }
+
+        /* SIGNATURE */
+        .signature-container {
+            margin-top: 50px;
+            text-align: right;
+        }
+        .signature-img {
+            max-width: 250px;
+            filter: invert(1) brightness(2); /* Invert black-to-white */
+            opacity: 0.8;
+        }
 
         /* OVERLAY SYSTEM */
         .system-overlay {
@@ -111,9 +141,11 @@
         .cmd-egg:hover { text-shadow: 0 0 10px var(--apple-blue); color: #fff; }
 
         @media (max-width: 768px) { 
-            h1 { font-size: 1.8rem; letter-spacing: 0; } 
+            nav { text-align: center; }
+            h1 { font-size: 1.8rem; } 
             .blog-extract { padding: 25px; font-size: 0.85rem; }
             .nav-logo { width: 160px; }
+            .typewriter-box { font-size: 0.8rem; }
         }
     </style>
 </head>
@@ -125,7 +157,9 @@
 
     <header>
         <h1>A Name on the Wall, 1 Infinite Loop</h1>
-        <div class="badge-id">SERVICE_RECORD // 2009-2014 // RYAN_DAVID</div>
+        <div class="typewriter-box">
+            <span id="typewriter-target"></span><span class="cursor"></span>
+        </div>
     </header>
 
     <div class="content-grid">
@@ -157,11 +191,15 @@
         </section>
 
         <section class="narrative">
-            <p>My first major product launch was the iPhone 3GS. I was there in 2010 when we launched the iPad. I attended Steve Job’s funeral with thousands of others in October of 2011. I celebrated the 30th anniversary of the Macintosh computer, and was lucky enough to have my name emblazoned forever in the halls of 1 Infinite Loop as one of the employees who played a small part in the success of that platform. Those were the major events. There are many less widely known events during that time, but no less important in my mind. </p>
+            <p>My first major product launch was the iPhone 3GS. I was there in 2010 when we launched the iPad. I attended Steve Job’s funeral with thousands of others in October of 2011. I celebrated the 30th anniversary of the Macintosh computer, and was lucky enough to have my name emblazoned forever in the halls of 1 Infinite Loop as one of the employees who played a small part in the success of that platform. Those were the major events. There are many less widely known events during that time, but no less important in my mind.</p>
 
             <p>Like all good things, it had to come to an end. Suffice it to say that my personal life collided heavily and irrevocably with my ambitions and pleasure at Apple. My growing family was my ultimate family, and while I enjoyed corporate status as a traveling Inventory Trainer, my schedule rested within the needs of Apple Retail. Evenings, weekends, and ‘clopening shifts’ would ultimately dictate my path away from Apple. Five years after I began there, I signed my resignation letter with melancholy as I laid the foundation for the next two working decades of my life.</p>
             
             <p>I will always be grateful for my time at Apple. I owe a debt of gratitude to those who I had the pleasure of working with. Most notable; Lindsey Costley, Andrew Calhoun, Jenn and Toby King, Chris Krieg, Jose Fernandez, Jose Ramirez, Jose Hernandez, Karlyn Herring, Corey Dillier, Eric Duffy, Saint, Ashley Lawson, Anna Sammons, Eric Locke, Maria Nissen, Bob O'Leary, Jack Saber, Scott Snyder, Eric Stout, Mike Van Dusen, Mark Henderson, Natalie Clifford, Sean Little, Brandon Love, Denise Harris-Kester, Bryan Beata, Mario Aldrete, Mary Lideen, Stanford Florence, Gregory Terry, Chelsey McPeek, Tyson Brown, Alex Tighe, Mike Franzone, Jake Burger and many, many others too numerous to list here. This was a huge part of my life, and I felt impressed to mark this phase of my life upon the digital record of OTW.</p>
+
+            <div class="signature-container">
+                <img src="Images/Signature.png" alt="RyanDavid Burningham" class="signature-img">
+            </div>
         </section>
     </div>
 
@@ -177,38 +215,56 @@
     </footer>
 
     <script>
+        // TYPEWRITER LOGIC
+        const typeTarget = document.getElementById('typewriter-target');
+        const typeText = "SERVICE_RECORD // 2009-2014 // RyanDavid Burningham";
+        let charIndex = 0;
+
+        function typeWriter() {
+            if (charIndex < typeText.length) {
+                typeTarget.textContent += typeText.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeWriter, 80);
+            }
+        }
+
+        // MATRIX DATA
         const pinkName = "RyanDavid Burningham";
         
-        const greenNames = ["Steve Wozniak", "Steve Jobs", "Mike Markkula", "Bill Fernandez", "Rod Holt", "Randy Wigginton", "Chris Espinosa", "Jim Martindale", "Sherry Livingston", "Don Breuner", "Daniel Kottke", "Mark Johnson", "Gene Carter", "Tom Whitney", "Wendell Sander", "Dick Huston", "Cliff Huston", "Ed Ruder", "Jef Raskin", "Brian Howard", "Bill Atkinson"];
+        // PIONEERS (NOW BLUE)
+        const bluePioneers = ["Steve Wozniak", "Steve Jobs", "Mike Markkula", "Bill Fernandez", "Rod Holt", "Randy Wigginton", "Michael Scott", "Chris Espinosa", "Jim Martindale", "Sherry Livingston", "Don Breuner", "Daniel Kottke", "Mark Johnson", "Gene Carter", "Tom Whitney", "Wendell Sander", "Dick Huston", "Cliff Huston", "Ed Ruder", "Jef Raskin", "Brian Howard", "Bill Atkinson", "Ronald Wayne", "Patty Jobs", "John Draper", "Gary Martin", "Dana Redington", "Clive Twyman", "Robert Martinengo", "Cliff Story", "Chrisann Brennan", "Elmer Baum", "Phil Roybal", "Gary Shannon", "Bana Witt", "John Couch", "Chuck Mauro", "Brad Hacker", "Bruce Tognazzini", "Barry Yarkoni", "Kent Hopkins", "Cheng Lim", "Terri Powers", "Bob Bishop", "Rich Whicker", "Joanna Hoffman", "Burrell Smith", "Bud Tribble", "Bob Belleville", "Steve Capps", "George Crow", "Donn Denman", "Bruce Horn", "Susan Kare", "Larry Kenyon", "Caroline Rose", "Andy Hertzfeld", "Patti Kenyon", "Terry Oyama", "Ronald Nicholson", "Martin Haeberli", "Brian Robertson", "Pamela Wyman", "Bryan Stearns", "Debi Coleman", "Matt Carter", "Colette Askeland", "Linda Wilkin", "Brian Berkeley", "MaryEllen McCammon", "Vicki Milledge", "Bill Bull", "Jerome Coonen", "Bob Bailey", "Dan'l Lewin", "Sam Lyall", "Joe Shelton", "David Beaver", "Mike Collins", "Peter Folley", "Owen Densmore", "Bill Wathen", "J David Egner", "Deborah Bress", "Steve Scheier", "Scott Knaster", "John Casado", "Lynnea Johnson", "Marc LeBrun", "Larry Tesler", "Michael Jurewitz"];
         
-        const blueNames = ["Lindsey Costley", "Andrew Calhoun", "Jenn King", "Toby King", "Chris Krieg", "Jose Fernandez", "Jose Ramirez", "Jose Hernandez", "Karlyn Herring", "Corey Dillier", "Eric Duffy", "Saint", "Ashley Lawson", "Anna Sammons", "Eric Locke", "Maria Nissen", "Bob O'Leary", "Jack Saber", "Scott Snyder", "Eric Stout", "Mike Van Dusen", "Mark Henderson", "Natalie Clifford", "Sean Little", "Brandon Love", "Denise Harris-Kester", "Bryan Beata", "Mario Aldrete", "Mary Lideen", "Stanford Florence", "Gregory Terry", "Chelsey McPeek", "Tyson Brown", "Alex Tighe", "Mike Franzone", "Jake Burger"];
+        // CO-WORKERS (NOW GREEN)
+        const greenColleagues = ["Lindsey Costley", "Andrew Calhoun", "Jenn King", "Toby King", "Chris Krieg", "Jose Fernandez", "Jose Ramirez", "Jose Hernandez", "Karlyn Herring", "Corey Dillier", "Eric Duffy", "Saint", "Ashley Lawson", "Anna Sammons", "Eric Locke", "Maria Nissen", "Bob O'Leary", "Jack Saber", "Scott Snyder", "Eric Stout", "Mike Van Dusen", "Mark Henderson", "Natalie Clifford", "Sean Little", "Brandon Love", "Denise Harris-Kester", "Bryan Beata", "Mario Aldrete", "Mary Lideen", "Stanford Florence", "Gregory Terry", "Chelsey McPeek", "Tyson Brown", "Alex Tighe", "Mike Franzone", "Jake Burger"];
 
-        const grayNames = ["Ronald Wayne", "Patty Jobs", "Michael Scott", "John Draper", "Gary Martin", "Dana Redington", "Clive Twyman", "Robert Martinengo", "Cliff Story", "Chrisann Brennan", "Elmer Baum", "Phil Roybal", "Gary Shannon", "Bana Witt", "John Couch", "Chuck Mauro", "Brad Hacker", "Bruce Tognazzini", "Barry Yarkoni", "Kent Hopkins", "Cheng Lim", "Terri Powers", "Bob Bishop", "Rich Whicker", "Joanna Hoffman", "Burrell Smith", "Bud Tribble", "Bob Belleville", "Steve Capps", "George Crow", "Donn Denman", "Bruce Horn", "Susan Kare", "Larry Kenyon", "Caroline Rose", "Andy Hertzfeld", "Patti Kenyon", "Terry Oyama", "Ronald Nicholson", "Martin Haeberli", "Brian Robertson", "Pamela Wyman", "Bryan Stearns", "Debi Coleman", "Matt Carter", "Colette Askeland", "Linda Wilkin", "Brian Berkeley", "MaryEllen McCammon", "Vicki Milledge", "Bill Bull", "Jerome Coonen", "Bob Bailey", "Dan'l Lewin", "Sam Lyall", "Joe Shelton", "David Beaver", "Mike Collins", "Peter Folley", "Owen Densmore", "Bill Wathen", "J David Egner", "Deborah Bress", "Steve Scheier", "Scott Knaster", "John Casado", "Lynnea Johnson", "Marc LeBrun", "Larry Tesler", "Michael Jurewitz", "Tim Cook", "Arthur Levinson", "Katherine Adams", "Eddy Cue", "Craig Federighi", "Greg Joswiak", "Sabih Khan", "Deirdre O'Brien", "Kevan Parekh", "Johny Srouji", "John Ternus", "Mike Fenger", "Luca Maestri", "Isabel Ge Mahe", "Tor Myhren", "Adrian Perica", "Kristin Huguet Quayle", "Phil Schiller", "Wanda Austin", "Alex Gorsky", "Andrea Jung", "Monica Lozano", "Ronald Sugar", "Susan Wagner", "Angela Ahrendts", "Gil Amelio", "Fred Anderson", "Satjiv Chahil", "Paul Deneve", "Kaiann Drance", "Alan Dye", "Scott Forstall", "Jean-Louis Gassée", "John Giannandrea", "Ellen Hancock", "Lisa Jackson", "Bob Mansfield", "Peter Oppenheimer", "Jon Rubinstein", "Bertrand Serlet", "Bruce Sewell", "Michael Spindler", "Avie Tevanian", "Jeff Williams", "Jony Ive", "Bartley Andre", "Daniel Coster", "Daniele De Iuliis", "Richard Howarth", "Duncan Kerr", "Shin Nishibori", "Matthew Dean Rohrbach", "Douglas Satzger", "Calvin Seid", "Christopher Stringer", "Eugene Whang", "Rico Zorkendorfer", "Imran Chaudhri", "Darin Adler", "Samir Arora", "Frank Balistreri", "Michael Bartosh", "Samy Bengio", "Marc Benioff", "Sabeer Bhatia", "Mike Boich", "Amelia Boone", "Robert Brunner", "Claire Buffie", "Matt Casamassina", "Tantek Çelik", "Stuart Cheshire", "Adam Cheyer", "Lee Collins", "Richard Crandall", "Robert X. Cringely", "Doug Cutting", "Mark Davis", "Michael Dhuey", "Paul Donovan", "Hugh Dubberly", "Donna Dubinsky", "Hartmut Esslinger", "Alex Fielding", "Stephen Friend", "Antonio García Martínez", "Michael Gartenberg", "Bill Gaver", "Timnit Gebru", "Dominic Giampaolo", "Ashley Gjøvik", "Ian Goodfellow", "Ramanathan V. Guha", "Angela Guzman", "Trip Hawkins", "Michael Homer", "Hsiao-Wuen Hon", "Jordan Hubbard", "Dave Hyatt", "Caitlin Kalinowski", "Guy Kawasaki", "Kazuo Kawasaki", "Alan Kay", "Jim Keller", "Raja Koduri", "Ivan Krstić", "Chris Lattner", "Bruce Leak", "Dave Limp", "Kevin Lynch", "Richard F. Lyon", "Divya Nag", "Shantanu Narayen", "Don Norman", "Dave Opstad", "Rich Page", "Mark Papermaster", "Janneke Parrish", "Robert Pera", "Patrick Piemonte", "Roger Powell", "Paul Takac", "Brandon Tory", "Xiaoyuan Tu", "Morgan Wandell", "Wayne Westerman", "Daniel Williams", "Keith Williams", "Kristina Hooper Woolsey", "Ed Mackowiak", "Edward B. Stead", "Ellen Petry Leanse", "Eric Traut", "Ko Isono", "Luke Wood", "Laszlo Zsidek", "Lyle Crouse", "Lynn Takahashi", "Paul Mercer", "Steve Sakoman", "Susan Barnes", "Tony Blevins", "Weibao Wang", "Wil Houde", "Paul Devine"];
+        const grayNames = ["Tim Cook", "Arthur Levinson", "Katherine Adams", "Eddy Cue", "Craig Federighi", "Greg Joswiak", "Sabih Khan", "Deirdre O'Brien", "Kevan Parekh", "Johny Srouji", "John Ternus", "Mike Fenger", "Luca Maestri", "Isabel Ge Mahe", "Tor Myhren", "Adrian Perica", "Kristin Huguet Quayle", "Phil Schiller", "Wanda Austin", "Alex Gorsky", "Andrea Jung", "Monica Lozano", "Ronald Sugar", "Susan Wagner", "Angela Ahrendts", "Gil Amelio", "Fred Anderson", "Satjiv Chahil", "Paul Deneve", "Kaiann Drance", "Alan Dye", "Scott Forstall", "Jean-Louis Gassée", "John Giannandrea", "Ellen Hancock", "Lisa Jackson", "Bob Mansfield", "Peter Oppenheimer", "Jon Rubinstein", "Bertrand Serlet", "Bruce Sewell", "Michael Spindler", "Avie Tevanian", "Jeff Williams", "Jony Ive", "Bartley Andre", "Daniel Coster", "Daniele De Iuliis", "Richard Howarth", "Duncan Kerr", "Shin Nishibori", "Matthew Dean Rohrbach", "Douglas Satzger", "Calvin Seid", "Christopher Stringer", "Eugene Whang", "Rico Zorkendorfer", "Imran Chaudhri", "Darin Adler", "Samir Arora", "Frank Balistreri", "Michael Bartosh", "Samy Bengio", "Marc Benioff", "Sabeer Bhatia", "Mike Boich", "Amelia Boone", "Robert Brunner", "Claire Buffie", "Matt Casamassina", "Tantek Çelik", "Stuart Cheshire", "Adam Cheyer", "Lee Collins", "Richard Crandall", "Robert X. Cringely", "Doug Cutting", "Mark Davis", "Michael Dhuey", "Paul Donovan", "Hugh Dubberly", "Donna Dubinsky", "Hartmut Esslinger", "Alex Fielding", "Stephen Friend", "Antonio García Martínez", "Michael Gartenberg", "Bill Gaver", "Timnit Gebru", "Dominic Giampaolo", "Ashley Gjøvik", "Ian Goodfellow", "Ramanathan V. Guha", "Angela Guzman", "Trip Hawkins", "Michael Homer", "Hsiao-Wuen Hon", "Jordan Hubbard", "Dave Hyatt", "Caitlin Kalinowski", "Guy Kawasaki", "Kazuo Kawasaki", "Alan Kay", "Jim Keller", "Raja Koduri", "Ivan Krstić", "Chris Lattner", "Bruce Leak", "Dave Limp", "Kevin Lynch", "Richard F. Lyon", "Divya Nag", "Shantanu Narayen", "Don Norman", "Dave Opstad", "Rich Page", "Mark Papermaster", "Janneke Parrish", "Robert Pera", "Patrick Piemonte", "Roger Powell", "Paul Takac", "Brandon Tory", "Xiaoyuan Tu", "Morgan Wandell", "Wayne Westerman", "Daniel Williams", "Keith Williams", "Kristina Hooper Woolsey", "Ed Mackowiak", "Edward B. Stead", "Ellen Petry Leanse", "Eric Traut", "Ko Isono", "Luke Wood", "Laszlo Zsidek", "Lyle Crouse", "Lynn Takahashi", "Paul Mercer", "Steve Sakoman", "Susan Barnes", "Tony Blevins", "Weibao Wang", "Wil Houde", "Paul Devine"];
 
         const wall = document.getElementById('name-wall');
 
         function generateWall() {
-            // Filter duplicates out of grayNames
-            let uniqueGray = grayNames.filter(name => !greenNames.includes(name) && !blueNames.includes(name) && name !== pinkName);
-            
+            // Pool for unique names
             let allEntities = [
                 { name: pinkName, type: 'pink-name highlight' },
-                ...greenNames.map(n => ({ name: n, type: 'green-name' })),
-                ...blueNames.map(n => ({ name: n, type: 'blue-name' })),
-                ...uniqueGray.map(n => ({ name: n, type: '' }))
+                ...bluePioneers.map(n => ({ name: n, type: 'blue-name' })),
+                ...greenColleagues.map(n => ({ name: n, type: 'green-name' })),
+                ...grayNames.map(n => ({ name: n, type: '' }))
             ];
 
-            // Shuffle
+            // Shuffle pool to prevent static patterns
             allEntities.sort(() => Math.random() - 0.5);
 
-            const fullList = [...allEntities, ...allEntities]; // Double for seamless loop
+            // Double the list for a seamless CSS scroll loop
+            const fullList = [...allEntities, ...allEntities];
             wall.innerHTML = fullList.map(item => `<span class="name-entry ${item.type}">${item.name}</span>`).join('');
         }
 
         function openOverlay(id) { document.getElementById(id).style.display = 'flex'; }
         function closeOverlay(id) { document.getElementById(id).style.display = 'none'; }
         
-        generateWall();
+        window.onload = () => {
+            generateWall();
+            setTimeout(typeWriter, 1000); // Start typewriter after load
+        };
     </script>
 </body>
 </html>
