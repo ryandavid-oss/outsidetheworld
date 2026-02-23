@@ -56,7 +56,7 @@
             background: #111;
             background-image: url('Images/Profile.jpg');
             background-size: cover; 
-            background-position: center 45%; /* NUDGED DOWN FOR HEADROOM */
+            background-position: center 45%; 
             filter: grayscale(100%) brightness(0.7);
             transition: 0.5s ease;
             position: relative; overflow: hidden;
@@ -69,7 +69,7 @@
         }
         @keyframes scan { 0% { top: 0%; } 100% { top: 100%; } }
 
-        /* CINEMATIC FOGGY LETTERING [RECLAIMED] */
+        /* CINEMATIC FOGGY LETTERING */
         .fog-name { 
             font-size: clamp(1.8rem, 5vw, 3.5rem); 
             font-weight: 900; 
@@ -96,15 +96,7 @@
         .cursor { display: inline-block; width: 10px; height: 18px; background-color: var(--brand-teal); margin-left: 5px; animation: blink 1s infinite; vertical-align: middle; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-        .lang-badge {
-            display: inline-block; margin-top: 10px; padding: 4px 10px;
-            border: 1px solid var(--brand-light-blue);
-            color: var(--brand-light-blue); font-family: 'Fira Code';
-            font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase;
-            background: rgba(160, 190, 245, 0.05);
-        }
-
-        /* MISSION BOX (Top Tier) */
+        /* MISSION BOX */
         .mission-box {
             margin: 40px 0 60px; padding: 40px;
             background: linear-gradient(90deg, var(--glass), transparent);
@@ -133,7 +125,7 @@
         .award-meta { font-family: 'Fira Code'; color: var(--brand-pink); font-size: 0.8rem; letter-spacing: 3px; margin-bottom: 15px; }
         .award-quote { font-size: 1.1rem; font-style: italic; color: #eee; border-left: 2px solid rgba(255,255,255,0.1); padding-left: 20px; margin-top: 20px; }
 
-        /* ARSENAL GRID */
+        /* ARSENAL & INTERESTS GRID */
         .arsenal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
         .arsenal-cat h4 { font-family: 'Fira Code'; color: var(--brand-blue); font-size: 0.8rem; letter-spacing: 3px; margin-bottom: 20px; text-transform: uppercase; }
         .skills-grid { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -143,19 +135,26 @@
         /* COMMUNICATION HUB */
         .comm-hub { background: var(--glass); border: 1px solid var(--border); padding: 40px; font-family: 'Fira Code'; font-size: 0.85rem; }
         .comm-hub a { color: #fff; text-decoration: none; margin-left: 10px; transition: 0.3s; }
-        .comm-hub a:hover { color: var(--brand-blue); }
         .hub-label { color: var(--brand-blue); display: inline-block; width: 100px; }
 
         .sig-block { margin-top: 80px; text-align: right; }
         .sig-img { max-width: 250px; filter: invert(1) brightness(2) contrast(150%); mix-blend-mode: screen; opacity: 0.8; }
 
-        /* MOBILE OPTIMIZATION */
+        /* --- PRINT SYSTEM OVERRIDE --- */
+        @media print {
+            nav, .uplink-btn, .comm-hub, .sig-block, body::after { display: none !important; }
+            body { background-color: #000 !important; -webkit-print-color-adjust: exact; color: #eee !important; }
+            .container { padding: 0 !important; margin: 0 !important; max-width: 100% !important; }
+            .fog-name { animation: none !important; opacity: 1 !important; filter: none !important; letter-spacing: 2px !important; background: none !important; -webkit-text-fill-color: #fff !important; }
+            .portrait { filter: grayscale(0%) !important; border: 1px solid var(--brand-blue); }
+            .portrait::after { display: none !important; }
+            .experience-entry, .award-entry { page-break-inside: avoid; }
+        }
+
         @media (max-width: 768px) {
             nav { text-align: center; }
             .hero { flex-direction: column; text-align: center; gap: 30px; }
             .exp-header { flex-direction: column; align-items: flex-start; gap: 5px; }
-            .arsenal-grid { grid-template-columns: 1fr; }
-            .mission-box { padding: 25px; }
         }
     </style>
 </head>
@@ -176,7 +175,6 @@
                 <div class="job-title">
                     <span id="typewriter-record"></span><span class="cursor"></span>
                 </div>
-                <div class="lang-badge">⌘ BILINGUAL_PROFICIENCY: SPANISH // CERTIFIED</div>
             </div>
         </header>
 
@@ -196,7 +194,7 @@
                     <span class="exp-date">2014 — CURRENT</span>
                 </div>
                 <div class="exp-body">
-                    Spearheading an agency-wide aesthetic revolution, transitioning from corporate standards to a high-impact, youthful brand mark. Managing comprehensive technology logistics for a 500+ member workforce, overseeing telemedicine, EHR integration, and cross-departmental hardware/network infrastructure. 
+                    Spearheading an agency-wide aesthetic revolution, transitioning from corporate standards to a high-impact, youthful brand mark. Managing comprehensive technology logistics for a 500+ member workforce, overseeing telemedicine and EMR integration.
                 </div>
             </div>
 
@@ -210,34 +208,8 @@
                     <span class="exp-date">2009 — 2014</span>
                 </div>
                 <div class="exp-body">
-                    Orchestrated logistical launch protocols for the 3rd Street Promenade flagship. Maintained elite-tier inventory precision (99.85%) and mentored regional talent through Southwest-wide operational training initiatives.
+                    Orchestrated logistical launch protocols for the 3rd Street Promenade flagship. Maintained elite-tier inventory precision (99.85%) and mentored regional operational talent.
                     <br><a href="mac30.html" style="color: var(--brand-pink); text-decoration: none; font-family: 'Fira Code'; font-size: 0.7rem; margin-top: 10px; display: inline-block;">[ ⌘ ACCESS_MAC30_ARCHIVE ]</a>
-                </div>
-            </div>
-
-            <div class="experience-entry">
-                <div class="exp-header">
-                    <div>
-                        <h3 class="exp-role">E-Care Team Leader</h3>
-                        <span class="exp-company">Cox Communications</span>
-                    </div>
-                    <span class="exp-date">2001 — 2009</span>
-                </div>
-                <div class="exp-body">
-                    Commanded a digital technical unit of 20+ members. Standardized global technical support benchmarks by unifying internal e-care operations with international outsourced hubs in Panama.
-                </div>
-            </div>
-
-            <div class="experience-entry">
-                <div class="exp-header">
-                    <div>
-                        <h3 class="exp-role">Public Safety Officer // Alpine First Responder</h3>
-                        <span class="exp-company">Snowbird Ski Resort</span>
-                    </div>
-                    <span class="exp-date">2000 — 2001</span>
-                </div>
-                <div class="exp-body">
-                    Executed tactical safety protocols across 2,500 alpine acres. Managed high-altitude medical triage and guest security within extreme environmental envelopes, acting as a primary emergency link.
                 </div>
             </div>
         </section>
@@ -247,70 +219,57 @@
             <div class="award-entry">
                 <div class="award-meta">SYSTEM_HONOR // MIKE TERKELTAUB AWARD // 2023</div>
                 <div class="exp-body">
-                    Recipient of the Mike Terkeltaub Award for embodying the "Whatever it Takes" spirit. Recognized as a catalyst for technological evolution and organizational morale, ensuring families and teammates have the tools required for dignity and excellence.
+                    Recognized for embodying the "Whatever it Takes" spirit. Catalyst for technological evolution and organizational morale.
                 </div>
                 <div class="award-quote">
-                    "RD is one of those people that just makes people’s lives better every day... he exudes going above and beyond. Truly the definition of that."
+                    "RD is one of those people that just makes people’s lives better every day... Truly the definition of going above and beyond."
                 </div>
-            </div>
-        </section>
-
-        <section id="linguistics">
-            <div class="section-label">04 // LINGUISTIC_IMMERSION</div>
-            <div class="experience-entry" style="background: linear-gradient(90deg, rgba(99, 149, 238, 0.05), transparent); padding: 30px; border-left: 2px solid var(--brand-blue);">
-                <span style="font-family: 'Fira Code'; color: var(--brand-light-blue); font-size: 0.8rem; margin-bottom: 10px; display: block;">STATUS: FULL PROFESSIONAL PROFICIENCY // SPANISH</span>
-                <div class="exp-body">
-                    <strong>International Service Representative // LDS Mission (1999 — 2001)</strong><br>
-                    Completed a 24-month intensive cultural and linguistic immersion. Facilitated community outreach and leadership programs, achieving professional fluency and cross-cultural communication expertise.
-                </div>
-            </div>
-        </section>
-
-        <section id="education">
-            <div class="section-label">05 // ACADEMIC_TENURE</div>
-            <div class="edu-item">
-                <div class="edu-school">Ottawa University // Rio Salado // BYU-Idaho</div>
-                <div class="edu-details">90+ Credit Hours accumulated in Business Management & Operational Strategy</div>
             </div>
         </section>
 
         <section id="arsenal">
-            <div class="section-label">06 // TACTICAL_ARSENAL</div>
+            <div class="section-label">04 // TACTICAL_ARSENAL</div>
             <div class="arsenal-grid">
                 <div class="arsenal-cat">
-                    <h4>Ops & Logistics</h4>
+                    <h4>Operations & Infrastructure</h4>
                     <div class="skills-grid">
-                        <div class="skill-chip">Global Inventory Control</div><div class="skill-chip">Shrink Management (.10%)</div>
-                        <div class="skill-chip">Supply Chain Logistics</div><div class="skill-chip">Asset Lifecycle Management</div>
-                        <div class="skill-chip">Vendor Relations</div>
+                        <div class="skill-chip">Global Inventory Control</div><div class="skill-chip">Cisco Meraki</div>
+                        <div class="skill-chip">Asset Lifecycle Management</div><div class="skill-chip">Mosyle MDM</div>
+                        <div class="skill-chip">Bilingual (Spanish)</div>
                     </div>
                 </div>
                 <div class="arsenal-cat">
-                    <h4>Brand & Strategy</h4>
+                    <h4>Design & Narrative</h4>
                     <div class="skills-grid">
-                        <div class="skill-chip">Visual Identity Design</div><div class="skill-chip">Digital Transformation</div>
-                        <div class="skill-chip">Social Media Marketing</div><div class="skill-chip">Brand Storytelling</div>
+                        <div class="skill-chip">Visual Identity Design</div><div class="skill-chip">Adobe Creative Studio</div>
+                        <div class="skill-chip">Brand Storytelling</div><div class="skill-chip">Digital Transformation</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="interests">
+            <div class="section-label">05 // HUMAN_ELEMENT_DATA</div>
+            <div class="arsenal-grid">
+                <div class="arsenal-cat">
+                    <h4>Endurance & Navigation</h4>
+                    <div class="skills-grid">
+                        <div class="skill-chip">Tactical Mountain Biking</div><div class="skill-chip">High-Altitude Hiking</div>
+                        <div class="skill-chip">Trail Running</div><div class="skill-chip">Emergency Response (Alumni)</div>
                     </div>
                 </div>
                 <div class="arsenal-cat">
-                    <h4>Tech Infrastructure</h4>
+                    <h4>Media & Archaeology</h4>
                     <div class="skills-grid">
-                        <div class="skill-chip">Cisco Meraki</div><div class="skill-chip">Mosyle MDM</div><div class="skill-chip">Ubiquiti Unifi</div>
-                        <div class="skill-chip">Adobe Creative Studio</div><div class="skill-chip">Telemedicine Deployment</div>
-                    </div>
-                </div>
-                <div class="arsenal-cat">
-                    <h4>Leadership</h4>
-                    <div class="skills-grid">
-                        <div class="skill-chip">Conflict Resolution</div><div class="skill-chip">Regional Training</div>
-                        <div class="skill-chip">Mentorship</div><div class="skill-chip">Emergency First Response</div>
+                        <div class="skill-chip">Legacy System Gaming</div><div class="skill-chip">Narrative Writing</div>
+                        <div class="skill-chip">Eclectic Auditory Data (Podcasts)</div><div class="skill-chip">Digital Archiving</div>
                     </div>
                 </div>
             </div>
         </section>
 
         <section id="contact">
-            <div class="section-label">07 // COMMUNICATION_HUB</div>
+            <div class="section-label">06 // COMMUNICATION_HUB</div>
             <div class="comm-hub">
                 <div style="margin-bottom: 15px;">
                     <span class="hub-label">[ SIGNAL ]</span>
@@ -322,7 +281,9 @@
                 </div>
                 <div>
                     <span class="hub-label">[ UPLINK ]</span>
-                    <a href="Images/Resume.pdf">Download_System_File.pdf</a>
+                    <a href="javascript:void(0)" onclick="window.print()" style="color: var(--brand-blue); font-weight: bold;">
+                        Generate_Dossier_PDF.exe
+                    </a>
                 </div>
             </div>
         </section>
