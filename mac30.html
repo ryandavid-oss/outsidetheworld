@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personnel_Log | Mac30 Anniversary</title>
+    <title>Personnel_Log | RyanDavid Burningham</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500;700&family=Inter:wght@300;400;700&display=swap');
 
         :root {
             --apple-blue: #6395EE;
@@ -15,10 +15,11 @@
 
         body {
             background-color: var(--bg-dark);
-            color: #222; /* Dim by default */
-            font-family: 'Fira Code', monospace;
-            margin: 0; padding: 0; overflow: hidden;
-            height: 100vh; display: flex; flex-direction: column;
+            color: #ccc;
+            font-family: 'Inter', sans-serif;
+            margin: 0; padding: 0;
+            line-height: 1.8;
+            overflow-x: hidden;
         }
 
         /* ATMOSPHERIC SCANLINES */
@@ -26,63 +27,76 @@
             content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%),
                         linear-gradient(90deg, rgba(99, 149, 238, 0.02), rgba(99, 149, 238, 0.01), rgba(99, 149, 238, 0.02));
-            background-size: 100% 3px, 3px 100%; pointer-events: none; z-index: 100; opacity: 0.3;
+            background-size: 100% 3px, 3px 100%; pointer-events: none; z-index: 1000; opacity: 0.2;
         }
 
         header {
-            padding: 60px 40px; text-align: left; z-index: 105;
-            background: linear-gradient(to bottom, var(--bg-dark) 60%, transparent);
+            padding: 80px 40px; text-align: left;
+            background: linear-gradient(to bottom, rgba(99, 149, 238, 0.05), transparent);
         }
 
         .back-btn {
-            color: var(--apple-blue); text-decoration: none; font-size: 0.7rem;
+            color: var(--apple-blue); text-decoration: none; font-family: 'Fira Code'; font-size: 0.7rem;
             letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; display: block;
         }
 
-        h1 { 
-            font-size: 2.5rem; color: #fff; margin: 0; letter-spacing: -1px; 
-            text-transform: uppercase; font-weight: 700;
+        h1 { font-size: 3rem; color: #fff; margin: 0; letter-spacing: -2px; font-weight: 700; }
+        .badge-id { font-family: 'Fira Code'; font-size: 0.8rem; color: var(--apple-blue); opacity: 0.6; }
+
+        .content-grid {
+            max-width: 900px; margin: 0 auto; padding: 60px 40px;
         }
 
-        /* THE MATRIX WALL */
-        .matrix-container {
-            flex: 1; position: relative; width: 100%; overflow: hidden;
+        /* NARRATIVE STYLING */
+        .narrative p { margin-bottom: 30px; font-size: 1.1rem; font-weight: 300; }
+        
+        .blog-extract {
+            background: rgba(255,255,255,0.03);
+            border-left: 2px solid var(--apple-blue);
+            padding: 40px; margin: 40px 0;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem; color: #888;
+        }
+        .extract-header { color: var(--apple-blue); font-size: 0.7rem; margin-bottom: 20px; display: block; }
+
+        /* THE MATRIX WALL SECTION */
+        .matrix-section {
+            height: 400px; position: relative; margin: 80px 0;
+            border: 1px solid rgba(255,255,255,0.05); overflow: hidden;
             mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
             -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
         }
 
         #name-wall {
-            display: flex; flex-wrap: wrap; gap: 15px 50px; padding: 60px 40px;
+            display: flex; flex-wrap: wrap; gap: 15px 40px; padding: 40px;
             justify-content: center; animation: scrollWall 180s linear infinite;
         }
 
-        .name-entry {
-            font-size: 0.65rem; letter-spacing: 1px; white-space: nowrap; transition: 0.4s;
-            text-transform: uppercase;
-        }
-
-        /* THE SIGNATURE HIGHLIGHT */
-        .highlight {
-            color: var(--apple-blue) !important; font-weight: 700; font-size: 0.9rem;
-            text-shadow: 0 0 15px rgba(99, 149, 238, 0.6);
-        }
+        .name-entry { font-family: 'Fira Code'; font-size: 0.6rem; color: #222; text-transform: uppercase; }
+        .highlight { color: var(--apple-blue) !important; font-weight: 700; }
         .highlight::before { content: "⌘ "; }
 
-        @keyframes scrollWall {
-            from { transform: translateY(0); }
-            to { transform: translateY(-50%); }
-        }
+        @keyframes scrollWall { from { transform: translateY(0); } to { transform: translateY(-50%); } }
 
-        .vignette {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle, transparent 30%, var(--bg-dark) 100%);
-            pointer-events: none;
+        /* EASTER EGG OVERLAY */
+        #poster-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95); z-index: 5000;
+            display: none; align-items: center; justify-content: center;
+            backdrop-filter: blur(20px); cursor: zoom-out;
         }
+        #poster-overlay img { max-width: 90%; max-height: 90%; border: 1px solid #333; box-shadow: 0 0 100px rgba(0,0,0,1); }
 
         footer {
-            padding: 30px 40px; text-align: left; font-size: 0.55rem; color: #333;
-            letter-spacing: 3px; text-transform: uppercase; z-index: 110;
+            padding: 100px 40px; text-align: center; font-family: 'Fira Code';
+            font-size: 0.6rem; letter-spacing: 4px; color: #333;
         }
+        .cmd-egg { color: var(--apple-blue); cursor: pointer; transition: 0.3s; }
+        .cmd-egg:hover { text-shadow: 0 0 10px var(--apple-blue); }
+
+        .mentions { color: #555; font-style: italic; margin-top: 60px; padding-top: 40px; border-top: 1px solid #111; }
+
+        @media (max-width: 768px) { h1 { font-size: 2rem; } .blog-extract { padding: 20px; } }
     </style>
 </head>
 <body>
@@ -90,50 +104,63 @@
     <header>
         <a href="flotsam.html" class="back-btn">< RE_STATIONS</a>
         <h1>Infinite_Signatures</h1>
+        <div class="badge-id">SERVICE_RECORD // 2009-2014 // RyanDavid Burningham</div>
     </header>
 
-    <main class="matrix-container">
-        <div id="name-wall"></div>
-        <div class="vignette"></div>
-    </main>
+    <div class="content-grid">
+        <section class="narrative">
+            <p>In August 2007, I went from casual critic to full on believer. While enjoying time with my family in Utah, my brother Tyler (of all people) brought his newly purchased iPhone to a family event. I had seen the iPhone before. I even made the trek to the Chandler Apple Store on 06/30/07 to take a look at the device to see what all the fuss was about.</p>
+
+            <div class="blog-extract">
+                <span class="extract-header">ARCHIVE_LOG // DATE: 06.30.07</span>
+                "I finally got to give it a good look, and I will say that I'm mighty impressed with the build quality of the device... I placed a few test calls and was impressed by the sound quality, but not overly so... The most impressive aspect of the iPhone and the only thing to trump my Treo was the new touchscreen. Unlike most other smart phone's screens, this one is made of glass and you can just feel the technology behind it... And yes, they virtual 'keyboard' was terrible. I've written this entire post from my Treo with very few errors or corrections."
+            </div>
+
+            <p>You can hear the avarice dripping from my passive aggressive voice even then. The iPhone stayed in the back of my mind, rent free, from that moment forward. Once Steve Jobs slashed the price in half, I made the jump. I felt not only impressed by the technology, I felt awakened. I felt driven to know more about the company behind this product. I had to work at Apple.</p>
+
+            <p>From 2009 until 2014, I had the honor of working with some of the most remarkable people on this planet. It took 5 interviews and a huge pay cut, but I got my foot in the door as a part-time iPhone Specialist at the SanTan Apple Store. I successfully landed the role of Inventory Trainer late in my career, traveling to California often and leading a team of individuals helping to open the new 3rd Street Promenade store in Santa Monica, CA. I'll never forget those early mornings and late nights, pushing ourselves to get every ounce of effort while we prepped that store for launch.</p>
+        </section>
+
+        <section class="matrix-section">
+            <div id="name-wall"></div>
+        </section>
+
+        <section class="narrative">
+            <p>Like all good things, it had to come to an end. Suffice it to say that my personal life collided heavily and irrevocably with my ambitions and pleasure at Apple. Five years after I began there, I signed my resignation letter with trepidation as I laid the foundation for the next two decades of my life.</p>
+            
+            <div class="mentions">
+                I owe a debt of gratitude to those who I had the pleasure of working with. Most notable; Lindsey Costley, Andrew Calhoun, Jenn and Toby King, Chris Krieg, Jose Fernandez, Karlyn Herring, Corey Dillier, Eric Duffy, Saint, and many, many others.
+            </div>
+        </section>
+    </div>
+
+    <div id="poster-overlay" onclick="closePoster()">
+        <img src="Images/Poster.png" alt="Mac 30 Anniversary Poster">
+    </div>
 
     <footer>
-        UPLINK_ESTABLISHED // SOURCE: MACINTOSH_30TH_ANNIVERSARY_COMMEMORATIVE_POSTER // HIRE_CHRONOLOGY_ACTIVE
+        UPLINK_STABLE // ⌘ <span class="cmd-egg" onclick="openPoster()">SYSTEM_OVERRIDE</span> // (C) 2014-2026
     </footer>
 
     <script>
-        // Foundational badge numbers
-        const legacyNames = [
-            "Steven Jobs", "Steve Wozniak", "Mike Markkula", "Bill Fernandez", 
-            "Rod Holt", "Randy Wigginton", "Michael Scott", "Chris Espinosa", 
-            "Jim Martindale", "Sherry Livingston", "Don Breuner", "Dan Kottke",
-            "Mark Johnson", "Gene Carter", "Tom Whitney", "Wendell Sander",
-            "Jony Ive", "Tim Cook", "Phil Schiller", "Eddy Cue", "Angela Ahrendts"
-        ];
-        
-        const placeholders = ["Badge_9281", "Badge_7721", "Badge_9920", "Staff_Ref_A12", "Badge_0492", "Staff_Ref_X09"];
+        const legacyNames = ["Steven Jobs", "Steve Wozniak", "Jony Ive", "Tim Cook", "Phil Schiller", "Eddy Cue", "Chris Espinosa"];
         const ME = "RyanDavid Burningham";
-        
         const wall = document.getElementById('name-wall');
 
         function generateWall() {
             let names = [];
-            // Generate a massive pool for seamless scrolling
-            for (let i = 0; i < 600; i++) {
-                if (i % 22 === 0) names.push(ME); 
-                if (i % 14 === 0) names.push(legacyNames[Math.floor(Math.random() * legacyNames.length)]);
-                names.push(placeholders[Math.floor(Math.random() * placeholders.length)]);
+            for (let i = 0; i < 400; i++) {
+                if (i % 18 === 0) names.push(ME);
+                else if (i % 12 === 0) names.push(legacyNames[Math.floor(Math.random() * legacyNames.length)]);
+                else names.push(`Badge_${Math.floor(Math.random()*90000)}`);
             }
-
-            // Duplicate the array to make the scroll seamless
             const fullList = [...names, ...names];
-
-            wall.innerHTML = fullList.map(name => {
-                const isMe = name === ME ? 'highlight' : '';
-                return `<span class="name-entry ${isMe}">${name}</span>`;
-            }).join('');
+            wall.innerHTML = fullList.map(name => `<span class="name-entry ${name === ME ? 'highlight' : ''}">${name}</span>`).join('');
         }
 
+        function openPoster() { document.getElementById('poster-overlay').style.display = 'flex'; }
+        function closePoster() { document.getElementById('poster-overlay').style.display = 'none'; }
+        
         generateWall();
     </script>
 </body>
