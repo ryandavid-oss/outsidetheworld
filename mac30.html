@@ -12,6 +12,7 @@
             --apple-blue: #6395EE;
             --apple-green: #32CD32;
             --apple-pink: #FF69B4;
+            --brand-teal: #91AFB3; /* Specific Teal for Service Record */
             --bg-dark: #050505;
         }
 
@@ -32,11 +33,11 @@
             background-size: 100% 3px, 3px 100%; pointer-events: none; z-index: 1000; opacity: 0.2;
         }
 
-        /* HERO NAVIGATION */
+        /* 1. HERO NAVIGATION (Left desktop, Center mobile) */
         nav { 
             position: relative; 
             padding: 40px; 
-            text-align: center;
+            text-align: left; /* Desktop Default */
             z-index: 1001; 
         }
 
@@ -46,22 +47,45 @@
             transition: 0.3s;
         }
 
+        /* 2. HEADER & GRADIENT REFINEMENT */
         header {
-            padding: 20px 40px 60px; text-align: center;
-            background: linear-gradient(to bottom, rgba(99, 149, 238, 0.05), transparent);
+            padding: 20px 40px 10px; /* Reduced bottom padding to close gap */
+            text-align: center;
+            background: linear-gradient(to bottom, rgba(99, 149, 238, 0.08) 0%, transparent 100%);
         }
 
         h1 { 
             font-size: 3rem; color: #fff; margin: 0; letter-spacing: -1px; 
             font-weight: 900; text-transform: uppercase;
         }
-        .badge-id { font-family: 'Fira Code'; font-size: 0.8rem; color: var(--apple-blue); opacity: 0.6; margin-top: 10px; }
 
-        .content-grid {
-            max-width: 900px; margin: 0 auto; padding: 60px 20px;
+        /* 3. TYPEWRITER SERVICE RECORD (Teal, Larger) */
+        .badge-id { 
+            font-family: 'Fira Code', monospace; 
+            font-size: 1.15rem; /* Larger font */
+            color: var(--brand-teal); /* Teal color */
+            margin-top: 10px;
+            min-height: 1.5rem;
+            display: inline-block;
         }
 
-        /* NARRATIVE STYLING */
+        .cursor {
+            display: inline-block;
+            width: 10px; height: 18px;
+            background-color: var(--brand-teal);
+            margin-left: 5px;
+            animation: blink 1s infinite;
+            vertical-align: middle;
+        }
+
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        /* 4. CONTENT GRID (Tightened gap) */
+        .content-grid {
+            max-width: 900px; margin: 0 auto; 
+            padding: 10px 20px 60px; /* Reduced top padding */
+        }
+
         .narrative p { margin-bottom: 30px; font-size: 1.1rem; font-weight: 300; }
         
         .blog-extract {
@@ -73,7 +97,6 @@
         }
         .extract-header { color: var(--apple-blue); font-size: 0.75rem; margin-bottom: 20px; display: block; letter-spacing: 2px; }
 
-        /* THE MATRIX WALL SECTION */
         .matrix-section {
             height: 500px; position: relative; margin: 80px 0;
             border: 1px solid rgba(255,255,255,0.05); overflow: hidden;
@@ -94,19 +117,14 @@
 
         @keyframes scrollWall { from { transform: translateY(0); } to { transform: translateY(-50%); } }
 
-        /* SIGNATURE STYLING */
-        .signature-container {
-            margin-top: 50px;
-            text-align: right;
-        }
-        .signature-img {
-            max-width: 280px;
+        .signature-container { margin-top: 50px; text-align: right; }
+        .signature-img { 
+            max-width: 280px; 
             filter: invert(1) brightness(2) contrast(150%);
-            mix-blend-mode: screen;
-            opacity: 0.9;
+            mix-blend-mode: screen; 
+            opacity: 0.9; 
         }
 
-        /* OVERLAY SYSTEM */
         .system-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.95); z-index: 5000;
@@ -120,11 +138,11 @@
             font-size: 0.6rem; letter-spacing: 4px; color: #333;
         }
         .cmd-egg { color: var(--apple-blue); cursor: pointer; transition: 0.3s; margin: 0 15px; }
-        .cmd-egg:hover { text-shadow: 0 0 10px var(--apple-blue); color: #fff; }
 
         @media (max-width: 768px) { 
+            nav { text-align: center; } /* Logo centered on mobile */
             h1 { font-size: 1.8rem; letter-spacing: 0; } 
-            .blog-extract { padding: 25px; font-size: 0.85rem; }
+            .badge-id { font-size: 0.9rem; }
             .nav-logo { width: 160px; }
         }
     </style>
@@ -137,9 +155,11 @@
 
     <header>
         <h1>A Name on the Wall, 1 Infinite Loop</h1>
-        <div class="badge-id">SERVICE_RECORD // 2009-2014 // RYAN_DAVID</div>
+        <div class="badge-id">
+            <span id="typewriter-record"></span><span class="cursor"></span>
+        </div>
     </header>
-a
+
     <div class="content-grid">
         <section class="narrative">
             <p>In August 2007, I went from casual Apple critic to full on believer. As I remember it, I was enjoying time with my family in Utah. At a gathering at a church building in Salt Lake City, my brother Tyler (of all people) brought his newly purchased iPhone and was toying around with it near the kitchen. I had seen the iPhone before. But this felt different. Here was my brother, barely able to handle any technology, yet holding the newest device on the street. And he felt no reservations about using it. He was totally and completely comfortable tapping away.</p>
@@ -148,7 +168,7 @@ a
 
             <div class="blog-extract">
                 <span class="extract-header">ARCHIVE_LOG // DATE: 06.30.07</span>
-                "I finally got to give it a good look, and I will say that I'm mighty impressed with the build quality of the device. It even outshines the solid feel of my 5.5g iPod. <br><br>I placed a few test calls and was impressed by the sound quality, but not overly so. The volume was a bit low. I can definitely get my Treo louder. EDGE speeds were actually functional. Whatever unofficial upgrades they made to the network speed during the past week will definitely pay off, though we'll see how that pays off as more customers activate their devices. <br><br>The most impressive aspect of the iPhone and the only thing to trump my Treo was the new touchscreen. Unlike most other smart phone's screens, this one is made of glass and you can just feel the technology behind it. I never had to push very hard to get it to respond. And yes, they virtual "keyboard" was terrible. I've written this entire post from my Treo with very few errors or corrections. The simple text message I sent from the iPhone took way too long. <br><br>Overall, I like it though. It's a good device, and I hope it comes to Sprint someday so that my wife can get it."
+                "I finally got to give it a good look, and I will say that I'm mighty impressed with the build quality of the device. It even outshines the solid feel of my 5.5g iPod. <br><br>I placed a few test calls and was impressed by the sound quality, but not overly so. The volume was a bit low. I can definitely get my Treo louder. EDGE speeds were actually functional. Whatever unofficial upgrades they made to the network speed during the past week will definitely pay off, though we'll see how that pays off as more customers activate their devices. <br><br>The most impressive aspect of the iPhone and the only thing to trump my Treo was the new touchscreen. Unlike most other smart phone's screens, this one is made of glass and you can just feel the technology behind it. I never had to push very hard to get it to respond. And yes, they virtual \"keyboard\" was terrible. I've written this entire post from my Treo with very few errors or corrections. The simple text message I sent from the iPhone took way too long. <br><br>Overall, I like it though. It's a good device, and I hope it comes to Sprint someday so that my wife can get it."
             </div>
 
             <p>If you incline your head even a fraction of a degree, you can absolutely taste the unbridled avarice dripping from my passive aggressive voice even then.</p>
@@ -169,7 +189,7 @@ a
         </section>
 
         <section class="narrative">
-            <p>My first major product launch was the iPhone 3GS. I was there in 2010 when we launched the iPad. I attended Steve Job’s funeral with thousands of others in October of 2011. I celebrated the 30th anniversary of the Macintosh computer, and was lucky enough to have my name emblazoned forever in the halls of 1 Infinite Loop as one of the employees who played a small part in the success of that platform. Those were the major events. There are many less widely known events during that time, but no less important in my mind. </p>
+            <p>My first major product launch was the iPhone 3GS. I was there in 2010 when we launched the iPad. I attended Steve Job’s funeral with thousands of others in October of 2011. I celebrated the 30th anniversary of the Macintosh computer, and was lucky enough to have my name emblazoned forever in the halls of 1 Infinite Loop as one of the employees who played a small part in the success of that platform. Those were the major events. There are many less widely known events during that time, but no less important in my mind.</p>
 
             <p>Like all good things, it had to come to an end. Suffice it to say that my personal life collided heavily and irrevocably with my ambitions and pleasure at Apple. My growing family was my ultimate family, and while I enjoyed corporate status as a traveling Inventory Trainer, my schedule rested within the needs of Apple Retail. Evenings, weekends, and ‘clopening shifts’ would ultimately dictate my path away from Apple. Five years after I began there, I signed my resignation letter with melancholy as I laid the foundation for the next two working decades of my life.</p>
             
@@ -193,38 +213,35 @@ a
     </footer>
 
     <script>
+        // TYPEWRITER EFFECT
+        const typeText = "SERVICE_RECORD // 2009-2014 // RyanDavid Burningham";
+        const typeTarget = document.getElementById('typewriter-record');
+        let typeIdx = 0;
+
+        function typeOut() {
+            if (typeIdx < typeText.length) {
+                typeTarget.textContent += typeText.charAt(typeIdx);
+                typeIdx++;
+                setTimeout(typeOut, 80);
+            }
+        }
+
+        // MATRIX CORE
         const pinkName = "RyanDavid Burningham";
-        
-        const blueNames = ["Steve Wozniak", "Steve Jobs", "Mike Markkula", "Bill Fernandez", "Rod Holt", "Randy Wigginton", "Chris Espinosa", "Jim Martindale", "Sherry Livingston", "Don Breuner", "Daniel Kottke", "Mark Johnson", "Gene Carter", "Tom Whitney", "Wendell Sander", "Dick Huston", "Cliff Huston", "Ed Ruder", "Jef Raskin", "Brian Howard", "Bill Atkinson"];
-        
+        const blueNames = ["Steve Wozniak", "Steve Jobs", "Mike Markkula", "Bill Fernandez", "Rod Holt", "Randy Wigginton", "Chris Espinosa", "Jim Martindale", "Sherry Livingston", "Don Breuner", "Daniel Kottke", "Mark Johnson", "Gene Carter", "Tom Whitney", "Wendell Sander", "Dick Huston", "Cliff Huston", "Ed Ruder", "Jef Raskin", "Brian Howard", "Bill Atkinson", "Joanna Hoffman", "Burrell Smith", "Bud Tribble", "Bob Belleville", "Steve Capps", "George Crow", "Donn Denman", "Bruce Horn", "Susan Kare", "Larry Kenyon", "Caroline Rose", "Andy Hertzfeld", "Patti Kenyon", "Terry Oyama", "Ronald Nicholson", "Martin Haeberli", "Brian Robertson", "Pamela Wyman", "Bryan Stearns", "Debi Coleman", "Matt Carter", "Colette Askeland", "Linda Wilkin", "Brian Berkeley", "MaryEllen McCammon", "Vicki Milledge", "Bill Bull", "Jerome Coonen", "Bob Bailey", "Dan'l Lewin", "Sam Lyall", "Joe Shelton", "David Beaver", "Mike Collins", "Peter Folley", "Owen Densmore", "Bill Wathen", "J David Egner", "Deborah Bress", "Steve Scheier", "Scott Knaster", "John Casado", "Lynnea Johnson", "Marc LeBrun", "Larry Tesler", "Michael Jurewitz"];
         const greenNames = ["Lindsey Costley", "Andrew Calhoun", "Jenn King", "Toby King", "Chris Krieg", "Jose Fernandez", "Jose Ramirez", "Jose Hernandez", "Karlyn Herring", "Corey Dillier", "Eric Duffy", "Saint", "Ashley Lawson", "Anna Sammons", "Eric Locke", "Maria Nissen", "Bob O'Leary", "Jack Saber", "Scott Snyder", "Eric Stout", "Mike Van Dusen", "Mark Henderson", "Natalie Clifford", "Sean Little", "Brandon Love", "Denise Harris-Kester", "Bryan Beata", "Mario Aldrete", "Mary Lideen", "Stanford Florence", "Gregory Terry", "Chelsey McPeek", "Tyson Brown", "Alex Tighe", "Mike Franzone", "Jake Burger"];
-
-        const grayNames = ["Ronald Wayne", "Patty Jobs", "Michael Scott", "John Draper", "Gary Martin", "Dana Redington", "Clive Twyman", "Robert Martinengo", "Cliff Story", "Chrisann Brennan", "Elmer Baum", "Phil Roybal", "Gary Shannon", "Bana Witt", "John Couch", "Chuck Mauro", "Brad Hacker", "Bruce Tognazzini", "Barry Yarkoni", "Kent Hopkins", "Cheng Lim", "Terri Powers", "Bob Bishop", "Rich Whicker", "Joanna Hoffman", "Burrell Smith", "Bud Tribble", "Bob Belleville", "Steve Capps", "George Crow", "Donn Denman", "Bruce Horn", "Susan Kare", "Larry Kenyon", "Caroline Rose", "Andy Hertzfeld", "Patti Kenyon", "Terry Oyama", "Ronald Nicholson", "Martin Haeberli", "Brian Robertson", "Pamela Wyman", "Bryan Stearns", "Debi Coleman", "Matt Carter", "Colette Askeland", "Linda Wilkin", "Brian Berkeley", "MaryEllen McCammon", "Vicki Milledge", "Bill Bull", "Jerome Coonen", "Bob Bailey", "Dan'l Lewin", "Sam Lyall", "Joe Shelton", "David Beaver", "Mike Collins", "Peter Folley", "Owen Densmore", "Bill Wathen", "J David Egner", "Deborah Bress", "Steve Scheier", "Scott Knaster", "John Casado", "Lynnea Johnson", "Marc LeBrun", "Larry Tesler", "Michael Jurewitz", "Tim Cook", "Arthur Levinson", "Katherine Adams", "Eddy Cue", "Craig Federighi", "Greg Joswiak", "Sabih Khan", "Deirdre O'Brien", "Kevan Parekh", "Johny Srouji", "John Ternus", "Mike Fenger", "Luca Maestri", "Isabel Ge Mahe", "Tor Myhren", "Adrian Perica", "Kristin Huguet Quayle", "Phil Schiller", "Wanda Austin", "Alex Gorsky", "Andrea Jung", "Monica Lozano", "Ronald Sugar", "Susan Wagner", "Angela Ahrendts", "Gil Amelio", "Fred Anderson", "Satjiv Chahil", "Paul Deneve", "Kaiann Drance", "Alan Dye", "Scott Forstall", "Jean-Louis Gassée", "John Giannandrea", "Ellen Hancock", "Lisa Jackson", "Bob Mansfield", "Peter Oppenheimer", "Jon Rubinstein", "Bertrand Serlet", "Bruce Sewell", "Michael Spindler", "Avie Tevanian", "Jeff Williams", "Jony Ive", "Bartley Andre", "Daniel Coster", "Daniele De Iuliis", "Richard Howarth", "Duncan Kerr", "Shin Nishibori", "Matthew Dean Rohrbach", "Douglas Satzger", "Calvin Seid", "Christopher Stringer", "Eugene Whang", "Rico Zorkendorfer", "Imran Chaudhri", "Darin Adler", "Samir Arora", "Frank Balistreri", "Michael Bartosh", "Samy Bengio", "Marc Benioff", "Sabeer Bhatia", "Mike Boich", "Amelia Boone", "Robert Brunner", "Claire Buffie", "Matt Casamassina", "Tantek Çelik", "Stuart Cheshire", "Adam Cheyer", "Lee Collins", "Richard Crandall", "Robert X. Cringely", "Doug Cutting", "Mark Davis", "Michael Dhuey", "Paul Donovan", "Hugh Dubberly", "Donna Dubinsky", "Hartmut Esslinger", "Alex Fielding", "Stephen Friend", "Antonio García Martínez", "Michael Gartenberg", "Bill Gaver", "Timnit Gebru", "Dominic Giampaolo", "Ashley Gjøvik", "Ian Goodfellow", "Ramanathan V. Guha", "Angela Guzman", "Trip Hawkins", "Michael Homer", "Hsiao-Wuen Hon", "Jordan Hubbard", "Dave Hyatt", "Caitlin Kalinowski", "Guy Kawasaki", "Kazuo Kawasaki", "Alan Kay", "Jim Keller", "Raja Koduri", "Ivan Krstić", "Chris Lattner", "Bruce Leak", "Dave Limp", "Kevin Lynch", "Richard F. Lyon", "Divya Nag", "Shantanu Narayen", "Don Norman", "Dave Opstad", "Rich Page", "Mark Papermaster", "Janneke Parrish", "Robert Pera", "Patrick Piemonte", "Roger Powell", "Paul Takac", "Brandon Tory", "Xiaoyuan Tu", "Morgan Wandell", "Wayne Westerman", "Daniel Williams", "Keith Williams", "Kristina Hooper Woolsey", "Ed Mackowiak", "Edward B. Stead", "Ellen Petry Leanse", "Eric Traut", "Ko Isono", "Luke Wood", "Laszlo Zsidek", "Lyle Crouse", "Lynn Takahashi", "Paul Mercer", "Steve Sakoman", "Susan Barnes", "Tony Blevins", "Weibao Wang", "Wil Houde", "Paul Devine"];
-
-        const wall = document.getElementById('name-wall');
+        const grayNames = ["Ronald Wayne", "Patty Jobs", "Michael Scott", "John Draper", "Gary Martin", "Dana Redington", "Clive Twyman", "Robert Martinengo", "Cliff Story", "Chrisann Brennan", "Elmer Baum", "Phil Roybal", "Gary Shannon", "Bana Witt", "John Couch", "Chuck Mauro", "Brad Hacker", "Bruce Tognazzini", "Barry Yarkoni", "Kent Hopkins", "Cheng Lim", "Terri Powers", "Bob Bishop", "Rich Whicker", "Tim Cook", "Arthur Levinson", "Katherine Adams", "Eddy Cue", "Craig Federighi", "Greg Joswiak", "Sabih Khan", "Deirdre O'Brien", "Kevan Parekh", "Johny Srouji", "John Ternus", "Mike Fenger", "Luca Maestri", "Isabel Ge Mahe", "Tor Myhren", "Adrian Perica", "Kristin Huguet Quayle", "Phil Schiller", "Wanda Austin", "Andrea Jung", "Monica Lozano", "Ronald Sugar", "Susan Wagner", "Angela Ahrendts", "Gil Amelio", "Fred Anderson", "Satjiv Chahil", "Paul Deneve", "Kaiann Drance", "Alan Dye", "Scott Forstall", "Jean-Louis Gassée", "John Giannandrea", "Ellen Hancock", "Lisa Jackson", "Bob Mansfield", "Peter Oppenheimer", "Jon Rubinstein", "Bertrand Serlet", "Bruce Sewell", "Michael Spindler", "Avie Tevanian", "Jeff Williams", "Jony Ive", "Bartley Andre", "Daniel Coster", "Daniele De Iuliis", "Richard Howarth", "Duncan Kerr", "Shin Nishibori", "Matthew Dean Rohrbach", "Douglas Satzger", "Calvin Seid", "Christopher Stringer", "Eugene Whang", "Rico Zorkendorfer", "Imran Chaudhri", "Darin Adler", "Samir Arora", "Frank Balistreri", "Michael Bartosh", "Samy Bengio", "Marc Benioff", "Sabeer Bhatia", "Mike Boich", "Amelia Boone", "Robert Brunner", "Claire Buffie", "Matt Casamassina", "Tantek Çelik", "Stuart Cheshire", "Adam Cheyer", "Lee Collins", "Richard Crandall", "Robert X. Cringely", "Doug Cutting", "Mark Davis", "Michael Dhuey", "Paul Donovan", "Hugh Dubberly", "Donna Dubinsky", "Hartmut Esslinger", "Alex Fielding", "Stephen Friend", "Antonio García Martínez", "Michael Gartenberg", "Bill Gaver", "Timnit Gebru", "Dominic Giampaolo", "Ashley Gjøvik", "Ian Goodfellow", "Ramanathan V. Guha", "Angela Guzman", "Trip Hawkins", "Michael Homer", "Hsiao-Wuen Hon", "Jordan Hubbard", "Dave Hyatt", "Caitlin Kalinowski", "Guy Kawasaki", "Kazuo Kawasaki", "Alan Kay", "Jim Keller", "Raja Koduri", "Ivan Krstić", "Chris Lattner", "Bruce Leak", "Dave Limp", "Kevin Lynch", "Richard F. Lyon", "Divya Nag", "Shantanu Narayen", "Don Norman", "Dave Opstad", "Rich Page", "Mark Papermaster", "Janneke Parrish", "Robert Pera", "Patrick Piemonte", "Roger Powell", "Paul Takac", "Brandon Tory", "Xiaoyuan Tu", "Morgan Wandell", "Wayne Westerman", "Daniel Williams", "Keith Williams", "Kristina Hooper Woolsey", "Ed Mackowiak", "Edward B. Stead", "Ellen Petry Leanse", "Eric Traut", "Ko Isono", "Luke Wood", "Laszlo Zsidek", "Lyle Crouse", "Lynn Takahashi", "Paul Mercer", "Steve Sakoman", "Susan Barnes", "Tony Blevins", "Weibao Wang", "Wil Houde", "Paul Devine"];
 
         function generateWall() {
-            // Filter duplicates out of grayNames
-            let uniqueGray = grayNames.filter(name => !greenNames.includes(name) && !blueNames.includes(name) && name !== pinkName);
-            
-            let allEntities = [
-                { name: pinkName, type: 'pink-name highlight' },
-                ...greenNames.map(n => ({ name: n, type: 'green-name' })),
-                ...blueNames.map(n => ({ name: n, type: 'blue-name' })),
-                ...uniqueGray.map(n => ({ name: n, type: '' }))
-            ];
-
-            // Shuffle
-            allEntities.sort(() => Math.random() - 0.5);
-
-            const fullList = [...allEntities, ...allEntities]; // Double for seamless loop
-            wall.innerHTML = fullList.map(item => `<span class="name-entry ${item.type}">${item.name}</span>`).join('');
+            let names = [{ name: pinkName, type: 'pink-name highlight' }, ...blueNames.map(n => ({ name: n, type: 'blue-name' })), ...greenNames.map(n => ({ name: n, type: 'green-name' })), ...grayNames.map(n => ({ name: n, type: '' }))];
+            names.sort(() => Math.random() - 0.5);
+            document.getElementById('name-wall').innerHTML = [...names, ...names].map(i => `<span class="name-entry ${i.type}">${i.name}</span>`).join('');
         }
 
         function openOverlay(id) { document.getElementById(id).style.display = 'flex'; }
         function closeOverlay(id) { document.getElementById(id).style.display = 'none'; }
         
-        generateWall();
+        window.onload = () => { generateWall(); setTimeout(typeOut, 1000); };
     </script>
 </body>
 </html>
