@@ -34,26 +34,25 @@
             background-size: 100% 3px, 3px 100%; pointer-events: none; z-index: 1000; opacity: 0.15;
         }
 
-        /* LOGO ALIGNMENT: Left desktop, Center mobile */
+        /* NAVIGATION: Left Desktop, Center Mobile */
         nav { padding: 60px 40px 10px; text-align: left; position: relative; z-index: 1001; }
         .nav-logo { width: 220px; filter: drop-shadow(0 0 20px rgba(99, 149, 238, 0.2)); }
 
-        /* HEADER: Entrance-style black gradation & Gap Closure */
-        header {
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px 100px; }
+
+        /* HERO SECTION */
+        header.entrance {
             padding: 10px 40px 0;
             text-align: center;
             background: linear-gradient(to bottom, rgba(5,5,5,1) 0%, rgba(5,5,5,0) 100%);
         }
 
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px 100px; }
-
-        /* HERO SECTION */
         .hero {
             display: flex; align-items: center; gap: 50px;
             padding: 40px 0; border-bottom: 1px solid var(--border);
         }
 
-        /* PORTRAIT: Further scooch */
+        /* PORTRAIT CALIBRATION */
         .scanner-frame {
             position: relative; width: 200px; height: 200px;
             border: 1px solid var(--border); padding: 10px;
@@ -64,7 +63,7 @@
             background: #111;
             background-image: url('Images/Profile.jpg');
             background-size: cover; 
-            background-position: center 35%; /* HEADROOM CALIBRATED */
+            background-position: center 35%; /* HEADROOM ADJUSTED */
             filter: grayscale(100%) brightness(0.7);
             transition: 0.5s ease;
             position: relative; overflow: hidden;
@@ -77,33 +76,54 @@
         }
         @keyframes scan { 0% { top: 0%; } 100% { top: 100%; } }
 
-        /* FOG NAME ANIMATION */
+        /* CINEMATIC FOGGY LETTERING */
         .fog-name {
-            font-size: 3.5rem; color: white; margin: 0;
-            font-weight: 900; letter-spacing: 12px;
-            text-transform: uppercase; line-height: 1;
+            font-size: clamp(1.8rem, 5vw, 3.5rem); 
+            font-weight: 900; 
+            letter-spacing: 12px; 
+            margin: 0; 
+            line-height: 1.2; 
+            text-transform: uppercase;
+            background: linear-gradient(to bottom, #fff 10%, #444 90%);
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 15px rgba(255,255,255,0.1));
             animation: fogReveal 3s forwards;
-            text-shadow: 0 0 40px rgba(255,255,255,0);
         }
         @keyframes fogReveal {
-            0% { letter-spacing: 35px; filter: blur(20px); opacity: 0; }
-            100% { letter-spacing: 2px; filter: blur(0); opacity: 1; 
-                   text-shadow: 0 0 20px rgba(255,255,255,0.2); }
+            0% { letter-spacing: 35px; opacity: 0; filter: blur(20px); }
+            100% { letter-spacing: 12px; opacity: 1; filter: blur(0); }
         }
 
         .job-title {
             font-family: 'Fira Code', monospace; color: var(--brand-teal);
             letter-spacing: 4px; text-transform: uppercase;
-            margin-top: 15px; font-size: 1.15rem; min-height: 1.5rem;
+            margin-top: 15px; font-size: 1.1rem; min-height: 1.5rem;
         }
         .cursor { display: inline-block; width: 10px; height: 18px; background-color: var(--brand-teal); margin-left: 5px; animation: blink 1s infinite; vertical-align: middle; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        /* MISSION BOX (Top Tier) */
+        .mission-box {
+            margin: 40px 0 60px; padding: 40px;
+            background: linear-gradient(90deg, var(--glass), transparent);
+            border-left: 2px solid var(--brand-pink);
+        }
+        .mission-box h2 { 
+            font-family: 'Fira Code'; font-size: 0.7rem; 
+            color: var(--brand-pink); letter-spacing: 5px; 
+            margin-bottom: 20px; text-transform: uppercase; 
+        }
+        .mission-box p { 
+            font-size: 1.3rem; font-weight: 300; line-height: 1.6; color: #fff;
+            max-width: 900px; margin: 0;
+        }
 
         /* SECTION STYLING */
         .section-label {
             font-family: 'Fira Code'; color: var(--brand-light-blue);
             font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase;
-            margin: 60px 0 30px; display: flex; align-items: center; gap: 20px;
+            margin: 80px 0 30px; display: flex; align-items: center; gap: 20px;
         }
         .section-label::after { content: ""; height: 1px; flex-grow: 1; background: var(--border); }
 
@@ -113,37 +133,36 @@
         .exp-company { font-family: 'Fira Code'; color: var(--brand-blue); font-size: 1rem; }
         .exp-date { font-family: 'Fira Code'; color: #555; font-size: 0.8rem; }
         .exp-body { font-weight: 300; color: #999; line-height: 1.7; font-size: 1rem; }
-        .exp-body strong { color: var(--brand-light-blue); font-weight: 400; }
 
-        /* AWARDS BOX */
-        .award-box {
+        /* COMMENDATIONS SECTION */
+        .award-entry {
             background: linear-gradient(90deg, rgba(255, 105, 180, 0.05), transparent);
-            border-left: 3px solid var(--brand-pink); padding: 30px; margin: 40px 0;
+            border-left: 3px solid var(--brand-pink); padding: 35px;
         }
-        .award-title { font-family: 'Fira Code'; color: var(--brand-pink); font-size: 0.8rem; letter-spacing: 3px; margin-bottom: 10px; text-transform: uppercase; }
-        .award-text { font-size: 1.2rem; font-weight: 300; color: #fff; line-height: 1.5; }
+        .award-meta { font-family: 'Fira Code'; color: var(--brand-pink); font-size: 0.8rem; letter-spacing: 3px; margin-bottom: 15px; }
+        .award-quote { font-size: 1.1rem; font-style: italic; color: #eee; border-left: 2px solid rgba(255,255,255,0.1); padding-left: 20px; margin-top: 20px; }
 
+        /* TACTICAL SKILLS */
         .skills-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px; }
         .skill-chip { padding: 4px 12px; border: 1px solid var(--border); font-family: 'Fira Code'; font-size: 0.65rem; color: var(--brand-teal); }
 
-        /* EDUCATION */
-        .edu-list { font-family: 'Inter'; }
-        .edu-item { margin-bottom: 20px; }
+        /* ACADEMIC TENURE */
+        .edu-item { margin-bottom: 10px; }
         .edu-school { color: #fff; font-weight: 700; font-size: 1.1rem; }
         .edu-details { font-family: 'Fira Code'; color: var(--brand-blue); font-size: 0.85rem; }
+
+        .sig-block { margin-top: 80px; text-align: right; }
+        .sig-img { max-width: 250px; filter: invert(1) brightness(2) contrast(150%); mix-blend-mode: screen; opacity: 0.8; }
 
         /* MOBILE OPTIMIZATION */
         @media (max-width: 768px) {
             nav { text-align: center; }
             .hero { flex-direction: column; text-align: center; gap: 30px; }
-            .fog-name { font-size: 2rem; letter-spacing: 4px; }
-            .job-title { font-size: 0.85rem; }
+            .mission-box { padding: 25px; }
+            .mission-box p { font-size: 1rem; }
             .exp-header { flex-direction: column; align-items: flex-start; gap: 5px; }
             .exp-role { font-size: 1.3rem; }
         }
-
-        .sig-block { margin-top: 80px; text-align: right; }
-        .sig-img { max-width: 250px; filter: invert(1) brightness(2); mix-blend-mode: screen; opacity: 0.8; }
     </style>
 </head>
 <body>
@@ -161,16 +180,15 @@
             <div class="hero-content">
                 <h1 class="fog-name">RyanDavid Burningham</h1>
                 <div class="job-title">
-                    <span id="type-target"></span><span class="cursor"></span>
+                    <span id="typewriter-record"></span><span class="cursor"></span>
                 </div>
+                <a href="Images/Resume.pdf" style="display:inline-block; margin-top:20px; color:var(--brand-blue); text-decoration:none; font-family:'Fira Code'; font-size:0.75rem; border:1px solid var(--brand-blue); padding:10px 20px;">[ ⌘ UPLINK_DATA_FILE ]</a>
             </div>
         </header>
 
-        <section class="award-box">
-            <div class="award-title">SYSTEM_ACHIEVEMENT // 2023</div>
-            <div class="award-text">
-                Recipient of the **Mike Terkeltaub Award**. Recognized for embodying the "Whatever it Takes" spirit: a proactive catalyst for organizational morale, technological evolution, and tireless advocacy for the families and teammates of CFSS.
-            </div>
+        <section class="mission-box">
+            <h2>Core_Directive</h2>
+            <p>Architecting a vivid organizational future by bridging the gap between high-precision technology logistics and recognizable, youthful brand identity. Transforming complex operational frameworks into cultural landmarks that attract elite talent.</p>
         </section>
 
         <section id="experience">
@@ -185,7 +203,7 @@
                     <span class="exp-date">2014 — CURRENT</span>
                 </div>
                 <div class="exp-body">
-                    Directing a **vivid agency-wide rebranding** effort, transitioning from corporate standard to a recognizable, youthful aesthetic. Managing end-to-end technology logistics for a **500+ employee infrastructure**, bridging the gap between high-level brand strategy and the robust IT systems (telemedicine, networking, EMR) that sustain premier behavioral health services. 
+                    Spearheading an agency-wide aesthetic revolution, transitioning from corporate standards to a high-impact, youthful brand mark. Managing comprehensive technology logistics for a 500+ member workforce, overseeing telemedicine, EHR integration, and cross-departmental hardware/network infrastructure.
                 </div>
             </div>
 
@@ -194,15 +212,14 @@
             <div class="experience-entry">
                 <div class="exp-header">
                     <div>
-                        <h3 class="exp-role">Inventory Control Lead & Southwest Trainer</h3>
+                        <h3 class="exp-role">Inventory Control Lead & Trainer</h3>
                         <span class="exp-company">Apple Inc.</span>
                     </div>
                     <span class="exp-date">2009 — 2014</span>
                 </div>
                 <div class="exp-body">
-                    Managed logistical operations and high-stakes launches (iPad inception) for **A+ Tier locations**, including the Santa Monica flagship. Orchestrated inventory accuracy standards of **99.8%+** while cultivating a culture of honest feedback and motivational leadership.
-                    <br>
-                    <a href="mac30.html" style="color: var(--brand-pink); text-decoration: none; font-family: 'Fira Code'; font-size: 0.7rem;">[ ⌘ ACCESS_MAC30_ARCHIVE ]</a>
+                    Orchestrated logistical launch protocols for the 3rd Street Promenade flagship. Maintained elite-tier inventory precision (99.85%) and mentored regional talent through Southwest-wide operational training initiatives.
+                    <br><a href="mac30.html" style="color: var(--brand-pink); text-decoration: none; font-family: 'Fira Code'; font-size: 0.7rem; margin-top: 10px; display: inline-block;">[ ⌘ VIEW_DETAILED_SERVICE_RECORD_06/30/07 ]</a>
                 </div>
             </div>
 
@@ -215,7 +232,7 @@
                     <span class="exp-date">2001 — 2009</span>
                 </div>
                 <div class="exp-body">
-                    Commanded a 20+ member digital response unit during the foundational era of technical E-Care. Unified standards across local and international partner centers (Panama) to ensure high-fidelity customer support through emerging web channels.
+                    Commanded a digital technical unit of 20+ members. Standardized global technical support benchmarks by unifying internal e-care operations with international outsourced hubs.
                 </div>
             </div>
 
@@ -228,26 +245,37 @@
                     <span class="exp-date">2000 — 2001</span>
                 </div>
                 <div class="exp-body">
-                    Operated as a tactical first responder across **2,500+ acres of alpine terrain**. Managed high-altitude medical emergencies and complex triage under extreme weather conditions, serving as the primary security link for guests and law enforcement.
+                    Executed tactical safety protocols across 2,500 alpine acres. Managed high-altitude medical triage and guest security within extreme environmental envelopes.
+                </div>
+            </div>
+        </section>
+
+        <section id="awards">
+            <div class="section-label">03 // COMMENDATIONS</div>
+            <div class="award-entry">
+                <div class="award-meta">SYSTEM_HONOR // MIKE TERKELTAUB AWARD // 2023</div>
+                <div class="exp-body">
+                    Recipient of the Mike Terkeltaub Award for embodying the "Whatever it Takes" spirit. Recognized as a catalyst for technological evolution and organizational morale, ensuring families and teammates have the tools required for dignity and excellence.
+                </div>
+                <div class="award-quote">
+                    "RD is one of those people that just makes people’s lives better every day... he exudes going above and beyond. Truly the definition of that."
                 </div>
             </div>
         </section>
 
         <section id="education">
-            <div class="section-label">03 // ACADEMIC_TENURE</div>
-            <div class="edu-list">
-                <div class="edu-item">
-                    <div class="edu-school">Ottawa University // Rio Salado // BYU-Idaho</div>
-                    <div class="edu-details">Professional Tenure: 90+ Credit Hours accumulated in Business Management & Operational Strategy</div>
-                </div>
+            <div class="section-label">04 // ACADEMIC_TENURE</div>
+            <div class="edu-item">
+                <div class="edu-school">Ottawa University // Rio Salado // BYU-Idaho</div>
+                <div class="edu-details">Professional Tenure: 90+ Credit Hours accumulated in Business Management & Operational Strategy</div>
             </div>
         </section>
 
         <section id="arsenal">
-            <div class="section-label">04 // TACTICAL_ARSENAL</div>
+            <div class="section-label">05 // TACTICAL_ARSENAL</div>
             <div class="skills-grid">
                 <div class="skill-chip">Cisco Meraki</div><div class="skill-chip">Mosyle MDM</div><div class="skill-chip">Adobe Creative Suite</div>
-                <div class="skill-chip">Bilingual (Spanish)</div><div class="skill-chip">Strategic Branding</div><div class="skill-chip">Inventory Logistics</div>
+                <div class="skill-chip">Google Workspace</div><div class="skill-chip">Ubiquiti Unifi</div><div class="skill-chip">Bilingual (Spanish)</div>
             </div>
         </section>
 
@@ -256,15 +284,13 @@
 
     <script>
         const text = "Asst. Director of Brand Strategy & Tech Logistics";
-        const target = document.getElementById('type-target');
+        const target = document.getElementById('typewriter-record');
         let i = 0;
         function type() { if (i < text.length) { target.textContent += text.charAt(i++); setTimeout(type, 60); } }
 
-        function init() {
-            // Trigger Fog Name and Scroll logic immediately
+        document.addEventListener('DOMContentLoaded', () => {
             setTimeout(type, 1000);
-        }
-        document.addEventListener('DOMContentLoaded', init);
+        });
     </script>
 </body>
 </html>
