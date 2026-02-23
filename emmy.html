@@ -22,94 +22,105 @@
             font-family: 'Inter', sans-serif;
             margin: 0; padding: 0;
             overflow-x: hidden;
-            line-height: 1.8;
+            line-height: 1.9;
         }
 
-        /* ATMOSPHERIC WARM PULSE */
+        /* SOFT RADIANCE PULSE (Removed Horizontal Lines) */
         body::after {
             content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at center, rgba(255, 179, 71, 0.03) 0%, transparent 80%),
-                        linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%);
-            background-size: 100% 100%, 100% 4px;
+            background: radial-gradient(circle at center, rgba(255, 179, 71, 0.04) 0%, transparent 85%);
             pointer-events: none; z-index: 1000;
+            animation: breathe 10s infinite ease-in-out;
         }
 
-        /* NAVIGATION: Desktop Left, Mobile Center */
+        @keyframes breathe {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
         nav { padding: 60px 40px 10px; text-align: left; position: relative; z-index: 1001; }
         .nav-logo { width: 180px; filter: sepia(1) saturate(2) hue-rotate(-20deg) brightness(1.2); opacity: 0.7; }
 
-        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px 100px; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px 150px; }
 
-        /* HERO SECTION */
         .hero { text-align: center; margin-bottom: 80px; padding-top: 40px; }
         
-        /* SMOOTHED ALIAS CYCLER */
         .fog-name { 
             font-size: clamp(2.5rem, 8vw, 5rem); 
-            font-weight: 900; 
-            letter-spacing: 12px; 
-            margin: 0; 
-            line-height: 1.2; 
-            text-transform: uppercase;
-            background: linear-gradient(to bottom, var(--rose-gold) 10%, var(--warm-amber) 90%);
-            -webkit-background-clip: text; 
-            -webkit-text-fill-color: transparent;
+            font-weight: 900; letter-spacing: 12px; margin: 0; 
+            line-height: 1.2; text-transform: uppercase;
+            background: linear-gradient(to bottom, #fff 10%, var(--rose-gold) 50%, var(--warm-amber) 90%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             filter: drop-shadow(0 0 15px rgba(255,179,71,0.2));
-            transition: opacity 1.5s ease-in-out, filter 1.5s ease-in-out, letter-spacing 1.5s ease-in-out;
-            opacity: 1;
+            transition: opacity 2s, filter 2s, letter-spacing 2s;
         }
 
         .promise-clock {
             font-family: 'Fira Code'; color: var(--warm-amber);
-            font-size: 0.75rem; letter-spacing: 4px; margin-top: 25px;
+            font-size: 0.75rem; letter-spacing: 5px; margin-top: 25px;
+            text-transform: uppercase;
         }
 
-        /* SECTION LABELS */
+        /* IMAGE PLACEHOLDERS */
+        .image-frame {
+            width: 100%; height: 500px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-gold);
+            margin: 60px 0;
+            display: flex; align-items: center; justify-content: center;
+            position: relative; overflow: hidden;
+        }
+        .image-frame::after {
+            content: ""; position: absolute; top: -100%; left: 0; width: 100%; height: 2px;
+            background: var(--warm-amber); box-shadow: 0 0 15px var(--warm-amber);
+            animation: scan 6s infinite linear; opacity: 0.3;
+        }
+        @keyframes scan { 0% { top: 0%; } 100% { top: 100%; } }
+        .placeholder-text { font-family: 'Fira Code'; font-size: 0.7rem; color: var(--border-gold); letter-spacing: 4px; }
+
         .section-label {
             font-family: 'Fira Code'; color: var(--rose-gold);
-            font-size: 0.7rem; letter-spacing: 5px; text-transform: uppercase;
-            margin: 80px 0 30px; display: flex; align-items: center; gap: 20px;
+            font-size: 0.75rem; letter-spacing: 6px; text-transform: uppercase;
+            margin: 100px 0 40px; display: flex; align-items: center; gap: 20px;
         }
         .section-label::after { content: ""; height: 1px; flex-grow: 1; background: var(--border-gold); }
 
-        .prose { font-size: 1.2rem; font-weight: 300; color: #b3a2c7; max-width: 850px; }
-        .highlight { color: var(--warm-amber); font-weight: 600; }
+        .prose { font-size: 1.3rem; font-weight: 300; color: #b3a2c7; max-width: 850px; text-align: justify; }
+        .highlight { color: var(--warm-amber); font-weight: 500; font-style: italic; }
 
-        /* SACRED RITUALS CARD */
-        .ritual-card {
+        /* THE HEX CARD */
+        .hex-card {
             border: 1px solid var(--border-gold);
-            padding: 40px;
-            background: linear-gradient(135deg, rgba(26, 11, 46, 0.4), transparent);
-            position: relative; margin: 60px 0;
-            backdrop-filter: blur(5px);
+            padding: 50px;
+            background: linear-gradient(135deg, rgba(26, 11, 46, 0.6), transparent);
+            position: relative; margin: 80px 0;
+            backdrop-filter: blur(8px);
         }
-        .ritual-card::before {
-            content: "PROTOCOL // SACRED_DATE_NIGHT";
-            position: absolute; top: -10px; left: 20px;
-            background: var(--bg-vault); padding: 0 10px;
-            font-family: 'Fira Code'; font-size: 0.6rem; color: var(--warm-amber);
+        .hex-card::after {
+            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 0l17.32 10v20L20 40 2.68 30V10z' fill='none' stroke='%238a2be2' stroke-width='0.5' stroke-opacity='0.15'/%3E%3C/svg%3E");
+            opacity: 0.4; z-index: -1;
         }
 
-        /* THE CHIP GRID */
-        .legacy-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+        .legacy-grid { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
         .legacy-chip { 
-            padding: 5px 15px; border: 1px solid var(--border-gold); 
-            font-family: 'Fira Code'; font-size: 0.7rem; color: var(--rose-gold);
+            padding: 8px 20px; border: 1px solid var(--border-gold); 
+            font-family: 'Fira Code'; font-size: 0.75rem; color: var(--rose-gold);
+            background: rgba(224, 191, 184, 0.03);
         }
 
-        /* SIGNATURE FIX: Transparent background via mix-blend-mode */
-        .sig-block { margin-top: 100px; text-align: center; }
+        .sig-block { margin-top: 120px; text-align: center; }
         .sig-img { 
-            max-width: 280px; 
+            max-width: 300px; 
             filter: invert(1) sepia(1) saturate(3) hue-rotate(-15deg) brightness(1.2); 
-            mix-blend-mode: screen; /* Makes black background transparent */
+            mix-blend-mode: screen; 
             opacity: 0.9; 
         }
 
         @media (max-width: 768px) {
             nav { text-align: center; }
             .fog-name { font-size: 2.2rem; letter-spacing: 6px; }
-            .prose { font-size: 1.05rem; }
+            .image-frame { height: 300px; }
         }
     </style>
 </head>
@@ -123,99 +134,94 @@
         
         <header class="hero">
             <h1 class="fog-name" id="alias-target">EMMY</h1>
-            <div class="promise-clock" id="covenant-clock">INITIATING_COVENANT_SYNC...</div>
+            <div class="promise-clock" id="covenant-clock">SYMBOLS_OF_DEVOTION // SYNCING...</div>
         </header>
 
         <section>
-            <div class="section-label">01 // ORIGIN_ALIGNMENT</div>
+            <div class="section-label">THE_GATHERING</div>
             <div class="prose">
-                She was born and raised in <span class="highlight">Lancaster/Palmdale</span>, the oldest of five—a perfect structural alignment to my own history as the youngest. For years, I moved through an emotional desert, but in the 11th hour of an expiring match, our <span class="highlight">search diameters collided</span>. What followed was a pleasantly violent connection; a knowing, an answering, and a calling home.
+                In the profound silence that followed a fifteen-year winter, I wandered through a desert of my own making—aloof, guarded, and resigned to the cold. But the universe holds its own timing. In the eleventh hour of a quick journey to California, our lives collided. 
+                <br><br>
+                It was not a mere introduction; it was a <span class="highlight">sudden, overwhelming recognition</span>. After 6.95 days of hesitation, the message was sent, and the desert vanished. To meet Emily was to be called home by a warm breeze that refused to let my spirit remain in the shadows. We are the youngest and the oldest, two halves of a long-sought whole, finally at rest.
+            </div>
+        </section>
+
+        <div class="image-frame">
+            <span class="placeholder-text">[ IMAGE_01 // THE_UNIFIED_SIGNAL // US ]</span>
+        </div>
+
+        <section>
+            <div class="section-label">THE_SACRIFICE_OF_THE_HEART</div>
+            <div class="prose">
+                I am humbled daily by the grace she has shown in transplanting her entire life for the sake of our bond. She faced the tempests of the legal system with a mother's fierce love, fighting to bring her four daughters into the sanctuary we were building together. 
+                <br><br>
+                Upon her arrival, she did not simply move into a house; she <span class="highlight">sanctified a home</span>. With an artist's eye and a generous spirit, she invested herself fully to clothe our residence in beauty and peace. She has folded my three children into her heart as her own, ensuring that every soul under our roof feels the profound safety of being truly loved.
+            </div>
+            <div class="legacy-grid">
+                <div class="legacy-chip">THE_DAUGHTERS // E + E + K + K</div>
+                <div class="legacy-chip">THE_SONS // G + D + B</div>
+                <div class="legacy-chip">THE_NEW_LEGACY // GRANDPARENTS // JAN 01, 2026</div>
+            </div>
+        </section>
+
+        <div class="image-frame">
+            <span class="placeholder-text">[ IMAGE_02 // THE_RADIANCE // HER ]</span>
+        </div>
+
+        <section class="hex-card">
+            <div class="prose">
+                Every Friday remains <span class="highlight">Sanctified & Sacred</span>. Our devotion is found in the quiet moments: the shared glow of a Target parking lot or the rugged ascent of <span class="highlight">Horton Creek</span>. 
+                <br><br>
+                I carry a cherished relic of our first Father's Day—an electric longboard that represents her selfless desire to see me joyful and free. She is the superb navigator of our journeys, the cook who turns a table into a feast for friends and strangers alike, and the patient passenger princess who trusts in our shared direction.
             </div>
         </section>
 
         <section>
-            <div class="section-label">02 // THE_UPROOTING</div>
+            <div class="section-label">RADICAL_LOVE // THE_PEACE_OF_CHRIST</div>
             <div class="prose">
-                I am continually humbled by the sheer magnitude of her sacrifice. She uprooted her entire existence, navigating the complexities of the legal system to secure the right to move her four daughters from California to Arizona. 
+                Emily is a living exemplar of the command to <span class="highlight">"Love Thy Neighbor."</span> She has achieved the impossible: weaving a tapestry of grace across our extended families, fostering collaborative peace with ex-spouses and new partners alike. She refuses to allow the dimming of any spirit.
                 <br><br>
-                Upon arrival, she initiated the <span class="highlight">Homestead Protocol</span>, investing herself fully to furnish, beautify, and expand our residence into a sanctuary. She treats my three children as her own, sacrificing her energy to ensure every soul in our home is loved, accepted, and fundamentally sound.
-            </div>
-            <div class="legacy-grid">
-                <div class="legacy-chip">THE_FOUR // E + E + K + K</div>
-                <div class="legacy-chip">THE_THREE // G + D + B</div>
-                <div class="legacy-chip">STATUS: COMPLETED_SQUAD</div>
-            </div>
-        </section>
-
-        <section class="ritual-card">
-            <div class="prose">
-                Every Friday is <span class="highlight">Sanctified & Sacred</span>. Whether we are eating chicken nuggets by the fluorescent glow of a Target parking lot or navigating the high-altitude trails of <span class="highlight">Horton Creek in Payson</span>, the focus is singular. 
-                <br><br>
-                She is an active listener, a keeper of details, and a navigator of peace. She exemplifies the pure love of Christ in a way that humbles my own walk. Watching her grow is the most sacred experience of my life.
-            </div>
-        </section>
-
-        <section>
-            <div class="section-label">03 // CORE_ATTRIBUTES</div>
-            <div class="legacy-grid">
-                <div class="legacy-chip">FAITHFUL</div>
-                <div class="legacy-chip">EASY_GOING</div>
-                <div class="legacy-chip">SENSE_OF_ADVENTURE</div>
-                <div class="legacy-chip">THE_CALM</div>
-                <div class="legacy-chip">THE_FUTURE</div>
+                Her devotion to God is not a quiet thing—it is a powerful uplink that shifts the very atmosphere. I have felt the tangible weight of her prayers across the miles, moments where my soul was suddenly stilled, prompting me to ask the only question that mattered: <span class="highlight">"Did you pray for me?"</span> She pleads for others with a faith that humbles me, and watching her light grow is the most sacred experience of my life.
             </div>
         </section>
 
         <div class="sig-block">
             <img src="Images/Signature.png" alt="Signature" class="sig-img">
-            <div class="promise-clock" style="margin-top: 20px;">WEDDING_SONG // KINGS & QUEENS // MAT KEARNEY</div>
+            <div class="promise-clock" style="margin-top: 20px;">KINGS & QUEENS // THE_ANTHEM_OF_US</div>
         </div>
 
     </div>
 
     <script>
-        // COVENANT CLOCK (April 17, 2021)
         function updateCovenant() {
             const start = new Date("April 17, 2021 00:00:00");
             const now = new Date();
             const diff = now - start;
-            
             const days = Math.floor(diff / (1000 * 60 * 60 * 24));
             const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
             const mins = Math.floor((diff / (1000 * 60)) % 60);
             const secs = Math.floor((diff / 1000) % 60);
-            
-            document.getElementById('covenant-clock').textContent = 
-                `PROMISE_ELAPSED // ${days}D:${hours}H:${mins}M:${secs}S`;
+            document.getElementById('covenant-clock').textContent = `MARRIED // ${days}D:${hours}H:${mins}M:${secs}S`;
         }
         setInterval(updateCovenant, 1000);
 
-        // STUTTER-FREE ALIAS CYCLER
         const aliases = ["EMMY", "ELSA", "EMMY LOU", "EMILY"];
         let aliasIdx = 0;
         const target = document.getElementById('alias-target');
 
         function cycleAlias() {
-            // Fade out
             target.style.opacity = '0';
             target.style.filter = 'blur(15px)';
             target.style.letterSpacing = '30px';
-
             setTimeout(() => {
-                // Change text while invisible
                 aliasIdx = (aliasIdx + 1) % aliases.length;
                 target.textContent = aliases[aliasIdx];
-                
-                // Fade back in
                 target.style.opacity = '1';
                 target.style.filter = 'blur(0)';
                 target.style.letterSpacing = '12px';
-            }, 1500); // Wait for fade out to finish
+            }, 1800);
         }
-
-        // Cycle every 6 seconds to allow for slow, elegant transitions
-        setInterval(cycleAlias, 6000);
-
+        setInterval(cycleAlias, 7000); // Slower, more reverent timing
         document.addEventListener('DOMContentLoaded', updateCovenant);
     </script>
 </body>
