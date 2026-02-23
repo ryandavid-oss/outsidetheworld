@@ -242,6 +242,14 @@
         function closeOverlay(id) { document.getElementById(id).style.display = 'none'; }
         
         window.onload = () => { generateWall(); setTimeout(typeOut, 1000); };
+        /* --- REPAIRED STARTUP LOGIC --- */
+function initSystem() {
+    generateWall(); // Start the scroll immediately
+    setTimeout(typeOut, 500); // Start typewriter shortly after
+}
+
+// Use DOMContentLoaded instead of window.onload for instant names
+document.addEventListener('DOMContentLoaded', initSystem);
     </script>
 </body>
 </html>
