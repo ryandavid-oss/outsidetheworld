@@ -24,6 +24,7 @@
             font-family: 'Inter', sans-serif;
             margin: 0; padding: 0;
             overflow-x: hidden;
+            line-height: 1.6;
         }
 
         /* ATMOSPHERIC SCANLINES */
@@ -34,36 +35,28 @@
             background-size: 100% 3px, 3px 100%; pointer-events: none; z-index: 1000; opacity: 0.15;
         }
 
-        /* NAVIGATION: Left Desktop, Center Mobile */
+        /* NAVIGATION: Desktop Left, Mobile Center */
         nav { padding: 60px 40px 10px; text-align: left; position: relative; z-index: 1001; }
         .nav-logo { width: 220px; filter: drop-shadow(0 0 20px rgba(99, 149, 238, 0.2)); }
 
         .container { max-width: 1100px; margin: 0 auto; padding: 0 20px 100px; }
 
         /* HERO SECTION */
-        header.entrance {
-            padding: 10px 40px 0;
-            text-align: center;
-            background: linear-gradient(to bottom, rgba(5,5,5,1) 0%, rgba(5,5,5,0) 100%);
-        }
-
         .hero {
             display: flex; align-items: center; gap: 50px;
             padding: 40px 0; border-bottom: 1px solid var(--border);
         }
 
-        /* PORTRAIT CALIBRATION */
         .scanner-frame {
-            position: relative; width: 200px; height: 200px;
-            border: 1px solid var(--border); padding: 10px;
-            transition: all 0.5s ease; flex-shrink: 0;
+            position: relative; width: 220px; height: 220px;
+            border: 1px solid var(--border); padding: 10px; flex-shrink: 0;
         }
         .portrait {
             width: 100%; height: 100%;
             background: #111;
             background-image: url('Images/Profile.jpg');
             background-size: cover; 
-            background-position: center 35%; /* HEADROOM ADJUSTED */
+            background-position: center 45%; /* NUDGED DOWN FOR HEADROOM */
             filter: grayscale(100%) brightness(0.7);
             transition: 0.5s ease;
             position: relative; overflow: hidden;
@@ -76,8 +69,8 @@
         }
         @keyframes scan { 0% { top: 0%; } 100% { top: 100%; } }
 
-        /* CINEMATIC FOGGY LETTERING */
-        .fog-name {
+        /* CINEMATIC FOGGY LETTERING [RECLAIMED] */
+        .fog-name { 
             font-size: clamp(1.8rem, 5vw, 3.5rem); 
             font-weight: 900; 
             letter-spacing: 12px; 
@@ -91,17 +84,25 @@
             animation: fogReveal 3s forwards;
         }
         @keyframes fogReveal {
-            0% { letter-spacing: 35px; opacity: 0; filter: blur(20px); }
+            0% { letter-spacing: 30px; opacity: 0; filter: blur(20px); }
             100% { letter-spacing: 12px; opacity: 1; filter: blur(0); }
         }
 
         .job-title {
             font-family: 'Fira Code', monospace; color: var(--brand-teal);
             letter-spacing: 4px; text-transform: uppercase;
-            margin-top: 15px; font-size: 1.1rem; min-height: 1.5rem;
+            margin-top: 15px; font-size: 1rem; min-height: 1.5rem;
         }
         .cursor { display: inline-block; width: 10px; height: 18px; background-color: var(--brand-teal); margin-left: 5px; animation: blink 1s infinite; vertical-align: middle; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        .lang-badge {
+            display: inline-block; margin-top: 10px; padding: 4px 10px;
+            border: 1px solid var(--brand-light-blue);
+            color: var(--brand-light-blue); font-family: 'Fira Code';
+            font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase;
+            background: rgba(160, 190, 245, 0.05);
+        }
 
         /* MISSION BOX (Top Tier) */
         .mission-box {
@@ -109,15 +110,8 @@
             background: linear-gradient(90deg, var(--glass), transparent);
             border-left: 2px solid var(--brand-pink);
         }
-        .mission-box h2 { 
-            font-family: 'Fira Code'; font-size: 0.7rem; 
-            color: var(--brand-pink); letter-spacing: 5px; 
-            margin-bottom: 20px; text-transform: uppercase; 
-        }
-        .mission-box p { 
-            font-size: 1.3rem; font-weight: 300; line-height: 1.6; color: #fff;
-            max-width: 900px; margin: 0;
-        }
+        .mission-box h2 { font-family: 'Fira Code'; font-size: 0.7rem; color: var(--brand-pink); letter-spacing: 5px; margin-bottom: 20px; text-transform: uppercase; }
+        .mission-box p { font-size: 1.3rem; font-weight: 300; line-height: 1.6; color: #fff; max-width: 900px; margin: 0; }
 
         /* SECTION STYLING */
         .section-label {
@@ -134,22 +128,23 @@
         .exp-date { font-family: 'Fira Code'; color: #555; font-size: 0.8rem; }
         .exp-body { font-weight: 300; color: #999; line-height: 1.7; font-size: 1rem; }
 
-        /* COMMENDATIONS SECTION */
-        .award-entry {
-            background: linear-gradient(90deg, rgba(255, 105, 180, 0.05), transparent);
-            border-left: 3px solid var(--brand-pink); padding: 35px;
-        }
+        /* COMMENDATIONS */
+        .award-entry { background: linear-gradient(90deg, rgba(255, 105, 180, 0.05), transparent); border-left: 3px solid var(--brand-pink); padding: 35px; }
         .award-meta { font-family: 'Fira Code'; color: var(--brand-pink); font-size: 0.8rem; letter-spacing: 3px; margin-bottom: 15px; }
         .award-quote { font-size: 1.1rem; font-style: italic; color: #eee; border-left: 2px solid rgba(255,255,255,0.1); padding-left: 20px; margin-top: 20px; }
 
-        /* TACTICAL SKILLS */
-        .skills-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px; }
-        .skill-chip { padding: 4px 12px; border: 1px solid var(--border); font-family: 'Fira Code'; font-size: 0.65rem; color: var(--brand-teal); }
+        /* ARSENAL GRID */
+        .arsenal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
+        .arsenal-cat h4 { font-family: 'Fira Code'; color: var(--brand-blue); font-size: 0.8rem; letter-spacing: 3px; margin-bottom: 20px; text-transform: uppercase; }
+        .skills-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+        .skill-chip { padding: 4px 10px; border: 1px solid var(--border); font-family: 'Fira Code'; font-size: 0.6rem; color: #777; transition: 0.3s; }
+        .skill-chip:hover { border-color: var(--brand-teal); color: var(--brand-teal); }
 
-        /* ACADEMIC TENURE */
-        .edu-item { margin-bottom: 10px; }
-        .edu-school { color: #fff; font-weight: 700; font-size: 1.1rem; }
-        .edu-details { font-family: 'Fira Code'; color: var(--brand-blue); font-size: 0.85rem; }
+        /* COMMUNICATION HUB */
+        .comm-hub { background: var(--glass); border: 1px solid var(--border); padding: 40px; font-family: 'Fira Code'; font-size: 0.85rem; }
+        .comm-hub a { color: #fff; text-decoration: none; margin-left: 10px; transition: 0.3s; }
+        .comm-hub a:hover { color: var(--brand-blue); }
+        .hub-label { color: var(--brand-blue); display: inline-block; width: 100px; }
 
         .sig-block { margin-top: 80px; text-align: right; }
         .sig-img { max-width: 250px; filter: invert(1) brightness(2) contrast(150%); mix-blend-mode: screen; opacity: 0.8; }
@@ -158,25 +153,10 @@
         @media (max-width: 768px) {
             nav { text-align: center; }
             .hero { flex-direction: column; text-align: center; gap: 30px; }
-            .mission-box { padding: 25px; }
-            .mission-box p { font-size: 1rem; }
             .exp-header { flex-direction: column; align-items: flex-start; gap: 5px; }
-            .exp-role { font-size: 1.3rem; }
+            .arsenal-grid { grid-template-columns: 1fr; }
+            .mission-box { padding: 25px; }
         }
-        /* ADD TO YOUR EXISTING STYLE BLOCK */
-    .immersion-box {
-        background: linear-gradient(90deg, rgba(99, 149, 238, 0.05), transparent);
-        border-left: 2px solid var(--brand-blue);
-        padding: 30px;
-        margin-top: 40px;
-    }
-    .lang-status {
-        font-family: 'Fira Code';
-        color: var(--brand-light-blue);
-        font-size: 0.8rem;
-        margin-bottom: 10px;
-        display: block;
-    }
     </style>
 </head>
 <body>
@@ -196,7 +176,7 @@
                 <div class="job-title">
                     <span id="typewriter-record"></span><span class="cursor"></span>
                 </div>
-                <a href="Images/Resume.pdf" style="display:inline-block; margin-top:20px; color:var(--brand-blue); text-decoration:none; font-family:'Fira Code'; font-size:0.75rem; border:1px solid var(--brand-blue); padding:10px 20px;">[ ⌘ UPLINK_DATA_FILE ]</a>
+                <div class="lang-badge">⌘ BILINGUAL_PROFICIENCY: SPANISH // CERTIFIED</div>
             </div>
         </header>
 
@@ -207,7 +187,6 @@
 
         <section id="experience">
             <div class="section-label">01 // ACTIVE_TENURE</div>
-
             <div class="experience-entry">
                 <div class="exp-header">
                     <div>
@@ -217,12 +196,11 @@
                     <span class="exp-date">2014 — CURRENT</span>
                 </div>
                 <div class="exp-body">
-                    Spearheading an agency-wide aesthetic revolution, transitioning from corporate standards to a high-impact, youthful brand mark. Managing comprehensive technology logistics for a 500+ member workforce, overseeing telemedicine, EHR integration, and cross-departmental hardware/network infrastructure.
+                    Spearheading an agency-wide aesthetic revolution, transitioning from corporate standards to a high-impact, youthful brand mark. Managing comprehensive technology logistics for a 500+ member workforce, overseeing telemedicine, EHR integration, and cross-departmental hardware/network infrastructure. 
                 </div>
             </div>
 
             <div class="section-label">02 // ARCHIVED_SERVICE</div>
-
             <div class="experience-entry">
                 <div class="exp-header">
                     <div>
@@ -233,7 +211,7 @@
                 </div>
                 <div class="exp-body">
                     Orchestrated logistical launch protocols for the 3rd Street Promenade flagship. Maintained elite-tier inventory precision (99.85%) and mentored regional talent through Southwest-wide operational training initiatives.
-                    <br><a href="mac30.html" style="color: var(--brand-pink); text-decoration: none; font-family: 'Fira Code'; font-size: 0.7rem; margin-top: 10px; display: inline-block;">[ ⌘ VIEW_DETAILED_SERVICE_RECORD_06/30/07 ]</a>
+                    <br><a href="mac30.html" style="color: var(--brand-pink); text-decoration: none; font-family: 'Fira Code'; font-size: 0.7rem; margin-top: 10px; display: inline-block;">[ ⌘ ACCESS_MAC30_ARCHIVE ]</a>
                 </div>
             </div>
 
@@ -246,7 +224,7 @@
                     <span class="exp-date">2001 — 2009</span>
                 </div>
                 <div class="exp-body">
-                    Commanded a digital technical unit of 20+ members. Standardized global technical support benchmarks by unifying internal e-care operations with international outsourced hubs.
+                    Commanded a digital technical unit of 20+ members. Standardized global technical support benchmarks by unifying internal e-care operations with international outsourced hubs in Panama.
                 </div>
             </div>
 
@@ -259,7 +237,7 @@
                     <span class="exp-date">2000 — 2001</span>
                 </div>
                 <div class="exp-body">
-                    Executed tactical safety protocols across 2,500 alpine acres. Managed high-altitude medical triage and guest security within extreme environmental envelopes.
+                    Executed tactical safety protocols across 2,500 alpine acres. Managed high-altitude medical triage and guest security within extreme environmental envelopes, acting as a primary emergency link.
                 </div>
             </div>
         </section>
@@ -278,64 +256,86 @@
         </section>
 
         <section id="linguistics">
-    <div class="section-label">06 // LINGUISTIC_IMMERSION</div>
-    <div class="immersion-box">
-        <span class="lang-status">STATUS: FULL PROFESSIONAL PROFICIENCY // SPANISH</span>
-        <div class="exp-body">
-            <strong>International Service Representative // LDS Mission (1999 — 2001)</strong><br>
-            Completed a 24-month intensive cultural and linguistic immersion. Facilitated community outreach, led localized instructional programs, and achieved full professional fluency in the Spanish language. Developed foundational skills in cross-cultural communication and community leadership that continue to inform my strategic approach to brand and logistics today.
-        </div>
-    </div>
-</section>
+            <div class="section-label">04 // LINGUISTIC_IMMERSION</div>
+            <div class="experience-entry" style="background: linear-gradient(90deg, rgba(99, 149, 238, 0.05), transparent); padding: 30px; border-left: 2px solid var(--brand-blue);">
+                <span style="font-family: 'Fira Code'; color: var(--brand-light-blue); font-size: 0.8rem; margin-bottom: 10px; display: block;">STATUS: FULL PROFESSIONAL PROFICIENCY // SPANISH</span>
+                <div class="exp-body">
+                    <strong>International Service Representative // LDS Mission (1999 — 2001)</strong><br>
+                    Completed a 24-month intensive cultural and linguistic immersion. Facilitated community outreach and leadership programs, achieving professional fluency and cross-cultural communication expertise.
+                </div>
+            </div>
+        </section>
 
         <section id="education">
-            <div class="section-label">04 // ACADEMIC_TENURE</div>
+            <div class="section-label">05 // ACADEMIC_TENURE</div>
             <div class="edu-item">
                 <div class="edu-school">Ottawa University // Rio Salado // BYU-Idaho</div>
-                <div class="edu-details">Professional Tenure: 90+ Credit Hours accumulated in Business Management & Operational Strategy</div>
+                <div class="edu-details">90+ Credit Hours accumulated in Business Management & Operational Strategy</div>
             </div>
         </section>
 
         <section id="arsenal">
-            <div class="section-label">05 // TACTICAL_ARSENAL</div>
-            <div class="skills-grid">
-                <div class="skill-chip">Cisco Meraki</div><div class="skill-chip">Mosyle MDM</div><div class="skill-chip">Adobe Creative Suite</div>
-                <div class="skill-chip">Google Workspace</div><div class="skill-chip">Ubiquiti Unifi</div><div class="skill-chip">Bilingual (Spanish)</div>
+            <div class="section-label">06 // TACTICAL_ARSENAL</div>
+            <div class="arsenal-grid">
+                <div class="arsenal-cat">
+                    <h4>Ops & Logistics</h4>
+                    <div class="skills-grid">
+                        <div class="skill-chip">Global Inventory Control</div><div class="skill-chip">Shrink Management (.10%)</div>
+                        <div class="skill-chip">Supply Chain Logistics</div><div class="skill-chip">Asset Lifecycle Management</div>
+                        <div class="skill-chip">Vendor Relations</div>
+                    </div>
+                </div>
+                <div class="arsenal-cat">
+                    <h4>Brand & Strategy</h4>
+                    <div class="skills-grid">
+                        <div class="skill-chip">Visual Identity Design</div><div class="skill-chip">Digital Transformation</div>
+                        <div class="skill-chip">Social Media Marketing</div><div class="skill-chip">Brand Storytelling</div>
+                    </div>
+                </div>
+                <div class="arsenal-cat">
+                    <h4>Tech Infrastructure</h4>
+                    <div class="skills-grid">
+                        <div class="skill-chip">Cisco Meraki</div><div class="skill-chip">Mosyle MDM</div><div class="skill-chip">Ubiquiti Unifi</div>
+                        <div class="skill-chip">Adobe Creative Studio</div><div class="skill-chip">Telemedicine Deployment</div>
+                    </div>
+                </div>
+                <div class="arsenal-cat">
+                    <h4>Leadership</h4>
+                    <div class="skills-grid">
+                        <div class="skill-chip">Conflict Resolution</div><div class="skill-chip">Regional Training</div>
+                        <div class="skill-chip">Mentorship</div><div class="skill-chip">Emergency First Response</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="section-label">07 // COMMUNICATION_HUB</div>
+            <div class="comm-hub">
+                <div style="margin-bottom: 15px;">
+                    <span class="hub-label">[ SIGNAL ]</span>
+                    <a href="mailto:your-email@example.com">Establishing_Connection...</a>
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <span class="hub-label">[ NETWORK ]</span>
+                    <a href="https://linkedin.com/in/yourprofile">View_LinkedIn_Profile</a>
+                </div>
+                <div>
+                    <span class="hub-label">[ UPLINK ]</span>
+                    <a href="Images/Resume.pdf">Download_System_File.pdf</a>
+                </div>
             </div>
         </section>
 
         <div class="sig-block"><img src="Images/Signature.png" alt="Signature" class="sig-img"></div>
     </div>
-<section id="contact">
-    <div class="section-label">06 // COMMUNICATION_UPLINK</div>
-    <div class="arsenal-grid">
-        <div class="experience-card" style="margin-bottom: 0; padding: 30px;">
-            <div class="exp-body" style="font-family: 'Fira Code'; font-size: 0.85rem;">
-                <div style="margin-bottom: 15px;">
-                    <span style="color: var(--brand-blue);">[ SIGNAL ]</span> 
-                    <a href="mailto:your-email@example.com" style="color: #fff; text-decoration: none; margin-left: 10px;">Establishing_Connection...</a>
-                </div>
-                <div style="margin-bottom: 15px;">
-                    <span style="color: var(--brand-teal);">[ NETWORK ]</span> 
-                    <a href="https://linkedin.com/in/yourprofile" style="color: #fff; text-decoration: none; margin-left: 10px;">View_LinkedIn_Profile</a>
-                </div>
-                <div>
-                    <span style="color: var(--brand-light-blue);">[ LOCATION ]</span> 
-                    <span style="color: #fff; margin-left: 10px;">Phoenix, AZ // Remote_Capable</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+
     <script>
         const text = "Asst. Director of Brand Strategy & Tech Logistics";
         const target = document.getElementById('typewriter-record');
         let i = 0;
         function type() { if (i < text.length) { target.textContent += text.charAt(i++); setTimeout(type, 60); } }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            setTimeout(type, 1000);
-        });
+        document.addEventListener('DOMContentLoaded', () => { setTimeout(type, 1000); });
     </script>
 </body>
 </html>
