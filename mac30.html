@@ -94,6 +94,18 @@
 
         @keyframes scrollWall { from { transform: translateY(0); } to { transform: translateY(-50%); } }
 
+        /* SIGNATURE STYLING */
+        .signature-container {
+            margin-top: 50px;
+            text-align: right;
+        }
+        .signature-img {
+            max-width: 280px;
+            filter: invert(1) brightness(2) contrast(150%);
+            mix-blend-mode: screen;
+            opacity: 0.9;
+        }
+
         /* OVERLAY SYSTEM */
         .system-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -162,6 +174,10 @@
             <p>Like all good things, it had to come to an end. Suffice it to say that my personal life collided heavily and irrevocably with my ambitions and pleasure at Apple. My growing family was my ultimate family, and while I enjoyed corporate status as a traveling Inventory Trainer, my schedule rested within the needs of Apple Retail. Evenings, weekends, and ‘clopening shifts’ would ultimately dictate my path away from Apple. Five years after I began there, I signed my resignation letter with melancholy as I laid the foundation for the next two working decades of my life.</p>
             
             <p>I will always be grateful for my time at Apple. I owe a debt of gratitude to those who I had the pleasure of working with. Most notable; Lindsey Costley, Andrew Calhoun, Jenn and Toby King, Chris Krieg, Jose Fernandez, Jose Ramirez, Jose Hernandez, Karlyn Herring, Corey Dillier, Eric Duffy, Saint, Ashley Lawson, Anna Sammons, Eric Locke, Maria Nissen, Bob O'Leary, Jack Saber, Scott Snyder, Eric Stout, Mike Van Dusen, Mark Henderson, Natalie Clifford, Sean Little, Brandon Love, Denise Harris-Kester, Bryan Beata, Mario Aldrete, Mary Lideen, Stanford Florence, Gregory Terry, Chelsey McPeek, Tyson Brown, Alex Tighe, Mike Franzone, Jake Burger and many, many others too numerous to list here. This was a huge part of my life, and I felt impressed to mark this phase of my life upon the digital record of OTW.</p>
+
+            <div class="signature-container">
+                <img src="Images/Signature.png" alt="Signature" class="signature-img">
+            </div>
         </section>
     </div>
 
@@ -179,9 +195,9 @@
     <script>
         const pinkName = "RyanDavid Burningham";
         
-        const greenNames = ["Steve Wozniak", "Steve Jobs", "Mike Markkula", "Bill Fernandez", "Rod Holt", "Randy Wigginton", "Chris Espinosa", "Jim Martindale", "Sherry Livingston", "Don Breuner", "Daniel Kottke", "Mark Johnson", "Gene Carter", "Tom Whitney", "Wendell Sander", "Dick Huston", "Cliff Huston", "Ed Ruder", "Jef Raskin", "Brian Howard", "Bill Atkinson"];
+        const blueNames = ["Steve Wozniak", "Steve Jobs", "Mike Markkula", "Bill Fernandez", "Rod Holt", "Randy Wigginton", "Chris Espinosa", "Jim Martindale", "Sherry Livingston", "Don Breuner", "Daniel Kottke", "Mark Johnson", "Gene Carter", "Tom Whitney", "Wendell Sander", "Dick Huston", "Cliff Huston", "Ed Ruder", "Jef Raskin", "Brian Howard", "Bill Atkinson"];
         
-        const blueNames = ["Lindsey Costley", "Andrew Calhoun", "Jenn King", "Toby King", "Chris Krieg", "Jose Fernandez", "Jose Ramirez", "Jose Hernandez", "Karlyn Herring", "Corey Dillier", "Eric Duffy", "Saint", "Ashley Lawson", "Anna Sammons", "Eric Locke", "Maria Nissen", "Bob O'Leary", "Jack Saber", "Scott Snyder", "Eric Stout", "Mike Van Dusen", "Mark Henderson", "Natalie Clifford", "Sean Little", "Brandon Love", "Denise Harris-Kester", "Bryan Beata", "Mario Aldrete", "Mary Lideen", "Stanford Florence", "Gregory Terry", "Chelsey McPeek", "Tyson Brown", "Alex Tighe", "Mike Franzone", "Jake Burger"];
+        const greenNames = ["Lindsey Costley", "Andrew Calhoun", "Jenn King", "Toby King", "Chris Krieg", "Jose Fernandez", "Jose Ramirez", "Jose Hernandez", "Karlyn Herring", "Corey Dillier", "Eric Duffy", "Saint", "Ashley Lawson", "Anna Sammons", "Eric Locke", "Maria Nissen", "Bob O'Leary", "Jack Saber", "Scott Snyder", "Eric Stout", "Mike Van Dusen", "Mark Henderson", "Natalie Clifford", "Sean Little", "Brandon Love", "Denise Harris-Kester", "Bryan Beata", "Mario Aldrete", "Mary Lideen", "Stanford Florence", "Gregory Terry", "Chelsey McPeek", "Tyson Brown", "Alex Tighe", "Mike Franzone", "Jake Burger"];
 
         const grayNames = ["Ronald Wayne", "Patty Jobs", "Michael Scott", "John Draper", "Gary Martin", "Dana Redington", "Clive Twyman", "Robert Martinengo", "Cliff Story", "Chrisann Brennan", "Elmer Baum", "Phil Roybal", "Gary Shannon", "Bana Witt", "John Couch", "Chuck Mauro", "Brad Hacker", "Bruce Tognazzini", "Barry Yarkoni", "Kent Hopkins", "Cheng Lim", "Terri Powers", "Bob Bishop", "Rich Whicker", "Joanna Hoffman", "Burrell Smith", "Bud Tribble", "Bob Belleville", "Steve Capps", "George Crow", "Donn Denman", "Bruce Horn", "Susan Kare", "Larry Kenyon", "Caroline Rose", "Andy Hertzfeld", "Patti Kenyon", "Terry Oyama", "Ronald Nicholson", "Martin Haeberli", "Brian Robertson", "Pamela Wyman", "Bryan Stearns", "Debi Coleman", "Matt Carter", "Colette Askeland", "Linda Wilkin", "Brian Berkeley", "MaryEllen McCammon", "Vicki Milledge", "Bill Bull", "Jerome Coonen", "Bob Bailey", "Dan'l Lewin", "Sam Lyall", "Joe Shelton", "David Beaver", "Mike Collins", "Peter Folley", "Owen Densmore", "Bill Wathen", "J David Egner", "Deborah Bress", "Steve Scheier", "Scott Knaster", "John Casado", "Lynnea Johnson", "Marc LeBrun", "Larry Tesler", "Michael Jurewitz", "Tim Cook", "Arthur Levinson", "Katherine Adams", "Eddy Cue", "Craig Federighi", "Greg Joswiak", "Sabih Khan", "Deirdre O'Brien", "Kevan Parekh", "Johny Srouji", "John Ternus", "Mike Fenger", "Luca Maestri", "Isabel Ge Mahe", "Tor Myhren", "Adrian Perica", "Kristin Huguet Quayle", "Phil Schiller", "Wanda Austin", "Alex Gorsky", "Andrea Jung", "Monica Lozano", "Ronald Sugar", "Susan Wagner", "Angela Ahrendts", "Gil Amelio", "Fred Anderson", "Satjiv Chahil", "Paul Deneve", "Kaiann Drance", "Alan Dye", "Scott Forstall", "Jean-Louis Gassée", "John Giannandrea", "Ellen Hancock", "Lisa Jackson", "Bob Mansfield", "Peter Oppenheimer", "Jon Rubinstein", "Bertrand Serlet", "Bruce Sewell", "Michael Spindler", "Avie Tevanian", "Jeff Williams", "Jony Ive", "Bartley Andre", "Daniel Coster", "Daniele De Iuliis", "Richard Howarth", "Duncan Kerr", "Shin Nishibori", "Matthew Dean Rohrbach", "Douglas Satzger", "Calvin Seid", "Christopher Stringer", "Eugene Whang", "Rico Zorkendorfer", "Imran Chaudhri", "Darin Adler", "Samir Arora", "Frank Balistreri", "Michael Bartosh", "Samy Bengio", "Marc Benioff", "Sabeer Bhatia", "Mike Boich", "Amelia Boone", "Robert Brunner", "Claire Buffie", "Matt Casamassina", "Tantek Çelik", "Stuart Cheshire", "Adam Cheyer", "Lee Collins", "Richard Crandall", "Robert X. Cringely", "Doug Cutting", "Mark Davis", "Michael Dhuey", "Paul Donovan", "Hugh Dubberly", "Donna Dubinsky", "Hartmut Esslinger", "Alex Fielding", "Stephen Friend", "Antonio García Martínez", "Michael Gartenberg", "Bill Gaver", "Timnit Gebru", "Dominic Giampaolo", "Ashley Gjøvik", "Ian Goodfellow", "Ramanathan V. Guha", "Angela Guzman", "Trip Hawkins", "Michael Homer", "Hsiao-Wuen Hon", "Jordan Hubbard", "Dave Hyatt", "Caitlin Kalinowski", "Guy Kawasaki", "Kazuo Kawasaki", "Alan Kay", "Jim Keller", "Raja Koduri", "Ivan Krstić", "Chris Lattner", "Bruce Leak", "Dave Limp", "Kevin Lynch", "Richard F. Lyon", "Divya Nag", "Shantanu Narayen", "Don Norman", "Dave Opstad", "Rich Page", "Mark Papermaster", "Janneke Parrish", "Robert Pera", "Patrick Piemonte", "Roger Powell", "Paul Takac", "Brandon Tory", "Xiaoyuan Tu", "Morgan Wandell", "Wayne Westerman", "Daniel Williams", "Keith Williams", "Kristina Hooper Woolsey", "Ed Mackowiak", "Edward B. Stead", "Ellen Petry Leanse", "Eric Traut", "Ko Isono", "Luke Wood", "Laszlo Zsidek", "Lyle Crouse", "Lynn Takahashi", "Paul Mercer", "Steve Sakoman", "Susan Barnes", "Tony Blevins", "Weibao Wang", "Wil Houde", "Paul Devine"];
 
