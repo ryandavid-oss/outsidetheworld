@@ -12,7 +12,7 @@
             --brand-blue: #6395EE;
             --brand-teal: #91AFB3;
             --brand-light-blue: #A0BEF5;
-            --brand-pink: #FF69B4; /* Accent reserve */
+            --brand-pink: #FF69B4;
             --bg-dark: #050505;
             --glass: rgba(255, 255, 255, 0.03);
             --border: rgba(255, 255, 255, 0.1);
@@ -24,7 +24,6 @@
             font-family: 'Inter', sans-serif;
             margin: 0; padding: 0;
             overflow-x: hidden;
-            line-height: 1.6;
         }
 
         /* ATMOSPHERIC SCANLINES */
@@ -35,103 +34,117 @@
             background-size: 100% 3px, 3px 100%; pointer-events: none; z-index: 1000; opacity: 0.15;
         }
 
-        /* HEADER ALIGNMENT (Matches mac30 logic) */
-        nav { 
-            position: relative; 
-            padding: 40px; 
-            text-align: left; 
-            z-index: 1001; 
-        }
+        nav { padding: 60px 40px 20px; text-align: left; position: relative; z-index: 1001; }
         .nav-logo { width: 220px; filter: drop-shadow(0 0 20px rgba(99, 149, 238, 0.2)); }
 
         .container { max-width: 1000px; margin: 0 auto; padding: 0 20px 100px; }
 
-        /* PROFILE SCANNER SECTION */
+        /* HERO: FOG NAME & INTERACTIVE SCANNER */
         .hero {
-            display: flex; align-items: center; gap: 50px;
-            padding: 40px 0 80px; border-bottom: 1px solid var(--border);
+            display: flex; align-items: center; gap: 60px;
+            padding: 80px 0; border-bottom: 1px solid var(--border);
         }
 
-        .profile-frame {
-            position: relative; width: 180px; height: 180px; flex-shrink: 0;
+        .scanner-frame {
+            position: relative; width: 200px; height: 200px;
+            border: 1px solid var(--border); padding: 10px;
+            transition: all 0.5s ease;
         }
 
-        .profile-img {
+        .portrait {
             width: 100%; height: 100%;
-            background: var(--glass);
-            border: 1px solid var(--brand-blue);
-            overflow: hidden; position: relative;
+            background: #111;
+            background-image: url('Images/Profile.jpg');
+            background-size: cover; background-position: center;
+            filter: grayscale(100%) brightness(0.7);
+            transition: 0.5s ease;
+            position: relative; overflow: hidden;
         }
 
-        /* Scan-line animation */
-        .profile-img::after {
-            content: ""; position: absolute; top: -100%; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(transparent, var(--brand-blue), transparent);
-            opacity: 0.4; animation: scanning 4s infinite linear;
+        .scanner-frame:hover .portrait { filter: grayscale(0%) brightness(1); }
+
+        .portrait::after {
+            content: ""; position: absolute; top: -100%; left: 0; width: 100%; height: 2px;
+            background: var(--brand-teal);
+            box-shadow: 0 0 15px var(--brand-teal);
+            animation: scan 4s infinite linear;
         }
 
-        @keyframes scanning { 0% { top: -100%; } 100% { top: 100%; } }
+        @keyframes scan { 0% { top: 0%; } 100% { top: 100%; } }
 
-        .hero-text h1 { 
-            font-size: 4rem; color: #fff; margin: 0; letter-spacing: -2px; 
-            font-weight: 900; line-height: 0.9;
-        }
-        .hero-text .subtitle { 
-            font-family: 'Fira Code'; color: var(--brand-teal); 
-            text-transform: uppercase; letter-spacing: 5px; margin-top: 15px; font-size: 0.9rem;
+        .fog-name {
+            font-size: 4.5rem; color: white; margin: 0;
+            font-weight: 900; letter-spacing: 15px;
+            text-transform: uppercase; line-height: 1;
+            animation: fogReveal 3s forwards;
+            text-shadow: 0 0 40px rgba(255,255,255,0);
         }
 
-        /* SECTION HEADERS */
-        .dossier-label {
+        @keyframes fogReveal {
+            0% { letter-spacing: 40px; filter: blur(20px); opacity: 0; }
+            100% { letter-spacing: -2px; filter: blur(0); opacity: 1; 
+                   text-shadow: 0 0 20px rgba(255,255,255,0.2); }
+        }
+
+        .job-title {
+            font-family: 'Fira Code'; color: var(--brand-teal);
+            letter-spacing: 5px; text-transform: uppercase;
+            margin-top: 20px; font-size: 0.9rem;
+        }
+
+        /* DOSSIER SECTION STYLING */
+        .section-label {
             font-family: 'Fira Code'; color: var(--brand-light-blue);
             font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase;
-            margin: 80px 0 30px; display: flex; align-items: center; gap: 15px;
+            margin: 80px 0 40px; display: flex; align-items: center; gap: 20px;
         }
-        .dossier-label::after { content: ""; height: 1px; flex-grow: 1; background: var(--border); }
+        .section-label::after { content: ""; height: 1px; flex-grow: 1; background: var(--border); }
 
-        /* EXPERIENCE BLOCKS */
-        .exp-card {
-            background: var(--glass);
-            border: 1px solid var(--border);
-            padding: 40px; margin-bottom: 30px;
-            transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative;
+        .experience-entry {
+            margin-bottom: 60px; padding-left: 20px; border-left: 1px solid var(--border);
+            transition: 0.3s;
         }
 
-        .exp-card:hover {
-            border-color: var(--brand-blue);
-            background: rgba(99, 149, 238, 0.03);
-            transform: translateX(10px);
+        .experience-entry:hover { border-left-color: var(--brand-blue); }
+
+        .exp-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 15px; }
+        .exp-role { font-size: 1.8rem; color: white; font-weight: 700; margin: 0; }
+        .exp-company { font-family: 'Fira Code'; color: var(--brand-blue); font-size: 1rem; }
+        .exp-date { font-family: 'Fira Code'; color: #555; font-size: 0.8rem; }
+
+        .exp-body { font-weight: 300; color: #999; line-height: 1.8; max-width: 800px; }
+        .exp-body strong { color: var(--brand-light-blue); }
+
+        /* SKILLS */
+        .skills-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+        .skill-chip { 
+            padding: 5px 12px; border: 1px solid var(--border); 
+            font-family: 'Fira Code'; font-size: 0.65rem; color: var(--brand-teal);
         }
 
-        .exp-card h3 { color: #fff; font-size: 1.6rem; margin: 0 0 5px 0; }
-        .exp-meta { font-family: 'Fira Code'; font-size: 0.8rem; color: var(--brand-teal); display: block; margin-bottom: 20px; }
-        
-        .exp-content { font-weight: 300; line-height: 1.8; color: #aaa; }
-
-        /* SKILL CHIPS */
-        .skills-container { display: flex; flex-wrap: wrap; gap: 12px; }
-        .skill-chip {
-            padding: 8px 18px; border: 1px solid var(--border);
-            font-family: 'Fira Code'; font-size: 0.7rem; color: #888;
-            transition: 0.3s; cursor: crosshair;
+        /* MAC30 LINK */
+        .believer-link {
+            display: inline-block; margin-top: 20px;
+            color: var(--brand-pink); text-decoration: none;
+            font-family: 'Fira Code'; font-size: 0.7rem; border-bottom: 1px solid transparent;
+            transition: 0.3s;
         }
-        .skill-chip:hover { border-color: var(--brand-pink); color: var(--brand-pink); }
+        .believer-link:hover { border-bottom-color: var(--brand-pink); }
 
-        /* SIGNATURE SECTION */
-        .sig-block { margin-top: 100px; text-align: right; }
-        .sig-img { 
-            max-width: 250px; 
-            filter: invert(1) brightness(2) contrast(150%);
-            mix-blend-mode: screen; 
-            opacity: 0.8; 
+        .uplink-btn {
+            display: inline-block; margin-top: 40px;
+            padding: 15px 30px; border: 1px solid var(--brand-blue);
+            color: var(--brand-blue); text-decoration: none;
+            font-family: 'Fira Code'; font-size: 0.8rem; letter-spacing: 2px;
+            transition: 0.3s;
         }
+        .uplink-btn:hover { background: var(--brand-blue); color: var(--bg-dark); }
 
         @media (max-width: 768px) {
             nav { text-align: center; }
-            .hero { flex-direction: column; text-align: center; gap: 20px; }
-            .hero-text h1 { font-size: 2.5rem; }
-            .exp-card { padding: 25px; }
+            .hero { flex-direction: column; text-align: center; gap: 30px; }
+            .fog-name { font-size: 2.5rem; letter-spacing: 5px; }
+            .exp-header { flex-direction: column; align-items: flex-start; gap: 10px; }
         }
     </style>
 </head>
@@ -144,53 +157,100 @@
     <div class="container">
         
         <header class="hero">
-            <div class="profile-frame">
-                <div class="profile-img"></div>
+            <div class="scanner-frame">
+                <div class="portrait"></div>
             </div>
-            <div class="hero-text">
-                <h1>RyanDavid Burningham</h1>
-                <div class="subtitle">Operations // Logistics // Strategist</div>
+            <div class="hero-content">
+                <h1 class="fog-name">RyanDavid</h1>
+                <div class="job-title">Assistant Director // Brand Strategy & Tech Logistics</div>
+                <a href="Images/Resume.pdf" class="uplink-btn">⌘ UPLINK_RESUME_PDF</a>
             </div>
         </header>
 
-        <section>
-            <div class="dossier-label">01_Professional_Service_History</div>
+        <section id="experience">
+            <div class="section-label">01 // ACTIVE_TENURE</div>
 
-            <div class="exp-card">
-                <h3>Inventory Trainer & Control Lead</h3>
-                <span class="exp-meta">Apple Inc. // 2009 — 2014</span>
-                <div class="exp-content">
-                    Orchestrated logistical frameworks for flagship retail operations. Led a specialized team of 11 through the evolution of the mobile photography vanguard and the inception of the iPad era. Specialized in the 3rd Street Promenade launch and high-fidelity inventory auditing.
+            <div class="experience-entry">
+                <div class="exp-header">
+                    <div>
+                        <h3 class="exp-role">Asst. Director of Brand Strategy & Technology Logistics</h3>
+                        <span class="exp-company">Child & Family Support Services</span>
+                    </div>
+                    <span class="exp-date">2014 — CURRENT</span>
+                </div>
+                <div class="exp-body">
+                    A multi-phase evolution from high-volume talent acquisition to **Architect of Brand Identity**. Currently spearheading the total reimagining of agency aesthetics, transitioning from corporate standard to a **vivid, youthful vision** synonymous with modern industry leaders. 
+                    <br><br>
+                    Managing the intersection of **Brand Direction** and **Technology Logistics**: overseeing web infrastructure, telemedicine deployment, social marketing, and the end-to-end support of 500+ employees. Instrumental in crafting a brand mark that serves as a beacon for elite recruiting and organizational pride.
+                </div>
+                <div class="skills-grid">
+                    <div class="skill-chip">Brand Architecture</div>
+                    <div class="skill-chip">IT Administration</div>
+                    <div class="skill-chip">Web Development</div>
+                    <div class="skill-chip">Strategic Marketing</div>
+                    <div class="skill-chip">EHR/EMR Support</div>
                 </div>
             </div>
 
-            <div class="exp-card">
-                <h3>[Your Current/Next Role]</h3>
-                <span class="exp-meta">Company Name // Dates</span>
-                <div class="exp-content">
-                    Description of impact, leadership, and key strategic wins. Focus on the "Human Element" behind the operational machine.
+            <div class="section-label">02 // ARCHIVED_SERVICE</div>
+
+            <div class="experience-entry">
+                <div class="exp-header">
+                    <div>
+                        <h3 class="exp-role">Inventory Control Lead & Regional Trainer</h3>
+                        <span class="exp-company">Apple Inc.</span>
+                    </div>
+                    <span class="exp-date">2009 — 2014</span>
+                </div>
+                <div class="exp-body">
+                    Mastered the "Human Element" behind the retail machine. Managed logistics for elite-tier launches (3rd Street Promenade) while maintaining a **.10% shrink rate** and **99.85% inventory accuracy**. Acted as a Regional Trainer, cultivating professional excellence across the Southwest.
+                    <br>
+                    <a href="mac30.html" class="believer-link">⌘ VIEW_PERSONNEL_LOG_06/30/07</a>
+                </div>
+            </div>
+
+            <div class="experience-entry">
+                <div class="exp-header">
+                    <div>
+                        <h3 class="exp-role">E-Care Team Leader</h3>
+                        <span class="exp-company">Cox Communications</span>
+                    </div>
+                    <span class="exp-date">2001 — 2009</span>
+                </div>
+                <div class="exp-body">
+                    Led a 20+ member digital response team through the first major era of online technical support. Bridged the gap between local operations and international outsourced partners in Panama, ensuring brand standards were maintained across a global support footprint.
+                </div>
+            </div>
+
+            <div class="experience-entry">
+                <div class="exp-header">
+                    <div>
+                        <h3 class="exp-role">Public Safety Officer // First Responder</h3>
+                        <span class="exp-company">Snowbird Ski Resort</span>
+                    </div>
+                    <span class="exp-date">2000 — 2001</span>
+                </div>
+                <div class="exp-body">
+                    Operated within high-alpine, extreme environments to ensure a secure footprint across 2,500+ acres of terrain. Acted as a primary medical first responder, managing complex triage and high-altitude emergency protocols under severe weather conditions. Bridged the gap between local law enforcement, medical services, and guest safety.
                 </div>
             </div>
         </section>
 
-        <section>
-            <div class="dossier-label">02_Core_Competencies</div>
-            <div class="skills-container">
-                <div class="skill-chip">Global Logistics</div>
-                <div class="skill-chip">Inventory Management</div>
-                <div class="skill-chip">Strategic Training</div>
-                <div class="skill-chip">Team Leadership</div>
-                <div class="skill-chip">Process Optimization</div>
-                <div class="skill-chip">Digital Archiving</div>
-                <div class="skill-chip">Brand Narrative</div>
+        <section id="tactical">
+            <div class="section-label">03 // TACTICAL_ARSENAL</div>
+            <div class="skills-grid">
+                <div class="skill-chip">Adobe Creative Studio</div>
+                <div class="skill-chip">Cisco Meraki</div>
+                <div class="skill-chip">Mosyle MDM</div>
+                <div class="skill-chip">Google Workspace</div>
+                <div class="skill-chip">Microsoft 365</div>
+                <div class="skill-chip">Ubiquiti Unifi</div>
+                <div class="skill-chip">Bilingual (Spanish)</div>
+                <div class="skill-chip">Kana CRM</div>
             </div>
         </section>
-
-        <div class="sig-block">
-            <img src="Images/Signature.png" alt="Signature" class="sig-img">
-        </div>
 
     </div>
 
-</body>
+    </body>
 </html>
