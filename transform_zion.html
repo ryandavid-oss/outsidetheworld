@@ -21,7 +21,7 @@
             margin: 0; padding: 0; line-height: 1.8;
         }
 
-        /* ATMOSPHERICS */
+        /* 1. ATMOSPHERICS */
         body::after {
             content: " "; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%),
@@ -29,6 +29,7 @@
             background-size: 100% 3px, 3px 100%; pointer-events: none; z-index: 3000; opacity: 0.1;
         }
 
+        /* 2. HEADER */
         header { 
             padding: 120px 20px 40px; text-align: center; 
             background: linear-gradient(to bottom, rgba(155, 89, 182, 0.08), transparent);
@@ -39,6 +40,7 @@
             max-width: 700px; margin: 25px auto 0; font-weight: 300; line-height: 1.6;
         }
 
+        /* 3. NAVIGATION */
         nav { 
             display: flex; justify-content: center; gap: 40px; 
             padding: 20px; position: sticky; top: 0; 
@@ -53,6 +55,7 @@
         }
         .nav-btn:hover, .nav-btn.active { color: var(--brand-purple); border-bottom-color: var(--brand-purple); }
 
+        /* 4. CONTENT SECTIONS */
         .container { max-width: 800px; margin: 0 auto; padding: 60px 20px; display: none; }
         .container.active { display: block; animation: contentFade 0.8s ease; }
         @keyframes contentFade { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
@@ -61,7 +64,14 @@
         
         .post { margin-bottom: 100px; }
         h2 { font-size: 2.2rem; font-weight: 800; color: var(--brand-light); margin-bottom: 15px; }
-        .date-line { font-family: 'Fira Code', monospace; font-size: 0.75rem; color: #666; margin-bottom: 35px; text-transform: uppercase; letter-spacing: 2px; }
+        
+        /* PURE WHITE DATE */
+        .date-line { 
+            font-family: 'Fira Code', monospace; font-size: 0.75rem; color: #ffffff; 
+            margin-bottom: 35px; text-transform: uppercase; letter-spacing: 2px; 
+            opacity: 1; 
+        }
+        
         p { margin-bottom: 25px; font-size: 1.15rem; font-weight: 300; color: #ccc; }
 
         /* FAQ STYLING */
@@ -89,41 +99,37 @@
         .submit-btn {
             background: var(--brand-purple); color: white; border: none;
             padding: 18px 50px; font-family: 'Fira Code'; text-transform: uppercase;
-            letter-spacing: 3px; cursor: pointer;
+            letter-spacing: 3px; cursor: pointer; transition: 0.3s;
         }
-        
+        .submit-btn:hover { background: #8e44ad; box-shadow: 0 0 20px rgba(155, 89, 182, 0.3); }
+
+        /* DISCLAIMER */
+        .form-disclaimer {
+            margin-top: 25px; font-family: 'Fira Code', monospace; font-size: 0.6rem;
+            color: #444; letter-spacing: 1px; line-height: 1.4; max-width: 500px;
+            margin-left: auto; margin-right: auto; text-transform: uppercase;
+        }
+
         .podcast-link { 
             display: inline-block; margin-top: 60px; font-family: 'Fira Code'; 
             font-size: 0.75rem; color: var(--brand-light); text-decoration: none; border: 1px solid #333; padding: 15px 30px;
         }
-        .podcast-link:hover { border-color: var(--brand-purple); background: rgba(155, 89, 182, 0.1); }
 
         footer { padding: 100px 20px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
-        footer p { font-size: 0.6rem; letter-spacing: 4px; color: #333; text-transform: uppercase; }
-        .exit-link { color: var(--brand-purple); text-decoration: none; font-family: 'Fira Code'; font-size: 0.7rem; margin-top: 20px; display: inline-block; }
+        .exit-link { color: var(--brand-purple); text-decoration: none; font-family: 'Fira Code'; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 3px; }
 
         @media (max-width: 768px) {
             .tfz-logo { font-size: 2rem; }
             nav { gap: 15px; }
             h2 { font-size: 1.8rem; }
         }
-        .form-disclaimer {
-    margin-top: 25px;
-    font-family: 'Fira Code', monospace;
-    font-size: 0.6rem;
-    color: #444; /* Subtle grey */
-    letter-spacing: 1px;
-    line-height: 1.4;
-    max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
-    text-transform: uppercase;
-}
     </style>
 </head>
 <body>
 
-    <nav><a href="personal.html" style="position: absolute; left: 40px; top: 25px; pointer-events: auto;"><img src="Images/Equal.svg" alt="Back" style="width: 180px; filter: drop-shadow(0 0 10px rgba(155, 89, 182, 0.3));"></a></nav>
+    <nav style="position: absolute; width: auto; background: none; border: none; backdrop-filter: none;">
+        <a href="personal.html" style="pointer-events: auto;"><img src="Images/Equal.svg" alt="Back" style="width: 180px; filter: drop-shadow(0 0 15px rgba(155, 89, 182, 0.4));"></a>
+    </nav>
 
     <header>
         <h1 class="tfz-logo">transformingzion</h1>
@@ -137,7 +143,7 @@
     </nav>
 
     <div id="home" class="container active">
-        <img src="Images/banner-2.png" class="banner-img" alt="Transforming Zion Banner">
+        <img src="Images/banner-2.png" class="banner-img" alt="Banner">
         
         <article class="post">
             <h2>What I believe</h2>
@@ -185,27 +191,22 @@
         </div>
 
         <div class="faq-item">
-            <span class="faq-q">How do you reconcile your gender identity with Church teachings on gender?</span>
-            <p>For me, it's been a process of seeking personal revelation and a journey of growth and learning. I believe that God speaks to us individually and guides us on our unique paths. I've felt a strong confirmation that embracing my gender identity is right for me. This doesn't mean I'm rejecting Church teachings, but rather that I'm seeking to understand them in a way that's consistent with my own experiences and the promptings of the Spirit.</p>
+            <span class="faq-q">How do you reconcile your gender identity with Church teachings?</span>
+            <p>It's been a process of seeking personal revelation and a journey of growth and learning. I've felt a strong confirmation that embracing my gender identity is right for me. This doesn't mean I'm rejecting Church teachings, but rather that I'm seeking to understand them in a way that's consistent with my own experiences and the promptings of the Spirit.</p>
         </div>
 
         <div class="faq-item">
             <span class="faq-q">When did you know you were transgender?</span>
-            <p>While the terminology didn't exist in my very young mind, I knew that I felt different from an early age. My earliest memories of gender dysphoria came at around 5 years old. I remember Mr. Rogers talking about the differences between boys and girls, and I went to bed that night dreaming about waking up the next day a girl. That longing stayed with me for many years.</p>
-        </div>
-
-        <div class="faq-item">
-            <span class="faq-q">What pronouns do you use?</span>
-            <p>My pronouns are he/him/his. This decision comes from a place of personal reflection and seeking guidance from the Spirit. I respect the counsel of Church leaders and want to navigate my journey in a way that feels both authentic to me and respectful of the community I belong to.</p>
+            <p>While the terminology didn't exist in my very young mind, I knew that I felt different from an early age. My earliest memories of gender dysphoria came at around 5 years old. I remember dreaming about waking up the next day a girl. That longing stayed with me for many years.</p>
         </div>
 
         <div class="faq-item">
             <span class="faq-q">What are the biggest challenges you face?</span>
             <ul>
                 <li><strong>Misunderstanding and Judgment:</strong> Bridging gaps takes patience and open communication.</li>
-                <li><strong>Fear of Losing Relationships:</strong> Balancing being true to myself with maintaining connections is an ongoing challenge.</li>
-                <li><strong>Safety and Acceptance:</strong> Living in a primarily conservative area, there are legitimate safety concerns.</li>
-                <li><strong>Internal Conflict:</strong> Balancing faith with gender identity requires ongoing effort to find peace.</li>
+                <li><strong>Fear of Losing Relationships:</strong> Balancing authenticity with maintaining connections.</li>
+                <li><strong>Safety and Acceptance:</strong> Legitimate concerns in primarily conservative areas.</li>
+                <li><strong>Internal Conflict:</strong> Ongoing effort to find peace between faith and identity.</li>
             </ul>
         </div>
 
@@ -213,11 +214,9 @@
             <span class="faq-q">How can I be a better ally?</span>
             <ul>
                 <li><strong>Educate Yourself:</strong> Learn about LGBTQ+ issues and terminology.</li>
-                <li><strong>Listen with Empathy:</strong> Listen with an open heart and without judgment.</li>
-                <li><strong>Love without Condition:</strong> Remember that Christ's love extends to everyone.</li>
-                <li><strong>Advocate for Inclusion:</strong> Challenge prejudice in your ward and family.</li>
-                <li><strong>Offer Support:</strong> Be a source of support and a shoulder to talk to.</li>
-                <li><strong>Practice Patience:</strong> Understanding doesn't always happen overnight.</li>
+                <li><strong>Listen with Empathy:</strong> Open your heart without judgment.</li>
+                <li><strong>Love without Condition:</strong> Christ's love extends to everyone.</li>
+                <li><strong>Advocate for Inclusion:</strong> Speak up in your ward and family.</li>
                 <li><strong>Pray for Guidance:</strong> Seek the Spirit on how you can best show love.</li>
             </ul>
         </div>
@@ -233,13 +232,12 @@
                 <br>
                 <button type="submit" class="submit-btn">Transmit Question</button>
             </form>
-            <div class="date-line" style="margin-top: 30px;">[ ANONYMOUS_ENCRYPTION_ACTIVE ]</div>
+            <div class="date-line" style="margin-top: 30px; color: #555;">[ ANONYMOUS_ENCRYPTION_ACTIVE ]</div>
         </div>
-        <button type="submit" class="submit-btn">Transmit Question</button>
 
-<div class="form-disclaimer">
-    [ NOTICE ] UPLINK POWERED BY FORMSPREE. CONFIDENTIALITY PRIORITIZED; SECURITY NOT GUARANTEED. AVOID SENSITIVE DATA TRANSMISSION.
-</div>
+        <div class="form-disclaimer">
+            [ NOTICE ] UPLINK POWERED BY FORMSPREE. CONFIDENTIALITY PRIORITIZED; SECURITY NOT GUARANTEED. AVOID SENSITIVE DATA TRANSMISSION.
+        </div>
 
         <a href="https://listenlearnandlove.org" target="_blank" class="podcast-link">
             FEATURED_ON: LISTEN, LEARN & LOVE (RICHARD OSTLER)
@@ -247,7 +245,6 @@
     </div>
 
     <footer>
-        <p>© 2025 TRANSFORMING ZION // DIGITAL RECLAMATION 2026</p>
         <a href="personal.html" class="exit-link">[ ABORT_CONNECTION ]</a>
     </footer>
 
