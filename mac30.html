@@ -24,7 +24,7 @@
             overflow-x: hidden;
         }
 
-        /* ATMOSPHERIC SCANLINES */
+        /* SCANLINE EFFECT */
         body::after {
             content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%),
@@ -33,238 +33,115 @@
         }
 
         /* NAVIGATION: LEFT JUSTIFIED ON DESKTOP */
-        nav { 
-            position: relative; 
-            padding: 60px 40px 20px; 
-            text-align: left; /* Desktop Default */
-            z-index: 1001; 
-        }
+        nav { padding: 60px 40px 20px; text-align: left; z-index: 1001; position: relative; }
+        .nav-logo { width: 220px; filter: drop-shadow(0 0 20px rgba(99, 149, 238, 0.4)); }
 
-        .nav-logo { 
-            width: 220px; 
-            filter: drop-shadow(0 0 20px rgba(99, 149, 238, 0.4)); 
-        }
+        header { padding: 20px 40px 60px; text-align: center; background: linear-gradient(to bottom, rgba(99, 149, 238, 0.05), transparent); }
+        h1 { font-size: 2.8rem; color: #fff; margin: 0; letter-spacing: -1px; font-weight: 900; text-transform: uppercase; }
 
-        header {
-            padding: 20px 40px 60px;
-            text-align: center;
-            background: linear-gradient(to bottom, rgba(99, 149, 238, 0.05), transparent);
-        }
-
-        h1 { 
-            font-size: 3rem; color: #fff; margin: 0; letter-spacing: -1px; 
-            font-weight: 900; text-transform: uppercase;
-        }
-
-        /* TYPEWRITER SERVICE RECORD */
-        .typewriter-box {
-            font-family: 'Fira Code', monospace;
-            font-size: 1.1rem; /* Slightly larger */
-            color: var(--apple-blue);
-            margin-top: 15px;
-            min-height: 1.5rem;
-            display: inline-block;
-        }
-        .cursor {
-            display: inline-block;
-            width: 10px; height: 18px;
-            background-color: var(--apple-blue);
-            margin-left: 5px;
-            animation: blink 1s infinite;
-            vertical-align: middle;
-        }
+        /* TYPEWRITER TERMINAL */
+        .typewriter-box { font-family: 'Fira Code', monospace; font-size: 1.2rem; color: var(--apple-blue); margin-top: 15px; min-height: 1.5rem; display: inline-block; }
+        .cursor { display: inline-block; width: 10px; height: 18px; background-color: var(--apple-blue); margin-left: 5px; animation: blink 1s infinite; vertical-align: middle; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-        .content-grid {
-            max-width: 900px; margin: 0 auto; padding: 60px 20px;
-        }
-
-        /* NARRATIVE & BLOG STYLING */
+        .content-grid { max-width: 900px; margin: 0 auto; padding: 60px 20px; }
         .narrative p { margin-bottom: 30px; font-size: 1.15rem; font-weight: 300; }
         
-        .blog-extract {
-            background: rgba(255,255,255,0.03);
-            border-left: 3px solid var(--apple-blue);
-            padding: 40px; margin: 40px 0;
-            font-family: 'Fira Code', monospace;
-            font-size: 0.95rem; color: #aaa;
-        }
+        .blog-extract { background: rgba(255,255,255,0.03); border-left: 3px solid var(--apple-blue); padding: 40px; margin: 40px 0; font-family: 'Fira Code', monospace; font-size: 0.95rem; color: #aaa; }
         .extract-header { color: var(--apple-blue); font-size: 0.75rem; margin-bottom: 20px; display: block; letter-spacing: 2px; }
 
-        /* THE MATRIX WALL (15% Speed Increase) */
-        .matrix-section {
-            height: 500px; position: relative; margin: 80px 0;
-            border: 1px solid rgba(255,255,255,0.05); overflow: hidden;
-            mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
-            -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
-        }
-
-        #name-wall {
-            display: flex; flex-wrap: wrap; gap: 15px 40px; padding: 40px;
-            justify-content: center; 
-            animation: scrollWall 130s linear infinite; /* Increased velocity */
-        }
-
-        .name-entry { font-family: 'Fira Code'; font-size: 0.65rem; color: #333; text-transform: uppercase; }
+        /* THE MATRIX WALL (+15% Velocity) */
+        .matrix-section { height: 450px; position: relative; margin: 80px 0; border: 1px solid rgba(255,255,255,0.05); overflow: hidden; mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent); -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent); }
+        #name-wall { display: flex; flex-wrap: wrap; gap: 15px 35px; padding: 40px; justify-content: center; position: absolute; width: calc(100% - 80px); animation: scrollWall 110s linear infinite; }
+        .name-entry { font-family: 'Fira Code'; font-size: 0.65rem; color: #333; text-transform: uppercase; white-space: nowrap; }
         .pink-name { color: var(--apple-pink) !important; font-weight: 700; font-size: 0.85rem; }
         .blue-name { color: var(--apple-blue) !important; font-weight: 600; }
-        .green-name { color: var(--apple-green) !important; }
+        .green-name { color: var(--apple-green) !important; font-weight: 600; }
         .highlight::before { content: "⌘ "; }
 
         @keyframes scrollWall { from { transform: translateY(0); } to { transform: translateY(-50%); } }
 
-        /* SIGNATURE */
-        .signature-container {
-            margin-top: 50px;
-            text-align: right;
-        }
-        .signature-img {
-            max-width: 250px;
-            filter: invert(1) brightness(2); /* Invert black-to-white */
-            opacity: 0.8;
+        /* SIGNATURE AUTO-INVERSION */
+        .signature-container { margin-top: 50px; text-align: right; }
+        .signature-img { 
+            max-width: 280px; 
+            filter: invert(1) brightness(2) contrast(150%); /* This turns your black ink white */
+            opacity: 0.9; 
         }
 
-        /* OVERLAY SYSTEM */
-        .system-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.95); z-index: 5000;
-            display: none; align-items: center; justify-content: center;
-            backdrop-filter: blur(20px); cursor: zoom-out;
-        }
+        /* SYSTEM OVERLAYS */
+        .system-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 5000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(20px); cursor: zoom-out; }
         .system-overlay img, .system-overlay iframe { max-width: 90%; max-height: 90%; border: 1px solid #333; }
 
-        footer {
-            padding: 100px 40px; text-align: center; font-family: 'Fira Code';
-            font-size: 0.6rem; letter-spacing: 4px; color: #333;
-        }
+        footer { padding: 100px 40px; text-align: center; font-family: 'Fira Code'; font-size: 0.6rem; letter-spacing: 4px; color: #333; }
         .cmd-egg { color: var(--apple-blue); cursor: pointer; transition: 0.3s; margin: 0 15px; }
         .cmd-egg:hover { text-shadow: 0 0 10px var(--apple-blue); color: #fff; }
 
-        @media (max-width: 768px) { 
-            nav { text-align: center; }
-            h1 { font-size: 1.8rem; } 
-            .blog-extract { padding: 25px; font-size: 0.85rem; }
-            .nav-logo { width: 160px; }
-            .typewriter-box { font-size: 0.8rem; }
-        }
+        @media (max-width: 768px) { nav { text-align: center; } h1 { font-size: 1.6rem; } .typewriter-box { font-size: 0.9rem; } }
     </style>
 </head>
 <body>
 
-    <nav>
-        <a href="flotsam.html"><img src="Images/Equal.svg" alt="Back" class="nav-logo"></a>
-    </nav>
+    <nav><a href="flotsam.html"><img src="Images/Equal.svg" alt="Back" class="nav-logo"></a></nav>
 
     <header>
         <h1>A Name on the Wall, 1 Infinite Loop</h1>
-        <div class="typewriter-box">
-            <span id="typewriter-target"></span><span class="cursor"></span>
-        </div>
+        <div class="typewriter-box"><span id="typewriter-target"></span><span class="cursor"></span></div>
     </header>
 
     <div class="content-grid">
         <section class="narrative">
             <p>In August 2007, I went from casual Apple critic to full on believer. As I remember it, I was enjoying time with my family in Utah. At a gathering at a church building in Salt Lake City, my brother Tyler (of all people) brought his newly purchased iPhone and was toying around with it near the kitchen. I had seen the iPhone before. But this felt different. Here was my brother, barely able to handle any technology, yet holding the newest device on the street. And he felt no reservations about using it. He was totally and completely comfortable tapping away.</p>
-
             <p>I remember clinging to my then current phone, the Palm Tree 650, self-righteously proclaiming that its physical keyboard and user-replaceable battery were the bee’s knees and part of the panoply consisting why I was technically superior with my choices. And while I sat out the actual iPhone launch day, my natural curiosity about all the fuss forced me to make the trek to the Chandler Apple Store on 06/30/07. From my blog that day:</p>
 
             <div class="blog-extract">
                 <span class="extract-header">ARCHIVE_LOG // DATE: 06.30.07</span>
-                "I finally got to give it a good look, and I will say that I'm mighty impressed with the build quality of the device. It even outshines the solid feel of my 5.5g iPod. <br><br>I placed a few test calls and was impressed by the sound quality, but not overly so. The volume was a bit low. I can definitely get my Treo louder. EDGE speeds were actually functional. Whatever unofficial upgrades they made to the network speed during the past week will definitely pay off, though we'll see how that pays off as more customers activate their devices. <br><br>The most impressive aspect of the iPhone and the only thing to trump my Treo was the new touchscreen. Unlike most other smart phone's screens, this one is made of glass and you can just feel the technology behind it. I never had to push very hard to get it to respond.And yes, they virtual \"keyboard\" was terrible. I've written this entire post from my Treo with very few errors or corrections. The simple text message I sent from the iPhone took way too long. <br><br>Overall, I like it though. It's a good device, and I hope it comes to Sprint someday so that my wife can get it."
+                "I finally got to give it a good look, and I will say that I'm mighty impressed with the build quality of the device. It even outshines the solid feel of my 5.5g iPod. <br><br>I placed a few test calls and was impressed by the sound quality, but not overly so. The volume was a bit low. I can definitely get my Treo louder. EDGE speeds were actually functional. Whatever unofficial upgrades they made to the network speed during the past week will definitely pay off, though we'll see how that pays off as more customers activate their devices. <br><br>The most impressive aspect of the iPhone and the only thing to trump my Treo was the new touchscreen. Unlike most other smart phone's screens, this one is made of glass and you can just feel the technology behind it. I never had to push very hard to get it to respond.And yes, they virtual \"keyboard\" was terrible. I've written this entire post from my Treo with very few errors or corrections. The simple text message I sent from the iPhone took way too long.<br><br>Overall, I like it though. It's a good device, and I hope it comes to Sprint someday so that my wife can get it."
             </div>
 
             <p>If you incline your head even a fraction of a degree, you can absolutely taste the unbridled avarice dripping from my passive aggressive voice even then.</p>
-
             <p>The iPhone stayed in the back of my mind, rent free, from that moment forward. After seeing my brother using it, the rest of my reservations evaporated. So, once Steve Jobs slashed the price in half, I made the jump. I felt not only impressed by the technology, I felt awakened. I felt driven to know more about the company behind this product. Sure, I had owned Mac computers before. I had an iPod. But this was the culmination of something quite different.</p>
-
             <p>I knew I had to work at Apple.</p>
-
             <p>From 2009 until 2014, I had the honor of working with some of the most remarkable people on this planet. It took 8 interviews and a huge pay cut, but I got my foot in the door as a part-time iPhone Specialist at the SanTan Apple Store.</p>
-
             <p>After spending a few months doing that, I found a knack for the logistical side of the retail experience, and nailed a promotion as the Inventory Control Lead for the Chandler Apple Store, leading a team of 11 remarkable people and basically having the time of my life learning and growing with the company.</p>
-
             <p>I successfully landed the role of Inventory Trainer late in my career, traveling to California often and leading a team of individuals helping to open the new 3rd Street Promenade store in Santa Monica, CA. I'll never forget those early mornings and late nights, pushing ourselves to get every ounce of effort while we prepped that store for launch. It was nothing short of heaven to be able to walk to the park overlooking the beach on a 15 minute break. I'll always look back on the tail end of my career at Apple fondly.</p>
         </section>
 
-        <section class="matrix-section">
-            <div id="name-wall"></div>
-        </section>
+        <section class="matrix-section"><div id="name-wall"></div></section>
 
         <section class="narrative">
             <p>My first major product launch was the iPhone 3GS. I was there in 2010 when we launched the iPad. I attended Steve Job’s funeral with thousands of others in October of 2011. I celebrated the 30th anniversary of the Macintosh computer, and was lucky enough to have my name emblazoned forever in the halls of 1 Infinite Loop as one of the employees who played a small part in the success of that platform. Those were the major events. There are many less widely known events during that time, but no less important in my mind.</p>
-
             <p>Like all good things, it had to come to an end. Suffice it to say that my personal life collided heavily and irrevocably with my ambitions and pleasure at Apple. My growing family was my ultimate family, and while I enjoyed corporate status as a traveling Inventory Trainer, my schedule rested within the needs of Apple Retail. Evenings, weekends, and ‘clopening shifts’ would ultimately dictate my path away from Apple. Five years after I began there, I signed my resignation letter with melancholy as I laid the foundation for the next two working decades of my life.</p>
-            
             <p>I will always be grateful for my time at Apple. I owe a debt of gratitude to those who I had the pleasure of working with. Most notable; Lindsey Costley, Andrew Calhoun, Jenn and Toby King, Chris Krieg, Jose Fernandez, Jose Ramirez, Jose Hernandez, Karlyn Herring, Corey Dillier, Eric Duffy, Saint, Ashley Lawson, Anna Sammons, Eric Locke, Maria Nissen, Bob O'Leary, Jack Saber, Scott Snyder, Eric Stout, Mike Van Dusen, Mark Henderson, Natalie Clifford, Sean Little, Brandon Love, Denise Harris-Kester, Bryan Beata, Mario Aldrete, Mary Lideen, Stanford Florence, Gregory Terry, Chelsey McPeek, Tyson Brown, Alex Tighe, Mike Franzone, Jake Burger and many, many others too numerous to list here. This was a huge part of my life, and I felt impressed to mark this phase of my life upon the digital record of OTW.</p>
-
-            <div class="signature-container">
-                <img src="Images/Signature.png" alt="RyanDavid Burningham" class="signature-img">
-            </div>
+            <div class="signature-container"><img src="Images/Signature.png" alt="Signature" class="signature-img"></div>
         </section>
     </div>
 
-    <div id="poster-overlay" class="system-overlay" onclick="closeOverlay('poster-overlay')">
-        <img src="Images/Poster Large.jpeg" alt="Mac 30 Anniversary Poster">
-    </div>
-    <div id="notes-overlay" class="system-overlay" onclick="closeOverlay('notes-overlay')">
-        <iframe src="Notes.pdf" width="80%" height="80%"></iframe>
-    </div>
+    <div id="poster-overlay" class="system-overlay" onclick="closeOverlay('poster-overlay')"><img src="Images/Poster Large.jpeg" alt="Poster"></div>
+    <div id="notes-overlay" class="system-overlay" onclick="closeOverlay('notes-overlay')"><iframe src="Images/Notes.pdf" width="80%" height="80%"></iframe></div>
 
-    <footer>
-        UPLINK_STABLE // ⌘ <span class="cmd-egg" onclick="openOverlay('poster-overlay')">POSTER_OVERRIDE</span> // ⌘ <span class="cmd-egg" onclick="openOverlay('notes-overlay')">PERSONNEL_NOTES</span>
-    </footer>
+    <footer>UPLINK_STABLE // ⌘ <span class="cmd-egg" onclick="openOverlay('poster-overlay')">POSTER_OVERRIDE</span> // ⌘ <span class="cmd-egg" onclick="openOverlay('notes-overlay')">PERSONNEL_NOTES</span></footer>
 
     <script>
-        // TYPEWRITER LOGIC
-        const typeTarget = document.getElementById('typewriter-target');
-        const typeText = "SERVICE_RECORD // 2009-2014 // RyanDavid Burningham";
-        let charIndex = 0;
-
-        function typeWriter() {
-            if (charIndex < typeText.length) {
-                typeTarget.textContent += typeText.charAt(charIndex);
-                charIndex++;
-                setTimeout(typeWriter, 80);
-            }
-        }
-
-        // MATRIX DATA
-        const pinkName = "RyanDavid Burningham";
-        
-        // PIONEERS (NOW BLUE)
-        const bluePioneers = ["Steve Wozniak", "Steve Jobs", "Mike Markkula", "Bill Fernandez", "Rod Holt", "Randy Wigginton", "Michael Scott", "Chris Espinosa", "Jim Martindale", "Sherry Livingston", "Don Breuner", "Daniel Kottke", "Mark Johnson", "Gene Carter", "Tom Whitney", "Wendell Sander", "Dick Huston", "Cliff Huston", "Ed Ruder", "Jef Raskin", "Brian Howard", "Bill Atkinson", "Ronald Wayne", "Patty Jobs", "John Draper", "Gary Martin", "Dana Redington", "Clive Twyman", "Robert Martinengo", "Cliff Story", "Chrisann Brennan", "Elmer Baum", "Phil Roybal", "Gary Shannon", "Bana Witt", "John Couch", "Chuck Mauro", "Brad Hacker", "Bruce Tognazzini", "Barry Yarkoni", "Kent Hopkins", "Cheng Lim", "Terri Powers", "Bob Bishop", "Rich Whicker", "Joanna Hoffman", "Burrell Smith", "Bud Tribble", "Bob Belleville", "Steve Capps", "George Crow", "Donn Denman", "Bruce Horn", "Susan Kare", "Larry Kenyon", "Caroline Rose", "Andy Hertzfeld", "Patti Kenyon", "Terry Oyama", "Ronald Nicholson", "Martin Haeberli", "Brian Robertson", "Pamela Wyman", "Bryan Stearns", "Debi Coleman", "Matt Carter", "Colette Askeland", "Linda Wilkin", "Brian Berkeley", "MaryEllen McCammon", "Vicki Milledge", "Bill Bull", "Jerome Coonen", "Bob Bailey", "Dan'l Lewin", "Sam Lyall", "Joe Shelton", "David Beaver", "Mike Collins", "Peter Folley", "Owen Densmore", "Bill Wathen", "J David Egner", "Deborah Bress", "Steve Scheier", "Scott Knaster", "John Casado", "Lynnea Johnson", "Marc LeBrun", "Larry Tesler", "Michael Jurewitz"];
-        
-        // CO-WORKERS (NOW GREEN)
-        const greenColleagues = ["Lindsey Costley", "Andrew Calhoun", "Jenn King", "Toby King", "Chris Krieg", "Jose Fernandez", "Jose Ramirez", "Jose Hernandez", "Karlyn Herring", "Corey Dillier", "Eric Duffy", "Saint", "Ashley Lawson", "Anna Sammons", "Eric Locke", "Maria Nissen", "Bob O'Leary", "Jack Saber", "Scott Snyder", "Eric Stout", "Mike Van Dusen", "Mark Henderson", "Natalie Clifford", "Sean Little", "Brandon Love", "Denise Harris-Kester", "Bryan Beata", "Mario Aldrete", "Mary Lideen", "Stanford Florence", "Gregory Terry", "Chelsey McPeek", "Tyson Brown", "Alex Tighe", "Mike Franzone", "Jake Burger"];
-
-        const grayNames = ["Tim Cook", "Arthur Levinson", "Katherine Adams", "Eddy Cue", "Craig Federighi", "Greg Joswiak", "Sabih Khan", "Deirdre O'Brien", "Kevan Parekh", "Johny Srouji", "John Ternus", "Mike Fenger", "Luca Maestri", "Isabel Ge Mahe", "Tor Myhren", "Adrian Perica", "Kristin Huguet Quayle", "Phil Schiller", "Wanda Austin", "Alex Gorsky", "Andrea Jung", "Monica Lozano", "Ronald Sugar", "Susan Wagner", "Angela Ahrendts", "Gil Amelio", "Fred Anderson", "Satjiv Chahil", "Paul Deneve", "Kaiann Drance", "Alan Dye", "Scott Forstall", "Jean-Louis Gassée", "John Giannandrea", "Ellen Hancock", "Lisa Jackson", "Bob Mansfield", "Peter Oppenheimer", "Jon Rubinstein", "Bertrand Serlet", "Bruce Sewell", "Michael Spindler", "Avie Tevanian", "Jeff Williams", "Jony Ive", "Bartley Andre", "Daniel Coster", "Daniele De Iuliis", "Richard Howarth", "Duncan Kerr", "Shin Nishibori", "Matthew Dean Rohrbach", "Douglas Satzger", "Calvin Seid", "Christopher Stringer", "Eugene Whang", "Rico Zorkendorfer", "Imran Chaudhri", "Darin Adler", "Samir Arora", "Frank Balistreri", "Michael Bartosh", "Samy Bengio", "Marc Benioff", "Sabeer Bhatia", "Mike Boich", "Amelia Boone", "Robert Brunner", "Claire Buffie", "Matt Casamassina", "Tantek Çelik", "Stuart Cheshire", "Adam Cheyer", "Lee Collins", "Richard Crandall", "Robert X. Cringely", "Doug Cutting", "Mark Davis", "Michael Dhuey", "Paul Donovan", "Hugh Dubberly", "Donna Dubinsky", "Hartmut Esslinger", "Alex Fielding", "Stephen Friend", "Antonio García Martínez", "Michael Gartenberg", "Bill Gaver", "Timnit Gebru", "Dominic Giampaolo", "Ashley Gjøvik", "Ian Goodfellow", "Ramanathan V. Guha", "Angela Guzman", "Trip Hawkins", "Michael Homer", "Hsiao-Wuen Hon", "Jordan Hubbard", "Dave Hyatt", "Caitlin Kalinowski", "Guy Kawasaki", "Kazuo Kawasaki", "Alan Kay", "Jim Keller", "Raja Koduri", "Ivan Krstić", "Chris Lattner", "Bruce Leak", "Dave Limp", "Kevin Lynch", "Richard F. Lyon", "Divya Nag", "Shantanu Narayen", "Don Norman", "Dave Opstad", "Rich Page", "Mark Papermaster", "Janneke Parrish", "Robert Pera", "Patrick Piemonte", "Roger Powell", "Paul Takac", "Brandon Tory", "Xiaoyuan Tu", "Morgan Wandell", "Wayne Westerman", "Daniel Williams", "Keith Williams", "Kristina Hooper Woolsey", "Ed Mackowiak", "Edward B. Stead", "Ellen Petry Leanse", "Eric Traut", "Ko Isono", "Luke Wood", "Laszlo Zsidek", "Lyle Crouse", "Lynn Takahashi", "Paul Mercer", "Steve Sakoman", "Susan Barnes", "Tony Blevins", "Weibao Wang", "Wil Houde", "Paul Devine"];
-
-        const wall = document.getElementById('name-wall');
+        const pink = "RyanDavid Burningham";
+        const blue = ["Steve Wozniak", "Steve Jobs", "Mike Markkula", "Bill Fernandez", "Rod Holt", "Randy Wigginton", "Michael Scott", "Chris Espinosa", "Jim Martindale", "Sherry Livingston", "Don Breuner", "Daniel Kottke", "Mark Johnson", "Gene Carter", "Tom Whitney", "Wendell Sander", "Dick Huston", "Cliff Huston", "Ed Ruder", "Jef Raskin", "Brian Howard", "Bill Atkinson", "Ronald Wayne", "Patty Jobs", "John Draper", "Gary Martin", "Dana Redington", "Clive Twyman", "Robert Martinengo", "Cliff Story", "Chrisann Brennan", "Elmer Baum", "Phil Roybal", "Gary Shannon", "Bana Witt", "John Couch", "Chuck Mauro", "Brad Hacker", "Bruce Tognazzini", "Barry Yarkoni", "Kent Hopkins", "Cheng Lim", "Terri Powers", "Bob Bishop", "Rich Whicker", "Joanna Hoffman", "Burrell Smith", "Bud Tribble", "Bob Belleville", "Steve Capps", "George Crow", "Donn Denman", "Bruce Horn", "Susan Kare", "Larry Kenyon", "Caroline Rose", "Andy Hertzfeld", "Patti Kenyon", "Terry Oyama", "Ronald Nicholson", "Martin Haeberli", "Brian Robertson", "Pamela Wyman", "Bryan Stearns", "Debi Coleman", "Matt Carter", "Colette Askeland", "Linda Wilkin", "Brian Berkeley", "MaryEllen McCammon", "Vicki Milledge", "Bill Bull", "Jerome Coonen", "Bob Bailey", "Dan'l Lewin", "Sam Lyall", "Joe Shelton", "David Beaver", "Mike Collins", "Peter Folley", "Owen Densmore", "Bill Wathen", "J David Egner", "Deborah Bress", "Steve Scheier", "Scott Knaster", "John Casado", "Lynnea Johnson", "Marc LeBrun", "Larry Tesler", "Michael Jurewitz"];
+        const green = ["Lindsey Costley", "Andrew Calhoun", "Jenn King", "Toby King", "Chris Krieg", "Jose Fernandez", "Jose Ramirez", "Jose Hernandez", "Karlyn Herring", "Corey Dillier", "Eric Duffy", "Saint", "Ashley Lawson", "Anna Sammons", "Eric Locke", "Maria Nissen", "Bob O'Leary", "Jack Saber", "Scott Snyder", "Eric Stout", "Mike Van Dusen", "Mark Henderson", "Natalie Clifford", "Sean Little", "Brandon Love", "Denise Harris-Kester", "Bryan Beata", "Mario Aldrete", "Mary Lideen", "Stanford Florence", "Gregory Terry", "Chelsey McPeek", "Tyson Brown", "Alex Tighe", "Mike Franzone", "Jake Burger"];
+        const gray = ["Tim Cook", "Arthur Levinson", "Katherine Adams", "Eddy Cue", "Craig Federighi", "Greg Joswiak", "Sabih Khan", "Deirdre O'Brien", "Kevan Parekh", "Johny Srouji", "John Ternus", "Mike Fenger", "Luca Maestri", "Isabel Ge Mahe", "Tor Myhren", "Adrian Perica", "Kristin Huguet Quayle", "Phil Schiller", "Wanda Austin", "Alex Gorsky", "Andrea Jung", "Monica Lozano", "Ronald Sugar", "Susan Wagner", "Angela Ahrendts", "Gil Amelio", "Fred Anderson", "Satjiv Chahil", "Paul Deneve", "Kaiann Drance", "Alan Dye", "Scott Forstall", "Jean-Louis Gassée", "John Giannandrea", "Ellen Hancock", "Lisa Jackson", "Bob Mansfield", "Peter Oppenheimer", "Jon Rubinstein", "Bertrand Serlet", "Bruce Sewell", "Michael Spindler", "Avie Tevanian", "Jeff Williams", "Jony Ive", "Bartley Andre", "Daniel Coster", "Daniele De Iuliis", "Richard Howarth", "Duncan Kerr", "Shin Nishibori", "Matthew Dean Rohrbach", "Douglas Satzger", "Calvin Seid", "Christopher Stringer", "Eugene Whang", "Rico Zorkendorfer", "Imran Chaudhri", "Darin Adler", "Samir Arora", "Frank Balistreri", "Michael Bartosh", "Samy Bengio", "Marc Benioff", "Sabeer Bhatia", "Mike Boich", "Amelia Boone", "Robert Brunner", "Claire Buffie", "Matt Casamassina", "Tantek Çelik", "Stuart Cheshire", "Adam Cheyer", "Lee Collins", "Richard Crandall", "Robert X. Cringely", "Doug Cutting", "Mark Davis", "Michael Dhuey", "Paul Donovan", "Hugh Dubberly", "Donna Dubinsky", "Hartmut Esslinger", "Alex Fielding", "Stephen Friend", "Antonio García Martínez", "Michael Gartenberg", "Bill Gaver", "Timnit Gebru", "Dominic Giampaolo", "Ashley Gjøvik", "Ian Goodfellow", "Ramanathan V. Guha", "Angela Guzman", "Trip Hawkins", "Michael Homer", "Hsiao-Wuen Hon", "Jordan Hubbard", "Dave Hyatt", "Caitlin Kalinowski", "Guy Kawasaki", "Kazuo Kawasaki", "Alan Kay", "Jim Keller", "Raja Koduri", "Ivan Krstić", "Chris Lattner", "Bruce Leak", "Dave Limp", "Kevin Lynch", "Richard F. Lyon", "Divya Nag", "Shantanu Narayen", "Don Norman", "Dave Opstad", "Rich Page", "Mark Papermaster", "Janneke Parrish", "Robert Pera", "Patrick Piemonte", "Roger Powell", "Paul Takac", "Brandon Tory", "Xiaoyuan Tu", "Morgan Wandell", "Wayne Westerman", "Daniel Williams", "Keith Williams", "Kristina Hooper Woolsey", "Ed Mackowiak", "Edward B. Stead", "Ellen Petry Leanse", "Eric Traut", "Ko Isono", "Luke Wood", "Laszlo Zsidek", "Lyle Crouse", "Lynn Takahashi", "Paul Mercer", "Steve Sakoman", "Susan Barnes", "Tony Blevins", "Weibao Wang", "Wil Houde", "Paul Devine"];
 
         function generateWall() {
-            // Pool for unique names
-            let allEntities = [
-                { name: pinkName, type: 'pink-name highlight' },
-                ...bluePioneers.map(n => ({ name: n, type: 'blue-name' })),
-                ...greenColleagues.map(n => ({ name: n, type: 'green-name' })),
-                ...grayNames.map(n => ({ name: n, type: '' }))
-            ];
-
-            // Shuffle pool to prevent static patterns
-            allEntities.sort(() => Math.random() - 0.5);
-
-            // Double the list for a seamless CSS scroll loop
-            const fullList = [...allEntities, ...allEntities];
-            wall.innerHTML = fullList.map(item => `<span class="name-entry ${item.type}">${item.name}</span>`).join('');
+            let names = [{n: pink, t: 'pink-name highlight'}, ...blue.map(n=>({n, t:'blue-name'})), ...green.map(n=>({n, t:'green-name'})), ...gray.map(n=>({n, t:''}))];
+            names.sort(()=>Math.random()-0.5);
+            document.getElementById('name-wall').innerHTML = [...names, ...names, ...names].map(i=>`<span class="name-entry ${i.t}">${i.n}</span>`).join('');
         }
+
+        const typeT = document.getElementById('typewriter-target');
+        const text = "SERVICE_RECORD // 2009-2014 // RyanDavid Burningham";
+        let idx = 0;
+        function type() { if(idx < text.length) { typeT.textContent += text.charAt(idx++); setTimeout(type, 70); } }
 
         function openOverlay(id) { document.getElementById(id).style.display = 'flex'; }
         function closeOverlay(id) { document.getElementById(id).style.display = 'none'; }
-        
-        window.onload = () => {
-            generateWall();
-            setTimeout(typeWriter, 1000); // Start typewriter after load
-        };
+        window.onload = () => { generateWall(); setTimeout(type, 1000); };
     </script>
 </body>
 </html>
