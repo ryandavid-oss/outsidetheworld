@@ -18,6 +18,8 @@
             --border: rgba(255, 255, 255, 0.1);
         }
 
+        * { box-sizing: border-box; }
+
         body {
             background-color: var(--bg-dark);
             color: #ccc;
@@ -38,7 +40,7 @@
         nav { padding: 60px 40px 10px; text-align: left; position: relative; z-index: 1001; }
         .nav-logo { width: 220px; filter: drop-shadow(0 0 20px rgba(99, 149, 238, 0.2)); }
 
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px 100px; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px 100px; position: relative; z-index: 1001; }
 
         /* HERO SECTION */
         .hero {
@@ -70,14 +72,9 @@
 
         .fog-name { 
             font-size: clamp(1.8rem, 5vw, 3.5rem); 
-            font-weight: 900; 
-            letter-spacing: 12px; 
-            margin: 0; 
-            line-height: 1.2; 
-            text-transform: uppercase;
+            font-weight: 900; letter-spacing: 12px; margin: 0; line-height: 1.2; text-transform: uppercase;
             background: linear-gradient(to bottom, #fff 10%, #444 90%);
-            -webkit-background-clip: text; 
-            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             filter: drop-shadow(0 0 15px rgba(255,255,255,0.1));
             animation: fogReveal 3s forwards;
         }
@@ -118,7 +115,16 @@
         }
         .section-label::after { content: ""; height: 1px; flex-grow: 1; background: var(--border); }
 
-        /* LIVE TENURE CLOCK STYLE */
+        /* BRIGHTER TENURE MARKERS [Requirement 2] */
+        .exp-date { 
+            font-family: 'Fira Code'; 
+            color: var(--brand-light-blue); 
+            font-size: 0.85rem; 
+            font-weight: 500;
+            text-shadow: 0 0 8px rgba(160, 190, 245, 0.3);
+            white-space: nowrap;
+        }
+
         .live-counter {
             font-family: 'Fira Code', monospace;
             font-size: 0.7rem;
@@ -127,41 +133,47 @@
             padding: 2px 8px;
             letter-spacing: 1px;
             white-space: nowrap;
-            margin-left: auto; /* Pushes clock to the right of the label */
+            margin-left: auto;
         }
 
-        .experience-entry { margin-bottom: 50px; padding-left: 20px; border-left: 1px solid var(--border); }
-        .exp-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 12px; }
+        .experience-entry { margin-bottom: 60px; padding-left: 20px; border-left: 1px solid var(--border); }
+        .exp-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 12px; flex-wrap: wrap; gap: 10px; }
         .exp-role { font-size: 1.7rem; color: white; font-weight: 700; margin: 0; }
         .exp-company { font-family: 'Fira Code'; color: var(--brand-blue); font-size: 1rem; }
-        .exp-date { font-family: 'Fira Code'; color: #555; font-size: 0.8rem; }
         .exp-body { font-weight: 300; color: #999; line-height: 1.7; font-size: 1rem; }
 
-        /* ACTIVE TENURE GLOW */
         .active-tenure {
             border-left: 2px solid var(--brand-blue);
             padding-left: 30px;
             background: linear-gradient(90deg, rgba(99, 149, 238, 0.05) 0%, transparent 100%);
         }
 
-        .mission-statement {
-            font-style: italic; color: var(--brand-light-blue);
-            margin-bottom: 30px; font-size: 1.1rem;
-        }
+        .mission-statement { font-style: italic; color: var(--brand-light-blue); margin-bottom: 30px; font-size: 1.1rem; }
 
-        .achievement-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px; margin-bottom: 30px;
-        }
-
+        .achievement-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 30px; }
         .achievement-pillar h4 { font-family: 'Fira Code'; font-size: 0.75rem; color: var(--brand-blue); letter-spacing: 2px; margin: 0 0 10px 0; }
         .achievement-pillar p { font-size: 0.95rem; line-height: 1.6; color: #b3b3b3; margin: 0; }
+        .tenure-metadata { display: flex; gap: 20px; flex-wrap: wrap; font-family: 'Fira Code'; font-size: 0.65rem; color: var(--brand-teal); opacity: 0.6; letter-spacing: 1px; }
 
-        .tenure-metadata { display: flex; gap: 20px; font-family: 'Fira Code'; font-size: 0.65rem; color: var(--brand-teal); opacity: 0.6; letter-spacing: 1px; }
+        /* COMMENDATIONS RESTORED SPARK [Requirement 4] */
+        .award-entry { 
+            background: linear-gradient(90deg, rgba(255, 105, 180, 0.08), transparent); 
+            border-left: 3px solid var(--brand-pink); padding: 35px; 
+            box-shadow: inset 10px 0 20px -10px rgba(255, 105, 180, 0.1);
+        }
+        .highlight-pink { 
+            color: var(--brand-pink) !important; 
+            text-shadow: 0 0 10px rgba(255, 105, 180, 0.5); 
+            font-weight: 700; 
+            font-family: 'Fira Code';
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+        }
+        .award-quote { font-size: 1.1rem; font-style: italic; color: #eee; border-left: 2px solid var(--brand-pink); padding-left: 20px; margin-top: 20px; }
 
-        /* SKILLS MATRIX */
-        .matrix-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 40px; }
-        .matrix-sector h4 { font-family: 'Fira Code'; color: var(--brand-blue); font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 25px; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+        /* MATRIX & HUMAN GRIDS */
+        .matrix-grid, .human-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 40px; }
+        .matrix-sector h4, .element-title { font-family: 'Fira Code'; color: var(--brand-blue); font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 25px; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
         .skill-gauge { margin-bottom: 20px; }
         .gauge-label { font-family: 'Fira Code'; font-size: 0.65rem; color: #999; display: flex; justify-content: space-between; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
         .gauge-label span { color: var(--brand-light-blue); }
@@ -169,17 +181,14 @@
         .gauge-fill { height: 100%; background: var(--brand-blue); box-shadow: 0 0 10px var(--brand-blue); position: relative; animation: gaugeLoad 2s ease-out forwards; transform-origin: left; }
         @keyframes gaugeLoad { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 
-        /* HUMAN ELEMENT */
-        .human-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-bottom: 40px; }
         .element-card { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); padding: 25px; transition: border-color 0.4s ease; }
         .element-card:hover { border-color: var(--brand-blue); }
-        .element-title { font-family: 'Fira Code'; font-size: 0.75rem; color: var(--brand-light-blue); letter-spacing: 3px; text-transform: uppercase; margin: 0 0 20px 0; }
         .element-tags { display: flex; flex-wrap: wrap; gap: 10px; }
-        .human-tag { font-family: 'Inter'; font-size: 0.8rem; color: #fff; background: rgba(99, 149, 238, 0.1); padding: 5px 12px; border: 1px solid rgba(99, 149, 238, 0.2); font-weight: 300; transition: all 0.3s ease; }
-        .human-tag:hover { background: var(--brand-blue); color: var(--bg-dark); border-color: var(--brand-blue); }
+        .human-tag { font-family: 'Inter'; font-size: 0.8rem; color: #fff; background: rgba(99, 149, 238, 0.1); padding: 5px 12px; border: 1px solid rgba(99, 149, 238, 0.2); font-weight: 300; transition: 0.3s; cursor: pointer; }
+        .human-tag:hover { background: var(--brand-blue); color: var(--bg-dark); }
         .human-prose { font-size: 1.1rem; line-height: 1.8; color: #999; font-weight: 300; max-width: 800px; border-left: 2px solid var(--brand-blue); padding-left: 30px; margin-top: 40px; }
 
-        /* COMM HUB */
+        /* CONTACT */
         .comm-hub { background: var(--glass); border: 1px solid var(--border); padding: 40px; font-family: 'Fira Code'; font-size: 0.85rem; }
         .comm-hub a { color: #fff; text-decoration: none; margin-left: 10px; transition: 0.3s; }
         .comm-hub a:hover { color: var(--brand-blue); }
@@ -188,20 +197,20 @@
         .sig-block { margin-top: 80px; text-align: right; }
         .sig-img { max-width: 250px; filter: invert(1) brightness(2) contrast(150%); mix-blend-mode: screen; opacity: 0.8; }
 
-        @media print {
-            * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-            nav, .sig-block, body::after, .cursor, .portrait::after { display: none !important; }
-            body { background: #fff !important; color: #000 !important; }
-            .container { max-width: 100% !important; }
-            .fog-name { -webkit-text-fill-color: #000 !important; }
-            .live-counter { display: none !important; }
-        }
-
+        /* MOBILE FIXES [Requirement 3] */
         @media (max-width: 768px) {
-            nav { text-align: center; }
-            .hero { flex-direction: column; text-align: center; gap: 30px; }
-            .section-label { flex-direction: column; align-items: flex-start; gap: 10px; }
-            .live-counter { margin-left: 0; }
+            nav { padding: 30px 20px; text-align: center; }
+            .hero { flex-direction: column; text-align: center; gap: 30px; padding: 20px 0; }
+            .exp-header { flex-direction: column; align-items: center; text-align: center; }
+            .section-label { flex-direction: column; align-items: center; gap: 10px; text-align: center; }
+            .section-label::after { display: none; }
+            .live-counter { margin: 10px 0 0 0; }
+            .exp-role { font-size: 1.4rem; }
+            .mission-box { padding: 25px; }
+            .mission-box p { font-size: 1.1rem; }
+            .achievement-grid, .matrix-grid, .human-grid { grid-template-columns: 1fr; }
+            .human-prose { padding-left: 20px; font-size: 1rem; }
+            .sig-block { text-align: center; }
         }
     </style>
 </head>
@@ -236,7 +245,6 @@
                 01 // CURRENT_TENURE_ACTIVE
                 <span id="tenure-clock" class="live-counter"></span>
             </div>
-            
             <div class="experience-entry active-tenure">
                 <div class="exp-header">
                     <div>
@@ -256,15 +264,13 @@
                             <h4>01 // THE_AESTHETIC_REVOLUTION</h4>
                             <p>Architected a complete agency-wide brand metamorphosis. Transitioned the visual language from "legacy corporate" to a high-impact, modern brand mark that reflects the dignity of the families served. Every pixel, print, and physical space now resonates with a unified, professional frequency.</p>
                         </div>
-
                         <div class="achievement-pillar">
                             <h4>02 // THE_DIGITAL_NERVOUS_SYSTEM</h4>
                             <p>Orchestrating complex technology logistics for a <strong>500+ member workforce</strong>. Developed and deployed a robust telemedicine infrastructure that became the agency’s lifeline during global shifts, ensuring that clinical support for children and families never faced a "signal loss."</p>
                         </div>
-
                         <div class="achievement-pillar">
                             <h4>03 // OPERATIONAL_STEWARDSHIP</h4>
-                            <p>Managing the full lifecycle of technological assets—from procurement to sunset. I oversee the network infrastructure and security protocols that safeguard sensitive clinical data, maintaining a 99.9% uptime for critical systems across multiple regional hubs.</p>
+                            <p>Managing the full lifecycle of technological assets—from procurement to sunset. I oversee the network infrastructure and security protocols that safeguard sensitive clinical data, maintaining a <strong>99.9% uptime</strong> for critical systems across multiple regional hubs.</p>
                         </div>
                     </div>
 
@@ -286,7 +292,7 @@
                     <span class="exp-date">2009 — 2014</span>
                 </div>
                 <div class="exp-body">
-                    Orchestrated logistical launch protocols for the 3rd Street Promenade flagship. Maintained elite-tier inventory precision (99.85%) and mentored regional operational talent through the Southwest.
+                    Orchestrated logistical launch protocols for the <strong>3rd Street Promenade flagship</strong>, managing high-volume inventory cycles during global product launches. Maintained a consistent <strong>99.85% inventory accuracy rate</strong> while overseeing the secure movement of high-value assets in a high-traffic environment. Facilitated regional operational workshops, mentoring and certifying inventory teams through the Southwest market to uphold global compliance standards.
                 </div>
             </div>
 
@@ -310,12 +316,12 @@
         <section id="awards">
             <div class="section-label">04 // COMMENDATIONS</div>
             <div class="award-entry">
-                <div class="award-meta">SYSTEM_HONOR // MIKE TERKELTAUB AWARD // 2023</div>
+                <div class="award-meta highlight-pink">SYSTEM_HONOR // MIKE TERKELTAUB AWARD // 2023</div>
                 <div class="exp-body">
-                    Recognized for embodying the "Whatever it Takes" spirit. Catalyst for technological evolution and organizational morale, ensuring teams have the tools required for excellence.
+                    Recognized for embodying the <strong>"Whatever it Takes"</strong> spirit. Catalyst for technological evolution and organizational morale, ensuring teams have the tools required for excellence.
                 </div>
                 <div class="award-quote">
-                    "RD is one of those people that just makes people’s lives better every day... he exudes going above and beyond."
+                    "RD is one of those people that just makes people’s lives better every day... he exudes <strong>going above and beyond.</strong>"
                 </div>
             </div>
         </section>
