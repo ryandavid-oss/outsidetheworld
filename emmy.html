@@ -26,13 +26,11 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* GLITTER OVERLAY */
         #glitter-canvas {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none; z-index: 1002;
         }
 
-        /* SOFT RADIANCE BREATHE */
         body::after {
             content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: radial-gradient(circle at center, rgba(255, 179, 71, 0.04) 0%, transparent 85%);
@@ -46,8 +44,25 @@
 
         .container { max-width: 1000px; margin: 0 auto; padding: 0 20px 100px; position: relative; z-index: 1003; }
 
-        /* HERO SECTION */
-        .hero { text-align: center; margin-bottom: 60px; padding-top: 20px; }
+        /* HERO SECTION - STABILIZED FOR MOBILE */
+        .hero { 
+            text-align: center; 
+            margin-bottom: 60px; 
+            padding-top: 20px; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        /* Fixed height container to prevent layout shifting/jumping */
+        .name-container {
+            height: 120px; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
         .fog-name { 
             font-size: clamp(2.2rem, 10vw, 5rem); 
             font-weight: 900; letter-spacing: 8px; margin: 0; 
@@ -65,7 +80,6 @@
             text-transform: uppercase;
         }
 
-        /* ETERNITY QUOTE STYLING */
         .eternity-quote {
             color: #FFFFFF;
             font-size: clamp(1rem, 4vw, 1.4rem);
@@ -84,7 +98,7 @@
             50% { opacity: 1; transform: scale(1); }
         }
 
-        /* --- MONUMENT GRID (REPAIRED ALIGNMENT) --- */
+        /* --- MONUMENT GRID --- */
         .monument-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -149,7 +163,7 @@
         .legacy-grid { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 25px; }
         .legacy-chip { padding: 8px 18px; border: 1px solid var(--border-gold); font-family: 'Fira Code'; font-size: 0.7rem; color: var(--rose-gold); background: rgba(255, 245, 225, 0.05); }
 
-        /* SIGNATURE ENGINE */
+        /* SIGNATURE BLEND */
         .sig-block { margin-top: 100px; text-align: center; }
         .sig-img { 
             max-width: 280px; 
@@ -160,9 +174,9 @@
             display: block;
         }
 
-        /* --- iPHONE / MOBILE REFINEMENT --- */
         @media (max-width: 768px) {
             nav { text-align: center; padding: 30px 0 0; }
+            .name-container { height: 100px; } /* Slightly smaller for mobile */
             .fog-name { letter-spacing: 6px; }
             .eternity-quote { font-size: 1.1rem; max-width: 95%; }
             .monument-grid { grid-template-columns: 1fr; gap: 20px; }
@@ -185,7 +199,9 @@
     <div class="container">
         
         <header class="hero">
-            <h1 class="fog-name" id="alias-target">EMMY</h1>
+            <div class="name-container">
+                <h1 class="fog-name" id="alias-target">EMMY</h1>
+            </div>
             <div class="promise-clock" id="covenant-clock">INITIATING_COVENANT_SYNC...</div>
             <div class="eternity-quote">
                 She is my healing past, my joyful present, and my hopeful future all in one.
@@ -221,7 +237,7 @@
         <section>
             <div class="section-label">THE_SACRIFICE_OF_THE_HEART</div>
             <div class="prose">
-                I am humbled daily by the grace she has shown in transplanting her entire life for our bond. She faced the legal system with a mother's fierce love, fighting to bring her daughters into our sanctuary. 
+                I am humbled daily by the grace she has shown in transplanting her entire life for our bond. She faced the tempests of the legal system with a mother's fierce love, fighting to bring her daughters into our sanctuary. 
                 <br><br>
                 Upon her arrival, she <span class="highlight">sanctified a home</span>. With an artist's eye, she invested herself fully to clothe our residence in beauty and peace. She has folded my son and daughters into her heart as her own, ensuring every soul—from the three S children to the newest light, W—feels truly accepted.
             </div>
@@ -256,7 +272,7 @@
                     <div class="timeline-content">
                         <span class="timeline-date">APRIL 17, 2021</span>
                         <h3 class="timeline-title">The Covenant</h3>
-                        <p class="timeline-desc">Two histories, one future.</p>
+                        <p class="timeline-desc">We stood before God and family. Two histories, one future.</p>
                     </div>
                 </div>
                 <div class="timeline-event">
@@ -287,7 +303,17 @@
             <div class="prose">
                 Every Friday remains <span class="highlight">Sanctified & Sacred</span>. Our devotion is found in the quiet moments: the shared glow of a Target parking lot or the rugged ascent of <span class="highlight">Horton Creek</span>. 
                 <br><br>
-                She is the cook who turns a table into a feast for all, and the patient co-pilot who trusts in our direction. Her favorite color is <span class="highlight">Glitter</span>—a way of moving through the world.
+                She is the cook who turns a table into a feast for all, and the patient co-pilot who trusts in our direction. Her favorite color is <span class="highlight">Glitter</span>—a way of moving through the world, <span class="highlight">catching the light.</span>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-label">RADICAL_LOVE // THE_PEACE_OF_CHRIST</div>
+            <div class="prose">
+                Emily is a living exemplar of <span class="highlight">charity and grace</span>. Her devotion to Heavenly Father is a powerful connection that shifts the atmosphere. 
+            </div>
+            <div class="prose">
+                I have felt the weight of her prayers across the void, prompting me to ask: <span class="highlight">"Did you pray for me?"</span> She pleads for others with a faith that sparkles with hope, and watching her light grow is the most sacred experience of my life.
             </div>
         </section>
 
