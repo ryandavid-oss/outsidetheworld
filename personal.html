@@ -161,6 +161,20 @@
             .main-interface { flex-direction: column; }
             .vertical-divider { width: 100%; height: 1px; margin: 40px 0; }
         }
+        /* THE DOSSIER CARD STYLE */
+.dossier-card:hover {
+    border-color: var(--brand-blue) !important;
+    background: rgba(99, 149, 238, 0.08) !important;
+    box-shadow: 0 20px 40px rgba(99, 149, 238, 0.15) !important;
+}
+
+.dossier-card:hover h3 {
+    color: var(--brand-blue) !important;
+}
+
+.dossier-card:hover .card-beacon {
+    color: var(--brand-blue) !important;
+}
     </style>
 </head>
 <body>
@@ -195,7 +209,11 @@
                 <h3>The Archive</h3>
                 <p>Historical residue from 2001 to present.</p>
             </a>
-
+            <a href="resume.html" class="archive-card dossier-card">
+    <div class="card-beacon"></div>
+    <h3>The Dossier</h3>
+    <p>Professional service history // Technical Logistics // Tenure Records.</p>
+</a>
             <a href="flotsam.html" class="archive-card">
                 <div class="card-beacon"></div>
                 <h3>The Flotsam</h3>
