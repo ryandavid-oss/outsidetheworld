@@ -68,7 +68,6 @@
         }
         @keyframes scan { 0% { top: 0%; } 100% { top: 100%; } }
 
-        /* CINEMATIC FOGGY LETTERING */
         .fog-name { 
             font-size: clamp(1.8rem, 5vw, 3.5rem); 
             font-weight: 900; 
@@ -119,6 +118,18 @@
         }
         .section-label::after { content: ""; height: 1px; flex-grow: 1; background: var(--border); }
 
+        /* LIVE TENURE CLOCK STYLE */
+        .live-counter {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.7rem;
+            color: var(--brand-pink);
+            background: rgba(255, 105, 180, 0.08);
+            padding: 2px 8px;
+            letter-spacing: 1px;
+            white-space: nowrap;
+            margin-left: auto; /* Pushes clock to the right of the label */
+        }
+
         .experience-entry { margin-bottom: 50px; padding-left: 20px; border-left: 1px solid var(--border); }
         .exp-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 12px; }
         .exp-role { font-size: 1.7rem; color: white; font-weight: 700; margin: 0; }
@@ -126,16 +137,49 @@
         .exp-date { font-family: 'Fira Code'; color: #555; font-size: 0.8rem; }
         .exp-body { font-weight: 300; color: #999; line-height: 1.7; font-size: 1rem; }
 
-        /* COMMENDATIONS */
-        .award-entry { background: linear-gradient(90deg, rgba(255, 105, 180, 0.05), transparent); border-left: 3px solid var(--brand-pink); padding: 35px; }
-        .award-meta { font-family: 'Fira Code'; color: var(--brand-pink); font-size: 0.8rem; letter-spacing: 3px; margin-bottom: 15px; }
-        .award-quote { font-size: 1.1rem; font-style: italic; color: #eee; border-left: 2px solid rgba(255,255,255,0.1); padding-left: 20px; margin-top: 20px; }
+        /* ACTIVE TENURE GLOW */
+        .active-tenure {
+            border-left: 2px solid var(--brand-blue);
+            padding-left: 30px;
+            background: linear-gradient(90deg, rgba(99, 149, 238, 0.05) 0%, transparent 100%);
+        }
 
-        /* ARSENAL GRID */
-        .arsenal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
-        .arsenal-cat h4 { font-family: 'Fira Code'; color: var(--brand-blue); font-size: 0.8rem; letter-spacing: 3px; margin-bottom: 20px; text-transform: uppercase; }
+        .mission-statement {
+            font-style: italic; color: var(--brand-light-blue);
+            margin-bottom: 30px; font-size: 1.1rem;
+        }
 
-        /* COMMUNICATION HUB */
+        .achievement-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px; margin-bottom: 30px;
+        }
+
+        .achievement-pillar h4 { font-family: 'Fira Code'; font-size: 0.75rem; color: var(--brand-blue); letter-spacing: 2px; margin: 0 0 10px 0; }
+        .achievement-pillar p { font-size: 0.95rem; line-height: 1.6; color: #b3b3b3; margin: 0; }
+
+        .tenure-metadata { display: flex; gap: 20px; font-family: 'Fira Code'; font-size: 0.65rem; color: var(--brand-teal); opacity: 0.6; letter-spacing: 1px; }
+
+        /* SKILLS MATRIX */
+        .matrix-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 40px; }
+        .matrix-sector h4 { font-family: 'Fira Code'; color: var(--brand-blue); font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 25px; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+        .skill-gauge { margin-bottom: 20px; }
+        .gauge-label { font-family: 'Fira Code'; font-size: 0.65rem; color: #999; display: flex; justify-content: space-between; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
+        .gauge-label span { color: var(--brand-light-blue); }
+        .gauge-track { height: 4px; background: rgba(255, 255, 255, 0.05); border-radius: 2px; overflow: hidden; position: relative; }
+        .gauge-fill { height: 100%; background: var(--brand-blue); box-shadow: 0 0 10px var(--brand-blue); position: relative; animation: gaugeLoad 2s ease-out forwards; transform-origin: left; }
+        @keyframes gaugeLoad { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+        /* HUMAN ELEMENT */
+        .human-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-bottom: 40px; }
+        .element-card { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); padding: 25px; transition: border-color 0.4s ease; }
+        .element-card:hover { border-color: var(--brand-blue); }
+        .element-title { font-family: 'Fira Code'; font-size: 0.75rem; color: var(--brand-light-blue); letter-spacing: 3px; text-transform: uppercase; margin: 0 0 20px 0; }
+        .element-tags { display: flex; flex-wrap: wrap; gap: 10px; }
+        .human-tag { font-family: 'Inter'; font-size: 0.8rem; color: #fff; background: rgba(99, 149, 238, 0.1); padding: 5px 12px; border: 1px solid rgba(99, 149, 238, 0.2); font-weight: 300; transition: all 0.3s ease; }
+        .human-tag:hover { background: var(--brand-blue); color: var(--bg-dark); border-color: var(--brand-blue); }
+        .human-prose { font-size: 1.1rem; line-height: 1.8; color: #999; font-weight: 300; max-width: 800px; border-left: 2px solid var(--brand-blue); padding-left: 30px; margin-top: 40px; }
+
+        /* COMM HUB */
         .comm-hub { background: var(--glass); border: 1px solid var(--border); padding: 40px; font-family: 'Fira Code'; font-size: 0.85rem; }
         .comm-hub a { color: #fff; text-decoration: none; margin-left: 10px; transition: 0.3s; }
         .comm-hub a:hover { color: var(--brand-blue); }
@@ -144,22 +188,20 @@
         .sig-block { margin-top: 80px; text-align: right; }
         .sig-img { max-width: 250px; filter: invert(1) brightness(2) contrast(150%); mix-blend-mode: screen; opacity: 0.8; }
 
-        /* PRINT SYSTEM REPAIR */
         @media print {
             * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
             nav, .sig-block, body::after, .cursor, .portrait::after { display: none !important; }
-            body { background: #000 !important; color: #fff !important; }
-            .container { padding: 0 !important; margin: 0 !important; max-width: 100% !important; }
-            .fog-name { background: none !important; -webkit-text-fill-color: #fff !important; opacity: 1 !important; filter: none !important; letter-spacing: 2px !important; }
-            .exp-role, .mission-box p, .edu-school { color: #fff !important; }
-            .exp-body, .skill-chip { color: #ccc !important; }
-            .experience-entry, .award-entry, .mission-box { page-break-inside: avoid; border-color: #333 !important; }
+            body { background: #fff !important; color: #000 !important; }
+            .container { max-width: 100% !important; }
+            .fog-name { -webkit-text-fill-color: #000 !important; }
+            .live-counter { display: none !important; }
         }
 
         @media (max-width: 768px) {
             nav { text-align: center; }
             .hero { flex-direction: column; text-align: center; gap: 30px; }
             .section-label { flex-direction: column; align-items: flex-start; gap: 10px; }
+            .live-counter { margin-left: 0; }
         }
     </style>
 </head>
@@ -190,96 +232,50 @@
         </section>
 
         <section id="experience">
-<div class="section-label">01 // CURRENT_TENURE_ACTIVE</div>
-<div class="experience-entry active-tenure">
-    <div class="exp-header">
-        <div>
-            <h3 class="exp-role">Asst. Director of Brand Strategy & Tech Logistics</h3>
-            <span class="exp-company">Child & Family Support Services (CFSS)</span>
-        </div>
-        <span class="exp-date">2014 — PRESENT</span>
-    </div>
-    
-    <div class="exp-body">
-        <p class="mission-statement">
-            Responsible for the total convergence of <strong>Aesthetic Identity</strong> and <strong>Systemic Reliability</strong> for a premier behavioral health agency.
-        </p>
+            <div class="section-label">
+                01 // CURRENT_TENURE_ACTIVE
+                <span id="tenure-clock" class="live-counter"></span>
+            </div>
+            
+            <div class="experience-entry active-tenure">
+                <div class="exp-header">
+                    <div>
+                        <h3 class="exp-role">Asst. Director of Brand Strategy & Tech Logistics</h3>
+                        <span class="exp-company">Child & Family Support Services (CFSS)</span>
+                    </div>
+                    <span class="exp-date">2014 — PRESENT</span>
+                </div>
+                
+                <div class="exp-body">
+                    <p class="mission-statement">
+                        Responsible for the total convergence of <strong>Aesthetic Identity</strong> and <strong>Systemic Reliability</strong> for a premier behavioral health agency.
+                    </p>
 
-        <div class="achievement-grid">
-            <div class="achievement-pillar">
-                <h4>01 // THE_AESTHETIC_REVOLUTION</h4>
-                <p>Architected a complete agency-wide brand metamorphosis. Transitioned the visual language from "legacy corporate" to a high-impact, modern brand mark that reflects the dignity of the families served. Every pixel, print, and physical space now resonates with a unified, professional frequency.</p>
+                    <div class="achievement-grid">
+                        <div class="achievement-pillar">
+                            <h4>01 // THE_AESTHETIC_REVOLUTION</h4>
+                            <p>Architected a complete agency-wide brand metamorphosis. Transitioned the visual language from "legacy corporate" to a high-impact, modern brand mark that reflects the dignity of the families served. Every pixel, print, and physical space now resonates with a unified, professional frequency.</p>
+                        </div>
+
+                        <div class="achievement-pillar">
+                            <h4>02 // THE_DIGITAL_NERVOUS_SYSTEM</h4>
+                            <p>Orchestrating complex technology logistics for a <strong>500+ member workforce</strong>. Developed and deployed a robust telemedicine infrastructure that became the agency’s lifeline during global shifts, ensuring that clinical support for children and families never faced a "signal loss."</p>
+                        </div>
+
+                        <div class="achievement-pillar">
+                            <h4>03 // OPERATIONAL_STEWARDSHIP</h4>
+                            <p>Managing the full lifecycle of technological assets—from procurement to sunset. I oversee the network infrastructure and security protocols that safeguard sensitive clinical data, maintaining a 99.9% uptime for critical systems across multiple regional hubs.</p>
+                        </div>
+                    </div>
+
+                    <div class="tenure-metadata">
+                        <span>● 500+ NODES MANAGED</span>
+                        <span>● ZERO_DOWNTIME_PROTOCOL</span>
+                        <span>● BRAND_SOVEREIGNTY_ESTABLISHED</span>
+                    </div>
+                </div>
             </div>
 
-            <div class="achievement-pillar">
-                <h4>02 // THE_DIGITAL_NERVOUS_SYSTEM</h4>
-                <p>Orchestrating complex technology logistics for a <strong>500+ member workforce</strong>. Developed and deployed a robust telemedicine infrastructure that became the agency’s lifeline during global shifts, ensuring that clinical support for children and families never faced a "signal loss."</p>
-            </div>
-
-            <div class="achievement-pillar">
-                <h4>03 // OPERATIONAL_STEWARDSHIP</h4>
-                <p>Managing the full lifecycle of technological assets—from procurement to sunset. I oversee the network infrastructure and security protocols that safeguard sensitive clinical data, maintaining a 99.9% uptime for critical systems across multiple regional hubs.</p>
-            </div>
-        </div>
-
-        <div class="tenure-metadata">
-            <span>● 500+ NODES MANAGED</span>
-            <span>● ZERO_DOWNTIME_PROTOCOL</span>
-            <span>● BRAND_SOVEREIGNTY_ESTABLISHED</span>
-        </div>
-    </div>
-</div>
-
-<style>
-    .active-tenure {
-        border-left: 2px solid var(--brand-blue);
-        padding-left: 30px;
-        background: linear-gradient(90deg, rgba(99, 149, 238, 0.05) 0%, transparent 100%);
-    }
-
-    .mission-statement {
-        font-style: italic;
-        color: var(--brand-light-blue);
-        margin-bottom: 30px;
-        font-size: 1.1rem;
-    }
-
-    .achievement-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 25px;
-        margin-bottom: 30px;
-    }
-
-    .achievement-pillar h4 {
-        font-family: 'Fira Code', monospace;
-        font-size: 0.75rem;
-        color: var(--brand-blue);
-        letter-spacing: 2px;
-        margin: 0 0 10px 0;
-    }
-
-    .achievement-pillar p {
-        font-size: 0.95rem;
-        line-height: 1.6;
-        color: #b3b3b3;
-        margin: 0;
-    }
-
-    .tenure-metadata {
-        display: flex;
-        gap: 20px;
-        font-family: 'Fira Code', monospace;
-        font-size: 0.65rem;
-        color: var(--brand-teal);
-        opacity: 0.6;
-        letter-spacing: 1px;
-    }
-
-    @media (min-width: 768px) {
-        .achievement-grid { grid-template-columns: 1fr 1fr; }
-    }
-</style>
             <div class="section-label">02 // ARCHIVED_SERVICE</div>
             <div class="experience-entry">
                 <div class="exp-header">
@@ -294,21 +290,21 @@
                 </div>
             </div>
 
-<div class="section-label">03 // DIGITAL_COMMERCE_ORIGINS</div>
-<div class="experience-entry">
-    <div class="exp-header">
-        <div>
-            <h3 class="exp-role">E-Care Team Leader & E-Business Strategist</h3>
-            <span class="exp-company">Cox Communications</span>
-        </div>
-        <span class="exp-date">2002 — 2008</span>
-    </div>
-    <div class="exp-body">
-        Directed a 23-member elite response team, managing the daily deployment of <strong>40,000+ digital commerce units</strong>, including e-commerce orders, live chats, and sensitive customer data. 
-        <br><br>
-        Partnered directly with the Webmaster and Marketing departments to optimize the E-Business interface, successfully transforming the support desk into a revenue engine. Orchestrated a sales-lead initiative through support channels that contributed <strong>5% of the total corporate sales goals</strong>. Rising from Specialist to Assist to Team Leader, I established the metrics for quality, accuracy, and in-the-moment coaching that defined the regional E-Care standard.
-    </div>
-</div>
+            <div class="section-label">03 // DIGITAL_COMMERCE_ORIGINS</div>
+            <div class="experience-entry">
+                <div class="exp-header">
+                    <div>
+                        <h3 class="exp-role">E-Care Team Leader & E-Business Strategist</h3>
+                        <span class="exp-company">Cox Communications</span>
+                    </div>
+                    <span class="exp-date">2002 — 2008</span>
+                </div>
+                <div class="exp-body">
+                    Directed a 23-member elite response team, managing the daily deployment of <strong>40,000+ digital commerce units</strong>, including e-commerce orders, live chats, and sensitive customer data. 
+                    <br><br>
+                    Partnered directly with the Webmaster and Marketing departments to optimize the E-Business interface, successfully transforming the support desk into a revenue engine. Orchestrated a sales-lead initiative through support channels that contributed <strong>5% of the total corporate sales goals</strong>. Rising from Specialist to Assist to Team Leader, I established the metrics for quality, accuracy, and in-the-moment coaching that defined the regional E-Care standard.
+                </div>
+            </div>
         </section>
 
         <section id="awards">
@@ -323,126 +319,62 @@
                 </div>
             </div>
         </section>
-<section id="skills-matrix">
-    <div class="section-label">04 // CORE_COMPETENCIES</div>
-    
-    <div class="matrix-grid">
-        <div class="matrix-sector">
-            <h4>Brand_Architecture</h4>
-            <div class="skill-gauge">
-                <div class="gauge-label">Identity Design & Aesthetics <span>95%</span></div>
-                <div class="gauge-track"><div class="gauge-fill" style="width: 95%;"></div></div>
+
+        <section id="skills-matrix">
+            <div class="section-label">05 // CORE_COMPETENCIES</div>
+            <div class="matrix-grid">
+                <div class="matrix-sector">
+                    <h4>Brand_Architecture</h4>
+                    <div class="skill-gauge">
+                        <div class="gauge-label">Identity Design & Aesthetics <span>95%</span></div>
+                        <div class="gauge-track"><div class="gauge-fill" style="width: 95%;"></div></div>
+                    </div>
+                    <div class="skill-gauge">
+                        <div class="gauge-label">Narrative Strategy <span>90%</span></div>
+                        <div class="gauge-track"><div class="gauge-fill" style="width: 90%;"></div></div>
+                    </div>
+                    <div class="skill-gauge">
+                        <div class="gauge-label">Cultural Landmark Positioning <span>85%</span></div>
+                        <div class="gauge-track"><div class="gauge-fill" style="width: 85%;"></div></div>
+                    </div>
+                </div>
+
+                <div class="matrix-sector">
+                    <h4>Logistics_Intelligence</h4>
+                    <div class="skill-gauge">
+                        <div class="gauge-label">Inventory Lifecycle (Apple Standards) <span>98%</span></div>
+                        <div class="gauge-track"><div class="gauge-fill" style="width: 98%;"></div></div>
+                    </div>
+                    <div class="skill-gauge">
+                        <div class="gauge-label">Procurement & Asset Mgmt <span>92%</span></div>
+                        <div class="gauge-track"><div class="gauge-fill" style="width: 92%;"></div></div>
+                    </div>
+                    <div class="skill-gauge">
+                        <div class="gauge-label">Operational Workflow Strategy <span>88%</span></div>
+                        <div class="gauge-track"><div class="gauge-fill" style="width: 88%;"></div></div>
+                    </div>
+                </div>
+
+                <div class="matrix-sector">
+                    <h4>Digital_Operations_Scale</h4>
+                    <div class="skill-gauge">
+                        <div class="gauge-label">Personnel Leadership (23+ Staff) <span>96%</span></div>
+                        <div class="gauge-track"><div class="gauge-fill" style="width: 96%;"></div></div>
+                    </div>
+                    <div class="skill-gauge">
+                        <div class="gauge-label">High-Volume Commerce Mgmt (40k/Day) <span>98%</span></div>
+                        <div class="gauge-track"><div class="gauge-fill" style="width: 98%;"></div></div>
+                    </div>
+                    <div class="skill-gauge">
+                        <div class="gauge-label">E-Commerce Conversion Strategy <span>90%</span></div>
+                        <div class="gauge-track"><div class="gauge-fill" style="width: 90%;"></div></div>
+                    </div>
+                </div>
             </div>
-            <div class="skill-gauge">
-                <div class="gauge-label">Narrative Strategy <span>90%</span></div>
-                <div class="gauge-track"><div class="gauge-fill" style="width: 90%;"></div></div>
-            </div>
-            <div class="skill-gauge">
-                <div class="gauge-label">Cultural Landmark Positioning <span>85%</span></div>
-                <div class="gauge-track"><div class="gauge-fill" style="width: 85%;"></div></div>
-            </div>
-        </div>
+        </section>
 
-        <div class="matrix-sector">
-            <h4>Logistics_Intelligence</h4>
-            <div class="skill-gauge">
-                <div class="gauge-label">Inventory Lifecycle (Apple Standards) <span>98%</span></div>
-                <div class="gauge-track"><div class="gauge-fill" style="width: 98%;"></div></div>
-            </div>
-            <div class="skill-gauge">
-                <div class="gauge-label">Procurement & Asset Mgmt <span>92%</span></div>
-                <div class="gauge-track"><div class="gauge-fill" style="width: 92%;"></div></div>
-            </div>
-            <div class="skill-gauge">
-                <div class="gauge-label">Operational Workflow Strategy <span>88%</span></div>
-                <div class="gauge-track"><div class="gauge-fill" style="width: 88%;"></div></div>
-            </div>
-        </div>
-
-<div class="matrix-sector">
-    <h4>Digital_Operations_Scale</h4>
-    <div class="skill-gauge">
-        <div class="gauge-label">Personnel Leadership (23+ Staff) <span>96%</span></div>
-        <div class="gauge-track"><div class="gauge-fill" style="width: 96%;"></div></div>
-    </div>
-    <div class="skill-gauge">
-        <div class="gauge-label">High-Volume Commerce Mgmt (40k/Day) <span>98%</span></div>
-        <div class="gauge-track"><div class="gauge-fill" style="width: 98%;"></div></div>
-    </div>
-    <div class="skill-gauge">
-        <div class="gauge-label">E-Commerce Conversion Strategy <span>90%</span></div>
-        <div class="gauge-track"><div class="gauge-fill" style="width: 90%;"></div></div>
-    </div>
-</div>
-</div>
-</section>
-
-<style>
-    .matrix-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 40px;
-        margin-top: 40px;
-    }
-
-    .matrix-sector h4 {
-        font-family: 'Fira Code', monospace;
-        color: var(--brand-blue);
-        font-size: 0.8rem;
-        letter-spacing: 3px;
-        text-transform: uppercase;
-        margin-bottom: 25px;
-        border-bottom: 1px solid var(--border);
-        padding-bottom: 10px;
-    }
-
-    .skill-gauge {
-        margin-bottom: 20px;
-    }
-
-    .gauge-label {
-        font-family: 'Fira Code', monospace;
-        font-size: 0.65rem;
-        color: #999;
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 8px;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
-
-    .gauge-label span {
-        color: var(--brand-light-blue);
-    }
-
-    .gauge-track {
-        height: 4px;
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 2px;
-        overflow: hidden;
-        position: relative;
-    }
-
-    .gauge-fill {
-        height: 100%;
-        background: var(--brand-blue);
-        box-shadow: 0 0 10px var(--brand-blue);
-        position: relative;
-        animation: gaugeLoad 2s ease-out forwards;
-        transform-origin: left;
-    }
-
-    @keyframes gaugeLoad {
-        from { transform: scaleX(0); }
-        to { transform: scaleX(1); }
-    }
-
-    @media (max-width: 768px) {
-        .matrix-grid { grid-template-columns: 1fr; }
-    }
-</style>
         <section id="education">
-            <div class="section-label">05 // ACADEMIC_TENURE</div>
+            <div class="section-label">06 // ACADEMIC_TENURE</div>
             <div class="experience-entry">
                 <div class="exp-header">
                     <div>
@@ -457,115 +389,44 @@
             </div>
         </section>
 
-<section id="human-element">
-    <div class="section-label">06 // HUMAN_ELEMENT_DATA</div>
-    
-    <div class="human-grid">
-        <div class="element-card">
-            <h4 class="element-title">The_Physical</h4>
-            <div class="element-tags">
-                <span class="human-tag">Mountain Biking</span>
-                <span class="human-tag">Longboarding</span>
-                <span class="human-tag">Hiking</span>
-                <span class="human-tag">Desert Exploration</span>
+        <section id="human-element">
+            <div class="section-label">07 // HUMAN_ELEMENT_DATA</div>
+            <div class="human-grid">
+                <div class="element-card">
+                    <h4 class="element-title">The_Physical</h4>
+                    <div class="element-tags">
+                        <span class="human-tag">Mountain Biking</span>
+                        <span class="human-tag">Longboarding</span>
+                        <span class="human-tag">Hiking</span>
+                        <span class="human-tag">Desert Exploration</span>
+                    </div>
+                </div>
+                <div class="element-card">
+                    <h4 class="element-title">The_Creative</h4>
+                    <div class="element-tags">
+                        <span class="human-tag">Web Site Design</span>
+                        <span class="human-tag">iPhone Photography</span>
+                        <span class="human-tag">Long Form Writing</span>
+                        <span class="human-tag">Reading</span>
+                    </div>
+                </div>
+                <div class="element-card">
+                    <h4 class="element-title">The_Sanctuary</h4>
+                    <div class="element-tags">
+                        <span class="human-tag">Fatherhood & Legacy</span>
+                        <span class="human-tag">Faith Devotion</span>
+                        <span class="human-tag">Home Restoration</span>
+                        <span class="human-tag">Grandparenting</span>
+                    </div>
+                </div>
             </div>
-        </div>
-
-        <div class="element-card">
-            <h4 class="element-title">The_Creative</h4>
-            <div class="element-tags">
-                <span class="human-tag">Web Site Design</span>
-                <span class="human-tag">iPhone Photography</span>
-                <span class="human-tag">Long Form Writing</span>
-                <span class="human-tag">Reading</span>
+            <div class="human-prose">
+                Outside the realm of of the cold and technical, my life is shaped by a connection to <strong>beauty, movement, and the sacred.</strong> Whether I'm tracing a clean line along a dusty Arizona trail, capturing the quiet magic of the everyday through a camera lens, or tending a home rooted in faith, the aim is always the same: to progress. I'm a student of the earth; desert and mountains, a father of seven, and someone who believes the most complex systems—at their core—are built to serve the indomitable human heart.   
             </div>
-        </div>
-
-        <div class="element-card">
-            <h4 class="element-title">The_Sanctuary</h4>
-            <div class="element-tags">
-                <span class="human-tag">Fatherhood & Legacy</span>
-                <span class="human-tag">Faith Devotion</span>
-                <span class="human-tag">Home Restoration</span>
-                <span class="human-tag">Grandparenting</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="human-prose">
-Outside the realm of of the cold and technical, my life is shaped by a connection to beauty, movement, and the sacred. Whether I'm tracing a clean line along a dusty Arizona trail, capturing the quiet magic of the everyday through a camera lens, or tending a home rooted in faith, the aim is always the same: to progress. I'm a student of the earth; desert and mountains, a father of seven, and someone who believes the most complex systems—at their core—are built to serve the indomitable human heart.   
- </div>
-</section>
-
-<style>
-    .human-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 30px;
-        margin-bottom: 40px;
-    }
-
-    .element-card {
-        background: rgba(255, 255, 255, 0.02);
-        border: 1px solid rgba(255, 255, 255, 0.05);
-        padding: 25px;
-        transition: border-color 0.4s ease;
-    }
-
-    .element-card:hover {
-        border-color: var(--brand-blue);
-    }
-
-    .element-title {
-        font-family: 'Fira Code', monospace;
-        font-size: 0.75rem;
-        color: var(--brand-light-blue);
-        letter-spacing: 3px;
-        text-transform: uppercase;
-        margin: 0 0 20px 0;
-    }
-
-    .element-tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-    }
-
-    .human-tag {
-        font-family: 'Inter', sans-serif;
-        font-size: 0.8rem;
-        color: #fff;
-        background: rgba(99, 149, 238, 0.1);
-        padding: 5px 12px;
-        border: 1px solid rgba(99, 149, 238, 0.2);
-        font-weight: 300;
-        transition: all 0.3s ease;
-    }
-
-    .human-tag:hover {
-        background: var(--brand-blue);
-        color: var(--bg-dark);
-        border-color: var(--brand-blue);
-    }
-
-    .human-prose {
-        font-size: 1.1rem;
-        line-height: 1.8;
-        color: #999;
-        font-weight: 300;
-        max-width: 800px;
-        border-left: 2px solid var(--brand-blue);
-        padding-left: 30px;
-        margin-top: 40px;
-    }
-
-    @media (max-width: 768px) {
-        .human-prose { font-size: 1rem; padding-left: 20px; }
-    }
-</style>
+        </section>
 
         <section id="contact">
-            <div class="section-label">07 // COMMUNICATION_HUB</div>
+            <div class="section-label">08 // COMMUNICATION_HUB</div>
             <div class="comm-hub">
                 <div style="margin-bottom: 15px;">
                     <span class="hub-label">[ SIGNAL ]</span>
@@ -588,11 +449,13 @@ Outside the realm of of the cold and technical, my life is shaped by a connectio
     </div>
 
     <script>
+        // TYPEWRITER EFFECT
         const text = "Asst. Director of Brand Strategy & Tech Logistics";
         const target = document.getElementById('typewriter-record');
         let i = 0;
         function type() { if (i < text.length) { target.textContent += text.charAt(i++); setTimeout(type, 60); } }
 
+        // LIVE TENURE CLOCK ENGINE
         function updateTenure() {
             const startDate = new Date("March 1, 2014 00:00:00");
             const now = new Date();
@@ -615,10 +478,16 @@ Outside the realm of of the cold and technical, my life is shaped by a connectio
 
             const pad = (n) => n.toString().padStart(2, '0');
             const clockStr = `[ TIME_ELAPSED // ${pad(years)}Y:${pad(months)}M:${pad(days)}D:${pad(hours)}H:${pad(minutes)}M:${pad(seconds)}S ]`;
-            /* Fixed logic to point to the correct ID from previous iterations if applicable, but since it's missing in provided HTML, added it for the script to function */
+            
+            const clockTarget = document.getElementById('tenure-clock');
+            if (clockTarget) {
+                clockTarget.textContent = clockStr;
+            }
         }
 
         document.addEventListener('DOMContentLoaded', () => {
+            setInterval(updateTenure, 1000);
+            updateTenure();
             setTimeout(type, 1000);
         });
     </script>
