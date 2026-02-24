@@ -23,14 +23,16 @@
             margin: 0; padding: 0;
             overflow-x: hidden;
             line-height: 1.8;
-            -webkit-tap-highlight-color: transparent; /* Cleaner iPhone interaction */
+            -webkit-tap-highlight-color: transparent;
         }
 
+        /* GLITTER OVERLAY */
         #glitter-canvas {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none; z-index: 1002;
         }
 
+        /* SOFT RADIANCE BREATHE */
         body::after {
             content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: radial-gradient(circle at center, rgba(255, 179, 71, 0.04) 0%, transparent 85%);
@@ -44,6 +46,7 @@
 
         .container { max-width: 1000px; margin: 0 auto; padding: 0 20px 100px; position: relative; z-index: 1003; }
 
+        /* HERO SECTION */
         .hero { text-align: center; margin-bottom: 60px; padding-top: 20px; }
         .fog-name { 
             font-size: clamp(2.2rem, 10vw, 5rem); 
@@ -62,12 +65,31 @@
             text-transform: uppercase;
         }
 
-        /* --- RESPONSIVE MONUMENT GRID --- */
+        /* ETERNITY QUOTE STYLING */
+        .eternity-quote {
+            color: #FFFFFF;
+            font-size: clamp(1rem, 4vw, 1.4rem);
+            font-weight: 300;
+            font-style: italic;
+            margin-top: 30px;
+            letter-spacing: 1px;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.6), 0 0 30px rgba(255, 255, 255, 0.2);
+            animation: eternityPulse 8s infinite ease-in-out;
+            max-width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        @keyframes eternityPulse {
+            0%, 100% { opacity: 0.7; transform: scale(0.98); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        /* --- MONUMENT GRID (REPAIRED ALIGNMENT) --- */
         .monument-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin: 60px 0;
+            gap: 40px;
+            margin: 80px 0;
             align-items: stretch;
         }
 
@@ -90,56 +112,65 @@
             align-items: center;
             border: 1px solid var(--border-gold);
             background: linear-gradient(135deg, rgba(26, 11, 46, 0.4), transparent);
-            padding: 30px;
+            padding: 40px;
             position: relative;
             backdrop-filter: blur(5px);
         }
 
         .symbols-container {
-            display: flex; flex-direction: column; gap: 30px; width: 100%;
+            display: flex; flex-direction: column; gap: 40px; width: 100%;
         }
         
-        .symbol-item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
-        .symbol-glyph { font-size: 2.5rem; color: var(--warm-amber); text-shadow: 0 0 10px var(--warm-amber); }
-        .symbol-label { font-family: 'Fira Code'; font-size: 0.6rem; letter-spacing: 3px; color: var(--rose-gold); text-transform: uppercase; text-align: center; }
+        .symbol-item { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+        .symbol-glyph { font-size: 3rem; color: var(--warm-amber); text-shadow: 0 0 15px var(--warm-amber); }
+        .symbol-label { font-family: 'Fira Code'; font-size: 0.65rem; letter-spacing: 4px; color: var(--rose-gold); text-transform: uppercase; text-align: center; }
 
         .section-label {
             font-family: 'Fira Code'; color: var(--rose-gold);
-            font-size: 0.7rem; letter-spacing: 5px; text-transform: uppercase;
-            margin: 80px 0 30px; display: flex; align-items: center; gap: 15px;
+            font-size: 0.75rem; letter-spacing: 6px; text-transform: uppercase;
+            margin: 100px 0 40px; display: flex; align-items: center; gap: 20px;
         }
         .section-label::after { content: ""; height: 1px; flex-grow: 1; background: var(--border-gold); }
 
-        .prose { font-size: 1.15rem; font-weight: 300; color: #b3a2c7; text-align: justify; margin-bottom: 1.5rem; }
+        .prose { font-size: 1.25rem; font-weight: 300; color: #b3a2c7; text-align: justify; margin-bottom: 2rem; }
         .highlight { color: var(--warm-amber); font-weight: 500; font-style: italic; text-shadow: 0 0 8px rgba(255, 179, 71, 0.4); }
 
-        .timeline-container { position: relative; padding: 20px 0; margin-left: 20px; border-left: 1px solid var(--border-gold); }
-        .timeline-event { position: relative; margin-bottom: 40px; padding-left: 30px; }
+        .timeline-container { position: relative; padding: 30px 0; margin-left: 25px; border-left: 1px solid var(--border-gold); }
+        .timeline-event { position: relative; margin-bottom: 50px; padding-left: 35px; }
         .timeline-node { position: absolute; left: -6px; top: 5px; width: 11px; height: 11px; background: var(--warm-amber); border-radius: 50%; box-shadow: 0 0 15px var(--warm-amber); }
-        .node-icon { position: absolute; left: -25px; font-size: 1rem; }
-        .timeline-date { font-family: 'Fira Code'; font-size: 0.65rem; color: var(--warm-amber); letter-spacing: 2px; }
-        .timeline-title { font-family: 'Inter'; font-size: 1.3rem; font-weight: 700; color: #fff; margin: 2px 0; }
-        .timeline-desc { font-size: 0.95rem; color: #b3a2c7; font-weight: 300; }
+        .node-icon { position: absolute; left: -28px; font-size: 1.1rem; }
+        .timeline-date { font-family: 'Fira Code'; font-size: 0.7rem; color: var(--warm-amber); letter-spacing: 3px; }
+        .timeline-title { font-family: 'Inter'; font-size: 1.5rem; font-weight: 700; color: #fff; margin: 4px 0; }
+        .timeline-desc { font-size: 1.05rem; color: #b3a2c7; font-weight: 300; }
 
-        .hex-card { border: 1px solid var(--border-gold); padding: 30px; background: linear-gradient(135deg, rgba(26, 11, 46, 0.6), transparent); position: relative; margin: 50px 0; backdrop-filter: blur(8px); overflow: hidden; }
+        .hex-card { border: 1px solid var(--border-gold); padding: 40px; background: linear-gradient(135deg, rgba(26, 11, 46, 0.6), transparent); position: relative; margin: 60px 0; backdrop-filter: blur(8px); overflow: hidden; }
         .hex-card::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 0l17.32 10v20L20 40 2.68 30V10z' fill='none' stroke='%238a2be2' stroke-width='0.5' stroke-opacity='0.15'/%3E%3C/svg%3E"); opacity: 0.3; z-index: -1; }
 
-        .legacy-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
-        .legacy-chip { padding: 6px 15px; border: 1px solid var(--border-gold); font-family: 'Fira Code'; font-size: 0.65rem; color: var(--rose-gold); background: rgba(255, 245, 225, 0.05); }
+        .legacy-grid { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 25px; }
+        .legacy-chip { padding: 8px 18px; border: 1px solid var(--border-gold); font-family: 'Fira Code'; font-size: 0.7rem; color: var(--rose-gold); background: rgba(255, 245, 225, 0.05); }
 
-        .sig-block { margin-top: 80px; text-align: center; }
-        .sig-img { max-width: 240px; filter: invert(1) sepia(1) saturate(3) hue-rotate(-15deg) brightness(1.2); mix-blend-mode: screen; opacity: 0.9; }
+        /* SIGNATURE ENGINE */
+        .sig-block { margin-top: 100px; text-align: center; }
+        .sig-img { 
+            max-width: 280px; 
+            filter: invert(1) sepia(1) saturate(3) hue-rotate(-15deg) brightness(1.2); 
+            mix-blend-mode: screen; 
+            opacity: 0.9; 
+            margin: 0 auto;
+            display: block;
+        }
 
-        /* --- iPHONE / MOBILE FIXES --- */
+        /* --- iPHONE / MOBILE REFINEMENT --- */
         @media (max-width: 768px) {
             nav { text-align: center; padding: 30px 0 0; }
-            .hero { margin-bottom: 40px; }
+            .fog-name { letter-spacing: 6px; }
+            .eternity-quote { font-size: 1.1rem; max-width: 95%; }
             .monument-grid { grid-template-columns: 1fr; gap: 20px; }
-            .monument-grid.reversed { display: flex; flex-direction: column-reverse; } /* Image on top */
-            .symbology-panel { aspect-ratio: auto; padding: 40px 20px; }
-            .symbols-container { flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 20px; }
-            .symbol-item { flex: 1 1 30%; }
-            .prose { text-align: left; }
+            .monument-grid.reversed { display: flex; flex-direction: column-reverse; }
+            .symbology-panel { aspect-ratio: auto; padding: 50px 20px; }
+            .symbols-container { flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 25px; }
+            .symbol-item { flex: 1 1 40%; }
+            .prose { text-align: left; font-size: 1.15rem; }
         }
     </style>
 </head>
@@ -155,7 +186,10 @@
         
         <header class="hero">
             <h1 class="fog-name" id="alias-target">EMMY</h1>
-            <div class="promise-clock" id="covenant-clock">SYMBOLS_OF_DEVOTION // SYNCING...</div>
+            <div class="promise-clock" id="covenant-clock">INITIATING_COVENANT_SYNC...</div>
+            <div class="eternity-quote">
+                She is my healing past, my joyful present, and my hopeful future all in one.
+            </div>
         </header>
 
         <section>
@@ -222,7 +256,7 @@
                     <div class="timeline-content">
                         <span class="timeline-date">APRIL 17, 2021</span>
                         <h3 class="timeline-title">The Covenant</h3>
-                        <p class="timeline-desc">We stood before God and family. Two histories, one future.</p>
+                        <p class="timeline-desc">Two histories, one future.</p>
                     </div>
                 </div>
                 <div class="timeline-event">
@@ -253,16 +287,7 @@
             <div class="prose">
                 Every Friday remains <span class="highlight">Sanctified & Sacred</span>. Our devotion is found in the quiet moments: the shared glow of a Target parking lot or the rugged ascent of <span class="highlight">Horton Creek</span>. 
                 <br><br>
-                She is the cook who turns a table into a feast for all, and the patient co-pilot who trusts in our direction. Her favorite color is <span class="highlight">Glitter</span>—a way of moving through the world, catching the light.
-            </div>
-        </section>
-
-        <section>
-            <div class="section-label">RADICAL LOVE // THE PEACE OF CHRIST</div>
-            <div class="prose">
-                Emily is a living exemplar of <span class="highlight">charity and grace</span>. Her devotion to Heavenly Father is a powerful connection that shifts the atmosphere. 
-                <br><br>
-                I have felt the weight of her prayers across the void, prompting me to ask: <span class="highlight">"Did you pray for me?"</span> She pleads for others with a faith that sparkles with hope, and watching her light grow is the most sacred experience of my life.
+                She is the cook who turns a table into a feast for all, and the patient co-pilot who trusts in our direction. Her favorite color is <span class="highlight">Glitter</span>—a way of moving through the world.
             </div>
         </section>
 
@@ -284,7 +309,7 @@
             update() { this.x += this.speedX; this.y += this.speedY; if (this.opacity < 1) this.opacity += 0.01; if (this.x > canvas.width) this.x = 0; if (this.x < 0) this.x = canvas.width; if (this.y > canvas.height) this.y = 0; if (this.y < 0) this.y = canvas.height; }
             draw() { ctx.fillStyle = `rgba(255, 179, 71, ${this.opacity * 0.3})`; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
         }
-        function init() { for (let i = 0; i < 60; i++) { particles.push(new Particle()); } }
+        function init() { for (let i = 0; i < 70; i++) { particles.push(new Particle()); } }
         function animate() { ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animate); }
         init(); animate();
 
