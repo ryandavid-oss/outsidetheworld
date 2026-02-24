@@ -271,73 +271,120 @@
     </div>
 
     <script>
-        const canvas = document.getElementById('glitter-canvas');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-        window.onresize = resize; resize();
-// UPDATED: High-Brightness Glitter Engine
-        class Particle {
-            constructor() { 
-                this.x = Math.random() * canvas.width; 
-                this.y = Math.random() * canvas.height; 
-                this.size = Math.random() * 3 + 0.5; // Slightly larger "sequins"
-                this.speedX = Math.random() * 0.4 - 0.2; 
-                this.speedY = Math.random() * 0.4 - 0.2; 
-                this.opacity = Math.random(); 
-                // Color variation: mostly gold, some pure white sparkles
-                this.color = Math.random() > 0.8 ? "255, 255, 255" : "255, 179, 71"; 
-            }
-            update() { 
-                this.x += this.speedX; 
-                this.y += this.speedY; 
-                if (this.opacity < 1) this.opacity += 0.01; 
-                if (this.x > canvas.width) this.x = 0; 
-                if (this.x < 0) this.x = canvas.width; 
-                if (this.y > canvas.height) this.y = 0; 
-                if (this.y < 0) this.y = canvas.height; 
-            }
-            draw() { 
-                ctx.shadowBlur = 10; // This creates the "Glow" effect
-                ctx.shadowColor = `rgba(${this.color}, ${this.opacity})`;
-                ctx.fillStyle = `rgba(${this.color}, ${this.opacity * 0.8})`; // Higher Alpha
-                ctx.beginPath(); 
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); 
-                ctx.fill(); 
-                ctx.shadowBlur = 0; // Reset for performance
-            }
+const canvas = document.getElementById('glitter-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+
+    function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    window.onresize = resize;
+    resize();
+
+    class Particle {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.size = Math.random() * 2.5 + 0.5; 
+            this.speedX = Math.random() * 0.3 - 0.15;
+            this.speedY = Math.random() * 0.3 - 0.15;
+            // High starting opacity for maximum punch
+            this.opacity = Math.random() * 0.5 + 0.5; 
+            this.twinkleSpeed = Math.random() * 0.02 + 0.01;
+            // 30% are pure white 'diamonds', 70% are warm gold
+            this.color = Math.random() > 0.7 ? "255, 255, 255" : "255, 185, 100";
         }
 
-        function init() { 
-            // Doubled the particle count for a denser shimmer
-            for (let i = 0; i < 150; i++) { 
-                particles.push(new Particle()); 
-            } 
-        }
-        function updateCovenant() {
-            const start = new Date("April 17, 2021 00:00:00");
-            const now = new Date();
-            let years = now.getFullYear() - start.getFullYear();
-            let months = now.getMonth() - start.getMonth();
-            let days = now.getDate() - start.getDate();
-            let hours = now.getHours() - start.getHours();
-            let mins = now.getMinutes() - start.getMinutes();
-            let secs = now.getSeconds() - start.getSeconds();
-            if (secs < 0) { secs += 60; mins--; }
-            if (mins < 0) { mins += 60; hours--; }
-            if (hours < 0) { hours += 24; days--; }
-            if (days < 0) { const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0); days += prevMonth.getDate(); months--; }
-            if (months < 0) { months += 12; years--; }
-            const pad = (n) => n.toString().padStart(2, '0');
-            document.getElementById('covenant-clock').textContent = `COVENANT_ELAPSED // ${pad(years)}Y:${pad(months)}M:${pad(days)}D:${pad(hours)}H:${pad(mins)}M:${pad(secs)}S`;
-        }
-        setInterval(updateCovenant, 1000);
+        update() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+            
+            // The Twinkle Logic: Pulsing the opacity
+            this.opacity += this.twinkleSpeed;
+            if (this.opacity > 1 || this.opacity < 0.3) {
+                this.twinkleSpeed *= -1;
+            }
 
-        const aliases = ["EMMY", "EMMY FLYNN", "EMMY LOU", "EMILY", "CORN PONE", "ELSA"];
-        let aliasIdx = 0; const target = document.getElementById('alias-target');
-        function cycleAlias() { target.style.opacity = '0'; target.style.filter = 'blur(15px)'; target.style.letterSpacing = '20px'; setTimeout(() => { aliasIdx = (aliasIdx + 1) % aliases.length; target.textContent = aliases[aliasIdx]; target.style.opacity = '1'; target.style.filter = 'blur(0)'; target.style.letterSpacing = '8px'; }, 1800); }
-        setInterval(cycleAlias, 7000);
-        document.addEventListener('DOMContentLoaded', updateCovenant);
-    </script>
+            if (this.x > canvas.width) this.x = 0;
+            if (this.x < 0) this.x = canvas.width;
+            if (this.y > canvas.height) this.y = 0;
+            if (this.y < 0) this.y = canvas.height;
+        }
+
+        draw() {
+            ctx.globalCompositeOperation = 'lighter'; // This makes them 'glow' when they overlap
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(${this.color}, ${this.opacity})`;
+            ctx.fill();
+            
+            // Add a secondary soft glow 'halo' around the brightest ones
+            if (this.opacity > 0.8) {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size * 2, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(${this.color}, ${this.opacity * 0.2})`;
+                ctx.fill();
+            }
+        }
+    }
+
+    function init() {
+        particles = [];
+        for (let i = 0; i < 180; i++) { // Increased density
+            particles.push(new Particle());
+        }
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => {
+            p.update();
+            p.draw();
+        });
+        requestAnimationFrame(animate);
+    }
+
+    /* --- MARRIAGE TIMER & ALIAS CYCLER --- */
+    function updateCovenant() {
+        const start = new Date("April 17, 2021 00:00:00");
+        const now = new Date();
+        let years = now.getFullYear() - start.getFullYear();
+        let months = now.getMonth() - start.getMonth();
+        let days = now.getDate() - start.getDate();
+        let hours = now.getHours() - start.getHours();
+        let mins = now.getMinutes() - start.getMinutes();
+        let secs = now.getSeconds() - start.getSeconds();
+        if (secs < 0) { secs += 60; mins--; }
+        if (mins < 0) { mins += 60; hours--; }
+        if (hours < 0) { hours += 24; days--; }
+        if (days < 0) { const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0); days += prevMonth.getDate(); months--; }
+        if (months < 0) { months += 12; years--; }
+        const pad = (n) => n.toString().padStart(2, '0');
+        document.getElementById('covenant-clock').textContent = `COVENANT_ELAPSED // ${pad(years)}Y:${pad(months)}M:${pad(days)}D:${pad(hours)}H:${pad(mins)}M:${pad(secs)}S`;
+    }
+
+    const aliases = ["EMMY", "EMMY FLYNN", "EMMY LOU", "EMILY", "CORN PONE", "ELSA"];
+    let aliasIdx = 0; 
+    const target = document.getElementById('alias-target');
+    
+    function cycleAlias() { 
+        target.style.opacity = '0'; 
+        target.style.filter = 'blur(15px)'; 
+        target.style.letterSpacing = '20px'; 
+        setTimeout(() => { 
+            aliasIdx = (aliasIdx + 1) % aliases.length; 
+            target.textContent = aliases[aliasIdx]; 
+            target.style.opacity = '1'; 
+            target.style.filter = 'blur(0)'; 
+            target.style.letterSpacing = '8px'; 
+        }, 1800); 
+    }
+
+    init();
+    animate();
+    setInterval(updateCovenant, 1000);
+    setInterval(cycleAlias, 7000);
+    document.addEventListener('DOMContentLoaded', updateCovenant);    </script>
 </body>
 </html>
