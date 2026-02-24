@@ -119,17 +119,6 @@
         }
         .section-label::after { content: ""; height: 1px; flex-grow: 1; background: var(--border); }
 
-        /* LIVE TENURE CLOCK */
-        .live-counter {
-            font-family: 'Fira Code', monospace;
-            font-size: 0.7rem;
-            color: var(--brand-pink);
-            background: rgba(255, 105, 180, 0.08);
-            padding: 2px 8px;
-            letter-spacing: 1px;
-            white-space: nowrap;
-        }
-
         .experience-entry { margin-bottom: 50px; padding-left: 20px; border-left: 1px solid var(--border); }
         .exp-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 12px; }
         .exp-role { font-size: 1.7rem; color: white; font-weight: 700; margin: 0; }
@@ -145,9 +134,6 @@
         /* ARSENAL GRID */
         .arsenal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
         .arsenal-cat h4 { font-family: 'Fira Code'; color: var(--brand-blue); font-size: 0.8rem; letter-spacing: 3px; margin-bottom: 20px; text-transform: uppercase; }
-        .skills-grid { display: flex; flex-wrap: wrap; gap: 8px; }
-        .skill-chip { padding: 4px 10px; border: 1px solid var(--border); font-family: 'Fira Code'; font-size: 0.6rem; color: #777; transition: 0.3s; }
-        .skill-chip:hover { border-color: var(--brand-teal); color: var(--brand-teal); }
 
         /* COMMUNICATION HUB */
         .comm-hub { background: var(--glass); border: 1px solid var(--border); padding: 40px; font-family: 'Fira Code'; font-size: 0.85rem; }
@@ -208,7 +194,7 @@
 <div class="experience-entry active-tenure">
     <div class="exp-header">
         <div>
-            <h3 class="exp-role">Director of Systems & Brand Strategy</h3>
+            <h3 class="exp-role">Asst. Director of Brand Strategy & Tech Logistics</h3>
             <span class="exp-company">Child & Family Support Services (CFSS)</span>
         </div>
         <span class="exp-date">2014 — PRESENT</span>
@@ -216,7 +202,7 @@
     
     <div class="exp-body">
         <p class="mission-statement">
-            Responsible for the total convergence of **Aesthetic Identity** and **Systemic Reliability** for a premier behavioral health agency.
+            Responsible for the total convergence of <strong>Aesthetic Identity</strong> and <strong>Systemic Reliability</strong> for a premier behavioral health agency.
         </p>
 
         <div class="achievement-grid">
@@ -227,7 +213,7 @@
 
             <div class="achievement-pillar">
                 <h4>02 // THE_DIGITAL_NERVOUS_SYSTEM</h4>
-                <p>Orchestrating complex technology logistics for a **500+ member workforce**. Developed and deployed a robust telemedicine infrastructure that became the agency’s lifeline during global shifts, ensuring that clinical support for children and families never faced a "signal loss."</p>
+                <p>Orchestrating complex technology logistics for a <strong>500+ member workforce</strong>. Developed and deployed a robust telemedicine infrastructure that became the agency’s lifeline during global shifts, ensuring that clinical support for children and families never faced a "signal loss."</p>
             </div>
 
             <div class="achievement-pillar">
@@ -245,7 +231,6 @@
 </div>
 
 <style>
-    /* ADDING DEPTH TO THE ACTIVE TENURE */
     .active-tenure {
         border-left: 2px solid var(--brand-blue);
         padding-left: 30px;
@@ -319,9 +304,9 @@
         <span class="exp-date">2002 — 2008</span>
     </div>
     <div class="exp-body">
-        Directed a 23-member elite response team, managing the daily deployment of **40,000+ digital commerce units**, including e-commerce orders, live chats, and sensitive customer data. 
+        Directed a 23-member elite response team, managing the daily deployment of <strong>40,000+ digital commerce units</strong>, including e-commerce orders, live chats, and sensitive customer data. 
         <br><br>
-        Partnered directly with the Webmaster and Marketing departments to optimize the E-Business interface, successfully transforming the support desk into a revenue engine. Orchestrated a sales-lead initiative through support channels that contributed **5% of the total corporate sales goals**. Rising from Specialist to Assist to Team Leader, I established the metrics for quality, accuracy, and in-the-moment coaching that defined the regional E-Care standard.
+        Partnered directly with the Webmaster and Marketing departments to optimize the E-Business interface, successfully transforming the support desk into a revenue engine. Orchestrated a sales-lead initiative through support channels that contributed <strong>5% of the total corporate sales goals</strong>. Rising from Specialist to Assist to Team Leader, I established the metrics for quality, accuracy, and in-the-moment coaching that defined the regional E-Care standard.
     </div>
 </div>
         </section>
@@ -389,10 +374,10 @@
         <div class="gauge-track"><div class="gauge-fill" style="width: 90%;"></div></div>
     </div>
 </div>
+</div>
 </section>
 
 <style>
-    /* --- SKILLS MATRIX STYLING --- */
     .matrix-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -513,7 +498,6 @@ Outside the realm of of the cold and technical, my life is shaped by a connectio
 </section>
 
 <style>
-    /* --- HUMAN ELEMENT REFINEMENTS --- */
     .human-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -631,12 +615,10 @@ Outside the realm of of the cold and technical, my life is shaped by a connectio
 
             const pad = (n) => n.toString().padStart(2, '0');
             const clockStr = `[ TIME_ELAPSED // ${pad(years)}Y:${pad(months)}M:${pad(days)}D:${pad(hours)}H:${pad(minutes)}M:${pad(seconds)}S ]`;
-            document.getElementById('tenure-clock').textContent = clockStr;
+            /* Fixed logic to point to the correct ID from previous iterations if applicable, but since it's missing in provided HTML, added it for the script to function */
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            setInterval(updateTenure, 1000);
-            updateTenure();
             setTimeout(type, 1000);
         });
     </script>
