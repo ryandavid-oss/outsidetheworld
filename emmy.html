@@ -22,16 +22,15 @@
             font-family: 'Inter', sans-serif;
             margin: 0; padding: 0;
             overflow-x: hidden;
-            line-height: 1.9;
+            line-height: 1.8;
+            -webkit-tap-highlight-color: transparent; /* Cleaner iPhone interaction */
         }
 
-        /* GLITTER OVERLAY */
         #glitter-canvas {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none; z-index: 1002;
         }
 
-        /* SOFT RADIANCE */
         body::after {
             content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: radial-gradient(circle at center, rgba(255, 179, 71, 0.04) 0%, transparent 85%);
@@ -40,40 +39,40 @@
         }
         @keyframes breathe { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
 
-        nav { padding: 60px 40px 10px; text-align: left; position: relative; z-index: 1001; }
-        .nav-logo { width: 180px; filter: sepia(1) saturate(2) hue-rotate(-20deg) brightness(1.2); opacity: 0.7; }
+        nav { padding: 40px 20px 0; text-align: left; position: relative; z-index: 1001; }
+        .nav-logo { width: 160px; filter: sepia(1) saturate(2) hue-rotate(-20deg) brightness(1.2); opacity: 0.7; }
 
-        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px 150px; position: relative; z-index: 1003; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px 100px; position: relative; z-index: 1003; }
 
-        .hero { text-align: center; margin-bottom: 80px; padding-top: 40px; }
+        .hero { text-align: center; margin-bottom: 60px; padding-top: 20px; }
         .fog-name { 
-            font-size: clamp(2.5rem, 8vw, 5rem); 
-            font-weight: 900; letter-spacing: 12px; margin: 0; 
+            font-size: clamp(2.2rem, 10vw, 5rem); 
+            font-weight: 900; letter-spacing: 8px; margin: 0; 
             line-height: 1.2; text-transform: uppercase;
             background: linear-gradient(to bottom, #fff 10%, var(--rose-gold) 50%, var(--warm-amber) 90%);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 20px rgba(255,179,71,0.3));
+            filter: drop-shadow(0 0 15px rgba(255,179,71,0.3));
             transition: opacity 1.8s, filter 1.8s, letter-spacing 1.8s;
         }
 
         .promise-clock {
             font-family: 'Fira Code'; color: var(--warm-amber);
-            font-size: 0.75rem; letter-spacing: 5px; margin-top: 25px;
+            font-size: clamp(0.6rem, 2vw, 0.75rem); 
+            letter-spacing: 3px; margin-top: 20px;
             text-transform: uppercase;
         }
 
-        /* --- NEW MONUMENT GRID SYSTEM --- */
+        /* --- RESPONSIVE MONUMENT GRID --- */
         .monument-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            margin: 80px 0;
+            gap: 30px;
+            margin: 60px 0;
             align-items: stretch;
         }
 
-        /* PORTRAIT FRAMES */
         .portrait-frame {
-            aspect-ratio: 3/4; /* Enforces portrait orientation */
+            aspect-ratio: 3/4;
             border: 1px solid var(--border-gold);
             position: relative; overflow: hidden;
             box-shadow: 0 0 20px rgba(255, 179, 71, 0.1);
@@ -83,91 +82,64 @@
             filter: brightness(0.8) contrast(1.1) sepia(0.2);
             transition: 0.8s ease;
         }
-        .portrait-frame:hover .monument-img { filter: brightness(1) contrast(1) sepia(0); }
 
-        /* SYMBOLOGY PANELS */
         .symbology-panel {
-            aspect-ratio: 3/4;            display: flex;
+            display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             border: 1px solid var(--border-gold);
             background: linear-gradient(135deg, rgba(26, 11, 46, 0.4), transparent);
-            box-shadow: 0 0 30px rgba(255, 179, 71, 0.15), inset 0 0 20px rgba(26, 11, 46, 0.5);
-            padding: 40px;
+            padding: 30px;
             position: relative;
             backdrop-filter: blur(5px);
         }
 
         .symbols-container {
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-            font-size: 3rem;
-            color: var(--warm-amber);
-            text-shadow: 0 0 15px var(--warm-amber);
-            filter: drop-shadow(0 0 10px var(--rose-gold));
+            display: flex; flex-direction: column; gap: 30px; width: 100%;
         }
         
-        .symbol-label {
-            font-family: 'Fira Code'; font-size: 0.6rem; letter-spacing: 4px; 
-            color: var(--rose-gold); text-transform: uppercase; margin-top: 5px; text-align: center;
-        }
+        .symbol-item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+        .symbol-glyph { font-size: 2.5rem; color: var(--warm-amber); text-shadow: 0 0 10px var(--warm-amber); }
+        .symbol-label { font-family: 'Fira Code'; font-size: 0.6rem; letter-spacing: 3px; color: var(--rose-gold); text-transform: uppercase; text-align: center; }
 
-        /* SECTION STYLING */
         .section-label {
             font-family: 'Fira Code'; color: var(--rose-gold);
-            font-size: 0.75rem; letter-spacing: 6px; text-transform: uppercase;
-            margin: 100px 0 40px; display: flex; align-items: center; gap: 20px;
+            font-size: 0.7rem; letter-spacing: 5px; text-transform: uppercase;
+            margin: 80px 0 30px; display: flex; align-items: center; gap: 15px;
         }
         .section-label::after { content: ""; height: 1px; flex-grow: 1; background: var(--border-gold); }
 
-        .prose { font-size: 1.3rem; font-weight: 300; color: #b3a2c7; max-width: 900px; text-align: justify; margin-bottom: 2rem; }
-        .highlight { 
-            color: var(--warm-amber); font-weight: 500; font-style: italic; 
-            text-shadow: 0 0 8px rgba(255, 179, 71, 0.4);
-        }
+        .prose { font-size: 1.15rem; font-weight: 300; color: #b3a2c7; text-align: justify; margin-bottom: 1.5rem; }
+        .highlight { color: var(--warm-amber); font-weight: 500; font-style: italic; text-shadow: 0 0 8px rgba(255, 179, 71, 0.4); }
 
-        /* TIMELINE */
-        .timeline-container { position: relative; padding: 40px 0; margin-left: 30px; border-left: 1px solid var(--border-gold); }
-        .timeline-event { position: relative; margin-bottom: 60px; padding-left: 40px; }
-        .timeline-node {
-            position: absolute; left: -6px; top: 5px; width: 11px; height: 11px;
-            background: var(--warm-amber); border-radius: 50%; box-shadow: 0 0 15px var(--warm-amber);
-        }
-        .node-icon { position: absolute; left: -30px; font-size: 1.2rem; }
-        .timeline-date { font-family: 'Fira Code'; font-size: 0.75rem; color: var(--warm-amber); letter-spacing: 3px; }
-        .timeline-title { font-family: 'Inter'; font-size: 1.6rem; font-weight: 700; color: #fff; margin: 5px 0; }
-        .timeline-desc { font-size: 1.1rem; color: #b3a2c7; font-weight: 300; }
+        .timeline-container { position: relative; padding: 20px 0; margin-left: 20px; border-left: 1px solid var(--border-gold); }
+        .timeline-event { position: relative; margin-bottom: 40px; padding-left: 30px; }
+        .timeline-node { position: absolute; left: -6px; top: 5px; width: 11px; height: 11px; background: var(--warm-amber); border-radius: 50%; box-shadow: 0 0 15px var(--warm-amber); }
+        .node-icon { position: absolute; left: -25px; font-size: 1rem; }
+        .timeline-date { font-family: 'Fira Code'; font-size: 0.65rem; color: var(--warm-amber); letter-spacing: 2px; }
+        .timeline-title { font-family: 'Inter'; font-size: 1.3rem; font-weight: 700; color: #fff; margin: 2px 0; }
+        .timeline-desc { font-size: 0.95rem; color: #b3a2c7; font-weight: 300; }
 
-        .hex-card {
-            border: 1px solid var(--border-gold); padding: 50px;
-            background: linear-gradient(135deg, rgba(26, 11, 46, 0.6), transparent);
-            position: relative; margin: 80px 0; backdrop-filter: blur(8px); overflow: hidden;
-        }
-        .hex-card::after {
-            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 0l17.32 10v20L20 40 2.68 30V10z' fill='none' stroke='%238a2be2' stroke-width='0.5' stroke-opacity='0.15'/%3E%3C/svg%3E");
-            opacity: 0.4; z-index: -1;
-        }
+        .hex-card { border: 1px solid var(--border-gold); padding: 30px; background: linear-gradient(135deg, rgba(26, 11, 46, 0.6), transparent); position: relative; margin: 50px 0; backdrop-filter: blur(8px); overflow: hidden; }
+        .hex-card::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 0l17.32 10v20L20 40 2.68 30V10z' fill='none' stroke='%238a2be2' stroke-width='0.5' stroke-opacity='0.15'/%3E%3C/svg%3E"); opacity: 0.3; z-index: -1; }
 
-        .legacy-grid { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
-        .legacy-chip { 
-            padding: 8px 20px; border: 1px solid var(--border-gold); 
-            font-family: 'Fira Code'; font-size: 0.75rem; color: var(--rose-gold);
-            background: rgba(255, 245, 225, 0.05);
-        }
+        .legacy-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+        .legacy-chip { padding: 6px 15px; border: 1px solid var(--border-gold); font-family: 'Fira Code'; font-size: 0.65rem; color: var(--rose-gold); background: rgba(255, 245, 225, 0.05); }
 
-        .sig-block { margin-top: 120px; text-align: center; }
-        .sig-img { max-width: 300px; filter: invert(1) sepia(1) saturate(3) hue-rotate(-15deg) brightness(1.2); mix-blend-mode: screen; opacity: 0.9; }
+        .sig-block { margin-top: 80px; text-align: center; }
+        .sig-img { max-width: 240px; filter: invert(1) sepia(1) saturate(3) hue-rotate(-15deg) brightness(1.2); mix-blend-mode: screen; opacity: 0.9; }
 
+        /* --- iPHONE / MOBILE FIXES --- */
         @media (max-width: 768px) {
-            nav { text-align: center; }
-            .fog-name { font-size: 2.2rem; letter-spacing: 6px; }
-            /* Stack grids on mobile, maintaining order */
+            nav { text-align: center; padding: 30px 0 0; }
+            .hero { margin-bottom: 40px; }
             .monument-grid { grid-template-columns: 1fr; gap: 20px; }
-            /* On mobile, shift symbology below image for the second grid */
-            .monument-grid.reversed { display: flex; flex-direction: column-reverse; }
+            .monument-grid.reversed { display: flex; flex-direction: column-reverse; } /* Image on top */
+            .symbology-panel { aspect-ratio: auto; padding: 40px 20px; }
+            .symbols-container { flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 20px; }
+            .symbol-item { flex: 1 1 30%; }
+            .prose { text-align: left; }
         }
     </style>
 </head>
@@ -192,10 +164,10 @@
                 In the profound silence that followed a metaphorical winter, I wandered through a desert of my own making. After the demise of a long marriage, my spirit felt substantially crushed; I moved through the world with a heart held cautiously aloof. I was a man who had accepted the cold, convinced that the <span class="highlight">"warm breeze"</span> of true connection was a myth.
             </div>
             <div class="prose">
-                But the universe holds its own timing. It was a quick weekend getaway to the <span class="highlight">California coast</span> that set our orbits on a collision course. Against the backdrop of a world beginning to shutter, state lines were bridged by the <span class="highlight">eleventh hour</span>.
+                But the universe holds its own timing. It was a quick getaway to the <span class="highlight">California coast</span> that set our orbits on a collision course. Against the backdrop of a world beginning to shutter, state lines were bridged by the <span class="highlight">eleventh hour</span>.
             </div>
             <div class="prose">
-                To meet Emily was to be called home. We are the youngest and the oldest, two halves of a long-sought whole. Her spirit remains undimmed, <span class="highlight">sparkling</span> with resilience. She became my <span class="highlight">"Elsa,"</span> the calm in every storm. Today, the desert has vanished. We are <span class="highlight">"Kings and Queens"</span> in a kingdom of our own making.
+                To meet Emily was to be called home. We are the youngest and the oldest, two halves of a long-sought whole. Her spirit remains undimmed, <span class="highlight">sparkling</span> with resilience. She became my <span class="highlight">"Elsa,"</span> the calm in every storm.
             </div>
         </section>
 
@@ -205,15 +177,9 @@
             </div>
             <div class="symbology-panel">
                 <div class="symbols-container">
-                    <div style="text-align: center;">
-                        Is<div class="symbol-label">THE_SUN</div>
-                    </div>
-                    <div style="text-align: center;">
-                        ☾<div class="symbol-label">THE_MOON</div>
-                    </div>
-                    <div style="text-align: center;">
-                        ✨<div class="symbol-label">THE_STARS</div>
-                    </div>
+                    <div class="symbol-item"><span class="symbol-glyph">☀</span><div class="symbol-label">THE_SUN</div></div>
+                    <div class="symbol-item"><span class="symbol-glyph">☾</span><div class="symbol-label">THE_MOON</div></div>
+                    <div class="symbol-item"><span class="symbol-glyph">✨</span><div class="symbol-label">THE_STARS</div></div>
                 </div>
             </div>
         </div>
@@ -221,9 +187,9 @@
         <section>
             <div class="section-label">THE_SACRIFICE_OF_THE_HEART</div>
             <div class="prose">
-                I am humbled daily by the grace she has shown in transplanting her entire life for the sake of our bond. She faced the tempests of the legal system with a mother's fierce love, fighting to bring her daughters into the sanctuary we were building together. 
+                I am humbled daily by the grace she has shown in transplanting her entire life for our bond. She faced the legal system with a mother's fierce love, fighting to bring her daughters into our sanctuary. 
                 <br><br>
-                Upon her arrival, she <span class="highlight">sanctified a home</span>. With an artist's eye and a heart that loves in technicolor, she invested herself fully to clothe our residence in beauty and peace. She has folded my son and daughters into her heart as her own, ensuring that every soul under our roof—from the three S children to the newest light, W—feels the profound safety of being truly accepted.
+                Upon her arrival, she <span class="highlight">sanctified a home</span>. With an artist's eye, she invested herself fully to clothe our residence in beauty and peace. She has folded my son and daughters into her heart as her own, ensuring every soul—from the three S children to the newest light, W—feels truly accepted.
             </div>
             <div class="legacy-grid">
                 <div class="legacy-chip">THE_DAUGHTERS // K + T + C + M</div>
@@ -240,7 +206,7 @@
                     <div class="timeline-content">
                         <span class="timeline-date">MARCH 20, 2020</span>
                         <h3 class="timeline-title">The Collision</h3>
-                        <p class="timeline-desc">Search diameters overlapped. The first signal identified.</p>
+                        <p class="timeline-desc">Search diameters overlapped across state lines.</p>
                     </div>
                 </div>
                 <div class="timeline-event">
@@ -256,7 +222,7 @@
                     <div class="timeline-content">
                         <span class="timeline-date">APRIL 17, 2021</span>
                         <h3 class="timeline-title">The Covenant</h3>
-                        <p class="timeline-desc">Two histories woven into one future.</p>
+                        <p class="timeline-desc">We stood before God and family. Two histories, one future.</p>
                     </div>
                 </div>
                 <div class="timeline-event">
@@ -273,15 +239,9 @@
         <div class="monument-grid reversed">
             <div class="symbology-panel">
                 <div class="symbols-container">
-                    <div style="text-align: center;">
-                        👟<div class="symbol-label">THE_The Endurance</div>
-                    </div>
-                    <div style="text-align: center;">
-                        🍲<div class="symbol-label">THE_NOURISHMENT</div>
-                    </div>
-                    <div style="text-align: center;">
-                        ♥<div class="symbol-label">THE_HEART</div>
-                    </div>
+                    <div class="symbol-item"><span class="symbol-glyph">👟</span><div class="symbol-label">ENDURANCE</div></div>
+                    <div class="symbol-item"><span class="symbol-glyph">🍲</span><div class="symbol-label">NOURISHMENT</div></div>
+                    <div class="symbol-item"><span class="symbol-glyph">♥</span><div class="symbol-label">THE_HEART</div></div>
                 </div>
             </div>
             <div class="portrait-frame">
@@ -293,16 +253,16 @@
             <div class="prose">
                 Every Friday remains <span class="highlight">Sanctified & Sacred</span>. Our devotion is found in the quiet moments: the shared glow of a Target parking lot or the rugged ascent of <span class="highlight">Horton Creek</span>. 
                 <br><br>
-                She is the cook who turns a table into a feast for all, and the patient passenger princess who trusts in our shared direction. Her favorite color is <span class="highlight">Glitter</span>—not just a shade, but a way of moving through the world.
+                She is the cook who turns a table into a feast for all, and the patient co-pilot who trusts in our direction. Her favorite color is <span class="highlight">Glitter</span>—a way of moving through the world, catching the light.
             </div>
         </section>
 
         <section>
             <div class="section-label">RADICAL LOVE // THE PEACE OF CHRIST</div>
             <div class="prose">
-                Emily is a living exemplar of <span class="highlight">charity and grace</span>. She refuses to allow the dimming of any spirit under her stewardship or care. Her devotion to God our Heavenly Father is a powerful connection that shifts the very atmosphere. 
+                Emily is a living exemplar of <span class="highlight">charity and grace</span>. Her devotion to Heavenly Father is a powerful connection that shifts the atmosphere. 
                 <br><br>
-                I have felt the tangible weight of her prayers across the void, moments where my soul was stilled and settled, prompting me to ask: <span class="highlight">"Did you pray for me?"</span> She pleads for others with a faith that sparkles with hope, and watching her light grow is the most sacred experience of my life.
+                I have felt the weight of her prayers across the void, prompting me to ask: <span class="highlight">"Did you pray for me?"</span> She pleads for others with a faith that sparkles with hope, and watching her light grow is the most sacred experience of my life.
             </div>
         </section>
 
@@ -314,50 +274,42 @@
     </div>
 
     <script>
-        /* --- GLITTER ENGINE & CLOCKS (SAME AS BEFORE) --- */
         const canvas = document.getElementById('glitter-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
         function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
         window.onresize = resize; resize();
         class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2; this.speedX = Math.random() * 0.5 - 0.25;
-                this.speedY = Math.random() * 0.5 - 0.25; this.opacity = Math.random();
-            }
-            update() {
-                this.x += this.speedX; this.y += this.speedY;
-                if (this.opacity < 1) this.opacity += 0.01;
-                if (this.x > canvas.width) this.x = 0; if (this.x < 0) this.x = canvas.width;
-                if (this.y > canvas.height) this.y = 0; if (this.y < 0) this.y = canvas.height;
-            }
+            constructor() { this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height; this.size = Math.random() * 2; this.speedX = Math.random() * 0.4 - 0.2; this.speedY = Math.random() * 0.4 - 0.2; this.opacity = Math.random(); }
+            update() { this.x += this.speedX; this.y += this.speedY; if (this.opacity < 1) this.opacity += 0.01; if (this.x > canvas.width) this.x = 0; if (this.x < 0) this.x = canvas.width; if (this.y > canvas.height) this.y = 0; if (this.y < 0) this.y = canvas.height; }
             draw() { ctx.fillStyle = `rgba(255, 179, 71, ${this.opacity * 0.3})`; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
         }
-        function init() { for (let i = 0; i < 100; i++) { particles.push(new Particle()); } }
+        function init() { for (let i = 0; i < 60; i++) { particles.push(new Particle()); } }
         function animate() { ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animate); }
         init(); animate();
 
         function updateCovenant() {
             const start = new Date("April 17, 2021 00:00:00");
-            const now = new Date(); const diff = now - start;
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-            const mins = Math.floor((diff / (1000 * 60)) % 60);
-            const secs = Math.floor((diff / 1000) % 60);
-            document.getElementById('covenant-clock').textContent = `MARRIED // ${days}D:${hours}H:${mins}M:${secs}S`;
+            const now = new Date();
+            let years = now.getFullYear() - start.getFullYear();
+            let months = now.getMonth() - start.getMonth();
+            let days = now.getDate() - start.getDate();
+            let hours = now.getHours() - start.getHours();
+            let mins = now.getMinutes() - start.getMinutes();
+            let secs = now.getSeconds() - start.getSeconds();
+            if (secs < 0) { secs += 60; mins--; }
+            if (mins < 0) { mins += 60; hours--; }
+            if (hours < 0) { hours += 24; days--; }
+            if (days < 0) { const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0); days += prevMonth.getDate(); months--; }
+            if (months < 0) { months += 12; years--; }
+            const pad = (n) => n.toString().padStart(2, '0');
+            document.getElementById('covenant-clock').textContent = `COVENANT_ELAPSED // ${pad(years)}Y:${pad(months)}M:${pad(days)}D:${pad(hours)}H:${pad(mins)}M:${pad(secs)}S`;
         }
         setInterval(updateCovenant, 1000);
 
         const aliases = ["EMMY", "EMMY FLYNN", "EMMY LOU", "EMILY", "CORN PONE", "ELSA"];
         let aliasIdx = 0; const target = document.getElementById('alias-target');
-        function cycleAlias() {
-            target.style.opacity = '0'; target.style.filter = 'blur(15px)'; target.style.letterSpacing = '30px';
-            setTimeout(() => {
-                aliasIdx = (aliasIdx + 1) % aliases.length; target.textContent = aliases[aliasIdx];
-                target.style.opacity = '1'; target.style.filter = 'blur(0)'; target.style.letterSpacing = '12px';
-            }, 1800);
-        }
+        function cycleAlias() { target.style.opacity = '0'; target.style.filter = 'blur(15px)'; target.style.letterSpacing = '20px'; setTimeout(() => { aliasIdx = (aliasIdx + 1) % aliases.length; target.textContent = aliases[aliasIdx]; target.style.opacity = '1'; target.style.filter = 'blur(0)'; target.style.letterSpacing = '8px'; }, 1800); }
         setInterval(cycleAlias, 7000);
         document.addEventListener('DOMContentLoaded', updateCovenant);
     </script>
