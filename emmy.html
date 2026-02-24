@@ -44,24 +44,8 @@
 
         .container { max-width: 1000px; margin: 0 auto; padding: 0 20px 100px; position: relative; z-index: 1003; }
 
-        /* HERO SECTION - STABILIZED FOR MOBILE */
-        .hero { 
-            text-align: center; 
-            margin-bottom: 60px; 
-            padding-top: 20px; 
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        
-        /* Fixed height container to prevent layout shifting/jumping */
-        .name-container {
-            height: 120px; 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-        }
+        .hero { text-align: center; margin-bottom: 60px; padding-top: 20px; display: flex; flex-direction: column; align-items: center; }
+        .name-container { height: 120px; display: flex; align-items: center; justify-content: center; width: 100%; }
 
         .fog-name { 
             font-size: clamp(2.2rem, 10vw, 5rem); 
@@ -89,61 +73,20 @@
             letter-spacing: 1px;
             text-shadow: 0 0 15px rgba(255, 255, 255, 0.6), 0 0 30px rgba(255, 255, 255, 0.2);
             animation: eternityPulse 8s infinite ease-in-out;
-            max-width: 80%;
-            margin-left: auto;
-            margin-right: auto;
+            max-width: 80%; margin-left: auto; margin-right: auto;
         }
-        @keyframes eternityPulse {
-            0%, 100% { opacity: 0.7; transform: scale(0.98); }
-            50% { opacity: 1; transform: scale(1); }
-        }
+        @keyframes eternityPulse { 0%, 100% { opacity: 0.7; transform: scale(0.98); } 50% { opacity: 1; transform: scale(1); } }
 
-        /* --- MONUMENT GRID --- */
-        .monument-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            margin: 80px 0;
-            align-items: stretch;
-        }
-
-        .portrait-frame {
-            aspect-ratio: 3/4;
-            border: 1px solid var(--border-gold);
-            position: relative; overflow: hidden;
-            box-shadow: 0 0 20px rgba(255, 179, 71, 0.1);
-        }
-        .monument-img {
-            width: 100%; height: 100%; object-fit: cover; object-position: center;
-            filter: brightness(0.8) contrast(1.1) sepia(0.2);
-            transition: 0.8s ease;
-        }
-
-        .symbology-panel {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            border: 1px solid var(--border-gold);
-            background: linear-gradient(135deg, rgba(26, 11, 46, 0.4), transparent);
-            padding: 40px;
-            position: relative;
-            backdrop-filter: blur(5px);
-        }
-
-        .symbols-container {
-            display: flex; flex-direction: column; gap: 40px; width: 100%;
-        }
-        
+        .monument-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin: 80px 0; align-items: stretch; }
+        .portrait-frame { aspect-ratio: 3/4; border: 1px solid var(--border-gold); position: relative; overflow: hidden; box-shadow: 0 0 20px rgba(255, 179, 71, 0.1); }
+        .monument-img { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: brightness(0.8) contrast(1.1) sepia(0.2); transition: 0.8s ease; }
+        .symbology-panel { display: flex; flex-direction: column; justify-content: center; align-items: center; border: 1px solid var(--border-gold); background: linear-gradient(135deg, rgba(26, 11, 46, 0.4), transparent); padding: 40px; position: relative; backdrop-filter: blur(5px); }
+        .symbols-container { display: flex; flex-direction: column; gap: 40px; width: 100%; }
         .symbol-item { display: flex; flex-direction: column; align-items: center; gap: 10px; }
         .symbol-glyph { font-size: 3rem; color: var(--warm-amber); text-shadow: 0 0 15px var(--warm-amber); }
         .symbol-label { font-family: 'Fira Code'; font-size: 0.65rem; letter-spacing: 4px; color: var(--rose-gold); text-transform: uppercase; text-align: center; }
 
-        .section-label {
-            font-family: 'Fira Code'; color: var(--rose-gold);
-            font-size: 0.75rem; letter-spacing: 6px; text-transform: uppercase;
-            margin: 100px 0 40px; display: flex; align-items: center; gap: 20px;
-        }
+        .section-label { font-family: 'Fira Code'; color: var(--rose-gold); font-size: 0.75rem; letter-spacing: 6px; text-transform: uppercase; margin: 100px 0 40px; display: flex; align-items: center; gap: 20px; }
         .section-label::after { content: ""; height: 1px; flex-grow: 1; background: var(--border-gold); }
 
         .prose { font-size: 1.25rem; font-weight: 300; color: #b3a2c7; text-align: justify; margin-bottom: 2rem; }
@@ -157,34 +100,23 @@
         .timeline-title { font-family: 'Inter'; font-size: 1.5rem; font-weight: 700; color: #fff; margin: 4px 0; }
         .timeline-desc { font-size: 1.05rem; color: #b3a2c7; font-weight: 300; }
 
-        .hex-card { border: 1px solid var(--border-gold); padding: 40px; background: linear-gradient(135deg, rgba(26, 11, 46, 0.6), transparent); position: relative; margin: 60px 0; backdrop-filter: blur(8px); overflow: hidden; }
+        .hex-card { border: 1px solid var(--border-gold); padding: 50px; background: linear-gradient(135deg, rgba(26, 11, 46, 0.6), transparent); position: relative; margin: 60px 0; backdrop-filter: blur(8px); overflow: hidden; }
         .hex-card::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 0l17.32 10v20L20 40 2.68 30V10z' fill='none' stroke='%238a2be2' stroke-width='0.5' stroke-opacity='0.15'/%3E%3C/svg%3E"); opacity: 0.3; z-index: -1; }
 
         .legacy-grid { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 25px; }
         .legacy-chip { padding: 8px 18px; border: 1px solid var(--border-gold); font-family: 'Fira Code'; font-size: 0.7rem; color: var(--rose-gold); background: rgba(255, 245, 225, 0.05); }
 
-        /* SIGNATURE BLEND */
         .sig-block { margin-top: 100px; text-align: center; }
-        .sig-img { 
-            max-width: 280px; 
-            filter: invert(1) sepia(1) saturate(3) hue-rotate(-15deg) brightness(1.2); 
-            mix-blend-mode: screen; 
-            opacity: 0.9; 
-            margin: 0 auto;
-            display: block;
-        }
+        .sig-img { max-width: 280px; filter: invert(1) sepia(1) saturate(3) hue-rotate(-15deg) brightness(1.2); mix-blend-mode: screen; opacity: 0.9; margin: 0 auto; display: block; }
 
         @media (max-width: 768px) {
             nav { text-align: center; padding: 30px 0 0; }
-            .name-container { height: 100px; } /* Slightly smaller for mobile */
-            .fog-name { letter-spacing: 6px; }
-            .eternity-quote { font-size: 1.1rem; max-width: 95%; }
+            .name-container { height: 100px; }
             .monument-grid { grid-template-columns: 1fr; gap: 20px; }
             .monument-grid.reversed { display: flex; flex-direction: column-reverse; }
             .symbology-panel { aspect-ratio: auto; padding: 50px 20px; }
             .symbols-container { flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 25px; }
             .symbol-item { flex: 1 1 40%; }
-            .prose { text-align: left; font-size: 1.15rem; }
         }
     </style>
 </head>
@@ -202,7 +134,7 @@
             <div class="name-container">
                 <h1 class="fog-name" id="alias-target">EMMY</h1>
             </div>
-            <div class="promise-clock" id="covenant-clock">INITIATING_COVENANT_SYNC...</div>
+            <div class="promise-clock" id="covenant-clock">SYMBOLS_OF_DEVOTION // SYNCING...</div>
             <div class="eternity-quote">
                 She is my healing past, my joyful present, and my hopeful future all in one.
             </div>
@@ -237,9 +169,16 @@
         <section>
             <div class="section-label">THE_SACRIFICE_OF_THE_HEART</div>
             <div class="prose">
-                I am humbled daily by the grace she has shown in transplanting her entire life for our bond. She faced the tempests of the legal system with a mother's fierce love, fighting to bring her daughters into our sanctuary. 
-                <br><br>
-                Upon her arrival, she <span class="highlight">sanctified a home</span>. With an artist's eye, she invested herself fully to clothe our residence in beauty and peace. She has folded my son and daughters into her heart as her own, ensuring every soul—from the three S children to the newest light, W—feels truly accepted.
+                I am humbled daily by the staggering grace Emily showed in uprooting her entire existence for the sake of our bond. Leaving California wasn't just a change of scenery; it was a total transplanting of her soul. She entered a <span class="highlight">crucible</span>, facing the relentless tempests of the legal system with the <span class="highlight">fierce, unyielding love</span> of a mother who refuses to lose.
+            </div>
+            <div class="prose">
+                There were seasons of bone-deep exhaustion—months defined by salt-streaked faces, fervent prayers whispered in the dark, and the crushing frustrations of a system that doesn't always value the heart. But she never wavered. She fought for her daughters with everything she had, enduring the fire until she emerged on the other side, victorious, bringing her children into the safety of our shared arms.
+            </div>
+            <div class="prose">
+                Upon her arrival, she did more than just move into a house; she <span class="highlight">sanctified a home</span>. With an artist’s eye and a <span class="highlight">warrior's resolve</span>, she invested every resource she possessed—emotionally, spiritually, and financially—to clothe our residence in a beauty that feels divine. She took a structure of wood and stone and transformed it into a <span class="highlight">literal heaven on earth</span>, a sanctuary where the chaos of the world finally stops at the door.
+            </div>
+            <div class="prose">
+                She has folded my son and daughters into her heart as her own, ensuring every soul—from the three S children to the newest light, W—feels truly accepted. Every corner of our life now breathes with the peace she painstakingly built, proving that while the desert was where we met, this kingdom is where we truly began.
             </div>
             <div class="legacy-grid">
                 <div class="legacy-chip">THE_DAUGHTERS // K + T + C + M</div>
@@ -301,19 +240,26 @@
 
         <section class="hex-card">
             <div class="prose">
-                Every Friday remains <span class="highlight">Sanctified & Sacred</span>. Our devotion is found in the quiet moments: the shared glow of a Target parking lot or the rugged ascent of <span class="highlight">Horton Creek</span>. 
-                <br><br>
-                She is the cook who turns a table into a feast for all, and the patient co-pilot who trusts in our direction. Her favorite color is <span class="highlight">Glitter</span>—a way of moving through the world, <span class="highlight">catching the light.</span>
+                For us, Friday is not merely the end of a week; it is <span class="highlight">Holy Ground</span>. These nights are our <span class="highlight">"Sanctified & Sacred"</span> Sabbath—a dedicated space where the world’s noise is muted so the core unit of our family can breathe. Whether we are finding a quiet devotion in the neon glow of a Target parking lot or navigating the rugged, pine-scented ascent of Horton Creek, this is where we reconnect. 
+            </div>
+            <div class="prose">
+                In the heart of our home, Emily is far more than a cook; she is a <span class="highlight">Chef of both substance and light</span>. She possesses the rare gift of the true nurturer—the ability to infuse every ingredient with peace and every seating with a sense of belonging. To eat at her table is to be seen, known, and restored.
+            </div>
+            <div class="prose" style="margin-bottom: 0;">
+                Through it all, she moves with a radiance that refuses to be categorized. Her favorite color is <span class="highlight">Glitter</span>. To her, it isn't just a pigment; it’s the art of <span class="highlight">catching the light</span>, even in the shadows. She is the shimmering proof that a life built on faith doesn't just shine—it <span class="highlight">sparkles</span>.
             </div>
         </section>
 
         <section>
             <div class="section-label">RADICAL_LOVE // THE_PEACE_OF_CHRIST</div>
             <div class="prose">
-                Emily is a living exemplar of <span class="highlight">charity and grace</span>. Her devotion to Heavenly Father is a powerful connection that shifts the atmosphere. 
+                Emily is more than a living exemplar of charity and grace; she is a <span class="highlight">displacement of the dark</span>. Her devotion to Heavenly Father is a conduit so powerful it literally <span class="highlight">shifts the atmosphere</span> of our home. It is a quiet, steady frequency that tunes the chaos of our world back into a song of peace. 
             </div>
             <div class="prose">
-                I have felt the weight of her prayers across the void, prompting me to ask: <span class="highlight">"Did you pray for me?"</span> She pleads for others with a faith that sparkles with hope, and watching her light grow is the most sacred experience of my life.
+                I have felt the physical weight of her intercession—a tangible tug on my spirit that has reached across the void of miles. There have been moments where the air around me suddenly changed, prompting me to call her and ask: <span class="highlight">"Did you just pray for me?"</span> The answer is always yes. 
+            </div>
+            <div class="prose">
+                She pleads for others with a <span class="highlight">fierce, radiant advocacy</span>. Her faith is a <span class="highlight">"Glitter" faith</span> that catches the light of heaven and scatters it into the darkest corners of our lives. To stand beside her is to be reminded that we are never truly alone in the desert, provided there is someone like Emily unceasingly <span class="highlight">calling us toward the spring.</span>
             </div>
         </section>
 
