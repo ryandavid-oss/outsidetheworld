@@ -76,23 +76,8 @@
             border-bottom: 1px solid var(--border-teal); padding-bottom: 15px;
         }
         
-        #md-render { 
-            font-family: 'Merriweather', serif; 
-            white-space: pre-wrap; /* Crucial for Markdown gaps */
-            line-height: 1.9; 
-            color: #d1d1d1; 
-            font-size: 1.1rem; 
-            font-weight: 300;
-        }
-        
-        #md-render img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            margin: 30px 0;
-            display: block;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
+        #md-render { font-family: 'Merriweather', serif; }
+        #md-render p { line-height: 1.9; color: #d1d1d1; font-size: 1.1rem; font-weight: 300; margin-bottom: 25px; }
 
         .nav-node { margin-top: 60px; padding-top: 30px; border-top: 1px solid var(--border-teal); display: flex; justify-content: space-between; }
         .node-link { font-family: 'Fira Code'; font-size: 0.7rem; color: var(--brand-teal); text-decoration: none; letter-spacing: 2px; transition: 0.3s; display: flex; align-items: center; gap: 10px; }
@@ -170,16 +155,41 @@
         .provisions-form textarea { height: 100px; resize: none; }
         .provisions-form input:focus { border-color: var(--brand-blue); outline: none; }
 
-        /* MOBILE REFINEMENTS */
+        /* MOBILE REFINEMENTS [Requirement 1, 2, 3] */
         @media (max-width: 1024px) {
             .interface-header { padding: 30px 20px; flex-direction: column; align-items: center; gap: 20px; }
-            .header-right { text-align: center; display: flex; flex-direction: column; align-items: center; width: 100%; }
-            .nav-logo { margin-bottom: 10px; }
-            .weather-uplink { margin-bottom: 15px; font-size: 0.7rem; }
-            .top-quadrant-text { text-align: center; font-size: 1.2rem; max-width: 90%; letter-spacing: 3px; }
+            .header-right { 
+                text-align: center; 
+                display: flex; 
+                flex-direction: column; 
+                align-items: center; 
+                width: 100%;
+            }
+            
+            .nav-logo { margin-bottom: 10px; } /* Logo Breathing Room */
+            
+            .weather-uplink { 
+                margin-bottom: 15px; /* Weather Breathing Room */
+                font-size: 0.7rem; 
+            }
+            
+            .top-quadrant-text { 
+                text-align: center; 
+                font-size: 1.2rem; 
+                max-width: 90%; 
+                letter-spacing: 3px;
+            }
+
             .main-interface { margin-top: 340px; flex-direction: column; padding: 0 20px; }
             .vertical-divider { display: none; }
-            .nav-node { flex-direction: column; align-items: center; gap: 20px; text-align: center; }
+
+            /* Nav Node Alignment [Requirement 3] */
+            .nav-node { 
+                flex-direction: column; 
+                align-items: center; 
+                gap: 20px; 
+                text-align: center; 
+            }
             .node-link { width: 100%; justify-content: center; }
         }
     </style>
@@ -278,8 +288,7 @@
 
     <footer><p>© 2026 OUTSIDE THE WORLD LLC &nbsp; | &nbsp; SYSTEMS & STORIES</p></footer>
 
-    <script src="wayback_purified.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script>
         const typeTarget = document.getElementById('typing-text');
         
@@ -308,36 +317,51 @@
             img.src = img.src.includes('Front') ? 'Images/OTW_Shirt_Back.png' : 'Images/OTW_Shirt_Front.png';
         }
 
-        // 2. THE LIVING LENS: ZERO-ALTERED LOGIC
         function syncLatestPost() {
             const contentArea = document.getElementById('latest-post-area');
+            fetch('./manifest.json')
+                .then(res => res.json())
+                .then(data => {
+                    if (data.length > 0) {
+                        const latest = data[0];
+                        const rawDate = latest.date; 
+                        let displayDate = "";
+                        const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                        let foundMonth = months.find(m => rawDate.includes(m)) || months[new Date().getMonth()];
+                        let foundDay = rawDate.match(/\d+/) || "01";
+                        displayDate = `${foundMonth} ${foundDay}, 2026`;
 
-            // wayback_raw_dump is provided by wayback_purified.js
-            if (typeof wayback_raw_dump !== 'undefined' && wayback_raw_dump.length > 0) {
-                const latest = wayback_raw_dump[0]; // The newest entry from the purifier
-                
-                contentArea.innerHTML = `
-                    <h2>${latest.title}</h2>
-                    <span class="post-date">${latest.date}</span>
-                    <div id="md-render">
-                        ${latest.body}
-                    </div>
-                    <div class="nav-node">
-                        <a href="wayback.html" class="node-link">← VIEW_HISTORICAL_ARCHIVE</a>
-                        <div class="node-link" style="opacity:0.3; cursor:default;">TERMINAL_END [X]</div>
-                    </div>
-                `;
-                
-                runTypewriterProtocol();
-            } else {
-                contentArea.innerHTML = "<p>Narrative connection lost. Sync failed.</p>";
-            }
+                        fetch('./blogger_posts/' + latest.file)
+                            .then(res => res.text())
+                            .then(text => {
+                                const lines = text.split('\n');
+                                const rawTitle = lines[0].replace('# ', '').trim();
+                                let bodyStartIndex = 1;
+                                while (lines[bodyStartIndex] !== undefined && 
+                                      (lines[bodyStartIndex].trim() === "" || 
+                                       /\d{4}/.test(lines[bodyStartIndex]) || 
+                                       lines[bodyStartIndex].includes(',') || 
+                                       months.some(m => lines[bodyStartIndex].includes(m)))) {
+                                    bodyStartIndex++;
+                                }
+                                const bodyContent = lines.slice(bodyStartIndex).join('\n');
+                                contentArea.innerHTML = `
+                                    <h2>${rawTitle}</h2>
+                                    <span class="post-date">${displayDate}</span>
+                                    <div id="md-render"></div>
+                                    <div class="nav-node">
+                                        <a href="wayback.html" class="node-link">← VIEW_HISTORICAL_ARCHIVE</a>
+                                        <div class="node-link" style="opacity:0.3; cursor:default;">TERMINAL_END [X]</div>
+                                    </div>
+                                `;
+                                document.getElementById('md-render').innerHTML = marked.parse(bodyContent);
+                                runTypewriterProtocol();
+                            });
+                    }
+                })
+                .catch(err => { console.error("Sync Error:", err); contentArea.innerHTML = "<p>Narrative connection lost.</p>"; });
         }
-
-        window.onload = () => { 
-            syncLatestPost(); 
-            fetchWeather(); 
-        };
+        window.onload = () => { syncLatestPost(); fetchWeather(); };
     </script>
 </body>
 </html>

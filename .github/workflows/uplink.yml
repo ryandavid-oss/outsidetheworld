@@ -1,0 +1,39 @@
+name: OTW_Uplink_Protocol
+
+on:
+  push:
+    paths:
+      - 'blogger_posts/**' # Only triggers when files inside this folder change
+
+# This block is CRITICAL. It gives the bot permission to write to your repo.
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-with: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          # No extra libraries needed for our script, but we ensure environment is ready
+          python -m pip install --upgrade pip
+
+      - name: Run Goldilocks Purifier
+        run: python purify_v5.py
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "OTW-Archive-Bot"
+          git config --global user.email "bot@outsidetheworld.com"
+          git add wayback_purified.js
+          # The "|| exit 0" prevents the bot from failing if there are no text changes
+          git commit -m "Uplink: New digital residue incorporated into ledger" || exit 0
+          git push
