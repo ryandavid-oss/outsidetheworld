@@ -88,46 +88,26 @@
             </div>
     </main>
 
-    <script>
-        const archive = [
-            {
-                title: "OUTSIDE THE WORLD",
-                date: "Circa 2001",
-                location: "PROVO_MTC",
-                body: `I dance along the path 
-                lonely emerald fields on either side
-                I gaze into the distant canyon
-                and know that I cannot enter
-                Every star seems to smile down this evening
-                each one shines its own way    
-                and the world is quiet       
-                it does not know I am here
-                The crisp air haunts me      
-                its aroma seems too familiar    
-                yes, but under different circumstances      
-                this would be true
-                there seems to be an end    
-                as the mountain peak swallows up the sky     
-                my perspective is my weakness   
-                <i>outside the world is new…</i>`
-            },
-            {
-                title: "ORION'S BELT",
-                date: "Winter 2002",
-                location: "MOUNTAIN_WALK",
-                body: "Text for second poem would go here..."
-            }
-        ];
+<script src="poetry_data.js"></script>
 
+    <script>
+        // 2. THE ARCHIVE LOGIC
         function loadArchive() {
             const list = document.getElementById('file-list');
+            
+            // Check if archive data exists
+            if (typeof archive === 'undefined' || archive.length === 0) {
+                list.innerHTML = '<div class="file-item"><span>ERROR: NO_SIGNALS_FOUND</span></div>';
+                return;
+            }
+
             archive.forEach((poem, index) => {
                 const item = document.createElement('div');
                 item.className = 'file-item';
                 item.onclick = () => displayPoem(index);
                 item.innerHTML = `
                     <h3>${poem.title}</h3>
-                    <span>${poem.date} // ${poem.location}</span>
+                    <span>${poem.date} // SIGNAL_DETECTED</span>
                 `;
                 list.appendChild(item);
             });
@@ -137,7 +117,6 @@
             const area = document.getElementById('display-area');
             const poem = archive[index];
             
-            // Effect: Fade out and back in
             area.classList.remove('visible');
             
             setTimeout(() => {
@@ -148,36 +127,19 @@
                 area.classList.add('visible');
             }, 300);
 
-            // Set active class
+            // Update active state in sidebar
             document.querySelectorAll('.file-item').forEach((el, i) => {
                 el.classList.toggle('active', i === index);
             });
         }
 
+        // 3. INITIALIZE ON LOAD
         window.onload = () => {
             loadArchive();
-            displayPoem(0); // Load first poem by default
+            if (typeof archive !== 'undefined' && archive.length > 0) {
+                displayPoem(0); 
+            }
         };
     </script>
-    <script src="poetry/poetry_data.js"></script>
-
-<script>
-    // Ensure the array is named 'archive' in your poetry_data.js
-    function loadArchive() {
-        const list = document.getElementById('file-list');
-        archive.forEach((poem, index) => {
-            const item = document.createElement('div');
-            item.className = 'file-item';
-            item.onclick = () => displayPoem(index);
-            // We use the extracted title and recovered signal label
-            item.innerHTML = `
-                <h3>${poem.title}</h3>
-                <span>${poem.date} // SIGNAL_DETECTED</span>
-            `;
-            list.appendChild(item);
-        });
-    }
-    // ... rest of the display logic ...
-</script>
 </body>
 </html>
