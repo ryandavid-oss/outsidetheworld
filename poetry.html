@@ -14,7 +14,7 @@
             --amethyst: #9b59b6;
             --bg-dark: #050505;
             --border-low: rgba(255, 255, 255, 0.08);
-            --glass-bg: rgba(0, 0, 0, 0.4);
+            --glass-bg: rgba(0, 0, 0, 0.6);
         }
 
         body {
@@ -24,38 +24,27 @@
             transition: background 1.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* 1. SIDEBAR (LOGO & TUNING) */
+        /* 1. SIDEBAR / DIRECTORY */
         .directory {
             width: 380px; border-right: 1px solid var(--border-low);
             display: flex; flex-direction: column; background: #050505;
-            z-index: 100;
+            z-index: 100; flex-shrink: 0;
         }
 
-        .dir-header { padding: 40px; border-bottom: 1px solid var(--border-low); }
+        .dir-header { padding: 40px; border-bottom: 1px solid var(--border-low); position: relative; }
         
-        /* HERO LOGO [Requirement 4] */
-.sidebar-logo {
-    width: 200px; 
-    margin-bottom: 30px;
-    /* Filter removed to show standard SVG colors */
-}
-        /* TUNING KNOB (FREQUENCY SELECTOR) [Requirement 1] */
-        .tuning-knob {
-            padding: 0 40px 20px;
-        }
-        .knob-label {
-            font-family: 'Fira Code'; font-size: 0.55rem; color: #555;
-            letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; display: block;
-        }
-        select.freq-filter {
-            background: transparent; border: 1px solid var(--border-low);
-            color: var(--brand-teal); font-family: 'Fira Code'; font-size: 0.7rem;
-            padding: 8px; width: 100%; cursor: pointer; outline: none;
-            transition: 0.3s;
-        }
-        select.freq-filter:hover { border-color: var(--brand-teal); }
+        .sidebar-logo { width: 140px; margin-bottom: 30px; display: block; }
 
-        .file-list { flex-grow: 1; overflow-y: auto; }
+        .tuning-knob { padding: 0 40px 20px; }
+        .knob-label { font-family: 'Fira Code'; font-size: 0.55rem; color: #555; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; display: block; }
+        
+        select.freq-filter {
+            background: #111; border: 1px solid var(--border-low);
+            color: var(--brand-teal); font-family: 'Fira Code'; font-size: 0.7rem;
+            padding: 10px; width: 100%; cursor: pointer; outline: none; appearance: none;
+        }
+
+        .file-list { flex-grow: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; }
         .file-item {
             padding: 20px 40px; cursor: pointer; transition: 0.3s;
             border-left: 3px solid transparent; border-bottom: 1px solid rgba(255,255,255,0.02);
@@ -65,43 +54,28 @@
         .file-item h3 { font-family: 'Fira Code'; font-size: 0.75rem; margin: 0 0 5px 0; color: #eee; font-weight: 500; }
         .file-item span { font-size: 0.55rem; color: #444; letter-spacing: 1.5px; }
 
-        /* 2. READER VIEW (GLASS CARD) [Requirement 2] */
+        /* 2. READER VIEW */
         .extraction-pane { 
             flex-grow: 1; padding: 60px; overflow-y: auto; position: relative; 
             display: flex; justify-content: center; align-items: flex-start;
+            background: radial-gradient(circle at center, rgba(0,0,0,0) 0%, rgba(0,0,0,0.4) 100%);
         }
 
         .glass-card {
             background: var(--glass-bg);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 80px;
-            max-width: 650px;
-            width: 100%;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+            backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 80px; max-width: 650px; width: 100%;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.8);
             opacity: 0; transform: translateY(20px);
             transition: 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+            box-sizing: border-box;
         }
         .glass-card.visible { opacity: 1; transform: translateY(0); }
 
-        /* TITLES & BODY [Requirement 3 & 5] */
-        .poem-title {
-            font-family: 'Inter'; font-weight: 900; font-size: 1.8rem;
-            letter-spacing: -1px; margin: 0 0 10px 0; color: #fff;
-        }
-
-        .poem-meta { 
-            font-family: 'Fira Code'; font-size: 0.6rem; color: var(--brand-teal); 
-            margin-bottom: 40px; letter-spacing: 3px; text-transform: uppercase;
-        }
-
-        .poem-body { 
-            font-family: 'Merriweather', serif; 
-            font-size: 1.05rem; /* Slightly smaller font */
-            line-height: 2.1; 
-            color: #ccc; white-space: pre-line; font-weight: 300;
-        }
+        .poem-title { font-family: 'Inter'; font-weight: 900; font-size: 1.8rem; letter-spacing: -1px; margin: 0 0 10px 0; color: #fff; }
+        .poem-meta { font-family: 'Fira Code'; font-size: 0.6rem; color: var(--brand-teal); margin-bottom: 40px; letter-spacing: 3px; text-transform: uppercase; }
+        .poem-body { font-family: 'Merriweather', serif; font-size: 1.05rem; line-height: 2.1; color: #ccc; white-space: pre-line; font-weight: 300; }
 
         .back-signal {
             position: fixed; top: 40px; right: 40px; z-index: 200;
@@ -110,13 +84,36 @@
         }
         .back-signal:hover { color: #fff; }
 
+        /* --- MOBILE ARCHITECTURE --- */
+        @media (max-width: 1024px) {
+            body { flex-direction: column; overflow-y: auto; height: auto; }
+
+            .directory { width: 100%; height: auto; border-right: none; border-bottom: 1px solid var(--border-low); }
+            
+            .dir-header { padding: 30px 20px 20px; display: flex; flex-direction: column; align-items: center; }
+            .sidebar-logo { width: 100px; margin-bottom: 20px; }
+            
+            .back-signal { position: absolute; top: 30px; right: 20px; }
+            
+            .tuning-knob { padding: 0 20px 30px; }
+            
+            .file-list { max-height: 40vh; border-top: 1px solid var(--border-low); }
+            .file-item { padding: 20px; }
+
+            .extraction-pane { padding: 20px; min-height: 60vh; }
+            .glass-card { padding: 40px 25px; border-radius: 0; border: none; background: rgba(0,0,0,0.8); }
+
+            .poem-title { font-size: 1.5rem; }
+            .poem-body { font-size: 1rem; line-height: 1.8; }
+        }
+
         ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-thumb { background: var(--border-low); }
     </style>
 </head>
 <body>
 
-    <a href="index.html" class="back-signal">TERMINATE_SESSION [ESC]</a>
+    <a href="index.html" class="back-signal">[ESC] TERMINATE</a>
 
     <aside class="directory">
         <div class="dir-header">
@@ -145,7 +142,7 @@
             const list = document.getElementById('file-list');
             const select = document.getElementById('freq-select');
             
-            // Extract unique frequencies for the "Tuning Knob"
+            // Extract unique frequencies
             const frequencies = [...new Set(archive.map(p => p.frequency))].sort();
             frequencies.forEach(f => {
                 const opt = document.createElement('option');
@@ -166,7 +163,13 @@
                     const item = document.createElement('div');
                     item.className = 'file-item';
                     item.setAttribute('data-id', index);
-                    item.onclick = () => displayPoem(index);
+                    item.onclick = () => {
+                        displayPoem(index);
+                        // On mobile, scroll the reader into view
+                        if (window.innerWidth <= 1024) {
+                            document.querySelector('.extraction-pane').scrollIntoView({ behavior: 'smooth' });
+                        }
+                    };
                     item.innerHTML = `
                         <h3>${poem.title}</h3>
                         <span>[${poem.frequency}] // ${poem.date}</span>
@@ -185,7 +188,7 @@
             const container = document.getElementById('glass-container');
             const poem = archive[index];
             
-            // Update Atmospheric Thumbprint
+            // Background blend mode helps the gradients mix with the dark base
             document.body.style.background = `
                 radial-gradient(circle at bottom right, rgba(0,0,0,0.8) 0%, #050505 100%),
                 ${poem.thumbprint}
@@ -201,10 +204,8 @@
                     <div class="poem-body">${poem.body}</div>
                 `;
                 container.classList.add('visible');
-                container.scrollTop = 0;
             }, 400);
 
-            // Set Active State
             document.querySelectorAll('.file-item').forEach(el => {
                 el.classList.toggle('active', el.getAttribute('data-id') == index);
             });
