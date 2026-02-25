@@ -98,41 +98,37 @@
         .saiph { bottom: 50px; left: 60px; width: 5px; height: 5px; --duration: 5.1s; }
         .rigel { bottom: 0; right: 40px; width: 8px; height: 8px; --duration: 3.8s; box-shadow: 0 0 25px rgba(100, 150, 255, 0.6); }
 
-        /* THE TRON UPLINK SYSTEM */
-        .belt-node { position: absolute; z-index: 50; }
-        .belt-star { width: 8px; height: 8px; background: #fff; border-radius: 50%; box-shadow: 0 0 20px #fff; cursor: pointer; position: relative; }
+        /* --- RE-CALIBRATED TRON TERMINALS --- */
 
-        .tron-path {
-            position: absolute; pointer-events: none;
-            stroke: var(--brand-teal); stroke-width: 1; fill: none;
-            stroke-dasharray: 200; stroke-dashoffset: 200;
-            transition: stroke-dashoffset 0.6s ease;
-            filter: drop-shadow(0 0 5px var(--brand-teal));
-        }
+/* 1. Alnitak (Interface) - Line ends at x:-110, y:-60 */
+.alnitak-node { top: 210px; left: 110px; }
+.alnitak-node .tron-card { 
+    top: -72px; /* Adjusted to align box center with the horizontal line */
+    left: -260px; /* Box sits to the left of the line's end */
+    transform: translateX(20px); 
+}
 
-        .tron-card {
-            position: absolute; opacity: 0;
-            background: rgba(5, 5, 5, 0.9);
-            border: 1px solid var(--brand-teal);
-            padding: 8px 15px;
-            font-family: 'Fira Code'; font-size: 0.6rem;
-            color: #fff; letter-spacing: 2px;
-            white-space: nowrap; pointer-events: none;
-            transition: opacity 0.3s ease 0.5s, transform 0.3s ease 0.5s;
-            backdrop-filter: blur(5px);
-        }
+/* 2. Alnilam (Dossier) - Line ends at x:95, y:-55 */
+.alnilam-node { top: 225px; left: 150px; }
+.alnilam-node .tron-card { 
+    top: -67px; /* Adjusted to align box center with the horizontal line */
+    left: 95px; /* Box starts exactly where the line ends */
+    transform: translateX(-20px); 
+}
 
-        .belt-node:hover .tron-path { stroke-dashoffset: 0; }
-        .belt-node:hover .tron-card { opacity: 1; transform: translate(0, 0); }
+/* 3. Mintaka (Heart and Soul) - Line ends at x:85, y:85 [FIXED] */
+.mintaka-node { top: 240px; left: 190px; }
+.mintaka-node .tron-card { 
+    top: 85px; /* Sits exactly at the bottom of the 80px vertical drop */
+    left: 5px; /* Centers the box under the vertical drop (Line is at x:85) */
+    transform: translateY(-10px); /* Slides down into place on hover */
+}
 
-        .alnitak-node { top: 210px; left: 110px; }
-        .alnitak-node .tron-card { top: -60px; left: -140px; transform: translateX(10px); }
-
-        .alnilam-node { top: 225px; left: 150px; }
-        .alnilam-node .tron-card { top: -70px; left: 20px; transform: translateY(10px); }
-
-        .mintaka-node { top: 240px; left: 190px; }
-        .mintaka-node .tron-card { bottom: -60px; left: 30px; transform: translateX(-10px); }
+/* Hover Reset */
+.belt-node:hover .tron-card { 
+    opacity: 1; 
+    transform: translate(0, 0); 
+}
 
         /* THE NEBULA (ORION'S SWORD) */
         .nebula-star { position: absolute; border-radius: 50%; background: #fff; width: 3px; height: 3px; --duration: 4s; }
