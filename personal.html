@@ -207,117 +207,96 @@
                 <h3>The Transition</h3>
                 <p>Internal struggle of fundamental identity.</p>
             </a>
-            <div class="column-label">03 // PROVISIONS_UPLINK</div>
+<div class="column-label">03 // PROVISIONS_UPLINK</div>
 <div class="provisions-card">
     <div class="provisions-display">
-        <img src="Images/OTW_Shirt_Front.jpg" alt="OTW Shirt" class="shirt-render active" id="shirt-img">
+        <img src="Images/OTW_Shirt_Front.jpg" alt="OTW Shirt" class="shirt-render" id="shirt-img">
         <div class="provisions-overlay">
-            <button class="toggle-btn" onclick="toggleShirt()">FRONT // BACK</button>
+            <button class="toggle-btn" onclick="toggleShirt()">VIEW_TOGGLE</button>
         </div>
     </div>
     <div class="provisions-info">
         <h3>THE_OTW_STANDARD_ISSUE</h3>
         <p>Premium Black Cotton // Screen-Printed // Boutique Release</p>
-        <a href="mailto:your-email@example.com?subject=PROVISIONS_REQUEST_OTW_SHIRT" class="buy-btn">REQUEST_ACCESS // $35</a>
+        <button onclick="openProvisionsForm()" class="buy-btn">REQUEST_ACCESS // $35</button>
+    </div>
+</div>
+
+<div id="provisions-overlay" class="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="column-label">PROVISIONS_REQUEST_PROTOCOL</span>
+            <button onclick="closeProvisionsForm()" class="close-x">[X]</button>
+        </div>
+        
+        <form action="https://formspree.io/f/xgolrnkb" method="POST" class="provisions-form">
+            <div class="form-row">
+                <input type="text" name="name" placeholder="IDENTIFIER // NAME" required>
+                <input type="email" name="_replyto" placeholder="SIGNAL_UPLINK // EMAIL" required>
+            </div>
+            
+            <div class="form-row">
+                <select name="size" required>
+                    <option value="" disabled selected>SELECT_SIZE</option>
+                    <option value="S">SMALL</option>
+                    <option value="M">MEDIUM</option>
+                    <option value="L">LARGE</option>
+                    <option value="XL">X-LARGE</option>
+                    <option value="2XL">2X-LARGE</option>
+                </select>
+                <input type="number" name="quantity" placeholder="QTY" min="1" value="1">
+            </div>
+            
+            <textarea name="address" placeholder="COORDINATES // SHIPPING_ADDRESS" required></textarea>
+            
+            <button type="submit" class="buy-btn">TRANSMIT_REQUEST</button>
+        </form>
     </div>
 </div>
 
 <style>
-    /* PROVISIONS CARD STYLING */
-    .provisions-card {
-        background: rgba(160, 190, 245, 0.03);
-        border: 1px solid var(--border-teal);
-        padding: 0;
-        margin-bottom: 20px;
-        overflow: hidden;
+    /* MODAL STYLES */
+    .modal-overlay {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0,0,0,0.85); backdrop-filter: blur(10px);
+        display: none; align-items: center; justify-content: center;
+        z-index: 5000;
     }
 
-    .provisions-display {
-        position: relative;
-        height: 200px;
-        background: var(--brand-light-blue); /* Matches the new light blue background */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-    }
-
-    .shirt-render {
-        max-width: 100%;
-        height: auto;
-        transition: opacity 0.5s ease;
-    }
-
-    .provisions-overlay {
-        position: absolute;
-        bottom: 10px;
-        right: 10px;
-    }
-
-    .toggle-btn {
-        background: rgba(5, 5, 5, 0.8);
+    .modal-content {
+        background: var(--bg-dark);
         border: 1px solid var(--brand-teal);
-        color: var(--brand-teal);
-        font-family: 'Fira Code', monospace;
-        font-size: 0.5rem;
-        padding: 5px 10px;
-        cursor: pointer;
-        letter-spacing: 1px;
+        padding: 40px; width: 90%; max-width: 500px;
+        box-shadow: 0 0 50px rgba(145, 175, 179, 0.2);
     }
 
-    .provisions-info {
-        padding: 20px;
-        border-top: 1px solid var(--border-teal);
+    .modal-header { display: flex; justify-content: space-between; margin-bottom: 30px; }
+    .close-x { background: none; border: none; color: var(--brand-pink); font-family: 'Fira Code'; cursor: pointer; }
+
+    .provisions-form { display: flex; flex-direction: column; gap: 15px; }
+    
+    .form-row { display: grid; grid-template-columns: 2fr 1fr; gap: 15px; }
+
+    .provisions-form input, .provisions-form select, .provisions-form textarea {
+        background: rgba(255,255,255,0.03);
+        border: 1px solid var(--border-teal);
+        padding: 15px; color: #fff; font-family: 'Fira Code'; font-size: 0.75rem;
     }
 
-    .provisions-info h3 {
-        font-family: 'Inter', sans-serif;
-        font-size: 0.9rem;
-        font-weight: 900;
-        margin: 0 0 5px 0;
-        color: #fff;
-        letter-spacing: 2px;
-    }
-
-    .provisions-info p {
-        font-size: 0.65rem;
-        color: #666;
-        margin-bottom: 20px;
-        text-transform: uppercase;
-    }
-
-    .buy-btn {
-        display: block;
-        text-align: center;
-        background: var(--brand-blue);
-        color: #050505;
-        text-decoration: none;
-        font-family: 'Fira Code', monospace;
-        font-size: 0.75rem;
-        font-weight: 700;
-        padding: 12px;
-        letter-spacing: 2px;
-        transition: 0.3s;
-    }
-
-    .buy-btn:hover {
-        background: #fff;
-        box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-    }
+    .provisions-form textarea { height: 100px; resize: none; }
+    
+    .provisions-form input:focus { border-color: var(--brand-blue); outline: none; }
 </style>
 
 <script>
-    // QUICK TOGGLE FOR THE SHIRT IMAGES
+    function openProvisionsForm() { document.getElementById('provisions-overlay').style.display = 'flex'; }
+    function closeProvisionsForm() { document.getElementById('provisions-overlay').style.display = 'none'; }
+    
     function toggleShirt() {
         const img = document.getElementById('shirt-img');
-        if (img.src.includes('Front')) {
-            img.src = 'Images/OTW_Shirt_Back.jpg';
-        } else {
-            img.src = 'Images/OTW_Shirt_Front.jpg';
-        }
+        img.src = img.src.includes('Front') ? 'Images/OTW_Shirt_Back.jpg' : 'Images/OTW_Shirt_Front.jpg';
     }
-</script>
-        </aside>
+</script>        </aside>
     </main>
 
     <footer><p>© 2026 OUTSIDE THE WORLD LLC &nbsp; | &nbsp; SYSTEMS & STORIES</p></footer>
