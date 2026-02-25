@@ -543,6 +543,96 @@ const wayback_archive = [
         "era": "THE_ANALOG_DAWN",
         "thumbprint": "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
         "body": "I'm unusually tired, so I'll be brief tonight. I'm mind-numbingly drained today. I had big plans for my site, I was really going to go to town on a few pages. But the minute hand paced by quicker than my will, and that will definitely take its toll on my ol' blog.\n\nAt least it's not a one-word entry, because I was going to simply leave it at the first line.\n\nNews: Sting announced his new Tour. Three minutes later, the site went down. But for some reason, I doubt that it was because of a flood of traffic. Rather, I suspect a very poorly designed Web site and an e-mail newsletter that was sent out prematurely. Hmm. So as of 9:01pm, I still have no clue of when Sting is to perform here in Arizona.\n\nIn other news: Strong Bad has finally put my feelings into song.\n\nSheesh. I just read James Lileks' entry for today, and it appears to be a two parter. More tomorrow! What I would give to have enough verbiage for a decent one-parter. But that's ok; my brother assures me that I should be there someday. And I trust him, because I've trusted him before and it hasn't gotten me into too much trouble.\n\nThat's it for today, I'm afraid. Sorry to disappoint. But I'll be back tomorrow, and hopefully eight hours of sleep richer."
+    },
+    {
+        "file": "2003-11-19-Christmas-tree.md",
+        "title": "Christmas Tree",
+        "year": "2003",
+        "date": "November 19",
+        "era": "THE_ANALOG_DAWN",
+        "thumbprint": "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
+        "body": "Ok, not so tired today. \n\nBut I have a surprise for you:\n\nThe wife persuaded me (like it took much effort) to decorate the Christmas tree this evening. \n\nSo, we're a little early. I can think of a few friends (ahem, Eric?) that would be less than pleased with my premature celebration of Navidad. That's ok, old boy. There's only 36 days left."
+    },
+    {
+        "file": "2003-11-21-Power-outage.md",
+        "title": "Power Outage",
+        "year": "2003",
+        "date": "November 21",
+        "era": "THE_ANALOG_DAWN",
+        "thumbprint": "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
+        "body": "I was preparing to write last nights' entry, when all of a sudden, *poof* the power went out. It was an incredibly eerie feeling; we've never seen it that dark at our apartment. Even when all of our lights were out, we always had the lamps outside shining through our windows.\n\nAs the lights went dark, several hoots and hollers were heard from the adjacent apartment buildings. I looked outside, alarmed. \"Oh, it's just the neighbor boys!\", I said.\n\nI now know that a power failure must be an invitation for young men to begin acting like loons. At least 10 of them ended up jumping in the neighboring pool. When they realized that, \"Hey, it's just a power outage, and we're cold\", they finally shut up and got out.\n\nSo the rest of the evening was spent in stillness and candlelight. Wife and I played cards—well, we played \"Go Fish\" to be specific. Go Fish is now Wife's favorite game to play with me. Did I mention that she's never won? But it's her favorite game.\n\nOh yeah. Dobby completely wrecked our Christmas tree two nights ago. He decided that it was his new plaything, so he climbed through and through. What was left was not pretty.\n\nSo, he's on my bad list at the moment. And he knows it, too. He sulks around the house, occasionally glancing up at me, begging to see a glimmer of recognition that he's a good kitty. But every time, I give him the look that makes him understand that he's in the dog house. Pardon my language.\n\nAnd such is life for us. I hope that you've enjoyed tonight's entry. But now, I must ask a favor of you. If anyone knows of a good software program that will let me create my own MP3 songs, please let me know. (Make sure that it's under $100.00). Ah, a good excuse for you to Contact me."
+    },
+    {
+        "file": "2003-11-22-Gb1.md",
+        "title": "GB1: The First Song",
+        "year": "2003",
+        "date": "November 22",
+        "era": "THE_ANALOG_DAWN",
+        "thumbprint": "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
+        "body": "Ok, since I didn't post on Thursday, I'll give you all a special treat. It's more than a weekend edition of the Blog, oh yes.\n\nIt's my first song. \n\nIt may only be :57 seconds long, it may not be composed of the greatest sounds. And it just may beat into your head like a bag of hammers. \n\nBut here it is. Enjoy!"
+    },
+    {
+        "file": "2003-11-24-Cat-in-the-hat.md",
+        "title": "Cat in the Hat (The Review)",
+        "year": "2003",
+        "date": "November 24",
+        "era": "THE_ANALOG_DAWN",
+        "thumbprint": "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
+        "body": "Welcome to the \"lunchtime\" edition of the Blog. Special note: You will find no great entertainment here today.\n\nWife and I saw the Cat in the Hat movie this weekend, or should I say, the Crap in the Sack movie. Big pile of flaming Crap in the Sack. It was terrible. That's the only way to describe it, really... it was terrible. Every time the Cat (aka Mike Myers) opened his mouth, my mind was sent into reparatory prayer. Please, please make him stop talking. Please....\n\nAnd so on. Sure, there were a few funny moments, but I can drivel out a few laughs of my own on this blog. And they don't cost a dime! Free laughs! Now at the Blog!\n\nAnyway, that was the weekend summed up in one bad movie. Only one other thing of note, last night I had the strangest dream. There were two ingredients to this dream: A dog and a crab. Cross these two items together and you get a very disturbing hairy sea creature.\n\nIn my dream, I went to my friend's house to talk to them. Out of the corner of my eye, I spied a strange-looking object. \n\n\"Oh, never mind that. That's just my dog\", said my friend.\n\nSo I walked over to it, naturally, and found the greatest offense against nature. It had the body of a dog, the claws of a crab, and it was sunk low to the ground with little crab feet. And it was hairy.\n\nWell, don't know where I'm going with that. Now, time to call the wife. See you on Tuesday!"
+    },
+    {
+        "file": "2003-11-25-Chicken-Enchiladas.md",
+        "title": "Chicken Enchiladas",
+        "year": "2003",
+        "date": "November 25",
+        "era": "THE_ANALOG_DAWN",
+        "thumbprint": "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
+        "body": "Fairly quiet day, if I do say so myself. In fact, it was so quiet that I really haven't much to say. \n\nWife made me my favorite dish tonight; I believe that I've mentioned them before. She makes the most delicious chicken enchiladas I have ever tasted (and I've eaten quite a few).\n\nWork today was much the same, except it went by very slowly. I expect that this is because I only have two more days of work left until Thanksgiving, or Dia De Pollo. I can remember back when I was serving my mission in New York City, around this same time of year. I was so sick with the Flu, I couldn't move, I couldn't eat, I couldn't even talk.\n\nI still believe till this day that I contracted that nasty virus from the wonderful health clinic where I received my Flu vaccination. I don't believe that I'll ever try one of those again, thank you very much!\n\nAnyway, I must be off... sorry about the extreme shortness of my entries lately. I expect to have some lengthier entries later on in the week, and I'll be sure to write about all of the Turkey Day happenings. Oh, on a sad note, this will be the first year ever that I do not participate in the Turkey Bowl.\n\nMore later!"
+    },
+    {
+        "file": "2003-11-26-Sick-and-star-wars.md",
+        "title": "Sick and Star Wars (Clone Wars)",
+        "year": "2003",
+        "date": "November 26",
+        "era": "THE_ANALOG_DAWN",
+        "thumbprint": "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
+        "body": "Here we go! It's right on time. I feel myself coming down with something, and oh, look... it's one day before Thanksgiving. This means that I get to spend my Turkey Day feeling scratchy and stuffy again. I think this makes eight years in a row, solid.\n\nBut, maybe I'm overreacting. I started to feel the customary twinge in the throat when I woke up this morning, and by afternoon, my head was pounding four-alarm style. I simply have that whole-bodied yuckiness that leads to a cold... and by the looks of people around me at work, this cold season ain't pretty.\n\nEnough of that. I just finished watching Star Wars: Clone Wars. For those not yet introduced to this title, it is a series of five-minute episodes which detail the events between Episode two and three.\n\nIt's a marvelous display of animation. From the beginning of the series, straight till the end, you can view the immense galaxy of Star Wars the way that it was meant to be seen.\n\nNotably, in the final episode, you find out exactly why Anakin Skywalker is described as a \"brilliant pilot\". He swoops and dodges enemy fighters, constructs intricate maneuvers, and brings down strongholds. Sadly, they have taken down the ability to view past episodes, but rest assured they will be back in Spring 2004."
+    },
+    {
+        "file": "2003-11-27-Thanksgiving.md",
+        "title": "Thanksgiving & 36 Days Left",
+        "year": "2003",
+        "date": "November 27",
+        "era": "THE_ANALOG_DAWN",
+        "thumbprint": "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
+        "body": "Happy Thanksgiving! Good news: I didn't get sick. So, I suppose that I over-exaggerated a bit.\n\nSince today is a day off, I don't expect to say much. I decided I should put a little bit of effort into this, though... since I have some free time this morning. Wife is out hiking with her mom right now; I would have gone, but my knee prohibits such activity at this time.\n\nSo, it's officially the time that we can begin listening to Christmas carols, donning our lights on the front porch, and (hopefully) start behaving a bit more kind toward our fellow men. Oh yes, and we have to start shopping, too.\n\nNow that I'm married, it's a lot different. When I was single, I had the same people to shop for. Now, I have to shop for Wife. I'm not saying that it's a chore in any way, but can you imagine the stress involved in an undertaking of this measure?\n\nCouple that pressure with the fact that she says that she has so many ideas for gifts for me. It makes me wonder if the ideas that I have for her are adequate? I want it to be perfect. Any suggestions?\n\nWell, that's more than plenty for today. Again, I wish you a happy Thanksgiving, and please, kick this holiday season off right. Be a little kinder, share a bit more of yourself to others, and put a can of food in a donation bin. And no canned beets. Make it something the kids will enjoy!"
+    },
+    {
+        "file": "2003-12-02-Mish-mash.md",
+        "title": "Mish-mash & Target Solutions",
+        "year": "2003",
+        "date": "December 2",
+        "era": "THE_ANALOG_DAWN",
+        "thumbprint": "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
+        "body": "If I had a digital camera, I'd be following suit of James Lileks' site right now. For the entire month of December, he's on hiatus. Instead, he is giving his readers their fill of photographs and other assorted mish-mash. \n\nGood news this past weekend: I managed to inflict a major dent in the holiday shopping list. I'd love to give everyone the run-down, however; my wife is an avid reader of my site, and that would ruin all of the fun. Suffice it to say that Target is a blessing and a curse at the same time.\n\nTo word it very delicately, it simply has everything. I spent two hours at the mall and came up very shorthanded. But just one hour at Target gave me loads of ideas. What a boon!\n\nOther good news: The cat is no longer sick. Wait... that really isn't that good of news. Now, instead of sleeping at nights, he runs around our room like a sugar-injected 5-year-old. He also eats like 78 times per day now, too. I don't want a fat cat... so maybe I should stop feeding him bacon. But it wasn't MY fault that he ate the bacon grease. He did that of his own volition.\n\nHmm.... nothing but good news today, I guess. I'll see you tomorrow!"
+    },
+    {
+        "file": "2003-12-03-Autumn--you-ve-been-found.md",
+        "title": "Autumn, You've Been Found",
+        "year": "2003",
+        "date": "December 3",
+        "era": "THE_ANALOG_DAWN",
+        "thumbprint": "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
+        "body": "Guess what? I found Autumn. It's residing in this lonely tree, right outside of my apartment complex. I would imagine that this image will be nothing more than ephemeral, as it could be 90 degrees come tomorrow.\n\nOh, and for any of you who may have realized my mistake of assumption yesterday, I apologize. Apparently, my spellchecker will pass anything with that may be hyphenated. No, really... watch! Zippy-gyro. (no problems!) Nike-Reebok. (not an issue!) Ryan-David. (nice!)\n\nEnough of that. I spent another hour at the mall tonight, and I didn't manage to make much headway. Or maybe I'm simply writing this so that I can mislead my wife into believing that I didn't purchase anything? Hmm, interesting, interesting. Now all she can do is wonder.\n\nIn other news: Google has finally combed over my site in its entirety. Go ahead, try it! I'll bet you find plenty of random links you didn't even know existed. Gone are the days of defunct links and 404 errors."
+    },
+    {
+        "file": "2003-12-04-For-the-sake-of-the-blog.md",
+        "title": "For the Sake of the Blog",
+        "year": "2003",
+        "date": "December 4",
+        "era": "THE_ANALOG_DAWN",
+        "thumbprint": "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
+        "body": "It's beginning to be quite difficult to come up with enough literature to fill up an entire entry. My job takes up most of the time, and not much happens there anyway. And besides, whatever interesting information I have from that sphere of life can't really be written online, as I could somehow get fired for it.\n\nLately, my nights have been taken up, as well. I'd love to sit down for an hour or two and really hammer out some thoughts on life at this moment. I want to paint a vivid picture for any who read this on a diurnal basis.\n\nBut that simply cannot be. I have too much going on, and not enough of it is important enough to mention, really. I expect things to pick up, but that may leave me with less time to write and more time to enjoy what I'm doing.\n\nIs that a curse? Of course not. It just means that whatever scribble you see here might just be nothing more than what you read tonight. An entry for the sake of the blog! Promise kept. See you tomorrow!"
     }
     
 ];
