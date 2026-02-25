@@ -207,96 +207,153 @@
                 <h3>The Transition</h3>
                 <p>Internal struggle of fundamental identity.</p>
             </a>
-<div class="column-label">03 // PROVISIONS_UPLINK</div>
-<div class="provisions-card">
-    <div class="provisions-display">
-        <img src="Images/OTW_Shirt_Front.jpg" alt="OTW Shirt" class="shirt-render" id="shirt-img">
-        <div class="provisions-overlay">
-            <button class="toggle-btn" onclick="toggleShirt()">VIEW_TOGGLE</button>
-        </div>
-    </div>
-    <div class="provisions-info">
-        <h3>THE_OTW_STANDARD_ISSUE</h3>
-        <p>Premium Black Cotton // Screen-Printed // Boutique Release</p>
-        <button onclick="openProvisionsForm()" class="buy-btn">REQUEST_ACCESS // $35</button>
-    </div>
-</div>
-
-<div id="provisions-overlay" class="modal-overlay">
-    <div class="modal-content">
-        <div class="modal-header">
-            <span class="column-label">PROVISIONS_REQUEST_PROTOCOL</span>
-            <button onclick="closeProvisionsForm()" class="close-x">[X]</button>
-        </div>
-        
-        <form action="https://formspree.io/f/xgolrnkb" method="POST" class="provisions-form">
-            <div class="form-row">
-                <input type="text" name="name" placeholder="IDENTIFIER // NAME" required>
-                <input type="email" name="_replyto" placeholder="SIGNAL_UPLINK // EMAIL" required>
+            
+            <div class="column-label">03 // PROVISIONS_UPLINK</div>
+            <div class="provisions-card">
+                <div class="provisions-display">
+                    <img src="Images/OTW_Shirt_Front.jpg" alt="OTW Shirt" class="shirt-render" id="shirt-img">
+                    <div class="provisions-overlay">
+                        <button class="toggle-btn" onclick="toggleShirt()">VIEW_TOGGLE</button>
+                    </div>
+                </div>
+                <div class="provisions-info">
+                    <h3>THE_OTW_STANDARD_ISSUE</h3>
+                    <p>Premium Black Cotton // Screen-Printed // Boutique Release</p>
+                    <button onclick="openProvisionsForm()" class="buy-btn">REQUEST_ACCESS // $35</button>
+                </div>
             </div>
-            
-            <div class="form-row">
-                <select name="size" required>
-                    <option value="" disabled selected>SELECT_SIZE</option>
-                    <option value="S">SMALL</option>
-                    <option value="M">MEDIUM</option>
-                    <option value="L">LARGE</option>
-                    <option value="XL">X-LARGE</option>
-                    <option value="2XL">2X-LARGE</option>
-                </select>
-                <input type="number" name="quantity" placeholder="QTY" min="1" value="1">
+
+            <div id="provisions-overlay" class="modal-overlay">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <span class="column-label">PROVISIONS_REQUEST_PROTOCOL</span>
+                        <button onclick="closeProvisionsForm()" class="close-x">[X]</button>
+                    </div>
+                    
+                    <form action="https://formspree.io/f/xgolrnkb" method="POST" class="provisions-form">
+                        <div class="form-row">
+                            <input type="text" name="name" placeholder="IDENTIFIER // NAME" required>
+                            <input type="email" name="_replyto" placeholder="SIGNAL_UPLINK // EMAIL" required>
+                        </div>
+                        
+                        <div class="form-row">
+                            <select name="size" required>
+                                <option value="" disabled selected>SELECT_SIZE</option>
+                                <option value="S">SMALL</option>
+                                <option value="M">MEDIUM</option>
+                                <option value="L">LARGE</option>
+                                <option value="XL">X-LARGE</option>
+                                <option value="2XL">2X-LARGE</option>
+                            </select>
+                            <input type="number" name="quantity" placeholder="QTY" min="1" value="1">
+                        </div>
+                        
+                        <textarea name="address" placeholder="COORDINATES // SHIPPING_ADDRESS" required></textarea>
+                        
+                        <button type="submit" class="buy-btn">TRANSMIT_REQUEST</button>
+                    </form>
+                </div>
             </div>
-            
-            <textarea name="address" placeholder="COORDINATES // SHIPPING_ADDRESS" required></textarea>
-            
-            <button type="submit" class="buy-btn">TRANSMIT_REQUEST</button>
-        </form>
-    </div>
-</div>
 
-<style>
-    /* MODAL STYLES */
-    .modal-overlay {
-        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-        background: rgba(0,0,0,0.85); backdrop-filter: blur(10px);
-        display: none; align-items: center; justify-content: center;
-        z-index: 5000;
-    }
+            <style>
+                /* --- PROVISIONS CARD CONSTRAINTS --- */
+                .provisions-card {
+                    background: rgba(160, 190, 245, 0.03);
+                    border: 1px solid var(--border-teal);
+                    padding: 0;
+                    margin-bottom: 20px;
+                    overflow: hidden;
+                    transition: border-color 0.4s ease;
+                }
+                .provisions-card:hover { border-color: var(--brand-blue); }
 
-    .modal-content {
-        background: var(--bg-dark);
-        border: 1px solid var(--brand-teal);
-        padding: 40px; width: 90%; max-width: 500px;
-        box-shadow: 0 0 50px rgba(145, 175, 179, 0.2);
-    }
+                .provisions-display {
+                    position: relative;
+                    height: 250px; /* Forces the box size */
+                    background: var(--brand-light-blue);
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    overflow: hidden;
+                }
 
-    .modal-header { display: flex; justify-content: space-between; margin-bottom: 30px; }
-    .close-x { background: none; border: none; color: var(--brand-pink); font-family: 'Fira Code'; cursor: pointer; }
+                .shirt-render {
+                    max-width: 100%;
+                    height: 100%;
+                    object-fit: cover; /* Ensures the high-res image fits the box perfectly */
+                    transition: opacity 0.5s ease;
+                }
 
-    .provisions-form { display: flex; flex-direction: column; gap: 15px; }
-    
-    .form-row { display: grid; grid-template-columns: 2fr 1fr; gap: 15px; }
+                .provisions-overlay { position: absolute; bottom: 10px; right: 10px; }
 
-    .provisions-form input, .provisions-form select, .provisions-form textarea {
-        background: rgba(255,255,255,0.03);
-        border: 1px solid var(--border-teal);
-        padding: 15px; color: #fff; font-family: 'Fira Code'; font-size: 0.75rem;
-    }
+                .toggle-btn {
+                    background: rgba(5, 5, 5, 0.8);
+                    border: 1px solid var(--brand-teal);
+                    color: var(--brand-teal);
+                    font-family: 'Fira Code', monospace;
+                    font-size: 0.5rem;
+                    padding: 5px 10px;
+                    cursor: pointer;
+                    letter-spacing: 1px;
+                }
 
-    .provisions-form textarea { height: 100px; resize: none; }
-    
-    .provisions-form input:focus { border-color: var(--brand-blue); outline: none; }
-</style>
+                .provisions-info { padding: 20px; border-top: 1px solid var(--border-teal); }
+                .provisions-info h3 { font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 900; margin: 0 0 5px 0; color: #fff; letter-spacing: 2px; }
+                .provisions-info p { font-size: 0.65rem; color: #666; margin-bottom: 20px; text-transform: uppercase; }
 
-<script>
-    function openProvisionsForm() { document.getElementById('provisions-overlay').style.display = 'flex'; }
-    function closeProvisionsForm() { document.getElementById('provisions-overlay').style.display = 'none'; }
-    
-    function toggleShirt() {
-        const img = document.getElementById('shirt-img');
-        img.src = img.src.includes('Front') ? 'Images/OTW_Shirt_Back.jpg' : 'Images/OTW_Shirt_Front.jpg';
-    }
-</script>        </aside>
+                .buy-btn {
+                    display: block;
+                    width: 100%;
+                    text-align: center;
+                    background: var(--brand-blue);
+                    color: #050505;
+                    text-decoration: none;
+                    font-family: 'Fira Code', monospace;
+                    font-size: 0.75rem;
+                    font-weight: 700;
+                    padding: 12px;
+                    border: none;
+                    letter-spacing: 2px;
+                    transition: 0.3s;
+                    cursor: pointer;
+                }
+                .buy-btn:hover { background: #fff; box-shadow: 0 0 20px rgba(255, 255, 255, 0.2); }
+
+                /* --- MODAL STYLES --- */
+                .modal-overlay {
+                    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                    background: rgba(0,0,0,0.85); backdrop-filter: blur(10px);
+                    display: none; align-items: center; justify-content: center;
+                    z-index: 5000;
+                }
+                .modal-content {
+                    background: var(--bg-dark);
+                    border: 1px solid var(--brand-teal);
+                    padding: 40px; width: 90%; max-width: 500px;
+                    box-shadow: 0 0 50px rgba(145, 175, 179, 0.2);
+                }
+                .modal-header { display: flex; justify-content: space-between; margin-bottom: 30px; }
+                .close-x { background: none; border: none; color: var(--brand-pink); font-family: 'Fira Code'; cursor: pointer; }
+                .provisions-form { display: flex; flex-direction: column; gap: 15px; }
+                .form-row { display: grid; grid-template-columns: 2fr 1fr; gap: 15px; }
+                .provisions-form input, .provisions-form select, .provisions-form textarea {
+                    background: rgba(255,255,255,0.03);
+                    border: 1px solid var(--border-teal);
+                    padding: 15px; color: #fff; font-family: 'Fira Code'; font-size: 0.75rem;
+                }
+                .provisions-form textarea { height: 100px; resize: none; }
+                .provisions-form input:focus { border-color: var(--brand-blue); outline: none; }
+            </style>
+
+            <script>
+                function openProvisionsForm() { document.getElementById('provisions-overlay').style.display = 'flex'; }
+                function closeProvisionsForm() { document.getElementById('provisions-overlay').style.display = 'none'; }
+                function toggleShirt() {
+                    const img = document.getElementById('shirt-img');
+                    img.src = img.src.includes('Front') ? 'Images/OTW_Shirt_Back.jpg' : 'Images/OTW_Shirt_Front.jpg';
+                }
+            </script>
+        </aside>
     </main>
 
     <footer><p>© 2026 OUTSIDE THE WORLD LLC &nbsp; | &nbsp; SYSTEMS & STORIES</p></footer>
@@ -323,59 +380,50 @@
             } catch (e) { display.textContent = `Queen Creek // STATUS_OFFLINE`; }
         }
 
-/* ... inside your <script> ... */
+        function syncLatestPost() {
+            const contentArea = document.getElementById('latest-post-area');
+            fetch('./manifest.json')
+                .then(res => res.json())
+                .then(data => {
+                    if (data.length > 0) {
+                        const latest = data[0];
+                        const rawDate = latest.date; 
+                        let displayDate = "";
+                        const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                        let foundMonth = months.find(m => rawDate.includes(m)) || months[new Date().getMonth()];
+                        let foundDay = rawDate.match(/\d+/) || "01";
+                        displayDate = `${foundMonth} ${foundDay}, 2026`;
 
-function syncLatestPost() {
-    const contentArea = document.getElementById('latest-post-area');
-    fetch('./manifest.json')
-        .then(res => res.json())
-        .then(data => {
-            if (data.length > 0) {
-                const latest = data[0];
-                const rawDate = latest.date; 
-                let displayDate = "";
-                
-                // FORCE THE YEAR 2026 PROTOCOL
-                const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-                let foundMonth = months.find(m => rawDate.includes(m)) || months[new Date().getMonth()];
-                let foundDay = rawDate.match(/\d+/) || "01";
-                displayDate = `${foundMonth} ${foundDay}, 2026`;
-
-                fetch('./blogger_posts/' + latest.file)
-                    .then(res => res.text())
-                    .then(text => {
-                        const lines = text.split('\n');
-                        const rawTitle = lines[0].replace('# ', '').trim();
-                        
-                        // DATE SURGERY: Skip the title AND any redundant dates in the file text
-                        let bodyStartIndex = 1;
-                        while (lines[bodyStartIndex] !== undefined && 
-                              (lines[bodyStartIndex].trim() === "" || 
-                               /\d{4}/.test(lines[bodyStartIndex]) || 
-                               lines[bodyStartIndex].includes(',') || 
-                               months.some(m => lines[bodyStartIndex].includes(m)))) {
-                            bodyStartIndex++;
-                        }
-                        
-                        const bodyContent = lines.slice(bodyStartIndex).join('\n');
-
-                        // REBUILT CLEAN OUTPUT: Single Blue Date Only
-                        contentArea.innerHTML = `
-                            <h2>${rawTitle}</h2>
-                            <span class="post-date">${displayDate}</span>
-                            <div id="md-render"></div>
-                            <div class="nav-node">
-                                <a href="wayback.html" class="node-link">← VIEW_HISTORICAL_ARCHIVE</a>
-                                <div class="node-link" style="opacity:0.3; cursor:default;">TERMINAL_END [X]</div>
-                            </div>
-                        `;
-                        document.getElementById('md-render').innerHTML = marked.parse(bodyContent);
-                        runTypewriterProtocol();
-                    });
-            }
-        })
-        .catch(err => { console.error("Sync Error:", err); contentArea.innerHTML = "<p>Narrative connection lost.</p>"; });
-}
+                        fetch('./blogger_posts/' + latest.file)
+                            .then(res => res.text())
+                            .then(text => {
+                                const lines = text.split('\n');
+                                const rawTitle = lines[0].replace('# ', '').trim();
+                                let bodyStartIndex = 1;
+                                while (lines[bodyStartIndex] !== undefined && 
+                                      (lines[bodyStartIndex].trim() === "" || 
+                                       /\d{4}/.test(lines[bodyStartIndex]) || 
+                                       lines[bodyStartIndex].includes(',') || 
+                                       months.some(m => lines[bodyStartIndex].includes(m)))) {
+                                    bodyStartIndex++;
+                                }
+                                const bodyContent = lines.slice(bodyStartIndex).join('\n');
+                                contentArea.innerHTML = `
+                                    <h2>${rawTitle}</h2>
+                                    <span class="post-date">${displayDate}</span>
+                                    <div id="md-render"></div>
+                                    <div class="nav-node">
+                                        <a href="wayback.html" class="node-link">← VIEW_HISTORICAL_ARCHIVE</a>
+                                        <div class="node-link" style="opacity:0.3; cursor:default;">TERMINAL_END [X]</div>
+                                    </div>
+                                `;
+                                document.getElementById('md-render').innerHTML = marked.parse(bodyContent);
+                                runTypewriterProtocol();
+                            });
+                    }
+                })
+                .catch(err => { console.error("Sync Error:", err); contentArea.innerHTML = "<p>Narrative connection lost.</p>"; });
+        }
         window.onload = () => { syncLatestPost(); fetchWeather(); };
     </script>
 </body>
