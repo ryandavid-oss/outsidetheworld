@@ -4,10 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Wayback | Outside The World</title>
-    <meta name="theme-color" content="#050505">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;900&family=Fira+Code:wght@300;500&family=Merriweather:ital,wght@0,300;0,700;1,300&display=swap');
 
@@ -26,111 +22,59 @@
             transition: background 1.5s ease;
         }
 
-        /* 1. SIDEBAR (CHRONOLOGY) */
+        /* SIDEBAR */
         .directory {
             width: 380px; border-right: 1px solid var(--border-low);
             display: flex; flex-direction: column; background: #050505;
             z-index: 100; flex-shrink: 0;
         }
-
         .dir-header { padding: 40px; border-bottom: 1px solid var(--border-low); text-align: center; }
-        
-        .sidebar-logo { 
-            width: 200px; display: block; margin: 0 auto 20px;
-            transition: transform 0.3s ease;
-        }
-        .sidebar-logo:hover { transform: scale(1.05); }
-
+        .sidebar-logo { width: 200px; display: block; margin: 0 auto 20px; }
         .tuning-knob { padding: 20px 40px; }
         .knob-label { font-family: 'Fira Code'; font-size: 0.55rem; color: #555; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; display: block; }
-        
-        select.era-filter {
-            background: #111; border: 1px solid var(--border-low);
-            color: var(--brand-teal); font-family: 'Fira Code'; font-size: 0.7rem;
-            padding: 10px; width: 100%; cursor: pointer; outline: none; appearance: none;
-        }
-
-        .post-list { flex-grow: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; }
-        .post-item {
-            padding: 15px 40px; cursor: pointer; transition: 0.3s;
-            border-left: 3px solid transparent; border-bottom: 1px solid rgba(255,255,255,0.02);
-        }
+        select.era-filter { background: #111; border: 1px solid var(--border-low); color: var(--brand-teal); font-family: 'Fira Code'; font-size: 0.7rem; padding: 10px; width: 100%; outline: none; appearance: none; cursor: pointer; }
+        .post-list { flex-grow: 1; overflow-y: auto; }
+        .post-item { padding: 15px 40px; cursor: pointer; transition: 0.3s; border-left: 3px solid transparent; border-bottom: 1px solid rgba(255,255,255,0.02); }
         .post-item:hover { background: rgba(255, 255, 255, 0.03); }
         .post-item.active { background: rgba(99, 149, 238, 0.1); border-left-color: var(--brand-blue); }
-        
         .post-item h3 { font-family: 'Fira Code'; font-size: 0.75rem; margin: 0 0 5px 0; color: #eee; font-weight: 500; }
         .post-item span { font-size: 0.55rem; color: #444; letter-spacing: 1px; }
 
-        /* 2. READER VIEW */
-        .extraction-pane { 
-            flex-grow: 1; padding: 60px; overflow-y: auto; position: relative; 
-            display: flex; justify-content: center; align-items: flex-start;
-        }
-
+        /* READER */
+        .extraction-pane { flex-grow: 1; padding: 60px; overflow-y: auto; display: flex; justify-content: center; align-items: flex-start; }
         .glass-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 80px; max-width: 750px; width: 100%;
-            box-shadow: 0 40px 100px rgba(0,0,0,0.8);
-            opacity: 0; transform: translateY(20px);
-            transition: 0.8s cubic-bezier(0.2, 1, 0.3, 1);
-            box-sizing: border-box;
+            background: var(--glass-bg); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.1); padding: 80px; max-width: 750px; width: 100%;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.8); opacity: 0; transform: translateY(20px);
+            transition: 0.6s ease-out; box-sizing: border-box;
         }
         .glass-card.visible { opacity: 1; transform: translateY(0); }
-
-        .entry-title { font-family: 'Inter'; font-weight: 900; font-size: 2.2rem; letter-spacing: -1px; margin: 0 0 10px 0; color: #fff; }
+        .entry-title { font-family: 'Inter'; font-weight: 900; font-size: 2.2rem; margin: 0 0 10px 0; color: #fff; }
         .entry-meta { font-family: 'Fira Code'; font-size: 0.6rem; color: var(--brand-teal); margin-bottom: 40px; letter-spacing: 3px; text-transform: uppercase; }
         
         .entry-body { 
-            font-family: 'Merriweather', serif; 
-            font-size: 1.1rem; 
-            line-height: 2.2; 
-            color: #ccc; 
-            font-weight: 300;
+            font-family: 'Merriweather', serif; font-size: 1.1rem; line-height: 2.2; color: #ccc; font-weight: 300;
+            white-space: pre-wrap; /* THIS PRESERVES YOUR LINE BREAKS */
         }
-        .entry-body p { margin-bottom: 2rem; }
         .entry-body img { 
-            max-width: 100%; 
-            height: auto; 
-            border-radius: 4px; 
-            margin: 20px 0;
+            display: block; max-width: 100%; height: auto; border-radius: 4px; margin: 40px 0;
             border: 1px solid rgba(255,255,255,0.1);
         }
 
-        /* ERA PULSE ANIMATION */
-        @keyframes pulse-era {
-            0% { opacity: 0.4; } 50% { opacity: 1; } 100% { opacity: 0.4; }
-        }
-        .loading-signal { font-family: 'Fira Code'; font-size: 0.7rem; color: var(--brand-blue); animation: pulse-era 1.5s infinite; text-align: center; padding: 40px; }
-
-        @media (max-width: 1024px) {
-            body { flex-direction: column; overflow-y: auto; height: auto; }
-            .directory { width: 100%; height: auto; border-right: none; }
-            .post-list { max-height: 40vh; }
-            .extraction-pane { padding: 20px; min-height: 100vh; }
-            .glass-card { padding: 40px 25px; border: none; background: rgba(0,0,0,0.9); }
-            .entry-title { font-size: 1.8rem; }
-        }
+        .loading-signal { font-family: 'Fira Code'; font-size: 0.7rem; color: var(--brand-blue); text-align: center; padding: 40px; }
     </style>
 </head>
 <body>
 
     <aside class="directory">
         <div class="dir-header">
-            <a href="personal.html">
-                <img src="Images/Equal.svg" class="sidebar-logo" alt="OTW">
-            </a>
+            <a href="personal.html"><img src="Images/Equal.svg" class="sidebar-logo" alt="OTW"></a>
         </div>
-        
         <div class="tuning-knob">
             <label class="knob-label">Temporal Era</label>
-            <select id="year-select" class="era-filter" onchange="filterEra()">
-            </select>
+            <select id="year-select" class="era-filter" onchange="filterEra()"></select>
         </div>
-
-        <div class="post-list" id="post-list">
-        </div>
+        <div class="post-list" id="post-list"></div>
     </aside>
 
     <main class="extraction-pane" id="scroll-target">
@@ -142,110 +86,68 @@
     <script src="wayback_purified.js"></script>
 
     <script>
-        // ERA definitions
         const ERA_MAP = {
             ANALOG: { label: "THE_ANALOG_DAWN", glow: "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)" },
             APPLE: { label: "THE_APPLE_YEARS", glow: "linear-gradient(135deg, #13547a 0%, #80d0c7 100%)" },
             MODERN: { label: "MODERN_RESONANCE", glow: "linear-gradient(135deg, #2c3e50 0%, #4b6cb7 100%)" }
         };
 
-        // Standardize the dump
         const allResidue = wayback_raw_dump.map(post => {
             let eraConfig = ERA_MAP.MODERN;
             const yearNum = parseInt(post.year);
-            
             if (yearNum <= 2006) eraConfig = ERA_MAP.ANALOG;
             else if (yearNum <= 2022) eraConfig = ERA_MAP.APPLE;
-
-            return {
-                ...post,
-                eraLabel: eraConfig.label,
-                thumbprint: eraConfig.glow
-            };
+            return { ...post, eraLabel: eraConfig.label, thumbprint: eraConfig.glow };
         });
 
         function initWayback() {
             const select = document.getElementById('year-select');
             const years = [...new Set(allResidue.map(p => p.year))].sort((a,b) => b-a);
-            
             years.forEach(y => {
                 const opt = document.createElement('option');
                 opt.value = y;
                 opt.textContent = `ERA_${y}`;
                 select.appendChild(opt);
             });
-
-            if (years.length > 0) {
-                renderEra(years[0]);
-                const firstIndex = allResidue.findIndex(p => p.year === years[0]);
-                displayEntry(firstIndex);
-            }
+            if (years.length > 0) { renderEra(years[0]); displayEntry(allResidue.findIndex(p => p.year === years[0])); }
         }
 
         function renderEra(year) {
             const list = document.getElementById('post-list');
             list.innerHTML = "";
-            
             allResidue.forEach((post, index) => {
                 if (post.year == year) {
                     const item = document.createElement('div');
                     item.className = 'post-item';
                     item.setAttribute('data-id', index);
-                    item.onclick = () => {
-                        displayEntry(index);
-                        if (window.innerWidth <= 1024) {
-                            document.getElementById('scroll-target').scrollIntoView({ behavior: 'smooth' });
-                        }
-                    };
-                    item.innerHTML = `
-                        <h3>${post.title}</h3>
-                        <span>${post.date} // ${post.eraLabel}</span>
-                    `;
+                    item.onclick = () => displayEntry(index);
+                    item.innerHTML = `<h3>${post.title}</h3><span>${post.date}</span>`;
                     list.appendChild(item);
                 }
             });
         }
 
-        function filterEra() {
-            const year = document.getElementById('year-select').value;
-            renderEra(year);
-        }
+        function filterEra() { renderEra(document.getElementById('year-select').value); }
 
         function displayEntry(index) {
             const container = document.getElementById('glass-container');
             const post = allResidue[index];
-            
-            document.body.style.background = `
-                radial-gradient(circle at bottom right, rgba(0,0,0,0.8) 0%, #050505 100%), 
-                ${post.thumbprint}
-            `;
+            document.body.style.background = `radial-gradient(circle at bottom right, rgba(0,0,0,0.8) 0%, #050505 100%), ${post.thumbprint}`;
             document.body.style.backgroundBlendMode = "overlay";
-
             container.classList.remove('visible');
-
             setTimeout(() => {
-                // Rendering HTML (body) and the corrected Title
                 container.innerHTML = `
                     <h1 class="entry-title">${post.title}</h1>
-                    <div class="entry-meta">RESIDUE_ERA: ${post.eraLabel} // DATE: ${post.date}, ${post.year}</div>
+                    <div class="entry-meta">ERA: ${post.eraLabel} // ${post.date}</div>
                     <div class="entry-body">${post.body}</div>
                 `;
                 container.classList.add('visible');
                 document.getElementById('scroll-target').scrollTop = 0;
             }, 400);
-
-            document.querySelectorAll('.post-item').forEach(el => {
-                el.classList.toggle('active', el.getAttribute('data-id') == index);
-            });
+            document.querySelectorAll('.post-item').forEach(el => el.classList.toggle('active', el.getAttribute('data-id') == index));
         }
 
-        window.onload = () => {
-            if (typeof wayback_raw_dump !== 'undefined') {
-                initWayback();
-            } else {
-                console.error("CRITICAL: wayback_purified.js link severed.");
-            }
-        };
+        window.onload = () => { if (typeof wayback_raw_dump !== 'undefined') initWayback(); };
     </script>
 </body>
 </html>
