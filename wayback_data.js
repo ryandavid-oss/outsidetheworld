@@ -193,4 +193,67 @@ const wayback_archive = [
         "thumbprint": "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
         "body": "Another hour, another idea...\n\nWell, not exactly. I stole this from my elder brother Adam. In fact, most of what I'm doing now is just a rip-off of his great ideas. Here is a link for where you can look at any pictures that I post. Just click on \"pictures\" on the left of the screen, and you should get there. Note: There are no pictures yet. Muah hah. It's an MSN community, slow as all get-out, but it's free and Americans like them free things.\n\nOh, I'm an American.\nI thought you knew that.\nYou did?\noh."
     }
+    {
+        "file": "2003-12-31-The-final-bow-of-2003.md",
+        "title": "The Final Bow of 2003",
+        "year": "2003",
+        "date": "December 31",
+        "era": "THE_ANALOG_DAWN",
+        "thumbprint": "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
+        "body": "So, this is it. The final remnant of 2003. The curtain falls on a great performance, the actors have taken their final bows.\n\nI wish to confirm that for myself, it signifies a brand new day. Other years have had their familiar nuances and flavors; in contrast, this year contains much that is unknown and starkly in direct opposite from others past."
+    },
+    {
+        "file": "2003-09-22-Marriage.md",
+        "title": "Marriage (The Big Step)",
+        "year": "2003",
+        "date": "September 22",
+        "era": "THE_ANALOG_DAWN",
+        "thumbprint": "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
+        "body": "Good evening, wherever you are. It's been ages since I've written my material...mainly because there was simply too much to catch up on. In a nutshell: Marriage.\n\nI was married to a beautiful girl on June 28th, 2003. Remarkable girl, really, and what's more, she puts up with me. Everything. Every last bit. And I love her, and she loves me. What more could you ask for?"
+    },
+    {
+        "file": "2002-11-01-Cherry-Coke-at-the-airport.md",
+        "title": "Cherry Coke at the Airport",
+        "year": "2002",
+        "date": "November 1",
+        "era": "THE_ANALOG_DAWN",
+        "thumbprint": "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
+        "body": "I brought no pine cones home, sorry. But what I did bring back was at least a little bit of sanity. I don't really have too much to say today...I called in sick from work because I felt so lousy. This is the kind of lousy that can only come from riding a scooter to work in the very early morning hours, when the air is so cold and wet you just want to turn right around and go back to bed."
+    },
+    {
+        "file": "2002-09-11-One-year.md",
+        "title": "One Year Later: 9/11",
+        "year": "2002",
+        "date": "September 11",
+        "era": "THE_ANALOG_DAWN",
+        "thumbprint": "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
+        "body": "God grant that I can say the right words here… I’ve been debating this for weeks now. Whether to mark this day with my own words or not. It’s a somber day. It’s a day of quiet reflection, as it should be for all Americans, for the whole world. I can never forget how naked I felt that day, even in the midst of the strongest mountains of the Rockies, I felt strangely exposed."
+    },
+    {
+        "file": "2002-03-07-Breaks.md",
+        "title": "Breaks in Reality",
+        "year": "2002",
+        "date": "March 7",
+        "era": "THE_ANALOG_DAWN",
+        "thumbprint": "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
+        "body": "Too many breaks between writings... It's amazing how time consuming a website can become. It can take over entire evenings with little effort; midnight rolls around rather quickly as you try to rework your tables and make your site cooperate the way you wish it would."
+    },
+    {
+        "file": "2002-01-12-A-small-story-to-end-yer-day--.md",
+        "title": "A Small Story (Running Out of Gas)",
+        "year": "2002",
+        "date": "January 12",
+        "era": "THE_ANALOG_DAWN",
+        "thumbprint": "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
+        "body": "I was sent on an errand at work today at about 4:00 pm. Little did I know but I was about 10 miles from running out of gas, and I ran into some nasty traffic just outside Dunlap Avenue. \"Golly\", I think to myself as I putter along at about 1.3 miles per hour, praying to the gasoline gods and everything efficient and holy that my car doesn't die."
+    },
+    {
+        "file": "2002-01-11-I-must-have-a-life-less-ordina.md",
+        "title": "A Life Less Ordinary",
+        "year": "2002",
+        "date": "January 11",
+        "era": "THE_ANALOG_DAWN",
+        "thumbprint": "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
+        "body": "I must have a life less ordinary... What exactly do I mean when I say that? Simple... as I drove home and felt the 60-degree weather flow in through my car window, I briefly remembered the poor seldom-correct weather man saying \"record highs, upper 70's for today.\" And as the clouds crashed together and made rain, I thanked God."
+    }
 ];
