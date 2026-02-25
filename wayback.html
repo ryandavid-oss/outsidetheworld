@@ -125,51 +125,54 @@
         </div>
     </main>
 
+<script src="wayback_data.js"></script>
+
     <script>
-        let allResidue = [];
+        // Use the variable name from wayback_data.js
+        const allResidue = wayback_archive;
 
-        // 1. Fetch the Manifest
-        fetch('./manifest.json')
-            .then(res => res.json())
-            .then(data => {
-                allResidue = data;
-                populateEras();
-                const latestYear = data[0].year;
-                document.getElementById('year-select').value = latestYear;
-                renderEra(latestYear);
-                displayEntry(data[0]); // Load latest post
-            });
-
-        function populateEras() {
+        function initWayback() {
             const select = document.getElementById('year-select');
+            
+            // 1. Extract unique years from our data for the dropdown
             const years = [...new Set(allResidue.map(p => p.year))].sort((a,b) => b-a);
+            
             years.forEach(y => {
                 const opt = document.createElement('option');
                 opt.value = y;
                 opt.textContent = `ERA_${y}`;
                 select.appendChild(opt);
             });
+
+            // 2. Render the latest era by default
+            if (years.length > 0) {
+                renderEra(years[0]);
+                displayEntry(0); // Load the very first post in that era
+            }
         }
 
         function renderEra(year) {
             const list = document.getElementById('post-list');
             list.innerHTML = "";
-            const eraData = allResidue.filter(p => p.year == year);
-
-            eraData.forEach((post) => {
-                const item = document.createElement('div');
-                item.className = 'post-item';
-                item.onclick = () => {
-                    displayEntry(post);
-                    if (window.innerWidth <= 1024) {
-                        document.getElementById('scroll-target').scrollIntoView({ behavior: 'smooth' });
-                    }
-                };
-                item.innerHTML = `
-                    <h3>${post.title}</h3>
-                    <span>${post.date}</span>
-                `;
-                list.appendChild(item);
+            
+            // Filter our internal data by the selected year
+            allResidue.forEach((post, index) => {
+                if (post.year == year) {
+                    const item = document.createElement('div');
+                    item.className = 'post-item';
+                    item.setAttribute('data-id', index);
+                    item.onclick = () => {
+                        displayEntry(index);
+                        if (window.innerWidth <= 1024) {
+                            document.getElementById('scroll-target').scrollIntoView({ behavior: 'smooth' });
+                        }
+                    };
+                    item.innerHTML = `
+                        <h3>${post.title}</h3>
+                        <span>${post.date}, ${post.year} // ${post.era}</span>
+                    `;
+                    list.appendChild(item);
+                }
             });
         }
 
@@ -178,34 +181,45 @@
             renderEra(year);
         }
 
-        function displayEntry(post) {
+        function displayEntry(index) {
             const container = document.getElementById('glass-container');
+            const post = allResidue[index];
             
-            // ERA-BASED ATMOSPHERE
-            let glow = "linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)"; // Default
-            if (post.year <= 2006) glow = "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)";
-            if (post.year >= 2020) glow = "linear-gradient(135deg, #2c3e50 0%, #4b6cb7 100%)";
-
-            document.body.style.background = `radial-gradient(circle at bottom right, rgba(0,0,0,0.8) 0%, #050505 100%), ${glow}`;
+            // ERA-BASED ATMOSPHERE (The "Temporal Frequencies")
+            // This pulls the thumbprint gradient we assigned in Phase VI
+            document.body.style.background = `
+                radial-gradient(circle at bottom right, rgba(0,0,0,0.8) 0%, #050505 100%), 
+                ${post.thumbprint}
+            `;
             document.body.style.backgroundBlendMode = "overlay";
 
             container.classList.remove('visible');
 
-            // Fetch actual content from the .txt or .html file
-            fetch(`posts/${post.file}`)
-                .then(res => res.text())
-                .then(htmlContent => {
-                    setTimeout(() => {
-                        container.innerHTML = `
-                            <h1 class="entry-title">${post.title}</h1>
-                            <div class="entry-meta">RESIDUE_ERA: ${post.year} // DATE: ${post.date}</div>
-                            <div class="entry-body">${htmlContent}</div>
-                        `;
-                        container.classList.add('visible');
-                        document.getElementById('scroll-target').scrollTop = 0;
-                    }, 400);
-                });
+            // NO FETCH REQUIRED: We pull directly from post.body
+            setTimeout(() => {
+                container.innerHTML = `
+                    <h1 class="entry-title">${post.title}</h1>
+                    <div class="entry-meta">ERA: ${post.era} // ${post.date}, ${post.year}</div>
+                    <div class="entry-body">${post.body}</div>
+                `;
+                container.classList.add('visible');
+                document.getElementById('scroll-target').scrollTop = 0;
+            }, 400);
+
+            // Set Active State in Sidebar
+            document.querySelectorAll('.post-item').forEach(el => {
+                el.classList.toggle('active', el.getAttribute('data-id') == index);
+            });
         }
+
+        // Initialize when the page and scripts are loaded
+        window.onload = () => {
+            if (typeof wayback_archive !== 'undefined') {
+                initWayback();
+            } else {
+                console.error("DATA_SIGNAL_LOST: wayback_data.js not loaded.");
+            }
+        };
     </script>
 </body>
 </html>
