@@ -1,53 +1,57 @@
 import os
 import json
 import re
+import html # Crucial for punctuation recovery
 
-# Targeting exactly where this script lives
 folder_path = os.path.dirname(os.path.abspath(__file__)) 
 output_file = os.path.join(folder_path, 'poetry_data.js')
 
-poems_archive = []
-
-# Regex for common date patterns (e.g., "January 1, 2001", "Winter 2002", "2001")
+# Pattern for dates, but we'll manually filter the "2009" fake date
 date_pattern = r'\b(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2},?\s+\d{4}\b|\b(?:Winter|Spring|Summer|Fall)\s+\d{4}\b|\b\d{4}\b'
 
-print(f"Refining extraction in: {folder_path}")
+poems_archive = []
+
+print(f"Purifying signals in: {folder_path}")
 
 for filename in os.listdir(folder_path):
     if filename.endswith(".html") or filename.endswith(".htm"):
         try:
-            # Use 'utf-8-sig' to handle potential Windows/Mac encoding quirks with punctuation
             with open(os.path.join(folder_path, filename), 'r', encoding='utf-8-sig', errors='ignore') as f:
                 content = f.read()
 
-                # 1. Capture the Title
+                # 1. Capture Title
                 title_match = re.search(r'<h1.*?>(.*?)</h1>', content, re.IGNORECASE | re.DOTALL)
-                if not title_match:
-                    title_match = re.search(r'<title>(.*?)</title>', content, re.IGNORECASE | re.DOTALL)
-                
-                title = title_match.group(1).strip() if title_match else filename.replace('.html', '').replace('_', ' ').upper()
-                title = re.sub('<[^<]+?>', '', title)
+                title = title_match.group(1).strip() if title_match else filename.replace('.html', '').upper()
+                title = html.unescape(re.sub('<[^<]+?>', '', title))
 
-                # 2. Extract Body Text & Handle Delimiters
-                # We strip the HTML tags first but keep line breaks
+                # 2. Extract Body and Restore Punctuation
                 body_raw = re.sub(r'<(p|br|div).*?>', '\n', content, flags=re.IGNORECASE)
-                body_raw = re.sub(r'<[^<]+?>', '', body_raw) # Remove all other tags
+                body_raw = re.sub(r'<[^<]+?>', '', body_raw)
+                body_raw = html.unescape(body_raw) # RESTORES IT'S, DON'T, ETC.
 
-                # --- SIGNATURE CUT-OFF ---
-                # We find your name and ignore everything after it
-                signature = "RyanDavid Burningham"
-                if signature in body_raw:
-                    body_raw = body_raw.split(signature)[0]
+                # 3. Signature Cut-off
+                if "RyanDavid Burningham" in body_raw:
+                    body_raw = body_raw.split("RyanDavid Burningham")[0]
 
-                # 3. Harvest the Date
-                # Look for a date in the body before we clean it too much
+                # 4. Filter out "Outside The World" from the top of the poem
+                body_raw = body_raw.replace("Outside The World", "").strip()
+
+                # 5. Date Logic: Ignore "23 March 2009"
                 dates_found = re.findall(date_pattern, body_raw)
-                extracted_date = dates_found[0] if dates_found else "[DATE_LOST]"
+                extracted_date = "[DATE_LOST]"
+                
+                bad_date = "23 March 2009"
+                valid_dates = [d for d in dates_found if bad_date not in d and "2009" not in d]
+                
+                if valid_dates:
+                    extracted_date = valid_dates[0]
+                elif dates_found and bad_date not in dates_found[0]:
+                    extracted_date = dates_found[0]
 
-                # 4. Final Cleanup (Preserving apostrophes and stanzas)
+                # 6. Final Clean and Preserve Shape
                 lines = [line.strip() for line in body_raw.splitlines()]
-                # Filter out the title if it appears at the top of the body
-                if lines and title.lower() in lines[0].lower():
+                # Remove title if it's the first line
+                if lines and (title.lower() in lines[0].lower() or not lines[0]):
                     lines = lines[1:]
                 
                 body_clean = "\n".join([line for line in lines if line])
@@ -61,8 +65,7 @@ for filename in os.listdir(folder_path):
         except Exception as e:
             print(f"Error in {filename}: {e}")
 
-# Write to the JS data file
 with open(output_file, 'w', encoding='utf-8') as out:
     out.write("const archive = " + json.dumps(poems_archive, indent=4) + ";")
 
-print(f"Refinement complete. {len(poems_archive)} signals purified.")
+print(f"Success. {len(poems_archive)} verses purified into poetry_data.js")
