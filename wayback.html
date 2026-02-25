@@ -4,224 +4,207 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Wayback | Outside The World</title>
+    <meta name="theme-color" content="#050505">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <style>
-        /* 1. IMPORTING FIRA CODE FOR TERMINAL LOOK */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;900&family=Fira+Code:wght@300;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;900&family=Fira+Code:wght@300;500&family=Merriweather:ital,wght@0,300;0,700;1,300&display=swap');
 
         :root {
             --brand-blue: #6395EE;
             --brand-teal: #91AFB3;
             --bg-dark: #050505;
-            --text-gray: #666;
+            --border-low: rgba(255, 255, 255, 0.08);
+            --glass-bg: rgba(0, 0, 0, 0.6);
         }
 
-        body, html {
-            margin: 0; padding: 0;
+        body {
             background-color: var(--bg-dark);
-            color: #e0e0e0;
-            font-family: 'Inter', sans-serif;
-            scroll-behavior: smooth;
+            color: white; font-family: 'Inter', sans-serif;
+            margin: 0; display: flex; height: 100vh; overflow: hidden;
+            transition: background 1.5s ease;
         }
 
-        /* 2. BRAND ANCHOR - 220px Logo */
-        .nav-logo { 
-            width: 220px; 
-            margin: 40px 0 60px 40px; 
-            filter: drop-shadow(0 0 20px rgba(99, 149, 238, 0.2));
-            display: block;
+        /* 1. SIDEBAR (CHRONOLOGY) */
+        .directory {
+            width: 380px; border-right: 1px solid var(--border-low);
+            display: flex; flex-direction: column; background: #050505;
+            z-index: 100; flex-shrink: 0;
         }
 
-        .archive-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 0 40px 100px;
+        .dir-header { padding: 40px; border-bottom: 1px solid var(--border-low); text-align: center; }
+        
+        .sidebar-logo { 
+            width: 200px; display: block; margin: 0 auto 20px;
+            transition: transform 0.3s ease;
+        }
+        .sidebar-logo:hover { transform: scale(1.05); }
+
+        .tuning-knob { padding: 20px 40px; }
+        .knob-label { font-family: 'Fira Code'; font-size: 0.55rem; color: #555; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; display: block; }
+        
+        select.era-filter {
+            background: #111; border: 1px solid var(--border-low);
+            color: var(--brand-teal); font-family: 'Fira Code'; font-size: 0.7rem;
+            padding: 10px; width: 100%; cursor: pointer; outline: none; appearance: none;
         }
 
-        h1 { 
-            font-size: 4rem; 
-            font-weight: 900; 
-            color: white; 
-            margin: 0 0 10px 0; 
-            letter-spacing: 2px;
-            text-transform: uppercase;
+        .post-list { flex-grow: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+        .post-item {
+            padding: 15px 40px; cursor: pointer; transition: 0.3s;
+            border-left: 3px solid transparent; border-bottom: 1px solid rgba(255,255,255,0.02);
+        }
+        .post-item:hover { background: rgba(255, 255, 255, 0.03); }
+        .post-item.active { background: rgba(99, 149, 238, 0.1); border-left-color: var(--brand-blue); }
+        
+        .post-item h3 { font-family: 'Fira Code'; font-size: 0.75rem; margin: 0 0 5px 0; color: #eee; font-weight: 500; }
+        .post-item span { font-size: 0.55rem; color: #444; letter-spacing: 1px; }
+
+        /* 2. READER VIEW */
+        .extraction-pane { 
+            flex-grow: 1; padding: 60px; overflow-y: auto; position: relative; 
+            display: flex; justify-content: center; align-items: flex-start;
         }
 
-        .back-link { 
-            text-decoration: none; 
-            color: var(--brand-blue); 
-            font-size: 0.75rem; 
-            font-weight: 700;
-            letter-spacing: 3px; 
-            text-transform: uppercase; 
-            margin-bottom: 20px;
-            display: inline-block;
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 80px; max-width: 750px; width: 100%;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.8);
+            opacity: 0; transform: translateY(20px);
+            transition: 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+            box-sizing: border-box;
         }
+        .glass-card.visible { opacity: 1; transform: translateY(0); }
 
-        /* 3. TYPEWRITER TAGLINE */
-        .tagline { 
-            color: #666; 
-            letter-spacing: 2px; 
-            text-transform: uppercase; 
-            font-size: 0.85rem; 
-            margin-bottom: 50px; 
-            font-family: 'Fira Code', monospace;
-            min-height: 1.2rem;
+        .entry-title { font-family: 'Inter'; font-weight: 900; font-size: 2.2rem; letter-spacing: -1px; margin: 0 0 10px 0; color: #fff; }
+        .entry-meta { font-family: 'Fira Code'; font-size: 0.6rem; color: var(--brand-teal); margin-bottom: 40px; letter-spacing: 3px; text-transform: uppercase; }
+        .entry-body { font-family: 'Merriweather', serif; font-size: 1.1rem; line-height: 2.2; color: #ccc; font-weight: 300; }
+        .entry-body p { margin-bottom: 2rem; }
+
+        /* ERA PULSE ANIMATION */
+        @keyframes pulse-era {
+            0% { opacity: 0.4; } 50% { opacity: 1; } 100% { opacity: 0.4; }
         }
+        .loading-signal { font-family: 'Fira Code'; font-size: 0.7rem; color: var(--brand-blue); animation: pulse-era 1.5s infinite; text-align: center; padding: 40px; }
 
-        .cursor {
-            display: inline-block;
-            width: 8px;
-            height: 14px;
-            background-color: var(--brand-teal);
-            margin-left: 8px;
-            animation: blink 1s infinite;
-            vertical-align: middle;
-        }
-
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-
-        /* 4. THE YEAR PICKER */
-        .year-picker { display: flex; flex-wrap: wrap; gap: 12px; margin: 40px 0; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 30px; }
-
-        .year-btn { 
-            background: none; border: 1px solid rgba(255,255,255,0.1); color: var(--text-gray); 
-            padding: 12px 22px; cursor: pointer; transition: 0.3s; font-weight: 800; font-size: 0.75rem;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .year-btn:hover, .year-btn.active { 
-            border-color: var(--brand-blue); color: white; background: rgba(99, 149, 238, 0.1); 
-            box-shadow: 0 0 20px rgba(99, 149, 238, 0.15);
-        }
-
-        .archive-item { 
-            padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.03); 
-            display: flex; gap: 30px; align-items: baseline; transition: transform 0.3s ease;
-        }
-        .archive-item:hover { transform: translateX(10px); }
-        .archive-item span { font-family: monospace; color: var(--brand-blue); font-size: 0.85rem; font-weight: 600; }
-        .archive-item a { color: #bbb; text-decoration: none; font-size: 1.25rem; font-weight: 500; transition: 0.2s; }
-        .archive-item a:hover { color: white; }
-
-        .current-era {
-            border-color: var(--brand-blue) !important;
-            color: white !important;
-            box-shadow: 0 0 15px rgba(99, 149, 238, 0.4);
-            position: relative;
-            animation: pulse-glow 3s infinite ease-in-out;
-        }
-
-        .current-era::after {
-            content: '';
-            display: inline-block;
-            width: 4px; height: 4px;
-            background: var(--brand-blue);
-            border-radius: 50%;
-            margin-left: 8px;
-            vertical-align: middle;
-            box-shadow: 0 0 5px var(--brand-blue);
-        }
-
-        @keyframes pulse-glow {
-            0% { box-shadow: 0 0 5px rgba(99, 149, 238, 0.2); }
-            50% { box-shadow: 0 0 20px rgba(99, 149, 238, 0.5); }
-            100% { box-shadow: 0 0 5px rgba(99, 149, 238, 0.2); }
+        @media (max-width: 1024px) {
+            body { flex-direction: column; overflow-y: auto; height: auto; }
+            .directory { width: 100%; height: auto; border-right: none; }
+            .post-list { max-height: 40vh; }
+            .extraction-pane { padding: 20px; min-height: 100vh; }
+            .glass-card { padding: 40px 25px; border: none; background: rgba(0,0,0,0.9); }
+            .entry-title { font-size: 1.8rem; }
         }
     </style>
 </head>
 <body>
-    <nav>
-        <a href="personal.html">
-            <img src="Images/Equal.svg" alt="Outside The World" class="nav-logo">
-        </a>
-    </nav>
-    
-    <main class="archive-container">
-        <a href="personal.html" class="back-link">← Back to Journal</a>
-        <h1>The Way back</h1>
-        <p class="tagline"><span id="type-target"></span><span class="cursor"></span></p>
 
-        <div class="year-picker">
-            <button class="year-btn current-era" onclick="showYear('2026', this)">2026</button>
-            <button class="year-btn" onclick="showYear('2025', this)">2025</button>
-            <button class="year-btn" onclick="showYear('2024', this)">2024</button>
-            <button class="year-btn" onclick="showYear('2023', this)">2023</button>
-            <button class="year-btn" onclick="showYear('2022', this)">2022</button>
-            <button class="year-btn" onclick="showYear('2021', this)">2021</button>
-            <button class="year-btn" onclick="showYear('2019', this)">2019</button>
-            <button class="year-btn" onclick="showYear('2012', this)">2012</button>
-            <button class="year-btn" onclick="showYear('2011', this)">2011</button>
-            <button class="year-btn" onclick="showYear('2010', this)">2010</button>
-            <button class="year-btn" onclick="showYear('2009', this)">2009</button>
-            <button class="year-btn" onclick="showYear('2008', this)">2008</button>
-            <button class="year-btn" onclick="showYear('2007', this)">2007</button>
-            <button class="year-btn" onclick="showYear('2006', this)">2006</button>
-            <button class="year-btn" onclick="showYear('2004', this)">2004</button>
-            <button class="year-btn" onclick="showYear('2003', this)">2003</button>
-            <button class="year-btn" onclick="showYear('2002', this)">2002</button>
+    <aside class="directory">
+        <div class="dir-header">
+            <a href="personal.html">
+                <img src="Images/Equal.svg" class="sidebar-logo" alt="OTW">
+            </a>
         </div>
-        <div id="archive-content"></div>
+        
+        <div class="tuning-knob">
+            <label class="knob-label">Temporal Era</label>
+            <select id="year-select" class="era-filter" onchange="filterEra()">
+                </select>
+        </div>
+
+        <div class="post-list" id="post-list">
+            </div>
+    </aside>
+
+    <main class="extraction-pane" id="scroll-target">
+        <div id="glass-container" class="glass-card">
+            <div class="loading-signal">INITIALIZING_WAYBACK_UPLINK...</div>
+        </div>
     </main>
 
     <script>
-        // TYPEWRITER EFFECT
-        var taglineText = "Twenty-six years of digital residue, sorted by era.";
-        var target = document.getElementById('type-target');
-        var i = 0;
+        let allResidue = [];
 
-        function typeWriter() {
-            if (i < taglineText.length) {
-                target.innerHTML += taglineText.charAt(i);
-                i++;
-                setTimeout(typeWriter, 80); // Quick terminal speed
-            }
+        // 1. Fetch the Manifest
+        fetch('./manifest.json')
+            .then(res => res.json())
+            .then(data => {
+                allResidue = data;
+                populateEras();
+                const latestYear = data[0].year;
+                document.getElementById('year-select').value = latestYear;
+                renderEra(latestYear);
+                displayEntry(data[0]); // Load latest post
+            });
+
+        function populateEras() {
+            const select = document.getElementById('year-select');
+            const years = [...new Set(allResidue.map(p => p.year))].sort((a,b) => b-a);
+            years.forEach(y => {
+                const opt = document.createElement('option');
+                opt.value = y;
+                opt.textContent = `ERA_${y}`;
+                select.appendChild(opt);
+            });
         }
 
-        window.onload = function() {
-            setTimeout(typeWriter, 1000); // Decrypting feel delay
-        };
+        function renderEra(year) {
+            const list = document.getElementById('post-list');
+            list.innerHTML = "";
+            const eraData = allResidue.filter(p => p.year == year);
 
-        var allResidue = [];
-        fetch('./manifest.json')
-            .then(function(response) {
-                if (!response.ok) throw new Error("Could not find manifest.json");
-                return response.json();
-            })
-            .then(function(data) {
-                allResidue = data;
-                if (allResidue.length > 0) showYear('2026'); 
-            })
-            .catch(function(err) { console.error("Archive Error:", err); });
+            eraData.forEach((post) => {
+                const item = document.createElement('div');
+                item.className = 'post-item';
+                item.onclick = () => {
+                    displayEntry(post);
+                    if (window.innerWidth <= 1024) {
+                        document.getElementById('scroll-target').scrollIntoView({ behavior: 'smooth' });
+                    }
+                };
+                item.innerHTML = `
+                    <h3>${post.title}</h3>
+                    <span>${post.date}</span>
+                `;
+                list.appendChild(item);
+            });
+        }
 
-        function showYear(year, btn) {
-            var container = document.getElementById('archive-content');
-            if (!container) return;
-            container.innerHTML = ''; 
-            var yearString = year.toString();
-            var yearData = [];
-            for (var i = 0; i < allResidue.length; i++) {
-                if (allResidue[i].year.toString() === yearString) {
-                    yearData.push(allResidue[i]);
-                }
-            }
-            if (yearData.length === 0) {
-                container.innerHTML = '<p style="color:#666; padding: 20px;">No residue found for this era.</p>';
-            }
-            for (var k = 0; k < yearData.length; k++) {
-                var post = yearData[k];
-                var row = document.createElement('div');
-                row.className = 'archive-item';
-                row.innerHTML = '<span>' + post.date + '</span><a href="post.html?file=' + post.file + '">' + post.title + '</a>';
-                container.appendChild(row);
-            }
-            var buttons = document.getElementsByClassName('year-btn');
-            for (var j = 0; j < buttons.length; j++) {
-                buttons[j].classList.remove('active');
-                if (buttons[j].textContent.trim() === yearString) {
-                    buttons[j].classList.add('active');
-                }
-            }
+        function filterEra() {
+            const year = document.getElementById('year-select').value;
+            renderEra(year);
+        }
+
+        function displayEntry(post) {
+            const container = document.getElementById('glass-container');
+            
+            // ERA-BASED ATMOSPHERE
+            let glow = "linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)"; // Default
+            if (post.year <= 2006) glow = "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)";
+            if (post.year >= 2020) glow = "linear-gradient(135deg, #2c3e50 0%, #4b6cb7 100%)";
+
+            document.body.style.background = `radial-gradient(circle at bottom right, rgba(0,0,0,0.8) 0%, #050505 100%), ${glow}`;
+            document.body.style.backgroundBlendMode = "overlay";
+
+            container.classList.remove('visible');
+
+            // Fetch actual content from the .txt or .html file
+            fetch(`posts/${post.file}`)
+                .then(res => res.text())
+                .then(htmlContent => {
+                    setTimeout(() => {
+                        container.innerHTML = `
+                            <h1 class="entry-title">${post.title}</h1>
+                            <div class="entry-meta">RESIDUE_ERA: ${post.year} // DATE: ${post.date}</div>
+                            <div class="entry-body">${htmlContent}</div>
+                        `;
+                        container.classList.add('visible');
+                        document.getElementById('scroll-target').scrollTop = 0;
+                    }, 400);
+                });
         }
     </script>
 </body>
