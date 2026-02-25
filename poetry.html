@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verse Archive | Outside The World</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;900&family=Fira+Code:wght@300;500&family=Merriweather:ital,wght@0,300;0,700;1,300&display=swap');
+
+        :root {
+            --brand-blue: #6395EE;
+            --brand-teal: #91AFB3;
+            --bg-dark: #050505;
+            --border-low: rgba(145, 175, 179, 0.1);
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: white; font-family: 'Inter', sans-serif;
+            margin: 0; display: flex; height: 100vh; overflow: hidden;
+        }
+
+        /* 1. ARCHIVE DIRECTORY (LEFT) */
+        .directory {
+            width: 350px; border-right: 1px solid var(--border-low);
+            display: flex; flex-direction: column; background: rgba(255,255,255,0.01);
+        }
+
+        .dir-header {
+            padding: 40px; border-bottom: 1px solid var(--border-low);
+        }
+
+        .dir-header h1 { font-size: 0.7rem; letter-spacing: 5px; color: var(--brand-teal); text-transform: uppercase; margin: 0; }
+
+        .file-list { flex-grow: 1; overflow-y: auto; padding: 20px 0; }
+        
+        .file-item {
+            padding: 15px 40px; cursor: pointer; transition: 0.3s;
+            border-left: 2px solid transparent;
+        }
+        .file-item:hover { background: rgba(99, 149, 238, 0.05); border-left-color: var(--brand-blue); }
+        .file-item.active { background: rgba(99, 149, 238, 0.1); border-left-color: var(--brand-blue); }
+
+        .file-item h3 { font-family: 'Fira Code'; font-size: 0.75rem; margin: 0 0 5px 0; letter-spacing: 1px; }
+        .file-item span { font-size: 0.55rem; color: #444; text-transform: uppercase; letter-spacing: 2px; }
+
+        /* 2. EXTRACTION PANE (RIGHT) */
+        .extraction-pane { flex-grow: 1; padding: 80px; overflow-y: auto; position: relative; }
+
+        .poem-container { max-width: 600px; margin: 0 auto; opacity: 0; transform: translateY(20px); transition: 0.8s ease; }
+        .poem-container.visible { opacity: 1; transform: translateY(0); }
+
+        .poem-meta { font-family: 'Fira Code'; font-size: 0.65rem; color: var(--brand-teal); margin-bottom: 40px; letter-spacing: 3px; }
+        
+        .poem-body { 
+            font-family: 'Merriweather', serif; font-size: 1.2rem; line-height: 2.2; 
+            color: #ccc; white-space: pre-line; font-weight: 300;
+        }
+        .poem-body i { color: #666; }
+
+        .back-signal {
+            position: fixed; top: 40px; right: 40px;
+            font-family: 'Fira Code'; font-size: 0.6rem; color: #333;
+            text-decoration: none; letter-spacing: 3px;
+        }
+        .back-signal:hover { color: var(--brand-blue); }
+
+        /* SCROLLBAR STYLING */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-thumb { background: var(--border-low); }
+    </style>
+</head>
+<body>
+
+    <a href="index.html" class="back-signal">TERMINATE_SESSION [ESC]</a>
+
+    <aside class="directory">
+        <div class="dir-header">
+            <h1>Verse_Extraction.log</h1>
+        </div>
+        <div class="file-list" id="file-list">
+            </div>
+    </aside>
+
+    <main class="extraction-pane">
+        <div id="display-area" class="poem-container">
+            </div>
+    </main>
+
+    <script>
+        const archive = [
+            {
+                title: "OUTSIDE THE WORLD",
+                date: "Circa 2001",
+                location: "PROVO_MTC",
+                body: `I dance along the path 
+                lonely emerald fields on either side
+                I gaze into the distant canyon
+                and know that I cannot enter
+                Every star seems to smile down this evening
+                each one shines its own way    
+                and the world is quiet       
+                it does not know I am here
+                The crisp air haunts me      
+                its aroma seems too familiar    
+                yes, but under different circumstances      
+                this would be true
+                there seems to be an end    
+                as the mountain peak swallows up the sky     
+                my perspective is my weakness   
+                <i>outside the world is new…</i>`
+            },
+            {
+                title: "ORION'S BELT",
+                date: "Winter 2002",
+                location: "MOUNTAIN_WALK",
+                body: "Text for second poem would go here..."
+            }
+        ];
+
+        function loadArchive() {
+            const list = document.getElementById('file-list');
+            archive.forEach((poem, index) => {
+                const item = document.createElement('div');
+                item.className = 'file-item';
+                item.onclick = () => displayPoem(index);
+                item.innerHTML = `
+                    <h3>${poem.title}</h3>
+                    <span>${poem.date} // ${poem.location}</span>
+                `;
+                list.appendChild(item);
+            });
+        }
+
+        function displayPoem(index) {
+            const area = document.getElementById('display-area');
+            const poem = archive[index];
+            
+            // Effect: Fade out and back in
+            area.classList.remove('visible');
+            
+            setTimeout(() => {
+                area.innerHTML = `
+                    <div class="poem-meta">ORIGIN_POINT: ${poem.location} // ${poem.date}</div>
+                    <div class="poem-body">${poem.body}</div>
+                `;
+                area.classList.add('visible');
+            }, 300);
+
+            // Set active class
+            document.querySelectorAll('.file-item').forEach((el, i) => {
+                el.classList.toggle('active', i === index);
+            });
+        }
+
+        window.onload = () => {
+            loadArchive();
+            displayPoem(0); // Load first poem by default
+        };
+    </script>
+</body>
+</html>
