@@ -183,6 +183,96 @@ const wayback_archive = [
         "era": "THE_ANALOG_DAWN",
         "thumbprint": "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
         "body": "Live, from Tucson, it's Saturday night! I decided to head south this weekend and pay a few friends of mine a much-delayed visit. I got into town at about 8:00pm, so it was completely dark and I didn't notice much about the surroundings.\n\nBut when I woke up and went outside, I saw what makes this city so strange: The mountains. It seems as if they've been placed here out of a joke; strange scraggy-pointy-blotchy creations that look so out of place, it couldn't look weirder even if there was lava spewing forth from the peaks.\n\nBut other than that, it looks and feels a lot like the rest of Arizona: flat, hot, and brown. Not much else of substance to write yet today. I suppose that I could say that I might write more tonight, but from all prior experience, we all know that will not happen. I'll be too tired, lazy, or both to do anything.\n\nPeace and love to all.\n\nposted by RyanDavid Burningham 5:02 PM"
+    },
+    {
+        "file": "2002-02-27-Tucson-was-good-for-me.md",
+        "title": "Tucson was Good for Me",
+        "year": "2002",
+        "date": "February 27",
+        "era": "THE_ANALOG_DAWN",
+        "thumbprint": "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
+        "body": "It was a chance to get away and recoup from the previous weeks' happenings. But I always hate coming back from somewhere fun like that; it's like eating 50 sugar packets and finding you have the energy to run up the wall across the ceiling, only to crash out of your high 35 seconds later and fall flat on your face in horrible spectacle. \n\nMy friend Eric and I met up with some of his friends to go to an Ice Hockey game (and you may ask, what other type of hockey is there?) I dunno, I just always call it ice hockey. So anyway, we went to this ICE hockey game and U of A won; they were playing ASU so the whole arena was packed. Eric has some cool friends down there; Sara, Jaime, Dan, Erica, and others... I wish I could remember all of their names. So, hello to all of them. I doubt they'll even read this anyway.\n\nWork work work. I've been waiting to hear back from Cox Communications; I've desired a job there for months now. But no word yet, so I plug away at this fine engineering firm that I've been so blessed to be employed by. Other than that, there is very little going on in my life... although I've decided to go to California for a couple of days with my newfound friends from Tucson. It's almost been a year since I've placed a foot on that strange soil; it will be kind of nice to go back. I doubt that I'll even have any chance to see my friends there, much to my chagrin, but that's life.\n\nCheck your house and see if there's a light bulb that needs replacing. Your eyes will thank you. Unless you stare directly at every light bulb in the house. Then they might get a bit sore after a while. Use sunglasses. If anybody asks why you are wearing them, just tell them it's better than not not wearing them. After thinking about this for a while, they'll probably leave you alone...\n\nposted by RyanDavid Burningham 3:04 PM"
+    },
+    {
+        "file": "2002-02-28-Yearning.md",
+        "title": "Yearning for TMNT & Legos",
+        "year": "2002",
+        "date": "February 28",
+        "era": "THE_ANALOG_DAWN",
+        "thumbprint": "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
+        "body": "Last day of February. This month seemed to fly by for me. And it's funny too, because when I was younger, February was the most painfully slow month that I knew, and the single reason for that is because my birthday is in March. \n\nSo the days would drag by, until the 8th of March would FINALLY come and I would be a happy child. Well, not that I wasn't happy in the days preceding, but when the days last as long as weeks, well, there's only so much happiness that a 9-year-old can achieve when he's waiting for a new Lego set or a Teenage Mutant Ninja Turtle Action figure... and of course my parents always got me exactly what I wanted. \n\nWhat a pain I was... my brothers and sister were right when they called me spoiled... well, that's what they get for moving out and leaving me to be the last one in the house.\n\nSo, in roughly eight more days I will be 23 years old. I was talking to my sister yesterday and she said that I was old. I know 23 isn't old, in fact, I'm still relatively young, but when I was younger I thought 23 was ancient and that all people, upon reaching that golden age of 20, turned into giants and were whisked away into outer space to live on larger planets. \n\nYes, I had an over-active imagination as a young boy, but that's why I had so much fun. So, now I'm almost 23, I don't look forward to my birthdays as much as I used to, and to draw testament to this fact, all I really want for my birthday is a new razor. What I wouldn't give to yearn for a new video game or something. Ah, my kingdom for a Lego set.....\n\nposted by RyanDavid Burningham 9:56 AM"
+    },
+    {
+        "file": "2002-03-01-Happy-Friday.md",
+        "title": "Happy Friday Host Migration",
+        "year": "2002",
+        "date": "March 1",
+        "era": "THE_ANALOG_DAWN",
+        "thumbprint": "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
+        "body": "Greetings and happy Friday. \n\nThis weekend, I will be moving the site to a new host, so you may experience some problems when attempting to view it. This should all be taken care of by Sunday night, and I will email everyone the new address. \n\nWhat's to come? All of my previous writings will be published to the site, so that anyone who is curious may see them. Also, a great little piece of web genius called Difference of Opinion, which is the creation of my friend Eric and his friend Mike. So, be on the lookout for both of those.\n\nAlso to come: Curiosities of TV in the desert, Painting the house of Webb, and much more. Stay tuned, for sure. Enjoy the weekend!\n\nposted by RyanDavid Burningham 6:43 PM"
+    },
+    {
+        "file": "2002-03-02-No-ads-.md",
+        "title": "No Ads!",
+        "year": "2002",
+        "date": "March 2",
+        "era": "THE_ANALOG_DAWN",
+        "thumbprint": "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
+        "body": "Look Ma, no ads! \n\nWelcome to the new site. For the time being, all will remain the same except the actual address, but this marks the successful transition from the old server to the new. Check back often, you never know when you may find new stuff.\n\nI walked out this morning...\nIt was like a veil had been removed from\nbefore my eyes.\nfor the first time i saw the work of heaven...\nin the line where the hills had been\nmarried to the sky.\n\n-Sting\n\nposted by RyanDavid Burningham 7:34 PM"
+    },
+    {
+        "file": "2002-03-03-Proverbial-corners.md",
+        "title": "Revamp & Proverbial Corners",
+        "year": "2002",
+        "date": "March 3",
+        "era": "THE_ANALOG_DAWN",
+        "thumbprint": "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
+        "body": "I think I've finally turned the corner with the site now. \n\nIt's about 1:30 in the morning, I'm still awake, I have no idea why, but I wanted to post a blog after my successful revamp of Outsidetheworld.com. Already this weekend has flown by; I'll try my hardest to make Sunday last as long as possible. \n\nEarlier today, (Saturday) I helped paint my co-worker's house. It wasn't a big deal, kind of fun really, but the wind was tenacious and didn't give us a moment's rest. Paint was flying everywhere, and it seemed to try its hardest to blow me off the ladder whenever I was in a precarious position.\n\nThe rest of the day was spent glued to my computer screen, trying to figure out just how to use Microsoft Frontpage. Go figure. \n\nMay your weekend last longer than mine!\n\nposted by RyanDavid Burningham 1:30 AM"
+    },
+    {
+        "file": "2002-03-07-Breaks.md",
+        "title": "Breaks (McDonald's Grease Slip)",
+        "year": "2002",
+        "date": "March 7",
+        "era": "THE_ANALOG_DAWN",
+        "thumbprint": "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
+        "body": "Too many breaks between writings... It's amazing how time-consuming a website can become. It can take over entire evenings with little effort; midnight rolls around rather quickly as you try to rework your tables and make your site cooperate the way you wish it would. \n\nEven a small site like mine can be a great distraction, as I haven't had the desire to write any entries. Today, no more meaningless talk about the change of the site, that's done. Complete. Whammo. The magic that was the transition has worked its way into the event horizon of the web. This week: McDonald's actually can be sued for a good reason, Trip to California, and other delightful jewels.\n\nAs I often listen to the radio personalities in the morning, I do hear a great deal of junk stories. The other day I heard that there was a class action lawsuit being brought against McDonald's in Great Britain. Apparently over 30 people have suffered \"serious burns\" due to the scalding hot nature of McDonald's coffee. Their lawyer says that the warning on the coffee cups are insufficient and misleading. That's true, because sometimes you can mistake \"Warning: Extremely Hot!\" for \"Hey, this may be warm, but put it in your lap anyways and burn your procreative powers away\". \n\nNeedless to say, this is ridiculous... until Tuesday happened to me. I went to the McDonald's on 7th Street and Bell. As it ended up, the terminal by the register was broken, so the young lady behind the counter asked me to step into the kitchen itself and use the one for the drive-thru. While I was walking back, however, I slipped on a spot of grease beside the grill, and nearly placed my left hand on top of it. Close call. For them. \n\nYes, I was stupid enough to walk back there. And I probably wouldn’t have done anything anyway; I gladly confess that I'm not one of the sue-happy in this society. But it's just too bad that companies like McDonald's are taken advantage of by clueless consumers that have delusions that they have somehow, in someway, been taken advantage of. People just believe too much of their own lies. \n\nposted by RyanDavid Burningham 10:15 PM"
+    },
+    {
+        "file": "2002-04-21-New-job.md",
+        "title": "Starting at Cox E-Care",
+        "year": "2002",
+        "date": "April 21",
+        "era": "THE_ANALOG_DAWN",
+        "thumbprint": "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
+        "body": "Tomorrow I start my new job... By a show of hands, how many people hate the feeling of the first day on the job? I know I don't really care for it. Honestly, it doesn't matter to me how prepared I am, how focused and intent I make myself on creating a good impression, I will invariably feel a little out of sorts that first day. \n\nI am starting my long-awaited job at Cox Communications tomorrow, where I will be doing what they call E-Care... I will be handling customer service and technical issues for clients of Cox. The great thing about the job is that I get to do all of this by email... and I can avoid the phones a lot of the time. So, all of you who think that they can now call me directly to solve all of your cable woes, sorry Charlie... this cat don't play that way. \n\nFor the past couple of months, I have delved into the world of computer upgrades and services on the side. Not a bad little rap, I suppose, I have had a lot of success but haven't made a bit of money. I seem to have this problem with charging people for things that seem a little fun to me, I suppose. So if anyone needs their computers networked, upgraded, or repaired, let me know. I will try my hardest to let you pay me.\n\nI have also purchased a new scooter; it's one of the funniest things I have ever owned in my life. I use it mainly to get around the neighborhood, and I will use it eventually to get to work. I am trying to sell my car, so if anybody that you know is interested in purchasing, point them to my car's webpage here. It's a great car.\n\nposted by RyanDavid Burningham 6:09 PM"
+    },
+    {
+        "file": "2002-04-25-Greetings--and-why-I-m-not-mar.md",
+        "title": "Why I'm Not Married",
+        "year": "2002",
+        "date": "April 25",
+        "era": "THE_ANALOG_DAWN",
+        "thumbprint": "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
+        "body": "Greetings to you this fine day... It's funny to think about life sometimes. I only say this because I'm waiting for the bad to come at any time now. I was able to get rid of my Honda and find a much more suitable car for my purposes, and I have what appears to be a dream job at a growing company. I'm happy, I have friends, the weather is still too hot, but that won't change till October. No rain. But nevertheless, life is cruising along at an incredible pace. \n\nIn the words of Elder Nielson, life's so good, it's scary... This week has been spent mainly in the classroom at Cox. I won't delve into this too much since I may be divulging too much information, but know that it is both challenging and fun. I believe that I can stay a while at this company. \n\nThis weekend, my friend Neal will be flying home from Idaho to spend a week in between semesters with his family. It'll be good to see him and spend some time with him before he leaves again for school. He is the last remnant of my friends that aren't married yet, a rare and highly (not) coveted rank on the Totem pole of life. No, really. I swear.\n\nWhy am I not married? Because I don't know. Why aren't you married? And don't give me anything like, 'well, actually I am' because that doesn't cut it with me anymore. I need something more substantial to go on here, not just a reception invitation to pad your list of presents. Want to know how many receptions I've been to in my life? 3. My brother's, my ex-girlfriend's, and my best friend Jake's. I may, and I can't confirm this, but it's a pretty safe bet, have a fear of commitment. Who knows, who knows.\n\nWell, have a wonderful weekend. Catch you on the other side of Sunday...\n\nposted by RyanDavid Burningham 11:01 PM"
+    },
+    {
+        "file": "2002-04-26-Aspirations.md",
+        "title": "Aspirations & Ergonomics",
+        "year": "2002",
+        "date": "April 26",
+        "era": "THE_ANALOG_DAWN",
+        "thumbprint": "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
+        "body": "Heavy winds, lots of clouds, and plenty of fresh air. But only if you don't have allergies. Then you might be a bit sore today. \n\nI just got home from work and had a great desire to do some more work to the site, so I've added some new pictures and a few new pages to the mix. In all, it appears that I might be gaining ground on my goal to create a more aesthetically pleasing view for Outside The World.\n\nMy remote control is ergonomic. Is yours? It should be.\n\nposted by RyanDavid Burningham 5:37 PM"
+    },
+    {
+        "file": "2002-05-01-Nth-day.md",
+        "title": "Nth Day & The 1994 Recording",
+        "year": "2002",
+        "date": "May 1",
+        "era": "THE_ANALOG_DAWN",
+        "thumbprint": "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
+        "body": "New month, new something or other. Nth day of inbound sales training, and I'm beginning to forget who I am. I find myself having to be reminded that I was hired for an entirely different department, and that I can pretty much negate 1/3 of the banter that goes on in the classroom. \n\nToday we had a team leader from the sales floor come in and do a little Q&A with us, and I believe that at one point, it almost came to fisticuffs when they decided to bombard the poor man with questions about 'commission structure'. So I sat there, pen in my mouth, trying to focus.\n\nAnd now I'm sitting at home, listening to a recording that I made off the radio back in 1994. It's a group of songs from a radio show called Open House Party that I believe is still on the air somewhere in this country. The only reason that it holds any significance, however, is because all of these songs remind me of a specific time in my life. In 1994, as a lad of 15 years, I recorded this album 2 days before I left for EFY. And as I sit here 8 years later and listen to my tape, I still feel the same as I did that night.\n\nAh, what the heck... here is the play list:\n\n1. Harmony - Erasure\n2. You Spin Me - Dead or Alive\n3. What's Up? - Four Non Blondes\n4. Amazing - Aerosmith\n5. Oh What a Night!\n6. Happy Nation - Ace of Base\n7. We Will Rock You (Techno Mix) - Queen\n8. Black Hole Sun - Soundgarden\n9. 100% Pure Love - Crystal Waters\n10. Show Me Love - Robin S\n11. Regulate - Nate Dogg & Warren G\n\nA stellar line up. VIVA EFY!\n\nposted by RyanDavid Burningham 6:33 PM"
     }
     
 ];
