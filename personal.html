@@ -33,6 +33,7 @@
             background-size: 100% 3px, 3px 100%; pointer-events: none; z-index: 3000; opacity: 0.1;
         }
 
+        /* HEADER & WEATHER */
         .interface-header { 
             position: fixed; top: 0; left: 0; width: 100%; 
             padding: 30px 60px; z-index: 3500; 
@@ -48,7 +49,7 @@
 
         .main-interface { display: flex; max-width: 1400px; margin: 240px auto 100px; padding: 0 40px; gap: 60px; }
 
-        /* REFINED FEED COLUMN [Requirement 1] */
+        /* FEED COLUMN */
         .feed-column { 
             flex: 2; text-align: left; 
             background: var(--glass-teal);
@@ -64,7 +65,6 @@
 
         #latest-post-area h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 900; color: #fff; margin: 0 0 15px 0; letter-spacing: -1px; line-height: 1.1; }
         
-        /* CONSOLIDATED DATE LINE [Requirement 1] */
         .post-date { 
             font-family: 'Fira Code', sans-serif; font-size: 0.8rem; color: var(--brand-light-blue); 
             margin-bottom: 30px; letter-spacing: 2px; font-weight: 700;
@@ -75,46 +75,54 @@
         #md-render { font-family: 'Merriweather', serif; }
         #md-render p { line-height: 1.9; color: #d1d1d1; font-size: 1.1rem; font-weight: 300; margin-bottom: 25px; }
 
-        /* NAV NODE [Requirement 3] */
-        .nav-node {
-            margin-top: 60px;
-            padding-top: 30px;
-            border-top: 1px solid var(--border-teal);
-            display: flex;
-            justify-content: space-between;
-        }
-        .node-link {
-            font-family: 'Fira Code';
-            font-size: 0.7rem;
-            color: var(--brand-teal);
-            text-decoration: none;
-            letter-spacing: 2px;
-            transition: 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+        .nav-node { margin-top: 60px; padding-top: 30px; border-top: 1px solid var(--border-teal); display: flex; justify-content: space-between; }
+        .node-link { font-family: 'Fira Code'; font-size: 0.7rem; color: var(--brand-teal); text-decoration: none; letter-spacing: 2px; transition: 0.3s; display: flex; align-items: center; gap: 10px; }
         .node-link:hover { color: #fff; transform: translateX(-5px); }
-        .node-link.next:hover { transform: translateX(5px); }
 
         .vertical-divider { width: 1px; background: var(--border-teal); align-self: stretch; }
 
+        /* RE-ESTABLISHED CARD THEMES */
         .cards-column { flex: 1; display: flex; flex-direction: column; gap: 20px; }
         .column-label { font-family: 'Fira Code'; font-size: 0.65rem; color: var(--brand-teal); letter-spacing: 4px; text-transform: uppercase; margin: 10px 0 5px; opacity: 0.6; display: flex; align-items: center; gap: 10px; }
         .column-label::after { content: ""; height: 1px; flex-grow: 1; background: var(--border-teal); }
 
         .archive-card { border: 1px solid rgba(255, 255, 255, 0.05); padding: 35px; background: rgba(255, 255, 255, 0.01); text-decoration: none; color: inherit; position: relative; transition: 0.5s; }
-        .archive-card:hover { border-color: var(--brand-teal); transform: translateX(10px); background: rgba(145, 175, 179, 0.05); }
+        
+        /* THE + RETICLES (BEACONS) */
         .card-beacon { position: absolute; top: 25px; right: 25px; width: 20px; height: 20px; color: var(--brand-blue); transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1); }
         .card-beacon::before, .card-beacon::after { content: ''; position: absolute; background: currentColor; }
         .card-beacon::before { top: 0; left: 9px; width: 2px; height: 20px; }
         .card-beacon::after { top: 9px; left: 0; width: 20px; height: 2px; }
-        .archive-card:hover .card-beacon { transform: rotate(90deg); color: var(--brand-teal); }
 
+        /* 1. DEFAULT TEAL THEME (Archive / Flotsam) */
+        .archive-card:hover { border-color: var(--brand-teal); transform: translateX(10px); background: rgba(145, 175, 179, 0.05); }
+        .archive-card:hover .card-beacon { transform: rotate(90deg); color: var(--brand-teal); }
+        .archive-card h3 { font-size: 1.1rem; font-weight: 900; letter-spacing: 4px; text-transform: uppercase; color: var(--brand-blue); margin: 0 0 10px 0; transition: 0.3s; }
+        .archive-card:hover h3 { color: var(--brand-teal); }
+        .archive-card p { font-size: 0.7rem; color: #666; text-transform: uppercase; margin: 0; }
+
+        /* 2. SACRED AMBER THEME */
         .sacred-card { border-color: rgba(255, 179, 71, 0.2); background: rgba(255, 179, 71, 0.02); }
         .sacred-card h3 { color: var(--warm-amber) !important; }
         .sacred-card p { color: var(--rose-gold) !important; }
+        .sacred-card:hover { border-color: var(--warm-amber); background: rgba(255, 179, 71, 0.05); }
+        .sacred-card .card-beacon { color: var(--warm-amber); }
+        .sacred-card:hover .card-beacon { transform: rotate(90deg); color: var(--warm-amber); }
 
+        /* 3. DOSSIER BLUE THEME */
+        .dossier-card:hover { border-color: var(--brand-blue); background: rgba(99, 149, 238, 0.05); }
+        .dossier-card:hover h3 { color: var(--brand-blue); }
+        .dossier-card .card-beacon { color: var(--brand-blue); }
+        .dossier-card:hover .card-beacon { transform: rotate(90deg); color: var(--brand-blue); }
+
+        /* 4. TRANSITION AMETHYST THEME */
+        .transition-card:hover { border-color: var(--amethyst); background: rgba(155, 89, 182, 0.05); }
+        .transition-card h3 { color: var(--amethyst); transition: 0.3s; }
+        .transition-card:hover h3 { color: var(--amethyst); }
+        .transition-card .card-beacon { color: var(--amethyst); }
+        .transition-card:hover .card-beacon { transform: rotate(90deg); color: var(--amethyst); }
+
+        /* PODCASTS */
         .podcast-widget { background: rgba(99, 149, 238, 0.03); border: 1px solid rgba(99, 149, 238, 0.1); padding: 30px; margin-bottom: 10px; }
         .podcast-item { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; text-decoration: none; transition: 0.3s; }
         .podcast-info span { display: block; font-size: 0.8rem; color: #fff; font-weight: 700; }
@@ -170,11 +178,35 @@
             </div>
 
             <div class="column-label">02 // SUB_SECTIONS</div>
-            <a href="emmy.html" class="archive-card sacred-card"><div class="card-beacon"></div><h3>THE WARM BREEZE</h3><p>Sun. Moon. Stars. The Core Sanctuary.</p></a>
-            <a href="wayback.html" class="archive-card"><div class="card-beacon"></div><h3>The Archive</h3><p>Historical residue from 2001 to present.</p></a>
-            <a href="resume.html" class="archive-card"><div class="card-beacon"></div><h3>The Dossier</h3><p>Professional history // Network Logistics.</p></a>
-            <a href="flotsam.html" class="archive-card"><div class="card-beacon"></div><h3>The Flotsam</h3><p>Visual vanguard and project residue.</p></a>
-            <a href="transform_gate.html" class="archive-card transition-card"><div class="card-beacon"></div><h3>The Transition</h3><p>Internal audit of architectural shifts.</p></a>
+            <a href="emmy.html" class="archive-card sacred-card">
+                <div class="card-beacon"></div>
+                <h3>THE WARM BREEZE</h3>
+                <p>Sun. Moon. Stars. The Core Sanctuary.</p>
+            </a>
+
+            <a href="wayback.html" class="archive-card">
+                <div class="card-beacon"></div>
+                <h3>The Archive</h3>
+                <p>Historical residue from 2001 to present.</p>
+            </a>
+            
+            <a href="resume.html" class="archive-card dossier-card">
+                <div class="card-beacon"></div>
+                <h3>The Dossier</h3>
+                <p>Professional history // Network Logistics.</p>
+            </a>
+            
+            <a href="flotsam.html" class="archive-card">
+                <div class="card-beacon"></div>
+                <h3>The Flotsam</h3>
+                <p>Visual vanguard and project residue.</p>
+            </a>
+
+            <a href="transform_gate.html" class="archive-card transition-card">
+                <div class="card-beacon"></div>
+                <h3>The Transition</h3>
+                <p>Internal audit of architectural shifts.</p>
+            </a>
         </aside>
     </main>
 
@@ -209,21 +241,12 @@
                 .then(data => {
                     if (data.length > 0) {
                         const latest = data[0];
-                        
-                        /* REBUILT DATE ENGINE [Requirement 2] */
                         const rawDate = latest.date; 
                         let displayDate = "";
-                        
-                        // Force a 2026 anchor if the string is fuzzy
                         const cleanDate = rawDate.replace(/[^\d\w\s,]/g, ' ');
-                        const dateParts = cleanDate.split(' ');
                         const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-                        
-                        // Look for month and day
                         let foundMonth = months.find(m => rawDate.includes(m)) || months[new Date().getMonth()];
                         let foundDay = rawDate.match(/\d+/) || "01";
-                        
-                        // Always attach the current cycle year (2026) to ensure it works
                         displayDate = `${foundMonth} ${foundDay}, 2026`;
 
                         fetch('./blogger_posts/' + latest.file)
@@ -233,7 +256,6 @@
                                 const rawTitle = lines[0].replace('# ', '').trim();
                                 let bodyStartIndex = 1;
                                 while (lines[bodyStartIndex] !== undefined && lines[bodyStartIndex].trim() === "") { bodyStartIndex++; }
-                                
                                 const bodyContent = lines.slice(bodyStartIndex).join('\n');
 
                                 contentArea.innerHTML = `
