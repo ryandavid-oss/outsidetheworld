@@ -26,7 +26,7 @@
             background: radial-gradient(circle at center, #0a0a0a 0%, #020202 100%);
         }
 
-        /* 1. HERO LOGO (TOP LEFT) */
+        /* 1. HERO LOGO (TOP LEFT - PURE WHITE) */
         .hero-logo {
             position: fixed; top: 40px; left: 40px; width: 200px;
             filter: brightness(0) invert(1);
@@ -38,7 +38,7 @@
         .starfield { 
             position: fixed; top: -10%; left: -10%; width: 120%; height: 120%; 
             z-index: 0; pointer-events: none; 
-            transition: transform 0.1s ease-out; /* Smooth parallax */
+            transition: transform 0.1s ease-out;
         }
         .dim-star {
             position: absolute; background: #fff; border-radius: 50%; opacity: 0.1;
@@ -70,7 +70,6 @@
             position: relative;
         }
 
-        /* SPECIFIC GLOWS [Requirement 1 & 2] */
         .explore-btn:hover {
             border-color: var(--brand-blue);
             box-shadow: 0 0 40px rgba(99, 149, 238, 0.4);
@@ -85,7 +84,7 @@
             letter-spacing: 10px;
         }
 
-        /* 4. THE HUNTER (ORION) [Requirement 4] */
+        /* 4. THE HUNTER (ORION) */
         .constellation { position: relative; width: 320px; height: 480px; }
         .star {
             position: absolute; background: var(--star-white); border-radius: 50%;
@@ -98,11 +97,42 @@
         .bellatrix { top: 25px; right: 40px; width: 5px; height: 5px; --duration: 4.2s; }
         .saiph { bottom: 50px; left: 60px; width: 5px; height: 5px; --duration: 5.1s; }
         .rigel { bottom: 0; right: 40px; width: 8px; height: 8px; --duration: 3.8s; box-shadow: 0 0 25px rgba(100, 150, 255, 0.6); }
-        
-        .belt-star { width: 6px; height: 6px; box-shadow: 0 0 20px #fff; cursor: pointer; z-index: 50; }
-        .alnitak { top: 210px; left: 110px; --duration: 2.5s; }
-        .alnilam { top: 225px; left: 150px; --duration: 3.1s; }
-        .mintaka { top: 240px; left: 190px; --duration: 2.7s; }
+
+        /* THE TRON UPLINK SYSTEM */
+        .belt-node { position: absolute; z-index: 50; }
+        .belt-star { width: 8px; height: 8px; background: #fff; border-radius: 50%; box-shadow: 0 0 20px #fff; cursor: pointer; position: relative; }
+
+        .tron-path {
+            position: absolute; pointer-events: none;
+            stroke: var(--brand-teal); stroke-width: 1; fill: none;
+            stroke-dasharray: 200; stroke-dashoffset: 200;
+            transition: stroke-dashoffset 0.6s ease;
+            filter: drop-shadow(0 0 5px var(--brand-teal));
+        }
+
+        .tron-card {
+            position: absolute; opacity: 0;
+            background: rgba(5, 5, 5, 0.9);
+            border: 1px solid var(--brand-teal);
+            padding: 8px 15px;
+            font-family: 'Fira Code'; font-size: 0.6rem;
+            color: #fff; letter-spacing: 2px;
+            white-space: nowrap; pointer-events: none;
+            transition: opacity 0.3s ease 0.5s, transform 0.3s ease 0.5s;
+            backdrop-filter: blur(5px);
+        }
+
+        .belt-node:hover .tron-path { stroke-dashoffset: 0; }
+        .belt-node:hover .tron-card { opacity: 1; transform: translate(0, 0); }
+
+        .alnitak-node { top: 210px; left: 110px; }
+        .alnitak-node .tron-card { top: -60px; left: -140px; transform: translateX(10px); }
+
+        .alnilam-node { top: 225px; left: 150px; }
+        .alnilam-node .tron-card { top: -70px; left: 20px; transform: translateY(10px); }
+
+        .mintaka-node { top: 240px; left: 190px; }
+        .mintaka-node .tron-card { bottom: -60px; left: 30px; transform: translateX(-10px); }
 
         /* THE NEBULA (ORION'S SWORD) */
         .nebula-star { position: absolute; border-radius: 50%; background: #fff; width: 3px; height: 3px; --duration: 4s; }
@@ -110,11 +140,11 @@
         .sword-mid { 
             top: 310px; left: 140px; width: 6px; height: 6px; 
             background: #fbc2eb; box-shadow: 0 0 15px var(--nebula-pink), 0 0 30px var(--nebula-pink);
-            filter: blur(1px); /* The "M42" Nebula effect */
+            filter: blur(1px);
         }
         .sword-bottom { top: 340px; left: 135px; opacity: 0.6; }
 
-        /* 5. FOOTER & TITLES [Requirement 3] */
+        /* 5. FOOTER & TITLES */
         .center-footer { 
             position: fixed; bottom: 6vh; text-align: center; width: 100%; 
             z-index: 20;
@@ -133,7 +163,7 @@
         }
         .poem-fragment:hover { color: var(--brand-teal); }
 
-        /* MODAL */
+        /* MODAL (POEM) */
         .modal {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.95); display: none;
@@ -147,14 +177,13 @@
         }
         .modal-content b { color: #fff; display: block; margin-top: 25px; font-weight: 900; }
 
-        /* MOBILE FIXES */
         @media (max-width: 1024px) {
             .gateway-container { flex-direction: column; gap: 40px; margin-top: -50px; }
             .hero-logo { width: 140px; top: 20px; left: 20px; }
             .constellation { height: 350px; transform: scale(0.7); }
+            .tron-card { display: none; }
             .main-title { font-size: 1rem; letter-spacing: 8px; }
             .center-footer { bottom: 4vh; }
-            .nav-wing { width: 100%; }
         }
     </style>
 </head>
@@ -174,9 +203,35 @@
             <div class="star betelgeuse"></div>
             <div class="star bellatrix"></div>
             
-            <a href="personal.html"><div class="star alnitak belt-star" title="Interface"></div></a>
-            <a href="resume.html"><div class="star alnilam belt-star" title="Dossier"></div></a>
-            <a href="emmy.html"><div class="star mintaka belt-star" title="Sanctuary"></div></a>
+            <div class="belt-node alnitak-node">
+                <a href="personal.html">
+                    <div class="belt-star" title="Interface"></div>
+                    <svg class="tron-path" width="150" height="100" style="top:-80px; left:-120px;">
+                        <path d="M 125 85 L 125 20 L 10 20" />
+                    </svg>
+                    <div class="tron-card">MAIN_INTERFACE</div>
+                </a>
+            </div>
+
+            <div class="belt-node alnilam-node">
+                <a href="resume.html">
+                    <div class="belt-star" title="Dossier"></div>
+                    <svg class="tron-path" width="100" height="100" style="top:-70px; left:5px;">
+                        <path d="M 5 75 L 5 15 L 90 15" />
+                    </svg>
+                    <div class="tron-card">DOSSIER_ACCESS</div>
+                </a>
+            </div>
+
+            <div class="belt-node mintaka-node">
+                <a href="emmy.html">
+                    <div class="belt-star" title="Sanctuary"></div>
+                    <svg class="tron-path" width="150" height="100" style="top:5px; left:5px;">
+                        <path d="M 5 5 L 80 5 L 80 80" />
+                    </svg>
+                    <div class="tron-card">HEART_AND_SOUL</div>
+                </a>
+            </div>
 
             <div class="nebula-star sword-top star"></div>
             <div class="nebula-star sword-mid star"></div>
@@ -223,16 +278,13 @@
     </div>
 
     <script>
-        // 1. Reactive Background (Parallax) [Requirement 5]
         const starBg = document.getElementById('star-bg');
-        
         document.addEventListener('mousemove', (e) => {
             const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
             const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
             starBg.style.transform = `translate(${moveX}px, ${moveY}px)`;
         });
 
-        // 2. Generate Random Starfield
         for (let i = 0; i < 180; i++) {
             const star = document.createElement('div');
             star.className = 'dim-star';
