@@ -207,6 +207,116 @@
                 <h3>The Transition</h3>
                 <p>Internal struggle of fundamental identity.</p>
             </a>
+            <div class="column-label">03 // PROVISIONS_UPLINK</div>
+<div class="provisions-card">
+    <div class="provisions-display">
+        <img src="Images/OTW_Shirt_Front.jpg" alt="OTW Shirt" class="shirt-render active" id="shirt-img">
+        <div class="provisions-overlay">
+            <button class="toggle-btn" onclick="toggleShirt()">FRONT // BACK</button>
+        </div>
+    </div>
+    <div class="provisions-info">
+        <h3>THE_OTW_STANDARD_ISSUE</h3>
+        <p>Premium Black Cotton // Screen-Printed // Boutique Release</p>
+        <a href="mailto:your-email@example.com?subject=PROVISIONS_REQUEST_OTW_SHIRT" class="buy-btn">REQUEST_ACCESS // $35</a>
+    </div>
+</div>
+
+<style>
+    /* PROVISIONS CARD STYLING */
+    .provisions-card {
+        background: rgba(160, 190, 245, 0.03);
+        border: 1px solid var(--border-teal);
+        padding: 0;
+        margin-bottom: 20px;
+        overflow: hidden;
+    }
+
+    .provisions-display {
+        position: relative;
+        height: 200px;
+        background: var(--brand-light-blue); /* Matches the new light blue background */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+
+    .shirt-render {
+        max-width: 100%;
+        height: auto;
+        transition: opacity 0.5s ease;
+    }
+
+    .provisions-overlay {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+    }
+
+    .toggle-btn {
+        background: rgba(5, 5, 5, 0.8);
+        border: 1px solid var(--brand-teal);
+        color: var(--brand-teal);
+        font-family: 'Fira Code', monospace;
+        font-size: 0.5rem;
+        padding: 5px 10px;
+        cursor: pointer;
+        letter-spacing: 1px;
+    }
+
+    .provisions-info {
+        padding: 20px;
+        border-top: 1px solid var(--border-teal);
+    }
+
+    .provisions-info h3 {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.9rem;
+        font-weight: 900;
+        margin: 0 0 5px 0;
+        color: #fff;
+        letter-spacing: 2px;
+    }
+
+    .provisions-info p {
+        font-size: 0.65rem;
+        color: #666;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+    }
+
+    .buy-btn {
+        display: block;
+        text-align: center;
+        background: var(--brand-blue);
+        color: #050505;
+        text-decoration: none;
+        font-family: 'Fira Code', monospace;
+        font-size: 0.75rem;
+        font-weight: 700;
+        padding: 12px;
+        letter-spacing: 2px;
+        transition: 0.3s;
+    }
+
+    .buy-btn:hover {
+        background: #fff;
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+    }
+</style>
+
+<script>
+    // QUICK TOGGLE FOR THE SHIRT IMAGES
+    function toggleShirt() {
+        const img = document.getElementById('shirt-img');
+        if (img.src.includes('Front')) {
+            img.src = 'Images/OTW_Shirt_Back.jpg';
+        } else {
+            img.src = 'Images/OTW_Shirt_Front.jpg';
+        }
+    }
+</script>
         </aside>
     </main>
 
