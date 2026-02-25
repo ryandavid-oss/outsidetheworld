@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outside The World</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;900&family=Fira+Code:wght@300&display=swap');
+
+        :root {
+            --star-white: #ffffff;
+            --star-glow: rgba(255, 255, 255, 0.3);
+            --bg-dark: #050505;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            margin: 0; height: 100vh;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            overflow: hidden; font-family: 'Inter', sans-serif;
+            color: white;
+        }
+
+        /* ORION CONSTELLATION CONTAINER */
+        .constellation {
+            position: relative; width: 300px; height: 500px;
+            margin-bottom: 50px;
+        }
+
+        /* STAR STYLING */
+        .star {
+            position: absolute;
+            background: var(--star-white);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--star-glow), 0 0 20px var(--star-glow);
+            animation: twinkle var(--duration) infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+
+        /* POSITIONING ORION'S KEY STARS */
+        /* Betelgeuse */ .star.betelgeuse { top: 0; left: 50px; width: 4px; height: 4px; --duration: 3s; }
+        /* Bellatrix */ .star.bellatrix { top: 30px; right: 50px; width: 3px; height: 3px; --duration: 4s; }
+        
+        /* THE BELT (The Centerpiece) */
+        .belt-star {
+            width: 5px; height: 5px;
+            box-shadow: 0 0 15px var(--star-white);
+            cursor: pointer; transition: 0.3s;
+        }
+        .star.alnitak { top: 220px; left: 110px; --duration: 2.5s; }
+        .star.alnilam { top: 235px; left: 145px; --duration: 3.2s; }
+        .star.mintaka { top: 250px; left: 180px; --duration: 2.8s; }
+
+        /* Saiph */ .star.saiph { bottom: 50px; left: 60px; width: 3px; height: 3px; --duration: 5s; }
+        /* Rigel */ .star.rigel { bottom: 20px; right: 70px; width: 5px; height: 5px; --duration: 3.5s; }
+
+        /* LOGO & TITLE */
+        .title-block {
+            text-align: center; z-index: 10;
+        }
+
+        h1 {
+            font-size: 1.2rem; font-weight: 300;
+            letter-spacing: 15px; text-transform: uppercase;
+            margin: 0; opacity: 0.7;
+        }
+
+        .enter-link {
+            margin-top: 30px;
+            display: block;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.7rem;
+            color: #666;
+            text-decoration: none;
+            letter-spacing: 4px;
+            transition: 0.5s;
+        }
+        .enter-link:hover { color: white; letter-spacing: 8px; }
+
+        /* BACKGROUND POEM (SUBTLE) */
+        .poem-shroud {
+            position: absolute; bottom: 40px; left: 40px;
+            font-size: 0.6rem; line-height: 2; color: #222;
+            max-width: 300px; font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="constellation">
+        <div class="star betelgeuse"></div>
+        <div class="star bellatrix"></div>
+        
+        <a href="personal.html" title="INTERFACE">
+            <div class="star alnitak belt-star"></div>
+        </a>
+        <a href="resume.html" title="DOSSIER">
+            <div class="star alnilam belt-star"></div>
+        </a>
+        <a href="emmy.html" title="SANCTUARY">
+            <div class="star mintaka belt-star"></div>
+        </a>
+
+        <div class="star saiph"></div>
+        <div class="star rigel"></div>
+    </div>
+
+    <div class="title-block">
+        <h1>Outside The World</h1>
+        <a href="personal.html" class="enter-link">INITIALIZE_CONNECTION</a>
+    </div>
+
+    <div class="poem-shroud">
+        Perspective is my weakness...<br>
+        outside the world is new.
+    </div>
+
+</body>
+</html>
