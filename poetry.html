@@ -159,5 +159,25 @@
             displayPoem(0); // Load first poem by default
         };
     </script>
+    <script src="poetry/poetry_data.js"></script>
+
+<script>
+    // Ensure the array is named 'archive' in your poetry_data.js
+    function loadArchive() {
+        const list = document.getElementById('file-list');
+        archive.forEach((poem, index) => {
+            const item = document.createElement('div');
+            item.className = 'file-item';
+            item.onclick = () => displayPoem(index);
+            // We use the extracted title and recovered signal label
+            item.innerHTML = `
+                <h3>${poem.title}</h3>
+                <span>${poem.date} // SIGNAL_DETECTED</span>
+            `;
+            list.appendChild(item);
+        });
+    }
+    // ... rest of the display logic ...
+</script>
 </body>
 </html>
