@@ -81,14 +81,16 @@
 
         .entry-title { font-family: 'Inter'; font-weight: 900; font-size: 2.2rem; letter-spacing: -1px; margin: 0 0 10px 0; color: #fff; }
         .entry-meta { font-family: 'Fira Code'; font-size: 0.6rem; color: var(--brand-teal); margin-bottom: 40px; letter-spacing: 3px; text-transform: uppercase; }
-.entry-body { 
-    font-family: 'Merriweather', serif; 
-    font-size: 1.05rem; 
-    line-height: 2.1; 
-    color: #ccc; 
-    white-space: pre-wrap; /* Changed from pre-line to pre-wrap for better fidelity */
-    font-weight: 300; 
-}        .entry-body p { margin-bottom: 2rem; }
+        
+        .entry-body { 
+            font-family: 'Merriweather', serif; 
+            font-size: 1.1rem; 
+            line-height: 2.2; 
+            color: #ccc; 
+            font-weight: 300;
+            white-space: pre-wrap; /* Crucial for preserving original newline layout */
+        }
+        .entry-body p { margin-bottom: 2rem; }
 
         /* ERA PULSE ANIMATION */
         @keyframes pulse-era {
@@ -118,11 +120,11 @@
         <div class="tuning-knob">
             <label class="knob-label">Temporal Era</label>
             <select id="year-select" class="era-filter" onchange="filterEra()">
-                </select>
+            </select>
         </div>
 
         <div class="post-list" id="post-list">
-            </div>
+        </div>
     </aside>
 
     <main class="extraction-pane" id="scroll-target">
@@ -131,16 +133,37 @@
         </div>
     </main>
 
-<script src="wayback_data.js"></script>
+    <script src="wayback_purified.js"></script>
 
     <script>
-        // Use the variable name from wayback_data.js
-        const allResidue = wayback_archive;
+        // Use the RAW dump from wayback_purified.js and Era-Tag it dynamically
+        const allResidue = wayback_raw_dump.map(post => {
+            let era = "MODERN_RESONANCE";
+            let thumb = "linear-gradient(135deg, #2c3e50 0%, #4b6cb7 100%)";
+
+            // Categorize by Year
+            const yearNum = parseInt(post.year);
+            if (yearNum <= 2006) {
+                era = "THE_ANALOG_DAWN";
+                thumb = "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)";
+            } else if (yearNum <= 2022) {
+                era = "THE_APPLE_YEARS";
+                thumb = "linear-gradient(135deg, #13547a 0%, #80d0c7 100%)";
+            }
+
+            return {
+                ...post,
+                era: era,
+                thumbprint: thumb,
+                displayTitle: post.current_title || "Untitled Entry",
+                displayBody: post.raw_body // The raw text from your Python script
+            };
+        });
 
         function initWayback() {
             const select = document.getElementById('year-select');
             
-            // 1. Extract unique years from our data for the dropdown
+            // Extract unique years from the raw data
             const years = [...new Set(allResidue.map(p => p.year))].sort((a,b) => b-a);
             
             years.forEach(y => {
@@ -150,10 +173,11 @@
                 select.appendChild(opt);
             });
 
-            // 2. Render the latest era by default
             if (years.length > 0) {
                 renderEra(years[0]);
-                displayEntry(0); // Load the very first post in that era
+                // Automatically display the first post of the latest year
+                const firstIndex = allResidue.findIndex(p => p.year === years[0]);
+                displayEntry(firstIndex);
             }
         }
 
@@ -161,7 +185,6 @@
             const list = document.getElementById('post-list');
             list.innerHTML = "";
             
-            // Filter our internal data by the selected year
             allResidue.forEach((post, index) => {
                 if (post.year == year) {
                     const item = document.createElement('div');
@@ -174,8 +197,8 @@
                         }
                     };
                     item.innerHTML = `
-                        <h3>${post.title}</h3>
-                        <span>${post.date}, ${post.year} // ${post.era}</span>
+                        <h3>${post.displayTitle}</h3>
+                        <span>${post.date} // ${post.era}</span>
                     `;
                     list.appendChild(item);
                 }
@@ -191,8 +214,7 @@
             const container = document.getElementById('glass-container');
             const post = allResidue[index];
             
-            // ERA-BASED ATMOSPHERE (The "Temporal Frequencies")
-            // This pulls the thumbprint gradient we assigned in Phase VI
+            // Atmospheric transition
             document.body.style.background = `
                 radial-gradient(circle at bottom right, rgba(0,0,0,0.8) 0%, #050505 100%), 
                 ${post.thumbprint}
@@ -201,29 +223,28 @@
 
             container.classList.remove('visible');
 
-            // NO FETCH REQUIRED: We pull directly from post.body
+            // Render Original Raw Text
             setTimeout(() => {
                 container.innerHTML = `
-                    <h1 class="entry-title">${post.title}</h1>
+                    <h1 class="entry-title">${post.displayTitle}</h1>
                     <div class="entry-meta">ERA: ${post.era} // ${post.date}, ${post.year}</div>
-                    <div class="entry-body">${post.body}</div>
+                    <div class="entry-body">${post.displayBody}</div>
                 `;
                 container.classList.add('visible');
                 document.getElementById('scroll-target').scrollTop = 0;
             }, 400);
 
-            // Set Active State in Sidebar
+            // Active State
             document.querySelectorAll('.post-item').forEach(el => {
                 el.classList.toggle('active', el.getAttribute('data-id') == index);
             });
         }
 
-        // Initialize when the page and scripts are loaded
         window.onload = () => {
-            if (typeof wayback_archive !== 'undefined') {
+            if (typeof wayback_raw_dump !== 'undefined') {
                 initWayback();
             } else {
-                console.error("DATA_SIGNAL_LOST: wayback_data.js not loaded.");
+                console.error("DATA_SIGNAL_LOST: wayback_purified.js not found.");
             }
         };
     </script>
