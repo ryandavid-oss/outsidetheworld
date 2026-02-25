@@ -94,14 +94,12 @@
         .card-beacon::before { top: 0; left: 9px; width: 2px; height: 20px; }
         .card-beacon::after { top: 9px; left: 0; width: 20px; height: 2px; }
 
-        /* 1. DEFAULT TEAL THEME (Archive / Flotsam) */
         .archive-card:hover { border-color: var(--brand-teal); transform: translateX(10px); background: rgba(145, 175, 179, 0.05); }
         .archive-card:hover .card-beacon { transform: rotate(90deg); color: var(--brand-teal); }
         .archive-card h3 { font-size: 1.1rem; font-weight: 900; letter-spacing: 4px; text-transform: uppercase; color: var(--brand-blue); margin: 0 0 10px 0; transition: 0.3s; }
         .archive-card:hover h3 { color: var(--brand-teal); }
         .archive-card p { font-size: 0.7rem; color: #666; text-transform: uppercase; margin: 0; }
 
-        /* 2. SACRED AMBER THEME */
         .sacred-card { border-color: rgba(255, 179, 71, 0.2); background: rgba(255, 179, 71, 0.02); }
         .sacred-card h3 { color: var(--warm-amber) !important; }
         .sacred-card p { color: var(--rose-gold) !important; }
@@ -109,13 +107,11 @@
         .sacred-card .card-beacon { color: var(--warm-amber); }
         .sacred-card:hover .card-beacon { transform: rotate(90deg); color: var(--warm-amber); }
 
-        /* 3. DOSSIER BLUE THEME */
         .dossier-card:hover { border-color: var(--brand-blue); background: rgba(99, 149, 238, 0.05); }
         .dossier-card:hover h3 { color: var(--brand-blue); }
         .dossier-card .card-beacon { color: var(--brand-blue); }
         .dossier-card:hover .card-beacon { transform: rotate(90deg); color: var(--brand-blue); }
 
-        /* 4. TRANSITION AMETHYST THEME */
         .transition-card:hover { border-color: var(--amethyst); background: rgba(155, 89, 182, 0.05); }
         .transition-card h3 { color: var(--amethyst); transition: 0.3s; }
         .transition-card:hover h3 { color: var(--amethyst); }
@@ -131,9 +127,66 @@
         footer { padding: 80px 0; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
         footer p { font-size: 0.55rem; letter-spacing: 5px; color: rgba(255,255,255,0.15); text-transform: uppercase; }
 
+        /* PROVISIONS CARD CONSTRAINTS */
+        .provisions-card { background: rgba(160, 190, 245, 0.03); border: 1px solid var(--border-teal); padding: 0; margin-bottom: 20px; overflow: hidden; transition: border-color 0.4s ease; }
+        .provisions-card:hover { border-color: var(--brand-blue); }
+        .provisions-display { position: relative; height: 250px; background: var(--brand-light-blue); display: flex; justify-content: center; align-items: center; overflow: hidden; }
+        .shirt-render { max-width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s ease; }
+        .provisions-overlay { position: absolute; bottom: 10px; right: 10px; }
+        .toggle-btn { background: rgba(5, 5, 5, 0.8); border: 1px solid var(--brand-teal); color: var(--brand-teal); font-family: 'Fira Code', monospace; font-size: 0.5rem; padding: 5px 10px; cursor: pointer; letter-spacing: 1px; }
+        .provisions-info { padding: 20px; border-top: 1px solid var(--border-teal); }
+        .provisions-info h3 { font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 900; margin: 0 0 5px 0; color: #fff; letter-spacing: 2px; }
+        .provisions-info p { font-size: 0.65rem; color: #666; margin-bottom: 20px; text-transform: uppercase; }
+        .buy-btn { display: block; width: 100%; text-align: center; background: var(--brand-blue); color: #050505; text-decoration: none; font-family: 'Fira Code', monospace; font-size: 0.75rem; font-weight: 700; padding: 12px; border: none; letter-spacing: 2px; transition: 0.3s; cursor: pointer; }
+        .buy-btn:hover { background: #fff; box-shadow: 0 0 20px rgba(255, 255, 255, 0.2); }
+
+        /* MODAL STYLES */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); display: none; align-items: center; justify-content: center; z-index: 5000; }
+        .modal-content { background: var(--bg-dark); border: 1px solid var(--brand-teal); padding: 40px; width: 90%; max-width: 500px; box-shadow: 0 0 50px rgba(145, 175, 179, 0.2); }
+        .modal-header { display: flex; justify-content: space-between; margin-bottom: 30px; }
+        .close-x { background: none; border: none; color: var(--brand-pink); font-family: 'Fira Code'; cursor: pointer; }
+        .provisions-form { display: flex; flex-direction: column; gap: 15px; }
+        .form-row { display: grid; grid-template-columns: 2fr 1fr; gap: 15px; }
+        .provisions-form input, .provisions-form select, .provisions-form textarea { background: rgba(255,255,255,0.03); border: 1px solid var(--border-teal); padding: 15px; color: #fff; font-family: 'Fira Code'; font-size: 0.75rem; }
+        .provisions-form textarea { height: 100px; resize: none; }
+        .provisions-form input:focus { border-color: var(--brand-blue); outline: none; }
+
+        /* MOBILE REFINEMENTS [Requirement 1, 2, 3] */
         @media (max-width: 1024px) {
-            .interface-header { padding: 20px; flex-direction: column; }
-            .main-interface { margin-top: 280px; flex-direction: column; }
+            .interface-header { padding: 30px 20px; flex-direction: column; align-items: center; gap: 20px; }
+            .header-right { 
+                text-align: center; 
+                display: flex; 
+                flex-direction: column; 
+                align-items: center; 
+                width: 100%;
+            }
+            
+            .nav-logo { margin-bottom: 10px; } /* Logo Breathing Room */
+            
+            .weather-uplink { 
+                margin-bottom: 15px; /* Weather Breathing Room */
+                font-size: 0.7rem; 
+            }
+            
+            .top-quadrant-text { 
+                text-align: center; 
+                font-size: 1.2rem; 
+                max-width: 90%; 
+                letter-spacing: 3px;
+            }
+
+            .main-interface { margin-top: 340px; flex-direction: column; padding: 0 20px; }
+            .vertical-divider { display: none; }
+
+            /* Nav Node Alignment [Requirement 3] */
+            .nav-node { 
+                flex-direction: column; 
+                align-items: center; 
+                gap: 20px; 
+                text-align: center; 
+            }
+            .node-link { width: 100%; justify-content: center; }
         }
     </style>
 </head>
@@ -178,35 +231,11 @@
             </div>
 
             <div class="column-label">02 // SUB_SECTIONS</div>
-            <a href="emmy.html" class="archive-card sacred-card">
-                <div class="card-beacon"></div>
-                <h3>THE WARM BREEZE</h3>
-                <p>Sun. Moon. Stars. The Core Sanctuary.</p>
-            </a>
-
-            <a href="wayback.html" class="archive-card">
-                <div class="card-beacon"></div>
-                <h3>The Archive</h3>
-                <p>Historical residue from 2001 to present.</p>
-            </a>
-            
-            <a href="resume.html" class="archive-card dossier-card">
-                <div class="card-beacon"></div>
-                <h3>The Resume</h3>
-                <p>Professional history // Tech Logistics.</p>
-            </a>
-            
-            <a href="flotsam.html" class="archive-card">
-                <div class="card-beacon"></div>
-                <h3>The Flotsam</h3>
-                <p>Visual depot and verbal residue.</p>
-            </a>
-
-            <a href="transform_gate.html" class="archive-card transition-card">
-                <div class="card-beacon"></div>
-                <h3>The Transition</h3>
-                <p>Internal struggle of fundamental identity.</p>
-            </a>
+            <a href="emmy.html" class="archive-card sacred-card"><div class="card-beacon"></div><h3>THE WARM BREEZE</h3><p>Sun. Moon. Stars. The Core Sanctuary.</p></a>
+            <a href="wayback.html" class="archive-card"><div class="card-beacon"></div><h3>The Archive</h3><p>Historical residue from 2001 to present.</p></a>
+            <a href="resume.html" class="archive-card dossier-card"><div class="card-beacon"></div><h3>The Resume</h3><p>Professional history // Tech Logistics.</p></a>
+            <a href="flotsam.html" class="archive-card"><div class="card-beacon"></div><h3>The Flotsam</h3><p>Visual depot and verbal residue.</p></a>
+            <a href="transform_gate.html" class="archive-card transition-card"><div class="card-beacon"></div><h3>The Transition</h3><p>Internal struggle of fundamental identity.</p></a>
             
             <div class="column-label">03 // PROVISIONS_UPLINK</div>
             <div class="provisions-card">
@@ -222,139 +251,36 @@
                     <button onclick="openProvisionsForm()" class="buy-btn">REQUEST_ACCESS // $29</button>
                 </div>
             </div>
-
-            <div id="provisions-overlay" class="modal-overlay">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <span class="column-label">PROVISIONS_REQUEST_PROTOCOL</span>
-                        <button onclick="closeProvisionsForm()" class="close-x">[X]</button>
-                    </div>
-                    
-                    <form action="https://formspree.io/f/xgolrnkb" method="POST" class="provisions-form">
-                        <div class="form-row">
-                            <input type="text" name="name" placeholder="FIRST/LAST NAME" required>
-                            <input type="email" name="_replyto" placeholder="YOUR EMAIL" required>
-                        </div>
-                        
-                        <div class="form-row">
-                            <select name="size" required>
-                                <option value="" disabled selected>SELECT_SIZE</option>
-                                <option value="S">SMALL</option>
-                                <option value="M">MEDIUM</option>
-                                <option value="L">LARGE</option>
-                                <option value="XL">X-LARGE</option>
-                                <option value="2XL">2X-LARGE</option>
-                            </select>
-                            <input type="number" name="quantity" placeholder="QTY" min="1" value="1">
-                        </div>
-                        
-                        <textarea name="address" placeholder="SHIPPING ADDRESS" required></textarea>
-                        
-                        <button type="submit" class="buy-btn">SUBMIT_REQUEST</button>
-                    </form>
-                </div>
-            </div>
-
-            <style>
-                /* --- PROVISIONS CARD CONSTRAINTS --- */
-                .provisions-card {
-                    background: rgba(160, 190, 245, 0.03);
-                    border: 1px solid var(--border-teal);
-                    padding: 0;
-                    margin-bottom: 20px;
-                    overflow: hidden;
-                    transition: border-color 0.4s ease;
-                }
-                .provisions-card:hover { border-color: var(--brand-blue); }
-
-                .provisions-display {
-                    position: relative;
-                    height: 250px; /* Forces the box size */
-                    background: var(--brand-light-blue);
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    overflow: hidden;
-                }
-
-                .shirt-render {
-                    max-width: 100%;
-                    height: 100%;
-                    object-fit: cover; /* Ensures the high-res image fits the box perfectly */
-                    transition: opacity 0.5s ease;
-                }
-
-                .provisions-overlay { position: absolute; bottom: 10px; right: 10px; }
-
-                .toggle-btn {
-                    background: rgba(5, 5, 5, 0.8);
-                    border: 1px solid var(--brand-teal);
-                    color: var(--brand-teal);
-                    font-family: 'Fira Code', monospace;
-                    font-size: 0.5rem;
-                    padding: 5px 10px;
-                    cursor: pointer;
-                    letter-spacing: 1px;
-                }
-
-                .provisions-info { padding: 20px; border-top: 1px solid var(--border-teal); }
-                .provisions-info h3 { font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 900; margin: 0 0 5px 0; color: #fff; letter-spacing: 2px; }
-                .provisions-info p { font-size: 0.65rem; color: #666; margin-bottom: 20px; text-transform: uppercase; }
-
-                .buy-btn {
-                    display: block;
-                    width: 100%;
-                    text-align: center;
-                    background: var(--brand-blue);
-                    color: #050505;
-                    text-decoration: none;
-                    font-family: 'Fira Code', monospace;
-                    font-size: 0.75rem;
-                    font-weight: 700;
-                    padding: 12px;
-                    border: none;
-                    letter-spacing: 2px;
-                    transition: 0.3s;
-                    cursor: pointer;
-                }
-                .buy-btn:hover { background: #fff; box-shadow: 0 0 20px rgba(255, 255, 255, 0.2); }
-
-                /* --- MODAL STYLES --- */
-                .modal-overlay {
-                    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-                    background: rgba(0,0,0,0.85); backdrop-filter: blur(10px);
-                    display: none; align-items: center; justify-content: center;
-                    z-index: 5000;
-                }
-                .modal-content {
-                    background: var(--bg-dark);
-                    border: 1px solid var(--brand-teal);
-                    padding: 40px; width: 90%; max-width: 500px;
-                    box-shadow: 0 0 50px rgba(145, 175, 179, 0.2);
-                }
-                .modal-header { display: flex; justify-content: space-between; margin-bottom: 30px; }
-                .close-x { background: none; border: none; color: var(--brand-pink); font-family: 'Fira Code'; cursor: pointer; }
-                .provisions-form { display: flex; flex-direction: column; gap: 15px; }
-                .form-row { display: grid; grid-template-columns: 2fr 1fr; gap: 15px; }
-                .provisions-form input, .provisions-form select, .provisions-form textarea {
-                    background: rgba(255,255,255,0.03);
-                    border: 1px solid var(--border-teal);
-                    padding: 15px; color: #fff; font-family: 'Fira Code'; font-size: 0.75rem;
-                }
-                .provisions-form textarea { height: 100px; resize: none; }
-                .provisions-form input:focus { border-color: var(--brand-blue); outline: none; }
-            </style>
-
-            <script>
-                function openProvisionsForm() { document.getElementById('provisions-overlay').style.display = 'flex'; }
-                function closeProvisionsForm() { document.getElementById('provisions-overlay').style.display = 'none'; }
-                function toggleShirt() {
-                    const img = document.getElementById('shirt-img');
-                    img.src = img.src.includes('Front') ? 'Images/OTW_Shirt_Back.png' : 'Images/OTW_Shirt_Front.png';
-                }
-            </script>
         </aside>
     </main>
+
+    <div id="provisions-overlay" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="column-label">PROVISIONS_REQUEST_PROTOCOL</span>
+                <button onclick="closeProvisionsForm()" class="close-x">[X]</button>
+            </div>
+            <form action="https://formspree.io/f/xgolrnkb" method="POST" class="provisions-form">
+                <div class="form-row">
+                    <input type="text" name="name" placeholder="FIRST/LAST NAME" required>
+                    <input type="email" name="_replyto" placeholder="YOUR EMAIL" required>
+                </div>
+                <div class="form-row">
+                    <select name="size" required>
+                        <option value="" disabled selected>SELECT_SIZE</option>
+                        <option value="S">SMALL</option>
+                        <option value="M">MEDIUM</option>
+                        <option value="L">LARGE</option>
+                        <option value="XL">X-LARGE</option>
+                        <option value="2XL">2X-LARGE</option>
+                    </select>
+                    <input type="number" name="quantity" placeholder="QTY" min="1" value="1">
+                </div>
+                <textarea name="address" placeholder="SHIPPING ADDRESS" required></textarea>
+                <button type="submit" class="buy-btn">SUBMIT_REQUEST</button>
+            </form>
+        </div>
+    </div>
 
     <footer><p>© 2026 OUTSIDE THE WORLD LLC &nbsp; | &nbsp; SYSTEMS & STORIES</p></footer>
 
@@ -378,6 +304,13 @@
                 const text = await response.text();
                 display.textContent = `Queen Creek // ${text.trim()}`;
             } catch (e) { display.textContent = `Queen Creek // STATUS_OFFLINE`; }
+        }
+
+        function openProvisionsForm() { document.getElementById('provisions-overlay').style.display = 'flex'; }
+        function closeProvisionsForm() { document.getElementById('provisions-overlay').style.display = 'none'; }
+        function toggleShirt() {
+            const img = document.getElementById('shirt-img');
+            img.src = img.src.includes('Front') ? 'Images/OTW_Shirt_Back.png' : 'Images/OTW_Shirt_Front.png';
         }
 
         function syncLatestPost() {
