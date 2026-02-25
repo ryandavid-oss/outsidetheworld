@@ -14,7 +14,7 @@
             --bg-dark: #020202;
             --brand-blue: #6395EE;
             --brand-teal: #91AFB3;
-            --nebula-pink: rgba(255, 100, 200, 0.4);
+            --nebula-red: rgba(255, 77, 77, 0.6); /* Sharpened for the link */
         }
 
         body {
@@ -50,16 +50,11 @@
         .gateway-container {
             display: flex; align-items: center; justify-content: center;
             gap: 120px; z-index: 10; width: 90%; max-width: 1400px;
-            margin: auto 0; /* Centers vertically on desktop */
+            margin: auto 0;
         }
 
         .nav-wing { display: flex; flex-direction: column; align-items: center; text-align: center; width: 280px; }
-        
-        .wing-label {
-            font-family: 'Fira Code'; font-size: 0.65rem; color: var(--brand-teal);
-            letter-spacing: 4px; text-transform: uppercase; margin-bottom: 25px;
-            opacity: 0.6;
-        }
+        .wing-label { font-family: 'Fira Code'; font-size: 0.65rem; color: var(--brand-teal); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 25px; opacity: 0.6; }
 
         .ethereal-btn {
             background: rgba(255, 255, 255, 0.02);
@@ -88,7 +83,7 @@
         .saiph { bottom: 50px; left: 60px; width: 5px; height: 5px; --duration: 5.1s; }
         .rigel { bottom: 0; right: 40px; width: 8px; height: 8px; --duration: 3.8s; box-shadow: 0 0 25px rgba(100, 150, 255, 0.6); }
 
-        /* TRON UPLINK SYSTEM (Terminus Fixed) */
+        /* TRON UPLINK SYSTEM */
         .belt-node { position: absolute; z-index: 50; }
         .belt-star { width: 8px; height: 8px; background: #fff; border-radius: 50%; box-shadow: 0 0 20px #fff; cursor: pointer; position: relative; }
 
@@ -115,99 +110,54 @@
         .belt-node:hover .tron-path { stroke-dashoffset: 0; }
         .belt-node:hover .tron-card { opacity: 1; transform: translate(0, 0); }
 
+        /* Belt Terminals */
         .alnitak-node { top: 210px; left: 110px; }
         .alnitak-node .tron-card { top: -72px; left: -260px; transform: translateX(20px); }
-
         .alnilam-node { top: 225px; left: 150px; }
         .alnilam-node .tron-card { top: -67px; left: 95px; transform: translateX(-20px); }
-
         .mintaka-node { top: 240px; left: 190px; }
         .mintaka-node .tron-card { top: 85px; left: 5px; transform: translateY(-10px); }
 
-        .nebula-star { position: absolute; border-radius: 50%; background: #fff; width: 3px; height: 3px; --duration: 4s; }
-        .sword-top { top: 280px; left: 145px; opacity: 0.6; }
-        .sword-mid { 
-            top: 310px; left: 140px; width: 6px; height: 6px; 
-            background: #fbc2eb; box-shadow: 0 0 15px var(--nebula-pink), 0 0 30px var(--nebula-pink);
+        /* --- THE KAVYA UPLINK (RED NEBULA) --- */
+        .kavya-node { top: 310px; left: 140px; }
+        .kavya-node .sword-mid { 
+            width: 10px; height: 10px; 
+            background: #fbc2eb; 
+            box-shadow: 0 0 20px var(--nebula-red), 0 0 40px var(--nebula-red);
             filter: blur(1px);
         }
-        .sword-bottom { top: 340px; left: 135px; opacity: 0.6; }
+        .kavya-node .tron-path { 
+            stroke: #ff4d4d; 
+            filter: drop-shadow(0 0 5px #ff4d4d); 
+        }
+        .kavya-node .tron-card { 
+            border-color: #ff4d4d; 
+            top: 20px; left: 80px; 
+            transform: translateX(-10px); 
+        }
+
+        /* Sword Siblings (Dimmer) */
+        .sword-top { top: 280px; left: 145px; opacity: 0.6; width: 3px; height: 3px; }
+        .sword-bottom { top: 340px; left: 135px; opacity: 0.6; width: 3px; height: 3px; }
 
         /* 5. FOOTER & TITLES */
-        .center-footer { 
-            position: fixed; bottom: 6vh; text-align: center; width: 100%; 
-            z-index: 20;
-        }
-        
-        .main-title {
-            font-size: 1.4rem; font-weight: 300; letter-spacing: 15px;
-            text-transform: uppercase; margin: 0; opacity: 0.8;
-            padding-bottom: 20px;
-        }
-
-        .poem-fragment {
-            font-size: 0.65rem; color: #444;
-            letter-spacing: 3px; font-style: italic; cursor: pointer;
-            transition: 0.3s;
-        }
+        .center-footer { position: fixed; bottom: 6vh; text-align: center; width: 100%; z-index: 20; }
+        .main-title { font-size: 1.4rem; font-weight: 300; letter-spacing: 15px; text-transform: uppercase; margin: 0; opacity: 0.8; padding-bottom: 20px; }
+        .poem-fragment { font-size: 0.65rem; color: #444; letter-spacing: 3px; font-style: italic; cursor: pointer; transition: 0.3s; }
         .poem-fragment:hover { color: var(--brand-teal); }
 
-        /* MODAL */
-        .modal {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.95); display: none;
-            justify-content: center; align-items: center; z-index: 1000;
-            backdrop-filter: blur(25px);
-        }
-        .modal-content {
-            max-width: 500px; text-align: left; line-height: 2.2;
-            font-size: 0.9rem; font-weight: 300; color: #ccc;
-            padding: 40px; border-left: 1px solid #333;
-        }
+        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); display: none; justify-content: center; align-items: center; z-index: 1000; backdrop-filter: blur(25px); }
+        .modal-content { max-width: 500px; text-align: left; line-height: 2.2; font-size: 0.9rem; font-weight: 300; color: #ccc; padding: 40px; border-left: 1px solid #333; }
         .modal-content b { color: #fff; display: block; margin-top: 25px; font-weight: 900; }
 
-        /* --- MOBILE REFINEMENTS --- */
         @media (max-width: 1024px) {
-            body { 
-                overflow-y: auto; 
-                justify-content: flex-start; /* Stacks from top */
-                padding: 40px 20px 100px;
-                box-sizing: border-box;
-            }
-
-            .hero-logo { 
-                position: relative; top: 0; left: 0; 
-                margin: 0 auto 30px; display: block;
-                width: 180px; transform: none; 
-                opacity: 0.8;
-            }
-
-            .gateway-container { 
-                flex-direction: column; 
-                gap: 50px; 
-                margin-top: 20px; 
-                width: 100%;
-            }
-            
+            body { overflow-y: auto; justify-content: flex-start; padding: 40px 20px 100px; box-sizing: border-box; }
+            .hero-logo { position: relative; top: 0; left: 0; margin: 0 auto 30px; display: block; width: 180px; transform: none; opacity: 0.8; }
+            .gateway-container { flex-direction: column; gap: 50px; margin-top: 20px; width: 100%; }
             .constellation { height: 420px; transform: scale(0.85); margin: 0 auto; }
-            
-            /* Disable Tron on small screens to avoid UI drift */
             .tron-path, .tron-card { display: none !important; }
-
-            .center-footer { 
-                position: relative; 
-                bottom: auto; 
-                margin-top: 50px;
-                width: 100%;
-            }
-            
-            .main-title { 
-                font-size: 1.1rem; 
-                letter-spacing: 8px; 
-                padding: 0 10px;
-                box-sizing: border-box;
-            }
-            
+            .center-footer { position: relative; bottom: auto; margin-top: 50px; width: 100%; }
+            .main-title { font-size: 1.1rem; letter-spacing: 8px; padding: 0 10px; box-sizing: border-box; }
             .poem-fragment { font-size: 0.6rem; max-width: 90%; margin: 0 auto; line-height: 1.6; }
         }
     </style>
@@ -215,7 +165,6 @@
 <body>
 
     <img src="Images/Equal.svg" alt="OTW" class="hero-logo">
-
     <div class="starfield" id="star-bg"></div>
 
     <main class="gateway-container">
@@ -258,9 +207,19 @@
                 </a>
             </div>
 
-            <div class="nebula-star sword-top star"></div>
-            <div class="nebula-star sword-mid star"></div>
-            <div class="nebula-star sword-bottom star"></div>
+            <div class="star sword-top"></div>
+            
+            <div class="belt-node kavya-node">
+                <a href="poetry.html">
+                    <div class="star sword-mid" title="Kavya Archive"></div>
+                    <svg class="tron-path" width="100" height="100" style="top:-10px; left:10px;">
+                        <path d="M 5 20 L 80 20 L 80 40" />
+                    </svg>
+                    <div class="tron-card">OTW_KAVYA</div>
+                </a>
+            </div>
+
+            <div class="star sword-bottom"></div>
 
             <div class="star saiph"></div>
             <div class="star rigel"></div>
@@ -282,17 +241,7 @@
     <div class="modal" id="poem-modal" onclick="togglePoem()">
         <div class="modal-content">
             I dance along the path<br>
-            lonely emerald fields on either side<br>
-            I gaze into the distant canyon<br>
-            and know that I cannot enter<br><br>
-            Every star seems to smile down this evening<br>
-            each one shines its own way<br>
-            and the world is quiet<br>
-            it does not know I am here<br><br>
-            The crisp air haunts me<br>
-            its aroma seems too familiar<br>
-            yes, but under different circumstances<br>
-            this would be true<br><br>
+            lonely emerald fields on either side...<br><br>
             there seems to be an end<br>
             as the mountain peak swallows up the sky<br>
             my perspective is my weakness<br>
