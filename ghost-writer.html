@@ -14,6 +14,7 @@
             --brand-teal: #91AFB3; 
             --brand-light-blue: #A0BEF5;
             --bg-dark: #050505;
+            --toolbar-bg: #111111;
         }
 
         body {
@@ -68,11 +69,33 @@
             padding: 8px 15px; border-radius: 4px; font-size: 0.9rem; outline: none;
         }
 
+        /* --- EASYMDE DARK THEME OVERRIDES --- */
+        .editor-toolbar { 
+            background: var(--toolbar-bg) !important; 
+            border: 1px solid rgba(255,255,255,0.1) !important; 
+            border-bottom: none !important;
+            opacity: 1 !important;
+        }
+        
+        /* Forces the icons to be bright white */
+        .editor-toolbar i, .editor-toolbar button { 
+            color: #ffffff !important; 
+            opacity: 0.8; 
+            transition: 0.3s;
+        }
+        
+        .editor-toolbar button:hover, .editor-toolbar button.active { 
+            background: rgba(255,255,255,0.1) !important; 
+            border: none !important;
+            opacity: 1;
+        }
+
         .CodeMirror { 
             background: transparent !important; color: #ccc !important; 
             border: 1px solid rgba(255,255,255,0.1) !important; height: 500px !important; 
             font-size: 1.1rem; line-height: 1.6;
         }
+        
         .CodeMirror-cursor { border-left: 2px solid var(--brand-blue) !important; }
 
         .publish-footer { margin-top: 40px; display: flex; justify-content: flex-end; }
@@ -108,7 +131,6 @@
     </div>
 
     <script>
-        // --- DATE LOGIC ---
         const now = new Date();
         const offset = now.getTimezoneOffset() * 60000;
         const localISOTime = new Date(now - offset).toISOString().split('T')[0];
@@ -119,7 +141,8 @@
             forceSync: true,
             spellChecker: false,
             status: false,
-            toolbar: ["bold", "italic", "heading", "|", "quote", "unordered-list", "ordered-list", "|", "preview", "side-by-side", "fullscreen"]
+            // Full toolbar enabled
+            toolbar: ["bold", "italic", "heading", "|", "quote", "unordered-list", "ordered-list", "|", "link", "image", "|", "preview", "side-by-side", "fullscreen"]
         });
 
         function login() {
@@ -132,14 +155,12 @@
 
         document.getElementById('passwordInput').addEventListener('keypress', (e) => { if (e.key === 'Enter') login(); });
 
-        // --- WORD COUNT LOGIC ---
         easyMDE.codemirror.on("change", () => {
             const text = easyMDE.value().trim();
             const count = text ? text.split(/\s+/).length : 0;
             document.getElementById('meter').innerText = `RESIDUE_DENSITY: ${count} WORDS`;
         });
 
-        // --- GENERATION LOGIC ---
         document.getElementById('downloadBtn').addEventListener('click', () => {
             let title = document.getElementById('title').value;
             const chosenDate = document.getElementById('entryDate').value;
@@ -147,17 +168,12 @@
 
             if (!title || !content || !chosenDate) { alert("ERROR: NARRATIVE INCOMPLETE"); return; }
 
-            // APOSTROPHE ARMOR (Protects the text from encoding errors)
             title = title.replace(/[\u2018\u2019]/g, "'").replace(/[\u201C\u201D]/g, '"');
             content = content.replace(/[\u2018\u2019]/g, "'").replace(/[\u201C\u201D]/g, '"');
 
             const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
             const formattedDate = new Date(chosenDate + 'T00:00:00').toLocaleDateString('en-US', dateOptions);
 
-            // --- CRITICAL STRUCTURE FOR PURIFIER_V5 ---
-            // Line 1: # Title
-            // Line 2: Date: Month Day, Year
-            // Line 3+: Content
             const fullMarkdown = `# ${title}\nDate: ${formattedDate}\n\n${content}`;
 
             const fileName = `${chosenDate}-${title.toLowerCase().replace(/[^a-z0-9]/g, '-')}.md`;
