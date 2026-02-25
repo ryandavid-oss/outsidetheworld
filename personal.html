@@ -211,7 +211,7 @@
             <div class="column-label">03 // PROVISIONS_UPLINK</div>
             <div class="provisions-card">
                 <div class="provisions-display">
-                    <img src="Images/OTW_Shirt_Front.jpg" alt="OTW Shirt" class="shirt-render" id="shirt-img">
+                    <img src="Images/OTW_Shirt_Front.png" alt="OTW Shirt" class="shirt-render" id="shirt-img">
                     <div class="provisions-overlay">
                         <button class="toggle-btn" onclick="toggleShirt()">VIEW_TOGGLE</button>
                     </div>
@@ -219,7 +219,7 @@
                 <div class="provisions-info">
                     <h3>THE_OTW_STANDARD_ISSUE</h3>
                     <p>Premium Black Cotton // Screen-Printed // Boutique Release</p>
-                    <button onclick="openProvisionsForm()" class="buy-btn">REQUEST_ACCESS // $35</button>
+                    <button onclick="openProvisionsForm()" class="buy-btn">REQUEST_ACCESS // $29</button>
                 </div>
             </div>
 
@@ -350,7 +350,7 @@
                 function closeProvisionsForm() { document.getElementById('provisions-overlay').style.display = 'none'; }
                 function toggleShirt() {
                     const img = document.getElementById('shirt-img');
-                    img.src = img.src.includes('Front') ? 'Images/OTW_Shirt_Back.jpg' : 'Images/OTW_Shirt_Front.jpg';
+                    img.src = img.src.includes('Front') ? 'Images/OTW_Shirt_Back.png' : 'Images/OTW_Shirt_Front.png';
                 }
             </script>
         </aside>
