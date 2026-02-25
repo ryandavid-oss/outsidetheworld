@@ -93,5 +93,96 @@ const wayback_archive = [
         "era": "THE_ANALOG_DAWN",
         "thumbprint": "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
         "body": "A special thanks to my friend Dan for letting me use his computer. My other friend Eric came back from U of A to find his parents computer completely dead, so i let him borrow mine for the weekend.\n\nI drove another 150 miles today for work, I'm half expecting my car to yell at me. Either that, or refuse to go anywhere anymore. Arizona roads can be torture, and the traffic makes it no better. Tomorrow: The fated bagel date. Too bad i forgot to call the person i'm going with...i ended up calling her at about 10:00 pm this evening. Yeah, that's me. I'm as smooth as silk when it comes to the women.\n\nHope your weekend is memorable.\n\nposted by RyanDavid Burningham 6:55 PM"
+    },
+    {
+        "file": "2002-01-19-Bagel-Date.md",
+        "title": "The Bagel Date (Freeze Party)",
+        "year": "2002",
+        "date": "January 19",
+        "era": "THE_ANALOG_DAWN",
+        "thumbprint": "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
+        "body": "So, it wasn't so much a \"bagel date\", per se, more of an early morning freeze party...\n\nFor all those whose curiosity was perked with the infamous \"bagel date\" entries, you may wish to go here to see the pictures. There's only three; no one was really excited about getting their picture taken that early in the morning. I'd rather keep those friends of mine than have them beat me silly from taking too many pictures.\n\nIt was extremely cold this morning, especially for Arizona. At one point it availed me nothing to have arms, because those that I had were lifeless as could be. It was really fun though. The people in the pictures are Adam, Staci and Jenna. They are my friends from my home ward here in Glendale. We hiked around Thunderbird mountain and then feasted upon \"hot bagels\" and washed it all down with a strange carbonated fruit drink.\n\n\"A single serving of fruit,\" the bottle said. Too bad I got half of it on me from shaking it up. Alas, 'twas only a half serving of fruit... You may also notice from the picture of me that I don't know how to smile. That would be because my face is frozen. Or maybe only half frozen? Everything came in half sizes today, so why not!\n\nHooray for replies. I got a good one from my friend Heather to Thursday's post regarding the memorial for the WTC disaster. I encourage anybody to tell me what they think about what I've written.\n\nWhat? What's that you say? I write about silly nonsense? Exactly. Here's to nonsense, in all of its countless forms.\n\nKeep the faith."
+    },
+    {
+        "file": "2002-01-23-Block.md",
+        "title": "Severe Writer's Block",
+        "year": "2002",
+        "date": "January 23",
+        "era": "THE_ANALOG_DAWN",
+        "thumbprint": "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
+        "body": "I'm sorry to report that I have severe writer's block tonight. Too much and not enough on my mind, I suppose!\n\nTomorrow our ward does have its first basketball game, and most likely I will write about that tomorrow. Keep up the good work, everybody. Tchau.\n\nposted by RyanDavid Burningham 11:00 PM"
+    },
+    {
+        "file": "2002-01-23-Manhole-covers.md",
+        "title": "Manhole Covers & Mental Math",
+        "year": "2002",
+        "date": "January 23",
+        "era": "THE_ANALOG_DAWN",
+        "thumbprint": "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
+        "body": "Surely I can think of something to write..... Today I got to go out on the job site to look at manhole covers. Yep, beautiful, beautiful manhole covers...\n\nIt was quite the experience, really. I learned that every step you take is about 3 feet long, and therefore I had to dust off the old brain and divide foot measurements by 3s. That was a tough one, but what made it worse was that I had to walk while I was dividing. I actually had to stop once, pause, divide 3 into some insanely easy number like 140 and then keep walking.\n\nFor some reason, the number \"7\" wouldn't leave my mind. Uh-huh, three must go into 140 seven times. Math is just not my gig. But honestly, you'd think that I could divide, for cryin' out loud...\n\nBut thank goodness I still have basketball. It's one of those rare beauties I have in life that makes me feel great afterward. Even when I lose, I still feel like I knew what I was doing.* Tonight I also asked this girl in my institute class on a date. Now, all I need is ideas. No more bagel dates. There can be only one of those, I'm 'fraid.\n\nOh, and I'm sure that Adam Dawson will appreciate this one: \"Sleep America... where America goes TO sleep.\" Not FOR sleep. You were correct, much to my dismay.\n\n*Sshhh, Kevin, quiet, Neal... Your time will undoubtedly come.....\n\nposted by RyanDavid Burningham"
+    },
+    {
+        "file": "2002-01-25-Sick.md",
+        "title": "Achilles Tendons & BYU Friends",
+        "year": "2002",
+        "date": "January 25",
+        "era": "THE_ANALOG_DAWN",
+        "thumbprint": "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
+        "body": "So, I woke up sick this morning... I hate that feeling that you get when you first wake up. You know the one I'm talking about, when your chest feels like your bed decided to lay on you halfway through the night? Yeah, that one.\n\nI have this interminable cough that just won't leave me alone. Sure, it takes vacations every once in a while, but apparently it got tired of wherever it was the past few weeks and is here to curse my life again. So I ended up not going into work today, which in and of itself isn't bad, but tomorrow I know I'll wake up feeling even worse, and then I won't want to call in sick because then I look like a pansy.\n\nWell, our ward did play our first basketball game tonight, and we won 64-44. 'Twas an excellent game. I think one poor old guy ruptured his Achilles tendon right when the game started though. The first rule when you are 50 years old and trying to play with kids half your age has been and always will be: Stretch.\n\nKrystal... this is your paragraph. Your very own paragraph on my little silly-site. Now, don't go saying I don't care about you. And to all the rest of my friends in Provo—Marci, Cat, Britney, Sarah, Janelle, John—you must be included in Krystal's paragraph too. I hope all is well in BYU town.\n\nCarpe Diem.\n\nposted by RyanDavid Burningham 10:54 PM"
+    },
+    {
+        "file": "2002-01-26-Slip.md",
+        "title": "A Forté for Rock Climbing",
+        "year": "2002",
+        "date": "January 26",
+        "era": "THE_ANALOG_DAWN",
+        "thumbprint": "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
+        "body": "It finally happened. I completely let the blog slip my mind last night. Grim. I figure that I'm allowed at least one miss, if not by works, then surely by grace.\n\nYesterday was a terribly slow one at work. I think everyone must have left quietly during lunch, for when I came back from my own midday snack, there wasn't much to behold. I suppose I can blame the absence of several employees on one of the four-letter words in my vocabulary: Golf. Yup, I'm gonna go swing a stick at a ball and I figger I might not make it back today. Golf really isn't that bad, I guess. It's just not my forté.\n\nToday I went on a group date to the local rock climbing gym. I wish that I could have taken pictures; it's a really great-looking place. Once upon a time, I climbed a lot. Now, 2 years later, I realize that I'm not so hot at it. By the end of the day I was so tired and my hands gave up. They're still putting up a fierce fight, must be why this entry is taking four-score months to type. I wish to make it a more aesthetic experience for all.\n\nI hope everyone has an enjoyable rest of the weekend. Back to the grind soon enough, eh? Aye.\n\nposted by RyanDavid Burningham 8:16 PM"
+    },
+    {
+        "file": "2002-01-28-The-state-needs-a-bath.md",
+        "title": "The State Needs a Bath",
+        "year": "2002",
+        "date": "January 28",
+        "era": "THE_ANALOG_DAWN",
+        "thumbprint": "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
+        "body": "I really wish I had something to write tonight. But I don't. Why can't I just accept it? Because I don't want to, dangit. I'm 'fraid there's a mighty large number of things in life that we have to accept... but not being able to write tonight, well, that takes the taco.\n\nOh, I know what it is: it's the pollution in the Valley of the Sun. Correction: Valley of the Sun hidden behind 15 layers of dirt, smoke and dust. That must be clouding my mind of all things written.\n\nWhat I wouldn't give for a monsoon storm the size of Alaska. This state needs a bath.\n\nposted by RyanDavid Burningham 7:55 PM"
+    },
+    {
+        "file": "2002-01-29-This-sickness.md",
+        "title": "Day 4: Interminable Sickness",
+        "year": "2002",
+        "date": "January 29",
+        "era": "THE_ANALOG_DAWN",
+        "thumbprint": "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
+        "body": "Day 4 of what seems to be an interminable sickness... I was thinking of putting some large wacky number there, instead of the 4. I was thinking, \"That would be good for a laugh, eh?\"\n\nBut then the thought occurred to me that there's nothing funny about being this sick for this long. Nothing! Not a jot nor a tittle. I spent half of the day coughing, the other half aching, and the whole day wondering why I was at work when there was a perfectly acceptable reason to be in bed.\n\nBlabbity blah. Where am I going with this entry? The same place as all of my writings: nowhere in particular. I'm hungry. Time to eat.\n\nposted by RyanDavid Burningham 10:43 PM"
+    },
+    {
+        "file": "2002-01-30-Rain.md",
+        "title": "Clean Desert Air",
+        "year": "2002",
+        "date": "January 30",
+        "era": "THE_ANALOG_DAWN",
+        "thumbprint": "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
+        "body": "The rain came! I woke up this morning and peered out my window at the clouds and hoped it was so. Sure enough, the rain was falling from the sky and cleaning the air. I breathed deep the aroma of fresh rain and sighed; this was all that I needed to start feeling better. The sickness is slowly but surely leaving the body.\n\nFor those that don't live in Arizona or who haven't experienced the rain here, it's some of the sweetest smelling rain around. No salty fragrance from the ocean or lake, nothing but clean desert air. Chances are that it won't last too long, but while it's here I might as well enjoy it.\n\nI forgot to mention that it was Eric's birthday yesterday... happy birthday. 21 years old. So now I guess you don't have to feel bad anymore when they say on TV, \"must be 21 or older to enter.\" Yes my 21-year-old friend, disclaimers have no hold over you. Unless of course, you never really cared about that in the first place.\n\nNothing much else to report as of this moment. Good day, ya'll.\n\nposted by RyanDavid Burningham 12:25 PM"
+    },
+    {
+        "file": "2002-02-05-Tuesdays.md",
+        "title": "The Tuesday Tummy Slump",
+        "year": "2002",
+        "date": "February 5",
+        "era": "THE_ANALOG_DAWN",
+        "thumbprint": "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
+        "body": "I never could get used to Tuesdays... Tuesday must be the red-headed stepchild of the week. And, come to think of it, February very well could be the same in relation to the months of the year. Perhaps this is why I'm having a bit of difficulty grasping ahold of this time of my life.\n\nI had to head home from work early again today. Apparently none of the food which I had partaken of in the past day wanted to stick around any longer. So it proceeded to push and shove its blessed little way out the way it came. Poor food. My tummy (gut? stomach?) must not have been a very hospitable host today.\n\nI'm in the process of finding a good host for my new website... coming in the next couple of months. If any of you all have any suggestions in regards to which host would do dandy for my website, just let me know. I have a few really cool ideas for the site, and I'd like to make it a little more interactive. I would really like to steer clear of any ads and keep it as simple as possible.\n\nSomeone must be home... the light's on.\n\nposted by RyanDavid Burningham 6:58 PM"
+    },
+    {
+        "file": "2002-02-23-In-Tucson.md",
+        "title": "Strange Scraggy Peaks",
+        "year": "2002",
+        "date": "February 23",
+        "era": "THE_ANALOG_DAWN",
+        "thumbprint": "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
+        "body": "Live, from Tucson, it's Saturday night! I decided to head south this weekend and pay a few friends of mine a much-delayed visit. I got into town at about 8:00pm, so it was completely dark and I didn't notice much about the surroundings.\n\nBut when I woke up and went outside, I saw what makes this city so strange: The mountains. It seems as if they've been placed here out of a joke; strange scraggy-pointy-blotchy creations that look so out of place, it couldn't look weirder even if there was lava spewing forth from the peaks.\n\nBut other than that, it looks and feels a lot like the rest of Arizona: flat, hot, and brown. Not much else of substance to write yet today. I suppose that I could say that I might write more tonight, but from all prior experience, we all know that will not happen. I'll be too tired, lazy, or both to do anything.\n\nPeace and love to all.\n\nposted by RyanDavid Burningham 5:02 PM"
     }
+    
 ];
