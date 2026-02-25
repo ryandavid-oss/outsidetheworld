@@ -17,6 +17,7 @@
             --rose-gold: #E0BFB8;
             --glass-teal: rgba(145, 175, 179, 0.05);
             --border-teal: rgba(145, 175, 179, 0.2);
+            --amethyst: #9b59b6;
         }
 
         body {
@@ -32,32 +33,34 @@
             background-size: 100% 3px, 3px 100%; pointer-events: none; z-index: 3000; opacity: 0.1;
         }
 
-        /* 1. SEAMLESS TOP QUADRANT [Requirement 1] */
+        /* 1. HEADER STABILIZATION [Fix for Item 2] */
         .interface-header { 
             position: fixed; top: 0; left: 0; width: 100%; 
-            padding: 40px; z-index: 3500; 
-            display: flex; justify-content: space-between; align-items: flex-start;
+            padding: 30px 40px; z-index: 3500; 
+            display: flex; justify-content: space-between; align-items: center;
             backdrop-filter: blur(15px);
             background: linear-gradient(to bottom, rgba(5,5,5,1) 0%, rgba(5,5,5,0) 100%);
+            box-sizing: border-box; /* Prevents overflow */
         }
         .nav-logo { width: 180px; filter: drop-shadow(0 0 20px rgba(99, 149, 238, 0.2)); }
 
         .top-quadrant-text {
             text-align: right; margin: 0;
-            font-size: 0.9rem; font-weight: 900; letter-spacing: 6px;
-            line-height: 1.4; text-transform: uppercase;
+            font-size: clamp(1rem, 2vw, 1.4rem); /* Increased size */
+            font-weight: 900; letter-spacing: 4px;
+            line-height: 1.1; text-transform: uppercase;
             background: linear-gradient(to bottom, #fff 10%, #666 90%);
             -webkit-background-clip: text; background-clip: text;
             -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 10px rgba(255,255,255,0.1));
+            max-width: 50%;
         }
 
         /* 2. MAIN LAYOUT */
         .main-interface {
-            display: flex; max-width: 1400px; margin: 200px auto 100px; padding: 0 40px; gap: 60px;
+            display: flex; max-width: 1400px; margin: 180px auto 100px; padding: 0 40px; gap: 60px;
         }
 
-        /* 3. GLASSY FEED COLUMN [Requirement 2] */
+        /* 3. FEED COLUMN */
         .feed-column { 
             flex: 2; text-align: left; 
             background: var(--glass-teal);
@@ -65,10 +68,8 @@
             padding: 50px;
             backdrop-filter: blur(20px);
             position: relative;
-            box-shadow: inset 0 0 50px rgba(145, 175, 179, 0.05);
         }
 
-        /* TYPEWRITER POSITIONING [Requirement 3] */
         .typing-container {
             font-family: 'Fira Code', monospace; font-size: 0.7rem; color: var(--brand-teal);
             letter-spacing: 3px; text-transform: uppercase; margin-bottom: 20px;
@@ -78,11 +79,10 @@
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
         #latest-post-area h2 { 
-            font-size: 2.8rem; font-weight: 900; color: #fff; 
+            font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 900; color: #fff; 
             margin: 0 0 15px 0; letter-spacing: -1px; line-height: 1.1;
         }
         
-        /* PROMINENT DATE [Requirement 4] */
         .post-date { 
             font-family: 'Fira Code', sans-serif; font-size: 0.85rem; color: var(--brand-light-blue); 
             margin-bottom: 40px; letter-spacing: 2px; font-weight: 700;
@@ -90,31 +90,26 @@
             border-bottom: 1px solid var(--border-teal); padding-bottom: 15px;
         }
         
-        #md-render p { line-height: 1.9; color: #d1d1d1; font-size: 1.15rem; font-weight: 300; margin-bottom: 25px; }
+        #md-render p { line-height: 1.9; color: #d1d1d1; font-size: 1.1rem; font-weight: 300; margin-bottom: 25px; }
 
         .vertical-divider { width: 1px; background: var(--border-teal); align-self: stretch; }
 
-        /* 4. ASIDE & PODCAST WIDGET [Requirement 5] */
+        /* 4. ASIDE & LABELS [Fix for Item 4] */
         .cards-column { flex: 1; display: flex; flex-direction: column; gap: 20px; }
+
+        .column-label {
+            font-family: 'Fira Code'; font-size: 0.65rem; color: var(--brand-teal);
+            letter-spacing: 4px; text-transform: uppercase;
+            margin: 10px 0 5px; opacity: 0.6;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .column-label::after { content: ""; height: 1px; flex-grow: 1; background: var(--border-teal); }
 
         .podcast-widget {
             background: rgba(99, 149, 238, 0.03);
             border: 1px solid rgba(99, 149, 238, 0.1);
-            padding: 30px; margin-bottom: 20px;
-            position: relative; overflow: hidden;
+            padding: 30px; margin-bottom: 10px;
         }
-        .podcast-widget h4 {
-            font-family: 'Fira Code'; font-size: 0.65rem; color: var(--brand-blue);
-            letter-spacing: 4px; margin: 0 0 20px 0; text-transform: uppercase;
-        }
-        .podcast-item {
-            display: flex; align-items: center; gap: 15px; margin-bottom: 15px;
-            text-decoration: none; transition: 0.3s;
-        }
-        .podcast-item:hover { transform: translateX(5px); }
-        .podcast-icon { font-size: 1.2rem; color: var(--brand-light-blue); }
-        .podcast-info span { display: block; font-size: 0.8rem; color: #fff; font-weight: 700; }
-        .podcast-info label { font-size: 0.6rem; color: #666; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; }
 
         .archive-card {
             border: 1px solid rgba(255, 255, 255, 0.05); padding: 30px;
@@ -125,20 +120,22 @@
         .archive-card h3 { font-size: 1.1rem; font-weight: 900; letter-spacing: 4px; text-transform: uppercase; color: var(--brand-blue); margin: 0 0 10px 0; }
         .archive-card p { font-size: 0.7rem; color: #666; text-transform: uppercase; margin: 0; }
 
-        /* SACRED VARIATION */
+        /* RE-INSERTING TRANSITION & SPECIAL STYLES [Fix for Item 3] */
         .sacred-card { border-color: rgba(255, 179, 71, 0.2); background: rgba(255, 179, 71, 0.02); }
         .sacred-card h3 { color: var(--warm-amber) !important; }
         .sacred-card p { color: var(--rose-gold) !important; }
-        .sacred-card:hover { border-color: var(--warm-amber); }
+
+        .transition-card:hover { border-color: var(--amethyst); background: rgba(155, 89, 182, 0.05); }
+        .transition-card h3 { color: var(--amethyst); }
 
         footer { padding: 80px 0; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
         footer p { font-size: 0.55rem; letter-spacing: 5px; color: rgba(255,255,255,0.15); text-transform: uppercase; }
 
         @media (max-width: 1024px) {
-            .interface-header { padding: 20px; flex-direction: column; align-items: center; gap: 15px; }
-            .top-quadrant-text { text-align: center; font-size: 0.7rem; }
-            .main-interface { margin-top: 180px; flex-direction: column; }
-            .feed-column { padding: 30px; }
+            .interface-header { padding: 20px; }
+            .top-quadrant-text { font-size: 0.8rem; }
+            .main-interface { margin-top: 150px; flex-direction: column; }
+            .vertical-divider { display: none; }
         }
     </style>
 </head>
@@ -146,13 +143,13 @@
 
     <header class="interface-header">
         <a href="index.html"><img src="Images/Equal.svg" alt="Back" class="nav-logo"></a>
-        <h1 class="top-quadrant-text">A QUARTER-CENTURY OF<br>DIGITAL RESIDUE</h1>
+        <h1 class="top-quadrant-text">A QUARTER-CENTURY OF DIGITAL RESIDUE</h1>
     </header>
 
     <main class="main-interface">
         <section class="feed-column">
             <div class="typing-container">
-                <span id="typing-text">INITIALIZING_UPLINK...</span><span class="cursor"></span>
+                <span id="typing-text">INITIALIZING_HANDSHAKE...</span><span class="cursor"></span>
             </div>
 
             <div id="latest-post-area">
@@ -163,31 +160,13 @@
         <div class="vertical-divider"></div>
 
         <aside class="cards-column">
+            <div class="column-label">01 // FREQUENCY_UPLINK</div>
             <div class="podcast-widget">
-                <h4>FREQUENCY_UPLINK</h4>
-                <a href="#" class="podcast-item">
-                    <div class="podcast-icon">🎙️</div>
-                    <div class="podcast-info">
-                        <span>The Daily</span>
-                        <label>News & Analysis</label>
-                    </div>
-                </a>
-                <a href="#" class="podcast-item">
-                    <div class="podcast-icon">📡</div>
-                    <div class="podcast-info">
-                        <span>Huberman Lab</span>
-                        <label>Science & Health</label>
-                    </div>
-                </a>
-                <a href="#" class="podcast-item">
-                    <div class="podcast-icon">⚡</div>
-                    <div class="podcast-info">
-                        <span>Hard Fork</span>
-                        <label>Tech & Future</label>
-                    </div>
-                </a>
-            </div>
+                <p style="font-size: 0.7rem; color: #555; margin: 0;">STREAMING_ACTIVE...</p>
+                </div>
 
+            <div class="column-label">02 // SUB_SECTIONS</div>
+            
             <a href="emmy.html" class="archive-card sacred-card">
                 <h3>THE WARM BREEZE</h3>
                 <p>Sun. Moon. Stars. The Core Sanctuary.</p>
@@ -207,6 +186,11 @@
                 <h3>The Flotsam</h3>
                 <p>Visual vanguard and project residue.</p>
             </a>
+
+            <a href="transform_gate.html" class="archive-card transition-card">
+                <h3>The Transition</h3>
+                <p>Internal audit of architectural shifts.</p>
+            </a>
         </aside>
     </main>
 
@@ -216,36 +200,27 @@
     <script>
         const typeTarget = document.getElementById('typing-text');
         
-        // Multi-state Typewriter Logic [Requirement 3]
         function runTypewriterProtocol() {
             const state1 = "SYNCHRONIZING...";
             const state2 = "CURRENT FEED SYNCED.";
-            
             let i = 0;
             typeTarget.innerHTML = "";
             
             function typeState1() {
                 if (i < state1.length) {
-                    typeTarget.innerHTML += state1.charAt(i);
-                    i++;
+                    typeTarget.innerHTML += state1.charAt(i); i++;
                     setTimeout(typeState1, 100);
                 } else {
-                    setTimeout(() => {
-                        i = 0;
-                        typeTarget.innerHTML = "";
-                        typeState2();
-                    }, 1000);
+                    setTimeout(() => { i = 0; typeTarget.innerHTML = ""; typeState2(); }, 800);
                 }
             }
 
             function typeState2() {
                 if (i < state2.length) {
-                    typeTarget.innerHTML += state2.charAt(i);
-                    i++;
+                    typeTarget.innerHTML += state2.charAt(i); i++;
                     setTimeout(typeState2, 80);
                 }
             }
-
             typeState1();
         }
 
@@ -257,18 +232,24 @@
                     if (data.length > 0) {
                         const latest = data[0];
                         
-                        // DATE FORMATTING [Requirement 4]
-                        // Expects a string we can parse or a specific format
-                        const dateObj = new Date(latest.date);
-                        const options = { month: 'long', day: 'numeric', year: 'numeric' };
-                        const formattedDate = dateObj.toLocaleDateString('en-US', options);
+                        /* IMPROVED DATE PARSING [Fix for Item 1] */
+                        const rawDate = latest.date; 
+                        let displayDate;
+                        try {
+                            const dateObj = new Date(rawDate);
+                            if (isNaN(dateObj.getTime())) {
+                                displayDate = rawDate; // Fallback if Date object fails
+                            } else {
+                                const options = { month: 'long', day: 'numeric', year: 'numeric' };
+                                displayDate = dateObj.toLocaleDateString('en-US', options);
+                            }
+                        } catch(e) { displayDate = rawDate; }
 
                         fetch('./blogger_posts/' + latest.file)
                             .then(res => res.text())
                             .then(text => {
                                 const lines = text.split('\n');
                                 const rawTitle = lines[0].replace('# ', '').trim();
-                                
                                 let bodyStartIndex = 1;
                                 while (lines[bodyStartIndex] !== undefined && 
                                       (lines[bodyStartIndex].trim() === "" || 
@@ -281,11 +262,11 @@
 
                                 contentArea.innerHTML = `
                                     <h2>${rawTitle}</h2>
-                                    <span class="post-date">${formattedDate}</span>
+                                    <span class="post-date">${displayDate}</span>
                                     <div id="md-render"></div>
                                 `;
                                 document.getElementById('md-render').innerHTML = marked.parse(bodyContent);
-                                runTypewriterProtocol(); // Start typewriter after data loads
+                                runTypewriterProtocol();
                             });
                     }
                 })
