@@ -33,31 +33,29 @@
             background-size: 100% 3px, 3px 100%; pointer-events: none; z-index: 3000; opacity: 0.1;
         }
 
-        /* 1. HEADER STABILIZATION [Fix for Item 2] */
+        /* 1. SYMMETRICAL HEADER [Requirement 1] */
         .interface-header { 
             position: fixed; top: 0; left: 0; width: 100%; 
-            padding: 30px 40px; z-index: 3500; 
+            padding: 40px 60px; z-index: 3500; 
             display: flex; justify-content: space-between; align-items: center;
             backdrop-filter: blur(15px);
             background: linear-gradient(to bottom, rgba(5,5,5,1) 0%, rgba(5,5,5,0) 100%);
-            box-sizing: border-box; /* Prevents overflow */
+            box-sizing: border-box;
         }
-        .nav-logo { width: 180px; filter: drop-shadow(0 0 20px rgba(99, 149, 238, 0.2)); }
+        .nav-logo { width: 240px; filter: drop-shadow(0 0 20px rgba(99, 149, 238, 0.2)); }
 
         .top-quadrant-text {
             text-align: right; margin: 0;
-            font-size: clamp(1rem, 2vw, 1.4rem); /* Increased size */
-            font-weight: 900; letter-spacing: 4px;
-            line-height: 1.1; text-transform: uppercase;
+            font-size: 1.5rem; font-weight: 900; letter-spacing: 5px;
+            line-height: 1.2; text-transform: uppercase;
             background: linear-gradient(to bottom, #fff 10%, #666 90%);
             -webkit-background-clip: text; background-clip: text;
             -webkit-text-fill-color: transparent;
-            max-width: 50%;
         }
 
         /* 2. MAIN LAYOUT */
         .main-interface {
-            display: flex; max-width: 1400px; margin: 180px auto 100px; padding: 0 40px; gap: 60px;
+            display: flex; max-width: 1400px; margin: 240px auto 100px; padding: 0 40px; gap: 60px;
         }
 
         /* 3. FEED COLUMN */
@@ -94,7 +92,7 @@
 
         .vertical-divider { width: 1px; background: var(--border-teal); align-self: stretch; }
 
-        /* 4. ASIDE & LABELS [Fix for Item 4] */
+        /* 4. CARDS & RETICLES [Requirement 2] */
         .cards-column { flex: 1; display: flex; flex-direction: column; gap: 20px; }
 
         .column-label {
@@ -105,36 +103,59 @@
         }
         .column-label::after { content: ""; height: 1px; flex-grow: 1; background: var(--border-teal); }
 
+        .archive-card {
+            border: 1px solid rgba(255, 255, 255, 0.05); padding: 35px;
+            background: rgba(255, 255, 255, 0.01); text-decoration: none; color: inherit;
+            position: relative; transition: 0.5s;
+        }
+        .archive-card:hover { border-color: var(--brand-teal); transform: translateX(10px); background: rgba(145, 175, 179, 0.05); }
+
+        /* THE + RETICLES (BEACONS) */
+        .card-beacon { 
+            position: absolute; top: 25px; right: 25px; width: 20px; height: 20px; 
+            color: var(--brand-blue); transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1); 
+        }
+        .card-beacon::before, .card-beacon::after { content: ''; position: absolute; background: currentColor; }
+        .card-beacon::before { top: 0; left: 9px; width: 2px; height: 20px; }
+        .card-beacon::after { top: 9px; left: 0; width: 20px; height: 2px; }
+        
+        .archive-card:hover .card-beacon { transform: rotate(90deg); color: var(--brand-teal); }
+        .sacred-card:hover .card-beacon { color: var(--warm-amber); }
+        .transition-card:hover .card-beacon { color: var(--amethyst) !important; }
+
+        .archive-card h3 { font-size: 1.1rem; font-weight: 900; letter-spacing: 4px; text-transform: uppercase; color: var(--brand-blue); margin: 0 0 10px 0; }
+        .archive-card p { font-size: 0.7rem; color: #666; text-transform: uppercase; margin: 0; }
+
+        /* SPECIAL CARDS */
+        .sacred-card { border-color: rgba(255, 179, 71, 0.2); background: rgba(255, 179, 71, 0.02); }
+        .sacred-card h3 { color: var(--warm-amber) !important; }
+        .sacred-card p { color: var(--rose-gold) !important; }
+        .transition-card h3 { color: var(--amethyst); }
+
+        /* 5. PODCAST WIDGET [Requirement 3] */
         .podcast-widget {
             background: rgba(99, 149, 238, 0.03);
             border: 1px solid rgba(99, 149, 238, 0.1);
             padding: 30px; margin-bottom: 10px;
         }
-
-        .archive-card {
-            border: 1px solid rgba(255, 255, 255, 0.05); padding: 30px;
-            background: rgba(255, 255, 255, 0.01); text-decoration: none; color: inherit;
-            position: relative; transition: 0.5s;
+        .podcast-item {
+            display: flex; align-items: center; gap: 15px; margin-bottom: 20px;
+            text-decoration: none; transition: 0.3s;
         }
-        .archive-card:hover { border-color: var(--brand-teal); transform: translateX(10px); background: rgba(145, 175, 179, 0.05); }
-        .archive-card h3 { font-size: 1.1rem; font-weight: 900; letter-spacing: 4px; text-transform: uppercase; color: var(--brand-blue); margin: 0 0 10px 0; }
-        .archive-card p { font-size: 0.7rem; color: #666; text-transform: uppercase; margin: 0; }
-
-        /* RE-INSERTING TRANSITION & SPECIAL STYLES [Fix for Item 3] */
-        .sacred-card { border-color: rgba(255, 179, 71, 0.2); background: rgba(255, 179, 71, 0.02); }
-        .sacred-card h3 { color: var(--warm-amber) !important; }
-        .sacred-card p { color: var(--rose-gold) !important; }
-
-        .transition-card:hover { border-color: var(--amethyst); background: rgba(155, 89, 182, 0.05); }
-        .transition-card h3 { color: var(--amethyst); }
+        .podcast-item:last-child { margin-bottom: 0; }
+        .podcast-item:hover { transform: translateX(5px); }
+        .podcast-icon { font-size: 1.2rem; color: var(--brand-light-blue); }
+        .podcast-info span { display: block; font-size: 0.8rem; color: #fff; font-weight: 700; }
+        .podcast-info label { font-size: 0.6rem; color: #666; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; }
 
         footer { padding: 80px 0; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
         footer p { font-size: 0.55rem; letter-spacing: 5px; color: rgba(255,255,255,0.15); text-transform: uppercase; }
 
+        /* MOBILE OPTIMIZATION */
         @media (max-width: 1024px) {
-            .interface-header { padding: 20px; }
-            .top-quadrant-text { font-size: 0.8rem; }
-            .main-interface { margin-top: 150px; flex-direction: column; }
+            .interface-header { padding: 20px; flex-direction: column; text-align: center; }
+            .top-quadrant-text { text-align: center; font-size: 1.1rem; margin-top: 15px; max-width: 100%; }
+            .main-interface { margin-top: 280px; flex-direction: column; }
             .vertical-divider { display: none; }
         }
     </style>
@@ -143,7 +164,7 @@
 
     <header class="interface-header">
         <a href="index.html"><img src="Images/Equal.svg" alt="Back" class="nav-logo"></a>
-        <h1 class="top-quadrant-text">A QUARTER-CENTURY OF DIGITAL RESIDUE</h1>
+        <h1 class="top-quadrant-text">A QUARTER-CENTURY OF<br>DIGITAL RESIDUE</h1>
     </header>
 
     <main class="main-interface">
@@ -162,32 +183,57 @@
         <aside class="cards-column">
             <div class="column-label">01 // FREQUENCY_UPLINK</div>
             <div class="podcast-widget">
-                <p style="font-size: 0.7rem; color: #555; margin: 0;">STREAMING_ACTIVE...</p>
-                </div>
+                <a href="#" class="podcast-item">
+                    <div class="podcast-icon">🎙️</div>
+                    <div class="podcast-info">
+                        <span>The Daily</span>
+                        <label>News & Analysis</label>
+                    </div>
+                </a>
+                <a href="#" class="podcast-item">
+                    <div class="podcast-icon">📡</div>
+                    <div class="podcast-info">
+                        <span>Huberman Lab</span>
+                        <label>Science & Health</label>
+                    </div>
+                </a>
+                <a href="#" class="podcast-item">
+                    <div class="podcast-icon">⚡</div>
+                    <div class="podcast-info">
+                        <span>Hard Fork</span>
+                        <label>Tech & Future</label>
+                    </div>
+                </a>
+            </div>
 
             <div class="column-label">02 // SUB_SECTIONS</div>
             
             <a href="emmy.html" class="archive-card sacred-card">
+                <div class="card-beacon"></div>
                 <h3>THE WARM BREEZE</h3>
                 <p>Sun. Moon. Stars. The Core Sanctuary.</p>
             </a>
 
             <a href="wayback.html" class="archive-card">
+                <div class="card-beacon"></div>
                 <h3>The Archive</h3>
                 <p>Historical residue from 2001 to present.</p>
             </a>
             
             <a href="resume.html" class="archive-card">
+                <div class="card-beacon"></div>
                 <h3>The Dossier</h3>
                 <p>Professional history // Network Logistics.</p>
             </a>
             
             <a href="flotsam.html" class="archive-card">
+                <div class="card-beacon"></div>
                 <h3>The Flotsam</h3>
                 <p>Visual vanguard and project residue.</p>
             </a>
 
             <a href="transform_gate.html" class="archive-card transition-card">
+                <div class="card-beacon"></div>
                 <h3>The Transition</h3>
                 <p>Internal audit of architectural shifts.</p>
             </a>
@@ -232,17 +278,19 @@
                     if (data.length > 0) {
                         const latest = data[0];
                         
-                        /* IMPROVED DATE PARSING [Fix for Item 1] */
+                        /* FORCED YEAR RENDER [Requirement 4] */
                         const rawDate = latest.date; 
                         let displayDate;
                         try {
                             const dateObj = new Date(rawDate);
-                            if (isNaN(dateObj.getTime())) {
-                                displayDate = rawDate; // Fallback if Date object fails
-                            } else {
-                                const options = { month: 'long', day: 'numeric', year: 'numeric' };
-                                displayDate = dateObj.toLocaleDateString('en-US', options);
-                            }
+                            // Explicitly format to ensure Month Day, Year
+                            displayDate = dateObj.toLocaleDateString('en-US', { 
+                                month: 'long', 
+                                day: 'numeric', 
+                                year: 'numeric' 
+                            });
+                            // If invalid, just use raw string but try to ensure it looks clean
+                            if (displayDate === "Invalid Date") displayDate = rawDate;
                         } catch(e) { displayDate = rawDate; }
 
                         fetch('./blogger_posts/' + latest.file)
