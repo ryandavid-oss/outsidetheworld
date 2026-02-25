@@ -20,7 +20,7 @@
         body {
             background-color: var(--bg-dark);
             margin: 0; min-height: 100vh;
-            display: flex; justify-content: center; align-items: center;
+            display: flex; flex-direction: column; align-items: center;
             overflow-x: hidden; font-family: 'Inter', sans-serif;
             color: white;
             background: radial-gradient(circle at center, #0a0a0a 0%, #020202 100%);
@@ -50,6 +50,7 @@
         .gateway-container {
             display: flex; align-items: center; justify-content: center;
             gap: 120px; z-index: 10; width: 90%; max-width: 1400px;
+            margin: auto 0; /* Centers vertically on desktop */
         }
 
         .nav-wing { display: flex; flex-direction: column; align-items: center; text-align: center; width: 280px; }
@@ -70,19 +71,8 @@
             position: relative;
         }
 
-        .explore-btn:hover {
-            border-color: var(--brand-blue);
-            box-shadow: 0 0 40px rgba(99, 149, 238, 0.4);
-            color: var(--brand-blue);
-            letter-spacing: 10px;
-        }
-
-        .consult-btn:hover {
-            border-color: var(--brand-teal);
-            box-shadow: 0 0 40px rgba(145, 175, 179, 0.4);
-            color: var(--brand-teal);
-            letter-spacing: 10px;
-        }
+        .explore-btn:hover { border-color: var(--brand-blue); box-shadow: 0 0 40px rgba(99, 149, 238, 0.4); color: var(--brand-blue); }
+        .consult-btn:hover { border-color: var(--brand-teal); box-shadow: 0 0 40px rgba(145, 175, 179, 0.4); color: var(--brand-teal); }
 
         /* 4. THE HUNTER (ORION) */
         .constellation { position: relative; width: 320px; height: 480px; }
@@ -98,7 +88,7 @@
         .saiph { bottom: 50px; left: 60px; width: 5px; height: 5px; --duration: 5.1s; }
         .rigel { bottom: 0; right: 40px; width: 8px; height: 8px; --duration: 3.8s; box-shadow: 0 0 25px rgba(100, 150, 255, 0.6); }
 
-        /* THE TRON UPLINK SYSTEM */
+        /* TRON UPLINK SYSTEM (Terminus Fixed) */
         .belt-node { position: absolute; z-index: 50; }
         .belt-star { width: 8px; height: 8px; background: #fff; border-radius: 50%; box-shadow: 0 0 20px #fff; cursor: pointer; position: relative; }
 
@@ -125,15 +115,15 @@
         .belt-node:hover .tron-path { stroke-dashoffset: 0; }
         .belt-node:hover .tron-card { opacity: 1; transform: translate(0, 0); }
 
-        /* Tron Recalibration */
         .alnitak-node { top: 210px; left: 110px; }
         .alnitak-node .tron-card { top: -72px; left: -260px; transform: translateX(20px); }
+
         .alnilam-node { top: 225px; left: 150px; }
         .alnilam-node .tron-card { top: -67px; left: 95px; transform: translateX(-20px); }
+
         .mintaka-node { top: 240px; left: 190px; }
         .mintaka-node .tron-card { top: 85px; left: 5px; transform: translateY(-10px); }
 
-        /* THE NEBULA (ORION'S SWORD) */
         .nebula-star { position: absolute; border-radius: 50%; background: #fff; width: 3px; height: 3px; --duration: 4s; }
         .sword-top { top: 280px; left: 145px; opacity: 0.6; }
         .sword-mid { 
@@ -178,31 +168,47 @@
 
         /* --- MOBILE REFINEMENTS --- */
         @media (max-width: 1024px) {
-            body { overflow-y: auto; align-items: flex-start; }
-            
+            body { 
+                overflow-y: auto; 
+                justify-content: flex-start; /* Stacks from top */
+                padding: 40px 20px 100px;
+                box-sizing: border-box;
+            }
+
             .hero-logo { 
-                position: relative; top: 40px; left: 50%; 
-                transform: translateX(-50%); margin-bottom: 60px;
-                width: 180px;
+                position: relative; top: 0; left: 0; 
+                margin: 0 auto 30px; display: block;
+                width: 180px; transform: none; 
+                opacity: 0.8;
             }
 
             .gateway-container { 
-                flex-direction: column; gap: 60px; 
-                margin-top: 20px; padding-bottom: 150px;
+                flex-direction: column; 
+                gap: 50px; 
+                margin-top: 20px; 
+                width: 100%;
             }
             
-            .constellation { height: 400px; transform: scale(0.8); }
+            .constellation { height: 420px; transform: scale(0.85); margin: 0 auto; }
             
-            /* Disable Tron Lines on mobile to prevent clutter */
+            /* Disable Tron on small screens to avoid UI drift */
             .tron-path, .tron-card { display: none !important; }
 
             .center-footer { 
-                position: relative; bottom: auto; padding-bottom: 80px;
-                margin-top: 40px;
+                position: relative; 
+                bottom: auto; 
+                margin-top: 50px;
+                width: 100%;
             }
             
-            .main-title { font-size: 1.1rem; letter-spacing: 8px; }
-            .poem-fragment { font-size: 0.6rem; max-width: 80%; margin: 0 auto; line-height: 1.6; }
+            .main-title { 
+                font-size: 1.1rem; 
+                letter-spacing: 8px; 
+                padding: 0 10px;
+                box-sizing: border-box;
+            }
+            
+            .poem-fragment { font-size: 0.6rem; max-width: 90%; margin: 0 auto; line-height: 1.6; }
         }
     </style>
 </head>
