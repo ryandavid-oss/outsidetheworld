@@ -3,214 +3,329 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Outside The World | Systems & Stories</title>
+    <title>Outside The World</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;900&family=Fira+Code:wght@300;500;700&display=swap');
+
         :root {
+            --star-white: #ffffff;
+            --star-glow: rgba(255, 255, 255, 0.6);
+            --bg-dark: #020202;
             --brand-blue: #6395EE;
             --brand-teal: #91AFB3;
-            --brand-light-blue: #A0BEF5;
-            --bg-dark: #050505;
-            --transition-main: 0.9s cubic-bezier(0.23, 1, 0.32, 1);
+            --nebula-pink: rgba(255, 100, 200, 0.4);
         }
 
-        body, html {
-            margin: 0; padding: 0; height: 100%;
-            font-family: 'Inter', sans-serif;
-            overflow: hidden;
+        body {
             background-color: var(--bg-dark);
+            margin: 0; min-height: 100vh;
+            display: flex; flex-direction: column; align-items: center;
+            overflow-x: hidden; font-family: 'Inter', sans-serif;
             color: white;
+            background: radial-gradient(circle at center, #0a0a0a 0%, #020202 100%);
         }
 
-        /* 1. NEUTRAL ZONES */
-        .neutral-top {
-            position: absolute;
-            top: 0; left: 0; width: 100%; 
-            height: 450px; 
-            z-index: 1000;
+        /* 1. HERO LOGO */
+        .hero-logo {
+            position: fixed; top: 40px; left: 40px; width: 200px;
+            filter: brightness(0) invert(1);
+            opacity: 0.4; transition: 0.5s; z-index: 100;
         }
-        .neutral-gutter {
-            position: absolute;
-            top: 0; left: 45%; width: 10%; 
-            height: 100%;
-            z-index: 1000;
+        .hero-logo:hover { opacity: 1; }
+
+        /* 2. REACTIVE STARFIELD */
+        .starfield { 
+            position: fixed; top: -10%; left: -10%; width: 120%; height: 120%; 
+            z-index: 0; pointer-events: none; 
+            transition: transform 0.1s ease-out;
+        }
+        .dim-star {
+            position: absolute; background: #fff; border-radius: 50%; opacity: 0.1;
+            animation: pulse var(--d) infinite alternate;
+        }
+        @keyframes pulse { from { opacity: 0.05; } to { opacity: 0.2; } }
+
+        /* 3. NAVIGATION LAYOUT */
+        .gateway-container {
+            display: flex; align-items: center; justify-content: center;
+            gap: 120px; z-index: 10; width: 90%; max-width: 1400px;
+            margin: auto 0; /* Centers vertically on desktop */
         }
 
-        /* 2. LOGO & TYPEWRITER INSTRUCTIONS */
-        .logo-header {
-            position: absolute; top: 50px; left: 50%;
-            transform: translateX(-50%); z-index: 1100;
-            width: 500px; transition: all var(--transition-main);
-            pointer-events: none; text-align: center;
-        }
-        .logo-header img { width: 100%; height: auto; }
+        .nav-wing { display: flex; flex-direction: column; align-items: center; text-align: center; width: 280px; }
         
-        .instruction {
-            margin-top: 40px; 
-            font-size: 0.85rem; /* Keeping the size you liked */
-            letter-spacing: 8px;
-            text-transform: uppercase; 
-            color: #eee; 
-            opacity: 0.8;
-            transition: opacity 0.4s ease;
-            font-family: 'Fira Code', monospace; /* Using mono for the cursor look */
-            min-height: 1.2rem;
+        .wing-label {
+            font-family: 'Fira Code'; font-size: 0.65rem; color: var(--brand-teal);
+            letter-spacing: 4px; text-transform: uppercase; margin-bottom: 25px;
+            opacity: 0.6;
         }
 
-        /* THE BLINKING CURSOR */
-        .cursor {
-            display: inline-block;
-            width: 8px;
-            height: 14px;
-            background-color: var(--brand-teal);
-            margin-left: 10px;
-            animation: blink 1s infinite;
-            vertical-align: middle;
+        .ethereal-btn {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 22px 45px; color: #fff;
+            font-family: 'Inter'; font-weight: 900; font-size: 1.1rem;
+            letter-spacing: 6px; text-transform: uppercase;
+            text-decoration: none; transition: 0.6s cubic-bezier(0.2, 1, 0.3, 1);
+            position: relative;
         }
 
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
+        .explore-btn:hover { border-color: var(--brand-blue); box-shadow: 0 0 40px rgba(99, 149, 238, 0.4); color: var(--brand-blue); }
+        .consult-btn:hover { border-color: var(--brand-teal); box-shadow: 0 0 40px rgba(145, 175, 179, 0.4); color: var(--brand-teal); }
+
+        /* 4. THE HUNTER (ORION) */
+        .constellation { position: relative; width: 320px; height: 480px; }
+        .star {
+            position: absolute; background: var(--star-white); border-radius: 50%;
+            box-shadow: 0 0 10px var(--star-glow), 0 0 20px var(--star-glow);
+            animation: twinkle var(--duration) infinite ease-in-out;
+        }
+        @keyframes twinkle { 0%, 100% { opacity: 0.4; transform: scale(0.9); } 50% { opacity: 1; transform: scale(1.1); } }
+
+        .betelgeuse { top: 0; left: 40px; width: 7px; height: 7px; --duration: 3s; box-shadow: 0 0 20px rgba(255, 100, 100, 0.6); }
+        .bellatrix { top: 25px; right: 40px; width: 5px; height: 5px; --duration: 4.2s; }
+        .saiph { bottom: 50px; left: 60px; width: 5px; height: 5px; --duration: 5.1s; }
+        .rigel { bottom: 0; right: 40px; width: 8px; height: 8px; --duration: 3.8s; box-shadow: 0 0 25px rgba(100, 150, 255, 0.6); }
+
+        /* TRON UPLINK SYSTEM (Terminus Fixed) */
+        .belt-node { position: absolute; z-index: 50; }
+        .belt-star { width: 8px; height: 8px; background: #fff; border-radius: 50%; box-shadow: 0 0 20px #fff; cursor: pointer; position: relative; }
+
+        .tron-path {
+            position: absolute; pointer-events: none;
+            stroke: var(--brand-teal); stroke-width: 1; fill: none;
+            stroke-dasharray: 200; stroke-dashoffset: 200;
+            transition: stroke-dashoffset 0.6s ease;
+            filter: drop-shadow(0 0 5px var(--brand-teal));
         }
 
-        /* Logo Shifting Logic */
-        body:has(.personal:hover) .logo-header { left: 25%; transform: translateX(-50%) scale(0.7); }
-        body:has(.professional:hover) .logo-header { left: 75%; transform: translateX(-50%) scale(0.7); }
-        body:has(.panel:hover) .instruction { opacity: 0; }
-
-        /* 3. THE PANELS & HITBOXES */
-        .container { display: flex; width: 100vw; height: 100vh; }
-        .panel { position: relative; flex: 1; transition: flex var(--transition-main); overflow: hidden; }
-        .panel:hover { flex: 6; }
-
-        .panel-link {
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            width: 100%; height: 100%; text-decoration: none; color: inherit;
-            position: relative; 
-            z-index: 500;
+        .tron-card {
+            position: absolute; opacity: 0;
+            background: rgba(5, 5, 5, 0.9);
+            border: 1px solid var(--brand-teal);
+            padding: 8px 15px;
+            font-family: 'Fira Code'; font-size: 0.6rem;
+            color: #fff; letter-spacing: 2px;
+            white-space: nowrap; pointer-events: none;
+            transition: opacity 0.3s ease 0.5s, transform 0.3s ease 0.5s;
+            backdrop-filter: blur(5px);
         }
 
-        .indicator-node {
-            position: absolute; top: 55%; left: 50%; width: 80px; height: 80px;
-            transform: translate(-50%, -50%); transition: all 0.5s ease;
-            pointer-events: none; opacity: 0.4;
+        .belt-node:hover .tron-path { stroke-dashoffset: 0; }
+        .belt-node:hover .tron-card { opacity: 1; transform: translate(0, 0); }
+
+        .alnitak-node { top: 210px; left: 110px; }
+        .alnitak-node .tron-card { top: -72px; left: -260px; transform: translateX(20px); }
+
+        .alnilam-node { top: 225px; left: 150px; }
+        .alnilam-node .tron-card { top: -67px; left: 95px; transform: translateX(-20px); }
+
+        .mintaka-node { top: 240px; left: 190px; }
+        .mintaka-node .tron-card { top: 85px; left: 5px; transform: translateY(-10px); }
+
+        .nebula-star { position: absolute; border-radius: 50%; background: #fff; width: 3px; height: 3px; --duration: 4s; }
+        .sword-top { top: 280px; left: 145px; opacity: 0.6; }
+        .sword-mid { 
+            top: 310px; left: 140px; width: 6px; height: 6px; 
+            background: #fbc2eb; box-shadow: 0 0 15px var(--nebula-pink), 0 0 30px var(--nebula-pink);
+            filter: blur(1px);
         }
-        .indicator-node::before, .indicator-node::after {
-            content: ''; position: absolute; background: currentColor; border-radius: 2px;
+        .sword-bottom { top: 340px; left: 135px; opacity: 0.6; }
+
+        /* 5. FOOTER & TITLES */
+        .center-footer { 
+            position: fixed; bottom: 6vh; text-align: center; width: 100%; 
+            z-index: 20;
         }
-        .indicator-node::before { top: 0; left: 38px; width: 4px; height: 80px; }
-        .indicator-node::after { top: 38px; left: 0; width: 80px; height: 4px; }
         
-        .personal .indicator-node { color: var(--brand-blue); }
-        .professional .indicator-node { color: var(--brand-teal); }
-        .panel:hover .indicator-node { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
-
-        /* 4. CONTENT REVEAL */
-        h2 {
-            font-size: 4rem; font-weight: 900; text-transform: uppercase;
-            letter-spacing: 10px; opacity: 0; transform: translateY(30px);
-            transition: all var(--transition-main);
-        }
-        .details { opacity: 0; transform: translateY(30px); transition: all 0.6s ease 0.2s; text-align: center; }
-        .details p { letter-spacing: 6px; font-size: 0.8rem; color: var(--brand-light-blue); margin-bottom: 30px; }
-
-        .panel:hover h2, .panel:hover .details { opacity: 1; transform: translateY(0); }
-
-        .fake-btn {
-            display: inline-block; padding: 16px 55px; border: 1px solid rgba(255,255,255,0.4);
-            font-size: 0.7rem; font-weight: 700; letter-spacing: 5px; text-transform: uppercase;
-            background: rgba(255,255,255,0.05); transition: 0.4s;
-        }
-        .panel-link:hover .fake-btn { background: white; color: black; box-shadow: 0 0 35px rgba(255,255,255,0.4); }
-
-        .divider {
-            position: absolute; left: 50%; top: 38%; bottom: 38%; width: 1px;
-            background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.15), transparent);
-            z-index: 5; transition: opacity 0.4s;
-        }
-        body:has(.panel:hover) .divider { opacity: 0; }
-
-        /* 5. MOBILE OVERHAUL */
-        @media (max-width: 768px) {
-            body, html { overflow-y: auto; }
-            .container { flex-direction: column; height: auto; }
-            .neutral-gutter, .neutral-top { display: none; }
-            .logo-header { position: relative; top: 30px; width: 80%; margin: 0 auto 60px; transform: none; left: auto; }
-            .panel { height: 60vh; flex: none !important; border-bottom: 1px solid rgba(255,255,255,0.1); }
-            h2, .details { opacity: 1 !important; transform: none !important; width: 100%; text-align: center; }
-            h2 { font-size: 2rem !important; letter-spacing: 3px !important; width: 95%; margin: 0 auto;}
-            .indicator-node { display: none; }
-            .fake-btn { background: white; color: black; } 
+        .main-title {
+            font-size: 1.4rem; font-weight: 300; letter-spacing: 15px;
+            text-transform: uppercase; margin: 0; opacity: 0.8;
+            padding-bottom: 20px;
         }
 
-        body::after {
-            content: " ";
+        .poem-fragment {
+            font-size: 0.65rem; color: #444;
+            letter-spacing: 3px; font-style: italic; cursor: pointer;
+            transition: 0.3s;
+        }
+        .poem-fragment:hover { color: var(--brand-teal); }
+
+        /* MODAL */
+        .modal {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%),
-                        linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
-            background-size: 100% 3px, 3px 100%;
-            pointer-events: none;
-            z-index: 3000;
-            opacity: 0.2;
+            background: rgba(0,0,0,0.95); display: none;
+            justify-content: center; align-items: center; z-index: 1000;
+            backdrop-filter: blur(25px);
+        }
+        .modal-content {
+            max-width: 500px; text-align: left; line-height: 2.2;
+            font-size: 0.9rem; font-weight: 300; color: #ccc;
+            padding: 40px; border-left: 1px solid #333;
+        }
+        .modal-content b { color: #fff; display: block; margin-top: 25px; font-weight: 900; }
+
+        /* --- MOBILE REFINEMENTS --- */
+        @media (max-width: 1024px) {
+            body { 
+                overflow-y: auto; 
+                justify-content: flex-start; /* Stacks from top */
+                padding: 40px 20px 100px;
+                box-sizing: border-box;
+            }
+
+            .hero-logo { 
+                position: relative; top: 0; left: 0; 
+                margin: 0 auto 30px; display: block;
+                width: 180px; transform: none; 
+                opacity: 0.8;
+            }
+
+            .gateway-container { 
+                flex-direction: column; 
+                gap: 50px; 
+                margin-top: 20px; 
+                width: 100%;
+            }
+            
+            .constellation { height: 420px; transform: scale(0.85); margin: 0 auto; }
+            
+            /* Disable Tron on small screens to avoid UI drift */
+            .tron-path, .tron-card { display: none !important; }
+
+            .center-footer { 
+                position: relative; 
+                bottom: auto; 
+                margin-top: 50px;
+                width: 100%;
+            }
+            
+            .main-title { 
+                font-size: 1.1rem; 
+                letter-spacing: 8px; 
+                padding: 0 10px;
+                box-sizing: border-box;
+            }
+            
+            .poem-fragment { font-size: 0.6rem; max-width: 90%; margin: 0 auto; line-height: 1.6; }
         }
     </style>
 </head>
 <body>
 
-    <div class="neutral-top"></div>
-    <div class="neutral-gutter"></div>
+    <img src="Images/Equal.svg" alt="OTW" class="hero-logo">
 
-    <div class="logo-header">
-        <img src="Images/Equal.svg" alt="Outside The World">
-        <div class="instruction">
-            <span id="type-target"></span><span class="cursor"></span>
+    <div class="starfield" id="star-bg"></div>
+
+    <main class="gateway-container">
+        <div class="nav-wing">
+            <span class="wing-label">[Thoughts & Creation]</span>
+            <a href="personal.html" class="ethereal-btn explore-btn">EXPLORE</a>
+        </div>
+
+        <div class="constellation">
+            <div class="star betelgeuse"></div>
+            <div class="star bellatrix"></div>
+            
+            <div class="belt-node alnitak-node">
+                <a href="personal.html">
+                    <div class="belt-star" title="Interface"></div>
+                    <svg class="tron-path" width="150" height="100" style="top:-80px; left:-120px;">
+                        <path d="M 125 85 L 125 20 L 10 20" />
+                    </svg>
+                    <div class="tron-card">MAIN_INTERFACE</div>
+                </a>
+            </div>
+
+            <div class="belt-node alnilam-node">
+                <a href="resume.html">
+                    <div class="belt-star" title="Dossier"></div>
+                    <svg class="tron-path" width="100" height="100" style="top:-70px; left:5px;">
+                        <path d="M 5 75 L 5 15 L 90 15" />
+                    </svg>
+                    <div class="tron-card">DOSSIER_ACCESS</div>
+                </a>
+            </div>
+
+            <div class="belt-node mintaka-node">
+                <a href="emmy.html">
+                    <div class="belt-star" title="Sanctuary"></div>
+                    <svg class="tron-path" width="150" height="100" style="top:5px; left:5px;">
+                        <path d="M 5 5 L 80 5 L 80 80" />
+                    </svg>
+                    <div class="tron-card">HEART_AND_SOUL</div>
+                </a>
+            </div>
+
+            <div class="nebula-star sword-top star"></div>
+            <div class="nebula-star sword-mid star"></div>
+            <div class="nebula-star sword-bottom star"></div>
+
+            <div class="star saiph"></div>
+            <div class="star rigel"></div>
+        </div>
+
+        <div class="nav-wing">
+            <span class="wing-label">[Strategy & Solutions]</span>
+            <a href="resume.html" class="ethereal-btn consult-btn">CONSULT</a>
+        </div>
+    </main>
+
+    <div class="center-footer">
+        <h1 class="main-title">Outside The World</h1>
+        <div class="poem-fragment" onclick="togglePoem()">
+            "perspective is my weakness... outside the world is new"
         </div>
     </div>
 
-    <div class="divider"></div>
-
-    <div class="container">
-        <section class="panel personal">
-            <a href="personal.html" class="panel-link">
-                <div class="indicator-node"></div>
-                <h2>Personal</h2>
-                <div class="details">
-                    <p>THOUGHTS & CREATION</p>
-                    <div class="fake-btn">Explore</div>
-                </div>
-            </a>
-        </section>
-
-        <section class="panel professional">
-            <a href="professional.html" class="panel-link">
-                <div class="indicator-node"></div>
-                <h2>Professional</h2>
-                <div class="details">
-                    <p>STRATEGY & SOLUTIONS</p>
-                    <div class="fake-btn">Consult</div>
-                </div>
-            </a>
-        </section>
+    <div class="modal" id="poem-modal" onclick="togglePoem()">
+        <div class="modal-content">
+            I dance along the path<br>
+            lonely emerald fields on either side<br>
+            I gaze into the distant canyon<br>
+            and know that I cannot enter<br><br>
+            Every star seems to smile down this evening<br>
+            each one shines its own way<br>
+            and the world is quiet<br>
+            it does not know I am here<br><br>
+            The crisp air haunts me<br>
+            its aroma seems too familiar<br>
+            yes, but under different circumstances<br>
+            this would be true<br><br>
+            there seems to be an end<br>
+            as the mountain peak swallows up the sky<br>
+            my perspective is my weakness<br>
+            <b>outside the world is new…</b>
+            <br><br>
+            <span style="font-size: 0.6rem; opacity: 0.4;">[CLICK TO CLOSE]</span>
+        </div>
     </div>
 
     <script>
-        // TYPEWRITER FOR INDEX PAGE
-        const textToType = "Pick a path forward";
-        const target = document.getElementById('type-target');
-        let i = 0;
+        const starBg = document.getElementById('star-bg');
+        document.addEventListener('mousemove', (e) => {
+            const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
+            const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
+            starBg.style.transform = `translate(${moveX}px, ${moveY}px)`;
+        });
 
-        function typeWriter() {
-            if (i < textToType.length) {
-                target.innerHTML += textToType.charAt(i);
-                i++;
-                setTimeout(typeWriter, 100); // Slightly faster for the home page
-            }
+        for (let i = 0; i < 180; i++) {
+            const star = document.createElement('div');
+            star.className = 'dim-star';
+            const size = Math.random() * 2.5;
+            star.style.width = size + 'px';
+            star.style.height = size + 'px';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.setProperty('--d', (Math.random() * 4 + 2) + 's');
+            starBg.appendChild(star);
         }
 
-        // Delay start slightly for that 'Loading System' feel
-        window.onload = () => {
-            setTimeout(typeWriter, 1200);
-        };
+        function togglePoem() {
+            const modal = document.getElementById('poem-modal');
+            modal.style.display = (modal.style.display === 'flex') ? 'none' : 'flex';
+        }
     </script>
 </body>
 </html>
