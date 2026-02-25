@@ -3,13 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#020202">
-
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Verse Archive | Outside The World</title>
+    <title>Kaavya Archive | Outside The World</title>
+    <meta name="theme-color" content="#050505">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;900&family=Fira+Code:wght@300;500&family=Merriweather:ital,wght@0,300;0,700;1,300&display=swap');
 
@@ -36,12 +34,19 @@
             z-index: 100; flex-shrink: 0;
         }
 
-        .dir-header { padding: 40px; border-bottom: 1px solid var(--border-low); position: relative; }
+        .dir-header { padding: 40px; border-bottom: 1px solid var(--border-low); text-align: center; }
         
-        .sidebar-logo { width: 140px; margin-bottom: 30px; display: block; }
+        /* LOGO AS BACK BUTTON [Requirement 1, 4, & 5] */
+        .sidebar-logo { 
+            width: 220px; /* Scaled Up */
+            display: block; 
+            margin: 0 auto 30px;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        .sidebar-logo:hover { transform: scale(1.05); opacity: 0.8; }
 
         .tuning-knob { padding: 0 40px 20px; }
-        .knob-label { font-family: 'Fira Code'; font-size: 0.55rem; color: #555; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; display: block; }
+        .knob-label { font-family: 'Fira Code'; font-size: 0.55rem; color: #555; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; display: block; text-align: left; }
         
         select.freq-filter {
             background: #111; border: 1px solid var(--border-low);
@@ -63,7 +68,6 @@
         .extraction-pane { 
             flex-grow: 1; padding: 60px; overflow-y: auto; position: relative; 
             display: flex; justify-content: center; align-items: flex-start;
-            background: radial-gradient(circle at center, rgba(0,0,0,0) 0%, rgba(0,0,0,0.4) 100%);
         }
 
         .glass-card {
@@ -82,34 +86,25 @@
         .poem-meta { font-family: 'Fira Code'; font-size: 0.6rem; color: var(--brand-teal); margin-bottom: 40px; letter-spacing: 3px; text-transform: uppercase; }
         .poem-body { font-family: 'Merriweather', serif; font-size: 1.05rem; line-height: 2.1; color: #ccc; white-space: pre-line; font-weight: 300; }
 
-        .back-signal {
-            position: fixed; top: 40px; right: 40px; z-index: 200;
-            font-family: 'Fira Code'; font-size: 0.6rem; color: #444;
-            text-decoration: none; letter-spacing: 3px;
-        }
-        .back-signal:hover { color: #fff; }
-
         /* --- MOBILE ARCHITECTURE --- */
         @media (max-width: 1024px) {
             body { flex-direction: column; overflow-y: auto; height: auto; }
 
             .directory { width: 100%; height: auto; border-right: none; border-bottom: 1px solid var(--border-low); }
             
-            .dir-header { padding: 30px 20px 20px; display: flex; flex-direction: column; align-items: center; }
-            .sidebar-logo { width: 100px; margin-bottom: 20px; }
-            
-            .back-signal { position: absolute; top: 30px; right: 20px; }
+            .dir-header { padding: 40px 20px 20px; }
+            .sidebar-logo { width: 180px; margin-bottom: 20px; }
             
             .tuning-knob { padding: 0 20px 30px; }
             
-            .file-list { max-height: 40vh; border-top: 1px solid var(--border-low); }
+            .file-list { max-height: 45vh; border-top: 1px solid var(--border-low); }
             .file-item { padding: 20px; }
 
             .extraction-pane { padding: 20px; min-height: 60vh; }
-            .glass-card { padding: 40px 25px; border-radius: 0; border: none; background: rgba(0,0,0,0.8); }
+            .glass-card { padding: 50px 25px; border-radius: 0; border: none; background: rgba(0,0,0,0.85); }
 
             .poem-title { font-size: 1.5rem; }
-            .poem-body { font-size: 1rem; line-height: 1.8; }
+            .poem-body { font-size: 1rem; line-height: 1.9; }
         }
 
         ::-webkit-scrollbar { width: 4px; }
@@ -118,11 +113,11 @@
 </head>
 <body>
 
-    <a href="index.html" class="back-signal">[ESC] TERMINATE</a>
-
     <aside class="directory">
         <div class="dir-header">
-            <img src="Images/Equal.svg" class="sidebar-logo" alt="OTW">
+            <a href="personal.html">
+                <img src="Images/Equal.svg" class="sidebar-logo" alt="BACK TO INTERFACE">
+            </a>
         </div>
         
         <div class="tuning-knob">
@@ -170,7 +165,6 @@
                     item.setAttribute('data-id', index);
                     item.onclick = () => {
                         displayPoem(index);
-                        // On mobile, scroll the reader into view
                         if (window.innerWidth <= 1024) {
                             document.querySelector('.extraction-pane').scrollIntoView({ behavior: 'smooth' });
                         }
@@ -193,7 +187,6 @@
             const container = document.getElementById('glass-container');
             const poem = archive[index];
             
-            // Background blend mode helps the gradients mix with the dark base
             document.body.style.background = `
                 radial-gradient(circle at bottom right, rgba(0,0,0,0.8) 0%, #050505 100%),
                 ${poem.thumbprint}
@@ -209,6 +202,7 @@
                     <div class="poem-body">${poem.body}</div>
                 `;
                 container.classList.add('visible');
+                container.scrollTop = 0;
             }, 400);
 
             document.querySelectorAll('.file-item').forEach(el => {
