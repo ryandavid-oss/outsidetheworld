@@ -6,71 +6,110 @@
     <title>Verse Archive | Outside The World</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;900&family=Fira+Code:wght@300;500&family=Merriweather:ital,wght@0,300;0,700;1,300&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;900&family=Fira+Code:wght@300;500&family=Merriweather:ital,wght@0,300;0,700;1,300&display=swap');
 
-:root {
-    --brand-blue: #6395EE;
-    --brand-teal: #91AFB3;
-    --amethyst: #9b59b6; /* New accent color */
-    --bg-dark: #050505;
-    --border-low: rgba(145, 175, 179, 0.1);
-}
+        :root {
+            --brand-blue: #6395EE;
+            --brand-teal: #91AFB3;
+            --amethyst: #9b59b6;
+            --bg-dark: #050505;
+            --border-low: rgba(255, 255, 255, 0.08);
+            --glass-bg: rgba(0, 0, 0, 0.4);
+        }
 
-body {
-    background-color: var(--bg-dark);
-    color: white; font-family: 'Inter', sans-serif;
-    margin: 0; display: flex; height: 100vh; overflow: hidden;
-}
+        body {
+            background-color: var(--bg-dark);
+            color: white; font-family: 'Inter', sans-serif;
+            margin: 0; display: flex; height: 100vh; overflow: hidden;
+            transition: background 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-/* SIDEBAR REFINEMENT */
-.directory {
-    width: 350px; border-right: 1px solid var(--border-low);
-    display: flex; flex-direction: column; background: rgba(5,5,5,1);
-    z-index: 10;
-}
+        /* 1. SIDEBAR (LOGO & TUNING) */
+        .directory {
+            width: 380px; border-right: 1px solid var(--border-low);
+            display: flex; flex-direction: column; background: #050505;
+            z-index: 100;
+        }
 
-.dir-header { padding: 40px; border-bottom: 1px solid var(--border-low); }
-.dir-header h1 { font-size: 0.7rem; letter-spacing: 5px; color: var(--brand-teal); text-transform: uppercase; margin: 0; }
+        .dir-header { padding: 40px; border-bottom: 1px solid var(--border-low); }
+        
+        /* HERO LOGO [Requirement 4] */
+        .sidebar-logo {
+            width: 140px; filter: brightness(0) invert(1);
+            opacity: 0.6; margin-bottom: 30px;
+        }
 
-.file-list { flex-grow: 1; overflow-y: auto; }
-.file-item {
-    padding: 20px 40px; cursor: pointer; transition: 0.3s;
-    border-left: 3px solid transparent; border-bottom: 1px solid rgba(255,255,255,0.02);
-}
-.file-item:hover { background: rgba(155, 89, 182, 0.05); }
-.file-item.active { background: rgba(155, 89, 182, 0.1); border-left-color: var(--amethyst); }
-.file-item h3 { font-family: 'Fira Code'; font-size: 0.75rem; margin: 0 0 5px 0; color: #eee; }
-.file-item span { font-size: 0.55rem; color: #444; letter-spacing: 2px; }
+        /* TUNING KNOB (FREQUENCY SELECTOR) [Requirement 1] */
+        .tuning-knob {
+            padding: 0 40px 20px;
+        }
+        .knob-label {
+            font-family: 'Fira Code'; font-size: 0.55rem; color: #555;
+            letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; display: block;
+        }
+        select.freq-filter {
+            background: transparent; border: 1px solid var(--border-low);
+            color: var(--brand-teal); font-family: 'Fira Code'; font-size: 0.7rem;
+            padding: 8px; width: 100%; cursor: pointer; outline: none;
+            transition: 0.3s;
+        }
+        select.freq-filter:hover { border-color: var(--brand-teal); }
 
-/* THE READER VIEW (COLORIZED) */
-.extraction-pane { 
-    flex-grow: 1; padding: 100px; overflow-y: auto; position: relative; 
-    /* Subtle background glow */
-    background: radial-gradient(circle at bottom right, rgba(155, 89, 182, 0.05) 0%, transparent 50%);
-}
+        .file-list { flex-grow: 1; overflow-y: auto; }
+        .file-item {
+            padding: 20px 40px; cursor: pointer; transition: 0.3s;
+            border-left: 3px solid transparent; border-bottom: 1px solid rgba(255,255,255,0.02);
+        }
+        .file-item:hover { background: rgba(255, 255, 255, 0.03); }
+        .file-item.active { background: rgba(155, 89, 182, 0.1); border-left-color: var(--amethyst); }
+        .file-item h3 { font-family: 'Fira Code'; font-size: 0.75rem; margin: 0 0 5px 0; color: #eee; font-weight: 500; }
+        .file-item span { font-size: 0.55rem; color: #444; letter-spacing: 1.5px; }
 
-.poem-container { max-width: 600px; margin: 0 auto; opacity: 0; transform: translateY(15px); transition: 0.8s cubic-bezier(0.2, 1, 0.3, 1); }
-.poem-container.visible { opacity: 1; transform: translateY(0); }
+        /* 2. READER VIEW (GLASS CARD) [Requirement 2] */
+        .extraction-pane { 
+            flex-grow: 1; padding: 60px; overflow-y: auto; position: relative; 
+            display: flex; justify-content: center; align-items: flex-start;
+        }
 
-.poem-meta { 
-    font-family: 'Fira Code'; font-size: 0.65rem; color: var(--amethyst); 
-    margin-bottom: 50px; letter-spacing: 4px; border-bottom: 1px solid var(--border-low);
-    padding-bottom: 10px;
-}
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 80px;
+            max-width: 650px;
+            width: 100%;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+            opacity: 0; transform: translateY(20px);
+            transition: 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+        }
+        .glass-card.visible { opacity: 1; transform: translateY(0); }
 
-.poem-body { 
-    font-family: 'Merriweather', serif; font-size: 1.25rem; line-height: 2.3; 
-    color: #d1d1d1; white-space: pre-line; font-weight: 300;
-}
+        /* TITLES & BODY [Requirement 3 & 5] */
+        .poem-title {
+            font-family: 'Inter'; font-weight: 900; font-size: 1.8rem;
+            letter-spacing: -1px; margin: 0 0 10px 0; color: #fff;
+        }
 
-/* Back Link */
-.back-signal {
-    position: fixed; top: 40px; right: 40px; z-index: 100;
-    font-family: 'Fira Code'; font-size: 0.6rem; color: #444;
-    text-decoration: none; letter-spacing: 3px;
-}
-.back-signal:hover { color: var(--amethyst); }
-        /* SCROLLBAR STYLING */
+        .poem-meta { 
+            font-family: 'Fira Code'; font-size: 0.6rem; color: var(--brand-teal); 
+            margin-bottom: 40px; letter-spacing: 3px; text-transform: uppercase;
+        }
+
+        .poem-body { 
+            font-family: 'Merriweather', serif; 
+            font-size: 1.05rem; /* Slightly smaller font */
+            line-height: 2.1; 
+            color: #ccc; white-space: pre-line; font-weight: 300;
+        }
+
+        .back-signal {
+            position: fixed; top: 40px; right: 40px; z-index: 200;
+            font-family: 'Fira Code'; font-size: 0.6rem; color: #444;
+            text-decoration: none; letter-spacing: 3px;
+        }
+        .back-signal:hover { color: #fff; }
+
         ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-thumb { background: var(--border-low); }
     </style>
@@ -81,81 +120,99 @@ body {
 
     <aside class="directory">
         <div class="dir-header">
-            <h1>Verse_Extraction.log</h1>
+            <img src="Images/Equal.svg" class="sidebar-logo" alt="OTW">
         </div>
-        <div class="file-list" id="file-list">
-            </div>
+        
+        <div class="tuning-knob">
+            <label class="knob-label">Filter Frequency</label>
+            <select id="freq-select" class="freq-filter" onchange="filterFrequencies()">
+                <option value="ALL">ALL_SIGNALS</option>
+            </select>
+        </div>
+
+        <div class="file-list" id="file-list"></div>
     </aside>
 
     <main class="extraction-pane">
-        <div id="display-area" class="poem-container">
+        <div id="glass-container" class="glass-card">
             </div>
     </main>
 
-<script src="poetry_data.js"></script>
+    <script src="poetry_data.js"></script>
 
     <script>
-        // 2. THE ARCHIVE LOGIC
-        function loadArchive() {
+        function initArchive() {
             const list = document.getElementById('file-list');
+            const select = document.getElementById('freq-select');
             
-            // Check if archive data exists
-            if (typeof archive === 'undefined' || archive.length === 0) {
-                list.innerHTML = '<div class="file-item"><span>ERROR: NO_SIGNALS_FOUND</span></div>';
-                return;
-            }
+            // Extract unique frequencies for the "Tuning Knob"
+            const frequencies = [...new Set(archive.map(p => p.frequency))].sort();
+            frequencies.forEach(f => {
+                const opt = document.createElement('option');
+                opt.value = f;
+                opt.textContent = f;
+                select.appendChild(opt);
+            });
 
+            renderList("ALL");
+        }
+
+        function renderList(filter) {
+            const list = document.getElementById('file-list');
+            list.innerHTML = "";
+            
             archive.forEach((poem, index) => {
-                const item = document.createElement('div');
-                item.className = 'file-item';
-                item.onclick = () => displayPoem(index);
-                item.innerHTML = `
-                    <h3>${poem.title}</h3>
-                    <span>${poem.date} // SIGNAL_DETECTED</span>
-                `;
-                list.appendChild(item);
+                if (filter === "ALL" || poem.frequency === filter) {
+                    const item = document.createElement('div');
+                    item.className = 'file-item';
+                    item.setAttribute('data-id', index);
+                    item.onclick = () => displayPoem(index);
+                    item.innerHTML = `
+                        <h3>${poem.title}</h3>
+                        <span>[${poem.frequency}] // ${poem.date}</span>
+                    `;
+                    list.appendChild(item);
+                }
             });
         }
 
-function displayPoem(index) {
-    const area = document.getElementById('display-area');
-    const poem = archive[index];
-    
-    // 1. UPDATE ATMOSPHERIC THUMBPRINT
-    // This changes the background glow based on the poem's color chord
-    document.body.style.background = `
-        radial-gradient(circle at bottom right, rgba(255,255,255,0.03) 0%, #050505 100%),
-        ${poem.thumbprint}
-    `;
-    document.body.style.backgroundBlendMode = "overlay";
+        function filterFrequencies() {
+            const val = document.getElementById('freq-select').value;
+            renderList(val);
+        }
 
-    area.classList.remove('visible');
-    
-    setTimeout(() => {
-        area.innerHTML = `
-            <div class="poem-meta">
-                [SIGNAL: ${poem.frequency}] // [ORIGIN: ${poem.date}]
-            </div>
-            <div class="poem-body">${poem.body}</div>
+        function displayPoem(index) {
+            const container = document.getElementById('glass-container');
+            const poem = archive[index];
             
-            <div style="margin-top: 60px; font-family: 'Fira Code'; font-size: 0.55rem; opacity: 0.3;">
-                [SCANNING_SOCIAL_RESIDUE_FOR_CROSS_LINKS...]
-            </div>
-        `;
-        area.classList.add('visible');
-    }, 300);
+            // Update Atmospheric Thumbprint
+            document.body.style.background = `
+                radial-gradient(circle at bottom right, rgba(0,0,0,0.8) 0%, #050505 100%),
+                ${poem.thumbprint}
+            `;
+            document.body.style.backgroundBlendMode = "overlay";
 
-    // Update Sidebar
-    document.querySelectorAll('.file-item').forEach((el, i) => {
-        el.classList.toggle('active', i === index);
-    });
-}
-        // 3. INITIALIZE ON LOAD
+            container.classList.remove('visible');
+            
+            setTimeout(() => {
+                container.innerHTML = `
+                    <h1 class="poem-title">${poem.title}</h1>
+                    <div class="poem-meta">SIGNAL: ${poem.frequency} // ORIGIN: ${poem.date}</div>
+                    <div class="poem-body">${poem.body}</div>
+                `;
+                container.classList.add('visible');
+                container.scrollTop = 0;
+            }, 400);
+
+            // Set Active State
+            document.querySelectorAll('.file-item').forEach(el => {
+                el.classList.toggle('active', el.getAttribute('data-id') == index);
+            });
+        }
+
         window.onload = () => {
-            loadArchive();
-            if (typeof archive !== 'undefined' && archive.length > 0) {
-                displayPoem(0); 
-            }
+            initArchive();
+            if (archive.length > 0) displayPoem(0);
         };
     </script>
 </body>
