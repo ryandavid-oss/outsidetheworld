@@ -453,6 +453,96 @@ const wayback_archive = [
         "era": "THE_ANALOG_DAWN",
         "thumbprint": "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
         "body": "Four months! 06/28/03 - 10/28/03!\n\nHappy anniversary, sweetie. I love you! You've made me the happiest man alive.\n\nToday was much of the same at work, except we decided to help our San Diego because of all of the fires. I genuinely feel badly for the folks who have lost their homes, but I do not feel an ounce of remorse for those poor souls who complain that they can't have their cable installed because the technician can't drive through a wall of flame. Pity. I felt the same way about those in North Carolina who expected our technicians to drive through the swelling ocean to get to their boat, er, home.\n\nRemember back in 198x, as kids, we would sit in front of the television and watch our wonderful Saturday morning cartoons? Mind you, this was before the era of Japanese animation, so Saturday morning was a little more tolerable. So, during these cartoons, we kids would anticipate the strangest commercials. I had one brought back to me the other day:\n\n'Don't drown your food! In mayo or ketchup or goo (yuck!) It's no fun to eat what you can't even SEE! So don't drown your food!'\n\nNow that I'm an adult, and I'm overly cynical about a few more things, I have to wonder what the purpose of that commercial was. As far as I remember, it was a little potato or scrap of some non-edible drawing, dancing around singing how we shouldn't sauce our vegetables. Hmmmm.... I doubt the severity of that particular dilemma of society.\n\nI suppose the FDA or some hoo haw might have seen an epidemic striking the children of America that I didn't see. Perhaps tens of thousands of elementary school children would perform a daily ritual of pouring 96 ounces of Heinz 57 sauce all over their goods each lunch time, crying prayers of sacrifice to the gods of white bread and cheese. Or, perhaps even more believable, the network execs needed to fill a couple of extra 30 second time slots, and this commercial (and others like it) fulfilled the requirement for educational programming in the mornings.\n\nPhew, that was a long drawn out piece about nothing.\n\nIn other news, Kobe Bryant was a little miffed yesterday about a few of Shaq's comments, which he directed solely at the Wonder Boy. Kobe lashed back by stating, 'He is not my quote unquote “big brother,”' All that I have to say is that Kobe better mind his manners. Perhaps all Mr. Bryant needed back in July was a 'big brother' to tell him..."
+    },
+    {
+        "file": "2003-10-29-4-months.md",
+        "title": "4 Months and Anniversary Priorities",
+        "year": "2003",
+        "date": "October 29",
+        "era": "THE_ANALOG_DAWN",
+        "thumbprint": "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
+        "body": "No time to really write, I'm afraid. Since yesterday was my four month anniversary, I had more important things to attend to. See you tomorrow!"
+    },
+    {
+        "file": "2003-10-30-Straight-to-bed.md",
+        "title": "Straight to Bed",
+        "year": "2003",
+        "date": "October 30",
+        "era": "THE_ANALOG_DAWN",
+        "thumbprint": "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
+        "body": "Wife and I appear to be coming down with something. Alas, straight to bed."
+    },
+    {
+        "file": "2003-11-01-A-friend-for-Dobby--nope--not-.md",
+        "title": "A Friend for Dobby (Nope, Not Gonna Happen)",
+        "year": "2003",
+        "date": "November 1",
+        "era": "THE_ANALOG_DAWN",
+        "thumbprint": "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
+        "body": "Today: An extra special weekend edition of the blog, in all its glory!\n\nWell, I put some of the finishing touches on my Professional Web site today. For any of you who may pass by this site, please tell me what you think! Additionally, I would appreciate any word-of-mouth advertising that you could offer.\n\nThis morning, I left for Petsmart on my scooter to purchase Dobby some essentials, i.e. litter and food, and upon my arrival back at home, I found a small kitten outside of my door. Coincidence? I doubt it!\n\nI took him inside, bathed him, tried to feed him (at least, I think it was a he?), and dried him all up. He attacked Dobby. Wrong thing to do. So, I took him to a shelter.\n\nBut now, I have a problem. I want another kitty. And I think Dobby deserves a friend too, with Wife and I being gone so often. Anyway, so please, refer someone to the site. If you want business cards, put in a request here, and I'll mail them promptly! Have a good weekend!"
+    },
+    {
+        "file": "2003-11-10-Ah--Sundays---.md",
+        "title": "Ah, Sundays (The Sleeping Professional)",
+        "year": "2003",
+        "date": "November 10",
+        "era": "THE_ANALOG_DAWN",
+        "thumbprint": "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
+        "body": "It was a welcome transition from the rest of the weekend. I won't go into great detail, primarily because I wouldn't want to relive the exhausting parts, even in my mind. Suffice it to say that Friday and Saturday were very, very odd. Odd: Now that's a nice descriptor!\n\nOur cat, Dobby... I will never, ever devote even a single page to the silly kitten, because I don't want to come off as a crazy nut who carries their cat in a backpack. But dang, that's a cool pose, and I hope he was dreaming about mice. Or catnip. He likes that stuff. I think he slept for like, 20 hours today.\n\nRight now, he's just cleaning himself, because all that slumber must have made him filthy. My brother told me to not feel sorry for him, ever: He said that cats have a knack at making themselves seem deprived and lowly. That said, Dobby is one of the best.\n\nAnyway, we're into week 17 of the pregnancy now. That's what, 4 months now? Isn't this about the time that I should start preparing for the child? Probably. I wonder if he/she will ever read any of this... I'll be willing to bet that it will give a definite good look into my head during this time of transition."
+    },
+    {
+        "file": "2003-11-11-Comfort.md",
+        "title": "Comfort, Love, and Week 17",
+        "year": "2003",
+        "date": "November 11",
+        "era": "THE_ANALOG_DAWN",
+        "thumbprint": "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
+        "body": "Complete comfort. What does it consist of, exactly? Is it a song, played at the perfect time? Or is it a picture of a familiar place, long forgotten, but easily remembered? How about a mother's touch? Is it anything deeper or slight?\n\nNo one can quite know the answer to this question. However, comfort is a feeling that I experience quite often now. And, not only do I feel this tangible device, but I can see it in my wife's eyes. I can smell it when I enter my home. I hear it when I listen to my music. And, I can see it when I cast my eyes to heaven.\n\nIt's not something that I've completely missed, now that I ponder upon it. I felt once that love was something that I was missing all along, and that may be true in one certain aspect, for I have never tasted love like I have now.\n\nI'm now four and a half months away from life's event horizon; my child will be born. In many ways, it still scares me and gives me great hope; never before did I believe that something could pave the way for such conflicting emotion. I'm excited and yet drawn inward. I'm cautious, yet reflected outward. It's an emotional contradiction in every sense of the meaning."
+    },
+    {
+        "file": "2003-11-12-Speelcheker.md",
+        "title": "Speelcheker and Work Drudgery",
+        "year": "2003",
+        "date": "November 12",
+        "era": "THE_ANALOG_DAWN",
+        "thumbprint": "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
+        "body": "Much less to come tonight, I'm afraid... It's a fine thing that I don't promise much. I read a few of my previous entries from over a year ago, and I tended to wax toward unfulfilled promises a bit. Nearly every weekend, I swore to post pictures of my adventures, only to come back empty-handed.\n\nToday crawled by, however the final hour of work was the worst part. It was one of those days when you looked at the clock and swore that it hadn't progressed at all. It even appeared to have taken turns at the opposite direction.\n\nYet the days can inch by like weeks, because the weeks are speeding along like days. I fear that one morning, I shall awaken in cold sweats. I'll check the calendar, and realize it's only April 18th. \n\nWow, speelcheker didn't go bananas over the word 'needn't'. Is that truly a word? I love English. Maybe I'll teach it someday?"
+    },
+    {
+        "file": "2003-11-13-Two-posts-.md",
+        "title": "Two Posts (Jet Skiing the Scooter)",
+        "year": "2003",
+        "date": "November 13",
+        "era": "THE_ANALOG_DAWN",
+        "thumbprint": "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
+        "body": "On my way home from work today, I had the rare experience of jet skiing the entire way. It must have rained at least an inch throughout the time when I was at work, so the streets were flooded, as was my apartment parking lot.\n\nI have a scooter that gets me to and from work and I found it terribly enjoyable to tear through the water in it tonight. As my back tire left a wake behind me, I didn't even give a second glance to find out if I splashed any unfortunate on-looker.\n\nThe funny thing is that kids love that scooter. I can't remember how many times those little tikes have asked me if they could ride it. Sure, kids. Go ask your mom. Yoinks. Gone."
+    },
+    {
+        "file": "2003-11-14-AOL.md",
+        "title": "AOL: The Optimized Middle School",
+        "year": "2003",
+        "date": "November 14",
+        "era": "THE_ANALOG_DAWN",
+        "thumbprint": "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
+        "body": "This morning, I awoke with the strangest of thoughts in my head: America Online asking me to come back to them is like my middle school asking me to redo 7th and 8th grade.\n\nI've actually placed some truth into this statement, too. I figure that America Online was my stepping stone into the Internet. I'm so far gone from those bright snappy icons and parental controls, that every time I receive one of those CDs in the mail, I shudder.\n\n'Why, for Pete's sake, would I want to return to you?'\n'Because we're optimized.'\n\nOptimized for what? Faster, superior cleaning action? Increased fuel efficiency? Simplified degradation of extreme variables? What? STOP SENDING ME THOSE COME BACK CDS."
+    },
+    {
+        "file": "2003-11-17-Darn-it-.md",
+        "title": "Darn It (Fry's vs. Albertsons)",
+        "year": "2003",
+        "date": "November 17",
+        "era": "THE_ANALOG_DAWN",
+        "thumbprint": "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
+        "body": "My wife is in the other room watching 'boy TV'. It's not any particular show, rather, a type of show. I believe the one she is watching now is called 'Maximum Exposure'. You know the type. It's basically Cops. Boy TV is anything with stuff caught on tape. Car crashes, hostage situations, people's trousers falling south in public, etc. Why is my wife watching it? Cause she's cute. Why else?\n\nWife and I decided to alter our choice of grocery stores this time around. We've been stuck on Albertsons for the past couple of months, and truthfully, we haven't been fond of their selection. So, we ventured over to Fry's, and were more than pleased. \n\nAnd what made me happy was they let me bag my own groceries. When I went to Albertsons last time, the bagger actually snarled and informed me that he could lose his job if I helped him bag. I thought he was kidding. 'No, really. I can get in trouble if you keep doing that,' said Unhappy Bagger Boy. \n\nLong story short, I like to bag my own groceries. Especially since they put my bleach in the same bag as my eggs. Really smooth."
+    },
+    {
+        "file": "2003-11-18-Tired.md",
+        "title": "Tired (Sting Tour Announcement)",
+        "year": "2003",
+        "date": "November 18",
+        "era": "THE_ANALOG_DAWN",
+        "thumbprint": "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
+        "body": "I'm unusually tired, so I'll be brief tonight. I'm mind-numbingly drained today. I had big plans for my site, I was really going to go to town on a few pages. But the minute hand paced by quicker than my will, and that will definitely take its toll on my ol' blog.\n\nSting announced his new Tour. Three minutes later, the site went down. But for some reason, I doubt that it was because of a flood of traffic. Rather, I suspect a very poorly designed Web site and an e-mail newsletter that was sent out prematurely. So as of 9:01pm, I still have no clue of when Sting is to perform here in Arizona.\n\nIn other news: Strong Bad has finally put my feelings into song. I'll be back tomorrow, and hopefully eight hours of sleep richer."
     }
     
 ];
