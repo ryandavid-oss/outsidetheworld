@@ -52,15 +52,23 @@
         .entry-title { font-family: 'Inter'; font-weight: 900; font-size: 2.2rem; margin: 0 0 10px 0; color: #fff; }
         .entry-meta { font-family: 'Fira Code'; font-size: 0.6rem; color: var(--brand-teal); margin-bottom: 40px; letter-spacing: 3px; text-transform: uppercase; }
         
-        .entry-body { 
-            font-family: 'Merriweather', serif; font-size: 1.1rem; line-height: 2.2; color: #ccc; font-weight: 300;
-            white-space: pre-wrap; /* THIS PRESERVES YOUR LINE BREAKS */
+.entry-body { 
+            font-family: 'Merriweather', serif; 
+            font-size: 1.1rem; 
+            line-height: 1.8; /* Slightly tighter for better readability */
+            color: #ccc; 
+            font-weight: 300;
+            white-space: pre-wrap;
+            word-wrap: break-word;
         }
         .entry-body img { 
-            display: block; max-width: 100%; height: auto; border-radius: 4px; margin: 40px 0;
-            border: 1px solid rgba(255,255,255,0.1);
+            display: block; 
+            max-width: 100%; 
+            height: auto; 
+            border-radius: 8px; 
+            margin: 30px auto; /* Centers the image */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); /* Gives images some depth */
         }
-
         .loading-signal { font-family: 'Fira Code'; font-size: 0.7rem; color: var(--brand-blue); text-align: center; padding: 40px; }
     </style>
 </head>
