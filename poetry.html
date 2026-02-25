@@ -117,26 +117,39 @@ body {
             });
         }
 
-        function displayPoem(index) {
-            const area = document.getElementById('display-area');
-            const poem = archive[index];
-            
-            area.classList.remove('visible');
-            
-            setTimeout(() => {
-                area.innerHTML = `
-                    <div class="poem-meta">ORIGIN_POINT: ${poem.location} // ${poem.date}</div>
-                    <div class="poem-body">${poem.body}</div>
-                `;
-                area.classList.add('visible');
-            }, 300);
+function displayPoem(index) {
+    const area = document.getElementById('display-area');
+    const poem = archive[index];
+    
+    // 1. UPDATE ATMOSPHERIC THUMBPRINT
+    // This changes the background glow based on the poem's color chord
+    document.body.style.background = `
+        radial-gradient(circle at bottom right, rgba(255,255,255,0.03) 0%, #050505 100%),
+        ${poem.thumbprint}
+    `;
+    document.body.style.backgroundBlendMode = "overlay";
 
-            // Update active state in sidebar
-            document.querySelectorAll('.file-item').forEach((el, i) => {
-                el.classList.toggle('active', i === index);
-            });
-        }
+    area.classList.remove('visible');
+    
+    setTimeout(() => {
+        area.innerHTML = `
+            <div class="poem-meta">
+                [SIGNAL: ${poem.frequency}] // [ORIGIN: ${poem.date}]
+            </div>
+            <div class="poem-body">${poem.body}</div>
+            
+            <div style="margin-top: 60px; font-family: 'Fira Code'; font-size: 0.55rem; opacity: 0.3;">
+                [SCANNING_SOCIAL_RESIDUE_FOR_CROSS_LINKS...]
+            </div>
+        `;
+        area.classList.add('visible');
+    }, 300);
 
+    // Update Sidebar
+    document.querySelectorAll('.file-item').forEach((el, i) => {
+        el.classList.toggle('active', i === index);
+    });
+}
         // 3. INITIALIZE ON LOAD
         window.onload = () => {
             loadArchive();
