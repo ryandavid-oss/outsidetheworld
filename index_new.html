@@ -4,121 +4,208 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Outside The World</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;900&family=Fira+Code:wght@300&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;900&family=Fira+Code:wght@300;500;700&display=swap');
 
         :root {
             --star-white: #ffffff;
-            --star-glow: rgba(255, 255, 255, 0.3);
-            --bg-dark: #050505;
+            --star-glow: rgba(255, 255, 255, 0.6);
+            --bg-dark: #020202;
+            --brand-blue: #6395EE;
+            --brand-teal: #91AFB3;
         }
 
         body {
             background-color: var(--bg-dark);
             margin: 0; height: 100vh;
-            display: flex; flex-direction: column;
-            justify-content: center; align-items: center;
+            display: flex; justify-content: center; align-items: center;
             overflow: hidden; font-family: 'Inter', sans-serif;
             color: white;
+            background: radial-gradient(circle at center, #0a0a0a 0%, #020202 100%);
         }
 
-        /* ORION CONSTELLATION CONTAINER */
-        .constellation {
-            position: relative; width: 300px; height: 500px;
-            margin-bottom: 50px;
+        /* 1. HERO LOGO (TOP LEFT - PURE WHITE) */
+        .hero-logo {
+            position: fixed; top: 40px; left: 40px; width: 200px;
+            filter: brightness(0) invert(1); /* Forces pure white */
+            opacity: 0.4; transition: 0.5s; z-index: 100;
+        }
+        .hero-logo:hover { opacity: 1; }
+
+        /* 2. STARFIELD BACKGROUND */
+        .starfield { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+        .dim-star {
+            position: absolute; background: #fff; border-radius: 50%; opacity: 0.1;
+            animation: pulse var(--d) infinite alternate;
+        }
+        @keyframes pulse { from { opacity: 0.05; } to { opacity: 0.2; } }
+
+        /* 3. MAIN NAVIGATION LAYOUT */
+        .gateway-container {
+            display: flex; align-items: center; justify-content: center;
+            gap: 100px; z-index: 10; width: 90%; max-width: 1400px;
         }
 
-        /* STAR STYLING */
+        .nav-wing { display: flex; flex-direction: column; align-items: center; text-align: center; width: 250px; }
+        
+        .wing-label {
+            font-family: 'Fira Code'; font-size: 0.6rem; color: var(--brand-teal);
+            letter-spacing: 4px; text-transform: uppercase; margin-bottom: 20px;
+            opacity: 0.6;
+        }
+
+        .ethereal-btn {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px 40px; color: #fff;
+            font-family: 'Inter'; font-weight: 900; font-size: 1rem;
+            letter-spacing: 6px; text-transform: uppercase;
+            text-decoration: none; transition: 0.6s cubic-bezier(0.2, 1, 0.3, 1);
+            position: relative; overflow: hidden;
+        }
+        .ethereal-btn:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: #fff; box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+            letter-spacing: 10px;
+        }
+
+        /* 4. THE HUNTER (ORION) */
+        .constellation { position: relative; width: 300px; height: 450px; }
         .star {
-            position: absolute;
-            background: var(--star-white);
-            border-radius: 50%;
+            position: absolute; background: var(--star-white); border-radius: 50%;
             box-shadow: 0 0 10px var(--star-glow), 0 0 20px var(--star-glow);
             animation: twinkle var(--duration) infinite ease-in-out;
         }
+        @keyframes twinkle { 0%, 100% { opacity: 0.4; transform: scale(0.9); } 50% { opacity: 1; transform: scale(1.1); } }
 
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.3; transform: scale(0.8); }
-            50% { opacity: 1; transform: scale(1.1); }
-        }
-
-        /* POSITIONING ORION'S KEY STARS */
-        /* Betelgeuse */ .star.betelgeuse { top: 0; left: 50px; width: 4px; height: 4px; --duration: 3s; }
-        /* Bellatrix */ .star.bellatrix { top: 30px; right: 50px; width: 3px; height: 3px; --duration: 4s; }
+        /* Orion Star Details */
+        .betelgeuse { top: 0; left: 40px; width: 6px; height: 6px; --duration: 3s; box-shadow: 0 0 15px rgba(255, 100, 100, 0.5); }
+        .bellatrix { top: 20px; right: 40px; width: 4px; height: 4px; --duration: 4.2s; }
+        .saiph { bottom: 40px; left: 50px; width: 4px; height: 4px; --duration: 5.1s; }
+        .rigel { bottom: 0; right: 40px; width: 7px; height: 7px; --duration: 3.8s; box-shadow: 0 0 20px rgba(100, 150, 255, 0.5); }
         
-        /* THE BELT (The Centerpiece) */
-        .belt-star {
-            width: 5px; height: 5px;
-            box-shadow: 0 0 15px var(--star-white);
-            cursor: pointer; transition: 0.3s;
-        }
-        .star.alnitak { top: 220px; left: 110px; --duration: 2.5s; }
-        .star.alnilam { top: 235px; left: 145px; --duration: 3.2s; }
-        .star.mintaka { top: 250px; left: 180px; --duration: 2.8s; }
+        .belt-star { width: 6px; height: 6px; box-shadow: 0 0 20px #fff; cursor: pointer; z-index: 50; }
+        .alnitak { top: 200px; left: 100px; --duration: 2.5s; }
+        .alnilam { top: 215px; left: 140px; --duration: 3.1s; }
+        .mintaka { top: 230px; left: 180px; --duration: 2.7s; }
 
-        /* Saiph */ .star.saiph { bottom: 50px; left: 60px; width: 3px; height: 3px; --duration: 5s; }
-        /* Rigel */ .star.rigel { bottom: 20px; right: 70px; width: 5px; height: 5px; --duration: 3.5s; }
-
-        /* LOGO & TITLE */
-        .title-block {
-            text-align: center; z-index: 10;
+        /* 5. TITLES & POETRY */
+        .center-footer { position: fixed; bottom: 80px; text-align: center; width: 100%; }
+        
+        /* THE FONT: Inter, 300 weight, 15px spacing */
+        .main-title {
+            font-size: 1.2rem; font-weight: 300; letter-spacing: 15px;
+            text-transform: uppercase; margin: 0; opacity: 0.8;
         }
 
-        h1 {
-            font-size: 1.2rem; font-weight: 300;
-            letter-spacing: 15px; text-transform: uppercase;
-            margin: 0; opacity: 0.7;
+        .poem-fragment {
+            margin-top: 40px; font-size: 0.65rem; color: #333;
+            letter-spacing: 3px; font-style: italic; cursor: pointer;
+            transition: 0.3s;
         }
+        .poem-fragment:hover { color: var(--brand-teal); }
 
-        .enter-link {
-            margin-top: 30px;
-            display: block;
-            font-family: 'Fira Code', monospace;
-            font-size: 0.7rem;
-            color: #666;
-            text-decoration: none;
-            letter-spacing: 4px;
-            transition: 0.5s;
+        /* 6. THE POEM POP-OVER */
+        .modal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95); display: none;
+            justify-content: center; align-items: center; z-index: 1000;
+            backdrop-filter: blur(20px);
         }
-        .enter-link:hover { color: white; letter-spacing: 8px; }
+        .modal-content {
+            max-width: 500px; text-align: left; line-height: 2;
+            font-size: 0.9rem; font-weight: 300; color: #ccc;
+            padding: 40px; border-left: 1px solid #222;
+        }
+        .modal-content b { color: #fff; display: block; margin-top: 20px; font-weight: 900; }
 
-        /* BACKGROUND POEM (SUBTLE) */
-        .poem-shroud {
-            position: absolute; bottom: 40px; left: 40px;
-            font-size: 0.6rem; line-height: 2; color: #222;
-            max-width: 300px; font-style: italic;
+        @media (max-width: 900px) {
+            .gateway-container { flex-direction: column; gap: 50px; }
+            .hero-logo { width: 140px; top: 20px; left: 20px; }
+            .constellation { height: 300px; transform: scale(0.8); }
         }
     </style>
 </head>
 <body>
 
-    <div class="constellation">
-        <div class="star betelgeuse"></div>
-        <div class="star bellatrix"></div>
-        
-        <a href="personal.html" title="INTERFACE">
-            <div class="star alnitak belt-star"></div>
-        </a>
-        <a href="resume.html" title="DOSSIER">
-            <div class="star alnilam belt-star"></div>
-        </a>
-        <a href="emmy.html" title="SANCTUARY">
-            <div class="star mintaka belt-star"></div>
-        </a>
+    <img src="Images/Equal.svg" alt="OTW" class="hero-logo">
 
-        <div class="star saiph"></div>
-        <div class="star rigel"></div>
+    <div class="starfield" id="star-bg"></div>
+
+    <main class="gateway-container">
+        <div class="nav-wing">
+            <span class="wing-label">[Thoughts & Creation]</span>
+            <a href="personal.html" class="ethereal-btn">EXPLORE</a>
+        </div>
+
+        <div class="constellation">
+            <div class="star betelgeuse"></div>
+            <div class="star bellatrix"></div>
+            
+            <a href="personal.html"><div class="star alnitak belt-star" title="Interface"></div></a>
+            <a href="resume.html"><div class="star alnilam belt-star" title="Dossier"></div></a>
+            <a href="emmy.html"><div class="star mintaka belt-star" title="Sanctuary"></div></a>
+
+            <div class="star saiph"></div>
+            <div class="star rigel"></div>
+        </div>
+
+        <div class="nav-wing">
+            <span class="wing-label">[Strategy & Solutions]</span>
+            <a href="resume.html" class="ethereal-btn">CONSULT</a>
+        </div>
+    </main>
+
+    <div class="center-footer">
+        <h1 class="main-title">Outside The World</h1>
+        <div class="poem-fragment" onclick="togglePoem()">
+            "perspective is my weakness... outside the world is new"
+        </div>
     </div>
 
-    <div class="title-block">
-        <h1>Outside The World</h1>
-        <a href="personal.html" class="enter-link">INITIALIZE_CONNECTION</a>
+    <div class="modal" id="poem-modal" onclick="togglePoem()">
+        <div class="modal-content">
+            I dance along the path<br>
+            lonely emerald fields on either side<br>
+            I gaze into the distant canyon<br>
+            and know that I cannot enter<br><br>
+            Every star seems to smile down this evening<br>
+            each one shines its own way<br>
+            and the world is quiet<br>
+            it does not know I am here<br><br>
+            The crisp air haunts me<br>
+            its aroma seems too familiar<br>
+            yes, but under different circumstances<br>
+            this would be true<br><br>
+            there seems to be an end<br>
+            as the mountain peak swallows up the sky<br>
+            my perspective is my weakness<br>
+            <b>outside the world is new…</b>
+            <br><br>
+            <span style="font-size: 0.6rem; opacity: 0.4;">[CLICK TO CLOSE]</span>
+        </div>
     </div>
 
-    <div class="poem-shroud">
-        Perspective is my weakness...<br>
-        Outside the world is new.
-    </div>
+    <script>
+        // Generate Dim Starfield
+        const starBg = document.getElementById('star-bg');
+        for (let i = 0; i < 150; i++) {
+            const star = document.createElement('div');
+            star.className = 'dim-star';
+            const size = Math.random() * 2;
+            star.style.width = size + 'px';
+            star.style.height = size + 'px';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.setProperty('--d', (Math.random() * 3 + 2) + 's');
+            starBg.appendChild(star);
+        }
 
+        function togglePoem() {
+            const modal = document.getElementById('poem-modal');
+            modal.style.display = (modal.style.display === 'flex') ? 'none' : 'flex';
+        }
+    </script>
 </body>
 </html>
