@@ -192,20 +192,20 @@
             
             <a href="resume.html" class="archive-card dossier-card">
                 <div class="card-beacon"></div>
-                <h3>The Dossier</h3>
-                <p>Professional history // Network Logistics.</p>
+                <h3>The Resume</h3>
+                <p>Professional history // Tech Logistics.</p>
             </a>
             
             <a href="flotsam.html" class="archive-card">
                 <div class="card-beacon"></div>
                 <h3>The Flotsam</h3>
-                <p>Visual vanguard and project residue.</p>
+                <p>Visual depot and verbal residue.</p>
             </a>
 
             <a href="transform_gate.html" class="archive-card transition-card">
                 <div class="card-beacon"></div>
                 <h3>The Transition</h3>
-                <p>Internal audit of architectural shifts.</p>
+                <p>Internal struggle of fundamental identity.</p>
             </a>
         </aside>
     </main>
@@ -234,47 +234,59 @@
             } catch (e) { display.textContent = `Queen Creek // STATUS_OFFLINE`; }
         }
 
-        function syncLatestPost() {
-            const contentArea = document.getElementById('latest-post-area');
-            fetch('./manifest.json')
-                .then(res => res.json())
-                .then(data => {
-                    if (data.length > 0) {
-                        const latest = data[0];
-                        const rawDate = latest.date; 
-                        let displayDate = "";
-                        const cleanDate = rawDate.replace(/[^\d\w\s,]/g, ' ');
-                        const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-                        let foundMonth = months.find(m => rawDate.includes(m)) || months[new Date().getMonth()];
-                        let foundDay = rawDate.match(/\d+/) || "01";
-                        displayDate = `${foundMonth} ${foundDay}, 2026`;
+/* ... inside your <script> ... */
 
-                        fetch('./blogger_posts/' + latest.file)
-                            .then(res => res.text())
-                            .then(text => {
-                                const lines = text.split('\n');
-                                const rawTitle = lines[0].replace('# ', '').trim();
-                                let bodyStartIndex = 1;
-                                while (lines[bodyStartIndex] !== undefined && lines[bodyStartIndex].trim() === "") { bodyStartIndex++; }
-                                const bodyContent = lines.slice(bodyStartIndex).join('\n');
+function syncLatestPost() {
+    const contentArea = document.getElementById('latest-post-area');
+    fetch('./manifest.json')
+        .then(res => res.json())
+        .then(data => {
+            if (data.length > 0) {
+                const latest = data[0];
+                const rawDate = latest.date; 
+                let displayDate = "";
+                
+                // FORCE THE YEAR 2026 PROTOCOL
+                const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                let foundMonth = months.find(m => rawDate.includes(m)) || months[new Date().getMonth()];
+                let foundDay = rawDate.match(/\d+/) || "01";
+                displayDate = `${foundMonth} ${foundDay}, 2026`;
 
-                                contentArea.innerHTML = `
-                                    <h2>${rawTitle}</h2>
-                                    <span class="post-date">${displayDate}</span>
-                                    <div id="md-render"></div>
-                                    <div class="nav-node">
-                                        <a href="wayback.html" class="node-link">← VIEW_HISTORICAL_ARCHIVE</a>
-                                        <div class="node-link" style="opacity:0.3; cursor:default;">TERMINAL_END [X]</div>
-                                    </div>
-                                `;
-                                document.getElementById('md-render').innerHTML = marked.parse(bodyContent);
-                                runTypewriterProtocol();
-                            });
-                    }
-                })
-                .catch(err => { console.error("Sync Error:", err); contentArea.innerHTML = "<p>Narrative connection lost.</p>"; });
-        }
+                fetch('./blogger_posts/' + latest.file)
+                    .then(res => res.text())
+                    .then(text => {
+                        const lines = text.split('\n');
+                        const rawTitle = lines[0].replace('# ', '').trim();
+                        
+                        // DATE SURGERY: Skip the title AND any redundant dates in the file text
+                        let bodyStartIndex = 1;
+                        while (lines[bodyStartIndex] !== undefined && 
+                              (lines[bodyStartIndex].trim() === "" || 
+                               /\d{4}/.test(lines[bodyStartIndex]) || 
+                               lines[bodyStartIndex].includes(',') || 
+                               months.some(m => lines[bodyStartIndex].includes(m)))) {
+                            bodyStartIndex++;
+                        }
+                        
+                        const bodyContent = lines.slice(bodyStartIndex).join('\n');
 
+                        // REBUILT CLEAN OUTPUT: Single Blue Date Only
+                        contentArea.innerHTML = `
+                            <h2>${rawTitle}</h2>
+                            <span class="post-date">${displayDate}</span>
+                            <div id="md-render"></div>
+                            <div class="nav-node">
+                                <a href="wayback.html" class="node-link">← VIEW_HISTORICAL_ARCHIVE</a>
+                                <div class="node-link" style="opacity:0.3; cursor:default;">TERMINAL_END [X]</div>
+                            </div>
+                        `;
+                        document.getElementById('md-render').innerHTML = marked.parse(bodyContent);
+                        runTypewriterProtocol();
+                    });
+            }
+        })
+        .catch(err => { console.error("Sync Error:", err); contentArea.innerHTML = "<p>Narrative connection lost.</p>"; });
+}
         window.onload = () => { syncLatestPost(); fetchWeather(); };
     </script>
 </body>
