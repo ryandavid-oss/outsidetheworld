@@ -88,9 +88,15 @@
             line-height: 2.2; 
             color: #ccc; 
             font-weight: 300;
-            white-space: pre-wrap; /* Crucial for preserving original newline layout */
         }
         .entry-body p { margin-bottom: 2rem; }
+        .entry-body img { 
+            max-width: 100%; 
+            height: auto; 
+            border-radius: 4px; 
+            margin: 20px 0;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
 
         /* ERA PULSE ANIMATION */
         @keyframes pulse-era {
@@ -136,34 +142,30 @@
     <script src="wayback_purified.js"></script>
 
     <script>
-        // Use the RAW dump from wayback_purified.js and Era-Tag it dynamically
-        const allResidue = wayback_raw_dump.map(post => {
-            let era = "MODERN_RESONANCE";
-            let thumb = "linear-gradient(135deg, #2c3e50 0%, #4b6cb7 100%)";
+        // ERA definitions
+        const ERA_MAP = {
+            ANALOG: { label: "THE_ANALOG_DAWN", glow: "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)" },
+            APPLE: { label: "THE_APPLE_YEARS", glow: "linear-gradient(135deg, #13547a 0%, #80d0c7 100%)" },
+            MODERN: { label: "MODERN_RESONANCE", glow: "linear-gradient(135deg, #2c3e50 0%, #4b6cb7 100%)" }
+        };
 
-            // Categorize by Year
+        // Standardize the dump
+        const allResidue = wayback_raw_dump.map(post => {
+            let eraConfig = ERA_MAP.MODERN;
             const yearNum = parseInt(post.year);
-            if (yearNum <= 2006) {
-                era = "THE_ANALOG_DAWN";
-                thumb = "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)";
-            } else if (yearNum <= 2022) {
-                era = "THE_APPLE_YEARS";
-                thumb = "linear-gradient(135deg, #13547a 0%, #80d0c7 100%)";
-            }
+            
+            if (yearNum <= 2006) eraConfig = ERA_MAP.ANALOG;
+            else if (yearNum <= 2022) eraConfig = ERA_MAP.APPLE;
 
             return {
                 ...post,
-                era: era,
-                thumbprint: thumb,
-                displayTitle: post.current_title || "Untitled Entry",
-                displayBody: post.raw_body // The raw text from your Python script
+                eraLabel: eraConfig.label,
+                thumbprint: eraConfig.glow
             };
         });
 
         function initWayback() {
             const select = document.getElementById('year-select');
-            
-            // Extract unique years from the raw data
             const years = [...new Set(allResidue.map(p => p.year))].sort((a,b) => b-a);
             
             years.forEach(y => {
@@ -175,7 +177,6 @@
 
             if (years.length > 0) {
                 renderEra(years[0]);
-                // Automatically display the first post of the latest year
                 const firstIndex = allResidue.findIndex(p => p.year === years[0]);
                 displayEntry(firstIndex);
             }
@@ -197,8 +198,8 @@
                         }
                     };
                     item.innerHTML = `
-                        <h3>${post.displayTitle}</h3>
-                        <span>${post.date} // ${post.era}</span>
+                        <h3>${post.title}</h3>
+                        <span>${post.date} // ${post.eraLabel}</span>
                     `;
                     list.appendChild(item);
                 }
@@ -214,7 +215,6 @@
             const container = document.getElementById('glass-container');
             const post = allResidue[index];
             
-            // Atmospheric transition
             document.body.style.background = `
                 radial-gradient(circle at bottom right, rgba(0,0,0,0.8) 0%, #050505 100%), 
                 ${post.thumbprint}
@@ -223,18 +223,17 @@
 
             container.classList.remove('visible');
 
-            // Render Original Raw Text
             setTimeout(() => {
+                // Rendering HTML (body) and the corrected Title
                 container.innerHTML = `
-                    <h1 class="entry-title">${post.displayTitle}</h1>
-                    <div class="entry-meta">ERA: ${post.era} // ${post.date}, ${post.year}</div>
-                    <div class="entry-body">${post.displayBody}</div>
+                    <h1 class="entry-title">${post.title}</h1>
+                    <div class="entry-meta">RESIDUE_ERA: ${post.eraLabel} // DATE: ${post.date}, ${post.year}</div>
+                    <div class="entry-body">${post.body}</div>
                 `;
                 container.classList.add('visible');
                 document.getElementById('scroll-target').scrollTop = 0;
             }, 400);
 
-            // Active State
             document.querySelectorAll('.post-item').forEach(el => {
                 el.classList.toggle('active', el.getAttribute('data-id') == index);
             });
@@ -244,7 +243,7 @@
             if (typeof wayback_raw_dump !== 'undefined') {
                 initWayback();
             } else {
-                console.error("DATA_SIGNAL_LOST: wayback_purified.js not found.");
+                console.error("CRITICAL: wayback_purified.js link severed.");
             }
         };
     </script>
