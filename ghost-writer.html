@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
     <script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Fira+Code:wght@300;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Fira+Code:wght@300;500;700&display=swap');
 
         :root {
             --brand-blue: #6395EE;
@@ -24,7 +24,6 @@
             min-height: 100vh; margin: 0; padding: 20px;
         }
 
-        /* 1. LOGIN SCREEN */
         #auth-container {
             width: 100%; max-width: 400px; padding: 40px;
             background: var(--bg-dark); 
@@ -46,7 +45,6 @@
             transition: 0.4s;
         }
 
-        /* 2. THE WRITER INTERFACE */
         #main-content { display: none; width: 100%; max-width: 1000px; }
 
         .writer-case {
@@ -70,34 +68,21 @@
             padding: 8px 15px; border-radius: 4px; font-size: 0.9rem; outline: none;
         }
 
-        .EasyMDEContainer { font-family: 'Inter', sans-serif !important; }
-        
-        /* UPDATED CodeMirror with visible blue cursor */
         .CodeMirror { 
             background: transparent !important; color: #ccc !important; 
             border: 1px solid rgba(255,255,255,0.1) !important; height: 500px !important; 
             font-size: 1.1rem; line-height: 1.6;
         }
-        .CodeMirror-cursor { 
-            border-left: 2px solid var(--brand-blue) !important; 
-        }
-
-        .editor-toolbar { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-bottom: none; }
-        .editor-toolbar button { color: #888 !important; }
+        .CodeMirror-cursor { border-left: 2px solid var(--brand-blue) !important; }
 
         .publish-footer { margin-top: 40px; display: flex; justify-content: flex-end; }
 
-        @media (max-width: 768px) {
-            .writer-case { padding: 30px 20px; }
-            .input-row { flex-direction: column; align-items: flex-start; }
-            input#title { font-size: 1.8rem; width: 100%; }
-        }
         .word-count {
-    position: fixed; bottom: 20px; left: 20px;
-    font-family: 'Fira Code', monospace; font-size: 0.7rem;
-    color: var(--brand-teal); opacity: 0.6;
-    letter-spacing: 2px; text-transform: uppercase;
-}
+            position: fixed; bottom: 20px; left: 20px;
+            font-family: 'Fira Code', monospace; font-size: 0.7rem;
+            color: var(--brand-teal); opacity: 0.6;
+            letter-spacing: 2px; text-transform: uppercase;
+        }
     </style>
 </head>
 <body>
@@ -114,17 +99,16 @@
                 <input type="text" id="title" placeholder="Entry Title...">
                 <input type="date" id="entryDate">
             </div>
-            
             <textarea id="content"></textarea>
-
             <div class="publish-footer">
                 <button type="button" id="downloadBtn" class="btn-action" style="width: auto; padding: 18px 80px;">CREATE RESIDUE</button>
             </div>
         </div>
+        <div id="meter" class="word-count">RESIDUE_DENSITY: 0 WORDS</div>
     </div>
 
     <script>
-        // --- FIXED ARIZONA LOCAL DATE LOGIC ---
+        // --- DATE LOGIC ---
         const now = new Date();
         const offset = now.getTimezoneOffset() * 60000;
         const localISOTime = new Date(now - offset).toISOString().split('T')[0];
@@ -148,6 +132,14 @@
 
         document.getElementById('passwordInput').addEventListener('keypress', (e) => { if (e.key === 'Enter') login(); });
 
+        // --- WORD COUNT LOGIC ---
+        easyMDE.codemirror.on("change", () => {
+            const text = easyMDE.value().trim();
+            const count = text ? text.split(/\s+/).length : 0;
+            document.getElementById('meter').innerText = `RESIDUE_DENSITY: ${count} WORDS`;
+        });
+
+        // --- GENERATION LOGIC ---
         document.getElementById('downloadBtn').addEventListener('click', () => {
             let title = document.getElementById('title').value;
             const chosenDate = document.getElementById('entryDate').value;
@@ -155,34 +147,27 @@
 
             if (!title || !content || !chosenDate) { alert("ERROR: NARRATIVE INCOMPLETE"); return; }
 
-            // APOSTROPHE ARMOR
+            // APOSTROPHE ARMOR (Protects the text from encoding errors)
             title = title.replace(/[\u2018\u2019]/g, "'").replace(/[\u201C\u201D]/g, '"');
             content = content.replace(/[\u2018\u2019]/g, "'").replace(/[\u201C\u201D]/g, '"');
 
-            // POETRY FIX
-            const formattedContent = content.replace(/\n/g, "  \n");
-            
             const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
             const formattedDate = new Date(chosenDate + 'T00:00:00').toLocaleDateString('en-US', dateOptions);
 
-            const fullMarkdown = `# ${title}\n### ${formattedDate}\n\n---\n\n${formattedContent}`;
+            // --- CRITICAL STRUCTURE FOR PURIFIER_V5 ---
+            // Line 1: # Title
+            // Line 2: Date: Month Day, Year
+            // Line 3+: Content
+            const fullMarkdown = `# ${title}\nDate: ${formattedDate}\n\n${content}`;
 
             const fileName = `${chosenDate}-${title.toLowerCase().replace(/[^a-z0-9]/g, '-')}.md`;
             const blob = new Blob([fullMarkdown], { type: 'text/markdown' });
             const a = document.createElement('a');
             a.href = URL.createObjectURL(blob);
             a.download = fileName;
+            document.body.appendChild(a);
             a.click();
-            // Add the meter to the page
-const meter = document.createElement('div');
-meter.className = 'word-count';
-document.body.appendChild(meter);
-
-// Update count on every keystroke
-easyMDE.codemirror.on("change", () => {
-    const count = easyMDE.value().trim().split(/\s+/).length;
-    meter.innerText = `RESIDUE_DENSITY: ${count} WORDS`;
-});
+            document.body.removeChild(a);
         });
     </script>
 </body>
