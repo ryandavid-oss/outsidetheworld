@@ -174,7 +174,7 @@
     <main class="gateway-container">
         <div class="nav-wing">
             <span class="wing-label">[Thoughts & Creation]</span>
-            <a href="personal.html" class="ethereal-btn explore-btn">EXPLORE</a>
+            <a href="personal.html" class="ethereal-btn explore-btn">ENTER</a>
         </div>
 
         <div class="constellation">
@@ -242,18 +242,40 @@
         </div>
     </div>
 
-    <div class="modal" id="poem-modal" onclick="togglePoem()">
-        <div class="modal-content">
-            I dance along the path<br>
-            lonely emerald fields on either side...<br><br>
-            there seems to be an end<br>
-            as the mountain peak swallows up the sky<br>
-            my perspective is my weakness<br>
-            <b>outside the world is new…</b>
-            <br><br>
-            <span style="font-size: 0.6rem; opacity: 0.4;">[CLICK TO CLOSE]</span>
+<div class="modal" id="poem-modal" onclick="togglePoem()" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5,5,5,0.97); backdrop-filter: blur(20px); z-index: 9999; justify-content: center; align-items: center;">
+    
+    <div class="modal-content" style="background: rgba(145, 175, 179, 0.02); padding: 60px 40px; border: 1px solid rgba(145, 175, 179, 0.15); position: relative; max-width: 550px; width: 90%; text-align: center; box-shadow: 0 0 60px rgba(0,0,0,1);">
+        
+        <div style="position: absolute; top: 0; right: 0; width: 100%; height: 2px; background: var(--brand-teal); box-shadow: 0 0 20px var(--brand-teal);"></div>
+        <div style="position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: var(--brand-teal); box-shadow: 0 0 20px var(--brand-teal);"></div>
+
+        <div style="font-family: 'Merriweather', serif; font-size: 1.1rem; line-height: 1.8; color: #e0e0e0; font-weight: 300;">
+            I dance along the path,<br>
+            lonely emerald fields on either side.<br>
+            I gaze into the distant canyon<br>
+            and know that I cannot enter.<br><br>
+
+            Every star seems to smile down this evening;<br>
+            each one shines its own way,<br>
+            and the world is quiet.<br>
+            It does not know I am here.<br><br>
+
+            The crisp air haunts me; <br>
+            its aroma seems too familiar. <br>
+            Yes, but under different circumstances <br>
+            this would be true.<br><br>
+
+            There seems to be an end<br>
+            as the mountain peak swallows up the sky.<br>
+            <span style="color: var(--brand-teal); font-weight: 700; text-shadow: 0 0 10px var(--brand-teal); font-style: normal;">My perspective is my weakness;</span><br>
+            <span style="color: #fff; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; font-size: 0.9rem; opacity: 0.9;">outside the world is new.</span>
+        </div>
+
+        <div style="margin-top: 50px; font-family: 'Fira Code', monospace; font-size: 0.55rem; color: #444; letter-spacing: 4px;">
+            [ SYSTEM_DEACTIVATE ]
         </div>
     </div>
+</div>
 
     <script>
         const starBg = document.getElementById('star-bg');
