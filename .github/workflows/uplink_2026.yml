@@ -21,7 +21,9 @@ jobs:
           python-version: '3.x'
 
       - name: Run Narrative Sync
-        run: python narrative_sync.py
+        run: |
+          touch narrative_data.js
+          python narrative_sync.py
 
       - name: Commit and Push Changes
         env:
@@ -29,12 +31,19 @@ jobs:
         run: |
           git config --global user.name "OTW-Narrative-Bot"
           git config --global user.email "bot@outsidetheworld.com"
-          git add narrative_data.js
           
-          # Only commit and push if something actually changed
-          if ! git diff --cached --quiet; then
-            git commit -m "Uplink: New 2026 narrative synced"
-            git push
+          # We check if the file exists before adding to prevent 128
+          if [ -f narrative_data.js ]; then
+            git add narrative_data.js
+            
+            # Only commit if there are actual changes
+            if ! git diff --cached --quiet; then
+              git commit -m "Uplink: New 2026 narrative synced"
+              git push
+            else
+              echo "No changes detected in narrative_data.js"
+            fi
           else
-            echo "No changes to commit."
+            echo "Error: narrative_data.js was not generated."
+            exit 1
           fi
