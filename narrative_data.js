@@ -1,9 +1,9 @@
 const current_narrative = [
     {
-        "title": "Test post (please work)",
+        "title": "Star date 164.595",
         "date": "February 25, 2026",
-        "body": "All I want is for this to actually post my blog.",
-        "file": "2026-02-25-test-post--please-work-.md"
+        "body": "Captains log, supplemental.  We have crossed over into the neutral zone, and Geordi has picked up a strange signal coming from deep within Kingon space.",
+        "file": "2026-02-25-star-date-164-595.md"
     },
     {
         "title": "A Brand New OTW, baby",
