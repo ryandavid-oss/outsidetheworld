@@ -53,15 +53,51 @@
 
         .main-interface { display: flex; max-width: 1400px; margin: 240px auto 100px; padding: 0 40px; gap: 60px; }
 
-        /* FEED COLUMN */
-        .feed-column { 
-            flex: 2; text-align: left; 
-            background: var(--glass-teal);
-            border: 1px solid var(--border-teal);
-            padding: 50px;
-            backdrop-filter: blur(20px);
-            position: relative;
-        }
+/* THE TRON FEED BOX */
+.feed-column { 
+    flex: 2; 
+    text-align: left; 
+    background: rgba(145, 175, 179, 0.03); /* Lowered opacity inside */
+    padding: 50px;
+    backdrop-filter: blur(20px);
+    position: relative;
+    border: 1px solid rgba(145, 175, 179, 0.1); /* Subtle base border */
+    overflow: hidden;
+}
+
+/* Line 1: Top-Right -> Top-Left -> Bottom-Left */
+.feed-column::before {
+    content: "";
+    position: absolute;
+    top: 0; right: 0;
+    width: 0; height: 2px;
+    background: var(--brand-teal);
+    box-shadow: 0 0 15px var(--brand-teal);
+    animation: draw-top-left 1.5s ease-out forwards;
+}
+
+/* Line 2: Top-Right -> Bottom-Right -> Bottom-Left */
+.feed-column::after {
+    content: "";
+    position: absolute;
+    top: 0; right: 0;
+    width: 2px; height: 0;
+    background: var(--brand-teal);
+    box-shadow: 0 0 15px var(--brand-teal);
+    animation: draw-right-bottom 1.5s ease-out forwards;
+}
+
+@keyframes draw-top-left {
+    0% { width: 0; height: 2px; right: 0; top: 0; }
+    50% { width: 100%; height: 2px; right: 0; top: 0; }
+    100% { width: 100%; height: 100%; right: 0; top: 0; border-left: 2px solid var(--brand-teal); background: transparent; }
+}
+
+@keyframes draw-right-bottom {
+    0% { height: 0; width: 2px; top: 0; right: 0; }
+    50% { height: 100%; width: 2px; top: 0; right: 0; }
+    100% { height: 100%; width: 100%; top: 0; right: 0; border-bottom: 2px solid var(--brand-teal); background: transparent; }
+}
 
         .typing-container { font-family: 'Fira Code', monospace; font-size: 0.7rem; color: var(--brand-teal); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 20px; display: flex; align-items: center; }
         .cursor { display: inline-block; width: 6px; height: 12px; background: var(--brand-teal); margin-left: 5px; animation: blink 1s infinite; }
@@ -278,8 +314,8 @@
 
     <footer><p>© 2026 OUTSIDE THE WORLD LLC &nbsp; | &nbsp; SYSTEMS & STORIES</p></footer>
 
+    <script src="./narrative_data.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-<script src="./narrative_data.js"></script>
 
 <script>
     const typeTarget = document.getElementById('typing-text');
@@ -312,35 +348,34 @@ const response = await fetch('https://wttr.in/Queen+Creek?format=3');           
     }
 
     // --- THE NARRATIVE ENGINE ---
-    function syncLatestPost() {
-        const contentArea = document.getElementById('latest-post-area');
+function syncLatestPost() {
+    const contentArea = document.getElementById('latest-post-area');
 
-        // This checks for the data the bot created
-        if (typeof current_narrative !== 'undefined' && current_narrative.length > 0) {
-            const latest = current_narrative[0]; 
-            
-            contentArea.innerHTML = `
-                <div style="font-family: 'Fira Code'; font-size: 0.65rem; color: var(--brand-blue); letter-spacing: 5px; text-transform: uppercase; margin-bottom: 20px; opacity: 0.8;">
-                    UPLINK_TIMESTAMP // ${latest.date.toUpperCase()}
-                </div>
-                <h2 style="font-size: clamp(2.2rem, 6vw, 4.5rem); line-height: 0.85; margin: 0 0 50px 0; font-weight: 900; letter-spacing: -4px; color: #fff;">
-                    ${latest.title}
-                </h2>
-                <div id="md-render" style="font-family: 'Inter'; font-weight: 300; font-size: 1.15rem; line-height: 2.1; color: #b0b0b0; letter-spacing: 0.2px;">
-                    ${marked.parse(latest.body)}
-                </div>
-                <div style="margin-top: 80px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.05);">
-                    <a href="wayback.html" style="font-family: 'Fira Code'; font-size: 0.6rem; color: var(--brand-teal); text-decoration: none; letter-spacing: 2px; opacity: 0.5; transition: 0.3s;">
-                        ← ACCESS_THE_WAYBACK_VAULT
-                    </a>
-                </div>
-            `;
-            runTypewriterProtocol();
-        } else {
-            contentArea.innerHTML = "<div style='font-family: Fira Code; opacity: 0.4;'>WAITING_FOR_UPLINK_SIGNAL...</div>";
-        }
+    if (typeof current_narrative !== 'undefined' && current_narrative.length > 0) {
+        const latest = current_narrative[0]; 
+        
+        contentArea.innerHTML = `
+            <div style="font-family: 'Fira Code'; font-size: 0.9rem; font-weight: 700; color: var(--brand-teal); letter-spacing: 2px; margin-bottom: 10px;">
+                ${latest.date.toUpperCase()}
+            </div>
+
+            <h2 style="font-size: clamp(1.5rem, 4vw, 2.2rem); line-height: 1.1; margin: 0 0 20px 0; font-weight: 900; letter-spacing: -1px; color: #fff;">
+                ${latest.title}
+            </h2>
+
+            <div id="md-render" style="font-family: 'Merriweather', serif; font-weight: 300; font-size: 1.05rem; line-height: 1.8; color: #d1d1d1;">
+                ${marked.parse(latest.body)}
+            </div>
+
+            <div class="nav-node" style="margin-top: 60px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.05);">
+                <a href="wayback.html" class="node-link" style="font-size: 0.6rem; opacity: 0.4;">← ACCESS_THE_WAYBACK_VAULT</a>
+            </div>
+        `;
+        runTypewriterProtocol();
+    } else {
+        contentArea.innerHTML = "<div class='timestamp-glitch'>WAITING_FOR_2026_SIGNAL...</div>";
     }
-
+}
     // Initialize everything
     window.onload = () => { 
         syncLatestPost(); 
