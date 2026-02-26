@@ -355,13 +355,17 @@ function syncLatestPost() {
         const latest = current_narrative[0]; 
         
         contentArea.innerHTML = `
-            <div style="font-family: 'Fira Code'; font-size: 0.9rem; font-weight: 700; color: var(--brand-teal); letter-spacing: 2px; margin-bottom: 10px;">
+            <div style="font-family: 'Fira Code'; font-size: 0.9rem; font-weight: 700; color: var(--brand-teal); letter-spacing: 2px; margin-bottom: 5px;">
                 ${latest.date.toUpperCase()}
             </div>
 
-            <h2 style="font-size: clamp(1.5rem, 4vw, 2.2rem); line-height: 1.1; margin: 0 0 20px 0; font-weight: 900; letter-spacing: -1px; color: #fff;">
+            <h2 style="font-size: clamp(1.5rem, 4vw, 2.2rem); line-height: 1.1; margin: 0 0 5px 0; font-weight: 900; letter-spacing: -1px; color: #fff;">
                 ${latest.title}
             </h2>
+
+            <style>
+                #md-render p:first-child { margin-top: 0; } 
+            </style>
 
             <div id="md-render" style="font-family: 'Merriweather', serif; font-weight: 300; font-size: 1.05rem; line-height: 1.8; color: #d1d1d1;">
                 ${marked.parse(latest.body)}
@@ -375,8 +379,7 @@ function syncLatestPost() {
     } else {
         contentArea.innerHTML = "<div class='timestamp-glitch'>WAITING_FOR_2026_SIGNAL...</div>";
     }
-}
-    // Initialize everything
+}    // Initialize everything
     window.onload = () => { 
         syncLatestPost(); 
         fetchWeather(); 
