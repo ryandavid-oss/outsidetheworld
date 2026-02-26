@@ -28,13 +28,19 @@
             --amethyst: #9b59b6;
         }
 
+        /* 1. GLOBAL & MOBILE BLACKOUT */
         body {
             background-color: var(--bg-dark);
             color: white;
             font-family: 'Inter', sans-serif;
             margin: 0;
-            padding: 0;
+            /* Safari Notch/Safe Area Protection */
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
+            padding-left: env(safe-area-inset-left);
+            padding-right: env(safe-area-inset-right);
             overflow-x: hidden;
+            min-height: 100vh;
         }
 
         body::after {
@@ -52,19 +58,27 @@
             opacity: 0.1;
         }
 
-        /* HEADER & WEATHER */
+        /* 2. SYMMETRICAL HEADER */
         .interface-header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            padding: 30px 60px;
             z-index: 3500;
+            backdrop-filter: blur(15px);
+            background: linear-gradient(to bottom, rgba(5, 5, 5, 1) 0%, rgba(5, 5, 5, 0) 100%);
+            box-sizing: border-box;
+            padding: 0;
+        }
+
+        .header-content-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            backdrop-filter: blur(15px);
-            background: linear-gradient(to bottom, rgba(5, 5, 5, 1) 0%, rgba(5, 5, 5, 0) 100%);
+            width: 100%;
             box-sizing: border-box;
         }
 
@@ -100,16 +114,15 @@
             -webkit-text-fill-color: transparent;
         }
 
+        /* 3. MAIN INTERFACE LAYOUT */
         .main-interface {
             display: flex;
             max-width: 1400px;
-            /* Reduced top margin from 240px to 190px to shore up the space */
             margin: 190px auto 100px;
             padding: 0 40px;
             gap: 60px;
         }
 
-        /* THE TRON FEED BOX (personal.html) */
         .feed-column {
             flex: 2;
             text-align: left;
@@ -119,10 +132,9 @@
             position: relative;
             border: 1px solid rgba(145, 175, 179, 0.1);
             overflow: hidden;
-            /* Keeps the light trails inside the boundary */
         }
 
-        /* Trail 1: The Top and Left Burn */
+        /* TRON ANIMATIONS */
         .feed-column::before {
             content: "";
             position: absolute;
@@ -135,7 +147,6 @@
             animation: draw-top-left 1.2s ease-out forwards;
         }
 
-        /* Trail 2: The Right and Bottom Burn */
         .feed-column::after {
             content: "";
             position: absolute;
@@ -148,7 +159,6 @@
             animation: draw-right-bottom 1.2s ease-out forwards;
         }
 
-        /* THE ANIMATION PROTOCOL */
         @keyframes draw-top-left {
             0% {
                 width: 0;
@@ -199,6 +209,7 @@
             }
         }
 
+        /* 4. POST CONTENT TYPOGRAPHY */
         .typing-container {
             font-family: 'Fira Code', monospace;
             font-size: 0.7rem;
@@ -255,17 +266,14 @@
 
         #md-render {
             font-family: 'Merriweather', serif;
-            /* REMOVE white-space: pre-wrap; */
             line-height: 1.8;
             color: #d1d1d1;
             font-size: 1.05rem;
             font-weight: 300;
         }
 
-        /* Control the gaps between paragraphs explicitly */
         #md-render p {
             margin-bottom: 1.5rem;
-            /* Adjust this number to make the gap bigger or smaller */
             margin-top: 0;
         }
 
@@ -282,38 +290,13 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
-        .nav-node {
-            margin-top: 60px;
-            padding-top: 30px;
-            border-top: 1px solid var(--border-teal);
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .node-link {
-            font-family: 'Fira Code';
-            font-size: 0.7rem;
-            color: var(--brand-teal);
-            text-decoration: none;
-            letter-spacing: 2px;
-            transition: 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .node-link:hover {
-            color: #fff;
-            transform: translateX(-5px);
-        }
-
         .vertical-divider {
             width: 1px;
             background: var(--border-teal);
             align-self: stretch;
         }
 
-        /* RE-ESTABLISHED CARD THEMES */
+        /* 5. UNIVERSAL CARD PROTOCOL */
         .cards-column {
             flex: 1;
             display: flex;
@@ -341,24 +324,126 @@
             background: var(--border-teal);
         }
 
+        /* BASE CARD STYLE */
         .archive-card {
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            display: block;
             padding: 35px;
-            background: rgba(255, 255, 255, 0.01);
             text-decoration: none;
             color: inherit;
             position: relative;
-            transition: 0.5s;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            /* Idle State */
+            margin-bottom: 5px;
         }
 
-        /* THE + RETICLES (BEACONS) */
+        .archive-card h3 {
+            font-size: 1.1rem;
+            font-weight: 900;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin: 0 0 10px 0;
+            transition: 0.3s;
+        }
+
+        .archive-card p {
+            font-size: 0.7rem;
+            color: #666;
+            text-transform: uppercase;
+            margin: 0;
+        }
+
+        /* HOVER REACTION (Same for everyone) */
+        .archive-card:hover {
+            transform: translateX(10px);
+        }
+
+        /* COLOR THEMES */
+        /* Teal Theme (Locked Past, Flotsam) */
+        .teal-card {
+            border-color: rgba(145, 175, 179, 0.2);
+        }
+
+        .teal-card h3 {
+            color: var(--brand-teal);
+            opacity: 0.8;
+        }
+
+        .teal-card:hover {
+            border-color: var(--brand-teal);
+            background: rgba(145, 175, 179, 0.05);
+        }
+
+        .teal-card:hover h3 {
+            opacity: 1;
+        }
+
+        /* Amethyst Theme (Matrix, Transition) */
+        .amethyst-card {
+            border-color: rgba(155, 89, 182, 0.2);
+        }
+
+        .amethyst-card h3 {
+            color: var(--amethyst);
+            opacity: 0.8;
+        }
+
+        .amethyst-card:hover {
+            border-color: var(--amethyst);
+            background: rgba(155, 89, 182, 0.05);
+        }
+
+        .amethyst-card:hover h3 {
+            opacity: 1;
+        }
+
+        /* Sacred Theme (Warm Breeze) */
+        .sacred-card {
+            border-color: rgba(255, 179, 71, 0.2);
+        }
+
+        .sacred-card h3 {
+            color: var(--warm-amber);
+            opacity: 0.8;
+        }
+
+        .sacred-card:hover {
+            border-color: var(--warm-amber);
+            background: rgba(255, 179, 71, 0.05);
+        }
+
+        .sacred-card:hover h3 {
+            opacity: 1;
+        }
+
+        /* Dossier Theme (Resume) */
+        .dossier-card {
+            border-color: rgba(99, 149, 238, 0.2);
+        }
+
+        .dossier-card h3 {
+            color: var(--brand-blue);
+            opacity: 0.8;
+        }
+
+        .dossier-card:hover {
+            border-color: var(--brand-blue);
+            background: rgba(99, 149, 238, 0.05);
+        }
+
+        .dossier-card:hover h3 {
+            opacity: 1;
+        }
+
+        /* BEACONS (Reticles) */
         .card-beacon {
             position: absolute;
             top: 25px;
             right: 25px;
             width: 20px;
             height: 20px;
-            color: var(--brand-blue);
+            color: inherit;
             transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
@@ -383,120 +468,11 @@
             height: 2px;
         }
 
-        .archive-card:hover {
-            border-color: var(--brand-teal);
-            transform: translateX(10px);
-            background: rgba(145, 175, 179, 0.05);
-        }
-
         .archive-card:hover .card-beacon {
             transform: rotate(90deg);
-            color: var(--brand-teal);
         }
 
-        .archive-card h3 {
-            font-size: 1.1rem;
-            font-weight: 900;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            color: var(--brand-blue);
-            margin: 0 0 10px 0;
-            transition: 0.3s;
-        }
-
-        .archive-card:hover h3 {
-            color: var(--brand-teal);
-        }
-
-        .archive-card p {
-            font-size: 0.7rem;
-            color: #666;
-            text-transform: uppercase;
-            margin: 0;
-        }
-
-        .sacred-card {
-            border-color: rgba(255, 179, 71, 0.2);
-            background: rgba(255, 179, 71, 0.02);
-        }
-
-        .sacred-card h3 {
-            color: var(--warm-amber) !important;
-        }
-
-        .sacred-card p {
-            color: var(--rose-gold) !important;
-        }
-
-        .sacred-card:hover {
-            border-color: var(--warm-amber);
-            background: rgba(255, 179, 71, 0.05);
-        }
-
-        .sacred-card .card-beacon {
-            color: var(--warm-amber);
-        }
-
-        .sacred-card:hover .card-beacon {
-            transform: rotate(90deg);
-            color: var(--warm-amber);
-        }
-
-        body {
-            background-color: #050505;
-            /* Must match the meta tag */
-
-            /* These constants ensure content stays out of the "Notch" area */
-            padding-top: env(safe-area-inset-top);
-            padding-bottom: env(safe-area-inset-bottom);
-            padding-left: env(safe-area-inset-left);
-            padding-right: env(safe-area-inset-right);
-
-            min-height: 100vh;
-        }
-
-        .dossier-card:hover {
-            border-color: var(--brand-blue);
-            background: rgba(99, 149, 238, 0.05);
-        }
-
-        .dossier-card:hover h3 {
-            color: var(--brand-blue);
-        }
-
-        .dossier-card .card-beacon {
-            color: var(--brand-blue);
-        }
-
-        .dossier-card:hover .card-beacon {
-            transform: rotate(90deg);
-            color: var(--brand-blue);
-        }
-
-        .transition-card:hover {
-            border-color: var(--amethyst);
-            background: rgba(155, 89, 182, 0.05);
-        }
-
-        .transition-card h3 {
-            color: var(--amethyst);
-            transition: 0.3s;
-        }
-
-        .transition-card:hover h3 {
-            color: var(--amethyst);
-        }
-
-        .transition-card .card-beacon {
-            color: var(--amethyst);
-        }
-
-        .transition-card:hover .card-beacon {
-            transform: rotate(90deg);
-            color: var(--amethyst);
-        }
-
-        /* PODCASTS */
+        /* 6. WIDGETS & FOOTER */
         .podcast-widget {
             background: rgba(99, 149, 238, 0.03);
             border: 1px solid rgba(99, 149, 238, 0.1);
@@ -528,20 +504,6 @@
             cursor: pointer;
         }
 
-        footer {
-            padding: 80px 0;
-            text-align: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        footer p {
-            font-size: 0.55rem;
-            letter-spacing: 5px;
-            color: rgba(255, 255, 255, 0.15);
-            text-transform: uppercase;
-        }
-
-        /* PROVISIONS CARD CONSTRAINTS */
         .provisions-card {
             background: rgba(160, 190, 245, 0.03);
             border: 1px solid var(--border-teal);
@@ -572,23 +534,6 @@
             transition: opacity 0.5s ease;
         }
 
-        .provisions-overlay {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-        }
-
-        .toggle-btn {
-            background: rgba(5, 5, 5, 0.8);
-            border: 1px solid var(--brand-teal);
-            color: var(--brand-teal);
-            font-family: 'Fira Code', monospace;
-            font-size: 0.5rem;
-            padding: 5px 10px;
-            cursor: pointer;
-            letter-spacing: 1px;
-        }
-
         .provisions-info {
             padding: 20px;
             border-top: 1px solid var(--border-teal);
@@ -601,13 +546,6 @@
             margin: 0 0 5px 0;
             color: #fff;
             letter-spacing: 2px;
-        }
-
-        .provisions-info p {
-            font-size: 0.65rem;
-            color: #666;
-            margin-bottom: 20px;
-            text-transform: uppercase;
         }
 
         .buy-btn {
@@ -632,7 +570,20 @@
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
         }
 
-        /* MODAL STYLES */
+        footer {
+            padding: 80px 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        footer p {
+            font-size: 0.55rem;
+            letter-spacing: 5px;
+            color: rgba(255, 255, 255, 0.15);
+            text-transform: uppercase;
+        }
+
+        /* 7. MODALS */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -656,86 +607,8 @@
             box-shadow: 0 0 50px rgba(145, 175, 179, 0.2);
         }
 
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 30px;
-        }
-
-        .close-x {
-            background: none;
-            border: none;
-            color: var(--brand-pink);
-            font-family: 'Fira Code';
-            cursor: pointer;
-        }
-
-        .provisions-form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 15px;
-        }
-
-        .provisions-form input,
-        .provisions-form select,
-        .provisions-form textarea {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--border-teal);
-            padding: 15px;
-            color: #fff;
-            font-family: 'Fira Code';
-            font-size: 0.75rem;
-        }
-
-        .provisions-form textarea {
-            height: 100px;
-            resize: none;
-        }
-
-        .provisions-form input:focus {
-            border-color: var(--brand-blue);
-            outline: none;
-        }
-
-        /* MOBILE REFINEMENTS */
+        /* 8. MOBILE REFINEMENTS */
         @media (max-width: 1024px) {
-            .interface-header {
-                padding: 30px 20px;
-                flex-direction: column;
-                align-items: center;
-                gap: 20px;
-            }
-
-            .header-right {
-                text-align: center;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                width: 100%;
-            }
-
-            .nav-logo {
-                margin-bottom: 10px;
-            }
-
-            .weather-uplink {
-                margin-bottom: 15px;
-                font-size: 0.7rem;
-            }
-
-            .top-quadrant-text {
-                text-align: center;
-                font-size: 1.2rem;
-                max-width: 90%;
-                letter-spacing: 3px;
-            }
-
             .main-interface {
                 margin-top: 280px;
                 flex-direction: column;
@@ -746,52 +619,8 @@
                 display: none;
             }
 
-            .nav-node {
-                flex-direction: column;
-                align-items: center;
-                gap: 20px;
-                text-align: center;
-            }
-
-            .node-link {
-                width: 100%;
-                justify-content: center;
-            }
-        }
-
-        /* THE HEADER WRAPPER FIX */
-        .interface-header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 3500;
-            backdrop-filter: blur(15px);
-            background: linear-gradient(to bottom, rgba(5, 5, 5, 1) 0%, rgba(5, 5, 5, 0) 100%);
-            box-sizing: border-box;
-            /* Remove the padding from the parent header */
-            padding: 0;
-        }
-
-        .header-content-inner {
-            max-width: 1400px;
-            /* MATCHES MAIN-INTERFACE */
-            margin: 0 auto;
-            padding: 30px 40px;
-            /* MATCHES MAIN-INTERFACE PADDING */
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        /* MOBILE SYMMETRY */
-        @media (max-width: 1024px) {
-            .header-content-inner {
-                flex-direction: column;
-                padding: 30px 20px;
-                gap: 20px;
+            .top-quadrant-text {
+                font-size: 1.2rem;
             }
         }
     </style>
@@ -832,14 +661,13 @@
                 <p>Sun. Moon. Stars. The Core Sanctuary.</p>
             </a>
 
-            <a href="residue_archive.html" class="archive-card"
-                style="border-color: var(--amethyst); background: rgba(155, 89, 182, 0.02);">
-                <div class="card-beacon" style="color: var(--amethyst);"></div>
-                <h3 style="color: var(--amethyst);">THE MATRIX</h3>
+            <a href="residue_archive.html" class="archive-card amethyst-card">
+                <div class="card-beacon"></div>
+                <h3>THE MATRIX</h3>
                 <p>Modern Narrative Archive // 2026 - Present</p>
             </a>
 
-            <a href="wayback.html" class="archive-card">
+            <a href="wayback.html" class="archive-card teal-card">
                 <div class="card-beacon"></div>
                 <h3>The Locked Past</h3>
                 <p>Historical residue from 2001 to 2025.</p>
@@ -851,18 +679,17 @@
                 <p>Professional history</p>
             </a>
 
-            <a href="flotsam.html" class="archive-card">
+            <a href="flotsam.html" class="archive-card teal-card">
                 <div class="card-beacon"></div>
                 <h3>The Flotsam</h3>
                 <p>Visual depot and verbal residue.</p>
             </a>
 
-            <a href="transform_gate.html" class="archive-card transition-card">
+            <a href="transform_gate.html" class="archive-card amethyst-card">
                 <div class="card-beacon"></div>
                 <h3>The Transition</h3>
                 <p>Internal struggle of fundamental identity.</p>
             </a>
-
             <div class="column-label">02 // WHAT I LISTEN TO</div>
             <div class="podcast-widget">
                 <a href="#" class="podcast-item">
