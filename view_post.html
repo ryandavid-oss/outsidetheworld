@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signal Recovery | OTW</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;900&family=Fira+Code:wght@500;700&family=Merriweather:ital,wght@0,300;0,700;1,300&display=swap');
+
+        :root {
+            --brand-blue: #6395EE;
+            --brand-teal: #91AFB3;
+            --bg-dark: #050505;
+            --border-teal: rgba(145, 175, 179, 0.2);
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: white; font-family: 'Inter', sans-serif;
+            margin: 0; padding: 100px 20px;
+            display: flex; justify-content: center;
+        }
+
+        /* TRON CONTAINER */
+        .post-vessel { 
+            max-width: 800px; width: 100%; 
+            padding: 60px; background: rgba(145, 175, 179, 0.02);
+            position: relative; border: 1px solid rgba(145, 175, 179, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        /* TRON BORDER ANIMATION (MATCHES PERSONAL.HTML) */
+        .post-vessel::before {
+            content: ""; position: absolute; top: 0; right: 0; width: 0; height: 2px;
+            background: var(--brand-teal); box-shadow: 0 0 15px var(--brand-teal);
+            animation: draw-top-left 1.2s ease-out forwards;
+        }
+        .post-vessel::after {
+            content: ""; position: absolute; top: 0; right: 0; width: 2px; height: 0;
+            background: var(--brand-teal); box-shadow: 0 0 15px var(--brand-teal);
+            animation: draw-right-bottom 1.2s ease-out forwards;
+        }
+
+        @keyframes draw-top-left {
+            0% { width: 0; height: 2px; right: 0; top: 0; }
+            50% { width: 100%; height: 2px; right: 0; top: 0; }
+            100% { width: 100%; height: 100%; right: 0; top: 0; border-left: 2px solid var(--brand-teal); background: transparent; }
+        }
+
+        @keyframes draw-right-bottom {
+            0% { height: 0; width: 2px; top: 0; right: 0; }
+            50% { height: 100%; width: 2px; top: 0; right: 0; }
+            100% { height: 100%; width: 100%; top: 0; right: 0; border-bottom: 2px solid var(--brand-teal); background: transparent; }
+        }
+
+        .back-nav { position: fixed; top: 40px; left: 40px; z-index: 100; }
+        .node-link { 
+            font-family: 'Fira Code'; font-size: 0.65rem; color: var(--brand-teal); 
+            text-decoration: none; letter-spacing: 2px;
+        }
+
+        .post-date { font-family: 'Fira Code'; font-size: 0.8rem; color: var(--brand-teal); margin-bottom: 10px; display: block; }
+        .post-title { font-size: 2.5rem; font-weight: 900; line-height: 1.1; margin: 0 0 40px 0; letter-spacing: -1px; }
+        
+        #md-render { 
+            font-family: 'Merriweather', serif; font-weight: 300; 
+            font-size: 1.1rem; line-height: 1.9; color: #d1d1d1; 
+        }
+
+        /* SPACE FIXES */
+        #md-render p:first-child { margin-top: 0; }
+    </style>
+</head>
+<body>
+
+    <nav class="back-nav">
+        <a href="residue_matrix.html" class="node-link">← RETURN_TO_MATRIX</a>
+    </nav>
+
+    <article class="post-vessel">
+        <div id="post-content">
+            <p style="font-family: 'Fira Code'; opacity: 0.3;">RECOVERING_SIGNAL...</p>
+        </div>
+    </article>
+
+    <script src="narrative_data.js"></script>
+    <script>
+        function loadPost() {
+            const params = new URLSearchParams(window.location.search);
+            const fileToFind = params.get('file');
+            const display = document.getElementById('post-content');
+
+            if (typeof current_narrative !== 'undefined' && fileToFind) {
+                const post = current_narrative.find(p => p.file === fileToFind);
+                
+                if (post) {
+                    document.title = `${post.title} | OTW`;
+                    display.innerHTML = `
+                        <span class="post-date">${post.date.toUpperCase()}</span>
+                        <h1 class="post-title">${post.title}</h1>
+                        <div id="md-render">${marked.parse(post.body)}</div>
+                    `;
+                    return;
+                }
+            }
+            display.innerHTML = "<h1>ERROR: SIGNAL_LOST</h1><p>The requested residue could not be recovered from the matrix.</p>";
+        }
+
+        window.onload = loadPost;
+    </script>
+</body>
+</html>
