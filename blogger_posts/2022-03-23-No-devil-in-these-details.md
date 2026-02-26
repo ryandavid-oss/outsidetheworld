@@ -8,7 +8,7 @@ Disney's Imagineers are well-known for their attention to the tiniest and most i
 Walking into Bug's Land back in 2000 was transformative; from the entrance, you were transported to a world where everything was bigger than you. It wasn't just sights, but the sensation of touch and smell that pulled this magic together.
 
 
-<img border="0" data-original-height="3024" data-original-width="3024" height="400" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhlE8ol5jyu7K4m2cozriOyZA1SR3EmEcrTAve8c_k30NLaRpB1xldj1hswNhtdGD_XqadCjBM661zIUcfjPitI6Amti0b2MSsc-ubmMrXHIWvZR6C1EtebPPfnJrt0Q2dVAcA_CQJI3a_pQBN6RPkigf9ZFTnNvZwQQDc5bXi0UHSwO9zj8Q/w400-h400/IMG_4481%202.heic" width="400" />Just one example of Cars Land
+<img border="0" data-original-height="3024" data-original-width="3024" height="400" src="images/archive/IMG_4481%202.heic.jpg" width="400" />Just one example of Cars Land
 
 Fast forward another decade, when Cars Land was launched to critical acclaim.  Before going, I read article after article, and saw countless pictures posted to both social media and professional journalism sites, but nothing prepared me for what I encountered upon my arrival.  
 
@@ -22,7 +22,7 @@ If you've ever wondered why some people are such zealots when it comes to Disney
 Which brings me to my final word for the day; Star Wars Land: Galaxy's Edge.  It launched nearly three years ago, during which time I've seen countless pictures and listened to the reveling of friends, relatives, and others.  I prepared myself accordingly.  Expectations were set to be blown away by what I would see.
 
 
-<img border="0" data-original-height="3024" data-original-width="3024" height="400" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgUMGA9jlcsHKg-nL2pcDvosMtAtfkDyOWTsj5R4toEn5Th5YpipO4yVGPBwefQX0VnK_LY2OmN3bBfIxI8GqBngnGRQaPTXlH7w-bkXaYBC4JLJVrPRpm0NNmI39JPZL6QmfxKKBwFToBOqm0NxMnPG6NhC_rKyh_xJJfhS7ULMKtHo-a3VA/w400-h400/OriginalPhoto-669224525.953226.jpg" width="400" />Yep, that's a full-sized Falcon
+<img border="0" data-original-height="3024" data-original-width="3024" height="400" src="images/archive/OriginalPhoto-669224525.953226.jpg" width="400" />Yep, that's a full-sized Falcon
 I still couldn't believe my own eyes.  As opposed to Cars Land, where Radiator Springs was the blueprint whereupon the Imagineers set their sights, Galaxy's Edge is an unknown quantity; a brand new planet within the Star Wars universe.  Yet you know upon walking inside this land that you are a part of the Star Wars experience.  Every single detail, even down to the custom Coca-Cola bottles commissioned for this area of the park, screams of an immediate transportation to Batuu.  
 
 

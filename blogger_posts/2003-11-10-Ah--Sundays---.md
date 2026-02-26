@@ -1,7 +1,7 @@
 # Ah, Sundays...
 Date: November 10, 2003
 
-<img border="0" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiweBPh_wba7pXXABZHOHFGtm3GptFOseNT94WlL1jxLENPx2DIrLIT9NYe9rijE-0JgvDQfIkf-0CZkC_DYQq4GE5Jz9sbB4-h1Lhy1t3YIpHg4dZvGLmb8u6N4eNa8dekGAdE/s1600/dobby_sleep.jpg" />
+<img border="0" src="images/archive/dobby_sleep.jpg" />
 
 
 

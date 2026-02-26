@@ -28,7 +28,7 @@ I believe he was just trying to play with the dog, and vice versa, but my cat do
 
 
 
-<img border="0" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjuOiiP4KnzD5WJO8GL3_5SNe0434X9o6-8QjPVpdaksQPZ0hGiFRxscz0eeR80EtRk7YAJkeAYWSfWgPZlbLH0et_N5dhg5pjRw8kT-9kWDd7j0ECPJokcxcNg0mauXIKNWsF7/s1600/catanddog.jpg" height="242" width="320" />
+<img border="0" src="images/archive/catanddog.jpg" height="242" width="320" />
 
 
 

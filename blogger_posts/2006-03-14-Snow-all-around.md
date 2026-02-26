@@ -32,17 +32,17 @@ I only wish that I had a camera at that moment.  Well, not at that very moment.
 
 
 
-<img border="0" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiKjswTKcfhLN0kx6Hyey-5WB0YE4Dn4YVw3i7dKmDy6xYWrci4VDjlgeHNEPm6VHF3wob6sj4ILWrsbdIX_oLeCjk69Qi46xVCZ5O00jmeGGXGiLZprTgG9UfXbV44QR2dgqJZ/s1600/IMAGE_00065.jpg" height="240" width="320" />
+<img border="0" src="images/archive/IMAGE_00065.jpg" height="240" width="320" />
 
 
 
 
-<img border="0" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhVs9_mA0fIESCoRu4M_cK5ELZ3o6Vdo4dKlDix5vUHp0Q3nXHdSF40nhDfBSBdn-U8VmDMvQKDexX0MhPzjkm9MD5trhdVjSI9m4eW2hrJFmzWUZjlTY6nHbduNfpHw92U6QvF/s1600/IMAGE_00066.jpg" height="240" width="320" />
+<img border="0" src="images/archive/IMAGE_00066.jpg" height="240" width="320" />
 
 
 
 
-<img border="0" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiQjhFR7hIbxZ3Jro5jxU0wMN3Tpj4MODKa70DY0rltcG8axQhfnfs2pzlNvIunXf4gwwbBL-V4NZeNDX_BTh4su-l8nYdM2YbBMEO4wd2uyvygDiiJ_Lh21tn0d9p035N26pTT/s1600/IMAGE_00067.jpg" height="240" width="320" />
+<img border="0" src="images/archive/IMAGE_00067.jpg" height="240" width="320" />
 
 
 

@@ -29,14 +29,14 @@ I tried to take a few pictures to summarize what I saw.  Share and enjoy!
 
 
 
-<img border="0" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhrIGOlehCW0EtF0vVmdv2J3srEQ1zHeiYYh3iRf2zJLzF1Di8ZIM-U2layeerqcwPN_uTZT6bYuE6snneEmCH4j9efOcsbml4p7vLNxzItbV76F1p86-KcdxibhYwcxiswdr3q/s1600/IMG_2054.JPG" height="240" width="320" />
+<img border="0" src="images/archive/IMG_2054.JPG.jpg" height="240" width="320" />
 
 
 
 
-<img border="0" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhRzpXvyjQDMyCkFndQJO3yVy80B_EZuaRflgjWKeEy_o-RBxOlG7E1mgzEYvZSNUx8iBZ-pDslw9gnZ3jspwgw7ZYYlln8-H7wbZaXtzHriFnW6yS1LugetwMIsZOr_Q4JxXKL/s1600/IMG_2055.JPG" height="240" width="320" />
+<img border="0" src="images/archive/IMG_2055.JPG.jpg" height="240" width="320" />
 
 
 
 
-<img border="0" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgwPu-t2Vp4zCrA2Nva9QszoOQnDCAKytI_R1xcGWxJ8JI7ilU7EBGksb6i8Bsjqk0m5R52j03BCNDEgPO6BjypOlxHRm6umgMU7iPigk0PyYtGDtZig9FMLD5q1-T5cZFjrSrJ/s1600/IMG_2056.JPG" height="239" width="320" />
+<img border="0" src="images/archive/IMG_2056.JPG.jpg" height="239" width="320" />

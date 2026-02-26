@@ -43,9 +43,9 @@ Perhaps he found it too familiar.....
 
 
 
-<img border="0" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiLbh3l1Sqz1uoSRgHmN5UQdmiBpvEv-rt1qW3-JmaTlBzoNbWooL7wRy7NJfLkiyWWUYEvDt-JQmyp-Z00pu8S5fYxRgF3LtshMUe2_t_S2BWZo3ZW8vH1E45Dtjbj0E1KnDCP/s1600/scooter.jpg" />
+<img border="0" src="images/archive/scooter.jpg" />
 
 
 
 
-<img border="0" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhQ_oxIci-oE7ssO_5N_G9ItZ0peuSgY1AGevAZSn1Sbg5n8X022dHlv_h5721GyHiDoRBLq7lgKDrLpvoPmSIfoEpZeNgtgpE-6WGPO9HDFBGvRaMVoi0_sj6qaGE9pkcesIxV/s1600/chicken4.jpg" />
+<img border="0" src="images/archive/chicken4.jpg" />

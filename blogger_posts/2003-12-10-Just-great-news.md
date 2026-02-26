@@ -54,4 +54,4 @@ So, just four little months left.  We await his arrival with great anticipation
 
 
 
-<img border="0" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjr-rYvOT0H9akpqUA9Iw8Yb4CimgwmyGH786V8Lt_gW_vxt5HpwLbuSVqBcEkwsfG-JfNl4aeRUqJjOxkKkWME976xLbZbtw58VzJpjwNZpeh2tJFNbhq1lOknGy8oqBxXWXFM/s1600/baby_us.jpg" height="239" width="320" />
+<img border="0" src="images/archive/baby_us.jpg" height="239" width="320" />

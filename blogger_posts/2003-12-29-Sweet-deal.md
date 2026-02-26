@@ -54,7 +54,7 @@ Most notable, I received the digital camera that I so dearly wanted.  The bigge
 
 
 
-<img border="0" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgF58a7G_TCAG_CQV31hAD-3RKb8xxDXosR-d201BiNcyoczoG7FWwN18JpyPJIs-JrGiC9r4hYkdLBvAaysosSY6nopvjNqcXk45xcjwmjEd3rK2YMseDq6Bn9w-w90bOV0ovc/s1600/BACK.gif" />
+<img border="0" src="images/archive/BACK.gif" />
 
 
 

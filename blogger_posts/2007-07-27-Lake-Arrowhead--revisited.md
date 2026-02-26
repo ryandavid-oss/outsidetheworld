@@ -13,7 +13,7 @@ As I wrote last week, the family and I took a trip to Lake Arrowhead over the we
 
 
 
-<img border="0" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEirprhGSxC534iOOGCaZSbTw4N6zw7xiywjrgPotaF5V2vNkuMLaJS2041QEKrB-kd0xuv4wnmA-xVsdYE5GFRGMPFGsLh_LhVi3q7-HlweafCjSI-YfKpkPoWrrlVEYzdhQTLE/s1600/IMG_1017.JPG" height="240" width="320" />
+<img border="0" src="images/archive/IMG_1017.JPG.jpg" height="240" width="320" />
 
 
 
@@ -27,7 +27,7 @@ Does it get much better than that? This was Saturday, our day at Lake Gregory. 
 
 
 
-<img border="0" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgK0GHiHVzeTcRuVJ17C45dmicJnxdBRZJaYjVehOSiEZDun-Btq0D9AoiC-pHaBuZbqFswiYFx4VVlVhDF6f-tqr4wbISQhwjwabxDrzv4UpT07iiLe4WU9psCMaL2axyq22Zx/s1600/IMG_1030.JPG" height="240" width="320" />
+<img border="0" src="images/archive/IMG_1030.JPG.jpg" height="240" width="320" />
 
 
 
@@ -48,19 +48,19 @@ When Sumner ran up to the lake, he had two very important questions for us.  Wh
 
 
 
-<img border="0" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh4qCJnBMD-CEvdZ32tXl_imJq3m6hYNeq9ODhXMF_Eyg01h6Tx4Dp_FlcM7is4EVtzN5rJG3lD6PUN4rliyoNIFF0QDPq_ff2qvyLtOYYRGTmDkqUNw4pJnLIs-NkJ9sogaHJ8/s1600/IMG_10261.jpg" height="240" width="320" />
+<img border="0" src="images/archive/IMG_10261.jpg" height="240" width="320" />
 
 
 
 
-<img border="0" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjm0lmEl7E-IRn1_yX2Yit82XUHoTkTX0pQQAwiiJv5faw_aX5O1cQkjhkjdn3t5vXsm2zOMnlWyyNaumenTXBCFdPblPyQMO86TmpKho4GJj9ppP7y5UTcEV0mXw2WnSmL3coi/s1600/IMG_1035.JPG" height="240" width="320" />
+<img border="0" src="images/archive/IMG_1035.JPG.jpg" height="240" width="320" />
 
 
 
 
 
 
-<img border="0" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh4qCJnBMD-CEvdZ32tXl_imJq3m6hYNeq9ODhXMF_Eyg01h6Tx4Dp_FlcM7is4EVtzN5rJG3lD6PUN4rliyoNIFF0QDPq_ff2qvyLtOYYRGTmDkqUNw4pJnLIs-NkJ9sogaHJ8/s1600/IMG_10261.jpg" height="240" width="320" />
+<img border="0" src="images/archive/IMG_10261.jpg" height="240" width="320" />
 
 
 
@@ -88,7 +88,7 @@ Sorry about the fuzziness of the pictures, it was getting dark and we were trave
 
 
 
-<img border="0" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjrIJU2yCEUjUpX_nyRKHC5A9HXnQic62yRfVJVkANOmqxSfOL1tbUKhyphenhyphenQYdsUOqDQq5mZ5-cwmhllWX1xrf_ZUjXHdidxaqefoKIXZdl8lHSGmIwT-GWrgQdkF8kd_c7jHapk8/s1600/IMG_1053.JPG" height="240" width="320" />
+<img border="0" src="images/archive/IMG_1053.JPG.jpg" height="240" width="320" />
 
 
 

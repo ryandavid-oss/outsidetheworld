@@ -43,12 +43,12 @@ Anyway, on to the pictures.  Rather than try to remember the purpose of this la
 
 
 
-<img border="0" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjsKRq9dHhuRIDnR0zWpqhIk4KNKjLtKuVaBS4TIBVLXjeCFK9c4CeRVu31QuK2vQUYu66vL8bW7gxaLC7UM-7ISMYa6IvtSgBffS9_UMoKo6OhpVzWqjtl5nWUTdHfW6gHYhWy/s1600/IMAGE_00063.jpg" height="320" width="239" />
+<img border="0" src="images/archive/IMAGE_00063.jpg" height="320" width="239" />
 
 
 
 
-<img border="0" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhmrXRuz6oW3_TandXNinfi8JpTH39rOsyCqh58R0OGFr_KkcsfI1I5CHoV6FYrliA2AinBfvrJ0fSSB3FA2Jo48f0C_BMzk0HHXdW7JbkIyPIzrCL2hEuXt_9Cw5BAc2KJcOJp/s1600/IMAGE_00064.jpg" height="242" width="320" />
+<img border="0" src="images/archive/IMAGE_00064.jpg" height="242" width="320" />
 
 
 

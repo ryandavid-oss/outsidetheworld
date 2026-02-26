@@ -109,7 +109,7 @@ Ah, here we go.
 
 
 
-<img border="0" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiC25ZwaHu-Zy1JTnYx6dby4r26Rfx8bcZqkDThjnCVsbs3OFmGdGZGXgQAlD4TZJSsmcdnnnTwtAKlf7_zwg0Py2dw2kpFK27C535p-amo5_9WoiMAVwY98aOT7aRzUBCs3r1I/s1600/houseaflame.jpg" height="261" width="320" />
+<img border="0" src="images/archive/houseaflame.jpg" height="261" width="320" />
 
 
 
@@ -125,7 +125,7 @@ Ah, here we go.
 Is this a house aflame?  Nope.  It's just my fuzzy camera phone ,and it appears that Frosty may have gotten himself in a jam.
 
 
-<img border="0" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiiqYT6GrE6Wwa-fouqBjkZYE1VhPetpbBodpJlWJvQDhBJuG0VMwro3Zw288HcZZC7dTLN9yxg1cWtV0UG5FBqpuJagyo39YgBh4SpZCbSXdrUeVDYLEtI8AIk0qlJaxAEBzPY/s1600/frosty.jpg" />
+<img border="0" src="images/archive/frosty.jpg" />
 
 
 

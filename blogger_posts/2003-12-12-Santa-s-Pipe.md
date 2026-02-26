@@ -10,7 +10,7 @@ This week, I have provided you with a different snapshot every day.  Well, I do
 
 
 
-<img border="0" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjtuZApDZySyqgRPDhzS7Mn8TWfqGnIziiRBiwWodAu-KHwdu5_lsATehiuWD-BSrJCbrTI7vY1liLhEVyJdVbtIWpEq1E_fSA9pPF9RLzfsfIYLaCVBzVBJ_09-gLtUk_eyGl1/s1600/santa2.jpg" height="320" width="203" />
+<img border="0" src="images/archive/santa2.jpg" height="320" width="203" />
 
 
 

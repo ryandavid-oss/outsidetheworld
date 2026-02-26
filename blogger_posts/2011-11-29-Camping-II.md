@@ -17,7 +17,7 @@ If that story was Home Alone, this is Home Alone 2.  Except with less steak.  
 
 
 
-<img border="0" height="320" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg4nEpsnoq1n_NCskiDXPd3HhPhPmKmKkZw4Yf628835QnqzfKDazPUGVXR1yYWYbW4U29mACzZkHe5DGZWh5bwpWqOJNxEFtPHZkpB6aPtXEGtQbr9F8vwpDxG27oV-XMjfziW/s320/Screen+Shot+2011-11-28+at+12.51.09+PM.png" width="99" />
+<img border="0" height="320" src="images/archive/Screen+Shot+2011-11-28+at+12.51.09+PM.png" width="99" />
 
 We had planned this trip for a long time.  When I say, “plan”, you might conjure up in your mind such descriptors as “outline”, “schedule”, “purpose”, or even “call ahead to see if they allow overnight camping”.  No.  
 
@@ -46,7 +46,7 @@ We thought we were so well prepared.  We had our tent, steak, our “trundle”
 No matter!  Onward and forward we thought, pulling into the well-manicured campground, loveingly named “Needle Rock Campground”.  Our first stop was a parking lot, where we found our second revelatory hindrance; a “No Overnight Camping” sign.
 
 
-<img border="0" height="200" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjAqPTjFRKrS2UXkPl48T0faEwwFtmN0rI590BdQw5Ys4rMGqkoiswAU5L6AIJUhIruneTviev8UhNvre1wnePghUmikf4oFDJMWFweNm8Oi_NZZeXomLyjf_1Mza26BbclLzOx/s200/IMG_2398.JPG" width="200" />
+<img border="0" height="200" src="images/archive/IMG_2398.JPG.jpg" width="200" />
 
 
 Allow me a brief diversion; does not the word “camping” denote the overnight variety?  Forgive me if I lack the intellectual fortitude to fully grasp the mountain man’s vision of camping, but when I say, “I’m going camping” to someone, you better believe they’re thinking I’m not coming back until at least the next day.  Hmm.
@@ -79,7 +79,7 @@ A few hundred yards from the entrance to the park, I noticed something awry.  A
 
 
 
-<img border="0" height="200" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiIXGCrf1PX-Bfo4pG63Exb7ePTNy7Tk-mLCE6vtEUBV8_HVy1qlmVNc3WlXGldyXJyBFSK03-TP-XOdvfKrU9uxJNJwPAtFU1pxzx4oMy2JHZccGbUN6h-MGcr0Ppn4cqYYafp/s200/IMG_2399.JPG" width="200" />
+<img border="0" height="200" src="images/archive/IMG_2399.JPG.jpg" width="200" />
 
 
 I turned to Daniel about 20 minutes into our queue and revealed to him what only I could see past the careening sequence of autos; a “Campground Full” sign.  I was flabbergasted.  How could this be?  We were still 10 cars back at least, and no one was driving the opposite direction from us.  There had to be a mistake.  Fate could not possibly hold such unmitigated sway over our endeavors.  
@@ -160,7 +160,7 @@ I said I did not know where that was, when clearly, I knew where it was.  My th
 
 
 
-<img border="0" height="200" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi7ypPE5V-UXgZ7Ctn-4wGwYVzmJdp6Yz4JJH_gMOT2gSup2vudKAFlx5Yx9CKHaenLvN0NQw-dNoVZuPpHnFG0Kqo0uJlqWMvAQRHFcO8iU_PGnyK_kcv_APSJsqPDhOFlfwu0/s200/IMG_2401.JPG" width="200" />
+<img border="0" height="200" src="images/archive/IMG_2401.JPG.jpg" width="200" />
 
 
 He pushed on.  “You just gotta drive south through Fountain Hills, get to the Beeline and take that north to the Bush Highway.  It’s the Saguaro Del Norte recreation area.  You drive down that road and you’ll be damned sure to find a place to camp there.”
@@ -258,7 +258,7 @@ Quizzically, I inquired with Daniel whether he thought that would cook the potat
 
 
 
-<img border="0" height="200" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiC5SlLToVYXJRUjtSykSE8hExmUGlo5-EBnL7upJcCerSbindDTaKzBmwgzMofkITYeo-jCre6jUS8wJZDeoqfFh-4RzDmIqc4SC0KepKN5KGjXnT17qd1Dpm3glHPGpKPRgCY/s200/IMG_2407.JPG" width="200" />
+<img border="0" height="200" src="images/archive/IMG_2407.JPG.jpg" width="200" />
 
 
 A few minutes later, Daniel whisked around in his chair, alarmed, aiming his flashlight into the distance.  
@@ -321,7 +321,7 @@ For some reason, common sense so intensely illuminated our minds at the same tim
 
 
 
-<img border="0" height="320" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg1IZXpBIjUe679aCCxnatclqPQAxBbMWWwS22SQlZdThyphenhyphenhXP4rT39D4Q3HKUZ44qRiuGUMuLCPChksC8oHY7o19hE7HlLDQO1SrrEtK9W7MpfN0AeffMxkHZC8Ic3RZeSR9pz9/s320/Camping+Nov+2011-4.jpg" width="212" />“There!  Over there.  Do you see it?”
+<img border="0" height="320" src="images/archive/Camping+Nov+2011-4.jpg" width="212" />“There!  Over there.  Do you see it?”
 
 
 
@@ -374,7 +374,7 @@ Daniel again caught him with eager senses afire, shooting around in his seat so 
 
 
 
-<img border="0" height="149" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhez6rLk5m7X3GngnjafrXhahOw22wsJafL0sh_sjhegaa_s2T4k5q08UROZ5iPrrbPSDm8jOA7K7krM7D53zZ1blm3-sAl1e21slhUGnVb6KggM6MC7d-F041YUzg3Dv9DXN4T/s200/IMG_2410.JPG" width="200" />“It’s the kitten again”, I said.  
+<img border="0" height="149" src="images/archive/IMG_2410.JPG.jpg" width="200" />“It’s the kitten again”, I said.  
 
 
 
@@ -405,7 +405,7 @@ The rest of the evening was spent taking pictures and telling stories, until the
 
 
 
-<img border="0" height="149" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh3Xv8om3kCr1MT_fzfD_aj4WJjPdzDQshDGp1IfTed1g081at4Xs1WOVs2v0r3qMsYhNFZQbEVWXlbA75_wUI48b4TIBFh02ajiErajU4THv_hVhI4UORHfVeGxOA9IbZ3FfD7/s200/IMG_2412.JPG" width="200" />Oh, and a note about putting out the fire; it’s never a good idea to urinate on top of a flaming hot 45 LB rock.  Cast your mind if you will, and imagine the stench of a locker room.  Now, make it 1000x worse.  That’s the smell of instantly vaporized urine.  It’s horrifying.
+<img border="0" height="149" src="images/archive/IMG_2412.JPG.jpg" width="200" />Oh, and a note about putting out the fire; it’s never a good idea to urinate on top of a flaming hot 45 LB rock.  Cast your mind if you will, and imagine the stench of a locker room.  Now, make it 1000x worse.  That’s the smell of instantly vaporized urine.  It’s horrifying.
 
 
 

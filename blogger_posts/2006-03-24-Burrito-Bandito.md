@@ -29,7 +29,7 @@ No.  It's my lunch.
 
 
 
-<img border="0" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgWayubh-7u0xj2Rz4aTtjZc5VmDkWASwIdBPzI1Ue3Qp8HNHY9SQyWq13m5FnEtIaCCFNwUBs67mZ6_2SKMEAdL3uridFjpEYzyOFg4X2E6_gsECXVBI_yTn8gYyLtNNGkRCtE/s1600/IMAGE_00003.jpg" height="253" width="320" />
+<img border="0" src="images/archive/IMAGE_00003.jpg" height="253" width="320" />
 
 
 

@@ -57,7 +57,7 @@ I tucked him back into bed and told him that he had a big day ahead of him tomor
 
 
 
-<img border="0" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjbjkoAve2NkeiRYL963WhnXWU6vyFEOzSLcJEy7T-LflEZTLH4PNlBO0Me7Yzh_DqwrhYCNtGA-pS0dd06Tc8xyV5BvPricvImaHKkdZ3nhWSY_TRhQ-fn9JDmcqZHRZegtYW1/s1600/harryconnnick.jpg" />
+<img border="0" src="images/archive/harryconnnick.jpg" />
 
 
 What am I listening to right now?  It's actually one of the finest albums I own.  A definite favorite.  Highly recommended! 

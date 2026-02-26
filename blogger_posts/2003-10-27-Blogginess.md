@@ -26,4 +26,4 @@ My wife decided, spur of the moment, to take me to Best Buy (my favorite store!)
 
 
 
-<img border="0" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgxpcyWlL3E0Un7HCKramc_Uzmq0Fswj8dKDuZrZwsn3s78EHOg65ZpmBps6I0arL3eBQESL3BHCnf2im3p0JlDalTdH5BcD4T_lJ606Kj5Qm-5SNFEMdeOaHRACOlR4KXkJgaC/s1600/3893712005_0.jpg" height="261" width="320" />
+<img border="0" src="images/archive/3893712005_0.jpg" height="261" width="320" />

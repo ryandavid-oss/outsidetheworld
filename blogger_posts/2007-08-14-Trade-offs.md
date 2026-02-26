@@ -4,7 +4,7 @@ Date: August 14, 2007
 The monsoon storms seem to have abated for the time, and the temperatures have soared right back up into the unbearable zone.  I knew I should have enjoyed the cooler weather while it was here.  Though there was a day about a week ago when we had a freakish amount of rain in a short time span.  I told Sumner to go enjoy it.  He had a blast!  Too bad daddy had to stand back and take the pictures though.  That's always the trade off: enjoy the moment or archive the memories.  I chose the latter.
 
 
-<img border="0" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiPyC5ycVoFzphyphenhyphenheiY-V-JjCJrNgcAG70BPwwSzVQTvLgSAbq6gqIV85NhyBhN9foxNjJ4Pjo6q8gnb0Vy5HhyphenhyphenDy8klGqcIbTqWOLfNhNHxux5vMUPdW9oGlgGkjPwUATK3LC3/s1600/IMG_1090.JPG" height="300" width="400" />
+<img border="0" src="images/archive/IMG_1090.JPG.jpg" height="300" width="400" />
 
 
 

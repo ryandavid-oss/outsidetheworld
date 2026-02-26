@@ -6,7 +6,7 @@ Guess what?  I found Autumn.
 
 
 
-<img border="0" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjwqlFI5sPKIssJuJkoetP35LSKXGyysQfD7dG-44rLuCfUq7F8IHNUntxgksNURiI7Rs5e6Gkf1UvQKYuSLoK8JQ51TCzIZbJkhehud4KbbdcJY499dz2g3JDOEY0amb56BUmR/s1600/fall.jpg" />
+<img border="0" src="images/archive/fall.jpg" />
 
 
 

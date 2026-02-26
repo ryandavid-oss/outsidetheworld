@@ -12,7 +12,7 @@ So, all I have to offer is this:
 
 
 
-<img border="0" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjqKLbnXOtv1tIloJpsY3P54NzZimNMD7Ihc8K6xojZ4aQbMoYWM0uHnqxKwGe3Z55zPrRFdm3oY5ltLfNvchnkMQ3wwwKU8VToBty2XFcZQnyL0eBeLEQvsrz3v8NKGQOyCmCS/s1600/wallpaper.JPG" height="480" width="640" />
+<img border="0" src="images/archive/wallpaper.JPG.jpg" height="480" width="640" />
 
 
 

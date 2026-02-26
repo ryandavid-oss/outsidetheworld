@@ -43,7 +43,7 @@ But after I took off my durn-blasted sunglasses, which have more scratches than 
 
 
 
-<img border="0" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiyCl52ZlQXRXgS9TnRDrNBg2fCJZCwQHQygZezkQTuCEwxRMarln4B9UinDsZpVErSHbkb4BtKUI1XTVpet7RCVrJnir24BheSzPCe9xV2gaEMxF4qG5lB1JPGFjU0wmqn0dGf/s1600/favorite.jpg" />
+<img border="0" src="images/archive/favorite.jpg" />
 
 
 

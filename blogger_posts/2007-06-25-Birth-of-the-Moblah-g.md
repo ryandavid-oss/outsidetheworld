@@ -111,12 +111,12 @@ So, enjoy the new entries, and by all means, comment as you wish!  The only way
 
 
 
-<img border="0" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgvo6rhREflAfuRHFUE1-y5Q7UWtynuZDEcu5N7TlDqWRAGwDZezOqNwCCrdytrcULwsuNKPYsOfMDD9FxYhU4OKzOuXti_sMdAUhcPIP5Xs_qlrky36Gioko4U13QoJz2hn_F7/s1600/IMG_0927.JPG" height="300" width="400" />
+<img border="0" src="images/archive/IMG_0927.JPG.jpg" height="300" width="400" />
 
 
 
 
-<img border="0" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg8uVLzm0EbtLoo4QFDVI7Ks7Vl5HVvrI-HHGZkmyzDXPhnD_3FdYy5dwcRrPPwNNxadZzLYVveOWjB1gFQ5FZXJZpKNj5FeR1cMRutgFge4aMsA_yDKN7fg31-0go7qHzovrzW/s1600/IMG_0937.JPG" height="300" width="400" />
+<img border="0" src="images/archive/IMG_0937.JPG.jpg" height="300" width="400" />
 
 
 

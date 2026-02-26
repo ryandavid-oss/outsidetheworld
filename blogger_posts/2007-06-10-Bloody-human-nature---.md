@@ -1,7 +1,7 @@
 # Bloody human nature...
 Date: June 10, 2007
 
-<img border="0" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhyJAEL8zhJjXkbVyt4hTlO-yCp1tmfuKDizRIcfLCELYtvJ8Ws8K2VWAHF8umUwnIQ38q0wpnesPEU0YkVm6yOD2bp_XlflXhPRXyEBmJteNZAcorCoy1ZcPyP8JeKylYqHX8m/s1600/simpbanner2.jpg" height="146" width="320" />
+<img border="0" src="images/archive/simpbanner2.jpg" height="146" width="320" />
 
 
 The rest of the family is asleep at the moment, and that's quite an accomplishment.  We've had a terrible time getting Sumner to sleep over the past few days; in fact, I can hardly remember a time when he acted this crazy.  He was barking mad last night, I was afraid he'd lose his mind, hez was so tired.  Wife and I both made a special mental note to try extra hard today.

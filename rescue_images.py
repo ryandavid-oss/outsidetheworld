@@ -1,45 +1,57 @@
 import os
-import shutil
 import re
+import urllib.request
 
-# --- CONFIGURATION ---
-# 1. Path to where your Google Takeout / Blogger export is sitting
-# Change this if you moved it, but usually it's in Downloads
-search_source = os.path.expanduser('~/Downloads') 
+# --- CONFIG ---
+posts_dir = './blogger_posts/'
+image_dir = './images/archive/'
 
-# 2. Path to your current project's Hipsta folder
-target_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'Images', 'Hipsta')
+# Create the folder if it doesn't exist
+if not os.path.exists(image_dir):
+    os.makedirs(image_dir)
 
-print(f"🔦 Searching for missing Hipsta-history in: {search_source}")
+def rescue_mission():
+    print("STARTING_RESCUE_PROTOCOL...")
+    
+    for filename in os.listdir(posts_dir):
+        if filename.endswith('.md'):
+            file_path = os.path.join(posts_dir, filename)
+            with open(file_path, 'r', encoding='utf-8') as f:
+                content = f.read()
 
-# Create a list of all IDs we need from your .md files
-needed_ids = set()
-stories_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'Stories')
+            # Find Blogger image URLs (regex matches the src="url" pattern)
+            urls = re.findall(r'src="(https://blogger.googleusercontent.com/img/b/[^"]+)"', content)
+            
+            if urls:
+                print(f"\nScanning {filename}: Found {len(urls)} images.")
+                for url in urls:
+                    # Create a clean filename from the URL
+                    img_name = url.split('/')[-1]
+                    if '?' in img_name: img_name = img_name.split('?')[0]
+                    if not img_name.endswith(('.jpg', '.png', '.gif', '.jpeg')):
+                        img_name += '.jpg'
+                    
+                    local_path = os.path.join(image_dir, img_name)
+                    
+                    # Download the image using built-in urllib
+                    try:
+                        print(f"  -> Downloading: {img_name}")
+                        # Adding a User-Agent header so Google doesn't block the request
+                        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+                        with urllib.request.urlopen(req) as response, open(local_path, 'wb') as out_file:
+                            out_file.write(response.read())
+                        
+                        # Update the Markdown content to use the LOCAL path
+                        # We use a relative path so it works on GitHub and locally
+                        content = content.replace(url, f'images/archive/{img_name}')
+                    except Exception as e:
+                        print(f"  !! FAILED to rescue: {url} | Error: {e}")
 
-for filename in os.listdir(stories_dir):
-    if filename.endswith(".md"):
-        with open(os.path.join(stories_dir, filename), 'r') as f:
-            ids = re.findall(r'(\d{5,})', f.read())
-            needed_ids.update(ids)
+                # Save the updated Markdown file
+                with open(file_path, 'w', encoding='utf-8') as f:
+                    f.write(content)
 
-print(f"🎯 We are looking for {len(needed_ids)} unique image IDs.")
+    print("\nRESCUE_COMPLETE. Your archive is now autonomous.")
 
-# Search the source folder and all sub-folders
-found_count = 0
-for root, dirs, files in os.walk(search_source):
-    for file in files:
-        # Check if the filename contains one of our IDs
-        for photo_id in needed_ids:
-            if photo_id in file:
-                source_path = os.path.join(root, file)
-                # Use '+' to match what the website expects
-                safe_name = file.replace(' ', '+')
-                dest_path = os.path.join(target_dir, safe_name)
-                
-                if not os.path.exists(dest_path):
-                    shutil.copy2(source_path, dest_path)
-                    found_count += 1
-                break
-
-print(f"✅ MISSION COMPLETE: Found and rescued {found_count} images.")
-print("Now run 'python3 build_index.py' to finish the job!")
+if __name__ == "__main__":
+    rescue_mission()

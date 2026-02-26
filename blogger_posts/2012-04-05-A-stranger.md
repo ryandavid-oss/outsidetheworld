@@ -14,7 +14,7 @@ Lens: John S
 Film: Rock BW-11
 
 
-<img alt="" border="0" id="BLOGGER_PHOTO_ID_5728010287690860386" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhxVPPvM7Lm1EFPw_9MG92TPe-8nNGSYLdAzmUzUAkiEFLaZ8tnpGjT6PLLyNZS3omKN3sHeV9Pz2si74aLl0bRNst5XIfLzpuRNas7b7KSeyiD7gauujBjuTcUQ5AerJTnKx4m4g/s320/My+HipstaPrint+920146625-721259.jpg" />
+<img alt="" border="0" id="BLOGGER_PHOTO_ID_5728010287690860386" src="images/archive/My+HipstaPrint+920146625-721259.jpg" />
 
 
 Sent from my iPhone

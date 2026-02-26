@@ -29,7 +29,7 @@ Also, I promised my wife that I would write more often. How about we start this 
 
 
 
-<img border="0" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj3PGfROp3RjvVoeWi0hImaU1hDi_8AT1pea6Q5vXl1OVZM1zKf01hDKakpxmj3B1Z27zYhYkxGKE9bz5A10fxUXJ54DtR-kNgV4ETxh7N37c2KA0f2d4_dMyi8QVIt0ySgO-A2/s1600/ultrasound.jpg" height="240" width="320" />
+<img border="0" src="images/archive/ultrasound.jpg" height="240" width="320" />
 
 
 

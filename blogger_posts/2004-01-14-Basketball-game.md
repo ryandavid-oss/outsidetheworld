@@ -8,7 +8,7 @@ Only a picture for today.  Tonight, my wife and I went to the Suns game, as she
 
 
 
-<img border="0" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEht_JPKKNIgMZHHm-UrBvRlBmEb_u9h910TF9LIUUSS0p7dp4ZqrZTLbyYzTO3hpJ-4HNrPaDgRwECD65px2uaLrG0MzMrQcaESqNbNBpVKL2djz8xEqTNoYB5HRBY5_VG_3-Qq/s1600/melo.jpg" height="240" width="320" />
+<img border="0" src="images/archive/melo.jpg" height="240" width="320" />
 
 
 

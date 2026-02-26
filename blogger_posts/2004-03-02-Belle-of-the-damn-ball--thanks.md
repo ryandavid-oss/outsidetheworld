@@ -43,10 +43,10 @@ And now I don't know whether to be proud that my site is back up to 66 visits pe
 
 
 
-<img border="0" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjiNiVUaPWZPMxrwc9XXWWn6KVoNZyRP7Z5qOHrjQWpfzto5TZbCeLh0gBmd44HOqrRy4LmktvAnALlJUJMUN9kIxwH44QwMS1PfTp4Xbt9yK0sVfA4309f67Ib4v8hgvXeR0Tx/s1600/spongmonkey2.jpg" />
+<img border="0" src="images/archive/spongmonkey2.jpg" />
 
 
-<img border="0" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgD-Uh731SD9ZonSPFRtSUd5Bs36QOLL0LOVjCyzn7V-9oL7pe6StSHgP763F1uINXe3xUPBOYrZIGUNEHr4oEZyeamlCH2ldVCZ0kgdobxBz9_RQwOLP261P6fC2RgG6BSshJw/s1600/spongmonkey1.jpg" />
+<img border="0" src="images/archive/spongmonkey1.jpg" />
 
 
 

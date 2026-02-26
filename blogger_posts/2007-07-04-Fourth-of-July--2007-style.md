@@ -15,7 +15,7 @@ That is, unless you live in Arizona.  I don't believe we've had rainfall in mon
 
 
 
-<img border="0" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiIPnb27VKi1LPH5vg_c72dHzJsLsfKLj92xa-Lzfc21u8WIr3ki_JzN35l75bLxMLfEBltlfgon6jgyqEHvSPyo5hXckHI2fzSLepVujwC8ntL9ExTdplcH9zLvLPAhWG5JWGG/s1600/IMG_0889.JPG" height="300" width="400" />Yes, I know the picture would have been immensely better had those cell towers not been smack in the middle, but that's the way it is living in the city.  I was quite disappointed to find those towers so close to our little community of houses.
+<img border="0" src="images/archive/IMG_0889.JPG.jpg" height="300" width="400" />Yes, I know the picture would have been immensely better had those cell towers not been smack in the middle, but that's the way it is living in the city.  I was quite disappointed to find those towers so close to our little community of houses.
 
 
 

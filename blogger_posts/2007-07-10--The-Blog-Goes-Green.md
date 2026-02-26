@@ -57,7 +57,7 @@ I don't remember where I was going with this.  Oh yes, Cracker Barrel.  I had 
 
 
 
-<img border="0" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi6jqAa9ECmA5PeHpTLf55cflcTdaFi3xb-i39RClSG50ZS-3tE2ogZhCFdllvT0EaC3iW_h5tpNhEERXCfNMqD6sutEfZqqydEtfedi8RcKDhW8aaWfjFUaAqhxTgLvlZ_SjcP/s1600/IMG_0941.JPG" height="300" width="400" />After breakfast, we parted ways with the in-laws and headed back toward our side of East freakin' Mesa, and I remembered that we had surpassed our oil change reminder by several...*ahem*...months.  It was decided that it would probably be a good idea to head over to the dealership.  The brakes were shot on both vehicles, and the wife's car made Bozo the Clown noises whenever you turned it on.  The past few times we had taken the car to the local mechanic, they being the cheaper of others in town and a place we had trusted on multiple occasions.  Yet the last time, I was left unimpressed by their brash service.  It was time to go Honda, baby.
+<img border="0" src="images/archive/IMG_0941.JPG.jpg" height="300" width="400" />After breakfast, we parted ways with the in-laws and headed back toward our side of East freakin' Mesa, and I remembered that we had surpassed our oil change reminder by several...*ahem*...months.  It was decided that it would probably be a good idea to head over to the dealership.  The brakes were shot on both vehicles, and the wife's car made Bozo the Clown noises whenever you turned it on.  The past few times we had taken the car to the local mechanic, they being the cheaper of others in town and a place we had trusted on multiple occasions.  Yet the last time, I was left unimpressed by their brash service.  It was time to go Honda, baby.
 
 
 

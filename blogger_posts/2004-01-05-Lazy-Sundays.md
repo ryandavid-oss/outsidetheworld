@@ -8,7 +8,7 @@ I know I've said it before, but I'm at liberty to say it again:  Lazy Sundays a
 
 
 
-<img border="0" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhZNRC0EazAht9fyaZ1otExzEJWhu3c9BTDs5P1DZ1c5PCKt8Wh3CszdJ82bBnETpju8hksf4LqR4LuUr1CosTnTh4IYK7TL41_xdf2xtUrOt9MxwHGaxDW4tk3nbBId8esqLr-/s1600/dobby.jpg" height="258" width="320" />
+<img border="0" src="images/archive/dobby.jpg" height="258" width="320" />
 
 
 

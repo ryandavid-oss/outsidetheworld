@@ -22,7 +22,7 @@ I will, however, leave you with this:
 
 
 
-<img border="0" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiYlLxaChB-9JSopZZAQVJMdrrnBU4QJuWahEzmr2MifrlSlF5YShxzFc3kBX3T20tf9epvDxjk-vPmMvbcQBuz-BuNSAAhHYHp9maRgI7eDecbcXIwJCr0Fb1B8r8iOmGhBkWu/s1600/IMG_1315.JPG" height="241" width="320" />
+<img border="0" src="images/archive/IMG_1315.JPG.jpg" height="241" width="320" />
 
 
 
