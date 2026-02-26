@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#020202">
-
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Interface | Outside The World</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Fira+Code:wght@300;500;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap');
 
@@ -37,7 +39,7 @@
             background-size: 100% 3px, 3px 100%; pointer-events: none; z-index: 3000; opacity: 0.1;
         }
 
-        /* HEADER & WEATHER */
+        /* HEADER */
         .interface-header { 
             position: fixed; top: 0; left: 0; width: 100%; 
             padding: 30px 60px; z-index: 3500; 
@@ -67,47 +69,43 @@
         .cursor { display: inline-block; width: 6px; height: 12px; background: var(--brand-teal); margin-left: 5px; animation: blink 1s infinite; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-        #latest-post-area h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 900; color: #fff; margin: 0 0 15px 0; letter-spacing: -1px; line-height: 1.1; }
-        
-        .post-date { 
-            font-family: 'Fira Code', sans-serif; font-size: 0.8rem; color: var(--brand-light-blue); 
-            margin-bottom: 30px; letter-spacing: 2px; font-weight: 700;
-            text-transform: uppercase; display: block;
-            border-bottom: 1px solid var(--border-teal); padding-bottom: 15px;
+        /* NEW 2026 CONTENT STYLES */
+        .timestamp-glitch { 
+            font-family: 'Fira Code', monospace; font-size: 0.65rem; color: var(--brand-blue); 
+            letter-spacing: 5px; text-transform: uppercase; margin-bottom: 20px; opacity: 0.8; 
+        }
+
+        #latest-post-area h2 { 
+            font-size: clamp(2.2rem, 6vw, 4.5rem); line-height: 0.85; margin: 0 0 50px 0; 
+            font-weight: 900; letter-spacing: -4px; color: #fff; 
         }
         
         #md-render { 
-            font-family: 'Merriweather', serif; 
-            white-space: pre-wrap; /* Crucial for Markdown gaps */
-            line-height: 1.9; 
-            color: #d1d1d1; 
-            font-size: 1.1rem; 
-            font-weight: 300;
+            font-family: 'Inter', sans-serif; 
+            font-weight: 300; font-size: 1.15rem; line-height: 2.1; color: #b0b0b0; 
+            letter-spacing: 0.2px;
         }
         
         #md-render img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            margin: 30px 0;
-            display: block;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            max-width: 100%; height: auto; border-radius: 0;
+            margin: 50px 0; display: block;
+            filter: brightness(0.8) contrast(1.2);
+            transition: 0.8s cubic-bezier(0.2, 1, 0.3, 1);
         }
+        #md-render img:hover { filter: brightness(1) contrast(1); }
 
-        .nav-node { margin-top: 60px; padding-top: 30px; border-top: 1px solid var(--border-teal); display: flex; justify-content: space-between; }
-        .node-link { font-family: 'Fira Code'; font-size: 0.7rem; color: var(--brand-teal); text-decoration: none; letter-spacing: 2px; transition: 0.3s; display: flex; align-items: center; gap: 10px; }
-        .node-link:hover { color: #fff; transform: translateX(-5px); }
+        .nav-node { margin-top: 80px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.05); }
+        .node-link { font-family: 'Fira Code'; font-size: 0.6rem; color: var(--brand-teal); text-decoration: none; letter-spacing: 2px; opacity: 0.5; transition: 0.3s; }
+        .node-link:hover { color: #fff; opacity: 1; transform: translateX(5px); }
 
         .vertical-divider { width: 1px; background: var(--border-teal); align-self: stretch; }
 
-        /* RE-ESTABLISHED CARD THEMES */
+        /* SIDEBAR CARDS */
         .cards-column { flex: 1; display: flex; flex-direction: column; gap: 20px; }
         .column-label { font-family: 'Fira Code'; font-size: 0.65rem; color: var(--brand-teal); letter-spacing: 4px; text-transform: uppercase; margin: 10px 0 5px; opacity: 0.6; display: flex; align-items: center; gap: 10px; }
         .column-label::after { content: ""; height: 1px; flex-grow: 1; background: var(--border-teal); }
 
         .archive-card { border: 1px solid rgba(255, 255, 255, 0.05); padding: 35px; background: rgba(255, 255, 255, 0.01); text-decoration: none; color: inherit; position: relative; transition: 0.5s; }
-        
-        /* THE + RETICLES (BEACONS) */
         .card-beacon { position: absolute; top: 25px; right: 25px; width: 20px; height: 20px; color: var(--brand-blue); transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1); }
         .card-beacon::before, .card-beacon::after { content: ''; position: absolute; background: currentColor; }
         .card-beacon::before { top: 0; left: 9px; width: 2px; height: 20px; }
@@ -115,72 +113,22 @@
 
         .archive-card:hover { border-color: var(--brand-teal); transform: translateX(10px); background: rgba(145, 175, 179, 0.05); }
         .archive-card:hover .card-beacon { transform: rotate(90deg); color: var(--brand-teal); }
-        .archive-card h3 { font-size: 1.1rem; font-weight: 900; letter-spacing: 4px; text-transform: uppercase; color: var(--brand-blue); margin: 0 0 10px 0; transition: 0.3s; }
-        .archive-card:hover h3 { color: var(--brand-teal); }
+        .archive-card h3 { font-size: 1.1rem; font-weight: 900; letter-spacing: 4px; text-transform: uppercase; color: var(--brand-blue); margin: 0 0 10px 0; }
         .archive-card p { font-size: 0.7rem; color: #666; text-transform: uppercase; margin: 0; }
 
-        .sacred-card { border-color: rgba(255, 179, 71, 0.2); background: rgba(255, 179, 71, 0.02); }
-        .sacred-card h3 { color: var(--warm-amber) !important; }
-        .sacred-card p { color: var(--rose-gold) !important; }
-        .sacred-card:hover { border-color: var(--warm-amber); background: rgba(255, 179, 71, 0.05); }
-        .sacred-card .card-beacon { color: var(--warm-amber); }
-        .sacred-card:hover .card-beacon { transform: rotate(90deg); color: var(--warm-amber); }
-
-        .dossier-card:hover { border-color: var(--brand-blue); background: rgba(99, 149, 238, 0.05); }
-        .dossier-card:hover h3 { color: var(--brand-blue); }
-        .dossier-card .card-beacon { color: var(--brand-blue); }
-        .dossier-card:hover .card-beacon { transform: rotate(90deg); color: var(--brand-blue); }
-
-        .transition-card:hover { border-color: var(--amethyst); background: rgba(155, 89, 182, 0.05); }
-        .transition-card h3 { color: var(--amethyst); transition: 0.3s; }
-        .transition-card:hover h3 { color: var(--amethyst); }
-        .transition-card .card-beacon { color: var(--amethyst); }
-        .transition-card:hover .card-beacon { transform: rotate(90deg); color: var(--amethyst); }
-
-        /* PODCASTS */
-        .podcast-widget { background: rgba(99, 149, 238, 0.03); border: 1px solid rgba(99, 149, 238, 0.1); padding: 30px; margin-bottom: 10px; }
-        .podcast-item { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; text-decoration: none; transition: 0.3s; }
+        /* PODCASTS & PROVISIONS */
+        .podcast-widget { background: rgba(99, 149, 238, 0.03); border: 1px solid rgba(99, 149, 238, 0.1); padding: 30px; }
+        .podcast-item { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; text-decoration: none; }
         .podcast-info span { display: block; font-size: 0.8rem; color: #fff; font-weight: 700; }
-        .podcast-info label { font-size: 0.6rem; color: #666; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; }
+        .podcast-info label { font-size: 0.6rem; color: #666; text-transform: uppercase; letter-spacing: 1px; }
 
         footer { padding: 80px 0; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
         footer p { font-size: 0.55rem; letter-spacing: 5px; color: rgba(255,255,255,0.15); text-transform: uppercase; }
 
-        /* PROVISIONS CARD CONSTRAINTS */
-        .provisions-card { background: rgba(160, 190, 245, 0.03); border: 1px solid var(--border-teal); padding: 0; margin-bottom: 20px; overflow: hidden; transition: border-color 0.4s ease; }
-        .provisions-card:hover { border-color: var(--brand-blue); }
-        .provisions-display { position: relative; height: 250px; background: var(--brand-light-blue); display: flex; justify-content: center; align-items: center; overflow: hidden; }
-        .shirt-render { max-width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s ease; }
-        .provisions-overlay { position: absolute; bottom: 10px; right: 10px; }
-        .toggle-btn { background: rgba(5, 5, 5, 0.8); border: 1px solid var(--brand-teal); color: var(--brand-teal); font-family: 'Fira Code', monospace; font-size: 0.5rem; padding: 5px 10px; cursor: pointer; letter-spacing: 1px; }
-        .provisions-info { padding: 20px; border-top: 1px solid var(--border-teal); }
-        .provisions-info h3 { font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 900; margin: 0 0 5px 0; color: #fff; letter-spacing: 2px; }
-        .provisions-info p { font-size: 0.65rem; color: #666; margin-bottom: 20px; text-transform: uppercase; }
-        .buy-btn { display: block; width: 100%; text-align: center; background: var(--brand-blue); color: #050505; text-decoration: none; font-family: 'Fira Code', monospace; font-size: 0.75rem; font-weight: 700; padding: 12px; border: none; letter-spacing: 2px; transition: 0.3s; cursor: pointer; }
-        .buy-btn:hover { background: #fff; box-shadow: 0 0 20px rgba(255, 255, 255, 0.2); }
-
-        /* MODAL STYLES */
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); display: none; align-items: center; justify-content: center; z-index: 5000; }
-        .modal-content { background: var(--bg-dark); border: 1px solid var(--brand-teal); padding: 40px; width: 90%; max-width: 500px; box-shadow: 0 0 50px rgba(145, 175, 179, 0.2); }
-        .modal-header { display: flex; justify-content: space-between; margin-bottom: 30px; }
-        .close-x { background: none; border: none; color: var(--brand-pink); font-family: 'Fira Code'; cursor: pointer; }
-        .provisions-form { display: flex; flex-direction: column; gap: 15px; }
-        .form-row { display: grid; grid-template-columns: 2fr 1fr; gap: 15px; }
-        .provisions-form input, .provisions-form select, .provisions-form textarea { background: rgba(255,255,255,0.03); border: 1px solid var(--border-teal); padding: 15px; color: #fff; font-family: 'Fira Code'; font-size: 0.75rem; }
-        .provisions-form textarea { height: 100px; resize: none; }
-        .provisions-form input:focus { border-color: var(--brand-blue); outline: none; }
-
-        /* MOBILE REFINEMENTS */
         @media (max-width: 1024px) {
-            .interface-header { padding: 30px 20px; flex-direction: column; align-items: center; gap: 20px; }
-            .header-right { text-align: center; display: flex; flex-direction: column; align-items: center; width: 100%; }
-            .nav-logo { margin-bottom: 10px; }
-            .weather-uplink { margin-bottom: 15px; font-size: 0.7rem; }
-            .top-quadrant-text { text-align: center; font-size: 1.2rem; max-width: 90%; letter-spacing: 3px; }
+            .interface-header { padding: 30px 20px; flex-direction: column; }
             .main-interface { margin-top: 340px; flex-direction: column; padding: 0 20px; }
             .vertical-divider { display: none; }
-            .nav-node { flex-direction: column; align-items: center; gap: 20px; text-align: center; }
-            .node-link { width: 100%; justify-content: center; }
         }
     </style>
 </head>
@@ -201,7 +149,7 @@
             </div>
 
             <div id="latest-post-area">
-                <p style="color: #444; letter-spacing: 2px;">POLLING SATELLITE DATA...</p>
+                <div class='timestamp-glitch'>POLLING_SATELLITE_DATA...</div>
             </div>
         </section>
 
@@ -210,82 +158,28 @@
         <aside class="cards-column">
             <div class="column-label">01 // WHAT I LISTEN TO</div>
             <div class="podcast-widget">
-                <a href="#" class="podcast-item">
-                    <div class="podcast-icon">🎙️</div>
-                    <div class="podcast-info"><span>Faith Matters</span><label>Christianity</label></div>
-                </a>
-                <a href="#" class="podcast-item">
-                    <div class="podcast-icon">📡</div>
-                    <div class="podcast-info"><span>Sanctuary</span><label>Christianity</label></div>
-                </a>
-                <a href="#" class="podcast-item">
-                    <div class="podcast-icon">⚡</div>
-                    <div class="podcast-info"><span>Lift + Love Podcast</span><label>Christianity</label></div>
-                </a>
+                <a href="#" class="podcast-item"><div class="podcast-info"><span>Faith Matters</span><label>Christianity</label></div></a>
+                <a href="#" class="podcast-item"><div class="podcast-info"><span>Sanctuary</span><label>Christianity</label></div></a>
+                <a href="#" class="podcast-item"><div class="podcast-info"><span>Lift + Love</span><label>Christianity</label></div></a>
             </div>
 
             <div class="column-label">02 // SUB_SECTIONS</div>
-            <a href="emmy.html" class="archive-card sacred-card"><div class="card-beacon"></div><h3>THE WARM BREEZE</h3><p>Sun. Moon. Stars. The Core Sanctuary.</p></a>
-            <a href="wayback.html" class="archive-card"><div class="card-beacon"></div><h3>The Archive</h3><p>Historical residue from 2001 to present.</p></a>
-            <a href="resume.html" class="archive-card dossier-card"><div class="card-beacon"></div><h3>The Resume</h3><p>Professional history // Tech Logistics.</p></a>
-            <a href="flotsam.html" class="archive-card"><div class="card-beacon"></div><h3>The Flotsam</h3><p>Visual depot and verbal residue.</p></a>
-            <a href="transform_gate.html" class="archive-card transition-card"><div class="card-beacon"></div><h3>The Transition</h3><p>Internal struggle of fundamental identity.</p></a>
-            
-            <div class="column-label">03 // PROVISIONS_UPLINK</div>
-            <div class="provisions-card">
-                <div class="provisions-display">
-                    <img src="Images/OTW_Shirt_Front.png" alt="OTW Shirt" class="shirt-render" id="shirt-img">
-                    <div class="provisions-overlay">
-                        <button class="toggle-btn" onclick="toggleShirt()">VIEW FRONT/BACK</button>
-                    </div>
-                </div>
-                <div class="provisions-info">
-                    <h3>THE_OTW_LIMITED_ISSUE</h3>
-                    <p>Premium Black Cotton // Screen-Printed // Boutique Release // Color may vary</p>
-                    <button onclick="openProvisionsForm()" class="buy-btn">REQUEST_ACCESS // $29</button>
-                </div>
-            </div>
+            <a href="emmy.html" class="archive-card"><div class="card-beacon"></div><h3>THE WARM BREEZE</h3><p>The Core Sanctuary.</p></a>
+            <a href="wayback.html" class="archive-card"><div class="card-beacon"></div><h3>The Archive</h3><p>2001 - 2025 History.</p></a>
+            <a href="resume.html" class="archive-card"><div class="card-beacon"></div><h3>The Resume</h3><p>Professional History.</p></a>
         </aside>
     </main>
 
-    <div id="provisions-overlay" class="modal-overlay">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span class="column-label">PROVISIONS_REQUEST_PROTOCOL</span>
-                <button onclick="closeProvisionsForm()" class="close-x">[X]</button>
-            </div>
-            <form action="https://formspree.io/f/xgolrnkb" method="POST" class="provisions-form">
-                <div class="form-row">
-                    <input type="text" name="name" placeholder="FULL NAME" required>
-                    <input type="email" name="_replyto" placeholder="YOUR EMAIL" required>
-                </div>
-                <div class="form-row">
-                    <select name="size" required>
-                        <option value="" disabled selected>SELECT_SIZE</option>
-                        <option value="S">SMALL</option>
-                        <option value="M">MEDIUM</option>
-                        <option value="L">LARGE</option>
-                        <option value="XL">X-LARGE</option>
-                        <option value="2XL">2X-LARGE</option>
-                    </select>
-                    <input type="number" name="quantity" placeholder="QTY" min="1" value="1">
-                </div>
-                <textarea name="address" placeholder="SHIPPING ADDRESS" required></textarea>
-                <button type="submit" class="buy-btn">SUBMIT_REQUEST</button>
-            </form>
-        </div>
-    </div>
-
     <footer><p>© 2026 OUTSIDE THE WORLD LLC &nbsp; | &nbsp; SYSTEMS & STORIES</p></footer>
 
-<script src="narrative_data.js"></script>
+    <script src="narrative_data.js"></script>
 
     <script>
         const typeTarget = document.getElementById('typing-text');
         
         function runTypewriterProtocol() {
             const state1 = "SYNCHRONIZING...";
-            const state2 = "CURRENT FEED SYNCED.";
+            const state2 = "FEED_NOMINAL_2026";
             let i = 0; typeTarget.innerHTML = "";
             function typeState1() { if (i < state1.length) { typeTarget.innerHTML += state1.charAt(i); i++; setTimeout(typeState1, 100); } else { setTimeout(() => { i = 0; typeTarget.innerHTML = ""; typeState2(); }, 800); } }
             function typeState2() { if (i < state2.length) { typeTarget.innerHTML += state2.charAt(i); i++; setTimeout(typeState2, 80); } }
@@ -301,37 +195,29 @@
             } catch (e) { display.textContent = `Queen Creek // STATUS_OFFLINE`; }
         }
 
-        function openProvisionsForm() { document.getElementById('provisions-overlay').style.display = 'flex'; }
-        function closeProvisionsForm() { document.getElementById('provisions-overlay').style.display = 'none'; }
-        function toggleShirt() {
-            const img = document.getElementById('shirt-img');
-            img.src = img.src.includes('Front') ? 'Images/OTW_Shirt_Back.png' : 'Images/OTW_Shirt_Front.png';
+        function syncLatestPost() {
+            const contentArea = document.getElementById('latest-post-area');
+
+            // Verify if the data variable from narrative_data.js exists
+            if (typeof current_narrative !== 'undefined' && current_narrative.length > 0) {
+                const latest = current_narrative[0]; 
+                
+                contentArea.innerHTML = `
+                    <div class="timestamp-glitch">UPLINK_TIMESTAMP // ${latest.date.toUpperCase()}</div>
+                    <h2>${latest.title}</h2>
+                    <div id="md-render">
+                        ${marked.parse(latest.body)}
+                    </div>
+                    <div class="nav-node">
+                        <a href="wayback.html" class="node-link">← ACCESS_THE_WAYBACK_VAULT</a>
+                    </div>
+                `;
+                runTypewriterProtocol();
+            } else {
+                contentArea.innerHTML = "<div class='timestamp-glitch'>WAITING_FOR_UPLINK_SIGNAL...</div>";
+            }
         }
 
-        // 2. THE LIVING LENS: ZERO-ALTERED LOGIC
-function syncLatestPost() {
-    const contentArea = document.getElementById('latest-post-area');
-
-    if (typeof current_narrative !== 'undefined' && current_narrative.length > 0) {
-        const latest = current_narrative[0]; 
-        
-        contentArea.innerHTML = `
-            <div class="timestamp-glitch">UPLINK_TIMESTAMP // ${latest.date.toUpperCase()}</div>
-            <h2 style="font-size: clamp(2.2rem, 6vw, 4.5rem); line-height: 0.85; margin-bottom: 50px; font-weight: 900; letter-spacing: -4px;">
-                ${latest.title}
-            </h2>
-            <div id="md-render">
-                ${latest.body}
-            </div>
-            <div class="nav-node" style="margin-top: 80px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.05);">
-                <a href="wayback.html" class="node-link" style="font-size: 0.6rem; opacity: 0.5;">← ACCESS_THE_WAYBACK_VAULT</a>
-            </div>
-        `;
-        runTypewriterProtocol();
-    } else {
-        contentArea.innerHTML = "<div class='timestamp-glitch'>WAITING_FOR_2026_SIGNAL...</div>";
-    }
-}
         window.onload = () => { 
             syncLatestPost(); 
             fetchWeather(); 
