@@ -758,16 +758,54 @@
                 justify-content: center;
             }
         }
+
+        /* THE HEADER WRAPPER FIX */
+        .interface-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 3500;
+            backdrop-filter: blur(15px);
+            background: linear-gradient(to bottom, rgba(5, 5, 5, 1) 0%, rgba(5, 5, 5, 0) 100%);
+            box-sizing: border-box;
+            /* Remove the padding from the parent header */
+            padding: 0;
+        }
+
+        .header-content-inner {
+            max-width: 1400px;
+            /* MATCHES MAIN-INTERFACE */
+            margin: 0 auto;
+            padding: 30px 40px;
+            /* MATCHES MAIN-INTERFACE PADDING */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* MOBILE SYMMETRY */
+        @media (max-width: 1024px) {
+            .header-content-inner {
+                flex-direction: column;
+                padding: 30px 20px;
+                gap: 20px;
+            }
+        }
     </style>
 </head>
 
 <body>
 
     <header class="interface-header">
-        <a href="index.html"><img src="Images/Equal.svg" alt="Back" class="nav-logo"></a>
-        <div class="header-right">
-            <div class="weather-uplink" id="weather-display">ATMOSPHERIC_SYNCING...</div>
-            <h1 class="top-quadrant-text">A QUARTER-CENTURY OF DIGITAL RESIDUE</h1>
+        <div class="header-content-inner">
+            <a href="index.html"><img src="Images/Equal.svg" alt="Back" class="nav-logo"></a>
+            <div class="header-right">
+                <div class="weather-uplink" id="weather-display">ATMOSPHERIC_SYNCING...</div>
+                <h1 class="top-quadrant-text">A QUARTER-CENTURY OF DIGITAL RESIDUE</h1>
+            </div>
         </div>
     </header>
 
