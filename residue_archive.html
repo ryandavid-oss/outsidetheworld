@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Residue Matrix | OTW</title>
+    <style>
+        :root {
+            --brand-blue: #6395EE;
+            --brand-light-blue: #A0BEF5;
+            --brand-teal: #91AFB3;
+            --bg-dark: #050505;
+            --warm-amber: #FFB347;
+            --rose-gold: #E0BFB8;
+            --glass-teal: rgba(145, 175, 179, 0.05);
+            --border-teal: rgba(145, 175, 179, 0.2);
+            --amethyst: #9b59b6;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: white; font-family: 'Inter', sans-serif;
+            margin: 0; padding: 60px 40px; overflow-x: hidden;
+        }
+
+        .matrix-header { margin-bottom: 80px; border-bottom: 1px solid var(--border-teal); padding-bottom: 20px; }
+        .matrix-header h1 { font-weight: 900; font-size: 3rem; letter-spacing: -2px; margin: 0; color: #fff; }
+        .matrix-header p { font-family: 'Fira Code'; font-size: 0.7rem; color: var(--brand-teal); letter-spacing: 5px; }
+
+        /* THE ACCORDION SYSTEM */
+        .year-node { margin-bottom: 40px; }
+        .year-label { 
+            font-size: 2rem; font-weight: 900; color: var(--amethyst); 
+            cursor: pointer; display: flex; align-items: center; gap: 20px;
+            text-shadow: 0 0 20px rgba(155, 89, 182, 0.3);
+        }
+        .year-label::after { content: ""; flex-grow: 1; height: 1px; background: rgba(155, 89, 182, 0.2); }
+
+        .month-group { margin-left: 40px; margin-top: 20px; display: none; }
+        .month-label { 
+            font-family: 'Fira Code'; font-size: 1.1rem; color: var(--warm-amber); 
+            cursor: pointer; margin-bottom: 15px; display: block;
+            transition: 0.3s;
+        }
+        .month-label:hover { color: #fff; text-shadow: 0 0 10px var(--warm-amber); }
+
+        .post-list { 
+            margin-left: 30px; border-left: 1px solid var(--border-teal); 
+            padding-left: 20px; margin-bottom: 30px; display: none; 
+        }
+        
+        .post-link {
+            display: block; color: var(--brand-light-blue); text-decoration: none;
+            font-size: 0.9rem; margin-bottom: 12px; transition: 0.3s;
+            padding: 5px 10px; border-radius: 4px;
+        }
+        .post-link:hover { 
+            background: var(--glass-teal); color: #fff; transform: translateX(10px); 
+            box-shadow: -5px 0 0 var(--brand-blue);
+        }
+
+        .active { display: block !important; }
+
+        .back-btn {
+            position: fixed; top: 30px; right: 30px;
+            font-family: 'Fira Code'; font-size: 0.7rem; color: var(--brand-teal);
+            text-decoration: none; border: 1px solid var(--border-teal);
+            padding: 10px 20px; backdrop-filter: blur(10px);
+        }
+        .back-btn:hover { background: var(--brand-teal); color: #000; }
+    </style>
+</head>
+<body>
+
+    <a href="personal.html" class="back-btn">← LIVE_FEED</a>
+
+    <header class="matrix-header">
+        <h1>RESIDUE_MATRIX</h1>
+        <p>CHRONOLOGICAL_EXTRACTION_PROTOCOL</p>
+    </header>
+
+    <div id="matrix-container">
+        </div>
+
+    <script src="narrative_data.js"></script>
+    <script>
+        function buildMatrix() {
+            const container = document.getElementById('matrix-container');
+            if (typeof current_narrative === 'undefined') return;
+
+            // Group data by Year and Month
+            const matrix = {};
+            current_narrative.forEach(post => {
+                // Assuming post.date is like "February 25, 2026"
+                const parts = post.date.split(' ');
+                const year = parts[parts.length - 1];
+                const month = parts[0];
+
+                if (!matrix[year]) matrix[year] = {};
+                if (!matrix[year][month]) matrix[year][month] = [];
+                matrix[year][month].push(post);
+            });
+
+            // Generate HTML
+            let html = '';
+            for (const year in matrix) {
+                html += `
+                <div class="year-node">
+                    <div class="year-label" onclick="toggle(this)">${year}</div>
+                    <div class="month-group">
+                `;
+
+                for (const month in matrix[year]) {
+                    html += `
+                        <div class="month-label" onclick="toggle(this)">> ${month.toUpperCase()}</div>
+                        <div class="post-list">
+                    `;
+
+                    matrix[year][month].forEach(post => {
+                        html += `<a href="view_post.html?file=${post.file}" class="post-link">${post.title}</a>`;
+                    });
+
+                    html += `</div>`; // Close post-list
+                }
+                html += `</div></div>`; // Close month-group and year-node
+            }
+            container.innerHTML = html;
+        }
+
+        function toggle(el) {
+            const next = el.nextElementSibling;
+            if (next) next.classList.toggle('active');
+        }
+
+        window.onload = buildMatrix;
+    </script>
+</body>
+</html>
