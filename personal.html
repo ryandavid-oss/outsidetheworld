@@ -278,64 +278,74 @@
 
     <footer><p>© 2026 OUTSIDE THE WORLD LLC &nbsp; | &nbsp; SYSTEMS & STORIES</p></footer>
 
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script src="narrative_data.js"></script>
 
-    <script>
-        const typeTarget = document.getElementById('typing-text');
-        
-        function runTypewriterProtocol() {
-            const state1 = "SYNCHRONIZING...";
-            const state2 = "CURRENT FEED SYNCED.";
-            let i = 0; typeTarget.innerHTML = "";
-            function typeState1() { if (i < state1.length) { typeTarget.innerHTML += state1.charAt(i); i++; setTimeout(typeState1, 100); } else { setTimeout(() => { i = 0; typeTarget.innerHTML = ""; typeState2(); }, 800); } }
-            function typeState2() { if (i < state2.length) { typeTarget.innerHTML += state2.charAt(i); i++; setTimeout(typeState2, 80); } }
-            typeState1();
-        }
-
-        async function fetchWeather() {
-            const display = document.getElementById('weather-display');
-            try {
-                const response = await fetch('https://wttr.in/Queen+Creek?format=%25c+%25t');
-                const text = await response.text();
-                display.textContent = `Queen Creek // ${text.trim()}`;
-            } catch (e) { display.textContent = `Queen Creek // STATUS_OFFLINE`; }
-        }
-
-        function openProvisionsForm() { document.getElementById('provisions-overlay').style.display = 'flex'; }
-        function closeProvisionsForm() { document.getElementById('provisions-overlay').style.display = 'none'; }
-        function toggleShirt() {
-            const img = document.getElementById('shirt-img');
-            img.src = img.src.includes('Front') ? 'Images/OTW_Shirt_Back.png' : 'Images/OTW_Shirt_Front.png';
-        }
-
-        // 2. THE LIVING LENS: ZERO-ALTERED LOGIC
-function syncLatestPost() {
-    const contentArea = document.getElementById('latest-post-area');
-
-    if (typeof current_narrative !== 'undefined' && current_narrative.length > 0) {
-        const latest = current_narrative[0]; 
-        
-        contentArea.innerHTML = `
-            <div class="timestamp-glitch">UPLINK_TIMESTAMP // ${latest.date.toUpperCase()}</div>
-            <h2 style="font-size: clamp(2.2rem, 6vw, 4.5rem); line-height: 0.85; margin-bottom: 50px; font-weight: 900; letter-spacing: -4px;">
-                ${latest.title}
-            </h2>
-            <div id="md-render">
-                ${latest.body}
-            </div>
-            <div class="nav-node" style="margin-top: 80px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.05);">
-                <a href="wayback.html" class="node-link" style="font-size: 0.6rem; opacity: 0.5;">← ACCESS_THE_WAYBACK_VAULT</a>
-            </div>
-        `;
-        runTypewriterProtocol();
-    } else {
-        contentArea.innerHTML = "<div class='timestamp-glitch'>WAITING_FOR_2026_SIGNAL...</div>";
+<script>
+    const typeTarget = document.getElementById('typing-text');
+    
+    // --- THE VISUAL FLAIR ---
+    function runTypewriterProtocol() {
+        const state1 = "SYNCHRONIZING...";
+        const state2 = "FEED_NOMINAL_2026";
+        let i = 0; typeTarget.innerHTML = "";
+        function typeState1() { if (i < state1.length) { typeTarget.innerHTML += state1.charAt(i); i++; setTimeout(typeState1, 100); } else { setTimeout(() => { i = 0; typeTarget.innerHTML = ""; typeState2(); }, 800); } }
+        function typeState2() { if (i < state2.length) { typeTarget.innerHTML += state2.charAt(i); i++; setTimeout(typeState2, 80); } }
+        typeState1();
     }
-}
-        window.onload = () => { 
-            syncLatestPost(); 
-            fetchWeather(); 
-        };
-    </script>
-</body>
+
+    // --- WEATHER UPLINK ---
+    async function fetchWeather() {
+        const display = document.getElementById('weather-display');
+        try {
+            const response = await fetch('https://wttr.in/Queen+Creek?format=%25c+%25t');
+            const text = await response.text();
+            display.textContent = `Queen Creek // ${text.trim()}`;
+        } catch (e) { display.textContent = `Queen Creek // STATUS_OFFLINE`; }
+    }
+
+    // --- PROVISIONS UI LOGIC ---
+    function openProvisionsForm() { document.getElementById('provisions-overlay').style.display = 'flex'; }
+    function closeProvisionsForm() { document.getElementById('provisions-overlay').style.display = 'none'; }
+    function toggleShirt() {
+        const img = document.getElementById('shirt-img');
+        img.src = img.src.includes('Front') ? 'Images/OTW_Shirt_Back.png' : 'Images/OTW_Shirt_Front.png';
+    }
+
+    // --- THE NARRATIVE ENGINE ---
+    function syncLatestPost() {
+        const contentArea = document.getElementById('latest-post-area');
+
+        // This checks for the data the bot created
+        if (typeof current_narrative !== 'undefined' && current_narrative.length > 0) {
+            const latest = current_narrative[0]; 
+            
+            contentArea.innerHTML = `
+                <div style="font-family: 'Fira Code'; font-size: 0.65rem; color: var(--brand-blue); letter-spacing: 5px; text-transform: uppercase; margin-bottom: 20px; opacity: 0.8;">
+                    UPLINK_TIMESTAMP // ${latest.date.toUpperCase()}
+                </div>
+                <h2 style="font-size: clamp(2.2rem, 6vw, 4.5rem); line-height: 0.85; margin: 0 0 50px 0; font-weight: 900; letter-spacing: -4px; color: #fff;">
+                    ${latest.title}
+                </h2>
+                <div id="md-render" style="font-family: 'Inter'; font-weight: 300; font-size: 1.15rem; line-height: 2.1; color: #b0b0b0; letter-spacing: 0.2px;">
+                    ${marked.parse(latest.body)}
+                </div>
+                <div style="margin-top: 80px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.05);">
+                    <a href="wayback.html" style="font-family: 'Fira Code'; font-size: 0.6rem; color: var(--brand-teal); text-decoration: none; letter-spacing: 2px; opacity: 0.5; transition: 0.3s;">
+                        ← ACCESS_THE_WAYBACK_VAULT
+                    </a>
+                </div>
+            `;
+            runTypewriterProtocol();
+        } else {
+            contentArea.innerHTML = "<div style='font-family: Fira Code; opacity: 0.4;'>WAITING_FOR_UPLINK_SIGNAL...</div>";
+        }
+    }
+
+    // Initialize everything
+    window.onload = () => { 
+        syncLatestPost(); 
+        fetchWeather(); 
+    };
+</script></body>
 </html>
