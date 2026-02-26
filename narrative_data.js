@@ -1,9 +1,9 @@
 const current_narrative = [
     {
-        "title": "THE FIRST UPLINK",
+        "title": "Test post (please work)",
         "date": "February 25, 2026",
-        "body": "This is the first signal from the LCARS terminal. The past is archived. The future is currently being written.",
-        "file": "2026-02-25-test.md"
+        "body": "All I want is for this to actually post my blog.",
+        "file": "2026-02-25-test-post--please-work-.md"
     },
     {
         "title": "A Brand New OTW, baby",
