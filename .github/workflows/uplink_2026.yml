@@ -1,0 +1,32 @@
+name: OTW_2026_Narrative_Sync
+
+on:
+  push:
+    paths:
+      - 'current_narrative/**' # Trigger only on new 2026 posts
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Run Narrative Sync
+        run: python narrative_sync.py
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "OTW-Narrative-Bot"
+          git config --global user.email "bot@outsidetheworld.com"
+          git add narrative_data.js
+          git commit -m "Uplink: New 2026 narrative residue synced" || exit 0
+          git push
