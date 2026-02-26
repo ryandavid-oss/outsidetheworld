@@ -608,19 +608,73 @@
         }
 
         /* 8. MOBILE REFINEMENTS */
+        /* 8. CONSOLIDATED MOBILE REFINEMENTS */
         @media (max-width: 1024px) {
-            .main-interface {
-                margin-top: 280px;
+
+            /* Fix the Header Docking */
+            .header-content-inner {
                 flex-direction: column;
-                padding: 0 20px;
+                padding: 20px;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .nav-logo {
+                width: 180px;
+                /* Scale down logo for mobile */
+                margin: 0 auto;
+            }
+
+            .header-right {
+                text-align: center;
+                /* Center the text when stacked */
+                width: 100%;
+            }
+
+            .weather-uplink {
+                font-size: 0.6rem;
+                margin-bottom: 5px;
+            }
+
+            .top-quadrant-text {
+                font-size: 1.1rem;
+                /* Significantly smaller for mobile */
+                letter-spacing: 2px;
+                /* Tighten spacing so it doesn't overflow */
+                max-width: 100%;
+                line-height: 1.4;
+            }
+
+            /* Fix the Main Layout */
+            .main-interface {
+                margin-top: 260px;
+                /* Adjust based on new stacked header height */
+                flex-direction: column;
+                padding: 0 15px;
+                gap: 30px;
+            }
+
+            .feed-column {
+                padding: 30px 20px;
+                /* Tighter padding for mobile */
             }
 
             .vertical-divider {
                 display: none;
             }
 
-            .top-quadrant-text {
-                font-size: 1.2rem;
+            /* Fix the Sidebar Cards */
+            .cards-column {
+                width: 100%;
+            }
+
+            .archive-card {
+                padding: 25px;
+            }
+
+            .archive-card:hover {
+                transform: none;
+                /* Disable slide-right on mobile to prevent overflow */
             }
         }
     </style>
