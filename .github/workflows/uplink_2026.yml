@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'current_narrative/**'
+      - 'narrative_sync.py'
 
 permissions:
   contents: write
@@ -15,35 +16,16 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.x'
-
       - name: Run Narrative Sync
         run: |
-          touch narrative_data.js
           python narrative_sync.py
+          echo "--- VERIFYING FILE CONTENT ---"
+          cat narrative_data.js  # This will show the content in the GitHub log
+          echo "--- VERIFICATION COMPLETE ---"
 
-      - name: Commit and Push Changes
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Commit and Push
         run: |
-          git config --global user.name "OTW-Narrative-Bot"
+          git config --global user.name "OTW-Bot"
           git config --global user.email "bot@outsidetheworld.com"
-          
-          # We check if the file exists before adding to prevent 128
-          if [ -f narrative_data.js ]; then
-            git add narrative_data.js
-            
-            # Only commit if there are actual changes
-            if ! git diff --cached --quiet; then
-              git commit -m "Uplink: New 2026 narrative synced"
-              git push
-            else
-              echo "No changes detected in narrative_data.js"
-            fi
-          else
-            echo "Error: narrative_data.js was not generated."
-            exit 1
-          fi
+          git add narrative_data.js
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Uplink sync" && git push)
