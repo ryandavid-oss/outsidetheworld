@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>Residue Archive | Matrix Terminal</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <meta name="theme-color" content="#050505">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
@@ -28,7 +29,7 @@
             display: flex;
             height: 100vh;
             overflow: hidden;
-            padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+            transition: background 1.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         /* --- SIDEBAR DIRECTORY --- */
@@ -40,7 +41,6 @@
             background: #070707;
             z-index: 100;
             flex-shrink: 0;
-            transition: transform 0.4s ease;
         }
 
         .dir-header {
@@ -54,6 +54,12 @@
             display: block;
             margin: 0 auto;
             opacity: 0.8;
+            transition: 0.3s;
+        }
+
+        .sidebar-logo:hover {
+            transform: scale(1.05);
+            opacity: 1;
         }
 
         .tuning-knob {
@@ -86,7 +92,7 @@
         .post-list {
             flex-grow: 1;
             overflow-y: auto;
-            padding-top: 10px;
+            -webkit-overflow-scrolling: touch;
         }
 
         .month-header {
@@ -199,58 +205,47 @@
             backdrop-filter: blur(5px);
         }
 
-        /* MOBILE OVERRIDES (THE POETRY PROTOCOL) */
+        /* --- MOBILE REFINEMENTS (POETRY PROTOCOL) --- */
         @media (max-width: 1024px) {
+            body {
+                flex-direction: column;
+                height: auto;
+                overflow-y: auto;
+            }
+
             .directory {
                 width: 100%;
+                height: auto;
                 border-right: none;
+                border-bottom: 1px solid var(--border-low);
+                padding-top: env(safe-area-inset-top);
+            }
+
+            .post-list {
+                max-height: 45vh;
+                border-top: 1px solid var(--border-low);
             }
 
             .extraction-pane {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                z-index: 5000;
-                background: var(--bg-dark);
                 padding: 20px;
-                display: none;
-                /* Hidden until entry selected */
-            }
-
-            .extraction-pane.active {
-                display: flex;
+                min-height: 60vh;
             }
 
             .glass-card {
-                padding: 40px 20px;
+                padding: 50px 25px;
                 border: none;
-                background: transparent;
-                backdrop-filter: none;
+                background: rgba(0, 0, 0, 0.85);
             }
 
             .entry-title {
                 font-size: 1.8rem;
             }
 
-            .mobile-close-btn {
-                position: fixed;
-                top: 20px;
-                left: 20px;
-                z-index: 6000;
-                font-family: 'Fira Code';
-                color: var(--brand-teal);
-                background: rgba(145, 175, 179, 0.1);
-                border: 1px solid var(--brand-teal);
-                padding: 10px 15px;
-                font-size: 0.7rem;
+            .back-nav {
                 display: none;
             }
 
-            .mobile-close-btn.active {
-                display: block;
-            }
+            /* Use the Logo for back nav on mobile */
         }
     </style>
 </head>
@@ -259,11 +254,9 @@
 
     <nav class="back-nav"><a href="personal.html" class="back-link">← CLOSE_TERMINAL</a></nav>
 
-    <button class="mobile-close-btn" id="mobile-close" onclick="closeEntry()">← BACK_TO_DIRECTORY</button>
-
-    <aside class="directory" id="sidebar">
+    <aside class="directory">
         <div class="dir-header">
-            <img src="Images/Equal.svg" class="sidebar-logo" alt="OTW">
+            <a href="personal.html"><img src="Images/Equal.svg" class="sidebar-logo" alt="OTW"></a>
         </div>
         <div class="tuning-knob">
             <label class="knob-label">Temporal Selection</label>
@@ -308,10 +301,7 @@
 
             if (years.length > 0) {
                 renderYear(years[0]);
-                // On Desktop: Load first entry. On Mobile: Wait for click.
-                if (window.innerWidth > 1024) {
-                    displayEntry(groupedMatrix[years[0]][Object.keys(groupedMatrix[years[0]])[0]][0].originalIndex);
-                }
+                displayEntry(groupedMatrix[years[0]][Object.keys(groupedMatrix[years[0]])[0]][0].originalIndex);
             }
         }
 
@@ -329,7 +319,13 @@
                     const item = document.createElement('div');
                     item.className = 'post-item';
                     item.id = `item-${post.originalIndex}`;
-                    item.onclick = () => displayEntry(post.originalIndex);
+                    item.onclick = () => {
+                        displayEntry(post.originalIndex);
+                        // FINESSE: Auto-scroll on mobile
+                        if (window.innerWidth <= 1024) {
+                            document.getElementById('scroll-target').scrollIntoView({ behavior: 'smooth' });
+                        }
+                    };
                     item.innerHTML = `<h3>${post.title}</h3><span>${post.date}</span>`;
                     list.appendChild(item);
                 });
@@ -340,15 +336,7 @@
 
         function displayEntry(index) {
             const container = document.getElementById('glass-container');
-            const pane = document.getElementById('scroll-target');
-            const mobileBtn = document.getElementById('mobile-close');
             const post = current_narrative[index];
-
-            // Activate Mobile View Overlay if on small screen
-            if (window.innerWidth <= 1024) {
-                pane.classList.add('active');
-                mobileBtn.classList.add('active');
-            }
 
             document.body.style.background = `radial-gradient(circle at top left, rgba(155, 89, 182, 0.1) 0%, #050505 100%)`;
             container.classList.remove('visible');
@@ -360,17 +348,15 @@
                     <div class="entry-body">${marked.parse(post.body)}</div>
                 `;
                 container.classList.add('visible');
-                pane.scrollTop = 0;
+                // On desktop, only reset the scroll of the pane, not the whole page
+                if (window.innerWidth > 1024) {
+                    document.getElementById('scroll-target').scrollTop = 0;
+                }
             }, 400);
 
             document.querySelectorAll('.post-item').forEach(el => el.classList.remove('active'));
             const activeItem = document.getElementById(`item-${index}`);
             if (activeItem) activeItem.classList.add('active');
-        }
-
-        function closeEntry() {
-            document.getElementById('scroll-target').classList.remove('active');
-            document.getElementById('mobile-close').classList.remove('active');
         }
 
         window.onload = initMatrix;
