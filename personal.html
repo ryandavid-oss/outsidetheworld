@@ -356,48 +356,31 @@ const response = await fetch('https://wttr.in/Queen+Creek?format=3');           
         img.src = img.src.includes('Front') ? 'Images/OTW_Shirt_Back.png' : 'Images/OTW_Shirt_Front.png';
     }
 
-    // --- THE NARRATIVE ENGINE ---
+// --- THE NARRATIVE ENGINE ---
 function syncLatestPost() {
     const contentArea = document.getElementById('latest-post-area');
 
     if (typeof current_narrative !== 'undefined' && current_narrative.length > 0) {
         
-        // LIMIT TO 5 ENTRIES
-        const displayFeed = current_narrative.slice(0, 5);
+        // CHANGE THIS LINE: from (0, 5) to (0, 1)
+        const displayFeed = current_narrative.slice(0, 1); 
         
         contentArea.innerHTML = displayFeed.map((post, index) => {
-            const isLatest = index === 0;
-            
-            return `
-                <article class="residue-signal" style="margin-bottom: 80px; opacity: ${isLatest ? 1 : 0.6};">
-                    <div style="font-family: 'Fira Code'; font-size: 0.8rem; font-weight: 700; color: var(--brand-teal); letter-spacing: 2px; margin-bottom: 5px;">
-                        ${post.date.toUpperCase()}
-                    </div>
-
-                    <h2 style="font-size: ${isLatest ? 'clamp(1.5rem, 4vw, 2.2rem)' : '1.4rem'}; line-height: 1.1; margin: 0 0 5px 0; font-weight: 900; letter-spacing: -1px; color: #fff;">
-                        ${post.title}
-                    </h2>
-
-                    <div class="md-render" style="font-family: 'Merriweather', serif; font-weight: 300; font-size: 1.05rem; line-height: 1.8; color: #d1d1d1;">
-                        ${marked.parse(post.body)}
-                    </div>
-                </article>
-                
-                ${index < displayFeed.length - 1 ? '<div style="width: 30px; height: 1px; background: rgba(145,175,179,0.15); margin: 40px 0;"></div>' : ''}
-            `;
+            // ... (keep the existing mapping logic)
         }).join('');
 
-        // ADD THE ARCHIVE LINK AT THE BOTTOM
-        if (current_narrative.length > 5) {
+        // CHANGE THIS CONDITION: from > 5 to > 1
+        // AND CHANGE THE LINK: from wayback.html to residue_archive.html
+        if (current_narrative.length > 1) {
             contentArea.innerHTML += `
                 <div style="margin-top: 40px; text-align: center; border-top: 1px solid rgba(145,175,179,0.1); padding-top: 40px;">
-                    <a href="wayback.html" class="node-link" style="justify-content: center; font-size: 0.7rem; opacity: 0.8;">
-                        SIGNAL_OVERFLOW // ACCESS_FULL_ARCHIVE [${current_narrative.length - 5}_ENTRIES_HIDDEN]
+                    <a href="residue_archive.html" class="node-link" style="justify-content: center; font-size: 0.7rem; opacity: 0.8;">
+                        SIGNAL_OVERFLOW // ACCESS_NEW_ARCHIVE [${current_narrative.length - 1}_ADDITIONAL_ENTRIES]
                     </a>
                 </div>
             `;
         }
-
+        
         runTypewriterProtocol();
     } else {
         contentArea.innerHTML = "<div class='timestamp-glitch'>WAITING_FOR_2026_SIGNAL...</div>";
