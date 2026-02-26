@@ -10,6 +10,10 @@
     <title>Interface | Outside The World</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <style>
+        /* THE GUSTO GAP-CLOSER */
+#latest-post-area h2 { margin-top: 0; padding-top: 0; }
+.md-render p { margin-bottom: 1.5em; } /* Space between paragraphs */
+.md-render p:first-child { margin-top: 0; } /* NO space before the first line */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Fira+Code:wght@300;500;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap');
 
         :root {
@@ -352,34 +356,49 @@ function syncLatestPost() {
     const contentArea = document.getElementById('latest-post-area');
 
     if (typeof current_narrative !== 'undefined' && current_narrative.length > 0) {
-        const latest = current_narrative[0]; 
         
-        contentArea.innerHTML = `
-            <div style="font-family: 'Fira Code'; font-size: 0.9rem; font-weight: 700; color: var(--brand-teal); letter-spacing: 2px; margin-bottom: 5px;">
-                ${latest.date.toUpperCase()}
-            </div>
+        // LIMIT TO 5 ENTRIES
+        const displayFeed = current_narrative.slice(0, 5);
+        
+        contentArea.innerHTML = displayFeed.map((post, index) => {
+            const isLatest = index === 0;
+            
+            return `
+                <article class="residue-signal" style="margin-bottom: 80px; opacity: ${isLatest ? 1 : 0.6};">
+                    <div style="font-family: 'Fira Code'; font-size: 0.8rem; font-weight: 700; color: var(--brand-teal); letter-spacing: 2px; margin-bottom: 5px;">
+                        ${post.date.toUpperCase()}
+                    </div>
 
-            <h2 style="font-size: clamp(1.5rem, 4vw, 2.2rem); line-height: 1.1; margin: 0 0 5px 0; font-weight: 900; letter-spacing: -1px; color: #fff;">
-                ${latest.title}
-            </h2>
+                    <h2 style="font-size: ${isLatest ? 'clamp(1.5rem, 4vw, 2.2rem)' : '1.4rem'}; line-height: 1.1; margin: 0 0 5px 0; font-weight: 900; letter-spacing: -1px; color: #fff;">
+                        ${post.title}
+                    </h2>
 
-            <style>
-                #md-render p:first-child { margin-top: 0; } 
-            </style>
+                    <div class="md-render" style="font-family: 'Merriweather', serif; font-weight: 300; font-size: 1.05rem; line-height: 1.8; color: #d1d1d1;">
+                        ${marked.parse(post.body)}
+                    </div>
+                </article>
+                
+                ${index < displayFeed.length - 1 ? '<div style="width: 30px; height: 1px; background: rgba(145,175,179,0.15); margin: 40px 0;"></div>' : ''}
+            `;
+        }).join('');
 
-            <div id="md-render" style="font-family: 'Merriweather', serif; font-weight: 300; font-size: 1.05rem; line-height: 1.8; color: #d1d1d1;">
-                ${marked.parse(latest.body)}
-            </div>
+        // ADD THE ARCHIVE LINK AT THE BOTTOM
+        if (current_narrative.length > 5) {
+            contentArea.innerHTML += `
+                <div style="margin-top: 40px; text-align: center; border-top: 1px solid rgba(145,175,179,0.1); padding-top: 40px;">
+                    <a href="wayback.html" class="node-link" style="justify-content: center; font-size: 0.7rem; opacity: 0.8;">
+                        SIGNAL_OVERFLOW // ACCESS_FULL_ARCHIVE [${current_narrative.length - 5}_ENTRIES_HIDDEN]
+                    </a>
+                </div>
+            `;
+        }
 
-            <div class="nav-node" style="margin-top: 60px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.05);">
-                <a href="wayback.html" class="node-link" style="font-size: 0.6rem; opacity: 0.4;">← ACCESS_THE_WAYBACK_VAULT</a>
-            </div>
-        `;
         runTypewriterProtocol();
     } else {
         contentArea.innerHTML = "<div class='timestamp-glitch'>WAITING_FOR_2026_SIGNAL...</div>";
     }
-}    // Initialize everything
+}
+    // Initialize everything
     window.onload = () => { 
         syncLatestPost(); 
         fetchWeather(); 
