@@ -15,7 +15,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
         with:
-          token: ${{ secrets.GITHUB_TOKEN }} # Explicitly hand the bot the keys
+          persist-credentials: false # We will handle credentials manually
           fetch-depth: 0
 
       - name: Set up Python
@@ -31,5 +31,12 @@ jobs:
           git config --global user.name "OTW-Narrative-Bot"
           git config --global user.email "bot@outsidetheworld.com"
           git add narrative_data.js
-          # This line prevents the "128" error by checking if there's actually a change
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Uplink: New 2026 narrative residue synced" && git push origin HEAD:${{ github.ref }})
+          
+          # Check if there are changes to commit
+          if [ -n "$(git status --porcelain)" ]; then
+            git commit -m "Uplink: New 2026 narrative residue synced"
+            # Manually inject the token into the remote URL for the push
+            git push "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" HEAD:${{ github.ref }}
+          else
+            echo "No changes to commit"
+          fi
