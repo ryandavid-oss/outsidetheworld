@@ -278,7 +278,7 @@
 
     <footer><p>© 2026 OUTSIDE THE WORLD LLC &nbsp; | &nbsp; SYSTEMS & STORIES</p></footer>
 
-    <script src="wayback_purified.js"></script>
+<script src="narrative_data.js"></script>
 
     <script>
         const typeTarget = document.getElementById('typing-text');
@@ -309,31 +309,29 @@
         }
 
         // 2. THE LIVING LENS: ZERO-ALTERED LOGIC
-        function syncLatestPost() {
-            const contentArea = document.getElementById('latest-post-area');
+function syncLatestPost() {
+    const contentArea = document.getElementById('latest-post-area');
 
-            // wayback_raw_dump is provided by wayback_purified.js
-            if (typeof wayback_raw_dump !== 'undefined' && wayback_raw_dump.length > 0) {
-                const latest = wayback_raw_dump[0]; // The newest entry from the purifier
-                
-                contentArea.innerHTML = `
-                    <h2>${latest.title}</h2>
-                    <span class="post-date">${latest.date}</span>
-                    <div id="md-render">
-                        ${latest.body}
-                    </div>
-                    <div class="nav-node">
-                        <a href="wayback.html" class="node-link">← VIEW_HISTORICAL_ARCHIVE</a>
-                        <div class="node-link" style="opacity:0.3; cursor:default;">TERMINAL_END [X]</div>
-                    </div>
-                `;
-                
-                runTypewriterProtocol();
-            } else {
-                contentArea.innerHTML = "<p>Narrative connection lost. Sync failed.</p>";
-            }
-        }
-
+    if (typeof current_narrative !== 'undefined' && current_narrative.length > 0) {
+        const latest = current_narrative[0]; 
+        
+        contentArea.innerHTML = `
+            <div class="timestamp-glitch">UPLINK_TIMESTAMP // ${latest.date.toUpperCase()}</div>
+            <h2 style="font-size: clamp(2.2rem, 6vw, 4.5rem); line-height: 0.85; margin-bottom: 50px; font-weight: 900; letter-spacing: -4px;">
+                ${latest.title}
+            </h2>
+            <div id="md-render">
+                ${latest.body}
+            </div>
+            <div class="nav-node" style="margin-top: 80px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.05);">
+                <a href="wayback.html" class="node-link" style="font-size: 0.6rem; opacity: 0.5;">← ACCESS_THE_WAYBACK_VAULT</a>
+            </div>
+        `;
+        runTypewriterProtocol();
+    } else {
+        contentArea.innerHTML = "<div class='timestamp-glitch'>WAITING_FOR_2026_SIGNAL...</div>";
+    }
+}
         window.onload = () => { 
             syncLatestPost(); 
             fetchWeather(); 
