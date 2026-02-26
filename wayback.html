@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>The Wayback | Outside The World</title>
+    <meta name="theme-color" content="#050505">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;900&family=Fira+Code:wght@300;500&family=Merriweather:ital,wght@0,300;0,700;1,300&display=swap');
 
@@ -17,66 +20,219 @@
 
         body {
             background-color: var(--bg-dark);
-            color: white; font-family: 'Inter', sans-serif;
-            margin: 0; display: flex; height: 100vh; overflow: hidden;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
             transition: background 1.5s ease;
         }
 
-        /* SIDEBAR */
+        /* SIDEBAR / DIRECTORY */
         .directory {
-            width: 380px; border-right: 1px solid var(--border-low);
-            display: flex; flex-direction: column; background: #050505;
-            z-index: 100; flex-shrink: 0;
+            width: 380px;
+            border-right: 1px solid var(--border-low);
+            display: flex;
+            flex-direction: column;
+            background: #050505;
+            z-index: 100;
+            flex-shrink: 0;
         }
-        .dir-header { padding: 40px; border-bottom: 1px solid var(--border-low); text-align: center; }
-        .sidebar-logo { width: 200px; display: block; margin: 0 auto 20px; }
-        .tuning-knob { padding: 20px 40px; }
-        .knob-label { font-family: 'Fira Code'; font-size: 0.55rem; color: #555; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; display: block; }
-        select.era-filter { background: #111; border: 1px solid var(--border-low); color: var(--brand-teal); font-family: 'Fira Code'; font-size: 0.7rem; padding: 10px; width: 100%; outline: none; appearance: none; cursor: pointer; }
-        .post-list { flex-grow: 1; overflow-y: auto; }
-        .post-item { padding: 15px 40px; cursor: pointer; transition: 0.3s; border-left: 3px solid transparent; border-bottom: 1px solid rgba(255,255,255,0.02); }
-        .post-item:hover { background: rgba(255, 255, 255, 0.03); }
-        .post-item.active { background: rgba(99, 149, 238, 0.1); border-left-color: var(--brand-blue); }
-        .post-item h3 { font-family: 'Fira Code'; font-size: 0.75rem; margin: 0 0 5px 0; color: #eee; font-weight: 500; }
-        .post-item span { font-size: 0.55rem; color: #444; letter-spacing: 1px; }
 
-        /* READER */
-        .extraction-pane { flex-grow: 1; padding: 60px; overflow-y: auto; display: flex; justify-content: center; align-items: flex-start; }
-        .glass-card {
-            background: var(--glass-bg); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 255, 255, 0.1); padding: 80px; max-width: 750px; width: 100%;
-            box-shadow: 0 40px 100px rgba(0,0,0,0.8); opacity: 0; transform: translateY(20px);
-            transition: 0.6s ease-out; box-sizing: border-box;
+        .dir-header {
+            padding: 40px;
+            border-bottom: 1px solid var(--border-low);
+            text-align: center;
         }
-        .glass-card.visible { opacity: 1; transform: translateY(0); }
-        .entry-title { font-family: 'Inter'; font-weight: 900; font-size: 2.2rem; margin: 0 0 10px 0; color: #fff; }
-        .entry-meta { font-family: 'Fira Code'; font-size: 0.6rem; color: var(--brand-teal); margin-bottom: 40px; letter-spacing: 3px; text-transform: uppercase; }
-        
-.entry-body { 
-            font-family: 'Merriweather', serif; 
-            font-size: 1.1rem; 
-            line-height: 1.8; /* Slightly tighter for better readability */
-            color: #ccc; 
+
+        .sidebar-logo {
+            width: 200px;
+            display: block;
+            margin: 0 auto 20px;
+            transition: 0.3s;
+        }
+
+        .sidebar-logo:hover {
+            transform: scale(1.02);
+            opacity: 0.8;
+        }
+
+        .tuning-knob {
+            padding: 20px 40px;
+        }
+
+        .knob-label {
+            font-family: 'Fira Code';
+            font-size: 0.55rem;
+            color: #555;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        select.era-filter {
+            background: #111;
+            border: 1px solid var(--border-low);
+            color: var(--brand-teal);
+            font-family: 'Fira Code';
+            font-size: 0.7rem;
+            padding: 10px;
+            width: 100%;
+            outline: none;
+            appearance: none;
+            cursor: pointer;
+        }
+
+        .post-list {
+            flex-grow: 1;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .post-item {
+            padding: 15px 40px;
+            cursor: pointer;
+            transition: 0.3s;
+            border-left: 3px solid transparent;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+        }
+
+        .post-item:hover {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .post-item.active {
+            background: rgba(99, 149, 238, 0.1);
+            border-left-color: var(--brand-blue);
+        }
+
+        .post-item h3 {
+            font-family: 'Fira Code';
+            font-size: 0.75rem;
+            margin: 0 0 5px 0;
+            color: #eee;
+            font-weight: 500;
+        }
+
+        .post-item span {
+            font-size: 0.55rem;
+            color: #444;
+            letter-spacing: 1px;
+        }
+
+        /* READER PANE */
+        .extraction-pane {
+            flex-grow: 1;
+            padding: 60px;
+            overflow-y: auto;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 80px;
+            max-width: 750px;
+            width: 100%;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: 0.6s ease-out;
+            box-sizing: border-box;
+        }
+
+        .glass-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .entry-title {
+            font-family: 'Inter';
+            font-weight: 900;
+            font-size: 2.2rem;
+            margin: 0 0 10px 0;
+            color: #fff;
+            line-height: 1.1;
+        }
+
+        .entry-meta {
+            font-family: 'Fira Code';
+            font-size: 0.6rem;
+            color: var(--brand-teal);
+            margin-bottom: 40px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .entry-body {
+            font-family: 'Merriweather', serif;
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: #ccc;
             font-weight: 300;
             white-space: pre-wrap;
             word-wrap: break-word;
         }
-        .entry-body img { 
-            display: block; 
-            max-width: 100%; 
-            height: auto; 
-            border-radius: 8px; 
-            margin: 30px auto; /* Centers the image */
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5); /* Gives images some depth */
+
+        .entry-body img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 30px auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
-        .loading-signal { font-family: 'Fira Code'; font-size: 0.7rem; color: var(--brand-blue); text-align: center; padding: 40px; }
+
+        /* --- MOBILE ARCHITECTURE (POETRY STYLE) --- */
+        @media (max-width: 1024px) {
+            body {
+                flex-direction: column;
+                height: auto;
+                overflow-y: auto;
+            }
+
+            .directory {
+                width: 100%;
+                height: auto;
+                border-right: none;
+                border-bottom: 1px solid var(--border-low);
+                padding-top: env(safe-area-inset-top);
+            }
+
+            .post-list {
+                max-height: 45vh;
+                border-top: 1px solid var(--border-low);
+            }
+
+            .extraction-pane {
+                padding: 20px;
+                min-height: 60vh;
+            }
+
+            .glass-card {
+                padding: 50px 25px;
+                background: rgba(0, 0, 0, 0.85);
+                border: none;
+            }
+
+            .entry-title {
+                font-size: 1.6rem;
+            }
+        }
     </style>
 </head>
+
 <body>
 
     <aside class="directory">
         <div class="dir-header">
-            <a href="personal.html"><img src="Images/Equal.svg" class="sidebar-logo" alt="OTW"></a>
+            <a href="personal.html"><img src="Images/Equal.svg" class="sidebar-logo" alt="BACK"></a>
         </div>
         <div class="tuning-knob">
             <label class="knob-label">Temporal Era</label>
@@ -87,7 +243,9 @@
 
     <main class="extraction-pane" id="scroll-target">
         <div id="glass-container" class="glass-card">
-            <div class="loading-signal">INITIALIZING_WAYBACK_UPLINK...</div>
+            <div
+                style="font-family: 'Fira Code'; font-size: 0.7rem; color: var(--brand-blue); text-align: center; padding: 40px;">
+                INITIALIZING_WAYBACK_UPLINK...</div>
         </div>
     </main>
 
@@ -110,14 +268,17 @@
 
         function initWayback() {
             const select = document.getElementById('year-select');
-            const years = [...new Set(allResidue.map(p => p.year))].sort((a,b) => b-a);
+            const years = [...new Set(allResidue.map(p => p.year))].sort((a, b) => b - a);
             years.forEach(y => {
                 const opt = document.createElement('option');
                 opt.value = y;
                 opt.textContent = `ERA_${y}`;
                 select.appendChild(opt);
             });
-            if (years.length > 0) { renderEra(years[0]); displayEntry(allResidue.findIndex(p => p.year === years[0])); }
+            if (years.length > 0) {
+                renderEra(years[0]);
+                displayEntry(allResidue.findIndex(p => p.year === years[0]));
+            }
         }
 
         function renderEra(year) {
@@ -128,7 +289,13 @@
                     const item = document.createElement('div');
                     item.className = 'post-item';
                     item.setAttribute('data-id', index);
-                    item.onclick = () => displayEntry(index);
+                    item.onclick = () => {
+                        displayEntry(index);
+                        // THE AUTO-SCROLL FINESSE
+                        if (window.innerWidth <= 1024) {
+                            document.getElementById('scroll-target').scrollIntoView({ behavior: 'smooth' });
+                        }
+                    };
                     item.innerHTML = `<h3>${post.title}</h3><span>${post.date}</span>`;
                     list.appendChild(item);
                 }
@@ -140,8 +307,10 @@
         function displayEntry(index) {
             const container = document.getElementById('glass-container');
             const post = allResidue[index];
+
             document.body.style.background = `radial-gradient(circle at bottom right, rgba(0,0,0,0.8) 0%, #050505 100%), ${post.thumbprint}`;
             document.body.style.backgroundBlendMode = "overlay";
+
             container.classList.remove('visible');
             setTimeout(() => {
                 container.innerHTML = `
@@ -150,12 +319,19 @@
                     <div class="entry-body">${post.body}</div>
                 `;
                 container.classList.add('visible');
-                document.getElementById('scroll-target').scrollTop = 0;
+                // Ensure desktop doesn't scroll the whole page, only the pane
+                if (window.innerWidth > 1024) {
+                    document.getElementById('scroll-target').scrollTop = 0;
+                }
             }, 400);
-            document.querySelectorAll('.post-item').forEach(el => el.classList.toggle('active', el.getAttribute('data-id') == index));
+
+            document.querySelectorAll('.post-item').forEach(el => {
+                el.classList.toggle('active', el.getAttribute('data-id') == index);
+            });
         }
 
         window.onload = () => { if (typeof wayback_raw_dump !== 'undefined') initWayback(); };
     </script>
 </body>
+
 </html>
