@@ -1,112 +1,267 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>Residue Archive | Matrix Terminal</title>
+    <meta name="theme-color" content="#050505">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;900&family=Fira+Code:wght@300;500;700&family=Merriweather:ital,wght@0,300;0,700;1,300&display=swap');
 
         :root {
             --brand-blue: #6395EE;
-            --brand-light-blue: #A0BEF5;
             --brand-teal: #91AFB3;
             --bg-dark: #050505;
             --warm-amber: #FFB347;
             --rose-gold: #E0BFB8;
-            --glass-teal: rgba(145, 175, 179, 0.05);
             --border-low: rgba(255, 255, 255, 0.08);
             --amethyst: #9b59b6;
         }
 
         body {
             background-color: var(--bg-dark);
-            color: white; font-family: 'Inter', sans-serif;
-            margin: 0; display: flex; height: 100vh; overflow: hidden;
-            transition: background 1s ease;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+            padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
         }
 
         /* --- SIDEBAR DIRECTORY --- */
         .directory {
-            width: 380px; border-right: 1px solid var(--border-low);
-            display: flex; flex-direction: column; background: #070707;
-            z-index: 100; flex-shrink: 0;
-        }
-        .dir-header { padding: 40px; border-bottom: 1px solid var(--border-low); text-align: center; }
-        .sidebar-logo { width: 180px; display: block; margin: 0 auto; opacity: 0.8; }
-        
-        .tuning-knob { padding: 20px 40px; border-bottom: 1px solid rgba(255,255,255,0.03); }
-        .knob-label { font-family: 'Fira Code'; font-size: 0.55rem; color: var(--brand-teal); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; display: block; }
-        
-        select.era-filter { 
-            background: #111; border: 1px solid var(--border-low); color: var(--rose-gold); 
-            font-family: 'Fira Code'; font-size: 0.75rem; padding: 12px; width: 100%; 
-            outline: none; cursor: pointer; text-shadow: 0 0 10px var(--rose-gold);
+            width: 380px;
+            border-right: 1px solid var(--border-low);
+            display: flex;
+            flex-direction: column;
+            background: #070707;
+            z-index: 100;
+            flex-shrink: 0;
+            transition: transform 0.4s ease;
         }
 
-        .post-list { flex-grow: 1; overflow-y: auto; padding-top: 10px; }
-        
-        /* MONTH GROUPING IN SIDEBAR */
-        .month-header { 
-            padding: 20px 40px 10px; font-family: 'Fira Code'; font-size: 0.65rem; 
-            color: var(--warm-amber); letter-spacing: 2px; text-transform: uppercase;
-            opacity: 0.7;
+        .dir-header {
+            padding: 40px;
+            border-bottom: 1px solid var(--border-low);
+            text-align: center;
         }
 
-        .post-item { 
-            padding: 15px 40px; cursor: pointer; transition: 0.3s; 
-            border-left: 3px solid transparent; border-bottom: 1px solid rgba(255,255,255,0.02); 
+        .sidebar-logo {
+            width: 180px;
+            display: block;
+            margin: 0 auto;
+            opacity: 0.8;
         }
-        .post-item:hover { background: rgba(145, 175, 179, 0.05); }
-        .post-item.active { 
-            background: rgba(155, 89, 182, 0.1); 
-            border-left-color: var(--amethyst); 
-            animation: pulse-border 2s infinite;
-        }
-        .post-item h3 { font-family: 'Fira Code'; font-size: 0.75rem; margin: 0 0 5px 0; color: #eee; font-weight: 500; }
-        .post-item span { font-size: 0.55rem; color: #555; letter-spacing: 1px; }
 
-        @keyframes pulse-border {
-            0% { border-left-color: var(--amethyst); }
-            50% { border-left-color: var(--brand-teal); }
-            100% { border-left-color: var(--amethyst); }
+        .tuning-knob {
+            padding: 20px 40px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .knob-label {
+            font-family: 'Fira Code';
+            font-size: 0.55rem;
+            color: var(--brand-teal);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        select.era-filter {
+            background: #111;
+            border: 1px solid var(--border-low);
+            color: var(--rose-gold);
+            font-family: 'Fira Code';
+            font-size: 0.75rem;
+            padding: 12px;
+            width: 100%;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .post-list {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding-top: 10px;
+        }
+
+        .month-header {
+            padding: 20px 40px 10px;
+            font-family: 'Fira Code';
+            font-size: 0.65rem;
+            color: var(--warm-amber);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .post-item {
+            padding: 15px 40px;
+            cursor: pointer;
+            transition: 0.3s;
+            border-left: 3px solid transparent;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+        }
+
+        .post-item:hover {
+            background: rgba(145, 175, 179, 0.05);
+        }
+
+        .post-item.active {
+            background: rgba(155, 89, 182, 0.1);
+            border-left-color: var(--amethyst);
+        }
+
+        .post-item h3 {
+            font-family: 'Fira Code';
+            font-size: 0.75rem;
+            margin: 0 0 5px 0;
+            color: #eee;
+        }
+
+        .post-item span {
+            font-size: 0.55rem;
+            color: #555;
         }
 
         /* --- READER PANE --- */
-        .extraction-pane { flex-grow: 1; padding: 60px; overflow-y: auto; display: flex; justify-content: center; align-items: flex-start; position: relative; }
-        
+        .extraction-pane {
+            flex-grow: 1;
+            padding: 60px;
+            overflow-y: auto;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
         .glass-card {
-            background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px);
-            border: 1px solid rgba(145, 175, 179, 0.1); padding: 80px; max-width: 800px; width: 100%;
-            box-shadow: 0 40px 100px rgba(0,0,0,0.9); opacity: 0; transform: translateY(20px);
-            transition: 0.6s cubic-bezier(0.16, 1, 0.3, 1); box-sizing: border-box;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border: 1px solid rgba(145, 175, 179, 0.1);
+            padding: 80px;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.9);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
         }
 
-        /* TRON CORNERS FOR THE READER */
-        .glass-card::before { content: ""; position: absolute; top: 0; left: 0; width: 40px; height: 40px; border-top: 2px solid var(--brand-teal); border-left: 2px solid var(--brand-teal); }
-        .glass-card::after { content: ""; position: absolute; bottom: 0; right: 0; width: 40px; height: 40px; border-bottom: 2px solid var(--brand-teal); border-right: 2px solid var(--brand-teal); }
-
-        .glass-card.visible { opacity: 1; transform: translateY(0); }
-        .entry-title { font-family: 'Inter'; font-weight: 900; font-size: 2.5rem; margin: 0 0 10px 0; color: #fff; letter-spacing: -1px; }
-        .entry-meta { font-family: 'Fira Code'; font-size: 0.65rem; color: var(--brand-teal); margin-bottom: 50px; letter-spacing: 3px; }
-        
-        .entry-body { 
-            font-family: 'Merriweather', serif; font-size: 1.1rem; line-height: 1.9; color: #ccc; font-weight: 300;
+        .glass-card.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
-        .entry-body p:first-child { margin-top: 0; }
 
-        .back-nav { position: fixed; top: 30px; right: 30px; z-index: 200; }
-        .back-link { font-family: 'Fira Code'; font-size: 0.6rem; color: var(--brand-teal); text-decoration: none; border: 1px solid var(--border-low); padding: 8px 15px; }
+        .entry-title {
+            font-family: 'Inter';
+            font-weight: 900;
+            font-size: 2.5rem;
+            margin: 0 0 10px 0;
+            color: #fff;
+            line-height: 1.1;
+        }
 
+        .entry-meta {
+            font-family: 'Fira Code';
+            font-size: 0.65rem;
+            color: var(--brand-teal);
+            margin-bottom: 50px;
+            letter-spacing: 3px;
+        }
+
+        .entry-body {
+            font-family: 'Merriweather', serif;
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: #ccc;
+        }
+
+        .back-nav {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            z-index: 200;
+        }
+
+        .back-link {
+            font-family: 'Fira Code';
+            font-size: 0.6rem;
+            color: var(--brand-teal);
+            text-decoration: none;
+            border: 1px solid var(--border-low);
+            padding: 8px 15px;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        /* MOBILE OVERRIDES (THE POETRY PROTOCOL) */
+        @media (max-width: 1024px) {
+            .directory {
+                width: 100%;
+                border-right: none;
+            }
+
+            .extraction-pane {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 5000;
+                background: var(--bg-dark);
+                padding: 20px;
+                display: none;
+                /* Hidden until entry selected */
+            }
+
+            .extraction-pane.active {
+                display: flex;
+            }
+
+            .glass-card {
+                padding: 40px 20px;
+                border: none;
+                background: transparent;
+                backdrop-filter: none;
+            }
+
+            .entry-title {
+                font-size: 1.8rem;
+            }
+
+            .mobile-close-btn {
+                position: fixed;
+                top: 20px;
+                left: 20px;
+                z-index: 6000;
+                font-family: 'Fira Code';
+                color: var(--brand-teal);
+                background: rgba(145, 175, 179, 0.1);
+                border: 1px solid var(--brand-teal);
+                padding: 10px 15px;
+                font-size: 0.7rem;
+                display: none;
+            }
+
+            .mobile-close-btn.active {
+                display: block;
+            }
+        }
     </style>
 </head>
+
 <body>
 
     <nav class="back-nav"><a href="personal.html" class="back-link">← CLOSE_TERMINAL</a></nav>
 
-    <aside class="directory">
+    <button class="mobile-close-btn" id="mobile-close" onclick="closeEntry()">← BACK_TO_DIRECTORY</button>
+
+    <aside class="directory" id="sidebar">
         <div class="dir-header">
             <img src="Images/Equal.svg" class="sidebar-logo" alt="OTW">
         </div>
@@ -114,13 +269,13 @@
             <label class="knob-label">Temporal Selection</label>
             <select id="year-select" class="era-filter" onchange="updateYear()"></select>
         </div>
-        <div class="post-list" id="post-list">
-            </div>
+        <div class="post-list" id="post-list"></div>
     </aside>
 
     <main class="extraction-pane" id="scroll-target">
         <div id="glass-container" class="glass-card">
-            <div style="font-family: 'Fira Code'; color: var(--brand-teal); text-align: center;">SELECT_SIGNAL_FROM_DIRECTORY...</div>
+            <div style="font-family: 'Fira Code'; color: var(--brand-teal); text-align: center;">
+                SELECT_SIGNAL_FROM_DIRECTORY...</div>
         </div>
     </main>
 
@@ -132,23 +287,18 @@
         function initMatrix() {
             if (typeof current_narrative === 'undefined') return;
 
-            // 1. Group posts by Year, then by Month
             current_narrative.forEach((post, index) => {
                 const parts = post.date.split(' ');
                 const year = parts[parts.length - 1];
                 const month = parts[0];
-
                 if (!groupedMatrix[year]) groupedMatrix[year] = {};
                 if (!groupedMatrix[year][month]) groupedMatrix[year][month] = [];
-                
-                // Keep the original index to find it later
                 groupedMatrix[year][month].push({ ...post, originalIndex: index });
             });
 
-            // 2. Populate Year Select
             const yearSelect = document.getElementById('year-select');
-            const years = Object.keys(groupedMatrix).sort((a,b) => b-a);
-            
+            const years = Object.keys(groupedMatrix).sort((a, b) => b - a);
+
             years.forEach(y => {
                 const opt = document.createElement('option');
                 opt.value = y;
@@ -156,26 +306,25 @@
                 yearSelect.appendChild(opt);
             });
 
-            // 3. Initial Render
             if (years.length > 0) {
                 renderYear(years[0]);
-                displayEntry(groupedMatrix[years[0]][Object.keys(groupedMatrix[years[0]])[0]][0].originalIndex);
+                // On Desktop: Load first entry. On Mobile: Wait for click.
+                if (window.innerWidth > 1024) {
+                    displayEntry(groupedMatrix[years[0]][Object.keys(groupedMatrix[years[0]])[0]][0].originalIndex);
+                }
             }
         }
 
         function renderYear(year) {
             const list = document.getElementById('post-list');
             list.innerHTML = "";
-            
             const months = groupedMatrix[year];
             for (const month in months) {
-                // Add Month Header
                 const mHeader = document.createElement('div');
                 mHeader.className = 'month-header';
                 mHeader.textContent = month;
                 list.appendChild(mHeader);
 
-                // Add Posts
                 months[month].forEach(post => {
                     const item = document.createElement('div');
                     item.className = 'post-item';
@@ -187,19 +336,23 @@
             }
         }
 
-        function updateYear() {
-            renderYear(document.getElementById('year-select').value);
-        }
+        function updateYear() { renderYear(document.getElementById('year-select').value); }
 
         function displayEntry(index) {
             const container = document.getElementById('glass-container');
+            const pane = document.getElementById('scroll-target');
+            const mobileBtn = document.getElementById('mobile-close');
             const post = current_narrative[index];
-            
-            // Set Dynamic Background Gradient based on brand colors
-            document.body.style.background = `radial-gradient(circle at top left, rgba(155, 89, 182, 0.1) 0%, #050505 100%)`;
 
+            // Activate Mobile View Overlay if on small screen
+            if (window.innerWidth <= 1024) {
+                pane.classList.add('active');
+                mobileBtn.classList.add('active');
+            }
+
+            document.body.style.background = `radial-gradient(circle at top left, rgba(155, 89, 182, 0.1) 0%, #050505 100%)`;
             container.classList.remove('visible');
-            
+
             setTimeout(() => {
                 container.innerHTML = `
                     <h1 class="entry-title">${post.title}</h1>
@@ -207,16 +360,21 @@
                     <div class="entry-body">${marked.parse(post.body)}</div>
                 `;
                 container.classList.add('visible');
-                document.getElementById('scroll-target').scrollTop = 0;
+                pane.scrollTop = 0;
             }, 400);
 
-            // Update Active State in Sidebar
             document.querySelectorAll('.post-item').forEach(el => el.classList.remove('active'));
             const activeItem = document.getElementById(`item-${index}`);
             if (activeItem) activeItem.classList.add('active');
         }
 
+        function closeEntry() {
+            document.getElementById('scroll-target').classList.remove('active');
+            document.getElementById('mobile-close').classList.remove('active');
+        }
+
         window.onload = initMatrix;
     </script>
 </body>
+
 </html>
