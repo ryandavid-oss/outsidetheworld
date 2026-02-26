@@ -16,26 +16,24 @@ def sync_production():
         file_path = os.path.join(input_folder, filename)
         try:
             with open(file_path, 'r', encoding='utf-8') as f:
-                content = f.read()
+                lines = f.readlines()
 
-            # 1. Extract Title (First line with #)
-            title_match = re.search(r'^#\s*(.*)', content, re.MULTILINE)
-            title = title_match.group(1).strip() if title_match else "Untitled Entry"
+            if len(lines) < 2:
+                continue
 
-            # 2. Extract Date (Line starting with Date: or ###)
-            date_match = re.search(r'(?:Date:|###)\s*(.*)', content)
-            date_str = date_match.group(1).strip() if date_match else "Unknown Date"
+            # 1. Target the top two lines specifically
+            # Line 0 is the Title, Line 1 is the Date
+            title = lines[0].replace('#', '').strip()
+            date_str = lines[1].replace('Date:', '').replace('###', '').strip()
 
-            # 3. Clean Body (Remove the title and date lines so they don't double up)
-            body = content
-            body = re.sub(r'^#.*', '', body, count=1, flags=re.MULTILINE) # Remove title
-            body = re.sub(r'(?:Date:|###).*', '', body, count=1)          # Remove date line
-            body = body.strip()
+            # 2. Preserve EVERYTHING from line 2 (the 3rd line) onward
+            # This keeps your spacing, your poems, and your formatting intact
+            body_content = "".join(lines[2:]).strip()
 
             posts.append({
                 "title": title,
                 "date": date_str,
-                "body": body,
+                "body": body_content,
                 "file": filename
             })
         except Exception as e:
@@ -47,7 +45,7 @@ def sync_production():
     with open(output_file, 'w', encoding='utf-8') as out:
         out.write(f"const current_narrative = {json.dumps(posts, indent=4)};")
     
-    print(f"SUCCESS: {len(posts)} entries synced to {output_file}")
+    print(f"SUCCESS: {len(posts)} entries synced with preserved spacing.")
 
 if __name__ == "__main__":
     sync_production()
