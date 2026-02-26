@@ -1,4 +1,4 @@
-# A Brand New OTW, Baby.....
+# A Brand New OTW, baby
 Date: February 25, 2026
 
 Where have I heard that before?  Surely, at least five times on this site during the past 26 years.    
