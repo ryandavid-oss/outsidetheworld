@@ -251,12 +251,22 @@
 
         #md-render {
             font-family: 'Merriweather', serif;
-            white-space: pre-wrap;
-            /* Crucial for Markdown gaps */
-            line-height: 1.9;
+            /* REMOVE white-space: pre-wrap; */
+            line-height: 1.8;
             color: #d1d1d1;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             font-weight: 300;
+        }
+
+        /* Control the gaps between paragraphs explicitly */
+        #md-render p {
+            margin-bottom: 1.5rem;
+            /* Adjust this number to make the gap bigger or smaller */
+            margin-top: 0;
+        }
+
+        #md-render p:last-child {
+            margin-bottom: 0;
         }
 
         #md-render img {
