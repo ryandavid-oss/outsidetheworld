@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#020202">
 
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Interface | Outside The World</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <style>
-        
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Fira+Code:wght@300;500;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap');
 
         :root {
@@ -27,208 +27,713 @@
 
         body {
             background-color: var(--bg-dark);
-            color: white; font-family: 'Inter', sans-serif;
-            margin: 0; padding: 0; overflow-x: hidden;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
         }
 
         body::after {
-            content: " "; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            content: " ";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%),
-                        linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
-            background-size: 100% 3px, 3px 100%; pointer-events: none; z-index: 3000; opacity: 0.1;
+                linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+            background-size: 100% 3px, 3px 100%;
+            pointer-events: none;
+            z-index: 3000;
+            opacity: 0.1;
         }
 
         /* HEADER & WEATHER */
-        .interface-header { 
-            position: fixed; top: 0; left: 0; width: 100%; 
-            padding: 30px 60px; z-index: 3500; 
-            display: flex; justify-content: space-between; align-items: center;
+        .interface-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 30px 60px;
+            z-index: 3500;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             backdrop-filter: blur(15px);
-            background: linear-gradient(to bottom, rgba(5,5,5,1) 0%, rgba(5,5,5,0) 100%);
+            background: linear-gradient(to bottom, rgba(5, 5, 5, 1) 0%, rgba(5, 5, 5, 0) 100%);
             box-sizing: border-box;
         }
-        .nav-logo { width: 240px; filter: drop-shadow(0 0 20px rgba(99, 149, 238, 0.2)); }
-        .header-right { text-align: right; }
-        .weather-uplink { font-family: 'Fira Code', monospace; font-size: 0.65rem; color: var(--brand-teal); letter-spacing: 2px; margin-bottom: 8px; text-transform: uppercase; opacity: 0.8; }
-        .top-quadrant-text { margin: 0; font-size: 2rem; font-weight: 900; letter-spacing: 5px; line-height: 1.2; text-transform: uppercase; background: linear-gradient(to bottom, #fff 10%, #666 90%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
 
-        .main-interface { display: flex; max-width: 1400px; margin: 240px auto 100px; padding: 0 40px; gap: 60px; }
-
-/* THE TRON FEED BOX (personal.html) */
-.feed-column { 
-    flex: 2; 
-    text-align: left; 
-    background: rgba(145, 175, 179, 0.03); 
-    padding: 50px;
-    backdrop-filter: blur(20px);
-    position: relative;
-    border: 1px solid rgba(145, 175, 179, 0.1); 
-    overflow: hidden; /* Keeps the light trails inside the boundary */
-}
-
-/* Trail 1: The Top and Left Burn */
-.feed-column::before {
-    content: ""; 
-    position: absolute; 
-    top: 0; right: 0; 
-    width: 0; height: 2px;
-    background: var(--brand-teal); 
-    box-shadow: 0 0 15px var(--brand-teal), 0 0 30px var(--brand-teal);
-    animation: draw-top-left 1.2s ease-out forwards;
-}
-
-/* Trail 2: The Right and Bottom Burn */
-.feed-column::after {
-    content: ""; 
-    position: absolute; 
-    top: 0; right: 0; 
-    width: 2px; height: 0;
-    background: var(--brand-teal); 
-    box-shadow: 0 0 15px var(--brand-teal), 0 0 30px var(--brand-teal);
-    animation: draw-right-bottom 1.2s ease-out forwards;
-}
-
-/* THE ANIMATION PROTOCOL */
-@keyframes draw-top-left {
-    0% { width: 0; height: 2px; right: 0; top: 0; }
-    50% { width: 100%; height: 2px; right: 0; top: 0; }
-    100% { 
-        width: 100%; height: 100%; right: 0; top: 0; 
-        border-left: 2px solid var(--brand-teal); 
-        background: transparent; 
-    }
-}
-
-@keyframes draw-right-bottom {
-    0% { height: 0; width: 2px; top: 0; right: 0; }
-    50% { height: 100%; width: 2px; top: 0; right: 0; }
-    100% { 
-        height: 100%; width: 100%; top: 0; right: 0; 
-        border-bottom: 2px solid var(--brand-teal); 
-        background: transparent; 
-    }
-}
-        .typing-container { font-family: 'Fira Code', monospace; font-size: 0.7rem; color: var(--brand-teal); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 20px; display: flex; align-items: center; }
-        .cursor { display: inline-block; width: 6px; height: 12px; background: var(--brand-teal); margin-left: 5px; animation: blink 1s infinite; }
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-
-        #latest-post-area h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 900; color: #fff; margin: 0 0 15px 0; letter-spacing: -1px; line-height: 1.1; }
-        
-        .post-date { 
-            font-family: 'Fira Code', sans-serif; font-size: 0.8rem; color: var(--brand-light-blue); 
-            margin-bottom: 30px; letter-spacing: 2px; font-weight: 700;
-            text-transform: uppercase; display: block;
-            border-bottom: 1px solid var(--border-teal); padding-bottom: 15px;
+        .nav-logo {
+            width: 240px;
+            filter: drop-shadow(0 0 20px rgba(99, 149, 238, 0.2));
         }
-        
-        #md-render { 
-            font-family: 'Merriweather', serif; 
-            white-space: pre-wrap; /* Crucial for Markdown gaps */
-            line-height: 1.9; 
-            color: #d1d1d1; 
-            font-size: 1.1rem; 
+
+        .header-right {
+            text-align: right;
+        }
+
+        .weather-uplink {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.65rem;
+            color: var(--brand-teal);
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            opacity: 0.8;
+        }
+
+        .top-quadrant-text {
+            margin: 0;
+            font-size: 2rem;
+            font-weight: 900;
+            letter-spacing: 5px;
+            line-height: 1.2;
+            text-transform: uppercase;
+            background: linear-gradient(to bottom, #fff 10%, #666 90%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .main-interface {
+            display: flex;
+            max-width: 1400px;
+            margin: 240px auto 100px;
+            padding: 0 40px;
+            gap: 60px;
+        }
+
+        /* THE TRON FEED BOX (personal.html) */
+        .feed-column {
+            flex: 2;
+            text-align: left;
+            background: rgba(145, 175, 179, 0.03);
+            padding: 50px;
+            backdrop-filter: blur(20px);
+            position: relative;
+            border: 1px solid rgba(145, 175, 179, 0.1);
+            overflow: hidden;
+            /* Keeps the light trails inside the boundary */
+        }
+
+        /* Trail 1: The Top and Left Burn */
+        .feed-column::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: var(--brand-teal);
+            box-shadow: 0 0 15px var(--brand-teal), 0 0 30px var(--brand-teal);
+            animation: draw-top-left 1.2s ease-out forwards;
+        }
+
+        /* Trail 2: The Right and Bottom Burn */
+        .feed-column::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 2px;
+            height: 0;
+            background: var(--brand-teal);
+            box-shadow: 0 0 15px var(--brand-teal), 0 0 30px var(--brand-teal);
+            animation: draw-right-bottom 1.2s ease-out forwards;
+        }
+
+        /* THE ANIMATION PROTOCOL */
+        @keyframes draw-top-left {
+            0% {
+                width: 0;
+                height: 2px;
+                right: 0;
+                top: 0;
+            }
+
+            50% {
+                width: 100%;
+                height: 2px;
+                right: 0;
+                top: 0;
+            }
+
+            100% {
+                width: 100%;
+                height: 100%;
+                right: 0;
+                top: 0;
+                border-left: 2px solid var(--brand-teal);
+                background: transparent;
+            }
+        }
+
+        @keyframes draw-right-bottom {
+            0% {
+                height: 0;
+                width: 2px;
+                top: 0;
+                right: 0;
+            }
+
+            50% {
+                height: 100%;
+                width: 2px;
+                top: 0;
+                right: 0;
+            }
+
+            100% {
+                height: 100%;
+                width: 100%;
+                top: 0;
+                right: 0;
+                border-bottom: 2px solid var(--brand-teal);
+                background: transparent;
+            }
+        }
+
+        .typing-container {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.7rem;
+            color: var(--brand-teal);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 6px;
+            height: 12px;
+            background: var(--brand-teal);
+            margin-left: 5px;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+        }
+
+        #latest-post-area h2 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 900;
+            color: #fff;
+            margin: 0 0 15px 0;
+            letter-spacing: -1px;
+            line-height: 1.1;
+        }
+
+        .post-date {
+            font-family: 'Fira Code', sans-serif;
+            font-size: 0.8rem;
+            color: var(--brand-light-blue);
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+            font-weight: 700;
+            text-transform: uppercase;
+            display: block;
+            border-bottom: 1px solid var(--border-teal);
+            padding-bottom: 15px;
+        }
+
+        #md-render {
+            font-family: 'Merriweather', serif;
+            white-space: pre-wrap;
+            /* Crucial for Markdown gaps */
+            line-height: 1.9;
+            color: #d1d1d1;
+            font-size: 1.1rem;
             font-weight: 300;
         }
-        
+
         #md-render img {
             max-width: 100%;
             height: auto;
             border-radius: 8px;
             margin: 30px 0;
             display: block;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
-        .nav-node { margin-top: 60px; padding-top: 30px; border-top: 1px solid var(--border-teal); display: flex; justify-content: space-between; }
-        .node-link { font-family: 'Fira Code'; font-size: 0.7rem; color: var(--brand-teal); text-decoration: none; letter-spacing: 2px; transition: 0.3s; display: flex; align-items: center; gap: 10px; }
-        .node-link:hover { color: #fff; transform: translateX(-5px); }
+        .nav-node {
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-teal);
+            display: flex;
+            justify-content: space-between;
+        }
 
-        .vertical-divider { width: 1px; background: var(--border-teal); align-self: stretch; }
+        .node-link {
+            font-family: 'Fira Code';
+            font-size: 0.7rem;
+            color: var(--brand-teal);
+            text-decoration: none;
+            letter-spacing: 2px;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .node-link:hover {
+            color: #fff;
+            transform: translateX(-5px);
+        }
+
+        .vertical-divider {
+            width: 1px;
+            background: var(--border-teal);
+            align-self: stretch;
+        }
 
         /* RE-ESTABLISHED CARD THEMES */
-        .cards-column { flex: 1; display: flex; flex-direction: column; gap: 20px; }
-        .column-label { font-family: 'Fira Code'; font-size: 0.65rem; color: var(--brand-teal); letter-spacing: 4px; text-transform: uppercase; margin: 10px 0 5px; opacity: 0.6; display: flex; align-items: center; gap: 10px; }
-        .column-label::after { content: ""; height: 1px; flex-grow: 1; background: var(--border-teal); }
+        .cards-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
 
-        .archive-card { border: 1px solid rgba(255, 255, 255, 0.05); padding: 35px; background: rgba(255, 255, 255, 0.01); text-decoration: none; color: inherit; position: relative; transition: 0.5s; }
-        
+        .column-label {
+            font-family: 'Fira Code';
+            font-size: 0.65rem;
+            color: var(--brand-teal);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin: 10px 0 5px;
+            opacity: 0.6;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .column-label::after {
+            content: "";
+            height: 1px;
+            flex-grow: 1;
+            background: var(--border-teal);
+        }
+
+        .archive-card {
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 35px;
+            background: rgba(255, 255, 255, 0.01);
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+            transition: 0.5s;
+        }
+
         /* THE + RETICLES (BEACONS) */
-        .card-beacon { position: absolute; top: 25px; right: 25px; width: 20px; height: 20px; color: var(--brand-blue); transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1); }
-        .card-beacon::before, .card-beacon::after { content: ''; position: absolute; background: currentColor; }
-        .card-beacon::before { top: 0; left: 9px; width: 2px; height: 20px; }
-        .card-beacon::after { top: 9px; left: 0; width: 20px; height: 2px; }
+        .card-beacon {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            width: 20px;
+            height: 20px;
+            color: var(--brand-blue);
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
 
-        .archive-card:hover { border-color: var(--brand-teal); transform: translateX(10px); background: rgba(145, 175, 179, 0.05); }
-        .archive-card:hover .card-beacon { transform: rotate(90deg); color: var(--brand-teal); }
-        .archive-card h3 { font-size: 1.1rem; font-weight: 900; letter-spacing: 4px; text-transform: uppercase; color: var(--brand-blue); margin: 0 0 10px 0; transition: 0.3s; }
-        .archive-card:hover h3 { color: var(--brand-teal); }
-        .archive-card p { font-size: 0.7rem; color: #666; text-transform: uppercase; margin: 0; }
+        .card-beacon::before,
+        .card-beacon::after {
+            content: '';
+            position: absolute;
+            background: currentColor;
+        }
 
-        .sacred-card { border-color: rgba(255, 179, 71, 0.2); background: rgba(255, 179, 71, 0.02); }
-        .sacred-card h3 { color: var(--warm-amber) !important; }
-        .sacred-card p { color: var(--rose-gold) !important; }
-        .sacred-card:hover { border-color: var(--warm-amber); background: rgba(255, 179, 71, 0.05); }
-        .sacred-card .card-beacon { color: var(--warm-amber); }
-        .sacred-card:hover .card-beacon { transform: rotate(90deg); color: var(--warm-amber); }
+        .card-beacon::before {
+            top: 0;
+            left: 9px;
+            width: 2px;
+            height: 20px;
+        }
 
-        .dossier-card:hover { border-color: var(--brand-blue); background: rgba(99, 149, 238, 0.05); }
-        .dossier-card:hover h3 { color: var(--brand-blue); }
-        .dossier-card .card-beacon { color: var(--brand-blue); }
-        .dossier-card:hover .card-beacon { transform: rotate(90deg); color: var(--brand-blue); }
+        .card-beacon::after {
+            top: 9px;
+            left: 0;
+            width: 20px;
+            height: 2px;
+        }
 
-        .transition-card:hover { border-color: var(--amethyst); background: rgba(155, 89, 182, 0.05); }
-        .transition-card h3 { color: var(--amethyst); transition: 0.3s; }
-        .transition-card:hover h3 { color: var(--amethyst); }
-        .transition-card .card-beacon { color: var(--amethyst); }
-        .transition-card:hover .card-beacon { transform: rotate(90deg); color: var(--amethyst); }
+        .archive-card:hover {
+            border-color: var(--brand-teal);
+            transform: translateX(10px);
+            background: rgba(145, 175, 179, 0.05);
+        }
+
+        .archive-card:hover .card-beacon {
+            transform: rotate(90deg);
+            color: var(--brand-teal);
+        }
+
+        .archive-card h3 {
+            font-size: 1.1rem;
+            font-weight: 900;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--brand-blue);
+            margin: 0 0 10px 0;
+            transition: 0.3s;
+        }
+
+        .archive-card:hover h3 {
+            color: var(--brand-teal);
+        }
+
+        .archive-card p {
+            font-size: 0.7rem;
+            color: #666;
+            text-transform: uppercase;
+            margin: 0;
+        }
+
+        .sacred-card {
+            border-color: rgba(255, 179, 71, 0.2);
+            background: rgba(255, 179, 71, 0.02);
+        }
+
+        .sacred-card h3 {
+            color: var(--warm-amber) !important;
+        }
+
+        .sacred-card p {
+            color: var(--rose-gold) !important;
+        }
+
+        .sacred-card:hover {
+            border-color: var(--warm-amber);
+            background: rgba(255, 179, 71, 0.05);
+        }
+
+        .sacred-card .card-beacon {
+            color: var(--warm-amber);
+        }
+
+        .sacred-card:hover .card-beacon {
+            transform: rotate(90deg);
+            color: var(--warm-amber);
+        }
+
+        .dossier-card:hover {
+            border-color: var(--brand-blue);
+            background: rgba(99, 149, 238, 0.05);
+        }
+
+        .dossier-card:hover h3 {
+            color: var(--brand-blue);
+        }
+
+        .dossier-card .card-beacon {
+            color: var(--brand-blue);
+        }
+
+        .dossier-card:hover .card-beacon {
+            transform: rotate(90deg);
+            color: var(--brand-blue);
+        }
+
+        .transition-card:hover {
+            border-color: var(--amethyst);
+            background: rgba(155, 89, 182, 0.05);
+        }
+
+        .transition-card h3 {
+            color: var(--amethyst);
+            transition: 0.3s;
+        }
+
+        .transition-card:hover h3 {
+            color: var(--amethyst);
+        }
+
+        .transition-card .card-beacon {
+            color: var(--amethyst);
+        }
+
+        .transition-card:hover .card-beacon {
+            transform: rotate(90deg);
+            color: var(--amethyst);
+        }
 
         /* PODCASTS */
-        .podcast-widget { background: rgba(99, 149, 238, 0.03); border: 1px solid rgba(99, 149, 238, 0.1); padding: 30px; margin-bottom: 10px; }
-        .podcast-item { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; text-decoration: none; transition: 0.3s; }
-        .podcast-info span { display: block; font-size: 0.8rem; color: #fff; font-weight: 700; }
-        .podcast-info label { font-size: 0.6rem; color: #666; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; }
+        .podcast-widget {
+            background: rgba(99, 149, 238, 0.03);
+            border: 1px solid rgba(99, 149, 238, 0.1);
+            padding: 30px;
+            margin-bottom: 10px;
+        }
 
-        footer { padding: 80px 0; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
-        footer p { font-size: 0.55rem; letter-spacing: 5px; color: rgba(255,255,255,0.15); text-transform: uppercase; }
+        .podcast-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .podcast-info span {
+            display: block;
+            font-size: 0.8rem;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .podcast-info label {
+            font-size: 0.6rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+        }
+
+        footer {
+            padding: 80px 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        footer p {
+            font-size: 0.55rem;
+            letter-spacing: 5px;
+            color: rgba(255, 255, 255, 0.15);
+            text-transform: uppercase;
+        }
 
         /* PROVISIONS CARD CONSTRAINTS */
-        .provisions-card { background: rgba(160, 190, 245, 0.03); border: 1px solid var(--border-teal); padding: 0; margin-bottom: 20px; overflow: hidden; transition: border-color 0.4s ease; }
-        .provisions-card:hover { border-color: var(--brand-blue); }
-        .provisions-display { position: relative; height: 250px; background: var(--brand-light-blue); display: flex; justify-content: center; align-items: center; overflow: hidden; }
-        .shirt-render { max-width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s ease; }
-        .provisions-overlay { position: absolute; bottom: 10px; right: 10px; }
-        .toggle-btn { background: rgba(5, 5, 5, 0.8); border: 1px solid var(--brand-teal); color: var(--brand-teal); font-family: 'Fira Code', monospace; font-size: 0.5rem; padding: 5px 10px; cursor: pointer; letter-spacing: 1px; }
-        .provisions-info { padding: 20px; border-top: 1px solid var(--border-teal); }
-        .provisions-info h3 { font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 900; margin: 0 0 5px 0; color: #fff; letter-spacing: 2px; }
-        .provisions-info p { font-size: 0.65rem; color: #666; margin-bottom: 20px; text-transform: uppercase; }
-        .buy-btn { display: block; width: 100%; text-align: center; background: var(--brand-blue); color: #050505; text-decoration: none; font-family: 'Fira Code', monospace; font-size: 0.75rem; font-weight: 700; padding: 12px; border: none; letter-spacing: 2px; transition: 0.3s; cursor: pointer; }
-        .buy-btn:hover { background: #fff; box-shadow: 0 0 20px rgba(255, 255, 255, 0.2); }
+        .provisions-card {
+            background: rgba(160, 190, 245, 0.03);
+            border: 1px solid var(--border-teal);
+            padding: 0;
+            margin-bottom: 20px;
+            overflow: hidden;
+            transition: border-color 0.4s ease;
+        }
+
+        .provisions-card:hover {
+            border-color: var(--brand-blue);
+        }
+
+        .provisions-display {
+            position: relative;
+            height: 250px;
+            background: var(--brand-light-blue);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .shirt-render {
+            max-width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.5s ease;
+        }
+
+        .provisions-overlay {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+        }
+
+        .toggle-btn {
+            background: rgba(5, 5, 5, 0.8);
+            border: 1px solid var(--brand-teal);
+            color: var(--brand-teal);
+            font-family: 'Fira Code', monospace;
+            font-size: 0.5rem;
+            padding: 5px 10px;
+            cursor: pointer;
+            letter-spacing: 1px;
+        }
+
+        .provisions-info {
+            padding: 20px;
+            border-top: 1px solid var(--border-teal);
+        }
+
+        .provisions-info h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 900;
+            margin: 0 0 5px 0;
+            color: #fff;
+            letter-spacing: 2px;
+        }
+
+        .provisions-info p {
+            font-size: 0.65rem;
+            color: #666;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .buy-btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+            background: var(--brand-blue);
+            color: #050505;
+            text-decoration: none;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 12px;
+            border: none;
+            letter-spacing: 2px;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .buy-btn:hover {
+            background: #fff;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+        }
 
         /* MODAL STYLES */
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); display: none; align-items: center; justify-content: center; z-index: 5000; }
-        .modal-content { background: var(--bg-dark); border: 1px solid var(--brand-teal); padding: 40px; width: 90%; max-width: 500px; box-shadow: 0 0 50px rgba(145, 175, 179, 0.2); }
-        .modal-header { display: flex; justify-content: space-between; margin-bottom: 30px; }
-        .close-x { background: none; border: none; color: var(--brand-pink); font-family: 'Fira Code'; cursor: pointer; }
-        .provisions-form { display: flex; flex-direction: column; gap: 15px; }
-        .form-row { display: grid; grid-template-columns: 2fr 1fr; gap: 15px; }
-        .provisions-form input, .provisions-form select, .provisions-form textarea { background: rgba(255,255,255,0.03); border: 1px solid var(--border-teal); padding: 15px; color: #fff; font-family: 'Fira Code'; font-size: 0.75rem; }
-        .provisions-form textarea { height: 100px; resize: none; }
-        .provisions-form input:focus { border-color: var(--brand-blue); outline: none; }
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 5000;
+        }
+
+        .modal-content {
+            background: var(--bg-dark);
+            border: 1px solid var(--brand-teal);
+            padding: 40px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 0 50px rgba(145, 175, 179, 0.2);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .close-x {
+            background: none;
+            border: none;
+            color: var(--brand-pink);
+            font-family: 'Fira Code';
+            cursor: pointer;
+        }
+
+        .provisions-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 15px;
+        }
+
+        .provisions-form input,
+        .provisions-form select,
+        .provisions-form textarea {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-teal);
+            padding: 15px;
+            color: #fff;
+            font-family: 'Fira Code';
+            font-size: 0.75rem;
+        }
+
+        .provisions-form textarea {
+            height: 100px;
+            resize: none;
+        }
+
+        .provisions-form input:focus {
+            border-color: var(--brand-blue);
+            outline: none;
+        }
 
         /* MOBILE REFINEMENTS */
         @media (max-width: 1024px) {
-            .interface-header { padding: 30px 20px; flex-direction: column; align-items: center; gap: 20px; }
-            .header-right { text-align: center; display: flex; flex-direction: column; align-items: center; width: 100%; }
-            .nav-logo { margin-bottom: 10px; }
-            .weather-uplink { margin-bottom: 15px; font-size: 0.7rem; }
-            .top-quadrant-text { text-align: center; font-size: 1.2rem; max-width: 90%; letter-spacing: 3px; }
-            .main-interface { margin-top: 340px; flex-direction: column; padding: 0 20px; }
-            .vertical-divider { display: none; }
-            .nav-node { flex-direction: column; align-items: center; gap: 20px; text-align: center; }
-            .node-link { width: 100%; justify-content: center; }
+            .interface-header {
+                padding: 30px 20px;
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+
+            .header-right {
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+            }
+
+            .nav-logo {
+                margin-bottom: 10px;
+            }
+
+            .weather-uplink {
+                margin-bottom: 15px;
+                font-size: 0.7rem;
+            }
+
+            .top-quadrant-text {
+                text-align: center;
+                font-size: 1.2rem;
+                max-width: 90%;
+                letter-spacing: 3px;
+            }
+
+            .main-interface {
+                margin-top: 340px;
+                flex-direction: column;
+                padding: 0 20px;
+            }
+
+            .vertical-divider {
+                display: none;
+            }
+
+            .nav-node {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+                text-align: center;
+            }
+
+            .node-link {
+                width: 100%;
+                justify-content: center;
+            }
         }
     </style>
 </head>
+
 <body>
 
     <header class="interface-header">
@@ -270,12 +775,32 @@
             </div>
 
             <div class="column-label">02 // SUB_SECTIONS</div>
-            <a href="emmy.html" class="archive-card sacred-card"><div class="card-beacon"></div><h3>THE WARM BREEZE</h3><p>Sun. Moon. Stars. The Core Sanctuary.</p></a>
-            <a href="wayback.html" class="archive-card"><div class="card-beacon"></div><h3>The Archive</h3><p>Historical residue from 2001 to present.</p></a>
-            <a href="resume.html" class="archive-card dossier-card"><div class="card-beacon"></div><h3>The Resume</h3><p>Professional history // Tech Logistics.</p></a>
-            <a href="flotsam.html" class="archive-card"><div class="card-beacon"></div><h3>The Flotsam</h3><p>Visual depot and verbal residue.</p></a>
-            <a href="transform_gate.html" class="archive-card transition-card"><div class="card-beacon"></div><h3>The Transition</h3><p>Internal struggle of fundamental identity.</p></a>
-            
+            <a href="emmy.html" class="archive-card sacred-card">
+                <div class="card-beacon"></div>
+                <h3>THE WARM BREEZE</h3>
+                <p>Sun. Moon. Stars. The Core Sanctuary.</p>
+            </a>
+            <a href="wayback.html" class="archive-card">
+                <div class="card-beacon"></div>
+                <h3>The Archive</h3>
+                <p>Historical residue from 2001 to present.</p>
+            </a>
+            <a href="resume.html" class="archive-card dossier-card">
+                <div class="card-beacon"></div>
+                <h3>The Resume</h3>
+                <p>Professional history // Tech Logistics.</p>
+            </a>
+            <a href="flotsam.html" class="archive-card">
+                <div class="card-beacon"></div>
+                <h3>The Flotsam</h3>
+                <p>Visual depot and verbal residue.</p>
+            </a>
+            <a href="transform_gate.html" class="archive-card transition-card">
+                <div class="card-beacon"></div>
+                <h3>The Transition</h3>
+                <p>Internal struggle of fundamental identity.</p>
+            </a>
+
             <div class="column-label">03 // PROVISIONS_UPLINK</div>
             <div class="provisions-card">
                 <div class="provisions-display">
@@ -321,75 +846,96 @@
         </div>
     </div>
 
-    <footer><p>© 2026 OUTSIDE THE WORLD LLC &nbsp; | &nbsp; SYSTEMS & STORIES</p></footer>
+    <footer>
+        <p>© 2026 OUTSIDE THE WORLD LLC &nbsp; | &nbsp; SYSTEMS & STORIES</p>
+    </footer>
 
     <script src="./narrative_data.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
-<script>
-    const typeTarget = document.getElementById('typing-text');
-    
-    // --- THE VISUAL FLAIR ---
-    function runTypewriterProtocol() {
-        const state1 = "SYNCHRONIZING...";
-        const state2 = "FEED_NOMINAL_2026";
-        let i = 0; typeTarget.innerHTML = "";
-        function typeState1() { if (i < state1.length) { typeTarget.innerHTML += state1.charAt(i); i++; setTimeout(typeState1, 100); } else { setTimeout(() => { i = 0; typeTarget.innerHTML = ""; typeState2(); }, 800); } }
-        function typeState2() { if (i < state2.length) { typeTarget.innerHTML += state2.charAt(i); i++; setTimeout(typeState2, 80); } }
-        typeState1();
-    }
+    <script>
+        const typeTarget = document.getElementById('typing-text');
 
-    // --- WEATHER UPLINK ---
-    async function fetchWeather() {
-        const display = document.getElementById('weather-display');
-        try {
-const response = await fetch('https://wttr.in/Queen+Creek?format=3');            const text = await response.text();
-            display.textContent = `Queen Creek // ${text.trim()}`;
-        } catch (e) { display.textContent = `Queen Creek // STATUS_OFFLINE`; }
-    }
+        // --- THE VISUAL FLAIR ---
+        function runTypewriterProtocol() {
+            const state1 = "SYNCHRONIZING...";
+            const state2 = "FEED_NOMINAL_2026";
+            let i = 0; typeTarget.innerHTML = "";
+            function typeState1() { if (i < state1.length) { typeTarget.innerHTML += state1.charAt(i); i++; setTimeout(typeState1, 100); } else { setTimeout(() => { i = 0; typeTarget.innerHTML = ""; typeState2(); }, 800); } }
+            function typeState2() { if (i < state2.length) { typeTarget.innerHTML += state2.charAt(i); i++; setTimeout(typeState2, 80); } }
+            typeState1();
+        }
 
-    // --- PROVISIONS UI LOGIC ---
-    function openProvisionsForm() { document.getElementById('provisions-overlay').style.display = 'flex'; }
-    function closeProvisionsForm() { document.getElementById('provisions-overlay').style.display = 'none'; }
-    function toggleShirt() {
-        const img = document.getElementById('shirt-img');
-        img.src = img.src.includes('Front') ? 'Images/OTW_Shirt_Back.png' : 'Images/OTW_Shirt_Front.png';
-    }
+        // --- WEATHER UPLINK ---
+        async function fetchWeather() {
+            const display = document.getElementById('weather-display');
+            try {
+                const response = await fetch('https://wttr.in/Queen+Creek?format=3'); const text = await response.text();
+                display.textContent = `Queen Creek // ${text.trim()}`;
+            } catch (e) { display.textContent = `Queen Creek // STATUS_OFFLINE`; }
+        }
 
-// --- THE NARRATIVE ENGINE ---
-function syncLatestPost() {
-    const contentArea = document.getElementById('latest-post-area');
+        // --- PROVISIONS UI LOGIC ---
+        function openProvisionsForm() { document.getElementById('provisions-overlay').style.display = 'flex'; }
+        function closeProvisionsForm() { document.getElementById('provisions-overlay').style.display = 'none'; }
+        function toggleShirt() {
+            const img = document.getElementById('shirt-img');
+            img.src = img.src.includes('Front') ? 'Images/OTW_Shirt_Back.png' : 'Images/OTW_Shirt_Front.png';
+        }
 
-    if (typeof current_narrative !== 'undefined' && current_narrative.length > 0) {
-        
-        // CHANGE THIS LINE: from (0, 5) to (0, 1)
-        const displayFeed = current_narrative.slice(0, 1); 
-        
-        contentArea.innerHTML = displayFeed.map((post, index) => {
-            // ... (keep the existing mapping logic)
-        }).join('');
+        // --- THE NARRATIVE ENGINE ---
+        function syncLatestPost() {
+            const contentArea = document.getElementById('latest-post-area');
 
-        // CHANGE THIS CONDITION: from > 5 to > 1
-        // AND CHANGE THE LINK: from wayback.html to residue_archive.html
-        if (current_narrative.length > 1) {
-            contentArea.innerHTML += `
+            if (typeof current_narrative !== 'undefined' && current_narrative.length > 0) {
+
+                // LIMIT TO 5 ENTRIES
+                const displayFeed = current_narrative.slice(0, 5);
+
+                contentArea.innerHTML = displayFeed.map((post, index) => {
+                    const isLatest = index === 0;
+
+                    return `
+                <article class="residue-signal" style="margin-bottom: 80px; opacity: ${isLatest ? 1 : 0.6};">
+                    <div style="font-family: 'Fira Code'; font-size: 0.8rem; font-weight: 700; color: var(--brand-teal); letter-spacing: 2px; margin-bottom: 5px;">
+                        ${post.date.toUpperCase()}
+                    </div>
+
+                    <h2 style="font-size: ${isLatest ? 'clamp(1.5rem, 4vw, 2.2rem)' : '1.4rem'}; line-height: 1.1; margin: 0 0 5px 0; font-weight: 900; letter-spacing: -1px; color: #fff;">
+                        ${post.title}
+                    </h2>
+
+                    <div class="md-render" style="font-family: 'Merriweather', serif; font-weight: 300; font-size: 1.05rem; line-height: 1.8; color: #d1d1d1;">
+                        ${marked.parse(post.body)}
+                    </div>
+                </article>
+                
+                ${index < displayFeed.length - 1 ? '<div style="width: 30px; height: 1px; background: rgba(145,175,179,0.15); margin: 40px 0;"></div>' : ''}
+            `;
+                }).join('');
+
+                // ADD THE ARCHIVE LINK AT THE BOTTOM
+                if (current_narrative.length > 5) {
+                    contentArea.innerHTML += `
                 <div style="margin-top: 40px; text-align: center; border-top: 1px solid rgba(145,175,179,0.1); padding-top: 40px;">
-                    <a href="residue_archive.html" class="node-link" style="justify-content: center; font-size: 0.7rem; opacity: 0.8;">
-                        SIGNAL_OVERFLOW // ACCESS_NEW_ARCHIVE [${current_narrative.length - 1}_ADDITIONAL_ENTRIES]
+                    <a href="wayback.html" class="node-link" style="justify-content: center; font-size: 0.7rem; opacity: 0.8;">
+                        SIGNAL_OVERFLOW // ACCESS_FULL_ARCHIVE [${current_narrative.length - 5}_ENTRIES_HIDDEN]
                     </a>
                 </div>
             `;
+                }
+
+                runTypewriterProtocol();
+            } else {
+                contentArea.innerHTML = "<div class='timestamp-glitch'>WAITING_FOR_2026_SIGNAL...</div>";
+            }
         }
-        
-        runTypewriterProtocol();
-    } else {
-        contentArea.innerHTML = "<div class='timestamp-glitch'>WAITING_FOR_2026_SIGNAL...</div>";
-    }
-}
-    // Initialize everything
-    window.onload = () => { 
-        syncLatestPost(); 
-        fetchWeather(); 
-    };
-</script></body>
+        // Initialize everything
+        window.onload = () => {
+            syncLatestPost();
+            fetchWeather();
+        };
+    </script>
+</body>
+
 </html>

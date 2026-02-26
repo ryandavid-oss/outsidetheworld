@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,95 +23,238 @@
 
         body {
             background-color: var(--bg-dark);
-            color: white; font-family: 'Inter', sans-serif;
-            margin: 0; display: flex; height: 100vh; overflow: hidden;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
             transition: background 1.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         /* 1. SIDEBAR / DIRECTORY */
         .directory {
-            width: 380px; border-right: 1px solid var(--border-low);
-            display: flex; flex-direction: column; background: #050505;
-            z-index: 100; flex-shrink: 0;
+            width: 380px;
+            border-right: 1px solid var(--border-low);
+            display: flex;
+            flex-direction: column;
+            background: #050505;
+            z-index: 100;
+            flex-shrink: 0;
         }
 
-        .dir-header { padding: 40px; border-bottom: 1px solid var(--border-low); text-align: center; }
-        
+        .dir-header {
+            padding: 40px;
+            border-bottom: 1px solid var(--border-low);
+            text-align: center;
+        }
+
         /* LOGO AS BACK BUTTON [Requirement 1, 4, & 5] */
-        .sidebar-logo { 
-            width: 220px; /* Scaled Up */
-            display: block; 
+        .sidebar-logo {
+            width: 220px;
+            /* Scaled Up */
+            display: block;
             margin: 0 auto 30px;
             transition: transform 0.3s ease, opacity 0.3s ease;
         }
-        .sidebar-logo:hover { transform: scale(1.05); opacity: 0.8; }
 
-        .tuning-knob { padding: 0 40px 20px; }
-        .knob-label { font-family: 'Fira Code'; font-size: 0.55rem; color: #555; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; display: block; text-align: left; }
-        
+        .sidebar-logo:hover {
+            transform: scale(1.05);
+            opacity: 0.8;
+        }
+
+        .tuning-knob {
+            padding: 0 40px 20px;
+        }
+
+        .knob-label {
+            font-family: 'Fira Code';
+            font-size: 0.55rem;
+            color: #555;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            display: block;
+            text-align: left;
+        }
+
         select.freq-filter {
-            background: #111; border: 1px solid var(--border-low);
-            color: var(--brand-teal); font-family: 'Fira Code'; font-size: 0.7rem;
-            padding: 10px; width: 100%; cursor: pointer; outline: none; appearance: none;
+            background: #111;
+            border: 1px solid var(--border-low);
+            color: var(--brand-teal);
+            font-family: 'Fira Code';
+            font-size: 0.7rem;
+            padding: 10px;
+            width: 100%;
+            cursor: pointer;
+            outline: none;
+            appearance: none;
         }
 
-        .file-list { flex-grow: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; }
-        .file-item {
-            padding: 20px 40px; cursor: pointer; transition: 0.3s;
-            border-left: 3px solid transparent; border-bottom: 1px solid rgba(255,255,255,0.02);
+        .file-list {
+            flex-grow: 1;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }
-        .file-item:hover { background: rgba(255, 255, 255, 0.03); }
-        .file-item.active { background: rgba(155, 89, 182, 0.1); border-left-color: var(--amethyst); }
-        .file-item h3 { font-family: 'Fira Code'; font-size: 0.75rem; margin: 0 0 5px 0; color: #eee; font-weight: 500; }
-        .file-item span { font-size: 0.55rem; color: #444; letter-spacing: 1.5px; }
+
+        .file-item {
+            padding: 20px 40px;
+            cursor: pointer;
+            transition: 0.3s;
+            border-left: 3px solid transparent;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+        }
+
+        .file-item:hover {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .file-item.active {
+            background: rgba(155, 89, 182, 0.1);
+            border-left-color: var(--amethyst);
+        }
+
+        .file-item h3 {
+            font-family: 'Fira Code';
+            font-size: 0.75rem;
+            margin: 0 0 5px 0;
+            color: #eee;
+            font-weight: 500;
+        }
+
+        .file-item span {
+            font-size: 0.55rem;
+            color: #444;
+            letter-spacing: 1.5px;
+        }
 
         /* 2. READER VIEW */
-        .extraction-pane { 
-            flex-grow: 1; padding: 60px; overflow-y: auto; position: relative; 
-            display: flex; justify-content: center; align-items: flex-start;
+        .extraction-pane {
+            flex-grow: 1;
+            padding: 60px;
+            overflow-y: auto;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
         }
 
         .glass-card {
             background: var(--glass-bg);
-            backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 80px; max-width: 650px; width: 100%;
-            box-shadow: 0 40px 100px rgba(0,0,0,0.8);
-            opacity: 0; transform: translateY(20px);
+            padding: 80px;
+            max-width: 650px;
+            width: 100%;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8);
+            opacity: 0;
+            transform: translateY(20px);
             transition: 0.8s cubic-bezier(0.2, 1, 0.3, 1);
             box-sizing: border-box;
         }
-        .glass-card.visible { opacity: 1; transform: translateY(0); }
 
-        .poem-title { font-family: 'Inter'; font-weight: 900; font-size: 1.8rem; letter-spacing: -1px; margin: 0 0 10px 0; color: #fff; }
-        .poem-meta { font-family: 'Fira Code'; font-size: 0.6rem; color: var(--brand-teal); margin-bottom: 40px; letter-spacing: 3px; text-transform: uppercase; }
-        .poem-body { font-family: 'Merriweather', serif; font-size: 1.05rem; line-height: 2.1; color: #ccc; white-space: pre-line; font-weight: 300; }
+        .glass-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .poem-title {
+            font-family: 'Inter';
+            font-weight: 900;
+            font-size: 1.8rem;
+            letter-spacing: -1px;
+            margin: 0 0 10px 0;
+            color: #fff;
+        }
+
+        .poem-meta {
+            font-family: 'Fira Code';
+            font-size: 0.6rem;
+            color: var(--brand-teal);
+            margin-bottom: 40px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .poem-body {
+            font-family: 'Merriweather', serif;
+            font-size: 1.05rem;
+            line-height: 2.1;
+            color: #ccc;
+            white-space: pre-line;
+            font-weight: 300;
+        }
 
         /* --- MOBILE ARCHITECTURE --- */
         @media (max-width: 1024px) {
-            body { flex-direction: column; overflow-y: auto; height: auto; }
+            body {
+                flex-direction: column;
+                overflow-y: auto;
+                height: auto;
+            }
 
-            .directory { width: 100%; height: auto; border-right: none; border-bottom: 1px solid var(--border-low); }
-            
-            .dir-header { padding: 40px 20px 20px; }
-            .sidebar-logo { width: 180px; margin-bottom: 20px; }
-            
-            .tuning-knob { padding: 0 20px 30px; }
-            
-            .file-list { max-height: 45vh; border-top: 1px solid var(--border-low); }
-            .file-item { padding: 20px; }
+            .directory {
+                width: 100%;
+                height: auto;
+                border-right: none;
+                border-bottom: 1px solid var(--border-low);
+            }
 
-            .extraction-pane { padding: 20px; min-height: 60vh; }
-            .glass-card { padding: 50px 25px; border-radius: 0; border: none; background: rgba(0,0,0,0.85); }
+            .dir-header {
+                padding: 40px 20px 20px;
+            }
 
-            .poem-title { font-size: 1.5rem; }
-            .poem-body { font-size: 1rem; line-height: 1.9; }
+            .sidebar-logo {
+                width: 180px;
+                margin-bottom: 20px;
+            }
+
+            .tuning-knob {
+                padding: 0 20px 30px;
+            }
+
+            .file-list {
+                max-height: 45vh;
+                border-top: 1px solid var(--border-low);
+            }
+
+            .file-item {
+                padding: 20px;
+            }
+
+            .extraction-pane {
+                padding: 20px;
+                min-height: 60vh;
+            }
+
+            .glass-card {
+                padding: 50px 25px;
+                border-radius: 0;
+                border: none;
+                background: rgba(0, 0, 0, 0.85);
+            }
+
+            .poem-title {
+                font-size: 1.5rem;
+            }
+
+            .poem-body {
+                font-size: 1rem;
+                line-height: 1.9;
+            }
         }
 
-        ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-thumb { background: var(--border-low); }
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-low);
+        }
     </style>
 </head>
+
 <body>
 
     <aside class="directory">
@@ -119,7 +263,7 @@
                 <img src="Images/Equal.svg" class="sidebar-logo" alt="BACK TO INTERFACE">
             </a>
         </div>
-        
+
         <div class="tuning-knob">
             <label class="knob-label">Filter Frequency</label>
             <select id="freq-select" class="freq-filter" onchange="filterFrequencies()">
@@ -132,7 +276,7 @@
 
     <main class="extraction-pane">
         <div id="glass-container" class="glass-card">
-            </div>
+        </div>
     </main>
 
     <script src="poetry_data.js"></script>
@@ -141,7 +285,7 @@
         function initArchive() {
             const list = document.getElementById('file-list');
             const select = document.getElementById('freq-select');
-            
+
             // Extract unique frequencies
             const frequencies = [...new Set(archive.map(p => p.frequency))].sort();
             frequencies.forEach(f => {
@@ -157,7 +301,7 @@
         function renderList(filter) {
             const list = document.getElementById('file-list');
             list.innerHTML = "";
-            
+
             archive.forEach((poem, index) => {
                 if (filter === "ALL" || poem.frequency === filter) {
                     const item = document.createElement('div');
@@ -186,7 +330,7 @@
         function displayPoem(index) {
             const container = document.getElementById('glass-container');
             const poem = archive[index];
-            
+
             document.body.style.background = `
                 radial-gradient(circle at bottom right, rgba(0,0,0,0.8) 0%, #050505 100%),
                 ${poem.thumbprint}
@@ -194,7 +338,7 @@
             document.body.style.backgroundBlendMode = "overlay";
 
             container.classList.remove('visible');
-            
+
             setTimeout(() => {
                 container.innerHTML = `
                     <h1 class="poem-title">${poem.title}</h1>
@@ -216,4 +360,5 @@
         };
     </script>
 </body>
+
 </html>
