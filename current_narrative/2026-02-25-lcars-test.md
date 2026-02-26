@@ -5,4 +5,4 @@ Star Date 02252026.
 
 I am testing the functionality of my new blogger interface.  
 
-That is all.
+That is all for now.
