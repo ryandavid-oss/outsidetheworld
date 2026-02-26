@@ -54,52 +54,60 @@
 
         .main-interface { display: flex; max-width: 1400px; margin: 240px auto 100px; padding: 0 40px; gap: 60px; }
 
-/* THE TRON FEED BOX */
+/* THE TRON FEED BOX (personal.html) */
 .feed-column { 
     flex: 2; 
     text-align: left; 
-    background: rgba(145, 175, 179, 0.03); /* Lowered opacity inside */
+    background: rgba(145, 175, 179, 0.03); 
     padding: 50px;
     backdrop-filter: blur(20px);
     position: relative;
-    border: 1px solid rgba(145, 175, 179, 0.1); /* Subtle base border */
-    overflow: hidden;
+    border: 1px solid rgba(145, 175, 179, 0.1); 
+    overflow: hidden; /* Keeps the light trails inside the boundary */
 }
 
-/* Line 1: Top-Right -> Top-Left -> Bottom-Left */
+/* Trail 1: The Top and Left Burn */
 .feed-column::before {
-    content: "";
-    position: absolute;
-    top: 0; right: 0;
+    content: ""; 
+    position: absolute; 
+    top: 0; right: 0; 
     width: 0; height: 2px;
-    background: var(--brand-teal);
-    box-shadow: 0 0 15px var(--brand-teal);
-    animation: draw-top-left 1.5s ease-out forwards;
+    background: var(--brand-teal); 
+    box-shadow: 0 0 15px var(--brand-teal), 0 0 30px var(--brand-teal);
+    animation: draw-top-left 1.2s ease-out forwards;
 }
 
-/* Line 2: Top-Right -> Bottom-Right -> Bottom-Left */
+/* Trail 2: The Right and Bottom Burn */
 .feed-column::after {
-    content: "";
-    position: absolute;
-    top: 0; right: 0;
+    content: ""; 
+    position: absolute; 
+    top: 0; right: 0; 
     width: 2px; height: 0;
-    background: var(--brand-teal);
-    box-shadow: 0 0 15px var(--brand-teal);
-    animation: draw-right-bottom 1.5s ease-out forwards;
+    background: var(--brand-teal); 
+    box-shadow: 0 0 15px var(--brand-teal), 0 0 30px var(--brand-teal);
+    animation: draw-right-bottom 1.2s ease-out forwards;
 }
 
+/* THE ANIMATION PROTOCOL */
 @keyframes draw-top-left {
     0% { width: 0; height: 2px; right: 0; top: 0; }
     50% { width: 100%; height: 2px; right: 0; top: 0; }
-    100% { width: 100%; height: 100%; right: 0; top: 0; border-left: 2px solid var(--brand-teal); background: transparent; }
+    100% { 
+        width: 100%; height: 100%; right: 0; top: 0; 
+        border-left: 2px solid var(--brand-teal); 
+        background: transparent; 
+    }
 }
 
 @keyframes draw-right-bottom {
     0% { height: 0; width: 2px; top: 0; right: 0; }
     50% { height: 100%; width: 2px; top: 0; right: 0; }
-    100% { height: 100%; width: 100%; top: 0; right: 0; border-bottom: 2px solid var(--brand-teal); background: transparent; }
+    100% { 
+        height: 100%; width: 100%; top: 0; right: 0; 
+        border-bottom: 2px solid var(--brand-teal); 
+        background: transparent; 
+    }
 }
-
         .typing-container { font-family: 'Fira Code', monospace; font-size: 0.7rem; color: var(--brand-teal); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 20px; display: flex; align-items: center; }
         .cursor { display: inline-block; width: 6px; height: 12px; background: var(--brand-teal); margin-left: 5px; animation: blink 1s infinite; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
