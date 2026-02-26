@@ -953,19 +953,18 @@
 
                 if (current_narrative.length > 1) {
                     contentArea.innerHTML += `
-        <div style="margin-top: 80px; text-align: center; border-top: 1px solid rgba(145,175,179,0.1); padding-top: 50px; width: 100%;">
+        <div style="margin-top: 80px; text-align: center; border-top: 1px solid rgba(145,175,179,0.1); padding-top: 50px;">
             <a href="residue_archive.html" class="overflow-trigger">
                 SIGNAL_OVERFLOW // ACCESS_MATRIX_ARCHIVE [${current_narrative.length - 1}_ADDITIONAL_ENTRIES]
             </a>
         </div>
     `;
                 }
-            }
 
-            runTypewriterProtocol();
-        } else {
-            contentArea.innerHTML = "<div class='timestamp-glitch'>WAITING_FOR_2026_SIGNAL...</div>";
-        }
+                runTypewriterProtocol();
+            } else {
+                contentArea.innerHTML = "<div class='timestamp-glitch'>WAITING_FOR_2026_SIGNAL...</div>";
+            }
         }
         // Initialize everything
         window.onload = () => {
