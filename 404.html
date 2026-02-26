@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>404 // SIGNAL_TERMINATED</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@700&family=Inter:wght@900&display=swap');
+
+        :root {
+            --vb-red: #ff0000;
+            --vb-red-dim: #440000;
+            --bg-dark: #000000;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--vb-red);
+            font-family: 'Fira Code', monospace;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            /* VIRTUAL BOY SCANLINE TEXTURE */
+            background-image: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255, 0, 0, 0.05) 3px);
+        }
+
+        /* THE WIREFRAME ROOM */
+        .wireframe-environment {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            perspective: 1000px;
+            z-index: 1;
+        }
+
+        .grid-box {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transform: rotateX(60deg);
+            background-image:
+                linear-gradient(var(--vb-red-dim) 1px, transparent 1px),
+                linear-gradient(90deg, var(--vb-red-dim) 1px, transparent 1px);
+            background-size: 80px 80px;
+            animation: move-grid 4s linear infinite;
+        }
+
+        @keyframes move-grid {
+            0% {
+                transform: rotateX(60deg) translateY(0);
+            }
+
+            100% {
+                transform: rotateX(60deg) translateY(80px);
+            }
+        }
+
+        /* TRON-BIKE TRACED NUMBERS */
+        .glitch-container {
+            z-index: 10;
+            position: relative;
+        }
+
+        .big-error {
+            font-family: 'Inter', sans-serif;
+            font-size: 8rem;
+            font-weight: 900;
+            letter-spacing: -5px;
+            color: transparent;
+            -webkit-text-stroke: 2px var(--vb-red);
+            text-shadow: 0 0 20px var(--vb-red);
+            margin: 0;
+            /* ANIMATED TRACING EFFECT */
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: trace-text 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes trace-text {
+            to {
+                text-shadow: 0 0 40px var(--vb-red), 0 0 60px var(--vb-red);
+            }
+        }
+
+        .asplode {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 10px;
+            text-transform: uppercase;
+            margin-top: 20px;
+            color: var(--vb-red);
+            text-shadow: 0 0 10px var(--vb-red);
+        }
+
+        .recovery-link {
+            z-index: 20;
+            margin-top: 60px;
+            padding: 10px 20px;
+            border: 2px solid var(--vb-red);
+            color: var(--vb-red);
+            text-decoration: none;
+            font-family: 'Fira Code';
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            transition: 0.3s;
+        }
+
+        .recovery-link:hover {
+            background: var(--vb-red);
+            color: #000;
+            box-shadow: 0 0 30px var(--vb-red);
+        }
+
+        /* DARKEN THE BOTTOM FOR DEPTH */
+        .vignette {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle, transparent 20%, black 100%);
+            z-index: 5;
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="wireframe-environment">
+        <div class="grid-box"></div>
+    </div>
+
+    <div class="vignette"></div>
+
+    <div class="glitch-container">
+        <h1 class="big-error">404'd!</h1>
+        <div class="asplode">YOUR HEAD ASPLODE</div>
+    </div>
+
+    <a href="personal.html" class="recovery-link">[ RE-ESTABLISH_UPLINK ]</a>
+
+</body>
+
+</html>
