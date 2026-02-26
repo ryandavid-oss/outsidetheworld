@@ -29,13 +29,14 @@
             background-size: 100% 4px, 3px 100%;
         }
 
-        /* 1. NAVIGATION */
+        /* 1. NARROWER NAVIGATION */
         nav {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            padding: 40px;
+            padding: 30px 40px;
+            /* Reduced from 40px to 30px */
             z-index: 1000;
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
@@ -53,15 +54,18 @@
             filter: drop-shadow(0 0 20px rgba(99, 149, 238, 0.4));
         }
 
-        /* 2. HERO SECTION */
+        /* 2. TIGHTENED HERO SPACE */
         .hero {
-            height: 45vh;
+            height: 30vh;
+            /* Reduced from 45vh to bring title up */
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: flex-end;
-            padding-bottom: 60px;
+            padding-bottom: 30px;
             text-align: center;
+            margin-top: 40px;
+            /* Adds a bit of breathing room from the top logo */
         }
 
         h1 {
@@ -71,6 +75,8 @@
             text-transform: uppercase;
             color: white;
             margin: 0;
+            line-height: 1;
+            /* Ensures no extra vertical space around the letters */
             background: linear-gradient(to bottom, #fff 40%, rgba(255, 255, 255, 0.1) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
