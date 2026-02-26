@@ -905,22 +905,22 @@
 
             if (typeof current_narrative !== 'undefined' && current_narrative.length > 0) {
 
-                // 1. LIMIT TO THE SINGLE LATEST POST
                 const displayFeed = current_narrative.slice(0, 1);
 
                 contentArea.innerHTML = displayFeed.map((post) => {
                     return `
-                <article class="residue-signal" style="opacity: 1;">
-                    <div class="post-date">
+                <article class="residue-signal">
+                    <div style="font-family: 'Fira Code'; font-size: 1rem; font-weight: 700; color: var(--brand-blue); letter-spacing: 3px; margin-bottom: 15px; text-shadow: 0 0 10px rgba(99, 149, 238, 0.3);">
                         ${post.date.toUpperCase()}
                     </div>
 
-                    <h2 style="margin-bottom: 5px;">
+                    <h2 style="font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 900; color: #fff; margin: 0 0 25px 0; letter-spacing: -1px; line-height: 1.1;">
                         ${post.title}
                     </h2>
 
                     <style>
                         #md-render p:first-child { margin-top: 0; }
+                        #md-render p { margin-bottom: 1.5rem; }
                     </style>
 
                     <div id="md-render">
@@ -930,10 +930,9 @@
             `;
                 }).join('');
 
-                // 2. ADD THE OVERFLOW LINK IF THERE'S MORE THAN 1 POST
                 if (current_narrative.length > 1) {
                     contentArea.innerHTML += `
-                <div style="margin-top: 40px; text-align: center; border-top: 1px solid rgba(145,175,179,0.1); padding-top: 40px;">
+                <div style="margin-top: 60px; text-align: center; border-top: 1px solid rgba(145,175,179,0.1); padding-top: 40px;">
                     <a href="residue_archive.html" class="node-link" style="justify-content: center; font-size: 0.7rem; opacity: 0.8;">
                         SIGNAL_OVERFLOW // ACCESS_NEW_ARCHIVE [${current_narrative.length - 1}_ADDITIONAL_ENTRIES]
                     </a>
@@ -945,7 +944,8 @@
             } else {
                 contentArea.innerHTML = "<div class='timestamp-glitch'>WAITING_FOR_2026_SIGNAL...</div>";
             }
-        }        // Initialize everything
+        }
+        // Initialize everything
         window.onload = () => {
             syncLatestPost();
             fetchWeather();
