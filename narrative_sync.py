@@ -1,53 +1,36 @@
 import os, json
 
-# CONFIG
-input_folder = 'current_narrative'
-output_file = 'narrative_data.js'
-
-def sync():
-    print(f"--- STARTING SYNC ---")
+def diagnostic_sync():
+    print("--- DIAGNOSTIC START ---")
+    print(f"Current Working Directory: {os.getcwd()}")
     
-    # 1. Ensure folder exists
-    if not os.path.exists(input_folder):
-        os.makedirs(input_folder)
-        print(f"NOTICE: Created missing folder: {input_folder}")
+    # List EVERYTHING so we can see where we are
+    for root, dirs, files in os.walk('.'):
+        level = root.replace('.', '').count(os.sep)
+        indent = ' ' * 4 * (level)
+        print(f"{indent}[{os.path.basename(root)}/]")
+        subindent = ' ' * 4 * (level + 1)
+        for f in files:
+            print(f"{subindent}{f}")
 
-    # 2. List everything in the directory for the logs
-    all_contents = os.listdir('.')
-    print(f"ROOT_CONTENTS: {all_contents}")
-    
-    proj_contents = os.listdir(input_folder)
-    print(f"FOLDER_CONTENTS ({input_folder}): {proj_contents}")
-
-    # 3. Process files
+    # The actual sync logic (extremely aggressive)
     posts = []
-    for filename in proj_contents:
-        if filename.endswith('.md'):
-            print(f"PROCESSING: {filename}")
-            try:
-                with open(os.path.join(input_folder, filename), 'r', encoding='utf-8') as f:
-                    lines = f.readlines()
-                    if len(lines) >= 2:
-                        posts.append({
-                            "title": lines[0].replace('#', '').strip(),
-                            "date": lines[1].replace('Date:', '').strip(),
-                            "body": "".join(lines[2:]).strip(),
-                            "file": filename
-                        })
-            except Exception as e:
-                print(f"ERROR reading {filename}: {e}")
-
-    # 4. Sort newest first
-    posts.sort(key=lambda x: x['file'], reverse=True)
-
-    # 5. THE GUARANTEED WRITE
-    # We use 'w+' to ensure it truncates and writes fresh
-    with open(output_file, 'w+', encoding='utf-8') as out:
-        json_data = json.dumps(posts, indent=4)
-        out.write(f"const current_narrative = {json_data};")
+    target = 'current_narrative'
     
-    print(f"SUCCESS: Wrote {len(posts)} posts to {output_file}")
-    print(f"--- SYNC COMPLETE ---")
+    # Look for the folder anywhere
+    for root, dirs, files in os.walk('.'):
+        if target in dirs:
+            folder_path = os.path.join(root, target)
+            print(f"!!! TARGET FOUND AT: {folder_path}")
+            for filename in os.listdir(folder_path):
+                if filename.endswith('.md'):
+                    with open(os.path.join(folder_path, filename), 'r') as f:
+                        lines = f.readlines()
+                        posts.append({"title": lines[0], "date": "Synced", "body": "".join(lines[1:])})
+    
+    with open('narrative_data.js', 'w') as out:
+        out.write(f"const current_narrative = {json.dumps(posts)};")
+    print("--- DIAGNOSTIC END ---")
 
 if __name__ == "__main__":
-    sync()
+    diagnostic_sync()
