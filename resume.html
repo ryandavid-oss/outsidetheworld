@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,108 +19,225 @@
             --border: rgba(255, 255, 255, 0.1);
         }
 
-        * { box-sizing: border-box; }
+        * {
+            box-sizing: border-box;
+        }
 
         body {
             background-color: var(--bg-dark);
             color: #ccc;
             font-family: 'Inter', sans-serif;
-            margin: 0; padding: 0;
+            margin: 0;
+            padding: 0;
             overflow-x: hidden;
             line-height: 1.6;
         }
 
         /* ATMOSPHERIC SCANLINES */
         body::after {
-            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%),
-                        linear-gradient(90deg, rgba(99, 149, 238, 0.02), rgba(99, 149, 238, 0.01), rgba(99, 149, 238, 0.02));
-            background-size: 100% 3px, 3px 100%; pointer-events: none; z-index: 1000; opacity: 0.15;
+                linear-gradient(90deg, rgba(99, 149, 238, 0.02), rgba(99, 149, 238, 0.01), rgba(99, 149, 238, 0.02));
+            background-size: 100% 3px, 3px 100%;
+            pointer-events: none;
+            z-index: 1000;
+            opacity: 0.15;
         }
 
-        nav { padding: 60px 40px 10px; text-align: left; position: relative; z-index: 1001; }
-        .nav-logo { width: 220px; filter: drop-shadow(0 0 20px rgba(99, 149, 238, 0.2)); }
+        nav {
+            padding: 60px 40px 10px;
+            text-align: left;
+            position: relative;
+            z-index: 1001;
+        }
 
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px 100px; position: relative; z-index: 1001; }
+        .nav-logo {
+            width: 220px;
+            filter: drop-shadow(0 0 20px rgba(99, 149, 238, 0.2));
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px 100px;
+            position: relative;
+            z-index: 1001;
+        }
 
         /* HERO SECTION */
         .hero {
-            display: flex; align-items: center; gap: 50px;
-            padding: 40px 0; border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            padding: 40px 0;
+            border-bottom: 1px solid var(--border);
         }
 
         .scanner-frame {
-            position: relative; width: 220px; height: 220px;
-            border: 1px solid var(--border); padding: 10px; flex-shrink: 0;
+            position: relative;
+            width: 220px;
+            height: 220px;
+            border: 1px solid var(--border);
+            padding: 10px;
+            flex-shrink: 0;
         }
+
         .portrait {
-            width: 100%; height: 100%;
+            width: 100%;
+            height: 100%;
             background: #111;
             background-image: url('Images/Profile.jpg');
-            background-size: cover; 
-            background-position: center 45%; 
+            background-size: cover;
+            background-position: center 45%;
             filter: grayscale(100%) brightness(0.7);
             transition: 0.5s ease;
-            position: relative; overflow: hidden;
+            position: relative;
+            overflow: hidden;
         }
-        .scanner-frame:hover .portrait { filter: grayscale(0%) brightness(1); }
+
+        .scanner-frame:hover .portrait {
+            filter: grayscale(0%) brightness(1);
+        }
+
         .portrait::after {
-            content: ""; position: absolute; top: -100%; left: 0; width: 100%; height: 2px;
-            background: var(--brand-teal); box-shadow: 0 0 15px var(--brand-teal);
+            content: "";
+            position: absolute;
+            top: -100%;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--brand-teal);
+            box-shadow: 0 0 15px var(--brand-teal);
             animation: scan 4s infinite linear;
         }
-        @keyframes scan { 0% { top: 0%; } 100% { top: 100%; } }
 
-        .fog-name { 
-            font-size: clamp(1.8rem, 5vw, 3.5rem); 
-            font-weight: 900; letter-spacing: 12px; margin: 0; line-height: 1.2; text-transform: uppercase;
+        @keyframes scan {
+            0% {
+                top: 0%;
+            }
+
+            100% {
+                top: 100%;
+            }
+        }
+
+        .fog-name {
+            font-size: clamp(1.8rem, 5vw, 3.5rem);
+            font-weight: 900;
+            letter-spacing: 12px;
+            margin: 0;
+            line-height: 1.2;
+            text-transform: uppercase;
             background: linear-gradient(to bottom, #fff 10%, #444 90%);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 15px rgba(255,255,255,0.1));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.1));
             animation: fogReveal 3s forwards;
         }
+
         @keyframes fogReveal {
-            0% { letter-spacing: 30px; opacity: 0; filter: blur(20px); }
-            100% { letter-spacing: 12px; opacity: 1; filter: blur(0); }
+            0% {
+                letter-spacing: 30px;
+                opacity: 0;
+                filter: blur(20px);
+            }
+
+            100% {
+                letter-spacing: 12px;
+                opacity: 1;
+                filter: blur(0);
+            }
         }
 
         .job-title {
-            font-family: 'Fira Code', monospace; color: var(--brand-teal);
-            letter-spacing: 4px; text-transform: uppercase;
-            margin-top: 15px; font-size: 1rem; min-height: 1.5rem;
+            font-family: 'Fira Code', monospace;
+            color: var(--brand-teal);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-top: 15px;
+            font-size: 1rem;
+            min-height: 1.5rem;
         }
-        .cursor { display: inline-block; width: 10px; height: 18px; background-color: var(--brand-teal); margin-left: 5px; animation: blink 1s infinite; vertical-align: middle; }
+
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 18px;
+            background-color: var(--brand-teal);
+            margin-left: 5px;
+            animation: blink 1s infinite;
+            vertical-align: middle;
+        }
 
         .lang-badge {
-            display: inline-block; margin-top: 10px; padding: 4px 10px;
+            display: inline-block;
+            margin-top: 10px;
+            padding: 4px 10px;
             border: 1px solid var(--brand-light-blue);
-            color: var(--brand-light-blue); font-family: 'Fira Code';
-            font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase;
+            color: var(--brand-light-blue);
+            font-family: 'Fira Code';
+            font-size: 0.6rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
             background: rgba(160, 190, 245, 0.05);
         }
 
         /* MISSION BOX */
         .mission-box {
-            margin: 40px 0 60px; padding: 40px;
+            margin: 40px 0 60px;
+            padding: 40px;
             background: linear-gradient(90deg, var(--glass), transparent);
             border-left: 2px solid var(--brand-pink);
         }
-        .mission-box h2 { font-family: 'Fira Code'; font-size: 0.7rem; color: var(--brand-pink); letter-spacing: 5px; margin-bottom: 20px; text-transform: uppercase; }
-        .mission-box p { font-size: 1.3rem; font-weight: 300; line-height: 1.6; color: #fff; max-width: 900px; margin: 0; }
+
+        .mission-box h2 {
+            font-family: 'Fira Code';
+            font-size: 0.7rem;
+            color: var(--brand-pink);
+            letter-spacing: 5px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .mission-box p {
+            font-size: 1.3rem;
+            font-weight: 300;
+            line-height: 1.6;
+            color: #fff;
+            max-width: 900px;
+            margin: 0;
+        }
 
         /* SECTION STYLING */
         .section-label {
-            font-family: 'Fira Code'; color: var(--brand-light-blue);
-            font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase;
-            margin: 80px 0 30px; display: flex; align-items: center; gap: 20px;
+            font-family: 'Fira Code';
+            color: var(--brand-light-blue);
+            font-size: 0.7rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin: 80px 0 30px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
         }
-        .section-label::after { content: ""; height: 1px; flex-grow: 1; background: var(--border); }
+
+        .section-label::after {
+            content: "";
+            height: 1px;
+            flex-grow: 1;
+            background: var(--border);
+        }
 
         /* BRIGHTER TENURE MARKERS [Requirement 2] */
-        .exp-date { 
-            font-family: 'Fira Code'; 
-            color: var(--brand-light-blue); 
-            font-size: 0.85rem; 
+        .exp-date {
+            font-family: 'Fira Code';
+            color: var(--brand-light-blue);
+            font-size: 0.85rem;
             font-weight: 500;
             text-shadow: 0 0 8px rgba(160, 190, 245, 0.3);
             white-space: nowrap;
@@ -136,11 +254,40 @@
             margin-left: auto;
         }
 
-        .experience-entry { margin-bottom: 60px; padding-left: 20px; border-left: 1px solid var(--border); }
-        .exp-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 12px; flex-wrap: wrap; gap: 10px; }
-        .exp-role { font-size: 1.7rem; color: white; font-weight: 700; margin: 0; }
-        .exp-company { font-family: 'Fira Code'; color: var(--brand-blue); font-size: 1rem; }
-        .exp-body { font-weight: 300; color: #999; line-height: 1.7; font-size: 1rem; }
+        .experience-entry {
+            margin-bottom: 60px;
+            padding-left: 20px;
+            border-left: 1px solid var(--border);
+        }
+
+        .exp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .exp-role {
+            font-size: 1.7rem;
+            color: white;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .exp-company {
+            font-family: 'Fira Code';
+            color: var(--brand-blue);
+            font-size: 1rem;
+        }
+
+        .exp-body {
+            font-weight: 300;
+            color: #999;
+            line-height: 1.7;
+            font-size: 1rem;
+        }
 
         .active-tenure {
             border-left: 2px solid var(--brand-blue);
@@ -148,81 +295,296 @@
             background: linear-gradient(90deg, rgba(99, 149, 238, 0.05) 0%, transparent 100%);
         }
 
-        .mission-statement { font-style: italic; color: var(--brand-light-blue); margin-bottom: 30px; font-size: 1.1rem; }
+        .mission-statement {
+            font-style: italic;
+            color: var(--brand-light-blue);
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
 
-        .achievement-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 30px; }
-        .achievement-pillar h4 { font-family: 'Fira Code'; font-size: 0.75rem; color: var(--brand-blue); letter-spacing: 2px; margin: 0 0 10px 0; }
-        .achievement-pillar p { font-size: 0.95rem; line-height: 1.6; color: #b3b3b3; margin: 0; }
-        .tenure-metadata { display: flex; gap: 20px; flex-wrap: wrap; font-family: 'Fira Code'; font-size: 0.65rem; color: var(--brand-teal); opacity: 0.6; letter-spacing: 1px; }
+        .achievement-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .achievement-pillar h4 {
+            font-family: 'Fira Code';
+            font-size: 0.75rem;
+            color: var(--brand-blue);
+            letter-spacing: 2px;
+            margin: 0 0 10px 0;
+        }
+
+        .achievement-pillar p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #b3b3b3;
+            margin: 0;
+        }
+
+        .tenure-metadata {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            font-family: 'Fira Code';
+            font-size: 0.65rem;
+            color: var(--brand-teal);
+            opacity: 0.6;
+            letter-spacing: 1px;
+        }
 
         /* COMMENDATIONS RESTORED SPARK [Requirement 4] */
-        .award-entry { 
-            background: linear-gradient(90deg, rgba(255, 105, 180, 0.08), transparent); 
-            border-left: 3px solid var(--brand-pink); padding: 35px; 
+        .award-entry {
+            background: linear-gradient(90deg, rgba(255, 105, 180, 0.08), transparent);
+            border-left: 3px solid var(--brand-pink);
+            padding: 35px;
             box-shadow: inset 10px 0 20px -10px rgba(255, 105, 180, 0.1);
         }
-        .highlight-pink { 
-            color: var(--brand-pink) !important; 
-            text-shadow: 0 0 10px rgba(255, 105, 180, 0.5); 
-            font-weight: 700; 
+
+        .highlight-pink {
+            color: var(--brand-pink) !important;
+            text-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
+            font-weight: 700;
             font-family: 'Fira Code';
             letter-spacing: 3px;
             margin-bottom: 15px;
         }
-        .award-quote { font-size: 1.1rem; font-style: italic; color: #eee; border-left: 2px solid var(--brand-pink); padding-left: 20px; margin-top: 20px; }
+
+        .award-quote {
+            font-size: 1.1rem;
+            font-style: italic;
+            color: #eee;
+            border-left: 2px solid var(--brand-pink);
+            padding-left: 20px;
+            margin-top: 20px;
+        }
 
         /* MATRIX & HUMAN GRIDS */
-        .matrix-grid, .human-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 40px; }
-        .matrix-sector h4, .element-title { font-family: 'Fira Code'; color: var(--brand-blue); font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 25px; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
-        .skill-gauge { margin-bottom: 20px; }
-        .gauge-label { font-family: 'Fira Code'; font-size: 0.65rem; color: #999; display: flex; justify-content: space-between; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
-        .gauge-label span { color: var(--brand-light-blue); }
-        .gauge-track { height: 4px; background: rgba(255, 255, 255, 0.05); border-radius: 2px; overflow: hidden; position: relative; }
-        .gauge-fill { height: 100%; background: var(--brand-blue); box-shadow: 0 0 10px var(--brand-blue); position: relative; animation: gaugeLoad 2s ease-out forwards; transform-origin: left; }
-        @keyframes gaugeLoad { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+        .matrix-grid,
+        .human-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
 
-        .element-card { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); padding: 25px; transition: border-color 0.4s ease; }
-        .element-card:hover { border-color: var(--brand-blue); }
-        .element-tags { display: flex; flex-wrap: wrap; gap: 10px; }
-        .human-tag { font-family: 'Inter'; font-size: 0.8rem; color: #fff; background: rgba(99, 149, 238, 0.1); padding: 5px 12px; border: 1px solid rgba(99, 149, 238, 0.2); font-weight: 300; transition: 0.3s; cursor: pointer; }
-        .human-tag:hover { background: var(--brand-blue); color: var(--bg-dark); }
-        .human-prose { font-size: 1.1rem; line-height: 1.8; color: #999; font-weight: 300; max-width: 800px; border-left: 2px solid var(--brand-blue); padding-left: 30px; margin-top: 40px; }
+        .matrix-sector h4,
+        .element-title {
+            font-family: 'Fira Code';
+            color: var(--brand-blue);
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 10px;
+        }
+
+        .skill-gauge {
+            margin-bottom: 20px;
+        }
+
+        .gauge-label {
+            font-family: 'Fira Code';
+            font-size: 0.65rem;
+            color: #999;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .gauge-label span {
+            color: var(--brand-light-blue);
+        }
+
+        .gauge-track {
+            height: 4px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 2px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .gauge-fill {
+            height: 100%;
+            background: var(--brand-blue);
+            box-shadow: 0 0 10px var(--brand-blue);
+            position: relative;
+            animation: gaugeLoad 2s ease-out forwards;
+            transform-origin: left;
+        }
+
+        @keyframes gaugeLoad {
+            from {
+                transform: scaleX(0);
+            }
+
+            to {
+                transform: scaleX(1);
+            }
+        }
+
+        .element-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            transition: border-color 0.4s ease;
+        }
+
+        .element-card:hover {
+            border-color: var(--brand-blue);
+        }
+
+        .element-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .human-tag {
+            font-family: 'Inter';
+            font-size: 0.8rem;
+            color: #fff;
+            background: rgba(99, 149, 238, 0.1);
+            padding: 5px 12px;
+            border: 1px solid rgba(99, 149, 238, 0.2);
+            font-weight: 300;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .human-tag:hover {
+            background: var(--brand-blue);
+            color: var(--bg-dark);
+        }
+
+        .human-prose {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #999;
+            font-weight: 300;
+            max-width: 800px;
+            border-left: 2px solid var(--brand-blue);
+            padding-left: 30px;
+            margin-top: 40px;
+        }
 
         /* CONTACT */
-        .comm-hub { background: var(--glass); border: 1px solid var(--border); padding: 40px; font-family: 'Fira Code'; font-size: 0.85rem; }
-        .comm-hub a { color: #fff; text-decoration: none; margin-left: 10px; transition: 0.3s; }
-        .comm-hub a:hover { color: var(--brand-blue); }
-        .hub-label { color: var(--brand-blue); display: inline-block; width: 100px; }
+        .comm-hub {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            padding: 40px;
+            font-family: 'Fira Code';
+            font-size: 0.85rem;
+        }
 
-        .sig-block { margin-top: 80px; text-align: right; }
-        .sig-img { max-width: 250px; filter: invert(1) brightness(2) contrast(150%); mix-blend-mode: screen; opacity: 0.8; }
+        .comm-hub a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 10px;
+            transition: 0.3s;
+        }
+
+        .comm-hub a:hover {
+            color: var(--brand-blue);
+        }
+
+        .hub-label {
+            color: var(--brand-blue);
+            display: inline-block;
+            width: 100px;
+        }
+
+        .sig-block {
+            margin-top: 80px;
+            text-align: right;
+        }
+
+        .sig-img {
+            max-width: 250px;
+            filter: invert(1) brightness(2) contrast(150%);
+            mix-blend-mode: screen;
+            opacity: 0.8;
+        }
 
         /* MOBILE FIXES [Requirement 3] */
         @media (max-width: 768px) {
-            nav { padding: 30px 20px; text-align: center; }
-            .hero { flex-direction: column; text-align: center; gap: 30px; padding: 20px 0; }
-            .exp-header { flex-direction: column; align-items: center; text-align: center; }
-            .section-label { flex-direction: column; align-items: center; gap: 10px; text-align: center; }
-            .section-label::after { display: none; }
-            .live-counter { margin: 10px 0 0 0; }
-            .exp-role { font-size: 1.4rem; }
-            .mission-box { padding: 25px; }
-            .mission-box p { font-size: 1.1rem; }
-            .achievement-grid, .matrix-grid, .human-grid { grid-template-columns: 1fr; }
-            .human-prose { padding-left: 20px; font-size: 1rem; }
-            .sig-block { text-align: center; }
+            nav {
+                padding: 30px 20px;
+                text-align: center;
+            }
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                gap: 30px;
+                padding: 20px 0;
+            }
+
+            .exp-header {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .section-label {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+                text-align: center;
+            }
+
+            .section-label::after {
+                display: none;
+            }
+
+            .live-counter {
+                margin: 10px 0 0 0;
+            }
+
+            .exp-role {
+                font-size: 1.4rem;
+            }
+
+            .mission-box {
+                padding: 25px;
+            }
+
+            .mission-box p {
+                font-size: 1.1rem;
+            }
+
+            .achievement-grid,
+            .matrix-grid,
+            .human-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .human-prose {
+                padding-left: 20px;
+                font-size: 1rem;
+            }
+
+            .sig-block {
+                text-align: center;
+            }
         }
     </style>
     <link rel="stylesheet" href="theme.css">
 </head>
+
 <body>
 
     <nav>
-        <a href="index.html"><img src="Images/Equal.svg" alt="Back" class="nav-logo"></a>
+        <a href="personal.html"><img src="Images/Equal.svg" alt="Back" class="nav-logo"></a>
     </nav>
 
     <div class="container">
-        
+
         <header class="hero">
             <div class="scanner-frame">
                 <div class="portrait"></div>
@@ -238,7 +600,9 @@
 
         <section class="mission-box">
             <h2>Core_Directive</h2>
-            <p>Architecting a vivid organizational future by bridging the gap between high-precision technology logistics and recognizable, youthful brand identity. Transforming complex operational frameworks into cultural landmarks that attract elite talent.</p>
+            <p>Architecting a vivid organizational future by bridging the gap between high-precision technology
+                logistics and recognizable, youthful brand identity. Transforming complex operational frameworks into
+                cultural landmarks that attract elite talent.</p>
         </section>
 
         <section id="experience">
@@ -254,24 +618,34 @@
                     </div>
                     <span class="exp-date">2014 — PRESENT</span>
                 </div>
-                
+
                 <div class="exp-body">
                     <p class="mission-statement">
-                        Responsible for the total convergence of <strong>Aesthetic Identity</strong> and <strong>Systemic Reliability</strong> for a premier behavioral health agency.
+                        Responsible for the total convergence of <strong>Aesthetic Identity</strong> and
+                        <strong>Systemic Reliability</strong> for a premier behavioral health agency.
                     </p>
 
                     <div class="achievement-grid">
                         <div class="achievement-pillar">
                             <h4>01 // THE_AESTHETIC_REVOLUTION</h4>
-                            <p>Architected a complete agency-wide brand metamorphosis. Transitioned the visual language from "legacy corporate" to a high-impact, modern brand mark that reflects the dignity of the families served. Every pixel, print, and physical space now resonates with a unified, professional frequency.</p>
+                            <p>Architected a complete agency-wide brand metamorphosis. Transitioned the visual language
+                                from "legacy corporate" to a high-impact, modern brand mark that reflects the dignity of
+                                the families served. Every pixel, print, and physical space now resonates with a
+                                unified, professional frequency.</p>
                         </div>
                         <div class="achievement-pillar">
                             <h4>02 // THE_DIGITAL_NERVOUS_SYSTEM</h4>
-                            <p>Orchestrating complex technology logistics for a <strong>500+ member workforce</strong>. Developed and deployed a robust telemedicine infrastructure that became the agency’s lifeline during global shifts, ensuring that clinical support for children and families never faced a "signal loss."</p>
+                            <p>Orchestrating complex technology logistics for a <strong>500+ member workforce</strong>.
+                                Developed and deployed a robust telemedicine infrastructure that became the agency’s
+                                lifeline during global shifts, ensuring that clinical support for children and families
+                                never faced a "signal loss."</p>
                         </div>
                         <div class="achievement-pillar">
                             <h4>03 // OPERATIONAL_STEWARDSHIP</h4>
-                            <p>Managing the full lifecycle of technological assets—from procurement to sunset. I oversee the network infrastructure and security protocols that safeguard sensitive clinical data, maintaining a <strong>99.9% uptime</strong> for critical systems across multiple regional hubs.</p>
+                            <p>Managing the full lifecycle of technological assets—from procurement to sunset. I oversee
+                                the network infrastructure and security protocols that safeguard sensitive clinical
+                                data, maintaining a <strong>99.9% uptime</strong> for critical systems across multiple
+                                regional hubs.</p>
                         </div>
                     </div>
 
@@ -293,7 +667,11 @@
                     <span class="exp-date">2009 — 2014</span>
                 </div>
                 <div class="exp-body">
-                    Orchestrated logistical launch protocols for the <strong>3rd Street Promenade flagship</strong>, managing high-volume inventory cycles during global product launches. Maintained a consistent <strong>99.85% inventory accuracy rate</strong> while overseeing the secure movement of high-value assets in a high-traffic environment. Facilitated regional operational workshops, mentoring and certifying inventory teams through the Southwest market to uphold global compliance standards.
+                    Orchestrated logistical launch protocols for the <strong>3rd Street Promenade flagship</strong>,
+                    managing high-volume inventory cycles during global product launches. Maintained a consistent
+                    <strong>99.85% inventory accuracy rate</strong> while overseeing the secure movement of high-value
+                    assets in a high-traffic environment. Facilitated regional operational workshops, mentoring and
+                    certifying inventory teams through the Southwest market to uphold global compliance standards.
                 </div>
             </div>
 
@@ -307,9 +685,14 @@
                     <span class="exp-date">2002 — 2008</span>
                 </div>
                 <div class="exp-body">
-                    Directed a 23-member elite response team, managing the daily deployment of <strong>40,000+ digital commerce units</strong>, including e-commerce orders, live chats, and sensitive customer data. 
+                    Directed a 23-member elite response team, managing the daily deployment of <strong>40,000+ digital
+                        commerce units</strong>, including e-commerce orders, live chats, and sensitive customer data.
                     <br><br>
-                    Partnered directly with the Webmaster and Marketing departments to optimize the E-Business interface, successfully transforming the support desk into a revenue engine. Orchestrated a sales-lead initiative through support channels that contributed <strong>5% of the total corporate sales goals</strong>. Rising from Specialist to Assist to Team Leader, I established the metrics for quality, accuracy, and in-the-moment coaching that defined the regional E-Care standard.
+                    Partnered directly with the Webmaster and Marketing departments to optimize the E-Business
+                    interface, successfully transforming the support desk into a revenue engine. Orchestrated a
+                    sales-lead initiative through support channels that contributed <strong>5% of the total corporate
+                        sales goals</strong>. Rising from Specialist to Assist to Team Leader, I established the metrics
+                    for quality, accuracy, and in-the-moment coaching that defined the regional E-Care standard.
                 </div>
             </div>
         </section>
@@ -319,10 +702,12 @@
             <div class="award-entry">
                 <div class="award-meta highlight-pink">SYSTEM_HONOR // MIKE TERKELTAUB AWARD // 2023</div>
                 <div class="exp-body">
-                    Recognized for embodying the <strong>"Whatever it Takes"</strong> spirit. Catalyst for technological evolution and organizational morale, ensuring teams have the tools required for excellence.
+                    Recognized for embodying the <strong>"Whatever it Takes"</strong> spirit. Catalyst for technological
+                    evolution and organizational morale, ensuring teams have the tools required for excellence.
                 </div>
                 <div class="award-quote">
-                    "RD is one of those people that just makes people’s lives better every day... he exudes <strong>going above and beyond.</strong>"
+                    "RD is one of those people that just makes people’s lives better every day... he exudes
+                    <strong>going above and beyond.</strong>"
                 </div>
             </div>
         </section>
@@ -334,15 +719,21 @@
                     <h4>Brand_Architecture</h4>
                     <div class="skill-gauge">
                         <div class="gauge-label">Identity Design & Aesthetics <span>95%</span></div>
-                        <div class="gauge-track"><div class="gauge-fill" style="width: 95%;"></div></div>
+                        <div class="gauge-track">
+                            <div class="gauge-fill" style="width: 95%;"></div>
+                        </div>
                     </div>
                     <div class="skill-gauge">
                         <div class="gauge-label">Narrative Strategy <span>90%</span></div>
-                        <div class="gauge-track"><div class="gauge-fill" style="width: 90%;"></div></div>
+                        <div class="gauge-track">
+                            <div class="gauge-fill" style="width: 90%;"></div>
+                        </div>
                     </div>
                     <div class="skill-gauge">
                         <div class="gauge-label">Cultural Landmark Positioning <span>85%</span></div>
-                        <div class="gauge-track"><div class="gauge-fill" style="width: 85%;"></div></div>
+                        <div class="gauge-track">
+                            <div class="gauge-fill" style="width: 85%;"></div>
+                        </div>
                     </div>
                 </div>
 
@@ -350,15 +741,21 @@
                     <h4>Logistics_Intelligence</h4>
                     <div class="skill-gauge">
                         <div class="gauge-label">Inventory Lifecycle (Apple Standards) <span>98%</span></div>
-                        <div class="gauge-track"><div class="gauge-fill" style="width: 98%;"></div></div>
+                        <div class="gauge-track">
+                            <div class="gauge-fill" style="width: 98%;"></div>
+                        </div>
                     </div>
                     <div class="skill-gauge">
                         <div class="gauge-label">Procurement & Asset Mgmt <span>92%</span></div>
-                        <div class="gauge-track"><div class="gauge-fill" style="width: 92%;"></div></div>
+                        <div class="gauge-track">
+                            <div class="gauge-fill" style="width: 92%;"></div>
+                        </div>
                     </div>
                     <div class="skill-gauge">
                         <div class="gauge-label">Operational Workflow Strategy <span>88%</span></div>
-                        <div class="gauge-track"><div class="gauge-fill" style="width: 88%;"></div></div>
+                        <div class="gauge-track">
+                            <div class="gauge-fill" style="width: 88%;"></div>
+                        </div>
                     </div>
                 </div>
 
@@ -366,15 +763,21 @@
                     <h4>Digital_Operations_Scale</h4>
                     <div class="skill-gauge">
                         <div class="gauge-label">Personnel Leadership (23+ Staff) <span>96%</span></div>
-                        <div class="gauge-track"><div class="gauge-fill" style="width: 96%;"></div></div>
+                        <div class="gauge-track">
+                            <div class="gauge-fill" style="width: 96%;"></div>
+                        </div>
                     </div>
                     <div class="skill-gauge">
                         <div class="gauge-label">High-Volume Commerce Mgmt (40k/Day) <span>98%</span></div>
-                        <div class="gauge-track"><div class="gauge-fill" style="width: 98%;"></div></div>
+                        <div class="gauge-track">
+                            <div class="gauge-fill" style="width: 98%;"></div>
+                        </div>
                     </div>
                     <div class="skill-gauge">
                         <div class="gauge-label">E-Commerce Conversion Strategy <span>90%</span></div>
-                        <div class="gauge-track"><div class="gauge-fill" style="width: 90%;"></div></div>
+                        <div class="gauge-track">
+                            <div class="gauge-fill" style="width: 90%;"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -391,7 +794,9 @@
                     <span class="exp-date">90+ CREDIT HOURS</span>
                 </div>
                 <div class="exp-body">
-                    Focused study in high-level management frameworks, organizational behavior, and strategic planning. Accumulated professional-tier credit volume focused on the mechanics of successful business operations.
+                    Focused study in high-level management frameworks, organizational behavior, and strategic planning.
+                    Accumulated professional-tier credit volume focused on the mechanics of successful business
+                    operations.
                 </div>
             </div>
         </section>
@@ -428,7 +833,12 @@
                 </div>
             </div>
             <div class="human-prose">
-                Outside the realm of of the cold and technical, my life is shaped by a connection to <strong>beauty, movement, and the sacred.</strong> Whether I'm tracing a clean line along a dusty Arizona trail, capturing the quiet magic of the everyday through a camera lens, or tending a home rooted in faith, the aim is always the same: to progress. I'm a student of the earth; desert and mountains, a father of seven, and someone who believes the most complex systems—at their core—are built to serve the indomitable human heart.   
+                Outside the realm of of the cold and technical, my life is shaped by a connection to <strong>beauty,
+                    movement, and the sacred.</strong> Whether I'm tracing a clean line along a dusty Arizona trail,
+                capturing the quiet magic of the everyday through a camera lens, or tending a home rooted in faith, the
+                aim is always the same: to progress. I'm a student of the earth; desert and mountains, a father of
+                seven, and someone who believes the most complex systems—at their core—are built to serve the
+                indomitable human heart.
             </div>
         </section>
 
@@ -445,7 +855,8 @@
                 </div>
                 <div>
                     <span class="hub-label">[ UPLINK ]</span>
-                    <a href="javascript:void(0)" onclick="window.print()" style="color: var(--brand-blue); font-weight: bold;">
+                    <a href="javascript:void(0)" onclick="window.print()"
+                        style="color: var(--brand-blue); font-weight: bold;">
                         Generate_Dossier_PDF.exe
                     </a>
                 </div>
@@ -485,7 +896,7 @@
 
             const pad = (n) => n.toString().padStart(2, '0');
             const clockStr = `[ TIME_ELAPSED // ${pad(years)}Y:${pad(months)}M:${pad(days)}D:${pad(hours)}H:${pad(minutes)}M:${pad(seconds)}S ]`;
-            
+
             const clockTarget = document.getElementById('tenure-clock');
             if (clockTarget) {
                 clockTarget.textContent = clockStr;
@@ -499,4 +910,5 @@
         });
     </script>
 </body>
+
 </html>

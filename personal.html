@@ -103,10 +103,10 @@
 
         .top-quadrant-text {
             margin: 0;
-            font-size: 2rem;
+            font-size: 2.0rem;
             font-weight: 900;
             letter-spacing: 5px;
-            line-height: 1.2;
+            line-height: 1.4;
             text-transform: uppercase;
             background: linear-gradient(to bottom, #fff 10%, #666 90%);
             -webkit-background-clip: text;
@@ -514,6 +514,42 @@
             transition: border-color 0.4s ease;
         }
 
+        /* 1. THE DESCRIPTION (CRISP & CENTERED) */
+        .provisions-meta {
+            text-align: center;
+            padding: 25px 20px;
+            /* Gives the text room from the image and the button */
+            font-family: 'Fira Code', monospace;
+            font-size: 0.65rem;
+            /* Explicitly small */
+            line-height: 1.8;
+            color: var(--brand-teal);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: rgba(5, 5, 5, 0.2);
+            /* Subtle separation from the card background */
+        }
+
+        /* 2. THE BUY BUTTON (ISOLATED) */
+        .buy-btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+            background: var(--brand-blue);
+            color: var(--bg-dark);
+            text-decoration: none;
+            font-family: 'Fira Code', monospace;
+            font-size: 1.1rem;
+            /* Adjust this here; it won't affect the meta anymore */
+            font-weight: 700;
+            padding: 16px;
+            border: none;
+            letter-spacing: 3px;
+            transition: 0.3s;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
         .provisions-display {
             position: relative;
             height: 350px;
@@ -566,22 +602,6 @@
             color: #000;
         }
 
-        .buy-btn {
-            display: block;
-            width: 100%;
-            text-align: center;
-            background: var(--brand-blue);
-            color: var(--bg-dark);
-            text-decoration: none;
-            font-family: 'Fira Code', monospace;
-            font-size: 1.2rem;
-            font-weight: 700;
-            padding: 12px;
-            border: none;
-            letter-spacing: 2px;
-            transition: 0.3s;
-            cursor: pointer;
-        }
 
         .buy-btn:hover {
             background: #fff;
@@ -796,32 +816,30 @@
 
             <a href="residue_archive.html" class="archive-card amethyst-card">
                 <div class="card-beacon"></div>
-                <h3>THE MATRIX</h3>
+                <h3>THE NEW ARCHIVE</h3>
                 <p>Modern Narrative Archive // 2026 - Present</p>
             </a>
 
             <a href="wayback.html" class="archive-card teal-card">
                 <div class="card-beacon"></div>
-                <h3>The Locked Past</h3>
+                <h3>The Static Past</h3>
                 <p>Historical residue from 2001 to 2025.</p>
             </a>
-
-            <a href="resume.html" class="archive-card dossier-card">
-                <div class="card-beacon"></div>
-                <h3>The Resume</h3>
-                <p>Professional history</p>
-            </a>
-
             <a href="flotsam.html" class="archive-card teal-card">
                 <div class="card-beacon"></div>
                 <h3>The Flotsam</h3>
                 <p>Visual depot and verbal residue.</p>
             </a>
+            <a href="resume.html" class="archive-card dossier-card">
+                <div class="card-beacon"></div>
+                <h3>The Resume</h3>
+                <p>Professional history // Inquires</p>
+            </a>
 
             <a href="transform_gate.html" class="archive-card amethyst-card">
                 <div class="card-beacon"></div>
-                <h3>The Transition</h3>
-                <p>Internal struggle of fundamental identity.</p>
+                <h3>The Transform</h3>
+                <p>Spiritual Truth // fundamental identity.</p>
             </a>
             <div class="column-label">02 // WHAT I LISTEN TO</div>
             <div class="podcast-widget">
@@ -847,11 +865,11 @@
                         <button class="toggle-btn" onclick="toggleShirt()">VIEW FRONT/BACK</button>
                     </div>
                 </div>
-                <div class="provisions-info">
-                    <h3>THE_OTW_LIMITED_ISSUE</h3>
-                    <p>Premium Black Cotton // Screen-Printed // Boutique Release // Color may vary</p>
-                    <button onclick="openProvisionsForm()" class="buy-btn">BUY_NOW // $29</button>
+                <div class="provisions-meta">
+                    THE_OTW_LIMITED_ISSUE<br>
+                    Premium Black Cotton // Screen-Printed // Boutique Release // Color may vary
                 </div>
+                <button onclick="openProvisionsForm()" class="buy-btn">BUY_NOW // $29</button>
             </div>
         </aside>
     </main>
@@ -862,11 +880,18 @@
                 <span class="column-label">PROVISIONS_REQUEST_PROTOCOL</span>
                 <button onclick="closeProvisionsForm()" class="close-x">[X]</button>
             </div>
+
             <form action="https://formspree.io/f/xgolrnkb" method="POST" class="provisions-form">
                 <div class="form-row">
                     <input type="text" name="name" placeholder="FULL NAME" required>
                     <input type="email" name="_replyto" placeholder="YOUR EMAIL" required>
                 </div>
+
+                <div class="form-row">
+                    <input type="text" name="venmo" placeholder="VENMO @HANDLE (FOR INVOICING)" required
+                        style="width: 100%;">
+                </div>
+
                 <div class="form-row">
                     <select name="size" required>
                         <option value="" disabled selected>SELECT_SIZE</option>
@@ -878,8 +903,11 @@
                     </select>
                     <input type="number" name="quantity" placeholder="QTY" min="1" value="1">
                 </div>
+
                 <textarea name="address" placeholder="SHIPPING ADDRESS" required></textarea>
-                <button type="submit" class="buy-btn">SUBMIT_REQUEST</button>
+
+                <button type="submit" id="submit-btn" class="buy-btn">SUBMIT_REQUEST</button>
+                <input type="hidden" name="_subject" value="NEW_OTW_SHIRT_ORDER">
             </form>
         </div>
     </div>
@@ -972,6 +1000,59 @@
             syncLatestPost();
             fetchWeather();
         };
+        const provisionsForm = document.querySelector('.provisions-form');
+
+        if (provisionsForm) {
+            provisionsForm.onsubmit = async (e) => {
+                e.preventDefault(); // This is the "No Redirect" kill-switch
+
+                const btn = document.getElementById('submit-btn');
+                const originalText = btn.innerText;
+
+                // 1. Enter "Transmitting" Mode
+                btn.innerText = "TRANSMITTING_UPLINK...";
+                btn.disabled = true;
+                btn.style.opacity = "0.7";
+
+                const formData = new FormData(provisionsForm);
+
+                try {
+                    const response = await fetch(provisionsForm.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: { 'Accept': 'application/json' }
+                    });
+
+                    if (response.ok) {
+                        // 2. The Success Signal
+                        btn.innerText = "REQUEST_TRANSMITTED";
+                        btn.style.background = "var(--brand-teal)"; // The color of the Archive
+                        btn.style.color = "var(--bg-dark)";
+                        btn.style.opacity = "1";
+
+                        // Keep the success message visible for 3 seconds so they can read it
+                        setTimeout(() => {
+                            closeProvisionsForm();
+                            provisionsForm.reset();
+
+                            // Reset the button for the next customer
+                            btn.innerText = originalText;
+                            btn.disabled = false;
+                            btn.style.background = "";
+                            btn.style.color = "";
+                        }, 3000);
+                    } else {
+                        // Handle server errors
+                        btn.innerText = "SIGNAL_INTERRUPTED";
+                        btn.disabled = false;
+                    }
+                } catch (error) {
+                    // Handle connection/network errors
+                    btn.innerText = "UPLINK_TIMEOUT";
+                    btn.disabled = false;
+                }
+            };
+        }
     </script>
 </body>
 
