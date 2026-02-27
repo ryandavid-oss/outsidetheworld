@@ -761,6 +761,25 @@
             transition: 0.3s;
         }
 
+        .form-disclaimer {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.55rem;
+            color: rgba(145, 175, 179, 0.4);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-align: center;
+            margin-top: 15px;
+            line-height: 1.4;
+            border-top: 1px solid rgba(145, 175, 179, 0.1);
+            padding-top: 15px;
+        }
+
+        .disclaimer-alert {
+            color: var(--brand-teal);
+            display: block;
+            margin-bottom: 5px;
+        }
+
         /* 8. MOBILE REFINEMENTS */
         /* 8. CONSOLIDATED MOBILE REFINEMENTS */
         @media (max-width: 1024px) {
@@ -968,7 +987,12 @@
                 <textarea name="address" placeholder="SHIPPING ADDRESS" rows="3" required
                     style="margin-bottom: 20px;"></textarea>
 
-                <button type="submit" id="submit-btn" class="buy-btn">SUBMIT REQUEST</button>
+                <button type="submit" id="submit-btn" class="buy-btn">SUBMIT ORDER</button>
+                <div class="form-disclaimer">
+                    <span class="disclaimer-alert">[!_SECURITY_ADVISORY_!]</span>
+                    PROVISIONS_UPLINK IS NOT ENCRYPTED FOR FINANCIAL DATA.<br>
+                    DO NOT TRANSMIT CREDIT CARD OR SENSITIVE IDENTITY INFO.
+                </div>
             </form>
         </div>
     </div>
