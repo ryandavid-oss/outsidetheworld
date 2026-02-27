@@ -108,12 +108,13 @@
             transform: scale(1.05);
         }
 
-        /* MODAL TYPOGRAPHY FIX (Preventing "Crazy Big" words) */
+        /* MODAL RECLAMATION: LEGIBILITY & DEPTH */
         #modal {
             position: fixed;
             inset: 0;
             z-index: 4000;
-            background: rgba(0, 0, 0, 0.95);
+            /* Darker background to kill grid "noise" behind the pop-up */
+            background: rgba(0, 0, 0, 0.98);
             display: none;
             overflow-y: auto;
             opacity: 0;
@@ -132,32 +133,40 @@
             text-align: center;
         }
 
-        /* Scaled down title for the modal */
-        .modal-content h1 {
-            font-size: 2rem !important;
-            letter-spacing: 8px;
-            margin-bottom: 10px;
-        }
-
-        .modal-content h2 {
-            font-family: 'Fira Code', monospace;
-            font-size: 0.8rem;
-            color: #91AFB3;
-            letter-spacing: 4px;
-            margin-bottom: 40px;
-        }
-
+        /* THE MARKDOWN FIX: Restoring the paragraph breaks */
         .modal-content .markdown {
             text-align: left;
             line-height: 1.8;
             color: #ccc;
         }
 
+        .modal-content .markdown p {
+            /* Forces space between paragraphs */
+            margin-bottom: 25px;
+            display: block;
+        }
+
         .modal-content .markdown img {
             max-width: 100%;
             border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-            margin-bottom: 30px;
+            margin: 20px 0 40px 0;
+        }
+
+        /* Standardizes headers within the markdown file */
+        .modal-content .markdown h1 {
+            font-size: 2rem !important;
+            letter-spacing: 8px;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .modal-content .markdown h2 {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.8rem;
+            color: #91AFB3;
+            letter-spacing: 4px;
+            margin-bottom: 40px;
         }
 
         /* MOBILE */
@@ -241,19 +250,21 @@
             const inner = document.getElementById('modal-inner');
             const backdrop = document.getElementById('modal-backdrop');
 
-            // Setup background
             backdrop.style.backgroundImage = `url(${item.image})`;
-
-            // CLEAN INJECTION: No duplicate images
-            inner.innerHTML = `<p style="font-family:monospace; color:#91AFB3;">[ LOADING_FILE... ]</p>`;
+            inner.innerHTML = `<p style="font-family:monospace; color:#91AFB3; margin-top:100px;">[ LOADING_FILE... ]</p>`;
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
 
-            const res = await fetch(item.file);
-            const md = await res.text();
+            try {
+                const res = await fetch(item.file);
+                const md = await res.text();
 
-            // We let the Markdown handle the image and title
-            inner.innerHTML = `<div class="markdown">${marked.parse(md)}</div>`;
+                // Ensure marked preserves line breaks
+                const htmlContent = marked.parse(md, { breaks: true });
+                inner.innerHTML = `<div class="markdown">${htmlContent}</div>`;
+            } catch (e) {
+                inner.innerHTML = `<p style="color:red;">[ ERROR: FILE_UNREADABLE ]</p>`;
+            }
         }
 
         function closeModal() {
