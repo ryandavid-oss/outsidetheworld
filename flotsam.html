@@ -223,21 +223,17 @@
             /* 1. RESET THE GLOBAL NAV PADDING FOR FLOTSAM */
             .hero-logo-container {
                 padding: 0 !important;
-                /* Removes the 50px gap from the global script */
                 width: auto;
             }
 
             nav {
                 padding: 20px 0;
-                /* Tightens the top bar */
                 display: flex;
                 justify-content: center;
-                /* Centers the logo within the nav */
             }
 
             .nav-logo {
                 width: 80vw !important;
-                /* Forces your 80% rule */
                 max-width: 320px;
                 margin: 0 auto;
             }
@@ -245,10 +241,8 @@
             /* 2. KILL THE GAP */
             .hero {
                 height: auto;
-                /* Removes the 40vh empty space */
                 min-height: 200px;
                 padding-top: 140px;
-                /* Carefully calculated to sit below the logo */
                 justify-content: center;
             }
 
@@ -257,16 +251,19 @@
                 letter-spacing: 8px;
                 margin-bottom: 10px;
             }
+
+            /* 3. MOBILE GRID OVERRIDES (NOW INSIDE THE MEDIA QUERY) */
+            .archive-list {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+
+            .archive-item {
+                padding: 40px 30px;
+            }
         }
 
-        .archive-list {
-            grid-template-columns: 1fr;
-            padding: 20px;
-        }
-
-        .archive-item {
-            padding: 40px 30px;
-        }
+        /* <--- THE BRACE NOW CORRECTLY CLOSES THE ENTIRE MOBILE BLOCK */
     </style>
     <link href="theme.css" rel="stylesheet" />
     <meta content="#0a0a0a" name="theme-color" />
