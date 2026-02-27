@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
-  <title>
-   Flotsam | Outside The World
-  </title>
-  <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
-  <style>
-   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;900&family=Fira+Code:wght@300;500&display=swap');
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport" />
+    <title>
+        Flotsam | Outside The World
+    </title>
+    <link href="favicon.svg" rel="icon" type="image/svg+xml" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;900&family=Fira+Code:wght@300;500&display=swap');
 
         :root {
             --brand-blue: var(--brand-blue);
@@ -218,151 +219,174 @@
         }
 
         @media (max-width: 768px) {
+
+            /* 1. RESET THE GLOBAL NAV PADDING FOR FLOTSAM */
+            .hero-logo-container {
+                padding: 0 !important;
+                /* Removes the 50px gap from the global script */
+                width: auto;
+            }
+
             nav {
-                padding: 20px;
+                padding: 20px 0;
+                /* Tightens the top bar */
+                display: flex;
+                justify-content: center;
+                /* Centers the logo within the nav */
             }
 
             .nav-logo {
-                width: 140px;
+                width: 80vw !important;
+                /* Forces your 80% rule */
+                max-width: 320px;
+                margin: 0 auto;
             }
 
+            /* 2. KILL THE GAP */
             .hero {
-                height: 40vh;
-                padding-top: 100px;
+                height: auto;
+                /* Removes the 40vh empty space */
+                min-height: 200px;
+                padding-top: 140px;
+                /* Carefully calculated to sit below the logo */
+                justify-content: center;
             }
 
             h1 {
                 font-size: 2.8rem;
                 letter-spacing: 8px;
-            }
-
-            .archive-list {
-                grid-template-columns: 1fr;
-                padding: 20px;
-            }
-
-            .archive-item {
-                padding: 40px 30px;
+                margin-bottom: 10px;
             }
         }
-  </style>
-  <link href="theme.css" rel="stylesheet"/>
-  <meta content="#0a0a0a" name="theme-color"/>
-  <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
-  <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
- </head>
- <body>
-  <div id="cursor-ring">
-  </div>
-  <div id="cursor-dot">
-  </div>
-  <nav>
-   <a href="personal.html">
-    <div class="hero-logo-container">
-     <img alt="Back" class="nav-logo hero-logo" src="Images/Equal.svg"/>
+
+        .archive-list {
+            grid-template-columns: 1fr;
+            padding: 20px;
+        }
+
+        .archive-item {
+            padding: 40px 30px;
+        }
+    </style>
+    <link href="theme.css" rel="stylesheet" />
+    <meta content="#0a0a0a" name="theme-color" />
+    <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport" />
+</head>
+
+<body>
+    <div id="cursor-ring">
     </div>
-   </a>
-  </nav>
-  <div class="hero">
-   <h1 id="hero-title">
-    Flotsam
-   </h1>
-   <div class="typing-container">
-    <span id="typing-text">
-    </span>
-    <span id="cursor" style="display:inline-block; width:8px; height:12px; background:var(--brand-teal); margin-left:5px; animation:blink 1s infinite;">
-    </span>
-   </div>
-  </div>
-  <div class="archive-list">
-   <a class="archive-item" href="mac30.html">
-    <span class="status-tag">
-     TYPE: ANNIVERSARY_AUDIT
-    </span>
-    <div class="card-beacon">
+    <div id="cursor-dot">
     </div>
-    <span class="archive-name">
-     1 Infinite Loop
-    </span>
-    <span class="archive-desc">
-     Commemorating the remarkable people and product launches of the Mac 30th
+    <nav>
+        <a href="personal.html" style="display: block; width: 100%;">
+            <div class="hero-logo-container">
+                <img alt="Back" class="nav-logo hero-logo" src="Images/Equal.svg" />
+            </div>
+        </a>
+    </nav>
+    <div class="hero">
+        <h1 id="hero-title">
+            Flotsam
+        </h1>
+        <div class="typing-container">
+            <span id="typing-text">
+            </span>
+            <span id="cursor"
+                style="display:inline-block; width:8px; height:12px; background:var(--brand-teal); margin-left:5px; animation:blink 1s infinite;">
+            </span>
+        </div>
+    </div>
+    <div class="archive-list">
+        <a class="archive-item" href="mac30.html">
+            <span class="status-tag">
+                TYPE: ANNIVERSARY_AUDIT
+            </span>
+            <div class="card-beacon">
+            </div>
+            <span class="archive-name">
+                1 Infinite Loop
+            </span>
+            <span class="archive-desc">
+                Commemorating the remarkable people and product launches of the Mac 30th
                 Anniversary era.
-    </span>
-   </a>
-   <a class="archive-item" href="hipsta.html">
-    <span class="status-tag">
-     TYPE: VISUAL_RECLAMATION
-    </span>
-    <div class="card-beacon">
-    </div>
-    <span class="archive-name">
-     Hipsta Project
-    </span>
-    <span class="archive-desc">
-     Visual vanguard of the estate's early mobile photography era (2011-2012).
-    </span>
-   </a>
-   <a class="archive-item" href="favorites.html">
-    <span class="status-tag">
-     TYPE: OBJECT_CURATION
-    </span>
-    <div class="card-beacon">
-    </div>
-    <span class="archive-name">
-     Favorites List
-    </span>
-    <span class="archive-desc">
-     A curated audit of objects, media, and essentials from the 2011 cycle.
-    </span>
-   </a>
-   <a class="archive-item" href="insta.html">
-    <span class="status-tag">
-     TYPE: SOCIAL_RESIDUE
-    </span>
-    <div class="card-beacon">
-    </div>
-    <span class="archive-name">
-     Instagram Estate
-    </span>
-    <span class="archive-desc">
-     Reclaimed narratives and digital byproduct from the discontinued 2012-2023
+            </span>
+        </a>
+        <a class="archive-item" href="hipsta.html">
+            <span class="status-tag">
+                TYPE: VISUAL_RECLAMATION
+            </span>
+            <div class="card-beacon">
+            </div>
+            <span class="archive-name">
+                Hipsta Project
+            </span>
+            <span class="archive-desc">
+                Visual vanguard of the estate's early mobile photography era (2011-2012).
+            </span>
+        </a>
+        <a class="archive-item" href="favorites.html">
+            <span class="status-tag">
+                TYPE: OBJECT_CURATION
+            </span>
+            <div class="card-beacon">
+            </div>
+            <span class="archive-name">
+                Favorites List
+            </span>
+            <span class="archive-desc">
+                A curated audit of objects, media, and essentials from the 2011 cycle.
+            </span>
+        </a>
+        <a class="archive-item" href="insta.html">
+            <span class="status-tag">
+                TYPE: SOCIAL_RESIDUE
+            </span>
+            <div class="card-beacon">
+            </div>
+            <span class="archive-name">
+                Instagram Estate
+            </span>
+            <span class="archive-desc">
+                Reclaimed narratives and digital byproduct from the discontinued 2012-2023
                 cycle.
-    </span>
-   </a>
-   <a class="archive-item" href="flotsam_test.html">
-    <span class="status-tag">
-     TYPE: CODE_ARCHAEOLOGY
-    </span>
-    <div class="card-beacon">
-    </div>
-    <span class="archive-name">
-     The Museum
-    </span>
-    <span class="archive-desc">
-     A collection of recovered index pages and site fragments dating back to
+            </span>
+        </a>
+        <a class="archive-item" href="flotsam_test.html">
+            <span class="status-tag">
+                TYPE: CODE_ARCHAEOLOGY
+            </span>
+            <div class="card-beacon">
+            </div>
+            <span class="archive-name">
+                The Museum
+            </span>
+            <span class="archive-desc">
+                A collection of recovered index pages and site fragments dating back to
                 2002.
-    </span>
-   </a>
-   <a class="archive-item" href="poetry.html">
-    <span class="status-tag">
-     TYPE: LYRIC_RECLAMATION
-    </span>
-    <div class="card-beacon">
-    </div>
-    <span class="archive-name">
-     Kavya Archive
-    </span>
-    <span class="archive-desc">
-     A collection of rhythmic fragments and verse recovered from the estate's early
+            </span>
+        </a>
+        <a class="archive-item" href="poetry.html">
+            <span class="status-tag">
+                TYPE: LYRIC_RECLAMATION
+            </span>
+            <div class="card-beacon">
+            </div>
+            <span class="archive-name">
+                Kavya Archive
+            </span>
+            <span class="archive-desc">
+                A collection of rhythmic fragments and verse recovered from the estate's early
                 literary cycles.
-    </span>
-   </a>
-  </div>
-  <a class="footer-link" href="index.html">
-   EXIT_TO_ENTRANCE
-  </a>
-  <script>
-   const text = "INITIALIZING_DEPOT_SCAN... [COMPLETE]";
+            </span>
+        </a>
+    </div>
+    <a class="footer-link" href="index.html">
+        EXIT_TO_ENTRANCE
+    </a>
+    <script>
+        const text = "INITIALIZING_DEPOT_SCAN... [COMPLETE]";
         const target = document.getElementById('typing-text');
         let i = 0;
         function typeWriter() {
@@ -373,6 +397,7 @@
             }
         }
         window.onload = () => { setTimeout(typeWriter, 800); };
-  </script>
- </body>
+    </script>
+</body>
+
 </html>
