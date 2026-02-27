@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
-  <meta content="var(--bg-dark)" name="theme-color"/>
-  <meta content="yes" name="mobile-web-app-capable"/>
-  <meta content="yes" name="apple-mobile-web-app-capable"/>
-  <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
-  <title>
-   OTW Feed | Outside The World
-  </title>
-  <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
-  <style>
-   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Fira+Code:wght@300;500;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap');
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+    <meta name="theme-color" content="var(--bg-dark)">
+
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <title>OTW Feed | Outside The World</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Fira+Code:wght@300;500;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap');
 
         :root {
             --brand-blue: var(--brand-blue);
@@ -848,224 +850,159 @@
                 /* Disable slide-right on mobile to prevent overflow */
             }
         }
-  </style>
-  <link href="theme.css" rel="stylesheet"/>
- </head>
- <body>
-  <div id="cursor-ring">
-  </div>
-  <div id="cursor-dot">
-  </div>
-  <header class="interface-header">
-   <div class="header-content-inner">
-    <a href="index.html">
-     <div class="hero-logo-container">
-      <img alt="Back" class="nav-logo hero-logo" src="Images/Equal.svg"/>
-     </div>
-    </a>
-    <div class="header-right">
-     <div class="weather-uplink" id="system-clock">
-      SYSTEM_TIME // --:--:--
-     </div>
-     <h1 class="top-quadrant-text">
-      A QUARTER-CENTURY OF DIGITAL RESIDUE
-     </h1>
+    </style>
+    <link rel="stylesheet" href="theme.css">
+</head>
+
+<body>
+
+    <header class="interface-header">
+        <div class="header-content-inner">
+            <a href="index.html"><img src="Images/Equal.svg" alt="Back" class="nav-logo"></a>
+            <div class="header-right">
+                <div class="weather-uplink" id="system-clock">SYSTEM_TIME // --:--:--</div>
+                <h1 class="top-quadrant-text">A QUARTER-CENTURY OF DIGITAL RESIDUE</h1>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-interface">
+        <section class="feed-column">
+            <div class="typing-container">
+                <span id="typing-text">INITIALIZING_HANDSHAKE...</span><span class="cursor"></span>
+            </div>
+
+            <div id="latest-post-area">
+                <p style="color: #444; letter-spacing: 2px;">POLLING SATELLITE DATA...</p>
+            </div>
+        </section>
+
+        <div class="vertical-divider"></div>
+
+        <aside class="cards-column">
+
+            <div class="column-label">01 // SUB_SECTIONS</div>
+
+            <a href="emmy.html" class="archive-card sacred-card">
+                <div class="card-beacon"></div>
+                <h3>THE WARM BREEZE</h3>
+                <p>Sun. Moon. Stars. The Core Sanctuary.</p>
+            </a>
+
+            <a href="residue_archive.html" class="archive-card amethyst-card">
+                <div class="card-beacon"></div>
+                <h3>THE NEW ARCHIVE</h3>
+                <p>Modern Narrative Archive // 2026 - Present</p>
+            </a>
+
+            <a href="wayback.html" class="archive-card teal-card">
+                <div class="card-beacon"></div>
+                <h3>The Static Past</h3>
+                <p>Historical residue from 2001 to 2025.</p>
+            </a>
+            <a href="flotsam.html" class="archive-card teal-card">
+                <div class="card-beacon"></div>
+                <h3>The Flotsam</h3>
+                <p>Visual depot and verbal residue.</p>
+            </a>
+            <a href="resume.html" class="archive-card dossier-card">
+                <div class="card-beacon"></div>
+                <h3>The Resume</h3>
+                <p>Professional history // Inquires</p>
+            </a>
+
+            <a href="transform_gate.html" class="archive-card amethyst-card">
+                <div class="card-beacon"></div>
+                <h3>The Transform</h3>
+                <p>Spiritual Truth // fundamental identity.</p>
+            </a>
+            <div class="column-label">02 // LIVE_LISTENING_SIGNAL</div>
+            <div class="podcast-widget" id="listening-feed"
+                style="transition: 0.5s; border: 1px solid rgba(145, 175, 179, 0.1);">
+                <div class="podcast-item" style="margin-bottom: 0;">
+                    <div class="podcast-icon" id="signal-status">📡</div>
+                    <div class="podcast-info">
+                        <span id="current-track" style="color: #fff; text-transform: uppercase;">SYNCHRONIZING...</span>
+                        <label id="current-artist"
+                            style="color: var(--brand-teal); font-size: 0.55rem; letter-spacing: 2px;">ESTABLISHING_UPLINK</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="column-label">03 // PROVISIONS_UPLINK</div>
+            <div class="provisions-card">
+                <div class="provisions-display">
+                    <img src="Images/OTW_Shirt_Front.png" alt="OTW Shirt" class="shirt-render" id="shirt-img">
+                    <div class="provisions-overlay">
+                        <button class="toggle-btn" onclick="toggleShirt()">VIEW FRONT/BACK</button>
+                    </div>
+                </div>
+                <div class="provisions-meta">
+                    THE_OTW_LIMITED_ISSUE<br>
+                    Premium Black Cotton // Screen-Printed // Boutique Release // Color may vary
+                </div>
+                <button onclick="openProvisionsForm()" class="buy-btn">BUY_NOW // $24</button>
+            </div>
+        </aside>
+    </main>
+
+    <div id="provisions-overlay" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="column-label">T-SHIRT_REQUEST_PROTOCOL</span>
+                <button onclick="closeProvisionsForm()" class="close-x">[X]</button>
+            </div>
+
+            <form action="https://formspree.io/f/xgolrnkb" method="POST" class="provisions-form">
+                <input type="hidden" name="_subject" value="NEW_OTW_SHIRT_ORDER">
+
+                <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                    <input type="text" name="name" placeholder="FULL NAME" required>
+                    <input type="email" name="_replyto" placeholder="YOUR EMAIL" required>
+                </div>
+
+                <div style="margin-bottom: 10px; position: relative;">
+                    <input type="text" id="venmo-input" name="venmo" placeholder="VENMO @HANDLE (FOR INVOICING)"
+                        required pattern="^@.*" oninput="validateVenmo(this)">
+                    <div id="venmo-status"
+                        style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); font-family: 'Fira Code'; font-size: 0.5rem; color: rgba(145, 175, 179, 0.3); pointer-events: none; transition: 0.3s;">
+                        WAITING_FOR_UPLINK</div>
+                </div>
+
+                <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                    <select name="size" required style="flex: 2;">
+                        <option value="" disabled selected>SELECT_SIZE</option>
+                        <option value="S">SMALL</option>
+                        <option value="M">MEDIUM</option>
+                        <option value="L">LARGE</option>
+                        <option value="XL">X-LARGE</option>
+                        <option value="2XL">2X-LARGE</option>
+                    </select>
+                    <input type="number" name="quantity" placeholder="QTY" min="1" value="1" style="flex: 1;">
+                </div>
+
+                <textarea name="address" placeholder="SHIPPING ADDRESS" rows="3" required
+                    style="margin-bottom: 20px;"></textarea>
+
+                <button type="submit" id="submit-btn" class="buy-btn">SUBMIT ORDER</button>
+                <div class="form-disclaimer">
+                    <span class="disclaimer-alert">[!_SECURITY_ADVISORY_!]</span>
+                    PROVISIONS_UPLINK IS NOT ENCRYPTED FOR FINANCIAL DATA.<br>
+                    DO NOT TRANSMIT CREDIT CARD OR SENSITIVE IDENTITY INFO.
+                </div>
+            </form>
+        </div>
     </div>
-   </div>
-  </header>
-  <main class="main-interface">
-   <section class="feed-column">
-    <div class="typing-container">
-     <span id="typing-text">
-      INITIALIZING_HANDSHAKE...
-     </span>
-     <span class="cursor">
-     </span>
-    </div>
-    <div id="latest-post-area">
-     <p style="color: #444; letter-spacing: 2px;">
-      POLLING SATELLITE DATA...
-     </p>
-    </div>
-   </section>
-   <div class="vertical-divider">
-   </div>
-   <aside class="cards-column">
-    <div class="column-label">
-     01 // SUB_SECTIONS
-    </div>
-    <a class="archive-card sacred-card" href="emmy.html">
-     <div class="card-beacon">
-     </div>
-     <h3>
-      THE WARM BREEZE
-     </h3>
-     <p>
-      Sun. Moon. Stars. The Core Sanctuary.
-     </p>
-    </a>
-    <a class="archive-card amethyst-card" href="residue_archive.html">
-     <div class="card-beacon">
-     </div>
-     <h3>
-      THE NEW ARCHIVE
-     </h3>
-     <p>
-      Modern Narrative Archive // 2026 - Present
-     </p>
-    </a>
-    <a class="archive-card teal-card" href="wayback.html">
-     <div class="card-beacon">
-     </div>
-     <h3>
-      The Static Past
-     </h3>
-     <p>
-      Historical residue from 2001 to 2025.
-     </p>
-    </a>
-    <a class="archive-card teal-card" href="flotsam.html">
-     <div class="card-beacon">
-     </div>
-     <h3>
-      The Flotsam
-     </h3>
-     <p>
-      Visual depot and verbal residue.
-     </p>
-    </a>
-    <a class="archive-card dossier-card" href="resume.html">
-     <div class="card-beacon">
-     </div>
-     <h3>
-      The Resume
-     </h3>
-     <p>
-      Professional history // Inquires
-     </p>
-    </a>
-    <a class="archive-card amethyst-card" href="transform_gate.html">
-     <div class="card-beacon">
-     </div>
-     <h3>
-      The Transform
-     </h3>
-     <p>
-      Spiritual Truth // fundamental identity.
-     </p>
-    </a>
-    <div class="column-label">
-     02 // LIVE_LISTENING_SIGNAL
-    </div>
-    <div class="podcast-widget" id="listening-feed" style="transition: 0.5s; border: 1px solid rgba(145, 175, 179, 0.1);">
-     <div class="podcast-item" style="margin-bottom: 0;">
-      <div class="podcast-icon" id="signal-status">
-       📡
-      </div>
-      <div class="podcast-info">
-       <span id="current-track" style="color: #fff; text-transform: uppercase;">
-        SYNCHRONIZING...
-       </span>
-       <label id="current-artist" style="color: var(--brand-teal); font-size: 0.55rem; letter-spacing: 2px;">
-        ESTABLISHING_UPLINK
-       </label>
-      </div>
-     </div>
-    </div>
-    <div class="column-label">
-     03 // PROVISIONS_UPLINK
-    </div>
-    <div class="provisions-card">
-     <div class="provisions-display">
-      <img alt="OTW Shirt" class="shirt-render" id="shirt-img" src="Images/OTW_Shirt_Front.png"/>
-      <div class="provisions-overlay">
-       <button class="toggle-btn" onclick="toggleShirt()">
-        VIEW FRONT/BACK
-       </button>
-      </div>
-     </div>
-     <div class="provisions-meta">
-      THE_OTW_LIMITED_ISSUE
-      <br/>
-      Premium Black Cotton // Screen-Printed // Boutique Release // Color may vary
-     </div>
-     <button class="buy-btn" onclick="openProvisionsForm()">
-      BUY_NOW // $29
-     </button>
-    </div>
-   </aside>
-  </main>
-  <div class="modal-overlay" id="provisions-overlay">
-   <div class="modal-content">
-    <div class="modal-header">
-     <span class="column-label">
-      T-SHIRT_REQUEST_PROTOCOL
-     </span>
-     <button class="close-x" onclick="closeProvisionsForm()">
-      [X]
-     </button>
-    </div>
-    <form action="https://formspree.io/f/xgolrnkb" class="provisions-form" method="POST">
-     <input name="_subject" type="hidden" value="NEW_OTW_SHIRT_ORDER"/>
-     <div style="display: flex; gap: 10px; margin-bottom: 10px;">
-      <input name="name" placeholder="FULL NAME" required="" type="text"/>
-      <input name="_replyto" placeholder="YOUR EMAIL" required="" type="email"/>
-     </div>
-     <div style="margin-bottom: 10px; position: relative;">
-      <input id="venmo-input" name="venmo" oninput="validateVenmo(this)" pattern="^@.*" placeholder="VENMO @HANDLE (FOR INVOICING)" required="" type="text"/>
-      <div id="venmo-status" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); font-family: 'Fira Code'; font-size: 0.5rem; color: rgba(145, 175, 179, 0.3); pointer-events: none; transition: 0.3s;">
-       WAITING_FOR_UPLINK
-      </div>
-     </div>
-     <div style="display: flex; gap: 10px; margin-bottom: 10px;">
-      <select name="size" required="" style="flex: 2;">
-       <option disabled="" selected="" value="">
-        SELECT_SIZE
-       </option>
-       <option value="S">
-        SMALL
-       </option>
-       <option value="M">
-        MEDIUM
-       </option>
-       <option value="L">
-        LARGE
-       </option>
-       <option value="XL">
-        X-LARGE
-       </option>
-       <option value="2XL">
-        2X-LARGE
-       </option>
-      </select>
-      <input min="1" name="quantity" placeholder="QTY" style="flex: 1;" type="number" value="1"/>
-     </div>
-     <textarea name="address" placeholder="SHIPPING ADDRESS" required="" rows="3" style="margin-bottom: 20px;"></textarea>
-     <button class="buy-btn" id="submit-btn" type="submit">
-      SUBMIT ORDER
-     </button>
-     <div class="form-disclaimer">
-      <span class="disclaimer-alert">
-       [!_SECURITY_ADVISORY_!]
-      </span>
-      PROVISIONS_UPLINK IS NOT ENCRYPTED FOR FINANCIAL DATA.
-      <br/>
-      DO NOT TRANSMIT CREDIT CARD OR SENSITIVE IDENTITY INFO.
-     </div>
-    </form>
-   </div>
-  </div>
-  <footer>
-   <p>
-    © 2026 OUTSIDE THE WORLD LLC   |   SYSTEMS &amp; STORIES
-   </p>
-  </footer>
-  <script src="./narrative_data.js">
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js">
-  </script>
-  <script>
-   const typeTarget = document.getElementById('typing-text');
+
+    <footer>
+        <p>© 2026 OUTSIDE THE WORLD LLC &nbsp; | &nbsp; SYSTEMS & STORIES</p>
+    </footer>
+
+    <script src="./narrative_data.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <script>
+        const typeTarget = document.getElementById('typing-text');
 
         // --- THE VISUAL FLAIR ---
         function runTypewriterProtocol() {
@@ -1262,6 +1199,7 @@
         // Initial sync and then every 30 seconds
         syncMusicSignal();
         setInterval(syncMusicSignal, 30000);
-  </script>
- </body>
+    </script>
+</body>
+
 </html>
