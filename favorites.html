@@ -27,6 +27,7 @@
             background-image: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
                 linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
             background-size: 100% 4px, 3px 100%;
+            padding-top: 180px;
         }
 
         /* 1. FIXED NAVIGATION BLOCK */
@@ -36,20 +37,33 @@
             left: 0;
             width: 100%;
             z-index: 3500;
+
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             background: linear-gradient(to bottom, rgba(10, 10, 10, 1) 0%, rgba(10, 10, 10, 0) 100%);
-            /* Ensure the nav itself is centered */
+
             display: flex;
-            justify-content: center;
-            padding: 40px 0;
+            justify-content: flex-start;
+            /* LEFT on desktop */
+            padding: 40px;
+            /* left gutter + vertical padding */
+
+            pointer-events: none;
+            /* don't block scrolling */
+        }
+
+        nav a,
+        nav .hero-logo-container,
+        nav .nav-logo {
+            pointer-events: auto;
+            /* but the logo/link remains clickable */
         }
 
         /* Center the script-injected container */
         .hero-logo-container {
-            display: flex !important;
-            justify-content: center !important;
-            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            width: auto;
         }
 
         .nav-logo {
@@ -62,7 +76,7 @@
         .header-area {
             text-align: center;
             /* Recalculated: clears the 220px logo + padding without the "canyon" */
-            padding-top: 220px;
+            padding-top: 0;
             margin-bottom: 60px;
             position: relative;
             z-index: 10;
@@ -111,7 +125,22 @@
         /* MOBILE ARCHITECTURE */
         @media (max-width: 768px) {
             nav {
+                justify-content: center;
                 padding: 20px 0 !important;
+            }
+
+            .hero-logo-container {
+                width: 100%;
+                justify-content: center;
+            }
+
+            body {
+                padding-top: 130px !important;
+            }
+
+            .header-area {
+                padding-top: 0;
+                /* important now */
             }
 
             .nav-logo {
