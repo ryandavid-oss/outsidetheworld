@@ -916,21 +916,16 @@
                 <h3>The Transform</h3>
                 <p>Spiritual Truth // fundamental identity.</p>
             </a>
-            <div class="column-label">02 // WHAT I LISTEN TO</div>
-            <div class="podcast-widget">
-                <a href="#" class="podcast-item">
-                    <div class="podcast-icon">🎙️</div>
-                    <div class="podcast-info"><span>Faith Matters</span><label>Christianity</label></div>
-                </a>
-                <a href="#" class="podcast-item">
-                    <div class="podcast-icon">📡</div>
-                    <div class="podcast-info"><span>Sanctuary</span><label>Christianity</label></div>
-                </a>
-                <a href="#" class="podcast-item">
-                    <div class="podcast-icon">⚡</div>
-                    <div class="podcast-info"><span>Lift + Love Podcast</span><label>Christianity</label></div>
-                </a>
-            </div>
+  <div class="column-label">02 // LIVE_LISTENING_SIGNAL</div>
+<div class="podcast-widget" id="listening-feed" style="transition: 0.5s; border: 1px solid rgba(145, 175, 179, 0.1);">
+    <div class="podcast-item" style="margin-bottom: 0;">
+        <div class="podcast-icon" id="signal-status">📡</div>
+        <div class="podcast-info">
+            <span id="current-track" style="color: #fff; text-transform: uppercase;">SYNCHRONIZING...</span>
+            <label id="current-artist" style="color: var(--brand-teal); font-size: 0.55rem; letter-spacing: 2px;">ESTABLISHING_UPLINK</label>
+        </div>
+    </div>
+</div>
 
             <div class="column-label">03 // PROVISIONS_UPLINK</div>
             <div class="provisions-card">
@@ -1159,6 +1154,49 @@
                 input.style.borderColor = "";
             }
         }
+        // --- LAST.FM SIGNAL UPLINK ---
+const LFM_API_KEY = '0cb4714c22caddc9beedf7afe2e35284';
+const LFM_USER = 'ryandavid_rylee';
+
+async function syncMusicSignal() {
+    const trackTarget = document.getElementById('current-track');
+    const artistTarget = document.getElementById('current-artist');
+    const statusIcon = document.getElementById('signal-status');
+    const feedContainer = document.getElementById('listening-feed');
+
+    const url = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${LFM_USER}&api_key=${LFM_API_KEY}&format=json&limit=1`;
+
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        const latest = data.recenttracks.track[0];
+
+        // Check if the "nowplaying" attribute exists and is true
+        const isLive = latest['@attr'] && latest['@attr'].nowplaying === 'true';
+        
+        trackTarget.innerText = latest.name.toUpperCase();
+        artistTarget.innerText = isLive ? `LIVE_NOW // ${latest.artist['#text'].toUpperCase()}` : `LAST_PLAYED // ${latest.artist['#text'].toUpperCase()}`;
+        
+        // Visual Feedback for Live Signal
+        if (isLive) {
+            statusIcon.innerText = "📶";
+            feedContainer.style.borderColor = "var(--brand-blue)";
+            feedContainer.style.background = "rgba(99, 149, 238, 0.05)";
+        } else {
+            statusIcon.innerText = "📡";
+            feedContainer.style.borderColor = "rgba(145, 175, 179, 0.1)";
+            feedContainer.style.background = "rgba(145, 175, 179, 0.02)";
+        }
+
+    } catch (e) {
+        trackTarget.innerText = "SIGNAL_LOST";
+        artistTarget.innerText = "CHECK_UPLINK_PROTOCOL";
+    }
+}
+
+// Initial sync and then every 30 seconds
+syncMusicSignal();
+setInterval(syncMusicSignal, 30000);
     </script>
 </body>
 
