@@ -22,8 +22,8 @@
             color: white;
             font-family: 'Inter', sans-serif;
             margin: 0;
-            /* This clears the new, taller desktop logo container */
-            padding: 220px 20px 60px;
+            /* INCREASED: Pushes content 280px down to clear the full nav stack */
+            padding: 280px 20px 60px;
             min-height: 100vh;
             overflow-x: hidden;
             /* Atmospheric Scanline texture */
@@ -305,20 +305,28 @@
                 margin: 0 auto;
             }
 
-            /* 2. RECLAIM THE CONTENT AREA */
-            body {
-                padding: 130px 5px 40px !important;
-                /* Clears the large logo */
-            }
+            @media (max-width: 768px) {
+                /* ... existing nav/logo-container code ... */
 
-            .header-area {
-                margin-bottom: 30px;
-            }
+                /* 2. RECLAIM THE CONTENT AREA */
+                body {
+                    /* INCREASED: 200px is the "Safe Zone" for the 80% logo */
+                    padding: 200px 5px 40px !important;
+                }
 
-            .header-area h1 {
-                font-size: 1.4rem !important;
-                letter-spacing: 6px !important;
-                margin-top: 10px;
+                .header-area {
+                    margin-top: 10px;
+                    /* Slight nudge for breathing room */
+                    margin-bottom: 30px;
+                }
+
+                .header-area h1 {
+                    font-size: 1.4rem !important;
+                    letter-spacing: 6px !important;
+                    margin-top: 10px;
+                    line-height: 1.2;
+                    /* Tightens the text block to prevent spill */
+                }
             }
 
             /* 3. GRID OPTIMIZATION */
