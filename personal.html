@@ -841,7 +841,7 @@
         <div class="header-content-inner">
             <a href="index.html"><img src="Images/Equal.svg" alt="Back" class="nav-logo"></a>
             <div class="header-right">
-                <div class="weather-uplink" id="weather-display">ATMOSPHERIC_SYNCING...</div>
+                <div class="weather-uplink" id="system-clock">SYSTEM_TIME // --:--:--</div>
                 <h1 class="top-quadrant-text">A QUARTER-CENTURY OF DIGITAL RESIDUE</h1>
             </div>
         </div>
@@ -993,15 +993,18 @@
             typeState1();
         }
 
-        // --- WEATHER UPLINK ---
-        async function fetchWeather() {
-            const display = document.getElementById('weather-display');
-            try {
-                const response = await fetch('https://wttr.in/Queen+Creek?format=3'); const text = await response.text();
-                display.textContent = `Queen Creek // ${text.trim()}`;
-            } catch (e) { display.textContent = `Queen Creek // STATUS_OFFLINE`; }
+        // --- SYSTEM CLOCK PROTOCOL ---
+        function updateClock() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('en-US', {
+                hour12: false,
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            });
+            document.getElementById('system-clock').textContent = `SYSTEM_TIME // ${timeString} MST`;
         }
-
+        setInterval(updateClock, 1000);
         // --- PROVISIONS UI LOGIC ---
         function openProvisionsForm() { document.getElementById('provisions-overlay').style.display = 'flex'; }
         function closeProvisionsForm() { document.getElementById('provisions-overlay').style.display = 'none'; }
@@ -1059,7 +1062,7 @@
         // Initialize everything
         window.onload = () => {
             syncLatestPost();
-            fetchWeather();
+            updateClock();
         };
         const provisionsForm = document.querySelector('.provisions-form');
 
