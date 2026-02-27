@@ -12,4 +12,41 @@
     /* SHARED TYPOGRAPHY */
     --font-main: 'Inter', sans-serif;
     --font-code: 'Fira Code', monospace;
+
+    /* SYSTEM-LEVEL BLACKOUT */
+    html {
+        /* Ensures the background behind the content is black */
+        background-color: #0a0a0a !important;
+    }
+
+    body {
+        background-color: #0a0a0a;
+        color: white;
+        /* Prevents horizontal scroll leaks on mobile */
+        overflow-x: hidden;
+        margin: 0;
+        padding: 0;
+    }
+}
+
+/* THE GLOBAL SEAL - MOBILE ARCHITECTURE */
+@media (max-width: 768px) {
+    .hero-logo-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 40px 0;
+        box-sizing: border-box;
+    }
+
+    .hero-logo-container img {
+        /* Commands attention at 80% screen width */
+        width: 80vw;
+        max-width: 400px;
+        /* Safety cap for large tablets */
+        height: auto;
+        display: block;
+        transition: opacity 0.5s ease;
+    }
 }
