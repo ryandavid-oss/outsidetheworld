@@ -185,31 +185,55 @@
         }
 
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
+
+            /* 1. Center the Logo */
+            nav {
+                justify-content: center;
+                padding: 20px 5%;
             }
-        }
 
-        .service-card {
-            background: linear-gradient(145deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%) !important;
-            border: 1px solid rgba(145, 175, 179, 0.1) !important;
-        }
+            /* 2. Tighten the Gaps */
+            .hero {
+                padding: 60px 5% 40px;
+                /* Reduced top/bottom padding */
+            }
 
-        .service-card:hover {
-            border-color: var(--brand-teal) !important;
-            box-shadow: 0 0 30px rgba(145, 175, 179, 0.1);
-        }
+            .hero h1 {
+                font-size: 2.2rem;
+                /* Scaled for mobile readability */
+            }
 
-        .service-number {
-            font-family: 'Fira Code', monospace;
-            letter-spacing: 2px;
-        }
+            .services-grid {
+                padding: 0 5% 60px 5%;
+                /* Tightened the gap below the grid */
+                gap: 20px;
+            }
 
-        @media (max-width: 600px) {
+            .service-card {
+                padding: 30px 20px;
+                /* More internal space for text, less for margins */
+            }
+
+            .founder-section {
+                padding: 60px 5% !important;
+                /* Overriding the 100px desktop padding */
+            }
+
+            .founder-section p {
+                font-size: 1.2rem !important;
+                /* Softened the "large" text for mobile screens */
+            }
+
+            .cta-section {
+                padding: 60px 5%;
+            }
+
+            /* 3. The Signature Block Responsive Shift */
             .signature {
                 flex-direction: column;
                 text-align: center;
-                padding-left: 0 !important;
+                padding: 30px 20px !important;
+                gap: 20px;
                 border-left: none !important;
                 border-top: 2px solid var(--brand-teal);
             }
@@ -267,47 +291,38 @@
                 that allow physical and digital spheres to operate in seamless synchronization.</p>
         </div>
     </main>
-    <section class="founder-section"
-        style="padding: 100px 5%; max-width: 800px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,0.05);">
+    <section class="founder-section">
         <h2
             style="font-size: 0.8rem; letter-spacing: 5px; color: var(--brand-teal); text-transform: uppercase; margin-bottom: 30px;">
-            The Founder's Perspective</h2>
+            THE_FOUNDER_PERSPECTIVE
+        </h2>
         <p style="font-size: 1.5rem; font-weight: 300; color: #eee; line-height: 1.4; margin-bottom: 30px;">
             Since the year 2000, <span style="color: white; font-weight: 700;">Outside the World</span> has served as a
-            digital vantage point—a place to document, analyze, and anticipate the shifts in our technical and cultural
-            landscape.
+            digital vantage point—a lab for observing the shifts in technical and cultural infrastructure.
         </p>
-        <div style="font-size: 1rem; color: #999; column-count: 1;">
+        <div style="font-size: 1rem; color: #999;">
             <p style="margin-bottom: 20px;">
-                What began as a personal exploration of the burgeoning web has evolved into a professional mission.
-                Today, <strong>Outside The World New LLC</strong> translates those decades of insight into actionable
-                strategies for small and medium-sized businesses.
+                Technical infrastructure and brand identity are not tasks to be completed, but ecosystems to be
+                maintained. My work focuses on the <strong>structural resilience of digital architectures</strong> and
+                the intentionality of intelligent environments.
             </p>
             <p>
-                We don't just implement technology or design brands; we build resilient digital architectures and
-                intelligent environments designed to endure. We operate on the belief that the most effective solutions
-                are found by looking beyond the immediate horizon.
+                The mission is rooted in the belief that execution is secondary to architecture. Mastery in these spaces
+                requires a vantage point that prioritizes long-term stability and systemic integrity over the immediate
+                noise of the technical horizon.
             </p>
         </div>
-        <div class="signature"
-            style="margin-top: 60px; border-left: 2px solid var(--brand-teal); padding: 30px; background: rgba(145, 175, 179, 0.03); display: flex; align-items: center; gap: 40px;">
 
-            <img src="Images/Profile.jpg" alt="RyanDavid Burningham, Lead Strategist"
-                style="width: 140px; height: 140px; border-radius: 50%; border: 2px solid var(--brand-teal); object-fit: cover; box-shadow: 0 0 20px rgba(145, 175, 179, 0.1);">
-
+        <div class="signature">
+            <img src="Images/Profile.jpg" alt="RyanDavid Burningham"
+                style="width: 140px; height: 140px; border-radius: 50%; border: 2px solid var(--brand-teal); object-fit: cover;">
             <div style="flex: 1;">
                 <p
-                    style="margin: 0; font-weight: 900; letter-spacing: 5px; text-transform: uppercase; font-size: 1.6rem; color: #fff; line-height: 1.2;">
-                    RyanDavid Burningham
-                </p>
-
+                    style="margin: 0; font-weight: 900; letter-spacing: 5px; text-transform: uppercase; font-size: 1.6rem; color: #fff;">
+                    RyanDavid Burningham</p>
                 <p
-                    style="margin: 10px 0 0; font-family: 'Fira Code', monospace; font-size: 0.75rem; color: var(--brand-teal); letter-spacing: 3px; text-transform: uppercase;">
-                    Principle Strategist // ID_8402.RYN
-                </p>
-
-                <div style="margin-top: 15px; width: 40px; height: 1px; background: var(--brand-blue); opacity: 0.5;">
-                </div>
+                    style="margin: 5px 0 0; font-family: 'Fira Code'; font-size: 0.75rem; color: var(--brand-teal); letter-spacing: 3px;">
+                    STRATEGIC_OVERSIGHT // ID_8402.RYN</p>
             </div>
         </div>
     </section>
