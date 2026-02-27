@@ -333,20 +333,26 @@
             const container = document.getElementById('glass-container');
             const poem = archive[index];
 
+            // THE VIBRANCY FIX: 
+            // We use a transparent center to let the Thumbprint "pop"
+            // and we change the Blend Mode to 'screen' or 'normal' to keep it bright.
             document.body.style.background = `
-                radial-gradient(circle at bottom right, rgba(0,0,0,0.8) 0%, var(--bg-dark) 100%),
-                ${poem.thumbprint}
-            `;
-            document.body.style.backgroundBlendMode = "overlay";
+        radial-gradient(circle at center, transparent 0%, rgba(5,5,5,0.9) 100%),
+        ${poem.thumbprint}
+    `;
+
+            // 'screen' makes colors much more vibrant than 'overlay'
+            document.body.style.backgroundBlendMode = "screen";
+            document.body.style.backgroundColor = "#050505"; // Foundation black
 
             container.classList.remove('visible');
 
             setTimeout(() => {
                 container.innerHTML = `
-                    <h1 class="poem-title">${poem.title}</h1>
-                    <div class="poem-meta">SIGNAL: ${poem.frequency} // ORIGIN: ${poem.date}</div>
-                    <div class="poem-body">${poem.body}</div>
-                `;
+            <h1 class="poem-title">${poem.title}</h1>
+            <div class="poem-meta">SIGNAL: ${poem.frequency} // ORIGIN: ${poem.date}</div>
+            <div class="poem-body">${poem.body}</div>
+        `;
                 container.classList.add('visible');
                 container.scrollTop = 0;
             }, 400);
@@ -354,13 +360,7 @@
             document.querySelectorAll('.file-item').forEach(el => {
                 el.classList.toggle('active', el.getAttribute('data-id') == index);
             });
-        }
-
-        window.onload = () => {
-            initArchive();
-            if (archive.length > 0) displayPoem(0);
-        };
-    </script>
+        }    </script>
 </body>
 
 </html>
