@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
-  <title>
-   The Wayback | Outside The World
-  </title>
-  <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
-  <meta content="var(--bg-dark)" name="theme-color"/>
-  <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
-  <style>
-   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;900&family=Fira+Code:wght@300;500&family=Merriweather:ital,wght@0,300;0,700;1,300&display=swap');
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport" />
+    <title>
+        The Wayback | Outside The World
+    </title>
+    <link href="favicon.svg" rel="icon" type="image/svg+xml" />
+    <meta content="var(--bg-dark)" name="theme-color" />
+    <link href="favicon.svg" rel="icon" type="image/svg+xml" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;900&family=Fira+Code:wght@300;500&family=Merriweather:ital,wght@0,300;0,700;1,300&display=swap');
 
         :root {
             --brand-blue: var(--brand-blue);
@@ -233,6 +234,19 @@
                 flex-direction: column;
                 height: auto;
                 overflow-y: auto;
+
+                @media (max-width: 1024px) {
+                    /* ... your existing mobile styles ... */
+
+                    .shuffle-box {
+                        position: sticky;
+                        bottom: 0;
+                        background: var(--bg-dark);
+                        padding: 15px 20px;
+                        z-index: 101;
+                        border-top: 1px solid var(--border-low);
+                    }
+                }
             }
 
             .directory {
@@ -265,53 +279,54 @@
         .entry-title {
             font-size: 1.6rem;
         }
-  
-/* THE CLEAN ATMOSPHERIC WASH */
 
+        /* THE CLEAN ATMOSPHERIC WASH */
     </style>
-  <link href="theme.css" rel="stylesheet"/>
- </head>
- <body>
-  <div id="cursor-ring">
-  </div>
-  <div id="cursor-dot">
-  </div>
-  <aside class="directory">
-   <div class="dir-header">
-    <a href="personal.html">
-     <div class="hero-logo-container">
-      <img alt="BACK" class="sidebar-logo hero-logo" src="Images/Equal.svg"/>
-     </div>
-    </a>
-   </div>
-   <div class="tuning-knob">
-    <label class="knob-label">
-     Temporal Era
-    </label>
-    <select class="era-filter" id="year-select" onchange="filterEra()">
-    </select>
-   </div>
-   <div class="shuffle-box">
-    <button class="shuffle-btn" onclick="randomizeArchive()">
-     Random_Access_Protocol
-    </button>
-   </div>
-   <div class="post-list" id="post-list">
-   </div>
-   <div class="post-list" id="post-list">
-   </div>
-  </aside>
-  <main class="extraction-pane" id="scroll-target">
-   <div class="glass-card" id="glass-container">
-    <div style="font-family: 'Fira Code'; font-size: 0.7rem; color: var(--brand-blue); text-align: center; padding: 40px;">
-     INITIALIZING_WAYBACK_UPLINK...
+    <link href="theme.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div id="cursor-ring">
     </div>
-   </div>
-  </main>
-  <script src="wayback_purified.js">
-  </script>
-  <script>
-   const ERA_MAP = {
+    <div id="cursor-dot">
+    </div>
+    <aside class="directory">
+        <div class="dir-header">
+            <a href="personal.html">
+                <div class="hero-logo-container">
+                    <img alt="BACK" class="sidebar-logo hero-logo" src="Images/Equal.svg" />
+                </div>
+            </a>
+        </div>
+        <div class="tuning-knob">
+            <label class="knob-label">
+                Temporal Era
+            </label>
+            <select class="era-filter" id="year-select" onchange="filterEra()">
+            </select>
+        </div>
+        <div class="shuffle-box">
+            <button class="shuffle-btn" onclick="randomizeArchive()">
+                Random_Access_Protocol
+            </button>
+        </div>
+        <div class="post-list" id="post-list">
+        </div>
+        <div class="post-list" id="post-list">
+        </div>
+    </aside>
+    <main class="extraction-pane" id="scroll-target">
+        <div class="glass-card" id="glass-container">
+            <div
+                style="font-family: 'Fira Code'; font-size: 0.7rem; color: var(--brand-blue); text-align: center; padding: 40px;">
+                INITIALIZING_WAYBACK_UPLINK...
+            </div>
+        </div>
+    </main>
+    <script src="wayback_purified.js">
+    </script>
+    <script>
+        const ERA_MAP = {
             ANALOG: { label: "THE_ANALOG_DAWN", glow: "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)" },
             APPLE: { label: "THE_APPLE_YEARS", glow: "linear-gradient(135deg, #13547a 0%, #80d0c7 100%)" },
             MODERN: { label: "MODERN_RESONANCE", glow: "linear-gradient(135deg, #2c3e50 0%, #4b6cb7 100%)" }
@@ -371,7 +386,18 @@
                     <div class="entry-body">${post.body}</div>
                 `;
                 container.classList.add('visible');
-                if (window.innerWidth > 1024) document.getElementById('scroll-target').scrollTop = 0;
+
+                // --- THE MOBILE SNAP ---
+                if (window.innerWidth <= 1024) {
+                    // Smoothly scroll the content into the viewport
+                    document.getElementById('scroll-target').scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                } else {
+                    // On desktop, just reset the scroll of the pane itself
+                    document.getElementById('scroll-target').scrollTop = 0;
+                }
             }, 400);
 
             document.querySelectorAll('.post-item').forEach(el => {
@@ -397,6 +423,7 @@
         }
 
         window.onload = initWayback;
-  </script>
- </body>
+    </script>
+</body>
+
 </html>
