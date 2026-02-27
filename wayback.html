@@ -332,7 +332,20 @@
             });
         }
 
-        window.onload = () => { if (typeof wayback_raw_dump !== 'undefined') initWayback(); };
+        window.onload = () => {
+            initArchive();
+
+            if (archive.length > 0) {
+                // 1. Calculate a random index
+                const randomIndex = Math.floor(Math.random() * archive.length);
+
+                // 2. Initialize the archive with that random entry
+                displayEntry(randomIndex);
+
+                // 3. Optional: Print a status message to the console for the "Terminal" feel
+                console.log(`RANDOM_ACCESS_PROTOCOL: Displaying Entry [${randomIndex}]`);
+            }
+        };
     </script>
 </body>
 
