@@ -22,7 +22,14 @@
             color: white;
             font-family: 'Inter', sans-serif;
             margin: 0;
-            padding: 140px 20px 60px;
+            /* This clears the new, taller desktop logo container */
+            padding: 220px 20px 60px;
+            min-height: 100vh;
+            overflow-x: hidden;
+            /* Atmospheric Scanline texture */
+            background-image: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+                linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            background-size: 100% 4px, 3px 100%;
         }
 
         /* 1. ATMOSPHERICS */
