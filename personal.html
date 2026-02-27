@@ -705,6 +705,54 @@
             left: 100%;
         }
 
+        /* FORM CLEANUP */
+        .modal-content input,
+        .modal-content select,
+        .modal-content textarea {
+            background: rgba(255, 255, 255, 0.05);
+            /* Transparent dark grey */
+            border: 1px solid var(--border-teal);
+            color: #fff;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.7rem;
+            padding: 12px;
+            border-radius: 0;
+            /* Remove rounded corners */
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+            outline: none;
+        }
+
+        /* Specific focus state */
+        .modal-content input:focus,
+        .modal-content textarea:focus {
+            border-color: var(--brand-blue);
+            background: rgba(99, 149, 238, 0.05);
+        }
+
+        /* Fix the [X] Close Button position */
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .close-x {
+            background: none;
+            border: none;
+            color: var(--brand-teal);
+            font-family: 'Fira Code', monospace;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: 0.3s;
+        }
+
+        .close-x:hover {
+            color: var(--brand-blue);
+        }
+
         /* 8. MOBILE REFINEMENTS */
         /* 8. CONSOLIDATED MOBILE REFINEMENTS */
         @media (max-width: 1024px) {
@@ -882,18 +930,15 @@
             </div>
 
             <form action="https://formspree.io/f/xgolrnkb" method="POST" class="provisions-form">
-                <div class="form-row">
+                <div style="display: flex; gap: 10px;">
                     <input type="text" name="name" placeholder="FULL NAME" required>
                     <input type="email" name="_replyto" placeholder="YOUR EMAIL" required>
                 </div>
 
-                <div class="form-row">
-                    <input type="text" name="venmo" placeholder="VENMO @HANDLE (FOR INVOICING)" required
-                        style="width: 100%;">
-                </div>
+                <input type="text" name="venmo" placeholder="VENMO @HANDLE (FOR INVOICING)" required>
 
-                <div class="form-row">
-                    <select name="size" required>
+                <div style="display: flex; gap: 10px;">
+                    <select name="size" required style="flex: 2;">
                         <option value="" disabled selected>SELECT_SIZE</option>
                         <option value="S">SMALL</option>
                         <option value="M">MEDIUM</option>
@@ -901,15 +946,21 @@
                         <option value="XL">X-LARGE</option>
                         <option value="2XL">2X-LARGE</option>
                     </select>
-                    <input type="number" name="quantity" placeholder="QTY" min="1" value="1">
+                    <input type="number" name="quantity" placeholder="QTY" min="1" value="1" style="flex: 1;">
                 </div>
 
-                <textarea name="address" placeholder="SHIPPING ADDRESS" required></textarea>
+                <textarea name="address" placeholder="SHIPPING ADDRESS" rows="3" required></textarea>
 
                 <button type="submit" id="submit-btn" class="buy-btn">SUBMIT_REQUEST</button>
-                <input type="hidden" name="_subject" value="NEW_OTW_SHIRT_ORDER">
             </form>
         </div>
+
+        <textarea name="address" placeholder="SHIPPING ADDRESS" required></textarea>
+
+        <button type="submit" id="submit-btn" class="buy-btn">SUBMIT_REQUEST</button>
+        <input type="hidden" name="_subject" value="NEW_OTW_SHIRT_ORDER">
+        </form>
+    </div>
     </div>
 
     <footer>
