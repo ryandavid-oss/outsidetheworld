@@ -3,19 +3,15 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>
         Hipsta Project | Outside The World
     </title>
     <link href="favicon.svg" rel="icon" type="image/svg+xml" />
+    <link href="theme.css" rel="stylesheet" />
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;900&family=Fira+Code:wght@300;500&display=swap');
 
-        :root {
-            --brand-teal: var(--brand-teal);
-            --brand-blue: var(--brand-blue);
-            --bg-dark: var(--bg-dark);
-        }
+
 
         body {
             background-color: var(--bg-dark);
@@ -274,6 +270,16 @@
             font-weight: 500;
         }
 
+        nav a {
+            pointer-events: auto;
+            display: inline-block;
+        }
+
+        .hero-logo-container {
+            pointer-events: auto;
+            display: inline-block;
+        }
+
         /* 6. MOBILE OVERRIDES: THE PHOTOS APP GRID */
         @media (max-width: 768px) {
 
@@ -305,14 +311,7 @@
             body {
                 padding: 130px 2px 40px !important;
                 /* Balanced for the large logo */
-            }
 
-            /* Desktop-only: push content below the fixed frosted nav */
-            @media (min-width: 769px) {
-                body {
-                    padding-top: 220px;
-                    /* try 220–260 depending on taste */
-                }
             }
 
             .header-area {
@@ -364,7 +363,7 @@
             }
         }
     </style>
-    <link href="theme.css" rel="stylesheet" />
+
     <meta content="#0a0a0a" name="theme-color" />
     <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style" />
     <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport" />
@@ -392,14 +391,13 @@
     </div>
     <div class="vault-grid" id="grid">
     </div>
-    <div id="modal" onclick="closeModalOnEmpty(event)" onscroll="handleScroll(this)">
-        <div id="modal-backdrop">
-        </div>
-        <button class="btn-back" onclick="closeModal()">
-            [ CLOSE_X ]
-        </button>
-        <div class="modal-content" id="modal-inner">
-        </div>
+    <div id="modal-backdrop">
+    </div>
+    <button class="btn-back" onclick="closeModal()">
+        [ CLOSE_X ]
+    </button>
+    <div class="modal-content" id="modal-inner">
+    </div>
     </div>
     <div id="mission-overlay" onclick="closeMission()">
         <div class="mission-content">
@@ -499,8 +497,10 @@
             }
         }
 
-        window.addEventListener("load", syncBodyToNav);
+        document.addEventListener("DOMContentLoaded", syncBodyToNav);
+        window.addEventListener("load", syncBodyToNav);     // recalc after logo/image load
         window.addEventListener("resize", syncBodyToNav);
+        syncBodyToNav();
     </script>
 </body>
 
