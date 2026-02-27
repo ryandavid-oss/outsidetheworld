@@ -190,6 +190,42 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
+        /* SHUFFLE BUTTON PROTOCOL */
+        .shuffle-box {
+            padding: 0 40px 20px;
+            border-bottom: 1px solid var(--border-low);
+        }
+
+        .shuffle-btn {
+            width: 100%;
+            background: rgba(145, 175, 179, 0.05);
+            border: 1px solid var(--brand-teal);
+            color: var(--brand-teal);
+            font-family: 'Fira Code', monospace;
+            font-size: 0.65rem;
+            padding: 12px;
+            cursor: pointer;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .shuffle-btn:hover {
+            background: var(--brand-teal);
+            color: var(--bg-dark);
+            box-shadow: 0 0 20px rgba(145, 175, 179, 0.4);
+        }
+
+        .shuffle-btn::before {
+            content: "⇋";
+            /* Technical shuffle icon */
+            font-size: 1rem;
+        }
+
         /* --- MOBILE ARCHITECTURE (POETRY STYLE) --- */
         @media (max-width: 1024px) {
             body {
@@ -236,10 +272,16 @@
         <div class="dir-header">
             <a href="personal.html"><img src="Images/Equal.svg" class="sidebar-logo" alt="BACK"></a>
         </div>
-        <div class="tuning-knob">
+<div class="tuning-knob">
             <label class="knob-label">Temporal Era</label>
             <select id="year-select" class="era-filter" onchange="filterEra()"></select>
         </div>
+
+        <div class="shuffle-box">
+            <button class="shuffle-btn" onclick="randomizeArchive()">Random_Access_Protocol</button>
+        </div>
+
+        <div class="post-list" id="post-list"></div>        </div>
         <div class="post-list" id="post-list"></div>
     </aside>
 
@@ -254,7 +296,7 @@
     <script src="wayback_purified.js"></script>
 
     <script>
-        const ERA_MAP = {
+const ERA_MAP = {
             ANALOG: { label: "THE_ANALOG_DAWN", glow: "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)" },
             APPLE: { label: "THE_APPLE_YEARS", glow: "linear-gradient(135deg, #13547a 0%, #80d0c7 100%)" },
             MODERN: { label: "MODERN_RESONANCE", glow: "linear-gradient(135deg, #2c3e50 0%, #4b6cb7 100%)" }
@@ -277,10 +319,9 @@
                 opt.textContent = `ERA_${y}`;
                 select.appendChild(opt);
             });
-            if (years.length > 0) {
-                renderEra(years[0]);
-                displayEntry(allResidue.findIndex(p => p.year === years[0]));
-            }
+            
+            // On load, we'll let the randomize function handle the first view
+            randomizeArchive();
         }
 
         function renderEra(year) {
@@ -291,13 +332,7 @@
                     const item = document.createElement('div');
                     item.className = 'post-item';
                     item.setAttribute('data-id', index);
-                    item.onclick = () => {
-                        displayEntry(index);
-                        // THE AUTO-SCROLL FINESSE
-                        if (window.innerWidth <= 1024) {
-                            document.getElementById('scroll-target').scrollIntoView({ behavior: 'smooth' });
-                        }
-                    };
+                    item.onclick = () => displayEntry(index);
                     item.innerHTML = `<h3>${post.title}</h3><span>${post.date}</span>`;
                     list.appendChild(item);
                 }
@@ -321,10 +356,7 @@
                     <div class="entry-body">${post.body}</div>
                 `;
                 container.classList.add('visible');
-                // Ensure desktop doesn't scroll the whole page, only the pane
-                if (window.innerWidth > 1024) {
-                    document.getElementById('scroll-target').scrollTop = 0;
-                }
+                if (window.innerWidth > 1024) document.getElementById('scroll-target').scrollTop = 0;
             }, 400);
 
             document.querySelectorAll('.post-item').forEach(el => {
@@ -332,20 +364,25 @@
             });
         }
 
-        window.onload = () => {
-            initArchive();
+        // --- NEW: THE RANDOM ACCESS PROTOCOL ---
+        function randomizeArchive() {
+            if (allResidue.length === 0) return;
 
-            if (archive.length > 0) {
-                // 1. Calculate a random index
-                const randomIndex = Math.floor(Math.random() * archive.length);
+            const randomIndex = Math.floor(Math.random() * allResidue.length);
+            const randomPost = allResidue[randomIndex];
 
-                // 2. Initialize the archive with that random entry
-                displayEntry(randomIndex);
+            // 1. Update the dropdown selector to the correct year
+            document.getElementById('year-select').value = randomPost.year;
 
-                // 3. Optional: Print a status message to the console for the "Terminal" feel
-                console.log(`RANDOM_ACCESS_PROTOCOL: Displaying Entry [${randomIndex}]`);
-            }
-        };
+            // 2. Render that specific era's list so the active state shows up
+            renderEra(randomPost.year);
+
+            // 3. Display the actual entry
+            displayEntry(randomIndex);
+        }
+
+        window.onload = initWayback;
+
     </script>
 </body>
 
