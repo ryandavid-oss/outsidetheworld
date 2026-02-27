@@ -500,12 +500,49 @@
                 line-height: 1.6;
             }
         }
+
+        /* THE RETICLE UI */
+        #cursor-ring {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--brand-teal);
+            border-radius: 50%;
+            pointer-events: none;
+            /* Crucial: so it doesn't block clicks */
+            z-index: 10000;
+            transition: width 0.3s, height 0.3s, border-color 0.3s, transform 0.1s ease-out;
+            mix-blend-mode: difference;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #cursor-dot {
+            width: 4px;
+            height: 4px;
+            background: var(--brand-blue);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10001;
+            mix-blend-mode: difference;
+        }
+
+        /* INTERACTION STATES */
+        .cursor-active #cursor-ring {
+            width: 60px;
+            height: 60px;
+            border-color: var(--brand-blue);
+            border-width: 2px;
+        }
     </style>
     <link rel="stylesheet" href="theme.css">
 </head>
 
 <body>
-
+    <div id="cursor-ring"></div>
+    <div id="cursor-dot"></div>
     <img src="Images/Equal.svg" alt="OTW" class="hero-logo">
     <div class="starfield" id="star-bg"></div>
 
@@ -671,6 +708,31 @@
             const modal = document.getElementById('poem-modal');
             modal.style.display = (modal.style.display === 'flex') ? 'none' : 'flex';
         }
+        const ring = document.getElementById('cursor-ring');
+        const dot = document.getElementById('cursor-dot');
+
+        // Update positions
+        document.addEventListener('mousemove', (e) => {
+            // The dot is instant
+            dot.style.left = e.clientX - 2 + 'px';
+            dot.style.top = e.clientY - 2 + 'px';
+
+            // The ring has a tiny delay (transform)
+            ring.style.left = e.clientX - 20 + 'px';
+            ring.style.top = e.clientY - 20 + 'px';
+        });
+
+        // Handle Hover States
+        const interactiveElements = document.querySelectorAll('a, .belt-star, .poem-fragment');
+
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                document.body.classList.add('cursor-active');
+            });
+            el.addEventListener('mouseleave', () => {
+                document.body.classList.remove('cursor-active');
+            });
+        });
     </script>
 </body>
 
