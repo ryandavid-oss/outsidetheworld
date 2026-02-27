@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional | Outside The World</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <style>
+        :root {
+            --brand-teal: var(--brand-teal);
+            --bg-dark: var(--bg-dark);
+            --transition-main: 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        body, html {
+            margin: 0; padding: 0; height: 100%;
+            /* THE FIX: Applying the 2006 legacy image as a background */
+            background: linear-gradient(rgba(5, 5, 5, 0.85), rgba(5, 5, 5, 0.85)), 
+                        url('Images/center.jpg'); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Keeps the globe steady on scroll */
+            color: white;
+            font-family: 'Inter', sans-serif;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            overflow: hidden;
+        }
+
+        @keyframes shieldReveal {
+            from { opacity: 0; transform: translateY(20px); filter: blur(10px); }
+            to { opacity: 1; transform: translateY(0); filter: blur(0); }
+        }
+
+        /* 1. BRANDING */
+        .shield-container {
+            text-align: center;
+            animation: shieldReveal 1.2s ease-out forwards;
+            padding: 40px;
+        }
+
+        .logo-main {
+            width: 320px;
+            margin-bottom: 60px;
+            filter: drop-shadow(0 0 20px rgba(145, 175, 179, 0.2));
+        }
+
+        /* 2. THE STATUS TAG */
+        .status-tag {
+            font-size: 0.7rem;
+            letter-spacing: 4px;
+            background: rgba(145, 175, 179, 0.1);
+            color: var(--brand-teal);
+            padding: 6px 15px;
+            border: 1px solid rgba(145, 175, 179, 0.3);
+            border-radius: 3px;
+            display: inline-block;
+            margin-bottom: 30px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            letter-spacing: 12px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        p {
+            font-size: 0.9rem;
+            letter-spacing: 4px;
+            color: #aaa; /* Brightened slightly to stand out against the image */
+            text-transform: uppercase;
+            max-width: 500px;
+            line-height: 1.8;
+            margin: 0 auto 50px;
+        }
+
+        /* 3. RETURN BUTTON */
+        .btn-back {
+            display: inline-block;
+            padding: 15px 40px;
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            text-decoration: none;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            transition: 0.4s;
+            backdrop-filter: blur(5px);
+            background: rgba(255,255,255,0.05);
+        }
+
+        .btn-back:hover {
+            border-color: var(--brand-teal);
+            color: white;
+            background: rgba(145, 175, 179, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .logo-main { width: 240px; }
+            h1 { font-size: 1.5rem; letter-spacing: 6px; }
+            p { font-size: 0.7rem; padding: 0 20px; }
+        }
+    </style>
+    <link rel="stylesheet" href="theme.css">
+</head>
+<body>
+
+    <div class="shield-container">
+        <img src="Images/Equal.svg" alt="Outside The World" class="logo-main">
+        
+        <br>
+        <div class="status-tag">Status: In Development</div>
+        
+        <h1>STRATEGY &<br>SOLUTIONS</h1>
+        
+        <p>The professional archive is currently being synchronized. Access to consultancy narratives and system strategies is restricted.</p>
+
+        <a href="index.html" class="btn-back">Return to Entrance</a>
+    </div>
+
+</body>
+</html>

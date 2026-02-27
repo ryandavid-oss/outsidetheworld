@@ -442,6 +442,24 @@
             margin-bottom: env(safe-area-inset-bottom);
         }
 
+        /* THE PROFESSIONAL WING BUTTON */
+        .right-wing-btn {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.02);
+            color: #fff;
+            font-family: 'Fira Code', monospace;
+            transition: 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .right-wing-btn:hover {
+            border-color: var(--brand-blue);
+            /* Anniversary Blue */
+            background: rgba(99, 149, 238, 0.05);
+            box-shadow: 0 0 20px rgba(99, 149, 238, 0.2);
+            letter-spacing: 5px;
+            /* Subtle expansion effect */
+        }
+
         @media (max-width: 1024px) {
             body {
                 overflow-y: auto;
@@ -605,8 +623,8 @@
         </div>
 
         <div class="nav-wing">
-            <span class="wing-label">[Strategy & Solutions]</span>
-            <a href="professional.html" class="ethereal-btn consult-btn">DOSSIER</a>
+            <span class="wing-label">[THE_OUTSIDE_VANTAGE]</span>
+            <a href="professional.html" class="ethereal-btn consult-btn">LEARN MORE</a>
         </div>
     </main>
 
