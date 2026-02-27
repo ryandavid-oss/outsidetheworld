@@ -1,4 +1,7 @@
-/* THE OTW CORE CHASSIS */
+/* THE OTW CORE CHASSIS: HARDENED 2026 
+   AESTHETIC: MODERN MINIMALIST / DEEP VOID
+*/
+
 :root {
     /* THE TRINITY */
     --brand-blue: #6395EE;
@@ -7,7 +10,6 @@
 
     /* THE UNIVERSAL VOID */
     --bg-dark: #0a0a0a;
-    /* Updated to match your system meta-tag */
     --border-low: rgba(255, 255, 255, 0.08);
 
     /* SHARED TYPOGRAPHY */
@@ -15,9 +17,43 @@
     --font-code: 'Fira Code', monospace;
 }
 
-/* SYSTEM-LEVEL BLACKOUT */
+/* 1. GLOBAL RESET & SMOOTHING */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* 2. BOUTIQUE SCROLLBAR (High-Fidelity)  */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(145, 175, 179, 0.2);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--brand-teal);
+}
+
+/* 3. SELECTION VIBE */
+::selection {
+    background: var(--brand-teal);
+    color: var(--bg-dark);
+}
+
+/* 4. SYSTEM-LEVEL BLACKOUT */
 html {
     background-color: var(--bg-dark) !important;
+    scroll-behavior: smooth;
 }
 
 body {
@@ -25,32 +61,57 @@ body {
     color: white;
     font-family: var(--font-main);
     overflow-x: hidden;
-    /* Prevents horizontal leaks */
     margin: 0;
     padding: 0;
+    min-height: 100vh;
 }
 
-/* THE GLOBAL SEAL - MOBILE ARCHITECTURE */
+/* 5. THE CLEAN ATMOSPHERIC WASH (Replaces CRT Scanlines) */
+body::after {
+    content: " ";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Subtle radial vignette for depth without clutter */
+    background: radial-gradient(circle at 50% 50%, rgba(10, 10, 10, 0) 0%, rgba(0, 0, 0, 0.5) 100%);
+    pointer-events: none;
+    z-index: 3000;
+    opacity: 0.6;
+}
+
+/* 6. NAVIGATION CHASSIS (Consistency Engine) */
+.hero-logo-container {
+    display: flex;
+    align-items: center;
+    pointer-events: auto;
+}
+
+.nav-logo {
+    width: 220px;
+    height: auto;
+    filter: drop-shadow(0 0 20px rgba(99, 149, 238, 0.1));
+    transition: filter 0.4s ease, transform 0.4s ease;
+}
+
+.nav-logo:hover {
+    filter: drop-shadow(0 0 30px rgba(99, 149, 238, 0.3));
+}
+
+/* 7. MOBILE MONOLITH ARCHITECTURE  */
 @media (max-width: 768px) {
     .hero-logo-container {
-        display: flex;
         justify-content: center;
-        align-items: center;
         width: 100%;
-        padding: 40px 0;
-        box-sizing: border-box;
     }
 
-    .hero-logo-container img {
-        width: 80vw;
-        /* Commands attention at 80% screen width */
-        max-width: 400px;
-        height: auto;
-        display: block;
-        transition: opacity 0.5s ease;
+    .nav-logo {
+        width: 80vw !important;
+        max-width: 350px;
     }
 
-    /* MOBILE CURSOR KILL-SWITCH */
+    /* KILL-SWITCH FOR MOBILE CURSOR (Performance) */
     #cursor-ring,
     #cursor-dot {
         display: none !important;
