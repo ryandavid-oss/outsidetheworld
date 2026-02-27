@@ -705,37 +705,49 @@
             left: 100%;
         }
 
-        /* FORM CLEANUP */
+        /* TERMINAL FORM REFINEMENT - THE BOUTIQUE GLOW */
         .modal-content input,
         .modal-content select,
         .modal-content textarea {
-            background: rgba(255, 255, 255, 0.05);
-            /* Transparent dark grey */
-            border: 1px solid var(--border-teal);
-            color: #fff;
+            background: rgba(255, 255, 255, 0.03) !important;
+            border: 1px solid rgba(145, 175, 179, 0.2) !important;
+            color: #fff !important;
             font-family: 'Fira Code', monospace;
             font-size: 0.7rem;
-            padding: 12px;
+            padding: 14px;
             border-radius: 0;
-            /* Remove rounded corners */
             width: 100%;
             box-sizing: border-box;
-            margin-bottom: 10px;
+            transition: all 0.3s ease;
             outline: none;
+            margin-bottom: 10px;
         }
 
-        /* Specific focus state */
+        .modal-content input:hover,
+        .modal-content select:hover,
+        .modal-content textarea:hover {
+            border-color: var(--brand-teal);
+            background: rgba(145, 175, 179, 0.08) !important;
+        }
+
         .modal-content input:focus,
         .modal-content textarea:focus {
             border-color: var(--brand-blue);
-            background: rgba(99, 149, 238, 0.05);
+            background: rgba(99, 149, 238, 0.05) !important;
+            box-shadow: 0 0 15px rgba(99, 149, 238, 0.2);
         }
 
-        /* Fix the [X] Close Button position */
+        /* Mandatory Field Pulse */
+        input:required:invalid {
+            border-bottom: 1px solid rgba(255, 77, 77, 0.3) !important;
+        }
+
         .modal-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border-bottom: 1px solid rgba(145, 175, 179, 0.1);
+            padding-bottom: 15px;
             margin-bottom: 25px;
         }
 
@@ -747,10 +759,6 @@
             cursor: pointer;
             font-size: 0.8rem;
             transition: 0.3s;
-        }
-
-        .close-x:hover {
-            color: var(--brand-blue);
         }
 
         /* 8. MOBILE REFINEMENTS */
@@ -930,14 +938,22 @@
             </div>
 
             <form action="https://formspree.io/f/xgolrnkb" method="POST" class="provisions-form">
-                <div style="display: flex; gap: 10px;">
+                <input type="hidden" name="_subject" value="NEW_OTW_SHIRT_ORDER">
+
+                <div style="display: flex; gap: 10px; margin-bottom: 10px;">
                     <input type="text" name="name" placeholder="FULL NAME" required>
                     <input type="email" name="_replyto" placeholder="YOUR EMAIL" required>
                 </div>
 
-                <input type="text" name="venmo" placeholder="VENMO @HANDLE (FOR INVOICING)" required>
+                <div style="margin-bottom: 10px; position: relative;">
+                    <input type="text" id="venmo-input" name="venmo" placeholder="VENMO @HANDLE (FOR INVOICING)"
+                        required pattern="^@.*" oninput="validateVenmo(this)">
+                    <div id="venmo-status"
+                        style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); font-family: 'Fira Code'; font-size: 0.5rem; color: rgba(145, 175, 179, 0.3); pointer-events: none; transition: 0.3s;">
+                        WAITING_FOR_UPLINK</div>
+                </div>
 
-                <div style="display: flex; gap: 10px;">
+                <div style="display: flex; gap: 10px; margin-bottom: 10px;">
                     <select name="size" required style="flex: 2;">
                         <option value="" disabled selected>SELECT_SIZE</option>
                         <option value="S">SMALL</option>
@@ -949,11 +965,12 @@
                     <input type="number" name="quantity" placeholder="QTY" min="1" value="1" style="flex: 1;">
                 </div>
 
-                <textarea name="address" placeholder="SHIPPING ADDRESS" rows="3" required></textarea>
+                <textarea name="address" placeholder="SHIPPING ADDRESS" rows="3" required
+                    style="margin-bottom: 20px;"></textarea>
 
                 <button type="submit" id="submit-btn" class="buy-btn">SUBMIT_REQUEST</button>
             </form>
-    </div>
+        </div>
     </div>
 
     <footer>
@@ -1096,6 +1113,24 @@
                     btn.disabled = false;
                 }
             };
+        }
+        function validateVenmo(input) {
+            const status = document.getElementById('venmo-status');
+            const value = input.value.trim();
+
+            if (value.startsWith('@') && value.length > 3) {
+                status.innerText = "HANDLE_VERIFIED";
+                status.style.color = "var(--brand-teal)";
+                input.style.borderColor = "var(--brand-teal)";
+            } else if (value.length > 0) {
+                status.innerText = "MISSING_@_PROTOCOL";
+                status.style.color = "#ff4d4d";
+                input.style.borderColor = "rgba(255, 77, 77, 0.5)";
+            } else {
+                status.innerText = "WAITING_FOR_UPLINK";
+                status.style.color = "rgba(145, 175, 179, 0.3)";
+                input.style.borderColor = "";
+            }
         }
     </script>
 </body>
