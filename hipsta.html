@@ -485,6 +485,23 @@
 
         loadVault();
     </script>
+    <script>
+        function syncBodyToNav() {
+            const nav = document.querySelector('nav');
+            if (!nav) return;
+
+            if (window.innerWidth > 768) {
+                // +30 gives you breathing room below the frosted area
+                document.body.style.paddingTop = (nav.offsetHeight + 30) + "px";
+            } else {
+                // Let your mobile CSS take over
+                document.body.style.paddingTop = "";
+            }
+        }
+
+        window.addEventListener("load", syncBodyToNav);
+        window.addEventListener("resize", syncBodyToNav);
+    </script>
 </body>
 
 </html>
