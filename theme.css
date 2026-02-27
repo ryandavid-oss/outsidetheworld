@@ -6,27 +6,28 @@
     --brand-teal: #91AFB3;
 
     /* THE UNIVERSAL VOID */
-    --bg-dark: #050505;
+    --bg-dark: #0a0a0a;
+    /* Updated to match your system meta-tag */
     --border-low: rgba(255, 255, 255, 0.08);
 
     /* SHARED TYPOGRAPHY */
     --font-main: 'Inter', sans-serif;
     --font-code: 'Fira Code', monospace;
+}
 
-    /* SYSTEM-LEVEL BLACKOUT */
-    html {
-        /* Ensures the background behind the content is black */
-        background-color: #0a0a0a !important;
-    }
+/* SYSTEM-LEVEL BLACKOUT */
+html {
+    background-color: var(--bg-dark) !important;
+}
 
-    body {
-        background-color: #0a0a0a;
-        color: white;
-        /* Prevents horizontal scroll leaks on mobile */
-        overflow-x: hidden;
-        margin: 0;
-        padding: 0;
-    }
+body {
+    background-color: var(--bg-dark);
+    color: white;
+    font-family: var(--font-main);
+    overflow-x: hidden;
+    /* Prevents horizontal leaks */
+    margin: 0;
+    padding: 0;
 }
 
 /* THE GLOBAL SEAL - MOBILE ARCHITECTURE */
@@ -41,12 +42,17 @@
     }
 
     .hero-logo-container img {
-        /* Commands attention at 80% screen width */
         width: 80vw;
+        /* Commands attention at 80% screen width */
         max-width: 400px;
-        /* Safety cap for large tablets */
         height: auto;
         display: block;
         transition: opacity 0.5s ease;
+    }
+
+    /* MOBILE CURSOR KILL-SWITCH */
+    #cursor-ring,
+    #cursor-dot {
+        display: none !important;
     }
 }

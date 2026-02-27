@@ -8,6 +8,7 @@
         Social Residue | Outside The World
     </title>
     <link href="favicon.svg" rel="icon" type="image/svg+xml" />
+    <link href="theme.css" rel="stylesheet" />
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;900&family=Fira+Code:wght@300;500&display=swap');
 
@@ -23,7 +24,8 @@
             font-family: 'Inter', sans-serif;
             margin: 0;
             /* JavaScript will override this, but 280px is a safer fallback for desktop */
-            padding: 280px 20px 60px;
+            padding: 0 20px 60px;
+            /* JS sets padding-top dynamically */
             min-height: 100vh;
             overflow-x: hidden;
             background-image: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
@@ -311,7 +313,7 @@
             }
         }
     </style>
-    <link href="theme.css" rel="stylesheet" />
+
     <meta content="#0a0a0a" name="theme-color" />
     <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style" />
     <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport" />
@@ -322,7 +324,8 @@
     </div>
     <div id="cursor-dot">
     </div>
-    <nav style="pointer-events: none;"> <a href="flotsam.html" style="pointer-events: auto; display: block;">
+    <nav>
+        <a href="flotsam.html" style="pointer-events:auto; display:inline-block;">
             <div class="hero-logo-container">
                 <img alt="Back" class="nav-logo hero-logo" src="Images/Equal.svg" />
             </div>
@@ -460,6 +463,17 @@
         function closeMission() { document.getElementById('mission-overlay').style.display = 'none'; }
 
         window.onload = loadVault;
+    </script>
+    <script>
+        function syncBodyToNav() {
+            const nav = document.querySelector('nav');
+            if (!nav) return;
+            const extra = 30; // breathing room
+            document.body.style.paddingTop = (nav.offsetHeight + extra) + "px";
+        }
+        window.addEventListener("load", syncBodyToNav);
+        window.addEventListener("resize", syncBodyToNav);
+        syncBodyToNav();
     </script>
 </body>
 
