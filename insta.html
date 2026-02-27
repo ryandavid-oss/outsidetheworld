@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>
-   Social Residue | Outside The World
-  </title>
-  <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
-  <style>
-   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;900&family=Fira+Code:wght@300;500&display=swap');
-        
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>
+        Social Residue | Outside The World
+    </title>
+    <link href="favicon.svg" rel="icon" type="image/svg+xml" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;900&family=Fira+Code:wght@300;500&display=swap');
+
         :root {
             --brand-teal: var(--brand-teal);
             --brand-blue: var(--brand-blue);
@@ -20,144 +21,342 @@
             background-color: var(--bg-dark);
             color: white;
             font-family: 'Inter', sans-serif;
-            margin: 0; padding: 160px 20px 60px;
+            margin: 0;
+            padding: 160px 20px 60px;
         }
 
         /* ATMOSPHERICS */
         body::after {
-            content: " "; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            content: " ";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%),
-                        linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
-            background-size: 100% 3px, 3px 100%; pointer-events: none; z-index: 3000; opacity: 0.1;
+                linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+            background-size: 100% 3px, 3px 100%;
+            pointer-events: none;
+            z-index: 3000;
+            opacity: 0.1;
         }
 
-        nav { 
-            position: fixed; top: 0; left: 0; width: 100%; padding: 40px; z-index: 3500; 
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 40px;
+            z-index: 3500;
             backdrop-filter: blur(10px);
-            background: linear-gradient(to bottom, rgba(5,5,5,1) 0%, rgba(5,5,5,0) 100%);
-            pointer-events: none; 
+            background: linear-gradient(to bottom, rgba(5, 5, 5, 1) 0%, rgba(5, 5, 5, 0) 100%);
+            pointer-events: none;
         }
-        .nav-logo { width: 220px; pointer-events: auto; filter: drop-shadow(0 0 20px rgba(145, 175, 179, 0.2)); }
 
-        .header-area { text-align: center; margin-bottom: 40px; position: relative; z-index: 10; }
-        .header-area h1 { font-size: 2.5rem; letter-spacing: 15px; text-transform: uppercase; margin-top: 20px; font-weight: 900; }
-        
-        .status-tag { 
-            font-family: 'Fira Code', monospace; font-size: 0.6rem; letter-spacing: 4px; 
-            color: var(--brand-teal); border: 1px solid rgba(145, 175, 179, 0.3); 
-            padding: 6px 15px; display: inline-block; text-transform: uppercase; cursor: pointer;
+        .nav-logo {
+            width: 220px;
+            pointer-events: auto;
+            filter: drop-shadow(0 0 20px rgba(145, 175, 179, 0.2));
+        }
+
+        .header-area {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .header-area h1 {
+            font-size: 2.5rem;
+            letter-spacing: 15px;
+            text-transform: uppercase;
+            margin-top: 20px;
+            font-weight: 900;
+        }
+
+        .status-tag {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.6rem;
+            letter-spacing: 4px;
+            color: var(--brand-teal);
+            border: 1px solid rgba(145, 175, 179, 0.3);
+            padding: 6px 15px;
+            display: inline-block;
+            text-transform: uppercase;
+            cursor: pointer;
         }
 
         .year-nav {
-            display: flex; justify-content: center; flex-wrap: wrap; gap: 10px;
-            margin-bottom: 60px; max-width: 1000px; margin-left: auto; margin-right: auto;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 60px;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .year-btn {
-            background: none; border: 1px solid rgba(145, 175, 179, 0.2);
-            color: var(--brand-teal); font-family: 'Fira Code', monospace; font-size: 0.7rem;
-            padding: 8px 18px; cursor: pointer; transition: 0.3s; text-transform: uppercase;
+            background: none;
+            border: 1px solid rgba(145, 175, 179, 0.2);
+            color: var(--brand-teal);
+            font-family: 'Fira Code', monospace;
+            font-size: 0.7rem;
+            padding: 8px 18px;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
         }
 
-        .year-btn:hover, .year-btn.active {
-            background: var(--brand-teal); color: black; border-color: var(--brand-teal);
+        .year-btn:hover,
+        .year-btn.active {
+            background: var(--brand-teal);
+            color: black;
+            border-color: var(--brand-teal);
             box-shadow: 0 0 15px rgba(145, 175, 179, 0.4);
         }
 
-        .vault-grid { 
-            display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; 
-            max-width: 1400px; margin: 0 auto; min-height: 400px;
+        .vault-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            max-width: 1400px;
+            margin: 0 auto;
+            min-height: 400px;
         }
 
-        .artifact-card { 
-            background: #111; cursor: pointer; position: relative; aspect-ratio: 1 / 1; 
-            overflow: hidden; border: 1px solid rgba(255,255,255,0.05);
+        .artifact-card {
+            background: #111;
+            cursor: pointer;
+            position: relative;
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
             animation: fadeIn 0.5s ease forwards;
         }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
 
-        .artifact-card img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(20%); transition: 0.4s; }
-        .artifact-card:hover img { filter: grayscale(0%); transform: scale(1.05); }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .artifact-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(20%);
+            transition: 0.4s;
+        }
+
+        .artifact-card:hover img {
+            filter: grayscale(0%);
+            transform: scale(1.05);
+        }
 
         /* MODAL */
-        #modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); z-index: 4000; display: none; overflow-y: auto; }
-        #modal.active { display: block; }
-        .modal-content { max-width: 800px; width: 95%; margin: 100px auto; padding-bottom: 100px; }
-        .modal-content h1 { font-family: 'Fira Code'; color: var(--brand-teal); font-size: 1rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; margin-bottom: 30px; letter-spacing: 5px; }
-        .modal-content img { width: 100%; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 30px; }
-        .modal-content p { line-height: 1.8; color: #eee; font-size: 1.15rem; font-weight: 300; }
-        .modal-content h3 { font-family: 'Fira Code'; font-size: 0.8rem; color: var(--brand-blue); margin-top: 40px; letter-spacing: 3px; }
+        #modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.98);
+            z-index: 4000;
+            display: none;
+            overflow-y: auto;
+        }
+
+        #modal.active {
+            display: block;
+        }
+
+        .modal-content {
+            max-width: 800px;
+            width: 95%;
+            margin: 100px auto;
+            padding-bottom: 100px;
+        }
+
+        .modal-content h1 {
+            font-family: 'Fira Code';
+            color: var(--brand-teal);
+            font-size: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            letter-spacing: 5px;
+        }
+
+        .modal-content img {
+            width: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .modal-content p {
+            line-height: 1.8;
+            color: #eee;
+            font-size: 1.15rem;
+            font-weight: 300;
+        }
+
+        .modal-content h3 {
+            font-family: 'Fira Code';
+            font-size: 0.8rem;
+            color: var(--brand-blue);
+            margin-top: 40px;
+            letter-spacing: 3px;
+        }
 
         /* TYPEWRITER OVERLAY */
         #mission-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.98); z-index: 6000;
-            display: none; justify-content: center; align-items: center;
-            padding: 40px; backdrop-filter: blur(20px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.98);
+            z-index: 6000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            backdrop-filter: blur(20px);
         }
-        .mission-content { max-width: 700px; font-family: 'Fira Code', monospace; color: var(--brand-teal); line-height: 1.8; text-align: left; }
-        .mission-content h3 { color: white; letter-spacing: 5px; text-transform: uppercase; border-bottom: 1px solid var(--brand-teal); padding-bottom: 10px; margin-bottom: 30px; }
 
-        #load-more-trigger { height: 100px; width: 100%; }
+        .mission-content {
+            max-width: 700px;
+            font-family: 'Fira Code', monospace;
+            color: var(--brand-teal);
+            line-height: 1.8;
+            text-align: left;
+        }
+
+        .mission-content h3 {
+            color: white;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--brand-teal);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+
+        #load-more-trigger {
+            height: 100px;
+            width: 100%;
+        }
 
         @media (max-width: 768px) {
-            .vault-grid { grid-template-columns: repeat(3, 1fr); gap: 2px; }
-            .header-area h1 { font-size: 1.2rem !important; letter-spacing: 5px !important; }
-            body { padding-top: 120px; }
+
+            /* 1. NORMALIZE THE NAV BLOCK */
+            nav {
+                padding: 20px 0 !important;
+                pointer-events: auto;
+                /* Restore touch for the logo link */
+                background: rgba(5, 5, 5, 0.95);
+                /* Solidify the blur for readability */
+                height: auto;
+            }
+
+            .hero-logo-container {
+                padding: 0 !important;
+                /* Kill the global 50px script gap */
+            }
+
+            .nav-logo {
+                width: 80vw !important;
+                max-width: 300px;
+                margin: 0 auto;
+            }
+
+            /* 2. POSITION THE CONTENT BELOW THE NAV */
+            body {
+                padding-top: 140px !important;
+                /* Push content past the large logo */
+            }
+
+            .header-area h1 {
+                font-size: 1.5rem !important;
+                /* Scaled for mobile "Monolith" look */
+                letter-spacing: 8px !important;
+                margin-top: 10px;
+            }
+
+            .vault-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2px;
+                padding: 0 5px;
+            }
+
+            /* 3. ENSURE FILTERS ARE ACCESSIBLE */
+            .year-nav {
+                margin-bottom: 30px;
+                padding: 0 10px;
+                position: relative;
+                z-index: 10;
+                /* Ensures it sits above any stray background atmospherics */
+            }
         }
-  </style>
-  <link href="theme.css" rel="stylesheet"/>
-  <meta content="#0a0a0a" name="theme-color"/>
-  <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
-  <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
- </head>
- <body>
-  <div id="cursor-ring">
-  </div>
-  <div id="cursor-dot">
-  </div>
-  <nav>
-   <a href="flotsam.html">
-    <div class="hero-logo-container">
-     <img alt="Back" class="nav-logo hero-logo" src="Images/Equal.svg"/>
+    </style>
+    <link href="theme.css" rel="stylesheet" />
+    <meta content="#0a0a0a" name="theme-color" />
+    <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport" />
+</head>
+
+<body>
+    <div id="cursor-ring">
     </div>
-   </a>
-  </nav>
-  <div class="header-area">
-   <div class="status-tag" onclick="revealMission()">
-    TYPE: SOCIAL_RESIDUE // RECLAIMED_2026
-   </div>
-   <h1>
-    Social Residue
-   </h1>
-  </div>
-  <div class="year-nav" id="year-filter">
-  </div>
-  <div class="vault-grid" id="grid">
-  </div>
-  <div id="load-more-trigger">
-  </div>
-  <div id="modal" onclick="if(event.target == this) closeModal()">
-   <div class="modal-content" id="modal-inner">
-   </div>
-  </div>
-  <div id="mission-overlay" onclick="closeMission()">
-   <div class="mission-content">
-    <h3>
-     Original Directive: 2026 Reclamation
-    </h3>
-    <div id="mission-type-target">
+    <div id="cursor-dot">
     </div>
-    <div style="margin-top: 50px; font-size: 0.7rem; opacity: 0.5;">
-     [ CLICK ANYWHERE TO EXIT_ ]
+    <nav style="pointer-events: none;"> <a href="flotsam.html" style="pointer-events: auto; display: block;">
+            <div class="hero-logo-container">
+                <img alt="Back" class="nav-logo hero-logo" src="Images/Equal.svg" />
+            </div>
+        </a>
+    </nav>
+    <div class="header-area">
+        <div class="status-tag" onclick="revealMission()">
+            TYPE: SOCIAL_RESIDUE // RECLAIMED_2026
+        </div>
+        <h1>
+            Social Residue
+        </h1>
     </div>
-   </div>
-  </div>
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js">
-  </script>
-  <script>
-   const manifesto = `> PROJECT_NAME: SOCIAL_RESIDUE\n\n> OBJECTIVE: RECOVER DIALOGUE FROM THE DISCONTINUED INSTAGRAM ESTATE.\n\nCaptured from 2011 to 2023, these artifacts represent the social byproduct of a decade. They are the 'Social Residue'—the conversations and moments that were meant to be transient but have been successfully encrypted into the permanent record.\n\n> ARCHIVE_STATUS: 100% RECLAIMED\n> AUTHENTICITY: VERIFIED\n\n[ CLICK ANYWHERE TO EXIT_ ]`;
+    <div class="year-nav" id="year-filter">
+    </div>
+    <div class="vault-grid" id="grid">
+    </div>
+    <div id="load-more-trigger">
+    </div>
+    <div id="modal" onclick="if(event.target == this) closeModal()">
+        <div class="modal-content" id="modal-inner">
+        </div>
+    </div>
+    <div id="mission-overlay" onclick="closeMission()">
+        <div class="mission-content">
+            <h3>
+                Original Directive: 2026 Reclamation
+            </h3>
+            <div id="mission-type-target">
+            </div>
+            <div style="margin-top: 50px; font-size: 0.7rem; opacity: 0.5;">
+                [ CLICK ANYWHERE TO EXIT_ ]
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js">
+    </script>
+    <script>
+        const manifesto = `> PROJECT_NAME: SOCIAL_RESIDUE\n\n> OBJECTIVE: RECOVER DIALOGUE FROM THE DISCONTINUED INSTAGRAM ESTATE.\n\nCaptured from 2011 to 2023, these artifacts represent the social byproduct of a decade. They are the 'Social Residue'—the conversations and moments that were meant to be transient but have been successfully encrypted into the permanent record.\n\n> ARCHIVE_STATUS: 100% RECLAIMED\n> AUTHENTICITY: VERIFIED\n\n[ CLICK ANYWHERE TO EXIT_ ]`;
 
         let allArtifacts = [];
         let filteredArtifacts = [];
@@ -169,7 +368,7 @@
             try {
                 const res = await fetch('./insta_manifest.json');
                 allArtifacts = await res.json();
-                
+
                 const years = [...new Set(allArtifacts.map(item => {
                     const match = item.date.match(/20\d{2}/);
                     return match ? match[0] : "Other";
@@ -184,7 +383,7 @@
                     filterContainer.appendChild(btn);
                 });
 
-                if(years.length > 0) filterByYear(years[0], filterContainer.firstChild);
+                if (years.length > 0) filterByYear(years[0], filterContainer.firstChild);
 
                 // Setup Intersection Observer for Infinite Scroll
                 const observer = new IntersectionObserver((entries) => {
@@ -208,10 +407,10 @@
 
         function renderNextBatch() {
             if (currentIndex >= filteredArtifacts.length) return;
-            
+
             const grid = document.getElementById('grid');
             const nextBatch = filteredArtifacts.slice(currentIndex, currentIndex + batchSize);
-            
+
             nextBatch.forEach(item => {
                 const card = document.createElement('div');
                 card.className = 'artifact-card';
@@ -219,7 +418,7 @@
                 card.onclick = () => openArtifact(item.file, item.image);
                 grid.appendChild(card);
             });
-            
+
             currentIndex += batchSize;
         }
 
@@ -256,6 +455,7 @@
         function closeMission() { document.getElementById('mission-overlay').style.display = 'none'; }
 
         window.onload = loadVault;
-  </script>
- </body>
+    </script>
+</body>
+
 </html>
