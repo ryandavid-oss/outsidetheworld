@@ -276,53 +276,29 @@
 
         /* 6. MOBILE OVERRIDES: THE PHOTOS APP GRID */
         @media (max-width: 768px) {
-
-            /* 1. NORMALIZE THE NAV BAR */
             nav {
                 padding: 20px 0 !important;
                 text-align: center !important;
                 pointer-events: none;
-                /* Allows swiping "through" the nav */
                 background: rgba(5, 5, 5, 0.95);
                 height: auto;
             }
 
             .hero-logo-container {
                 padding: 0 !important;
-                /* Removes the global padding gap */
                 pointer-events: auto;
-                /* Ensures logo link remains touchable */
             }
 
             .nav-logo {
                 width: 80vw !important;
-                /* Enforces the 80% Brand Monolith */
                 max-width: 300px;
                 margin: 0 auto;
             }
 
-            /* 2. RECLAIM THE CONTENT AREA */
+            /* MOBILE CLEARANCE */
             body {
-                padding: 130px 2px 40px !important;
-                /* Balanced for the large logo */
-            }
-
-            /* Desktop-only: push content below the fixed frosted nav */
-            @media (min-width: 769px) {
-                body {
-                    padding-top: 220px;
-                    /* try 220–260 depending on taste */
-                }
-            }
-
-            .header-area {
-                margin-bottom: 30px;
-            }
-
-            .header-area h1 {
-                font-size: 1.4rem !important;
-                letter-spacing: 6px !important;
-                margin-top: 10px;
+                padding: 180px 2px 40px !important;
+                /* Forces clearance for the 80% logo monolith */
             }
 
             /* 3. GRID OPTIMIZATION */
