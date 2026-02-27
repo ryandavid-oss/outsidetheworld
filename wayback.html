@@ -248,19 +248,21 @@
             }
 
             .extraction-pane {
-                padding: 20px;
+                padding: 15px;
+                /* Tighter margins for small screens */
                 min-height: 60vh;
             }
 
             .glass-card {
-                padding: 50px 25px;
-                background: rgba(0, 0, 0, 0.85);
-                border: none;
+                padding: 40px 20px;
+                /* Precise internal spacing */
+                background: rgba(0, 0, 0, 0.9);
+                /* Darker for better contrast outdoors */
             }
+        }
 
-            .entry-title {
-                font-size: 1.6rem;
-            }
+        .entry-title {
+            font-size: 1.6rem;
         }
     </style>
     <link rel="stylesheet" href="theme.css">
@@ -272,7 +274,7 @@
         <div class="dir-header">
             <a href="personal.html"><img src="Images/Equal.svg" class="sidebar-logo" alt="BACK"></a>
         </div>
-<div class="tuning-knob">
+        <div class="tuning-knob">
             <label class="knob-label">Temporal Era</label>
             <select id="year-select" class="era-filter" onchange="filterEra()"></select>
         </div>
@@ -281,7 +283,8 @@
             <button class="shuffle-btn" onclick="randomizeArchive()">Random_Access_Protocol</button>
         </div>
 
-        <div class="post-list" id="post-list"></div>        </div>
+        <div class="post-list" id="post-list"></div>
+        </div>
         <div class="post-list" id="post-list"></div>
     </aside>
 
@@ -296,7 +299,7 @@
     <script src="wayback_purified.js"></script>
 
     <script>
-const ERA_MAP = {
+        const ERA_MAP = {
             ANALOG: { label: "THE_ANALOG_DAWN", glow: "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)" },
             APPLE: { label: "THE_APPLE_YEARS", glow: "linear-gradient(135deg, #13547a 0%, #80d0c7 100%)" },
             MODERN: { label: "MODERN_RESONANCE", glow: "linear-gradient(135deg, #2c3e50 0%, #4b6cb7 100%)" }
@@ -319,7 +322,7 @@ const ERA_MAP = {
                 opt.textContent = `ERA_${y}`;
                 select.appendChild(opt);
             });
-            
+
             // On load, we'll let the randomize function handle the first view
             randomizeArchive();
         }
