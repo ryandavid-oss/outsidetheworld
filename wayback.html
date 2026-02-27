@@ -6,15 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>The Wayback | Outside The World</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <meta name="theme-color" content="#050505">
+    <meta name="theme-color" content="var(--bg-dark)">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;900&family=Fira+Code:wght@300;500&family=Merriweather:ital,wght@0,300;0,700;1,300&display=swap');
 
         :root {
-            --brand-blue: #6395EE;
-            --brand-teal: #91AFB3;
-            --bg-dark: #050505;
+            --brand-blue: var(--brand-blue);
+            --brand-teal: var(--brand-teal);
+            --bg-dark: var(--bg-dark);
             --border-low: rgba(255, 255, 255, 0.08);
             --glass-bg: rgba(0, 0, 0, 0.6);
         }
@@ -36,7 +36,7 @@
             border-right: 1px solid var(--border-low);
             display: flex;
             flex-direction: column;
-            background: #050505;
+            background: var(--bg-dark);
             z-index: 100;
             flex-shrink: 0;
         }
@@ -227,6 +227,7 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="theme.css">
 </head>
 
 <body>
@@ -309,7 +310,7 @@
             const container = document.getElementById('glass-container');
             const post = allResidue[index];
 
-            document.body.style.background = `radial-gradient(circle at bottom right, rgba(0,0,0,0.8) 0%, #050505 100%), ${post.thumbprint}`;
+            document.body.style.background = `radial-gradient(circle at bottom right, rgba(0,0,0,0.8) 0%, var(--bg-dark) 100%), ${post.thumbprint}`;
             document.body.style.backgroundBlendMode = "overlay";
 
             container.classList.remove('visible');

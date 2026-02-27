@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-    <meta name="theme-color" content="#050505">
+    <meta name="theme-color" content="var(--bg-dark)">
 
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -17,10 +17,10 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Fira+Code:wght@300;500;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap');
 
         :root {
-            --brand-blue: #6395EE;
-            --brand-light-blue: #A0BEF5;
-            --brand-teal: #91AFB3;
-            --bg-dark: #050505;
+            --brand-blue: var(--brand-blue);
+            --brand-light-blue: var(--brand-light-blue);
+            --brand-teal: var(--brand-teal);
+            --bg-dark: var(--bg-dark);
             --warm-amber: #FFB347;
             --rose-gold: #E0BFB8;
             --glass-teal: rgba(145, 175, 179, 0.05);
@@ -571,7 +571,7 @@
             width: 100%;
             text-align: center;
             background: var(--brand-blue);
-            color: #050505;
+            color: var(--bg-dark);
             text-decoration: none;
             font-family: 'Fira Code', monospace;
             font-size: 1.2rem;
@@ -756,6 +756,7 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="theme.css">
 </head>
 
 <body>

@@ -6,15 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>Residue Archive | Matrix Terminal</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <meta name="theme-color" content="#050505">
+    <meta name="theme-color" content="var(--bg-dark)">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;900&family=Fira+Code:wght@300;500;700&family=Merriweather:ital,wght@0,300;0,700;1,300&display=swap');
 
         :root {
-            --brand-blue: #6395EE;
-            --brand-teal: #91AFB3;
-            --bg-dark: #050505;
+            --brand-blue: var(--brand-blue);
+            --brand-teal: var(--brand-teal);
+            --bg-dark: var(--bg-dark);
             --warm-amber: #FFB347;
             --rose-gold: #E0BFB8;
             --border-low: rgba(255, 255, 255, 0.08);
@@ -248,6 +248,7 @@
             /* Use the Logo for back nav on mobile */
         }
     </style>
+    <link rel="stylesheet" href="theme.css">
 </head>
 
 <body>
@@ -338,7 +339,7 @@
             const container = document.getElementById('glass-container');
             const post = current_narrative[index];
 
-            document.body.style.background = `radial-gradient(circle at top left, rgba(155, 89, 182, 0.1) 0%, #050505 100%)`;
+            document.body.style.background = `radial-gradient(circle at top left, rgba(155, 89, 182, 0.1) 0%, var(--bg-dark) 100%)`;
             container.classList.remove('visible');
 
             setTimeout(() => {

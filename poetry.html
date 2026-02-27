@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verse Archive | Outside The World</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <meta name="theme-color" content="#050505">
+    <meta name="theme-color" content="var(--bg-dark)">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -14,10 +14,10 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;900&family=Fira+Code:wght@300;500&family=Merriweather:ital,wght@0,300;0,700;1,300&display=swap');
 
         :root {
-            --brand-blue: #6395EE;
-            --brand-teal: #91AFB3;
+            --brand-blue: var(--brand-blue);
+            --brand-teal: var(--brand-teal);
             --amethyst: #9b59b6;
-            --bg-dark: #050505;
+            --bg-dark: var(--bg-dark);
             --border-low: rgba(255, 255, 255, 0.08);
             --glass-bg: rgba(0, 0, 0, 0.6);
         }
@@ -39,7 +39,7 @@
             border-right: 1px solid var(--border-low);
             display: flex;
             flex-direction: column;
-            background: #050505;
+            background: var(--bg-dark);
             z-index: 100;
             flex-shrink: 0;
         }
@@ -254,6 +254,7 @@
             background: var(--border-low);
         }
     </style>
+    <link rel="stylesheet" href="theme.css">
 </head>
 
 <body>
@@ -333,7 +334,7 @@
             const poem = archive[index];
 
             document.body.style.background = `
-                radial-gradient(circle at bottom right, rgba(0,0,0,0.8) 0%, #050505 100%),
+                radial-gradient(circle at bottom right, rgba(0,0,0,0.8) 0%, var(--bg-dark) 100%),
                 ${poem.thumbprint}
             `;
             document.body.style.backgroundBlendMode = "overlay";

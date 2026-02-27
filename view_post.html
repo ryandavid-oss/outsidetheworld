@@ -9,9 +9,9 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;900&family=Fira+Code:wght@500;700&family=Merriweather:ital,wght@0,300;0,700;1,300&display=swap');
 
         :root {
-            --brand-blue: #6395EE;
-            --brand-teal: #91AFB3;
-            --bg-dark: #050505;
+            --brand-blue: var(--brand-blue);
+            --brand-teal: var(--brand-teal);
+            --bg-dark: var(--bg-dark);
             --border-teal: rgba(145, 175, 179, 0.2);
         }
 
@@ -71,6 +71,7 @@
         /* SPACE FIXES */
         #md-render p:first-child { margin-top: 0; }
     </style>
+    <link rel="stylesheet" href="theme.css">
 </head>
 <body>
 

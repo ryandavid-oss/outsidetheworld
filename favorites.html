@@ -9,9 +9,9 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;900&family=Fira+Code:wght@300;500&display=swap');
 
         :root {
-            --brand-teal: #91AFB3;
-            --brand-blue: #6395EE;
-            --bg-dark: #050505;
+            --brand-teal: var(--brand-teal);
+            --brand-blue: var(--brand-blue);
+            --bg-dark: var(--bg-dark);
         }
 
         body {
@@ -104,7 +104,7 @@
 
         .modal-content h2 {
             font-family: 'Fira Code', monospace; font-size: 0.95rem;
-            color: #91AFB3 !important; letter-spacing: 5px; text-transform: uppercase;
+            color: var(--brand-teal) !important; letter-spacing: 5px; text-transform: uppercase;
             margin: 10px 0 60px 0; font-weight: 500; opacity: 1 !important;
         }
 
@@ -153,6 +153,7 @@
             .btn-back { top: 20px; right: 20px; padding: 8px 16px; font-size: 0.6rem; }
         }
     </style>
+    <link rel="stylesheet" href="theme.css">
 </head>
 <body>
 
