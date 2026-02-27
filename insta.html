@@ -22,11 +22,10 @@
             color: white;
             font-family: 'Inter', sans-serif;
             margin: 0;
-            /* This clears the new, taller desktop logo container */
-            padding: 220px 20px 60px;
+            /* JavaScript will override this, but 280px is a safer fallback for desktop */
+            padding: 280px 20px 60px;
             min-height: 100vh;
             overflow-x: hidden;
-            /* Atmospheric Scanline texture */
             background-image: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
                 linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
             background-size: 100% 4px, 3px 100%;
@@ -53,16 +52,23 @@
             top: 0;
             left: 0;
             width: 100%;
-            padding: 40px;
             z-index: 3500;
-            backdrop-filter: blur(10px);
-            background: linear-gradient(to bottom, rgba(5, 5, 5, 1) 0%, rgba(5, 5, 5, 0) 100%);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            background: linear-gradient(to bottom, rgba(10, 10, 10, 1) 0%, rgba(10, 10, 10, 0) 100%);
+            padding: 40px;
+            /* Standard left-aligned gutter */
             pointer-events: none;
+        }
+
+        .hero-logo-container {
+            display: inline-block !important;
+            /* Forces left-alignment on desktop */
+            pointer-events: auto;
         }
 
         .nav-logo {
             width: 220px;
-            pointer-events: auto;
             filter: drop-shadow(0 0 20px rgba(145, 175, 179, 0.2));
         }
 
@@ -71,14 +77,6 @@
             margin-bottom: 40px;
             position: relative;
             z-index: 10;
-        }
-
-        .header-area h1 {
-            font-size: 2.5rem;
-            letter-spacing: 15px;
-            text-transform: uppercase;
-            margin-top: 20px;
-            font-weight: 900;
         }
 
         .status-tag {
