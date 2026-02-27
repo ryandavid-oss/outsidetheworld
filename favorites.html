@@ -1,257 +1,619 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>The Favorites List | Outside The World</title>
-    <link href="favicon.svg" rel="icon" type="image/svg+xml" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
 
-    <link href="theme.css" rel="stylesheet" />
+    <!-- Load global theme FIRST -->
+    <link rel="stylesheet" href="theme.css" />
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;900&family=Fira+Code:wght@300;500&display=swap');
 
-        body {
-            /* JavaScript will handle the top padding dynamically */
-            padding: 0 20px 60px;
-            font-family: 'Inter', sans-serif;
-            background-image: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
-                linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
-            background-size: 100% 4px, 3px 100%;
+        :root {
+            /* JS will update this based on the actual nav height */
+            --nav-offset: 180px;
         }
 
-        /* 2. NAVIGATION - DESKTOP LEFT, MOBILE CENTER */
-        nav {
+        body {
+            font-family: var(--font-main, 'Inter', sans-serif);
+            color: white;
+            margin: 0;
+
+            /* Push content below fixed nav (dynamic) */
+            padding: calc(var(--nav-offset) + env(safe-area-inset-top)) 20px 60px;
+
+            /* Your scanline + RGB wash */
+            background-image:
+                linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+                linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            background-size: 100% 4px, 3px 100%;
+            overflow-x: hidden;
+        }
+
+        /* NAV (desktop left / mobile centered) */
+        .fav-nav {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             z-index: 3500;
+
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             background: linear-gradient(to bottom, rgba(10, 10, 10, 1) 0%, rgba(10, 10, 10, 0) 100%);
+
             display: flex;
             justify-content: flex-start;
-            /* Desktop Default */
-            padding: 40px;
+            padding: 28px 40px;
+
+            /* critical: don't block scroll/touch */
             pointer-events: none;
         }
 
-        /* Override the global container to prevent it from forcing a center on desktop */
-        .hero-logo-container {
-            display: flex !important;
-            justify-content: flex-start !important;
-            width: auto !important;
-            padding: 0 !important;
+        .fav-nav a {
             pointer-events: auto;
+            display: inline-flex;
+            align-items: center;
         }
 
-        .nav-logo {
+        .fav-nav-logo {
             width: 220px;
+            height: auto;
+            display: block;
             filter: drop-shadow(0 0 20px rgba(99, 149, 238, 0.3));
         }
 
-        /* 3. HEADER AREA */
+        /* HEADER */
         .header-area {
             text-align: center;
-            margin-bottom: 60px;
+            margin: 0 auto 60px auto;
+            max-width: 1200px;
             position: relative;
             z-index: 10;
+        }
+
+        .status-tag {
+            font-family: var(--font-code, 'Fira Code', monospace);
+            font-size: 0.65rem;
+            letter-spacing: 4px;
+            color: var(--brand-teal, #91AFB3);
+            border: 1px solid rgba(145, 175, 179, 0.3);
+            padding: 8px 16px;
+            display: inline-block;
+            text-transform: uppercase;
+            background: rgba(0, 0, 0, 0.25);
+            cursor: pointer;
+            user-select: none;
+            transition: 0.25s;
+        }
+
+        .status-tag:hover {
+            background: rgba(145, 175, 179, 0.2);
+            color: white;
+            box-shadow: 0 0 18px rgba(145, 175, 179, 0.35);
         }
 
         .header-area h1 {
             font-size: 2.5rem;
             letter-spacing: 15px;
             text-transform: uppercase;
-            margin: 0;
-            color: white;
+            margin: 18px 0 0 0;
             font-weight: 900;
         }
 
-        /* 4. GRID */
+        /* GRID */
         .vault-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 15px;
             max-width: 1400px;
             margin: 0 auto;
-            padding: 0 20px;
         }
 
+        /* Use a button for accessibility + no “drag freeze” behavior */
         .artifact-card {
+            appearance: none;
+            -webkit-appearance: none;
+            border: 1px solid rgba(255, 255, 255, 0.06);
             background: #111;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            aspect-ratio: 1 / 1;
-            overflow: hidden;
+            padding: 0;
+            margin: 0;
+            border-radius: 0;
             cursor: pointer;
+            overflow: hidden;
+            aspect-ratio: 1 / 1;
+            position: relative;
+            transition: border-color 0.25s ease, transform 0.25s ease;
         }
 
-        /* 5. MOBILE OVERRIDES */
+        .artifact-card:focus {
+            outline: none;
+            border-color: rgba(99, 149, 238, 0.6);
+            box-shadow: 0 0 0 3px rgba(99, 149, 238, 0.15);
+        }
+
+        .artifact-card:hover {
+            border-color: rgba(99, 149, 238, 0.45);
+            transform: translateY(-1px);
+        }
+
+        .artifact-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            filter: grayscale(20%) contrast(1.1);
+            transition: transform 0.4s ease, filter 0.4s ease;
+        }
+
+        .artifact-card:hover img {
+            filter: grayscale(0%) contrast(1.0);
+            transform: scale(1.04);
+        }
+
+        .load-error {
+            font-family: var(--font-code, 'Fira Code', monospace);
+            color: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 18px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* MODAL */
+        #modal {
+            position: fixed;
+            inset: 0;
+            z-index: 4000;
+
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.35s ease;
+
+            background: rgba(0, 0, 0, 0.92);
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        #modal.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        #modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            filter: blur(80px) brightness(0.2);
+            opacity: 0.75;
+            transform: scale(1.15);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .btn-back {
+            position: fixed;
+            top: 22px;
+            right: 24px;
+            z-index: 5000;
+
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid var(--brand-teal, #91AFB3);
+            color: var(--brand-teal, #91AFB3);
+            font-family: var(--font-code, 'Fira Code', monospace);
+            cursor: pointer;
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            padding: 12px 18px;
+        }
+
+        .modal-content {
+            max-width: 900px;
+            width: min(900px, 92vw);
+            margin: 90px auto 80px auto;
+            text-align: center;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .modal-content h1 {
+            font-weight: 900;
+            font-size: 3.1rem;
+            letter-spacing: 12px;
+            text-transform: uppercase;
+            margin: 0 0 6px 0;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.35), 0 0 40px rgba(255, 255, 255, 0.18);
+        }
+
+        .modal-content h2 {
+            font-family: var(--font-code, 'Fira Code', monospace);
+            font-size: 0.95rem;
+            color: var(--brand-teal, #91AFB3);
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            margin: 10px 0 50px 0;
+            font-weight: 500;
+        }
+
+        .modal-content img {
+            max-width: 100%;
+            max-height: 75vh;
+            height: auto;
+            display: block;
+            margin: 0 auto 50px auto;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.85);
+        }
+
+        .modal-content .loading {
+            font-family: var(--font-code, 'Fira Code', monospace);
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 2px;
+            margin: 0;
+        }
+
+        .modal-content .markdown {
+            text-align: left;
+            margin: 0 auto;
+            max-width: 760px;
+        }
+
+        .modal-content .markdown p,
+        .modal-content .markdown li {
+            font-size: 1.2rem;
+            line-height: 1.85;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 300;
+        }
+
+        .modal-content .markdown blockquote {
+            border-left: 2px solid rgba(145, 175, 179, 0.5);
+            margin: 24px 0;
+            padding-left: 16px;
+            color: rgba(145, 175, 179, 0.95);
+            font-family: var(--font-code, 'Fira Code', monospace);
+            letter-spacing: 1px;
+            font-size: 0.95rem;
+        }
+
+        /* MISSION OVERLAY */
+        #mission-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 6000;
+
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+
+            background: rgba(0, 0, 0, 0.96);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        #mission-overlay.active {
+            display: flex;
+        }
+
+        .mission-content {
+            max-width: 760px;
+            width: 100%;
+            font-family: var(--font-code, 'Fira Code', monospace);
+            color: var(--brand-teal, #91AFB3);
+            line-height: 1.85;
+            text-align: left;
+        }
+
+        .mission-content h3 {
+            color: white;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--brand-teal, #91AFB3);
+            padding-bottom: 10px;
+            margin: 0 0 24px 0;
+        }
+
+        .mission-content .highlight {
+            color: white;
+            font-weight: 500;
+        }
+
+        .mission-hint {
+            margin-top: 50px;
+            font-size: 0.7rem;
+            opacity: 0.5;
+            letter-spacing: 2px;
+        }
+
+        /* MOBILE */
         @media (max-width: 768px) {
-            nav {
-                justify-content: center !important;
-                padding: 20px 0 !important;
+            body {
+                padding-left: 6px;
+                padding-right: 6px;
+                padding-bottom: 40px;
             }
 
-            .hero-logo-container {
-                width: 100% !important;
-                justify-content: center !important;
+            .fav-nav {
+                justify-content: center;
+                padding: 16px 0;
             }
 
-            .nav-logo {
-                width: 80vw !important;
-                max-width: 280px;
+            .fav-nav-logo {
+                width: 80vw;
+                max-width: 320px;
+            }
+
+            .header-area {
+                margin-bottom: 28px;
             }
 
             .header-area h1 {
-                font-size: 1.3rem !important;
-                letter-spacing: 6px !important;
+                font-size: 1.3rem;
+                letter-spacing: 6px;
             }
 
             .vault-grid {
                 grid-template-columns: repeat(2, 1fr);
-                padding: 0 10px;
+                gap: 8px;
+            }
+
+            .modal-content {
+                margin-top: 70px;
+            }
+
+            .modal-content h1 {
+                font-size: 1.8rem;
+                letter-spacing: 6px;
+            }
+
+            .modal-content h2 {
+                margin-bottom: 26px;
+            }
+
+            .btn-back {
+                top: 16px;
+                right: 16px;
+                padding: 9px 14px;
+                font-size: 0.65rem;
             }
         }
     </style>
 </head>
 
 <body>
-    <div id="cursor-ring">
-    </div>
-    <div id="cursor-dot">
-    </div>
-    <nav>
-        <a href="flotsam.html" style="display: inline-block; pointer-events: auto;">
-            <div class="hero-logo-container">
-                <img alt="Back" class="nav-logo hero-logo" src="Images/Equal.svg" />
-            </div>
+    <div id="cursor-ring"></div>
+    <div id="cursor-dot"></div>
+
+    <nav class="fav-nav">
+        <a href="flotsam.html" aria-label="Back to Flotsam">
+            <img class="fav-nav-logo" src="Images/Equal.svg" alt="Back" />
         </a>
     </nav>
-    <div class="header-area">
-        <div class="status-tag" onclick="revealMission()">
+
+    <header class="header-area">
+        <div class="status-tag" id="statusTag" title="Click to reveal directive">
             TYPE: CULTURAL_RESIDUE // PROJECT: FAVORITES_2011
         </div>
-        <h1>
-            The Favorites List
-        </h1>
+        <h1>The Favorites List</h1>
+    </header>
+
+    <main>
+        <div class="vault-grid" id="grid" aria-live="polite"></div>
+    </main>
+
+    <div id="modal" aria-hidden="true">
+        <div id="modal-backdrop"></div>
+        <button class="btn-back" id="modalClose" type="button">[ CLOSE_X ]</button>
+        <div class="modal-content" id="modal-inner"></div>
     </div>
-    <div class="vault-grid" id="grid">
-    </div>
-    <div id="modal" onclick="closeModalOnEmpty(event)">
-        <div id="modal-backdrop">
-        </div>
-        <button class="btn-back" onclick="closeModal()">
-            [ CLOSE_X ]
-        </button>
-        <div class="modal-content" id="modal-inner">
-        </div>
-    </div>
-    <div id="mission-overlay" onclick="closeMission()">
+
+    <div id="mission-overlay" aria-hidden="true">
         <div class="mission-content">
-            <h3>
-                Original Directive: 2011
-            </h3>
-            <div id="mission-type-target">
-            </div>
-            <div style="margin-top: 50px; font-size: 0.7rem; opacity: 0.5;">
-                [ CLICK ANYWHERE TO EXIT_ ]
-            </div>
+            <h3>Original Directive: 2011</h3>
+            <div id="mission-type-target"></div>
+            <div class="mission-hint">[ CLICK ANYWHERE TO EXIT_ ]</div>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js">
-    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script>
-        async function loadVault() {
-            try {
-                const response = await fetch('favorites_manifest.json');
-                const artifacts = await response.json();
-                const grid = document.getElementById('grid');
+        (() => {
+            const grid = document.getElementById('grid');
+            const nav = document.querySelector('.fav-nav');
 
-                artifacts.forEach(item => {
-                    const card = document.createElement('div');
-                    card.className = 'artifact-card';
-                    card.innerHTML = `<img src="${item.image}" alt="${item.title}" loading="lazy">`;
-                    card.onclick = () => openArtifact(item.file, item.image);
-                    grid.appendChild(card);
-                });
-            } catch (e) { console.error("Manifest load error:", e); }
-        }
-
-        async function openArtifact(file, imageUrl) {
-            const response = await fetch(file);
-            const markdown = await response.text();
-            document.getElementById('modal-backdrop').style.backgroundImage = `url(${imageUrl})`;
-            document.getElementById('modal-inner').innerHTML = marked.parse(markdown);
             const modal = document.getElementById('modal');
-            modal.style.display = 'block';
-            setTimeout(() => { modal.classList.add('active'); }, 10);
-            modal.scrollTop = 0;
-            document.body.style.overflow = 'hidden';
-        }
+            const modalInner = document.getElementById('modal-inner');
+            const modalBackdrop = document.getElementById('modal-backdrop');
+            const modalClose = document.getElementById('modalClose');
 
-        function closeModal() {
-            const modal = document.getElementById('modal');
-            modal.classList.remove('active');
-            setTimeout(() => { modal.style.display = 'none'; document.body.style.overflow = 'auto'; }, 500);
-        }
+            const statusTag = document.getElementById('statusTag');
+            const missionOverlay = document.getElementById('mission-overlay');
+            const missionTarget = document.getElementById('mission-type-target');
 
-        function closeModalOnEmpty(event) {
-            if (event.target.id === 'modal' || event.target.id === 'modal-backdrop') closeModal();
-        }
+            let currentController = null;
+            let isTyping = false;
 
-        // UPDATED MANIFESTO FOR FAVORITE THINGS [cite: 98, 100, 102]
-        const manifesto = `> PROJECT_NAME: THE FAVORITES LIST\n\nGreetings, travelers. If you've come here by way of The iPhone Photo Project, i hope you find this an entertaining diversion.\n\nHere, you'll find a list catalogue of my <span class="highlight">favorite things</span>. One for each day, ending the 31st of December.\n\nI loved the idea of getting to know someone better by learning about their <span class="highlight">treasures, vices, needs, and brand choices</span>.\n\n> STATUS: RECLAIMED 2026`;
+            // Make marked behave nicely for simple text
+            if (window.marked) {
+                marked.setOptions({ breaks: true, mangle: false, headerIds: false });
+            }
 
-        let isTyping = false;
-        function revealMission() {
-            if (isTyping) return;
-            isTyping = true;
-            const overlay = document.getElementById('mission-overlay');
-            const target = document.getElementById('mission-type-target');
-            overlay.style.display = 'flex';
-            target.innerHTML = "";
-            let i = 0;
-            function typeManifesto() {
-                if (i < manifesto.length) {
-                    if (manifesto.substring(i, i + 1) === '<') {
-                        let tagEnd = manifesto.indexOf('>', i);
-                        target.innerHTML += manifesto.substring(i, tagEnd + 1);
-                        i = tagEnd + 1;
+            function escapeHtml(str) {
+                return String(str).replace(/[&<>"']/g, (ch) => ({
+                    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+                }[ch]));
+            }
+
+            function syncNavOffset() {
+                if (!nav) return;
+                const h = Math.ceil(nav.getBoundingClientRect().height);
+                document.documentElement.style.setProperty('--nav-offset', (h + 24) + 'px');
+            }
+
+            window.addEventListener('load', syncNavOffset, { passive: true });
+            window.addEventListener('resize', syncNavOffset, { passive: true });
+            syncNavOffset();
+
+            async function loadVault() {
+                try {
+                    const res = await fetch('favorites_manifest.json', { cache: 'no-store' });
+                    if (!res.ok) throw new Error(`Manifest HTTP ${res.status}`);
+                    const artifacts = await res.json();
+
+                    const frag = document.createDocumentFragment();
+
+                    artifacts.forEach((item) => {
+                        const btn = document.createElement('button');
+                        btn.className = 'artifact-card';
+                        btn.type = 'button';
+
+                        const title = item.title || 'Favorite';
+                        btn.setAttribute('aria-label', `Open: ${title}`);
+
+                        btn.innerHTML = `<img src="${item.image}" alt="${escapeHtml(title)}" loading="lazy" decoding="async">`;
+                        btn.addEventListener('click', () => openArtifact(item));
+                        frag.appendChild(btn);
+                    });
+
+                    grid.innerHTML = '';
+                    grid.appendChild(frag);
+                } catch (err) {
+                    console.error('Manifest load error:', err);
+                    grid.innerHTML = `<div class="load-error">Could not load favorites_manifest.json. Open dev tools console for details.</div>`;
+                }
+            }
+
+            function openModalShell(imageUrl) {
+                modalBackdrop.style.backgroundImage = imageUrl ? `url(${imageUrl})` : '';
+                modal.classList.add('active');
+                modal.setAttribute('aria-hidden', 'false');
+                document.body.style.overflow = 'hidden';
+                modal.scrollTop = 0;
+            }
+
+            async function openArtifact(item) {
+                // Abort any in-flight fetch if user clicks fast
+                if (currentController) currentController.abort();
+                currentController = new AbortController();
+
+                const title = item.title || 'Artifact';
+                openModalShell(item.image);
+
+                // Skeleton content so it never “hangs”
+                modalInner.innerHTML = `
+          <h1>${escapeHtml(title)}</h1>
+          <h2>FAVORITES_2011</h2>
+          <img src="${item.image}" alt="${escapeHtml(title)}" loading="eager" decoding="async">
+          <p class="loading">Loading…</p>
+        `;
+
+                try {
+                    const res = await fetch(item.file, { signal: currentController.signal });
+                    if (!res.ok) throw new Error(`Artifact HTTP ${res.status}`);
+                    const markdown = await res.text();
+
+                    const loadingEl = modalInner.querySelector('.loading');
+                    if (loadingEl) loadingEl.remove();
+
+                    const wrap = document.createElement('div');
+                    wrap.className = 'markdown';
+                    wrap.innerHTML = window.marked ? marked.parse(markdown) : `<pre>${escapeHtml(markdown)}</pre>`;
+                    modalInner.appendChild(wrap);
+                } catch (err) {
+                    if (err.name === 'AbortError') return;
+                    console.error('Artifact load error:', err);
+                    const loadingEl = modalInner.querySelector('.loading');
+                    if (loadingEl) loadingEl.textContent = 'Could not load this entry.';
+                }
+            }
+
+            function closeModal() {
+                modal.classList.remove('active');
+                modal.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = '';
+
+                if (currentController) {
+                    currentController.abort();
+                    currentController = null;
+                }
+            }
+
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal || e.target === modalBackdrop) closeModal();
+            });
+
+            modalClose.addEventListener('click', (e) => {
+                e.stopPropagation();
+                closeModal();
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    if (modal.classList.contains('active')) closeModal();
+                    if (missionOverlay.classList.contains('active')) closeMission();
+                }
+            });
+
+            // Mission overlay typing
+            const manifesto =
+                `> PROJECT_NAME: THE FAVORITES LIST
+
+Greetings, travelers. If you've come here by way of The iPhone Photo Project, i hope you find this an entertaining diversion.
+
+Here, you'll find a list catalogue of my <span class="highlight">favorite things</span>. One for each day, ending the 31st of December.
+
+I loved the idea of getting to know someone better by learning about their <span class="highlight">treasures, vices, needs, and brand choices</span>.
+
+> STATUS: RECLAIMED 2026`;
+
+            function revealMission() {
+                if (isTyping) return;
+                isTyping = true;
+
+                missionOverlay.classList.add('active');
+                missionOverlay.setAttribute('aria-hidden', 'false');
+                missionTarget.innerHTML = '';
+
+                let i = 0;
+
+                const type = () => {
+                    if (i >= manifesto.length) { isTyping = false; return; }
+
+                    // Preserve inline HTML tags
+                    if (manifesto[i] === '<') {
+                        const end = manifesto.indexOf('>', i);
+                        if (end !== -1) {
+                            missionTarget.innerHTML += manifesto.slice(i, end + 1);
+                            i = end + 1;
+                        } else {
+                            missionTarget.innerHTML += manifesto[i++];
+                        }
                     } else {
-                        target.innerHTML += manifesto.charAt(i);
-                        i++;
+                        missionTarget.innerHTML += manifesto[i++];
                     }
-                    setTimeout(typeManifesto, 25);
-                } else { isTyping = false; }
+                    setTimeout(type, 22);
+                };
+
+                type();
             }
-            typeManifesto();
-        }
-        function closeMission() { document.getElementById('mission-overlay').style.display = 'none'; }
-        document.querySelector('.status-tag').onclick = revealMission;
 
-        loadVault();
-    </script>
-    <script>
-        function syncBodyToNav() {
-            const nav = document.querySelector('nav');
-            if (!nav) return;
-
-            if (window.innerWidth > 768) {
-                // Adds 40px of breathing room below the blur zone
-                document.body.style.paddingTop = (nav.offsetHeight + 40) + "px";
-            } else {
-                // On mobile, the CSS 130px padding-top will take over
-                document.body.style.paddingTop = "180px";
+            function closeMission() {
+                missionOverlay.classList.remove('active');
+                missionOverlay.setAttribute('aria-hidden', 'true');
+                isTyping = false;
             }
-        }
 
-        window.addEventListener("load", syncBodyToNav);
-        window.addEventListener("resize", syncBodyToNav);
+            statusTag.addEventListener('click', revealMission);
+            missionOverlay.addEventListener('click', closeMission);
 
-        // Run it once immediately if content is already loaded
-        syncBodyToNav();
+            loadVault();
+        })();
     </script>
 </body>
 
