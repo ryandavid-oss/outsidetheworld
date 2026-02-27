@@ -204,6 +204,16 @@
             font-family: 'Fira Code', monospace;
             letter-spacing: 2px;
         }
+
+        @media (max-width: 600px) {
+            .signature {
+                flex-direction: column;
+                text-align: center;
+                padding-left: 0 !important;
+                border-left: none !important;
+                border-top: 2px solid var(--brand-teal);
+            }
+        }
     </style>
     <link rel="stylesheet" href="theme.css">
 </head>
