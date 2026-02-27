@@ -15,6 +15,7 @@
         }
 
         body {
+    background-color: #0a0a0a;
             font-family: 'Inter', sans-serif;
             color: white;
             margin: 0;
@@ -22,9 +23,8 @@
             padding-bottom: 60px;
             background-color: #0a0a0a;
             overflow-x: hidden;
-            background-image: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
-                linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
-            background-size: 100% 4px, 3px 100%;
+            
+            
         }
 
         nav {
@@ -195,6 +195,7 @@
             }
 
             body {
+    background-color: #0a0a0a;
                 padding-top: 180px !important;
             }
 
@@ -208,6 +209,15 @@
                 gap: 2px;
             }
         }
+    
+/* THE CLEAN ATMOSPHERIC WASH */
+body::after {
+    content: " "; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle at 50% 50%, rgba(10, 10, 10, 0) 0%, rgba(0, 0, 0, 0.4) 100%),
+                linear-gradient(90deg, rgba(255, 0, 0, 0.01), rgba(0, 255, 0, 0.005), rgba(0, 0, 255, 0.01));
+    pointer-events: none; z-index: 3000; opacity: 0.2;
+}
+
     </style>
 </head>
 
