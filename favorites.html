@@ -6,77 +6,55 @@
     <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport" />
     <title>The Favorites List | Outside The World</title>
     <link href="favicon.svg" rel="icon" type="image/svg+xml" />
+
     <link href="theme.css" rel="stylesheet" />
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;900&family=Fira+Code:wght@300;500&display=swap');
 
-        :root {
-            --brand-teal: #91AFB3;
-            --brand-blue: #6395EE;
-            --bg-dark: #0a0a0a;
-        }
-
         body {
-            background-color: var(--bg-dark);
-            color: white;
+            /* JavaScript will handle the top padding dynamically */
+            padding: 0 20px 60px;
             font-family: 'Inter', sans-serif;
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-            overflow-x: hidden;
             background-image: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
                 linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
             background-size: 100% 4px, 3px 100%;
-            padding-top: 180px;
         }
 
-        /* 1. FIXED NAVIGATION BLOCK */
+        /* 2. NAVIGATION - DESKTOP LEFT, MOBILE CENTER */
         nav {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             z-index: 3500;
-
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             background: linear-gradient(to bottom, rgba(10, 10, 10, 1) 0%, rgba(10, 10, 10, 0) 100%);
-
             display: flex;
             justify-content: flex-start;
-            /* LEFT on desktop */
+            /* Desktop Default */
             padding: 40px;
-            /* left gutter + vertical padding */
-
             pointer-events: none;
-            /* don't block scrolling */
         }
 
-        nav a,
-        nav .hero-logo-container,
-        nav .nav-logo {
-            pointer-events: auto;
-            /* but the logo/link remains clickable */
-        }
-
-        /* Center the script-injected container */
+        /* Override the global container to prevent it from forcing a center on desktop */
         .hero-logo-container {
-            display: flex;
-            justify-content: flex-start;
-            width: auto;
+            display: flex !important;
+            justify-content: flex-start !important;
+            width: auto !important;
+            padding: 0 !important;
+            pointer-events: auto;
         }
 
         .nav-logo {
             width: 220px;
-            pointer-events: auto;
             filter: drop-shadow(0 0 20px rgba(99, 149, 238, 0.3));
         }
 
-        /* 2. THE HEADER AREA - RECALIBRATED */
+        /* 3. HEADER AREA */
         .header-area {
             text-align: center;
-            /* Recalculated: clears the 220px logo + padding without the "canyon" */
-            padding-top: 0;
             margin-bottom: 60px;
             position: relative;
             z-index: 10;
@@ -91,66 +69,39 @@
             font-weight: 900;
         }
 
-        .status-tag {
-            font-family: 'Fira Code', monospace;
-            font-size: 0.6rem;
-            letter-spacing: 4px;
-            color: var(--brand-teal);
-            border: 1px solid rgba(145, 175, 179, 0.3);
-            padding: 6px 15px;
-            display: inline-block;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-        }
-
-        /* 3. VAULT GRID */
+        /* 4. GRID */
         .vault-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 15px;
             max-width: 1400px;
             margin: 0 auto;
-            padding: 0 40px 100px;
+            padding: 0 20px;
         }
 
         .artifact-card {
             background: #111;
             border: 1px solid rgba(255, 255, 255, 0.05);
-            cursor: pointer;
-            position: relative;
             aspect-ratio: 1 / 1;
             overflow: hidden;
+            cursor: pointer;
         }
 
-        /* MOBILE ARCHITECTURE */
+        /* 5. MOBILE OVERRIDES */
         @media (max-width: 768px) {
             nav {
-                justify-content: center;
+                justify-content: center !important;
                 padding: 20px 0 !important;
             }
 
             .hero-logo-container {
-                width: 100%;
-                justify-content: center;
-            }
-
-            body {
-                padding-top: 130px !important;
-            }
-
-            .header-area {
-                padding-top: 0;
-                /* important now */
+                width: 100% !important;
+                justify-content: center !important;
             }
 
             .nav-logo {
-                width: 75vw !important;
+                width: 80vw !important;
                 max-width: 280px;
-            }
-
-            .header-area {
-                padding-top: 160px;
-                /* Tighter for mobile */
             }
 
             .header-area h1 {
@@ -164,10 +115,6 @@
             }
         }
     </style>
-
-
-    <meta content="#0a0a0a" name="theme-color" />
-    <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style" />
 </head>
 
 <body>
@@ -285,6 +232,26 @@
         document.querySelector('.status-tag').onclick = revealMission;
 
         loadVault();
+    </script>
+    <script>
+        function syncBodyToNav() {
+            const nav = document.querySelector('nav');
+            if (!nav) return;
+
+            if (window.innerWidth > 768) {
+                // Adds 40px of breathing room below the blur zone
+                document.body.style.paddingTop = (nav.offsetHeight + 40) + "px";
+            } else {
+                // On mobile, the CSS 130px padding-top will take over
+                document.body.style.paddingTop = "180px";
+            }
+        }
+
+        window.addEventListener("load", syncBodyToNav);
+        window.addEventListener("resize", syncBodyToNav);
+
+        // Run it once immediately if content is already loaded
+        syncBodyToNav();
     </script>
 </body>
 
