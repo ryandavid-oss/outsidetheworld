@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <title>Artifacts // Flotsam_Test</title>
-    <meta name="theme-color" content="var(--bg-dark)">
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500;700&family=Inter:wght@400;900&display=swap');
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+  <title>
+   Artifacts // Flotsam_Test
+  </title>
+  <meta content="var(--bg-dark)" name="theme-color"/>
+  <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
+  <style>
+   @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500;700&family=Inter:wght@400;900&display=swap');
 
         :root {
             --brand-blue: var(--brand-blue);
@@ -159,55 +160,73 @@
                 gap: 10px;
             }
         }
-    </style>
-    <link rel="stylesheet" href="theme.css">
-</head>
-
-<body>
-
-    <header class="terminal-header">
-        <div class="header-title">
-            <span class="status-tag">DIRECTORY_RECOVERY // ACTIVE</span>
-            <h1>FLOTSAM_ARCHIVES</h1>
-        </div>
-        <a href="personal.html"
-            style="font-family:'Fira Code'; color:var(--brand-teal); text-decoration:none; font-size:0.7rem;">←
-            EXIT_SYSTEM</a>
-    </header>
-
-    <main class="artifact-rack">
-
-        <div class="museum-case">
-            <div class="viewport-container">
-                <iframe src="old_index_2009.html" class="legacy-frame"></iframe>
-                <div class="case-overlay"></div>
-            </div>
-            <div class="case-info">
-                <h3>OTW_INDEX_V2.1</h3>
-                <p>Origin: 23 MAR 2009 // MS_FRONTPAGE</p>
-                <a href="old_index_2009.html" class="boot-btn">BOOT_ARTIFACT</a>
-            </div>
-        </div>
-
-        <div class="museum-case">
-            <div class="viewport-container">
-                <iframe src="index01.html" class="legacy-frame"></iframe>
-                <div class="case-overlay"></div>
-            </div>
-            <div class="case-info">
-                <h3>OTW_INDEX_V1.0</h3>
-                <p>Origin: 26 APR 2002 // Hand-Coded Tables</p>
-                <a href="index01.html" class="boot-btn">BOOT_ARTIFACT</a>
-            </div>
-        </div>
-
-    </main>
-
-    <footer style="text-align:center; padding: 40px; border-top: 1px solid var(--border-low);">
-        <p style="font-family:'Fira Code'; font-size:0.5rem; color:#222; letter-spacing:4px;">© 2026
-            DIGITAL_ARCHAEOLOGY_UNIT</p>
-    </footer>
-
-</body>
-
+  </style>
+  <link href="theme.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <div id="cursor-ring">
+  </div>
+  <div id="cursor-dot">
+  </div>
+  <header class="terminal-header">
+   <div class="header-title">
+    <span class="status-tag">
+     DIRECTORY_RECOVERY // ACTIVE
+    </span>
+    <h1>
+     FLOTSAM_ARCHIVES
+    </h1>
+   </div>
+   <a href="personal.html" style="font-family:'Fira Code'; color:var(--brand-teal); text-decoration:none; font-size:0.7rem;">
+    ←
+            EXIT_SYSTEM
+   </a>
+  </header>
+  <main class="artifact-rack">
+   <div class="museum-case">
+    <div class="viewport-container">
+     <iframe class="legacy-frame" src="old_index_2009.html">
+     </iframe>
+     <div class="case-overlay">
+     </div>
+    </div>
+    <div class="case-info">
+     <h3>
+      OTW_INDEX_V2.1
+     </h3>
+     <p>
+      Origin: 23 MAR 2009 // MS_FRONTPAGE
+     </p>
+     <a class="boot-btn" href="old_index_2009.html">
+      BOOT_ARTIFACT
+     </a>
+    </div>
+   </div>
+   <div class="museum-case">
+    <div class="viewport-container">
+     <iframe class="legacy-frame" src="index01.html">
+     </iframe>
+     <div class="case-overlay">
+     </div>
+    </div>
+    <div class="case-info">
+     <h3>
+      OTW_INDEX_V1.0
+     </h3>
+     <p>
+      Origin: 26 APR 2002 // Hand-Coded Tables
+     </p>
+     <a class="boot-btn" href="index01.html">
+      BOOT_ARTIFACT
+     </a>
+    </div>
+   </div>
+  </main>
+  <footer style="text-align:center; padding: 40px; border-top: 1px solid var(--border-low);">
+   <p style="font-family:'Fira Code'; font-size:0.5rem; color:#222; letter-spacing:4px;">
+    © 2026
+            DIGITAL_ARCHAEOLOGY_UNIT
+   </p>
+  </footer>
+ </body>
 </html>

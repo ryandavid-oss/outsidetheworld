@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <title>Residue Archive | Matrix Terminal</title>
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <meta name="theme-color" content="var(--bg-dark)">
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;900&family=Fira+Code:wght@300;500;700&family=Merriweather:ital,wght@0,300;0,700;1,300&display=swap');
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+  <title>
+   Residue Archive | Matrix Terminal
+  </title>
+  <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
+  <meta content="var(--bg-dark)" name="theme-color"/>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js">
+  </script>
+  <style>
+   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;900&family=Fira+Code:wght@300;500;700&family=Merriweather:ital,wght@0,300;0,700;1,300&display=swap');
 
         :root {
             --brand-blue: var(--brand-blue);
@@ -247,36 +249,48 @@
 
             /* Use the Logo for back nav on mobile */
         }
-    </style>
-    <link rel="stylesheet" href="theme.css">
-</head>
-
-<body>
-
-    <nav class="back-nav"><a href="personal.html" class="back-link">← CLOSE_TERMINAL</a></nav>
-
-    <aside class="directory">
-        <div class="dir-header">
-            <a href="personal.html"><img src="Images/Equal.svg" class="sidebar-logo" alt="OTW"></a>
-        </div>
-        <div class="tuning-knob">
-            <label class="knob-label">Temporal Selection</label>
-            <select id="year-select" class="era-filter" onchange="updateYear()"></select>
-        </div>
-        <div class="post-list" id="post-list"></div>
-    </aside>
-
-    <main class="extraction-pane" id="scroll-target">
-        <div id="glass-container" class="glass-card">
-            <div style="font-family: 'Fira Code'; color: var(--brand-teal); text-align: center;">
-                SELECT_SIGNAL_FROM_DIRECTORY...</div>
-        </div>
-    </main>
-
-    <script src="narrative_data.js"></script>
-
-    <script>
-        let groupedMatrix = {};
+  </style>
+  <link href="theme.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <div id="cursor-ring">
+  </div>
+  <div id="cursor-dot">
+  </div>
+  <nav class="back-nav">
+   <a class="back-link" href="personal.html">
+    ← CLOSE_TERMINAL
+   </a>
+  </nav>
+  <aside class="directory">
+   <div class="dir-header">
+    <a href="personal.html">
+     <div class="hero-logo-container">
+      <img alt="OTW" class="sidebar-logo hero-logo" src="Images/Equal.svg"/>
+     </div>
+    </a>
+   </div>
+   <div class="tuning-knob">
+    <label class="knob-label">
+     Temporal Selection
+    </label>
+    <select class="era-filter" id="year-select" onchange="updateYear()">
+    </select>
+   </div>
+   <div class="post-list" id="post-list">
+   </div>
+  </aside>
+  <main class="extraction-pane" id="scroll-target">
+   <div class="glass-card" id="glass-container">
+    <div style="font-family: 'Fira Code'; color: var(--brand-teal); text-align: center;">
+     SELECT_SIGNAL_FROM_DIRECTORY...
+    </div>
+   </div>
+  </main>
+  <script src="narrative_data.js">
+  </script>
+  <script>
+   let groupedMatrix = {};
 
         function initMatrix() {
             if (typeof current_narrative === 'undefined') return;
@@ -361,7 +375,6 @@
         }
 
         window.onload = initMatrix;
-    </script>
-</body>
-
+  </script>
+ </body>
 </html>

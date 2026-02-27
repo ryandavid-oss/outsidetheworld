@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hipsta Project | Outside The World</title>
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;900&family=Fira+Code:wght@300;500&display=swap');
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Hipsta Project | Outside The World
+  </title>
+  <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
+  <style>
+   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;900&family=Fira+Code:wght@300;500&display=swap');
 
         :root {
             --brand-teal: var(--brand-teal);
@@ -154,37 +156,59 @@
             .modal-content p { font-size: 1.1rem; line-height: 1.6; padding: 0 10px; }
             .btn-back { top: 20px; right: 20px; padding: 8px 16px; font-size: 0.6rem; }
         }
-    </style>
-    <link rel="stylesheet" href="theme.css">
-</head>
-<body>
-
-    <nav><a href="flotsam.html"><img src="Images/Equal.svg" alt="Back" class="nav-logo"></a></nav>
-
-    <div class="header-area">
-        <div class="status-tag">TYPE: VISUAL_RECLAMATION // PROJECT: HIPSTA_2011</div>
-        <h1>Hipsta_Project 2011</h1>
+  </style>
+  <link href="theme.css" rel="stylesheet"/>
+  <meta content="#0a0a0a" name="theme-color"/>
+  <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
+  <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+ </head>
+ <body>
+  <div id="cursor-ring">
+  </div>
+  <div id="cursor-dot">
+  </div>
+  <nav>
+   <a href="flotsam.html">
+    <div class="hero-logo-container">
+     <img alt="Back" class="nav-logo hero-logo" src="Images/Equal.svg"/>
     </div>
-
-    <div class="vault-grid" id="grid"></div>
-
-    <div id="modal" onscroll="handleScroll(this)" onclick="closeModalOnEmpty(event)">
-        <div id="modal-backdrop"></div>
-        <button class="btn-back" onclick="closeModal()">[ CLOSE_X ]</button>
-        <div class="modal-content" id="modal-inner"></div>
+   </a>
+  </nav>
+  <div class="header-area">
+   <div class="status-tag">
+    TYPE: VISUAL_RECLAMATION // PROJECT: HIPSTA_2011
+   </div>
+   <h1>
+    Hipsta_Project 2011
+   </h1>
+  </div>
+  <div class="vault-grid" id="grid">
+  </div>
+  <div id="modal" onclick="closeModalOnEmpty(event)" onscroll="handleScroll(this)">
+   <div id="modal-backdrop">
+   </div>
+   <button class="btn-back" onclick="closeModal()">
+    [ CLOSE_X ]
+   </button>
+   <div class="modal-content" id="modal-inner">
+   </div>
+  </div>
+  <div id="mission-overlay" onclick="closeMission()">
+   <div class="mission-content">
+    <h3>
+     Original Directive: 2011
+    </h3>
+    <div id="mission-type-target">
     </div>
-
-    <div id="mission-overlay" onclick="closeMission()">
-        <div class="mission-content">
-            <h3>Original Directive: 2011</h3>
-            <div id="mission-type-target"></div>
-            <div style="margin-top: 50px; font-size: 0.7rem; opacity: 0.5;">[ CLICK ANYWHERE TO EXIT_ ]</div>
-        </div>
+    <div style="margin-top: 50px; font-size: 0.7rem; opacity: 0.5;">
+     [ CLICK ANYWHERE TO EXIT_ ]
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script>
-        async function loadVault() {
+   </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js">
+  </script>
+  <script>
+   async function loadVault() {
             try {
                 const response = await fetch('hipsta_manifest.json');
                 const artifacts = await response.json();
@@ -252,6 +276,6 @@
         document.querySelector('.status-tag').onclick = revealMission;
 
         loadVault();
-    </script>
-</body>
+  </script>
+ </body>
 </html>

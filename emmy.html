@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sacred_Record | EMMY</title>
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500;700&family=Inter:wght@300;400;700;900&display=swap');
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Sacred_Record | EMMY
+  </title>
+  <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
+  <style>
+   @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500;700&family=Inter:wght@300;400;700;900&display=swap');
 
         :root {
             --warm-amber: #FFB347;
@@ -118,161 +120,342 @@
             .symbols-container { flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 25px; }
             .symbol-item { flex: 1 1 40%; }
         }
-    </style>
-    <link rel="stylesheet" href="theme.css">
-</head>
-<body>
-
-    <canvas id="glitter-canvas"></canvas>
-
-    <nav>
-        <a href="personal.html"><img src="Images/Equal.svg" alt="Back" class="nav-logo"></a>
-    </nav>
-
-    <div class="container">
-        
-        <header class="hero">
-            <div class="name-container">
-                <h1 class="fog-name" id="alias-target">EMMY</h1>
-            </div>
-            <div class="promise-clock" id="covenant-clock">SYMBOLS_OF_DEVOTION // SYNCING...</div>
-            <div class="eternity-quote">
-                She is my healing past, my joyful present, and my hopeful future all in one.
-            </div>
-        </header>
-
-        <section>
-            <div class="section-label">THE_GATHERING</div>
-            <div class="prose">
-                In the profound silence that followed a metaphorical winter, I wandered through a desert of my own making. After the demise of a long marriage, my spirit felt substantially crushed; I moved through the world with a heart held cautiously aloof. I was a person who had accepted the cold, convinced that the <span class="highlight">"warm breeze"</span> of true connection was a myth.
-            </div>
-            <div class="prose">
-                But the universe holds its own timing. It was a quick getaway to the <span class="highlight">California coast</span> that set our orbits on a collision course. Against the backdrop of a world beginning to shutter, state lines were bridged by the <span class="highlight">eleventh hour</span>.
-            </div>
-            <div class="prose">
-                To meet Emily was to be called home. We are the youngest and the oldest, two halves of a long-sought whole. Her spirit remains undimmed, <span class="highlight">sparkling</span> with resilience. She became my <span class="highlight">"Elsa,"</span> the calm in every storm.
-            </div>
-        </section>
-
-        <div class="monument-grid">
-            <div class="portrait-frame">
-                <img src="Images/us.jpg" alt="RyanDavid and Emily" class="monument-img">
-            </div>
-            <div class="symbology-panel">
-                <div class="symbols-container">
-                    <div class="symbol-item"><span class="symbol-glyph">☀</span><div class="symbol-label">THE_SUN</div></div>
-                    <div class="symbol-item"><span class="symbol-glyph">☾</span><div class="symbol-label">THE_MOON</div></div>
-                    <div class="symbol-item"><span class="symbol-glyph">✨</span><div class="symbol-label">THE_STARS</div></div>
-                </div>
-            </div>
-        </div>
-
-        <section>
-            <div class="section-label">THE_SACRIFICE_OF_THE_HEART</div>
-            <div class="prose">
-                I am humbled daily by the staggering grace Emily showed in uprooting her entire existence for the sake of our bond. Leaving California wasn't just a change of scenery; it was a total transplanting of her soul. She entered a <span class="highlight">crucible</span>, facing the relentless tempests of the legal system with the <span class="highlight">fierce, unyielding love</span> of a mother who refuses to lose.
-            </div>
-            <div class="prose">
-                There were seasons of bone-deep exhaustion—months defined by salt-streaked faces, fervent prayers whispered in the dark, and the crushing frustrations of a system that doesn't always value the heart. But she never wavered. She fought for her daughters with everything she had, enduring the fire until she emerged on the other side, victorious, bringing her children into the safety of our shared arms.
-            </div>
-            <div class="prose">
-                Upon her arrival, she did more than just move into a house; she <span class="highlight">sanctified a home</span>. With an artist’s eye and a <span class="highlight">warrior's resolve</span>, she invested every resource she possessed—emotionally, spiritually, and financially—to clothe our residence in a beauty that feels divine. She took a structure of wood and stone and transformed it into a <span class="highlight">literal heaven on earth</span>, a sanctuary where the chaos of the world finally stops at the door.
-            </div>
-            <div class="prose">
-                She has folded my son and daughters into her heart as her own, ensuring every soul—from the three S children to the newest light, W—feels truly accepted. Every corner of our life now breathes with the peace she painstakingly built, proving that while the desert was where we met, this kingdom is where we truly began.
-            </div>
-            <div class="legacy-grid">
-                <div class="legacy-chip">THE_DAUGHTERS // K + T + C + M</div>
-                <div class="legacy-chip">THE_THREE // S + S + S</div>
-                <div class="legacy-chip">THE_NEW_LEGACY // W</div>
-            </div>
-        </section>
-
-        <section id="chronology">
-            <div class="section-label">THE_SACRED_CHRONOLOGY</div>
-            <div class="timeline-container">
-                <div class="timeline-event">
-                    <div class="timeline-node"></div>
-                    <div class="timeline-content">
-                        <span class="timeline-date">MARCH 20, 2020</span>
-                        <h3 class="timeline-title">The Collision</h3>
-                        <p class="timeline-desc">Search diameters overlapped across state lines.</p>
-                    </div>
-                </div>
-                <div class="timeline-event">
-                    <div class="timeline-node"><span class="node-icon">⛰️</span></div>
-                    <div class="timeline-content">
-                        <span class="timeline-date">JUNE 13, 2020</span>
-                        <h3 class="timeline-title">The Peak</h3>
-                        <p class="timeline-desc">At the heights of Snowbird, the desert was left behind.</p>
-                    </div>
-                </div>
-                <div class="timeline-event">
-                    <div class="timeline-node"></div>
-                    <div class="timeline-content">
-                        <span class="timeline-date">APRIL 17, 2021</span>
-                        <h3 class="timeline-title">The Covenant</h3>
-                        <p class="timeline-desc">We stood before God and family. Two histories, one future.</p>
-                    </div>
-                </div>
-                <div class="timeline-event">
-                    <div class="timeline-node"><span class="node-icon">🏛️</span></div>
-                    <div class="timeline-content">
-                        <span class="timeline-date">MAY 22, 2021</span>
-                        <h3 class="timeline-title">The Sealing</h3>
-                        <p class="timeline-desc">In the Gilbert Temple, our union was bound forever.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <div class="monument-grid reversed">
-            <div class="symbology-panel">
-                <div class="symbols-container">
-                    <div class="symbol-item"><span class="symbol-glyph">👟</span><div class="symbol-label">ENDURANCE</div></div>
-                    <div class="symbol-item"><span class="symbol-glyph">🍲</span><div class="symbol-label">NOURISHMENT</div></div>
-                    <div class="symbol-item"><span class="symbol-glyph">♥</span><div class="symbol-label">THE_HEART</div></div>
-                </div>
-            </div>
-            <div class="portrait-frame">
-                <img src="Images/emmy.jpg" alt="Emily" class="monument-img">
-            </div>
-        </div>
-
-        <section class="hex-card">
-            <div class="prose">
-                For us, Friday is not merely the end of a week; it is <span class="highlight">Holy Ground</span>. These nights are our <span class="highlight">"Sanctified & Sacred"</span> Sabbath—a dedicated space where the world’s noise is muted so the core unit of our family can breathe. Whether we are finding a quiet devotion in the neon glow of a Target parking lot or navigating the rugged, pine-scented ascent of Horton Creek, this is where we reconnect. 
-            </div>
-            <div class="prose">
-                In the heart of our home, Emily is far more than a cook; she is a <span class="highlight">Chef of both substance and light</span>. She possesses the rare gift of the true nurturer—the ability to infuse every ingredient with peace and every seating with a sense of belonging. To eat at her table is to be seen, known, and restored.
-            </div>
-            <div class="prose" style="margin-bottom: 0;">
-                Through it all, she moves with a radiance that refuses to be categorized. Her favorite color is <span class="highlight">Glitter</span>. To her, it isn't just a pigment; it’s the art of <span class="highlight">catching the light</span>, even in the shadows. She is the shimmering proof that a life built on faith doesn't just shine—it <span class="highlight">sparkles</span>.
-            </div>
-        </section>
-
-        <section>
-            <div class="section-label">RADICAL_LOVE // THE_PEACE_OF_CHRIST</div>
-            <div class="prose">
-                Emily is more than a living exemplar of charity and grace; she is a <span class="highlight">displacement of the dark</span>. Her devotion to Heavenly Father is a conduit so powerful it literally <span class="highlight">shifts the atmosphere</span> of our home. It is a quiet, steady frequency that tunes the chaos of our world back into a song of peace. 
-            </div>
-            <div class="prose">
-                I have felt the physical weight of her intercession—a tangible tug on my spirit that has reached across the void of miles. There have been moments where the air around me suddenly changed, prompting me to call her and ask: <span class="highlight">"Did you just pray for me?"</span> The answer is always yes. 
-            </div>
-            <div class="prose">
-                She pleads for others with a <span class="highlight">fierce, radiant advocacy</span>. Her faith is a <span class="highlight">"Glitter" faith</span> that catches the light of heaven and scatters it into the darkest corners of our lives. To stand beside her is to be reminded that we are never truly alone in the desert, provided there is someone like Emily unceasingly <span class="highlight">calling us toward the spring.</span>
-            </div>
-        </section>
-
-        <div class="sig-block">
-            <img src="Images/Signature.png" alt="Signature" class="sig-img">
-            <div class="promise-clock" style="margin-top: 20px;">KINGS & QUEENS // THE_ANTHEM_OF_US</div>
-        </div>
-
+  </style>
+  <link href="theme.css" rel="stylesheet"/>
+  <meta content="#0a0a0a" name="theme-color"/>
+  <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
+  <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+ </head>
+ <body>
+  <div id="cursor-ring">
+  </div>
+  <div id="cursor-dot">
+  </div>
+  <canvas id="glitter-canvas">
+  </canvas>
+  <nav>
+   <a href="personal.html">
+    <div class="hero-logo-container">
+     <img alt="Back" class="nav-logo hero-logo" src="Images/Equal.svg"/>
     </div>
-
-    <script>
-const canvas = document.getElementById('glitter-canvas');
+   </a>
+  </nav>
+  <div class="container">
+   <header class="hero">
+    <div class="name-container">
+     <h1 class="fog-name" id="alias-target">
+      EMMY
+     </h1>
+    </div>
+    <div class="promise-clock" id="covenant-clock">
+     SYMBOLS_OF_DEVOTION // SYNCING...
+    </div>
+    <div class="eternity-quote">
+     She is my healing past, my joyful present, and my hopeful future all in one.
+    </div>
+   </header>
+   <section>
+    <div class="section-label">
+     THE_GATHERING
+    </div>
+    <div class="prose">
+     In the profound silence that followed a metaphorical winter, I wandered through a desert of my own making. After the demise of a long marriage, my spirit felt substantially crushed; I moved through the world with a heart held cautiously aloof. I was a person who had accepted the cold, convinced that the
+     <span class="highlight">
+      "warm breeze"
+     </span>
+     of true connection was a myth.
+    </div>
+    <div class="prose">
+     But the universe holds its own timing. It was a quick getaway to the
+     <span class="highlight">
+      California coast
+     </span>
+     that set our orbits on a collision course. Against the backdrop of a world beginning to shutter, state lines were bridged by the
+     <span class="highlight">
+      eleventh hour
+     </span>
+     .
+    </div>
+    <div class="prose">
+     To meet Emily was to be called home. We are the youngest and the oldest, two halves of a long-sought whole. Her spirit remains undimmed,
+     <span class="highlight">
+      sparkling
+     </span>
+     with resilience. She became my
+     <span class="highlight">
+      "Elsa,"
+     </span>
+     the calm in every storm.
+    </div>
+   </section>
+   <div class="monument-grid">
+    <div class="portrait-frame">
+     <img alt="RyanDavid and Emily" class="monument-img" src="Images/us.jpg"/>
+    </div>
+    <div class="symbology-panel">
+     <div class="symbols-container">
+      <div class="symbol-item">
+       <span class="symbol-glyph">
+        ☀
+       </span>
+       <div class="symbol-label">
+        THE_SUN
+       </div>
+      </div>
+      <div class="symbol-item">
+       <span class="symbol-glyph">
+        ☾
+       </span>
+       <div class="symbol-label">
+        THE_MOON
+       </div>
+      </div>
+      <div class="symbol-item">
+       <span class="symbol-glyph">
+        ✨
+       </span>
+       <div class="symbol-label">
+        THE_STARS
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+   <section>
+    <div class="section-label">
+     THE_SACRIFICE_OF_THE_HEART
+    </div>
+    <div class="prose">
+     I am humbled daily by the staggering grace Emily showed in uprooting her entire existence for the sake of our bond. Leaving California wasn't just a change of scenery; it was a total transplanting of her soul. She entered a
+     <span class="highlight">
+      crucible
+     </span>
+     , facing the relentless tempests of the legal system with the
+     <span class="highlight">
+      fierce, unyielding love
+     </span>
+     of a mother who refuses to lose.
+    </div>
+    <div class="prose">
+     There were seasons of bone-deep exhaustion—months defined by salt-streaked faces, fervent prayers whispered in the dark, and the crushing frustrations of a system that doesn't always value the heart. But she never wavered. She fought for her daughters with everything she had, enduring the fire until she emerged on the other side, victorious, bringing her children into the safety of our shared arms.
+    </div>
+    <div class="prose">
+     Upon her arrival, she did more than just move into a house; she
+     <span class="highlight">
+      sanctified a home
+     </span>
+     . With an artist’s eye and a
+     <span class="highlight">
+      warrior's resolve
+     </span>
+     , she invested every resource she possessed—emotionally, spiritually, and financially—to clothe our residence in a beauty that feels divine. She took a structure of wood and stone and transformed it into a
+     <span class="highlight">
+      literal heaven on earth
+     </span>
+     , a sanctuary where the chaos of the world finally stops at the door.
+    </div>
+    <div class="prose">
+     She has folded my son and daughters into her heart as her own, ensuring every soul—from the three S children to the newest light, W—feels truly accepted. Every corner of our life now breathes with the peace she painstakingly built, proving that while the desert was where we met, this kingdom is where we truly began.
+    </div>
+    <div class="legacy-grid">
+     <div class="legacy-chip">
+      THE_DAUGHTERS // K + T + C + M
+     </div>
+     <div class="legacy-chip">
+      THE_THREE // S + S + S
+     </div>
+     <div class="legacy-chip">
+      THE_NEW_LEGACY // W
+     </div>
+    </div>
+   </section>
+   <section id="chronology">
+    <div class="section-label">
+     THE_SACRED_CHRONOLOGY
+    </div>
+    <div class="timeline-container">
+     <div class="timeline-event">
+      <div class="timeline-node">
+      </div>
+      <div class="timeline-content">
+       <span class="timeline-date">
+        MARCH 20, 2020
+       </span>
+       <h3 class="timeline-title">
+        The Collision
+       </h3>
+       <p class="timeline-desc">
+        Search diameters overlapped across state lines.
+       </p>
+      </div>
+     </div>
+     <div class="timeline-event">
+      <div class="timeline-node">
+       <span class="node-icon">
+        ⛰️
+       </span>
+      </div>
+      <div class="timeline-content">
+       <span class="timeline-date">
+        JUNE 13, 2020
+       </span>
+       <h3 class="timeline-title">
+        The Peak
+       </h3>
+       <p class="timeline-desc">
+        At the heights of Snowbird, the desert was left behind.
+       </p>
+      </div>
+     </div>
+     <div class="timeline-event">
+      <div class="timeline-node">
+      </div>
+      <div class="timeline-content">
+       <span class="timeline-date">
+        APRIL 17, 2021
+       </span>
+       <h3 class="timeline-title">
+        The Covenant
+       </h3>
+       <p class="timeline-desc">
+        We stood before God and family. Two histories, one future.
+       </p>
+      </div>
+     </div>
+     <div class="timeline-event">
+      <div class="timeline-node">
+       <span class="node-icon">
+        🏛️
+       </span>
+      </div>
+      <div class="timeline-content">
+       <span class="timeline-date">
+        MAY 22, 2021
+       </span>
+       <h3 class="timeline-title">
+        The Sealing
+       </h3>
+       <p class="timeline-desc">
+        In the Gilbert Temple, our union was bound forever.
+       </p>
+      </div>
+     </div>
+    </div>
+   </section>
+   <div class="monument-grid reversed">
+    <div class="symbology-panel">
+     <div class="symbols-container">
+      <div class="symbol-item">
+       <span class="symbol-glyph">
+        👟
+       </span>
+       <div class="symbol-label">
+        ENDURANCE
+       </div>
+      </div>
+      <div class="symbol-item">
+       <span class="symbol-glyph">
+        🍲
+       </span>
+       <div class="symbol-label">
+        NOURISHMENT
+       </div>
+      </div>
+      <div class="symbol-item">
+       <span class="symbol-glyph">
+        ♥
+       </span>
+       <div class="symbol-label">
+        THE_HEART
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="portrait-frame">
+     <img alt="Emily" class="monument-img" src="Images/emmy.jpg"/>
+    </div>
+   </div>
+   <section class="hex-card">
+    <div class="prose">
+     For us, Friday is not merely the end of a week; it is
+     <span class="highlight">
+      Holy Ground
+     </span>
+     . These nights are our
+     <span class="highlight">
+      "Sanctified &amp; Sacred"
+     </span>
+     Sabbath—a dedicated space where the world’s noise is muted so the core unit of our family can breathe. Whether we are finding a quiet devotion in the neon glow of a Target parking lot or navigating the rugged, pine-scented ascent of Horton Creek, this is where we reconnect.
+    </div>
+    <div class="prose">
+     In the heart of our home, Emily is far more than a cook; she is a
+     <span class="highlight">
+      Chef of both substance and light
+     </span>
+     . She possesses the rare gift of the true nurturer—the ability to infuse every ingredient with peace and every seating with a sense of belonging. To eat at her table is to be seen, known, and restored.
+    </div>
+    <div class="prose" style="margin-bottom: 0;">
+     Through it all, she moves with a radiance that refuses to be categorized. Her favorite color is
+     <span class="highlight">
+      Glitter
+     </span>
+     . To her, it isn't just a pigment; it’s the art of
+     <span class="highlight">
+      catching the light
+     </span>
+     , even in the shadows. She is the shimmering proof that a life built on faith doesn't just shine—it
+     <span class="highlight">
+      sparkles
+     </span>
+     .
+    </div>
+   </section>
+   <section>
+    <div class="section-label">
+     RADICAL_LOVE // THE_PEACE_OF_CHRIST
+    </div>
+    <div class="prose">
+     Emily is more than a living exemplar of charity and grace; she is a
+     <span class="highlight">
+      displacement of the dark
+     </span>
+     . Her devotion to Heavenly Father is a conduit so powerful it literally
+     <span class="highlight">
+      shifts the atmosphere
+     </span>
+     of our home. It is a quiet, steady frequency that tunes the chaos of our world back into a song of peace.
+    </div>
+    <div class="prose">
+     I have felt the physical weight of her intercession—a tangible tug on my spirit that has reached across the void of miles. There have been moments where the air around me suddenly changed, prompting me to call her and ask:
+     <span class="highlight">
+      "Did you just pray for me?"
+     </span>
+     The answer is always yes.
+    </div>
+    <div class="prose">
+     She pleads for others with a
+     <span class="highlight">
+      fierce, radiant advocacy
+     </span>
+     . Her faith is a
+     <span class="highlight">
+      "Glitter" faith
+     </span>
+     that catches the light of heaven and scatters it into the darkest corners of our lives. To stand beside her is to be reminded that we are never truly alone in the desert, provided there is someone like Emily unceasingly
+     <span class="highlight">
+      calling us toward the spring.
+     </span>
+    </div>
+   </section>
+   <div class="sig-block">
+    <img alt="Signature" class="sig-img" src="Images/Signature.png"/>
+    <div class="promise-clock" style="margin-top: 20px;">
+     KINGS &amp; QUEENS // THE_ANTHEM_OF_US
+    </div>
+   </div>
+  </div>
+  <script>
+   const canvas = document.getElementById('glitter-canvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
 
@@ -386,6 +569,7 @@ const canvas = document.getElementById('glitter-canvas');
     animate();
     setInterval(updateCovenant, 1000);
     setInterval(cycleAlias, 7000);
-    document.addEventListener('DOMContentLoaded', updateCovenant);    </script>
-</body>
+    document.addEventListener('DOMContentLoaded', updateCovenant);
+  </script>
+ </body>
 </html>

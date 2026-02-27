@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Wayback | Outside The World</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;900&family=Fira+Code:wght@300;500&family=Merriweather:ital,wght@0,300;0,700;1,300&display=swap');
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   The Wayback | Outside The World
+  </title>
+  <style>
+   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;900&family=Fira+Code:wght@300;500&family=Merriweather:ital,wght@0,300;0,700;1,300&display=swap');
 
         :root {
             --brand-blue: var(--brand-blue);
@@ -70,32 +72,46 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.5); /* Gives images some depth */
         }
         .loading-signal { font-family: 'Fira Code'; font-size: 0.7rem; color: var(--brand-blue); text-align: center; padding: 40px; }
-    </style>
-    <link rel="stylesheet" href="theme.css">
-</head>
-<body>
-
-    <aside class="directory">
-        <div class="dir-header">
-            <a href="personal.html"><img src="Images/Equal.svg" class="sidebar-logo" alt="OTW"></a>
-        </div>
-        <div class="tuning-knob">
-            <label class="knob-label">Temporal Era</label>
-            <select id="year-select" class="era-filter" onchange="filterEra()"></select>
-        </div>
-        <div class="post-list" id="post-list"></div>
-    </aside>
-
-    <main class="extraction-pane" id="scroll-target">
-        <div id="glass-container" class="glass-card">
-            <div class="loading-signal">INITIALIZING_WAYBACK_UPLINK...</div>
-        </div>
-    </main>
-
-    <script src="wayback_purified.js"></script>
-
-    <script>
-        const ERA_MAP = {
+  </style>
+  <link href="theme.css" rel="stylesheet"/>
+  <meta content="#0a0a0a" name="theme-color"/>
+  <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
+  <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+ </head>
+ <body>
+  <div id="cursor-ring">
+  </div>
+  <div id="cursor-dot">
+  </div>
+  <aside class="directory">
+   <div class="dir-header">
+    <a href="personal.html">
+     <div class="hero-logo-container">
+      <img alt="OTW" class="sidebar-logo hero-logo" src="Images/Equal.svg"/>
+     </div>
+    </a>
+   </div>
+   <div class="tuning-knob">
+    <label class="knob-label">
+     Temporal Era
+    </label>
+    <select class="era-filter" id="year-select" onchange="filterEra()">
+    </select>
+   </div>
+   <div class="post-list" id="post-list">
+   </div>
+  </aside>
+  <main class="extraction-pane" id="scroll-target">
+   <div class="glass-card" id="glass-container">
+    <div class="loading-signal">
+     INITIALIZING_WAYBACK_UPLINK...
+    </div>
+   </div>
+  </main>
+  <script src="wayback_purified.js">
+  </script>
+  <script>
+   const ERA_MAP = {
             ANALOG: { label: "THE_ANALOG_DAWN", glow: "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)" },
             APPLE: { label: "THE_APPLE_YEARS", glow: "linear-gradient(135deg, #13547a 0%, #80d0c7 100%)" },
             MODERN: { label: "MODERN_RESONANCE", glow: "linear-gradient(135deg, #2c3e50 0%, #4b6cb7 100%)" }
@@ -157,6 +173,6 @@
         }
 
         window.onload = () => { if (typeof wayback_raw_dump !== 'undefined') initWayback(); };
-    </script>
-</body>
+  </script>
+ </body>
 </html>

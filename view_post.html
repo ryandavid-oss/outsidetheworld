@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signal Recovery | OTW</title>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;900&family=Fira+Code:wght@500;700&family=Merriweather:ital,wght@0,300;0,700;1,300&display=swap');
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Signal Recovery | OTW
+  </title>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js">
+  </script>
+  <style>
+   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;900&family=Fira+Code:wght@500;700&family=Merriweather:ital,wght@0,300;0,700;1,300&display=swap');
 
         :root {
             --brand-blue: var(--brand-blue);
@@ -70,24 +73,33 @@
 
         /* SPACE FIXES */
         #md-render p:first-child { margin-top: 0; }
-    </style>
-    <link rel="stylesheet" href="theme.css">
-</head>
-<body>
-
-    <nav class="back-nav">
-        <a href="residue_matrix.html" class="node-link">← RETURN_TO_MATRIX</a>
-    </nav>
-
-    <article class="post-vessel">
-        <div id="post-content">
-            <p style="font-family: 'Fira Code'; opacity: 0.3;">RECOVERING_SIGNAL...</p>
-        </div>
-    </article>
-
-    <script src="narrative_data.js"></script>
-    <script>
-        function loadPost() {
+  </style>
+  <link href="theme.css" rel="stylesheet"/>
+  <meta content="#0a0a0a" name="theme-color"/>
+  <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
+  <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+ </head>
+ <body>
+  <div id="cursor-ring">
+  </div>
+  <div id="cursor-dot">
+  </div>
+  <nav class="back-nav">
+   <a class="node-link" href="residue_matrix.html">
+    ← RETURN_TO_MATRIX
+   </a>
+  </nav>
+  <article class="post-vessel">
+   <div id="post-content">
+    <p style="font-family: 'Fira Code'; opacity: 0.3;">
+     RECOVERING_SIGNAL...
+    </p>
+   </div>
+  </article>
+  <script src="narrative_data.js">
+  </script>
+  <script>
+   function loadPost() {
             const params = new URLSearchParams(window.location.search);
             const fileToFind = params.get('file');
             const display = document.getElementById('post-content');
@@ -109,6 +121,6 @@
         }
 
         window.onload = loadPost;
-    </script>
-</body>
+  </script>
+ </body>
 </html>

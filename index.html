@@ -1,20 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-
-    <meta name="theme-color" content="var(--bg-dark)">
-
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="mobile-web-app-capable" content="yes">
-
-    <title>Outside The World</title>
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;900&family=Fira+Code:wght@300;500;700&display=swap');
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+  <meta content="var(--bg-dark)" name="theme-color"/>
+  <meta content="yes" name="apple-mobile-web-app-capable"/>
+  <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
+  <meta content="yes" name="mobile-web-app-capable"/>
+  <title>
+   Outside The World
+  </title>
+  <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
+  <style>
+   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;900&family=Fira+Code:wght@300;500;700&display=swap');
 
         :root {
             --star-white: #ffffff;
@@ -560,136 +558,166 @@
             border-color: var(--brand-blue);
             border-width: 2px;
         }
-    </style>
-    <link rel="stylesheet" href="theme.css">
-</head>
-
-<body>
-    <div id="cursor-ring"></div>
-    <div id="cursor-dot"></div>
-    <img src="Images/Equal.svg" alt="OTW" class="hero-logo">
-    <div class="starfield" id="star-bg"></div>
-
-    <main class="gateway-container">
-        <div class="nav-wing">
-            <span class="wing-label">[Thoughts & Creation]</span>
-            <a href="personal.html" class="ethereal-btn explore-btn">ENTER MAIN</a>
-        </div>
-
-        <div class="constellation">
-            <div class="star betelgeuse"></div>
-            <div class="star bellatrix"></div>
-
-            <div class="belt-node alnitak-node">
-                <a href="personal.html">
-                    <div class="belt-star" title="Interface"></div>
-                    <svg class="tron-path" width="150" height="100" style="top:-80px; left:-120px;">
-                        <path d="M 125 85 L 125 20 L 10 20" />
-                    </svg>
-                    <div class="tron-card">MAIN_INTERFACE</div>
-                </a>
-            </div>
-
-            <div class="belt-node alnilam-node">
-                <a href="resume.html">
-                    <div class="belt-star" title="Dossier"></div>
-                    <svg class="tron-path" width="100" height="100" style="top:-70px; left:5px;">
-                        <path d="M 5 75 L 5 15 L 90 15" />
-                    </svg>
-                    <div class="tron-card">DOSSIER_ACCESS</div>
-                </a>
-            </div>
-
-            <div class="belt-node mintaka-node">
-                <a href="emmy.html">
-                    <div class="belt-star" title="Sanctuary"></div>
-                    <svg class="tron-path" width="150" height="100" style="top:5px; left:5px;">
-                        <path d="M 5 5 L 80 5 L 80 80" />
-                    </svg>
-                    <div class="tron-card">HEART_AND_SOUL</div>
-                </a>
-            </div>
-
-            <div class="star sword-top"></div>
-
-            <div class="belt-node kavya-node">
-                <a href="poetry.html">
-                    <div class="star sword-mid" title="Kavya Archive"></div>
-                    <svg class="tron-path" width="100" height="100" style="top:-10px; left:10px;">
-                        <path d="M 5 20 L 80 20 L 80 40" />
-                    </svg>
-                    <div class="tron-card">OTW_KAVYA</div>
-                </a>
-            </div>
-
-            <div class="star sword-bottom"></div>
-
-            <div class="star saiph"></div>
-            <div class="star rigel"></div>
-        </div>
-
-        <div class="nav-wing">
-            <span class="wing-label">[THE_OUTSIDE_VANTAGE]</span>
-            <a href="professional.html" class="ethereal-btn consult-btn">LEARN MORE</a>
-        </div>
-    </main>
-
-    <div class="center-footer">
-        <h1 class="main-title">Outside The World</h1>
-        <div class="poem-fragment" onclick="togglePoem()">
-            "perspective is my weakness... outside the world is new"
-        </div>
+  </style>
+  <link href="theme.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <div id="cursor-ring">
+  </div>
+  <div id="cursor-dot">
+  </div>
+  <div class="hero-logo-container">
+   <img alt="OTW" class="hero-logo" src="Images/Equal.svg"/>
+  </div>
+  <div class="starfield" id="star-bg">
+  </div>
+  <main class="gateway-container">
+   <div class="nav-wing">
+    <span class="wing-label">
+     [Thoughts &amp; Creation]
+    </span>
+    <a class="ethereal-btn explore-btn" href="personal.html">
+     ENTER MAIN
+    </a>
+   </div>
+   <div class="constellation">
+    <div class="star betelgeuse">
     </div>
-
-    <div class="modal" id="poem-modal" onclick="togglePoem()"
-        style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5,5,5,0.97); backdrop-filter: blur(20px); z-index: 9999; justify-content: center; align-items: center;">
-
-        <div class="modal-content"
-            style="background: rgba(145, 175, 179, 0.02); padding: 60px 40px; border: 1px solid rgba(145, 175, 179, 0.15); position: relative; max-width: 550px; width: 90%; text-align: center; box-shadow: 0 0 60px rgba(0,0,0,1);">
-
-            <div
-                style="position: absolute; top: 0; right: 0; width: 100%; height: 2px; background: var(--brand-teal); box-shadow: 0 0 20px var(--brand-teal);">
-            </div>
-            <div
-                style="position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: var(--brand-teal); box-shadow: 0 0 20px var(--brand-teal);">
-            </div>
-
-            <div
-                style="font-family: 'Merriweather', serif; font-size: 1.1rem; line-height: 1.8; color: #e0e0e0; font-weight: 300;">
-                I dance along the path,<br>
-                lonely emerald fields on either side.<br>
-                I gaze into the distant canyon<br>
-                and know that I cannot enter.<br><br>
-
-                Every star seems to smile down this evening;<br>
-                each one shines its own way,<br>
-                and the world is quiet.<br>
-                It does not know I am here.<br><br>
-
-                The crisp air haunts me; <br>
-                its aroma seems too familiar. <br>
-                Yes, but under different circumstances <br>
-                this would be true.<br><br>
-
-                There seems to be an end<br>
-                as the mountain peak swallows up the sky.<br>
-                <span
-                    style="color: var(--brand-teal); font-weight: 700; text-shadow: 0 0 10px var(--brand-teal); font-style: normal;">My
-                    perspective is my weakness;</span><br>
-                <span
-                    style="color: #fff; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; font-size: 0.9rem; opacity: 0.9;">outside
-                    the world is new.</span>
-            </div>
-
-            <div
-                style="margin-top: 50px; font-family: 'Fira Code', monospace; font-size: 0.55rem; color: #444; letter-spacing: 4px;">
-                [ SYSTEM_DEACTIVATE ]
-            </div>
-        </div>
+    <div class="star bellatrix">
     </div>
-
-    <script>
-        const starBg = document.getElementById('star-bg');
+    <div class="belt-node alnitak-node">
+     <a href="personal.html">
+      <div class="belt-star" title="Interface">
+      </div>
+      <svg class="tron-path" height="100" style="top:-80px; left:-120px;" width="150">
+       <path d="M 125 85 L 125 20 L 10 20">
+       </path>
+      </svg>
+      <div class="tron-card">
+       MAIN_INTERFACE
+      </div>
+     </a>
+    </div>
+    <div class="belt-node alnilam-node">
+     <a href="resume.html">
+      <div class="belt-star" title="Dossier">
+      </div>
+      <svg class="tron-path" height="100" style="top:-70px; left:5px;" width="100">
+       <path d="M 5 75 L 5 15 L 90 15">
+       </path>
+      </svg>
+      <div class="tron-card">
+       DOSSIER_ACCESS
+      </div>
+     </a>
+    </div>
+    <div class="belt-node mintaka-node">
+     <a href="emmy.html">
+      <div class="belt-star" title="Sanctuary">
+      </div>
+      <svg class="tron-path" height="100" style="top:5px; left:5px;" width="150">
+       <path d="M 5 5 L 80 5 L 80 80">
+       </path>
+      </svg>
+      <div class="tron-card">
+       HEART_AND_SOUL
+      </div>
+     </a>
+    </div>
+    <div class="star sword-top">
+    </div>
+    <div class="belt-node kavya-node">
+     <a href="poetry.html">
+      <div class="star sword-mid" title="Kavya Archive">
+      </div>
+      <svg class="tron-path" height="100" style="top:-10px; left:10px;" width="100">
+       <path d="M 5 20 L 80 20 L 80 40">
+       </path>
+      </svg>
+      <div class="tron-card">
+       OTW_KAVYA
+      </div>
+     </a>
+    </div>
+    <div class="star sword-bottom">
+    </div>
+    <div class="star saiph">
+    </div>
+    <div class="star rigel">
+    </div>
+   </div>
+   <div class="nav-wing">
+    <span class="wing-label">
+     [THE_OUTSIDE_VANTAGE]
+    </span>
+    <a class="ethereal-btn consult-btn" href="professional.html">
+     LEARN MORE
+    </a>
+   </div>
+  </main>
+  <div class="center-footer">
+   <h1 class="main-title">
+    Outside The World
+   </h1>
+   <div class="poem-fragment" onclick="togglePoem()">
+    "perspective is my weakness... outside the world is new"
+   </div>
+  </div>
+  <div class="modal" id="poem-modal" onclick="togglePoem()" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5,5,5,0.97); backdrop-filter: blur(20px); z-index: 9999; justify-content: center; align-items: center;">
+   <div class="modal-content" style="background: rgba(145, 175, 179, 0.02); padding: 60px 40px; border: 1px solid rgba(145, 175, 179, 0.15); position: relative; max-width: 550px; width: 90%; text-align: center; box-shadow: 0 0 60px rgba(0,0,0,1);">
+    <div style="position: absolute; top: 0; right: 0; width: 100%; height: 2px; background: var(--brand-teal); box-shadow: 0 0 20px var(--brand-teal);">
+    </div>
+    <div style="position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: var(--brand-teal); box-shadow: 0 0 20px var(--brand-teal);">
+    </div>
+    <div style="font-family: 'Merriweather', serif; font-size: 1.1rem; line-height: 1.8; color: #e0e0e0; font-weight: 300;">
+     I dance along the path,
+     <br/>
+     lonely emerald fields on either side.
+     <br/>
+     I gaze into the distant canyon
+     <br/>
+     and know that I cannot enter.
+     <br/>
+     <br/>
+     Every star seems to smile down this evening;
+     <br/>
+     each one shines its own way,
+     <br/>
+     and the world is quiet.
+     <br/>
+     It does not know I am here.
+     <br/>
+     <br/>
+     The crisp air haunts me;
+     <br/>
+     its aroma seems too familiar.
+     <br/>
+     Yes, but under different circumstances
+     <br/>
+     this would be true.
+     <br/>
+     <br/>
+     There seems to be an end
+     <br/>
+     as the mountain peak swallows up the sky.
+     <br/>
+     <span style="color: var(--brand-teal); font-weight: 700; text-shadow: 0 0 10px var(--brand-teal); font-style: normal;">
+      My
+                    perspective is my weakness;
+     </span>
+     <br/>
+     <span style="color: #fff; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; font-size: 0.9rem; opacity: 0.9;">
+      outside
+                    the world is new.
+     </span>
+    </div>
+    <div style="margin-top: 50px; font-family: 'Fira Code', monospace; font-size: 0.55rem; color: #444; letter-spacing: 4px;">
+     [ SYSTEM_DEACTIVATE ]
+    </div>
+   </div>
+  </div>
+  <script>
+   const starBg = document.getElementById('star-bg');
 
         // Parallax movement (Increased factor to 0.03 for more 'pop')
         document.addEventListener('mousemove', (e) => {
@@ -757,7 +785,6 @@
                 document.body.classList.remove('cursor-active');
             });
         });
-    </script>
-</body>
-
+  </script>
+ </body>
 </html>

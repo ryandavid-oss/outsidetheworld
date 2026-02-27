@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LCARS_TERMINAL // GHOST_WRITER</title>
-    <link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
-    <script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Antonio:wght@400;700&family=Fira+Code:wght@300;500&display=swap');
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   LCARS_TERMINAL // GHOST_WRITER
+  </title>
+  <link href="https://unpkg.com/easymde/dist/easymde.min.css" rel="stylesheet"/>
+  <script src="https://unpkg.com/easymde/dist/easymde.min.js">
+  </script>
+  <style>
+   @import url('https://fonts.googleapis.com/css2?family=Antonio:wght@400;700&family=Fira+Code:wght@300;500&display=swap');
 
         :root {
             --lcars-orange: #ff9900;
@@ -221,48 +223,66 @@
             color: var(--lcars-blue);
             margin-top: 10px;
         }
-    </style>
-    <link rel="stylesheet" href="theme.css">
-</head>
-
-<body>
-
-    <div id="auth-container">
-        <div class="auth-label">RESTRICTED_ACCESS // UPLINK_AUTHORIZATION</div>
-        <input type="password" id="passwordInput" placeholder="••••••••" autofocus>
+  </style>
+  <link href="theme.css" rel="stylesheet"/>
+  <meta content="#0a0a0a" name="theme-color"/>
+  <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
+  <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+ </head>
+ <body>
+  <div id="cursor-ring">
+  </div>
+  <div id="cursor-dot">
+  </div>
+  <div id="auth-container">
+   <div class="auth-label">
+    RESTRICTED_ACCESS // UPLINK_AUTHORIZATION
+   </div>
+   <input autofocus="" id="passwordInput" placeholder="••••••••" type="password"/>
+  </div>
+  <div class="lcars-frame">
+   <div class="elbow">
+   </div>
+   <div class="header">
+    OTW_GHOST_WRITER // SUB-PROCESS_2026
+   </div>
+   <div class="sidebar">
+    <div class="bar-segment">
     </div>
-
-    <div class="lcars-frame">
-        <div class="elbow"></div>
-        <div class="header">OTW_GHOST_WRITER // SUB-PROCESS_2026</div>
-
-        <div class="sidebar">
-            <div class="bar-segment"></div>
-            <div class="bar-segment red"></div>
-            <div class="bar-segment"></div>
-            <div class="bar-segment"></div>
-            <div style="flex-grow:1"></div>
-            <div class="bar-segment" style="background: var(--lcars-purple); height: 100px;"></div>
-        </div>
-
-        <div id="main-content">
-            <div class="input-row">
-                <input type="text" id="title" placeholder="BLOG TITLE..">
-                <input type="date" id="entryDate">
-            </div>
-            <textarea id="content"></textarea>
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <div id="meter" class="word-count">DENSITY: 0 WORDS</div>
-                <button type="button" id="downloadBtn" class="btn-action">INITIALIZE_UPLINK</button>
-            </div>
-        </div>
-
-        <div class="bottom-elbow"></div>
-        <div class="footer">NARRATIVE_STREAM_026 // QUEEN_CREEK_RELAY</div>
+    <div class="bar-segment red">
     </div>
-
-    <script>
-        // DATE LOGIC
+    <div class="bar-segment">
+    </div>
+    <div class="bar-segment">
+    </div>
+    <div style="flex-grow:1">
+    </div>
+    <div class="bar-segment" style="background: var(--lcars-purple); height: 100px;">
+    </div>
+   </div>
+   <div id="main-content">
+    <div class="input-row">
+     <input id="title" placeholder="BLOG TITLE.." type="text"/>
+     <input id="entryDate" type="date"/>
+    </div>
+    <textarea id="content"></textarea>
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+     <div class="word-count" id="meter">
+      DENSITY: 0 WORDS
+     </div>
+     <button class="btn-action" id="downloadBtn" type="button">
+      INITIALIZE_UPLINK
+     </button>
+    </div>
+   </div>
+   <div class="bottom-elbow">
+   </div>
+   <div class="footer">
+    NARRATIVE_STREAM_026 // QUEEN_CREEK_RELAY
+   </div>
+  </div>
+  <script>
+   // DATE LOGIC
         const now = new Date();
         const offset = now.getTimezoneOffset() * 60000;
         const localISOTime = new Date(now - offset).toISOString().split('T')[0];
@@ -345,7 +365,6 @@
             a.download = fileName;
             a.click();
         });
-    </script>
-</body>
-
+  </script>
+ </body>
 </html>

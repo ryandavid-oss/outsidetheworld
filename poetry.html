@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verse Archive | Outside The World</title>
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <meta name="theme-color" content="var(--bg-dark)">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;900&family=Fira+Code:wght@300;500&family=Merriweather:ital,wght@0,300;0,700;1,300&display=swap');
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Verse Archive | Outside The World
+  </title>
+  <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
+  <meta content="var(--bg-dark)" name="theme-color"/>
+  <meta content="yes" name="apple-mobile-web-app-capable"/>
+  <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
+  <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
+  <style>
+   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;900&family=Fira+Code:wght@300;500&family=Merriweather:ital,wght@0,300;0,700;1,300&display=swap');
 
         :root {
             --brand-blue: var(--brand-blue);
@@ -253,38 +254,43 @@
         ::-webkit-scrollbar-thumb {
             background: var(--border-low);
         }
-    </style>
-    <link rel="stylesheet" href="theme.css">
-</head>
-
-<body>
-
-    <aside class="directory">
-        <div class="dir-header">
-            <a href="flotsam.html">
-                <img src="Images/Equal.svg" class="sidebar-logo" alt="BACK TO INTERFACE">
-            </a>
-        </div>
-
-        <div class="tuning-knob">
-            <label class="knob-label">Filter by topic</label>
-            <select id="freq-select" class="freq-filter" onchange="filterFrequencies()">
-                <option value="ALL">TONE/THEME</option>
-            </select>
-        </div>
-
-        <div class="file-list" id="file-list"></div>
-    </aside>
-
-    <main class="extraction-pane">
-        <div id="glass-container" class="glass-card">
-        </div>
-    </main>
-
-    <script src="poetry_data.js"></script>
-
-    <script>
-function initArchive() {
+  </style>
+  <link href="theme.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <div id="cursor-ring">
+  </div>
+  <div id="cursor-dot">
+  </div>
+  <aside class="directory">
+   <div class="dir-header">
+    <a href="flotsam.html">
+     <div class="hero-logo-container">
+      <img alt="BACK TO INTERFACE" class="sidebar-logo hero-logo" src="Images/Equal.svg"/>
+     </div>
+    </a>
+   </div>
+   <div class="tuning-knob">
+    <label class="knob-label">
+     Filter by topic
+    </label>
+    <select class="freq-filter" id="freq-select" onchange="filterFrequencies()">
+     <option value="ALL">
+      TONE/THEME
+     </option>
+    </select>
+   </div>
+   <div class="file-list" id="file-list">
+   </div>
+  </aside>
+  <main class="extraction-pane">
+   <div class="glass-card" id="glass-container">
+   </div>
+  </main>
+  <script src="poetry_data.js">
+  </script>
+  <script>
+   function initArchive() {
             const list = document.getElementById('file-list');
             const select = document.getElementById('freq-select');
 
@@ -363,8 +369,7 @@ function initArchive() {
         window.onload = () => {
             initArchive();
             if (archive.length > 0) displayPoem(0);
-        };   
-        </script>
-</body>
-
+        };
+  </script>
+ </body>
 </html>

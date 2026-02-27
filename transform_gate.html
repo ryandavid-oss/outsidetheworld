@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Decryption Required | Outside The World</title>
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500&family=Inter:wght@900&display=swap');
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Decryption Required | Outside The World
+  </title>
+  <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
+  <style>
+   @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500&family=Inter:wght@900&display=swap');
 
         :root {
             --brand-purple: #9b59b6;
@@ -150,30 +152,41 @@
             transition: 0.3s;
         }
         .back-link:hover { color: var(--brand-purple); }
-    </style>
-    <link rel="stylesheet" href="theme.css">
-</head>
-<body>
-
-    <div class="nav-header">
-        <img src="Images/Equal.svg" alt="Logo" class="nav-logo">
-    </div>
-
-    <div class="terminal-box">
-        <div class="status-container">
-            <span id="status-text"></span><span class="cursor"></span>
-        </div>
-        
-        <div class="input-group">
-            <input type="password" id="passkey" placeholder="DECRYPTION_KEY" onkeypress="handleKeyPress(event)">
-            <button class="submit-btn" onclick="validateKey()">Initialize_Uplink</button>
-        </div>
-
-        <a href="personal.html" class="back-link">[ ABORT_CONNECTION ]</a>
-    </div>
-
-<script>
-    // 1. TYPEWRITER CONFIG
+  </style>
+  <link href="theme.css" rel="stylesheet"/>
+  <meta content="#0a0a0a" name="theme-color"/>
+  <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
+  <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+ </head>
+ <body>
+  <div id="cursor-ring">
+  </div>
+  <div id="cursor-dot">
+  </div>
+  <div class="nav-header">
+   <div class="hero-logo-container">
+    <img alt="Logo" class="nav-logo hero-logo" src="Images/Equal.svg"/>
+   </div>
+  </div>
+  <div class="terminal-box">
+   <div class="status-container">
+    <span id="status-text">
+    </span>
+    <span class="cursor">
+    </span>
+   </div>
+   <div class="input-group">
+    <input id="passkey" onkeypress="handleKeyPress(event)" placeholder="DECRYPTION_KEY" type="password"/>
+    <button class="submit-btn" onclick="validateKey()">
+     Initialize_Uplink
+    </button>
+   </div>
+   <a class="back-link" href="personal.html">
+    [ ABORT_CONNECTION ]
+   </a>
+  </div>
+  <script>
+   // 1. TYPEWRITER CONFIG
     const statusElement = document.getElementById('status-text');
     const initialMessage = "WAITING_FOR_KEY...";
     let i = 0;
@@ -236,7 +249,6 @@
             }
         }, 1000);
     }
-</script>
-    </script>
-</body>
+  </script>
+ </body>
 </html>
