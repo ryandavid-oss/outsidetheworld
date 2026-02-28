@@ -1,23 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>
-   Dossier | RyanDavid Burningham
-  </title>
-  <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
-  <style>
-   @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500;700&family=Inter:wght@300;400;700;900&display=swap');
 
-:root {
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>
+        Dossier | RyanDavid Burningham
+    </title>
+    <link href="favicon.svg" rel="icon" type="image/svg+xml" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500;700&family=Inter:wght@300;400;700;900&display=swap');
+
+        :root {
             /* Hardcoded values to stop the infinite loop */
             --brand-blue: #6395EE;
             --brand-teal: #91AFB3;
             --brand-light-blue: #A0BEF5;
             --brand-pink: #FF69B4;
             --bg-dark: #0a0a0a;
-            
+
             /* Local UI variables */
             --glass: rgba(255, 255, 255, 0.03);
             --border: rgba(255, 255, 255, 0.1);
@@ -501,6 +502,34 @@
             opacity: 0.8;
         }
 
+        /* --- THE IDENTITY ANCHOR: REPAIRED --- */
+        #cycle-name {
+            display: inline-block;
+            /* 10ch (10 characters) is a safe width for "RYANDAVID" */
+            min-width: 9ch;
+            text-align: left;
+            white-space: nowrap;
+            vertical-align: bottom;
+
+            /* RE-ESTABLISH THE GRADIENT */
+            background: linear-gradient(to bottom, #fff 10%, #444 90%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+
+            /* THE TRANSITION */
+            transition: opacity 0.8s ease, filter 0.8s ease, letter-spacing 0.8s ease;
+            opacity: 1;
+            filter: blur(0);
+        }
+
+        /* The "Concealed" State */
+        .name-shifting {
+            /* Using 0.01 instead of 0 can sometimes prevent browser "glitches" */
+            opacity: 0.01 !important;
+            filter: blur(15px) !important;
+            letter-spacing: 20px !important;
+        }
+
         /* MOBILE FIXES [Requirement 3] */
         @media (max-width: 768px) {
             nav {
@@ -563,509 +592,511 @@
                 text-align: center;
             }
         }
-  
-/* THE CLEAN ATMOSPHERIC WASH */
 
+        /* THE CLEAN ATMOSPHERIC WASH */
     </style>
-  <link href="theme.css" rel="stylesheet"/>
-  <meta content="#0a0a0a" name="theme-color"/>
-  <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
-  <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
- </head>
- <body>
-  <div id="cursor-ring">
-  </div>
-  <div id="cursor-dot">
-  </div>
-  <nav>
-   <a href="personal.html">
-    <div class="hero-logo-container">
-     <img alt="Back" class="nav-logo hero-logo" src="Images/Equal.svg"/>
+    <link href="theme.css" rel="stylesheet" />
+    <meta content="#0a0a0a" name="theme-color" />
+    <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport" />
+</head>
+
+<body>
+    <div id="cursor-ring">
     </div>
-   </a>
-  </nav>
-  <div class="container">
-   <header class="hero">
-    <div class="scanner-frame">
-     <div class="portrait">
-     </div>
+    <div id="cursor-dot">
     </div>
-    <div class="hero-content">
-     <h1 class="fog-name">
-      RyanDavid Burningham
-     </h1>
-     <div class="job-title">
-      <span id="typewriter-record">
-      </span>
-      <span class="cursor">
-      </span>
-     </div>
-     <div class="lang-badge">
-      ⌘ BILINGUAL_PROFICIENCY: SPANISH // CERTIFIED
-     </div>
-    </div>
-   </header>
-   <section class="mission-box">
-    <h2>
-     Core_Directive
-    </h2>
-    <p>
-     Architecting a vivid organizational future by bridging the gap between high-precision technology
+    <nav>
+        <a href="personal.html">
+            <div class="hero-logo-container">
+                <img alt="Back" class="nav-logo hero-logo" src="Images/Equal.svg" />
+            </div>
+        </a>
+    </nav>
+    <div class="container">
+        <header class="hero">
+            <div class="scanner-frame">
+                <div class="portrait">
+                </div>
+            </div>
+            <div class="hero-content">
+                <h1 class="fog-name">
+                    <span id="cycle-name">RyanDavid</span> Burningham
+                </h1>
+                <div class="job-title">
+                    <span id="typewriter-record">
+                    </span>
+                    <span class="cursor">
+                    </span>
+                </div>
+                <div class="lang-badge">
+                    ⌘ BILINGUAL_PROFICIENCY: SPANISH // CERTIFIED
+                </div>
+            </div>
+        </header>
+        <section class="mission-box">
+            <h2>
+                Core_Directive
+            </h2>
+            <p>
+                Architecting a vivid organizational future by bridging the gap between high-precision technology
                 logistics and recognizable, youthful brand identity. Transforming complex operational frameworks into
                 cultural landmarks that attract elite talent.
-    </p>
-   </section>
-   <section id="experience">
-    <div class="section-label">
-     01 // CURRENT_TENURE_ACTIVE
-     <span class="live-counter" id="tenure-clock">
-     </span>
-    </div>
-    <div class="experience-entry active-tenure">
-     <div class="exp-header">
-      <div>
-       <h3 class="exp-role">
-        Asst. Director of Brand Strategy &amp; Tech Logistics
-       </h3>
-       <span class="exp-company">
-        Child &amp; Family Support Services (CFSS)
-       </span>
-      </div>
-      <span class="exp-date">
-       2014 — PRESENT
-      </span>
-     </div>
-     <div class="exp-body">
-      <p class="mission-statement">
-       Responsible for the total convergence of
-       <strong>
-        Aesthetic Identity
-       </strong>
-       and
-       <strong>
-        Systemic Reliability
-       </strong>
-       for a premier behavioral health agency.
-      </p>
-      <div class="achievement-grid">
-       <div class="achievement-pillar">
-        <h4>
-         01 // THE_AESTHETIC_REVOLUTION
-        </h4>
-        <p>
-         Architected a complete agency-wide brand metamorphosis. Transitioned the visual language
+            </p>
+        </section>
+        <section id="experience">
+            <div class="section-label">
+                01 // CURRENT_TENURE_ACTIVE
+                <span class="live-counter" id="tenure-clock">
+                </span>
+            </div>
+            <div class="experience-entry active-tenure">
+                <div class="exp-header">
+                    <div>
+                        <h3 class="exp-role">
+                            Asst. Director of Brand Strategy &amp; Tech Logistics
+                        </h3>
+                        <span class="exp-company">
+                            Child &amp; Family Support Services (CFSS)
+                        </span>
+                    </div>
+                    <span class="exp-date">
+                        2014 — PRESENT
+                    </span>
+                </div>
+                <div class="exp-body">
+                    <p class="mission-statement">
+                        Responsible for the total convergence of
+                        <strong>
+                            Aesthetic Identity
+                        </strong>
+                        and
+                        <strong>
+                            Systemic Reliability
+                        </strong>
+                        for a premier behavioral health agency.
+                    </p>
+                    <div class="achievement-grid">
+                        <div class="achievement-pillar">
+                            <h4>
+                                01 // THE_AESTHETIC_REVOLUTION
+                            </h4>
+                            <p>
+                                Architected a complete agency-wide brand metamorphosis. Transitioned the visual language
                                 from "legacy corporate" to a high-impact, modern brand mark that reflects the dignity of
                                 the families served. Every pixel, print, and physical space now resonates with a
                                 unified, professional frequency.
-        </p>
-       </div>
-       <div class="achievement-pillar">
-        <h4>
-         02 // THE_DIGITAL_NERVOUS_SYSTEM
-        </h4>
-        <p>
-         Orchestrating complex technology logistics for a
-         <strong>
-          500+ member workforce
-         </strong>
-         .
+                            </p>
+                        </div>
+                        <div class="achievement-pillar">
+                            <h4>
+                                02 // THE_DIGITAL_NERVOUS_SYSTEM
+                            </h4>
+                            <p>
+                                Orchestrating complex technology logistics for a
+                                <strong>
+                                    500+ member workforce
+                                </strong>
+                                .
                                 Developed and deployed a robust telemedicine infrastructure that became the agency’s
                                 lifeline during global shifts, ensuring that clinical support for children and families
                                 never faced a "signal loss."
-        </p>
-       </div>
-       <div class="achievement-pillar">
-        <h4>
-         03 // OPERATIONAL_STEWARDSHIP
-        </h4>
-        <p>
-         Managing the full lifecycle of technological assets—from procurement to sunset. I oversee
+                            </p>
+                        </div>
+                        <div class="achievement-pillar">
+                            <h4>
+                                03 // OPERATIONAL_STEWARDSHIP
+                            </h4>
+                            <p>
+                                Managing the full lifecycle of technological assets—from procurement to sunset. I
+                                oversee
                                 the network infrastructure and security protocols that safeguard sensitive clinical
                                 data, maintaining a
-         <strong>
-          99.9% uptime
-         </strong>
-         for critical systems across multiple
+                                <strong>
+                                    99.9% uptime
+                                </strong>
+                                for critical systems across multiple
                                 regional hubs.
-        </p>
-       </div>
-      </div>
-      <div class="tenure-metadata">
-       <span>
-        ● 500+ NODES MANAGED
-       </span>
-       <span>
-        ● ZERO_DOWNTIME_PROTOCOL
-       </span>
-       <span>
-        ● BRAND_SOVEREIGNTY_ESTABLISHED
-       </span>
-      </div>
-     </div>
-    </div>
-    <div class="section-label">
-     02 // ARCHIVED_SERVICE
-    </div>
-    <div class="experience-entry">
-     <div class="exp-header">
-      <div>
-       <h3 class="exp-role">
-        Inventory Control Lead &amp; Trainer
-       </h3>
-       <span class="exp-company">
-        Apple Inc.
-       </span>
-      </div>
-      <span class="exp-date">
-       2009 — 2014
-      </span>
-     </div>
-     <div class="exp-body">
-      Orchestrated logistical launch protocols for the
-      <strong>
-       3rd Street Promenade flagship
-      </strong>
-      ,
+                            </p>
+                        </div>
+                    </div>
+                    <div class="tenure-metadata">
+                        <span>
+                            ● 500+ NODES MANAGED
+                        </span>
+                        <span>
+                            ● ZERO_DOWNTIME_PROTOCOL
+                        </span>
+                        <span>
+                            ● BRAND_SOVEREIGNTY_ESTABLISHED
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="section-label">
+                02 // ARCHIVED_SERVICE
+            </div>
+            <div class="experience-entry">
+                <div class="exp-header">
+                    <div>
+                        <h3 class="exp-role">
+                            Inventory Control Lead &amp; Trainer
+                        </h3>
+                        <span class="exp-company">
+                            Apple Inc.
+                        </span>
+                    </div>
+                    <span class="exp-date">
+                        2009 — 2014
+                    </span>
+                </div>
+                <div class="exp-body">
+                    Orchestrated logistical launch protocols for the
+                    <strong>
+                        3rd Street Promenade flagship
+                    </strong>
+                    ,
                     managing high-volume inventory cycles during global product launches. Maintained a consistent
-      <strong>
-       99.85% inventory accuracy rate
-      </strong>
-      while overseeing the secure movement of high-value
+                    <strong>
+                        99.85% inventory accuracy rate
+                    </strong>
+                    while overseeing the secure movement of high-value
                     assets in a high-traffic environment. Facilitated regional operational workshops, mentoring and
                     certifying inventory teams through the Southwest market to uphold global compliance standards.
-     </div>
-    </div>
-    <div class="section-label">
-     03 // DIGITAL_COMMERCE_ORIGINS
-    </div>
-    <div class="experience-entry">
-     <div class="exp-header">
-      <div>
-       <h3 class="exp-role">
-        E-Care Team Leader &amp; E-Business Strategist
-       </h3>
-       <span class="exp-company">
-        Cox Communications
-       </span>
-      </div>
-      <span class="exp-date">
-       2002 — 2008
-      </span>
-     </div>
-     <div class="exp-body">
-      Directed a 23-member elite response team, managing the daily deployment of
-      <strong>
-       40,000+ digital
+                </div>
+            </div>
+            <div class="section-label">
+                03 // DIGITAL_COMMERCE_ORIGINS
+            </div>
+            <div class="experience-entry">
+                <div class="exp-header">
+                    <div>
+                        <h3 class="exp-role">
+                            E-Care Team Leader &amp; E-Business Strategist
+                        </h3>
+                        <span class="exp-company">
+                            Cox Communications
+                        </span>
+                    </div>
+                    <span class="exp-date">
+                        2002 — 2008
+                    </span>
+                </div>
+                <div class="exp-body">
+                    Directed a 23-member elite response team, managing the daily deployment of
+                    <strong>
+                        40,000+ digital
                         commerce units
-      </strong>
-      , including e-commerce orders, live chats, and sensitive customer data.
-      <br/>
-      <br/>
-      Partnered directly with the Webmaster and Marketing departments to optimize the E-Business
+                    </strong>
+                    , including e-commerce orders, live chats, and sensitive customer data.
+                    <br />
+                    <br />
+                    Partnered directly with the Webmaster and Marketing departments to optimize the E-Business
                     interface, successfully transforming the support desk into a revenue engine. Orchestrated a
                     sales-lead initiative through support channels that contributed
-      <strong>
-       5% of the total corporate
+                    <strong>
+                        5% of the total corporate
                         sales goals
-      </strong>
-      . Rising from Specialist to Assist to Team Leader, I established the metrics
+                    </strong>
+                    . Rising from Specialist to Assist to Team Leader, I established the metrics
                     for quality, accuracy, and in-the-moment coaching that defined the regional E-Care standard.
-     </div>
-    </div>
-   </section>
-   <section id="awards">
-    <div class="section-label">
-     04 // COMMENDATIONS
-    </div>
-    <div class="award-entry">
-     <div class="award-meta highlight-pink">
-      SYSTEM_HONOR // MIKE TERKELTAUB AWARD // 2023
-     </div>
-     <div class="exp-body">
-      Recognized for embodying the
-      <strong>
-       "Whatever it Takes"
-      </strong>
-      spirit. Catalyst for technological
+                </div>
+            </div>
+        </section>
+        <section id="awards">
+            <div class="section-label">
+                04 // COMMENDATIONS
+            </div>
+            <div class="award-entry">
+                <div class="award-meta highlight-pink">
+                    SYSTEM_HONOR // MIKE TERKELTAUB AWARD // 2023
+                </div>
+                <div class="exp-body">
+                    Recognized for embodying the
+                    <strong>
+                        "Whatever it Takes"
+                    </strong>
+                    spirit. Catalyst for technological
                     evolution and organizational morale, ensuring teams have the tools required for excellence.
-     </div>
-     <div class="award-quote">
-      "RD is one of those people that just makes people’s lives better every day... he exudes
-      <strong>
-       going above and beyond.
-      </strong>
-      "
-     </div>
-    </div>
-   </section>
-   <section id="skills-matrix">
-    <div class="section-label">
-     05 // CORE_COMPETENCIES
-    </div>
-    <div class="matrix-grid">
-     <div class="matrix-sector">
-      <h4>
-       Brand_Architecture
-      </h4>
-      <div class="skill-gauge">
-       <div class="gauge-label">
-        Identity Design &amp; Aesthetics
-        <span>
-         95%
-        </span>
-       </div>
-       <div class="gauge-track">
-        <div class="gauge-fill" style="width: 95%;">
-        </div>
-       </div>
-      </div>
-      <div class="skill-gauge">
-       <div class="gauge-label">
-        Narrative Strategy
-        <span>
-         90%
-        </span>
-       </div>
-       <div class="gauge-track">
-        <div class="gauge-fill" style="width: 90%;">
-        </div>
-       </div>
-      </div>
-      <div class="skill-gauge">
-       <div class="gauge-label">
-        Cultural Landmark Positioning
-        <span>
-         85%
-        </span>
-       </div>
-       <div class="gauge-track">
-        <div class="gauge-fill" style="width: 85%;">
-        </div>
-       </div>
-      </div>
-     </div>
-     <div class="matrix-sector">
-      <h4>
-       Logistics_Intelligence
-      </h4>
-      <div class="skill-gauge">
-       <div class="gauge-label">
-        Inventory Lifecycle (Apple Standards)
-        <span>
-         98%
-        </span>
-       </div>
-       <div class="gauge-track">
-        <div class="gauge-fill" style="width: 98%;">
-        </div>
-       </div>
-      </div>
-      <div class="skill-gauge">
-       <div class="gauge-label">
-        Procurement &amp; Asset Mgmt
-        <span>
-         92%
-        </span>
-       </div>
-       <div class="gauge-track">
-        <div class="gauge-fill" style="width: 92%;">
-        </div>
-       </div>
-      </div>
-      <div class="skill-gauge">
-       <div class="gauge-label">
-        Operational Workflow Strategy
-        <span>
-         88%
-        </span>
-       </div>
-       <div class="gauge-track">
-        <div class="gauge-fill" style="width: 88%;">
-        </div>
-       </div>
-      </div>
-     </div>
-     <div class="matrix-sector">
-      <h4>
-       Digital_Operations_Scale
-      </h4>
-      <div class="skill-gauge">
-       <div class="gauge-label">
-        Personnel Leadership (23+ Staff)
-        <span>
-         96%
-        </span>
-       </div>
-       <div class="gauge-track">
-        <div class="gauge-fill" style="width: 96%;">
-        </div>
-       </div>
-      </div>
-      <div class="skill-gauge">
-       <div class="gauge-label">
-        High-Volume Commerce Mgmt (40k/Day)
-        <span>
-         98%
-        </span>
-       </div>
-       <div class="gauge-track">
-        <div class="gauge-fill" style="width: 98%;">
-        </div>
-       </div>
-      </div>
-      <div class="skill-gauge">
-       <div class="gauge-label">
-        E-Commerce Conversion Strategy
-        <span>
-         90%
-        </span>
-       </div>
-       <div class="gauge-track">
-        <div class="gauge-fill" style="width: 90%;">
-        </div>
-       </div>
-      </div>
-     </div>
-    </div>
-   </section>
-   <section id="education">
-    <div class="section-label">
-     06 // ACADEMIC_TENURE
-    </div>
-    <div class="experience-entry">
-     <div class="exp-header">
-      <div>
-       <h3 class="exp-role">
-        Business Management &amp; Operational Strategy
-       </h3>
-       <span class="exp-company">
-        Ottawa University // Rio Salado // BYU-Idaho
-       </span>
-      </div>
-      <span class="exp-date">
-       90+ CREDIT HOURS
-      </span>
-     </div>
-     <div class="exp-body">
-      Focused study in high-level management frameworks, organizational behavior, and strategic planning.
+                </div>
+                <div class="award-quote">
+                    "RD is one of those people that just makes people’s lives better every day... he exudes
+                    <strong>
+                        going above and beyond.
+                    </strong>
+                    "
+                </div>
+            </div>
+        </section>
+        <section id="skills-matrix">
+            <div class="section-label">
+                05 // CORE_COMPETENCIES
+            </div>
+            <div class="matrix-grid">
+                <div class="matrix-sector">
+                    <h4>
+                        Brand_Architecture
+                    </h4>
+                    <div class="skill-gauge">
+                        <div class="gauge-label">
+                            Identity Design &amp; Aesthetics
+                            <span>
+                                95%
+                            </span>
+                        </div>
+                        <div class="gauge-track">
+                            <div class="gauge-fill" style="width: 95%;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill-gauge">
+                        <div class="gauge-label">
+                            Narrative Strategy
+                            <span>
+                                90%
+                            </span>
+                        </div>
+                        <div class="gauge-track">
+                            <div class="gauge-fill" style="width: 90%;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill-gauge">
+                        <div class="gauge-label">
+                            Cultural Landmark Positioning
+                            <span>
+                                85%
+                            </span>
+                        </div>
+                        <div class="gauge-track">
+                            <div class="gauge-fill" style="width: 85%;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="matrix-sector">
+                    <h4>
+                        Logistics_Intelligence
+                    </h4>
+                    <div class="skill-gauge">
+                        <div class="gauge-label">
+                            Inventory Lifecycle (Apple Standards)
+                            <span>
+                                98%
+                            </span>
+                        </div>
+                        <div class="gauge-track">
+                            <div class="gauge-fill" style="width: 98%;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill-gauge">
+                        <div class="gauge-label">
+                            Procurement &amp; Asset Mgmt
+                            <span>
+                                92%
+                            </span>
+                        </div>
+                        <div class="gauge-track">
+                            <div class="gauge-fill" style="width: 92%;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill-gauge">
+                        <div class="gauge-label">
+                            Operational Workflow Strategy
+                            <span>
+                                88%
+                            </span>
+                        </div>
+                        <div class="gauge-track">
+                            <div class="gauge-fill" style="width: 88%;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="matrix-sector">
+                    <h4>
+                        Digital_Operations_Scale
+                    </h4>
+                    <div class="skill-gauge">
+                        <div class="gauge-label">
+                            Personnel Leadership (23+ Staff)
+                            <span>
+                                96%
+                            </span>
+                        </div>
+                        <div class="gauge-track">
+                            <div class="gauge-fill" style="width: 96%;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill-gauge">
+                        <div class="gauge-label">
+                            High-Volume Commerce Mgmt (40k/Day)
+                            <span>
+                                98%
+                            </span>
+                        </div>
+                        <div class="gauge-track">
+                            <div class="gauge-fill" style="width: 98%;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill-gauge">
+                        <div class="gauge-label">
+                            E-Commerce Conversion Strategy
+                            <span>
+                                90%
+                            </span>
+                        </div>
+                        <div class="gauge-track">
+                            <div class="gauge-fill" style="width: 90%;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="education">
+            <div class="section-label">
+                06 // ACADEMIC_TENURE
+            </div>
+            <div class="experience-entry">
+                <div class="exp-header">
+                    <div>
+                        <h3 class="exp-role">
+                            Business Management &amp; Operational Strategy
+                        </h3>
+                        <span class="exp-company">
+                            Ottawa University // Rio Salado // BYU-Idaho
+                        </span>
+                    </div>
+                    <span class="exp-date">
+                        90+ CREDIT HOURS
+                    </span>
+                </div>
+                <div class="exp-body">
+                    Focused study in high-level management frameworks, organizational behavior, and strategic planning.
                     Accumulated professional-tier credit volume focused on the mechanics of successful business
                     operations.
-     </div>
-    </div>
-   </section>
-   <section id="human-element">
-    <div class="section-label">
-     07 // HUMAN_ELEMENT_DATA
-    </div>
-    <div class="human-grid">
-     <div class="element-card">
-      <h4 class="element-title">
-       The_Physical
-      </h4>
-      <div class="element-tags">
-       <span class="human-tag">
-        Mountain Biking
-       </span>
-       <span class="human-tag">
-        Longboarding
-       </span>
-       <span class="human-tag">
-        Hiking
-       </span>
-       <span class="human-tag">
-        Desert Exploration
-       </span>
-      </div>
-     </div>
-     <div class="element-card">
-      <h4 class="element-title">
-       The_Creative
-      </h4>
-      <div class="element-tags">
-       <span class="human-tag">
-        Web Site Design
-       </span>
-       <span class="human-tag">
-        iPhone Photography
-       </span>
-       <span class="human-tag">
-        Long Form Writing
-       </span>
-       <span class="human-tag">
-        Reading
-       </span>
-      </div>
-     </div>
-     <div class="element-card">
-      <h4 class="element-title">
-       The_Sanctuary
-      </h4>
-      <div class="element-tags">
-       <span class="human-tag">
-        Fatherhood &amp; Legacy
-       </span>
-       <span class="human-tag">
-        Faith Devotion
-       </span>
-       <span class="human-tag">
-        Home Restoration
-       </span>
-       <span class="human-tag">
-        Grandparenting
-       </span>
-      </div>
-     </div>
-    </div>
-    <div class="human-prose">
-     Outside the realm of of the cold and technical, my life is shaped by a connection to
-     <strong>
-      beauty,
+                </div>
+            </div>
+        </section>
+        <section id="human-element">
+            <div class="section-label">
+                07 // HUMAN_ELEMENT_DATA
+            </div>
+            <div class="human-grid">
+                <div class="element-card">
+                    <h4 class="element-title">
+                        The_Physical
+                    </h4>
+                    <div class="element-tags">
+                        <span class="human-tag">
+                            Mountain Biking
+                        </span>
+                        <span class="human-tag">
+                            Longboarding
+                        </span>
+                        <span class="human-tag">
+                            Hiking
+                        </span>
+                        <span class="human-tag">
+                            Desert Exploration
+                        </span>
+                    </div>
+                </div>
+                <div class="element-card">
+                    <h4 class="element-title">
+                        The_Creative
+                    </h4>
+                    <div class="element-tags">
+                        <span class="human-tag">
+                            Web Site Design
+                        </span>
+                        <span class="human-tag">
+                            iPhone Photography
+                        </span>
+                        <span class="human-tag">
+                            Long Form Writing
+                        </span>
+                        <span class="human-tag">
+                            Reading
+                        </span>
+                    </div>
+                </div>
+                <div class="element-card">
+                    <h4 class="element-title">
+                        The_Sanctuary
+                    </h4>
+                    <div class="element-tags">
+                        <span class="human-tag">
+                            Fatherhood &amp; Legacy
+                        </span>
+                        <span class="human-tag">
+                            Faith Devotion
+                        </span>
+                        <span class="human-tag">
+                            Home Restoration
+                        </span>
+                        <span class="human-tag">
+                            Grandparenting
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="human-prose">
+                Outside the realm of of the cold and technical, my life is shaped by a connection to
+                <strong>
+                    beauty,
                     movement, and the sacred.
-     </strong>
-     Whether I'm tracing a clean line along a dusty Arizona trail,
+                </strong>
+                Whether I'm tracing a clean line along a dusty Arizona trail,
                 capturing the quiet magic of the everyday through a camera lens, or tending a home rooted in faith, the
                 aim is always the same: to progress. I'm a student of the earth; desert and mountains, a father of
                 seven, and someone who believes the most complex systems—at their core—are built to serve the
                 indomitable human heart.
+            </div>
+        </section>
+        <section id="contact">
+            <div class="section-label">
+                08 // COMMUNICATION_HUB
+            </div>
+            <div class="comm-hub">
+                <div style="margin-bottom: 15px;">
+                    <span class="hub-label">
+                        [ SIGNAL ]
+                    </span>
+                    <a href="mailto:your-email@example.com">
+                        Establishing_Connection...
+                    </a>
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <span class="hub-label">
+                        [ NETWORK ]
+                    </span>
+                    <a href="https://www.linkedin.com/in/ryandavid-burningham-711b4856/">
+                        View_LinkedIn_Profile
+                    </a>
+                </div>
+                <div>
+                    <span class="hub-label">
+                        [ UPLINK ]
+                    </span>
+                    <a href="javascript:void(0)" onclick="window.print()"
+                        style="color: var(--brand-blue); font-weight: bold;">
+                        Generate_Dossier_PDF.exe
+                    </a>
+                </div>
+            </div>
+        </section>
+        <div class="sig-block">
+            <img alt="Signature" class="sig-img" src="Images/Signature.png" />
+        </div>
     </div>
-   </section>
-   <section id="contact">
-    <div class="section-label">
-     08 // COMMUNICATION_HUB
-    </div>
-    <div class="comm-hub">
-     <div style="margin-bottom: 15px;">
-      <span class="hub-label">
-       [ SIGNAL ]
-      </span>
-      <a href="mailto:your-email@example.com">
-       Establishing_Connection...
-      </a>
-     </div>
-     <div style="margin-bottom: 15px;">
-      <span class="hub-label">
-       [ NETWORK ]
-      </span>
-      <a href="https://www.linkedin.com/in/ryandavid-burningham-711b4856/">
-       View_LinkedIn_Profile
-      </a>
-     </div>
-     <div>
-      <span class="hub-label">
-       [ UPLINK ]
-      </span>
-      <a href="javascript:void(0)" onclick="window.print()" style="color: var(--brand-blue); font-weight: bold;">
-       Generate_Dossier_PDF.exe
-      </a>
-     </div>
-    </div>
-   </section>
-   <div class="sig-block">
-    <img alt="Signature" class="sig-img" src="Images/Signature.png"/>
-   </div>
-  </div>
-  <script>
-   // TYPEWRITER EFFECT
+    <script>
+        // TYPEWRITER EFFECT
         const text = "Asst. Director of Brand Strategy & Tech Logistics";
         const target = document.getElementById('typewriter-record');
         let i = 0;
@@ -1106,6 +1137,30 @@
             updateTenure();
             setTimeout(type, 1000);
         });
-  </script>
- </body>
+        // --- IDENTITY CYCLE SYSTEM ---
+        const nameTarget = document.getElementById('cycle-name');
+        const names = ["RyanDavid", "Rylee"];
+        let nameIndex = 0;
+
+        function cycleIdentity() {
+            // 1. Start the fade-out
+            nameTarget.classList.add('name-shifting');
+
+            // 2. Wait for the fade-out to complete
+            setTimeout(() => {
+                nameIndex = (nameIndex + 1) % names.length;
+                nameTarget.textContent = names[nameIndex];
+
+                // 3. Start the fade-in
+                nameTarget.classList.remove('name-shifting');
+            }, 800);
+        }
+
+        // Ensure the interval starts after the page is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            setInterval(cycleIdentity, 5000);
+        });
+    </script>
+</body>
+
 </html>
