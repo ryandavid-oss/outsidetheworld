@@ -38,50 +38,83 @@
             background: radial-gradient(circle at center, #0a0a0a 0%, var(--bg-dark) 100%);
         }
 
-        /* 1. HERO LOGO */
+        /* --- CENTERED HUD CONSOLE --- */
+        /* --- UPDATED HEADER CONSOLE --- */
         .header-console {
             position: fixed;
-            top: 40px;
-            left: 40px;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 25px;
-            /* Space between logo and text */
+
+            /* INCREASED GAP: Moves the typewriter text down  */
+            gap: 20px;
+
             z-index: 1000;
             pointer-events: none;
-            /* Allows clicks to pass through to stars if needed */
+            width: 100%;
+            text-align: center;
         }
 
         .console-logo {
-            width: 180px;
-            filter: brightness(0) invert(1);
-            opacity: 0.5;
-            transition: 0.5s;
+            width: 220px;
+            /* Slightly smaller to keep the "Star Scene" open */
+            filter: brightness(0) opacity: 0.5;
+            transition: 0.5s cubic-bezier(0.23, 1, 0.32, 1);
             pointer-events: auto;
-            /* Re-enable clicks for the logo link */
         }
 
         .console-logo:hover {
             opacity: 1;
-            transform: scale(1.02);
+            transform: scale(1.05);
+            /* Layered shadows for "Supernova" bloom */
+            filter: brightness(0) invert(1) drop-shadow(0 0 15px #fff) drop-shadow(0 0 30px var(--brand-blue)) drop-shadow(0 0 50px rgba(99, 149, 238, 0.4));
         }
 
         .console-text {
             font-family: 'Fira Code', monospace;
-            /* Using Fira for that high-tech terminal feel */
-            font-size: 0.7rem;
+            font-size: 0.75rem;
+            /* Precise size for desktop */
             font-weight: 700;
             color: var(--brand-teal);
             letter-spacing: 2px;
             text-transform: uppercase;
-            white-space: nowrap;
+
+            /* Subtle Phosphor Glow */
+            text-shadow: 0 0 8px rgba(145, 175, 179, 0.6);
+
+
+            /* THE GLOW EFFECT  */
+            text-shadow:
+                0 0 5px rgba(255, 255, 255, 0.8),
+                /* Hot core */
+                0 0 12px var(--brand-blue),
+                /* Primary brand glow */
+                0 0 25px rgba(99, 149, 238, 0.4);
+            /* Wide ambient glow */
+
+            transition: all 0.5s ease;
         }
 
-        /* THE BLINKING CURSOR  */
+        /* MATCHING GLOWING CURSOR */
         .console-text::after {
             content: '_';
+            font-weight: 900;
+            color: var(--brand-blue);
+            text-shadow: 0 0 10px var(--brand-blue);
             animation: cursorBlink 1s infinite;
-            margin-left: 5px;
+            margin-left: 8px;
+        }
+
+        /* HOVER STATE: The text "ignites" when the logo is hovered */
+        .header-console:hover .console-text {
+            color: var(--brand-blue);
+            text-shadow:
+                0 0 10px #fff,
+                0 0 20px var(--brand-blue),
+                0 0 40px var(--brand-blue);
         }
 
         @keyframes cursorBlink {
@@ -142,7 +175,7 @@
             }
         }
 
-        /* 3. NAVIGATION LAYOUT */
+        /* --- 3. NAVIGATION LAYOUT --- */
         .gateway-container {
             display: flex;
             align-items: center;
@@ -151,7 +184,12 @@
             z-index: 10;
             width: 90%;
             max-width: 1400px;
-            margin: auto 0;
+
+            /* CHANGE THIS LINE  */
+            margin: 220px auto auto;
+
+            /* This pushes the container down 180px from the top 
+       while keeping it horizontally centered. */
         }
 
         .nav-wing {
@@ -162,14 +200,38 @@
             width: 280px;
         }
 
+        /* --- ENHANCED WING LABELS --- */
         .wing-label {
-            font-family: 'Fira Code';
-            font-size: 0.65rem;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.75rem;
+            /* Bumped from 0.65 for desktop clarity */
+            font-weight: 700;
+            /* Increased weight to hold the glow */
             color: var(--brand-teal);
             letter-spacing: 4px;
             text-transform: uppercase;
             margin-bottom: 25px;
-            opacity: 0.6;
+
+            /* THE HUD GLOW  */
+            text-shadow:
+                0 0 5px rgba(145, 175, 179, 0.5),
+                0 0 10px rgba(145, 175, 179, 0.3);
+
+            opacity: 0.9;
+            /* More presence than the old 0.6 */
+            transition: all 0.4s ease;
+        }
+
+        /* Interaction: Labels "flare" when you hover the button wing */
+        .nav-wing:hover .wing-label {
+            opacity: 1;
+            color: #fff;
+            /* Shifts toward white-hot teal on hover */
+            text-shadow:
+                0 0 8px var(--brand-teal),
+                0 0 20px var(--brand-teal);
+            letter-spacing: 6px;
+            /* Subtle expansion */
         }
 
         .ethereal-btn {
@@ -525,8 +587,23 @@
                     margin-bottom: 30px;
                 }
 
+                /* --- ENHANCED CONSOLE LOGO --- */
                 .console-logo {
-                    width: 140px;
+                    width: 200px;
+                    /* 25% increase from 160px */
+                    filter: brightness(0) invert(1) drop-shadow(0 0 5px rgba(255, 255, 255, 0.1));
+                    opacity: 0.85;
+                    /* Much brighter on load, but still feels "projected" */
+                    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+                    pointer-events: auto;
+                }
+
+                /* THE SUPERNOVA HOVER  */
+                .console-logo:hover {
+                    opacity: 1;
+                    transform: scale(1.05);
+                    /* Layered shadows for "Supernova" bloom */
+                    filter: brightness(0) invert(1) drop-shadow(0 0 15px #fff) drop-shadow(0 0 30px var(--brand-blue)) drop-shadow(0 0 50px rgba(99, 149, 238, 0.4));
                 }
 
                 .console-text {
@@ -572,6 +649,22 @@
                 max-width: 90%;
                 margin: 0 auto;
                 line-height: 1.6;
+            }
+
+            .wing-label {
+                font-size: 0.85rem !important;
+                /* Larger for touch-screen scale */
+                letter-spacing: 3px !important;
+                /* Slightly tighter so it doesn't wrap */
+                opacity: 1 !important;
+                /* Maximum contrast for mobile visibility */
+                margin-bottom: 15px;
+                /* Tighter grouping with the button */
+                font-weight: 900;
+                /* Heavy weight for readability */
+
+                /* Stronger glow for the small screen */
+                text-shadow: 0 0 8px var(--brand-teal);
             }
         }
 
@@ -852,24 +945,24 @@
             });
         });
         // --- TYPEWRITER SYSTEM ---
-const consoleTarget = document.getElementById('typewriter-target');
-const message = "Click a button, star, or nebula to continue...";
-let charIndex = 0;
+        const consoleTarget = document.getElementById('typewriter-target');
+        const message = "Click a button, star, or nebula to continue...";
+        let charIndex = 0;
 
-function typeConsole() {
-    if (charIndex < message.length) {
-        consoleTarget.textContent += message.charAt(charIndex);
-        charIndex++;
-        // Randomize typing speed slightly for a more 'organic' machine feel
-        const typingSpeed = Math.random() * (80 - 30) + 30; 
-        setTimeout(typeConsole, typingSpeed);
-    }
-}
+        function typeConsole() {
+            if (charIndex < message.length) {
+                consoleTarget.textContent += message.charAt(charIndex);
+                charIndex++;
+                // Randomize typing speed slightly for a more 'organic' machine feel
+                const typingSpeed = Math.random() * (80 - 30) + 30;
+                setTimeout(typeConsole, typingSpeed);
+            }
+        }
 
-// Start the sequence after a brief delay
-window.addEventListener('load', () => {
-    setTimeout(typeConsole, 600);
-});
+        // Start the sequence after a brief delay
+        window.addEventListener('load', () => {
+            setTimeout(typeConsole, 600);
+        });
     </script>
 </body>
 
