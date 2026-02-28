@@ -572,43 +572,60 @@
             /* Subtle expansion effect */
         }
 
-@media (max-width: 1024px) {
-    /* 1. Reset the Page Flow */
-    body {
-        justify-content: flex-start;
-        padding-top: 20px; /* Room for the top notch */
-    }
+        @media (max-width: 1024px) {
 
-    /* 2. Rescale the Console for Mobile  */
-    .header-console {
-        position: relative; /* Allow it to sit at the top of the scroll */
-        top: 0; left: 0; transform: none;
-        margin: 0 auto 30px;
-        width: 100%;
-        gap: 12px; /* Tighter gap for small screens */
-    }
+            /* 1. Reset the Page Flow */
+            body {
+                justify-content: flex-start;
+                padding-top: 20px;
+                /* Room for the top notch */
+            }
 
-    .console-logo {
-        width: 150px !important; /* Scaled back for mobile safety */
-        opacity: 0.9;
-        margin: 0 auto;
-        display: block;
-    }
+            /* 2. Rescale the Console for Mobile  */
+            .header-console {
+                position: relative;
+                top: 0;
+                left: 0;
+                transform: none;
+                margin: 20px auto 40px;
+                /* More bottom margin to clear the text */
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+                /* Tight but readable gap */
+            }
 
-    .console-text {
-        font-size: 0.65rem !important; /* Smaller text for narrow screens */
-        letter-spacing: 1px !important;
-        white-space: normal; /* Allow wrapping if the phone is very narrow */
-        max-width: 80%;
-        margin: 0 auto;
-    }
+            .console-logo {
+                /* THE STRETCH: 80% of the screen width */
+                width: 80vw !important;
+                max-width: 450px;
+                /* Safety cap so it doesn't get absurd on iPads */
+                height: auto;
 
-    /* 3. The Navigation Gap */
-    .gateway-container {
-        margin-top: 20px !important; /* Removes the 240px desktop gap */
-        flex-direction: column;
-        gap: 40px;
-    }
+                /* TRUE COLOR RESTORATION */
+                filter: saturate(1.1) brightness(1.1) !important;
+                opacity: 1 !important;
+
+                display: block;
+                margin: 0 auto;
+            }
+
+            .console-text {
+                font-size: 0.7rem !important;
+                letter-spacing: 1px !important;
+                width: 85%;
+                text-align: center;
+                /* Allow text to wrap naturally under the giant logo */
+                white-space: normal !important;
+                line-height: 1.4;
+            }
+
+            /* Pull the buttons down a bit more to accommodate the giant logo */
+            .gateway-container {
+                margin-top: 30px !important;
+            }
 
 
             .gateway-container {
