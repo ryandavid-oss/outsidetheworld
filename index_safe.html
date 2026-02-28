@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport" />
+    <title>Outside The World</title>
+    <link href="favicon.svg" rel="icon" type="image/svg+xml" />
+    <link href="theme.css" rel="stylesheet" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;900&family=Fira+Code:wght@300;500;700&display=swap');
+
+        :root {
+            --star-white: #ffffff;
+            --star-glow: rgba(255, 255, 255, 0.4);
+            --bg-dark: #0a0a0a;
+            --brand-blue: #6395EE;
+            --brand-teal: #91AFB3;
+            --nebula-pink: #fbc2eb;
+            --nebula-glow: rgba(255, 77, 77, 0.7);
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            font-family: 'Inter', sans-serif;
+            color: white;
+            cursor: none;
+        }
+
+        /* 1. BACKGROUND DEPTH */
+        .starfield {
+            position: fixed;
+            inset: -5%;
+            width: 110%;
+            height: 110%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .dim-star {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            opacity: 0.2;
+            animation: breathe var(--d) infinite ease-in-out alternate;
+        }
+
+        @keyframes breathe {
+            from {
+                opacity: 0.1;
+                transform: scale(0.8);
+            }
+
+            to {
+                opacity: 0.4;
+                transform: scale(1.1);
+            }
+        }
+
+        /* 2. THE 19-STAR CONSTELLATION */
+        .constellation {
+            position: relative;
+            width: 320px;
+            height: 480px;
+            z-index: 10;
+        }
+
+        .star {
+            position: absolute;
+            background: var(--star-white);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--star-glow);
+            animation: twinkle var(--duration) infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+
+            0%,
+            100% {
+                opacity: 0.5;
+                transform: scale(0.95);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+        }
+
+        /* THE FRAME */
+        .betelgeuse {
+            top: 0;
+            left: 40px;
+            width: 7px;
+            height: 7px;
+            --duration: 8s;
+            box-shadow: 0 0 20px rgba(255, 51, 0, 0.8);
+            background: #FF3300;
+        }
+
+        .bellatrix {
+            top: 25px;
+            right: 40px;
+            width: 4px;
+            height: 4px;
+            --duration: 7s;
+        }
+
+        .rigel {
+            bottom: 0;
+            right: 40px;
+            width: 8px;
+            height: 8px;
+            --duration: 9s;
+            box-shadow: 0 0 25px rgba(153, 204, 255, 0.7);
+            background: #99CCFF;
+        }
+
+        .saiph {
+            bottom: 30px;
+            left: 45px;
+            width: 4px;
+            height: 4px;
+            --duration: 10s;
+        }
+
+        /* THE TILTED BELT (Rising Diagonal /) */
+        .alnitak {
+            top: 210px;
+            left: 115px;
+            width: 5px;
+            height: 5px;
+            --duration: 6s;
+        }
+
+        .alnilam {
+            top: 225px;
+            left: 155px;
+            width: 6px;
+            height: 6px;
+            --duration: 7.5s;
+        }
+
+        .mintaka {
+            top: 240px;
+            left: 195px;
+            width: 5px;
+            height: 5px;
+            --duration: 6.8s;
+        }
+
+        /* THE HEAD (3 Stars) */
+        .meissa {
+            top: -40px;
+            left: 150px;
+            width: 3px;
+            height: 3px;
+            --duration: 11s;
+            opacity: 0.6;
+        }
+
+        .phi1 {
+            top: -35px;
+            left: 135px;
+            width: 2px;
+            height: 2px;
+            --duration: 12s;
+            opacity: 0.4;
+        }
+
+        .phi2 {
+            top: -37px;
+            left: 165px;
+            width: 2px;
+            height: 2px;
+            --duration: 13s;
+            opacity: 0.4;
+        }
+
+        /* THE SWORD & ORIGINAL NEBULA */
+        .sword-top {
+            top: 275px;
+            left: 150px;
+            width: 2px;
+            height: 2px;
+            --duration: 9s;
+            opacity: 0.6;
+        }
+
+        .nebula {
+            top: 310px;
+            left: 145px;
+            width: 10px;
+            height: 10px;
+            background: var(--nebula-pink);
+            box-shadow: 0 0 20px var(--nebula-glow), 0 0 40px var(--nebula-glow);
+            filter: blur(1px);
+            animation: nebula-breath 10s infinite alternate ease-in-out;
+        }
+
+        @keyframes nebula-breath {
+            from {
+                opacity: 0.6;
+                transform: scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1.1);
+            }
+        }
+
+        .sword-bottom {
+            top: 350px;
+            left: 138px;
+            width: 3px;
+            height: 3px;
+            --duration: 8.5s;
+            opacity: 0.6;
+        }
+
+        /* THE SHIELD ARC (6 Stars) */
+        .pi1 {
+            top: 60px;
+            right: -20px;
+            width: 2px;
+            height: 2px;
+            --duration: 14s;
+            opacity: 0.5;
+        }
+
+        .pi2 {
+            top: 100px;
+            right: -45px;
+            width: 3px;
+            height: 3px;
+            --duration: 12s;
+            opacity: 0.6;
+        }
+
+        .pi3 {
+            top: 150px;
+            right: -60px;
+            width: 3px;
+            height: 3px;
+            --duration: 11s;
+            opacity: 0.8;
+        }
+
+        .pi4 {
+            top: 200px;
+            right: -55px;
+            width: 2px;
+            height: 2px;
+            --duration: 13s;
+            opacity: 0.6;
+        }
+
+        .pi5 {
+            top: 240px;
+            right: -40px;
+            width: 2px;
+            height: 2px;
+            --duration: 15s;
+            opacity: 0.5;
+        }
+
+        .pi6 {
+            top: 280px;
+            right: -10px;
+            width: 2px;
+            height: 2px;
+            --duration: 14s;
+            opacity: 0.4;
+        }
+
+        /* 3. NAVIGATION */
+        .gateway-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 100px;
+            z-index: 100;
+            margin-bottom: 40px;
+        }
+
+        .nav-wing {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 250px;
+        }
+
+        .wing-label {
+            font-family: 'Fira Code';
+            font-size: 0.6rem;
+            color: var(--brand-teal);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        .ethereal-btn {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 18px 35px;
+            color: #fff;
+            font-weight: 900;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: 0.5s;
+        }
+
+        .ethereal-btn:hover {
+            border-color: var(--brand-blue);
+            box-shadow: 0 0 30px rgba(99, 149, 238, 0.3);
+            color: var(--brand-blue);
+        }
+
+        /* 4. FOOTER */
+        .footer {
+            position: fixed;
+            bottom: 5vh;
+            text-align: center;
+            width: 100%;
+            z-index: 100;
+        }
+
+        .main-title {
+            font-size: 1.2rem;
+            font-weight: 300;
+            letter-spacing: 12px;
+            text-transform: uppercase;
+            margin: 0 0 10px;
+            opacity: 0.7;
+        }
+
+        .poem-trigger {
+            font-size: 0.6rem;
+            color: #444;
+            letter-spacing: 3px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .poem-trigger:hover {
+            color: var(--brand-teal);
+        }
+
+        /* 5. RETICLE */
+        #cursor-ring {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--brand-teal);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10000;
+            transition: transform 0.15s ease-out;
+            mix-blend-mode: difference;
+        }
+
+        #cursor-dot {
+            width: 4px;
+            height: 4px;
+            background: var(--brand-blue);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10001;
+            mix-blend-mode: difference;
+        }
+
+        @media (max-width: 1024px) {
+            .gateway-container {
+                flex-direction: column;
+                gap: 40px;
+            }
+
+            .constellation {
+                transform: scale(0.7);
+                height: 350px;
+                margin: 20px 0;
+            }
+
+            #cursor-ring,
+            #cursor-dot {
+                display: none;
+            }
+
+            body {
+                cursor: auto;
+                overflow-y: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="cursor-ring"></div>
+    <div id="cursor-dot"></div>
+    <div class="starfield" id="starfield"></div>
+
+    <main class="gateway-container">
+        <div class="nav-wing">
+            <span class="wing-label">[Thoughts & Creation]</span>
+            <a href="personal.html" class="ethereal-btn">Enter Main</a>
+        </div>
+
+        <div class="constellation">
+            <div class="star betelgeuse"></div>
+            <div class="star bellatrix"></div>
+            <div class="star saiph"></div>
+            <div class="star rigel"></div>
+            <div class="star alnitak"></div>
+            <div class="star alnilam"></div>
+            <div class="star mintaka"></div>
+            <div class="star meissa"></div>
+            <div class="star phi1"></div>
+            <div class="star phi2"></div>
+            <div class="star sword-top"></div>
+            <div class="star nebula"></div>
+            <div class="star sword-bottom"></div>
+            <div class="star pi1"></div>
+            <div class="star pi2"></div>
+            <div class="star pi3"></div>
+            <div class="star pi4"></div>
+            <div class="star pi5"></div>
+            <div class="star pi6"></div>
+        </div>
+
+        <div class="nav-wing">
+            <span class="wing-label">[The Outside Vantage]</span>
+            <a href="professional.html" class="ethereal-btn">Learn More</a>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <h1 class="main-title">Outside The World</h1>
+        <div class="poem-trigger" onclick="togglePoem()">"perspective is my weakness... outside the world is new"</div>
+    </footer>
+
+    <script>
+        // RETICLE
+        const ring = document.getElementById('cursor-ring');
+        const dot = document.getElementById('cursor-dot');
+        document.addEventListener('mousemove', (e) => {
+            dot.style.left = e.clientX - 2 + 'px';
+            dot.style.top = e.clientY - 2 + 'px';
+            ring.style.left = e.clientX - 20 + 'px';
+            ring.style.top = e.clientY - 20 + 'px';
+        });
+
+        // PARALLAX STARFIELD
+        const starfield = document.getElementById('starfield');
+        for (let i = 0; i < 150; i++) {
+            const s = document.createElement('div');
+            s.className = 'dim-star';
+            s.style.width = s.style.height = Math.random() * 2 + 'px';
+            s.style.top = Math.random() * 100 + '%';
+            s.style.left = Math.random() * 100 + '%';
+            s.style.setProperty('--d', (Math.random() * 5 + 3) + 's');
+            starfield.appendChild(s);
+        }
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX - window.innerWidth / 2) * 0.02;
+            const y = (e.clientY - window.innerHeight / 2) * 0.02;
+            starfield.style.transform = `translate(${x}px, ${y}px)`;
+        });
+
+        function togglePoem() { /* Reuse your existing modal logic here */ }
+    </script>
+</body>
+
+</html>
