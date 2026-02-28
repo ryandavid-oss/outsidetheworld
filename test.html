@@ -753,7 +753,10 @@
         function buildStarfield() {
             const M = 160 * DPR; // margin beyond the visible canvas
             stars = []; bigStars = [];
-            for (let i = 0; i < STAR_COUNT; i++) {
+            // NEW PERFORMANCE LOGIC
+            const currentStarCount = window.innerWidth < 1024 ? STAR_COUNT / 2 : STAR_COUNT;
+
+            for (let i = 0; i < currentStarCount; i++) {
                 const m = Math.pow(Math.random(), 2.2);
                 const size = lerp(0.35, 1.45, 1 - m);
                 const base = lerp(0.10, 0.55, 1 - m);
@@ -967,7 +970,8 @@
                 const dy = j ? Math.cos(t * 0.6 + s.ph) * j : 0;
 
                 ctx.fillStyle = `rgba(210,230,255,${a})`;
-                ctx.fillRect(s.x + dx, s.y + dy, s.r * DPR, s.r * DPR);
+                const size = s.r * DPR;
+                ctx.fillRect(Math.round(s.x + dx), Math.round(s.y + dy), Math.round(size), Math.round(size));
             }
 
             for (const s of bigStars) {
