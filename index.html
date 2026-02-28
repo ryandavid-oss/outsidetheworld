@@ -58,19 +58,28 @@
             text-align: center;
         }
 
+        /* --- CONSOLE LOGO: TRUE COLOR RESTORATION --- */
         .console-logo {
-            width: 220px;
-            /* Slightly smaller to keep the "Star Scene" open */
-            filter: brightness(0) opacity: 0.5;
-            transition: 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            width: 250px;
+
+            /* REMOVED: brightness(0) invert(1) */
+            /* ADDED: Boosts existing colors for the "glow" look */
+            filter: saturate(1.2) brightness(1.1);
+
+            opacity: 0.9;
+            /* Keeps it clear but slightly translucent */
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
             pointer-events: auto;
+            display: block;
+            margin: 0 auto;
         }
 
+        /* THE COLOR-SAFE SUPERNOVA */
         .console-logo:hover {
             opacity: 1;
             transform: scale(1.05);
-            /* Layered shadows for "Supernova" bloom */
-            filter: brightness(0) invert(1) drop-shadow(0 0 15px #fff) drop-shadow(0 0 30px var(--brand-blue)) drop-shadow(0 0 50px rgba(99, 149, 238, 0.4));
+            /* Instead of white, we use the Brand Blue for the bloom */
+            filter: saturate(1.5) brightness(1.3) drop-shadow(0 0 15px var(--brand-blue)) drop-shadow(0 0 30px rgba(99, 149, 238, 0.4));
         }
 
         .console-text {
@@ -563,54 +572,44 @@
             /* Subtle expansion effect */
         }
 
-        @media (max-width: 1024px) {
+@media (max-width: 1024px) {
+    /* 1. Reset the Page Flow */
+    body {
+        justify-content: flex-start;
+        padding-top: 20px; /* Room for the top notch */
+    }
 
-            #cursor-ring,
-            #cursor-dot {
-                display: none !important;
-            }
+    /* 2. Rescale the Console for Mobile  */
+    .header-console {
+        position: relative; /* Allow it to sit at the top of the scroll */
+        top: 0; left: 0; transform: none;
+        margin: 0 auto 30px;
+        width: 100%;
+        gap: 12px; /* Tighter gap for small screens */
+    }
 
-            body {
-                overflow-y: auto;
-                justify-content: flex-start;
-                padding: 40px 20px 100px;
-                box-sizing: border-box;
-            }
+    .console-logo {
+        width: 150px !important; /* Scaled back for mobile safety */
+        opacity: 0.9;
+        margin: 0 auto;
+        display: block;
+    }
 
-            @media (max-width: 1024px) {
-                .header-console {
-                    position: relative;
-                    top: 0;
-                    left: 0;
-                    flex-direction: column;
-                    gap: 15px;
-                    margin-bottom: 30px;
-                }
+    .console-text {
+        font-size: 0.65rem !important; /* Smaller text for narrow screens */
+        letter-spacing: 1px !important;
+        white-space: normal; /* Allow wrapping if the phone is very narrow */
+        max-width: 80%;
+        margin: 0 auto;
+    }
 
-                /* --- ENHANCED CONSOLE LOGO --- */
-                .console-logo {
-                    width: 200px;
-                    /* 25% increase from 160px */
-                    filter: brightness(0) invert(1) drop-shadow(0 0 5px rgba(255, 255, 255, 0.1));
-                    opacity: 0.85;
-                    /* Much brighter on load, but still feels "projected" */
-                    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-                    pointer-events: auto;
-                }
+    /* 3. The Navigation Gap */
+    .gateway-container {
+        margin-top: 20px !important; /* Removes the 240px desktop gap */
+        flex-direction: column;
+        gap: 40px;
+    }
 
-                /* THE SUPERNOVA HOVER  */
-                .console-logo:hover {
-                    opacity: 1;
-                    transform: scale(1.05);
-                    /* Layered shadows for "Supernova" bloom */
-                    filter: brightness(0) invert(1) drop-shadow(0 0 15px #fff) drop-shadow(0 0 30px var(--brand-blue)) drop-shadow(0 0 50px rgba(99, 149, 238, 0.4));
-                }
-
-                .console-text {
-                    font-size: 0.6rem;
-                    letter-spacing: 1px;
-                }
-            }
 
             .gateway-container {
                 flex-direction: column;
