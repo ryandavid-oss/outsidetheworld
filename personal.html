@@ -144,6 +144,7 @@
             animation: draw-right-bottom 1.2s ease-out forwards;
         }
 
+        /* THE TRON TRACE REPAIR */
         @keyframes draw-top-left {
             0% {
                 width: 0;
@@ -164,8 +165,11 @@
                 height: 100%;
                 right: 0;
                 top: 0;
+                /* THE FIX: Re-assert the TOP line as a border when background goes transparent */
+                border-top: 2px solid var(--brand-teal);
                 border-left: 2px solid var(--brand-teal);
                 background: transparent;
+                box-shadow: -5px -5px 15px rgba(145, 175, 179, 0.3);
             }
         }
 
@@ -189,8 +193,11 @@
                 width: 100%;
                 top: 0;
                 right: 0;
+                /* THE FIX: Re-assert the RIGHT line as a border when background goes transparent */
+                border-right: 2px solid var(--brand-teal);
                 border-bottom: 2px solid var(--brand-teal);
                 background: transparent;
+                box-shadow: 5px 5px 15px rgba(145, 175, 179, 0.3);
             }
         }
 
@@ -834,9 +841,8 @@
                 /* Disable slide-right on mobile to prevent overflow */
             }
         }
-    
-/* THE CLEAN ATMOSPHERIC WASH */
 
+        /* THE CLEAN ATMOSPHERIC WASH */
     </style>
     <link rel="stylesheet" href="theme.css">
 </head>
