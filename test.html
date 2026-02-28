@@ -106,17 +106,13 @@
             pointer-events: none;
         }
 
-        /* --- THE DESKTOP VERTICAL PUSH --- */
+        /* Optional: push the wings toward the edges a little more */
         .nav-wing:first-child {
             justify-self: end;
-            margin-top: -12vh;
-            /* Physically moves ENTER MAIN UP */
         }
 
         .nav-wing:last-child {
             justify-self: start;
-            margin-bottom: -12vh;
-            /* Physically moves LEARN MORE DOWN */
         }
 
         /* Center spacer column (purely for layout) */
@@ -148,63 +144,29 @@
         .ethereal-btn {
             display: inline-block;
             text-decoration: none;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 20px 40px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            padding: 22px 45px;
             color: #fff;
             font-family: var(--font-main);
             font-weight: 900;
-            font-size: 0.95rem;
-            /* Slightly smaller for precision */
-            letter-spacing: 5px;
+            font-size: 1.1rem;
+            letter-spacing: 6px;
             text-transform: uppercase;
-            transition: all 0.4s cubic-bezier(0.2, 1, 0.3, 1);
+            transition: 0.6s cubic-bezier(0.2, 1, 0.3, 1);
             position: relative;
             pointer-events: auto;
-            backdrop-filter: blur(10px);
-
-            /* THE HIGH-TECH CLIP */
-            clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
-        }
-
-        /* THE CORNER BRACKETS */
-        .ethereal-btn::before,
-        .ethereal-btn::after {
-            content: '';
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            transition: 0.4s;
-            opacity: 0.5;
-        }
-
-        /* Top Right Bracket */
-        .ethereal-btn::before {
-            top: 0;
-            right: 0;
-            border-top: 2px solid white;
-            border-right: 2px solid white;
-        }
-
-        /* Bottom Left Bracket */
-        .ethereal-btn::after {
-            bottom: 0;
-            left: 0;
-            border-bottom: 2px solid white;
-            border-left: 2px solid white;
+            backdrop-filter: blur(6px);
         }
 
         .ethereal-btn:hover {
-            background: rgba(255, 255, 255, 0.08);
-            letter-spacing: 7px;
-            padding: 20px 50px;
+            transform: translateY(-1px);
         }
 
-        .ethereal-btn:hover::before,
-        .ethereal-btn:hover::after {
-            width: 100%;
-            height: 100%;
-            opacity: 1;
+        .explore-btn:hover {
+            border-color: var(--brand-blue);
+            box-shadow: 0 0 40px rgba(99, 149, 238, 0.35);
+            color: var(--brand-blue);
         }
 
         .consult-btn:hover {
@@ -478,150 +440,77 @@
             color: white;
         }
 
-/* --- UNIFIED MOBILE HUD: ZERO-SCROLL & DYNAMIC SPACING --- */
+        @media (max-width:1024px) {
+            .lines-chip {
+                display: none;
+            }
+
+            /* optional: hide on mobile */
+        }
+
+        /* Mobile layout: stack wings + simplify tron UI */
         @media (max-width: 1024px) {
-            
-            /* 1. Global Performance & Visibility */
-            #cursor-ring, #cursor-dot, .tron-path, .tron-card, .lines-chip, .poem-fragment { 
-                display: none !important; 
-            }
-            
-            html, body { 
-                overflow: hidden !important; 
-                height: 100% !important;
-                position: fixed; /* Prevents "Rubber-banding" on iOS */
-                width: 100%;
-                touch-action: none; /* Kills all scroll/swipe */
+
+            #cursor-ring,
+            #cursor-dot {
+                display: none !important;
             }
 
-            /* 2. The Gateway: Pushes Logo UP and Buttons DOWN */
+            html,
+            body {
+                overflow: auto;
+            }
+
             .gateway {
-                position: fixed;
-                inset: 0;
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between; /* This is the key vertical separation */
-                align-items: center;
-                /* Bottom padding (80px) is larger to sit the buttons higher than the footer */
-                padding: calc(60px + var(--safe-top)) 20px 80px; 
-                z-index: 20;
-                box-sizing: border-box;
-            }
-
-/* --- BRAND LOGO --- */
-        .otw-logo-link {
-            position: fixed;
-            top: calc(30px + var(--safe-top));
-            left: calc(30px + var(--safe-left));
-            z-index: 100;
-            pointer-events: auto;
-        }
-
-        .otw-logo {
-            width: 200px;
-            opacity: 0.45;
-            filter: brightness(0) invert(1);
-            transition: 0.4s;
-        }
-
-        .otw-logo-link:hover .otw-logo { opacity: 1; }
-
-        /* --- GATEWAY LAYOUT --- */
-        .gateway {
-            position: fixed;
-            inset: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10;
-            padding: 0 5vw;
-            pointer-events: none;
-        }
-
-        .gateway-inner {
-            width: 100%;
-            max-width: 1600px;
-            display: grid;
-            grid-template-columns: 1fr 500px 1fr; /* 500px Reserved for Orion */
-            align-items: center;
-        }
-
-        /* PHYSICALLY MOVING THE BUTTONS  */
-        .nav-wing:first-child {
-            justify-self: end;
-            transform: translateY(-12vh); /* Pushes ENTER MAIN UP */
-        }
-
-        .nav-wing:last-child {
-            justify-self: start;
-            transform: translateY(12vh); /* Pushes LEARN MORE DOWN */
-        }
-
-        .desktop-orion-void { width: 500px; height: 1px; }
-
-        .nav-wing {
-            width: 280px;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 22px;
-            pointer-events: auto;
-        }
-
-        /* --- UNIFIED MOBILE HUD (ZERO-SCROLL) --- */
-        @media (max-width: 1024px) {
-            html, body { overflow: hidden !important; height: 100%; position: fixed; width: 100%; touch-action: none; }
-            
-            .gateway {
-                flex-direction: column;
-                justify-content: space-between;
-                padding: 60px 20px 100px;
-            }
-
-            /* Moves logo to top-center hero position */
-            .otw-logo-link {
-                position: relative;
-                top: 0; left: 0;
-                width: 80vw;
-                max-width: 320px;
-                display: flex;
-                justify-content: center;
-            }
-
-            .otw-logo { width: 100%; opacity: 0.9; }
-
-            .orion-spacer {
-                display: block !important;
-                flex-grow: 1;
-                min-height: 20vh; /* Protects Orion in the center */
+                overflow: auto;
+                align-items: flex-start;
             }
 
             .gateway-inner {
-                display: flex;
+                margin-top: 110px;
                 flex-direction: column;
-                gap: 20px;
-                grid-template-columns: 1fr;
+                gap: 42px;
+                padding-bottom: 110px;
             }
 
-            .nav-wing:first-child, .nav-wing:last-child {
-                transform: none; /* Resets the vertical push for mobile stack */
-                justify-self: center;
+            .otw-logo {
+                position: relative;
+                top: 0;
+                left: 0;
+                margin: 22px auto 0;
+                display: block;
+                width: 180px;
+                opacity: 0.8;
             }
 
-            .desktop-orion-void { display: none; }
-            
-            .ethereal-btn { 
-                width: 280px; padding: 18px 0; font-size: 0.85rem; 
-                backdrop-filter: none !important;
-                background: rgba(255,255,255,0.05) !important;
+            /* Hide flyout chrome on touch */
+            .tron-path,
+            .tron-card {
+                display: none !important;
             }
 
-            .center-footer { position: absolute; bottom: 30px; width: 100%; z-index: 5; }
-            .poem-fragment, .lines-chip { display: none !important; }
+            .center-footer {
+                position: relative;
+                bottom: auto;
+                margin: 30px 0 60px;
+            }
+
+            .main-title {
+                font-size: 1.1rem;
+                letter-spacing: 8px;
+                padding: 0 10px;
+            }
+
+            .poem-fragment {
+                font-size: 0.6rem;
+                max-width: 90%;
+                margin: 0 auto;
+                line-height: 1.6;
+                display: block;
+            }
         }
-        } 
-    </style></head>
+    </style>
+</head>
 
 <body>
     <canvas id="sky"></canvas>
@@ -630,24 +519,23 @@
     <div id="cursor-ring"></div>
     <div id="cursor-dot"></div>
 
+    <!-- Branding logo -->
+    <a href="flotsam.html" aria-label="Enter flotsam">
+        <img class="otw-logo" src="Images/Equal.svg" alt="Outside The World" />
+    </a>
     <button id="linesToggle" class="lines-chip" type="button" aria-pressed="true">
         LINES: ON
     </button>
-
+    <!-- UI -->
     <div class="gateway">
-        <a href="flotsam.html" class="otw-logo-link" aria-label="Enter flotsam">
-            <img class="otw-logo" src="Images/Equal.svg" alt="Outside The World" />
-        </a>
-
-        <div class="orion-spacer"></div>
-
         <div class="gateway-inner">
             <div class="nav-wing">
                 <span class="wing-label">[Thoughts &amp; Creation]</span>
                 <a class="ethereal-btn explore-btn" href="personal.html">ENTER MAIN</a>
             </div>
 
-            <div class="desktop-orion-void"></div>
+            <!-- The Orion clickable nodes live in #orion-links (positioned over the canvas) -->
+            <div style="width: 1px; height: 1px;"></div>
 
             <div class="nav-wing">
                 <span class="wing-label">[THE_OUTSIDE_VANTAGE]</span>
@@ -656,13 +544,92 @@
         </div>
     </div>
 
+    <!-- Clickable stars + flyouts -->
     <div id="orion-links" aria-hidden="false">
+        <!-- Belt stars -->
+        <div class="node alnitak" data-star="Alnitak">
+            <a href="personal.html" aria-label="Main Interface">
+                <div class="node-star" title="Interface"></div>
+                <svg class="tron-path" width="150" height="100" style="top:-80px; left:-120px;">
+                    <path d="M 125 85 L 125 20 L 10 20"></path>
+                </svg>
+                <div class="tron-card">MAIN_INTERFACE</div>
+            </a>
         </div>
 
+        <div class="node alnilam" data-star="Alnilam">
+            <a href="resume.html" aria-label="Dossier Access">
+                <div class="node-star" title="Dossier"></div>
+                <svg class="tron-path" width="110" height="100" style="top:-70px; left:5px;">
+                    <path d="M 5 75 L 5 15 L 100 15"></path>
+                </svg>
+                <div class="tron-card">DOSSIER_ACCESS</div>
+            </a>
+        </div>
+
+        <div class="node mintaka" data-star="Mintaka">
+            <a href="emmy.html" aria-label="Heart and Soul">
+                <div class="node-star" title="Sanctuary"></div>
+                <svg class="tron-path" width="150" height="100" style="top:5px; left:5px;">
+                    <path d="M 5 5 L 80 5 L 80 80"></path>
+                </svg>
+                <div class="tron-card">HEART_AND_SOUL</div>
+            </a>
+        </div>
+
+        <!-- Nebula node -->
+        <div class="node kavya" data-star="OrionNebula">
+            <a href="poetry.html" aria-label="OTW Kavya">
+                <div class="node-star" title="Kavya Archive"></div>
+                <svg class="tron-path" width="110" height="100" style="top:-10px; left:10px;">
+                    <path d="M 5 20 L 90 20 L 90 42"></path>
+                </svg>
+                <div class="tron-card">OTW_KAVYA</div>
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
     <div class="center-footer">
         <h1 class="main-title">Outside The World</h1>
         <div class="poem-fragment" id="poemTrigger">
             "perspective is my weakness... outside the world is new"
+        </div>
+    </div>
+
+    <!-- Poem modal -->
+    <div class="modal" id="poem-modal" role="dialog" aria-modal="true" aria-hidden="true">
+        <div class="modal-content">
+            <div
+                style="font-family: 'Merriweather', serif; font-size: 1.1rem; line-height: 1.8; color: #e0e0e0; font-weight: 300;">
+                I dance along the path,<br />
+                lonely emerald fields on either side.<br />
+                I gaze into the distant canyon<br />
+                and know that I cannot enter.<br /><br />
+                Every star seems to smile down this evening;<br />
+                each one shines its own way,<br />
+                and the world is quiet.<br />
+                It does not know I am here.<br /><br />
+                The crisp air haunts me;<br />
+                its aroma seems too familiar.<br />
+                Yes, but under different circumstances<br />
+                this would be true.<br /><br />
+                There seems to be an end<br />
+                as the mountain peak swallows up the sky.<br />
+                <span
+                    style="color: var(--brand-teal); font-weight: 700; text-shadow: 0 0 10px var(--brand-teal); font-style: normal;">
+                    My perspective is my weakness;
+                </span><br />
+                <span
+                    style="color: #fff; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; font-size: 0.9rem; opacity: 0.9;">
+                    outside the world is new.
+                </span>
+            </div>
+
+            <div
+                style="margin-top: 50px; font-family: var(--font-code); font-size: 0.55rem; color: #444; letter-spacing: 4px;">
+                [ SYSTEM_DEACTIVATE ]
+            </div>
         </div>
     </div>
 
@@ -722,10 +689,7 @@
         function buildStarfield() {
             const M = 160 * DPR; // margin beyond the visible canvas
             stars = []; bigStars = [];
-            // NEW PERFORMANCE LOGIC
-            const currentStarCount = window.innerWidth < 1024 ? STAR_COUNT / 2 : STAR_COUNT;
-
-            for (let i = 0; i < currentStarCount; i++) {
+            for (let i = 0; i < STAR_COUNT; i++) {
                 const m = Math.pow(Math.random(), 2.2);
                 const size = lerp(0.35, 1.45, 1 - m);
                 const base = lerp(0.10, 0.55, 1 - m);
@@ -849,21 +813,12 @@
             W = Math.floor(innerWidth * DPR);
             H = Math.floor(innerHeight * DPR);
             canvas.width = W; canvas.height = H;
-
-            // DYNAMIC DENSITY
-            const isMobile = window.innerWidth < 1024;
-
-            // Cut standard stars by 70% on mobile
-            const count = isMobile ? 600 : 2400;
-
-            buildStarfield(count);
+            canvas.style.width = innerWidth + "px";
+            canvas.style.height = innerHeight + "px";
+            buildStarfield();
             buildNebula();
-
-            // Scale Orion down to 20% on mobile so it stays in the center gap
-            const scale = isMobile ? 0.20 : 0.30;
-            orion = buildOrion(scale);
-
-            syncLinkNodes(0.5, 0.5);
+            orion = buildOrion();
+            syncLinkNodes(0.5, 0.5); // initial
         }
         addEventListener("resize", resize, { passive: true });
 
@@ -948,8 +903,7 @@
                 const dy = j ? Math.cos(t * 0.6 + s.ph) * j : 0;
 
                 ctx.fillStyle = `rgba(210,230,255,${a})`;
-                const size = s.r * DPR;
-                ctx.fillRect(Math.round(s.x + dx), Math.round(s.y + dy), Math.round(size), Math.round(size));
+                ctx.fillRect(s.x + dx, s.y + dy, s.r * DPR, s.r * DPR);
             }
 
             for (const s of bigStars) {
