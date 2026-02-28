@@ -483,94 +483,93 @@
         }
 
         /* --- MOBILE RECOVERY PROTOCOL --- */
+        /* --- MOBILE ZERO-SCROLL HUD --- */
         @media (max-width: 1024px) {
 
             #cursor-ring,
-            #cursor-dot {
-                display: none !important;
-            }
-
-            html,
-            body {
-                overflow-y: auto !important;
-                overflow-x: hidden !important;
-                height: auto;
-            }
-
-            .gateway {
-                position: relative;
-                display: block;
-                padding: 140px 20px 60px;
-                min-height: 100vh;
-                z-index: 10;
-                pointer-events: none;
-            }
-
-            .gateway-inner {
-                display: flex;
-                flex-direction: column;
-                gap: 80px;
-                align-items: center;
-                width: 100%;
-                margin-top: 0;
-                /* Resetting your manual margin */
-                padding-bottom: 0;
-            }
-
-            .nav-wing {
-                max-width: 280px;
-                width: 100%;
-                pointer-events: auto;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: 20px;
-            }
-
-            .orion-spacer {
-                display: none;
-            }
-
-            .otw-logo {
-                position: fixed;
-                top: calc(20px + var(--safe-top));
-                left: 50%;
-                transform: translateX(-50%);
-                width: 140px;
-                z-index: 100;
-                opacity: 0.9;
-                display: block;
-            }
-
+            #cursor-dot,
+            .orion-spacer,
             .tron-path,
             .tron-card {
                 display: none !important;
             }
 
-            .center-footer {
+            html,
+            body {
+                overflow: hidden !important;
+                /* Locks the viewport */
+                height: 100% !important;
+            }
+
+            .gateway {
+                position: fixed;
+                inset: 0;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-evenly;
+                /* Evenly spaces Logo -> Orion -> Buttons */
+                align-items: center;
+                padding: 40px 20px;
+                z-index: 20;
+            }
+
+            .otw-logo {
                 position: relative;
-                bottom: auto;
-                margin-top: 60px;
-                padding-bottom: 80px;
+                /* Moves logo into the flex flow */
+                top: 0;
+                left: 0;
+                transform: none;
+                width: 75vw;
+                /* Fills 80% of width as requested */
+                max-width: 320px;
+                opacity: 0.9;
+                filter: brightness(0) invert(1);
+                /* Forces it to listen to the dark theme */
+            }
+
+            .gateway-inner {
+                display: flex;
+                flex-direction: column;
+                gap: 25px;
+                /* Tight button group */
                 width: 100%;
-                z-index: 12;
+                align-items: center;
+            }
+
+            .nav-wing {
+                width: 90%;
+                max-width: 300px;
+            }
+
+            .ethereal-btn {
+                width: 100%;
+                /* Full-width mobile buttons */
+                padding: 18px 0;
+                font-size: 0.85rem;
+                backdrop-filter: none !important;
+                /* Performance save */
+                background: rgba(255, 255, 255, 0.05);
+            }
+
+            .center-footer {
+                position: absolute;
+                bottom: 30px;
+                width: 100%;
             }
 
             .main-title {
-                font-size: 1rem;
-                letter-spacing: 6px;
-                padding: 0 10px;
+                font-size: 0.9rem;
+                letter-spacing: 5px;
             }
 
             .poem-fragment {
-                font-size: 0.6rem;
-                max-width: 90%;
-                margin: 0 auto;
-                line-height: 1.6;
-                display: block;
+                display: none;
             }
 
+            /* Simplified footer */
         }
+
+
 
         /* <--- THIS BRACKET CLOSES THE MEDIA QUERY */
     </style>
@@ -880,12 +879,21 @@
             W = Math.floor(innerWidth * DPR);
             H = Math.floor(innerHeight * DPR);
             canvas.width = W; canvas.height = H;
-            canvas.style.width = innerWidth + "px";
-            canvas.style.height = innerHeight + "px";
-            buildStarfield();
+
+            // DYNAMIC DENSITY
+            const isMobile = window.innerWidth < 1024;
+
+            // Cut standard stars by 70% on mobile
+            const count = isMobile ? 600 : 2400;
+
+            buildStarfield(count);
             buildNebula();
-            orion = buildOrion();
-            syncLinkNodes(0.5, 0.5); // initial
+
+            // Scale Orion down to 20% on mobile so it stays in the center gap
+            const scale = isMobile ? 0.20 : 0.30;
+            orion = buildOrion(scale);
+
+            syncLinkNodes(0.5, 0.5);
         }
         addEventListener("resize", resize, { passive: true });
 
