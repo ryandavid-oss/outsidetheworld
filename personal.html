@@ -127,6 +127,7 @@
             right: 0;
             width: 0;
             height: 2px;
+            pointer-events: none;
             background: var(--brand-teal);
             box-shadow: 0 0 15px var(--brand-teal), 0 0 30px var(--brand-teal);
             animation: draw-top-left 1.2s ease-out forwards;
@@ -139,6 +140,7 @@
             right: 0;
             width: 2px;
             height: 0;
+            pointer-events: none;
             background: var(--brand-teal);
             box-shadow: 0 0 15px var(--brand-teal), 0 0 30px var(--brand-teal);
             animation: draw-right-bottom 1.2s ease-out forwards;
@@ -785,6 +787,21 @@
             /* This adds "visual mass" to the letters so they don't look thin on mobile */
             text-shadow: 0 0 2px rgba(255, 255, 255, 0.3);
         }
+        /* --- TERMINAL LINK STYLING --- */
+#md-render a {
+    color: var(--brand-teal); /* Or brand-blue */
+    text-decoration: none;
+    font-weight: 700;
+    border-bottom: 1px dashed rgba(145, 175, 179, 0.4);
+    transition: all 0.3s ease;
+}
+
+#md-render a:hover {
+    color: #fff;
+    border-bottom: 1px solid var(--brand-teal);
+    /* The "High-Output" Glow  */
+    text-shadow: 0 0 10px var(--brand-teal), 0 0 20px rgba(145, 175, 179, 0.4);
+}
 
         /* 8. MOBILE REFINEMENTS */
         /* 8. CONSOLIDATED MOBILE REFINEMENTS */
