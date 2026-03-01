@@ -14,7 +14,7 @@
     <title>OTW Feed | Outside The World</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,300;0,400;0,700;1,300&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,300;0,400;0,700;0,900&display=swap');
 
         :root {
             --brand-blue: var(--brand-blue);
@@ -769,6 +769,21 @@
             color: var(--brand-teal);
             display: block;
             margin-bottom: 5px;
+        }
+
+        /* --- OVERCLOCKED BOLD TEXT --- */
+        #md-render strong {
+            /* We switch to Inter for bold words because it has a 900 "Black" weight */
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
+            color: #ffffff;
+            /* Pure white for maximum contrast */
+            letter-spacing: 0.5px;
+            /* Give the heavy letters a tiny bit of room */
+
+            /* THE "PHOSPHOR BLEED"  */
+            /* This adds "visual mass" to the letters so they don't look thin on mobile */
+            text-shadow: 0 0 2px rgba(255, 255, 255, 0.3);
         }
 
         /* 8. MOBILE REFINEMENTS */
