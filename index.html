@@ -905,88 +905,88 @@
     <script>
         const starBg = document.getElementById('star-bg');
 
-// --- SHROUDED CANVAS STAR ENGINE  ---
-const canvas = document.getElementById('star-canvas');
-const ctx = canvas.getContext('2d');
+        // --- SHROUDED CANVAS STAR ENGINE  ---
+        const canvas = document.getElementById('star-canvas');
+        const ctx = canvas.getContext('2d');
 
-let stars = [];
-let width, height;
-let targetX = 0, targetY = 0;
-let currentX = 0, currentY = 0;
-let lastTime = 0;
+        let stars = [];
+        let width, height;
+        let targetX = 0, targetY = 0;
+        let currentX = 0, currentY = 0;
+        let lastTime = 0;
 
-function resize() {
-    width = window.innerWidth;
-    height = window.innerHeight;
-    canvas.width = width * window.devicePixelRatio;
-    canvas.height = height * window.devicePixelRatio;
-    ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
-    initStars();
-}
-
-function initStars() {
-    stars = [];
-    for (let i = 0; i < 450; i++) {
-        stars.push({
-            x: Math.random() * width,
-            y: Math.random() * height,
-            size: Math.random() * 1.5 + 0.5,
-            opacity: Math.random(),
-            twinkleSpeed: Math.random() * 0.0005 + 0.0002, 
-            color: Math.random() > 0.9 ? '#6395EE' : (Math.random() > 0.8 ? '#91AFB3' : '#ffffff')
-        });
-    }
-}
-
-document.addEventListener('mousemove', (e) => {
-    targetX = (e.clientX - width / 2) * 0.012;
-    targetY = (e.clientY - height / 2) * 0.012;
-});
-
-function draw(timestamp) {
-    const deltaTime = timestamp - lastTime;
-    lastTime = timestamp;
-
-    ctx.clearRect(0, 0, width, height);
-    
-    currentX += (targetX - currentX) * 0.05;
-    currentY += (targetY - currentY) * 0.05;
-
-    // THE SHROUD PARAMETERS
-    const centerX = width / 2;
-    const centerY = height / 2;
-    const shroudRadius = 300; // The "No-Fly Zone" for bright stars
-
-    stars.forEach(s => {
-        s.opacity += s.twinkleSpeed * deltaTime;
-        if (s.opacity > 1 || s.opacity < 0.1) s.twinkleSpeed = -s.twinkleSpeed;
-
-        // 1. Calculate distance from the center of the screen
-        const dx = (s.x + currentX) - centerX;
-        const dy = (s.y + currentY) - centerY;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-
-        // 2. The Shroud Logic: Dim stars the closer they are to the center
-        let shroudAlpha = 1.0;
-        if (distance < shroudRadius) {
-            // Creates a smooth falloff so there isn't a "hard circle"
-            shroudAlpha = 0.2 + (distance / shroudRadius) * 0.8;
+        function resize() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width * window.devicePixelRatio;
+            canvas.height = height * window.devicePixelRatio;
+            ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+            initStars();
         }
 
-        ctx.globalAlpha = Math.max(0, Math.min(1, s.opacity * shroudAlpha));
-        ctx.fillStyle = s.color;
-        
-        ctx.beginPath();
-        ctx.arc(s.x + currentX, s.y + currentY, s.size, 0, Math.PI * 2);
-        ctx.fill();
-    });
+        function initStars() {
+            stars = [];
+            for (let i = 0; i < 450; i++) {
+                stars.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    size: Math.random() * 1.5 + 0.5,
+                    opacity: Math.random(),
+                    twinkleSpeed: Math.random() * 0.0005 + 0.0002,
+                    color: Math.random() > 0.9 ? '#6395EE' : (Math.random() > 0.8 ? '#91AFB3' : '#ffffff')
+                });
+            }
+        }
 
-    requestAnimationFrame(draw);
-}
+        document.addEventListener('mousemove', (e) => {
+            targetX = (e.clientX - width / 2) * 0.012;
+            targetY = (e.clientY - height / 2) * 0.012;
+        });
 
-window.addEventListener('resize', resize);
-resize();
-requestAnimationFrame(draw);
+        function draw(timestamp) {
+            const deltaTime = timestamp - lastTime;
+            lastTime = timestamp;
+
+            ctx.clearRect(0, 0, width, height);
+
+            currentX += (targetX - currentX) * 0.05;
+            currentY += (targetY - currentY) * 0.05;
+
+            // THE SHROUD PARAMETERS
+            const centerX = width / 2;
+            const centerY = height / 2;
+            const shroudRadius = 300; // The "No-Fly Zone" for bright stars
+
+            stars.forEach(s => {
+                s.opacity += s.twinkleSpeed * deltaTime;
+                if (s.opacity > 1 || s.opacity < 0.1) s.twinkleSpeed = -s.twinkleSpeed;
+
+                // 1. Calculate distance from the center of the screen
+                const dx = (s.x + currentX) - centerX;
+                const dy = (s.y + currentY) - centerY;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+
+                // 2. The Shroud Logic: Dim stars the closer they are to the center
+                let shroudAlpha = 1.0;
+                if (distance < shroudRadius) {
+                    // Creates a smooth falloff so there isn't a "hard circle"
+                    shroudAlpha = 0.2 + (distance / shroudRadius) * 0.8;
+                }
+
+                ctx.globalAlpha = Math.max(0, Math.min(1, s.opacity * shroudAlpha));
+                ctx.fillStyle = s.color;
+
+                ctx.beginPath();
+                ctx.arc(s.x + currentX, s.y + currentY, s.size, 0, Math.PI * 2);
+                ctx.fill();
+            });
+
+            requestAnimationFrame(draw);
+        }
+
+        window.addEventListener('resize', resize);
+        resize();
+        requestAnimationFrame(draw);
 
         function togglePoem() {
             const modal = document.getElementById('poem-modal');

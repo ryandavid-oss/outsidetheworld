@@ -223,6 +223,74 @@
             color: var(--lcars-blue);
             margin-top: 10px;
         }
+        /* --- MOBILE DISTRACTION-FREE OVERRIDE --- */
+@media (max-width: 768px) {
+    /* 1. SCRUB THE DECORATIONS */
+    .elbow, .bottom-elbow, .sidebar, .footer, .header {
+        display: none !important;
+    }
+    #auth-container #passwordInput {
+        width: 85%;
+        font-size: 1.2rem;
+    }
+
+    /* 2. FLATTEN THE GRID  */
+    .lcars-frame {
+        display: block; /* Breaks the grid entirely */
+        padding: env(safe-area-inset-top) 15px env(safe-area-inset-bottom);
+        height: auto;
+    }
+
+    body {
+        padding: 0;
+        height: auto;
+        overflow-y: auto;
+    }
+
+    /* 3. EXPAND THE EDITOR  */
+    #main-content {
+        display: block; /* Overrides the 'none' from the login logic once authorized */
+        padding: 0;
+        width: 100%;
+    }
+
+    .input-row {
+        flex-direction: column;
+        gap: 15px;
+        margin-top: 20px;
+    }
+
+    input#title {
+        font-size: 1.8rem;
+        border-bottom: 2px solid var(--lcars-orange);
+    }
+
+    /* 4. KEYBOARD-FRIENDLY TOOLBAR */
+    .editor-toolbar {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: #1a1a1a !important;
+        display: flex;
+        overflow-x: auto;
+        border: none !important;
+        border-bottom: 1px solid #333 !important;
+    }
+
+    .CodeMirror {
+        height: 350px; /* Gives a solid block of writing space */
+        border: none !important;
+        font-size: 16px !important; /* Prevents iOS auto-zoom */
+    }
+
+    .btn-action {
+        width: 100%;
+        margin: 30px 0;
+        padding: 18px;
+        border-radius: 10px;
+        font-size: 1.1rem;
+    }
+}
   
 /* THE CLEAN ATMOSPHERIC WASH */
 
