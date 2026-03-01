@@ -9,6 +9,6 @@ I was especially stoked for this display tonight, as my MIL was in town from Uta
 
 **While I was on my** long ride this morning, I had a dozen ideas for things to write here for the weekend's entry.  As the day draws to a successfuly close, all those thoughts have flitted away as easily as they came.  I had hoped that as I sat here to type, the gears would turn and shake the cobwebs of excess contemplation, but alas; tis not to be.
 
-My greatest wish for now is that I can keep up some sort of momentum, and gain back a few of you who used to frequent this site in the decade's past.  [Drop me a line](mailto:ryandavid@outsidetheworld.com?subject=I%20came,%20I%20saw,%20I%20read) if you do stop by, as I have no other way to gauge visitorship or views at the moment. 
+My greatest wish for now is that I can keep up some sort of momentum, and gain back a few of you who used to frequent this site in the decades past.  [Drop me a line](mailto:ryandavid@outsidetheworld.com?subject=OTW) if you do stop by, as I have no other way to gauge visitorship or views at the moment. 
 
 The skeletal framework for OTW is complete.  You can practically hear the sigh of relief as you read this, no?
