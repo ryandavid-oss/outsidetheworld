@@ -840,6 +840,64 @@
                 transform: none;
                 /* Disable slide-right on mobile to prevent overflow */
             }
+
+            /* 1. LIGHT UP THE FEED COLUMN  */
+            .feed-column {
+                background: rgba(145, 175, 179, 0.08) !important;
+                /* Bumped from 0.03 */
+                border: 1px solid rgba(145, 175, 179, 0.3) !important;
+                /* Sharper border */
+                backdrop-filter: blur(15px) brightness(1.2) !important;
+                /* Internal brightness boost */
+            }
+
+            /* 2. FIX THE DIM ARCHIVE CARDS */
+            .archive-card {
+                background: rgba(255, 255, 255, 0.05) !important;
+                /* Make the "glass" visible */
+                border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            }
+
+            .archive-card p {
+                color: #bbb !important;
+                /* Changed from #666 (unreadable) to light grey */
+                letter-spacing: 1px;
+            }
+
+            .archive-card h3 {
+                opacity: 1 !important;
+                /* Force full brightness on mobile titles */
+                font-size: 1rem;
+            }
+
+            /* 3. BRIGHTEN THE MAIN POST TEXT */
+            #md-render {
+                color: #eeeeee !important;
+                /* High-contrast white-ish */
+                font-weight: 400;
+                /* Slightly thicker for mobile legibility */
+            }
+
+            /* 4. REPAIR THE HEADER TEXT GRADIENT */
+            .top-quadrant-text {
+                background: linear-gradient(to bottom, #fff 40%, #bbb 100%) !important;
+                -webkit-background-clip: text;
+                background-clip: text;
+            }
+
+            /* 5. BOOST THE PROVISIONS META */
+            .provisions-meta {
+                background: rgba(5, 5, 5, 0.6) !important;
+                /* Darker back for lighter text */
+                color: #fff !important;
+                /* Pure white for small technical text */
+            }
+
+            .interface-header {
+                background: rgba(5, 5, 5, 0.8) !important;
+                /* Less "heavy" than a full black gradient */
+                border-bottom: 1px solid var(--border-teal);
+            }
         }
 
         /* THE CLEAN ATMOSPHERIC WASH */

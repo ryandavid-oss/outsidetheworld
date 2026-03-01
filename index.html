@@ -572,14 +572,29 @@
             /* Subtle expansion effect */
         }
 
-        @media (max-width: 1024px) {
+        @media (max-width: 768px) {
 
-            /* 1. Reset the Page Flow */
+            /* 1. Lighten the Text for Contrast */
             body {
-                justify-content: flex-start;
-                padding-top: 20px;
-                /* Room for the top notch */
+                color: #eee !important;
             }
+
+            .exp-body,
+            .human-prose {
+                color: #bbb !important;
+            }
+
+            /* 2. Boost the Portrait */
+            .portrait {
+                filter: grayscale(100%) brightness(0.9) !important;
+            }
+
+            /* 3. The Index "Atmosphere" Lift */
+            .starfield {
+                opacity: 0.8;
+                /* Let the stars shine more clearly */
+            }
+
 
             /* 2. Rescale the Console for Mobile  */
             .header-console {
