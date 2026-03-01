@@ -1,7 +1,7 @@
 # Sunset Sublimity x2
 Date: February 28, 2026
 
-**The last two days** have been a right treat for sunsets here in AZ.  Tonight's in particular was especially tasty; one of those viciously red blasts that eminate on the horizon and paint the entire celestial dome with a thousand different shades of orange, pink, purple, and blue.Take a look:
+**The last two days** have been a right treat for sunsets here in AZ.  Tonight's in particular was especially tasty; one of those viciously red blasts that eminate on the horizon and paint the entire celestial dome with a thousand different shades of orange, pink, purple, and blue. Take a look:
 
 ![Saturday Skies](Images/Blog/az_skies.jpeg)
 
