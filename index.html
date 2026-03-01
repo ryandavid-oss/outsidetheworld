@@ -141,15 +141,13 @@
         /* 2. REACTIVE STARFIELD - UPDATED */
         .starfield {
             position: fixed;
-            top: -10%;
-            left: -10%;
-            width: 120%;
-            height: 120%;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
             z-index: 0;
             pointer-events: none;
-            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-            will-change: transform;
-            /* Smoothed transition */
+            background: transparent;
         }
 
         /* --- ENHANCED STARFIELD  --- */
@@ -750,7 +748,7 @@
         <div class="console-text" id="typewriter-target"></div>
     </header>
     </div>
-    <div class="starfield" id="star-bg">
+    <canvas id="star-canvas" class="starfield"></canvas>
     </div>
     <main class="gateway-container">
         <div class="nav-wing">
@@ -907,45 +905,88 @@
     <script>
         const starBg = document.getElementById('star-bg');
 
-        // --- CALIBRATED PARALLAX MOVEMENT ---
-        document.addEventListener('mousemove', (e) => {
-            // 0.01 is the "Sweet Spot" for 450+ stars
-            const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
-            const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
+// --- SHROUDED CANVAS STAR ENGINE  ---
+const canvas = document.getElementById('star-canvas');
+const ctx = canvas.getContext('2d');
 
-            // We use a slight transition in the CSS to keep this from feeling "jerky"
-            starBg.style.transform = `translate(${moveX}px, ${moveY}px)`;
+let stars = [];
+let width, height;
+let targetX = 0, targetY = 0;
+let currentX = 0, currentY = 0;
+let lastTime = 0;
+
+function resize() {
+    width = window.innerWidth;
+    height = window.innerHeight;
+    canvas.width = width * window.devicePixelRatio;
+    canvas.height = height * window.devicePixelRatio;
+    ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+    initStars();
+}
+
+function initStars() {
+    stars = [];
+    for (let i = 0; i < 450; i++) {
+        stars.push({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            size: Math.random() * 1.5 + 0.5,
+            opacity: Math.random(),
+            twinkleSpeed: Math.random() * 0.0005 + 0.0002, 
+            color: Math.random() > 0.9 ? '#6395EE' : (Math.random() > 0.8 ? '#91AFB3' : '#ffffff')
         });
+    }
+}
 
-        // --- DENSE STAR GENERATION ---
-        for (let i = 0; i < 450; i++) { // Increased count from 180 to 450
-            const star = document.createElement('div');
-            star.className = 'dim-star';
+document.addEventListener('mousemove', (e) => {
+    targetX = (e.clientX - width / 2) * 0.012;
+    targetY = (e.clientY - height / 2) * 0.012;
+});
 
-            // Randomized sizes: mostly tiny dust, a few "hero" stars
-            const size = Math.random() * Math.random() * 3.5 + 0.5;
-            star.style.width = size + 'px';
-            star.style.height = size + 'px';
+function draw(timestamp) {
+    const deltaTime = timestamp - lastTime;
+    lastTime = timestamp;
 
-            // Randomize positions
-            star.style.top = Math.random() * 100 + '%';
-            star.style.left = Math.random() * 100 + '%';
+    ctx.clearRect(0, 0, width, height);
+    
+    currentX += (targetX - currentX) * 0.05;
+    currentY += (targetY - currentY) * 0.05;
 
-            // Twinkle duration
-            star.style.setProperty('--d', (Math.random() * 5 + 3) + 's');
+    // THE SHROUD PARAMETERS
+    const centerX = width / 2;
+    const centerY = height / 2;
+    const shroudRadius = 300; // The "No-Fly Zone" for bright stars
 
-            // COLOR INJECTION: 20% of stars get a tint
-            const rand = Math.random();
-            if (rand > 0.90) {
-                star.style.background = 'var(--brand-blue)';
-                star.style.boxShadow = '0 0 10px var(--brand-blue)';
-            } else if (rand > 0.80) {
-                star.style.background = 'var(--brand-teal)';
-                star.style.boxShadow = '0 0 10px var(--brand-teal)';
-            }
+    stars.forEach(s => {
+        s.opacity += s.twinkleSpeed * deltaTime;
+        if (s.opacity > 1 || s.opacity < 0.1) s.twinkleSpeed = -s.twinkleSpeed;
 
-            starBg.appendChild(star);
+        // 1. Calculate distance from the center of the screen
+        const dx = (s.x + currentX) - centerX;
+        const dy = (s.y + currentY) - centerY;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        // 2. The Shroud Logic: Dim stars the closer they are to the center
+        let shroudAlpha = 1.0;
+        if (distance < shroudRadius) {
+            // Creates a smooth falloff so there isn't a "hard circle"
+            shroudAlpha = 0.2 + (distance / shroudRadius) * 0.8;
         }
+
+        ctx.globalAlpha = Math.max(0, Math.min(1, s.opacity * shroudAlpha));
+        ctx.fillStyle = s.color;
+        
+        ctx.beginPath();
+        ctx.arc(s.x + currentX, s.y + currentY, s.size, 0, Math.PI * 2);
+        ctx.fill();
+    });
+
+    requestAnimationFrame(draw);
+}
+
+window.addEventListener('resize', resize);
+resize();
+requestAnimationFrame(draw);
 
         function togglePoem() {
             const modal = document.getElementById('poem-modal');
