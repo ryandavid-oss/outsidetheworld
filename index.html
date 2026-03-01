@@ -147,40 +147,38 @@
             height: 120%;
             z-index: 0;
             pointer-events: none;
-            transition: transform 0.15s ease-out;
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            will-change: transform;
             /* Smoothed transition */
         }
 
+        /* --- ENHANCED STARFIELD  --- */
         .dim-star {
             position: absolute;
             background: #fff;
             border-radius: 50%;
-            /* No global opacity here; handled by animation for better control */
-            animation: pulse var(--d) infinite alternate;
-            box-shadow: 0 0 3px rgba(255, 255, 255, 0.2);
-            /* Subtle glow */
+            /* Replaced scale animation with a cleaner twinkle */
+            animation: deepTwinkle var(--d) infinite alternate ease-in-out;
+            /* Added a stronger, hot-white core glow */
+            box-shadow: 0 0 4px #fff, 0 0 8px rgba(255, 255, 255, 0.4);
+            filter: blur(0.2px);
+            /* Softens the digital edge just a touch */
         }
 
-        @keyframes pulse {
+        @keyframes deepTwinkle {
             0% {
-                opacity: 0.1;
-                transform: scale(0.8);
+                opacity: 0.2;
+                transform: scale(0.7);
+            }
+
+            50% {
+                opacity: 0.8;
+                /* Significant brightness boost */
             }
 
             100% {
-                opacity: 0.5;
-                /* Increased from 0.2 */
+                opacity: 0.4;
                 transform: scale(1.1);
-            }
-        }
-
-        @keyframes pulse {
-            from {
-                opacity: 0.05;
-            }
-
-            to {
-                opacity: 0.2;
             }
         }
 
@@ -909,20 +907,23 @@
     <script>
         const starBg = document.getElementById('star-bg');
 
-        // Parallax movement (Increased factor to 0.03 for more 'pop')
+        // --- CALIBRATED PARALLAX MOVEMENT ---
         document.addEventListener('mousemove', (e) => {
-            const moveX = (e.clientX - window.innerWidth / 2) * 0.03;
-            const moveY = (e.clientY - window.innerHeight / 2) * 0.03;
+            // 0.01 is the "Sweet Spot" for 450+ stars
+            const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
+            const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
+
+            // We use a slight transition in the CSS to keep this from feeling "jerky"
             starBg.style.transform = `translate(${moveX}px, ${moveY}px)`;
         });
 
-        // Star Generation logic
-        for (let i = 0; i < 180; i++) {
+        // --- DENSE STAR GENERATION ---
+        for (let i = 0; i < 450; i++) { // Increased count from 180 to 450
             const star = document.createElement('div');
             star.className = 'dim-star';
 
-            // Randomize sizes
-            const size = Math.random() * 2.8;
+            // Randomized sizes: mostly tiny dust, a few "hero" stars
+            const size = Math.random() * Math.random() * 3.5 + 0.5;
             star.style.width = size + 'px';
             star.style.height = size + 'px';
 
@@ -931,16 +932,16 @@
             star.style.left = Math.random() * 100 + '%';
 
             // Twinkle duration
-            star.style.setProperty('--d', (Math.random() * 4 + 2) + 's');
+            star.style.setProperty('--d', (Math.random() * 5 + 3) + 's');
 
-            // COLOR INJECTION: 15% of stars get a tint of OTW colors
+            // COLOR INJECTION: 20% of stars get a tint
             const rand = Math.random();
             if (rand > 0.90) {
                 star.style.background = 'var(--brand-blue)';
-                star.style.boxShadow = '0 0 6px var(--brand-blue)';
-            } else if (rand > 0.85) {
+                star.style.boxShadow = '0 0 10px var(--brand-blue)';
+            } else if (rand > 0.80) {
                 star.style.background = 'var(--brand-teal)';
-                star.style.boxShadow = '0 0 6px var(--brand-teal)';
+                star.style.boxShadow = '0 0 10px var(--brand-teal)';
             }
 
             starBg.appendChild(star);
