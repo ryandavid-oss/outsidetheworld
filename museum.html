@@ -5,18 +5,20 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport" />
     <title>Artifacts // Outside The World</title>
-    <meta content="var(--bg-dark)" name="theme-color" />
+    <meta content="#050505" name="theme-color" />
     <link href="favicon.svg" rel="icon" type="image/svg+xml" />
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500;700&family=Inter:wght@400;900&display=swap');
 
         :root {
-            /* Z-INDEX MAP: Unified with the OTW Chassis */
             --z-shroud: 9000;
             --z-interface: 10000;
             --z-header: 11000;
             --border-low: rgba(145, 175, 179, 0.15);
+            --brand-blue: #6395ee;
+            --brand-teal: #91afb3;
+            --bg-dark: #050505;
         }
 
         body {
@@ -30,7 +32,7 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* THE ATMOSPHERIC SHROUD (Aligned with personal.html) */
+        /* ATMOSPHERIC SHROUD */
         body::after {
             content: "";
             position: fixed;
@@ -44,7 +46,7 @@
             opacity: 0.6;
         }
 
-        /* 1. SYMMETRICAL HEADER (LIFTED FROM PERSONAL.HTML) */
+        /* SYMMETRICAL HEADER */
         .interface-header {
             position: fixed;
             top: 0;
@@ -59,14 +61,14 @@
         .header-content-inner {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 30px 40px;
+            padding: 20px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .nav-logo {
-            width: 240px;
+            width: 220px;
             filter: drop-shadow(0 0 20px rgba(99, 149, 238, 0.2));
         }
 
@@ -76,19 +78,18 @@
 
         .weather-uplink {
             font-family: 'Fira Code', monospace;
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             color: var(--brand-teal);
             letter-spacing: 2px;
-            margin-bottom: 8px;
+            margin-bottom: 4px;
             text-transform: uppercase;
-            opacity: 0.8;
         }
 
         .top-quadrant-text {
             margin: 0;
-            font-size: 2.0rem;
+            font-size: 1.6rem;
             font-weight: 900;
-            letter-spacing: 5px;
+            letter-spacing: 4px;
             text-transform: uppercase;
             background: linear-gradient(to bottom, #fff 10%, #666 90%);
             -webkit-background-clip: text;
@@ -96,11 +97,78 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* 2. ARTIFACT GRID */
+        /* FULL CURATOR'S STATEMENT SECTION */
+        .statement-container {
+            max-width: 900px;
+            margin: 180px auto 80px;
+            padding: 0 40px;
+            position: relative;
+            z-index: var(--z-interface);
+        }
+
+        .statement-header {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.75rem;
+            color: var(--brand-teal);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            border-left: 3px solid var(--brand-blue);
+            padding-left: 15px;
+        }
+
+        .statement-title {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 40px;
+            line-height: 1.1;
+        }
+
+        .statement-body {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: #aaa;
+        }
+
+        .statement-body p {
+            margin-bottom: 30px;
+        }
+
+        .statement-quote {
+            border-top: 1px solid var(--border-low);
+            border-bottom: 1px solid var(--border-low);
+            padding: 40px 0;
+            margin: 50px 0;
+            font-family: 'Fira Code', monospace;
+            color: #fff;
+            font-size: 1.2rem;
+            font-style: italic;
+            position: relative;
+        }
+
+        .statement-quote::before {
+            content: '"';
+            font-size: 4rem;
+            position: absolute;
+            top: -10px;
+            left: -30px;
+            opacity: 0.1;
+        }
+
+        .statement-quote span {
+            display: block;
+            font-size: 0.7rem;
+            font-style: normal;
+            margin-top: 20px;
+            color: var(--brand-teal);
+            letter-spacing: 2px;
+            font-weight: bold;
+        }
+
+        /* ARTIFACT GRID */
         .artifact-rack {
             max-width: 1400px;
-            margin: 220px auto 100px;
-            /* Offset for fixed header */
+            margin: 0 auto 100px;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
             gap: 40px;
@@ -112,20 +180,17 @@
         .museum-case {
             background: #000;
             border: 1px solid var(--border-low);
-            position: relative;
-            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-            overflow: hidden;
             display: flex;
             flex-direction: column;
+            transition: 0.4s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
         .museum-case:hover {
             border-color: var(--brand-blue);
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+            transform: translateY(-8px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
         }
 
-        /* THE SIMULATED VIEWPORT */
         .viewport-container {
             width: 100%;
             height: 280px;
@@ -144,44 +209,41 @@
             pointer-events: none;
         }
 
-        .case-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, transparent 100%);
-            pointer-events: none;
-        }
-
         .case-info {
-            padding: 25px;
+            padding: 30px;
             background: #080808;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .case-info h3 {
             font-family: 'Fira Code', monospace;
-            font-size: 0.85rem;
-            margin: 0 0 8px 0;
+            font-size: 0.9rem;
             color: var(--brand-blue);
-            letter-spacing: 1px;
+            margin: 0 0 10px 0;
         }
 
         .case-info p {
-            font-size: 0.65rem;
+            font-size: 0.7rem;
             color: #666;
             text-transform: uppercase;
             letter-spacing: 2px;
-            margin: 0 0 20px 0;
+            margin: 0 0 25px 0;
+            line-height: 1.4;
         }
 
         .boot-btn {
+            margin-top: auto;
             display: inline-block;
+            align-self: flex-start;
             font-family: 'Fira Code', monospace;
-            font-size: 0.65rem;
+            font-size: 0.7rem;
             color: #fff;
             text-decoration: none;
-            padding: 10px 20px;
+            padding: 12px 24px;
             border: 1px solid #333;
             transition: 0.3s;
-            letter-spacing: 2px;
         }
 
         .boot-btn:hover {
@@ -191,39 +253,49 @@
         }
 
         footer {
-            padding: 80px 0;
+            padding: 100px 0;
             text-align: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            position: relative;
-            z-index: var(--z-interface);
-        }
-
-        footer p {
+            opacity: 0.2;
             font-family: 'Fira Code', monospace;
-            font-size: 0.55rem;
+            font-size: 0.6rem;
             letter-spacing: 5px;
-            color: rgba(255, 255, 255, 0.15);
-            text-transform: uppercase;
         }
 
-        @media (max-width: 1024px) {
-            .artifact-rack {
-                grid-template-columns: 1fr;
-                margin-top: 260px;
-                padding: 0 20px;
-            }
-
-            .top-quadrant-text {
-                font-size: 1.2rem;
-                letter-spacing: 2px;
+        /* MOBILE OPTIMIZATION */
+        @media (max-width: 768px) {
+            .header-content-inner {
+                padding: 15px 20px;
+                flex-direction: column;
+                align-items: flex-start;
             }
 
             .nav-logo {
-                width: 180px;
+                width: 150px;
+            }
+
+            .artifact-rack {
+                grid-template-columns: 1fr;
+                padding: 0 20px;
+            }
+
+            .statement-container {
+                margin-top: 150px;
+                padding: 0 20px;
+            }
+
+            .statement-title {
+                font-size: 2rem;
+            }
+
+            .statement-body {
+                font-size: 1rem;
+            }
+
+            .legacy-frame {
+                transform: scale(0.24);
             }
         }
     </style>
-    <link href="theme.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -238,9 +310,35 @@
         </div>
     </header>
 
+    <section class="statement-container">
+        <div class="statement-header">CURATOR_LOG // OTW_RECOVERY_INIT</div>
+        <h2 class="statement-title">A Museum of Resurrection: Reclaiming the Digital Soul</h2>
+        <div class="statement-body">
+            <p>Welcome to the OTW museum. What you see below is more than a collection of tables, sliced JPEGs,
+                and legacy code; it is a twenty-five-year journey. </p>
 
+            <p>This project began as a solemn attempt to rescue fragments of a digital past that were nearly
+                swallowed by the past. From the neon blue of a 1998 Tripod page to the monochromatic
+                minimalism of 2013, these artifacts represent the changing seasons of my life; some vibrant with growth,
+                and others quiet with stasis and the pain of natural mechanism.</p>
+
+            <div class="statement-quote">
+                "OTW will be back, someday."
+                <span>SYSTEM_LOG: 27 NOV 2021 // STATUS: PROMISE_KEPT</span>
+            </div>
+
+            <p>This simple line, left on a blank white screen in 2021, was a placeholder for a future that felt
+                uncertain. I am so grateful to acknowledge that "someday" has arrived. By restoring these pages with
+                meticulous fidelity, you
+                aren't just looking at old websites; you are witnessing a person finding their footing again.</p>
+
+            <p>This museum is a testament to the fact that we are never truly "down"—we are just in a period of
+                maintenance. The site is back. The curator is healed. <strong>So go outside.</strong></p>
+        </div>
+    </section>
 
     <main class="artifact-rack">
+
         <div class="museum-case">
             <div class="viewport-container">
                 <iframe class="legacy-frame" src="UTJazz.html"></iframe>
@@ -248,29 +346,22 @@
             </div>
             <div class="case-info">
                 <h3>I HAVE NO IDEA WHY I TRY</h3>
-                <p>Origin: CIRCA 2000 // TRIPOD PAGE</p>
+                <p>Origin: CIRCA 1998 // Ryan-David's Trendy Tripod Homepage</p>
                 <a class="boot-btn" href="UTJazz.html">BOOT_ARTIFACT</a>
             </div>
         </div>
 
         <div class="museum-case">
-            <div class="viewport-container">
-                <iframe class="legacy-frame" src="UtJazz2.html"></iframe>
-                <div class="case-overlay"></div>
-            </div>
+            <div class="viewport-container"><iframe class="legacy-frame" src="UtJazz2.html"></iframe></div>
             <div class="case-info">
                 <h3>OTW_PRE_GENESIS_V0.5</h3>
-                <p>Origin: CIRCA 1998 // The Tripod / Richard Barry Artifact</p>
-                <p style="font-style: italic; font-size: 10px; color: #888;">"Don't feed the bears."</p>
+                <p>Origin: CIRCA 1998 // Tripod Richard Barry Artifact</p>
                 <a class="boot-btn" href="UtJazz2.html">BOOT_ARTIFACT</a>
             </div>
         </div>
 
         <div class="museum-case">
-            <div class="viewport-container">
-                <iframe class="legacy-frame" src="allstargame.html"></iframe>
-                <div class="case-overlay"></div>
-            </div>
+            <div class="viewport-container"><iframe class="legacy-frame" src="allstargame.html"></iframe></div>
             <div class="case-info">
                 <h3>ARROWHEAD_ASG_98</h3>
                 <p>Origin: 17 APR 1998 // Tripod Legacy Recovery</p>
@@ -279,10 +370,7 @@
         </div>
 
         <div class="museum-case">
-            <div class="viewport-container">
-                <iframe class="legacy-frame" src="index42002.html"></iframe>
-                <div class="case-overlay"></div>
-            </div>
+            <div class="viewport-container"><iframe class="legacy-frame" src="index42002.html"></iframe></div>
             <div class="case-info">
                 <h3>OTW_INDEX_V1.0_GENESIS</h3>
                 <p>Origin: 26 APR 2002 // Original Three-Column Layout</p>
@@ -291,10 +379,7 @@
         </div>
 
         <div class="museum-case">
-            <div class="viewport-container">
-                <iframe class="legacy-frame" src="index122002.html"></iframe>
-                <div class="case-overlay"></div>
-            </div>
+            <div class="viewport-container"><iframe class="legacy-frame" src="index122002.html"></iframe></div>
             <div class="case-info">
                 <h3>OTW_INDEX_V1.1</h3>
                 <p>Origin: 01 DEC 2002 // Nested Table Architecture</p>
@@ -303,10 +388,7 @@
         </div>
 
         <div class="museum-case">
-            <div class="viewport-container">
-                <iframe class="legacy-frame" src="homework.html"></iframe>
-                <div class="case-overlay"></div>
-            </div>
+            <div class="viewport-container"><iframe class="legacy-frame" src="homework.html"></iframe></div>
             <div class="case-info">
                 <h3>DVHS_POETRY_1994</h3>
                 <p>Origin: CIRCA 2002 // Legacy Anthology Recovery</p>
@@ -315,89 +397,59 @@
         </div>
 
         <div class="museum-case">
-            <div class="viewport-container">
-                <iframe class="legacy-frame" src="index122003.html"></iframe>
-                <div class="case-overlay"></div>
-            </div>
+            <div class="viewport-container"><iframe class="legacy-frame" src="index122003.html"></iframe></div>
             <div class="case-info">
                 <h3>OTW_INDEX_V2.0_PRO</h3>
-                <p>Origin: 06 DEC 2003 // Professional Redesign Artifact</p>
+                <p>Origin: 06 DEC 2003 // Professional Redesign</p>
                 <a class="boot-btn" href="index122003.html">BOOT_ARTIFACT</a>
             </div>
         </div>
 
         <div class="museum-case">
-            <div class="viewport-container">
-                <iframe class="legacy-frame" src="index2004.html"></iframe>
-                <div class="case-overlay"></div>
-            </div>
+            <div class="viewport-container"><iframe class="legacy-frame" src="index2004.html"></iframe></div>
             <div class="case-info">
                 <h3>OTW_INDEX_V2.2_STATIC</h3>
-                <p>Origin: CIRCA 2004 // Image-Map & Floating Link Artifact</p>
+                <p>Origin: CIRCA 2004 // Floating Link Artifact</p>
                 <a class="boot-btn" href="index2004.html">BOOT_ARTIFACT</a>
             </div>
         </div>
 
         <div class="museum-case">
-            <div class="viewport-container">
-                <iframe class="legacy-frame" src="old_index_2009.html"></iframe>
-                <div class="case-overlay"></div>
-            </div>
+            <div class="viewport-container"><iframe class="legacy-frame" src="old_index_2009.html"></iframe></div>
             <div class="case-info">
-                <h3>OTW_INDEX_V2.1</h3>
-                <p>Origin: 23 MAR 2009 // MS_FRONTPAGE</p>
+                <h3>OTW_INDEX_V3.0</h3>
+                <p>Origin: 23 MAR 2009 // MS_FRONTPAGE ARCHIVE</p>
                 <a class="boot-btn" href="old_index_2009.html">BOOT_ARTIFACT</a>
             </div>
         </div>
 
         <div class="museum-case">
-            <div class="viewport-container">
-                <iframe class="legacy-frame" src="index_2011.html"></iframe>
-                <div class="case-overlay"></div>
-            </div>
+            <div class="viewport-container"><iframe class="legacy-frame" src="index_2011.html"></iframe></div>
             <div class="case-info">
-                <h3>OTW_INDEX_V3.0</h3>
+                <h3>OTW_INDEX_V3.5</h3>
                 <p>Origin: 02 FEB 2011 // Blue Era Portal</p>
                 <a class="boot-btn" href="index_2011.html">BOOT_ARTIFACT</a>
             </div>
         </div>
 
         <div class="museum-case">
-            <div class="viewport-container">
-                <iframe class="legacy-frame" src="index06_2013.html"></iframe>
-                <div class="case-overlay"></div>
-            </div>
+            <div class="viewport-container"><iframe class="legacy-frame" src="index06_2013.html"></iframe></div>
             <div class="case-info">
-                <h3>OTW_INDEX_V3.0_MINIMAL</h3>
-                <p>Origin: 19 JUN 2013 // Freeway Express 6 Grid Artifact</p>
+                <h3>OTW_INDEX_V4.0_MINIMAL</h3>
+                <p>Origin: 19 JUN 2013 // Freeway Express 6 Grid</p>
                 <a class="boot-btn" href="index06_2013.html">BOOT_ARTIFACT</a>
             </div>
         </div>
 
-        <div class="museum-case">
-            <div class="viewport-container">
-                <iframe class="legacy-frame" src="index2003.html"></iframe>
-                <div class="case-overlay"></div>
-            </div>
-            <div class="case-info">
-                <h3>OTW_INDEX_V1.5 (ICE9)</h3>
-                <p>Origin: 05 JAN 2003 // FrontPage_Export</p>
-                <a class="boot-btn" href="index2003.html">BOOT_ARTIFACT</a>
-            </div>
-        </div>
-
         <div class="museum-case" style="border-color: #444;">
-            <div class="viewport-container">
-                <iframe class="legacy-frame" src="index2021.html"></iframe>
-                <div class="case-overlay" style="background: rgba(0,0,0,0.6);"></div>
-            </div>
+            <div class="viewport-container"><iframe class="legacy-frame" src="index2021.html"></iframe></div>
             <div class="case-info">
-                <h3>OTW_STASIS_V4.0</h3>
-                <p>Origin: 27 NOV 2021 // The Long Hiatus Artifact</p>
-                <p style="font-style: italic; font-size: 10px; color: #888;">"OTW will be back, someday."</p>
+                <h3>OTW_STASIS_V5.0</h3>
+                <p>Origin: 27 NOV 2021 // The Long Hiatus</p>
                 <a class="boot-btn" href="index2021.html">BOOT_ARTIFACT</a>
             </div>
         </div>
+
     </main>
 
     <footer>
@@ -407,13 +459,10 @@
     <script>
         function updateClock() {
             const now = new Date();
-            const timeString = now.toLocaleTimeString('en-US', {
-                hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit'
-            });
+            const timeString = now.toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
             document.getElementById('system-clock').textContent = `SYSTEM_TIME // ${timeString} MST`;
         }
-        setInterval(updateClock, 1000);
-        updateClock();
+        setInterval(updateClock, 1000); updateClock();
     </script>
 </body>
 
