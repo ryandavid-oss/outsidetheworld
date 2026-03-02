@@ -15,10 +15,50 @@
             --z-shroud: 9000;
             --z-interface: 10000;
             --z-header: 11000;
+            --header-offset: 180px;
+
             --border-low: rgba(145, 175, 179, 0.15);
             --brand-blue: #6395ee;
             --brand-teal: #91afb3;
             --bg-dark: #050505;
+
+            --page-max: 1400px;
+            --text-max: 900px;
+            --pad-x: clamp(16px, 4vw, 40px);
+
+            /* Set to 1024px to accommodate your 3-column layouts */
+            --legacy-w: 1024;
+            --legacy-h: 2400;
+            --frame-scale: 1;
+            /* Handled dynamically by JS */
+        }
+
+        /* --- HARDEN LAYOUT AGAINST HORIZONTAL OVERFLOW --- */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        @supports (overflow-x: clip) {
+
+            html,
+            body {
+                overflow-x: clip;
+            }
+        }
+
+        /* This is the global rule that was causing the issue */
+        img,
+        iframe {
+            max-width: 100%;
         }
 
         body {
@@ -26,20 +66,17 @@
             color: #eeeeee;
             font-family: 'Inter', sans-serif;
             margin: 0;
-            padding: 0;
-            overflow-x: hidden;
+            padding-top: var(--header-offset);
             min-height: 100vh;
             -webkit-font-smoothing: antialiased;
+            position: relative;
         }
 
         /* ATMOSPHERIC SHROUD */
         body::after {
             content: "";
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            inset: 0;
             background: radial-gradient(circle at 50% 50%, rgba(10, 10, 10, 0) 20%, rgba(0, 0, 0, 0.7) 100%);
             pointer-events: none;
             z-index: var(--z-shroud);
@@ -51,29 +88,40 @@
             position: fixed;
             top: 0;
             left: 0;
+            right: 0;
             width: 100%;
             z-index: var(--z-header);
             backdrop-filter: blur(15px);
             background: linear-gradient(to bottom, rgba(5, 5, 5, 1) 60%, rgba(5, 5, 5, 0) 100%);
-            box-sizing: border-box;
         }
 
         .header-content-inner {
-            max-width: 1400px;
+            width: min(var(--page-max), 100%);
             margin: 0 auto;
-            padding: 20px 40px;
+            padding: 20px calc(var(--pad-x) + env(safe-area-inset-left)) 20px calc(var(--pad-x) + env(safe-area-inset-right));
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 16px;
+        }
+
+        .nav-logo-link {
+            display: block;
+            line-height: 0;
+            flex: 0 0 auto;
         }
 
         .nav-logo {
             width: 220px;
+            height: auto;
+            display: block;
             filter: drop-shadow(0 0 20px rgba(99, 149, 238, 0.2));
         }
 
         .header-right {
             text-align: right;
+            flex: 1 1 auto;
+            min-width: 0;
         }
 
         .weather-uplink {
@@ -83,6 +131,7 @@
             letter-spacing: 2px;
             margin-bottom: 4px;
             text-transform: uppercase;
+            white-space: nowrap;
         }
 
         .top-quadrant-text {
@@ -99,9 +148,9 @@
 
         /* FULL CURATOR'S STATEMENT SECTION */
         .statement-container {
-            max-width: 900px;
-            margin: 180px auto 80px;
-            padding: 0 40px;
+            width: min(var(--text-max), 100%);
+            margin: 0 auto 80px;
+            padding: 0 var(--pad-x);
             position: relative;
             z-index: var(--z-interface);
         }
@@ -118,7 +167,7 @@
         }
 
         .statement-title {
-            font-size: 3rem;
+            font-size: clamp(2.1rem, 5vw, 3rem);
             font-weight: 900;
             margin-bottom: 40px;
             line-height: 1.1;
@@ -167,12 +216,12 @@
 
         /* ARTIFACT GRID */
         .artifact-rack {
-            max-width: 1400px;
+            width: min(var(--page-max), 100%);
             margin: 0 auto 100px;
+            padding: 0 var(--pad-x);
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 40px;
-            padding: 0 40px;
             position: relative;
             z-index: var(--z-interface);
         }
@@ -183,6 +232,8 @@
             display: flex;
             flex-direction: column;
             transition: 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            min-width: 0;
+            overflow: hidden;
         }
 
         .museum-case:hover {
@@ -191,22 +242,50 @@
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
         }
 
+        /* Preview viewport cannot affect layout width */
         .viewport-container {
             width: 100%;
             height: 280px;
             background: #111;
-            overflow: hidden;
             position: relative;
+            overflow: hidden;
             border-bottom: 1px solid var(--border-low);
+            contain: layout paint;
+        }
+
+        /* Stage is clipped and isolates the oversized iframe */
+        .frame-stage {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
         }
 
         .legacy-frame {
-            width: 1280px;
-            height: 900px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: calc(var(--legacy-w) * 1px);
+            height: calc(var(--legacy-h) * 1px);
+
+            /* MAGIC FIX: This releases the iframe from the global max-width constraint */
+            max-width: none !important;
+
             border: none;
-            transform: scale(0.32);
-            transform-origin: 0 0;
+            display: block;
+
+            /* Makes it “non-manipulatable” */
             pointer-events: none;
+
+            /* Pin to top left for exact width scaling */
+            transform-origin: top left;
+            transform: scale(var(--frame-scale));
+        }
+
+        .case-overlay {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0.25) 100%);
         }
 
         .case-info {
@@ -215,6 +294,7 @@
             flex-grow: 1;
             display: flex;
             flex-direction: column;
+            min-width: 0;
         }
 
         .case-info h3 {
@@ -259,49 +339,52 @@
             font-family: 'Fira Code', monospace;
             font-size: 0.6rem;
             letter-spacing: 5px;
+            position: relative;
+            z-index: var(--z-interface);
         }
 
         /* MOBILE OPTIMIZATION */
         @media (max-width: 768px) {
             .header-content-inner {
-                padding: 15px 20px;
+                padding: 15px calc(var(--pad-x) + env(safe-area-inset-left)) 15px calc(var(--pad-x) + env(safe-area-inset-right));
                 flex-direction: column;
                 align-items: center;
-                /* Surgical Center Alignment */
+                text-align: center;
+            }
+
+            :root {
+                --header-offset: 235px;
             }
 
             .nav-logo {
                 width: 80%;
-                /* Centered at 80% screen width */
-                margin-bottom: 15px;
-                /* Spacing between logo and title */
+                max-width: 420px;
+                margin: 0 auto 10px auto;
             }
 
             .header-right {
+                width: 100%;
                 text-align: center;
-                /* Center Title & Clock */
+            }
+
+            .statement-container {
+                margin: 20px auto 70px;
+                /* Reduced 160px to 20px (or 0) */
             }
 
             .artifact-rack {
                 grid-template-columns: 1fr;
-                padding: 0 20px;
+                gap: 20px;
             }
 
-            .statement-container {
-                margin-top: 150px;
-                padding: 0 20px;
+            .viewport-container {
+                height: 220px;
             }
+        }
 
-            .statement-title {
-                font-size: 2rem;
-            }
-
-            .statement-body {
-                font-size: 1rem;
-            }
-
-            .legacy-frame {
-                transform: scale(0.24);
+        @media (max-width: 360px) {
+            .top-quadrant-text {
+                font-size: 1.3rem;
             }
         }
     </style>
@@ -311,7 +394,9 @@
 
     <header class="interface-header">
         <div class="header-content-inner">
-            <a href="flotsam.html"><img src="Images/Equal.svg" alt="Back" class="nav-logo"></a>
+            <a class="nav-logo-link" href="flotsam.html">
+                <img src="Images/Equal.svg" alt="Back" class="nav-logo">
+            </a>
             <div class="header-right">
                 <div class="weather-uplink" id="system-clock">SYSTEM_TIME // --:--:--</div>
                 <h1 class="top-quadrant-text">FLOTSAM_ARCHIVES</h1>
@@ -324,7 +409,7 @@
         <h2 class="statement-title">A Museum of Resurrection: Reclaiming the Digital Soul</h2>
         <div class="statement-body">
             <p>Welcome to the OTW museum. What you see below is more than a collection of tables, sliced JPEGs,
-                and legacy code; it is a twenty-five-year journey. </p>
+                and legacy code; it is a twenty-five-year journey.</p>
 
             <p>This project began as a solemn attempt to rescue fragments of a digital past that were nearly
                 swallowed by the past. From the neon blue of a 1998 Tripod page to the monochromatic
@@ -350,7 +435,9 @@
 
         <div class="museum-case">
             <div class="viewport-container">
-                <iframe class="legacy-frame" src="UTJazz.html"></iframe>
+                <div class="frame-stage">
+                    <iframe class="legacy-frame" src="UTJazz.html" scrolling="no" tabindex="-1"></iframe>
+                </div>
                 <div class="case-overlay"></div>
             </div>
             <div class="case-info">
@@ -361,7 +448,12 @@
         </div>
 
         <div class="museum-case">
-            <div class="viewport-container"><iframe class="legacy-frame" src="UTJazz2.html"></iframe></div>
+            <div class="viewport-container">
+                <div class="frame-stage">
+                    <iframe class="legacy-frame" src="UTJazz2.html" scrolling="no" tabindex="-1"></iframe>
+                </div>
+                <div class="case-overlay"></div>
+            </div>
             <div class="case-info">
                 <h3>OTW_PRE_GENESIS_V0.5</h3>
                 <p>Origin: CIRCA 1998 // Tripod Richard Barry Artifact</p>
@@ -370,7 +462,12 @@
         </div>
 
         <div class="museum-case">
-            <div class="viewport-container"><iframe class="legacy-frame" src="allstargame.html"></iframe></div>
+            <div class="viewport-container">
+                <div class="frame-stage">
+                    <iframe class="legacy-frame" src="allstargame.html" scrolling="no" tabindex="-1"></iframe>
+                </div>
+                <div class="case-overlay"></div>
+            </div>
             <div class="case-info">
                 <h3>ARROWHEAD_ASG_98</h3>
                 <p>Origin: 17 APR 1998 // Tripod Legacy Recovery</p>
@@ -379,7 +476,12 @@
         </div>
 
         <div class="museum-case">
-            <div class="viewport-container"><iframe class="legacy-frame" src="index42002.html"></iframe></div>
+            <div class="viewport-container">
+                <div class="frame-stage">
+                    <iframe class="legacy-frame" src="index42002.html" scrolling="no" tabindex="-1"></iframe>
+                </div>
+                <div class="case-overlay"></div>
+            </div>
             <div class="case-info">
                 <h3>OTW_INDEX_V1.0_GENESIS</h3>
                 <p>Origin: 26 APR 2002 // Original Three-Column Layout</p>
@@ -388,7 +490,12 @@
         </div>
 
         <div class="museum-case">
-            <div class="viewport-container"><iframe class="legacy-frame" src="index122002.html"></iframe></div>
+            <div class="viewport-container">
+                <div class="frame-stage">
+                    <iframe class="legacy-frame" src="index122002.html" scrolling="no" tabindex="-1"></iframe>
+                </div>
+                <div class="case-overlay"></div>
+            </div>
             <div class="case-info">
                 <h3>OTW_INDEX_V1.1</h3>
                 <p>Origin: 01 DEC 2002 // Nested Table Architecture</p>
@@ -397,7 +504,12 @@
         </div>
 
         <div class="museum-case">
-            <div class="viewport-container"><iframe class="legacy-frame" src="homework.html"></iframe></div>
+            <div class="viewport-container">
+                <div class="frame-stage">
+                    <iframe class="legacy-frame" src="homework.html" scrolling="no" tabindex="-1"></iframe>
+                </div>
+                <div class="case-overlay"></div>
+            </div>
             <div class="case-info">
                 <h3>DVHS_POETRY_1994</h3>
                 <p>Origin: CIRCA 2002 // Legacy Anthology Recovery</p>
@@ -406,7 +518,12 @@
         </div>
 
         <div class="museum-case">
-            <div class="viewport-container"><iframe class="legacy-frame" src="index122003.html"></iframe></div>
+            <div class="viewport-container">
+                <div class="frame-stage">
+                    <iframe class="legacy-frame" src="index122003.html" scrolling="no" tabindex="-1"></iframe>
+                </div>
+                <div class="case-overlay"></div>
+            </div>
             <div class="case-info">
                 <h3>OTW_INDEX_V2.0_PRO</h3>
                 <p>Origin: 06 DEC 2003 // Professional Redesign</p>
@@ -415,7 +532,12 @@
         </div>
 
         <div class="museum-case">
-            <div class="viewport-container"><iframe class="legacy-frame" src="index2004.html"></iframe></div>
+            <div class="viewport-container">
+                <div class="frame-stage">
+                    <iframe class="legacy-frame" src="index2004.html" scrolling="no" tabindex="-1"></iframe>
+                </div>
+                <div class="case-overlay"></div>
+            </div>
             <div class="case-info">
                 <h3>OTW_INDEX_V2.2_STATIC</h3>
                 <p>Origin: CIRCA 2004 // Floating Link Artifact</p>
@@ -424,7 +546,12 @@
         </div>
 
         <div class="museum-case">
-            <div class="viewport-container"><iframe class="legacy-frame" src="old_index_2009.html"></iframe></div>
+            <div class="viewport-container">
+                <div class="frame-stage">
+                    <iframe class="legacy-frame" src="old_index_2009.html" scrolling="no" tabindex="-1"></iframe>
+                </div>
+                <div class="case-overlay"></div>
+            </div>
             <div class="case-info">
                 <h3>OTW_INDEX_V3.0</h3>
                 <p>Origin: 23 MAR 2009 // MS_FRONTPAGE ARCHIVE</p>
@@ -433,7 +560,12 @@
         </div>
 
         <div class="museum-case">
-            <div class="viewport-container"><iframe class="legacy-frame" src="index_2011.html"></iframe></div>
+            <div class="viewport-container">
+                <div class="frame-stage">
+                    <iframe class="legacy-frame" src="index_2011.html" scrolling="no" tabindex="-1"></iframe>
+                </div>
+                <div class="case-overlay"></div>
+            </div>
             <div class="case-info">
                 <h3>OTW_INDEX_V3.5</h3>
                 <p>Origin: 02 FEB 2011 // Blue Era Portal</p>
@@ -442,7 +574,12 @@
         </div>
 
         <div class="museum-case">
-            <div class="viewport-container"><iframe class="legacy-frame" src="index06_2013.html"></iframe></div>
+            <div class="viewport-container">
+                <div class="frame-stage">
+                    <iframe class="legacy-frame" src="index06_2013.html" scrolling="no" tabindex="-1"></iframe>
+                </div>
+                <div class="case-overlay"></div>
+            </div>
             <div class="case-info">
                 <h3>OTW_INDEX_V4.0_MINIMAL</h3>
                 <p>Origin: 19 JUN 2013 // Freeway Express 6 Grid</p>
@@ -451,16 +588,24 @@
         </div>
 
         <div class="museum-case" style="border-color: #444;">
-            <div class="viewport-container"><iframe class="legacy-frame" src="index2021.html"></iframe></div>
+            <div class="viewport-container">
+                <div class="frame-stage">
+                    <iframe class="legacy-frame" src="index2021.html" scrolling="no" tabindex="-1"></iframe>
+                </div>
+                <div class="case-overlay"></div>
+            </div>
             <div class="case-info">
                 <h3>OTW_STASIS_V5.0</h3>
                 <p>Origin: 27 NOV 2021 // The Long Hiatus</p>
                 <a class="boot-btn" href="index2021.html">BOOT_ARTIFACT</a>
             </div>
         </div>
+
         <div class="museum-case">
             <div class="viewport-container">
-                <iframe class="legacy-frame" src="TrillianDog.html"></iframe>
+                <div class="frame-stage">
+                    <iframe class="legacy-frame" src="TrillianDog.html" scrolling="no" tabindex="-1"></iframe>
+                </div>
                 <div class="case-overlay"></div>
             </div>
             <div class="case-info">
@@ -483,6 +628,27 @@
             document.getElementById('system-clock').textContent = `SYSTEM_TIME // ${timeString} MST`;
         }
         setInterval(updateClock, 1000); updateClock();
+    </script>
+    <script>
+        function fitArtifactFrames() {
+            // Updated to 1024 to match your CSS
+            const baseW = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--legacy-w')) || 1024;
+
+            document.querySelectorAll('.viewport-container').forEach(vc => {
+                const frame = vc.querySelector('iframe.legacy-frame');
+                if (!frame) return;
+
+                const viewportW = vc.clientWidth;
+                // Scale precisely to match the container's width, overriding any default zoom
+                const scale = viewportW / baseW;
+
+                frame.style.setProperty('--frame-scale', scale.toFixed(4));
+            });
+        }
+
+        window.addEventListener('resize', fitArtifactFrames, { passive: true });
+        window.addEventListener('orientationchange', fitArtifactFrames, { passive: true });
+        document.addEventListener('DOMContentLoaded', fitArtifactFrames);
     </script>
 </body>
 
