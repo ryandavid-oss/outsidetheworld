@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport" />
+    <title>Artifacts // Outside The World</title>
+    <meta content="var(--bg-dark)" name="theme-color" />
+    <link href="favicon.svg" rel="icon" type="image/svg+xml" />
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500;700&family=Inter:wght@400;900&display=swap');
+
+        :root {
+            /* Z-INDEX MAP: Unified with the OTW Chassis */
+            --z-shroud: 9000;
+            --z-interface: 10000;
+            --z-header: 11000;
+            --border-low: rgba(145, 175, 179, 0.15);
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: #eeeeee;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* THE ATMOSPHERIC SHROUD (Aligned with personal.html) */
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(10, 10, 10, 0) 20%, rgba(0, 0, 0, 0.7) 100%);
+            pointer-events: none;
+            z-index: var(--z-shroud);
+            opacity: 0.6;
+        }
+
+        /* 1. SYMMETRICAL HEADER (LIFTED FROM PERSONAL.HTML) */
+        .interface-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: var(--z-header);
+            backdrop-filter: blur(15px);
+            background: linear-gradient(to bottom, rgba(5, 5, 5, 1) 60%, rgba(5, 5, 5, 0) 100%);
+            box-sizing: border-box;
+        }
+
+        .header-content-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            width: 240px;
+            filter: drop-shadow(0 0 20px rgba(99, 149, 238, 0.2));
+        }
+
+        .header-right {
+            text-align: right;
+        }
+
+        .weather-uplink {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.65rem;
+            color: var(--brand-teal);
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            opacity: 0.8;
+        }
+
+        .top-quadrant-text {
+            margin: 0;
+            font-size: 2.0rem;
+            font-weight: 900;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            background: linear-gradient(to bottom, #fff 10%, #666 90%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* 2. ARTIFACT GRID */
+        .artifact-rack {
+            max-width: 1400px;
+            margin: 220px auto 100px;
+            /* Offset for fixed header */
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            padding: 0 40px;
+            position: relative;
+            z-index: var(--z-interface);
+        }
+
+        .museum-case {
+            background: #000;
+            border: 1px solid var(--border-low);
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .museum-case:hover {
+            border-color: var(--brand-blue);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+        }
+
+        /* THE SIMULATED VIEWPORT */
+        .viewport-container {
+            width: 100%;
+            height: 280px;
+            background: #111;
+            overflow: hidden;
+            position: relative;
+            border-bottom: 1px solid var(--border-low);
+        }
+
+        .legacy-frame {
+            width: 1280px;
+            height: 900px;
+            border: none;
+            transform: scale(0.32);
+            transform-origin: 0 0;
+            pointer-events: none;
+        }
+
+        .case-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, transparent 100%);
+            pointer-events: none;
+        }
+
+        .case-info {
+            padding: 25px;
+            background: #080808;
+        }
+
+        .case-info h3 {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+            margin: 0 0 8px 0;
+            color: var(--brand-blue);
+            letter-spacing: 1px;
+        }
+
+        .case-info p {
+            font-size: 0.65rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 0 0 20px 0;
+        }
+
+        .boot-btn {
+            display: inline-block;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.65rem;
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            border: 1px solid #333;
+            transition: 0.3s;
+            letter-spacing: 2px;
+        }
+
+        .boot-btn:hover {
+            border-color: var(--brand-teal);
+            background: var(--brand-teal);
+            color: var(--bg-dark);
+        }
+
+        footer {
+            padding: 80px 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            z-index: var(--z-interface);
+        }
+
+        footer p {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.55rem;
+            letter-spacing: 5px;
+            color: rgba(255, 255, 255, 0.15);
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 1024px) {
+            .artifact-rack {
+                grid-template-columns: 1fr;
+                margin-top: 260px;
+                padding: 0 20px;
+            }
+
+            .top-quadrant-text {
+                font-size: 1.2rem;
+                letter-spacing: 2px;
+            }
+
+            .nav-logo {
+                width: 180px;
+            }
+        }
+    </style>
+    <link href="theme.css" rel="stylesheet" />
+</head>
+
+<body>
+
+    <header class="interface-header">
+        <div class="header-content-inner">
+            <a href="flotsam.html"><img src="Images/Equal.svg" alt="Back" class="nav-logo"></a>
+            <div class="header-right">
+                <div class="weather-uplink" id="system-clock">SYSTEM_TIME // --:--:--</div>
+                <h1 class="top-quadrant-text">FLOTSAM_ARCHIVES</h1>
+            </div>
+        </div>
+    </header>
+
+    <main class="artifact-rack">
+        <div class="museum-case">
+            <div class="viewport-container">
+                <iframe class="legacy-frame" src="allstargame.html"></iframe>
+                <div class="case-overlay"></div>
+            </div>
+            <div class="case-info">
+                <h3>ARROWHEAD_ASG_98</h3>
+                <p>Origin: 17 APR 1998 // Tripod Legacy Recovery</p>
+                <a class="boot-btn" href="allstargame.html">BOOT_ARTIFACT</a>
+            </div>
+        </div>
+
+        <div class="museum-case">
+            <div class="viewport-container">
+                <iframe class="legacy-frame" src="old_index_2009.html"></iframe>
+                <div class="case-overlay"></div>
+            </div>
+            <div class="case-info">
+                <h3>OTW_INDEX_V2.1</h3>
+                <p>Origin: 23 MAR 2009 // MS_FRONTPAGE</p>
+                <a class="boot-btn" href="old_index_2009.html">BOOT_ARTIFACT</a>
+            </div>
+        </div>
+
+        <div class="museum-case">
+            <div class="viewport-container">
+                <iframe class="legacy-frame" src="index2003.html"></iframe>
+                <div class="case-overlay"></div>
+            </div>
+            <div class="case-info">
+                <h3>OTW_INDEX_V1.5 (ICE9)</h3>
+                <p>Origin: 05 JAN 2003 // FrontPage_Export</p>
+                <a class="boot-btn" href="index2003.html">BOOT_ARTIFACT</a>
+            </div>
+        </div>
+
+        <div class="museum-case">
+            <div class="viewport-container">
+                <iframe class="legacy-frame" src="UTJazz.html"></iframe>
+                <div class="case-overlay"></div>
+            </div>
+            <div class="case-info">
+                <h3>I HAVE NO IDEA WHY I TRY</h3>
+                <p>Origin: CIRCA 2000 // TRIPOD PAGE</p>
+                <a class="boot-btn" href="UTJazz.html">BOOT_ARTIFACT</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2026 DIGITAL_ARCHAEOLOGY_UNIT // SYSTEMS & STORIES</p>
+    </footer>
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('en-US', {
+                hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit'
+            });
+            document.getElementById('system-clock').textContent = `SYSTEM_TIME // ${timeString} MST`;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
+</body>
+
+</html>
