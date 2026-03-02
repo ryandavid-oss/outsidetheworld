@@ -70,9 +70,10 @@
             top: 0;
             left: 0;
             width: 100%;
-            z-index: 3500;
+            /* BUMPED: Must be higher than the 9999 wash  */
+            z-index: 11000;
             backdrop-filter: blur(15px);
-            background: linear-gradient(to bottom, rgba(5, 5, 5, 1) 0%, rgba(5, 5, 5, 0) 100%);
+            background: linear-gradient(to bottom, rgba(5, 5, 5, 1) 60%, rgba(5, 5, 5, 0) 100%);
             box-sizing: border-box;
             padding: 0;
         }
@@ -831,17 +832,16 @@
         /* --- JUMP STRIP STYLING --- */
         .mobile-jump-strip {
             display: none;
-            /* Hidden on Desktop */
             width: 100%;
-            background: rgba(145, 175, 179, 0.05);
+            /* BUMPED: More visible opacity for the "glass"  */
+            background: rgba(145, 175, 179, 0.15);
             border-top: 1px solid var(--border-teal);
             border-bottom: 1px solid var(--border-teal);
             backdrop-filter: blur(10px);
             position: sticky;
-            /* Sticks to the top as they scroll  */
-            top: 140px;
-            /* Adjust based on your header height */
-            z-index: 3000;
+            /* CALIBRATED: Matches your mobile margin-top  */
+            top: 260px;
+            z-index: 10500;
         }
 
         .jump-btn {
@@ -934,12 +934,14 @@
             }
 
             /* Fix the Main Layout */
-            .main-interface {
-                margin-top: 260px;
-                /* Adjust based on new stacked header height */
-                flex-direction: column;
-                padding: 0 15px;
-                gap: 30px;
+            @media (max-width: 1024px) {
+                .main-interface {
+                    /* Reduced from 260px because the Jump Strip now occupies some of that air */
+                    margin-top: 20px;
+                    flex-direction: column;
+                    padding: 0 15px;
+                    gap: 30px;
+                }
             }
 
             .feed-column {
@@ -971,6 +973,15 @@
                 font-weight: 400;
                 /* Slightly thicker "ink" for small screens */
             }
+
+            .top-quadrant-text .mobile-break {
+                display: block;
+                /* Forces onto a new line  */
+                margin-top: 8px;
+                /* Slight color shift to emphasize the core brand */
+                color: #fff;
+                -webkit-text-fill-color: #fff;
+            }
         }
 
         /* THE CLEAN ATMOSPHERIC WASH */
@@ -985,7 +996,9 @@
             <a href="index.html"><img src="Images/Equal.svg" alt="Back" class="nav-logo"></a>
             <div class="header-right">
                 <div class="weather-uplink" id="system-clock">SYSTEM_TIME // --:--:--</div>
-                <h1 class="top-quadrant-text">A QUARTER-CENTURY OF DIGITAL RESIDUE</h1>
+                <h1 class="top-quadrant-text">
+                    A QUARTER-CENTURY OF <span class="mobile-break">DIGITAL RESIDUE</span>
+                </h1>
             </div>
         </div>
     </header>
