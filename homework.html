@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Outside the World is New... // Complete Legacy Archive</title>
@@ -162,108 +163,132 @@
         }
 
         /* LIGHTBOX */
-        .modal { display: none; position: fixed; z-index: 10000; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); }
-        .modal-img { margin: auto; display: block; max-width: 90%; max-height: 85vh; margin-top: 5vh; border: 5px solid #fff; }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+        }
+
+        .modal-img {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 85vh;
+            margin-top: 5vh;
+            border: 5px solid #fff;
+        }
     </style>
 </head>
+
 <body>
 
-<div class="master-table">
-    <header class="header-unit">
-        <img src="Images/banner2.jpg" width="500" height="89" alt="Outside the World">
-    </header>
+    <div class="master-table">
+        <header class="header-unit">
+            <img src="Images/banner2.jpg" width="500" height="89" alt="Outside the World">
+        </header>
 
-    <aside class="nav-sidebar">
-        <img src="Images/button.jpg" width="115">
-        <img src="Images/newbutton004.jpg" width="115">
-        <img src="Images/newbutton003.jpg" width="115">
-        <img src="Images/newbutton008.jpg" width="115">
-        <img src="Images/newbutton002.jpg" width="115">
-    </aside>
+        <aside class="nav-sidebar">
+            <img src="Images/button.jpg" width="115">
+            <img src="Images/newbutton004.jpg" width="115">
+            <img src="Images/newbutton003.jpg" width="115">
+            <img src="Images/newbutton008.jpg" width="115">
+            <img src="Images/newbutton002.jpg" width="115">
+        </aside>
 
-    <main class="content-column">
-  
-        <div class="homework-section">
-            <img src="Images/DV.jpg" class="dv-img" alt="DVHS">
-            <b>T</b>he year was 1994, and we were all Sophomores at Deer 
-            Valley High School In Glendale AZ. In English class, our teacher asked 
-            us to create a simple Poetry Anthology. We failed. <i>Miserably</i>.
-        </div>
+        <main class="content-column">
 
-        <div class="gallery-grid">
-            <div class="gallery-item"><img src="Images/Page1.jpg" onclick="openLightbox(this.src)"><div style="font-size:8pt; margin-top:5px; font-weight:bold;">Page 1</div></div>
-            <div class="gallery-item"><img src="Images/Page-2.jpg" onclick="openLightbox(this.src)"><div style="font-size:8pt; margin-top:5px; font-weight:bold;">Page 2</div></div>
-            <div class="gallery-item"><img src="Images/Page-3.jpg" onclick="openLightbox(this.src)"><div style="font-size:8pt; margin-top:5px; font-weight:bold;">Page 3</div></div>
-        </div>
-
-        <div style="border: 1px solid #fff; margin-top: 20px;">
-            <div style="background:#000; padding:5px; color:#FFBB77; font-size:9pt; font-style:italic;">Quote of the Day-</div>
-            <div style="padding:10px; font-size:8pt; font-style:italic;">"...the only type of cause that matters is final cause, the purpose. Once you understand what people really want, you can't hate them anymore."<br><br>Speaker for the Dead</div>
-        </div>
-    </main>
-
-    <aside class="cactus-area">
-        <div class="cactus-frame">
-            <img src="Images/cactus.jpg" alt="Cactus">
-        </div>
-        <p style="font-size: 8pt; font-style: italic; margin-top:10px;">Brought to you by the letter "C"</p>
-    </aside>
-
-    <footer class="footer-matrix">
-        <div class="footer-block">
-            <img src="Images/newbutton005.jpg" width="30" height="115">
-            <div class="footer-links">
-                <div><img src="Images/freccia_verde.gif" width="11" height="13"> <a href="#">Main Page</a></div>
-                <div><img src="Images/freccia_verde.gif" width="11" height="13"> <a href="#">Archives</a></div>
-                <div><img src="Images/freccia_verde.gif" width="11" height="13"> <a href="#">Latest Updates</a></div>
+            <div class="homework-section">
+                <img src="Images/DV.jpg" class="dv-img" alt="DVHS">
+                <b>T</b>he year was 1994, and we were all Sophomores at Deer
+                Valley High School In Glendale AZ. In English class, our teacher asked
+                us to create a simple Poetry Anthology. We failed. <i>Miserably</i>.
             </div>
-        </div>
-        <div class="footer-block">
-            <img src="Images/newbutton006.jpg" width="30" height="115">
-            <div class="footer-links">
-                <div><img src="Images/freccia_verde.gif" width="11" height="13"> <a href="#">Main Page</a></div>
-                <div><img src="Images/freccia_verde.gif" width="11" height="13"> <a href="#">Rants</a></div>
-                <div><img src="Images/freccia_verde.gif" width="11" height="13"> <a href="#">Read List</a></div>
-                <div><img src="Images/freccia_verde.gif" width="11" height="13"> <a href="#">Latest Updates</a></div>
-                <div><img src="Images/freccia_verde.gif" width="11" height="13"> <a href="#">Archives</a></div>
-            </div>
-        </div>
-        <div class="footer-block">
-            <img src="Images/newbutton007.jpg" width="30" height="115">
-            <div class="footer-links">
-                <div><img src="Images/freccia_verde.gif" width="11" height="13"> <a href="#">Blogs</a></div>
-                <div><img src="Images/freccia_verde.gif" width="11" height="13"> <a href="#">Media</a></div>
-                <div><img src="Images/freccia_verde.gif" width="11" height="13"> <a href="#">Writings</a></div>
-                <div><img src="Images/freccia_verde.gif" width="11" height="13"> <a href="#">Links</a></div>
-                <div><img src="Images/freccia_verde.gif" width="11" height="13"> <a href="#">Contact</a></div>
-                <div><img src="Images/freccia_verde.gif" width="11" height="13"> <a href="#">About Me</a></div>
-            </div>
-        </div>
-        <div class="footer-block">
-            <img src="Images/buttonbe.jpg" width="30" height="115">
-            <div class="footer-links">
-                <div><img src="Images/freccia_verde.gif" width="11" height="13"> <a href="#">Lileks.com</a></div>
-                <div><img src="Images/freccia_verde.gif" width="11" height="13"> <a href="#">Blogger.com</a></div>
-            </div>
-        </div>
-    </footer>
 
-    <div class="copyright-bar">© Copyright RD Burningham 2002</div>
-</div>
+            <div class="gallery-grid">
+                <div class="gallery-item"><img src="Images/Page1.jpg" onclick="openLightbox(this.src)">
+                    <div style="font-size:8pt; margin-top:5px; font-weight:bold;">Page 1</div>
+                </div>
+                <div class="gallery-item"><img src="Images/Page-2.jpg" onclick="openLightbox(this.src)">
+                    <div style="font-size:8pt; margin-top:5px; font-weight:bold;">Page 2</div>
+                </div>
+                <div class="gallery-item"><img src="Images/Page-3.jpg" onclick="openLightbox(this.src)">
+                    <div style="font-size:8pt; margin-top:5px; font-weight:bold;">Page 3</div>
+                </div>
+            </div>
 
-<div id="lightbox" class="modal" onclick="this.style.display='none'">
-    <img class="modal-img" id="modalImg">
-</div>
 
-<script>
-    function openLightbox(src) {
-        document.getElementById('lightbox').style.display = 'block';
-        document.getElementById('modalImg').src = src;
-    }
-    document.onkeydown = function(evt) {
-        if (evt.key === "Escape") { document.getElementById('lightbox').style.display = 'none'; }
-    };
-</script>
+        </main>
+
+        <aside class="cactus-area">
+            <div class="cactus-frame">
+                <img src="Images/cactus.jpg" alt="Cactus">
+            </div>
+            <p style="font-size: 8pt; font-style: italic; margin-top:10px;">Brought to you by the letter "C"</p>
+        </aside>
+
+        <footer class="footer-matrix">
+            <div class="footer-block">
+                <img src="Images/newbutton005.jpg" width="30" height="115">
+                <div class="footer-links">
+                    <div><img src="Images/freccia_verde.gif" width="11" height="13"> <a href="#">Main Page</a></div>
+                    <div><img src="Images/freccia_verde.gif" width="11" height="13"> <a href="#">Archives</a></div>
+                    <div><img src="Images/freccia_verde.gif" width="11" height="13"> <a href="#">Latest Updates</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-block">
+                <img src="Images/newbutton006.jpg" width="30" height="115">
+                <div class="footer-links">
+                    <div><img src="Images/freccia_verde.gif" width="11" height="13"> <a href="#">Main Page</a></div>
+                    <div><img src="Images/freccia_verde.gif" width="11" height="13"> <a href="#">Rants</a></div>
+                    <div><img src="Images/freccia_verde.gif" width="11" height="13"> <a href="#">Read List</a></div>
+                    <div><img src="Images/freccia_verde.gif" width="11" height="13"> <a href="#">Latest Updates</a>
+                    </div>
+                    <div><img src="Images/freccia_verde.gif" width="11" height="13"> <a href="#">Archives</a></div>
+                </div>
+            </div>
+            <div class="footer-block">
+                <img src="Images/newbutton007.jpg" width="30" height="115">
+                <div class="footer-links">
+                    <div><img src="Images/freccia_verde.gif" width="11" height="13"> <a href="#">Blogs</a></div>
+                    <div><img src="Images/freccia_verde.gif" width="11" height="13"> <a href="#">Media</a></div>
+                    <div><img src="Images/freccia_verde.gif" width="11" height="13"> <a href="#">Writings</a></div>
+                    <div><img src="Images/freccia_verde.gif" width="11" height="13"> <a href="#">Links</a></div>
+                    <div><img src="Images/freccia_verde.gif" width="11" height="13"> <a href="#">Contact</a></div>
+                    <div><img src="Images/freccia_verde.gif" width="11" height="13"> <a href="#">About Me</a></div>
+                </div>
+            </div>
+            <div class="footer-block">
+                <img src="Images/buttonbe.jpg" width="30" height="115">
+                <div class="footer-links">
+                    <div><img src="Images/freccia_verde.gif" width="11" height="13"> <a href="#">Lileks.com</a></div>
+                    <div><img src="Images/freccia_verde.gif" width="11" height="13"> <a href="#">Blogger.com</a></div>
+                </div>
+            </div>
+        </footer>
+
+        <div class="copyright-bar">© Copyright RD Burningham 2002</div>
+    </div>
+
+    <div id="lightbox" class="modal" onclick="this.style.display='none'">
+        <img class="modal-img" id="modalImg">
+    </div>
+
+    <script>
+        function openLightbox(src) {
+            document.getElementById('lightbox').style.display = 'block';
+            document.getElementById('modalImg').src = src;
+        }
+        document.onkeydown = function (evt) {
+            if (evt.key === "Escape") { document.getElementById('lightbox').style.display = 'none'; }
+        };
+    </script>
 
 </body>
+
 </html>

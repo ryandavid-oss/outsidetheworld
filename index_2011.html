@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Outside The World - Blogs, Photography, powered by Burningham</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 40px 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* The container for each interactive box */
+        .rollover {
+            display: block;
+            position: relative;
+            width: 336px;
+            height: 120px;
+            overflow: hidden;
+            line-height: 0;
+        }
+
+        /* Stack images on top of each other */
+        .rollover img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 336px;
+            height: 120px;
+            border: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        /* The "Hover" image starts invisible */
+        .rollover .hover-img {
+            opacity: 0;
+            z-index: 2;
+        }
+
+        /* The "Base" image stays underneath */
+        .rollover .base-img {
+            position: relative;
+            /* This keeps the cell height correct */
+            z-index: 1;
+        }
+
+        /* When mouse touches the link, fade in the top image */
+        .rollover:hover .hover-img {
+            opacity: 1;
+        }
+
+        .copyright {
+            color: #999999;
+            font-size: 11px;
+            margin-top: 20px;
+            line-height: 1.5;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body bgcolor="#C6E3FF">
+
+    <div align="center">
+        <table cellpadding="0" cellspacing="0" border="2" width="672" bgcolor="#FFFFFF" bordercolor="#000000"
+            style="border-collapse: collapse;">
+
+            <tr>
+                <td colspan="2" align="center">
+                    <img src="Images/Archive/topbanner5.jpg" width="672" height="200" alt="Top Banner">
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <a href="/blog" class="rollover">
+                        <img src="Images/Archive/flower1.jpg" class="base-img">
+                        <img src="Images/Archive/blogfinal.jpg" class="hover-img">
+                    </a>
+                </td>
+                <td>
+                    <a href="https://ryandavid.blogspot.com/" class="rollover">
+                        <img src="Images/Archive/flower2.jpg" class="base-img">
+                        <img src="Images/Archive/moblahgroll.jpg" class="hover-img">
+                    </a>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <a href="photography.htm" class="rollover">
+                        <img src="Images/Archive/water1.jpg" class="base-img">
+                        <img src="Images/Archive/photorollover.jpg" class="hover-img">
+                    </a>
+                </td>
+                <td>
+                    <a href="archive.htm" class="rollover">
+                        <img src="Images/Archive/water2.jpg" class="base-img">
+                        <img src="Images/Archive/archivesroll.jpg" class="hover-img">
+                    </a>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <a href="contactus.htm" class="rollover">
+                        <img src="Images/Archive/corn3.jpg" class="base-img">
+                        <img src="Images/Archive/contactroll.jpg" class="hover-img">
+                    </a>
+                </td>
+                <td>
+                    <img src="Images/Archive/corn4.jpg" width="336" height="120">
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2" align="center">
+                    <img src="Images/Archive/barbottom.jpg" width="672" height="75" alt="Navigation Bar">
+                </td>
+            </tr>
+        </table>
+
+        <div class="copyright">
+            <p>©2011 Outside The World<br>
+                All rights reserved<br>
+                Images subject to copyright</p>
+        </div>
+    </div>
+
+</body>
+
+</html>
