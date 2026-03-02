@@ -828,6 +828,73 @@
             text-shadow: 0 0 10px var(--brand-teal), 0 0 20px rgba(145, 175, 179, 0.4);
         }
 
+        /* --- JUMP STRIP STYLING --- */
+        .mobile-jump-strip {
+            display: none;
+            /* Hidden on Desktop */
+            width: 100%;
+            background: rgba(145, 175, 179, 0.05);
+            border-top: 1px solid var(--border-teal);
+            border-bottom: 1px solid var(--border-teal);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            /* Sticks to the top as they scroll  */
+            top: 140px;
+            /* Adjust based on your header height */
+            z-index: 3000;
+        }
+
+        .jump-btn {
+            width: 100%;
+            padding: 15px;
+            background: transparent;
+            border: none;
+            color: var(--brand-teal);
+            font-family: 'Fira Code', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .pulse-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--brand-teal);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--brand-teal);
+            animation: beaconPulse 2s infinite;
+        }
+
+        @keyframes beaconPulse {
+            0% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.3;
+                transform: scale(1.5);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* MOBILE MEDIA QUERY OVERRIDE */
+        @media (max-width: 1024px) {
+            .mobile-jump-strip {
+                display: block;
+                /* Activate for Mobile */
+            }
+        }
+
         /* 8. MOBILE REFINEMENTS */
         /* 8. CONSOLIDATED MOBILE REFINEMENTS */
         @media (max-width: 1024px) {
@@ -922,6 +989,12 @@
             </div>
         </div>
     </header>
+    <nav class="mobile-jump-strip" id="jump-strip">
+        <button onclick="scrollToCards()" class="jump-btn">
+            <span class="pulse-dot"></span>
+            ACCESS_SUB_SECTIONS // [01-03]
+        </button>
+    </nav>
 
     <main class="main-interface">
         <section class="feed-column">
@@ -1259,6 +1332,15 @@
         // Initial sync and then every 30 seconds
         syncMusicSignal();
         setInterval(syncMusicSignal, 30000);
+        // --- MOBILE NAVIGATION ANCHOR ---
+        function scrollToCards() {
+            // Finds your "Cards Column" and scrolls it into view
+            const target = document.querySelector('.cards-column');
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
     </script>
 </body>
 
