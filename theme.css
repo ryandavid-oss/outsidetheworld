@@ -56,29 +56,47 @@ html {
     scroll-behavior: smooth;
 }
 
+/* --- GLOBAL CHASSIS: THE 2026 READABILITY STANDARD --- */
 body {
     background-color: var(--bg-dark);
-    color: white;
+    /* THE READABILITY TWEAK: Off-white for long-form comfort  */
+    color: #eeeeee;
     font-family: var(--font-main);
-    overflow-x: hidden;
+
     margin: 0;
     padding: 0;
     min-height: 100vh;
+    overflow-x: hidden;
+
+    /* RENDERING OPTIMIZATION: Keeps text sharp on Retina/Studio displays  */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
 }
 
-/* 5. THE CLEAN ATMOSPHERIC WASH (Replaces CRT Scanlines) */
+/* --- THE ATMOSPHERIC SHROUD (VIGNETTE) --- */
 body::after {
-    content: " ";
+    content: "";
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    /* Subtle radial vignette for depth without clutter */
-    background: radial-gradient(circle at 50% 50%, rgba(10, 10, 10, 0) 0%, rgba(0, 0, 0, 0.5) 100%);
+
+    /* THE DEPTH RADIUS: Focuses light on the center content while dimming the edges  */
+    background: radial-gradient(circle at 50% 50%,
+            rgba(10, 10, 10, 0) 20%,
+            rgba(0, 0, 0, 0.7) 100%);
+
     pointer-events: none;
-    z-index: 3000;
+    /* Allows clicks to pass through to links */
+    z-index: 9999;
+    /* Ensures it sits above everything, even the TRON lines */
     opacity: 0.6;
+
+    /* Performance: Prevents the "M4 Stutter" by offloading the gradient to the GPU */
+    will-change: opacity;
+    transform: translateZ(0);
 }
 
 /* 6. NAVIGATION CHASSIS (Consistency Engine) */
