@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Outside the World // January 2003 Fidelity Recovery</title>
+    <style>
+        /* --- 2003 FIDELITY COLORS --- */
+        :root {
+            --bg-page: #000000;
+            --bg-sidebars: #58607A; 
+            --bg-content: #FFFFE1; 
+            --text-maroon: #990000;
+            --header-brown: #605548; 
+            --header-gray: #66696b;
+            --welcome-teal: #2D4548;
+        }
+
+        body {
+            background-color: var(--bg-page);
+            margin: 0;
+            padding: 20px 0;
+            font-family: Verdana, Arial, Helvetica, sans-serif;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* 1. MASTER GRID: FIXED 196px SIDEBAR */
+        .master-table {
+            width: 769px;
+            display: grid;
+            grid-template-columns: 196px 393px 180px;
+            border: 1px solid #000;
+            background-color: #000;
+        }
+
+        /* 2. THE ABSOLUTE SIDEBAR (SPANNING FROM TOP) */
+        .sidebar-left {
+            grid-column: 1;
+            grid-row: 1 / span 4; /* Spans across Header & Welcome rows */
+            background-color: var(--bg-sidebars);
+            border-right: 1px solid #000;
+        }
+
+        .sidebar-portrait {
+            width: 196px;
+            height: 288px;
+            display: block;
+            border-bottom: 1px solid #000;
+        }
+
+        .sidebar-content {
+            padding: 15px 10px;
+            font-size: 8pt;
+            color: #FFFFFF;
+        }
+
+        /* 3. HEADER & WELCOME: RECONFIGURED TO START AT COL 2 */
+        .header-complex {
+            grid-column: 2 / span 2; /* Removes brown line from top-left */
+            background-color: var(--header-brown);
+            padding: 2px 0;
+        }
+
+        .banner-inner {
+            background-color: var(--header-gray);
+            height: 100px;
+            display: flex;
+            align-items: center;
+            padding-left: 20px;
+        }
+
+        .welcome-row {
+            grid-column: 2 / span 2; /* Removes teal overlap from left */
+            background-color: var(--header-brown);
+            padding-bottom: 2px;
+        }
+
+        .welcome-teal-bar {
+            background-color: var(--welcome-teal);
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-top: 1px solid #000;
+            border-bottom: 1px solid #000;
+        }
+
+        /* UI ELEMENTS */
+        .quote-box {
+            background-color: #B2B2B2;
+            color: #FFFFFF;
+            padding: 0;
+            border: 1px solid #FFF;
+            margin-top: 10px;
+        }
+
+        .quote-header { background-color: #808080; padding: 5px 10px; font-size: 7.5pt; color: #DDD; }
+        .quote-body { padding: 10px; line-height: 1.4; }
+
+        .updates-box { font-size: 7.5pt; margin-top: 25px; line-height: 1.4; }
+
+        /* MAIN CONTENT */
+        .content-main {
+            grid-column: 2;
+            background-color: var(--bg-content);
+            color: #000;
+            padding: 25px;
+            font-size: 9pt;
+            line-height: 1.6;
+            border-top: 1px solid #000;
+        }
+
+        .content-main b, .content-main a { color: var(--text-maroon); text-decoration: none; font-weight: bold; }
+        .content-main a:hover { text-decoration: underline; }
+        .dot-bullet { vertical-align: middle; margin-right: 8px; width: 14px; }
+
+        /* RIGHT SIDEBAR */
+        .sidebar-right {
+            grid-column: 3;
+            background-color: var(--bg-sidebars);
+            padding: 15px 10px;
+            font-size: 8pt;
+            color: #FFFFFF;
+            border-top: 1px solid #000;
+        }
+
+        .last-updated-box { background-color: #66696B; padding: 8px; text-align: center; border: 1px solid #000; margin-bottom: 20px; }
+        .last-updated-text { color: #FFCC66; font-style: italic; font-weight: bold; font-size: 8.5pt; }
+        .legacy-button { border: 1px solid #000; display: block; margin: 20px auto; width: 140px; }
+
+        .copyright {
+            grid-column: 1 / span 3;
+            background-color: #000;
+            text-align: right;
+            padding: 8px 15px;
+            color: #FFF;
+            font-size: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="master-table">
+    <aside class="sidebar-left">
+        <img src="Images/blank_page.jpg" class="sidebar-portrait" alt="Wedding Portrait">
+        <div class="sidebar-content">
+            <div class="quote-box">
+                <div class="quote-header">Quote of the Day-</div>
+                <div class="quote-body">
+                    <i>"At last he came to a door, with these words in glowing emeralds: THE END OF THE WORLD"</i><br><br>
+                    He did not hesitate. He opened the door and stepped through.<br><br>
+                    <b>Ender's Game</b>
+                </div>
+            </div>
+
+            <div class="updates-box">
+                <b style="color:#000">Latest Updates:</b><br><br>
+                01/05/03 New Wedge and updated Mexico Page<br><br>
+                12/29/02 Changed Layout<br><br>
+                11/01/02 Placed new pictures on Media Page<br><br>
+                10/02/02 Released site to public<br><br>
+                09/30/02 Finished uploading all edited pages, graphics and stories. Enjoy!<br><br>
+                09/26/02 Going crazy with site, decided to go to bed.
+            </div>
+        </div>
+    </aside>
+
+    <header class="header-complex">
+        <div class="banner-inner">
+            <img src="Images/banner4.jpg" alt="OTW Banner">
+        </div>
+    </header>
+
+    <div class="welcome-row">
+        <div class="welcome-teal-bar">
+            <img src="Images/bar3.jpg" alt="Welcome">
+        </div>
+    </div>
+
+    <main class="content-main">
+        <p>A new year, a new design. (kind of)</p>
+        <p>Welcome, to those who still dare to visit. Check back often! Also, there is a new <a href="#"><b>Wedge</b></a>.</p>
+        
+        <p><a href="#"><b>MEXICO</b></a> Click here Click here!!!!!</p>
+
+        <p>Under <i>Outside the World</i>, you will find:</p>
+
+        <p><img src="Images/dot.gif" class="dot-bullet"> <a href="#"><b>The Wedge</b></a> is my daily writing, scribble, blog, or whatever you'd like to call it. I haven't quite finished the archiving feature, so you may find some really random looking pages.</p>
+        <p><img src="Images/dot.gif" class="dot-bullet"> <a href="#"><b>Media</b></a> This is where I throw all of my pictures. Check back often!</p>
+        <p><img src="Images/dot.gif" class="dot-bullet"> <a href="#"><b>Writings</b></a> you'll find a book of poetry and a shameless short story.</p>
+        <p><img src="Images/dot.gif" class="dot-bullet"> <a href="#"><b>Links</b></a> various things in Links. Probably just links to old sites of mine, outdated pages, and archives.</p>
+
+        <p>As always, you can <a href="mailto:"><b>Contact</b></a> me. I promise to write back in a timely manner.</p>
+        <p>Please take some time and visit the other web sites, too. You'll find helpful news and tips about technology at the <a href="#">Tech Desk</a>.</p>
+    </main>
+
+    <aside class="sidebar-right">
+        <div class="last-updated-box">
+            <span class="last-updated-text">Last Updated<br>05 January 2003</span>
+        </div>
+
+        <div style="font-size: 7.5pt; line-height: 1.4; margin-bottom: 30px;">
+            I feel the winter come<br>
+            His icy sinews,<br>
+            Now in the firelight<br>
+            The case continues<br><br>
+            <b>Sting, Ghost Story</b>
+        </div>
+
+        <img src="Images/bleat1.jpg" class="legacy-button" alt="The Bleat">
+        <img src="Images/tech1.jpg" class="legacy-button" alt="The Tech Desk">
+    </aside>
+
+    <div class="copyright">© Copyright RD Burningham 2002</div>
+</div>
+
+</body>
+</html>
