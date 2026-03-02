@@ -895,92 +895,75 @@
             }
         }
 
-        /* 8. MOBILE REFINEMENTS */
-        /* 8. CONSOLIDATED MOBILE REFINEMENTS */
+        /* --- CORRECTED MOBILE ALIGNMENT --- */
         @media (max-width: 1024px) {
 
-            /* Fix the Header Docking */
+            /* 1. STABILIZE THE HEADER HEIGHT */
+            .interface-header {
+                height: auto;
+                min-height: 200px;
+                /* Ensures a solid base for the strip  */
+            }
+
             .header-content-inner {
                 flex-direction: column;
-                padding: 20px;
-                gap: 15px;
+                padding: 15px 20px;
+                gap: 10px;
                 text-align: center;
             }
 
             .nav-logo {
-                width: 180px;
-                /* Scale down logo for mobile */
+                width: 160px;
+                /* Slightly smaller for more room */
                 margin: 0 auto;
             }
 
-            .header-right {
-                text-align: center;
-                /* Center the text when stacked */
-                width: 100%;
-            }
-
-            .weather-uplink {
-                font-size: 0.6rem;
-                margin-bottom: 5px;
-            }
-
             .top-quadrant-text {
-                font-size: 1.1rem;
-                /* Significantly smaller for mobile */
+                font-size: 1rem;
                 letter-spacing: 2px;
-                /* Tighten spacing so it doesn't overflow */
-                max-width: 100%;
-                line-height: 1.4;
             }
 
-            /* Fix the Main Layout */
-            @media (max-width: 1024px) {
-                .main-interface {
-                    /* Reduced from 260px because the Jump Strip now occupies some of that air */
-                    margin-top: 20px;
-                    flex-direction: column;
-                    padding: 0 15px;
-                    gap: 30px;
-                }
+            .top-quadrant-text .mobile-break {
+                display: block;
+                margin-top: 5px;
+                color: #fff;
+                -webkit-text-fill-color: #fff;
             }
 
-            .feed-column {
-                padding: 30px 20px;
-                /* Tighter padding for mobile */
+            /* 2. ALIGN THE JUMP STRIP  */
+            .mobile-jump-strip {
+                display: block;
+                position: sticky;
+                /* The strip needs to stay "below" the header as it scrolls */
+                top: 200px;
+                z-index: 10500;
+                background: rgba(10, 10, 10, 0.9);
+                /* More solid to hide text scrolling behind it */
+                border-bottom: 1px solid var(--brand-teal);
             }
 
-            .vertical-divider {
-                display: none;
+            /* 3. PUSH CONTENT DOWN (THE COLLISION FIX) */
+            .main-interface {
+                /* Total Header + Strip space  */
+                margin-top: 50px !important;
+                flex-direction: column;
+                padding: 0 15px;
+                gap: 30px;
             }
 
-            /* Fix the Sidebar Cards */
+            /* 4. REPAIR SIDEBAR CARDS */
             .cards-column {
                 width: 100%;
             }
 
             .archive-card {
                 padding: 25px;
-            }
-
-            .archive-card:hover {
-                transform: none;
-                /* Disable slide-right on mobile to prevent overflow */
+                background: rgba(255, 255, 255, 0.03) !important;
             }
 
             #md-render {
                 color: #ffffff !important;
-                /* Force pure white on mobile for maximum legibility */
                 font-weight: 400;
-                /* Slightly thicker "ink" for small screens */
-            }
-
-            .top-quadrant-text .mobile-break {
-                display: block;
-                /* Forces onto a new line  */
-                margin-top: 8px;
-                /* Slight color shift to emphasize the core brand */
-                color: #fff;
-                -webkit-text-fill-color: #fff;
             }
         }
 
@@ -1022,7 +1005,7 @@
 
         <div class="vertical-divider"></div>
 
-        <aside class="cards-column">
+        <aside class="cards-column" id="sub-sections">
 
             <div class="column-label">01 // SUB_SECTIONS</div>
 
@@ -1347,11 +1330,17 @@
         setInterval(syncMusicSignal, 30000);
         // --- MOBILE NAVIGATION ANCHOR ---
         function scrollToCards() {
-            // Finds your "Cards Column" and scrolls it into view
-            const target = document.querySelector('.cards-column');
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
+            const target = document.getElementById('sub-sections');
+            // We add an offset so it doesn't scroll behind the sticky header
+            const offset = 250;
+            const bodyRect = document.body.getBoundingClientRect().top;
+            const elementRect = target.getBoundingClientRect().top;
+            const elementPosition = elementRect - bodyRect;
+            const offsetPosition = elementPosition - offset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
             });
         }
     </script>
