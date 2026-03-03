@@ -62,13 +62,17 @@
             width: auto;
             display: block;
             transition: all 0.3s ease;
-            opacity: 0.85;
+            /* CHANGE: Set to 1 for full brightness */
+            opacity: 1;
+            /* ADD: This gives it a professional 'lift' off the black background */
+            filter: drop-shadow(0 0 15px rgba(99, 149, 238, 0.3));
         }
 
         .nav-logo img:hover {
             transform: scale(1.08);
-            opacity: 1;
+            /* Already at 1, so we just keep the hover scaling */
             cursor: pointer;
+            filter: drop-shadow(0 0 20px rgba(99, 149, 238, 0.5));
         }
 
         .back-link {
