@@ -1,466 +1,1634 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" data-mood="auto">
 
 <head>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-YKRKPFV2MB"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-YKRKPFV2MB');
-</script>
+    <!-- Core -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>Orion | Outside The World</title>
+    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+
+    <!-- App-like (optional) -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="mobile-web-app-capable" content="yes" />
+
+    <!-- Primary SEO -->
+    <title>Outside The World</title>
+    <meta name="description"
+        content="Outside The World is a personal archive and professional research lab documenting 25 years of creative work, systems observation, and digital archaeology—based in Queen Creek, Arizona." />
+    <link rel="canonical" href="https://outsidetheworld.com/" />
+
+    <!-- Icons -->
+    <link href="favicon.svg" rel="icon" type="image/svg+xml" />
+
+    <!-- Social -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Outside The World" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="Outside The World" />
+    <meta property="og:description"
+        content="A personal archive and professional research lab documenting 25 years of creative work and systems observation—based in Queen Creek, Arizona." />
+    <meta property="og:image" content="https://outsidetheworld.com/Images/SocialPreview.jpg" />
+    <meta property="og:url" content="https://outsidetheworld.com/" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Outside The World" />
+    <meta name="twitter:description"
+        content="A personal archive and professional research lab documenting 25 years of creative work and systems observation—based in Queen Creek, Arizona." />
+    <meta name="twitter:image" content="https://outsidetheworld.com/Images/SocialPreview.jpg" />
+
+    <!-- Performance: Fonts (faster than @import) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;900&family=Fira+Code:wght@300;500;700&family=Merriweather:wght@300;400;700&display=swap"
+        rel="stylesheet" />
+
+    <!-- Optional: preload the hero mark -->
+    <link rel="preload" as="image" href="Images/Equal.svg" type="image/svg+xml" />
+
+    <!-- Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YKRKPFV2MB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-YKRKPFV2MB');
+    </script>
+
+    <!-- Your site chassis -->
+    <link href="theme.css" rel="stylesheet" />
+
     <style>
+        /* ---------------------------------------------------------
+           OTW INDEX: ENTERTAINMENT LAYER (mood + drift + depth)
+           --------------------------------------------------------- */
+
+        :root {
+            /* Pull from theme.css if present, with safe fallbacks */
+            --c-bg: var(--bg-dark, #0a0a0a);
+            --c-blue: var(--brand-blue, #6395EE);
+            --c-teal: var(--brand-teal, #91AFB3);
+
+            --c-white: #ffffff;
+            --c-star-glow: rgba(255, 255, 255, 0.6);
+            --c-nebula: rgba(255, 77, 77, 0.6);
+
+            --ease: cubic-bezier(0.23, 1, 0.32, 1);
+
+            /* Drift vars (set by JS daily) */
+            --const-rot: 0deg;
+            --const-scale: 1;
+            --const-shift-x: 0px;
+            --const-shift-y: 0px;
+
+            /* UI */
+            --pad-safe-top: env(safe-area-inset-top);
+            --pad-safe-bottom: env(safe-area-inset-bottom);
+        }
+
+        /* Mood palette (set via <html data-mood="...">) */
+        html[data-mood="dawn"] {
+            --c-bg: #0b0f14;
+            --c-blue: #8bb0ff;
+            --c-teal: #a6cfd2;
+            --c-nebula: rgba(255, 120, 120, 0.40);
+        }
+
+        html[data-mood="noon"] {
+            --c-bg: #0a0a0a;
+            --c-blue: #6395EE;
+            --c-teal: #91AFB3;
+            --c-nebula: rgba(255, 77, 77, 0.45);
+        }
+
+        html[data-mood="dusk"] {
+            --c-bg: #070812;
+            --c-blue: #6f8cff;
+            --c-teal: #82b9c2;
+            --c-nebula: rgba(255, 95, 155, 0.35);
+        }
+
+        html[data-mood="midnight"] {
+            --c-bg: #050505;
+            --c-blue: #7aa3ff;
+            --c-teal: #87c9c0;
+            --c-nebula: rgba(255, 77, 77, 0.55);
+        }
+
+        /* Hardening */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
         html,
         body {
-            height: 100%;
-            margin: 0;
-            background: #000;
-            overflow: hidden;
+            width: 100%;
+            max-width: 100%;
+            overflow-x: hidden;
         }
 
-        canvas {
+        @supports (overflow-x: clip) {
+
+            html,
+            body {
+                overflow-x: clip;
+            }
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            font-family: 'Inter', sans-serif;
+            color: #fff;
+
+            padding-top: var(--pad-safe-top);
+            padding-bottom: var(--pad-safe-bottom);
+            padding-left: env(safe-area-inset-left);
+            padding-right: env(safe-area-inset-right);
+
+            background:
+                radial-gradient(circle at center, rgba(255, 255, 255, 0.03) 0%, transparent 22%),
+                radial-gradient(900px 700px at 15% 18%, rgba(99, 149, 238, 0.14), transparent 55%),
+                radial-gradient(900px 700px at 85% 12%, rgba(145, 175, 179, 0.10), transparent 55%),
+                radial-gradient(900px 700px at 50% 85%, rgba(99, 149, 238, 0.10), transparent 60%),
+                radial-gradient(circle at center, #0a0a0a 0%, var(--c-bg) 100%);
+        }
+
+        /* Subtle grid/noise overlay (tasteful, dynamic) */
+        body::before,
+        body::after {
+            content: "";
             position: fixed;
             inset: 0;
-            width: 100%;
-            height: 100%;
-            display: block;
+            pointer-events: none;
+            z-index: 0;
         }
 
-        .hud {
+        body::before {
+            background:
+                linear-gradient(to right, rgba(255, 255, 255, 0.030) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+            background-size: 70px 70px;
+            mask-image: radial-gradient(circle at 50% 25%, black 0%, transparent 60%);
+            opacity: 0.12;
+            animation: gridDrift 22s linear infinite;
+        }
+
+        @keyframes gridDrift {
+            0% {
+                transform: translate3d(0, 0, 0);
+            }
+
+            100% {
+                transform: translate3d(-70px, 35px, 0);
+            }
+        }
+
+        body::after {
+            background: radial-gradient(circle at 50% 50%, rgba(10, 10, 10, 0) 20%, rgba(0, 0, 0, 0.70) 100%);
+            opacity: 0.60;
+        }
+
+        /* Hidden H1 for SEO, keeps visuals unchanged */
+        .sr-only {
+            position: absolute !important;
+            width: 1px !important;
+            height: 1px !important;
+            padding: 0 !important;
+            margin: -1px !important;
+            overflow: hidden !important;
+            clip: rect(0, 0, 0, 0) !important;
+            white-space: nowrap !important;
+            border: 0 !important;
+        }
+
+        /* Foreground layer */
+        .layer {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+        }
+
+        /* -----------------------------------
+           HEADER CONSOLE
+           ----------------------------------- */
+        .header-console {
             position: fixed;
-            left: 18px;
-            bottom: 14px;
-            right: 18px;
-            font: 12px/1.4 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-            color: rgba(255, 255, 255, .55);
-            letter-spacing: .12em;
+            top: calc(30px + var(--pad-safe-top));
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+            z-index: 1000;
+            pointer-events: none;
+            width: 100%;
+            text-align: center;
+        }
+
+        .header-console a {
+            pointer-events: auto;
+            display: inline-block;
+        }
+
+        .console-logo {
+            width: clamp(270px, 22vw, 380px);
+            /* bigger on desktop, still responsive */
+            filter: saturate(1.2) brightness(1.1);
+            opacity: 0.92;
+            transition: transform 0.6s var(--ease), filter 0.6s var(--ease), opacity 0.6s var(--ease);
+            display: block;
+            margin: 0 auto;
+        }
+
+        .console-logo:hover {
+            opacity: 1;
+            transform: scale(1.05);
+            filter:
+                saturate(1.5) brightness(1.25) drop-shadow(0 0 16px var(--c-blue)) drop-shadow(0 0 30px rgba(99, 149, 238, 0.35));
+        }
+
+        .console-text {
+            font-family: 'Fira Code', monospace;
+            font-size: clamp(0.85rem, 1.0vw, 1.05rem);
+            /* bigger “statement” line */
+            font-weight: 700;
+            color: var(--c-teal);
+            letter-spacing: 2px;
             text-transform: uppercase;
             pointer-events: none;
-            display: flex;
-            gap: 12px;
-            align-items: center;
-            justify-content: space-between;
-            mix-blend-mode: screen;
+            text-shadow:
+                0 0 5px rgba(255, 255, 255, 0.8),
+                0 0 12px var(--c-blue),
+                0 0 25px rgba(99, 149, 238, 0.35);
+            transition: color 0.5s ease, text-shadow 0.5s ease;
         }
 
-        .hud strong {
-            color: rgba(255, 255, 255, .85);
-            font-weight: 600;
+        .console-text::after {
+            content: '_';
+            font-weight: 900;
+            color: var(--c-blue);
+            text-shadow: 0 0 10px var(--c-blue);
+            animation: cursorBlink 1s infinite;
+            margin-left: 8px;
+        }
+
+        .header-console:hover .console-text {
+            color: var(--c-blue);
+            text-shadow:
+                0 0 10px #fff,
+                0 0 20px var(--c-blue),
+                0 0 40px var(--c-blue);
+        }
+
+        @keyframes cursorBlink {
+
+            0%,
+            100% {
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* Mini control row (mood + sound) */
+        .console-controls {
+            pointer-events: auto;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.58rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.55);
+            opacity: 0.85;
         }
 
         .chip {
-            border: 1px solid rgba(255, 255, 255, .12);
-            padding: 6px 10px;
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            background: rgba(255, 255, 255, 0.03);
+            padding: 8px 10px;
             border-radius: 999px;
-            background: rgba(0, 0, 0, .25);
-            backdrop-filter: blur(8px);
+            cursor: pointer;
+            transition: transform 0.35s var(--ease), border-color 0.35s var(--ease), background 0.35s var(--ease);
+            user-select: none;
+        }
+
+        .chip:hover {
+            transform: translateY(-1px);
+            border-color: rgba(255, 255, 255, 0.22);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .chip strong {
+            color: var(--c-teal);
+            font-weight: 700;
+        }
+
+        /* -----------------------------------
+           STARFIELD CANVAS
+           ----------------------------------- */
+        .starfield {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+            pointer-events: none;
+            background: transparent;
+        }
+
+        /* -----------------------------------
+           GATEWAY LAYOUT
+           ----------------------------------- */
+        main.gateway-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 120px;
+            width: 90%;
+            max-width: 1400px;
+            margin: 220px auto auto;
+        }
+
+        .nav-wing {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 280px;
+        }
+
+        .wing-label {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--c-teal);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            opacity: 0.92;
+            transition: all 0.4s ease;
+            text-shadow:
+                0 0 5px rgba(145, 175, 179, 0.45),
+                0 0 10px rgba(145, 175, 179, 0.25);
+        }
+
+        .nav-wing:hover .wing-label {
+            opacity: 1;
+            color: #fff;
+            text-shadow:
+                0 0 8px var(--c-teal),
+                0 0 20px var(--c-teal);
+            letter-spacing: 6px;
+        }
+
+        .ethereal-btn {
+            position: relative;
+            overflow: hidden;
+
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            padding: 22px 45px;
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
+            font-size: 1.1rem;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: 0.6s cubic-bezier(0.2, 1, 0.3, 1);
+        }
+
+        /* Premium hover sweep */
+        .ethereal-btn::before {
+            content: "";
+            position: absolute;
+            top: -20%;
+            left: -40%;
+            width: 60%;
+            height: 140%;
+            background: linear-gradient(120deg, transparent 0%, rgba(255, 255, 255, 0.16) 45%, transparent 100%);
+            transform: rotate(12deg) translateX(-120%);
+            transition: transform 0.9s var(--ease);
+            pointer-events: none;
+        }
+
+        .ethereal-btn:hover::before {
+            transform: rotate(12deg) translateX(260%);
+        }
+
+        .explore-btn:hover {
+            border-color: var(--c-blue);
+            box-shadow: 0 0 40px rgba(99, 149, 238, 0.35);
+            color: var(--c-blue);
+        }
+
+        .consult-btn:hover {
+            border-color: var(--c-teal);
+            box-shadow: 0 0 40px rgba(145, 175, 179, 0.35);
+            color: var(--c-teal);
+        }
+
+        /* -----------------------------------
+           CONSTELLATION (Daily drift)
+           ----------------------------------- */
+        .constellation {
+            position: relative;
+            width: 320px;
+            height: 480px;
+            transform:
+                translate3d(var(--const-shift-x), var(--const-shift-y), 0) rotate(var(--const-rot)) scale(var(--const-scale));
+            transform-origin: center;
+            transition: transform 900ms var(--ease);
+        }
+
+        .star {
+            position: absolute;
+            background: var(--c-white);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--c-star-glow), 0 0 20px var(--c-star-glow);
+            animation: twinkle var(--duration) infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+
+            0%,
+            100% {
+                opacity: 0.4;
+                transform: scale(0.9);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.1);
+            }
+        }
+
+        .betelgeuse {
+            top: 0;
+            left: 40px;
+            width: 7px;
+            height: 7px;
+            --duration: 3s;
+            box-shadow: 0 0 20px rgba(255, 100, 100, 0.6);
+        }
+
+        .bellatrix {
+            top: 25px;
+            right: 40px;
+            width: 5px;
+            height: 5px;
+            --duration: 4.2s;
+        }
+
+        .saiph {
+            bottom: 50px;
+            left: 60px;
+            width: 5px;
+            height: 5px;
+            --duration: 5.1s;
+        }
+
+        .rigel {
+            bottom: 0;
+            right: 40px;
+            width: 8px;
+            height: 8px;
+            --duration: 3.8s;
+            box-shadow: 0 0 25px rgba(100, 150, 255, 0.6);
+        }
+
+        /* TRON UPLINK SYSTEM */
+        .belt-node {
+            position: absolute;
+            z-index: 50;
+        }
+
+        .belt-node a {
+            text-decoration: none;
+        }
+
+        .belt-star {
+            width: 8px;
+            height: 8px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 20px #fff;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .tron-path {
+            position: absolute;
+            pointer-events: none;
+            stroke: var(--c-teal);
+            stroke-width: 1;
+            fill: none;
+            stroke-dasharray: 200;
+            stroke-dashoffset: 200;
+            transition: stroke-dashoffset 0.6s ease;
+            filter: drop-shadow(0 0 5px var(--c-teal));
+        }
+
+        .tron-card {
+            position: absolute;
+            opacity: 0;
+            background: rgba(5, 5, 5, 0.9);
+            border: 1px solid var(--c-teal);
+            padding: 8px 15px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.6rem;
+            color: #fff;
+            letter-spacing: 2px;
+            white-space: nowrap;
+            pointer-events: none;
+            transition: opacity 0.3s ease 0.5s, transform 0.3s ease 0.5s;
+            backdrop-filter: blur(5px);
+        }
+
+        .belt-node:hover .tron-path {
+            stroke-dashoffset: 0;
+        }
+
+        .belt-node:hover .tron-card {
+            opacity: 1;
+            transform: translate(0, 0);
+        }
+
+        .alnitak-node {
+            top: 210px;
+            left: 110px;
+        }
+
+        .alnitak-node .tron-card {
+            top: -72px;
+            left: -260px;
+            transform: translateX(20px);
+        }
+
+        .alnilam-node {
+            top: 225px;
+            left: 150px;
+        }
+
+        .alnilam-node .tron-card {
+            top: -67px;
+            left: 95px;
+            transform: translateX(-20px);
+        }
+
+        .mintaka-node {
+            top: 240px;
+            left: 190px;
+        }
+
+        .mintaka-node .tron-card {
+            top: 85px;
+            left: 5px;
+            transform: translateY(-10px);
+        }
+
+        /* Kavya (nebula aura) */
+        .kavya-node {
+            top: 310px;
+            left: 140px;
+        }
+
+        .kavya-node::before {
+            content: "";
+            position: absolute;
+            top: -55px;
+            left: -55px;
+            width: 130px;
+            height: 130px;
+            background: radial-gradient(circle, var(--c-nebula) 0%, transparent 65%);
+            filter: blur(12px);
+            opacity: 0.40;
+            animation: nebulaBreath 10s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes nebulaBreath {
+
+            0%,
+            100% {
+                transform: scale(0.92);
+                opacity: 0.34;
+            }
+
+            50% {
+                transform: scale(1.06);
+                opacity: 0.52;
+            }
+        }
+
+        .kavya-node .sword-mid {
+            width: 10px;
+            height: 10px;
+            background: #fbc2eb;
+            box-shadow: 0 0 20px var(--c-nebula), 0 0 40px var(--c-nebula);
+            filter: blur(1px);
+        }
+
+        .kavya-node .tron-path {
+            stroke: #ff4d4d;
+            filter: drop-shadow(0 0 5px #ff4d4d);
+        }
+
+        .kavya-node .tron-card {
+            border-color: #ff4d4d;
+            top: 20px;
+            left: 80px;
+            transform: translateX(-10px);
+        }
+
+        .sword-top {
+            top: 280px;
+            left: 145px;
+            opacity: 0.6;
+            width: 3px;
+            height: 3px;
+        }
+
+        .sword-bottom {
+            top: 340px;
+            left: 135px;
+            opacity: 0.6;
+            width: 3px;
+            height: 3px;
+        }
+
+        /* -----------------------------------
+           FOOTER + POEM
+           ----------------------------------- */
+        .center-footer {
+            position: fixed;
+            bottom: calc(6vh + var(--pad-safe-bottom));
+            text-align: center;
+            width: 100%;
+            z-index: 20;
+        }
+
+        .main-title {
+            font-size: 1.1rem;
+            font-weight: 300;
+            letter-spacing: 12px;
+            text-transform: uppercase;
+            margin: 0;
+            opacity: 0.75;
+            padding-bottom: 18px;
+            font-family: 'Fira Code', monospace;
+            color: rgba(255, 255, 255, 0.35);
+        }
+
+        .poem-fragment {
+            font-size: 0.65rem;
+            color: #444;
+            letter-spacing: 3px;
+            font-style: italic;
+            cursor: pointer;
+            transition: 0.3s;
+            user-select: none;
+        }
+
+        .poem-fragment:hover {
+            color: var(--c-teal);
+        }
+
+        /* Modal */
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(5, 5, 5, 0.97);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            backdrop-filter: blur(20px);
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: rgba(145, 175, 179, 0.02);
+            padding: 60px 40px;
+            border: 1px solid rgba(145, 175, 179, 0.15);
+            position: relative;
+            max-width: 550px;
+            width: min(550px, 92vw);
+            text-align: center;
+            box-shadow: 0 0 60px rgba(0, 0, 0, 1);
+            margin-bottom: var(--pad-safe-bottom);
+        }
+
+        .modal-bar {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--c-teal);
+            box-shadow: 0 0 20px var(--c-teal);
+        }
+
+        .modal-bar.top {
+            top: 0;
+        }
+
+        .modal-bar.bottom {
+            bottom: 0;
+        }
+
+        .modal-poem {
+            font-family: 'Merriweather', serif;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #e0e0e0;
+            font-weight: 300;
+        }
+
+        .modal-system {
+            margin-top: 50px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.55rem;
+            color: #444;
+            letter-spacing: 4px;
+        }
+
+        /* -----------------------------------
+           CURSOR UI (desktop only; auto-hidden mobile)
+           ----------------------------------- */
+        #cursor-ring {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--c-teal);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10000;
+            transition: width 0.3s, height 0.3s, border-color 0.3s, transform 0.1s ease-out;
+            mix-blend-mode: difference;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #cursor-dot {
+            width: 4px;
+            height: 4px;
+            background: var(--c-blue);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10001;
+            mix-blend-mode: difference;
+        }
+
+        .cursor-active #cursor-ring {
+            width: 60px;
+            height: 60px;
+            border-color: var(--c-blue);
+            border-width: 2px;
+        }
+
+        /* -----------------------------------
+           Responsive (mobile-safe)
+           ----------------------------------- */
+        @media (max-width: 1024px) {
+            body {
+                color: #eee;
+            }
+
+            .header-console {
+                position: relative;
+                top: 0;
+                left: 0;
+                transform: none;
+                margin: 20px auto 40px;
+                gap: 14px;
+            }
+
+            .console-logo {
+                width: 80vw !important;
+                max-width: 450px;
+                height: auto;
+                filter: saturate(1.1) brightness(1.1) !important;
+                opacity: 1 !important;
+            }
+
+            .console-text {
+                font-size: 0.7rem !important;
+                letter-spacing: 1px !important;
+                width: 85%;
+                white-space: normal !important;
+                line-height: 1.4;
+            }
+
+            main.gateway-container {
+                flex-direction: column;
+                gap: 50px;
+                margin-top: 20px;
+                width: 100%;
+            }
+
+            .constellation {
+                height: 420px;
+                margin: 0 auto;
+                /* keep drift but make it slightly calmer on mobile */
+                --const-scale: 0.90;
+            }
+
+            .tron-path,
+            .tron-card {
+                display: none !important;
+            }
+
+            .center-footer {
+                position: relative;
+                bottom: auto;
+                margin-top: 50px;
+            }
+
+            .main-title {
+                font-size: 0.9rem;
+                letter-spacing: 8px;
+                padding: 0 10px;
+            }
+
+            .poem-fragment {
+                font-size: 0.6rem;
+                max-width: 90%;
+                margin: 0 auto;
+                line-height: 1.6;
+            }
+
+            .wing-label {
+                font-size: 0.85rem !important;
+                letter-spacing: 3px !important;
+                opacity: 1 !important;
+                margin-bottom: 15px;
+                font-weight: 900;
+                text-shadow: 0 0 8px var(--c-teal);
+            }
+
+            /* Cursor off on touch screens */
+            #cursor-ring,
+            #cursor-dot {
+                display: none !important;
+            }
         }
 
         @media (prefers-reduced-motion: reduce) {
-            .hud {
-                display: none;
+
+            .star,
+            .console-text::after,
+            body::before,
+            .kavya-node::before {
+                animation: none !important;
+            }
+
+            .console-logo,
+            .wing-label,
+            .ethereal-btn,
+            .constellation,
+            .chip {
+                transition: none !important;
             }
         }
     </style>
+
+    <!-- Structured Data: Website + Publisher -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Outside The World",
+  "url": "https://outsidetheworld.com/",
+  "description": "A personal archive and professional research lab documenting 25 years of creative work and systems observation.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Outside The World New LLC",
+    "url": "https://outsidetheworld.com/",
+    "logo": "https://outsidetheworld.com/Images/Equal.svg",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Queen Creek",
+      "addressRegion": "AZ",
+      "postalCode": "85142",
+      "addressCountry": "US"
+    }
+  }
+}
+    </script>
 </head>
 
 <body>
-    <canvas id="sky"></canvas>
-    <div class="hud">
-        <div class="chip"><strong>Orion</strong> — centered</div>
-        <div class="chip">Click: toggle lines • Move: subtle parallax</div>
+    <!-- Desktop cursor UI -->
+    <div id="cursor-ring"></div>
+    <div id="cursor-dot"></div>
+
+    <!-- SEO H1 (visual unchanged) -->
+    <h1 class="sr-only">Outside The World</h1>
+
+    <div class="layer">
+        <!-- Header Console -->
+        <header class="header-console" aria-label="Outside The World console">
+            <a href="index.html" aria-label="Home">
+                <img alt="Outside The World" class="console-logo" src="Images/Equal.svg" />
+            </a>
+
+            <div class="console-text" id="typewriter-target" aria-live="polite"></div>
+
+            <div class="console-controls" aria-label="Console controls">
+                <div class="chip" id="mood-chip" role="button" tabindex="0" aria-label="Change mood">
+                    MOOD: <strong id="mood-label">AUTO</strong>
+                </div>
+                <div class="chip" id="sound-chip" role="button" tabindex="0" aria-label="Toggle sound">
+                    SOUND: <strong id="sound-label">OFF</strong>
+                </div>
+            </div>
+        </header>
+
+        <!-- Star Canvas -->
+        <canvas id="star-canvas" class="starfield" aria-hidden="true"></canvas>
+
+        <!-- Gateway -->
+        <main class="gateway-container" aria-label="Site navigation gateway">
+            <div class="nav-wing">
+                <span class="wing-label">[Thoughts &amp; Creation]</span>
+                <a class="ethereal-btn explore-btn" href="personal.html" aria-label="Enter main (Personal)">
+                    ENTER MAIN
+                </a>
+            </div>
+
+            <div class="constellation" aria-hidden="true">
+                <div class="star betelgeuse"></div>
+                <div class="star bellatrix"></div>
+
+                <div class="belt-node alnitak-node">
+                    <a href="personal.html" aria-label="Main interface">
+                        <div class="belt-star" title="Interface"></div>
+                        <svg class="tron-path" height="100" style="top:-80px; left:-120px;" width="150"
+                            aria-hidden="true">
+                            <path d="M 125 85 L 125 20 L 10 20"></path>
+                        </svg>
+                        <div class="tron-card">MAIN_INTERFACE</div>
+                    </a>
+                </div>
+
+                <div class="belt-node alnilam-node">
+                    <a href="resume.html" aria-label="Professional dossier">
+                        <div class="belt-star" title="Dossier"></div>
+                        <svg class="tron-path" height="100" style="top:-70px; left:5px;" width="100" aria-hidden="true">
+                            <path d="M 5 75 L 5 15 L 90 15"></path>
+                        </svg>
+                        <div class="tron-card">DOSSIER_ACCESS</div>
+                    </a>
+                </div>
+
+                <div class="belt-node mintaka-node">
+                    <a href="emmy.html" aria-label="Heart and soul">
+                        <div class="belt-star" title="Sanctuary"></div>
+                        <svg class="tron-path" height="100" style="top:5px; left:5px;" width="150" aria-hidden="true">
+                            <path d="M 5 5 L 80 5 L 80 80"></path>
+                        </svg>
+                        <div class="tron-card">HEART_AND_SOUL</div>
+                    </a>
+                </div>
+
+                <div class="star sword-top"></div>
+
+                <div class="belt-node kavya-node">
+                    <a href="poetry.html" aria-label="Kavya archive (Poetry)">
+                        <div class="star sword-mid" title="Kavya Archive"></div>
+                        <svg class="tron-path" height="100" style="top:-10px; left:10px;" width="100"
+                            aria-hidden="true">
+                            <path d="M 5 20 L 80 20 L 80 40"></path>
+                        </svg>
+                        <div class="tron-card">OTW_KAVYA</div>
+                    </a>
+                </div>
+
+                <div class="star sword-bottom"></div>
+                <div class="star saiph"></div>
+                <div class="star rigel"></div>
+            </div>
+
+            <div class="nav-wing">
+                <span class="wing-label">[THE_OUTSIDE_VANTAGE]</span>
+                <a class="ethereal-btn consult-btn" href="professional.html" aria-label="Learn more (Professional)">
+                    LEARN MORE
+                </a>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <div class="center-footer">
+            <h2 class="main-title" id="footer-title"></h2>
+            <div class="poem-fragment" id="poem-trigger" role="button" tabindex="0" aria-label="Open poem">
+                "perspective is my weakness... outside the world is new"
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal" id="poem-modal" role="dialog" aria-modal="true" aria-label="Poem modal">
+            <div class="modal-content" id="poem-content">
+                <div class="modal-bar top"></div>
+                <div class="modal-bar bottom"></div>
+
+                <div class="modal-poem">
+                    I dance along the path,
+                    <br />
+                    lonely emerald fields on either side.
+                    <br />
+                    I gaze into the distant canyon
+                    <br />
+                    and know that I cannot enter.
+                    <br />
+                    <br />
+                    Every star seems to smile down this evening;
+                    <br />
+                    each one shines its own way,
+                    <br />
+                    and the world is quiet.
+                    <br />
+                    It does not know I am here.
+                    <br />
+                    <br />
+                    The crisp air haunts me;
+                    <br />
+                    its aroma seems too familiar.
+                    <br />
+                    Yes, but under different circumstances
+                    <br />
+                    this would be true.
+                    <br />
+                    <br />
+                    There seems to be an end
+                    <br />
+                    as the mountain peak swallows up the sky.
+                    <br />
+                    <span
+                        style="color: var(--c-teal); font-weight: 700; text-shadow: 0 0 10px var(--c-teal); font-style: normal;">
+                        My perspective is my weakness;
+                    </span>
+                    <br />
+                    <span
+                        style="color: #fff; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; font-size: 0.9rem; opacity: 0.9;">
+                        outside the world is new.
+                    </span>
+                </div>
+
+                <div class="modal-system">[ SYSTEM_DEACTIVATE ]</div>
+            </div>
+        </div>
     </div>
 
     <script>
-        (() => {
-            const canvas = document.getElementById("sky");
-            const ctx = canvas.getContext("2d", { alpha: false });
+        /* ---------------------------------------------------------
+           ENTERTAINMENT LAYER: mood + daily drift + rotating lines
+           --------------------------------------------------------- */
 
-            const DPR = Math.min(2, window.devicePixelRatio || 1);
-            let W = 0, H = 0, t0 = performance.now();
-            let reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        // --- EASTER EGGS (safe + mobile-friendly) ---
+        const EASTER = {
+            cometChance: 0.10,      // 0.10 = ~1/10 loads. Set to 0.25 for ~1/4 loads.
+            maxCometsPerVisit: 2,   // how many comets can appear per visit
+            ripples: true           // click/tap ripple feedback
+        };
 
-            // --- Config knobs ---
-            const STAR_COUNT = 1400;        // background stars
-            const BIG_STAR_COUNT = 45;      // a few brighter random stars
-            const ORION_SCALE = 0.32;       // relative to min(W,H)
-            const ORION_ROT_DEG = 12;      // slight tilt (similar to many photos)
-            const NEBULA_STRENGTH = 0.55;   // 0..1
-            const TWINKLE = 0.75;           // 0..1
-            const SCINTILLATION = 0.6;      // 0..1 tiny jitter
+        let comets = [];
+        let cometSchedule = [];
+        let ripples = [];
+        let visitStart = performance.now();
 
-            // --- Helpers ---
-            const rand = (a = 1, b = 0) => b + Math.random() * (a - b);
-            const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
-            const lerp = (a, b, u) => a + (b - a) * u;
+        function scheduleComets() {
+            cometSchedule = [];
+            comets = [];
 
-            function resize() {
-                W = Math.floor(innerWidth * DPR);
-                H = Math.floor(innerHeight * DPR);
-                canvas.width = W; canvas.height = H;
-                canvas.style.width = innerWidth + "px";
-                canvas.style.height = innerHeight + "px";
-                buildStarfield();
-                buildNebula();
-                buildOrion();
-            }
-            addEventListener("resize", resize, { passive: true });
+            if (reduceMotion) return;
+            if (Math.random() > EASTER.cometChance) return;
 
-            // --- Star sprite cache ---
-            const spriteCache = new Map();
-            function starSprite(radius, color) {
-                const key = `${radius}|${color}`;
-                if (spriteCache.has(key)) return spriteCache.get(key);
-                const s = document.createElement("canvas");
-                const r = Math.ceil(radius * DPR);
-                const size = r * 6;
-                s.width = s.height = size;
-                const c = s.getContext("2d");
-                c.translate(size / 2, size / 2);
+            const count = 1 + (Math.random() < 0.35 ? 1 : 0); // sometimes 2 comets
+            const finalCount = Math.min(count, EASTER.maxCometsPerVisit);
 
-                // outer glow
-                const g = c.createRadialGradient(0, 0, 0, 0, 0, size / 2);
-                g.addColorStop(0.00, color);
-                g.addColorStop(0.25, color.replace("1)", "0.55)"));
-                g.addColorStop(1.00, "rgba(0,0,0,0)");
-                c.fillStyle = g;
-                c.beginPath();
-                c.arc(0, 0, size / 2, 0, Math.PI * 2);
-                c.fill();
-
-                // core
-                c.fillStyle = "rgba(255,255,255,0.9)";
-                c.beginPath();
-                c.arc(0, 0, Math.max(1, r * 0.45), 0, Math.PI * 2);
-                c.fill();
-
-                spriteCache.set(key, s);
-                return s;
+            for (let i = 0; i < finalCount; i++) {
+                // appear sometime in the first ~35 seconds
+                cometSchedule.push(2500 + Math.random() * 32000);
             }
 
-            // --- Background stars (precomputed positions) ---
-            let stars = [];
-            let bigStars = [];
-            function buildStarfield() {
-                stars = [];
-                bigStars = [];
+            cometSchedule.sort((a, b) => a - b);
+        }
 
-                // background stars
-                for (let i = 0; i < STAR_COUNT; i++) {
-                    const m = Math.pow(Math.random(), 2.2); // magnitude-ish (more faint than bright)
-                    const size = lerp(0.35, 1.45, 1 - m);
-                    const base = lerp(0.10, 0.55, 1 - m);
-                    stars.push({
-                        x: Math.random() * W,
-                        y: Math.random() * H,
-                        r: size,
-                        a: base,
-                        tw: rand(0.6, 1.8),
-                        ph: rand(Math.PI * 2),
-                        hue: rand(220, 190), // bluish-ish
-                    });
-                }
+        function spawnComet() {
+            // Start off-screen from left or right
+            const fromLeft = Math.random() < 0.5;
+            const x = fromLeft ? -120 : (width + 120);
+            const y = Math.random() * (height * 0.55) + (height * 0.10);
 
-                // a few bright random stars
-                for (let i = 0; i < BIG_STAR_COUNT; i++) {
-                    const x = Math.random() * W, y = Math.random() * H;
-                    const r = rand(1.8, 3.8);
-                    const a = rand(0.35, 0.8);
-                    const warm = Math.random() < 0.22;
-                    const color = warm
-                        ? "rgba(255,210,170,1)"
-                        : "rgba(185,215,255,1)";
-                    bigStars.push({
-                        x, y, r, a,
-                        tw: rand(0.2, 0.8),
-                        ph: rand(Math.PI * 2),
-                        color
-                    });
-                }
+            // Velocity (px/ms)
+            const speed = 0.85 + Math.random() * 0.75; // ~0.85–1.6 px/ms
+            const vx = (fromLeft ? 1 : -1) * speed;
+            const vy = (Math.random() * 0.35 + 0.05) * speed * (Math.random() < 0.5 ? 1 : -1);
+
+            const len = 220 + Math.random() * 180;
+            const life = 900 + Math.random() * 600; // ms
+            const thickness = 1.2 + Math.random() * 1.6;
+
+            const mag = Math.hypot(vx, vy) || 1;
+            comets.push({
+                x, y, vx, vy,
+                nx: vx / mag, ny: vy / mag,
+                len, life, age: 0,
+                thickness
+            });
+        }
+
+        function updateComets(dt, nowMs) {
+            // Schedule checks (relative to visitStart)
+            const t = nowMs - visitStart;
+            while (cometSchedule.length && t >= cometSchedule[0]) {
+                cometSchedule.shift();
+                spawnComet();
             }
 
-            // --- Nebula (soft glows) ---
-            let nebula = [];
-            function buildNebula() {
-                nebula = [];
+            // Update active comets
+            comets = comets.filter(c => {
+                c.age += dt;
+                c.x += c.vx * dt;
+                c.y += c.vy * dt;
+                return c.age < c.life;
+            });
+        }
 
-                // Anchor the main nebula near where Orion's sword will be (centered below belt)
-                // We'll compute exact sword position later; for now make relative blobs, re-centered in draw.
-                for (let i = 0; i < 6; i++) {
-                    nebula.push({
-                        ox: rand(-0.22, 0.22),
-                        oy: rand(-0.05, 0.38),
-                        rad: rand(0.18, 0.42),
-                        hue: rand(205, 245),
-                        alpha: rand(0.06, 0.14) * NEBULA_STRENGTH,
-                        drift: rand(0.08, 0.22),
-                        ph: rand(Math.PI * 2),
-                    });
-                }
+        function drawComets() {
+            for (const c of comets) {
+                const p = Math.max(0, Math.min(1, c.age / c.life));
+                const a = Math.sin(Math.PI * p); // fade in/out nicely
 
-                // a faint outer haze
-                for (let i = 0; i < 3; i++) {
-                    nebula.push({
-                        ox: rand(-0.55, 0.55),
-                        oy: rand(-0.45, 0.55),
-                        rad: rand(0.55, 0.9),
-                        hue: rand(210, 255),
-                        alpha: rand(0.015, 0.04) * NEBULA_STRENGTH,
-                        drift: rand(0.03, 0.09),
-                        ph: rand(Math.PI * 2),
-                    });
+                const tx = c.x - c.nx * c.len;
+                const ty = c.y - c.ny * c.len;
+
+                const g = ctx.createLinearGradient(c.x, c.y, tx, ty);
+                g.addColorStop(0, `rgba(255,255,255,${0.85 * a})`);
+                g.addColorStop(0.35, `rgba(160,190,245,${0.35 * a})`);
+                g.addColorStop(1, `rgba(255,255,255,0)`);
+
+                ctx.save();
+                ctx.globalAlpha = 1;
+                ctx.strokeStyle = g;
+                ctx.lineWidth = c.thickness;
+                ctx.beginPath();
+                ctx.moveTo(c.x, c.y);
+                ctx.lineTo(tx, ty);
+                ctx.stroke();
+
+                // Head glow
+                ctx.fillStyle = `rgba(255,255,255,${0.7 * a})`;
+                ctx.beginPath();
+                ctx.arc(c.x, c.y, c.thickness * 1.8, 0, Math.PI * 2);
+                ctx.fill();
+
+                ctx.restore();
+            }
+        }
+
+        // Click/tap ripples on the starfield (does not affect navigation)
+        function addRipple(clientX, clientY) {
+            if (!EASTER.ripples || reduceMotion) return;
+            ripples.push({
+                x: clientX,
+                y: clientY,
+                age: 0,
+                life: 900 + Math.random() * 400
+            });
+        }
+
+        function updateRipples(dt) {
+            ripples = ripples.filter(r => {
+                r.age += dt;
+                return r.age < r.life;
+            });
+        }
+
+        function drawRipples() {
+            for (const r of ripples) {
+                const p = r.age / r.life;
+                const radius = 18 + p * 190;
+                const alpha = (1 - p) * 0.22;
+
+                ctx.save();
+                ctx.globalAlpha = alpha;
+                ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--c-teal').trim() || '#91AFB3';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.arc(r.x, r.y, radius, 0, Math.PI * 2);
+                ctx.stroke();
+
+                // inner glow ring
+                ctx.globalAlpha = alpha * 0.55;
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.arc(r.x, r.y, radius * 0.66, 0, Math.PI * 2);
+                ctx.stroke();
+                ctx.restore();
+            }
+        }
+        // Deterministic daily seed (same for every visit that day)
+        function dayKey() {
+            const d = new Date();
+            const y = d.getFullYear();
+            const m = String(d.getMonth() + 1).padStart(2, '0');
+            const dd = String(d.getDate()).padStart(2, '0');
+            return `${y}-${m}-${dd}`;
+        }
+
+        function xmur3(str) {
+            let h = 1779033703 ^ str.length;
+            for (let i = 0; i < str.length; i++) {
+                h = Math.imul(h ^ str.charCodeAt(i), 3432918353);
+                h = (h << 13) | (h >>> 19);
+            }
+            return function () {
+                h = Math.imul(h ^ (h >>> 16), 2246822507);
+                h = Math.imul(h ^ (h >>> 13), 3266489909);
+                return (h ^= h >>> 16) >>> 0;
+            };
+        }
+
+        function mulberry32(a) {
+            return function () {
+                let t = a += 0x6D2B79F5;
+                t = Math.imul(t ^ (t >>> 15), t | 1);
+                t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+                return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+            };
+        }
+
+        const seedFn = xmur3(`OTW:${dayKey()}`);
+        const rand = mulberry32(seedFn());
+
+        // Mood logic: auto by time, or user override
+        const MOODS = ["dawn", "noon", "dusk", "midnight"];
+        const moodChip = document.getElementById('mood-chip');
+        const moodLabel = document.getElementById('mood-label');
+
+        function autoMoodFromTime() {
+            const h = new Date().getHours();
+            if (h >= 5 && h < 10) return "dawn";
+            if (h >= 10 && h < 16) return "noon";
+            if (h >= 16 && h < 21) return "dusk";
+            return "midnight";
+        }
+
+        function setMood(mode) {
+            const html = document.documentElement;
+            if (mode === "auto") {
+                html.dataset.mood = autoMoodFromTime();
+                moodLabel.textContent = "AUTO";
+            } else {
+                html.dataset.mood = mode;
+                moodLabel.textContent = mode.toUpperCase();
+            }
+        }
+
+        function getSavedMood() {
+            return localStorage.getItem('otw_mood') || "auto";
+        }
+
+        function saveMood(v) {
+            localStorage.setItem('otw_mood', v);
+        }
+
+        function cycleMood() {
+            const currentSaved = getSavedMood();
+            if (currentSaved === "auto") {
+                saveMood("dawn");
+            } else {
+                const idx = MOODS.indexOf(currentSaved);
+                const next = MOODS[(idx + 1) % MOODS.length];
+                saveMood(next);
+            }
+            setMood(getSavedMood());
+            hudClick();
+        }
+
+        // Daily drift for constellation (small, elegant)
+        function setDailyDrift() {
+            // Keep it subtle and deterministic
+            const rot = (rand() * 3.0 - 1.5).toFixed(2); // degrees
+            const sc = (0.985 + rand() * 0.03).toFixed(3); // 0.985–1.015
+            const sx = Math.round((rand() * 10 - 5)); // px
+            const sy = Math.round((rand() * 10 - 5)); // px
+
+            document.documentElement.style.setProperty('--const-rot', `${rot}deg`);
+            document.documentElement.style.setProperty('--const-scale', sc);
+            document.documentElement.style.setProperty('--const-shift-x', `${sx}px`);
+            document.documentElement.style.setProperty('--const-shift-y', `${sy}px`);
+        }
+
+        // Rotating system lines (typewriter)
+        const consoleTarget = document.getElementById('typewriter-target');
+        const lines = [
+            "Click a button, star, or nebula to continue...",
+            "SYSTEM_READY // UPLINK_STABLE // SELECT_PATH",
+            "ARCHIVE_ONLINE // SIGNAL_LOCKED // ENTER",
+            "FIELD_NOTE: THE DESERT REMEMBERS",
+            "RESEARCH_LOG: VECTOR_INTEGRITY_CONFIRMED",
+            "NAV_CORE: PERSONAL / PROFESSIONAL / KAVYA",
+            "STARSCOPE_ACTIVE // PARALLAX_ENGAGED"
+        ];
+
+        const footerTitle = document.getElementById('footer-title');
+        const footerTitles = [
+            "OUTSIDE_THE_WORLD",
+            "DIGITAL_ARCHAEOLOGY",
+            "SYSTEMS & STORIES",
+            "THOUGHTS & CREATION",
+            "THE OUTSIDE VANTAGE"
+        ];
+
+        function pickDaily(arr) {
+            // deterministic pick using rand but stable per day
+            const i = Math.floor(rand() * arr.length);
+            return arr[i];
+        }
+
+        function typeLine(text) {
+            consoleTarget.textContent = "";
+            let i = 0;
+            function tick() {
+                if (i < text.length) {
+                    consoleTarget.textContent += text.charAt(i++);
+                    const speed = 24 + Math.random() * 65;
+                    setTimeout(tick, speed);
                 }
             }
+            tick();
+        }
 
-            // --- Orion constellation (centered) ---
-            // Coordinates in "Orion space" (rough proportions): x,y in [-1..1]
-            // Belt centered near (0,0). Sword extends downward.
-            let orion = { stars: [], lines: [], center: { x: 0, y: 0 }, sword: { x: 0, y: 0 }, showLines: true };
-            function buildOrion() {
-                const deg = ORION_ROT_DEG * Math.PI / 180;
-                const cs = Math.cos(deg), sn = Math.sin(deg);
-                const S = Math.min(W, H) * ORION_SCALE;
+        // Sound toggle (optional, off by default)
+        const soundChip = document.getElementById('sound-chip');
+        const soundLabel = document.getElementById('sound-label');
+        let soundOn = localStorage.getItem('otw_sound') === 'on';
+        soundLabel.textContent = soundOn ? "ON" : "OFF";
 
-                function rot(p) {
-                    const x = p.x * cs - p.y * sn;
-                    const y = p.x * sn + p.y * cs;
-                    return { x, y };
+        let audioCtx = null;
+        function ensureAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+        }
+
+        function blip(freq = 620, dur = 0.045, gain = 0.06) {
+            if (!soundOn) return;
+            try {
+                ensureAudio();
+                const o = audioCtx.createOscillator();
+                const g = audioCtx.createGain();
+                o.type = 'sine';
+                o.frequency.value = freq;
+                g.gain.value = gain;
+                o.connect(g);
+                g.connect(audioCtx.destination);
+                o.start();
+                o.stop(audioCtx.currentTime + dur);
+            } catch (_) { }
+        }
+
+        function hudClick() { blip(520, 0.04, 0.05); }
+        function hudConfirm() { blip(720, 0.06, 0.06); }
+
+        function toggleSound() {
+            soundOn = !soundOn;
+            localStorage.setItem('otw_sound', soundOn ? 'on' : 'off');
+            soundLabel.textContent = soundOn ? "ON" : "OFF";
+            hudConfirm();
+        }
+
+        // Accessible chip controls
+        function bindChip(el, fn) {
+            el.addEventListener('click', fn);
+            el.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    fn();
                 }
-                function place(p) {
-                    const r = rot(p);
-                    return { x: orion.center.x + r.x * S, y: orion.center.y + r.y * S };
-                }
+            });
+        }
 
-                orion.center = { x: W * 0.5, y: H * 0.47 };
+        bindChip(moodChip, cycleMood);
+        bindChip(soundChip, toggleSound);
 
-                // A slightly stylized Orion (names included if you want to extend later)
-                const O = [
-                    // Shoulders / head
-                    { id: "Meissa", p: { x: 0.05, y: -0.72 }, r: 3.4, a: 0.85, c: "rgba(205,230,255,1)" },
-                    { id: "Betelgeuse", p: { x: -0.48, y: -0.35 }, r: 5.4, a: 1, c: "rgba(255,210,175,1)" },
-                    { id: "Bellatrix", p: { x: 0.38, y: -0.33 }, r: 4.6, a: 0.98, c: "rgba(210,235,255,1)" },
+        // Modal controls
+        const poemTrigger = document.getElementById('poem-trigger');
+        const poemModal = document.getElementById('poem-modal');
+        const poemContent = document.getElementById('poem-content');
 
-                    // Belt (Alnitak—Alnilam—Mintaka)
-                    { id: "Alnitak", p: { x: -0.14, y: -0.03 }, r: 3.4, a: 0.86, c: "rgba(215,235,255,1)" },
-                    { id: "Alnilam", p: { x: 0.00, y: 0.02 }, r: 3.9, a: 0.92, c: "rgba(220,240,255,1)" },
-                    { id: "Mintaka", p: { x: 0.14, y: 0.07 }, r: 3.3, a: 0.84, c: "rgba(215,235,255,1)" },
+        function togglePoem(open) {
+            poemModal.style.display = open ? 'flex' : 'none';
+            if (open) hudConfirm();
+            else hudClick();
+        }
 
-                    // Sword / nebula region
-                    { id: "SwordTop", p: { x: 0.02, y: 0.16 }, r: 2.4, a: 0.55, c: "rgba(205,230,255,1)" },
-                    { id: "OrionNebula", p: { x: 0.04, y: 0.30 }, r: 3.0, a: 0.68, c: "rgba(195,225,255,1)" },
-                    { id: "SwordLow", p: { x: 0.06, y: 0.46 }, r: 2.1, a: 0.45, c: "rgba(205,230,255,1)" },
+        poemTrigger.addEventListener('click', () => togglePoem(true));
+        poemTrigger.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                togglePoem(true);
+            }
+        });
 
-                    // Knees / feet
-                    { id: "Saiph", p: { x: -0.35, y: 0.60 }, r: 4.4, a: 0.98, c: "rgba(210,235,255,1)" },
-                    { id: "Rigel", p: { x: 0.52, y: 0.64 }, r: 6, a: 1, c: "rgba(210,235,255,1)" },
-                ];
+        poemModal.addEventListener('click', () => togglePoem(false));
+        poemContent.addEventListener('click', (e) => e.stopPropagation());
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && poemModal.style.display === 'flex') togglePoem(false);
+        });
 
-                // Convert to screen coords
-                orion.stars = O.map(s => {
-                    const xy = place(s.p);
-                    return {
-                        ...s,
-                        x: xy.x,
-                        y: xy.y,
-                        tw: rand(0.10, 0.35),  // slower twinkle for main stars
-                        ph: rand(Math.PI * 2)
-                    };
+        // Cursor system (desktop)
+        const ring = document.getElementById('cursor-ring');
+        const dot = document.getElementById('cursor-dot');
+        document.addEventListener('mousemove', (e) => {
+            if (!ring || !dot) return;
+            dot.style.left = e.clientX - 2 + 'px';
+            dot.style.top = e.clientY - 2 + 'px';
+            ring.style.left = e.clientX - 20 + 'px';
+            ring.style.top = e.clientY - 20 + 'px';
+        });
+
+        const interactiveElements = document.querySelectorAll('a, .belt-star, .poem-fragment, .chip');
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => document.body.classList.add('cursor-active'));
+            el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-active'));
+        });
+
+        // Add tiny sound cues on navigational intent
+        document.querySelectorAll('a').forEach(a => {
+            a.addEventListener('mouseenter', () => hudClick());
+            a.addEventListener('click', () => hudConfirm());
+        });
+        document.addEventListener('pointerdown', (e) => {
+            // canvas uses CSS pixels because ctx.setTransform(dpr,0,0,dpr,0,0)
+            addRipple(e.clientX, e.clientY);
+        }, { passive: true });
+        // STARFIELD: depth tiers + parallax + idle drift (mobile-friendly)
+        const canvas = document.getElementById('star-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let width = 0, height = 0;
+        let stars = [];
+        let targetX = 0, targetY = 0;
+        let currentX = 0, currentY = 0;
+
+        function resize() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+
+            const dpr = Math.max(1, window.devicePixelRatio || 1);
+            canvas.width = Math.floor(width * dpr);
+            canvas.height = Math.floor(height * dpr);
+            canvas.style.width = width + 'px';
+            canvas.style.height = height + 'px';
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+            initStars();
+            if (reduceMotion) drawStatic();
+        }
+
+        function initStars() {
+            const isMobile = window.matchMedia('(max-width: 1024px)').matches;
+            const count = reduceMotion ? 120 : (isMobile ? 260 : 520);
+
+            stars = [];
+            for (let i = 0; i < count; i++) {
+                const z = 0.15 + Math.random() * 0.95; // depth
+                stars.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    z,
+                    r: (0.4 + Math.random() * 1.6) * (0.45 + z),
+                    o: 0.15 + Math.random() * 0.85,
+                    tw: (0.00015 + Math.random() * 0.00055) * (0.55 + z),
+                    c: pickStarColor()
                 });
-
-                // Save sword/nebula anchor for nebulosity placement
-                const neb = orion.stars.find(s => s.id === "OrionNebula");
-                orion.sword = { x: neb.x, y: neb.y };
-
-                // Constellation line segments (indices by id)
-                const L = [
-                    ["Betelgeuse", "Bellatrix"],
-                    ["Betelgeuse", "Alnitak"],
-                    ["Bellatrix", "Mintaka"],
-                    ["Alnitak", "Alnilam"],
-                    ["Alnilam", "Mintaka"],
-                    ["Alnitak", "Saiph"],
-                    ["Mintaka", "Rigel"],
-                    ["Saiph", "Rigel"],
-                    ["Alnilam", "SwordTop"],
-                    ["SwordTop", "OrionNebula"],
-                    ["OrionNebula", "SwordLow"],
-                    ["Meissa", "Betelgeuse"],
-                    ["Meissa", "Bellatrix"]
-                ];
-                const byId = Object.fromEntries(orion.stars.map(s => [s.id, s]));
-                orion.lines = L.map(([a, b]) => ({ a: byId[a], b: byId[b] }));
             }
+        }
 
-            // --- Interaction: subtle parallax + toggle lines ---
-            let mouse = { x: 0.5, y: 0.5, tx: 0.5, ty: 0.5 };
-            addEventListener("pointermove", (e) => {
-                mouse.tx = e.clientX / innerWidth;
-                mouse.ty = e.clientY / innerHeight;
-            }, { passive: true });
+        function pickStarColor() {
+            // Slightly mood-aware mix: mostly white, some teal/blue
+            const r = Math.random();
+            if (r > 0.92) return getComputedStyle(document.documentElement).getPropertyValue('--c-blue').trim() || '#6395EE';
+            if (r > 0.84) return getComputedStyle(document.documentElement).getPropertyValue('--c-teal').trim() || '#91AFB3';
+            return '#ffffff';
+        }
 
-            addEventListener("click", () => { orion.showLines = !orion.showLines; });
+        function onPointerMove(e) {
+            const x = e.clientX ?? (e.touches && e.touches[0] && e.touches[0].clientX) ?? width / 2;
+            const y = e.clientY ?? (e.touches && e.touches[0] && e.touches[0].clientY) ?? height / 2;
+            targetX = (x - width / 2) * 0.012;
+            targetY = (y - height / 2) * 0.012;
+        }
 
-            // --- Draw ---
-            function draw(now) {
-                const t = (now - t0) * 0.001;
-                const mx = lerp(mouse.x, mouse.tx, 0.06);
-                const my = lerp(mouse.y, mouse.ty, 0.06);
-                mouse.x = mx; mouse.y = my;
+        document.addEventListener('mousemove', onPointerMove, { passive: true });
+        document.addEventListener('touchmove', onPointerMove, { passive: true });
 
-                // Background clear
-                ctx.setTransform(1, 0, 0, 1, 0, 0);
-                ctx.fillStyle = "#000";
-                ctx.fillRect(0, 0, W, H);
+        let t0 = performance.now();
+        function drawFrame(t) {
+            const dt = Math.min(40, t - t0);
+            t0 = t;
+            updateComets(dt, t);
+            updateRipples(dt);
+            // Idle drift so it feels alive even without input
+            const idle = Math.sin(t * 0.00012) * 0.9;
+            const idle2 = Math.cos(t * 0.00010) * 0.8;
 
-                // Vignette
-                const vg = ctx.createRadialGradient(W * 0.5, H * 0.5, Math.min(W, H) * 0.2, W * 0.5, H * 0.5, Math.min(W, H) * 0.75);
-                vg.addColorStop(0, "rgba(0,0,0,0)");
-                vg.addColorStop(1, "rgba(0,0,0,0.85)");
-                ctx.fillStyle = vg;
-                ctx.fillRect(0, 0, W, H);
+            currentX += (targetX + idle - currentX) * 0.045;
+            currentY += (targetY + idle2 - currentY) * 0.045;
 
-                // Nebula (soft additive glows) anchored near Orion nebula
-                ctx.save();
-                ctx.globalCompositeOperation = "screen";
-                for (const n of nebula) {
-                    const drift = reduceMotion ? 0 : Math.sin(t * n.drift + n.ph) * 0.015;
-                    const px = orion.sword.x + (n.ox + drift) * Math.min(W, H);
-                    const py = orion.sword.y + (n.oy + drift) * Math.min(W, H);
-                    const R = n.rad * Math.min(W, H);
+            ctx.clearRect(0, 0, width, height);
 
-                    const a = n.alpha * (reduceMotion ? 1 : (0.75 + 0.25 * Math.sin(t * 0.25 + n.ph)));
-                    const colorA = `hsla(${n.hue}, 70%, 65%, ${a})`;
-                    const colorB = `hsla(${n.hue + 18}, 80%, 55%, ${a * 0.55})`;
+            const centerX = width / 2;
+            const centerY = height / 2;
+            const shroudRadius = 300;
 
-                    const g = ctx.createRadialGradient(px, py, 0, px, py, R);
-                    g.addColorStop(0.00, colorA);
-                    g.addColorStop(0.35, colorB);
-                    g.addColorStop(1.00, "rgba(0,0,0,0)");
-                    ctx.fillStyle = g;
-                    ctx.beginPath();
-                    ctx.arc(px, py, R, 0, Math.PI * 2);
-                    ctx.fill();
-                }
-                ctx.restore();
+            for (const s of stars) {
+                // twinkle
+                s.o += s.tw * dt;
+                if (s.o > 1 || s.o < 0.1) s.tw = -s.tw;
 
-                // Parallax shift (very subtle)
-                const parX = (mx - 0.5) * 10 * DPR;
-                const parY = (my - 0.5) * 10 * DPR;
+                // depth parallax
+                const px = (currentX * s.z);
+                const py = (currentY * s.z);
 
-                // Background stars
-                ctx.save();
-                ctx.translate(parX * 0.35, parY * 0.35);
-                ctx.globalCompositeOperation = "lighter";
+                const dx = (s.x + px) - centerX;
+                const dy = (s.y + py) - centerY;
+                const dist = Math.sqrt(dx * dx + dy * dy);
 
-                for (const s of stars) {
-                    const tw = reduceMotion ? 1 : (0.75 + 0.25 * Math.sin(t * s.tw + s.ph));
-                    const a = s.a * (1 - TWINKLE * 0.35 + TWINKLE * 0.35 * tw);
+                let shroudAlpha = 1.0;
+                if (dist < shroudRadius) shroudAlpha = 0.2 + (dist / shroudRadius) * 0.8;
 
-                    // tiny atmospheric jitter
-                    const j = reduceMotion ? 0 : SCINTILLATION * 0.9;
-                    const dx = j ? Math.sin(t * 0.7 + s.ph) * j : 0;
-                    const dy = j ? Math.cos(t * 0.6 + s.ph) * j : 0;
+                ctx.globalAlpha = Math.max(0, Math.min(1, s.o * shroudAlpha));
+                ctx.fillStyle = s.c;
 
-                    ctx.fillStyle = `rgba(210,230,255,${a})`;
-                    ctx.fillRect(s.x + dx, s.y + dy, s.r * DPR, s.r * DPR);
-                }
-
-                // Big random stars with sprite glow
-                for (const s of bigStars) {
-                    const tw = reduceMotion ? 1 : (0.7 + 0.3 * Math.sin(t * s.tw + s.ph));
-                    const a = s.a * tw;
-
-                    const spr = starSprite(s.r, s.color);
-                    ctx.globalAlpha = a;
-                    ctx.drawImage(spr, (s.x - spr.width / 2), (s.y - spr.height / 2));
-                }
-                ctx.restore();
-
-                // Orion: brighter + colored + slight pulsing
-                ctx.save();
-                ctx.globalCompositeOperation = "screen";
-
-                // Constellation lines (glow)
-                if (orion.showLines) {
-                    const linePulse = reduceMotion ? 1 : (0.7 + 0.3 * Math.sin(t * 0.55));
-                    ctx.lineWidth = 1.2 * DPR;
-                    ctx.strokeStyle = `rgba(145,175,179,${0.22 * linePulse})`;
-                    ctx.shadowColor = "rgba(145,175,179,0.55)";
-                    ctx.shadowBlur = 10 * DPR;
-
-                    ctx.beginPath();
-                    for (const seg of orion.lines) {
-                        ctx.moveTo(seg.a.x + parX * 0.8, seg.a.y + parY * 0.8);
-                        ctx.lineTo(seg.b.x + parX * 0.8, seg.b.y + parY * 0.8);
-                    }
-                    ctx.stroke();
-
-                    // thinner inner line
-                    ctx.shadowBlur = 0;
-                    ctx.lineWidth = 0.9 * DPR;
-                    ctx.strokeStyle = `rgba(210,235,255,${0.10 * linePulse})`;
-                    ctx.stroke();
-                }
-
-                // Orion stars
-                for (const s of orion.stars) {
-                    const tw = reduceMotion ? 1 : (0.78 + 0.22 * Math.sin(t * s.tw + s.ph));
-                    const a = s.a * tw;
-
-                    // scintillation on main stars is extra subtle
-                    const j = reduceMotion ? 0 : SCINTILLATION * 0.55;
-                    const dx = j ? Math.sin(t * 0.9 + s.ph) * j : 0;
-                    const dy = j ? Math.cos(t * 0.8 + s.ph) * j : 0;
-
-                    const spr = starSprite(s.r, s.c);
-                    ctx.globalAlpha = a;
-                    ctx.drawImage(spr, (s.x + dx + parX * 0.8 - spr.width / 2), (s.y + dy + parY * 0.8 - spr.height / 2));
-
-                    // extra nebula glow around Orion Nebula star
-                    if (s.id === "OrionNebula") {
-                        const R = 120 * DPR;
-                        const g = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, R);
-                        const pulse = reduceMotion ? 1 : (0.75 + 0.25 * Math.sin(t * 0.35));
-                        g.addColorStop(0, `rgba(170,210,255,${0.10 * pulse})`);
-                        g.addColorStop(0.5, `rgba(120,190,255,${0.055 * pulse})`);
-                        g.addColorStop(1, "rgba(0,0,0,0)");
-                        ctx.fillStyle = g;
-                        ctx.beginPath();
-                        ctx.arc(s.x, s.y, R, 0, Math.PI * 2);
-                        ctx.fill();
-                    }
-                }
-
-                ctx.restore();
-
-                // subtle “atmospheric wash” (tiny animated noise via alpha dither)
-                if (!reduceMotion) {
-                    ctx.save();
-                    ctx.globalCompositeOperation = "soft-light";
-                    ctx.globalAlpha = 0.06;
-                    ctx.fillStyle = "rgba(255,255,255,1)";
-                    const step = 6 * DPR;
-                    for (let y = 0; y < H; y += step) {
-                        for (let x = 0; x < W; x += step) {
-                            const n = (Math.sin((x * 0.012) + (t * 0.8)) + Math.cos((y * 0.013) - (t * 0.7))) * 0.5;
-                            if (n > 0.62) ctx.fillRect(x, y, 1, 1);
-                        }
-                    }
-                    ctx.restore();
-                }
-
-                requestAnimationFrame(draw);
+                ctx.beginPath();
+                ctx.arc(s.x + px, s.y + py, s.r, 0, Math.PI * 2);
+                ctx.fill();
             }
+            drawComets();
+            drawRipples();
+            requestAnimationFrame(drawFrame);
+        }
 
-            // Init
+        function drawStatic() {
+            // single render (reduced motion)
+            ctx.clearRect(0, 0, width, height);
+            for (const s of stars) {
+                ctx.globalAlpha = 0.6;
+                ctx.fillStyle = s.c;
+                ctx.beginPath();
+                ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+                ctx.fill();
+            }
+            ctx.globalAlpha = 1;
+        }
+
+        // Init sequence
+        function init() {
+            setDailyDrift();
+
+            const savedMood = getSavedMood();
+            setMood(savedMood);
+            // Update auto mood every 10 minutes if in auto mode
+            setInterval(() => {
+                if (getSavedMood() === "auto") setMood("auto");
+            }, 10 * 60 * 1000);
+
+            // Set footer title (subtle change, keeps it alive)
+            footerTitle.textContent = pickDaily(footerTitles);
+
+            // Pick daily line and type it
+            typeLine(pickDaily(lines));
+
+            // Starfield
+            window.addEventListener('resize', resize, { passive: true });
             resize();
-            requestAnimationFrame(draw);
-
-        })();
+            if (!reduceMotion) requestAnimationFrame(drawFrame);
+        }
+        scheduleComets();
+        init();
     </script>
 </body>
 
