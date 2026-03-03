@@ -7,22 +7,34 @@
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
-
         gtag('config', 'G-YKRKPFV2MB');
     </script>
+
     <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>
-        Professional Services | Outside The World New LLC
-    </title>
+    <title>Technical Advisory & Brand Systems Research | Outside The World</title>
+    <meta name="description"
+        content="A professional archive and technical laboratory documenting 25 years of digital observation in Queen Creek, AZ 85142. Specializing in brand architecture and systems resilience.">
     <link href="favicon.svg" rel="icon" type="image/svg+xml" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta content="#0a0a0a" name="theme-color" />
+    <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style" />
+
+    <meta property="og:title" content="Outside The World | Technical Research Archive">
+    <meta property="og:description"
+        content="A quarter-century of technical observation and brand architecture research. Base of operations: Queen Creek, Arizona.">
+    <meta property="og:image" content="https://outsidetheworld.com/Images/SocialPreview.jpg">
+    <meta property="og:url" content="https://outsidetheworld.com/professional.html">
+    <meta name="twitter:card" content="summary_large_image">
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;700&family=Inter:wght@100;300;400;700;900&display=swap');
 
         :root {
-            --brand-blue: var(--brand-blue);
-            --brand-teal: var(--brand-teal);
-            --brand-light-blue: var(--brand-light-blue);
+            /* Restored Hex Codes to prevent circular variable reference errors */
+            --brand-blue: #6395ee;
+            --brand-teal: #91afb3;
+            --brand-light-blue: #a3c2ff;
             --bg-dark: #0a0a0a;
             --card-bg: rgba(255, 255, 255, 0.03);
         }
@@ -47,20 +59,15 @@
 
         .nav-logo img {
             height: 70px;
-            /* Increased size for brand impact */
             width: auto;
             display: block;
             transition: all 0.3s ease;
-            /* This handles the 'grow' and the opacity */
             opacity: 0.85;
-            /* Softened base state */
         }
 
         .nav-logo img:hover {
             transform: scale(1.08);
-            /* The 'Grow' effect */
             opacity: 1;
-            /* Sharpens to full clarity */
             cursor: pointer;
         }
 
@@ -79,7 +86,6 @@
             text-shadow: 0 0 10px var(--brand-blue);
         }
 
-        /* Hero Section */
         .hero {
             padding: 100px 5%;
             text-align: center;
@@ -105,7 +111,6 @@
             margin-bottom: 40px;
         }
 
-        /* Services Grid */
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -160,7 +165,6 @@
             width: 100%;
         }
 
-        /* Contact Section */
         .cta-section {
             background: linear-gradient(to bottom, transparent, #111);
             padding: 100px 5%;
@@ -195,17 +199,13 @@
             text-transform: uppercase;
         }
 
-        /* Founder Section - Desktop Constraints */
         .founder-section {
             padding: 100px 5%;
             max-width: 800px;
-            /* Limits width for readability */
             margin: 0 auto;
-            /* Centers the block */
             border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        /* The Signature Layout */
         .signature {
             margin-top: 60px;
             border-left: 2px solid var(--brand-teal);
@@ -216,11 +216,9 @@
             gap: 40px;
         }
 
-        /* --- DOSSIER FOOTER CARD --- */
         .dossier-uplink-container {
             max-width: 800px;
             margin: 40px auto 100px;
-            /* Aligns with Founder Section width */
             padding: 0 5%;
         }
 
@@ -276,77 +274,71 @@
             transform: translateX(10px);
         }
 
-        @media (max-width: 768px) {
-            .dossier-footer-card {
-                flex-direction: column;
-                text-align: center;
-                gap: 20px;
-                padding: 30px 20px;
+        /* RESPONSIVE BREAKPOINTS (Improved for iPad Landscape/Portrait) */
+        @media (max-width: 1024px) {
+            .services-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .hero h1 {
+                font-size: 2.8rem;
             }
         }
 
         @media (max-width: 768px) {
-
-            /* 1. Center the Logo */
-            nav {
+            .nav {
                 justify-content: center;
-                padding: 20px 5%;
             }
 
-            /* 2. Tighten the Gaps */
             .hero {
                 padding: 60px 5% 40px;
-                /* Reduced top/bottom padding */
             }
 
             .hero h1 {
                 font-size: 2.2rem;
-                /* Scaled for mobile readability */
             }
 
             .services-grid {
-                padding: 0 5% 60px 5%;
-                /* Tightened the gap below the grid */
+                grid-template-columns: 1fr;
                 gap: 20px;
-            }
-
-            .service-card {
-                padding: 30px 20px;
-                /* More internal space for text, less for margins */
             }
 
             .founder-section {
                 padding: 60px 5% !important;
-                /* Overriding the 100px desktop padding */
             }
 
-            .founder-section p {
-                font-size: 1.2rem !important;
-                /* Softened the "large" text for mobile screens */
-            }
-
-            .cta-section {
-                padding: 60px 5%;
-            }
-
-            /* 3. The Signature Block Responsive Shift */
             .signature {
                 flex-direction: column;
                 text-align: center;
-                padding: 30px 20px !important;
-                gap: 20px;
-                border-left: none !important;
+                border-left: none;
                 border-top: 2px solid var(--brand-teal);
             }
-        }
 
-        /* THE CLEAN ATMOSPHERIC WASH */
+            .dossier-footer-card {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+        }
     </style>
 
     <link href="theme.css" rel="stylesheet" />
-    <meta content="#0a0a0a" name="theme-color" />
-    <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style" />
-    <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport" />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "Outside The World New LLC",
+      "url": "https://outsidetheworld.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Queen Creek",
+        "addressRegion": "AZ",
+        "postalCode": "85142",
+        "addressCountry": "US"
+      }
+    }
+    </script>
 </head>
 
 <body>
@@ -484,6 +476,28 @@
     <footer>
         Outside The World New LLC • Registered Arizona Entity • Since 2000
     </footer>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Outside The World New LLC",
+  "image": "https://outsidetheworld.com/Images/Equal.svg",
+  "url": "https://outsidetheworld.com",
+  "description": "A technical research archive and brand architecture laboratory serving the Queen Creek and East Valley market.",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Queen Creek",
+    "addressRegion": "AZ",
+    "postalCode": "85142",
+    "addressCountry": "US"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 33.248, 
+    "longitude": -111.634
+  }
+}
+</script>
 </body>
 
 </html>
