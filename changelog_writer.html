@@ -1,0 +1,872 @@
+<!-- changelog_writer.html -->
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>OTW Changelog Writer</title>
+
+    <!-- Your site theme -->
+    <link rel="stylesheet" href="theme.css" />
+
+    <!-- Fonts (safe even if theme already loads them) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Fira+Code:wght@300;400;700&family=IBM+Plex+Serif:wght@300;400;700&display=swap" />
+
+    <style>
+        :root {
+            /* Fallbacks if theme.css isn’t present for any reason */
+            --bg-dark: #0a0a0a;
+            --font-main: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+            --font-code: "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+            --brand-blue: #6395EE;
+            --brand-light-blue: #A0BEF5;
+            --brand-teal: #91AFB3;
+
+            --glass: rgba(145, 175, 179, 0.05);
+            --glass-strong: rgba(145, 175, 179, 0.08);
+            --border: rgba(145, 175, 179, 0.18);
+            --border-strong: rgba(145, 175, 179, 0.28);
+            --ink: rgba(255, 255, 255, 0.92);
+            --muted: rgba(145, 175, 179, 0.70);
+
+            --ok: #78f0c6;
+            --warn: #ffd36e;
+            --bad: #ff4d4d;
+        }
+
+        /* Base */
+        body {
+            margin: 0;
+            background: var(--bg-dark);
+            color: var(--ink);
+            font-family: var(--font-main);
+            overflow-x: hidden;
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+
+        /* Subtle page grain + glow */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(circle at 20% 15%, rgba(99, 149, 238, 0.14), transparent 45%),
+                radial-gradient(circle at 80% 25%, rgba(145, 175, 179, 0.12), transparent 45%),
+                radial-gradient(circle at 50% 95%, rgba(160, 190, 245, 0.10), transparent 45%);
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.9;
+        }
+
+        .wrap {
+            position: relative;
+            z-index: 1;
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 18px 16px 90px;
+        }
+
+        /* Header */
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            backdrop-filter: blur(14px);
+            background: linear-gradient(to bottom, rgba(5, 5, 5, 0.95) 70%, rgba(5, 5, 5, 0) 100%);
+            border-bottom: 1px solid rgba(145, 175, 179, 0.12);
+            padding: 14px 0 10px;
+            margin: 0 -16px 18px;
+            padding-left: 16px;
+            padding-right: 16px;
+        }
+
+        .topbar-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            max-width: 1180px;
+            margin: 0 auto;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 0;
+        }
+
+        .brand img {
+            width: 92px;
+            height: auto;
+            filter: drop-shadow(0 0 18px rgba(99, 149, 238, 0.22));
+        }
+
+        .titleblock {
+            min-width: 0;
+        }
+
+        .title {
+            font-weight: 900;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-size: 0.95rem;
+            margin: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .subtitle {
+            font-family: var(--font-code);
+            font-size: 0.6rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-top: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .status {
+            font-family: var(--font-code);
+            font-size: 0.6rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.72);
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            background: rgba(255, 255, 255, 0.03);
+            padding: 8px 10px;
+            white-space: nowrap;
+        }
+
+        .status .dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+            margin-right: 8px;
+            background: rgba(145, 175, 179, 0.35);
+            box-shadow: 0 0 10px rgba(145, 175, 179, 0.18);
+            vertical-align: middle;
+        }
+
+        /* Layout */
+        .grid {
+            display: grid;
+            grid-template-columns: 1.05fr 0.95fr;
+            gap: 16px;
+            align-items: start;
+        }
+
+        @media (max-width: 980px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .status {
+                display: none;
+            }
+        }
+
+        /* Tron card */
+        .card {
+            position: relative;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            backdrop-filter: blur(16px);
+            padding: 16px;
+            overflow: hidden;
+        }
+
+        /* Tron corner traces */
+        .card::before,
+        .card::after {
+            content: "";
+            position: absolute;
+            pointer-events: none;
+            inset: 0;
+        }
+
+        .card::before {
+            border-top: 2px solid rgba(145, 175, 179, 0.45);
+            border-left: 2px solid rgba(145, 175, 179, 0.45);
+            width: 42%;
+            height: 46%;
+            top: 0;
+            left: 0;
+            box-shadow: -8px -8px 22px rgba(145, 175, 179, 0.12);
+        }
+
+        .card::after {
+            border-right: 2px solid rgba(145, 175, 179, 0.35);
+            border-bottom: 2px solid rgba(145, 175, 179, 0.35);
+            width: 46%;
+            height: 44%;
+            right: 0;
+            bottom: 0;
+            box-shadow: 8px 8px 22px rgba(145, 175, 179, 0.10);
+        }
+
+        .card-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .card-label {
+            font-family: var(--font-code);
+            font-size: 0.65rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(145, 175, 179, 0.85);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 0;
+        }
+
+        .card-label::after {
+            content: "";
+            height: 1px;
+            flex: 1;
+            background: rgba(145, 175, 179, 0.22);
+        }
+
+        .chip {
+            font-family: var(--font-code);
+            font-size: 0.55rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 6px 8px;
+            border: 1px solid rgba(160, 190, 245, 0.16);
+            color: rgba(160, 190, 245, 0.90);
+            background: rgba(160, 190, 245, 0.05);
+            white-space: nowrap;
+        }
+
+        /* Form */
+        .fields {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        @media (max-width: 640px) {
+            .fields {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        label {
+            display: block;
+            font-family: var(--font-code);
+            font-size: 0.55rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(160, 190, 245, 0.92);
+            margin: 0 0 6px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            box-sizing: border-box;
+            background: rgba(5, 5, 5, 0.72);
+            border: 1px solid rgba(145, 175, 179, 0.22);
+            color: #fff;
+            outline: none;
+            padding: 12px;
+            font-family: var(--font-code);
+            font-size: 0.8rem;
+            transition: border-color .2s ease, background .2s ease, box-shadow .2s ease;
+        }
+
+        textarea {
+            font-family: "IBM Plex Serif", serif;
+            font-size: 1.05rem;
+            line-height: 1.55;
+            min-height: 130px;
+            resize: vertical;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: rgba(99, 149, 238, 0.65);
+            box-shadow: 0 0 0 3px rgba(99, 149, 238, 0.12);
+            background: rgba(5, 5, 5, 0.80);
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .btn {
+            cursor: pointer;
+            border: none;
+            padding: 10px 12px;
+            font-family: var(--font-code);
+            font-size: 0.62rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: transform .15s ease, box-shadow .2s ease, background .2s ease, color .2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            white-space: nowrap;
+            user-select: none;
+        }
+
+        .btn.primary {
+            background: var(--brand-blue);
+            color: var(--bg-dark);
+            box-shadow: 0 10px 26px rgba(99, 149, 238, 0.22);
+        }
+
+        .btn.primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 14px 30px rgba(99, 149, 238, 0.28);
+        }
+
+        .btn.ghost {
+            background: rgba(255, 255, 255, 0.03);
+            color: rgba(255, 255, 255, 0.88);
+            border: 1px solid rgba(145, 175, 179, 0.22);
+        }
+
+        .btn.ghost:hover {
+            transform: translateY(-1px);
+            border-color: rgba(145, 175, 179, 0.45);
+            box-shadow: 0 0 18px rgba(145, 175, 179, 0.18);
+        }
+
+        .btn.danger {
+            background: rgba(255, 77, 77, 0.10);
+            color: rgba(255, 255, 255, 0.90);
+            border: 1px solid rgba(255, 77, 77, 0.25);
+        }
+
+        .btn.danger:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 0 18px rgba(255, 77, 77, 0.18);
+        }
+
+        .mini {
+            font-family: var(--font-code);
+            font-size: 0.55rem;
+            letter-spacing: 1px;
+            color: rgba(145, 175, 179, 0.75);
+            margin-top: 10px;
+            line-height: 1.5;
+        }
+
+        /* Preview blocks */
+        .preview {
+            margin-top: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(0, 0, 0, 0.35);
+            padding: 12px;
+            overflow: auto;
+            white-space: pre;
+            font-family: var(--font-code);
+            font-size: 0.66rem;
+            line-height: 1.55;
+            max-height: 220px;
+        }
+
+        /* Lists */
+        .list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .item {
+            border: 1px solid rgba(145, 175, 179, 0.16);
+            background: rgba(145, 175, 179, 0.04);
+            padding: 12px;
+        }
+
+        .meta {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+            font-family: var(--font-code);
+            font-size: 0.58rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.9;
+            margin-bottom: 8px;
+        }
+
+        .meta .date {
+            color: var(--brand-teal);
+        }
+
+        .meta .type {
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            padding: 2px 6px;
+            color: rgba(255, 255, 255, 0.80);
+        }
+
+        .meta .badge {
+            border: 1px solid rgba(160, 190, 245, 0.16);
+            color: rgba(160, 190, 245, 0.90);
+            background: rgba(160, 190, 245, 0.05);
+            padding: 2px 6px;
+        }
+
+        .text {
+            font-family: "IBM Plex Serif", serif;
+            font-size: 1.02rem;
+            line-height: 1.55;
+            color: rgba(255, 255, 255, 0.92);
+        }
+
+        .controls-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .search {
+            flex: 1;
+            min-width: 220px;
+        }
+
+        .split {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        /* Status coloring */
+        .ok {
+            color: var(--ok);
+        }
+
+        .warn {
+            color: var(--warn);
+        }
+
+        .bad {
+            color: var(--bad);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="topbar">
+        <div class="topbar-inner">
+            <div class="brand">
+                <!-- Adjust path if needed -->
+                <a href="index.html" aria-label="Back to home" style="display:flex; align-items:center;">
+                    <img src="Images/Equal.svg" alt="Outside The World" />
+                </a>
+                <div class="titleblock">
+                    <h1 class="title">CHANGELOG_WRITER // AUTHORING_CONSOLE</h1>
+                    <div class="subtitle" id="subline">INITIALIZING_UPLINK…</div>
+                </div>
+            </div>
+            <div class="status" id="statusBox"><span class="dot"></span><span id="statusText">IDLE</span></div>
+        </div>
+    </div>
+
+    <div class="wrap">
+        <div class="grid">
+            <!-- LEFT: Writer -->
+            <section class="card" aria-label="Changelog entry writer">
+                <div class="card-head">
+                    <p class="card-label">01 // ENTRY_COMPOSER</p>
+                    <span class="chip" id="loadedChip">LOG: not loaded</span>
+                </div>
+
+                <div class="fields">
+                    <div>
+                        <label for="date">DATE</label>
+                        <input id="date" type="date" />
+                    </div>
+                    <div>
+                        <label for="type">TYPE</label>
+                        <select id="type">
+                            <option>Feature</option>
+                            <option>Fix</option>
+                            <option>Tweak</option>
+                            <option>Docs</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="text">CHANGE_DESCRIPTION</label>
+                    <textarea id="text"
+                        placeholder="Describe what changed. Keep it short, human-readable, and future-you friendly."></textarea>
+                </div>
+
+                <div class="actions">
+                    <button class="btn primary" id="btnStage" type="button">STAGE_ENTRY</button>
+                    <button class="btn ghost" id="btnCopy" type="button">COPY_JSON_OBJECT</button>
+                    <button class="btn ghost" id="btnLoad" type="button">LOAD_CHANGELOG.JSON</button>
+                    <button class="btn ghost" id="btnDownload" type="button">DOWNLOAD_UPDATED_JSON</button>
+                    <button class="btn danger" id="btnClearStaged" type="button">CLEAR_STAGING</button>
+                </div>
+
+                <div class="mini" id="hint">
+                    Tip: Stage a few entries during a work session, then download the updated
+                    <code>changelog.json</code> and commit it.
+                </div>
+
+                <div class="preview" id="jsonPreview">{ }</div>
+
+                <div class="card-head" style="margin-top: 14px;">
+                    <p class="card-label">02 // STAGING_BUFFER</p>
+                    <span class="chip" id="stagedChip">0 staged</span>
+                </div>
+
+                <div class="list" id="stagedList"></div>
+            </section>
+
+            <!-- RIGHT: Existing log preview -->
+            <aside class="card" aria-label="Existing changelog viewer">
+                <div class="card-head">
+                    <p class="card-label">03 // MATRIX_ARCHIVE_VIEW</p>
+                    <span class="chip" id="countChip">0 entries</span>
+                </div>
+
+                <div class="controls-row">
+                    <input class="search" id="search" type="text" placeholder="FILTER // text contains…" />
+                    <div class="split">
+                        <button class="btn ghost" id="btnRefresh" type="button">REFRESH</button>
+                        <button class="btn ghost" id="btnCopyAll" type="button">COPY_FULL_JSON</button>
+                    </div>
+                </div>
+
+                <div class="list" id="logList"></div>
+            </aside>
+        </div>
+    </div>
+
+    <script>
+        // -----------------------
+        // State
+        // -----------------------
+        let loadedLog = null;         // array from changelog.json
+        let staged = [];              // staged entries (array of objects)
+        let lastBuilt = null;
+
+        const elDate = document.getElementById('date');
+        const elType = document.getElementById('type');
+        const elText = document.getElementById('text');
+
+        const elSubline = document.getElementById('subline');
+        const elStatusText = document.getElementById('statusText');
+        const elStatusBox = document.getElementById('statusBox');
+
+        const elLoadedChip = document.getElementById('loadedChip');
+        const elCountChip = document.getElementById('countChip');
+        const elStagedChip = document.getElementById('stagedChip');
+
+        const elPreview = document.getElementById('jsonPreview');
+        const elStagedList = document.getElementById('stagedList');
+        const elLogList = document.getElementById('logList');
+        const elSearch = document.getElementById('search');
+
+        // -----------------------
+        // Helpers
+        // -----------------------
+        function setStatus(msg, level = 'ok') {
+            elStatusText.textContent = msg;
+            const dot = elStatusBox.querySelector('.dot');
+            dot.style.background =
+                level === 'ok' ? 'rgba(120,240,198,0.65)' :
+                    level === 'warn' ? 'rgba(255,211,110,0.75)' :
+                        'rgba(255,77,77,0.75)';
+            dot.style.boxShadow =
+                level === 'ok' ? '0 0 12px rgba(120,240,198,0.25)' :
+                    level === 'warn' ? '0 0 12px rgba(255,211,110,0.25)' :
+                        '0 0 12px rgba(255,77,77,0.25)';
+        }
+
+        function todayISO() {
+            const d = new Date();
+            const yyyy = d.getFullYear();
+            const mm = String(d.getMonth() + 1).padStart(2, '0');
+            const dd = String(d.getDate()).padStart(2, '0');
+            return `${yyyy}-${mm}-${dd}`;
+        }
+
+        function escapeHtml(s) {
+            return String(s).replace(/[&<>"']/g, c => ({
+                '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+            }[c]));
+        }
+
+        function buildEntry() {
+            const date = elDate.value.trim();
+            const type = elType.value.trim();
+            const text = elText.value.trim();
+
+            if (!date) throw new Error('DATE_REQUIRED');
+            if (!text) throw new Error('DESCRIPTION_REQUIRED');
+
+            return { date, type, text };
+        }
+
+        function sortNewestFirst(arr) {
+            // YYYY-MM-DD sorts correctly as strings if always formatted
+            return arr.slice().sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+        }
+
+        function dedupe(arr) {
+            const seen = new Set();
+            const out = [];
+            for (const x of arr) {
+                const key = `${x.date || ''}||${(x.type || '').toLowerCase()}||${(x.text || '').trim().toLowerCase()}`;
+                if (seen.has(key)) continue;
+                seen.add(key);
+                out.push(x);
+            }
+            return out;
+        }
+
+        async function copyToClipboard(text) {
+            try {
+                await navigator.clipboard.writeText(text);
+                return true;
+            } catch {
+                // fallback
+                const ta = document.createElement('textarea');
+                ta.value = text;
+                ta.style.position = 'fixed';
+                ta.style.left = '-9999px';
+                document.body.appendChild(ta);
+                ta.select();
+                const ok = document.execCommand('copy');
+                ta.remove();
+                return ok;
+            }
+        }
+
+        function downloadFile(filename, contents, mime = 'application/json') {
+            const blob = new Blob([contents], { type: mime });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            URL.revokeObjectURL(url);
+        }
+
+        // -----------------------
+        // Rendering
+        // -----------------------
+        function renderPreview(entry) {
+            elPreview.textContent = entry ? (JSON.stringify(entry, null, 2)) : '{ }';
+        }
+
+        function renderStaged() {
+            elStagedChip.textContent = `${staged.length} staged`;
+            if (!staged.length) {
+                elStagedList.innerHTML = `<div class="mini">STAGING_BUFFER_EMPTY // stage entries to batch your update.</div>`;
+                return;
+            }
+
+            const rows = sortNewestFirst(staged).map((e, idx) => {
+                return `
+          <div class="item">
+            <div class="meta">
+              <span class="date">${escapeHtml((e.date || '').toUpperCase())}</span>
+              <span class="type">${escapeHtml((e.type || 'Other').toUpperCase())}</span>
+              <span class="badge">STAGED</span>
+            </div>
+            <div class="text">${escapeHtml(e.text || '')}</div>
+            <div class="actions" style="margin-top:10px;">
+              <button class="btn ghost" type="button" data-action="copy" data-idx="${idx}">COPY</button>
+              <button class="btn danger" type="button" data-action="remove" data-idx="${idx}">REMOVE</button>
+            </div>
+          </div>
+        `;
+            }).join('');
+
+            elStagedList.innerHTML = rows;
+
+            elStagedList.querySelectorAll('button[data-action]').forEach(btn => {
+                btn.addEventListener('click', async () => {
+                    const action = btn.getAttribute('data-action');
+                    const idx = Number(btn.getAttribute('data-idx'));
+                    const entry = sortNewestFirst(staged)[idx];
+                    if (!entry) return;
+
+                    if (action === 'remove') {
+                        // remove by identity match
+                        staged = staged.filter(x => !(x.date === entry.date && x.type === entry.type && x.text === entry.text));
+                        renderStaged();
+                        setStatus('STAGED_ENTRY_REMOVED', 'warn');
+                    }
+
+                    if (action === 'copy') {
+                        const ok = await copyToClipboard(JSON.stringify(entry, null, 2) + ',');
+                        setStatus(ok ? 'COPIED_STAGED_ENTRY' : 'COPY_FAILED', ok ? 'ok' : 'bad');
+                    }
+                });
+            });
+        }
+
+        function renderLogList() {
+            const q = elSearch.value.trim().toLowerCase();
+            const data = Array.isArray(loadedLog) ? sortNewestFirst(loadedLog) : [];
+
+            const filtered = q
+                ? data.filter(x =>
+                    (x.text || '').toLowerCase().includes(q) ||
+                    (x.type || '').toLowerCase().includes(q) ||
+                    (x.date || '').toLowerCase().includes(q)
+                )
+                : data;
+
+            elCountChip.textContent = `${filtered.length} entries`;
+
+            if (!filtered.length) {
+                elLogList.innerHTML = `<div class="mini">NO_RESULTS // load changelog.json or adjust filter.</div>`;
+                return;
+            }
+
+            elLogList.innerHTML = filtered.slice(0, 120).map(e => `
+        <div class="item">
+          <div class="meta">
+            <span class="date">${escapeHtml((e.date || '').toUpperCase())}</span>
+            <span class="type">${escapeHtml((e.type || 'Other').toUpperCase())}</span>
+          </div>
+          <div class="text">${escapeHtml(e.text || '')}</div>
+        </div>
+      `).join('');
+        }
+
+        // -----------------------
+        // Actions
+        // -----------------------
+        async function loadChangelog() {
+            try {
+                setStatus('LOADING_CHANGELOG…', 'warn');
+                elSubline.textContent = 'UPLINK // fetching changelog.json';
+
+                const res = await fetch('./changelog.json', { cache: 'no-store' });
+                if (!res.ok) throw new Error(`HTTP_${res.status}`);
+
+                const data = await res.json();
+                if (!Array.isArray(data)) throw new Error('INVALID_FORMAT_NOT_ARRAY');
+
+                loadedLog = data;
+                elLoadedChip.textContent = `LOG: loaded (${loadedLog.length})`;
+                elSubline.textContent = `UPLINK_ESTABLISHED // changelog.json loaded (${loadedLog.length} entries)`;
+                setStatus('LOG_LOADED', 'ok');
+
+                renderLogList();
+            } catch (e) {
+                loadedLog = null;
+                elLoadedChip.textContent = 'LOG: load failed';
+                elSubline.textContent = 'UPLINK_FAILED // open via http(s), not file://';
+                setStatus('LOAD_FAILED', 'bad');
+                renderLogList();
+            }
+        }
+
+        function stageEntry() {
+            try {
+                lastBuilt = buildEntry();
+                renderPreview(lastBuilt);
+
+                staged.unshift(lastBuilt);
+                staged = dedupe(staged);
+                renderStaged();
+
+                setStatus('ENTRY_STAGED', 'ok');
+            } catch (e) {
+                setStatus(e.message === 'DATE_REQUIRED' ? 'DATE_REQUIRED' : 'DESCRIPTION_REQUIRED', 'bad');
+            }
+        }
+
+        async function copyEntry() {
+            try {
+                if (!lastBuilt) lastBuilt = buildEntry();
+                renderPreview(lastBuilt);
+
+                const ok = await copyToClipboard(JSON.stringify(lastBuilt, null, 2) + ',');
+                setStatus(ok ? 'COPIED_JSON_OBJECT' : 'COPY_FAILED', ok ? 'ok' : 'bad');
+            } catch (e) {
+                setStatus('CANNOT_COPY // missing fields', 'bad');
+            }
+        }
+
+        async function copyFullJson() {
+            const base = Array.isArray(loadedLog) ? loadedLog : [];
+            const merged = sortNewestFirst(dedupe(base));
+            const ok = await copyToClipboard(JSON.stringify(merged, null, 2));
+            setStatus(ok ? 'COPIED_FULL_JSON' : 'COPY_FAILED', ok ? 'ok' : 'bad');
+        }
+
+        function downloadUpdatedJson() {
+            // merge staged + loaded
+            const base = Array.isArray(loadedLog) ? loadedLog : [];
+            const merged = dedupe([...staged, ...base]);
+            const sorted = sortNewestFirst(merged);
+
+            downloadFile('changelog.json', JSON.stringify(sorted, null, 2) + '\n');
+            setStatus('DOWNLOADED_CHANGELOG.JSON', 'ok');
+        }
+
+        function clearStaging() {
+            staged = [];
+            renderStaged();
+            setStatus('STAGING_CLEARED', 'warn');
+        }
+
+        // -----------------------
+        // Wire up
+        // -----------------------
+        document.getElementById('btnStage').addEventListener('click', stageEntry);
+        document.getElementById('btnCopy').addEventListener('click', copyEntry);
+        document.getElementById('btnLoad').addEventListener('click', loadChangelog);
+        document.getElementById('btnRefresh').addEventListener('click', loadChangelog);
+        document.getElementById('btnDownload').addEventListener('click', downloadUpdatedJson);
+        document.getElementById('btnClearStaged').addEventListener('click', clearStaging);
+        document.getElementById('btnCopyAll').addEventListener('click', copyFullJson);
+        elSearch.addEventListener('input', renderLogList);
+
+        // Init defaults
+        elDate.value = todayISO();
+        renderPreview(null);
+        renderStaged();
+        renderLogList();
+        setStatus('IDLE', 'ok');
+
+        // Auto-try load (nice on GitHub Pages)
+        loadChangelog();
+    </script>
+</body>
+
+</html>
