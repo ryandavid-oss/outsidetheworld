@@ -119,7 +119,20 @@
         }
 
         /* THE ATMOSPHERIC SHROUD  */
-        body::after {}
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(10, 10, 10, 0) 20%, rgba(0, 0, 0, 0.7) 100%);
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.6;
+            will-change: opacity;
+            transform: translateZ(0);
+        }
 
         /* Keyboard focus (no visual change for mouse users) */
         :focus-visible {
@@ -1332,6 +1345,15 @@
                 letter-spacing: 2px;
                 box-shadow: none;
             }
+        }
+
+        /* Keep the vibe, but reduce the heavy haze on iPhone */
+        @media (max-width: 1024px) {
+            body::after {
+                opacity: 0.18 !important;
+            }
+
+            /* try 0.10–0.25 */
         }
     </style>
 </head>
