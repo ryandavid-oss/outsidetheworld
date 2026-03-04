@@ -119,20 +119,7 @@
         }
 
         /* THE ATMOSPHERIC SHROUD  */
-        body::after {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 50% 50%, rgba(10, 10, 10, 0) 20%, rgba(0, 0, 0, 0.7) 100%);
-            pointer-events: none;
-            z-index: 9999;
-            opacity: 0.6;
-            will-change: opacity;
-            transform: translateZ(0);
-        }
+        body::after {}
 
         /* Keyboard focus (no visual change for mouse users) */
         :focus-visible {
