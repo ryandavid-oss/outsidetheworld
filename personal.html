@@ -637,6 +637,57 @@
             gap: 20px;
         }
 
+        /* === Mobile header collapse (mini Equal.svg after scroll) === */
+        @media (max-width: 1024px) {
+            body {
+                --mobile-header-expanded: 220px;
+                --mobile-header-collapsed: 72px;
+                --mobile-header-current: var(--mobile-header-expanded);
+            }
+
+            body.header-collapsed {
+                --mobile-header-current: var(--mobile-header-collapsed);
+            }
+
+            .interface-header {
+                height: var(--mobile-header-current);
+                transition: height 220ms ease, background 220ms ease, backdrop-filter 220ms ease;
+                overflow: hidden;
+            }
+
+            /* Keep the jump strip glued right under whatever header height is active */
+            .mobile-jump-strip {
+                top: var(--mobile-header-current);
+                margin-top: var(--mobile-header-current);
+                transition: top 220ms ease, margin-top 220ms ease;
+            }
+
+            /* Collapsed layout: logo + clock only */
+            body.header-collapsed .header-content-inner {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px 14px;
+                gap: 10px;
+            }
+
+            body.header-collapsed .top-quadrant-text {
+                display: none !important;
+            }
+
+            body.header-collapsed .interface-header .nav-logo {
+                width: 120px;
+                margin: 0;
+            }
+
+            body.header-collapsed .weather-uplink {
+                margin: 0;
+                font-size: 0.55rem;
+                letter-spacing: 2px;
+                opacity: 0.85;
+            }
+        }
+
         .column-label {
             font-family: var(--font-code);
             font-size: 0.65rem;
@@ -1712,6 +1763,33 @@
                 artistTarget.innerText = "CHECK_UPLINK_PROTOCOL";
             }
         }
+
+        // --- MOBILE HEADER COLLAPSE ON SCROLL ---
+        (function initMobileHeaderCollapse() {
+            const mq = window.matchMedia('(max-width: 1024px)');
+            const threshold = 40; // px before collapsing
+            let ticking = false;
+
+            function apply() {
+                if (!mq.matches) {
+                    document.body.classList.remove('header-collapsed');
+                    return;
+                }
+                document.body.classList.toggle('header-collapsed', window.scrollY > threshold);
+            }
+
+            window.addEventListener('scroll', () => {
+                if (ticking) return;
+                ticking = true;
+                requestAnimationFrame(() => {
+                    apply();
+                    ticking = false;
+                });
+            }, { passive: true });
+
+            mq.addEventListener?.('change', apply);
+            apply();
+        })();
 
         syncMusicSignal();
         setInterval(syncMusicSignal, 30000);
