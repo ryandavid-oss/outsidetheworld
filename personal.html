@@ -1309,9 +1309,20 @@
                 display: none !important;
             }
 
-            /* Logo to 50% of your mobile size (140px -> 70px) */
+            /* Logo: true 50% shrink (works even if SVG scaling is weird on iOS) */
+            body.header-collapsed .header-content-inner>a {
+                display: flex;
+                align-items: center;
+                line-height: 0;
+            }
+
             body.header-collapsed .interface-header .nav-logo {
-                width: 70px;
+                width: 140px;
+                /* keep the normal mobile width */
+                height: auto;
+                transform: scale(0.5);
+                /* <- the actual 50% shrink */
+                transform-origin: left center;
                 margin: 0;
                 filter: none;
             }
