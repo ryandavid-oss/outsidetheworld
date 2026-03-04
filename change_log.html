@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>OTW Change Log</title>
+    <link rel="stylesheet" href="theme.css" />
+    <style>
+        body {
+            background: var(--bg-dark);
+            color: #eee;
+            font-family: var(--font-main);
+            margin: 0;
+            padding: 40px 16px 80px;
+        }
+
+        .wrap {
+            max-width: 980px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            margin: 0 0 8px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 1.8rem;
+        }
+
+        .sub {
+            font-family: var(--font-code);
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(145, 175, 179, 0.75);
+            margin-bottom: 24px;
+        }
+
+        .log {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .item {
+            border: 1px solid rgba(145, 175, 179, 0.18);
+            background: rgba(145, 175, 179, 0.04);
+            padding: 14px;
+        }
+
+        .meta {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+            font-family: var(--font-code);
+            font-size: 0.6rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.9;
+            margin-bottom: 8px;
+        }
+
+        .date {
+            color: var(--brand-teal);
+        }
+
+        .type {
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 2px 6px;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .msg {
+            font-family: 'IBM Plex Serif', serif;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.92);
+        }
+
+        .err {
+            font-family: var(--font-code);
+            color: #ff4d4d;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <h1>Change Log</h1>
+        <div class="sub" id="subline">Loading changelog.json…</div>
+        <div id="out"></div>
+    </div>
+
+    <script>
+        async function loadLog() {
+            const out = document.getElementById('out');
+            const sub = document.getElementById('subline');
+
+            try {
+                const res = await fetch('./changelog.json', { cache: 'no-store' });
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+                const data = await res.json();
+                if (!Array.isArray(data)) throw new Error('changelog.json is not an array');
+
+                // Sort newest first (YYYY-MM-DD sorts correctly as strings)
+                data.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+
+                sub.textContent = `Entries: ${data.length}`;
+
+                const ul = document.createElement('ul');
+                ul.className = 'log';
+
+                for (const row of data) {
+                    const li = document.createElement('li');
+                    li.className = 'item';
+
+                    li.innerHTML = `
+            <div class="meta">
+              <span class="date">${(row.date || '').toUpperCase()}</span>
+              <span class="type">${(row.type || 'Other').toUpperCase()}</span>
+            </div>
+            <div class="msg">${escapeHtml(row.text || '')}</div>
+          `;
+                    ul.appendChild(li);
+                }
+
+                out.innerHTML = '';
+                out.appendChild(ul);
+            } catch (e) {
+                sub.textContent = 'Failed to load changelog.json';
+                out.innerHTML = `<div class="err">ERROR // ${escapeHtml(String(e.message || e))}</div>`;
+            }
+        }
+
+        function escapeHtml(s) {
+            return s.replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+        }
+
+        loadLog();
+    </script>
+</body>
+
+</html>
