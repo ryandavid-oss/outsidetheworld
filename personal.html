@@ -431,6 +431,17 @@
             background: var(--reader-surface);
             border-color: var(--reader-border);
             color: var(--reader-text);
+            /* Reader UI (typewriter + overflow button) */
+            --reader-ui: var(--brand-teal);
+
+            /* Overflow trigger defaults (VOID) */
+            --overflow-fg: var(--brand-light-blue);
+            --overflow-border: rgba(160, 190, 245, 0.2);
+            --overflow-bg: rgba(160, 190, 245, 0.02);
+            --overflow-hover-fg: #fff;
+            --overflow-hover-bg: rgba(160, 190, 245, 0.1);
+            --overflow-hover-border: var(--brand-blue);
+            --overflow-hover-shadow: 0 0 20px rgba(99, 149, 238, 0.4);
         }
 
         .feed-column[data-reader-mode="light"] {
@@ -447,6 +458,15 @@
 
             --reader-link: #0a6c70;
             --reader-link-border: rgba(10, 108, 112, 0.35);
+            --reader-ui: var(--reader-accent);
+
+            --overflow-fg: var(--reader-accent);
+            --overflow-border: var(--reader-border);
+            --overflow-bg: rgba(0, 0, 0, 0.03);
+            --overflow-hover-fg: #fff;
+            --overflow-hover-bg: var(--reader-accent);
+            --overflow-hover-border: var(--reader-accent);
+            --overflow-hover-shadow: none;
         }
 
         .feed-column[data-reader-mode="sepia"] {
@@ -463,6 +483,15 @@
 
             --reader-link: #1b6a5c;
             --reader-link-border: rgba(27, 106, 92, 0.35);
+            --reader-ui: var(--reader-accent);
+
+            --overflow-fg: var(--reader-accent);
+            --overflow-border: var(--reader-border);
+            --overflow-bg: rgba(25, 15, 10, 0.04);
+            --overflow-hover-fg: #fff;
+            --overflow-hover-bg: var(--reader-accent);
+            --overflow-hover-border: var(--reader-accent);
+            --overflow-hover-shadow: none;
         }
 
         .feed-topbar {
@@ -557,6 +586,29 @@
             text-align: center;
             border-top: 1px solid var(--reader-divider);
             padding-top: 50px;
+        }
+
+        /* Make the typewriter label follow reader mode */
+        .feed-column .typing-container {
+            color: var(--reader-ui);
+        }
+
+        .feed-column .cursor {
+            background: var(--reader-ui);
+        }
+
+        /* Make SIGNAL_OVERFLOW follow reader mode */
+        .feed-column .overflow-trigger {
+            color: var(--overflow-fg);
+            border-color: var(--overflow-border);
+            background: var(--overflow-bg);
+        }
+
+        .feed-column .overflow-trigger:hover {
+            color: var(--overflow-hover-fg);
+            background: var(--overflow-hover-bg);
+            border-color: var(--overflow-hover-border);
+            box-shadow: var(--overflow-hover-shadow);
         }
 
         @media (max-width: 1024px) {
