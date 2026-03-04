@@ -2,31 +2,89 @@
 <html lang="en">
 
 <head>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-YKRKPFV2MB"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-YKRKPFV2MB');
-</script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-
-    <meta name="theme-color" content="var(--bg-dark)">
-
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-
+    <!-- Core -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>OTW Feed | Outside The World</title>
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,300;0,400;0,700;0,900&display=swap');
 
+    <!-- SEO / Share -->
+    <meta name="description"
+        content="The Outside The World feed — latest signal plus navigation into archives, flotsam, and beacons." />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#0a0a0a" />
+
+    <!-- Canonical (update the filename if this page isn't actually /personal.html) -->
+    <link rel="canonical" href="https://outsidetheworld.com/personal.html" />
+
+    <!-- Open Graph (iMessage / socials) -->
+    <meta property="og:site_name" content="Outside The World" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="OTW Feed | Outside The World" />
+    <meta property="og:description"
+        content="A quarter-century of digital residue — the latest signal plus navigation into the archives." />
+    <meta property="og:url" content="https://outsidetheworld.com/personal.html" />
+    <meta property="og:image" content="https://outsidetheworld.com/Images/og/otw-feed-1200x630.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Outside The World — OTW Feed" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="OTW Feed | Outside The World" />
+    <meta name="twitter:description" content="Latest signal + navigation into the archives of Outside The World." />
+    <meta name="twitter:image" content="https://outsidetheworld.com/Images/og/otw-feed-1200x630.jpg" />
+
+    <!-- App-like -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Outside The World" />
+    <meta name="application-name" content="Outside The World" />
+
+    <!-- Icons -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="icon" href="favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="Images/icons/apple-touch-icon.png" />
+    <link rel="manifest" href="site.webmanifest" />
+
+    <!-- Fonts (replaces @import; ensures Inter + Fira Code + IBM Plex Serif actually load) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Fira+Code:wght@300;400;700&family=IBM+Plex+Serif:ital,wght@0,300;0,400;0,700;0,900&display=swap" />
+
+    <!-- Base theme FIRST, then page overrides -->
+    <link rel="stylesheet" href="theme.css" />
+
+    <!-- GA -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YKRKPFV2MB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-YKRKPFV2MB');
+    </script>
+
+    <!-- Structured data (optional but helpful) -->
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "OTW Feed | Outside The World",
+    "url": "https://outsidetheworld.com/personal.html",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Outside The World",
+      "url": "https://outsidetheworld.com/"
+    }
+  }
+  </script>
+
+    <style>
         :root {
-            /* We only keep variables unique to this page. 
-       The core colors now come from theme.css */
+            /* We only keep variables unique to this page.
+         The core colors now come from theme.css */
             --warm-amber: #FFB347;
             --rose-gold: #E0BFB8;
             --amethyst: #9b59b6;
@@ -43,18 +101,19 @@
         /* 1. GLOBAL & MOBILE BLACKOUT */
         body {
             background-color: var(--bg-dark);
-            /* UPDATED: High-Luminance Off-White for readability  */
             color: #eeeeee;
-            font-family: 'Inter', sans-serif;
+            font-family: var(--font-main);
             margin: 0;
+
+            /* Safe-area padding for notched devices */
             padding-top: env(safe-area-inset-top);
             padding-bottom: env(safe-area-inset-bottom);
             padding-left: env(safe-area-inset-left);
             padding-right: env(safe-area-inset-right);
+
             overflow-x: hidden;
             min-height: 100vh;
 
-            /* Sharp Text Rendering */
             -webkit-font-smoothing: antialiased;
             text-rendering: optimizeLegibility;
         }
@@ -75,13 +134,18 @@
             transform: translateZ(0);
         }
 
+        /* Keyboard focus (no visual change for mouse users) */
+        :focus-visible {
+            outline: 2px solid var(--brand-teal);
+            outline-offset: 3px;
+        }
+
         /* 2. SYMMETRICAL HEADER */
         .interface-header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            /* BUMPED: Must be higher than the 9999 wash  */
             z-index: 11000;
             backdrop-filter: blur(15px);
             background: linear-gradient(to bottom, rgba(5, 5, 5, 1) 60%, rgba(5, 5, 5, 0) 100%);
@@ -100,8 +164,10 @@
             box-sizing: border-box;
         }
 
-        .nav-logo {
+        /* Override theme.css nav-logo size for this header only */
+        .interface-header .nav-logo {
             width: 240px;
+            height: auto;
             filter: drop-shadow(0 0 20px rgba(99, 149, 238, 0.2));
         }
 
@@ -110,7 +176,7 @@
         }
 
         .weather-uplink {
-            font-family: 'Fira Code', monospace;
+            font-family: var(--font-code);
             font-size: 0.65rem;
             color: var(--brand-teal);
             letter-spacing: 2px;
@@ -179,7 +245,6 @@
             animation: draw-right-bottom 1.2s ease-out forwards;
         }
 
-        /* THE TRON TRACE REPAIR */
         @keyframes draw-top-left {
             0% {
                 width: 0;
@@ -200,7 +265,6 @@
                 height: 100%;
                 right: 0;
                 top: 0;
-                /* THE FIX: Re-assert the TOP line as a border when background goes transparent */
                 border-top: 2px solid var(--brand-teal);
                 border-left: 2px solid var(--brand-teal);
                 background: transparent;
@@ -228,7 +292,6 @@
                 width: 100%;
                 top: 0;
                 right: 0;
-                /* THE FIX: Re-assert the RIGHT line as a border when background goes transparent */
                 border-right: 2px solid var(--brand-teal);
                 border-bottom: 2px solid var(--brand-teal);
                 background: transparent;
@@ -238,7 +301,7 @@
 
         /* 4. POST CONTENT TYPOGRAPHY */
         .typing-container {
-            font-family: 'Fira Code', monospace;
+            font-family: var(--font-code);
             font-size: 0.7rem;
             color: var(--brand-teal);
             letter-spacing: 3px;
@@ -279,7 +342,7 @@
         }
 
         .post-date {
-            font-family: 'Fira Code', sans-serif;
+            font-family: var(--font-code);
             font-size: 0.8rem;
             color: var(--brand-light-blue);
             margin-bottom: 30px;
@@ -294,16 +357,13 @@
         #md-render {
             font-family: 'IBM Plex Serif', serif;
             line-height: 1.85;
-            /* Increased for better line-tracking */
-            /* UPDATED: Boosted from #d1d1d1 to high-contrast off-white */
             color: #eeeeee;
             font-size: 1.05rem;
             font-weight: 300;
         }
 
         #md-render p {
-            margin-bottom: 1.5rem;
-            margin-top: 0;
+            margin: 0 0 1.5rem 0;
         }
 
         #md-render p:last-child {
@@ -317,6 +377,30 @@
             margin: 30px 0;
             display: block;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        /* --- OVERCLOCKED BOLD TEXT --- */
+        #md-render strong {
+            font-family: var(--font-main);
+            font-weight: 900;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+            text-shadow: 0 0 2px rgba(255, 255, 255, 0.3);
+        }
+
+        /* --- TERMINAL LINK STYLING --- */
+        #md-render a {
+            color: var(--brand-teal);
+            text-decoration: none;
+            font-weight: 700;
+            border-bottom: 1px dashed rgba(145, 175, 179, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        #md-render a:hover {
+            color: #fff;
+            border-bottom: 1px solid var(--brand-teal);
+            text-shadow: 0 0 10px var(--brand-teal), 0 0 20px rgba(145, 175, 179, 0.4);
         }
 
         .vertical-divider {
@@ -334,7 +418,7 @@
         }
 
         .column-label {
-            font-family: 'Fira Code';
+            font-family: var(--font-code);
             font-size: 0.65rem;
             color: var(--brand-teal);
             letter-spacing: 4px;
@@ -353,7 +437,6 @@
             background: var(--border-teal);
         }
 
-        /* BASE CARD STYLE */
         .archive-card {
             display: block;
             padding: 35px;
@@ -363,7 +446,6 @@
             transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
             background: rgba(255, 255, 255, 0.01);
             border: 1px solid rgba(255, 255, 255, 0.05);
-            /* Idle State */
             margin-bottom: 5px;
         }
 
@@ -383,13 +465,11 @@
             margin: 0;
         }
 
-        /* HOVER REACTION (Same for everyone) */
         .archive-card:hover {
             transform: translateX(10px);
         }
 
         /* COLOR THEMES */
-        /* Teal Theme (Locked Past, Flotsam) */
         .teal-card {
             border-color: rgba(145, 175, 179, 0.2);
         }
@@ -408,7 +488,6 @@
             opacity: 1;
         }
 
-        /* Amethyst Theme (Matrix, Transition) */
         .amethyst-card {
             border-color: rgba(155, 89, 182, 0.2);
         }
@@ -427,7 +506,6 @@
             opacity: 1;
         }
 
-        /* Sacred Theme (Warm Breeze) */
         .sacred-card {
             border-color: rgba(255, 179, 71, 0.2);
         }
@@ -446,7 +524,6 @@
             opacity: 1;
         }
 
-        /* Dossier Theme (Resume) */
         .dossier-card {
             border-color: rgba(99, 149, 238, 0.2);
         }
@@ -543,23 +620,18 @@
             transition: border-color 0.4s ease;
         }
 
-        /* 1. THE DESCRIPTION (CRISP & CENTERED) */
         .provisions-meta {
             text-align: center;
             padding: 25px 20px;
-            /* Gives the text room from the image and the button */
-            font-family: 'Fira Code', monospace;
+            font-family: var(--font-code);
             font-size: 0.65rem;
-            /* Explicitly small */
             line-height: 1.8;
             color: var(--brand-teal);
             letter-spacing: 2px;
             text-transform: uppercase;
             background: rgba(5, 5, 5, 0.2);
-            /* Subtle separation from the card background */
         }
 
-        /* 2. THE BUY BUTTON (ISOLATED) */
         .buy-btn {
             display: block;
             width: 100%;
@@ -567,9 +639,8 @@
             background: var(--brand-blue);
             color: var(--bg-dark);
             text-decoration: none;
-            font-family: 'Fira Code', monospace;
+            font-family: var(--font-code);
             font-size: 1.1rem;
-            /* Adjust this here; it won't affect the meta anymore */
             font-weight: 700;
             padding: 16px;
             border: none;
@@ -582,22 +653,18 @@
         .provisions-display {
             position: relative;
             height: 350px;
-            /* Increased height to give the shirt room to breathe */
             background: var(--brand-light-blue);
             display: flex;
             justify-content: center;
             align-items: center;
             overflow: hidden;
             padding: 20px;
-            /* Internal buffer so the shirt doesn't hit the edges */
         }
 
         .shirt-render {
             max-width: 100%;
             max-height: 100%;
-            /* Changed from height: 100% to max-height */
             object-fit: contain;
-            /* Changed from cover to contain to ensure the whole shirt is visible */
             transition: opacity 0.5s ease;
             filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2));
         }
@@ -605,20 +672,16 @@
         .provisions-overlay {
             position: absolute;
             bottom: 15px;
-            /* Nudged in from the edge */
             right: 15px;
-            /* Nudged in from the edge */
             z-index: 10;
         }
 
         .toggle-btn {
             background: rgba(5, 5, 5, 0.85);
-            /* Slightly darker for better legibility */
             border: 1px solid var(--brand-teal);
             color: var(--brand-teal);
-            font-family: 'Fira Code', monospace;
+            font-family: var(--font-code);
             font-size: 0.6rem;
-            /* Slightly larger for easier clicking */
             padding: 8px 12px;
             cursor: pointer;
             letter-spacing: 1px;
@@ -662,7 +725,6 @@
             align-items: center;
             justify-content: center;
             z-index: var(--z-modal);
-            /* Now guaranteed to be on top of the shroud */
         }
 
         .modal-content {
@@ -674,11 +736,10 @@
             box-shadow: 0 0 50px rgba(145, 175, 179, 0.2);
         }
 
-        /* SIGNAL OVERFLOW BUTTON - LIGHT BLUE THEME */
         .overflow-trigger {
             display: inline-block;
             padding: 15px 30px;
-            font-family: 'Fira Code', monospace;
+            font-family: var(--font-code);
             font-size: 0.7rem;
             color: var(--brand-light-blue);
             text-decoration: none;
@@ -689,9 +750,7 @@
             position: relative;
             overflow: hidden;
             cursor: pointer;
-            /* Ensures the hand icon appears */
             z-index: 10;
-            /* Keeps it above the background flair */
         }
 
         .overflow-trigger:hover {
@@ -702,23 +761,7 @@
             transform: translateY(-2px);
         }
 
-        /* THE TRON TRACE */
-        .overflow-trigger::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(160, 190, 245, 0.4), transparent);
-            transition: 0.5s;
-        }
-
-        .overflow-trigger:hover::after {
-            left: 100%;
-        }
-
-        /* THE TRON TRACE (Pseudo-element) */
+        /* SINGLE TRON TRACE (deduped) */
         .overflow-trigger::after {
             content: '';
             position: absolute;
@@ -734,14 +777,13 @@
             left: 100%;
         }
 
-        /* TERMINAL FORM REFINEMENT - THE BOUTIQUE GLOW */
         .modal-content input,
         .modal-content select,
         .modal-content textarea {
             background: rgba(255, 255, 255, 0.03) !important;
             border: 1px solid rgba(145, 175, 179, 0.2) !important;
             color: #fff !important;
-            font-family: 'Fira Code', monospace;
+            font-family: var(--font-code);
             font-size: 0.7rem;
             padding: 14px;
             border-radius: 0;
@@ -766,7 +808,6 @@
             box-shadow: 0 0 15px rgba(99, 149, 238, 0.2);
         }
 
-        /* Mandatory Field Pulse */
         input:required:invalid {
             border-bottom: 1px solid rgba(255, 77, 77, 0.3) !important;
         }
@@ -784,14 +825,15 @@
             background: none;
             border: none;
             color: var(--brand-teal);
-            font-family: 'Fira Code', monospace;
+            font-family: var(--font-code);
             cursor: pointer;
             font-size: 0.8rem;
             transition: 0.3s;
+            padding: 8px 10px;
         }
 
         .form-disclaimer {
-            font-family: 'Fira Code', monospace;
+            font-family: var(--font-code);
             font-size: 0.55rem;
             color: rgba(145, 175, 179, 0.4);
             letter-spacing: 1px;
@@ -809,61 +851,25 @@
             margin-bottom: 5px;
         }
 
-        /* --- OVERCLOCKED BOLD TEXT --- */
-        #md-render strong {
-            /* We switch to Inter for bold words because it has a 900 "Black" weight */
-            font-family: 'Inter', sans-serif;
-            font-weight: 900;
-            color: #ffffff;
-            /* Pure white for maximum contrast */
-            letter-spacing: 0.5px;
-            /* Give the heavy letters a tiny bit of room */
-
-            /* THE "PHOSPHOR BLEED"  */
-            /* This adds "visual mass" to the letters so they don't look thin on mobile */
-            text-shadow: 0 0 2px rgba(255, 255, 255, 0.3);
-        }
-
-        /* --- TERMINAL LINK STYLING --- */
-        #md-render a {
-            color: var(--brand-teal);
-            /* Or brand-blue */
-            text-decoration: none;
-            font-weight: 700;
-            border-bottom: 1px dashed rgba(145, 175, 179, 0.4);
-            transition: all 0.3s ease;
-        }
-
-        #md-render a:hover {
-            color: #fff;
-            border-bottom: 1px solid var(--brand-teal);
-            /* The "High-Output" Glow  */
-            text-shadow: 0 0 10px var(--brand-teal), 0 0 20px rgba(145, 175, 179, 0.4);
-        }
-
         /* --- JUMP STRIP STYLING --- */
         .mobile-jump-strip {
             display: none;
             width: 100%;
-            /* BUMPED: More visible opacity for the "glass"  */
             background: rgba(145, 175, 179, 0.15);
             border-top: 1px solid var(--border-teal);
             border-bottom: 1px solid var(--border-teal);
             backdrop-filter: blur(10px);
             position: sticky;
-            /* CALIBRATED: Matches your mobile margin-top  */
             top: 260px;
             z-index: 10500;
         }
 
         .jump-btn {
-            /* BRAND BLUE THEME: Differentiates from the teal blog */
             background: var(--brand-blue) !important;
             color: var(--bg-dark) !important;
             padding: 12px 25px;
             border-radius: 50px;
-            /* Rounded corners */
-            font-family: 'Fira Code', monospace;
+            font-family: var(--font-code);
             font-size: 0.7rem;
             font-weight: 700;
             letter-spacing: 2px;
@@ -872,13 +878,15 @@
             align-items: center;
             gap: 12px;
             box-shadow: 0 5px 20px rgba(99, 149, 238, 0.4);
-            /* High-tech glow */
         }
 
         .pulse-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 999px;
             background: var(--bg-dark);
-            /* Contrast dot */
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+            animation: beaconPulse 1.6s infinite;
         }
 
         @keyframes beaconPulse {
@@ -898,30 +906,28 @@
             }
         }
 
-        /* MOBILE MEDIA QUERY OVERRIDE */
         @media (max-width: 1024px) {
             .mobile-jump-strip {
                 display: block;
-                /* Activate for Mobile */
             }
         }
 
         /* --- 8. REFINED MOBILE ALIGNMENT --- */
         @media (max-width: 1024px) {
 
-            /* 1. RESET THE FRAME */
+            /* Keep safe-area top/bottom (don’t hard-zero everything) */
             body {
-                padding: 0 !important;
+                padding-top: env(safe-area-inset-top) !important;
+                padding-bottom: env(safe-area-inset-bottom) !important;
+                padding-left: 0 !important;
+                padding-right: 0 !important;
             }
 
-            /* 2. LOCKED HEADER (Fixes Title Overlap) */
             .interface-header {
                 position: fixed;
                 height: 220px;
-                /* Adjusted to tighten the 'out of whack' look */
                 z-index: 11000;
                 background: #050505;
-                /* Solid black to block scrolling text */
                 border-bottom: 1px solid rgba(145, 175, 179, 0.1);
             }
 
@@ -934,9 +940,8 @@
                 justify-content: center;
             }
 
-            .nav-logo {
+            .interface-header .nav-logo {
                 width: 140px;
-                /* Smaller footprint for mobile */
                 margin: 0 auto 5px;
             }
 
@@ -946,7 +951,6 @@
                 line-height: 1.4 !important;
                 margin: 0 !important;
                 width: 100%;
-                /* Use Flexbox to ensure both lines are perfectly centered */
                 display: flex;
                 flex-direction: column;
                 align-items: center;
@@ -959,21 +963,17 @@
             .top-quadrant-text .mobile-break {
                 display: block;
                 width: fit-content;
-                /* Ensures it centers based on its own width */
                 margin: 4px auto 0 !important;
                 font-weight: 900;
             }
 
-            /* 3. THE STICKY NAV REPAIR (No more big space) */
             .mobile-jump-strip {
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 width: 100%;
-                /* INCREASED PADDING: Creates the gap between header and blog */
                 padding: 20px 0 30px 0;
                 background: transparent;
-                /* Removes the dark bar */
                 border: none !important;
                 position: sticky;
                 top: 220px;
@@ -981,14 +981,11 @@
                 z-index: 10500;
             }
 
-            /* 4. EXPAND BLOG MARGINS */
             .main-interface {
-                /* Trimmed margin to remove the void after the header */
                 margin-top: 0 !important;
                 padding: 0 10px !important;
                 flex-direction: column;
                 gap: 0px;
-                /* Tightens the gap between strip and blog */
             }
 
             .feed-column {
@@ -996,7 +993,6 @@
                 width: 100%;
                 box-sizing: border-box;
                 background: rgba(145, 175, 179, 0.05);
-                /* REMOVE TOP BORDER: Prevents the "Double Line" clash with the strip */
                 border-top: none !important;
             }
 
@@ -1006,7 +1002,6 @@
                 line-height: 1.7;
             }
 
-            /* 5. SIDEBAR & CARDS */
             .cards-column {
                 width: 100%;
             }
@@ -1026,19 +1021,28 @@
             }
 
             #warm-breeze-target {
-                /* Adds a "landing pad" so the card doesn't hit the nav bar too hard */
                 margin-top: 15px !important;
             }
         }
+
+        /* Motion safety (no visual change for most users) */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+                scroll-behavior: auto !important;
+            }
+        }
     </style>
-    <link rel="stylesheet" href="theme.css">
 </head>
 
 <body>
 
     <header class="interface-header">
         <div class="header-content-inner">
-            <a href="index.html"><img src="Images/Equal.svg" alt="Back" class="nav-logo"></a>
+            <a href="index.html" aria-label="Back to home">
+                <img src="Images/Equal.svg" alt="Outside The World home" class="nav-logo" decoding="async">
+            </a>
             <div class="header-right">
                 <div class="weather-uplink" id="system-clock">SYSTEM_TIME // --:--:--</div>
                 <h1 class="top-quadrant-text">
@@ -1047,9 +1051,10 @@
             </div>
         </div>
     </header>
+
     <nav class="mobile-jump-strip" id="jump-strip">
-        <button onclick="scrollToCards()" class="jump-btn">
-            <span class="pulse-dot"></span>
+        <button type="button" onclick="scrollToCards()" class="jump-btn">
+            <span class="pulse-dot" aria-hidden="true"></span>
             ACCESS SITE NAV (SKIP BLOG)
         </button>
     </nav>
@@ -1057,7 +1062,7 @@
     <main class="main-interface">
         <section class="feed-column">
             <div class="typing-container">
-                <span id="typing-text">INITIALIZING_HANDSHAKE...</span><span class="cursor"></span>
+                <span id="typing-text">INITIALIZING_HANDSHAKE...</span><span class="cursor" aria-hidden="true"></span>
             </div>
 
             <div id="latest-post-area">
@@ -1065,50 +1070,53 @@
             </div>
         </section>
 
-        <div class="vertical-divider"></div>
+        <div class="vertical-divider" aria-hidden="true"></div>
 
         <aside class="cards-column" id="sub-sections">
 
             <div class="column-label">01 // SUB_SECTIONS</div>
 
             <a href="emmy.html" id="warm-breeze-target" class="archive-card sacred-card">
-                <div class="card-beacon"></div>
+                <div class="card-beacon" aria-hidden="true"></div>
                 <h3>THE WARM BREEZE</h3>
                 <p>Sun. Moon. Stars. The Core Sanctuary.</p>
             </a>
 
             <a href="residue_archive.html" class="archive-card amethyst-card">
-                <div class="card-beacon"></div>
+                <div class="card-beacon" aria-hidden="true"></div>
                 <h3>THE NEW ARCHIVE</h3>
                 <p>Modern Narrative Archive // 2026 - Present</p>
             </a>
 
             <a href="wayback.html" class="archive-card teal-card">
-                <div class="card-beacon"></div>
+                <div class="card-beacon" aria-hidden="true"></div>
                 <h3>The Static Past</h3>
                 <p>Historical residue from 2001 to 2025.</p>
             </a>
+
             <a href="flotsam.html" class="archive-card teal-card">
-                <div class="card-beacon"></div>
+                <div class="card-beacon" aria-hidden="true"></div>
                 <h3>The Flotsam</h3>
                 <p>Visual depot and verbal residue.</p>
             </a>
+
             <a href="resume.html" class="archive-card dossier-card">
-                <div class="card-beacon"></div>
+                <div class="card-beacon" aria-hidden="true"></div>
                 <h3>The Curriculum Vitae</h3>
                 <p>Professional history // Inquires</p>
             </a>
 
             <a href="transform_gate.html" class="archive-card amethyst-card">
-                <div class="card-beacon"></div>
+                <div class="card-beacon" aria-hidden="true"></div>
                 <h3>The Transform</h3>
                 <p>Spiritual Truth // fundamental identity.</p>
             </a>
+
             <div class="column-label">02 // LIVE_LISTENING_SIGNAL</div>
             <div class="podcast-widget" id="listening-feed"
                 style="transition: 0.5s; border: 1px solid rgba(145, 175, 179, 0.1);">
                 <div class="podcast-item" style="margin-bottom: 0;">
-                    <div class="podcast-icon" id="signal-status">📡</div>
+                    <div class="podcast-icon" id="signal-status" aria-hidden="true">📡</div>
                     <div class="podcast-info">
                         <span id="current-track" style="color: #fff; text-transform: uppercase;">SYNCHRONIZING...</span>
                         <label id="current-artist"
@@ -1120,45 +1128,52 @@
             <div class="column-label">03 // PROVISIONS_UPLINK</div>
             <div class="provisions-card">
                 <div class="provisions-display">
-                    <img src="Images/OTW_Shirt_Front.png" alt="OTW Shirt" class="shirt-render" id="shirt-img">
+                    <img src="Images/OTW_Shirt_Front.png" alt="OTW Shirt" class="shirt-render" id="shirt-img"
+                        decoding="async" width="1200" height="1200">
                     <div class="provisions-overlay">
-                        <button class="toggle-btn" onclick="toggleShirt()">VIEW FRONT/BACK</button>
+                        <button type="button" class="toggle-btn" onclick="toggleShirt()">VIEW FRONT/BACK</button>
                     </div>
                 </div>
                 <div class="provisions-meta">
                     THE_OTW_LIMITED_ISSUE<br>
                     Premium Black Cotton // Screen-Printed // Boutique Release // Color may vary
                 </div>
-                <button onclick="openProvisionsForm()" class="buy-btn">BUY_NOW // $24</button>
+                <button type="button" onclick="openProvisionsForm()" class="buy-btn">BUY_NOW // $24</button>
             </div>
         </aside>
     </main>
 
-    <div id="provisions-overlay" class="modal-overlay">
+    <div id="provisions-overlay" class="modal-overlay" role="dialog" aria-modal="true" aria-hidden="true"
+        aria-labelledby="provisions-title">
         <div class="modal-content">
             <div class="modal-header">
-                <span class="column-label">T-SHIRT_REQUEST_PROTOCOL</span>
-                <button onclick="closeProvisionsForm()" class="close-x">[X]</button>
+                <span class="column-label" id="provisions-title">T-SHIRT_REQUEST_PROTOCOL</span>
+                <button type="button" onclick="closeProvisionsForm()" class="close-x"
+                    aria-label="Close modal">[X]</button>
             </div>
 
             <form action="https://formspree.io/f/xgolrnkb" method="POST" class="provisions-form">
                 <input type="hidden" name="_subject" value="NEW_OTW_SHIRT_ORDER">
 
                 <div style="display: flex; gap: 10px; margin-bottom: 10px;">
-                    <input type="text" name="name" placeholder="FULL NAME" required>
-                    <input type="email" name="_replyto" placeholder="YOUR EMAIL" required>
+                    <input type="text" name="name" placeholder="FULL NAME" required autocomplete="name"
+                        aria-label="Full name">
+                    <input type="email" name="_replyto" placeholder="YOUR EMAIL" required autocomplete="email"
+                        aria-label="Email address">
                 </div>
 
                 <div style="margin-bottom: 10px; position: relative;">
                     <input type="text" id="venmo-input" name="venmo" placeholder="VENMO @HANDLE (FOR INVOICING)"
-                        required pattern="^@.*" oninput="validateVenmo(this)">
+                        required pattern="^@.*" oninput="validateVenmo(this)" autocomplete="off"
+                        aria-label="Venmo handle">
                     <div id="venmo-status"
-                        style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); font-family: 'Fira Code'; font-size: 0.5rem; color: rgba(145, 175, 179, 0.3); pointer-events: none; transition: 0.3s;">
-                        WAITING_FOR_UPLINK</div>
+                        style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); font-family: var(--font-code); font-size: 0.5rem; color: rgba(145, 175, 179, 0.3); pointer-events: none; transition: 0.3s;">
+                        WAITING_FOR_UPLINK
+                    </div>
                 </div>
 
                 <div style="display: flex; gap: 10px; margin-bottom: 10px;">
-                    <select name="size" required style="flex: 2;">
+                    <select name="size" required style="flex: 2;" aria-label="Shirt size">
                         <option value="" disabled selected>SELECT_SIZE</option>
                         <option value="S">SMALL</option>
                         <option value="M">MEDIUM</option>
@@ -1166,13 +1181,15 @@
                         <option value="XL">X-LARGE</option>
                         <option value="2XL">2X-LARGE</option>
                     </select>
-                    <input type="number" name="quantity" placeholder="QTY" min="1" value="1" style="flex: 1;">
+                    <input type="number" name="quantity" placeholder="QTY" min="1" value="1" style="flex: 1;"
+                        inputmode="numeric" aria-label="Quantity">
                 </div>
 
-                <textarea name="address" placeholder="SHIPPING ADDRESS" rows="3" required
-                    style="margin-bottom: 20px;"></textarea>
+                <textarea name="address" placeholder="SHIPPING ADDRESS" rows="3" required style="margin-bottom: 20px;"
+                    autocomplete="shipping street-address" aria-label="Shipping address"></textarea>
 
                 <button type="submit" id="submit-btn" class="buy-btn">SUBMIT ORDER</button>
+
                 <div class="form-disclaimer">
                     <span class="disclaimer-alert">[!_SECURITY_ADVISORY_!]</span>
                     PROVISIONS_UPLINK IS NOT ENCRYPTED FOR FINANCIAL DATA.<br>
@@ -1196,9 +1213,31 @@
         function runTypewriterProtocol() {
             const state1 = "SYNCHRONIZING...";
             const state2 = "Welcome Human Visitor // Enjoy Your Stay in the Residue";
-            let i = 0; typeTarget.innerHTML = "";
-            function typeState1() { if (i < state1.length) { typeTarget.innerHTML += state1.charAt(i); i++; setTimeout(typeState1, 100); } else { setTimeout(() => { i = 0; typeTarget.innerHTML = ""; typeState2(); }, 800); } }
-            function typeState2() { if (i < state2.length) { typeTarget.innerHTML += state2.charAt(i); i++; setTimeout(typeState2, 80); } }
+            let i = 0;
+            typeTarget.innerHTML = "";
+
+            function typeState1() {
+                if (i < state1.length) {
+                    typeTarget.innerHTML += state1.charAt(i);
+                    i++;
+                    setTimeout(typeState1, 100);
+                } else {
+                    setTimeout(() => {
+                        i = 0;
+                        typeTarget.innerHTML = "";
+                        typeState2();
+                    }, 800);
+                }
+            }
+
+            function typeState2() {
+                if (i < state2.length) {
+                    typeTarget.innerHTML += state2.charAt(i);
+                    i++;
+                    setTimeout(typeState2, 80);
+                }
+            }
+
             typeState1();
         }
 
@@ -1213,10 +1252,49 @@
             });
             document.getElementById('system-clock').textContent = `SYSTEM_TIME // ${timeString} MST`;
         }
+
+        updateClock();
         setInterval(updateClock, 1000);
-        // --- PROVISIONS UI LOGIC ---
-        function openProvisionsForm() { document.getElementById('provisions-overlay').style.display = 'flex'; }
-        function closeProvisionsForm() { document.getElementById('provisions-overlay').style.display = 'none'; }
+
+        // --- PROVISIONS UI LOGIC (improved mobile behavior + ARIA) ---
+        let lastFocusedEl = null;
+
+        function openProvisionsForm() {
+            const overlay = document.getElementById('provisions-overlay');
+            lastFocusedEl = document.activeElement;
+
+            overlay.style.display = 'flex';
+            overlay.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+
+            // focus first input
+            const firstInput = overlay.querySelector('input, select, textarea, button');
+            if (firstInput) firstInput.focus();
+        }
+
+        function closeProvisionsForm() {
+            const overlay = document.getElementById('provisions-overlay');
+            overlay.style.display = 'none';
+            overlay.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+
+            if (lastFocusedEl && typeof lastFocusedEl.focus === 'function') {
+                lastFocusedEl.focus();
+            }
+        }
+
+        // Close modal via ESC and backdrop click
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const overlay = document.getElementById('provisions-overlay');
+                if (overlay && overlay.style.display === 'flex') closeProvisionsForm();
+            }
+        });
+
+        document.getElementById('provisions-overlay').addEventListener('click', (e) => {
+            if (e.target.id === 'provisions-overlay') closeProvisionsForm();
+        });
+
         function toggleShirt() {
             const img = document.getElementById('shirt-img');
             img.src = img.src.includes('Front') ? 'Images/OTW_Shirt_Back.png' : 'Images/OTW_Shirt_Front.png';
@@ -1227,43 +1305,34 @@
             const contentArea = document.getElementById('latest-post-area');
 
             if (typeof current_narrative !== 'undefined' && current_narrative.length > 0) {
-
                 const displayFeed = current_narrative.slice(0, 1);
 
                 contentArea.innerHTML = displayFeed.map((post) => {
                     return `
-                <article class="residue-signal">
-                    <div style="font-family: 'Fira Code'; font-size: 1rem; font-weight: 700; color: var(--brand-blue); letter-spacing: 3px; margin-bottom: 15px; text-shadow: 0 0 10px rgba(99, 149, 238, 0.3);">
-                        ${post.date.toUpperCase()}
-                    </div>
+            <article class="residue-signal">
+              <div style="font-family: var(--font-code); font-size: 1rem; font-weight: 700; color: var(--brand-blue); letter-spacing: 3px; margin-bottom: 15px; text-shadow: 0 0 10px rgba(99, 149, 238, 0.3);">
+                ${post.date.toUpperCase()}
+              </div>
 
-                    <h2 style="font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 900; color: #fff; margin: 0 0 25px 0; letter-spacing: -1px; line-height: 1.1;">
-                        ${post.title}
-                    </h2>
+              <h2 style="font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 900; color: #fff; margin: 0 0 25px 0; letter-spacing: -1px; line-height: 1.1;">
+                ${post.title}
+              </h2>
 
-                    <style>
-                        #md-render p:first-child { margin-top: 0; }
-                        #md-render p { margin-bottom: 1.5rem; }
-                    
-/* THE CLEAN ATMOSPHERIC WASH */
-
-    </style>
-
-                    <div id="md-render">
-                        ${marked.parse(post.body)}
-                    </div>
-                </article>
-            `;
+              <div id="md-render">
+                ${marked.parse(post.body)}
+              </div>
+            </article>
+          `;
                 }).join('');
 
                 if (current_narrative.length > 1) {
                     contentArea.innerHTML += `
-        <div style="margin-top: 80px; text-align: center; border-top: 1px solid rgba(145,175,179,0.1); padding-top: 50px;">
-            <a href="residue_archive.html" class="overflow-trigger">
+            <div style="margin-top: 80px; text-align: center; border-top: 1px solid rgba(145,175,179,0.1); padding-top: 50px;">
+              <a href="residue_archive.html" class="overflow-trigger">
                 SIGNAL_OVERFLOW // ACCESS_MATRIX_ARCHIVE [${current_narrative.length - 1}_ADDITIONAL_ENTRIES]
-            </a>
-        </div>
-    `;
+              </a>
+            </div>
+          `;
                 }
 
                 runTypewriterProtocol();
@@ -1271,21 +1340,22 @@
                 contentArea.innerHTML = "<div class='timestamp-glitch'>WAITING_FOR_2026_SIGNAL...</div>";
             }
         }
-        // Initialize everything
-        window.onload = () => {
+
+        // Initialize
+        window.addEventListener('load', () => {
             syncLatestPost();
-            updateClock();
-        };
+        });
+
+        // --- FORM SUBMIT (No Redirect) ---
         const provisionsForm = document.querySelector('.provisions-form');
 
         if (provisionsForm) {
             provisionsForm.onsubmit = async (e) => {
-                e.preventDefault(); // This is the "No Redirect" kill-switch
+                e.preventDefault();
 
                 const btn = document.getElementById('submit-btn');
                 const originalText = btn.innerText;
 
-                // 1. Enter "Transmitting" Mode
                 btn.innerText = "TRANSMITTING_UPLINK...";
                 btn.disabled = true;
                 btn.style.opacity = "0.7";
@@ -1300,35 +1370,34 @@
                     });
 
                     if (response.ok) {
-                        // 2. The Success Signal
                         btn.innerText = "REQUEST_TRANSMITTED";
-                        btn.style.background = "var(--brand-teal)"; // The color of the Archive
+                        btn.style.background = "var(--brand-teal)";
                         btn.style.color = "var(--bg-dark)";
                         btn.style.opacity = "1";
 
-                        // Keep the success message visible for 3 seconds so they can read it
                         setTimeout(() => {
                             closeProvisionsForm();
                             provisionsForm.reset();
 
-                            // Reset the button for the next customer
                             btn.innerText = originalText;
                             btn.disabled = false;
                             btn.style.background = "";
                             btn.style.color = "";
+                            btn.style.opacity = "";
                         }, 3000);
                     } else {
-                        // Handle server errors
                         btn.innerText = "SIGNAL_INTERRUPTED";
                         btn.disabled = false;
+                        btn.style.opacity = "";
                     }
                 } catch (error) {
-                    // Handle connection/network errors
                     btn.innerText = "UPLINK_TIMEOUT";
                     btn.disabled = false;
+                    btn.style.opacity = "";
                 }
             };
         }
+
         function validateVenmo(input) {
             const status = document.getElementById('venmo-status');
             const value = input.value.trim();
@@ -1347,6 +1416,7 @@
                 input.style.borderColor = "";
             }
         }
+
         // --- LAST.FM SIGNAL UPLINK ---
         const LFM_API_KEY = '0cb4714c22caddc9beedf7afe2e35284';
         const LFM_USER = 'ryandavid_rylee';
@@ -1364,13 +1434,13 @@
                 const data = await response.json();
                 const latest = data.recenttracks.track[0];
 
-                // Check if the "nowplaying" attribute exists and is true
                 const isLive = latest['@attr'] && latest['@attr'].nowplaying === 'true';
 
                 trackTarget.innerText = latest.name.toUpperCase();
-                artistTarget.innerText = isLive ? `LIVE_NOW // ${latest.artist['#text'].toUpperCase()}` : `LAST_PLAYED // ${latest.artist['#text'].toUpperCase()}`;
+                artistTarget.innerText = isLive
+                    ? `LIVE_NOW // ${latest.artist['#text'].toUpperCase()}`
+                    : `LAST_PLAYED // ${latest.artist['#text'].toUpperCase()}`;
 
-                // Visual Feedback for Live Signal
                 if (isLive) {
                     statusIcon.innerText = "📶";
                     feedContainer.style.borderColor = "var(--brand-blue)";
@@ -1380,22 +1450,18 @@
                     feedContainer.style.borderColor = "rgba(145, 175, 179, 0.1)";
                     feedContainer.style.background = "rgba(145, 175, 179, 0.02)";
                 }
-
             } catch (e) {
                 trackTarget.innerText = "SIGNAL_LOST";
                 artistTarget.innerText = "CHECK_UPLINK_PROTOCOL";
             }
         }
 
-        // Initial sync and then every 30 seconds
         syncMusicSignal();
         setInterval(syncMusicSignal, 30000);
+
         // --- MOBILE NAVIGATION ANCHOR ---
         function scrollToCards() {
             const target = document.getElementById('warm-breeze-target');
-
-            // CALIBRATED OFFSET: Header + Jump Strip + Safety Buffer
-            // Increased to 340 to ensure the blog content is fully purged from view
             const offset = 140;
 
             const bodyRect = document.body.getBoundingClientRect().top;
