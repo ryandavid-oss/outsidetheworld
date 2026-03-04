@@ -2,6 +2,46 @@
 <html lang="en">
 
 <head>
+    <!-- Core -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta content="#0a0a0a" name="theme-color" />
+    <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style" />
+
+    <!-- Primary SEO -->
+    <title>Technical Advisory & Systems Research | Outside The World</title>
+    <meta name="description"
+        content="A professional archive and technical laboratory documenting 25 years of digital observation in Queen Creek, AZ 85142. Specializing in brand architecture and systems resilience.">
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta name="author" content="Outside The World New LLC" />
+    <link rel="canonical" href="https://outsidetheworld.com/professional.html" />
+
+    <!-- Icons -->
+    <link href="favicon.svg" rel="icon" type="image/svg+xml" />
+
+    <!-- Performance: Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;700&family=Inter:wght@100;300;400;700;900&display=swap"
+        rel="stylesheet" />
+
+    <!-- Social -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Outside The World" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="Outside The World | Technical Research Archive">
+    <meta property="og:description"
+        content="A quarter-century of technical observation and brand architecture research. Base of operations: Queen Creek, Arizona.">
+    <meta property="og:image" content="https://outsidetheworld.com/Images/SocialPreview.jpg">
+    <meta property="og:url" content="https://outsidetheworld.com/professional.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Outside The World | Technical Research Archive">
+    <meta name="twitter:description"
+        content="A quarter-century of technical observation and brand architecture research. Base of operations: Queen Creek, Arizona.">
+    <meta name="twitter:image" content="https://outsidetheworld.com/Images/SocialPreview.jpg">
+
+    <!-- Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-YKRKPFV2MB"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -10,220 +50,444 @@
         gtag('config', 'G-YKRKPFV2MB');
     </script>
 
-    <meta charset="utf-8" />
-    <title>Technical Advisory & Brand Systems Research | Outside The World</title>
-    <meta name="description"
-        content="A professional archive and technical laboratory documenting 25 years of digital observation in Queen Creek, AZ 85142. Specializing in brand architecture and systems resilience.">
-    <link href="favicon.svg" rel="icon" type="image/svg+xml" />
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta content="#0a0a0a" name="theme-color" />
-    <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style" />
-
-    <meta property="og:title" content="Outside The World | Technical Research Archive">
-    <meta property="og:description"
-        content="A quarter-century of technical observation and brand architecture research. Base of operations: Queen Creek, Arizona.">
-    <meta property="og:image" content="https://outsidetheworld.com/Images/SocialPreview.jpg">
-    <meta property="og:url" content="https://outsidetheworld.com/professional.html">
-    <meta name="twitter:card" content="summary_large_image">
-
+    <!-- Page CSS -->
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;700&family=Inter:wght@100;300;400;700;900&display=swap');
-
         :root {
-            /* Restored Hex Codes to prevent circular variable reference errors */
+            /* Brand */
             --brand-blue: #6395ee;
             --brand-teal: #91afb3;
             --brand-light-blue: #a3c2ff;
+
+            /* Surfaces */
             --bg-dark: #0a0a0a;
+            --bg-deeper: #070707;
             --card-bg: rgba(255, 255, 255, 0.03);
+
+            /* Borders / glow */
+            --border: rgba(255, 255, 255, 0.08);
+            --border-soft: rgba(255, 255, 255, 0.06);
+            --glow-blue: rgba(99, 149, 238, 0.35);
+            --glow-teal: rgba(145, 175, 179, 0.25);
+
+            /* Layout */
+            --container: 1120px;
+            --container-wide: 1200px;
+            --pad-x: clamp(18px, 4vw, 56px);
+
+            /* Type */
+            --font-sans: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+            --font-mono: 'Fira Code', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+
+            /* Radius / shadow */
+            --r-sm: 10px;
+            --r-md: 16px;
+            --r-lg: 22px;
+
+            --shadow-1: 0 18px 45px rgba(0, 0, 0, 0.55);
+            --shadow-2: 0 25px 70px rgba(0, 0, 0, 0.7);
+
+            /* Motion */
+            --ease: cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        /* Harden layout */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        @supports (overflow-x: clip) {
+
+            html,
+            body {
+                overflow-x: clip;
+            }
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
         }
 
         body {
             margin: 0;
             padding: 0;
             background-color: var(--bg-dark);
-            color: white;
-            font-family: 'Inter', sans-serif;
+            color: #fff;
+            font-family: var(--font-sans);
             line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            position: relative;
         }
 
-        /* Navigation Bar */
+        /* Cinematic background field */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            background:
+                radial-gradient(900px 700px at 15% 18%, rgba(99, 149, 238, 0.14), transparent 55%),
+                radial-gradient(900px 700px at 85% 12%, rgba(145, 175, 179, 0.10), transparent 55%),
+                radial-gradient(900px 700px at 50% 85%, rgba(99, 149, 238, 0.10), transparent 60%),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03), transparent 28%, rgba(0, 0, 0, 0.45) 100%);
+            opacity: 1;
+        }
+
+        /* Subtle grid + noise */
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            background:
+                linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 70px 70px;
+            mask-image: radial-gradient(circle at 50% 25%, black 0%, transparent 60%);
+            opacity: 0.15;
+        }
+
+        /* Skip link (a11y, no content removed) */
+        .skip {
+            position: absolute;
+            left: -999px;
+            top: 10px;
+            background: #fff;
+            color: #000;
+            padding: 10px 14px;
+            border-radius: 8px;
+            z-index: 9999;
+            text-decoration: none;
+            font-weight: 800;
+        }
+
+        .skip:focus {
+            left: 12px;
+        }
+
+        /* Cursor elements kept as-is; give safe defaults */
+        #cursor-ring,
+        #cursor-dot {
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* Site wrapper ensures content sits above background layers */
+        .site {
+            position: relative;
+            z-index: 1;
+        }
+
+        .container {
+            width: min(var(--container), 100%);
+            margin: 0 auto;
+            padding: 0 var(--pad-x);
+        }
+
+        .container-wide {
+            width: min(var(--container-wide), 100%);
+            margin: 0 auto;
+            padding: 0 var(--pad-x);
+        }
+
+        /* Header / Nav — elevated, glass, professional */
         nav {
-            padding: 30px 5%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 22px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            background: linear-gradient(to bottom, rgba(10, 10, 10, 0.85), rgba(10, 10, 10, 0.55));
+            backdrop-filter: blur(16px);
+        }
+
+        .nav-shell {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            justify-content: center;
+            gap: 24px;
+        }
+
+        .nav-logo a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
         }
 
         .nav-logo img {
-            height: 70px;
+            height: 74px;
             width: auto;
-            display: block;
-            transition: all 0.3s ease;
-            /* CHANGE: Set to 1 for full brightness */
+            transition: transform 0.35s var(--ease), filter 0.35s var(--ease);
             opacity: 1;
-            /* ADD: This gives it a professional 'lift' off the black background */
-            filter: drop-shadow(0 0 15px rgba(99, 149, 238, 0.3));
+            filter: drop-shadow(0 0 16px rgba(99, 149, 238, 0.35));
         }
 
         .nav-logo img:hover {
-            transform: scale(1.08);
-            /* Already at 1, so we just keep the hover scaling */
+            transform: translateY(-2px) scale(1.06);
             cursor: pointer;
-            filter: drop-shadow(0 0 20px rgba(99, 149, 238, 0.5));
+            filter: drop-shadow(0 0 26px rgba(99, 149, 238, 0.55));
         }
 
-        .back-link {
-            color: var(--brand-light-blue);
-            text-decoration: none;
-            font-size: 0.8rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            font-weight: 700;
-            transition: 0.3s;
-        }
-
-        .back-link:hover {
-            color: white;
-            text-shadow: 0 0 10px var(--brand-blue);
-        }
-
+        /* Hero — deep, editorial, strong hierarchy */
         .hero {
-            padding: 100px 5%;
+            padding: clamp(64px, 9vw, 112px) 0 clamp(34px, 6vw, 64px);
             text-align: center;
-            max-width: 900px;
-            margin: 0 auto;
+        }
+
+        .hero-eyebrow {
+            font-family: var(--font-mono);
+            font-size: 0.62rem;
+            color: var(--brand-teal);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 18px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .hero-eyebrow::before,
+        .hero-eyebrow::after {
+            content: "";
+            height: 1px;
+            width: 42px;
+            background: linear-gradient(to right, transparent, rgba(145, 175, 179, 0.55), transparent);
+            opacity: 0.9;
         }
 
         .hero h1 {
-            font-size: 3.5rem;
+            font-size: clamp(2.3rem, 6vw, 3.8rem);
             font-weight: 900;
             letter-spacing: -2px;
-            margin-bottom: 20px;
-            background: linear-gradient(to right, #fff, var(--brand-light-blue));
-            background-clip: text;
+            margin: 0 0 18px;
+            background: linear-gradient(90deg, #fff 0%, var(--brand-light-blue) 55%, rgba(145, 175, 179, 0.95) 100%);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(99, 149, 238, 0.08);
         }
 
         .hero p {
-            font-size: 1.2rem;
-            color: var(--brand-teal);
-            letter-spacing: 1px;
-            margin-bottom: 40px;
+            font-size: clamp(1.02rem, 2vw, 1.2rem);
+            color: #999;
+            max-width: 750px;
+            margin: 0 auto;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        /* Divider band under hero */
+        .hero-band {
+            margin-top: clamp(26px, 4vw, 44px);
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(99, 149, 238, 0.22), rgba(145, 175, 179, 0.18), transparent);
+            opacity: 0.9;
+        }
+
+        /* Services grid — high-end cards w/ depth, accent and glow */
+        .services {
+            padding: 34px 0 90px;
         }
 
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            padding: 0 5% 100px 5%;
-            max-width: 1200px;
-            margin: 0 auto;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 22px;
         }
 
         .service-card {
-            background: var(--card-bg);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 40px;
-            border-radius: 4px;
-            transition: all 0.4s ease;
+            grid-column: span 4;
+            background:
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.02));
+            border: 1px solid var(--border-soft);
+            border-radius: var(--r-lg);
+            padding: 34px 34px;
             position: relative;
             overflow: hidden;
+            transition: transform 0.45s var(--ease), border-color 0.45s var(--ease), box-shadow 0.45s var(--ease);
+            min-height: 220px;
+        }
+
+        .service-card::before {
+            content: "";
+            position: absolute;
+            inset: -2px;
+            background:
+                radial-gradient(600px 200px at 20% 0%, rgba(99, 149, 238, 0.20), transparent 60%),
+                radial-gradient(600px 200px at 80% 0%, rgba(145, 175, 179, 0.14), transparent 60%);
+            opacity: 0;
+            transition: opacity 0.45s var(--ease);
+            pointer-events: none;
+        }
+
+        .service-card::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--brand-blue), transparent);
+            opacity: 0.0;
+            transition: opacity 0.45s var(--ease);
         }
 
         .service-card:hover {
-            border-color: var(--brand-blue);
             transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.05);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border-color: rgba(99, 149, 238, 0.45);
+            box-shadow: var(--shadow-1);
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-card:hover::after {
+            opacity: 1;
+        }
+
+        .service-number {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
         }
 
         .service-card h3 {
             color: var(--brand-light-blue);
-            font-size: 1.5rem;
-            margin-bottom: 15px;
+            font-size: 1.15rem;
+            margin: 0 0 12px;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
         .service-card p {
-            font-size: 0.95rem;
-            color: #ccc;
+            font-size: 0.98rem;
+            color: #c7c7c7;
+            margin: 0;
+            position: relative;
+            z-index: 1;
         }
 
-        .service-card::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--brand-blue);
-            transition: width 0.4s ease;
-        }
-
-        .service-card:hover::after {
-            width: 100%;
-        }
-
-        .cta-section {
-            background: linear-gradient(to bottom, transparent, #111);
-            padding: 100px 5%;
-            text-align: center;
-        }
-
-        .contact-btn {
-            display: inline-block;
-            padding: 20px 60px;
-            background: white;
-            color: black;
-            text-decoration: none;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            border-radius: 2px;
-            transition: 0.3s;
-        }
-
-        .contact-btn:hover {
-            background: var(--brand-blue);
-            color: white;
-            box-shadow: 0 0 30px rgba(99, 149, 238, 0.4);
-        }
-
-        footer {
-            padding: 50px 5%;
-            text-align: center;
-            font-size: 0.7rem;
-            color: #555;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
+        /* Founder section — more editorial, more “dossier” */
         .founder-section {
-            padding: 100px 5%;
-            max-width: 800px;
-            margin: 0 auto;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 96px 0 84px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
         }
 
+        .founder-card {
+            border-radius: var(--r-lg);
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.02));
+            border: 1px solid var(--border-soft);
+            padding: clamp(26px, 4vw, 42px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .founder-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background:
+                radial-gradient(800px 380px at 20% 20%, rgba(99, 149, 238, 0.16), transparent 60%),
+                radial-gradient(800px 380px at 80% 0%, rgba(145, 175, 179, 0.12), transparent 60%);
+            opacity: 0.85;
+        }
+
+        .founder-inner {
+            position: relative;
+            z-index: 1;
+        }
+
+        .founder-kicker {
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            letter-spacing: 5px;
+            color: var(--brand-teal);
+            text-transform: uppercase;
+            margin: 0 0 26px;
+        }
+
+        .founder-lede {
+            font-size: clamp(1.2rem, 2.3vw, 1.8rem);
+            font-weight: 300;
+            color: #eee;
+            line-height: 1.4;
+            margin: 0 0 22px;
+        }
+
+        .founder-body {
+            font-size: 1.4rem;
+            color: #999;
+        }
+
+        .founder-body p {
+            margin: 0 0 18px;
+        }
+
+        .founder-body p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Signature block */
         .signature {
-            margin-top: 60px;
-            border-left: 2px solid var(--brand-teal);
-            padding: 30px;
+            margin-top: 46px;
+            border-radius: var(--r-md);
+            padding: 26px;
             background: rgba(145, 175, 179, 0.03);
+            border: 1px solid rgba(145, 175, 179, 0.10);
             display: flex;
             align-items: center;
-            gap: 40px;
+            gap: 26px;
         }
 
+        .signature img {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            border: 2px solid var(--brand-teal);
+            object-fit: cover;
+            box-shadow: 0 0 30px rgba(145, 175, 179, 0.08);
+        }
+
+        .signature-name {
+            margin: 0;
+            font-weight: 900;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+            color: #fff;
+        }
+
+        .signature-meta {
+            margin: 8px 0 0;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--brand-teal);
+            letter-spacing: 3px;
+        }
+
+        /* Dossier link — premium CTA card */
         .dossier-uplink-container {
-            max-width: 800px;
-            margin: 40px auto 100px;
-            padding: 0 5%;
+            padding: 34px 0 92px;
         }
 
         .dossier-footer-card {
@@ -231,19 +495,34 @@
             justify-content: space-between;
             align-items: center;
             background: rgba(145, 175, 179, 0.03);
-            border: 1px solid var(--border);
-            padding: 30px 40px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: var(--r-lg);
+            padding: 28px 30px;
             text-decoration: none;
-            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            transition: transform 0.45s var(--ease), border-color 0.45s var(--ease), box-shadow 0.45s var(--ease), background 0.45s var(--ease);
             position: relative;
             overflow: hidden;
         }
 
+        .dossier-footer-card::before {
+            content: "";
+            position: absolute;
+            inset: -2px;
+            background: radial-gradient(700px 200px at 25% 0%, rgba(99, 149, 238, 0.18), transparent 60%);
+            opacity: 0;
+            transition: opacity 0.45s var(--ease);
+            pointer-events: none;
+        }
+
         .dossier-footer-card:hover {
-            border-color: var(--brand-blue);
-            background: rgba(99, 149, 238, 0.05);
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border-color: rgba(99, 149, 238, 0.45);
+            background: rgba(99, 149, 238, 0.06);
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-1);
+        }
+
+        .dossier-footer-card:hover::before {
+            opacity: 1;
         }
 
         .dossier-label-group {
@@ -253,7 +532,7 @@
         }
 
         .dossier-label-group span {
-            font-family: 'Fira Code', monospace;
+            font-family: var(--font-mono);
             font-size: 0.65rem;
             color: var(--brand-teal);
             letter-spacing: 3px;
@@ -262,7 +541,7 @@
 
         .dossier-label-group h4 {
             margin: 0;
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             color: #fff;
             letter-spacing: 2px;
             text-transform: uppercase;
@@ -271,247 +550,166 @@
         .dossier-arrow {
             font-size: 1.5rem;
             color: var(--brand-blue);
-            transition: transform 0.3s ease;
+            transition: transform 0.35s var(--ease);
         }
 
         .dossier-footer-card:hover .dossier-arrow {
-            transform: translateX(10px);
+            transform: translateX(12px);
         }
 
-        /* RESPONSIVE BREAKPOINTS (Improved for iPad Landscape/Portrait) */
-        @media (max-width: 1024px) {
-            .services-grid {
-                grid-template-columns: 1fr 1fr;
-            }
+        /* Knowledge exchange — cleaner, more commanding */
+        .cta-section {
+            padding: 88px 0 96px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.02));
+            text-align: center;
+        }
 
-            .hero h1 {
-                font-size: 2.8rem;
+        .cta-kicker {
+            margin: 0 0 18px;
+            font-weight: 900;
+            letter-spacing: 5px;
+            font-size: 0.8rem;
+            color: var(--brand-teal);
+        }
+
+        .cta-sub {
+            color: #666;
+            font-size: 0.9rem;
+            margin: 0 0 34px;
+            font-family: var(--font-mono);
+        }
+
+        .contact-btn {
+            display: inline-block;
+            padding: 18px 56px;
+            text-decoration: none;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            border-radius: 12px;
+            transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease), border-color 0.35s var(--ease), background 0.35s var(--ease), color 0.35s var(--ease);
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.85);
+            color: #fff;
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-2px);
+            background: rgba(99, 149, 238, 0.18);
+            border-color: rgba(99, 149, 238, 0.65);
+            box-shadow: 0 0 35px rgba(99, 149, 238, 0.18);
+        }
+
+        footer {
+            padding: 44px 0 58px;
+            text-align: center;
+            font-size: 0.7rem;
+            color: #555;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .service-card {
+                grid-column: span 6;
             }
         }
 
         @media (max-width: 768px) {
+
+            /* ✅ Background/shade spans full screen */
             nav {
-                width: 80% !important;
-                /* User request: 80% width */
-                margin: 0 auto !important;
-                /* This is the magic that centers the 80% block */
-                padding: 30px 0;
-                /* Vertical breathing room */
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-                /* Slightly more visible on small screens */
+                width: 100% !important;
+                margin: 0 !important;
+                padding: 22px 0;
             }
 
-            .nav-logo {
-                display: flex;
+            /* ✅ The content (logo block) is 80% wide and centered */
+            nav .container {
+                width: 80% !important;
+                margin: 0 auto !important;
+                padding: 0 !important;
+            }
+
+            .nav-shell {
                 justify-content: center;
-                width: 100%;
             }
 
             .nav-logo img {
-                height: 60px;
-                /* Scaled perfectly for iPhone */
+                height: 72px;
                 width: auto;
-                opacity: 1;
-                /* Keeps it bright for Marcia */
             }
 
-            .hero {
-                padding: 60px 5% 40px;
-            }
-
-            .hero h1 {
-                font-size: 2.2rem;
+            .services {
+                padding: 24px 0 66px;
             }
 
             .services-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
+                gap: 16px;
             }
 
-            .founder-section {
-                padding: 60px 5% !important;
+            .service-card {
+                grid-column: span 12;
+                padding: 26px;
             }
 
             .signature {
                 flex-direction: column;
                 text-align: center;
-                border-left: none;
-                border-top: 2px solid var(--brand-teal);
+                gap: 18px;
             }
 
             .dossier-footer-card {
                 flex-direction: column;
                 text-align: center;
-                gap: 20px;
+                gap: 16px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                transition: none !important;
             }
         }
     </style>
 
+    <!-- Your site-wide chassis -->
     <link href="theme.css" rel="stylesheet" />
 
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "ProfessionalService",
-      "name": "Outside The World New LLC",
-      "url": "https://outsidetheworld.com",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Queen Creek",
-        "addressRegion": "AZ",
-        "postalCode": "85142",
-        "addressCountry": "US"
-      }
-    }
-    </script>
-</head>
+    <!-- Page-specific overrides (must be after theme.css) -->
+    <style>
+        nav .nav-logo {
+            width: auto !important;
+        }
 
-<body>
-    <div id="cursor-ring">
-    </div>
-    <div id="cursor-dot">
-    </div>
-    <nav>
-        <div class="nav-logo">
-            <a href="index.html">
-                <div class="hero-logo-container">
-                    <img alt="Outside The World" class="hero-logo" src="Images/Equal.svg" />
-                </div>
-            </a>
-        </div>
-    </nav>
-    <header class="hero">
-        <div
-            style="font-family: 'Fira Code'; font-size: 0.6rem; color: var(--brand-teal); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 20px;">
-            RESEARCH_LOG // TECHNICAL_METHODOLOGIES
-        </div>
-        <h1>The Outside Vantage.</h1>
-        <p style="color: #999; max-width: 750px; margin: 0 auto 40px; line-height: 1.8; font-weight: 300;">
-            A professional archive and technical laboratory documenting 25 years of digital observation.
-            This space serves as a repository for exploring the intersection of legacy infrastructure
-            and emergent technical paradigms.
-        </p>
-    </header>
-    <main class="services-grid">
-        <div class="service-card">
-            <div class="service-number"
-                style="color: var(--brand-blue); font-size: 0.7rem; font-weight: 900; margin-bottom: 10px;">
-                01
-            </div>
-            <h3>
-                Brand Architecture
-            </h3>
-            <p>
-                Exploring the long-term structural resilience of brand systems and digital identity within complex,
-                multi-layered environments.
-            </p>
-        </div>
-        <div class="service-card">
-            <div class="service-number"
-                style="color: var(--brand-teal); font-size: 0.7rem; font-weight: 900; margin-bottom: 10px;">
-                02
-            </div>
-            <h3>
-                Technical Advisory
-            </h3>
-            <p>
-                Documenting workflows and systems logic. We explore the architectural blueprints necessary for
-                maintaining stability in rapidly shifting technical landscapes. </p>
-        </div>
-        <div class="service-card">
-            <div class="service-number"
-                style="color: var(--brand-light-blue); font-size: 0.7rem; font-weight: 900; margin-bottom: 10px;">
-                03
-            </div>
-            <h3>
-                Adaptive Environments
-            </h3>
-            <p>
-                Researching the integration of human intuition and spatial tech to define how physical and digital
-                spheres can operate in synchronization. </p>
-        </div>
-    </main>
-    <section class="founder-section">
-        <h2
-            style="font-family: 'Fira Code'; font-size: 0.7rem; letter-spacing: 5px; color: var(--brand-teal); text-transform: uppercase; margin-bottom: 30px;">
-            THE_FOUNDER_PERSPECTIVE
-        </h2>
-        ...
-        <p style="font-size: 1.5rem; font-weight: 300; color: #eee; line-height: 1.4; margin-bottom: 30px;">
-            Since the year 2000,
-            <span style="color: white; font-weight: 700;">
-                Outside the World
-            </span>
-            has served as a
-            digital vantage point—a lab for observing the shifts in technical and cultural infrastructure.
-        </p>
-        <div style="font-size: 1rem; color: #999;">
-            <p style="margin-bottom: 20px;">
-                Technical infrastructure and brand identity are not tasks to be completed, but ecosystems to be
-                maintained. My work focuses on the
-                <strong>
-                    structural resilience of digital architectures
-                </strong>
-                and
-                the intentionality of intelligent environments.
-            </p>
-            <p>
-                The mission is rooted in the belief that execution is secondary to architecture. Mastery in these spaces
-                requires a vantage point that prioritizes long-term stability and systemic integrity over the immediate
-                noise of the technical horizon.
-            </p>
-        </div>
-        <div class="signature">
-            <img alt="RyanDavid Burningham" src="Images/Profile.jpg"
-                style="width: 140px; height: 140px; border-radius: 50%; border: 2px solid var(--brand-teal); object-fit: cover;" />
-            <div style="flex: 1;">
-                <p
-                    style="margin: 0; font-weight: 900; letter-spacing: 5px; text-transform: uppercase; font-size: 1.6rem; color: #fff;">
-                    RyanDavid 'Rylee' Burningham
-                </p>
-                <p
-                    style="margin: 5px 0 0; font-family: 'Fira Code'; font-size: 0.75rem; color: var(--brand-teal); letter-spacing: 3px;">
-                    STRATEGIC_OVERSIGHT // ID_8402.RYN
-                </p>
-            </div>
-        </div>
-    </section>
-    <div class="dossier-uplink-container">
-        <a href="resume.html" class="dossier-footer-card">
-            <div class="dossier-label-group">
-                <span>FILE_ENCLOSURE //</span>
-                <h4>Access Professional Dossier</h4>
-            </div>
-            <div class="dossier-arrow">→</div>
-        </a>
-    </div>
-    <section class="cta-section" style="border-top: 1px solid rgba(255,255,255,0.05); background: transparent;">
-        <h2
-            style="margin-bottom: 20px; font-weight: 900; letter-spacing: 5px; font-size: 0.8rem; color: var(--brand-teal);">
-            KNOWLEDGE_EXCHANGE
-        </h2>
-        <p style="color: #666; font-size: 0.9rem; margin-bottom: 40px; font-family: 'Fira Code';">
-            Open to professional dialogue regarding technical research or long-term systems observation.
-        </p>
-        <a class="contact-btn" href="mailto:hello@outsidetheworld.com"
-            style="background: transparent; border: 1px solid white; color: white;">
-            Initiate Dialogue
-        </a>
-    </section>
-    <footer>
-        Outside The World New LLC • Registered Arizona Entity • Since 2000
-    </footer>
+        nav img.hero-logo {
+            height: clamp(74px, 7vw, 130px);
+            width: auto;
+            max-width: none;
+        }
+
+        @media (max-width: 768px) {
+            nav img.hero-logo {
+                height: 72px;
+            }
+        }
+    </style>
+
+    <!-- Structured Data -->
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   "name": "Outside The World New LLC",
+  "url": "https://outsidetheworld.com/professional.html",
   "image": "https://outsidetheworld.com/Images/Equal.svg",
-  "url": "https://outsidetheworld.com",
-  "description": "A technical research archive and brand architecture laboratory serving the Queen Creek and East Valley market.",
+  "description": "A professional archive and technical laboratory documenting 25 years of digital observation. Specializing in brand architecture and systems resilience.",
+  "areaServed": {
+    "@type": "AdministrativeArea",
+    "name": "Queen Creek, AZ"
+  },
   "address": {
     "@type": "PostalAddress",
     "addressLocality": "Queen Creek",
@@ -519,13 +717,191 @@
     "postalCode": "85142",
     "addressCountry": "US"
   },
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": 33.248, 
-    "longitude": -111.634
+  "provider": {
+    "@type": "Organization",
+    "name": "Outside The World New LLC",
+    "url": "https://outsidetheworld.com",
+    "logo": "https://outsidetheworld.com/Images/Equal.svg"
   }
 }
-</script>
+    </script>
+</head>
+
+<body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <div id="cursor-ring"></div>
+    <div id="cursor-dot"></div>
+
+    <div class="site">
+        <nav>
+            <div class="container">
+                <div class="nav-shell">
+                    <div class="nav-logo">
+                        <a href="index.html">
+                            <div class="hero-logo-container">
+                                <img alt="Outside The World" class="hero-logo" src="Images/Equal.svg" />
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <header class="hero">
+            <div class="container">
+                <div class="hero-eyebrow">
+                    RESEARCH_LOG // TECHNICAL_METHODOLOGIES
+                </div>
+
+                <h1>The Outside Vantage.</h1>
+
+                <p>
+                    A professional archive and technical laboratory documenting 25 years of digital observation.
+                    This space serves as a repository for exploring the intersection of legacy infrastructure
+                    and emergent technical paradigms.
+                </p>
+
+                <div class="hero-band"></div>
+            </div>
+        </header>
+
+        <main id="main" class="services">
+            <div class="container-wide">
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-number" style="color: var(--brand-blue);">
+                            01
+                        </div>
+                        <h3>
+                            Brand Architecture
+                        </h3>
+                        <p>
+                            Exploring the long-term structural resilience of brand systems and digital identity within
+                            complex,
+                            multi-layered environments.
+                        </p>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-number" style="color: var(--brand-teal);">
+                            02
+                        </div>
+                        <h3>
+                            Technical Advisory
+                        </h3>
+                        <p>
+                            Documenting workflows and systems logic. We explore the architectural blueprints necessary
+                            for
+                            maintaining stability in rapidly shifting technical landscapes.
+                        </p>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-number" style="color: var(--brand-light-blue);">
+                            03
+                        </div>
+                        <h3>
+                            Adaptive Environments
+                        </h3>
+                        <p>
+                            Researching the integration of human intuition and spatial tech to define how physical and
+                            digital
+                            spheres can operate in synchronization.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <section class="founder-section">
+            <div class="container">
+                <div class="founder-card">
+                    <div class="founder-inner">
+                        <h2 class="founder-kicker">
+                            THE_FOUNDER_PERSPECTIVE
+                        </h2>
+
+                        ...
+                        <p class="founder-lede">
+                            Since the year 2000,
+                            <span style="color: white; font-weight: 700;">
+                                Outside the World
+                            </span>
+                            has served as a
+                            digital vantage point—a lab for observing the shifts in technical and cultural
+                            infrastructure.
+                        </p>
+
+                        <div class="founder-body">
+                            <p>
+                                Technical infrastructure and identity are not tasks to be completed, but
+                                ecosystems to be
+                                maintained. My work focuses on the
+                                <strong>
+                                    structural resilience of digital architectures
+                                </strong>
+                                and
+                                the intentionality of intelligent environments.
+                            </p>
+                            <p>
+                                The mission is rooted in the belief that execution is secondary to architecture. Mastery
+                                in these spaces
+                                requires a vantage point that prioritizes long-term stability and systemic integrity
+                                over the immediate
+                                noise of the technical horizon.
+                            </p>
+                        </div>
+
+                        <div class="signature">
+                            <img alt="RyanDavid Burningham" src="Images/Profile.jpg" loading="lazy" decoding="async" />
+                            <div style="flex: 1;">
+                                <p class="signature-name">
+                                    RyanDavid 'Rylee' Burningham
+                                </p>
+                                <p class="signature-meta">
+                                    STRATEGIC_OVERSIGHT // ID_8402.RYN
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="dossier-uplink-container">
+            <div class="container">
+                <a href="resume.html" class="dossier-footer-card">
+                    <div class="dossier-label-group">
+                        <span>FILE_ENCLOSURE //</span>
+                        <h4>Access Professional Dossier</h4>
+                    </div>
+                    <div class="dossier-arrow">→</div>
+                </a>
+            </div>
+        </div>
+
+        <section class="cta-section" style="border-top: 1px solid rgba(255,255,255,0.05); background: transparent;">
+            <div class="container">
+                <h2 class="cta-kicker">
+                    KNOWLEDGE_EXCHANGE
+                </h2>
+                <p class="cta-sub">
+                    Open to professional dialogue regarding technical research or long-term systems observation. Base of
+                    operations: Queen Creek, Arizona — serving the East Valley and beyond.
+                </p>
+                <a class="contact-btn" href="mailto:hello@outsidetheworld.com"
+                    style="background: transparent; border: 1px solid white; color: white;">
+                    Initiate Dialogue
+                </a>
+            </div>
+        </section>
+
+        <footer>
+            Outside The World New LLC • Registered Arizona Entity • Since 2000
+        </footer>
+    </div>
 </body>
 
 </html>

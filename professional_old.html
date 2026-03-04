@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YKRKPFV2MB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-YKRKPFV2MB');
+    </script>
+
+    <meta charset="utf-8" />
+    <title>Technical Advisory & Brand Systems Research | Outside The World</title>
+    <meta name="description"
+        content="A professional archive and technical laboratory documenting 25 years of digital observation in Queen Creek, AZ 85142. Specializing in brand architecture and systems resilience.">
+    <link href="favicon.svg" rel="icon" type="image/svg+xml" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta content="#0a0a0a" name="theme-color" />
+    <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style" />
+
+    <meta property="og:title" content="Outside The World | Technical Research Archive">
+    <meta property="og:description"
+        content="A quarter-century of technical observation and brand architecture research. Base of operations: Queen Creek, Arizona.">
+    <meta property="og:image" content="https://outsidetheworld.com/Images/SocialPreview.jpg">
+    <meta property="og:url" content="https://outsidetheworld.com/professional.html">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;700&family=Inter:wght@100;300;400;700;900&display=swap');
+
+        :root {
+            /* Restored Hex Codes to prevent circular variable reference errors */
+            --brand-blue: #6395ee;
+            --brand-teal: #91afb3;
+            --brand-light-blue: #a3c2ff;
+            --bg-dark: #0a0a0a;
+            --card-bg: rgba(255, 255, 255, 0.03);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-dark);
+            color: white;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+        }
+
+        /* Navigation Bar */
+        nav {
+            padding: 30px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-logo img {
+            height: 70px;
+            width: auto;
+            display: block;
+            transition: all 0.3s ease;
+            /* CHANGE: Set to 1 for full brightness */
+            opacity: 1;
+            /* ADD: This gives it a professional 'lift' off the black background */
+            filter: drop-shadow(0 0 15px rgba(99, 149, 238, 0.3));
+        }
+
+        .nav-logo img:hover {
+            transform: scale(1.08);
+            /* Already at 1, so we just keep the hover scaling */
+            cursor: pointer;
+            filter: drop-shadow(0 0 20px rgba(99, 149, 238, 0.5));
+        }
+
+        .back-link {
+            color: var(--brand-light-blue);
+            text-decoration: none;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+
+        .back-link:hover {
+            color: white;
+            text-shadow: 0 0 10px var(--brand-blue);
+        }
+
+        .hero {
+            padding: 100px 5%;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            letter-spacing: -2px;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #fff, var(--brand-light-blue));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--brand-teal);
+            letter-spacing: 1px;
+            margin-bottom: 40px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 0 5% 100px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 4px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card:hover {
+            border-color: var(--brand-blue);
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .service-card h3 {
+            color: var(--brand-light-blue);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .service-card p {
+            font-size: 0.95rem;
+            color: #ccc;
+        }
+
+        .service-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--brand-blue);
+            transition: width 0.4s ease;
+        }
+
+        .service-card:hover::after {
+            width: 100%;
+        }
+
+        .cta-section {
+            background: linear-gradient(to bottom, transparent, #111);
+            padding: 100px 5%;
+            text-align: center;
+        }
+
+        .contact-btn {
+            display: inline-block;
+            padding: 20px 60px;
+            background: white;
+            color: black;
+            text-decoration: none;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+
+        .contact-btn:hover {
+            background: var(--brand-blue);
+            color: white;
+            box-shadow: 0 0 30px rgba(99, 149, 238, 0.4);
+        }
+
+        footer {
+            padding: 50px 5%;
+            text-align: center;
+            font-size: 0.7rem;
+            color: #555;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .founder-section {
+            padding: 100px 5%;
+            max-width: 800px;
+            margin: 0 auto;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .signature {
+            margin-top: 60px;
+            border-left: 2px solid var(--brand-teal);
+            padding: 30px;
+            background: rgba(145, 175, 179, 0.03);
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .dossier-uplink-container {
+            max-width: 800px;
+            margin: 40px auto 100px;
+            padding: 0 5%;
+        }
+
+        .dossier-footer-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(145, 175, 179, 0.03);
+            border: 1px solid var(--border);
+            padding: 30px 40px;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dossier-footer-card:hover {
+            border-color: var(--brand-blue);
+            background: rgba(99, 149, 238, 0.05);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .dossier-label-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .dossier-label-group span {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.65rem;
+            color: var(--brand-teal);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .dossier-label-group h4 {
+            margin: 0;
+            font-size: 1.2rem;
+            color: #fff;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .dossier-arrow {
+            font-size: 1.5rem;
+            color: var(--brand-blue);
+            transition: transform 0.3s ease;
+        }
+
+        .dossier-footer-card:hover .dossier-arrow {
+            transform: translateX(10px);
+        }
+
+        /* RESPONSIVE BREAKPOINTS (Improved for iPad Landscape/Portrait) */
+        @media (max-width: 1024px) {
+            .services-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                width: 80% !important;
+                /* User request: 80% width */
+                margin: 0 auto !important;
+                /* This is the magic that centers the 80% block */
+                padding: 30px 0;
+                /* Vertical breathing room */
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                /* Slightly more visible on small screens */
+            }
+
+            .nav-logo {
+                display: flex;
+                justify-content: center;
+                width: 100%;
+            }
+
+            .nav-logo img {
+                height: 60px;
+                /* Scaled perfectly for iPhone */
+                width: auto;
+                opacity: 1;
+                /* Keeps it bright for Marcia */
+            }
+
+            .hero {
+                padding: 60px 5% 40px;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .founder-section {
+                padding: 60px 5% !important;
+            }
+
+            .signature {
+                flex-direction: column;
+                text-align: center;
+                border-left: none;
+                border-top: 2px solid var(--brand-teal);
+            }
+
+            .dossier-footer-card {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+        }
+    </style>
+
+    <link href="theme.css" rel="stylesheet" />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "Outside The World New LLC",
+      "url": "https://outsidetheworld.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Queen Creek",
+        "addressRegion": "AZ",
+        "postalCode": "85142",
+        "addressCountry": "US"
+      }
+    }
+    </script>
+</head>
+
+<body>
+    <div id="cursor-ring">
+    </div>
+    <div id="cursor-dot">
+    </div>
+    <nav>
+        <div class="nav-logo">
+            <a href="index.html">
+                <div class="hero-logo-container">
+                    <img alt="Outside The World" class="hero-logo" src="Images/Equal.svg" />
+                </div>
+            </a>
+        </div>
+    </nav>
+    <header class="hero">
+        <div
+            style="font-family: 'Fira Code'; font-size: 0.6rem; color: var(--brand-teal); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 20px;">
+            RESEARCH_LOG // TECHNICAL_METHODOLOGIES
+        </div>
+        <h1>The Outside Vantage.</h1>
+        <p style="color: #999; max-width: 750px; margin: 0 auto 40px; line-height: 1.8; font-weight: 300;">
+            A professional archive and technical laboratory documenting 25 years of digital observation.
+            This space serves as a repository for exploring the intersection of legacy infrastructure
+            and emergent technical paradigms.
+        </p>
+    </header>
+    <main class="services-grid">
+        <div class="service-card">
+            <div class="service-number"
+                style="color: var(--brand-blue); font-size: 0.7rem; font-weight: 900; margin-bottom: 10px;">
+                01
+            </div>
+            <h3>
+                Brand Architecture
+            </h3>
+            <p>
+                Exploring the long-term structural resilience of brand systems and digital identity within complex,
+                multi-layered environments.
+            </p>
+        </div>
+        <div class="service-card">
+            <div class="service-number"
+                style="color: var(--brand-teal); font-size: 0.7rem; font-weight: 900; margin-bottom: 10px;">
+                02
+            </div>
+            <h3>
+                Technical Advisory
+            </h3>
+            <p>
+                Documenting workflows and systems logic. We explore the architectural blueprints necessary for
+                maintaining stability in rapidly shifting technical landscapes. </p>
+        </div>
+        <div class="service-card">
+            <div class="service-number"
+                style="color: var(--brand-light-blue); font-size: 0.7rem; font-weight: 900; margin-bottom: 10px;">
+                03
+            </div>
+            <h3>
+                Adaptive Environments
+            </h3>
+            <p>
+                Researching the integration of human intuition and spatial tech to define how physical and digital
+                spheres can operate in synchronization. </p>
+        </div>
+    </main>
+    <section class="founder-section">
+        <h2
+            style="font-family: 'Fira Code'; font-size: 0.7rem; letter-spacing: 5px; color: var(--brand-teal); text-transform: uppercase; margin-bottom: 30px;">
+            THE_FOUNDER_PERSPECTIVE
+        </h2>
+        ...
+        <p style="font-size: 1.5rem; font-weight: 300; color: #eee; line-height: 1.4; margin-bottom: 30px;">
+            Since the year 2000,
+            <span style="color: white; font-weight: 700;">
+                Outside the World
+            </span>
+            has served as a
+            digital vantage point—a lab for observing the shifts in technical and cultural infrastructure.
+        </p>
+        <div style="font-size: 1rem; color: #999;">
+            <p style="margin-bottom: 20px;">
+                Technical infrastructure and brand identity are not tasks to be completed, but ecosystems to be
+                maintained. My work focuses on the
+                <strong>
+                    structural resilience of digital architectures
+                </strong>
+                and
+                the intentionality of intelligent environments.
+            </p>
+            <p>
+                The mission is rooted in the belief that execution is secondary to architecture. Mastery in these spaces
+                requires a vantage point that prioritizes long-term stability and systemic integrity over the immediate
+                noise of the technical horizon.
+            </p>
+        </div>
+        <div class="signature">
+            <img alt="RyanDavid Burningham" src="Images/Profile.jpg"
+                style="width: 140px; height: 140px; border-radius: 50%; border: 2px solid var(--brand-teal); object-fit: cover;" />
+            <div style="flex: 1;">
+                <p
+                    style="margin: 0; font-weight: 900; letter-spacing: 5px; text-transform: uppercase; font-size: 1.6rem; color: #fff;">
+                    RyanDavid 'Rylee' Burningham
+                </p>
+                <p
+                    style="margin: 5px 0 0; font-family: 'Fira Code'; font-size: 0.75rem; color: var(--brand-teal); letter-spacing: 3px;">
+                    STRATEGIC_OVERSIGHT // ID_8402.RYN
+                </p>
+            </div>
+        </div>
+    </section>
+    <div class="dossier-uplink-container">
+        <a href="resume.html" class="dossier-footer-card">
+            <div class="dossier-label-group">
+                <span>FILE_ENCLOSURE //</span>
+                <h4>Access Professional Dossier</h4>
+            </div>
+            <div class="dossier-arrow">→</div>
+        </a>
+    </div>
+    <section class="cta-section" style="border-top: 1px solid rgba(255,255,255,0.05); background: transparent;">
+        <h2
+            style="margin-bottom: 20px; font-weight: 900; letter-spacing: 5px; font-size: 0.8rem; color: var(--brand-teal);">
+            KNOWLEDGE_EXCHANGE
+        </h2>
+        <p style="color: #666; font-size: 0.9rem; margin-bottom: 40px; font-family: 'Fira Code';">
+            Open to professional dialogue regarding technical research or long-term systems observation.
+        </p>
+        <a class="contact-btn" href="mailto:hello@outsidetheworld.com"
+            style="background: transparent; border: 1px solid white; color: white;">
+            Initiate Dialogue
+        </a>
+    </section>
+    <footer>
+        Outside The World New LLC • Registered Arizona Entity • Since 2000
+    </footer>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Outside The World New LLC",
+  "image": "https://outsidetheworld.com/Images/Equal.svg",
+  "url": "https://outsidetheworld.com",
+  "description": "A technical research archive and brand architecture laboratory serving the Queen Creek and East Valley market.",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Queen Creek",
+    "addressRegion": "AZ",
+    "postalCode": "85142",
+    "addressCountry": "US"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 33.248, 
+    "longitude": -111.634
+  }
+}
+</script>
+</body>
+
+</html>
