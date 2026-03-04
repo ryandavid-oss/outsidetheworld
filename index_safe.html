@@ -2,89 +2,309 @@
 <html lang="en">
 
 <head>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-YKRKPFV2MB"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-YKRKPFV2MB');
-</script>
+    <!-- Core -->
     <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport" />
-    <title>Outside The World</title>
-    <link href="favicon.svg" rel="icon" type="image/svg+xml" />
-    <link href="theme.css" rel="stylesheet" />
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;900&family=Fira+Code:wght@300;500;700&display=swap');
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
 
+    <!-- App-like (optional but fine) -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="mobile-web-app-capable" content="yes" />
+
+    <!-- Primary SEO -->
+    <title>Outside The World</title>
+    <meta name="description"
+        content="Outside The World is a personal archive and professional research lab documenting 25 years of creative work, systems observation, and digital archaeology—based in Queen Creek, Arizona." />
+    <link rel="canonical" href="https://outsidetheworld.com/" />
+
+    <!-- Icons -->
+    <link href="favicon.svg" rel="icon" type="image/svg+xml" />
+
+    <!-- Social (Homepage) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Outside The World" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="Outside The World" />
+    <meta property="og:description"
+        content="A personal archive and professional research lab documenting 25 years of creative work and systems observation—based in Queen Creek, Arizona." />
+    <meta property="og:image" content="https://outsidetheworld.com/Images/SocialPreview.jpg" />
+    <meta property="og:url" content="https://outsidetheworld.com/" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Outside The World" />
+    <meta name="twitter:description"
+        content="A personal archive and professional research lab documenting 25 years of creative work and systems observation—based in Queen Creek, Arizona." />
+    <meta name="twitter:image" content="https://outsidetheworld.com/Images/SocialPreview.jpg" />
+
+    <!-- Performance: Fonts (faster than @import) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;900&family=Fira+Code:wght@300;500;700&family=Merriweather:wght@300;400;700&display=swap"
+        rel="stylesheet" />
+
+    <!-- Optional: preload the hero mark -->
+    <link rel="preload" as="image" href="Images/Equal.svg" type="image/svg+xml" />
+
+    <!-- Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YKRKPFV2MB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-YKRKPFV2MB');
+    </script>
+
+    <!-- Site chassis (variables / shared styles) -->
+    <link href="theme.css" rel="stylesheet" />
+
+    <style>
         :root {
-            --star-white: #ffffff;
-            --star-glow: rgba(255, 255, 255, 0.4);
+            /* Solid defaults (no circular vars) */
             --bg-dark: #0a0a0a;
             --brand-blue: #6395EE;
             --brand-teal: #91AFB3;
-            --nebula-pink: #fbc2eb;
-            --nebula-glow: rgba(255, 77, 77, 0.7);
+
+            --star-white: #ffffff;
+            --star-glow: rgba(255, 255, 255, 0.6);
+            --nebula-red: rgba(255, 77, 77, 0.6);
+        }
+
+        /* Hardening */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        @supports (overflow-x: clip) {
+
+            html,
+            body {
+                overflow-x: clip;
+            }
         }
 
         body {
-            background-color: var(--bg-dark);
             margin: 0;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            overflow: hidden;
+
             font-family: 'Inter', sans-serif;
             color: white;
-            cursor: none;
+
+            background: radial-gradient(circle at center, #0a0a0a 0%, var(--bg-dark) 100%);
+
+            /* Safe area protection */
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
+            padding-left: env(safe-area-inset-left);
+            padding-right: env(safe-area-inset-right);
         }
 
-        /* 1. BACKGROUND DEPTH */
-        .starfield {
+        /* Visually-hidden utility for SEO/A11y without changing visuals */
+        .sr-only {
+            position: absolute !important;
+            width: 1px !important;
+            height: 1px !important;
+            padding: 0 !important;
+            margin: -1px !important;
+            overflow: hidden !important;
+            clip: rect(0, 0, 0, 0) !important;
+            white-space: nowrap !important;
+            border: 0 !important;
+        }
+
+        /* --- HEADER CONSOLE --- */
+        .header-console {
             position: fixed;
-            inset: -5%;
-            width: 110%;
-            height: 110%;
-            z-index: 0;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            z-index: 1000;
+            width: 100%;
+            text-align: center;
+
+            /* Allow only the logo link to be clickable */
             pointer-events: none;
         }
 
-        .dim-star {
-            position: absolute;
-            background: #fff;
-            border-radius: 50%;
-            opacity: 0.2;
-            animation: breathe var(--d) infinite ease-in-out alternate;
+        .header-console a {
+            pointer-events: auto;
+            display: inline-block;
         }
 
-        @keyframes breathe {
-            from {
-                opacity: 0.1;
-                transform: scale(0.8);
+        .console-logo {
+            width: 250px;
+            filter: saturate(1.2) brightness(1.1);
+            opacity: 0.9;
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            display: block;
+            margin: 0 auto;
+        }
+
+        .console-logo:hover {
+            opacity: 1;
+            transform: scale(1.05);
+            filter: saturate(1.5) brightness(1.3) drop-shadow(0 0 15px var(--brand-blue)) drop-shadow(0 0 30px rgba(99, 149, 238, 0.4));
+        }
+
+        .console-text {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--brand-teal);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.5s ease;
+            pointer-events: none;
+
+            text-shadow:
+                0 0 5px rgba(255, 255, 255, 0.8),
+                0 0 12px var(--brand-blue),
+                0 0 25px rgba(99, 149, 238, 0.4);
+        }
+
+        .console-text::after {
+            content: '_';
+            font-weight: 900;
+            color: var(--brand-blue);
+            text-shadow: 0 0 10px var(--brand-blue);
+            animation: cursorBlink 1s infinite;
+            margin-left: 8px;
+        }
+
+        .header-console:hover .console-text {
+            color: var(--brand-blue);
+            text-shadow:
+                0 0 10px #fff,
+                0 0 20px var(--brand-blue),
+                0 0 40px var(--brand-blue);
+        }
+
+        @keyframes cursorBlink {
+
+            0%,
+            100% {
+                opacity: 0;
             }
 
-            to {
-                opacity: 0.4;
-                transform: scale(1.1);
+            50% {
+                opacity: 1;
             }
         }
 
-        /* 2. THE 19-STAR CONSTELLATION */
+        /* --- STARFIELD CANVAS --- */
+        .starfield {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+            background: transparent;
+        }
+
+        /* --- NAV LAYOUT --- */
+        main.gateway-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 120px;
+            z-index: 10;
+            width: 90%;
+            max-width: 1400px;
+            margin: 220px auto auto;
+        }
+
+        .nav-wing {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 280px;
+        }
+
+        .wing-label {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--brand-teal);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            opacity: 0.9;
+            transition: all 0.4s ease;
+            text-shadow:
+                0 0 5px rgba(145, 175, 179, 0.5),
+                0 0 10px rgba(145, 175, 179, 0.3);
+        }
+
+        .nav-wing:hover .wing-label {
+            opacity: 1;
+            color: #fff;
+            text-shadow:
+                0 0 8px var(--brand-teal),
+                0 0 20px var(--brand-teal);
+            letter-spacing: 6px;
+        }
+
+        .ethereal-btn {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 22px 45px;
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
+            font-size: 1.1rem;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: 0.6s cubic-bezier(0.2, 1, 0.3, 1);
+            position: relative;
+        }
+
+        .explore-btn:hover {
+            border-color: var(--brand-blue);
+            box-shadow: 0 0 40px rgba(99, 149, 238, 0.4);
+            color: var(--brand-blue);
+        }
+
+        .consult-btn:hover {
+            border-color: var(--brand-teal);
+            box-shadow: 0 0 40px rgba(145, 175, 179, 0.4);
+            color: var(--brand-teal);
+        }
+
+        /* --- ORION --- */
         .constellation {
             position: relative;
             width: 320px;
             height: 480px;
-            z-index: 10;
         }
 
         .star {
             position: absolute;
             background: var(--star-white);
             border-radius: 50%;
-            box-shadow: 0 0 10px var(--star-glow);
+            box-shadow: 0 0 10px var(--star-glow), 0 0 20px var(--star-glow);
             animation: twinkle var(--duration) infinite ease-in-out;
         }
 
@@ -92,33 +312,39 @@
 
             0%,
             100% {
-                opacity: 0.5;
-                transform: scale(0.95);
+                opacity: 0.4;
+                transform: scale(0.9);
             }
 
             50% {
                 opacity: 1;
-                transform: scale(1.05);
+                transform: scale(1.1);
             }
         }
 
-        /* THE FRAME */
         .betelgeuse {
             top: 0;
             left: 40px;
             width: 7px;
             height: 7px;
-            --duration: 8s;
-            box-shadow: 0 0 20px rgba(255, 51, 0, 0.8);
-            background: #FF3300;
+            --duration: 3s;
+            box-shadow: 0 0 20px rgba(255, 100, 100, 0.6);
         }
 
         .bellatrix {
             top: 25px;
             right: 40px;
-            width: 4px;
-            height: 4px;
-            --duration: 7s;
+            width: 5px;
+            height: 5px;
+            --duration: 4.2s;
+        }
+
+        .saiph {
+            bottom: 50px;
+            left: 60px;
+            width: 5px;
+            height: 5px;
+            --duration: 5.1s;
         }
 
         .rigel {
@@ -126,245 +352,232 @@
             right: 40px;
             width: 8px;
             height: 8px;
-            --duration: 9s;
-            box-shadow: 0 0 25px rgba(153, 204, 255, 0.7);
-            background: #99CCFF;
+            --duration: 3.8s;
+            box-shadow: 0 0 25px rgba(100, 150, 255, 0.6);
         }
 
-        .saiph {
-            bottom: 30px;
-            left: 45px;
-            width: 4px;
-            height: 4px;
-            --duration: 10s;
+        /* TRON UPLINK */
+        .belt-node {
+            position: absolute;
+            z-index: 50;
         }
 
-        /* THE TILTED BELT (Rising Diagonal /) */
-        .alnitak {
+        .belt-node a {
+            text-decoration: none;
+        }
+
+        .belt-star {
+            width: 8px;
+            height: 8px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 20px #fff;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .tron-path {
+            position: absolute;
+            pointer-events: none;
+            stroke: var(--brand-teal);
+            stroke-width: 1;
+            fill: none;
+            stroke-dasharray: 200;
+            stroke-dashoffset: 200;
+            transition: stroke-dashoffset 0.6s ease;
+            filter: drop-shadow(0 0 5px var(--brand-teal));
+        }
+
+        .tron-card {
+            position: absolute;
+            opacity: 0;
+            background: rgba(5, 5, 5, 0.9);
+            border: 1px solid var(--brand-teal);
+            padding: 8px 15px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.6rem;
+            color: #fff;
+            letter-spacing: 2px;
+            white-space: nowrap;
+            pointer-events: none;
+            transition: opacity 0.3s ease 0.5s, transform 0.3s ease 0.5s;
+            backdrop-filter: blur(5px);
+        }
+
+        .belt-node:hover .tron-path {
+            stroke-dashoffset: 0;
+        }
+
+        .belt-node:hover .tron-card {
+            opacity: 1;
+            transform: translate(0, 0);
+        }
+
+        .alnitak-node {
             top: 210px;
-            left: 115px;
-            width: 5px;
-            height: 5px;
-            --duration: 6s;
+            left: 110px;
         }
 
-        .alnilam {
+        .alnitak-node .tron-card {
+            top: -72px;
+            left: -260px;
+            transform: translateX(20px);
+        }
+
+        .alnilam-node {
             top: 225px;
-            left: 155px;
-            width: 6px;
-            height: 6px;
-            --duration: 7.5s;
+            left: 150px;
         }
 
-        .mintaka {
+        .alnilam-node .tron-card {
+            top: -67px;
+            left: 95px;
+            transform: translateX(-20px);
+        }
+
+        .mintaka-node {
             top: 240px;
-            left: 195px;
-            width: 5px;
-            height: 5px;
-            --duration: 6.8s;
+            left: 190px;
         }
 
-        /* THE HEAD (3 Stars) */
-        .meissa {
-            top: -40px;
-            left: 150px;
-            width: 3px;
-            height: 3px;
-            --duration: 11s;
-            opacity: 0.6;
+        .mintaka-node .tron-card {
+            top: 85px;
+            left: 5px;
+            transform: translateY(-10px);
         }
 
-        .phi1 {
-            top: -35px;
-            left: 135px;
-            width: 2px;
-            height: 2px;
-            --duration: 12s;
-            opacity: 0.4;
-        }
-
-        .phi2 {
-            top: -37px;
-            left: 165px;
-            width: 2px;
-            height: 2px;
-            --duration: 13s;
-            opacity: 0.4;
-        }
-
-        /* THE SWORD & ORIGINAL NEBULA */
-        .sword-top {
-            top: 275px;
-            left: 150px;
-            width: 2px;
-            height: 2px;
-            --duration: 9s;
-            opacity: 0.6;
-        }
-
-        .nebula {
+        /* Kavya uplink */
+        .kavya-node {
             top: 310px;
-            left: 145px;
+            left: 140px;
+        }
+
+        .kavya-node .sword-mid {
             width: 10px;
             height: 10px;
-            background: var(--nebula-pink);
-            box-shadow: 0 0 20px var(--nebula-glow), 0 0 40px var(--nebula-glow);
+            background: #fbc2eb;
+            box-shadow: 0 0 20px var(--nebula-red), 0 0 40px var(--nebula-red);
             filter: blur(1px);
-            animation: nebula-breath 10s infinite alternate ease-in-out;
         }
 
-        @keyframes nebula-breath {
-            from {
-                opacity: 0.6;
-                transform: scale(0.9);
-            }
+        .kavya-node .tron-path {
+            stroke: #ff4d4d;
+            filter: drop-shadow(0 0 5px #ff4d4d);
+        }
 
-            to {
-                opacity: 1;
-                transform: scale(1.1);
-            }
+        .kavya-node .tron-card {
+            border-color: #ff4d4d;
+            top: 20px;
+            left: 80px;
+            transform: translateX(-10px);
+        }
+
+        .sword-top {
+            top: 280px;
+            left: 145px;
+            opacity: 0.6;
+            width: 3px;
+            height: 3px;
         }
 
         .sword-bottom {
-            top: 350px;
-            left: 138px;
+            top: 340px;
+            left: 135px;
+            opacity: 0.6;
             width: 3px;
             height: 3px;
-            --duration: 8.5s;
-            opacity: 0.6;
         }
 
-        /* THE SHIELD ARC (6 Stars) */
-        .pi1 {
-            top: 60px;
-            right: -20px;
-            width: 2px;
-            height: 2px;
-            --duration: 14s;
-            opacity: 0.5;
-        }
-
-        .pi2 {
-            top: 100px;
-            right: -45px;
-            width: 3px;
-            height: 3px;
-            --duration: 12s;
-            opacity: 0.6;
-        }
-
-        .pi3 {
-            top: 150px;
-            right: -60px;
-            width: 3px;
-            height: 3px;
-            --duration: 11s;
-            opacity: 0.8;
-        }
-
-        .pi4 {
-            top: 200px;
-            right: -55px;
-            width: 2px;
-            height: 2px;
-            --duration: 13s;
-            opacity: 0.6;
-        }
-
-        .pi5 {
-            top: 240px;
-            right: -40px;
-            width: 2px;
-            height: 2px;
-            --duration: 15s;
-            opacity: 0.5;
-        }
-
-        .pi6 {
-            top: 280px;
-            right: -10px;
-            width: 2px;
-            height: 2px;
-            --duration: 14s;
-            opacity: 0.4;
-        }
-
-        /* 3. NAVIGATION */
-        .gateway-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 100px;
-            z-index: 100;
-            margin-bottom: 40px;
-        }
-
-        .nav-wing {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 250px;
-        }
-
-        .wing-label {
-            font-family: 'Fira Code';
-            font-size: 0.6rem;
-            color: var(--brand-teal);
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-            opacity: 0.5;
-        }
-
-        .ethereal-btn {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 18px 35px;
-            color: #fff;
-            font-weight: 900;
-            letter-spacing: 5px;
-            text-transform: uppercase;
-            text-decoration: none;
-            transition: 0.5s;
-        }
-
-        .ethereal-btn:hover {
-            border-color: var(--brand-blue);
-            box-shadow: 0 0 30px rgba(99, 149, 238, 0.3);
-            color: var(--brand-blue);
-        }
-
-        /* 4. FOOTER */
-        .footer {
+        /* --- FOOTER --- */
+        .center-footer {
             position: fixed;
-            bottom: 5vh;
+            bottom: 6vh;
             text-align: center;
             width: 100%;
-            z-index: 100;
+            z-index: 20;
         }
 
         .main-title {
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             font-weight: 300;
-            letter-spacing: 12px;
+            letter-spacing: 15px;
             text-transform: uppercase;
-            margin: 0 0 10px;
-            opacity: 0.7;
+            margin: 0;
+            opacity: 0.8;
+            padding-bottom: 20px;
         }
 
-        .poem-trigger {
-            font-size: 0.6rem;
+        .poem-fragment {
+            font-size: 0.65rem;
             color: #444;
             letter-spacing: 3px;
+            font-style: italic;
             cursor: pointer;
             transition: 0.3s;
         }
 
-        .poem-trigger:hover {
+        .poem-fragment:hover {
             color: var(--brand-teal);
         }
 
-        /* 5. RETICLE */
+        /* Modal */
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(5, 5, 5, 0.97);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            backdrop-filter: blur(20px);
+        }
+
+        .modal-content {
+            background: rgba(145, 175, 179, 0.02);
+            padding: 60px 40px;
+            border: 1px solid rgba(145, 175, 179, 0.15);
+            position: relative;
+            max-width: 550px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 0 60px rgba(0, 0, 0, 1);
+            margin-bottom: env(safe-area-inset-bottom);
+        }
+
+        .modal-bar {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--brand-teal);
+            box-shadow: 0 0 20px var(--brand-teal);
+        }
+
+        .modal-bar.top {
+            top: 0;
+        }
+
+        .modal-bar.bottom {
+            bottom: 0;
+        }
+
+        .modal-poem {
+            font-family: 'Merriweather', serif;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #e0e0e0;
+            font-weight: 300;
+        }
+
+        .modal-system {
+            margin-top: 50px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.55rem;
+            color: #444;
+            letter-spacing: 4px;
+        }
+
+        /* Cursor UI */
         #cursor-ring {
             position: fixed;
             width: 40px;
@@ -373,8 +586,11 @@
             border-radius: 50%;
             pointer-events: none;
             z-index: 10000;
-            transition: transform 0.15s ease-out;
+            transition: width 0.3s, height 0.3s, border-color 0.3s, transform 0.1s ease-out;
             mix-blend-mode: difference;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         #cursor-dot {
@@ -388,104 +604,431 @@
             mix-blend-mode: difference;
         }
 
+        .cursor-active #cursor-ring {
+            width: 60px;
+            height: 60px;
+            border-color: var(--brand-blue);
+            border-width: 2px;
+        }
+
+        /* Responsive */
         @media (max-width: 1024px) {
-            .gateway-container {
+            body {
+                color: #eee;
+            }
+
+            .header-console {
+                position: relative;
+                top: 0;
+                left: 0;
+                transform: none;
+                margin: 20px auto 40px;
+                gap: 15px;
+            }
+
+            .console-logo {
+                width: 80vw !important;
+                max-width: 450px;
+                height: auto;
+                filter: saturate(1.1) brightness(1.1) !important;
+                opacity: 1 !important;
+            }
+
+            .console-text {
+                font-size: 0.7rem !important;
+                letter-spacing: 1px !important;
+                width: 85%;
+                white-space: normal !important;
+                line-height: 1.4;
+            }
+
+            main.gateway-container {
                 flex-direction: column;
-                gap: 40px;
+                gap: 50px;
+                margin-top: 20px;
+                width: 100%;
             }
 
             .constellation {
-                transform: scale(0.7);
-                height: 350px;
-                margin: 20px 0;
+                height: 420px;
+                transform: scale(0.85);
+                margin: 0 auto;
             }
 
-            #cursor-ring,
-            #cursor-dot {
-                display: none;
+            .tron-path,
+            .tron-card {
+                display: none !important;
             }
 
-            body {
-                cursor: auto;
-                overflow-y: auto;
+            .center-footer {
+                position: relative;
+                bottom: auto;
+                margin-top: 50px;
+            }
+
+            .main-title {
+                font-size: 1.1rem;
+                letter-spacing: 8px;
+                padding: 0 10px;
+            }
+
+            .poem-fragment {
+                font-size: 0.6rem;
+                max-width: 90%;
+                margin: 0 auto;
+                line-height: 1.6;
+            }
+
+            .wing-label {
+                font-size: 0.85rem !important;
+                letter-spacing: 3px !important;
+                opacity: 1 !important;
+                margin-bottom: 15px;
+                font-weight: 900;
+                text-shadow: 0 0 8px var(--brand-teal);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .star,
+            .console-text::after {
+                animation: none !important;
+            }
+
+            .console-logo,
+            .wing-label,
+            .ethereal-btn {
+                transition: none !important;
             }
         }
     </style>
+
+    <!-- Structured Data: Website + Organization -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Outside The World",
+  "url": "https://outsidetheworld.com/",
+  "description": "A personal archive and professional research lab documenting 25 years of creative work and systems observation.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Outside The World New LLC",
+    "url": "https://outsidetheworld.com/",
+    "logo": "https://outsidetheworld.com/Images/Equal.svg",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Queen Creek",
+      "addressRegion": "AZ",
+      "postalCode": "85142",
+      "addressCountry": "US"
+    }
+  }
+}
+    </script>
 </head>
 
 <body>
+    <!-- Cursor UI -->
     <div id="cursor-ring"></div>
     <div id="cursor-dot"></div>
-    <div class="starfield" id="starfield"></div>
 
-    <main class="gateway-container">
+    <!-- Hidden H1 for SEO without changing visuals -->
+    <h1 class="sr-only">Outside The World</h1>
+
+    <!-- Header Console -->
+    <header class="header-console" aria-label="Outside The World console">
+        <a href="index.html" aria-label="Home">
+            <img alt="Outside The World" class="console-logo" src="Images/Equal.svg" />
+        </a>
+        <div class="console-text" id="typewriter-target" aria-live="polite"></div>
+    </header>
+
+    <!-- Star Canvas -->
+    <canvas id="star-canvas" class="starfield" aria-hidden="true"></canvas>
+
+    <!-- Gateway -->
+    <main class="gateway-container" aria-label="Site navigation gateway">
         <div class="nav-wing">
-            <span class="wing-label">[Thoughts & Creation]</span>
-            <a href="personal.html" class="ethereal-btn">Enter Main</a>
+            <span class="wing-label">[Thoughts &amp; Creation]</span>
+            <a class="ethereal-btn explore-btn" href="personal.html" aria-label="Enter main (Personal)">
+                ENTER MAIN
+            </a>
         </div>
 
-        <div class="constellation">
+        <div class="constellation" aria-hidden="true">
             <div class="star betelgeuse"></div>
             <div class="star bellatrix"></div>
+
+            <div class="belt-node alnitak-node">
+                <a href="personal.html" aria-label="Main interface">
+                    <div class="belt-star" title="Interface"></div>
+                    <svg class="tron-path" height="100" style="top:-80px; left:-120px;" width="150" aria-hidden="true">
+                        <path d="M 125 85 L 125 20 L 10 20"></path>
+                    </svg>
+                    <div class="tron-card">MAIN_INTERFACE</div>
+                </a>
+            </div>
+
+            <div class="belt-node alnilam-node">
+                <a href="resume.html" aria-label="Professional dossier">
+                    <div class="belt-star" title="Dossier"></div>
+                    <svg class="tron-path" height="100" style="top:-70px; left:5px;" width="100" aria-hidden="true">
+                        <path d="M 5 75 L 5 15 L 90 15"></path>
+                    </svg>
+                    <div class="tron-card">DOSSIER_ACCESS</div>
+                </a>
+            </div>
+
+            <div class="belt-node mintaka-node">
+                <a href="emmy.html" aria-label="Heart and soul">
+                    <div class="belt-star" title="Sanctuary"></div>
+                    <svg class="tron-path" height="100" style="top:5px; left:5px;" width="150" aria-hidden="true">
+                        <path d="M 5 5 L 80 5 L 80 80"></path>
+                    </svg>
+                    <div class="tron-card">HEART_AND_SOUL</div>
+                </a>
+            </div>
+
+            <div class="star sword-top"></div>
+
+            <div class="belt-node kavya-node">
+                <a href="poetry.html" aria-label="Kavya archive (Poetry)">
+                    <div class="star sword-mid" title="Kavya Archive"></div>
+                    <svg class="tron-path" height="100" style="top:-10px; left:10px;" width="100" aria-hidden="true">
+                        <path d="M 5 20 L 80 20 L 80 40"></path>
+                    </svg>
+                    <div class="tron-card">OTW_KAVYA</div>
+                </a>
+            </div>
+
+            <div class="star sword-bottom"></div>
             <div class="star saiph"></div>
             <div class="star rigel"></div>
-            <div class="star alnitak"></div>
-            <div class="star alnilam"></div>
-            <div class="star mintaka"></div>
-            <div class="star meissa"></div>
-            <div class="star phi1"></div>
-            <div class="star phi2"></div>
-            <div class="star sword-top"></div>
-            <div class="star nebula"></div>
-            <div class="star sword-bottom"></div>
-            <div class="star pi1"></div>
-            <div class="star pi2"></div>
-            <div class="star pi3"></div>
-            <div class="star pi4"></div>
-            <div class="star pi5"></div>
-            <div class="star pi6"></div>
         </div>
 
         <div class="nav-wing">
-            <span class="wing-label">[The Outside Vantage]</span>
-            <a href="professional.html" class="ethereal-btn">Learn More</a>
+            <span class="wing-label">[THE_OUTSIDE_VANTAGE]</span>
+            <a class="ethereal-btn consult-btn" href="professional.html" aria-label="Learn more (Professional)">
+                LEARN MORE
+            </a>
         </div>
     </main>
 
-    <footer class="footer">
-        <h1 class="main-title">Outside The World</h1>
-        <div class="poem-trigger" onclick="togglePoem()">"perspective is my weakness... outside the world is new"</div>
-    </footer>
+    <!-- Footer -->
+    <div class="center-footer">
+        <h2 class="main-title"></h2>
+        <div class="poem-fragment" id="poem-trigger" role="button" tabindex="0" aria-label="Open poem">
+            "perspective is my weakness... outside the world is new"
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="poem-modal" role="dialog" aria-modal="true" aria-label="Poem modal">
+        <div class="modal-content" id="poem-content">
+            <div class="modal-bar top"></div>
+            <div class="modal-bar bottom"></div>
+
+            <div class="modal-poem">
+                I dance along the path,
+                <br />
+                lonely emerald fields on either side.
+                <br />
+                I gaze into the distant canyon
+                <br />
+                and know that I cannot enter.
+                <br />
+                <br />
+                Every star seems to smile down this evening;
+                <br />
+                each one shines its own way,
+                <br />
+                and the world is quiet.
+                <br />
+                It does not know I am here.
+                <br />
+                <br />
+                The crisp air haunts me;
+                <br />
+                its aroma seems too familiar.
+                <br />
+                Yes, but under different circumstances
+                <br />
+                this would be true.
+                <br />
+                <br />
+                There seems to be an end
+                <br />
+                as the mountain peak swallows up the sky.
+                <br />
+                <span
+                    style="color: var(--brand-teal); font-weight: 700; text-shadow: 0 0 10px var(--brand-teal); font-style: normal;">
+                    My perspective is my weakness;
+                </span>
+                <br />
+                <span
+                    style="color: #fff; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; font-size: 0.9rem; opacity: 0.9;">
+                    outside the world is new.
+                </span>
+            </div>
+
+            <div class="modal-system">[ SYSTEM_DEACTIVATE ]</div>
+        </div>
+    </div>
 
     <script>
-        // RETICLE
+        // --- STARFIELD ENGINE (clean + no cumulative scale bug) ---
+        const canvas = document.getElementById('star-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let stars = [];
+        let width = 0, height = 0;
+        let targetX = 0, targetY = 0;
+        let currentX = 0, currentY = 0;
+        let lastTime = 0;
+
+        const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        function resize() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+
+            const dpr = Math.max(1, window.devicePixelRatio || 1);
+            canvas.width = Math.floor(width * dpr);
+            canvas.height = Math.floor(height * dpr);
+            canvas.style.width = width + 'px';
+            canvas.style.height = height + 'px';
+
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            initStars();
+        }
+
+        function initStars() {
+            stars = [];
+            const count = reduceMotion ? 120 : 450;
+
+            for (let i = 0; i < count; i++) {
+                stars.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    size: Math.random() * 1.5 + 0.5,
+                    opacity: Math.random(),
+                    twinkleSpeed: Math.random() * 0.0005 + 0.0002,
+                    color: Math.random() > 0.9 ? '#6395EE' : (Math.random() > 0.8 ? '#91AFB3' : '#ffffff')
+                });
+            }
+        }
+
+        function onPointerMove(e) {
+            const x = e.clientX ?? (e.touches && e.touches[0] && e.touches[0].clientX) ?? width / 2;
+            const y = e.clientY ?? (e.touches && e.touches[0] && e.touches[0].clientY) ?? height / 2;
+            targetX = (x - width / 2) * 0.012;
+            targetY = (y - height / 2) * 0.012;
+        }
+
+        document.addEventListener('mousemove', onPointerMove, { passive: true });
+        document.addEventListener('touchmove', onPointerMove, { passive: true });
+
+        function draw(timestamp) {
+            const deltaTime = Math.min(60, timestamp - lastTime || 16);
+            lastTime = timestamp;
+
+            ctx.clearRect(0, 0, width, height);
+
+            currentX += (targetX - currentX) * 0.05;
+            currentY += (targetY - currentY) * 0.05;
+
+            const centerX = width / 2;
+            const centerY = height / 2;
+            const shroudRadius = 300;
+
+            stars.forEach(s => {
+                s.opacity += s.twinkleSpeed * deltaTime;
+                if (s.opacity > 1 || s.opacity < 0.1) s.twinkleSpeed = -s.twinkleSpeed;
+
+                const dx = (s.x + currentX) - centerX;
+                const dy = (s.y + currentY) - centerY;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+
+                let shroudAlpha = 1.0;
+                if (distance < shroudRadius) {
+                    shroudAlpha = 0.2 + (distance / shroudRadius) * 0.8;
+                }
+
+                ctx.globalAlpha = Math.max(0, Math.min(1, s.opacity * shroudAlpha));
+                ctx.fillStyle = s.color;
+
+                ctx.beginPath();
+                ctx.arc(s.x + currentX, s.y + currentY, s.size, 0, Math.PI * 2);
+                ctx.fill();
+            });
+
+            if (!reduceMotion) requestAnimationFrame(draw);
+        }
+
+        window.addEventListener('resize', resize, { passive: true });
+        resize();
+        if (!reduceMotion) requestAnimationFrame(draw);
+
+        // --- POEM MODAL ---
+        function togglePoem(forceState) {
+            const modal = document.getElementById('poem-modal');
+            const open = typeof forceState === 'boolean'
+                ? forceState
+                : (modal.style.display !== 'flex');
+
+            modal.style.display = open ? 'flex' : 'none';
+        }
+
+        const poemTrigger = document.getElementById('poem-trigger');
+        const poemModal = document.getElementById('poem-modal');
+        const poemContent = document.getElementById('poem-content');
+
+        poemTrigger.addEventListener('click', () => togglePoem(true));
+        poemTrigger.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                togglePoem(true);
+            }
+        });
+
+        poemModal.addEventListener('click', () => togglePoem(false));
+        poemContent.addEventListener('click', (e) => e.stopPropagation());
+
+        // --- CURSOR SYSTEM ---
         const ring = document.getElementById('cursor-ring');
         const dot = document.getElementById('cursor-dot');
+
         document.addEventListener('mousemove', (e) => {
             dot.style.left = e.clientX - 2 + 'px';
             dot.style.top = e.clientY - 2 + 'px';
+
             ring.style.left = e.clientX - 20 + 'px';
             ring.style.top = e.clientY - 20 + 'px';
         });
 
-        // PARALLAX STARFIELD
-        const starfield = document.getElementById('starfield');
-        for (let i = 0; i < 150; i++) {
-            const s = document.createElement('div');
-            s.className = 'dim-star';
-            s.style.width = s.style.height = Math.random() * 2 + 'px';
-            s.style.top = Math.random() * 100 + '%';
-            s.style.left = Math.random() * 100 + '%';
-            s.style.setProperty('--d', (Math.random() * 5 + 3) + 's');
-            starfield.appendChild(s);
-        }
-        document.addEventListener('mousemove', (e) => {
-            const x = (e.clientX - window.innerWidth / 2) * 0.02;
-            const y = (e.clientY - window.innerHeight / 2) * 0.02;
-            starfield.style.transform = `translate(${x}px, ${y}px)`;
+        const interactiveElements = document.querySelectorAll('a, .belt-star, .poem-fragment');
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => document.body.classList.add('cursor-active'));
+            el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-active'));
         });
 
-        function togglePoem() { /* Reuse your existing modal logic here */ }
+        // --- TYPEWRITER ---
+        const consoleTarget = document.getElementById('typewriter-target');
+        const message = "Click a button, star, or nebula to continue...";
+        let charIndex = 0;
+
+        function typeConsole() {
+            if (charIndex < message.length) {
+                consoleTarget.textContent += message.charAt(charIndex);
+                charIndex++;
+                const typingSpeed = Math.random() * (80 - 30) + 30;
+                setTimeout(typeConsole, typingSpeed);
+            }
+        }
+
+        window.addEventListener('load', () => setTimeout(typeConsole, 600));
     </script>
 </body>
 
