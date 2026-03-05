@@ -1826,36 +1826,41 @@
         })();
 
         // --- THE NARRATIVE ENGINE ---
+        // --- THE NARRATIVE ENGINE ---
         function syncLatestPost() {
             const contentArea = document.getElementById('latest-post-area');
 
+            // 1. SET YOUR LIMIT: Change '3' to however many posts you want to show
+            const postsToShow = 3;
+
             if (typeof current_narrative !== 'undefined' && current_narrative.length > 0) {
-                const displayFeed = current_narrative.slice(0, 1);
+                // 2. SLICE the array based on your limit
+                const displayFeed = current_narrative.slice(0, postsToShow);
 
                 contentArea.innerHTML = displayFeed.map((post) => {
                     return `
-            <article class="residue-signal">
-              <div class="post-meta-date">
-                ${post.date.toUpperCase()}
-              </div>
+    <article class="residue-signal" style="margin-bottom: 80px;"> <div class="post-meta-date">
+        ${post.date.toUpperCase()}
+      </div>
 
-              <h2 class="post-title">${post.title}</h2>
+      <h2 class="post-title">${post.title}</h2>
 
-              <div id="md-render">
-                ${marked.parse(post.body)}
-              </div>
-            </article>
-          `;
+      <div id="md-render">
+        ${marked.parse(post.body)}
+      </div>
+    </article>
+  `;
                 }).join('');
 
-                if (current_narrative.length > 1) {
+                // 3. Update the overflow trigger logic
+                if (current_narrative.length > postsToShow) {
                     contentArea.innerHTML += `
-            <div class="overflow-trigger-wrap">
-              <a href="residue_archive.html" class="overflow-trigger">
-                SIGNAL_OVERFLOW // ACCESS_MATRIX_ARCHIVE [${current_narrative.length - 1}_ADDITIONAL_ENTRIES]
-              </a>
-            </div>
-          `;
+    <div class="overflow-trigger-wrap">
+      <a href="residue_archive.html" class="overflow-trigger">
+        SIGNAL_OVERFLOW // ACCESS_MATRIX_ARCHIVE [${current_narrative.length - postsToShow}_ADDITIONAL_ENTRIES]
+      </a>
+    </div>
+  `;
                 }
 
                 runTypewriterProtocol();
