@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YKRKPFV2MB"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YKRKPFV2MB');
+</script>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   LCARS_TERMINAL // GHOST_WRITER
+  </title>
+  <link href="https://unpkg.com/easymde/dist/easymde.min.css" rel="stylesheet"/>
+  <script src="https://unpkg.com/easymde/dist/easymde.min.js">
+  </script>
+  <style>
+   @import url('https://fonts.googleapis.com/css2?family=Antonio:wght@400;700&family=Fira+Code:wght@300;500&display=swap');
+
+        :root {
+            --lcars-orange: #ff9900;
+            --lcars-purple: #cc99cc;
+            --lcars-blue: #99ccff;
+            --lcars-red: #cc0000;
+            --lcars-tan: #ffcc99;
+            --bg-dark: var(--bg-dark);
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: #fff;
+            font-family: 'Antonio', sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* LCARS CHASSIS */
+        .lcars-frame {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            grid-template-rows: 60px 1fr 60px;
+            gap: 15px;
+            height: 100%;
+        }
+
+        /* ELBOWS */
+        .elbow {
+            background: var(--lcars-purple);
+            height: 60px;
+            width: 150px;
+            border-radius: 30px 0 0 0;
+            position: relative;
+        }
+
+        .bottom-elbow {
+            background: var(--lcars-orange);
+            height: 60px;
+            width: 150px;
+            border-radius: 0 0 0 30px;
+        }
+
+        /* SIDEBAR PANEL */
+        .sidebar {
+            background: var(--lcars-blue);
+            width: 150px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 10px 0;
+            align-items: flex-end;
+        }
+
+        .bar-segment {
+            background: var(--lcars-tan);
+            width: 100px;
+            height: 40px;
+        }
+
+        .bar-segment.red {
+            background: var(--lcars-red);
+        }
+
+        /* HEADER & FOOTER */
+        .header {
+            background: var(--lcars-orange);
+            border-radius: 0 30px 30px 0;
+            display: flex;
+            align-items: center;
+            padding-left: 30px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .footer {
+            background: var(--lcars-purple);
+            border-radius: 0 30px 30px 0;
+            display: flex;
+            align-items: center;
+            padding-left: 30px;
+            font-size: 0.8rem;
+        }
+
+        /* AUTH SCREEN */
+        #auth-container {
+            position: fixed;
+            inset: 0;
+            background: #000;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .auth-label {
+            color: var(--lcars-orange);
+            letter-spacing: 5px;
+            margin-bottom: 20px;
+        }
+
+        #passwordInput {
+            background: transparent;
+            border: 4px solid var(--lcars-blue);
+            border-radius: 20px;
+            padding: 15px;
+            color: #fff;
+            font-family: 'Fira Code';
+            font-size: 1.5rem;
+            text-align: center;
+            outline: none;
+            width: 300px;
+        }
+
+        /* MAIN CONTENT */
+        #main-content {
+            grid-column: 2;
+            grid-row: 2;
+            display: none;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .input-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        input#title {
+            background: transparent;
+            border: none;
+            border-bottom: 4px solid var(--lcars-tan);
+            color: #fff;
+            font-size: 2.5rem;
+            font-family: 'Antonio';
+            text-transform: none !important;
+            flex-grow: 1;
+            outline: none;
+        }
+
+        input#entryDate {
+            background: var(--lcars-purple);
+            color: #000;
+            border: none;
+            padding: 10px;
+            font-family: 'Fira Code';
+            font-weight: 700;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        /* EASYMDE OVERRIDES (FOR FULL VISIBILITY) */
+        .editor-toolbar {
+            background: #333 !important;
+            border: 2px solid var(--lcars-blue) !important;
+            border-radius: 15px 15px 0 0 !important;
+        }
+
+        .editor-toolbar i,
+        .editor-toolbar button {
+            color: #fff !important;
+            opacity: 1 !important;
+        }
+
+        .editor-toolbar button:hover {
+            background: var(--lcars-blue) !important;
+            color: #000 !important;
+        }
+
+        .CodeMirror {
+            background: #111 !important;
+            color: #fff !important;
+            border: 2px solid var(--lcars-blue) !important;
+            border-top: none !important;
+            border-radius: 0 0 15px 15px !important;
+            font-family: 'Fira Code', monospace;
+            font-size: 1.1rem;
+        }
+
+        .CodeMirror-cursor {
+            border-left: 3px solid var(--lcars-orange) !important;
+        }
+
+        .btn-action {
+            background: var(--lcars-orange);
+            color: #000;
+            border: none;
+            padding: 20px 40px;
+            font-family: 'Antonio';
+            font-weight: 700;
+            font-size: 1.2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn-action:hover {
+            background: #fff;
+            transform: scale(1.05);
+        }
+
+        .word-count {
+            font-family: 'Fira Code';
+            color: var(--lcars-blue);
+            margin-top: 10px;
+        }
+        /* --- MOBILE DISTRACTION-FREE OVERRIDE --- */
+@media (max-width: 768px) {
+    /* 1. SCRUB THE DECORATIONS */
+    .elbow, .bottom-elbow, .sidebar, .footer, .header {
+        display: none !important;
+    }
+    #auth-container #passwordInput {
+        width: 85%;
+        font-size: 1.2rem;
+    }
+
+    /* 2. FLATTEN THE GRID  */
+    .lcars-frame {
+        display: block; /* Breaks the grid entirely */
+        padding: env(safe-area-inset-top) 15px env(safe-area-inset-bottom);
+        height: auto;
+    }
+
+    body {
+        padding: 0;
+        height: auto;
+        overflow-y: auto;
+    }
+
+    /* 3. EXPAND THE EDITOR  */
+    #main-content {
+        display: block; /* Overrides the 'none' from the login logic once authorized */
+        padding: 0;
+        width: 100%;
+    }
+
+    .input-row {
+        flex-direction: column;
+        gap: 15px;
+        margin-top: 20px;
+    }
+
+    input#title {
+        font-size: 1.8rem;
+        border-bottom: 2px solid var(--lcars-orange);
+    }
+
+    /* 4. KEYBOARD-FRIENDLY TOOLBAR */
+    .editor-toolbar {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: #1a1a1a !important;
+        display: flex;
+        overflow-x: auto;
+        border: none !important;
+        border-bottom: 1px solid #333 !important;
+    }
+
+    .CodeMirror {
+        height: 350px; /* Gives a solid block of writing space */
+        border: none !important;
+        font-size: 16px !important; /* Prevents iOS auto-zoom */
+    }
+
+    .btn-action {
+        width: 100%;
+        margin: 30px 0;
+        padding: 18px;
+        border-radius: 10px;
+        font-size: 1.1rem;
+    }
+}
+  
+/* THE CLEAN ATMOSPHERIC WASH */
+
+    </style>
+  <link href="theme.css" rel="stylesheet"/>
+  <meta content="#0a0a0a" name="theme-color"/>
+  <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
+  <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+ </head>
+ <body>
+  <div id="cursor-ring">
+  </div>
+  <div id="cursor-dot">
+  </div>
+  <div id="auth-container">
+   <div class="auth-label">
+    RESTRICTED_ACCESS // UPLINK_AUTHORIZATION
+   </div>
+   <input autofocus="" id="passwordInput" placeholder="••••••••" type="password"/>
+  </div>
+  <div class="lcars-frame">
+   <div class="elbow">
+   </div>
+   <div class="header">
+    OTW_GHOST_WRITER // SUB-PROCESS_2026
+   </div>
+   <div class="sidebar">
+    <div class="bar-segment">
+    </div>
+    <div class="bar-segment red">
+    </div>
+    <div class="bar-segment">
+    </div>
+    <div class="bar-segment">
+    </div>
+    <div style="flex-grow:1">
+    </div>
+    <div class="bar-segment" style="background: var(--lcars-purple); height: 100px;">
+    </div>
+   </div>
+   <div id="main-content">
+    <div class="input-row">
+     <input id="title" placeholder="BLOG TITLE.." type="text"/>
+     <input id="entryDate" type="date"/>
+    </div>
+    <textarea id="content"></textarea>
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+     <div class="word-count" id="meter">
+      DENSITY: 0 WORDS
+     </div>
+     <button class="btn-action" id="downloadBtn" type="button">
+      INITIALIZE_UPLINK
+     </button>
+    </div>
+   </div>
+   <div class="bottom-elbow">
+   </div>
+   <div class="footer">
+    NARRATIVE_STREAM_026 // QUEEN_CREEK_RELAY
+   </div>
+  </div>
+  <script>
+   // DATE LOGIC
+        const now = new Date();
+        const offset = now.getTimezoneOffset() * 60000;
+        const localISOTime = new Date(now - offset).toISOString().split('T')[0];
+        document.getElementById('entryDate').value = localISOTime;
+
+        // EASYMDE CONFIGURATION WITH CUSTOM IMAGE BUTTON
+        const easyMDE = new EasyMDE({
+            element: document.getElementById('content'),
+            forceSync: true,
+            spellChecker: false,
+            status: false,
+            // We are rebuilding the toolbar to include your specific Image Uplink
+            toolbar: [
+                "bold", "italic", "heading", "|",
+                "quote", "unordered-list", "ordered-list", "|",
+                "link",
+                {
+                    name: "uplink-image",
+                    action: function insertImage(editor) {
+                        const filename = prompt("ENTER_FILENAME (e.g., photo.jpg):", "");
+                        if (filename) {
+                            const cm = editor.codemirror;
+                            const stat = editor.getState();
+                            const options = editor.options;
+                            const url = `Images/Blog/${filename}`;
+                            // Injects Markdown image syntax at cursor
+                            cm.replaceSelection(`![Image_Description](${url})`);
+                        }
+                    },
+                    className: "fa fa-picture-o", // Uses the standard image icon
+                    title: "Insert Blog Image Signal",
+                },
+                "|", "preview", "side-by-side", "fullscreen"
+            ]
+        });
+
+        function login() {
+            // Note: I'm keeping your password check intact as requested
+            if (document.getElementById('passwordInput').value === 'Stockton12!') {
+                document.getElementById('auth-container').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+                easyMDE.codemirror.refresh();
+            } else {
+                alert('ACCESS_DENIED // SECURITY_HANDSHAKE_FAILED');
+            }
+        }
+
+        document.getElementById('passwordInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') login();
+        });
+
+        // Word Count Logic
+        easyMDE.codemirror.on("change", () => {
+            const text = easyMDE.value().trim();
+            const count = text ? text.split(/\s+/).length : 0;
+            document.getElementById('meter').innerText = `DENSITY: ${count} WORDS`;
+        });
+
+        // DOWNLOAD / UPLINK LOGIC
+        document.getElementById('downloadBtn').addEventListener('click', () => {
+            let title = document.getElementById('title').value;
+            const chosenDate = document.getElementById('entryDate').value;
+            let content = easyMDE.value();
+
+            if (!title || !content || !chosenDate) {
+                alert("ERROR: LOG_INCOMPLETE");
+                return;
+            }
+
+            const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+            const formattedDate = new Date(chosenDate + 'T00:00:00').toLocaleDateString('en-US', dateOptions);
+
+            // This ensures your .md file follows our sync protocol
+            const fullMarkdown = `# ${title}\nDate: ${formattedDate}\n\n${content}`;
+            const fileName = `${chosenDate}-${title.toLowerCase().replace(/[^a-z0-9]/g, '-')}.md`;
+
+            const blob = new Blob([fullMarkdown], { type: 'text/markdown' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = fileName;
+            a.click();
+        });
+  </script>
+ </body>
+</html>
