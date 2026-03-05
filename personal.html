@@ -848,15 +848,29 @@
             overflow: hidden;
         }
 
+        /* === OVERRIDE: Chip inline with title (prevents collisions) === */
+        .builder-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
         .builder-card .builder-chip {
-            position: absolute;
-            top: 22px;
-            left: 22px;
+            position: static !important;
+            /* defeats any older absolute styling */
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 18px;
+            padding: 0 8px;
+            border-radius: 999px;
+
             font-family: var(--font-code);
-            font-size: 0.55rem;
+            font-size: 0.52rem;
             letter-spacing: 2px;
             text-transform: uppercase;
-            padding: 5px 8px;
+            line-height: 1;
+
             border: 1px solid rgba(160, 190, 245, 0.25);
             background: rgba(99, 149, 238, 0.10);
             color: rgba(160, 190, 245, 0.95);
@@ -1543,6 +1557,15 @@
                 <div class="card-beacon" aria-hidden="true"></div>
                 <h3>THE NEW ARCHIVE</h3>
                 <p>Modern Narrative Archive // 2026 - Present</p>
+            </a>
+
+            <a href="image_of_the_day.html" class="archive-card dossier-card builder-card">
+                <div class="card-beacon" aria-hidden="true"></div>
+                <h3 class="builder-title">
+                    <span class="builder-chip">NEW</span>
+                    THE IOTD
+                </h3>
+                <p>Image Of The Day // Daily Signal</p>
             </a>
 
             <a href="wayback.html" class="archive-card teal-card">
