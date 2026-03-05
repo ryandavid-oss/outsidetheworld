@@ -33,7 +33,8 @@
 
     <style>
         :root {
-            --nav-offset: 160px;
+            --nav-offset: 140px;
+            /* will be overwritten by syncNav() */
         }
 
         body {
@@ -46,37 +47,56 @@
             overflow-x: hidden;
         }
 
-        nav {
+        /* =========================
+     TOP NAV (fixed, two-column)
+     ========================= */
+        .top-nav {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             z-index: 3500;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            background: linear-gradient(to bottom, rgba(10, 10, 10, 1) 0%, rgba(10, 10, 10, 0) 100%);
-            display: flex;
-            justify-content: flex-start;
-            padding: 30px 40px;
+
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            background: linear-gradient(to bottom, rgba(10, 10, 10, 0.98) 0%, rgba(10, 10, 10, 0) 100%);
+
+            padding: 22px 0;
             pointer-events: none;
+            /* keep “only logo/title clickable” feel */
         }
 
-        .hero-logo-container {
-            display: flex !important;
+        .top-nav-inner {
+            max-width: 1600px;
+            /* wider rails = less “pulled to center” */
+            margin: 0 auto;
+            padding: 0 28px;
+            /* slightly tighter than 40px */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 22px;
+        }
+
+        .top-nav .hero-logo-container {
             pointer-events: auto;
+            display: flex;
+            align-items: center;
         }
 
-        .nav-logo {
+        .top-nav .nav-logo {
             width: 220px;
+            max-width: 42vw;
+            /* prevents logo from visually hogging the row */
+            height: auto;
             filter: drop-shadow(0 0 20px rgba(99, 149, 238, 0.25));
         }
 
-        header {
-            text-align: center;
-            margin: 0 auto 30px;
-            position: relative;
-            z-index: 10;
-            padding: 0 20px;
+        .top-nav .nav-right {
+            pointer-events: auto;
+            flex: 1;
+            min-width: 0;
+            text-align: right;
         }
 
         .status-tag {
@@ -88,34 +108,44 @@
             padding: 6px 15px;
             display: inline-block;
             text-transform: uppercase;
-            margin-bottom: 14px;
             opacity: 0.9;
         }
 
-        header h1 {
-            font-size: 2.0rem;
-            letter-spacing: 12px;
-            text-transform: uppercase;
-            font-weight: 900;
-            margin: 8px 0 0;
+        .top-nav .status-tag {
+            margin: 0 0 8px;
         }
 
-        /* HERO (Image of the Day) */
+        .top-nav .nav-title {
+            margin: 0;
+            font-size: 1.35rem;
+            letter-spacing: 10px;
+            text-transform: uppercase;
+            font-weight: 900;
+
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* =========================
+     HERO (Image of the Day)
+     ========================= */
         .hero {
-            max-width: 1100px;
+            max-width: 1280px;
+            /* slightly wider than your old 1100 */
             margin: 0 auto 40px;
             padding: 0 20px;
         }
 
         .hero-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.015);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             overflow: hidden;
         }
 
         .hero-img {
             width: 100%;
-            max-height: 70vh;
+            max-height: 78vh;
             object-fit: contain;
             display: block;
             background: #050505;
@@ -177,7 +207,9 @@
             background: rgba(145, 175, 179, 0.14);
         }
 
-        /* ARCHIVE GRID */
+        /* =========================
+     ARCHIVE GRID
+     ========================= */
         .section-label {
             max-width: 1400px;
             margin: 0 auto 10px;
@@ -231,7 +263,6 @@
             transform: scale(1.04);
         }
 
-        /* small date tag overlay */
         .artifact-tag {
             position: absolute;
             bottom: 10px;
@@ -247,15 +278,22 @@
             backdrop-filter: blur(8px);
         }
 
-        @media (max-width:768px) {
-            nav {
-                justify-content: center;
-                padding: 20px 0;
+        /* =========================
+     MOBILE
+     ========================= */
+        @media (max-width: 768px) {
+            .top-nav {
+                padding: 18px 0;
             }
 
-            .hero-logo-container {
-                width: 100%;
+            .top-nav-inner {
+                padding: 0 16px;
                 justify-content: center;
+            }
+
+            .top-nav .nav-right {
+                display: none;
+                /* keep mobile clean: logo only */
             }
 
             .nav-logo {
@@ -263,13 +301,8 @@
                 max-width: 280px;
             }
 
-            body {
-                padding-top: 200px !important;
-            }
-
-            header h1 {
-                font-size: 1.2rem;
-                letter-spacing: 5px;
+            .hero {
+                padding: 0 10px;
             }
 
             .vault-grid {
@@ -281,25 +314,73 @@
             .section-label {
                 padding: 0 10px;
             }
+        }
 
-            .hero {
-                padding: 0 10px;
-            }
+        /* =========================
+   OTW JE NE SAIS QUOI
+   1) Header signal line
+   2) Subtle hero film grain
+   ========================= */
+
+        /* 1) Signature OTW signal line under the header */
+        .top-nav {
+            position: fixed;
+            /* just ensuring this is set already */
+        }
+
+        .top-nav::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 1px;
+            background: linear-gradient(90deg,
+                    transparent,
+                    rgba(99, 149, 238, 0.40),
+                    rgba(145, 175, 179, 0.22),
+                    transparent);
+            opacity: 0.9;
+            pointer-events: none;
+        }
+
+        /* 2) Hero film grain (very subtle) */
+        .hero-card {
+            position: relative;
+        }
+
+        .hero-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+
+            /* tiny dot grain */
+            background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+            background-size: 3px 3px;
+
+            opacity: 0.055;
+            /* keep it low */
+            mix-blend-mode: overlay;
+            /* gentle texture */
         }
     </style>
 </head>
 
 <body>
-    <nav>
-        <a href="personal.html" class="hero-logo-container">
-            <img class="nav-logo" src="Images/Equal.svg" alt="Back" />
-        </a>
-    </nav>
 
-    <header>
-        <div class="status-tag">TYPE: DAILY_SIGNAL // STREAM: IMAGE_OF_THE_DAY</div>
-        <h1>Image_Of_The_Day</h1>
-    </header>
+    <nav class="top-nav">
+        <div class="top-nav-inner">
+            <a href="personal.html" class="hero-logo-container" aria-label="Back to Personal">
+                <img class="nav-logo" src="Images/Equal.svg" alt="Outside The World" />
+            </a>
+
+            <div class="nav-right">
+                <div class="status-tag">TYPE: DAILY_SIGNAL // STREAM: IOTD</div>
+                <h1 class="nav-title">Image of the Day</h1>
+            </div>
+        </div>
+    </nav>
 
     <!-- HERO -->
     <section class="hero">
@@ -325,10 +406,11 @@
     <script>
         // Dynamic clearance
         function syncNav() {
-            const nav = document.querySelector('nav');
-            if (nav && window.innerWidth > 768) {
-                document.documentElement.style.setProperty('--nav-offset', (nav.offsetHeight + 30) + 'px');
-            }
+            const nav = document.querySelector('.top-nav');
+            if (!nav) return;
+
+            const buffer = window.innerWidth > 768 ? 8 : 10;
+            document.documentElement.style.setProperty('--nav-offset', (nav.offsetHeight + buffer) + 'px');
         }
         window.addEventListener('resize', syncNav);
         window.addEventListener('load', syncNav);
