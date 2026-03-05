@@ -1,0 +1,1050 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#0a0a0a" />
+    <title>OTW T-Shirt Builder</title>
+
+    <link rel="stylesheet" href="/theme.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;700&family=Inter:wght@300;400;700;900&display=swap" />
+
+    <style>
+        :root {
+            --bg-dark: #0a0a0a;
+            --font-main: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+            --font-code: "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+            --brand-blue: #6395EE;
+            --brand-light-blue: #A0BEF5;
+            --brand-teal: #91AFB3;
+
+            --ink: rgba(255, 255, 255, 0.92);
+            --muted: rgba(145, 175, 179, 0.75);
+
+            --surface: rgba(145, 175, 179, 0.045);
+            --borderx: rgba(145, 175, 179, 0.18);
+
+            --ok: #78f0c6;
+            --warn: #ffd36e;
+            --bad: #ff4d4d;
+        }
+
+        html {
+            color-scheme: dark;
+            background: var(--bg-dark);
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg-dark);
+            color: var(--ink);
+            font-family: var(--font-main);
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(circle at 20% 15%, rgba(99, 149, 238, 0.12), transparent 52%),
+                radial-gradient(circle at 80% 25%, rgba(145, 175, 179, 0.10), transparent 52%),
+                radial-gradient(circle at 50% 95%, rgba(160, 190, 245, 0.10), transparent 52%);
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.9;
+        }
+
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            -webkit-backdrop-filter: blur(14px);
+            backdrop-filter: blur(14px);
+            background: linear-gradient(to bottom, rgba(5, 5, 5, 0.95) 70%, rgba(5, 5, 5, 0) 100%);
+            border-bottom: 1px solid rgba(145, 175, 179, 0.12);
+            padding: 14px 16px 10px;
+            margin-bottom: 18px;
+        }
+
+        .topbar-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 0;
+        }
+
+        .brand img {
+            width: 92px;
+            height: auto;
+            filter: drop-shadow(0 0 18px rgba(99, 149, 238, 0.22));
+        }
+
+        .titleblock {
+            min-width: 0;
+        }
+
+        .title {
+            font-weight: 900;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-size: 0.95rem;
+            margin: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .subtitle {
+            font-family: var(--font-code);
+            font-size: 0.6rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-top: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .status {
+            font-family: var(--font-code);
+            font-size: 0.6rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.72);
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            background: rgba(255, 255, 255, 0.03);
+            padding: 8px 10px;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .status .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+            background: rgba(145, 175, 179, 0.35);
+            box-shadow: 0 0 10px rgba(145, 175, 179, 0.18);
+        }
+
+        @media (max-width: 980px) {
+            .status {
+                display: none;
+            }
+        }
+
+        .wrap {
+            position: relative;
+            z-index: 1;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 16px 90px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 0.95fr 1.05fr;
+            gap: 16px;
+            align-items: start;
+        }
+
+        @media (max-width: 980px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            position: relative;
+            background: var(--surface);
+            border: 1px solid var(--borderx);
+            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(16px);
+            padding: 16px;
+            overflow: hidden;
+            transform: translateZ(0);
+            will-change: transform;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background:
+                linear-gradient(to right, rgba(145, 175, 179, 0.55), rgba(145, 175, 179, 0)) top left / 90px 2px no-repeat,
+                linear-gradient(to bottom, rgba(145, 175, 179, 0.55), rgba(145, 175, 179, 0)) top left / 2px 90px no-repeat,
+                linear-gradient(to left, rgba(145, 175, 179, 0.40), rgba(145, 175, 179, 0)) bottom right / 90px 2px no-repeat,
+                linear-gradient(to top, rgba(145, 175, 179, 0.40), rgba(145, 175, 179, 0)) bottom right / 2px 90px no-repeat;
+            opacity: 0.95;
+        }
+
+        .card-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .card-label {
+            font-family: var(--font-code);
+            font-size: 0.65rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(145, 175, 179, 0.85);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 0;
+        }
+
+        .card-label::after {
+            content: "";
+            height: 1px;
+            flex: 1;
+            background: rgba(145, 175, 179, 0.22);
+        }
+
+        .chip {
+            font-family: var(--font-code);
+            font-size: 0.55rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 6px 8px;
+            border: 1px solid rgba(160, 190, 245, 0.16);
+            color: rgba(160, 190, 245, 0.90);
+            background: rgba(160, 190, 245, 0.05);
+            white-space: nowrap;
+        }
+
+        label {
+            display: block;
+            font-family: var(--font-code);
+            font-size: 0.55rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(160, 190, 245, 0.92);
+            margin: 0 0 6px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            box-sizing: border-box;
+            background: rgba(5, 5, 5, 0.72);
+            border: 1px solid rgba(145, 175, 179, 0.22);
+            color: #fff;
+            outline: none;
+            padding: 12px;
+            font-family: var(--font-code);
+            font-size: 0.8rem;
+            transition: border-color .2s ease, background .2s ease, box-shadow .2s ease;
+            appearance: none;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: rgba(99, 149, 238, 0.65);
+            box-shadow: 0 0 0 3px rgba(99, 149, 238, 0.12);
+            background: rgba(5, 5, 5, 0.80);
+        }
+
+        .fields {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        @media (max-width: 640px) {
+            .fields {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .btn {
+            cursor: pointer;
+            border: none;
+            padding: 10px 12px;
+            font-family: var(--font-code);
+            font-size: 0.62rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: transform .15s ease, box-shadow .2s ease, background .2s ease, color .2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            white-space: nowrap;
+            user-select: none;
+        }
+
+        .btn.primary {
+            background: var(--brand-blue);
+            color: var(--bg-dark);
+            box-shadow: 0 10px 26px rgba(99, 149, 238, 0.22);
+        }
+
+        .btn.primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 14px 30px rgba(99, 149, 238, 0.28);
+        }
+
+        .btn.ghost {
+            background: rgba(255, 255, 255, 0.03);
+            color: rgba(255, 255, 255, 0.88);
+            border: 1px solid rgba(145, 175, 179, 0.22);
+        }
+
+        .btn.ghost:hover {
+            transform: translateY(-1px);
+            border-color: rgba(145, 175, 179, 0.45);
+            box-shadow: 0 0 18px rgba(145, 175, 179, 0.18);
+        }
+
+        .note {
+            margin-top: 10px;
+            font-family: var(--font-code);
+            font-size: 0.55rem;
+            letter-spacing: 1px;
+            color: rgba(145, 175, 179, 0.75);
+            line-height: 1.5;
+        }
+
+        .note .warn {
+            color: rgba(255, 211, 110, 0.95);
+        }
+
+        .note .ok {
+            color: rgba(120, 240, 198, 0.95);
+        }
+
+        .note .bad {
+            color: rgba(255, 77, 77, 0.95);
+        }
+
+        .preview-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .stage {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            border: 1px solid rgba(145, 175, 179, 0.16);
+            background: rgba(0, 0, 0, 0.30);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        canvas#preview {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .smallmeta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+            justify-content: space-between;
+            font-family: var(--font-code);
+            font-size: 0.58rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(145, 175, 179, 0.80);
+        }
+
+        .pill {
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            background: rgba(255, 255, 255, 0.03);
+            padding: 6px 8px;
+            white-space: nowrap;
+        }
+
+        .toggle-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+
+        .checkbox {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            font-family: var(--font-code);
+            font-size: 0.6rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(145, 175, 179, 0.80);
+            user-select: none;
+        }
+
+        .checkbox input {
+            width: auto;
+        }
+
+        input[type="checkbox"] {
+            appearance: auto !important;
+            -webkit-appearance: auto !important;
+            width: 18px !important;
+            height: 18px !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            accent-color: var(--brand-teal);
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="topbar">
+        <div class="topbar-inner">
+            <div class="brand">
+                <a href="/index.html" aria-label="Back to home" style="display:flex; align-items:center;">
+                    <img src="/Images/Equal.svg" alt="Outside The World" />
+                </a>
+                <div class="titleblock">
+                    <h1 class="title">T-SHIRT_BUILDER // MOCK_ENGINE</h1>
+                    <div class="subtitle" id="subline">INITIALIZING_ASSETS…</div>
+                </div>
+            </div>
+            <div class="status" id="statusBox"><span class="dot" id="statusDot"></span><span id="statusText">BOOT</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="wrap">
+        <div class="grid">
+            <section class="card">
+                <div class="card-head">
+                    <p class="card-label">01 // CONTROL_MATRIX</p>
+                    <span class="chip" id="assetChip">ASSETS: —</span>
+                </div>
+
+                <div class="fields">
+                    <div>
+                        <label for="style">T-SHIRT_STYLE</label>
+                        <select id="style">
+                            <option value="short">SHORT_SLEEVE</option>
+                            <option value="long">LONG_SLEEVE</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="color">T-SHIRT_COLOR</label>
+                        <select id="color">
+                            <option value="black">BLACK</option>
+                            <option value="gray">HEATHER_GRAY</option>
+                            <option value="white">WHITE</option>
+                            <option value="navyfrost">NAVYFROST</option>
+                            <option value="neptune">NEPTUNE</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="fields">
+                    <div>
+                        <label for="side">VIEW</label>
+                        <select id="side">
+                            <option value="front">FRONT</option>
+                            <option value="back">BACK</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="logoFront">FRONT_ART</label>
+                        <select id="logoFront">
+                            <option value="none">NONE</option>
+                            <option value="brandmark">BRANDMARK_CIRCLE</option>
+                            <option value="full">FULL_LOGO</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="fields">
+                    <div>
+                        <label for="logoBack">BACK_ART</label>
+                        <select id="logoBack">
+                            <option value="none">NONE</option>
+                            <option value="brandmark">BRANDMARK_CIRCLE</option>
+                            <option value="full">FULL_LOGO</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="sloganMode">BACK_SLOGAN</label>
+                        <select id="sloganMode">
+                            <option value="off">OFF</option>
+                            <option value="random">RANDOM</option>
+                            <option value="choose">CHOOSE</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="sloganChooser" style="display:none; margin-bottom: 10px;">
+                    <label for="sloganPick">SLOGAN_PICK</label>
+                    <select id="sloganPick"></select>
+                </div>
+
+                <div class="toggle-row">
+                    <label class="checkbox">
+                        <input type="checkbox" id="autoLogoVariant" checked>
+                        AUTO_LOGO_VARIANT
+                    </label>
+                    <label class="checkbox">
+                        <input type="checkbox" id="forceDarkLogo">
+                        FORCE_DARK_LOGO
+                    </label>
+                </div>
+
+                <div class="actions">
+                    <button class="btn primary" id="downloadBtn" type="button">DOWNLOAD_PNG</button>
+                    <button class="btn ghost" id="emailBtn" type="button">EMAIL_FOR_APPROVAL</button>
+                    <button class="btn ghost" id="randomizeBtn" type="button">RANDOMIZE</button>
+                </div>
+
+                <div class="note" id="note">
+                    <span class="ok">TIP</span>: Download the PNG, then EMAIL_FOR_APPROVAL opens your email with the
+                    configuration. Attach the downloaded PNG manually.
+                    <br><br>
+                    <span class="warn">LOGO_VISIBILITY</span>: White/Gray shirts generally need the <b>dark</b> logo
+                    variants. Auto mode will handle this.
+                </div>
+            </section>
+
+            <aside class="card">
+                <div class="card-head">
+                    <p class="card-label">02 // RENDER_PREVIEW</p>
+                    <span class="chip" id="renderChip">READY: —</span>
+                </div>
+
+                <div class="preview-wrap">
+                    <div class="stage">
+                        <canvas id="preview" width="2000" height="2000"></canvas>
+                    </div>
+
+                    <div class="smallmeta">
+                        <span class="pill" id="metaShirt">SHIRT: —</span>
+                        <span class="pill" id="metaArt">ART: —</span>
+                        <span class="pill" id="metaText">TEXT: —</span>
+                    </div>
+
+                    <div class="note" style="margin-top:0">
+                        Uses photo mock bases from <code>/Images/Builder</code>, slogans from
+                        <code>/shirt_scripting.json</code>, and overlays your SVG logos.
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <script>
+        // -----------------------
+        // Config (paths + assets)
+        // -----------------------
+        const BASE_PATH = '/Images/Builder/';
+        const SLOGAN_PATH = '/shirt_scripting.json';
+
+        function shirtFilename(color, style, side) {
+            return `${color}-${style}-${side}.jpg`;
+        }
+
+        const LOGOS = {
+            full_light: `${BASE_PATH}Main Logo.svg`,
+            full_dark: `${BASE_PATH}Main Logo Dark.svg`,
+            mark_light: `${BASE_PATH}OTW_Brandmark.svg`,
+            mark_dark: `${BASE_PATH}OTW_Brandmark_dark.svg`,
+        };
+
+        const LIGHT_SHIRTS = new Set(['white', 'gray']);
+        const TEXT = {
+            fontFamily: '"Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
+        };
+
+        const PLACEMENT = {
+            front: {
+                leftChest: { x: 1250, y: 705 },      // wearer-left == viewer-right
+                logoScaleFull: 0.17,
+                logoScaleMark: 0.14,
+            },
+            back: {
+                logoCenter: { x: 1000, y: 630 },
+                logoScaleFull: 0.40,
+                logoScaleMark: 0.38,
+                sloganGap: 70,
+                shirtCenterX: 1000,     // optical center of the shirt image
+                sloganXOffset: 30,       // nudge for the slogan only
+            }
+        };
+
+        // -----------------------
+        // UI Elements
+        // -----------------------
+        const elStyle = document.getElementById('style');
+        const elColor = document.getElementById('color');
+        const elSide = document.getElementById('side');
+        const elFront = document.getElementById('logoFront');
+        const elBack = document.getElementById('logoBack');
+        const elSMode = document.getElementById('sloganMode');
+        const elSChooser = document.getElementById('sloganChooser');
+        const elSPick = document.getElementById('sloganPick');
+
+        const elAuto = document.getElementById('autoLogoVariant');
+        const elForceDark = document.getElementById('forceDarkLogo');
+
+        const elAssetChip = document.getElementById('assetChip');
+        const elRenderChip = document.getElementById('renderChip');
+        const elSubline = document.getElementById('subline');
+        const elStatusText = document.getElementById('statusText');
+        const elStatusDot = document.getElementById('statusDot');
+
+        const elMetaShirt = document.getElementById('metaShirt');
+        const elMetaArt = document.getElementById('metaArt');
+        const elMetaText = document.getElementById('metaText');
+
+        const canvas = document.getElementById('preview');
+        const ctx = canvas.getContext('2d');
+
+        // -----------------------
+        // Status helpers
+        // -----------------------
+        function setStatus(text, level = 'ok') {
+            elStatusText.textContent = text;
+            elStatusDot.style.background =
+                level === 'ok' ? 'rgba(120,240,198,0.65)' :
+                    level === 'warn' ? 'rgba(255,211,110,0.75)' :
+                        'rgba(255,77,77,0.75)';
+            elStatusDot.style.boxShadow =
+                level === 'ok' ? '0 0 12px rgba(120,240,198,0.25)' :
+                    level === 'warn' ? '0 0 12px rgba(255,211,110,0.25)' :
+                        '0 0 12px rgba(255,77,77,0.25)';
+        }
+
+        function isLightShirt(color) { return LIGHT_SHIRTS.has(color); }
+
+        function inkColorForShirt(color) {
+            return isLightShirt(color) ? 'rgba(0,0,0,0.90)' : 'rgba(255,255,255,0.92)';
+        }
+
+        function pickLogoVariant(color) {
+            if (elForceDark.checked) return 'dark';
+            if (!elAuto.checked) return 'light';
+            return isLightShirt(color) ? 'dark' : 'light';
+        }
+
+        function resolveLogoPath(kind, variant) {
+            if (kind === 'full') return variant === 'dark' ? LOGOS.full_dark : LOGOS.full_light;
+            if (kind === 'brandmark') return variant === 'dark' ? LOGOS.mark_dark : LOGOS.mark_light;
+            return null;
+        }
+
+        // -----------------------
+        // Slogans
+        // -----------------------
+        let SLOGANS = ["SYSTEMS & STORIES", "ENJOY YOUR STAY IN THE RESIDUE", "SIGNAL_OVERFLOW"];
+
+        async function loadSlogans() {
+            try {
+                const res = await fetch(SLOGAN_PATH, { cache: 'no-store' });
+                if (!res.ok) throw new Error(`HTTP_${res.status}`);
+                const data = await res.json();
+                if (!Array.isArray(data)) throw new Error('INVALID_JSON');
+                SLOGANS = data.filter(Boolean).map(String);
+                populateSloganDropdown();
+                return true;
+            } catch (e) {
+                populateSloganDropdown();
+                return false;
+            }
+        }
+
+        function populateSloganDropdown() {
+            elSPick.innerHTML = '';
+            for (const s of SLOGANS) {
+                const opt = document.createElement('option');
+                opt.value = s;
+                opt.textContent = s;
+                elSPick.appendChild(opt);
+            }
+        }
+
+        function normalizeSlogan(s) {
+            return String(s || '').trim().replace(/\s+/g, ' ');
+        }
+
+        // returns { lines:[...] } or null
+        function toPrintableLines(raw, maxLen = 15) {
+            const clean = normalizeSlogan(raw);
+            if (!clean) return null;
+
+            if (clean.length <= maxLen) return { lines: [clean] };
+
+            if (clean.length <= maxLen * 2) {
+                const mid = Math.floor(clean.length / 2);
+                let cut = clean.lastIndexOf(' ', mid);
+                if (cut === -1) cut = clean.indexOf(' ', mid);
+                if (cut === -1) return null;
+
+                const a = clean.slice(0, cut).trim();
+                const b = clean.slice(cut + 1).trim();
+                if (!a || !b) return null;
+                if (a.length > maxLen || b.length > maxLen) return null;
+
+                return { lines: [a, b] };
+            }
+
+            return null;
+        }
+
+        // returns printable slogan {lines:[...]} or null
+        function getSelectedSlogan() {
+            if (elSMode.value === 'off') return null;
+
+            const pickOne = () => {
+                if (elSMode.value === 'choose') return elSPick.value || null;
+                if (!SLOGANS.length) return null;
+                return SLOGANS[Math.floor(Math.random() * SLOGANS.length)];
+            };
+
+            for (let i = 0; i < 10; i++) {
+                const raw = pickOne();
+                const printable = toPrintableLines(raw, 15);
+                if (printable) return printable;
+            }
+            return null;
+        }
+
+        // -----------------------
+        // Image loading + SVG -> Image
+        // -----------------------
+        const imgCache = new Map();
+
+        function loadImage(url) {
+            if (imgCache.has(url)) return imgCache.get(url);
+            const p = new Promise((resolve, reject) => {
+                const img = new Image();
+                img.crossOrigin = 'anonymous';
+                img.onload = () => resolve(img);
+                img.onerror = () => reject(new Error(`IMG_LOAD_FAIL: ${url}`));
+                img.src = url;
+            });
+            imgCache.set(url, p);
+            return p;
+        }
+
+        async function loadSvgAsImage(url) {
+            const cacheKey = `svgimg:${url}`;
+            if (imgCache.has(cacheKey)) return imgCache.get(cacheKey);
+
+            const p = (async () => {
+                const res = await fetch(url, { cache: 'no-store' });
+                if (!res.ok) throw new Error(`SVG_HTTP_${res.status}`);
+                let svgText = await res.text();
+
+                // remove common white background rects
+                svgText = svgText.replace(
+                    /<rect\b[^>]*\b(fill|style)=["'][^"']*(#fff|#ffffff|white)[^"']*["'][^>]*(\/>|><\/rect>)/ig,
+                    ''
+                );
+
+                const blob = new Blob([svgText], { type: 'image/svg+xml' });
+                const objUrl = URL.createObjectURL(blob);
+                const img = await loadImage(objUrl);
+                return img;
+            })();
+
+            imgCache.set(cacheKey, p);
+            return p;
+        }
+
+        // -----------------------
+        // Text helpers
+        // -----------------------
+        function drawTrackedText(text, x, y, trackingPx) {
+            const chars = [...text];
+            const widths = chars.map(ch => ctx.measureText(ch).width);
+            const total = widths.reduce((a, b) => a + b, 0) + trackingPx * (chars.length - 1);
+
+            let startX = x - total / 2;
+            for (let i = 0; i < chars.length; i++) {
+                ctx.fillText(chars[i], startX, y);
+                startX += widths[i] + trackingPx;
+            }
+        }
+
+        function measureTrackedWidth(text, trackingPx) {
+            const chars = [...text];
+            const widths = chars.map(ch => ctx.measureText(ch).width);
+            return widths.reduce((a, b) => a + b, 0) + trackingPx * (chars.length - 1);
+        }
+
+        // -----------------------
+        // Rendering
+        // -----------------------
+        async function render() {
+            const style = elStyle.value;
+            const color = elColor.value;
+            const side = elSide.value;
+
+            const frontChoice = elFront.value;
+            const backChoice = elBack.value;
+
+            const variant = pickLogoVariant(color);
+            const sloganObj = getSelectedSlogan(); // {lines:[...]} or null
+
+            elSChooser.style.display = (elSMode.value === 'choose') ? 'block' : 'none';
+
+            const activeArt = (side === 'front') ? frontChoice : backChoice;
+
+            const shirtUrl = BASE_PATH + shirtFilename(color, style, side);
+
+            elMetaShirt.textContent = `SHIRT: ${color.toUpperCase()}_${style.toUpperCase()}_${side.toUpperCase()}`;
+            elMetaArt.textContent = `ART: ${activeArt.toUpperCase()}_${variant.toUpperCase()}`;
+            elMetaText.textContent = sloganObj ? `TEXT: ${sloganObj.lines.join(' / ')}` : `TEXT: OFF`;
+
+            if (isLightShirt(color) && variant !== 'dark') {
+                elRenderChip.textContent = 'WARN: LIGHT_SHIRT_NEEDS_DARK_LOGO';
+                elRenderChip.style.borderColor = 'rgba(255,211,110,0.35)';
+            } else {
+                elRenderChip.textContent = 'READY: RENDER_OK';
+                elRenderChip.style.borderColor = 'rgba(160,190,245,0.16)';
+            }
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            try {
+                const shirtImg = await loadImage(shirtUrl);
+                ctx.drawImage(shirtImg, 0, 0, canvas.width, canvas.height);
+
+                if (activeArt !== 'none') {
+                    const logoUrl = resolveLogoPath(activeArt, variant);
+                    const logoImg = logoUrl.endsWith('.svg') ? await loadSvgAsImage(logoUrl) : await loadImage(logoUrl);
+
+                    const place = PLACEMENT[side];
+                    const center = (side === 'front') ? place.leftChest : place.logoCenter;
+
+                    const scale = (activeArt === 'full') ? place.logoScaleFull : place.logoScaleMark;
+
+                    const lw = logoImg.width;
+                    const lh = logoImg.height;
+
+                    const targetW = canvas.width * scale;
+                    const maxW = (side === 'front') ? canvas.width * 0.22 : canvas.width * 0.62;
+                    const finalW = Math.min(targetW, maxW);
+
+                    const targetH = finalW * (lh / lw);
+                    const x = center.x - finalW / 2;
+                    const y = center.y - targetH / 2;
+
+                    ctx.drawImage(logoImg, x, y, finalW, targetH);
+
+                    const logoBottomY = y + targetH;
+
+                    if (side === 'back' && backChoice !== 'none' && sloganObj) {
+                        const lines = sloganObj.lines;
+                        const textColor = inkColorForShirt(color);
+
+                        ctx.save();
+                        ctx.fillStyle = textColor;
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'middle';
+                        ctx.globalAlpha = 0.95;
+
+                        const maxWidth = canvas.width * 0.75;
+                        let fontSize = Math.round(canvas.width * 0.034);
+                        let tracking = Math.round(canvas.width * 0.002);
+
+                        const longest = lines.reduce((a, b) => (a.length > b.length ? a : b), '');
+                        const longestUp = longest.toUpperCase();
+
+                        while (fontSize > 16) {
+                            ctx.font = `700 ${fontSize}px ${TEXT.fontFamily}`;
+                            const w = measureTrackedWidth(longestUp, tracking);
+                            if (w <= maxWidth) break;
+                            fontSize -= 2;
+                            if (tracking > 1) tracking -= 1;
+                        }
+
+                        const gap = (PLACEMENT.back.sloganGap ?? 70);
+                        const lineHeight = fontSize * 1.15;
+
+                        const sloganX =
+                            (PLACEMENT.back.shirtCenterX ?? (canvas.width / 2)) +
+                            (PLACEMENT.back.sloganXOffset ?? 0); const baseY = (logoBottomY + gap) + (lines.length === 2 ? lineHeight * 0.5 : 0);
+
+                        for (let i = 0; i < lines.length; i++) {
+                            const t = lines[i].toUpperCase();
+                            const yy = baseY + (i * lineHeight);
+                            drawTrackedText(t, sloganX, yy, tracking);
+                        }
+
+                        ctx.restore();
+                    }
+                }
+
+                setStatus('RENDER_OK', 'ok');
+                elSubline.textContent = 'UPLINK_ESTABLISHED // render complete';
+            } catch (e) {
+                setStatus('RENDER_FAIL', 'bad');
+                elSubline.textContent = 'UPLINK_INTERRUPTED // check asset paths';
+                console.error(e);
+            }
+        }
+
+        // -----------------------
+        // Export + mailto
+        // -----------------------
+        function downloadPng() {
+            const file = `otw-shirt-${elColor.value}-${elStyle.value}-${elSide.value}.png`;
+            canvas.toBlob((blob) => {
+                if (!blob) return;
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = file;
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+                URL.revokeObjectURL(url);
+            }, 'image/png', 0.95);
+        }
+
+        function openApprovalEmail() {
+            const style = elStyle.value;
+            const color = elColor.value;
+            const side = elSide.value;
+
+            const variant = pickLogoVariant(color);
+            const front = elFront.value;
+            const back = elBack.value;
+
+            const sloganObj = getSelectedSlogan();
+            const sloganText = sloganObj ? sloganObj.lines.join(' / ') : 'OFF';
+
+            const subject = encodeURIComponent(`OTW Shirt Mock Approval // ${color} ${style}`);
+            const bodyLines = [
+                `Approval request for OTW shirt mock:`,
+                ``,
+                `STYLE: ${style}`,
+                `COLOR: ${color}`,
+                `VIEW (current): ${side}`,
+                `FRONT ART: ${front}`,
+                `BACK ART: ${back}`,
+                `LOGO VARIANT: ${variant}`,
+                `BACK SLOGAN MODE: ${elSMode.value}`,
+                `BACK SLOGAN: ${sloganText}`,
+                ``,
+                `ATTACHMENT: Please attach the downloaded PNG from tshirt_builder.html`,
+                ``,
+                `NOTES: Light shirts generally require DARK logo variants.`,
+            ];
+
+            // TODO: put your own email address here
+            const to = 'you@example.com';
+            const body = encodeURIComponent(bodyLines.join('\n'));
+            window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
+        }
+
+        // -----------------------
+        // Randomize
+        // -----------------------
+        function randomize() {
+            const styles = ['short', 'long'];
+            const colors = ['black', 'gray', 'white', 'navyfrost', 'neptune'];
+            const sides = ['front', 'back'];
+            const art = ['none', 'brandmark', 'full'];
+
+            elStyle.value = styles[Math.floor(Math.random() * styles.length)];
+            elColor.value = colors[Math.floor(Math.random() * colors.length)];
+            elSide.value = sides[Math.floor(Math.random() * sides.length)];
+            elFront.value = art[Math.floor(Math.random() * art.length)];
+            elBack.value = art[Math.floor(Math.random() * art.length)];
+
+            if (elBack.value === 'full') {
+                elSMode.value = (Math.random() < 0.7) ? 'random' : 'off';
+            } else {
+                elSMode.value = 'off';
+            }
+
+            elAuto.checked = true;
+            elForceDark.checked = false;
+
+            render();
+        }
+
+        // -----------------------
+        // Init
+        // -----------------------
+        function bind() {
+            [elStyle, elColor, elSide, elFront, elBack, elSMode, elSPick, elAuto, elForceDark]
+                .forEach(el => el.addEventListener('change', render));
+
+            document.getElementById('downloadBtn').addEventListener('click', () => {
+                downloadPng();
+                setStatus('DOWNLOADED', 'ok');
+            });
+
+            document.getElementById('emailBtn').addEventListener('click', () => {
+                openApprovalEmail();
+            });
+
+            document.getElementById('randomizeBtn').addEventListener('click', randomize);
+        }
+
+        (async function init() {
+            setStatus('BOOT', 'warn');
+            elSubline.textContent = 'INITIALIZING_SLOGANS…';
+
+            const ok = await loadSlogans();
+            elAssetChip.textContent = ok ? 'ASSETS: SLOGANS_LOADED' : 'ASSETS: SLOGANS_FALLBACK';
+
+            elStyle.value = 'short';
+            elColor.value = 'black';
+            elSide.value = 'front';
+            elFront.value = 'brandmark';
+            elBack.value = 'full';
+            elSMode.value = 'random';
+
+            bind();
+
+            elSubline.textContent = 'UPLINK_ESTABLISHED // ready';
+            setStatus('READY', 'ok');
+            render();
+        })();
+    </script>
+</body>
+
+</html>
