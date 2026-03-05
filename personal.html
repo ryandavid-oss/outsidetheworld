@@ -762,91 +762,128 @@
             opacity: 1;
         }
 
-/* === CHANGE LOG CARD === */
-.changelog-card{
-  display: block;
-  position: relative;
-  padding: 30px;
-  text-decoration: none;
-  color: inherit;
+        /* === CHANGE LOG CARD === */
+        .changelog-card {
+            display: block;
+            position: relative;
+            padding: 30px;
+            text-decoration: none;
+            color: inherit;
 
-  background: rgba(255, 255, 255, 0.01);
-  border: 1px solid rgba(160, 190, 245, 0.10);
-  overflow: hidden;
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid rgba(160, 190, 245, 0.10);
+            overflow: hidden;
 
-  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-}
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
 
-.changelog-card .card-beacon{
-  top: 22px;
-  right: 22px;
-  width: 18px;
-  height: 18px;
-  color: var(--brand-blue);
-  opacity: 0.8;
-}
+        .changelog-card .card-beacon {
+            top: 22px;
+            right: 22px;
+            width: 18px;
+            height: 18px;
+            color: var(--brand-blue);
+            opacity: 0.8;
+        }
 
-.changelog-kicker{
-  font-family: var(--font-code);
-  font-size: 0.55rem;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: rgba(145, 175, 179, 0.75);
-  margin-bottom: 12px;
-}
+        .changelog-kicker {
+            font-family: var(--font-code);
+            font-size: 0.55rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(145, 175, 179, 0.75);
+            margin-bottom: 12px;
+        }
 
-.changelog-title{
-  font-family: var(--font-main);
-  font-weight: 900;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  font-size: 0.95rem;
-  color: var(--brand-light-blue);
-  margin-bottom: 10px;
-}
+        .changelog-title {
+            font-family: var(--font-main);
+            font-weight: 900;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-size: 0.95rem;
+            color: var(--brand-light-blue);
+            margin-bottom: 10px;
+        }
 
-.changelog-sub{
-  font-family: 'IBM Plex Serif', serif;
-  font-size: 0.95rem;
-  line-height: 1.55;
-  color: rgba(255, 255, 255, 0.72);
-}
+        .changelog-sub {
+            font-family: 'IBM Plex Serif', serif;
+            font-size: 0.95rem;
+            line-height: 1.55;
+            color: rgba(255, 255, 255, 0.72);
+        }
 
-.changelog-cta{
-  margin-top: 18px;
-  font-family: var(--font-code);
-  font-size: 0.6rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--brand-teal);
-  opacity: 0.85;
-}
+        .changelog-cta {
+            margin-top: 18px;
+            font-family: var(--font-code);
+            font-size: 0.6rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--brand-teal);
+            opacity: 0.85;
+        }
 
-/* hover / focus */
-.changelog-card:hover{
-  transform: translateX(10px);
-  border-color: rgba(99, 149, 238, 0.35);
-  background: rgba(99, 149, 238, 0.05);
-}
+        /* hover / focus */
+        .changelog-card:hover {
+            transform: translateX(10px);
+            border-color: rgba(99, 149, 238, 0.35);
+            background: rgba(99, 149, 238, 0.05);
+        }
 
-.changelog-card:hover .changelog-title{
-  color: #fff;
-}
+        .changelog-card:hover .changelog-title {
+            color: #fff;
+        }
 
-.changelog-card:hover .changelog-cta{
-  opacity: 1;
-  text-shadow: 0 0 10px rgba(145, 175, 179, 0.35);
-}
+        .changelog-card:hover .changelog-cta {
+            opacity: 1;
+            text-shadow: 0 0 10px rgba(145, 175, 179, 0.35);
+        }
 
-.changelog-card:focus-visible{
-  outline: 2px solid var(--brand-teal);
-  outline-offset: 4px;
-}
+        .changelog-card:focus-visible {
+            outline: 2px solid var(--brand-teal);
+            outline-offset: 4px;
+        }
 
-/* Mobile: match your reduced hover behavior */
-@media (max-width: 1024px){
-  .changelog-card:hover{ transform: none; }
-}
+        .builder-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .builder-card .builder-chip {
+            position: absolute;
+            top: 22px;
+            left: 22px;
+            font-family: var(--font-code);
+            font-size: 0.55rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 5px 8px;
+            border: 1px solid rgba(160, 190, 245, 0.25);
+            background: rgba(99, 149, 238, 0.10);
+            color: rgba(160, 190, 245, 0.95);
+        }
+
+        .builder-card::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -120%;
+            width: 120%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(99, 149, 238, 0.22), transparent);
+            transform: skewX(-12deg);
+            transition: left 0.6s ease;
+        }
+
+        .builder-card:hover::after {
+            left: 120%;
+        }
+
+        /* Mobile: match your reduced hover behavior */
+        @media (max-width: 1024px) {
+            .changelog-card:hover {
+                transform: none;
+            }
+        }
 
         /* BEACONS (Reticles) */
         .card-beacon {
@@ -1554,14 +1591,21 @@
 
                 <div class="changelog-title">CHANGE_LOG // VIEW ARCHIVE</div>
 
-<div class="changelog-sub">
-  <span id="changelog-latest-text">Recent fixes, features, and site edits — chronicle of the residue.</span>
-  <br>
-  <span id="changelog-latest-meta" style="display:inline-block; margin-top:10px; font-family: var(--font-code); font-size:0.55rem; letter-spacing:2px; text-transform:uppercase; color: rgba(145,175,179,0.75);">
-    LOADING_LATEST_ENTRY…
-  </span>
-</div>
+                <div class="changelog-sub">
+                    <span id="changelog-latest-text">Recent fixes, features, and site edits — chronicle of the
+                        residue.</span>
+                    <br>
+                    <span id="changelog-latest-meta"
+                        style="display:inline-block; margin-top:10px; font-family: var(--font-code); font-size:0.55rem; letter-spacing:2px; text-transform:uppercase; color: rgba(145,175,179,0.75);">
+                        LOADING_LATEST_ENTRY…
+                    </span>
+                </div>
+                <a href="tshirt_builder.html" class="archive-card dossier-card builder-card">
+                    <div class="card-beacon" aria-hidden="true"></div>
+                    <h3>SHIRT BUILDER</h3>
+                    <p>Funtime Engine // Make it yours</p>
 
+                </a>
                 <div class="changelog-cta">OPEN_CHANGE_LOG →</div>
             </a>
 
@@ -1944,40 +1988,40 @@
         syncMusicSignal();
         setInterval(syncMusicSignal, 30000);
 
-// --- CHANGE LOG PREVIEW (latest entry) ---
-(async function hydrateChangelogCard() {
-  const textEl = document.getElementById('changelog-latest-text');
-  const metaEl = document.getElementById('changelog-latest-meta');
-  if (!textEl || !metaEl) return;
+        // --- CHANGE LOG PREVIEW (latest entry) ---
+        (async function hydrateChangelogCard() {
+            const textEl = document.getElementById('changelog-latest-text');
+            const metaEl = document.getElementById('changelog-latest-meta');
+            if (!textEl || !metaEl) return;
 
-  try {
-    const res = await fetch('/changelog.json', { cache: 'no-store' });
-    if (!res.ok) throw new Error(`HTTP_${res.status}`);
+            try {
+                const res = await fetch('/changelog.json', { cache: 'no-store' });
+                if (!res.ok) throw new Error(`HTTP_${res.status}`);
 
-    const data = await res.json();
-    if (!Array.isArray(data) || data.length === 0) throw new Error('NO_ENTRIES');
+                const data = await res.json();
+                if (!Array.isArray(data) || data.length === 0) throw new Error('NO_ENTRIES');
 
-    // pick newest by date (YYYY-MM-DD). Fall back to first item.
-    const sorted = data.slice().sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')));
-    const latest = sorted[0] || data[0];
+                // pick newest by date (YYYY-MM-DD). Fall back to first item.
+                const sorted = data.slice().sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')));
+                const latest = sorted[0] || data[0];
 
-    const date = (latest.date || '').toString();
-    const type = (latest.type || 'Other').toString();
-    const text = (latest.text || '').toString();
+                const date = (latest.date || '').toString();
+                const type = (latest.type || 'Other').toString();
+                const text = (latest.text || '').toString();
 
-    if (text) textEl.textContent = text;
+                if (text) textEl.textContent = text;
 
-    // nice compact meta line
-    const typeUpper = type.toUpperCase();
-    metaEl.textContent = date
-      ? `LATEST // ${date} // ${typeUpper}`
-      : `LATEST // ${typeUpper}`;
+                // nice compact meta line
+                const typeUpper = type.toUpperCase();
+                metaEl.textContent = date
+                    ? `LATEST // ${date} // ${typeUpper}`
+                    : `LATEST // ${typeUpper}`;
 
-  } catch (e) {
-    // fail silently but keep vibe
-    metaEl.textContent = 'LATEST // UNAVAILABLE';
-  }
-})();
+            } catch (e) {
+                // fail silently but keep vibe
+                metaEl.textContent = 'LATEST // UNAVAILABLE';
+            }
+        })();
 
         // --- MOBILE NAVIGATION ANCHOR ---
         function scrollToCards() {
