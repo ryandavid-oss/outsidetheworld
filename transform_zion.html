@@ -17,7 +17,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
   <meta name="color-scheme" content="dark"/>
 
-  <!-- Best-effort privacy -->
+  <!-- Best-effort privacy (not security) -->
   <meta name="robots" content="noindex, nofollow, noarchive">
   <meta name="googlebot" content="noindex, nofollow, noarchive">
 
@@ -34,9 +34,9 @@
     :root{
       --brand-purple:#9b59b6;
       --brand-light:#d2b4de;
-      --bg-dark:#0a0a0a; /* FIX: force real dark */
+      --bg-dark:#0a0a0a;
       --text-grey:#888;
-      --hdr-offset: 92px; /* will be overwritten by syncHeader() */
+      --hdr-offset: 92px; /* overwritten by syncHeader() */
     }
 
     body{
@@ -50,7 +50,7 @@
     }
 
     /* =========================
-       1) FIXED HEADER (clean, minimal, same vibe)
+       FIXED HEADER
        ========================= */
     .top-nav{
       position: fixed;
@@ -108,7 +108,6 @@
       text-overflow: ellipsis;
     }
 
-    /* subtle signal line */
     .top-nav::after{
       content:"";
       position:absolute;
@@ -126,7 +125,7 @@
     }
 
     /* =========================
-       2) HERO HEADER (same as your original, just cleaned)
+       HERO HEADER
        ========================= */
     header{
       padding: 100px 20px 40px;
@@ -147,14 +146,14 @@
       font-size: 0.95rem;
       color: var(--brand-purple);
       letter-spacing: 1px;
-      max-width: 700px;
+      max-width: 720px;
       margin: 25px auto 0;
       font-weight: 300;
-      line-height: 1.6;
+      line-height: 1.65;
     }
 
     /* =========================
-       3) TAB NAV (sticky) — kept same look
+       TAB NAV (sticky)
        ========================= */
     .tab-nav{
       display: flex;
@@ -190,7 +189,7 @@
     }
 
     /* =========================
-       4) CONTENT SECTIONS — kept same
+       CONTENT SECTIONS
        ========================= */
     .container{
       max-width: 800px;
@@ -259,9 +258,24 @@
       padding: 5px 0 5px 30px;
       font-style: italic;
       color: #888;
-      margin: 35px 0;
+      margin: 35px 0 18px;
       font-size: 1rem;
     }
+    .quote-source{
+      font-family: 'Fira Code', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(155,89,182,0.7);
+      text-decoration: none;
+      border-bottom: 1px dotted rgba(155,89,182,0.35);
+      padding-bottom: 2px;
+    }
+    .quote-source:hover{
+      color: rgba(210,180,222,0.95);
+      border-bottom-color: rgba(210,180,222,0.55);
+    }
+
     ul{ margin-bottom: 30px; padding-left: 20px; color: #ccc; }
     li{ margin-bottom: 15px; font-size: 1.1rem; font-weight: 300; }
     li strong{ color: var(--brand-light); }
@@ -314,7 +328,7 @@
       color: #444;
       letter-spacing: 1px;
       line-height: 1.4;
-      max-width: 500px;
+      max-width: 520px;
       margin-left: auto;
       margin-right: auto;
       text-transform: uppercase;
@@ -357,7 +371,6 @@
       .top-nav .nav-logo{ width: 80vw; max-width: 280px; }
     }
 
-    /* Motion safety */
     @media (prefers-reduced-motion: reduce){
       *{ animation: none !important; transition: none !important; scroll-behavior: auto !important; }
     }
@@ -368,7 +381,7 @@
   <div id="cursor-ring"></div>
   <div id="cursor-dot"></div>
 
-  <!-- Clean fixed header (replaces the old inline nav hack) -->
+  <!-- Clean fixed header -->
   <nav class="top-nav" aria-label="Top navigation">
     <div class="top-nav-inner">
       <a href="personal.html" aria-label="Back to Personal">
@@ -383,7 +396,7 @@
   <header>
     <h1 class="tfz-logo">transformingzion</h1>
     <p class="tfz-subtitle">
-      Exploring the intersection of trans/non-binary and Latter-day Saint identities.<br/>
+      Exploring the intersection of non-binary and Latter-day Saint identities.<br/>
       Broadening minds, extending Zion, and fostering understanding.
     </p>
   </header>
@@ -394,416 +407,394 @@
     <button class="nav-btn" onclick="showTab('ama', this)">Ask Me Anything</button>
   </nav>
 
+  <!-- =========================
+       HOME
+       ========================= -->
   <div class="container active" id="home">
     <img alt="Banner" class="banner-img" src="Images/banner-2.png"/>
 
-<article class="post">
-  <h2>What I believe</h2>
-  <div class="date-line">Tuesday, February 4, 2025</div>
+    <article class="post">
+      <h2>What I believe</h2>
+      <div class="date-line">Tuesday, February 4, 2025</div>
 
-  <p>
-    I believe in the restoration of the gospel of Jesus Christ. Essentially, I am a believing member of The Church of
-    Jesus Christ of Latter-day Saints because of that simple, profound fact. I have a spiritual knowledge—a witness—of
-    where the Book of Mormon came from and recognize the divine hand that brought it forth from the dust of forgotten
-    history. I have a testimony of the power of the Book of Mormon and believe it speaks of Christ in a sacred,
-    understandable light, illuminating His role in our lives. While I do not—and perhaps cannot—understand every word
-    that proceeds from a prophet's mouth, I have faith in the leaders of the Church. I believe that, like all of us,
-    they are earnestly seeking further light and knowledge that only God can provide. Through prayer and study, I have
-    learned how to listen to the Holy Spirit confirm truth to me in my life, heart, and mind.
-  </p>
+      <p>
+        I believe in the restoration of the gospel of Jesus Christ. I am a believing member of The Church of Jesus
+        Christ of Latter-day Saints because of that simple, profound fact. I have a spiritual knowledge—a witness—of
+        where the Book of Mormon came from and recognize the divine hand that brought it forth from the dust of
+        forgotten history. I have a testimony of the power of the Book of Mormon, and I believe it speaks of Christ
+        in a sacred, understandable light.
+      </p>
 
-  <p>
-    I love being part of the body of Christ and feeling the love and compassion of a ward family. I try my best to
-    emulate my Savior's example, and have long loved the inspired words of King Benjamin from Mosiah 4:15:
-    “…ye will teach them to love one another, and to serve one another.” Truthfully, my faith is all I have known from
-    the start. I was born into it, albeit into a family of varying degrees of faith. Early on, I quickly grew to
-    understand something deeper about the religion in which I was being raised. While many of my family members ebbed
-    and flowed in their faith and commitment to the gospel, each one of them abounded in good works, cultivated a
-    solemn morality, and sought to expand their lives with truth and wisdom.
-  </p>
+      <p>
+        While I do not—and perhaps cannot—understand every word that proceeds from a prophet’s mouth, I have faith in
+        the leaders of the Church. I believe they are earnestly seeking further light and knowledge that only God can
+        provide. Through prayer and study, I’ve learned how to listen to the Holy Spirit confirm truth to me in my life,
+        heart, and mind.
+      </p>
 
-  <p>
-    To me, this spoke of the genuine influence of the Gospel of Jesus Christ, if only by proximity, not by pure,
-    consistent practice. I learned that merely having a tiny seed of hope in Christ can bring about blessings. In an
-    unexpected and peculiar way, this foundation of my testimony of the gospel has yielded fruits that could not have
-    been predicted in my youth. I find a resilience to temptation, a willingness to look beyond certitudes—to embrace
-    nuance and complexity—and the flexibility to adapt when faced with doubt and hardship. Without going into further
-    detail at this time, I am a believing member of The Church of Jesus Christ of Latter-day Saints because of the
-    fruits I have seen in my life, rather than in spite of the flaws the Church, like any human institution, may
-    exhibit.
-  </p>
+      <p>
+        I love being part of the body of Christ and feeling the love and compassion of a ward family. I try my best to
+        emulate my Savior’s example, and I have long loved the words of King Benjamin from Mosiah 4:15:
+        “…ye will teach them to love one another, and to serve one another.”
+      </p>
 
-  <p>
-    I have a firm testimony of the power of prayer in our lives and can promise anyone within the sound of my voice
-    that God does answer prayers—not always in the way we expect, but always in the way we need. The mere act of
-    opening your heart to your Maker requires humility and a sacrifice of control to something bigger than yourself. I
-    hold fast to the promises of God that if I look to Him in all things, I will be guided to do good continually.
-  </p>
+      <p>
+        Truthfully, my faith is all I have known from the start. I was born into it—into a family of varying degrees of
+        faith—and early on I learned something deeper about the religion in which I was being raised. Even when family
+        members ebbed and flowed in commitment, many still abounded in good works, cultivated solemn morality, and
+        sought to expand their lives with truth and wisdom.
+      </p>
 
-  <p>
-    I honor and respect the priesthood with which I have been blessed in this life. I realize that by my sex assigned
-    at birth, I was given the right and responsibility to exercise this sacred power to lift up all others and care
-    for the poor in spirit. Not only do I have a chance to share of my physical substance in this life, I have the
-    honor to promote spiritual well-being to those who seek their Heavenly Parents' blessings on earth.
-  </p>
+      <p>
+        To me, that revealed the genuine influence of the gospel—even by proximity. In a quiet, sometimes unexpected
+        way, this foundation has yielded fruits I could not have predicted in my youth: resilience to temptation, a
+        willingness to look beyond certitudes, and a flexibility to adapt when faced with doubt and hardship. I remain a
+        believing member of The Church of Jesus Christ of Latter-day Saints because of the fruits I have seen in my life,
+        not because I think human institutions are flawless.
+      </p>
 
-  <p>
-    Which brings me to my next point: being non-binary does not exclude me from practicing, in full faith, all of the
-    tenets of the gospel and administering to those in need through the power of the priesthood. I am careful to
-    attend to current Church guidelines regarding social transitioning, retain my "he" pronouns, and do not have any
-    current plans of medically transitioning to alleviate the dysphoria I have experienced since I was a child.
-  </p>
+      <p>
+        I have a testimony of prayer. God answers prayers—not always in the way we expect, but always in the way we need.
+        The mere act of opening your heart to your Maker requires humility and a surrender of control to something bigger
+        than yourself. I hold fast to the promises of God that if I look to Him in all things, I will be guided to do good
+        continually.
+      </p>
 
-  <p>
-    I am choosing to walk down this path, not primarily for me, but to shine a light for the thousands of other
-    Latter-day Saint individuals who experience, and sometimes struggle with, gender dysphoria. I walk this path as my
-    way forward—a path of personal revelation—to better understand the conditions of mortality so that I may lead my
-    family alongside my wife with presence and demonstrable humility. If I wanted life to be easy, I would not have
-    come out in any way. I would have tamped down the emotions that well up each time I look in the mirror and see
-    someone that I am not—someone who does not fully reflect the person I know myself to be. I would have forcefully
-    dried the tears that I cry each time I experience the rigid, often painful binary culture of our Church. I could
-    have done this, as it has been my way of life for 40+ years, and I am damn good at hiding from the world, even from
-    myself.
-  </p>
+      <p>
+        I honor and respect the priesthood with which I have been blessed in this life. I recognize that by my sex assigned
+        at birth, I was given the responsibility to exercise this sacred power to lift others and care for the poor in spirit.
+      </p>
 
-  <p>
-    But my faith in Christ and in the restoration of the gospel of Jesus Christ compels me to take up this yoke, to
-    embrace this challenge, and to walk this path. I will never be alone, because in Gethsemane my Savior took upon
-    Himself not only the scarlet sins of an entire world but the immensity of their sorrows, their weaknesses, and
-    their struggles with mental and emotional health. Christ died for me so that I may truly live—authentically and
-    completely.
-  </p>
+      <p>
+        Which brings me to my next point: as I understand and live my faith, being non-binary does not exclude me from
+        practicing, in full faith, the tenets of the gospel—or from ministering to those in need through priesthood service.
+        I am careful to attend to current Church guidelines, retain my “he” pronouns, and do not have plans to medically
+        transition to alleviate the dysphoria I have experienced since I was a child.
+      </p>
 
-  <p>
-    It is now my responsibility to live my life for Him, so that through me, others may come to know Him—not just the
-    historical Jesus, but the living Christ who walks with us today.
-  </p>
-</article>
+      <p>
+        I am choosing to walk this path not primarily to make life easier, but to shine a light for Latter-day Saint
+        individuals who experience gender dysphoria—especially those who feel alone. I walk this path as a way forward:
+        a path of personal revelation, and a path of humility, as I lead my family alongside my wife.
+      </p>
 
-<article class="post">
-  <h2>Hello, and welcome</h2>
-  <div class="date-line">Saturday, February 1, 2025</div>
+      <p>
+        If I wanted life to be easy, I would have stayed silent. I would have tamped down the emotions that rise each time
+        I look in the mirror and see someone that I am not—someone who does not fully reflect the person I know myself to be.
+        I would have forcefully dried the tears I cry when I experience the rigid, often painful binary culture that can exist
+        around us. I could have done that; it has been my way for decades, and I became very good at hiding—even from myself.
+      </p>
 
-  <p>
-    Sharing this part of myself isn't easy. In the past year, I have felt the pull on my heart to open up to the world
-    about who I am—who I have always been, as far as I can remember. My gender identity is a part of me that I'm now
-    ready to share, even though it feels both exhilarating and unnerving.
-  </p>
+      <p>
+        But my faith in Christ and in the restoration of the gospel compels me to take up this yoke, embrace this challenge,
+        and walk this path. I will not be alone, because in Gethsemane my Savior took upon Himself not only the sins of a world
+        but also its sorrows, weaknesses, and struggles. Christ died for me so that I may truly live—authentically and completely.
+      </p>
 
-  <p>
-    During different periods of my life, I have made the active choice to hide who I am, often at great personal cost,
-    whether out of comfort, safety, convenience, role requirements, or even denial. But an interesting thing happens as
-    we grow older; the facades we create for ourselves tend to dissolve in the face of our own mortality. Over time, I
-    slowly realized how dreadfully stuck I was in my own head, with anxiety and depression only the tip of the iceberg
-    of my emotional and mental health struggles. I began to see how my juggling of choices forced me into a cognitive
-    corner; constantly choosing between authenticity and conformity led to a sense of being trapped.
-  </p>
+      <p>
+        It is now my responsibility to live my life for Him, so that through me others may come to know Him—not only the
+        historical Jesus, but the living Christ who walks with us today.
+      </p>
+    </article>
 
-  <p>And the last straw was how it affected my faith in God.</p>
+    <article class="post">
+      <h2>Hello, and welcome</h2>
+      <div class="date-line">Saturday, February 1, 2025</div>
 
-  <p>
-    You see, Christianity has a tenuous relationship with gender, focused on a strict male/female binary. This tension
-    was something I wrestled with deeply. In the beginning, it is said that God made mankind; male and female, he
-    created them. So throughout history, those who didn't fit those molds were given a bad rap and forced into seclusion
-    or worse. But we must remember that though God works in simplicity… I do not believe He limits the creativity of His
-    expression, including in the realm of gender identity.
-  </p>
+      <p>
+        Sharing this part of myself isn’t easy. In the past year, I have felt a pull on my heart to open up about who I am—
+        who I have always been, as far as I can remember. This part of my life is now ready to be spoken aloud, even though
+        it feels both exhilarating and unnerving.
+      </p>
 
-  <p>
-    The same God who created the heavens and the earth, giving them day and night, oceans and dry land, also caused that
-    there be transitions betwixt the binary aspects of His wonder. Between day and night, we find dawn and dusk, and a
-    thousand varying degrees of beautiful shades of color and light. Marshes, fenlands, bogs, and wetlands give delicate
-    and tenuous life a place to settle down and thrive, whereas in the dry deserts or deep oceans, they would suffer and
-    perish. Just as these liminal spaces—these in-between places—exist in nature, so too does my gender identity exist
-    as a valid and beautiful expression of God's creation.
-  </p>
+      <p>
+        In different seasons of my life, I chose to hide—out of comfort, safety, convenience, role requirements, and sometimes
+        denial. But something shifts as we grow older: the facades we build begin to dissolve in the face of mortality. Over time,
+        I realized how stuck I had become in my own head, with anxiety and depression only the tip of the iceberg. I began to see
+        how the constant choice between authenticity and conformity can trap a person in a cognitive corner.
+      </p>
 
-  <p>I exist in that in-between space.</p>
+      <p>And the last straw was how it affected my faith in God.</p>
 
-  <p>
-    I believe that my gender identity, like those who identify strictly as male or female, occupies a sacred and equally
-    valid space. Indeed, I believe that because of my gender identity, I have the blessed opportunity to love and
-    understand all of God's creations, regardless of circumstance, creed, gender, race, social standing, or any of the
-    other constructs that tend to separate and not unify mankind.
-  </p>
+      <p>
+        Christianity can carry a tense relationship with gender, often framed through a strict male/female binary. This tension
+        was something I wrestled with deeply. Scripture tells us that God created mankind; male and female, He created them. Over
+        time, those who didn’t fit neat categories were often misunderstood or pushed aside. But we must remember: though God works
+        in simplicity, I do not believe He limits the creativity of His expression—including in the realm of gender.
+      </p>
 
-  <p>
-    So please, be patient with me as I share my experiences with you through this dedicated account. I understand the
-    discomfort that this topic brings. I realize that some of you may equate those feelings of discomfort to unyielding
-    confirmation that who I am is in opposition to my Heavenly parentage. I challenge each of you who finds yourselves
-    coming to this conclusion to walk with me with an open heart, listen to my story, and gently open up to the risk
-    that when we limit ourselves to comfortable topics, familiar echo chambers, and like-minded relationships, we limit
-    our ability to love our neighbors as Christ would want us to.
-  </p>
+      <p>
+        The same God who gave us day and night also gave us dawn and dusk—endless shades of color and light between the binaries.
+        Marshes, bogs, wetlands—liminal places—allow delicate life to thrive where it might otherwise perish. Just as these
+        in-between places exist in nature, I believe there are sacred in-between places within human experience as well.
+      </p>
 
-  <p>
-    P.S. I know that sharing this part of myself might bring up questions for some of you. To help address those, I've
-    created a Frequently Asked Questions page where I delve into some of the complexities of being non-binary and a
-    member of the Church. I discuss how I reconcile my gender identity with my faith, the challenges I face, and what it
-    means to be an ally to the LGBTQ+ community. If you're curious to learn more, I invite you to explore the FAQ page.
-    It's a space for open dialogue and deeper understanding.
-  </p>
-</article>
+      <p>I exist in that in-between space.</p>
+
+      <p>
+        I believe my experience, like the experiences of those who identify strictly as male or female, occupies a meaningful place
+        within God’s creation. And I believe that walking this road has expanded my capacity to love—across circumstance, creed, gender,
+        race, social standing, and the many constructs that tend to separate rather than unify.
+      </p>
+
+      <p>
+        So please, be patient with me as I share. I understand the discomfort this topic can bring. I also understand that discomfort
+        can sometimes be mistaken for certainty. I invite anyone who feels that pull toward certainty to walk with me with an open heart:
+        listen to my story, and consider the possibility that love grows when we risk proximity.
+      </p>
+
+      <p>
+        P.S. I know this may raise questions. To help address them, I’ve written a Frequently Asked Questions section where I talk about
+        the complexities of being non-binary and a member of the Church—how I reconcile faith and identity, what challenges I face, and what
+        it can look like to be an ally. If you’re curious, I invite you to explore it.
+      </p>
+    </article>
   </div>
 
-<div class="container" id="faq">
-  <h2>Frequently Asked Questions</h2>
+  <!-- =========================
+       FAQ
+       ========================= -->
+  <div class="container" id="faq">
+    <h2>Frequently Asked Questions</h2>
 
-  <div class="faq-item">
-    <span class="faq-q">How can someone be non-binary and a member of the Church?</span>
+    <div class="faq-item">
+      <span class="faq-q">How can someone be non-binary and a member of the Church?</span>
 
-    <p>
-      Gender identity is a deeply personal and complex aspect of who we are, separate from gender expression or sexual
-      orientation. Every individual's journey with their gender identity is unique, and there's no single way to be
-      non-binary.
-    </p>
+      <p>
+        Gender identity is a deeply personal and complex aspect of who we are, separate from gender expression or sexual
+        orientation. Every individual’s experience is unique, and there is no single way to be non-binary.
+      </p>
 
-    <p>
-      For me, and for many others, being non-binary is a part of our identity, just like being gay or lesbian is part of
-      someone else's. We can integrate this understanding of ourselves with our faith and participation in the Church.
-    </p>
+      <p>
+        For me—and for many others—being non-binary is part of our identity, much like being gay or lesbian is part of someone
+        else’s. We can integrate this understanding of ourselves with our faith and participation in the Church.
+      </p>
 
-    <p>
-      The Church itself acknowledges this complexity on its website, stating in the "Understanding Yourself" section:
-    </p>
+      <p>
+        The Church acknowledges this complexity on its website, stating:
+      </p>
 
-    <div class="quote-block">
-      “Some people feel their inner sense of gender does not align with their biological sex at birth. The Church does
-      not take a position on the causes of these feelings. Some who experience these feelings identify as non-binary.”
-      — Church Website
+      <div class="quote-block">
+        “Some people feel their inner sense of gender does not align with their biological sex at birth. The Church does not take a position on the causes of these feelings. Some who experience these feelings identify as transgender.”
+        — The Church of Jesus Christ of Latter-day Saints
+      </div>
+
+      <a class="quote-source" href="https://www.churchofjesuschrist.org/topics/transgender/understanding?lang=eng" target="_blank" rel="noopener">
+        SOURCE: UNDERSTANDING_YOURSELF
+      </a>
+
+      <p style="margin-top:18px;">
+        I don’t quote this to “win” anything—I quote it because it acknowledges complexity. And for me, that matters. I believe
+        there is space in the Church community for people navigating real and sometimes difficult questions about gender.
+      </p>
     </div>
 
-    <p>
-      This statement affirms that people with diverse experiences of gender can find a place within the Church
-      community, and I'm a testament to that possibility.
-    </p>
+    <div class="faq-item">
+      <span class="faq-q">How does your identity fit within the Plan of Salvation?</span>
+      <p>
+        Quite simply, it doesn’t appear that it fits cleanly at all. Like many aspects of faith, interpretations of gender roles
+        and the Plan of Salvation vary. Many non-binary Latter-day Saints find ways to reconcile their understanding of these
+        concepts with lived experience. For me, it remains a topic of ongoing study, prayer, and personal revelation.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <span class="faq-q">How do you reconcile your gender identity with Church teachings on gender?</span>
+
+      <p>
+        This is a deeply personal question, and the answer is unique to each individual. It often involves prayer, study, and
+        seeking guidance from the Spirit. There is no single, prescribed way to reconcile these parts of a person’s life.
+      </p>
+
+      <p>
+        For me, it has been a process of seeking personal revelation and learning over time. While the Proclamation initially
+        seemed to present a stark challenge, I have come to believe that God speaks to us individually and guides us on our
+        unique paths. Through prayer and pondering, I’ve felt a strong confirmation that acknowledging my experience is part of
+        my discipleship—not a departure from it.
+      </p>
+
+      <p>
+        I believe God loves and accepts us all, including those of us who are non-binary. I have felt the Spirit confirm that
+        walking honestly—without unnecessary performance—can be part of the work of becoming who God wants me to be.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <span class="faq-q">When did you know you were non-binary?</span>
+
+      <p>
+        While the terminology didn’t exist in my very young mind, I knew that I felt different from an early age. My earliest
+        memories of gender dysphoria came at around 5 years old.
+      </p>
+
+      <p>
+        I noted in a personal journal entry a few years ago this memory: “I’m five years old. It’s 6 am, well before school.
+        Mom lets me watch PBS in the mornings before I go to preschool at Mrs. Wing’s house. Mr. Rogers is speaking to me. I love
+        Mr. Rogers. He makes me feel safe and loved and ok with the world. He’s talking about the differences between boys and girls,
+        but did I hear him say that boys could be girls? Probably not. But I go to bed that night and dream about waking up the next
+        day a girl. That can’t be right.”
+      </p>
+
+      <p>
+        Even at that young age, I remember longing—wishing and waiting—to be transformed into a version of myself that felt more
+        comfortable. That feeling stayed with me for many years, even when I had no words for it.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <span class="faq-q">What pronouns do you use?</span>
+
+      <p>
+        My pronouns are he/him/his. This is something I’ve given a lot of thought to, especially in light of the Church’s guidelines
+        on gender and identity. While I identify as non-binary, I have chosen not to socially transition at this time. This means I
+        continue to use the pronouns that align with my assigned sex at birth.
+      </p>
+
+      <p>
+        This decision comes from personal reflection and seeking guidance from the Spirit. I respect the counsel of Church leaders and
+        want to navigate my path in a way that feels both authentic to me and respectful of the community I belong to.
+      </p>
+
+      <p>
+        I also want to acknowledge the complexity here: there are many perspectives within the Church, and many lived experiences. I honor
+        those who choose to socially transition, and I respect those who do not. Ultimately, I believe it is a matter of personal revelation
+        and following the path that feels right for each individual.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <span class="faq-q">What name do you prefer?</span>
+      <p>I prefer to go by Rylee, but RyanDavid is wonderful as well.</p>
+    </div>
+
+    <div class="faq-item">
+      <span class="faq-q">What has your experience been like with your ward/family/friends?</span>
+
+      <p>
+        I’ve been incredibly fortunate to have a supportive network of family, friends, and ward members. Everyone I’ve shared my story
+        with has responded with grace and love.
+      </p>
+
+      <p>
+        Of course, there are times when deep understanding might be lacking—but I believe that’s where proximity and honest communication
+        do their work. By sharing my experiences and being open to questions, I’ve found I can build bridges even with those who begin from
+        a very different perspective.
+      </p>
+
+      <p>
+        Most importantly of all, I am lucky enough to have a kind, empathetic, and supportive wife by my side. She was willing to walk with
+        me from the time we met. I consider her heart above all others, because dysphoria can involve real grief and loss. For that reason—and
+        for many other personal reasons—I try to be thoughtful about how and when I share.
+      </p>
+
+      <p>
+        I’m grateful for the relationships I have, especially with my wife, and for the way they have supported me. Their love and understanding
+        have been invaluable.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <span class="faq-q">What are the biggest challenges you face?</span>
+      <ul>
+        <li><strong>Misunderstanding and Judgment:</strong> It’s not always easy for people to understand experiences different from their own,
+          which can lead to hurtful misunderstandings or judgments. Bridging gaps takes patience and open communication.</li>
+
+        <li><strong>Fear of Losing Relationships:</strong> One of my biggest fears is losing relationships with loved ones who might not understand
+          or accept my experience of gender. Balancing authenticity with maintaining those connections is an ongoing challenge.</li>
+
+        <li><strong>Safety and Acceptance:</strong> In primarily conservative areas, there can be legitimate safety concerns that come with being
+          visibly gender-nonconforming. Finding belonging and acceptance can be challenging.</li>
+
+        <li><strong>Internal Conflict:</strong> Balancing faith with gender-related questions can create internal conflict, requiring ongoing effort
+          to find peace and reconciliation.</li>
+      </ul>
+
+      <p>
+        Despite these challenges, I remain committed to living honestly and finding my place within the Church and my community. I believe that
+        through open communication, vulnerability, and a willingness to learn from one another, we can create a more loving space for everyone.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <span class="faq-q">Are you planning on transitioning / have you transitioned?</span>
+
+      <p>This is a very personal question.</p>
+
+      <p>
+        I have no plans to transition, either socially or medically. This decision comes from personal reflection, prayer, and seeking guidance
+        from the Spirit. It is the path that feels right for me at this point in my life.
+      </p>
+
+      <p>
+        It’s important to emphasize that decisions about transitioning are deeply personal. Some non-binary people choose to medically or socially
+        transition, while others do not. There is no single “right way” to be non-binary, and I respect the choices others make for themselves.
+      </p>
+
+      <p>
+        I believe it’s crucial to avoid assumptions about anyone’s journey and to create a space where people are treated with respect and dignity,
+        regardless of the path they walk.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <span class="faq-q">Doesn’t this mean you’re gay?</span>
+
+      <p>
+        This question highlights an important distinction: gender identity and sexual orientation are separate aspects of who we are.
+      </p>
+
+      <p>To answer directly: I do not experience attraction toward men.</p>
+
+      <p>
+        However, a non-binary person can be gay, lesbian, bisexual, straight, or any other sexual orientation. Being non-binary doesn’t automatically
+        determine someone’s sexual orientation.
+      </p>
+
+      <p>
+        I can only imagine how challenging it must be for those who experience same-sex attraction and also navigate complex questions about gender.
+        The process can feel layered and heavy, and I have tremendous respect for those on that road.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <span class="faq-q">How can I be a better ally?</span>
+
+      <p>
+        I love this question. It shows a genuine desire to support the LGBTQ+ community. To answer, I’ll borrow a phrase from my favorite LGBTQ+
+        podcast: listen, learn, and love.
+      </p>
+
+      <p>Here are a few ways to put that into action, especially within a faith-based context:</p>
+
+      <ul>
+        <li><strong>Educate Yourself:</strong> Learn terminology and lived experiences. Read books, listen to podcasts, and engage reputable resources.
+          Understanding is a foundation of allyship.</li>
+
+        <li><strong>Listen with Empathy:</strong> When someone shares their story, listen with an open heart and without judgment. Their experience is
+          real, even if it differs from yours.</li>
+
+        <li><strong>Love without Condition:</strong> Show love and respect regardless of sexual orientation or gender identity. Remember that Christ’s love
+          extends to everyone.</li>
+
+        <li><strong>Advocate for Inclusion:</strong> Speak up for inclusion and dignity in your ward, community, and family. Challenge prejudice. Make space
+          for people to belong.</li>
+
+        <li><strong>Offer Support:</strong> Be someone safe. Sometimes allyship is as simple as being steady, kind, and present.</li>
+
+        <li><strong>Practice Patience:</strong> Understanding doesn’t always happen overnight. Be patient with yourself and others as learning unfolds.</li>
+
+        <li><strong>Pray for Guidance:</strong> Seek the Spirit to know how you can best show love to those who need it.</li>
+      </ul>
+
+      <p>
+        Allyship is an ongoing journey, not a destination. It requires continued learning, self-reflection, and a commitment to building a more loving world.
+      </p>
+    </div>
   </div>
 
-  <div class="faq-item">
-    <span class="faq-q">How does your identity fit within the Plan of Salvation?</span>
-    <p>
-      Quite simply, it doesn't appear that it fits at all. Like many aspects of faith, interpretations of gender roles
-      and the Plan of Salvation vary. Many non-binary Latter-day Saints find ways to reconcile their understanding of
-      these concepts with their lived experience. It's a topic of ongoing personal study and revelation.
-    </p>
-  </div>
-
-  <div class="faq-item">
-    <span class="faq-q">How do you reconcile your gender identity with Church teachings on gender?</span>
-
-    <p>
-      This is a deeply personal question, and the answer is unique to each individual. It often involves prayer, study,
-      and seeking guidance from the Spirit. There is no single, prescribed way to reconcile these aspects of oneself.
-    </p>
-
-    <p>
-      For me, it's been a process of seeking personal revelation and a journey of growth and learning. While the
-      Proclamation initially seemed to present a challenge, I've come to believe that God speaks to us individually and
-      guides us on our unique paths. Through prayer and pondering, I've felt a strong confirmation that embracing my
-      gender identity is right for me. This doesn't mean I'm rejecting Church teachings, but rather that I'm seeking to
-      understand them in a way that's consistent with my own experiences and the promptings of the Spirit.
-    </p>
-
-    <p>
-      I believe that God loves and accepts us all, and that includes those of us who are non-binary. I've felt the
-      Spirit confirm that embracing my true self is part of my journey toward becoming the person God wants me to be.
-    </p>
-  </div>
-
-  <div class="faq-item">
-    <span class="faq-q">When did you know you were non-binary?</span>
-
-    <p>
-      While the terminology didn't exist in my very young mind, I knew that I felt different from an early age. My
-      earliest memories of gender dysphoria came at around 5 years old.
-    </p>
-
-    <p>
-      I noted in a personal journal entry a few years ago this memory: "I'm five years old. It's 6 am, well before
-      school. Mom lets me watch PBS in the mornings before I go to preschool at Mrs. Wing's house. Mr. Rogers is
-      speaking to me. I love Mr. Rogers. He makes me feel safe and loved and ok with the world. He's talking about the
-      differences between boys and girls, but did I hear him say that boys could be girls? Probably not. But I go to bed
-      that night and dream about waking up the next day a girl. That can't be right."
-    </p>
-
-    <p>
-      Even at that young age, I remember longing, wishing, and waiting for the moment that I would be magically
-      transformed into a version of myself that I felt more comfortable with. It's a feeling that stayed with me for
-      many years, even though I didn't have the words to describe it at the time.
-    </p>
-  </div>
-
-  <div class="faq-item">
-    <span class="faq-q">What pronouns do you use?</span>
-
-    <p>
-      My pronouns are he/him/his. This is something I've given a lot of thought to, especially in light of the Church's
-      guidelines on gender and identity. While I identify as non-binary, I've chosen not to socially transition at this
-      time. This means I continue to use the pronouns that align with my assigned sex at birth.
-    </p>
-
-    <p>
-      This decision comes from a place of personal reflection and seeking guidance from the Spirit. I respect the
-      counsel of Church leaders and want to navigate my journey in a way that feels both authentic to me and respectful
-      of the community I belong to.
-    </p>
-
-    <p>
-      It's important to acknowledge that this is a complex and evolving issue, and there are many perspectives within
-      the Church. I honor the experiences of those who choose to socially transition, and I also respect those who
-      choose not to. Ultimately, I believe it's a matter of personal revelation and following the path that feels right
-      for each individual.
-    </p>
-  </div>
-
-  <div class="faq-item">
-    <span class="faq-q">What name do you prefer?</span>
-    <p>I prefer to go by Rylee, but RyanDavid is wonderful as well.</p>
-  </div>
-
-  <div class="faq-item">
-    <span class="faq-q">What has your experience been like with your ward/family/friends?</span>
-
-    <p>
-      I've been incredibly fortunate to have a supportive network of family, friends, and ward members. Everyone I've
-      shared my story with has responded with grace and love.
-    </p>
-
-    <p>
-      Of course, there are times when a deep understanding might be lacking, but I believe that's where proximity and
-      open communication come in. By sharing my experiences and being open to questions, I've found that I can build
-      bridges and foster understanding even with those who might initially have different perspectives.
-    </p>
-
-    <p>
-      I always invite those who know me to ask questions and share any concerns they might have. I believe that honest
-      and open dialogue is crucial for creating a space of love and acceptance, even amidst differing viewpoints.
-    </p>
-
-    <p>
-      Most importantly of all, I am lucky enough to have a kind, empathetic, and supportive wife by my side. She was
-      willing to walk with me in my journey from the time we met. It is her heart that I consider above all others
-      because there can be great grief and loss associated with dysphoria. Because of this, and many other personal
-      reasons, I must be thoughtful in the way I share my story.
-    </p>
-
-    <p>
-      I'm grateful for the relationships I have, especially with my wife, and for the way they've supported me on my
-      journey. Their love and understanding have been invaluable.
-    </p>
-  </div>
-
-  <div class="faq-item">
-    <span class="faq-q">What are the biggest challenges you face?</span>
-    <ul>
-      <li><strong>Misunderstanding and Judgment:</strong> It's not always easy for people to understand experiences
-        different from their own, which can lead to hurtful misunderstandings or judgments. Bridging those gaps takes
-        patience and open communication.</li>
-
-      <li><strong>Fear of Losing Relationships:</strong> One of my biggest fears is losing relationships with loved ones
-        who might not understand or accept my gender identity. Balancing being true to myself with maintaining those
-        connections is an ongoing challenge.</li>
-
-      <li><strong>Safety and Acceptance:</strong> Living in a primarily conservative area, there can be legitimate safety
-        concerns that come with being visibly gender-nonconforming. Finding a sense of belonging and acceptance can also
-        be challenging.</li>
-
-      <li><strong>Internal Conflict:</strong> Balancing my faith with my gender identity can create internal conflict,
-        requiring ongoing effort to find peace and reconciliation.</li>
-    </ul>
-
-    <p>
-      Despite these challenges, I remain committed to being true to myself and to finding my place within the Church and
-      my community. I believe that through open communication, vulnerability, and a willingness to learn from one
-      another, we can create a more inclusive and loving space for everyone.
-    </p>
-  </div>
-
-  <div class="faq-item">
-    <span class="faq-q">Are you planning on transitioning / have you transitioned?</span>
-
-    <p>This is a very personal question.</p>
-
-    <p>
-      I have no plans to transition, either socially or medically. This is a decision that comes from a place of
-      personal reflection, prayer, and seeking guidance from the Spirit. It's a path that feels right for me at this
-      point in my journey.
-    </p>
-
-    <p>
-      It's important to emphasize that decisions about transitioning are deeply personal. Some non-binary people choose
-      to medically or socially transition, while others do not. There is no single right way to be non-binary, and I
-      deeply respect the choices that others make for themselves.
-    </p>
-
-    <p>
-      I believe it's crucial to avoid making assumptions about anyone's journey and to create a space where everyone
-      feels respected and valued, regardless of their path.
-    </p>
-  </div>
-
-  <div class="faq-item">
-    <span class="faq-q">Doesn't this mean you're gay?</span>
-
-    <p>
-      This question highlights an important distinction: gender identity and sexual orientation are separate aspects of
-      who we are.
-    </p>
-
-    <p>To answer your question directly, I do not experience any attraction toward men.</p>
-
-    <p>
-      However, it's crucial to understand that a non-binary person can be gay, lesbian, bisexual, straight, or any other
-      sexual orientation. Being non-binary doesn't automatically determine a person's sexual orientation.
-    </p>
-
-    <p>
-      I can only imagine how challenging it must be for those who experience same-sex attraction and also navigate a
-      complex relationship with gender. The process of coming out and embracing one's identity can be layered and
-      difficult, and I have tremendous respect for those who are on that journey.
-    </p>
-  </div>
-
-  <div class="faq-item">
-    <span class="faq-q">How can I be a better ally?</span>
-
-    <p>
-      I love this question! It shows a genuine desire to support the LGBTQ+ community, and that's truly appreciated. To
-      answer your question, I'll borrow a phrase from my favorite LGBTQ+ podcast: listen, learn, and love.
-    </p>
-
-    <p>Here are some ways you can put that into action, especially within a faith-based context:</p>
-
-    <ul>
-      <li><strong>Educate Yourself:</strong> Take the time to learn about LGBTQ+ issues, terminology, and experiences.
-        Read books, listen to podcasts, and engage with resources from reputable organizations. Understanding is the
-        foundation of allyship.</li>
-
-      <li><strong>Listen with Empathy:</strong> When someone shares their story with you, listen with an open heart and
-        without judgment. Their experiences are real and valid, even if they differ from your own.</li>
-
-      <li><strong>Love without Condition:</strong> Show love and acceptance to all, regardless of their sexual
-        orientation or gender identity. Remember that Christ's love extends to everyone.</li>
-
-      <li><strong>Advocate for Inclusion:</strong> Speak up for inclusion and equality within your ward, community, and
-        family. Challenge prejudice and create space for everyone to feel welcome and valued.</li>
-
-      <li><strong>Offer Support:</strong> Be a source of support for LGBTQ+ individuals. Let them know you're there for
-        them—whether they need someone to talk to, a shoulder to cry on, or an advocate in their corner.</li>
-
-      <li><strong>Practice Patience:</strong> Change takes time, and understanding doesn't always happen overnight. Be
-        patient with yourself and others as you navigate these complex issues.</li>
-
-      <li><strong>Pray for Guidance:</strong> Seek guidance from the Spirit on how you can best be an ally and show love
-        to those who need it most.</li>
-    </ul>
-
-    <p>
-      Remember, allyship is an ongoing journey, not a destination. It requires continuous learning, self-reflection, and
-      a commitment to creating a more loving and inclusive world.
-    </p>
-  </div>
-</div>
+  <!-- =========================
+       AMA
+       ========================= -->
   <div class="container" id="ama">
     <h2>Ask Me Anything</h2>
     <p>This is a space for open dialogue. What questions do you have? You can remain totally anonymous.</p>
