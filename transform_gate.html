@@ -1,259 +1,365 @@
 <!DOCTYPE html>
 <html lang="en">
- <head>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-YKRKPFV2MB"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-YKRKPFV2MB');
-</script>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>
-   Decryption Required | Outside The World
-  </title>
-  <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
-  <style>
-   @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500&family=Inter:wght@900&display=swap');
-
-        :root {
-            --brand-purple: #9b59b6;
-            --bg-dark: var(--bg-dark);
-        }
-
-        body {
-            background-color: var(--bg-dark);
-            color: var(--brand-purple);
-            font-family: 'Fira Code', monospace;
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        /* ATMOSPHERIC SCANLINES */
-
-        /* HERO LOGO AT TOP */
-        .nav-header {
-            position: absolute;
-            top: 60px;
-            text-align: center;
-            width: 100%;
-        }
-        .nav-logo {
-            width: 220px;
-            filter: drop-shadow(0 0 20px rgba(155, 89, 182, 0.4));
-        }
-
-        .terminal-box {
-            max-width: 450px;
-            width: 90%;
-            padding: 60px 40px;
-            border: 1px solid rgba(155, 89, 182, 0.2);
-            background: rgba(155, 89, 182, 0.02);
-            text-align: center;
-            position: relative;
-            z-index: 10;
-        }
-
-        /* TYPEWRITER STATUS STYLE */
-        .status-container {
-            min-height: 1.5rem;
-            margin-bottom: 40px;
-        }
-        #status-text {
-            font-size: 1.1rem; /* Slightly larger as requested */
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            font-weight: 500;
-        }
-        .cursor {
-            display: inline-block;
-            width: 10px;
-            height: 18px;
-            background: var(--brand-purple);
-            margin-left: 5px;
-            animation: blink 1s infinite;
-            vertical-align: middle;
-        }
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-
-        /* INPUT AREA */
-        .input-group {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        input {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid #333;
-            color: white;
-            font-family: 'Fira Code', monospace;
-            font-size: 1rem;
-            padding: 18px;
-            width: 100%;
-            box-sizing: border-box;
-            outline: none;
-            text-align: center;
-            transition: 0.4s;
-            letter-spacing: 4px;
-        }
-
-        input:focus {
-            border-color: var(--brand-purple);
-            box-shadow: 0 0 20px rgba(155, 89, 182, 0.2);
-            background: rgba(155, 89, 182, 0.05);
-        }
-
-        /* SUBMIT BUTTON */
-        .submit-btn {
-            background: none;
-            border: 1px solid var(--brand-purple);
-            color: var(--brand-purple);
-            padding: 15px;
-            font-family: 'Fira Code';
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            cursor: pointer;
-            transition: 0.3s;
-            font-size: 0.8rem;
-        }
-
-        .submit-btn:hover {
-            background: var(--brand-purple);
-            color: black;
-            box-shadow: 0 0 20px rgba(155, 89, 182, 0.4);
-        }
-
-        .error-shake {
-            animation: shake 0.4s ease-in-out;
-            border-color: #e74c3c !important;
-        }
-
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-10px); }
-            75% { transform: translateX(10px); }
-        }
-
-        .back-link {
-            position: absolute;
-            bottom: -60px;
-            left: 0;
-            width: 100%;
-            text-decoration: none;
-            color: #444;
-            font-size: 0.6rem;
-            letter-spacing: 2px;
-            transition: 0.3s;
-        }
-        .back-link:hover { color: var(--brand-purple); }
-  
-/* THE CLEAN ATMOSPHERIC WASH */
-
-    </style>
-  <link href="theme.css" rel="stylesheet"/>
-  <meta content="#0a0a0a" name="theme-color"/>
-  <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
-  <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
- </head>
- <body>
-  <div id="cursor-ring">
-  </div>
-  <div id="cursor-dot">
-  </div>
-  <div class="nav-header">
-   <div class="hero-logo-container">
-    <img alt="Logo" class="nav-logo hero-logo" src="Images/Equal.svg"/>
-   </div>
-  </div>
-  <div class="terminal-box">
-   <div class="status-container">
-    <span id="status-text">
-    </span>
-    <span class="cursor">
-    </span>
-   </div>
-   <div class="input-group">
-    <input id="passkey" onkeypress="handleKeyPress(event)" placeholder="DECRYPTION_KEY" type="password"/>
-    <button class="submit-btn" onclick="validateKey()">
-     Initialize_Uplink
-    </button>
-   </div>
-   <a class="back-link" href="personal.html">
-    [ ABORT_CONNECTION ]
-   </a>
-  </div>
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-YKRKPFV2MB"></script>
   <script>
-   // 1. TYPEWRITER CONFIG
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-YKRKPFV2MB');
+  </script>
+
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <meta name="color-scheme" content="dark" />
+  <title>Decryption Required | Outside The World</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml"/>
+
+  <link rel="stylesheet" href="theme.css"/>
+  <meta name="theme-color" content="#0a0a0a"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500&family=Inter:wght@900&display=swap');
+
+    :root{
+      --brand-purple:#9b59b6;
+      --bg-dark: #0a0a0a;          /* ✅ FIX: force true dark */
+      --nav-offset: 120px;         /* will be overwritten by syncNav() */
+    }
+
+    body{
+      background-color: var(--bg-dark);
+      color: var(--brand-purple);
+      font-family: 'Fira Code', monospace;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow-x: hidden;
+      padding-top: var(--nav-offset);
+      padding-bottom: 40px;
+      box-sizing: border-box;
+    }
+
+    /* =========================
+       FIXED HEADER (logo left, title right)
+       ========================= */
+    .top-nav{
+      position: fixed;
+      top:0; left:0;
+      width:100%;
+      z-index: 3500;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      background: linear-gradient(to bottom, rgba(10,10,10,0.98) 0%, rgba(10,10,10,0) 100%);
+      padding: 20px 0;
+      pointer-events: none;
+    }
+
+    .top-nav-inner{
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 0 28px;
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 22px;
+    }
+
+    .top-nav .hero-logo-container{
+      pointer-events:auto;
+      display:flex;
+      align-items:center;
+    }
+
+    .top-nav .nav-logo{
+      width: 220px;
+      max-width: 42vw;
+      height: auto;
+      filter: drop-shadow(0 0 20px rgba(155,89,182,0.30));
+      opacity: 0.92;
+    }
+
+    .top-nav .nav-right{
+      pointer-events:auto;
+      flex: 1;
+      min-width: 0;
+      text-align: right;
+    }
+
+    .nav-title{
+      font-family: Inter, sans-serif;
+      font-weight: 900;
+      letter-spacing: 10px;
+      text-transform: uppercase;
+      font-size: 1.05rem;
+      margin: 0;
+
+      color: rgba(155,89,182,0.95);                 /* ✅ FIX: purple, not white */
+      text-shadow: 0 0 18px rgba(155,89,182,0.18);  /* subtle glow */
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .nav-sub{
+      font-size: 0.6rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(155,89,182,0.70);
+      margin-top: 8px;
+    }
+
+    /* Signature signal line */
+    .top-nav::after{
+      content:"";
+      position:absolute;
+      left:0; right:0;
+      bottom:0;
+      height:1px;
+      background: linear-gradient(90deg,
+        transparent,
+        rgba(155,89,182,0.45),
+        rgba(155,89,182,0.18),
+        transparent
+      );
+      opacity: 0.9;
+      pointer-events:none;
+    }
+
+    /* =========================
+       TERMINAL BOX
+       ========================= */
+    .terminal-box{
+      max-width: 450px;
+      width: 90%;
+      padding: 48px 40px 60px;
+      border: 1px solid rgba(155,89,182,0.20);
+      background: rgba(155,89,182,0.02);
+      text-align: center;
+      position: relative;
+      z-index: 10;
+    }
+
+    /* Equal.svg placed ABOVE the password box (inside terminal) */
+    .terminal-logo{
+      width: 180px;
+      height: auto;
+      display: block;
+      margin: 0 auto 26px;
+
+      opacity: 0.72; /* ✅ FIX: less bright */
+      filter: grayscale(100%) brightness(0.90) drop-shadow(0 0 18px rgba(155,89,182,0.32));
+    }
+
+    /* TYPEWRITER STATUS STYLE */
+    .status-container{
+      min-height: 1.5rem;
+      margin-bottom: 28px;
+    }
+
+    #status-text{
+      font-size: 1.1rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .cursor{
+      display: inline-block;
+      width: 10px;
+      height: 18px;
+      background: var(--brand-purple);
+      margin-left: 5px;
+      animation: blink 1s infinite;
+      vertical-align: middle;
+    }
+
+    @keyframes blink{
+      0%,100%{opacity:1;}
+      50%{opacity:0;}
+    }
+
+    .input-group{
+      display:flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    input{
+      background: rgba(255,255,255,0.03);
+      border: 1px solid #333;
+      color: white;
+      font-family: 'Fira Code', monospace;
+      font-size: 1rem;
+      padding: 18px;
+      width: 100%;
+      box-sizing: border-box;
+      outline: none;
+      text-align: center;
+      transition: 0.4s;
+      letter-spacing: 4px;
+    }
+
+    input:focus{
+      border-color: var(--brand-purple);
+      box-shadow: 0 0 20px rgba(155,89,182,0.20);
+      background: rgba(155,89,182,0.05);
+    }
+
+    .submit-btn{
+      background: none;
+      border: 1px solid var(--brand-purple);
+      color: var(--brand-purple);
+      padding: 15px;
+      font-family: 'Fira Code';
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      cursor: pointer;
+      transition: 0.3s;
+      font-size: 0.8rem;
+    }
+
+    .submit-btn:hover{
+      background: var(--brand-purple);
+      color: black;
+      box-shadow: 0 0 20px rgba(155,89,182,0.40);
+    }
+
+    .error-shake{
+      animation: shake 0.4s ease-in-out;
+      border-color: #e74c3c !important;
+    }
+
+    @keyframes shake{
+      0%,100%{transform: translateX(0);}
+      25%{transform: translateX(-10px);}
+      75%{transform: translateX(10px);}
+    }
+
+    .back-link{
+      position: absolute;
+      bottom: -54px;
+      left: 0;
+      width: 100%;
+      text-decoration: none;
+      color: #444;
+      font-size: 0.6rem;
+      letter-spacing: 2px;
+      transition: 0.3s;
+    }
+    .back-link:hover{ color: var(--brand-purple); }
+
+    /* Mobile: keep header calm, center logo, hide right text */
+    @media (max-width: 768px){
+      .top-nav{ padding: 16px 0; }
+      .top-nav-inner{ padding: 0 16px; justify-content: center; }
+      .top-nav .nav-right{ display:none; }
+      .top-nav .nav-logo{ width: 80vw; max-width: 280px; }
+      .terminal-box{ padding: 40px 18px 56px; }
+      .terminal-logo{ width: 160px; margin-bottom: 22px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="cursor-ring"></div>
+  <div id="cursor-dot"></div>
+
+  <nav class="top-nav" aria-label="Top navigation">
+    <div class="top-nav-inner">
+      <a href="personal.html" class="hero-logo-container" aria-label="Back to Personal">
+        <img alt="Outside The World" class="nav-logo" src="Images/Equal.svg"/>
+      </a>
+
+      <div class="nav-right">
+        <div class="nav-sub">OBFUSCATION_GATE // AUTH_REQUIRED</div>
+        <h1 class="nav-title">DECRYPTION_REQUIRED</h1>
+      </div>
+    </div>
+  </nav>
+
+  <div class="terminal-box">
+    <img src="Images/Equal.svg" alt="Outside The World" class="terminal-logo" />
+
+    <div class="status-container">
+      <span id="status-text"></span>
+      <span class="cursor"></span>
+    </div>
+
+    <div class="input-group">
+      <input id="passkey" onkeypress="handleKeyPress(event)" placeholder="DECRYPTION_KEY" type="password"/>
+      <button class="submit-btn" onclick="validateKey()">Initialize_Uplink</button>
+    </div>
+
+    <a class="back-link" href="personal.html">[ ABORT_CONNECTION ]</a>
+  </div>
+
+  <script>
+    function syncNav(){
+      const nav = document.querySelector('.top-nav');
+      if (!nav) return;
+      const buffer = window.innerWidth > 768 ? 16 : 10;
+      document.documentElement.style.setProperty('--nav-offset', (nav.offsetHeight + buffer) + 'px');
+    }
+    window.addEventListener('resize', syncNav);
+    window.addEventListener('load', syncNav);
+
     const statusElement = document.getElementById('status-text');
     const initialMessage = "WAITING_FOR_KEY...";
     let i = 0;
 
     function typeMessage(message, speed = 100) {
-        statusElement.innerText = "";
-        i = 0;
-        function type() {
-            if (i < message.length) {
-                statusElement.innerText += message.charAt(i);
-                i++;
-                setTimeout(type, speed);
-            }
+      statusElement.innerText = "";
+      i = 0;
+      function type() {
+        if (i < message.length) {
+          statusElement.innerText += message.charAt(i);
+          i++;
+          setTimeout(type, speed);
         }
-        type();
+      }
+      type();
     }
 
-    // Initialize the terminal on load
     window.onload = () => {
-        setTimeout(() => typeMessage(initialMessage), 500);
+      syncNav();
+      setTimeout(() => typeMessage(initialMessage), 500);
     };
 
-    // 2. THE DEADBOLT LOGIC
-    // To change your password: Go to any Base64 encoder online, 
-    // type your pass, and replace the string below.
-    const SECRET_HASH = "WW91clBhc3N3b3JkSGVyZQ=="; // Currently: 'YourPasswordHere'
-
+const SECRET_HASH = "U3RvY2t0b24xMiE="; // Stockton12!
     function handleKeyPress(e) {
-        if (e.key === 'Enter') {
-            validateKey();
-        }
+      if (e.key === 'Enter') validateKey();
     }
 
     function validateKey() {
-        const input = document.getElementById('passkey');
-        
-        // Show authentication status in typewriter
-        typeMessage("AUTHENTICATING...", 50);
+      const input = document.getElementById('passkey');
+      typeMessage("AUTHENTICATING...", 50);
 
-        setTimeout(() => {
-            // btoa() converts the input into Base64 to compare against your HASH
-            if (btoa(input.value) === SECRET_HASH) {
-                typeMessage("ACCESS_GRANTED", 50);
-                statusElement.style.color = "#2ecc71"; // Success Green
-                setTimeout(() => {
-                    window.location.href = "transform_zion.html"; 
-                }, 1000);
-            } else {
-                typeMessage("ACCESS_DENIED", 50);
-                statusElement.style.color = "#e74c3c"; // Error Red
-                input.classList.add('error-shake');
-                input.value = "";
-                
-                // Reset after error
-                setTimeout(() => {
-                    input.classList.remove('error-shake');
-                    statusElement.style.color = "var(--brand-purple)";
-                    typeMessage(initialMessage);
-                }, 1500);
-            }
-        }, 1000);
+      setTimeout(() => {
+        if (btoa(input.value) === SECRET_HASH) {
+          typeMessage("ACCESS_GRANTED", 50);
+          statusElement.style.color = "#2ecc71";
+          setTimeout(() => {
+            window.location.href = "transform_zion.html";
+          }, 1000);
+        } else {
+          typeMessage("ACCESS_DENIED", 50);
+          statusElement.style.color = "#e74c3c";
+          input.classList.add('error-shake');
+          input.value = "";
+
+          setTimeout(() => {
+            input.classList.remove('error-shake');
+            statusElement.style.color = "var(--brand-purple)";
+            typeMessage(initialMessage);
+          }, 1500);
+        }
+      }, 1000);
     }
   </script>
- </body>
+</body>
 </html>

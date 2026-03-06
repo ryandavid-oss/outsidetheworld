@@ -1,394 +1,855 @@
 <!DOCTYPE html>
 <html lang="en">
- <head>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-YKRKPFV2MB"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-YKRKPFV2MB');
-</script>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>
-   Transforming Zion | Safe Room
-  </title>
-  <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
-  <style>
-   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Fira+Code:wght@300;500&display=swap');
-
-        :root {
-            --brand-purple: #9b59b6;
-            --brand-light: #d2b4de;
-            --bg-dark: var(--bg-dark);
-            --text-grey: #888;
-        }
-
-        body {
-            background-color: var(--bg-dark);
-            color: white; font-family: 'Inter', sans-serif;
-            margin: 0; padding: 0; line-height: 1.8;
-        }
-
-        /* 1. ATMOSPHERICS */
-
-        /* 2. HEADER */
-        header { 
-            padding: 120px 20px 40px; text-align: center; 
-            background: linear-gradient(to bottom, rgba(155, 89, 182, 0.08), transparent);
-        }
-        .tfz-logo { font-size: 3rem; font-weight: 900; letter-spacing: -2px; margin: 0; color: white; }
-        .tfz-subtitle { 
-            font-size: 0.95rem; color: var(--brand-purple); letter-spacing: 1px; 
-            max-width: 700px; margin: 25px auto 0; font-weight: 300; line-height: 1.6;
-        }
-
-        /* 3. NAVIGATION */
-        nav { 
-            display: flex; justify-content: center; gap: 40px; 
-            padding: 20px; position: sticky; top: 0; 
-            background: rgba(5,5,5,0.95); backdrop-filter: blur(15px); z-index: 100;
-            border-bottom: 1px solid rgba(155, 89, 182, 0.1);
-        }
-        .nav-btn {
-            background: none; border: none; color: var(--text-grey);
-            font-family: 'Fira Code', monospace; font-size: 0.8rem;
-            text-transform: uppercase; letter-spacing: 3px; cursor: pointer;
-            transition: 0.4s; padding: 10px 0; border-bottom: 2px solid transparent;
-        }
-        .nav-btn:hover, .nav-btn.active { color: var(--brand-purple); border-bottom-color: var(--brand-purple); }
-
-        /* 4. CONTENT SECTIONS */
-        .container { max-width: 800px; margin: 0 auto; padding: 60px 20px; display: none; }
-        .container.active { display: block; animation: contentFade 0.8s ease; }
-        @keyframes contentFade { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
-
-        .banner-img { width: 100%; margin-bottom: 60px; border: 1px solid rgba(155, 89, 182, 0.2); opacity: 0.8; }
-        
-        .post { margin-bottom: 100px; }
-        h2 { font-size: 2.2rem; font-weight: 800; color: var(--brand-light); margin-bottom: 15px; }
-        
-        /* PURE WHITE DATE */
-        .date-line { 
-            font-family: 'Fira Code', monospace; font-size: 0.75rem; color: #ffffff; 
-            margin-bottom: 35px; text-transform: uppercase; letter-spacing: 2px; 
-            opacity: 1; 
-        }
-        
-        p { margin-bottom: 25px; font-size: 1.15rem; font-weight: 300; color: #ccc; }
-
-        /* FAQ STYLING */
-        .faq-item { margin-bottom: 60px; padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .faq-q { color: var(--brand-purple); font-weight: 700; font-size: 1.3rem; margin-bottom: 20px; display: block; line-height: 1.4; }
-        .quote-block { 
-            border-left: 2px solid var(--brand-purple); padding: 5px 0 5px 30px; 
-            font-style: italic; color: #888; margin: 35px 0; font-size: 1rem;
-        }
-        ul { margin-bottom: 30px; padding-left: 20px; color: #ccc; }
-        li { margin-bottom: 15px; font-size: 1.1rem; font-weight: 300; }
-        li strong { color: var(--brand-light); }
-
-        /* AMA FORM */
-        .ama-interface { 
-            background: rgba(155, 89, 182, 0.02); border: 1px solid rgba(155, 89, 182, 0.15); 
-            padding: 60px 40px; text-align: center; margin-top: 20px;
-        }
-        .ama-form textarea {
-            width: 100%; background: #0a0a0a; border: 1px solid #333; color: white;
-            padding: 25px; font-family: 'Inter'; font-size: 1.1rem; margin-bottom: 25px;
-            resize: vertical; min-height: 180px; outline: none;
-        }
-        .ama-form textarea:focus { border-color: var(--brand-purple); }
-        .submit-btn {
-            background: var(--brand-purple); color: white; border: none;
-            padding: 18px 50px; font-family: 'Fira Code'; text-transform: uppercase;
-            letter-spacing: 3px; cursor: pointer; transition: 0.3s;
-        }
-        .submit-btn:hover { background: #8e44ad; box-shadow: 0 0 20px rgba(155, 89, 182, 0.3); }
-
-        /* DISCLAIMER */
-        .form-disclaimer {
-            margin-top: 25px; font-family: 'Fira Code', monospace; font-size: 0.6rem;
-            color: #444; letter-spacing: 1px; line-height: 1.4; max-width: 500px;
-            margin-left: auto; margin-right: auto; text-transform: uppercase;
-        }
-
-        .podcast-link { 
-            display: inline-block; margin-top: 60px; font-family: 'Fira Code'; 
-            font-size: 0.75rem; color: var(--brand-light); text-decoration: none; border: 1px solid #333; padding: 15px 30px;
-        }
-
-        footer { padding: 100px 20px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
-        .exit-link { color: var(--brand-purple); text-decoration: none; font-family: 'Fira Code'; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 3px; }
-
-        @media (max-width: 768px) {
-            .tfz-logo { font-size: 2rem; }
-            nav { gap: 15px; }
-            h2 { font-size: 1.8rem; }
-        }
-  
-/* THE CLEAN ATMOSPHERIC WASH */
-
-    </style>
-  <link href="theme.css" rel="stylesheet"/>
-  <meta content="#0a0a0a" name="theme-color"/>
-  <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
-  <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
- </head>
- <body>
-  <div id="cursor-ring">
-  </div>
-  <div id="cursor-dot">
-  </div>
-  <nav style="position: absolute; width: auto; background: none; border: none; backdrop-filter: none;">
-   <a href="personal.html" style="pointer-events: auto;">
-    <div class="hero-logo-container">
-     <img alt="Back" class="hero-logo" src="Images/Equal.svg" style="width: 180px; filter: drop-shadow(0 0 15px rgba(155, 89, 182, 0.4));"/>
-    </div>
-   </a>
-  </nav>
-  <header>
-   <h1 class="tfz-logo">
-    transformingzion
-   </h1>
-   <p class="tfz-subtitle">
-    Exploring the intersection of trans/non-binary and Latter-day Saint identities.
-    <br/>
-    Broadening minds, extending Zion, and fostering understanding.
-   </p>
-  </header>
-  <nav style="justify-content: center;">
-   <button class="nav-btn active" onclick="showTab('home', this)">
-    Home
-   </button>
-   <button class="nav-btn" onclick="showTab('faq', this)">
-    FAQs
-   </button>
-   <button class="nav-btn" onclick="showTab('ama', this)">
-    Ask Me Anything
-   </button>
-  </nav>
-  <div class="container active" id="home">
-   <img alt="Banner" class="banner-img" src="Images/banner-2.png"/>
-   <article class="post">
-    <h2>
-     What I believe
-    </h2>
-    <div class="date-line">
-     Tuesday, February 4, 2025
-    </div>
-    <p>
-     I believe in the restoration of the gospel of Jesus Christ. Essentially, I am a believing member of The Church of Jesus Christ of Latter-day Saints because of that simple, profound fact. I have a spiritual knowledge—a witness—of where the Book of Mormon came from and recognize the divine hand that brought it forth from the dust of forgotten history. I have a testimony of the power of the Book of Mormon and believe it speaks of Christ in a sacred, understandable light, illuminating His role in our lives. While I do not—and perhaps cannot—understand every word that proceeds from a prophet's mouth, I have faith in the leaders of the Church. I believe that, like all of us, they are earnestly seeking further light and knowledge that only God can provide. Through prayer and study, I have learned how to listen to the Holy Spirit confirm truth to me in my life, heart, and mind.
-    </p>
-    <p>
-     I love being part of the body of Christ and feeling the love and compassion of a ward family. I try my best to emulate my Savior's example, and have long loved the inspired words of King Benjamin from Mosiah 4:15: “…ye will teach them to love one another, and to serve one another.” Truthfully, my faith is all I have known from the start. I was born into it, albeit into a family of varying degrees of faith. Early on, I quickly grew to understand something deeper about the religion in which I was being raised. While many of my family members ebbed and flowed in their faith and commitment to the gospel, each one of them abounded in good works, cultivated a solemn morality, and sought to expand their lives with truth and wisdom.
-    </p>
-    <p>
-     To me, this spoke of the genuine influence of the Gospel of Jesus Christ, if only by proximity, not by pure, consistent practice. I learned that merely having a tiny seed of hope in Christ can bring about blessings. In an unexpected and peculiar way, this foundation of my testimony of the gospel has yielded fruits that could not have been predicted in my youth. I find a resilience to temptation, a willingness to look beyond certitudes—to embrace nuance and complexity—and the flexibility to adapt when faced with doubt and hardship. Without going into further detail at this time, I am a believing member of The Church of Jesus Christ of Latter-day Saints because of the fruits I have seen in my life, rather than in spite of the flaws the Church, like any human institution, may exhibit.
-    </p>
-    <p>
-     I have a firm testimony of the power of prayer in our lives and can promise anyone within the sound of my voice that God does answer prayers—not always in the way we expect, but always in the way we need. The mere act of opening your heart to your Maker requires humility and a sacrifice of control to something bigger than yourself. I hold fast to the promises of God that if I look to Him in all things, I will be guided to do good continually.
-    </p>
-    <p>
-     I honor and respect the priesthood with which I have been blessed in this life. I realize that by my sex assigned at birth, I was given the right and responsibility to exercise this sacred power to lift up all others and care for the poor in spirit. Not only do I have a chance to share of my physical substance in this life, I have the honor to promote spiritual well-being to those who seek their Heavenly Parents' blessings on earth.
-    </p>
-    <p>
-     Which brings me to my next point: being transgender does not exclude me from practicing, in full faith, all of the tenets of the gospel and administering to those in need through the power of the priesthood. I am careful to attend to current Church guidelines regarding social transitioning, retain my "he" pronouns, and do not have any current plans of medically transitioning to alleviate the dysphoria I have experienced since I was a child.
-    </p>
-    <p>
-     I am choosing to walk down this path, not primarily for me, but to shine a light for the thousands of other Latter-day Saint individuals who experience, and sometimes struggle with, gender dysphoria. I walk this path as my way forward—a path of personal revelation—to better understand the conditions of mortality so that I may lead my family alongside my wife with presence and demonstrable humility. If I wanted life to be easy, I would not have come out in any way. I would have tamped down the emotions that well up each time I look in the mirror and see someone that I am not—someone who does not fully reflect the person I know myself to be. I would have forcefully dried the tears that I cry each time I experience the rigid, often painful binary culture of our Church. I could have done this, as it has been my way of life for 40+ years, and I am damn good at hiding from the world, even from myself.
-    </p>
-    <p>
-     But my faith in Christ and in the restoration of the gospel of Jesus Christ compels me to take up this yoke, to embrace this challenge, and to walk this path. I will never be alone, because in Gethsemane my Savior took upon Himself not only the scarlet sins of an entire world but the immensity of their sorrows, their weaknesses, and their struggles with mental and emotional health. Christ died for me so that I may truly live—authentically and completely.
-    </p>
-    <p>
-     It is now my responsibility to live my life for Him, so that through me, others may come to know Him—not just the historical Jesus, but the living Christ who walks with us today.
-    </p>
-   </article>
-   <article class="post">
-    <h2>
-     Hello, and welcome
-    </h2>
-    <div class="date-line">
-     Saturday, February 1, 2025
-    </div>
-    <p>
-     Sharing this part of myself isn't easy. In the past year, I have felt the pull on my heart to open up to the world about who I am; who I have always been as far as I can remember. My gender identity is a part of me that I'm now ready to share, even though it feels both exhilarating and unnerving.
-    </p>
-    <p>
-     During different periods of my life, I have made the active choice to hide who I am, often at great personal cost, whether out of comfort, safety, convenience, role requirements, or even denial. But an interesting thing happens as we grow older; the facades we create for ourselves tend to dissolve in the face of our own mortality. Over time, I slowly realized how dreadfully stuck I was in my own head, with anxiety and depression only the tip of the iceberg of my emotional and mental health struggles. I began to see how my juggling of choices forced me into a cognitive corner; constantly choosing between authenticity and conformity led to a sense of being trapped.
-    </p>
-    <p>
-     And the last straw was how it affected my faith in God.
-    </p>
-    <p>
-     You see, Christianity has a tenuous relationship with gender, focused on a strict male/female binary. This tension was something I wrestled with deeply. In the beginning, it is said that God made mankind; male and female, he created them. So throughout history, those who didn't fit those molds were given a bad rap and forced into seclusion or worse. But we must remember that though God works in simplicity… I do not believe he limits the creativity of his expression, including in the realm of gender identity.
-    </p>
-    <p>
-     The same God who created the heavens and the earth, giving them day and night, oceans and dry land, also caused that there be transitions betwixt the binary aspects of his wonder. Between day and night, we find dawn and dusk, and a thousand varying degrees of beautiful shades of color and light. Marshes, fenlands, bogs, and wetlands give delicate and tenuous life a place to settle down and thrive, whereas in the dry deserts or deep oceans, they would suffer and perish. Just as these liminal spaces, these in-between places, exist in nature, so too does my gender identity exist as a valid and beautiful expression of God's creation.
-    </p>
-    <p>
-     I exist in that in-between space.
-    </p>
-    <p>
-     I believe that my gender identity, like those who identify strictly as male or female, occupies a sacred and equally valid space. Indeed, I believe that because of my gender identity, I have the blessed opportunity to love and understand all of God's creations, regardless of circumstance, creed, gender, race, social standing, or any of the other constructs that tend to separate and not unify mankind.
-    </p>
-    <p>
-     So please, be patient with me as I share my experiences with you through this dedicated account. I understand the discomfort that this topic brings. I realize that some of you may equate those feelings of discomfort to unyielding confirmation that who I am is in opposition to my Heavenly parentage. I challenge each of you who finds themselves coming to this conclusion to walk with me with an open heart and listen to my story, and gently open up to the risk that when we limit ourselves to comfortable topics, familiar echo chambers, and like-minded relationships, we limit our ability to love our neighbors as Christ would want us to.
-    </p>
-    <p>
-     P.S. I know that sharing this part of myself might bring up questions for some of you. To help address those, I've created a Frequently Asked Questions page where I delve into some of the complexities of being transgender and a member of the Church. I discuss how I reconcile my gender identity with my faith, the challenges I face, and what it means to be an ally to the LGBTQ+ community. If you're curious to learn more, I invite you to explore the FAQ page. It's a space for open dialogue and deeper understanding.
-    </p>
-   </article>
-  </div>
-  <div class="container" id="faq">
-   <h2>
-    Frequently Asked Questions
-   </h2>
-   <div class="faq-item">
-    <span class="faq-q">
-     How can someone be transgender and a member of the Church?
-    </span>
-    <p>
-     Gender identity is a deeply personal and complex aspect of who we are, separate from gender expression or sexual orientation. Every individual's journey with their gender identity is unique, and there's no single way to be transgender.
-    </p>
-    <div class="quote-block">
-     "Some people feel their inner sense of gender does not align with their biological sex at birth. The Church does not take a position on the causes of these feelings. Some who experience these feelings identify as transgender." — Church Website
-    </div>
-   </div>
-   <div class="faq-item">
-    <span class="faq-q">
-     How does your identity fit within the Plan of Salvation?
-    </span>
-    <p>
-     Quite simply, it doesn't appear that it fits at all. Like many aspects of faith, interpretations of gender roles and the Plan of Salvation vary. Many transgender Latter-day Saints find ways to reconcile their understanding of these concepts with their lived experience.
-    </p>
-   </div>
-   <div class="faq-item">
-    <span class="faq-q">
-     How do you reconcile your gender identity with Church teachings?
-    </span>
-    <p>
-     It's been a process of seeking personal revelation and a journey of growth and learning. I've felt a strong confirmation that embracing my gender identity is right for me. This doesn't mean I'm rejecting Church teachings, but rather that I'm seeking to understand them in a way that's consistent with my own experiences and the promptings of the Spirit.
-    </p>
-   </div>
-   <div class="faq-item">
-    <span class="faq-q">
-     When did you know you were transgender?
-    </span>
-    <p>
-     While the terminology didn't exist in my very young mind, I knew that I felt different from an early age. My earliest memories of gender dysphoria came at around 5 years old. I remember dreaming about waking up the next day a girl. That longing stayed with me for many years.
-    </p>
-   </div>
-   <div class="faq-item">
-    <span class="faq-q">
-     What are the biggest challenges you face?
-    </span>
-    <ul>
-     <li>
-      <strong>
-       Misunderstanding and Judgment:
-      </strong>
-      Bridging gaps takes patience and open communication.
-     </li>
-     <li>
-      <strong>
-       Fear of Losing Relationships:
-      </strong>
-      Balancing authenticity with maintaining connections.
-     </li>
-     <li>
-      <strong>
-       Safety and Acceptance:
-      </strong>
-      Legitimate concerns in primarily conservative areas.
-     </li>
-     <li>
-      <strong>
-       Internal Conflict:
-      </strong>
-      Ongoing effort to find peace between faith and identity.
-     </li>
-    </ul>
-   </div>
-   <div class="faq-item">
-    <span class="faq-q">
-     How can I be a better ally?
-    </span>
-    <ul>
-     <li>
-      <strong>
-       Educate Yourself:
-      </strong>
-      Learn about LGBTQ+ issues and terminology.
-     </li>
-     <li>
-      <strong>
-       Listen with Empathy:
-      </strong>
-      Open your heart without judgment.
-     </li>
-     <li>
-      <strong>
-       Love without Condition:
-      </strong>
-      Christ's love extends to everyone.
-     </li>
-     <li>
-      <strong>
-       Advocate for Inclusion:
-      </strong>
-      Speak up in your ward and family.
-     </li>
-     <li>
-      <strong>
-       Pray for Guidance:
-      </strong>
-      Seek the Spirit on how you can best show love.
-     </li>
-    </ul>
-   </div>
-  </div>
-  <div class="container" id="ama">
-   <h2>
-    Ask Me Anything
-   </h2>
-   <p>
-    This is a space for open dialogue. What questions do you have? You can remain totally anonymous.
-   </p>
-   <div class="ama-interface">
-    <form action="https://formspree.io/f/mdalpokv" class="ama-form" method="POST">
-     <textarea name="message" placeholder="TYPE_YOUR_QUESTION_HERE..." required=""></textarea>
-     <br/>
-     <button class="submit-btn" type="submit">
-      Transmit Question
-     </button>
-    </form>
-    <div class="date-line" style="margin-top: 30px; color: #555;">
-     [ ANONYMOUS_ENCRYPTION_ACTIVE ]
-    </div>
-   </div>
-   <div class="form-disclaimer">
-    [ NOTICE ] UPLINK POWERED BY FORMSPREE. CONFIDENTIALITY PRIORITIZED; SECURITY NOT GUARANTEED. AVOID SENSITIVE DATA TRANSMISSION.
-   </div>
-   <a class="podcast-link" href="https://listenlearnandlove.org" target="_blank">
-    FEATURED_ON: LISTEN, LEARN &amp; LOVE (RICHARD OSTLER)
-   </a>
-  </div>
-  <footer>
-   <a class="exit-link" href="personal.html">
-    [ ABORT_CONNECTION ]
-   </a>
-  </footer>
+<head>
+  <!-- GA -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-YKRKPFV2MB"></script>
   <script>
-   function showTab(tabId, btn) {
-            document.querySelectorAll('.container').forEach(c => c.classList.remove('active'));
-            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById(tabId).classList.add('active');
-            btn.classList.add('active');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-YKRKPFV2MB');
   </script>
- </body>
+
+  <!-- Core -->
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <meta name="theme-color" content="#0a0a0a"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <meta name="color-scheme" content="dark"/>
+
+  <!-- Best-effort privacy -->
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="googlebot" content="noindex, nofollow, noarchive">
+
+  <title>Transforming Zion | Safe Room</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml"/>
+  <link rel="stylesheet" href="theme.css"/>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Fira+Code:wght@300;500&display=swap"/>
+
+  <style>
+    :root{
+      --brand-purple:#9b59b6;
+      --brand-light:#d2b4de;
+      --bg-dark:#0a0a0a; /* FIX: force real dark */
+      --text-grey:#888;
+      --hdr-offset: 92px; /* will be overwritten by syncHeader() */
+    }
+
+    body{
+      background-color: var(--bg-dark);
+      color: white;
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.8;
+      padding-top: var(--hdr-offset);
+    }
+
+    /* =========================
+       1) FIXED HEADER (clean, minimal, same vibe)
+       ========================= */
+    .top-nav{
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      z-index: 6000;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background: linear-gradient(to bottom, rgba(10,10,10,0.98) 0%, rgba(10,10,10,0) 100%);
+      padding: 18px 0;
+      pointer-events: none;
+    }
+
+    .top-nav-inner{
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+    }
+
+    .top-nav a{
+      pointer-events: auto;
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .top-nav .nav-logo{
+      width: 180px;
+      max-width: 45vw;
+      height: auto;
+      filter: drop-shadow(0 0 15px rgba(155, 89, 182, 0.35));
+      opacity: 0.92;
+    }
+
+    .top-nav .nav-right{
+      pointer-events: auto;
+      text-align: right;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .top-nav .nav-tag{
+      font-family: 'Fira Code', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(155, 89, 182, 0.75);
+      margin: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* subtle signal line */
+    .top-nav::after{
+      content:"";
+      position:absolute;
+      left:0; right:0;
+      bottom:0;
+      height:1px;
+      background: linear-gradient(90deg,
+        transparent,
+        rgba(155, 89, 182, 0.35),
+        rgba(155, 89, 182, 0.12),
+        transparent
+      );
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    /* =========================
+       2) HERO HEADER (same as your original, just cleaned)
+       ========================= */
+    header{
+      padding: 100px 20px 40px;
+      text-align: center;
+      background: linear-gradient(to bottom, rgba(155, 89, 182, 0.08), transparent);
+    }
+
+    .tfz-logo{
+      font-size: 3rem;
+      font-weight: 900;
+      letter-spacing: -2px;
+      margin: 0;
+      color: white;
+      text-transform: lowercase;
+    }
+
+    .tfz-subtitle{
+      font-size: 0.95rem;
+      color: var(--brand-purple);
+      letter-spacing: 1px;
+      max-width: 700px;
+      margin: 25px auto 0;
+      font-weight: 300;
+      line-height: 1.6;
+    }
+
+    /* =========================
+       3) TAB NAV (sticky) — kept same look
+       ========================= */
+    .tab-nav{
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      padding: 20px;
+      position: sticky;
+      top: var(--hdr-offset);
+      background: rgba(5,5,5,0.95);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      z-index: 1000;
+      border-bottom: 1px solid rgba(155, 89, 182, 0.1);
+    }
+
+    .nav-btn{
+      background: none;
+      border: none;
+      color: var(--text-grey);
+      font-family: 'Fira Code', monospace;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      cursor: pointer;
+      transition: 0.4s;
+      padding: 10px 0;
+      border-bottom: 2px solid transparent;
+    }
+    .nav-btn:hover,
+    .nav-btn.active{
+      color: var(--brand-purple);
+      border-bottom-color: var(--brand-purple);
+    }
+
+    /* =========================
+       4) CONTENT SECTIONS — kept same
+       ========================= */
+    .container{
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 60px 20px;
+      display: none;
+    }
+    .container.active{
+      display: block;
+      animation: contentFade 0.8s ease;
+    }
+    @keyframes contentFade{
+      from{ opacity:0; transform: translateY(15px); }
+      to{ opacity:1; transform: translateY(0); }
+    }
+
+    .banner-img{
+      width: 100%;
+      margin-bottom: 60px;
+      border: 1px solid rgba(155, 89, 182, 0.2);
+      opacity: 0.8;
+    }
+
+    .post{ margin-bottom: 100px; }
+
+    h2{
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--brand-light);
+      margin-bottom: 15px;
+    }
+
+    .date-line{
+      font-family: 'Fira Code', monospace;
+      font-size: 0.75rem;
+      color: #ffffff;
+      margin-bottom: 35px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      opacity: 1;
+    }
+
+    p{
+      margin-bottom: 25px;
+      font-size: 1.15rem;
+      font-weight: 300;
+      color: #ccc;
+    }
+
+    /* FAQ */
+    .faq-item{
+      margin-bottom: 60px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .faq-q{
+      color: var(--brand-purple);
+      font-weight: 700;
+      font-size: 1.3rem;
+      margin-bottom: 20px;
+      display: block;
+      line-height: 1.4;
+    }
+    .quote-block{
+      border-left: 2px solid var(--brand-purple);
+      padding: 5px 0 5px 30px;
+      font-style: italic;
+      color: #888;
+      margin: 35px 0;
+      font-size: 1rem;
+    }
+    ul{ margin-bottom: 30px; padding-left: 20px; color: #ccc; }
+    li{ margin-bottom: 15px; font-size: 1.1rem; font-weight: 300; }
+    li strong{ color: var(--brand-light); }
+
+    /* AMA */
+    .ama-interface{
+      background: rgba(155, 89, 182, 0.02);
+      border: 1px solid rgba(155, 89, 182, 0.15);
+      padding: 60px 40px;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .ama-form textarea{
+      width: 100%;
+      background: #0a0a0a;
+      border: 1px solid #333;
+      color: white;
+      padding: 25px;
+      font-family: 'Inter';
+      font-size: 1.1rem;
+      margin-bottom: 25px;
+      resize: vertical;
+      min-height: 180px;
+      outline: none;
+      box-sizing: border-box;
+    }
+    .ama-form textarea:focus{ border-color: var(--brand-purple); }
+
+    .submit-btn{
+      background: var(--brand-purple);
+      color: white;
+      border: none;
+      padding: 18px 50px;
+      font-family: 'Fira Code';
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .submit-btn:hover{
+      background: #8e44ad;
+      box-shadow: 0 0 20px rgba(155, 89, 182, 0.3);
+    }
+
+    .form-disclaimer{
+      margin-top: 25px;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.6rem;
+      color: #444;
+      letter-spacing: 1px;
+      line-height: 1.4;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      text-transform: uppercase;
+    }
+
+    .podcast-link{
+      display: inline-block;
+      margin-top: 60px;
+      font-family: 'Fira Code';
+      font-size: 0.75rem;
+      color: var(--brand-light);
+      text-decoration: none;
+      border: 1px solid #333;
+      padding: 15px 30px;
+    }
+
+    footer{
+      padding: 100px 20px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .exit-link{
+      color: var(--brand-purple);
+      text-decoration: none;
+      font-family: 'Fira Code';
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+    }
+
+    @media (max-width: 768px){
+      body{ padding-top: 92px; }
+      .tfz-logo{ font-size: 2rem; }
+      .tab-nav{ gap: 15px; }
+      h2{ font-size: 1.8rem; }
+      .ama-interface{ padding: 40px 18px; }
+      .top-nav-inner{ padding: 0 16px; justify-content: center; }
+      .top-nav .nav-right{ display: none; }
+      .top-nav .nav-logo{ width: 80vw; max-width: 280px; }
+    }
+
+    /* Motion safety */
+    @media (prefers-reduced-motion: reduce){
+      *{ animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="cursor-ring"></div>
+  <div id="cursor-dot"></div>
+
+  <!-- Clean fixed header (replaces the old inline nav hack) -->
+  <nav class="top-nav" aria-label="Top navigation">
+    <div class="top-nav-inner">
+      <a href="personal.html" aria-label="Back to Personal">
+        <img class="nav-logo" src="Images/Equal.svg" alt="Outside The World" />
+      </a>
+      <div class="nav-right">
+        <p class="nav-tag">SAFE_ROOM // TRANSFORMING_ZION</p>
+      </div>
+    </div>
+  </nav>
+
+  <header>
+    <h1 class="tfz-logo">transformingzion</h1>
+    <p class="tfz-subtitle">
+      Exploring the intersection of trans/non-binary and Latter-day Saint identities.<br/>
+      Broadening minds, extending Zion, and fostering understanding.
+    </p>
+  </header>
+
+  <nav class="tab-nav" aria-label="Section navigation">
+    <button class="nav-btn active" onclick="showTab('home', this)">Home</button>
+    <button class="nav-btn" onclick="showTab('faq', this)">FAQs</button>
+    <button class="nav-btn" onclick="showTab('ama', this)">Ask Me Anything</button>
+  </nav>
+
+  <div class="container active" id="home">
+    <img alt="Banner" class="banner-img" src="Images/banner-2.png"/>
+
+<article class="post">
+  <h2>What I believe</h2>
+  <div class="date-line">Tuesday, February 4, 2025</div>
+
+  <p>
+    I believe in the restoration of the gospel of Jesus Christ. Essentially, I am a believing member of The Church of
+    Jesus Christ of Latter-day Saints because of that simple, profound fact. I have a spiritual knowledge—a witness—of
+    where the Book of Mormon came from and recognize the divine hand that brought it forth from the dust of forgotten
+    history. I have a testimony of the power of the Book of Mormon and believe it speaks of Christ in a sacred,
+    understandable light, illuminating His role in our lives. While I do not—and perhaps cannot—understand every word
+    that proceeds from a prophet's mouth, I have faith in the leaders of the Church. I believe that, like all of us,
+    they are earnestly seeking further light and knowledge that only God can provide. Through prayer and study, I have
+    learned how to listen to the Holy Spirit confirm truth to me in my life, heart, and mind.
+  </p>
+
+  <p>
+    I love being part of the body of Christ and feeling the love and compassion of a ward family. I try my best to
+    emulate my Savior's example, and have long loved the inspired words of King Benjamin from Mosiah 4:15:
+    “…ye will teach them to love one another, and to serve one another.” Truthfully, my faith is all I have known from
+    the start. I was born into it, albeit into a family of varying degrees of faith. Early on, I quickly grew to
+    understand something deeper about the religion in which I was being raised. While many of my family members ebbed
+    and flowed in their faith and commitment to the gospel, each one of them abounded in good works, cultivated a
+    solemn morality, and sought to expand their lives with truth and wisdom.
+  </p>
+
+  <p>
+    To me, this spoke of the genuine influence of the Gospel of Jesus Christ, if only by proximity, not by pure,
+    consistent practice. I learned that merely having a tiny seed of hope in Christ can bring about blessings. In an
+    unexpected and peculiar way, this foundation of my testimony of the gospel has yielded fruits that could not have
+    been predicted in my youth. I find a resilience to temptation, a willingness to look beyond certitudes—to embrace
+    nuance and complexity—and the flexibility to adapt when faced with doubt and hardship. Without going into further
+    detail at this time, I am a believing member of The Church of Jesus Christ of Latter-day Saints because of the
+    fruits I have seen in my life, rather than in spite of the flaws the Church, like any human institution, may
+    exhibit.
+  </p>
+
+  <p>
+    I have a firm testimony of the power of prayer in our lives and can promise anyone within the sound of my voice
+    that God does answer prayers—not always in the way we expect, but always in the way we need. The mere act of
+    opening your heart to your Maker requires humility and a sacrifice of control to something bigger than yourself. I
+    hold fast to the promises of God that if I look to Him in all things, I will be guided to do good continually.
+  </p>
+
+  <p>
+    I honor and respect the priesthood with which I have been blessed in this life. I realize that by my sex assigned
+    at birth, I was given the right and responsibility to exercise this sacred power to lift up all others and care
+    for the poor in spirit. Not only do I have a chance to share of my physical substance in this life, I have the
+    honor to promote spiritual well-being to those who seek their Heavenly Parents' blessings on earth.
+  </p>
+
+  <p>
+    Which brings me to my next point: being non-binary does not exclude me from practicing, in full faith, all of the
+    tenets of the gospel and administering to those in need through the power of the priesthood. I am careful to
+    attend to current Church guidelines regarding social transitioning, retain my "he" pronouns, and do not have any
+    current plans of medically transitioning to alleviate the dysphoria I have experienced since I was a child.
+  </p>
+
+  <p>
+    I am choosing to walk down this path, not primarily for me, but to shine a light for the thousands of other
+    Latter-day Saint individuals who experience, and sometimes struggle with, gender dysphoria. I walk this path as my
+    way forward—a path of personal revelation—to better understand the conditions of mortality so that I may lead my
+    family alongside my wife with presence and demonstrable humility. If I wanted life to be easy, I would not have
+    come out in any way. I would have tamped down the emotions that well up each time I look in the mirror and see
+    someone that I am not—someone who does not fully reflect the person I know myself to be. I would have forcefully
+    dried the tears that I cry each time I experience the rigid, often painful binary culture of our Church. I could
+    have done this, as it has been my way of life for 40+ years, and I am damn good at hiding from the world, even from
+    myself.
+  </p>
+
+  <p>
+    But my faith in Christ and in the restoration of the gospel of Jesus Christ compels me to take up this yoke, to
+    embrace this challenge, and to walk this path. I will never be alone, because in Gethsemane my Savior took upon
+    Himself not only the scarlet sins of an entire world but the immensity of their sorrows, their weaknesses, and
+    their struggles with mental and emotional health. Christ died for me so that I may truly live—authentically and
+    completely.
+  </p>
+
+  <p>
+    It is now my responsibility to live my life for Him, so that through me, others may come to know Him—not just the
+    historical Jesus, but the living Christ who walks with us today.
+  </p>
+</article>
+
+<article class="post">
+  <h2>Hello, and welcome</h2>
+  <div class="date-line">Saturday, February 1, 2025</div>
+
+  <p>
+    Sharing this part of myself isn't easy. In the past year, I have felt the pull on my heart to open up to the world
+    about who I am—who I have always been, as far as I can remember. My gender identity is a part of me that I'm now
+    ready to share, even though it feels both exhilarating and unnerving.
+  </p>
+
+  <p>
+    During different periods of my life, I have made the active choice to hide who I am, often at great personal cost,
+    whether out of comfort, safety, convenience, role requirements, or even denial. But an interesting thing happens as
+    we grow older; the facades we create for ourselves tend to dissolve in the face of our own mortality. Over time, I
+    slowly realized how dreadfully stuck I was in my own head, with anxiety and depression only the tip of the iceberg
+    of my emotional and mental health struggles. I began to see how my juggling of choices forced me into a cognitive
+    corner; constantly choosing between authenticity and conformity led to a sense of being trapped.
+  </p>
+
+  <p>And the last straw was how it affected my faith in God.</p>
+
+  <p>
+    You see, Christianity has a tenuous relationship with gender, focused on a strict male/female binary. This tension
+    was something I wrestled with deeply. In the beginning, it is said that God made mankind; male and female, he
+    created them. So throughout history, those who didn't fit those molds were given a bad rap and forced into seclusion
+    or worse. But we must remember that though God works in simplicity… I do not believe He limits the creativity of His
+    expression, including in the realm of gender identity.
+  </p>
+
+  <p>
+    The same God who created the heavens and the earth, giving them day and night, oceans and dry land, also caused that
+    there be transitions betwixt the binary aspects of His wonder. Between day and night, we find dawn and dusk, and a
+    thousand varying degrees of beautiful shades of color and light. Marshes, fenlands, bogs, and wetlands give delicate
+    and tenuous life a place to settle down and thrive, whereas in the dry deserts or deep oceans, they would suffer and
+    perish. Just as these liminal spaces—these in-between places—exist in nature, so too does my gender identity exist
+    as a valid and beautiful expression of God's creation.
+  </p>
+
+  <p>I exist in that in-between space.</p>
+
+  <p>
+    I believe that my gender identity, like those who identify strictly as male or female, occupies a sacred and equally
+    valid space. Indeed, I believe that because of my gender identity, I have the blessed opportunity to love and
+    understand all of God's creations, regardless of circumstance, creed, gender, race, social standing, or any of the
+    other constructs that tend to separate and not unify mankind.
+  </p>
+
+  <p>
+    So please, be patient with me as I share my experiences with you through this dedicated account. I understand the
+    discomfort that this topic brings. I realize that some of you may equate those feelings of discomfort to unyielding
+    confirmation that who I am is in opposition to my Heavenly parentage. I challenge each of you who finds yourselves
+    coming to this conclusion to walk with me with an open heart, listen to my story, and gently open up to the risk
+    that when we limit ourselves to comfortable topics, familiar echo chambers, and like-minded relationships, we limit
+    our ability to love our neighbors as Christ would want us to.
+  </p>
+
+  <p>
+    P.S. I know that sharing this part of myself might bring up questions for some of you. To help address those, I've
+    created a Frequently Asked Questions page where I delve into some of the complexities of being non-binary and a
+    member of the Church. I discuss how I reconcile my gender identity with my faith, the challenges I face, and what it
+    means to be an ally to the LGBTQ+ community. If you're curious to learn more, I invite you to explore the FAQ page.
+    It's a space for open dialogue and deeper understanding.
+  </p>
+</article>
+  </div>
+
+<div class="container" id="faq">
+  <h2>Frequently Asked Questions</h2>
+
+  <div class="faq-item">
+    <span class="faq-q">How can someone be non-binary and a member of the Church?</span>
+
+    <p>
+      Gender identity is a deeply personal and complex aspect of who we are, separate from gender expression or sexual
+      orientation. Every individual's journey with their gender identity is unique, and there's no single way to be
+      non-binary.
+    </p>
+
+    <p>
+      For me, and for many others, being non-binary is a part of our identity, just like being gay or lesbian is part of
+      someone else's. We can integrate this understanding of ourselves with our faith and participation in the Church.
+    </p>
+
+    <p>
+      The Church itself acknowledges this complexity on its website, stating in the "Understanding Yourself" section:
+    </p>
+
+    <div class="quote-block">
+      “Some people feel their inner sense of gender does not align with their biological sex at birth. The Church does
+      not take a position on the causes of these feelings. Some who experience these feelings identify as non-binary.”
+      — Church Website
+    </div>
+
+    <p>
+      This statement affirms that people with diverse experiences of gender can find a place within the Church
+      community, and I'm a testament to that possibility.
+    </p>
+  </div>
+
+  <div class="faq-item">
+    <span class="faq-q">How does your identity fit within the Plan of Salvation?</span>
+    <p>
+      Quite simply, it doesn't appear that it fits at all. Like many aspects of faith, interpretations of gender roles
+      and the Plan of Salvation vary. Many non-binary Latter-day Saints find ways to reconcile their understanding of
+      these concepts with their lived experience. It's a topic of ongoing personal study and revelation.
+    </p>
+  </div>
+
+  <div class="faq-item">
+    <span class="faq-q">How do you reconcile your gender identity with Church teachings on gender?</span>
+
+    <p>
+      This is a deeply personal question, and the answer is unique to each individual. It often involves prayer, study,
+      and seeking guidance from the Spirit. There is no single, prescribed way to reconcile these aspects of oneself.
+    </p>
+
+    <p>
+      For me, it's been a process of seeking personal revelation and a journey of growth and learning. While the
+      Proclamation initially seemed to present a challenge, I've come to believe that God speaks to us individually and
+      guides us on our unique paths. Through prayer and pondering, I've felt a strong confirmation that embracing my
+      gender identity is right for me. This doesn't mean I'm rejecting Church teachings, but rather that I'm seeking to
+      understand them in a way that's consistent with my own experiences and the promptings of the Spirit.
+    </p>
+
+    <p>
+      I believe that God loves and accepts us all, and that includes those of us who are non-binary. I've felt the
+      Spirit confirm that embracing my true self is part of my journey toward becoming the person God wants me to be.
+    </p>
+  </div>
+
+  <div class="faq-item">
+    <span class="faq-q">When did you know you were non-binary?</span>
+
+    <p>
+      While the terminology didn't exist in my very young mind, I knew that I felt different from an early age. My
+      earliest memories of gender dysphoria came at around 5 years old.
+    </p>
+
+    <p>
+      I noted in a personal journal entry a few years ago this memory: "I'm five years old. It's 6 am, well before
+      school. Mom lets me watch PBS in the mornings before I go to preschool at Mrs. Wing's house. Mr. Rogers is
+      speaking to me. I love Mr. Rogers. He makes me feel safe and loved and ok with the world. He's talking about the
+      differences between boys and girls, but did I hear him say that boys could be girls? Probably not. But I go to bed
+      that night and dream about waking up the next day a girl. That can't be right."
+    </p>
+
+    <p>
+      Even at that young age, I remember longing, wishing, and waiting for the moment that I would be magically
+      transformed into a version of myself that I felt more comfortable with. It's a feeling that stayed with me for
+      many years, even though I didn't have the words to describe it at the time.
+    </p>
+  </div>
+
+  <div class="faq-item">
+    <span class="faq-q">What pronouns do you use?</span>
+
+    <p>
+      My pronouns are he/him/his. This is something I've given a lot of thought to, especially in light of the Church's
+      guidelines on gender and identity. While I identify as non-binary, I've chosen not to socially transition at this
+      time. This means I continue to use the pronouns that align with my assigned sex at birth.
+    </p>
+
+    <p>
+      This decision comes from a place of personal reflection and seeking guidance from the Spirit. I respect the
+      counsel of Church leaders and want to navigate my journey in a way that feels both authentic to me and respectful
+      of the community I belong to.
+    </p>
+
+    <p>
+      It's important to acknowledge that this is a complex and evolving issue, and there are many perspectives within
+      the Church. I honor the experiences of those who choose to socially transition, and I also respect those who
+      choose not to. Ultimately, I believe it's a matter of personal revelation and following the path that feels right
+      for each individual.
+    </p>
+  </div>
+
+  <div class="faq-item">
+    <span class="faq-q">What name do you prefer?</span>
+    <p>I prefer to go by Rylee, but RyanDavid is wonderful as well.</p>
+  </div>
+
+  <div class="faq-item">
+    <span class="faq-q">What has your experience been like with your ward/family/friends?</span>
+
+    <p>
+      I've been incredibly fortunate to have a supportive network of family, friends, and ward members. Everyone I've
+      shared my story with has responded with grace and love.
+    </p>
+
+    <p>
+      Of course, there are times when a deep understanding might be lacking, but I believe that's where proximity and
+      open communication come in. By sharing my experiences and being open to questions, I've found that I can build
+      bridges and foster understanding even with those who might initially have different perspectives.
+    </p>
+
+    <p>
+      I always invite those who know me to ask questions and share any concerns they might have. I believe that honest
+      and open dialogue is crucial for creating a space of love and acceptance, even amidst differing viewpoints.
+    </p>
+
+    <p>
+      Most importantly of all, I am lucky enough to have a kind, empathetic, and supportive wife by my side. She was
+      willing to walk with me in my journey from the time we met. It is her heart that I consider above all others
+      because there can be great grief and loss associated with dysphoria. Because of this, and many other personal
+      reasons, I must be thoughtful in the way I share my story.
+    </p>
+
+    <p>
+      I'm grateful for the relationships I have, especially with my wife, and for the way they've supported me on my
+      journey. Their love and understanding have been invaluable.
+    </p>
+  </div>
+
+  <div class="faq-item">
+    <span class="faq-q">What are the biggest challenges you face?</span>
+    <ul>
+      <li><strong>Misunderstanding and Judgment:</strong> It's not always easy for people to understand experiences
+        different from their own, which can lead to hurtful misunderstandings or judgments. Bridging those gaps takes
+        patience and open communication.</li>
+
+      <li><strong>Fear of Losing Relationships:</strong> One of my biggest fears is losing relationships with loved ones
+        who might not understand or accept my gender identity. Balancing being true to myself with maintaining those
+        connections is an ongoing challenge.</li>
+
+      <li><strong>Safety and Acceptance:</strong> Living in a primarily conservative area, there can be legitimate safety
+        concerns that come with being visibly gender-nonconforming. Finding a sense of belonging and acceptance can also
+        be challenging.</li>
+
+      <li><strong>Internal Conflict:</strong> Balancing my faith with my gender identity can create internal conflict,
+        requiring ongoing effort to find peace and reconciliation.</li>
+    </ul>
+
+    <p>
+      Despite these challenges, I remain committed to being true to myself and to finding my place within the Church and
+      my community. I believe that through open communication, vulnerability, and a willingness to learn from one
+      another, we can create a more inclusive and loving space for everyone.
+    </p>
+  </div>
+
+  <div class="faq-item">
+    <span class="faq-q">Are you planning on transitioning / have you transitioned?</span>
+
+    <p>This is a very personal question.</p>
+
+    <p>
+      I have no plans to transition, either socially or medically. This is a decision that comes from a place of
+      personal reflection, prayer, and seeking guidance from the Spirit. It's a path that feels right for me at this
+      point in my journey.
+    </p>
+
+    <p>
+      It's important to emphasize that decisions about transitioning are deeply personal. Some non-binary people choose
+      to medically or socially transition, while others do not. There is no single right way to be non-binary, and I
+      deeply respect the choices that others make for themselves.
+    </p>
+
+    <p>
+      I believe it's crucial to avoid making assumptions about anyone's journey and to create a space where everyone
+      feels respected and valued, regardless of their path.
+    </p>
+  </div>
+
+  <div class="faq-item">
+    <span class="faq-q">Doesn't this mean you're gay?</span>
+
+    <p>
+      This question highlights an important distinction: gender identity and sexual orientation are separate aspects of
+      who we are.
+    </p>
+
+    <p>To answer your question directly, I do not experience any attraction toward men.</p>
+
+    <p>
+      However, it's crucial to understand that a non-binary person can be gay, lesbian, bisexual, straight, or any other
+      sexual orientation. Being non-binary doesn't automatically determine a person's sexual orientation.
+    </p>
+
+    <p>
+      I can only imagine how challenging it must be for those who experience same-sex attraction and also navigate a
+      complex relationship with gender. The process of coming out and embracing one's identity can be layered and
+      difficult, and I have tremendous respect for those who are on that journey.
+    </p>
+  </div>
+
+  <div class="faq-item">
+    <span class="faq-q">How can I be a better ally?</span>
+
+    <p>
+      I love this question! It shows a genuine desire to support the LGBTQ+ community, and that's truly appreciated. To
+      answer your question, I'll borrow a phrase from my favorite LGBTQ+ podcast: listen, learn, and love.
+    </p>
+
+    <p>Here are some ways you can put that into action, especially within a faith-based context:</p>
+
+    <ul>
+      <li><strong>Educate Yourself:</strong> Take the time to learn about LGBTQ+ issues, terminology, and experiences.
+        Read books, listen to podcasts, and engage with resources from reputable organizations. Understanding is the
+        foundation of allyship.</li>
+
+      <li><strong>Listen with Empathy:</strong> When someone shares their story with you, listen with an open heart and
+        without judgment. Their experiences are real and valid, even if they differ from your own.</li>
+
+      <li><strong>Love without Condition:</strong> Show love and acceptance to all, regardless of their sexual
+        orientation or gender identity. Remember that Christ's love extends to everyone.</li>
+
+      <li><strong>Advocate for Inclusion:</strong> Speak up for inclusion and equality within your ward, community, and
+        family. Challenge prejudice and create space for everyone to feel welcome and valued.</li>
+
+      <li><strong>Offer Support:</strong> Be a source of support for LGBTQ+ individuals. Let them know you're there for
+        them—whether they need someone to talk to, a shoulder to cry on, or an advocate in their corner.</li>
+
+      <li><strong>Practice Patience:</strong> Change takes time, and understanding doesn't always happen overnight. Be
+        patient with yourself and others as you navigate these complex issues.</li>
+
+      <li><strong>Pray for Guidance:</strong> Seek guidance from the Spirit on how you can best be an ally and show love
+        to those who need it most.</li>
+    </ul>
+
+    <p>
+      Remember, allyship is an ongoing journey, not a destination. It requires continuous learning, self-reflection, and
+      a commitment to creating a more loving and inclusive world.
+    </p>
+  </div>
+</div>
+  <div class="container" id="ama">
+    <h2>Ask Me Anything</h2>
+    <p>This is a space for open dialogue. What questions do you have? You can remain totally anonymous.</p>
+
+    <div class="ama-interface">
+      <form action="https://formspree.io/f/mdalpokv" class="ama-form" method="POST">
+        <textarea name="message" placeholder="TYPE_YOUR_QUESTION_HERE..." required=""></textarea>
+        <br/>
+        <button class="submit-btn" type="submit">Transmit Question</button>
+      </form>
+
+      <div class="date-line" style="margin-top: 30px; color: #555;">
+        [ ANONYMOUS_ENCRYPTION_ACTIVE ]
+      </div>
+    </div>
+
+    <div class="form-disclaimer">
+      [ NOTICE ] UPLINK POWERED BY FORMSPREE. CONFIDENTIALITY PRIORITIZED; SECURITY NOT GUARANTEED. AVOID SENSITIVE DATA TRANSMISSION.
+    </div>
+
+    <a class="podcast-link" href="https://listenlearnandlove.org" target="_blank" rel="noopener">
+      FEATURED_ON: LISTEN, LEARN &amp; LOVE (RICHARD OSTLER)
+    </a>
+  </div>
+
+  <footer>
+    <a class="exit-link" href="personal.html">[ ABORT_CONNECTION ]</a>
+  </footer>
+
+  <script>
+    function syncHeader(){
+      const hdr = document.querySelector('.top-nav');
+      if (!hdr) return;
+      const buffer = window.innerWidth > 768 ? 12 : 10;
+      document.documentElement.style.setProperty('--hdr-offset', (hdr.offsetHeight + buffer) + 'px');
+    }
+    window.addEventListener('resize', syncHeader);
+    window.addEventListener('load', syncHeader);
+
+    function showTab(tabId, btn) {
+      document.querySelectorAll('.container').forEach(c => c.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      btn.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+</body>
 </html>
