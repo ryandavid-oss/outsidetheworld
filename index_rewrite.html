@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en" data-mood="auto">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0a0a0a" />
+<meta name="color-scheme" content="dark" />
+<meta name="robots" content="index,follow,max-image-preview:large" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="mobile-web-app-capable" content="yes" />
+<title>Outside The World</title>
+<meta name="description" content="Outside The World is a personal archive and professional research lab documenting 25 years of creative work, systems observation, and digital archaeology—based in Queen Creek, Arizona." />
+<link rel="canonical" href="https://outsidetheworld.com/" />
+<link href="favicon.svg" rel="icon" type="image/svg+xml" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Outside The World" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:title" content="Outside The World" />
+<meta property="og:description" content="A personal archive and professional research lab documenting 25 years of creative work and systems observation—based in Queen Creek, Arizona." />
+<meta property="og:image" content="https://outsidetheworld.com/Images/index_preview.jpg" />
+<meta property="og:image:secure_url" content="https://outsidetheworld.com/Images/index_preview.jpg" />
+<meta property="og:image:type" content="image/jpeg" />
+<meta property="og:image:width" content="1291" />
+<meta property="og:image:height" content="690" />
+<meta property="og:url" content="https://outsidetheworld.com/" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Outside The World" />
+<meta name="twitter:description" content="A personal archive and professional research lab documenting 25 years of creative work and systems observation—based in Queen Creek, Arizona." />
+<meta name="twitter:image" content="https://outsidetheworld.com/Images/index_preview.jpg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;900&family=Fira+Code:wght@300;500;700&family=Merriweather:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet" />
+<link rel="preload" as="image" href="Images/Equal.svg" type="image/svg+xml" />
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YKRKPFV2MB"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);} 
+gtag('js', new Date());
+gtag('config', 'G-YKRKPFV2MB');
+</script>
+<link href="theme.css" rel="stylesheet" />
+<style>
+:root {
+  --c-bg: var(--bg-dark, #0a0a0a);
+  --c-blue: var(--brand-blue, #6395EE);
+  --c-light-blue: var(--brand-light-blue, #A0BEF5);
+  --c-teal: var(--brand-teal, #91AFB3);
+  --c-nebula: rgba(255,77,77,.52);
+  --ease: cubic-bezier(0.23, 1, 0.32, 1);
+  --const-rot: 0deg;
+  --const-scale: 1;
+  --const-shift-x: 0px;
+  --const-shift-y: 0px;
+  --pad-safe-top: env(safe-area-inset-top);
+  --pad-safe-bottom: env(safe-area-inset-bottom);
+}
+html[data-mood="dawn"] { --c-bg:#0b0f14; --c-blue:#8bb0ff; --c-teal:#a6cfd2; --c-nebula:rgba(255,120,120,.40); }
+html[data-mood="noon"] { --c-bg:#0a0a0a; --c-blue:#6395EE; --c-teal:#91AFB3; --c-nebula:rgba(255,77,77,.48); }
+html[data-mood="dusk"] { --c-bg:#070812; --c-blue:#6f8cff; --c-teal:#82b9c2; --c-nebula:rgba(255,95,155,.38); }
+html[data-mood="midnight"] { --c-bg:#050505; --c-blue:#7aa3ff; --c-teal:#87c9c0; --c-nebula:rgba(255,77,77,.58); }
+*,*::before,*::after { box-sizing:border-box; }
+html,body { width:100%; max-width:100%; overflow-x:hidden; }
+@supports (overflow-x: clip) { html,body { overflow-x:clip; } }
+body {
+  margin:0; min-height:100vh; display:flex; flex-direction:column; align-items:center;
+  font-family:'Inter',sans-serif; color:#fff;
+  padding-top:var(--pad-safe-top); padding-bottom:var(--pad-safe-bottom);
+  padding-left:env(safe-area-inset-left); padding-right:env(safe-area-inset-right);
+  background:
+    radial-gradient(circle at center, rgba(255,255,255,.015) 0%, transparent 22%),
+    radial-gradient(900px 700px at 15% 18%, rgba(99,149,238,.07), transparent 55%),
+    radial-gradient(900px 700px at 85% 12%, rgba(145,175,179,.055), transparent 55%),
+    radial-gradient(900px 700px at 50% 85%, rgba(99,149,238,.05), transparent 60%),
+    radial-gradient(circle at center, #0a0a0a 0%, var(--c-bg) 100%);
+}
+body::before,body::after { content:""; position:fixed; inset:0; pointer-events:none; z-index:0; }
+body::before {
+  background:linear-gradient(to right, rgba(255,255,255,.028) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,.022) 1px, transparent 1px);
+  background-size:70px 70px; mask-image:radial-gradient(circle at 50% 25%, black 0%, transparent 60%);
+  opacity:.11; animation:gridDrift 22s linear infinite;
+}
+body::after { background:radial-gradient(circle at 50% 50%, rgba(10,10,10,0) 20%, rgba(0,0,0,.70) 100%); opacity:.72; }
+@keyframes gridDrift { from { transform:translate3d(0,0,0); } to { transform:translate3d(-70px,35px,0); } }
+.sr-only { position:absolute!important; width:1px!important; height:1px!important; padding:0!important; margin:-1px!important; overflow:hidden!important; clip:rect(0,0,0,0)!important; white-space:nowrap!important; border:0!important; }
+.layer { position:relative; z-index:3; width:100%; }
+.header-console {
+  position:fixed; top:calc(24px + var(--pad-safe-top)); left:50%; transform:translateX(-50%);
+  display:flex; flex-direction:column; align-items:center; gap:15px; z-index:1000; pointer-events:none; width:100%; text-align:center;
+}
+.header-console a { pointer-events:auto; display:inline-block; }
+.console-logo {
+  width:clamp(270px,22vw,380px); display:block; margin:0 auto; opacity:.92;
+  filter:saturate(1.2) brightness(1.1);
+  transition:transform .6s var(--ease), filter .6s var(--ease), opacity .6s var(--ease);
+}
+.console-logo:hover { opacity:1; transform:scale(1.05); filter:saturate(1.5) brightness(1.25) drop-shadow(0 0 16px var(--c-blue)) drop-shadow(0 0 30px rgba(99,149,238,.35)); }
+.console-text {
+  width:min(880px,90vw); margin:0 auto; font-size:clamp(.95rem,1.05vw,1.08rem); font-weight:500;
+  color:rgba(255,255,255,.84); letter-spacing:.25px; line-height:1.6; text-shadow:0 0 5px rgba(255,255,255,.28), 0 0 16px rgba(99,149,238,.18);
+}
+.console-controls {
+  pointer-events:auto; display:inline-flex; align-items:center; gap:10px;
+  font-family:'Fira Code', monospace; font-size:.58rem; letter-spacing:3px; text-transform:uppercase;
+  color:rgba(255,255,255,.55); opacity:.9;
+}
+.chip {
+  border:1px solid rgba(255,255,255,.10); background:rgba(255,255,255,.03); padding:8px 10px;
+  border-radius:999px; cursor:pointer; user-select:none;
+  transition:transform .35s var(--ease), border-color .35s var(--ease), background .35s var(--ease);
+}
+.chip:hover { transform:translateY(-1px); border-color:rgba(255,255,255,.22); background:rgba(255,255,255,.05); }
+.chip strong { color:var(--c-teal); font-weight:700; }
+.starfield { position:fixed; inset:0; width:100vw; height:100vh; z-index:1; pointer-events:none; background:transparent; }
+.field-stars { position:fixed; inset:0; z-index:900; pointer-events:none; }
+.field-star { position:absolute; transform:translate(-50%, -50%); pointer-events:auto; user-select:none; touch-action:manipulation; }
+.field-dot {
+  width:9px; height:9px; display:block; border-radius:50%; border:0; padding:0; cursor:pointer;
+  background:rgba(255,255,255,.94);
+  box-shadow:0 0 14px rgba(255,255,255,.85), 0 0 26px rgba(145,175,179,.22), 0 0 34px rgba(99,149,238,.18);
+  position:relative;
+}
+.field-dot::after {
+  content:""; position:absolute; inset:-7px; border-radius:50%; border:1px solid rgba(145,175,179,.28);
+  box-shadow:0 0 12px rgba(145,175,179,.14); opacity:.75; pointer-events:none;
+}
+.field-callout { position:absolute; opacity:0; pointer-events:none; transition:opacity .25s ease, transform .25s ease; filter:drop-shadow(0 0 6px rgba(145,175,179,.45)); }
+.field-line { position:absolute; background:rgba(145,175,179,.86); }
+.field-line.h { height:1px; }
+.field-line.v { width:1px; }
+.field-card {
+  position:absolute; min-width:170px; padding:11px 18px; background:rgba(5,5,5,.90); border:1px solid rgba(145,175,179,.68);
+  font-family:'Fira Code', monospace; font-size:.62rem; color:#fff; letter-spacing:4px; white-space:nowrap; text-transform:uppercase;
+  backdrop-filter:blur(6px);
+}
+.field-star:hover .field-callout, .field-star.active .field-callout { opacity:1; transform:translateY(0); }
+.field-sjb .field-callout { left:18px; top:-82px; width:250px; height:94px; transform:translateY(6px); }
+.field-sjb .seg-1 { left:0; top:64px; width:58px; }
+.field-sjb .seg-2 { left:58px; top:24px; height:40px; }
+.field-sjb .seg-3 { left:58px; top:24px; width:174px; }
+.field-sjb .field-card { left:62px; top:0; }
+.field-sjeb .field-callout { left:-250px; top:-82px; width:250px; height:94px; transform:translateY(6px); }
+.field-sjeb .seg-1 { left:192px; top:64px; width:58px; }
+.field-sjeb .seg-2 { left:192px; top:24px; height:40px; }
+.field-sjeb .seg-3 { left:16px; top:24px; width:176px; }
+.field-sjeb .field-card { right:62px; top:0; }
+.field-sgb .field-callout { left:-250px; top:10px; width:250px; height:94px; transform:translateY(-6px); }
+.field-sgb .seg-1 { left:192px; top:18px; width:58px; }
+.field-sgb .seg-2 { left:192px; top:18px; height:38px; }
+.field-sgb .seg-3 { left:16px; top:56px; width:176px; }
+.field-sgb .field-card { right:62px; top:38px; }
+main.gateway-container {
+  display:flex; align-items:flex-start; justify-content:center; gap:98px; width:min(94%,1460px); margin:198px auto 0;
+}
+.nav-wing {
+  display:flex; flex-direction:column; align-items:center; text-align:center; width:300px; padding-top:22px;
+}
+.wing-label {
+  font-family:'Fira Code', monospace; font-size:.76rem; font-weight:700; color:var(--c-teal); letter-spacing:4px;
+  text-transform:uppercase; margin-bottom:18px; opacity:.94; text-shadow:0 0 5px rgba(145,175,179,.45), 0 0 10px rgba(145,175,179,.25);
+}
+.ethereal-btn {
+  position:relative; overflow:hidden; background:rgba(255,255,255,.02); border:1px solid rgba(255,255,255,.10);
+  padding:22px 34px; color:#fff; font-family:'Inter', sans-serif; font-weight:900; font-size:1.02rem; letter-spacing:4px;
+  text-transform:uppercase; text-decoration:none; white-space:nowrap;
+  transition:.6s cubic-bezier(.2,1,.3,1);
+}
+.ethereal-btn::before {
+  content:""; position:absolute; top:-20%; left:-40%; width:60%; height:140%; pointer-events:none;
+  background:linear-gradient(120deg, transparent 0%, rgba(255,255,255,.16) 45%, transparent 100%);
+  transform:rotate(12deg) translateX(-120%); transition:transform .9s var(--ease);
+}
+.ethereal-btn:hover::before { transform:rotate(12deg) translateX(260%); }
+.explore-btn:hover { border-color:var(--c-blue); box-shadow:0 0 40px rgba(99,149,238,.35); color:var(--c-blue); }
+.consult-btn:hover { border-color:var(--c-teal); box-shadow:0 0 40px rgba(145,175,179,.35); color:var(--c-teal); }
+.wing-copy {
+  max-width:280px; margin:18px 0 0; font-family:'Merriweather', serif; font-size:.96rem; line-height:1.85;
+  color:rgba(255,255,255,.78); font-style:italic; letter-spacing:.15px;
+}
+.wing-links { display:flex; justify-content:center; align-items:center; gap:14px; flex-wrap:wrap; margin-top:16px; }
+.wing-link {
+  color:rgba(255,255,255,.72); text-decoration:none; font-family:'Fira Code', monospace; font-size:.72rem; letter-spacing:2px;
+  text-transform:uppercase; border-bottom:1px solid transparent; transition:color .25s ease, border-color .25s ease;
+}
+.wing-link:hover { color:var(--c-teal); border-color:var(--c-teal); }
+.constellation-wrap { display:flex; align-items:center; justify-content:center; }
+.constellation {
+  position:relative; width:420px; height:560px; isolation:isolate;
+  transform:translate3d(var(--const-shift-x), var(--const-shift-y), 0) rotate(var(--const-rot)) scale(var(--const-scale));
+  transform-origin:center; transition:transform 900ms var(--ease);
+}
+.orion-star {
+  position:absolute; width:var(--s, 7px); height:var(--s, 7px); border-radius:50%; background:var(--col, rgba(255,255,255,.95));
+  box-shadow:0 0 12px rgba(255,255,255,.75), 0 0 22px rgba(145,175,179,.18), 0 0 32px rgba(99,149,238,.14);
+  animation:twinkle var(--dur, 4.2s) infinite ease-in-out; z-index:1; mix-blend-mode:screen;
+}
+.orion-minor { opacity:.62; filter:saturate(.95); }
+@keyframes twinkle { 0%,100% { opacity:.55; transform:scale(.92); } 50% { opacity:1; transform:scale(1.08); } }
+.superbright { box-shadow:0 0 16px rgba(255,255,255,.98), 0 0 34px rgba(255,255,255,.46), 0 0 58px rgba(99,149,238,.24); }
+.blue-star { --col:rgba(160,190,245,.98); }
+.red-star { --col:rgba(255,170,170,.92); }
+.kavya-node {
+  position:absolute; left:214px; top:390px; transform:translate(-50%, -50%); z-index:3;
+}
+.kavya-node::before {
+  content:""; position:absolute; top:50%; left:50%; width:138px; height:138px; transform:translate(-50%, -50%);
+  background:radial-gradient(circle, var(--c-nebula) 0%, transparent 66%); filter:blur(10px); opacity:.42;
+  animation:nebulaBreath 10s ease-in-out infinite; pointer-events:none;
+}
+.kavya-node .sword-mid {
+  position:relative; width:10px; height:10px; border-radius:50%; background:#fbc2eb;
+  box-shadow:0 0 20px var(--c-nebula), 0 0 40px var(--c-nebula); filter:blur(1px);
+}
+@keyframes nebulaBreath {
+  0%,100% { transform:translate(-50%, -50%) scale(.92); opacity:.34; }
+  50% { transform:translate(-50%, -50%) scale(1.06); opacity:.52; }
+}
+.center-footer {
+  position:fixed; bottom:calc(6vh + var(--pad-safe-bottom)); width:100%; text-align:center; z-index:20; padding:0 18px;
+}
+.poem-fragment {
+  font-size:.65rem; color:#444; letter-spacing:3px; font-style:italic; cursor:pointer; transition:.3s; user-select:none;
+}
+.poem-fragment:hover { color:var(--c-teal); }
+.modal {
+  position:fixed; inset:0; background:rgba(5,5,5,.97); display:none; justify-content:center; align-items:center;
+  z-index:9999; backdrop-filter:blur(20px); padding:20px;
+}
+.modal-content {
+  background:rgba(145,175,179,.02); padding:60px 40px; border:1px solid rgba(145,175,179,.15); position:relative;
+  max-width:550px; width:min(550px, 92vw); text-align:center; box-shadow:0 0 60px rgba(0,0,0,1); margin-bottom:var(--pad-safe-bottom);
+}
+.modal-bar { position:absolute; left:0; width:100%; height:2px; background:var(--c-teal); box-shadow:0 0 20px var(--c-teal); }
+.modal-bar.top { top:0; } .modal-bar.bottom { bottom:0; }
+.modal-poem { font-family:'Merriweather', serif; font-size:1.1rem; line-height:1.8; color:#e0e0e0; font-weight:300; }
+.modal-system { margin-top:50px; font-family:'Fira Code', monospace; font-size:.55rem; color:#444; letter-spacing:4px; }
+#cursor-ring {
+  position:fixed; width:40px; height:40px; border:1px solid var(--c-teal); border-radius:50%; pointer-events:none;
+  z-index:10000; transition:width .3s, height .3s, border-color .3s, transform .1s ease-out; mix-blend-mode:difference;
+}
+#cursor-dot {
+  width:4px; height:4px; background:var(--c-blue); border-radius:50%; position:fixed; pointer-events:none; z-index:10001; mix-blend-mode:difference;
+}
+.cursor-active #cursor-ring { width:60px; height:60px; border-color:var(--c-blue); border-width:2px; }
+@media (max-width: 1024px) {
+  .header-console { position:relative; top:0; left:0; transform:none; margin:20px auto 34px; gap:12px; }
+  .console-logo { width:80vw!important; max-width:450px; height:auto; filter:saturate(1.1) brightness(1.1)!important; opacity:1!important; }
+  .console-text { font-size:.84rem!important; width:min(92vw,700px); white-space:normal!important; line-height:1.6; }
+  main.gateway-container { flex-direction:column; gap:34px; margin-top:10px; width:100%; align-items:center; }
+  .nav-wing { width:min(92vw,480px); padding-top:0; }
+  .wing-label { font-size:.82rem; letter-spacing:3px; margin-bottom:15px; }
+  .ethereal-btn { white-space:normal; letter-spacing:3px; }
+  .wing-copy { max-width:34rem; font-size:.96rem; margin-top:16px; }
+  .constellation { height:480px; margin:0 auto; --const-scale:.88; }
+  .field-callout { display:none!important; }
+  .center-footer { position:relative; bottom:auto; margin-top:42px; margin-bottom:26px; }
+  .poem-fragment { font-size:.6rem; max-width:90%; margin:0 auto; line-height:1.6; }
+  #cursor-ring,#cursor-dot { display:none!important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .orion-star, body::before, .kavya-node::before { animation:none!important; }
+  .console-logo, .ethereal-btn, .constellation, .chip, .field-callout { transition:none!important; }
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Outside The World",
+  "url": "https://outsidetheworld.com/",
+  "description": "A personal archive and professional research lab documenting 25 years of creative work and systems observation.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Outside The World New LLC",
+    "url": "https://outsidetheworld.com/",
+    "logo": "https://outsidetheworld.com/Images/Equal.svg",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Queen Creek",
+      "addressRegion": "AZ",
+      "postalCode": "85142",
+      "addressCountry": "US"
+    }
+  }
+}
+</script>
+</head>
+<body>
+<div id="cursor-ring"></div>
+<div id="cursor-dot"></div>
+<h1 class="sr-only">Outside The World</h1>
+<div class="field-stars" aria-hidden="false">
+  <div class="field-star field-sjb" data-label="SJB 4/8/04" role="button" tabindex="0" aria-label="SJB 4/8/04">
+    <button class="field-dot" aria-label="SJB 4/8/04"></button>
+    <div class="field-callout" aria-hidden="true">
+      <span class="field-line h seg-1"></span>
+      <span class="field-line v seg-2"></span>
+      <span class="field-line h seg-3"></span>
+      <div class="field-card">SJB 4/8/04</div>
+    </div>
+  </div>
+  <div class="field-star field-sjeb" data-label="SJEB 7/4/08" role="button" tabindex="0" aria-label="SJEB 7/4/08">
+    <button class="field-dot" aria-label="SJEB 7/4/08"></button>
+    <div class="field-callout" aria-hidden="true">
+      <span class="field-line h seg-1"></span>
+      <span class="field-line v seg-2"></span>
+      <span class="field-line h seg-3"></span>
+      <div class="field-card">SJEB 7/4/08</div>
+    </div>
+  </div>
+  <div class="field-star field-sgb" data-label="SGB 6/4/11" role="button" tabindex="0" aria-label="SGB 6/4/11">
+    <button class="field-dot" aria-label="SGB 6/4/11"></button>
+    <div class="field-callout" aria-hidden="true">
+      <span class="field-line h seg-1"></span>
+      <span class="field-line v seg-2"></span>
+      <span class="field-line h seg-3"></span>
+      <div class="field-card">SGB 6/4/11</div>
+    </div>
+  </div>
+</div>
+<div class="layer">
+  <header class="header-console" aria-label="Outside The World console">
+    <a href="index.html" aria-label="Home"><img alt="Outside The World" class="console-logo" src="Images/Equal.svg" /></a>
+    <div class="console-text" id="typewriter-target" aria-live="polite"></div>
+    <div class="console-controls" aria-label="Console controls">
+      <div class="chip" id="mood-chip" role="button" tabindex="0" aria-label="Change mood">MOOD: <strong id="mood-label">AUTO</strong></div>
+    </div>
+  </header>
+  <canvas id="star-canvas" class="starfield" aria-hidden="true"></canvas>
+  <main class="gateway-container" aria-label="Site navigation gateway">
+    <div class="nav-wing">
+      <span class="wing-label">[Personal_&_Creative]</span>
+      <a class="ethereal-btn explore-btn" href="personal.html" aria-label="Explore the world">EXPLORE THE WORLD</a>
+      <p class="wing-copy">Photography, essays, experiments, memory, and the broader map of the site.</p>
+      <div class="wing-links" aria-label="Creative links">
+        <a class="wing-link" href="poetry.html">Poetry</a>
+        <a class="wing-link" href="emmy.html">Heart &amp; Soul</a>
+      </div>
+    </div>
+    <div class="constellation-wrap" aria-hidden="true">
+      <div class="constellation" aria-label="Orion constellation">
+        <div class="orion-star red-star superbright" style="left:140px; top:170px; --s:10px; --dur:3.3s;" title="Betelgeuse"></div>
+        <div class="orion-star superbright" style="left:305px; top:170px; --s:9px; --dur:3.8s;" title="Bellatrix"></div>
+        <div class="orion-star superbright" style="left:155px; top:535px; --s:10px; --dur:4.2s;" title="Saiph"></div>
+        <div class="orion-star blue-star superbright" style="left:325px; top:535px; --s:12px; --dur:3.6s;" title="Rigel"></div>
+        <div class="orion-star orion-minor" style="left:210px; top:80px; --s:7px; --dur:4.8s;" title="Meissa"></div>
+        <div class="orion-star orion-minor" style="left:85px; top:110px; --s:6px; --dur:5.1s;"></div>
+        <div class="orion-star orion-minor" style="left:60px; top:55px; --s:6px; --dur:5.4s;"></div>
+        <div class="orion-star superbright" style="left:45px; top:25px; --s:8px; --dur:4.0s;" title="Club tip"></div>
+        <div class="orion-star orion-minor" style="left:345px; top:120px; --s:6px; --dur:5.2s;"></div>
+        <div class="orion-star orion-minor" style="left:380px; top:160px; --s:6px; --dur:5.0s;"></div>
+        <div class="orion-star superbright" style="left:400px; top:220px; --s:8px; --dur:4.3s;" title="Shield edge"></div>
+        <div class="orion-star superbright" style="left:179px; top:330px; --s:8px; --dur:3.9s;" title="Alnitak"></div>
+        <div class="orion-star superbright" style="left:210px; top:320px; --s:8px; --dur:4.1s;" title="Alnilam"></div>
+        <div class="orion-star superbright" style="left:234px; top:303px; --s:8px; --dur:3.7s;" title="Mintaka"></div>
+        <div class="kavya-node" aria-hidden="true"><div class="sword-mid" title="Nebula"></div></div>
+        <div class="orion-star orion-minor" style="left:214px; top:360px; --s:6px; --dur:5.2s;"></div>
+        <div class="orion-star orion-minor" style="left:214px; top:420px; --s:6px; --dur:5.0s;"></div>
+      </div>
+    </div>
+    <div class="nav-wing">
+      <span class="wing-label">[Professional_Work]</span>
+      <a class="ethereal-btn consult-btn" href="professional.html" aria-label="Professional work">PROFESSIONAL WORK</a>
+      <p class="wing-copy">Branding, systems thinking, leadership, design, and professional background.</p>
+      <div class="wing-links" aria-label="Professional links"><a class="wing-link" href="resume.html">Résumé</a></div>
+    </div>
+  </main>
+  <div class="center-footer">
+    <div class="poem-fragment" id="poem-trigger" role="button" tabindex="0" aria-label="Open poem">"perspective is my weakness... outside the world is new"</div>
+  </div>
+  <div class="modal" id="poem-modal" role="dialog" aria-modal="true" aria-label="Poem modal">
+    <div class="modal-content" id="poem-content">
+      <div class="modal-bar top"></div>
+      <div class="modal-bar bottom"></div>
+      <div class="modal-poem">
+        I dance along the path,<br />
+        lonely emerald fields on either side.<br />
+        I gaze into the distant canyon<br />
+        and know that I cannot enter.<br /><br />
+        Every star seems to smile down this evening;<br />
+        each one shines its own way,<br />
+        and the world is quiet.<br />
+        It does not know I am here.<br /><br />
+        The crisp air haunts me;<br />
+        its aroma seems too familiar.<br />
+        Yes, but under different circumstances<br />
+        this would be true.<br /><br />
+        There seems to be an end<br />
+        as the mountain peak swallows up the sky.<br />
+        <span style="color: var(--c-teal); font-weight: 700; text-shadow: 0 0 10px var(--c-teal); font-style: normal;">My perspective is my weakness;</span><br />
+        <span style="color: #fff; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; font-size: 0.9rem; opacity: 0.9;">outside the world is new.</span>
+      </div>
+      <div class="modal-system">[ SYSTEM_DEACTIVATE ]</div>
+    </div>
+  </div>
+</div>
+<script>
+const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const PRIMARY_LINE = 'Personal archive. Professional work. Ongoing poetry, photography, and systems observation.';
+const MOODS = ['dawn', 'noon', 'dusk', 'midnight'];
+const moodChip = document.getElementById('mood-chip');
+const moodLabel = document.getElementById('mood-label');
+const consoleTarget = document.getElementById('typewriter-target');
+const poemTrigger = document.getElementById('poem-trigger');
+const poemModal = document.getElementById('poem-modal');
+const poemContent = document.getElementById('poem-content');
+const ring = document.getElementById('cursor-ring');
+const dot = document.getElementById('cursor-dot');
+const fieldStars = Array.from(document.querySelectorAll('.field-star'));
+const fieldDots = Array.from(document.querySelectorAll('.field-dot'));
+
+function dayKey() {
+  const d = new Date();
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const dd = String(d.getDate()).padStart(2, '0');
+  return `${y}-${m}-${dd}`;
+}
+function xmur3(str) {
+  let h = 1779033703 ^ str.length;
+  for (let i = 0; i < str.length; i++) {
+    h = Math.imul(h ^ str.charCodeAt(i), 3432918353);
+    h = (h << 13) | (h >>> 19);
+  }
+  return function () {
+    h = Math.imul(h ^ (h >>> 16), 2246822507);
+    h = Math.imul(h ^ (h >>> 13), 3266489909);
+    return (h ^= h >>> 16) >>> 0;
+  };
+}
+function mulberry32(a) {
+  return function () {
+    let t = a += 0x6D2B79F5;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+const seedFn = xmur3(`OTW:${dayKey()}`);
+const rand = mulberry32(seedFn());
+function autoMoodFromTime() {
+  const h = new Date().getHours();
+  if (h >= 5 && h < 10) return 'dawn';
+  if (h >= 10 && h < 16) return 'noon';
+  if (h >= 16 && h < 21) return 'dusk';
+  return 'midnight';
+}
+function getSavedMood() { return localStorage.getItem('otw_mood') || 'auto'; }
+function saveMood(v) { localStorage.setItem('otw_mood', v); }
+function setMood(mode) {
+  if (mode === 'auto') {
+    document.documentElement.dataset.mood = autoMoodFromTime();
+    moodLabel.textContent = 'AUTO';
+  } else {
+    document.documentElement.dataset.mood = mode;
+    moodLabel.textContent = mode.toUpperCase();
+  }
+}
+function cycleMood() {
+  const current = getSavedMood();
+  if (current === 'auto') saveMood('dawn');
+  else {
+    const idx = MOODS.indexOf(current);
+    saveMood(MOODS[(idx + 1) % MOODS.length]);
+  }
+  setMood(getSavedMood());
+}
+function bindChip(el, fn) {
+  el.addEventListener('click', fn);
+  el.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fn(); }
+  });
+}
+bindChip(moodChip, cycleMood);
+function setDailyDrift() {
+  const rot = (rand() * 3.0 - 1.5).toFixed(2);
+  const sc = (0.985 + rand() * 0.03).toFixed(3);
+  const sx = Math.round((rand() * 10 - 5));
+  const sy = Math.round((rand() * 10 - 5));
+  document.documentElement.style.setProperty('--const-rot', `${rot}deg`);
+  document.documentElement.style.setProperty('--const-scale', sc);
+  document.documentElement.style.setProperty('--const-shift-x', `${sx}px`);
+  document.documentElement.style.setProperty('--const-shift-y', `${sy}px`);
+}
+function renderConsoleLine() { consoleTarget.textContent = PRIMARY_LINE; }
+function togglePoem(open) { poemModal.style.display = open ? 'flex' : 'none'; }
+poemTrigger.addEventListener('click', () => togglePoem(true));
+poemTrigger.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); togglePoem(true); }
+});
+poemModal.addEventListener('click', () => togglePoem(false));
+poemContent.addEventListener('click', (e) => e.stopPropagation());
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && poemModal.style.display === 'flex') togglePoem(false);
+});
+document.addEventListener('mousemove', (e) => {
+  if (!ring || !dot) return;
+  dot.style.left = `${e.clientX - 2}px`;
+  dot.style.top = `${e.clientY - 2}px`;
+  ring.style.left = `${e.clientX - 20}px`;
+  ring.style.top = `${e.clientY - 20}px`;
+});
+const interactiveElements = document.querySelectorAll('a, .poem-fragment, .chip, .field-star, .field-dot');
+interactiveElements.forEach(el => {
+  el.addEventListener('mouseenter', () => document.body.classList.add('cursor-active'));
+  el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-active'));
+});
+function clearFieldActives() { fieldStars.forEach(s => s.classList.remove('active')); }
+function toggleStar(star, e) {
+  e.preventDefault?.();
+  e.stopPropagation?.();
+  const willActivate = !star.classList.contains('active');
+  clearFieldActives();
+  if (willActivate) star.classList.add('active');
+}
+fieldDots.forEach(dotEl => {
+  const star = dotEl.closest('.field-star');
+  dotEl.addEventListener('pointerdown', (e) => toggleStar(star, e), { passive: false });
+  dotEl.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') toggleStar(star, e);
+  });
+});
+document.addEventListener('pointerdown', (e) => { if (!e.target.closest('.field-star')) clearFieldActives(); }, { passive: true });
+function paddedRect(el, pad = 24) {
+  if (!el) return null;
+  const r = el.getBoundingClientRect();
+  return { x: r.left - pad, y: r.top - pad, w: r.width + pad * 2, h: r.height + pad * 2 };
+}
+function inRect(rect, x, y) {
+  return rect && x >= rect.x && x <= rect.x + rect.w && y >= rect.y && y <= rect.y + rect.h;
+}
+function childPRNG(label) {
+  const sf = xmur3(`OTW_CHILD:${dayKey()}:${label}`);
+  return mulberry32(sf());
+}
+function childStarBounds(star) {
+  const bounds = { left: 38, right: 38, top: 38, bottom: 38 };
+  if (star.classList.contains('field-sjb')) { bounds.right = 280; bounds.top = 126; }
+  if (star.classList.contains('field-sjeb')) { bounds.left = 280; bounds.top = 126; }
+  if (star.classList.contains('field-sgb')) { bounds.left = 280; bounds.bottom = 126; }
+  return {
+    minX: bounds.left,
+    maxX: Math.max(bounds.left + 1, window.innerWidth - bounds.right),
+    minY: bounds.top,
+    maxY: Math.max(bounds.top + 1, window.innerHeight - bounds.bottom)
+  };
+}
+function fallbackChildPosition(star) {
+  if (star.classList.contains('field-sjb')) return { x: 92, y: Math.round(window.innerHeight * 0.72) };
+  if (star.classList.contains('field-sjeb')) return { x: Math.round(window.innerWidth - 92), y: Math.round(window.innerHeight * 0.28) };
+  return { x: Math.round(window.innerWidth * 0.74), y: Math.round(window.innerHeight - 92) };
+}
+function positionChildStars() {
+  const header = document.querySelector('.header-console');
+  const gateway = document.querySelector('main.gateway-container');
+  const footer = document.querySelector('.center-footer');
+  const rects = [paddedRect(header, 30), paddedRect(gateway, 40), paddedRect(footer, 30)].filter(Boolean);
+  const placed = [];
+  fieldStars.forEach(star => {
+    const label = star.getAttribute('data-label') || 'STAR';
+    const rnd = childPRNG(label);
+    const bounds = childStarBounds(star);
+    let x = 80, y = 80, ok = false;
+    for (let i = 0; i < 140; i++) {
+      x = bounds.minX + rnd() * (bounds.maxX - bounds.minX);
+      y = bounds.minY + rnd() * (bounds.maxY - bounds.minY);
+      if (rects.some(r => inRect(r, x, y))) continue;
+      const tooClose = placed.some(p => ((p.x - x) ** 2 + (p.y - y) ** 2) < (160 ** 2));
+      if (tooClose) continue;
+      ok = true;
+      break;
+    }
+    if (!ok) {
+      const fallback = fallbackChildPosition(star);
+      x = fallback.x;
+      y = fallback.y;
+    }
+    star.style.left = `${x}px`;
+    star.style.top = `${y}px`;
+  });
+}
+const canvas = document.getElementById('star-canvas');
+const ctx = canvas.getContext('2d');
+let width = 0, height = 0, stars = [];
+let targetX = 0, targetY = 0, currentX = 0, currentY = 0;
+function pickStarColor() {
+  const r = Math.random();
+  if (r > 0.92) return getComputedStyle(document.documentElement).getPropertyValue('--c-blue').trim() || '#6395EE';
+  if (r > 0.84) return getComputedStyle(document.documentElement).getPropertyValue('--c-teal').trim() || '#91AFB3';
+  return '#ffffff';
+}
+function initStars() {
+  const isMobile = window.matchMedia('(max-width: 1024px)').matches;
+  const count = reduceMotion ? 120 : (isMobile ? 240 : 380);
+  stars = [];
+  for (let i = 0; i < count; i++) {
+    const z = 0.15 + Math.random() * 0.95;
+    stars.push({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      z,
+      r: (0.4 + Math.random() * 1.6) * (0.45 + z),
+      o: 0.15 + Math.random() * 0.85,
+      tw: (0.00015 + Math.random() * 0.00055) * (0.55 + z),
+      c: pickStarColor(),
+      mask: Math.random()
+    });
+  }
+}
+function resize() {
+  width = window.innerWidth;
+  height = window.innerHeight;
+  const dpr = Math.max(1, window.devicePixelRatio || 1);
+  canvas.width = Math.floor(width * dpr);
+  canvas.height = Math.floor(height * dpr);
+  canvas.style.width = `${width}px`;
+  canvas.style.height = `${height}px`;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  initStars();
+  requestAnimationFrame(positionChildStars);
+  if (reduceMotion) drawStatic();
+}
+function onPointerMove(e) {
+  const x = e.clientX ?? width / 2;
+  const y = e.clientY ?? height / 2;
+  targetX = (x - width / 2) * 0.012;
+  targetY = (y - height / 2) * 0.012;
+}
+document.addEventListener('mousemove', onPointerMove, { passive: true });
+document.addEventListener('touchmove', onPointerMove, { passive: true });
+let t0 = performance.now();
+function drawFrame(t) {
+  const dt = Math.min(40, t - t0);
+  t0 = t;
+  const idle = Math.sin(t * 0.00012) * 0.9;
+  const idle2 = Math.cos(t * 0.00010) * 0.8;
+  currentX += (targetX + idle - currentX) * 0.045;
+  currentY += (targetY + idle2 - currentY) * 0.045;
+  ctx.clearRect(0, 0, width, height);
+  const centerX = width / 2;
+  const centerY = height / 2;
+  const quietRadius = 520;
+  const shroudRadius = 440;
+  for (const s of stars) {
+    s.o += s.tw * dt;
+    if (s.o > 1 || s.o < 0.1) s.tw = -s.tw;
+    const px = currentX * s.z;
+    const py = currentY * s.z;
+    const dx = (s.x + px) - centerX;
+    const dy = (s.y + py) - centerY;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    if (dist < quietRadius && s.mask < 0.58) continue;
+    let shroudAlpha = 1;
+    if (dist < shroudRadius) shroudAlpha = 0.08 + (dist / shroudRadius) * 0.92;
+    ctx.globalAlpha = Math.max(0, Math.min(1, s.o * shroudAlpha));
+    ctx.fillStyle = s.c;
+    ctx.beginPath();
+    ctx.arc(s.x + px, s.y + py, s.r, 0, Math.PI * 2);
+    ctx.fill();
+  }
+  requestAnimationFrame(drawFrame);
+}
+function drawStatic() {
+  ctx.clearRect(0, 0, width, height);
+  for (const s of stars) {
+    ctx.globalAlpha = 0.6;
+    ctx.fillStyle = s.c;
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+    ctx.fill();
+  }
+  ctx.globalAlpha = 1;
+}
+function init() {
+  setMood(getSavedMood());
+  setInterval(() => { if (getSavedMood() === 'auto') setMood('auto'); }, 10 * 60 * 1000);
+  setDailyDrift();
+  renderConsoleLine();
+  window.addEventListener('resize', resize, { passive: true });
+  resize();
+  if (!reduceMotion) requestAnimationFrame(drawFrame);
+}
+init();
+</script>
+</body>
+</html>
