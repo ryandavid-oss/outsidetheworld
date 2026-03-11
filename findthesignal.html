@@ -4,697 +4,295 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Find the Signal — Outside The World</title>
-  <meta name="description" content="Find the hidden signal somewhere on Outside The World and enter to win one of two exclusive 2026 Purple Frost shirts." />
   <style>
+    /* --- THEME CORE INTEGRATION --- */
     :root {
-      --bg: #06070b;
-      --bg-soft: #0c1020;
-      --panel: rgba(255,255,255,0.06);
-      --panel-strong: rgba(255,255,255,0.08);
-      --line: rgba(255,255,255,0.12);
-      --text: #f6f7fb;
-      --muted: rgba(246,247,251,0.72);
       --brand-blue: #6395EE;
       --brand-light-blue: #A0BEF5;
       --brand-teal: #91AFB3;
-      --purple-frost: #8d73c8;
-      --shadow: 0 30px 80px rgba(0,0,0,0.45);
-      --radius: 28px;
-      --max: 1180px;
+      --bg-dark: #0a0a0a;
+      --border-low: rgba(255, 255, 255, 0.08);
+      --font-main: 'Inter', sans-serif;
+      --font-code: 'Fira Code', monospace;
+      --radius: 24px;
     }
 
-    * { box-sizing: border-box; }
+    /* GLOBAL RESET & SMOOTHING */
+    *, *::before, *::after { box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+    
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg-dark); }
+    ::-webkit-scrollbar-thumb { background: rgba(145, 175, 179, 0.2); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--brand-teal); }
+    
+    ::selection { background: var(--brand-teal); color: var(--bg-dark); }
 
-    html { scroll-behavior: smooth; }
+    html { background-color: var(--bg-dark); scroll-behavior: smooth; }
 
     body {
-      margin: 0;
+      background-color: var(--bg-dark);
+      color: #eeeeee;
+      font-family: var(--font-main);
+      margin: 0; padding: 0;
       min-height: 100vh;
-      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(900px 500px at 15% 10%, rgba(160,190,245,0.10), transparent 55%),
-        radial-gradient(700px 420px at 82% 14%, rgba(145,175,179,0.10), transparent 55%),
-        radial-gradient(700px 500px at 50% 85%, rgba(141,115,200,0.14), transparent 60%),
-        linear-gradient(180deg, #05060a 0%, #090b12 45%, #05060a 100%);
       overflow-x: hidden;
+      /* DEPTH GRADIENTS */
+      background-image: 
+        radial-gradient(900px 500px at 15% 10%, rgba(99, 149, 238, 0.08), transparent 55%),
+        radial-gradient(700px 420px at 50% 85%, rgba(141, 115, 200, 0.12), transparent 60%);
     }
 
-    body::before {
+    /* THE ATMOSPHERIC SHROUD (VIGNETTE) */
+    body::after {
       content: "";
       position: fixed;
-      inset: 0;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: radial-gradient(circle at 50% 50%, rgba(10, 10, 10, 0) 20%, rgba(0, 0, 0, 0.7) 100%);
       pointer-events: none;
-      background-image:
-        radial-gradient(circle at 10% 20%, rgba(255,255,255,0.8) 0 1px, transparent 1.5px),
-        radial-gradient(circle at 40% 70%, rgba(255,255,255,0.6) 0 1px, transparent 1.5px),
-        radial-gradient(circle at 78% 30%, rgba(160,190,245,0.85) 0 1.2px, transparent 1.6px),
-        radial-gradient(circle at 65% 80%, rgba(145,175,179,0.85) 0 1.2px, transparent 1.6px),
-        radial-gradient(circle at 90% 65%, rgba(255,255,255,0.55) 0 1px, transparent 1.5px);
-      opacity: 0.35;
-      z-index: 0;
+      z-index: 9999;
+      opacity: 0.6;
     }
-
-    a { color: inherit; }
 
     .page {
       position: relative;
-      z-index: 1;
-      width: min(var(--max), calc(100% - 32px));
+      z-index: 10;
+      width: min(1180px, calc(100% - 32px));
       margin: 0 auto;
-      padding: 28px 0 72px;
+      padding: 40px 0 80px;
     }
 
+    /* NAVIGATION */
     .topbar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 28px;
-    }
-
-    .brand-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 14px;
-      text-decoration: none;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      font-size: 0.78rem;
-    }
-
-    .brand-link img {
-      height: 34px;
-      width: auto;
-      display: block;
-      filter: drop-shadow(0 0 18px rgba(160,190,245,0.22));
-    }
-
-    .back-link {
-      text-decoration: none;
-      color: var(--muted);
-      font-size: 0.88rem;
-      border: 1px solid var(--line);
-      padding: 10px 14px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.03);
-      transition: 0.25s ease;
-    }
-
-    .back-link:hover {
-      color: var(--text);
-      border-color: rgba(160,190,245,0.4);
-      transform: translateY(-1px);
-    }
-
-    .hero {
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 28px;
-      align-items: stretch;
-    }
-
-    .panel {
-      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.035));
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(12px);
-    }
-
-    .hero-copy {
-      padding: 44px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-copy::before {
-      content: "";
-      position: absolute;
-      width: 420px;
-      height: 420px;
-      right: -120px;
-      top: -160px;
-      background: radial-gradient(circle, rgba(160,190,245,0.12) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--brand-teal);
-      font-size: 0.8rem;
-      letter-spacing: 0.24em;
-      text-transform: uppercase;
-      margin-bottom: 18px;
-    }
-
-    .eyebrow::before {
-      content: "";
-      width: 26px;
-      height: 1px;
-      background: currentColor;
-      box-shadow: 0 0 14px rgba(145,175,179,0.6);
-    }
-
-    h1 {
-      margin: 0;
-      font-size: clamp(2.5rem, 5vw, 4.7rem);
-      line-height: 0.96;
-      font-weight: 900;
-      letter-spacing: -0.04em;
-    }
-
-    .lede {
-      margin: 18px 0 0;
-      max-width: 52ch;
-      font-size: 1.06rem;
-      line-height: 1.8;
-      color: var(--muted);
-    }
-
-    .hero-stack {
-      display: grid;
-      gap: 18px;
-      margin-top: 28px;
-    }
-
-    .signal-box {
-      display: grid;
-      gap: 14px;
-      padding: 20px 22px;
-      border-radius: 22px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(160,190,245,0.18);
-    }
-
-    .signal-box strong {
-      font-size: 1rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .signal-box p,
-    .mini-note {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.7;
-    }
-
-    .cta-row {
-      display: flex;
-      gap: 14px;
+      margin-bottom: 40px;
       flex-wrap: wrap;
-      margin-top: 4px;
+      gap: 20px;
     }
 
+    .nav-logo {
+      width: 220px;
+      height: auto;
+      filter: drop-shadow(0 0 20px rgba(99, 149, 238, 0.1));
+    }
+
+    /* UNIFIED BUTTON STYLING */
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 50px;
-      padding: 0 20px;
+      padding: 14px 28px;
       border-radius: 999px;
       text-decoration: none;
-      font-weight: 800;
-      letter-spacing: 0.08em;
+      font-weight: 700;
+      font-size: 0.85rem;
       text-transform: uppercase;
-      font-size: 0.84rem;
+      letter-spacing: 0.05em;
+      transition: 0.3s cubic-bezier(0.2, 1, 0.3, 1);
+      font-family: var(--font-main);
       border: 1px solid transparent;
-      transition: 0.25s ease;
+      cursor: pointer;
     }
 
-    .btn-primary {
-      background: linear-gradient(135deg, var(--brand-blue), var(--brand-light-blue));
-      color: #08111f;
-      box-shadow: 0 14px 36px rgba(99,149,238,0.28);
+    .btn-primary { background: linear-gradient(135deg, var(--brand-blue), var(--brand-light-blue)); color: #0a0a0a; }
+    .btn-secondary { background: rgba(255, 255, 255, 0.03); border-color: var(--border-low); color: #fff; }
+
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0,0,0,0.4); }
+    .btn-primary:hover { box-shadow: 0 10px 25px rgba(99, 149, 238, 0.25); }
+    .btn-secondary:hover { border-color: var(--brand-teal); }
+
+    /* LAYOUT PANELS */
+    .hero { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 24px; }
+
+    .panel {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+      border: 1px solid var(--border-low);
+      border-radius: var(--radius);
+      backdrop-filter: blur(12px);
     }
 
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 20px 40px rgba(99,149,238,0.34);
-    }
+    .hero-copy { padding: 48px; }
+    .eyebrow { font-family: var(--font-code); color: var(--brand-teal); font-size: 0.75rem; letter-spacing: 0.2em; margin-bottom: 20px; display: block; }
+    h1 { margin: 0; font-size: clamp(2.2rem, 5vw, 4rem); font-weight: 900; line-height: 1; letter-spacing: -0.03em; color: #fff; }
+    .lede { margin: 24px 0 32px; font-size: 1.1rem; line-height: 1.8; color: rgba(255,255,255,0.7); }
+    .accent { color: var(--brand-light-blue); font-weight: 600; }
 
-    .btn-secondary {
-      border-color: var(--line);
-      background: rgba(255,255,255,0.03);
-      color: var(--text);
-    }
+    /* SHIRT VISUALIZER */
+    .shirt-card { padding: 24px; display: flex; flex-direction: column; gap: 20px; }
+    .shirt-stage { flex-grow: 1; min-height: 400px; position: relative; display: flex; align-items: center; justify-content: center; }
 
-    .btn-secondary:hover {
-      transform: translateY(-2px);
-      border-color: rgba(145,175,179,0.42);
-    }
-
-    .shirt-card {
-      padding: 24px;
-      display: grid;
-      gap: 18px;
-      align-content: start;
-    }
-
-    .shirt-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .shirt-header h2 {
-      margin: 0;
-      font-size: 1rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: rgba(141,115,200,0.16);
-      border: 1px solid rgba(141,115,200,0.3);
-      color: #e8ddff;
-      font-size: 0.76rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      white-space: nowrap;
-    }
-
-    .shirt-stage {
-      position: relative;
-      min-height: 640px;
-      border-radius: 24px;
-      background:
-        radial-gradient(circle at 50% 16%, rgba(255,255,255,0.34), transparent 26%),
-        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
-      border: 1px solid rgba(255,255,255,0.08);
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 28px;
-    }
-
-    .shirt-stage::after {
-      content: "";
+    .shirt-img {
       position: absolute;
-      inset: auto 12% 8% 12%;
-      height: 38px;
-      background: radial-gradient(ellipse at center, rgba(0,0,0,0.38), transparent 68%);
-      filter: blur(12px);
-      pointer-events: none;
+      max-width: 90%;
+      max-height: 90%;
+      filter: drop-shadow(0 20px 40px rgba(0,0,0,0.7));
+      transition: 0.6s cubic-bezier(0.2, 1, 0.3, 1);
     }
+    .hidden { opacity: 0; transform: scale(0.96) translateY(10px); pointer-events: none; }
 
-    .folded-stack {
-      position: relative;
-      width: min(100%, 420px);
-      aspect-ratio: 1 / 1;
+    .toggle-group { display: flex; background: rgba(0,0,0,0.3); padding: 4px; border-radius: 999px; border: 1px solid var(--border-low); margin: 0 auto; }
+    .toggle-btn { padding: 8px 20px; border-radius: 999px; border: none; background: transparent; color: rgba(255,255,255,0.4); cursor: pointer; font-family: var(--font-code); font-size: 0.7rem; transition: 0.3s; }
+    .toggle-btn.active { background: var(--brand-blue); color: #0a0a0a; font-weight: 700; }
+
+    /* DETAILS GRID + TEAL GLOW HOVER */
+    .details-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 24px; }
+    .detail-card { padding: 28px; transition: 0.4s ease; border: 1px solid var(--border-low); }
+    
+    /* TEAL GLOW EFFECT */
+    .detail-card:hover { 
+      border-color: var(--brand-teal); 
+      box-shadow: 0 0 25px rgba(145, 175, 179, 0.2); 
+      transform: translateY(-4px); 
     }
+    .detail-card h3 { font-family: var(--font-code); color: var(--brand-teal); font-size: 0.75rem; margin: 0 0 10px; }
 
-    .fold-layer,
-    .fold-top {
-      position: absolute;
-      inset: 0;
-      display: block;
-      object-fit: contain;
+    /* FORM PANEL */
+    .form-panel { margin-top: 24px; padding: 48px; display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 48px; }
+    .manifest { font-family: var(--font-code); background: rgba(0,0,0,0.2); border: 1px solid var(--border-low); padding: 24px; border-radius: 16px; font-size: 0.85rem; line-height: 1.7; }
+    .manifest div { border-bottom: 1px solid rgba(255,255,255,0.05); padding: 8px 0; }
+    .manifest b { color: var(--brand-light-blue); }
+
+    /* ENHANCED INPUT SIZING */
+    input, textarea {
       width: 100%;
-      height: 100%;
-      user-select: none;
-      -webkit-user-drag: none;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border-low);
+      padding: 18px;
+      border-radius: 12px;
+      color: #fff;
+      margin-bottom: 24px;
+      font-family: var(--font-main);
+      font-size: 1.15rem; 
+      transition: 0.3s;
     }
+    input:focus, textarea:focus { outline: none; border-color: var(--brand-blue); background: rgba(255,255,255,0.08); }
 
-    .fold-layer.back {
-      transform: translate(-24px, 32px) scale(0.92) rotate(-8deg);
-      opacity: 0.46;
-      filter: saturate(0.82) brightness(0.86);
-    }
+    label { font-family: var(--font-code); font-size: 0.75rem; color: var(--brand-teal); display: block; margin-bottom: 10px; text-transform: uppercase; }
 
-    .fold-layer.mid {
-      transform: translate(18px, 20px) scale(0.95) rotate(7deg);
-      opacity: 0.62;
-      filter: brightness(0.92);
-    }
-
-    .fold-top {
-      transform: translateY(-4px) rotate(-1.5deg);
-      filter: drop-shadow(0 20px 30px rgba(0,0,0,0.30));
-    }
-
-    .brandmark,
-    .back-logo {
-      position: absolute;
-      width: auto;
-      display: block;
-      z-index: 3;
-      filter: drop-shadow(0 10px 14px rgba(0,0,0,0.28));
-    }
-
-    .brandmark {
-      width: 56px;
-      left: 34.5%;
-      top: 44.5%;
-      transform: rotate(-1.5deg);
-    }
-
-    .back-logo {
-      width: 168px;
-      left: 50%;
-      top: 41%;
-      transform: translateX(-50%) rotate(7deg);
-      opacity: 0.5;
-      mix-blend-mode: multiply;
-    }
-
-    .shirt-notes {
-      display: grid;
-      gap: 10px;
-      color: var(--muted);
-      font-size: 0.95rem;
-      line-height: 1.75;
-    }
-
-    .shirt-notes strong { color: var(--text); }
-
-    .details {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-      margin-top: 28px;
-    }
-
-    .detail-card {
-      padding: 24px;
-    }
-
-    .detail-card h3 {
-      margin: 0 0 10px;
-      font-size: 1rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .detail-card p {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.75;
-    }
-
-    .form-panel {
-      margin-top: 28px;
-      padding: 32px;
-      display: grid;
-      grid-template-columns: 0.92fr 1.08fr;
-      gap: 28px;
-      align-items: start;
-    }
-
-    .form-copy h2 {
-      margin: 0 0 12px;
-      font-size: clamp(1.8rem, 3vw, 2.7rem);
-      line-height: 1.02;
-    }
-
-    .form-copy p {
-      margin: 0 0 16px;
-      color: var(--muted);
-      line-height: 1.8;
-    }
-
-    .rules {
-      display: grid;
-      gap: 10px;
-      padding: 18px 20px;
-      border-radius: 20px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .rules strong {
-      font-size: 0.82rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--brand-teal);
-    }
-
-    .rules span {
-      color: var(--muted);
-      line-height: 1.7;
-      font-size: 0.95rem;
-    }
-
-    form {
-      display: grid;
-      gap: 16px;
-    }
-
-    .field {
-      display: grid;
-      gap: 8px;
-    }
-
-    label {
-      font-size: 0.8rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: rgba(246,247,251,0.88);
-    }
-
-    input,
-    textarea {
-      width: 100%;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(255,255,255,0.04);
-      color: var(--text);
-      border-radius: 16px;
-      padding: 14px 16px;
-      font: inherit;
-      outline: none;
-      transition: 0.2s ease;
-    }
-
-    input:focus,
-    textarea:focus {
-      border-color: rgba(160,190,245,0.5);
-      box-shadow: 0 0 0 4px rgba(160,190,245,0.12);
-    }
-
-    textarea {
-      min-height: 130px;
-      resize: vertical;
-    }
-
-    .legal {
-      font-size: 0.84rem;
-      color: rgba(246,247,251,0.62);
-      line-height: 1.7;
-    }
-
-    .footer-note {
-      text-align: center;
-      color: rgba(246,247,251,0.56);
-      font-size: 0.84rem;
-      margin-top: 24px;
-      line-height: 1.7;
-    }
-
-    .accent {
-      color: var(--brand-light-blue);
-    }
-
-    @media (max-width: 1080px) {
-      .hero,
-      .form-panel {
-        grid-template-columns: 1fr;
-      }
-
-      .details {
-        grid-template-columns: 1fr;
-      }
-
-      .shirt-stage {
-        min-height: 520px;
-      }
-    }
-
-    @media (max-width: 720px) {
-      .page {
-        width: min(var(--max), calc(100% - 18px));
-        padding: 18px 0 54px;
-      }
-
-      .topbar {
-        flex-direction: column;
-        align-items: flex-start;
-        margin-bottom: 18px;
-      }
-
-      .hero-copy,
-      .shirt-card,
-      .detail-card,
-      .form-panel {
-        padding: 22px;
-      }
-
-      .shirt-stage {
-        min-height: 430px;
-        padding: 18px;
-      }
-
-      .folded-stack {
-        width: min(100%, 320px);
-      }
-
-      .brandmark {
-        width: 44px;
-      }
-
-      .back-logo {
-        width: 132px;
-      }
-
-      .cta-row {
-        flex-direction: column;
-      }
-
-      .btn {
-        width: 100%;
-      }
+    /* MOBILE ARCHITECTURE */
+    @media (max-width: 900px) {
+      .hero, .form-panel, .details-grid { grid-template-columns: 1fr; }
+      .topbar { justify-content: center; text-align: center; }
+      .page { padding: 20px 0 60px; }
+      .hero-copy, .form-panel { padding: 30px; }
     }
   </style>
 </head>
 <body>
+
   <div class="page">
     <header class="topbar">
-      <a class="brand-link" href="index.html">
-        <img src="Images/Equal.svg" alt="Outside The World" />
-
-      </a>
-      <a class="back-link" href="index.html">Return to site</a>
+      <div class="hero-logo-container">
+        <img src="Images/Equal.svg" class="nav-logo" alt="Outside The World">
+      </div>
+      <a href="personal.html" class="btn btn-secondary" style="font-size: 0.7rem;">Return to Site</a>
     </header>
 
     <section class="hero">
       <div class="panel hero-copy">
-        <div class="eyebrow">2026 Shirt Giveaway</div>
+        <span class="eyebrow">// TRANSMISSION_ID: 2026_DISCOVERY</span>
         <h1>Find the Signal.</h1>
         <p class="lede">
-          Somewhere on <span class="accent">Outside The World</span>, a hidden signal is waiting.
-          Find it, submit the answer, and you'll be entered to win one of two exclusive
-          <strong>Purple Frost</strong> shirts from the single 2026 run.
+          Somewhere on <span class="accent">Outside The World</span>, a hidden signal is waiting. 
+          Find it, submit the answer, and you'll be entered to win one of three exclusive 
+          <span class="accent">Purple Frost</span> shirts from the single 2026 run.
         </p>
-
-        <div class="hero-stack">
-          <div class="signal-box">
-            <strong>How it works</strong>
-            <p>
-              Visit the site. Explore until you find the hidden signal. Then come back here and enter the exact word,
-              phrase, or clue you discovered.
-            </p>
-            <div class="cta-row">
-              <a class="btn btn-primary" href="#entry">Enter the giveaway</a>
-              <a class="btn btn-secondary" href="personal.html">Start exploring</a>
-            </div>
-          </div>
-
-          <p class="mini-note">
-            No quiz. No tagging spree. Just curiosity, discovery, and a better reason to wander the site.
-          </p>
+        
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <a href="#entry" class="btn btn-primary">Enter the giveaway</a>
+          <a href="personal.html" class="btn btn-secondary">Start exploring</a>
         </div>
       </div>
 
-      <aside class="panel shirt-card" aria-label="Giveaway shirt preview">
-        <div class="shirt-header">
-          <h2>Purple Frost</h2>
-          <div class="pill">Exclusive 2026 Run</div>
+      <aside class="panel shirt-card">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-family: var(--font-code); font-size: 0.75rem; color: var(--brand-light-blue);">SPEC: PURPLE_FROST</span>
+          <span style="font-family: var(--font-code); font-size: 0.65rem; color: var(--brand-teal);">STOCK: 03_UNITS</span>
         </div>
-
+        
         <div class="shirt-stage">
-          <div class="folded-stack">
-            <img class="fold-layer back" src="SM-DM130-Purple-Frost-F4.jpg" alt="Purple Frost shirt back" />
-            <img class="fold-layer mid" src="SM-DM130-Purple-Frost-E4.jpg" alt="Purple Frost shirt front" />
-            <img class="fold-top" src="SM-DM130-Purple-Frost-E4.jpg" alt="Folded Purple Frost shirt" />
-            <img class="brandmark" src="OTW_Brandmark_dark.svg" alt="Brandmark on chest" />
-            <img class="back-logo" src="Main Logo Dark.svg" alt="OTW logo on back layer" />
-          </div>
+          <img id="front-view" class="shirt-img" src="Images/LES-back.png" alt="Shirt Front">
+          <img id="back-view" class="shirt-img hidden" src="Images/LES-front.png" alt="Shirt Back">
         </div>
 
-        <div class="shirt-notes">
-          <div><strong>Front:</strong> OTW brandmark on Purple Frost.</div>
-          <div><strong>Back:</strong> OTW logo on the reverse.</div>
-          <div><strong>Run:</strong> A single 2026 giveaway edition, not an always-available shirt.</div>
+        <div class="toggle-group">
+          <button class="toggle-btn active" id="t-front" onclick="toggleShirt('front')">FRONT_VIEW</button>
+          <button class="toggle-btn" id="t-back" onclick="toggleShirt('back')">BACK_VIEW</button>
         </div>
       </aside>
     </section>
 
-    <section class="details">
+    <div class="details-grid">
       <div class="panel detail-card">
-        <h3>Step One</h3>
-        <p>Go into the site and follow what interests you. The hidden signal should feel found, not forced.</p>
+        <h3>01_DISCOVER</h3>
+        <p>Explore the site naturally. The signal is found, not forced—look for the hidden word or unique phrase.</p>
       </div>
       <div class="panel detail-card">
-        <h3>Step Two</h3>
-        <p>When you discover the clue, return here and submit it through the form. Simple and low-friction.</p>
+        <h3>02_DECODE</h3>
+        <p>Note the phrase exactly as it appears. Once you have it, return here to log your discovery.</p>
       </div>
       <div class="panel detail-card">
-        <h3>Step Three</h3>
-        <p>Two winners are chosen after the giveaway closes and contacted by email for shirt size and mailing details.</p>
+        <h3>03_WIN</h3>
+        <p>Three winners will be selected at random once the window closes. Winners contacted via email.</p>
       </div>
-    </section>
+    </div>
 
     <section class="panel form-panel" id="entry">
-      <div class="form-copy">
-        <h2>Submit what you found.</h2>
-        <p>
-          Keep the entry lightweight. Name, email, and the hidden signal. That’s enough to make the giveaway feel open,
-          easy, and worth doing.
-        </p>
-
-        <div class="rules">
-          <strong>Suggested details</strong>
-          <span>Entry closes: <em>[add date]</em></span>
-          <span>Winners selected at random: <em>[yes / no]</em></span>
-          <span>Open to: <em>[U.S. only / broader]</em></span>
-          <span>Prize: one of two exclusive 2026 Purple Frost shirts</span>
+      <div>
+        <h2 style="font-size: 2.2rem; margin-top: 0; letter-spacing: -0.02em;">Submit Discovery</h2>
+        <p style="color: rgba(255,255,255,0.5); font-size: 0.95rem;">Enter the exact signal below to secure your entry.</p>
+        
+        <div class="manifest">
+          <div><b>ENTRY CLOSES:</b> March 20, 2026</div>
+          <div><b>SELECTION:</b> 3 Random Winners</div>
+          <div><b>OPEN TO:</b> U.S. Residents Only</div>
+          <div><b>PRIZE:</b> Exclusive Purple Frost Shirt</div>
+          <div style="border:none; color: var(--brand-teal);"><b>SHIPPING:</b> FREE US-WIDE</div>
         </div>
       </div>
 
-      <form action="https://formspree.io/f/your-form-id" method="POST">
+      <form action="#" method="POST">
         <div class="field">
-          <label for="name">Name</label>
-          <input id="name" name="name" type="text" placeholder="Your name" required />
+          <label>NAVIGATOR_NAME</label>
+          <input type="text" name="name" placeholder="Your name" required>
         </div>
-
         <div class="field">
-          <label for="email">Email</label>
-          <input id="email" name="email" type="email" placeholder="you@example.com" required />
+          <label>EMAIL_ADDRESS</label>
+          <input type="email" name="email" placeholder="explorer@domain.com" required>
         </div>
-
         <div class="field">
-          <label for="signal">Hidden signal</label>
-          <input id="signal" name="signal" type="text" placeholder="Enter the phrase, word, or clue you found" required />
+          <label>THE_SIGNAL</label>
+          <input type="text" name="signal" placeholder="Phrase or word discovered" required>
         </div>
-
         <div class="field">
-          <label for="favorite">Optional: favorite page or path</label>
-          <textarea id="favorite" name="favorite" placeholder="Tell me what page you liked most, if you want."></textarea>
+          <label>OPTIONAL: FAVORITE PATH</label>
+          <textarea name="feedback" placeholder="What stood out to you during the hunt?" rows="4"></textarea>
         </div>
-
-        <button class="btn btn-primary" type="submit">Submit entry</button>
-
-        <p class="legal">
-          By entering, you agree that your information may be used to administer the giveaway and contact winners.
-          This promotion is not sponsored, endorsed, administered by, or associated with Instagram or Facebook.
-        </p>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Transmit Entry</button>
       </form>
     </section>
 
-    <p class="footer-note">
-      Built for curiosity. Designed to send people back into the world behind the signal.
-    </p>
+    <footer style="margin-top: 60px; text-align: center; color: rgba(255,255,255,0.2); font-family: var(--font-code); font-size: 0.75rem;">
+      &copy; 2026 OUTSIDE THE WORLD // ARCHIVE_STATION_03
+    </footer>
   </div>
+
+  <script>
+    function toggleShirt(side) {
+      const f = document.getElementById('front-view');
+      const b = document.getElementById('back-view');
+      const btnF = document.getElementById('t-front');
+      const btnB = document.getElementById('t-back');
+
+      if (side === 'front') {
+        f.classList.remove('hidden'); b.classList.add('hidden');
+        btnF.classList.add('active'); btnB.classList.remove('active');
+      } else {
+        f.classList.add('hidden'); b.classList.remove('hidden');
+        btnF.classList.remove('active'); btnB.classList.add('active');
+      }
+    }
+  </script>
 </body>
 </html>

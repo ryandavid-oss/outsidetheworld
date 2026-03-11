@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YKRKPFV2MB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-YKRKPFV2MB');
+    </script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Image of the Day | Outside The World</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="theme.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;900&family=Fira+Code:wght@300;500&display=swap" />
+
+    <style>
+        :root {
+            --nav-offset: 140px;
+            --brand-blue: #6395EE;
+            --brand-teal: #91AFB3;
+            --brand-light-blue: #A0BEF5;
+            --purple-frost: #8d73c8; /* Defined for the new call-to-action */
+        }
+
+        body {
+            background: #0a0a0a;
+            font-family: 'Inter', sans-serif;
+            color: #fff;
+            margin: 0;
+            padding-top: var(--nav-offset) !important;
+            padding-bottom: 70px;
+            overflow-x: hidden;
+        }
+
+        /* --- NAVIGATION --- */
+        .top-nav {
+            position: fixed;
+            top: 0; left: 0; width: 100%; z-index: 3500;
+            backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+            background: linear-gradient(to bottom, rgba(10, 10, 10, 0.98) 0%, rgba(10, 10, 10, 0) 100%);
+            padding: 22px 0;
+        }
+        .top-nav-inner {
+            max-width: 1600px; margin: 0 auto; padding: 0 28px;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .nav-logo { width: 220px; filter: drop-shadow(0 0 20px rgba(99, 149, 238, 0.25)); }
+        .status-tag { font-family: 'Fira Code', monospace; font-size: 0.6rem; letter-spacing: 4px; color: var(--brand-teal); border: 1px solid rgba(145, 175, 179, 0.25); padding: 6px 15px; text-transform: uppercase; }
+        .nav-title { margin: 0; font-size: 1.35rem; letter-spacing: 10px; text-transform: uppercase; font-weight: 900; }
+
+        /* --- HERO --- */
+        .hero { max-width: 1280px; margin: 0 auto 40px; padding: 0 20px; }
+        .hero-card { background: rgba(255, 255, 255, 0.015); border: 1px solid rgba(255, 255, 255, 0.06); position: relative; }
+        .hero-img { width: 100%; max-height: 78vh; object-fit: contain; display: block; background: #050505; }
+        .hero-meta { padding: 25px; text-align: center; }
+        .hero-date { font-family: 'Fira Code', monospace; font-size: 0.7rem; color: var(--brand-blue); margin-bottom: 10px; }
+        .hero-title { font-weight: 900; letter-spacing: 3px; text-transform: uppercase; font-size: 1.2rem; margin: 0 0 10px; }
+        .hero-caption { color: rgba(255, 255, 255, 0.7); line-height: 1.7; max-width: 800px; margin: 0 auto; }
+
+        .hero-actions {
+            margin-top: 20px;
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .hero-btn {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            padding: 12px 18px;
+            border: 1px solid rgba(145, 175, 179, 0.3);
+            background: rgba(145, 175, 179, 0.08);
+            color: #fff;
+            text-decoration: none;
+            transition: 0.3s cubic-bezier(0.2, 1, 0.3, 1);
+            cursor: pointer;
+        }
+        .hero-btn:hover { border-color: var(--brand-teal); background: rgba(145, 175, 179, 0.15); transform: translateY(-1px); }
+
+        /* --- REVEAL OVERLAY & ANIMATIONS --- */
+        #revealOverlay {
+            position: fixed; inset: 0; background: #fff; z-index: 10000;
+            display: none; flex-direction: column; align-items: center; justify-content: center;
+            opacity: 0; transition: background 0.4s ease, opacity 0.4s ease;
+        }
+
+        .reveal-content {
+            text-align: center; max-width: 900px; padding: 40px;
+            transform: scale(0.95); opacity: 0; transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Call to Action Container (Text + Arrow) */
+        .signal-cta {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            opacity: 0;
+            transition: opacity 0.6s 1s ease-out; /* Fades in after initial pop/reveal */
+        }
+        body.revealing .signal-cta { opacity: 1; }
+
+        .cta-prompt {
+            font-family: 'Fira Code', monospace;
+            font-size: 1rem;
+            color: var(--purple-frost);
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            font-weight: 500;
+            filter: drop-shadow(0 0 10px rgba(141, 115, 200, 0.6));
+        }
+
+        /* Large, glowing, diagonal, pulsing purple arrow */
+        .glowing-arrow {
+            width: 80px;
+            height: 80px;
+            transform: rotate(135deg); /* Slightly diagonal */
+            filter: drop-shadow(0 0 15px var(--purple-frost));
+            animation: pulseArrow 1.5s infinite ease-in-out;
+        }
+        .glowing-arrow path {
+            fill: var(--purple-frost);
+        }
+
+        @keyframes pulseArrow {
+            0%, 100% { transform: rotate(135deg) scale(1); opacity: 1; filter: drop-shadow(0 0 15px var(--purple-frost)); }
+            50% { transform: rotate(135deg) scale(1.1); opacity: 0.8; filter: drop-shadow(0 0 25px var(--purple-frost)); }
+        }
+
+        .signal-phrase {
+            font-size: clamp(1.8rem, 5vw, 3rem);
+            font-weight: 900; line-height: 1.1; letter-spacing: -0.04em;
+            color: #fff; cursor: pointer; transition: 0.3s;
+            margin-bottom: 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            opacity: 0;
+            transition: opacity 0.6s 0.8s ease-out; /* Main text fades in slightly before arrow */
+        }
+        body.revealing .signal-phrase { opacity: 1; }
+        .signal-phrase:hover { color: var(--brand-light-blue); transform: scale(1.02); }
+        
+        .status-msg {
+            font-family: 'Fira Code', monospace; font-size: 0.8rem;
+            color: var(--brand-teal); letter-spacing: 4px; text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        /* Checkmark SVG Animation */
+        .checkmark-svg {
+            width: 60px; height: 60px; display: none; margin-top: 20px;
+        }
+        .checkmark-path {
+            stroke-dasharray: 100; stroke-dashoffset: 100;
+            stroke: var(--brand-teal); stroke-width: 4; fill: none;
+            animation: draw 0.6s ease-out forwards;
+        }
+        @keyframes draw { to { stroke-dashoffset: 0; } }
+
+        body.revealing #revealOverlay { display: flex; opacity: 1; }
+        body.revealing .reveal-content { transform: scale(1); opacity: 1; }
+
+        /* --- VAULT GRID --- */
+        .section-label { max-width: 1400px; margin: 40px auto 15px; padding: 0 20px; font-family: 'Fira Code', monospace; font-size: 0.6rem; color: rgba(145, 175, 179, 0.5); letter-spacing: 4px; display: flex; align-items: center; gap: 15px; }
+        .section-label::after { content: ""; flex: 1; height: 1px; background: rgba(255,255,255,0.05); }
+        .vault-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; max-width: 1400px; margin: 0 auto; padding: 0 20px; }
+        .artifact-card { background: #111; border: 1px solid rgba(255,255,255,0.05); aspect-ratio: 1; overflow: hidden; cursor: pointer; position: relative; }
+        .artifact-card img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; transition: 0.5s; }
+        .artifact-card:hover img { opacity: 1; transform: scale(1.05); }
+
+        @media (max-width: 768px) {
+            .nav-right { display: none; }
+            .vault-grid { grid-template-columns: repeat(2, 1fr); gap: 5px; }
+            .hero-card { border: none; }
+            .signal-cta { margin-bottom: 10px; }
+            .glowing-arrow { width: 50px; height: 50px; }
+        }
+    </style>
+</head>
+<body>
+
+  <div class="page-chassis" style="position: relative; z-index: 10;">
+    <nav class="top-nav">
+        <div class="top-nav-inner">
+            <a href="personal.html" class="hero-logo-container">
+                <img class="nav-logo" src="Images/Equal.svg" alt="OTW Core">
+            </a>
+            <div class="nav-right">
+                <div class="status-tag">SIGNAL_STREAM: ACTIVE</div>
+                <h1 class="nav-title">Image of the Day</h1>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-card">
+            <img id="heroImg" class="hero-img" src="" alt="Daily Signal" />
+            <div class="hero-meta">
+                <div id="heroDate" class="hero-date"></div>
+                <h2 id="heroTitle" class="hero-title"></h2>
+                <p id="heroCaption" class="hero-caption"></p>
+
+                <div class="hero-actions">
+                    <a id="heroOpen" class="hero-btn" href="#" target="_blank">OPEN_UNIT</a>
+                    <a id="heroDownload" class="hero-btn" href="#" download>DOWNLOAD_UNIT</a>
+                    
+                    <button class="hero-btn" onclick="initiateDiscovery()" style="color: var(--purple-frost); border-color: rgba(141, 115, 200, 0.5);">42</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-label">ARCHIVE_VAULT</div>
+    <div class="vault-grid" id="grid"></div>
+  </div>
+
+    <div id="revealOverlay">
+        <div class="reveal-content">
+            <div class="status-msg" id="revealStatus">// TRANSMISSION_DECODED</div>
+            
+            <div class="signal-cta">
+                <div class="cta-prompt">Click Here!</div>
+                <svg class="glowing-arrow" viewBox="0 0 24 24">
+                    <path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" />
+                </svg>
+            </div>
+
+            <div class="signal-phrase" id="copyContainer" onclick="handleCopy()">
+                <span id="copyText">The Answer to the Ultimate Question of Life, the Universe, and Everything.</span>
+                
+                <svg class="checkmark-svg" id="checkIcon" viewBox="0 0 52 52">
+                    <path class="checkmark-path" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function syncNav() {
+            const nav = document.querySelector('.top-nav');
+            if (nav) document.documentElement.style.setProperty('--nav-offset', (nav.offsetHeight + 10) + 'px');
+        }
+        window.addEventListener('resize', syncNav);
+
+        async function init() {
+            try {
+                const res = await fetch('image_manifest.json', { cache: 'no-store' });
+                const items = await res.json();
+                items.sort((a, b) => b.date.localeCompare(a.date));
+                
+                const hero = items[0];
+                document.getElementById('heroImg').src = hero.image;
+                document.getElementById('heroDate').textContent = hero.date.replaceAll('-', '_');
+                document.getElementById('heroTitle').textContent = hero.title || 'DAILY_SIGNAL';
+                document.getElementById('heroCaption').textContent = hero.caption || '';
+                document.getElementById('heroOpen').href = hero.image;
+                document.getElementById('heroDownload').href = hero.image;
+
+                const grid = document.getElementById('grid');
+                items.slice(1).forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = 'artifact-card';
+                    card.innerHTML = `<img src="${item.image}" loading="lazy"><div style="position:absolute; bottom:10px; left:10px; font-family:'Fira Code'; font-size:0.5rem; background:black; padding:4px 8px;">${item.date.replaceAll('-', '_')}</div>`;
+                    card.onclick = () => window.open(item.image, '_blank');
+                    grid.appendChild(card);
+                });
+                syncNav();
+            } catch (e) { console.error("Manifest Load Failed"); }
+        }
+        init();
+
+        function initiateDiscovery() {
+            const body = document.body;
+            const overlay = document.getElementById('revealOverlay');
+            body.classList.add('revealing');
+            
+            // Initial "Pop" transition sequence
+            setTimeout(() => { overlay.style.background = '#0a0a0a'; }, 300);
+        }
+
+        function handleCopy() {
+            const text = document.getElementById('copyText').innerText;
+            const status = document.getElementById('revealStatus');
+            const check = document.getElementById('checkIcon');
+            const cta = document.querySelector('.signal-cta');
+            
+            navigator.clipboard.writeText(text).then(() => {
+                // Change UI status
+                status.innerText = "// SIGNAL_COPIED_TO_CLIPBOARD";
+                status.style.color = "#fff";
+                
+                // Show Checkmark and hide original prompt
+                check.style.display = 'block';
+                cta.style.display = 'none';
+                document.getElementById('copyText').style.color = "var(--brand-teal)";
+                
+                // Boot to entry form
+                setTimeout(() => {
+                    window.location.href = 'findthesignal.html#entry';
+                }, 1600);
+            });
+        }
+    </script>
+</body>
+</html>
