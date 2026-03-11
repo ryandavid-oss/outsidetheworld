@@ -21,7 +21,7 @@ jobs:
           python-version: '3.x'
 
       - name: Run Goldilocks Purifier
-        run: python purify_v5.py
+        run: python tools/purify_v5.py
 
       - name: Commit and Push Changes
         run: |

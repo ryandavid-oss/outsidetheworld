@@ -17,7 +17,7 @@ jobs:
           python-version: '3.x'
 
       - name: Run Sync Script
-        run: python sync_residue.py
+        run: python Archive_Construction_Debris/sync_residue.py
 
       - name: Commit and Push Manifest
         run: |
