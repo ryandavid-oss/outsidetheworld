@@ -24,7 +24,6 @@
             --brand-blue: #6395EE;
             --brand-teal: #91AFB3;
             --brand-light-blue: #A0BEF5;
-            --purple-frost: #8d73c8; /* Defined for the new call-to-action */
         }
 
         body {
@@ -85,7 +84,7 @@
         }
         .hero-btn:hover { border-color: var(--brand-teal); background: rgba(145, 175, 179, 0.15); transform: translateY(-1px); }
 
-        /* --- REVEAL OVERLAY & ANIMATIONS --- */
+        /* --- REVEAL OVERLAY --- */
         #revealOverlay {
             position: fixed; inset: 0; background: #fff; z-index: 10000;
             display: none; flex-direction: column; align-items: center; justify-content: center;
@@ -97,47 +96,8 @@
             transform: scale(0.95); opacity: 0; transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* Call to Action Container (Text + Arrow) */
-        .signal-cta {
-            margin-bottom: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-            opacity: 0;
-            transition: opacity 0.6s 1s ease-out; /* Fades in after initial pop/reveal */
-        }
-        body.revealing .signal-cta { opacity: 1; }
-
-        .cta-prompt {
-            font-family: 'Fira Code', monospace;
-            font-size: 1rem;
-            color: var(--purple-frost);
-            letter-spacing: 6px;
-            text-transform: uppercase;
-            font-weight: 500;
-            filter: drop-shadow(0 0 10px rgba(141, 115, 200, 0.6));
-        }
-
-        /* Large, glowing, diagonal, pulsing purple arrow */
-        .glowing-arrow {
-            width: 80px;
-            height: 80px;
-            transform: rotate(135deg); /* Slightly diagonal */
-            filter: drop-shadow(0 0 15px var(--purple-frost));
-            animation: pulseArrow 1.5s infinite ease-in-out;
-        }
-        .glowing-arrow path {
-            fill: var(--purple-frost);
-        }
-
-        @keyframes pulseArrow {
-            0%, 100% { transform: rotate(135deg) scale(1); opacity: 1; filter: drop-shadow(0 0 15px var(--purple-frost)); }
-            50% { transform: rotate(135deg) scale(1.1); opacity: 0.8; filter: drop-shadow(0 0 25px var(--purple-frost)); }
-        }
-
         .signal-phrase {
-            font-size: clamp(1.8rem, 5vw, 3rem);
+            font-size: clamp(2rem, 5vw, 3.5rem);
             font-weight: 900; line-height: 1.1; letter-spacing: -0.04em;
             color: #fff; cursor: pointer; transition: 0.3s;
             margin-bottom: 24px;
@@ -145,10 +105,7 @@
             flex-direction: column;
             align-items: center;
             gap: 20px;
-            opacity: 0;
-            transition: opacity 0.6s 0.8s ease-out; /* Main text fades in slightly before arrow */
         }
-        body.revealing .signal-phrase { opacity: 1; }
         .signal-phrase:hover { color: var(--brand-light-blue); transform: scale(1.02); }
         
         .status-msg {
@@ -159,7 +116,7 @@
 
         /* Checkmark SVG Animation */
         .checkmark-svg {
-            width: 60px; height: 60px; display: none; margin-top: 20px;
+            width: 60px; height: 60px; display: none;
         }
         .checkmark-path {
             stroke-dasharray: 100; stroke-dashoffset: 100;
@@ -178,19 +135,10 @@
         .artifact-card { background: #111; border: 1px solid rgba(255,255,255,0.05); aspect-ratio: 1; overflow: hidden; cursor: pointer; position: relative; }
         .artifact-card img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; transition: 0.5s; }
         .artifact-card:hover img { opacity: 1; transform: scale(1.05); }
-
-        @media (max-width: 768px) {
-            .nav-right { display: none; }
-            .vault-grid { grid-template-columns: repeat(2, 1fr); gap: 5px; }
-            .hero-card { border: none; }
-            .signal-cta { margin-bottom: 10px; }
-            .glowing-arrow { width: 50px; height: 50px; }
-        }
     </style>
 </head>
 <body>
 
-  <div class="page-chassis" style="position: relative; z-index: 10;">
     <nav class="top-nav">
         <div class="top-nav-inner">
             <a href="personal.html" class="hero-logo-container">
@@ -215,7 +163,7 @@
                     <a id="heroOpen" class="hero-btn" href="#" target="_blank">OPEN_UNIT</a>
                     <a id="heroDownload" class="hero-btn" href="#" download>DOWNLOAD_UNIT</a>
                     
-                    <button class="hero-btn" onclick="initiateDiscovery()" style="color: var(--purple-frost); border-color: rgba(141, 115, 200, 0.5);">42</button>
+                    <button class="hero-btn" onclick="initiateDiscovery()" style="color: var(--brand-teal); border-color: rgba(145, 175, 179, 0.5);">42</button>
                 </div>
             </div>
         </div>
@@ -223,19 +171,11 @@
 
     <div class="section-label">ARCHIVE_VAULT</div>
     <div class="vault-grid" id="grid"></div>
-  </div>
 
     <div id="revealOverlay">
         <div class="reveal-content">
             <div class="status-msg" id="revealStatus">// TRANSMISSION_DECODED</div>
             
-            <div class="signal-cta">
-                <div class="cta-prompt">Click Here!</div>
-                <svg class="glowing-arrow" viewBox="0 0 24 24">
-                    <path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" />
-                </svg>
-            </div>
-
             <div class="signal-phrase" id="copyContainer" onclick="handleCopy()">
                 <span id="copyText">The Answer to the Ultimate Question of Life, the Universe, and Everything.</span>
                 
@@ -243,6 +183,8 @@
                     <path class="checkmark-path" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
                 </svg>
             </div>
+
+            <div class="status-msg" style="font-size: 0.6rem; opacity: 0.6;" id="helpMsg">[ CLICK_TO_COPY_AND_TRANSMIT ]</div>
         </div>
     </div>
 
@@ -285,7 +227,7 @@
             const overlay = document.getElementById('revealOverlay');
             body.classList.add('revealing');
             
-            // Initial "Pop" transition sequence
+            // The "POP": White out to Deep Void transition
             setTimeout(() => { overlay.style.background = '#0a0a0a'; }, 300);
         }
 
@@ -293,16 +235,16 @@
             const text = document.getElementById('copyText').innerText;
             const status = document.getElementById('revealStatus');
             const check = document.getElementById('checkIcon');
-            const cta = document.querySelector('.signal-cta');
+            const help = document.getElementById('helpMsg');
             
             navigator.clipboard.writeText(text).then(() => {
                 // Change UI status
                 status.innerText = "// SIGNAL_COPIED_TO_CLIPBOARD";
                 status.style.color = "#fff";
                 
-                // Show Checkmark and hide original prompt
+                // Show Checkmark and hide help text
                 check.style.display = 'block';
-                cta.style.display = 'none';
+                help.style.opacity = '0';
                 document.getElementById('copyText').style.color = "var(--brand-teal)";
                 
                 // Boot to entry form
