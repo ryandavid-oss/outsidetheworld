@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Find the Signal — Outside The World</title>
+  <meta name="description" content="Find the hidden signal somewhere on Outside The World and enter to win one of two exclusive 2026 Purple Frost shirts." />
+  <style>
+    :root {
+      --bg: #06070b;
+      --bg-soft: #0c1020;
+      --panel: rgba(255,255,255,0.06);
+      --panel-strong: rgba(255,255,255,0.08);
+      --line: rgba(255,255,255,0.12);
+      --text: #f6f7fb;
+      --muted: rgba(246,247,251,0.72);
+      --brand-blue: #6395EE;
+      --brand-light-blue: #A0BEF5;
+      --brand-teal: #91AFB3;
+      --purple-frost: #8d73c8;
+      --shadow: 0 30px 80px rgba(0,0,0,0.45);
+      --radius: 28px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(900px 500px at 15% 10%, rgba(160,190,245,0.10), transparent 55%),
+        radial-gradient(700px 420px at 82% 14%, rgba(145,175,179,0.10), transparent 55%),
+        radial-gradient(700px 500px at 50% 85%, rgba(141,115,200,0.14), transparent 60%),
+        linear-gradient(180deg, #05060a 0%, #090b12 45%, #05060a 100%);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(circle at 10% 20%, rgba(255,255,255,0.8) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 40% 70%, rgba(255,255,255,0.6) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 78% 30%, rgba(160,190,245,0.85) 0 1.2px, transparent 1.6px),
+        radial-gradient(circle at 65% 80%, rgba(145,175,179,0.85) 0 1.2px, transparent 1.6px),
+        radial-gradient(circle at 90% 65%, rgba(255,255,255,0.55) 0 1px, transparent 1.5px);
+      opacity: 0.35;
+      z-index: 0;
+    }
+
+    a { color: inherit; }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 72px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .brand-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+
+    .brand-link img {
+      height: 34px;
+      width: auto;
+      display: block;
+      filter: drop-shadow(0 0 18px rgba(160,190,245,0.22));
+    }
+
+    .back-link {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.88rem;
+      border: 1px solid var(--line);
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.03);
+      transition: 0.25s ease;
+    }
+
+    .back-link:hover {
+      color: var(--text);
+      border-color: rgba(160,190,245,0.4);
+      transform: translateY(-1px);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .panel {
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.035));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+
+    .hero-copy {
+      padding: 44px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-copy::before {
+      content: "";
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      right: -120px;
+      top: -160px;
+      background: radial-gradient(circle, rgba(160,190,245,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--brand-teal);
+      font-size: 0.8rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 26px;
+      height: 1px;
+      background: currentColor;
+      box-shadow: 0 0 14px rgba(145,175,179,0.6);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.5rem, 5vw, 4.7rem);
+      line-height: 0.96;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+    }
+
+    .lede {
+      margin: 18px 0 0;
+      max-width: 52ch;
+      font-size: 1.06rem;
+      line-height: 1.8;
+      color: var(--muted);
+    }
+
+    .hero-stack {
+      display: grid;
+      gap: 18px;
+      margin-top: 28px;
+    }
+
+    .signal-box {
+      display: grid;
+      gap: 14px;
+      padding: 20px 22px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(160,190,245,0.18);
+    }
+
+    .signal-box strong {
+      font-size: 1rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .signal-box p,
+    .mini-note {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 50px;
+      padding: 0 20px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.84rem;
+      border: 1px solid transparent;
+      transition: 0.25s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--brand-blue), var(--brand-light-blue));
+      color: #08111f;
+      box-shadow: 0 14px 36px rgba(99,149,238,0.28);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 20px 40px rgba(99,149,238,0.34);
+    }
+
+    .btn-secondary {
+      border-color: var(--line);
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-2px);
+      border-color: rgba(145,175,179,0.42);
+    }
+
+    .shirt-card {
+      padding: 24px;
+      display: grid;
+      gap: 18px;
+      align-content: start;
+    }
+
+    .shirt-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .shirt-header h2 {
+      margin: 0;
+      font-size: 1rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(141,115,200,0.16);
+      border: 1px solid rgba(141,115,200,0.3);
+      color: #e8ddff;
+      font-size: 0.76rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .shirt-stage {
+      position: relative;
+      min-height: 640px;
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at 50% 16%, rgba(255,255,255,0.34), transparent 26%),
+        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.08);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 28px;
+    }
+
+    .shirt-stage::after {
+      content: "";
+      position: absolute;
+      inset: auto 12% 8% 12%;
+      height: 38px;
+      background: radial-gradient(ellipse at center, rgba(0,0,0,0.38), transparent 68%);
+      filter: blur(12px);
+      pointer-events: none;
+    }
+
+    .folded-stack {
+      position: relative;
+      width: min(100%, 420px);
+      aspect-ratio: 1 / 1;
+    }
+
+    .fold-layer,
+    .fold-top {
+      position: absolute;
+      inset: 0;
+      display: block;
+      object-fit: contain;
+      width: 100%;
+      height: 100%;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    .fold-layer.back {
+      transform: translate(-24px, 32px) scale(0.92) rotate(-8deg);
+      opacity: 0.46;
+      filter: saturate(0.82) brightness(0.86);
+    }
+
+    .fold-layer.mid {
+      transform: translate(18px, 20px) scale(0.95) rotate(7deg);
+      opacity: 0.62;
+      filter: brightness(0.92);
+    }
+
+    .fold-top {
+      transform: translateY(-4px) rotate(-1.5deg);
+      filter: drop-shadow(0 20px 30px rgba(0,0,0,0.30));
+    }
+
+    .brandmark,
+    .back-logo {
+      position: absolute;
+      width: auto;
+      display: block;
+      z-index: 3;
+      filter: drop-shadow(0 10px 14px rgba(0,0,0,0.28));
+    }
+
+    .brandmark {
+      width: 56px;
+      left: 34.5%;
+      top: 44.5%;
+      transform: rotate(-1.5deg);
+    }
+
+    .back-logo {
+      width: 168px;
+      left: 50%;
+      top: 41%;
+      transform: translateX(-50%) rotate(7deg);
+      opacity: 0.5;
+      mix-blend-mode: multiply;
+    }
+
+    .shirt-notes {
+      display: grid;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.75;
+    }
+
+    .shirt-notes strong { color: var(--text); }
+
+    .details {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 28px;
+    }
+
+    .detail-card {
+      padding: 24px;
+    }
+
+    .detail-card h3 {
+      margin: 0 0 10px;
+      font-size: 1rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .detail-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .form-panel {
+      margin-top: 28px;
+      padding: 32px;
+      display: grid;
+      grid-template-columns: 0.92fr 1.08fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .form-copy h2 {
+      margin: 0 0 12px;
+      font-size: clamp(1.8rem, 3vw, 2.7rem);
+      line-height: 1.02;
+    }
+
+    .form-copy p {
+      margin: 0 0 16px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .rules {
+      display: grid;
+      gap: 10px;
+      padding: 18px 20px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .rules strong {
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--brand-teal);
+    }
+
+    .rules span {
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 0.95rem;
+    }
+
+    form {
+      display: grid;
+      gap: 16px;
+    }
+
+    .field {
+      display: grid;
+      gap: 8px;
+    }
+
+    label {
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(246,247,251,0.88);
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      border-radius: 16px;
+      padding: 14px 16px;
+      font: inherit;
+      outline: none;
+      transition: 0.2s ease;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: rgba(160,190,245,0.5);
+      box-shadow: 0 0 0 4px rgba(160,190,245,0.12);
+    }
+
+    textarea {
+      min-height: 130px;
+      resize: vertical;
+    }
+
+    .legal {
+      font-size: 0.84rem;
+      color: rgba(246,247,251,0.62);
+      line-height: 1.7;
+    }
+
+    .footer-note {
+      text-align: center;
+      color: rgba(246,247,251,0.56);
+      font-size: 0.84rem;
+      margin-top: 24px;
+      line-height: 1.7;
+    }
+
+    .accent {
+      color: var(--brand-light-blue);
+    }
+
+    @media (max-width: 1080px) {
+      .hero,
+      .form-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .details {
+        grid-template-columns: 1fr;
+      }
+
+      .shirt-stage {
+        min-height: 520px;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .page {
+        width: min(var(--max), calc(100% - 18px));
+        padding: 18px 0 54px;
+      }
+
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 18px;
+      }
+
+      .hero-copy,
+      .shirt-card,
+      .detail-card,
+      .form-panel {
+        padding: 22px;
+      }
+
+      .shirt-stage {
+        min-height: 430px;
+        padding: 18px;
+      }
+
+      .folded-stack {
+        width: min(100%, 320px);
+      }
+
+      .brandmark {
+        width: 44px;
+      }
+
+      .back-logo {
+        width: 132px;
+      }
+
+      .cta-row {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <a class="brand-link" href="index.html">
+        <img src="Images/Equal.svg" alt="Outside The World" />
+
+      </a>
+      <a class="back-link" href="index.html">Return to site</a>
+    </header>
+
+    <section class="hero">
+      <div class="panel hero-copy">
+        <div class="eyebrow">2026 Shirt Giveaway</div>
+        <h1>Find the Signal.</h1>
+        <p class="lede">
+          Somewhere on <span class="accent">Outside The World</span>, a hidden signal is waiting.
+          Find it, submit the answer, and you'll be entered to win one of two exclusive
+          <strong>Purple Frost</strong> shirts from the single 2026 run.
+        </p>
+
+        <div class="hero-stack">
+          <div class="signal-box">
+            <strong>How it works</strong>
+            <p>
+              Visit the site. Explore until you find the hidden signal. Then come back here and enter the exact word,
+              phrase, or clue you discovered.
+            </p>
+            <div class="cta-row">
+              <a class="btn btn-primary" href="#entry">Enter the giveaway</a>
+              <a class="btn btn-secondary" href="personal.html">Start exploring</a>
+            </div>
+          </div>
+
+          <p class="mini-note">
+            No quiz. No tagging spree. Just curiosity, discovery, and a better reason to wander the site.
+          </p>
+        </div>
+      </div>
+
+      <aside class="panel shirt-card" aria-label="Giveaway shirt preview">
+        <div class="shirt-header">
+          <h2>Purple Frost</h2>
+          <div class="pill">Exclusive 2026 Run</div>
+        </div>
+
+        <div class="shirt-stage">
+          <div class="folded-stack">
+            <img class="fold-layer back" src="SM-DM130-Purple-Frost-F4.jpg" alt="Purple Frost shirt back" />
+            <img class="fold-layer mid" src="SM-DM130-Purple-Frost-E4.jpg" alt="Purple Frost shirt front" />
+            <img class="fold-top" src="SM-DM130-Purple-Frost-E4.jpg" alt="Folded Purple Frost shirt" />
+            <img class="brandmark" src="OTW_Brandmark_dark.svg" alt="Brandmark on chest" />
+            <img class="back-logo" src="Main Logo Dark.svg" alt="OTW logo on back layer" />
+          </div>
+        </div>
+
+        <div class="shirt-notes">
+          <div><strong>Front:</strong> OTW brandmark on Purple Frost.</div>
+          <div><strong>Back:</strong> OTW logo on the reverse.</div>
+          <div><strong>Run:</strong> A single 2026 giveaway edition, not an always-available shirt.</div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="details">
+      <div class="panel detail-card">
+        <h3>Step One</h3>
+        <p>Go into the site and follow what interests you. The hidden signal should feel found, not forced.</p>
+      </div>
+      <div class="panel detail-card">
+        <h3>Step Two</h3>
+        <p>When you discover the clue, return here and submit it through the form. Simple and low-friction.</p>
+      </div>
+      <div class="panel detail-card">
+        <h3>Step Three</h3>
+        <p>Two winners are chosen after the giveaway closes and contacted by email for shirt size and mailing details.</p>
+      </div>
+    </section>
+
+    <section class="panel form-panel" id="entry">
+      <div class="form-copy">
+        <h2>Submit what you found.</h2>
+        <p>
+          Keep the entry lightweight. Name, email, and the hidden signal. That’s enough to make the giveaway feel open,
+          easy, and worth doing.
+        </p>
+
+        <div class="rules">
+          <strong>Suggested details</strong>
+          <span>Entry closes: <em>[add date]</em></span>
+          <span>Winners selected at random: <em>[yes / no]</em></span>
+          <span>Open to: <em>[U.S. only / broader]</em></span>
+          <span>Prize: one of two exclusive 2026 Purple Frost shirts</span>
+        </div>
+      </div>
+
+      <form action="https://formspree.io/f/your-form-id" method="POST">
+        <div class="field">
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" placeholder="Your name" required />
+        </div>
+
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" placeholder="you@example.com" required />
+        </div>
+
+        <div class="field">
+          <label for="signal">Hidden signal</label>
+          <input id="signal" name="signal" type="text" placeholder="Enter the phrase, word, or clue you found" required />
+        </div>
+
+        <div class="field">
+          <label for="favorite">Optional: favorite page or path</label>
+          <textarea id="favorite" name="favorite" placeholder="Tell me what page you liked most, if you want."></textarea>
+        </div>
+
+        <button class="btn btn-primary" type="submit">Submit entry</button>
+
+        <p class="legal">
+          By entering, you agree that your information may be used to administer the giveaway and contact winners.
+          This promotion is not sponsored, endorsed, administered by, or associated with Instagram or Facebook.
+        </p>
+      </form>
+    </section>
+
+    <p class="footer-note">
+      Built for curiosity. Designed to send people back into the world behind the signal.
+    </p>
+  </div>
+</body>
+</html>
