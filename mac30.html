@@ -10,25 +10,39 @@
   gtag('config', 'G-YKRKPFV2MB');
 </script>
   <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
   <title>
-   Personnel_Log | RyanDavid Burningham
+   A Name on the Wall, 1 Infinite Loop | Outside The World
   </title>
+  <meta content="A personal record of RyanDavid Burningham's Apple years, from early iPhone awe to inventory leadership, launches, and the 30th anniversary of the Macintosh." name="description"/>
   <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
+  <link href="https://outsidetheworld.com/mac30.html" rel="canonical"/>
+  <meta content="#0a0a0a" name="theme-color"/>
+  <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
+  <meta content="A Name on the Wall, 1 Infinite Loop | Outside The World" property="og:title"/>
+  <meta content="A personal record of RyanDavid Burningham's Apple years, from early iPhone awe to inventory leadership, launches, and the 30th anniversary of the Macintosh." property="og:description"/>
+  <meta content="website" property="og:type"/>
+  <meta content="https://outsidetheworld.com/mac30.html" property="og:url"/>
+  <meta content="https://outsidetheworld.com/Images/og/otw-feed-1200x630.jpg" property="og:image"/>
+  <meta content="Outside The World Apple memoir page." property="og:image:alt"/>
+  <meta content="summary_large_image" name="twitter:card"/>
+  <meta content="A Name on the Wall, 1 Infinite Loop | Outside The World" name="twitter:title"/>
+  <meta content="A personal record of RyanDavid Burningham's Apple years, from early iPhone awe to inventory leadership, launches, and the 30th anniversary of the Macintosh." name="twitter:description"/>
+  <meta content="https://outsidetheworld.com/Images/og/otw-feed-1200x630.jpg" name="twitter:image"/>
   <style>
-   @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500;700&family=Inter:wght@300;400;700;900&display=swap');
+	   @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500;700&family=Inter:wght@300;400;700;900&display=swap');
 
         :root {
-            --apple-blue: var(--brand-blue);
+            --apple-blue: var(--brand-blue, #6395ee);
             --apple-green: #32CD32;
             --apple-pink: #FF69B4;
-            --brand-teal: var(--brand-teal); 
-            --bg-dark: var(--bg-dark);
+            --page-teal: var(--brand-teal, #a0bef5);
+            --page-bg: var(--bg-dark, #050505);
         }
 
         body {
-            background-color: var(--bg-dark);
-            color: #ccc;
+            background-color: var(--page-bg);
+            color: #d0d4d7;
             font-family: 'Inter', sans-serif;
             margin: 0; padding: 0;
             line-height: 1.8;
@@ -55,7 +69,7 @@
         header {
             padding: 20px 40px 0; /* Bottom padding 0 to close gap */
             text-align: center;
-            background: linear-gradient(to bottom, rgba(5,5,5,1) 0%, rgba(5,5,5,0) 100%);
+            background: linear-gradient(to bottom, rgba(10, 10, 10, 1) 0%, rgba(10, 10, 10, 0) 100%);
         }
 
         h1 { 
@@ -67,7 +81,7 @@
         .badge-id { 
             font-family: 'Fira Code', monospace; 
             font-size: 1.25rem; /* Larger font */
-            color: var(--brand-teal); /* Teal color */
+            color: var(--page-teal); /* Teal color */
             margin: 0; /* Tightened gap */
             min-height: 1.5rem;
             display: inline-block;
@@ -76,7 +90,7 @@
         .cursor {
             display: inline-block;
             width: 10px; height: 18px;
-            background-color: var(--brand-teal);
+            background-color: var(--page-teal);
             margin-left: 5px;
             animation: blink 1s infinite;
             vertical-align: middle;
@@ -91,6 +105,19 @@
         }
 
         .narrative p { margin-bottom: 30px; font-size: 1.1rem; font-weight: 300; }
+        .section-label {
+            display: inline-block;
+            margin: 30px 0 24px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.68rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--page-teal);
+        }
+
+        .section-label:first-child {
+            margin-top: 12px;
+        }
         
         .blog-extract {
             background: rgba(255,255,255,0.03);
@@ -106,6 +133,7 @@
             border: 1px solid rgba(255,255,255,0.05); overflow: hidden;
             mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
             -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+            background: linear-gradient(180deg, rgba(6, 9, 14, 0.76) 0%, rgba(6, 9, 14, 0.28) 100%);
         }
 
         #name-wall {
@@ -113,7 +141,7 @@
             justify-content: center; animation: scrollWall 200s linear infinite;
         }
 
-        .name-entry { font-family: 'Fira Code'; font-size: 0.65rem; color: #555; text-transform: uppercase; }
+        .name-entry { font-family: 'Fira Code'; font-size: 0.65rem; color: #646a72; text-transform: uppercase; }
         .pink-name { color: var(--apple-pink) !important; font-weight: 700; font-size: 0.85rem; }
         .green-name { color: var(--apple-green) !important; font-weight: 600; }
         .blue-name { color: var(--apple-blue) !important; }
@@ -139,24 +167,53 @@
 
         footer {
             padding: 100px 40px; text-align: center; font-family: 'Fira Code';
-            font-size: 0.6rem; letter-spacing: 4px; color: #333;
+            font-size: 0.6rem; letter-spacing: 4px; color: #57606b;
         }
-        .cmd-egg { color: var(--apple-blue); cursor: pointer; transition: 0.3s; margin: 0 15px; }
+        .cmd-egg {
+            color: var(--apple-blue);
+            cursor: pointer;
+            transition: color 0.25s ease, text-shadow 0.25s ease;
+            margin: 0 15px;
+        }
+
+        .cmd-egg:hover {
+            color: #a0bef5;
+            text-shadow: 0 0 12px rgba(99, 149, 238, 0.35);
+        }
 
         @media (max-width: 768px) { 
             nav { text-align: center; } /* Logo centered on mobile */
             h1 { font-size: 1.8rem; letter-spacing: 0; } 
             .badge-id { font-size: 1rem; }
             .nav-logo { width: 160px; }
+            .content-grid { padding: 0 20px 48px; }
+            .matrix-section { height: 360px; margin: 56px 0; }
+            #name-wall { gap: 12px 24px; padding: 28px 20px; }
+            .narrative p { font-size: 1rem; }
+            footer { padding: 72px 20px; line-height: 2.4; }
         }
   
 /* THE CLEAN ATMOSPHERIC WASH */
 
     </style>
   <link href="theme.css" rel="stylesheet"/>
-  <meta content="#0a0a0a" name="theme-color"/>
-  <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
-  <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+  <script type="application/ld+json">
+   {
+     "@context": "https://schema.org",
+     "@type": "Article",
+     "headline": "A Name on the Wall, 1 Infinite Loop",
+     "description": "A personal record of RyanDavid Burningham's Apple years, from early iPhone awe to inventory leadership, launches, and the 30th anniversary of the Macintosh.",
+     "author": {
+       "@type": "Person",
+       "name": "RyanDavid Burningham"
+     },
+     "publisher": {
+       "@type": "Organization",
+       "name": "Outside The World"
+     },
+     "url": "https://outsidetheworld.com/mac30.html"
+   }
+  </script>
  </head>
  <body>
   <div id="cursor-ring">
@@ -181,11 +238,14 @@
     </span>
    </div>
   </header>
-  <div class="content-grid">
-   <section class="narrative">
-    <p>
-     In August 2007, I went from casual Apple critic to full on believer. As I remember it, I was enjoying time with my family in Utah. At a gathering at a church building in Salt Lake City, my brother Tyler (of all people) brought his newly purchased iPhone and was toying around with it near the kitchen. I had seen the iPhone before. But this felt different. Here was my brother, barely able to handle any technology, yet holding the newest device on the street. And he felt no reservations about using it. He was totally and completely comfortable tapping away.
-    </p>
+	  <div class="content-grid">
+	   <section class="narrative">
+    <span class="section-label">
+     Conversion Log
+    </span>
+	    <p>
+	     In August 2007, I went from casual Apple critic to full on believer. As I remember it, I was enjoying time with my family in Utah. At a gathering at a church building in Salt Lake City, my brother Tyler (of all people) brought his newly purchased iPhone and was toying around with it near the kitchen. I had seen the iPhone before. But this felt different. Here was my brother, barely able to handle any technology, yet holding the newest device on the street. And he felt no reservations about using it. He was totally and completely comfortable tapping away.
+	    </p>
     <p>
      I remember clinging to my then current phone, the Palm Tree 650, self-righteously proclaiming that its physical keyboard and user-replaceable battery were the bee’s knees and part of the panoply consisting why I was technically superior with my choices. And while I sat out the actual iPhone launch day, my natural curiosity about all the fuss forced me to make the trek to the Chandler Apple Store on 06/30/07. From my blog that day:
     </p>
@@ -222,15 +282,18 @@
     <p>
      I successfully landed the role of Inventory Trainer late in my career, traveling to California often and leading a team of individuals helping to open the new 3rd Street Promenade store in Santa Monica, CA. I'll never forget those early mornings and late nights, pushing ourselves to get every ounce of effort while we prepped that store for launch. It was nothing short of heaven to be able to walk to the park overlooking the beach on a 15 minute break. I'll always look back on the tail end of my career at Apple fondly.
     </p>
-   </section>
-   <section class="matrix-section">
-    <div id="name-wall">
-    </div>
-   </section>
-   <section class="narrative">
-    <p>
-     My first major product launch was the iPhone 3GS. I was there in 2010 when we launched the iPad. I attended Steve Job’s funeral with thousands of others in October of 2011. I celebrated the 30th anniversary of the Macintosh computer, and was lucky enough to have my name emblazoned forever in the halls of 1 Infinite Loop as one of the employees who played a small part in the success of that platform. Those were the major events. There are many less widely known events during that time, but no less important in my mind.
-    </p>
+	   </section>
+	   <section class="matrix-section">
+	    <div id="name-wall">
+	    </div>
+	   </section>
+	   <section class="narrative">
+    <span class="section-label">
+     After the Badge
+    </span>
+	    <p>
+	     My first major product launch was the iPhone 3GS. I was there in 2010 when we launched the iPad. I attended Steve Job’s funeral with thousands of others in October of 2011. I celebrated the 30th anniversary of the Macintosh computer, and was lucky enough to have my name emblazoned forever in the halls of 1 Infinite Loop as one of the employees who played a small part in the success of that platform. Those were the major events. There are many less widely known events during that time, but no less important in my mind.
+	    </p>
     <p>
      Like all good things, it had to come to an end. Suffice it to say that my personal life collided heavily and irrevocably with my ambitions and pleasure at Apple. My growing family was my ultimate family, and while I enjoyed corporate status as a traveling Inventory Trainer, my schedule rested within the needs of Apple Retail. Evenings, weekends, and ‘clopening shifts’ would ultimately dictate my path away from Apple. Five years after I began there, I signed my resignation letter with melancholy as I laid the foundation for the next two working decades of my life.
     </p>

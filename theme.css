@@ -10,7 +10,15 @@
 
     /* THE UNIVERSAL VOID */
     --bg-dark: #0a0a0a;
+    --text-main: #eeeeee;
     --border-low: rgba(255, 255, 255, 0.08);
+    --theme-shroud-opacity: 0.24;
+    --theme-shroud-gradient: radial-gradient(circle at 50% 50%,
+            rgba(10, 10, 10, 0) 26%,
+            rgba(0, 0, 0, 0.52) 100%);
+    --nav-logo-width: 220px;
+    --nav-logo-mobile-width: 80vw;
+    --nav-logo-mobile-max: 350px;
 
     /* SHARED TYPOGRAPHY */
     --font-main: 'Inter', sans-serif;
@@ -60,7 +68,7 @@ html {
 body {
     background-color: var(--bg-dark);
     /* THE READABILITY TWEAK: Off-white for long-form comfort  */
-    color: #eeeeee;
+    color: var(--text-main);
     font-family: var(--font-main);
 
     margin: 0;
@@ -84,15 +92,13 @@ body::after {
     height: 100%;
 
     /* THE DEPTH RADIUS: Focuses light on the center content while dimming the edges  */
-    background: radial-gradient(circle at 50% 50%,
-            rgba(10, 10, 10, 0) 20%,
-            rgba(0, 0, 0, 0.7) 100%);
+    background: var(--theme-shroud-gradient);
 
     pointer-events: none;
     /* Allows clicks to pass through to links */
-    z-index: 9999;
-    /* Ensures it sits above everything, even the TRON lines */
-    opacity: 0.6;
+    z-index: 0;
+    /* Lets page components establish their own layering */
+    opacity: var(--theme-shroud-opacity);
 
     /* Performance: Prevents the "M4 Stutter" by offloading the gradient to the GPU */
     will-change: opacity;
@@ -107,7 +113,7 @@ body::after {
 }
 
 .nav-logo {
-    width: 220px;
+    width: var(--nav-logo-width);
     height: auto;
     filter: drop-shadow(0 0 20px rgba(99, 149, 238, 0.1));
     transition: filter 0.4s ease, transform 0.4s ease;
@@ -125,8 +131,8 @@ body::after {
     }
 
     .nav-logo {
-        width: 80vw !important;
-        max-width: 350px;
+        width: var(--nav-logo-mobile-width) !important;
+        max-width: var(--nav-logo-mobile-max);
     }
 
     /* KILL-SWITCH FOR MOBILE CURSOR (Performance) */
