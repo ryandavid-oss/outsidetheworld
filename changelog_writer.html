@@ -350,6 +350,33 @@
       line-height: 1.5;
     }
 
+    .preset-bar{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top: 12px;
+    }
+
+    .preset-btn{
+      cursor:pointer;
+      border: 1px solid rgba(145,175,179,0.22);
+      background: rgba(255,255,255,0.03);
+      color: rgba(255,255,255,0.88);
+      padding: 8px 10px;
+      font-family: var(--font-code);
+      font-size: 0.55rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      transition: transform .15s ease, border-color .2s ease, box-shadow .2s ease;
+      white-space: nowrap;
+    }
+
+    .preset-btn:hover{
+      transform: translateY(-1px);
+      border-color: rgba(160,190,245,0.35);
+      box-shadow: 0 0 18px rgba(145,175,179,0.14);
+    }
+
     /* Preview blocks */
     .preview{
       margin-top: 14px;
@@ -480,16 +507,28 @@
           <textarea id="text" placeholder="Describe what changed. Keep it short, human-readable, and future-you friendly."></textarea>
         </div>
 
+        <div>
+          <div class="mini">QUICK_BUILD // tap once to seed a common entry, tap again to replace as needed.</div>
+          <div class="preset-bar" aria-label="Quick changelog presets">
+            <button class="preset-btn" type="button" data-preset="feature">Feature</button>
+            <button class="preset-btn" type="button" data-preset="fix">Fix</button>
+            <button class="preset-btn" type="button" data-preset="tweak">Tweak</button>
+            <button class="preset-btn" type="button" data-preset="narrative">Narrative Entry</button>
+            <button class="preset-btn" type="button" data-preset="iotd">IOTD Added</button>
+            <button class="preset-btn" type="button" data-preset="copy_title">Copy Style</button>
+          </div>
+        </div>
+
         <div class="actions">
           <button class="btn primary" id="btnStage" type="button">STAGE_ENTRY</button>
           <button class="btn ghost" id="btnCopy" type="button">COPY_JSON_OBJECT</button>
           <button class="btn ghost" id="btnLoad" type="button">LOAD_CHANGELOG.JSON</button>
-          <button class="btn ghost" id="btnDownload" type="button">DOWNLOAD_UPDATED_JSON</button>
+          <button class="btn ghost" id="btnDownload" type="button">SAVE_OR_DOWNLOAD_JSON</button>
           <button class="btn danger" id="btnClearStaged" type="button">CLEAR_STAGING</button>
         </div>
 
         <div class="mini" id="hint">
-          Tip: Stage a few entries during a work session, then download the updated <code>changelog.json</code> and commit it.
+          Tip: Stage a few entries during a work session, then save the updated <code>changelog.json</code> or use the helper script for one-step updates.
         </div>
 
         <div class="preview" id="jsonPreview">{ }</div>
@@ -529,6 +568,10 @@
     let loadedLog = null;         // array from changelog.json
     let staged = [];              // staged entries (array of objects)
     let lastBuilt = null;
+    const STORAGE_KEYS = {
+      draft: 'otw_changelog_writer_draft',
+      staged: 'otw_changelog_writer_staged'
+    };
 
     const elDate = document.getElementById('date');
     const elType = document.getElementById('type');
@@ -546,6 +589,7 @@
     const elStagedList = document.getElementById('stagedList');
     const elLogList = document.getElementById('logList');
     const elSearch = document.getElementById('search');
+    const presetButtons = Array.from(document.querySelectorAll('[data-preset]'));
 
     // -----------------------
     // Helpers
@@ -577,6 +621,41 @@
       }[c]));
     }
 
+    function saveDraft() {
+      const payload = {
+        date: elDate.value,
+        type: elType.value,
+        text: elText.value
+      };
+      localStorage.setItem(STORAGE_KEYS.draft, JSON.stringify(payload));
+    }
+
+    function restoreDraft() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEYS.draft);
+        if (!raw) return;
+        const payload = JSON.parse(raw);
+        if (payload && typeof payload === 'object') {
+          if (payload.date) elDate.value = payload.date;
+          if (payload.type) elType.value = payload.type;
+          if (payload.text) elText.value = payload.text;
+        }
+      } catch {}
+    }
+
+    function saveStaged() {
+      localStorage.setItem(STORAGE_KEYS.staged, JSON.stringify(staged));
+    }
+
+    function restoreStaged() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEYS.staged);
+        if (!raw) return;
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed)) staged = dedupe(parsed);
+      } catch {}
+    }
+
     function buildEntry() {
       const date = elDate.value.trim();
       const type = elType.value.trim();
@@ -586,6 +665,48 @@
       if (!text) throw new Error('DESCRIPTION_REQUIRED');
 
       return { date, type, text };
+    }
+
+    function setComposer(type, text, mode = 'replace') {
+      elType.value = type;
+
+      if (mode === 'append' && elText.value.trim()) {
+        elText.value = `${elText.value.trim()} ${text}`.trim();
+      } else {
+        elText.value = text;
+      }
+
+      saveDraft();
+      elText.focus();
+      elText.setSelectionRange(elText.value.length, elText.value.length);
+      setStatus('COMPOSER_SEEDED', 'ok');
+    }
+
+    function applyPreset(kind) {
+      const current = elText.value.trim();
+
+      switch (kind) {
+        case 'feature':
+          setComposer('Feature', current || 'Added ', 'replace');
+          break;
+        case 'fix':
+          setComposer('Fix', current || 'Fixed ', 'replace');
+          break;
+        case 'tweak':
+          setComposer('Tweak', current || 'Updated ', 'replace');
+          break;
+        case 'narrative':
+          setComposer('Feature', 'New blogfeed entry - ', 'replace');
+          break;
+        case 'iotd':
+          setComposer('Other', 'Added IOTD for ', 'replace');
+          break;
+        case 'copy_title':
+          setComposer(elType.value || 'Other', current || 'Refined copy and layout on ', 'replace');
+          break;
+        default:
+          break;
+      }
     }
 
     function sortNewestFirst(arr) {
@@ -641,6 +762,7 @@
     }
 
     function renderStaged() {
+      saveStaged();
       elStagedChip.textContent = `${staged.length} staged`;
       if (!staged.length) {
         elStagedList.innerHTML = `<div class="mini">STAGING_BUFFER_EMPTY // stage entries to batch your update.</div>`;
@@ -726,7 +848,7 @@
         setStatus('LOADING_CHANGELOG…', 'warn');
         elSubline.textContent = 'UPLINK // fetching changelog.json';
 
-        const res = await fetch('/changelog.json', { cache: 'no-store' });
+        const res = await fetch('./changelog.json', { cache: 'no-store' });
         if (!res.ok) throw new Error(`HTTP_${res.status}`);
 
         const data = await res.json();
@@ -781,12 +903,34 @@
       setStatus(ok ? 'COPIED_FULL_JSON' : 'COPY_FAILED', ok ? 'ok' : 'bad');
     }
 
-    function downloadUpdatedJson() {
+    async function downloadUpdatedJson() {
       const base = Array.isArray(loadedLog) ? loadedLog : [];
       const merged = dedupe([...staged, ...base]);
       const sorted = sortNewestFirst(merged);
+      const contents = JSON.stringify(sorted, null, 2) + '\n';
 
-      downloadFile('changelog.json', JSON.stringify(sorted, null, 2) + '\n');
+      if (window.showSaveFilePicker) {
+        try {
+          const handle = await window.showSaveFilePicker({
+            suggestedName: 'changelog.json',
+            types: [{
+              description: 'JSON files',
+              accept: { 'application/json': ['.json'] }
+            }]
+          });
+          const writable = await handle.createWritable();
+          await writable.write(contents);
+          await writable.close();
+          setStatus('SAVED_CHANGELOG.JSON', 'ok');
+          return;
+        } catch (e) {
+          if (e && e.name !== 'AbortError') {
+            setStatus('SAVE_PICKER_FAILED // downloaded instead', 'warn');
+          }
+        }
+      }
+
+      downloadFile('changelog.json', contents);
       setStatus('DOWNLOADED_CHANGELOG.JSON', 'ok');
     }
 
@@ -807,9 +951,17 @@
     document.getElementById('btnClearStaged').addEventListener('click', clearStaging);
     document.getElementById('btnCopyAll').addEventListener('click', copyFullJson);
     elSearch.addEventListener('input', renderLogList);
+    elDate.addEventListener('input', saveDraft);
+    elType.addEventListener('change', saveDraft);
+    elText.addEventListener('input', saveDraft);
+    presetButtons.forEach(btn => {
+      btn.addEventListener('click', () => applyPreset(btn.getAttribute('data-preset')));
+    });
 
     // Init defaults
     elDate.value = todayISO();
+    restoreDraft();
+    restoreStaged();
     renderPreview(null);
     renderStaged();
     renderLogList();

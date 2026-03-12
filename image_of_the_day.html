@@ -13,6 +13,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>Image of the Day | Outside The World</title>
+    <meta name="description"
+        content="Image of the Day from Outside The World in Queen Creek, Arizona. A daily signal capture with archive access." />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="color-scheme" content="dark" />
+    <link rel="canonical" href="https://outsidetheworld.com/image_of_the_day.html" />
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="theme.css" />
 
@@ -20,11 +26,14 @@
     <meta property="og:site_name" content="Outside The World" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Image of the Day | Outside The World" />
-    <meta property="og:description" content="Daily signal capture from Outside The World." />
+    <meta property="og:description" content="Daily signal capture from Outside The World in Queen Creek, Arizona." />
     <meta property="og:url" content="https://outsidetheworld.com/image_of_the_day.html" />
-    <!-- Optional: you can set this dynamically later; for now set a default -->
     <meta property="og:image" content="https://outsidetheworld.com/Images/og/otw-feed-1200x630.jpg" />
+    <meta property="og:image:alt" content="Image of the Day from Outside The World." />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Image of the Day | Outside The World" />
+    <meta name="twitter:description" content="Daily signal capture from Outside The World in Queen Creek, Arizona." />
+    <meta name="twitter:image" content="https://outsidetheworld.com/Images/og/otw-feed-1200x630.jpg" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -365,6 +374,24 @@
             /* gentle texture */
         }
     </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": "Image of the Day | Outside The World",
+      "url": "https://outsidetheworld.com/image_of_the_day.html",
+      "description": "Image of the Day from Outside The World in Queen Creek, Arizona.",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Outside The World",
+        "url": "https://outsidetheworld.com/"
+      },
+      "contentLocation": {
+        "@type": "Place",
+        "name": "Queen Creek, Arizona"
+      }
+    }
+    </script>
 </head>
 
 <body>
@@ -418,21 +445,39 @@
         // MANIFEST: newest first
         // Create: image_manifest.json (array of objects)
         // [{ "date":"2026-03-05", "title":"...", "caption":"...", "image":"Images/IOTD/2026-03-05.jpg" }, ...]
+        function normalizeManifest(items) {
+            const seenDates = new Set();
+            const normalized = [];
+
+            items.forEach((item) => {
+                if (!item || typeof item !== 'object') return;
+
+                const date = String(item.date || '').trim();
+                const title = String(item.title || '').trim();
+                const caption = String(item.caption || '').trim();
+                const image = String(item.image || '').trim();
+
+                if (!date || !image) return;
+                if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) return;
+                if (seenDates.has(date)) return;
+
+                seenDates.add(date);
+                normalized.push({ date, title, caption, image });
+            });
+
+            normalized.sort((a, b) => String(b.date).localeCompare(String(a.date)));
+            return normalized;
+        }
+
         async function loadManifest() {
             const res = await fetch('image_manifest.json', { cache: 'no-store' });
             if (!res.ok) throw new Error('MANIFEST_LOAD_FAIL');
             const data = await res.json();
             if (!Array.isArray(data) || !data.length) throw new Error('MANIFEST_EMPTY');
 
-            // Sort newest date first (expects YYYY-MM-DD)
-            data.sort((a, b) => {
-                const ad = String(a.date || '');
-                const bd = String(b.date || '');
-                // lexical compare works for ISO dates
-                return bd.localeCompare(ad);
-            });
-
-            return data;
+            const normalized = normalizeManifest(data);
+            if (!normalized.length) throw new Error('MANIFEST_INVALID');
+            return normalized;
         }
 
         function setHero(item) {
@@ -444,7 +489,7 @@
             const heroDownload = document.getElementById('heroDownload');
 
             heroImg.src = item.image;
-            heroImg.alt = item.title || 'Image of the day';
+            heroImg.alt = item.title ? `${item.title} // Image of the day` : 'Image of the day';
             heroDate.textContent = (item.date || '').replaceAll('-', '_');
             heroTitle.textContent = item.title || 'DAILY_SIGNAL';
             heroCaption.textContent = item.caption || '';
@@ -454,7 +499,10 @@
 
             // If you want iMessage preview to always show today:
             // (iMessage caches hard; but this helps browsers)
-            document.querySelector('meta[property="og:image"]')?.setAttribute('content', 'https://outsidetheworld.com/' + item.image.replace(/^\//, ''));
+            const absoluteImage = 'https://outsidetheworld.com/' + item.image.replace(/^\//, '');
+            document.querySelector('meta[property="og:image"]')?.setAttribute('content', absoluteImage);
+            document.querySelector('meta[property="og:image:alt"]')?.setAttribute('content', heroImg.alt);
+            document.querySelector('meta[name="twitter:image"]')?.setAttribute('content', absoluteImage);
         }
 
         function buildGrid(items, heroDate) {
