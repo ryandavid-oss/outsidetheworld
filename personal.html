@@ -133,7 +133,7 @@
             background: radial-gradient(circle at 50% 50%, rgba(10, 10, 10, 0) 20%, rgba(0, 0, 0, 0.7) 100%);
             pointer-events: none;
             z-index: 9999;
-            opacity: 0.6;
+            opacity: 0.32;
             will-change: opacity;
             transform: translateZ(0);
         }
@@ -186,7 +186,7 @@
             letter-spacing: 2px;
             margin-bottom: 8px;
             text-transform: uppercase;
-            opacity: 0.8;
+            opacity: 0.92;
         }
 
         .top-quadrant-text {
@@ -196,7 +196,7 @@
             letter-spacing: 5px;
             line-height: 1.4;
             text-transform: uppercase;
-            background: linear-gradient(to bottom, #fff 10%, #666 90%);
+            background: linear-gradient(to bottom, #fff 10%, #a8b5af 90%);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -214,11 +214,11 @@
         .feed-column {
             flex: 2;
             text-align: left;
-            background: rgba(145, 175, 179, 0.03);
+            background: rgba(145, 175, 179, 0.07);
             padding: 50px;
             backdrop-filter: blur(20px);
             position: relative;
-            border: 1px solid rgba(145, 175, 179, 0.1);
+            border: 1px solid rgba(145, 175, 179, 0.16);
             overflow: hidden;
         }
 
@@ -427,12 +427,12 @@
            ================================ */
         .feed-column {
             /* defaults match your current VOID look */
-            --reader-surface: rgba(145, 175, 179, 0.03);
-            --reader-border: rgba(145, 175, 179, 0.10);
-            --reader-text: #eeeeee;
+            --reader-surface: rgba(145, 175, 179, 0.07);
+            --reader-border: rgba(145, 175, 179, 0.16);
+            --reader-text: #f4f4f4;
             --reader-heading: #ffffff;
-            --reader-muted: #666;
-            --reader-divider: rgba(145, 175, 179, 0.10);
+            --reader-muted: #8b938f;
+            --reader-divider: rgba(145, 175, 179, 0.16);
 
             --reader-accent: var(--brand-blue);
             --reader-accent-glow: 0 0 10px rgba(99, 149, 238, 0.3);
@@ -528,7 +528,7 @@
         }
 
         .reader-label {
-            opacity: 0.85;
+            opacity: 0.96;
             letter-spacing: 1.5px;
         }
 
@@ -538,7 +538,7 @@
             letter-spacing: 2px;
             text-transform: uppercase;
             color: var(--reader-text);
-            background: rgba(5, 5, 5, 0.65);
+            background: rgba(5, 5, 5, 0.78);
             border: 1px solid var(--reader-border);
             padding: 8px 10px;
             outline: none;
@@ -657,7 +657,7 @@
             letter-spacing: 4px;
             text-transform: uppercase;
             margin: 10px 0 5px;
-            opacity: 0.6;
+            opacity: 0.8;
             display: flex;
             align-items: center;
             gap: 10px;
@@ -677,8 +677,8 @@
             color: inherit;
             position: relative;
             transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-            background: rgba(255, 255, 255, 0.01);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             margin-bottom: 5px;
         }
 
@@ -693,7 +693,7 @@
 
         .archive-card p {
             font-size: 0.7rem;
-            color: #666;
+            color: #919894;
             text-transform: uppercase;
             margin: 0;
         }
@@ -709,7 +709,7 @@
 
         .teal-card h3 {
             color: var(--brand-teal);
-            opacity: 0.8;
+            opacity: 0.96;
         }
 
         .teal-card:hover {
@@ -727,7 +727,7 @@
 
         .amethyst-card h3 {
             color: var(--amethyst);
-            opacity: 0.8;
+            opacity: 0.96;
         }
 
         .amethyst-card:hover {
@@ -745,7 +745,7 @@
 
         .sacred-card h3 {
             color: var(--warm-amber);
-            opacity: 0.8;
+            opacity: 0.96;
         }
 
         .sacred-card:hover {
@@ -763,7 +763,7 @@
 
         .dossier-card h3 {
             color: var(--brand-blue);
-            opacity: 0.8;
+            opacity: 0.96;
         }
 
         .dossier-card:hover {
@@ -804,7 +804,7 @@
             font-size: 0.55rem;
             letter-spacing: 3px;
             text-transform: uppercase;
-            color: rgba(145, 175, 179, 0.75);
+            color: rgba(145, 175, 179, 0.9);
             margin-bottom: 12px;
         }
 
@@ -822,7 +822,7 @@
             font-family: 'IBM Plex Serif', serif;
             font-size: 0.95rem;
             line-height: 1.55;
-            color: rgba(255, 255, 255, 0.72);
+            color: rgba(255, 255, 255, 0.84);
         }
 
         .changelog-cta {
@@ -940,7 +940,7 @@
             letter-spacing: 2px;
             text-transform: uppercase;
             color: #fff;
-            background: rgba(5, 5, 5, 0.62);
+            background: rgba(5, 5, 5, 0.76);
             border: 1px solid rgba(99, 149, 238, 0.28);
             padding: 6px 10px;
             backdrop-filter: blur(8px);
@@ -957,7 +957,7 @@
             font-size: 0.62rem;
             letter-spacing: 2px;
             text-transform: uppercase;
-            color: rgba(160, 190, 245, 0.88);
+            color: rgba(160, 190, 245, 0.96);
         }
 
         .iotd-preview-card h3 {
@@ -1044,7 +1044,7 @@
 
         .podcast-info label {
             font-size: 0.6rem;
-            color: #666;
+            color: #9aa39e;
             text-transform: uppercase;
             letter-spacing: 1px;
             cursor: pointer;
@@ -1148,7 +1148,7 @@
         footer p {
             font-size: 0.55rem;
             letter-spacing: 5px;
-            color: rgba(255, 255, 255, 0.15);
+            color: rgba(255, 255, 255, 0.28);
             text-transform: uppercase;
         }
 
