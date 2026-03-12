@@ -12,12 +12,28 @@
 </script>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport" />
+    <meta content="#0a0a0a" name="theme-color" />
+    <meta name="description"
+        content="The Wayback is an archive interface for recovered posts, writing, and images from Outside The World, spanning years of digital residue and long-form observation." />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <link rel="canonical" href="https://outsidetheworld.com/wayback.html" />
     <title>
         The Wayback | Outside The World
     </title>
     <link href="favicon.svg" rel="icon" type="image/svg+xml" />
-    <meta content="var(--bg-dark)" name="theme-color" />
-    <link href="favicon.svg" rel="icon" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Outside The World" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="The Wayback | Outside The World" />
+    <meta property="og:description"
+        content="A random-access archive of recovered posts, images, and long-form residue from Outside The World." />
+    <meta property="og:url" content="https://outsidetheworld.com/wayback.html" />
+    <meta property="og:image" content="https://outsidetheworld.com/Images/SocialPreview.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="The Wayback | Outside The World" />
+    <meta name="twitter:description"
+        content="A random-access archive of recovered posts, images, and long-form residue from Outside The World." />
+    <meta name="twitter:image" content="https://outsidetheworld.com/Images/SocialPreview.jpg" />
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;900&family=Fira+Code:wght@300;500&family=Merriweather:ital,wght@0,300;0,700;1,300&display=swap');
 
@@ -242,19 +258,6 @@
                 flex-direction: column;
                 height: auto;
                 overflow-y: auto;
-
-                @media (max-width: 1024px) {
-                    /* ... your existing mobile styles ... */
-
-                    .shuffle-box {
-                        position: sticky;
-                        bottom: 0;
-                        background: var(--bg-dark);
-                        padding: 15px 20px;
-                        z-index: 101;
-                        border-top: 1px solid var(--border-low);
-                    }
-                }
             }
 
             .directory {
@@ -267,6 +270,15 @@
 
             .post-list {
                 max-height: 45vh;
+                border-top: 1px solid var(--border-low);
+            }
+
+            .shuffle-box {
+                position: sticky;
+                bottom: 0;
+                background: var(--bg-dark);
+                padding: 15px 20px;
+                z-index: 101;
                 border-top: 1px solid var(--border-low);
             }
 
@@ -291,6 +303,20 @@
         /* THE CLEAN ATMOSPHERIC WASH */
     </style>
     <link href="theme.css" rel="stylesheet" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "The Wayback",
+  "url": "https://outsidetheworld.com/wayback.html",
+  "description": "An archive interface for recovered posts, images, and long-form residue from Outside The World.",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "Outside The World",
+    "url": "https://outsidetheworld.com/"
+  }
+}
+    </script>
 </head>
 
 <body>
@@ -320,8 +346,6 @@
         </div>
         <div class="post-list" id="post-list">
         </div>
-        <div class="post-list" id="post-list">
-        </div>
     </aside>
     <main class="extraction-pane" id="scroll-target">
         <div class="glass-card" id="glass-container">
@@ -334,28 +358,116 @@
     <script src="wayback_purified.js">
     </script>
     <script>
+        function decodeEntities(value) {
+            const textarea = document.createElement('textarea');
+            textarea.innerHTML = String(value ?? '');
+            return textarea.value;
+        }
+
+        function escapeHtml(value) {
+            return decodeEntities(value)
+                .replaceAll('&', '&amp;')
+                .replaceAll('<', '&lt;')
+                .replaceAll('>', '&gt;')
+                .replaceAll('"', '&quot;')
+                .replaceAll("'", '&#39;');
+        }
+
+        function sanitizeArchiveBody(html) {
+            const template = document.createElement('template');
+            template.innerHTML = decodeEntities(html);
+
+            const blockedTags = ['script', 'style', 'iframe', 'object', 'embed', 'link', 'meta'];
+            blockedTags.forEach(tag => {
+                template.content.querySelectorAll(tag).forEach(node => node.remove());
+            });
+
+            template.content.querySelectorAll('*').forEach(node => {
+                [...node.attributes].forEach(attr => {
+                    const name = attr.name.toLowerCase();
+                    const value = attr.value.trim();
+
+                    if (name.startsWith('on')) {
+                        node.removeAttribute(attr.name);
+                        return;
+                    }
+
+                    if ((name === 'src' || name === 'href') && /^javascript:/i.test(value)) {
+                        node.removeAttribute(attr.name);
+                        return;
+                    }
+
+                    if (!['img', 'a'].includes(node.tagName.toLowerCase()) && ['src', 'href'].includes(name)) {
+                        node.removeAttribute(attr.name);
+                    }
+                });
+
+                if (node.tagName.toLowerCase() === 'a') {
+                    node.setAttribute('rel', 'noopener noreferrer');
+                    if (!node.getAttribute('target')) {
+                        node.setAttribute('target', '_blank');
+                    }
+                }
+
+                if (node.tagName.toLowerCase() === 'img') {
+                    node.setAttribute('loading', 'lazy');
+                    node.setAttribute('decoding', 'async');
+                }
+            });
+
+            return template.innerHTML;
+        }
+
         const ERA_MAP = {
-            ANALOG: { label: "THE_ANALOG_DAWN", glow: "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)" },
-            APPLE: { label: "THE_APPLE_YEARS", glow: "linear-gradient(135deg, #13547a 0%, #80d0c7 100%)" },
-            MODERN: { label: "MODERN_RESONANCE", glow: "linear-gradient(135deg, #2c3e50 0%, #4b6cb7 100%)" }
+            COMMERCE: {
+                label: "COX_ERA",
+                glow: "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)"
+            },
+            APPLE: {
+                label: "APPLE_ERA",
+                glow: "linear-gradient(135deg, #13547a 0%, #80d0c7 100%)"
+            },
+            CURRENT: {
+                label: "CFSS_ERA",
+                glow: "linear-gradient(135deg, #2c3e50 0%, #4b6cb7 100%)"
+            }
         };
 
         const allResidue = wayback_raw_dump.map(post => {
-            let eraConfig = ERA_MAP.MODERN;
+            let eraConfig = ERA_MAP.CURRENT;
             const yearNum = parseInt(post.year);
-            if (yearNum <= 2006) eraConfig = ERA_MAP.ANALOG;
-            else if (yearNum <= 2022) eraConfig = ERA_MAP.APPLE;
+            if (yearNum >= 2002 && yearNum <= 2008) {
+                eraConfig = ERA_MAP.COMMERCE;
+            } else if (yearNum >= 2009 && yearNum <= 2013) {
+                eraConfig = ERA_MAP.APPLE;
+            } else if (yearNum >= 2014) {
+                eraConfig = ERA_MAP.CURRENT;
+            }
             return { ...post, eraLabel: eraConfig.label, thumbprint: eraConfig.glow };
         });
 
         function initWayback() {
             const select = document.getElementById('year-select');
             const years = [...new Set(allResidue.map(p => p.year))].sort((a, b) => b - a);
-            years.forEach(y => {
-                const opt = document.createElement('option');
-                opt.value = y;
-                opt.textContent = `ERA_${y}`;
-                select.appendChild(opt);
+            const groups = [
+                { label: 'CFSS_ERA', years: years.filter(y => Number(y) >= 2014) },
+                { label: 'APPLE_ERA', years: years.filter(y => Number(y) >= 2009 && Number(y) <= 2013) },
+                { label: 'COX_ERA', years: years.filter(y => Number(y) >= 2002 && Number(y) <= 2008) }
+            ];
+
+            groups.forEach(group => {
+                if (group.years.length === 0) return;
+                const optgroup = document.createElement('optgroup');
+                optgroup.label = group.label;
+
+                group.years.forEach(y => {
+                    const opt = document.createElement('option');
+                    opt.value = y;
+                    opt.textContent = `ERA_${y}`;
+                    optgroup.appendChild(opt);
+                });
+
+                select.appendChild(optgroup);
             });
 
             // On load, we'll let the randomize function handle the first view
@@ -371,7 +483,7 @@
                     item.className = 'post-item';
                     item.setAttribute('data-id', index);
                     item.onclick = () => displayEntry(index);
-                    item.innerHTML = `<h3>${post.title}</h3><span>${post.date}</span>`;
+                    item.innerHTML = `<h3>${escapeHtml(post.title)}</h3><span>${escapeHtml(post.date)}</span>`;
                     list.appendChild(item);
                 }
             });
@@ -389,9 +501,9 @@
             container.classList.remove('visible');
             setTimeout(() => {
                 container.innerHTML = `
-                    <h1 class="entry-title">${post.title}</h1>
-                    <div class="entry-meta">ERA: ${post.eraLabel} // ${post.date}</div>
-                    <div class="entry-body">${post.body}</div>
+                    <h1 class="entry-title">${escapeHtml(post.title)}</h1>
+                    <div class="entry-meta">ERA: ${escapeHtml(post.eraLabel)} // ${escapeHtml(post.date)}</div>
+                    <div class="entry-body">${sanitizeArchiveBody(post.body)}</div>
                 `;
                 container.classList.add('visible');
 

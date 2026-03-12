@@ -594,7 +594,7 @@
                 <div class="status-msg" id="revealStatus">// SEEKING_SIGNAL</div>
 
                 <div class="signal-phrase" id="copyText">
-                    The Answer to the Ultimate Question of Life, the Universe, and Everything.
+                    OTW_SIGNAL_42
                 </div>
 
                 <div class="signal-instruction" id="signalInstruction">
@@ -602,7 +602,7 @@
                 </div>
 
                 <button class="signal-btn" id="signalBtn" type="button" onclick="handleCopy()">
-                    COPY SIGNAL &amp; GO TO ENTRY
+                    COPY SIGNAL &amp; OPEN ENTRY
                 </button>
 
                 <svg class="checkmark-svg" id="checkIcon" viewBox="0 0 52 52" aria-hidden="true">
@@ -683,7 +683,7 @@
             check.style.display = "none";
 
             btn.disabled = false;
-            btn.innerText = "COPY SIGNAL & GO TO ENTRY";
+                btn.innerText = "COPY SIGNAL & OPEN ENTRY";
             btn.style.opacity = "1";
             btn.style.cursor = "pointer";
 
@@ -724,7 +724,7 @@
                 btn.style.cursor = "default";
 
                 setTimeout(() => {
-                    window.location.href = 'findthesignal.html#entry';
+                    window.location.href = `findthesignal.html?signal=${encodeURIComponent(text)}#entry`;
                 }, 1400);
             }).catch(() => {
                 status.innerText = "// COPY_FAILED";

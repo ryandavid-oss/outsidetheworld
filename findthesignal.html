@@ -481,6 +481,48 @@
       flex-wrap: wrap;
     }
 
+    .rules-panel {
+      margin-top: 24px;
+      padding: 32px;
+    }
+
+    .rules-panel h2 {
+      margin: 0 0 12px;
+      font-size: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .rules-kicker {
+      margin: 0 0 18px;
+      font-family: var(--font-code);
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--brand-teal);
+    }
+
+    .rules-list {
+      display: grid;
+      gap: 14px;
+      color: var(--text-soft);
+      font-size: 0.95rem;
+      line-height: 1.75;
+    }
+
+    .rules-list div {
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .rules-list div:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .rules-list b {
+      color: #fff;
+    }
+
     .footer {
       margin-top: 60px;
       text-align: center;
@@ -583,11 +625,11 @@
 
         <div class="cta-row">
           <a href="#entry" class="btn btn-primary">Enter the Giveaway</a>
-          <a href="personal.html" class="btn btn-secondary">Start Exploring</a>
+          <a href="IOTDtemp2.html" class="btn btn-secondary">Search the IOTD Stream</a>
         </div>
 
         <p class="sub-note">
-          No purchase. No tagging spree. Just find the signal and submit it.
+          This week the hidden signal lives inside the <span class="accent">Image of the Day</span> stream. No purchase. No tagging spree. Just find it and submit it.
         </p>
       </div>
 
@@ -612,11 +654,11 @@
     <section class="details-grid">
       <div class="panel detail-card">
         <h3>01_DISCOVER</h3>
-        <p>Explore the site and find the hidden signal where it’s been placed.</p>
+        <p>Start in the Image of the Day stream and find the hidden signal where it’s been placed.</p>
       </div>
       <div class="panel detail-card">
         <h3>02_DECODE</h3>
-        <p>Capture the phrase exactly as it appears, then return here to transmit it.</p>
+        <p>Capture the exact signal, then return here to transmit it. Spacing and characters count.</p>
       </div>
       <div class="panel detail-card">
         <h3>03_WIN</h3>
@@ -627,7 +669,7 @@
     <section class="panel form-panel" id="entry">
       <div class="form-copy">
         <h2>Transmit Your Entry</h2>
-        <p>Enter the exact signal below to lock in your submission.</p>
+        <p>Enter the exact signal below to lock in your submission. If you used the guided path, it may already be filled in for you.</p>
 
         <div class="manifest">
           <div><b>Entry Closes:</b> March 20, 2026</div>
@@ -667,7 +709,7 @@
 
           <div class="field">
             <label for="signal">The_Signal</label>
-            <input id="signal" type="text" name="signal" placeholder="Phrase or word discovered" required />
+            <input id="signal" type="text" name="signal" placeholder="OTW_SIGNAL_42" required autocapitalize="off" autocorrect="off" spellcheck="false" />
           </div>
 
           <div class="field">
@@ -680,6 +722,22 @@
             <div class="submit-status" id="submitStatus" aria-live="polite"></div>
           </div>
         </form>
+      </div>
+    </section>
+
+    <section class="panel rules-panel" id="rules">
+      <div class="rules-kicker">// OFFICIAL_RULES_SUMMARY</div>
+      <h2>Official Rules Summary</h2>
+      <div class="rules-list">
+        <div><b>No purchase necessary.</b> A purchase will not improve your chances of winning.</div>
+        <div><b>Sponsor:</b> Outside The World is New LLC.</div>
+        <div><b>Promotion Period:</b> Begins at 12:00 AM MST on March 13, 2026 and ends at 11:59 PM MST on March 20, 2026.</div>
+        <div><b>Eligibility:</b> Open to legal residents of the United States who are 18 years of age or older at the time of entry. Void where prohibited.</div>
+        <div><b>How to Enter:</b> Find the hidden signal on the Outside The World site, submit the exact signal through the giveaway form on this page, and provide a valid name and email address. Limit one entry per person and per email address during the promotion period.</div>
+        <div><b>Prize:</b> Three winners will each receive one Outside The World 2026 Purple Frost giveaway shirt. Prize is non-transferable and no cash alternative will be provided.</div>
+        <div><b>Winner Selection:</b> Three winners will be selected at random from eligible entries received during the promotion period. Winners will be contacted by email after the giveaway closes.</div>
+        <div><b>Privacy:</b> Submitted name and email information will be used only for giveaway administration and winner contact.</div>
+        <div><b>General:</b> Sponsor reserves the right to disqualify incomplete, duplicate, automated, or tampered entries, and to modify, suspend, or cancel the promotion if technical or administrative issues compromise fair operation.</div>
       </div>
     </section>
 
@@ -712,6 +770,15 @@
     const submitBtn = document.getElementById('submitBtn');
     const submitStatus = document.getElementById('submitStatus');
     const successState = document.getElementById('successState');
+    const signalInput = document.getElementById('signal');
+
+    (function hydrateSignalFromUrl() {
+      const params = new URLSearchParams(window.location.search);
+      const signal = params.get('signal');
+      if (signal && signalInput) {
+        signalInput.value = signal;
+      }
+    })();
 
     form.addEventListener('submit', async function (e) {
       e.preventDefault();

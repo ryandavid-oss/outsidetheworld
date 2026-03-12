@@ -4,7 +4,26 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>OTW Change Log</title>
+    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="description"
+        content="The public change log for Outside The World, documenting recent updates, fixes, refinements, and content additions across the site." />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <link rel="canonical" href="https://outsidetheworld.com/change_log.html" />
+    <title>Change Log | Outside The World</title>
+    <link href="favicon.svg" rel="icon" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Outside The World" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="Change Log | Outside The World" />
+    <meta property="og:description"
+        content="Recent updates, fixes, refinements, and content additions across Outside The World." />
+    <meta property="og:url" content="https://outsidetheworld.com/change_log.html" />
+    <meta property="og:image" content="https://outsidetheworld.com/Images/SocialPreview.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Change Log | Outside The World" />
+    <meta name="twitter:description"
+        content="Recent updates, fixes, refinements, and content additions across Outside The World." />
+    <meta name="twitter:image" content="https://outsidetheworld.com/Images/SocialPreview.jpg" />
     <link rel="stylesheet" href="theme.css" />
     <style>
         body {
@@ -12,6 +31,7 @@
             color: #eee;
             font-family: var(--font-main);
             margin: 0;
+            min-height: 100vh;
             padding: 40px 16px 80px;
         }
 
@@ -86,7 +106,50 @@
             color: #ff4d4d;
             letter-spacing: 1px;
         }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 24px 14px 56px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+                letter-spacing: 2px;
+            }
+
+            .sub {
+                margin-bottom: 18px;
+            }
+
+            .log {
+                gap: 10px;
+            }
+
+            .item {
+                padding: 12px;
+            }
+
+            .meta {
+                gap: 8px;
+                font-size: 0.55rem;
+                letter-spacing: 1.5px;
+            }
+
+            .msg {
+                font-size: 0.98rem;
+                line-height: 1.55;
+            }
+        }
     </style>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Outside The World Change Log",
+  "url": "https://outsidetheworld.com/change_log.html",
+  "description": "A running record of updates, fixes, refinements, and content changes across Outside The World."
+}
+    </script>
 </head>
 
 <body>

@@ -8,6 +8,10 @@
   <meta name="color-scheme" content="dark" />
   <meta name="theme-color" content="#0a0a0a" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="description" content="Private authoring console for composing markdown entries for Outside The World." />
+  <meta name="robots" content="noindex,nofollow,noarchive" />
+  <link rel="canonical" href="https://outsidetheworld.com/ghost-writer.html" />
+  <link href="favicon.svg" rel="icon" type="image/svg+xml" />
 
   <title>OTW_GHOST_WRITER // AUTHORING_CONSOLE</title>
 
@@ -21,7 +25,7 @@
   </script>
 
   <!-- Theme -->
-  <link rel="stylesheet" href="/theme.css" />
+  <link rel="stylesheet" href="./theme.css" />
 
   <!-- EasyMDE -->
   <link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css" />
@@ -258,6 +262,16 @@
     @media (max-width: 980px) {
       .status {
         display: none;
+      }
+
+      .topbar-inner {
+        flex-wrap: wrap;
+        align-items: flex-start;
+      }
+
+      .writer-controls {
+        width: 100%;
+        justify-content: space-between;
       }
     }
 
@@ -531,6 +545,65 @@
       user-select: none;
     }
 
+    @media (max-width: 640px) {
+      .wrap {
+        padding: 14px 12px 72px;
+      }
+
+      .topbar {
+        padding-top: 12px;
+      }
+
+      .brand img {
+        width: 78px;
+      }
+
+      .title {
+        font-size: 0.8rem;
+        letter-spacing: 2px;
+      }
+
+      .subtitle,
+      .writer-controls,
+      .writer-select {
+        font-size: 0.55rem;
+        letter-spacing: 1.5px;
+      }
+
+      .card {
+        padding: 14px;
+      }
+
+      .card-head {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .chip {
+        white-space: normal;
+      }
+
+      .actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .btn {
+        justify-content: center;
+        min-height: 44px;
+        white-space: normal;
+        text-align: center;
+      }
+
+      .metrics {
+        gap: 8px;
+      }
+
+      .meter {
+        width: 100%;
+      }
+    }
+
     .btn.primary {
       background: var(--brand-blue);
       color: var(--bg-dark);
@@ -774,8 +847,8 @@
   <div class="topbar">
     <div class="topbar-inner">
       <div class="brand">
-        <a href="/index.html" aria-label="Back to home" style="display:flex; align-items:center;">
-          <img src="/Images/Equal.svg" alt="Outside The World" />
+        <a href="./index.html" aria-label="Back to home" style="display:flex; align-items:center;">
+          <img src="./Images/Equal.svg" alt="Outside The World" />
         </a>
         <div class="titleblock">
           <h1 class="title">GHOST_WRITER // AUTHORING_CONSOLE</h1>
