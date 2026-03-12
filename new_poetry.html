@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YKRKPFV2MB"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-YKRKPFV2MB');
+</script>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+  <title>Living Verse | Outside The World</title>
+  <meta content="Recovered and ongoing poems not yet folded into the main Outside The World verse archive." name="description"/>
+  <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
+  <link href="https://outsidetheworld.com/new_poetry.html" rel="canonical"/>
+  <meta content="#050505" name="theme-color"/>
+  <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
+  <meta content="Living Verse | Outside The World" property="og:title"/>
+  <meta content="Recovered and ongoing poems not yet folded into the main Outside The World verse archive." property="og:description"/>
+  <meta content="website" property="og:type"/>
+  <meta content="https://outsidetheworld.com/new_poetry.html" property="og:url"/>
+  <meta content="https://outsidetheworld.com/Images/og/otw-feed-1200x630.jpg" property="og:image"/>
+  <meta content="Outside The World living verse interface." property="og:image:alt"/>
+  <meta content="summary_large_image" name="twitter:card"/>
+  <meta content="Living Verse | Outside The World" name="twitter:title"/>
+  <meta content="Recovered and ongoing poems not yet folded into the main Outside The World verse archive." name="twitter:description"/>
+  <meta content="https://outsidetheworld.com/Images/og/otw-feed-1200x630.jpg" name="twitter:image"/>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@300;400;500&family=Inter:wght@300;400;700;900&family=Fira+Code:wght@300;500&display=swap');
+
+    :root {
+      --page-bg: var(--bg-dark, #050505);
+      --page-blue: var(--brand-blue, #6395ee);
+      --page-teal: var(--brand-teal, #91afb3);
+      --page-lilac: #c7b6ef;
+      --border-low: rgba(255, 255, 255, 0.08);
+      --glass-bg: rgba(5, 8, 12, 0.74);
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      height: 100vh;
+      display: flex;
+      background-color: var(--page-bg);
+      color: #efefef;
+      font-family: 'Inter', sans-serif;
+      overflow: hidden;
+      transition: background 1s ease;
+    }
+
+    .directory {
+      width: 392px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      border-right: 1px solid var(--border-low);
+      background: linear-gradient(180deg, rgba(4, 7, 10, 0.96) 0%, rgba(4, 7, 10, 0.9) 100%);
+      z-index: 2;
+    }
+
+    .dir-header {
+      padding: 34px 34px 24px;
+      border-bottom: 1px solid var(--border-low);
+    }
+
+    .hero-logo-container {
+      min-height: 90px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .sidebar-logo {
+      width: 280px;
+      max-width: 100%;
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 0 16px rgba(99, 149, 238, 0.14));
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+
+    .sidebar-logo:hover {
+      transform: scale(1.03);
+      opacity: 0.95;
+    }
+
+    .archive-intro {
+      margin-top: 10px;
+      font-size: 0.85rem;
+      line-height: 1.8;
+      color: #9cadb2;
+      max-width: 290px;
+    }
+
+    .tuning-knob {
+      padding: 22px 34px 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .knob-label {
+      display: block;
+      margin-bottom: 12px;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 2.4px;
+      text-transform: uppercase;
+      color: #8ca5ab;
+    }
+
+    .filter-wrap {
+      position: relative;
+    }
+
+    .filter-wrap::after {
+      content: "⌄";
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba(160, 190, 245, 0.75);
+      font-size: 0.95rem;
+      pointer-events: none;
+    }
+
+    select.era-filter {
+      width: 100%;
+      padding: 14px 42px 14px 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(160, 190, 245, 0.18);
+      background: rgba(11, 16, 20, 0.96);
+      color: #b9cfe4;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 1px;
+      appearance: none;
+      outline: none;
+      transition: border-color 0.25s ease, background 0.25s ease;
+    }
+
+    select.era-filter:hover,
+    select.era-filter:focus {
+      border-color: rgba(160, 190, 245, 0.34);
+      background: rgba(13, 19, 24, 0.98);
+    }
+
+    .knob-helper {
+      margin: 12px 0 0;
+      color: #7d8d92;
+      font-size: 0.68rem;
+      line-height: 1.6;
+    }
+
+    .file-list {
+      flex: 1 1 auto;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .file-item {
+      padding: 20px 34px;
+      cursor: pointer;
+      border-left: 3px solid transparent;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+      transition: background 0.25s ease, border-color 0.25s ease;
+    }
+
+    .file-item:hover {
+      background: rgba(255, 255, 255, 0.035);
+    }
+
+    .file-item.active {
+      background: rgba(199, 182, 239, 0.09);
+      border-left-color: var(--page-lilac);
+    }
+
+    .file-item h3 {
+      margin: 0 0 8px;
+      font-family: 'IBM Plex Serif', serif;
+      font-size: 1rem;
+      font-weight: 500;
+      color: #f2f3f5;
+    }
+
+    .file-item span {
+      display: block;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.56rem;
+      letter-spacing: 1.6px;
+      color: #7f8f95;
+      text-transform: uppercase;
+    }
+
+    .extraction-pane {
+      flex: 1 1 auto;
+      overflow-y: auto;
+      padding: 56px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      position: relative;
+      min-height: 0;
+    }
+
+    .glass-card {
+      width: 100%;
+      max-width: 760px;
+      padding: 74px 72px;
+      background: var(--glass-bg);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 30px;
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.75);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+      box-sizing: border-box;
+    }
+
+    .glass-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .entry-kicker {
+      display: inline-flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #9cb9c0;
+    }
+
+    .entry-kicker .pill {
+      padding: 8px 10px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .poem-title {
+      margin: 0 0 12px;
+      font-family: 'IBM Plex Serif', serif;
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      line-height: 1.05;
+      font-weight: 500;
+      color: #f5f5f4;
+      letter-spacing: -0.04em;
+    }
+
+    .poem-meta {
+      margin-bottom: 38px;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 2.8px;
+      text-transform: uppercase;
+      color: var(--page-teal);
+    }
+
+    .poem-body {
+      font-family: 'IBM Plex Serif', serif;
+      font-size: 1.08rem;
+      line-height: 2.05;
+      color: #ddd7cf;
+      white-space: pre-line;
+      text-wrap: pretty;
+    }
+
+    .poem-note {
+      margin-top: 36px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      font-size: 0.82rem;
+      color: #90a0a5;
+      line-height: 1.8;
+    }
+
+    @media (max-width: 1024px) {
+      body {
+        flex-direction: column;
+        overflow-y: auto;
+        height: auto;
+      }
+
+      .directory {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--border-low);
+      }
+
+      .dir-header {
+        padding: 32px 20px 18px;
+      }
+
+      .hero-logo-container {
+        justify-content: center;
+        min-height: 70px;
+      }
+
+      .sidebar-logo {
+        width: 220px;
+      }
+
+      .archive-intro {
+        max-width: none;
+        text-align: center;
+        margin: 8px auto 0;
+      }
+
+      .tuning-knob {
+        padding: 18px 20px 24px;
+      }
+
+      .file-list {
+        max-height: 42vh;
+      }
+
+      .file-item {
+        padding: 18px 20px;
+      }
+
+      .extraction-pane {
+        padding: 20px;
+        min-height: 56vh;
+      }
+
+      .glass-card {
+        padding: 44px 24px;
+        border-radius: 22px;
+      }
+
+      .poem-body {
+        font-size: 1rem;
+        line-height: 1.95;
+      }
+    }
+
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); }
+  </style>
+  <link href="theme.css" rel="stylesheet"/>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Living Verse",
+    "description": "Recovered and ongoing poems not yet folded into the main Outside The World verse archive.",
+    "url": "https://outsidetheworld.com/new_poetry.html"
+  }
+  </script>
+</head>
+<body>
+  <aside class="directory">
+    <div class="dir-header">
+      <a href="poetry.html">
+        <div class="hero-logo-container">
+          <img alt="Back to verse archive" class="sidebar-logo" src="Images/Equal.svg"/>
+        </div>
+      </a>
+      <div class="archive-intro">
+        New and recovered poems that do not currently live inside the main verse archive. A place for the ongoing signal.
+      </div>
+    </div>
+    <div class="tuning-knob">
+      <label class="knob-label">Tune by era</label>
+      <div class="filter-wrap">
+        <select class="era-filter" id="era-select" onchange="filterVerse()">
+          <option value="ALL">ALL SIGNALS</option>
+          <option value="CURRENT_SIGNAL">CURRENT SIGNAL</option>
+          <option value="RETURNED_SIGNAL">RETURNED SIGNAL</option>
+          <option value="MICRO_SIGNAL">MICRO SIGNAL</option>
+          <option value="HIDDEN_STATIC">HIDDEN STATIC</option>
+        </select>
+      </div>
+      <p class="knob-helper">Recovered from the current narrative, the Blogger return, and older static corners of OTW.</p>
+    </div>
+    <div class="file-list" id="file-list"></div>
+  </aside>
+  <main class="extraction-pane">
+    <div class="glass-card" id="glass-container"></div>
+  </main>
+  <script src="new_poetry_data.js"></script>
+  <script>
+    function initLivingVerse() {
+      renderList("ALL");
+      if (livingVerse.length > 0) {
+        displayPoem(0);
+      }
+    }
+
+    function renderList(filter) {
+      const list = document.getElementById('file-list');
+      list.innerHTML = "";
+      livingVerse.forEach((poem, index) => {
+        if (filter === "ALL" || poem.era === filter) {
+          const item = document.createElement('div');
+          item.className = 'file-item';
+          item.setAttribute('data-id', index);
+          item.onclick = () => {
+            displayPoem(index);
+            if (window.innerWidth <= 1024) {
+              document.querySelector('.extraction-pane').scrollIntoView({ behavior: 'smooth' });
+            }
+          };
+          item.innerHTML = `
+            <h3>${poem.title}</h3>
+            <span>${poem.era.replaceAll('_', ' ')} // ${poem.date}</span>
+          `;
+          list.appendChild(item);
+        }
+      });
+    }
+
+    function filterVerse() {
+      const val = document.getElementById('era-select').value;
+      renderList(val);
+    }
+
+    function displayPoem(index) {
+      const container = document.getElementById('glass-container');
+      const poem = livingVerse[index];
+      document.body.style.background = `
+        radial-gradient(circle at center, transparent 0%, rgba(5,5,5,0.92) 100%),
+        ${poem.thumbprint}
+      `;
+      document.body.style.backgroundBlendMode = "screen";
+      document.body.style.backgroundColor = "#050505";
+      container.classList.remove('visible');
+      setTimeout(() => {
+        container.innerHTML = `
+          <div class="entry-kicker">
+            <span class="pill">${poem.era.replaceAll('_', ' ')}</span>
+            <span class="pill">${poem.source}</span>
+          </div>
+          <h1 class="poem-title">${poem.title}</h1>
+          <div class="poem-meta">ORIGIN: ${poem.date}</div>
+          <div class="poem-body">${poem.body}</div>
+          <div class="poem-note">This page is reserved for poems recovered outside the primary archive and for newer verse that deserves its own running ledger.</div>
+        `;
+        container.classList.add('visible');
+        container.scrollTop = 0;
+      }, 220);
+
+      document.querySelectorAll('.file-item').forEach(el => {
+        el.classList.toggle('active', el.getAttribute('data-id') == index);
+      });
+    }
+
+    window.onload = initLivingVerse;
+  </script>
+</body>
+</html>
