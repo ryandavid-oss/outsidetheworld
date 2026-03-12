@@ -11,11 +11,25 @@
   gtag('config', 'G-YKRKPFV2MB');
 </script>
     <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport" />
     <title>
         Sacred_Record | EMMY
     </title>
+    <meta content="A luminous personal tribute to Emily, charting love, covenant, family, and the sacred chronology of a shared life." name="description" />
     <link href="favicon.svg" rel="icon" type="image/svg+xml" />
+    <link href="https://outsidetheworld.com/emmy.html" rel="canonical" />
+    <meta content="#0a0a0a" name="theme-color" />
+    <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="Sacred Record | EMMY | Outside The World" property="og:title" />
+    <meta content="A luminous personal tribute to Emily, charting love, covenant, family, and the sacred chronology of a shared life." property="og:description" />
+    <meta content="website" property="og:type" />
+    <meta content="https://outsidetheworld.com/emmy.html" property="og:url" />
+    <meta content="https://outsidetheworld.com/Images/og/otw-feed-1200x630.jpg" property="og:image" />
+    <meta content="Outside The World tribute page for Emily." property="og:image:alt" />
+    <meta content="summary_large_image" name="twitter:card" />
+    <meta content="Sacred Record | EMMY | Outside The World" name="twitter:title" />
+    <meta content="A luminous personal tribute to Emily, charting love, covenant, family, and the sacred chronology of a shared life." name="twitter:description" />
+    <meta content="https://outsidetheworld.com/Images/og/otw-feed-1200x630.jpg" name="twitter:image" />
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500;700&family=Inter:wght@300;400;700;900&display=swap');
 
@@ -23,8 +37,10 @@
             --warm-amber: #FFB347;
             --rose-gold: #E0BFB8;
             --glitter-gold: #FFF5E1;
-            --bg-vault: var(--bg-dark);
+            --bg-vault: var(--bg-dark, #0a0a0a);
             --border-gold: rgba(255, 179, 71, 0.25);
+            --panel-violet: rgba(48, 23, 71, 0.42);
+            --copy-soft: #c9bbd9;
         }
 
         body {
@@ -46,20 +62,28 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 1002;
+            z-index: 2;
         }
 
         nav {
             padding: 40px 20px 0;
             text-align: left;
             position: relative;
-            z-index: 1001;
+            z-index: 4;
         }
 
         .nav-logo {
-            width: 160px;
-            filter: sepia(1) saturate(2) hue-rotate(-20deg) brightness(1.2);
-            opacity: 0.7;
+            width: 220px;
+            max-width: 100%;
+            filter: drop-shadow(0 0 18px rgba(255, 179, 71, 0.2)) drop-shadow(0 0 30px rgba(255, 255, 255, 0.06));
+            opacity: 0.96;
+            transition: transform 0.25s ease, filter 0.25s ease, opacity 0.25s ease;
+        }
+
+        .nav-logo:hover {
+            transform: scale(1.03);
+            opacity: 1;
+            filter: drop-shadow(0 0 22px rgba(255, 179, 71, 0.28)) drop-shadow(0 0 34px rgba(255, 255, 255, 0.08));
         }
 
         .container {
@@ -67,7 +91,7 @@
             margin: 0 auto;
             padding: 0 20px 100px;
             position: relative;
-            z-index: 1003;
+            z-index: 3;
         }
 
         .hero {
@@ -117,7 +141,7 @@
             font-style: italic;
             margin-top: 30px;
             letter-spacing: 1px;
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.6), 0 0 30px rgba(255, 255, 255, 0.2);
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.5), 0 0 30px rgba(255, 255, 255, 0.16);
             animation: eternityPulse 8s infinite ease-in-out;
             max-width: 80%;
             margin-left: auto;
@@ -151,7 +175,7 @@
             border: 1px solid var(--border-gold);
             position: relative;
             overflow: hidden;
-            box-shadow: 0 0 20px rgba(255, 179, 71, 0.1);
+            box-shadow: 0 0 24px rgba(255, 179, 71, 0.12);
         }
 
         .monument-img {
@@ -159,7 +183,7 @@
             height: 100%;
             object-fit: cover;
             object-position: center;
-            filter: brightness(0.8) contrast(1.1) sepia(0.2);
+            filter: brightness(0.9) contrast(1.08) sepia(0.12);
             transition: 0.8s ease;
         }
 
@@ -169,10 +193,10 @@
             justify-content: center;
             align-items: center;
             border: 1px solid var(--border-gold);
-            background: linear-gradient(135deg, rgba(26, 11, 46, 0.4), transparent);
+            background: linear-gradient(135deg, var(--panel-violet), rgba(0, 0, 0, 0.08));
             padding: 40px;
             position: relative;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(8px);
         }
 
         .symbols-container {
@@ -226,7 +250,7 @@
         .prose {
             font-size: 1.25rem;
             font-weight: 300;
-            color: #b3a2c7;
+            color: var(--copy-soft);
             text-align: left;
             margin-bottom: 2rem;
         }
@@ -285,14 +309,14 @@
 
         .timeline-desc {
             font-size: 1.05rem;
-            color: #b3a2c7;
+            color: var(--copy-soft);
             font-weight: 300;
         }
 
         .hex-card {
             border: 1px solid var(--border-gold);
             padding: 50px;
-            background: linear-gradient(135deg, rgba(26, 11, 46, 0.6), transparent);
+            background: linear-gradient(135deg, rgba(48, 23, 71, 0.62), rgba(0, 0, 0, 0.12));
             position: relative;
             margin: 60px 0;
             backdrop-filter: blur(8px);
@@ -324,7 +348,7 @@
             font-family: 'Fira Code';
             font-size: 0.7rem;
             color: var(--rose-gold);
-            background: rgba(255, 245, 225, 0.05);
+            background: rgba(255, 245, 225, 0.08);
         }
 
         .sig-block {
@@ -347,8 +371,16 @@
                 padding: 30px 0 0;
             }
 
+            .nav-logo {
+                width: 180px;
+            }
+
             .name-container {
                 height: 100px;
+            }
+
+            .eternity-quote {
+                max-width: 92%;
             }
 
             .monument-grid {
@@ -376,14 +408,42 @@
             .symbol-item {
                 flex: 1 1 40%;
             }
+
+            .prose {
+                font-size: 1.08rem;
+            }
+
+            .section-label {
+                margin: 72px 0 28px;
+                font-size: 0.68rem;
+                letter-spacing: 4px;
+            }
+
+            .hex-card {
+                padding: 36px 24px;
+            }
         }
 
         /* THE CLEAN ATMOSPHERIC WASH */
     </style>
     <link href="theme.css" rel="stylesheet" />
-    <meta content="#0a0a0a" name="theme-color" />
-    <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style" />
-    <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport" />
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "Sacred Record | EMMY",
+            "description": "A luminous personal tribute to Emily, charting love, covenant, family, and the sacred chronology of a shared life.",
+            "author": {
+                "@type": "Person",
+                "name": "RyanDavid Burningham"
+            },
+            "publisher": {
+                "@type": "Organization",
+                "name": "Outside The World"
+            },
+            "url": "https://outsidetheworld.com/emmy.html"
+        }
+    </script>
 </head>
 
 <body>
