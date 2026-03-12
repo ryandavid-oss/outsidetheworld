@@ -13,7 +13,10 @@ jobs:
     runs-on: ubuntu-latest # FIXED: Changed from 'runs-with' to 'runs-on'
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          token: ${{ github.token }}
+          persist-credentials: true
 
       - name: Set up Python
         uses: actions/setup-python@v4

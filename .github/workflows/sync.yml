@@ -4,12 +4,18 @@ on:
     paths:
       - 'blogger_posts/**' # The robot only wakes up when you add a post
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          token: ${{ github.token }}
+          persist-credentials: true
 
       - name: Set up Python
         uses: actions/setup-python@v4
