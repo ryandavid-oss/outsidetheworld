@@ -1,0 +1,1916 @@
+<!DOCTYPE html>
+<html lang="en" data-mood="auto">
+
+<head>
+    <!-- Core -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+
+    <!-- App-like (optional) -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="mobile-web-app-capable" content="yes" />
+
+    <!-- Primary SEO -->
+    <title>Outside The World</title>
+    <meta name="description"
+        content="Outside The World is a personal archive and professional research lab documenting 25 years of creative work, systems observation, and digital archaeology—based in Queen Creek, Arizona." />
+    <link rel="canonical" href="https://outsidetheworld.com/" />
+
+    <!-- Icons -->
+    <link href="favicon.svg" rel="icon" type="image/svg+xml" />
+
+    <!-- Social -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Outside The World" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="Outside The World" />
+    <meta property="og:description"
+        content="A personal archive and professional research lab documenting 25 years of creative work and systems observation—based in Queen Creek, Arizona." />
+    <meta property="og:image" content="https://outsidetheworld.com/Images/index_preview.jpg" />
+    <meta property="og:image:secure_url" content="https://outsidetheworld.com/Images/index_preview.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1291" />
+    <meta property="og:image:height" content="690" />
+    <meta property="og:url" content="https://outsidetheworld.com/" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Outside The World" />
+    <meta name="twitter:description"
+        content="A personal archive and professional research lab documenting 25 years of creative work and systems observation—based in Queen Creek, Arizona." />
+    <meta name="twitter:image" content="https://outsidetheworld.com/Images/index_preview.jpg" />
+
+    <!-- Performance: Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;900&family=Fira+Code:wght@300;500;700&family=Merriweather:wght@300;400;700&display=swap"
+        rel="stylesheet" />
+
+    <!-- Optional: preload the hero mark -->
+    <link rel="preload" as="image" href="Images/Equal.svg" type="image/svg+xml" />
+
+    <!-- Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YKRKPFV2MB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-YKRKPFV2MB');
+    </script>
+
+    <!-- Your site chassis -->
+    <link href="theme.css" rel="stylesheet" />
+
+    <style>
+        :root {
+            --c-bg: var(--bg-dark, #0a0a0a);
+            --c-blue: var(--brand-blue, #6395EE);
+            --c-teal: var(--brand-teal, #91AFB3);
+
+            --c-white: #ffffff;
+            --c-star-glow: rgba(255, 255, 255, 0.6);
+            --c-nebula: rgba(255, 77, 77, 0.6);
+
+            --ease: cubic-bezier(0.23, 1, 0.32, 1);
+
+            --const-rot: 0deg;
+            --const-scale: 1;
+            --const-shift-x: 0px;
+            --const-shift-y: 0px;
+
+            --pad-safe-top: env(safe-area-inset-top);
+            --pad-safe-bottom: env(safe-area-inset-bottom);
+        }
+
+        html[data-mood="dawn"] {
+            --c-bg: #0b0f14;
+            --c-blue: #8bb0ff;
+            --c-teal: #a6cfd2;
+            --c-nebula: rgba(255, 120, 120, .40);
+        }
+
+        html[data-mood="noon"] {
+            --c-bg: #0a0a0a;
+            --c-blue: #6395EE;
+            --c-teal: #91AFB3;
+            --c-nebula: rgba(255, 77, 77, .45);
+        }
+
+        html[data-mood="dusk"] {
+            --c-bg: #070812;
+            --c-blue: #6f8cff;
+            --c-teal: #82b9c2;
+            --c-nebula: rgba(255, 95, 155, .35);
+        }
+
+        html[data-mood="midnight"] {
+            --c-bg: #050505;
+            --c-blue: #7aa3ff;
+            --c-teal: #87c9c0;
+            --c-nebula: rgba(255, 77, 77, .55);
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        @supports (overflow-x: clip) {
+
+            html,
+            body {
+                overflow-x: clip;
+            }
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: 'Inter', sans-serif;
+            color: #fff;
+
+            padding-top: var(--pad-safe-top);
+            padding-bottom: var(--pad-safe-bottom);
+            padding-left: env(safe-area-inset-left);
+            padding-right: env(safe-area-inset-right);
+
+            background:
+                radial-gradient(circle at center, rgba(255, 255, 255, 0.015) 0%, transparent 22%),
+                radial-gradient(900px 700px at 15% 18%, rgba(99, 149, 238, 0.07), transparent 55%),
+                radial-gradient(900px 700px at 85% 12%, rgba(145, 175, 179, 0.055), transparent 55%),
+                radial-gradient(900px 700px at 50% 85%, rgba(99, 149, 238, 0.05), transparent 60%),
+                radial-gradient(circle at center, #0a0a0a 0%, var(--c-bg) 100%);
+        }
+
+        body::before,
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        body::before {
+            background:
+                linear-gradient(to right, rgba(255, 255, 255, 0.030) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+            background-size: 70px 70px;
+            mask-image: radial-gradient(circle at 50% 25%, black 0%, transparent 60%);
+            opacity: 0.12;
+            animation: gridDrift 22s linear infinite;
+        }
+
+        @keyframes gridDrift {
+            0% {
+                transform: translate3d(0, 0, 0);
+            }
+
+            100% {
+                transform: translate3d(-70px, 35px, 0);
+            }
+        }
+
+        body::after {
+            background: radial-gradient(circle at 50% 50%, rgba(10, 10, 10, 0) 20%, rgba(0, 0, 0, 0.70) 100%);
+            opacity: 0.72;
+        }
+
+        .sr-only {
+            position: absolute !important;
+            width: 1px !important;
+            height: 1px !important;
+            padding: 0 !important;
+            margin: -1px !important;
+            overflow: hidden !important;
+            clip: rect(0, 0, 0, 0) !important;
+            white-space: nowrap !important;
+            border: 0 !important;
+        }
+
+        .layer {
+            position: relative;
+            z-index: 3;
+            width: 100%;
+        }
+
+        /* Header Console */
+        .header-console {
+            position: fixed;
+            top: calc(30px + var(--pad-safe-top));
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+            z-index: 1000;
+            pointer-events: none;
+            width: 100%;
+            text-align: center;
+        }
+
+        .header-console a {
+            pointer-events: auto;
+            display: inline-block;
+        }
+
+        .console-logo {
+            width: clamp(270px, 22vw, 380px);
+            filter: saturate(1.2) brightness(1.1);
+            opacity: 0.92;
+            transition: transform 0.6s var(--ease), filter 0.6s var(--ease), opacity 0.6s var(--ease);
+            display: block;
+            margin: 0 auto;
+        }
+
+        .console-logo:hover {
+            opacity: 1;
+            transform: scale(1.05);
+            filter: saturate(1.5) brightness(1.25) drop-shadow(0 0 16px var(--c-blue)) drop-shadow(0 0 30px rgba(99, 149, 238, 0.35));
+        }
+
+        .console-text {
+            font-family: 'Fira Code', monospace;
+            font-size: clamp(0.85rem, 1.0vw, 1.05rem);
+            font-weight: 700;
+            color: var(--c-teal);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            pointer-events: none;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.8), 0 0 12px var(--c-blue), 0 0 25px rgba(99, 149, 238, 0.35);
+            transition: color 0.5s ease, text-shadow 0.5s ease;
+        }
+
+        .console-text::after {
+            content: '_';
+            font-weight: 900;
+            color: var(--c-blue);
+            text-shadow: 0 0 10px var(--c-blue);
+            animation: cursorBlink 1s infinite;
+            margin-left: 8px;
+        }
+
+        .header-console:hover .console-text {
+            color: var(--c-blue);
+            text-shadow: 0 0 10px #fff, 0 0 20px var(--c-blue), 0 0 40px var(--c-blue);
+        }
+
+        @keyframes cursorBlink {
+
+            0%,
+            100% {
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        .console-controls {
+            pointer-events: auto;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.58rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.55);
+            opacity: 0.85;
+        }
+
+        .chip {
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            background: rgba(255, 255, 255, 0.03);
+            padding: 8px 10px;
+            border-radius: 999px;
+            cursor: pointer;
+            transition: transform 0.35s var(--ease), border-color 0.35s var(--ease), background 0.35s var(--ease);
+            user-select: none;
+        }
+
+        .chip:hover {
+            transform: translateY(-1px);
+            border-color: rgba(255, 255, 255, 0.22);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .chip strong {
+            color: var(--c-teal);
+            font-weight: 700;
+        }
+
+        /* Starfield canvas */
+        .starfield {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+            pointer-events: none;
+            background: transparent;
+        }
+
+        /* Child stars overlay */
+        .field-stars {
+            position: fixed;
+            inset: 0;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .field-star {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            pointer-events: auto;
+            user-select: none;
+            touch-action: manipulation;
+        }
+
+        .field-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.92);
+            box-shadow:
+                0 0 14px rgba(255, 255, 255, 0.85),
+                0 0 26px rgba(145, 175, 179, 0.22),
+                0 0 34px rgba(99, 149, 238, 0.18);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .field-stars {
+            z-index: 900 !important;
+        }
+
+        /* above .layer (3), below header (1000) */
+        /* Signature ring (subtle) */
+        .field-dot::after {
+            content: "";
+            position: absolute;
+            inset: -7px;
+            border-radius: 50%;
+            border: 1px solid rgba(145, 175, 179, 0.28);
+            box-shadow: 0 0 12px rgba(145, 175, 179, 0.14);
+            opacity: 0.75;
+            pointer-events: none;
+        }
+
+        .field-tron {
+            position: absolute;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.25s ease;
+            filter: drop-shadow(0 0 6px rgba(145, 175, 179, 0.55));
+        }
+
+        .field-card {
+            position: absolute;
+            opacity: 0;
+            background: rgba(5, 5, 5, 0.88);
+            border: 1px solid rgba(145, 175, 179, 0.65);
+            padding: 8px 14px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.6rem;
+            color: #fff;
+            letter-spacing: 2px;
+            white-space: nowrap;
+            pointer-events: none;
+            backdrop-filter: blur(6px);
+            transition: opacity 0.25s ease, transform 0.25s ease;
+            transform: translateY(6px);
+        }
+
+        .field-star:hover .field-tron,
+        .field-star.active .field-tron {
+            opacity: 1;
+        }
+
+        .field-star:hover .field-card,
+        .field-star.active .field-card {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Card placements per star */
+        .field-sjb .field-card {
+            left: 18px;
+            top: -44px;
+        }
+
+        .field-sjb .field-tron {
+            left: 6px;
+            top: -40px;
+        }
+
+        .field-sjeb .field-card {
+            left: -160px;
+            top: -44px;
+        }
+
+        .field-sjeb .field-tron {
+            left: -150px;
+            top: -40px;
+        }
+
+        .field-sgb .field-card {
+            left: -160px;
+            top: 14px;
+        }
+
+        .field-sgb .field-tron {
+            left: -150px;
+            top: 10px;
+        }
+
+        /* Gateway */
+        main.gateway-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 120px;
+            width: 90%;
+            max-width: 1400px;
+            margin: 220px auto auto;
+        }
+
+        .nav-wing {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 280px;
+        }
+
+        .wing-label {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--c-teal);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            opacity: 0.92;
+            transition: transform 0.35s ease, opacity 0.35s ease, color 0.35s ease, text-shadow 0.35s ease;
+            text-shadow: 0 0 5px rgba(145, 175, 179, 0.45), 0 0 10px rgba(145, 175, 179, 0.25);
+            display: inline-block;
+            will-change: transform;
+        }
+
+        .nav-wing:hover .wing-label,
+        .nav-wing:focus-within .wing-label {
+            opacity: 1;
+            color: #fff;
+            text-shadow: 0 0 8px var(--c-teal), 0 0 20px var(--c-teal);
+            transform: translateY(-1px);
+        }
+
+        .ethereal-btn {
+            position: relative;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            padding: 22px 45px;
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
+            font-size: 1.1rem;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: 0.6s cubic-bezier(0.2, 1, 0.3, 1);
+        }
+
+        .ethereal-btn::before {
+            content: "";
+            position: absolute;
+            top: -20%;
+            left: -40%;
+            width: 60%;
+            height: 140%;
+            background: linear-gradient(120deg, transparent 0%, rgba(255, 255, 255, 0.16) 45%, transparent 100%);
+            transform: rotate(12deg) translateX(-120%);
+            transition: transform 0.9s var(--ease);
+            pointer-events: none;
+        }
+
+        .ethereal-btn:hover::before {
+            transform: rotate(12deg) translateX(260%);
+        }
+
+        .explore-btn:hover {
+            border-color: var(--c-blue);
+            box-shadow: 0 0 40px rgba(99, 149, 238, 0.35);
+            color: var(--c-blue);
+        }
+
+        .consult-btn:hover {
+            border-color: var(--c-teal);
+            box-shadow: 0 0 40px rgba(145, 175, 179, 0.35);
+            color: var(--c-teal);
+        }
+
+        /* Orion */
+        .constellation {
+            position: relative;
+            width: 420px;
+            height: 560px;
+            transform: translate3d(var(--const-shift-x), var(--const-shift-y), 0) rotate(var(--const-rot)) scale(var(--const-scale));
+            transform-origin: center;
+            transition: transform 900ms var(--ease);
+            isolation: isolate;
+        }
+
+
+
+        /* Kill connector lines */
+        .orion-skeleton {
+            display: none !important;
+        }
+
+        .orion-star {
+            position: absolute;
+            width: var(--s, 7px);
+            height: var(--s, 7px);
+            border-radius: 50%;
+            background: var(--col, rgba(255, 255, 255, 0.95));
+            box-shadow: 0 0 12px rgba(255, 255, 255, 0.75), 0 0 22px rgba(145, 175, 179, 0.18), 0 0 32px rgba(99, 149, 238, 0.14);
+            animation: twinkle var(--dur, 4.2s) infinite ease-in-out;
+            z-index: 1;
+            mix-blend-mode: screen;
+        }
+
+        .orion-minor {
+            opacity: 0.62;
+            filter: saturate(0.95);
+        }
+
+        @keyframes twinkle {
+
+            0%,
+            100% {
+                opacity: 0.55;
+                transform: scale(0.92);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.08);
+            }
+        }
+
+        .superbright {
+            box-shadow: 0 0 16px rgba(255, 255, 255, 0.98),
+                0 0 34px rgba(255, 255, 255, 0.46),
+                0 0 58px rgba(99, 149, 238, 0.24);
+        }
+
+        .blue-star {
+            --col: rgba(160, 190, 245, 0.98);
+        }
+
+        .red-star {
+            --col: rgba(255, 170, 170, 0.92);
+        }
+
+        /* Tron nodes */
+        .belt-node {
+            position: absolute;
+            z-index: 50;
+        }
+
+        .belt-node a {
+            text-decoration: none;
+        }
+
+        .belt-star {
+            width: 8px;
+            height: 8px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.85);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .tron-path {
+            position: absolute;
+            pointer-events: none;
+            stroke: var(--c-teal);
+            stroke-width: 1;
+            fill: none;
+            stroke-dasharray: 200;
+            stroke-dashoffset: 200;
+            transition: stroke-dashoffset 0.6s ease;
+            filter: drop-shadow(0 0 5px var(--c-teal));
+        }
+
+        .tron-card {
+            position: absolute;
+            opacity: 0;
+            background: rgba(5, 5, 5, 0.9);
+            border: 1px solid var(--c-teal);
+            padding: 8px 15px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.6rem;
+            color: #fff;
+            letter-spacing: 2px;
+            white-space: nowrap;
+            pointer-events: none;
+            transition: opacity 0.3s ease 0.5s, transform 0.3s ease 0.5s;
+            backdrop-filter: blur(5px);
+        }
+
+        .belt-node:hover .tron-path {
+            stroke-dashoffset: 0;
+        }
+
+        .belt-node:hover .tron-card {
+            opacity: 1;
+            transform: translate(0, 0);
+        }
+
+        /* Belt positions */
+        .alnitak-node {
+            top: 330px;
+            left: 179px;
+        }
+
+        .alnitak-node .tron-card {
+            top: -72px;
+            left: -260px;
+            transform: translateX(20px);
+        }
+
+        .alnilam-node {
+            top: 320px;
+            left: 210px;
+        }
+
+        .alnilam-node .tron-card {
+            top: -67px;
+            left: 95px;
+            transform: translateX(-20px);
+        }
+
+        .mintaka-node {
+            top: 303px;
+            left: 234px;
+        }
+
+        .mintaka-node .tron-card {
+            top: 85px;
+            left: 5px;
+            transform: translateY(-10px);
+        }
+
+        /* Kavya */
+        .kavya-node {
+            top: 385px;
+            left: 214px;
+        }
+
+        .kavya-node::before {
+            content: "";
+            position: absolute;
+            top: -55px;
+            left: -55px;
+            width: 130px;
+            height: 130px;
+            background: radial-gradient(circle, var(--c-nebula) 0%, transparent 65%);
+            filter: blur(8px);
+            opacity: 0.40;
+            animation: nebulaBreath 10s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes nebulaBreath {
+
+            0%,
+            100% {
+                transform: scale(0.92);
+                opacity: 0.34;
+            }
+
+            50% {
+                transform: scale(1.06);
+                opacity: 0.52;
+            }
+        }
+
+        .kavya-node .sword-mid {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #fbc2eb;
+            box-shadow: 0 0 20px var(--c-nebula), 0 0 40px var(--c-nebula);
+            filter: blur(1px);
+        }
+
+        .kavya-node .tron-path {
+            stroke: #ff4d4d;
+            filter: drop-shadow(0 0 5px #ff4d4d);
+        }
+
+        .kavya-node .tron-card {
+            border-color: #ff4d4d;
+            top: 20px;
+            left: 80px;
+            transform: translateX(-10px);
+        }
+
+        /* Footer + poem */
+        .center-footer {
+            position: fixed;
+            bottom: calc(6vh + var(--pad-safe-bottom));
+            text-align: center;
+            width: 100%;
+            z-index: 20;
+        }
+
+        .main-title {
+            font-size: 1.1rem;
+            font-weight: 300;
+            letter-spacing: 12px;
+            text-transform: uppercase;
+            margin: 0;
+            opacity: 0.75;
+            padding-bottom: 18px;
+            font-family: 'Fira Code', monospace;
+            color: rgba(255, 255, 255, 0.35);
+        }
+
+        .poem-fragment {
+            font-size: 0.65rem;
+            color: #444;
+            letter-spacing: 3px;
+            font-style: italic;
+            cursor: pointer;
+            transition: 0.3s;
+            user-select: none;
+        }
+
+        .poem-fragment:hover {
+            color: var(--c-teal);
+        }
+
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(5, 5, 5, 0.97);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            backdrop-filter: blur(20px);
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: rgba(145, 175, 179, 0.02);
+            padding: 60px 40px;
+            border: 1px solid rgba(145, 175, 179, 0.15);
+            position: relative;
+            max-width: 550px;
+            width: min(550px, 92vw);
+            text-align: center;
+            box-shadow: 0 0 60px rgba(0, 0, 0, 1);
+            margin-bottom: var(--pad-safe-bottom);
+        }
+
+        .modal-bar {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--c-teal);
+            box-shadow: 0 0 20px var(--c-teal);
+        }
+
+        .modal-bar.top {
+            top: 0;
+        }
+
+        .modal-bar.bottom {
+            bottom: 0;
+        }
+
+        .modal-poem {
+            font-family: 'Merriweather', serif;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #e0e0e0;
+            font-weight: 300;
+        }
+
+        .modal-system {
+            margin-top: 50px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.55rem;
+            color: #444;
+            letter-spacing: 4px;
+        }
+
+        /* Cursor UI (desktop only) */
+        #cursor-ring {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--c-teal);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10000;
+            transition: width 0.3s, height 0.3s, border-color 0.3s, transform 0.1s ease-out;
+            mix-blend-mode: difference;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #cursor-dot {
+            width: 4px;
+            height: 4px;
+            background: var(--c-blue);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10001;
+            mix-blend-mode: difference;
+        }
+
+        .cursor-active #cursor-ring {
+            width: 60px;
+            height: 60px;
+            border-color: var(--c-blue);
+            border-width: 2px;
+        }
+
+        /* Secret: COMPASS SCAN mode */
+        body.compass-scan .field-tron,
+        body.compass-scan .field-card {
+            opacity: 1 !important;
+            transform: none !important;
+        }
+
+        body.compass-scan .field-dot {
+            box-shadow: 0 0 18px rgba(255, 255, 255, 0.95),
+                0 0 34px rgba(145, 175, 179, 0.35),
+                0 0 44px rgba(99, 149, 238, 0.28);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            body {
+                color: #eee;
+            }
+
+            .header-console {
+                position: relative;
+                top: 0;
+                left: 0;
+                transform: none;
+                margin: 20px auto 40px;
+                gap: 14px;
+            }
+
+            .console-logo {
+                width: 80vw !important;
+                max-width: 450px;
+                height: auto;
+                filter: saturate(1.1) brightness(1.1) !important;
+                opacity: 1 !important;
+            }
+
+            .console-text {
+                font-size: 0.7rem !important;
+                letter-spacing: 1px !important;
+                width: 85%;
+                white-space: normal !important;
+                line-height: 1.4;
+            }
+
+            main.gateway-container {
+                flex-direction: column;
+                gap: 50px;
+                margin-top: 20px;
+                width: 100%;
+            }
+
+            .constellation {
+                height: 480px;
+                margin: 0 auto;
+                --const-scale: 0.88;
+            }
+
+            .tron-path,
+            .tron-card,
+            .field-tron,
+            .field-card {
+                display: none !important;
+            }
+
+            .center-footer {
+                position: relative;
+                bottom: auto;
+                margin-top: 50px;
+            }
+
+            .main-title {
+                font-size: 0.9rem;
+                letter-spacing: 8px;
+                padding: 0 10px;
+            }
+
+            .poem-fragment {
+                font-size: 0.6rem;
+                max-width: 90%;
+                margin: 0 auto;
+                line-height: 1.6;
+            }
+
+            .wing-label {
+                font-size: 0.85rem !important;
+                letter-spacing: 3px !important;
+                opacity: 1 !important;
+                margin-bottom: 15px;
+                font-weight: 900;
+                text-shadow: 0 0 8px var(--c-teal);
+            }
+
+            #cursor-ring,
+            #cursor-dot {
+                display: none !important;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .orion-star,
+            .console-text::after,
+            body::before,
+            .kavya-node::before {
+                animation: none !important;
+            }
+
+            .console-logo,
+            .wing-label,
+            .ethereal-btn,
+            .constellation,
+            .chip {
+                transition: none !important;
+            }
+        }
+    </style>
+
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Outside The World",
+  "url": "https://outsidetheworld.com/",
+  "description": "A personal archive and professional research lab documenting 25 years of creative work and systems observation.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Outside The World New LLC",
+    "url": "https://outsidetheworld.com/",
+    "logo": "https://outsidetheworld.com/Images/Equal.svg",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Queen Creek",
+      "addressRegion": "AZ",
+      "postalCode": "85142",
+      "addressCountry": "US"
+    }
+  }
+}
+  </script>
+</head>
+
+<body>
+    <div id="cursor-ring"></div>
+    <div id="cursor-dot"></div>
+
+    <h1 class="sr-only">Outside The World</h1>
+
+    <!-- Children's stars -->
+    <div class="field-stars" aria-hidden="false">
+        <div class="field-star field-sjb" data-label="SJB 4/8/04" role="button" tabindex="0" aria-label="SJB 4/8/04">
+            <div class="field-dot" title="SJB 4/8/04"></div>
+            <svg class="field-tron" width="170" height="60">
+                <path d="M 10 45 L 70 45 L 70 12 L 160 12" stroke="rgba(145,175,179,0.9)" stroke-width="1" fill="none">
+                </path>
+            </svg>
+            <div class="field-card">SJB 4/8/04</div>
+        </div>
+
+        <div class="field-star field-sjeb" data-label="SJEB 7/4/08" role="button" tabindex="0" aria-label="SJEB 7/4/08">
+            <div class="field-dot" title="SJEB 7/4/08"></div>
+            <svg class="field-tron" width="170" height="60">
+                <path d="M 160 45 L 100 45 L 100 12 L 10 12" stroke="rgba(145,175,179,0.9)" stroke-width="1"
+                    fill="none"></path>
+            </svg>
+            <div class="field-card">SJEB 7/4/08</div>
+        </div>
+
+        <div class="field-star field-sgb" data-label="SGB 6/4/11" role="button" tabindex="0" aria-label="SGB 6/4/11">
+            <div class="field-dot" title="SGB 6/4/11"></div>
+            <svg class="field-tron" width="170" height="60">
+                <path d="M 160 16 L 90 16 L 90 48 L 10 48" stroke="rgba(145,175,179,0.9)" stroke-width="1" fill="none">
+                </path>
+            </svg>
+            <div class="field-card">SGB 6/4/11</div>
+        </div>
+    </div>
+
+    <div class="layer">
+        <header class="header-console" aria-label="Outside The World console">
+            <a href="index.html" aria-label="Home">
+                <img alt="Outside The World" class="console-logo" src="Images/Equal.svg" />
+            </a>
+
+            <div class="console-text" id="typewriter-target" aria-live="polite"></div>
+
+            <div class="console-controls" aria-label="Console controls">
+                <div class="chip" id="mood-chip" role="button" tabindex="0" aria-label="Change mood">
+                    MOOD: <strong id="mood-label">AUTO</strong>
+                </div>
+                <div class="chip" id="sound-chip" role="button" tabindex="0" aria-label="Toggle sound">
+                    SOUND: <strong id="sound-label">OFF</strong>
+                </div>
+            </div>
+        </header>
+
+        <canvas id="star-canvas" class="starfield" aria-hidden="true"></canvas>
+
+        <main class="gateway-container" aria-label="Site navigation gateway">
+            <div class="nav-wing">
+                <span class="wing-label">[The_Primary_Experience]</span>
+                <a class="ethereal-btn explore-btn" href="personal.html" aria-label="Enter main (Personal)">ENTER
+                    MAIN</a>
+            </div>
+
+            <div class="constellation" aria-label="Orion constellation">
+                <!-- Main bright extremities + shoulders -->
+                <div class="orion-star red-star superbright" style="left:140px; top:170px; --s:10px; --dur:3.3s;"
+                    title="Betelgeuse"></div>
+                <div class="orion-star superbright" style="left:305px; top:170px; --s:9px; --dur:3.8s;"
+                    title="Bellatrix"></div>
+
+                <div class="orion-star superbright" style="left:155px; top:535px; --s:10px; --dur:4.2s;" title="Saiph">
+                </div>
+                <div class="orion-star blue-star superbright" style="left:325px; top:535px; --s:12px; --dur:3.6s;"
+                    title="Rigel"></div>
+
+                <!-- Head -->
+                <div class="orion-star orion-minor" style="left:210px; top:80px; --s:7px; --dur:4.8s;" title="Meissa">
+                </div>
+
+                <!-- Left arm (club) -->
+                <div class="orion-star orion-minor" style="left:85px; top:110px; --s:6px; --dur:5.1s;"></div>
+                <div class="orion-star orion-minor" style="left:60px; top:55px; --s:6px; --dur:5.4s;"></div>
+                <div class="orion-star superbright" style="left:45px; top:25px; --s:8px; --dur:4.0s;" title="Club tip">
+                </div>
+
+                <!-- Right arm -->
+                <div class="orion-star orion-minor" style="left:345px; top:120px; --s:6px; --dur:5.2s;"></div>
+                <div class="orion-star orion-minor" style="left:380px; top:160px; --s:6px; --dur:5.0s;"></div>
+                <div class="orion-star superbright" style="left:400px; top:220px; --s:8px; --dur:4.3s;"
+                    title="Shield edge"></div>
+
+                <!-- Sword (aligned under the nebula, vertical) -->
+                <div class="orion-star orion-minor" style="left:214px; top:360px; --s:6px; --dur:5.2s;"></div>
+                <div class="orion-star orion-minor" style="left:214px; top:420px; --s:6px; --dur:5.0s;"></div>
+
+                <!-- Belt nodes -->
+                <div class="belt-node alnitak-node">
+                    <a href="personal.html" aria-label="Main interface">
+                        <div class="belt-star" title="Interface"></div>
+                        <svg class="tron-path" height="100" style="top:-80px; left:-120px;" width="150"
+                            aria-hidden="true">
+                            <path d="M 125 85 L 125 20 L 10 20"></path>
+                        </svg>
+                        <div class="tron-card">MAIN_INTERFACE</div>
+                    </a>
+                </div>
+
+                <div class="belt-node alnilam-node">
+                    <a href="resume.html" aria-label="Professional dossier">
+                        <div class="belt-star" title="Dossier"></div>
+                        <svg class="tron-path" height="100" style="top:-70px; left:5px;" width="100" aria-hidden="true">
+                            <path d="M 5 75 L 5 15 L 90 15"></path>
+                        </svg>
+                        <div class="tron-card">DOSSIER_ACCESS</div>
+                    </a>
+                </div>
+
+                <div class="belt-node mintaka-node">
+                    <a href="emmy.html" aria-label="Heart and soul">
+                        <div class="belt-star" title="Sanctuary"></div>
+                        <svg class="tron-path" height="100" style="top:5px; left:5px;" width="150" aria-hidden="true">
+                            <path d="M 5 5 L 80 5 L 80 80"></path>
+                        </svg>
+                        <div class="tron-card">HEART_AND_SOUL</div>
+                    </a>
+                </div>
+
+                <!-- Kavya -->
+                <div class="belt-node kavya-node">
+                    <a href="poetry.html" aria-label="Kavya archive (Poetry)">
+                        <div class="sword-mid" title="Kavya Archive"></div>
+                        <svg class="tron-path" height="100" style="top:-10px; left:10px;" width="100"
+                            aria-hidden="true">
+                            <path d="M 5 20 L 80 20 L 80 40"></path>
+                        </svg>
+                        <div class="tron-card">OTW_KAVYA</div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="nav-wing">
+                <span class="wing-label">[THE_OUTSIDE_VANTAGE]</span>
+                <a class="ethereal-btn consult-btn" href="professional.html"
+                    aria-label="Learn more (Professional)">LEARN MORE</a>
+            </div>
+        </main>
+
+        <div class="center-footer">
+            <h2 class="main-title" id="footer-title"></h2>
+            <div class="poem-fragment" id="poem-trigger" role="button" tabindex="0" aria-label="Open poem">
+                "perspective is my weakness... outside the world is new"
+            </div>
+        </div>
+
+        <div class="modal" id="poem-modal" role="dialog" aria-modal="true" aria-label="Poem modal">
+            <div class="modal-content" id="poem-content">
+                <div class="modal-bar top"></div>
+                <div class="modal-bar bottom"></div>
+
+                <div class="modal-poem">
+                    I dance along the path,<br />
+                    lonely emerald fields on either side.<br />
+                    I gaze into the distant canyon<br />
+                    and know that I cannot enter.<br /><br />
+                    Every star seems to smile down this evening;<br />
+                    each one shines its own way,<br />
+                    and the world is quiet.<br />
+                    It does not know I am here.<br /><br />
+                    The crisp air haunts me;<br />
+                    its aroma seems too familiar.<br />
+                    Yes, but under different circumstances<br />
+                    this would be true.<br /><br />
+                    There seems to be an end<br />
+                    as the mountain peak swallows up the sky.<br />
+                    <span
+                        style="color: var(--c-teal); font-weight: 700; text-shadow: 0 0 10px var(--c-teal); font-style: normal;">
+                        My perspective is my weakness;
+                    </span><br />
+                    <span
+                        style="color: #fff; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; font-size: 0.9rem; opacity: 0.9;">
+                        outside the world is new.
+                    </span>
+                </div>
+
+                <div class="modal-system">[ SYSTEM_DEACTIVATE ]</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        const EASTER = {
+            cometChance: 0.10,
+            maxCometsPerVisit: 2,
+            ripples: true,
+            satellites: true,
+            maxSatellites: 2,
+            satelliteEveryMsMin: 12000,
+            satelliteEveryMsMax: 24000
+        };
+
+        // Comets
+        let comets = [];
+        let cometSchedule = [];
+        let visitStart = performance.now();
+
+        // Ripples
+        let ripples = [];
+
+        // Satellites
+        let satellites = [];
+        let nextSatelliteAt = 0;
+
+        function dayKey() {
+            const d = new Date();
+            const y = d.getFullYear();
+            const m = String(d.getMonth() + 1).padStart(2, '0');
+            const dd = String(d.getDate()).padStart(2, '0');
+            return `${y}-${m}-${dd}`;
+        }
+
+        function xmur3(str) {
+            let h = 1779033703 ^ str.length;
+            for (let i = 0; i < str.length; i++) {
+                h = Math.imul(h ^ str.charCodeAt(i), 3432918353);
+                h = (h << 13) | (h >>> 19);
+            }
+            return function () {
+                h = Math.imul(h ^ (h >>> 16), 2246822507);
+                h = Math.imul(h ^ (h >>> 13), 3266489909);
+                return (h ^= h >>> 16) >>> 0;
+            };
+        }
+
+        function mulberry32(a) {
+            return function () {
+                let t = a += 0x6D2B79F5;
+                t = Math.imul(t ^ (t >>> 15), t | 1);
+                t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+                return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+            };
+        }
+
+        const seedFn = xmur3(`OTW:${dayKey()}`);
+        const rand = mulberry32(seedFn());
+
+        // Comets
+        function scheduleComets() {
+            cometSchedule = [];
+            comets = [];
+            if (reduceMotion) return;
+            if (Math.random() > EASTER.cometChance) return;
+
+            const count = 1 + (Math.random() < 0.35 ? 1 : 0);
+            const finalCount = Math.min(count, EASTER.maxCometsPerVisit);
+
+            for (let i = 0; i < finalCount; i++) {
+                cometSchedule.push(2500 + Math.random() * 32000);
+            }
+            cometSchedule.sort((a, b) => a - b);
+        }
+
+        function spawnComet() {
+            const fromLeft = Math.random() < 0.5;
+            const x = fromLeft ? -120 : (width + 120);
+            const y = Math.random() * (height * 0.55) + (height * 0.10);
+
+            const speed = 0.85 + Math.random() * 0.75;
+            const vx = (fromLeft ? 1 : -1) * speed;
+            const vy = (Math.random() * 0.35 + 0.05) * speed * (Math.random() < 0.5 ? 1 : -1);
+
+            const len = 220 + Math.random() * 180;
+            const life = 900 + Math.random() * 600;
+            const thickness = 1.2 + Math.random() * 1.6;
+
+            const mag = Math.hypot(vx, vy) || 1;
+            comets.push({ x, y, vx, vy, nx: vx / mag, ny: vy / mag, len, life, age: 0, thickness });
+        }
+
+        function updateComets(dt, nowMs) {
+            const t = nowMs - visitStart;
+            while (cometSchedule.length && t >= cometSchedule[0]) {
+                cometSchedule.shift();
+                spawnComet();
+            }
+            comets = comets.filter(c => {
+                c.age += dt;
+                c.x += c.vx * dt;
+                c.y += c.vy * dt;
+                return c.age < c.life;
+            });
+        }
+
+        function drawComets() {
+            for (const c of comets) {
+                const p = Math.max(0, Math.min(1, c.age / c.life));
+                const a = Math.sin(Math.PI * p);
+
+                const tx = c.x - c.nx * c.len;
+                const ty = c.y - c.ny * c.len;
+
+                const g = ctx.createLinearGradient(c.x, c.y, tx, ty);
+                g.addColorStop(0, `rgba(255,255,255,${0.85 * a})`);
+                g.addColorStop(0.35, `rgba(160,190,245,${0.35 * a})`);
+                g.addColorStop(1, `rgba(255,255,255,0)`);
+
+                ctx.save();
+                ctx.globalAlpha = 1;
+                ctx.strokeStyle = g;
+                ctx.lineWidth = c.thickness;
+                ctx.beginPath();
+                ctx.moveTo(c.x, c.y);
+                ctx.lineTo(tx, ty);
+                ctx.stroke();
+
+                ctx.fillStyle = `rgba(255,255,255,${0.7 * a})`;
+                ctx.beginPath();
+                ctx.arc(c.x, c.y, c.thickness * 1.8, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        // Ripples
+        function addRipple(clientX, clientY) {
+            if (!EASTER.ripples || reduceMotion) return;
+            ripples.push({ x: clientX, y: clientY, age: 0, life: 900 + Math.random() * 400 });
+        }
+
+        function updateRipples(dt) {
+            ripples = ripples.filter(r => {
+                r.age += dt;
+                return r.age < r.life;
+            });
+        }
+
+        function drawRipples() {
+            for (const r of ripples) {
+                const p = r.age / r.life;
+                const radius = 18 + p * 190;
+                const alpha = (1 - p) * 0.22;
+
+                ctx.save();
+                ctx.globalAlpha = alpha;
+                ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--c-teal').trim() || '#91AFB3';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.arc(r.x, r.y, radius, 0, Math.PI * 2);
+                ctx.stroke();
+
+                ctx.globalAlpha = alpha * 0.55;
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.arc(r.x, r.y, radius * 0.66, 0, Math.PI * 2);
+                ctx.stroke();
+                ctx.restore();
+            }
+        }
+
+        // Satellites
+        function scheduleNextSatellite(nowMs) {
+            const span = EASTER.satelliteEveryMsMax - EASTER.satelliteEveryMsMin;
+            nextSatelliteAt = nowMs + EASTER.satelliteEveryMsMin + Math.random() * Math.max(1, span);
+        }
+
+        function spawnSatellite() {
+            const fromLeft = Math.random() < 0.5;
+            const fromTop = Math.random() < 0.45;
+
+            const x = fromLeft ? -40 : (width + 40);
+            const y = fromTop ? (height * 0.12 + Math.random() * height * 0.35) : (height * 0.25 + Math.random() * height * 0.55);
+
+            const speed = 0.10 + Math.random() * 0.14;
+            const vx = (fromLeft ? 1 : -1) * speed;
+            const vy = (Math.random() * 0.05 - 0.025) * speed * 40;
+
+            satellites.push({
+                x, y, vx, vy,
+                age: 0,
+                life: 18000 + Math.random() * 14000,
+                blink: 0.002 + Math.random() * 0.004,
+                trail: 70 + Math.random() * 120
+            });
+        }
+
+        function updateSatellites(dt, nowMs) {
+            if (!EASTER.satellites || reduceMotion) return;
+
+            const isMobile = window.matchMedia('(max-width: 1024px)').matches;
+            const maxSat = isMobile ? 1 : EASTER.maxSatellites;
+
+            if (nowMs >= nextSatelliteAt && satellites.length < maxSat) {
+                if (Math.random() < 0.85) spawnSatellite();
+                scheduleNextSatellite(nowMs);
+            }
+
+            satellites = satellites.filter(s => {
+                s.age += dt;
+                s.x += s.vx * dt;
+                s.y += s.vy * dt;
+                return s.age < s.life;
+            });
+        }
+
+        function drawSatellites(nowMs) {
+            if (!EASTER.satellites || reduceMotion) return;
+
+            const teal = getComputedStyle(document.documentElement).getPropertyValue('--c-teal').trim() || '#91AFB3';
+            const blue = getComputedStyle(document.documentElement).getPropertyValue('--c-blue').trim() || '#6395EE';
+
+            for (const s of satellites) {
+                const pulse = 0.45 + 0.55 * (0.5 + 0.5 * Math.sin(nowMs * s.blink));
+                const a = 0.16 + 0.30 * pulse;
+
+                const tx = s.x - s.vx * s.trail;
+                const ty = s.y - s.vy * s.trail;
+
+                const g = ctx.createLinearGradient(s.x, s.y, tx, ty);
+                g.addColorStop(0, `rgba(255,255,255,${0.45 * a})`);
+                g.addColorStop(0.35, `rgba(145,175,179,${0.40 * a})`);
+                g.addColorStop(0.85, `rgba(99,149,238,${0.18 * a})`);
+                g.addColorStop(1, `rgba(255,255,255,0)`);
+
+                ctx.save();
+                ctx.globalAlpha = 1;
+                ctx.strokeStyle = g;
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(s.x, s.y);
+                ctx.lineTo(tx, ty);
+                ctx.stroke();
+
+                ctx.globalAlpha = 0.7 * a;
+                ctx.fillStyle = teal;
+                ctx.beginPath();
+                ctx.arc(s.x, s.y, 1.6, 0, Math.PI * 2);
+                ctx.fill();
+
+                ctx.globalAlpha = 0.35 * a;
+                ctx.fillStyle = blue;
+                ctx.beginPath();
+                ctx.arc(s.x, s.y, 4.2, 0, Math.PI * 2);
+                ctx.fill();
+
+                ctx.restore();
+            }
+        }
+
+        // Mood / drift / typewriter
+        const MOODS = ["dawn", "noon", "dusk", "midnight"];
+        const moodChip = document.getElementById('mood-chip');
+        const moodLabel = document.getElementById('mood-label');
+
+        function autoMoodFromTime() {
+            const h = new Date().getHours();
+            if (h >= 5 && h < 10) return "dawn";
+            if (h >= 10 && h < 16) return "noon";
+            if (h >= 16 && h < 21) return "dusk";
+            return "midnight";
+        }
+
+        function setMood(mode) {
+            const html = document.documentElement;
+            if (mode === "auto") {
+                html.dataset.mood = autoMoodFromTime();
+                moodLabel.textContent = "AUTO";
+            } else {
+                html.dataset.mood = mode;
+                moodLabel.textContent = mode.toUpperCase();
+            }
+        }
+
+        function getSavedMood() { return localStorage.getItem('otw_mood') || "auto"; }
+        function saveMood(v) { localStorage.setItem('otw_mood', v); }
+
+        function cycleMood() {
+            const currentSaved = getSavedMood();
+            if (currentSaved === "auto") saveMood("dawn");
+            else {
+                const idx = MOODS.indexOf(currentSaved);
+                saveMood(MOODS[(idx + 1) % MOODS.length]);
+            }
+            setMood(getSavedMood());
+            hudClick();
+        }
+
+        function setDailyDrift() {
+            const rot = (rand() * 3.0 - 1.5).toFixed(2);
+            const sc = (0.985 + rand() * 0.03).toFixed(3);
+            const sx = Math.round((rand() * 10 - 5));
+            const sy = Math.round((rand() * 10 - 5));
+
+            document.documentElement.style.setProperty('--const-rot', `${rot}deg`);
+            document.documentElement.style.setProperty('--const-scale', sc);
+            document.documentElement.style.setProperty('--const-shift-x', `${sx}px`);
+            document.documentElement.style.setProperty('--const-shift-y', `${sy}px`);
+        }
+
+        const consoleTarget = document.getElementById('typewriter-target');
+        const lines = [
+            "Click a button, star, or nebula to continue...",
+            "SYSTEM_READY // UPLINK_STABLE // SELECT_PATH",
+            "ARCHIVE_ONLINE // SIGNAL_LOCKED // ENTER",
+            "FIELD_NOTE: THE DESERT REMEMBERS",
+            "RESEARCH_LOG: VECTOR_INTEGRITY_CONFIRMED",
+            "NAV_CORE: PERSONAL / PROFESSIONAL / KAVYA",
+            "STARSCOPE_ACTIVE // PARALLAX_ENGAGED"
+        ];
+
+        const footerTitle = document.getElementById('footer-title');
+        const footerTitles = [
+            "OUTSIDE_THE_WORLD",
+            "DIGITAL_ARCHAEOLOGY",
+            "SYSTEMS & STORIES",
+            "THOUGHTS & CREATION",
+            "THE OUTSIDE VANTAGE"
+        ];
+
+        function pickDaily(arr) {
+            const i = Math.floor(rand() * arr.length);
+            return arr[i];
+        }
+
+        function typeLine(text) {
+            consoleTarget.textContent = "";
+            let i = 0;
+            function tick() {
+                if (i < text.length) {
+                    consoleTarget.textContent += text.charAt(i++);
+                    const speed = 24 + Math.random() * 65;
+                    setTimeout(tick, speed);
+                }
+            }
+            tick();
+        }
+
+        // Sound
+        const soundChip = document.getElementById('sound-chip');
+        const soundLabel = document.getElementById('sound-label');
+        let soundOn = localStorage.getItem('otw_sound') === 'on';
+        soundLabel.textContent = soundOn ? "ON" : "OFF";
+
+        let audioCtx = null;
+        function ensureAudio() {
+            if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+        }
+
+        function blip(freq = 620, dur = 0.045, gain = 0.06) {
+            if (!soundOn) return;
+            try {
+                ensureAudio();
+                const o = audioCtx.createOscillator();
+                const g = audioCtx.createGain();
+                o.type = 'sine';
+                o.frequency.value = freq;
+                g.gain.value = gain;
+                o.connect(g); g.connect(audioCtx.destination);
+                o.start(); o.stop(audioCtx.currentTime + dur);
+            } catch (_) { }
+        }
+
+        function hudClick() { blip(520, 0.04, 0.05); }
+        function hudConfirm() { blip(720, 0.06, 0.06); }
+
+        function toggleSound() {
+            soundOn = !soundOn;
+            localStorage.setItem('otw_sound', soundOn ? 'on' : 'off');
+            soundLabel.textContent = soundOn ? "ON" : "OFF";
+            hudConfirm();
+        }
+
+        function bindChip(el, fn) {
+            el.addEventListener('click', fn);
+            el.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    fn();
+                }
+            });
+        }
+
+        bindChip(moodChip, cycleMood);
+        bindChip(soundChip, toggleSound);
+
+        // Modal
+        const poemTrigger = document.getElementById('poem-trigger');
+        const poemModal = document.getElementById('poem-modal');
+        const poemContent = document.getElementById('poem-content');
+
+        function togglePoem(open) {
+            poemModal.style.display = open ? 'flex' : 'none';
+            if (open) hudConfirm(); else hudClick();
+        }
+
+        poemTrigger.addEventListener('click', () => togglePoem(true));
+        poemTrigger.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                togglePoem(true);
+            }
+        });
+
+        poemModal.addEventListener('click', () => togglePoem(false));
+        poemContent.addEventListener('click', (e) => e.stopPropagation());
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && poemModal.style.display === 'flex') togglePoem(false);
+        });
+
+        // Cursor (desktop)
+        const ring = document.getElementById('cursor-ring');
+        const dot = document.getElementById('cursor-dot');
+        document.addEventListener('mousemove', (e) => {
+            if (!ring || !dot) return;
+            dot.style.left = e.clientX - 2 + 'px';
+            dot.style.top = e.clientY - 2 + 'px';
+            ring.style.left = e.clientX - 20 + 'px';
+            ring.style.top = e.clientY - 20 + 'px';
+        });
+
+        const interactiveElements = document.querySelectorAll('a, .belt-star, .poem-fragment, .chip, .field-star');
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => document.body.classList.add('cursor-active'));
+            el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-active'));
+        });
+
+        document.querySelectorAll('a').forEach(a => {
+            a.addEventListener('mouseenter', () => hudClick());
+            a.addEventListener('click', () => hudConfirm());
+        });
+
+        document.addEventListener('pointerdown', (e) => addRipple(e.clientX, e.clientY), { passive: true });
+
+        // ✅ Child star toggle (FIXED): bind to the DOT (hover/click reliable)
+        const fieldStars = Array.from(document.querySelectorAll('.field-star'));
+        const fieldDots = Array.from(document.querySelectorAll('.field-dot'));
+
+        function clearFieldActives() {
+            fieldStars.forEach(s => s.classList.remove('active'));
+        }
+
+        function toggleStar(star, e) {
+            e.preventDefault?.();
+            e.stopPropagation?.();
+            e.stopImmediatePropagation?.();
+
+            const willActivate = !star.classList.contains('active');
+            clearFieldActives();
+            if (willActivate) star.classList.add('active');
+        }
+
+        // Make dots focusable + clickable without editing HTML
+        fieldDots.forEach(dotEl => {
+            const star = dotEl.closest('.field-star');
+            dotEl.setAttribute('role', 'button');
+            dotEl.setAttribute('tabindex', '0');
+
+            dotEl.addEventListener('pointerdown', (e) => toggleStar(star, e), { passive: false });
+            dotEl.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') toggleStar(star, e);
+            });
+        });
+
+        // Click anywhere else closes
+        document.addEventListener('pointerdown', () => clearFieldActives(), { passive: true });
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') clearFieldActives(); });
+
+        // ✅ Child star placement (FIXED): deterministic per day, avoids UI overlap
+        function paddedRect(el, pad = 24) {
+            if (!el) return null;
+            const r = el.getBoundingClientRect();
+            return { x: r.left - pad, y: r.top - pad, w: r.width + pad * 2, h: r.height + pad * 2 };
+        }
+
+        function inRect(rect, x, y) {
+            return rect && x >= rect.x && x <= rect.x + rect.w && y >= rect.y && y <= rect.y + rect.h;
+        }
+
+        function childPRNG(label) {
+            const sf = xmur3(`OTW_CHILD:${dayKey()}:${label}`);
+            return mulberry32(sf());
+        }
+
+        function positionChildStars() {
+            // Only meaningful on desktop; on mobile they’re still fine but less important
+            const header = document.querySelector('.header-console');
+            const gateway = document.querySelector('main.gateway-container');
+            const footer = document.querySelector('.center-footer');
+
+            const rects = [
+                paddedRect(header, 30),
+                paddedRect(gateway, 40),
+                paddedRect(footer, 30)
+            ].filter(Boolean);
+
+            const margin = 22;
+            const topGuard = margin;
+            const bottomGuard = margin;
+
+            const placed = [];
+
+            fieldStars.forEach(star => {
+                const label = star.getAttribute('data-label') || 'STAR';
+                const rnd = childPRNG(label);
+
+                let x = 80, y = 80;
+                let ok = false;
+
+                for (let i = 0; i < 120; i++) {
+                    x = margin + rnd() * (window.innerWidth - margin * 2);
+                    y = topGuard + rnd() * (window.innerHeight - topGuard - bottomGuard);
+
+                    // avoid UI blocks
+                    if (rects.some(r => inRect(r, x, y))) continue;
+
+                    // avoid being too close to each other
+                    const tooClose = placed.some(p => {
+                        const dx = p.x - x;
+                        const dy = p.y - y;
+                        return (dx * dx + dy * dy) < (160 * 160);
+                    });
+                    if (tooClose) continue;
+
+                    ok = true;
+                    break;
+                }
+
+                if (!ok) {
+                    // fallback: corners (still avoids UI most of the time)
+                    const corners = [
+                        { x: margin + 40, y: window.innerHeight * 0.68 },
+                        { x: window.innerWidth - margin - 40, y: window.innerHeight * 0.30 },
+                        { x: window.innerWidth * 0.72, y: window.innerHeight - margin - 60 }
+                    ];
+                    const pick = corners[Math.floor(rnd() * corners.length)];
+                    x = pick.x; y = pick.y;
+                }
+
+                star.style.left = `${x}px`;
+                star.style.top = `${y}px`;
+                placed.push({ x, y });
+            });
+        }
+
+        // Starfield canvas
+        const canvas = document.getElementById('star-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let width = 0, height = 0;
+        let stars = [];
+        let targetX = 0, targetY = 0;
+        let currentX = 0, currentY = 0;
+
+        function resize() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+
+            const dpr = Math.max(1, window.devicePixelRatio || 1);
+            canvas.width = Math.floor(width * dpr);
+            canvas.height = Math.floor(height * dpr);
+            canvas.style.width = width + 'px';
+            canvas.style.height = height + 'px';
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+            initStars();
+
+            // Re-position child stars after layout settles
+            requestAnimationFrame(positionChildStars);
+
+            if (reduceMotion) drawStatic();
+        }
+
+        function initStars() {
+            const isMobile = window.matchMedia('(max-width: 1024px)').matches;
+            const count = reduceMotion ? 120 : (isMobile ? 240 : 420); // slightly less busy on desktop
+
+            stars = [];
+            for (let i = 0; i < count; i++) {
+                const z = 0.15 + Math.random() * 0.95;
+                stars.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    z,
+                    r: (0.4 + Math.random() * 1.6) * (0.45 + z),
+                    o: 0.15 + Math.random() * 0.85,
+                    tw: (0.00015 + Math.random() * 0.00055) * (0.55 + z),
+                    c: pickStarColor(),
+                    mask: Math.random() // stable per load
+                });
+            }
+        }
+
+        function pickStarColor() {
+            const r = Math.random();
+            if (r > 0.92) return getComputedStyle(document.documentElement).getPropertyValue('--c-blue').trim() || '#6395EE';
+            if (r > 0.84) return getComputedStyle(document.documentElement).getPropertyValue('--c-teal').trim() || '#91AFB3';
+            return '#ffffff';
+        }
+
+        function onPointerMove(e) {
+            const x = e.clientX ?? (e.touches && e.touches[0] && e.touches[0].clientX) ?? width / 2;
+            const y = e.clientY ?? (e.touches && e.touches[0] && e.touches[0].clientY) ?? height / 2;
+            targetX = (x - width / 2) * 0.012;
+            targetY = (y - height / 2) * 0.012;
+        }
+
+        document.addEventListener('mousemove', onPointerMove, { passive: true });
+        document.addEventListener('touchmove', onPointerMove, { passive: true });
+
+        let t0 = performance.now();
+        function drawFrame(t) {
+            const dt = Math.min(40, t - t0);
+            t0 = t;
+
+            updateComets(dt, t);
+            updateRipples(dt);
+            updateSatellites(dt, t);
+
+            const idle = Math.sin(t * 0.00012) * 0.9;
+            const idle2 = Math.cos(t * 0.00010) * 0.8;
+
+            currentX += (targetX + idle - currentX) * 0.045;
+            currentY += (targetY + idle2 - currentY) * 0.045;
+
+            ctx.clearRect(0, 0, width, height);
+
+            const centerX = width / 2;
+            const centerY = height / 2;
+
+            // Stronger quiet-zone so Orion reads
+            const quietRadius = 520;        // fewer stars inside
+            const shroudRadius = 440;       // darker inside
+
+            for (const s of stars) {
+                s.o += s.tw * dt;
+                if (s.o > 1 || s.o < 0.1) s.tw = -s.tw;
+
+                const px = (currentX * s.z);
+                const py = (currentY * s.z);
+
+                const dx = (s.x + px) - centerX;
+                const dy = (s.y + py) - centerY;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+
+                // Quiet zone: drop a chunk of stars near the center (stable per load)
+                if (dist < quietRadius && s.mask < 0.58) continue;
+
+                // Stronger shroud inside the radius
+                let shroudAlpha = 1.0;
+                if (dist < shroudRadius) shroudAlpha = 0.08 + (dist / shroudRadius) * 0.92;
+
+                ctx.globalAlpha = Math.max(0, Math.min(1, s.o * shroudAlpha));
+                ctx.fillStyle = s.c;
+
+                ctx.beginPath();
+                ctx.arc(s.x + px, s.y + py, s.r, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            drawSatellites(t);
+            drawComets();
+            drawRipples();
+
+            requestAnimationFrame(drawFrame);
+        }
+
+        function drawStatic() {
+            ctx.clearRect(0, 0, width, height);
+            for (const s of stars) {
+                ctx.globalAlpha = 0.6;
+                ctx.fillStyle = s.c;
+                ctx.beginPath();
+                ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+                ctx.fill();
+            }
+            ctx.globalAlpha = 1;
+        }
+
+        // Init
+        function init() {
+            const savedMood = getSavedMood();
+            setMood(savedMood);
+            setInterval(() => { if (getSavedMood() === "auto") setMood("auto"); }, 10 * 60 * 1000);
+
+            setDailyDrift();
+            footerTitle.textContent = pickDaily(footerTitles);
+            typeLine(pickDaily(lines));
+
+            window.addEventListener('resize', resize, { passive: true });
+            resize();
+
+            scheduleComets();
+            scheduleNextSatellite(performance.now());
+
+            if (!reduceMotion) requestAnimationFrame(drawFrame);
+        }
+
+        // Secret: press "C" to momentarily highlight compass stars
+        document.addEventListener('keydown', (e) => {
+            if (e.key.toLowerCase() !== 'c') return;
+            document.body.classList.add('compass-scan');
+            setTimeout(() => document.body.classList.remove('compass-scan'), 2200);
+        });
+
+        init();
+    </script>
+</body>
+
+</html>

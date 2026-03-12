@@ -14,7 +14,7 @@
 
     <title>Outside The World</title>
     <meta name="description"
-        content="Outside The World is a personal archive and professional body of work documenting 25 years of creative work, systems observation, and digital archaeology—based in Queen Creek, Arizona." />
+        content="Outside The World is a personal archive and professional body of work documenting 25 years of creative work, systems observation, and digital archaeology, based in Queen Creek, Arizona." />
     <link rel="canonical" href="https://outsidetheworld.com/" />
 
     <link href="favicon.svg" rel="icon" type="image/svg+xml" />
@@ -24,7 +24,7 @@
     <meta property="og:locale" content="en_US" />
     <meta property="og:title" content="Outside The World" />
     <meta property="og:description"
-        content="A personal archive and professional body of work documenting 25 years of creative work and systems observation—based in Queen Creek, Arizona." />
+        content="A personal archive and professional body of work documenting 25 years of creative work and systems observation, based in Queen Creek, Arizona." />
     <meta property="og:image" content="https://outsidetheworld.com/Images/index_preview.jpg" />
     <meta property="og:image:secure_url" content="https://outsidetheworld.com/Images/index_preview.jpg" />
     <meta property="og:image:type" content="image/jpeg" />
@@ -35,13 +35,13 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Outside The World" />
     <meta name="twitter:description"
-        content="A personal archive and professional body of work documenting 25 years of creative work and systems observation—based in Queen Creek, Arizona." />
+        content="A personal archive and professional body of work documenting 25 years of creative work and systems observation, based in Queen Creek, Arizona." />
     <meta name="twitter:image" content="https://outsidetheworld.com/Images/index_preview.jpg" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Fira+Code:wght@400;500;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
         rel="stylesheet" />
 
     <link rel="preload" as="image" href="Images/Equal.svg" type="image/svg+xml" />
@@ -57,19 +57,29 @@
 
     <style>
         :root {
-            --bg: #0a0a0a;
+            --bg: #090a0d;
+            --bg-deep: #050608;
             --surface: rgba(255, 255, 255, 0.045);
-            --surface-strong: rgba(255, 255, 255, 0.065);
-            --border: rgba(255, 255, 255, 0.10);
-            --text: #ffffff;
-            --text-soft: rgba(255, 255, 255, 0.72);
-            --text-faint: rgba(255, 255, 255, 0.46);
-            --brand-blue: var(--brand-blue, #6395EE);
-            --brand-light-blue: var(--brand-light-blue, #A0BEF5);
-            --brand-teal: var(--brand-teal, #91AFB3);
+            --surface-strong: rgba(255, 255, 255, 0.07);
+            --surface-soft: rgba(255, 255, 255, 0.028);
+            --border: rgba(255, 255, 255, 0.11);
+            --border-strong: rgba(255, 255, 255, 0.18);
+            --text: #f5f7fb;
+            --text-soft: rgba(245, 247, 251, 0.76);
+            --text-faint: rgba(245, 247, 251, 0.48);
+            --blue: #77a3ff;
+            --blue-soft: rgba(119, 163, 255, 0.18);
+            --teal: #9ec5c1;
+            --teal-soft: rgba(158, 197, 193, 0.16);
+            --gold: #d9c08c;
+            --gold-soft: rgba(217, 192, 140, 0.14);
+            --amethyst: #9b59b6;
+            --shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+            --radius-xl: 32px;
+            --radius-lg: 24px;
+            --radius-md: 18px;
+            --max-w: 1180px;
             --ease: cubic-bezier(0.23, 1, 0.32, 1);
-            --radius: 24px;
-            --max-w: 1160px;
             --safe-top: env(safe-area-inset-top);
             --safe-bottom: env(safe-area-inset-bottom);
             --safe-left: env(safe-area-inset-left);
@@ -93,16 +103,16 @@
             margin: 0;
             min-height: 100vh;
             color: var(--text);
-            font-family: 'Inter', sans-serif;
+            font-family: 'IBM Plex Sans', sans-serif;
             padding-top: var(--safe-top);
             padding-bottom: var(--safe-bottom);
             padding-left: var(--safe-left);
             padding-right: var(--safe-right);
             background:
-                radial-gradient(900px 600px at 15% 10%, rgba(99, 149, 238, 0.08), transparent 55%),
-                radial-gradient(900px 600px at 85% 12%, rgba(145, 175, 179, 0.07), transparent 55%),
-                radial-gradient(1000px 700px at 50% 88%, rgba(99, 149, 238, 0.05), transparent 62%),
-                radial-gradient(circle at center, #0a0a0a 0%, var(--bg) 100%);
+                radial-gradient(760px 500px at 12% 12%, rgba(119, 163, 255, 0.12), transparent 60%),
+                radial-gradient(720px 480px at 86% 14%, rgba(158, 197, 193, 0.11), transparent 58%),
+                radial-gradient(840px 560px at 52% 88%, rgba(217, 192, 140, 0.09), transparent 62%),
+                linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 100%);
         }
 
         body::before,
@@ -116,16 +126,53 @@
 
         body::before {
             background:
-                linear-gradient(to right, rgba(255, 255, 255, 0.022) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
-            background-size: 72px 72px;
-            mask-image: radial-gradient(circle at 50% 18%, black 0%, transparent 62%);
-            opacity: 0.10;
+                linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.016) 1px, transparent 1px);
+            background-size: 68px 68px;
+            mask-image: radial-gradient(circle at 50% 18%, black 0%, transparent 70%);
+            opacity: 0.22;
+            animation: drift 26s linear infinite;
         }
 
         body::after {
-            background: radial-gradient(circle at 50% 50%, rgba(10, 10, 10, 0) 18%, rgba(0, 0, 0, 0.62) 100%);
-            opacity: 0.8;
+            background:
+                radial-gradient(circle at center, rgba(0, 0, 0, 0) 15%, rgba(0, 0, 0, 0.62) 100%),
+                linear-gradient(180deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.22));
+        }
+
+        @keyframes drift {
+            from {
+                transform: translate3d(0, 0, 0);
+            }
+
+            to {
+                transform: translate3d(-68px, 34px, 0);
+            }
+        }
+
+        @keyframes revealUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulseLine {
+            0%,
+            100% {
+                opacity: 0.45;
+                transform: scaleX(0.94);
+            }
+
+            50% {
+                opacity: 0.85;
+                transform: scaleX(1);
+            }
         }
 
         .sr-only {
@@ -146,17 +193,10 @@
             width: 100%;
         }
 
-        .site-header {
-            width: 100%;
-            padding: 18px 18px 0;
-        }
-
-        .site-header-inner {
+        .frame {
             max-width: var(--max-w);
             margin: 0 auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            padding: 20px 18px 56px;
         }
 
         .brand {
@@ -164,147 +204,367 @@
             align-items: center;
             justify-content: center;
             text-decoration: none;
-            width: 100%;
+            position: relative;
+            z-index: 1;
         }
 
         .brand img {
-            width: min(58vw, 300px);
+            width: min(56vw, 250px);
             height: auto;
             display: block;
-            filter: saturate(1.04) brightness(1.03) drop-shadow(0 0 14px rgba(99, 149, 238, 0.10));
+            filter: saturate(1.05) brightness(1.04) drop-shadow(0 0 18px rgba(119, 163, 255, 0.14));
         }
 
-        .main {
-            max-width: var(--max-w);
-            margin: 0 auto;
-            padding: 4px 18px 64px;
+        .hero-panel {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xl);
+            background:
+                linear-gradient(180deg, rgba(255, 255, 255, 0.055) 0%, rgba(255, 255, 255, 0.028) 100%);
+            box-shadow: var(--shadow);
+            padding: 28px 22px 24px;
+            backdrop-filter: blur(8px);
+            animation: revealUp 0.85s 0.12s both;
         }
 
-        .hero {
-            padding: 10px 0 8px;
-            text-align: center;
+        .hero-panel::before {
+            content: "";
+            position: absolute;
+            inset: -10% auto auto -6%;
+            width: 280px;
+            height: 280px;
+            background: radial-gradient(circle, var(--blue-soft) 0%, transparent 72%);
+            pointer-events: none;
         }
 
-        .hero h2 {
+        .hero-panel::after {
+            content: "";
+            position: absolute;
+            right: -8%;
+            bottom: -18%;
+            width: 260px;
+            height: 260px;
+            background: radial-gradient(circle, var(--gold-soft) 0%, transparent 74%);
+            pointer-events: none;
+        }
+
+        .hero-grid {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            gap: 28px;
+        }
+
+        .hero-mark {
+            display: flex;
+            justify-content: center;
+            margin: -2px 0 8px;
+        }
+
+        .hero-copy {
+            max-width: 44rem;
+        }
+
+        .hero-side {
+            display: grid;
+            gap: 22px;
+            align-content: start;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 18px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.76rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--text-faint);
+        }
+
+        .eyebrow::before {
+            content: "";
+            width: 56px;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(119, 163, 255, 0.1), rgba(119, 163, 255, 0.9));
+            animation: pulseLine 6s ease-in-out infinite;
+        }
+
+        .hero-title {
             margin: 0;
-            font-size: clamp(1.85rem, 6.4vw, 3.15rem);
-            line-height: 0.98;
-            letter-spacing: -0.04em;
-            font-weight: 900;
+            font-family: 'IBM Plex Serif', serif;
+            font-size: clamp(2.8rem, 8.7vw, 5.8rem);
+            line-height: 0.94;
+            letter-spacing: -0.05em;
+            font-weight: 600;
+            text-wrap: balance;
         }
 
-        .hero h2 .line {
+        .hero-title .accent {
+            color: var(--amethyst);
+            text-shadow: 0 0 22px rgba(155, 89, 182, 0.16);
+        }
+
+        .hero-dek {
+            margin: 20px 0 0;
+            max-width: 38rem;
+            font-size: 1rem;
+            line-height: 1.85;
+            color: var(--text-soft);
+        }
+
+        .hero-dek strong {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .hero-meta {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+        }
+
+        .meta-chip {
+            padding: 14px 14px 15px;
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.03);
+            min-height: 148px;
+        }
+
+        .meta-label {
             display: block;
+            margin-bottom: 6px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.68rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--text-faint);
+        }
+
+        .meta-value {
+            display: block;
+            font-size: 0.98rem;
+            line-height: 1.45;
+            color: var(--text-soft);
+        }
+
+        .split-note {
+            margin: 18px auto 0;
+            max-width: 44rem;
+            padding: 0 8px;
+            text-align: center;
+            font-size: 0.98rem;
+            line-height: 1.8;
+            color: var(--text-soft);
+            animation: revealUp 0.85s 0.2s both;
+        }
+
+        .split-note strong {
+            color: var(--text);
+            font-weight: 600;
         }
 
         .route-grid {
             display: grid;
-            grid-template-columns: 1fr;
             gap: 18px;
-            margin-top: 18px;
+            margin-top: 28px;
         }
 
         .route-card {
             position: relative;
             overflow: hidden;
-            min-height: 280px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding: 24px 22px;
-            border-radius: var(--radius);
+            display: grid;
+            gap: 28px;
+            min-height: 320px;
+            padding: 24px 22px 22px;
+            border-radius: var(--radius-lg);
             border: 1px solid var(--border);
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.055) 0%, rgba(255, 255, 255, 0.025) 100%);
-            box-shadow: 0 12px 42px rgba(0, 0, 0, 0.18);
+            background:
+                linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.025) 100%);
+            box-shadow: 0 18px 44px rgba(0, 0, 0, 0.24);
             text-decoration: none;
             color: inherit;
             transition:
-                transform 0.28s var(--ease),
-                border-color 0.28s var(--ease),
-                box-shadow 0.28s var(--ease),
-                background 0.28s var(--ease);
+                transform 0.3s var(--ease),
+                border-color 0.3s var(--ease),
+                box-shadow 0.3s var(--ease),
+                background 0.3s var(--ease);
+            animation: revealUp 0.9s both;
         }
 
+        .route-card.personal {
+            animation-delay: 0.26s;
+        }
+
+        .route-card.professional {
+            animation-delay: 0.34s;
+        }
+
+        .route-card::before,
         .route-card::after {
             content: "";
             position: absolute;
-            inset: 0;
             pointer-events: none;
+            transition: transform 0.3s var(--ease), opacity 0.3s var(--ease);
+        }
+
+        .route-card::before {
+            inset: 0;
             opacity: 0.95;
-            transition: opacity 0.28s var(--ease);
+        }
+
+        .route-card::after {
+            width: 190px;
+            height: 190px;
+            border-radius: 50%;
+            filter: blur(6px);
+            opacity: 0.7;
+        }
+
+        .route-card.personal::before {
+            background:
+                linear-gradient(140deg, rgba(119, 163, 255, 0.12), transparent 36%),
+                radial-gradient(420px 240px at 14% 18%, rgba(119, 163, 255, 0.16), transparent 62%);
         }
 
         .route-card.personal::after {
+            top: -36px;
+            right: -18px;
+            background: radial-gradient(circle, rgba(119, 163, 255, 0.18) 0%, transparent 72%);
+        }
+
+        .route-card.professional::before {
             background:
-                radial-gradient(540px 240px at 18% 12%, rgba(99, 149, 238, 0.12), transparent 62%),
-                radial-gradient(180px 180px at 88% 82%, rgba(255, 255, 255, 0.04), transparent 70%);
+                linear-gradient(220deg, rgba(158, 197, 193, 0.11), transparent 34%),
+                radial-gradient(420px 240px at 84% 20%, rgba(158, 197, 193, 0.15), transparent 62%);
         }
 
         .route-card.professional::after {
-            background:
-                radial-gradient(540px 240px at 82% 12%, rgba(145, 175, 179, 0.12), transparent 62%),
-                radial-gradient(180px 180px at 12% 82%, rgba(255, 255, 255, 0.04), transparent 70%);
+            bottom: -42px;
+            left: -18px;
+            background: radial-gradient(circle, rgba(158, 197, 193, 0.16) 0%, transparent 72%);
         }
 
         .route-card:hover,
         .route-card:focus-visible {
-            transform: translateY(-3px);
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.068) 0%, rgba(255, 255, 255, 0.032) 100%);
-            box-shadow: 0 18px 48px rgba(0, 0, 0, 0.26);
+            transform: translateY(-5px);
+            background:
+                linear-gradient(180deg, rgba(255, 255, 255, 0.072) 0%, rgba(255, 255, 255, 0.032) 100%);
+            box-shadow: 0 24px 58px rgba(0, 0, 0, 0.34);
+        }
+
+        .route-card:hover::after,
+        .route-card:focus-visible::after {
+            transform: scale(1.08);
+            opacity: 0.94;
         }
 
         .route-card.personal:hover,
         .route-card.personal:focus-visible {
-            border-color: rgba(99, 149, 238, 0.42);
-            box-shadow:
-                inset 0 0 0 1px rgba(99, 149, 238, 0.08),
-                0 18px 48px rgba(0, 0, 0, 0.26),
-                0 0 24px rgba(99, 149, 238, 0.08);
+            border-color: rgba(119, 163, 255, 0.42);
         }
 
         .route-card.professional:hover,
         .route-card.professional:focus-visible {
-            border-color: rgba(145, 175, 179, 0.42);
-            box-shadow:
-                inset 0 0 0 1px rgba(145, 175, 179, 0.08),
-                0 18px 48px rgba(0, 0, 0, 0.26),
-                0 0 24px rgba(145, 175, 179, 0.08);
+            border-color: rgba(158, 197, 193, 0.4);
         }
 
-        .route-meta,
-        .route-action {
+        .route-head,
+        .route-body,
+        .route-footer {
             position: relative;
-            z-index: 2;
+            z-index: 1;
+        }
+
+        .route-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 16px;
         }
 
         .route-label {
-            display: inline-block;
-            margin-bottom: 16px;
-            font-family: 'Fira Code', monospace;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'IBM Plex Mono', monospace;
             font-size: 0.72rem;
             letter-spacing: 0.14em;
             text-transform: uppercase;
             color: var(--text-faint);
         }
 
-        .route-card h3 {
+        .route-index {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.78rem;
+            color: var(--text-faint);
+        }
+
+        .route-body h3 {
             margin: 0 0 12px;
-            font-size: clamp(1.6rem, 5vw, 2.45rem);
-            line-height: 1.02;
-            letter-spacing: -0.03em;
-            font-weight: 900;
+            font-family: 'IBM Plex Serif', serif;
+            font-size: clamp(2.1rem, 6.1vw, 3.2rem);
+            line-height: 0.95;
+            letter-spacing: -0.04em;
+            font-weight: 600;
         }
 
-        .route-card p {
+        .route-body p {
             margin: 0;
-            max-width: 34ch;
+            max-width: 32ch;
             color: var(--text-soft);
+            font-size: 1rem;
             line-height: 1.8;
-            font-size: 0.98rem;
         }
 
-        .route-action {
-            margin-top: 24px;
+        .route-signals {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        .signal-pill {
+            display: inline-flex;
+            align-items: center;
+            min-height: 34px;
+            padding: 0 12px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.035);
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.72rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--text-soft);
+        }
+
+        .route-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 16px;
+        }
+
+        .route-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .mini-link {
+            display: inline-flex;
+            align-items: center;
+            min-height: 32px;
+            padding: 0 11px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.03);
+            font-size: 0.78rem;
+            color: var(--text-soft);
         }
 
         .route-btn {
@@ -314,139 +574,234 @@
             min-height: 50px;
             padding: 0 18px;
             border-radius: 999px;
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            background: rgba(255, 255, 255, 0.04);
-            color: #fff;
-            font-weight: 800;
+            border: 1px solid var(--border-strong);
+            background: rgba(255, 255, 255, 0.05);
+            font-family: 'IBM Plex Mono', monospace;
             font-size: 0.78rem;
+            font-weight: 600;
             letter-spacing: 0.12em;
             text-transform: uppercase;
             transition:
-                transform 0.28s var(--ease),
-                box-shadow 0.28s var(--ease),
-                border-color 0.28s var(--ease),
-                color 0.28s var(--ease),
-                background 0.28s var(--ease);
+                transform 0.3s var(--ease),
+                border-color 0.3s var(--ease),
+                background 0.3s var(--ease),
+                color 0.3s var(--ease),
+                box-shadow 0.3s var(--ease);
         }
 
         .route-card:hover .route-btn,
         .route-card:focus-visible .route-btn {
             transform: translateY(-1px);
-            background: rgba(255, 255, 255, 0.06);
         }
 
         .route-card.personal:hover .route-btn,
         .route-card.personal:focus-visible .route-btn {
-            border-color: var(--brand-blue);
-            color: var(--brand-blue);
-            box-shadow: 0 0 20px rgba(99, 149, 238, 0.10);
+            color: var(--blue);
+            border-color: rgba(119, 163, 255, 0.62);
+            box-shadow: 0 0 22px rgba(119, 163, 255, 0.14);
         }
 
         .route-card.professional:hover .route-btn,
         .route-card.professional:focus-visible .route-btn {
-            border-color: var(--brand-teal);
-            color: var(--brand-teal);
-            box-shadow: 0 0 20px rgba(145, 175, 179, 0.10);
+            color: var(--teal);
+            border-color: rgba(158, 197, 193, 0.58);
+            box-shadow: 0 0 22px rgba(158, 197, 193, 0.14);
         }
 
-        .support-copy {
-            margin: 18px auto 0;
-            color: var(--text-soft);
-            font-size: 0.98rem;
-            line-height: 1.9;
-            max-width: 46rem;
+        .support-band {
+            display: grid;
+            gap: 16px;
+            margin-top: 22px;
+            padding: 18px 18px 0;
+            animation: revealUp 0.95s 0.42s both;
+        }
+
+        .support-quote {
+            margin: 0;
+            font-family: 'IBM Plex Serif', serif;
+            font-size: clamp(1.18rem, 3.2vw, 1.7rem);
+            line-height: 1.5;
+            color: rgba(245, 247, 251, 0.84);
             text-align: center;
+            text-wrap: balance;
         }
 
-        .support-copy strong {
-            color: #fff;
-            font-weight: 700;
+        .secondary-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .secondary-nav a {
+            display: inline-flex;
+            align-items: center;
+            min-height: 40px;
+            padding: 0 14px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text-soft);
+            text-decoration: none;
+            font-size: 0.84rem;
+            transition: border-color 0.28s var(--ease), color 0.28s var(--ease), transform 0.28s var(--ease);
+        }
+
+        .secondary-nav a:hover,
+        .secondary-nav a:focus-visible {
+            transform: translateY(-1px);
+            color: var(--text);
+            border-color: rgba(255, 255, 255, 0.18);
         }
 
         .site-footer {
-            max-width: var(--max-w);
-            margin: 44px auto 0;
-            padding: 22px 18px 28px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 34px;
+            padding: 22px 0 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
             text-align: center;
-            position: relative;
-            z-index: 2;
+            animation: revealUp 1s 0.5s both;
         }
 
         .legal {
             margin: 0;
             font-size: 0.76rem;
             line-height: 1.8;
-            color: rgba(255, 255, 255, 0.34);
-            letter-spacing: 0.04em;
+            letter-spacing: 0.05em;
+            color: rgba(245, 247, 251, 0.36);
+        }
+
+        a {
+            color: inherit;
         }
 
         a:focus-visible {
-            outline: 2px solid var(--brand-light-blue);
-            outline-offset: 3px;
+            outline: 2px solid rgba(119, 163, 255, 0.8);
+            outline-offset: 4px;
         }
 
         @media (min-width: 900px) {
-            .site-header {
-                padding: 24px 24px 0;
+            .frame {
+                padding: 24px 24px 72px;
             }
 
-            .site-header-inner {
-                justify-content: flex-start;
+            .hero-panel {
+                padding: 36px 36px 34px;
             }
 
-            .brand {
-                justify-content: flex-start;
-                width: auto;
+            .hero-grid {
+                grid-template-columns: minmax(0, 1.28fr) minmax(260px, 0.72fr);
+                align-items: start;
+                gap: 34px;
+            }
+
+            .hero-mark {
+                justify-content: flex-end;
+                align-items: flex-start;
+                margin: 0;
+                padding-right: 2px;
             }
 
             .brand img {
-                width: clamp(180px, 20vw, 250px);
+                width: clamp(270px, 25vw, 380px);
             }
 
-            .main {
-                padding: 0 24px 76px;
-            }
-
-            .hero {
-                padding-top: 2px;
-                text-align: center;
-            }
-
-            .hero h2 {
-                font-size: clamp(2.1rem, 4.2vw, 3.4rem);
+            .hero-meta {
+                margin-top: 84px;
             }
 
             .route-grid {
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns: 1.08fr 0.92fr;
+                align-items: stretch;
                 gap: 22px;
-                margin-top: 18px;
             }
 
             .route-card {
-                min-height: 340px;
-                padding: 30px 28px;
+                min-height: 400px;
+                padding: 30px 28px 26px;
             }
 
-            .support-copy {
-                margin-top: 20px;
+            .route-card.personal {
+                transform: translateY(8px);
             }
 
-            .site-footer {
-                margin-top: 56px;
-                padding-left: 24px;
-                padding-right: 24px;
+            .route-card.professional {
+                transform: translateY(-8px);
+            }
+
+            .route-card.personal:hover,
+            .route-card.personal:focus-visible {
+                transform: translateY(2px);
+            }
+
+            .route-card.professional:hover,
+            .route-card.professional:focus-visible {
+                transform: translateY(-13px);
+            }
+
+            .support-band {
+                padding: 22px 54px 0;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .frame {
+                padding-top: 14px;
+            }
+
+            .hero-grid {
+                gap: 20px;
+            }
+
+            .hero-side {
+                order: -1;
+                gap: 14px;
+            }
+
+            .hero-panel {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .hero-mark {
+                margin-top: -8px;
+                margin-bottom: 10px;
+            }
+
+            .brand img {
+                width: min(64vw, 220px);
+            }
+
+            .hero-meta {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .meta-chip {
+                min-height: 0;
+            }
+
+            .route-footer {
+                align-items: start;
+                flex-direction: column;
+            }
+
+            .support-band {
+                padding-left: 0;
+                padding-right: 0;
             }
         }
 
         @media (prefers-reduced-motion: reduce) {
-
             *,
             *::before,
             *::after {
                 animation: none !important;
                 transition: none !important;
                 scroll-behavior: auto !important;
+            }
+
+            .route-card.personal,
+            .route-card.professional {
+                transform: none !important;
             }
         }
     </style>
@@ -480,64 +835,129 @@
     <h1 class="sr-only">Outside The World</h1>
 
     <div class="shell">
-        <header class="site-header" aria-label="Site header">
-            <div class="site-header-inner">
-                <a class="brand" href="index.html" aria-label="Outside The World home">
-                    <img src="Images/Equal.svg" alt="Outside The World" />
-                </a>
-            </div>
-        </header>
+        <div class="frame">
+            <main>
+                <section class="hero-panel" aria-label="Homepage introduction">
+                    <div class="hero-grid">
+                        <div class="hero-copy">
+                            <div class="eyebrow">Personal archive / professional practice</div>
+                            <p class="hero-title">
+                                A life in <span class="accent">signal</span> and structure.
+                            </p>
+                            <p class="hero-dek">
+                                Outside The World holds two sides of the same body of work:
+                                <strong>the personal record</strong> of memory, writing, photography, and long-form
+                                observation, and <strong>the professional record</strong> of systems thinking, design,
+                                leadership, and delivery.
+                            </p>
+                        </div>
 
-        <main class="main">
-            <section class="hero" aria-label="Homepage introduction">
-                <h2>
-                    <span class="line">Personal archive.</span>
-                    <span class="line">Professional work.</span>
-                </h2>
-            </section>
-
-            <section class="route-grid" aria-label="Primary site paths">
-                <a class="route-card personal" href="personal.html" aria-label="Enter personal section">
-                    <div class="route-meta">
-                        <div class="route-label">[ Personal ]</div>
-                        <h3>Enter Personal</h3>
-                        <p>
-                            Essays, photography, memory, poetry, and the more human side of the archive.
-                        </p>
+                        <div class="hero-side">
+                            <div class="hero-mark">
+                                <a class="brand" href="index.html" aria-label="Outside The World home">
+                                    <img src="Images/Equal.svg" alt="Outside The World" />
+                                </a>
+                            </div>
+                            <div class="hero-meta" aria-label="Site summary">
+                                <div class="meta-chip">
+                                    <span class="meta-label">Built over</span>
+                                    <span class="meta-value">25 years of notes, images, experiments, and recovered pages</span>
+                                </div>
+                                <div class="meta-chip">
+                                    <span class="meta-label">Based in</span>
+                                    <span class="meta-value">Queen Creek, Arizona, with one foot in archive and one in practice</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                </section>
 
-                    <div class="route-action">
-                        <span class="route-btn">Explore Personal</span>
-                    </div>
-                </a>
+                <div class="split-note">
+                    Choose the doorway that fits your reason for arriving.
+                    <strong>Both paths belong to the same world.</strong>
+                </div>
 
-                <a class="route-card professional" href="professional.html" aria-label="Enter professional section">
-                    <div class="route-meta">
-                        <div class="route-label">[ Professional ]</div>
-                        <h3>Enter Professional</h3>
-                        <p>
-                            Branding, systems thinking, leadership, portfolio work, and the formal record of what I do.
-                        </p>
-                    </div>
+                <section class="route-grid" aria-label="Primary site paths">
+                    <a class="route-card personal" href="personal.html" aria-label="Enter personal section">
+                        <div class="route-head">
+                            <div class="route-label">[ Personal ]</div>
+                            <div class="route-index">01</div>
+                        </div>
 
-                    <div class="route-action">
-                        <span class="route-btn">Explore Professional</span>
-                    </div>
-                </a>
-            </section>
+                        <div class="route-body">
+                            <h3>Enter the living archive.</h3>
+                            <p>
+                                Essays, photography, poetry, residue, and the more intimate record of how a life looked,
+                                felt, and was remembered.
+                            </p>
+                            <div class="route-signals" aria-label="Personal highlights">
+                                <span class="signal-pill">writing</span>
+                                <span class="signal-pill">photography</span>
+                                <span class="signal-pill">memory</span>
+                                <span class="signal-pill">signal recovery</span>
+                            </div>
+                        </div>
 
-            <div class="support-copy">
-                A single body of work divided into two clear paths:
-                <strong>the personal</strong> and <strong>the professional</strong>.
-                Writing, photography, systems observation, design, and twenty-five years of creative life — all under one roof.
-            </div>
-        </main>
+                        <div class="route-footer">
+                            <div class="route-links" aria-label="Personal destinations">
+                                <span class="mini-link">feed</span>
+                                <span class="mini-link">poetry</span>
+                                <span class="mini-link">wayback</span>
+                            </div>
+                            <span class="route-btn">Explore Personal</span>
+                        </div>
+                    </a>
 
-        <footer class="site-footer">
-            <p class="legal">
-                © 2026 Outside The World is New LLC. All rights reserved.
-            </p>
-        </footer>
+                    <a class="route-card professional" href="professional.html"
+                        aria-label="Enter professional section">
+                        <div class="route-head">
+                            <div class="route-label">[ Professional ]</div>
+                            <div class="route-index">02</div>
+                        </div>
+
+                        <div class="route-body">
+                            <h3>Enter the practice.</h3>
+                            <p>
+                                Advisory work, systems design, leadership, product thinking, and the formal record of
+                                what I build and how I work.
+                            </p>
+                            <div class="route-signals" aria-label="Professional highlights">
+                                <span class="signal-pill">strategy</span>
+                                <span class="signal-pill">systems</span>
+                                <span class="signal-pill">design</span>
+                                <span class="signal-pill">leadership</span>
+                            </div>
+                        </div>
+
+                        <div class="route-footer">
+                            <div class="route-links" aria-label="Professional destinations">
+                                <span class="mini-link">portfolio</span>
+                                <span class="mini-link">resume</span>
+                                <span class="mini-link">advisory</span>
+                            </div>
+                            <span class="route-btn">Explore Professional</span>
+                        </div>
+                    </a>
+                </section>
+
+                <section class="support-band" aria-label="Supporting links">
+                    <p class="support-quote">
+                        Twenty-five years of recovered pages, field notes, work, memory, and proof of life.
+                    </p>
+
+                    <nav class="secondary-nav" aria-label="Secondary navigation">
+                        <a href="poetry.html">Verse Archive</a>
+                        <a href="flotsam.html">Flotsam</a>
+                        <a href="resume.html">Dossier</a>
+                        <a href="emmy.html">Heart</a>
+                    </nav>
+                </section>
+            </main>
+
+            <footer class="site-footer">
+                <p class="legal">© 2026 Outside The World is New LLC. All rights reserved.</p>
+            </footer>
+        </div>
     </div>
 </body>
 
