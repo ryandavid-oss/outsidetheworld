@@ -1,7 +1,7 @@
 # Life is grand, getting grander
 Date: March 11, 2026
 
-**What a fabulous week off. **
+**What a fabulous week off.**
 
 **Emily and I went** the staycation route and nailed down a 2-night stay at the Hilton Phoenix Tapatio Cliffs Resort, which is near an area I used to frequent as a teenager. Driving through those hills gave me so many flashbacks. Even moving around the resort reminded me that decades ago, my aunt and uncle would bring their family to the valley and stay at Tapatio Cliffs. I remember being 13 years old when they visited the first time, and I misread the situation pretty badly, thinking that my mom said they were moving to Phoenix, not staying for a time.
 
