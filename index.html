@@ -327,6 +327,10 @@
             gap: 12px;
         }
 
+        .hero-meta-mobile {
+            display: none;
+        }
+
         .meta-chip {
             padding: 14px 14px 15px;
             border-radius: var(--radius-md);
@@ -776,6 +780,16 @@
                 grid-template-columns: 1fr 1fr;
             }
 
+            .hero-meta-desktop {
+                display: none;
+            }
+
+            .hero-meta-mobile {
+                display: grid;
+                margin-top: 20px;
+                animation: revealUp 0.92s 0.38s both;
+            }
+
             .meta-chip {
                 min-height: 0;
             }
@@ -859,7 +873,7 @@
                                     <img src="Images/Equal.svg" alt="Outside The World" />
                                 </a>
                             </div>
-                            <div class="hero-meta" aria-label="Site summary">
+                            <div class="hero-meta hero-meta-desktop" aria-label="Site summary">
                                 <div class="meta-chip">
                                     <span class="meta-label">Built over</span>
                                     <span class="meta-value">25 years of notes, images, experiments, and recovered pages</span>
@@ -939,6 +953,17 @@
                             <span class="route-btn">Explore Professional</span>
                         </div>
                     </a>
+                </section>
+
+                <section class="hero-meta hero-meta-mobile" aria-label="Site summary">
+                    <div class="meta-chip">
+                        <span class="meta-label">Built over</span>
+                        <span class="meta-value">25 years of notes, images, experiments, and recovered pages</span>
+                    </div>
+                    <div class="meta-chip">
+                        <span class="meta-label">Based in</span>
+                        <span class="meta-value">Queen Creek, Arizona, with one foot in archive and one in practice</span>
+                    </div>
                 </section>
 
                 <section class="support-band" aria-label="Supporting links">
