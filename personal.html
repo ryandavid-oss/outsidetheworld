@@ -313,6 +313,14 @@
             margin-bottom: 20px;
             display: flex;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .typing-line {
+            display: inline-flex;
+            align-items: center;
+            min-width: 0;
         }
 
         .cursor {
@@ -521,6 +529,7 @@
 
         .reader-label {
             opacity: 0.85;
+            letter-spacing: 1.5px;
         }
 
         .reader-select {
@@ -953,14 +962,6 @@
 
         .iotd-preview-card h3 {
             margin-bottom: 12px;
-        }
-
-        .iotd-preview-caption {
-            font-size: 0.78rem;
-            line-height: 1.75;
-            color: rgba(255, 255, 255, 0.72);
-            text-transform: none;
-            margin: 0 0 18px;
         }
 
         .iotd-preview-cta {
@@ -1604,12 +1605,14 @@
         <section class="feed-column">
             <div class="feed-topbar">
                 <div class="typing-container">
-                    <span id="typing-text">INITIALIZING_HANDSHAKE...</span><span class="cursor"
-                        aria-hidden="true"></span>
+                    <span class="typing-line">
+                        <span id="typing-text">INITIALIZING_HANDSHAKE...</span><span class="cursor"
+                            aria-hidden="true"></span>
+                    </span>
                 </div>
 
                 <div class="reader-controls" aria-label="Reading mode">
-                    <label class="reader-label" for="reader-mode">READ_MODE //</label>
+                    <label class="reader-label" for="reader-mode">READER //</label>
                     <select id="reader-mode" class="reader-select">
                         <option value="dark">VOID</option>
                         <option value="light">INVERT</option>
@@ -1655,7 +1658,6 @@
                         <span class="builder-chip">NEW</span>
                         THE IOTD
                     </h3>
-                    <p class="iotd-preview-caption" id="iotd-preview-caption">Loading the latest image signal…</p>
                     <div class="iotd-preview-cta">OPEN TODAY'S IMAGE →</div>
                 </div>
             </a>
@@ -2172,9 +2174,8 @@
             const imageEl = document.getElementById('iotd-preview-image');
             const dateEl = document.getElementById('iotd-preview-date');
             const titleEl = document.getElementById('iotd-preview-title');
-            const captionEl = document.getElementById('iotd-preview-caption');
 
-            if (!card || !imageEl || !dateEl || !titleEl || !captionEl) return;
+            if (!card || !imageEl || !dateEl || !titleEl) return;
 
             try {
                 const res = await fetch('./image_manifest.json', { cache: 'no-store' });
@@ -2190,11 +2191,9 @@
                 imageEl.alt = latest.title ? `${latest.title} // Latest Image of the Day` : 'Latest Image of the Day';
                 dateEl.textContent = latest.date ? latest.date.replaceAll('-', '_') : 'LATEST_SIGNAL';
                 titleEl.innerHTML = `<span class="builder-chip">NEW</span> ${latest.title || 'THE IOTD'}`;
-                captionEl.textContent = latest.caption || 'Daily signal capture from the OTW archive.';
             } catch (e) {
                 dateEl.textContent = 'SIGNAL_PENDING';
                 titleEl.innerHTML = '<span class="builder-chip">NEW</span> THE IOTD';
-                captionEl.textContent = 'Open the Image of the Day archive to view the latest signal.';
             }
         })();
 
