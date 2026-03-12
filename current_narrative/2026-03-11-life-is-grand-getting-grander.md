@@ -5,7 +5,7 @@ Date: March 11, 2026
 
 **Emily and I went** the staycation route and nailed down a 2-night stay at the Hilton Phoenix Tapatio Cliffs Resort, which is near an area I used to frequent as a teenager. Driving through those hills gave me so many flashbacks. Even moving around the resort reminded me that decades ago, my aunt and uncle would bring their family to the valley and stay at Tapatio Cliffs. I remember being 13 years old when they visited the first time, and I misread the situation pretty badly, thinking that my mom said they were moving to Phoenix, not staying for a time.
 
-That must have played out pretty confusingly to my poor cousin Brady, who had to endure the hubris and temerity befitting a 13-year-old when I gave him the '411' on all things to expect in Phoenix. I wish 
+That must have played out pretty confusingly to my poor cousin Brady, who had to endure the hubris and temerity befitting a 13-year-old when I gave him the '411' on all things to expect in Phoenix. I wish I could scrub my memory of all cringe-worthy moments, but alas.
 
 **Side note:** Have you ever randomly noticed the auto-correct on your phone taking a sudden and abrupt nap? It does to me, and I think it does this to show me how badly I actually type on a phone. "See idiot? You do need me."
 
