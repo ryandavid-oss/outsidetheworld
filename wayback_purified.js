@@ -1,5 +1,11 @@
 const wayback_raw_dump = [
-
+    {
+        "file": "2009-03-31-03-31-2009---Now-this-tale-did.md",
+        "year": "long ago",
+        "date": "before, but long, long ago",
+        "title": "03/31/2009 - Now this tale didn&39;t happen just yesterday, nor the day",
+        "body": "Date: March 31, 2009\n\nI realized today that I hadn't published any of our pictures from our awesome trip to Disneyland on March the 13th.  Here are a few of them!\n\n<img class=\"alignnone\" src=\"http://www.outsidetheworld.com/pics/Disney0309/sumnerline\" alt=\"\" width=\"461\" height=\"614\" />\n\n<img class=\"alignnone\" src=\"http://www.outsidetheworld.com/pics/Disney0309/sumnerride.jpg\" alt=\"\" width=\"461\" height=\"614\" />\n\n<img class=\"alignnone\" src=\"http://www.outsidetheworld.com/pics/Disney0309/sumnerjenna.jpg\" alt=\"\" width=\"614\" height=\"461\" />\n\n<img class=\"alignnone\" src=\"http://www.outsidetheworld.com/pics/Disney0309/sumnerball.jpg\" alt=\"\" width=\"614\" height=\"461\" />\n\n<img class=\"alignnone\" src=\"http://www.outsidetheworld.com/pics/Disney0309/dadadamsj.jpg\" alt=\"\" width=\"461\" height=\"614\" />\n\n<img class=\"alignnone\" src=\"http://www.outsidetheworld.com/pics/Disney0309/dadsj.jpg\" alt=\"\" width=\"461\" height=\"614\" />\n\n<img class=\"alignnone\" src=\"http://www.outsidetheworld.com/pics/Disney0309/nowthistale.jpg\" alt=\"\" width=\"614\" height=\"461\" />\n\n<img class=\"alignnone\" src=\"http://www.outsidetheworld.com/pics/Disney0309/itwasone.jpg\" alt=\"\" width=\"614\" height=\"461\" />\n\n<img class=\"alignnone\" src=\"http://www.outsidetheworld.com/pics/Disney0309/jennasumner.jpg\" alt=\"\" width=\"614\" height=\"461\" />\n\n<img class=\"alignnone\" src=\"http://www.outsidetheworld.com/pics/Disney0309/sumnersplash.jpg\" alt=\"\" width=\"461\" height=\"614\" />\n\n<img class=\"alignnone\" src=\"http://www.outsidetheworld.com/pics/Disney0309/sumnerlost.jpg\" alt=\"\" width=\"461\" height=\"614\" />\n\n<img class=\"alignnone\" src=\"http://www.outsidetheworld.com/pics/Disney0309/sarajane.jpg\" alt=\"\" width=\"461\" height=\"614\" />\n\n<img class=\"alignnone\" src=\"http://www.outsidetheworld.com/pics/Disney0309/sumnersleep.jpg\" alt=\"\" width=\"461\" height=\"614\" />\n\n<img class=\"alignnone\" src=\"http://www.outsidetheworld.com/pics/Disney0309/sjchoc.jpg\" alt=\"\" width=\"461\" height=\"614\" />\n\n<img class=\"alignnone\" src=\"http://www.outsidetheworld.com/pics/Disney0309/family.jpg\" alt=\"\" width=\"614\" height=\"446\" />"
+    },
     {
         "file": "2025-05-21-Weight--inexplicable.md",
         "year": "2025",
@@ -40,7 +46,7 @@ const wayback_raw_dump = [
         "year": "2024",
         "date": "May 20, 2024",
         "title": "Airport thoughts",
-        "body": "My mind doesn\u2019t just race at airports.  It chases every meandering thought down each terminal, back alley, and boutique shop.  Every consonant belonging to every cascading word in my mind takes up residence in the expressways of internal expression.  And tonight, it\u2019s crushing me into the polished crushed granite tile paving the path toward my gate.\n\nI don\u2019t know that I know how to grieve properly.  My brain has erected impenetrable walls and opaque veils between my emotions and my dialogue.  My fear is that one day soon, my inability to penetrate these fortifications will cause me to collapse in unexpected ways.  My hope is that no one is around when that happens.\n\nAnyway.  I am at the airport.  These are my words about being at the airport.  And here\u2019s a picture of the airport.  The end.\n\n<img border=\"0\" data-original-height=\"3024\" data-original-width=\"3024\" height=\"400\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgJbQj6m4DXzOYUIlgUmyVD6A51WKyq_j8AzGyYeQSAomWc_qNSlERzenznpqvtGBonaWADqUANELa2yblpxpc3vmlEKmdWhU_adqru2V1vbcHWFrbodjakaOkGLoCEGNqPgRqcHjSzLuvCNdb7xoMO4t5U5ZZcm7t2bbkGDuPrtVqOBr8DGTqT/w400-h400/OriginalPhoto-737866034.253894.jpeg\" width=\"400\" />"
+        "body": "My mind doesn\u2019t just race at airports.  It chases every meandering thought down each terminal, back alley, and boutique shop.  Every consonant belonging to every cascading word in my mind takes up residence in the expressways of internal expression.  And tonight, it\u2019s crushing me into the polished crushed granite tile paving the path toward my gate.\n\nI don\u2019t know that I know how to grieve properly.  My brain has erected impenetrable walls and opaque veils between my emotions and my dialogue.  My fear is that one day soon, my inability to penetrate these fortifications will cause me to collapse in unexpected ways.  My hope is that no one is around when that happens.\n\nAnyway.  I am at the airport.  These are my words about being at the airport.  And here\u2019s a picture of the airport.  The end.\n\n<img border=\"0\" data-original-height=\"3024\" data-original-width=\"3024\" height=\"400\" src=\"images/archive/OriginalPhoto-737866034.253894.jpeg\" width=\"400\" />"
     },
     {
         "file": "2023-06-25-WCL.md",
@@ -222,7 +228,7 @@ const wayback_raw_dump = [
         "year": "2022",
         "date": "July 08, 2022",
         "title": "Updates, etc",
-        "body": "<img alt=\"\" border=\"0\" height=\"300\" id=\"BLOGGER_PHOTO_ID_7118133409873746962\" src=\"https://blogger.googleusercontent.com/img/a/AVvXsEjrwLQ0KEqF0o8UQcSs_Lh_XjWlaICFUIzWc-64YCDn53ZDKF0LnUnuwz-0JtGK3HASuz6dcbbq1yhB5sNBAR5J87gXx5AyGnexGvcFQVDg3yWffAd2XOzjqoy2Y_ipivQ674hEwHkBOVyWMi-J1cJ2M9gSDyVD6T3kF56tqZL_g0yKT4PO0g=w400-h300\" width=\"400\" />Having driven the new car for a few days now, I've gathered a few thoughts about the differences between my previous Tesla Model 3 and this new Chevy Bolt.  Fun fact: I haven't test driven the last two cars I purchased.  That is an absurd statement.\nThe Tesla that I owned previously was a 2019 model year, \"Standard Range Plus\" version with a maximum of 240 miles of range.  \nMy new car is a 2022 Chevy (I refuse to type \"Chevrolet\", tho I just did...) Bolt EV 2LT.  Maximum range: 259 miles.  On paper, that doesn't seem like much of a difference. But my goodness, in real world driving comparisons, it seems night and day.  My commute to work is a healthy 31 miles each way, and I was always conscious of what my battery started and ended at.  \nFor example, any given weekday morning, I would wake up with ~185 miles of range on my Model 3 (I would charge to 90% only).  Given maths, one would assume that I arrive at work with around 154 miles of range left.  More often than not, however, my range would be in the 140s.  On occasion, my gauge would correct itself and say I had 150 or 160, but that was rare and only really on 70\u00ba mornings, when the battery was at it's nominal temperature.\nNow, I realize I only have a few days of real-world usage, but I've only had to charge my car once in the 4 days I have had it.  This morning in particular, I started my drive with 226 miles of range (again, charging to 90% because no one can seemingly come to a consensus online about charging best practices) and ended my drive with 212 miles remaining.  Now, I have some observations about this discrepancy.\nDriving habits: I would drive my Tesla hard.  I never used \"Chill mode\".  It was always balls to the wall, bat outta hell style driving.  This is my fault.  But no one could challenge me on the road.  Each launch at a green light would cost me dearly.  The Bolt? She has not yet entered \"Sport Mode\", which basically means I am running this car in Chill mode 100% of the time.  It's served to calm me down.  Plus, it's a new car, so I am babying her.  I haven't taken Max above 75mph.  \nOverall efficiency: This is a smaller car.  It's obvious just by looking at it in the garage. I am simply not launching a longer, heavier car around the freeways. (update: I am full of garbage.  The weights are nearly the same: 3552 lbs vs 3289 lbs)\nRegardless, I am seeing some huge advantages with this newer EV.  Anecdotal statements from subredditors say that Tesla's range estimation algorithm is messy and unpredictable.  Sure seems that way, to me.\nSo, what do I like about the Bolt more than my previous Model 3?  \n\nRide height.  I never thought this would be me.  But it's easy to get in/out.  I see more of the road around me.  It's a nice feeling, and it gives me great visibility.  Physical buttons. Sorry, but swiping on a screen, in retrospect, was inefficient at best and dangerous at worst.  I want to turn down the AC? Tap the AC button, miss the touch point, fix what I touched, get the right touch point, adjust the AC slider, oops...too high, adjust down...etc.  Now, I reach over and push a button up and down.  Magical.That A/C.  Speaking of the A/C, Chevy knows how to cool a car down.  While I don't have rear air, it hardly matters.  That air is chilly.Sound system.  The Bolt came with a 7 speaker Bose system that fairly trounces the sound from the Tesla.Quieter ride.  Some of this can be chalked up to the fact that I replaced my rear tires in the Tesla with cheaper, louder tires.  But the cabin in the Bolt feels quieter to me, too.Wireless CarPlay.  Seriously, I had wired CarPlay in my 2016 Hyundai, and I missed it each and every day.  Now I can use Apple Maps, Google Maps, Waze, Apple Music, Spotify...whatever I want.  It's my choice, and it's divine. No glass roof.  Looks great, in theory...but as the driver? You never see it.  Only your passengers see it.  And I live in AZ.  It's HOT.  360\u00ba backup (HD Surround Vision).  So nice to see everything around me as I park.  Oh, and 25% of the time, my backup camera in the Tesla would fail to respond.  So that was fun.The Regen Paddle.  On my Bolt's steering wheel, there's a paddle on the left side.  Pull it, and it doubles the regenerative properties of the permanent magnet motor.  I already use one-peddle driving, having gotten used to it in my Tesla.  But this regen paddle basically ensures that I may never need to use my brakes, unless in an emergency.  And this can only help increase my range.REAL SiriusXM radio.  Yep, I am hooked on the stuff.  I have had to use the app for the past 3 years.  It wasn't a huge deal, but it did require me to launch it from my phone before I could drive away and listen to it.  I also had to reach for my phone to change stations.  But now, I have the full experience back.  Oh, and it's cheaper.  $5.99/month vs $8.99.There are quite a few other things I really like, but I think this entry is getting boring. So, how about what I don't like?\n\nIt really is smaller.  The center console is narrow, and only one arm really belongs on it at any given time.  My rear seat passengers better be children, and small ones at that.No AutoPilot.  Nope.  No auto steer, none of it.  I have lane keep assist, but that is a poor man's implementation of the most advanced level 2 self driving technology known to man.  I miss it.  I will forever miss it.SuperCharger network.  For now, I am forbidden the use of Tesla's expansive network of fast charging stations.  But that could change, by year's end.The \"Cool factor\". It's just not a Tesla.  It's a Chevy.  No one is gonna stop me at the drive through and say, \"Cool car, man\".Two screens instead of one.  This one completely surprised me.  But it has been a wee bit disorienting going back to having my speed, battery charge, etc directly in front of me again.  So I am now looking back and forth between two screens, instead of the one massive screen in the Tesla.  I am really confident that I will get over this pretty quickly.The app experience.  Tesla's app was superbly designed and showed me everything I needed.  And it was usually quick to refresh.  But the MyChevrolet app is slow, inefficient, and doesn't show me critical information.  Are my doors locked?  Dunno.  Sure, I can lock them.  But shouldn't you show me?Phone as a key.  This one hurts.  I never carried around a key fob in the last 3 years.  I walk up to my car, it's unlocked.  I walk away, it locks.  I miss this dearly.That blinding, raw speed.  I may turn on Sport Mode someday and negate this one. The frunk.  That extra space really came in handy, especially when bringing home pizza for the kids!Rear A/C.  See above.In the end, the pros outweigh the cons.  She's still an EV, so that makes it a win for me.  How about y'all?  Any questions for me about my experience in switching away from a Tesla?"
+        "body": "<img alt=\"\" border=\"0\" height=\"300\" id=\"BLOGGER_PHOTO_ID_7118133409873746962\" src=\"https://blogger.googleusercontent.com/img/a/AVvXsEjrwLQ0KEqF0o8UQcSs_Lh_XjWlaICFUIzWc-64YCDn53ZDKF0LnUnuwz-0JtGK3HASuz6dcbbq1yhB5sNBAR5J87gXx5AyGnexGvcFQVDg3yWffAd2XOzjqoy2Y_ipivQ674hEwHkBOVyWMi-J1cJ2M9gSDyVD6T3kF56tqZL_g0yKT4PO0g=w400-h300\" width=\"400\" />\n\nHaving driven the new car for a few days now, I've gathered a few thoughts about the differences between my previous Tesla Model 3 and this new Chevy Bolt.\n\nFun fact: I haven't test driven the last two cars I purchased.  That is an absurd statement.\n\nThe Tesla that I owned previously was a 2019 model year, \"Standard Range Plus\" version with a maximum of 240 miles of range.  \n\nMy new car is a 2022 Chevy (I refuse to type \"Chevrolet\", tho I just did...) Bolt EV 2LT.  Maximum range: 259 miles.  On paper, that doesn't seem like much of a difference. But my goodness, in real world driving comparisons, it seems night and day.  My commute to work is a healthy 31 miles each way, and I was always conscious of what my battery started and ended at.  \n\nFor example, any given weekday morning, I would wake up with ~185 miles of range on my Model 3 (I would charge to 90% only).  Given maths, one would assume that I arrive at work with around 154 miles of range left.  More often than not, however, my range would be in the 140s.  On occasion, my gauge would correct itself and say I had 150 or 160, but that was rare and only really on 70\u00ba mornings, when the battery was at it's nominal temperature.\n\nNow, I realize I only have a few days of real-world usage, but I've only had to charge my car once in the 4 days I have had it.  This morning in particular, I started my drive with 226 miles of range (again, charging to 90% because no one can seemingly come to a consensus online about charging best practices) and ended my drive with 212 miles remaining.  Now, I have some observations about this discrepancy.\n\n**Driving habits.** I would drive my Tesla hard.  I never used \"Chill mode\".  It was always balls to the wall, bat outta hell style driving.  This is my fault.  But no one could challenge me on the road.  Each launch at a green light would cost me dearly.  The Bolt? She has not yet entered \"Sport Mode\", which basically means I am running this car in Chill mode 100% of the time.  It's served to calm me down.  Plus, it's a new car, so I am babying her.  I haven't taken Max above 75mph.  \n\n**Overall efficiency.** This is a smaller car.  It's obvious just by looking at it in the garage. I am simply not launching a longer, heavier car around the freeways. (update: I am full of garbage.  The weights are nearly the same: 3552 lbs vs 3289 lbs)\n\nRegardless, I am seeing some huge advantages with this newer EV.  Anecdotal statements from subredditors say that Tesla's range estimation algorithm is messy and unpredictable.  Sure seems that way, to me.\n\nSo, what do I like about the Bolt more than my previous Model 3?  \n\n**Ride height.**  I never thought this would be me.  But it's easy to get in/out.  I see more of the road around me.  It's a nice feeling, and it gives me great visibility.\n\n**Physical buttons.** Sorry, but swiping on a screen, in retrospect, was inefficient at best and dangerous at worst.  I want to turn down the AC? Tap the AC button, miss the touch point, fix what I touched, get the right touch point, adjust the AC slider, oops...too high, adjust down...etc.  Now, I reach over and push a button up and down.  Magical.\n\n**That A/C.**  Speaking of the A/C, Chevy knows how to cool a car down.  While I don't have rear air, it hardly matters.  That air is chilly.\n\n**Sound system.**  The Bolt came with a 7 speaker Bose system that fairly trounces the sound from the Tesla.\n\n**Quieter ride.**  Some of this can be chalked up to the fact that I replaced my rear tires in the Tesla with cheaper, louder tires.  But the cabin in the Bolt feels quieter to me, too.\n\n**Wireless CarPlay.**  Seriously, I had wired CarPlay in my 2016 Hyundai, and I missed it each and every day.  Now I can use Apple Maps, Google Maps, Waze, Apple Music, Spotify...whatever I want.  It's my choice, and it's divine.\n\n**No glass roof.**  Looks great, in theory...but as the driver? You never see it.  Only your passengers see it.  And I live in AZ.  It's HOT.\n\n**360\u00ba backup (HD Surround Vision).**  So nice to see everything around me as I park.  Oh, and 25% of the time, my backup camera in the Tesla would fail to respond.  So that was fun.\n\n**The Regen Paddle.**  On my Bolt's steering wheel, there's a paddle on the left side.  Pull it, and it doubles the regenerative properties of the permanent magnet motor.  I already use one-peddle driving, having gotten used to it in my Tesla.  But this regen paddle basically ensures that I may never need to use my brakes, unless in an emergency.  And this can only help increase my range.\n\n**REAL SiriusXM radio.**  Yep, I am hooked on the stuff.  I have had to use the app for the past 3 years.  It wasn't a huge deal, but it did require me to launch it from my phone before I could drive away and listen to it.  I also had to reach for my phone to change stations.  But now, I have the full experience back.  Oh, and it's cheaper.  $5.99/month vs $8.99.\n\nThere are quite a few other things I really like, but I think this entry is getting boring. So, how about what I don't like?\n\n**It really is smaller.**  The center console is narrow, and only one arm really belongs on it at any given time.  My rear seat passengers better be children, and small ones at that.\n\n**No AutoPilot.**  Nope.  No auto steer, none of it.  I have lane keep assist, but that is a poor man's implementation of the most advanced level 2 self driving technology known to man.  I miss it.  I will forever miss it.\n\n**SuperCharger network.**  For now, I am forbidden the use of Tesla's expansive network of fast charging stations.  But that could change, by year's end.\n\n**The \"Cool factor\".** It's just not a Tesla.  It's a Chevy.  No one is gonna stop me at the drive through and say, \"Cool car, man\".\n\n**Two screens instead of one.**  This one completely surprised me.  But it has been a wee bit disorienting going back to having my speed, battery charge, etc directly in front of me again.  So I am now looking back and forth between two screens, instead of the one massive screen in the Tesla.  I am really confident that I will get over this pretty quickly.\n\n**The app experience.**  Tesla's app was superbly designed and showed me everything I needed.  And it was usually quick to refresh.  But the MyChevrolet app is slow, inefficient, and doesn't show me critical information.  Are my doors locked?  Dunno.  Sure, I can lock them.  But shouldn't you show me?\n\n**Phone as a key.**  This one hurts.  I never carried around a key fob in the last 3 years.  I walk up to my car, it's unlocked.  I walk away, it locks.  I miss this dearly.\n\n**That blinding, raw speed.**  I may turn on Sport Mode someday and negate this one.\n\n**The frunk.**  That extra space really came in handy, especially when bringing home pizza for the kids!\n\n**Rear A/C.**  See above.\n\nIn the end, the pros outweigh the cons.  She's still an EV, so that makes it a win for me.  How about y'all?  Any questions for me about my experience in switching away from a Tesla?"
     },
     {
         "file": "2022-07-06-Hello--Max-.md",
@@ -271,7 +277,7 @@ const wayback_raw_dump = [
         "year": "2022",
         "date": "March 23, 2022",
         "title": "No devil in these details",
-        "body": "<img alt=\"\" border=\"0\" height=\"400\" id=\"BLOGGER_PHOTO_ID_7078415423811868914\" src=\"https://blogger.googleusercontent.com/img/a/AVvXsEh82V4m8T7jQdXgCh30aTOm1lfahZUR5B7feKESpWORIYMk0fPrEx0dbiN9uMRkDMpiWaLhb6JBCUhP_GiNxpuATfnPVf2kV8NA35nPrWOD9dygFF0tA5YGCy-i_8YP92_FI37-acXnwyPkZdiMOJ6Z7WramzSs1cGDGJx63clNE5s3wE-E6A=w400-h400\" width=\"400\" />Lighting seen while in line for \"Rise of the Resistance\"\nDisney's Imagineers are well-known for their attention to the tiniest and most insignificant of details. As I have grown older, Disneyland (with its little brother, California Adventure) has rapidly expanded with new rides and lands that pay homage to their newer IP. In my mind, I see the shift to contemporary details began with Bug's Land, which sadly no longer exists but within the memories of Disney fandom.  \n\nWalking into Bug's Land back in 2000 was transformative; from the entrance, you were transported to a world where everything was bigger than you. It wasn't just sights, but the sensation of touch and smell that pulled this magic together.\n\n<img border=\"0\" data-original-height=\"3024\" data-original-width=\"3024\" height=\"400\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhlE8ol5jyu7K4m2cozriOyZA1SR3EmEcrTAve8c_k30NLaRpB1xldj1hswNhtdGD_XqadCjBM661zIUcfjPitI6Amti0b2MSsc-ubmMrXHIWvZR6C1EtebPPfnJrt0Q2dVAcA_CQJI3a_pQBN6RPkigf9ZFTnNvZwQQDc5bXi0UHSwO9zj8Q/w400-h400/IMG_4481%202.heic\" width=\"400\" />Just one example of Cars Land\n\nFast forward another decade, when Cars Land was launched to critical acclaim.  Before going, I read article after article, and saw countless pictures posted to both social media and professional journalism sites, but nothing prepared me for what I encountered upon my arrival.  \n\nI don't know the level of collaboration that exists between Disney/Pixar's film studios and Disney's park organization, and frankly, I don't want to know...but it was mind blowing to see Cars Land in person.  Again, every sensory faculty attached to my human frame was catered to with remarkable precision.  This was Disney's Imagineering with all of its intended magic and might.  \n\nIf you've ever wondered why some people are such zealots when it comes to Disneyland, perhaps my overly verbose descriptions and sumptuous fawning can give you some idea.\n\nWhich brings me to my final word for the day; Star Wars Land: Galaxy's Edge.  It launched nearly three years ago, during which time I've seen countless pictures and listened to the reveling of friends, relatives, and others.  I prepared myself accordingly.  Expectations were set to be blown away by what I would see.\n\n<img border=\"0\" data-original-height=\"3024\" data-original-width=\"3024\" height=\"400\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgUMGA9jlcsHKg-nL2pcDvosMtAtfkDyOWTsj5R4toEn5Th5YpipO4yVGPBwefQX0VnK_LY2OmN3bBfIxI8GqBngnGRQaPTXlH7w-bkXaYBC4JLJVrPRpm0NNmI39JPZL6QmfxKKBwFToBOqm0NxMnPG6NhC_rKyh_xJJfhS7ULMKtHo-a3VA/w400-h400/OriginalPhoto-669224525.953226.jpg\" width=\"400\" />Yep, that's a full-sized Falcon\nI still couldn't believe my own eyes.  As opposed to Cars Land, where Radiator Springs was the blueprint whereupon the Imagineers set their sights, Galaxy's Edge is an unknown quantity; a brand new planet within the Star Wars universe.  Yet you know upon walking inside this land that you are a part of the Star Wars experience.  Every single detail, even down to the custom Coca-Cola bottles commissioned for this area of the park, screams of an immediate transportation to Batuu.  \n\nOn the final day, the wife and I spent one of our final hours there.  We didn't ride any rides, didn't eat any food; we just sat or walked around.  Life is complicated, fraught with stress, drama, and enough heartache to fill the Millennium Falcon.  So, to be able to escape to this tiny land within a small park in what was once tracts of orange groves in Anaheim California, the mindless wander amongst the fruits of some of the world's best designers was a welcome respite."
+        "body": "<img alt=\"\" border=\"0\" height=\"400\" id=\"BLOGGER_PHOTO_ID_7078415423811868914\" src=\"https://blogger.googleusercontent.com/img/a/AVvXsEh82V4m8T7jQdXgCh30aTOm1lfahZUR5B7feKESpWORIYMk0fPrEx0dbiN9uMRkDMpiWaLhb6JBCUhP_GiNxpuATfnPVf2kV8NA35nPrWOD9dygFF0tA5YGCy-i_8YP92_FI37-acXnwyPkZdiMOJ6Z7WramzSs1cGDGJx63clNE5s3wE-E6A=w400-h400\" width=\"400\" />Lighting seen while in line for \"Rise of the Resistance\"\nDisney's Imagineers are well-known for their attention to the tiniest and most insignificant of details. As I have grown older, Disneyland (with its little brother, California Adventure) has rapidly expanded with new rides and lands that pay homage to their newer IP. In my mind, I see the shift to contemporary details began with Bug's Land, which sadly no longer exists but within the memories of Disney fandom.  \n\nWalking into Bug's Land back in 2000 was transformative; from the entrance, you were transported to a world where everything was bigger than you. It wasn't just sights, but the sensation of touch and smell that pulled this magic together.\n\n<img border=\"0\" data-original-height=\"3024\" data-original-width=\"3024\" height=\"400\" src=\"images/archive/IMG_4481%202.heic.jpg\" width=\"400\" />Just one example of Cars Land\n\nFast forward another decade, when Cars Land was launched to critical acclaim.  Before going, I read article after article, and saw countless pictures posted to both social media and professional journalism sites, but nothing prepared me for what I encountered upon my arrival.  \n\nI don't know the level of collaboration that exists between Disney/Pixar's film studios and Disney's park organization, and frankly, I don't want to know...but it was mind blowing to see Cars Land in person.  Again, every sensory faculty attached to my human frame was catered to with remarkable precision.  This was Disney's Imagineering with all of its intended magic and might.  \n\nIf you've ever wondered why some people are such zealots when it comes to Disneyland, perhaps my overly verbose descriptions and sumptuous fawning can give you some idea.\n\nWhich brings me to my final word for the day; Star Wars Land: Galaxy's Edge.  It launched nearly three years ago, during which time I've seen countless pictures and listened to the reveling of friends, relatives, and others.  I prepared myself accordingly.  Expectations were set to be blown away by what I would see.\n\n<img border=\"0\" data-original-height=\"3024\" data-original-width=\"3024\" height=\"400\" src=\"images/archive/OriginalPhoto-669224525.953226.jpg\" width=\"400\" />Yep, that's a full-sized Falcon\nI still couldn't believe my own eyes.  As opposed to Cars Land, where Radiator Springs was the blueprint whereupon the Imagineers set their sights, Galaxy's Edge is an unknown quantity; a brand new planet within the Star Wars universe.  Yet you know upon walking inside this land that you are a part of the Star Wars experience.  Every single detail, even down to the custom Coca-Cola bottles commissioned for this area of the park, screams of an immediate transportation to Batuu.  \n\nOn the final day, the wife and I spent one of our final hours there.  We didn't ride any rides, didn't eat any food; we just sat or walked around.  Life is complicated, fraught with stress, drama, and enough heartache to fill the Millennium Falcon.  So, to be able to escape to this tiny land within a small park in what was once tracts of orange groves in Anaheim California, the mindless wander amongst the fruits of some of the world's best designers was a welcome respite."
     },
     {
         "file": "2022-03-15-From-somewhere--who-knows---.md",
@@ -306,7 +312,7 @@ const wayback_raw_dump = [
         "year": "2022",
         "date": "February 16, 2022",
         "title": "Days of travel, past",
-        "body": "<img alt=\"\" border=\"0\" height=\"400\" id=\"BLOGGER_PHOTO_ID_7065333748336141266\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh7nM1kzBPyzcLjRAxwEfhl4oSPm1CsqiVqmQPFPVi2lDnr0t9zjx4Ah65xhIcV5boh7_Iqmm3VaDbw2kUVixxKr16fqNhG4jnPm7BYqnk-iaMmcnn5omgIuTs8pQHI-vpKzyQa/w400-h400/OriginalPhoto-635475759.337284-703487.jpg\" width=\"400\" />\nAbout a year ago, it seemed I was traveling to California every other weekend to see my wife (n\u00e9e fianc\u00e9), whether by car or plane.  But my gosh, was air travel ever preferable.  I am reminded that in California, public restrooms have been considered a massive luxury since the pandemic started, so it made the electric driving miles tantamount to medieval torture as I stopped for 20-30 minutes every 200 miles."
+        "body": "<img alt=\"\" border=\"0\" height=\"400\" id=\"BLOGGER_PHOTO_ID_7065333748336141266\" src=\"images/archive/OriginalPhoto-635475759.337284-703487.jpg\" width=\"400\" />\nAbout a year ago, it seemed I was traveling to California every other weekend to see my wife (n\u00e9e fianc\u00e9), whether by car or plane.  But my gosh, was air travel ever preferable.  I am reminded that in California, public restrooms have been considered a massive luxury since the pandemic started, so it made the electric driving miles tantamount to medieval torture as I stopped for 20-30 minutes every 200 miles."
     },
     {
         "file": "2022-01-21-Concrete-and-detritus.md",
@@ -320,7 +326,7 @@ const wayback_raw_dump = [
         "year": "2022",
         "date": "January 14, 2022",
         "title": "Blue Heron",
-        "body": "[Originally published March 30, 2012]\n<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5725809245583901474\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhht58gAWko3RONjrKu6V5b3_ogQ-A2DPCJxIGWTI2v1O7xs3PQX5RSzAtjKnLn_0fsbUl07Niu1b9BdusPiSfCRR11MgfHQHwzhD1uN6L5Jci5YVp3kw6uwDKoyUe4c8DI2Tfv5w/s320/photo+1-751992.JPG\" />\n<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5725809253984246162\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh6PVFh_8GgCgVGtLaIRnyPlDQOsWYtM343q28UJrkV3WrQ1cV4ZPibyBJMG8nZB3jYm3rk0r8udpV1tk6u8e00UhFquZxskE27P43s46PqrAFfT9qq4C2qs-TqV4zNjlRJJ3mubA/s320/photo+2-753589.JPG\" />\n<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5725809265175609122\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhN0IO9sQAHavNlOM8nlodVG97odvXJ5lLpnTT5kbJNLu66Lom0FBvZJkvrRY9FcrcnQIImv752au0LHMaf1iC47iOrKEGwTBeWSdLmOlCZM7GoJcQpBnCb0Kv6H1oXqpTRJRg0Lw/s320/photo+3-755654.JPG\" />\nHe seemed amicable enough. I would take two steps, he would shuffle a few to the left. His gaze never left mine, and when he flew, he never gained more than a few yards' advantage. It almost seemed a game; the heron daring me to try again before taking flight.  People stopped and stared at my vain attempts at closer shots. Ultimately, I chose to halt what could have been a real annoyance to this poor bird. \nDoesn't make him any less beautiful. And my pops thinks he was just a baby, too. He seemed big enough to me."
+        "body": "[Originally published March 30, 2012]\n<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5725809245583901474\" src=\"images/archive/photo+1-751992.JPG.jpg\" />\n<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5725809253984246162\" src=\"images/archive/photo+2-753589.JPG.jpg\" />\n<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5725809265175609122\" src=\"images/archive/photo+3-755654.JPG.jpg\" />\nHe seemed amicable enough. I would take two steps, he would shuffle a few to the left. His gaze never left mine, and when he flew, he never gained more than a few yards' advantage. It almost seemed a game; the heron daring me to try again before taking flight.  People stopped and stared at my vain attempts at closer shots. Ultimately, I chose to halt what could have been a real annoyance to this poor bird. \nDoesn't make him any less beautiful. And my pops thinks he was just a baby, too. He seemed big enough to me."
     },
     {
         "file": "2022-01-12-Stop-the-car.md",
@@ -348,7 +354,7 @@ const wayback_raw_dump = [
         "year": "2022",
         "date": "January 04, 2022",
         "title": "The magical world of non-destructive edits",
-        "body": "<img data-original-height=\"2448\" data-original-width=\"2448\" height=\"320\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhraJlDDIIl8ILxEacDz0_jFQq_0C87LwodWrh_8aihlz08S6ONRweblx0Ucmjzz-U7Wi8IhwpGC_WxAG6Ej6FfVZbmHAiFMjsmhR57lk_8jVLpYlOE_KSipb52tvj1UNJlkmRt/w320-h320/FullSizeRender.jpg\" width=\"320\" />iPhone 6 Plus ~ 4.15mm ~ \u0192/2.2Lately, it's been tricky finding time to shoot.  Generally speaking, inspiration hasn't been the dilemma; in fact, I am quite grateful that the urge to take a picture materializes more often than not.  It's a feeling I've missed, part and parcel with the writings that used to be common fare on this site.  Time and energy it is that stops me nowadays.\nSo I decided to take a quick journey on my iPhone today, utilizing the [Search] function built into the Photos app.  (Side note: Try it.  Seriously.  Search for anything; flowers, mountains, a person, a color, etc.  My library is over 27,000 pictures strong.  What I find with search is staggering)\nAnyway, back to what I was doing.  A quick search popped up this glorious shot of a jutted rock in Newport, CA.  But sadly, it didn't look like this first image with rocky details and creamy morning sand. \n\n<img alt=\"\" data-original-height=\"2448\" data-original-width=\"2448\" height=\"320\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgbr7OV4CVaeAXWzPnvkxfrISlm-JZJF8RjvzKujUdYowVmNkP_k7IvENuYJhGoKw8cvwx-f-D2GqtcJzGMuCs2sTDj6w2BJfjJMvuffHHSpuYHxXoz2AY3N_VHuY4eYtY3XarQ/w320-h320/PIPQ8763.jpg\" width=\"320\" />Shot w/Hipstamatic ~ badlyInstead, it looked like this.  It was a hastily snapped picture, taken with my favorite app, Hipstamatic. And thanks to the magic of non-destructive edits, I was able to turn back the hands of time by six years and uncover the virgin, unedited picture with a few taps of my finger.  \n\nHipstamatic doesn't always do what I wish it would.  But that's part of the appeal, in a way.  Harkening back to the days of disposable point and shoots, when one would never know what result would come until the day of development, Hipstamatic brings a little bit of risk back into digital photography. \n\nBut I digress; such is no longer the case.  I remember reading years ago when the developers added non-destructive edits, but I believe I only scoffed when I saw that news.  I probably figured it would tarnish what I believed to be a perfect app.\n\nBut I've grown up a bit, and today's photo brings me a bit of excitement.  Because buried within the 27,000+ photos in my library is the possibility of a few more gems worth re-editing.  And that will tide me over quite well until I can get back out on the road and capture a few new shots."
+        "body": "<img data-original-height=\"2448\" data-original-width=\"2448\" height=\"320\" src=\"images/archive/FullSizeRender.jpg\" width=\"320\" />iPhone 6 Plus ~ 4.15mm ~ \u0192/2.2Lately, it's been tricky finding time to shoot.  Generally speaking, inspiration hasn't been the dilemma; in fact, I am quite grateful that the urge to take a picture materializes more often than not.  It's a feeling I've missed, part and parcel with the writings that used to be common fare on this site.  Time and energy it is that stops me nowadays.\nSo I decided to take a quick journey on my iPhone today, utilizing the [Search] function built into the Photos app.  (Side note: Try it.  Seriously.  Search for anything; flowers, mountains, a person, a color, etc.  My library is over 27,000 pictures strong.  What I find with search is staggering)\nAnyway, back to what I was doing.  A quick search popped up this glorious shot of a jutted rock in Newport, CA.  But sadly, it didn't look like this first image with rocky details and creamy morning sand. \n\n<img alt=\"\" data-original-height=\"2448\" data-original-width=\"2448\" height=\"320\" src=\"images/archive/PIPQ8763.jpg\" width=\"320\" />Shot w/Hipstamatic ~ badlyInstead, it looked like this.  It was a hastily snapped picture, taken with my favorite app, Hipstamatic. And thanks to the magic of non-destructive edits, I was able to turn back the hands of time by six years and uncover the virgin, unedited picture with a few taps of my finger.  \n\nHipstamatic doesn't always do what I wish it would.  But that's part of the appeal, in a way.  Harkening back to the days of disposable point and shoots, when one would never know what result would come until the day of development, Hipstamatic brings a little bit of risk back into digital photography. \n\nBut I digress; such is no longer the case.  I remember reading years ago when the developers added non-destructive edits, but I believe I only scoffed when I saw that news.  I probably figured it would tarnish what I believed to be a perfect app.\n\nBut I've grown up a bit, and today's photo brings me a bit of excitement.  Because buried within the 27,000+ photos in my library is the possibility of a few more gems worth re-editing.  And that will tide me over quite well until I can get back out on the road and capture a few new shots."
     },
     {
         "file": "2022-01-02-A-rose-by-any-other-name---.md",
@@ -376,721 +382,721 @@ const wayback_raw_dump = [
         "year": "2021",
         "date": "December 15, 2021",
         "title": "Water tower on a Sunday afternoon",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhR3RSGZhXNL7Sm7u39L7vGu_IcAA09JbmUXEKz2T3JpsKhQMs1qU7jNPoNuI91R8RT_g2J_A6B4K6kiBuaXSsMJAkEyTuPBY-mGEfABrOp7kHdzX0iqbr2rzZN1VvL2-p_IHo1/s320/image0-782233.jpeg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_7041768029896959538\" />"
+        "body": "<img src=\"images/archive/image0-782233.jpeg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_7041768029896959538\" />"
     },
     {
         "file": "2019-11-15-Light--shape--debris.md",
         "year": "2019",
         "date": "November 15, 2019",
         "title": "Light, shape, debris",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhbMpdUngty5BDDUSWsADOtgJHQ3X8OhKYj70nDtwyvC0gJCmQaUSTSsnf8G05dJIxCcllkoVPbpxEbfM1xVlgYwdI2-6tzT-g21W8bsLUgEQHFZVWVnAP5cWDaH7llIWEdD1TH1w/s320/HipstamaticPhoto-595522767.125635-768807.JPG\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_6759623840165893442\" />\nThere's a bit more depth to this shot as you spend a bit of time looking at it. The opposite side peeks through the middle cylinder, and the weeks worth of dust muddies the outside."
+        "body": "<img src=\"images/archive/HipstamaticPhoto-595522767.125635-768807.JPG.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_6759623840165893442\" />\nThere's a bit more depth to this shot as you spend a bit of time looking at it. The opposite side peeks through the middle cylinder, and the weeks worth of dust muddies the outside."
     },
     {
         "file": "2019-11-07-Contrast.md",
         "year": "2019",
         "date": "November 07, 2019",
         "title": "Contrast",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgcaPefH99GANQtHSo3vJO_Qq8bSYa89pCyuhiL0K0oJ-FvTdqD_t0JDJ2MpavV_80UMT7Ghyphenhyphendm_45R24Bs6HbgcrG8EK7Bn_ISat5YnWiZrERZsI-3y4qtoCkPNKhB3JYJfsBSIg/s320/HipstamaticPhoto-594590873.574860-752510.JPG\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_6756609993434115458\" />\nHard to pick a day to begin again, especially with all of the noise and tumult from the previous few years. \n\nWhy not today?"
+        "body": "<img src=\"images/archive/HipstamaticPhoto-594590873.574860-752510.JPG.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_6756609993434115458\" />\nHard to pick a day to begin again, especially with all of the noise and tumult from the previous few years. \n\nWhy not today?"
     },
     {
         "file": "2012-10-10-Jack.md",
         "year": "2012",
         "date": "October 10, 2012",
         "title": "Jack",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjufS02x2BtkG7IzIQ7Lf94Gvl1jXn89BY-Ggqje3JXoMYRWm-etjdAhIdQp_9wVhWM6ChQXmAP_BQ3soR475rDrRK_CxUz9MYE3XX6_jlPKuakyajO7ZHY7F5gcNEE0Hr7BLfTwA/s320/My+HipstaPrint+922400709-743946.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5797719422225016466\" />\nIt's been a good couple of days here at the land Walt built. Tonight, it's the Halloween party. Still two days left, at that. \n\nMy friend Jack here is ready for the remainder of the holidays, in style. \n\nLens: Tejas\n\nFilm: BlacKeys SuperGrain"
+        "body": "<img src=\"images/archive/My+HipstaPrint+922400709-743946.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5797719422225016466\" />\nIt's been a good couple of days here at the land Walt built. Tonight, it's the Halloween party. Still two days left, at that. \n\nMy friend Jack here is ready for the remainder of the holidays, in style. \n\nLens: Tejas\n\nFilm: BlacKeys SuperGrain"
     },
     {
         "file": "2012-08-25-Fall--39-s-Debut.md",
         "year": "2012",
         "date": "August 25, 2012",
         "title": "Fall&39;s Debut",
-        "body": "<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5780753800107696226\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh_x67lMDfrR3TCCDgAo6uBIdcZ6ZLF_-8Gf79TKs8muVRkL5M2yspL7cZdgmWKR76DWsuWIacWCaVEkoXO7HFVgmFyf9FViJKbThezEs7Ka5G3vrejhhHp-TdfI-sFKXWHwsE-/s320/photo-727669.JPG\" />\nAs school begins and the temperature fluctuates, if only a few degrees, the cottonwood out front drops a few leaves, as if in surrender, concurrent with the aster's bloom.  \nEvery year, it begins like this."
+        "body": "<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5780753800107696226\" src=\"images/archive/photo-727669.JPG.jpg\" />\nAs school begins and the temperature fluctuates, if only a few degrees, the cottonwood out front drops a few leaves, as if in surrender, concurrent with the aster's bloom.  \nEvery year, it begins like this."
     },
     {
         "file": "2012-08-21-Illuminated-cloud.md",
         "year": "2012",
         "date": "August 21, 2012",
         "title": "Illuminated cloud",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjlUHmALR4uZkg-8vzNE1XZ3ER9_3DU22FmoRszqHY11R9R0zvE1JlqKu7DmDC0hvdvIcdLcJ3uTw70fUgTusSWt3EgWj4kMeHo6vFkd6LjRpoepJWAGgZi6dylQPMz3CsC_5PlXw/s320/My+HipstaPrint+888674309-722180.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5778949462486916818\" />\nLens: Foxy\n\nFilm: Sugar"
+        "body": "<img src=\"images/archive/My+HipstaPrint+888674309-722180.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5778949462486916818\" />\nLens: Foxy\n\nFilm: Sugar"
     },
     {
         "file": "2012-08-12-A-long-goodbye-.md",
         "year": "2012",
         "date": "August 12, 2012",
         "title": "A long goodbye.",
-        "body": "A bit of 4s action, shot and manipulated.\n\n<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhS49ZyQJAyYvSh1NGc_TEXD4QETjEDpNjYck_0BfnpncimBpt0lGaMOw5j3x5lRMBVKCev7NSdtMTghtirXApzoktI-Efz-OIQDQ6aoavylpgqPKcXwehwU6ST4Mq-1LqjVlf6/s320/Image-763232.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5775613306762275154\" />"
+        "body": "A bit of 4s action, shot and manipulated.\n\n<img src=\"images/archive/Image-763232.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5775613306762275154\" />"
     },
     {
         "file": "2012-07-30-Noise-and-tumult.md",
         "year": "2012",
         "date": "July 30, 2012",
         "title": "Noise and tumult",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj-eGbYsDHSuqaLnfa0xO5k_0NDbDZh0G3CPrbtEI83a8zXT-cCHQ-fF60SLq8qXaX_xHEJDw2LZvJAZSn-F0gn-VJFgcVW7HMDjJRdp47PdJaDCTkm6ZunzvhWjs54Amv4w0BUMA/s320/photo-794887.JPG\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5770786758113545090\" />\nTonight's storm rolled in line upon line, layer upon layer, until its full force was unleashed. More storms are expected tonight, continuing until tomorrow afternoon. \n\nI snapped this picture in between storms, risking water damage to my trusty, yet still two-years old, iPhone. A bit of editing with Snapseed produced the results you see here."
+        "body": "<img src=\"images/archive/photo-794887.JPG.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5770786758113545090\" />\nTonight's storm rolled in line upon line, layer upon layer, until its full force was unleashed. More storms are expected tonight, continuing until tomorrow afternoon. \n\nI snapped this picture in between storms, risking water damage to my trusty, yet still two-years old, iPhone. A bit of editing with Snapseed produced the results you see here."
     },
     {
         "file": "2012-07-28-A-fine-sunset.md",
         "year": "2012",
         "date": "July 28, 2012",
         "title": "A fine sunset",
-        "body": "A family wants to go out to dinner. A family drives to dinner. A family makes poor choices for restaurants on a Friday night. A family continues driving. Finally, food is found to satiate all appetites. A sunset greets the family as they leave. Such a reward. Lens: John SFilm: Ina's 1969\n\n<img border=\"0\" height=\"320\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEikBtw6EDAd3kZ6V-aHxi7h9NsMfRWSYxCSBJ1zPENNkOowT7WBGwG2kBXyZ0189Ome_4kvMbcgJzBik6QHD9YRwdPVPcgPGYDbstOy_IdZBR__euCfWPmt9Dz9eIn9MN8Eyp-kTA/s320/photo.JPG\" width=\"320\" />"
+        "body": "A family wants to go out to dinner. A family drives to dinner. A family makes poor choices for restaurants on a Friday night. A family continues driving. Finally, food is found to satiate all appetites. A sunset greets the family as they leave. Such a reward. Lens: John SFilm: Ina's 1969\n\n<img border=\"0\" height=\"320\" src=\"images/archive/photo.JPG.jpg\" width=\"320\" />"
     },
     {
         "file": "2012-07-19-Into-the-Gap.md",
         "year": "2012",
         "date": "July 19, 2012",
         "title": "Into the Gap",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEja-aWcoaGMJpsLILbMn9f_bBsilHrCAqQwptpYQWHOsNevlALyJER2BOC_80pEQNdd0TTrdJXiomhu9Cai0nc7-HPyV2_UOvC8rV3eRZWZb5FbddmaoP4A0XaDQ6UTR-VwmRoY/s320/My+HipstaPrint+854328001-770070.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5766699990596122626\" />\nIt was a day long on beauty. So much to see, so much to feel, mists, time, trees, and skies. The experience was almost too much for me to take. Plus at my side, my sweetheart. \n\nThis captured and tied up the day with a bow.\n\nLens: Chunky\n\nFilm: DC"
+        "body": "<img src=\"images/archive/My+HipstaPrint+854328001-770070.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5766699990596122626\" />\nIt was a day long on beauty. So much to see, so much to feel, mists, time, trees, and skies. The experience was almost too much for me to take. Plus at my side, my sweetheart. \n\nThis captured and tied up the day with a bow.\n\nLens: Chunky\n\nFilm: DC"
     },
     {
         "file": "2012-07-15-Mantodea--Praying-Mantis-.md",
         "year": "2012",
         "date": "July 15, 2012",
         "title": "Mantodea {Praying Mantis}",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg_eCpXFRB-Imasas9061Vl8Jsg0Y58i1DmQWQ8Ryks-CHb6Qv7-SBGJOjw3bUyUqo1029WhiKeQbYXiEHmdgCJyiu_lBn0KOIYrj2RmkB3X8XUB9c_htcAOyjOX-8G9Yef-WjZBQ/s320/photo-770390.JPG\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5765228107709366978\" />\nI saw this little guy while I was in the front yard, taking care of weeds while the ground was still soft from the rain. I've always been fascinated by these creatures. They seem so gentle and, dare I say, intelligent. He looked at me quizzically for quite a while before taking advantage of his new vista; before long, the kids found me and were begging to hold him. \n\nI set him back down inside my garden, silently hoping he would stay. \n\nTaken with the wife's iPhone 4. \n\nEdited in Snapseed."
+        "body": "<img src=\"images/archive/photo-770390.JPG.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5765228107709366978\" />\nI saw this little guy while I was in the front yard, taking care of weeds while the ground was still soft from the rain. I've always been fascinated by these creatures. They seem so gentle and, dare I say, intelligent. He looked at me quizzically for quite a while before taking advantage of his new vista; before long, the kids found me and were begging to hold him. \n\nI set him back down inside my garden, silently hoping he would stay. \n\nTaken with the wife's iPhone 4. \n\nEdited in Snapseed."
     },
     {
         "file": "2012-07-10-114-.md",
         "year": "2012",
         "date": "July 10, 2012",
         "title": "114\u00b0",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEipkoUztnLsI0iki8WvZhyPmQZuBtA0KQE21OwgGVD9Ge9nz72M2u5g40Rkj4eu-0ShkYTjcwVQ0KXKvyG1MaS3LDDy_X4CgQf07j50tSB7w52RldLH2jLEEME0OxL8a3Kwy9OzKQ/s320/My+HipstaPrint+854549185-775458.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5763630831895310338\" />\nHard to visualize. \n\nLens: Jane\n\nFilm: Ina's 1982"
+        "body": "<img src=\"images/archive/My+HipstaPrint+854549185-775458.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5763630831895310338\" />\nHard to visualize. \n\nLens: Jane\n\nFilm: Ina's 1982"
     },
     {
         "file": "2012-07-07-A-bank-of-clouds-building-over.md",
         "year": "2012",
         "date": "July 07, 2012",
         "title": "A bank of clouds building over the Colorado Plateau",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEioEHv2Lg9sgB0QeoMkpQ4QDaUiTbzYTyqnlLd0qCaobqluE9WXbNHLPCGkCjSiPQ2b3lnr4InRc2dTcSAOi6GS4pabm4nclemHoQXpWXdjmG_t_gwLsfMyIW6gkz_Fbvu3Kz0J/s320/My+HipstaPrint+852050625-738433.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5762511834258519170\" />\nLens: Tejas\n\nFilm: Ina's 1982"
+        "body": "<img src=\"images/archive/My+HipstaPrint+852050625-738433.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5762511834258519170\" />\nLens: Tejas\n\nFilm: Ina's 1982"
     },
     {
         "file": "2012-07-04-Flowers-at-the-village.md",
         "year": "2012",
         "date": "July 04, 2012",
         "title": "Flowers at the village",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhCsJ9fENLGhCYScjKO4PzpmX5ygUwZRTHjSuO2Fz0oIWzkH5ZmocW861lqzfFIlFqAZ1cCgRsHFedmw6yxFknIWz2l2gmhqCaSRGbWIrh8bxIkmw1eNem8HcAk28xoGdJVKWI6iQ/s320/My+HipstaPrint+864178881-779511.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5761399618674935026\" />\nTaken with the new iPad, no less. \n\nHappy Fourth of July!\n\nLens: Jane\n\nFilm: Ina's 1982"
+        "body": "<img src=\"images/archive/My+HipstaPrint+864178881-779511.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5761399618674935026\" />\nTaken with the new iPad, no less. \n\nHappy Fourth of July!\n\nLens: Jane\n\nFilm: Ina's 1982"
     },
     {
         "file": "2012-06-01-These-Flowers.md",
         "year": "2012",
         "date": "June 01, 2012",
         "title": "These Flowers",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi0MSiG27t84xKIXtloIqabQNDuaTJPpVbF1isAASuaUo58RiOZyWGamIMdT5-XDiNP01CtKKlDo8lD25mp6urWhCyVwMUHhFAJuI64eBagEJWWabqS1ZAcf7KXj-O97fxq111z/s320/My+HipstaPrint+848134849-717564.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5749109314697318098\" />\nFlax in the back quarter.\n\nLens: John S\n\nFilm: Dylan"
+        "body": "<img src=\"images/archive/My+HipstaPrint+848134849-717564.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5749109314697318098\" />\nFlax in the back quarter.\n\nLens: John S\n\nFilm: Dylan"
     },
     {
         "file": "2012-05-16-Lost-art.md",
         "year": "2012",
         "date": "May 16, 2012",
         "title": "Lost art",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiF2-4cBXmovfUIIthoMQHq-YMz-eRHtl_lei6RxDaOSBY4HEM1467l3EQ1pLKjLAb2LH4ypm6ScaI1CFqoFVC1nkqHDk_rCIJ-htfQTMAmbXz4W4jo_IbdnXNnBcMhXgh59aixJg/s320/My+HipstaPrint+868725441-793605.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5743179995607192674\" />\nIt's a rare thing for me to open a CD. So when I do, it's special. Complimenting this occasion is multiple other factors; that this CD is a result of my friend's toil is the biggest of all. Add the fact that this has to be the most legit looking CD, and you have one happy listener. \n\nLens: Loftus\n\nFilm: DC"
+        "body": "<img src=\"images/archive/My+HipstaPrint+868725441-793605.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5743179995607192674\" />\nIt's a rare thing for me to open a CD. So when I do, it's special. Complimenting this occasion is multiple other factors; that this CD is a result of my friend's toil is the biggest of all. Add the fact that this has to be the most legit looking CD, and you have one happy listener. \n\nLens: Loftus\n\nFilm: DC"
     },
     {
         "file": "2012-05-13-Theodore-Roosevelt--39-s-Lake.md",
         "year": "2012",
         "date": "May 13, 2012",
         "title": "Theodore Roosevelt&39;s Lake",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjWbgubY4UarfGfJMmkG7gajZ851JWcIU55l7wBVTSl3hysaM7OdlgsPX8hoJb6YespHe3CHs-qShMwyT6w1N58c-hHSxw_b0fQuBfDSoElHKy73S9pqj1DlBBoCc1LFR70BHtmNQ/s320/My+HipstaPrint+868725441-726510.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5741877473032691122\" />\nCall me crazy, but I believe old Theodore deserves a better body of water. \n\nMaybe when Yellowstone blows sky-high, we can fill up the crater and call it good. \n\nLens: Tejas\n\nFilm: Blanko Freedom11"
+        "body": "<img src=\"images/archive/My+HipstaPrint+868725441-726510.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5741877473032691122\" />\nCall me crazy, but I believe old Theodore deserves a better body of water. \n\nMaybe when Yellowstone blows sky-high, we can fill up the crater and call it good. \n\nLens: Tejas\n\nFilm: Blanko Freedom11"
     },
     {
         "file": "2012-05-05-Florence-Bench.md",
         "year": "2012",
         "date": "May 05, 2012",
         "title": "Florence Bench",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiRZfDzJp23vpM6HbkyhJn3Fm93jpnZQJyYq1398sB9BNC37agSbjWPxghM2IL9bkQ4W_8L1ZluBUsraBIjC4tdFwv4SYGLfWSRRGg8ciW02LdOLfRHcl5_fx_u5aiS-cTzkSDiIg/s320/My+HipstaPrint+918856385-730008.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5738853828238054898\" />\nWhat's that you say?  I haven't posted in a month?  Hmm. \n\nWell, everybody deserves a break. \n\nLens: Tejas\n\nFilm: Rock BW-11"
+        "body": "<img src=\"images/archive/My+HipstaPrint+918856385-730008.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5738853828238054898\" />\nWhat's that you say?  I haven't posted in a month?  Hmm. \n\nWell, everybody deserves a break. \n\nLens: Tejas\n\nFilm: Rock BW-11"
     },
     {
         "file": "2012-04-05-A-stranger.md",
         "year": "2012",
         "date": "April 05, 2012",
         "title": "A stranger",
-        "body": "A stranger sat next to me during lunch today. His attire was simple; a pair of faded 501's and a plaid shirt.  He appeared melancholy at first, but a quick glance in my direction contradicted my observation as he revealed a kind smile and thoughtful eyes behind wire-rim spectacles. Browned leather skin hung loosely from his aged frame, tanned from what appeared to be years of outside labor.  He ate no food, instead setting his day planner on the table and examining the contents therein. \n\nI considered him for a moment, and the thought crept into my mind that I ought to introduce myself and explain today's HipstaDay project. I grew hesitant as I noticed a hearing aide rising above his left ear. Fear overtook any bravado I had.  After all, I have never before approached a stranger to ask for a picture. What if he didn't hear me?  What if he misunderstood my intent? \n\nIt was for naught, after all; he quickly gathered his belongings and strode away. I managed to snap this before he left.  Bummer, because I actually wanted to know his name and what his story was. \n\nLens: John S\nFilm: Rock BW-11\n\n<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5728010287690860386\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhxVPPvM7Lm1EFPw_9MG92TPe-8nNGSYLdAzmUzUAkiEFLaZ8tnpGjT6PLLyNZS3omKN3sHeV9Pz2si74aLl0bRNst5XIfLzpuRNas7b7KSeyiD7gauujBjuTcUQ5AerJTnKx4m4g/s320/My+HipstaPrint+920146625-721259.jpg\" />\n\nSent from my iPhone"
+        "body": "A stranger sat next to me during lunch today. His attire was simple; a pair of faded 501's and a plaid shirt.  He appeared melancholy at first, but a quick glance in my direction contradicted my observation as he revealed a kind smile and thoughtful eyes behind wire-rim spectacles. Browned leather skin hung loosely from his aged frame, tanned from what appeared to be years of outside labor.  He ate no food, instead setting his day planner on the table and examining the contents therein. \n\nI considered him for a moment, and the thought crept into my mind that I ought to introduce myself and explain today's HipstaDay project. I grew hesitant as I noticed a hearing aide rising above his left ear. Fear overtook any bravado I had.  After all, I have never before approached a stranger to ask for a picture. What if he didn't hear me?  What if he misunderstood my intent? \n\nIt was for naught, after all; he quickly gathered his belongings and strode away. I managed to snap this before he left.  Bummer, because I actually wanted to know his name and what his story was. \n\nLens: John S\nFilm: Rock BW-11\n\n<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5728010287690860386\" src=\"images/archive/My+HipstaPrint+920146625-721259.jpg\" />\n\nSent from my iPhone"
     },
     {
         "file": "2012-04-03-Light-above-the-pier.md",
         "year": "2012",
         "date": "April 03, 2012",
         "title": "Light above the pier",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEivUwXscnFaKHqJpFfPE47N9G65IY2gcRvtR7PATRqmUP2Op0ebwe4U10sksNs2jaJxAPqFcIC5DVxs9P0EsZjwGlKx4aPqjKDKatxCmaVQXSWEE7LbK1KC47xbGJAVirQev5bV6g/s320/My+HipstaPrint+920146625-725715.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5727032345842864578\" />\nJohn S + Rock. What a combo.  Mmm, contrasty.  I'm addicted to the black and white goodness. Lens: John S\nFilm: Rock BW-11"
+        "body": "<img src=\"images/archive/My+HipstaPrint+920146625-725715.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5727032345842864578\" />\nJohn S + Rock. What a combo.  Mmm, contrasty.  I'm addicted to the black and white goodness. Lens: John S\nFilm: Rock BW-11"
     },
     {
         "file": "2012-03-30-Moon-over-the-new-digs.md",
         "year": "2012",
         "date": "March 30, 2012",
         "title": "Moon over the new digs",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiv7fOiRbkeR3YiW1kUfDWlt48EfmUwzS4iD_gJPyst5YqQ6OLW1p96PX9NvtaZAKgPyeTiYdAyvNcAS-h-toCu_7wqV5Yz-iWBiw-QVP7D0Jfk23d-8JCEY4HFhJNhUc6q6hSTPw/s320/My+HipstaPrint+920146625-759833.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5725501332976994082\" />\nWe truly enjoy the new place. A breath of fresh air. Lens: Hornbecker\nFilm: BlacKeys SuperGrain"
+        "body": "<img src=\"images/archive/My+HipstaPrint+920146625-759833.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5725501332976994082\" />\nWe truly enjoy the new place. A breath of fresh air. Lens: Hornbecker\nFilm: BlacKeys SuperGrain"
     },
     {
         "file": "2012-03-29-Rug-on-the-Floor.md",
         "year": "2012",
         "date": "March 29, 2012",
         "title": "Rug on the Floor",
-        "body": "<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5725116866597378130\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEguSOLnvbs3fxIDNk7pnFR-9-JrAZE0GlxxFC4q0EPr_YU6JhVc6ErDiCsHIjSIvzY0B_RRZRu_SUEB4lvio1WotEkvdzfYg8aJ97uvRFoyvu9DcDiUvCJ86fOf6FESkB7bxaHd/s320/My+HipstaPrint+834708161-744729.jpg\" />\nI use and very much like it.\nThis rug is on a wood floor, and light from the sun makes it visible to us through our eyes. \nHere is a photo representation.\nLens: John S\nFilm: Blanko"
+        "body": "<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5725116866597378130\" src=\"images/archive/My+HipstaPrint+834708161-744729.jpg\" />\nI use and very much like it.\nThis rug is on a wood floor, and light from the sun makes it visible to us through our eyes. \nHere is a photo representation.\nLens: John S\nFilm: Blanko"
     },
     {
         "file": "2012-03-27-Nature--it-swung-swiftly.md",
         "year": "2012",
         "date": "March 27, 2012",
         "title": "Nature, it swung swiftly",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjXHT-dl7aZOyuSyQcDI89s8UtHwh8tKMHcW3GdXX-G7NgrWWJtPOmydVum5XEymxmyBSU6VVIkaFdQXLyyJhqEh0Uz2lOfFrcKVNr5nhK6T2OIUm9KhNHKiD6xPeVDGDyaj_4PFA/s320/My+HipstaPrint+920146625-755652.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5724367872421600882\" />\nGo ahead. Explain to these poor wildflowers how in Arizona, you can't predict springtime weather. Tell them that yes, it was 85 degrees a week previous, and they were welcome to bloom. Then confess that it snowed. It snowed, and sapped the life from these poor tender blossoms. A few days later, nature found equilibrium, and what remains is this damaged silhouette, drying in the setting 75\u00b0 sun. Lens: Tejas\nFilm: Ina's 1935\nFlash: Off"
+        "body": "<img src=\"images/archive/My+HipstaPrint+920146625-755652.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5724367872421600882\" />\nGo ahead. Explain to these poor wildflowers how in Arizona, you can't predict springtime weather. Tell them that yes, it was 85 degrees a week previous, and they were welcome to bloom. Then confess that it snowed. It snowed, and sapped the life from these poor tender blossoms. A few days later, nature found equilibrium, and what remains is this damaged silhouette, drying in the setting 75\u00b0 sun. Lens: Tejas\nFilm: Ina's 1935\nFlash: Off"
     },
     {
         "file": "2012-03-25-Some-more-old-stuff-and-lovely.md",
         "year": "2012",
         "date": "March 25, 2012",
         "title": "Some more old stuff and lovely flowers, as well",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiJolc7zmF3pFM1YmZQju8B74fT_tjvUVsa49IJ7bmMwQLHGvjI6qWGYNvUepnJtNszPCtXpVJo1Tb6FRn6rmXaA2s3tLE1uDu8eEayiimW13ij0jiEvIQsh1QmeMwCuXnclRxU/s320/My+HipstaPrint+834708161-750556.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5723967989984215106\" />\nI swear, they just bloomed all on their own!\nLens: Lucifer VI\nFilm: Pistil"
+        "body": "<img src=\"images/archive/My+HipstaPrint+834708161-750556.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5723967989984215106\" />\nI swear, they just bloomed all on their own!\nLens: Lucifer VI\nFilm: Pistil"
     },
     {
         "file": "2012-03-24-Lost-Dutchman-State-Park.md",
         "year": "2012",
         "date": "March 24, 2012",
         "title": "Lost Dutchman State Park",
-        "body": "<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5723322881553534850\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgxnikb1DLMMIMbulMobavsUX7ASlomd9YgeRKc_DnCHor76C1pnpnj55txteV7uTGMFkmXHHGmL_vYJ-6sIqXffPAfcHeS2slcnj6eIc9yJRefTCh7tzJvRQfrwFCSLZetianPqg/s320/My+HipstaPrint+920146625-749682.jpg\" />\n\nI've wanted to come out here for a while now. Though still battling a cold, I felt encouraged to take the trip today after work.  \n\nGot there with plenty of sunlight left. Even took the new bike for a spin around a few trails.\n\nAlso, an iPhoto Journal.  More shots can be found there.  Enjoy!\n\nLens: Libatique 73\nFilm: Ina's 1935"
+        "body": "<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5723322881553534850\" src=\"images/archive/My+HipstaPrint+920146625-749682.jpg\" />\n\nI've wanted to come out here for a while now. Though still battling a cold, I felt encouraged to take the trip today after work.  \n\nGot there with plenty of sunlight left. Even took the new bike for a spin around a few trails.\n\nAlso, an iPhoto Journal.  More shots can be found there.  Enjoy!\n\nLens: Libatique 73\nFilm: Ina's 1935"
     },
     {
         "file": "2012-03-22-Sunrise-contrail-through-the-b.md",
         "year": "2012",
         "date": "March 22, 2012",
         "title": "Sunrise contrail through the blossoming plum",
-        "body": "<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5722763766586374738\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhF-fvYJ5SznEB853omjdD2YbzJA2rd-RmoBceqkepamBG-MaZ0pH_7hzMRLb0fQDoQ14g7iOwm94Vy7IkjgpHyuDmL7FdG5ZqA2CaKlQLg5XJfXssY6kL1SBdV0esXT1ASNlyhFg/s320/My+HipstaPrint+920146625-771359.jpg\" />\n\nBacking out of the driveway this morning, I noticed an arcing line spanning the entire sky. It started a brilliant peach near the horizon, waned red, until it settled on soft pink as it followed the gradient of the sky.\n\nLens: Lucifer VI\nFilm: Ina's 1935"
+        "body": "<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5722763766586374738\" src=\"images/archive/My+HipstaPrint+920146625-771359.jpg\" />\n\nBacking out of the driveway this morning, I noticed an arcing line spanning the entire sky. It started a brilliant peach near the horizon, waned red, until it settled on soft pink as it followed the gradient of the sky.\n\nLens: Lucifer VI\nFilm: Ina's 1935"
     },
     {
         "file": "2012-03-20-Stove-on-the-porch.md",
         "year": "2012",
         "date": "March 20, 2012",
         "title": "Stove on the porch",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgg2MoFOiHmhhHMd4WDte-xLeV3uL2sc-z3KD4e_BmpkTTkCnFoPXi_DnSBaRVc5htsF6Vt7nmUr2eGC1YPC2sYF3MiqjUcdOlt41aNzWbBlsbxphzalqUl9IEIjKmH-h7rLVFi/s320/My+HipstaPrint+832185025-719691.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5721799330889016066\" />\nI have a cast-iron stove on the porch of our family's cabin, and from time to time, I like to head up there and watch the snow falling across the valley in a comfortable chair with a warm fire at my feet.\nLens: Roboto Glitter\nFilm: Cano Cafenol"
+        "body": "<img src=\"images/archive/My+HipstaPrint+832185025-719691.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5721799330889016066\" />\nI have a cast-iron stove on the porch of our family's cabin, and from time to time, I like to head up there and watch the snow falling across the valley in a comfortable chair with a warm fire at my feet.\nLens: Roboto Glitter\nFilm: Cano Cafenol"
     },
     {
         "file": "2012-03-19-Layering.md",
         "year": "2012",
         "date": "March 19, 2012",
         "title": "Layering",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhrShVJw5KHu4WlMMJYxceenp23475xDtra5GH3rf8B43Yx5RXiFdtUmaa6RWbSycNV8jHuSpX87shKt3KOQY2Xu6gJAFbTFCLnl3UdA3eYFF0ILRYk1M0fcHIoSUrmY7JMrVqJZA/s320/My+HipstaPrint+920146625-738624.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5721661110543106754\" />\nThere's no such thing as \"just a cloud\". There's layers of deception and kinetic energy hidden in this shot. Lens: James M\nFilm: DC"
+        "body": "<img src=\"images/archive/My+HipstaPrint+920146625-738624.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5721661110543106754\" />\nThere's no such thing as \"just a cloud\". There's layers of deception and kinetic energy hidden in this shot. Lens: James M\nFilm: DC"
     },
     {
         "file": "2012-03-19-Hail--yes--lt--pun-gt-.md",
         "year": "2012",
         "date": "March 19, 2012",
         "title": "Hail, yes &lt;\\pun&gt;",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh1IxrV5v-NyLIPR7J2iW9h0HQP3T0t7fAuBhFumZ4rpxuUiRKEJ1biaSLRZx8HqFm63-D6FtdWACQVwiLMZoPt0WMa1Vpv220d5DjP3cPP1N0aUsEb2mhkr3lE0XuR1lSXLgMnEA/s320/My+HipstaPrint+920146625-749169.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5721409473535743874\" />\nAs forecasted, we received a dose of wet weather today. Once the hail started, I grabbed a zip-lock bag and headed outside. Unfortunately, it rained so hard that my lens immediately fogged and nothing would focus. This was the only reputable shot. The kids took a handful and chucked it out the door. I suppose that's an Arizona snowball. Lens: John S\nFilm: Claunch 72 Monochrome"
+        "body": "<img src=\"images/archive/My+HipstaPrint+920146625-749169.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5721409473535743874\" />\nAs forecasted, we received a dose of wet weather today. Once the hail started, I grabbed a zip-lock bag and headed outside. Unfortunately, it rained so hard that my lens immediately fogged and nothing would focus. This was the only reputable shot. The kids took a handful and chucked it out the door. I suppose that's an Arizona snowball. Lens: John S\nFilm: Claunch 72 Monochrome"
     },
     {
         "file": "2012-03-16-Exterior-lighting.md",
         "year": "2012",
         "date": "March 16, 2012",
         "title": "Exterior lighting",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhpCyowNS-0jsOEDi2IiQVUdH7uD5dlwIMa4ckd55MX59WfruD9-sD-qCA8Y0Wj4KwaWx9SPuHtab5cGxmAHaF7loa9_0JcRtQmQpH4QIghA0yqX-_0tEkhadDYBJz9cre7JgiTww/s320/My+HipstaPrint+920146625-771824.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5720334539375840082\" />\n<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjbEc8kY-IqNmochBx2Psh-YA4zvkWeHAFxFt_lsPTB8IYOGm3b7pgUSR1ZN4FojI9jTFM4zx4lKRFVAXBxj6rI4JZcSJaWr1kTg4ZkO2i0CqEl63F6jXjknwcLcBlbUreBsNWj_w/s320/image-775495.jpeg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5720334554593953042\" />\nMy best efforts at regular postings this month have failed, largely because of sundry illnesses passing through my family. I'm finally feeling zapped; but several things will give me energy in the coming days and weeks. Working late tonight, so this picture was all about finding suitable light for a quick shot. It seems this new film gives random results, as if the film had expired long ago and only a few exposures are worth their salt. The tree turned out well enough.  I'll post an example of a failure as well. Lens: Adler 9009\nFilm: Dylan"
+        "body": "<img src=\"images/archive/My+HipstaPrint+920146625-771824.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5720334539375840082\" />\n<img src=\"images/archive/image-775495.jpeg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5720334554593953042\" />\nMy best efforts at regular postings this month have failed, largely because of sundry illnesses passing through my family. I'm finally feeling zapped; but several things will give me energy in the coming days and weeks. Working late tonight, so this picture was all about finding suitable light for a quick shot. It seems this new film gives random results, as if the film had expired long ago and only a few exposures are worth their salt. The tree turned out well enough.  I'll post an example of a failure as well. Lens: Adler 9009\nFilm: Dylan"
     },
     {
         "file": "2012-03-11-Light-pours.md",
         "year": "2012",
         "date": "March 11, 2012",
         "title": "Light pours",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjR-P-byG7YPPAus9rzdgY0LPtan0U0c4QKihkTMtkTCxlL66ct_JM-CwRnDDzfGlxvvsoChlVIPRvgsqWHk12r3CrrXxz2nMj1HdEIsizMZwEEimjH0SB-lGb7dOZp63K_Vih3xQ/s320/My+HipstaPrint+852365361-762584.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5718462324850651746\" />\nI'll say nothing about the architecture, but it's wonderful that when you have to be inside, you don't really have to be without a bit of sunshine. Lens: Roboto Glitter\nFilm: DreamCanvas"
+        "body": "<img src=\"images/archive/My+HipstaPrint+852365361-762584.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5718462324850651746\" />\nI'll say nothing about the architecture, but it's wonderful that when you have to be inside, you don't really have to be without a bit of sunshine. Lens: Roboto Glitter\nFilm: DreamCanvas"
     },
     {
         "file": "2012-03-09-Thirty-three.md",
         "year": "2012",
         "date": "March 09, 2012",
         "title": "Thirty-three",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjaexgyUBprr92878cPTuAOvrVcnGiIooGLU0iPzdVktV5p4CW3OIINWtqZS0fsBoBEHH7EhbNzudke1exDi4NEVbAv9NMKmYHQ32pxef-SUpxdxh1g8q4wxJK3Mj_METEqXULnUQ/s320/photo-786249.JPG\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5717776518518082994\" />\nSurrounded by family and friends, I couldn't have asked for a better birthday. I am blessed. I am lucky. I should be more grateful for what I have."
+        "body": "<img src=\"images/archive/photo-786249.JPG.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5717776518518082994\" />\nSurrounded by family and friends, I couldn't have asked for a better birthday. I am blessed. I am lucky. I should be more grateful for what I have."
     },
     {
         "file": "2012-03-09-Fluid-motion.md",
         "year": "2012",
         "date": "March 09, 2012",
         "title": "Fluid motion",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhxSzU7BYv6yXJZkPptJ9sX0hyphenhyphenQlFhUBOjwy80ymdDxHAbSud4iwe_7u_OQIhceN3GJZgPfhTp9_KPss3sn14QgJLnYhN7iI7kTkmkilgLsfeHJiYfpD3T0YC_gIsE_LsnkUsC0fQ/s320/My+HipstaPrint+852365361-717748.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5717991834014853730\" />\nYou know what?  I'm grateful for this little phone, with a camera that allows me to take a portion of my day and capitalize on it. I'm not sure the source of these poignant feelings, but I'm acutely aware of just how lucky I am. The big things, the little things, the good and the bad; everything coalesces into this fine adventure I call my life. So with that said, enjoy another black and white pic. It's my current weapon of choice. Lens: Bettie XL\nFilm: Rock BW-11"
+        "body": "<img src=\"images/archive/My+HipstaPrint+852365361-717748.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5717991834014853730\" />\nYou know what?  I'm grateful for this little phone, with a camera that allows me to take a portion of my day and capitalize on it. I'm not sure the source of these poignant feelings, but I'm acutely aware of just how lucky I am. The big things, the little things, the good and the bad; everything coalesces into this fine adventure I call my life. So with that said, enjoy another black and white pic. It's my current weapon of choice. Lens: Bettie XL\nFilm: Rock BW-11"
     },
     {
         "file": "2012-03-07-Circle-in-silence.md",
         "year": "2012",
         "date": "March 07, 2012",
         "title": "Circle in silence",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiX5WDu5QhjmMa3Q_HrV9Mno5GvnDHyuAY51042UFLL2Hxy6pULLBGQzC4-wqB-Fzlr5M5WYoJ7JaEBeT5RrCuZRj0Pc-iuECdk-h-vX__v51MnUF4HgfVjibVJOO4DeBMuDq_RUQ/s320/My+HipstaPrint+852365361-714111.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5716940838260461250\" />\nToo bad I had to watch my back to take this shot. Lens: James M\nFilm: Blanko Freedom13"
+        "body": "<img src=\"images/archive/My+HipstaPrint+852365361-714111.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5716940838260461250\" />\nToo bad I had to watch my back to take this shot. Lens: James M\nFilm: Blanko Freedom13"
     },
     {
         "file": "2012-03-05-Backlit-Sissoo.md",
         "year": "2012",
         "date": "March 05, 2012",
         "title": "Backlit Sissoo",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj3Laa8_euZBcSnXJSKYUxMfTkr7nxtz8HDbdflnquSdSxWYZ8_DUbXHQQoGlV9mky72Cp4iq8rU5QUDxjg1SnLiUOFrmWhXhekNQpSQ9X4eLCbGbwfFYdAWKdAikSgkQzK9kUaIQ/s320/My+HipstaPrint+851017777-716184.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5716235185876308738\" />\nTrying out a few nighttime shots. Could have lined this one up a bit better, but the effect came through. Lens: John S\nFilm: AO BW"
+        "body": "<img src=\"images/archive/My+HipstaPrint+851017777-716184.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5716235185876308738\" />\nTrying out a few nighttime shots. Could have lined this one up a bit better, but the effect came through. Lens: John S\nFilm: AO BW"
     },
     {
         "file": "2012-03-01-Path.md",
         "year": "2012",
         "date": "March 01, 2012",
         "title": "Path",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh8E2JPkZ60oZAJswDGazwuthiPeJiyP1g8TNhHjvhwtff05kD3Is7S_4oItYwgvc-QldebGj_l0qe2xV3L5opsjaQP0vc0h7rYjixt28RCC5x1MN5NL5vE1LwLlk-R_HIC6aJspA/s320/My+HipstaPrint+0-786593.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5714989086680962658\" />\nWhen I awoke today \nSuddenly, nothing happened\nBut in my dreams-\nI slew the dragon\nAnd down this beaten path\nAnd up this cobbled lane \nI'm walking in my own footsteps once again-Colin HayLens: Tejas\nFilm: BlacKeys SuperGrain"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-786593.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5714989086680962658\" />\nWhen I awoke today \nSuddenly, nothing happened\nBut in my dreams-\nI slew the dragon\nAnd down this beaten path\nAnd up this cobbled lane \nI'm walking in my own footsteps once again-Colin HayLens: Tejas\nFilm: BlacKeys SuperGrain"
     },
     {
         "file": "2012-02-26-Birthday.md",
         "year": "2012",
         "date": "February 26, 2012",
         "title": "Birthday",
-        "body": "<img border=\"0\" height=\"199\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhqEALtAKpxghvOb9xHlASpG13m4yWJMVPIPmX-_6uEa4DcHGb9FtPiaodXTYtGLVAs4lYXMOfr456z_LJPU3RYwn4iLHAB8jSwD5hEbW1gEcD_KpHY39bCjjerEXmyz7UtTdMX/s320/adam.jpg\" width=\"320\" zda=\"true\" />\n\nSpeaking in terms of days past, there were two brothers. 10 years separated them nearly to the month and day; the sign they shared of Pisces was a bond in both word and temperament. \n\nThe older brother was all the younger brother could ask for. Patient and kind, always willing to share time with him. On far too many occasions, the younger would find his way downstairs and into the older's room. He was never once dismissed. Instead, he was welcomed and encouraged to come back.\n\nOnce, the older brother gave the younger a quarter to use for a candy dispenser at Robintino's; the young brother did not forget this. The young brother hopes the older remembers the look on the hiss face. He hopes it contained gratitude. \n\n<img border=\"0\" height=\"226\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiHS6rrBAwN4ZY5LbdALU6YuSpuFT-GiecvQ2qdEoHH5uMChMHT93NmtzgKeF4nxh20VBSiRN0Xd_a4TjEmHzZdj-AOx2j3H5K0qSHaoHKNr43zhuaSBHgdAX6u6gKWFD8cU2f3/s320/adamfamily.jpg\" width=\"320\" zda=\"true\" />\n\nAnother time, he took the young brother with him to downtown Salt Lake. The young brother remembers this trip fondly, his older brother had a broken leg. They bought magic tricks at a shop at the Crossroads. The young brother was cold at the bus stop, so the older brother gave him his sweater. The young brother was warm, and knew his older brother was likely cold. But the older brother never let on. They also missed the bus. \n\nCountless memories continue; using the older brother's paint, listening to his music, spending time in his room when he had no real business there. He remembers the Sunkist clock on the wall, the replica cars and models in his room. There were pencil drawings on the wall above the door. It smelled of incense and cologne.\n\nThe older brother baptized the younger, helped him feel encouraged when times were less than certain, and always made him feel like he was on to something big.\n\n<img border=\"0\" height=\"252\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg-u78k2FtF118QQzX8IespwACk5MHl3dZlP0oH_vsUReNs0o6NL7JPLwnG6QFN59bJ8Wy6m6B884nz61dOTsQPnZdv7cQxmB4yCaL0wXFj4t0ovkJqngpkRjuJs_zDDvMMx89f/s320/adam2.jpg\" width=\"320\" zda=\"true\" />\n\nThe younger brother remembers the swim meets, concerts (especially singing Goodnight Saigon...killer), football games, date nights, and family dinners. Big events and small, it shows that the young brother was always watching.\n\nThe younger brother remembers the Vespa. He remembers the trouble he caused when he brought it home, but remembers it only feeling like excitement. This was the vehicle that would carry his hero forth on his journeys. The younger brother pretended his bike was a Vespa. The younger brother pretended he was his older brother.\n\nSharing a close birthday, yet being separated by 10 years gave the young brother perspective. It allowed him to see into the future. \n\nHappy birthday to an older brother who has always exemplified the role he was thrust into, the role that so many fail miserably at, that many are still trying to master. Happy birthday to the older brother that teaches his children to be the best siblings they can be, whether brothers or sisters, older or young.\n\nHappy birthday to you, Adam."
+        "body": "<img border=\"0\" height=\"199\" src=\"images/archive/adam.jpg\" width=\"320\" zda=\"true\" />\n\nSpeaking in terms of days past, there were two brothers. 10 years separated them nearly to the month and day; the sign they shared of Pisces was a bond in both word and temperament. \n\nThe older brother was all the younger brother could ask for. Patient and kind, always willing to share time with him. On far too many occasions, the younger would find his way downstairs and into the older's room. He was never once dismissed. Instead, he was welcomed and encouraged to come back.\n\nOnce, the older brother gave the younger a quarter to use for a candy dispenser at Robintino's; the young brother did not forget this. The young brother hopes the older remembers the look on the hiss face. He hopes it contained gratitude. \n\n<img border=\"0\" height=\"226\" src=\"images/archive/adamfamily.jpg\" width=\"320\" zda=\"true\" />\n\nAnother time, he took the young brother with him to downtown Salt Lake. The young brother remembers this trip fondly, his older brother had a broken leg. They bought magic tricks at a shop at the Crossroads. The young brother was cold at the bus stop, so the older brother gave him his sweater. The young brother was warm, and knew his older brother was likely cold. But the older brother never let on. They also missed the bus. \n\nCountless memories continue; using the older brother's paint, listening to his music, spending time in his room when he had no real business there. He remembers the Sunkist clock on the wall, the replica cars and models in his room. There were pencil drawings on the wall above the door. It smelled of incense and cologne.\n\nThe older brother baptized the younger, helped him feel encouraged when times were less than certain, and always made him feel like he was on to something big.\n\n<img border=\"0\" height=\"252\" src=\"images/archive/adam2.jpg\" width=\"320\" zda=\"true\" />\n\nThe younger brother remembers the swim meets, concerts (especially singing Goodnight Saigon...killer), football games, date nights, and family dinners. Big events and small, it shows that the young brother was always watching.\n\nThe younger brother remembers the Vespa. He remembers the trouble he caused when he brought it home, but remembers it only feeling like excitement. This was the vehicle that would carry his hero forth on his journeys. The younger brother pretended his bike was a Vespa. The younger brother pretended he was his older brother.\n\nSharing a close birthday, yet being separated by 10 years gave the young brother perspective. It allowed him to see into the future. \n\nHappy birthday to an older brother who has always exemplified the role he was thrust into, the role that so many fail miserably at, that many are still trying to master. Happy birthday to the older brother that teaches his children to be the best siblings they can be, whether brothers or sisters, older or young.\n\nHappy birthday to you, Adam."
     },
     {
         "file": "2012-02-22-Mac-Stack.md",
         "year": "2012",
         "date": "February 22, 2012",
         "title": "Mac Stack",
-        "body": "<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5712088655421047762\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjXN2ge9gN_pEYXo-U97ViSzUdvCzYDW3GbyW8ZoI1O6OjJ2QMfwvmw3hDnZa0CWABh9i5ca99hzBjfBQJK3NkWkqraETAEhk4CHasV6PVfelw9i1FJQzob64EsqpttVylS1jWW/s320/My+HipstaPrint+0-777786.jpg\" />\nIn my office, of late.\nLens: Lucifer VI\nFilm: DreamCanvas"
+        "body": "<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5712088655421047762\" src=\"images/archive/My+HipstaPrint+0-777786.jpg\" />\nIn my office, of late.\nLens: Lucifer VI\nFilm: DreamCanvas"
     },
     {
         "file": "2012-02-15-Some-update-is-better-than-non.md",
         "year": "2012",
         "date": "February 15, 2012",
         "title": "Some update is better than none",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi-Qn-tTBFH2psoUsk5Gq58d0yvEZA88Xsxk-fR-Zn44udh_mq8I5zwNvjdKUsk0p2uZfLntUvrJ1XgV9b-EwZyN5YV8AHQPNCLEqvTVau3KP9ypaBFj9a_8_QNH1gtq9M-Benitw/s320/My+HipstaPrint+0-716660.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5709428090250255138\" />\nEven if it's not grammatically correct. Lens: Americana\nFilm: BlacKeys B+W"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-716660.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5709428090250255138\" />\nEven if it's not grammatically correct. Lens: Americana\nFilm: BlacKeys B+W"
     },
     {
         "file": "2012-02-09-Reasoning-Madness.md",
         "year": "2012",
         "date": "February 09, 2012",
         "title": "Reasoning/Madness",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiEn3YumvqPPOofGTQXD2uFoFAfCCRo0bXryJG2xYpdY0c8UrLx3cSO7vnc38MbygVadljfdN2hr0mEwBIusq6e7xrcIHDSvfcFlH3cTE-u6FrxeqpYPjshyphenhyphenfxBcgPyazFa77VYHg/s320/My+HipstaPrint+0-751195.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5706940591994080482\" />\nSomething happened today that made me nearly lose my grip; the type of situation that strips naked the tender, fragile connections we as human beings strive to keep with one another, as well as the delicate nature of those connections as they rest upon the edge of a sword. I don't have any further words at this time. Lens: Watts\nFilm: Blanko Noir"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-751195.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5706940591994080482\" />\nSomething happened today that made me nearly lose my grip; the type of situation that strips naked the tender, fragile connections we as human beings strive to keep with one another, as well as the delicate nature of those connections as they rest upon the edge of a sword. I don't have any further words at this time. Lens: Watts\nFilm: Blanko Noir"
     },
     {
         "file": "2012-02-06-A-change-of-plans.md",
         "year": "2012",
         "date": "February 06, 2012",
         "title": "A change of plans",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgQHLrHBaGNkGwJwUxe7VdAtprhKvSCziTXsWnnsix93xdpLOE5JW_daXgH91VyDKE9DOKtohWydoAup3jUT1U3_bJVXDNmzpyRoKFzObwbZX-sZJtK2hYqbWsM-ScEvcoBpUa6Ow/s320/My+HipstaPrint+0-755603.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5705838524138929858\" />\nWhile parking at church today, I noticed a trio of prematurely blossoming trees near the south side of the building.  Later on, I made it a point to pull away from our meeting for a moment to shoot it. Wandering closer, I saw not only that it was in full spring bloom, it had not yet lost its autumn color completely. I tried to take a picture that would illustrate the contrast between the two seasons clinging to this tree when I noticed another element. Dozens of bees were crowding the area, lazily hovering between branches. Normally, I would make haste and flee. But something about the casual nature of their flight endowed me with bravery. At least, until I perturbed them enough to provoke them. I did manage to snap this picture before I left. After consulting with my dad and the Net, I'm still unsure whether it's a wasp or not. These trees better hope a late season frost doesn't scatter these blossoms on the ground. Then again, we haven't even seen the low 40s since December. Lens: Helga Viking\nFilm: Ina's 1935"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-755603.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5705838524138929858\" />\nWhile parking at church today, I noticed a trio of prematurely blossoming trees near the south side of the building.  Later on, I made it a point to pull away from our meeting for a moment to shoot it. Wandering closer, I saw not only that it was in full spring bloom, it had not yet lost its autumn color completely. I tried to take a picture that would illustrate the contrast between the two seasons clinging to this tree when I noticed another element. Dozens of bees were crowding the area, lazily hovering between branches. Normally, I would make haste and flee. But something about the casual nature of their flight endowed me with bravery. At least, until I perturbed them enough to provoke them. I did manage to snap this picture before I left. After consulting with my dad and the Net, I'm still unsure whether it's a wasp or not. These trees better hope a late season frost doesn't scatter these blossoms on the ground. Then again, we haven't even seen the low 40s since December. Lens: Helga Viking\nFilm: Ina's 1935"
     },
     {
         "file": "2012-02-01-Postcard-friendly.md",
         "year": "2012",
         "date": "February 01, 2012",
         "title": "Postcard friendly",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiWztvkqO8E2te2xonrvZXi2yqErFj8BIqOsc_A1QTcO0Q-T2ryFE1TWSzSfUxTp1fqBv9W5ceXBn_fZeAxTPgnJ0pzY8DYNlznLWTqcXy4dmbhcEkmh_RBDtwx_hWxlJOGq8pA6A/s320/My+HipstaPrint+0-762538.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5704207327770367362\" />\nAs is ritual for me during my lunch hour, I spent half of it eating, and the other half walking the grounds of the mall in which I work. I snapped 14 pictures along the way. I returned inside to look at them. I always hope for that gem; the one print that says something to me, or the one that looks brilliant, despite the circumstances. None of the 14 yesterday really did, though. But after showing a friend at work, he and I both agreed that this one fit the cliche postcard look nicely enough. And since it's been several days since I've posted, it made the cut. So, enjoy the exposure, little palm-tree-with-wispy-clouds picture. You wouldn't have made it on any other day. Lens: Buckhorst H1\nFilm: DreamCanvas"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-762538.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5704207327770367362\" />\nAs is ritual for me during my lunch hour, I spent half of it eating, and the other half walking the grounds of the mall in which I work. I snapped 14 pictures along the way. I returned inside to look at them. I always hope for that gem; the one print that says something to me, or the one that looks brilliant, despite the circumstances. None of the 14 yesterday really did, though. But after showing a friend at work, he and I both agreed that this one fit the cliche postcard look nicely enough. And since it's been several days since I've posted, it made the cut. So, enjoy the exposure, little palm-tree-with-wispy-clouds picture. You wouldn't have made it on any other day. Lens: Buckhorst H1\nFilm: DreamCanvas"
     },
     {
         "file": "2012-01-31-Fair-Ancient-Entryway.md",
         "year": "2012",
         "date": "January 31, 2012",
         "title": "Fair Ancient Entryway",
-        "body": "<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5703595386217708866\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjdIuQ2K9xE7jRntz0HGRFcXGuq-kwH3rDzQXMz0LG5fp26xaenoYqP6rjFCXvJKFibqcdE69hU2XmvlHlTtfkVx7HR-mp-MQSi1U0yrCWQUDsg7WQn9OugzzCBrWIr5nmblGCm/s320/photo-784141.JPG\" />\nShot with ye olde 4s\nA purple door and warm, old pine. \nOh yeah; industrial linoleum in black and white, too. \nThat's it."
+        "body": "<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5703595386217708866\" src=\"images/archive/photo-784141.JPG.jpg\" />\nShot with ye olde 4s\nA purple door and warm, old pine. \nOh yeah; industrial linoleum in black and white, too. \nThat's it."
     },
     {
         "file": "2012-01-28-Shadows-in-Flight.md",
         "year": "2012",
         "date": "January 28, 2012",
         "title": "Shadows in Flight",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjBHuNYD9ShqWMvfAYq8AGDF0nWyszyTMqtqMMDbIKGzz7rDE0NqEDLt7E_3hnZB-g3nU_pPRmM4buEkVjq10w7nsNwb2I4G_o2xPlFri-ni66a4wr2yGBBG3l1KMQ_1s9CLozyaw/s320/My+HipstaPrint+0-748971.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5702473822653927042\" />\nA bit dark outside for the lens choice. Still fun to zoom in and see the different stages of flight. Yep. The title is a shout out to my favorite author. Live long, Scott Card. Lens: John S\nFilm: Rock BW-11"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-748971.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5702473822653927042\" />\nA bit dark outside for the lens choice. Still fun to zoom in and see the different stages of flight. Yep. The title is a shout out to my favorite author. Live long, Scott Card. Lens: John S\nFilm: Rock BW-11"
     },
     {
         "file": "2012-01-22-To-the-valley-below.md",
         "year": "2012",
         "date": "January 22, 2012",
         "title": "To the valley below",
-        "body": "<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5700609009338628610\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh8epkp340SCYgw9OjTr831xMzrDZ5hmBY-42UezOix_oTbHrP1HZ_8-uFNLKoMSMtfSDH6Bc22n4dx2p0CnWlUTYJKf-VDEGy5nE4CPPYq6LAN-ZqJmxGI86PHyXLeACWGdMaV/s320/My+HipstaPrint+0-763970.jpg\" />\n\nTexture and green\none day to be resurgent\n'neath a snow linen\n\nLens: Lucifer VI\nFilm: DreamCanvas"
+        "body": "<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5700609009338628610\" src=\"images/archive/My+HipstaPrint+0-763970.jpg\" />\n\nTexture and green\none day to be resurgent\n'neath a snow linen\n\nLens: Lucifer VI\nFilm: DreamCanvas"
     },
     {
         "file": "2012-01-20-Stairs.md",
         "year": "2012",
         "date": "January 20, 2012",
         "title": "Stairs",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiBOJWHvjnZAF5ND_ibKNNLPQinX4LSSK0W_PgURou3ulPeKZbHgHdw-j2GO2dwXXvWZUrI1q1o1LqfWTqOrEyLKwcjVoVctTr5DU0FEQldDTickwnXbhwv6S3F4aVGw6Rv3qqpfQ/s320/My+HipstaPrint+0-721316.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5699512750341114578\" />\nI remembered I shot these stairs last year. Right after my wife and I returned from Southern California. Lens: Kaimal Mark II\nFilm: Ina's 1935"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-721316.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5699512750341114578\" />\nI remembered I shot these stairs last year. Right after my wife and I returned from Southern California. Lens: Kaimal Mark II\nFilm: Ina's 1935"
     },
     {
         "file": "2012-01-16-Mid-January--her-shadows-unfur.md",
         "year": "2012",
         "date": "January 16, 2012",
         "title": "Mid-January, her shadows unfurled",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgjLdYrw_cAyoHN4AUkqATSEflenVgfDJXOaPUfkBazA-A9RoCGDSa9MWMo-RTCVnC_1rr_pi8N0rnyKCV6Mhwmj1m29dfFLe1MahIzXf0k6Z85T110iMFqx2gPGTMrNmPIkgZexg/s320/My+HipstaPrint+0-769913.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5698372212435072002\" />\nLens: Kaimal Mark II\nFilm: BlacKeys SuperGrain"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-769913.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5698372212435072002\" />\nLens: Kaimal Mark II\nFilm: BlacKeys SuperGrain"
     },
     {
         "file": "2012-01-14-XIII.md",
         "year": "2012",
         "date": "January 14, 2012",
         "title": "XIII",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhVm2TlSg5EQyI_jwvzXSJKklaoVcNcDXuzXi8ZTH3y7Wk3gQRAP1GG4OjloehLvMZKWrAvcIymUtMrNh8G2JeW_EznBa8joRNX_kL1kI5o6E5p_CJAoYsvTvteLSEtxBWU3e2r/s320/My+HipstaPrint+0-749440.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5697304398446823122\" />\nOut trying my luck on Friday the 13th...\nLens: Watts\nFilm: Big Up"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-749440.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5697304398446823122\" />\nOut trying my luck on Friday the 13th...\nLens: Watts\nFilm: Big Up"
     },
     {
         "file": "2012-01-11-Corners.md",
         "year": "2012",
         "date": "January 11, 2012",
         "title": "Corners",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjUKugWs0OzopQcVmZus-N33I9gt1eD2lze0Vi5sY0rIlGc5Dj5nzFAryN398cvZJ6mCaiA5BF1rKg8hulWZ9pVNXfynaznl-AClSxvmU31UMZlgcjIfryqGH_oORw56lXSoKxFCg/s320/My+HipstaPrint+0-710447.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5696162202271156994\" />\nI'm back at work full-time now, which means my time to explore this world through the lens of a camera is compressed to a 30 minute window. An opportunity that I am blessed and grateful to have. Lens: Hornbecker\nFilm: BlacKeys SuperGrain"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-710447.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5696162202271156994\" />\nI'm back at work full-time now, which means my time to explore this world through the lens of a camera is compressed to a 30 minute window. An opportunity that I am blessed and grateful to have. Lens: Hornbecker\nFilm: BlacKeys SuperGrain"
     },
     {
         "file": "2012-01-10-Corn-stands-still--slowly---yi.md",
         "year": "2012",
         "date": "January 10, 2012",
         "title": "Corn stands still, slowly / yielding to entropy&39;s call",
-        "body": "<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5696154362050047682\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjYaeYwd0U_3BaDvhMHN7bfZ8TjBSG-t2G-2q7OCyAkwF13KUtSqSI2G5U3kmTCfoLpsLSDMBObXNKILa-ThfCiGUwr3uXYxTL5Ku0gY3H4thzNnECi_VNtcn2OVhg_XaApdajz/s320/My+HipstaPrint+0-785364.jpg\" />\nsun, silence and cold.\n\nIt's nice to be in the garden, even during January.\nLens: John S\nFilm: DC"
+        "body": "<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5696154362050047682\" src=\"images/archive/My+HipstaPrint+0-785364.jpg\" />\nsun, silence and cold.\n\nIt's nice to be in the garden, even during January.\nLens: John S\nFilm: DC"
     },
     {
         "file": "2012-01-09-Ashen-log-astride-the-fallen-f.md",
         "year": "2012",
         "date": "January 09, 2012",
         "title": "Ashen log astride the fallen flame",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhcZ_Hqb2dASqcFSLJHCi4-SasfMZOprvW9OXSOefEAxjoRM87gbUDvkSZewl_ypjPbpta6kg7PPYfNE82cZpRuJjhqrTjkzZcLbAQG89_aCS1TPpPZkqZwHjY-MHEAvsmrLZsdug/s320/My+HipstaPrint+0-782911.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5695445249252137106\" />\nCapped off the weekend with a marshmallow roast outside the in-law's residence. I wonder what this new week will bring?  Lens: Libatique 73\nFilm: Ina's 1969"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-782911.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5695445249252137106\" />\nCapped off the weekend with a marshmallow roast outside the in-law's residence. I wonder what this new week will bring?  Lens: Libatique 73\nFilm: Ina's 1969"
     },
     {
         "file": "2012-01-08-A-skiff-and-clear-air.md",
         "year": "2012",
         "date": "January 08, 2012",
         "title": "A skiff and clear air",
-        "body": "<img alt=\"\" border=\"0\" height=\"388\" id=\"BLOGGER_PHOTO_ID_5695052141250681250\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj_zoX2sQ4ruftEcyVrqfVYI2J8dqWmdbOd4kupp7q4vuFd6-7sS32T0wUJwIeqzzF2yiijT6BDC3CdbiO2_gOTz5N-UCzhPfEkAIKlotUrUDFPRyEGM6Gp0ds3ZBrJYJ6xqjrS/s640/photo-755023.JPG\" width=\"640\" />\n\nTaken by the venerable 4s.\nProcessed in PhotoStudio and framed in Lightbox."
+        "body": "<img alt=\"\" border=\"0\" height=\"388\" id=\"BLOGGER_PHOTO_ID_5695052141250681250\" src=\"images/archive/photo-755023.JPG.jpg\" width=\"640\" />\n\nTaken by the venerable 4s.\nProcessed in PhotoStudio and framed in Lightbox."
     },
     {
         "file": "2012-01-07-Familiar-moon--familiar-tree.md",
         "year": "2012",
         "date": "January 07, 2012",
         "title": "Familiar moon, familiar tree",
-        "body": "<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5694689738597445666\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg1jiCgSkwRrkqAcEVDCCNokZc6Oj5qYqozGtOfA77LqOjQFUZbQd920kIPChTTN5V6hb9vsmpvrIeqJc-F3Sb0mnPtMPrOakZuKTBadEKJdY0Nh7GhOj2D2XKhgmcHJW8eDnnwOA/s320/My+HipstaPrint+0-776374.jpg\" />\n\nThis isn't the first time this tree has been the subject of a hipstaprint. Back in March of last year, I photo'd it in near full bloom the day we left for California. \n\nLens: John S\nFilm: Ina's 1969"
+        "body": "<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5694689738597445666\" src=\"images/archive/My+HipstaPrint+0-776374.jpg\" />\n\nThis isn't the first time this tree has been the subject of a hipstaprint. Back in March of last year, I photo'd it in near full bloom the day we left for California. \n\nLens: John S\nFilm: Ina's 1969"
     },
     {
         "file": "2012-01-05-Cable-and-anchor.md",
         "year": "2012",
         "date": "January 05, 2012",
         "title": "Cable and anchor",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgXL2m4B9SZpj3h8BrFAbTaOEWgSiTJtb8i4bHzYhyDcURnfadLkooGq9TuI1NUrcn0dQHbgIV_dtj9cr5YIE7-F_eiQaE28-_AyNFqXTeUrQVHwV3hEdxE_M7jyWndPjdP8FnI/s320/My+HipstaPrint+0-711412.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5693997971003306706\" />\nSome things are better rooted in reality than others...\nLens: Roboto Glitter\nFilm: DC"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-711412.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5693997971003306706\" />\nSome things are better rooted in reality than others...\nLens: Roboto Glitter\nFilm: DC"
     },
     {
         "file": "2012-01-01-Sitting-in-a-tree.md",
         "year": "2012",
         "date": "January 01, 2012",
         "title": "Sitting in a tree",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjcxrtabeEWJEwzlzKwXUm5jVbF6JXwQvDXtzo8bCT5Pl0PyqgpkBYa8-ryUfWviDW-174Th3rlHYOZkqQZRGRMoryEwyLCjROo_PtGq3PHpke3DAl8YYa9jfhrkDXMDGBUDlYl0w/s320/My+HipstaPrint+0-754451.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5692787831946279234\" />\nOn the eve of my return to work, I find nothing better than this. Lens: Libatique 73\nFilm: DreamCanvas"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-754451.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5692787831946279234\" />\nOn the eve of my return to work, I find nothing better than this. Lens: Libatique 73\nFilm: DreamCanvas"
     },
     {
         "file": "2011-12-30-Iron--concrete--and-another-le.md",
         "year": "2011",
         "date": "December 30, 2011",
         "title": "Iron, concrete, and another leaf",
-        "body": "<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5692041425733904770\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgzJ71a5PSsVKCFTdfKuEkBc3gerxBftNIshI59zuue11Zt7BtpbwWoluVrZJeVPPLloQTMBKxV-7L768yTJnaehoha7JazFCyXQOGcUNSfC3QuDZSbaXtqZrMPlATIkO5358gW/s320/Photo1-768154.jpg\" />\n\nProcessed in lightbox\nProduced entirely on Earth"
+        "body": "<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5692041425733904770\" src=\"images/archive/Photo1-768154.jpg\" />\n\nProcessed in lightbox\nProduced entirely on Earth"
     },
     {
         "file": "2011-12-29-Old-and-weathered--all.md",
         "year": "2011",
         "date": "December 29, 2011",
         "title": "Old and weathered, all",
-        "body": "<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5691355282209483138\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgEAntCf3478-fglHAL5Ofdls39ge9YY2kr9BKiI7wWsPofrFk2tOFf39BErQ62CUv2r9RWvtxiaoJRO-Ho_em1tHsLfel7oKp1tpCadBR9zAfTrGYJoIlyE0m2Ed3wboY5mUk7/s320/photo-712743.JPG\" />\n\nRD covers the Sonoran down south a ways,  but I have the distinct privilege of working the profound beauty of the basin-and-range deserts in Utah and our neighboring states. \nGood country.\n\nLens: Meoldie\nFilm: Ina's 1935"
+        "body": "<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5691355282209483138\" src=\"images/archive/photo-712743.JPG.jpg\" />\n\nRD covers the Sonoran down south a ways,  but I have the distinct privilege of working the profound beauty of the basin-and-range deserts in Utah and our neighboring states. \nGood country.\n\nLens: Meoldie\nFilm: Ina's 1935"
     },
     {
         "file": "2011-12-28-The-moon-and-Mercury.md",
         "year": "2011",
         "date": "December 28, 2011",
         "title": "The moon and Mercury",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEivbgAcLtScObFy8G71Ii9FTd6ZFEnK3D0TawyVRJXIdXM5Wjb651g59Vm2ug-olyRH1eszEI8mMd_7G3l5u0Kcz-UnQFsf4cBO7zrcGFFH_7p4U7Au7MVE1Xsi94gi6_RlIKTk/s320/Photo1-713771.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5690998375390511314\" />\nShot with the iPhone 4s"
+        "body": "<img src=\"images/archive/Photo1-713771.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5690998375390511314\" />\nShot with the iPhone 4s"
     },
     {
         "file": "2011-12-25-A-very-Merry-Christmas-to-you-.md",
         "year": "2011",
         "date": "December 25, 2011",
         "title": "A very Merry Christmas to you from all of us",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh2W9CF-qZY9k42dzzyDAHnHvj4DF07cKIyeP5L2c4hyphenhyphenrltb4QiWZONPi9rR-mxwkHzmx8ankNy8iC-q8PuvgS61h1mbLHo7g6IN4eq7aoaMMaBg5U7m0fXo-7UUmgNqqEbw-fh/s320/My+HipstaPrint+0-748912.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5690090998309707538\" />\nThe evergreen and the flowering red\nLens: Lucifer VI\nFlash: Laser Lemon Gel\nFilm: DreamCanvas"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-748912.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5690090998309707538\" />\nThe evergreen and the flowering red\nLens: Lucifer VI\nFlash: Laser Lemon Gel\nFilm: DreamCanvas"
     },
     {
         "file": "2011-12-18-Last-breath-of-color.md",
         "year": "2011",
         "date": "December 18, 2011",
         "title": "Last breath of color",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjht1nK80N6umx45fPL4-eJkXzQzImuMJV1t2WaPI0CZrAln6QRq6CypVt9fkjSl5qWoahZ-S3p3SCIr8GS7UoR36pZkCsEk9qRQqa0E4-FCIpZ6tMWh8wqw6VyfxQv5R4oj7_ZmQ/s320/My+HipstaPrint+0-784955.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5687303289172548626\" />\nThough, probably not. I've really had my eyes opened up to the amount of fall color in Arizona this year. Lens: John S\nFilm: Kodot XGrizzled"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-784955.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5687303289172548626\" />\nThough, probably not. I've really had my eyes opened up to the amount of fall color in Arizona this year. Lens: John S\nFilm: Kodot XGrizzled"
     },
     {
         "file": "2011-12-15-Another-sunset-image---.md",
         "year": "2011",
         "date": "December 15, 2011",
         "title": "Another sunset image?!?",
-        "body": "<img border=\"0\" height=\"320\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj76cBuNNQFJl3X-JmiflenICs78p18dXlZF4vPPrVCC38FMdBiyOaIEOdds2XIxMpU6LfuexKpFXeZ0E37L6zJ5zhuXz9Ujm_YPj2qjZYjMa0CkbBcKWUQQ8yUPK_XFLmk8Kz8/s320/photo-793514.JPG\" width=\"320\" />\n\nDeveloped in Lightbox for iPhone\nYet another twee sunset.\nI so enjoy sharing them, though."
+        "body": "<img border=\"0\" height=\"320\" src=\"images/archive/photo-793514.JPG.jpg\" width=\"320\" />\n\nDeveloped in Lightbox for iPhone\nYet another twee sunset.\nI so enjoy sharing them, though."
     },
     {
         "file": "2011-12-13-Shadows-in-the-rain.md",
         "year": "2011",
         "date": "December 13, 2011",
         "title": "Shadows in the rain",
-        "body": "<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5685754314010843682\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjcPsWyowFZDXBQPrBowvHzYP8oAyJL5NvFywYOT4_ZaSA_AooQjn8uUK5B7LmZA1vx-9b32PfaCxFie2qyfYPUoognHB-_gUpmxo4A3ALWXJNHYsFRCWJSoEQLvvAv7fMG86gA-A/s320/My+HipstaPrint+0-736013.jpg\" />\nI woke up in my clothes again this morning\nI don't know exactly where I am\nAnd I should heed my doctor's warning\nHe does the best with me he can\n\nHe claims I suffer from delusion\nBut I'm so confident I'm sane\nIt can't be an optical illusion\nSo how can you explain\nShadows in the rain\n\n-Sting, Shadows in the Rain\n\nLens: Libatique 73\nFilm: Ina's 1935"
+        "body": "<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5685754314010843682\" src=\"images/archive/My+HipstaPrint+0-736013.jpg\" />\nI woke up in my clothes again this morning\nI don't know exactly where I am\nAnd I should heed my doctor's warning\nHe does the best with me he can\n\nHe claims I suffer from delusion\nBut I'm so confident I'm sane\nIt can't be an optical illusion\nSo how can you explain\nShadows in the rain\n\n-Sting, Shadows in the Rain\n\nLens: Libatique 73\nFilm: Ina's 1935"
     },
     {
         "file": "2011-12-11-Cluster-of-palms--city-skyline.md",
         "year": "2011",
         "date": "December 11, 2011",
         "title": "Cluster of palms, city skyline",
-        "body": "<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5684678808038075202\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhOhV_voPUYIixLoaOMohDiVanlqy8rqw9dLX1dYhYqmxaqxOwShQMq4YAjBLkRLXzIBiNykQfJX2tfX_fmcXP_AOeuxGnIm2R3xZ9CC2YED9xAGumqIdEkossIVp2Kic3e-hPBgw/s320/My+HipstaPrint+0-725022.jpg\" />\n\nWhile at Encanto this afternoon, I decided to give the new lens/film combo a whirl. \n\nLens: Loftus\nFilm: DC"
+        "body": "<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5684678808038075202\" src=\"images/archive/My+HipstaPrint+0-725022.jpg\" />\n\nWhile at Encanto this afternoon, I decided to give the new lens/film combo a whirl. \n\nLens: Loftus\nFilm: DC"
     },
     {
         "file": "2011-12-10-The-moon-rises-on-real-estate.md",
         "year": "2011",
         "date": "December 10, 2011",
         "title": "The moon rises on real estate",
-        "body": "<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5684298827200254898\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhw9VkWKg4-gmE7hIQYgyEfyboM38lvD8YUGYt8zBOtnqGIRT7Cjg3zRco5sTLWYfpnuk4ofNYxwIeTCew9Bbg9BZn4X70DU1BT8ajjRGCrAs78bmEfnKVP8exEDmy5H8uOUCCo/s320/Photo1-753939.jpg\" />\nThe best thing about our society is that you can buy just about anything with the right amount of money and willingness to submit oneself to usury."
+        "body": "<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5684298827200254898\" src=\"images/archive/Photo1-753939.jpg\" />\nThe best thing about our society is that you can buy just about anything with the right amount of money and willingness to submit oneself to usury."
     },
     {
         "file": "2011-12-08-Farm--South-Mountain.md",
         "year": "2011",
         "date": "December 08, 2011",
         "title": "Farm @South Mountain",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjFMrWEhpgYbmroUrvTQhFdWZLgSoDOgBm6ASiegX5v5TgwE3TPzeOJOPLIQPriar94b8Vu-u_FDWvV5iWAyGbphXz4a2P8UhDXPPNDRH4pLRSyRGyDJ0hKALmMD3o_6imMH6Se4w/s320/My+HipstaPrint+0-729945.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5683806519983007202\" />\nWe can dismiss those naysayers who contend Arizona has no seasons. I find them everyday. Lens: Libatique 73\nFilm: Ina's 1969"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-729945.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5683806519983007202\" />\nWe can dismiss those naysayers who contend Arizona has no seasons. I find them everyday. Lens: Libatique 73\nFilm: Ina's 1969"
     },
     {
         "file": "2011-12-05-Cold--wandering.md",
         "year": "2011",
         "date": "December 05, 2011",
         "title": "Cold, wandering",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgXbKlj3vSoPdXv5fP6sIDvfH66hooQtkZFdND5eFw2or9fe52Eh6SY2g2JC6_fG2rV4ZqRCKOSI0BJGQb-LFVSu0nRh2q4c6-7eFbK7uSbtOtitlXcKkKEFZC54AhW6tiWsMym3Q/s320/My+HipstaPrint+0-760210.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5682442573212995602\" />\nBefore arriving at a wedding this evening, the wife and I stopped to take a few pictures out in the desert.Lens: Libatique 73\nFilm: Ina's 1969"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-760210.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5682442573212995602\" />\nBefore arriving at a wedding this evening, the wife and I stopped to take a few pictures out in the desert.Lens: Libatique 73\nFilm: Ina's 1969"
     },
     {
         "file": "2011-12-04-Snow-on-the-Sage.md",
         "year": "2011",
         "date": "December 04, 2011",
         "title": "Snow on the Sage",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh5ixTWZwTRkcMJ1AEuoT-RFOUg4NDVrt1HPtpf1hFZqJimizn02BeMzfCHJZyi2AnS4ArCL1NiTvCXbQrl7CJtZMeYIwqhQNkazo8Q0jrLbt4LxIGOsrYowavmwWwN3kn5XCfn/s320/My+HipstaPrint+0-708387.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5682361172490029282\" />\nAs a nail is pounded home, there is often an impression left in the wood aside the nail; that is what happens in my soul as December gains traction.\nThe cold has driven itself a seasonal home on our little stretch of high desert.\nLens: Jimmy\nFilm: AO DLX"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-708387.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5682361172490029282\" />\nAs a nail is pounded home, there is often an impression left in the wood aside the nail; that is what happens in my soul as December gains traction.\nThe cold has driven itself a seasonal home on our little stretch of high desert.\nLens: Jimmy\nFilm: AO DLX"
     },
     {
         "file": "2011-12-03-Long-Shadows.md",
         "year": "2011",
         "date": "December 03, 2011",
         "title": "Long Shadows",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhy_CLu0sPSQHlLXCITUxH_jbpVRBTPO9XznOpSNog9yvhHZwxYd7v21cVnZeRqx6jybFXKRlYJUYm5GDthXDJI1s55FWYjRzIOOb8Q8FHe0dDpm-PJ0orfr7ZzfCJ1sEquriAw/s320/My+SwankoPrint-759191.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5681789726640308082\" />\nBefore the storm came on today, the angles of light reminded us of just how little time we have left before the solstice. \nDeveloped in SwankoLab for iPhone using Vinny's BL94, Grizzle Fix, and Flamoz Fixer"
+        "body": "<img src=\"images/archive/My+SwankoPrint-759191.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5681789726640308082\" />\nBefore the storm came on today, the angles of light reminded us of just how little time we have left before the solstice. \nDeveloped in SwankoLab for iPhone using Vinny's BL94, Grizzle Fix, and Flamoz Fixer"
     },
     {
         "file": "2011-11-29-Camping-II.md",
         "year": "2011",
         "date": "November 29, 2011",
         "title": "Camping II",
-        "body": "Every good story deserves a sequel.  Five years ago, I wrote what some consider to be a good story about a star-crossed camping trip.  I described it as \u201c...not a long story, ...filled with happiness, embarrassment, laughter, disappointment, steak, and 150 miles of driving.\u201d\n\nIf that story was Home Alone, this is Home Alone 2.  Except with less steak.  So sit back and cast your thoughts aside for a few moments while I entertain you with another adventure.\n\n<img border=\"0\" height=\"320\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg4nEpsnoq1n_NCskiDXPd3HhPhPmKmKkZw4Yf628835QnqzfKDazPUGVXR1yYWYbW4U29mACzZkHe5DGZWh5bwpWqOJNxEFtPHZkpB6aPtXEGtQbr9F8vwpDxG27oV-XMjfziW/s320/Screen+Shot+2011-11-28+at+12.51.09+PM.png\" width=\"99\" />\n\nWe had planned this trip for a long time.  When I say, \u201cplan\u201d, you might conjure up in your mind such descriptors as \u201coutline\u201d, \u201cschedule\u201d, \u201cpurpose\u201d, or even \u201ccall ahead to see if they allow overnight camping\u201d.  No.  \n\nWhen I say we planned it, I mean Daniel Dawson and I desired to go camping.  Greatly desired.  We simply wanted to drive to the desert, light a fire, grill some steak, get some rest, and shoot some photos.  You know, camping. \n\nAfter finally setting a date, Daniel and I split some basic responsibilities and necessities and met on a Friday afternoon.  We piled everything up in the trusty van, and set off northward toward the Needle Rock area, which was the spot of many camping adventures in the past, including the ill-fated camping trip of 2006.\n\nWe thought we were so well prepared.  We had our tent, steak, our \u201ctrundle\u201d of wood (as christened by me, it being three bundles of wood) and plenty of daylight.  We should have realized our night\u2019s true destiny then, when we pulled up to the Needle Rock entrance and saw pavement instead of a dirt trail.  Yes, the forest service had taken hold of this land, paved it, and blessed it with bathrooms.  And wanted money for the experience.  Permits required.\n\nNo matter!  Onward and forward we thought, pulling into the well-manicured campground, loveingly named \u201cNeedle Rock Campground\u201d.  Our first stop was a parking lot, where we found our second revelatory hindrance; a \u201cNo Overnight Camping\u201d sign.\n\n<img border=\"0\" height=\"200\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjAqPTjFRKrS2UXkPl48T0faEwwFtmN0rI590BdQw5Ys4rMGqkoiswAU5L6AIJUhIruneTviev8UhNvre1wnePghUmikf4oFDJMWFweNm8Oi_NZZeXomLyjf_1Mza26BbclLzOx/s200/IMG_2398.JPG\" width=\"200\" />\n\nAllow me a brief diversion; does not the word \u201ccamping\u201d denote the overnight variety?  Forgive me if I lack the intellectual fortitude to fully grasp the mountain man\u2019s vision of camping, but when I say, \u201cI\u2019m going camping\u201d to someone, you better believe they\u2019re thinking I\u2019m not coming back until at least the next day.  Hmm.\n\nSo, thus disenchanted but never discouraged by our discovery, we decided to take the first unpaved road we saw and forage our way ahead to see what else we could find.  Not even 100 yards on this path we met our third hiccup in the night\u2019s affairs by nearly getting my front-wheel drive family mini-van stuck in some nasty sand.  Luckily, it lasted only a moment, and we turned back, proverbial tail between our legs, a nasty taste of deja vu in our mouths.\n\nAs I had AT&T and had ventured outside of my 25-foot grace period of the city limits, my phone would do us no good as we turned to the Internet for help in our search for suitable camping arrangements for the evening.  Luckily, Daniel had Verizon and was somehow pulling down about 5mbps out in the boonies, so we quickly confirmed our fate at the current campground and headed south.  \n\nAfter several unanswered phone calls to family members resulted in a quick Google search.  As good fortune would have it, there was another campground only three miles to shy of us called McDowell Mountain.  It seemed a literal utopian paradise for us; we were wrong.\n\nA few hundred yards from the entrance to the park, I noticed something awry.  Another snag in the fibers of the night.  There was a line of cars, campers, and trucks waiting to get in.  Yes, it was a holiday weekend, but still...a line of near 50 vehicles seemed hardly warranted at this point.  When you\u2019re faced with this unfortunate set of circumstances, you have very little choice.  You pull in and mark your spot in line, noticing that no one is being turned away.  Faithfully, you dig in, and wait.\n\n<img border=\"0\" height=\"200\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiIXGCrf1PX-Bfo4pG63Exb7ePTNy7Tk-mLCE6vtEUBV8_HVy1qlmVNc3WlXGldyXJyBFSK03-TP-XOdvfKrU9uxJNJwPAtFU1pxzx4oMy2JHZccGbUN6h-MGcr0Ppn4cqYYafp/s200/IMG_2399.JPG\" width=\"200\" />\n\nI turned to Daniel about 20 minutes into our queue and revealed to him what only I could see past the careening sequence of autos; a \u201cCampground Full\u201d sign.  I was flabbergasted.  How could this be?  We were still 10 cars back at least, and no one was driving the opposite direction from us.  There had to be a mistake.  Fate could not possibly hold such unmitigated sway over our endeavors.  \n\nThe sun setting before our very eyes, we had little options.  After a few more excruciating minutes in line, we pulled up to a very congenial looking gentleman.  Pleasantly, he glanced in the car at us and said, \u201cYou running?\u201d\n\nI was perplexed.  Did he think us fugitives, evading the law at the nearest 45 minutes line of cars we could find?\n\n\u201cAre you running?\u201d\n\n\u201cEx..excuse me?\u201d, I stammered.  I could no longer hide my utter confusion at this curveball of a conversation.\n\n\u201cAre you racing this weekend?\u201d, he blustered back.  Consternation knit my brow.\n\n\u201cNo..no..We\u2019re camping.  Camping.  We want to camp.\u201d  I could only muster the vocabulary of an eight year old at that point.  There was a lump in my throat.  Tunnel vision clouded my processes.  Daniel laughed and guffawed at my side.\n\n\u201cOh, you\u2019re serious,\u201d he said, looking very sympathetic.  \u201cI\u2019m sorry.  You\u2019ve waited for nothing.  We\u2019re full.\"  He stammered a bit; shuffling his feet for stability.  \"We don\u2019t have anything for you.  We\u2019re holding the Ironman Triathlon here this weekend.  I\u2019m so sorry.\u201d\n\nI don\u2019t recall very well what I said next. For all I know, it was probably a few hesitated inflections about how I really just wanted a place to grill some steak.  Nonplussed, the gentleman carried on.\n\n\u201cYou know, if you drive not four miles to the North, there\u2019s a campground there you can stay at.\u201d\n\n\u201cWe know\u201d, we said nearly in unison.  \u201cWe just came from there.  There\u2019s no overnight camping allowed anymore.\u201d  \n\n\u201cWell, that\u2019s unfortunate.  I just sent a few others there this evening.  Look, do you know where the Bush Highway is?\u201d\n\nI said I did not know where that was, when clearly, I knew where it was.  My thoughts were with those other poor souls who were sent to Needlerock.  Our eyes glazed over with disillusion. \n\n<img border=\"0\" height=\"200\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi7ypPE5V-UXgZ7Ctn-4wGwYVzmJdp6Yz4JJH_gMOT2gSup2vudKAFlx5Yx9CKHaenLvN0NQw-dNoVZuPpHnFG0Kqo0uJlqWMvAQRHFcO8iU_PGnyK_kcv_APSJsqPDhOFlfwu0/s200/IMG_2401.JPG\" width=\"200\" />\n\nHe pushed on.  \u201cYou just gotta drive south through Fountain Hills, get to the Beeline and take that north to the Bush Highway.  It\u2019s the Saguaro Del Norte recreation area.  You drive down that road and you\u2019ll be damned sure to find a place to camp there.\u201d\n\nWe looked at each other for a brief moment to communicate our thoughts, turned back toward the man and issued our gratitude for his help.  Flummoxed, we took our adventure southward again, toward the Fountain Hills area and ultimately the Bush Highway.\n\nHysteria and delirium clobbered the van at that point.  How could we be afflicted yet again with such a destiny? Did the fates hold anything for us?  Would we be able to grill any steak?  Read on, dear readers.  \n\nWe faced a decision.  With our allotment of daylight dwindling rapidly, and no clear destination in mind, did we push forth and try to find a suitable spot?  Careening through the rolling streets of Fountain Hills gave us plenty of time to both decide and complain.  By the time we reached Shea Blvd, we had made up our minds.  We knew our destiny, and it smelled like steak seasoning.  \n\nPeeling out while turning to the East on Shea, the fearless Odyssey minivan showing its true colors and passion to its occupants, we headed toward the Bush Highway.  Headlights on, we kept our eyes peeled for any clues that might show us the way.  Turning left on what seemed like a good location, we discovered only a pier that led to the lake.  \n\nOut of the corner of my eye, I spotted the small Lakeshore Restaurant.  Daniel bade me to ask someone for directions.  Spotting a woman on a golf cart, I drove up to her and sheepishly asked her whether there was a place to camp nearby.\n\nShe said there wasn\u2019t, and we both lowered our heads in disbelief.  Quickly she corrected herself however, remembering that it was in fact November, and the Park Service allowed camping along the shore of the Salt River until March.  We simply needed to keep following the road until we found the Water Users Camping area, and hike on down to the shore.  We finally felt a brief moment of relief and hope.  Thanking the woman, we left her and made our trek back to the highway.  \n\nLight had all but left us at that point.  Following the woman\u2019s precise directions, we located the parking lot that would allow us passage to the shores of the Salt River.  Letting the headlights be our guide, we passed back and forth while deciding which spot would bring us closer to the campsite.  \n\nUnexpectedly, a small animal darted in front of the van, eyes ablaze as its tapetum lucidum reflected our headlights back at us.  Daniel freaked; he screamed and beckoned me to stop.  After discovering it to be a lost kitten, we discarded our man-cards and parked on the North end of the lot.  \n\nIt was time to investigate this campsite.\n\nIt should be mentioned that we had stocked immensely for the night.  Tents, sleeping bags, chairs, wood, a grill, a cooler, and other odds and ends that would prove difficult to carry down to the river in one trip.  We decided that we had better take a trip sans supplies, just to see if we could even find a suitable location.  After all, the sky had darkened and time was a luxury we did not have. \n\nOnce down at the shore, we realized the last damning fact that sealed our fate.  Every square inch of the area was covered in broken glass.  There was no chance of camping here.  While our tetanus shots were both up to date, the thought of dealing with those shards helped speed our decision to simply make a fire, grill the steak, and get home.\n\nHome.  We remembered at this point that Daniel\u2019s car was 50 miles away, parked in the lot of an AJ\u2019s Fine Foods.  Our nightly adventure had taken us quite a few miles out of our original path.  \n\nI digress.  After a few runs to the car, we placed our \u201ctrundle\u201d of wood inside a hastily crafted fire ring, and begun the process of heating the coals for the grill.  With our chairs set up, Daniel and I had a few minutes to ruminate on the night\u2019s transpiring.  We could hardly believe that we fell victim to another night of gallivanting about the Valley in search of a place to camp.  \n\nWith the steak cooking on the grill, Daniel took out the potatoes that his dear wife had carefully wrapped in aluminum foil for us to cook.  He dug a couple small holes a few inches deep, set in each a hot coal, placed the wrapped potato on top of the coal, and placed three more; one on top, and one on each side.\n\nQuizzically, I inquired with Daniel whether he thought that would cook the potatoes.  \u201cJust set a timer\u201d, he said.  He was quite sure that in less than an hour, we would have wonderfully cooked steamy fresh potatoes for our culinary enjoyment.  So we set the timer, and carried on.\n\n<img border=\"0\" height=\"200\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiC5SlLToVYXJRUjtSykSE8hExmUGlo5-EBnL7upJcCerSbindDTaKzBmwgzMofkITYeo-jCre6jUS8wJZDeoqfFh-4RzDmIqc4SC0KepKN5KGjXnT17qd1Dpm3glHPGpKPRgCY/s200/IMG_2407.JPG\" width=\"200\" />\n\nA few minutes later, Daniel whisked around in his chair, alarmed, aiming his flashlight into the distance.  \n\n\u201cDid you hear something?\u201d he asked.  I responded to him nonchalantly, stating that I hadn\u2019t heard a thing, and for him to stop scaring me.  This was the second time that night that he was roused by something, and his predilection for theatre was quite amusing.\n\n\u201cI swear I heard something.  Right behind me.\u201d  \n\nAfter a few minutes of swinging the lights to and fro, we concluded that we were not being harassed by coyotes, javelina, bobcats, mountain lions, or raccoons.  A few times we did hear some fish jumping out of the water, which as time went on became the tidings of mer-people during their nightly dalliance.  \n\nThe steak was delicious, if not a bit over-seasoned by yours truly.  The conversation shifted from the serious to the insane, from intense to jocular, and we hardly remembered the potatoes that were surely ready to eat.\n\nCarefully, Daniel dusted the coals from on top of the wrappings, and carefully peeled back the aluminum bundling.  I did the same.  \n\nWe looked at each other.  \n\n\u201cIs your potato stone-cold?\u201d\n\n\u201cYeah.  Yours too?\u201d\n\nFor some reason, common sense so intensely illuminated our minds at the same time, that we almost fell out of our chairs for the pain of it.  How did we ever expect a huge potato to cook with four coals?  We could hardly stop laughing, when suddenly, Daniel whipped around again like on a swivel chair.  \n\n<img border=\"0\" height=\"320\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg1IZXpBIjUe679aCCxnatclqPQAxBbMWWwS22SQlZdThyphenhyphenhXP4rT39D4Q3HKUZ44qRiuGUMuLCPChksC8oHY7o19hE7HlLDQO1SrrEtK9W7MpfN0AeffMxkHZC8Ic3RZeSR9pz9/s320/Camping+Nov+2011-4.jpg\" width=\"212\" />\u201cThere!  Over there.  Do you see it?\u201d\n\n\u201cI don\u2019t\u201d, I replied.  \u201cWhat did you see?\u201d\n\n\u201cEyes.  Something\u2019s hunting us.  I saw its eyes over there.  You can\u2019t hear it?\u201d\n\nI paused, shuffled my feet for stability, and perked my ears to the scene.  It took a moment, but then I heard it.  Rustling in the branches, small footsteps on the underbrush.  Something was hunting us.\n\n\u201cWhat was it?  Did you get a good look at it?  Should we leave?\u201d, I asked, hesitantly.  I realized at that moment that neither of us could make a quick getaway.  Besides, what could really be stalking us at that moment?  Were we in peril?\n\nWe listened further, but no further auditory revelations were offered. After tossing a few rocks of humane warning into the trees and nearby foliage, we assured ourselves that we were safe, and that the night could go on.\n\nTossing the potatoes inside of the smoldering fire proved much more effective than our previous effort, and within 15 minutes, we had us some taters to eat.  More light conversation ensued, and we hardly remembered our previous dance with the unknown adversary.  \n\nAn adversary which was, my friends, quite real.\n\nDaniel again caught him with eager senses afire, shooting around in his seat so quick that his red hair was a blur.  Our flashlights found the target immediately; a pair of eyes in the distance, flickering and reflecting the light back at us, piercing, foraging, waiting.  It disappeared for only a moment, and was back in a flash, nearly 10 feet from its previous position.  \n\n<img border=\"0\" height=\"149\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhez6rLk5m7X3GngnjafrXhahOw22wsJafL0sh_sjhegaa_s2T4k5q08UROZ5iPrrbPSDm8jOA7K7krM7D53zZ1blm3-sAl1e21slhUGnVb6KggM6MC7d-F041YUzg3Dv9DXN4T/s200/IMG_2410.JPG\" width=\"200\" />\u201cIt\u2019s the kitten again\u201d, I said.  \n\n\u201cNo, it\u2019s not\u201d, Daniel replied.  He seemed much more sure of himself than I was.  \n\nWith his certainty placing the seed of doubt so firmly in my mind, my flashlight shifted from left to right, sweeping for its target.   It only took a few more moments before we found our antagonist again.  \n\n\u201cIt\u2019s a raccoon!\u201d, bellowed Daniel. Indeed it was, and it had given us quite the scare.  But enough was enough, and we tossed a few well-aimed rocks in his direction to give him a final send off.  With Mr. Procyon lotor gone on his merry way, we returned to normal, but with a heightened sense of our surroundings.  And I certainly listened to Daniel when he thought he heard something.  \n\nThe rest of the evening was spent taking pictures and telling stories, until the hour grew late and we broke camp and put out the fire.\n\n<img border=\"0\" height=\"149\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh3Xv8om3kCr1MT_fzfD_aj4WJjPdzDQshDGp1IfTed1g081at4Xs1WOVs2v0r3qMsYhNFZQbEVWXlbA75_wUI48b4TIBFh02ajiErajU4THv_hVhI4UORHfVeGxOA9IbZ3FfD7/s200/IMG_2412.JPG\" width=\"200\" />Oh, and a note about putting out the fire; it\u2019s never a good idea to urinate on top of a flaming hot 45 LB rock.  Cast your mind if you will, and imagine the stench of a locker room.  Now, make it 1000x worse.  That\u2019s the smell of instantly vaporized urine.  It\u2019s horrifying.\n\nIn my last ill-fated story about camping, I concluded by tale by stating that I would do it all again in a heartbeat.  That\u2019s why we went, really.  Even if you had told us going in that we would be beset on every turn by every imagination of obstruction, we would have sallied forth with dogged determination.  \n\nLike before, this lengthy travelogue certainly does not do the evening enough justice.  As they say, you just had to be there."
+        "body": "Every good story deserves a sequel.  Five years ago, I wrote what some consider to be a good story about a star-crossed camping trip.  I described it as \u201c...not a long story, ...filled with happiness, embarrassment, laughter, disappointment, steak, and 150 miles of driving.\u201d\n\nIf that story was Home Alone, this is Home Alone 2.  Except with less steak.  So sit back and cast your thoughts aside for a few moments while I entertain you with another adventure.\n\n<img border=\"0\" height=\"320\" src=\"images/archive/Screen+Shot+2011-11-28+at+12.51.09+PM.png\" width=\"99\" />\n\nWe had planned this trip for a long time.  When I say, \u201cplan\u201d, you might conjure up in your mind such descriptors as \u201coutline\u201d, \u201cschedule\u201d, \u201cpurpose\u201d, or even \u201ccall ahead to see if they allow overnight camping\u201d.  No.  \n\nWhen I say we planned it, I mean Daniel Dawson and I desired to go camping.  Greatly desired.  We simply wanted to drive to the desert, light a fire, grill some steak, get some rest, and shoot some photos.  You know, camping. \n\nAfter finally setting a date, Daniel and I split some basic responsibilities and necessities and met on a Friday afternoon.  We piled everything up in the trusty van, and set off northward toward the Needle Rock area, which was the spot of many camping adventures in the past, including the ill-fated camping trip of 2006.\n\nWe thought we were so well prepared.  We had our tent, steak, our \u201ctrundle\u201d of wood (as christened by me, it being three bundles of wood) and plenty of daylight.  We should have realized our night\u2019s true destiny then, when we pulled up to the Needle Rock entrance and saw pavement instead of a dirt trail.  Yes, the forest service had taken hold of this land, paved it, and blessed it with bathrooms.  And wanted money for the experience.  Permits required.\n\nNo matter!  Onward and forward we thought, pulling into the well-manicured campground, loveingly named \u201cNeedle Rock Campground\u201d.  Our first stop was a parking lot, where we found our second revelatory hindrance; a \u201cNo Overnight Camping\u201d sign.\n\n<img border=\"0\" height=\"200\" src=\"images/archive/IMG_2398.JPG.jpg\" width=\"200\" />\n\nAllow me a brief diversion; does not the word \u201ccamping\u201d denote the overnight variety?  Forgive me if I lack the intellectual fortitude to fully grasp the mountain man\u2019s vision of camping, but when I say, \u201cI\u2019m going camping\u201d to someone, you better believe they\u2019re thinking I\u2019m not coming back until at least the next day.  Hmm.\n\nSo, thus disenchanted but never discouraged by our discovery, we decided to take the first unpaved road we saw and forage our way ahead to see what else we could find.  Not even 100 yards on this path we met our third hiccup in the night\u2019s affairs by nearly getting my front-wheel drive family mini-van stuck in some nasty sand.  Luckily, it lasted only a moment, and we turned back, proverbial tail between our legs, a nasty taste of deja vu in our mouths.\n\nAs I had AT&T and had ventured outside of my 25-foot grace period of the city limits, my phone would do us no good as we turned to the Internet for help in our search for suitable camping arrangements for the evening.  Luckily, Daniel had Verizon and was somehow pulling down about 5mbps out in the boonies, so we quickly confirmed our fate at the current campground and headed south.  \n\nAfter several unanswered phone calls to family members resulted in a quick Google search.  As good fortune would have it, there was another campground only three miles to shy of us called McDowell Mountain.  It seemed a literal utopian paradise for us; we were wrong.\n\nA few hundred yards from the entrance to the park, I noticed something awry.  Another snag in the fibers of the night.  There was a line of cars, campers, and trucks waiting to get in.  Yes, it was a holiday weekend, but still...a line of near 50 vehicles seemed hardly warranted at this point.  When you\u2019re faced with this unfortunate set of circumstances, you have very little choice.  You pull in and mark your spot in line, noticing that no one is being turned away.  Faithfully, you dig in, and wait.\n\n<img border=\"0\" height=\"200\" src=\"images/archive/IMG_2399.JPG.jpg\" width=\"200\" />\n\nI turned to Daniel about 20 minutes into our queue and revealed to him what only I could see past the careening sequence of autos; a \u201cCampground Full\u201d sign.  I was flabbergasted.  How could this be?  We were still 10 cars back at least, and no one was driving the opposite direction from us.  There had to be a mistake.  Fate could not possibly hold such unmitigated sway over our endeavors.  \n\nThe sun setting before our very eyes, we had little options.  After a few more excruciating minutes in line, we pulled up to a very congenial looking gentleman.  Pleasantly, he glanced in the car at us and said, \u201cYou running?\u201d\n\nI was perplexed.  Did he think us fugitives, evading the law at the nearest 45 minutes line of cars we could find?\n\n\u201cAre you running?\u201d\n\n\u201cEx..excuse me?\u201d, I stammered.  I could no longer hide my utter confusion at this curveball of a conversation.\n\n\u201cAre you racing this weekend?\u201d, he blustered back.  Consternation knit my brow.\n\n\u201cNo..no..We\u2019re camping.  Camping.  We want to camp.\u201d  I could only muster the vocabulary of an eight year old at that point.  There was a lump in my throat.  Tunnel vision clouded my processes.  Daniel laughed and guffawed at my side.\n\n\u201cOh, you\u2019re serious,\u201d he said, looking very sympathetic.  \u201cI\u2019m sorry.  You\u2019ve waited for nothing.  We\u2019re full.\"  He stammered a bit; shuffling his feet for stability.  \"We don\u2019t have anything for you.  We\u2019re holding the Ironman Triathlon here this weekend.  I\u2019m so sorry.\u201d\n\nI don\u2019t recall very well what I said next. For all I know, it was probably a few hesitated inflections about how I really just wanted a place to grill some steak.  Nonplussed, the gentleman carried on.\n\n\u201cYou know, if you drive not four miles to the North, there\u2019s a campground there you can stay at.\u201d\n\n\u201cWe know\u201d, we said nearly in unison.  \u201cWe just came from there.  There\u2019s no overnight camping allowed anymore.\u201d  \n\n\u201cWell, that\u2019s unfortunate.  I just sent a few others there this evening.  Look, do you know where the Bush Highway is?\u201d\n\nI said I did not know where that was, when clearly, I knew where it was.  My thoughts were with those other poor souls who were sent to Needlerock.  Our eyes glazed over with disillusion. \n\n<img border=\"0\" height=\"200\" src=\"images/archive/IMG_2401.JPG.jpg\" width=\"200\" />\n\nHe pushed on.  \u201cYou just gotta drive south through Fountain Hills, get to the Beeline and take that north to the Bush Highway.  It\u2019s the Saguaro Del Norte recreation area.  You drive down that road and you\u2019ll be damned sure to find a place to camp there.\u201d\n\nWe looked at each other for a brief moment to communicate our thoughts, turned back toward the man and issued our gratitude for his help.  Flummoxed, we took our adventure southward again, toward the Fountain Hills area and ultimately the Bush Highway.\n\nHysteria and delirium clobbered the van at that point.  How could we be afflicted yet again with such a destiny? Did the fates hold anything for us?  Would we be able to grill any steak?  Read on, dear readers.  \n\nWe faced a decision.  With our allotment of daylight dwindling rapidly, and no clear destination in mind, did we push forth and try to find a suitable spot?  Careening through the rolling streets of Fountain Hills gave us plenty of time to both decide and complain.  By the time we reached Shea Blvd, we had made up our minds.  We knew our destiny, and it smelled like steak seasoning.  \n\nPeeling out while turning to the East on Shea, the fearless Odyssey minivan showing its true colors and passion to its occupants, we headed toward the Bush Highway.  Headlights on, we kept our eyes peeled for any clues that might show us the way.  Turning left on what seemed like a good location, we discovered only a pier that led to the lake.  \n\nOut of the corner of my eye, I spotted the small Lakeshore Restaurant.  Daniel bade me to ask someone for directions.  Spotting a woman on a golf cart, I drove up to her and sheepishly asked her whether there was a place to camp nearby.\n\nShe said there wasn\u2019t, and we both lowered our heads in disbelief.  Quickly she corrected herself however, remembering that it was in fact November, and the Park Service allowed camping along the shore of the Salt River until March.  We simply needed to keep following the road until we found the Water Users Camping area, and hike on down to the shore.  We finally felt a brief moment of relief and hope.  Thanking the woman, we left her and made our trek back to the highway.  \n\nLight had all but left us at that point.  Following the woman\u2019s precise directions, we located the parking lot that would allow us passage to the shores of the Salt River.  Letting the headlights be our guide, we passed back and forth while deciding which spot would bring us closer to the campsite.  \n\nUnexpectedly, a small animal darted in front of the van, eyes ablaze as its tapetum lucidum reflected our headlights back at us.  Daniel freaked; he screamed and beckoned me to stop.  After discovering it to be a lost kitten, we discarded our man-cards and parked on the North end of the lot.  \n\nIt was time to investigate this campsite.\n\nIt should be mentioned that we had stocked immensely for the night.  Tents, sleeping bags, chairs, wood, a grill, a cooler, and other odds and ends that would prove difficult to carry down to the river in one trip.  We decided that we had better take a trip sans supplies, just to see if we could even find a suitable location.  After all, the sky had darkened and time was a luxury we did not have. \n\nOnce down at the shore, we realized the last damning fact that sealed our fate.  Every square inch of the area was covered in broken glass.  There was no chance of camping here.  While our tetanus shots were both up to date, the thought of dealing with those shards helped speed our decision to simply make a fire, grill the steak, and get home.\n\nHome.  We remembered at this point that Daniel\u2019s car was 50 miles away, parked in the lot of an AJ\u2019s Fine Foods.  Our nightly adventure had taken us quite a few miles out of our original path.  \n\nI digress.  After a few runs to the car, we placed our \u201ctrundle\u201d of wood inside a hastily crafted fire ring, and begun the process of heating the coals for the grill.  With our chairs set up, Daniel and I had a few minutes to ruminate on the night\u2019s transpiring.  We could hardly believe that we fell victim to another night of gallivanting about the Valley in search of a place to camp.  \n\nWith the steak cooking on the grill, Daniel took out the potatoes that his dear wife had carefully wrapped in aluminum foil for us to cook.  He dug a couple small holes a few inches deep, set in each a hot coal, placed the wrapped potato on top of the coal, and placed three more; one on top, and one on each side.\n\nQuizzically, I inquired with Daniel whether he thought that would cook the potatoes.  \u201cJust set a timer\u201d, he said.  He was quite sure that in less than an hour, we would have wonderfully cooked steamy fresh potatoes for our culinary enjoyment.  So we set the timer, and carried on.\n\n<img border=\"0\" height=\"200\" src=\"images/archive/IMG_2407.JPG.jpg\" width=\"200\" />\n\nA few minutes later, Daniel whisked around in his chair, alarmed, aiming his flashlight into the distance.  \n\n\u201cDid you hear something?\u201d he asked.  I responded to him nonchalantly, stating that I hadn\u2019t heard a thing, and for him to stop scaring me.  This was the second time that night that he was roused by something, and his predilection for theatre was quite amusing.\n\n\u201cI swear I heard something.  Right behind me.\u201d  \n\nAfter a few minutes of swinging the lights to and fro, we concluded that we were not being harassed by coyotes, javelina, bobcats, mountain lions, or raccoons.  A few times we did hear some fish jumping out of the water, which as time went on became the tidings of mer-people during their nightly dalliance.  \n\nThe steak was delicious, if not a bit over-seasoned by yours truly.  The conversation shifted from the serious to the insane, from intense to jocular, and we hardly remembered the potatoes that were surely ready to eat.\n\nCarefully, Daniel dusted the coals from on top of the wrappings, and carefully peeled back the aluminum bundling.  I did the same.  \n\nWe looked at each other.  \n\n\u201cIs your potato stone-cold?\u201d\n\n\u201cYeah.  Yours too?\u201d\n\nFor some reason, common sense so intensely illuminated our minds at the same time, that we almost fell out of our chairs for the pain of it.  How did we ever expect a huge potato to cook with four coals?  We could hardly stop laughing, when suddenly, Daniel whipped around again like on a swivel chair.  \n\n<img border=\"0\" height=\"320\" src=\"images/archive/Camping+Nov+2011-4.jpg\" width=\"212\" />\u201cThere!  Over there.  Do you see it?\u201d\n\n\u201cI don\u2019t\u201d, I replied.  \u201cWhat did you see?\u201d\n\n\u201cEyes.  Something\u2019s hunting us.  I saw its eyes over there.  You can\u2019t hear it?\u201d\n\nI paused, shuffled my feet for stability, and perked my ears to the scene.  It took a moment, but then I heard it.  Rustling in the branches, small footsteps on the underbrush.  Something was hunting us.\n\n\u201cWhat was it?  Did you get a good look at it?  Should we leave?\u201d, I asked, hesitantly.  I realized at that moment that neither of us could make a quick getaway.  Besides, what could really be stalking us at that moment?  Were we in peril?\n\nWe listened further, but no further auditory revelations were offered. After tossing a few rocks of humane warning into the trees and nearby foliage, we assured ourselves that we were safe, and that the night could go on.\n\nTossing the potatoes inside of the smoldering fire proved much more effective than our previous effort, and within 15 minutes, we had us some taters to eat.  More light conversation ensued, and we hardly remembered our previous dance with the unknown adversary.  \n\nAn adversary which was, my friends, quite real.\n\nDaniel again caught him with eager senses afire, shooting around in his seat so quick that his red hair was a blur.  Our flashlights found the target immediately; a pair of eyes in the distance, flickering and reflecting the light back at us, piercing, foraging, waiting.  It disappeared for only a moment, and was back in a flash, nearly 10 feet from its previous position.  \n\n<img border=\"0\" height=\"149\" src=\"images/archive/IMG_2410.JPG.jpg\" width=\"200\" />\u201cIt\u2019s the kitten again\u201d, I said.  \n\n\u201cNo, it\u2019s not\u201d, Daniel replied.  He seemed much more sure of himself than I was.  \n\nWith his certainty placing the seed of doubt so firmly in my mind, my flashlight shifted from left to right, sweeping for its target.   It only took a few more moments before we found our antagonist again.  \n\n\u201cIt\u2019s a raccoon!\u201d, bellowed Daniel. Indeed it was, and it had given us quite the scare.  But enough was enough, and we tossed a few well-aimed rocks in his direction to give him a final send off.  With Mr. Procyon lotor gone on his merry way, we returned to normal, but with a heightened sense of our surroundings.  And I certainly listened to Daniel when he thought he heard something.  \n\nThe rest of the evening was spent taking pictures and telling stories, until the hour grew late and we broke camp and put out the fire.\n\n<img border=\"0\" height=\"149\" src=\"images/archive/IMG_2412.JPG.jpg\" width=\"200\" />Oh, and a note about putting out the fire; it\u2019s never a good idea to urinate on top of a flaming hot 45 LB rock.  Cast your mind if you will, and imagine the stench of a locker room.  Now, make it 1000x worse.  That\u2019s the smell of instantly vaporized urine.  It\u2019s horrifying.\n\nIn my last ill-fated story about camping, I concluded by tale by stating that I would do it all again in a heartbeat.  That\u2019s why we went, really.  Even if you had told us going in that we would be beset on every turn by every imagination of obstruction, we would have sallied forth with dogged determination.  \n\nLike before, this lengthy travelogue certainly does not do the evening enough justice.  As they say, you just had to be there."
     },
     {
         "file": "2011-11-29-Any-Day-Now--It--39-ll-All-Be-.md",
         "year": "2011",
         "date": "November 29, 2011",
         "title": "Any Day Now, It&39;ll All Be White",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiCDYlzUvdgsn_CLhWKc1jTFugpqsnEQ2JU3zv49jqj6D5FTmKPXjO98s1vQwUdARzDoNIYvaAL0tsIBmDHqDwKHIwibIvmAskH1S_m5ULzJMQIM8nMClts3z2EchlXC8BFBclH/s320/My+HipstaPrint+0-709392.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5680231731019377138\" />\nDon't mean to sound like a broken record, but can't say enough about this year's extended autumnal warmth.\nLens: Lucas AB2\nFilm: Kodot XGrizzled"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-709392.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5680231731019377138\" />\nDon't mean to sound like a broken record, but can't say enough about this year's extended autumnal warmth.\nLens: Lucas AB2\nFilm: Kodot XGrizzled"
     },
     {
         "file": "2011-11-28-The-remnants-of-color.md",
         "year": "2011",
         "date": "November 28, 2011",
         "title": "The remnants of color",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhBLvTqtxDOxgWcjUXX7hgmyXMuaDib_ijQ9IZ_O-O6MhZHFDFQ6XXAzvFzmfWujzH1k5-ykOSOR_KGUIwsySyKupRBwn3vFGcW_jrdXUEuqadkpmq03cBOuJWJfDrRaO51KNGswA/s320/My+HipstaPrint+0-724146.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5680194000593237842\" />\nOn a brisk day in Lake Arrowhead, the wind will chill you to the bone as you make your way through the whimsical shipping area. This tree in particular caught my eye, as it seemed majestic in its desire to maintain the color of autumn better than any neighboring trees. Lens: Watts\nFilm: Ina's 1935"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-724146.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5680194000593237842\" />\nOn a brisk day in Lake Arrowhead, the wind will chill you to the bone as you make your way through the whimsical shipping area. This tree in particular caught my eye, as it seemed majestic in its desire to maintain the color of autumn better than any neighboring trees. Lens: Watts\nFilm: Ina's 1935"
     },
     {
         "file": "2011-11-27-Silver-Marker.md",
         "year": "2011",
         "date": "November 27, 2011",
         "title": "Silver Marker",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgF3O3DDRcznSFQk1KNjH1Y0dFIgL3qmBN0si-9tSrFO48j6CSKhyphenhyphen-aX9DDhjgBDkUnxH4bjVXmvOUNkjed-pEzL2pKixQ8nnoIF6zIJpEozv54LILxU7vRFOxR_Y8WV3ZvDMnS/s320/My+HipstaPrint+0-713429.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5679520503025676354\" />\nThese pop up here and there out on the range...\nLens: Hornbecker\nFilm: BlacKeys SuperGrain"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-713429.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5679520503025676354\" />\nThese pop up here and there out on the range...\nLens: Hornbecker\nFilm: BlacKeys SuperGrain"
     },
     {
         "file": "2011-11-27-Autumn-on-asphalt.md",
         "year": "2011",
         "date": "November 27, 2011",
         "title": "Autumn on asphalt",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgJG2gZWGSSUf_XeYgmi22Jm2Gr_tfxeydODJqrpkHP5dbVZMQIfhjiH-jrhBVq-E3Sg3K4Qt94FJnOiR2RPmHNE2SP0AzZZRgduOjbkRzuke_9cxhHUCZE_LxKXqoLpbF4RtGazw/s320/My+HipstaPrint+0-754616.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5679530564231083458\" />\nIt'll shortly be time to make the drive off this mountain. Can't complain about the time spent up in these San Bernadino heights; plenty of rest, ample leftovers consumed, and a fit farewell to the autumn season. Lens: John S\nFlash: Off\nFilm: Ina's 1935"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-754616.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5679530564231083458\" />\nIt'll shortly be time to make the drive off this mountain. Can't complain about the time spent up in these San Bernadino heights; plenty of rest, ample leftovers consumed, and a fit farewell to the autumn season. Lens: John S\nFlash: Off\nFilm: Ina's 1935"
     },
     {
         "file": "2011-11-25-Steamed-kitchen-glass.md",
         "year": "2011",
         "date": "November 25, 2011",
         "title": "Steamed kitchen glass",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjNYl3gVFpk1DmZ74gEDx0uwDu7WU0fta1A8fpvQe9VT265fp69Xqbl_HitUcfGqVj0JreZZQzja0yftZGLrhk858oV1lK0B7Pbteiq4T9y5B3F9XuQonAJoIQqd0T6F7llqdwF5g/s320/My+HipstaPrint+0-717589.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5678990092313057186\" />\nThe effect of a warm kitchen on chilly autumn glass made me pause yesterday and take notice. The sights, the smells, the entire environment was on point; nothing could be improved. The yellowing Ash behind the cabin was only a whisper. An overcast sky blanketed the village, prescribing rest and affection.  Thanksgiving is rapidly becoming my favorite holiday.Lens: James M\nFilm: Ina's 1935"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-717589.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5678990092313057186\" />\nThe effect of a warm kitchen on chilly autumn glass made me pause yesterday and take notice. The sights, the smells, the entire environment was on point; nothing could be improved. The yellowing Ash behind the cabin was only a whisper. An overcast sky blanketed the village, prescribing rest and affection.  Thanksgiving is rapidly becoming my favorite holiday.Lens: James M\nFilm: Ina's 1935"
     },
     {
         "file": "2011-11-24-Thanksgiving-morning-and-still.md",
         "year": "2011",
         "date": "November 24, 2011",
         "title": "Thanksgiving morning and still water",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiNbBOEq8AltWXqqBV19lJ3K88Z8Va6-IgddZXKS9VEld-3aeBUubdHY2s6jfnondziSaK5JYYpUxJ3yoBYPUYEz-I98DxSp2fr3-J6iHAh_baLnWJ0304buHF-7Ez3zGuBUt6rEQ/s320/My+HipstaPrint+0-785405.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5678619730181228338\" />\n33 degrees and beautiful. Lens: Kaimal Mark II\nFilm: Ina's 1935"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-785405.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5678619730181228338\" />\n33 degrees and beautiful. Lens: Kaimal Mark II\nFilm: Ina's 1935"
     },
     {
         "file": "2011-11-24-Big-Spaces.md",
         "year": "2011",
         "date": "November 24, 2011",
         "title": "Big Spaces",
-        "body": "<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5678670713816965394\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhN-BoId11tLgXYlE-LPXyJnTr2h5kmlGL2PJG5T0dTU-v0soz0e8tGi5FwGrH2eCjJstnvnOZqT_SA-uH1NEzuCO5SWBqB5OrfMRH3saQreoZoBkUk_5tSv7Y_1szhyUVhBCJ7/s320/My+HipstaPrint+0-756071.jpg\" />\n The field waits on winter, as well.\n Lens: Lucas AB2\n Film: Ina's 1969"
+        "body": "<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5678670713816965394\" src=\"images/archive/My+HipstaPrint+0-756071.jpg\" />\n The field waits on winter, as well.\n Lens: Lucas AB2\n Film: Ina's 1969"
     },
     {
         "file": "2011-11-23-Wetland-as-winter-comes-on.md",
         "year": "2011",
         "date": "November 23, 2011",
         "title": "Wetland as winter comes on",
-        "body": "<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5678343969093770530\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhq0NH0k5tt0vv68GWflOoPTQ-rdaQ0YWVzLz1NPS7cFTwlCFZjgqGXnckVZ4FaTjGs-2I02TSCC3-VY8Uv1tHqoNIoqdbanQDKHnSLLVbsU-nbpZBh-wJCmv0XP_JidMkjVAZa/s320/My+HipstaPrint+0-780297.jpg\" />\nShores turn brown as sure as meadows with the coming of winter.\nLens: Jimmy\nFilm: Float"
+        "body": "<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5678343969093770530\" src=\"images/archive/My+HipstaPrint+0-780297.jpg\" />\nShores turn brown as sure as meadows with the coming of winter.\nLens: Jimmy\nFilm: Float"
     },
     {
         "file": "2011-11-20-Derelict-and-Feline.md",
         "year": "2011",
         "date": "November 20, 2011",
         "title": "Derelict and Feline",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgpILu0U8Gn1IsWWM6g9CX5AIARb556CxjCe3xrxndEb1wmICmA4S94Sd5BtTedHVUwFNaIX3brTLyTYfg_Cq7tDGAa59wwWYoL0LskylN1maO08-OqN9XPOQSK9mLuv3db5a_7/s320/My+HipstaPrint+0-793140.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5677184388173684914\" />\nThere is no shortage of odd things to photograph, even as close as my own lot...\nLens: Bettie XL\nFilm: Rock BW-11"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-793140.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5677184388173684914\" />\nThere is no shortage of odd things to photograph, even as close as my own lot...\nLens: Bettie XL\nFilm: Rock BW-11"
     },
     {
         "file": "2011-11-19-The-Old-With-the-New.md",
         "year": "2011",
         "date": "November 19, 2011",
         "title": "The Old With the New",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjKQUsDrVqkrMLEfTX7xMifdqxSfq5p4Kwvym9wGTFlF4BgbyyhwmSzHsf8g4YyyDlQ4A7WezTiol7fLFEkoIaN6ZUQrfpMPGnk5tkD3PTfd-PhSoPlWzD9lhp4Ns1WkAE72JKL/s320/My+HipstaPrint+0-734395.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5676741750709777666\" />\nOut in the valley, seeing what could be sought after, I found these horses hanging around a brand-new pivot sprinkler.\nTime rolls along, even in the valley of the San Pitch.\nLens: Libatique 73\nFilm: Alfred Infrared"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-734395.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5676741750709777666\" />\nOut in the valley, seeing what could be sought after, I found these horses hanging around a brand-new pivot sprinkler.\nTime rolls along, even in the valley of the San Pitch.\nLens: Libatique 73\nFilm: Alfred Infrared"
     },
     {
         "file": "2011-11-17-Scattered.md",
         "year": "2011",
         "date": "November 17, 2011",
         "title": "Scattered",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEglnCa0GmqhHNgbmeg7_9g8Z75ueGDt36HcJLlMIBGRzz2ZGibjQI1DHPhWKUNqf1vdEmNP5OiY-cDV55Y0E5T6h8GU-qM3xdy-u3AQUIr7ClJ0dzEGczNuMCCwt44adyOrMBvT/s320/My+HipstaPrint+0-703104.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5675797147538733474\" />\nWhere the leaves fell to the ground only a few days ago, a new blacktop lot covers the earth. Newly fenced and cut off from the rest of the world, dead leaves await the wind or grinding tires for their next move along the continuum of regeneration.Lens: Roboto Glitter\nFilm: DreamCanvass"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-703104.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5675797147538733474\" />\nWhere the leaves fell to the ground only a few days ago, a new blacktop lot covers the earth. Newly fenced and cut off from the rest of the world, dead leaves await the wind or grinding tires for their next move along the continuum of regeneration.Lens: Roboto Glitter\nFilm: DreamCanvass"
     },
     {
         "file": "2011-11-16-Taking-a-break---.md",
         "year": "2011",
         "date": "November 16, 2011",
         "title": "Taking a break...",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhhJysi_oGMijrd1KE3Aoc9IQObhHq3u3-4Cm3R-zoMgzUnRF_EhMmwb8-uHq1Ab_U5Iq7C6G6JPAN7PzuIgjWVmB2-eyuUPWBHnvNOYY0OHBW6DoS-BusYbznuUQ1cXsNQCJMJlw/s320/My+HipstaPrint+0-778249.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5675383440240574898\" />\nI'll be laid up in bed for a few days, so it may be a bit before you see anything from me. Now, a post from my elder brother?  That may be forthcoming. Stay tuned. Lens: James M\nFilm: Ina's 1969"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-778249.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5675383440240574898\" />\nI'll be laid up in bed for a few days, so it may be a bit before you see anything from me. Now, a post from my elder brother?  That may be forthcoming. Stay tuned. Lens: James M\nFilm: Ina's 1969"
     },
     {
         "file": "2011-11-14-Autumnal-Sunset.md",
         "year": "2011",
         "date": "November 14, 2011",
         "title": "Autumnal Sunset",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEioNyWlhfpgfHnrL9ppNaai6mPnteWwZEz64ySlPIAJAn7RaV9mjrYQmiQtAMZlXCH3figSfb3cWNoW1hgrHKxoWjmU6SWHK1ISzpy0MBdoDhA9RHGgQhyphenhyphen5wUwhIJW8Dh_oZQio/s320/My+HipstaPrint+0-738096.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5674699933534867906\" />\nLying on my back after a long day of only a little light, the night settled on only after this bit of freedom jam...\nLens: Watts\nFilm: Cano Cafenol"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-738096.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5674699933534867906\" />\nLying on my back after a long day of only a little light, the night settled on only after this bit of freedom jam...\nLens: Watts\nFilm: Cano Cafenol"
     },
     {
         "file": "2011-11-12-Ghost-in-the-dark.md",
         "year": "2011",
         "date": "November 12, 2011",
         "title": "Ghost in the dark",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjlY0tb-Nyo4J4WPhdRKS0ylLhVgE8xF0ua90uGGC6VnnrH6KFiBcNHsGEqeivjvJ6bSUV97lecjX5swhJoG-tuxFKw6WUSX_szfxYq-XUGU3npbZAjVOCInN8bvmuXxwgHtx9CRg/s320/photo-786615.JPG\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5674144378196308146\" />\nSometimes, you can see things in the flames. Other times, the things in the flames see you. Shot with Camera+"
+        "body": "<img src=\"images/archive/photo-786615.JPG.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5674144378196308146\" />\nSometimes, you can see things in the flames. Other times, the things in the flames see you. Shot with Camera+"
     },
     {
         "file": "2011-11-10-Not-much-longer---.md",
         "year": "2011",
         "date": "November 10, 2011",
         "title": "Not much longer...",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjTkTbdsKhzNDtmbDM-YqK4CiGb4JNUjacr65MDSli996vmeOLPPxEWAYPGFj3oLJGbOUOiH6w6tO0R193j4ne_VoVJqhj0FaeUGsitrJ4TKDoS-EsQ_Jk73W7NhxOQv-u5b55C/s320/My+HipstaPrint+0-743493.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5673199724328515810\" />\nIn farmyards across the land, the clocks tick by the final days until the holidays...\nLens: Libatique 73\nFilm: Ina's 1969"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-743493.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5673199724328515810\" />\nIn farmyards across the land, the clocks tick by the final days until the holidays...\nLens: Libatique 73\nFilm: Ina's 1969"
     },
     {
         "file": "2011-11-08-My-my-my.md",
         "year": "2011",
         "date": "November 08, 2011",
         "title": "My my my",
-        "body": "My my my it\u2019s a beautiful world\nI like swimming in the sea\nI like to go out beyond the white breakers\nWhere a man can still be free (or a woman if you are one)\nI like swimming in the sea. \n\nBeautiful World, Colin Hay\n\n<img border=\"0\" height=\"640\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiSjFRELmiv2cZCuan9Xr4WBj4LCaqYaz1Y5-RkfNi8EzOJyqf3YdSxTfDHyBzMWQq3Ycc8C_niVHgEN1BDec19-gXW0rbM94GnJDYfNjQEw0sN9VV0fK7tMLFYu0JKU0KsqWqJkw/s640/IMG_0243.JPG\" width=\"640\" />"
+        "body": "My my my it\u2019s a beautiful world\nI like swimming in the sea\nI like to go out beyond the white breakers\nWhere a man can still be free (or a woman if you are one)\nI like swimming in the sea. \n\nBeautiful World, Colin Hay\n\n<img border=\"0\" height=\"640\" src=\"images/archive/IMG_0243.JPG.jpg\" width=\"640\" />"
     },
     {
         "file": "2011-11-06-New-Season-Snow.md",
         "year": "2011",
         "date": "November 06, 2011",
         "title": "New Season Snow",
-        "body": "With November hard upon us, the sun dipping lower toward the south in its austral season, and very little response from things formerly flourishing out-of-doors, the changing light and skies are a welcome diversion.\n\n<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh1v1xV2y_BZ9QS75QOwxPPSH3uFyQ04JYyQrpa5IVZyaj9jemPaT7vBmSXLp2r8v_8v4Oz1u1xDM1HJQirBTh4YE8bI3AuTlOhquf_qw4UfyphrEfNEEvYZJUxkJjPzXgPt6dk/s320/image-719193.png\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5671957948282610002\" />\n\n<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgw74oQh4aXC5c0tgWxEfrGEzq_4zy4-oyOu-c3uS9M0wvFD6yHQ7BYwLTTIAkODTqHDbwmwuw7htyonSXOTxhoD77rZJOvqGPuSRWLBpHjC7zVVIUZNCpL6mND3C6vmNJGAB8V/s320/image-720735.png\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5671957949462859666\" />\n\n<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjSYA5e9cv1bmpw7uW6XcFn_p9k_IZIQ39moqCj-heybLRTvdXkw7n3ZaHvCJ71r_HTharVVgr8aISJ5gqFpUhK0HgF3cICqgCx5Uu3ppRu6csWPswHLZX5s5LyocD2-_kGiCb1/s320/image-722324.png\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5671957959735484162\" />"
+        "body": "With November hard upon us, the sun dipping lower toward the south in its austral season, and very little response from things formerly flourishing out-of-doors, the changing light and skies are a welcome diversion.\n\n<img src=\"images/archive/image-719193.png\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5671957948282610002\" />\n\n<img src=\"images/archive/image-720735.png\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5671957949462859666\" />\n\n<img src=\"images/archive/image-722324.png\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5671957959735484162\" />"
     },
     {
         "file": "2011-11-04-Perfect-Blue-November-Sky.md",
         "year": "2011",
         "date": "November 04, 2011",
         "title": "Perfect Blue November Sky",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhRb3QZg3zDU9MRVVkeRu7yLYqddAafFHUPL3ABm6qIarrrKlq-CcS6KhVHDD_MPD-ER34-rssmKlw3N-ypnVPgPD60pSHBdTFdHYRuYdNBCp-Bn_HaO1A328lwY-6uJXYeveq51Q/s320/My+HipstaPrint+0-713674.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5670973516549644242\" />\nWith the two oldest kids in school, stealing away for a long walk with the baby was easy. Finding something to shoot, well...that was a touch the opposite way. Having lived in the same place for five years, I tend to stick to the same path when I leave the house. I know the houses, the people, it's all very familiar and comfortable to me. That's why I smiled when I elevated my gaze for just a moment and saw these two palms reaching toward a perfect blue November sky. Hadn't noticed them before, yet there they were. Lens: John S\nFilm: Ina's 1969"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-713674.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5670973516549644242\" />\nWith the two oldest kids in school, stealing away for a long walk with the baby was easy. Finding something to shoot, well...that was a touch the opposite way. Having lived in the same place for five years, I tend to stick to the same path when I leave the house. I know the houses, the people, it's all very familiar and comfortable to me. That's why I smiled when I elevated my gaze for just a moment and saw these two palms reaching toward a perfect blue November sky. Hadn't noticed them before, yet there they were. Lens: John S\nFilm: Ina's 1969"
     },
     {
         "file": "2011-11-04-Good-Granite-Scree-Slope.md",
         "year": "2011",
         "date": "November 04, 2011",
         "title": "Good Granite Scree Slope",
-        "body": "<img border=\"0\" height=\"320\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh6Skfm7E-6fu2GcoatKNoYGDDX52GX7ppAVvfQusIkRkp-kHW4cd9OroHJXWKRW96W4aG6_AUhQuATxw75JM5AIvOdhnkhAoDIeNFOpD60xdXEriAMY11K7Wt9HbVQBB-QybEm/s320/My+HipstaPrint+0.jpg\" width=\"320\" />\n\nOn a bit of a detour through the canyon. \nThe definition of good is undeniably that of 'something reliably uplifting', and that's what the proximity of a granite feature does for me.\nGood action.\n\nLens: WattsFilm: Blanko"
+        "body": "<img border=\"0\" height=\"320\" src=\"images/archive/My+HipstaPrint+0.jpg\" width=\"320\" />\n\nOn a bit of a detour through the canyon. \nThe definition of good is undeniably that of 'something reliably uplifting', and that's what the proximity of a granite feature does for me.\nGood action.\n\nLens: WattsFilm: Blanko"
     },
     {
         "file": "2011-11-03-Ripple-and-coalesce.md",
         "year": "2011",
         "date": "November 03, 2011",
         "title": "Ripple and coalesce",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgFt8naX7l0jXsPEYZKGJPdf271r1qAmnWZ0R-yQmmXclJ7LWkaRrnRSpy0SgBg4vSKUnF9iK3949nSxGqIBS2UuRbtOTaYImsGh_wqKhy3lAIF1OxP99ZRrauJ2DqgHk2r0wye9Q/s320/My+HipstaPrint+0-780032.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5670563204545706034\" />\nAs remarkable as the Sonoran sky is, I'd like to pull away from this horizon and see what waits for me. Just for a bit, you see. This arid clime always brings me back regardless. Lens: John S\nFilm: Blanko"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-780032.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5670563204545706034\" />\nAs remarkable as the Sonoran sky is, I'd like to pull away from this horizon and see what waits for me. Just for a bit, you see. This arid clime always brings me back regardless. Lens: John S\nFilm: Blanko"
     },
     {
         "file": "2011-11-01-Youthful-enthusiasm.md",
         "year": "2011",
         "date": "November 01, 2011",
         "title": "Youthful enthusiasm",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhploM4mPiQ1vfbSRCTxCQbE7JwlO-tRrn3rnhZvEQr-27ef-2kzlNJic2i8D1yVkCG_a8-GGb9il0CsFFq3ORrWHjn8D07XpaME51mJAK9hUjAYm__XSPTJ00Qh-yKI1-_N9zP4A/s320/My+HipstaPrint+0-732508.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5670125772787842210\" />\nMy boy ran down the street, orange pumpkin shaped bucket in his left hand, Firebolt in his right. Determination marked his brow, much like the lightning bolt shaped scar his mom drew earlier. It was Halloween night, and nothing would stop his exploits. Lens: Tejas\nFilm: Kodot XGrizzled"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-732508.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5670125772787842210\" />\nMy boy ran down the street, orange pumpkin shaped bucket in his left hand, Firebolt in his right. Determination marked his brow, much like the lightning bolt shaped scar his mom drew earlier. It was Halloween night, and nothing would stop his exploits. Lens: Tejas\nFilm: Kodot XGrizzled"
     },
     {
         "file": "2011-10-30-The-Swell-and-Back.md",
         "year": "2011",
         "date": "October 30, 2011",
         "title": "The Swell and Back",
-        "body": "<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5669423020210026690\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEioT9UZg3_Cd70o6fb_nXE1hxJ1nn7EIdAPRPon9I4mWAttCFuMt9el7VsJOEmXgibYm894Qi7DJ2HKFAnOSQbrwPcUeqoVrZig_HiZ9Pg2iRmyHDXXAHT5XhcQzNT0T49zFLEz/s320/IMG_0144-710830.jpeg\" />Lens: Tejas\nFilm: Ina's 1969\n\nThere are a variety of lenses and films used here; so much color and beauty along this way. I'm very seldom sure of what to do to capture the colors naturally inherent in the high desert that is our home\n\nLens: Tejas\nFilm: Big Up\n<img border=\"0\" height=\"200\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgMMQIDdvK23HO0oYD87n3It6WEjefxuPWgH5oMP9B4JwOdN10AtzorF3qxQ-SQxuzvsFlx_ZGMJgZnd_xs0aFyubI576rKNsZdUlUKAlR8TynvLofvCS6b4_OxxM5v2lba6Rzb/s200/IMG_0149.JPG\" width=\"200\" />\n\nLens: Tejas\nFilm: Ina's 1969\n<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5669423019160647618\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEicbRrmlcOemLVwGPaxdSKwHzsg9o3-tY1JKws98KFQ5OY8YqwXVeJoJnFa9LkD4BYY_qZfqZ2pjwuxN1oThMgzNyAmS68d7J_FE9wXCjSI6lZqQIo6PB9_cLaGzEtQPTMpMFt4/s320/IMG_0143-710142.jpeg\" />\n\nLens: Tejas\nFilm: Big Up\n<img border=\"0\" height=\"320\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjtcnAjOJqRR8w57tZHg6RnrlGXWUcQ9iiOQ1qi6aVA3rkh4vxDHDp92TisKb0hyphenhyphenJU27iQJxQyjT84IXogFz9_xw1QI2O1Mk0Qdcd6RrM_V82Zt33hHvHWTzwlqHUEhDowC2BjI/s320/IMG_0155.JPG\" style=\"cursor: move;\" width=\"320\" />\n\nLens: Matty ALN\nFilm: Dream Canvas\n<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5669423029288280114\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgymP_R9S8DNBGz0iPfe3GXN7BSqbhKhIAybxgdh6Dc5B_gtlDcNtG-I0V0E-ScM-4y_5IpaUjWeVeKD_4TlPcVATRQICnxlJBbtnQgXo4P1J1HWt7Qph4XXgdrlg8UWShZiliW/s320/IMG_0178-713550.jpeg\" />\n\nLens: Watts\nFilm: Blanko\n<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5669423033869687474\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhTuAEfYqoYHuZoM6Yw9rJoSNiWaV5ofQnz8yNjNuaC8r8oHzaJPdyAFCKgBLqA1j-xT8oTsq4aUzFAnzRWqNPgyWVwLtRElCXzJwJF-k4WJkEveuRr9gDNIwfwAB_yUqr8J0p9/s320/IMG_0170-714559.jpeg\" />\n\nLens: John S\nFilm: Kodot XGrizzled\n<img border=\"0\" height=\"320\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgM0kJ_QCPQuwQ6KyBRqhEZ6fFH2UvhVEQTvf-EHHUtkpBigEj66oleMT_qKC8V9TPHBwkZuuGBPtQknz48nCXDnckJfZh_LxOITATNhgQik05FiSmD7yWSTcTg6m-N9QSkNbtY/s320/IMG_0161.JPG\" width=\"320\" />\n\nLens: LIbatique 73\nFilm: Ina's 1969\n<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5669423049139141330\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhmcVYvjboZ-Xfr5d0g7NLYondBRXGqVd6mTWprsoeL7qxnzVH8hd7EJtsK3WwBfCheeafvHoEEKv9cJsUacYBUqw47kG_0ww03owWC4ZqDN3o0aruO70BuMD1-B3guRzIP2wOa/s320/IMG_0180-717338.jpeg\" /> Hope you enjoy the images, one way t'other..."
+        "body": "<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5669423020210026690\" src=\"images/archive/IMG_0144-710830.jpeg\" />Lens: Tejas\nFilm: Ina's 1969\n\nThere are a variety of lenses and films used here; so much color and beauty along this way. I'm very seldom sure of what to do to capture the colors naturally inherent in the high desert that is our home\n\nLens: Tejas\nFilm: Big Up\n<img border=\"0\" height=\"200\" src=\"images/archive/IMG_0149.JPG.jpg\" width=\"200\" />\n\nLens: Tejas\nFilm: Ina's 1969\n<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5669423019160647618\" src=\"images/archive/IMG_0143-710142.jpeg\" />\n\nLens: Tejas\nFilm: Big Up\n<img border=\"0\" height=\"320\" src=\"images/archive/IMG_0155.JPG.jpg\" style=\"cursor: move;\" width=\"320\" />\n\nLens: Matty ALN\nFilm: Dream Canvas\n<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5669423029288280114\" src=\"images/archive/IMG_0178-713550.jpeg\" />\n\nLens: Watts\nFilm: Blanko\n<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5669423033869687474\" src=\"images/archive/IMG_0170-714559.jpeg\" />\n\nLens: John S\nFilm: Kodot XGrizzled\n<img border=\"0\" height=\"320\" src=\"images/archive/IMG_0161.JPG.jpg\" width=\"320\" />\n\nLens: LIbatique 73\nFilm: Ina's 1969\n<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5669423049139141330\" src=\"images/archive/IMG_0180-717338.jpeg\" /> Hope you enjoy the images, one way t'other..."
     },
     {
         "file": "2011-10-30-Gradient-moon.md",
         "year": "2011",
         "date": "October 30, 2011",
         "title": "Gradient moon",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEik7pZG4FBVOKjZDoN5PYW_6G2u51rDwV5_yHxa8cUxbEgMVu4NQv0A8zckinAvNyyN1ZM3rEUNFCZzfYgxE0l6BAVEi3PLWxaVggWOgXiOsXxDyTlWiy9yoqNupsbfflBX-gBEJQ/s320/My+HipstaPrint+0-785208.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5669081462909572226\" />\nSpending the evening with the family at a longstanding Halloween tradition; my old elementary school's \"Boo Bash\".   Glanced up to see the moon nothing more than a crescent. Lens: Tejas\nFilm: Ina's 1969"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-785208.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5669081462909572226\" />\nSpending the evening with the family at a longstanding Halloween tradition; my old elementary school's \"Boo Bash\".   Glanced up to see the moon nothing more than a crescent. Lens: Tejas\nFilm: Ina's 1969"
     },
     {
         "file": "2011-10-29-Iron-and-Bone.md",
         "year": "2011",
         "date": "October 29, 2011",
         "title": "Iron and Bone",
-        "body": "<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5669040652259510162\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEie7vvpvAiurD66g7h9ur3El4-xnWh2sBLl4x91l5agCQB2QVIUXLDRZWE-vQ_JTrpcrAFItenTrKhvDcIEj1UZh2bkhdU41VCHpHmibTIL4Ug9zXHq3p6oRvI6AYDFyCrMi8Pn/s320/photo-782816.JPG\" />\n\nFilm: Matty ALN\nFIlm: Claunch 72 Monochrome"
+        "body": "<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5669040652259510162\" src=\"images/archive/photo-782816.JPG.jpg\" />\n\nFilm: Matty ALN\nFIlm: Claunch 72 Monochrome"
     },
     {
         "file": "2011-10-27-Debut-from-MiddleUtah.md",
         "year": "2011",
         "date": "October 27, 2011",
         "title": "Debut from MiddleUtah",
-        "body": "A stroll outside of town<img border=\"0\" height=\"320\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgKJFFQiNAGfL4eKhmIJnqzIXW3n3xbFafIR1mLakP3klKLHue8WrfGYypev4J_MMbufl1nggbMhjLnkEEUoW6ANhujLZ65CyR7nw7cJhkXmvBzPYbrXZKJMYhgeffHnt8wYQVh/s320/IMG_0103.JPG\" width=\"320\" />\n\n<img border=\"0\" height=\"320\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhX0EFCfFETultP9xZC1mR4mT4F7YRpcB4x-Y9iox7O18hWK_rdgmvzinovq6PUip7bjK3eNOcd5Bs02PjmEm5Qc8_ndzekRNLGNu0bGl9OCy3sRRWkK8aCQdiBeHw2J7iDT9iJ/s320/Image.jpg\" width=\"320\" />crossings and modes\n\ntall creatures and the changes afoot<img border=\"0\" height=\"320\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg3krt2FCmwSxme_F1OvNgcPuZwLccd8UMNYWimfirtAlpq2vdTSw2BMPcc_r1eUAfRsxNLrvzO5FYaeyMlPlehbCtz-BAQqX6Ke1RVetDrDXFeXHZnr3ZMhrodyCsPRBCWX2Bi/s320/Image+1.jpg\" width=\"320\" />\n\n<img border=\"0\" height=\"320\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgPA340gLEgILd3ea2a1bg2Nfx10Xf8eq-SSY2Y0LyVFog1kwaxKgyjyAYP8bu9P-KgYvnnyRNPumnZGr0zVzk_YyfR4NEqi47y8xwlbfvw6jaNceRHp6qkmcFjeSk_H2DsLMOU/s320/Image+2.jpg\" width=\"320\" />remains and remainders\n\nunderfoot and atop the gravel<img border=\"0\" height=\"226\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj0LfgXtklZex4s_U7xkw23WFE6kCyXMa5blDx_G-UkQw-XFteKh9MTUCaIub0hkAj9nzDe6K5jtUPqgLcTiVsB-lNFnyJBYsohH79ondIW52WxBaeFOGIkr2CuvkG2e8-Zz-_K/s320/Image+4.jpg\" width=\"320\" />"
+        "body": "A stroll outside of town<img border=\"0\" height=\"320\" src=\"images/archive/IMG_0103.JPG.jpg\" width=\"320\" />\n\n<img border=\"0\" height=\"320\" src=\"images/archive/Image.jpg\" width=\"320\" />crossings and modes\n\ntall creatures and the changes afoot<img border=\"0\" height=\"320\" src=\"images/archive/Image+1.jpg\" width=\"320\" />\n\n<img border=\"0\" height=\"320\" src=\"images/archive/Image+2.jpg\" width=\"320\" />remains and remainders\n\nunderfoot and atop the gravel<img border=\"0\" height=\"226\" src=\"images/archive/Image+4.jpg\" width=\"320\" />"
     },
     {
         "file": "2011-10-26-Hipstamatic-Farms.md",
         "year": "2011",
         "date": "October 26, 2011",
         "title": "Hipstamatic Farms",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj_XQuiH5BYXnPWI3YwxHncWx2BvS7jkSdTIPRHMb_cDGL0dVKaT6ZA5I7brAXl7rhdymScmKFCm9USjPIpGWJAuOTonqEz5WYnD0hAy0BuBwc-sNLb7N-TQPcIxU97Z2hHw-37Sg/s320/photo+1-757613.JPG\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5667918698065244290\" />\n<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhQhTBqETmHv7hs6o3-LOlMHhAWBY18x6xDhsYEqlS8fgq4fPe-0xdYIURCyG_reW4hJCoyr2VxGiMNHc3gEir4npY5bb-Af05kQ3-yE2s3UY42QbAMu-uNZHB0fnFiTfQYW_lfYA/s320/image-759428.jpeg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5667918708123179266\" />\n<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjTA7D0tmzLuhDmLG6PCRCMmx5ruFoQa0B3zCHbE-BRKigCUmUpaocmmN0KZ5wkFXoF1WH5Dj25Cq1UUsfm2bmOAYn4G0lxLeXls8i-k79gQndEjVA4pwFTST_TJzCtrM2wTKzHyA/s320/photo+2-761776.JPG\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5667918714816506962\" />\n<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiabOTDkeKoINWCifdZeI3iofMNot62ovGqvXsdv-C2YIanOj90AXqPOPxXRCIoCem47Ob5-Z3y_aZa7Rx2qgvFPSkJDCz8alUgP9Ntzg-cauNTEV2urRQ9n_wdlWfHAW9A-FfrSQ/s320/photo+3-765675.JPG\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5667918730831051442\" />\n<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhvEcVyCV_8llQyBNmfc6fgZnVlFb5Fbr6qyhpbOSnv752iPz9WWOSaO6oGHcyj1FCSpvpPFGJchYOMwq_wWXo_IqjUnWxaEszEG_bQy3WChH7yJZkQ7KfSbIX8laoGrROI1nDj7g/s320/photo+4-768132.JPG\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5667918740810429218\" />\n<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiouD4HWhKQm8GzXL5rR9XVZLPIcX_1joqngT5BeG8iuN5MgIOkflBDoui-jA5nX7O8y_hRiAE0j-AhROvRk8Z4SJ4mOFLLFrIfa03tTTq0P40JKwG1ApFvBn2-SIxoslFjI3hvyQ/s320/photo+5-770383.JPG\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5667918749577502834\" />\nWe took a trip to a \"farm\" in Mesa today. Drawing close to Halloween, I trusted the SuperGrain effect coupled with the warmth of Tejas to bring a spirit of the macabre to all the photos from the day. Lens: Tejas\nFilm: BlacKeys SuperGrain"
+        "body": "<img src=\"images/archive/photo+1-757613.JPG.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5667918698065244290\" />\n<img src=\"images/archive/image-759428.jpeg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5667918708123179266\" />\n<img src=\"images/archive/photo+2-761776.JPG.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5667918714816506962\" />\n<img src=\"images/archive/photo+3-765675.JPG.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5667918730831051442\" />\n<img src=\"images/archive/photo+4-768132.JPG.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5667918740810429218\" />\n<img src=\"images/archive/photo+5-770383.JPG.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5667918749577502834\" />\nWe took a trip to a \"farm\" in Mesa today. Drawing close to Halloween, I trusted the SuperGrain effect coupled with the warmth of Tejas to bring a spirit of the macabre to all the photos from the day. Lens: Tejas\nFilm: BlacKeys SuperGrain"
     },
     {
         "file": "2011-10-25-Dot-Matrix-with-Surround-Sound.md",
         "year": "2011",
         "date": "October 25, 2011",
         "title": "Dot Matrix with Surround Sound",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhw3Rgjs0KoUHtOp7YXdrtOGbIS-2vlpdQMTLMcIVeTnEevDYQKUBieWL-_KszaONaRnoVqUtBS2c_iI7wg7zoYILYg4VxYA_27Xv1vDfZusVlq7UmZwxSP89-GjUsZfVC-tZR3tg/s320/photo-777984.JPG\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5667249625575145714\" />\nYou know."
+        "body": "<img src=\"images/archive/photo-777984.JPG.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5667249625575145714\" />\nYou know."
     },
     {
         "file": "2011-10-12-Ice--amp--Snow.md",
         "year": "2011",
         "date": "October 12, 2011",
         "title": "Ice &amp; Snow",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhRFMl4P1ASa4TYt-p2Q4NsRA65yto2DrDjvawnClgHuwUUrjXUBRKkQNh6zd28S9MCsSSJoe2cElD1clABUvup8tNIgBLSFp55l7jdm4ahABeBUwdxLw3CR2rVCSVhPTUfn8NEQQ/s320/My+HipstaPrint+0-743237.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5662648279927186658\" />\nVisited Snowbird and found the place to be mostly quiet. No tram, no food, and squirmy kids resulted in a rapid decent from the mountain. Until next time!Lens: John S\nFilm: Pistil"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-743237.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5662648279927186658\" />\nVisited Snowbird and found the place to be mostly quiet. No tram, no food, and squirmy kids resulted in a rapid decent from the mountain. Until next time!Lens: John S\nFilm: Pistil"
     },
     {
         "file": "2011-10-11---Thanksgiving-Point.md",
         "year": "2011",
         "date": "October 11, 2011",
         "title": "@ Thanksgiving Point",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEil8lELMzQR6RWmPMLUPSbFEJ0Gb2jeNBq7HqbJXPNaHk4dPXM6RZn6IiG75C2ZHKpd61PeUMl2_kVlzl7O9ioaxjeM1UaWBhyfwlcj_QdZRvXmMQ0Hiz78tfLlatFbG8m-Yk5XLg/s320/My+HipstaPrint+0-761891.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5662044488612621730\" />\nLens: Jimmy\nFilm: Big Up"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-761891.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5662044488612621730\" />\nLens: Jimmy\nFilm: Big Up"
     },
     {
         "file": "2011-10-09-The-long-road-ahead.md",
         "year": "2011",
         "date": "October 09, 2011",
         "title": "The long road ahead",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhBEC1SyNBqcRwcGfxgFb2SFjuSegU0ZapoitimwEJSV7zjdG63nHVXQkHELdEIPkZdFaDq57ghTWHDkRmYiSppX-Jzb-Sp8GwgkemUr0pB2x5KPGyXUPGB4OWSS_e1Se9yjHi_Eg/s320/My+HipstaPrint+0-719978.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5661553395832665250\" />\nBoth figuratively and literally, I suppose. Lens: Lucas AB2\nFilm: Ina's 1969"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-719978.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5661553395832665250\" />\nBoth figuratively and literally, I suppose. Lens: Lucas AB2\nFilm: Ina's 1969"
     },
     {
         "file": "2011-10-07-Extinguished-logo-and-memories.md",
         "year": "2011",
         "date": "October 07, 2011",
         "title": "Extinguished logo and memories on the wall",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhiJgRN9C_v_U7MTm-pRvYeaMTHiGRkHRdC8L54oIXd1W1CXJamBBOYbJ4UYUWBfWNddVKVLlhgxlXhxkMfQ9LqkXox3sDtwqg4-QCRu-qY5qj06KsTcKkS3wig-jjV4-0onK9EZw/s320/photo+1-746614.JPG\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5660604749793851314\" />\n<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEghPkOI_MpNdlpQatUD0B1-NVf32sqZYeE2o6B90sSAXquzDzPtRBA0XF9_8F1678N-Kd7_JC3KHyf9SdziyAf6oJ05IwiEIElYFcVe62OCk855skXb_9FToykqyanZtdmDOmouGQ/s320/photo+2-748544.JPG\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5660604759849118466\" />\nA few shots from outside my store today. People cope with loss in their own way."
+        "body": "<img src=\"images/archive/photo+1-746614.JPG.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5660604749793851314\" />\n<img src=\"images/archive/photo+2-748544.JPG.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5660604759849118466\" />\nA few shots from outside my store today. People cope with loss in their own way."
     },
     {
         "file": "2011-09-24-But-of-course.md",
         "year": "2011",
         "date": "September 24, 2011",
         "title": "But of course",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgUTsjYSFcmdCl3FHKsIXzEH1SRpgUZC2kFGbOE4GWsYfd0Zhm_rZu9RAW_n27_UGkFxO81fMmfYybOQJfCN-fDpZLykUu1rJe3TrFmNK4CpEP8wS9V3hL8xxR8blYb0VOhObsSyw/s320/infographic-733068.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5655733338682019186\" />\nWhat would your iPhone photo infographic look like?"
+        "body": "<img src=\"images/archive/infographic-733068.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5655733338682019186\" />\nWhat would your iPhone photo infographic look like?"
     },
     {
         "file": "2011-09-12-Silence.md",
         "year": "2011",
         "date": "September 12, 2011",
         "title": "Silence",
-        "body": "<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5651259268265988514\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg428joC9EoW5Zcdgo339vxmwp3eyx_Cc4DITffgbRp0gEuHttntLDexgyId07JR7e0W8Wd5rcYJy66G2sbYOtluqC2bsjvkpkkjVu5l8ENq09V3hWUXzIs_axPSCU4DDGd3CqY3g/s320/My+HipstaPrint+0-731314.jpg\" />\n\nOutside the World\n\nLens: Hornbecker\nFilm: Kodot XGrizzled"
+        "body": "<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5651259268265988514\" src=\"images/archive/My+HipstaPrint+0-731314.jpg\" />\n\nOutside the World\n\nLens: Hornbecker\nFilm: Kodot XGrizzled"
     },
     {
         "file": "2011-09-11-A-few-shots-from-around-town.md",
         "year": "2011",
         "date": "September 11, 2011",
         "title": "A few shots from around town",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjlPrWXbzsVwz-0-jgiNTSGnScw-b2Zb7xGzCZ-cCDr-Q14pCLKOo6fDduBPOGJmaE1HON71lrIPEbxemuNUkTjAtMhaGeTN5p7QyOkKWTwxqdWss1uUEXxIi3vLEPunFkXo7_8HA/s320/photo+1-781423.JPG\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5651165419906404386\" />\n<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg3JFjl6qN-EzLrMDhY7pvoROOyBYdDyM8tipDYmCCIc1wv8EC1wrlb-kx4zJBmdUl8cxyA2DNRhmTGUEHWD4e5iUaMKijYFA3aBxo5lUmdOv3mB2bWKW0xLv9CnjXhclE1sKpORQ/s320/photo+2-783127.JPG\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5651165424821730082\" />\n<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg6wJ9M1xCvHmGg4ASRqYsAv5JvncRNlAJ6nJqMH0ezBJxwuFvtxQpk2lfJK84poYp47F76oewqDCGzQpYI9KOdS2G0oi6UUo7MZF8KmsEtbqD9irjcHS6Z3QNE-SfXlnWJ6hvadg/s320/photo+3-784311.JPG\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5651165430435937074\" />\n<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjUlDmhsT2gsA3HI3s-NX1FYo5G56HzfqIWRSivno9WJLfau_oOW-GzD__O2ND7A8u7_csoLD0_56wD65hEVHR4FUBgzjlZrl3DRqMAlZlUBExopkD_PhSIjCuEaib0BgJ7ic6m1g/s320/photo+4-785415.JPG\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5651165433065135362\" />"
+        "body": "<img src=\"images/archive/photo+1-781423.JPG.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5651165419906404386\" />\n<img src=\"images/archive/photo+2-783127.JPG.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5651165424821730082\" />\n<img src=\"images/archive/photo+3-784311.JPG.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5651165430435937074\" />\n<img src=\"images/archive/photo+4-785415.JPG.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5651165433065135362\" />"
     },
     {
         "file": "2011-09-11-9-11.md",
@@ -1104,56 +1110,56 @@ const wayback_raw_dump = [
         "year": "2011",
         "date": "September 06, 2011",
         "title": "Reflections from a leaky sprinkler",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh0nGPz0vgurUCIlU-bAwmmDhyphenhyphenhA9nOLmsXgnuFMBvo7BZDU_XJd6jqoQ9gD0UKXsVTYKdna3BSvjiSCRMAzb2ip2ALmzwA0_EmKIKNrdduJLwiuVgvp8eNQfPcCFhXuuf5JZPqBA/s320/My+HipstaPrint+0-757797.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5649351556246367666\" />\nLens: Watts\nFilm: DreamCanvas"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-757797.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5649351556246367666\" />\nLens: Watts\nFilm: DreamCanvas"
     },
     {
         "file": "2011-08-23-A-Bug--39-s-Life.md",
         "year": "2011",
         "date": "August 23, 2011",
         "title": "A Bug&39;s Life",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhLBO0f23iK4wtt3NJXkIc0rnL5iI_G9MVZK2KQF-xjUYHPN8qcP32fRmkFnskOzsJ5F2b7_OpDTmb2SpngffT7dgFiRIxmuYspa8mETIiihQ4P96vlI96vhanmPkIM2MTZZo8ZyQ/s320/My+HipstaPrint+0-756508.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5643911115531942514\" />\nLens: John S\nFilm: Blanko"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-756508.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5643911115531942514\" />\nLens: John S\nFilm: Blanko"
     },
     {
         "file": "2011-08-18-Flipped.md",
         "year": "2011",
         "date": "August 18, 2011",
         "title": "Flipped",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg38Jcvxp1go1-hH6nazyHU8aKIAd0hBs2cZck1BKLjKNrAho5bhOI2BLfgduePMTROrZNzVm0a2jzRcsN_tLAQWlYzYcBlsBMaexxfvmCXh6jkrrEEWieDCAWIzHWFrn1_do39ZA/s320/My+HipstaPrint+0-786866.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5642338424467347666\" />\nLens: John S\nFilm: Blanko"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-786866.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5642338424467347666\" />\nLens: John S\nFilm: Blanko"
     },
     {
         "file": "2011-08-14-Trail.md",
         "year": "2011",
         "date": "August 14, 2011",
         "title": "Trail",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj5Q8YiGP1rGdoskKwf84YPC1I9H4ZV7yBqAwHzSKUF8TCCLjowNX5F5NOg9KCyGgspunzTB9Zlemi-OCICCAnbpOwHKW2PCZ7Na5W1z88png0eJ_mUtNrRi3pMIL8WUgGKqiF89g/s320/My+HipstaPrint+0-779241.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5640505733676740322\" />\nLens: Helga Viking\nFilm: Float"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-779241.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5640505733676740322\" />\nLens: Helga Viking\nFilm: Float"
     },
     {
         "file": "2011-08-14-Shadow.md",
         "year": "2011",
         "date": "August 14, 2011",
         "title": "Shadow",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgDS0jGepgvYfwW3FaLs0D8cgLNfnC4TzSepago09BjyViewqG1HNmqZLZERubHqtPjKiMT29LPc7MMuQfY-_bQBvRgmzJ1e3P7kCOBC5gnvgZVVh9z3FHQQCK93xk_u8yTXHewyg/s320/My+HipstaPrint+0-721123.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5640506343976549666\" />\nLens: Hornbecker\nFilm: BlacKeys SuperGrain"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-721123.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5640506343976549666\" />\nLens: Hornbecker\nFilm: BlacKeys SuperGrain"
     },
     {
         "file": "2011-08-14-Cat-tails.md",
         "year": "2011",
         "date": "August 14, 2011",
         "title": "Cat tails",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjfOTtefzbMH0L3YGRXZLbg1rGMkikR1Zsy030ttIadZ-iEyu5-84xEXYX0vPUcY0RloZzPow3__onDgSOkgZwgmh6k6kvfDzGlXeRyKugom3ID7nDa9zhED-ysEY_kAt814FSzsw/s320/My+HipstaPrint+0-728319.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5640505514276632722\" />\nLens: Kaimal Mark II\nFilm: Ina's 1969"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-728319.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5640505514276632722\" />\nLens: Kaimal Mark II\nFilm: Ina's 1969"
     },
     {
         "file": "2011-08-10-27.md",
         "year": "2011",
         "date": "August 10, 2011",
         "title": "27",
-        "body": "<img border=\"0\" height=\"320\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhaQo2w39i8qElLLPXtPGssVOopLMTou6mi2UgdQOTFNwq_2zSweD3WlCrzLqamTTCdyHi0tauSCny_QTwo74_tPq-rtlVzBheKPwrMTyR-rCA2miWOjg6e5fULIdUoDmdqvzl33g/s320/photo+2-783430.JPG\" width=\"320\" />\n\nMy sweet wife knows my memory just isn't what it used to be. She'll often speak of things in our past with color and description when all I can muster is a vague remembrance or hint. \n\nNevertheless, there are hundreds (if not thousands) of memories in this gray matter of mine that are indelibly etched because they're associated with that sweet, perfect girl. \n\nAnd on this, her 27th birthday, I want to mark the day with just a few of those memories, in no particular order. \n\n1.  New York City. Landing in the city of my mission meant something entirely different to me when she was by my side. \n\n2.  Walking along the beach on our honeymoon, after we took public transportation. \n\n3.  Baby #1. Walking around the hospital with her dressed in a yellow robe. \n\n4. I remember when she got her job at Ottawa. She didn't even need an interview. \n\n5. I used to have a scooter, and it was pouring rain. She picked me up from work. \n\n6. Our first visit to Lake Arrowhead. It was so fun to see where she visited when she was little. \n\n7. Our engagement pictures with her best friend. Her friend took them with a disposable camera and developed them in black and white. They were great. \n\n8. A kiss on the cheek under the basketball hoop on New Year's Eve. \n\n9. Our wedding day. She looked like a barbie doll and I still don't know how I'm so lucky. \n\n10. Rock climbing before we were married. In fact, we should go back. \n\n11. Disneyland. I think every trip was amazing. We tend to forget the outside world when we're there.\n\n12. Bagel date. Enough said. \n\n13. Baby # 2. She was so tough and decided that natural was the way to go from there on out. \n\n14. David Gray concert. I'd never really sung in front of her until that night. \n\n15. Lagoon!  She didn't even get to go on a ride because our first baby was so young. But she loved it there, and it was fun to have her with me. \n\n16. A surprise visit to Snowbird. I arranged to have our son watched by my sister and drove up the mountain after lunch at Olive Garden. I told her it was just a quick trip but surprised her when I checked into the same room we had for our honeymoon in Utah. \n\n17. Driving home from Utah when I decided I needed Benadryl. Poor thing drove home the whole way. \n\n18. Billy Joel concert. We originally had expensive tickets to see his show, when he got into a car accident and went into rehab. The show was cancelled. A year later, he came back, but we had only enough money for the crappiest seats there. It was still a great show, because she was there. \n\n19. Proposing to her. Still glad she said yes, yes, yes. \n\n20. Baby # 3. It was such a blur!  But my goodness, she was tough. No meds, 10 minute labor. And then there were five of us. \n\n21. Moving into our first apartment. Building new furniture, hanging pictures, decorating for Christmas, we loved that little 725 square foot apartment. She cried when we moved out. \n\n22. OT school. 4am study sessions, cadaver labs, rotations, and finals. Summa Cum Laude. \n\n23. One day shortly after our first was born, Jenna was hit in a parking lot. She called me, crying. It was her first and only accident  Ever since then, my worry rises when she calls me crying!\n\n24. Her first marathon. 26.2 miles and a broken foot. She smiled when she crossed the finish line. I offered to get the car and pick her up, but she wanted to walk. Another mile. \n\n25. Our San Diego trip. It was supposed to be the cabin, but we drove south instead and used priceline everyday. Actually one of my favorite memories. \n\n26. Every walk we've ever been on. \n\n27. Before our first was born, she watched every Star Trek movie with me. Every. Single. One. \n\nAgain, just a few of those wonderful memories.  I hope I didn't miss anything major.  \n\nI love this girl with all my heart."
+        "body": "<img border=\"0\" height=\"320\" src=\"images/archive/photo+2-783430.JPG.jpg\" width=\"320\" />\n\nMy sweet wife knows my memory just isn't what it used to be. She'll often speak of things in our past with color and description when all I can muster is a vague remembrance or hint. \n\nNevertheless, there are hundreds (if not thousands) of memories in this gray matter of mine that are indelibly etched because they're associated with that sweet, perfect girl. \n\nAnd on this, her 27th birthday, I want to mark the day with just a few of those memories, in no particular order. \n\n1.  New York City. Landing in the city of my mission meant something entirely different to me when she was by my side. \n\n2.  Walking along the beach on our honeymoon, after we took public transportation. \n\n3.  Baby #1. Walking around the hospital with her dressed in a yellow robe. \n\n4. I remember when she got her job at Ottawa. She didn't even need an interview. \n\n5. I used to have a scooter, and it was pouring rain. She picked me up from work. \n\n6. Our first visit to Lake Arrowhead. It was so fun to see where she visited when she was little. \n\n7. Our engagement pictures with her best friend. Her friend took them with a disposable camera and developed them in black and white. They were great. \n\n8. A kiss on the cheek under the basketball hoop on New Year's Eve. \n\n9. Our wedding day. She looked like a barbie doll and I still don't know how I'm so lucky. \n\n10. Rock climbing before we were married. In fact, we should go back. \n\n11. Disneyland. I think every trip was amazing. We tend to forget the outside world when we're there.\n\n12. Bagel date. Enough said. \n\n13. Baby # 2. She was so tough and decided that natural was the way to go from there on out. \n\n14. David Gray concert. I'd never really sung in front of her until that night. \n\n15. Lagoon!  She didn't even get to go on a ride because our first baby was so young. But she loved it there, and it was fun to have her with me. \n\n16. A surprise visit to Snowbird. I arranged to have our son watched by my sister and drove up the mountain after lunch at Olive Garden. I told her it was just a quick trip but surprised her when I checked into the same room we had for our honeymoon in Utah. \n\n17. Driving home from Utah when I decided I needed Benadryl. Poor thing drove home the whole way. \n\n18. Billy Joel concert. We originally had expensive tickets to see his show, when he got into a car accident and went into rehab. The show was cancelled. A year later, he came back, but we had only enough money for the crappiest seats there. It was still a great show, because she was there. \n\n19. Proposing to her. Still glad she said yes, yes, yes. \n\n20. Baby # 3. It was such a blur!  But my goodness, she was tough. No meds, 10 minute labor. And then there were five of us. \n\n21. Moving into our first apartment. Building new furniture, hanging pictures, decorating for Christmas, we loved that little 725 square foot apartment. She cried when we moved out. \n\n22. OT school. 4am study sessions, cadaver labs, rotations, and finals. Summa Cum Laude. \n\n23. One day shortly after our first was born, Jenna was hit in a parking lot. She called me, crying. It was her first and only accident  Ever since then, my worry rises when she calls me crying!\n\n24. Her first marathon. 26.2 miles and a broken foot. She smiled when she crossed the finish line. I offered to get the car and pick her up, but she wanted to walk. Another mile. \n\n25. Our San Diego trip. It was supposed to be the cabin, but we drove south instead and used priceline everyday. Actually one of my favorite memories. \n\n26. Every walk we've ever been on. \n\n27. Before our first was born, she watched every Star Trek movie with me. Every. Single. One. \n\nAgain, just a few of those wonderful memories.  I hope I didn't miss anything major.  \n\nI love this girl with all my heart."
     },
     {
         "file": "2011-08-02-Used-to-my-surroundings.md",
         "year": "2011",
         "date": "August 02, 2011",
         "title": "Used to my surroundings",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh_ZHc5nD64RfxwILB4jgcya6w_WA8ddabTslQYZltAfr4GG8rEQuaR9dBW-QjNvwE6n993C4_B7mMRCVtP13oBClp5RFvHHn8jiuaFJc5fBWa5YLZxVpaaTWrawTA2dCKu8OgqqQ/s320/My+HipstaPrint+0-792148.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5636111177963309058\" />\nMuch of the lack of activity on this site is because I'm bored. I no longer really look for things to shoot. I only shot this because I glanced up for a moment. Otherwise, it's too blasted hot to go hunting for shots outside. And inside?  We can all agree that without sufficient light, iPhone photos can be lacking. Lens: Tejas\nFilm: AO BW"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-792148.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5636111177963309058\" />\nMuch of the lack of activity on this site is because I'm bored. I no longer really look for things to shoot. I only shot this because I glanced up for a moment. Otherwise, it's too blasted hot to go hunting for shots outside. And inside?  We can all agree that without sufficient light, iPhone photos can be lacking. Lens: Tejas\nFilm: AO BW"
     },
     {
         "file": "2011-08-02-Brand-New-Day.md",
@@ -1167,84 +1173,84 @@ const wayback_raw_dump = [
         "year": "2011",
         "date": "July 30, 2011",
         "title": "Just something I saw",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi0xKEtFyG480_OgSAcSxqG1SykWNoiKjBEVahEKtqafBdn8m-ej1wFVTcrEsW4M7MwiAF8Q79ZpR1Oe_NfHU__cTpV8PrpJ0tpHxbcEseC8VrRBPVXfgxTrsrYir1tgH9rZsvqkg/s320/photo-782249.JPG\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5634940333665870978\" />\nx4"
+        "body": "<img src=\"images/archive/photo-782249.JPG.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5634940333665870978\" />\nx4"
     },
     {
         "file": "2011-07-16-Salt--amp--Pepper.md",
         "year": "2011",
         "date": "July 16, 2011",
         "title": "Salt &amp; Pepper",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjio2TRO0vbwWMAXwIPCzV5r75bcTIy5nc7Hor5KcWtNWthp31vLx6G741aoXEfV5aes1BUUbiuZP_84cjwIlKJx6O7pCtxxfdK_R-GLHolw_IWp32V311hGG9fIbccp-sbadXovA/s320/My+HipstaPrint+0-763868.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5629979558854294338\" />\nShot at De La Cruz Bistro in downtown Mesa.Lens: Helga Viking\nFilm: Float"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-763868.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5629979558854294338\" />\nShot at De La Cruz Bistro in downtown Mesa.Lens: Helga Viking\nFilm: Float"
     },
     {
         "file": "2011-07-12-Toy-Story-Clouds.md",
         "year": "2011",
         "date": "July 12, 2011",
         "title": "Toy Story Clouds",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEior9yQxAXEHE5gS8P4JxPwCe-1h1XZtZfnFL0HW-pChQ0KX-ZAjqQYvWaax7eOMGh7_gzoD-zMpglbAnaz74lInm_XJLkElMwQueAgSevvCfwzToG8wl5vl0IWse0fA4-Jx89JyQ/s320/My+HipstaPrint+0-715621.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5628616131852976642\" />\nLens: Helga Viking\nFilm: Pistil"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-715621.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5628616131852976642\" />\nLens: Helga Viking\nFilm: Pistil"
     },
     {
         "file": "2011-07-06-NSEW--Dust.md",
         "year": "2011",
         "date": "July 06, 2011",
         "title": "NSEW, Dust",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifILz6mAAzG7Nr2c0Jn2hZmyl_hbI0A5bR8_gMQCvbrGCgEHcZo4rKsVtUzLCJFCAXmOcAGXhDmFwMeViXaOK0Fsfi1Rk0gM-j3jkmgS8STha1JL4khZuncpXJQUgg5tcYSXDvcQ/s320/photo+1-734676.JPG\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5626249272851091762\" />\n<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiVoIl_UaAjXD1ZI7LPEcrsSAuz7tFwA8wY5AMVhfCNqjJoDq_CqKmymR82XeaboYrSJZk1l1Jm2Xn-8uni7mRqHudqCWD2drBwxtsn-8EiMs6E6ufcVVnJ41oDrRKFrASTJoIGwQ/s320/photo+2-745257.JPG\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5626249302287637906\" />\nAnd to think...I left my garage door open last night."
+        "body": "<img src=\"images/archive/photo+1-734676.JPG.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5626249272851091762\" />\n<img src=\"images/archive/photo+2-745257.JPG.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5626249302287637906\" />\nAnd to think...I left my garage door open last night."
     },
     {
         "file": "2011-07-05-Fireworks---trees.md",
         "year": "2011",
         "date": "July 05, 2011",
         "title": "Fireworks + trees",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhZb9vCqj8GDuVKb6DXi-VatiejAI8img33Z1UmS8c1OtH4a3QQbVdI4JkZ5W5d7kFa-r5Rn4ygiavzvxlFiayjucyEzuR_xxeCf_GXi23Pxe7sTuTa2S7R_9IGYVzjdPg2dFjiHw/s320/My+HipstaPrint+0-727295.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5625761319167793666\" />\nEvery year, it seems I must do something stupid with fireworks. This year's unwilling victim was the front yard ficus. Lens: Tejas\nFilm: BlacKeys SuperGrain"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-727295.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5625761319167793666\" />\nEvery year, it seems I must do something stupid with fireworks. This year's unwilling victim was the front yard ficus. Lens: Tejas\nFilm: BlacKeys SuperGrain"
     },
     {
         "file": "2011-06-16-Full-moon-over-the-canal.md",
         "year": "2011",
         "date": "June 16, 2011",
         "title": "Full moon over the canal",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiMdC3uX422pc13InwqkZyJReFzpNsnHB94tFSBuZwGjJOjbnnfgvTR3KUwYLZJRtvw17yg9siOex5fYlHJbDx4e4N_qZfRi1wWdxQ0GW-73Od5XzLJBee1cWhURC7B3zF-XzWPVw/s320/My+HipstaPrint+0-759046.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5618670031952730946\" />\nLens: Jimmy\nFilm: Claunch 72 Monochrome"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-759046.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5618670031952730946\" />\nLens: Jimmy\nFilm: Claunch 72 Monochrome"
     },
     {
         "file": "2011-06-14-Neon.md",
         "year": "2011",
         "date": "June 14, 2011",
         "title": "Neon",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi0LASSnrAZJ18DmRhst01xpeRbohS0NNvC1QtkeMFJhChlVCX9mbxDtSU7ROUu0WgLXphCIeDyU5Kd5p2WIWu3UW-qmmk3AAW3REx48yGv31n9cJkouzew-U1DUIXnLEnwIC06SA/s320/photo-720657.JPG\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5617905796874744754\" />\nHipstamatic + Diptic"
+        "body": "<img src=\"images/archive/photo-720657.JPG.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5617905796874744754\" />\nHipstamatic + Diptic"
     },
     {
         "file": "2011-06-05-Outnumbered--in-a-good-way.md",
         "year": "2011",
         "date": "June 05, 2011",
         "title": "Outnumbered, in a good way",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi8h3N1gyb3O1Aa3QgwAkZf6kvBuGVDAxhNsL1XFFhcHaZOmIRG4wNvUq0Zv00k4bcZOOiWoO-OgBeSzTPAOQT0Ad9mlqH4Qr_3M2ygTdG0oXouIUyEK0azMEuOzxtQMkCTD2eHCg/s320/photo-705327.JPG\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5614827524519936162\" />\nSorry if you came here looking for a picture of the little one...those would be found at a different site. Just know she's healthy and very, very beautiful!"
+        "body": "<img src=\"images/archive/photo-705327.JPG.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5614827524519936162\" />\nSorry if you came here looking for a picture of the little one...those would be found at a different site. Just know she's healthy and very, very beautiful!"
     },
     {
         "file": "2011-06-01-Where--oh-where.md",
         "year": "2011",
         "date": "June 01, 2011",
         "title": "Where, oh where",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiLpHg953TaOEe9Lh0VY1nT5pWw2tzO2uTnlHxD-De4U5cZSh69WlagiCgUgYo53I5-D9uE8mR2zXitReMeeY576E8_oMqcihy-KeljUO_n7CvxSWgmt5ZhB-2qxhJMuEv4gCLQIg/s320/photo-755271.JPG\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5613115761304004290\" />\nYes, I admit to being absent a lot lately. My attention has been divided. I hope to be back into the swing of things within a few weeks. Until then...the pressure is off. Good day!"
+        "body": "<img src=\"images/archive/photo-755271.JPG.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5613115761304004290\" />\nYes, I admit to being absent a lot lately. My attention has been divided. I hope to be back into the swing of things within a few weeks. Until then...the pressure is off. Good day!"
     },
     {
         "file": "2011-06-01-Light-tunnel.md",
         "year": "2011",
         "date": "June 01, 2011",
         "title": "Light/tunnel",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgCtP5vbNHT0bLJPjnxFY7hqEW_n3IVICllxeg__OjFbtOi82ocvInzXDJew1kuL5V5UjaarV62qRgjLpZBPaRvdWSFNYESTr2RD20ZqfVe7H3qi-3u96397cHCjy3T1wI1zZFp1Q/s320/My+HipstaPrint+0-755170.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5613356708320692242\" />\nNew film, new shot. Lens: John S\nFilm: AO BW"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-755170.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5613356708320692242\" />\nNew film, new shot. Lens: John S\nFilm: AO BW"
     },
     {
         "file": "2011-05-21-Grimaldi--39-s.md",
         "year": "2011",
         "date": "May 21, 2011",
         "title": "Grimaldi&39;s",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhmR8imKmaS-5D6Npd5m6Ik0nUojSeUQCxCu1h0-IHeOfhyphenhyphenaOr59FdiDIiIdR2ziQEQQS-aWwETDSt9WYCBW4siXeNvlElh6ahgS7gO32P9R9Huc7OzEimoN7207Sh2GWhR4UCzsQ/s320/My+HipstaPrint+0-740707.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5608977929982839298\" />\nThe only thing that could make it better is if we were in Brooklyn. I can deal. Plus, David Gray is on the PA. Lens: Watts\nFilm: Big Up"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-740707.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5608977929982839298\" />\nThe only thing that could make it better is if we were in Brooklyn. I can deal. Plus, David Gray is on the PA. Lens: Watts\nFilm: Big Up"
     },
     {
         "file": "2011-05-20-My-lamp.md",
         "year": "2011",
         "date": "May 20, 2011",
         "title": "My lamp",
-        "body": "<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5608658578804953298\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjhiwjy_ZddSdeqVmHU9jYGrEvfCFclgdClDJEgF3JMR7U2hvibV5_KHjvIap0oh5QGbrAUsNcpIlnhYO-0VRp5sX4V0i3IQMT01WyNhmPcDC4nBxocTaLRwnnijlts9Hm69m73_A/s320/My+HipstaPrint+0-785382.jpg\" />\n\nAt least there's pretty lights\nAnd though there's little variation\nIt nullifies the night from overkill\nDay after day it reappears\nNight after night, my heartbeat shows the fear\nGhosts appear and fade away\nCome back another day\n\n-Overkill, Colin Hay\n\nLens: John S\nFilm: Float"
+        "body": "<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5608658578804953298\" src=\"images/archive/My+HipstaPrint+0-785382.jpg\" />\n\nAt least there's pretty lights\nAnd though there's little variation\nIt nullifies the night from overkill\nDay after day it reappears\nNight after night, my heartbeat shows the fear\nGhosts appear and fade away\nCome back another day\n\n-Overkill, Colin Hay\n\nLens: John S\nFilm: Float"
     },
     {
         "file": "2011-05-20-A-poem--at-last.md",
@@ -1258,147 +1264,147 @@ const wayback_raw_dump = [
         "year": "2011",
         "date": "May 17, 2011",
         "title": "Akatsuki",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhPg126EQzlADgw1nU5Ji-g6EMuDvbX835Iea9mPlPOHbZ-29YnUoSgriVBlEXG5P4vCOOCcE4Hny6hu3RCdGOQMicM_fOIED8qRewQQKD7LVK_t13ZcV647JlqHd8jzhpA03gHpA/s320/My+HipstaPrint+0-711179.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5607709499148499506\" />\nMaybe you have a friend who has a friend that visited China. Perhaps then, that friend of a friend decided to bring back the world's greatest cane. Ultimately, your friend suggests this cane be on Hipstaproject.  He then names the cane after an anime character from Vampire Knight. Smiles and happiness abound in great measure. Lens: Watts\nFilm: Pistil"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-711179.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5607709499148499506\" />\nMaybe you have a friend who has a friend that visited China. Perhaps then, that friend of a friend decided to bring back the world's greatest cane. Ultimately, your friend suggests this cane be on Hipstaproject.  He then names the cane after an anime character from Vampire Knight. Smiles and happiness abound in great measure. Lens: Watts\nFilm: Pistil"
     },
     {
         "file": "2011-05-16-Symmetry.md",
         "year": "2011",
         "date": "May 16, 2011",
         "title": "Symmetry",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEia0l6k3fmw5ji-fb_w3mJ6-6ojGQ6YvSHSKyta2T-1HoJGaxz-WfyxnN1DfjPxN_azD10YlvBzfaKFL75T6RCqN8rJKqe15ocUuOVWc004zm1MJz8TS8oqeOaontVz9AtvpUiMhA/s320/My+HipstaPrint+0-778944.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5607422884643377570\" />\nI had the opportunity to travel to another store yesterday to lend a helping hand, and was impressed enough by this assembly of palms that it they earned the distinction of being the first subject shot with the Watts lens. Lens: Watts\nFilm: Ina's 1969"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-778944.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5607422884643377570\" />\nI had the opportunity to travel to another store yesterday to lend a helping hand, and was impressed enough by this assembly of palms that it they earned the distinction of being the first subject shot with the Watts lens. Lens: Watts\nFilm: Ina's 1969"
     },
     {
         "file": "2011-05-08-Nature-and-other-hidden-things.md",
         "year": "2011",
         "date": "May 08, 2011",
         "title": "Nature and other hidden things",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgSek9jGIlsIm_1ICnZZPjDOd-FMESTPfan1EluDI-RYPutUOSIA2qxd3feUwH7oXoXtw5uZN9h2OPM62G0jnArrImS3uWsgK-k8Hpv2Qqh8Q3-UfZCXwzhS71QvvL7rr7cxPrA4A/s320/photo+1-719370.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5604386085063743538\" />\n<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiiopDyJdxQWjbpz2VPmb2h1FJSrXTq7_okamqTBa9F28PXfD60gYq71YOW7Cl5Bg7929Dt-O4I6k-mZIs_ZB4qTqFmS58HLCdPiyZusNoXNXtwwY_oeL5m7KjdBu3JWV_itLDBMg/s320/photo+2-720414.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5604386088312113330\" />\n<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgs4JbSEQh4eNdxuJW4GOsBgjy_PxMZYiTWp8EUTveREala0mWiAJFY_sYJzQpZoWec0Bcx7Ukp8cTY9oGkV-WBsC6VYoFy55aUSUc4tknKk9UW4Iqg_xB_mRwkpEWQKWn4Xy8jMA/s320/photo+3-721386.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5604386093918640946\" />\n<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiR0jYdJ90Z_xUZ-jF5jHUBCNWnXKrFhUfD6qvVYPrCao6uBsznaW1erztSe2phRzgisHCkVfffgzKcI4aTZiX7_T-n_bfqHS7LC-M2Pg5VdNEqmfsuDtuLNWlPEfj2K77M1Kumhw/s320/photo+4-722545.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5604386095961286098\" />\nClimb the mountains and get their good tidings. Nature's peace will flow into you as sunshine flows into trees. The winds will blow their own freshness into you, and the storms their energy, while cares will drop away from you like the leaves of Autumn. - John Muir"
+        "body": "<img src=\"images/archive/photo+1-719370.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5604386085063743538\" />\n<img src=\"images/archive/photo+2-720414.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5604386088312113330\" />\n<img src=\"images/archive/photo+3-721386.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5604386093918640946\" />\n<img src=\"images/archive/photo+4-722545.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5604386095961286098\" />\nClimb the mountains and get their good tidings. Nature's peace will flow into you as sunshine flows into trees. The winds will blow their own freshness into you, and the storms their energy, while cares will drop away from you like the leaves of Autumn. - John Muir"
     },
     {
         "file": "2011-05-08-Blue-Ridge-Reservoir.md",
         "year": "2011",
         "date": "May 08, 2011",
         "title": "Blue Ridge Reservoir",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhRHOsnJVAfb_nQsPPbOUbhdUStYEn9qVe1KvJ2DXdqjFDuHVcYXpg-iDRDZZini23qsL8IRo8FNJfot8-2rPxhrDhh9rATW7NxNKDLxds-Y3s30RzaVYjkBxcculdt3lgOPx6D9A/s320/photo+1-726435.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5604389122051427762\" />\n<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEilvQBSrML7hWMBoPJOCWhzZAFq1PhgmuC5J4rvWgqejsVG8gsiqnYV9VbVBVyBr8L3AlD_XsIM9r69ROyWeRaj-Ujw1iBbkbQ-IY1IhiywUfm_BHMj-CRUB_9W34D0xLlEXu4WGw/s320/photo+2-727007.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5604389124984470690\" />\n<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjAnBZ2priWBJDiECgTnhfbpQmf5ZFYlPHltG8AyvVu6hq9kmJiJGRAFQLseI9zN9HHu-FNrgRFfE5TZPvieTkN9_IrMr42famHouddWk03PDoeZxLBEFYegpOknLkzvmKcOSFIyw/s320/photo+3-727804.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5604389131089590306\" />\nShortly after arriving at camp, we took a short drive up the road to the Blue Ridge reservoir, hidden off the 87 highway after a very bumpy drive down FR 751. The dam itself is impressive enough; but the area it created is more so. A hike down revealed a rocky area populated by numerous reptiles. We steered clear of the obvious rattlesnake dorms and caught glimpses of quite a few lizards."
+        "body": "<img src=\"images/archive/photo+1-726435.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5604389122051427762\" />\n<img src=\"images/archive/photo+2-727007.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5604389124984470690\" />\n<img src=\"images/archive/photo+3-727804.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5604389131089590306\" />\nShortly after arriving at camp, we took a short drive up the road to the Blue Ridge reservoir, hidden off the 87 highway after a very bumpy drive down FR 751. The dam itself is impressive enough; but the area it created is more so. A hike down revealed a rocky area populated by numerous reptiles. We steered clear of the obvious rattlesnake dorms and caught glimpses of quite a few lizards."
     },
     {
         "file": "2011-05-05-Order-Orthoptera.md",
         "year": "2011",
         "date": "May 05, 2011",
         "title": "Order Orthoptera",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj3zbYZB3Wp5X_uWJPI3LfHEDlB-EajgL20Jwy-kDfpHRdqCiTss_LCDigMih_d2JuojVePoxvoy91aEBXCD6xmV2C3SQDdmEPuH7WJtYCzVF2_G9RWV5j8jffp49h0Fn7NDUA6pQ/s320/My+HipstaPrint+0-706933.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5603241852869485234\" />\nThe infestation of grasshoppers has returned to AZ. Not nearly as bad as those in recent memory; I can remember one particular year when you couldn't walk across the street, nor fill up your gas tank at night without being attacked by these flying pests. Lens: John S\nFilm: Kodot XGrizzled"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-706933.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5603241852869485234\" />\nThe infestation of grasshoppers has returned to AZ. Not nearly as bad as those in recent memory; I can remember one particular year when you couldn't walk across the street, nor fill up your gas tank at night without being attacked by these flying pests. Lens: John S\nFilm: Kodot XGrizzled"
     },
     {
         "file": "2011-04-30-My-excursion.md",
         "year": "2011",
         "date": "April 30, 2011",
         "title": "My excursion",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiJwCEju2TFPojgSugN4Dyljq0sYjguP3eWRsFU5LzM5tr9OURY1l_X2eyqDnDSq-XoftWRp1AbPDVc45NvdmfL5cdcsVgsaPaTDHb9tetEhvJGL7WPKAGezvH6tIc4yUXz_ExwSQ/s320/photo+1-790701.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5601511343376171922\" />\n<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjdz5jrhuqf9uhPzBFyb3m1G69h22j_-LdUsVw8OEJUP_od3fLs-PNZPvaJwkxJ_w11c9PRmStCqQhvV_PaOFJjw9igVHYCIr2dPk945CpbIY1PlEnK9BDYPTqHHC-szLoYVy380Q/s320/photo+2-792893.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5601511353464863122\" />\n<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiu7ae5R7h9na1GNDmcwF8hAf6wgVYIJCD6iLLoJ1ZSAI_U2JSfS0pWYPbXr8HGrQiQ3y0JVPXZcPnZZ-20JipdqkA_vkcHT2udS24Pc5_8uhQnIewrR2JYdMISVu6fXxuj8rXGdQ/s320/photo+3-794454.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5601511362309828514\" />\n<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEixHBHuHoPmtbRTXitz7J9ZCxaUuwhBi6BlgxmqxhdMmnAAwXGoiwAbXb93hjG-1cd0Zo8Wrf4N0T1aCTGaUjW103W7Yi_bnIlyaCP2LJ7QSKFOCfLCQrN5LqHUAjbGwh-5kSCjiA/s320/photo+4-796165.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5601511365411514114\" />\n<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhlLTcPKIPR9SWOKi8unUWcRF0Gac9cv_hc4IwoOsBlos3x6E_8IOSGmuIflErOWBxBch-meYjrm80jdabS79isBT2lGmFs_INWwc6iiH0GnnH2MasAgn5GO_odlRv8VYuGaB2scQ/s320/photo+5-797876.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5601511374976384754\" />\n\"Go ride your bike\", said my wife. So I did. Lens: John S\nFilm: Kodot XGrizzled"
+        "body": "<img src=\"images/archive/photo+1-790701.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5601511343376171922\" />\n<img src=\"images/archive/photo+2-792893.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5601511353464863122\" />\n<img src=\"images/archive/photo+3-794454.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5601511362309828514\" />\n<img src=\"images/archive/photo+4-796165.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5601511365411514114\" />\n<img src=\"images/archive/photo+5-797876.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5601511374976384754\" />\n\"Go ride your bike\", said my wife. So I did. Lens: John S\nFilm: Kodot XGrizzled"
     },
     {
         "file": "2011-04-28-Wandering-the-grounds.md",
         "year": "2011",
         "date": "April 28, 2011",
         "title": "Wandering the grounds",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjq6Y8zvkSjBZ4njj21fGvBMwavInmkDFplMunYZaM-KeQ0vJV-3vdFMik34hFO-e8qDhenBKh0ZVKaP-xerA9I8Py21_W1wpsI9sKR61E025CIB7Fw0zzV-nBHiAiXFUPok9Sfvg/s320/My+HipstaPrint+0-788815.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5600452627280899714\" />\nNew hospitals are amazing.  Well manicured paths, four course room service, private quarters, the whole nine. Lens: John S\nFilm: Pistil"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-788815.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5600452627280899714\" />\nNew hospitals are amazing.  Well manicured paths, four course room service, private quarters, the whole nine. Lens: John S\nFilm: Pistil"
     },
     {
         "file": "2011-04-25-My-Waterfall.md",
         "year": "2011",
         "date": "April 25, 2011",
         "title": "My Waterfall",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhOZYcH4V2E1eerPgFSrW6eacEdblxzAGC3OtgoKzlODO0BeQAs9D5lRPxgQ4WJQnNjWTJd8sGqYHcKi2la9fr32K5soiiKm858-5IhXZV1I6AJmuU4X9LyDHB1evJRz8ztucf9vQ/s320/My+HipstaPrint+0-775920.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5599594006500792770\" />\nWe never know what the day may bring. Instead of work, you could find yourself pacing around a hospital, shooting a waterfall to calm your nerves. Lens: John S\nFilm: Pistil"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-775920.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5599594006500792770\" />\nWe never know what the day may bring. Instead of work, you could find yourself pacing around a hospital, shooting a waterfall to calm your nerves. Lens: John S\nFilm: Pistil"
     },
     {
         "file": "2011-04-23-Fly-into-the-sun.md",
         "year": "2011",
         "date": "April 23, 2011",
         "title": "Fly into the sun",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjM4UP1blGI_sRdfxfCXcVwxfT6fQkHYNgun_jblB9zwzpyRdjsfQ90xsBrMe0JomxcB230eRTZMGz4xzKT7sW3gtCx6gVg2SSgBowNt1raxcfEGU6Kxc0_3gFG65T1ASIWl7Waxw/s320/My+HipstaPrint+0-748046.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5598588434854956146\" />\nQuite a few contrails in the setting sky this evening, all giving the appearance of a solar destination. Lens: Lucifer VI\nFilm: Float"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-748046.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5598588434854956146\" />\nQuite a few contrails in the setting sky this evening, all giving the appearance of a solar destination. Lens: Lucifer VI\nFilm: Float"
     },
     {
         "file": "2011-04-22-Bird-of-Paradise.md",
         "year": "2011",
         "date": "April 22, 2011",
         "title": "Bird of Paradise",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhPbMwJlWZnAF8gc4OTaUKqwiHFtegaddAGy44E-uE0er7VrV8QqKh1qa7bvj5yYJ289_jLK1Bbw5uLjYYIHFWCylsPJ8fRH1PyLlgn0gA9FHAddZxqJUSCpZekJiLGszcJ3m8Wvg/s320/photo-745820.JPG\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5598272744635533538\" />\nI've been sifting through the pictures I took during our trip to La Jolla back in March and decided a few of them deserve the chance to be posted, if only a little bit late This was taken just after arriving at our destination. Just looking at it makes me want to go back."
+        "body": "<img src=\"images/archive/photo-745820.JPG.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5598272744635533538\" />\nI've been sifting through the pictures I took during our trip to La Jolla back in March and decided a few of them deserve the chance to be posted, if only a little bit late This was taken just after arriving at our destination. Just looking at it makes me want to go back."
     },
     {
         "file": "2011-04-19-Night-swimming.md",
         "year": "2011",
         "date": "April 19, 2011",
         "title": "Night swimming",
-        "body": "<img border=\"0\" height=\"320\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi0LM48iwL_8JoQTOPsxrW6G8CZO7rhIXCPsUl7kbWH7a2cY2yjHT-nM65BELBFq3nx-mP4-N5jCqml2UhVKFyEjF_t7eLZhrrDUeQey1PltigBpGogI2htUfesjkA6mTYLHnO1Rw/s320/IMG_0784.JPG\" width=\"320\" />\n\nNot me, of course. I'm not likely to put my iPhone in the pool.\n\nOr am I?\n\nLens: Tejas\nFlash: Cadet Blue Gel\nFilm: Ina's 1969"
+        "body": "<img border=\"0\" height=\"320\" src=\"images/archive/IMG_0784.JPG.jpg\" width=\"320\" />\n\nNot me, of course. I'm not likely to put my iPhone in the pool.\n\nOr am I?\n\nLens: Tejas\nFlash: Cadet Blue Gel\nFilm: Ina's 1969"
     },
     {
         "file": "2011-04-18-Something-fun-to-remember.md",
         "year": "2011",
         "date": "April 18, 2011",
         "title": "Something fun to remember",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj_EsKVqZKZqO4FZU3x4EdTnHhtjtYF6EHRfBOaKJD-bDbmw1E511PmUzv46U1d1JGVNeL9C9H-j-n1n4_cDkOCYmnUIqSRx-Au-Du8BhG8sPXaC2dVvo0BgrmYISNrxPtKUYG6/s320/simpbanner2-711336.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5596762917029273234\" />\nI was cleaning up old, unused files on the computer when I came across this jewel.  I remember making it, thinking at the time how absolutely clever I was."
+        "body": "<img src=\"images/archive/simpbanner2-711336.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5596762917029273234\" />\nI was cleaning up old, unused files on the computer when I came across this jewel.  I remember making it, thinking at the time how absolutely clever I was."
     },
     {
         "file": "2011-04-18-Perspective.md",
         "year": "2011",
         "date": "April 18, 2011",
         "title": "Perspective",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiVjIrEmi1Jtb_nFuSZxNzsTctsYQaWV9iJTliC_Myh3Z_5pKDNu9RA119BeIJNB2Vv3DZV_dYfc5tAZR2UDbNASDofpMXzOdph1oou-60bHIYBUwKl5ylDSZFgtLuOhfdkoAxd6A/s320/My+HipstaPrint+0-700422.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5597030023055214818\" />\nOftentimes, I simply walk around until until I find something that will look odd when viewed the incorrect way. Lens: Helga Viking\nFilm: Ina's 1969"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-700422.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5597030023055214818\" />\nOftentimes, I simply walk around until until I find something that will look odd when viewed the incorrect way. Lens: Helga Viking\nFilm: Ina's 1969"
     },
     {
         "file": "2011-04-16-At-least-the-view-was-nice.md",
         "year": "2011",
         "date": "April 16, 2011",
         "title": "At least the view was nice",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhqaxAHRzjktH8cLZZiOooMJkLQ2bEFOK4WYTMHSJG3woXI0DwNAnRfuisLorhY8VcAzQnS243s4TyVNlNnZTjnNa6pOSHVuLdIgXmBJtFnIeUoEGpIETG0Ou7LeEujO_eFDf3BFQ/s320/My+HipstaPrint+0-705301.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5596241914511644386\" />\nWent for a trail ride today with a few friends this morning. I discovered my ability to negotiate the trails has been slightly diminished. After a few rough patches, I decided to take a break and shoot what I saw. The desert really is beautiful in the spring. Lens: Tejas\nFilm: Ina's 1935"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-705301.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5596241914511644386\" />\nWent for a trail ride today with a few friends this morning. I discovered my ability to negotiate the trails has been slightly diminished. After a few rough patches, I decided to take a break and shoot what I saw. The desert really is beautiful in the spring. Lens: Tejas\nFilm: Ina's 1935"
     },
     {
         "file": "2011-04-15-Fury.md",
         "year": "2011",
         "date": "April 15, 2011",
         "title": "Fury",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgEsmXhZ-iMv4wqXKqDSIVkvlOXWRb0t_WKLbu9Jcgffs_OF_re753CpnyKi3Huk7na3kNSEGHOKWBzSMCUD8mkG0irVFJ0xPlLI6akCyL7woWbr0jcv03XcrExGu02Ab1TnSExTQ/s320/My+HipstaPrint+0-768312.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5595625422748737762\" />\nGood amounts of dust and muck make for a brilliant sunset in AZ. Lens: Tejas\nFilm: Ina's 1935"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-768312.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5595625422748737762\" />\nGood amounts of dust and muck make for a brilliant sunset in AZ. Lens: Tejas\nFilm: Ina's 1935"
     },
     {
         "file": "2011-04-11-Roonil-Wazlib.md",
         "year": "2011",
         "date": "April 11, 2011",
         "title": "Roonil Wazlib",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEggNmNj6v6MJx3Tf7YaZFdtGrIRTXlYt4KSLL_ehaHAxeXVQW_8GW9RW-ZFYOUnbewYQmFXhYXqkWXS4YVDpYtFU-9-kFeRhELNSF3G6c3GpdLEkpqmerQei97uadXwYsVOFs9R0Q/s320/My+HipstaPrint+0-712745.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5594132685930356018\" />\nCrazy Brits. Driving on the other side of the road.  Hope everyone had a splendid weekend!Lens: Helga Viking\nFilm: Ina's 1935"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-712745.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5594132685930356018\" />\nCrazy Brits. Driving on the other side of the road.  Hope everyone had a splendid weekend!Lens: Helga Viking\nFilm: Ina's 1935"
     },
     {
         "file": "2011-04-10-Storm-receding.md",
         "year": "2011",
         "date": "April 10, 2011",
         "title": "Storm receding",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEid2eU1uJsO-Qr-B6jvFRdNVKyg9acBXpPNgHnTnXTpjf19DS_NjeyLYK-kjrcbXGOnGOBHOU4w5WYrw-MerOCGAnugAeNnEu0gG1uzriJgsiM9sP53HftkDS8SezBy6nvdBDjwfw/s320/My+HipstaPrint+0-706240.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5594011537785555730\" />\nThe rain left everything cold and clean. Off to the east, the Superstitions and further ranges were dusted in snow. Not an ounce of dust or soot was to be found in the sky. Lens: Lucifer VI\nFilm: Ina's 1935"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-706240.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5594011537785555730\" />\nThe rain left everything cold and clean. Off to the east, the Superstitions and further ranges were dusted in snow. Not an ounce of dust or soot was to be found in the sky. Lens: Lucifer VI\nFilm: Ina's 1935"
     },
     {
         "file": "2011-04-07-Reflections.md",
         "year": "2011",
         "date": "April 07, 2011",
         "title": "Reflections",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjKJZyA-VHzfH2f1836ZzzmkEKuTeDLl6MECwVbOvdE6yGlw0JzAyKnzLWTYxPpWxJ-seRoi9AV1U18R2EjiZAa7QDDb9RoV4pffMvVMpJqvWu4rVpqBg6H86zBlaOBFSdAB5RShQ/s320/My+HipstaPrint+0-754529.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5592650672696226498\" />\nI was surprised today by a bit of wet weather. Never a problem with me. Lens: John S\nFilm: Pistil"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-754529.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5592650672696226498\" />\nI was surprised today by a bit of wet weather. Never a problem with me. Lens: John S\nFilm: Pistil"
     },
     {
         "file": "2011-04-05-Spinning-Wheels.md",
         "year": "2011",
         "date": "April 05, 2011",
         "title": "Spinning Wheels",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg4bVTZXeyBVfdVNDE1n8A9T8YIqgUA4mCPUwNfCyFAu8oSq_1n2IIpwYtzoM6oUE5O1SIaSY0R9R8AnxwCd5Bp-LcHnY_4sNPxpHax9b9dlqrN-sJHmCXEg3VnttFu8eQ4YOJdhg/s320/photo+1-731740.JPG\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5591953930369801618\" />\n<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg7ySAEjP9JcfwKG_E4ndr09qANpMqSksVE_tDDrW_G42Z3g9UoKOhGzATNJcU6S9uISb1tVmXbvD293LtYxsMbmxTZDCiBkPbIVkw-TbvsKHrwE8UbqmgBmQDc_wPDiYZyfx9OhQ/s320/photo+2-732751.JPG\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5591953931828047154\" />\n<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjB1tYFZJYYjBuqU2MArZQiwuJ8wYgqsT7n8N5KJtJWUGOTOuxej_iPCQjHd1hNRGBAyuQLtQ2LCexFY0nh5HtWizPA-BST6pPzTw4ziNtEsVQWU9Wz_XgY2tYdhK9VLv5i92h8gw/s320/photo+4-733395.JPG\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5591953935070734594\" />\n<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjhhCQcuyCYzO-P_kvpiHC3o5jGz4VNwcrsSWLu__1gMXFWlrJrKlawYgghj_4hm3u2yNi1abcPRUqopT7EhyTYQzrAjnch8_iRMK5dHnnaa-w_YZtKq_9vHQyNq0WczydpXnnrrA/s320/photo+5-734253.JPG\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5591953939112984834\" />\nAnother nightly run, another encounter with the carnival occurring down the street from me. White Ladder was my companion as I journeyed, memories of Little Cottonwood fresh in my mind. Enjoy a few selections courtesy of SwankoLab + Slow Shutter."
+        "body": "<img src=\"images/archive/photo+1-731740.JPG.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5591953930369801618\" />\n<img src=\"images/archive/photo+2-732751.JPG.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5591953931828047154\" />\n<img src=\"images/archive/photo+4-733395.JPG.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5591953935070734594\" />\n<img src=\"images/archive/photo+5-734253.JPG.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5591953939112984834\" />\nAnother nightly run, another encounter with the carnival occurring down the street from me. White Ladder was my companion as I journeyed, memories of Little Cottonwood fresh in my mind. Enjoy a few selections courtesy of SwankoLab + Slow Shutter."
     },
     {
         "file": "2011-04-02-Mesa-Amphitheater.md",
         "year": "2011",
         "date": "April 02, 2011",
         "title": "Mesa Amphitheater",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhAzPj-Gwk8ECqwIHXN5PVMjvlrEUF2fJBacIWb0uBSYAcuy18mKXVP-UG2LdfN_UY7VsNppgtGOt3niUR07z1z7PX_XYONGyO-Hzjyz16omj2zuKGE4gq7L5vwE8uEfXqbnCznJA/s320/My+HipstaPrint+0-746134.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5591040454315783682\" />\nOn October 31st, 1999, my brother and I came to this venue for a remarkable evening. It was my first time seeing Sting in concert. Fast forward 12 years, and all is quiet on a Saturday morning. But the memory echoes still. Lens: Jimmy\nFilm: Blanko"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-746134.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5591040454315783682\" />\nOn October 31st, 1999, my brother and I came to this venue for a remarkable evening. It was my first time seeing Sting in concert. Fast forward 12 years, and all is quiet on a Saturday morning. But the memory echoes still. Lens: Jimmy\nFilm: Blanko"
     },
     {
         "file": "2011-04-02-Dandelion.md",
         "year": "2011",
         "date": "April 02, 2011",
         "title": "Dandelion",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgB0s0iGRXWvaB9ZTv163gDId7M1QEYk-hL0RUn6lWx2nS6AC8Hq1m1ZFm3lQt2UdIadd19m2Uth8uTQFNizSFEuZzoWMfo3tSI_avAg7yUA3cdgHyPb4Jg3677IUC7-rOorE-BdA/s320/My+HipstaPrint+0-712279.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5591084545428911170\" />\nDarn camera refused to focus on the subject, so I tricked it. Turned out well enough. Lens: John S\nFilm: Blanko"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-712279.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5591084545428911170\" />\nDarn camera refused to focus on the subject, so I tricked it. Turned out well enough. Lens: John S\nFilm: Blanko"
     },
     {
         "file": "2011-03-31-Riding-a-bike.md",
@@ -1412,28 +1418,28 @@ const wayback_raw_dump = [
         "year": "2011",
         "date": "March 31, 2011",
         "title": "Coming and going, part II",
-        "body": "<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5590121125249072754\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjbvd6Tv_iZe8mOlGayjNmM_cw95kUMA5LkkM4PcgqqNvMe3YvfCtUa0YxL0BAF6PNkxEBplxjVR-qHnosNC3lKgPfzaWjBYP2AoAQgpU61WRXY85__Q7gL7ejoNs2pxEBmEkl2ug/s320/My+SwankoPrint-798834.jpg\" />\n\nTreat yourself to yet another departure from the norm. Apps used were Slow Shutter (thank you, Andrew) and SwankoLab (thank you, Adam). \n\nYes, I love the iPhone's camera."
+        "body": "<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5590121125249072754\" src=\"images/archive/My+SwankoPrint-798834.jpg\" />\n\nTreat yourself to yet another departure from the norm. Apps used were Slow Shutter (thank you, Andrew) and SwankoLab (thank you, Adam). \n\nYes, I love the iPhone's camera."
     },
     {
         "file": "2011-03-31-Carnival.md",
         "year": "2011",
         "date": "March 31, 2011",
         "title": "Carnival",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgkqM-F6WCIq0t1Vd1RIQ6ZRmdn_nKb1YCYcZwLHWkKXweLcdK4ShEIeLugpveSbZjYcP9F3nFqbQOhoCyTSOtOY8ZErLKEPy1OEP6Kq_ogpxHwkoJiLzl4eq5zqBV3w20G5qDiiQ/s320/photo-736599.JPG\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5590109690845018722\" />\nDuring my nightly ride, I came across the carnival as they were cleaning up.  I took four quick Hipstamatic shots and put them together with Diptic. I liked the results. You?"
+        "body": "<img src=\"images/archive/photo-736599.JPG.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5590109690845018722\" />\nDuring my nightly ride, I came across the carnival as they were cleaning up.  I took four quick Hipstamatic shots and put them together with Diptic. I liked the results. You?"
     },
     {
         "file": "2011-03-30-Disregard.md",
         "year": "2011",
         "date": "March 30, 2011",
         "title": "Disregard",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjK4sWgv-y0sX-yXvfhuOEFSpvbakL30rwZezilnFqkLUm38RJ7wcLy9XHhXW34L3fbHZO3Qafxl4ND3bzCaXnGzFXxsIzyclCw1ixJd_Ah2CXJ1R4kQlDZJNku5yHd8ygn3XO54w/s320/My+HipstaPrint+0-761082.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5589986532774447122\" />\nThat's it. Screw the man and his rules.  This'll show him. Lens: Lucifer VI\nFilm: Float"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-761082.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5589986532774447122\" />\nThat's it. Screw the man and his rules.  This'll show him. Lens: Lucifer VI\nFilm: Float"
     },
     {
         "file": "2011-03-29-My-sunrise.md",
         "year": "2011",
         "date": "March 29, 2011",
         "title": "My sunrise",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEipWK23hbMfl3sExB_VeBDBfFhjlsEEZlQSS5YkfEAYR6-EvuboUofVBrtcApKwd-0Y_a0v7tKOAojbD2tA1BdR9bHf9Db3MzihgEZS39C-u6yooir_k_i7u5jovGFb0P2fKpmb4g/s320/My+HipstaPrint+0-751750.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5589500735618696994\" />\nIf it weren't for mirrors, the sun would have only known my tailpipe this morning. Lens: Helga Viking\nFilm: Ina's 1969"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-751750.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5589500735618696994\" />\nIf it weren't for mirrors, the sun would have only known my tailpipe this morning. Lens: Helga Viking\nFilm: Ina's 1969"
     },
     {
         "file": "2011-03-27-When-will-they-learn-.md",
@@ -1447,14 +1453,14 @@ const wayback_raw_dump = [
         "year": "2011",
         "date": "March 27, 2011",
         "title": "Swing, batter",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhhct0AIB8lYcATVLt9PRGWaT9_MPl4fF-pfQsc8fzF2TexKd7zMI43wUMEBknneSB4euKPGkFzBLVWJ3yBbEy-ubsA4THEenCHCVMN8Ha1vZeHQZjwMthIDs87DIM5Ct2tgWKQQw/s320/My+HipstaPrint+0-783082.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5588883674528053010\" />\nMy son started his first season of baseball this weekend. Kids really didn't know what they were doing, but hey had fun. Lens: Tejas\nFilm: Ina's 1969"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-783082.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5588883674528053010\" />\nMy son started his first season of baseball this weekend. Kids really didn't know what they were doing, but hey had fun. Lens: Tejas\nFilm: Ina's 1969"
     },
     {
         "file": "2011-03-27-Leisure-World.md",
         "year": "2011",
         "date": "March 27, 2011",
         "title": "Leisure World",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEio8lYhS4DoZK3ohm-WCzczo4HBow28mxHQFamoSNvprjlGffNnkMJd5vZ0BCm8uoPPlE2EzSuOWS1uO1vuGhKytslzZ-LtFiwVKDzojYa3LV7UiD64-GwtjuEfSdnN60cFacn-KQ/s320/My+HipstaPrint+0-743264.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5588585437201245538\" />\nNot much to say. It's a gigantic iron globe outside of a planned retirement community. Interestingly, there's a river of water that cascades down from this globe. For some reason, the property management felt compelled to put blue dye in the water. Lots of blue dye. Very frothy. Lens: Kaimal Mark II\nFilm: Pistil"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-743264.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5588585437201245538\" />\nNot much to say. It's a gigantic iron globe outside of a planned retirement community. Interestingly, there's a river of water that cascades down from this globe. For some reason, the property management felt compelled to put blue dye in the water. Lots of blue dye. Very frothy. Lens: Kaimal Mark II\nFilm: Pistil"
     },
     {
         "file": "2011-03-26-It-s-back--I-guess-.md",
@@ -1468,406 +1474,406 @@ const wayback_raw_dump = [
         "year": "2011",
         "date": "March 25, 2011",
         "title": "Wispy",
-        "body": "<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5588098828015676802\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg-tibh2EjaUPZsqeMTScpK7YUfXR9tLRD-LFEfWMr08C5lBGu7994mivG09V1hRT_yHgjP2nMSx52sSHIBwQ1j00l0XrizIqYoOC4VSFcCvjTCrfR6BivueYWeBsx4gyAZ79t8bQ/s320/My+HipstaPrint+0-745866.jpg\" />\n\nI couldn't have asked for better weather on my day off. The breeze and high clouds are icing on the cake. \n\nLens: John S\nFilm: Ina's 1969"
+        "body": "<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5588098828015676802\" src=\"images/archive/My+HipstaPrint+0-745866.jpg\" />\n\nI couldn't have asked for better weather on my day off. The breeze and high clouds are icing on the cake. \n\nLens: John S\nFilm: Ina's 1969"
     },
     {
         "file": "2011-03-25-The-bike.md",
         "year": "2011",
         "date": "March 25, 2011",
         "title": "The bike",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhSJv7HaEIQV_yzaYIZ-Nroe1p9VjNWZkAcUS2hRrJq5z2I-yV5A83DrxAyX-_fookWHWuZEogZh4O-Ba0HzG59KiLdHC1-I6LcbSPUcV1yG2Z8opjIqbPiXCaKFzPUha12rMHXRw/s320/My+HipstaPrint+0-751674.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5587815812462359714\" />\nI had my old Giant for nearly 15 years. It took me a few more to finally choose another one. Lens: Helga Viking\nFilm: Ina's 1969"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-751674.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5587815812462359714\" />\nI had my old Giant for nearly 15 years. It took me a few more to finally choose another one. Lens: Helga Viking\nFilm: Ina's 1969"
     },
     {
         "file": "2011-03-25-Bird-in-a-burned-out-house.md",
         "year": "2011",
         "date": "March 25, 2011",
         "title": "Bird in a burned-out house",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhn4M1M2Qj2VX4PrdmJVyPIRvZgl0ShbzaPP99hEoLi2HeGXzSHkT1eWdYrR_mkV8FaGyQRydSKOdTSzkfVOkMF1_bEpJ_-KZ2XG-IU_Uc5jchw26Q8szhqM9uqo0jb8gOAgpAv2A/s320/My+HipstaPrint+0-748134.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5587817945503107698\" />\nA benefit of having a bike is that you see things you might have missed had you been driving.  I found this while riding along Main tonight and trespassed accordingly. I don't necessarily want to know why the bird stayed so still for this picture. Turned out well, though. Lens: Tejas\nFilm: BlacKeys SuperGrain"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-748134.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5587817945503107698\" />\nA benefit of having a bike is that you see things you might have missed had you been driving.  I found this while riding along Main tonight and trespassed accordingly. I don't necessarily want to know why the bird stayed so still for this picture. Turned out well, though. Lens: Tejas\nFilm: BlacKeys SuperGrain"
     },
     {
         "file": "2011-03-24-Sky---Sunglasses.md",
         "year": "2011",
         "date": "March 24, 2011",
         "title": "Sky + Sunglasses",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhN7oSWcCFMQ8gfIS9xeIgqNCY5NbYpiE4ir6gIS20ZH9IG_OI1mA8WENZVGRTvJpkeRa709zQXr0OfqVK54HWdvnWskDRqYB5ZMR2PyYVwfa1tCBNMTeQDjNsCqZ3Mttg8c5ImdA/s320/My+HipstaPrint+0-760563.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5587434889940777330\" />\nI had an entire day off today. A blank canvas; I could literally do anything. So, naturally, I played with my baby girl. The picture today was the result of an idea to put my shades over the lens of my camera. Not a bad result. Lens: Helga Viking\nFilm: Ina's 1969"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-760563.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5587434889940777330\" />\nI had an entire day off today. A blank canvas; I could literally do anything. So, naturally, I played with my baby girl. The picture today was the result of an idea to put my shades over the lens of my camera. Not a bad result. Lens: Helga Viking\nFilm: Ina's 1969"
     },
     {
         "file": "2011-03-22-Rain.md",
         "year": "2011",
         "date": "March 22, 2011",
         "title": "Rain",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgO00lNp9DF0G7pYuEZN6lWXqKW5vVttUnjPLK61HOiOz1ZrmXej8ICOQHoU8cByx5j07Ze0qu4P3ZbNeq_K-QN06w5RzObuq5p70lJU1W-B33Lxh3l17pfK8-qK5teDWv4NUAMPA/s320/My+HipstaPrint+0-751112.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5586709433750757186\" />\nIt's been 90+ degrees lately in AZ. So yes, I love the rain. Anything that can drop the outside temperature 30 degrees in one day is ok with me. Lens: Helga Viking\nFilm: Float"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-751112.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5586709433750757186\" />\nIt's been 90+ degrees lately in AZ. So yes, I love the rain. Anything that can drop the outside temperature 30 degrees in one day is ok with me. Lens: Helga Viking\nFilm: Float"
     },
     {
         "file": "2011-03-22-Coming-and-going.md",
         "year": "2011",
         "date": "March 22, 2011",
         "title": "Coming and going",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhcuscPY2dvy8B_xP3i7hIvmefMIGTD9KCHlAUIrs5xv4JlJDmDLs-wl3dVGY-y6WIbhTx_YqLam-ywDGAsfLDWrfoqouAbDBU6qJY1CBptg5URumM_fIiUJjbQAGZnNyA3mHpLMA/s320/My+HipstaPrint+0-773363.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5586992990861960626\" />\nWhere to?  Lens: Helga Viking\nFilm: Ina's 1935"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-773363.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5586992990861960626\" />\nWhere to?  Lens: Helga Viking\nFilm: Ina's 1935"
     },
     {
         "file": "2011-03-21-Gear.md",
         "year": "2011",
         "date": "March 21, 2011",
         "title": "Gear",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjcw6e7znTg7F7TszxKRyLfjogjk_zOjwRjmLWdxzr0U9gpAVa8DJf1rpAsIT5aFWV1OZLzWa2_q3WMLClFMYJkDXlzcX0pWfWLZekFmkqPy6-rvmRBsj_fvmrEFssg0KQnCeWaxQ/s320/My+HipstaPrint+0-777917.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5586392148108062738\" />\nI had a good time shooting the moon last night.  So much that I broke the camera back out tonight and played around a bit more. Hope everyone had a great weekend!Lens: Jimmy\nFilm: Pistil"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-777917.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5586392148108062738\" />\nI had a good time shooting the moon last night.  So much that I broke the camera back out tonight and played around a bit more. Hope everyone had a great weekend!Lens: Jimmy\nFilm: Pistil"
     },
     {
         "file": "2011-03-20-Moon.md",
         "year": "2011",
         "date": "March 20, 2011",
         "title": "Moon",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiOt6ycSuedaZdKsrmnmAdf3SgBTMATCjUAl1ocpbORWsBPET34bjPtwX1KzV3PFYUumLBR8zaR9Zctoec2MnVRtL1G0mBp8gaInlRMDY0lJ7hBIPtJAP8O98eYopvhYVD3rRf4LA/s320/My+HipstaPrint+0-761247.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5586039026331122498\" />\nAs I drove home from work tonight, the moon was slowly rising in the east. I had a nice view of it all the way until I pulled into the driveway. I decided to pull out the DSLR and snap a few shots. Yes, this technically makes this iPhone photo a cheat; I only took a picture of the photo on my camera. Meh, I'm ok with that. As always, enjoy!Lens: Kaimal Mark II\nFilm: Pistil"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-761247.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5586039026331122498\" />\nAs I drove home from work tonight, the moon was slowly rising in the east. I had a nice view of it all the way until I pulled into the driveway. I decided to pull out the DSLR and snap a few shots. Yes, this technically makes this iPhone photo a cheat; I only took a picture of the photo on my camera. Meh, I'm ok with that. As always, enjoy!Lens: Kaimal Mark II\nFilm: Pistil"
     },
     {
         "file": "2011-03-19-Slide.md",
         "year": "2011",
         "date": "March 19, 2011",
         "title": "Slide",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgDLG238lNQ_n4SwWPbuV-sorHFOW3NAncOblaYY-eezPK7e9Ppb1ff9b8Du_RSmwYfZzU6ybfzkgnDrzy2RuwOdTtK6XjHozE7NrbFfLfyunx4YfmzQjiwu1UdrDwHqsfCvi9WvQ/s320/My+HipstaPrint+0-727128.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5585903591217312450\" />\nAnother picture from Tuesday. I found a lot of interesting items to shoot that day. Lens: Tejas\nFilm: Pistil"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-727128.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5585903591217312450\" />\nAnother picture from Tuesday. I found a lot of interesting items to shoot that day. Lens: Tejas\nFilm: Pistil"
     },
     {
         "file": "2011-03-18-Distortion.md",
         "year": "2011",
         "date": "March 18, 2011",
         "title": "Distortion",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgQgESuRfwZnAQpp_9bQFPN3-ZKgb9GHerW4OrPx0-tlW2Q2kLVMDM8BuDkNDw8DkZ4DBASX6xIPG-9VzR64MobttPw4qfLV1CWG6MZaoVuqoqaetniH1pUplBesUU-HA3J5m2uhQ/s320/My+HipstaPrint+0-778958.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5585549910824349538\" />\nFound an old bench somewhere outside the mall today; pretty sure it's forgotten by most. Probably an old smoke spot. Lens: Salvador 84\nFilm: Claunch 72 Monochrome"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-778958.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5585549910824349538\" />\nFound an old bench somewhere outside the mall today; pretty sure it's forgotten by most. Probably an old smoke spot. Lens: Salvador 84\nFilm: Claunch 72 Monochrome"
     },
     {
         "file": "2011-03-17-Wheel.md",
         "year": "2011",
         "date": "March 17, 2011",
         "title": "Wheel",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhswPubt748lkEzLSbfYbfyGdnMXsvxQnGES7zZUiu-ujFAKF3Pbk_NWSdK9l4F_XVanD7bgXcne6r1bA7Xh_H_mRpuQ0kssIEajnncuN3aNxnCOZ1LFARISwrgUf1U8wb50hDKTg/s320/My+HipstaPrint+0-729806.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5584883543007256434\" />\nI've been busy with the site redesign tonight, so this is all we have for today. Lens: Tejas\nFilm: Ina's 1935"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-729806.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5584883543007256434\" />\nI've been busy with the site redesign tonight, so this is all we have for today. Lens: Tejas\nFilm: Ina's 1935"
     },
     {
         "file": "2011-03-17-Sun-through-the-trees.md",
         "year": "2011",
         "date": "March 17, 2011",
         "title": "Sun through the trees",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgRXF-vPIS6F6xHCXkXcVDSrE2YzHfGSN6Z0BJZbSVg6LwkUcec4bFo7CvlqzyxoNtO1Rse_ZKEKjjMb7slyZsTVSbbXFZPRZRFRWTXR6L8aI5Ce0D2ykoEE1GBS4M1lebQJ9CWzw/s320/My+HipstaPrint+0-721405.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5585142067779574338\" />\nJust started wandering down paths I don't generally walk. Now that we've had a few 80+ degree days here in AZ, the trees have mostly full-size leaves, yet they still have that shiny luster that disappears during the summer heat. Lens: John S\nFilm: Ina's 1969"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-721405.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5585142067779574338\" />\nJust started wandering down paths I don't generally walk. Now that we've had a few 80+ degree days here in AZ, the trees have mostly full-size leaves, yet they still have that shiny luster that disappears during the summer heat. Lens: John S\nFilm: Ina's 1969"
     },
     {
         "file": "2011-03-16-Rings.md",
         "year": "2011",
         "date": "March 16, 2011",
         "title": "Rings",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi65oTNNb3ktKI_X_8adeJCo6hvO7vL88N36rTx0iWY-ZpWyAHR66tDGlNVQYI1d5J6cIrNFcLfUeullOFeI6CnLFR_1_s7iToBwoh28TdvZFt32c9Yt-Om8sLMVIiPN-EFCROaaA/s320/My+HipstaPrint+0-785370.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5584480060113434338\" />\nI remember when these meant nothing but blisters. Lens: Tejas\nFilm: Pistil"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-785370.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5584480060113434338\" />\nI remember when these meant nothing but blisters. Lens: Tejas\nFilm: Pistil"
     },
     {
         "file": "2011-03-16-It-is-what-it-is.md",
         "year": "2011",
         "date": "March 16, 2011",
         "title": "It is what it is",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEidWki0ynC1EnRVspwagc_XMV0S1XC7oMiqNJ7LXfazfHf5cKJsJJ31zesqw0oXr90UmxmxD4hjTjCv6NxKmvy6doZfnID2xtfDGxCQP1ra5b5f74S8At1czhK9IuJzhGGHPKkaWw/s320/My+HipstaPrint+0-784505.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5584471898262082658\" />\nMost of the time, I just look around for peculiarities. I found this around an old concrete foundation of a building that must have been 25 years demolished. If anyone knows what purpose it may have once served, I'd be interested. Lens: Kaimal Mark II\nFilm: Blanko"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-784505.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5584471898262082658\" />\nMost of the time, I just look around for peculiarities. I found this around an old concrete foundation of a building that must have been 25 years demolished. If anyone knows what purpose it may have once served, I'd be interested. Lens: Kaimal Mark II\nFilm: Blanko"
     },
     {
         "file": "2011-03-14-Upward.md",
         "year": "2011",
         "date": "March 14, 2011",
         "title": "Upward",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhBoqwrQuWnZWYURt6rDEuIl_plR3erSyIbknzC7ys5BdAifLwFNX97blRC1xInC6V_BLdiXWxrk-l3UN-0SW5gntYpgnMVsXaUH8ZCRuWpBShasiAOfIY1An76FpURwKKh7xekqg/s320/My+HipstaPrint+0-791159.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5584048438175183954\" />\nI've gotten past feeling foolish when I'm taking pictures in public. This particular picture was taken outside, flat on my back, in a very crowded area. Today marks the addition of a brand new lens to the hipstamatic family. Tejas appears to have great potential here in Arizona, for sure. Lens: Tejas\nFilm: Ina's 1935"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-791159.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5584048438175183954\" />\nI've gotten past feeling foolish when I'm taking pictures in public. This particular picture was taken outside, flat on my back, in a very crowded area. Today marks the addition of a brand new lens to the hipstamatic family. Tejas appears to have great potential here in Arizona, for sure. Lens: Tejas\nFilm: Ina's 1935"
     },
     {
         "file": "2011-03-14----it-wasn--39-t-really-so.md",
         "year": "2011",
         "date": "March 14, 2011",
         "title": "...it wasn&39;t really so",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhVfozyGK47tWHdxmEXOAERGNYqrrqTXvQkCrziw1ltNqWT445DDmNDu3i3DRktC04PQ9VElXL9Ubj5QUUkmrgGHoBl42EM0UKhxriqZM63m5EQIyxQf7PpqWPmMgb5bczNlMgqLg/s320/My+HipstaPrint+0-772814.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5583744708541003298\" />\nBut it seemed to be. Lens: Helga Viking\nFilm: Kodot XGrizzled"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-772814.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5583744708541003298\" />\nBut it seemed to be. Lens: Helga Viking\nFilm: Kodot XGrizzled"
     },
     {
         "file": "2011-03-13-Movie-night.md",
         "year": "2011",
         "date": "March 13, 2011",
         "title": "Movie night",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEitYlhoEfumwtet8omGwxn0UvugiI18OZ6wXeaaK2A0OnmybxgIcj_vULP7KO5LJZXWVKW-ymfacrte7Yc24BtSbssfubIPMKlaHCLmGqYQsTs1Ncn3TauQCFQTADZWvgfSiP1Oug/s320/My+HipstaPrint+0-728789.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5583399628455526418\" />\nTwo brothers... One speaks no English, the other learned English from watching \"The Wide World of Sports.\" So you tell me... Which is better, speaking no English at all, or speaking Howard Cosell?- Lane MyerLens: John S\nFilm: Ina's 1969"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-728789.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5583399628455526418\" />\nTwo brothers... One speaks no English, the other learned English from watching \"The Wide World of Sports.\" So you tell me... Which is better, speaking no English at all, or speaking Howard Cosell?- Lane MyerLens: John S\nFilm: Ina's 1969"
     },
     {
         "file": "2011-03-13-Glass.md",
         "year": "2011",
         "date": "March 13, 2011",
         "title": "Glass",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgrw3r0AVTjIdREmKxGqGeMy44O06DDSE8jzF3W9T9KtSuv-9yEAt1cCGQS7S2ocfrJgu2wHQf6UpMJgxR69HDwYszEfk4EccslGSsxw5pE6VOzbcMib7wLNU7IcQ4kTpeCsE_UYg/s320/My+HipstaPrint+0-723622.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5583446856683766914\" />\nFinished up my work for the day. \nGrabbed the glass by my bed side. \nDrank the water. \nSaw the laptop through the glass. \nSnapped the picture. Lens: John S\nFilm: Blanko"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-723622.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5583446856683766914\" />\nFinished up my work for the day. \nGrabbed the glass by my bed side. \nDrank the water. \nSaw the laptop through the glass. \nSnapped the picture. Lens: John S\nFilm: Blanko"
     },
     {
         "file": "2011-03-12-Saturday-diversion.md",
         "year": "2011",
         "date": "March 12, 2011",
         "title": "Saturday diversion",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEha8u_TNdOBNFEOk6Ekc609w0ORtWGYcnS_-eofST4Vyf1FnW3nw3lhRv0LgLe_pig_G2VwHvrEK5Fh3TGMOdfGdYmbfQMLKv5VXF3dfXUSapQYT8yT_zAZlR7RsYsYA-3xZmExqw/s320/photo-712797.JPG\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5583321390465274562\" />\nThis site is devoted to Hipstamatic.  But today, I had a little fun with two other apps. Enjoy!Apps used: SwankoLab + Labelbox"
+        "body": "<img src=\"images/archive/photo-712797.JPG.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5583321390465274562\" />\nThis site is devoted to Hipstamatic.  But today, I had a little fun with two other apps. Enjoy!Apps used: SwankoLab + Labelbox"
     },
     {
         "file": "2011-03-11-My-shoe.md",
         "year": "2011",
         "date": "March 11, 2011",
         "title": "My shoe",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiYZms_RgUfHmCTNxR-bi7dlJSCGS6QTuHhw7dKqfpYunujJEM3-804wyYSQNzt2_RY9M-3gGBeq-HpiMxUH-Pt_H6lpN0K1ox5lHpatlt8d49F3B_b8ok5QiCpfi-iWGHtpwgmwQ/s320/My+HipstaPrint+0-710344.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5582964471601964450\" />\nBecause it was requested, a picture of my shoe. Lens: John S\nFilm: BlacKeys SuperGrain"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-710344.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5582964471601964450\" />\nBecause it was requested, a picture of my shoe. Lens: John S\nFilm: BlacKeys SuperGrain"
     },
     {
         "file": "2011-03-11-Main-street--Mesa.md",
         "year": "2011",
         "date": "March 11, 2011",
         "title": "Main street, Mesa",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjCDlC31KjPOtbZQpT5hetPu6TTxwNH2UXkdwlZX-Fieub-RGvPQ8yiRzghDwzBDV75wHpV5wJfuKEPk8Wno12XqW_9xNs0SF4C8BiT-yzHCSXg6-MYQ-FyQBUfB2uTEoqz0UHjdA/s320/My+HipstaPrint+0-712070.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5582957178476112722\" />\nWhile shooting the Day + Night photos last night, I let the Lucifer lens do its magic with the night sky. Also, I love these types of street lights. A nice reminder of how it used to be in Arizona. Lens: Lucifer VI\nFilm: Kodot XGrizzled"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-712070.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5582957178476112722\" />\nWhile shooting the Day + Night photos last night, I let the Lucifer lens do its magic with the night sky. Also, I love these types of street lights. A nice reminder of how it used to be in Arizona. Lens: Lucifer VI\nFilm: Kodot XGrizzled"
     },
     {
         "file": "2011-03-11-Day---Night.md",
         "year": "2011",
         "date": "March 11, 2011",
         "title": "Day + Night",
-        "body": "<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5582648957528294514\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhUCm8Sa2YO9x7IPcBhqZj4dwIJuTN595uoQeSB9ylPtcgBF-UgurN3tSqKiMcWdB46Q7h2r1j0RfYlUYi0wAJAFM2lXfGUYEQTaQTNIt-hL5070bat7oAbnZj8rx8GDC8QCIhNzQ/s320/My+HipstaPrint+0-748991.jpg\" />\n<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5582648963812726258\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhLJ2UMJ9nPt_G1MVdKKcz1YJOApccLX_F2ln0gMeOwC_NkuPdv6oTnSFecqOGF8NkX-pwSQDxvlJ4Zuqd1bOD8jNuz1bPXDiUxaEb7_cz0mobAW8JNlsCyUAPY2TdvY0aMpgjnJA/s320/image-751050.jpeg\" />\n\nI saw this motel one night as I was picking up some pizza for the family. In the brief interlude between driving there and back, I observed the basic contrast that occurred when the neon lights were switched. \n\nAnd thus starts a new theme for TiPP. \n\nIf anyone has subject matter ideas for Day + Night, drop me a line in the comments. \n\nLens: Helga Viking\nFilm: Ina's 1935"
+        "body": "<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5582648957528294514\" src=\"images/archive/My+HipstaPrint+0-748991.jpg\" />\n<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5582648963812726258\" src=\"images/archive/image-751050.jpeg\" />\n\nI saw this motel one night as I was picking up some pizza for the family. In the brief interlude between driving there and back, I observed the basic contrast that occurred when the neon lights were switched. \n\nAnd thus starts a new theme for TiPP. \n\nIf anyone has subject matter ideas for Day + Night, drop me a line in the comments. \n\nLens: Helga Viking\nFilm: Ina's 1935"
     },
     {
         "file": "2011-03-10-Flag.md",
         "year": "2011",
         "date": "March 10, 2011",
         "title": "Flag",
-        "body": "<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5582600096156847858\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhr1tOW-7ExPosLzsqDiqIXn7G76JQMf7sFru0KmjW94X1O2bNPAhNn4JaS78YWbutOsIkYuHHW7Ry6sg_kF3sn-bJsI41icig-ccD00c75gTelYHJa2rDnwioE_8j4eT-CSMzEcA/s320/My+HipstaPrint+0-772895.jpg\" />\n\nNot much inspiration today. I just wandered around until something worked. At least the stratus clouds played nicely in the background. \n\nSidenote: I'm becoming more of a fan of the Jimmy lens. \n\nLens: Jimmy\nFilm: Pistil"
+        "body": "<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5582600096156847858\" src=\"images/archive/My+HipstaPrint+0-772895.jpg\" />\n\nNot much inspiration today. I just wandered around until something worked. At least the stratus clouds played nicely in the background. \n\nSidenote: I'm becoming more of a fan of the Jimmy lens. \n\nLens: Jimmy\nFilm: Pistil"
     },
     {
         "file": "2011-03-08-1979.md",
         "year": "2011",
         "date": "March 08, 2011",
         "title": "1979",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhlcZktI0F5WdY_TIHNZiU0FH_7bgWRJDhPABKo1z56uYtWzxXmKvD52t13NvL5km-YVTSgww66NWV4pUbsk9K_clo_7j_-oRnOvxXzA29akNhKytbotSYKKD3M8Q7lTu2EImjEIQ/s320/My+HipstaPrint+0-741111.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5581750414422336754\" />\nThis coin has been wandering the world as long as I have. Lens: Kaimal Mark II\nFilm: Ina's 1969"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-741111.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5581750414422336754\" />\nThis coin has been wandering the world as long as I have. Lens: Kaimal Mark II\nFilm: Ina's 1969"
     },
     {
         "file": "2011-03-07-Stairs.md",
         "year": "2011",
         "date": "March 07, 2011",
         "title": "Stairs",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgkjD-Jn4U2wQ9Jmq_yl-RwpJGJnZpKIejcIJkvCNOb5RMQR2feIfKcATFblX5WMT7d1bO-eEVS1MzGUKrHc6eujj2itVn9KwKp1tNyw1-7CphMHTS51rN11A6xblhoM_MnlVIusg/s320/My+HipstaPrint+0-746435.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5581458381024669058\" />\nJust a standard-issue flight of stairs. Much more boring than a beach. The John S lens did a nice job bringing out the abnormalities and rust stains. Lens: John S\nFilm: BlacKeys B+W"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-746435.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5581458381024669058\" />\nJust a standard-issue flight of stairs. Much more boring than a beach. The John S lens did a nice job bringing out the abnormalities and rust stains. Lens: John S\nFilm: BlacKeys B+W"
     },
     {
         "file": "2011-03-07-Farewell--for-now.md",
         "year": "2011",
         "date": "March 07, 2011",
         "title": "Farewell, for now",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiA2kv14WJp8dkE8VgzXm7G_Lf3t3Pnjl3shuMr5SZiOm-qy0mQJgac8fab4i93EEE2oS77bsHaBpjbqls_p5SD8c0w8hpXuQ8NBnxMnLX-ak_UWcmjiuaeA-VnFJIvph9uTO7EQQ/s320/My+HipstaPrint+0-729628.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5581204044496989474\" />\nIt was a good trip. Lens: Jimmy\nFilm: Kodot XGrizzled"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-729628.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5581204044496989474\" />\nIt was a good trip. Lens: Jimmy\nFilm: Kodot XGrizzled"
     },
     {
         "file": "2011-03-06-Roll-of-the-tide.md",
         "year": "2011",
         "date": "March 06, 2011",
         "title": "Roll of the tide",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjdkctKtbtKWDAvq9tmr6aU0ZiX5HC2kGOvuvqcCLpH9x0p9CYnlhnYuKYw3xZ2GyskwZAsOjyNnV5dsOgXqvvHgTaPYynzltILyz35S3r_cAPJwOZCqmq-0lb9iC70VBsjWI75HQ/s320/My+HipstaPrint+0-729668.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5580821792826946898\" />\nNo zoom lens = great efforts to shoot and run. It may not look like it, but I was right next to the waves as they rolled in. Lens: Jimmy\nFilm: Blanko Noir"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-729668.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5580821792826946898\" />\nNo zoom lens = great efforts to shoot and run. It may not look like it, but I was right next to the waves as they rolled in. Lens: Jimmy\nFilm: Blanko Noir"
     },
     {
         "file": "2011-03-06-Impact.md",
         "year": "2011",
         "date": "March 06, 2011",
         "title": "Impact",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjVopbjuYt_UzSEtlGjFd4LBIoXSZXuT22nzgWJCQNQCIl2uCbrSL5tIKqHqaPqeDxhrRs4FNu1UY0J3p2F4v3EizlF5UggX8Z-WlACQyNLGs450Z0RjnRZUP6bqTPidnWjUIYG_A/s320/My+HipstaPrint+0-748568.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5580819727532944930\" />\nProbably the best shot of the day. I wasn't prepared for this to happen; the wave snuck up on us both and smacked right into her. I managed to hit the button before I ran. It was a miracle my phone didn't end up in the ocean today. Lens: Bettie XL\nFilm: BlacKeys B+W"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-748568.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5580819727532944930\" />\nProbably the best shot of the day. I wasn't prepared for this to happen; the wave snuck up on us both and smacked right into her. I managed to hit the button before I ran. It was a miracle my phone didn't end up in the ocean today. Lens: Bettie XL\nFilm: BlacKeys B+W"
     },
     {
         "file": "2011-03-06-Balboa-Island.md",
         "year": "2011",
         "date": "March 06, 2011",
         "title": "Balboa Island",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgAyhOprV7eVryDnEDnURdcAajaa4y0rN7smuDAWzs0agH_W46XfVbpku0_ti1bo73LApkAovqcHCzC_zsJht26y5tcY5thM_JIVt_v1xzSn9kAKP6dlffYzvNNVvwffKw7SEy_Xw/s320/My+HipstaPrint+0-707817.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5580822987073847170\" />\nTons of flowers on Balboa Island. Lens: Chunky\nFilm: BlacKeys B+W"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-707817.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5580822987073847170\" />\nTons of flowers on Balboa Island. Lens: Chunky\nFilm: BlacKeys B+W"
     },
     {
         "file": "2011-03-04-Timing.md",
         "year": "2011",
         "date": "March 04, 2011",
         "title": "Timing",
-        "body": "<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5580342775116428066\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhBkQ8mpehOJVxTYW90WPfuGl4A_uJVdjQU7Xuwuxb7YlRSf27NrCV7YodpuWsLYYKwgZ4FtTSgcN7DQPUZViGNopnbRdBNf0toNWnLim2_qfH5vvFMLbUa0Zfznw4MRiS8D3C_xA/s320/My+HipstaPrint+0-799266.jpg\" />\n\nI got hit immediately after I took this shot. \n\nLens: Helga Viking\nFilm: Ina's 1969"
+        "body": "<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5580342775116428066\" src=\"images/archive/My+HipstaPrint+0-799266.jpg\" />\n\nI got hit immediately after I took this shot. \n\nLens: Helga Viking\nFilm: Ina's 1969"
     },
     {
         "file": "2011-03-04-Tide.md",
         "year": "2011",
         "date": "March 04, 2011",
         "title": "Tide",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgEICWrsIlEpK_h6Va45KDD_tYKe-wJcfJ3OWwrQDfA1Mx5NIhGy55rolKwkxGHTAsJdcmUdOvQc8grd5zUgmtsKEsUbVdEzfkeD8rPHKv1khvAn68jUReHMpPJQkNS9sB62yoqKg/s320/My+HipstaPrint+0-714139.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5580102323567753058\" />\nMy aversion to sand runs deep. I decided, then, to keep my shoes on today. I looked like a moron escaping the rolling tide every few moments.  Wouldn't have wanted the shoes to get wet, right?Lens: Kaimal Mark II\nFilm: Blanko Noir"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-714139.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5580102323567753058\" />\nMy aversion to sand runs deep. I decided, then, to keep my shoes on today. I looked like a moron escaping the rolling tide every few moments.  Wouldn't have wanted the shoes to get wet, right?Lens: Kaimal Mark II\nFilm: Blanko Noir"
     },
     {
         "file": "2011-03-04-The-beach.md",
         "year": "2011",
         "date": "March 04, 2011",
         "title": "The beach",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEggdu41QcHsWqDoKvOcQ0TR9kL4JprvzTM2Q6i-aWaxpYa582iBgXiOmyLyZk7nFiTRbyUNoYNEeVeif_c7x1l62QVsArOX4ouNPLMZJbb3x4XF5xON183IrwmkITu05fINx_qRcA/s320/My+HipstaPrint+0-790757.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5580100502071032594\" />\nLa Jolla, to be exact. The wife and I hadn't been here in nearly eight years, so the idea to divert from the original destination seemed well justified. After a quick FaceTime call to my brother, the wife and I shot the beach like it wasn't going to be there the next day. A few more shots will be posted in the coming moments. Lens: John S\nFilm: BlacKeys B+W"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-790757.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5580100502071032594\" />\nLa Jolla, to be exact. The wife and I hadn't been here in nearly eight years, so the idea to divert from the original destination seemed well justified. After a quick FaceTime call to my brother, the wife and I shot the beach like it wasn't going to be there the next day. A few more shots will be posted in the coming moments. Lens: John S\nFilm: BlacKeys B+W"
     },
     {
         "file": "2011-03-04-Sandy-feet.md",
         "year": "2011",
         "date": "March 04, 2011",
         "title": "Sandy feet",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjjUEgVmR2bVTuN6XvnUS4o_eDBl4iZk168NstKCLW9S3hbkKWq6dCQ6ixTfhKqkXPpYWTepcaDcXhmLKPIgpwM0WpDhf1O-kILlmEjMUCNp9S_6000e4iVLzlub5JKS-QJY7cqQQ/s320/My+HipstaPrint+0-743770.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5580102886862272802\" />\nThe wife, incidentally, has no such aversion to sand. Lens: Helga Viking\nFilm: Blanko"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-743770.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5580102886862272802\" />\nThe wife, incidentally, has no such aversion to sand. Lens: Helga Viking\nFilm: Blanko"
     },
     {
         "file": "2011-03-04-Rolling-tide.md",
         "year": "2011",
         "date": "March 04, 2011",
         "title": "Rolling tide",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhUr4ZCn2S6WebL6LQtoqKdFBltLWq98Rss2TJG0kmSTLAYj24QyzcLklQ6u_AcI35m1B44X6D0cgsEy7eWIz5CGqqbMjVPT3n9JasRVoFowPPsKIBuRl_4r6NyyJXPlBVIqo3PMw/s320/My+HipstaPrint+0-708854.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5580337662072453186\" />\nSurf was rough. Falling a bit too early for folks to ride much. Lens: Chunky\nFilm: Cano Cafenol"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-708854.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5580337662072453186\" />\nSurf was rough. Falling a bit too early for folks to ride much. Lens: Chunky\nFilm: Cano Cafenol"
     },
     {
         "file": "2011-03-04-Nook.md",
         "year": "2011",
         "date": "March 04, 2011",
         "title": "Nook",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhus-QbT0Y-tRSBou3u6wsbPHpXbt25FhFdKbbsEk8UqOuKBgc6Iv6XxBFsdIVcZdF8PpVSqSXG0446-fePKNWgcJbZDvfx1lcjFOieCjt7o-QiXObTZlUY9ixJNjuzW-uBJTX8nA/s320/My+HipstaPrint+0-777442.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5580101731232383842\" />\nLens: John S\nFilm: Ina's 1969"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-777442.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5580101731232383842\" />\nLens: John S\nFilm: Ina's 1969"
     },
     {
         "file": "2011-03-04-Me.md",
         "year": "2011",
         "date": "March 04, 2011",
         "title": "Me",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhv9RK0ix49sA-Qbh2SY43wyc-MoOagKggI3sp7dla2XKe53FKhkYAareSR9GWuAIHYhaRlXcQpJX56_1ajakyRX8ojSiVDtynN8txe2wTUEIPpIxC5fQeEtxYsq2Im6x-C9efEOw/s320/My+HipstaPrint+0-723142.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5580106223019784258\" />\nJust doing my thing. Lens: John S\nFilm: Ina's 1935"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-723142.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5580106223019784258\" />\nJust doing my thing. Lens: John S\nFilm: Ina's 1935"
     },
     {
         "file": "2011-03-04-Epic.md",
         "year": "2011",
         "date": "March 04, 2011",
         "title": "Epic",
-        "body": "<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5580277834860813250\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgcLNwc4VAoi9vC0fKYeXZ9gsNzaPsXXiwGbuam3XfNv8LEGRHmekxkzBFLhI_umTh5prB3YChQvfSLplMX0LHUyUlgStAIRjvL6FlrsvNHvBhehRpTinnXKoAmztsLc97MhK0r2w/s320/My+HipstaPrint+0-779315.jpg\" />\n\nThis shot?  Not mine. It's the wife's. It really captured the scene. This little 12 year old girl against the ocean, and she was really, really good. \n\nIt had to be included. \n\nLens: Helga Viking\nFilm: Claunch 72 Monochrome"
+        "body": "<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5580277834860813250\" src=\"images/archive/My+HipstaPrint+0-779315.jpg\" />\n\nThis shot?  Not mine. It's the wife's. It really captured the scene. This little 12 year old girl against the ocean, and she was really, really good. \n\nIt had to be included. \n\nLens: Helga Viking\nFilm: Claunch 72 Monochrome"
     },
     {
         "file": "2011-03-04-Driftwood.md",
         "year": "2011",
         "date": "March 04, 2011",
         "title": "Driftwood",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEip9tS88OHYhKiLnmDL-XewwC-EODZ1ItEddhQ4wUZA4lzmyCEh6KBOJ0ulWwcfHW_KZ0p526AMOiJZB_nmN1QRpoCKTLquDwk9B9rYysC4Op3b04ndLm6-ByMOLV58kBDWoUc6IQ/s320/My+HipstaPrint+0-730292.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5580103248084696370\" />\nMost everything looked better in high-contrast black and white today. Lens: Helga Viking\nFilm: BlacKeys B+W"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-730292.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5580103248084696370\" />\nMost everything looked better in high-contrast black and white today. Lens: Helga Viking\nFilm: BlacKeys B+W"
     },
     {
         "file": "2011-03-04-Comradery.md",
         "year": "2011",
         "date": "March 04, 2011",
         "title": "Comradery",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg9SUm9eb6s4TMuGSf2XIauTuCsj7lFfCFVYC5b6u3zTXKtJXa7Jml4bGiiwP-dkJ-Hk2AsiKRar37dD_Jm511KMq7eKMkvCx7fbSrKBgpG43SmobDN7mPc0EJTXQZFoSzU7QJIfQ/s320/My+HipstaPrint+0-717880.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5580101477247043874\" />\nA fellow photographer waiting for the sun to set. Nice guy; he took a few shots of the wife and me. Lens: John S\nFilm: BlacKeys SuperGrain"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-717880.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5580101477247043874\" />\nA fellow photographer waiting for the sun to set. Nice guy; he took a few shots of the wife and me. Lens: John S\nFilm: BlacKeys SuperGrain"
     },
     {
         "file": "2011-03-04-CA-78-diversion.md",
         "year": "2011",
         "date": "March 04, 2011",
         "title": "CA-78 diversion",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh4ffgme2u8EX7f55MAoX8gPQNY6bIMIq5N5Ge9teE3u0-L_d8wxuvZf07bH7vfe1aAdmZwDNxNsxsMdSa4CfykVeGO-j5pjN5wrscaW-vUlSUsxsX6K8EQkNsChE7kJlf_Qhn-fQ/s320/My+HipstaPrint+0-785040.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5580011573802504562\" />\nWe took a different route. And it was worth it. Lens: John S\nFilm: Kodot XGrizzled"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-785040.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5580011573802504562\" />\nWe took a different route. And it was worth it. Lens: John S\nFilm: Kodot XGrizzled"
     },
     {
         "file": "2011-03-04-Bravery-is-in-the-eye-of-the-b.md",
         "year": "2011",
         "date": "March 04, 2011",
         "title": "Bravery is in the eye of the beholder",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj_qVWLFaFd-utQ8IMV2QmaMJ1G-8JJgcKUa5e13hh2KKb1Ss5txxzZrziKkMdgiqUJkSeBrhyelpMYWf22EQ_uNpvb85Co65I_OA8YO88JqvRMen_jAX1rXn69ARNhWPc4niW-xg/s320/My+HipstaPrint+0-777265.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5580104308317772306\" />\nI tell you, I couldn't have done it. No way on earth. I had a sweater on, and I was freezing. Just a handful of the surfers we saw today in La Jolla. Lens: Kaimal Mark II\nFilm: Claunch 72 Monochrome"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-777265.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5580104308317772306\" />\nI tell you, I couldn't have done it. No way on earth. I had a sweater on, and I was freezing. Just a handful of the surfers we saw today in La Jolla. Lens: Kaimal Mark II\nFilm: Claunch 72 Monochrome"
     },
     {
         "file": "2011-03-04-Another-shot-from-the-road.md",
         "year": "2011",
         "date": "March 04, 2011",
         "title": "Another shot from the road",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi4guRuZr9YaTFBDnqWIl4sj8RVIyvWjC5f-LBzbLgckq0wMjB4FNZVeXleb6wbnUfIfbMk3smCfqdIhxFLnvczwmhwXxy_GD3nvy5JlOK6DXYmJFv90BH0fQsn9IR5rpC50SsQnw/s320/My+HipstaPrint+0-765141.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5580011913009043858\" />\nEnjoy!Lens: Helga Viking\nFilm: Ina's 1969"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-765141.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5580011913009043858\" />\nEnjoy!Lens: Helga Viking\nFilm: Ina's 1969"
     },
     {
         "file": "2011-03-04-Along-the-path.md",
         "year": "2011",
         "date": "March 04, 2011",
         "title": "Along the path",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhCXVEYYr-yLVQOnRuIz9T-bmrieH7S8qxahq2ICou_G4tcHXDyv7gwf26uBkyxllPPvFkr6HhsRYFAfQ7x5pPUbcTT5W1CEo6P3mrfzzzfaDKVL3Yff_YzCDy5S48zTNesZ0z-mA/s320/My+HipstaPrint+0-730370.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5580103674456168338\" />\nLens: Helga Viking\nFilm: BlacKeys B+W"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-730370.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5580103674456168338\" />\nLens: Helga Viking\nFilm: BlacKeys B+W"
     },
     {
         "file": "2011-03-04-A-true-hue.md",
         "year": "2011",
         "date": "March 04, 2011",
         "title": "A true hue",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgFG-bfXJeow_dz9KCOpxJVMX7w5tsgDGcAvm8DkIzHYGtWxRFqg_q9W5N5P2-YddZ5qv7z0d5X-spTd3GoAkuNi-nmJwW4ibnOTkUp1EHnO6eWRC6Nkismn0UI101LFKjMHDMzWQ/s320/My+HipstaPrint+0-771165.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5580105998443981826\" />\nIt's in Hipstamatic's DNA to exaggerate the color, contrast, and temperature of the subject. This time, however, the exaggerations were appropriate. Lens: Helga Viking\nFilm: Ina's 1935"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-771165.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5580105998443981826\" />\nIt's in Hipstamatic's DNA to exaggerate the color, contrast, and temperature of the subject. This time, however, the exaggerations were appropriate. Lens: Helga Viking\nFilm: Ina's 1935"
     },
     {
         "file": "2011-03-04--Laguna-Beach.md",
         "year": "2011",
         "date": "March 04, 2011",
         "title": "@Laguna Beach",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh-MMDUWzKfy5hKCLAJJvjaPxgF4Nc8lsbP0fbVZFGfvTBVI1-NxuS7oMyEAnIW0gGt4k0BOhANpLg8y0aU1ZnrHxmXv7asYDxrX6e4Y1LId5IepAjx1MXBUloCOZ4b1DTInp5ELw/s320/My+HipstaPrint+0-704885.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5580336357373367042\" />\nA few more to come in a bit. Just pulled into Balboa for a spot of lunch. Lens: Chunky\nFilm: Blanko Noir"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-704885.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5580336357373367042\" />\nA few more to come in a bit. Just pulled into Balboa for a spot of lunch. Lens: Chunky\nFilm: Blanko Noir"
     },
     {
         "file": "2011-03-03-Spring.md",
         "year": "2011",
         "date": "March 03, 2011",
         "title": "Spring",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjflNECBa_Euf7OMzhaVaXf8ItO2G0SDHKJI92_5qoi3P2m0fL0BU8A59-AdqNi18j9TEDYg0uZjyxEFuyAwlopS8iPE6c78vzhji4wGAB7RoKIA6V0zVWhYDfoKzABGQ1B2ZAF9A/s320/My+HipstaPrint+0-766786.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5579883505944663282\" />\nMarch 3rd. Right on time. Lens: Jimmy\nFilm: Blanko Noir"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-766786.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5579883505944663282\" />\nMarch 3rd. Right on time. Lens: Jimmy\nFilm: Blanko Noir"
     },
     {
         "file": "2011-03-01-Collision.md",
         "year": "2011",
         "date": "March 01, 2011",
         "title": "Collision",
-        "body": "<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5579206969178671602\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjND2huoBUyxYHaMyOst6HQmEkxaBwAnsPlUUnwbyKfOkBb-uHR-9-OFzmqsoMtNUlXdiEVF3hHjY5iCt3G9DqFeBy2Bw7ZjnUPMXPF4GyMcoxKurE2z5sj5vsV4eMLMmMRWCO9rg/s320/My+HipstaPrint+0-749353.jpg\" />\n\nI may run out of subjects at the mall to photograph. That would make me frown. \n\nLens: Helga Viking\nFilm: BlacKeys SuperGrain"
+        "body": "<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5579206969178671602\" src=\"images/archive/My+HipstaPrint+0-749353.jpg\" />\n\nI may run out of subjects at the mall to photograph. That would make me frown. \n\nLens: Helga Viking\nFilm: BlacKeys SuperGrain"
     },
     {
         "file": "2011-02-28-Illusion.md",
         "year": "2011",
         "date": "February 28, 2011",
         "title": "Illusion",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhxgyNSNuI8A2564KCBYGrAm-a38QPnc1NiUmlIjwq7IV_HJEnBt9Pkhd0yMgstoLJLgtiCKIx6Fk3uwiQ9wGcQnVHpWJisn7HRaypyy3DTmuqv6juSkPttvrjA8xwWZYcOVVN7zw/s320/My+HipstaPrint+0-790731.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5578887173309287634\" />\nWhile walking back to work, I quickly removed the iPhone from my pocket and waved it under this curiously-thinned tree. The result was a bit disorienting. Lens: Lucifer VI\nFilm: Alfred Infrared"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-790731.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5578887173309287634\" />\nWhile walking back to work, I quickly removed the iPhone from my pocket and waved it under this curiously-thinned tree. The result was a bit disorienting. Lens: Lucifer VI\nFilm: Alfred Infrared"
     },
     {
         "file": "2011-02-27-Spherical.md",
         "year": "2011",
         "date": "February 27, 2011",
         "title": "Spherical",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiNiP-zZQgF0ADRnefouPCEJm4wOkoQDekLVaBZhdRNPMlEPElk8-ZxrwjreCoAV5RU5V4CTqaeXLxMyqMCmMkofRExvAw68QQQGsK0U2Tgtjb_Nc2Oe6kUDZy2SnNVMLqgVP_SQg/s320/My+HipstaPrint+0-738409.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5578156801518104178\" />\nMy brain is tired. It feels like this cactus looks. First time for this particular film effect, though. Nice, neh?Lens: Helga Viking\nFilm: Cano Cafenol"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-738409.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5578156801518104178\" />\nMy brain is tired. It feels like this cactus looks. First time for this particular film effect, though. Nice, neh?Lens: Helga Viking\nFilm: Cano Cafenol"
     },
     {
         "file": "2011-02-27-A-spot-of-rain.md",
         "year": "2011",
         "date": "February 27, 2011",
         "title": "A spot of rain",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgxV2HhZhehz6qFXe4a4yMLb2nPq3RY_tQvTfpvAff50HSqGDrAoX4YnC4LAf8w4EfxEVHwqKFkEHLLpq9ELNW-KMojc_QxZGcA80S3yQMtg_nJo8a-GkVbyRLJpal2EDw2ds94ig/s320/My+HipstaPrint+0-719481.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5578444915600318578\" />\nFor whatever reason, I like to make the sidewalk the subject of my rainy day shots. Lens: Kaimal Mark II\nFilm: Ina's 1969"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-719481.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5578444915600318578\" />\nFor whatever reason, I like to make the sidewalk the subject of my rainy day shots. Lens: Kaimal Mark II\nFilm: Ina's 1969"
     },
     {
         "file": "2011-02-27-A-first-time-for-everything.md",
         "year": "2011",
         "date": "February 27, 2011",
         "title": "A first time for everything",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEixhmU-QXxYOEP4xZBKNdORe9suYOKTWCqB7_GzICKATmTSlvANhTKy6uda1kfUbtzQ3z38_acDC4jIzicrpZ6vGqA7iNwweW7cenVo05NYpKGKdTUXYcBTx3SPI2xladfgYtMpLA/s320/My+HipstaPrint+0-717613.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5578445336204352818\" />\nThe Salvador lens effect is a mixed bag. Place anything in your shot that is concrete and easily identifiable and you'll have a mess of a picture. By chance, this shot worked out pretty well as long as you don't analyze the details. Lens: Salvador 84\nFilm: Pistil"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-717613.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5578445336204352818\" />\nThe Salvador lens effect is a mixed bag. Place anything in your shot that is concrete and easily identifiable and you'll have a mess of a picture. By chance, this shot worked out pretty well as long as you don't analyze the details. Lens: Salvador 84\nFilm: Pistil"
     },
     {
         "file": "2011-02-24-A-confession.md",
         "year": "2011",
         "date": "February 24, 2011",
         "title": "A confession",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj1UQZ8F4W6Fm9Y_U80BdcqkheR1Cj5VG7T2K7qskWHzItKM_wMft8ZSlw2EsOWqKc0NUxXBiAxxObjdb63yjzh9a5kIe2VkMrmpzczjLW3mCJ-MF_aBGczUpNYVe9rLEBjiimpqQ/s320/My+HipstaPrint+0-791845.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5577077709682501874\" />\nSo, about today's photo...It was quite a day, and I didn't have much time to pause and take a shot. So I have to dig into my reserve with this post.  With that said...They say that good artists copy, and great artists steal. It's not to say I think I'm either good/great, but I've definitely stolen this shot's conceptual background. Won't say who, but if he sees it, he'll know. Let's just say it's an homage.  Lens: John S\nFilm: Kodot XGrizzled"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-791845.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5577077709682501874\" />\nSo, about today's photo...It was quite a day, and I didn't have much time to pause and take a shot. So I have to dig into my reserve with this post.  With that said...They say that good artists copy, and great artists steal. It's not to say I think I'm either good/great, but I've definitely stolen this shot's conceptual background. Won't say who, but if he sees it, he'll know. Let's just say it's an homage.  Lens: John S\nFilm: Kodot XGrizzled"
     },
     {
         "file": "2011-02-23-Morning-Palo-Verde.md",
         "year": "2011",
         "date": "February 23, 2011",
         "title": "Morning/Palo Verde",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjqjet10VJGa35LZ1SGO_HePFT69e56yDsFxKMMgTJeBoVNO79PXGCWHMlzImAPND_KYXth6zZyRfkPUs_uwNYJeJJ7TKV0oDX9bbJmgPKE6dbAVTQdQbYyyjFaEFUN-E8oCgqriA/s320/My+HipstaPrint+0-730481.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5576673720478432482\" />\nThe sky had a nice, even gradient this morning, and this shot caught my eye. Normally I dislike Palo Verde trees, but this one silhouetted quite nicely. Tomorrow I'll take another stab at the black/white theme. Lens: Kaimal Mark II\nFilm: BlacKeys B+W"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-730481.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5576673720478432482\" />\nThe sky had a nice, even gradient this morning, and this shot caught my eye. Normally I dislike Palo Verde trees, but this one silhouetted quite nicely. Tomorrow I'll take another stab at the black/white theme. Lens: Kaimal Mark II\nFilm: BlacKeys B+W"
     },
     {
         "file": "2011-02-21-Weekend-warrior.md",
         "year": "2011",
         "date": "February 21, 2011",
         "title": "Weekend warrior",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiEG8hCl7jdtJxnxXEGONbDDdXwjqzmeedJ2vF0-t8BgD9dfseU8QmyVogqSFZMvh2PtJjfICMNPTAYj6lnP16rkUPkCQfB1jZKBmCYhFJXpMgW6FAOiybWFJMovfwgQBeOsIHvZw/s320/My+HipstaPrint+0-702421.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5576218764005264146\" />\nThough 50 degrees outside, the boy wouldn't be separated from his trampoline. A repeat of yesterday's lens/film combo, indeed. But it fit the bill for today's post. Enjoy!Lens: John S\nFilm: Pistil"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-702421.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5576218764005264146\" />\nThough 50 degrees outside, the boy wouldn't be separated from his trampoline. A repeat of yesterday's lens/film combo, indeed. But it fit the bill for today's post. Enjoy!Lens: John S\nFilm: Pistil"
     },
     {
         "file": "2011-02-21-Altocumulus.md",
         "year": "2011",
         "date": "February 21, 2011",
         "title": "Altocumulus",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhDly-8EVpkinkGAKzdVXKaHw2DbU-2AfzFOb0PW1EUp4qigNdLguZT1D_XGc48Udv0wndI_2t1mh5rNvvuVVoBWjzLoa3Qq9y5LvJDFQ8D2ldFPlUjWPBkeSRu9beclFE1hSqXlA/s320/My+HipstaPrint+0-786360.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5576286553487168290\" />\nShooting clouds is kind of a cop-out, for sure. But they always provide plenty of contrast and variety for the eye. If I'd been a bit quicker on the shoot, this would have come out better. But it's nice enough. Lens: Helga Viking\nFilm: DreamCanvas"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-786360.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5576286553487168290\" />\nShooting clouds is kind of a cop-out, for sure. But they always provide plenty of contrast and variety for the eye. If I'd been a bit quicker on the shoot, this would have come out better. But it's nice enough. Lens: Helga Viking\nFilm: DreamCanvas"
     },
     {
         "file": "2011-02-21-After-the-rain-has-fallen.md",
         "year": "2011",
         "date": "February 21, 2011",
         "title": "After the rain has fallen",
-        "body": "<img id=\"BLOGGER_PHOTO_ID_5575931609216493330\" border=\"0\" alt=\"\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh60PXmJ27ZjMULp_9oaBMTNKCpsOs1T_ieuGYZQIHDeUxT708FkLlQbzXac4cOPbR6QYaOD3zzXfkqkcK2LzRtVyfcM6n3HAYCbKCKn4KzCxEA2wdM8Mgko_eKB1NUkyMhlE7cnQ/s320/My+HipstaPrint+0-744217.jpg\" />\nA weekend full of rain, wind, and colder temperatures is over, and we're left to pick up the mess. The John S lens is my favorite effect. I promise to try and go light on its use from here on out. Back to work tomorrow! Lens: John S\nFilm: Pistil"
+        "body": "<img id=\"BLOGGER_PHOTO_ID_5575931609216493330\" border=\"0\" alt=\"\" src=\"images/archive/My+HipstaPrint+0-744217.jpg\" />\nA weekend full of rain, wind, and colder temperatures is over, and we're left to pick up the mess. The John S lens is my favorite effect. I promise to try and go light on its use from here on out. Back to work tomorrow! Lens: John S\nFilm: Pistil"
     },
     {
         "file": "2011-02-20-A-nice-find.md",
         "year": "2011",
         "date": "February 20, 2011",
         "title": "A nice find",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjUpYx2t8tJDjkfL_fsNBQBu_pEx8aLFlD2LpG6o39X8amMt8qV0qpxSaGk6eB3FtmQ7KtfvOD32sVgz_Ai9GWK9z1WVo8h7GPYDxjfYtqdSWf1WmnvAlimSlzGeWbiTsJSAJeSbw/s320/My+HipstaPrint+0-716403.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5575585739149884018\" />\nWhile helping the parents remove their old carpet, I found a gem: my first digital camera. It's an 11 year old Kodak DC215. While only 1 mp, it took nice shots. I'm thinking of loading some batteries and taking it for a spin later. Lens: Chunky\nFilm: Ina's 1935"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-716403.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5575585739149884018\" />\nWhile helping the parents remove their old carpet, I found a gem: my first digital camera. It's an 11 year old Kodak DC215. While only 1 mp, it took nice shots. I'm thinking of loading some batteries and taking it for a spin later. Lens: Chunky\nFilm: Ina's 1935"
     },
     {
         "file": "2011-02-18-A-change-in-weather.md",
         "year": "2011",
         "date": "February 18, 2011",
         "title": "A change in weather",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjsPciw5hI_hBfa5xB4fe3NRrAPikvKq2zZLf-kUpf-HoekoFWHQwUfDdm2-OgA-65sYqueprxy5wKqNacviOZ10BJu0xLTzFFyPYnBdCt6FTmmSp-y2pmtBjIC-ZwmOpyLPjpSAg/s320/My+HipstaPrint+0-783837.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5575138497889065170\" />\nIt's been warm lately here, so the blanket of clouds was a welcome contrast during what will inevitably be one of the last efforts of winter. Decided to go with the Kaimal lens to add color to an otherwise dreary looking sky. Ina's film balanced it all out. Lens: Kaimal Mark II\nFilm: Ina's 1969"
+        "body": "<img src=\"images/archive/My+HipstaPrint+0-783837.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5575138497889065170\" />\nIt's been warm lately here, so the blanket of clouds was a welcome contrast during what will inevitably be one of the last efforts of winter. Decided to go with the Kaimal lens to add color to an otherwise dreary looking sky. Ina's film balanced it all out. Lens: Kaimal Mark II\nFilm: Ina's 1969"
     },
     {
         "file": "2010-05-04-New-shoes.md",
@@ -1895,7 +1901,7 @@ const wayback_raw_dump = [
         "year": "2009",
         "date": "August 09, 2009",
         "title": "Pretty quick",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgbSDacRCnvGlSkV3gMkowqJc8s1S6GpBQB0IIPDKoSqvI3X1gT6QD_iSQl5-bDBWVnADkscS_9Zd_MDt3lTlSDlnPDWl9qXrQnn7VkzBHvCd7xkiKN2ojYfFbA1U25imakuhwr/s320/photo-715528.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5368076968075113618\" />"
+        "body": "<img src=\"images/archive/photo-715528.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5368076968075113618\" />"
     },
     {
         "file": "2009-05-14-05-13-09---Star-Trek--or-somet.md",
@@ -1909,7 +1915,7 @@ const wayback_raw_dump = [
         "year": "2009",
         "date": "May 07, 2009",
         "title": "First 100+ degree day at my house",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgbj_khzuLyGSzz_bfBHppOCcfZFmt0yrRtDcLMAvseTwLf3a7kX1ByQ1q3KrihG-BlsxxcPiHl0ZyD4v158gGB3dSEfcxlWIldHiaB1WgqaJndmRQOQwlfsJBQQa0u08i4UizL/s320/photo-787814.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5333197418583240338\" />\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-787814.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5333197418583240338\" />\n\nSent from my iPhone"
     },
     {
         "file": "2009-05-07-05-07-09---No--I-didn--39-t-br.md",
@@ -1923,7 +1929,7 @@ const wayback_raw_dump = [
         "year": "2009",
         "date": "May 03, 2009",
         "title": "Good 'n Sprained!",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiyAxySTMKhONvsG9aai_TQcKLGhIUa9xZTc8imaMpXSnbIK30CGVvhvI_i6gf1XNC58QeM-VX8VO3IZtPnFsJg6rT5kHp8VL7bnYG9F4Z45Uj81rsIJ2OzDY84yBhBAj9u39lP/s320/photo-721797.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5331716228761443650\" />\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-721797.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5331716228761443650\" />\n\nSent from my iPhone"
     },
     {
         "file": "2009-04-28-04-28-09---Preparing-for-Utah.md",
@@ -1958,14 +1964,14 @@ const wayback_raw_dump = [
         "year": "2009",
         "date": "April 18, 2009",
         "title": "Sumner the snake charmer",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjzmJMQs6NS4CwZ5Fgia0yhNH3_ghxqHy99o21JmVXQ09CXI43rpaYCS3Rc04ZTgFotHy8B88chPOHPBq2f76puUEKso0gTCL57q3dOjAKYNP1dr5bC_AyD7njjrvYKMaBRGkxW/s320/photo-749560.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5326142771182708562\" />\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-749560.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5326142771182708562\" />\n\nSent from my iPhone"
     },
     {
         "file": "2009-04-18-04-18-09---Weird-logic.md",
         "year": "2009",
         "date": "April 18, 2009",
         "title": "04/18/09 - Weird logic",
-        "body": "For those of you who may have missed it at the Moblah'g, check this out.\n\n<img class=\"alignnone\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjzmJMQs6NS4CwZ5Fgia0yhNH3_ghxqHy99o21JmVXQ09CXI43rpaYCS3Rc04ZTgFotHy8B88chPOHPBq2f76puUEKso0gTCL57q3dOjAKYNP1dr5bC_AyD7njjrvYKMaBRGkxW/s1600/photo-749560.jpg\" alt=\"\" width=\"420\" height=\"560\" />\n\nNo...he still won't pet a dog.  But he will allow a six foot python around his neck.  Love that boy."
+        "body": "For those of you who may have missed it at the Moblah'g, check this out.\n\n<img class=\"alignnone\" src=\"images/archive/photo-749560.jpg\" alt=\"\" width=\"420\" height=\"560\" />\n\nNo...he still won't pet a dog.  But he will allow a six foot python around his neck.  Love that boy."
     },
     {
         "file": "2009-04-17-04-17-09---Quote-of-the-day.md",
@@ -1979,7 +1985,7 @@ const wayback_raw_dump = [
         "year": "2009",
         "date": "April 16, 2009",
         "title": "This is how to spend a great day with your son. Watching a toy frog melt in water.",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiF-IzZ-JFP2MTVeloBpSU-IhkNKhwvkRhsWEZGOOoLTn9nyLdd-5sKxrk4F9VKJyzqQ9lIGCMI5AuRZBU7Nbby9nAwYmkFrbm7I2dojLb7w5Q2T_IOHcPYrSlopMTIIWoT8CNB/s320/photo-764609.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5325434164000881810\" />\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-764609.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5325434164000881810\" />\n\nSent from my iPhone"
     },
     {
         "file": "2009-04-16-04-16-09---Something-to-write.md",
@@ -2021,14 +2027,14 @@ const wayback_raw_dump = [
         "year": "2009",
         "date": "March 26, 2009",
         "title": "A sneak preview",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjuMcIwQWc8yZMn0m7HFk4qbRgv9j2OOYqAj1oPXZWUTfHpyIoFhQa7CncH3KJwySw5TYzmH4Kw5w0eyfU7fv3j-6ANAHl0jS4hD1NHybuA3avqj1k2qZ7t5BEQaS4EAVWgwkey/s320/photo-765136.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5317350181247892290\" />\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-765136.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5317350181247892290\" />\n\nSent from my iPhone"
     },
     {
         "file": "2009-03-25-Games-are-just-more-fun-with-S.md",
         "year": "2009",
         "date": "March 25, 2009",
         "title": "Games are just more fun with Sumner",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhEQiPqMDo_tcmmzv63q7Qxat9jxWh7FZHZbS7ipEG6C8_Di0AxvhA2VnlwJnyvvnFUZYQDc2ypvQiYigtVDKav2Drcal3-Oq42WdX1jPxPzZox21JQuNBrSkGYYI2mB3f-0V7F/s320/photo-797254.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5317221900396064882\" />\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-797254.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5317221900396064882\" />\n\nSent from my iPhone"
     },
     {
         "file": "2009-03-24-3-24-2009---Hackbook-.md",
@@ -2056,168 +2062,168 @@ const wayback_raw_dump = [
         "year": "2009",
         "date": "March 13, 2009",
         "title": "SaraJane's First Visit",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEigZIRzxBi-CKEf_zL4RqYE-4K0pGVrRnGvIJ95gp-jTYIUCKiblo-vXscRNibomu-VfeNxIr-_9qlaLHYtXVYXisy_xwVx58UMyNbiEZHsQvUfXLvLGTRfpISgNOezbP6lHoOU/s320/photo-766374.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5312789788352962994\" />\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-766374.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5312789788352962994\" />\n\nSent from my iPhone"
     },
     {
         "file": "2009-03-11-Another-picture-of-the-girl-.md",
         "year": "2009",
         "date": "March 11, 2009",
         "title": "Another picture of the girl",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjD0SBK8GkAV3LwSv8_4a2LIDlcviYyTv8C8ypWDgRecC2gdjtZ8ZPbkiFk-c-m4xksq_yo8xQdsUNwQ2_LIlR8U0Q_lENeZH4aHZeUc5dX0mcB-zS_Iwj4QQ4lBgYTA04Z0AV1/s320/photo-764858.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5311765002864564610\" />\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-764858.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5311765002864564610\" />\n\nSent from my iPhone"
     },
     {
         "file": "2009-03-10-SaraJane.md",
         "year": "2009",
         "date": "March 10, 2009",
         "title": "SaraJane",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhtVQ5ep7Pc7hJsX_dM_3u4rJfKRLP_2BosBtCoTB9L3odxMHF83KSHoPi8llaEUAeJnpNXCwvNR8vzzzqRTNfkLdZZtuCUsyyREs8ONVlRbHLIasMTuzRfN7_kERc5Qp69g_5z/s320/photo-756778.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5311629675874473442\" />\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-756778.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5311629675874473442\" />\n\nSent from my iPhone"
     },
     {
         "file": "2009-03-04-Orange-blossoms.md",
         "year": "2009",
         "date": "March 04, 2009",
         "title": "Orange blossoms",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi1YAtcpUh34gUnYevvmQ9Bo0kfps2V5F27tcmqUxzBfQqzBhJg_Cxe3xGX81snWUh21XQLDf4GvSHNNhLEYVOLQlO4rL7130QZCVVKhyKCEkOyuGffRlsP5pq1wqdKhXJuszYB/s320/photo-703940.jpg\" border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5309431288026406786\" />\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-703940.jpg\" border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5309431288026406786\" />\n\nSent from my iPhone"
     },
     {
         "file": "2009-01-16-There-s-Phoenix--if-you-can-sp.md",
         "year": "2009",
         "date": "January 16, 2009",
         "title": "There's Phoenix, if you can spot it",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjy5qh-tSTZvWUbZGX3m0x0EqidSH1q8mBx6MxBmpudETEpvWVKddEmJhk2zA4JGtmCLHIsLDv5iQGt3YFbs-wI3dcIYGTPcK7Fod-2s14Y7OIXESzHZjtyBYA6hJRJPiCnV9hD/s320/photo-708028.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5292000182645827330\" />\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-708028.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5292000182645827330\" />\n\nSent from my iPhone"
     },
     {
         "file": "2009-01-16-Superstitions.md",
         "year": "2009",
         "date": "January 16, 2009",
         "title": "Superstitions",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhICfjZfVviH4-ECWHgFCUPSqwQKRsOqBkf3qud2118iouGJljeRPV2LgvtFdNaqlnNUcpy9WQ6rFfOrbJZu0knciwH2zY7oQV9syUNtOatXur9AS9KSlp57oeQWZv36tKvuso9/s320/photo-714269.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5292000209092868418\" />\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-714269.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5292000209092868418\" />\n\nSent from my iPhone"
     },
     {
         "file": "2008-12-31-Yep--Dangit--.md",
         "year": "2008",
         "date": "December 31, 2008",
         "title": "Yep. Dangit.",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgY8DFU8GvZPrcSd3Nleb5j3c4ROKAn41rUqqhXWssfHeNOd8hjjs8Smq1OZ46jThdBZgRY36ifme-2fppx8zqQ4jLdQxavUl2OeQYqVa-8Oy0vmZrlJCNK_hKGmmITYywdAQ9Q/s320/photo-785124.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5285803304697129362\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-785124.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5285803304697129362\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-12-24-Making-a-gingerbread-house-at-.md",
         "year": "2008",
         "date": "December 24, 2008",
         "title": "Making a gingerbread house at Nana's house",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgsTNfXzIeDRNhAZleJA7kqoIatH4Nd2rAznF1cMxBZwNny4uQI6QnH5AcNFzGhB0MQvzUR0q-H1_pPWQgiTqS2Z1K0FlCtsY83g4gEy-DBVcEkkNSQ5CYaGLAQF6OcDZu9r1hO/s320/photo-704591.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5283476799799653810\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-704591.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5283476799799653810\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-12-23-Who-needs-snow--.md",
         "year": "2008",
         "date": "December 23, 2008",
         "title": "Who needs snow?!",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjl2DUDLdVHFtCEiYbLYu9VTOU4Vec9XIEPKKGiszhjxeIe5knuHVdpOl1wgYk_rAXeS3pthEyZ2-w7zXQg0AEYcRBjGlrKWbWWM3zmu1f1cOrKXDxb0Dg-Jbprgb7VpFUjrMlN/s320/photo-714135.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5283121221283387250\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-714135.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5283121221283387250\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-12-22-All-wrapped-up.md",
         "year": "2008",
         "date": "December 22, 2008",
         "title": "All wrapped up",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhWa4nOxLIzXbu6E2tOD-zkbH4vSqbkv-Z7jYYJdiY5_0rPcBGbqCosaD6zer-FCHC-q6odh5sdyR4E9KtsI2sqFLvObbwWYC3aGbB3M-x-YNBlANBl0z33kGxbkjVTCbdjeWD2/s320/photo-740039.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5282762702593295058\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-740039.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5282762702593295058\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-12-04-Exhausted-.md",
         "year": "2008",
         "date": "December 04, 2008",
         "title": "Exhausted!",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjkRuqKsZsbNO8CJj8W5hHOAGQAIePCbj8Y-Q_P74L-Tho48QbXgYLqmZDJxvNF9h5KnmQRXqi_Ny-8Oe9WUAtvAaAyxCJx9NfgvHyUySewoUKIxY_EKNQPFVnQtg9ZJJRZkAR8/s320/photo-718446.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5276089089219838786\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-718446.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5276089089219838786\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-12-03-First-time-rolling-over-on-her.md",
         "year": "2008",
         "date": "December 03, 2008",
         "title": "First time rolling over on her own",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgaQZMh9NjLCGqBqLdlwESEXJe718wW6ATbkQyiLthcA7YAOLU3W6SaXzbE3rgeiLMqUsugdcvk28fn7_Cw8zAfDw05d1MR6_gJ9yLZ0kbpuIPTReHUyurqMu2ZF4aEf8XOEx1Y/s320/photo-720085.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5275690954941216194\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-720085.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5275690954941216194\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-11-30-Lights.md",
         "year": "2008",
         "date": "November 30, 2008",
         "title": "Lights",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhK8tiKJFpvrUL0amJQjFvBoQCpZORkzhniawdEQfPSykwdUeyUlWqAjLiTwlhULf1cfhWPvWkJ5vIiAz6cmC0IDzPIGtY51ups1WreFLl9mqwmztiTrf_v6p078kYzM6A0BaAt/s320/photo-726592.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5274303275047654194\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-726592.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5274303275047654194\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-11-26-Time-to-meet-Santa-.md",
         "year": "2008",
         "date": "November 26, 2008",
         "title": "Time to meet Santa!",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEieYbzWg7-5GjaEj-qdadbn6ZSSENVsLY2tdUz-wYkeu_O_Go56CTwuTPs7Xg5UEvKb_N54mAkhVBomTM5ySdwblK_XyAOc4s2CsqkfEh6MyOPoGScliWEVrxmQGOWohQ_gaSA6/s320/photo-733301.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5273062059684696034\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-733301.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5273062059684696034\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-11-17-I-can-hold-my-own-bottle--than.md",
         "year": "2008",
         "date": "November 17, 2008",
         "title": "I can hold my own bottle, thank you",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEig8aA-3VDK1MCyGwyFLdnUehz-WD_sc-VtcbGEMId3B2wPhtG0-SUt1S2VswFNdh-ljQMRog2C5eTnxW51Mjx8yrYC1DndiFa5kJ1f1OtaUDKhoq1e7ALqRKyWuDTq2X2WJvGw/s320/photo-764442.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5269741326638066626\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-764442.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5269741326638066626\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-11-15-Just---watching-Nascar.md",
         "year": "2008",
         "date": "November 15, 2008",
         "title": "Just...watching Nascar",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjsVGsLFMnTNfK4p3y7aIzWGICn8VScubLy17MEu9t86cOxhT31wIacdYH_AHYyHzBPcA_dFgHFF8WY7xlKXQQ7q8UzHro2LZjiPvpO34UL8AUmr-MsllQ-SNEGB3t1lS2W93EV/s320/photo-767927.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5268989721504858466\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-767927.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5268989721504858466\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-11-13-SaraJane-loves-her-Red-Dog.md",
         "year": "2008",
         "date": "November 13, 2008",
         "title": "SaraJane loves her Red Dog",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiPIGLE9yP8rGxBrMMPaD8WZcqDpSFB-BLi2yiG4wCM4g1B4ACErW-xbFoMpcuTkJmqspYWdDr-gpf0Jkf_b0SGksf7-OueGCPugyAdqqB4_ZT9a3UZyJHKrPBr78zAFQWtGZ23/s320/photo-711199.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5268222827662564530\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-711199.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5268222827662564530\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-11-06-Got-us-a-van--Deal-with-it--cr.md",
         "year": "2008",
         "date": "November 06, 2008",
         "title": "Got us a van. Deal with it, critics.",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEivvdzMH8j4Xe3vcPAngCKUk0KbRVBTdGh4RK1-WsJXjosCGybFelFi1TUX0kzWqvzGp8DJoG9BIpybt_ZxPp9E0YUlapxkzsoAkU4xeRs7oysfePyEmCECTkt_nbiPJrY69GcB/s320/photo-738940.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5265615043480765426\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-738940.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5265615043480765426\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-11-04-How-s-that-thumb-.md",
         "year": "2008",
         "date": "November 04, 2008",
         "title": "How's that thumb?",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj9xBb4xuwupVvOsqUhWSzhcK9qO2ZofIkLB_jvVNFtR3GMZF-7tGUdrVj4X77WLfe3XlLZuj-bFMq_097rKTvqP5EvuAS5HIGgcP5zotd4wDdNHaNFX48DI_gpossh9Sst18kA/s320/photo-722608.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5264591047641423730\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-722608.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5264591047641423730\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-10-30-In-Sumner-s-class.md",
         "year": "2008",
         "date": "October 30, 2008",
         "title": "In Sumner's class",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjx27A7TJPfa01Rkc6msQPYs6dDQQRUDCIwR3bL7OMACzITf2uMqDQyNRl1Z_pC-KHHKmSE7yC-GXv9UKX6-rLIQFJFrxjbsgpv4Qo_rre0q6MCdIhkE6TbfK1Lc2ZB0jLwi9Xe/s320/photo-707710.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5263002709173985138\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-707710.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5263002709173985138\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-10-23-Salt-and-the-silly-boy-.md",
         "year": "2008",
         "date": "October 23, 2008",
         "title": "Salt and the silly boy",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhScsFIoM6MrNFlIlhZhZ2fby0kDjegtWJGmAB_29a8NsHdyK1SZZkG1bTJxas8VdAZQhd4pQIIV454u5-TqNCec86YqhWKIzGvxx3eWygbrAGHUTnbWKUBikN7Xxe1Zq9w_IjD/s320/photo-763006.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5260417805745542242\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-763006.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5260417805745542242\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-10-09-Those-eyes-.md",
         "year": "2008",
         "date": "October 09, 2008",
         "title": "Those eyes!",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjGJlenVCa-mYYEStczNf-zgKXIJTvU68PNaqXpLwVYqkAqWhou3Ayy_PvsizGTEKYg-UIXLI5v6FFuv_lIw9TWUvxZ3VnljXoS9bQs03pDsPH5Dp8BHGxpi_Xm5UuIouV-gXeM/s320/IMG_3352-736728.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5255288640316907346\" />"
+        "body": "<img src=\"images/archive/IMG_3352-736728.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5255288640316907346\" />"
     },
     {
         "file": "2008-10-09-Hello.md",
         "year": "2008",
         "date": "October 09, 2008",
         "title": "Hello",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgRxo7IRBeTI1xqMhsowdEH5eHLKI2VmR-Pp6dstKb4TXYmRY3B_DvF-ZD_pkCBEiLiszIG-CyXu5yWltiTEsaickPXbyeVGbQy0jJVRT80S04ZqiqVqHTNRhgzaA76IoYXyy7r/s320/photo-793975.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5255283735523280674\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-793975.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5255283735523280674\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-10-03-Daddy--Sumner-and-SaraJane-gho.md",
         "year": "2008",
         "date": "October 03, 2008",
         "title": "Daddy, Sumner and SaraJane ghosts (and mommy's at work)",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjCt3vAMH_rk7eBuC7ENfHT2MXwowifmp13KoF2N86AZH-wzuEcaGhuQZswU2ZJrK0lSXFyWfxfzm-I5lOsXng3AeVEj-lKTXX87DEYW6vTCWPCY-4F7bhu3M16Az28zP0pdfSP/s320/photo-713067.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5252780277589936450\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-713067.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5252780277589936450\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-09-30-9-30-2008.md",
@@ -2231,203 +2237,203 @@ const wayback_raw_dump = [
         "year": "2008",
         "date": "September 28, 2008",
         "title": "Happy baby",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgvo8fh9utcbU9yi95XQLlXy8BQX9YrGHZZhw5W7gxI5BcPmmmEwlTyViPxO2krAEEr679z1JyrISZVKTh42mj9R6r_jUgBFAkzcLn-8gxeM11abhs_R-9MCNTmHwldW8CjMaZB/s320/photo-708022.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5251219897559302706\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-708022.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5251219897559302706\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-09-27-A-view-from-the-hike.md",
         "year": "2008",
         "date": "September 27, 2008",
         "title": "A view from the hike",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhEiuh_4_ng7eqMrxgejNz-Lopbzw-B-bJE6YpT51xdY9D3N3poNg4YLOs9F2lx2XoQB8B2AYpKHNug-JBGjCwv8U8CowTxH-cASJHACwLDG9upvu560rwy0OyT_rR0w-1008I0/s320/photo-707932.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5250516804473791794\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-707932.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5250516804473791794\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-09-26-The-old-street.md",
         "year": "2008",
         "date": "September 26, 2008",
         "title": "The old street",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgOBCUNx4QC-1EmYjYFu5OIYkka7e1H5F_UdfClaz-XBd5YYvrjbPhyphenhyphenBXEjAQJOMgmH8ebRbde2MC0UPmkSokIaGvb8PWgPsuYtcxugznqtQcIexe05YpZpBAO0B1UmKSqHMVA5/s320/photo-796123.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5250412821347475362\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-796123.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5250412821347475362\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-09-26-The-old-school.md",
         "year": "2008",
         "date": "September 26, 2008",
         "title": "The old school",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhlihczkDdNaTOAID7FKoBodWeEFAESmbJjZNDS_UO5mZqaZzisKFxxN0-j07n0PkbvsqGFrIL3i0AJ2I5J6Hi421whxHtTuA3NBZ2GDK1hNU3kcbaAws_M9GvLPWVaHSjrYdYd/s320/photo-754136.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5250419084322698626\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-754136.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5250419084322698626\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-09-26-The-old-house-.md",
         "year": "2008",
         "date": "September 26, 2008",
         "title": "The old house",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjOeHsLVOul6el8AQGQEHNXJ-TV5lshuh_AIJnprTYel7erKU0MxtTxgBs2_1EBS2DmpZhFHs3mHcoHXicXShzxd7c7KG0U8yeQJ_vb_0uLpvqZX6Mr_9qW7xUVU6QzFl5VS1ih/s320/photo-768807.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5250413128877529826\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-768807.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5250413128877529826\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-09-26-The-old-hallways.md",
         "year": "2008",
         "date": "September 26, 2008",
         "title": "The old hallways",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjRsd0yFDMSbfAk0Co-Ujfm7EVjsPgwpAACZyDpBXwhSIxnCO_aFEKLLPYvtSHopwm9CilUn3bFoK__NiCacB-hQ6mjQI9LG0F79YRM0Cozd7CSj0fb12B6v7rvMgSUSkhnyHjI/s320/photo-749792.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5250432804824424546\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-749792.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5250432804824424546\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-09-26-The-boy-at-Mueller-Park.md",
         "year": "2008",
         "date": "September 26, 2008",
         "title": "The boy at Mueller Park",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh43Hv7lhpbOGiClRVbMzid7PnQGZbGZyX3ct8n_Nz4GWFDNNAh5q0kw4WEdMS-2yk-CEncaU1sTKnCVIN1jmtbVDCVU-DXZY0Koq8WDrlMIFSfMwu8vXNAzaRBvPBeLZpVtOPQ/s320/photo-752103.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5250441837066332642\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-752103.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5250441837066332642\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-09-26-Palm-trees-in-Bountiful-.md",
         "year": "2008",
         "date": "September 26, 2008",
         "title": "Palm trees in Bountiful?",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgV7EHZrKXHQBiPT29YKxhZEvX1YoIs_TAEhkW46GFAx8X1L7DFTIRPRv58sknYtnbjtaN0aT3P3k39QuGwv8EkGywz0yPnj6METd9I3OeRUwbrIUIb8aQNtm7mNgIy22i2AtqR/s320/photo-785770.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5250414063963044674\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-785770.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5250414063963044674\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-09-26-On-a-hike.md",
         "year": "2008",
         "date": "September 26, 2008",
         "title": "On a hike",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiQWsZSgX-am_dTZ4s34XQe4oOAkPjQV2dykNGTPVq1-q0IcjcgtReLXGrMywedFMPLcCQfUuWMfY-sE4x-yEYUwfYGqhcgVp8IBBjkSjtBm635auenb7ZnymgPu2ZwOBr6n_Rs/s320/photo-783723.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5250463016934659746\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-783723.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5250463016934659746\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-09-26-McDonalds.md",
         "year": "2008",
         "date": "September 26, 2008",
         "title": "McDonalds",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEibw_cL2l9V_WJx81X1ee1p4awkL55rp1LPiO4K9gIjPTcKmY2b8Lkvih_cOZRNcWKoQXFdUf9xGkpxel2Jt1DWLiLH2PfWYVq_9srlzIkoMeAPwTVNsaGmRC8uHbvLi_6AhJSZ/s320/photo-797142.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5250399509609173746\" />\n\nI'm sitting here with Sumner at the same McDonalds that I would visit  \n\nwhen I was his age. It looks largely the same in the dining area,  \n\nthough I am disappointed that the play area has been robbed of Mayor  \n\nMcCheese, Grimace, and the Hamburgler. It's also moved indoors, though  \n\nthat's understandable with the climate.\n\nSumner really doesn't believe me that I used to live here when I was  \n\nhis age. I'll keep trying to convince him today.\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-797142.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5250399509609173746\" />\n\nI'm sitting here with Sumner at the same McDonalds that I would visit  \n\nwhen I was his age. It looks largely the same in the dining area,  \n\nthough I am disappointed that the play area has been robbed of Mayor  \n\nMcCheese, Grimace, and the Hamburgler. It's also moved indoors, though  \n\nthat's understandable with the climate.\n\nSumner really doesn't believe me that I used to live here when I was  \n\nhis age. I'll keep trying to convince him today.\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-09-26-I-ll-miss-those-mountains.md",
         "year": "2008",
         "date": "September 26, 2008",
         "title": "I'll miss those mountains",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi2iC5v_MHefYIw-9IKEtdazcXxOOq6bnr4SG8l0laZgR85xoHkytauElIsPbxQG41qt8k_yvk0rX4rs74l6J53WiXiy_BwinxwhkziE_QtVOc9ffMt0gY2f2f-jnWrCBSDyIQ5/s320/photo-710052.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5250144447028127986\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-710052.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5250144447028127986\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-09-26-Four-kids---Target---FUN.md",
         "year": "2008",
         "date": "September 26, 2008",
         "title": "Four kids @ Target...FUN",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhpVA0RS-RsuJgYGuAJNEtOGX11-AxpMaMrrBimeDL383pK7XegHkzRfp4b9IjO6c-jJ2TXNC3Sy4WQdubAXNueETh1Zv04gA-9okpY4s93aHxNv6RhT04SR0pS2QtVX7vrUpy7/s320/photo-781450.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5250146468477173090\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-781450.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5250146468477173090\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-09-26-Colors.md",
         "year": "2008",
         "date": "September 26, 2008",
         "title": "Colors",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgVVYKDRenH5FCp6PwHXSpI2Tx9iNqpwzksSySdVHe6_-KtoFYmfJSSXU-gqywtcZFvUTgPVptcvJD72J9pPx0Y0Bbm5JET4NnCXKKmrqMALk97-fP77F4N4fz3iqjTsAcjWC47/s320/photo-729735.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5250463217018894146\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-729735.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5250463217018894146\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-09-25-Taffy-Town.md",
         "year": "2008",
         "date": "September 25, 2008",
         "title": "Taffy Town",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjymwS9cXnMaEZSMKE30QjNUeViOE5tUp-fgt7GyT4LpP5hw2_4YGfd0NpZF-6Kxy1rydxCqRmhTtw9rCNWiIymHPtmpfXCXG4Mu_f74L1afIRJtL4-MKGHC38I4rLL1uZx8Zwa/s320/photo-716376.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5250067590435714642\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-716376.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5250067590435714642\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-09-24-Sumner-s-new-haircut.md",
         "year": "2008",
         "date": "September 24, 2008",
         "title": "Sumner's new haircut",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjZw66Xvny_DGRSxCh_-h9Fgk3vJKQTi3L9aqfqUDSE5NLE6tAHGzMuVHW9p7KEEYE1aY6f9BoiBDbav8OCwLLPVXm4NPmK-NH6RQLZMYljVQq1uQsnqDea5P8cfoTWf7Um664i/s320/photo-781323.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5249672302097473602\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-781323.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5249672302097473602\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-09-22-Time-to-eat.md",
         "year": "2008",
         "date": "September 22, 2008",
         "title": "Time to eat",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhVFeNHfKQlDiECQlMNiOucx_7skhdmWvvzhQCjls8pBUn3LK-BK-VXQBSc9AZ5MagsVooOuLfWm5k2ZWA9elD1TUXtgGQJlIahEbDGXPyb7mG7uXk04EuiN2Wr7cRubTKPlVdm/s320/photo-729116.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5248966848266470354\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-729116.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5248966848266470354\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-09-21-Cold.md",
         "year": "2008",
         "date": "September 21, 2008",
         "title": "Cold",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjjGNwsu8fZ0rABfIUn7SM0Np4x1Cij4Bg1YDD-9VNsHyv7jwTrq8vA4_cViBm7_JR5Io_VZELJ1vq468_yJUN92gT1EID-M_oewVOckVzx0GFJZTEk9LlPOuVtfY6F6Q7uwyks/s320/photo-729031.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5248541215292094818\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-729031.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5248541215292094818\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-09-21-Alpine-slide-.md",
         "year": "2008",
         "date": "September 21, 2008",
         "title": "Alpine slide",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiBPnlbBpIyLalMHOcVTRC8wdXlsOCLyLt0k6QoXqKA4Jh7hGgArG2FvvWSsOwYe4r0qz_XSDh1VJxezkhHlR158_JZC94wjv7PIlfbm7wiuT9hTbjkeCrHAv_bqYpZvkeXGPZK/s320/photo-781213.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5248547023292231938\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-781213.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5248547023292231938\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-09-21-A-token-from-the-Alpine-slide.md",
         "year": "2008",
         "date": "September 21, 2008",
         "title": "A token from the Alpine slide",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhc67imHeSOAOK7UKzBQw9YepDrJo4eIsRl2iM5LmdqO60yaasXWT1I41_ZC7i5f2j2RXVTkNgbVx1vXpVkrbVfArrwqTyhI5ZjujvC5hJotYdW0ooaw6wlXKO_b-dU2ykOpPMr/s320/photo-704880.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5248550556372106930\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-704880.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5248550556372106930\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-09-21-2nd-day.md",
         "year": "2008",
         "date": "September 21, 2008",
         "title": "2nd day",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiANrSIU6q3olI6_rxPHzwcfBJL77PwzIMkQGyfEnc8MuEMd02Ix7aoJBQcCJZaYUa70dwOHH4ZczjL-jGM8skT8ndViqZ6SfuRNJHeOpM4l5MRvCn4Emua9-vqNy0EiAwe4klo/s320/photo-745592.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5248506064260356450\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-745592.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5248506064260356450\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-09-20-Oktoberfest.md",
         "year": "2008",
         "date": "September 20, 2008",
         "title": "Oktoberfest",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjgzrTtJ-KqxBvmpCt5iT3KJHLi1XVeMViKbjweP7XqhP-CiU3q4qnmEyFh0rdUhNaBQJKyLnpCjlGUc-GhWUgzMGah1aaOvjEp5vLchkS3B-FXx28aupEmhS9RKUas1duUI1nk/s320/photo-792882.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5248191876119210066\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-792882.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5248191876119210066\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-09-20-Guess-who--.md",
         "year": "2008",
         "date": "September 20, 2008",
         "title": "Guess who?!",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhy6XlKGIL05g_wps-FIHANsfFkqw461mG_re63Tooe3fPpcLIhkXeNXC-HhIB1zLIvhHjd6gX37brGV4_ZqX31XjTanGW6BPpEpIdioImLAT9TTWHpC7F3BESOO72SB5yk_qUR/s320/photo-729431.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5248192892705890546\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-729431.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5248192892705890546\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-09-20---the--Bird.md",
         "year": "2008",
         "date": "September 20, 2008",
         "title": "@ the 'Bird",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgQ9b60jFsJF9Nf90vXRBpuNEbnaGmuvhdnPjQYzT1T5WuDDD8Sh6VI35k_wXgPAobijNjBPRjmHZ8BZNM5M9JkeYTC4l_WdjtHAKidqef1SWKNTm-MFWUpX42LAmOQLlPCl0pB/s320/photo-759009.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5248179278775754306\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-759009.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5248179278775754306\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-09-19-Whatcha-lookin--at-.md",
         "year": "2008",
         "date": "September 19, 2008",
         "title": "Whatcha lookin' at?",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhW6IkfdvKkXNpRRW3n2DfvydpbNNjNlbvD46LWYxndsPrIIq1z5w9Ibvdt1V5xwjZsHmCurxuw81AztgM0tFNf7AL7-_dIWLzMqFuru_kU2bwbIjJAsQ9CRG7ZopHTqMdIMJ3_/s320/photo-750132.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5247527692765194146\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-750132.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5247527692765194146\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-09-19-The-three-amigos--together-aga.md",
         "year": "2008",
         "date": "September 19, 2008",
         "title": "The three amigos, together again",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjOJhlMrMSJISySuOLthbMG5XRhHND4sXI_qQdOAD7-EIPKyYyAUUmO6nyXnzQBdsG_goelBrBG5G1QcBSDhncp0yYA174JMsEWHw9BOjVmbEm1E12GTA_LVszZSOsxQZ1Bun7z/s320/photo-714292.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5247861257469180290\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-714292.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5247861257469180290\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-09-19-SaraJane-meets-her-cousin--Noa.md",
         "year": "2008",
         "date": "September 19, 2008",
         "title": "SaraJane meets her cousin, Noah",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiPgBt4e3QVfBi31JGWqrA58oOuXmblTP3aq5230FkGxtAiGxBK-z9dAejMD9AAMHFAOeMxekRseWOMpv68yDiv1VC0B56Gu8DX_RjpAoT_HXlxZCk-DcGiMCkSvqLce3pueBx1/s320/photo-778186.jpg\" border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5247836194160402594\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-778186.jpg\" border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5247836194160402594\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-09-12-Out-for-the-night.md",
         "year": "2008",
         "date": "September 12, 2008",
         "title": "Out for the night",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj8tLPWE2j2lElJBNghjRJLeBgtetKvz3_SE-Qhp-4jjk29Z0Tk1SKa0gfsFvxB85EaEk45zWG_Q4da1D_qogrAlFpabsENlXat16HwC62SbNYJ1X24AZ3SLoCkCCju7y5ZUm_y/s320/photo-753880.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5244973061232185458\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-753880.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5244973061232185458\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-09-12-Dust-storm.md",
         "year": "2008",
         "date": "September 12, 2008",
         "title": "Dust storm",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhgn9U0awZJJlTtfw8jaWYf63mz605PD4pLXA0gneSmR0N0Ou6FUBMPNXOky63uEk4LEdjx8uamHskMC0MmKqXmXxUtwqPpLZUNjpyFJ5SM5dFrrQPFTZIRppk0M9HVL3zoUv_R/s320/photo-763304.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5244944754984850898\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-763304.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5244944754984850898\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-09-11-Sunset.md",
         "year": "2008",
         "date": "September 11, 2008",
         "title": "Sunset",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjhV6yRd6l7OXBQB89KtKduCfpo8B-yWaMQ_tRii0s3a40VybpniEBsbvC0kC1klFuwtbZ4AeZlDQXDX1cvPUkYArJrAghOVm1wMUXPaaPijxZckaxRun6asUYgq6pQgYj2oFjk/s320/photo-794164.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5244578528582688674\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-794164.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5244578528582688674\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-09-10-Thoughts-about-iTunes-8-0.md",
@@ -2448,28 +2454,28 @@ const wayback_raw_dump = [
         "year": "2008",
         "date": "September 08, 2008",
         "title": "Out for a bit of a stroll on Sunday evening",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgJ9BdEwiZHzOcg6aE01kR_uOcFcFIT0bMzfxwUpc3a17_Y_3eL3DYkKUG8vfHI04-uMCvi_MJ_yHNCBmRV0_Obz2vkksa_-VpsbGn9BCUJl4O3O-pzwfSteDE8cRD99aLx8PJV/s320/photo-744279.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5243757117300031314\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-744279.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5243757117300031314\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-09-08-No-denying-the-cuteness.md",
         "year": "2008",
         "date": "September 08, 2008",
         "title": "No denying the cuteness",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi55shHhURGXJd9y7mF6dYfVHKKYzv8MZ2u7lqu6u8ErxNaIHJqEL8j-ilrTZ1H3NqrbF648RocfMYnO_x-wOanrdaKS5uIq6PPHQfXK8jjb2Ygucv91Dcn3HDixmAiN_IJZuME/s320/photo-710286.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5243757828228850610\" />\n\nShe just is.\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-710286.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5243757828228850610\" />\n\nShe just is.\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-09-06-Chubby-cheeks-magee.md",
         "year": "2008",
         "date": "September 06, 2008",
         "title": "Chubby cheeks magee",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhOU7msiDVthH7PveEq69bo90mb5gKO-jdLP_z1Ls4QfmCWQwfPRCd4WFk54qfEM1-2GcJ04NwdaY8UoNLmHQ6NwTsxmUlerGN9he3bB6IYcA0pLcOrgLHmta9n-00GMRZnJc5C/s320/photo-724702.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5242739553135883234\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-724702.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5242739553135883234\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-09-05-You-think-you-ve-seen-everythi.md",
         "year": "2008",
         "date": "September 05, 2008",
         "title": "You think you've seen everything...",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh9_IMd0wlLbAKt5rA4vNXE9Y4E0JQpQ0WlXyMOzhGvU5c3PHmMtd2wDRqPnN1xlTIIUbvhiuxHuhC_6S20Qpsu6oIgAlnb-A-2TMlA5Vq6FQ1wYziDJng3f0HenNghDIBbIetO/s320/photo-749558.jpg\" border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5242690695187372498\" />\n\nA friend of mine sent me this picture of a road side diner in Page,  AZ. I must visit next time I drive through.\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-749558.jpg\" border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5242690695187372498\" />\n\nA friend of mine sent me this picture of a road side diner in Page,  AZ. I must visit next time I drive through.\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-08-29-Incredible-Storm.md",
@@ -2483,7 +2489,7 @@ const wayback_raw_dump = [
         "year": "2008",
         "date": "August 28, 2008",
         "title": "Kids eat free at Rainforest Cafe!",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifsdu43n4bGXjp8OhI16U2uipVcdhhxez9urACGrm-evEsO_Ozehaxt_r6GEJf8rD9szDBa9zYS5rjrnHS1IHosXu9905TtAeFHnoDjho5aCNjexW9QZamdUZUY1NgE6qCwjKL/s320/photo-761209.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5239410250718554354\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-761209.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5239410250718554354\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-08-24-A-thought.md",
@@ -2497,280 +2503,280 @@ const wayback_raw_dump = [
         "year": "2008",
         "date": "August 23, 2008",
         "title": "Way ready for Halloween",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg0LeUKcs8c-SGL2Ucb2fwiOoDFGy4xTXjFkqZbHtViexK1CPigcPGS3PgOd8684_8r5nWEu0ZRB9NFNbbUcy6CpVZlnqxR2VsV1Bh5MOTWBR7TdmwRSPdvFxanZhqpiqj7wUq6/s320/photo-743877.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5237860979183793570\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-743877.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5237860979183793570\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-08-07-Big-brother--helping-out.md",
         "year": "2008",
         "date": "August 07, 2008",
         "title": "Big brother, helping out",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjfvlhAmJo-Uzvc9jHqfMzPH5oWUO31PDa9BsxTc0w1QfvuZQ60-aqwMu0Zkb0nS8ZxLILOzUWrrgcCOQW2PX8MwHYe0pGh_2HUxY6knuqEV5eGI4afc8NP5kjhMmTV60kNDUK1/s320/photo-721427.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5231869408386446002\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-721427.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5231869408386446002\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-08-05-Fast-asleep.md",
         "year": "2008",
         "date": "August 05, 2008",
         "title": "Fast asleep",
-        "body": "<img alt=\"\" border=\"0\" height=\"640\" id=\"BLOGGER_PHOTO_ID_5255288892283983170\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjiQQr8DW6dwj73W9r6ubxT-s8sPZHkMI7bclt8v6QhLIhy4LvekwpEKea1JdumVSpLDsNPZjQaZ6idPWkTRqb3247njHkoaYBu4Af9oyyIFuHqb4sRKkIx5vHij_K_hns7GkPj/w480-h640/IMG_3357-794980.jpg\" width=\"480\" />"
+        "body": "<img alt=\"\" border=\"0\" height=\"640\" id=\"BLOGGER_PHOTO_ID_5255288892283983170\" src=\"images/archive/IMG_3357-794980.jpg\" width=\"480\" />"
     },
     {
         "file": "2008-08-03-Sleeping-through-church.md",
         "year": "2008",
         "date": "August 03, 2008",
         "title": "Sleeping through church",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEikmkRBrkWkpINv2mnn6-L0Vg0X-wZq3rcb1ILuq5mONuOuqpl5zw-yhGSI7P9z1sq5SXU4tyvaMEuISUttrfpVyb3GINpKh0Eo_n2s2aH1GNuZXMUUTToGCU_piYwyPtdI4Cfp/s320/photo-785220.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5230371598917248034\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-785220.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5230371598917248034\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-08-02-You-d-forgive-her-too-for-keep.md",
         "year": "2008",
         "date": "August 02, 2008",
         "title": "You'd forgive her too for keeping you up at night",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgZbZYCelPv_8ApySiZcPeQjq3JHyoe5pVdWIumZTNm3wSj-TuJQ4sxEX8mhwlUBYNwxQ_emkcLVPkEibEjo1oSQZqt8jDwCuh9i7Z56c_b9YZ23AvkMwTGOjoQ6paMqmEAwb6b/s320/photo-750515.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5229974163258516994\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-750515.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5229974163258516994\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-08-02-I-ll-sing-you-a-song-for-free.md",
         "year": "2008",
         "date": "August 02, 2008",
         "title": "I'll sing you a song for free",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh67zKFY4kZ8OAP8p4R8MDxLJlXazW2MDa28uAI-OazQba1cRuKPszTmD2XTLDDp0rW5Vr-N5zZORF-f7kzGHsh0qhK-cllo8N_Mo5FONKt78WLbTF21WOqRMrF1KNRfRM_xUSH/s320/photo-753489.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5230001231328419506\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-753489.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5230001231328419506\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-07-29-I-totally-approve-of-this--Now.md",
         "year": "2008",
         "date": "July 29, 2008",
         "title": "I totally approve of this. Now, it's Target's turn.",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg5taJ0dN8f8wTosDGrzfiki5cisMRLXoCUs0ec7yG-kV8tF4_afITu1aJjaYwdDkeFvSMtxX2dSwi3m5mNzy2MnX7115jXWth1L8RVJ5aSEAYSIYHp3KWLL676STlX_XAt6gdt/s320/photo-791567.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5228535955141921490\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-791567.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5228535955141921490\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-07-28-Sumner-s-new-haircut.md",
         "year": "2008",
         "date": "July 28, 2008",
         "title": "Sumner's new haircut",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhSSYyns7XThN8vGN9_-u3YvMUradpRoFRkJcj4_uEwlcZQOy3HkSLLXM1YB8iVD5VM_KTAdIgmvlcsdBEWQnWttdZ_81QTRrg0W5iHUS0CczhA30J-WHzlFGsE0qq2MW3V1LL6/s320/photo-772454.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5227891625156881426\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-772454.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5227891625156881426\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-07-28-Mommy-s-old-phone-serves-a-new.md",
         "year": "2008",
         "date": "July 28, 2008",
         "title": "Mommy's old phone serves a new purpose",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh1O39f3rWWMkC1ysDmWRcg7wgF6Bxleus6YX5VaF4IkNkUmsHe58T16itNMFqvvjA1r5N_C73XNkL3GpCjDDAdmVD-UjLJbHYhcbERf6TvrKCyBVxbDXA0FrnimJZlAgXbYS9l/s320/photo-741510.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5227906957282250674\" />\n\nRD Burningham\n\nSent from my iPhoneAnd that's to entertain Sumner."
+        "body": "<img src=\"images/archive/photo-741510.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5227906957282250674\" />\n\nRD Burningham\n\nSent from my iPhoneAnd that's to entertain Sumner."
     },
     {
         "file": "2008-07-28-All-tuckered-out-after-a-long-.md",
         "year": "2008",
         "date": "July 28, 2008",
         "title": "All tuckered out after a long day",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg811VslWFNVCLVaZaJIxRpqRrslwtob0GmRRCrPX6rtANDcZaWaOOcw3DF-5r7V3iEETghaqnFu5oGHQ9BTr9YCnaaV3-jCYKzLUOUJLHksKm68EIg1hI1YIRtUgONSHppBYHA/s320/photo-714809.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5227905982656483666\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-714809.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5227905982656483666\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-07-27-Look-at-how-much-weight-I-ve-g.md",
         "year": "2008",
         "date": "July 27, 2008",
         "title": "Look at how much weight I've gained!",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgZPf4ksClNSGYbIDBa2qNiuVBmPZtUkv5iJkDVwDgC_1uJxbzvDhBXoUYSnYtbvbEqXOwh6uS85O5BgW6WaC5_mPwSA51aO5ZwUpdp0Gioebscaxwh3UKAi6hk8mdxyWrt5nnb/s320/photo-744742.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5227778550405853234\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-744742.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5227778550405853234\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-07-25-Taking-a-well-deserved-break.md",
         "year": "2008",
         "date": "July 25, 2008",
         "title": "Taking a well deserved break",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh1A4mDrVlypX5N7nfiUPoMfbidxMhYSc7q6-m6nm-l4c-Dc_hyNDYZpdZ425OUxePWm4bA7-m1YJwN6LjT5mARaFyO8AAAcSAAvvsadEHW-Ep6OzB8JJaE6MUHOQACBpinAQvj/s320/photo-798765.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5227000531786529250\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-798765.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5227000531786529250\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-07-21-We-think-she-s-pert-cute.md",
         "year": "2008",
         "date": "July 21, 2008",
         "title": "We think she's pert cute",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEig8mAVIg41d_oyc9GO7N1RYpirkvojQpn21T_9_9Wf3Sn-9QPEuLySAVn0-UqZkw9Se1wCDe7NFCYLHKqmb0W1nU2MJIv-_xuDC75mFHsnfaqlxw0txIT_kWtxXZ6UJDU1jygn/s320/photo-754643.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5225555515138069618\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-754643.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5225555515138069618\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-07-21-Got-me-some-new-shoes.md",
         "year": "2008",
         "date": "July 21, 2008",
         "title": "Got me some new shoes",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi9wI0qNFkfkoCZPu-WvRFN3f6lgm0mbFdjgEPrUyP0wPFj6FodyVpYvLh8R-2HdgzMT-VJnmaxl8JaxpIdZOQozbhtKM-_rBWft_w61oRaEkMzAWNoQfOteTIYXKmCWyYkSVxl/s320/photo-788968.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5225529467142796210\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-788968.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5225529467142796210\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-07-21-Asleep-at-SunSplash.md",
         "year": "2008",
         "date": "July 21, 2008",
         "title": "Asleep at SunSplash",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi9BZzSRhpyOJ4RnyfhBzqxwAsSF5UwFbaNFqkXcRPAXy9_G4GzncJ7Qs_5ojZVNLB7clpt_gZoeGNJKhUWHghl8NowUdIWqXIiUG0cBhqlITx9Z3Bu_1VUuwNaAOg-OF4qhq0C/s320/photo-756191.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5225621240302271682\" />\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-756191.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5225621240302271682\" />\n\nSent from my iPhone"
     },
     {
         "file": "2008-07-19-At-the-cabin.md",
         "year": "2008",
         "date": "July 19, 2008",
         "title": "At the cabin",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh2Gb14lQaYe7ZjIAEfH_v0dmcT-l9igc5RhbVBrVu8AvZknE_MjNWfeA4d709Fj9PSrRCHG-xhh9on4VxAaOpTlYi07SS2bHzr7K6NOuhcoKXx-vGIU3bsfsz6BV7WzpF2Gs-Z/s320/photo-747258.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5224877742802341634\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-747258.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5224877742802341634\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-07-17-Daughter--you-got-an-iPhone-on.md",
         "year": "2008",
         "date": "July 17, 2008",
         "title": "Daughter, you got an iPhone on yo' back?!",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhQ0_j5tWpjxJkWj9ScmieIytkx1nluk52PePxo4c7fcfKBM8LBdDymuzGot_UNkT-9m_1vPqTjwOyA34LSSwDhu1F4leJXGzKi0RxDk1E6uyfeWV_WYFJHR-hXIDIxDiA6tP9N/s320/photo-753360.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5223835379643211314\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-753360.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5223835379643211314\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-07-17-A-hand-drawn-picture-of-Dad--b.md",
         "year": "2008",
         "date": "July 17, 2008",
         "title": "A hand drawn picture of Dad, by Sumner",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhcTzZ1aeJtbZ9lb-_olAsT7bsPOLVceB8IdhL5qctiPB8BJOPbo1gmUpBNKvW8fn681_RE9_cnqsVjsGi69f2rmx-bmz3zs-SsHqs4E_Lh1PTc5trkt4uka5qlkpuqNe3-M3DI/s320/photo-781952.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5224067003272793026\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-781952.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5224067003272793026\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-07-13-Sumner-and-SaraJane.md",
         "year": "2008",
         "date": "July 13, 2008",
         "title": "Sumner and SaraJane",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjT_nPBQHQGwVyye3qZ8zr3zKyXRUVHoiIoG6v8O6gD4ggkhOI8fU_k-FRKrY9N4D-9rDGzcciLzFSWCy5hy6LtUmy00OTw4H7ZP3I9PJKZHfG8rEWb8tVujyiSAAChYTaQgoTs/s320/photo-776255.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5222356719086449122\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-776255.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5222356719086449122\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-07-13-Content-to-just-suck-on-her-ha.md",
         "year": "2008",
         "date": "July 13, 2008",
         "title": "Content to just suck on her hand...",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgft-JeKl8yReJEya6vyDLdIrrDsSOijLhrDRRFU-zhDMUf7PDoD4BDLZ8pGRzb8K-LP3VD8KGcgaeEG37XF2WTHtIhSZqg3fxHC2umcClY6DwXobkpy-xXjNxG5K6jXOGIYxvq/s320/photo-778116.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5222360593924375362\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-778116.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5222360593924375362\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-07-13-All-ready-for-church-.md",
         "year": "2008",
         "date": "July 13, 2008",
         "title": "All ready for church!",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh4YUT6Q5k7LPzBtwZPoiofmGeGDuigD-U-hdHJNCfAhZSPYtBNgMPt_FQ1V_t3t0IrFvsiYMDBUcgvH6a8PY012KnYSB6byzVokXrpqiO3NGxgFV7X0fpDZf88eZZAPaDiYr7v/s320/photo-786207.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5222551326137167330\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-786207.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5222551326137167330\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-07-13-A-little-Mario-Bros-with-Sumne.md",
         "year": "2008",
         "date": "July 13, 2008",
         "title": "A little Mario Bros with Sumner",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgAwhWy2kdtgouKK8nA6d63xhH5N8zznRgbXUXT7ODBDIj_nUOWxERz4tqSBrPFUQ7yFBv9d23XiyBSR7OHtzvAcCfNoRmUZHeEpYQtDXZdlPNleM8CdytCblpGlrrT00PHQzIe/s320/photo-726660.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5222645987061069954\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-726660.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5222645987061069954\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-07-12-Sleeping-peacefully.md",
         "year": "2008",
         "date": "July 12, 2008",
         "title": "Sleeping peacefully",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgylPYOpuhL3__7VyGNR9TE60FfoqHK3-Tzj1x81AfFSJhBJE1WfPnTCABoH-Tp_4_LQttmyXU555XXKBI2n7uzMMVtvjrvzK6xF_xelgQ56ebpqg3AEjhADR-ZGZ0wP_NNzyA5/s320/photo-767733.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5222181877917534690\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-767733.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5222181877917534690\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-07-12-Aunt-Janey-and-SaraJaney.md",
         "year": "2008",
         "date": "July 12, 2008",
         "title": "Aunt Janey and SaraJaney",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgwL39VJWthfdukNys2ikkHGvYoW3Muqg8Iacm3nrvsbNcqp5GFndQxTP0Y_gx8aDdc55ScUc75xfsWpzeuOp2uPXn7xPBfkrh-e6sunWRG9j53o8fzrJz4hUBPBNlEbm-tDi-c/s320/photo-772091.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5222220550178817202\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-772091.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5222220550178817202\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-07-11-What-a-great-big-brother.md",
         "year": "2008",
         "date": "July 11, 2008",
         "title": "What a great big brother",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEisWJNGi9FdLCDn8_jm4l_HshwchojQWszDeQx6F5JH98Fo_o476bFD2Ij5UmeLrFQuLU9DO8j4XNTkMCXhilRO-_MnChh7pUbHe8OX5LahLw4H7RbxePfUJJNQKvSQCnK_xxxb/s320/photo-745899.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5221606264210479218\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-745899.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5221606264210479218\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-07-11-All-full-after-dinner.md",
         "year": "2008",
         "date": "July 11, 2008",
         "title": "All full after dinner",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgCWlsSscpy_iuWxNHlNhskbiHz7jljzsQJ2zdzuEzdorrCbDjsB0Kc-mBBL-Of-ra-BLSeXab0lup402X-KeB2LaIJC1Ouuo0JBpvPAlRpP9yCcn87uD-co36QWMnMcj0ve2DH/s320/photo-739902.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5221603662690328706\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-739902.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5221603662690328706\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-07-10-Hooray-for-iPhone-2-0-.md",
         "year": "2008",
         "date": "July 10, 2008",
         "title": "Hooray for iPhone 2.0!",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi1wVFHNH7_iKmCA5UkCyJgeHCivk1C0rgTLWAOYWZqhLVYzG_QUcLFYf-2mzzzhAlRUaV5UhHWoe7UBs7VDzYuQtmPSe1tB2JxqrKEwBl5FgcxltKCgI6MJ8Cuk6W99sGcGzZP/s320/photo-781550.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5221533397864579202\" />\n\nRD Burningham\n\nSent from my iPhone"
+        "body": "<img src=\"images/archive/photo-781550.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5221533397864579202\" />\n\nRD Burningham\n\nSent from my iPhone"
     },
     {
         "file": "2008-07-09-Tummy-time-with-dad.md",
         "year": "2008",
         "date": "July 09, 2008",
         "title": "Tummy time with dad",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEin2h3e_HDxYs5MfsujlRPqlYacYj_iqDIogkEYtHWBWzVo_3KulIyXOSbSm6uzTuM9-ZuO_Usk7v37MMRpkA53DZc6W2wkkDma44apMGFnOg422GOsc7H9ht63FLZ58S8neQ_w/s320/photo-782856.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5221086725516216898\" />"
+        "body": "<img src=\"images/archive/photo-782856.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5221086725516216898\" />"
     },
     {
         "file": "2008-07-09-First-smile-for-the-camera-.md",
         "year": "2008",
         "date": "July 09, 2008",
         "title": "First smile for the camera!",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhuHDLKdw_o3MYjUH93dDsbsY0IVEg4F3sttt1nxe40wh2ztcjfdGGHdF0hpWc-vzy_VdWdlocs_920u5BeWw-RMw0PwpNmvf4Ipn6GUe_zdTN-M-DIOsK_UY6FXEzXF5f2hlE5/s320/photo-798330.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5220841122110754626\" />\nJenna has mad photography skills. Also Mario skills, enchilada skills,  \netc..."
+        "body": "<img src=\"images/archive/photo-798330.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5220841122110754626\" />\nJenna has mad photography skills. Also Mario skills, enchilada skills,  \netc..."
     },
     {
         "file": "2008-07-08-I-think-Sumner-can-take-him.md",
         "year": "2008",
         "date": "July 08, 2008",
         "title": "I think Sumner can take him",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjlTwj5U5KDsDcrfcdGbeL13VUowUJ9BjulSwiodOfHnvJAcVasAktbt7HlzVG4TCM_a4nFN3V-iUofGn38EQ5Q8uxr9e3Ny9aezg3BvLFw3D3qolWXoDBIFt1yCqa60v1Lb_LT/s320/photo-755299.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5220710367272307042\" />"
+        "body": "<img src=\"images/archive/photo-755299.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5220710367272307042\" />"
     },
     {
         "file": "2008-07-07-Just-layin--in-my-big-brother-.md",
         "year": "2008",
         "date": "July 07, 2008",
         "title": "Just layin' in my big brother's swing...",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj6UYM-bTYmnOZlnPEtVAcu4rou8iuyuw45Rim5A4xNpECVG3k2Fk9rCgO174h4z5kG7fvofIu9IXcI8eBEsRXRnuTzODcQ7X9MDnGZTI2IJ5hDXvHRKxtolgdvPeWwvl2SP6m2/s320/photo-740087.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5220400638842528754\" />"
+        "body": "<img src=\"images/archive/photo-740087.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5220400638842528754\" />"
     },
     {
         "file": "2008-07-06-Mr--Helper.md",
         "year": "2008",
         "date": "July 06, 2008",
         "title": "Mr. Helper",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjIjGxrYttJk1aPWdBAf__kSUlbAFYCjBRBl5V9tyMMlvcv5W2i5ztnxoGht8_kdSCiWvgzNzfTTRAJbjVPe10aWCAomFnTLUlfschMxFYCLkP7q0U4ETZbtFkiu5_uYrzjKxUl/s320/photo-747627.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5219725926705507794\" />"
+        "body": "<img src=\"images/archive/photo-747627.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5219725926705507794\" />"
     },
     {
         "file": "2008-07-06-Home--safe-and-sound-.md",
         "year": "2008",
         "date": "July 06, 2008",
         "title": "Home, safe and sound!",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjTwfCwLCfOgvf_-Tl4bfTMH_BWgDdEscjg42oF4Q-Kpdk83h9gps1K6jjia4sNTwci7jBrXWSwmOIDVjE2Y46eBf-05CZutYT34NPEpc5xLx_8OS_Ztqkyf-jifJ-CWT-SbSWG/s320/photo-715368.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5219967596826335650\" />"
+        "body": "<img src=\"images/archive/photo-715368.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5219967596826335650\" />"
     },
     {
         "file": "2008-07-06-Finally--a-little-sister-.md",
         "year": "2008",
         "date": "July 06, 2008",
         "title": "Finally, a little sister!",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEimoZ0nMX8Ptw30RIngz2RlTUcWVOO3L0q-7jWxySqscFajw8x2Mqr0z5R07OXqAQNNTTedAoE_lazi5F0E4tXIRwj8cuJ9t-6vvMacGp-w-jqR8SoTG5WfGiaY_hpAKORDtXBA/s320/photo-777070.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5219702865613110018\" />"
+        "body": "<img src=\"images/archive/photo-777070.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5219702865613110018\" />"
     },
     {
         "file": "2008-07-06-Doesn-t-she-look-a-little-slee.md",
         "year": "2008",
         "date": "July 06, 2008",
         "title": "Doesn't she look a little sleepy?",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjThbo63I8BvgvuxEMW5jLkZYf8s6pJNS-SOHTd3BxmTPaOerGxhOSaAjCIj-0tx2JXGtThNzrHLiGwnYVUuZf_EsduEPay7qT9bPuAAEnV-NwbmUkzP1sYVpyFL4cZiEbU9v6D/s320/photo-769039.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5220034832414732162\" />\nWho? Both. =)"
+        "body": "<img src=\"images/archive/photo-769039.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5220034832414732162\" />\nWho? Both. =)"
     },
     {
         "file": "2008-07-06-Brother-and-sister.md",
         "year": "2008",
         "date": "July 06, 2008",
         "title": "Brother and sister",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjCvVkoZa-yLjaHeeCgmJhS4wCOFjvCraEh5Kmcs9TyvRyulVWr0zBdcjRDhq8i4dRDI-G1kZmPr8TlHrxLKnWJ-8TxMDSRuSEXL8tS_9joOmAtNT9ahocbGmMMMwhFDpNO4HNL/s320/photo-716082.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5219708612806701538\" />\nNever have I seen him more excited."
+        "body": "<img src=\"images/archive/photo-716082.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5219708612806701538\" />\nNever have I seen him more excited."
     },
     {
         "file": "2008-07-05-SaraJane---Born-on-the-Fourth-.md",
         "year": "2008",
         "date": "July 05, 2008",
         "title": "SaraJane - Born on the Fourth of July!",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi9tRgxTRjojAOOGobtbh3KKotgBI3ndbMQT3QY72oSg5mu_HK64U8BvSgMHNWHhOwkCGipnNgVG_vyuFk4q7PZKFUragV3jfLRJjKBl58ks_55h1QmNxz1_B0VSMm5MaJL9mFs/s320/photo-737028.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5219561386389098162\" />"
+        "body": "<img src=\"images/archive/photo-737028.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5219561386389098162\" />"
     },
     {
         "file": "2008-07-04-Off-the-charts.md",
         "year": "2008",
         "date": "July 04, 2008",
         "title": "Off the charts",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi-c0gm-i8eXJa9Zv0wM3-chMPwBN3NrdrkQTkil9V4xSeHXhyphenhyphenMdGJy5QlIkDLzTmZDxTtERrI8cZyemYNEl4ii9lgINX1NxrqXM1anQdtaKy2leW63NEbTQtFcF-uXph-RmeW6/s320/photo-729335.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5219161063463739730\" />\n:)"
+        "body": "<img src=\"images/archive/photo-729335.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5219161063463739730\" />\n:)"
     },
     {
         "file": "2008-06-26-A-pleasant-surprise.md",
         "year": "2008",
         "date": "June 26, 2008",
         "title": "A pleasant surprise",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhj4Hj3IViraL1Z0Ztdg1RZpwYlukzKTVY0Pl-U8MlKo-aBof4Ra38MVJu_OZLR6MVW-aaivwWfsn31BsgQ0rFiNc_PYJj2T5HFpEgwahInzKeQtHJqbsfrTE45mkYtpQgWDldG/s320/photo-743914.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5216192444265136866\" />\nWe were greeted this afternoon by a very brief rainstorm. Sumner  \ninsisted upon getting his umbrella."
+        "body": "<img src=\"images/archive/photo-743914.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5216192444265136866\" />\nWe were greeted this afternoon by a very brief rainstorm. Sumner  \ninsisted upon getting his umbrella."
     },
     {
         "file": "2008-06-18-You-thought-115-was-hot-.md",
         "year": "2008",
         "date": "June 18, 2008",
         "title": "You thought 115 was hot?",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiv2ECnzCki-lepugKawovLLAnBHn_VTcHoIubtyHP3Lv3ZHIykYvMip9I8tcsEUB8OfdSuXV-wO_H3fgTEJCJe-qb8P_sCzCTEm762o-qnWzqixSaidrKRWMGCRAZqEebk0OGQ/s320/photo-712722.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5213334443168662306\" />"
+        "body": "<img src=\"images/archive/photo-712722.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5213334443168662306\" />"
     },
     {
         "file": "2008-06-10-Post--100.md",
@@ -2784,35 +2790,35 @@ const wayback_raw_dump = [
         "year": "2008",
         "date": "June 10, 2008",
         "title": "Magic?",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhkeasTFPQEYTZTa-RctBFM-Ub3IePEM7kr67v0OSImwX_xcyvFXytI7dbHIZZRBf0WKrnpk-9JZeb7L37EDRRle4_qwrvdeqp8qHj2XY9kVHcRRu-DlobdqUHFKPd0tyLaFsAD/s320/photo-742156.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5210348705644025730\" />\nMagic!"
+        "body": "<img src=\"images/archive/photo-742156.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5210348705644025730\" />\nMagic!"
     },
     {
         "file": "2008-06-10-If-you-ask-for-a-donut-at-Chic.md",
         "year": "2008",
         "date": "June 10, 2008",
         "title": "If you ask for a donut at Chick-Fil-A...",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhkj0WaYume9ycqLrz1UGGl33o7bq7Xxzx3gGP9joA4K-XGDGXGQ_pUKvDp7B5nAmFk52QpGS-tjjz4PEMrT0n2wEe4DRJKJI3U1RWNT43G-j4BzsZrF3b0jSyIP0mjAY-UpTLM/s320/photo-704892.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5210300443216104882\" />\nThis is what you get."
+        "body": "<img src=\"images/archive/photo-704892.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5210300443216104882\" />\nThis is what you get."
     },
     {
         "file": "2008-06-07-Bob-Swift.md",
         "year": "2008",
         "date": "June 07, 2008",
         "title": "Bob Swift",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj8mufg36SO8m0muEBX1SmcV9wtlEdcIszBnYv-FnxOhi_dKtl4658BRH6WmCowW6NQ7c18vnYs7Rmk04-R4KcIyUB6UxfBzOwrjLp8cqn8cNXjABWT5uvF74dEyrYeD7TiVKOM/s320/photo-745448.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5209264668510095458\" />\nWhat?  You didn't know I worked with him?"
+        "body": "<img src=\"images/archive/photo-745448.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5209264668510095458\" />\nWhat?  You didn't know I worked with him?"
     },
     {
         "file": "2008-06-06-At-the-dinner.md",
         "year": "2008",
         "date": "June 06, 2008",
         "title": "At the dinner",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiDS_qFDJ1crAGsO2KFZP7Gfk4oTpSMzVZ-FCnNRL7wzXotJ4wIkUie0vmCy6eFiZeBEmhsSQ57om_PDxv6m5A1zvYhEHtlE8Tqyxqqsj1SA7aTVSx5hMKlXTYqq01X0WEaGlMW/s320/photo-742867.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5208593784659178658\" />\nNo, that's not your eyes playing tricks on you. The room was pretty  \nmuch coral throughout."
+        "body": "<img src=\"images/archive/photo-742867.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5208593784659178658\" />\nNo, that's not your eyes playing tricks on you. The room was pretty  \nmuch coral throughout."
     },
     {
         "file": "2008-06-05-Superstition-mountains.md",
         "year": "2008",
         "date": "June 05, 2008",
         "title": "Superstition mountains",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhBkWY9nsERPw9q5VyYWj3lDklER9oqfSW-sKefB00P0BlpvLHPqbhtU4AlG8u7VAUZm7QdT6eUF-uw_NPPnFD4UdX8SJIUyVODRy0BQT4aJGV79FOWl_pG9RLtF2uiJ-wPQR7m/s320/photo-717062.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5208466972108589138\" />\nA few days ago, we took a quick drive to the east. It was beautiful.  \nWe would have stayed longer, bit the abundance of gnats made it near  \nimpossible."
+        "body": "<img src=\"images/archive/photo-717062.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5208466972108589138\" />\nA few days ago, we took a quick drive to the east. It was beautiful.  \nWe would have stayed longer, bit the abundance of gnats made it near  \nimpossible."
     },
     {
         "file": "2008-06-05-Back-in-time.md",
@@ -2826,21 +2832,21 @@ const wayback_raw_dump = [
         "year": "2008",
         "date": "June 05, 2008",
         "title": "Am I glad I drive a Fit and get 38 mpg?",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi71tPSlcxOKvKQf6fPMGIn8shj3v6zCS3yldlF3hbf3OMlvTwpr9mQD7LK4d-HECXEQvFQvWqVjEOewExJwvrli4encD3PTDtouvDMYKe5X0k0o2bSdVs073xr_6miKEOgof1z/s320/photo-714775.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5208195944361322386\" />\nYou bet."
+        "body": "<img src=\"images/archive/photo-714775.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5208195944361322386\" />\nYou bet."
     },
     {
         "file": "2008-06-04-Always-wanted-to-do-this----.md",
         "year": "2008",
         "date": "June 04, 2008",
         "title": "Always wanted to do this....",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh0zycH4pcXujOpYirrsyaPiJSFnr1AGEYRxIziT77eRtmnuZ2A-9G-UYVghpYDDapkYJmWCYzWBG15AywWYk332DUw8K_x4F7BzvEbByJokso2yYr30I8GkJ7VbSyBgod2f7H9/s320/photo-776978.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5208072090452757170\" />\nBut never had a camera."
+        "body": "<img src=\"images/archive/photo-776978.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5208072090452757170\" />\nBut never had a camera."
     },
     {
         "file": "2008-06-03-Testing-the-ol--camera---.md",
         "year": "2008",
         "date": "June 03, 2008",
         "title": "Testing the ol' camera...",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEijPevAkPfLrRIt9FK6wyxXOihfcrZLM4pI-KSS5adsdDmXJrlnTqor_bb0rwqCvBQZsZSWwcCmrZ80zCjjKi0yqlv2GGUJ7cu73x4Jdx5NQQAhXEXGGleLu-hVSjNMGqS-s3JS/s320/photo-734001.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5207789297790051778\" />\nAnyone who knows me, knows I chew Cool Lime."
+        "body": "<img src=\"images/archive/photo-734001.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5207789297790051778\" />\nAnyone who knows me, knows I chew Cool Lime."
     },
     {
         "file": "2008-06-03-Something-just-isn-t-right---.md",
@@ -2868,112 +2874,112 @@ const wayback_raw_dump = [
         "year": "2007",
         "date": "November 24, 2007",
         "title": "Waiting for Santa",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiAvfAgg_1lcxpc5NBDaaNwh9sV1wHvH26K44w8wZ57Am3ULjZxwHzEELKhvqoIF0WFFYUoZpFaTO3GxOCyrUicVjSu45NqrTSHMBVII9XM1JUQsEjWZfR_fBsZ66KJQk1jqn4k/s320/treo102-703426.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5136535656499831634\" />"
+        "body": "<img src=\"images/archive/treo102-703426.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5136535656499831634\" />"
     },
     {
         "file": "2007-11-24-Santa-.md",
         "year": "2007",
         "date": "November 24, 2007",
         "title": "Santa!",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhu9r4R9zZ2f8w4kMEB9JhxpN1no2EZVaOTe-NejC06iWUFAXhiMgp2LWRmaK8-_y7limMyIymSNevSyW_sv3c5MhpJJaZStwGbAL3OaAP9SBKegwFBj9-FtUU_Ytib6nHJ2JVa/s320/treo107-790999.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5136536034456953698\" />"
+        "body": "<img src=\"images/archive/treo107-790999.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5136536034456953698\" />"
     },
     {
         "file": "2007-09-05-Advertising---.md",
         "year": "2007",
         "date": "September 05, 2007",
         "title": "Advertising...",
-        "body": "Usually, advertising on Web sites is targeted pretty well to me. But today, that changed in a flash. Just read this.  I was absolutely bewildered when I saw it.  The part that gets me is where is says, \"Your sister's wedding has been fixed.\"  Do weddings break? \n\nYeah, I get it. It's India.  But it's still an odd advertisement to find on a tech blog.\n\n<img id=\"BLOGGER_PHOTO_ID_5106763169352143890\" style=\"CURSOR: hand\" alt=\"\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiRC3kQGgApYia7b06Hkvcx02KeFD1JSWRSCIz89HqqKB9YAlVefp5ihBCMCcYSR1kydeTbsEv6MuxT92kDuzrlU5KkawXPWphEXzvTnjDRexxHVLFgFD7fuXEsX21hQW9yg_6X/s320/930166.gif\" border=\"0\" />"
+        "body": "Usually, advertising on Web sites is targeted pretty well to me. But today, that changed in a flash. Just read this.  I was absolutely bewildered when I saw it.  The part that gets me is where is says, \"Your sister's wedding has been fixed.\"  Do weddings break? \n\nYeah, I get it. It's India.  But it's still an odd advertisement to find on a tech blog.\n\n<img id=\"BLOGGER_PHOTO_ID_5106763169352143890\" style=\"CURSOR: hand\" alt=\"\" src=\"images/archive/930166.gif\" border=\"0\" />"
     },
     {
         "file": "2007-08-30-Peruvian-Chairlift.md",
         "year": "2007",
         "date": "August 30, 2007",
         "title": "Peruvian Chairlift",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhohVo5Wn-lB4l-ES6vxUZR0wvOtVJfNzMvFPQ5Ro9PS0hhlCTTjs2sE_2iE5RrTMvoDV4IKTA6N5t1rlE5lR0xSpp21HWpXOgBZDDRxDM6D5Fu5NrmvVDvF_mPvmDPwncGGWXV/s320/treo038-705507.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5104584976687977426\" />\nJenna is being brave and agreed to go on the chairlift.  Wish her luck!"
+        "body": "<img src=\"images/archive/treo038-705507.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5104584976687977426\" />\nJenna is being brave and agreed to go on the chairlift.  Wish her luck!"
     },
     {
         "file": "2007-08-30-I-m-home-.md",
         "year": "2007",
         "date": "August 30, 2007",
         "title": "I'm home!",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhulLtI64MtbncPrQ_RgtIbsvjOWuSWAvACkqBTB83KOPt8IlZoLgGwtvlrs4pe-fbdkFdwcgBaTTfFierSt_CCfU0JUOQrzqqhpse9eXzx277Vx1WLqYOK9ceN6_aIC86AUXKw/s320/treo037-798984.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5104580655950877634\" />"
+        "body": "<img src=\"images/archive/treo037-798984.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5104580655950877634\" />"
     },
     {
         "file": "2007-08-30-I-have-fire-.md",
         "year": "2007",
         "date": "August 30, 2007",
         "title": "I have fire!",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh3JzYfHMsojRAqSri-KT8iNVXZtdhPHCrx_0SOOM6YE7bg3GRqF7_z-cnifubW3jdS-Wz19amNeKXImupa9I-FUAD2owR3NsqxPP28npsSpU9mO4o14WzTPCTyGXcE5ypKgdG7/s320/treo036-727557.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5104299455852073906\" />\nIt only took 15 matches,  but kevin and I did it.  We're up at Mueller Park Canyon, enjoying the great weather.  S'mores time!"
+        "body": "<img src=\"images/archive/treo036-727557.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5104299455852073906\" />\nIt only took 15 matches,  but kevin and I did it.  We're up at Mueller Park Canyon, enjoying the great weather.  S'mores time!"
     },
     {
         "file": "2007-08-30-Hello--Tram.md",
         "year": "2007",
         "date": "August 30, 2007",
         "title": "Hello, Tram",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgG9c6VTjoLXr1JFzS6HWlGSpLnrTohEB4pbT9tBEyjvf4StMQ71xZD_O1YbRzGRXrRZOU9FD8hw7dPgFQC-hxAJEFUeE6APoRlVrQwbwHXaK4-gbNnAWM2mkEftc0RPR1XBlvd/s320/treo041-764135.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5104588666064884722\" />"
+        "body": "<img src=\"images/archive/treo041-764135.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5104588666064884722\" />"
     },
     {
         "file": "2007-08-30-Back-Country.md",
         "year": "2007",
         "date": "August 30, 2007",
         "title": "Back Country",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhAemFkLtOvLYmQR4vzGifclyX495NBUFX9Q8bd76noJEpop6j2XyAZTfnWCF3V82gkvZmqwNbgFIzlSU2ybi7qqZRaoacoLKcldRtKqRnscyCtmhK38pnwD0CDpm-68YHpY3bw/s320/treo042-773516.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5104596865157452802\" />"
+        "body": "<img src=\"images/archive/treo042-773516.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5104596865157452802\" />"
     },
     {
         "file": "2007-08-30-A-view-from-the-lift.md",
         "year": "2007",
         "date": "August 30, 2007",
         "title": "A view from the lift",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjTuhMWDbe4z6nxhO-SDuPtAFSCJw0phkXgovG1etUxmMdw71jxTsf6ffc7WZ3R6Dz8_sV0jFMuyDn_5u963NMh3WTSvxQRgYqwqmyQ_JnngpMwSpqp5iBKyML40m6prHz9cLlb/s320/treo040-712674.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5104586299537904610\" />"
+        "body": "<img src=\"images/archive/treo040-712674.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5104586299537904610\" />"
     },
     {
         "file": "2007-08-29-What-kind-of-a-title-do-you-us.md",
         "year": "2007",
         "date": "August 29, 2007",
         "title": "What kind of a title do you use for this?  It needs none.",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjkAeDVzlYPbboaR-IWlBkiYdr5EFnAI-LElD5K03xOq1-Xf9fjUTwegGJf_3-iM6aMkyTKigQHfrVohOjcb7j52cXBzRIITGtGH6elOr959zz2_nYW8qbAkiAS-zEkpv0k68tv/s320/treo034-728895.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5104212276605899682\" />"
+        "body": "<img src=\"images/archive/treo034-728895.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5104212276605899682\" />"
     },
     {
         "file": "2007-08-29-On-the-Trax.md",
         "year": "2007",
         "date": "August 29, 2007",
         "title": "On the Trax",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgbrse1m36UdHtSX1YXNKft44NKhTBCokNFayKkl6ml7WbfL49wv8EUdCLRdGE1CQmtsbbKmT_TbAHb6pkAMsmKiIyH6QdeO1K1HuiNnIToHT7OVQrdzlwVL-xBICAm7EF-oy4k/s320/treo031-797708.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5104161462847820674\" />\nWe find ourselves on the UTA Trax this morning, en route to Salt Lake City.  We figured we'd save the gas and use the train, but my gosh.  $4.25 for an all day pass?  Yeesh.The train is mostly empty now, but it'll fill up quickly as we follow the track.  Sumner doesn't remember doing this a few years ago, which is sad only because the trip with him as an 18 month old is imprinted on my mind so thoroughly.  I'll keep the memory going for him, then.The train started moving now, and I am in the rear facing seat.  It makes me a bit ill to type in this environment, so I bid you adiue for now.  More pictures as the day progresses!"
+        "body": "<img src=\"images/archive/treo031-797708.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5104161462847820674\" />\nWe find ourselves on the UTA Trax this morning, en route to Salt Lake City.  We figured we'd save the gas and use the train, but my gosh.  $4.25 for an all day pass?  Yeesh.The train is mostly empty now, but it'll fill up quickly as we follow the track.  Sumner doesn't remember doing this a few years ago, which is sad only because the trip with him as an 18 month old is imprinted on my mind so thoroughly.  I'll keep the memory going for him, then.The train started moving now, and I am in the rear facing seat.  It makes me a bit ill to type in this environment, so I bid you adiue for now.  More pictures as the day progresses!"
     },
     {
         "file": "2007-08-29-Nothin--better.md",
         "year": "2007",
         "date": "August 29, 2007",
         "title": "Nothin' better",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiHuywpFa2vlBuLn-Xja7ndoISc7pp-4CGATp5EdE12NjzrZlJeZQx7z081_27N67aBagKD8QpQt05tdYdxaSGvY4gz-QqNcc5Mm_p-GfuBdkmiv-oIOE037_Qn_KaJtmG1Gci4/s320/treo033-702876.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5104202716008698770\" />\nWell, except maybe my dad's burgers..."
+        "body": "<img src=\"images/archive/treo033-702876.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5104202716008698770\" />\nWell, except maybe my dad's burgers..."
     },
     {
         "file": "2007-08-29-Concentrate---.md",
         "year": "2007",
         "date": "August 29, 2007",
         "title": "Concentrate...",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiMT1oEdNWE9wFen0wSH78bj7oNHlISv7wuiIUH0U3B69CJglqLMvDYJdwPIFwccVTCrnzWLn3H2YXJSw59fiGoFpvumI_jXUpbiYgj5z021iCU52DdRWvZC0Vwf6ccKjL0LF9u/s320/treo030-732744.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5103962756185871218\" />\nMy brother-in-law is the best Jenga player *ever*..."
+        "body": "<img src=\"images/archive/treo030-732744.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5103962756185871218\" />\nMy brother-in-law is the best Jenga player *ever*..."
     },
     {
         "file": "2007-08-28-Watching-the-kids-play-at-the-.md",
         "year": "2007",
         "date": "August 28, 2007",
         "title": "Watching the kids play at the park",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiX5WhtHAsG8TlKRfdB0fj1iu1NZeX00WAs1OJ3cDeU1QtrB45ioWQfPeKG8XfSVC-gKZiRUx93jLVDiaBF6eiKhIoY62C4fRY68FHrCUeY6tW1QqgiBmiIe_tkWR8a0FIioxg5/s320/treo027-746050.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5103899676001194850\" />"
+        "body": "<img src=\"images/archive/treo027-746050.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5103899676001194850\" />"
     },
     {
         "file": "2007-08-28-Union-Pacific.md",
         "year": "2007",
         "date": "August 28, 2007",
         "title": "Union Pacific",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjia2wirDvLdwnVSSGLEUP5EDFFyz-1tv3WZA1so3vjZZycQQZIEB0ci7tlOoEjcP6f6Cr-rNPU8bQn5KIOJ_ej-WoE4qfvB-Nu2IW_0VxRKhfge01QWXahFJtACXmx5KmvJOPS/s320/treo029-700868.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5103899482727666498\" />"
+        "body": "<img src=\"images/archive/treo029-700868.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5103899482727666498\" />"
     },
     {
         "file": "2007-08-28-Look---Real-grass-.md",
         "year": "2007",
         "date": "August 28, 2007",
         "title": "Look!  Real grass.",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiA-6I54BYc8P3-P3s0xt458_lGWbRpBBF9vawHA-0Br9XcMq2VfJL2sVDUjxZUr8TdiFl7dxnJdiY0odlS8xiVUHKFzPtQqfeIcrXW8mST8gLJws5Z0fay-eKtGRZ58Z1vtx2Q/s320/treo028-724181.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5103899585806881618\" />"
+        "body": "<img src=\"images/archive/treo028-724181.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5103899585806881618\" />"
     },
     {
         "file": "2007-08-28-It-s-5-25am--what-the-heck.md",
@@ -2987,63 +2993,63 @@ const wayback_raw_dump = [
         "year": "2007",
         "date": "August 28, 2007",
         "title": "All is Well!",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiZEsm5l9Px6ubF8okkq0Ihcydsx5cVoa4wL12u_EL8HeA82FedAPRVX2vBWZk6GyLq6LER1L_UeFC0O4NNE_sbWIG5Sc4gElBMNNetrAkQ1DE3CD2zu_NBWkELC2eCkW3AaxPQ/s320/treo026-719430.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5103866918285628210\" />\nFor any worried that I might not have survived coming down off of that terrible sugar/caffeine/deer urine high, fear not.  I am back amongst the living after a brief rest and some good Italian food. We're now in American Fork at the local Shade store, which looks like it inhabited an old red brick elementary school.  The wife has been looking extra-forward to this event.  I'll just sit back in this ultra comfortable husband chair and type away while she tries on clothes.I'll try and post some pictures a little later of the surroundings and what-not.  Thanks for visiting!"
+        "body": "<img src=\"images/archive/treo026-719430.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5103866918285628210\" />\nFor any worried that I might not have survived coming down off of that terrible sugar/caffeine/deer urine high, fear not.  I am back amongst the living after a brief rest and some good Italian food. We're now in American Fork at the local Shade store, which looks like it inhabited an old red brick elementary school.  The wife has been looking extra-forward to this event.  I'll just sit back in this ultra comfortable husband chair and type away while she tries on clothes.I'll try and post some pictures a little later of the surroundings and what-not.  Thanks for visiting!"
     },
     {
         "file": "2007-08-19-A-view-of-the-canyon.md",
         "year": "2007",
         "date": "August 19, 2007",
         "title": "A view of the canyon",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEibGwlUmORk2L3PiWZIlXNmsNGR5bbLOVluOquntLXEU-1q0h-ML3VVWO41TvEinRAdIkJ19ZiRn7GbnYSERIxYyR7gcnCrYAmcPepDHaOdvspT3TA990K201STKqJS1tMu2OPe/s320/treo009-731147.jpg\" width=\"320\" />\n<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgIFVy-Cw30w8bcu6FnQnLI-bQTUILuWDuSS6QFA77hw4frVvva0sA2-LhZCsCnjVobdKhOmgIaP940ONo8lcwtda3BY0sIwU7Xv2pR0SGy4Vvn4ZuaBSiWRMgdZZjlvR3naL7t/s320/treo010-731817.jpg\" width=\"320\" />"
+        "body": "<img src=\"images/archive/treo009-731147.jpg\" width=\"320\" />\n<img src=\"images/archive/treo010-731817.jpg\" width=\"320\" />"
     },
     {
         "file": "2007-08-18-The-Natural-Bridge.md",
         "year": "2007",
         "date": "August 18, 2007",
         "title": "The Natural Bridge",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjOnCbhhzAgZXcsIzml5pwnNCiSU0qfsc_ND8vBmD2Yv_4ALphqP7iQcgGFT-x7dMpsi7gGWz_xRrKL2nDf1d5HRxZtlh0B0MZ_6dCEkOlubhlZSyrUjaCh9SesUlSc58Ku6HU3/s320/treo015-708311.jpg\" width=\"320\"/>\n<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiRlOyJODu7_7GmcBN0Vsntt5CQtlne0_uBXrGW7wo91VBmW-jzHllLFFmzzvnHbL3Pgv1Y3rG5ldKkMnEamiqPhfDybBynnW0cudAwr9ia4-PHT1haZI0q9dZrSeyX4UrIMvXD/s320/treo014-709131.jpg\" width=\"320\"/>"
+        "body": "<img src=\"images/archive/treo015-708311.jpg\" width=\"320\"/>\n<img src=\"images/archive/treo014-709131.jpg\" width=\"320\"/>"
     },
     {
         "file": "2007-08-18-Small-Waterfall.md",
         "year": "2007",
         "date": "August 18, 2007",
         "title": "Small Waterfall",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhtFMnNxK7kpeagkiDAqCwq66nFL9gOkLsTSIGte3oX4i-zIkhVNiU0TqZZ1w_iM7UVTJF717OZyM7Xnl2ISZmuET752IIsYtZjpCStxiGpYdWZecz5Wea214qVhFq4_viAmoyh/s320/treo011-745110.jpg\" width=\"320\"/>\n<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj4RWCMtqoLa1mfFlpYAoo4qbuszhUnwv94RqW97w5Z_gIgd8ASQ-SvzbOua5OTqQoNxueZylyZCN3fpO_sXX7TzPWWfgc0Y5mrflQTGE4QLFtj0LYRMVw-J8ldvNvIrKIFpdAr/s320/treo012-747466.jpg\" width=\"320\"/>"
+        "body": "<img src=\"images/archive/treo011-745110.jpg\" width=\"320\"/>\n<img src=\"images/archive/treo012-747466.jpg\" width=\"320\"/>"
     },
     {
         "file": "2007-08-18-On-the-way-to-Payson.md",
         "year": "2007",
         "date": "August 18, 2007",
         "title": "On the way to Payson",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh7Jp7C31XZ5TwDsRZlgGt0KAl3yB5S-osaKNrU4YAuHZr1fHwLlL8_hkSf6g4IMkuOv1tf6SVYGJtOgVl9VoY6DAc3DkHb1YHTu3DHD2fd9uRgK9y6oD3MHa-8cLIBPQl2OWY8/s320/treo005-766359.jpg\" width=\"320\"/>"
+        "body": "<img src=\"images/archive/treo005-766359.jpg\" width=\"320\"/>"
     },
     {
         "file": "2007-08-18-Near-the-exit.md",
         "year": "2007",
         "date": "August 18, 2007",
         "title": "Near the exit",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiMUbVeOG4YEehe5NsZdZ9VdsuWx9-dzlk8V4dTunI-JFHUnlAopHRAPnrb4byEV-9Oqa1h9_boZIfObPkXwiwg0Zz_4qos5janK7Ay9C2vxXa4Ge4hyP9pG8MM37FQXRrP61Oy/s320/treo021-703368.jpg\" width=\"320\"/>"
+        "body": "<img src=\"images/archive/treo021-703368.jpg\" width=\"320\"/>"
     },
     {
         "file": "2007-08-18-McDonalds.md",
         "year": "2007",
         "date": "August 18, 2007",
         "title": "McDonalds",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEif6pfYfXkDVLXt_5LmSNT2LRRDzfMc_S-D0y-92O2u9X7QjDIbXwF2KO37Z4j_lWcQAbVfnBWZoskH0JD423Dzq5VEQOtCKYBENEI9_pz6xt0P78IGErYXyVoTMM8jIxGbx-BG/s320/treo006-708976.jpg\" width=\"320\"/>\nOnce upon a time, I ate 10 hamburgers at this very location."
+        "body": "<img src=\"images/archive/treo006-708976.jpg\" width=\"320\"/>\nOnce upon a time, I ate 10 hamburgers at this very location."
     },
     {
         "file": "2007-08-18-Looking-through-to-the-other-s.md",
         "year": "2007",
         "date": "August 18, 2007",
         "title": "Looking through to the other side",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjfvPIfOwgLXlmOZTu9bYASQcAe_ulOWiojDwHP8QBUl7QehOMbdoHgMn0OwhTC5aheCdI4w_OChOnN5cZt7meDRQtdN_rO5ypg6LVPTDToe_f5Kk63A5srbh3UCzEWfno4Ox0u/s320/treo018-785560.jpg\" width=\"320\"/>"
+        "body": "<img src=\"images/archive/treo018-785560.jpg\" width=\"320\"/>"
     },
     {
         "file": "2007-08-18-Looking-back-out.md",
         "year": "2007",
         "date": "August 18, 2007",
         "title": "Looking back out",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh17BpwGS9WPNEjDtwcQ_07KbJqVD4K5JrpdpeKt0vZyW0bawhMRHVN4K2MjsI7BLPkLx1NwnVwJOmKc00YwMspbIvby5VDXZlMZihUZSv8JfwvSJcK3ft1w3URQfFXbhYAyhRD/s320/treo022-718228.jpg\" width=\"320\"/>"
+        "body": "<img src=\"images/archive/treo022-718228.jpg\" width=\"320\"/>"
     },
     {
         "file": "2007-08-18-I-ve-been-here-before.md",
@@ -3057,63 +3063,63 @@ const wayback_raw_dump = [
         "year": "2007",
         "date": "August 18, 2007",
         "title": "A view from the bottom",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjfJmJ5E6U_HpBw88suBJynaH8bx7-ePdUhxqNR8kz0VvOimqaBXDHuIplKD310REg7fuwVnHxrgsYs67yrzVj2EOAKfbXWc8viuKcGxVhsVf7JXbexWYWv9KQyYY-i6BTRb10m/s320/treo016-767394.jpg\" width=\"320\"/>"
+        "body": "<img src=\"images/archive/treo016-767394.jpg\" width=\"320\"/>"
     },
     {
         "file": "2007-08-14-Trade-offs.md",
         "year": "2007",
         "date": "August 14, 2007",
         "title": "Trade-offs",
-        "body": "The monsoon storms seem to have abated for the time, and the temperatures have soared right back up into the unbearable zone.  I knew I should have enjoyed the cooler weather while it was here.  Though there was a day about a week ago when we had a freakish amount of rain in a short time span.  I told Sumner to go enjoy it.  He had a blast!  Too bad daddy had to stand back and take the pictures though.  That's always the trade off: enjoy the moment or archive the memories.  I chose the latter.\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiPyC5ycVoFzphyphenhyphenheiY-V-JjCJrNgcAG70BPwwSzVQTvLgSAbq6gqIV85NhyBhN9foxNjJ4Pjo6q8gnb0Vy5HhyphenhyphenDy8klGqcIbTqWOLfNhNHxux5vMUPdW9oGlgGkjPwUATK3LC3/s1600/IMG_1090.JPG\" height=\"300\" width=\"400\" />\n\nI came the the conclusion earlier tonight that I ought to enjoy my time more fully.  Whatever predilection I was endowed with that provides me with reactionary statements such as \"I'm so busy\" must be stopped, at all costs!  I'm tired of feeling busy.  In fact, it's about time I figured out that I'm not busy, really...not at all.  24 hours in a day is a lot of time to enjoy.\n\nOh sure, I can be genuinely busy at times.  But it seems that we humans feel like an absolute waste when we aren't actively engaged and able to respond as such.  Trouble is, some of the activities we occupy ourselves with is pure garbage that is best left alone.  Time could be better spent with family and friends. \n\nIt's wonderfully healing doing nothing every once in a while.  Perhaps if we spend a little more time unwinding and meditating, we can find ourselves in a better position to tackle the demons that appear throughout the week.  Maybe that's the reason why I do this blog...I don't feel obliged to do it, I just write because I love to do it.  It lets me reflect a bit more on the environment around me and the way that I am connected to it.  Believe me, the employment that I choose does not, in the grand scheme of things, make a bit of difference.  So then why do I spend so much of my time at home preoccupied with the generalities of the function?  Rather, my time could be better spent. \n\nThe people I talk to at work, the relationships I forge, the words I speak and listen to...those matter a great deal to both me and others.  And I don't think I give those special moments enough consideration in my life.  My job itself matters only as it is a vehicle for me to provide service to others.\n\nWe spend too much time working as it is.  Do I really want a job where I work 65 hours/week?  No.  I assert that it must not be that way now, nor must it ever become that way.  They say that no success in the professional life can compensate for failure at the home front.  I think that can be applied to other areas of life, as well.  Work is what sustains us, gives us our daily bread and provisions for our family.   It is not meant to be a replacement for or a threat to the main functions of our life, which are family, love, friendship, meditation, and education. \n\nI'm not sure where I'm going with this.  I certainly didn't intend to end up there when I began, that's for sure.  But I'll leave it as is. \n\nLast weekend went off pretty well, with the wife celebrating her 23rd birthday on Friday.  Late Thursday night, I inflated 75 balloons while watching The Simpsons.  To my amazement, I didn't really become lightheaded.  But by the end of the third bag of balloons, I felt that my lips were burning fiercely, and it was then I remembered my allergy to latex.  Hmm.  Latex balloons might not mix well with me, then.  At least not 75 of them. \n\nSo I had a bit of a reaction.  I envisioned my poor wife waking up next to Lips Manliss on the morning of her birthday, with all me being able to say was a muffled \"Mabby Burbfday\".  Or something to that extent.  But the swelling went down and by Friday morning, I was back to my normal self again.  I cooked up my special breakfast of Sourdough French Toast w/ turkey sausage, but was completely disappointed in myself that I forgot to get the OJ.\n\nAfter work that day, we went to a birthday favorite, Claim Jumper.  I swear those folks could cook a tennis shoe in motor oil and not only make it taste great, but present it to you in such a way as to make you believe it to be top sirloin.  I had the pepperoni pizza, the wife had the spinach salad.  We both shared a pretzel at the beginning, and the complimentary and obligatory massive slice of ice cream at the end.  Dinner done right, I tell you. \n\nSaturday brought an influx of friends to the casa, arriving one after the other to enjoy a night of Wii Sports, Excite Truck, DiRT, and Mario Kart.  When we all get together, the best thing seems to be the Wii Bowling, though playing that game mirrors the real thing all too well.  I play superb at the beginning, and end the night on a terrible note.  I'd say practice makes perfect, but I have better things to do.\n\nSo there you have it, life as I know it up to this point.  Who knows what tomorrow may bring.  I do know that we are most certainly leaving for Utah on the 28th.  Weather.com says the average high will be around 83 degrees.  I say Arizona will be hard to come home to."
+        "body": "The monsoon storms seem to have abated for the time, and the temperatures have soared right back up into the unbearable zone.  I knew I should have enjoyed the cooler weather while it was here.  Though there was a day about a week ago when we had a freakish amount of rain in a short time span.  I told Sumner to go enjoy it.  He had a blast!  Too bad daddy had to stand back and take the pictures though.  That's always the trade off: enjoy the moment or archive the memories.  I chose the latter.\n\n<img border=\"0\" src=\"images/archive/IMG_1090.JPG.jpg\" height=\"300\" width=\"400\" />\n\nI came the the conclusion earlier tonight that I ought to enjoy my time more fully.  Whatever predilection I was endowed with that provides me with reactionary statements such as \"I'm so busy\" must be stopped, at all costs!  I'm tired of feeling busy.  In fact, it's about time I figured out that I'm not busy, really...not at all.  24 hours in a day is a lot of time to enjoy.\n\nOh sure, I can be genuinely busy at times.  But it seems that we humans feel like an absolute waste when we aren't actively engaged and able to respond as such.  Trouble is, some of the activities we occupy ourselves with is pure garbage that is best left alone.  Time could be better spent with family and friends. \n\nIt's wonderfully healing doing nothing every once in a while.  Perhaps if we spend a little more time unwinding and meditating, we can find ourselves in a better position to tackle the demons that appear throughout the week.  Maybe that's the reason why I do this blog...I don't feel obliged to do it, I just write because I love to do it.  It lets me reflect a bit more on the environment around me and the way that I am connected to it.  Believe me, the employment that I choose does not, in the grand scheme of things, make a bit of difference.  So then why do I spend so much of my time at home preoccupied with the generalities of the function?  Rather, my time could be better spent. \n\nThe people I talk to at work, the relationships I forge, the words I speak and listen to...those matter a great deal to both me and others.  And I don't think I give those special moments enough consideration in my life.  My job itself matters only as it is a vehicle for me to provide service to others.\n\nWe spend too much time working as it is.  Do I really want a job where I work 65 hours/week?  No.  I assert that it must not be that way now, nor must it ever become that way.  They say that no success in the professional life can compensate for failure at the home front.  I think that can be applied to other areas of life, as well.  Work is what sustains us, gives us our daily bread and provisions for our family.   It is not meant to be a replacement for or a threat to the main functions of our life, which are family, love, friendship, meditation, and education. \n\nI'm not sure where I'm going with this.  I certainly didn't intend to end up there when I began, that's for sure.  But I'll leave it as is. \n\nLast weekend went off pretty well, with the wife celebrating her 23rd birthday on Friday.  Late Thursday night, I inflated 75 balloons while watching The Simpsons.  To my amazement, I didn't really become lightheaded.  But by the end of the third bag of balloons, I felt that my lips were burning fiercely, and it was then I remembered my allergy to latex.  Hmm.  Latex balloons might not mix well with me, then.  At least not 75 of them. \n\nSo I had a bit of a reaction.  I envisioned my poor wife waking up next to Lips Manliss on the morning of her birthday, with all me being able to say was a muffled \"Mabby Burbfday\".  Or something to that extent.  But the swelling went down and by Friday morning, I was back to my normal self again.  I cooked up my special breakfast of Sourdough French Toast w/ turkey sausage, but was completely disappointed in myself that I forgot to get the OJ.\n\nAfter work that day, we went to a birthday favorite, Claim Jumper.  I swear those folks could cook a tennis shoe in motor oil and not only make it taste great, but present it to you in such a way as to make you believe it to be top sirloin.  I had the pepperoni pizza, the wife had the spinach salad.  We both shared a pretzel at the beginning, and the complimentary and obligatory massive slice of ice cream at the end.  Dinner done right, I tell you. \n\nSaturday brought an influx of friends to the casa, arriving one after the other to enjoy a night of Wii Sports, Excite Truck, DiRT, and Mario Kart.  When we all get together, the best thing seems to be the Wii Bowling, though playing that game mirrors the real thing all too well.  I play superb at the beginning, and end the night on a terrible note.  I'd say practice makes perfect, but I have better things to do.\n\nSo there you have it, life as I know it up to this point.  Who knows what tomorrow may bring.  I do know that we are most certainly leaving for Utah on the 28th.  Weather.com says the average high will be around 83 degrees.  I say Arizona will be hard to come home to."
     },
     {
         "file": "2007-08-09-Sassy.md",
         "year": "2007",
         "date": "August 09, 2007",
         "title": "Sassy",
-        "body": "I took a break from writing because I had nothing to write.  Plenty to write about now, so let's get started, shall we?\n\nApple redesigned their iMac.\n\nThe XBOX 360 drops price, and adds HDMI\n\nThe Wii got an update and came close to, but not quite, practical\n\nBonds hit number 756* (dang, that asterisk felt good)\n\nThose are the things that sticks out in my mind.  Hmm.  Best to go through each one, then.  Here goes!\n\nApple.  Does anyone else think that keyboard is terrible?  It can't just be me.  Yes, this is a bit off topic from the iMac redesign, but still...it comes packed in now.  It's reminiscent of the keyboard on my Macbook, and I hate that keyboard as well.  Just glancing at the new keyboard gives me the impression that typing on it might be similar to a Speak N Spell. \n\nIt's obvious that Apple Inc emphasizes design over function; that point has been made for years, even when the iBook resembled a toilet seat and their taste was gently forced upon us.  But they seem to have reached an impasse with design and quality; items such as the iPhone go far beyond the utilitarian mode and have delved into the realm of insanity.  Soon, they will be forcing us to control our devices with gestures.  I can only imagine the level of frustration, rising to the point where I throw it the bird and finally convince it to go into standby. \n\nXbox 360.  I've been waiting for this announcement for a while.  Most analysts saw it coming, yet again, if enough of them sound their trumpet long enough, it all turns into background noise on the waves of the InterWebs.  When their predictions come to fruition, we can only nod in affirmation at the recollection that someone, somewhere thought of it before and it had to be \"that guy\". \n\nAnyway.  So the Xbox, which I consider to be far superior in almost every way to the Playstation 3, received its first price drop since arriving in late 2005.  I wouldn't go so far to call it a bargain...at $350.00, it's still way out of reach of most cost-conscious consumers (alliteration!).  Not only the price drop, but confirmation came late Wednesday that any unit built after July 4th, 2007 comes standard with the famed (and useful) HDMI port.  As the ubiquity of HDTV's marches on, the inclusion of this connection standard can only be a boon. \n\nThe Wii.  I came home on Tuesday night to the mellow beckoning of that cool blue light on the front of my Wii.  This could only mean one thing; an update was ready for download and I needed to jump on it.  I love the age of connectivity, where my devices receive new life-blood months and years after I purchase them.  With my finicky, impulsive buying habits, features that grant extended interest in gadgetry are great thing. \n\nAlas, this update was mostly geared toward stability and thwarting piracy, rather than adding features like previous updates had been.  Still, a few neat things managed to squeak through, such as the aforementioned USB keyboard support and a more streamlined Virtual Console shopping experience.   I'm still pretty hopeful that all of the things I dreamed about the Wii will come true; the Nintendo DS connectivity, downloadable demos, and DVD playback are just a few of them.  Nintendo has a good thing going with the Wii; let's hope they don't screw it up.\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgloc_W9Gbe_Xj1yh6vNuovK_t5AyX_QIEOgGha_LrQdkw9iz4P3YUAK2zJ4tVwGi5V5kj2Qsb-oF-H2ccQC14-xOCzqXgkY3a6Md3Z1vvIlI9WOulvtyZ5U6Bc-MRlfXO_NfEc/s1600/bonds_both.jpg\" />Bonds.  What a jerk.  I want this t-shirt.   I don't need all of the stuff on the back, though.  I just need the 756 with the asterisk.  That'd be great.\n\nI just don't get him.  I don't get professional athletes, to be concise.  Mr Bonds is the epitomy, nay, the embodiment of the loss of focus on the American fan.  Instead, it's a fascination with SportsCenter and Rome is Burning.  There's no publicity to these men.  Whatever it takes. \n\nAnd he's a liar too.  Boldface.  Times New Roman font. \n\nAnd I don't really feel any empathy for the record, either.  People have had ample opportunity to speak up and make a stand against this debauchery.  True, it's not Hank Aaron's responsibility, but it's his record, and now it's gone.  Asterisk or not, the MLB let Bonds keep playing and will parlay judgment until after retirement.  Whatever.\n\nI have a few more things to say, but the hour grows late and my penchant for typing decreases with each passing minute.  That, and I really should pace myself and save a few articles for the weekend, when I actually have time for the Web site.  Thanks for dropping by, and if the tone of the blog seems somewhat somber, I apologize.  We've hit the home stretch of summer and I have a large vacation approaching, so my mind is elsewhere.\n\nAs always, the Moblah'g stands ready to satisfy your cravings for daily reading.  Head on over!"
+        "body": "I took a break from writing because I had nothing to write.  Plenty to write about now, so let's get started, shall we?\n\nApple redesigned their iMac.\n\nThe XBOX 360 drops price, and adds HDMI\n\nThe Wii got an update and came close to, but not quite, practical\n\nBonds hit number 756* (dang, that asterisk felt good)\n\nThose are the things that sticks out in my mind.  Hmm.  Best to go through each one, then.  Here goes!\n\nApple.  Does anyone else think that keyboard is terrible?  It can't just be me.  Yes, this is a bit off topic from the iMac redesign, but still...it comes packed in now.  It's reminiscent of the keyboard on my Macbook, and I hate that keyboard as well.  Just glancing at the new keyboard gives me the impression that typing on it might be similar to a Speak N Spell. \n\nIt's obvious that Apple Inc emphasizes design over function; that point has been made for years, even when the iBook resembled a toilet seat and their taste was gently forced upon us.  But they seem to have reached an impasse with design and quality; items such as the iPhone go far beyond the utilitarian mode and have delved into the realm of insanity.  Soon, they will be forcing us to control our devices with gestures.  I can only imagine the level of frustration, rising to the point where I throw it the bird and finally convince it to go into standby. \n\nXbox 360.  I've been waiting for this announcement for a while.  Most analysts saw it coming, yet again, if enough of them sound their trumpet long enough, it all turns into background noise on the waves of the InterWebs.  When their predictions come to fruition, we can only nod in affirmation at the recollection that someone, somewhere thought of it before and it had to be \"that guy\". \n\nAnyway.  So the Xbox, which I consider to be far superior in almost every way to the Playstation 3, received its first price drop since arriving in late 2005.  I wouldn't go so far to call it a bargain...at $350.00, it's still way out of reach of most cost-conscious consumers (alliteration!).  Not only the price drop, but confirmation came late Wednesday that any unit built after July 4th, 2007 comes standard with the famed (and useful) HDMI port.  As the ubiquity of HDTV's marches on, the inclusion of this connection standard can only be a boon. \n\nThe Wii.  I came home on Tuesday night to the mellow beckoning of that cool blue light on the front of my Wii.  This could only mean one thing; an update was ready for download and I needed to jump on it.  I love the age of connectivity, where my devices receive new life-blood months and years after I purchase them.  With my finicky, impulsive buying habits, features that grant extended interest in gadgetry are great thing. \n\nAlas, this update was mostly geared toward stability and thwarting piracy, rather than adding features like previous updates had been.  Still, a few neat things managed to squeak through, such as the aforementioned USB keyboard support and a more streamlined Virtual Console shopping experience.   I'm still pretty hopeful that all of the things I dreamed about the Wii will come true; the Nintendo DS connectivity, downloadable demos, and DVD playback are just a few of them.  Nintendo has a good thing going with the Wii; let's hope they don't screw it up.\n\n<img border=\"0\" src=\"images/archive/bonds_both.jpg\" />Bonds.  What a jerk.  I want this t-shirt.   I don't need all of the stuff on the back, though.  I just need the 756 with the asterisk.  That'd be great.\n\nI just don't get him.  I don't get professional athletes, to be concise.  Mr Bonds is the epitomy, nay, the embodiment of the loss of focus on the American fan.  Instead, it's a fascination with SportsCenter and Rome is Burning.  There's no publicity to these men.  Whatever it takes. \n\nAnd he's a liar too.  Boldface.  Times New Roman font. \n\nAnd I don't really feel any empathy for the record, either.  People have had ample opportunity to speak up and make a stand against this debauchery.  True, it's not Hank Aaron's responsibility, but it's his record, and now it's gone.  Asterisk or not, the MLB let Bonds keep playing and will parlay judgment until after retirement.  Whatever.\n\nI have a few more things to say, but the hour grows late and my penchant for typing decreases with each passing minute.  That, and I really should pace myself and save a few articles for the weekend, when I actually have time for the Web site.  Thanks for dropping by, and if the tone of the blog seems somewhat somber, I apologize.  We've hit the home stretch of summer and I have a large vacation approaching, so my mind is elsewhere.\n\nAs always, the Moblah'g stands ready to satisfy your cravings for daily reading.  Head on over!"
     },
     {
         "file": "2007-08-08-Don-t-ask.md",
         "year": "2007",
         "date": "August 08, 2007",
         "title": "Don't ask",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjWO8fORZPlOFM2-to9WSgrwrMhN888H6VRTu8Cvad_1eT0Od1uQH2vBh-FbOprmXL_FFL93IA1yTV837efAVg5LtF3lh9ALjnDoACccX9GNh9gwV7ryVBfnCVzYpEDLQMr6a5O/s320/img001-796916.jpg\" width=\"320\"/>"
+        "body": "<img src=\"images/archive/img001-796916.jpg\" width=\"320\"/>"
     },
     {
         "file": "2007-08-01-Dark-Skies.md",
         "year": "2007",
         "date": "August 01, 2007",
         "title": "Dark Skies",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi06QOhDkXnTjVncU_Z9lQYqh-V1Bc5Z_d_m2wgRVRIGMQI-FSv0MGsJpAjTn82DHhOJ4SiID71E8yUQBKAIe0lS4Ss6vGeMLFSnNX5GdCd4Riq2jvBXL3I_LYOE4bqYHp5bhhR/s320/img155-764247.jpg\" width=\"320\"/>\nThose, my friends, are some serious clouds.Posted wirelessly!"
+        "body": "<img src=\"images/archive/img155-764247.jpg\" width=\"320\"/>\nThose, my friends, are some serious clouds.Posted wirelessly!"
     },
     {
         "file": "2007-07-31-Bad-Traffic.md",
         "year": "2007",
         "date": "July 31, 2007",
         "title": "Bad Traffic",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEibbIDEVNHhx5YYvDhuUK1mJPTebF4IOKtB5AGfamHp9mAeIIRpeuFmPW4VEonnYnPbahbG7a7B3bHjLxpDnYfRKGZFF581NxnjsQbLZmXd0HTVizeHZr5Qk2jRasxzfIvyb3Wm/s320/img153-732171.jpg\" width=\"320\"/>\nPosted wirelessly!"
+        "body": "<img src=\"images/archive/img153-732171.jpg\" width=\"320\"/>\nPosted wirelessly!"
     },
     {
         "file": "2007-07-29-On-the-Death-Star.md",
         "year": "2007",
         "date": "July 29, 2007",
         "title": "On the Death Star",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgDU3efGWXXSPWOp22rfdM3liyflNnN-84ZVOzCt8S7v_twvKvPtq3xq9I1e9JZ-InQMMsCiwJ-LjIvLvfaAiYQ09ucL3ivVs4zlc5mB71krcnIIrczn99KyFavExBhQreBpAzd/s320/img152-712386.jpg\" width=\"320\"/>\nI met Darth Vader tonight.  He force choked me.  It hurt.Posted by the force."
+        "body": "<img src=\"images/archive/img152-712386.jpg\" width=\"320\"/>\nI met Darth Vader tonight.  He force choked me.  It hurt.Posted by the force."
     },
     {
         "file": "2007-07-28-Monsoon.md",
         "year": "2007",
         "date": "July 28, 2007",
         "title": "Monsoon",
-        "body": "While downstairs cleaning this afternoon, the sunlight entering through my eastern windows faded quickly.  Crossing my fingers, I walked out the front door and snapped a few pictures for good measure.  A storm was brewing just northeast of my location, and luckily seemed to be heading my way.\n\nI should mention that I love the monsoon season in Arizona...I know many others do not share my predilection.  But these summer storms have a certain je ne sais quoi...a seeming ability to transcend the boiling rut of summer and make it feel new again. \n\nMany of the sentiments date back to the elementary school years, when those precious summer months meant something entirely different than they do now.  As creatures of curious stimulus, we sometimes find comfort in those few stable elements of our lives that repeat each year ad nauseum...The monsoons are as such for me.\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhIr2Et4S28ALo-v0eThATrjXKvgtKgmTrOSeHY7j70iICz4LD8fL5ZHHSObLnMANObi5yFI6SIgC3uX24g7sFp4lLf22YCkA0UWHd8M9pIs_lvG_s60TUC3WdzwoMDMuBvbW3i/s1600/IMG_1063.JPG\" height=\"240\" width=\"320\" />\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgydyoIgGauPiQXRLWHnGimxh66eeX-tF3uVFlV3ajaD5Z026uc2CxA31pDPZjyoQGnOjS7wF2NKanzPNLPT0SML8lFbE6X5DCgX9wBs1yZ4Vgh1u_zNPgL_x6X7xCu5dW3Sdmy/s1600/IMG_1067.JPG\" height=\"240\" width=\"320\" />"
+        "body": "While downstairs cleaning this afternoon, the sunlight entering through my eastern windows faded quickly.  Crossing my fingers, I walked out the front door and snapped a few pictures for good measure.  A storm was brewing just northeast of my location, and luckily seemed to be heading my way.\n\nI should mention that I love the monsoon season in Arizona...I know many others do not share my predilection.  But these summer storms have a certain je ne sais quoi...a seeming ability to transcend the boiling rut of summer and make it feel new again. \n\nMany of the sentiments date back to the elementary school years, when those precious summer months meant something entirely different than they do now.  As creatures of curious stimulus, we sometimes find comfort in those few stable elements of our lives that repeat each year ad nauseum...The monsoons are as such for me.\n\n<img border=\"0\" src=\"images/archive/IMG_1063.JPG.jpg\" height=\"240\" width=\"320\" />\n\n<img border=\"0\" src=\"images/archive/IMG_1067.JPG.jpg\" height=\"240\" width=\"320\" />"
     },
     {
         "file": "2007-07-27-Lake-Arrowhead--revisited.md",
         "year": "2007",
         "date": "July 27, 2007",
         "title": "Lake Arrowhead, revisited",
-        "body": "A brief hiatus from the blog, but I come back with content.  Actually, I'll confess a bit of writer's block that affects me even now.  I know the only way to overcome this pitfall is to keep writing...so if the quality suffers as I go along here, my apologies. \n\nAs I wrote last week, the family and I took a trip to Lake Arrowhead over the weekend.  We didn't stay for very long, I'm sad to say.  Not nearly long enough.  The weather was obscenely beautiful with the temperatures never gracing the 90 degree platform.  There was nary a cloud in the satiny blue sky.  To leave Arizona during the hottest month was the best part about it all, though it left a fog over our mind when we thought about going back home.  Here, just see for yourself.\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEirprhGSxC534iOOGCaZSbTw4N6zw7xiywjrgPotaF5V2vNkuMLaJS2041QEKrB-kd0xuv4wnmA-xVsdYE5GFRGMPFGsLh_LhVi3q7-HlweafCjSI-YfKpkPoWrrlVEYzdhQTLE/s1600/IMG_1017.JPG\" height=\"240\" width=\"320\" />\n\nDoes it get much better than that? This was Saturday, our day at Lake Gregory.  It's not too far away from the town of Lake Arrowhead, and kids prefer it as a destination, owing to the water slides and all.  If you look close in the next picture, you can see it winding down through the trees.  If only I had a better trained eye for this type of thing, the slide would be the focus of the picture, rather that...well, nothing in particular.  Maybe that big tree in the middle.  Which looks like it belongs in Rockefeller Center.\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgK0GHiHVzeTcRuVJ17C45dmicJnxdBRZJaYjVehOSiEZDun-Btq0D9AoiC-pHaBuZbqFswiYFx4VVlVhDF6f-tqr4wbISQhwjwabxDrzv4UpT07iiLe4WU9psCMaL2axyq22Zx/s1600/IMG_1030.JPG\" height=\"240\" width=\"320\" />\n\nIt's quite sad...I'm looking through the photos I took, and it's bare indeed.  I hardly took time to snap anything.  What can I say, I was too busy not doing anything in particular.  Not something I get to do very often.\n\nWhen Sumner ran up to the lake, he had two very important questions for us.  Why was there sand in the pool?  Where is the blue water?  He wanted blue water, if possible.  He even said please and thank you.  But that didn't stop him from diving right in.  And let me tell you, it was cold water.  Dad didn't even go in past his ankles.  What a bum.\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh4qCJnBMD-CEvdZ32tXl_imJq3m6hYNeq9ODhXMF_Eyg01h6Tx4Dp_FlcM7is4EVtzN5rJG3lD6PUN4rliyoNIFF0QDPq_ff2qvyLtOYYRGTmDkqUNw4pJnLIs-NkJ9sogaHJ8/s1600/IMG_10261.jpg\" height=\"240\" width=\"320\" />\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjm0lmEl7E-IRn1_yX2Yit82XUHoTkTX0pQQAwiiJv5faw_aX5O1cQkjhkjdn3t5vXsm2zOMnlWyyNaumenTXBCFdPblPyQMO86TmpKho4GJj9ppP7y5UTcEV0mXw2WnSmL3coi/s1600/IMG_1035.JPG\" height=\"240\" width=\"320\" />\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh4qCJnBMD-CEvdZ32tXl_imJq3m6hYNeq9ODhXMF_Eyg01h6Tx4Dp_FlcM7is4EVtzN5rJG3lD6PUN4rliyoNIFF0QDPq_ff2qvyLtOYYRGTmDkqUNw4pJnLIs-NkJ9sogaHJ8/s1600/IMG_10261.jpg\" height=\"240\" width=\"320\" />\n\nWe stayed in Lake Arrowhead until about 4:00pm on Sunday.  More often than not, we leave in the early morning hours, but this time we just couldn't pull ourselves away from the scene.  We played pool, read, played more pool, read again, ate, sat out on the deck, and read some more.  I finished Harry Potter #6 on the way home.  Wait, I feel redundant.  I digress.\n\nI saw some interesting mountains a ways off in the distance as we were traveling home on the I-10 that evening, and it made me realize again just how beautiful and varied Arizona is.  I'll probably never even see a tenth of the things this state has to offer. \n\nSorry about the fuzziness of the pictures, it was getting dark and we were traveling at 80 mph, after all.  But you'll get the idea.\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjrIJU2yCEUjUpX_nyRKHC5A9HXnQic62yRfVJVkANOmqxSfOL1tbUKhyphenhyphenQYdsUOqDQq5mZ5-cwmhllWX1xrf_ZUjXHdidxaqefoKIXZdl8lHSGmIwT-GWrgQdkF8kd_c7jHapk8/s1600/IMG_1053.JPG\" height=\"240\" width=\"320\" />\n\nThat cold that I mentioned last week is still with me.  I can't stop coughing and it's becoming annoying.  Yes, I ought to take better care of myself, and I thought I was over this bout until the cool mountain air entered my lungs late Thursday night.  I woke up feeling it Friday morning, and I'm having the hardest time shaking it. \n\nSee, I told you i'd wander all over this blog.  A million apologies.  I'm going to end it there, if you don't mind.  Enjoy the pictures, and be sure to head on over the the Moblah'g when you have the opportunity.  Always something going on there, for certain."
+        "body": "A brief hiatus from the blog, but I come back with content.  Actually, I'll confess a bit of writer's block that affects me even now.  I know the only way to overcome this pitfall is to keep writing...so if the quality suffers as I go along here, my apologies. \n\nAs I wrote last week, the family and I took a trip to Lake Arrowhead over the weekend.  We didn't stay for very long, I'm sad to say.  Not nearly long enough.  The weather was obscenely beautiful with the temperatures never gracing the 90 degree platform.  There was nary a cloud in the satiny blue sky.  To leave Arizona during the hottest month was the best part about it all, though it left a fog over our mind when we thought about going back home.  Here, just see for yourself.\n\n<img border=\"0\" src=\"images/archive/IMG_1017.JPG.jpg\" height=\"240\" width=\"320\" />\n\nDoes it get much better than that? This was Saturday, our day at Lake Gregory.  It's not too far away from the town of Lake Arrowhead, and kids prefer it as a destination, owing to the water slides and all.  If you look close in the next picture, you can see it winding down through the trees.  If only I had a better trained eye for this type of thing, the slide would be the focus of the picture, rather that...well, nothing in particular.  Maybe that big tree in the middle.  Which looks like it belongs in Rockefeller Center.\n\n<img border=\"0\" src=\"images/archive/IMG_1030.JPG.jpg\" height=\"240\" width=\"320\" />\n\nIt's quite sad...I'm looking through the photos I took, and it's bare indeed.  I hardly took time to snap anything.  What can I say, I was too busy not doing anything in particular.  Not something I get to do very often.\n\nWhen Sumner ran up to the lake, he had two very important questions for us.  Why was there sand in the pool?  Where is the blue water?  He wanted blue water, if possible.  He even said please and thank you.  But that didn't stop him from diving right in.  And let me tell you, it was cold water.  Dad didn't even go in past his ankles.  What a bum.\n\n<img border=\"0\" src=\"images/archive/IMG_10261.jpg\" height=\"240\" width=\"320\" />\n\n<img border=\"0\" src=\"images/archive/IMG_1035.JPG.jpg\" height=\"240\" width=\"320\" />\n\n<img border=\"0\" src=\"images/archive/IMG_10261.jpg\" height=\"240\" width=\"320\" />\n\nWe stayed in Lake Arrowhead until about 4:00pm on Sunday.  More often than not, we leave in the early morning hours, but this time we just couldn't pull ourselves away from the scene.  We played pool, read, played more pool, read again, ate, sat out on the deck, and read some more.  I finished Harry Potter #6 on the way home.  Wait, I feel redundant.  I digress.\n\nI saw some interesting mountains a ways off in the distance as we were traveling home on the I-10 that evening, and it made me realize again just how beautiful and varied Arizona is.  I'll probably never even see a tenth of the things this state has to offer. \n\nSorry about the fuzziness of the pictures, it was getting dark and we were traveling at 80 mph, after all.  But you'll get the idea.\n\n<img border=\"0\" src=\"images/archive/IMG_1053.JPG.jpg\" height=\"240\" width=\"320\" />\n\nThat cold that I mentioned last week is still with me.  I can't stop coughing and it's becoming annoying.  Yes, I ought to take better care of myself, and I thought I was over this bout until the cool mountain air entered my lungs late Thursday night.  I woke up feeling it Friday morning, and I'm having the hardest time shaking it. \n\nSee, I told you i'd wander all over this blog.  A million apologies.  I'm going to end it there, if you don't mind.  Enjoy the pictures, and be sure to head on over the the Moblah'g when you have the opportunity.  Always something going on there, for certain."
     },
     {
         "file": "2007-07-26-The-Good-News.md",
@@ -3141,42 +3147,42 @@ const wayback_raw_dump = [
         "year": "2007",
         "date": "July 25, 2007",
         "title": "And the rain rain rain came down down down.....",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjHv8lxMaZ8cQNaO-Aw6vuO7lb0V0OLf042UgcdwNqVEz7lVZQ5v7x4fdrZoZ-qy3n9G66t0ICQ7Rd7Ko5CKephf8i31jer-bSt2IRpStDReXYUxePXWphyphenhyphenZeEwMwyoM8H48jjc/s320/img151-767326.jpg\" width=\"320\"/>\nAbout time!\nPosted wirelessly!"
+        "body": "<img src=\"images/archive/img151-767326.jpg\" width=\"320\"/>\nAbout time!\nPosted wirelessly!"
     },
     {
         "file": "2007-07-23-On-the-way-home.md",
         "year": "2007",
         "date": "July 23, 2007",
         "title": "On the way home",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjLydOdTodVhyphenhyphenyxVN-0ixwrD0JNQLbjSIFAcfPRvQ0ZTd1xPkGa8S6t5PxbGR6j-1sWWvXlq-oXRw7o-HroghDpo_lMmxMOM8cq42QxYUcLa9Rg1NMXs_HtwLLJzyA-7ywTuZeQ/s320/img146-716180.jpg\" width=\"320\"/>\nMuch of the journey behind us, we travel behind the \"useless van\". (as my wife calls it,  it being inconsistent with its speed..)We were sad to leave the comforts of the cabin behind, a polar opposite to numerous other visits when we had packed up and left not a moment after waking.  Maybe it was the unusual quiet of the surroundings, or perhaps the imminent commencement of another work week...we weren't quite ready to leave.I had the great fortune to finish Harry Potter #6 while away.  It's always nice to achieve a lazy goal while on vacation, and I had wanted a good start for Harry Potter #7, which is undoubtedly waiting for my arrival on my front porch.A good journey, for sure.  No, not necessarily marked by the live blogging I had hoped for...it is decidedly tougher than I had imagined, dividing one's time between relaxing and writing.  Truthfully, I hadn't so much as glanced at my phone more than a few times per day, a grand testament to the diversionary successes of our holiday.More to come later, certainly.  Thanks for visiting, thanks for the comments.  Posted wirelessly!"
+        "body": "<img src=\"images/archive/img146-716180.jpg\" width=\"320\"/>\nMuch of the journey behind us, we travel behind the \"useless van\". (as my wife calls it,  it being inconsistent with its speed..)We were sad to leave the comforts of the cabin behind, a polar opposite to numerous other visits when we had packed up and left not a moment after waking.  Maybe it was the unusual quiet of the surroundings, or perhaps the imminent commencement of another work week...we weren't quite ready to leave.I had the great fortune to finish Harry Potter #6 while away.  It's always nice to achieve a lazy goal while on vacation, and I had wanted a good start for Harry Potter #7, which is undoubtedly waiting for my arrival on my front porch.A good journey, for sure.  No, not necessarily marked by the live blogging I had hoped for...it is decidedly tougher than I had imagined, dividing one's time between relaxing and writing.  Truthfully, I hadn't so much as glanced at my phone more than a few times per day, a grand testament to the diversionary successes of our holiday.More to come later, certainly.  Thanks for visiting, thanks for the comments.  Posted wirelessly!"
     },
     {
         "file": "2007-07-21-The-world-s--largest-freakin--.md",
         "year": "2007",
         "date": "July 21, 2007",
         "title": "The world's  largest freakin' pizza",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh4djbRHROGXqoRdKB_tqXv-nD8xyDJgdPKMaa3jZBmLp5KeNYkZZVaKVoUeg62k8muD9i6Vm0SYEAWZE_BVV9TxnOh4iZ_7hdk8lHcBizu2dUMHqEJzM2XzgdMtq-orjoK9HYq/s320/img142-742249.jpg\" width=\"320\"/>\nCheck THAT out.Posted wirelessly!"
+        "body": "<img src=\"images/archive/img142-742249.jpg\" width=\"320\"/>\nCheck THAT out.Posted wirelessly!"
     },
     {
         "file": "2007-07-21-The-Village.md",
         "year": "2007",
         "date": "July 21, 2007",
         "title": "The Village",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjvsXO7O3XK0IUZ06ca8p8i-JCmKOCWkv7B1mOjjX7UHghaTJqVR6k4Orx2ecKsfYdTZFUXh2SHgs0ledl1X32UoqyCHYhVqlYb9Lmg5f95oPq272cQuLDktkNu21IlXgwrY93o/s320/img144-711216.jpg\" width=\"320\"/>\nNot the movie.  It's only 79 degrees now, and the wind has kicked up quite a bit.I noticed on the way back from Lake Gregory just how dry the mountain is.  It's pretty severe, with enough dry undergrowth to start a fire real quick.Posted wirelessly!"
+        "body": "<img src=\"images/archive/img144-711216.jpg\" width=\"320\"/>\nNot the movie.  It's only 79 degrees now, and the wind has kicked up quite a bit.I noticed on the way back from Lake Gregory just how dry the mountain is.  It's pretty severe, with enough dry undergrowth to start a fire real quick.Posted wirelessly!"
     },
     {
         "file": "2007-07-21-Lake-Gregory.md",
         "year": "2007",
         "date": "July 21, 2007",
         "title": "Lake Gregory",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjQI9Zvx3-GpKpWDGGBVPohWOQ_alLG0yKgKo8VZvf5tei09nK7ER0hR1Cd1QzGowD1JKKKCPGtKc9E7arc6NhCsoaFN8rq0BpitxJ-VTf8Fhj_KXdRJkkikIblIc7b5fMsKsZU/s320/img143-759290.jpg\" width=\"320\"/>\nFull of summer visitors, ready to get away from the (87 degree) heat.  Excellent weather, for sure!  I'll still get a sunburn.  We'll see.Posted wirelessly!"
+        "body": "<img src=\"images/archive/img143-759290.jpg\" width=\"320\"/>\nFull of summer visitors, ready to get away from the (87 degree) heat.  Excellent weather, for sure!  I'll still get a sunburn.  We'll see.Posted wirelessly!"
     },
     {
         "file": "2007-07-20-At-the-cabin.md",
         "year": "2007",
         "date": "July 20, 2007",
         "title": "At the cabin",
-        "body": "<img src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgRH21peqVRkOftveynQGkBsxMkM6_8mFlTOYVk1AbJ6zopwX79OxeIHdAVXeKG9iHzl9wvoeMbxzkFTHbMyvc8rn51gByeIue9jV1r9ccAavUA-Knxev3HwSArqag4AafmAtdM/s320/img141-747427.jpg\" width=\"320\"/>\nHere we are, after quite the late night drive.  The weather is just fine (60 degrees) and I've already seen quite a few Blue Jays.  More later!Posted wirelessly!"
+        "body": "<img src=\"images/archive/img141-747427.jpg\" width=\"320\"/>\nHere we are, after quite the late night drive.  The weather is just fine (60 degrees) and I've already seen quite a few Blue Jays.  More later!Posted wirelessly!"
     },
     {
         "file": "2007-07-11-Three-E-s.md",
@@ -3211,7 +3217,7 @@ const wayback_raw_dump = [
         "year": "2007",
         "date": "July 10, 2007",
         "title": "The Blog Goes Green",
-        "body": "It was a busy weekend.  As I mentioned in the daily blog, I had no desire to get back on the computer after Friday night, which is a rare thing for me.  Usual weekends involve me plastered to my desk for hours each night, pounding out words and redesigning the site.\n\nSo why the change of heart this weekend?  In a fit of redesign rage Friday night, I looked up at the top of this very page often, frowning each time at the volume of white space.  I wanted something different!  I wanted flash animation!  I had no idea how to do this!\n\nOff I went to Adobe.com, searching for tips and tricks to implement a custom-drawn animation into my site.  Fifteen minutes later, I gave up and simply downloaded the entire 400 Mb trial version of Flash CS3 Professional.  I figured I could learn it as I went along, kind of like I did with Photoshop.  While I did take a class to learn Photoshop, the only real thing I paid attention to was how to make water effects with the \"ripple\" tool.  That hasn't come in too handy, except for entertaining Sumner.  And I should add that's losing it's luster quick too.\n\nBack to Flash.  I installed the program (nearly 10 minutes, a new record) and opened it up.  Nothing looked familiar, so I poked around the menu settings and decided to start from a template.  Templates have historically been a great place to start learning programs risk-free, but the problem here was that every template was for a banner ad.  That wasn't really what I had in mind.\n\nI kept at it for another two hours or so and let me make no pretense; I was extremely frustrated.  I have no idea why I expected to pick it up and learn it without some sort of effort, and the program made me pay dearly.  By the end of the night I was fed up with everything computer related, and I shut the computer off.  Done. \n\nSaturday morning brought a welcomed phone call from the in-laws; this can only mean one thing on a weekend.  Breakfast!  We don't do it often, but when the occasion arises, the wife and I always recommend Cracker Barrel as our choice of restaurant.  They never disappoint with their selection of morning delicacies, but we could never convince them to go.  I suppose they had a valid reason, as the nearest location was situated somewhere down the I-10 in Tempe, nearly 20 miles from our location.  As a side note, I would whole-heartedly drive the distance if it meant being spared from such tortuous devices as Denny's and *shudder* McDonalds.  I used to like their breakfast food, but then I grew taste buds and moved on. \n\nThe fortuitous occasion arrived a few months ago that a Cracker Barrel was built just five miles away from the in-law's house, nestled right next to the largest outdoor outfitter that I have ever seen.  I think they may have an indoor outdoor inside that building, if you follow.  Otherwise, I can't digest the idea that the entirety is covered with merchandise.  The edifice is simply too big.\n\nI don't remember where I was going with this.  Oh yes, Cracker Barrel.  I had the most delicious selection on the menu, Mama's French Toast Breakfast with turkey sausage (sausage! shout out to Janey) and scrambled eggs.  I highly recommend it.  The wife got her usual, a mountainous bowl of oatmeal and a muffin the size of a bowling ball.  She can hardly put a dent in the muffin, but Sumner likes to eat the rest anyway.  It all works out when you have a three year old with a voracious appetite.  No kidding, that child can pack it in when he wants to.  When he doesn't want to, well...good luck.\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi6jqAa9ECmA5PeHpTLf55cflcTdaFi3xb-i39RClSG50ZS-3tE2ogZhCFdllvT0EaC3iW_h5tpNhEERXCfNMqD6sutEfZqqydEtfedi8RcKDhW8aaWfjFUaAqhxTgLvlZ_SjcP/s1600/IMG_0941.JPG\" height=\"300\" width=\"400\" />After breakfast, we parted ways with the in-laws and headed back toward our side of East freakin' Mesa, and I remembered that we had surpassed our oil change reminder by several...*ahem*...months.  It was decided that it would probably be a good idea to head over to the dealership.  The brakes were shot on both vehicles, and the wife's car made Bozo the Clown noises whenever you turned it on.  The past few times we had taken the car to the local mechanic, they being the cheaper of others in town and a place we had trusted on multiple occasions.  Yet the last time, I was left unimpressed by their brash service.  It was time to go Honda, baby.\n\nAnd that's where it happened.  Presented by repair and maintenance bills that stretched the length of 8.5x11, we thought twice about our future relationship with not one, but both cars.  You might call it an impulse; heck, you could even call it a rash decision, but we made friends with two particular cars on the lot that decided to follow us home that night.\n\nAfter spending eight hours at the dealership.  Eight. Freaking. Hours. \n\nAnd yes, we like 'em.  Nah, we love 'em.  We got two Honda Fits, their newest car that promise good gas mileage and low emissions. (you wondered why the Blog went green?  Now you know)  They drive swell.  And hey, it's the wife's first new car!\n\nGood news all around.  We should save a small fortune on gas during the next few years.  That fact played no small role in our decision to make the trade.  They're good looking too for such small cars.  Pretty functional too, I was amazed at the flexibility of the cabin.  Plenty of room for kids in the back seat, too.  All for the price of one inexpensive SUV!  And we got two of them.\n\nYeah, I'm a bit sad to see the Acura go.  Sumner actually asked later that night when we thought the old cars would get back from the hospital (it was the only analogy that fit, really) and I told him that they probably weren't. \n\nThe Acura was still a pretty good car, but the mileage jumped up really quick and I had already had the air conditioner and transmission worked on recently. \n\nI don't even want to know what'll happen to the wife's Bozo car.  I was worried every day that she drove that thing to work.  Darn thing shook so much she swore it'd blow and leave an Olympic-sized crater in the freeway.   My dad told me at least a billion times to stop exaggerating, but I ain't kidding you.  One shaky car.\n\nThe picture ain't great, but the red one is mine, the white one is hers.  Cut the picture in half and you'll have a whole car!  I wanted to roll them out of the garage, but that would have meant opening up the door and possibly waking up the boy from his slumber. I'll take a few pictures later on down the road. \n\nSo that was Saturday, and you should now be gathering a pretty good idea of why no posts were made throughout the weekend.  We came home pooped that night and slept soundly as can be.  Sunday was spent in the company of family visiting from Utah, and that was really nice.  We were still pert tired from the previous day's activities, so we needed a break.  Oh yes, and the wife fell into the pool.  \n\nActually, Sumner pushed her in.  It was quite humorous. \n\nMy mother provided her with dry clothes from the bottom of Where's Waldo's 1990's chest of drawers, so she looked extra nice on the ride home.  She asked if I thought people could see her through the windows, and I said no.  Though I kept wondering why so many people were pointing and shouting, \"There he is!  I see him!\"\n\nPhew.  I think that's a generous enough entry for the time being.  Time to hit the hay.  See you over at the Moblah'g!  You know how to get there."
+        "body": "It was a busy weekend.  As I mentioned in the daily blog, I had no desire to get back on the computer after Friday night, which is a rare thing for me.  Usual weekends involve me plastered to my desk for hours each night, pounding out words and redesigning the site.\n\nSo why the change of heart this weekend?  In a fit of redesign rage Friday night, I looked up at the top of this very page often, frowning each time at the volume of white space.  I wanted something different!  I wanted flash animation!  I had no idea how to do this!\n\nOff I went to Adobe.com, searching for tips and tricks to implement a custom-drawn animation into my site.  Fifteen minutes later, I gave up and simply downloaded the entire 400 Mb trial version of Flash CS3 Professional.  I figured I could learn it as I went along, kind of like I did with Photoshop.  While I did take a class to learn Photoshop, the only real thing I paid attention to was how to make water effects with the \"ripple\" tool.  That hasn't come in too handy, except for entertaining Sumner.  And I should add that's losing it's luster quick too.\n\nBack to Flash.  I installed the program (nearly 10 minutes, a new record) and opened it up.  Nothing looked familiar, so I poked around the menu settings and decided to start from a template.  Templates have historically been a great place to start learning programs risk-free, but the problem here was that every template was for a banner ad.  That wasn't really what I had in mind.\n\nI kept at it for another two hours or so and let me make no pretense; I was extremely frustrated.  I have no idea why I expected to pick it up and learn it without some sort of effort, and the program made me pay dearly.  By the end of the night I was fed up with everything computer related, and I shut the computer off.  Done. \n\nSaturday morning brought a welcomed phone call from the in-laws; this can only mean one thing on a weekend.  Breakfast!  We don't do it often, but when the occasion arises, the wife and I always recommend Cracker Barrel as our choice of restaurant.  They never disappoint with their selection of morning delicacies, but we could never convince them to go.  I suppose they had a valid reason, as the nearest location was situated somewhere down the I-10 in Tempe, nearly 20 miles from our location.  As a side note, I would whole-heartedly drive the distance if it meant being spared from such tortuous devices as Denny's and *shudder* McDonalds.  I used to like their breakfast food, but then I grew taste buds and moved on. \n\nThe fortuitous occasion arrived a few months ago that a Cracker Barrel was built just five miles away from the in-law's house, nestled right next to the largest outdoor outfitter that I have ever seen.  I think they may have an indoor outdoor inside that building, if you follow.  Otherwise, I can't digest the idea that the entirety is covered with merchandise.  The edifice is simply too big.\n\nI don't remember where I was going with this.  Oh yes, Cracker Barrel.  I had the most delicious selection on the menu, Mama's French Toast Breakfast with turkey sausage (sausage! shout out to Janey) and scrambled eggs.  I highly recommend it.  The wife got her usual, a mountainous bowl of oatmeal and a muffin the size of a bowling ball.  She can hardly put a dent in the muffin, but Sumner likes to eat the rest anyway.  It all works out when you have a three year old with a voracious appetite.  No kidding, that child can pack it in when he wants to.  When he doesn't want to, well...good luck.\n\n<img border=\"0\" src=\"images/archive/IMG_0941.JPG.jpg\" height=\"300\" width=\"400\" />After breakfast, we parted ways with the in-laws and headed back toward our side of East freakin' Mesa, and I remembered that we had surpassed our oil change reminder by several...*ahem*...months.  It was decided that it would probably be a good idea to head over to the dealership.  The brakes were shot on both vehicles, and the wife's car made Bozo the Clown noises whenever you turned it on.  The past few times we had taken the car to the local mechanic, they being the cheaper of others in town and a place we had trusted on multiple occasions.  Yet the last time, I was left unimpressed by their brash service.  It was time to go Honda, baby.\n\nAnd that's where it happened.  Presented by repair and maintenance bills that stretched the length of 8.5x11, we thought twice about our future relationship with not one, but both cars.  You might call it an impulse; heck, you could even call it a rash decision, but we made friends with two particular cars on the lot that decided to follow us home that night.\n\nAfter spending eight hours at the dealership.  Eight. Freaking. Hours. \n\nAnd yes, we like 'em.  Nah, we love 'em.  We got two Honda Fits, their newest car that promise good gas mileage and low emissions. (you wondered why the Blog went green?  Now you know)  They drive swell.  And hey, it's the wife's first new car!\n\nGood news all around.  We should save a small fortune on gas during the next few years.  That fact played no small role in our decision to make the trade.  They're good looking too for such small cars.  Pretty functional too, I was amazed at the flexibility of the cabin.  Plenty of room for kids in the back seat, too.  All for the price of one inexpensive SUV!  And we got two of them.\n\nYeah, I'm a bit sad to see the Acura go.  Sumner actually asked later that night when we thought the old cars would get back from the hospital (it was the only analogy that fit, really) and I told him that they probably weren't. \n\nThe Acura was still a pretty good car, but the mileage jumped up really quick and I had already had the air conditioner and transmission worked on recently. \n\nI don't even want to know what'll happen to the wife's Bozo car.  I was worried every day that she drove that thing to work.  Darn thing shook so much she swore it'd blow and leave an Olympic-sized crater in the freeway.   My dad told me at least a billion times to stop exaggerating, but I ain't kidding you.  One shaky car.\n\nThe picture ain't great, but the red one is mine, the white one is hers.  Cut the picture in half and you'll have a whole car!  I wanted to roll them out of the garage, but that would have meant opening up the door and possibly waking up the boy from his slumber. I'll take a few pictures later on down the road. \n\nSo that was Saturday, and you should now be gathering a pretty good idea of why no posts were made throughout the weekend.  We came home pooped that night and slept soundly as can be.  Sunday was spent in the company of family visiting from Utah, and that was really nice.  We were still pert tired from the previous day's activities, so we needed a break.  Oh yes, and the wife fell into the pool.  \n\nActually, Sumner pushed her in.  It was quite humorous. \n\nMy mother provided her with dry clothes from the bottom of Where's Waldo's 1990's chest of drawers, so she looked extra nice on the ride home.  She asked if I thought people could see her through the windows, and I said no.  Though I kept wondering why so many people were pointing and shouting, \"There he is!  I see him!\"\n\nPhew.  I think that's a generous enough entry for the time being.  Time to hit the hay.  See you over at the Moblah'g!  You know how to get there."
     },
     {
         "file": "2007-07-09-Mars-Rovers.md",
@@ -3267,7 +3273,7 @@ const wayback_raw_dump = [
         "year": "2007",
         "date": "July 04, 2007",
         "title": "Fourth of July, 2007 style",
-        "body": "Good morning, and welcome to the Fourth of July, a day to be spent reflective upon the foundation of our country, those who sacrificed for it, and of course, to try and blow a small portion of it sky-high.\n\nThat is, unless you live in Arizona.  I don't believe we've had rainfall in months.  That leaves the state absolutely dried up, though that has no meaning on the yearly 'works.  Speaking of rainfall, most habitants here are patiently waiting for the annual monsoon storms.  I snapped this picture in late May, and had the false hope that we might begin receiving the storms two months early:\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiIPnb27VKi1LPH5vg_c72dHzJsLsfKLj92xa-Lzfc21u8WIr3ki_JzN35l75bLxMLfEBltlfgon6jgyqEHvSPyo5hXckHI2fzSLepVujwC8ntL9ExTdplcH9zLvLPAhWG5JWGG/s1600/IMG_0889.JPG\" height=\"300\" width=\"400\" />Yes, I know the picture would have been immensely better had those cell towers not been smack in the middle, but that's the way it is living in the city.  I was quite disappointed to find those towers so close to our little community of houses.\n\nI digress.  Ever since I moved to Arizona in 1990, all forms of fireworks have been illegal.  Oh, we'll see some tonight, brought to you by some large display by the city of Surprise, but you know it's never the same.  There's something about lighting that fuse and getting the heck out of dodge.  I take heart knowing that other states have not banned the art of colorful gunpowder just yet; it means that if we ever do move from this state someday, we may just be able to enact our own glorious display of pyrotechnic delight.\n\nAs you may have noticed, I did manage to fix this page so that it behaves half-way normal.  The clickable calendar has been destroyed as it was too hard to manage.  Whenever I moved it, it would blow up the entire table, both where I moved to it, and where I moved it from.  Everything else is up to date, and the remaining structure will stay from here on out (or until I get bored again).  The only item that might change is the top graphic, as I have always felt the blog page needed its own flair.  Agreed?\n\nThere have also been further posts over at the Moblah'g, so if you haven't visited in a while, go check it out.  I'll always be grateful for the patronage.  I have noticed that the pictures I have taken with the mobile phone always lean heavily toward yellow; it makes me pine greatly for a better camera.  Not a new phone, mind you...I'd be happy with an auto-focusing 2 or 3 megapixel camera in my current phone.  But have I told you of the picture quality of the pictures from the iPhone?  Ah, the pictures I could take with that!  *back to reality* But that will not happen, as I couldn't do 75% of the other things necessary for the livelihood of the Moblah'g. \n\nEh, it is what it is, so for the immediate future, the mobile blog will have yellowish pictures.\n\nThat's it for me today.  I think I've neglected my son for long enough this morning, and I haven't yet eaten breakfast.  But I've accomplished what I set out to do, and I can relax for the remainder of the day.  See you at the Moblah'g!"
+        "body": "Good morning, and welcome to the Fourth of July, a day to be spent reflective upon the foundation of our country, those who sacrificed for it, and of course, to try and blow a small portion of it sky-high.\n\nThat is, unless you live in Arizona.  I don't believe we've had rainfall in months.  That leaves the state absolutely dried up, though that has no meaning on the yearly 'works.  Speaking of rainfall, most habitants here are patiently waiting for the annual monsoon storms.  I snapped this picture in late May, and had the false hope that we might begin receiving the storms two months early:\n\n<img border=\"0\" src=\"images/archive/IMG_0889.JPG.jpg\" height=\"300\" width=\"400\" />Yes, I know the picture would have been immensely better had those cell towers not been smack in the middle, but that's the way it is living in the city.  I was quite disappointed to find those towers so close to our little community of houses.\n\nI digress.  Ever since I moved to Arizona in 1990, all forms of fireworks have been illegal.  Oh, we'll see some tonight, brought to you by some large display by the city of Surprise, but you know it's never the same.  There's something about lighting that fuse and getting the heck out of dodge.  I take heart knowing that other states have not banned the art of colorful gunpowder just yet; it means that if we ever do move from this state someday, we may just be able to enact our own glorious display of pyrotechnic delight.\n\nAs you may have noticed, I did manage to fix this page so that it behaves half-way normal.  The clickable calendar has been destroyed as it was too hard to manage.  Whenever I moved it, it would blow up the entire table, both where I moved to it, and where I moved it from.  Everything else is up to date, and the remaining structure will stay from here on out (or until I get bored again).  The only item that might change is the top graphic, as I have always felt the blog page needed its own flair.  Agreed?\n\nThere have also been further posts over at the Moblah'g, so if you haven't visited in a while, go check it out.  I'll always be grateful for the patronage.  I have noticed that the pictures I have taken with the mobile phone always lean heavily toward yellow; it makes me pine greatly for a better camera.  Not a new phone, mind you...I'd be happy with an auto-focusing 2 or 3 megapixel camera in my current phone.  But have I told you of the picture quality of the pictures from the iPhone?  Ah, the pictures I could take with that!  *back to reality* But that will not happen, as I couldn't do 75% of the other things necessary for the livelihood of the Moblah'g. \n\nEh, it is what it is, so for the immediate future, the mobile blog will have yellowish pictures.\n\nThat's it for me today.  I think I've neglected my son for long enough this morning, and I haven't yet eaten breakfast.  But I've accomplished what I set out to do, and I can relax for the remainder of the day.  See you at the Moblah'g!"
     },
     {
         "file": "2007-07-03-Xbox-360-failure-rate.md",
@@ -3295,7 +3301,7 @@ const wayback_raw_dump = [
         "year": "2007",
         "date": "July 02, 2007",
         "title": "Songs I heard",
-        "body": "This past weekend was one of those that passed quickly.  For example, when Sunday night rolls around, you tend you ask yourself what you accomplished, and the only thing you can think of is eating mac and cheese for dinner.  Sure, there was other stuff, but that was all filler, right?\n\nOf course, I did create quite a few entries for the ol' Moblah'g on Saturday, which was a lot of fun.  The boy and I decided we had enough of lounging around the house that morning, and skipped out at around quarter to noon.  I'll openly admit that I couldn't face the iPhone's launch sitting down; I had to see it for myself.  Like I mentioned in a previous post, I'm mostly impressed with the quality of the gadget.  The software is great too, with the exception of that darn keyboard.  Most say that it is something that can be gotten used to, I say I may not ever want to.  I like the keyboard on my Treo fine, thank you kindly.\n\nMobile blogging is truly a blast though, even if no one hardly reads it on the weekend.  I wish I could go all over the place and do it for a living.  I'd do it tomorrow, except my family needs food more than words.  Oh, if only these words could earn money.  Someday, maybe.  Today?  Not a chance.\n\nI often wonder what Sumner thinks of all the time I spend here in my office.  He's only a lad of three, so he probably doesn't think much of it.  Lately much of my free time has been consumed by the Web site, as happens from time to time...and occasionally he'll saunter in and ask me a few questions about why my Web site is blue (see, he has a supposed monopoly on all things blue, especially dark blue) and afterward, wander back into his room to play trucks or ninja turtles.  Oh, and that's another thing entirely.  Since when does my offspring play with my number one favorite toy of all time?  It just doesn't seem like that long has transpired since I bought my first turtle from Fred and Meyers back in '87.\n\nAh, but I gave myself away, didn't I?  It was a long, long time ago.  Nearly 20 years, to my count.  The world was so much the same, but so much is different now.  If you take time to consider it though, it's overwhelming how much is comparable from a certain perspective.  It really provides a bit of comfort in this insanely fast paced world.\n\nExcuse me.  It's 11:00pm and my son just hopped out of bed, and is playing with something on his bedroom floor.\n\nNo sweat, I'm back.  I opened the door and a small shadow flew past my field of view and dove back into the bed, dashing under the covers in the hopes that I may not have seen him.  It was amusing to behold, because I did the same thing so many times when I was his age.  Does nothing change with children?  It scares me what things in the future he will try to get away with while I'm not looking. \n\nI tucked him back into bed and told him that he had a big day ahead of him tomorrow, so he had better get a good night sleep.  He asked me if sleeping well would make him be a good boy, and I confirmed that he was already a very good boy, but sleeping would make him even better.  He smiled cheekily and with a wink told me that I was a good boy too.  Simple moments like those are what make Monday through Friday bearable, my friends.  Only a family can do that for you.\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjbjkoAve2NkeiRYL963WhnXWU6vyFEOzSLcJEy7T-LflEZTLH4PNlBO0Me7Yzh_DqwrhYCNtGA-pS0dd06Tc8xyV5BvPricvImaHKkdZ3nhWSY_TRhQ-fn9JDmcqZHRZegtYW1/s1600/harryconnnick.jpg\" />\n\nWhat am I listening to right now?  It's actually one of the finest albums I own.  A definite favorite.  Highly recommended! \n\nWhen you're tired of listening to traditional children's music, the kind that repeats itself straight into your cerebellum and travels down your spinal cord until it buries yourself deep in your soul, then you'll welcome \"Songs I Heard\" with tears of overwhelming joy.  I could listen to this album for hours, and I have on more than one occasion.  Heck, I owned it well before I had Sumner and even before I married the Mrs. \n\nThe selections from \"Charlie and the Chocolate Factory\" are my absolute favorite.  It makes me realize that it was the music (and Gene Wilder, of course) that made that movie.  The new version with poor hapless Johnny Depp just doesn't do it for me, I'm afraid.  It's visual, sure...but it lacks that special quality and charm that the original was blessed with.  The first time I watched the Gene version was back in the early eighties, at my great-grandmother's funeral.  All of the parents placed the children under the watchful eyes of the television set while they enjoyed Jell-O with bananas embedded deep into its core.  Yes, those are RD's memories.  It's probably very, very false...but I was Sumner's age, I think.  And the Oompa Loompas scared me to tears.  Big surprise.  The sky is also blue and the sun is hot.  Johnny Depp is also a loon.  Just as obvious, to me.\n\nI have no idea why this blog's column is so insanely long, and I keep taking time out during writing to try and figure it out.  I've decided that's not a good idea, as I feel about 10 feet above the keyboard.  I'm hitting the backspace button about as many times as I did when I used the iPhone's virtual keyboard (zing!).  Probably time for me to head off to bed.  Enjoy your Monday!  More bloggage at the Moblah'g.  I'll see you there!"
+        "body": "This past weekend was one of those that passed quickly.  For example, when Sunday night rolls around, you tend you ask yourself what you accomplished, and the only thing you can think of is eating mac and cheese for dinner.  Sure, there was other stuff, but that was all filler, right?\n\nOf course, I did create quite a few entries for the ol' Moblah'g on Saturday, which was a lot of fun.  The boy and I decided we had enough of lounging around the house that morning, and skipped out at around quarter to noon.  I'll openly admit that I couldn't face the iPhone's launch sitting down; I had to see it for myself.  Like I mentioned in a previous post, I'm mostly impressed with the quality of the gadget.  The software is great too, with the exception of that darn keyboard.  Most say that it is something that can be gotten used to, I say I may not ever want to.  I like the keyboard on my Treo fine, thank you kindly.\n\nMobile blogging is truly a blast though, even if no one hardly reads it on the weekend.  I wish I could go all over the place and do it for a living.  I'd do it tomorrow, except my family needs food more than words.  Oh, if only these words could earn money.  Someday, maybe.  Today?  Not a chance.\n\nI often wonder what Sumner thinks of all the time I spend here in my office.  He's only a lad of three, so he probably doesn't think much of it.  Lately much of my free time has been consumed by the Web site, as happens from time to time...and occasionally he'll saunter in and ask me a few questions about why my Web site is blue (see, he has a supposed monopoly on all things blue, especially dark blue) and afterward, wander back into his room to play trucks or ninja turtles.  Oh, and that's another thing entirely.  Since when does my offspring play with my number one favorite toy of all time?  It just doesn't seem like that long has transpired since I bought my first turtle from Fred and Meyers back in '87.\n\nAh, but I gave myself away, didn't I?  It was a long, long time ago.  Nearly 20 years, to my count.  The world was so much the same, but so much is different now.  If you take time to consider it though, it's overwhelming how much is comparable from a certain perspective.  It really provides a bit of comfort in this insanely fast paced world.\n\nExcuse me.  It's 11:00pm and my son just hopped out of bed, and is playing with something on his bedroom floor.\n\nNo sweat, I'm back.  I opened the door and a small shadow flew past my field of view and dove back into the bed, dashing under the covers in the hopes that I may not have seen him.  It was amusing to behold, because I did the same thing so many times when I was his age.  Does nothing change with children?  It scares me what things in the future he will try to get away with while I'm not looking. \n\nI tucked him back into bed and told him that he had a big day ahead of him tomorrow, so he had better get a good night sleep.  He asked me if sleeping well would make him be a good boy, and I confirmed that he was already a very good boy, but sleeping would make him even better.  He smiled cheekily and with a wink told me that I was a good boy too.  Simple moments like those are what make Monday through Friday bearable, my friends.  Only a family can do that for you.\n\n<img border=\"0\" src=\"images/archive/harryconnnick.jpg\" />\n\nWhat am I listening to right now?  It's actually one of the finest albums I own.  A definite favorite.  Highly recommended! \n\nWhen you're tired of listening to traditional children's music, the kind that repeats itself straight into your cerebellum and travels down your spinal cord until it buries yourself deep in your soul, then you'll welcome \"Songs I Heard\" with tears of overwhelming joy.  I could listen to this album for hours, and I have on more than one occasion.  Heck, I owned it well before I had Sumner and even before I married the Mrs. \n\nThe selections from \"Charlie and the Chocolate Factory\" are my absolute favorite.  It makes me realize that it was the music (and Gene Wilder, of course) that made that movie.  The new version with poor hapless Johnny Depp just doesn't do it for me, I'm afraid.  It's visual, sure...but it lacks that special quality and charm that the original was blessed with.  The first time I watched the Gene version was back in the early eighties, at my great-grandmother's funeral.  All of the parents placed the children under the watchful eyes of the television set while they enjoyed Jell-O with bananas embedded deep into its core.  Yes, those are RD's memories.  It's probably very, very false...but I was Sumner's age, I think.  And the Oompa Loompas scared me to tears.  Big surprise.  The sky is also blue and the sun is hot.  Johnny Depp is also a loon.  Just as obvious, to me.\n\nI have no idea why this blog's column is so insanely long, and I keep taking time out during writing to try and figure it out.  I've decided that's not a good idea, as I feel about 10 feet above the keyboard.  I'm hitting the backspace button about as many times as I did when I used the iPhone's virtual keyboard (zing!).  Probably time for me to head off to bed.  Enjoy your Monday!  More bloggage at the Moblah'g.  I'll see you there!"
     },
     {
         "file": "2007-07-02-It-s-definitely-a-Monday.md",
@@ -3533,14 +3539,14 @@ const wayback_raw_dump = [
         "year": "2007",
         "date": "June 25, 2007",
         "title": "Birth of the Moblah'g",
-        "body": "Monday evening, and a wonderful dip in the pool.  While we were swimming around, Sumner asked me one of those questions only children can ask. \n\n\"Why are the clouds orange, daddy?\"\n\nFunny how such a simple question can have such a complex answer to a child.  The sun reflects its light against the clouds in the evening. \n\n\"But, the sun is yellow\", he stated matter of factly.\n\nI then tried explaining that just as he sees himself in the mirror, the suns sees itself in the clouds.  That brought a smile to his face, and he resumed swimming.  Coincidentally, Sumner is an awesome swimmer, even better than he was last summer.  In previous years, he faced the pool and water with reckless abandon; he feared nothing about the entire event.  Seeing how he is more fully self-aware, I feared this summer would bring trepidation in full swing. \n\nBut after two weeks of prescribed swimming lessons, the boy is nearly swimming the width of the pool.  Any pool in fact, just as long as there is water enough to jump in.  He lasts much longer than his parents, too...he doesn't know when to quit yet. \n\nI'm pretty stoked to announce a new addition to Outside the World: The Moblah'g!  Go check it out, and come right back.  Don't worry, I'll wait right here.\n\nBack?  Good.  So the proper term is \"MoBlog\" (as in mobile blog), but I much prefer the Moblah'g.  I know it's been done thousands of times before by hundreds of thousands of people, but it's fun and why not, eh?  With this new blog, the site will be granted daily updates.  Everything comes straight from my smart phone, right as it happens.  It's my own little version of buzz.mn.\n\nI love the freedom that it gives me.  No longer is my mind tethered by my keyboard and mouse; I can post a picture and thoughts from anywhere I wish now.  Jeez, now that I think about it, this could be dangerous.  Well, with great power comes great responsibility, as one arachnid's uncle once said.  I'll do my best to entertain.\n\nSo, on the weekends, check the main blog site for updates.  Any other day, head on over to the Moblah'g.  I'll be much appreciative of the effort! \n\nAs my brother pointed out, it is quite sad that I only know a song by \"The Who\" because I heard the reference on an episode of \"The Simpsons\".  Well, it is what it is, as Rocky once said. \n\nFrom the episode, \"A Tale of Two Springfields\":\n\nThe various Who songs mentioned or played during this episode are: \"My Generation\", \"Won't Get Fooled Again\", \"Squeeze Box\" -Mentioned by Homer in the hotel.\n\n\"Won't Get Fooled Again\" was played later, as the group \"broke\" the wall.\n\n\"The Seeker\" - Played at the start of the concert.\n\n\"Magic Bus\", \"Pinball Wizard\" - Requested by Homer.\n\nIt was \"Won't Get Fooled Again\". \n\nSo, enjoy the new entries, and by all means, comment as you wish!  The only way I know that people are visiting this humble little blog is because of the commentary.  Plug away!  I leave you with the moon.\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgvo6rhREflAfuRHFUE1-y5Q7UWtynuZDEcu5N7TlDqWRAGwDZezOqNwCCrdytrcULwsuNKPYsOfMDD9FxYhU4OKzOuXti_sMdAUhcPIP5Xs_qlrky36Gioko4U13QoJz2hn_F7/s1600/IMG_0927.JPG\" height=\"300\" width=\"400\" />\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg8uVLzm0EbtLoo4QFDVI7Ks7Vl5HVvrI-HHGZkmyzDXPhnD_3FdYy5dwcRrPPwNNxadZzLYVveOWjB1gFQ5FZXJZpKNj5FeR1cMRutgFge4aMsA_yDKN7fg31-0go7qHzovrzW/s1600/IMG_0937.JPG\" height=\"300\" width=\"400\" />\n\nPS. Yes, this entry was all over the place.  I was just excited to get the updates done.  Forgiveness please!"
+        "body": "Monday evening, and a wonderful dip in the pool.  While we were swimming around, Sumner asked me one of those questions only children can ask. \n\n\"Why are the clouds orange, daddy?\"\n\nFunny how such a simple question can have such a complex answer to a child.  The sun reflects its light against the clouds in the evening. \n\n\"But, the sun is yellow\", he stated matter of factly.\n\nI then tried explaining that just as he sees himself in the mirror, the suns sees itself in the clouds.  That brought a smile to his face, and he resumed swimming.  Coincidentally, Sumner is an awesome swimmer, even better than he was last summer.  In previous years, he faced the pool and water with reckless abandon; he feared nothing about the entire event.  Seeing how he is more fully self-aware, I feared this summer would bring trepidation in full swing. \n\nBut after two weeks of prescribed swimming lessons, the boy is nearly swimming the width of the pool.  Any pool in fact, just as long as there is water enough to jump in.  He lasts much longer than his parents, too...he doesn't know when to quit yet. \n\nI'm pretty stoked to announce a new addition to Outside the World: The Moblah'g!  Go check it out, and come right back.  Don't worry, I'll wait right here.\n\nBack?  Good.  So the proper term is \"MoBlog\" (as in mobile blog), but I much prefer the Moblah'g.  I know it's been done thousands of times before by hundreds of thousands of people, but it's fun and why not, eh?  With this new blog, the site will be granted daily updates.  Everything comes straight from my smart phone, right as it happens.  It's my own little version of buzz.mn.\n\nI love the freedom that it gives me.  No longer is my mind tethered by my keyboard and mouse; I can post a picture and thoughts from anywhere I wish now.  Jeez, now that I think about it, this could be dangerous.  Well, with great power comes great responsibility, as one arachnid's uncle once said.  I'll do my best to entertain.\n\nSo, on the weekends, check the main blog site for updates.  Any other day, head on over to the Moblah'g.  I'll be much appreciative of the effort! \n\nAs my brother pointed out, it is quite sad that I only know a song by \"The Who\" because I heard the reference on an episode of \"The Simpsons\".  Well, it is what it is, as Rocky once said. \n\nFrom the episode, \"A Tale of Two Springfields\":\n\nThe various Who songs mentioned or played during this episode are: \"My Generation\", \"Won't Get Fooled Again\", \"Squeeze Box\" -Mentioned by Homer in the hotel.\n\n\"Won't Get Fooled Again\" was played later, as the group \"broke\" the wall.\n\n\"The Seeker\" - Played at the start of the concert.\n\n\"Magic Bus\", \"Pinball Wizard\" - Requested by Homer.\n\nIt was \"Won't Get Fooled Again\". \n\nSo, enjoy the new entries, and by all means, comment as you wish!  The only way I know that people are visiting this humble little blog is because of the commentary.  Plug away!  I leave you with the moon.\n\n<img border=\"0\" src=\"images/archive/IMG_0927.JPG.jpg\" height=\"300\" width=\"400\" />\n\n<img border=\"0\" src=\"images/archive/IMG_0937.JPG.jpg\" height=\"300\" width=\"400\" />\n\nPS. Yes, this entry was all over the place.  I was just excited to get the updates done.  Forgiveness please!"
     },
     {
         "file": "2007-06-24-Pano.md",
         "year": "2007",
         "date": "June 24, 2007",
         "title": "Pano",
-        "body": "As a matter of fact, yes, I was putting the Web site off for quite a few days.  Why do you ask? \n\nI'm still coming to grips with the new design.  I do not know whether it holds any particular aesthetic value or not, and the lengthier column makes me feel as if I haven't typed nearly as much material.  I am tempted to beat my hands against the keyboard in a chaotic fashion to pound out meaningless drivel. \n\nOverall, I feel the page to be quite boring; it holds nothing of value to me, so it might be gone/changed soon.  Below this entry you'll notice a new linkable calendar that I whipped up (ie, divided one table 30 times, whoopee!), but I quickly realized after creating it that I only create entries once per week at the moment.  25 out of 30 links now become useless!  That is, unless I write everyday.  I have a few ideas for that, too.\n\nIt's been a pretty fine month of June so far, though the days recently passed have brought much higher temperatures than in the beginning of the month.  Late in May, we bought the wife a new bike complete with a secondary seat for the little one.  We've wanted to ride bikes again for years, but some other priority seemingly stood in the way.  But we finally did it, and it was perfect weather in the evening times. \n\nWe haven't ridden in about a week or so now.  Reason?  The temps rose 20 degrees in the sundown hours.  That's just enough to make me think twice about the whole affair, at least until the monsoons hit.\n\nBut!  It will be a riding night tonight.  Armed with water bottles and a stubborn constitution, we will enjoy our outdoors time, by gosh.\n\nSide note: the boy just waddled up to me and asked me if he could give me a hug.  I love Sundays.\n\nJust for fun, how about a chopped up panoramic view of my front yard!\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjOzdjj1VwYMxx399xT4ydXREyMg1wlC1yxrvuyMNLjQykD7Uc5_grfcjkJTpXgaXm5XwiV5_FX7aFEvXJ6850I2eXuwbYBNs1JH18ZAKLQtqiO65r5B082ozm4gnU3bypuDhfs/s1600/frontyard.jpg\" height=\"134\" width=\"640\" />\n\nAnd maybe a little more fun?  A picture of where the magic begins.\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgLLHNdPNFtxYuxEqT1dt560AX0BxQSCHgKGBoN8q5giX1yMJrcu9kZB5mkvYjWJSKvC59VOgA-Rc3h4uZds5ZRsDdFSCGQXj1v9_ZJaEMDKQy_w6HRiz7SOe25bF1MkuodxuCx/s1600/office.jpg\" height=\"240\" width=\"320\" />\n\nA picture of Sumner out in front of our house\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgcfet-3WinLjTQdXSzjeTUKjkYITIzQnQiP30VygkbAzMXKxJ9sVOzjQ7SqfjZ7VvAdRVwQ389HLHahTzY5A72QX-7SW_Zu5shW8A_oHpQTmF_wcvVmLDGXhvgBM0_hG58TKah/s1600/sumneroutside.jpg\" height=\"240\" width=\"320\" />\n\nWell, now I'm just doing the Web equivalent of bashing my hands against the keys, so I'll stop for now.  The nightly bike ride may have just been postponed due to inclement bad child health; my wife just asked if we could give Sumner Pepto-Bismol.  That's usually not a good sign of things to come.  Have a great day!"
+        "body": "As a matter of fact, yes, I was putting the Web site off for quite a few days.  Why do you ask? \n\nI'm still coming to grips with the new design.  I do not know whether it holds any particular aesthetic value or not, and the lengthier column makes me feel as if I haven't typed nearly as much material.  I am tempted to beat my hands against the keyboard in a chaotic fashion to pound out meaningless drivel. \n\nOverall, I feel the page to be quite boring; it holds nothing of value to me, so it might be gone/changed soon.  Below this entry you'll notice a new linkable calendar that I whipped up (ie, divided one table 30 times, whoopee!), but I quickly realized after creating it that I only create entries once per week at the moment.  25 out of 30 links now become useless!  That is, unless I write everyday.  I have a few ideas for that, too.\n\nIt's been a pretty fine month of June so far, though the days recently passed have brought much higher temperatures than in the beginning of the month.  Late in May, we bought the wife a new bike complete with a secondary seat for the little one.  We've wanted to ride bikes again for years, but some other priority seemingly stood in the way.  But we finally did it, and it was perfect weather in the evening times. \n\nWe haven't ridden in about a week or so now.  Reason?  The temps rose 20 degrees in the sundown hours.  That's just enough to make me think twice about the whole affair, at least until the monsoons hit.\n\nBut!  It will be a riding night tonight.  Armed with water bottles and a stubborn constitution, we will enjoy our outdoors time, by gosh.\n\nSide note: the boy just waddled up to me and asked me if he could give me a hug.  I love Sundays.\n\nJust for fun, how about a chopped up panoramic view of my front yard!\n\n<img border=\"0\" src=\"images/archive/frontyard.jpg\" height=\"134\" width=\"640\" />\n\nAnd maybe a little more fun?  A picture of where the magic begins.\n\n<img border=\"0\" src=\"images/archive/office.jpg\" height=\"240\" width=\"320\" />\n\nA picture of Sumner out in front of our house\n\n<img border=\"0\" src=\"images/archive/sumneroutside.jpg\" height=\"240\" width=\"320\" />\n\nWell, now I'm just doing the Web equivalent of bashing my hands against the keys, so I'll stop for now.  The nightly bike ride may have just been postponed due to inclement bad child health; my wife just asked if we could give Sumner Pepto-Bismol.  That's usually not a good sign of things to come.  Have a great day!"
     },
     {
         "file": "2007-06-15-Redesign.md",
@@ -3554,7 +3560,7 @@ const wayback_raw_dump = [
         "year": "2007",
         "date": "June 10, 2007",
         "title": "Bloody human nature...",
-        "body": "<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhyJAEL8zhJjXkbVyt4hTlO-yCp1tmfuKDizRIcfLCELYtvJ8Ws8K2VWAHF8umUwnIQ38q0wpnesPEU0YkVm6yOD2bp_XlflXhPRXyEBmJteNZAcorCoy1ZcPyP8JeKylYqHX8m/s1600/simpbanner2.jpg\" height=\"146\" width=\"320\" />\n\nThe rest of the family is asleep at the moment, and that's quite an accomplishment.  We've had a terrible time getting Sumner to sleep over the past few days; in fact, I can hardly remember a time when he acted this crazy.  He was barking mad last night, I was afraid he'd lose his mind, hez was so tired.  Wife and I both made a special mental note to try extra hard today.\n\nAgain, he's asleep now, for which I am grateful. \n\nFor this week's entry, I wanted to report on how Sumner did in school.  Well, he did just fine.  Really great. In fact, I'm pretty sure he saved all his naughtiness for the weekend with his folks.  That's fine, better here in a controlled situation.\n\nWe had an interesting day yesterday.  As the sun was setting and dusk was establishing its mighty grip on the streets around us, the nightly rounds of ATV rides begun.  These things are ghastly, noisy beasts, and I have been of the mindset to walk outside and ask them if they could knock it the frack off on more than one occasion.  But I've held my tongue.  Thank goodness I haven't entered the \"get off my lawn\" phase of my life.  Hopefully never.\n\nBack and forth they rode, quiet Quiet QUIET loud Loud LOUD RaCkEt QUIET quiet gone.  Rinse, repeat.  My blood was beginning to boil, and that sensitive spot right above my eye?  Twitching.  Like the alarm clock on Peter Pan.  Tick Tock Tick Tock Tick Tock. \n\nEventually it became as background noise, and I was impervious to its effect.  Oh, it was still there, but I was one resigned man, sitting inside his resigned house with his resigned family.  This would go on for weeks, it seemed now.  At least until they lost their enthusiasm for the ATV.\n\n*SMACK* rumble rumble rumble\n\nI hardly made a move, but the wife darted up from the couch and said, \"Did they just hit our house?\"\n\n\"No, they couldn't have\", said I.  My house isn't on the corner of the street, and we're surrounded by at least 10 feet of rock on both sides.  We're safe.\n\n\"I'm gonna go check it out\", said the wife.  By this time, I was out the side door of the house.  My wife arrived through the garage at the same time.\n\nShe called it.  They ran straight into our house. \n\nIt's hard to recall what emotion I was feeling at this point.  Until this moment in my life, I had experienced some pretty bad stuff, car accidents, lost jobs, health issues, all with their accompanying emotions.  But this was different.  I was toying with the idea that it might be good to get mad.  So I did.\n\n\"I'm really sorry about your house\", said my neighbor.  I mentioned something like sorry wasn't going to cut it, and immediately regretted it.  Because at that moment, I saw the driver of the ATV.\n\nAnd then I saw his leg.\n\nHis leg hit the house first, not the ATV.  Let me explain.  The force from the 40mph collision was absorbed by the single right leg of this gentleman.  The ATV came afterward.\n\nHis lower leg was almost off.  What to do?  Wife went to get ice.  I went to get bandages. \n\n\"I don't think it's broken\", said the young man.  \"If it were, I'd be crying, right?\"\n\n\"Um, you just sit there.  I'll be right back.\" \n\nAs I ran up the stairs, I thought about my initial reaction to the scene.  Why had I gotten so mad?  It was just a house, which could easily be repaired.  This young man could have lost his leg or his life.  I didn't even think to look around for injuries.\n\nI felt like a jackass, and I deserved it.\n\nI ran back outside and everyone was still there, and the leg looked much worse by now.  My neighbor proceeded to tell me to send him a bill for my house repairs. \n\nI turned to him and pleaded with him to please forget the house for now.  I apologized for overreacting, and begged him to get his friend to a hospital.  He delayed further, which deepened my emotional despair. \n\nEventually, they got him back to the house, and the family and I walked back into ours, amazed at what just transpired.  I fiddled around for a few minutes, trying to rationalize my reaction within my own mind, when my wife decided to jump into the foray. \n\nShe mentioned that I didn't see the poor kid at first, and that anyone would be upset when such a large chunk of their house was missing.  Fine, but I still feel bad. \n\nShe mentioned that I didn't raise my voice, and that I didn't sound mad.  Fine, but I remained steadfastly troubled. \n\nWith nothing else to do, I went back upstairs to my medicine cabinet and, remembering the traumatic experience when I shattered my own knee, retrieved a few of the remaining narcotics that I had left.  Not likely they'd accept them, but if anyone needed them at this time, it was this young man.\n\nYou see, he was from Mexico, and most likely had no insurance.  I had no idea when they'd even get them to the hospital. \n\nI walked over to their house, knocked firmly but warmly on the door, and spoke to my neighbor again.  The first thing he said was that he already found someone to fix the side of my house. \n\nYep, there was that guilty pang again, right on queue. \n\nI shrugged his comments aside, asking him how his friend was, and offering the medicine at the same time.  He accepted it, and at the same time informed me that they were going to the Urgent Care as soon as they could.  I breathed a sigh of relief, apologized one last time for my reaction, and bid him good evening.\n\nLater that evening, I was talking about the experience again with my wife.  She was her usual compassionate self, gently scratching my back and speaking her words of kindness.  She said that she knew one of the reasons why I took the medicine over there was to make sure the kid was alright. \n\nBut the truth is, I only wanted one more chance to apologize for the way I reacted.  The medicine, while convenient and needed, was merely a mechanism for delivery.\n\nI think I learned my lesson this weekend"
+        "body": "<img border=\"0\" src=\"images/archive/simpbanner2.jpg\" height=\"146\" width=\"320\" />\n\nThe rest of the family is asleep at the moment, and that's quite an accomplishment.  We've had a terrible time getting Sumner to sleep over the past few days; in fact, I can hardly remember a time when he acted this crazy.  He was barking mad last night, I was afraid he'd lose his mind, hez was so tired.  Wife and I both made a special mental note to try extra hard today.\n\nAgain, he's asleep now, for which I am grateful. \n\nFor this week's entry, I wanted to report on how Sumner did in school.  Well, he did just fine.  Really great. In fact, I'm pretty sure he saved all his naughtiness for the weekend with his folks.  That's fine, better here in a controlled situation.\n\nWe had an interesting day yesterday.  As the sun was setting and dusk was establishing its mighty grip on the streets around us, the nightly rounds of ATV rides begun.  These things are ghastly, noisy beasts, and I have been of the mindset to walk outside and ask them if they could knock it the frack off on more than one occasion.  But I've held my tongue.  Thank goodness I haven't entered the \"get off my lawn\" phase of my life.  Hopefully never.\n\nBack and forth they rode, quiet Quiet QUIET loud Loud LOUD RaCkEt QUIET quiet gone.  Rinse, repeat.  My blood was beginning to boil, and that sensitive spot right above my eye?  Twitching.  Like the alarm clock on Peter Pan.  Tick Tock Tick Tock Tick Tock. \n\nEventually it became as background noise, and I was impervious to its effect.  Oh, it was still there, but I was one resigned man, sitting inside his resigned house with his resigned family.  This would go on for weeks, it seemed now.  At least until they lost their enthusiasm for the ATV.\n\n*SMACK* rumble rumble rumble\n\nI hardly made a move, but the wife darted up from the couch and said, \"Did they just hit our house?\"\n\n\"No, they couldn't have\", said I.  My house isn't on the corner of the street, and we're surrounded by at least 10 feet of rock on both sides.  We're safe.\n\n\"I'm gonna go check it out\", said the wife.  By this time, I was out the side door of the house.  My wife arrived through the garage at the same time.\n\nShe called it.  They ran straight into our house. \n\nIt's hard to recall what emotion I was feeling at this point.  Until this moment in my life, I had experienced some pretty bad stuff, car accidents, lost jobs, health issues, all with their accompanying emotions.  But this was different.  I was toying with the idea that it might be good to get mad.  So I did.\n\n\"I'm really sorry about your house\", said my neighbor.  I mentioned something like sorry wasn't going to cut it, and immediately regretted it.  Because at that moment, I saw the driver of the ATV.\n\nAnd then I saw his leg.\n\nHis leg hit the house first, not the ATV.  Let me explain.  The force from the 40mph collision was absorbed by the single right leg of this gentleman.  The ATV came afterward.\n\nHis lower leg was almost off.  What to do?  Wife went to get ice.  I went to get bandages. \n\n\"I don't think it's broken\", said the young man.  \"If it were, I'd be crying, right?\"\n\n\"Um, you just sit there.  I'll be right back.\" \n\nAs I ran up the stairs, I thought about my initial reaction to the scene.  Why had I gotten so mad?  It was just a house, which could easily be repaired.  This young man could have lost his leg or his life.  I didn't even think to look around for injuries.\n\nI felt like a jackass, and I deserved it.\n\nI ran back outside and everyone was still there, and the leg looked much worse by now.  My neighbor proceeded to tell me to send him a bill for my house repairs. \n\nI turned to him and pleaded with him to please forget the house for now.  I apologized for overreacting, and begged him to get his friend to a hospital.  He delayed further, which deepened my emotional despair. \n\nEventually, they got him back to the house, and the family and I walked back into ours, amazed at what just transpired.  I fiddled around for a few minutes, trying to rationalize my reaction within my own mind, when my wife decided to jump into the foray. \n\nShe mentioned that I didn't see the poor kid at first, and that anyone would be upset when such a large chunk of their house was missing.  Fine, but I still feel bad. \n\nShe mentioned that I didn't raise my voice, and that I didn't sound mad.  Fine, but I remained steadfastly troubled. \n\nWith nothing else to do, I went back upstairs to my medicine cabinet and, remembering the traumatic experience when I shattered my own knee, retrieved a few of the remaining narcotics that I had left.  Not likely they'd accept them, but if anyone needed them at this time, it was this young man.\n\nYou see, he was from Mexico, and most likely had no insurance.  I had no idea when they'd even get them to the hospital. \n\nI walked over to their house, knocked firmly but warmly on the door, and spoke to my neighbor again.  The first thing he said was that he already found someone to fix the side of my house. \n\nYep, there was that guilty pang again, right on queue. \n\nI shrugged his comments aside, asking him how his friend was, and offering the medicine at the same time.  He accepted it, and at the same time informed me that they were going to the Urgent Care as soon as they could.  I breathed a sigh of relief, apologized one last time for my reaction, and bid him good evening.\n\nLater that evening, I was talking about the experience again with my wife.  She was her usual compassionate self, gently scratching my back and speaking her words of kindness.  She said that she knew one of the reasons why I took the medicine over there was to make sure the kid was alright. \n\nBut the truth is, I only wanted one more chance to apologize for the way I reacted.  The medicine, while convenient and needed, was merely a mechanism for delivery.\n\nI think I learned my lesson this weekend"
     },
     {
         "file": "2007-06-04--Starburys-.md",
@@ -3575,7 +3581,7 @@ const wayback_raw_dump = [
         "year": "2006",
         "date": "July 23, 2006",
         "title": "The Cabin",
-        "body": "The weekend draws to a close, and I'm not ready for another work week.  Sure, it'll still happen come 9:00am tomorrow, but I won't like it.  I won't even pretend!  We had a lot of fun this weekend, the family and I, and the fun isn't just over yet.  I can hear baby Sumner in the bathtub, laughing away like a wet pirate.  Actually, he did take his stuffed pirate toy into the bathtub tonight.  Another McDonald's treasure.\n\nSumner continually reminds me of how precious the little things in life are.  The smallest surprise will make his day complete, from gumballs to ice cream cones (come to think of it, most of his favorite things are food-based.  I wonder where that comes from).\n\nSo now, willingly, unwillingly, the work week beckons to me and I must follow its call.  I do have much to look forward to shortly, however; we're taking a family trip to California on Thursday night to spend some time at the in-laws cabin at Lake Arrowhead.  I'm terribly happy with that idea.  Fantastically infatuated, maybe. \n\nWhen the in-laws decided to make the big purchase of the cabin, I was outspokenly pessimistic about the whole thing.  It just seemed to far away, too expensive, and too complicated for the family.  But now, after a few trips there, I can only think of one other place that I find more beautiful (read: Snowbird) and I always look forward to going back.  It's up in the mountains of Southern California, (which by the way, I did not know existed before) and the trees are endless. \n\nThe architecture is inspired from Europe; some Swiss and German elements are spattered throughout the town.  But the Village is where the buildings truly shine.  Here, take a look.\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiKiGfkFx2JydkUrzU9Z1TcCKE-32D1HZWTwlCsmfH1bsJS_3g_N7v63JcQpAUkWbVECGly69xInGVJzeynjVEnpUnXGYmNcvie-P9dweXJsoVMMjD-n7K9wDLkykr8qd82ZvU_/s1600/IMG_1707.JPG\" height=\"240\" width=\"320\" />\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh0iWj3bWwqUH7dxvTiaV580xadDqQWM0yvL45WkhUP2q3be0pDwjd-ZzgOZR9JlRyhbJ-k9tR-gBbZ98PBLhZAKCmgXmtLymnPGcri4-dag_DI7bJ9NP7EnJixPpKZdetz5-Jf/s1600/IMG_1710.JPG\" height=\"240\" width=\"320\" />\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhnl27IgRUplg7CVi5j27pO0m93JDqtXZxzUmpAYNbkBNPIcu26nJugFGVPwsCsbwxA3C_y6XDaOd-dXbsOxxvpai6NEZyQKpV7lhYgUTgiKvnPpazKroOcG5ZRoKvMNcNTs3BK/s1600/IMG_1725.JPG\" height=\"240\" width=\"320\" />\n\nNot the greatest pictures, I know, but to make up for it, how about a cute picture of Sumner?  (taken quite a while ago)\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhudLZkFc3AxMk8dyCRkZSM5bSqeYApBEVhlfwQaW3_MZj8ibdt-yO-p5wJSWsTRf7S6G-QYfBTsOADnXmpHa41LLi2FfaukNPq9YlghdwsCiPdNJ_W3LrZ74i91Iv_Ljp6pdWU/s1600/IMG_1701.JPG\" height=\"237\" width=\"320\" />\n\nThat was taken lakeside in Lake Arrowhead just over one year ago, and yes, that is ice cream dribbling down his mouth.  I told you most of his joys stemmed from ice cream.\n\nSo, I'll tell you what.  (This is dangerous.  I'm making a promise) I'll take better pictures this time around.  I'll even post them when I get home.  Heck, I might even take some new pictures of the family while we're all up there.  It's about time, anyway.  I do have some recent pictures of the boy.  These were taken about a week ago after I made some cookies and Sumner decided it was his turn, not mom's, to have the beaters.  Cookie Dough!\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhVvuz4PqGQ7_i9FWAhQwUbcQWLHJU-rGCrls_YGGGVHKA6BxAQN978_BA3pzNaEoackDpWdGxLhM0Y3iwmxuRzV-pcSwVWVFNBAdPhPAwgM9AeMyZS6MuEGrA9uT9XqQU5Njg6/s1600/IMG_2158.JPG\" height=\"320\" width=\"241\" />\n\nAnd now, for the reason that I live and love.  The two people that make my life amazing every day.\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjSz17fdQjgP_yb217zMuE9WCb7gnweYMptjN6GBPlS_eQ7aerI4L_GmwQlkegvUSmXjHCYtivmJMhsRFtJ5D4WyJI4H_JMWIMEKzQmTYoWf-JswJMhlG-rd-f3A0a3dkYG0wWh/s1600/JennaSumner.JPG\" height=\"320\" width=\"245\" />\n\nIn the words of Stevie Wonder, Isn't She Lovely?\n\nThat's all for now, enjoy your week!  Seriously.  I'll do my best to survive until Thursday.  And if you made your way here via MySpace, a million trillion thanks for reading this."
+        "body": "The weekend draws to a close, and I'm not ready for another work week.  Sure, it'll still happen come 9:00am tomorrow, but I won't like it.  I won't even pretend!  We had a lot of fun this weekend, the family and I, and the fun isn't just over yet.  I can hear baby Sumner in the bathtub, laughing away like a wet pirate.  Actually, he did take his stuffed pirate toy into the bathtub tonight.  Another McDonald's treasure.\n\nSumner continually reminds me of how precious the little things in life are.  The smallest surprise will make his day complete, from gumballs to ice cream cones (come to think of it, most of his favorite things are food-based.  I wonder where that comes from).\n\nSo now, willingly, unwillingly, the work week beckons to me and I must follow its call.  I do have much to look forward to shortly, however; we're taking a family trip to California on Thursday night to spend some time at the in-laws cabin at Lake Arrowhead.  I'm terribly happy with that idea.  Fantastically infatuated, maybe. \n\nWhen the in-laws decided to make the big purchase of the cabin, I was outspokenly pessimistic about the whole thing.  It just seemed to far away, too expensive, and too complicated for the family.  But now, after a few trips there, I can only think of one other place that I find more beautiful (read: Snowbird) and I always look forward to going back.  It's up in the mountains of Southern California, (which by the way, I did not know existed before) and the trees are endless. \n\nThe architecture is inspired from Europe; some Swiss and German elements are spattered throughout the town.  But the Village is where the buildings truly shine.  Here, take a look.\n\n<img border=\"0\" src=\"images/archive/IMG_1707.JPG.jpg\" height=\"240\" width=\"320\" />\n\n<img border=\"0\" src=\"images/archive/IMG_1710.JPG.jpg\" height=\"240\" width=\"320\" />\n\n<img border=\"0\" src=\"images/archive/IMG_1725.JPG.jpg\" height=\"240\" width=\"320\" />\n\nNot the greatest pictures, I know, but to make up for it, how about a cute picture of Sumner?  (taken quite a while ago)\n\n<img border=\"0\" src=\"images/archive/IMG_1701.JPG.jpg\" height=\"237\" width=\"320\" />\n\nThat was taken lakeside in Lake Arrowhead just over one year ago, and yes, that is ice cream dribbling down his mouth.  I told you most of his joys stemmed from ice cream.\n\nSo, I'll tell you what.  (This is dangerous.  I'm making a promise) I'll take better pictures this time around.  I'll even post them when I get home.  Heck, I might even take some new pictures of the family while we're all up there.  It's about time, anyway.  I do have some recent pictures of the boy.  These were taken about a week ago after I made some cookies and Sumner decided it was his turn, not mom's, to have the beaters.  Cookie Dough!\n\n<img border=\"0\" src=\"images/archive/IMG_2158.JPG.jpg\" height=\"320\" width=\"241\" />\n\nAnd now, for the reason that I live and love.  The two people that make my life amazing every day.\n\n<img border=\"0\" src=\"images/archive/JennaSumner.JPG.jpg\" height=\"320\" width=\"245\" />\n\nIn the words of Stevie Wonder, Isn't She Lovely?\n\nThat's all for now, enjoy your week!  Seriously.  I'll do my best to survive until Thursday.  And if you made your way here via MySpace, a million trillion thanks for reading this."
     },
     {
         "file": "2006-07-20-Flat-batteries.md",
@@ -3596,7 +3602,7 @@ const wayback_raw_dump = [
         "year": "2006",
         "date": "June 26, 2006",
         "title": "Shoes",
-        "body": "It was an interesting weekend, and a quick one at that.  After work on Friday, Jenna, Sumner and I scooted off to Scottsdale rather quickly to attend my cousin's birthday dinner at a restaurant called Tucci's.  More about that particular dining establishment later. \n\nI hadn't seen this particular cousin since July of 2003, shortly after I married.  She's now 21 years old, and it's just another one of those \"How old am I?\" moments in life.  She's a good gal, and it was certainly good to see her and her parentals.  She was quite glad to find out that I had a MySpace, and I was not surprised that she had one.  At all.  She fits the demographic, I believe. \n\nAnd yes, I know there are a few of you out there (the ones that didn't come here straight from MySpace) that are staring at your monitor, cursing my name for selling my soul to the MySpace regime.  No worries, mates.  I do it for several reasons:\n\n1.  I've actually found a few people that I wanted to find\n\n2.  It lets people know that I have a predilection for blogs\n\n3.  Jenna has one, so why can't I?\n\nThe restaurant.  Pizza joints are a dime/dozen.  Good pizza joints are much, much rarer.  So when we strolled up to Tucci's and saw the typical advertisements regarding their authenticity, I was skeptical at best. \n\nI guess that's the good thing about keeping your guard up, though.  A pleasant surprise can turn into a refreshing experience.  This pizza was good.  They seemed to care about the two most important pieces to the puzzle: the bread and the sauce.  You get either one of those wrong, and you have a bad pie.  You get both of those wrong, and I'm counting the days until the place closes down.\n\nSaturday, we cleaned.  I mean, we CLEANED.  From the baseboards to the corners of the closets, nothing avoided our sanitizing stare.  The master closet bore the brunt of our efforts, as that was the worst location in the home.  We ended up with eight full bags of clothes to hand away.  The only way this fit in there before was because the clothes were crammed in there so tightly.  Tetris would have been jealous.  (Lame, lame sentence.  I know.)\n\nAnd of course, I took every last shirt to the cleaners.  Time to look presentable at work again, I presume.  But when every shirt that you own is at the cleaners, it makes it insurmountably difficult to go to church the next day.  I didn't think about this until I tried getting ready.  Ho, hum.\n\nWe also saw the movie \"Click\" on Saturday night.  Typical Adam Sandler movie, mind you, with plenty of cursing, dogs humping stuffed animals, and the now common uncomfortable crying. \n\nCrying?\n\nWe went as a group of three couples, and all three girls were bawling by the end of the movie.  I don't mind them crying at all, but it just seems so out of place to start crying after hearing Mr. Sandler say \"What?  Your dad's stereo BLOWS?\" a few times. \n\nThat about sums up the weekend.  I'll leave you with a few pictures of Sumner, and bid you adieu for a week.\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgWyAsj_5Z9beULBKIDuoS1Amu4ep-rJ5Q2fedWvRTB8dqH-YuJXCzbT6TGrTIrkZ5FMAsnfiS5q9JjOZCWztu0xq8h6nM6QDpPOSgTKxY0diJ7MsmwrdFEPu0LrLs3TgNFjz23/s1600/IMG_0347.JPG\" height=\"241\" width=\"320\" />\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg2k-zkse6mal33Dho7IDKEnH82wuGcKwikhzfdzfBrZ0YSNHLg3wcw4XVirPtof2VkfylmNVYNFnR5duJdnm-zx6iyMNCV8i8FKZs6jhkUw02ZxeiflFohH2imYyecquCuG__o/s1600/IMG_0352.JPG\" height=\"240\" width=\"320\" />\n\nHave I ever told you Sumner loved shoes?  He also loves the shoe box.  Sorry for the choppy video. (click picture for movie, 3mb WMV file)"
+        "body": "It was an interesting weekend, and a quick one at that.  After work on Friday, Jenna, Sumner and I scooted off to Scottsdale rather quickly to attend my cousin's birthday dinner at a restaurant called Tucci's.  More about that particular dining establishment later. \n\nI hadn't seen this particular cousin since July of 2003, shortly after I married.  She's now 21 years old, and it's just another one of those \"How old am I?\" moments in life.  She's a good gal, and it was certainly good to see her and her parentals.  She was quite glad to find out that I had a MySpace, and I was not surprised that she had one.  At all.  She fits the demographic, I believe. \n\nAnd yes, I know there are a few of you out there (the ones that didn't come here straight from MySpace) that are staring at your monitor, cursing my name for selling my soul to the MySpace regime.  No worries, mates.  I do it for several reasons:\n\n1.  I've actually found a few people that I wanted to find\n\n2.  It lets people know that I have a predilection for blogs\n\n3.  Jenna has one, so why can't I?\n\nThe restaurant.  Pizza joints are a dime/dozen.  Good pizza joints are much, much rarer.  So when we strolled up to Tucci's and saw the typical advertisements regarding their authenticity, I was skeptical at best. \n\nI guess that's the good thing about keeping your guard up, though.  A pleasant surprise can turn into a refreshing experience.  This pizza was good.  They seemed to care about the two most important pieces to the puzzle: the bread and the sauce.  You get either one of those wrong, and you have a bad pie.  You get both of those wrong, and I'm counting the days until the place closes down.\n\nSaturday, we cleaned.  I mean, we CLEANED.  From the baseboards to the corners of the closets, nothing avoided our sanitizing stare.  The master closet bore the brunt of our efforts, as that was the worst location in the home.  We ended up with eight full bags of clothes to hand away.  The only way this fit in there before was because the clothes were crammed in there so tightly.  Tetris would have been jealous.  (Lame, lame sentence.  I know.)\n\nAnd of course, I took every last shirt to the cleaners.  Time to look presentable at work again, I presume.  But when every shirt that you own is at the cleaners, it makes it insurmountably difficult to go to church the next day.  I didn't think about this until I tried getting ready.  Ho, hum.\n\nWe also saw the movie \"Click\" on Saturday night.  Typical Adam Sandler movie, mind you, with plenty of cursing, dogs humping stuffed animals, and the now common uncomfortable crying. \n\nCrying?\n\nWe went as a group of three couples, and all three girls were bawling by the end of the movie.  I don't mind them crying at all, but it just seems so out of place to start crying after hearing Mr. Sandler say \"What?  Your dad's stereo BLOWS?\" a few times. \n\nThat about sums up the weekend.  I'll leave you with a few pictures of Sumner, and bid you adieu for a week.\n\n<img border=\"0\" src=\"images/archive/IMG_0347.JPG.jpg\" height=\"241\" width=\"320\" />\n\n<img border=\"0\" src=\"images/archive/IMG_0352.JPG.jpg\" height=\"240\" width=\"320\" />\n\nHave I ever told you Sumner loved shoes?  He also loves the shoe box.  Sorry for the choppy video. (click picture for movie, 3mb WMV file)"
     },
     {
         "file": "2006-06-19-Oh--now-it-s-weekly-.md",
@@ -3638,21 +3644,21 @@ const wayback_raw_dump = [
         "year": "2006",
         "date": "March 24, 2006",
         "title": "Burrito Bandito",
-        "body": "It's no small accomplishment that I'm actually going to post this blog before 11:00pm; every other night has been posted at that hour or much, much later.  Blame school, blame work, and blame...well, myself of course.  But tonight, there are far more important things than the blog.\n\nBurrito Bandito.  This is a small Mexican restaurant that I found near my place of work, and I love it.  For $3.78 with tax, I can get a sizely bean and cheese burrito, a half order of Baby Banditos, and a drink.  Believe me, it fills me up. \n\nAnd for the third day straight, I have a picture!  'Cept this picture isn't of a sunset, labyrinth, or other such amusements. \n\nNo.  It's my lunch.\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgWayubh-7u0xj2Rz4aTtjZc5VmDkWASwIdBPzI1Ue3Qp8HNHY9SQyWq13m5FnEtIaCCFNwUBs67mZ6_2SKMEAdL3uridFjpEYzyOFg4X2E6_gsECXVBI_yTn8gYyLtNNGkRCtE/s1600/IMAGE_00003.jpg\" height=\"253\" width=\"320\" />\n\nLooks tasty, doesn't it?  I don't know what came over me when I took this picture.  I was not particularly impressed with the presentation; forgive me, but I'd seen this plate on numerous other occasions.  I just wanted to take a picture of my lunch, and let everyone see it.  And I wanted to tell you to try The Burrito Bandito.  It's at 19th Avenue and Union Hills Road.  Huzzah!\n\nTechnically, the last time I took a picture of my food was in the Missionary Training Center when I was 19 years old.  I would regularly take pictures of the grand portions there; after developing them (remember doing that?) I would send them to my parents, either as proof that I was eating or, more likely, to be completely obnoxious. \n\nSheesh.  It's been quite a week.  This is it until Monday, I hope that you have found this week's postings slightly amusing, if not bemusing.  Yes, it truly is confusing to go from picture of post-rain sunsets to a styrofoam plate full of fried Mexican food. \n\nBut what can you do?  Meet me back here on Monday and I'll try to make it up."
+        "body": "It's no small accomplishment that I'm actually going to post this blog before 11:00pm; every other night has been posted at that hour or much, much later.  Blame school, blame work, and blame...well, myself of course.  But tonight, there are far more important things than the blog.\n\nBurrito Bandito.  This is a small Mexican restaurant that I found near my place of work, and I love it.  For $3.78 with tax, I can get a sizely bean and cheese burrito, a half order of Baby Banditos, and a drink.  Believe me, it fills me up. \n\nAnd for the third day straight, I have a picture!  'Cept this picture isn't of a sunset, labyrinth, or other such amusements. \n\nNo.  It's my lunch.\n\n<img border=\"0\" src=\"images/archive/IMAGE_00003.jpg\" height=\"253\" width=\"320\" />\n\nLooks tasty, doesn't it?  I don't know what came over me when I took this picture.  I was not particularly impressed with the presentation; forgive me, but I'd seen this plate on numerous other occasions.  I just wanted to take a picture of my lunch, and let everyone see it.  And I wanted to tell you to try The Burrito Bandito.  It's at 19th Avenue and Union Hills Road.  Huzzah!\n\nTechnically, the last time I took a picture of my food was in the Missionary Training Center when I was 19 years old.  I would regularly take pictures of the grand portions there; after developing them (remember doing that?) I would send them to my parents, either as proof that I was eating or, more likely, to be completely obnoxious. \n\nSheesh.  It's been quite a week.  This is it until Monday, I hope that you have found this week's postings slightly amusing, if not bemusing.  Yes, it truly is confusing to go from picture of post-rain sunsets to a styrofoam plate full of fried Mexican food. \n\nBut what can you do?  Meet me back here on Monday and I'll try to make it up."
     },
     {
         "file": "2006-03-23-Labyrinth.md",
         "year": "2006",
         "date": "March 23, 2006",
         "title": "Labyrinth",
-        "body": "Third night in a row staying up way too late.  But this evening, I was especially preoccupied with getting everything ready with my change of e-mail address.  That's right, I give up.  Spam ruined my favorite e-mail address.\n\nBut not to worry!  My outsidetheworld.com account came to the rescue. \n\nI had so much on my mind to write about tonight, but it all fails me now.  I procrastinated writing far too long, I'm afraid, and now all I have left in me is babble.  Unmitigated verbal meandering.  Oh wait, I do have a few pictures.\n\nBelow you will find a place at work that I frequent whenever I'm having a rough day.  It's an eleven circuit labyrinth, and it's supposed to be a place of meditation and prayer.  Kind of like Pooh's thoughtful spot, but not as cheerful or blustery.  (Correction, Pooh's \"Thotful Spot\") \n\nI never understood the many misspellings in the books and cartoons, but they did me no harm, so I should just be quiet. \n\nAnyway, on to the pictures.  Rather than try to remember the purpose of this labyrinth and attempt to paraphrase, I simply took a picture of what \"they\" said it is.\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjsKRq9dHhuRIDnR0zWpqhIk4KNKjLtKuVaBS4TIBVLXjeCFK9c4CeRVu31QuK2vQUYu66vL8bW7gxaLC7UM-7ISMYa6IvtSgBffS9_UMoKo6OhpVzWqjtl5nWUTdHfW6gHYhWy/s1600/IMAGE_00063.jpg\" height=\"320\" width=\"239\" />\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhmrXRuz6oW3_TandXNinfi8JpTH39rOsyCqh58R0OGFr_KkcsfI1I5CHoV6FYrliA2AinBfvrJ0fSSB3FA2Jo48f0C_BMzk0HHXdW7JbkIyPIzrCL2hEuXt_9Cw5BAc2KJcOJp/s1600/IMAGE_00064.jpg\" height=\"242\" width=\"320\" />\n\nAgain, you'll have to forgive the fact that these pictures were taken with my phone's camera.  But, there it is.  The place where you could find me if all else at work had failed.  And by all else I mean a package of candy and a game of pool.\n\nIt was actually quite beautiful outside today; it was much preferable to the office environment.  It was just so blasted cold inside my office.  I couldn't keep warm or awake, a terrible and rare combination that leads to poor productivity.  So, outside to the labyrinth I went, and was greeted by 70 degree sunshine and the chirping of birds.\n\nI think this'll do for the evening.  Have a great day and week ahead...it's almost Friday.  We can make it to Friday, right?  Right.\n\nP.S. The weather widget was never right, so I removed it.   39 degrees at 11:00am?  Nope.  Good riddance."
+        "body": "Third night in a row staying up way too late.  But this evening, I was especially preoccupied with getting everything ready with my change of e-mail address.  That's right, I give up.  Spam ruined my favorite e-mail address.\n\nBut not to worry!  My outsidetheworld.com account came to the rescue. \n\nI had so much on my mind to write about tonight, but it all fails me now.  I procrastinated writing far too long, I'm afraid, and now all I have left in me is babble.  Unmitigated verbal meandering.  Oh wait, I do have a few pictures.\n\nBelow you will find a place at work that I frequent whenever I'm having a rough day.  It's an eleven circuit labyrinth, and it's supposed to be a place of meditation and prayer.  Kind of like Pooh's thoughtful spot, but not as cheerful or blustery.  (Correction, Pooh's \"Thotful Spot\") \n\nI never understood the many misspellings in the books and cartoons, but they did me no harm, so I should just be quiet. \n\nAnyway, on to the pictures.  Rather than try to remember the purpose of this labyrinth and attempt to paraphrase, I simply took a picture of what \"they\" said it is.\n\n<img border=\"0\" src=\"images/archive/IMAGE_00063.jpg\" height=\"320\" width=\"239\" />\n\n<img border=\"0\" src=\"images/archive/IMAGE_00064.jpg\" height=\"242\" width=\"320\" />\n\nAgain, you'll have to forgive the fact that these pictures were taken with my phone's camera.  But, there it is.  The place where you could find me if all else at work had failed.  And by all else I mean a package of candy and a game of pool.\n\nIt was actually quite beautiful outside today; it was much preferable to the office environment.  It was just so blasted cold inside my office.  I couldn't keep warm or awake, a terrible and rare combination that leads to poor productivity.  So, outside to the labyrinth I went, and was greeted by 70 degree sunshine and the chirping of birds.\n\nI think this'll do for the evening.  Have a great day and week ahead...it's almost Friday.  We can make it to Friday, right?  Right.\n\nP.S. The weather widget was never right, so I removed it.   39 degrees at 11:00am?  Nope.  Good riddance."
     },
     {
         "file": "2006-03-22-Share-and-enjoy--share-and-enj.md",
         "year": "2006",
         "date": "March 22, 2006",
         "title": "Share and enjoy, share and enjoy...",
-        "body": "Just a short entry today.  To make up for it, however, I'm providing pictures for your viewing enjoyment. \n\nI'm already looking at the 11:00 hour as I write this.  Tuesday is the longest day of the week for me, with school and all.  And for whatever reason, class just crawled by tonight.  It was all I could do to keep from looking at the time.\n\nThere was a short unanticipated rain storm today in the valley.  When I left work at six, the clouds were barely breaking and the sun was shining in the best way imaginable.  The pollution had all been swept away; every mountain range within 100 miles was clearly visible with the orange sunlight casting textures upon them. \n\nI tried to take a few pictures to summarize what I saw.  Share and enjoy!\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhrIGOlehCW0EtF0vVmdv2J3srEQ1zHeiYYh3iRf2zJLzF1Di8ZIM-U2layeerqcwPN_uTZT6bYuE6snneEmCH4j9efOcsbml4p7vLNxzItbV76F1p86-KcdxibhYwcxiswdr3q/s1600/IMG_2054.JPG\" height=\"240\" width=\"320\" />\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhRzpXvyjQDMyCkFndQJO3yVy80B_EZuaRflgjWKeEy_o-RBxOlG7E1mgzEYvZSNUx8iBZ-pDslw9gnZ3jspwgw7ZYYlln8-H7wbZaXtzHriFnW6yS1LugetwMIsZOr_Q4JxXKL/s1600/IMG_2055.JPG\" height=\"240\" width=\"320\" />\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgwPu-t2Vp4zCrA2Nva9QszoOQnDCAKytI_R1xcGWxJ8JI7ilU7EBGksb6i8Bsjqk0m5R52j03BCNDEgPO6BjypOlxHRm6umgMU7iPigk0PyYtGDtZig9FMLD5q1-T5cZFjrSrJ/s1600/IMG_2056.JPG\" height=\"239\" width=\"320\" />"
+        "body": "Just a short entry today.  To make up for it, however, I'm providing pictures for your viewing enjoyment. \n\nI'm already looking at the 11:00 hour as I write this.  Tuesday is the longest day of the week for me, with school and all.  And for whatever reason, class just crawled by tonight.  It was all I could do to keep from looking at the time.\n\nThere was a short unanticipated rain storm today in the valley.  When I left work at six, the clouds were barely breaking and the sun was shining in the best way imaginable.  The pollution had all been swept away; every mountain range within 100 miles was clearly visible with the orange sunlight casting textures upon them. \n\nI tried to take a few pictures to summarize what I saw.  Share and enjoy!\n\n<img border=\"0\" src=\"images/archive/IMG_2054.JPG.jpg\" height=\"240\" width=\"320\" />\n\n<img border=\"0\" src=\"images/archive/IMG_2055.JPG.jpg\" height=\"240\" width=\"320\" />\n\n<img border=\"0\" src=\"images/archive/IMG_2056.JPG.jpg\" height=\"239\" width=\"320\" />"
     },
     {
         "file": "2006-03-21-Widget.md",
@@ -3680,14 +3686,14 @@ const wayback_raw_dump = [
         "year": "2006",
         "date": "March 15, 2006",
         "title": "\"The Wedge\"",
-        "body": "I just got home from school.  Like I mentioned yesterday, I cannot promise that this entry will have depth or meaning, but that's not really a big deal. \n\nMy brother is chatting with my over MSN and continues laughing about something.  That something would be this:\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhm06SdA-bQnjmFPrvZf-IbCCVBJ_ClXnsqJCHCzXAen3OdNDCGf28sB2plEDVUPdOaNXto1sqJxUh3iFkJpB6j0lNHRqW6q9R4hKcHWNzAqr8mUUoAW6rgLWcNwuN9-1aqfWfE/s1600/button.jpg\" />\n\nIn many respects, it deserves whatever criticism comes its merry way.  Unfortunately, and I do mean regrettably, that is what I used to call my blog.  I haven't a clue what I meant by it.  I think I was playing around with a thesaurus or perhaps I drew a name out of a black hat in a dark room.  Who knows, really.  At least it's over with, done.\n\nI mentioned to him that I could just see him laughing.  The Wedge.  Ooh!\n\nI also mentioned yesterday that I would try to post another picture of the snowy vistas surrounding Phoenix.  Well, a combination of higher temperatures and increased pollution did not permit me to obtain a good shot.  But I got one nonetheless.\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiaoNphSka8GEkNiQSD6TgoRlputtPb7bhSsCtV35Cup3Vs5vTt60dPDROxALFYVn4-FR0Bur8YhxC9xnCf8F2EEtIq_1nP-xWT81V4e-f0bBwNqJRO5tir34ELwDWDsFMrb_dA/s1600/IMG_2044.JPG\" height=\"242\" width=\"320\" />\n\nSadly, it's just about as blurry as the phone camera pics because I had to digitally zoom so far to get a good enough view of the capped mountain in the distance. \n\nAnd as a special treat, a somewhat better picture of the (I think) C-130 on the tarmac at Deer Valley Airport.\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEje9OJf7Kwc_8lCTZnXLRhPwtVXxneNzoA11_bWcloePT6qquNK9dH8wnSmoMtueXldqA7l4V16L6xamDyR9nbCnjwaiLvdmBEO-Q9NelT-A9Rtt_DVuPQ8Jva872IkfVuKiHc8/s1600/IMG_2046.JPG\" height=\"240\" width=\"320\" />\n\nNow I'm rambling and posting silly pictures.  I should probably end this for now.  Overall, a fairly anemic post, but fun nonetheless.  Have a great day!"
+        "body": "I just got home from school.  Like I mentioned yesterday, I cannot promise that this entry will have depth or meaning, but that's not really a big deal. \n\nMy brother is chatting with my over MSN and continues laughing about something.  That something would be this:\n\n<img border=\"0\" src=\"images/archive/button.jpg\" />\n\nIn many respects, it deserves whatever criticism comes its merry way.  Unfortunately, and I do mean regrettably, that is what I used to call my blog.  I haven't a clue what I meant by it.  I think I was playing around with a thesaurus or perhaps I drew a name out of a black hat in a dark room.  Who knows, really.  At least it's over with, done.\n\nI mentioned to him that I could just see him laughing.  The Wedge.  Ooh!\n\nI also mentioned yesterday that I would try to post another picture of the snowy vistas surrounding Phoenix.  Well, a combination of higher temperatures and increased pollution did not permit me to obtain a good shot.  But I got one nonetheless.\n\n<img border=\"0\" src=\"images/archive/IMG_2044.JPG.jpg\" height=\"242\" width=\"320\" />\n\nSadly, it's just about as blurry as the phone camera pics because I had to digitally zoom so far to get a good enough view of the capped mountain in the distance. \n\nAnd as a special treat, a somewhat better picture of the (I think) C-130 on the tarmac at Deer Valley Airport.\n\n<img border=\"0\" src=\"images/archive/IMG_2046.JPG.jpg\" height=\"240\" width=\"320\" />\n\nNow I'm rambling and posting silly pictures.  I should probably end this for now.  Overall, a fairly anemic post, but fun nonetheless.  Have a great day!"
     },
     {
         "file": "2006-03-14-Snow-all-around.md",
         "year": "2006",
         "date": "March 14, 2006",
         "title": "Snow all around",
-        "body": "Long day.  Nearly half of it was spent at work, rather than the usual 1/3.  That never ceases to strike me as strange; we humans spend eight out of the 24 hours working.  I guess it all means something, though.\n\nThe reason for the few extra hours today was a deadline that I'm working toward.  I've been told that my time management skills could use some work (who am I to argue?) so I'm definitely focused on attaining this.  I was only able to finish about 50% of what needed to be done.  More tomorrow!\n\nWhen I drove to work this morning, I traveled on my usual route of the 101 to the 1-17, then exit.  But something caught my eye when I curved around the loop toward the 17; snow.  It was everywhere.  Each mountain range within eye shot was dusted with white.  It was absolutely beautiful.\n\nI only wish that I had a camera at that moment.  Well, not at that very moment. If I had attempted to take a picture, the results could have been disastrous.  Photography and moving automobiles rarely mix, if ever.  But I did manage to take these with my camera phone later on in the day.  I sincerely apologize in advance for the terrible quality.  Truly, these images deserved better justice.\n\n      \n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiKjswTKcfhLN0kx6Hyey-5WB0YE4Dn4YVw3i7dKmDy6xYWrci4VDjlgeHNEPm6VHF3wob6sj4ILWrsbdIX_oLeCjk69Qi46xVCZ5O00jmeGGXGiLZprTgG9UfXbV44QR2dgqJZ/s1600/IMAGE_00065.jpg\" height=\"240\" width=\"320\" />\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhVs9_mA0fIESCoRu4M_cK5ELZ3o6Vdo4dKlDix5vUHp0Q3nXHdSF40nhDfBSBdn-U8VmDMvQKDexX0MhPzjkm9MD5trhdVjSI9m4eW2hrJFmzWUZjlTY6nHbduNfpHw92U6QvF/s1600/IMAGE_00066.jpg\" height=\"240\" width=\"320\" />\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiQjhFR7hIbxZ3Jro5jxU0wMN3Tpj4MODKa70DY0rltcG8axQhfnfs2pzlNvIunXf4gwwbBL-V4NZeNDX_BTh4su-l8nYdM2YbBMEO4wd2uyvygDiiJ_Lh21tn0d9p035N26pTT/s1600/IMAGE_00067.jpg\" height=\"240\" width=\"320\" />\n\nGarbage.  You can hardly even see the snow.  Anyway, it's there, if you look really hard.  If the snow is still there tomorrow, I promise to provide better shots.\n\nYou might notice the absence of several links on the Web site lately.  It's all in preparation to reintroduce the site near the end of this month.  Also, many pages lack important functionality as my new host is making normal operation difficult.  My good friend Eric also wishes to blame Microsoft, but that's a given and I feel much better picking on something that I pay for on a monthly basis.\n\nSchool tomorrow night.  Therefore, few, if any, promises are made for an update to Wednesday's blog.  School just lays waste to my energy levels, especially after work.  At least it's an interesting class.  Now, if only I had a text book to use. \n\nDoes anyone else think the clover in the banner image is a little big?  I do.\n\nOh, I'm rambling now.  Time to end this.  Good day to you all!\n\nPS @ 9:54pm There are a lot of ways to get to old defunct areas of this Web site.  Do me (and yourself) a favor and don't get too click happy!  You might run into an interminable loop!"
+        "body": "Long day.  Nearly half of it was spent at work, rather than the usual 1/3.  That never ceases to strike me as strange; we humans spend eight out of the 24 hours working.  I guess it all means something, though.\n\nThe reason for the few extra hours today was a deadline that I'm working toward.  I've been told that my time management skills could use some work (who am I to argue?) so I'm definitely focused on attaining this.  I was only able to finish about 50% of what needed to be done.  More tomorrow!\n\nWhen I drove to work this morning, I traveled on my usual route of the 101 to the 1-17, then exit.  But something caught my eye when I curved around the loop toward the 17; snow.  It was everywhere.  Each mountain range within eye shot was dusted with white.  It was absolutely beautiful.\n\nI only wish that I had a camera at that moment.  Well, not at that very moment. If I had attempted to take a picture, the results could have been disastrous.  Photography and moving automobiles rarely mix, if ever.  But I did manage to take these with my camera phone later on in the day.  I sincerely apologize in advance for the terrible quality.  Truly, these images deserved better justice.\n\n      \n\n<img border=\"0\" src=\"images/archive/IMAGE_00065.jpg\" height=\"240\" width=\"320\" />\n\n<img border=\"0\" src=\"images/archive/IMAGE_00066.jpg\" height=\"240\" width=\"320\" />\n\n<img border=\"0\" src=\"images/archive/IMAGE_00067.jpg\" height=\"240\" width=\"320\" />\n\nGarbage.  You can hardly even see the snow.  Anyway, it's there, if you look really hard.  If the snow is still there tomorrow, I promise to provide better shots.\n\nYou might notice the absence of several links on the Web site lately.  It's all in preparation to reintroduce the site near the end of this month.  Also, many pages lack important functionality as my new host is making normal operation difficult.  My good friend Eric also wishes to blame Microsoft, but that's a given and I feel much better picking on something that I pay for on a monthly basis.\n\nSchool tomorrow night.  Therefore, few, if any, promises are made for an update to Wednesday's blog.  School just lays waste to my energy levels, especially after work.  At least it's an interesting class.  Now, if only I had a text book to use. \n\nDoes anyone else think the clover in the banner image is a little big?  I do.\n\nOh, I'm rambling now.  Time to end this.  Good day to you all!\n\nPS @ 9:54pm There are a lot of ways to get to old defunct areas of this Web site.  Do me (and yourself) a favor and don't get too click happy!  You might run into an interminable loop!"
     },
     {
         "file": "2006-03-13-XBOX-360.md",
@@ -3722,7 +3728,7 @@ const wayback_raw_dump = [
         "year": "2004",
         "date": "October 21, 2004",
         "title": "Cutest thing",
-        "body": "The Jazz got whooped tonight.  I don't recall the score exactly, but it was like 670-36.  We went to the game tonight with a couple of our friends, so gratefully that made it worth it. \n\nNot a whole lot else on my mind, I'm afraid.  Yeah.  Nothing.  I keep typing lines and deleting them.  Must be a sign. \n\nI will, however, leave you with this:\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiYlLxaChB-9JSopZZAQVJMdrrnBU4QJuWahEzmr2MifrlSlF5YShxzFc3kBX3T20tf9epvDxjk-vPmMvbcQBuz-BuNSAAhHYHp9maRgI7eDecbcXIwJCr0Fb1B8r8iOmGhBkWu/s1600/IMG_1315.JPG\" height=\"241\" width=\"320\" />\n\nI don't care what he's doing.  He's the cutest thing on the planet."
+        "body": "The Jazz got whooped tonight.  I don't recall the score exactly, but it was like 670-36.  We went to the game tonight with a couple of our friends, so gratefully that made it worth it. \n\nNot a whole lot else on my mind, I'm afraid.  Yeah.  Nothing.  I keep typing lines and deleting them.  Must be a sign. \n\nI will, however, leave you with this:\n\n<img border=\"0\" src=\"images/archive/IMG_1315.JPG.jpg\" height=\"241\" width=\"320\" />\n\nI don't care what he's doing.  He's the cutest thing on the planet."
     },
     {
         "file": "2004-10-20-Waiting--wondering.md",
@@ -3771,7 +3777,7 @@ const wayback_raw_dump = [
         "year": "2004",
         "date": "April 08, 2004",
         "title": "Welcome to the world, Buddy",
-        "body": "Welcome to the world, Sumner James.\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj9QZ9tBd0Xnpk4KsRbya5RfSJQWe61s_r4r4d7Q2o6bHEkha3Hpwtarc-DE-nx0Wl5_LOEdTRm_maCfFec0heq-d4cQv3GolwH9Dqr9yru-fsM_GeheoONKRUVtj0JqOrrcFSC/s1600/IMG_0533.JPG\" />"
+        "body": "Welcome to the world, Sumner James.\n\n<img border=\"0\" src=\"images/archive/IMG_0533.JPG.jpg\" />"
     },
     {
         "file": "2004-03-26-Stolen.md",
@@ -3820,14 +3826,14 @@ const wayback_raw_dump = [
         "year": "2004",
         "date": "March 09, 2004",
         "title": "Comparisons",
-        "body": "As it's still my birthday, I'll make this a brief entry.   The wife and I ran all around town today, having all sorts of fun, and now we're ready to collapse for a few hours.  But I won't leave you all empty handed, oh no. \n\nWhat I have for you today is a video.  To clarify, a video of a chicken.  Yes yes, I know.  I beat things to death.  But I figure that when you have a theme, you ought to go with it.  It seems that the chicken was still around when we got home last night, even though promises were made for its safe retrieval.  For all I know, the poor guy is still cluckin' about outside, wondering how he got to be in this predicament.  He seemed to be quite worried when I approached him, to tell the truth. \n\nSo what was the prize for today?  The ultimate gift had to be the Star Trek box set.  That completes the collection at ten DVDs.  That's pretty happy news.  We sat down last night to watch the first one.  My wife had of course never seen the earlier Treks, and it had been quite a few years since I had viewed it, save maybe the last few minutes on some cable channel.  The only word I have to describe that first installment is odd.  Such a strange, odd show.  I like it, but there is just so much pomp and non-climatic chorus. \n\nAs I explained (or tried) to my wife, this movie arrived years after the final episode of the television series, so they intended the seven minute sequence of Kirk and Scotty soaring around the new Enterprise to be somewhat of a touching moment.  But now, watching the movie in 2004, it all feels a bit hokey, like they're making too much of a deal about the reunion and such.   You want to push the fast forward button to the action parts, but the movie is meant to be cerebral and platonic.  Needless today, we're moving right along to the latter movies with greater anticipation.\n\nSo that's it.  The birthday is at an end, and by what I hear outside of my office window, the neighbors have reported that the chicken has taken roost just beyond their front porch.  That's fine, as he had previously staked out the seat of my scooter as his new home.  He decided against it. \n\nPerhaps he found it too familiar.....\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiLbh3l1Sqz1uoSRgHmN5UQdmiBpvEv-rt1qW3-JmaTlBzoNbWooL7wRy7NJfLkiyWWUYEvDt-JQmyp-Z00pu8S5fYxRgF3LtshMUe2_t_S2BWZo3ZW8vH1E45Dtjbj0E1KnDCP/s1600/scooter.jpg\" />\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhQ_oxIci-oE7ssO_5N_G9ItZ0peuSgY1AGevAZSn1Sbg5n8X022dHlv_h5721GyHiDoRBLq7lgKDrLpvoPmSIfoEpZeNgtgpE-6WGPO9HDFBGvRaMVoi0_sj6qaGE9pkcesIxV/s1600/chicken4.jpg\" />"
+        "body": "As it's still my birthday, I'll make this a brief entry.   The wife and I ran all around town today, having all sorts of fun, and now we're ready to collapse for a few hours.  But I won't leave you all empty handed, oh no. \n\nWhat I have for you today is a video.  To clarify, a video of a chicken.  Yes yes, I know.  I beat things to death.  But I figure that when you have a theme, you ought to go with it.  It seems that the chicken was still around when we got home last night, even though promises were made for its safe retrieval.  For all I know, the poor guy is still cluckin' about outside, wondering how he got to be in this predicament.  He seemed to be quite worried when I approached him, to tell the truth. \n\nSo what was the prize for today?  The ultimate gift had to be the Star Trek box set.  That completes the collection at ten DVDs.  That's pretty happy news.  We sat down last night to watch the first one.  My wife had of course never seen the earlier Treks, and it had been quite a few years since I had viewed it, save maybe the last few minutes on some cable channel.  The only word I have to describe that first installment is odd.  Such a strange, odd show.  I like it, but there is just so much pomp and non-climatic chorus. \n\nAs I explained (or tried) to my wife, this movie arrived years after the final episode of the television series, so they intended the seven minute sequence of Kirk and Scotty soaring around the new Enterprise to be somewhat of a touching moment.  But now, watching the movie in 2004, it all feels a bit hokey, like they're making too much of a deal about the reunion and such.   You want to push the fast forward button to the action parts, but the movie is meant to be cerebral and platonic.  Needless today, we're moving right along to the latter movies with greater anticipation.\n\nSo that's it.  The birthday is at an end, and by what I hear outside of my office window, the neighbors have reported that the chicken has taken roost just beyond their front porch.  That's fine, as he had previously staked out the seat of my scooter as his new home.  He decided against it. \n\nPerhaps he found it too familiar.....\n\n<img border=\"0\" src=\"images/archive/scooter.jpg\" />\n\n<img border=\"0\" src=\"images/archive/chicken4.jpg\" />"
     },
     {
         "file": "2004-03-08-Birthday.md",
         "year": "2004",
         "date": "March 08, 2004",
         "title": "Birthday",
-        "body": "So, chickens can climb stairs.  We were awoken this morning by some peculiar and rare news.  My wife seemed to think it was mildly amusing, but if she only knew the quickening pace of my heart when she told me, she would have instantly known that she made my day.\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgQfoMdjnkbmfWWvPRqpq9z32IDwHL32nHgCtuCcO_LCMWnnhWnQOks6Vl2WJVUqwTROFXQXIoDsssfHOFIJdPWDQAu9xM86kURcnSv3gt9ogj02S0JHUFItcAzk8VdxSDbO68O/s1600/chicken.jpg\" height=\"320\" width=\"192\" />\n\nThere was a rooster out in our front yard.   Maybe the only reason that I got excited was because it was genuine camera fodder, for there is blessed little to capture around an urban apartment complex. \n\nThe neighborhood kids were thrilled with delight; there were a few of them who were set on the idea of catching this lost bird.  But I could remember from my summer in Ephraim, Utah that it's not really possible to capture one of these birds without a little bit of formal training. \n\nThe older neighbors were abuzz.  It seems we don't get much excitement around here, eh?  The apartment staff was there too, walkie-talkies in hand, wondering what to do about this rogue farm animal.  Luckily, one of the girls that worked at the office had a husband that knew a thing or two about these birds, and actually raised a few hundred in his life.  So he came straight over to get it.  That's fine, because I was growing weary of my neighbors jokes about a chicken dinner. \n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgQdWyXBzb46ptpsMdlgY-yxN2wlPJUNHduqcWc40Xciw5GjT0_UrXRq1KeuT8DxOAmPI6O42c5s2cteRxbuq9zTVnyvA2i44sWxUEbdu-9i9Fep-VQK37lUNiFUAp6dRVuSUpP/s1600/chicken2.jpg\" height=\"244\" width=\"320\" />\n\nLast week, Quiznos.  This week, KFC?\n\nIn other news:  It's birthday time, and I have the day off.  It's time to go shopping.  The wife got me some neat-o presents this morning, including a much-coveted propane lantern.  How'd she know that I wanted that?  Easy.  She's the best.  She also left early in the morning to get me my birthday cereal.  That is simply a tradition that cannot die.  Although it appears now that other families have jumped on that wagon, as my wife came home with a box of \"Birthday Trix\".  When I sat down at my desk to scribble off this entry, I was also greeted with an e-mail from my brother, wishing me a happy day with a Pay Pal present in tow. What a wonderful start to a wonderful morning.\n\nPoultry and sugared cereal, propane lanterns and active Pay Pal accounts.  What a day.  See you tomorrow!"
+        "body": "So, chickens can climb stairs.  We were awoken this morning by some peculiar and rare news.  My wife seemed to think it was mildly amusing, but if she only knew the quickening pace of my heart when she told me, she would have instantly known that she made my day.\n\n<img border=\"0\" src=\"images/archive/chicken.jpg\" height=\"320\" width=\"192\" />\n\nThere was a rooster out in our front yard.   Maybe the only reason that I got excited was because it was genuine camera fodder, for there is blessed little to capture around an urban apartment complex. \n\nThe neighborhood kids were thrilled with delight; there were a few of them who were set on the idea of catching this lost bird.  But I could remember from my summer in Ephraim, Utah that it's not really possible to capture one of these birds without a little bit of formal training. \n\nThe older neighbors were abuzz.  It seems we don't get much excitement around here, eh?  The apartment staff was there too, walkie-talkies in hand, wondering what to do about this rogue farm animal.  Luckily, one of the girls that worked at the office had a husband that knew a thing or two about these birds, and actually raised a few hundred in his life.  So he came straight over to get it.  That's fine, because I was growing weary of my neighbors jokes about a chicken dinner. \n\n<img border=\"0\" src=\"images/archive/chicken2.jpg\" height=\"244\" width=\"320\" />\n\nLast week, Quiznos.  This week, KFC?\n\nIn other news:  It's birthday time, and I have the day off.  It's time to go shopping.  The wife got me some neat-o presents this morning, including a much-coveted propane lantern.  How'd she know that I wanted that?  Easy.  She's the best.  She also left early in the morning to get me my birthday cereal.  That is simply a tradition that cannot die.  Although it appears now that other families have jumped on that wagon, as my wife came home with a box of \"Birthday Trix\".  When I sat down at my desk to scribble off this entry, I was also greeted with an e-mail from my brother, wishing me a happy day with a Pay Pal present in tow. What a wonderful start to a wonderful morning.\n\nPoultry and sugared cereal, propane lanterns and active Pay Pal accounts.  What a day.  See you tomorrow!"
     },
     {
         "file": "2004-03-05-Pseudo-lit.md",
@@ -3841,7 +3847,7 @@ const wayback_raw_dump = [
         "year": "2004",
         "date": "March 04, 2004",
         "title": "Quizno's",
-        "body": "So they weren't lying, after all.  Their subs are A. Toasty B. Tasty and C.  They do have a pepper bar.  But it wasn't the pepper bar that I had expected.  For some strange reason, I believed that they had all sorts of exotic \"shaking\" peppers that you could use on your subs.  And well, since my wife has gotten me into really nice pepper, I was sort of excited.  Fine, I wasn't disappointed, I just now stand corrected.\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEivK6gLubrKqr4mPqaNczkRYKacYQ903PujsFhjfiR83Iewg6pxU2vnE8ZpeNCb5GOPCWHj3_GtHhLhho0UKx3n6CS2u19nq7nqmdoDTV8nLpUkKtRWwherYc1Vp7x8PUHVfk4g/s1600/pepperbar.jpg\" height=\"262\" width=\"320\" />\n\nYes, they have a pepper bar.\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjB5l2evVUISuv2tUK22CFdFeogYSh7AVUEPPJ0I0hfXWp_QTb6bwTymdvmdiSeP7kKT1pDVv55nWQPzS90YkSySriIR1visB_B6XU8AfwfQZPfM2BN_qrKnAMkvEyUISt4LRfP/s1600/toasty.jpg\" height=\"262\" width=\"320\" />\n\nThe proof is in the pudding.  Well, in the bread, at any rate...\n\nI promise that this is my final entry regarding Quiznos.  And hey, we all got a laugh, I'm sure.  I suppose that it's only fitting that this strange adventure ends in the culmination of the visit to the restaurant.  Side note:  My wife thought that the place was cute.  It was, but it wasn't wholly original.  I'd seen cuter.\n\nOn to bigger and better things.  Let's see...this weekend, there are many things afoot.  The buddies and I are planning on taking another camping trip to Camp Verde, perchance (sorry, James Lileks) we'll visit the hot springs this time around.  I think i'll be braver this time and take the camera along for the adventure, as I saw many picture-worthy jewels in the wilderness that day.  One could spend an entire day shooting the mountains in that region.\n\nShortly after we return from the camping trip, it's all business from thereon out.  I have to meet with a company regarding a possible Web site design.  That should be interesting, and quite a positive experience if I may be so bold. \n\nSunday is slated for nothing but church and relaxation.  Monday?  Number 25 for this chap.  I haven't a clue what to do for that day, but maybe my wife will make more choco-crisps for me.  That's an entirely different topic for another day, keep in mind.  I'll be sure to elucidate further next week.  See you on Friday.  To remind myself, it'll be something about The Passion.\n\nKeep em coming."
+        "body": "So they weren't lying, after all.  Their subs are A. Toasty B. Tasty and C.  They do have a pepper bar.  But it wasn't the pepper bar that I had expected.  For some strange reason, I believed that they had all sorts of exotic \"shaking\" peppers that you could use on your subs.  And well, since my wife has gotten me into really nice pepper, I was sort of excited.  Fine, I wasn't disappointed, I just now stand corrected.\n\n<img border=\"0\" src=\"images/archive/pepperbar.jpg\" height=\"262\" width=\"320\" />\n\nYes, they have a pepper bar.\n\n<img border=\"0\" src=\"images/archive/toasty.jpg\" height=\"262\" width=\"320\" />\n\nThe proof is in the pudding.  Well, in the bread, at any rate...\n\nI promise that this is my final entry regarding Quiznos.  And hey, we all got a laugh, I'm sure.  I suppose that it's only fitting that this strange adventure ends in the culmination of the visit to the restaurant.  Side note:  My wife thought that the place was cute.  It was, but it wasn't wholly original.  I'd seen cuter.\n\nOn to bigger and better things.  Let's see...this weekend, there are many things afoot.  The buddies and I are planning on taking another camping trip to Camp Verde, perchance (sorry, James Lileks) we'll visit the hot springs this time around.  I think i'll be braver this time and take the camera along for the adventure, as I saw many picture-worthy jewels in the wilderness that day.  One could spend an entire day shooting the mountains in that region.\n\nShortly after we return from the camping trip, it's all business from thereon out.  I have to meet with a company regarding a possible Web site design.  That should be interesting, and quite a positive experience if I may be so bold. \n\nSunday is slated for nothing but church and relaxation.  Monday?  Number 25 for this chap.  I haven't a clue what to do for that day, but maybe my wife will make more choco-crisps for me.  That's an entirely different topic for another day, keep in mind.  I'll be sure to elucidate further next week.  See you on Friday.  To remind myself, it'll be something about The Passion.\n\nKeep em coming."
     },
     {
         "file": "2004-03-03-I-care.md",
@@ -3855,7 +3861,7 @@ const wayback_raw_dump = [
         "year": "2004",
         "date": "March 02, 2004",
         "title": "Belle of the damn ball, thanks",
-        "body": "03/02/04 ---Come for the Spong monkeys, stay for the fun!---\n\nSite Stats.  If anything motivates me with this Web site, it's when I check the daily statistics and see what brought visitors here.  When I checked this morning, I realized that I had become inundated with requests for one thing:\n\nSpong monkeys.\n\nIt's now apparent that those funny furry animals have made Quiznos very, very famous indeed.  For crying out loud, 12 out of 13 queries were for that commercial.  The number one hit was \"spong monkey\", with a whopping 49 inquiries for the past two days. \n\nI ran across what appears to be the first appearance of these spongmonkeys.  You may find it very interesting and annoying at the same time.  The Web site is here.  It's an endearing song about how much they love the Moon.  Joel Veitch, you're a genius.  Oh yeah, and you're probably very rich now, too.  Jerk. \n\nAnd now I don't know whether to be proud that my site is back up to 66 visits per day.  It's obvious that they're only coming now for the 'monkeys.  Well, that's just fine with me, I got the bandwidth, and I ain't that proud.\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjiNiVUaPWZPMxrwc9XXWWn6KVoNZyRP7Z5qOHrjQWpfzto5TZbCeLh0gBmd44HOqrRy4LmktvAnALlJUJMUN9kIxwH44QwMS1PfTp4Xbt9yK0sVfA4309f67Ib4v8hgvXeR0Tx/s1600/spongmonkey2.jpg\" />\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgD-Uh731SD9ZonSPFRtSUd5Bs36QOLL0LOVjCyzn7V-9oL7pe6StSHgP763F1uINXe3xUPBOYrZIGUNEHr4oEZyeamlCH2ldVCZ0kgdobxBz9_RQwOLP261P6fC2RgG6BSshJw/s1600/spongmonkey1.jpg\" />\n\n     \n\nTeen Girl Squad.  Hard to believe that we're up to number five, but that's where life has led us.  Strong Bad introduces us to the fact that the others really don't like What's her Face.  And if you look closely enough, you'll see that her last name really is \"Herface\".  The obvious moral of this issue is to avoid dipping your head in the sand at the beach.  If you do, the following may happen to you:\n\nA.  You will inhale sand (and cigarette butts)\n\nB.  Birds will find you an attractive perch\n\nC.  Presidents and body builders will stop and mock\n\nAh the humor of Homestarrunner.  Long live the king.\n\nPreparations.  Since life is barreling along with the velocity of a snapshot, the wife and I have been afoot with the usual pre-birth preparations.  We managed to rearrange the second room and reclaim an entire wall, that will definitely come in useful when the babe arrives. \n\nTo sum my wife up in a few words:  She is simply amazing.  I'd imagine that I could search through a few previous blogs and find that same phrase more than a few times, but it needs to be said more often.  On Saturday night, my work held a huge bonus party at a local joint called Rawhide.  I was really looking forward to it because there were so many people at work that had been chomping at the bit to meet the lovely dame.\n\nI asked her to take her time and get all dolled up for the event, but what walked through that door was nothing short of angelic.  She's eight months pregnant and she looks absolutely perfect, and everyone there knew it.  I had the belle of the ball and I was damn proud of it, thanks.\n\nWhen I returned to work today, most people who had met her that night had more than a few comments for me.  She was described as glowing, beautiful, and sweet.  More fitting words could not be found, for sure.\n\nAnd why am I here?  Too many questions, even more answers.  You'll find out soon.  Until then, keep coming back.  Invite a friend.  I take all coupons."
+        "body": "03/02/04 ---Come for the Spong monkeys, stay for the fun!---\n\nSite Stats.  If anything motivates me with this Web site, it's when I check the daily statistics and see what brought visitors here.  When I checked this morning, I realized that I had become inundated with requests for one thing:\n\nSpong monkeys.\n\nIt's now apparent that those funny furry animals have made Quiznos very, very famous indeed.  For crying out loud, 12 out of 13 queries were for that commercial.  The number one hit was \"spong monkey\", with a whopping 49 inquiries for the past two days. \n\nI ran across what appears to be the first appearance of these spongmonkeys.  You may find it very interesting and annoying at the same time.  The Web site is here.  It's an endearing song about how much they love the Moon.  Joel Veitch, you're a genius.  Oh yeah, and you're probably very rich now, too.  Jerk. \n\nAnd now I don't know whether to be proud that my site is back up to 66 visits per day.  It's obvious that they're only coming now for the 'monkeys.  Well, that's just fine with me, I got the bandwidth, and I ain't that proud.\n\n<img border=\"0\" src=\"images/archive/spongmonkey2.jpg\" />\n\n<img border=\"0\" src=\"images/archive/spongmonkey1.jpg\" />\n\n     \n\nTeen Girl Squad.  Hard to believe that we're up to number five, but that's where life has led us.  Strong Bad introduces us to the fact that the others really don't like What's her Face.  And if you look closely enough, you'll see that her last name really is \"Herface\".  The obvious moral of this issue is to avoid dipping your head in the sand at the beach.  If you do, the following may happen to you:\n\nA.  You will inhale sand (and cigarette butts)\n\nB.  Birds will find you an attractive perch\n\nC.  Presidents and body builders will stop and mock\n\nAh the humor of Homestarrunner.  Long live the king.\n\nPreparations.  Since life is barreling along with the velocity of a snapshot, the wife and I have been afoot with the usual pre-birth preparations.  We managed to rearrange the second room and reclaim an entire wall, that will definitely come in useful when the babe arrives. \n\nTo sum my wife up in a few words:  She is simply amazing.  I'd imagine that I could search through a few previous blogs and find that same phrase more than a few times, but it needs to be said more often.  On Saturday night, my work held a huge bonus party at a local joint called Rawhide.  I was really looking forward to it because there were so many people at work that had been chomping at the bit to meet the lovely dame.\n\nI asked her to take her time and get all dolled up for the event, but what walked through that door was nothing short of angelic.  She's eight months pregnant and she looks absolutely perfect, and everyone there knew it.  I had the belle of the ball and I was damn proud of it, thanks.\n\nWhen I returned to work today, most people who had met her that night had more than a few comments for me.  She was described as glowing, beautiful, and sweet.  More fitting words could not be found, for sure.\n\nAnd why am I here?  Too many questions, even more answers.  You'll find out soon.  Until then, keep coming back.  Invite a friend.  I take all coupons."
     },
     {
         "file": "2004-02-27-Everything-is-nothing.md",
@@ -3960,7 +3966,7 @@ const wayback_raw_dump = [
         "year": "2004",
         "date": "January 16, 2004",
         "title": "Glo-fish",
-        "body": "I just got off the telephone with Sprint.  It seems that they managed to foul up my billing once again.  It wasn't that big of a deal, because I was certain that they had made the mistake.  But it was a whole lot of money, and Sprint is the one company that I choose (I don't know why) to have automatically debited from my checking account.\n\nSo, the funds are gone until the next billing period.  (sound of toilet flushing)\n\n.....\n\nSorry about that, I finally got fed up with the ominous odor emanating from my kitten's litter box.  I lost my train of though.  Wait, no, yes.  It's gone.\n\nAnd he just p00ped again.  Thanks, fat cat.  Gosh.\n\nIn other news:  So I found out today that pet stores sell glowing fish now.  Now, allow me to elucidate.  I found out that they sell, as pets, genetically altered (modified?) fluorescent zebra fish.\n\nThese small goldfish look-alikes were originally developed to help scientists study pollution levels.  However, they are now being mass-marketed in the United States (sans California, which banned the sale of these creatures of science) as household pets. \n\nThe news part of this is that two public interest groups have filed a lawsuit, alleging that these creations must be regulated by the feds.  They claim that these fish are unsafe and if released into the wild, could represent a hazard as other animals consume these fish.  We humans eat these other animals in turn.\n\nSo that's the basic of their argument.  Good case, I'd admit. \n\nAll I know is that I want one.\n\nBrother's blog:  If you haven't already, you ought to check out my brother's Web site.  There has been much controversy as of late with this particular article, entitled Voluntary Simplicity.  If you'd met my brother before, you would understand me when I say that he leads a very simple yet complex lifestyle.  \n\nHe is envied and misunderstood at the same time.  People turn to him for advice, yet dole out criticism in stride.  His comments on voluntary simplicity are genuine and intelligent, and darned if I agree.\n\nHowever, I lead a different lifestyle, albeit I admit that it's still strangely complex.  Take for instance my story about Sprint that I mentioned earlier.  I could be without that stress in my life, but I'd imagine that I'd bored with that.\n\nI think a fish hit on my wife.  No, really.  We went to The Rainforest Cafe last Saturday.  We were seated adjacent quite a large aquarium with various tropical fish.  However, there was one fish that couldn't quite keep his eyes off my beautiful bride.\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjZtT_CB4-i3pTlyQA3_zsb-ViSq9MqCVcqEHkqusVIksFH23C9i8bbSDdVhHe38A4g3HogJOB4T3SJVsQ5f7RN8yTFATd451hwsB_NO39shzvyHvZ4Ygm37GASWUQirYm5TBnW/s1600/casanova.jpg\" height=\"227\" width=\"320\" />\n\nHe just sat there, staring\n\nShe thought it was creepy, I thought it was quite amusing.  And if you're wondering why I had a picture of this particular moment, stop wondering.  I take my camera everywhere now.  It's the greatest fuel that the Blog has ever had.  Ever.\n\nI'm sure there was more, but that'll do for now.  To make up for this week's missed entries, I'll be back tomorrow for one more.  But don't say I didn't warn you.  Go get me a Glofish."
+        "body": "I just got off the telephone with Sprint.  It seems that they managed to foul up my billing once again.  It wasn't that big of a deal, because I was certain that they had made the mistake.  But it was a whole lot of money, and Sprint is the one company that I choose (I don't know why) to have automatically debited from my checking account.\n\nSo, the funds are gone until the next billing period.  (sound of toilet flushing)\n\n.....\n\nSorry about that, I finally got fed up with the ominous odor emanating from my kitten's litter box.  I lost my train of though.  Wait, no, yes.  It's gone.\n\nAnd he just p00ped again.  Thanks, fat cat.  Gosh.\n\nIn other news:  So I found out today that pet stores sell glowing fish now.  Now, allow me to elucidate.  I found out that they sell, as pets, genetically altered (modified?) fluorescent zebra fish.\n\nThese small goldfish look-alikes were originally developed to help scientists study pollution levels.  However, they are now being mass-marketed in the United States (sans California, which banned the sale of these creatures of science) as household pets. \n\nThe news part of this is that two public interest groups have filed a lawsuit, alleging that these creations must be regulated by the feds.  They claim that these fish are unsafe and if released into the wild, could represent a hazard as other animals consume these fish.  We humans eat these other animals in turn.\n\nSo that's the basic of their argument.  Good case, I'd admit. \n\nAll I know is that I want one.\n\nBrother's blog:  If you haven't already, you ought to check out my brother's Web site.  There has been much controversy as of late with this particular article, entitled Voluntary Simplicity.  If you'd met my brother before, you would understand me when I say that he leads a very simple yet complex lifestyle.  \n\nHe is envied and misunderstood at the same time.  People turn to him for advice, yet dole out criticism in stride.  His comments on voluntary simplicity are genuine and intelligent, and darned if I agree.\n\nHowever, I lead a different lifestyle, albeit I admit that it's still strangely complex.  Take for instance my story about Sprint that I mentioned earlier.  I could be without that stress in my life, but I'd imagine that I'd bored with that.\n\nI think a fish hit on my wife.  No, really.  We went to The Rainforest Cafe last Saturday.  We were seated adjacent quite a large aquarium with various tropical fish.  However, there was one fish that couldn't quite keep his eyes off my beautiful bride.\n\n<img border=\"0\" src=\"images/archive/casanova.jpg\" height=\"227\" width=\"320\" />\n\nHe just sat there, staring\n\nShe thought it was creepy, I thought it was quite amusing.  And if you're wondering why I had a picture of this particular moment, stop wondering.  I take my camera everywhere now.  It's the greatest fuel that the Blog has ever had.  Ever.\n\nI'm sure there was more, but that'll do for now.  To make up for this week's missed entries, I'll be back tomorrow for one more.  But don't say I didn't warn you.  Go get me a Glofish."
     },
     {
         "file": "2004-01-15-Blank.md",
@@ -3974,7 +3980,7 @@ const wayback_raw_dump = [
         "year": "2004",
         "date": "January 14, 2004",
         "title": "Basketball game",
-        "body": "Only a picture for today.  Tonight, my wife and I went to the Suns game, as she had won tickets (I'd probably never pay to see them, unless they were playing the Utah Jazz, in that case, I'd be paying to see the Jazz)  The game was ultra-boring, and that's being nice.\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEht_JPKKNIgMZHHm-UrBvRlBmEb_u9h910TF9LIUUSS0p7dp4ZqrZTLbyYzTO3hpJ-4HNrPaDgRwECD65px2uaLrG0MzMrQcaESqNbNBpVKL2djz8xEqTNoYB5HRBY5_VG_3-Qq/s1600/melo.jpg\" height=\"240\" width=\"320\" />\n\nThe only reason that I went was to see number 15.  Carmelo Anthony, one of the youngest players ever in the NBA.  I wonder how many times we'll say that...eventually, they'll find a way to get a 17 year old in, as long as he's graduated from High School."
+        "body": "Only a picture for today.  Tonight, my wife and I went to the Suns game, as she had won tickets (I'd probably never pay to see them, unless they were playing the Utah Jazz, in that case, I'd be paying to see the Jazz)  The game was ultra-boring, and that's being nice.\n\n<img border=\"0\" src=\"images/archive/melo.jpg\" height=\"240\" width=\"320\" />\n\nThe only reason that I went was to see number 15.  Carmelo Anthony, one of the youngest players ever in the NBA.  I wonder how many times we'll say that...eventually, they'll find a way to get a 17 year old in, as long as he's graduated from High School."
     },
     {
         "file": "2004-01-13-Yonder-flask.md",
@@ -3988,7 +3994,7 @@ const wayback_raw_dump = [
         "year": "2004",
         "date": "January 12, 2004",
         "title": "A journey for photos' sake",
-        "body": "A thousand apologies.  In my desire to continue my vacation well into Monday morning, I avoided my computer like month-old milk.\n\nBut we're back to the grind now.  It's approximately 7:30pm, and I'm late.  But fear not, because I have something to show for the delay.\n\nPictures.  Yes, I took that adventure that I had been wanting.  I ventured outside my apartment vicinity for what seems like the first time in weeks.  I feel like this because in my moments of solitary meditation last week, I continually envisioned the same scenery in my mind over and over.  It all consisted of the area surrounding my apartment and work local.\n\nBlah blah.  My journey took me to downtown Phoenix, where I photographed the Viad Building and its immediate surroundings.  Please let me explain, I haven't had much experience with digital photography, and I've had even less experience with this camera.  So, those pictures didn't turn out that great. \n\nThat is, until I visited the botanical gardens east of town.  At first, I was sorely disappointed by the lack of variety and poor supply of vivid color on my trek around the jardin. \n\nBut after I took off my durn-blasted sunglasses, which have more scratches than my brother's 45's after I listened to them as a child, I began to see the small bits of color that were strewn about the area.\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiyCl52ZlQXRXgS9TnRDrNBg2fCJZCwQHQygZezkQTuCEwxRMarln4B9UinDsZpVErSHbkb4BtKUI1XTVpet7RCVrJnir24BheSzPCe9xV2gaEMxF4qG5lB1JPGFjU0wmqn0dGf/s1600/favorite.jpg\" />\n\nMy Favorite\n\nI sincerely enjoyed that part of my day.  I found it relaxing, invigorating, and educational (although I failed to write down any of the names of the flora)  The most amusing part of the garden was the Library. \n\nThis bibliotek was placed adjacent the visitors center, so i stopped there before leaving.  I took out my camera and began taking random pictures because I could, when all of a sudden, the librarian came swooping out of the woodwork.\n\n\"I see that you're taking pictures\", she said.\n\n\"Er, yes.\", I said, rather startled.  \"Is that ok?  I can stop if you'd like.\"\n\n\"Oh, no!  It's quite alright.  Are you a librarian?\", she inquired, excitedly.\n\n\"Well, no, but I have an extreme fascination with small libraries.\", I lied.\n\n\"Oh, that's absolutely wonderful!  Are you from a newspaper?\"  she said, her left eye twitching wildly.  I was beginning to believe she might actually faint at this point.\n\n\"No, no...I'm from...I'm from my school in Colorado.  I'm taking pictures of small Arizona libraries for my Senior project.\"  I said.  My web of lies was growing faster than my desire to keep the charade up.\n\n\"Well, be sure to sign our guest book up front.  And feel free to take as many pictures as you please!\"  she exclaimed, and disappeared as fast as she came.\n\nI was relieved that she had decided to end the conversation at that point.  I don't know if:\n\nA.  I could come up with more falsifications, and\n\nB.  If I could keep from laughing any longer\n\nSince I've gone on long enough about this library, how about the link to these aforementioned pictures?  You may find them here, or you can always find this permanently on my Media Page.\n\nAnd that's it, for I must save more verbiage for later on tonight.  I must cook up another blog for those who read late at night or early in the morning.  Again, sorry for the delay, and I hope that the pictures make up for it.\n\nPostscript: For a limited time, I will be offering these pictures for download in whatever size you need.  \n\nPlease Contact Me to request a size. \n\n800x600  1024x768  1280x1024  1600x1200"
+        "body": "A thousand apologies.  In my desire to continue my vacation well into Monday morning, I avoided my computer like month-old milk.\n\nBut we're back to the grind now.  It's approximately 7:30pm, and I'm late.  But fear not, because I have something to show for the delay.\n\nPictures.  Yes, I took that adventure that I had been wanting.  I ventured outside my apartment vicinity for what seems like the first time in weeks.  I feel like this because in my moments of solitary meditation last week, I continually envisioned the same scenery in my mind over and over.  It all consisted of the area surrounding my apartment and work local.\n\nBlah blah.  My journey took me to downtown Phoenix, where I photographed the Viad Building and its immediate surroundings.  Please let me explain, I haven't had much experience with digital photography, and I've had even less experience with this camera.  So, those pictures didn't turn out that great. \n\nThat is, until I visited the botanical gardens east of town.  At first, I was sorely disappointed by the lack of variety and poor supply of vivid color on my trek around the jardin. \n\nBut after I took off my durn-blasted sunglasses, which have more scratches than my brother's 45's after I listened to them as a child, I began to see the small bits of color that were strewn about the area.\n\n<img border=\"0\" src=\"images/archive/favorite.jpg\" />\n\nMy Favorite\n\nI sincerely enjoyed that part of my day.  I found it relaxing, invigorating, and educational (although I failed to write down any of the names of the flora)  The most amusing part of the garden was the Library. \n\nThis bibliotek was placed adjacent the visitors center, so i stopped there before leaving.  I took out my camera and began taking random pictures because I could, when all of a sudden, the librarian came swooping out of the woodwork.\n\n\"I see that you're taking pictures\", she said.\n\n\"Er, yes.\", I said, rather startled.  \"Is that ok?  I can stop if you'd like.\"\n\n\"Oh, no!  It's quite alright.  Are you a librarian?\", she inquired, excitedly.\n\n\"Well, no, but I have an extreme fascination with small libraries.\", I lied.\n\n\"Oh, that's absolutely wonderful!  Are you from a newspaper?\"  she said, her left eye twitching wildly.  I was beginning to believe she might actually faint at this point.\n\n\"No, no...I'm from...I'm from my school in Colorado.  I'm taking pictures of small Arizona libraries for my Senior project.\"  I said.  My web of lies was growing faster than my desire to keep the charade up.\n\n\"Well, be sure to sign our guest book up front.  And feel free to take as many pictures as you please!\"  she exclaimed, and disappeared as fast as she came.\n\nI was relieved that she had decided to end the conversation at that point.  I don't know if:\n\nA.  I could come up with more falsifications, and\n\nB.  If I could keep from laughing any longer\n\nSince I've gone on long enough about this library, how about the link to these aforementioned pictures?  You may find them here, or you can always find this permanently on my Media Page.\n\nAnd that's it, for I must save more verbiage for later on tonight.  I must cook up another blog for those who read late at night or early in the morning.  Again, sorry for the delay, and I hope that the pictures make up for it.\n\nPostscript: For a limited time, I will be offering these pictures for download in whatever size you need.  \n\nPlease Contact Me to request a size. \n\n800x600  1024x768  1280x1024  1600x1200"
     },
     {
         "file": "2004-01-07-The-Spirit-Lands.md",
@@ -4009,7 +4015,7 @@ const wayback_raw_dump = [
         "year": "2004",
         "date": "January 05, 2004",
         "title": "Lazy Sundays",
-        "body": "I know I've said it before, but I'm at liberty to say it again:  Lazy Sundays are nice.\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhZNRC0EazAht9fyaZ1otExzEJWhu3c9BTDs5P1DZ1c5PCKt8Wh3CszdJ82bBnETpju8hksf4LqR4LuUr1CosTnTh4IYK7TL41_xdf2xtUrOt9MxwHGaxDW4tk3nbBId8esqLr-/s1600/dobby.jpg\" height=\"258\" width=\"320\" />\n\nIt may be silly to post cat pictures as much as I do, but there simply the best representations of feelings of relaxation.  Not since my father has anyone been able to sleep so professionally.  And I mean that with the utmost respect, of course.\n\nI had to work on Saturday, so that blew most of the weekend plans.  I had one specific idea that could have surprised my wife, but now, that'll have to wait until next weekend. \n\nNew Pictures.  You may wish to visit the Media page of this site, for there you'll find the best in photographic excellence.  Ironic though, they aren't mine.  I receive a digital camera for Christmas, and post-holiday, the only things I have to grant are my brother's capturings.\n\nNonetheless, they're absolutely beautiful works, and I wanted my brother to be able to post them online.  He and his family of eight live in Spring City, Utah, and I honestly believe that it's one of the most serene places I've visited. (I haven't been very far)  It snowed several inches over the weekend in this little town of 700.  The entire vista is encompassed in brilliant white spectacle.  I had my brother take his digi-cam out into the open and give me a look.\n\nI was just discussing with him how odd it was that he could have children in this small town and the population actually increases noticeably.  I believe he described it as anachronistic, and that it is.  I have never experienced life as he does.  In many ways, I wish I could.  There are more people in my apartment complex than there are in his town.\n\nThat's all that I have for today, but only because I'm distracted.  Come back tomorrow if you feel so inclined."
+        "body": "I know I've said it before, but I'm at liberty to say it again:  Lazy Sundays are nice.\n\n<img border=\"0\" src=\"images/archive/dobby.jpg\" height=\"258\" width=\"320\" />\n\nIt may be silly to post cat pictures as much as I do, but there simply the best representations of feelings of relaxation.  Not since my father has anyone been able to sleep so professionally.  And I mean that with the utmost respect, of course.\n\nI had to work on Saturday, so that blew most of the weekend plans.  I had one specific idea that could have surprised my wife, but now, that'll have to wait until next weekend. \n\nNew Pictures.  You may wish to visit the Media page of this site, for there you'll find the best in photographic excellence.  Ironic though, they aren't mine.  I receive a digital camera for Christmas, and post-holiday, the only things I have to grant are my brother's capturings.\n\nNonetheless, they're absolutely beautiful works, and I wanted my brother to be able to post them online.  He and his family of eight live in Spring City, Utah, and I honestly believe that it's one of the most serene places I've visited. (I haven't been very far)  It snowed several inches over the weekend in this little town of 700.  The entire vista is encompassed in brilliant white spectacle.  I had my brother take his digi-cam out into the open and give me a look.\n\nI was just discussing with him how odd it was that he could have children in this small town and the population actually increases noticeably.  I believe he described it as anachronistic, and that it is.  I have never experienced life as he does.  In many ways, I wish I could.  There are more people in my apartment complex than there are in his town.\n\nThat's all that I have for today, but only because I'm distracted.  Come back tomorrow if you feel so inclined."
     },
     {
         "file": "2004-01-02-Brand-new-year.md",
@@ -4044,21 +4050,21 @@ const wayback_raw_dump = [
         "year": "2003",
         "date": "December 29, 2003",
         "title": "Sweet deal",
-        "body": "My goodness.  Where have I been?\n\nIt's a long story.  It all started back at the end of the week of the 19th, when I began a new Beta project.  I found it necessary to format my computer, and in so doing, completely eradicated all of my Office software (including FrontPage).\n\nBummer.  So no worries, I simply had to reinstall my Office suite and move on, right?  Sadly, no.  Upon reinstallation, I found out, to my dismay, that the software had recently expired.  So, that brought an abrupt end to the blog and all other updates.\n\nI wish that I could say that I had decided to take a break from writing, or that my Web site updates needed a hiatus for creative recovery.  Neither for the former...but we're finally back in business after the holidays.\n\nWhich, by the way, mine was wonderful.  Granted that New Years has not yet happened; however, I feel so estranged from that particular holiday that it really has no specific meaning for me.  Although, the resolutions this year should be predominantly meaty.  First, there's the not-so-small matter of rehabilitating my knee.  I continue to forget that I forked over a lot of cash so that I could play basketball again, and somehow, other things are taking front seat to that effort.\n\nThen, there's that tiny event on the horizon.  I must prepare myself, both physically and mentally, for the birth of my son.  I just had to pause at that statement for a good 45 seconds.  I hadn't yet thought of it quite that way...my son.  It's not an unsettling feeling, really...more so, it's a startling realization that it's not just a game.  Please, don't get me wrong, I hadn't thought of fathering a child as a source of entertainment.  The mere thought hadn't crossed my mind.  But, sometimes parents get caught up in the romance of any given idea, especially child-birth, and more especially, the birth of their first.\n\nNo one has really provided us with the stern warnings that I thought came with this territory.  When Wife and I decided to wed, there were the usual talks and speeches about how it's not all fun and games, about how it's hard work and there will be tough times for any couple.  We understood that, and expected it (it hasn't yet happened, mind you...six months)\n\nBut doesn't anyone have any horror stories about children for me?  I've heard the poopie diaper dramas and the screaming-child-at-3:00am stories, but those are simply expected.  It's programmed in the parents hard-coding.  I want some real advice: I want some sit up straight and listen, dangit, because you've had it soft and you ain't got no idea what's in store kind of advice.\n\nOr, maybe I don't.  Maybe that was a horrific tangent that I just delved into.  Spare me, for I think I may be going a little crazy.\n\nWhere was I.  Oh yes, New Years resolutions.  Yes, there's the customary \"work out, eat better\" resolution, too.  I'm anticipating a little assistance from my spouse on that one, though.  I've never made it more than three months into the year without pooping out in one form or another.  Although I think that I had a fairly good excuse last year, what with the engagement and wedding and surgery and all...but this year, no excuses.  Nothing, short of child-birth, will stop me from reaching my goal.\n\nOh, boy, am I in for it.\n\nBy the way, to elucidate further on Christmas day, it was a great one.  Dare I say it, it was the best one ever.  I got everything I could have wanted and then some.  Plus, I was able to make my wife happy with most of what she wanted.  I still think there may be something that I forgot along the line, but no matter.  We're both happy. \n\nMost notable, I received the digital camera that I so dearly wanted.  The biggest surprise came from my wife.  She managed to find the music-creation software that I wanted.  As a result of these gifts, additions will be in place in the Media page of my Web site.  Sweet deal.  You know what?  That deserves a graphic:\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgF58a7G_TCAG_CQV31hAD-3RKb8xxDXosR-d201BiNcyoczoG7FWwN18JpyPJIs-JrGiC9r4hYkdLBvAaysosSY6nopvjNqcXk45xcjwmjEd3rK2YMseDq6Bn9w-w90bOV0ovc/s1600/BACK.gif\" />\n\nOh yes.  See you tomorrow!  So much more to come!  Thanks for coming back. I'll be sure and make it worth your time."
+        "body": "My goodness.  Where have I been?\n\nIt's a long story.  It all started back at the end of the week of the 19th, when I began a new Beta project.  I found it necessary to format my computer, and in so doing, completely eradicated all of my Office software (including FrontPage).\n\nBummer.  So no worries, I simply had to reinstall my Office suite and move on, right?  Sadly, no.  Upon reinstallation, I found out, to my dismay, that the software had recently expired.  So, that brought an abrupt end to the blog and all other updates.\n\nI wish that I could say that I had decided to take a break from writing, or that my Web site updates needed a hiatus for creative recovery.  Neither for the former...but we're finally back in business after the holidays.\n\nWhich, by the way, mine was wonderful.  Granted that New Years has not yet happened; however, I feel so estranged from that particular holiday that it really has no specific meaning for me.  Although, the resolutions this year should be predominantly meaty.  First, there's the not-so-small matter of rehabilitating my knee.  I continue to forget that I forked over a lot of cash so that I could play basketball again, and somehow, other things are taking front seat to that effort.\n\nThen, there's that tiny event on the horizon.  I must prepare myself, both physically and mentally, for the birth of my son.  I just had to pause at that statement for a good 45 seconds.  I hadn't yet thought of it quite that way...my son.  It's not an unsettling feeling, really...more so, it's a startling realization that it's not just a game.  Please, don't get me wrong, I hadn't thought of fathering a child as a source of entertainment.  The mere thought hadn't crossed my mind.  But, sometimes parents get caught up in the romance of any given idea, especially child-birth, and more especially, the birth of their first.\n\nNo one has really provided us with the stern warnings that I thought came with this territory.  When Wife and I decided to wed, there were the usual talks and speeches about how it's not all fun and games, about how it's hard work and there will be tough times for any couple.  We understood that, and expected it (it hasn't yet happened, mind you...six months)\n\nBut doesn't anyone have any horror stories about children for me?  I've heard the poopie diaper dramas and the screaming-child-at-3:00am stories, but those are simply expected.  It's programmed in the parents hard-coding.  I want some real advice: I want some sit up straight and listen, dangit, because you've had it soft and you ain't got no idea what's in store kind of advice.\n\nOr, maybe I don't.  Maybe that was a horrific tangent that I just delved into.  Spare me, for I think I may be going a little crazy.\n\nWhere was I.  Oh yes, New Years resolutions.  Yes, there's the customary \"work out, eat better\" resolution, too.  I'm anticipating a little assistance from my spouse on that one, though.  I've never made it more than three months into the year without pooping out in one form or another.  Although I think that I had a fairly good excuse last year, what with the engagement and wedding and surgery and all...but this year, no excuses.  Nothing, short of child-birth, will stop me from reaching my goal.\n\nOh, boy, am I in for it.\n\nBy the way, to elucidate further on Christmas day, it was a great one.  Dare I say it, it was the best one ever.  I got everything I could have wanted and then some.  Plus, I was able to make my wife happy with most of what she wanted.  I still think there may be something that I forgot along the line, but no matter.  We're both happy. \n\nMost notable, I received the digital camera that I so dearly wanted.  The biggest surprise came from my wife.  She managed to find the music-creation software that I wanted.  As a result of these gifts, additions will be in place in the Media page of my Web site.  Sweet deal.  You know what?  That deserves a graphic:\n\n<img border=\"0\" src=\"images/archive/BACK.gif\" />\n\nOh yes.  See you tomorrow!  So much more to come!  Thanks for coming back. I'll be sure and make it worth your time."
     },
     {
         "file": "2003-12-19-Fight---Fight---Fight-.md",
         "year": "2003",
         "date": "December 19, 2003",
         "title": "Fight!  Fight!  Fight!",
-        "body": "T minus six days.  Begin final preparations.\n\nOk, I finally have something.  Please keep in mind that this picture may be so visually stimulating that it may cause more than a few gasps of disbelief.\n\nBut before we get to the picture, a little background.  Lights, please?\n\nA few days ago, our friends came over for a little pre-holiday get-together.  Presents were exchanged, but that wasn't the best part.  Laughs were shared, but that isn't why I'm writing.  My entry today is about the introduction of one little kitty and one tiny puppy.\n\nWhile the picture describes it the best, I should mention that our cat may have missed his calling.  It appears to me that he should have been a prize fighter, as he has one of the best left hooks I've ever seen.\n\nI believe he was just trying to play with the dog, and vice versa, but my cat doesn't know how to play clean.  Anyway, enough verbiage, on with the picture:\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjuOiiP4KnzD5WJO8GL3_5SNe0434X9o6-8QjPVpdaksQPZ0hGiFRxscz0eeR80EtRk7YAJkeAYWSfWgPZlbLH0et_N5dhg5pjRw8kT-9kWDd7j0ECPJokcxcNg0mauXIKNWsF7/s1600/catanddog.jpg\" height=\"242\" width=\"320\" />\n\nI thumb nailed it because I wanted to keep it at a respectable size.  My friend and I (thank you, Ryan) couldn't capture the two in mid swing, but I remember that this picture must have been taken right before the punch came.\n\nWell, the hour for work draws nigh, so I must end this blog for the week.  Thanks for dropping by, I hope that the reading value has not decreased.  I'll see you back here on Monday morning.  There may be additions to the Media Library this weekend.  Happy holidays!"
+        "body": "T minus six days.  Begin final preparations.\n\nOk, I finally have something.  Please keep in mind that this picture may be so visually stimulating that it may cause more than a few gasps of disbelief.\n\nBut before we get to the picture, a little background.  Lights, please?\n\nA few days ago, our friends came over for a little pre-holiday get-together.  Presents were exchanged, but that wasn't the best part.  Laughs were shared, but that isn't why I'm writing.  My entry today is about the introduction of one little kitty and one tiny puppy.\n\nWhile the picture describes it the best, I should mention that our cat may have missed his calling.  It appears to me that he should have been a prize fighter, as he has one of the best left hooks I've ever seen.\n\nI believe he was just trying to play with the dog, and vice versa, but my cat doesn't know how to play clean.  Anyway, enough verbiage, on with the picture:\n\n<img border=\"0\" src=\"images/archive/catanddog.jpg\" height=\"242\" width=\"320\" />\n\nI thumb nailed it because I wanted to keep it at a respectable size.  My friend and I (thank you, Ryan) couldn't capture the two in mid swing, but I remember that this picture must have been taken right before the punch came.\n\nWell, the hour for work draws nigh, so I must end this blog for the week.  Thanks for dropping by, I hope that the reading value has not decreased.  I'll see you back here on Monday morning.  There may be additions to the Media Library this weekend.  Happy holidays!"
     },
     {
         "file": "2003-12-18-Comic.md",
         "year": "2003",
         "date": "December 18, 2003",
         "title": "Comic",
-        "body": "Crunch time.\n\nI told you that the entries would thin out over the space of the month, but did anyone believe me?  Did you listen?  Probably.\n\nMy apologies (again) for the delayed entry today.  Last night, Wife and I babysat a child of a friend of ours for about four hours while they saw The Return of the King.   Before the night was even expired, I felt like a ton of bricks.  I couldn't hardly stay awake, so when the time came for the babe to be picked up, I hit the bed like a rock and did not stir until morning.\n\nBesides, if I had tried to compose anything last night, it would have been very sloppy and disjointed.   So, depending on your point of view, I saved you.\n\nAt this time, I'm waiting for a certain beta to complete downloading so that I can begin the installation process.  It was a fairly hefty file, measuring in at just under 250 megabytes.  Reminiscing, I wonder what that would have been like on a dial-up connection.\n\nPoint in fact, it wouldn't.  I would not have even tried.\n\nSide note:  My cat just lost my last fix of Chappy Stick.  I saw him do it.  He batted that thing right underneath the door of our storage closet.  And I'm not going in there to look for it.\n\nI don't quite understand his fascination with that petroleum tube, but maybe that's what I should get him for Christmas.  However, knowing him, he'd just get disinterested because he couldn't pick them out of my pocket anymore.\n\nOh well, you take what you can get.  And I have a cat that's addicted to Chap Stick.\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi-LoZhaKPFdAYMr3f1Ebu-4njVt_btHHTdpk5PT4_sfXBb0RVetyRDURSrxz-bMOGXvkIbnJG2gtcjla2RS9aDbkKYHqr1orAqzmVBPaGESVRSUJuBgGfl_hO9DDpw38jhcKz-/s1600/comic.jpg\" />\n\nTomorrow comes quickly.  I must prepare.  Good night!"
+        "body": "Crunch time.\n\nI told you that the entries would thin out over the space of the month, but did anyone believe me?  Did you listen?  Probably.\n\nMy apologies (again) for the delayed entry today.  Last night, Wife and I babysat a child of a friend of ours for about four hours while they saw The Return of the King.   Before the night was even expired, I felt like a ton of bricks.  I couldn't hardly stay awake, so when the time came for the babe to be picked up, I hit the bed like a rock and did not stir until morning.\n\nBesides, if I had tried to compose anything last night, it would have been very sloppy and disjointed.   So, depending on your point of view, I saved you.\n\nAt this time, I'm waiting for a certain beta to complete downloading so that I can begin the installation process.  It was a fairly hefty file, measuring in at just under 250 megabytes.  Reminiscing, I wonder what that would have been like on a dial-up connection.\n\nPoint in fact, it wouldn't.  I would not have even tried.\n\nSide note:  My cat just lost my last fix of Chappy Stick.  I saw him do it.  He batted that thing right underneath the door of our storage closet.  And I'm not going in there to look for it.\n\nI don't quite understand his fascination with that petroleum tube, but maybe that's what I should get him for Christmas.  However, knowing him, he'd just get disinterested because he couldn't pick them out of my pocket anymore.\n\nOh well, you take what you can get.  And I have a cat that's addicted to Chap Stick.\n\n<img border=\"0\" src=\"images/archive/comic.jpg\" />\n\nTomorrow comes quickly.  I must prepare.  Good night!"
     },
     {
         "file": "2003-12-17-Simple-beauty.md",
@@ -4072,7 +4078,7 @@ const wayback_raw_dump = [
         "year": "2003",
         "date": "December 16, 2003",
         "title": "Wallpaper",
-        "body": "Can't stay and play tonight, folks.  I did something to my back and need the Rx of sleep.\n\nSo, all I have to offer is this:\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjqKLbnXOtv1tIloJpsY3P54NzZimNMD7Ihc8K6xojZ4aQbMoYWM0uHnqxKwGe3Z55zPrRFdm3oY5ltLfNvchnkMQ3wwwKU8VToBty2XFcZQnyL0eBeLEQvsrz3v8NKGQOyCmCS/s1600/wallpaper.JPG\" height=\"480\" width=\"640\" />\n\nIt's an old wallpaper that I created while living in California.  The words are taken from a song by Sting.  Enjoy!  Be back tomorrow."
+        "body": "Can't stay and play tonight, folks.  I did something to my back and need the Rx of sleep.\n\nSo, all I have to offer is this:\n\n<img border=\"0\" src=\"images/archive/wallpaper.JPG.jpg\" height=\"480\" width=\"640\" />\n\nIt's an old wallpaper that I created while living in California.  The words are taken from a song by Sting.  Enjoy!  Be back tomorrow."
     },
     {
         "file": "2003-12-15-Not-a-chore.md",
@@ -4086,35 +4092,35 @@ const wayback_raw_dump = [
         "year": "2003",
         "date": "December 12, 2003",
         "title": "Santa's Pipe",
-        "body": "Finally, Friday is upon us.   It's unique signature is visible upon the week's horizon.\n\nThis week, I have provided you with a different snapshot every day.  Well, I don't have a new one today.  I just couldn't muster it.  So instead, I have delved into my treasure chest of old pictures to give you this:\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjtuZApDZySyqgRPDhzS7Mn8TWfqGnIziiRBiwWodAu-KHwdu5_lsATehiuWD-BSrJCbrTI7vY1liLhEVyJdVbtIWpEq1E_fSA9pPF9RLzfsfIYLaCVBzVBJ_09-gLtUk_eyGl1/s1600/santa2.jpg\" height=\"320\" width=\"203\" />\n\nI got this a couple of years ago from my elder brother.  He usually had this threatening picture of Saint Nick up on his refrigerator door, and he had some sort of clever caption, written by himself, affixed somewhere nearby.\n\nOh yes, I believe it went something like, \"Only good little girls and boys get to know what's in Santa's pipe\".\n\nWell, it's paraphrased, anyway.  I'm sure my brother will write me tomorrow and let me know what it really said.  And now, it's made its way on the the old Net.  What do you think about that, eh?\n\nWell, this week was my gift to you.  And now, it's at an end.  Sorry about the short entry today. It's been a long day, after all.  Have a great weekend, and I'll see you back here on Monday. (or Sunday night, for all you blogjumpers out there)"
+        "body": "Finally, Friday is upon us.   It's unique signature is visible upon the week's horizon.\n\nThis week, I have provided you with a different snapshot every day.  Well, I don't have a new one today.  I just couldn't muster it.  So instead, I have delved into my treasure chest of old pictures to give you this:\n\n<img border=\"0\" src=\"images/archive/santa2.jpg\" height=\"320\" width=\"203\" />\n\nI got this a couple of years ago from my elder brother.  He usually had this threatening picture of Saint Nick up on his refrigerator door, and he had some sort of clever caption, written by himself, affixed somewhere nearby.\n\nOh yes, I believe it went something like, \"Only good little girls and boys get to know what's in Santa's pipe\".\n\nWell, it's paraphrased, anyway.  I'm sure my brother will write me tomorrow and let me know what it really said.  And now, it's made its way on the the old Net.  What do you think about that, eh?\n\nWell, this week was my gift to you.  And now, it's at an end.  Sorry about the short entry today. It's been a long day, after all.  Have a great weekend, and I'll see you back here on Monday. (or Sunday night, for all you blogjumpers out there)"
     },
     {
         "file": "2003-12-11-Merry-and-bright.md",
         "year": "2003",
         "date": "December 11, 2003",
         "title": "Merry and bright",
-        "body": "Greetings on this fine Thursday.  Warning:  Extreme laziness today.  Not much below.\n\nToday, I had a day off.  It was needed because I had a doctor's appointment to attend to at 4:00pm.  Too bad, because I forgot about it entirely.  My wife had to remind me about it about a gazillion times, (special note, gazillion also appears to be acceptable to Word's spellchecker) and I still forgot. \n\nNow, something for the rest of you.  MSNBC has a neat Digital IQ test.  I took it, wife did too, as did my brother and parents.  Go ahead and take that test and then come back here. \n\nI won't tell you what I got, as that is unimportant in this case.  And the fact of the matter is that it's entirely lop-sided on the downward cycle.  If you haven't got a home network or if you don't know what bluetooth is, then you're in for a rough time.\n\nMany MSNBC readers who completed this IQ test sent its creator a word or two.  I found the following entry quite amusing:\n\nName: Ryan\n\n       Hometown: Mesa, Ariz.\n\nJust like stereotypical nerds, the people who aren\u2019t scoring high get all flustered and upset because it strips them of their geekness \u2014 the only thing that they have.\n\nDigital IQ isn\u2019t about who sets up the most elaborate wireless network ... it\u2019s also about knowledge of Internet culture. Teen Girl Squad, anyone? (Kudos if you know what this is)\n\nAs for the \u201cWeb site designer\u201d who says you suck for not using Mozilla ... he suffers from typical hypergeekism. To mimic the years of abuse from their peers in grade school, they continue to abuse themselves by using outdated and/or inferior technology so they can be L33T.\n\nThey love to make everything difficult. \u201cHa? Use an FTP Client? I do all my work command-line. Outlook? Are you crazy? I spent a few weeks writing my own JAVA app for that. I might share it with people on my Website. Check it out \u2014 new messages are in 0000FF.\u201d\n\nAnd don\u2019t get me started on the \u201cOMG, I HATE OFFICE AND MICROSOFT. Y R U USING IT, N00B???\u201d people.\n\nFor the record, I got 120 on the quiz. Again, its more about culture than engineering, n00bz.\n\nI simply found that refreshing.  If you missed the Web site above, you can find that here.  Anyway.  (do I say that too often?) Since I've provided you readers with a different picture every day of this week, I had better stick with the program and fuzz you another cam-shot.\n\nRun phone_pictures.exe: ....cat....cat....cat....Wife....cat....\n\n(something's definitely wrong here)\n\nAh, here we go.\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiC25ZwaHu-Zy1JTnYx6dby4r26Rfx8bcZqkDThjnCVsbs3OFmGdGZGXgQAlD4TZJSsmcdnnnTwtAKlf7_zwg0Py2dw2kpFK27C535p-amo5_9WoiMAVwY98aOT7aRzUBCs3r1I/s1600/houseaflame.jpg\" height=\"261\" width=\"320\" />\n\nIs this a house aflame?  Nope.  It's just my fuzzy camera phone ,and it appears that Frosty may have gotten himself in a jam.\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiiqYT6GrE6Wwa-fouqBjkZYE1VhPetpbBodpJlWJvQDhBJuG0VMwro3Zw288HcZZC7dTLN9yxg1cWtV0UG5FBqpuJagyo39YgBh4SpZCbSXdrUeVDYLEtI8AIk0qlJaxAEBzPY/s1600/frosty.jpg\" />\n\nPlease, don't put Frosty on your roof.  He just doesn't belong there.   How is he going to get down?\n\n14 days left!  May your days be both merry and bright!)"
+        "body": "Greetings on this fine Thursday.  Warning:  Extreme laziness today.  Not much below.\n\nToday, I had a day off.  It was needed because I had a doctor's appointment to attend to at 4:00pm.  Too bad, because I forgot about it entirely.  My wife had to remind me about it about a gazillion times, (special note, gazillion also appears to be acceptable to Word's spellchecker) and I still forgot. \n\nNow, something for the rest of you.  MSNBC has a neat Digital IQ test.  I took it, wife did too, as did my brother and parents.  Go ahead and take that test and then come back here. \n\nI won't tell you what I got, as that is unimportant in this case.  And the fact of the matter is that it's entirely lop-sided on the downward cycle.  If you haven't got a home network or if you don't know what bluetooth is, then you're in for a rough time.\n\nMany MSNBC readers who completed this IQ test sent its creator a word or two.  I found the following entry quite amusing:\n\nName: Ryan\n\n       Hometown: Mesa, Ariz.\n\nJust like stereotypical nerds, the people who aren\u2019t scoring high get all flustered and upset because it strips them of their geekness \u2014 the only thing that they have.\n\nDigital IQ isn\u2019t about who sets up the most elaborate wireless network ... it\u2019s also about knowledge of Internet culture. Teen Girl Squad, anyone? (Kudos if you know what this is)\n\nAs for the \u201cWeb site designer\u201d who says you suck for not using Mozilla ... he suffers from typical hypergeekism. To mimic the years of abuse from their peers in grade school, they continue to abuse themselves by using outdated and/or inferior technology so they can be L33T.\n\nThey love to make everything difficult. \u201cHa? Use an FTP Client? I do all my work command-line. Outlook? Are you crazy? I spent a few weeks writing my own JAVA app for that. I might share it with people on my Website. Check it out \u2014 new messages are in 0000FF.\u201d\n\nAnd don\u2019t get me started on the \u201cOMG, I HATE OFFICE AND MICROSOFT. Y R U USING IT, N00B???\u201d people.\n\nFor the record, I got 120 on the quiz. Again, its more about culture than engineering, n00bz.\n\nI simply found that refreshing.  If you missed the Web site above, you can find that here.  Anyway.  (do I say that too often?) Since I've provided you readers with a different picture every day of this week, I had better stick with the program and fuzz you another cam-shot.\n\nRun phone_pictures.exe: ....cat....cat....cat....Wife....cat....\n\n(something's definitely wrong here)\n\nAh, here we go.\n\n<img border=\"0\" src=\"images/archive/houseaflame.jpg\" height=\"261\" width=\"320\" />\n\nIs this a house aflame?  Nope.  It's just my fuzzy camera phone ,and it appears that Frosty may have gotten himself in a jam.\n\n<img border=\"0\" src=\"images/archive/frosty.jpg\" />\n\nPlease, don't put Frosty on your roof.  He just doesn't belong there.   How is he going to get down?\n\n14 days left!  May your days be both merry and bright!)"
     },
     {
         "file": "2003-12-10-Just-great-news.md",
         "year": "2003",
         "date": "December 10, 2003",
         "title": "Just great news",
-        "body": "No tricks tonight, just great news.\n\nWe finally know what it is.  After weeks of waiting, Wife and I had our second ultrasound to determine the gender of our baby.  We awoke early, around 6:00am, as our appointment time was at 7:00 and we needed to be there early.\n\nWhen we arrived, the sun was barely rising over the eastern mountains.  There was a definite chill in the air as I led her up to the building.  We were both excited, but neither of us wanted to admit that we were nervous, too.\n\nWhen we walked into the doctor's office, I asked the receptionist if we should proceed directly to the ultrasound or wait here for the doctor.\n\n\"You don't have an ultrasound scheduled for today, I'm afraid\", she said.\n\nI then informed her that there must have been some mistake, as the doctor told us that he would make sure we found out during the next appointment.  She was very stern with me, and told me that there was no possible way that we could have our ultrasound today.\n\nHeartbroken, we took our seats in the lobby and waited for the doctor to call us in.  My wife didn't say a word, but the look in her eyes told me exactly how she felt.  The poor thing was heartbroken!\n\nAnyway, when we talked to the doctor, he informed us that he would work his magic and make sure we were scheduled in at 8:00am for the ultrasound.  Pure excitement!\n\nWe waited another hour, watching the Today show on the television in the lobby.  It must have done a great job of distracting me, because I didn't feel nervous again until they called my wife's name.\n\nWe walked together back into the ultrasound room, holding hands and breaths.  I nervously asked the nurse if she thought that we'd be able to know what it was, she reassured us that we should have no problem finding out.\n\nAs she touched the wand to my wife's tummy, I glanced at the tiny screen to the side of us.  I watched in wonder as this tiny being rolled around inside my wife.  \"Just get to the good part\", I said to myself.  I had hardly thought this when I realized I should be enjoying this moment, I should really experience the whole thing, and not just the penultimate moment.\n\nWell, that moment finally came.  She told us what it was, and we both looked at each other knowingly.  We both knew it from the start, yet we were still so surprised and happy.  Basically, any positive and wholesome emotion was felt at that moment in time.\n\nSo, just four little months left.  We await his arrival with great anticipation.\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjr-rYvOT0H9akpqUA9Iw8Yb4CimgwmyGH786V8Lt_gW_vxt5HpwLbuSVqBcEkwsfG-JfNl4aeRUqJjOxkKkWME976xLbZbtw58VzJpjwNZpeh2tJFNbhq1lOknGy8oqBxXWXFM/s1600/baby_us.jpg\" height=\"239\" width=\"320\" />"
+        "body": "No tricks tonight, just great news.\n\nWe finally know what it is.  After weeks of waiting, Wife and I had our second ultrasound to determine the gender of our baby.  We awoke early, around 6:00am, as our appointment time was at 7:00 and we needed to be there early.\n\nWhen we arrived, the sun was barely rising over the eastern mountains.  There was a definite chill in the air as I led her up to the building.  We were both excited, but neither of us wanted to admit that we were nervous, too.\n\nWhen we walked into the doctor's office, I asked the receptionist if we should proceed directly to the ultrasound or wait here for the doctor.\n\n\"You don't have an ultrasound scheduled for today, I'm afraid\", she said.\n\nI then informed her that there must have been some mistake, as the doctor told us that he would make sure we found out during the next appointment.  She was very stern with me, and told me that there was no possible way that we could have our ultrasound today.\n\nHeartbroken, we took our seats in the lobby and waited for the doctor to call us in.  My wife didn't say a word, but the look in her eyes told me exactly how she felt.  The poor thing was heartbroken!\n\nAnyway, when we talked to the doctor, he informed us that he would work his magic and make sure we were scheduled in at 8:00am for the ultrasound.  Pure excitement!\n\nWe waited another hour, watching the Today show on the television in the lobby.  It must have done a great job of distracting me, because I didn't feel nervous again until they called my wife's name.\n\nWe walked together back into the ultrasound room, holding hands and breaths.  I nervously asked the nurse if she thought that we'd be able to know what it was, she reassured us that we should have no problem finding out.\n\nAs she touched the wand to my wife's tummy, I glanced at the tiny screen to the side of us.  I watched in wonder as this tiny being rolled around inside my wife.  \"Just get to the good part\", I said to myself.  I had hardly thought this when I realized I should be enjoying this moment, I should really experience the whole thing, and not just the penultimate moment.\n\nWell, that moment finally came.  She told us what it was, and we both looked at each other knowingly.  We both knew it from the start, yet we were still so surprised and happy.  Basically, any positive and wholesome emotion was felt at that moment in time.\n\nSo, just four little months left.  We await his arrival with great anticipation.\n\n<img border=\"0\" src=\"images/archive/baby_us.jpg\" height=\"239\" width=\"320\" />"
     },
     {
         "file": "2003-12-09-Howling-wind.md",
         "year": "2003",
         "date": "December 09, 2003",
         "title": "Howling wind",
-        "body": "Hah, well...I tricked you.\n\nThat's the problem.  You see, I didn't intentionally mislead you.  The date you see affixed to this entry is in fact the day when Wife and I learn more about our new child.  But the problem lies in the fact that I always (generally, can I say that?) write these entries on the night before.\n\nSo that means the smashing update that I promised simply has not yet occurred.\n\nBummer.  So, that means another short space of time for readers to wait.  But rest assured, I will most likely not make you wait until Wednesday morning to learn of the news.  I'll set to it right when I get home from the appointment.\n\nThe wind is howling outside tonight.  It started to really kick up when I left for lunch earlier today.  It's hardly a good thing when the vehicle you use weighs slightly less than you do.  It's a remarkably good thing that I only have to wander across the street on that scooter.  Which, by the way, my friend is interested in purchasing.  That would be a boon, says I.\n\nSo where was I.  Oh yes, the wind.  It actually makes it feel a tad bit wintry outside.  That does make me feel better, as earlier this month, Mr. Weatherman informed Arizona viewers that this month's weather would be unseasonably hot.  Not warm, mind you, but hot.  That's simply not the way that anyone wishes to begin their holiday season, especially someone like me, who at one point in his life, viewed ten feet of snow piled outside his bedroom window on any given morning.\n\nWell, we take what we can get here in the land of the sun.\n\n16 days till Christmas.  Might I recommend a gifts for you and yours?\n\nThis camera is smokin' I don't know if you can find a better deal on it, anywhere.\n\nLet's take a surprise check at what my kitty is doing right now:\n\nDobby lookin shady...\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgR-Ksou-XbARB6VhpytHV8CUO28P4L_hmlVB5EXoUvUy1cdPsKoU8B7DmmamWEBKP2qhXqmJO0YtboJXBJo33E4fhMklkjwEUOo1Wek8snwu2knQkCjRTsvIev-MgwdvxiJAJi/s1600/shady.jpg\" height=\"261\" width=\"320\" />\n\nLooks pretty shady to me.\n\nAlright.  That's enough for today.  It's just sad when you have to draw upon the comedic prowess of your feline companion to keep your blog afloat on any given day.  Today, my friends...is simply not going to be one of those days.\n\nGood day to you.  I'll see you tomorrow. (or less!)"
+        "body": "Hah, well...I tricked you.\n\nThat's the problem.  You see, I didn't intentionally mislead you.  The date you see affixed to this entry is in fact the day when Wife and I learn more about our new child.  But the problem lies in the fact that I always (generally, can I say that?) write these entries on the night before.\n\nSo that means the smashing update that I promised simply has not yet occurred.\n\nBummer.  So, that means another short space of time for readers to wait.  But rest assured, I will most likely not make you wait until Wednesday morning to learn of the news.  I'll set to it right when I get home from the appointment.\n\nThe wind is howling outside tonight.  It started to really kick up when I left for lunch earlier today.  It's hardly a good thing when the vehicle you use weighs slightly less than you do.  It's a remarkably good thing that I only have to wander across the street on that scooter.  Which, by the way, my friend is interested in purchasing.  That would be a boon, says I.\n\nSo where was I.  Oh yes, the wind.  It actually makes it feel a tad bit wintry outside.  That does make me feel better, as earlier this month, Mr. Weatherman informed Arizona viewers that this month's weather would be unseasonably hot.  Not warm, mind you, but hot.  That's simply not the way that anyone wishes to begin their holiday season, especially someone like me, who at one point in his life, viewed ten feet of snow piled outside his bedroom window on any given morning.\n\nWell, we take what we can get here in the land of the sun.\n\n16 days till Christmas.  Might I recommend a gifts for you and yours?\n\nThis camera is smokin' I don't know if you can find a better deal on it, anywhere.\n\nLet's take a surprise check at what my kitty is doing right now:\n\nDobby lookin shady...\n\n<img border=\"0\" src=\"images/archive/shady.jpg\" height=\"261\" width=\"320\" />\n\nLooks pretty shady to me.\n\nAlright.  That's enough for today.  It's just sad when you have to draw upon the comedic prowess of your feline companion to keep your blog afloat on any given day.  Today, my friends...is simply not going to be one of those days.\n\nGood day to you.  I'll see you tomorrow. (or less!)"
     },
     {
         "file": "2003-12-08-A-new-week.md",
         "year": "2003",
         "date": "December 08, 2003",
         "title": "A new week",
-        "body": "Ahem, a new week.\n\nThis weekend was enjoyable, I must say.  Wife and I got to spend some time with a few friends of ours.  We ate at their place and then headed to Mesa to view the Mesa Arizona temple lights.\n\nIt was beautiful, as it always is.  However this year, there seemed to be a few more lights around than usual.  In fact, I was going to place a picture of the lights here on the site, but with my poor camera phone, it made the Christmas lights appear as if they were fire, and every tree around the temple grounds was engulfed in flames.\n\nAs you peruse the site this week, you'll be happy to note that the Media page has finally been updated.   Go visit when you have a chance.\n\nThere's a few pictures there, one poor song, and the hope of a lot more content in the coming month.  Please, please keep in mind one thing:  I don't know too much about photography, I simply like taking pictures of random scenery too much.  It'll get better, I promise.  I haven't had a decent camera in ages.\n\nI also changed the front page picture, but I'm still trying to get used to it.  Maybe I was just too attached to the other one.\n\nNo shopping trips this weekend, though.  No money this time around.  We'll hit the stores as soon as Friday rolls around.  Oh, that reminds me.  We have a train around our tree now.\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhwxsMvnWfbwZvkCcf1Z-s04o4mgjqwrDGUwC43voWzS8mSYCGcgHhC9dX-3GFs0qfCvQnH2JBkA9V2sFcXUD8_pI6lrakSO0bX-ZJApgR-x9_-swJQbtDeUbcNryzM3hZdtca1/s1600/6974068613.jpg\" height=\"261\" width=\"320\" />\n\nThere you go, have a fuzzy picture, compliments of Sanyo.\n\nIt's one of the greatest things to have during the holidays.  I highly recommend it.  In fact, if you don't have one, start a fund, go shopping, look around, go nuts.  Just make sure yours doesn't play a high-pitched \"Christmas Favourite\" as the box mentioned.  Yeah, that's how the manufacturer spelled favorite.  They must correlate Christmas time with Merry Olde England.  And who doesn't?  Disney sure does.\n\nAnd that's it.  No more for today, says I.  Have a great week, we'll see you tomorrow.\n\nOh yes, you know what tomorrow is."
+        "body": "Ahem, a new week.\n\nThis weekend was enjoyable, I must say.  Wife and I got to spend some time with a few friends of ours.  We ate at their place and then headed to Mesa to view the Mesa Arizona temple lights.\n\nIt was beautiful, as it always is.  However this year, there seemed to be a few more lights around than usual.  In fact, I was going to place a picture of the lights here on the site, but with my poor camera phone, it made the Christmas lights appear as if they were fire, and every tree around the temple grounds was engulfed in flames.\n\nAs you peruse the site this week, you'll be happy to note that the Media page has finally been updated.   Go visit when you have a chance.\n\nThere's a few pictures there, one poor song, and the hope of a lot more content in the coming month.  Please, please keep in mind one thing:  I don't know too much about photography, I simply like taking pictures of random scenery too much.  It'll get better, I promise.  I haven't had a decent camera in ages.\n\nI also changed the front page picture, but I'm still trying to get used to it.  Maybe I was just too attached to the other one.\n\nNo shopping trips this weekend, though.  No money this time around.  We'll hit the stores as soon as Friday rolls around.  Oh, that reminds me.  We have a train around our tree now.\n\n<img border=\"0\" src=\"images/archive/6974068613.jpg\" height=\"261\" width=\"320\" />\n\nThere you go, have a fuzzy picture, compliments of Sanyo.\n\nIt's one of the greatest things to have during the holidays.  I highly recommend it.  In fact, if you don't have one, start a fund, go shopping, look around, go nuts.  Just make sure yours doesn't play a high-pitched \"Christmas Favourite\" as the box mentioned.  Yeah, that's how the manufacturer spelled favorite.  They must correlate Christmas time with Merry Olde England.  And who doesn't?  Disney sure does.\n\nAnd that's it.  No more for today, says I.  Have a great week, we'll see you tomorrow.\n\nOh yes, you know what tomorrow is."
     },
     {
         "file": "2003-12-05-TiVo.md",
@@ -4135,7 +4141,7 @@ const wayback_raw_dump = [
         "year": "2003",
         "date": "December 03, 2003",
         "title": "Autumn, you've been found",
-        "body": "Guess what?  I found Autumn.\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjwqlFI5sPKIssJuJkoetP35LSKXGyysQfD7dG-44rLuCfUq7F8IHNUntxgksNURiI7Rs5e6Gkf1UvQKYuSLoK8JQ51TCzIZbJkhehud4KbbdcJY499dz2g3JDOEY0amb56BUmR/s1600/fall.jpg\" />\n\nIt's residing in this lonely tree, right outside of my apartment complex.  I would imagine that this image will be nothing more than ephemeral, as it could be 90 degrees come tomorrow.\n\nOh, and for any of you who may have realized my mistake of assumption yesterday, I apologize.  Apparently, my spellchecker will pass anything with that may be hyphenated.  No, really...watch!\n\nZippy-gyro. (no problems!)\n\nNike-Reebok.  (not an issue!)\n\nRyan-David. (nice!)\n\nEnough of that.  I spent another hour at the mall tonight, and I didn't manage to make much head-way.  Or maybe I'm simply writing this so that I can mislead my wife into believing that I didn't purchase anything?  Hmm, interesting, interesting.  Now all she can do is wonder.  (or, she could just ask me...I can't lie to that pretty face of hers)\n\nIn other news:  Google has finally combed over my site in its entirety.  Go ahead, try it!  I'll bet you find plenty of random links you didn't even know existed.  Gone are the days of defunct links and 404 errors.\n\nSorry, that's all I have for December 3rd.  I'm tired, been up since 6:00am, and I still need to do the laundry.  See you tomorrow!"
+        "body": "Guess what?  I found Autumn.\n\n<img border=\"0\" src=\"images/archive/fall.jpg\" />\n\nIt's residing in this lonely tree, right outside of my apartment complex.  I would imagine that this image will be nothing more than ephemeral, as it could be 90 degrees come tomorrow.\n\nOh, and for any of you who may have realized my mistake of assumption yesterday, I apologize.  Apparently, my spellchecker will pass anything with that may be hyphenated.  No, really...watch!\n\nZippy-gyro. (no problems!)\n\nNike-Reebok.  (not an issue!)\n\nRyan-David. (nice!)\n\nEnough of that.  I spent another hour at the mall tonight, and I didn't manage to make much head-way.  Or maybe I'm simply writing this so that I can mislead my wife into believing that I didn't purchase anything?  Hmm, interesting, interesting.  Now all she can do is wonder.  (or, she could just ask me...I can't lie to that pretty face of hers)\n\nIn other news:  Google has finally combed over my site in its entirety.  Go ahead, try it!  I'll bet you find plenty of random links you didn't even know existed.  Gone are the days of defunct links and 404 errors.\n\nSorry, that's all I have for December 3rd.  I'm tired, been up since 6:00am, and I still need to do the laundry.  See you tomorrow!"
     },
     {
         "file": "2003-12-02-Mish-mash.md",
@@ -4191,7 +4197,7 @@ const wayback_raw_dump = [
         "year": "2003",
         "date": "November 19, 2003",
         "title": "Christmas tree",
-        "body": "Ok, not so tired today.\n\nBut I have a surprise for you:\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj6LYXF2Jrc_Mw_uX2DQCLM4oDcpenqtcXXT0Zer_yUAQiB4hGMNwDF-dSWNVccavOwRlaqWgDFR31uK5at3RgE6RjdOg3tKSG3ph08qehJtq-js8C44eiycYW90_PZBcQ1nLfd/s1600/tree.jpg\" />\n\nThe wife persuaded me (like it took much effort) to decorate the Christmas tree this evening.\n\nSo, we're a little early.  I can think of a few friends (ahem, Eric?) that would be less than pleased with my premature celebration of Navidad.  That's ok, old boy.  There's only 36 days left."
+        "body": "Ok, not so tired today.\n\nBut I have a surprise for you:\n\n<img border=\"0\" src=\"images/archive/tree.jpg\" />\n\nThe wife persuaded me (like it took much effort) to decorate the Christmas tree this evening.\n\nSo, we're a little early.  I can think of a few friends (ahem, Eric?) that would be less than pleased with my premature celebration of Navidad.  That's ok, old boy.  There's only 36 days left."
     },
     {
         "file": "2003-11-18-Tired.md",
@@ -4240,7 +4246,7 @@ const wayback_raw_dump = [
         "year": "2003",
         "date": "November 10, 2003",
         "title": "Ah, Sundays...",
-        "body": "<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiweBPh_wba7pXXABZHOHFGtm3GptFOseNT94WlL1jxLENPx2DIrLIT9NYe9rijE-0JgvDQfIkf-0CZkC_DYQq4GE5Jz9sbB4-h1Lhy1t3YIpHg4dZvGLmb8u6N4eNa8dekGAdE/s1600/dobby_sleep.jpg\" />\n\nIt was a welcome transition from the rest of the weekend.  I won't go into great detail, primarily because I wouldn't want to relive the exhausting parts, even in my mind.  Suffice it to say that Friday and Saturday were very, very odd.\n\nOdd:  Now that's a nice descriptor!\n\nThe picture up there; that's our cat.  I will never, ever devote even a single page to the silly kitten, because I don't want to come off as a crazy nut who carries their cat in a backpack.  But dang, that's a cool pose, and I hope he was dreaming about mice.\n\nOr catnip.  He likes that stuff.\n\nI think he slept for like, 20 hours today.  Right now, he's just cleaning himself, because all that slumber must have made him filthy.  My brother told me to not feel sorry for him, ever: He said that cats have a knack at making themselves seem deprived and lowly.  That said, Dobby is one of the best.\n\nEnough about the silly cat.  Wife is fine, house is fine.  Car still runs great, though it sounds like a helicopter at lift-off. (literary licence: I've actually never heard a live helicopter, let alone one during lift-off)  However, Wife and I feel that the Copter gives an accurate description of the sounds that it generates when we drive away.\n\nOther than that, I delve into the coming week in happier spirits than the last, the promise of Friday being pay day does an amazing job of making me smile.  And I should never forget that I have the best wife in the world. \n\nBy the way, we're into week 17 of the pregnancy now.  That's what, 4 months now?  Isn't this about the time that I should start preparing for the child?  Probably.  I wonder if he/she will ever read any of this...I'll be willing to bet that it will give a definite good look into my head during this time of transition.\n\nThis entry is turning quickly into blather.  I really need to go to bed, anyway.  Like I said earlier, it's been an odd weekend..."
+        "body": "<img border=\"0\" src=\"images/archive/dobby_sleep.jpg\" />\n\nIt was a welcome transition from the rest of the weekend.  I won't go into great detail, primarily because I wouldn't want to relive the exhausting parts, even in my mind.  Suffice it to say that Friday and Saturday were very, very odd.\n\nOdd:  Now that's a nice descriptor!\n\nThe picture up there; that's our cat.  I will never, ever devote even a single page to the silly kitten, because I don't want to come off as a crazy nut who carries their cat in a backpack.  But dang, that's a cool pose, and I hope he was dreaming about mice.\n\nOr catnip.  He likes that stuff.\n\nI think he slept for like, 20 hours today.  Right now, he's just cleaning himself, because all that slumber must have made him filthy.  My brother told me to not feel sorry for him, ever: He said that cats have a knack at making themselves seem deprived and lowly.  That said, Dobby is one of the best.\n\nEnough about the silly cat.  Wife is fine, house is fine.  Car still runs great, though it sounds like a helicopter at lift-off. (literary licence: I've actually never heard a live helicopter, let alone one during lift-off)  However, Wife and I feel that the Copter gives an accurate description of the sounds that it generates when we drive away.\n\nOther than that, I delve into the coming week in happier spirits than the last, the promise of Friday being pay day does an amazing job of making me smile.  And I should never forget that I have the best wife in the world. \n\nBy the way, we're into week 17 of the pregnancy now.  That's what, 4 months now?  Isn't this about the time that I should start preparing for the child?  Probably.  I wonder if he/she will ever read any of this...I'll be willing to bet that it will give a definite good look into my head during this time of transition.\n\nThis entry is turning quickly into blather.  I really need to go to bed, anyway.  Like I said earlier, it's been an odd weekend..."
     },
     {
         "file": "2003-11-01-A-friend-for-Dobby--nope--not-.md",
@@ -4275,7 +4281,7 @@ const wayback_raw_dump = [
         "year": "2003",
         "date": "October 27, 2003",
         "title": "Blogginess",
-        "body": "Welcome to a new week of blogginess.  (I created a word, today hey hey)\n\nIt looks like the site is in full swing now.  With a little bit of luck, I hope to have a little bit of business flow from this.  This weekend, Wife and I had more free time to ourselves than usual, so we hit the favorite spots.  Olive Garden, Hungry Howies, and of course, Best Buy.\n\nMy wife is a dear.  And when I say a dear, I am trying to illustrate that she is the most thoughtful, kind, and loving person I know.  This short story must begin with the understanding that my cell phone was in dire straits.  Utter despair, I mean, for crying out loud, the last legs of cell-phone-ness.\n\nSo on Saturday night, the last straw.  My charger broke while it was still in the cell phone.  Thing weren't really going smoothly for me that night anyway, I had tried using the barbeque outside of my apartment for the first time, and I couldn't figure out the blasted starting mechanism.  No matter, inside the house I went with the meat.  Wife suggested we use the George Foreman grill.\n\nOnce bite was enough for me.  It tasted like burnt ashes.  Oh, there were a few other happenings  that went totally awry, but we don't need to go into them.  Suffice it to say that the cell phone incident placed me firmly over the edge.\n\nMy wife decided, spur of the moment, to take me to Best Buy (my favorite store!) and get me a brand new cell phone.  This was the one that I had been craving for the longest time.  So here it is, and now, I share with you a picture of my cat, courtesy of my nifty camera phone.\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgxpcyWlL3E0Un7HCKramc_Uzmq0Fswj8dKDuZrZwsn3s78EHOg65ZpmBps6I0arL3eBQESL3BHCnf2im3p0JlDalTdH5BcD4T_lJ606Kj5Qm-5SNFEMdeOaHRACOlR4KXkJgaC/s1600/3893712005_0.jpg\" height=\"261\" width=\"320\" />"
+        "body": "Welcome to a new week of blogginess.  (I created a word, today hey hey)\n\nIt looks like the site is in full swing now.  With a little bit of luck, I hope to have a little bit of business flow from this.  This weekend, Wife and I had more free time to ourselves than usual, so we hit the favorite spots.  Olive Garden, Hungry Howies, and of course, Best Buy.\n\nMy wife is a dear.  And when I say a dear, I am trying to illustrate that she is the most thoughtful, kind, and loving person I know.  This short story must begin with the understanding that my cell phone was in dire straits.  Utter despair, I mean, for crying out loud, the last legs of cell-phone-ness.\n\nSo on Saturday night, the last straw.  My charger broke while it was still in the cell phone.  Thing weren't really going smoothly for me that night anyway, I had tried using the barbeque outside of my apartment for the first time, and I couldn't figure out the blasted starting mechanism.  No matter, inside the house I went with the meat.  Wife suggested we use the George Foreman grill.\n\nOnce bite was enough for me.  It tasted like burnt ashes.  Oh, there were a few other happenings  that went totally awry, but we don't need to go into them.  Suffice it to say that the cell phone incident placed me firmly over the edge.\n\nMy wife decided, spur of the moment, to take me to Best Buy (my favorite store!) and get me a brand new cell phone.  This was the one that I had been craving for the longest time.  So here it is, and now, I share with you a picture of my cat, courtesy of my nifty camera phone.\n\n<img border=\"0\" src=\"images/archive/3893712005_0.jpg\" height=\"261\" width=\"320\" />"
     },
     {
         "file": "2003-10-24-The-Police.md",
@@ -4310,7 +4316,7 @@ const wayback_raw_dump = [
         "year": "2003",
         "date": "October 20, 2003",
         "title": "Annoucement",
-        "body": "This week: Announcement, air conditioning, and recovery.\n\nBrought back to the site by necessity, really.\n\nWhenever I find out that anybody still checks this site, I feel a pang of guilt. Whenever they ask me to update it, for crying out loud, I feel a call of responsibility.\n\nAlso, I promised my wife that I would write more often. How about we start this week off with my news:\n\n<img border=\"0\" src=\"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj3PGfROp3RjvVoeWi0hImaU1hDi_8AT1pea6Q5vXl1OVZM1zKf01hDKakpxmj3B1Z27zYhYkxGKE9bz5A10fxUXJ54DtR-kNgV4ETxh7N37c2KA0f2d4_dMyi8QVIt0ySgO-A2/s1600/ultrasound.jpg\" height=\"240\" width=\"320\" />\n\nThere (he/she) is. In that blurry little picture, you will find my fetura. Jenna and I are fully convinced that little critter is a boy, however we could still be surprised. We both would love a little girl, Jenna says that I only say that so that I can have a little daddy's girl. I have yet to argue that point.\n\nNevertheless, if this creation turns out male, you will not find any happier parents than we.\n\nOther news: Our air conditioner broke, and it has not been the best weekend because of that. The remarkable thing is that it would matter normally, we're nearing the very conclusion of October. Why, it should be 80 degrees.\n\nNah, it's still in the lower 100's. Our Weather.\n\nNo matter, we don't need it right now. But the cat loves the tile right now. A lot."
+        "body": "This week: Announcement, air conditioning, and recovery.\n\nBrought back to the site by necessity, really.\n\nWhenever I find out that anybody still checks this site, I feel a pang of guilt. Whenever they ask me to update it, for crying out loud, I feel a call of responsibility.\n\nAlso, I promised my wife that I would write more often. How about we start this week off with my news:\n\n<img border=\"0\" src=\"images/archive/ultrasound.jpg\" height=\"240\" width=\"320\" />\n\nThere (he/she) is. In that blurry little picture, you will find my fetura. Jenna and I are fully convinced that little critter is a boy, however we could still be surprised. We both would love a little girl, Jenna says that I only say that so that I can have a little daddy's girl. I have yet to argue that point.\n\nNevertheless, if this creation turns out male, you will not find any happier parents than we.\n\nOther news: Our air conditioner broke, and it has not been the best weekend because of that. The remarkable thing is that it would matter normally, we're nearing the very conclusion of October. Why, it should be 80 degrees.\n\nNah, it's still in the lower 100's. Our Weather.\n\nNo matter, we don't need it right now. But the cat loves the tile right now. A lot."
     },
     {
         "file": "2003-09-23-Mondays.md",
