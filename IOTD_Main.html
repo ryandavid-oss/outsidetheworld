@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YKRKPFV2MB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-YKRKPFV2MB');
+    </script>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Image of the Day | Outside The World</title>
+    <meta name="description"
+        content="Image of the Day from Outside The World in Queen Creek, Arizona. A daily signal capture with archive access." />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="color-scheme" content="dark" />
+    <link rel="canonical" href="https://outsidetheworld.com/image_of_the_day.html" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="theme.css" />
+
+    <!-- Social preview -->
+    <meta property="og:site_name" content="Outside The World" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Image of the Day | Outside The World" />
+    <meta property="og:description" content="Daily signal capture from Outside The World in Queen Creek, Arizona." />
+    <meta property="og:url" content="https://outsidetheworld.com/image_of_the_day.html" />
+    <meta property="og:image" content="https://outsidetheworld.com/Images/og/otw-feed-1200x630.jpg" />
+    <meta property="og:image:alt" content="Image of the Day from Outside The World." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Image of the Day | Outside The World" />
+    <meta name="twitter:description" content="Daily signal capture from Outside The World in Queen Creek, Arizona." />
+    <meta name="twitter:image" content="https://outsidetheworld.com/Images/og/otw-feed-1200x630.jpg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;900&family=Fira+Code:wght@300;500&display=swap" />
+
+    <style>
+        :root {
+            --nav-offset: 140px;
+            /* will be overwritten by syncNav() */
+        }
+
+        body {
+            background: #0a0a0a;
+            font-family: Inter, sans-serif;
+            color: #fff;
+            margin: 0;
+            padding-top: var(--nav-offset) !important;
+            padding-bottom: 70px;
+            overflow-x: hidden;
+        }
+
+        /* =========================
+     TOP NAV (fixed, two-column)
+     ========================= */
+        .top-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 3500;
+
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            background: linear-gradient(to bottom, rgba(10, 10, 10, 0.98) 0%, rgba(10, 10, 10, 0) 100%);
+
+            padding: 22px 0;
+            pointer-events: none;
+            /* keep “only logo/title clickable” feel */
+        }
+
+        .top-nav-inner {
+            max-width: 1600px;
+            /* wider rails = less “pulled to center” */
+            margin: 0 auto;
+            padding: 0 28px;
+            /* slightly tighter than 40px */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 22px;
+        }
+
+        .top-nav .hero-logo-container {
+            pointer-events: auto;
+            display: flex;
+            align-items: center;
+        }
+
+        .top-nav .nav-logo {
+            width: 220px;
+            max-width: 42vw;
+            /* prevents logo from visually hogging the row */
+            height: auto;
+            filter: drop-shadow(0 0 20px rgba(99, 149, 238, 0.25));
+        }
+
+        .top-nav .nav-right {
+            pointer-events: auto;
+            flex: 1;
+            min-width: 0;
+            text-align: right;
+        }
+
+        .status-tag {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.6rem;
+            letter-spacing: 4px;
+            color: #91AFB3;
+            border: 1px solid rgba(145, 175, 179, 0.25);
+            padding: 6px 15px;
+            display: inline-block;
+            text-transform: uppercase;
+            opacity: 0.9;
+        }
+
+        .top-nav .status-tag {
+            margin: 0 0 8px;
+        }
+
+        .top-nav .nav-title {
+            margin: 0;
+            font-size: 1.35rem;
+            letter-spacing: 10px;
+            text-transform: uppercase;
+            font-weight: 900;
+
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* =========================
+     HERO (Image of the Day)
+     ========================= */
+        .hero {
+            max-width: 1280px;
+            /* slightly wider than your old 1100 */
+            margin: 0 auto 40px;
+            padding: 0 20px;
+        }
+
+        .hero-card {
+            background: rgba(255, 255, 255, 0.015);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            overflow: hidden;
+        }
+
+        .hero-img {
+            width: 100%;
+            max-height: 78vh;
+            object-fit: contain;
+            display: block;
+            background: #050505;
+        }
+
+        .hero-meta {
+            padding: 18px 18px 20px;
+            text-align: center;
+        }
+
+        .hero-date {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            color: #A0BEF5;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .hero-title {
+            font-weight: 900;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin: 0 0 10px;
+            font-size: 1.2rem;
+        }
+
+        .hero-caption {
+            color: rgba(255, 255, 255, 0.78);
+            line-height: 1.7;
+            max-width: 900px;
+            margin: 0 auto;
+            font-size: 1rem;
+        }
+
+        .hero-actions {
+            margin-top: 14px;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hero-btn {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 10px 14px;
+            border: 1px solid rgba(145, 175, 179, 0.30);
+            background: rgba(145, 175, 179, 0.08);
+            color: #fff;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .hero-btn:hover {
+            border-color: #91AFB3;
+            background: rgba(145, 175, 179, 0.14);
+        }
+
+        /* =========================
+     ARCHIVE GRID
+     ========================= */
+        .section-label {
+            max-width: 1400px;
+            margin: 0 auto 10px;
+            padding: 0 20px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.6rem;
+            letter-spacing: 4px;
+            color: rgba(145, 175, 179, 0.75);
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-label::after {
+            content: "";
+            height: 1px;
+            flex: 1;
+            background: rgba(145, 175, 179, 0.18);
+        }
+
+        .vault-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 12px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .artifact-card {
+            background: #111;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            aspect-ratio: 1/1;
+            overflow: hidden;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .artifact-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(15%);
+            transition: 0.35s;
+            display: block;
+        }
+
+        .artifact-card:hover img {
+            filter: grayscale(0%);
+            transform: scale(1.04);
+        }
+
+        .artifact-tag {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.55rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.85);
+            background: rgba(0, 0, 0, 0.55);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 6px 8px;
+            backdrop-filter: blur(8px);
+        }
+
+        /* =========================
+     MOBILE
+     ========================= */
+        @media (max-width: 768px) {
+            .top-nav {
+                padding: 18px 0;
+            }
+
+            .top-nav-inner {
+                padding: 0 16px;
+                justify-content: center;
+            }
+
+            .top-nav .nav-right {
+                display: none;
+                /* keep mobile clean: logo only */
+            }
+
+            .nav-logo {
+                width: 80vw;
+                max-width: 280px;
+            }
+
+            .hero {
+                padding: 0 10px;
+            }
+
+            .vault-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2px;
+                padding: 0 5px;
+            }
+
+            .section-label {
+                padding: 0 10px;
+            }
+        }
+
+        /* =========================
+   OTW JE NE SAIS QUOI
+   1) Header signal line
+   2) Subtle hero film grain
+   ========================= */
+
+        /* 1) Signature OTW signal line under the header */
+        .top-nav {
+            position: fixed;
+            /* just ensuring this is set already */
+        }
+
+        .top-nav::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 1px;
+            background: linear-gradient(90deg,
+                    transparent,
+                    rgba(99, 149, 238, 0.40),
+                    rgba(145, 175, 179, 0.22),
+                    transparent);
+            opacity: 0.9;
+            pointer-events: none;
+        }
+
+        /* 2) Hero film grain (very subtle) */
+        .hero-card {
+            position: relative;
+        }
+
+        .hero-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+
+            /* tiny dot grain */
+            background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+            background-size: 3px 3px;
+
+            opacity: 0.055;
+            /* keep it low */
+            mix-blend-mode: overlay;
+            /* gentle texture */
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": "Image of the Day | Outside The World",
+      "url": "https://outsidetheworld.com/image_of_the_day.html",
+      "description": "Image of the Day from Outside The World in Queen Creek, Arizona.",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Outside The World",
+        "url": "https://outsidetheworld.com/"
+      },
+      "contentLocation": {
+        "@type": "Place",
+        "name": "Queen Creek, Arizona"
+      }
+    }
+    </script>
+</head>
+
+<body>
+
+    <nav class="top-nav">
+        <div class="top-nav-inner">
+            <a href="personal.html" class="hero-logo-container" aria-label="Back to Personal">
+                <img class="nav-logo" src="Images/Equal.svg" alt="Outside The World" />
+            </a>
+
+            <div class="nav-right">
+                <div class="status-tag">TYPE: DAILY_SIGNAL // STREAM: IOTD</div>
+                <h1 class="nav-title">Image of the Day</h1>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-card">
+            <img id="heroImg" class="hero-img" src="" alt="Image of the day" />
+            <div class="hero-meta">
+                <div id="heroDate" class="hero-date">LOADING_DATE…</div>
+                <h2 id="heroTitle" class="hero-title">LOADING_TITLE…</h2>
+                <p id="heroCaption" class="hero-caption">LOADING_CAPTION…</p>
+
+                <div class="hero-actions">
+                    <a id="heroOpen" class="hero-btn" href="#" target="_blank" rel="noopener">OPEN_IMAGE</a>
+                    <a id="heroDownload" class="hero-btn" href="#" download>DOWNLOAD</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ARCHIVE -->
+    <div class="section-label">ARCHIVE_GRID</div>
+    <div class="vault-grid" id="grid"></div>
+
+    <script>
+        // Dynamic clearance
+        function syncNav() {
+            const nav = document.querySelector('.top-nav');
+            if (!nav) return;
+
+            const buffer = window.innerWidth > 768 ? 8 : 10;
+            document.documentElement.style.setProperty('--nav-offset', (nav.offsetHeight + buffer) + 'px');
+        }
+        window.addEventListener('resize', syncNav);
+        window.addEventListener('load', syncNav);
+
+        // MANIFEST: newest first
+        // Create: image_manifest.json (array of objects)
+        // [{ "date":"2026-03-05", "title":"...", "caption":"...", "image":"Images/IOTD/2026-03-05.jpg" }, ...]
+        function normalizeManifest(items) {
+            const seenDates = new Set();
+            const normalized = [];
+
+            items.forEach((item) => {
+                if (!item || typeof item !== 'object') return;
+
+                const date = String(item.date || '').trim();
+                const title = String(item.title || '').trim();
+                const caption = String(item.caption || '').trim();
+                const image = String(item.image || '').trim();
+
+                if (!date || !image) return;
+                if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) return;
+                if (seenDates.has(date)) return;
+
+                seenDates.add(date);
+                normalized.push({ date, title, caption, image });
+            });
+
+            normalized.sort((a, b) => String(b.date).localeCompare(String(a.date)));
+            return normalized;
+        }
+
+        async function loadManifest() {
+            const res = await fetch('image_manifest.json', { cache: 'no-store' });
+            if (!res.ok) throw new Error('MANIFEST_LOAD_FAIL');
+            const data = await res.json();
+            if (!Array.isArray(data) || !data.length) throw new Error('MANIFEST_EMPTY');
+
+            const normalized = normalizeManifest(data);
+            if (!normalized.length) throw new Error('MANIFEST_INVALID');
+            return normalized;
+        }
+
+        function setHero(item) {
+            const heroImg = document.getElementById('heroImg');
+            const heroDate = document.getElementById('heroDate');
+            const heroTitle = document.getElementById('heroTitle');
+            const heroCaption = document.getElementById('heroCaption');
+            const heroOpen = document.getElementById('heroOpen');
+            const heroDownload = document.getElementById('heroDownload');
+
+            heroImg.src = item.image;
+            heroImg.alt = item.title ? `${item.title} // Image of the day` : 'Image of the day';
+            heroDate.textContent = (item.date || '').replaceAll('-', '_');
+            heroTitle.textContent = item.title || 'DAILY_SIGNAL';
+            heroCaption.textContent = item.caption || '';
+
+            heroOpen.href = item.image;
+            heroDownload.href = item.image;
+
+            // If you want iMessage preview to always show today:
+            // (iMessage caches hard; but this helps browsers)
+            const absoluteImage = 'https://outsidetheworld.com/' + item.image.replace(/^\//, '');
+            document.querySelector('meta[property="og:image"]')?.setAttribute('content', absoluteImage);
+            document.querySelector('meta[property="og:image:alt"]')?.setAttribute('content', heroImg.alt);
+            document.querySelector('meta[name="twitter:image"]')?.setAttribute('content', absoluteImage);
+        }
+
+        function buildGrid(items, heroDate) {
+            const grid = document.getElementById('grid');
+            grid.innerHTML = '';
+
+            items.forEach((item) => {
+                if (item.date === heroDate) return; // skip the hero item
+
+                const card = document.createElement('div');
+                card.className = 'artifact-card';
+                card.innerHTML = `
+      <img src="${item.image}" loading="lazy" alt="${item.title || 'archive image'}">
+      <div class="artifact-tag">${(item.date || '').replaceAll('-', '_')}</div>
+    `;
+                card.onclick = () => window.open(item.image, '_blank', 'noopener');
+                grid.appendChild(card);
+            });
+        }
+
+        (async function init() {
+            try {
+                const items = await loadManifest();
+                const hero = items[0];
+
+                setHero(hero);
+                buildGrid(items, hero.date);
+
+                syncNav();
+            } catch (e) {
+                console.error(e);
+                document.getElementById('heroTitle').textContent = 'ERROR_LOADING_SIGNAL';
+                document.getElementById('heroCaption').textContent = 'Check image_manifest.json and file paths.';
+            }
+        })();
+    </script>
+</body>
+
+</html>

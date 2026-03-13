@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Find the Signal — Outside The World</title>
-  <meta name="description" content="Find the hidden signal somewhere on Outside The World and enter to win one of three exclusive 2026 Purple Frost shirts." />
+  <title>Find 42. Win a Shirt. | Outside The World</title>
+  <meta name="description" content="Open Image of the Day, find and click the hidden 42, then enter for a chance to win one of three Purple Frost giveaway shirts." />
 
   <style>
     :root {
@@ -17,7 +17,9 @@
       --border-mid: rgba(255, 255, 255, 0.14);
       --text-main: #f2f2f2;
       --text-soft: rgba(255, 255, 255, 0.72);
-      --text-faint: rgba(255, 255, 255, 0.5);
+      --text-faint: rgba(255, 255, 255, 0.56);
+      --surface-soft: rgba(255, 255, 255, 0.04);
+      --surface-mid: rgba(255, 255, 255, 0.06);
       --font-main: 'Inter', sans-serif;
       --font-code: 'Fira Code', monospace;
       --radius: 24px;
@@ -118,6 +120,7 @@
       border: 1px solid transparent;
       cursor: pointer;
       white-space: nowrap;
+      text-align: center;
     }
 
     .btn:focus-visible,
@@ -151,6 +154,28 @@
 
     .btn-secondary:hover {
       border-color: var(--brand-teal);
+    }
+
+    .btn-text {
+      min-height: auto;
+      padding: 0;
+      border: none;
+      border-radius: 0;
+      background: none;
+      box-shadow: none;
+      color: var(--brand-light-blue);
+      font-size: 0.86rem;
+      font-weight: 600;
+      letter-spacing: 0;
+      text-transform: none;
+      white-space: normal;
+      justify-content: flex-start;
+    }
+
+    .btn-text:hover {
+      transform: none;
+      box-shadow: none;
+      color: #fff;
     }
 
     .hero {
@@ -192,7 +217,7 @@
     .lede {
       margin: 24px 0 24px;
       font-size: 1.08rem;
-      line-height: 1.8;
+      line-height: 1.75;
       color: var(--text-soft);
       max-width: 58ch;
     }
@@ -204,15 +229,22 @@
 
     .sub-note {
       margin-top: 14px;
-      color: var(--text-faint);
-      font-size: 0.95rem;
-      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.68);
+      font-size: 0.92rem;
+      line-height: 1.65;
     }
 
     .cta-row {
       display: flex;
       gap: 12px;
       flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .cta-stack {
+      display: grid;
+      gap: 12px;
+      align-items: start;
     }
 
     .shirt-card {
@@ -305,6 +337,24 @@
       margin-top: 24px;
     }
 
+    .details-head {
+      margin: 44px 0 0;
+      padding: 0 4px;
+    }
+
+    .details-head h2 {
+      margin: 0;
+      font-size: clamp(1.6rem, 3vw, 2.3rem);
+      letter-spacing: -0.03em;
+    }
+
+    .details-head p {
+      margin: 10px 0 0;
+      color: var(--text-faint);
+      line-height: 1.75;
+      max-width: 66ch;
+    }
+
     .detail-card {
       padding: 28px;
       transition: 0.35s ease;
@@ -319,10 +369,9 @@
 
     .detail-card h3 {
       margin: 0 0 10px;
-      font-family: var(--font-code);
-      color: var(--brand-teal);
-      font-size: 0.75rem;
-      letter-spacing: 0.08em;
+      color: #fff;
+      font-size: 1.1rem;
+      letter-spacing: -0.02em;
     }
 
     .detail-card p {
@@ -347,6 +396,21 @@
       line-height: 1.05;
     }
 
+    .signal-note {
+      margin-top: 10px;
+      padding: 12px 14px;
+      border: 1px solid rgba(160, 190, 245, 0.18);
+      border-radius: 12px;
+      background: rgba(160, 190, 245, 0.05);
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 0.92rem;
+      line-height: 1.55;
+    }
+
+    .signal-note b {
+      color: #fff;
+    }
+
     .form-copy p {
       margin: 0 0 20px;
       color: var(--text-faint);
@@ -355,19 +419,21 @@
     }
 
     .manifest {
-      font-family: var(--font-code);
       background: rgba(0, 0, 0, 0.2);
       border: 1px solid var(--border-low);
       padding: 24px;
       border-radius: 16px;
-      font-size: 0.84rem;
-      line-height: 1.7;
+      display: grid;
+      gap: 12px;
     }
 
     .manifest div {
+      display: grid;
+      gap: 4px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-      padding: 8px 0;
+      padding: 0 0 12px;
       color: var(--text-soft);
+      line-height: 1.55;
     }
 
     .manifest div:last-child {
@@ -377,6 +443,10 @@
     .manifest b {
       color: var(--brand-light-blue);
       font-weight: 700;
+      font-family: var(--font-code);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
 
     .field {
@@ -386,17 +456,16 @@
     label {
       display: block;
       margin-bottom: 10px;
-      font-family: var(--font-code);
-      font-size: 0.75rem;
-      color: var(--brand-teal);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
+      font-size: 0.9rem;
+      color: #fff;
+      font-weight: 600;
+      letter-spacing: -0.01em;
     }
 
     input,
     textarea {
       width: 100%;
-      background: rgba(255, 255, 255, 0.05);
+      background: var(--surface-soft);
       border: 1px solid var(--border-low);
       padding: 18px;
       border-radius: 12px;
@@ -415,8 +484,13 @@
     textarea:focus {
       outline: none;
       border-color: var(--brand-blue);
-      background: rgba(255, 255, 255, 0.08);
+      background: var(--surface-mid);
       box-shadow: 0 0 0 4px rgba(99, 149, 238, 0.08);
+    }
+
+    .prefilled {
+      border-color: rgba(160, 190, 245, 0.26);
+      background: rgba(160, 190, 245, 0.07);
     }
 
     textarea {
@@ -567,6 +641,10 @@
       .shirt-stage {
         min-height: 320px;
       }
+
+      .details-head {
+        margin-top: 30px;
+      }
     }
 
     @media (max-width: 640px) {
@@ -587,14 +665,24 @@
       .cta-row,
       .success-actions {
         flex-direction: column;
+        align-items: stretch;
       }
 
       .btn {
         width: 100%;
       }
 
+      .btn-text {
+        width: auto;
+        justify-content: center;
+      }
+
       .shirt-meta {
         justify-content: center;
+      }
+
+      .manifest {
+        padding: 20px;
       }
     }
   </style>
@@ -615,22 +703,24 @@
 
     <section class="hero">
       <div class="panel hero-copy">
-        <span class="eyebrow">// TRANSMISSION_ID: 2026_DISCOVERY</span>
-        <h1>Find the Signal.</h1>
+        <span class="eyebrow">2026_GIVEAWAY</span>
+        <h1>Find 42. Win a Shirt.</h1>
         <p class="lede">
-          Somewhere on <span class="accent">Outside The World</span>, a hidden signal is waiting.
-          Find it, submit it, and you’ll be entered to win one of three exclusive
-          <span class="accent">Purple Frost</span> shirts from the single 2026 run.
+          To enter, open <span class="accent">Image of the Day</span>, find and click the hidden 42,
+          then submit your name and email for a chance to win one of three limited-edition
+          <span class="accent">Purple Frost</span> shirts.
         </p>
 
-        <div class="cta-row">
-          <a href="#entry" class="btn btn-primary">Enter the Giveaway</a>
-          <a href="IOTDtemp2.html" class="btn btn-secondary">Search the IOTD Stream</a>
+        <div class="cta-stack">
+          <div class="cta-row">
+            <a href="image_of_the_day.html" class="btn btn-primary">Open Image of the Day</a>
+            <a href="#entry" class="btn btn-text">Already found it? Jump to entry form</a>
+          </div>
+
+          <p class="sub-note">
+            No purchase necessary. Open to eligible U.S. residents 18+. Ends March 20, 2026.
+          </p>
         </div>
-
-        <p class="sub-note">
-          This week the hidden signal lives inside the <span class="accent">Image of the Day</span> stream. No purchase. No tagging spree. Just find it and submit it.
-        </p>
       </div>
 
       <aside class="panel shirt-card">
@@ -651,37 +741,46 @@
       </aside>
     </section>
 
-    <section class="details-grid">
+    <section class="details-head" aria-labelledby="how-to-enter">
+      <h2 id="how-to-enter">How to Enter</h2>
+      <p>Start at Image of the Day, click the hidden 42 when you find it, then come back here to finish your entry.</p>
+    </section>
+
+    <section class="details-grid" aria-label="How to enter">
       <div class="panel detail-card">
-        <h3>01_DISCOVER</h3>
-        <p>Start in the Image of the Day stream and find the hidden signal where it’s been placed.</p>
+        <h3>1. Open Image of the Day</h3>
+        <p>Visit the Image of the Day page and look through the current stream.</p>
       </div>
       <div class="panel detail-card">
-        <h3>02_DECODE</h3>
-        <p>Capture the exact signal, then return here to transmit it. Spacing and characters count.</p>
+        <h3>2. Find and click the hidden 42</h3>
+        <p>A hidden “42” is placed in the Image of the Day experience. Click it to reveal the signal.</p>
       </div>
       <div class="panel detail-card">
-        <h3>03_WIN</h3>
-        <p>Three random winners receive the 2026 Purple Frost giveaway shirt.</p>
+        <h3>3. Enter your name and email</h3>
+        <p>Once you find the signal, return here and submit your entry. If you came through the guided path, the signal may already be filled in for you.</p>
       </div>
     </section>
 
+    <p class="sub-note" style="margin: 16px 4px 0;">
+      Tip: The fastest path is to start at Image of the Day, click the hidden 42, then finish your entry here.
+    </p>
+
     <section class="panel form-panel" id="entry">
       <div class="form-copy">
-        <h2>Transmit Your Entry</h2>
-        <p>Enter the exact signal below to lock in your submission. If you used the guided path, it may already be filled in for you.</p>
+        <h2>Enter the Giveaway</h2>
+        <p>If you found the hidden 42, your signal may already be filled in for you. Just enter your name and email to complete your entry.</p>
 
         <div class="manifest">
-          <div><b>Entry Closes:</b> March 20, 2026</div>
-          <div><b>Selection:</b> 3 Random Winners</div>
-          <div><b>Open To:</b> U.S. Residents Only</div>
-          <div><b>Prize:</b> Exclusive Purple Frost Shirt</div>
-          <div><b>Shipping:</b> Free U.S. Delivery</div>
+          <div><b>Entry closes</b><span>March 20, 2026</span></div>
+          <div><b>Winners</b><span>3 random winners</span></div>
+          <div><b>Eligibility</b><span>U.S. residents, 18+</span></div>
+          <div><b>Prize</b><span>Purple Frost giveaway shirt</span></div>
+          <div><b>Shipping</b><span>Free U.S. shipping</span></div>
         </div>
 
         <div class="success-state" id="successState">
           <div class="success-kicker">// SIGNAL_RECEIVED</div>
-          <h3>Entry transmitted.</h3>
+          <h3>Entry submitted.</h3>
           <p>
             Your signal has been logged successfully. If your entry is selected, you’ll be contacted by email after the giveaway closes.
           </p>
@@ -698,27 +797,28 @@
           <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
 
           <div class="field">
-            <label for="name">Navigator_Name</label>
+            <label for="name">Name</label>
             <input id="name" type="text" name="name" placeholder="Your name" required />
           </div>
 
           <div class="field">
-            <label for="email">Email_Address</label>
+            <label for="email">Email address</label>
             <input id="email" type="email" name="email" placeholder="explorer@domain.com" required />
           </div>
 
           <div class="field">
-            <label for="signal">The_Signal</label>
-            <input id="signal" type="text" name="signal" placeholder="OTW_SIGNAL_42" required autocapitalize="off" autocorrect="off" spellcheck="false" />
+            <label for="signal">Signal</label>
+            <input id="signal" type="text" name="signal" placeholder="OTW_SIGNAL_42" aria-describedby="signalNote" required autocapitalize="off" autocorrect="off" spellcheck="false" />
+            <div class="signal-note" id="signalNote">The signal should read: <b>OTW_SIGNAL_42</b></div>
           </div>
 
           <div class="field">
-            <label for="feedback">Optional: Favorite_Path</label>
-            <textarea id="feedback" name="feedback" placeholder="What stood out to you during the hunt?"></textarea>
+            <label for="feedback">Optional note</label>
+            <textarea id="feedback" name="feedback" placeholder="What stood out to you while exploring the site?"></textarea>
           </div>
 
           <div class="form-actions">
-            <button id="submitBtn" type="submit" class="btn btn-primary" style="width: 100%;">Transmit Entry</button>
+            <button id="submitBtn" type="submit" class="btn btn-primary" style="width: 100%;">Submit Entry</button>
             <div class="submit-status" id="submitStatus" aria-live="polite"></div>
           </div>
         </form>
@@ -742,7 +842,7 @@
     </section>
 
     <footer class="footer">
-      OUTSIDE THE WORLD // SIGNAL ENTRY PORTAL
+      OUTSIDE THE WORLD // GIVEAWAY ENTRY PORTAL
     </footer>
   </div>
 
@@ -774,9 +874,14 @@
 
     (function hydrateSignalFromUrl() {
       const params = new URLSearchParams(window.location.search);
-      const signal = params.get('signal');
+      const signal = params.get('signal') || window.localStorage.getItem('otwSignal');
       if (signal && signalInput) {
         signalInput.value = signal;
+        signalInput.classList.add('prefilled');
+        const signalNote = document.getElementById('signalNote');
+        if (signalNote) {
+          signalNote.innerHTML = 'Signal ready. You can edit it if needed. It should read: <b>OTW_SIGNAL_42</b>';
+        }
       }
     })();
 
@@ -788,14 +893,14 @@
       successState.classList.remove('show');
 
       if (!form.checkValidity()) {
-        submitStatus.textContent = 'Please complete all required fields before transmitting your entry.';
+        submitStatus.textContent = 'Please complete all required fields before submitting your entry.';
         submitStatus.classList.add('error');
         form.reportValidity();
         return;
       }
 
       submitBtn.disabled = true;
-      submitBtn.textContent = 'Transmitting...';
+      submitBtn.textContent = 'Submitting...';
       submitBtn.style.opacity = '0.8';
 
       try {
@@ -810,6 +915,7 @@
         });
 
         if (response.ok) {
+          window.localStorage.removeItem('otwSignal');
           form.reset();
           successState.classList.add('show');
           submitStatus.textContent = '';
@@ -817,17 +923,17 @@
           successState.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         } else {
           const data = await response.json().catch(() => null);
-          submitStatus.textContent = data?.errors?.[0]?.message || 'Something interrupted the transmission. Please try again.';
+          submitStatus.textContent = data?.errors?.[0]?.message || 'Something interrupted your submission. Please try again.';
           submitStatus.classList.add('error');
           submitBtn.disabled = false;
-          submitBtn.textContent = 'Transmit Entry';
+          submitBtn.textContent = 'Submit Entry';
           submitBtn.style.opacity = '1';
         }
       } catch (error) {
         submitStatus.textContent = 'Network issue. Please try again in a moment.';
         submitStatus.classList.add('error');
         submitBtn.disabled = false;
-        submitBtn.textContent = 'Transmit Entry';
+        submitBtn.textContent = 'Submit Entry';
         submitBtn.style.opacity = '1';
       }
     });
