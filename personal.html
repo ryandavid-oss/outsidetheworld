@@ -311,16 +311,15 @@
             letter-spacing: 3px;
             text-transform: uppercase;
             margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
+            display: block;
+            flex: 1 1 auto;
+            min-width: 0;
+            line-height: 1.7;
         }
 
         .typing-line {
-            display: inline-flex;
-            align-items: center;
-            min-width: 0;
+            display: inline;
+            white-space: normal;
         }
 
         .cursor {
@@ -328,8 +327,9 @@
             width: 6px;
             height: 12px;
             background: var(--brand-teal);
-            margin-left: 5px;
+            margin-left: 0.25ch;
             animation: blink 1s infinite;
+            vertical-align: text-bottom;
         }
 
         @keyframes blink {
