@@ -20,6 +20,7 @@
   <link rel="stylesheet" href="theme.css" />
   <style>
     :root {
+      --safe-top: env(safe-area-inset-top);
       --page-bg: #0a0a0a;
       --page-bg-deep: #050505;
       --surface: rgba(255, 255, 255, 0.045);
@@ -87,7 +88,7 @@
     .shell {
       width: min(var(--max-width), calc(100% - 20px));
       margin: 0 auto;
-      padding: 16px 0 56px;
+      padding: calc(var(--safe-top) + 10px) 0 56px;
     }
 
     .topbar {
@@ -190,46 +191,11 @@
     }
 
     .composer {
-      padding: 24px 20px 20px;
+      padding: 18px 18px 16px;
     }
 
-    .kicker {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 14px;
-      color: var(--brand-teal);
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 0.72rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-    }
-
-    .kicker::before {
-      content: "";
-      width: 34px;
-      height: 1px;
-      background: rgba(160, 190, 245, 0.6);
-    }
-
-    .title {
-      margin: 0;
-      font-family: "IBM Plex Serif", serif;
-      font-size: clamp(1.9rem, 5vw, 3rem);
-      line-height: 0.98;
-      letter-spacing: -0.04em;
-    }
-
-    .deck {
-      margin: 14px 0 0;
-      color: var(--text-soft);
-      line-height: 1.75;
-      max-width: 58ch;
-    }
-
-    .install-note,
     .status-line {
-      margin-top: 14px;
+      margin-top: 0;
       padding: 12px 14px;
       border-radius: 14px;
       border: 1px solid var(--border);
@@ -239,15 +205,14 @@
       line-height: 1.65;
     }
 
-    .status-line strong,
-    .install-note strong {
+    .status-line strong {
       color: var(--text-main);
     }
 
     .form-grid {
       display: grid;
       gap: 16px;
-      margin-top: 18px;
+      margin-top: 14px;
     }
 
     .field {
@@ -355,6 +320,54 @@
       gap: 14px;
     }
 
+    .compose-row {
+      display: grid;
+      grid-template-columns: 58px minmax(0, 1fr);
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .compose-avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 999px;
+      object-fit: cover;
+      object-position: center;
+      border: 1px solid rgba(160, 190, 245, 0.16);
+      box-shadow: 0 0 0 3px rgba(155, 89, 182, 0.08), 0 12px 26px rgba(0, 0, 0, 0.22);
+    }
+
+    .compose-main {
+      display: grid;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .compose-input {
+      border: none;
+      background: transparent;
+      padding: 0;
+      border-radius: 0;
+      font-size: clamp(1.7rem, 6vw, 2.6rem);
+      line-height: 1.1;
+      min-height: 180px;
+      box-shadow: none;
+    }
+
+    .compose-input::placeholder {
+      color: rgba(238, 238, 238, 0.34);
+    }
+
+    body[data-theme="light"] .compose-input::placeholder {
+      color: rgba(26, 28, 32, 0.3);
+    }
+
+    .compose-input:focus {
+      border: none;
+      box-shadow: none;
+      background: transparent;
+    }
+
     .preview-panel,
     .outbox-panel {
       padding: 18px;
@@ -412,6 +425,7 @@
       align-items: center;
       gap: 8px;
       min-width: 0;
+      flex-wrap: wrap;
     }
 
     .fragment-name {
@@ -452,6 +466,9 @@
       text-transform: uppercase;
       text-align: right;
       flex-shrink: 0;
+      white-space: normal;
+      line-height: 1.45;
+      max-width: 170px;
     }
 
     .fragment-body {
@@ -537,7 +554,7 @@
     @media (max-width: 640px) {
       .shell {
         width: calc(100% - 12px);
-        padding-top: 10px;
+        padding-top: calc(var(--safe-top) + 14px);
       }
 
       .topbar-actions {
@@ -562,6 +579,38 @@
       .secondary-btn {
         width: 100%;
       }
+
+      .compose-row {
+        grid-template-columns: 50px minmax(0, 1fr);
+        gap: 12px;
+      }
+
+      .compose-avatar {
+        width: 46px;
+        height: 46px;
+      }
+
+      .compose-input {
+        min-height: 140px;
+        font-size: clamp(1.45rem, 7vw, 2rem);
+      }
+
+      .fragment-head {
+        gap: 10px;
+      }
+
+      .fragment-identity {
+        width: 100%;
+      }
+
+      .fragment-title {
+        align-items: flex-start;
+      }
+
+      .fragment-time {
+        max-width: none;
+        text-align: left;
+      }
     }
   </style>
 </head>
@@ -581,24 +630,33 @@
 
     <div class="layout">
       <main class="panel composer">
-        <div class="kicker">Fragments Publisher</div>
-        <h1 class="title">A private place to catch the thought before it disappears.</h1>
-        <p class="deck">This is the installable Phase 1 fragments app. It drafts, autosaves, previews, and stages short-form posts on your phone. It does not publish live yet.</p>
-        <div class="install-note" id="installNote"><strong>Install tip:</strong> Add this page to your home screen from Safari or your browser menu to use it like an app.</div>
         <div class="status-line" id="statusLine"><strong>Status:</strong> Drafts save locally on this device. Stage a fragment to add it to the outbox and copy JSON for later publishing.</div>
 
         <form class="form-grid" id="publisherForm">
-          <div class="field">
-            <label for="fragmentText">Fragment</label>
-            <textarea id="fragmentText" name="fragmentText" placeholder="Write the thought while it is still warm..."></textarea>
-            <div class="char-count" id="charCount">0 characters</div>
+          <div class="compose-row">
+            <img class="compose-avatar" src="Images/Profile.jpg" alt="RyanDavid Burningham" />
+            <div class="compose-main">
+              <div class="field">
+                <label for="fragmentText" class="helper">Compose</label>
+                <textarea class="compose-input" id="fragmentText" name="fragmentText" placeholder="What's happening?"></textarea>
+                <div class="char-count" id="charCount">0 characters</div>
+              </div>
+            </div>
           </div>
 
           <div class="meta-row">
             <div class="field">
               <label for="fragmentTag">Tag</label>
-              <input id="fragmentTag" name="fragmentTag" type="text" placeholder="FRAGMENT" value="FRAGMENT" />
-              <div class="helper">Optional. Good defaults: FRAGMENT, RESIDUE, FIELD_NOTE.</div>
+              <select id="fragmentTag" name="fragmentTag">
+                <option value="FRAGMENT">Fragment</option>
+                <option value="COMPLAINT">Complaint</option>
+                <option value="REGRET">Regret</option>
+                <option value="POSITIVITY">Positivity</option>
+                <option value="SPIRITUAL">Spiritual</option>
+                <option value="RESIDUE">Residue</option>
+                <option value="FIELD_NOTE">Field Note</option>
+              </select>
+              <div class="helper">Choose the lane and keep moving.</div>
             </div>
 
             <div class="field">
@@ -747,6 +805,13 @@
       charCount.textContent = `${textInput.value.length} characters`;
     }
 
+    function setPreviewFromEntry(entry) {
+      previewBody.textContent = entry.text || 'Your fragment preview will appear here.';
+      previewTag.textContent = (entry.tag || 'FRAGMENT').toUpperCase();
+      previewTime.textContent = formatTimestamp(entry.timestamp);
+      charCount.textContent = `${textInput.value.length} characters`;
+    }
+
     function renderOutbox() {
       const items = readOutbox();
       if (!items.length) {
@@ -787,7 +852,8 @@
       textInput.value = '';
       tagInput.value = 'FRAGMENT';
       timestampInput.value = toLocalDatetimeValue();
-      updatePreview();
+      setPreviewFromEntry(entry);
+      charCount.textContent = '0 characters';
       renderOutbox();
 
       const json = JSON.stringify(entry, null, 2);
