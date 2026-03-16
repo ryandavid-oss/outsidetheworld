@@ -132,7 +132,7 @@
 
     .masthead {
       position: sticky;
-      top: 0;
+      top: var(--safe-top);
       z-index: 20;
       margin-bottom: 14px;
       padding: 14px 14px 12px;
@@ -460,7 +460,7 @@
     @media (max-width: 640px) {
       .shell {
         width: min(var(--max-width), calc(100% - 12px));
-        padding-top: 10px;
+        padding-top: calc(var(--safe-top) + 14px);
       }
 
       .masthead {
