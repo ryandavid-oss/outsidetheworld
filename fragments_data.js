@@ -16,7 +16,7 @@ window.otw_fragments = [
   },
   {
     "timestamp": "2026-03-16T01:41:00.000Z",
-    "text": "What I wouldnÃ¢ÂÂt do for a pizza right now.",
+    "text": "What I wouldn't do for a pizza right now.",
     "tag": "COMPLAINT"
   },
   {
