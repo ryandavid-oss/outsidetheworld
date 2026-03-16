@@ -641,27 +641,11 @@
     function renderFragments() {
       const container = document.getElementById('fragmentsFeed');
       const fragments = Array.isArray(window.otw_fragments) ? window.otw_fragments : [];
-      const botPool = Array.isArray(window.otw_bot_pool) ? window.otw_bot_pool : [];
       const items = fragments.slice();
 
       if (!items.length) {
         renderEmptyState(container);
         return;
-      }
-
-      const now = new Date();
-      const start = new Date('2026-03-14T00:00:00-07:00');
-      const dayIndex = Math.max(0, Math.floor((now - start) / 86400000));
-      const shouldShowBot = botPool.length > 0 && (dayIndex % 5 === 0 || dayIndex % 5 === 3);
-
-      if (shouldShowBot) {
-        const botText = botPool[dayIndex % botPool.length];
-        items.splice(Math.min(1, items.length), 0, {
-          timestamp: new Date(now.getFullYear(), now.getMonth(), now.getDate(), 12, 42).toISOString(),
-          text: botText,
-          tag: 'OTW_BOT',
-          author: 'OTW_Bot'
-        });
       }
 
       container.innerHTML = items.map((fragment) => {
