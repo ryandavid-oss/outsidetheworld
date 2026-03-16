@@ -160,6 +160,36 @@
       gap: 10px;
     }
 
+    .menu-toggle {
+      display: none;
+      appearance: none;
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-main);
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: 0.25s var(--ease);
+    }
+
+    body[data-theme="light"] .menu-toggle {
+      background: rgba(255, 255, 255, 0.48);
+    }
+
+    .menu-toggle:hover,
+    .menu-toggle:focus-visible {
+      border-color: var(--brand-blue);
+      background: rgba(160, 190, 245, 0.08);
+    }
+
+    .menu-toggle svg {
+      width: 18px;
+      height: 18px;
+    }
+
     .brand {
       display: inline-flex;
       align-items: center;
@@ -174,25 +204,6 @@
 
     body[data-theme="light"] .brand img {
       filter: drop-shadow(0 0 16px rgba(27, 54, 93, 0.08));
-    }
-
-    .masthead-link {
-      color: var(--text-soft);
-      text-decoration: none;
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 0.72rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      border: 1px solid var(--border);
-      padding: 10px 14px;
-      border-radius: 999px;
-      transition: 0.25s var(--ease);
-    }
-
-    .masthead-link:hover,
-    .masthead-link:focus-visible {
-      color: var(--text-main);
-      border-color: var(--brand-teal);
     }
 
     .theme-toggle {
@@ -222,7 +233,16 @@
       background: rgba(255, 255, 255, 0.48);
     }
 
-    .hero-card,
+    .page-title {
+      margin: 0 0 14px;
+      padding: 8px 4px 4px;
+      font-family: "IBM Plex Serif", serif;
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      line-height: 0.96;
+      letter-spacing: -0.04em;
+      color: var(--text-main);
+    }
+
     .fragment-card,
     .empty-card {
       background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.028));
@@ -232,72 +252,9 @@
       box-shadow: 0 18px 44px rgba(0, 0, 0, 0.24);
     }
 
-    body[data-theme="light"] .hero-card,
     body[data-theme="light"] .fragment-card,
     body[data-theme="light"] .empty-card {
       box-shadow: 0 16px 36px rgba(27, 54, 93, 0.08);
-    }
-
-    .hero-card {
-      padding: 26px 22px 24px;
-      margin-bottom: 14px;
-    }
-
-    .hero-kicker {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 14px;
-      color: var(--brand-teal);
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 0.72rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-    }
-
-    .hero-kicker::before {
-      content: "";
-      width: 34px;
-      height: 1px;
-      background: rgba(160, 190, 245, 0.6);
-    }
-
-    .hero-title {
-      margin: 0;
-      font-family: "IBM Plex Serif", serif;
-      font-size: clamp(2rem, 7vw, 3.4rem);
-      line-height: 0.98;
-      letter-spacing: -0.04em;
-    }
-
-    .hero-deck {
-      margin: 16px 0 0;
-      color: var(--text-soft);
-      font-size: 1rem;
-      line-height: 1.75;
-      max-width: 60ch;
-    }
-
-    .hero-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 18px;
-    }
-
-    .hero-chip {
-      display: inline-flex;
-      align-items: center;
-      min-height: 36px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--border);
-      color: var(--text-soft);
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 0.68rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
     }
 
     .feed {
@@ -510,32 +467,56 @@
       }
 
       .masthead-inner {
-        align-items: flex-start;
-        flex-direction: column;
+        position: relative;
+      }
+
+      .brand img {
+        width: min(52vw, 210px);
+      }
+
+      .menu-toggle {
+        display: inline-flex;
+        margin-left: auto;
       }
 
       .masthead-actions {
-        width: 100%;
+        position: absolute;
+        top: calc(100% + 8px);
+        right: 0;
+        width: min(210px, calc(100vw - 32px));
+        padding: 10px;
+        border-radius: 18px;
+        border: 1px solid var(--border);
+        background: rgba(10, 10, 10, 0.94);
+        backdrop-filter: blur(18px);
+        box-shadow: 0 18px 36px rgba(0, 0, 0, 0.26);
         flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-6px);
+        transition: 0.22s var(--ease);
       }
 
-      .masthead-link {
-        width: 100%;
-        text-align: center;
+      body[data-theme="light"] .masthead-actions {
+        background: rgba(247, 243, 235, 0.96);
+        box-shadow: 0 18px 36px rgba(27, 54, 93, 0.12);
+      }
+
+      .masthead-actions.is-open {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
       }
 
       .theme-toggle {
         width: 100%;
       }
 
-      .hero-card,
       .fragment-card,
       .empty-card {
         border-radius: 24px;
-      }
-
-      .hero-card {
-        padding: 22px 18px 20px;
       }
 
       .fragment-card {
@@ -575,25 +556,20 @@
         <a class="brand" href="personal.html" aria-label="Return to OTW feed">
           <img id="fragmentsLogo" src="Images/Equal.svg" alt="Outside The World" />
         </a>
-        <div class="masthead-actions">
+        <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mastheadActions" aria-label="Open settings menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+            <path d="M4 7h16"></path>
+            <path d="M4 12h16"></path>
+            <path d="M4 17h16"></path>
+          </svg>
+        </button>
+        <div class="masthead-actions" id="mastheadActions">
           <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false">Light Mode</button>
-          <a class="masthead-link" href="personal.html">Return to Main Feed</a>
         </div>
       </div>
     </header>
 
-    <section class="hero-card" aria-labelledby="fragments-title">
-      <div class="hero-kicker">Fragments</div>
-      <h1 class="hero-title" id="fragments-title">A small place for passing thoughts.</h1>
-      <p class="hero-deck">
-        This is the short-form OTW stream: notes, passing signals, stray observations, and thoughts too small for a full entry.
-      </p>
-      <div class="hero-meta">
-        <span class="hero-chip">Text only</span>
-        <span class="hero-chip">Short-form feed</span>
-        <span class="hero-chip">OTW field notes</span>
-      </div>
-    </section>
+    <h1 class="page-title" id="fragments-title">Thought + Fragment</h1>
 
     <main class="feed" id="fragmentsFeed" aria-live="polite"></main>
   </div>
@@ -716,9 +692,38 @@
       applyTheme(saved || 'dark');
     }
 
+    function setMenuState(isOpen) {
+      const menu = document.getElementById('mastheadActions');
+      const toggle = document.getElementById('menuToggle');
+      menu.classList.toggle('is-open', isOpen);
+      toggle.setAttribute('aria-expanded', String(isOpen));
+    }
+
     document.getElementById('themeToggle').addEventListener('click', () => {
       const current = document.body.dataset.theme === 'light' ? 'light' : 'dark';
       applyTheme(current === 'light' ? 'dark' : 'light');
+      if (window.innerWidth <= 640) {
+        setMenuState(false);
+      }
+    });
+    document.getElementById('menuToggle').addEventListener('click', () => {
+      const menu = document.getElementById('mastheadActions');
+      setMenuState(!menu.classList.contains('is-open'));
+    });
+    document.addEventListener('click', (event) => {
+      if (window.innerWidth > 640) {
+        return;
+      }
+      const menu = document.getElementById('mastheadActions');
+      const toggle = document.getElementById('menuToggle');
+      if (!menu.contains(event.target) && !toggle.contains(event.target)) {
+        setMenuState(false);
+      }
+    });
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 640) {
+        setMenuState(false);
+      }
     });
 
     hydrateTheme();
