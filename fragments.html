@@ -574,8 +574,39 @@
     <main class="feed" id="fragmentsFeed" aria-live="polite"></main>
   </div>
 
-  <script src="fragments_data.js"></script>
   <script>
+    async function loadFragmentsData() {
+      const cacheBust = `ts=${Date.now()}`;
+      const response = await fetch(`fragments_data.js?${cacheBust}`, {
+        cache: 'no-store'
+      });
+
+      if (!response.ok) {
+        throw new Error(`Could not load fragments data: ${response.status}`);
+      }
+
+      const scriptText = await response.text();
+      const sandbox = {};
+      const evaluator = new Function(
+        "sandbox",
+        `${scriptText}; sandbox.otw_fragments = typeof window !== "undefined" && Array.isArray(window.otw_fragments) ? window.otw_fragments : [];`
+      );
+
+      const previousFragments = typeof window !== 'undefined' ? window.otw_fragments : undefined;
+      evaluator(sandbox);
+
+      const fragments = Array.isArray(window.otw_fragments) ? window.otw_fragments : [];
+      if (typeof window !== 'undefined') {
+        if (typeof previousFragments === 'undefined') {
+          delete window.otw_fragments;
+        } else {
+          window.otw_fragments = previousFragments;
+        }
+      }
+
+      return fragments;
+    }
+
     function escapeHtml(value) {
       return String(value)
         .replace(/&/g, '&amp;')
@@ -614,9 +645,22 @@
       `;
     }
 
-    function renderFragments() {
+    async function renderFragments() {
       const container = document.getElementById('fragmentsFeed');
-      const fragments = Array.isArray(window.otw_fragments) ? window.otw_fragments : [];
+      let fragments = [];
+
+      try {
+        fragments = await loadFragmentsData();
+      } catch (error) {
+        container.innerHTML = `
+          <section class="empty-card">
+            <h2 class="empty-title">Feed temporarily unavailable.</h2>
+            <p class="empty-copy">${escapeHtml(error.message || 'Could not load fragments right now.')}</p>
+          </section>
+        `;
+        return;
+      }
+
       const items = fragments.slice();
 
       if (!items.length) {
