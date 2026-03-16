@@ -670,6 +670,64 @@
             background: var(--border-teal);
         }
 
+        .mini-feed-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 14px 18px;
+            text-decoration: none;
+            color: inherit;
+            border: 1px solid rgba(155, 89, 182, 0.18);
+            background: rgba(155, 89, 182, 0.04);
+            transition: all 0.3s ease;
+        }
+
+        .mini-feed-link:hover {
+            border-color: rgba(155, 89, 182, 0.38);
+            background: rgba(155, 89, 182, 0.08);
+            transform: translateX(6px);
+        }
+
+        .mini-feed-copy {
+            min-width: 0;
+        }
+
+        .mini-feed-label {
+            font-family: var(--font-code);
+            font-size: 0.62rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--amethyst);
+            opacity: 0.9;
+            margin-bottom: 6px;
+        }
+
+        .mini-feed-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-main);
+            letter-spacing: 0.01em;
+            margin: 0 0 4px 0;
+        }
+
+        .mini-feed-desc {
+            font-size: 0.72rem;
+            color: #919894;
+            text-transform: uppercase;
+            margin: 0;
+        }
+
+        .mini-feed-arrow {
+            font-family: var(--font-code);
+            font-size: 0.72rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--amethyst);
+            white-space: nowrap;
+            opacity: 0.9;
+        }
+
         .archive-card {
             display: block;
             padding: 35px;
@@ -1631,6 +1689,15 @@
         <aside class="cards-column" id="sub-sections">
 
             <div class="column-label">01 // SUB_SECTIONS</div>
+
+            <a href="fragments.html" class="mini-feed-link" aria-label="Open Fragments feed">
+                <div class="mini-feed-copy">
+                    <div class="mini-feed-label">FRAGMENTS</div>
+                    <h3 class="mini-feed-title">Short-form thoughts + field notes</h3>
+                    <p class="mini-feed-desc">A narrower ledge for passing signal</p>
+                </div>
+                <div class="mini-feed-arrow">OPEN →</div>
+            </a>
 
             <a href="emmy.html" id="warm-breeze-target" class="archive-card sacred-card">
                 <div class="card-beacon" aria-hidden="true"></div>

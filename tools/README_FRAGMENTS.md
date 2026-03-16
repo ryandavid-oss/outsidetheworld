@@ -50,3 +50,25 @@ git add fragments_data.js
 git commit -m "Add fragments"
 git push
 ```
+
+## OTW_Bot Helper
+
+To add a real persistent `OTW_Bot` post into the feed:
+
+```bash
+python3 tools/add_otw_bot_fragment.py
+```
+
+That uses the built-in quip pool and writes a normal archived entry into `fragments_data.js`.
+
+To supply your own bot line:
+
+```bash
+python3 tools/add_otw_bot_fragment.py --text "The machine has opinions about this particular mood."
+```
+
+To preview without writing:
+
+```bash
+python3 tools/add_otw_bot_fragment.py --dry-run
+```
