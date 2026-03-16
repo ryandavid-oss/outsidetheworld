@@ -1,12 +1,17 @@
 window.otw_fragments = [
   {
+    "timestamp": "2026-03-16T14:45:00.000Z",
+    "text": "Protected Worker test fragment.",
+    "tag": "FIELD_NOTE"
+  },
+  {
     "timestamp": "2026-03-16T14:25:00.000Z",
     "text": "Cloudflare Worker test fragment.",
     "tag": "FIELD_NOTE"
   },
   {
     "timestamp": "2026-03-16T01:41:00.000Z",
-    "text": "What I wouldn’t do for a pizza right now.",
+    "text": "What I wouldnât do for a pizza right now.",
     "tag": "COMPLAINT"
   },
   {
