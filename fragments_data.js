@@ -1,5 +1,15 @@
 window.otw_fragments = [
   {
+    "timestamp": "2026-03-16T08:07:00.000Z",
+    "text": "Revenge procrastination is absolutely a real thing. And I’m doing it right now.",
+    "tag": "REGRET"
+  },
+  {
+    "timestamp": "2026-03-16T07:53:00.000Z",
+    "text": "Did we do it? Did we wire the app correctly?",
+    "tag": "POSITIVITY"
+  },
+  {
     "timestamp": "2026-03-16T07:40:00.000Z",
     "text": "Protected Worker test fragment.",
     "tag": "FIELD_NOTE"
@@ -8,11 +18,6 @@ window.otw_fragments = [
     "timestamp": "2026-03-16T07:20:00.000Z",
     "text": "Cloudflare Worker test fragment.",
     "tag": "FIELD_NOTE"
-  },
-  {
-    "timestamp": "2026-03-16T07:53:00.000Z",
-    "text": "Did we do it? Did we wire the app correctly?",
-    "tag": "POSITIVITY"
   },
   {
     "timestamp": "2026-03-16T01:41:00.000Z",
