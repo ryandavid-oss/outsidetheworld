@@ -245,6 +245,15 @@
       margin-top: 14px;
     }
 
+    .publish-box {
+      display: grid;
+      gap: 10px;
+      padding: 14px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.03);
+    }
+
     .field {
       display: grid;
       gap: 8px;
@@ -718,6 +727,17 @@
         <div class="status-line" id="statusLine"><strong>Status:</strong> Drafts save locally on this device. Stage a fragment to add it to the outbox and copy JSON for later publishing.</div>
 
         <form class="form-grid" id="publisherForm">
+          <div class="publish-box">
+            <div class="field">
+              <label for="publishKeyInput">Publish Key</label>
+              <input id="publishKeyInput" name="publishKeyInput" type="password" autocomplete="off" placeholder="Stored locally on this device" />
+              <div class="helper">Used only for secure Worker publishing. Saved locally on this device, never in the repo.</div>
+            </div>
+            <div class="action-row" style="margin-top: 0;">
+              <button class="secondary-btn" id="savePublishKeyBtn" type="button">Save Publish Key</button>
+            </div>
+          </div>
+
           <div class="compose-row">
             <img class="compose-avatar" src="Images/Profile.jpg" alt="RyanDavid Burningham" />
             <div class="compose-main">
@@ -752,7 +772,8 @@
           </div>
 
           <div class="action-row">
-            <button class="primary-btn" id="stageBtn" type="submit">Stage Fragment</button>
+            <button class="primary-btn" id="publishBtn" type="button">Publish Now</button>
+            <button class="secondary-btn" id="stageBtn" type="submit">Stage Fragment</button>
             <button class="secondary-btn" id="copyBtn" type="button">Copy Latest JSON</button>
             <button class="secondary-btn" id="downloadBtn" type="button">Download Outbox</button>
             <button class="secondary-btn" id="clearDraftBtn" type="button">Clear Draft</button>
@@ -806,10 +827,13 @@
     const DRAFT_KEY = 'otwFragmentsPublisherDraft';
     const OUTBOX_KEY = 'otwFragmentsPublisherOutbox';
     const THEME_KEY = 'otwFragmentsPublisherTheme';
+    const PUBLISH_KEY_STORAGE = 'otwFragmentsPublishKey';
+    const PUBLISH_ENDPOINT = 'https://otw-fragments-publish.ryandavid.workers.dev/publish-fragment';
 
     const textInput = document.getElementById('fragmentText');
     const tagInput = document.getElementById('fragmentTag');
     const timestampInput = document.getElementById('fragmentTimestamp');
+    const publishKeyInput = document.getElementById('publishKeyInput');
     const charCount = document.getElementById('charCount');
     const statusLine = document.getElementById('statusLine');
     const previewBody = document.getElementById('previewBody');
@@ -884,6 +908,35 @@
       window.localStorage.removeItem(DRAFT_KEY);
     }
 
+    function getPublishKey() {
+      return window.localStorage.getItem(PUBLISH_KEY_STORAGE) || '';
+    }
+
+    function savePublishKey() {
+      const value = publishKeyInput.value.trim();
+      if (!value) {
+        window.localStorage.removeItem(PUBLISH_KEY_STORAGE);
+        statusLine.innerHTML = '<strong>Status:</strong> Publish key cleared from this device.';
+        return;
+      }
+
+      window.localStorage.setItem(PUBLISH_KEY_STORAGE, value);
+      statusLine.innerHTML = '<strong>Status:</strong> Publish key saved locally on this device.';
+    }
+
+    function buildEntryFromForm() {
+      const text = textInput.value.trim();
+      if (!text) {
+        throw new Error('Write something first. A fragment can be short, but it still has to exist.');
+      }
+
+      return {
+        timestamp: toIsoWithLocalOffset(timestampInput.value),
+        text,
+        tag: (tagInput.value || 'FRAGMENT').trim().toUpperCase() || 'FRAGMENT'
+      };
+    }
+
     function updatePreview() {
       const text = textInput.value.trim();
       const tag = (tagInput.value || 'FRAGMENT').trim() || 'FRAGMENT';
@@ -922,17 +975,13 @@
 
     function stageFragment(event) {
       event.preventDefault();
-      const text = textInput.value.trim();
-      if (!text) {
-        statusLine.innerHTML = '<strong>Status:</strong> Write something first. A fragment can be short, but it still has to exist.';
+      let entry;
+      try {
+        entry = buildEntryFromForm();
+      } catch (error) {
+        statusLine.innerHTML = `<strong>Status:</strong> ${escapeHtml(error.message || 'Could not stage fragment.')}`;
         return;
       }
-
-      const entry = {
-        timestamp: toIsoWithLocalOffset(timestampInput.value),
-        text,
-        tag: (tagInput.value || 'FRAGMENT').trim().toUpperCase() || 'FRAGMENT'
-      };
 
       const outbox = readOutbox();
       outbox.unshift(entry);
@@ -952,6 +1001,54 @@
       }).catch(() => {
         statusLine.innerHTML = '<strong>Status:</strong> Fragment staged. Clipboard copy failed, but the outbox item was saved locally.';
       });
+    }
+
+    async function publishFragment() {
+      let entry;
+      try {
+        entry = buildEntryFromForm();
+      } catch (error) {
+        statusLine.innerHTML = `<strong>Status:</strong> ${escapeHtml(error.message || 'Could not publish fragment.')}`;
+        return;
+      }
+
+      const publishKey = publishKeyInput.value.trim() || getPublishKey();
+      if (!publishKey) {
+        statusLine.innerHTML = '<strong>Status:</strong> Add your publish key first so this device can post securely.';
+        return;
+      }
+
+      statusLine.innerHTML = '<strong>Status:</strong> Publishing fragment to the OTW Worker...';
+
+      try {
+        const response = await fetch(PUBLISH_ENDPOINT, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-publish-key': publishKey
+          },
+          body: JSON.stringify(entry)
+        });
+
+        const payload = await response.json().catch(() => ({}));
+        if (!response.ok || !payload.ok) {
+          throw new Error(payload.error || `Publish failed with status ${response.status}`);
+        }
+
+        if (publishKeyInput.value.trim()) {
+          window.localStorage.setItem(PUBLISH_KEY_STORAGE, publishKeyInput.value.trim());
+        }
+
+        clearDraftStorage();
+        textInput.value = '';
+        tagInput.value = 'FRAGMENT';
+        timestampInput.value = toLocalDatetimeValue();
+        setPreviewFromEntry(entry);
+        charCount.textContent = '0 characters';
+        statusLine.innerHTML = '<strong>Status:</strong> Fragment published successfully. The live feed should update shortly.';
+      } catch (error) {
+        statusLine.innerHTML = `<strong>Status:</strong> ${escapeHtml(error.message || 'Publish failed.')}`;
+      }
     }
 
     function copyLatestJson() {
@@ -1025,15 +1122,21 @@
       applyTheme(window.localStorage.getItem(THEME_KEY) || 'dark');
     }
 
+    function hydratePublishKey() {
+      publishKeyInput.value = getPublishKey();
+    }
+
     function setMenuState(isOpen) {
       topbarActions.classList.toggle('is-open', isOpen);
       menuToggle.setAttribute('aria-expanded', String(isOpen));
     }
 
     document.getElementById('publisherForm').addEventListener('submit', stageFragment);
+    document.getElementById('publishBtn').addEventListener('click', publishFragment);
     document.getElementById('copyBtn').addEventListener('click', copyLatestJson);
     document.getElementById('downloadBtn').addEventListener('click', downloadOutbox);
     document.getElementById('clearDraftBtn').addEventListener('click', clearDraft);
+    document.getElementById('savePublishKeyBtn').addEventListener('click', savePublishKey);
     themeToggle.addEventListener('click', () => {
       applyTheme(document.body.dataset.theme === 'light' ? 'dark' : 'light');
       if (window.innerWidth <= 640) {
@@ -1081,6 +1184,7 @@
     }
 
     hydrateTheme();
+    hydratePublishKey();
     hydrateDraft();
     updatePreview();
     renderOutbox();

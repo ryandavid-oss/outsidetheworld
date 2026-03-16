@@ -564,6 +564,7 @@
           </svg>
         </button>
         <div class="masthead-actions" id="mastheadActions">
+          <button class="theme-toggle" id="refreshFeedBtn" type="button">Refresh Feed</button>
           <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false">Light Mode</button>
         </div>
       </div>
@@ -746,6 +747,12 @@
     document.getElementById('themeToggle').addEventListener('click', () => {
       const current = document.body.dataset.theme === 'light' ? 'light' : 'dark';
       applyTheme(current === 'light' ? 'dark' : 'light');
+      if (window.innerWidth <= 640) {
+        setMenuState(false);
+      }
+    });
+    document.getElementById('refreshFeedBtn').addEventListener('click', async () => {
+      await renderFragments();
       if (window.innerWidth <= 640) {
         setMenuState(false);
       }
