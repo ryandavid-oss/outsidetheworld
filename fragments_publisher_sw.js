@@ -1,4 +1,4 @@
-const CACHE_NAME = 'otw-fragments-publisher-v1';
+const CACHE_NAME = 'otw-fragments-publisher-v2';
 const CORE_ASSETS = [
   '/fragments_publisher.html',
   '/fragments_publisher.webmanifest',
@@ -31,6 +31,26 @@ self.addEventListener('activate', (event) => {
 
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') {
+    return;
+  }
+
+  const requestUrl = new URL(event.request.url);
+  const isPublisherShell =
+    requestUrl.pathname === '/fragments_publisher.html' ||
+    requestUrl.pathname === '/fragments_publisher.webmanifest';
+
+  if (isPublisherShell) {
+    event.respondWith(
+      fetch(event.request)
+        .then((response) => {
+          if (response && response.status === 200) {
+            const copy = response.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
+          }
+          return response;
+        })
+        .catch(() => caches.match(event.request).then((cached) => cached || caches.match('/fragments_publisher.html')))
+    );
     return;
   }
 
