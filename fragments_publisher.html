@@ -239,6 +239,10 @@
       color: var(--text-main);
     }
 
+    .status-prefix {
+      display: none;
+    }
+
     .form-grid {
       display: grid;
       gap: 16px;
@@ -716,17 +720,6 @@
           </svg>
         </button>
         <div class="topbar-actions" id="topbarActions">
-          <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false">Light Mode</button>
-          <a class="pill-btn" href="fragments.html">Open Feed</a>
-        </div>
-      </div>
-    </header>
-
-    <div class="layout">
-      <main class="panel composer">
-        <div class="status-line" id="statusLine"><strong>Status:</strong> Drafts save locally on this device. Stage a fragment to add it to the outbox and copy JSON for later publishing.</div>
-
-        <form class="form-grid" id="publisherForm">
           <div class="publish-box">
             <div class="field">
               <label for="publishKeyInput">Publish Key</label>
@@ -737,7 +730,17 @@
               <button class="secondary-btn" id="savePublishKeyBtn" type="button">Save Publish Key</button>
             </div>
           </div>
+          <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false">Light Mode</button>
+          <a class="pill-btn" href="fragments.html">Open Feed</a>
+        </div>
+      </div>
+    </header>
 
+    <div class="layout">
+      <main class="panel composer">
+        <div class="status-line" id="statusLine">Drafts save locally on this device. Stage a fragment to add it to the outbox and copy JSON for later publishing.</div>
+
+        <form class="form-grid" id="publisherForm">
           <div class="compose-row">
             <img class="compose-avatar" src="Images/Profile.jpg" alt="RyanDavid Burningham" />
             <div class="compose-main">
@@ -916,12 +919,12 @@
       const value = publishKeyInput.value.trim();
       if (!value) {
         window.localStorage.removeItem(PUBLISH_KEY_STORAGE);
-        statusLine.innerHTML = '<strong>Status:</strong> Publish key cleared from this device.';
+        statusLine.textContent = 'Publish key cleared from this device.';
         return;
       }
 
       window.localStorage.setItem(PUBLISH_KEY_STORAGE, value);
-      statusLine.innerHTML = '<strong>Status:</strong> Publish key saved locally on this device.';
+      statusLine.textContent = 'Publish key saved locally on this device.';
     }
 
     function buildEntryFromForm() {
@@ -979,7 +982,7 @@
       try {
         entry = buildEntryFromForm();
       } catch (error) {
-        statusLine.innerHTML = `<strong>Status:</strong> ${escapeHtml(error.message || 'Could not stage fragment.')}`;
+        statusLine.textContent = error.message || 'Could not stage fragment.';
         return;
       }
 
@@ -997,9 +1000,9 @@
 
       const json = JSON.stringify(entry, null, 2);
       navigator.clipboard.writeText(json).then(() => {
-        statusLine.innerHTML = '<strong>Status:</strong> Fragment staged. JSON copied to clipboard and saved in the outbox on this device.';
+        statusLine.textContent = 'Fragment staged. JSON copied to clipboard and saved in the outbox on this device.';
       }).catch(() => {
-        statusLine.innerHTML = '<strong>Status:</strong> Fragment staged. Clipboard copy failed, but the outbox item was saved locally.';
+        statusLine.textContent = 'Fragment staged. Clipboard copy failed, but the outbox item was saved locally.';
       });
     }
 
@@ -1008,17 +1011,17 @@
       try {
         entry = buildEntryFromForm();
       } catch (error) {
-        statusLine.innerHTML = `<strong>Status:</strong> ${escapeHtml(error.message || 'Could not publish fragment.')}`;
+        statusLine.textContent = error.message || 'Could not publish fragment.';
         return;
       }
 
       const publishKey = publishKeyInput.value.trim() || getPublishKey();
       if (!publishKey) {
-        statusLine.innerHTML = '<strong>Status:</strong> Add your publish key first so this device can post securely.';
+        statusLine.textContent = 'Add your publish key first so this device can post securely.';
         return;
       }
 
-      statusLine.innerHTML = '<strong>Status:</strong> Publishing fragment to the OTW Worker...';
+      statusLine.textContent = 'Publishing fragment to the OTW Worker...';
 
       try {
         const response = await fetch(PUBLISH_ENDPOINT, {
@@ -1045,30 +1048,30 @@
         timestampInput.value = toLocalDatetimeValue();
         setPreviewFromEntry(entry);
         charCount.textContent = '0 characters';
-        statusLine.innerHTML = '<strong>Status:</strong> Fragment published successfully. The live feed should update shortly.';
+        statusLine.textContent = 'Fragment published successfully. The live feed should update shortly.';
       } catch (error) {
-        statusLine.innerHTML = `<strong>Status:</strong> ${escapeHtml(error.message || 'Publish failed.')}`;
+        statusLine.textContent = error.message || 'Publish failed.';
       }
     }
 
     function copyLatestJson() {
       const outbox = readOutbox();
       if (!outbox.length) {
-        statusLine.innerHTML = '<strong>Status:</strong> Nothing in the outbox yet. Stage a fragment first.';
+        statusLine.textContent = 'Nothing in the outbox yet. Stage a fragment first.';
         return;
       }
 
       navigator.clipboard.writeText(JSON.stringify(outbox[0], null, 2)).then(() => {
-        statusLine.innerHTML = '<strong>Status:</strong> Latest staged fragment copied as JSON.';
+        statusLine.textContent = 'Latest staged fragment copied as JSON.';
       }).catch(() => {
-        statusLine.innerHTML = '<strong>Status:</strong> Clipboard copy failed on this device.';
+        statusLine.textContent = 'Clipboard copy failed on this device.';
       });
     }
 
     function downloadOutbox() {
       const outbox = readOutbox();
       if (!outbox.length) {
-        statusLine.innerHTML = '<strong>Status:</strong> Nothing to export yet. Stage a fragment first.';
+        statusLine.textContent = 'Nothing to export yet. Stage a fragment first.';
         return;
       }
 
@@ -1079,7 +1082,7 @@
       link.download = `fragments-outbox-${new Date().toISOString().slice(0, 10)}.json`;
       link.click();
       URL.revokeObjectURL(url);
-      statusLine.innerHTML = '<strong>Status:</strong> Outbox exported as JSON.';
+      statusLine.textContent = 'Outbox exported as JSON.';
     }
 
     function clearDraft() {
@@ -1088,7 +1091,7 @@
       timestampInput.value = toLocalDatetimeValue();
       clearDraftStorage();
       updatePreview();
-      statusLine.innerHTML = '<strong>Status:</strong> Draft cleared on this device.';
+      statusLine.textContent = 'Draft cleared on this device.';
     }
 
     function hydrateDraft() {
@@ -1098,7 +1101,7 @@
           textInput.value = draft.text || '';
           tagInput.value = draft.tag || 'FRAGMENT';
           timestampInput.value = draft.timestamp || toLocalDatetimeValue();
-          statusLine.innerHTML = '<strong>Status:</strong> Recovered the last local draft from this device.';
+          statusLine.textContent = 'Recovered the last local draft from this device.';
           return;
         }
       } catch {
@@ -1178,7 +1181,7 @@
             // Ignore update errors and keep the current shell.
           });
         }).catch(() => {
-          statusLine.innerHTML = '<strong>Status:</strong> Publisher loaded, but offline caching was not available in this browser.';
+          statusLine.textContent = 'Publisher loaded, but offline caching was not available in this browser.';
         });
       });
     }
