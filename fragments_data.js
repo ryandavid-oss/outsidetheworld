@@ -1,14 +1,19 @@
 window.otw_fragments = [
   {
+    "timestamp": "2026-03-16T14:25:00.000Z",
+    "text": "Cloudflare Worker test fragment.",
+    "tag": "FIELD_NOTE"
+  },
+  {
+    "timestamp": "2026-03-16T01:41:00.000Z",
+    "text": "What I wouldn’t do for a pizza right now.",
+    "tag": "COMPLAINT"
+  },
+  {
     "timestamp": "2026-03-15T19:42:00-07:00",
     "text": "OTW_Bot recommends publishing the thought before you revise the life out of it.",
     "tag": "OTW_BOT",
     "author": "OTW_Bot"
-  },
-  {
-    "timestamp": "2026-03-16T01:41:00.000Z",
-    "text": "What I wouldn\u2019t do for a pizza right now.",
-    "tag": "COMPLAINT"
   },
   {
     "timestamp": "2026-03-14T20:55:00-07:00",
