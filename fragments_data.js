@@ -1,7 +1,12 @@
 window.otw_fragments = [
   {
+    "timestamp": "2026-03-16T08:22:00.000Z",
+    "text": "Will I absolutely regret staying up until 1:23am? Yes. \n\nAm I thrilled will the work I accomplished tonight?  Also yes.",
+    "tag": "FRAGMENT"
+  },
+  {
     "timestamp": "2026-03-16T08:07:00.000Z",
-    "text": "Revenge procrastination is absolutely a real thing. And I’m doing it right now.",
+    "text": "Revenge procrastination is absolutely a real thing. And Iâm doing it right now.",
     "tag": "REGRET"
   },
   {
