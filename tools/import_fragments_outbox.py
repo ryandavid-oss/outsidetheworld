@@ -97,7 +97,7 @@ def dedupe(entries: list[dict]) -> list[dict]:
 
 def replace_fragments_array(original: str, entries: list[dict]) -> str:
     replacement = f"window.otw_fragments = {json.dumps(entries, indent=2)};"
-    return FRAGMENTS_PATTERN.sub(replacement, original, count=1)
+    return FRAGMENTS_PATTERN.sub(lambda _match: replacement, original, count=1)
 
 
 def main() -> int:

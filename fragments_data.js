@@ -1,5 +1,10 @@
 window.otw_fragments = [
   {
+    "timestamp": "2026-03-16T01:41:00.000Z",
+    "text": "What I wouldn\u2019t do for a pizza right now.",
+    "tag": "COMPLAINT"
+  },
+  {
     "timestamp": "2026-03-14T20:55:00-07:00",
     "text": "I made the shirt promotion too complicated. The path is cleaner now, but next time I need to trust clarity sooner and stop mistaking friction for mystery.",
     "tag": "FIELD_NOTE"
