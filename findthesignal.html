@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Find 42. Win a Shirt. | Outside The World</title>
-  <meta name="description" content="Open Image of the Day, find and click the hidden 42, then enter for a chance to win one of three Purple Frost giveaway shirts." />
+  <title>Win a Shirt. | Outside The World</title>
+  <meta name="description" content="Enter for a chance to win one of three Purple Frost giveaway shirts from Outside The World." />
 
   <style>
     :root {
@@ -330,58 +330,8 @@
       font-weight: 700;
     }
 
-    .details-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-      margin-top: 24px;
-    }
-
-    .details-head {
-      margin: 44px 0 0;
-      padding: 0 4px;
-    }
-
-    .details-head h2 {
-      margin: 0;
-      font-size: clamp(1.6rem, 3vw, 2.3rem);
-      letter-spacing: -0.03em;
-    }
-
-    .details-head p {
-      margin: 10px 0 0;
-      color: var(--text-faint);
-      line-height: 1.75;
-      max-width: 66ch;
-    }
-
-    .detail-card {
-      padding: 28px;
-      transition: 0.35s ease;
-      border: 1px solid var(--border-low);
-    }
-
-    .detail-card:hover {
-      border-color: var(--brand-teal);
-      box-shadow: 0 0 25px rgba(145, 175, 179, 0.18);
-      transform: translateY(-4px);
-    }
-
-    .detail-card h3 {
-      margin: 0 0 10px;
-      color: #fff;
-      font-size: 1.1rem;
-      letter-spacing: -0.02em;
-    }
-
-    .detail-card p {
-      margin: 0;
-      color: var(--text-soft);
-      line-height: 1.75;
-    }
-
     .form-panel {
-      margin-top: 24px;
+      margin-top: 32px;
       padding: 48px;
       display: grid;
       grid-template-columns: 0.9fr 1.1fr;
@@ -394,21 +344,6 @@
       font-size: 2.2rem;
       letter-spacing: -0.02em;
       line-height: 1.05;
-    }
-
-    .signal-note {
-      margin-top: 10px;
-      padding: 12px 14px;
-      border: 1px solid rgba(160, 190, 245, 0.18);
-      border-radius: 12px;
-      background: rgba(160, 190, 245, 0.05);
-      color: rgba(255, 255, 255, 0.8);
-      font-size: 0.92rem;
-      line-height: 1.55;
-    }
-
-    .signal-note b {
-      color: #fff;
     }
 
     .form-copy p {
@@ -486,11 +421,6 @@
       border-color: var(--brand-blue);
       background: var(--surface-mid);
       box-shadow: 0 0 0 4px rgba(99, 149, 238, 0.08);
-    }
-
-    .prefilled {
-      border-color: rgba(160, 190, 245, 0.26);
-      background: rgba(160, 190, 245, 0.07);
     }
 
     textarea {
@@ -619,8 +549,7 @@
 
     @media (max-width: 900px) {
       .hero,
-      .form-panel,
-      .details-grid {
+      .form-panel {
         grid-template-columns: 1fr;
       }
 
@@ -704,21 +633,21 @@
     <section class="hero">
       <div class="panel hero-copy">
         <span class="eyebrow">2026_GIVEAWAY</span>
-        <h1>Find 42. Win a Shirt.</h1>
+        <h1>Win a Shirt.</h1>
         <p class="lede">
-          To enter, open <span class="accent">Image of the Day</span>, find and click the hidden 42,
-          then submit your name and email for a chance to win one of three limited-edition
-          <span class="accent">Purple Frost</span> shirts.
+          Enter your name and email for a chance to win one of three limited-edition
+          <span class="accent">Purple Frost</span> shirts. If you want a little context first,
+          you can still explore <span class="accent">Outside The World</span> before you enter.
         </p>
 
         <div class="cta-stack">
           <div class="cta-row">
-            <a href="image_of_the_day.html" class="btn btn-primary">Open Image of the Day</a>
-            <a href="#entry" class="btn btn-text">Already found it? Jump to entry form</a>
+            <a href="#entry" class="btn btn-primary">Jump to Entry Form</a>
+            <a href="image_of_the_day.html" class="btn btn-text">Want to look around first? Open Image of the Day</a>
           </div>
 
           <p class="sub-note">
-            No purchase necessary. Open to eligible U.S. residents 18+. Ends March 20, 2026.
+            No purchase necessary. Open to eligible U.S. residents in the 48 contiguous states. Ends March 27, 2026.
           </p>
         </div>
       </div>
@@ -741,48 +670,24 @@
       </aside>
     </section>
 
-    <section class="details-head" aria-labelledby="how-to-enter">
-      <h2 id="how-to-enter">How to Enter</h2>
-      <p>Start at Image of the Day, click the hidden 42 when you find it, then come back here to finish your entry.</p>
-    </section>
-
-    <section class="details-grid" aria-label="How to enter">
-      <div class="panel detail-card">
-        <h3>1. Open Image of the Day</h3>
-        <p>Visit the Image of the Day page and look through the current stream.</p>
-      </div>
-      <div class="panel detail-card">
-        <h3>2. Find and click the hidden 42</h3>
-        <p>A hidden “42” is placed in the Image of the Day experience. Click it to reveal the signal.</p>
-      </div>
-      <div class="panel detail-card">
-        <h3>3. Enter your name and email</h3>
-        <p>Once you find the signal, return here and submit your entry. If you came through the guided path, the signal may already be filled in for you.</p>
-      </div>
-    </section>
-
-    <p class="sub-note" style="margin: 16px 4px 0;">
-      Tip: The fastest path is to start at Image of the Day, click the hidden 42, then finish your entry here.
-    </p>
-
     <section class="panel form-panel" id="entry">
       <div class="form-copy">
         <h2>Enter the Giveaway</h2>
-        <p>If you found the hidden 42, your signal may already be filled in for you. Just enter your name and email to complete your entry.</p>
+        <p>Keep it simple. Enter your name and email and you’re in for a chance at one of the three giveaway shirts.</p>
 
         <div class="manifest">
-          <div><b>Entry closes</b><span>March 20, 2026</span></div>
+          <div><b>Entry closes</b><span>March 27, 2026</span></div>
           <div><b>Winners</b><span>3 random winners</span></div>
-          <div><b>Eligibility</b><span>U.S. residents, 18+</span></div>
+          <div><b>Eligibility</b><span>U.S. residents in the 48 contiguous states</span></div>
           <div><b>Prize</b><span>Purple Frost giveaway shirt</span></div>
           <div><b>Shipping</b><span>Free U.S. shipping</span></div>
         </div>
 
         <div class="success-state" id="successState">
-          <div class="success-kicker">// SIGNAL_RECEIVED</div>
+          <div class="success-kicker">// ENTRY_RECEIVED</div>
           <h3>Entry submitted.</h3>
           <p>
-            Your signal has been logged successfully. If your entry is selected, you’ll be contacted by email after the giveaway closes.
+            Your entry has been logged successfully. If your entry is selected, you’ll be contacted by email after the giveaway closes.
           </p>
           <div class="success-actions">
             <a href="personal.html" class="btn btn-secondary">Keep Exploring</a>
@@ -797,24 +702,13 @@
           <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
 
           <div class="field">
-            <label for="name">Name</label>
+            <label for="name">Full Name</label>
             <input id="name" type="text" name="name" placeholder="Your name" required />
           </div>
 
           <div class="field">
             <label for="email">Email address</label>
             <input id="email" type="email" name="email" placeholder="explorer@domain.com" required />
-          </div>
-
-          <div class="field">
-            <label for="signal">Signal</label>
-            <input id="signal" type="text" name="signal" placeholder="OTW_SIGNAL_42" aria-describedby="signalNote" required autocapitalize="off" autocorrect="off" spellcheck="false" />
-            <div class="signal-note" id="signalNote">The signal should read: <b>OTW_SIGNAL_42</b></div>
-          </div>
-
-          <div class="field">
-            <label for="feedback">Optional note</label>
-            <textarea id="feedback" name="feedback" placeholder="What stood out to you while exploring the site?"></textarea>
           </div>
 
           <div class="form-actions">
@@ -831,9 +725,9 @@
       <div class="rules-list">
         <div><b>No purchase necessary.</b> A purchase will not improve your chances of winning.</div>
         <div><b>Sponsor:</b> Outside The World is New LLC.</div>
-        <div><b>Promotion Period:</b> Begins at 12:00 AM MST on March 13, 2026 and ends at 11:59 PM MST on March 20, 2026.</div>
-        <div><b>Eligibility:</b> Open to legal residents of the United States who are 18 years of age or older at the time of entry. Void where prohibited.</div>
-        <div><b>How to Enter:</b> Find the hidden signal on the Outside The World site, submit the exact signal through the giveaway form on this page, and provide a valid name and email address. Limit one entry per person and per email address during the promotion period.</div>
+        <div><b>Promotion Period:</b> Begins at 12:00 AM MST on March 13, 2026 and ends at 11:59 PM MST on March 27, 2026.</div>
+        <div><b>Eligibility:</b> Open to legal residents of the 48 contiguous United States. Void where prohibited.</div>
+        <div><b>How to Enter:</b> Complete the giveaway entry form on this page and provide a valid name and email address. Limit one entry per person and per email address during the promotion period.</div>
         <div><b>Prize:</b> Three winners will each receive one Outside The World 2026 Purple Frost giveaway shirt. Prize is non-transferable and no cash alternative will be provided.</div>
         <div><b>Winner Selection:</b> Three winners will be selected at random from eligible entries received during the promotion period. Winners will be contacted by email after the giveaway closes.</div>
         <div><b>Privacy:</b> Submitted name and email information will be used only for giveaway administration and winner contact.</div>
@@ -870,21 +764,6 @@
     const submitBtn = document.getElementById('submitBtn');
     const submitStatus = document.getElementById('submitStatus');
     const successState = document.getElementById('successState');
-    const signalInput = document.getElementById('signal');
-
-    (function hydrateSignalFromUrl() {
-      const params = new URLSearchParams(window.location.search);
-      const signal = params.get('signal') || window.localStorage.getItem('otwSignal');
-      if (signal && signalInput) {
-        signalInput.value = signal;
-        signalInput.classList.add('prefilled');
-        const signalNote = document.getElementById('signalNote');
-        if (signalNote) {
-          signalNote.innerHTML = 'Signal ready. You can edit it if needed. It should read: <b>OTW_SIGNAL_42</b>';
-        }
-      }
-    })();
-
     form.addEventListener('submit', async function (e) {
       e.preventDefault();
 
@@ -915,7 +794,6 @@
         });
 
         if (response.ok) {
-          window.localStorage.removeItem('otwSignal');
           form.reset();
           successState.classList.add('show');
           submitStatus.textContent = '';

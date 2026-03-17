@@ -1,7 +1,7 @@
 window.otw_fragments = [
   {
     "timestamp": "2026-03-17T00:13:00.000Z",
-    "text": "There ought to be a prohibition on using the letters “DR” on a custom license plate frame. \n\nUnless it’s followed by “PEPPER”, or your credentials are pasted to your rear window. \n\nOtherwise, DR LVN, I very much doubt your authenticity.",
+    "text": "There ought to be a prohibition on using the letters “DR” on a custom license plate. \n\nUnless it’s followed by “PEPPER”, or your credentials are pasted to your rear window. \n\nOtherwise, DR LVN, I very much doubt your authenticity.",
     "tag": "COMPLAINT"
   },
   {
