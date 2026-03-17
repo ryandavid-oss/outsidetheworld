@@ -59,12 +59,24 @@ def normalize_tag(raw_tag: str) -> str:
     return tag or "FRAGMENT"
 
 
+def normalize_text(raw_text: str) -> str:
+    text = str(raw_text or "")
+    return (
+        text.replace("\u2018", "'")
+        .replace("\u2019", "'")
+        .replace("\u2032", "'")
+        .replace("\u201c", '"')
+        .replace("\u201d", '"')
+        .replace("\u00a0", " ")
+    )
+
+
 def normalize_entry(entry: dict) -> dict:
     if not isinstance(entry, dict):
         raise SystemExit("ERROR: every outbox entry must be an object")
 
     timestamp = str(entry.get("timestamp", "")).strip()
-    text = str(entry.get("text", "")).strip()
+    text = normalize_text(entry.get("text", "")).strip()
     tag = normalize_tag(str(entry.get("tag", "FRAGMENT")))
 
     if not timestamp:

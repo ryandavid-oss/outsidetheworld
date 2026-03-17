@@ -6,7 +6,7 @@ window.otw_fragments = [
   },
   {
     "timestamp": "2026-03-17T00:12:00.000Z",
-    "text": "Faith Matters podcasts? ð¯",
+    "text": "Faith Matters podcasts? Legit.",
     "tag": "SPIRITUAL"
   },
   {

@@ -367,6 +367,11 @@
       transition: 0.25s var(--ease);
     }
 
+    .primary-btn.is-success {
+      background: linear-gradient(135deg, var(--brand-teal), var(--brand-light-blue));
+      box-shadow: 0 18px 34px rgba(145, 175, 179, 0.22);
+    }
+
     .primary-btn {
       background: linear-gradient(135deg, var(--brand-blue), var(--brand-light-blue));
       color: #0a0a0a;
@@ -620,6 +625,81 @@
       margin: 0;
     }
 
+    .publish-toast {
+      position: fixed;
+      left: 50%;
+      bottom: 22px;
+      z-index: 50;
+      width: min(460px, calc(100vw - 28px));
+      padding: 14px 16px;
+      border-radius: 20px;
+      border: 1px solid rgba(145, 175, 179, 0.26);
+      background: linear-gradient(180deg, rgba(20, 24, 28, 0.96), rgba(10, 10, 10, 0.94));
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.36);
+      backdrop-filter: blur(18px);
+      transform: translate(-50%, 24px);
+      opacity: 0;
+      pointer-events: none;
+      transition: 0.28s var(--ease);
+    }
+
+    body[data-theme="light"] .publish-toast {
+      background: linear-gradient(180deg, rgba(247, 243, 235, 0.98), rgba(236, 230, 221, 0.95));
+      box-shadow: 0 16px 34px rgba(27, 54, 93, 0.14);
+    }
+
+    .publish-toast.show {
+      transform: translate(-50%, 0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .publish-toast-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 6px;
+    }
+
+    .publish-toast-title {
+      color: var(--text-main);
+      font-weight: 700;
+      font-size: 0.98rem;
+      letter-spacing: -0.02em;
+    }
+
+    .publish-toast-kicker {
+      color: var(--brand-teal);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .publish-toast-copy {
+      margin: 0;
+      color: var(--text-soft);
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    .publish-toast-close {
+      appearance: none;
+      border: none;
+      background: transparent;
+      color: var(--text-faint);
+      font-size: 1rem;
+      line-height: 1;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .publish-toast-close:hover,
+    .publish-toast-close:focus-visible {
+      color: var(--text-main);
+    }
+
     @media (max-width: 860px) {
       .layout {
         grid-template-columns: 1fr;
@@ -816,6 +896,17 @@
     </div>
   </div>
 
+  <div class="publish-toast" id="publishToast" role="status" aria-live="polite" aria-atomic="true">
+    <div class="publish-toast-head">
+      <div>
+        <div class="publish-toast-kicker">// FRAGMENT_PUBLISHED</div>
+        <div class="publish-toast-title" id="publishToastTitle">Fragment published.</div>
+      </div>
+      <button class="publish-toast-close" id="publishToastClose" type="button" aria-label="Dismiss publish notice">×</button>
+    </div>
+    <p class="publish-toast-copy" id="publishToastCopy">Your fragment has been sent to the live feed.</p>
+  </div>
+
   <script>
     const DRAFT_KEY = 'otwFragmentsPublisherDraft';
     const OUTBOX_KEY = 'otwFragmentsPublisherOutbox';
@@ -837,6 +928,12 @@
     const publisherLogo = document.getElementById('publisherLogo');
     const menuToggle = document.getElementById('menuToggle');
     const topbarActions = document.getElementById('topbarActions');
+    const publishBtn = document.getElementById('publishBtn');
+    const publishToast = document.getElementById('publishToast');
+    const publishToastTitle = document.getElementById('publishToastTitle');
+    const publishToastCopy = document.getElementById('publishToastCopy');
+    const publishToastClose = document.getElementById('publishToastClose');
+    let publishToastTimer = null;
 
     function escapeHtml(value) {
       return String(value)
@@ -860,6 +957,13 @@
 
       const parsed = new Date(localValue);
       return parsed.toISOString();
+    }
+
+    function normalizeFragmentText(value) {
+      return String(value || '')
+        .replace(/[\u2018\u2019\u2032]/g, "'")
+        .replace(/[\u201C\u201D]/g, '"')
+        .replace(/\u00A0/g, ' ');
     }
 
     function formatTimestamp(timestamp) {
@@ -905,6 +1009,27 @@
       return window.localStorage.getItem(PUBLISH_KEY_STORAGE) || '';
     }
 
+    function showPublishToast(title, copy) {
+      if (publishToastTimer) {
+        window.clearTimeout(publishToastTimer);
+      }
+      publishToastTitle.textContent = title;
+      publishToastCopy.textContent = copy;
+      publishToast.classList.add('show');
+      publishToastTimer = window.setTimeout(() => {
+        publishToast.classList.remove('show');
+      }, 3200);
+    }
+
+    function celebratePublish() {
+      publishBtn.classList.add('is-success');
+      publishBtn.textContent = 'Published';
+      window.setTimeout(() => {
+        publishBtn.classList.remove('is-success');
+        publishBtn.textContent = 'Publish Now';
+      }, 1400);
+    }
+
     function savePublishKey() {
       const value = publishKeyInput.value.trim();
       if (!value) {
@@ -918,7 +1043,7 @@
     }
 
     function buildEntryFromForm() {
-      const text = textInput.value.trim();
+      const text = normalizeFragmentText(textInput.value).trim();
       if (!text) {
         throw new Error('Write something first. A fragment can be short, but it still has to exist.');
       }
@@ -1039,6 +1164,11 @@
         setPreviewFromEntry(entry);
         charCount.textContent = '0 characters';
         statusLine.textContent = 'Fragment published successfully. The live feed should update shortly.';
+        celebratePublish();
+        showPublishToast(
+          'Fragment published.',
+          'Your thought is on its way. If you spot a typo, we can add edit and delete next.'
+        );
       } catch (error) {
         statusLine.textContent = error.message || 'Publish failed.';
       }
@@ -1130,6 +1260,12 @@
     document.getElementById('downloadBtn').addEventListener('click', downloadOutbox);
     document.getElementById('clearDraftBtn').addEventListener('click', clearDraft);
     document.getElementById('savePublishKeyBtn').addEventListener('click', savePublishKey);
+    publishToastClose.addEventListener('click', () => {
+      publishToast.classList.remove('show');
+      if (publishToastTimer) {
+        window.clearTimeout(publishToastTimer);
+      }
+    });
     themeToggle.addEventListener('click', () => {
       applyTheme(document.body.dataset.theme === 'light' ? 'dark' : 'light');
       setMenuState(false);
