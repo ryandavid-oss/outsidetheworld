@@ -1,5 +1,10 @@
 window.otw_fragments = [
   {
+    "timestamp": "2026-03-17T16:08:00.000Z",
+    "text": "Drumming up an idea for a new blog post. May have to dig deep into the memories.",
+    "tag": "FRAGMENT"
+  },
+  {
     "timestamp": "2026-03-17T05:22:00.000Z",
     "text": "10:22pm, and I’m fixing bugs in the code. \n\nBugs related to emoji. \n\n🤷",
     "tag": "FIELD_NOTE"
