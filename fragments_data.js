@@ -1,5 +1,10 @@
 window.otw_fragments = [
   {
+    "timestamp": "2026-03-17T19:58:00.000Z",
+    "text": "In the Taco Bell drive through, pondering email continuity. \n\nMaybe I'll focus on my order instead.",
+    "tag": "POSITIVITY"
+  },
+  {
     "timestamp": "2026-03-17T16:09:00.000Z",
     "text": "If we only understood the fragile lattice work separating functional technologies from complete societal collapse. \n\nOn second thought, let's stay naive.",
     "tag": "RESIDUE"
