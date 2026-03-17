@@ -250,6 +250,10 @@
       flex-wrap: wrap;
     }
 
+    .type-line-text {
+      min-height: 1.5em;
+    }
+
     .type-cursor {
       display: inline-block;
       width: 0.58em;
@@ -600,7 +604,7 @@
     </header>
 
     <div class="type-line" id="fragments-title" aria-label="Welcome to my narrow little ledge">
-      <span>Welcome to my narrow little ledge</span>
+      <span class="type-line-text" id="typeLineText" data-full-text="Welcome to my narrow little ledge"></span>
       <span class="type-cursor" aria-hidden="true"></span>
     </div>
 
@@ -776,6 +780,28 @@
       toggle.setAttribute('aria-expanded', String(isOpen));
     }
 
+    function runTypeLine() {
+      const typeLine = document.getElementById('typeLineText');
+      if (!typeLine) {
+        return;
+      }
+
+      const fullText = typeLine.dataset.fullText || '';
+      let index = 0;
+      typeLine.textContent = '';
+
+      function step() {
+        if (index >= fullText.length) {
+          return;
+        }
+        typeLine.textContent += fullText.charAt(index);
+        index += 1;
+        window.setTimeout(step, index < 10 ? 42 : 30);
+      }
+
+      window.setTimeout(step, 180);
+    }
+
     document.getElementById('themeToggle').addEventListener('click', () => {
       const current = document.body.dataset.theme === 'light' ? 'light' : 'dark';
       applyTheme(current === 'light' ? 'dark' : 'light');
@@ -811,6 +837,7 @@
 
     hydrateTheme();
     renderFragments();
+    runTypeLine();
   </script>
 </body>
 </html>
