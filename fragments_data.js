@@ -1,11 +1,5 @@
 window.otw_fragments = [
   {
-    "timestamp": "2026-03-17T22:11-07:00",
-    "text": "Try not to build a cathedral every time all you need is a porch light.",
-    "tag": "OTW_BOT",
-    "author": "OTW_Bot"
-  },
-  {
     "timestamp": "2026-03-17T05:22:00.000Z",
     "text": "10:22pm, and I\u2019m fixing bugs in the code. \n\nBugs related to emoji. \n\n\ud83e\udd37",
     "tag": "FIELD_NOTE"
