@@ -1,5 +1,10 @@
 window.otw_fragments = [
   {
+    "timestamp": "2026-03-18T18:54:00.000Z",
+    "text": "Reposing in the vacuum of silence. Not comfortably, I might add.",
+    "tag": "SPIRITUAL"
+  },
+  {
     "timestamp": "2026-03-17T22:11-07:00",
     "text": "Try not to build a cathedral every time all you need is a porch light.",
     "tag": "OTW_BOT",
