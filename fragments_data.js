@@ -18,7 +18,7 @@ window.otw_fragments = [
   },
   {
     "timestamp": "2026-03-19T03:18:00.000Z",
-    "text": "Oh goodie! It's that magical time of year when we use A/C all the time in all the buildings, and I swear sweatshirts inside.",
+    "text": "Oh goodie! It's that magical time of year when we use A/C all the time in all the buildings, and I wear sweatshirts inside.",
     "tag": "COMPLAINT"
   },
   {
