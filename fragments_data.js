@@ -1,5 +1,11 @@
 window.otw_fragments = [
   {
+    "timestamp": "2026-03-19T04:31:27.126Z",
+    "text": "Reminder: not every passing thought is a crisis. Some of them are just undercaffeinated.",
+    "tag": "OTW_BOT",
+    "author": "OTW_Bot"
+  },
+  {
     "timestamp": "2026-03-19T03:18:00.000Z",
     "text": "Oh goodie! It's that magical time of year when we use A/C all the time in all the buildings, and I swear sweatshirts inside.",
     "tag": "COMPLAINT"
@@ -38,12 +44,12 @@ window.otw_fragments = [
   },
   {
     "timestamp": "2026-03-17T05:22:00.000Z",
-    "text": "10:22pm, and I\u2019m fixing bugs in the code. \n\nBugs related to emoji. \n\n\ud83e\udd37",
+    "text": "10:22pm, and I’m fixing bugs in the code. \n\nBugs related to emoji. \n\n🤷",
     "tag": "FIELD_NOTE"
   },
   {
     "timestamp": "2026-03-17T00:13:00.000Z",
-    "text": "There ought to be a prohibition on using the letters \u201cDR\u201d on a custom license plate. \n\nUnless it\u2019s followed by \u201cPEPPER\u201d, or your credentials are pasted to your rear window. \n\nOtherwise, DR LVN, I very much doubt your authenticity.",
+    "text": "There ought to be a prohibition on using the letters “DR” on a custom license plate. \n\nUnless it’s followed by “PEPPER”, or your credentials are pasted to your rear window. \n\nOtherwise, DR LVN, I very much doubt your authenticity.",
     "tag": "COMPLAINT"
   },
   {
