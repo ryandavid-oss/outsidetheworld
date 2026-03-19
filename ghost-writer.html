@@ -927,6 +927,7 @@
           <button class="btn ghost" id="copyBtn" type="button">COPY_MD_TO_CLIPBOARD</button>
           <button class="btn ghost" id="imgBtn" type="button">INSERT_IMAGE</button>
           <button class="btn ghost" id="capBtn" type="button">INSERT_CAPTIONED_FIGURE</button>
+          <button class="btn ghost" id="centerBtn" type="button">INSERT_CENTERED_TEXT</button>
           <button class="btn ghost" id="dateHeaderBtn" type="button">INSERT_DATE_HEADER</button>
           <button class="btn ghost" id="dividerBtn" type="button">INSERT_DIVIDER</button>
           <button class="btn ghost" id="loadDraftBtn" type="button">LOAD_DRAFT</button>
@@ -936,7 +937,8 @@
 
         <div class="mini" id="miniNote">
           Captioned images insert a <code>&lt;figure&gt;</code> block (Option B) with an italicized
-          <code>&lt;figcaption&gt;</code>.
+          <code>&lt;figcaption&gt;</code>. Centered lines use <code>&lt;div class="otw-center"&gt;...&lt;/div&gt;</code>,
+          and dividers insert a standard <code>---</code> rule.
         </div>
       </section>
 
@@ -984,6 +986,20 @@
                 &lt;/figure&gt;
               </span><br><br>
               Use the toolbar button (image icon) or <b>INSERT_CAPTIONED_FIGURE</b>.
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="meta">
+              <span class="tag">CENTERED_TEXT</span>
+              <span class="tag">OTW_BLOCK</span>
+            </div>
+            <div class="text">
+              Use this for centered standalone lines or short pull-text:<br><br>
+              <span style="font-family: var(--font-code); font-size:0.7rem; color: rgba(160,190,245,0.9);">
+                &lt;div class="otw-center"&gt;Your centered line&lt;/div&gt;
+              </span><br><br>
+              Use <b>INSERT_CENTERED_TEXT</b> for the snippet and <b>INSERT_DIVIDER</b> for a horizontal rule.
             </div>
           </div>
 
@@ -1318,6 +1334,11 @@
       return `<figure>\n  <img src="${url}" alt="${alt}">\n  <figcaption><em>${cap}</em></figcaption>\n</figure>\n`;
     }
 
+    function buildCenteredTextSnippet(text) {
+      const safeText = (text || 'Centered text').trim() || 'Centered text';
+      return `\n\n<div class="otw-center">${safeText}</div>\n\n`;
+    }
+
     function promptForFigure() {
       const filename = prompt("ENTER_FILENAME (e.g., photo.jpg):", "");
       if (!filename) return null;
@@ -1360,6 +1381,16 @@
             className: "fa fa-file-image-o",
             title: "Insert Captioned Figure (Option B)",
           },
+          {
+            name: "uplink-center",
+            action: function (editor) {
+              const text = prompt("CENTERED_TEXT:", "Centered text");
+              if (text === null) return;
+              editor.codemirror.replaceSelection(buildCenteredTextSnippet(text));
+            },
+            className: "fa fa-align-center",
+            title: "Insert Centered Text",
+          },
           "|", "preview", "side-by-side", "fullscreen"
         ]
       });
@@ -1397,6 +1428,12 @@
       document.getElementById('capBtn').addEventListener('click', () => {
         const snippet = promptForFigure();
         if (snippet) insertAtCursor(snippet);
+      });
+
+      document.getElementById('centerBtn').addEventListener('click', () => {
+        const text = prompt("CENTERED_TEXT:", "Centered text");
+        if (text === null) return;
+        insertAtCursor(buildCenteredTextSnippet(text));
       });
 
       document.getElementById('dateHeaderBtn').addEventListener('click', () => {

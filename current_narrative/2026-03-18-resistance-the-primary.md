@@ -2,7 +2,7 @@
 Date: March 18, 2026
 Tags: family
 
-**Preface**
+<div class="otw-center">Preface</div>
 
 What spills forth below is the end result of the 649 days in between this very moment and the day my mom crossed the bridge to her next journey.
 
@@ -16,7 +16,7 @@ I have especially dithered over the final product because, like my mother’s pa
 
 She carries on the work behind veiled doors for now. Until we meet again, mom.
 
-**A Note on the Circuitry**
+<div class="otw-center">A Note on the Circuitry</div>
 
 The language that follows is technical because it is the only way I can map the invisible. While my father spent his life in insurance—calculating risk, mitigating loss, and providing a safety net for the unforeseen—I have always processed our family dynamic through the lens of hardware. In our house, we didn't just have feelings; we had surges. We didn't have disagreements; we had impedance mismatches.
 
@@ -32,9 +32,7 @@ I use these metaphors because they ground the abstract weight of my childhood in
 
 **The Ground:** This is the path of least resistance. It is the safety valve where dangerous levels of energy are sent to be neutralized. In our house, the ground was found in the silent patches of a repair or the aerodynamic grace of a paper airplane.
 
-**Main Essay **
-
-**Resistance: The Primary**
+<div class="otw-center">Resistance: The Primary</div>
 
 In electronics, resistance is what converts electrical energy into something else—heat, light, motion. Without it, you just have a short circuit: a frantic, destructive loop of energy with nowhere to go, consuming itself until the wires melt into an ozonic slag of copper and regret. To move a needle, to light a bulb, or to forge a soul, you need the friction. You need the "No."
 
