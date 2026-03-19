@@ -800,6 +800,7 @@
               <button class="secondary-btn" id="savePublishKeyBtn" type="button">Save Publish Key</button>
             </div>
           </div>
+          <button class="pill-btn" id="summonBotBtn" type="button">Summon OTW_Bot</button>
           <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false">Light Mode</button>
           <a class="pill-btn" href="fragments.html">Open Feed</a>
         </div>
@@ -913,6 +914,7 @@
     const THEME_KEY = 'otwFragmentsPublisherTheme';
     const PUBLISH_KEY_STORAGE = 'otwFragmentsPublishKey';
     const PUBLISH_ENDPOINT = 'https://otw-fragments-publish.ryandavid.workers.dev/publish-fragment';
+    const PUBLISH_BOT_ENDPOINT = 'https://otw-fragments-publish.ryandavid.workers.dev/publish-bot-fragment';
 
     const textInput = document.getElementById('fragmentText');
     const tagInput = document.getElementById('fragmentTag');
@@ -929,6 +931,7 @@
     const menuToggle = document.getElementById('menuToggle');
     const topbarActions = document.getElementById('topbarActions');
     const publishBtn = document.getElementById('publishBtn');
+    const summonBotBtn = document.getElementById('summonBotBtn');
     const publishToast = document.getElementById('publishToast');
     const publishToastTitle = document.getElementById('publishToastTitle');
     const publishToastCopy = document.getElementById('publishToastCopy');
@@ -1174,6 +1177,54 @@
       }
     }
 
+    async function summonOtwBot() {
+      const confirmed = window.confirm('Deploy quip?');
+      if (!confirmed) return;
+
+      const publishKey = publishKeyInput.value.trim() || getPublishKey();
+      if (!publishKey) {
+        statusLine.textContent = 'Add your publish key first so this device can summon OTW_Bot securely.';
+        setMenuState(false);
+        return;
+      }
+
+      statusLine.textContent = 'Summoning OTW_Bot...';
+      summonBotBtn.disabled = true;
+      summonBotBtn.textContent = 'Deploying...';
+
+      try {
+        const response = await fetch(PUBLISH_BOT_ENDPOINT, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-publish-key': publishKey
+          },
+          body: JSON.stringify({})
+        });
+
+        const payload = await response.json().catch(() => ({}));
+        if (!response.ok || !payload.ok) {
+          throw new Error(payload.error || `OTW_Bot publish failed with status ${response.status}`);
+        }
+
+        if (publishKeyInput.value.trim()) {
+          window.localStorage.setItem(PUBLISH_KEY_STORAGE, publishKeyInput.value.trim());
+        }
+
+        statusLine.textContent = 'OTW_Bot deployed successfully. The new quip should appear in the feed shortly.';
+        showPublishToast(
+          'OTW_Bot deployed.',
+          'A new quip is on its way to the live feed.'
+        );
+        setMenuState(false);
+      } catch (error) {
+        statusLine.textContent = error.message || 'OTW_Bot publish failed.';
+      } finally {
+        summonBotBtn.disabled = false;
+        summonBotBtn.textContent = 'Summon OTW_Bot';
+      }
+    }
+
     function copyLatestJson() {
       const outbox = readOutbox();
       if (!outbox.length) {
@@ -1260,6 +1311,7 @@
     document.getElementById('downloadBtn').addEventListener('click', downloadOutbox);
     document.getElementById('clearDraftBtn').addEventListener('click', clearDraft);
     document.getElementById('savePublishKeyBtn').addEventListener('click', savePublishKey);
+    summonBotBtn.addEventListener('click', summonOtwBot);
     publishToastClose.addEventListener('click', () => {
       publishToast.classList.remove('show');
       if (publishToastTimer) {
