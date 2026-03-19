@@ -1,5 +1,10 @@
 window.otw_fragments = [
   {
+    "timestamp": "2026-03-19T03:18:00.000Z",
+    "text": "Oh goodie! It's that magical time of year when we use A/C all the time in all the buildings, and I swear sweatshirts inside.",
+    "tag": "COMPLAINT"
+  },
+  {
     "timestamp": "2026-03-18T18:54:00.000Z",
     "text": "Reposing in the vacuum of silence. Not comfortably, I might add.",
     "tag": "SPIRITUAL"
