@@ -1,5 +1,10 @@
 window.otw_fragments = [
   {
+    "timestamp": "2026-03-19T15:08:00.000Z",
+    "text": "Both my body and mind feel heavy today. \n\nAn inescapable emotion of lack. Fighting against the kindness of gravity today feels burdensome. \n\nI am left in a vacuum of nameless want and need.",
+    "tag": "SPIRITUAL"
+  },
+  {
     "timestamp": "2026-03-19T04:31:27.126Z",
     "text": "Reminder: not every passing thought is a crisis. Some of them are just undercaffeinated.",
     "tag": "OTW_BOT",
