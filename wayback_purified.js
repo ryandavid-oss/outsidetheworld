@@ -3,7 +3,7 @@ const wayback_raw_dump = [
         "file": "2009-03-31-03-31-2009---Now-this-tale-did.md",
         "year": "long ago",
         "date": "before, but long, long ago",
-        "title": "03/31/2009 - Now this tale didn&39;t happen just yesterday, nor the day",
+        "title": "03/31/2009 - Now this tale didn't happen just yesterday, nor the day",
         "body": "Date: March 31, 2009\n\nI realized today that I hadn't published any of our pictures from our awesome trip to Disneyland on March the 13th.  Here are a few of them!\n\n<img class=\"alignnone\" src=\"http://www.outsidetheworld.com/pics/Disney0309/sumnerline\" alt=\"\" width=\"461\" height=\"614\" />\n\n<img class=\"alignnone\" src=\"http://www.outsidetheworld.com/pics/Disney0309/sumnerride.jpg\" alt=\"\" width=\"461\" height=\"614\" />\n\n<img class=\"alignnone\" src=\"http://www.outsidetheworld.com/pics/Disney0309/sumnerjenna.jpg\" alt=\"\" width=\"614\" height=\"461\" />\n\n<img class=\"alignnone\" src=\"http://www.outsidetheworld.com/pics/Disney0309/sumnerball.jpg\" alt=\"\" width=\"614\" height=\"461\" />\n\n<img class=\"alignnone\" src=\"http://www.outsidetheworld.com/pics/Disney0309/dadadamsj.jpg\" alt=\"\" width=\"461\" height=\"614\" />\n\n<img class=\"alignnone\" src=\"http://www.outsidetheworld.com/pics/Disney0309/dadsj.jpg\" alt=\"\" width=\"461\" height=\"614\" />\n\n<img class=\"alignnone\" src=\"http://www.outsidetheworld.com/pics/Disney0309/nowthistale.jpg\" alt=\"\" width=\"614\" height=\"461\" />\n\n<img class=\"alignnone\" src=\"http://www.outsidetheworld.com/pics/Disney0309/itwasone.jpg\" alt=\"\" width=\"614\" height=\"461\" />\n\n<img class=\"alignnone\" src=\"http://www.outsidetheworld.com/pics/Disney0309/jennasumner.jpg\" alt=\"\" width=\"614\" height=\"461\" />\n\n<img class=\"alignnone\" src=\"http://www.outsidetheworld.com/pics/Disney0309/sumnersplash.jpg\" alt=\"\" width=\"461\" height=\"614\" />\n\n<img class=\"alignnone\" src=\"http://www.outsidetheworld.com/pics/Disney0309/sumnerlost.jpg\" alt=\"\" width=\"461\" height=\"614\" />\n\n<img class=\"alignnone\" src=\"http://www.outsidetheworld.com/pics/Disney0309/sarajane.jpg\" alt=\"\" width=\"461\" height=\"614\" />\n\n<img class=\"alignnone\" src=\"http://www.outsidetheworld.com/pics/Disney0309/sumnersleep.jpg\" alt=\"\" width=\"461\" height=\"614\" />\n\n<img class=\"alignnone\" src=\"http://www.outsidetheworld.com/pics/Disney0309/sjchoc.jpg\" alt=\"\" width=\"461\" height=\"614\" />\n\n<img class=\"alignnone\" src=\"http://www.outsidetheworld.com/pics/Disney0309/family.jpg\" alt=\"\" width=\"614\" height=\"446\" />"
     },
     {
@@ -409,7 +409,7 @@ const wayback_raw_dump = [
         "file": "2012-08-25-Fall--39-s-Debut.md",
         "year": "2012",
         "date": "August 25, 2012",
-        "title": "Fall&39;s Debut",
+        "title": "Fall's Debut",
         "body": "<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5780753800107696226\" src=\"Images/archive/photo-727669.JPG.jpg\" />\nAs school begins and the temperature fluctuates, if only a few degrees, the cottonwood out front drops a few leaves, as if in surrender, concurrent with the aster's bloom.  \nEvery year, it begins like this."
     },
     {
@@ -493,7 +493,7 @@ const wayback_raw_dump = [
         "file": "2012-05-13-Theodore-Roosevelt--39-s-Lake.md",
         "year": "2012",
         "date": "May 13, 2012",
-        "title": "Theodore Roosevelt&39;s Lake",
+        "title": "Theodore Roosevelt's Lake",
         "body": "<img src=\"Images/archive/My+HipstaPrint+868725441-726510.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5741877473032691122\" />\nCall me crazy, but I believe old Theodore deserves a better body of water. \n\nMaybe when Yellowstone blows sky-high, we can fill up the crater and call it good. \n\nLens: Tejas\n\nFilm: Blanko Freedom11"
     },
     {
@@ -724,7 +724,7 @@ const wayback_raw_dump = [
         "file": "2012-01-10-Corn-stands-still--slowly---yi.md",
         "year": "2012",
         "date": "January 10, 2012",
-        "title": "Corn stands still, slowly / yielding to entropy&39;s call",
+        "title": "Corn stands still, slowly / yielding to entropy's call",
         "body": "<img alt=\"\" border=\"0\" id=\"BLOGGER_PHOTO_ID_5696154362050047682\" src=\"Images/archive/My+HipstaPrint+0-785364.jpg\" />\nsun, silence and cold.\n\nIt's nice to be in the garden, even during January.\nLens: John S\nFilm: DC"
     },
     {
@@ -864,7 +864,7 @@ const wayback_raw_dump = [
         "file": "2011-11-29-Any-Day-Now--It--39-ll-All-Be-.md",
         "year": "2011",
         "date": "November 29, 2011",
-        "title": "Any Day Now, It&39;ll All Be White",
+        "title": "Any Day Now, It'll All Be White",
         "body": "<img src=\"Images/archive/My+HipstaPrint+0-709392.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5680231731019377138\" />\nDon't mean to sound like a broken record, but can't say enough about this year's extended autumnal warmth.\nLens: Lucas AB2\nFilm: Kodot XGrizzled"
     },
     {
@@ -1116,7 +1116,7 @@ const wayback_raw_dump = [
         "file": "2011-08-23-A-Bug--39-s-Life.md",
         "year": "2011",
         "date": "August 23, 2011",
-        "title": "A Bug&39;s Life",
+        "title": "A Bug's Life",
         "body": "<img src=\"Images/archive/My+HipstaPrint+0-756508.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5643911115531942514\" />\nLens: John S\nFilm: Blanko"
     },
     {
@@ -1242,7 +1242,7 @@ const wayback_raw_dump = [
         "file": "2011-05-21-Grimaldi--39-s.md",
         "year": "2011",
         "date": "May 21, 2011",
-        "title": "Grimaldi&39;s",
+        "title": "Grimaldi's",
         "body": "<img src=\"Images/archive/My+HipstaPrint+0-740707.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5608977929982839298\" />\nThe only thing that could make it better is if we were in Brooklyn. I can deal. Plus, David Gray is on the PA. Lens: Watts\nFilm: Big Up"
     },
     {
@@ -1578,7 +1578,7 @@ const wayback_raw_dump = [
         "file": "2011-03-14----it-wasn--39-t-really-so.md",
         "year": "2011",
         "date": "March 14, 2011",
-        "title": "...it wasn&39;t really so",
+        "title": "...it wasn't really so",
         "body": "<img src=\"Images/archive/My+HipstaPrint+0-772814.jpg\"  border=\"0\" alt=\"\" id=\"BLOGGER_PHOTO_ID_5583744708541003298\" />\nBut it seemed to be. Lens: Helga Viking\nFilm: Kodot XGrizzled"
     },
     {
@@ -1921,7 +1921,7 @@ const wayback_raw_dump = [
         "file": "2009-05-07-05-07-09---No--I-didn--39-t-br.md",
         "year": "2009",
         "date": "May 07, 2009",
-        "title": "05/07/09 - No, I didn&39;t break my ankle...",
+        "title": "05/07/09 - No, I didn't break my ankle...",
         "body": "<img class=\"size-thumbnail wp-image-55 alignleft\" title=\"photo-33\" src=\"http://outsidetheworld.com/blog/wp-content/uploads/2009/04/photo-33-150x150.jpg\" alt=\"photo-33\" width=\"150\" height=\"150\" />I don\u2019t believe that I\u2019m a particularly accident-prone guy.  But I have to finally cede the fact that I have been to the hospital a fair share more times than the average 30 year old.  I found my way back to the ER this past Tuesday, when it felt like I snapped my foot off at the ankle during a night of basketball.  An unfortunate drive to the hoop and an awkward landing on someone\u2019s foot was all I needed to ruin my evening (and more).\n\nThank goodness it was only a sprain.  Everyone who witnessed it was certain of a break, and I had little reason to dispute their observations.  I have never felt such intense pain in my life.  It was almost enough to make me give up the game.  Almost.  Not quite enough, though.  \n\nThe good news is that it\u2019s only been a week since the injury and I\u2019m walking again.  Very little limping going on, except in the morning.  The wife says I look like the Tin Man, with my unsightly shuffle-step.\n\nI felt bad that I injured myself only a day before we left for Utah.  We tried to make the most of it, keeping our plans intact for the majority of the time.  I could do very little to help out; injuring the right foot meant that I couldn't even drive.  The best I could do was hold SaraJane when I was being carted around in a wheelchair.  \n\nWe saw plenty of family and a few friends.  There never seems to be enough time to see everyone.  I\u2019m sure that if we ran around enough, we could have.  But then we\u2019d have needed the \u201cvacation from the vacation\u201d that you hear about so often.\n\nA minor note about the drive home; it seems that a bit more faith in Google Maps might be in order.  About 100 miles or so  before we reached the normal turnoff to the 20, we decided to try driving through Las Vegas.  I had never done it before, but had heard good things about it.  Every so often, I would double-check my route on the trusty iPhone, wanting to be sure that I had everything in order.\n\nEach time, Google Maps tried to get me to get myself back to highway 89.  Even when I had passed Cedar City, it again tried to get me to rethink my strategy and pull back for the normal route.  My wife and I thought the program had gone bananas, and thusly ignored its suggestions.\n\nI should have taken the hint when I finally passed through Las Vegas, and the iPhone informed me that I should hug the Arizona-California border and head home that way.  Seemed like an awful waste of time to me.  Oh, how wrong we were.  Never again will I pass that route.  Driving to Mesa from the 93/60 is the worst route imaginable.   \n\nFinally, a happy birthday to my newest nephew, Parker Bowden.  Parker was born today, weighing in at 6 lb. 13 oz.  Welcome to the world, little buddy.  You\u2019ve got yourself quite the family to enjoy the journey with."
     },
     {
@@ -1949,7 +1949,7 @@ const wayback_raw_dump = [
         "file": "2009-04-23-04-22-09---Sleep-doesn--39-t-c.md",
         "year": "2009",
         "date": "April 23, 2009",
-        "title": "04/22/09 - Sleep doesn&39;t come easily at 9pm",
+        "title": "04/22/09 - Sleep doesn't come easily at 9pm",
         "body": "So far, no updates from the hospital, so I doubt I'll be volunteering there this week.  I'd just like to know, you know?  Because knowing helps you feel better about the time when you didn't know.  So it will be a few more weeks of waiting.  I'm excited to get out of the house a little bit, gather some outside stimuli to dust off the cobwebs in my mind.  Sometimes when I write, I feel like I am peeling away at old information.\n\nSome points of excitement for me, as I'm getting iLife and iWork tomorrow for my little Dell Macbook.  The thing that worries me is whether I'll have enough room for all the neat programs they come with.  I really only want Pages from the iWork suite, and really want to try out iPhoto from the iLife collection.  iPhoto has some great features that should make my thousands of digital photos easier to find.  And Pages just removes the clutter while you write.  I find it harder and harder to write with all that can distract you on this screen.\n\nThe family is gearing up for the trip to Utah next week; we're leaving the heat.  I just hope it doesn't snow while we're there.  I'd like to take at least one trip up into the mountains, you know?  Hike a little bit (lot).  I'm not much for skiing anymore, so the less snow on the mounts, the better.\n\nI don't put nearly enough pictures on this blog, I know.  It's extremely difficult to do with my blogging tool.  You're thinking to yourself, \"Didn't you change the whole thing so it would be easier?\"  Yes, yes I did.  And in the process, added 8 more steps.  I could be back to the old format before you know it.\n\nTalked to Sumner's teacher a little bit after school today, seems the lad can't stay in his seat.  Most other aspects of his behavior in the classroom are steady for now, but the chair is his mortal enemy, it seems.  Strangely, this makes me smile, only because that trait is so much like his pop.  In so many ways, he has the charisma and predilections of his dear mommy, so whenever I get to mark one in the daddy column, I like it.  \n\nNo, I never wanted to stay in my seat.  In my young mind, there were about 50 other things that I would rather be doing, or seeing, or experimenting with, and I was actively categorizing them in my mind for later activity.  I see the same in Sumner.\n\nAs far as SaraJane goes, she cut two more teeth in the past week, with a few more looking ripe for  departure.  She's also cruising around the couches more and more, looking braver for that first big step away from the hand hold. \n\nIt breaks my heart to see her grow so fast, because little girls turn into big girls, and big girls turn into young women that find a way to get married.  18 years is never enough with a daughter.  I hope that, somehow, she sees how much her daddy loves her.\n\nMy goodness, I've reached the magical 500 work threshold yet again.  That's more than enough.  Goodnight, and thanks for reading."
     },
     {

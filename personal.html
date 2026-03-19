@@ -574,6 +574,42 @@
             line-height: 1.1;
         }
 
+        .post-stats {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin: 0 0 24px 0;
+        }
+
+        .post-stat {
+            min-width: 118px;
+            padding: 12px 16px;
+            border: 1px solid var(--reader-border);
+            background: rgba(255, 255, 255, 0.025);
+            font-family: var(--font-code);
+            font-size: 0.72rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--reader-muted);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .post-stat strong {
+            font-family: var(--font-code);
+            font-weight: 400;
+            letter-spacing: 4px;
+            color: var(--reader-heading);
+            text-shadow: none;
+        }
+
+        .feed-column[data-reader-mode="light"] .post-stat,
+        .feed-column[data-reader-mode="sepia"] .post-stat {
+            background: rgba(0, 0, 0, 0.03);
+        }
+
         .feed-column #md-render {
             color: var(--reader-text);
         }
@@ -639,6 +675,15 @@
             .reader-select {
                 width: 160px;
                 text-align: right;
+            }
+
+            .post-stats {
+                gap: 10px;
+            }
+
+            .post-stat {
+                flex: 1 1 150px;
+                min-width: 0;
             }
         }
 
@@ -1841,6 +1886,22 @@
                 .join('');
         }
 
+        function getPostMetrics(body) {
+            const plainText = String(body || '')
+                .replace(/!\[[^\]]*\]\([^)]+\)/g, ' ')
+                .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+                .replace(/[`*_>#-]/g, ' ')
+                .replace(/\n+/g, ' ')
+                .replace(/\s+/g, ' ')
+                .trim();
+
+            const words = plainText ? plainText.split(/\s+/).length : 0;
+            const chars = plainText.length;
+            const readMin = Math.max(1, Math.round(words / 200));
+
+            return { words, chars, readMin };
+        }
+
         // --- THE VISUAL FLAIR ---
         function runTypewriterProtocol() {
             const state1 = "SYNCHRONIZING...";
@@ -1961,11 +2022,26 @@
                 // 2. SLICE the array based on your limit
                 const displayFeed = current_narrative.slice(0, postsToShow);
 
-                contentArea.innerHTML = displayFeed.map((post) => {
+                contentArea.innerHTML = displayFeed.map((post, index) => {
+                    const statsMarkup = index === 0
+                        ? (() => {
+                            const metrics = getPostMetrics(post.body);
+                            return `
+      <div class="post-stats" aria-label="Post statistics">
+        <div class="post-stat"><span>Words:</span> <strong>${metrics.words}</strong></div>
+        <div class="post-stat"><span>Chars:</span> <strong>${metrics.chars}</strong></div>
+        <div class="post-stat"><span>Read:</span> <strong>${metrics.readMin} min</strong></div>
+      </div>
+    `;
+                        })()
+                        : '';
+
                     return `
     <article class="residue-signal" style="margin-bottom: 80px;"> <div class="post-meta-date">
         ${post.date.toUpperCase()}
       </div>
+
+      ${statsMarkup}
 
       <h2 class="post-title">${post.title}</h2>
 
