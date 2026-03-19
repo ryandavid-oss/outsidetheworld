@@ -212,6 +212,54 @@
             letter-spacing: 3px;
         }
 
+        .entry-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+
+        .entry-toolbar .entry-meta {
+            margin-bottom: 0;
+        }
+
+        .share-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .share-btn,
+        .share-status {
+            font-family: 'Fira Code';
+            font-size: 0.58rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .share-btn {
+            border: 1px solid rgba(145, 175, 179, 0.18);
+            background: rgba(145, 175, 179, 0.04);
+            color: var(--brand-teal);
+            padding: 9px 12px;
+            cursor: pointer;
+            transition: 0.25s ease;
+        }
+
+        .share-btn:hover {
+            border-color: var(--brand-teal);
+            background: rgba(145, 175, 179, 0.08);
+            color: #fff;
+        }
+
+        .share-status {
+            color: var(--text-muted);
+            opacity: 0.85;
+        }
+
         .entry-body {
             font-family: 'Merriweather', serif;
             font-size: 1.1rem;
@@ -310,6 +358,15 @@
                 font-size: 1.8rem;
             }
 
+            .entry-toolbar {
+                margin-bottom: 34px;
+                gap: 12px;
+            }
+
+            .share-controls {
+                width: 100%;
+            }
+
             .back-nav {
                 display: none;
             }
@@ -362,6 +419,85 @@
     <script>
         let groupedMatrix = {};
 
+        function slugify(value) {
+            return String(value || '')
+                .toLowerCase()
+                .replace(/&/g, ' and ')
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/^-+|-+$/g, '');
+        }
+
+        function buildPostId(post) {
+            return `${post.date || 'undated'}--${slugify(post.title || 'untitled')}`;
+        }
+
+        function buildShareUrl(post) {
+            const url = new URL(window.location.href);
+            url.searchParams.set('post', buildPostId(post));
+            return url.toString();
+        }
+
+        async function copyToClipboard(text) {
+            try {
+                await navigator.clipboard.writeText(text);
+                return true;
+            } catch {
+                const ta = document.createElement('textarea');
+                ta.value = text;
+                ta.style.position = 'fixed';
+                ta.style.left = '-9999px';
+                document.body.appendChild(ta);
+                ta.select();
+                const ok = document.execCommand('copy');
+                ta.remove();
+                return ok;
+            }
+        }
+
+        async function sharePostLink(index) {
+            const post = current_narrative[index];
+            if (!post) return;
+
+            const shareUrl = buildShareUrl(post);
+            const shareTitle = post.title || 'Residue Archive Entry';
+            const statusEl = document.getElementById('share-status');
+
+            try {
+                if (navigator.share) {
+                    await navigator.share({
+                        title: shareTitle,
+                        text: `${shareTitle} // Outside The World`,
+                        url: shareUrl
+                    });
+                    if (statusEl) statusEl.textContent = 'LINK_SHARED';
+                    return;
+                }
+
+                const ok = await copyToClipboard(shareUrl);
+                if (statusEl) statusEl.textContent = ok ? 'LINK_COPIED' : 'COPY_FAILED';
+            } catch {
+                if (statusEl) statusEl.textContent = 'SHARE_CANCELLED';
+            }
+        }
+
+        function findPostIndexById(postId) {
+            if (!postId || typeof current_narrative === 'undefined') return -1;
+            return current_narrative.findIndex((post) => buildPostId(post) === postId);
+        }
+
+        function updateUrlForPost(post, replace = false) {
+            const url = new URL(window.location.href);
+            url.searchParams.set('post', buildPostId(post));
+            const next = `${url.pathname}${url.search}${url.hash}`;
+            const state = { postId: buildPostId(post) };
+
+            if (replace) {
+                history.replaceState(state, '', next);
+            } else {
+                history.pushState(state, '', next);
+            }
+        }
+
         function initMatrix() {
             if (typeof current_narrative === 'undefined') return;
 
@@ -385,8 +521,17 @@
             });
 
             if (years.length > 0) {
-                renderYear(years[0]);
-                displayEntry(groupedMatrix[years[0]][Object.keys(groupedMatrix[years[0]])[0]][0].originalIndex);
+                const requestedPostId = new URLSearchParams(window.location.search).get('post');
+                const requestedIndex = findPostIndexById(requestedPostId);
+                const initialIndex = requestedIndex >= 0
+                    ? requestedIndex
+                    : groupedMatrix[years[0]][Object.keys(groupedMatrix[years[0]])[0]][0].originalIndex;
+                const initialPost = current_narrative[initialIndex];
+                const initialYear = initialPost.date.split(' ').slice(-1)[0];
+
+                yearSelect.value = initialYear;
+                renderYear(initialYear);
+                displayEntry(initialIndex, { replaceUrl: true });
             }
         }
 
@@ -404,9 +549,9 @@
                     const item = document.createElement('div');
                     item.className = 'post-item';
                     item.id = `item-${post.originalIndex}`;
+                    item.dataset.postId = buildPostId(post);
                     item.onclick = () => {
                         displayEntry(post.originalIndex);
-                        // FINESSE: Auto-scroll on mobile
                         if (window.innerWidth <= 1024) {
                             document.getElementById('scroll-target').scrollIntoView({ behavior: 'smooth' });
                         }
@@ -419,9 +564,10 @@
 
         function updateYear() { renderYear(document.getElementById('year-select').value); }
 
-        function displayEntry(index) {
+        function displayEntry(index, options = {}) {
             const container = document.getElementById('glass-container');
             const post = current_narrative[index];
+            if (!post) return;
 
             document.body.style.background = `radial-gradient(circle at top left, rgba(155, 89, 182, 0.1) 0%, var(--bg-dark) 100%)`;
             container.classList.remove('visible');
@@ -429,11 +575,16 @@
             setTimeout(() => {
                 container.innerHTML = `
                     <h1 class="entry-title">${post.title}</h1>
-                    <div class="entry-meta">TEMPORAL_MARK: ${post.date.toUpperCase()}</div>
+                    <div class="entry-toolbar">
+                        <div class="entry-meta">TEMPORAL_MARK: ${post.date.toUpperCase()}</div>
+                        <div class="share-controls">
+                            <button type="button" class="share-btn" onclick="sharePostLink(${index})">COPY / SHARE LINK</button>
+                            <span class="share-status" id="share-status">SHAREABLE_ARCHIVE_SIGNAL</span>
+                        </div>
+                    </div>
                     <div class="entry-body">${marked.parse(post.body)}</div>
                 `;
                 container.classList.add('visible');
-                // On desktop, only reset the scroll of the pane, not the whole page
                 if (window.innerWidth > 1024) {
                     document.getElementById('scroll-target').scrollTop = 0;
                 }
@@ -442,7 +593,21 @@
             document.querySelectorAll('.post-item').forEach(el => el.classList.remove('active'));
             const activeItem = document.getElementById(`item-${index}`);
             if (activeItem) activeItem.classList.add('active');
+
+            updateUrlForPost(post, Boolean(options.replaceUrl));
         }
+
+        window.addEventListener('popstate', () => {
+            const postId = new URLSearchParams(window.location.search).get('post');
+            const index = findPostIndexById(postId);
+            if (index >= 0) {
+                const post = current_narrative[index];
+                const year = post.date.split(' ').slice(-1)[0];
+                document.getElementById('year-select').value = year;
+                renderYear(year);
+                displayEntry(index, { replaceUrl: true });
+            }
+        });
 
         window.onload = initMatrix;
     </script>
