@@ -262,6 +262,34 @@
       color: var(--page-teal);
     }
 
+    .poem-share {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin: -20px 0 32px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: #9cb9c0;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: color 0.24s ease, transform 0.24s ease;
+    }
+
+    .poem-share:hover,
+    .poem-share:focus-visible {
+      color: var(--page-lilac);
+      transform: translateY(-1px);
+      outline: none;
+    }
+
+    .poem-share-status {
+      color: #7f8f95;
+    }
+
     .poem-body {
       font-family: 'IBM Plex Serif', serif;
       font-size: 1.08rem;
@@ -436,6 +464,55 @@
       return livingVerse.findIndex((poem) => poem.id === poemId);
     }
 
+    function buildShareUrl(poem) {
+      const url = new URL(window.location.href);
+      url.searchParams.set('poem', poem.id || '');
+      return url.toString();
+    }
+
+    async function copyToClipboard(text) {
+      try {
+        await navigator.clipboard.writeText(text);
+        return true;
+      } catch {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.left = '-9999px';
+        document.body.appendChild(ta);
+        ta.select();
+        const ok = document.execCommand('copy');
+        ta.remove();
+        return ok;
+      }
+    }
+
+    async function sharePoemLink(index) {
+      const poem = livingVerse[index];
+      if (!poem) return;
+
+      const shareUrl = buildShareUrl(poem);
+      const shareTitle = poem.title || 'Living Verse Entry';
+      const statusEl = document.getElementById('share-status');
+
+      try {
+        if (navigator.share) {
+          await navigator.share({
+            title: shareTitle,
+            text: `${shareTitle} // Outside The World`,
+            url: shareUrl
+          });
+          if (statusEl) statusEl.textContent = 'LINK_SHARED';
+          return;
+        }
+
+        const ok = await copyToClipboard(shareUrl);
+        if (statusEl) statusEl.textContent = ok ? 'LINK_COPIED' : 'COPY_FAILED';
+      } catch {
+        if (statusEl) statusEl.textContent = 'SHARE_CANCELLED';
+      }
+    }
+
     function displayPoem(index, options = {}) {
       const container = document.getElementById('glass-container');
       const poem = livingVerse[index];
@@ -456,6 +533,10 @@
           </div>
           <h1 class="poem-title">${poem.title}</h1>
           <div class="poem-meta">ORIGIN: ${poem.date}</div>
+          <button class="poem-share" type="button" onclick="sharePoemLink(${index})">
+            <span>COPY / SHARE LINK</span>
+            <span class="poem-share-status" id="share-status">READY</span>
+          </button>
           <div class="poem-body">${poem.body}</div>
           <div class="poem-note">This page is reserved for poems recovered outside the primary archive and for newer verse that deserves its own running ledger.</div>
         `;
