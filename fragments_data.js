@@ -1,5 +1,10 @@
 window.otw_fragments = [
   {
+    "timestamp": "2026-03-20T00:03:00.000Z",
+    "text": "I can neither confirm nor deny what my thoughts are on bedtime, tonight. \n\nI would like to ask for 6 extra hours today, however.",
+    "tag": "RESIDUE"
+  },
+  {
     "timestamp": "2026-03-19T18:53:13.651Z",
     "text": "Minor alert: your perfectionism has mistaken itself for taste again.",
     "tag": "OTW_BOT",
