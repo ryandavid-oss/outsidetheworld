@@ -16,6 +16,7 @@
     <meta name="description"
         content="Outside The World is a personal archive and professional practice spanning 25 years of writing, photography, systems thinking, and digital archaeology in Queen Creek, Arizona." />
     <link rel="canonical" href="https://outsidetheworld.com/" />
+    <link rel="alternate" type="application/atom+xml" title="Outside The World Atom Feed" href="https://outsidetheworld.com/atom.xml" />
 
     <link href="favicon.svg" rel="icon" type="image/svg+xml" />
 
@@ -838,6 +839,53 @@
             animation: revealUp 0.95s 0.42s both;
         }
 
+        .feed-subscribe {
+            display: flex;
+            justify-content: center;
+            margin-top: 12px;
+            padding: 0 6px;
+            animation: revealUp 0.95s 0.38s both;
+        }
+
+        .feed-subscribe a {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            min-height: 38px;
+            padding: 0 14px;
+            border-radius: 999px;
+            border: 1px solid rgba(155, 89, 182, 0.34);
+            background: rgba(155, 89, 182, 0.06);
+            color: rgba(224, 191, 184, 0.92);
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.74rem;
+            font-weight: 600;
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition:
+                border-color 0.28s var(--ease),
+                color 0.28s var(--ease),
+                transform 0.28s var(--ease),
+                background 0.28s var(--ease),
+                box-shadow 0.28s var(--ease);
+        }
+
+        .feed-subscribe a::before {
+            content: "↗";
+            font-size: 0.82rem;
+            color: var(--amethyst);
+        }
+
+        .feed-subscribe a:hover,
+        .feed-subscribe a:focus-visible {
+            transform: translateY(-1px);
+            color: var(--text);
+            border-color: rgba(155, 89, 182, 0.62);
+            background: rgba(155, 89, 182, 0.11);
+            box-shadow: 0 0 22px rgba(155, 89, 182, 0.14);
+        }
+
         .support-meta {
             margin: 2px 0 0;
             text-align: center;
@@ -979,6 +1027,11 @@
             .support-band {
                 padding: 10px 54px 0;
             }
+
+            .feed-subscribe {
+                justify-content: flex-end;
+                padding-right: 54px;
+            }
         }
 
         @media (max-width: 640px) {
@@ -1043,6 +1096,11 @@
             .support-band {
                 padding-left: 0;
                 padding-right: 0;
+            }
+
+            .feed-subscribe {
+                justify-content: center;
+                padding: 0;
             }
         }
 
@@ -1189,6 +1247,10 @@
                         </div>
                     </a>
                 </section>
+
+                <div class="feed-subscribe">
+                    <a href="atom.xml">Subscribe via Atom</a>
+                </div>
 
                 <section class="support-band" aria-label="Supporting links">
                     <nav class="secondary-nav" aria-label="Secondary navigation">
