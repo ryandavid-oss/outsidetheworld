@@ -234,6 +234,352 @@
       gap: 14px;
     }
 
+    .workspace {
+      display: none;
+    }
+
+    .workspace.is-active {
+      display: block;
+    }
+
+    .app-home {
+      display: grid;
+      gap: 14px;
+      padding-top: 8px;
+      justify-items: center;
+    }
+
+    .app-home-label {
+      margin: 0 0 2px;
+      min-height: 44px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(145, 175, 179, 0.22);
+      background: linear-gradient(180deg, rgba(145, 175, 179, 0.14), rgba(145, 175, 179, 0.06));
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18);
+      color: var(--brand-teal);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    body[data-theme="light"] .app-home-label {
+      box-shadow: 0 12px 26px rgba(27, 54, 93, 0.08);
+    }
+
+    .app-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px 12px;
+      align-items: start;
+      width: 100%;
+      max-width: 560px;
+    }
+
+    .app-tile {
+      appearance: none;
+      width: 100%;
+      text-align: center;
+      padding: 10px 8px 6px;
+      border-radius: 20px;
+      border: none;
+      background: transparent;
+      box-shadow: none;
+      color: var(--text-main);
+      cursor: pointer;
+      transition: transform 0.25s var(--ease), background 0.25s var(--ease);
+    }
+
+    .app-tile:hover,
+    .app-tile:focus-visible {
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.03);
+      outline: none;
+    }
+
+    body[data-theme="light"] .app-tile:hover,
+    body[data-theme="light"] .app-tile:focus-visible {
+      background: rgba(255, 255, 255, 0.38);
+    }
+
+    .app-tile:disabled,
+    .app-tile[aria-disabled="true"] {
+      cursor: default;
+    }
+
+    .app-tile:disabled:hover,
+    .app-tile[aria-disabled="true"]:hover,
+    .app-tile:disabled:focus-visible,
+    .app-tile[aria-disabled="true"]:focus-visible {
+      transform: none;
+      background: transparent;
+    }
+
+    .app-icon {
+      width: 78px;
+      height: 78px;
+      margin: 0 auto 12px;
+      border-radius: 22px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.02));
+      display: grid;
+      place-items: center;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+    }
+
+    .app-icon svg {
+      width: 42px;
+      height: 42px;
+      display: block;
+    }
+
+    .app-icon img {
+      width: 42px;
+      height: 42px;
+      display: block;
+    }
+
+    .app-icon.fragments-icon {
+      color: var(--brand-blue);
+      box-shadow: inset 0 0 0 1px rgba(99, 149, 238, 0.08);
+    }
+
+    .app-icon.changelog-icon {
+      color: var(--brand-teal);
+      box-shadow: inset 0 0 0 1px rgba(145, 175, 179, 0.08);
+    }
+
+    body[data-theme="light"] .app-icon {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.52));
+      border-color: rgba(27, 54, 93, 0.1);
+      box-shadow: inset 0 0 0 1px rgba(27, 54, 93, 0.03), 0 10px 20px rgba(27, 54, 93, 0.06);
+    }
+
+    body[data-theme="light"] .app-icon img {
+      filter: saturate(0.95) contrast(1.02);
+    }
+
+    .app-tile-label {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+
+    .app-tile-meta {
+      margin: 4px 0 0;
+      color: var(--text-faint);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .app-tile-meta:empty {
+      display: none;
+    }
+
+    .app-tile-copy {
+      display: none;
+    }
+
+    .app-statebar {
+      display: none;
+    }
+
+    .app-state {
+      color: var(--text-faint);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .app-arrow {
+      color: var(--text-faint);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.92rem;
+    }
+
+    .back-home-btn {
+      display: none;
+      appearance: none;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-soft);
+      min-height: 42px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: 0.25s var(--ease);
+    }
+
+    .back-home-btn.is-visible {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .back-home-btn:hover,
+    .back-home-btn:focus-visible {
+      color: var(--text-main);
+      border-color: var(--brand-blue);
+      background: rgba(160, 190, 245, 0.08);
+      outline: none;
+    }
+
+    .workspace-nav {
+      display: flex;
+      justify-content: flex-end;
+      margin: 0 0 10px;
+    }
+
+    .coming-panel {
+      padding: 18px;
+    }
+
+    .coming-card {
+      padding: 18px;
+      border-radius: 24px;
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.028));
+    }
+
+    .coming-card h2 {
+      margin: 0 0 10px;
+      font-family: "IBM Plex Serif", serif;
+      font-size: 1.5rem;
+      letter-spacing: -0.03em;
+    }
+
+    .coming-card p {
+      margin: 0;
+      color: var(--text-soft);
+      line-height: 1.75;
+    }
+
+    .bot-shell {
+      display: grid;
+      gap: 14px;
+    }
+
+    .bot-hero {
+      padding: 26px 22px;
+      text-align: center;
+    }
+
+    .bot-mark {
+      width: 94px;
+      height: 94px;
+      margin: 0 auto 16px;
+      display: block;
+    }
+
+    .bot-kicker {
+      margin: 0 0 8px;
+      color: var(--amethyst);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .bot-title {
+      margin: 0;
+      font-family: "IBM Plex Serif", serif;
+      font-size: clamp(2rem, 5vw, 2.8rem);
+      line-height: 0.98;
+      letter-spacing: -0.05em;
+    }
+
+    .bot-copy {
+      margin: 14px auto 0;
+      max-width: 32rem;
+      color: var(--text-soft);
+      line-height: 1.75;
+    }
+
+    .bot-actions {
+      display: flex;
+      justify-content: center;
+      margin-top: 18px;
+    }
+
+    .bot-status {
+      margin: 0;
+      padding: 14px 16px;
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text-soft);
+      text-align: center;
+      line-height: 1.7;
+    }
+
+    .log-card {
+      padding: 18px;
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.028));
+      border: 1px solid var(--border);
+    }
+
+    .log-meta {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      color: var(--text-faint);
+    }
+
+    .log-date {
+      color: var(--brand-teal);
+    }
+
+    .log-type {
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 3px 7px;
+      color: var(--text-soft);
+      border-radius: 999px;
+    }
+
+    .log-message {
+      margin: 0;
+      font-family: "IBM Plex Serif", serif;
+      font-size: 1.04rem;
+      line-height: 1.62;
+      color: var(--text-main);
+    }
+
+    .recent-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .recent-item {
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.035);
+    }
+
+    .recent-empty {
+      margin: 0;
+      color: var(--text-soft);
+      line-height: 1.7;
+    }
+
     .panel {
       background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.028));
       border: 1px solid var(--border);
@@ -704,6 +1050,10 @@
       .layout {
         grid-template-columns: 1fr;
       }
+
+      .app-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
     }
 
     @media (max-width: 640px) {
@@ -772,6 +1122,28 @@
         max-width: none;
         text-align: left;
       }
+
+      .app-home {
+        padding-top: 2px;
+      }
+
+      .app-icon {
+        width: 70px;
+        height: 70px;
+      }
+
+      .app-home-label {
+        width: 100%;
+      }
+
+      .bot-hero {
+        padding: 22px 18px;
+      }
+
+      .bot-mark {
+        width: 82px;
+        height: 82px;
+      }
     }
   </style>
 </head>
@@ -794,6 +1166,7 @@
             <div class="field">
               <label for="publishKeyInput">Publish Key</label>
               <input id="publishKeyInput" name="publishKeyInput" type="password" autocomplete="off" placeholder="Stored locally on this device" />
+              <div class="helper" id="publishKeyStatus">No publish key saved on this device.</div>
               <div class="helper">Used only for secure Worker publishing. Saved locally on this device, never in the repo.</div>
             </div>
             <div class="action-row" style="margin-top: 0;">
@@ -807,6 +1180,69 @@
       </div>
     </header>
 
+    <section class="workspace app-home is-active" id="homeWorkspace">
+      <p class="app-home-label">Private OTW Tool Suite</p>
+      <div class="app-grid" aria-label="Publisher tools">
+        <button class="app-tile fragments-tile" id="openFragmentsApp" type="button">
+          <div class="app-icon fragments-icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 13h30"></path>
+              <path d="M9 24h22"></path>
+              <path d="M9 35h16"></path>
+              <path d="M34 19l5 5-5 5"></path>
+            </svg>
+          </div>
+          <h2 class="app-tile-label">Fragments</h2>
+          <p class="app-tile-meta"></p>
+        </button>
+
+        <button class="app-tile changelog-tile" id="openChangelogApp" type="button">
+          <div class="app-icon changelog-icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="11" y="9" width="26" height="30" rx="4"></rect>
+              <path d="M18 18h12"></path>
+              <path d="M18 25h12"></path>
+              <path d="M18 32h7"></path>
+            </svg>
+          </div>
+          <h2 class="app-tile-label">Changelog</h2>
+          <p class="app-tile-meta">Coming Soon</p>
+        </button>
+
+        <button class="app-tile" id="openSiteApp" type="button">
+          <div class="app-icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="10" y="10" width="28" height="28" rx="8" stroke="#D9C08C"></rect>
+              <path d="M19 29L29 19" stroke="#6395EE"></path>
+              <path d="M21 19H29V27" stroke="#91AFB3"></path>
+            </svg>
+          </div>
+          <h2 class="app-tile-label">Open OTW</h2>
+          <p class="app-tile-meta"></p>
+        </button>
+
+        <button class="app-tile" type="button" disabled aria-disabled="true">
+          <div class="app-icon" aria-hidden="true">
+            <img src="Images/ghost_writer_lite_icon.svg" alt="" />
+          </div>
+          <h2 class="app-tile-label">Ghost-writer Lite</h2>
+          <p class="app-tile-meta">Coming Soon</p>
+        </button>
+
+        <button class="app-tile" id="openBotApp" type="button">
+          <div class="app-icon" aria-hidden="true">
+            <img src="Images/otw_bot_summon_icon.svg" alt="" />
+          </div>
+          <h2 class="app-tile-label">Summon OTW_Bot</h2>
+          <p class="app-tile-meta"></p>
+        </button>
+      </div>
+    </section>
+
+    <section class="workspace" id="fragmentsWorkspace">
+    <div class="workspace-nav">
+      <button class="back-home-btn" id="backHomeBtn" type="button">Back to hub</button>
+    </div>
     <div class="layout">
       <main class="panel composer">
         <div class="status-line" id="statusLine">Drafts save locally on this device. Stage a fragment to add it to the outbox and copy JSON for later publishing.</div>
@@ -895,6 +1331,95 @@
         </section>
       </aside>
     </div>
+    </section>
+
+    <section class="workspace" id="changelogWorkspace">
+      <div class="workspace-nav">
+        <button class="back-home-btn" id="backHomeBtnChangelog" type="button">Back to hub</button>
+      </div>
+      <div class="layout">
+        <main class="panel composer">
+          <div class="status-line" id="changelogStatusLine">Quick-drop mode: write one clean update, then stage or export it without fighting JSON by hand.</div>
+
+          <form class="form-grid" id="changelogForm">
+            <div class="meta-row">
+              <div class="field">
+                <label for="changelogDate">Date</label>
+                <input id="changelogDate" name="changelogDate" type="date" />
+              </div>
+
+              <div class="field">
+                <label for="changelogType">Type</label>
+                <select id="changelogType" name="changelogType">
+                  <option value="Feature">Feature</option>
+                  <option value="Fix">Fix</option>
+                  <option value="Tweak">Tweak</option>
+                  <option value="Docs">Docs</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="changelogText">What changed?</label>
+              <textarea id="changelogText" name="changelogText" placeholder="Describe the change in one clear line or short paragraph. Keep it useful to future-you."></textarea>
+              <div class="char-count" id="changelogCharCount">0 characters</div>
+            </div>
+
+            <div class="action-row">
+              <button class="primary-btn" id="changelogPublishBtn" type="button">Publish Now</button>
+              <button class="primary-btn" id="changelogStageBtn" type="submit">Stage Entry</button>
+              <button class="secondary-btn" id="changelogCopyBtn" type="button">Copy Latest JSON</button>
+              <button class="secondary-btn" id="changelogDownloadBtn" type="button">Download Outbox</button>
+              <button class="secondary-btn" id="changelogClearBtn" type="button">Clear Draft</button>
+            </div>
+          </form>
+        </main>
+
+        <aside class="side-stack">
+          <section class="panel preview-panel">
+            <h2 class="section-title">Entry Preview</h2>
+            <article class="log-card">
+              <div class="log-meta">
+                <span class="log-date" id="changelogPreviewDate">Today</span>
+                <span class="log-type" id="changelogPreviewType">Other</span>
+              </div>
+              <p class="log-message" id="changelogPreviewText">Your changelog entry preview will appear here.</p>
+            </article>
+          </section>
+
+          <section class="panel outbox-panel">
+            <h2 class="section-title">Outbox</h2>
+            <p class="helper" style="margin: 0 0 12px;">Staged changelog entries remain on this device until you export them or merge them on your Mac.</p>
+            <p class="helper" style="margin: 0 0 16px;">On your Mac, import the downloaded JSON with <code>python3 tools/import_changelog_outbox.py ~/Downloads/changelog-outbox-YYYY-MM-DD.json</code>.</p>
+            <div class="outbox-list" id="changelogOutboxList"></div>
+          </section>
+
+          <section class="panel outbox-panel">
+            <h2 class="section-title">Recent Log</h2>
+            <div class="recent-list" id="changelogRecentList"></div>
+          </section>
+        </aside>
+      </div>
+    </section>
+
+    <section class="workspace" id="botWorkspace">
+      <div class="workspace-nav">
+        <button class="back-home-btn" id="backHomeBtnBot" type="button">Back to hub</button>
+      </div>
+      <div class="bot-shell">
+        <section class="panel bot-hero">
+          <img class="bot-mark" src="Images/otw_bot_summon_icon.svg" alt="OTW_Bot" />
+          <p class="bot-kicker">Private bot lane</p>
+          <h2 class="bot-title">Summon OTW_Bot</h2>
+          <p class="bot-copy">Deploy one dry little machine-thought into the live fragments feed. The quip stays a surprise. The only thing this lane does is ask for consent, fire the signal, and let the bot wander back into the archive.</p>
+          <div class="bot-actions">
+            <button class="primary-btn" id="botDeployBtn" type="button">Deploy Quip</button>
+          </div>
+        </section>
+        <p class="bot-status panel" id="botStatusLine">OTW_Bot is idle and mildly judgmental.</p>
+      </div>
+    </section>
   </div>
 
   <div class="publish-toast" id="publishToast" role="status" aria-live="polite" aria-atomic="true">
@@ -911,15 +1436,19 @@
   <script>
     const DRAFT_KEY = 'otwFragmentsPublisherDraft';
     const OUTBOX_KEY = 'otwFragmentsPublisherOutbox';
+    const CHANGELOG_DRAFT_KEY = 'otwChangelogPublisherDraft';
+    const CHANGELOG_OUTBOX_KEY = 'otwChangelogPublisherOutbox';
     const THEME_KEY = 'otwFragmentsPublisherTheme';
     const PUBLISH_KEY_STORAGE = 'otwFragmentsPublishKey';
     const PUBLISH_ENDPOINT = 'https://otw-fragments-publish.ryandavid.workers.dev/publish-fragment';
     const PUBLISH_BOT_ENDPOINT = 'https://otw-fragments-publish.ryandavid.workers.dev/publish-bot-fragment';
+    const PUBLISH_CHANGELOG_ENDPOINT = 'https://otw-fragments-publish.ryandavid.workers.dev/publish-changelog-entry';
 
     const textInput = document.getElementById('fragmentText');
     const tagInput = document.getElementById('fragmentTag');
     const timestampInput = document.getElementById('fragmentTimestamp');
     const publishKeyInput = document.getElementById('publishKeyInput');
+    const publishKeyStatus = document.getElementById('publishKeyStatus');
     const charCount = document.getElementById('charCount');
     const statusLine = document.getElementById('statusLine');
     const previewBody = document.getElementById('previewBody');
@@ -936,7 +1465,32 @@
     const publishToastTitle = document.getElementById('publishToastTitle');
     const publishToastCopy = document.getElementById('publishToastCopy');
     const publishToastClose = document.getElementById('publishToastClose');
+    const homeWorkspace = document.getElementById('homeWorkspace');
+    const fragmentsWorkspace = document.getElementById('fragmentsWorkspace');
+    const changelogWorkspace = document.getElementById('changelogWorkspace');
+    const botWorkspace = document.getElementById('botWorkspace');
+    const openFragmentsApp = document.getElementById('openFragmentsApp');
+    const openChangelogApp = document.getElementById('openChangelogApp');
+    const openBotApp = document.getElementById('openBotApp');
+    const openSiteApp = document.getElementById('openSiteApp');
+    const backHomeBtn = document.getElementById('backHomeBtn');
+    const backHomeBtnChangelog = document.getElementById('backHomeBtnChangelog');
+    const backHomeBtnBot = document.getElementById('backHomeBtnBot');
+    const botDeployBtn = document.getElementById('botDeployBtn');
+    const botStatusLine = document.getElementById('botStatusLine');
+    const changelogDateInput = document.getElementById('changelogDate');
+    const changelogTypeInput = document.getElementById('changelogType');
+    const changelogTextInput = document.getElementById('changelogText');
+    const changelogStatusLine = document.getElementById('changelogStatusLine');
+    const changelogCharCount = document.getElementById('changelogCharCount');
+    const changelogPublishBtn = document.getElementById('changelogPublishBtn');
+    const changelogPreviewDate = document.getElementById('changelogPreviewDate');
+    const changelogPreviewType = document.getElementById('changelogPreviewType');
+    const changelogPreviewText = document.getElementById('changelogPreviewText');
+    const changelogOutboxList = document.getElementById('changelogOutboxList');
+    const changelogRecentList = document.getElementById('changelogRecentList');
     let publishToastTimer = null;
+    let loadedChangelog = [];
 
     function escapeHtml(value) {
       return String(value)
@@ -983,6 +1537,19 @@
       }).format(value);
     }
 
+    function formatLogDate(dateString) {
+      if (!dateString) return 'TODAY';
+      const value = new Date(`${dateString}T12:00:00`);
+      if (Number.isNaN(value.getTime())) {
+        return String(dateString).toUpperCase();
+      }
+      return new Intl.DateTimeFormat('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric'
+      }).format(value).toUpperCase();
+    }
+
     function readOutbox() {
       try {
         return JSON.parse(window.localStorage.getItem(OUTBOX_KEY) || '[]');
@@ -1008,8 +1575,40 @@
       window.localStorage.removeItem(DRAFT_KEY);
     }
 
+    function writeChangelogDraft() {
+      const draft = {
+        date: changelogDateInput.value,
+        type: changelogTypeInput.value,
+        text: changelogTextInput.value
+      };
+      window.localStorage.setItem(CHANGELOG_DRAFT_KEY, JSON.stringify(draft));
+    }
+
+    function clearChangelogDraftStorage() {
+      window.localStorage.removeItem(CHANGELOG_DRAFT_KEY);
+    }
+
     function getPublishKey() {
       return window.localStorage.getItem(PUBLISH_KEY_STORAGE) || '';
+    }
+
+    function readChangelogOutbox() {
+      try {
+        return JSON.parse(window.localStorage.getItem(CHANGELOG_OUTBOX_KEY) || '[]');
+      } catch {
+        return [];
+      }
+    }
+
+    function writeChangelogOutbox(items) {
+      window.localStorage.setItem(CHANGELOG_OUTBOX_KEY, JSON.stringify(items));
+    }
+
+    function updatePublishKeyStatus() {
+      const hasStoredKey = Boolean(getPublishKey());
+      publishKeyStatus.textContent = hasStoredKey
+        ? 'Publish key saved on this device.'
+        : 'No publish key saved on this device.';
     }
 
     function showPublishToast(title, copy) {
@@ -1033,15 +1632,26 @@
       }, 1400);
     }
 
+    function celebrateChangelogPublish() {
+      changelogPublishBtn.classList.add('is-success');
+      changelogPublishBtn.textContent = 'Published';
+      window.setTimeout(() => {
+        changelogPublishBtn.classList.remove('is-success');
+        changelogPublishBtn.textContent = 'Publish Now';
+      }, 1400);
+    }
+
     function savePublishKey() {
       const value = publishKeyInput.value.trim();
       if (!value) {
         window.localStorage.removeItem(PUBLISH_KEY_STORAGE);
+        updatePublishKeyStatus();
         statusLine.textContent = 'Publish key cleared from this device.';
         return;
       }
 
       window.localStorage.setItem(PUBLISH_KEY_STORAGE, value);
+      updatePublishKeyStatus();
       statusLine.textContent = 'Publish key saved locally on this device.';
     }
 
@@ -1094,6 +1704,86 @@
       `).join('');
     }
 
+    function buildChangelogEntry() {
+      const date = changelogDateInput.value.trim();
+      const type = (changelogTypeInput.value || 'Other').trim() || 'Other';
+      const text = normalizeFragmentText(changelogTextInput.value).trim();
+
+      if (!date) {
+        throw new Error('Choose a date first. The log needs a clean day stamp.');
+      }
+
+      if (!text) {
+        throw new Error('Write the changelog line first. One useful sentence is enough.');
+      }
+
+      return { date, type, text };
+    }
+
+    function updateChangelogPreview() {
+      const date = changelogDateInput.value || new Date().toISOString().slice(0, 10);
+      const type = (changelogTypeInput.value || 'Other').trim() || 'Other';
+      const text = changelogTextInput.value.trim();
+
+      changelogPreviewDate.textContent = formatLogDate(date);
+      changelogPreviewType.textContent = type.toUpperCase();
+      changelogPreviewText.textContent = text || 'Your changelog entry preview will appear here.';
+      changelogCharCount.textContent = `${changelogTextInput.value.length} characters`;
+    }
+
+    function renderChangelogOutbox() {
+      const items = readChangelogOutbox();
+      if (!items.length) {
+        changelogOutboxList.innerHTML = '<p class="outbox-empty">No staged changelog entries yet. Add one here and it will wait in the outbox.</p>';
+        return;
+      }
+
+      changelogOutboxList.innerHTML = items.map((item) => `
+        <article class="outbox-item">
+          <div class="outbox-item-head">
+            <div class="outbox-item-title">${escapeHtml((item.type || 'Other').toUpperCase())}</div>
+            <div class="helper">${escapeHtml(formatLogDate(item.date || ''))}</div>
+          </div>
+          <p class="outbox-item-copy">${escapeHtml(item.text || '')}</p>
+        </article>
+      `).join('');
+    }
+
+    function renderRecentChangelog() {
+      if (!loadedChangelog.length) {
+        changelogRecentList.innerHTML = '<p class="recent-empty">Recent changelog entries will appear here after the app loads `changelog.json`.</p>';
+        return;
+      }
+
+      changelogRecentList.innerHTML = loadedChangelog.slice(0, 6).map((item) => `
+        <article class="recent-item">
+          <div class="log-meta">
+            <span class="log-date">${escapeHtml(formatLogDate(item.date || ''))}</span>
+            <span class="log-type">${escapeHtml((item.type || 'Other').toUpperCase())}</span>
+          </div>
+          <p class="log-message">${escapeHtml(item.text || '')}</p>
+        </article>
+      `).join('');
+    }
+
+    async function loadRecentChangelog() {
+      try {
+        const response = await fetch('changelog.json', { cache: 'no-store' });
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
+
+        const payload = await response.json();
+        loadedChangelog = Array.isArray(payload)
+          ? payload.slice().sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')))
+          : [];
+      } catch {
+        loadedChangelog = [];
+      }
+
+      renderRecentChangelog();
+    }
+
     function stageFragment(event) {
       event.preventDefault();
       let entry;
@@ -1122,6 +1812,88 @@
       }).catch(() => {
         statusLine.textContent = 'Fragment staged. Clipboard copy failed, but the outbox item was saved locally.';
       });
+    }
+
+    function stageChangelogEntry(event) {
+      event.preventDefault();
+      let entry;
+      try {
+        entry = buildChangelogEntry();
+      } catch (error) {
+        changelogStatusLine.textContent = error.message || 'Could not stage changelog entry.';
+        return;
+      }
+
+      const outbox = readChangelogOutbox();
+      outbox.unshift(entry);
+      writeChangelogOutbox(outbox);
+      clearChangelogDraftStorage();
+
+      changelogTextInput.value = '';
+      changelogTypeInput.value = 'Feature';
+      changelogDateInput.value = new Date().toISOString().slice(0, 10);
+      updateChangelogPreview();
+      renderChangelogOutbox();
+
+      navigator.clipboard.writeText(JSON.stringify(entry, null, 2)).then(() => {
+        changelogStatusLine.textContent = 'Changelog entry staged. JSON copied and saved in the outbox on this device.';
+      }).catch(() => {
+        changelogStatusLine.textContent = 'Changelog entry staged. Clipboard copy failed, but the outbox item was saved locally.';
+      });
+    }
+
+    async function publishChangelogEntry() {
+      let entry;
+      try {
+        entry = buildChangelogEntry();
+      } catch (error) {
+        changelogStatusLine.textContent = error.message || 'Could not publish changelog entry.';
+        return;
+      }
+
+      const publishKey = publishKeyInput.value.trim() || getPublishKey();
+      if (!publishKey) {
+        changelogStatusLine.textContent = 'Add your publish key first so this device can post changelog entries securely.';
+        return;
+      }
+
+      changelogStatusLine.textContent = 'Publishing changelog entry to the OTW Worker...';
+
+      try {
+        const response = await fetch(PUBLISH_CHANGELOG_ENDPOINT, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-publish-key': publishKey
+          },
+          body: JSON.stringify(entry)
+        });
+
+        const payload = await response.json().catch(() => ({}));
+        if (!response.ok || !payload.ok) {
+          throw new Error(payload.error || `Publish failed with status ${response.status}`);
+        }
+
+        if (publishKeyInput.value.trim()) {
+          window.localStorage.setItem(PUBLISH_KEY_STORAGE, publishKeyInput.value.trim());
+          updatePublishKeyStatus();
+        }
+
+        clearChangelogDraftStorage();
+        changelogTextInput.value = '';
+        changelogTypeInput.value = 'Feature';
+        changelogDateInput.value = new Date().toISOString().slice(0, 10);
+        updateChangelogPreview();
+        changelogStatusLine.textContent = 'Changelog entry published successfully. The public log should update shortly.';
+        celebrateChangelogPublish();
+        showPublishToast(
+          'Changelog entry published.',
+          'The public record just picked up a fresh site update.'
+        );
+        loadRecentChangelog();
+      } catch (error) {
+        changelogStatusLine.textContent = error.message || 'Publish failed.';
+      }
     }
 
     async function publishFragment() {
@@ -1184,13 +1956,17 @@
       const publishKey = publishKeyInput.value.trim() || getPublishKey();
       if (!publishKey) {
         statusLine.textContent = 'Add your publish key first so this device can summon OTW_Bot securely.';
+        botStatusLine.textContent = 'A publish key needs to be saved on this device before OTW_Bot can deploy.';
         setMenuState(false);
         return;
       }
 
       statusLine.textContent = 'Summoning OTW_Bot...';
+      botStatusLine.textContent = 'Summoning OTW_Bot...';
       summonBotBtn.disabled = true;
       summonBotBtn.textContent = 'Deploying...';
+      botDeployBtn.disabled = true;
+      botDeployBtn.textContent = 'Deploying...';
 
       try {
         const response = await fetch(PUBLISH_BOT_ENDPOINT, {
@@ -1212,6 +1988,7 @@
         }
 
         statusLine.textContent = 'OTW_Bot deployed successfully. The new quip should appear in the feed shortly.';
+        botStatusLine.textContent = 'OTW_Bot deployed successfully. The new quip should drift into the live feed shortly.';
         showPublishToast(
           'OTW_Bot deployed.',
           'A new quip is on its way to the live feed.'
@@ -1219,9 +1996,12 @@
         setMenuState(false);
       } catch (error) {
         statusLine.textContent = error.message || 'OTW_Bot publish failed.';
+        botStatusLine.textContent = error.message || 'OTW_Bot publish failed.';
       } finally {
         summonBotBtn.disabled = false;
         summonBotBtn.textContent = 'Summon OTW_Bot';
+        botDeployBtn.disabled = false;
+        botDeployBtn.textContent = 'Deploy Quip';
       }
     }
 
@@ -1265,6 +2045,46 @@
       statusLine.textContent = 'Draft cleared on this device.';
     }
 
+    function copyLatestChangelogJson() {
+      const outbox = readChangelogOutbox();
+      if (!outbox.length) {
+        changelogStatusLine.textContent = 'Nothing in the changelog outbox yet. Stage an entry first.';
+        return;
+      }
+
+      navigator.clipboard.writeText(JSON.stringify(outbox[0], null, 2)).then(() => {
+        changelogStatusLine.textContent = 'Latest changelog JSON copied.';
+      }).catch(() => {
+        changelogStatusLine.textContent = 'Clipboard copy failed on this device.';
+      });
+    }
+
+    function downloadChangelogOutbox() {
+      const outbox = readChangelogOutbox();
+      if (!outbox.length) {
+        changelogStatusLine.textContent = 'Nothing to export yet. Stage an entry first.';
+        return;
+      }
+
+      const blob = new Blob([JSON.stringify(outbox, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `changelog-outbox-${new Date().toISOString().slice(0, 10)}.json`;
+      link.click();
+      URL.revokeObjectURL(url);
+      changelogStatusLine.textContent = 'Changelog outbox exported as JSON.';
+    }
+
+    function clearChangelogDraft() {
+      changelogTextInput.value = '';
+      changelogTypeInput.value = 'Feature';
+      changelogDateInput.value = new Date().toISOString().slice(0, 10);
+      clearChangelogDraftStorage();
+      updateChangelogPreview();
+      changelogStatusLine.textContent = 'Changelog draft cleared on this device.';
+    }
+
     function hydrateDraft() {
       try {
         const draft = JSON.parse(window.localStorage.getItem(DRAFT_KEY) || 'null');
@@ -1282,6 +2102,27 @@
       timestampInput.value = toLocalDatetimeValue();
     }
 
+    function hydrateChangelogDraft() {
+      try {
+        const draft = JSON.parse(window.localStorage.getItem(CHANGELOG_DRAFT_KEY) || 'null');
+        if (draft) {
+          changelogDateInput.value = draft.date || new Date().toISOString().slice(0, 10);
+          changelogTypeInput.value = draft.type || 'Feature';
+          changelogTextInput.value = draft.text || '';
+          changelogStatusLine.textContent = 'Recovered the last changelog draft from this device.';
+          return;
+        }
+      } catch {
+        // Ignore malformed local draft state.
+      }
+
+      changelogDateInput.value = new Date().toISOString().slice(0, 10);
+    }
+
+    function getSystemTheme() {
+      return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    }
+
     function applyTheme(theme) {
       const nextTheme = theme === 'light' ? 'light' : 'dark';
       document.body.dataset.theme = nextTheme;
@@ -1289,15 +2130,16 @@
       themeToggle.setAttribute('aria-pressed', String(nextTheme === 'light'));
       publisherLogo.src = nextTheme === 'light' ? 'Images/Equal_dark.svg' : 'Images/Equal.svg';
       document.querySelector('meta[name="theme-color"]').setAttribute('content', nextTheme === 'light' ? '#f4efe6' : '#0a0a0a');
-      window.localStorage.setItem(THEME_KEY, nextTheme);
     }
 
     function hydrateTheme() {
-      applyTheme(window.localStorage.getItem(THEME_KEY) || 'dark');
+      const storedTheme = window.localStorage.getItem(THEME_KEY);
+      applyTheme(storedTheme || getSystemTheme());
     }
 
     function hydratePublishKey() {
       publishKeyInput.value = getPublishKey();
+      updatePublishKeyStatus();
     }
 
     function setMenuState(isOpen) {
@@ -1305,13 +2147,58 @@
       menuToggle.setAttribute('aria-expanded', String(isOpen));
     }
 
+    function setWorkspace(view) {
+      const nextView = ['home', 'fragments', 'changelog', 'bot'].includes(view) ? view : 'home';
+
+      homeWorkspace.classList.toggle('is-active', nextView === 'home');
+      fragmentsWorkspace.classList.toggle('is-active', nextView === 'fragments');
+      changelogWorkspace.classList.toggle('is-active', nextView === 'changelog');
+      botWorkspace.classList.toggle('is-active', nextView === 'bot');
+      backHomeBtn.classList.toggle('is-visible', nextView !== 'home');
+      backHomeBtnChangelog.classList.toggle('is-visible', nextView !== 'home');
+      backHomeBtnBot.classList.toggle('is-visible', nextView !== 'home');
+
+      setMenuState(false);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
     document.getElementById('publisherForm').addEventListener('submit', stageFragment);
+    document.getElementById('changelogForm').addEventListener('submit', stageChangelogEntry);
     document.getElementById('publishBtn').addEventListener('click', publishFragment);
+    document.getElementById('changelogPublishBtn').addEventListener('click', publishChangelogEntry);
     document.getElementById('copyBtn').addEventListener('click', copyLatestJson);
     document.getElementById('downloadBtn').addEventListener('click', downloadOutbox);
     document.getElementById('clearDraftBtn').addEventListener('click', clearDraft);
+    document.getElementById('changelogCopyBtn').addEventListener('click', copyLatestChangelogJson);
+    document.getElementById('changelogDownloadBtn').addEventListener('click', downloadChangelogOutbox);
+    document.getElementById('changelogClearBtn').addEventListener('click', clearChangelogDraft);
     document.getElementById('savePublishKeyBtn').addEventListener('click', savePublishKey);
     summonBotBtn.addEventListener('click', summonOtwBot);
+    openFragmentsApp.addEventListener('click', () => {
+      setWorkspace('fragments');
+      window.setTimeout(() => {
+        textInput.focus();
+      }, 120);
+    });
+    openChangelogApp.addEventListener('click', () => {
+      setWorkspace('changelog');
+    });
+    openBotApp.addEventListener('click', () => {
+      setWorkspace('bot');
+    });
+    openSiteApp.addEventListener('click', () => {
+      window.open('index.html', '_blank', 'noopener,noreferrer');
+    });
+    backHomeBtn.addEventListener('click', () => {
+      setWorkspace('home');
+    });
+    backHomeBtnChangelog.addEventListener('click', () => {
+      setWorkspace('home');
+    });
+    backHomeBtnBot.addEventListener('click', () => {
+      setWorkspace('home');
+    });
+    botDeployBtn.addEventListener('click', summonOtwBot);
     publishToastClose.addEventListener('click', () => {
       publishToast.classList.remove('show');
       if (publishToastTimer) {
@@ -1319,8 +2206,15 @@
       }
     });
     themeToggle.addEventListener('click', () => {
-      applyTheme(document.body.dataset.theme === 'light' ? 'dark' : 'light');
+      const nextTheme = document.body.dataset.theme === 'light' ? 'dark' : 'light';
+      window.localStorage.setItem(THEME_KEY, nextTheme);
+      applyTheme(nextTheme);
       setMenuState(false);
+    });
+    window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', () => {
+      if (!window.localStorage.getItem(THEME_KEY)) {
+        applyTheme(getSystemTheme());
+      }
     });
     menuToggle.addEventListener('click', () => {
       setMenuState(!topbarActions.classList.contains('is-open'));
@@ -1345,6 +2239,17 @@
       });
     });
 
+    [changelogDateInput, changelogTypeInput, changelogTextInput].forEach((element) => {
+      element.addEventListener('input', () => {
+        writeChangelogDraft();
+        updateChangelogPreview();
+      });
+      element.addEventListener('change', () => {
+        writeChangelogDraft();
+        updateChangelogPreview();
+      });
+    });
+
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('fragments_publisher_sw.js', { updateViaCache: 'none' }).then((registration) => {
@@ -1360,8 +2265,13 @@
     hydrateTheme();
     hydratePublishKey();
     hydrateDraft();
+    hydrateChangelogDraft();
     updatePreview();
+    updateChangelogPreview();
     renderOutbox();
+    renderChangelogOutbox();
+    loadRecentChangelog();
+    setWorkspace('home');
   </script>
 </body>
 </html>
