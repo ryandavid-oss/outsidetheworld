@@ -1250,6 +1250,138 @@
         linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.028));
     }
 
+    .iotd-preview-card {
+      display: grid;
+      gap: 18px;
+    }
+
+    .iotd-image-frame {
+      position: relative;
+      overflow: hidden;
+      border-radius: 24px;
+      border: 1px solid var(--border);
+      min-height: 240px;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(circle at top, rgba(75, 227, 110, 0.12), transparent 56%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(7, 11, 16, 0.88));
+    }
+
+    body[data-theme="light"] .iotd-image-frame {
+      background:
+        radial-gradient(circle at top, rgba(75, 227, 110, 0.14), transparent 56%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(229, 238, 233, 0.96));
+    }
+
+    .iotd-image-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .iotd-image-placeholder {
+      display: grid;
+      gap: 12px;
+      justify-items: center;
+      padding: 28px;
+      text-align: center;
+      color: var(--text-soft);
+    }
+
+    .iotd-image-placeholder img {
+      width: 88px;
+      height: 88px;
+      object-fit: contain;
+      display: block;
+      filter: drop-shadow(0 0 18px rgba(75, 227, 110, 0.18));
+    }
+
+    .iotd-image-placeholder strong {
+      color: var(--text-main);
+      font-size: 0.98rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .iotd-kicker {
+      margin: 0;
+      color: var(--brand-teal);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .iotd-title {
+      margin: 0;
+      font-size: clamp(1.9rem, 3vw, 2.5rem);
+      line-height: 0.95;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .iotd-caption {
+      margin: 0;
+      color: var(--text-main);
+      line-height: 1.72;
+      font-size: 1.02rem;
+    }
+
+    .iotd-meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 12px;
+    }
+
+    .iotd-stat {
+      display: grid;
+      gap: 6px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.035);
+    }
+
+    body[data-theme="light"] .iotd-stat {
+      background: rgba(255, 255, 255, 0.52);
+    }
+
+    .iotd-stat-label {
+      color: var(--text-faint);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.66rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .iotd-stat-value {
+      color: var(--text-main);
+      font-size: 0.94rem;
+      line-height: 1.5;
+      word-break: break-word;
+    }
+
+    .iotd-manifest-preview {
+      margin: 0;
+      padding: 18px;
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      background: rgba(4, 8, 12, 0.8);
+      color: #dffbf0;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.8rem;
+      line-height: 1.75;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    body[data-theme="light"] .iotd-manifest-preview {
+      background: rgba(231, 239, 235, 0.95);
+      color: #23453f;
+    }
+
     .ghost-preview-meta {
       margin-bottom: 12px;
       color: var(--brand-teal);
@@ -1852,12 +1984,12 @@
           <p class="app-tile-meta"></p>
         </button>
 
-        <button class="app-tile" type="button" disabled aria-disabled="true">
+        <button class="app-tile" id="openIotdApp" type="button">
           <div class="app-icon" aria-hidden="true">
             <img src="Images/iotd_icon.svg" alt="" />
           </div>
           <h2 class="app-tile-label">IOTD</h2>
-          <p class="app-tile-meta">Coming Soon</p>
+          <p class="app-tile-meta"></p>
         </button>
 
         <button class="app-tile" id="openGhostApp" type="button">
@@ -2108,6 +2240,89 @@
       </div>
     </section>
 
+    <section class="workspace" id="iotdWorkspace">
+      <div class="layout">
+        <main class="panel composer">
+          <div class="status-line" id="iotdStatusLine">Prototype lane: shape the entry the way your manifest expects, preview the image, and package the metadata cleanly.</div>
+
+          <form class="form-grid" id="iotdForm">
+            <div class="field">
+              <label for="iotdImage">Photo</label>
+              <input id="iotdImage" name="iotdImage" type="file" accept="image/*" />
+              <div class="helper">Pick the photo from your phone or Files. For now, the image itself previews locally and is not uploaded yet.</div>
+            </div>
+
+            <div class="meta-row">
+              <div class="field">
+                <label for="iotdDate">Date</label>
+                <input id="iotdDate" name="iotdDate" type="date" />
+              </div>
+
+              <div class="field">
+                <label for="iotdTitle">Title</label>
+                <input id="iotdTitle" name="iotdTitle" type="text" placeholder="WINDOW_VISITATION" />
+                <div class="helper">Uppercase signal names feel native here, but we can loosen that later if we want.</div>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="iotdCaption">Caption</label>
+              <textarea id="iotdCaption" name="iotdCaption" placeholder="Write the line that will sit beneath the image on image_of_the_day.html."></textarea>
+            </div>
+
+            <div class="action-row">
+              <button class="primary-btn" id="iotdPrepareBtn" type="button">Prepare Entry</button>
+              <button class="secondary-btn" id="iotdDownloadBtn" type="button">Download Metadata</button>
+              <button class="secondary-btn" id="iotdClearBtn" type="button">Clear Draft</button>
+            </div>
+          </form>
+        </main>
+
+        <aside class="side-stack">
+          <section class="panel preview-panel">
+            <h2 class="section-title">Image Preview</h2>
+            <article class="iotd-preview-card">
+              <div class="iotd-image-frame">
+                <div class="iotd-image-placeholder" id="iotdImagePlaceholder">
+                  <img src="Images/iotd_icon.svg" alt="" />
+                  <strong>Image of the Day</strong>
+                  <span>Select a photo and this lane will preview it here in the same shape the public page expects.</span>
+                </div>
+                <img id="iotdPreviewImage" alt="IOTD preview" hidden />
+              </div>
+              <p class="iotd-kicker" id="iotdPreviewDate">TODAY</p>
+              <h3 class="iotd-title" id="iotdPreviewTitle">UNTITLED_SIGNAL</h3>
+              <p class="iotd-caption" id="iotdPreviewCaption">Your image caption will appear here once you start shaping the entry.</p>
+            </article>
+          </section>
+
+          <section class="panel outbox-panel">
+            <h2 class="section-title">Entry Wiring</h2>
+            <div class="iotd-meta-grid">
+              <div class="iotd-stat">
+                <span class="iotd-stat-label">Target Path</span>
+                <span class="iotd-stat-value" id="iotdTargetPath">Images/IOTD/2026-03-19.jpg</span>
+              </div>
+              <div class="iotd-stat">
+                <span class="iotd-stat-label">Selected File</span>
+                <span class="iotd-stat-value" id="iotdFileMeta">No image selected yet.</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="panel outbox-panel">
+            <h2 class="section-title">Manifest Payload</h2>
+            <pre class="iotd-manifest-preview" id="iotdManifestPreview">{
+  "date": "2026-03-19",
+  "title": "UNTITLED_SIGNAL",
+  "caption": "",
+  "image": "Images/IOTD/2026-03-19.jpg"
+}</pre>
+          </section>
+        </aside>
+      </div>
+    </section>
+
     <section class="workspace" id="ghostWorkspace">
       <div class="layout">
         <main class="panel composer">
@@ -2292,6 +2507,7 @@
     const CHANGELOG_DRAFT_KEY = 'otwChangelogPublisherDraft';
     const CHANGELOG_OUTBOX_KEY = 'otwChangelogPublisherOutbox';
     const GHOST_DRAFT_KEY = 'otwGhostWriterLiteDraft';
+    const IOTD_DRAFT_KEY = 'otwIotdPublisherDraft';
     const THEME_KEY = 'otwFragmentsPublisherTheme';
     const PUBLISH_KEY_STORAGE = 'otwFragmentsPublishKey';
     const PUBLISH_ENDPOINT = 'https://otw-fragments-publish.ryandavid.workers.dev/publish-fragment';
@@ -2324,10 +2540,12 @@
     const homeWorkspace = document.getElementById('homeWorkspace');
     const fragmentsWorkspace = document.getElementById('fragmentsWorkspace');
     const changelogWorkspace = document.getElementById('changelogWorkspace');
+    const iotdWorkspace = document.getElementById('iotdWorkspace');
     const ghostWorkspace = document.getElementById('ghostWorkspace');
     const botWorkspace = document.getElementById('botWorkspace');
     const openFragmentsApp = document.getElementById('openFragmentsApp');
     const openChangelogApp = document.getElementById('openChangelogApp');
+    const openIotdApp = document.getElementById('openIotdApp');
     const openGhostApp = document.getElementById('openGhostApp');
     const openBotApp = document.getElementById('openBotApp');
     const openSiteApp = document.getElementById('openSiteApp');
@@ -2356,6 +2574,20 @@
     const changelogPreviewText = document.getElementById('changelogPreviewText');
     const changelogOutboxList = document.getElementById('changelogOutboxList');
     const changelogRecentList = document.getElementById('changelogRecentList');
+    const iotdDateInput = document.getElementById('iotdDate');
+    const iotdTitleInput = document.getElementById('iotdTitle');
+    const iotdCaptionInput = document.getElementById('iotdCaption');
+    const iotdImageInput = document.getElementById('iotdImage');
+    const iotdStatusLine = document.getElementById('iotdStatusLine');
+    const iotdPreviewDate = document.getElementById('iotdPreviewDate');
+    const iotdPreviewTitle = document.getElementById('iotdPreviewTitle');
+    const iotdPreviewCaption = document.getElementById('iotdPreviewCaption');
+    const iotdPreviewImage = document.getElementById('iotdPreviewImage');
+    const iotdImagePlaceholder = document.getElementById('iotdImagePlaceholder');
+    const iotdTargetPath = document.getElementById('iotdTargetPath');
+    const iotdFileMeta = document.getElementById('iotdFileMeta');
+    const iotdManifestPreview = document.getElementById('iotdManifestPreview');
+    const iotdPrepareBtn = document.getElementById('iotdPrepareBtn');
     const ghostTitleInput = document.getElementById('ghostTitle');
     const ghostBodyInput = document.getElementById('ghostBody');
     const ghostStatusLine = document.getElementById('ghostStatusLine');
@@ -2368,6 +2600,7 @@
     let publishToastTimer = null;
     let ghostRecoveryToastTimer = null;
     let loadedChangelog = [];
+    let iotdObjectUrl = null;
 
     function escapeHtml(value) {
       return String(value)
@@ -2427,6 +2660,32 @@
       }).format(value).toUpperCase();
     }
 
+    function escapeJsonString(value) {
+      return JSON.stringify(String(value ?? ''));
+    }
+
+    function getIotdExtension() {
+      const file = iotdImageInput.files && iotdImageInput.files[0];
+      if (file && file.name.includes('.')) {
+        return file.name.split('.').pop().toLowerCase();
+      }
+      return 'jpg';
+    }
+
+    function buildIotdEntry() {
+      const date = iotdDateInput.value || new Date().toISOString().slice(0, 10);
+      const title = (iotdTitleInput.value.trim() || 'UNTITLED_SIGNAL').toUpperCase().replace(/\s+/g, '_');
+      const caption = normalizeFragmentText(iotdCaptionInput.value).trim();
+      const extension = getIotdExtension();
+
+      return {
+        date,
+        title,
+        caption,
+        image: `Images/IOTD/${date}.${extension}`
+      };
+    }
+
     function slugifyGhostTitle(value) {
       const slug = String(value || 'untitled-draft')
         .toLowerCase()
@@ -2483,6 +2742,19 @@
 
     function clearGhostDraftStorage() {
       window.localStorage.removeItem(GHOST_DRAFT_KEY);
+    }
+
+    function writeIotdDraft() {
+      const draft = {
+        date: iotdDateInput.value,
+        title: iotdTitleInput.value,
+        caption: iotdCaptionInput.value
+      };
+      window.localStorage.setItem(IOTD_DRAFT_KEY, JSON.stringify(draft));
+    }
+
+    function clearIotdDraftStorage() {
+      window.localStorage.removeItem(IOTD_DRAFT_KEY);
     }
 
     function getPublishKey() {
@@ -2766,6 +3038,50 @@
       ghostWordCount.textContent = String(wordCount);
       ghostCharCount.textContent = String(charCountValue);
       ghostReadTime.textContent = `${readMins} min`;
+    }
+
+    function updateIotdPreview() {
+      const entry = buildIotdEntry();
+      iotdPreviewDate.textContent = formatLogDate(entry.date);
+      iotdPreviewTitle.textContent = entry.title;
+      iotdPreviewCaption.textContent = entry.caption || 'Your image caption will appear here once you start shaping the entry.';
+      iotdTargetPath.textContent = entry.image;
+      iotdManifestPreview.textContent = `{
+  "date": ${escapeJsonString(entry.date)},
+  "title": ${escapeJsonString(entry.title)},
+  "caption": ${escapeJsonString(entry.caption)},
+  "image": ${escapeJsonString(entry.image)}
+}`;
+    }
+
+    function setIotdImagePreview(file) {
+      if (iotdObjectUrl) {
+        URL.revokeObjectURL(iotdObjectUrl);
+        iotdObjectUrl = null;
+      }
+
+      if (!file) {
+        iotdPreviewImage.hidden = true;
+        iotdPreviewImage.removeAttribute('src');
+        iotdImagePlaceholder.hidden = false;
+        iotdFileMeta.textContent = 'No image selected yet.';
+        return;
+      }
+
+      iotdObjectUrl = URL.createObjectURL(file);
+      iotdPreviewImage.src = iotdObjectUrl;
+      iotdPreviewImage.hidden = false;
+      iotdImagePlaceholder.hidden = true;
+
+      const sizeKb = Math.max(1, Math.round(file.size / 1024));
+      const probe = new Image();
+      probe.onload = () => {
+        iotdFileMeta.textContent = `${file.name} // ${probe.naturalWidth}×${probe.naturalHeight} // ${sizeKb} KB`;
+      };
+      probe.onerror = () => {
+        iotdFileMeta.textContent = `${file.name} // ${sizeKb} KB`;
+      };
+      probe.src = iotdObjectUrl;
     }
 
     function insertGhostSnippet(snippet) {
@@ -3233,6 +3549,38 @@
       ghostStatusLine.textContent = 'Draft downloaded as markdown.';
     }
 
+    function prepareIotdEntry() {
+      const entry = buildIotdEntry();
+      iotdStatusLine.textContent = 'IOTD entry prepared. The metadata is shaped correctly; image upload wiring still comes next.';
+      showPublishToast(
+        'IOTD entry prepared.',
+        `Target path ready: ${entry.image}`
+      );
+    }
+
+    function downloadIotdMetadata() {
+      const entry = buildIotdEntry();
+      const blob = new Blob([JSON.stringify(entry, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `iotd-entry-${entry.date}.json`;
+      link.click();
+      URL.revokeObjectURL(url);
+      iotdStatusLine.textContent = 'IOTD metadata downloaded. The image itself still needs the future upload lane.';
+    }
+
+    function clearIotdDraft() {
+      iotdDateInput.value = new Date().toISOString().slice(0, 10);
+      iotdTitleInput.value = '';
+      iotdCaptionInput.value = '';
+      iotdImageInput.value = '';
+      clearIotdDraftStorage();
+      setIotdImagePreview(null);
+      updateIotdPreview();
+      iotdStatusLine.textContent = 'IOTD draft cleared on this device.';
+    }
+
     function clearGhostDraft() {
       ghostTitleInput.value = '';
       ghostBodyInput.value = '';
@@ -3271,6 +3619,23 @@
       } catch {
         // Ignore malformed local draft state.
       }
+    }
+
+    function hydrateIotdDraft() {
+      try {
+        const draft = JSON.parse(window.localStorage.getItem(IOTD_DRAFT_KEY) || 'null');
+        if (draft) {
+          iotdDateInput.value = draft.date || new Date().toISOString().slice(0, 10);
+          iotdTitleInput.value = draft.title || '';
+          iotdCaptionInput.value = draft.caption || '';
+          iotdStatusLine.textContent = 'Recovered the last IOTD metadata draft from this device. Re-select the image if you want to preview it again.';
+          return;
+        }
+      } catch {
+        // Ignore malformed local draft state.
+      }
+
+      iotdDateInput.value = new Date().toISOString().slice(0, 10);
     }
 
     function hydrateChangelogDraft() {
@@ -3319,11 +3684,12 @@
     }
 
     function setWorkspace(view) {
-      const nextView = ['home', 'fragments', 'changelog', 'ghost', 'bot'].includes(view) ? view : 'home';
+      const nextView = ['home', 'fragments', 'changelog', 'iotd', 'ghost', 'bot'].includes(view) ? view : 'home';
 
       homeWorkspace.classList.toggle('is-active', nextView === 'home');
       fragmentsWorkspace.classList.toggle('is-active', nextView === 'fragments');
       changelogWorkspace.classList.toggle('is-active', nextView === 'changelog');
+      iotdWorkspace.classList.toggle('is-active', nextView === 'iotd');
       ghostWorkspace.classList.toggle('is-active', nextView === 'ghost');
       botWorkspace.classList.toggle('is-active', nextView === 'bot');
       headerBackBtn.classList.toggle('is-visible', nextView !== 'home');
@@ -3391,6 +3757,9 @@
     });
     openChangelogApp.addEventListener('click', () => {
       setWorkspace('changelog');
+    });
+    openIotdApp.addEventListener('click', () => {
+      setWorkspace('iotd');
     });
     openGhostApp.addEventListener('click', () => {
       setWorkspace('ghost');
@@ -3475,6 +3844,27 @@
       });
     });
 
+    [iotdDateInput, iotdTitleInput, iotdCaptionInput].forEach((element) => {
+      element.addEventListener('input', () => {
+        writeIotdDraft();
+        updateIotdPreview();
+      });
+      element.addEventListener('change', () => {
+        writeIotdDraft();
+        updateIotdPreview();
+      });
+    });
+
+    iotdImageInput.addEventListener('change', () => {
+      const file = iotdImageInput.files && iotdImageInput.files[0];
+      setIotdImagePreview(file || null);
+      updateIotdPreview();
+    });
+
+    iotdPrepareBtn.addEventListener('click', prepareIotdEntry);
+    document.getElementById('iotdDownloadBtn').addEventListener('click', downloadIotdMetadata);
+    document.getElementById('iotdClearBtn').addEventListener('click', clearIotdDraft);
+
     [ghostTitleInput, ghostBodyInput].forEach((element) => {
       element.addEventListener('input', () => {
         writeGhostDraft();
@@ -3504,9 +3894,11 @@
     hydratePublishKey();
     hydrateDraft();
     hydrateChangelogDraft();
+    hydrateIotdDraft();
     hydrateGhostDraft();
     updatePreview();
     updateChangelogPreview();
+    updateIotdPreview();
     updateGhostPreview();
     renderOutbox();
     renderChangelogOutbox();
