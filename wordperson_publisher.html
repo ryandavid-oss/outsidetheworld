@@ -1,0 +1,1756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#f7f0ea" />
+  <meta name="color-scheme" content="light" />
+  <meta name="robots" content="noindex,nofollow" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="word.person" />
+  <title>word.person | Private App</title>
+  <meta name="description" content="A gentle private publishing app for word.person and Emily's fragments." />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="Images/wordperson/WP_Icon.png" />
+  <link rel="manifest" href="wordperson_publisher.webmanifest" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" />
+  <style>
+    :root {
+      --cream: #f7f0ea;
+      --parchment: #efe3d8;
+      --soft-charcoal: #2f2a31;
+      --muted-rose: #c38fa0;
+      --muted-rose-soft: rgba(195, 143, 160, 0.14);
+      --warm-plum: #675168;
+      --warm-plum-soft: rgba(103, 81, 104, 0.12);
+      --rose-gold: #e0bfb8;
+      --gold: #c9a96f;
+      --ink-soft: rgba(47, 42, 49, 0.74);
+      --border: rgba(47, 42, 49, 0.12);
+      --border-strong: rgba(47, 42, 49, 0.2);
+      --surface: rgba(255, 255, 255, 0.76);
+      --surface-strong: rgba(255, 255, 255, 0.9);
+      --shadow: 0 24px 70px rgba(78, 56, 68, 0.12);
+      --safe-top: env(safe-area-inset-top);
+      --safe-bottom: env(safe-area-inset-bottom);
+      --safe-left: env(safe-area-inset-left);
+      --safe-right: env(safe-area-inset-right);
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+      --max-w: 1100px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "IBM Plex Sans", sans-serif;
+      color: var(--soft-charcoal);
+      background:
+        radial-gradient(720px 440px at 10% 0%, rgba(195, 143, 160, 0.18), transparent 52%),
+        radial-gradient(580px 380px at 92% 6%, rgba(103, 81, 104, 0.12), transparent 48%),
+        radial-gradient(640px 420px at 50% 100%, rgba(224, 191, 184, 0.2), transparent 56%),
+        linear-gradient(180deg, #fcf8f3 0%, #f7f0ea 100%);
+      padding:
+        calc(var(--safe-top) + 12px)
+        calc(var(--safe-right) + 18px)
+        calc(var(--safe-bottom) + 120px)
+        calc(var(--safe-left) + 18px);
+    }
+
+    .app {
+      width: min(100%, var(--max-w));
+      margin: 0 auto;
+      display: grid;
+      gap: 18px;
+    }
+
+    .topbar {
+      position: sticky;
+      top: calc(var(--safe-top) + 2px);
+      z-index: 30;
+      display: grid;
+      grid-template-columns: 48px 1fr 48px;
+      align-items: center;
+      gap: 12px;
+      padding: 6px 0 10px;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .topbar-slot {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+    }
+
+    .topbar-title {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .topbar-logo {
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(103, 81, 104, 0.12);
+      flex-shrink: 0;
+    }
+
+    .topbar-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .topbar-title-text {
+      font-family: "Fraunces", serif;
+      font-size: clamp(1.22rem, 4vw, 1.8rem);
+      line-height: 1;
+      letter-spacing: -0.04em;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .icon-btn {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.68);
+      color: var(--soft-charcoal);
+      display: grid;
+      place-items: center;
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow: 0 10px 22px rgba(103, 81, 104, 0.08);
+      transition: transform 0.22s var(--ease), border-color 0.22s var(--ease), background 0.22s var(--ease);
+    }
+
+    .icon-btn:hover,
+    .icon-btn:focus-visible {
+      transform: translateY(-1px);
+      border-color: rgba(195, 143, 160, 0.34);
+      background: rgba(255, 255, 255, 0.86);
+    }
+
+    .icon-btn[hidden] {
+      visibility: hidden;
+      display: grid;
+    }
+
+    .workspace {
+      display: none;
+      gap: 18px;
+    }
+
+    .workspace.is-active {
+      display: grid;
+    }
+
+    .workspace.has-fixed-actions {
+      padding-bottom: 220px;
+    }
+
+    .panel {
+      border-radius: 32px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .launcher-hero {
+      position: relative;
+      overflow: hidden;
+      padding: 22px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.58)),
+        radial-gradient(420px 260px at 88% 18%, rgba(195, 143, 160, 0.14), transparent 54%),
+        radial-gradient(420px 240px at 14% 84%, rgba(224, 191, 184, 0.2), transparent 56%);
+    }
+
+    .launcher-profile {
+      display: grid;
+      grid-template-columns: 76px 1fr;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .launcher-avatar {
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid rgba(255, 255, 255, 0.82);
+      box-shadow: 0 14px 28px rgba(103, 81, 104, 0.14);
+      background: #fff;
+    }
+
+    .launcher-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .launcher-kicker {
+      margin: 0 0 4px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(103, 81, 104, 0.78);
+    }
+
+    .launcher-heading {
+      margin: 0 0 4px;
+      font-family: "Fraunces", serif;
+      font-size: clamp(2rem, 6vw, 2.9rem);
+      line-height: 0.98;
+      letter-spacing: -0.05em;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0;
+    }
+
+    .launcher-copy {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 1rem;
+      line-height: 1.72;
+      max-width: 44ch;
+    }
+
+    .launcher-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .tool-tile {
+      appearance: none;
+      width: 100%;
+      border-radius: 30px;
+      border: 1px solid var(--border);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.84), rgba(255, 255, 255, 0.68)),
+        radial-gradient(circle at top right, rgba(195, 143, 160, 0.12), transparent 44%);
+      padding: 20px 18px;
+      display: grid;
+      gap: 14px;
+      text-align: left;
+      cursor: pointer;
+      transition: transform 0.24s var(--ease), border-color 0.24s var(--ease), box-shadow 0.24s var(--ease);
+      box-shadow: 0 16px 30px rgba(103, 81, 104, 0.08);
+    }
+
+    .tool-tile:hover,
+    .tool-tile:focus-visible {
+      transform: translateY(-2px);
+      border-color: rgba(195, 143, 160, 0.36);
+      box-shadow: 0 22px 36px rgba(103, 81, 104, 0.12);
+    }
+
+    .tool-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 24px;
+      border: 1px solid rgba(47, 42, 49, 0.08);
+      background: rgba(255, 255, 255, 0.72);
+      display: grid;
+      place-items: center;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.54);
+    }
+
+    .tool-head {
+      display: grid;
+      grid-template-columns: 72px minmax(0, 1fr);
+      gap: 14px;
+      align-items: center;
+    }
+
+    .tool-icon img,
+    .tool-icon svg {
+      width: 54px;
+      height: 54px;
+      display: block;
+    }
+
+    .tool-labels {
+      min-width: 0;
+    }
+
+    .tool-title {
+      margin: 0;
+      font-family: "Fraunces", serif;
+      font-size: 1.65rem;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      font-weight: 600;
+    }
+
+    .tool-wordmark {
+      width: min(100%, 190px);
+      display: block;
+      filter: drop-shadow(0 0 12px rgba(99, 149, 238, 0.1));
+    }
+
+    .tool-copy {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 0.96rem;
+      line-height: 1.7;
+    }
+
+    .composer-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .media-panel,
+    .compose-panel,
+    .fragment-panel,
+    .fragment-preview-panel {
+      padding: 18px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .fragment-preview-panel {
+      align-content: start;
+      gap: 16px;
+    }
+
+    .media-shell {
+      position: relative;
+      overflow: hidden;
+      border-radius: 28px;
+      border: 1px dashed rgba(103, 81, 104, 0.22);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.6)),
+        radial-gradient(circle at top right, rgba(195, 143, 160, 0.16), transparent 42%);
+      min-height: 120px;
+      display: grid;
+      place-items: center;
+      padding: 12px;
+    }
+
+    .media-shell.has-image {
+      border-style: solid;
+      background: rgba(255, 255, 255, 0.78);
+    }
+
+    .media-preview {
+      width: auto;
+      max-width: 100%;
+      display: none;
+      height: auto;
+      max-height: min(20vh, 170px);
+      object-fit: contain;
+      border-radius: 18px;
+    }
+
+    .media-shell.has-image .media-preview {
+      display: block;
+    }
+
+    .media-placeholder {
+      width: min(100%, 340px);
+      padding: 26px 24px;
+      display: grid;
+      justify-items: center;
+      gap: 10px;
+      text-align: center;
+      color: var(--ink-soft);
+    }
+
+    .media-shell.has-image .media-placeholder {
+      display: none;
+    }
+
+    .media-placeholder-title {
+      margin: 0;
+      font-family: "Fraunces", serif;
+      font-size: 1.7rem;
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+      color: var(--soft-charcoal);
+    }
+
+    .media-placeholder-copy {
+      margin: 0;
+      font-size: 0.98rem;
+      line-height: 1.7;
+    }
+
+    .media-actions,
+    .field-group,
+    .preview-card,
+    .fragment-preview-card {
+      display: grid;
+      gap: 12px;
+    }
+
+    .media-actions-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .media-actions-left,
+    .fragment-actions-left {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .pick-image-btn,
+    .soft-btn,
+    .action-btn,
+    .tag-pill {
+      min-height: 48px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.76);
+      color: var(--soft-charcoal);
+      font: inherit;
+      cursor: pointer;
+      transition: transform 0.22s var(--ease), border-color 0.22s var(--ease), background 0.22s var(--ease), box-shadow 0.22s var(--ease);
+    }
+
+    .pick-image-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 0 22px;
+      border-color: rgba(195, 143, 160, 0.34);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(255, 255, 255, 0.82)),
+        radial-gradient(circle at top right, rgba(195, 143, 160, 0.14), transparent 42%);
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      box-shadow:
+        0 12px 26px rgba(103, 81, 104, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.64);
+    }
+
+    .pick-image-btn svg {
+      width: 18px;
+      height: 18px;
+      color: var(--warm-plum);
+      flex-shrink: 0;
+    }
+
+    .settings-link {
+      border: 0;
+      padding: 0;
+      background: transparent;
+      color: rgba(103, 81, 104, 0.8);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: color 0.22s var(--ease), transform 0.22s var(--ease);
+    }
+
+    .settings-link:hover,
+    .settings-link:focus-visible {
+      color: var(--soft-charcoal);
+      transform: translateY(-1px);
+    }
+
+    .soft-btn,
+    .action-btn {
+      padding: 0 18px;
+      font-weight: 600;
+    }
+
+    .soft-btn:hover,
+    .soft-btn:focus-visible,
+    .action-btn:hover,
+    .action-btn:focus-visible,
+    .tag-pill:hover,
+    .tag-pill:focus-visible {
+      transform: translateY(-1px);
+      border-color: rgba(195, 143, 160, 0.34);
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .tag-pill {
+      padding: 0 18px;
+      font-size: 0.92rem;
+      font-weight: 600;
+    }
+
+    .tag-pill.is-active {
+      border-color: rgba(195, 143, 160, 0.46);
+      background: rgba(195, 143, 160, 0.12);
+      box-shadow: 0 10px 18px rgba(103, 81, 104, 0.08);
+    }
+
+    .media-meta,
+    .helper-mono,
+    .field-label,
+    .preview-date,
+    .fragment-preview-date,
+    .status-copy {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(103, 81, 104, 0.78);
+    }
+
+    .media-meta {
+      margin: 0;
+      color: rgba(47, 42, 49, 0.66);
+      text-transform: uppercase;
+    }
+
+    .field-group {
+      gap: 8px;
+    }
+
+    .field-input,
+    .field-textarea {
+      width: 100%;
+      border-radius: 24px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.8);
+      color: var(--soft-charcoal);
+      font: inherit;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    }
+
+    .field-input {
+      min-height: 54px;
+      padding: 0 18px;
+      font-size: 1rem;
+    }
+
+    .field-textarea {
+      min-height: 260px;
+      padding: 18px;
+      resize: vertical;
+      font-size: 1rem;
+      line-height: 1.78;
+    }
+
+    .field-input:focus,
+    .field-textarea:focus {
+      outline: none;
+      border-color: rgba(195, 143, 160, 0.42);
+      box-shadow: 0 0 0 4px rgba(195, 143, 160, 0.12);
+    }
+
+    .helper-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    details.advanced {
+      border-radius: 24px;
+      border: 1px solid rgba(47, 42, 49, 0.1);
+      background: rgba(255, 255, 255, 0.52);
+      padding: 14px 16px;
+    }
+
+    details.advanced summary {
+      cursor: pointer;
+      list-style: none;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(103, 81, 104, 0.78);
+    }
+
+    details.advanced summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .status-line {
+      margin: 0;
+      color: rgba(47, 42, 49, 0.68);
+      font-size: 0.94rem;
+      line-height: 1.65;
+    }
+
+    .preview-card,
+    .fragment-preview-card {
+      overflow: hidden;
+      border-radius: 28px;
+      border: 1px solid rgba(47, 42, 49, 0.1);
+      background: rgba(255, 255, 255, 0.88);
+      box-shadow: 0 16px 34px rgba(78, 56, 68, 0.08);
+    }
+
+    .preview-image {
+      width: auto;
+      max-width: 100%;
+      height: auto;
+      max-height: min(16vh, 130px);
+      object-fit: contain;
+      display: block;
+      background: rgba(103, 81, 104, 0.08);
+    }
+
+    .preview-copy,
+    .fragment-preview-copy {
+      padding: 18px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .preview-title,
+    .fragment-preview-title {
+      margin: 0;
+      font-family: "Fraunces", serif;
+      font-size: clamp(1.45rem, 4vw, 2.1rem);
+      line-height: 1.02;
+      letter-spacing: -0.04em;
+      font-weight: 600;
+    }
+
+    .preview-excerpt,
+    .fragment-preview-body {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 0.98rem;
+      line-height: 1.72;
+      white-space: pre-wrap;
+    }
+
+    .fragment-preview-tag {
+      color: #6395EE;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.66rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .action-dock {
+      position: fixed;
+      left: max(calc(var(--safe-left) + 18px), calc(50% - 540px));
+      right: max(calc(var(--safe-right) + 18px), calc(50% - 540px));
+      bottom: calc(var(--safe-bottom) + 88px);
+      z-index: 35;
+      display: none;
+      gap: 10px;
+      padding: 14px;
+      border-radius: 26px;
+      border: 1px solid rgba(47, 42, 49, 0.12);
+      background: rgba(255, 255, 255, 0.82);
+      box-shadow: 0 22px 60px rgba(78, 56, 68, 0.18);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    .action-dock.is-active {
+      display: grid;
+    }
+
+    .bottom-dock {
+      position: fixed;
+      left: max(calc(var(--safe-left) + 18px), calc(50% - 540px));
+      right: max(calc(var(--safe-right) + 18px), calc(50% - 540px));
+      bottom: calc(var(--safe-bottom) + 18px);
+      z-index: 40;
+      display: flex;
+      align-items: stretch;
+      justify-content: space-between;
+      gap: 6px;
+      padding: 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(47, 42, 49, 0.12);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.84), rgba(255, 255, 255, 0.72)),
+        radial-gradient(circle at top center, rgba(195, 143, 160, 0.14), transparent 48%);
+      box-shadow: 0 22px 60px rgba(78, 56, 68, 0.18);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    .dock-btn {
+      flex: 1 1 0;
+      min-width: 0;
+      min-height: 70px;
+      border: 0;
+      border-radius: 999px;
+      background: transparent;
+      color: var(--soft-charcoal);
+      display: grid;
+      justify-items: center;
+      align-content: center;
+      gap: 6px;
+      padding: 8px 6px;
+      cursor: pointer;
+      transition: background 0.22s var(--ease), transform 0.22s var(--ease), color 0.22s var(--ease);
+      text-decoration: none;
+    }
+
+    .dock-btn:hover,
+    .dock-btn:focus-visible {
+      transform: translateY(-1px);
+      background: rgba(255, 255, 255, 0.56);
+    }
+
+    .dock-btn.is-active {
+      background: rgba(195, 143, 160, 0.16);
+      box-shadow: inset 0 0 0 1px rgba(195, 143, 160, 0.18);
+    }
+
+    .dock-btn img,
+    .dock-btn svg {
+      width: 22px;
+      height: 22px;
+      display: block;
+      object-fit: contain;
+    }
+
+    .dock-btn-label {
+      font-family: "IBM Plex Sans", sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      text-align: center;
+    }
+
+    .primary-btn {
+      min-height: 56px;
+      border: 0;
+      border-radius: 999px;
+      color: #fff;
+      font: inherit;
+      font-size: 1.02rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      cursor: pointer;
+      transition: transform 0.22s var(--ease), box-shadow 0.22s var(--ease);
+    }
+
+    .primary-btn:hover,
+    .primary-btn:focus-visible {
+      transform: translateY(-1px);
+    }
+
+    .primary-btn.word-btn {
+      background: linear-gradient(135deg, #8b667f 0%, #bf8fa1 48%, #d7ad8c 100%);
+      box-shadow: 0 18px 34px rgba(139, 102, 127, 0.28);
+    }
+
+    .primary-btn.fragment-btn {
+      background: linear-gradient(135deg, #6c86d8 0%, #8aa6ee 50%, #91afb3 100%);
+      box-shadow: 0 18px 34px rgba(99, 149, 238, 0.24);
+    }
+
+    .primary-btn.is-success {
+      background: linear-gradient(135deg, #ab7f90 0%, #7eaa87 100%);
+    }
+
+    .secondary-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .sheet {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 18px;
+      background: rgba(47, 42, 49, 0.18);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .sheet.is-open {
+      display: flex;
+    }
+
+    .sheet-panel {
+      width: min(100%, 560px);
+      border-radius: 32px;
+      border: 1px solid rgba(47, 42, 49, 0.12);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.82)),
+        radial-gradient(420px 260px at top right, rgba(195, 143, 160, 0.16), transparent 46%);
+      box-shadow: 0 24px 70px rgba(78, 56, 68, 0.2);
+      padding: 22px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .sheet-title {
+      margin: 0;
+      font-family: "Fraunces", serif;
+      font-size: 1.8rem;
+      line-height: 1.02;
+      letter-spacing: -0.04em;
+    }
+
+    .sheet-copy {
+      margin: 0;
+      color: var(--ink-soft);
+      line-height: 1.72;
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      z-index: 80;
+      transform: translate(-50%, -50%) scale(0.98);
+      opacity: 0;
+      pointer-events: none;
+      width: min(calc(100vw - 36px), 360px);
+      padding: 18px 20px;
+      border-radius: 24px;
+      border: 1px solid rgba(47, 42, 49, 0.12);
+      background: rgba(255, 255, 255, 0.88);
+      box-shadow: 0 26px 70px rgba(78, 56, 68, 0.18);
+      text-align: center;
+      transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .toast-title {
+      margin: 0 0 6px;
+      font-family: "Fraunces", serif;
+      font-size: 1.4rem;
+      line-height: 1.02;
+      letter-spacing: -0.04em;
+    }
+
+    .toast-copy {
+      margin: 0;
+      color: var(--ink-soft);
+      line-height: 1.66;
+    }
+
+    @media (min-width: 920px) {
+      .composer-grid {
+        grid-template-columns: minmax(0, 1.02fr) minmax(360px, 0.84fr);
+        align-items: start;
+      }
+
+    }
+
+    @media (max-width: 919px) {
+      .bottom-dock {
+        left: calc(var(--safe-left) + 10px);
+        right: calc(var(--safe-right) + 10px);
+        gap: 4px;
+        padding: 8px 6px;
+      }
+
+      .action-dock {
+        left: calc(var(--safe-left) + 12px);
+        right: calc(var(--safe-right) + 12px);
+        bottom: calc(var(--safe-bottom) + 84px);
+      }
+
+      .workspace.has-fixed-actions {
+        padding-bottom: 208px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      body {
+        padding:
+          calc(var(--safe-top) + 10px)
+          calc(var(--safe-right) + 14px)
+          calc(var(--safe-bottom) + 128px)
+          calc(var(--safe-left) + 14px);
+      }
+
+      .launcher-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .tool-head {
+        grid-template-columns: 64px minmax(0, 1fr);
+        gap: 12px;
+      }
+
+      .launcher-profile {
+        grid-template-columns: 64px 1fr;
+      }
+
+      .launcher-avatar {
+        width: 64px;
+        height: 64px;
+      }
+
+      .launcher-heading {
+        align-items: flex-start;
+      }
+
+      .tool-icon {
+        width: 64px;
+        height: 64px;
+        border-radius: 20px;
+      }
+
+      .tool-icon img,
+      .tool-icon svg {
+        width: 48px;
+        height: 48px;
+      }
+
+      .media-shell {
+        min-height: 108px;
+      }
+
+      .field-textarea {
+        min-height: 220px;
+      }
+
+      .secondary-actions {
+        flex-direction: column;
+      }
+
+      .dock-btn {
+        min-height: 66px;
+        padding: 8px 4px;
+      }
+
+      .dock-btn-label {
+        font-size: 0.68rem;
+      }
+
+      .workspace.has-fixed-actions {
+        padding-bottom: 196px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="topbar-slot">
+        <button class="icon-btn" id="backBtn" type="button" aria-label="Back" hidden>
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M15 18l-6-6 6-6"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="topbar-title">
+        <div class="topbar-logo">
+          <img src="Images/wordperson/WP_Icon.png" alt="word.person" />
+        </div>
+        <div class="topbar-title-text" id="topbarTitle">word.person</div>
+      </div>
+      <div class="topbar-slot"></div>
+    </header>
+
+    <section class="workspace is-active" id="homeWorkspace">
+      <section class="panel launcher-hero">
+      <div class="launcher-profile">
+          <div class="launcher-avatar">
+            <img src="Images/IG_Emmy.jpg" alt="Emily" />
+          </div>
+          <div>
+            <p class="launcher-kicker">@word.person</p>
+            <h1 class="launcher-heading">Emmy's Small App</h1>
+          </div>
+        </div>
+      </section>
+
+      <section class="launcher-grid">
+        <button class="tool-tile" id="openWordpersonTool" type="button">
+          <div class="tool-head">
+            <div class="tool-icon" aria-hidden="true">
+              <img src="Images/wordperson/WP_Icon.svg" alt="" />
+            </div>
+            <div class="tool-labels">
+              <h2 class="tool-title">word.person</h2>
+            </div>
+          </div>
+          <p class="tool-copy">Image first, story after. A quieter publishing space for the longer reflections and devotional warmth that belong to her own lane.</p>
+        </button>
+
+        <button class="tool-tile" id="openFragmentsTool" type="button">
+          <div class="tool-head">
+            <div class="tool-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#6395EE" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M4 7h11"></path>
+                <path d="M4 12h16"></path>
+                <path d="M4 17h13"></path>
+                <path d="M16 7h4l-2 2"></path>
+              </svg>
+            </div>
+            <div class="tool-labels">
+              <img class="tool-wordmark" src="Images/fragments.svg" alt="Fragments" />
+            </div>
+          </div>
+          <p class="tool-copy">Short thoughts that land directly inside the shared family feed.</p>
+        </button>
+      </section>
+    </section>
+
+    <section class="workspace has-fixed-actions" id="fragmentsWorkspace">
+      <div class="composer-grid">
+        <div class="composer-column">
+          <section class="panel fragment-panel">
+            <div class="field-group">
+              <label class="field-label" for="fragmentBody">frgm&lt;nts</label>
+              <textarea class="field-textarea" id="fragmentBody" placeholder="What do you want to share?" spellcheck="true"></textarea>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label">Tone</label>
+              <div class="tag-row">
+                <button class="tag-pill is-active" data-fragment-tag="FRAGMENT" type="button">Fragment</button>
+                <button class="tag-pill" data-fragment-tag="FIELD_NOTE" type="button">Field Note</button>
+                <button class="tag-pill" data-fragment-tag="PRAYER" type="button">Prayer</button>
+                <button class="tag-pill" data-fragment-tag="ENCOURAGEMENT" type="button">Encouragement</button>
+              </div>
+            </div>
+
+            <div class="helper-row">
+              <span class="helper-mono" id="fragmentWordCount">0 words</span>
+              <span class="helper-mono" id="fragmentCharCount">0 chars</span>
+            </div>
+
+            <p class="status-line" id="fragmentStatusLine">Short thoughts save quietly on this device while you shape them.</p>
+          </section>
+        </div>
+
+        <aside class="panel fragment-preview-panel">
+          <div>
+            <p class="field-label">Shared feed preview</p>
+            <p class="status-line">This is roughly how Emily’s fragment will feel inside the main OTW feed.</p>
+          </div>
+          <article class="fragment-preview-card">
+            <div class="fragment-preview-copy">
+              <div class="preview-date" id="fragmentPreviewDate">TODAY</div>
+              <div style="display:flex;gap:12px;align-items:flex-start;">
+                <img src="Images/IG_Emmy.jpg" alt="Emily" style="width:46px;height:46px;border-radius:999px;object-fit:cover;flex-shrink:0;border:1px solid rgba(160,190,245,0.16);box-shadow:0 0 0 3px rgba(155,89,182,0.08),0 12px 26px rgba(0,0,0,0.12);" />
+                <div style="display:grid;gap:4px;min-width:0;">
+                  <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                    <div style="font-weight:600;">Emily</div>
+                    <svg viewBox="0 0 24 24" aria-label="Verified" style="width:16px;height:16px;flex-shrink:0;">
+                      <path fill="#9B59B6" d="M12 1.8l2.76 1.58 3.16-.23 1.58 2.76 2.76 1.58-.23 3.16L23 12l-1.97 2.55.23 3.16-2.76 1.58-1.58 2.76-3.16-.23L12 22.2l-2.76-1.58-3.16.23-1.58-2.76-2.76-1.58.23-3.16L1 12l1.97-2.55-.23-3.16 2.76-1.58 1.58-2.76 3.16.23L12 1.8z"></path>
+                      <path fill="#F5F7FB" d="M10.55 15.62l-2.6-2.6 1.2-1.2 1.4 1.4 4.26-4.26 1.2 1.2z"></path>
+                    </svg>
+                  </div>
+                  <div style="color:rgba(47,42,49,0.56);font-size:0.82rem;">@word.person</div>
+                  <div class="fragment-preview-tag" id="fragmentPreviewTag">FRAGMENT</div>
+                </div>
+              </div>
+              <p class="fragment-preview-body" id="fragmentPreviewBody">Emily’s shared fragment will appear here as she writes.</p>
+            </div>
+          </article>
+        </aside>
+      </div>
+    </section>
+
+    <section class="workspace has-fixed-actions" id="wordpersonWorkspace">
+      <div class="composer-grid">
+        <div class="composer-column">
+          <section class="panel media-panel">
+            <div class="media-shell" id="mediaShell">
+              <div class="media-placeholder" id="mediaPlaceholder">
+                <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="3" y="3" width="18" height="18" rx="4"></rect>
+                  <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                  <path d="M21 15l-4.5-4.5L6 21"></path>
+                </svg>
+                <h2 class="media-placeholder-title">Start with the image.</h2>
+                <p class="media-placeholder-copy">Pick the photo or graphic first. Once it feels right, the words can gather underneath it.</p>
+              </div>
+              <img class="media-preview" id="mediaPreview" alt="" />
+            </div>
+
+            <div class="media-actions-row">
+              <div class="media-actions-left">
+                <label class="pick-image-btn" for="imageInput">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M12 5v14"></path>
+                    <path d="M5 12h14"></path>
+                  </svg>
+                  <span>Choose photo</span>
+                </label>
+                <input id="imageInput" type="file" accept="image/*" hidden />
+              </div>
+              <p class="media-meta" id="fileMeta">No image selected yet.</p>
+            </div>
+          </section>
+
+          <section class="panel compose-panel">
+            <div class="field-group">
+              <label class="field-label" for="postDate">Date</label>
+              <input class="field-input" id="postDate" type="date" />
+            </div>
+
+            <div class="field-group">
+              <label class="field-label" for="postTitle">Title · optional</label>
+              <input class="field-input" id="postTitle" type="text" maxlength="140" placeholder="If the post wants a title, give it one." />
+            </div>
+
+            <div class="field-group">
+              <label class="field-label" for="postBody">Reflection</label>
+              <textarea class="field-textarea" id="postBody" placeholder="What moved you to write?" spellcheck="true"></textarea>
+            </div>
+
+            <div class="helper-row">
+              <span class="helper-mono" id="wordCount">0 words</span>
+              <span class="helper-mono" id="charCount">0 chars</span>
+            </div>
+
+            <details class="advanced">
+              <summary>Accessibility note</summary>
+              <div class="field-group" style="margin-top: 12px;">
+                <label class="field-label" for="postAlt">Alt text · optional</label>
+                <input class="field-input" id="postAlt" type="text" maxlength="220" placeholder="Describe the image if you want to override the default." />
+              </div>
+            </details>
+
+            <p class="status-line" id="statusLine">Drafts save quietly on this device while you write.</p>
+          </section>
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+  <div class="action-dock" id="fragmentsDock">
+    <button class="primary-btn fragment-btn" id="fragmentPublishBtn" type="button">Share to frgm&lt;nts</button>
+    <div class="secondary-actions">
+      <button class="action-btn" id="fragmentClearBtn" type="button">Clear draft</button>
+    </div>
+  </div>
+
+  <div class="action-dock" id="wordDock">
+    <button class="primary-btn word-btn" id="publishBtn" type="button">Share</button>
+    <div class="secondary-actions">
+      <button class="action-btn" id="clearBtn" type="button">Clear draft</button>
+    </div>
+  </div>
+
+  <nav class="bottom-dock" aria-label="App navigation">
+    <button class="dock-btn is-active" id="dockHomeBtn" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M3 10.5L12 3l9 7.5"></path>
+        <path d="M5.5 9.5V20h13V9.5"></path>
+      </svg>
+      <span class="dock-btn-label">Home</span>
+    </button>
+    <button class="dock-btn" id="dockWordpersonBtn" type="button">
+      <img src="Images/wordperson/WP_Icon.svg" alt="" aria-hidden="true" />
+      <span class="dock-btn-label">word.person</span>
+    </button>
+    <button class="dock-btn" id="dockFragmentsBtn" type="button">
+      <img src="Images/otw_brandmark_stroke.svg" alt="" aria-hidden="true" />
+      <span class="dock-btn-label">frgm&lt;nts</span>
+    </button>
+    <a class="dock-btn" id="dockSupportBtn" href="mailto:ryandavid@me.com?subject=word.person%20app%20support">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M4 5h16v14H4z"></path>
+        <path d="M4 7l8 6 8-6"></path>
+      </svg>
+      <span class="dock-btn-label">Support</span>
+    </a>
+    <button class="dock-btn" id="dockSettingsBtn" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="3.2"></circle>
+        <path d="M19.4 15A1.65 1.65 0 0 0 19.73 16.82L19.79 16.88A2 2 0 1 1 16.96 19.71L16.9 19.65A1.65 1.65 0 0 0 15.08 19.32A1.65 1.65 0 0 0 14 20.85V21A2 2 0 1 1 10 21V20.91A1.65 1.65 0 0 0 8.92 19.39A1.65 1.65 0 0 0 7.1 19.72L7.04 19.78A2 2 0 1 1 4.21 16.95L4.27 16.89A1.65 1.65 0 0 0 4.6 15.07A1.65 1.65 0 0 0 3.07 14H3A2 2 0 1 1 3 10H3.09A1.65 1.65 0 0 0 4.61 8.92A1.65 1.65 0 0 0 4.28 7.1L4.22 7.04A2 2 0 1 1 7.05 4.21L7.11 4.27A1.65 1.65 0 0 0 8.93 4.6H9A1.65 1.65 0 0 0 10 3.09V3A2 2 0 1 1 14 3V3.09A1.65 1.65 0 0 0 15.07 4.61A1.65 1.65 0 0 0 16.89 4.28L16.95 4.22A2 2 0 1 1 19.78 7.05L19.72 7.11A1.65 1.65 0 0 0 19.39 8.93V9A1.65 1.65 0 0 0 20.91 10H21A2 2 0 1 1 21 14H20.91A1.65 1.65 0 0 0 19.4 15Z"></path>
+      </svg>
+      <span class="dock-btn-label">Settings</span>
+    </button>
+  </nav>
+
+  <div class="sheet" id="settingsSheet" aria-hidden="true">
+    <div class="sheet-panel">
+      <h2 class="sheet-title">Publishing settings</h2>
+      <p class="sheet-copy">This stays tucked away so the writing spaces can stay gentle. Emily’s publish key is only saved on this device.</p>
+      <div class="field-group">
+        <label class="field-label" for="publishKeyInput">Publish key</label>
+        <input class="field-input" id="publishKeyInput" type="password" placeholder="Paste the word.person key here" autocomplete="off" />
+      </div>
+      <p class="status-line" id="publishKeyStatus">No word.person publish key is saved on this device.</p>
+      <div class="secondary-actions">
+        <button class="action-btn" id="saveKeyBtn" type="button">Save key</button>
+        <button class="action-btn" id="closeSheetBtn" type="button">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="recoveryToast" aria-live="polite">
+    <h2 class="toast-title">Draft restored</h2>
+    <p class="toast-copy" id="recoveryToastCopy">We recovered the last draft from this device.</p>
+  </div>
+
+  <div class="toast" id="publishToast" aria-live="polite">
+    <h2 class="toast-title" id="publishToastTitle">Post published</h2>
+    <p class="toast-copy" id="publishToastCopy">Your reflection is on its way to the site.</p>
+  </div>
+
+  <script>
+    const WORD_DRAFT_KEY = 'wordPersonPublisherDraft';
+    const FRAGMENT_DRAFT_KEY = 'wordPersonFragmentsDraft';
+    const PUBLISH_KEY_STORAGE = 'wordPersonPublishKey';
+    const WORD_PUBLISH_ENDPOINT = 'https://otw-fragments-publish.ryandavid.workers.dev/publish-wordperson-entry';
+    const FRAGMENT_PUBLISH_ENDPOINT = 'https://otw-fragments-publish.ryandavid.workers.dev/publish-fragment';
+
+    const homeWorkspace = document.getElementById('homeWorkspace');
+    const fragmentsWorkspace = document.getElementById('fragmentsWorkspace');
+    const wordpersonWorkspace = document.getElementById('wordpersonWorkspace');
+    const backBtn = document.getElementById('backBtn');
+    const topbarTitle = document.getElementById('topbarTitle');
+    const openFragmentsTool = document.getElementById('openFragmentsTool');
+    const openWordpersonTool = document.getElementById('openWordpersonTool');
+    const settingsSheet = document.getElementById('settingsSheet');
+    const closeSheetBtn = document.getElementById('closeSheetBtn');
+    const publishKeyInput = document.getElementById('publishKeyInput');
+    const publishKeyStatus = document.getElementById('publishKeyStatus');
+    const saveKeyBtn = document.getElementById('saveKeyBtn');
+    const dockHomeBtn = document.getElementById('dockHomeBtn');
+    const dockWordpersonBtn = document.getElementById('dockWordpersonBtn');
+    const dockFragmentsBtn = document.getElementById('dockFragmentsBtn');
+    const dockSettingsBtn = document.getElementById('dockSettingsBtn');
+
+    const fragmentBody = document.getElementById('fragmentBody');
+    const fragmentStatusLine = document.getElementById('fragmentStatusLine');
+    const fragmentPreviewDate = document.getElementById('fragmentPreviewDate');
+    const fragmentPreviewTag = document.getElementById('fragmentPreviewTag');
+    const fragmentPreviewBody = document.getElementById('fragmentPreviewBody');
+    const fragmentWordCount = document.getElementById('fragmentWordCount');
+    const fragmentCharCount = document.getElementById('fragmentCharCount');
+    const fragmentPublishBtn = document.getElementById('fragmentPublishBtn');
+    const fragmentClearBtn = document.getElementById('fragmentClearBtn');
+    const fragmentsDock = document.getElementById('fragmentsDock');
+
+    const imageInput = document.getElementById('imageInput');
+    const mediaShell = document.getElementById('mediaShell');
+    const mediaPreview = document.getElementById('mediaPreview');
+    const fileMeta = document.getElementById('fileMeta');
+    const postDate = document.getElementById('postDate');
+    const postTitle = document.getElementById('postTitle');
+    const postBody = document.getElementById('postBody');
+    const postAlt = document.getElementById('postAlt');
+    const wordCount = document.getElementById('wordCount');
+    const charCount = document.getElementById('charCount');
+    const statusLine = document.getElementById('statusLine');
+    const publishBtn = document.getElementById('publishBtn');
+    const clearBtn = document.getElementById('clearBtn');
+    const wordDock = document.getElementById('wordDock');
+
+    const recoveryToast = document.getElementById('recoveryToast');
+    const recoveryToastCopy = document.getElementById('recoveryToastCopy');
+    const publishToast = document.getElementById('publishToast');
+    const publishToastTitle = document.getElementById('publishToastTitle');
+    const publishToastCopy = document.getElementById('publishToastCopy');
+
+    const fragmentTagButtons = Array.from(document.querySelectorAll('[data-fragment-tag]'));
+
+    let activeWorkspace = 'home';
+    let activeFragmentTag = 'FRAGMENT';
+    let imageObjectUrl = null;
+    let recoveryToastTimer = null;
+    let publishToastTimer = null;
+
+    function setActiveDock(activeId) {
+      [dockHomeBtn, dockWordpersonBtn, dockFragmentsBtn, dockSettingsBtn].forEach((button) => {
+        if (!button) return;
+        button.classList.toggle('is-active', button.id === activeId);
+      });
+    }
+
+    function todayValue() {
+      return new Date().toISOString().slice(0, 10);
+    }
+
+    function currentTimestamp() {
+      return new Date().toISOString();
+    }
+
+    function formatDate(value) {
+      if (!value) return 'TODAY';
+      const parsed = new Date(`${value}T12:00:00`);
+      if (Number.isNaN(parsed.getTime())) return String(value).toUpperCase();
+      return new Intl.DateTimeFormat('en-US', {
+        month: 'long',
+        day: 'numeric',
+        year: 'numeric'
+      }).format(parsed).toUpperCase();
+    }
+
+    function getPublishKey() {
+      return window.localStorage.getItem(PUBLISH_KEY_STORAGE) || '';
+    }
+
+    function updatePublishKeyStatus() {
+      publishKeyStatus.textContent = getPublishKey()
+        ? 'Emily’s publish key is saved on this device.'
+        : 'No word.person publish key is saved on this device.';
+    }
+
+    function openSettingsSheet() {
+      publishKeyInput.value = getPublishKey();
+      updatePublishKeyStatus();
+      settingsSheet.classList.add('is-open');
+      settingsSheet.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeSettingsSheet() {
+      settingsSheet.classList.remove('is-open');
+      settingsSheet.setAttribute('aria-hidden', 'true');
+    }
+
+    function savePublishKey() {
+      const value = publishKeyInput.value.trim();
+      if (!value) {
+        window.localStorage.removeItem(PUBLISH_KEY_STORAGE);
+        updatePublishKeyStatus();
+        if (activeWorkspace === 'fragments') {
+          fragmentStatusLine.textContent = 'Emily’s publish key was cleared from this device.';
+        } else if (activeWorkspace === 'wordperson') {
+          statusLine.textContent = 'Emily’s publish key was cleared from this device.';
+        }
+        return;
+      }
+
+      window.localStorage.setItem(PUBLISH_KEY_STORAGE, value);
+      updatePublishKeyStatus();
+      if (activeWorkspace === 'fragments') {
+        fragmentStatusLine.textContent = 'Emily’s publish key was saved locally on this device.';
+      } else if (activeWorkspace === 'wordperson') {
+        statusLine.textContent = 'Emily’s publish key was saved locally on this device.';
+      }
+    }
+
+    function showRecoveryToast(copy) {
+      if (recoveryToastTimer) {
+        window.clearTimeout(recoveryToastTimer);
+      }
+      recoveryToastCopy.textContent = copy;
+      recoveryToast.classList.add('show');
+      recoveryToastTimer = window.setTimeout(() => {
+        recoveryToast.classList.remove('show');
+      }, 4000);
+    }
+
+    function showPublishToast(title, copy) {
+      if (publishToastTimer) {
+        window.clearTimeout(publishToastTimer);
+      }
+      publishToastTitle.textContent = title;
+      publishToastCopy.textContent = copy;
+      publishToast.classList.add('show');
+      publishToastTimer = window.setTimeout(() => {
+        publishToast.classList.remove('show');
+      }, 3600);
+    }
+
+    function celebratePublish(button, restingLabel, successLabel) {
+      button.classList.add('is-success');
+      button.textContent = successLabel;
+      window.setTimeout(() => {
+        button.classList.remove('is-success');
+        button.textContent = restingLabel;
+      }, 1400);
+    }
+
+    function setWorkspace(nextWorkspace) {
+      activeWorkspace = nextWorkspace;
+      homeWorkspace.classList.toggle('is-active', nextWorkspace === 'home');
+      fragmentsWorkspace.classList.toggle('is-active', nextWorkspace === 'fragments');
+      wordpersonWorkspace.classList.toggle('is-active', nextWorkspace === 'wordperson');
+      fragmentsDock.classList.toggle('is-active', nextWorkspace === 'fragments');
+      wordDock.classList.toggle('is-active', nextWorkspace === 'wordperson');
+      backBtn.hidden = nextWorkspace === 'home';
+
+      if (nextWorkspace === 'fragments') {
+        topbarTitle.textContent = 'frgm<nts';
+        setActiveDock('dockFragmentsBtn');
+      } else if (nextWorkspace === 'wordperson') {
+        topbarTitle.textContent = 'word.person';
+        setActiveDock('dockWordpersonBtn');
+      } else {
+        topbarTitle.textContent = 'word.person';
+        setActiveDock('dockHomeBtn');
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function openSiteWithReturnHint(url, label) {
+      window.open(url, '_blank', 'noopener');
+      showPublishToast(
+        `${label} opened`,
+        'It opened in a new tab. Close that tab anytime to come straight back to Emmy’s app.'
+      );
+    }
+
+    function selectFragmentTag(tag) {
+      activeFragmentTag = tag;
+      fragmentTagButtons.forEach((button) => {
+        button.classList.toggle('is-active', button.dataset.fragmentTag === tag);
+      });
+      updateFragmentPreview();
+      saveFragmentDraft();
+    }
+
+    function currentFragmentDraft() {
+      return {
+        body: fragmentBody.value,
+        tag: activeFragmentTag
+      };
+    }
+
+    function saveFragmentDraft() {
+      window.localStorage.setItem(FRAGMENT_DRAFT_KEY, JSON.stringify(currentFragmentDraft()));
+    }
+
+    function clearFragmentDraftStorage() {
+      window.localStorage.removeItem(FRAGMENT_DRAFT_KEY);
+    }
+
+    function updateFragmentPreview() {
+      const body = fragmentBody.value.trim();
+      const words = body ? body.split(/\s+/).filter(Boolean).length : 0;
+      fragmentWordCount.textContent = `${words} words`;
+      fragmentCharCount.textContent = `${fragmentBody.value.length} chars`;
+      fragmentPreviewDate.textContent = formatDate(todayValue());
+      fragmentPreviewTag.textContent = activeFragmentTag;
+      fragmentPreviewBody.textContent = body || 'Emily’s shared fragment will appear here as she writes.';
+    }
+
+    function clearFragmentDraft() {
+      fragmentBody.value = '';
+      selectFragmentTag('FRAGMENT');
+      clearFragmentDraftStorage();
+      updateFragmentPreview();
+      fragmentStatusLine.textContent = 'Fragment draft cleared on this device.';
+    }
+
+    async function publishFragment() {
+      const text = fragmentBody.value.trim();
+      const publishKey = getPublishKey() || publishKeyInput.value.trim();
+
+      if (!text) {
+        fragmentStatusLine.textContent = 'Write the fragment first.';
+        return;
+      }
+
+      if (!publishKey) {
+        fragmentStatusLine.textContent = 'Emily’s publish key is needed before this device can share to frgm<nts.';
+        openSettingsSheet();
+        return;
+      }
+
+      fragmentStatusLine.textContent = 'Sharing Emily’s fragment into the live feed...';
+
+      try {
+        const response = await fetch(FRAGMENT_PUBLISH_ENDPOINT, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-publish-key': publishKey
+          },
+          body: JSON.stringify({
+            timestamp: currentTimestamp(),
+            text,
+            tag: activeFragmentTag,
+            author: 'Emily',
+            author_handle: '@word.person'
+          })
+        });
+
+        const payload = await response.json().catch(() => ({}));
+        if (!response.ok || !payload.ok) {
+          throw new Error(payload.error || `Publish failed with status ${response.status}`);
+        }
+
+        if (publishKeyInput.value.trim()) {
+          window.localStorage.setItem(PUBLISH_KEY_STORAGE, publishKeyInput.value.trim());
+          updatePublishKeyStatus();
+        }
+
+        clearFragmentDraftStorage();
+        fragmentBody.value = '';
+        selectFragmentTag('FRAGMENT');
+        updateFragmentPreview();
+        fragmentStatusLine.textContent = 'Fragment published successfully. It should appear in the shared feed shortly.';
+        celebratePublish(fragmentPublishBtn, 'Share to frgm<nts', 'Shared');
+        showPublishToast('Fragment published', 'Emily’s fragment is on its way to the shared feed.');
+      } catch (error) {
+        fragmentStatusLine.textContent = error.message || 'Publish failed.';
+      }
+    }
+
+    function deriveTitle(body) {
+      const cleaned = String(body || '').replace(/\s+/g, ' ').trim();
+      if (!cleaned) return 'Untitled reflection';
+      const firstSentence = cleaned.split(/(?<=[.!?])\s+/)[0] || cleaned;
+      return firstSentence.length > 72 ? `${firstSentence.slice(0, 69).trimEnd()}...` : firstSentence;
+    }
+
+    function deriveExcerpt(body) {
+      const cleaned = String(body || '').replace(/\s+/g, ' ').trim();
+      if (!cleaned) return 'Choose an image and begin writing. The preview will settle into place as you go.';
+      return cleaned.length > 210 ? `${cleaned.slice(0, 207).trimEnd()}...` : cleaned;
+    }
+
+    function currentWordDraft() {
+      return {
+        date: postDate.value || todayValue(),
+        title: postTitle.value,
+        body: postBody.value,
+        alt: postAlt.value
+      };
+    }
+
+    function saveWordDraft() {
+      window.localStorage.setItem(WORD_DRAFT_KEY, JSON.stringify(currentWordDraft()));
+    }
+
+    function clearWordDraftStorage() {
+      window.localStorage.removeItem(WORD_DRAFT_KEY);
+    }
+
+    function updateWordPreview() {
+      const body = postBody.value.trim();
+      const words = body ? body.split(/\s+/).filter(Boolean).length : 0;
+      wordCount.textContent = `${words} words`;
+      charCount.textContent = `${postBody.value.length} chars`;
+    }
+
+    function setImagePreview(file) {
+      if (imageObjectUrl) {
+        URL.revokeObjectURL(imageObjectUrl);
+        imageObjectUrl = null;
+      }
+
+      if (!file) {
+        mediaShell.classList.remove('has-image');
+        mediaPreview.removeAttribute('src');
+        mediaPreview.alt = '';
+        fileMeta.textContent = 'No image selected yet.';
+        return;
+      }
+
+      imageObjectUrl = URL.createObjectURL(file);
+      mediaShell.classList.add('has-image');
+      mediaPreview.src = imageObjectUrl;
+      mediaPreview.alt = file.name;
+
+      const sizeKb = Math.max(1, Math.round(file.size / 1024));
+      const probe = new Image();
+      probe.onload = () => {
+        fileMeta.textContent = `${file.name} // ${probe.naturalWidth}×${probe.naturalHeight} // ${sizeKb} KB`;
+      };
+      probe.onerror = () => {
+        fileMeta.textContent = `${file.name} // ${sizeKb} KB`;
+      };
+      probe.src = imageObjectUrl;
+    }
+
+    function clearWordDraft() {
+      postDate.value = todayValue();
+      postTitle.value = '';
+      postBody.value = '';
+      postAlt.value = '';
+      imageInput.value = '';
+      clearWordDraftStorage();
+      setImagePreview(null);
+      updateWordPreview();
+      statusLine.textContent = 'word.person draft cleared on this device.';
+    }
+
+    async function publishWordEntry() {
+      const file = imageInput.files && imageInput.files[0];
+      const body = postBody.value.trim();
+      const title = postTitle.value.trim();
+      const date = postDate.value || todayValue();
+      const alt = postAlt.value.trim();
+      const publishKey = getPublishKey() || publishKeyInput.value.trim();
+
+      if (!file) {
+        statusLine.textContent = 'Choose the image first. This lane begins there.';
+        return;
+      }
+
+      if (!body) {
+        statusLine.textContent = 'Add the reflection before you share it.';
+        return;
+      }
+
+      if (!publishKey) {
+        statusLine.textContent = 'Emily’s publish key is needed before this device can share live posts.';
+        openSettingsSheet();
+        return;
+      }
+
+      statusLine.textContent = 'Sharing the image and reflection to word.person...';
+
+      try {
+        const formData = new FormData();
+        formData.append('image', file);
+        formData.append('date', date);
+        formData.append('title', title);
+        formData.append('body', body);
+        formData.append('alt', alt);
+
+        const response = await fetch(WORD_PUBLISH_ENDPOINT, {
+          method: 'POST',
+          headers: {
+            'x-publish-key': publishKey
+          },
+          body: formData
+        });
+
+        const payload = await response.json().catch(() => ({}));
+        if (!response.ok || !payload.ok) {
+          throw new Error(payload.error || `Publish failed with status ${response.status}`);
+        }
+
+        if (publishKeyInput.value.trim()) {
+          window.localStorage.setItem(PUBLISH_KEY_STORAGE, publishKeyInput.value.trim());
+          updatePublishKeyStatus();
+        }
+
+        clearWordDraftStorage();
+        postDate.value = todayValue();
+        postTitle.value = '';
+        postBody.value = '';
+        postAlt.value = '';
+        imageInput.value = '';
+        setImagePreview(null);
+        updateWordPreview();
+        statusLine.textContent = 'Post published successfully. The word.person page should update shortly.';
+        celebratePublish(publishBtn, 'Share', 'Shared');
+        showPublishToast('Post published', 'Her image and reflection are on their way to the site.');
+      } catch (error) {
+        statusLine.textContent = error.message || 'Publish failed.';
+      }
+    }
+
+    function hydrateFragmentDraft() {
+      try {
+        const draft = JSON.parse(window.localStorage.getItem(FRAGMENT_DRAFT_KEY) || 'null');
+        if (!draft) return;
+        fragmentBody.value = draft.body || '';
+        selectFragmentTag(draft.tag || 'FRAGMENT');
+        fragmentStatusLine.textContent = 'The last fragments draft was restored from this device.';
+        showRecoveryToast('We recovered the last frgm<nts draft from this device.');
+      } catch {
+        // Ignore malformed local state.
+      }
+    }
+
+    function hydrateWordDraft() {
+      try {
+        const draft = JSON.parse(window.localStorage.getItem(WORD_DRAFT_KEY) || 'null');
+        if (!draft) return;
+
+        postDate.value = draft.date || todayValue();
+        postTitle.value = draft.title || '';
+        postBody.value = draft.body || '';
+        postAlt.value = draft.alt || '';
+        statusLine.textContent = 'The last word.person draft was restored from this device.';
+        showRecoveryToast('We recovered the last word.person draft from this device.');
+      } catch {
+        // Ignore malformed local state.
+      }
+    }
+
+    openFragmentsTool.addEventListener('click', () => setWorkspace('fragments'));
+    openWordpersonTool.addEventListener('click', () => setWorkspace('wordperson'));
+    backBtn.addEventListener('click', () => setWorkspace('home'));
+    dockHomeBtn.addEventListener('click', () => setWorkspace('home'));
+    dockWordpersonBtn.addEventListener('click', () => openSiteWithReturnHint('wordperson.html', 'word.person'));
+    dockFragmentsBtn.addEventListener('click', () => openSiteWithReturnHint('fragments.html', 'frgm<nts'));
+    dockSettingsBtn.addEventListener('click', openSettingsSheet);
+
+    closeSheetBtn.addEventListener('click', closeSettingsSheet);
+    saveKeyBtn.addEventListener('click', savePublishKey);
+    settingsSheet.addEventListener('click', (event) => {
+      if (event.target === settingsSheet) {
+        closeSettingsSheet();
+      }
+    });
+
+    fragmentTagButtons.forEach((button) => {
+      button.addEventListener('click', () => selectFragmentTag(button.dataset.fragmentTag));
+    });
+
+    fragmentBody.addEventListener('input', () => {
+      saveFragmentDraft();
+      updateFragmentPreview();
+    });
+
+    fragmentPublishBtn.addEventListener('click', publishFragment);
+    fragmentClearBtn.addEventListener('click', clearFragmentDraft);
+
+    imageInput.addEventListener('change', () => {
+      const file = imageInput.files && imageInput.files[0];
+      setImagePreview(file || null);
+      saveWordDraft();
+      updateWordPreview();
+    });
+
+    [postDate, postTitle, postBody, postAlt].forEach((element) => {
+      element.addEventListener('input', () => {
+        saveWordDraft();
+        updateWordPreview();
+      });
+    });
+
+    publishBtn.addEventListener('click', publishWordEntry);
+    clearBtn.addEventListener('click', clearWordDraft);
+
+    postDate.value = todayValue();
+    updatePublishKeyStatus();
+    setActiveDock('dockHomeBtn');
+    hydrateFragmentDraft();
+    hydrateWordDraft();
+    updateFragmentPreview();
+    updateWordPreview();
+  </script>
+</body>
+</html>

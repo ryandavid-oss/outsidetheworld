@@ -1,6 +1,7 @@
 const FRAGMENTS_PATH = "fragments_data.js";
 const CHANGELOG_PATH = "changelog.json";
 const IMAGE_MANIFEST_PATH = "image_manifest.json";
+const WORDPERSON_MANIFEST_PATH = "wordperson_manifest.json";
 const CURRENT_NARRATIVE_DIR = "current_narrative";
 const FRAGMENTS_PATTERN = /window\.otw_fragments\s*=\s*(\[[\s\S]*?\])\s*;/m;
 
@@ -45,9 +46,27 @@ function jsonResponse(data, status = 200) {
   });
 }
 
+function getPublishHeader(request) {
+  return String(request.headers.get("x-publish-key") || "").trim();
+}
+
+function matchesSecret(key, secret) {
+  return Boolean(key && secret && key === secret);
+}
+
 function isAuthorized(request, env) {
-  const key = request.headers.get("x-publish-key");
-  return Boolean(key && env.PUBLISH_KEY && key === env.PUBLISH_KEY);
+  const key = getPublishHeader(request);
+  return matchesSecret(key, env.PUBLISH_KEY);
+}
+
+function isWordpersonAuthorized(request, env) {
+  const key = getPublishHeader(request);
+  return matchesSecret(key, env.WORDPERSON_PUBLISH_KEY);
+}
+
+function isFamilyFeedAuthorized(request, env) {
+  const key = getPublishHeader(request);
+  return matchesSecret(key, env.PUBLISH_KEY) || matchesSecret(key, env.WORDPERSON_PUBLISH_KEY);
 }
 
 function decodeBase64Utf8(content) {
@@ -101,6 +120,10 @@ function normalizeFragmentEntry(entry) {
     normalized.author = String(entry.author).trim();
   }
 
+  if (entry.author_handle) {
+    normalized.author_handle = String(entry.author_handle).trim();
+  }
+
   return normalized;
 }
 
@@ -113,6 +136,7 @@ function dedupeFragments(entries) {
     const key = [
       normalized.timestamp,
       String(normalized.author || "").trim(),
+      String(normalized.author_handle || "").trim(),
       normalized.tag,
       normalized.text
     ].join("||");
@@ -266,6 +290,105 @@ function normalizeIotdEntry(entry) {
   return { date, title, caption, image };
 }
 
+function normalizeWordpersonDate(raw) {
+  const value = String(raw || "").trim();
+  if (!value) {
+    return new Date().toISOString().slice(0, 10);
+  }
+  if (value.length !== 10 || value[4] !== "-" || value[7] !== "-") {
+    throw new Error("word.person date must be in YYYY-MM-DD format");
+  }
+  return value;
+}
+
+function normalizeWordpersonBody(raw) {
+  const body = String(raw || "").trim();
+  if (!body) {
+    throw new Error("word.person body is required");
+  }
+  return body;
+}
+
+function deriveWordpersonTitle(body) {
+  const cleaned = stripMarkdownForTitle(body);
+  if (!cleaned) {
+    return "Untitled reflection";
+  }
+
+  const firstSentence = cleaned.split(/(?<=[.!?])\s+/)[0]?.trim() || cleaned;
+  return firstSentence.length > 72 ? `${firstSentence.slice(0, 69).trimEnd()}...` : firstSentence;
+}
+
+function normalizeWordpersonTitle(raw, body) {
+  const title = String(raw || "").trim();
+  return title || deriveWordpersonTitle(body);
+}
+
+function deriveWordpersonExcerpt(body) {
+  const firstParagraph = String(body || "")
+    .split(/\n\s*\n/)
+    .map((part) => stripMarkdownForTitle(part))
+    .find(Boolean);
+
+  const source = firstParagraph || stripMarkdownForTitle(body);
+  if (!source) {
+    return "";
+  }
+
+  return source.length > 190 ? `${source.slice(0, 187).trimEnd()}...` : source;
+}
+
+function normalizeWordpersonAlt(raw, title) {
+  const alt = String(raw || "").trim();
+  return alt || title;
+}
+
+function buildWordpersonImageUrl(env, objectKey) {
+  const base = String(env.IOTD_PUBLIC_BASE_URL || "").replace(/\/+$/g, "");
+  if (!base) {
+    throw new Error("Public image base URL is not configured");
+  }
+  return `${base}/${objectKey}`;
+}
+
+function normalizeWordpersonEntry(entry) {
+  if (!entry || typeof entry !== "object") {
+    throw new Error("word.person payload must be an object");
+  }
+
+  const date = normalizeWordpersonDate(entry.date);
+  const body = normalizeWordpersonBody(entry.body);
+  const title = normalizeWordpersonTitle(entry.title, body);
+  const excerpt = String(entry.excerpt || "").trim() || deriveWordpersonExcerpt(body);
+  const image = String(entry.image || "").trim();
+  const alt = normalizeWordpersonAlt(entry.alt, title);
+  const id = String(entry.id || "").trim();
+
+  if (!image) {
+    throw new Error("word.person image URL is required");
+  }
+
+  if (!id) {
+    throw new Error("word.person id is required");
+  }
+
+  return { id, date, title, image, alt, excerpt, body };
+}
+
+function dedupeWordperson(entries) {
+  const seen = new Set();
+  const out = [];
+
+  for (const entry of entries) {
+    const normalized = normalizeWordpersonEntry(entry);
+    if (seen.has(normalized.id)) continue;
+    seen.add(normalized.id);
+    out.push(normalized);
+  }
+
+  return out;
+}
+
 function dedupeIotd(entries) {
   const seen = new Set();
   const out = [];
@@ -415,6 +538,22 @@ async function loadImageManifestFile(env) {
   return { ...file, entries };
 }
 
+async function loadWordpersonManifestFile(env) {
+  const file = await loadRepoFile(env, WORDPERSON_MANIFEST_PATH);
+  let entries;
+  try {
+    entries = JSON.parse(file.raw);
+  } catch (error) {
+    throw new Error(`Could not parse wordperson_manifest.json: ${error.message}`);
+  }
+
+  if (!Array.isArray(entries)) {
+    throw new Error("wordperson_manifest.json is not an array");
+  }
+
+  return { ...file, entries };
+}
+
 function sortFragments(entries) {
   return entries.slice().sort((a, b) => String(b.timestamp || "").localeCompare(String(a.timestamp || "")));
 }
@@ -425,6 +564,28 @@ function sortChangelog(entries) {
 
 function sortIotd(entries) {
   return entries.slice().sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")));
+}
+
+function sortWordperson(entries) {
+  return entries.slice().sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")));
+}
+
+function buildUniqueWordpersonIdentity(existingEntries, date, title, extension) {
+  const titleSlug = slugify(title) || "reflection";
+  for (let attempt = 0; attempt < 50; attempt += 1) {
+    const suffix = attempt === 0 ? "" : `-${attempt + 1}`;
+    const id = `${date}-${titleSlug}${suffix}`;
+    const objectKey = `wordperson/${id}.${extension}`;
+    const exists = existingEntries.some((entry) => {
+      const imagePath = String(entry.image || "");
+      return entry.id === id || imagePath.endsWith(`/${objectKey}`) || imagePath.endsWith(objectKey);
+    });
+    if (!exists) {
+      return { id, objectKey };
+    }
+  }
+
+  throw new Error("Could not find an available word.person post identity");
 }
 
 async function findAvailableNarrativePath(env, date, title) {
@@ -472,13 +633,14 @@ export default {
           publish_bot_fragment: "POST /publish-bot-fragment",
           publish_changelog_entry: "POST /publish-changelog-entry",
           publish_ghost_draft: "POST /publish-ghost-draft",
-          publish_iotd_entry: "POST /publish-iotd-entry"
+          publish_iotd_entry: "POST /publish-iotd-entry",
+          publish_wordperson_entry: "POST /publish-wordperson-entry"
         }
       });
     }
 
     if (request.method === "POST" && url.pathname === "/publish-fragment") {
-      if (!isAuthorized(request, env)) {
+      if (!isFamilyFeedAuthorized(request, env)) {
         return jsonResponse({ ok: false, error: "Unauthorized" }, 401);
       }
 
@@ -632,6 +794,69 @@ export default {
         });
       } catch (error) {
         return jsonResponse({ ok: false, error: error.message || "Unknown IOTD publish error" }, 400);
+      }
+    }
+
+    if (request.method === "POST" && url.pathname === "/publish-wordperson-entry") {
+      if (!(isAuthorized(request, env) || isWordpersonAuthorized(request, env))) {
+        return jsonResponse({ ok: false, error: "Unauthorized" }, 401);
+      }
+
+      try {
+        if (!env.IOTD_BUCKET) {
+          throw new Error("Image bucket binding is not configured");
+        }
+
+        const formData = await request.formData();
+        const file = formData.get("image");
+        if (!(file instanceof File)) {
+          throw new Error("word.person image file is required");
+        }
+
+        const date = normalizeWordpersonDate(formData.get("date"));
+        const body = normalizeWordpersonBody(formData.get("body"));
+        const title = normalizeWordpersonTitle(formData.get("title"), body);
+        const alt = normalizeWordpersonAlt(formData.get("alt"), title);
+        const extension = detectImageExtension(file);
+
+        const manifestFile = await loadWordpersonManifestFile(env);
+        const identity = buildUniqueWordpersonIdentity(manifestFile.entries, date, title, extension);
+        const imageUrl = buildWordpersonImageUrl(env, identity.objectKey);
+
+        await env.IOTD_BUCKET.put(identity.objectKey, await file.arrayBuffer(), {
+          httpMetadata: {
+            contentType: file.type || "application/octet-stream"
+          }
+        });
+
+        const entry = normalizeWordpersonEntry({
+          id: identity.id,
+          date,
+          title,
+          image: imageUrl,
+          alt,
+          excerpt: formData.get("excerpt"),
+          body
+        });
+
+        const merged = sortWordperson(dedupeWordperson([entry, ...manifestFile.entries]));
+        const updatedRaw = `${JSON.stringify(merged, null, 2)}\n`;
+        const result = await saveRepoFile(
+          env,
+          WORDPERSON_MANIFEST_PATH,
+          updatedRaw,
+          manifestFile.sha,
+          "Publish word.person entry"
+        );
+
+        return jsonResponse({
+          ok: true,
+          published: entry,
+          object_key: identity.objectKey,
+          commit: result.commit?.sha || null
+        });
+      } catch (error) {
+        return jsonResponse({ ok: false, error: error.message || "Unknown word.person publish error" }, 400);
       }
     }
 

@@ -17,6 +17,9 @@ This file is intentionally practical. It is not a polished roadmap. It is a runn
   - Likely requires stable fragment IDs plus Worker support for update/delete actions.
 - Keep the public feed simple and calm.
 - Continue improving cache behavior where needed.
+- Keep expanding the fake `Sponsored Signals` rail on `fragments.html`.
+  - Add more dry, Douglas Adams-style nonsense ads over time.
+  - Especially preserve and build on the tone of entries like `Signal Socks`.
 
 ### OTW_Bot
 

@@ -76,7 +76,7 @@
       --radius-xl: 28px;
       --radius-lg: 22px;
       --radius-md: 16px;
-      --max-width: 760px;
+      --max-width: 1120px;
       --ease: cubic-bezier(0.23, 1, 0.32, 1);
     }
 
@@ -129,6 +129,13 @@
       width: min(var(--max-width), calc(100% - 20px));
       margin: 0 auto;
       padding: calc(var(--safe-top) + 12px) 0 60px;
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 280px;
+      gap: 18px;
+      align-items: start;
     }
 
     .masthead {
@@ -294,6 +301,99 @@
     .feed {
       display: grid;
       gap: 12px;
+    }
+
+    .signals-rail {
+      position: sticky;
+      top: calc(var(--safe-top) + 134px);
+      display: grid;
+      gap: 12px;
+    }
+
+    .signals-kicker {
+      margin: 0 0 2px;
+      color: var(--brand-teal);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .signal-card {
+      display: grid;
+      gap: 10px;
+      padding: 16px 16px 15px;
+      text-decoration: none;
+      color: inherit;
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(145, 175, 179, 0.14);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.026)),
+        radial-gradient(circle at top right, rgba(155, 89, 182, 0.11), transparent 48%);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 16px 34px rgba(0, 0, 0, 0.16);
+      transition: transform 0.22s var(--ease), border-color 0.22s var(--ease), background 0.22s var(--ease);
+      cursor: default;
+      pointer-events: none;
+    }
+
+    body[data-theme="light"] .signal-card {
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.74), rgba(255, 255, 255, 0.64)),
+        radial-gradient(circle at top right, rgba(155, 89, 182, 0.08), transparent 48%);
+      box-shadow: 0 12px 28px rgba(27, 54, 93, 0.08);
+    }
+
+    .signal-card:hover {
+      transform: translateY(-1px);
+      border-color: rgba(155, 89, 182, 0.22);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03)),
+        radial-gradient(circle at top right, rgba(155, 89, 182, 0.14), transparent 48%);
+    }
+
+    .signal-label {
+      color: rgba(155, 89, 182, 0.96);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.63rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .signal-title {
+      margin: 0;
+      color: var(--text-main);
+      font-family: "IBM Plex Serif", serif;
+      font-size: 1.08rem;
+      line-height: 1.18;
+      letter-spacing: -0.02em;
+    }
+
+    .signal-copy {
+      margin: 0;
+      color: var(--text-soft);
+      font-size: 0.88rem;
+      line-height: 1.58;
+    }
+
+    .signal-foot {
+      color: var(--text-faint);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .signals-disclaimer {
+      margin: 2px 2px 0;
+      color: var(--text-faint);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.58rem;
+      line-height: 1.55;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      opacity: 0.86;
     }
 
     .fragment-card {
@@ -490,9 +590,19 @@
       white-space: pre-wrap;
     }
 
+    @media (max-width: 940px) {
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .signals-rail {
+        display: none;
+      }
+    }
+
     @media (max-width: 640px) {
       .shell {
-        width: min(var(--max-width), calc(100% - 12px));
+        width: min(760px, calc(100% - 12px));
         padding-top: calc(var(--safe-top) + 14px);
       }
 
@@ -609,10 +719,117 @@
       <span class="type-cursor" aria-hidden="true"></span>
     </div>
 
-    <main class="feed" id="fragmentsFeed" aria-live="polite"></main>
+    <div class="content-grid">
+      <main class="feed" id="fragmentsFeed" aria-live="polite"></main>
+      <aside class="signals-rail" id="signalsRail" aria-label="Sponsored signals">
+        <p class="signals-kicker">Sponsored Signals</p>
+      </aside>
+    </div>
   </div>
 
   <script>
+    const sponsoredSignals = [
+      {
+        label: 'Sponsored // Utility',
+        title: 'Porch Light Premium',
+        copy: 'For thoughts too small to become cathedrals, but too loud to leave in the dark.',
+        foot: 'No subscription required'
+      },
+      {
+        label: 'Ad // Civic Service',
+        title: 'Queen Creek Signal Repair',
+        copy: 'We align crossed wires, unhelpful narratives, and at least one avoidable mood spiral per quarter.',
+        foot: 'Walk-ins mildly tolerated'
+      },
+      {
+        label: 'OTW_Bot Recommends',
+        title: 'Adequacy Plus',
+        copy: 'Now with 14% less self-explanation. Suitable for notes, drafts, and emotionally overqualified sentences.',
+        foot: 'Trusted by one machine'
+      },
+      {
+        label: 'Market Notice',
+        title: 'Continuity Insurance',
+        copy: 'Protect your emotional narrative against outages, revisions, and unlicensed overthinking.',
+        foot: 'Claims processed eventually'
+      },
+      {
+        label: 'Public Notice',
+        title: 'Unfinished Thoughts Archive',
+        copy: 'Drop off three half-formed insights and receive one slightly better sentence by post.',
+        foot: 'Postage not included'
+      },
+      {
+        label: 'Residue Services',
+        title: 'Portable Meaning',
+        copy: 'Now available in travel size for airports, waiting rooms, and minor personal reckonings.',
+        foot: 'Fits in carry-on luggage'
+      },
+      {
+        label: 'Promotional Consideration',
+        title: 'Signal Socks',
+        copy: 'For anyone trying to maintain dignity while standing in the kitchen having a private crisis.',
+        foot: 'Left and right sold separately'
+      },
+      {
+        label: 'Ad // Household',
+        title: 'Archive Dust Management',
+        copy: 'Because every memory deserves a tasteful shelf and at least one soft cloth.',
+        foot: 'Recommended by nobody official'
+      },
+      {
+        label: 'Sponsored // Emotional Weather',
+        title: 'Provisional Calm',
+        copy: 'A temporary holding pattern for thoughts that insist on filing themselves as emergencies.',
+        foot: 'Mildly lavender-scented'
+      },
+      {
+        label: 'Systems Update',
+        title: 'Porchlight Pro Max',
+        copy: 'For users who accidentally built a cathedral and now need tasteful exterior guidance.',
+        foot: 'Batteries spiritually included'
+      },
+      {
+        label: 'OTW_Bot Classifieds',
+        title: 'Sentence Straightening',
+        copy: 'Bent clauses, overgrown metaphors, and emotionally swollen adverbs restored to serviceable condition.',
+        foot: 'One quote per customer'
+      },
+      {
+        label: 'Ad // Household',
+        title: 'Countertop Theology',
+        copy: 'Now available in a wipe-clean finish for revelations that arrive during dish duty.',
+        foot: 'Pairs well with coffee'
+      },
+      {
+        label: 'Sponsored // Field Gear',
+        title: 'Mood Lantern 2',
+        copy: 'Casts a flattering light on passing insights and most forms of low-grade existential drift.',
+        foot: 'Not safe for committee use'
+      },
+      {
+        label: 'Civic Tender',
+        title: 'Local Certainty Exchange',
+        copy: 'Trade five opinions and receive one modest conviction suitable for everyday use.',
+        foot: 'Hours vary by temperament'
+      },
+      {
+        label: 'Promotional Signal',
+        title: 'Perspective Ration Pack',
+        copy: 'Shelf-stable reassurance for long stretches of scrolling, spiraling, or professional Mondayness.',
+        foot: 'Now in family size'
+      }
+    ];
+
+    function shuffleArray(items) {
+      const copy = [...items];
+      for (let index = copy.length - 1; index > 0; index -= 1) {
+        const swapIndex = Math.floor(Math.random() * (index + 1));
+        [copy[index], copy[swapIndex]] = [copy[swapIndex], copy[index]];
+      }
+      return copy;
+    }
+
     async function loadFragmentsData() {
       const cacheBust = `ts=${Date.now()}`;
       const response = await fetch(`fragments_data.js?${cacheBust}`, {
@@ -668,6 +885,41 @@
       return `${stamp}--${bodyStub}`;
     }
 
+    function getAuthorProfile(fragment) {
+      const author = String(fragment.author || '').trim();
+      const authorHandle = String(fragment.author_handle || '').trim();
+
+      if (author === 'OTW_Bot') {
+        return {
+          name: 'OTW_Bot',
+          handle: authorHandle || '@otw_bot',
+          avatarHtml: '<img class="fragment-avatar bot-avatar" src="Images/OTW_Bot.png" alt="OTW_Bot" />',
+          isBot: true
+        };
+      }
+
+      if (
+        author.toLowerCase() === 'emily' ||
+        author.toLowerCase() === 'emily burningham' ||
+        authorHandle.toLowerCase() === '@word.person' ||
+        authorHandle.toLowerCase() === 'word.person'
+      ) {
+        return {
+          name: 'Emily',
+          handle: '@word.person',
+          avatarHtml: '<img class="fragment-avatar" src="Images/IG_Emmy.jpg" alt="Emily" />',
+          isBot: false
+        };
+      }
+
+      return {
+        name: author || 'The_RyanDavid',
+        handle: authorHandle || '@outsidetheworld',
+        avatarHtml: '<img class="fragment-avatar" src="Images/Profile.jpg" alt="The_RyanDavid" />',
+        isBot: false
+      };
+    }
+
     function formatTimestamp(timestamp) {
       const value = new Date(timestamp);
       if (Number.isNaN(value.getTime())) {
@@ -694,6 +946,27 @@
   "tag": "FIELD_NOTE"
 }</span>
         </section>
+      `;
+    }
+
+    function renderSponsoredSignals() {
+      const rail = document.getElementById('signalsRail');
+      if (!rail) {
+        return;
+      }
+
+      const picks = shuffleArray(sponsoredSignals).slice(0, 3);
+      rail.innerHTML = `
+        <p class="signals-kicker">Sponsored Signals</p>
+        ${picks.map((signal) => `
+          <a class="signal-card" href="#" tabindex="-1" aria-hidden="true">
+            <div class="signal-label">${escapeHtml(signal.label)}</div>
+            <h2 class="signal-title">${escapeHtml(signal.title)}</h2>
+            <p class="signal-copy">${escapeHtml(signal.copy)}</p>
+            <div class="signal-foot">${escapeHtml(signal.foot)}</div>
+          </a>
+        `).join('')}
+        <p class="signals-disclaimer">Randomly generated by OTW.ai.<br>Every attempt has been made to be offensive and dry.</p>
       `;
     }
 
@@ -724,29 +997,25 @@
       container.innerHTML = items.map((fragment) => {
         const tag = fragment.tag ? `<div class="fragment-tag">${escapeHtml(fragment.tag)}</div>` : '';
         const timestamp = formatTimestamp(fragment.timestamp || '');
-        const isBot = fragment.author === 'OTW_Bot';
-        const name = isBot ? 'OTW_Bot' : 'The_RyanDavid';
-        const handle = isBot ? '@otw_bot' : '@outsidetheworld';
+        const authorProfile = getAuthorProfile(fragment);
+        const isBot = authorProfile.isBot;
         const fragmentId = buildFragmentId(fragment);
-        const avatar = isBot
-          ? '<img class="fragment-avatar bot-avatar" src="Images/OTW_Bot.png" alt="OTW_Bot" />'
-          : '<img class="fragment-avatar" src="Images/Profile.jpg" alt="The_RyanDavid" />';
 
         return `
           <article class="fragment-card${isBot ? ' is-bot' : ''}" id="fragment-${fragmentId}" data-fragment-id="${fragmentId}">
             <div class="fragment-head">
               <div class="fragment-identity">
-                ${avatar}
+                ${authorProfile.avatarHtml}
                 <div class="fragment-id">
                   <div class="fragment-title">
                     <div class="fragment-title-top">
-                      <div class="fragment-name">${escapeHtml(name)}</div>
+                      <div class="fragment-name">${escapeHtml(authorProfile.name)}</div>
                       <svg class="verified-badge" viewBox="0 0 24 24" aria-label="Verified">
                         <path fill="#9B59B6" d="M12 1.8l2.76 1.58 3.16-.23 1.58 2.76 2.76 1.58-.23 3.16L23 12l-1.97 2.55.23 3.16-2.76 1.58-1.58 2.76-3.16-.23L12 22.2l-2.76-1.58-3.16.23-1.58-2.76-2.76-1.58.23-3.16L1 12l1.97-2.55-.23-3.16 2.76-1.58 1.58-2.76 3.16.23L12 1.8z"></path>
                         <path fill="#F5F7FB" d="M10.55 15.62l-2.6-2.6 1.2-1.2 1.4 1.4 4.26-4.26 1.2 1.2z"></path>
                       </svg>
                     </div>
-                    <div class="fragment-handle">${escapeHtml(handle)}</div>
+                    <div class="fragment-handle">${escapeHtml(authorProfile.handle)}</div>
                   </div>
                   ${tag}
                 </div>
@@ -860,6 +1129,7 @@
     });
 
     hydrateTheme();
+    renderSponsoredSignals();
     renderFragments();
     runTypeLine();
   </script>
