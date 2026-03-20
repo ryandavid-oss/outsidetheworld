@@ -892,6 +892,10 @@
       line-height: 1.65;
     }
 
+    .status-line:empty {
+      display: none;
+    }
+
     .status-line strong {
       color: var(--text-main);
     }
@@ -1207,6 +1211,153 @@
       text-transform: uppercase;
     }
 
+    .ghost-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .ghost-stat {
+      padding: 12px 14px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.03);
+      display: grid;
+      gap: 6px;
+    }
+
+    .ghost-stat-label {
+      color: var(--text-faint);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.64rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .ghost-stat-value {
+      color: var(--brand-light-blue);
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .ghost-preview-card {
+      padding: 20px 20px 18px;
+      border-radius: 24px;
+      border: 1px solid var(--border);
+      background:
+        radial-gradient(260px 120px at 50% 0%, rgba(155, 89, 182, 0.1), transparent 74%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.028));
+    }
+
+    .ghost-preview-meta {
+      margin-bottom: 12px;
+      color: var(--brand-teal);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.66rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .ghost-preview-title {
+      margin: 0 0 16px;
+      font-family: "IBM Plex Serif", serif;
+      font-size: clamp(1.8rem, 4.4vw, 2.6rem);
+      line-height: 0.98;
+      letter-spacing: -0.05em;
+    }
+
+    .ghost-prose {
+      color: var(--text-main);
+      line-height: 1.78;
+      font-size: 1rem;
+    }
+
+    .ghost-prose p,
+    .ghost-prose h2,
+    .ghost-prose h3,
+    .ghost-prose hr,
+    .ghost-prose .otw-center {
+      margin: 0 0 1em;
+    }
+
+    .ghost-prose h2,
+    .ghost-prose h3 {
+      font-family: "IBM Plex Serif", serif;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+    }
+
+    .ghost-prose h2 {
+      font-size: 1.55rem;
+    }
+
+    .ghost-prose h3 {
+      font-size: 1.2rem;
+    }
+
+    .ghost-prose hr {
+      border: none;
+      border-top: 1px solid rgba(145, 175, 179, 0.26);
+    }
+
+    .ghost-prose .otw-center {
+      color: var(--brand-teal);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      line-height: 1.6;
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    .ghost-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .ghost-tool-btn {
+      appearance: none;
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-main);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: 0.25s var(--ease);
+    }
+
+    .ghost-tool-btn:hover,
+    .ghost-tool-btn:focus-visible {
+      border-color: var(--brand-blue);
+      background: rgba(160, 190, 245, 0.08);
+      outline: none;
+      transform: translateY(-1px);
+    }
+
+    body[data-theme="light"] .ghost-tool-btn {
+      background: rgba(255, 255, 255, 0.56);
+    }
+
+    .ghost-tool-btn svg {
+      width: 18px;
+      height: 18px;
+      display: block;
+    }
+
+    .ghost-tool-btn.ghost-type-btn {
+      font-family: "IBM Plex Serif", serif;
+      font-size: 0.96rem;
+      font-weight: 700;
+    }
+
     .dot {
       width: 5px;
       height: 5px;
@@ -1331,6 +1482,56 @@
     .publish-toast-close:hover,
     .publish-toast-close:focus-visible {
       color: var(--text-main);
+    }
+
+    .ghost-recovery-toast {
+      position: fixed;
+      inset: 50% auto auto 50%;
+      transform: translate(-50%, -50%) scale(0.98);
+      z-index: 60;
+      width: min(420px, calc(100vw - 36px));
+      padding: 16px 18px;
+      border-radius: 22px;
+      border: 1px solid rgba(145, 175, 179, 0.22);
+      background:
+        radial-gradient(220px 100px at 50% 0%, rgba(155, 89, 182, 0.12), transparent 74%),
+        rgba(10, 10, 10, 0.92);
+      color: var(--text-main);
+      text-align: center;
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.32);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s var(--ease), transform 0.4s var(--ease);
+    }
+
+    body[data-theme="light"] .ghost-recovery-toast {
+      background:
+        radial-gradient(220px 100px at 50% 0%, rgba(155, 89, 182, 0.1), transparent 74%),
+        rgba(247, 243, 235, 0.96);
+      box-shadow: 0 20px 42px rgba(27, 54, 93, 0.12);
+    }
+
+    .ghost-recovery-toast.show {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .ghost-recovery-kicker {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--brand-teal);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.64rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .ghost-recovery-copy {
+      margin: 0;
+      font-size: 0.96rem;
+      line-height: 1.6;
     }
 
     .bottom-dock {
@@ -1651,12 +1852,12 @@
           <p class="app-tile-meta"></p>
         </button>
 
-        <button class="app-tile" type="button" disabled aria-disabled="true">
+        <button class="app-tile" id="openGhostApp" type="button">
           <div class="app-icon" aria-hidden="true">
             <img src="Images/ghost_writer_lite_icon.svg" alt="" />
           </div>
           <h2 class="app-tile-label">Ghost-Writer Lite</h2>
-          <p class="app-tile-meta">Coming Soon</p>
+          <p class="app-tile-meta"></p>
         </button>
 
         <button class="app-tile" id="openBotApp" type="button">
@@ -1899,6 +2100,111 @@
       </div>
     </section>
 
+    <section class="workspace" id="ghostWorkspace">
+      <div class="layout">
+        <main class="panel composer">
+          <div class="status-line" id="ghostStatusLine"></div>
+
+          <form class="form-grid" id="ghostWriterLiteForm">
+            <div class="field">
+              <label for="ghostTitle">Title</label>
+              <input id="ghostTitle" name="ghostTitle" type="text" placeholder="Give the piece a name, or leave it untitled for now." />
+            </div>
+
+            <div class="ghost-stats">
+              <div class="ghost-stat">
+                <span class="ghost-stat-label">Words</span>
+                <span class="ghost-stat-value" id="ghostWordCount">0</span>
+              </div>
+              <div class="ghost-stat">
+                <span class="ghost-stat-label">Chars</span>
+                <span class="ghost-stat-value" id="ghostCharCount">0</span>
+              </div>
+              <div class="ghost-stat">
+                <span class="ghost-stat-label">Read</span>
+                <span class="ghost-stat-value" id="ghostReadTime">1 min</span>
+              </div>
+            </div>
+
+            <div class="ghost-toolbar" aria-label="Ghost writer formatting tools">
+              <button class="ghost-tool-btn ghost-type-btn" id="ghostBoldBtn" type="button" aria-label="Bold"><span aria-hidden="true">B</span></button>
+              <button class="ghost-tool-btn ghost-type-btn" id="ghostItalicBtn" type="button" aria-label="Italic"><span aria-hidden="true"><em>I</em></span></button>
+              <button class="ghost-tool-btn ghost-type-btn" id="ghostH2Btn" type="button" aria-label="Insert heading level 2"><span aria-hidden="true">H2</span></button>
+              <button class="ghost-tool-btn ghost-type-btn" id="ghostH3Btn" type="button" aria-label="Insert heading level 3"><span aria-hidden="true">H3</span></button>
+              <button class="ghost-tool-btn" id="ghostQuoteBtn" type="button" aria-label="Insert quote">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M8.5 9.5H5.8C5.36 9.5 5 9.86 5 10.3V12.7C5 13.14 5.36 13.5 5.8 13.5H8.2V16.2H5.8C3.98 16.2 2.5 14.72 2.5 12.9V10.3C2.5 8.48 3.98 7 5.8 7H8.5V9.5Z"></path>
+                  <path d="M18.5 9.5H15.8C15.36 9.5 15 9.86 15 10.3V12.7C15 13.14 15.36 13.5 15.8 13.5H18.2V16.2H15.8C13.98 16.2 12.5 14.72 12.5 12.9V10.3C12.5 8.48 13.98 7 15.8 7H18.5V9.5Z"></path>
+                </svg>
+              </button>
+              <button class="ghost-tool-btn" id="ghostListBtn" type="button" aria-label="Insert list">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                  <path d="M9 7h10"></path>
+                  <path d="M9 12h10"></path>
+                  <path d="M9 17h10"></path>
+                  <circle cx="5" cy="7" r="0.9" fill="currentColor" stroke="none"></circle>
+                  <circle cx="5" cy="12" r="0.9" fill="currentColor" stroke="none"></circle>
+                  <circle cx="5" cy="17" r="0.9" fill="currentColor" stroke="none"></circle>
+                </svg>
+              </button>
+              <button class="ghost-tool-btn" id="ghostInsertCenteredBtn" type="button" aria-label="Insert centered text">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                  <path d="M5 8h14"></path>
+                  <path d="M8 12h8"></path>
+                  <path d="M5 16h14"></path>
+                </svg>
+              </button>
+              <button class="ghost-tool-btn" id="ghostInsertDividerBtn" type="button" aria-label="Insert divider">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                  <path d="M4 12h16"></path>
+                </svg>
+              </button>
+            </div>
+
+            <div class="field">
+              <label for="ghostBody">Draft</label>
+              <textarea id="ghostBody" name="ghostBody" placeholder="Write the line. Then the next one. Ghost-Writer Lite will keep the structure simple."></textarea>
+              <div class="helper">Markdown-friendly. Centered OTW lines and dividers are supported here too.</div>
+            </div>
+
+            <div class="action-row">
+              <button class="primary-btn" id="ghostPublishBtn" type="button">Publish</button>
+              <button class="secondary-btn" id="ghostDownloadBtn" type="button">Download Draft</button>
+              <button class="secondary-btn" id="ghostClearBtn" type="button">Clear Draft</button>
+            </div>
+          </form>
+        </main>
+
+        <aside class="side-stack">
+          <section class="panel preview-panel">
+            <h2 class="section-title">Live Preview</h2>
+            <article class="ghost-preview-card">
+              <div class="ghost-preview-meta">Ghost-Writer Lite // Local Draft</div>
+              <h3 class="ghost-preview-title" id="ghostPreviewTitle">Untitled draft</h3>
+              <div class="ghost-prose" id="ghostPreviewBody">
+                <p>Your preview will appear here as you write.</p>
+              </div>
+            </article>
+          </section>
+
+          <section class="panel outbox-panel">
+            <h2 class="section-title">Use It Like This</h2>
+            <div class="recent-list">
+              <article class="recent-item">
+                <p class="recent-empty">Use this lane when you want something more deliberate than a fragment, but much lighter than the full ghost-writer console.</p>
+              </article>
+              <article class="recent-item">
+                <p class="recent-empty">`Insert Centered Text` drops in the same centered OTW marker style you use in the blog.</p>
+              </article>
+              <article class="recent-item">
+                <p class="recent-empty">When the piece is ready, copy the markdown or download it and move it into the fuller workflow on your Mac.</p>
+              </article>
+            </div>
+          </section>
+        </aside>
+      </div>
+    </section>
+
     <section class="workspace" id="botWorkspace">
       <div class="bot-shell">
         <section class="panel bot-hero">
@@ -1924,6 +2230,11 @@
       <button class="publish-toast-close" id="publishToastClose" type="button" aria-label="Dismiss publish notice">×</button>
     </div>
     <p class="publish-toast-copy" id="publishToastCopy">Your fragment has been sent to the live feed.</p>
+  </div>
+
+  <div class="ghost-recovery-toast" id="ghostRecoveryToast" role="status" aria-live="polite" aria-atomic="true">
+    <span class="ghost-recovery-kicker">// DRAFT_RECOVERED</span>
+    <p class="ghost-recovery-copy">Recovered the last Ghost-Writer Lite draft from this device.</p>
   </div>
 
   <nav class="bottom-dock" aria-label="Publisher dock">
@@ -1972,11 +2283,13 @@
     const OUTBOX_KEY = 'otwFragmentsPublisherOutbox';
     const CHANGELOG_DRAFT_KEY = 'otwChangelogPublisherDraft';
     const CHANGELOG_OUTBOX_KEY = 'otwChangelogPublisherOutbox';
+    const GHOST_DRAFT_KEY = 'otwGhostWriterLiteDraft';
     const THEME_KEY = 'otwFragmentsPublisherTheme';
     const PUBLISH_KEY_STORAGE = 'otwFragmentsPublishKey';
     const PUBLISH_ENDPOINT = 'https://otw-fragments-publish.ryandavid.workers.dev/publish-fragment';
     const PUBLISH_BOT_ENDPOINT = 'https://otw-fragments-publish.ryandavid.workers.dev/publish-bot-fragment';
     const PUBLISH_CHANGELOG_ENDPOINT = 'https://otw-fragments-publish.ryandavid.workers.dev/publish-changelog-entry';
+    const PUBLISH_GHOST_ENDPOINT = 'https://otw-fragments-publish.ryandavid.workers.dev/publish-ghost-draft';
 
     const textInput = document.getElementById('fragmentText');
     const tagInput = document.getElementById('fragmentTag');
@@ -1999,12 +2312,15 @@
     const publishToastTitle = document.getElementById('publishToastTitle');
     const publishToastCopy = document.getElementById('publishToastCopy');
     const publishToastClose = document.getElementById('publishToastClose');
+    const ghostRecoveryToast = document.getElementById('ghostRecoveryToast');
     const homeWorkspace = document.getElementById('homeWorkspace');
     const fragmentsWorkspace = document.getElementById('fragmentsWorkspace');
     const changelogWorkspace = document.getElementById('changelogWorkspace');
+    const ghostWorkspace = document.getElementById('ghostWorkspace');
     const botWorkspace = document.getElementById('botWorkspace');
     const openFragmentsApp = document.getElementById('openFragmentsApp');
     const openChangelogApp = document.getElementById('openChangelogApp');
+    const openGhostApp = document.getElementById('openGhostApp');
     const openBotApp = document.getElementById('openBotApp');
     const openSiteApp = document.getElementById('openSiteApp');
     const headerBackBtn = document.getElementById('headerBackBtn');
@@ -2032,7 +2348,17 @@
     const changelogPreviewText = document.getElementById('changelogPreviewText');
     const changelogOutboxList = document.getElementById('changelogOutboxList');
     const changelogRecentList = document.getElementById('changelogRecentList');
+    const ghostTitleInput = document.getElementById('ghostTitle');
+    const ghostBodyInput = document.getElementById('ghostBody');
+    const ghostStatusLine = document.getElementById('ghostStatusLine');
+    const ghostWordCount = document.getElementById('ghostWordCount');
+    const ghostCharCount = document.getElementById('ghostCharCount');
+    const ghostReadTime = document.getElementById('ghostReadTime');
+    const ghostPreviewTitle = document.getElementById('ghostPreviewTitle');
+    const ghostPreviewBody = document.getElementById('ghostPreviewBody');
+    const ghostPublishBtn = document.getElementById('ghostPublishBtn');
     let publishToastTimer = null;
+    let ghostRecoveryToastTimer = null;
     let loadedChangelog = [];
 
     function escapeHtml(value) {
@@ -2093,6 +2419,14 @@
       }).format(value).toUpperCase();
     }
 
+    function slugifyGhostTitle(value) {
+      const slug = String(value || 'untitled-draft')
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+      return slug || 'untitled-draft';
+    }
+
     function readOutbox() {
       try {
         return JSON.parse(window.localStorage.getItem(OUTBOX_KEY) || '[]');
@@ -2129,6 +2463,18 @@
 
     function clearChangelogDraftStorage() {
       window.localStorage.removeItem(CHANGELOG_DRAFT_KEY);
+    }
+
+    function writeGhostDraft() {
+      const draft = {
+        title: ghostTitleInput.value,
+        body: ghostBodyInput.value
+      };
+      window.localStorage.setItem(GHOST_DRAFT_KEY, JSON.stringify(draft));
+    }
+
+    function clearGhostDraftStorage() {
+      window.localStorage.removeItem(GHOST_DRAFT_KEY);
     }
 
     function getPublishKey() {
@@ -2209,6 +2555,17 @@
       }, 3200);
     }
 
+    function showGhostRecoveryToast() {
+      if (ghostRecoveryToastTimer) {
+        window.clearTimeout(ghostRecoveryToastTimer);
+      }
+
+      ghostRecoveryToast.classList.add('show');
+      ghostRecoveryToastTimer = window.setTimeout(() => {
+        ghostRecoveryToast.classList.remove('show');
+      }, 4200);
+    }
+
     function celebratePublish() {
       publishBtn.classList.add('is-success');
       publishBtn.textContent = 'Published';
@@ -2224,6 +2581,15 @@
       window.setTimeout(() => {
         changelogPublishBtn.classList.remove('is-success');
         changelogPublishBtn.textContent = 'Publish Now';
+      }, 1400);
+    }
+
+    function celebrateGhostPublish() {
+      ghostPublishBtn.classList.add('is-success');
+      ghostPublishBtn.textContent = 'Published';
+      window.setTimeout(() => {
+        ghostPublishBtn.classList.remove('is-success');
+        ghostPublishBtn.textContent = 'Publish';
       }, 1400);
     }
 
@@ -2315,6 +2681,111 @@
       changelogPreviewType.textContent = type.toUpperCase();
       changelogPreviewText.textContent = text || 'Your changelog entry preview will appear here.';
       changelogCharCount.textContent = `${changelogTextInput.value.length} characters`;
+    }
+
+    function renderGhostMarkup(source) {
+      const lines = normalizeFragmentText(source || '').split(/\r?\n/);
+      const blocks = [];
+      let paragraph = [];
+
+      function flushParagraph() {
+        if (!paragraph.length) return;
+        blocks.push(`<p>${formatGhostInline(paragraph.join(' '))}</p>`);
+        paragraph = [];
+      }
+
+      for (const rawLine of lines) {
+        const line = rawLine.trim();
+
+        if (!line) {
+          flushParagraph();
+          continue;
+        }
+
+        if (line === '---') {
+          flushParagraph();
+          blocks.push('<hr />');
+          continue;
+        }
+
+        const centeredMatch = rawLine.match(/<div class="otw-center">([\s\S]*?)<\/div>/i);
+        if (centeredMatch) {
+          flushParagraph();
+          blocks.push(`<div class="otw-center">${formatGhostInline(centeredMatch[1].trim())}</div>`);
+          continue;
+        }
+
+        if (line.startsWith('### ')) {
+          flushParagraph();
+          blocks.push(`<h3>${formatGhostInline(line.slice(4))}</h3>`);
+          continue;
+        }
+
+        if (line.startsWith('## ')) {
+          flushParagraph();
+          blocks.push(`<h2>${formatGhostInline(line.slice(3))}</h2>`);
+          continue;
+        }
+
+        paragraph.push(line);
+      }
+
+      flushParagraph();
+      return blocks.join('') || '<p>Your preview will appear here as you write.</p>';
+    }
+
+    function formatGhostInline(value) {
+      return escapeHtml(value)
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*(.+?)\*/g, '<em>$1</em>')
+        .replace(/`(.+?)`/g, '<code>$1</code>');
+    }
+
+    function updateGhostPreview() {
+      const title = ghostTitleInput.value.trim();
+      const body = ghostBodyInput.value;
+      const plainText = normalizeFragmentText(body)
+        .replace(/<div class="otw-center">([\s\S]*?)<\/div>/gi, ' $1 ')
+        .replace(/[*`#>-]/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+      const wordCount = plainText ? plainText.split(/\s+/).filter(Boolean).length : 0;
+      const charCountValue = ghostBodyInput.value.length;
+      const readMins = Math.max(1, Math.ceil(wordCount / 220));
+
+      ghostPreviewTitle.textContent = title || 'Untitled draft';
+      ghostPreviewBody.innerHTML = renderGhostMarkup(body);
+      ghostWordCount.textContent = String(wordCount);
+      ghostCharCount.textContent = String(charCountValue);
+      ghostReadTime.textContent = `${readMins} min`;
+    }
+
+    function insertGhostSnippet(snippet) {
+      const { selectionStart, selectionEnd, value } = ghostBodyInput;
+      const nextValue = `${value.slice(0, selectionStart)}${snippet}${value.slice(selectionEnd)}`;
+      ghostBodyInput.value = nextValue;
+      writeGhostDraft();
+      updateGhostPreview();
+      refreshSystemStatus();
+      ghostBodyInput.focus();
+      const nextCursor = selectionStart + snippet.length;
+      ghostBodyInput.setSelectionRange(nextCursor, nextCursor);
+    }
+
+    function wrapGhostSelection(prefix, suffix = prefix, emptyText = '') {
+      const { selectionStart, selectionEnd, value } = ghostBodyInput;
+      const selected = value.slice(selectionStart, selectionEnd);
+      const middle = selected || emptyText;
+      const replacement = `${prefix}${middle}${suffix}`;
+      const nextValue = `${value.slice(0, selectionStart)}${replacement}${value.slice(selectionEnd)}`;
+      ghostBodyInput.value = nextValue;
+      writeGhostDraft();
+      updateGhostPreview();
+      refreshSystemStatus();
+      ghostBodyInput.focus();
+      const start = selectionStart + prefix.length;
+      const end = start + middle.length;
+      ghostBodyInput.setSelectionRange(start, end);
     }
 
     function renderChangelogOutbox() {
@@ -2680,6 +3151,89 @@
       refreshSystemStatus();
     }
 
+    function publishGhostDraft() {
+      const title = ghostTitleInput.value.trim();
+      const body = ghostBodyInput.value.trim();
+      if (!body) {
+        ghostStatusLine.textContent = 'There is nothing to publish yet. Write a line first.';
+        return;
+      }
+
+      const publishKey = publishKeyInput.value.trim() || getPublishKey();
+      if (!publishKey) {
+        ghostStatusLine.textContent = 'Add your publish key first so this device can post Ghost-Writer Lite drafts securely.';
+        return;
+      }
+
+      const now = new Date();
+      const localDate = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+
+      ghostStatusLine.textContent = 'Publishing Ghost-Writer Lite draft to the OTW Worker...';
+
+      fetch(PUBLISH_GHOST_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-publish-key': publishKey
+        },
+        body: JSON.stringify({
+          title,
+          body: ghostBodyInput.value,
+          date: localDate
+        })
+      }).then(async (response) => {
+        const payload = await response.json().catch(() => ({}));
+        if (!response.ok || !payload.ok) {
+          throw new Error(payload.error || `Publish failed with status ${response.status}`);
+        }
+
+        if (publishKeyInput.value.trim()) {
+          window.localStorage.setItem(PUBLISH_KEY_STORAGE, publishKeyInput.value.trim());
+          updatePublishKeyStatus();
+        }
+
+        clearGhostDraftStorage();
+        ghostTitleInput.value = '';
+        ghostBodyInput.value = '';
+        updateGhostPreview();
+        ghostStatusLine.textContent = 'Ghost draft published successfully. The narrative uplink should pick it up shortly.';
+        celebrateGhostPublish();
+        showPublishToast(
+          'Ghost draft published.',
+          'A new markdown entry just landed in current_narrative and should sync into the site shortly.'
+        );
+        refreshSystemStatus();
+      }).catch((error) => {
+        ghostStatusLine.textContent = error.message || 'Publish failed.';
+      });
+    }
+
+    function downloadGhostDraft() {
+      const markdown = `${ghostTitleInput.value.trim() ? `# ${ghostTitleInput.value.trim()}\n\n` : ''}${ghostBodyInput.value}`.trim();
+      if (!markdown) {
+        ghostStatusLine.textContent = 'There is nothing to download yet. Write a line first.';
+        return;
+      }
+
+      const blob = new Blob([markdown], { type: 'text/markdown;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `${slugifyGhostTitle(ghostTitleInput.value)}.md`;
+      link.click();
+      URL.revokeObjectURL(url);
+      ghostStatusLine.textContent = 'Draft downloaded as markdown.';
+    }
+
+    function clearGhostDraft() {
+      ghostTitleInput.value = '';
+      ghostBodyInput.value = '';
+      clearGhostDraftStorage();
+      updateGhostPreview();
+      ghostStatusLine.textContent = 'Ghost-Writer Lite draft cleared on this device.';
+      refreshSystemStatus();
+    }
+
     function hydrateDraft() {
       try {
         const draft = JSON.parse(window.localStorage.getItem(DRAFT_KEY) || 'null');
@@ -2695,6 +3249,20 @@
       }
 
       timestampInput.value = toLocalDatetimeValue();
+    }
+
+    function hydrateGhostDraft() {
+      try {
+        const draft = JSON.parse(window.localStorage.getItem(GHOST_DRAFT_KEY) || 'null');
+        if (draft) {
+          ghostTitleInput.value = draft.title || '';
+          ghostBodyInput.value = draft.body || '';
+          showGhostRecoveryToast();
+          return;
+        }
+      } catch {
+        // Ignore malformed local draft state.
+      }
     }
 
     function hydrateChangelogDraft() {
@@ -2743,11 +3311,12 @@
     }
 
     function setWorkspace(view) {
-      const nextView = ['home', 'fragments', 'changelog', 'bot'].includes(view) ? view : 'home';
+      const nextView = ['home', 'fragments', 'changelog', 'ghost', 'bot'].includes(view) ? view : 'home';
 
       homeWorkspace.classList.toggle('is-active', nextView === 'home');
       fragmentsWorkspace.classList.toggle('is-active', nextView === 'fragments');
       changelogWorkspace.classList.toggle('is-active', nextView === 'changelog');
+      ghostWorkspace.classList.toggle('is-active', nextView === 'ghost');
       botWorkspace.classList.toggle('is-active', nextView === 'bot');
       headerBackBtn.classList.toggle('is-visible', nextView !== 'home');
       dockHomeBtn.classList.toggle('is-active', nextView === 'home');
@@ -2769,6 +3338,41 @@
     document.getElementById('changelogCopyBtn').addEventListener('click', copyLatestChangelogJson);
     document.getElementById('changelogDownloadBtn').addEventListener('click', downloadChangelogOutbox);
     document.getElementById('changelogClearBtn').addEventListener('click', clearChangelogDraft);
+    ghostPublishBtn.addEventListener('click', publishGhostDraft);
+    document.getElementById('ghostDownloadBtn').addEventListener('click', downloadGhostDraft);
+    document.getElementById('ghostClearBtn').addEventListener('click', clearGhostDraft);
+    document.getElementById('ghostBoldBtn').addEventListener('click', () => {
+      wrapGhostSelection('**', '**', 'bold text');
+      ghostStatusLine.textContent = 'Bold markdown inserted into the draft.';
+    });
+    document.getElementById('ghostItalicBtn').addEventListener('click', () => {
+      wrapGhostSelection('*', '*', 'italic text');
+      ghostStatusLine.textContent = 'Italic markdown inserted into the draft.';
+    });
+    document.getElementById('ghostH2Btn').addEventListener('click', () => {
+      insertGhostSnippet('\n## Section Heading\n');
+      ghostStatusLine.textContent = 'Level-two heading inserted into the draft.';
+    });
+    document.getElementById('ghostH3Btn').addEventListener('click', () => {
+      insertGhostSnippet('\n### Smaller Heading\n');
+      ghostStatusLine.textContent = 'Level-three heading inserted into the draft.';
+    });
+    document.getElementById('ghostQuoteBtn').addEventListener('click', () => {
+      insertGhostSnippet('\n> Quoted line\n');
+      ghostStatusLine.textContent = 'Quote block inserted into the draft.';
+    });
+    document.getElementById('ghostListBtn').addEventListener('click', () => {
+      insertGhostSnippet('\n- First point\n- Second point\n- Third point\n');
+      ghostStatusLine.textContent = 'List structure inserted into the draft.';
+    });
+    document.getElementById('ghostInsertCenteredBtn').addEventListener('click', () => {
+      insertGhostSnippet('\n<div class="otw-center">Centered line</div>\n');
+      ghostStatusLine.textContent = 'Centered OTW marker inserted into the draft.';
+    });
+    document.getElementById('ghostInsertDividerBtn').addEventListener('click', () => {
+      insertGhostSnippet('\n---\n');
+      ghostStatusLine.textContent = 'Divider inserted into the draft.';
+    });
     document.getElementById('savePublishKeyBtn').addEventListener('click', savePublishKey);
     summonBotBtn.addEventListener('click', summonOtwBot);
     openFragmentsApp.addEventListener('click', () => {
@@ -2779,6 +3383,12 @@
     });
     openChangelogApp.addEventListener('click', () => {
       setWorkspace('changelog');
+    });
+    openGhostApp.addEventListener('click', () => {
+      setWorkspace('ghost');
+      window.setTimeout(() => {
+        ghostBodyInput.focus();
+      }, 120);
     });
     openBotApp.addEventListener('click', () => {
       setWorkspace('bot');
@@ -2857,6 +3467,19 @@
       });
     });
 
+    [ghostTitleInput, ghostBodyInput].forEach((element) => {
+      element.addEventListener('input', () => {
+        writeGhostDraft();
+        updateGhostPreview();
+        refreshSystemStatus();
+      });
+      element.addEventListener('change', () => {
+        writeGhostDraft();
+        updateGhostPreview();
+        refreshSystemStatus();
+      });
+    });
+
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('fragments_publisher_sw.js', { updateViaCache: 'none' }).then((registration) => {
@@ -2873,8 +3496,10 @@
     hydratePublishKey();
     hydrateDraft();
     hydrateChangelogDraft();
+    hydrateGhostDraft();
     updatePreview();
     updateChangelogPreview();
+    updateGhostPreview();
     renderOutbox();
     renderChangelogOutbox();
     loadRecentChangelog();

@@ -1,5 +1,6 @@
 const FRAGMENTS_PATH = "fragments_data.js";
 const CHANGELOG_PATH = "changelog.json";
+const CURRENT_NARRATIVE_DIR = "current_narrative";
 const FRAGMENTS_PATTERN = /window\.otw_fragments\s*=\s*(\[[\s\S]*?\])\s*;/m;
 
 const BOT_POOL = [
@@ -143,6 +144,59 @@ function normalizeChangelogEntry(entry) {
   return { date, type, text };
 }
 
+function normalizeNarrativeDate(raw) {
+  const date = String(raw || "").trim();
+  if (date.length !== 10 || date[4] !== "-" || date[7] !== "-") {
+    throw new Error("Narrative date must be in YYYY-MM-DD format");
+  }
+  return date;
+}
+
+function stripMarkdownForTitle(value) {
+  return String(value || "")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/[#>*_`-]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function slugify(value) {
+  return String(value || "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+function deriveNarrativeTitle(body) {
+  const lines = String(body || "")
+    .split(/\r?\n/)
+    .map((line) => stripMarkdownForTitle(line))
+    .filter(Boolean);
+
+  return lines[0] || "Untitled draft";
+}
+
+function normalizeNarrativeEntry(entry) {
+  if (!entry || typeof entry !== "object") {
+    throw new Error("Narrative payload must be an object");
+  }
+
+  const body = String(entry.body || "").trim();
+  if (!body) {
+    throw new Error("Narrative body is required");
+  }
+
+  const date = normalizeNarrativeDate(entry.date);
+  const rawTitle = String(entry.title || "").trim();
+  const title = rawTitle || deriveNarrativeTitle(body);
+
+  if (!title) {
+    throw new Error("Narrative title could not be derived");
+  }
+
+  return { title, date, body };
+}
+
 function dedupeChangelog(entries) {
   const seen = new Set();
   const out = [];
@@ -205,7 +259,7 @@ async function saveRepoFile(env, path, content, sha, message) {
       body: JSON.stringify({
         message,
         content: encoded,
-        sha,
+        ...(sha ? { sha } : {}),
         branch: env.GITHUB_BRANCH
       })
     }
@@ -269,6 +323,34 @@ function sortChangelog(entries) {
   return entries.slice().sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")));
 }
 
+async function findAvailableNarrativePath(env, date, title) {
+  const baseSlug = slugify(title) || "untitled-draft";
+
+  for (let attempt = 0; attempt < 50; attempt += 1) {
+    const suffix = attempt === 0 ? "" : `-${attempt + 1}`;
+    const path = `${CURRENT_NARRATIVE_DIR}/${date}-${baseSlug}${suffix}.md`;
+    const response = await githubRequest(
+      env,
+      `/repos/${env.GITHUB_OWNER}/${env.GITHUB_REPO}/contents/${path}?ref=${env.GITHUB_BRANCH}`
+    );
+
+    if (response.status === 404) {
+      return path;
+    }
+
+    if (!response.ok) {
+      const text = await response.text();
+      throw new Error(`Could not verify narrative path ${path}: ${response.status} ${text}`);
+    }
+  }
+
+  throw new Error("Could not find an available narrative filename");
+}
+
+function buildNarrativeMarkdown(entry) {
+  return `# ${entry.title}\nDate: ${entry.date}\n\n${entry.body.trim()}\n`;
+}
+
 export default {
   async fetch(request, env) {
     if (request.method === "OPTIONS") {
@@ -284,7 +366,8 @@ export default {
         routes: {
           publish_fragment: "POST /publish-fragment",
           publish_bot_fragment: "POST /publish-bot-fragment",
-          publish_changelog_entry: "POST /publish-changelog-entry"
+          publish_changelog_entry: "POST /publish-changelog-entry",
+          publish_ghost_draft: "POST /publish-ghost-draft"
         }
       });
     }
@@ -369,6 +452,29 @@ export default {
         });
       } catch (error) {
         return jsonResponse({ ok: false, error: error.message || "Unknown changelog publish error" }, 400);
+      }
+    }
+
+    if (request.method === "POST" && url.pathname === "/publish-ghost-draft") {
+      if (!isAuthorized(request, env)) {
+        return jsonResponse({ ok: false, error: "Unauthorized" }, 401);
+      }
+
+      try {
+        const body = await request.json();
+        const entry = normalizeNarrativeEntry(body);
+        const path = await findAvailableNarrativePath(env, entry.date, entry.title);
+        const markdown = buildNarrativeMarkdown(entry);
+        const result = await saveRepoFile(env, path, markdown, null, "Publish ghost draft");
+
+        return jsonResponse({
+          ok: true,
+          published: entry,
+          file: path,
+          commit: result.commit?.sha || null
+        });
+      } catch (error) {
+        return jsonResponse({ ok: false, error: error.message || "Unknown ghost publish error" }, 400);
       }
     }
 
