@@ -2243,13 +2243,13 @@
     <section class="workspace" id="iotdWorkspace">
       <div class="layout">
         <main class="panel composer">
-          <div class="status-line" id="iotdStatusLine">Prototype lane: shape the entry the way your manifest expects, preview the image, and package the metadata cleanly.</div>
+          <div class="status-line" id="iotdStatusLine">Pick the image, shape the metadata, and publish Image of the Day straight from this device.</div>
 
           <form class="form-grid" id="iotdForm">
             <div class="field">
               <label for="iotdImage">Photo</label>
               <input id="iotdImage" name="iotdImage" type="file" accept="image/*" />
-              <div class="helper">Pick the photo from your phone or Files. For now, the image itself previews locally and is not uploaded yet.</div>
+              <div class="helper">Pick the photo from your phone or Files. This lane will upload it to the OTW image bucket when you publish.</div>
             </div>
 
             <div class="meta-row">
@@ -2261,7 +2261,7 @@
               <div class="field">
                 <label for="iotdTitle">Title</label>
                 <input id="iotdTitle" name="iotdTitle" type="text" placeholder="WINDOW_VISITATION" />
-                <div class="helper">Uppercase signal names feel native here, but we can loosen that later if we want.</div>
+                <div class="helper">Uppercase signal names still feel native here, but the image itself now has a real publishing lane.</div>
               </div>
             </div>
 
@@ -2271,7 +2271,7 @@
             </div>
 
             <div class="action-row">
-              <button class="primary-btn" id="iotdPrepareBtn" type="button">Prepare Entry</button>
+              <button class="primary-btn" id="iotdPublishBtn" type="button">Publish</button>
               <button class="secondary-btn" id="iotdDownloadBtn" type="button">Download Metadata</button>
               <button class="secondary-btn" id="iotdClearBtn" type="button">Clear Draft</button>
             </div>
@@ -2300,8 +2300,8 @@
             <h2 class="section-title">Entry Wiring</h2>
             <div class="iotd-meta-grid">
               <div class="iotd-stat">
-                <span class="iotd-stat-label">Target Path</span>
-                <span class="iotd-stat-value" id="iotdTargetPath">Images/IOTD/2026-03-19.jpg</span>
+                <span class="iotd-stat-label">Image URL</span>
+                <span class="iotd-stat-value" id="iotdTargetPath">https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/2026-03-19.jpg</span>
               </div>
               <div class="iotd-stat">
                 <span class="iotd-stat-label">Selected File</span>
@@ -2316,7 +2316,7 @@
   "date": "2026-03-19",
   "title": "UNTITLED_SIGNAL",
   "caption": "",
-  "image": "Images/IOTD/2026-03-19.jpg"
+  "image": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/2026-03-19.jpg"
 }</pre>
           </section>
         </aside>
@@ -2514,6 +2514,8 @@
     const PUBLISH_BOT_ENDPOINT = 'https://otw-fragments-publish.ryandavid.workers.dev/publish-bot-fragment';
     const PUBLISH_CHANGELOG_ENDPOINT = 'https://otw-fragments-publish.ryandavid.workers.dev/publish-changelog-entry';
     const PUBLISH_GHOST_ENDPOINT = 'https://otw-fragments-publish.ryandavid.workers.dev/publish-ghost-draft';
+    const PUBLISH_IOTD_ENDPOINT = 'https://otw-fragments-publish.ryandavid.workers.dev/publish-iotd-entry';
+    const IOTD_PUBLIC_BASE_URL = 'https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev';
 
     const textInput = document.getElementById('fragmentText');
     const tagInput = document.getElementById('fragmentTag');
@@ -2587,7 +2589,7 @@
     const iotdTargetPath = document.getElementById('iotdTargetPath');
     const iotdFileMeta = document.getElementById('iotdFileMeta');
     const iotdManifestPreview = document.getElementById('iotdManifestPreview');
-    const iotdPrepareBtn = document.getElementById('iotdPrepareBtn');
+    const iotdPublishBtn = document.getElementById('iotdPublishBtn');
     const ghostTitleInput = document.getElementById('ghostTitle');
     const ghostBodyInput = document.getElementById('ghostBody');
     const ghostStatusLine = document.getElementById('ghostStatusLine');
@@ -2677,12 +2679,14 @@
       const title = (iotdTitleInput.value.trim() || 'UNTITLED_SIGNAL').toUpperCase().replace(/\s+/g, '_');
       const caption = normalizeFragmentText(iotdCaptionInput.value).trim();
       const extension = getIotdExtension();
+      const objectKey = `${date}.${extension}`;
 
       return {
         date,
         title,
         caption,
-        image: `Images/IOTD/${date}.${extension}`
+        image: `${IOTD_PUBLIC_BASE_URL}/${objectKey}`,
+        objectKey
       };
     }
 
@@ -2870,6 +2874,15 @@
       window.setTimeout(() => {
         ghostPublishBtn.classList.remove('is-success');
         ghostPublishBtn.textContent = 'Publish';
+      }, 1400);
+    }
+
+    function celebrateIotdPublish() {
+      iotdPublishBtn.classList.add('is-success');
+      iotdPublishBtn.textContent = 'Published';
+      window.setTimeout(() => {
+        iotdPublishBtn.classList.remove('is-success');
+        iotdPublishBtn.textContent = 'Publish';
       }, 1400);
     }
 
@@ -3549,13 +3562,63 @@
       ghostStatusLine.textContent = 'Draft downloaded as markdown.';
     }
 
-    function prepareIotdEntry() {
+    async function publishIotdEntry() {
+      const file = iotdImageInput.files && iotdImageInput.files[0];
+      if (!file) {
+        iotdStatusLine.textContent = 'Pick an image first. IOTD needs the photo and the metadata together.';
+        return;
+      }
+
       const entry = buildIotdEntry();
-      iotdStatusLine.textContent = 'IOTD entry prepared. The metadata is shaped correctly; image upload wiring still comes next.';
-      showPublishToast(
-        'IOTD entry prepared.',
-        `Target path ready: ${entry.image}`
-      );
+      const publishKey = publishKeyInput.value.trim() || getPublishKey();
+      if (!publishKey) {
+        iotdStatusLine.textContent = 'Add your publish key first so this device can post IOTD entries securely.';
+        return;
+      }
+
+      iotdStatusLine.textContent = 'Publishing image and manifest entry to the OTW Worker...';
+
+      try {
+        const formData = new FormData();
+        formData.append('image', file);
+        formData.append('date', entry.date);
+        formData.append('title', entry.title);
+        formData.append('caption', entry.caption);
+
+        const response = await fetch(PUBLISH_IOTD_ENDPOINT, {
+          method: 'POST',
+          headers: {
+            'x-publish-key': publishKey
+          },
+          body: formData
+        });
+
+        const payload = await response.json().catch(() => ({}));
+        if (!response.ok || !payload.ok) {
+          throw new Error(payload.error || `Publish failed with status ${response.status}`);
+        }
+
+        if (publishKeyInput.value.trim()) {
+          window.localStorage.setItem(PUBLISH_KEY_STORAGE, publishKeyInput.value.trim());
+          updatePublishKeyStatus();
+        }
+
+        clearIotdDraftStorage();
+        iotdDateInput.value = new Date().toISOString().slice(0, 10);
+        iotdTitleInput.value = '';
+        iotdCaptionInput.value = '';
+        iotdImageInput.value = '';
+        setIotdImagePreview(null);
+        updateIotdPreview();
+        iotdStatusLine.textContent = 'IOTD published successfully. The image is live and the manifest should update shortly.';
+        celebrateIotdPublish();
+        showPublishToast(
+          'IOTD published.',
+          'Your image and manifest entry are on their way to the live site.'
+        );
+      } catch (error) {
+        iotdStatusLine.textContent = error.message || 'IOTD publish failed.';
+      }
     }
 
     function downloadIotdMetadata() {
@@ -3567,7 +3630,7 @@
       link.download = `iotd-entry-${entry.date}.json`;
       link.click();
       URL.revokeObjectURL(url);
-      iotdStatusLine.textContent = 'IOTD metadata downloaded. The image itself still needs the future upload lane.';
+      iotdStatusLine.textContent = 'IOTD metadata downloaded. This is still a useful fallback if you want to hand-edit later.';
     }
 
     function clearIotdDraft() {
@@ -3861,7 +3924,7 @@
       updateIotdPreview();
     });
 
-    iotdPrepareBtn.addEventListener('click', prepareIotdEntry);
+    iotdPublishBtn.addEventListener('click', publishIotdEntry);
     document.getElementById('iotdDownloadBtn').addEventListener('click', downloadIotdMetadata);
     document.getElementById('iotdClearBtn').addEventListener('click', clearIotdDraft);
 

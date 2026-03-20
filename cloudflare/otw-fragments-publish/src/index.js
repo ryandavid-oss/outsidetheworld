@@ -1,5 +1,6 @@
 const FRAGMENTS_PATH = "fragments_data.js";
 const CHANGELOG_PATH = "changelog.json";
+const IMAGE_MANIFEST_PATH = "image_manifest.json";
 const CURRENT_NARRATIVE_DIR = "current_narrative";
 const FRAGMENTS_PATTERN = /window\.otw_fragments\s*=\s*(\[[\s\S]*?\])\s*;/m;
 
@@ -197,6 +198,89 @@ function normalizeNarrativeEntry(entry) {
   return { title, date, body };
 }
 
+function normalizeIotdDate(raw) {
+  const date = String(raw || "").trim();
+  if (date.length !== 10 || date[4] !== "-" || date[7] !== "-") {
+    throw new Error("IOTD date must be in YYYY-MM-DD format");
+  }
+  return date;
+}
+
+function sanitizeIotdTitle(raw) {
+  return String(raw || "UNTITLED_SIGNAL")
+    .trim()
+    .replace(/\s+/g, "_")
+    .toUpperCase() || "UNTITLED_SIGNAL";
+}
+
+function detectImageExtension(file) {
+  const fromName = String(file?.name || "").trim().toLowerCase();
+  if (fromName.includes(".")) {
+    const ext = fromName.split(".").pop();
+    if (ext) return ext;
+  }
+
+  const mime = String(file?.type || "").toLowerCase();
+  if (mime === "image/jpeg") return "jpg";
+  if (mime === "image/png") return "png";
+  if (mime === "image/gif") return "gif";
+  if (mime === "image/webp") return "webp";
+
+  return "jpg";
+}
+
+function buildIotdObjectKey(date, extension) {
+  return `${date}.${extension}`;
+}
+
+function buildIotdImageUrl(env, objectKey) {
+  const base = String(env.IOTD_PUBLIC_BASE_URL || "").replace(/\/+$/g, "");
+  if (!base) {
+    throw new Error("IOTD public base URL is not configured");
+  }
+  return `${base}/${objectKey}`;
+}
+
+function normalizeIotdCaption(raw) {
+  return String(raw || "").trim();
+}
+
+function normalizeIotdTitleForFilename(title) {
+  return sanitizeIotdTitle(title);
+}
+
+function normalizeIotdEntry(entry) {
+  if (!entry || typeof entry !== "object") {
+    throw new Error("IOTD payload must be an object");
+  }
+
+  const date = normalizeIotdDate(entry.date);
+  const title = normalizeIotdTitleForFilename(entry.title);
+  const caption = normalizeIotdCaption(entry.caption);
+  const image = String(entry.image || "").trim();
+
+  if (!image) {
+    throw new Error("IOTD image URL is required");
+  }
+
+  return { date, title, caption, image };
+}
+
+function dedupeIotd(entries) {
+  const seen = new Set();
+  const out = [];
+
+  for (const entry of entries) {
+    const normalized = normalizeIotdEntry(entry);
+    const key = normalized.date;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    out.push(normalized);
+  }
+
+  return out;
+}
+
 function dedupeChangelog(entries) {
   const seen = new Set();
   const out = [];
@@ -315,11 +399,31 @@ async function loadChangelogFile(env) {
   return { ...file, entries };
 }
 
+async function loadImageManifestFile(env) {
+  const file = await loadRepoFile(env, IMAGE_MANIFEST_PATH);
+  let entries;
+  try {
+    entries = JSON.parse(file.raw);
+  } catch (error) {
+    throw new Error(`Could not parse image_manifest.json: ${error.message}`);
+  }
+
+  if (!Array.isArray(entries)) {
+    throw new Error("image_manifest.json is not an array");
+  }
+
+  return { ...file, entries };
+}
+
 function sortFragments(entries) {
   return entries.slice().sort((a, b) => String(b.timestamp || "").localeCompare(String(a.timestamp || "")));
 }
 
 function sortChangelog(entries) {
+  return entries.slice().sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")));
+}
+
+function sortIotd(entries) {
   return entries.slice().sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")));
 }
 
@@ -367,7 +471,8 @@ export default {
           publish_fragment: "POST /publish-fragment",
           publish_bot_fragment: "POST /publish-bot-fragment",
           publish_changelog_entry: "POST /publish-changelog-entry",
-          publish_ghost_draft: "POST /publish-ghost-draft"
+          publish_ghost_draft: "POST /publish-ghost-draft",
+          publish_iotd_entry: "POST /publish-iotd-entry"
         }
       });
     }
@@ -475,6 +580,58 @@ export default {
         });
       } catch (error) {
         return jsonResponse({ ok: false, error: error.message || "Unknown ghost publish error" }, 400);
+      }
+    }
+
+    if (request.method === "POST" && url.pathname === "/publish-iotd-entry") {
+      if (!isAuthorized(request, env)) {
+        return jsonResponse({ ok: false, error: "Unauthorized" }, 401);
+      }
+
+      try {
+        if (!env.IOTD_BUCKET) {
+          throw new Error("IOTD bucket binding is not configured");
+        }
+
+        const formData = await request.formData();
+        const file = formData.get("image");
+        if (!(file instanceof File)) {
+          throw new Error("IOTD image file is required");
+        }
+
+        const date = normalizeIotdDate(formData.get("date"));
+        const title = normalizeIotdTitleForFilename(formData.get("title"));
+        const caption = normalizeIotdCaption(formData.get("caption"));
+        const extension = detectImageExtension(file);
+        const objectKey = buildIotdObjectKey(date, extension);
+        const imageUrl = buildIotdImageUrl(env, objectKey);
+
+        await env.IOTD_BUCKET.put(objectKey, await file.arrayBuffer(), {
+          httpMetadata: {
+            contentType: file.type || "application/octet-stream"
+          }
+        });
+
+        const entry = normalizeIotdEntry({
+          date,
+          title,
+          caption,
+          image: imageUrl
+        });
+
+        const fileData = await loadImageManifestFile(env);
+        const merged = sortIotd(dedupeIotd([entry, ...fileData.entries]));
+        const updatedRaw = `${JSON.stringify(merged, null, 2)}\n`;
+        const result = await saveRepoFile(env, IMAGE_MANIFEST_PATH, updatedRaw, fileData.sha, "Publish IOTD entry");
+
+        return jsonResponse({
+          ok: true,
+          published: entry,
+          object_key: objectKey,
+          commit: result.commit?.sha || null
+        });
+      } catch (error) {
+        return jsonResponse({ ok: false, error: error.message || "Unknown IOTD publish error" }, 400);
       }
     }
 
