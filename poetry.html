@@ -421,9 +421,29 @@
             renderList(val);
         }
 
-        function displayPoem(index) {
+        function updateUrlForPoem(poem, replace = false) {
+            const url = new URL(window.location.href);
+            url.searchParams.set('poem', poem.id || '');
+            const next = `${url.pathname}${url.search}${url.hash}`;
+            const state = { poemId: poem.id || '' };
+
+            if (replace) {
+                history.replaceState(state, '', next);
+            } else {
+                history.pushState(state, '', next);
+            }
+        }
+
+        function findPoemIndexById(poemId) {
+            if (!poemId) return -1;
+            return archive.findIndex((poem) => poem.id === poemId);
+        }
+
+        function displayPoem(index, options = {}) {
             const container = document.getElementById('glass-container');
             const poem = archive[index];
+            if (!poem) return;
+            const { replaceUrl = false } = options;
 
             // VIBRANCY RESTORED: Transparent center + Screen blend mode
             document.body.style.background = `
@@ -449,13 +469,42 @@
             document.querySelectorAll('.file-item').forEach(el => {
                 el.classList.toggle('active', el.getAttribute('data-id') == index);
             });
+
+            updateUrlForPoem(poem, replaceUrl);
         }
 
         // THIS WAS THE MISSING PIECE:
         window.onload = () => {
             initArchive();
-            if (archive.length > 0) displayPoem(0);
+            const requestedPoemId = new URLSearchParams(window.location.search).get('poem');
+            const requestedIndex = findPoemIndexById(requestedPoemId);
+
+            if (requestedIndex >= 0) {
+                const requestedPoem = archive[requestedIndex];
+                const select = document.getElementById('freq-select');
+                if (select && requestedPoem.frequency) {
+                    select.value = requestedPoem.frequency;
+                    renderList(requestedPoem.frequency);
+                }
+                displayPoem(requestedIndex, { replaceUrl: true });
+            } else if (archive.length > 0) {
+                displayPoem(0, { replaceUrl: true });
+            }
         };
+
+        window.addEventListener('popstate', () => {
+            const requestedPoemId = new URLSearchParams(window.location.search).get('poem');
+            const requestedIndex = findPoemIndexById(requestedPoemId);
+            if (requestedIndex >= 0) {
+                const requestedPoem = archive[requestedIndex];
+                const select = document.getElementById('freq-select');
+                if (select && requestedPoem.frequency) {
+                    select.value = requestedPoem.frequency;
+                    renderList(requestedPoem.frequency);
+                }
+                displayPoem(requestedIndex, { replaceUrl: true });
+            }
+        });
   </script>
  </body>
 </html>

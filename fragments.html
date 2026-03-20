@@ -653,6 +653,20 @@
         .replace(/'/g, '&#39;');
     }
 
+    function slugify(value) {
+      return String(value || '')
+        .toLowerCase()
+        .replace(/&/g, ' and ')
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+    }
+
+    function buildFragmentId(fragment) {
+      const stamp = String(fragment.timestamp || 'undated').replace(/[^0-9]/g, '');
+      const bodyStub = slugify(String(fragment.text || '').split(/\s+/).slice(0, 8).join(' ')) || 'fragment';
+      return `${stamp}--${bodyStub}`;
+    }
+
     function formatTimestamp(timestamp) {
       const value = new Date(timestamp);
       if (Number.isNaN(value.getTime())) {
@@ -699,6 +713,7 @@
       }
 
       const items = fragments.slice();
+      const requestedEntryId = new URLSearchParams(window.location.search).get('entry');
 
       if (!items.length) {
         renderEmptyState(container);
@@ -711,12 +726,13 @@
         const isBot = fragment.author === 'OTW_Bot';
         const name = isBot ? 'OTW_Bot' : 'The_RyanDavid';
         const handle = isBot ? '@otw_bot' : '@outsidetheworld';
+        const fragmentId = buildFragmentId(fragment);
         const avatar = isBot
           ? '<img class="fragment-avatar bot-avatar" src="Images/OTW_Bot.png" alt="OTW_Bot" />'
           : '<img class="fragment-avatar" src="Images/Profile.jpg" alt="The_RyanDavid" />';
 
         return `
-          <article class="fragment-card${isBot ? ' is-bot' : ''}">
+          <article class="fragment-card${isBot ? ' is-bot' : ''}" id="fragment-${fragmentId}" data-fragment-id="${fragmentId}">
             <div class="fragment-head">
               <div class="fragment-identity">
                 ${avatar}
@@ -745,6 +761,13 @@
           </article>
         `;
       }).join('');
+
+      if (requestedEntryId && typeof CSS !== 'undefined' && CSS.escape) {
+        const requestedNode = document.querySelector(`[data-fragment-id="${CSS.escape(requestedEntryId)}"]`);
+        if (requestedNode) {
+          requestedNode.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
     }
 
     function applyTheme(theme) {

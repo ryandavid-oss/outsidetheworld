@@ -388,9 +388,6 @@
   <script>
     function initLivingVerse() {
       renderList("ALL");
-      if (livingVerse.length > 0) {
-        displayPoem(0);
-      }
     }
 
     function renderList(filter) {
@@ -421,9 +418,29 @@
       renderList(val);
     }
 
-    function displayPoem(index) {
+    function updateUrlForPoem(poem, replace = false) {
+      const url = new URL(window.location.href);
+      url.searchParams.set('poem', poem.id || '');
+      const next = `${url.pathname}${url.search}${url.hash}`;
+      const state = { poemId: poem.id || '' };
+
+      if (replace) {
+        history.replaceState(state, '', next);
+      } else {
+        history.pushState(state, '', next);
+      }
+    }
+
+    function findPoemIndexById(poemId) {
+      if (!poemId) return -1;
+      return livingVerse.findIndex((poem) => poem.id === poemId);
+    }
+
+    function displayPoem(index, options = {}) {
       const container = document.getElementById('glass-container');
       const poem = livingVerse[index];
+      if (!poem) return;
+      const { replaceUrl = false } = options;
       document.body.style.background = `
         radial-gradient(circle at center, transparent 0%, rgba(5,5,5,0.92) 100%),
         ${poem.thumbprint}
@@ -449,9 +466,41 @@
       document.querySelectorAll('.file-item').forEach(el => {
         el.classList.toggle('active', el.getAttribute('data-id') == index);
       });
+
+      updateUrlForPoem(poem, replaceUrl);
     }
 
-    window.onload = initLivingVerse;
+    window.onload = () => {
+      initLivingVerse();
+      const requestedPoemId = new URLSearchParams(window.location.search).get('poem');
+      const requestedIndex = findPoemIndexById(requestedPoemId);
+
+      if (requestedIndex >= 0) {
+        const requestedPoem = livingVerse[requestedIndex];
+        const select = document.getElementById('era-select');
+        if (select && requestedPoem.era) {
+          select.value = requestedPoem.era;
+          renderList(requestedPoem.era);
+        }
+        displayPoem(requestedIndex, { replaceUrl: true });
+      } else if (livingVerse.length > 0) {
+        displayPoem(0, { replaceUrl: true });
+      }
+    };
+
+    window.addEventListener('popstate', () => {
+      const requestedPoemId = new URLSearchParams(window.location.search).get('poem');
+      const requestedIndex = findPoemIndexById(requestedPoemId);
+      if (requestedIndex >= 0) {
+        const requestedPoem = livingVerse[requestedIndex];
+        const select = document.getElementById('era-select');
+        if (select && requestedPoem.era) {
+          select.value = requestedPoem.era;
+          renderList(requestedPoem.era);
+        }
+        displayPoem(requestedIndex, { replaceUrl: true });
+      }
+    });
   </script>
 </body>
 </html>

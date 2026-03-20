@@ -218,7 +218,9 @@
 
         .hero-panel {
             position: relative;
-            overflow: hidden;
+            overflow: visible;
+            isolation: isolate;
+            z-index: 20;
             border: 1px solid var(--border);
             border-radius: var(--radius-xl);
             background:
@@ -271,6 +273,185 @@
             display: grid;
             gap: 22px;
             align-content: start;
+            position: relative;
+            z-index: 6;
+        }
+
+        .site-search {
+            display: grid;
+            gap: 12px;
+            position: relative;
+            z-index: 12;
+        }
+
+        .site-search-shell {
+            position: relative;
+        }
+
+        .site-search-input {
+            width: 100%;
+            min-height: 54px;
+            padding: 0 18px 0 48px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.11);
+            background: rgba(255, 255, 255, 0.035);
+            color: var(--text);
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-size: 0.97rem;
+            transition:
+                border-color 0.24s var(--ease),
+                box-shadow 0.24s var(--ease),
+                background 0.24s var(--ease);
+        }
+
+        .site-search-input::placeholder {
+            color: rgba(245, 247, 251, 0.44);
+        }
+
+        .site-search-input:hover,
+        .site-search-input:focus-visible {
+            outline: none;
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(119, 163, 255, 0.34);
+            box-shadow: 0 0 0 4px rgba(119, 163, 255, 0.08);
+        }
+
+        .site-search-icon {
+            position: absolute;
+            left: 17px;
+            top: 50%;
+            width: 18px;
+            height: 18px;
+            transform: translateY(-50%);
+            color: rgba(158, 197, 193, 0.82);
+            pointer-events: none;
+        }
+
+        .site-search-hint {
+            margin: 0;
+            font-size: 0.78rem;
+            line-height: 1.6;
+            color: var(--amethyst);
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .search-results {
+            display: none;
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            right: 0;
+            z-index: 60;
+            overflow: hidden;
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(158, 197, 193, 0.24);
+            background:
+                linear-gradient(180deg, rgba(16, 25, 28, 0.995), rgba(9, 15, 18, 0.985)),
+                radial-gradient(circle at top right, rgba(158, 197, 193, 0.2), transparent 46%),
+                radial-gradient(circle at 12% 18%, rgba(119, 163, 255, 0.14), transparent 42%);
+            box-shadow:
+                0 24px 56px rgba(0, 0, 0, 0.42),
+                0 0 0 1px rgba(158, 197, 193, 0.08) inset;
+            backdrop-filter: blur(34px) saturate(1.08);
+            -webkit-backdrop-filter: blur(34px) saturate(1.08);
+        }
+
+        .search-results.is-open {
+            display: block;
+        }
+
+        .search-status {
+            padding: 14px 16px 0;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.64rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-faint);
+        }
+
+        .search-list {
+            display: grid;
+        }
+
+        .search-result {
+            display: grid;
+            gap: 8px;
+            position: relative;
+            z-index: 1;
+            padding: 15px 16px 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(7, 12, 14, 0.82);
+            text-decoration: none;
+            color: inherit;
+            transition: background 0.24s var(--ease), transform 0.24s var(--ease);
+        }
+
+        .search-result:first-child {
+            border-top: 0;
+        }
+
+        .search-result:hover,
+        .search-result:focus-visible {
+            background: rgba(18, 31, 34, 0.96);
+            transform: translateY(-1px);
+        }
+
+        .search-result-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.62rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-faint);
+        }
+
+        .search-result-kind {
+            color: var(--teal);
+        }
+
+        .search-result-title {
+            margin: 0;
+            font-family: 'IBM Plex Serif', serif;
+            font-size: 1.06rem;
+            line-height: 1.25;
+            color: var(--text);
+        }
+
+        .search-result-snippet {
+            margin: 0;
+            font-size: 0.88rem;
+            line-height: 1.65;
+            color: var(--text-soft);
+        }
+
+        .hero-meta,
+        .hero-copy,
+        .route-grid,
+        .hero-meta-mobile,
+        .split-note,
+        .support-band {
+            position: relative;
+            z-index: 1;
+        }
+
+        .search-empty {
+            padding: 18px 16px 19px;
+            color: var(--text-soft);
+            font-size: 0.9rem;
+            line-height: 1.65;
+        }
+
+        .search-more {
+            padding: 0 16px 16px;
+            color: var(--text-faint);
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.62rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
         }
 
         .eyebrow {
@@ -711,7 +892,11 @@
             }
 
             .hero-meta {
-                margin-top: 84px;
+                margin-top: 12px;
+            }
+
+            .site-search {
+                margin-top: 2px;
             }
 
             .route-grid {
@@ -770,6 +955,21 @@
             .hero-mark {
                 margin-top: -8px;
                 margin-bottom: 10px;
+            }
+
+            .site-search-input {
+                min-height: 50px;
+                font-size: 0.93rem;
+            }
+
+            .site-search-hint {
+                font-size: 0.74rem;
+            }
+
+            .search-results {
+                max-height: min(62vh, 430px);
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
             }
 
             .brand img {
@@ -872,6 +1072,25 @@
                                 <a class="brand" href="index.html" aria-label="Outside The World home">
                                     <img src="Images/Equal.svg" alt="Outside The World" />
                                 </a>
+                            </div>
+                            <div class="site-search" aria-label="Site-wide search">
+                                <div class="site-search-shell">
+                                    <svg class="site-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <circle cx="11" cy="11" r="7"></circle>
+                                        <path d="M20 20l-3.5-3.5"></path>
+                                    </svg>
+                                    <input
+                                        id="siteSearchInput"
+                                        class="site-search-input"
+                                        type="search"
+                                        placeholder="SEARCH THE WORLD"
+                                        autocomplete="off"
+                                        spellcheck="false"
+                                        aria-describedby="siteSearchHint"
+                                        aria-controls="siteSearchResults" />
+                                </div>
+                                <p class="site-search-hint" id="siteSearchHint">Natural-language search across Outside The World.</p>
+                                <div class="search-results" id="siteSearchResults" role="status" aria-live="polite"></div>
                             </div>
                             <div class="hero-meta hero-meta-desktop" aria-label="Site summary">
                                 <div class="meta-chip">
@@ -985,6 +1204,317 @@
             </footer>
         </div>
     </div>
+    <script>
+        function escapeHtml(value) {
+            return String(value ?? '')
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
+
+        function slugify(value) {
+            return String(value || '')
+                .toLowerCase()
+                .replace(/&/g, ' and ')
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/^-+|-+$/g, '');
+        }
+
+        function buildArchivePostId(post) {
+            return `${post.date || 'undated'}--${slugify(post.title || 'untitled')}`;
+        }
+
+        function buildFragmentId(fragment) {
+            const stamp = String(fragment.timestamp || 'undated').replace(/[^0-9]/g, '');
+            const bodyStub = slugify(String(fragment.text || '').split(/\s+/).slice(0, 8).join(' ')) || 'fragment';
+            return `${stamp}--${bodyStub}`;
+        }
+
+        function decodeEntities(value) {
+            const textarea = document.createElement('textarea');
+            textarea.innerHTML = String(value ?? '');
+            return textarea.value;
+        }
+
+        function stripHtml(value) {
+            const template = document.createElement('template');
+            template.innerHTML = decodeEntities(String(value ?? ''));
+            return template.content.textContent || template.innerText || '';
+        }
+
+        function cleanText(value) {
+            return stripHtml(String(value ?? ''))
+                .replace(/!\[[^\]]*\]\(([^)]+)\)/g, ' ')
+                .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '$1')
+                .replace(/[*_`>#-]+/g, ' ')
+                .replace(/\s+/g, ' ')
+                .trim();
+        }
+
+        function buildExcerpt(value, maxLength = 170) {
+            const clean = cleanText(value);
+            if (clean.length <= maxLength) return clean;
+            return `${clean.slice(0, maxLength).trimEnd()}...`;
+        }
+
+        function buildFragmentTitle(fragment) {
+            const clean = cleanText(fragment.text || '');
+            if (!clean) return 'Untitled fragment';
+            const words = clean.split(/\s+/).slice(0, 7).join(' ');
+            return clean.split(/\s+/).length > 7 ? `${words}...` : words;
+        }
+
+        function loadArrayFromScript(url, returnExpression) {
+            return fetch(`${url}?ts=${Date.now()}`, { cache: 'no-store' })
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error(`Could not load ${url}: ${response.status}`);
+                    }
+                    return response.text();
+                })
+                .then((scriptText) => {
+                    const evaluator = new Function(`${scriptText}; return (${returnExpression});`);
+                    return evaluator();
+                });
+        }
+
+        let searchIndexPromise;
+
+        function buildSearchIndex() {
+            if (searchIndexPromise) return searchIndexPromise;
+
+            searchIndexPromise = Promise.all([
+                loadArrayFromScript('narrative_data.js', 'typeof current_narrative !== "undefined" ? current_narrative : []'),
+                loadArrayFromScript('poetry_data.js', 'typeof archive !== "undefined" ? archive : []'),
+                loadArrayFromScript('new_poetry_data.js', 'typeof livingVerse !== "undefined" ? livingVerse : []'),
+                loadArrayFromScript('fragments_data.js', 'typeof window !== "undefined" && Array.isArray(window.otw_fragments) ? window.otw_fragments : []'),
+                loadArrayFromScript('wayback_purified.js', 'typeof wayback_raw_dump !== "undefined" ? wayback_raw_dump : []')
+            ]).then(([narratives, poems, livingVerse, fragments, wayback]) => {
+                const entries = [];
+
+                narratives.forEach((post) => {
+                    const body = cleanText(post.body || '');
+                    entries.push({
+                        kind: 'Blog',
+                        title: post.title || 'Untitled entry',
+                        date: post.date || '',
+                        url: `residue_archive.html?post=${encodeURIComponent(buildArchivePostId(post))}`,
+                        snippet: buildExcerpt(body),
+                        text: `${post.title || ''} ${post.date || ''} ${body}`.toLowerCase()
+                    });
+                });
+
+                poems.forEach((poem) => {
+                    const body = cleanText(poem.body || '');
+                    entries.push({
+                        kind: 'Poem',
+                        title: poem.title || 'Untitled poem',
+                        date: poem.date || '',
+                        url: `poetry.html?poem=${encodeURIComponent(poem.id || '')}`,
+                        snippet: buildExcerpt(body),
+                        text: `${poem.title || ''} ${poem.date || ''} ${poem.frequency || ''} ${body}`.toLowerCase()
+                    });
+                });
+
+                livingVerse.forEach((poem) => {
+                    const body = cleanText(poem.body || '');
+                    entries.push({
+                        kind: 'Living verse',
+                        title: poem.title || 'Untitled poem',
+                        date: poem.date || '',
+                        url: `new_poetry.html?poem=${encodeURIComponent(poem.id || '')}`,
+                        snippet: buildExcerpt(body),
+                        text: `${poem.title || ''} ${poem.date || ''} ${poem.era || ''} ${poem.source || ''} ${body}`.toLowerCase()
+                    });
+                });
+
+                fragments.forEach((fragment) => {
+                    const body = cleanText(fragment.text || '');
+                    entries.push({
+                        kind: fragment.author === 'OTW_Bot' ? 'OTW_Bot' : 'Fragment',
+                        title: buildFragmentTitle(fragment),
+                        date: fragment.timestamp || '',
+                        url: `fragments.html?entry=${encodeURIComponent(buildFragmentId(fragment))}`,
+                        snippet: buildExcerpt(body),
+                        text: `${fragment.author || ''} ${fragment.tag || ''} ${fragment.timestamp || ''} ${body}`.toLowerCase()
+                    });
+                });
+
+                wayback.forEach((post) => {
+                    const body = cleanText(post.body || '');
+                    entries.push({
+                        kind: 'Wayback',
+                        title: post.title || 'Untitled archive entry',
+                        date: post.date || '',
+                        url: `wayback.html?post=${encodeURIComponent(buildArchivePostId(post))}`,
+                        snippet: buildExcerpt(body),
+                        text: `${post.title || ''} ${post.date || ''} ${post.year || ''} ${body}`.toLowerCase()
+                    });
+                });
+
+                return entries;
+            });
+
+            return searchIndexPromise;
+        }
+
+        function scoreEntry(entry, normalizedQuery, tokens) {
+            let score = 0;
+            const title = String(entry.title || '').toLowerCase();
+            const kind = String(entry.kind || '').toLowerCase();
+            const date = String(entry.date || '').toLowerCase();
+            const haystack = String(entry.text || '');
+
+            if (title.includes(normalizedQuery)) score += 64;
+            if (kind.includes(normalizedQuery)) score += 20;
+            if (date.includes(normalizedQuery)) score += 12;
+            if (haystack.includes(normalizedQuery)) score += 18;
+
+            tokens.forEach((token) => {
+                if (title.includes(token)) score += 15;
+                if (kind.includes(token)) score += 6;
+                if (date.includes(token)) score += 4;
+                if (haystack.includes(token)) score += 5;
+            });
+
+            return score;
+        }
+
+        function renderSearchResults(container, state) {
+            if (state.mode === 'empty') {
+                container.classList.remove('is-open');
+                container.innerHTML = '';
+                return;
+            }
+
+            container.classList.add('is-open');
+
+            if (state.mode === 'loading') {
+                container.innerHTML = `
+                    <div class="search-status">Indexing the world...</div>
+                    <div class="search-empty">Pulling in blogs, poems, fragments, and archive residue.</div>
+                `;
+                return;
+            }
+
+            if (state.mode === 'error') {
+                container.innerHTML = `
+                    <div class="search-status">Search unavailable</div>
+                    <div class="search-empty">${escapeHtml(state.message)}</div>
+                `;
+                return;
+            }
+
+            if (state.mode === 'no-results') {
+                container.innerHTML = `
+                    <div class="search-status">No matching signal</div>
+                    <div class="search-empty">Try a title, phrase, tag, or piece of natural language from the post itself.</div>
+                `;
+                return;
+            }
+
+            container.innerHTML = `
+                <div class="search-status">Top ${state.results.length} match${state.results.length === 1 ? '' : 'es'}</div>
+                <div class="search-list">
+                    ${state.results.map((result) => `
+                        <a class="search-result" href="${escapeHtml(result.url)}">
+                            <div class="search-result-meta">
+                                <span class="search-result-kind">${escapeHtml(result.kind)}</span>
+                                <span>${escapeHtml(result.date)}</span>
+                            </div>
+                            <h3 class="search-result-title">${escapeHtml(result.title)}</h3>
+                            <p class="search-result-snippet">${escapeHtml(result.snippet)}</p>
+                        </a>
+                    `).join('')}
+                </div>
+                ${state.remaining ? `<div class="search-more">${state.remaining} more possible match${state.remaining === 1 ? '' : 'es'}. Refine the search to narrow the field.</div>` : ''}
+            `;
+        }
+
+        async function runSiteSearch(query) {
+            const normalizedQuery = query.trim().toLowerCase();
+            const resultsContainer = document.getElementById('siteSearchResults');
+
+            if (normalizedQuery.length < 2) {
+                renderSearchResults(resultsContainer, { mode: 'empty' });
+                return;
+            }
+
+            renderSearchResults(resultsContainer, { mode: 'loading' });
+
+            try {
+                const index = await buildSearchIndex();
+                const tokens = normalizedQuery.split(/\s+/).filter(Boolean);
+                const allMatches = index
+                    .map((entry) => ({ ...entry, score: scoreEntry(entry, normalizedQuery, tokens) }))
+                    .filter((entry) => entry.score > 0)
+                    .sort((a, b) => b.score - a.score || String(b.date).localeCompare(String(a.date)));
+                const results = allMatches.slice(0, 5);
+
+                if (!allMatches.length) {
+                    renderSearchResults(resultsContainer, { mode: 'no-results' });
+                    return;
+                }
+
+                renderSearchResults(resultsContainer, {
+                    mode: 'results',
+                    count: allMatches.length,
+                    results,
+                    remaining: Math.max(0, allMatches.length - results.length)
+                });
+            } catch (error) {
+                renderSearchResults(resultsContainer, {
+                    mode: 'error',
+                    message: error.message || 'Could not load the search index right now.'
+                });
+            }
+        }
+
+        (function initSiteSearch() {
+            const input = document.getElementById('siteSearchInput');
+            const results = document.getElementById('siteSearchResults');
+
+            if (!input || !results) return;
+
+            let searchDebounce;
+
+            input.addEventListener('focus', () => {
+                buildSearchIndex().catch(() => {});
+            });
+
+            input.addEventListener('input', () => {
+                window.clearTimeout(searchDebounce);
+                searchDebounce = window.setTimeout(() => {
+                    runSiteSearch(input.value);
+                }, 90);
+            });
+
+            input.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter') {
+                    const firstResult = results.querySelector('.search-result');
+                    if (firstResult) {
+                        event.preventDefault();
+                        window.location.href = firstResult.href;
+                    }
+                }
+
+                if (event.key === 'Escape') {
+                    input.value = '';
+                    renderSearchResults(results, { mode: 'empty' });
+                    input.blur();
+                }
+            });
+
+            document.addEventListener('click', (event) => {
+                if (!results.classList.contains('is-open')) return;
+                if (event.target === input || results.contains(event.target)) return;
+                if (input.value.trim().length >= 2) return;
+                renderSearchResults(results, { mode: 'empty' });
+            });
+        })();
+    </script>
 </body>
 
 </html>
