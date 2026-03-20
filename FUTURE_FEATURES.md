@@ -9,6 +9,9 @@ This file is intentionally practical. It is not a polished roadmap. It is a runn
 ### Fragments
 
 - Keep refining the mobile publisher experience.
+- Consider a coordinated rename of the private app shell later:
+  - `fragments_publisher.html` -> `otw_app.html`
+  - only do this when the manifest, service worker, and installed-app cache behavior feel stable enough to avoid needless churn
 - Consider a stronger publish payoff animation or toast if the current success feedback still feels too subtle.
 - Revisit edit/delete later if the pain of typo correction keeps recurring.
   - Likely requires stable fragment IDs plus Worker support for update/delete actions.

@@ -1668,11 +1668,10 @@
 
     .bottom-dock {
       position: fixed;
-      left: 50%;
-      bottom: calc(env(safe-area-inset-bottom) + 12px);
-      transform: translateX(-50%);
+      left: max(11px, calc(50vw - 340px));
+      right: max(11px, calc(50vw - 340px));
+      bottom: max(12px, calc(env(safe-area-inset-bottom) + 8px));
       z-index: 45;
-      width: min(680px, calc(100vw - 22px));
       padding: 8px;
       border-radius: 999px;
       border: 1px solid rgba(99, 149, 238, 0.24);
@@ -1894,8 +1893,9 @@
       }
 
       .bottom-dock {
-        width: calc(100vw - 14px);
-        bottom: calc(env(safe-area-inset-bottom) + 8px);
+        left: 7px;
+        right: 7px;
+        bottom: max(8px, calc(env(safe-area-inset-bottom) + 6px));
       }
 
       .dock-btn {
