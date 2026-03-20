@@ -544,7 +544,9 @@
     .fragment-foot {
       display: flex;
       align-items: center;
-      gap: 12px;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
       margin-top: 16px;
       padding-top: 12px;
       border-top: 1px solid rgba(255, 255, 255, 0.05);
@@ -560,6 +562,31 @@
       height: 5px;
       border-radius: 999px;
       background: rgba(145, 175, 179, 0.35);
+    }
+
+    .fragment-foot-meta {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      min-width: 0;
+    }
+
+    .fragment-reactions {
+      min-height: 24px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: flex-end;
+      margin-left: auto;
+    }
+
+    .fragment-reactions .webReactionz {
+      gap: 6px;
+    }
+
+    .fragment-reactions .webReactionz .emoji {
+      filter: saturate(0.92);
+      opacity: 0.9;
     }
 
     .empty-card {
@@ -689,6 +716,16 @@
       .fragment-body {
         font-size: 0.98rem;
         line-height: 1.68;
+      }
+
+      .fragment-foot {
+        align-items: flex-start;
+      }
+
+      .fragment-reactions {
+        width: 100%;
+        justify-content: flex-start;
+        margin-left: 0;
       }
     }
   </style>
@@ -970,6 +1007,33 @@
       `;
     }
 
+    function initReactionWidgets(items) {
+      if (!Array.isArray(items) || !items.length) {
+        return;
+      }
+
+      if (typeof window.WebReactionz !== 'function') {
+        window.setTimeout(() => initReactionWidgets(items), 220);
+        return;
+      }
+
+      items.forEach((fragment) => {
+        const fragmentId = buildFragmentId(fragment);
+        const selector = `#reactions-${fragmentId}`;
+        const target = document.querySelector(selector);
+        if (!target || target.dataset.reactionsReady === 'true') {
+          return;
+        }
+
+        target.dataset.reactionsReady = 'true';
+        new window.WebReactionz({
+          siteId: '0b926b89-1467-4ef1-a8d4-ca95543047a3',
+          domSelector: selector,
+          pageId: `fragment:${fragmentId}`
+        }).init();
+      });
+    }
+
     async function renderFragments() {
       const container = document.getElementById('fragmentsFeed');
       let fragments = [];
@@ -1024,13 +1088,18 @@
             </div>
             <p class="fragment-body">${escapeHtml(fragment.text || '')}</p>
             <div class="fragment-foot">
-              <span>Fragment</span>
-              <span class="dot" aria-hidden="true"></span>
-              <span>Outside The World</span>
+              <div class="fragment-foot-meta">
+                <span>Fragment</span>
+                <span class="dot" aria-hidden="true"></span>
+                <span>Outside The World</span>
+              </div>
+              <div class="fragment-reactions" id="reactions-${fragmentId}"></div>
             </div>
           </article>
         `;
       }).join('');
+
+      initReactionWidgets(items);
 
       if (requestedEntryId && typeof CSS !== 'undefined' && CSS.escape) {
         const requestedNode = document.querySelector(`[data-fragment-id="${CSS.escape(requestedEntryId)}"]`);
@@ -1133,5 +1202,6 @@
     renderFragments();
     runTypeLine();
   </script>
+  <script async defer src="https://cdn.jsdelivr.net/gh/intersect-software/web-reactionz@1/public/setup.min.js" data-siteid="0b926b89-1467-4ef1-a8d4-ca95543047a3" data-noautoinit="1"></script>
 </body>
 </html>
