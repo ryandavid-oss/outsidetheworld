@@ -242,7 +242,11 @@
       display: block;
     }
 
-    .app-home {
+    .workspace.app-home {
+      display: none;
+    }
+
+    .workspace.app-home.is-active {
       display: grid;
       gap: 14px;
       padding-top: 8px;
@@ -331,14 +335,14 @@
     }
 
     .app-icon svg {
-      width: 42px;
-      height: 42px;
+      width: 58px;
+      height: 58px;
       display: block;
     }
 
     .app-icon img {
-      width: 42px;
-      height: 42px;
+      width: 58px;
+      height: 58px;
       display: block;
     }
 
@@ -360,6 +364,12 @@
 
     body[data-theme="light"] .app-icon img {
       filter: saturate(0.95) contrast(1.02);
+    }
+
+    body[data-theme="light"] .app-icon.app-icon-plain {
+      background: transparent;
+      border: none;
+      box-shadow: none;
     }
 
     .app-tile-label {
@@ -435,10 +445,39 @@
       outline: none;
     }
 
+    .back-icon-btn {
+      display: none;
+      appearance: none;
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-main);
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: 0.25s var(--ease);
+    }
+
+    .back-icon-btn.is-visible {
+      display: inline-flex;
+    }
+
+    .back-icon-btn:hover,
+    .back-icon-btn:focus-visible {
+      border-color: var(--brand-blue);
+      background: rgba(160, 190, 245, 0.08);
+      outline: none;
+    }
+
+    .back-icon-btn svg {
+      width: 18px;
+      height: 18px;
+    }
+
     .workspace-nav {
-      display: flex;
-      justify-content: flex-end;
-      margin: 0 0 10px;
+      display: none;
     }
 
     .coming-panel {
@@ -1132,6 +1171,12 @@
         height: 70px;
       }
 
+      .app-icon svg,
+      .app-icon img {
+        width: 52px;
+        height: 52px;
+      }
+
       .app-home-label {
         width: 100%;
       }
@@ -1154,6 +1199,11 @@
         <a class="brand" href="fragments.html" aria-label="Open fragments feed">
           <img id="publisherLogo" src="Images/Equal.svg" alt="Outside The World" />
         </a>
+        <button class="back-icon-btn" id="headerBackBtn" type="button" aria-label="Back to publisher hub">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 18L9 12L15 6"></path>
+          </svg>
+        </button>
         <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="topbarActions" aria-label="Open settings menu">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
             <path d="M4 7h16"></path>
@@ -1206,16 +1256,12 @@
             </svg>
           </div>
           <h2 class="app-tile-label">Changelog</h2>
-          <p class="app-tile-meta">Coming Soon</p>
+          <p class="app-tile-meta"></p>
         </button>
 
         <button class="app-tile" id="openSiteApp" type="button">
           <div class="app-icon" aria-hidden="true">
-            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="10" y="10" width="28" height="28" rx="8" stroke="#D9C08C"></rect>
-              <path d="M19 29L29 19" stroke="#6395EE"></path>
-              <path d="M21 19H29V27" stroke="#91AFB3"></path>
-            </svg>
+            <img src="Images/otw_brandmark_stroke.svg" alt="" />
           </div>
           <h2 class="app-tile-label">Open OTW</h2>
           <p class="app-tile-meta"></p>
@@ -1225,7 +1271,7 @@
           <div class="app-icon" aria-hidden="true">
             <img src="Images/ghost_writer_lite_icon.svg" alt="" />
           </div>
-          <h2 class="app-tile-label">Ghost-writer Lite</h2>
+          <h2 class="app-tile-label">Ghost-Writer Lite</h2>
           <p class="app-tile-meta">Coming Soon</p>
         </button>
 
@@ -1240,9 +1286,6 @@
     </section>
 
     <section class="workspace" id="fragmentsWorkspace">
-    <div class="workspace-nav">
-      <button class="back-home-btn" id="backHomeBtn" type="button">Back to hub</button>
-    </div>
     <div class="layout">
       <main class="panel composer">
         <div class="status-line" id="statusLine">Drafts save locally on this device. Stage a fragment to add it to the outbox and copy JSON for later publishing.</div>
@@ -1334,9 +1377,6 @@
     </section>
 
     <section class="workspace" id="changelogWorkspace">
-      <div class="workspace-nav">
-        <button class="back-home-btn" id="backHomeBtnChangelog" type="button">Back to hub</button>
-      </div>
       <div class="layout">
         <main class="panel composer">
           <div class="status-line" id="changelogStatusLine">Quick-drop mode: write one clean update, then stage or export it without fighting JSON by hand.</div>
@@ -1404,9 +1444,6 @@
     </section>
 
     <section class="workspace" id="botWorkspace">
-      <div class="workspace-nav">
-        <button class="back-home-btn" id="backHomeBtnBot" type="button">Back to hub</button>
-      </div>
       <div class="bot-shell">
         <section class="panel bot-hero">
           <img class="bot-mark" src="Images/otw_bot_summon_icon.svg" alt="OTW_Bot" />
@@ -1473,9 +1510,7 @@
     const openChangelogApp = document.getElementById('openChangelogApp');
     const openBotApp = document.getElementById('openBotApp');
     const openSiteApp = document.getElementById('openSiteApp');
-    const backHomeBtn = document.getElementById('backHomeBtn');
-    const backHomeBtnChangelog = document.getElementById('backHomeBtnChangelog');
-    const backHomeBtnBot = document.getElementById('backHomeBtnBot');
+    const headerBackBtn = document.getElementById('headerBackBtn');
     const botDeployBtn = document.getElementById('botDeployBtn');
     const botStatusLine = document.getElementById('botStatusLine');
     const changelogDateInput = document.getElementById('changelogDate');
@@ -2154,12 +2189,12 @@
       fragmentsWorkspace.classList.toggle('is-active', nextView === 'fragments');
       changelogWorkspace.classList.toggle('is-active', nextView === 'changelog');
       botWorkspace.classList.toggle('is-active', nextView === 'bot');
-      backHomeBtn.classList.toggle('is-visible', nextView !== 'home');
-      backHomeBtnChangelog.classList.toggle('is-visible', nextView !== 'home');
-      backHomeBtnBot.classList.toggle('is-visible', nextView !== 'home');
+      headerBackBtn.classList.toggle('is-visible', nextView !== 'home');
 
       setMenuState(false);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      requestAnimationFrame(() => {
+        window.scrollTo(0, 0);
+      });
     }
 
     document.getElementById('publisherForm').addEventListener('submit', stageFragment);
@@ -2189,13 +2224,7 @@
     openSiteApp.addEventListener('click', () => {
       window.open('index.html', '_blank', 'noopener,noreferrer');
     });
-    backHomeBtn.addEventListener('click', () => {
-      setWorkspace('home');
-    });
-    backHomeBtnChangelog.addEventListener('click', () => {
-      setWorkspace('home');
-    });
-    backHomeBtnBot.addEventListener('click', () => {
+    headerBackBtn.addEventListener('click', () => {
       setWorkspace('home');
     });
     botDeployBtn.addEventListener('click', summonOtwBot);
