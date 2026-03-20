@@ -75,6 +75,10 @@
             --gold: #d9c08c;
             --gold-soft: rgba(217, 192, 140, 0.14);
             --amethyst: #9b59b6;
+            --brand-pink: #ff69b4;
+            --brand-pink-soft: rgba(255, 105, 180, 0.14);
+            --rose-gold: #e0bfb8;
+            --rose-gold-soft: rgba(224, 191, 184, 0.16);
             --shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
             --radius-xl: 32px;
             --radius-lg: 24px;
@@ -112,6 +116,8 @@
             background:
                 radial-gradient(760px 500px at 12% 12%, rgba(119, 163, 255, 0.12), transparent 60%),
                 radial-gradient(720px 480px at 86% 14%, rgba(158, 197, 193, 0.11), transparent 58%),
+                radial-gradient(560px 360px at 18% 74%, rgba(255, 105, 180, 0.08), transparent 62%),
+                radial-gradient(520px 340px at 82% 78%, rgba(224, 191, 184, 0.07), transparent 58%),
                 radial-gradient(840px 560px at 52% 88%, rgba(217, 192, 140, 0.09), transparent 62%),
                 linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 100%);
         }
@@ -428,11 +434,8 @@
             color: var(--text-soft);
         }
 
-        .hero-meta,
         .hero-copy,
         .route-grid,
-        .hero-meta-mobile,
-        .split-note,
         .support-band {
             position: relative;
             z-index: 1;
@@ -502,69 +505,19 @@
             font-weight: 600;
         }
 
-        .hero-meta {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 12px;
-        }
-
-        .hero-meta-mobile {
-            display: none;
-        }
-
-        .meta-chip {
-            padding: 14px 14px 15px;
-            border-radius: var(--radius-md);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            background: rgba(255, 255, 255, 0.03);
-            min-height: 148px;
-        }
-
-        .meta-label {
-            display: block;
-            margin-bottom: 6px;
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 0.68rem;
-            letter-spacing: 0.14em;
-            text-transform: uppercase;
-            color: var(--text-faint);
-        }
-
-        .meta-value {
-            display: block;
-            font-size: 0.98rem;
-            line-height: 1.45;
-            color: var(--text-soft);
-        }
-
-        .split-note {
-            margin: 18px auto 0;
-            max-width: 44rem;
-            padding: 0 8px;
-            text-align: center;
-            font-size: 0.98rem;
-            line-height: 1.8;
-            color: var(--text-soft);
-            animation: revealUp 0.85s 0.2s both;
-        }
-
-        .split-note strong {
-            color: var(--text);
-            font-weight: 600;
-        }
-
         .route-grid {
             display: grid;
             gap: 18px;
-            margin-top: 28px;
+            margin-top: 18px;
         }
 
         .route-card {
             position: relative;
             overflow: hidden;
             display: grid;
-            gap: 28px;
-            min-height: 320px;
+            grid-template-rows: auto 1fr auto;
+            gap: 22px;
+            min-height: 296px;
             padding: 24px 22px 22px;
             border-radius: var(--radius-lg);
             border: 1px solid var(--border);
@@ -613,25 +566,27 @@
         .route-card.personal::before {
             background:
                 linear-gradient(140deg, rgba(119, 163, 255, 0.12), transparent 36%),
-                radial-gradient(420px 240px at 14% 18%, rgba(119, 163, 255, 0.16), transparent 62%);
+                radial-gradient(420px 240px at 14% 18%, rgba(224, 191, 184, 0.14), transparent 62%),
+                radial-gradient(280px 180px at 82% 12%, rgba(255, 105, 180, 0.1), transparent 62%);
         }
 
         .route-card.personal::after {
             top: -36px;
             right: -18px;
-            background: radial-gradient(circle, rgba(119, 163, 255, 0.18) 0%, transparent 72%);
+            background: radial-gradient(circle, rgba(224, 191, 184, 0.18) 0%, transparent 72%);
         }
 
         .route-card.professional::before {
             background:
                 linear-gradient(220deg, rgba(158, 197, 193, 0.11), transparent 34%),
-                radial-gradient(420px 240px at 84% 20%, rgba(158, 197, 193, 0.15), transparent 62%);
+                radial-gradient(420px 240px at 84% 20%, rgba(158, 197, 193, 0.15), transparent 62%),
+                radial-gradient(260px 180px at 18% 82%, rgba(217, 192, 140, 0.1), transparent 64%);
         }
 
         .route-card.professional::after {
             bottom: -42px;
             left: -18px;
-            background: radial-gradient(circle, rgba(158, 197, 193, 0.16) 0%, transparent 72%);
+            background: radial-gradient(circle, rgba(217, 192, 140, 0.16) 0%, transparent 72%);
         }
 
         .route-card:hover,
@@ -683,6 +638,14 @@
             color: var(--text-faint);
         }
 
+        .route-card.personal .route-label {
+            color: rgba(224, 191, 184, 0.78);
+        }
+
+        .route-card.professional .route-label {
+            color: rgba(158, 197, 193, 0.78);
+        }
+
         .route-index {
             font-family: 'IBM Plex Mono', monospace;
             font-size: 0.78rem;
@@ -698,19 +661,26 @@
             font-weight: 600;
         }
 
+        .route-body {
+            display: grid;
+            align-content: start;
+            gap: 0;
+            padding-right: 112px;
+        }
+
         .route-body p {
             margin: 0;
-            max-width: 32ch;
+            max-width: 28ch;
             color: var(--text-soft);
-            font-size: 1rem;
-            line-height: 1.8;
+            font-size: 0.98rem;
+            line-height: 1.68;
         }
 
         .route-signals {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
-            margin-top: 18px;
+            margin-top: 12px;
         }
 
         .signal-pill {
@@ -718,9 +688,9 @@
             align-items: center;
             min-height: 34px;
             padding: 0 12px;
-            border-radius: 999px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            background: rgba(255, 255, 255, 0.035);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            background: rgba(255, 255, 255, 0.022);
             font-family: 'IBM Plex Mono', monospace;
             font-size: 0.72rem;
             letter-spacing: 0.06em;
@@ -728,29 +698,95 @@
             color: var(--text-soft);
         }
 
+        .signal-pill::before {
+            content: "#";
+            margin-right: 0.32rem;
+            color: var(--text-faint);
+        }
+
         .route-footer {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-start;
             align-items: end;
             gap: 16px;
         }
 
-        .route-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
+        .route-orb {
+            position: absolute;
+            top: 78px;
+            right: 18px;
+            width: 88px;
+            height: 88px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: radial-gradient(circle at 30% 28%, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02) 58%, rgba(0, 0, 0, 0.12) 100%);
+            box-shadow:
+                inset 0 0 24px rgba(255, 255, 255, 0.03),
+                0 16px 34px rgba(0, 0, 0, 0.22);
+            display: grid;
+            place-items: center;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
         }
 
-        .mini-link {
-            display: inline-flex;
-            align-items: center;
-            min-height: 32px;
-            padding: 0 11px;
-            border-radius: 999px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            background: rgba(255, 255, 255, 0.03);
-            font-size: 0.78rem;
-            color: var(--text-soft);
+        .route-orb svg {
+            width: 75%;
+            height: 75%;
+        }
+
+        .route-orb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transform: scale(1.1);
+            transform-origin: center;
+            transition: transform 0.3s var(--ease), filter 0.3s var(--ease), opacity 0.3s var(--ease);
+        }
+
+        .route-card.personal .route-orb {
+            border-color: rgba(224, 191, 184, 0.3);
+            background:
+                radial-gradient(circle at 22% 24%, rgba(255, 105, 180, 0.18), transparent 44%),
+                radial-gradient(circle at 78% 74%, rgba(119, 163, 255, 0.16), transparent 48%),
+                linear-gradient(180deg, rgba(224, 191, 184, 0.09), rgba(255, 255, 255, 0.02));
+            box-shadow:
+                inset 0 0 26px rgba(255, 255, 255, 0.04),
+                0 0 28px rgba(224, 191, 184, 0.08);
+        }
+
+        .route-card.professional .route-orb {
+            border-color: rgba(158, 197, 193, 0.28);
+            background:
+                radial-gradient(circle at 24% 24%, rgba(158, 197, 193, 0.16), transparent 44%),
+                radial-gradient(circle at 78% 74%, rgba(217, 192, 140, 0.14), transparent 48%),
+                linear-gradient(180deg, rgba(119, 163, 255, 0.08), rgba(255, 255, 255, 0.02));
+            box-shadow:
+                inset 0 0 26px rgba(255, 255, 255, 0.04),
+                0 0 28px rgba(158, 197, 193, 0.08);
+        }
+
+        .route-card:hover .route-orb img,
+        .route-card:focus-visible .route-orb img {
+            filter:
+                saturate(1.08)
+                brightness(1.04)
+                hue-rotate(-8deg)
+                drop-shadow(0 0 22px rgba(155, 89, 182, 0.36));
+        }
+
+        .route-card:hover .route-orb,
+        .route-card:focus-visible .route-orb {
+            border-color: rgba(155, 89, 182, 0.48);
+            background:
+                radial-gradient(circle at 22% 24%, rgba(155, 89, 182, 0.24), transparent 42%),
+                radial-gradient(circle at 78% 74%, rgba(255, 105, 180, 0.14), transparent 46%),
+                linear-gradient(180deg, rgba(155, 89, 182, 0.12), rgba(255, 255, 255, 0.03));
+            box-shadow:
+                inset 0 0 30px rgba(255, 255, 255, 0.05),
+                0 0 34px rgba(155, 89, 182, 0.24),
+                0 0 56px rgba(155, 89, 182, 0.14);
         }
 
         .route-btn {
@@ -796,20 +832,20 @@
 
         .support-band {
             display: grid;
-            gap: 16px;
-            margin-top: 22px;
-            padding: 18px 18px 0;
+            gap: 10px;
+            margin-top: 12px;
+            padding: 8px 18px 0;
             animation: revealUp 0.95s 0.42s both;
         }
 
-        .support-quote {
-            margin: 0;
-            font-family: 'IBM Plex Serif', serif;
-            font-size: clamp(1.18rem, 3.2vw, 1.7rem);
-            line-height: 1.5;
-            color: rgba(245, 247, 251, 0.84);
+        .support-meta {
+            margin: 2px 0 0;
             text-align: center;
-            text-wrap: balance;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.72rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: rgba(224, 191, 184, 0.7);
         }
 
         .secondary-nav {
@@ -825,19 +861,24 @@
             min-height: 40px;
             padding: 0 14px;
             border-radius: 999px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            background: rgba(255, 255, 255, 0.03);
-            color: var(--text-soft);
+            border: 1px solid rgba(155, 89, 182, 0.42);
+            background: rgba(155, 89, 182, 0.08);
+            color: rgba(245, 247, 251, 0.88);
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
             text-decoration: none;
-            font-size: 0.84rem;
-            transition: border-color 0.28s var(--ease), color 0.28s var(--ease), transform 0.28s var(--ease);
+            transition: border-color 0.28s var(--ease), color 0.28s var(--ease), transform 0.28s var(--ease), background 0.28s var(--ease), box-shadow 0.28s var(--ease);
         }
 
         .secondary-nav a:hover,
         .secondary-nav a:focus-visible {
             transform: translateY(-1px);
             color: var(--text);
-            border-color: rgba(255, 255, 255, 0.18);
+            border-color: rgba(155, 89, 182, 0.7);
+            background: rgba(155, 89, 182, 0.14);
+            box-shadow: 0 0 20px rgba(155, 89, 182, 0.14);
         }
 
         .site-footer {
@@ -891,16 +932,12 @@
                 width: clamp(270px, 25vw, 380px);
             }
 
-            .hero-meta {
-                margin-top: 12px;
-            }
-
             .site-search {
                 margin-top: 2px;
             }
 
             .route-grid {
-                grid-template-columns: 1.08fr 0.92fr;
+                grid-template-columns: 1fr 1fr;
                 align-items: stretch;
                 gap: 22px;
             }
@@ -908,6 +945,17 @@
             .route-card {
                 min-height: 400px;
                 padding: 30px 28px 26px;
+            }
+
+            .route-body {
+                padding-right: 154px;
+            }
+
+            .route-orb {
+                top: 86px;
+                right: 26px;
+                width: 118px;
+                height: 118px;
             }
 
             .route-card.personal {
@@ -929,7 +977,7 @@
             }
 
             .support-band {
-                padding: 22px 54px 0;
+                padding: 10px 54px 0;
             }
         }
 
@@ -976,27 +1024,20 @@
                 width: min(64vw, 220px);
             }
 
-            .hero-meta {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .hero-meta-desktop {
-                display: none;
-            }
-
-            .hero-meta-mobile {
-                display: grid;
-                margin-top: 20px;
-                animation: revealUp 0.92s 0.38s both;
-            }
-
-            .meta-chip {
-                min-height: 0;
-            }
-
             .route-footer {
                 align-items: start;
                 flex-direction: column;
+            }
+
+            .route-body {
+                padding-right: 84px;
+            }
+
+            .route-orb {
+                top: 52px;
+                right: 14px;
+                width: 70px;
+                height: 70px;
             }
 
             .support-band {
@@ -1055,15 +1096,11 @@
                 <section class="hero-panel" aria-label="Homepage introduction">
                     <div class="hero-grid">
                         <div class="hero-copy">
-                            <div class="eyebrow">Personal archive / professional practice</div>
                             <p class="hero-title">
                                 A life in <span class="accent">signal</span> and structure.
                             </p>
                             <p class="hero-dek">
-                                Outside The World holds two sides of the same body of work:
-                                <strong>the personal record</strong> of memory, writing, photography, and long-form
-                                observation, and <strong>the professional record</strong> of systems thinking, design,
-                                leadership, and delivery.
+                                Personal archive. Professional practice.
                             </p>
                         </div>
 
@@ -1092,24 +1129,9 @@
                                 <p class="site-search-hint" id="siteSearchHint">Natural-language search across Outside The World.</p>
                                 <div class="search-results" id="siteSearchResults" role="status" aria-live="polite"></div>
                             </div>
-                            <div class="hero-meta hero-meta-desktop" aria-label="Site summary">
-                                <div class="meta-chip">
-                                    <span class="meta-label">Built over</span>
-                                    <span class="meta-value">25 years of notes, images, experiments, and recovered pages</span>
-                                </div>
-                                <div class="meta-chip">
-                                    <span class="meta-label">Based in</span>
-                                    <span class="meta-value">Queen Creek, Arizona, with one foot in archive and one in practice</span>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </section>
-
-                <div class="split-note">
-                    Choose the doorway that fits your reason for arriving.
-                    <strong>Both paths belong to the same world.</strong>
-                </div>
 
                 <section class="route-grid" aria-label="Primary site paths">
                     <a class="route-card personal" href="personal.html" aria-label="Enter personal section">
@@ -1118,26 +1140,23 @@
                             <div class="route-index">01</div>
                         </div>
 
+                        <div class="route-orb" aria-hidden="true">
+                            <img src="Images/pers_circle.jpg" alt="" />
+                        </div>
+
                         <div class="route-body">
                             <h3>Enter the living archive.</h3>
                             <p>
-                                Essays, photography, poetry, residue, and the more intimate record of how a life looked,
-                                felt, and was remembered.
+                                Writing, photography, poetry, and memory.
                             </p>
                             <div class="route-signals" aria-label="Personal highlights">
                                 <span class="signal-pill">writing</span>
                                 <span class="signal-pill">photography</span>
-                                <span class="signal-pill">memory</span>
-                                <span class="signal-pill">signal recovery</span>
+                                <span class="signal-pill">poetry</span>
                             </div>
                         </div>
 
                         <div class="route-footer">
-                            <div class="route-links" aria-label="Personal destinations">
-                                <span class="mini-link">feed</span>
-                                <span class="mini-link">poetry</span>
-                                <span class="mini-link">wayback</span>
-                            </div>
                             <span class="route-btn">Explore Personal</span>
                         </div>
                     </a>
@@ -1149,53 +1168,41 @@
                             <div class="route-index">02</div>
                         </div>
 
+                        <div class="route-orb" aria-hidden="true">
+                            <img src="Images/pro_circle.jpg" alt="" />
+                        </div>
+
                         <div class="route-body">
                             <h3>Enter the practice.</h3>
                             <p>
-                                Advisory work, systems design, leadership, product thinking, and the formal record of
-                                what I build and how I work.
+                                Advisory work, systems design, and leadership.
                             </p>
                             <div class="route-signals" aria-label="Professional highlights">
                                 <span class="signal-pill">strategy</span>
                                 <span class="signal-pill">systems</span>
-                                <span class="signal-pill">design</span>
                                 <span class="signal-pill">leadership</span>
                             </div>
                         </div>
 
                         <div class="route-footer">
-                            <div class="route-links" aria-label="Professional destinations">
-                                <span class="mini-link">portfolio</span>
-                                <span class="mini-link">resume</span>
-                                <span class="mini-link">advisory</span>
-                            </div>
                             <span class="route-btn">Explore Professional</span>
                         </div>
                     </a>
                 </section>
 
-                <section class="hero-meta hero-meta-mobile" aria-label="Site summary">
-                    <div class="meta-chip">
-                        <span class="meta-label">Built over</span>
-                        <span class="meta-value">25 years of notes, images, experiments, and recovered pages</span>
-                    </div>
-                    <div class="meta-chip">
-                        <span class="meta-label">Based in</span>
-                        <span class="meta-value">Queen Creek, Arizona, with one foot in archive and one in practice</span>
-                    </div>
-                </section>
-
                 <section class="support-band" aria-label="Supporting links">
-                    <p class="support-quote">
-                        Twenty-five years of recovered pages, field notes, work, memory, and proof of life.
-                    </p>
-
                     <nav class="secondary-nav" aria-label="Secondary navigation">
                         <a href="poetry.html">Verse Archive</a>
+                        <a href="fragments.html">Fragments</a>
+                        <a href="wayback.html">Wayback</a>
+                        <a href="image_of_the_day.html">Image of the Day</a>
                         <a href="flotsam.html">Flotsam</a>
                         <a href="resume.html">Dossier</a>
+                        <a href="mac30.html">Mac 30</a>
+                        <a href="museum.html">Artifacts</a>
                         <a href="emmy.html">Heart</a>
                     </nav>
+                    <p class="support-meta">Built over 25 years in Queen Creek, Arizona.</p>
                 </section>
             </main>
 
