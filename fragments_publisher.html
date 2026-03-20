@@ -35,6 +35,8 @@
       --brand-teal: #91AFB3;
       --brand-gold: #D9C08C;
       --amethyst: #9B59B6;
+      --signal-green: #4BE36E;
+      --signal-green-soft: rgba(75, 227, 110, 0.16);
       --radius-xl: 28px;
       --radius-lg: 22px;
       --radius-md: 16px;
@@ -71,6 +73,8 @@
       color: var(--text-main);
       font-family: "IBM Plex Sans", system-ui, sans-serif;
       background:
+        radial-gradient(540px 300px at 50% -2%, rgba(155, 89, 182, 0.34), transparent 58%),
+        radial-gradient(420px 260px at 82% 6%, rgba(155, 89, 182, 0.18), transparent 62%),
         radial-gradient(720px 460px at 10% 10%, rgba(99, 149, 238, 0.11), transparent 58%),
         radial-gradient(680px 440px at 88% 16%, rgba(145, 175, 179, 0.08), transparent 58%),
         radial-gradient(640px 420px at 50% 100%, rgba(27, 54, 93, 0.22), transparent 60%),
@@ -79,6 +83,8 @@
 
     body[data-theme="light"] {
       background:
+        radial-gradient(540px 300px at 50% -2%, rgba(155, 89, 182, 0.16), transparent 58%),
+        radial-gradient(420px 260px at 82% 6%, rgba(155, 89, 182, 0.1), transparent 62%),
         radial-gradient(720px 460px at 10% 10%, rgba(99, 149, 238, 0.09), transparent 58%),
         radial-gradient(680px 440px at 88% 16%, rgba(145, 175, 179, 0.08), transparent 58%),
         radial-gradient(640px 420px at 50% 100%, rgba(217, 192, 140, 0.16), transparent 60%),
@@ -98,14 +104,18 @@
       margin-bottom: 14px;
       padding: 14px;
       backdrop-filter: blur(18px);
-      background: linear-gradient(180deg, rgba(10, 10, 10, 0.92), rgba(10, 10, 10, 0.7));
+      background:
+        radial-gradient(240px 120px at 72% 0%, rgba(155, 89, 182, 0.16), transparent 68%),
+        linear-gradient(180deg, rgba(10, 10, 10, 0.94), rgba(10, 10, 10, 0.72));
       border: 1px solid var(--border);
       border-radius: 0 0 var(--radius-lg) var(--radius-lg);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.22), 0 0 0 1px rgba(155, 89, 182, 0.06);
     }
 
     body[data-theme="light"] .topbar {
-      background: linear-gradient(180deg, rgba(247, 243, 235, 0.92), rgba(247, 243, 235, 0.74));
+      background:
+        radial-gradient(240px 120px at 72% 0%, rgba(155, 89, 182, 0.12), transparent 68%),
+        linear-gradient(180deg, rgba(247, 243, 235, 0.94), rgba(247, 243, 235, 0.76));
       box-shadow: 0 12px 30px rgba(27, 54, 93, 0.08);
     }
 
@@ -259,8 +269,10 @@
       padding: 12px 18px;
       border-radius: 999px;
       border: 1px solid rgba(145, 175, 179, 0.22);
-      background: linear-gradient(180deg, rgba(145, 175, 179, 0.14), rgba(145, 175, 179, 0.06));
-      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18);
+      background:
+        radial-gradient(180px 70px at 50% 0%, rgba(155, 89, 182, 0.14), transparent 70%),
+        linear-gradient(180deg, rgba(145, 175, 179, 0.14), rgba(145, 175, 179, 0.06));
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18), 0 0 30px rgba(155, 89, 182, 0.08);
       color: var(--brand-teal);
       font-family: "IBM Plex Mono", monospace;
       font-size: 0.82rem;
@@ -281,6 +293,212 @@
       align-items: start;
       width: 100%;
       max-width: 560px;
+    }
+
+    .status-card {
+      width: 100%;
+      max-width: 720px;
+      padding: 20px 18px 18px;
+      border-radius: 28px;
+      border: 1px solid rgba(75, 227, 110, 0.18);
+      background:
+        radial-gradient(240px 96px at 50% 0%, rgba(75, 227, 110, 0.12), transparent 72%),
+        linear-gradient(180deg, rgba(11, 20, 15, 0.88), rgba(8, 13, 10, 0.82));
+      box-shadow:
+        0 24px 48px rgba(0, 0, 0, 0.26),
+        0 0 30px rgba(75, 227, 110, 0.08);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    body[data-theme="light"] .status-card {
+      background:
+        radial-gradient(240px 96px at 50% 0%, rgba(75, 227, 110, 0.1), transparent 72%),
+        linear-gradient(180deg, rgba(247, 250, 246, 0.96), rgba(238, 245, 239, 0.92));
+      border-color: rgba(75, 227, 110, 0.16);
+      box-shadow: 0 18px 40px rgba(27, 54, 93, 0.1), 0 0 24px rgba(75, 227, 110, 0.06);
+    }
+
+    .status-card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .status-card-title {
+      margin: 0;
+      color: #dfffe7;
+      font-size: clamp(1.5rem, 3.8vw, 2rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+    }
+
+    body[data-theme="light"] .status-card-title {
+      color: #1f5c31;
+    }
+
+    .status-card-mark {
+      color: rgba(223, 255, 231, 0.78);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    body[data-theme="light"] .status-card-mark {
+      color: rgba(31, 92, 49, 0.76);
+    }
+
+    .status-track {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 8px;
+      padding: 18px 16px;
+      margin-bottom: 18px;
+      border-radius: 24px;
+      border: 1px solid rgba(75, 227, 110, 0.1);
+      background:
+        linear-gradient(90deg, rgba(75, 227, 110, 0.22), rgba(39, 125, 61, 0.2)),
+        rgba(21, 52, 28, 0.46);
+    }
+
+    .status-track::before,
+    .status-track::after {
+      content: "";
+      position: absolute;
+      left: 14px;
+      right: 14px;
+      height: 5px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      pointer-events: none;
+    }
+
+    .status-track::before {
+      top: 10px;
+    }
+
+    .status-track::after {
+      bottom: 10px;
+    }
+
+    body[data-theme="light"] .status-track {
+      background:
+        linear-gradient(90deg, rgba(75, 227, 110, 0.18), rgba(39, 125, 61, 0.14)),
+        rgba(201, 242, 210, 0.7);
+    }
+
+    .status-node {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      justify-items: center;
+      gap: 10px;
+    }
+
+    .status-node-dot {
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      color: #071108;
+      background: var(--signal-green);
+      box-shadow:
+        0 0 0 8px rgba(75, 227, 110, 0.08),
+        0 0 24px rgba(75, 227, 110, 0.28);
+      animation: signalPulse 3.6s ease-in-out infinite;
+    }
+
+    .status-node:nth-child(2) .status-node-dot {
+      animation-delay: 0.28s;
+    }
+
+    .status-node:nth-child(3) .status-node-dot {
+      animation-delay: 0.56s;
+    }
+
+    .status-node:nth-child(4) .status-node-dot {
+      animation-delay: 0.84s;
+    }
+
+    .status-node:nth-child(5) .status-node-dot {
+      animation-delay: 1.12s;
+    }
+
+    .status-node-dot svg {
+      width: 22px;
+      height: 22px;
+      display: block;
+    }
+
+    .status-metrics {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      align-items: start;
+      margin-bottom: 14px;
+    }
+
+    .status-metric {
+      display: grid;
+      gap: 6px;
+      justify-items: center;
+      text-align: center;
+    }
+
+    .status-metric-label {
+      color: var(--text-faint);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.66rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .status-metric-value {
+      color: #f0fff3;
+      font-size: 0.92rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+    }
+
+    body[data-theme="light"] .status-metric-value {
+      color: #1f5c31;
+    }
+
+    .status-card-copy {
+      margin: 0;
+      color: var(--text-soft);
+      font-size: 1.06rem;
+      line-height: 1.6;
+    }
+
+    .status-card-copy strong {
+      color: #dfffe7;
+      font-weight: 600;
+    }
+
+    body[data-theme="light"] .status-card-copy strong {
+      color: #1f5c31;
+    }
+
+    @keyframes signalPulse {
+      0%, 100% {
+        transform: translateY(0) scale(1);
+        box-shadow:
+          0 0 0 8px rgba(75, 227, 110, 0.08),
+          0 0 24px rgba(75, 227, 110, 0.28);
+      }
+      50% {
+        transform: translateY(2px) scale(0.97);
+        box-shadow:
+          0 0 0 10px rgba(75, 227, 110, 0.05),
+          0 0 18px rgba(75, 227, 110, 0.18);
+      }
     }
 
     .app-tile {
@@ -328,10 +546,14 @@
       margin: 0 auto 12px;
       border-radius: 22px;
       border: 1px solid rgba(255, 255, 255, 0.08);
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.02));
+      background:
+        radial-gradient(40px 24px at 50% 20%, rgba(255, 255, 255, 0.06), transparent 72%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.018));
       display: grid;
       place-items: center;
-      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+      box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.02),
+        0 12px 26px rgba(0, 0, 0, 0.2);
     }
 
     .app-icon svg {
@@ -348,16 +570,34 @@
 
     .app-icon.fragments-icon {
       color: var(--brand-blue);
-      box-shadow: inset 0 0 0 1px rgba(99, 149, 238, 0.08);
+      box-shadow:
+        inset 0 0 0 1px rgba(99, 149, 238, 0.12),
+        0 0 18px rgba(99, 149, 238, 0.08);
     }
 
     .app-icon.changelog-icon {
       color: var(--brand-teal);
-      box-shadow: inset 0 0 0 1px rgba(145, 175, 179, 0.08);
+      box-shadow:
+        inset 0 0 0 1px rgba(145, 175, 179, 0.12),
+        0 0 18px rgba(145, 175, 179, 0.07);
+    }
+
+    .app-tile#openBotApp .app-icon {
+      box-shadow:
+        inset 0 0 0 1px rgba(155, 89, 182, 0.14),
+        0 0 22px rgba(155, 89, 182, 0.12);
+    }
+
+    .app-tile#openSiteApp .app-icon {
+      box-shadow:
+        inset 0 0 0 1px rgba(217, 192, 140, 0.14),
+        0 0 18px rgba(217, 192, 140, 0.08);
     }
 
     body[data-theme="light"] .app-icon {
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.52));
+      background:
+        radial-gradient(40px 24px at 50% 18%, rgba(255, 255, 255, 0.82), transparent 72%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.54));
       border-color: rgba(27, 54, 93, 0.1);
       box-shadow: inset 0 0 0 1px rgba(27, 54, 93, 0.03), 0 10px 20px rgba(27, 54, 93, 0.06);
     }
@@ -488,7 +728,9 @@
       padding: 18px;
       border-radius: 24px;
       border: 1px solid var(--border);
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.028));
+      background:
+        radial-gradient(220px 120px at 50% 0%, rgba(155, 89, 182, 0.12), transparent 72%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.028));
     }
 
     .coming-card h2 {
@@ -556,7 +798,9 @@
       padding: 14px 16px;
       border-radius: 18px;
       border: 1px solid var(--border);
-      background: rgba(255, 255, 255, 0.03);
+      background:
+        radial-gradient(220px 120px at 50% 0%, rgba(155, 89, 182, 0.1), transparent 72%),
+        rgba(255, 255, 255, 0.03);
       color: var(--text-soft);
       text-align: center;
       line-height: 1.7;
@@ -620,7 +864,9 @@
     }
 
     .panel {
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.028));
+      background:
+        radial-gradient(340px 160px at 50% 0%, rgba(155, 89, 182, 0.08), transparent 74%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.028));
       border: 1px solid var(--border);
       border-radius: var(--radius-xl);
       backdrop-filter: blur(16px);
@@ -666,7 +912,9 @@
       padding: 14px;
       border: 1px solid var(--border);
       border-radius: 16px;
-      background: rgba(255, 255, 255, 0.03);
+      background:
+        radial-gradient(180px 80px at 50% 0%, rgba(155, 89, 182, 0.1), transparent 74%),
+        rgba(255, 255, 255, 0.03);
     }
 
     .field {
@@ -1085,6 +1333,99 @@
       color: var(--text-main);
     }
 
+    .bottom-dock {
+      position: fixed;
+      left: 50%;
+      bottom: calc(env(safe-area-inset-bottom) + 12px);
+      transform: translateX(-50%);
+      z-index: 45;
+      width: min(680px, calc(100vw - 22px));
+      padding: 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(99, 149, 238, 0.24);
+      background:
+        radial-gradient(180px 72px at 18% 0%, rgba(155, 89, 182, 0.22), transparent 72%),
+        radial-gradient(180px 72px at 82% 0%, rgba(99, 149, 238, 0.18), transparent 72%),
+        linear-gradient(180deg, rgba(27, 54, 93, 0.5), rgba(10, 10, 10, 0.84)),
+        rgba(10, 10, 10, 0.88);
+      box-shadow: 0 18px 44px rgba(0, 0, 0, 0.34), 0 0 34px rgba(99, 149, 238, 0.08);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    body[data-theme="light"] .bottom-dock {
+      background:
+        radial-gradient(180px 72px at 18% 0%, rgba(155, 89, 182, 0.14), transparent 72%),
+        radial-gradient(180px 72px at 82% 0%, rgba(99, 149, 238, 0.12), transparent 72%),
+        linear-gradient(180deg, rgba(99, 149, 238, 0.18), rgba(244, 239, 230, 0.9)),
+        rgba(244, 239, 230, 0.9);
+      border-color: rgba(27, 54, 93, 0.12);
+      box-shadow: 0 16px 34px rgba(27, 54, 93, 0.12);
+    }
+
+    .bottom-dock-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 6px;
+      align-items: stretch;
+    }
+
+    .dock-btn {
+      appearance: none;
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--text-soft);
+      min-height: 74px;
+      padding: 10px 8px 12px;
+      border-radius: 999px;
+      display: grid;
+      justify-items: center;
+      align-content: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: 0.25s var(--ease);
+      text-decoration: none;
+    }
+
+    .dock-btn svg {
+      width: 22px;
+      height: 22px;
+      display: block;
+    }
+
+    .dock-btn-label {
+      font-size: 0.72rem;
+      line-height: 1;
+      letter-spacing: -0.01em;
+    }
+
+    .dock-btn:hover,
+    .dock-btn:focus-visible {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.05);
+      outline: none;
+    }
+
+    .dock-btn.is-active {
+      color: var(--text-main);
+      background:
+        radial-gradient(64px 34px at 50% 0%, rgba(155, 89, 182, 0.14), transparent 72%),
+        rgba(255, 255, 255, 0.09);
+      border-color: rgba(160, 190, 245, 0.18);
+      box-shadow: inset 0 0 0 1px rgba(160, 190, 245, 0.08), 0 0 20px rgba(99, 149, 238, 0.08);
+    }
+
+    .dock-btn.is-disabled {
+      opacity: 0.55;
+      cursor: default;
+    }
+
+    .dock-btn.is-disabled:hover,
+    .dock-btn.is-disabled:focus-visible {
+      color: var(--text-soft);
+      background: transparent;
+    }
+
     @media (max-width: 860px) {
       .layout {
         grid-template-columns: 1fr;
@@ -1099,6 +1440,7 @@
       .shell {
         width: calc(100% - 12px);
         padding-top: calc(var(--safe-top) + 14px);
+        padding-bottom: calc(env(safe-area-inset-bottom) + 118px);
       }
 
       .topbar-inner {
@@ -1181,6 +1523,34 @@
         width: 100%;
       }
 
+      .status-card {
+        padding: 18px 14px 16px;
+      }
+
+      .status-track,
+      .status-metrics {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 6px;
+      }
+
+      .status-node-dot {
+        width: 38px;
+        height: 38px;
+      }
+
+      .status-node-dot svg {
+        width: 19px;
+        height: 19px;
+      }
+
+      .status-metric-value {
+        font-size: 0.78rem;
+      }
+
+      .status-card-copy {
+        font-size: 0.94rem;
+      }
+
       .bot-hero {
         padding: 22px 18px;
       }
@@ -1188,6 +1558,20 @@
       .bot-mark {
         width: 82px;
         height: 82px;
+      }
+
+      .bottom-dock {
+        width: calc(100vw - 14px);
+        bottom: calc(env(safe-area-inset-bottom) + 8px);
+      }
+
+      .dock-btn {
+        min-height: 68px;
+        padding: 8px 4px 10px;
+      }
+
+      .dock-btn-label {
+        font-size: 0.66rem;
       }
     }
   </style>
@@ -1283,6 +1667,78 @@
           <p class="app-tile-meta"></p>
         </button>
       </div>
+      <section class="status-card" aria-labelledby="systemStatusTitle">
+        <div class="status-card-head">
+          <h2 class="status-card-title" id="systemStatusTitle">System Status</h2>
+          <span class="status-card-mark">Live Channels</span>
+        </div>
+        <div class="status-track" aria-hidden="true">
+          <div class="status-node">
+            <div class="status-node-dot">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 12h4l2-4 4 8 2-4h6"></path>
+              </svg>
+            </div>
+          </div>
+          <div class="status-node">
+            <div class="status-node-dot">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 5v14"></path>
+                <path d="M5 12h14"></path>
+              </svg>
+            </div>
+          </div>
+          <div class="status-node">
+            <div class="status-node-dot">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="5.5"></circle>
+                <path d="M12 9.2v5.6"></path>
+              </svg>
+            </div>
+          </div>
+          <div class="status-node">
+            <div class="status-node-dot">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 17h12"></path>
+                <path d="M8 13h8"></path>
+                <path d="M10 9h4"></path>
+              </svg>
+            </div>
+          </div>
+          <div class="status-node">
+            <div class="status-node-dot">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 12l3 3 7-7"></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div class="status-metrics">
+          <div class="status-metric">
+            <div class="status-metric-label">Uplink</div>
+            <div class="status-metric-value" id="statusUplink">Ready</div>
+          </div>
+          <div class="status-metric">
+            <div class="status-metric-label">Fragments</div>
+            <div class="status-metric-value" id="statusFragments">Clear</div>
+          </div>
+          <div class="status-metric">
+            <div class="status-metric-label">Change_Log</div>
+            <div class="status-metric-value" id="statusChangelog">Clear</div>
+          </div>
+          <div class="status-metric">
+            <div class="status-metric-label">OTW_Bot</div>
+            <div class="status-metric-value" id="statusBot">Standing By</div>
+          </div>
+          <div class="status-metric">
+            <div class="status-metric-label">Archive</div>
+            <div class="status-metric-value" id="statusArchive">Open</div>
+          </div>
+        </div>
+        <p class="status-card-copy" id="systemStatusCopy">
+          <strong>All primary channels are stable.</strong> Private publishing lane is open whenever you are.
+        </p>
+      </section>
     </section>
 
     <section class="workspace" id="fragmentsWorkspace">
@@ -1470,6 +1926,47 @@
     <p class="publish-toast-copy" id="publishToastCopy">Your fragment has been sent to the live feed.</p>
   </div>
 
+  <nav class="bottom-dock" aria-label="Publisher dock">
+    <div class="bottom-dock-grid">
+      <button class="dock-btn is-active" id="dockHomeBtn" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 11.5L12 5L20 11.5"></path>
+          <path d="M6.5 10.5V19H17.5V10.5"></path>
+        </svg>
+        <span class="dock-btn-label">Home</span>
+      </button>
+      <button class="dock-btn is-disabled" id="dockAnalyticsBtn" type="button" aria-disabled="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 18V12"></path>
+          <path d="M12 18V7"></path>
+          <path d="M19 18V10"></path>
+        </svg>
+        <span class="dock-btn-label">Analytics</span>
+      </button>
+      <button class="dock-btn" id="dockGithubBtn" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M9 18C4 19.5 4 15.5 2 15"></path>
+          <path d="M15 21V17.13C15.0375 16.6532 14.9731 16.1739 14.811 15.723C14.6489 15.2721 14.3929 14.8608 14.06 14.517C17.2 14.17 20.5 12.98 20.5 7.52C20.4997 6.12383 19.9627 4.7812 19 3.77C19.4559 2.54851 19.4236 1.19835 18.91 0C18.91 0 17.73 -0.35 15 1.48C12.708 0.859004 10.292 0.859004 8 1.48C5.27 -0.35 4.09 0 4.09 0C3.57638 1.19835 3.54414 2.54851 4 3.77C3.03013 4.7887 2.49252 6.14453 2.5 7.55C2.5 12.97 5.8 14.16 8.94 14.55C8.611 14.8905 8.35726 15.2972 8.19531 15.7426C8.03335 16.188 7.96687 16.6617 8 17.13V21"></path>
+        </svg>
+        <span class="dock-btn-label">GitHub</span>
+      </button>
+      <button class="dock-btn" id="dockCloudflareBtn" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M7 16.5C5.34 16.5 4 15.16 4 13.5C4 11.99 5.11 10.73 6.56 10.53C7.04 8.08 9.2 6.25 11.79 6.25C14.31 6.25 16.42 7.99 16.97 10.34C18.64 10.38 20 11.77 20 13.45C20 15.16 18.61 16.55 16.9 16.55H7Z"></path>
+          <path d="M8.8 16.5L10.05 12.65H16.7C17.21 12.65 17.62 13.06 17.62 13.57C17.62 14.07 17.21 14.49 16.7 14.49H12.1L11.6 16.5H8.8Z"></path>
+        </svg>
+        <span class="dock-btn-label">Cloudflare</span>
+      </button>
+      <button class="dock-btn" id="dockSettingsBtn" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="3.2"></circle>
+          <path d="M19.4 15A1.65 1.65 0 0 0 19.73 16.82L19.79 16.88A2 2 0 1 1 16.96 19.71L16.9 19.65A1.65 1.65 0 0 0 15.08 19.32A1.65 1.65 0 0 0 14 20.85V21A2 2 0 1 1 10 21V20.91A1.65 1.65 0 0 0 8.92 19.39A1.65 1.65 0 0 0 7.1 19.72L7.04 19.78A2 2 0 1 1 4.21 16.95L4.27 16.89A1.65 1.65 0 0 0 4.6 15.07A1.65 1.65 0 0 0 3.07 14H3A2 2 0 1 1 3 10H3.09A1.65 1.65 0 0 0 4.61 8.92A1.65 1.65 0 0 0 4.28 7.1L4.22 7.04A2 2 0 1 1 7.05 4.21L7.11 4.27A1.65 1.65 0 0 0 8.93 4.6H9A1.65 1.65 0 0 0 10 3.09V3A2 2 0 1 1 14 3V3.09A1.65 1.65 0 0 0 15.07 4.61A1.65 1.65 0 0 0 16.89 4.28L16.95 4.22A2 2 0 1 1 19.78 7.05L19.72 7.11A1.65 1.65 0 0 0 19.39 8.93V9A1.65 1.65 0 0 0 20.91 10H21A2 2 0 1 1 21 14H20.91A1.65 1.65 0 0 0 19.4 15Z"></path>
+        </svg>
+        <span class="dock-btn-label">Settings</span>
+      </button>
+    </div>
+  </nav>
+
   <script>
     const DRAFT_KEY = 'otwFragmentsPublisherDraft';
     const OUTBOX_KEY = 'otwFragmentsPublisherOutbox';
@@ -1513,6 +2010,17 @@
     const headerBackBtn = document.getElementById('headerBackBtn');
     const botDeployBtn = document.getElementById('botDeployBtn');
     const botStatusLine = document.getElementById('botStatusLine');
+    const dockHomeBtn = document.getElementById('dockHomeBtn');
+    const dockAnalyticsBtn = document.getElementById('dockAnalyticsBtn');
+    const dockGithubBtn = document.getElementById('dockGithubBtn');
+    const dockCloudflareBtn = document.getElementById('dockCloudflareBtn');
+    const dockSettingsBtn = document.getElementById('dockSettingsBtn');
+    const statusUplink = document.getElementById('statusUplink');
+    const statusFragments = document.getElementById('statusFragments');
+    const statusChangelog = document.getElementById('statusChangelog');
+    const statusBot = document.getElementById('statusBot');
+    const statusArchive = document.getElementById('statusArchive');
+    const systemStatusCopy = document.getElementById('systemStatusCopy');
     const changelogDateInput = document.getElementById('changelogDate');
     const changelogTypeInput = document.getElementById('changelogType');
     const changelogTextInput = document.getElementById('changelogText');
@@ -1644,6 +2152,49 @@
       publishKeyStatus.textContent = hasStoredKey
         ? 'Publish key saved on this device.'
         : 'No publish key saved on this device.';
+      refreshSystemStatus();
+    }
+
+    function refreshSystemStatus() {
+      const hasPublishKey = Boolean(getPublishKey() || publishKeyInput.value.trim());
+      const fragmentsDraft = textInput.value.trim();
+      const changelogDraft = changelogTextInput.value.trim();
+      const fragmentOutboxCount = readOutbox().length;
+      const changelogOutboxCount = readChangelogOutbox().length;
+
+      statusUplink.textContent = hasPublishKey ? 'Green' : 'Key Needed';
+
+      if (fragmentOutboxCount > 0) {
+        statusFragments.textContent = `${fragmentOutboxCount} Staged`;
+      } else if (fragmentsDraft) {
+        statusFragments.textContent = 'Draft Held';
+      } else {
+        statusFragments.textContent = 'Clear';
+      }
+
+      if (changelogOutboxCount > 0) {
+        statusChangelog.textContent = `${changelogOutboxCount} Staged`;
+      } else if (changelogDraft) {
+        statusChangelog.textContent = 'Draft Held';
+      } else {
+        statusChangelog.textContent = 'Clear';
+      }
+
+      statusBot.textContent = hasPublishKey ? 'Armed' : 'Waiting';
+      statusArchive.textContent = loadedChangelog.length ? 'Open' : 'Syncing';
+
+      let summary = '<strong>All primary channels are stable.</strong> Private publishing lane is open whenever you are.';
+
+      if (!hasPublishKey) {
+        summary = '<strong>Secure uplink is waiting on your publish key.</strong> Save it on this device and every lane is ready.';
+      } else if (fragmentOutboxCount > 0 || changelogOutboxCount > 0) {
+        const totalItems = fragmentOutboxCount + changelogOutboxCount;
+        summary = `<strong>Staged entries are standing by.</strong> ${totalItems} item${totalItems === 1 ? '' : 's'} waiting in local outboxes.`;
+      } else if (fragmentsDraft || changelogDraft) {
+        summary = '<strong>Draft signal detected on this device.</strong> You can publish now, or leave it resting here for later.';
+      }
+
+      systemStatusCopy.innerHTML = summary;
     }
 
     function showPublishToast(title, copy) {
@@ -1817,6 +2368,7 @@
       }
 
       renderRecentChangelog();
+      refreshSystemStatus();
     }
 
     function stageFragment(event) {
@@ -1840,6 +2392,7 @@
       setPreviewFromEntry(entry);
       charCount.textContent = '0 characters';
       renderOutbox();
+      refreshSystemStatus();
 
       const json = JSON.stringify(entry, null, 2);
       navigator.clipboard.writeText(json).then(() => {
@@ -1869,6 +2422,7 @@
       changelogDateInput.value = new Date().toISOString().slice(0, 10);
       updateChangelogPreview();
       renderChangelogOutbox();
+      refreshSystemStatus();
 
       navigator.clipboard.writeText(JSON.stringify(entry, null, 2)).then(() => {
         changelogStatusLine.textContent = 'Changelog entry staged. JSON copied and saved in the outbox on this device.';
@@ -1926,6 +2480,7 @@
           'The public record just picked up a fresh site update.'
         );
         loadRecentChangelog();
+        refreshSystemStatus();
       } catch (error) {
         changelogStatusLine.textContent = error.message || 'Publish failed.';
       }
@@ -1979,6 +2534,7 @@
           'Fragment published.',
           'Your thought is on its way. If you spot a typo, we can add edit and delete next.'
         );
+        refreshSystemStatus();
       } catch (error) {
         statusLine.textContent = error.message || 'Publish failed.';
       }
@@ -2069,6 +2625,7 @@
       link.click();
       URL.revokeObjectURL(url);
       statusLine.textContent = 'Outbox exported as JSON.';
+      refreshSystemStatus();
     }
 
     function clearDraft() {
@@ -2078,6 +2635,7 @@
       clearDraftStorage();
       updatePreview();
       statusLine.textContent = 'Draft cleared on this device.';
+      refreshSystemStatus();
     }
 
     function copyLatestChangelogJson() {
@@ -2109,6 +2667,7 @@
       link.click();
       URL.revokeObjectURL(url);
       changelogStatusLine.textContent = 'Changelog outbox exported as JSON.';
+      refreshSystemStatus();
     }
 
     function clearChangelogDraft() {
@@ -2118,6 +2677,7 @@
       clearChangelogDraftStorage();
       updateChangelogPreview();
       changelogStatusLine.textContent = 'Changelog draft cleared on this device.';
+      refreshSystemStatus();
     }
 
     function hydrateDraft() {
@@ -2190,8 +2750,10 @@
       changelogWorkspace.classList.toggle('is-active', nextView === 'changelog');
       botWorkspace.classList.toggle('is-active', nextView === 'bot');
       headerBackBtn.classList.toggle('is-visible', nextView !== 'home');
+      dockHomeBtn.classList.toggle('is-active', nextView === 'home');
 
       setMenuState(false);
+      refreshSystemStatus();
       requestAnimationFrame(() => {
         window.scrollTo(0, 0);
       });
@@ -2223,6 +2785,18 @@
     });
     openSiteApp.addEventListener('click', () => {
       window.open('index.html', '_blank', 'noopener,noreferrer');
+    });
+    dockHomeBtn.addEventListener('click', () => {
+      setWorkspace('home');
+    });
+    dockGithubBtn.addEventListener('click', () => {
+      window.open('https://github.com/ryandavid-oss/outsidetheworld', '_blank', 'noopener,noreferrer');
+    });
+    dockCloudflareBtn.addEventListener('click', () => {
+      window.open('https://dash.cloudflare.com/', '_blank', 'noopener,noreferrer');
+    });
+    dockSettingsBtn.addEventListener('click', () => {
+      setMenuState(!topbarActions.classList.contains('is-open'));
     });
     headerBackBtn.addEventListener('click', () => {
       setWorkspace('home');
@@ -2261,10 +2835,12 @@
       element.addEventListener('input', () => {
         writeDraft();
         updatePreview();
+        refreshSystemStatus();
       });
       element.addEventListener('change', () => {
         writeDraft();
         updatePreview();
+        refreshSystemStatus();
       });
     });
 
@@ -2272,10 +2848,12 @@
       element.addEventListener('input', () => {
         writeChangelogDraft();
         updateChangelogPreview();
+        refreshSystemStatus();
       });
       element.addEventListener('change', () => {
         writeChangelogDraft();
         updateChangelogPreview();
+        refreshSystemStatus();
       });
     });
 
@@ -2301,6 +2879,7 @@
     renderChangelogOutbox();
     loadRecentChangelog();
     setWorkspace('home');
+    refreshSystemStatus();
   </script>
 </body>
 </html>
