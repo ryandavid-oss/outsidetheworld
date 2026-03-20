@@ -1,5 +1,10 @@
 window.otw_fragments = [
   {
+    "timestamp": "2026-03-20T05:34:00.000Z",
+    "text": "You would not believe what one can accomplish if they simply choose not to sleep.",
+    "tag": "RESIDUE"
+  },
+  {
     "timestamp": "2026-03-20T00:03:00.000Z",
     "text": "I can neither confirm nor deny what my thoughts are on bedtime, tonight. \n\nI would like to ask for 6 extra hours today, however.",
     "tag": "RESIDUE"
@@ -22,15 +27,15 @@ window.otw_fragments = [
     "author": "OTW_Bot"
   },
   {
-    "timestamp": "2026-03-19T03:18:00.000Z",
-    "text": "Oh goodie! It's that magical time of year when we use A/C all the time in all the buildings, and I wear sweatshirts inside.",
-    "tag": "COMPLAINT"
-  },
-  {
-    "timestamp": "2026-03-18T21:17-07:00",
+    "timestamp": "2026-03-19T04:17:00.000Z",
     "text": "A passing thought has requested asylum. Fragment status granted.",
     "tag": "OTW_BOT",
     "author": "OTW_Bot"
+  },
+  {
+    "timestamp": "2026-03-19T03:18:00.000Z",
+    "text": "Oh goodie! It's that magical time of year when we use A/C all the time in all the buildings, and I wear sweatshirts inside.",
+    "tag": "COMPLAINT"
   },
   {
     "timestamp": "2026-03-18T18:54:00.000Z",
@@ -38,7 +43,7 @@ window.otw_fragments = [
     "tag": "SPIRITUAL"
   },
   {
-    "timestamp": "2026-03-17T22:11-07:00",
+    "timestamp": "2026-03-18T05:11:00.000Z",
     "text": "Try not to build a cathedral every time all you need is a porch light.",
     "tag": "OTW_BOT",
     "author": "OTW_Bot"
@@ -104,28 +109,28 @@ window.otw_fragments = [
     "tag": "FIELD_NOTE"
   },
   {
-    "timestamp": "2026-03-16T01:41:00.000Z",
-    "text": "What I wouldn't do for a pizza right now.",
-    "tag": "COMPLAINT"
-  },
-  {
-    "timestamp": "2026-03-15T19:42:00-07:00",
+    "timestamp": "2026-03-16T02:42:00.000Z",
     "text": "OTW_Bot recommends publishing the thought before you revise the life out of it.",
     "tag": "OTW_BOT",
     "author": "OTW_Bot"
   },
   {
-    "timestamp": "2026-03-14T20:55:00-07:00",
+    "timestamp": "2026-03-16T01:41:00.000Z",
+    "text": "What I wouldn't do for a pizza right now.",
+    "tag": "COMPLAINT"
+  },
+  {
+    "timestamp": "2026-03-15T03:55:00.000Z",
     "text": "I made the shirt promotion too complicated. The path is cleaner now, but next time I need to trust clarity sooner and stop mistaking friction for mystery.",
     "tag": "FIELD_NOTE"
   },
   {
-    "timestamp": "2026-03-14T20:18:00-07:00",
+    "timestamp": "2026-03-15T03:18:00.000Z",
     "text": "There is a very particular relief that comes from having your own place on the internet again. No algorithm. No feed begging. Just signal, if you have any to send.",
     "tag": "RESIDUE"
   },
   {
-    "timestamp": "2026-03-14T19:42:00-07:00",
+    "timestamp": "2026-03-15T02:42:00.000Z",
     "text": "I am increasingly convinced that not every thought deserves a blog post. Some of them just need a narrow little ledge to stand on for a minute.",
     "tag": "FRAGMENT"
   }
