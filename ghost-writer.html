@@ -27,9 +27,7 @@
   <!-- Theme -->
   <link rel="stylesheet" href="./theme.css" />
 
-  <!-- EasyMDE -->
-  <link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css" />
-  <script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
   <!-- Fonts (safe even if theme already loads them) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -699,53 +697,71 @@
       color: rgba(255, 211, 110, 0.9);
     }
 
-    /* EasyMDE re-skin */
-    .editor-toolbar {
-      background: var(--toolbar-bg) !important;
-      border: 1px solid var(--borderx) !important;
-      border-bottom: none !important;
-      border-radius: 0 !important;
+    .editor-shell {
+      border: 1px solid var(--borderx);
+      background: var(--editor-bg);
     }
 
-    .editor-toolbar button,
-    .editor-toolbar i {
-      color: var(--ink) !important;
-      opacity: 1 !important;
+    .format-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 10px;
+      border-bottom: 1px solid var(--borderx);
+      background: var(--toolbar-bg);
     }
 
-    .editor-toolbar button:hover {
-      background: rgba(145, 175, 179, 0.12) !important;
+    .format-btn {
+      cursor: pointer;
+      border: 1px solid rgba(145, 175, 179, 0.22);
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--ink);
+      padding: 8px 10px;
+      font-family: var(--font-code);
+      font-size: 0.6rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: background .2s ease, border-color .2s ease, transform .15s ease;
     }
 
-    .CodeMirror {
-      background: var(--editor-bg) !important;
-      color: var(--ink) !important;
-      border: 1px solid var(--borderx) !important;
-      border-radius: 0 !important;
-      font-family: var(--font-code) !important;
-      font-size: 16px !important;
-      /* prevents iOS zoom */
-      line-height: 1.6 !important;
+    .format-btn:hover {
+      background: rgba(145, 175, 179, 0.12);
+      border-color: rgba(145, 175, 179, 0.4);
+      transform: translateY(-1px);
+    }
+
+    body[data-writer-mode="light"] .format-btn,
+    body[data-writer-mode="sepia"] .format-btn {
+      background: rgba(0, 0, 0, 0.03);
+      border-color: var(--borderx);
+    }
+
+    #content {
       min-height: 520px;
+      resize: vertical;
+      border: none;
+      background: transparent;
+      color: var(--ink);
+      font-family: "IBM Plex Serif", serif;
+      font-size: 1.02rem;
+      line-height: 1.8;
+      padding: 18px 16px 22px;
+      outline: none;
+      caret-color: var(--cursor);
+      -webkit-user-select: text;
+      user-select: text;
     }
 
-    body.reset-flush * {
-      transform: translateZ(0);
+    #content:focus {
+      border: none;
+      box-shadow: none;
+      background: transparent;
     }
 
     @media (max-width: 980px) {
-      .CodeMirror {
+      #content {
         min-height: 420px;
       }
-    }
-
-    /* Cursor + selection visibility */
-    .CodeMirror-cursor {
-      border-left: 2px solid var(--cursor) !important;
-    }
-
-    .CodeMirror-selected {
-      background: rgba(99, 149, 238, 0.25) !important;
     }
 
     /* Right side list */
@@ -803,24 +819,130 @@
       word-break: break-word;
     }
 
-    .preview {
+    .preview-shell {
       border: 1px solid rgba(255, 255, 255, 0.08);
-      background: rgba(0, 0, 0, 0.35);
-      padding: 12px;
-      overflow: auto;
-      white-space: pre;
+      background: rgba(0, 0, 0, 0.22);
+      padding: 14px;
+      min-height: 540px;
+    }
+
+    body[data-writer-mode="light"] .preview-shell,
+    body[data-writer-mode="sepia"] .preview-shell {
+      border-color: var(--borderx);
+      background: rgba(0, 0, 0, 0.03);
+    }
+
+    .preview-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
       font-family: var(--font-code);
-      font-size: 0.66rem;
-      line-height: 1.55;
-      max-height: 200px;
-      margin-top: 10px;
+      font-size: 0.58rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .preview-file {
+      color: var(--ink);
+      word-break: break-word;
+    }
+
+    .render-preview {
+      max-width: 760px;
+    }
+
+    .render-title {
+      margin: 0 0 10px;
+      font-family: "IBM Plex Serif", serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
       color: var(--ink);
     }
 
-    body[data-writer-mode="light"] .preview,
-    body[data-writer-mode="sepia"] .preview {
-      border-color: var(--borderx);
-      background: rgba(0, 0, 0, 0.03);
+    .render-kicker {
+      font-family: var(--font-code);
+      font-size: 0.62rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(160, 190, 245, 0.92);
+      margin-bottom: 20px;
+    }
+
+    .render-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0 18px;
+    }
+
+    .render-tags span {
+      border: 1px solid rgba(145, 175, 179, 0.22);
+      background: rgba(145, 175, 179, 0.06);
+      padding: 4px 8px;
+      font-family: var(--font-code);
+      font-size: 0.58rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .render-body {
+      font-family: "IBM Plex Serif", serif;
+      font-size: 1.02rem;
+      line-height: 1.85;
+      color: var(--ink);
+    }
+
+    .render-body p,
+    .render-body ul,
+    .render-body ol,
+    .render-body blockquote,
+    .render-body figure,
+    .render-body hr,
+    .render-body h2,
+    .render-body h3 {
+      margin: 0 0 1.25rem;
+    }
+
+    .render-body h2,
+    .render-body h3 {
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+
+    .render-body blockquote {
+      margin-left: 0;
+      padding-left: 16px;
+      border-left: 2px solid rgba(160, 190, 245, 0.3);
+      color: var(--muted);
+    }
+
+    .render-body img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .render-body figcaption {
+      margin-top: 10px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .render-body .otw-center {
+      text-align: center;
+      margin: 1.5rem 0;
+    }
+
+    .render-empty {
+      color: var(--muted);
+      font-style: italic;
     }
 
     /* Hide main until auth passes */
@@ -908,7 +1030,23 @@
 
         <div>
           <label for="content">CONTENT</label>
-          <textarea id="content"></textarea>
+          <div class="editor-shell">
+            <div class="format-toolbar" aria-label="Formatting controls">
+              <button class="format-btn" data-action="bold" type="button">B</button>
+              <button class="format-btn" data-action="italic" type="button">I</button>
+              <button class="format-btn" data-action="heading" type="button">H2</button>
+              <button class="format-btn" data-action="quote" type="button">QUOTE</button>
+              <button class="format-btn" data-action="list" type="button">LIST</button>
+              <button class="format-btn" data-action="link" type="button">LINK</button>
+              <button class="format-btn" data-action="image" type="button">IMAGE</button>
+              <button class="format-btn" data-action="figure" type="button">FIGURE</button>
+              <button class="format-btn" data-action="center" type="button">CENTER</button>
+              <button class="format-btn" data-action="date-header" type="button">DATE</button>
+              <button class="format-btn" data-action="divider" type="button">DIVIDER</button>
+            </div>
+            <textarea id="content" spellcheck="true" autocapitalize="sentences" autocorrect="on"
+              placeholder="Start with the sentence."></textarea>
+          </div>
         </div>
 
         <div class="metrics">
@@ -925,93 +1063,29 @@
         <div class="actions">
           <button class="btn primary" id="downloadBtn" type="button">DOWNLOAD_MD</button>
           <button class="btn ghost" id="copyBtn" type="button">COPY_MD_TO_CLIPBOARD</button>
-          <button class="btn ghost" id="imgBtn" type="button">INSERT_IMAGE</button>
-          <button class="btn ghost" id="capBtn" type="button">INSERT_CAPTIONED_FIGURE</button>
-          <button class="btn ghost" id="centerBtn" type="button">INSERT_CENTERED_TEXT</button>
-          <button class="btn ghost" id="dateHeaderBtn" type="button">INSERT_DATE_HEADER</button>
-          <button class="btn ghost" id="dividerBtn" type="button">INSERT_DIVIDER</button>
           <button class="btn ghost" id="loadDraftBtn" type="button">LOAD_DRAFT</button>
           <button class="btn danger" id="resetAllBtn" type="button">RESET_ALL</button>
           <button class="btn danger" id="clearDraftBtn" type="button">CLEAR_DRAFT</button>
         </div>
 
         <div class="mini" id="miniNote">
-          Captioned images insert a <code>&lt;figure&gt;</code> block (Option B) with an italicized
-          <code>&lt;figcaption&gt;</code>. Centered lines use <code>&lt;div class="otw-center"&gt;...&lt;/div&gt;</code>,
-          and dividers insert a standard <code>---</code> rule.
+          Native editor active. Spellcheck, Look Up, and Writing Tools should now come from macOS instead of a custom editor layer.
         </div>
       </section>
 
-      <!-- RIGHT: Output / Preview / Helpers -->
-      <aside class="card" aria-label="Output and helpers">
+      <!-- RIGHT: Preview -->
+      <aside class="card" aria-label="Rendered preview">
         <div class="card-head">
-          <p class="card-label">02 // UPLINK_STATUS</p>
+          <p class="card-label">02 // LIVE_PREVIEW</p>
           <span class="chip" id="fileChip">FILE: —</span>
         </div>
 
-        <div class="list">
-          <div class="item">
-            <div class="meta">
-              <span class="tag">FILENAME_PREVIEW</span>
-              <span class="tag" id="lastSavedTag">LAST_SAVED: —</span>
-            </div>
-            <div class="text" id="filePreview">—</div>
-            <div class="preview" id="mdPreview">{ markdown will appear here }</div>
+        <div class="preview-shell">
+          <div class="preview-meta">
+            <span id="lastSavedTag">LAST_SAVED: —</span>
+            <span class="preview-file" id="filePreview">—</span>
           </div>
-
-          <div class="item">
-            <div class="meta">
-              <span class="tag">IMAGE_PATH</span>
-              <span class="tag">/Images/Blog/...</span>
-            </div>
-            <div class="text">
-              Basic image syntax:<br>
-              <span style="font-family: var(--font-code); font-size:0.7rem; color: rgba(160,190,245,0.9);">
-                ![Alt_Text](/Images/Blog/filename.jpg)
-              </span>
-            </div>
-          </div>
-
-          <div class="item">
-            <div class="meta">
-              <span class="tag">CAPTIONED_FIGURE</span>
-              <span class="tag">OPTION_B</span>
-            </div>
-            <div class="text">
-              This inserts a real caption using HTML (works in most Markdown renderers):<br><br>
-              <span style="font-family: var(--font-code); font-size:0.7rem; color: rgba(160,190,245,0.9);">
-                &lt;figure&gt;<br>
-                &nbsp;&nbsp;&lt;img src="/Images/Blog/photo.jpg" alt="Alt_Text"&gt;<br>
-                &nbsp;&nbsp;&lt;figcaption&gt;&lt;em&gt;Your caption...&lt;/em&gt;&lt;/figcaption&gt;<br>
-                &lt;/figure&gt;
-              </span><br><br>
-              Use the toolbar button (image icon) or <b>INSERT_CAPTIONED_FIGURE</b>.
-            </div>
-          </div>
-
-          <div class="item">
-            <div class="meta">
-              <span class="tag">CENTERED_TEXT</span>
-              <span class="tag">OTW_BLOCK</span>
-            </div>
-            <div class="text">
-              Use this for centered standalone lines or short pull-text:<br><br>
-              <span style="font-family: var(--font-code); font-size:0.7rem; color: rgba(160,190,245,0.9);">
-                &lt;div class="otw-center"&gt;Your centered line&lt;/div&gt;
-              </span><br><br>
-              Use <b>INSERT_CENTERED_TEXT</b> for the snippet and <b>INSERT_DIVIDER</b> for a horizontal rule.
-            </div>
-          </div>
-
-          <div class="item">
-            <div class="meta">
-              <span class="tag">NOTE</span>
-            </div>
-            <div class="text">
-              Autosave stores drafts locally in this browser. Downloaded markdown follows your sync protocol + filename
-              rules.
-            </div>
-          </div>
+          <article class="render-preview" id="mdPreview"></article>
         </div>
       </aside>
     </div>
@@ -1087,8 +1161,7 @@
     // -----------------------
     // Editor + UX features
     // -----------------------
-    const DRAFT_KEY = 'otw_ghost_writer_draft_v3';
-    let easyMDE = null;
+    const DRAFT_KEY = 'otw_ghost_writer_draft_v4';
     let autosaveTimer = null;
     let dirty = false;
 
@@ -1097,6 +1170,7 @@
     const elTags = document.getElementById('tags');
     const elSlug = document.getElementById('slug');
 
+    const elContent = document.getElementById('content');
     const elWords = document.getElementById('mWords');
     const elChars = document.getElementById('mChars');
     const elRead = document.getElementById('mRead');
@@ -1131,7 +1205,7 @@
       const tags = elTags.value.trim();
 
       const formattedDate = formatDateLong(chosenDate);
-      const content = (easyMDE ? easyMDE.value() : '').trim();
+      const content = elContent.value.trim();
 
       const tagLine = tags ? `Tags: ${tags}\n` : '';
       return `# ${title}\nDate: ${formattedDate}\n${tagLine}\n${content}`;
@@ -1147,13 +1221,8 @@
       return `${chosenDate}-${safe}.md`;
     }
 
-    function safePreview(md, maxLen) {
-      if (md.length <= maxLen) return md;
-      return md.slice(0, maxLen) + '\n\n…(preview truncated)…';
-    }
-
     function updateMetrics() {
-      const text = (easyMDE ? easyMDE.value() : '').trim();
+      const text = elContent.value.trim();
       const count = text ? text.split(/\s+/).length : 0;
       const chars = text.length;
       const readMin = Math.max(1, Math.round(count / 200)); // ~200 wpm baseline
@@ -1165,9 +1234,24 @@
       const fn = buildFilename();
       elFileChip.textContent = `FILE: ${fn}`;
       elFilePreview.textContent = fn;
+      renderPreview();
+    }
 
-      const md = safePreview(buildMarkdown(), 2400);
-      elMdPreview.textContent = md;
+    function renderPreview() {
+      const title = elTitle.value.trim() || 'Untitled draft';
+      const dateValue = elDate.value || localISOTime;
+      const tags = elTags.value.split(',').map(tag => tag.trim()).filter(Boolean);
+      const body = elContent.value.trim();
+      const renderedBody = body
+        ? marked.parse(body, { breaks: true, gfm: true })
+        : '<p class="render-empty">Start typing. The live preview will follow your draft here.</p>';
+
+      elMdPreview.innerHTML = `
+        <div class="render-kicker">${formatDateLong(dateValue)}</div>
+        <h2 class="render-title">${title}</h2>
+        ${tags.length ? `<div class="render-tags">${tags.map(tag => `<span>#${tag}</span>`).join('')}</div>` : ''}
+        <div class="render-body">${renderedBody}</div>
+      `;
     }
 
     function markDirty() {
@@ -1189,14 +1273,12 @@
     }
 
     function saveDraft() {
-      if (!easyMDE) return;
-
       const payload = {
         title: elTitle.value,
         date: elDate.value,
         tags: elTags.value,
         slug: elSlug.value,
-        content: easyMDE.value(),
+        content: elContent.value,
         savedAt: new Date().toLocaleString()
       };
 
@@ -1229,7 +1311,7 @@
         elDate.value = payload.date || localISOTime;
         elTags.value = payload.tags || '';
         elSlug.value = payload.slug || '';
-        if (easyMDE) easyMDE.value(payload.content || '');
+        elContent.value = payload.content || '';
 
         setLastSaved(payload.savedAt || null);
         elSaveChip.textContent = 'AUTOSAVE: ON';
@@ -1260,15 +1342,7 @@
       elTags.value = '';
       elSlug.value = '';
 
-      // 3) Clear editor content safely
-      if (easyMDE) {
-        easyMDE.value('');
-        // force CodeMirror to redraw (fixes “black band” / stale paint)
-        requestAnimationFrame(() => {
-          easyMDE.codemirror.refresh();
-          easyMDE.codemirror.focus();
-        });
-      }
+      elContent.value = '';
 
       // 4) Reset UI chips/state
       elSaveChip.textContent = 'AUTOSAVE: OFF';
@@ -1276,10 +1350,6 @@
       updateMetrics();
       setStatus('RESET', 'warn');
       elSubline.textContent = 'RESET_COMPLETE // fresh console';
-
-      // Extra paint nudge for weird GPU composites
-      document.body.classList.add('reset-flush');
-      requestAnimationFrame(() => document.body.classList.remove('reset-flush'));
     }
     async function copyToClipboard(text) {
       try {
@@ -1301,7 +1371,7 @@
     function downloadMarkdown() {
       const title = elTitle.value.trim();
       const chosenDate = elDate.value;
-      const content = (easyMDE ? easyMDE.value() : '').trim();
+      const content = elContent.value.trim();
 
       if (!title || !content || !chosenDate) {
         alert("ERROR: LOG_INCOMPLETE");
@@ -1322,9 +1392,49 @@
     }
 
     function insertAtCursor(snippet) {
-      const cm = easyMDE.codemirror;
-      cm.replaceSelection(snippet);
-      cm.focus();
+      const start = elContent.selectionStart;
+      const end = elContent.selectionEnd;
+      const current = elContent.value;
+      elContent.value = `${current.slice(0, start)}${snippet}${current.slice(end)}`;
+      const nextPos = start + snippet.length;
+      elContent.focus();
+      elContent.setSelectionRange(nextPos, nextPos);
+      updateMetrics();
+      markDirty();
+      scheduleAutosave();
+    }
+
+    function wrapSelection(before, after = before, fallback = 'text') {
+      const start = elContent.selectionStart;
+      const end = elContent.selectionEnd;
+      const current = elContent.value;
+      const selected = current.slice(start, end) || fallback;
+      const replacement = `${before}${selected}${after}`;
+      elContent.value = `${current.slice(0, start)}${replacement}${current.slice(end)}`;
+      const cursorStart = start + before.length;
+      const cursorEnd = cursorStart + selected.length;
+      elContent.focus();
+      elContent.setSelectionRange(cursorStart, cursorEnd);
+      updateMetrics();
+      markDirty();
+      scheduleAutosave();
+    }
+
+    function prefixSelectedLines(prefix, fallback = 'List item') {
+      const start = elContent.selectionStart;
+      const end = elContent.selectionEnd;
+      const current = elContent.value;
+      const selected = current.slice(start, end) || fallback;
+      const replacement = selected
+        .split('\n')
+        .map(line => `${prefix}${line}`)
+        .join('\n');
+      elContent.value = `${current.slice(0, start)}${replacement}${current.slice(end)}`;
+      elContent.focus();
+      elContent.setSelectionRange(start, start + replacement.length);
+      updateMetrics();
+      markDirty();
+      scheduleAutosave();
     }
 
     function buildFigureSnippet(filename, altText, caption) {
@@ -1350,54 +1460,6 @@
     }
 
     function initEditorAfterAuth() {
-      // EasyMDE config with Image + Figure Caption button
-      easyMDE = new EasyMDE({
-        element: document.getElementById('content'),
-        forceSync: true,
-        spellChecker: false,
-        status: false,
-        toolbar: [
-          "bold", "italic", "heading", "|",
-          "quote", "unordered-list", "ordered-list", "|",
-          "link",
-          {
-            name: "uplink-image",
-            action: function (editor) {
-              const filename = prompt("ENTER_FILENAME (e.g., photo.jpg):", "");
-              if (filename) {
-                const url = `/Images/Blog/${filename}`;
-                editor.codemirror.replaceSelection(`![Alt_Text](${url})`);
-              }
-            },
-            className: "fa fa-picture-o",
-            title: "Insert Blog Image",
-          },
-          {
-            name: "uplink-figure",
-            action: function (editor) {
-              const snippet = promptForFigure();
-              if (snippet) editor.codemirror.replaceSelection(snippet);
-            },
-            className: "fa fa-file-image-o",
-            title: "Insert Captioned Figure (Option B)",
-          },
-          {
-            name: "uplink-center",
-            action: function (editor) {
-              const text = prompt("CENTERED_TEXT:", "Centered text");
-              if (text === null) return;
-              editor.codemirror.replaceSelection(buildCenteredTextSnippet(text));
-            },
-            className: "fa fa-align-center",
-            title: "Insert Centered Text",
-          },
-          "|", "preview", "side-by-side", "fullscreen"
-        ]
-      });
-
-      easyMDE.codemirror.refresh();
-
-      // Auto-load draft
       loadDraft();
 
       // Live metrics + autosave
@@ -1408,7 +1470,45 @@
       elTags.addEventListener('input', onAnyChange);
       elSlug.addEventListener('input', onAnyChange);
 
-      easyMDE.codemirror.on("change", onAnyChange);
+      elContent.addEventListener('input', onAnyChange);
+
+      document.querySelector('.format-toolbar').addEventListener('click', (event) => {
+        const button = event.target.closest('.format-btn');
+        if (!button) return;
+
+        const action = button.dataset.action;
+        if (action === 'bold') wrapSelection('**', '**', 'bold text');
+        if (action === 'italic') wrapSelection('*', '*', 'italic text');
+        if (action === 'heading') insertAtCursor(`\n\n## Section heading\n\n`);
+        if (action === 'quote') prefixSelectedLines('> ', 'Quoted line');
+        if (action === 'list') prefixSelectedLines('- ', 'List item');
+        if (action === 'link') {
+          const url = prompt('ENTER_URL:', 'https://');
+          if (!url) return;
+          const text = prompt('LINK_TEXT:', 'Link text') || 'Link text';
+          insertAtCursor(`[${text}](${url})`);
+        }
+        if (action === 'image') {
+          const filename = prompt('ENTER_FILENAME (e.g., photo.jpg):', '');
+          if (!filename) return;
+          insertAtCursor(`![Alt_Text](/Images/Blog/${filename})`);
+        }
+        if (action === 'figure') {
+          const snippet = promptForFigure();
+          if (snippet) insertAtCursor(snippet);
+        }
+        if (action === 'center') {
+          const text = prompt('CENTERED_TEXT:', 'Centered text');
+          if (text === null) return;
+          insertAtCursor(buildCenteredTextSnippet(text));
+        }
+        if (action === 'date-header') {
+          const iso = elDate.value || localISOTime;
+          const formatted = formatDateLong(iso);
+          insertAtCursor(`\n\n---\n\n**${formatted}**\n\n`);
+        }
+        if (action === 'divider') insertAtCursor(`\n\n---\n\n`);
+      });
 
       // Buttons
       document.getElementById('downloadBtn').addEventListener('click', downloadMarkdown);
@@ -1417,33 +1517,6 @@
         const md = buildMarkdown();
         const ok = await copyToClipboard(md);
         setStatus(ok ? 'COPIED' : 'COPY_FAILED', ok ? 'ok' : 'bad');
-      });
-
-      document.getElementById('imgBtn').addEventListener('click', () => {
-        const filename = prompt("ENTER_FILENAME (e.g., photo.jpg):", "");
-        if (!filename) return;
-        insertAtCursor(`![Alt_Text](/Images/Blog/${filename})`);
-      });
-
-      document.getElementById('capBtn').addEventListener('click', () => {
-        const snippet = promptForFigure();
-        if (snippet) insertAtCursor(snippet);
-      });
-
-      document.getElementById('centerBtn').addEventListener('click', () => {
-        const text = prompt("CENTERED_TEXT:", "Centered text");
-        if (text === null) return;
-        insertAtCursor(buildCenteredTextSnippet(text));
-      });
-
-      document.getElementById('dateHeaderBtn').addEventListener('click', () => {
-        const iso = elDate.value || localISOTime;
-        const formatted = formatDateLong(iso);
-        insertAtCursor(`\n\n---\n\n**${formatted}**\n\n`);
-      });
-
-      document.getElementById('dividerBtn').addEventListener('click', () => {
-        insertAtCursor(`\n\n---\n\n`);
       });
 
       document.getElementById('loadDraftBtn').addEventListener('click', () => {
@@ -1466,8 +1539,9 @@
       });
       // Initial UI state
       setStatus('READY', 'ok');
-      elSubline.textContent = 'UPLINK_ESTABLISHED // console ready';
+      elSubline.textContent = 'UPLINK_ESTABLISHED // native editor ready';
       updateMetrics();
+      elContent.focus();
     }
   </script>
 </body>

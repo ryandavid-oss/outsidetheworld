@@ -50,6 +50,15 @@ This file is intentionally practical. It is not a polished roadmap. It is a runn
   - chars
   - read time
 
+### Search
+
+- Keep the public search focused on live/public content.
+- Consider a second `Deep Archive Search` later for internal use:
+  - Instagram archive
+  - construction debris
+  - older markdown and repo-only materials
+  - keep this separate from the public-facing search so the main experience stays clean
+
 ## Medium-term ideas
 
 ### Multi-user fragments concept
