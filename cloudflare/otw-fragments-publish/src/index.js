@@ -506,6 +506,32 @@ function replaceFragmentsArray(raw, entries) {
   return raw.replace(FRAGMENTS_PATTERN, replacement);
 }
 
+function isGithubConflictError(error) {
+  const message = String(error?.message || "");
+  return message.includes("Could not save") && message.includes("409");
+}
+
+async function saveFragmentEntryWithRetry(env, entry, message, maxAttempts = 3) {
+  let lastError = null;
+
+  for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
+    try {
+      const file = await loadFragmentsFile(env);
+      const merged = sortFragments(dedupeFragments([entry, ...file.fragments]));
+      const updatedRaw = replaceFragmentsArray(file.raw, merged);
+      const result = await saveRepoFile(env, FRAGMENTS_PATH, updatedRaw, file.sha, message);
+      return { result, merged };
+    } catch (error) {
+      lastError = error;
+      if (!isGithubConflictError(error) || attempt === maxAttempts) {
+        throw error;
+      }
+    }
+  }
+
+  throw lastError || new Error("Fragment publish retry failed");
+}
+
 async function loadChangelogFile(env) {
   const file = await loadRepoFile(env, CHANGELOG_PATH);
   let entries;
@@ -647,10 +673,7 @@ export default {
       try {
         const body = await request.json();
         const entry = normalizeFragmentEntry(body);
-        const file = await loadFragmentsFile(env);
-        const merged = sortFragments(dedupeFragments([entry, ...file.fragments]));
-        const updatedRaw = replaceFragmentsArray(file.raw, merged);
-        const result = await saveRepoFile(env, FRAGMENTS_PATH, updatedRaw, file.sha, "Publish fragment");
+        const { result } = await saveFragmentEntryWithRetry(env, entry, "Publish fragment");
 
         return jsonResponse({
           ok: true,
@@ -686,9 +709,7 @@ export default {
           author: "OTW_Bot"
         });
 
-        const merged = sortFragments(dedupeFragments([entry, ...file.fragments]));
-        const updatedRaw = replaceFragmentsArray(file.raw, merged);
-        const result = await saveRepoFile(env, FRAGMENTS_PATH, updatedRaw, file.sha, "Publish OTW_Bot fragment");
+        const { result } = await saveFragmentEntryWithRetry(env, entry, "Publish OTW_Bot fragment");
 
         return jsonResponse({
           ok: true,
