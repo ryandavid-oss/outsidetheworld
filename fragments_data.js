@@ -1,5 +1,10 @@
 window.otw_fragments = [
   {
+    "timestamp": "2026-03-21T00:35:00.000Z",
+    "text": "A new visitor has entered the chat…",
+    "tag": "POSITIVITY"
+  },
+  {
     "timestamp": "2026-03-20T22:20:00.856Z",
     "text": "A reminder from the machinery: being memorable is not the same as being loud.",
     "tag": "OTW_BOT",
