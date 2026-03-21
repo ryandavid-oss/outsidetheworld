@@ -303,6 +303,39 @@
       gap: 12px;
     }
 
+    .feed-controls {
+      display: flex;
+      justify-content: center;
+      margin-top: 8px;
+    }
+
+    .load-more-btn {
+      appearance: none;
+      min-height: 48px;
+      padding: 0 20px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: 0.22s var(--ease);
+    }
+
+    .load-more-btn:hover,
+    .load-more-btn:focus-visible {
+      border-color: var(--brand-blue);
+      background: rgba(160, 190, 245, 0.08);
+      transform: translateY(-1px);
+    }
+
+    body[data-theme="light"] .load-more-btn {
+      background: rgba(255, 255, 255, 0.52);
+    }
+
     .signals-rail {
       position: sticky;
       top: calc(var(--safe-top) + 134px);
@@ -762,6 +795,9 @@
         <p class="signals-kicker">Sponsored Signals</p>
       </aside>
     </div>
+    <div class="feed-controls" id="feedControls" hidden>
+      <button class="load-more-btn" id="loadMoreBtn" type="button">Load 10 More</button>
+    </div>
   </div>
 
   <script>
@@ -857,6 +893,10 @@
         foot: 'Now in family size'
       }
     ];
+
+    const FRAGMENTS_PAGE_SIZE = 10;
+    let allFragments = [];
+    let visibleFragmentCount = FRAGMENTS_PAGE_SIZE;
 
     function shuffleArray(items) {
       const copy = [...items];
@@ -1034,6 +1074,76 @@
       });
     }
 
+    function buildFragmentCard(fragment) {
+      const tag = fragment.tag ? `<div class="fragment-tag">${escapeHtml(fragment.tag)}</div>` : '';
+      const timestamp = formatTimestamp(fragment.timestamp || '');
+      const authorProfile = getAuthorProfile(fragment);
+      const isBot = authorProfile.isBot;
+      const fragmentId = buildFragmentId(fragment);
+
+      return `
+        <article class="fragment-card${isBot ? ' is-bot' : ''}" id="fragment-${fragmentId}" data-fragment-id="${fragmentId}">
+          <div class="fragment-head">
+            <div class="fragment-identity">
+              ${authorProfile.avatarHtml}
+              <div class="fragment-id">
+                <div class="fragment-title">
+                  <div class="fragment-title-top">
+                    <div class="fragment-name">${escapeHtml(authorProfile.name)}</div>
+                    <svg class="verified-badge" viewBox="0 0 24 24" aria-label="Verified">
+                      <path fill="#9B59B6" d="M12 1.8l2.76 1.58 3.16-.23 1.58 2.76 2.76 1.58-.23 3.16L23 12l-1.97 2.55.23 3.16-2.76 1.58-1.58 2.76-3.16-.23L12 22.2l-2.76-1.58-3.16.23-1.58-2.76-2.76-1.58.23-3.16L1 12l1.97-2.55-.23-3.16 2.76-1.58 1.58-2.76 3.16.23L12 1.8z"></path>
+                      <path fill="#F5F7FB" d="M10.55 15.62l-2.6-2.6 1.2-1.2 1.4 1.4 4.26-4.26 1.2 1.2z"></path>
+                    </svg>
+                  </div>
+                  <div class="fragment-handle">${escapeHtml(authorProfile.handle)}</div>
+                </div>
+                ${tag}
+              </div>
+            </div>
+            <div class="fragment-time">${timestamp}</div>
+          </div>
+          <p class="fragment-body">${escapeHtml(fragment.text || '')}</p>
+          <div class="fragment-foot">
+            <div class="fragment-foot-meta">
+              <span>Fragment</span>
+              <span class="dot" aria-hidden="true"></span>
+              <span>OTW</span>
+            </div>
+            <div class="fragment-reactions" id="reactions-${fragmentId}"></div>
+          </div>
+        </article>
+      `;
+    }
+
+    function updateLoadMoreControls() {
+      const controls = document.getElementById('feedControls');
+      const button = document.getElementById('loadMoreBtn');
+      if (!controls || !button) {
+        return;
+      }
+
+      const remaining = Math.max(0, allFragments.length - visibleFragmentCount);
+      controls.hidden = remaining <= 0;
+      if (remaining > 0) {
+        button.textContent = `Load ${Math.min(FRAGMENTS_PAGE_SIZE, remaining)} More`;
+      }
+    }
+
+    function renderVisibleFragments(requestedEntryId = null) {
+      const container = document.getElementById('fragmentsFeed');
+      const items = allFragments.slice(0, visibleFragmentCount);
+      container.innerHTML = items.map(buildFragmentCard).join('');
+      initReactionWidgets(items);
+      updateLoadMoreControls();
+
+      if (requestedEntryId && typeof CSS !== 'undefined' && CSS.escape) {
+        const requestedNode = document.querySelector(`[data-fragment-id="${CSS.escape(requestedEntryId)}"]`);
+        if (requestedNode) {
+          requestedNode.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    }
+
     async function renderFragments() {
       const container = document.getElementById('fragmentsFeed');
       let fragments = [];
@@ -1050,63 +1160,25 @@
         return;
       }
 
-      const items = fragments.slice();
       const requestedEntryId = new URLSearchParams(window.location.search).get('entry');
+      allFragments = fragments.slice();
 
-      if (!items.length) {
+      if (!allFragments.length) {
         renderEmptyState(container);
+        updateLoadMoreControls();
         return;
       }
 
-      container.innerHTML = items.map((fragment) => {
-        const tag = fragment.tag ? `<div class="fragment-tag">${escapeHtml(fragment.tag)}</div>` : '';
-        const timestamp = formatTimestamp(fragment.timestamp || '');
-        const authorProfile = getAuthorProfile(fragment);
-        const isBot = authorProfile.isBot;
-        const fragmentId = buildFragmentId(fragment);
+      visibleFragmentCount = FRAGMENTS_PAGE_SIZE;
 
-        return `
-          <article class="fragment-card${isBot ? ' is-bot' : ''}" id="fragment-${fragmentId}" data-fragment-id="${fragmentId}">
-            <div class="fragment-head">
-              <div class="fragment-identity">
-                ${authorProfile.avatarHtml}
-                <div class="fragment-id">
-                  <div class="fragment-title">
-                    <div class="fragment-title-top">
-                      <div class="fragment-name">${escapeHtml(authorProfile.name)}</div>
-                      <svg class="verified-badge" viewBox="0 0 24 24" aria-label="Verified">
-                        <path fill="#9B59B6" d="M12 1.8l2.76 1.58 3.16-.23 1.58 2.76 2.76 1.58-.23 3.16L23 12l-1.97 2.55.23 3.16-2.76 1.58-1.58 2.76-3.16-.23L12 22.2l-2.76-1.58-3.16.23-1.58-2.76-2.76-1.58.23-3.16L1 12l1.97-2.55-.23-3.16 2.76-1.58 1.58-2.76 3.16.23L12 1.8z"></path>
-                        <path fill="#F5F7FB" d="M10.55 15.62l-2.6-2.6 1.2-1.2 1.4 1.4 4.26-4.26 1.2 1.2z"></path>
-                      </svg>
-                    </div>
-                    <div class="fragment-handle">${escapeHtml(authorProfile.handle)}</div>
-                  </div>
-                  ${tag}
-                </div>
-              </div>
-              <div class="fragment-time">${timestamp}</div>
-            </div>
-            <p class="fragment-body">${escapeHtml(fragment.text || '')}</p>
-            <div class="fragment-foot">
-              <div class="fragment-foot-meta">
-                <span>Fragment</span>
-                <span class="dot" aria-hidden="true"></span>
-                <span>OTW</span>
-              </div>
-              <div class="fragment-reactions" id="reactions-${fragmentId}"></div>
-            </div>
-          </article>
-        `;
-      }).join('');
-
-      initReactionWidgets(items);
-
-      if (requestedEntryId && typeof CSS !== 'undefined' && CSS.escape) {
-        const requestedNode = document.querySelector(`[data-fragment-id="${CSS.escape(requestedEntryId)}"]`);
-        if (requestedNode) {
-          requestedNode.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (requestedEntryId) {
+        const requestedIndex = allFragments.findIndex((fragment) => buildFragmentId(fragment) === requestedEntryId);
+        if (requestedIndex >= 0) {
+          visibleFragmentCount = Math.max(FRAGMENTS_PAGE_SIZE, requestedIndex + 1);
         }
       }
+
+      renderVisibleFragments(requestedEntryId);
     }
 
     function applyTheme(theme) {
@@ -1180,6 +1252,10 @@
     document.getElementById('menuToggle').addEventListener('click', () => {
       const menu = document.getElementById('mastheadActions');
       setMenuState(!menu.classList.contains('is-open'));
+    });
+    document.getElementById('loadMoreBtn').addEventListener('click', () => {
+      visibleFragmentCount += FRAGMENTS_PAGE_SIZE;
+      renderVisibleFragments();
     });
     document.addEventListener('click', (event) => {
       if (window.innerWidth > 640) {
