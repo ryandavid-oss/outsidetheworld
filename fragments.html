@@ -626,13 +626,37 @@
       margin-left: auto;
     }
 
-    .fragment-reactions .webReactionz {
+    .fragment-reactions .WebReactionz {
+      display: inline-flex;
+      align-items: center;
+      justify-content: flex-end;
       gap: 6px;
+      margin: 0;
+      width: auto;
+      flex-direction: row;
     }
 
-    .fragment-reactions .webReactionz .emoji {
+    .fragment-reactions .WebReactionz.minimal {
+      flex-direction: row;
+      padding: 0;
+    }
+
+    .fragment-reactions .WebReactionz .emojis {
+      gap: 6px;
+      margin: 0;
+    }
+
+    .fragment-reactions .WebReactionz .emoji {
       filter: saturate(0.92);
       opacity: 0.9;
+    }
+
+    .fragment-reactions .WebReactionz .branding {
+      width: 15px;
+      margin-top: 0;
+      margin-left: 8px;
+      display: block;
+      flex: 0 0 auto;
     }
 
     .empty-card {
@@ -774,30 +798,32 @@
         margin-left: 0;
       }
 
-      .fragment-reactions .webReactionz {
+      .fragment-reactions .WebReactionz {
         justify-content: flex-start;
         text-align: left;
         flex-wrap: nowrap;
         white-space: nowrap;
+        margin: 0;
+        width: auto;
+        flex-direction: row;
       }
 
-      .fragment-reactions .webReactionz .emojis {
+      .fragment-reactions .WebReactionz.minimal {
+        flex-direction: row;
+        padding: 0;
+      }
+
+      .fragment-reactions .WebReactionz .emojis {
         justify-content: flex-start;
         flex-wrap: nowrap;
         white-space: nowrap;
+        margin: 0;
       }
 
-      .fragment-reactions .webReactionz > div:last-child {
-        display: inline-flex;
-        align-items: center;
-        flex: 0 0 auto;
-        margin-left: 6px;
-      }
-
-      .fragment-reactions .webReactionz img.branding {
-        width: 20px;
-        height: 20px;
-        display: block;
+      .fragment-reactions .WebReactionz .branding {
+        width: 14px;
+        margin-top: 0;
+        margin-left: 8px;
       }
     }
   </style>
