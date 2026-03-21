@@ -538,7 +538,7 @@
             align-items: center;
             gap: 10px;
             font-family: var(--font-code);
-            font-size: 0.6rem;
+            font-size: 0.68rem;
             letter-spacing: 2px;
             text-transform: uppercase;
             color: var(--reader-muted);
@@ -548,18 +548,18 @@
 
         .reader-label {
             opacity: 0.96;
-            letter-spacing: 1.5px;
+            letter-spacing: 1.7px;
         }
 
         .reader-select {
             font-family: var(--font-code);
-            font-size: 0.6rem;
+            font-size: 0.68rem;
             letter-spacing: 2px;
             text-transform: uppercase;
             color: var(--reader-text);
             background: rgba(5, 5, 5, 0.78);
             border: 1px solid var(--reader-border);
-            padding: 8px 10px;
+            padding: 8px 12px;
             outline: none;
             appearance: none;
         }
@@ -595,16 +595,17 @@
 
         .post-stats {
             display: flex;
-            gap: 14px;
-            flex-wrap: wrap;
+            gap: 18px;
+            flex-wrap: nowrap;
+            align-items: center;
             margin: 0 0 24px 0;
         }
 
         .post-stat {
-            min-width: 118px;
-            padding: 12px 16px;
-            border: 1px solid var(--reader-border);
-            background: rgba(255, 255, 255, 0.025);
+            min-width: 0;
+            padding: 0;
+            border: none;
+            background: transparent;
             font-family: var(--font-code);
             font-size: 0.72rem;
             letter-spacing: 3px;
@@ -612,8 +613,8 @@
             color: var(--reader-muted);
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            gap: 10px;
+            justify-content: flex-start;
+            gap: 12px;
         }
 
         .post-stat strong {
@@ -622,11 +623,6 @@
             letter-spacing: 4px;
             color: var(--reader-heading);
             text-shadow: none;
-        }
-
-        .feed-column[data-reader-mode="light"] .post-stat,
-        .feed-column[data-reader-mode="sepia"] .post-stat {
-            background: rgba(0, 0, 0, 0.03);
         }
 
         .feed-column #md-render {
@@ -687,22 +683,18 @@
             }
 
             .reader-controls {
-                width: 100%;
-                justify-content: space-between;
+                width: auto;
+                justify-content: flex-start;
             }
 
             .reader-select {
-                width: 160px;
-                text-align: right;
+                width: 148px;
+                text-align: left;
             }
 
             .post-stats {
-                gap: 10px;
-            }
-
-            .post-stat {
-                flex: 1 1 150px;
-                min-width: 0;
+                gap: 16px;
+                margin-bottom: 18px;
             }
         }
 
@@ -1377,19 +1369,19 @@
         }
 
         .jump-btn {
-            background: var(--brand-blue) !important;
+            background: #79a9ff !important;
             color: var(--bg-dark) !important;
-            padding: 12px 25px;
+            padding: 13px 26px;
             border-radius: 50px;
             font-family: var(--font-code);
-            font-size: 0.7rem;
+            font-size: 0.8rem;
             font-weight: 700;
-            letter-spacing: 2px;
+            letter-spacing: 2.4px;
             border: none;
             display: flex;
             align-items: center;
             gap: 12px;
-            box-shadow: 0 5px 20px rgba(99, 149, 238, 0.4);
+            box-shadow: 0 5px 22px rgba(121, 169, 255, 0.42);
         }
 
         .pulse-dot {
@@ -1666,25 +1658,18 @@
     <nav class="mobile-jump-strip" id="jump-strip">
         <button type="button" onclick="scrollToCards()" class="jump-btn">
             <span class="pulse-dot" aria-hidden="true"></span>
-            ACCESS SITE NAV (SKIP BLOG)
+            ACCESS SITE MENU
         </button>
     </nav>
 
     <main class="main-interface">
         <section class="feed-column">
             <div class="feed-topbar">
-                <div class="typing-container">
-                    <span class="typing-line">
-                        <span id="typing-text">INITIALIZING_HANDSHAKE...</span><span class="cursor"
-                            aria-hidden="true"></span>
-                    </span>
-                </div>
-
                 <div class="reader-controls" aria-label="Reading mode">
-                    <label class="reader-label" for="reader-mode">READER //</label>
+                    <label class="reader-label" for="reader-mode">READING //</label>
                     <select id="reader-mode" class="reader-select">
-                        <option value="dark">VOID</option>
-                        <option value="light">INVERT</option>
+                        <option value="dark">DARK</option>
+                        <option value="light">LIGHT</option>
                         <option value="sepia">PAPER</option>
                     </select>
                 </div>
@@ -1923,6 +1908,7 @@
 
         // --- THE VISUAL FLAIR ---
         function runTypewriterProtocol() {
+            if (!typeTarget) return;
             const state1 = "SYNCHRONIZING...";
             const state2 = "Welcome Human Visitor // Enjoy Your Stay in the Residue";
             let i = 0;
@@ -2048,7 +2034,6 @@
                             return `
       <div class="post-stats" aria-label="Post statistics">
         <div class="post-stat"><span>Words:</span> <strong>${metrics.words}</strong></div>
-        <div class="post-stat"><span>Chars:</span> <strong>${metrics.chars}</strong></div>
         <div class="post-stat"><span>Read:</span> <strong>${metrics.readMin} min</strong></div>
       </div>
     `;
