@@ -789,18 +789,26 @@
       }
 
       .fragment-foot {
-        align-items: flex-start;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: nowrap;
+      }
+
+      .fragment-foot-meta {
+        flex-wrap: nowrap;
       }
 
       .fragment-reactions {
-        width: 100%;
-        justify-content: flex-start;
-        margin-left: 0;
+        width: auto;
+        justify-content: flex-end;
+        margin-left: auto;
+        flex: 0 0 auto;
       }
 
       .fragment-reactions .WebReactionz {
-        justify-content: flex-start;
-        text-align: left;
+        justify-content: flex-end;
+        text-align: right;
         flex-wrap: nowrap;
         white-space: nowrap;
         margin: 0;
