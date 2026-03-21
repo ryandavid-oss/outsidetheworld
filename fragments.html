@@ -1103,7 +1103,14 @@
         return;
       }
 
-      if (typeof window.WebReactionz !== 'function') {
+      const ReactionzCtor =
+        typeof WebReactionz === 'function'
+          ? WebReactionz
+          : typeof window.WebReactionz === 'function'
+            ? window.WebReactionz
+            : null;
+
+      if (!ReactionzCtor) {
         window.setTimeout(() => initReactionWidgets(items), 220);
         return;
       }
@@ -1117,7 +1124,7 @@
         }
 
         target.dataset.reactionsReady = 'true';
-        new window.WebReactionz({
+        new ReactionzCtor({
           siteId: '0b926b89-1467-4ef1-a8d4-ca95543047a3',
           domSelector: selector,
           pageId: `fragment:${fragmentId}`
