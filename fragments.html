@@ -202,13 +202,22 @@
     .brand {
       display: inline-flex;
       align-items: center;
+      gap: 10px;
       text-decoration: none;
     }
 
     .brand img {
-      width: min(42vw, 210px);
       display: block;
       filter: drop-shadow(0 0 18px rgba(99, 149, 238, 0.14));
+    }
+
+    .brand-mark {
+      width: clamp(28px, 4.8vw, 38px);
+      flex: 0 0 auto;
+    }
+
+    .brand-wordmark {
+      width: min(40vw, 198px);
     }
 
     body[data-theme="light"] .brand img {
@@ -711,8 +720,16 @@
         position: relative;
       }
 
-      .brand img {
-        width: min(52vw, 210px);
+      .brand {
+        gap: 8px;
+      }
+
+      .brand-mark {
+        width: clamp(24px, 7vw, 32px);
+      }
+
+      .brand-wordmark {
+        width: min(50vw, 198px);
       }
 
       .menu-toggle {
@@ -841,7 +858,8 @@
     <header class="masthead">
       <div class="masthead-inner">
         <a class="brand" href="personal.html" aria-label="Return to OTW feed">
-          <img id="fragmentsLogo" src="Images/fragments.svg" alt="Fragments" />
+          <img class="brand-mark" src="Images/OTW_Brandmark_Main.svg" alt="Outside The World" />
+          <img class="brand-wordmark" id="fragmentsLogo" src="Images/fragments.svg" alt="Fragments" />
         </a>
         <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mastheadActions" aria-label="Open settings menu">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
@@ -1304,6 +1322,7 @@
       const body = document.body;
       const toggle = document.getElementById('themeToggle');
       const logo = document.getElementById('fragmentsLogo');
+      const brandMark = document.querySelector('.brand-mark');
       const themeMeta = document.querySelector('meta[name="theme-color"]');
 
       body.dataset.theme = nextTheme;
@@ -1313,6 +1332,9 @@
       }
       if (logo) {
         logo.src = nextTheme === 'light' ? 'Images/fragments_dark.svg' : 'Images/fragments.svg';
+      }
+      if (brandMark) {
+        brandMark.src = nextTheme === 'light' ? 'Images/OTW_Brandmark_dark.svg' : 'Images/OTW_Brandmark_Main.svg';
       }
       if (themeMeta) {
         themeMeta.setAttribute('content', nextTheme === 'light' ? '#f4efe6' : '#0a0a0a');
