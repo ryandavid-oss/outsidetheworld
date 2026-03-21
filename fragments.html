@@ -480,6 +480,19 @@
       background: rgba(255, 255, 255, 0.04);
     }
 
+    .fragment-avatar.initials-avatar {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.92rem;
+      letter-spacing: 0.08em;
+      color: #f5f7fb;
+      background:
+        radial-gradient(circle at 30% 25%, rgba(160, 190, 245, 0.34), transparent 38%),
+        linear-gradient(145deg, rgba(155, 89, 182, 0.9), rgba(99, 149, 238, 0.62));
+    }
+
     .fragment-avatar.bot-avatar {
       background:
         radial-gradient(circle at 30% 30%, rgba(160, 190, 245, 0.12), transparent 45%),
@@ -962,9 +975,28 @@
       return `${stamp}--${bodyStub}`;
     }
 
+    function getInitials(value) {
+      const parts = String(value || '')
+        .trim()
+        .split(/\s+/)
+        .filter(Boolean)
+        .slice(0, 2);
+
+      if (!parts.length) {
+        return 'OT';
+      }
+
+      return parts.map((part) => part.charAt(0).toUpperCase()).join('');
+    }
+
+    function buildInitialsAvatar(name) {
+      return `<div class="fragment-avatar initials-avatar" aria-hidden="true">${escapeHtml(getInitials(name))}</div>`;
+    }
+
     function getAuthorProfile(fragment) {
       const author = String(fragment.author || '').trim();
       const authorHandle = String(fragment.author_handle || '').trim();
+      const authorAvatar = String(fragment.author_avatar || '').trim();
 
       if (author === 'OTW_Bot') {
         return {
@@ -985,6 +1017,25 @@
           name: 'Emily',
           handle: '@word.person',
           avatarHtml: '<img class="fragment-avatar" src="Images/IG_Emmy.jpg" alt="Emily" />',
+          isBot: false
+        };
+      }
+
+      if (authorAvatar) {
+        return {
+          name: author || 'OTW',
+          handle: authorHandle || '@outsidetheworld',
+          avatarHtml: `<img class="fragment-avatar" src="${escapeHtml(authorAvatar)}" alt="${escapeHtml(author || 'Fragment author')}" />`,
+          isBot: false
+        };
+      }
+
+      if (author || authorHandle) {
+        const displayName = author || authorHandle.replace(/^@+/, '') || 'OTW';
+        return {
+          name: displayName,
+          handle: authorHandle || `@${slugify(displayName).replace(/-/g, '_')}`,
+          avatarHtml: buildInitialsAvatar(displayName),
           isBot: false
         };
       }

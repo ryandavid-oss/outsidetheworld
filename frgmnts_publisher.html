@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#090909" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="robots" content="noindex,nofollow" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="frgm<nts" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <title>frgm&lt;nts | Family App</title>
+  <meta name="description" content="A dedicated private OTW fragments app for a small family feed." />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="apple-touch-icon" href="Images/Equal.png" />
+  <link rel="manifest" href="frgmnts_publisher.webmanifest" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" />
+  <style>
+    :root {
+      --page-bg: #090909;
+      --surface: rgba(255, 255, 255, 0.05);
+      --surface-strong: rgba(255, 255, 255, 0.08);
+      --border: rgba(255, 255, 255, 0.1);
+      --border-strong: rgba(160, 190, 245, 0.18);
+      --text-main: #f5f7fb;
+      --text-soft: rgba(245, 247, 251, 0.76);
+      --text-faint: rgba(245, 247, 251, 0.52);
+      --brand-blue: #6395EE;
+      --brand-light-blue: #A0BEF5;
+      --brand-teal: #91AFB3;
+      --brand-gold: #D9C08C;
+      --amethyst: #9B59B6;
+      --rose-gold: #E0BFB8;
+      --signal-green: #4BE36E;
+      --safe-top: env(safe-area-inset-top);
+      --safe-right: env(safe-area-inset-right);
+      --safe-bottom: env(safe-area-inset-bottom);
+      --safe-left: env(safe-area-inset-left);
+      --radius-xl: 32px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --ease: cubic-bezier(0.23, 1, 0.32, 1);
+      --max-w: 860px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "IBM Plex Sans", system-ui, sans-serif;
+      color: var(--text-main);
+      background:
+        radial-gradient(520px 280px at 18% 0%, rgba(155, 89, 182, 0.22), transparent 56%),
+        radial-gradient(440px 260px at 82% 6%, rgba(145, 175, 179, 0.14), transparent 58%),
+        radial-gradient(620px 420px at 50% 100%, rgba(217, 192, 140, 0.14), transparent 60%),
+        linear-gradient(180deg, #090909 0%, #0d0d0f 100%);
+      padding:
+        calc(var(--safe-top) + 12px)
+        calc(var(--safe-right) + 18px)
+        calc(var(--safe-bottom) + 210px)
+        calc(var(--safe-left) + 18px);
+    }
+
+    .app {
+      width: min(100%, var(--max-w));
+      margin: 0 auto;
+      display: grid;
+      gap: 16px;
+    }
+
+    .topbar {
+      position: sticky;
+      top: calc(var(--safe-top) + 2px);
+      z-index: 30;
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+      border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+      background:
+        linear-gradient(180deg, rgba(9, 9, 9, 0.94), rgba(9, 9, 9, 0.72)),
+        radial-gradient(220px 120px at 82% 0%, rgba(155, 89, 182, 0.18), transparent 68%);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: 0 16px 38px rgba(0, 0, 0, 0.26);
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .brand-orb {
+      width: 46px;
+      height: 46px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(160, 190, 245, 0.18);
+      background:
+        radial-gradient(circle at top, rgba(99, 149, 238, 0.18), transparent 52%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.06),
+        0 16px 28px rgba(0, 0, 0, 0.22);
+      flex-shrink: 0;
+    }
+
+    .brand-orb svg {
+      width: 24px;
+      height: 24px;
+      stroke: var(--brand-blue);
+    }
+
+    .brand-orb img {
+      width: 24px;
+      height: 24px;
+      display: block;
+    }
+
+    .brand-wordmark {
+      display: block;
+      height: 20px;
+      width: auto;
+      filter: drop-shadow(0 0 18px rgba(99, 149, 238, 0.12));
+    }
+
+    .brand-copy {
+      display: grid;
+      gap: 3px;
+      min-width: 0;
+    }
+
+    .brand-kicker {
+      margin: 0;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.68rem;
+      line-height: 1;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+    }
+
+    .brand-title {
+      margin: 0;
+      font-family: "IBM Plex Serif", serif;
+      font-size: clamp(1.2rem, 4vw, 1.65rem);
+      line-height: 1;
+      letter-spacing: -0.04em;
+      font-weight: 600;
+    }
+
+    .icon-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-main);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transition: transform 0.22s var(--ease), border-color 0.22s var(--ease), background 0.22s var(--ease);
+    }
+
+    .icon-btn:hover,
+    .icon-btn:focus-visible {
+      transform: translateY(-1px);
+      border-color: var(--brand-blue);
+      background: rgba(160, 190, 245, 0.08);
+    }
+
+    .panel {
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.035)),
+        radial-gradient(420px 280px at 88% 0%, rgba(155, 89, 182, 0.08), transparent 56%);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 20px 46px rgba(0, 0, 0, 0.22);
+    }
+
+    .compose {
+      padding: 22px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .field-group {
+      display: grid;
+      gap: 10px;
+    }
+
+    .field-label {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.74rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+    }
+
+    .field-textarea {
+      width: 100%;
+      min-height: 240px;
+      resize: vertical;
+      border-radius: 26px;
+      border: 1px solid var(--border);
+      background: rgba(8, 8, 10, 0.42);
+      color: var(--text-main);
+      padding: 20px 22px;
+      font: inherit;
+      font-size: clamp(1.12rem, 4vw, 1.42rem);
+      line-height: 1.7;
+      transition: border-color 0.22s var(--ease), background 0.22s var(--ease), box-shadow 0.22s var(--ease);
+    }
+
+    .field-textarea::placeholder {
+      color: rgba(245, 247, 251, 0.34);
+    }
+
+    .field-textarea:focus {
+      outline: none;
+      border-color: rgba(160, 190, 245, 0.28);
+      background: rgba(8, 8, 10, 0.54);
+      box-shadow: 0 0 0 4px rgba(99, 149, 238, 0.08);
+    }
+
+    .field-select {
+      width: 100%;
+      min-height: 52px;
+      padding: 0 16px;
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-main);
+      font: inherit;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      appearance: none;
+      background-image:
+        linear-gradient(45deg, transparent 50%, rgba(245, 247, 251, 0.7) 50%),
+        linear-gradient(135deg, rgba(245, 247, 251, 0.7) 50%, transparent 50%);
+      background-position:
+        calc(100% - 22px) calc(50% - 3px),
+        calc(100% - 16px) calc(50% - 3px);
+      background-size: 6px 6px, 6px 6px;
+      background-repeat: no-repeat;
+    }
+
+    .field-select:focus {
+      outline: none;
+      border-color: rgba(160, 190, 245, 0.24);
+      box-shadow: 0 0 0 4px rgba(99, 149, 238, 0.08);
+    }
+
+    .stats-line {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: -2px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+    }
+
+    .stats-line span {
+      margin: 0;
+    }
+
+    .dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 999px;
+      background: rgba(160, 190, 245, 0.34);
+      flex-shrink: 0;
+    }
+
+    .status-line {
+      margin: 0;
+      min-height: 1.5em;
+      color: var(--text-faint);
+      font-size: 0.96rem;
+      line-height: 1.5;
+    }
+
+    .action-dock {
+      position: fixed;
+      left: max(calc(var(--safe-left) + 18px), 50%);
+      transform: translateX(-50%);
+      bottom: calc(var(--safe-bottom) + 102px);
+      z-index: 35;
+      width: min(calc(100vw - 24px), var(--max-w));
+      padding: 18px;
+      border-radius: 30px;
+      border: 1px solid var(--border);
+      background:
+        linear-gradient(180deg, rgba(8, 8, 10, 0.92), rgba(8, 8, 10, 0.74)),
+        radial-gradient(220px 120px at 20% 0%, rgba(155, 89, 182, 0.12), transparent 68%);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.22);
+      display: grid;
+      gap: 12px;
+    }
+
+    .primary-btn,
+    .secondary-btn {
+      appearance: none;
+      width: 100%;
+      min-height: 62px;
+      border-radius: 999px;
+      font: inherit;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.22s var(--ease), opacity 0.22s var(--ease), border-color 0.22s var(--ease), background 0.22s var(--ease);
+    }
+
+    .primary-btn {
+      border: 0;
+      color: #f7fbff;
+      background: linear-gradient(135deg, var(--brand-blue), var(--brand-teal));
+      box-shadow: 0 20px 36px rgba(99, 149, 238, 0.18);
+    }
+
+    .primary-btn:hover,
+    .primary-btn:focus-visible {
+      transform: translateY(-1px);
+      opacity: 0.96;
+    }
+
+    .primary-btn.is-success {
+      background: linear-gradient(135deg, rgba(75, 227, 110, 0.86), rgba(145, 175, 179, 0.88));
+      color: #07130b;
+    }
+
+    .secondary-btn {
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .secondary-btn:hover,
+    .secondary-btn:focus-visible {
+      transform: translateY(-1px);
+      border-color: rgba(160, 190, 245, 0.22);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .bottom-dock {
+      position: fixed;
+      left: max(calc(var(--safe-left) + 18px), 50%);
+      transform: translateX(-50%);
+      bottom: calc(var(--safe-bottom) + 14px);
+      z-index: 34;
+      width: min(calc(100vw - 24px), var(--max-w));
+      padding: 12px 16px;
+      border-radius: 34px;
+      border: 1px solid rgba(160, 190, 245, 0.12);
+      background:
+        linear-gradient(180deg, rgba(14, 14, 16, 0.92), rgba(14, 14, 16, 0.76)),
+        radial-gradient(260px 110px at 18% 0%, rgba(99, 149, 238, 0.14), transparent 72%);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.22);
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 6px;
+    }
+
+    .dock-btn {
+      appearance: none;
+      min-height: 72px;
+      border-radius: 24px;
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--text-main);
+      text-decoration: none;
+      display: grid;
+      justify-items: center;
+      align-content: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: 0.22s var(--ease);
+    }
+
+    .dock-btn:hover,
+    .dock-btn:focus-visible {
+      border-color: rgba(160, 190, 245, 0.12);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .dock-btn svg {
+      width: 22px;
+      height: 22px;
+      stroke: currentColor;
+    }
+
+    .dock-btn-label {
+      font-size: 0.82rem;
+      line-height: 1;
+      font-weight: 600;
+    }
+
+    .sheet {
+      position: fixed;
+      inset: 0;
+      z-index: 45;
+      display: grid;
+      align-items: end;
+      padding: 16px;
+      background: rgba(2, 2, 3, 0.44);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.22s var(--ease);
+    }
+
+    .sheet.is-open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .sheet-panel {
+      width: min(100%, 560px);
+      margin: 0 auto;
+      padding: 22px;
+      border-radius: 28px 28px 18px 18px;
+      border: 1px solid var(--border);
+      background:
+        linear-gradient(180deg, rgba(14, 14, 16, 0.96), rgba(14, 14, 16, 0.88)),
+        radial-gradient(320px 180px at 84% 0%, rgba(155, 89, 182, 0.18), transparent 64%);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      display: grid;
+      gap: 14px;
+    }
+
+    .sheet-title {
+      margin: 0;
+      font-family: "IBM Plex Serif", serif;
+      font-size: 1.6rem;
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+
+    .sheet-copy {
+      margin: 0;
+      color: var(--text-soft);
+      font-size: 0.96rem;
+      line-height: 1.6;
+    }
+
+    .field-input {
+      width: 100%;
+      min-height: 52px;
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-main);
+      padding: 0 16px;
+      font: inherit;
+      font-size: 1rem;
+    }
+
+    .field-input::placeholder {
+      color: rgba(245, 247, 251, 0.34);
+    }
+
+    .field-input:focus {
+      outline: none;
+      border-color: rgba(160, 190, 245, 0.24);
+      box-shadow: 0 0 0 4px rgba(99, 149, 238, 0.08);
+    }
+
+    .sheet-actions {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: calc(var(--safe-bottom) + 188px);
+      transform: translate(-50%, 20px);
+      z-index: 44;
+      width: min(calc(100vw - 32px), 420px);
+      padding: 16px 18px;
+      border-radius: 22px;
+      border: 1px solid rgba(160, 190, 245, 0.14);
+      background:
+        linear-gradient(180deg, rgba(14, 14, 16, 0.94), rgba(14, 14, 16, 0.82)),
+        radial-gradient(240px 120px at top, rgba(155, 89, 182, 0.12), transparent 68%);
+      box-shadow: 0 20px 34px rgba(0, 0, 0, 0.24);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.28s var(--ease), transform 0.28s var(--ease);
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    .toast-title {
+      margin: 0 0 4px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--brand-light-blue);
+    }
+
+    .toast-copy {
+      margin: 0;
+      color: var(--text-soft);
+      font-size: 0.96rem;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 759px) {
+      body {
+        padding-left: calc(var(--safe-left) + 12px);
+        padding-right: calc(var(--safe-right) + 12px);
+        padding-bottom: calc(var(--safe-bottom) + 196px);
+      }
+
+      .topbar {
+        padding: 12px 14px;
+      }
+
+      .brand-wordmark {
+        height: 18px;
+      }
+
+      .compose {
+        padding: 18px;
+      }
+
+      .sheet-actions {
+        grid-template-columns: 1fr;
+      }
+
+      .action-dock {
+        width: calc(100vw - 24px);
+        bottom: calc(var(--safe-bottom) + 92px);
+        padding: 14px;
+      }
+
+      .bottom-dock {
+        width: calc(100vw - 24px);
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        padding: 10px 12px;
+      }
+
+      .dock-btn {
+        min-height: 64px;
+      }
+
+      .dock-btn-label {
+        font-size: 0.76rem;
+      }
+
+      .toast {
+        bottom: calc(var(--safe-bottom) + 176px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="brand">
+          <div class="brand-orb" aria-hidden="true">
+            <img src="Images/OTW_Brandmark_Main.svg" alt="" />
+          </div>
+          <div class="brand-copy">
+            <p class="brand-kicker">Shared Family Feed</p>
+            <img class="brand-wordmark" src="Images/fragments.svg" alt="Fragments" />
+          </div>
+        </div>
+        <button class="icon-btn" id="settingsBtn" type="button" aria-label="Open settings">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3.2"></circle>
+            <path d="M19.4 15A1.65 1.65 0 0 0 19.73 16.82L19.79 16.88A2 2 0 1 1 16.96 19.71L16.9 19.65A1.65 1.65 0 0 0 15.08 19.32A1.65 1.65 0 0 0 14 20.85V21A2 2 0 1 1 10 21V20.91A1.65 1.65 0 0 0 8.92 19.39A1.65 1.65 0 0 0 7.1 19.72L7.04 19.78A2 2 0 1 1 4.21 16.95L4.27 16.89A1.65 1.65 0 0 0 4.6 15.07A1.65 1.65 0 0 0 3.07 14H3A2 2 0 1 1 3 10H3.09A1.65 1.65 0 0 0 4.61 8.92A1.65 1.65 0 0 0 4.28 7.1L4.22 7.04A2 2 0 1 1 7.05 4.21L7.11 4.27A1.65 1.65 0 0 0 8.93 4.6H9A1.65 1.65 0 0 0 10 3.09V3A2 2 0 1 1 14 3V3.09A1.65 1.65 0 0 0 15.07 4.61A1.65 1.65 0 0 0 16.89 4.28L16.95 4.22A2 2 0 1 1 19.78 7.05L19.72 7.11A1.65 1.65 0 0 0 19.39 8.93V9A1.65 1.65 0 0 0 20.91 10H21A2 2 0 1 1 21 14H20.91A1.65 1.65 0 0 0 19.4 15Z"></path>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <section class="panel compose">
+      <div class="field-group">
+        <label class="field-label" for="fragmentBody">frgm&lt;nts</label>
+        <textarea class="field-textarea" id="fragmentBody" placeholder="What do you want to share?" spellcheck="true"></textarea>
+      </div>
+
+      <div class="stats-line">
+        <span id="wordCount">0 words</span>
+        <span id="charCount">0 chars</span>
+        <span id="draftState">No local fragment draft yet.</span>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" for="tagSelect">Signal Type</label>
+        <select class="field-select" id="tagSelect">
+          <option value="FRAGMENT">Fragment</option>
+          <option value="POSITIVITY">Positivity</option>
+          <option value="CHECK_IN">Check-In</option>
+          <option value="REGRET">Regret</option>
+          <option value="SPIRITUAL">Spiritual</option>
+          <option value="RESIDUE">Residue</option>
+          <option value="COMPLAINT">Complaint</option>
+        </select>
+      </div>
+
+      <p class="status-line" id="statusLine">Drafts save quietly on this device while you write.</p>
+    </section>
+  </main>
+
+  <div class="action-dock">
+    <button class="primary-btn" id="publishBtn" type="button">Share to frgm&lt;nts</button>
+    <button class="secondary-btn" id="clearBtn" type="button">Clear draft</button>
+  </div>
+
+  <nav class="bottom-dock" aria-label="App navigation">
+    <button class="dock-btn" id="homeBtn" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 10.5 12 3l9 7.5"></path>
+        <path d="M5.5 9.8V21h13V9.8"></path>
+      </svg>
+      <span class="dock-btn-label">Home</span>
+    </button>
+    <button class="dock-btn" id="liveFeedBtn" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="9"></circle>
+        <path d="M7 12h10"></path>
+        <path d="M12 7v10"></path>
+      </svg>
+      <span class="dock-btn-label">Live Feed</span>
+    </button>
+    <a class="dock-btn" href="mailto:ryandavid@me.com?subject=frgm%3Cnts%20app%20support">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 5h16v14H4z"></path>
+        <path d="M4 7l8 6 8-6"></path>
+      </svg>
+      <span class="dock-btn-label">Support</span>
+    </a>
+    <button class="dock-btn" id="settingsDockBtn" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="3.2"></circle>
+        <path d="M19.4 15A1.65 1.65 0 0 0 19.73 16.82L19.79 16.88A2 2 0 1 1 16.96 19.71L16.9 19.65A1.65 1.65 0 0 0 15.08 19.32A1.65 1.65 0 0 0 14 20.85V21A2 2 0 1 1 10 21V20.91A1.65 1.65 0 0 0 8.92 19.39A1.65 1.65 0 0 0 7.1 19.72L7.04 19.78A2 2 0 1 1 4.21 16.95L4.27 16.89A1.65 1.65 0 0 0 4.6 15.07A1.65 1.65 0 0 0 3.07 14H3A2 2 0 1 1 3 10H3.09A1.65 1.65 0 0 0 4.61 8.92A1.65 1.65 0 0 0 4.28 7.1L4.22 7.04A2 2 0 1 1 7.05 4.21L7.11 4.27A1.65 1.65 0 0 0 8.93 4.6H9A1.65 1.65 0 0 0 10 3.09V3A2 2 0 1 1 14 3V3.09A1.65 1.65 0 0 0 15.07 4.61A1.65 1.65 0 0 0 16.89 4.28L16.95 4.22A2 2 0 1 1 19.78 7.05L19.72 7.11A1.65 1.65 0 0 0 19.39 8.93V9A1.65 1.65 0 0 0 20.91 10H21A2 2 0 1 1 21 14H20.91A1.65 1.65 0 0 0 19.4 15Z"></path>
+      </svg>
+      <span class="dock-btn-label">Settings</span>
+    </button>
+  </nav>
+
+  <div class="sheet" id="settingsSheet" aria-hidden="true">
+    <div class="sheet-panel">
+      <h2 class="sheet-title">Posting settings</h2>
+      <p class="sheet-copy">Each device can keep its own identity and publish key. That is what makes the family feed feel shared instead of anonymous.</p>
+      <div class="field-group">
+        <label class="field-label" for="authorNameInput">Display name</label>
+        <input class="field-input" id="authorNameInput" type="text" placeholder="Emily" autocomplete="name" />
+      </div>
+      <div class="field-group">
+        <label class="field-label" for="authorHandleInput">Handle</label>
+        <input class="field-input" id="authorHandleInput" type="text" placeholder="@word.person" autocomplete="off" />
+      </div>
+      <div class="field-group">
+        <label class="field-label" for="publishKeyInput">Publish key</label>
+        <input class="field-input" id="publishKeyInput" type="password" placeholder="Paste the family fragments key here" autocomplete="off" />
+      </div>
+      <p class="status-line" id="settingsStatus">No publish key is saved on this device yet.</p>
+      <div class="field-group">
+        <div class="field-label">About frgm&lt;nts</div>
+        <p class="sheet-copy">A small family social feed for short signals, check-ins, jokes, warmth, weather, and the passing thought before it evaporates. It lands directly inside the shared OTW fragments stream.</p>
+      </div>
+      <div class="sheet-actions">
+        <button class="primary-btn" id="saveSettingsBtn" type="button">Save settings</button>
+        <button class="secondary-btn" id="closeSettingsBtn" type="button">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="publishToast" aria-live="polite">
+    <h2 class="toast-title" id="toastTitle">Shared</h2>
+    <p class="toast-copy" id="toastCopy">Your fragment is on its way to the family feed.</p>
+  </div>
+
+  <script>
+    const DRAFT_KEY = 'familyFragmentsDraft';
+    const PROFILE_KEY = 'familyFragmentsProfile';
+    const PUBLISH_ENDPOINT = 'https://otw-fragments-publish.ryandavid.workers.dev/publish-fragment';
+
+    const fragmentBody = document.getElementById('fragmentBody');
+    const statusLine = document.getElementById('statusLine');
+    const publishBtn = document.getElementById('publishBtn');
+    const clearBtn = document.getElementById('clearBtn');
+    const liveFeedBtn = document.getElementById('liveFeedBtn');
+    const homeBtn = document.getElementById('homeBtn');
+    const settingsBtn = document.getElementById('settingsBtn');
+    const settingsDockBtn = document.getElementById('settingsDockBtn');
+    const settingsSheet = document.getElementById('settingsSheet');
+    const closeSettingsBtn = document.getElementById('closeSettingsBtn');
+    const saveSettingsBtn = document.getElementById('saveSettingsBtn');
+    const settingsStatus = document.getElementById('settingsStatus');
+    const authorNameInput = document.getElementById('authorNameInput');
+    const authorHandleInput = document.getElementById('authorHandleInput');
+    const publishKeyInput = document.getElementById('publishKeyInput');
+
+    const draftState = document.getElementById('draftState');
+    const wordCount = document.getElementById('wordCount');
+    const charCount = document.getElementById('charCount');
+    const tagSelect = document.getElementById('tagSelect');
+
+
+    const publishToast = document.getElementById('publishToast');
+    const toastTitle = document.getElementById('toastTitle');
+    const toastCopy = document.getElementById('toastCopy');
+
+    let activeTag = 'FRAGMENT';
+    let publishToastTimer = null;
+
+    function initialsFor(value) {
+      const parts = String(value || '')
+        .trim()
+        .split(/\s+/)
+        .filter(Boolean)
+        .slice(0, 2);
+
+      if (!parts.length) {
+        return 'OT';
+      }
+
+      return parts.map((part) => part.charAt(0).toUpperCase()).join('');
+    }
+
+    function normalizeHandle(value, fallbackName) {
+      const trimmed = String(value || '').trim();
+      if (!trimmed) {
+        const fallback = String(fallbackName || 'family').trim().toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
+        return `@${fallback || 'family'}`;
+      }
+
+      return trimmed.startsWith('@') ? trimmed : `@${trimmed}`;
+    }
+
+    function formatLongDate(timestamp) {
+      const value = timestamp ? new Date(timestamp) : new Date();
+      return new Intl.DateTimeFormat('en-US', {
+        month: 'long',
+        day: 'numeric',
+        year: 'numeric'
+      }).format(value).toUpperCase();
+    }
+
+    function getNowIso() {
+      return new Date().toISOString();
+    }
+
+    function getProfile() {
+      const raw = window.localStorage.getItem(PROFILE_KEY);
+      if (!raw) {
+        return {
+          author: 'The_RyanDavid',
+          author_handle: '@outsidetheworld',
+          publish_key: ''
+        };
+      }
+
+      try {
+        const parsed = JSON.parse(raw);
+        const author = String(parsed.author || '').trim() || 'The_RyanDavid';
+        const author_handle = normalizeHandle(parsed.author_handle, author);
+        const publish_key = String(parsed.publish_key || '').trim();
+        return { author, author_handle, publish_key };
+      } catch (error) {
+        return {
+          author: 'The_RyanDavid',
+          author_handle: '@outsidetheworld',
+          publish_key: ''
+        };
+      }
+    }
+
+    function saveProfile(profile) {
+      window.localStorage.setItem(PROFILE_KEY, JSON.stringify(profile));
+    }
+
+    function getDraft() {
+      const raw = window.localStorage.getItem(DRAFT_KEY);
+      if (!raw) {
+        return null;
+      }
+
+      try {
+        return JSON.parse(raw);
+      } catch (error) {
+        return null;
+      }
+    }
+
+    function saveDraft() {
+      window.localStorage.setItem(DRAFT_KEY, JSON.stringify({
+        body: fragmentBody.value,
+        tag: activeTag
+      }));
+    }
+
+    function clearDraftStorage() {
+      window.localStorage.removeItem(DRAFT_KEY);
+    }
+
+    function updateProfilePresentation() {
+      const profile = getProfile();
+      settingsStatus.textContent = profile.publish_key
+        ? 'A publish key is saved on this device.'
+        : 'No publish key is saved on this device yet.';
+    }
+
+    function selectTag(tag) {
+      activeTag = tag;
+      tagSelect.value = tag;
+      updatePreview();
+      saveDraft();
+    }
+
+    function updatePreview() {
+      const body = fragmentBody.value.trim();
+      const words = body ? body.split(/\s+/).filter(Boolean).length : 0;
+      const chars = fragmentBody.value.length;
+      const hasDraft = Boolean(body);
+
+      wordCount.textContent = `${words} words`;
+      charCount.textContent = `${chars} chars`;
+      draftState.textContent = hasDraft ? 'Local draft saved.' : 'No local fragment draft yet.';
+    }
+
+    function clearDraft() {
+      fragmentBody.value = '';
+      selectTag('FRAGMENT');
+      clearDraftStorage();
+      updatePreview();
+      statusLine.textContent = 'Draft cleared on this device.';
+    }
+
+    function showToast(title, copy) {
+      if (publishToastTimer) {
+        window.clearTimeout(publishToastTimer);
+      }
+
+      toastTitle.textContent = title;
+      toastCopy.textContent = copy;
+      publishToast.classList.add('show');
+      publishToastTimer = window.setTimeout(() => {
+        publishToast.classList.remove('show');
+      }, 3600);
+    }
+
+    function celebratePublish() {
+      publishBtn.classList.add('is-success');
+      publishBtn.textContent = 'Shared';
+      window.setTimeout(() => {
+        publishBtn.classList.remove('is-success');
+        publishBtn.textContent = 'Share to frgm<nts';
+      }, 1400);
+    }
+
+    function openSettings() {
+      const profile = getProfile();
+      authorNameInput.value = profile.author;
+      authorHandleInput.value = profile.author_handle;
+      publishKeyInput.value = profile.publish_key;
+      settingsSheet.classList.add('is-open');
+      settingsSheet.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeSettings() {
+      settingsSheet.classList.remove('is-open');
+      settingsSheet.setAttribute('aria-hidden', 'true');
+    }
+
+    function persistSettings() {
+      const author = String(authorNameInput.value || '').trim() || 'OTW Family';
+      const author_handle = normalizeHandle(authorHandleInput.value, author);
+      const publish_key = String(publishKeyInput.value || '').trim();
+      saveProfile({ author, author_handle, publish_key });
+      updateProfilePresentation();
+      statusLine.textContent = 'Settings saved on this device.';
+      closeSettings();
+    }
+
+    async function publishFragment() {
+      const body = fragmentBody.value.trim();
+      const profile = getProfile();
+
+      if (!body) {
+        statusLine.textContent = 'Write the fragment first.';
+        return;
+      }
+
+      if (!profile.publish_key) {
+        statusLine.textContent = 'A publish key is needed before this device can share live.';
+        openSettings();
+        return;
+      }
+
+      statusLine.textContent = 'Sending the fragment into the shared family feed...';
+
+      try {
+        const response = await fetch(PUBLISH_ENDPOINT, {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json',
+            'x-publish-key': profile.publish_key
+          },
+          body: JSON.stringify({
+            timestamp: getNowIso(),
+            text: body,
+            tag: activeTag,
+            author: profile.author,
+            author_handle: profile.author_handle
+          })
+        });
+
+        const payload = await response.json().catch(() => ({}));
+        if (!response.ok || !payload.ok) {
+          throw new Error(payload.error || `Publish failed with status ${response.status}`);
+        }
+
+        clearDraftStorage();
+        fragmentBody.value = '';
+        selectTag('FRAGMENT');
+        updatePreview();
+        statusLine.textContent = 'Fragment published successfully. It should appear in the live family feed shortly.';
+        celebratePublish();
+        showToast('Fragment published', 'Your fragment is on its way to the shared family feed.');
+      } catch (error) {
+        statusLine.textContent = error.message || 'Publish failed.';
+      }
+    }
+
+    function restoreState() {
+      updateProfilePresentation();
+
+      const draft = getDraft();
+      if (draft) {
+        fragmentBody.value = draft.body || '';
+        if (draft.tag) {
+          activeTag = String(draft.tag);
+        }
+        selectTag(activeTag);
+        statusLine.textContent = 'The last fragment draft was restored from this device.';
+        showToast('Draft restored', 'The last fragment draft is back and ready for you.');
+      } else {
+        updatePreview();
+      }
+    }
+
+    function openFeedWithReturnHint() {
+      window.open('fragments.html', '_blank', 'noopener');
+      showToast('Live feed opened', 'It opened in a new tab. Close that tab anytime to come straight back to the app.');
+    }
+
+    settingsBtn.addEventListener('click', openSettings);
+    settingsDockBtn.addEventListener('click', openSettings);
+    closeSettingsBtn.addEventListener('click', closeSettings);
+    saveSettingsBtn.addEventListener('click', persistSettings);
+
+    settingsSheet.addEventListener('click', (event) => {
+      if (event.target === settingsSheet) {
+        closeSettings();
+      }
+    });
+
+    homeBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    liveFeedBtn.addEventListener('click', openFeedWithReturnHint);
+    publishBtn.addEventListener('click', publishFragment);
+    clearBtn.addEventListener('click', clearDraft);
+
+    tagSelect.addEventListener('change', () => selectTag(tagSelect.value || 'FRAGMENT'));
+
+    fragmentBody.addEventListener('input', () => {
+      updatePreview();
+      saveDraft();
+    });
+
+    restoreState();
+  </script>
+</body>
+</html>

@@ -298,7 +298,8 @@
     .status-card {
       width: 100%;
       max-width: 720px;
-      padding: 20px 18px 18px;
+      margin-top: 10px;
+      padding: 16px 18px;
       border-radius: 28px;
       border: 1px solid rgba(75, 227, 110, 0.18);
       background:
@@ -319,170 +320,75 @@
       box-shadow: 0 18px 40px rgba(27, 54, 93, 0.1), 0 0 24px rgba(75, 227, 110, 0.06);
     }
 
-    .status-card-head {
+    .status-pill {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 16px;
-    }
-
-    .status-card-title {
-      margin: 0;
-      color: #dfffe7;
-      font-size: clamp(1.5rem, 3.8vw, 2rem);
-      font-weight: 700;
-      letter-spacing: -0.04em;
-    }
-
-    body[data-theme="light"] .status-card-title {
-      color: #1f5c31;
-    }
-
-    .status-card-mark {
-      color: rgba(223, 255, 231, 0.78);
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 0.68rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-    }
-
-    body[data-theme="light"] .status-card-mark {
-      color: rgba(31, 92, 49, 0.76);
-    }
-
-    .status-track {
-      position: relative;
-      display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 8px;
-      padding: 18px 16px;
-      margin-bottom: 18px;
-      border-radius: 24px;
-      border: 1px solid rgba(75, 227, 110, 0.1);
-      background:
-        linear-gradient(90deg, rgba(75, 227, 110, 0.22), rgba(39, 125, 61, 0.2)),
-        rgba(21, 52, 28, 0.46);
-    }
-
-    .status-track::before,
-    .status-track::after {
-      content: "";
-      position: absolute;
-      left: 14px;
-      right: 14px;
-      height: 5px;
+      gap: 12px;
+      min-height: 60px;
+      padding: 12px 16px;
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.12);
-      pointer-events: none;
-    }
-
-    .status-track::before {
-      top: 10px;
-    }
-
-    .status-track::after {
-      bottom: 10px;
-    }
-
-    body[data-theme="light"] .status-track {
+      border: 1px solid rgba(75, 227, 110, 0.16);
       background:
-        linear-gradient(90deg, rgba(75, 227, 110, 0.18), rgba(39, 125, 61, 0.14)),
-        rgba(201, 242, 210, 0.7);
+        linear-gradient(135deg, rgba(75, 227, 110, 0.18), rgba(35, 71, 42, 0.36)),
+        rgba(8, 18, 11, 0.72);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.06),
+        0 14px 34px rgba(0, 0, 0, 0.22),
+        0 0 24px rgba(75, 227, 110, 0.08);
     }
 
-    .status-node {
-      position: relative;
-      z-index: 1;
-      display: grid;
-      justify-items: center;
-      gap: 10px;
+    body[data-theme="light"] .status-pill {
+      background:
+        linear-gradient(135deg, rgba(75, 227, 110, 0.16), rgba(210, 244, 220, 0.68)),
+        rgba(246, 250, 246, 0.9);
+      border-color: rgba(75, 227, 110, 0.14);
+      box-shadow: 0 14px 30px rgba(27, 54, 93, 0.08), 0 0 18px rgba(75, 227, 110, 0.06);
     }
 
-    .status-node-dot {
-      width: 44px;
-      height: 44px;
+    .status-state-icon {
+      width: 36px;
+      height: 36px;
       border-radius: 999px;
       display: grid;
       place-items: center;
       color: #071108;
       background: var(--signal-green);
       box-shadow:
-        0 0 0 8px rgba(75, 227, 110, 0.08),
-        0 0 24px rgba(75, 227, 110, 0.28);
-      animation: signalPulse 3.6s ease-in-out infinite;
+        0 0 0 6px rgba(75, 227, 110, 0.08),
+        0 0 24px rgba(75, 227, 110, 0.2);
+      flex-shrink: 0;
     }
 
-    .status-node:nth-child(2) .status-node-dot {
-      animation-delay: 0.28s;
-    }
-
-    .status-node:nth-child(3) .status-node-dot {
-      animation-delay: 0.56s;
-    }
-
-    .status-node:nth-child(4) .status-node-dot {
-      animation-delay: 0.84s;
-    }
-
-    .status-node:nth-child(5) .status-node-dot {
-      animation-delay: 1.12s;
-    }
-
-    .status-node-dot svg {
-      width: 22px;
-      height: 22px;
+    .status-state-icon svg {
+      width: 18px;
+      height: 18px;
       display: block;
     }
 
-    .status-metrics {
-      display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 10px;
-      align-items: start;
-      margin-bottom: 14px;
+    .status-state-icon.is-caution {
+      background: #f0c44c;
+      box-shadow:
+        0 0 0 6px rgba(240, 196, 76, 0.12),
+        0 0 24px rgba(240, 196, 76, 0.18);
     }
 
-    .status-metric {
-      display: grid;
-      gap: 6px;
-      justify-items: center;
-      text-align: center;
+    .status-state-icon.is-halt {
+      background: #de6673;
+      box-shadow:
+        0 0 0 6px rgba(222, 102, 115, 0.12),
+        0 0 24px rgba(222, 102, 115, 0.18);
     }
 
-    .status-metric-label {
-      color: var(--text-faint);
+    .status-pill-text {
+      margin: 0;
+      color: #dfffe7;
       font-family: "IBM Plex Mono", monospace;
-      font-size: 0.66rem;
-      letter-spacing: 0.14em;
+      font-size: clamp(0.94rem, 2.5vw, 1.05rem);
+      letter-spacing: 0.12em;
       text-transform: uppercase;
     }
 
-    .status-metric-value {
-      color: #f0fff3;
-      font-size: 0.92rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      line-height: 1.15;
-    }
-
-    body[data-theme="light"] .status-metric-value {
-      color: #1f5c31;
-    }
-
-    .status-card-copy {
-      margin: 0;
-      color: var(--text-soft);
-      font-size: 1.06rem;
-      line-height: 1.6;
-    }
-
-    .status-card-copy strong {
-      color: #dfffe7;
-      font-weight: 600;
-    }
-
-    body[data-theme="light"] .status-card-copy strong {
+    body[data-theme="light"] .status-pill-text {
       color: #1f5c31;
     }
 
@@ -1856,31 +1762,29 @@
       }
 
       .status-card {
+        margin-top: 14px;
         padding: 18px 14px 16px;
       }
 
-      .status-track,
-      .status-metrics {
-        grid-template-columns: repeat(5, minmax(0, 1fr));
-        gap: 6px;
+      .status-pill {
+        min-height: 54px;
+        padding: 10px 14px;
+        gap: 10px;
       }
 
-      .status-node-dot {
-        width: 38px;
-        height: 38px;
+      .status-state-icon {
+        width: 32px;
+        height: 32px;
       }
 
-      .status-node-dot svg {
-        width: 19px;
-        height: 19px;
+      .status-state-icon svg {
+        width: 16px;
+        height: 16px;
       }
 
-      .status-metric-value {
-        font-size: 0.78rem;
-      }
-
-      .status-card-copy {
-        font-size: 0.94rem;
+      .status-pill-text {
+        font-size: 0.84rem;
+        letter-spacing: 0.1em;
       }
 
       .bot-hero {
@@ -2009,83 +1913,21 @@
         </button>
       </div>
       <section class="status-card" aria-labelledby="systemStatusTitle">
-        <div class="status-card-head">
-          <h2 class="status-card-title" id="systemStatusTitle">System Status</h2>
-          <span class="status-card-mark">Live Channels</span>
+        <div class="status-pill">
+          <span class="status-state-icon is-go" id="systemStatusIcon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 12.5l4 4L18 8.5"></path>
+            </svg>
+          </span>
+          <p class="status-pill-text" id="systemStatusTitle">System Status: GO</p>
         </div>
-        <div class="status-track" aria-hidden="true">
-          <div class="status-node">
-            <div class="status-node-dot">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M3 12h4l2-4 4 8 2-4h6"></path>
-              </svg>
-            </div>
-          </div>
-          <div class="status-node">
-            <div class="status-node-dot">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 5v14"></path>
-                <path d="M5 12h14"></path>
-              </svg>
-            </div>
-          </div>
-          <div class="status-node">
-            <div class="status-node-dot">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="5.5"></circle>
-                <path d="M12 9.2v5.6"></path>
-              </svg>
-            </div>
-          </div>
-          <div class="status-node">
-            <div class="status-node-dot">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M6 17h12"></path>
-                <path d="M8 13h8"></path>
-                <path d="M10 9h4"></path>
-              </svg>
-            </div>
-          </div>
-          <div class="status-node">
-            <div class="status-node-dot">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M7 12l3 3 7-7"></path>
-              </svg>
-            </div>
-          </div>
-        </div>
-        <div class="status-metrics">
-          <div class="status-metric">
-            <div class="status-metric-label">Uplink</div>
-            <div class="status-metric-value" id="statusUplink">Ready</div>
-          </div>
-          <div class="status-metric">
-            <div class="status-metric-label">Fragments</div>
-            <div class="status-metric-value" id="statusFragments">Clear</div>
-          </div>
-          <div class="status-metric">
-            <div class="status-metric-label">Change_Log</div>
-            <div class="status-metric-value" id="statusChangelog">Clear</div>
-          </div>
-          <div class="status-metric">
-            <div class="status-metric-label">OTW_Bot</div>
-            <div class="status-metric-value" id="statusBot">Standing By</div>
-          </div>
-          <div class="status-metric">
-            <div class="status-metric-label">Archive</div>
-            <div class="status-metric-value" id="statusArchive">Open</div>
-          </div>
-        </div>
-        <p class="status-card-copy" id="systemStatusCopy">
-          <strong>All primary channels are stable.</strong> Private publishing lane is open whenever you are.
-        </p>
       </section>
     </section>
 
     <section class="workspace" id="fragmentsWorkspace">
     <div class="layout">
       <main class="panel composer">
-        <div class="status-line" id="statusLine">Drafts save locally on this device. Stage a fragment to add it to the outbox and copy JSON for later publishing.</div>
+        <div class="status-line" id="statusLine">Drafts save locally on this device. Publish when it feels ready.</div>
 
         <form class="form-grid" id="publisherForm">
           <div class="compose-row">
@@ -2104,12 +1946,12 @@
               <label for="fragmentTag">Tag</label>
               <select id="fragmentTag" name="fragmentTag">
                 <option value="FRAGMENT">Fragment</option>
-                <option value="COMPLAINT">Complaint</option>
-                <option value="REGRET">Regret</option>
                 <option value="POSITIVITY">Positivity</option>
+                <option value="CHECK_IN">Check-In</option>
+                <option value="REGRET">Regret</option>
                 <option value="SPIRITUAL">Spiritual</option>
                 <option value="RESIDUE">Residue</option>
-                <option value="FIELD_NOTE">Field Note</option>
+                <option value="COMPLAINT">Complaint</option>
               </select>
               <div class="helper">Choose the lane and keep moving.</div>
             </div>
@@ -2117,59 +1959,16 @@
             <div class="field">
               <label for="fragmentTimestamp">Timestamp</label>
               <input id="fragmentTimestamp" name="fragmentTimestamp" type="datetime-local" />
-              <div class="helper">Defaults to now. You can adjust before staging.</div>
+              <div class="helper">Defaults to now. You can adjust before publishing.</div>
             </div>
           </div>
 
           <div class="action-row">
             <button class="primary-btn" id="publishBtn" type="button">Publish Now</button>
-            <button class="secondary-btn" id="stageBtn" type="submit">Stage Fragment</button>
-            <button class="secondary-btn" id="copyBtn" type="button">Copy Latest JSON</button>
-            <button class="secondary-btn" id="downloadBtn" type="button">Download Outbox</button>
             <button class="secondary-btn" id="clearDraftBtn" type="button">Clear Draft</button>
           </div>
         </form>
       </main>
-
-      <aside class="side-stack">
-        <section class="panel preview-panel">
-          <h2 class="section-title">Live Preview</h2>
-          <article class="fragment-card">
-            <div class="fragment-head">
-              <div class="fragment-identity">
-                <img class="fragment-avatar" src="Images/Profile.jpg" alt="The_RyanDavid" />
-                <div class="fragment-id">
-                  <div class="fragment-title">
-                    <div class="fragment-title-top">
-                      <div class="fragment-name">The_RyanDavid</div>
-                      <svg class="verified-badge" viewBox="0 0 24 24" aria-label="Verified">
-                        <path fill="#9B59B6" d="M12 1.8l2.76 1.58 3.16-.23 1.58 2.76 2.76 1.58-.23 3.16L23 12l-1.97 2.55.23 3.16-2.76 1.58-1.58 2.76-3.16-.23L12 22.2l-2.76-1.58-3.16.23-1.58-2.76-2.76-1.58.23-3.16L1 12l1.97-2.55-.23-3.16 2.76-1.58 1.58-2.76 3.16.23L12 1.8z"></path>
-                        <path fill="#F5F7FB" d="M10.55 15.62l-2.6-2.6 1.2-1.2 1.4 1.4 4.26-4.26 1.2 1.2z"></path>
-                      </svg>
-                    </div>
-                    <div class="fragment-handle">@outsidetheworld</div>
-                  </div>
-                  <div class="fragment-tag" id="previewTag">FRAGMENT</div>
-                </div>
-              </div>
-              <div class="fragment-time" id="previewTime">Now</div>
-            </div>
-            <p class="fragment-body" id="previewBody">Your fragment preview will appear here.</p>
-            <div class="fragment-foot">
-              <span>Fragment</span>
-              <span class="dot" aria-hidden="true"></span>
-              <span>Outside The World</span>
-            </div>
-          </article>
-        </section>
-
-        <section class="panel outbox-panel">
-          <h2 class="section-title">Outbox</h2>
-          <p class="helper" style="margin: 0 0 12px;">Staged fragments remain on this device until you copy or export them.</p>
-          <p class="helper" style="margin: 0 0 16px;">On your Mac, import the downloaded JSON with <code>python3 tools/import_fragments_outbox.py ~/Downloads/fragments-outbox-YYYY-MM-DD.json</code>.</p>
-          <div class="outbox-list" id="outboxList"></div>
-        </section>
-      </aside>
     </div>
     </section>
 
@@ -2503,7 +2302,6 @@
 
   <script>
     const DRAFT_KEY = 'otwFragmentsPublisherDraft';
-    const OUTBOX_KEY = 'otwFragmentsPublisherOutbox';
     const CHANGELOG_DRAFT_KEY = 'otwChangelogPublisherDraft';
     const CHANGELOG_OUTBOX_KEY = 'otwChangelogPublisherOutbox';
     const GHOST_DRAFT_KEY = 'otwGhostWriterLiteDraft';
@@ -2524,10 +2322,6 @@
     const publishKeyStatus = document.getElementById('publishKeyStatus');
     const charCount = document.getElementById('charCount');
     const statusLine = document.getElementById('statusLine');
-    const previewBody = document.getElementById('previewBody');
-    const previewTag = document.getElementById('previewTag');
-    const previewTime = document.getElementById('previewTime');
-    const outboxList = document.getElementById('outboxList');
     const themeToggle = document.getElementById('themeToggle');
     const publisherLogo = document.getElementById('publisherLogo');
     const menuToggle = document.getElementById('menuToggle');
@@ -2559,12 +2353,8 @@
     const dockGithubBtn = document.getElementById('dockGithubBtn');
     const dockCloudflareBtn = document.getElementById('dockCloudflareBtn');
     const dockSettingsBtn = document.getElementById('dockSettingsBtn');
-    const statusUplink = document.getElementById('statusUplink');
-    const statusFragments = document.getElementById('statusFragments');
-    const statusChangelog = document.getElementById('statusChangelog');
-    const statusBot = document.getElementById('statusBot');
-    const statusArchive = document.getElementById('statusArchive');
-    const systemStatusCopy = document.getElementById('systemStatusCopy');
+    const systemStatusIcon = document.getElementById('systemStatusIcon');
+    const systemStatusTitle = document.getElementById('systemStatusTitle');
     const changelogDateInput = document.getElementById('changelogDate');
     const changelogTypeInput = document.getElementById('changelogType');
     const changelogTextInput = document.getElementById('changelogText');
@@ -2699,18 +2489,6 @@
       return slug || 'untitled-draft';
     }
 
-    function readOutbox() {
-      try {
-        return JSON.parse(window.localStorage.getItem(OUTBOX_KEY) || '[]');
-      } catch {
-        return [];
-      }
-    }
-
-    function writeOutbox(items) {
-      window.localStorage.setItem(OUTBOX_KEY, JSON.stringify(items));
-    }
-
     function writeDraft() {
       const draft = {
         text: textInput.value,
@@ -2791,42 +2569,38 @@
       const hasPublishKey = Boolean(getPublishKey() || publishKeyInput.value.trim());
       const fragmentsDraft = textInput.value.trim();
       const changelogDraft = changelogTextInput.value.trim();
-      const fragmentOutboxCount = readOutbox().length;
       const changelogOutboxCount = readChangelogOutbox().length;
-
-      statusUplink.textContent = hasPublishKey ? 'Green' : 'Key Needed';
-
-      if (fragmentOutboxCount > 0) {
-        statusFragments.textContent = `${fragmentOutboxCount} Staged`;
-      } else if (fragmentsDraft) {
-        statusFragments.textContent = 'Draft Held';
-      } else {
-        statusFragments.textContent = 'Clear';
-      }
-
-      if (changelogOutboxCount > 0) {
-        statusChangelog.textContent = `${changelogOutboxCount} Staged`;
-      } else if (changelogDraft) {
-        statusChangelog.textContent = 'Draft Held';
-      } else {
-        statusChangelog.textContent = 'Clear';
-      }
-
-      statusBot.textContent = hasPublishKey ? 'Armed' : 'Waiting';
-      statusArchive.textContent = loadedChangelog.length ? 'Open' : 'Syncing';
-
-      let summary = '<strong>All primary channels are stable.</strong> Private publishing lane is open whenever you are.';
+      let state = 'GO';
+      let iconClass = 'status-state-icon is-go';
+      let iconMarkup = `
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 12.5l4 4L18 8.5"></path>
+        </svg>
+      `;
 
       if (!hasPublishKey) {
-        summary = '<strong>Secure uplink is waiting on your publish key.</strong> Save it on this device and every lane is ready.';
-      } else if (fragmentOutboxCount > 0 || changelogOutboxCount > 0) {
-        const totalItems = fragmentOutboxCount + changelogOutboxCount;
-        summary = `<strong>Staged entries are standing by.</strong> ${totalItems} item${totalItems === 1 ? '' : 's'} waiting in local outboxes.`;
-      } else if (fragmentsDraft || changelogDraft) {
-        summary = '<strong>Draft signal detected on this device.</strong> You can publish now, or leave it resting here for later.';
+        state = 'HALT';
+        iconClass = 'status-state-icon is-halt';
+        iconMarkup = `
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9.2 9a3.1 3.1 0 1 1 5.45 2.03c-.78.77-1.55 1.28-1.55 2.47"></path>
+            <path d="M12 17.2h.01"></path>
+          </svg>
+        `;
+      } else if (changelogOutboxCount > 0 || fragmentsDraft || changelogDraft || !loadedChangelog.length) {
+        state = 'CAUTION';
+        iconClass = 'status-state-icon is-caution';
+        iconMarkup = `
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 7.2v6.2"></path>
+            <path d="M12 17.3h.01"></path>
+          </svg>
+        `;
       }
 
-      systemStatusCopy.innerHTML = summary;
+      systemStatusIcon.className = iconClass;
+      systemStatusIcon.innerHTML = iconMarkup;
+      systemStatusTitle.textContent = `System Status: ${state}`;
     }
 
     function showPublishToast(title, copy) {
@@ -2916,13 +2690,6 @@
     }
 
     function updatePreview() {
-      const text = textInput.value.trim();
-      const tag = (tagInput.value || 'FRAGMENT').trim() || 'FRAGMENT';
-      const timestamp = timestampInput.value ? toIsoWithLocalOffset(timestampInput.value) : new Date().toISOString();
-
-      previewBody.textContent = text || 'Your fragment preview will appear here.';
-      previewTag.textContent = tag.toUpperCase();
-      previewTime.textContent = formatTimestamp(timestamp);
       charCount.textContent = `${textInput.value.length} characters`;
     }
 
@@ -2958,31 +2725,6 @@
         writeDraft();
         updatePreview();
       }
-    }
-
-    function setPreviewFromEntry(entry) {
-      previewBody.textContent = entry.text || 'Your fragment preview will appear here.';
-      previewTag.textContent = (entry.tag || 'FRAGMENT').toUpperCase();
-      previewTime.textContent = formatTimestamp(entry.timestamp);
-      charCount.textContent = `${textInput.value.length} characters`;
-    }
-
-    function renderOutbox() {
-      const items = readOutbox();
-      if (!items.length) {
-        outboxList.innerHTML = '<p class="outbox-empty">No staged fragments yet. Stage one here and it will wait in your outbox.</p>';
-        return;
-      }
-
-      outboxList.innerHTML = items.map((item, index) => `
-        <article class="outbox-item">
-          <div class="outbox-item-head">
-            <div class="outbox-item-title">${escapeHtml((item.tag || 'FRAGMENT').toUpperCase())}</div>
-            <div class="helper">${escapeHtml(formatTimestamp(item.timestamp))}</div>
-          </div>
-          <p class="outbox-item-copy">${escapeHtml(item.text || '')}</p>
-        </article>
-      `).join('');
     }
 
     function buildChangelogEntry() {
@@ -3215,37 +2957,6 @@
       refreshSystemStatus();
     }
 
-    function stageFragment(event) {
-      event.preventDefault();
-      let entry;
-      try {
-        entry = buildEntryFromForm();
-      } catch (error) {
-        statusLine.textContent = error.message || 'Could not stage fragment.';
-        return;
-      }
-
-      const outbox = readOutbox();
-      outbox.unshift(entry);
-      writeOutbox(outbox);
-      clearDraftStorage();
-
-      textInput.value = '';
-      tagInput.value = 'FRAGMENT';
-      setFragmentTimestampToNow();
-      setPreviewFromEntry(entry);
-      charCount.textContent = '0 characters';
-      renderOutbox();
-      refreshSystemStatus();
-
-      const json = JSON.stringify(entry, null, 2);
-      navigator.clipboard.writeText(json).then(() => {
-        statusLine.textContent = 'Fragment staged. JSON copied to clipboard and saved in the outbox on this device.';
-      }).catch(() => {
-        statusLine.textContent = 'Fragment staged. Clipboard copy failed, but the outbox item was saved locally.';
-      });
-    }
-
     function stageChangelogEntry(event) {
       event.preventDefault();
       let entry;
@@ -3370,7 +3081,6 @@
         textInput.value = '';
         tagInput.value = 'FRAGMENT';
         setFragmentTimestampToNow();
-        setPreviewFromEntry(entry);
         charCount.textContent = '0 characters';
         statusLine.textContent = 'Fragment published successfully. The live feed should update shortly.';
         celebratePublish();
@@ -3438,38 +3148,6 @@
         botDeployBtn.disabled = false;
         botDeployBtn.textContent = 'Deploy Quip';
       }
-    }
-
-    function copyLatestJson() {
-      const outbox = readOutbox();
-      if (!outbox.length) {
-        statusLine.textContent = 'Nothing in the outbox yet. Stage a fragment first.';
-        return;
-      }
-
-      navigator.clipboard.writeText(JSON.stringify(outbox[0], null, 2)).then(() => {
-        statusLine.textContent = 'Latest staged fragment copied as JSON.';
-      }).catch(() => {
-        statusLine.textContent = 'Clipboard copy failed on this device.';
-      });
-    }
-
-    function downloadOutbox() {
-      const outbox = readOutbox();
-      if (!outbox.length) {
-        statusLine.textContent = 'Nothing to export yet. Stage a fragment first.';
-        return;
-      }
-
-      const blob = new Blob([JSON.stringify(outbox, null, 2)], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = `fragments-outbox-${new Date().toISOString().slice(0, 10)}.json`;
-      link.click();
-      URL.revokeObjectURL(url);
-      statusLine.textContent = 'Outbox exported as JSON.';
-      refreshSystemStatus();
     }
 
     function clearDraft() {
@@ -3806,12 +3484,9 @@
       });
     }
 
-    document.getElementById('publisherForm').addEventListener('submit', stageFragment);
     document.getElementById('changelogForm').addEventListener('submit', stageChangelogEntry);
     document.getElementById('publishBtn').addEventListener('click', publishFragment);
     document.getElementById('changelogPublishBtn').addEventListener('click', publishChangelogEntry);
-    document.getElementById('copyBtn').addEventListener('click', copyLatestJson);
-    document.getElementById('downloadBtn').addEventListener('click', downloadOutbox);
     document.getElementById('clearDraftBtn').addEventListener('click', clearDraft);
     document.getElementById('changelogCopyBtn').addEventListener('click', copyLatestChangelogJson);
     document.getElementById('changelogDownloadBtn').addEventListener('click', downloadChangelogOutbox);
@@ -4016,7 +3691,6 @@
     updateChangelogPreview();
     updateIotdPreview();
     updateGhostPreview();
-    renderOutbox();
     renderChangelogOutbox();
     loadRecentChangelog();
     setWorkspace('home');
