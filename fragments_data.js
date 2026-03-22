@@ -1,5 +1,13 @@
 window.otw_fragments = [
   {
+    "timestamp": "2026-03-22T22:29:00.000Z",
+    "text": "Just wrote a dilly of a whopper. To be published later. \n\nWhy am I so weird?",
+    "tag": "CHECK_IN",
+    "author_id": "ryan",
+    "author": "The_RyanDavid",
+    "author_handle": "@outsidetheworld"
+  },
+  {
     "timestamp": "2026-03-22T15:37:12.526Z",
     "text": "Happy Sunday. I’m counting the days till Easter. I’ve lost a lot of close people to me in my life.  The meaning of Easter, celebrating Jesus Christ’s victory over death and resurrection has always filled me with incomprehensible hope. It’s exciting to know that I will see my people again in their perfect, physical, resurrected bodies.",
     "tag": "POSITIVITY",
