@@ -910,6 +910,7 @@
 
     let activeTag = 'FRAGMENT';
     let publishToastTimer = null;
+    let isPublishing = false;
 
     function initialsFor(value) {
       const parts = String(value || '')
@@ -1110,6 +1111,13 @@
       }, 1400);
     }
 
+    function setPublishingState(nextState) {
+      isPublishing = nextState;
+      publishBtn.disabled = nextState;
+      clearBtn.disabled = nextState;
+      publishBtn.textContent = nextState ? 'Sharing...' : 'Share to frgm<nts';
+    }
+
     async function refreshIdentityFromStoredKey() {
       const publishKey = getStoredPublishKey();
       if (!publishKey) {
@@ -1177,6 +1185,10 @@
       const body = fragmentBody.value.trim();
       const publishKey = getStoredPublishKey();
 
+      if (isPublishing) {
+        return;
+      }
+
       if (!body) {
         statusLine.textContent = 'Write the fragment first.';
         return;
@@ -1189,6 +1201,7 @@
       }
 
       statusLine.textContent = 'Sending the fragment into the shared family feed...';
+      setPublishingState(true);
 
       try {
         const response = await fetch(PUBLISH_ENDPOINT, {
@@ -1224,6 +1237,8 @@
         showToast('Fragment published', 'Your fragment is on its way to the shared family feed.');
       } catch (error) {
         statusLine.textContent = error.message || 'Publish failed.';
+      } finally {
+        setPublishingState(false);
       }
     }
 
