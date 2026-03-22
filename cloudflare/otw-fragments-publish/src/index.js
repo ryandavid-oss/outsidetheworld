@@ -157,10 +157,6 @@ function normalizeFragmentsUser(entry) {
     throw new Error(`Fragments user ${id} is missing handle`);
   }
 
-  if (!avatar) {
-    throw new Error(`Fragments user ${id} is missing avatar`);
-  }
-
   return {
     id,
     name,
