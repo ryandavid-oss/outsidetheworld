@@ -288,6 +288,70 @@
             border-color: var(--brand-teal);
         }
 
+        .entry-reactions-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-top: 34px;
+            padding-top: 18px;
+            border-top: 1px solid rgba(145, 175, 179, 0.12);
+            font-family: 'Fira Code';
+            font-size: 0.62rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(224, 230, 237, 0.56);
+        }
+
+        .entry-reactions-meta {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            min-width: 0;
+        }
+
+        .entry-reactions {
+            min-height: 24px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: flex-end;
+            margin-left: auto;
+        }
+
+        .entry-reactions .WebReactionz {
+            display: inline-flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 10px;
+            margin: 0;
+            width: auto;
+            flex-direction: row;
+        }
+
+        .entry-reactions .WebReactionz.minimal {
+            flex-direction: row;
+            padding: 0;
+        }
+
+        .entry-reactions .WebReactionz .emojis {
+            gap: 10px;
+            margin: 0;
+        }
+
+        .entry-reactions .WebReactionz .emoji {
+            filter: saturate(0.92);
+            opacity: 0.92;
+        }
+
+        .entry-reactions .WebReactionz .branding {
+            width: 15px;
+            margin-top: 0;
+            margin-left: 8px;
+            display: block;
+            flex: 0 0 auto;
+        }
+
         .back-nav {
             position: fixed;
             top: 30px;
@@ -332,11 +396,11 @@
                 min-height: 60vh;
             }
 
-        .glass-card {
-            padding: 50px 25px;
-            border: none;
-            background: rgba(0, 0, 0, 0.85);
-        }
+            .glass-card {
+                padding: 50px 25px;
+                border: none;
+                background: rgba(0, 0, 0, 0.85);
+            }
 
         .entry-body .otw-center {
             text-align: center;
@@ -363,6 +427,54 @@
             .entry-toolbar {
                 margin-bottom: 34px;
                 gap: 12px;
+            }
+
+            .entry-reactions-row {
+                align-items: center;
+                justify-content: space-between;
+                gap: 12px;
+                flex-wrap: nowrap;
+                font-size: 0.58rem;
+                letter-spacing: 2px;
+            }
+
+            .entry-reactions-meta {
+                flex-wrap: nowrap;
+            }
+
+            .entry-reactions {
+                width: auto;
+                justify-content: flex-end;
+                margin-left: auto;
+                flex: 0 0 auto;
+            }
+
+            .entry-reactions .WebReactionz {
+                justify-content: flex-end;
+                text-align: right;
+                flex-wrap: nowrap;
+                white-space: nowrap;
+                margin: 0;
+                width: auto;
+                flex-direction: row;
+            }
+
+            .entry-reactions .WebReactionz.minimal {
+                flex-direction: row;
+                padding: 0;
+            }
+
+            .entry-reactions .WebReactionz .emojis {
+                justify-content: flex-start;
+                flex-wrap: nowrap;
+                white-space: nowrap;
+                margin: 0;
+            }
+
+            .entry-reactions .WebReactionz .branding {
+                width: 14px;
+                margin-top: 0;
+                margin-left: 10px;
             }
 
             .share-controls {
@@ -570,6 +682,7 @@
             const container = document.getElementById('glass-container');
             const post = current_narrative[index];
             if (!post) return;
+            const postId = buildPostId(post);
 
             document.body.style.background = `radial-gradient(circle at top left, rgba(155, 89, 182, 0.1) 0%, var(--bg-dark) 100%)`;
             container.classList.remove('visible');
@@ -585,11 +698,16 @@
                         </div>
                     </div>
                     <div class="entry-body">${marked.parse(post.body)}</div>
+                    <div class="entry-reactions-row">
+                        <div class="entry-reactions-meta">BLOG <span aria-hidden="true">•</span> OTW</div>
+                        <div class="entry-reactions" id="archive-reactions-${postId}"></div>
+                    </div>
                 `;
                 container.classList.add('visible');
                 if (window.innerWidth > 1024) {
                     document.getElementById('scroll-target').scrollTop = 0;
                 }
+                initArchiveReactionWidget(post);
             }, 400);
 
             document.querySelectorAll('.post-item').forEach(el => el.classList.remove('active'));
@@ -597,6 +715,38 @@
             if (activeItem) activeItem.classList.add('active');
 
             updateUrlForPost(post, Boolean(options.replaceUrl));
+        }
+
+        function initArchiveReactionWidget(post) {
+            if (!post) {
+                return;
+            }
+
+            const ReactionzCtor =
+                typeof WebReactionz === 'function'
+                    ? WebReactionz
+                    : typeof window.WebReactionz === 'function'
+                        ? window.WebReactionz
+                        : null;
+
+            if (!ReactionzCtor) {
+                window.setTimeout(() => initArchiveReactionWidget(post), 220);
+                return;
+            }
+
+            const postId = buildPostId(post);
+            const selector = `#archive-reactions-${postId}`;
+            const target = document.querySelector(selector);
+            if (!target || target.dataset.reactionsReady === 'true') {
+                return;
+            }
+
+            target.dataset.reactionsReady = 'true';
+            new ReactionzCtor({
+                siteId: '0b926b89-1467-4ef1-a8d4-ca95543047a3',
+                domSelector: selector,
+                pageId: `blog:${postId}`
+            }).init();
         }
 
         window.addEventListener('popstate', () => {
@@ -613,6 +763,7 @@
 
         window.onload = initMatrix;
     </script>
+    <script async defer src="https://cdn.jsdelivr.net/gh/intersect-software/web-reactionz@1/public/setup.min.js" data-siteid="0b926b89-1467-4ef1-a8d4-ca95543047a3" data-noautoinit="1"></script>
 </body>
 
 </html>

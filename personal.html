@@ -576,12 +576,13 @@
 
         .post-meta-date {
             font-family: var(--font-code);
-            font-size: 1rem;
+            font-size: 1.14rem;
             font-weight: 700;
             color: var(--reader-accent);
-            letter-spacing: 3px;
+            letter-spacing: 4px;
             margin-bottom: 15px;
             text-shadow: var(--reader-accent-glow);
+            line-height: 1.2;
         }
 
         .post-title {
@@ -623,6 +624,70 @@
             letter-spacing: 4px;
             color: var(--reader-heading);
             text-shadow: none;
+        }
+
+        .blog-foot {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-top: 30px;
+            padding-top: 18px;
+            border-top: 1px solid rgba(145, 175, 179, 0.12);
+            font-family: var(--font-code);
+            font-size: 0.72rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(224, 230, 237, 0.54);
+        }
+
+        .blog-foot-meta {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            min-width: 0;
+        }
+
+        .blog-reactions {
+            min-height: 24px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: flex-end;
+            margin-left: auto;
+        }
+
+        .blog-reactions .WebReactionz {
+            display: inline-flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 10px;
+            margin: 0;
+            width: auto;
+            flex-direction: row;
+        }
+
+        .blog-reactions .WebReactionz.minimal {
+            flex-direction: row;
+            padding: 0;
+        }
+
+        .blog-reactions .WebReactionz .emojis {
+            gap: 10px;
+            margin: 0;
+        }
+
+        .blog-reactions .WebReactionz .emoji {
+            filter: saturate(0.92);
+            opacity: 0.92;
+        }
+
+        .blog-reactions .WebReactionz .branding {
+            width: 15px;
+            margin-top: 0;
+            margin-left: 8px;
+            display: block;
+            flex: 0 0 auto;
         }
 
         .feed-column #md-render {
@@ -695,6 +760,54 @@
             .post-stats {
                 gap: 16px;
                 margin-bottom: 18px;
+            }
+
+            .blog-foot {
+                align-items: center;
+                justify-content: space-between;
+                gap: 12px;
+                flex-wrap: nowrap;
+                font-size: 0.66rem;
+                letter-spacing: 2px;
+            }
+
+            .blog-foot-meta {
+                flex-wrap: nowrap;
+            }
+
+            .blog-reactions {
+                width: auto;
+                justify-content: flex-end;
+                margin-left: auto;
+                flex: 0 0 auto;
+            }
+
+            .blog-reactions .WebReactionz {
+                justify-content: flex-end;
+                text-align: right;
+                flex-wrap: nowrap;
+                white-space: nowrap;
+                margin: 0;
+                width: auto;
+                flex-direction: row;
+            }
+
+            .blog-reactions .WebReactionz.minimal {
+                flex-direction: row;
+                padding: 0;
+            }
+
+            .blog-reactions .WebReactionz .emojis {
+                justify-content: flex-start;
+                flex-wrap: nowrap;
+                white-space: nowrap;
+                margin: 0;
+            }
+
+            .blog-reactions .WebReactionz .branding {
+                width: 14px;
+                margin-top: 0;
+                margin-left: 10px;
             }
         }
 
@@ -1890,6 +2003,18 @@
                 .join('');
         }
 
+        function slugify(value) {
+            return String(value || '')
+                .toLowerCase()
+                .replace(/&/g, ' and ')
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/^-+|-+$/g, '');
+        }
+
+        function buildBlogPostId(post) {
+            return `${post.date || 'undated'}--${slugify(post.title || 'untitled')}`;
+        }
+
         function getPostMetrics(body) {
             const plainText = String(body || '')
                 .replace(/!\[[^\]]*\]\([^)]+\)/g, ' ')
@@ -1937,6 +2062,40 @@
             }
 
             typeState1();
+        }
+
+        function initBlogReactionWidgets(posts) {
+            if (!Array.isArray(posts) || !posts.length) {
+                return;
+            }
+
+            const ReactionzCtor =
+                typeof WebReactionz === 'function'
+                    ? WebReactionz
+                    : typeof window.WebReactionz === 'function'
+                        ? window.WebReactionz
+                        : null;
+
+            if (!ReactionzCtor) {
+                window.setTimeout(() => initBlogReactionWidgets(posts), 220);
+                return;
+            }
+
+            posts.forEach((post) => {
+                const postId = buildBlogPostId(post);
+                const selector = `#blog-reactions-${postId}`;
+                const target = document.querySelector(selector);
+                if (!target || target.dataset.reactionsReady === 'true') {
+                    return;
+                }
+
+                target.dataset.reactionsReady = 'true';
+                new ReactionzCtor({
+                    siteId: '0b926b89-1467-4ef1-a8d4-ca95543047a3',
+                    domSelector: selector,
+                    pageId: `blog:${postId}`
+                }).init();
+            });
         }
 
         // --- SYSTEM CLOCK PROTOCOL ---
@@ -2028,6 +2187,7 @@
                 const displayFeed = current_narrative.slice(0, postsToShow);
 
                 contentArea.innerHTML = displayFeed.map((post, index) => {
+                    const postId = buildBlogPostId(post);
                     const statsMarkup = index === 0
                         ? (() => {
                             const metrics = getPostMetrics(post.body);
@@ -2052,6 +2212,11 @@
       <div id="md-render">
         ${renderMarkdown(post.body)}
       </div>
+
+      <div class="blog-foot">
+        <div class="blog-foot-meta">BLOG <span aria-hidden="true">•</span> OTW</div>
+        <div class="blog-reactions" id="blog-reactions-${postId}"></div>
+      </div>
     </article>
   `;
                 }).join('');
@@ -2068,6 +2233,7 @@
                 }
 
                 runTypewriterProtocol();
+                initBlogReactionWidgets(displayFeed);
             } else {
                 contentArea.innerHTML = "<div class='timestamp-glitch'>WAITING_FOR_2026_SIGNAL...</div>";
             }
@@ -2304,6 +2470,7 @@
             });
         }
     </script>
+    <script async defer src="https://cdn.jsdelivr.net/gh/intersect-software/web-reactionz@1/public/setup.min.js" data-siteid="0b926b89-1467-4ef1-a8d4-ca95543047a3" data-noautoinit="1"></script>
 </body>
 
 </html>
