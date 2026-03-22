@@ -13,7 +13,8 @@
   <title>frgm&lt;nts | Family App</title>
   <meta name="description" content="A dedicated private OTW fragments app for a small family feed." />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-  <link rel="apple-touch-icon" href="Images/Equal.png" />
+  <link rel="icon" type="image/png" sizes="128x128" href="Images/assets/fragments_icon_128.png" />
+  <link rel="apple-touch-icon" sizes="512x512" href="Images/assets/fragments_icon_512.png" />
   <link rel="manifest" href="frgmnts_publisher.webmanifest" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -199,6 +200,83 @@
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       box-shadow: 0 20px 46px rgba(0, 0, 0, 0.22);
+    }
+
+    .install-card {
+      padding: 18px 18px 16px;
+      display: grid;
+      gap: 12px;
+      border-radius: 28px;
+      border: 1px solid rgba(160, 190, 245, 0.16);
+      background:
+        linear-gradient(180deg, rgba(16, 16, 18, 0.94), rgba(12, 12, 14, 0.88)),
+        radial-gradient(320px 180px at 88% 0%, rgba(99, 149, 238, 0.16), transparent 62%);
+      box-shadow: 0 18px 38px rgba(0, 0, 0, 0.24);
+    }
+
+    .install-card[hidden] {
+      display: none;
+    }
+
+    .install-head {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .install-title {
+      margin: 0;
+      font-family: "IBM Plex Serif", serif;
+      font-size: 1.28rem;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+    }
+
+    .install-copy {
+      margin: 0;
+      color: var(--text-soft);
+      font-size: 0.94rem;
+      line-height: 1.6;
+    }
+
+    .install-steps {
+      margin: 0;
+      padding-left: 1.2rem;
+      color: var(--text-main);
+      display: grid;
+      gap: 8px;
+      line-height: 1.55;
+    }
+
+    .install-dismiss {
+      appearance: none;
+      width: 38px;
+      height: 38px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-main);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      flex: 0 0 auto;
+      transition: 0.22s var(--ease);
+    }
+
+    .install-dismiss:hover,
+    .install-dismiss:focus-visible {
+      border-color: var(--brand-blue);
+      background: rgba(160, 190, 245, 0.08);
+    }
+
+    .install-foot {
+      margin: 0;
+      color: var(--text-faint);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
     }
 
     .compose {
@@ -683,6 +761,28 @@
       </div>
     </header>
 
+    <section class="install-card" id="installCard" hidden aria-label="Add frgmnts to your Home Screen">
+      <div class="install-head">
+        <div>
+          <h2 class="install-title">Add frgm&lt;nts to your Home Screen</h2>
+          <p class="install-copy">On iPhone, this makes it feel much more like a tiny private family app.</p>
+        </div>
+        <button class="install-dismiss" id="installDismissBtn" type="button" aria-label="Dismiss Home Screen tip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M6 6l12 12"></path>
+            <path d="M18 6L6 18"></path>
+          </svg>
+        </button>
+      </div>
+      <ol class="install-steps">
+        <li>Tap <strong>Share</strong> in Safari.</li>
+        <li>Tap <strong>Add to Home Screen</strong>.</li>
+        <li>Turn on <strong>Open as Web App</strong>.</li>
+        <li>Tap <strong>Add</strong>.</li>
+      </ol>
+      <p class="install-foot">iPhone Safari only</p>
+    </section>
+
     <section class="panel compose">
       <div class="field-group">
         <label class="field-label" for="fragmentBody">frgm&lt;nts</label>
@@ -791,9 +891,12 @@
     const DRAFT_KEY = 'familyFragmentsDraft';
     const PUBLISH_KEY_STORAGE = 'familyFragmentsPublishKey';
     const IDENTITY_CACHE_KEY = 'familyFragmentsIdentity';
+    const INSTALL_PROMPT_DISMISSED_KEY = 'familyFragmentsInstallPromptDismissed';
     const PUBLISH_ENDPOINT = 'https://otw-fragments-publish.ryandavid.workers.dev/publish-fragment';
     const PROFILE_ENDPOINT = 'https://otw-fragments-publish.ryandavid.workers.dev/fragments-user-profile';
 
+    const installCard = document.getElementById('installCard');
+    const installDismissBtn = document.getElementById('installDismissBtn');
     const fragmentBody = document.getElementById('fragmentBody');
     const statusLine = document.getElementById('statusLine');
     const publishBtn = document.getElementById('publishBtn');
@@ -938,6 +1041,32 @@
 
     function clearDraftStorage() {
       window.localStorage.removeItem(DRAFT_KEY);
+    }
+
+    function isIosSafari() {
+      const ua = window.navigator.userAgent || '';
+      const isIOS = /iPhone|iPad|iPod/i.test(ua);
+      const isWebKit = /WebKit/i.test(ua);
+      const isOtherBrowser = /CriOS|FxiOS|EdgiOS|OPiOS/i.test(ua);
+      return isIOS && isWebKit && !isOtherBrowser;
+    }
+
+    function isStandaloneDisplay() {
+      return window.navigator.standalone === true || window.matchMedia('(display-mode: standalone)').matches;
+    }
+
+    function shouldShowInstallPrompt() {
+      const dismissed = window.localStorage.getItem(INSTALL_PROMPT_DISMISSED_KEY) === 'true';
+      return isIosSafari() && !isStandaloneDisplay() && !dismissed;
+    }
+
+    function updateInstallPrompt() {
+      installCard.hidden = !shouldShowInstallPrompt();
+    }
+
+    function dismissInstallPrompt() {
+      window.localStorage.setItem(INSTALL_PROMPT_DISMISSED_KEY, 'true');
+      updateInstallPrompt();
     }
 
     function updateProfilePresentation() {
@@ -1119,6 +1248,7 @@
     }
 
     function restoreState() {
+      updateInstallPrompt();
       updateProfilePresentation();
 
       const draft = getDraft();
@@ -1147,6 +1277,7 @@
     settingsBtn.addEventListener('click', openSettings);
     settingsDockBtn.addEventListener('click', openSettings);
     closeSettingsBtn.addEventListener('click', closeSettings);
+    installDismissBtn.addEventListener('click', dismissInstallPrompt);
     saveSettingsBtn.addEventListener('click', persistSettings);
 
     settingsSheet.addEventListener('click', (event) => {
