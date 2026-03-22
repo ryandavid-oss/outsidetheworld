@@ -69,9 +69,9 @@
         radial-gradient(620px 420px at 50% 100%, rgba(217, 192, 140, 0.14), transparent 60%),
         linear-gradient(180deg, #090909 0%, #0d0d0f 100%);
       padding:
-        calc(var(--safe-top) + 12px)
+        calc(var(--safe-top) + 4px)
         calc(var(--safe-right) + 18px)
-        calc(var(--safe-bottom) + 210px)
+        calc(var(--safe-bottom) + 110px)
         calc(var(--safe-left) + 18px);
     }
 
@@ -84,7 +84,7 @@
 
     .topbar {
       position: sticky;
-      top: calc(var(--safe-top) + 2px);
+      top: 0;
       z-index: 30;
       padding: 14px 16px;
       border: 1px solid var(--border);
@@ -300,7 +300,7 @@
 
     .field-textarea {
       width: 100%;
-      min-height: 240px;
+      min-height: 220px;
       resize: vertical;
       border-radius: 26px;
       border: 1px solid var(--border);
@@ -387,21 +387,9 @@
     }
 
     .action-dock {
-      position: fixed;
-      left: max(calc(var(--safe-left) + 18px), 50%);
-      transform: translateX(-50%);
-      bottom: calc(var(--safe-bottom) + 102px);
-      z-index: 35;
-      width: min(calc(100vw - 24px), var(--max-w));
-      padding: 18px;
+      width: 100%;
+      padding: 0;
       border-radius: 30px;
-      border: 1px solid var(--border);
-      background:
-        linear-gradient(180deg, rgba(8, 8, 10, 0.92), rgba(8, 8, 10, 0.74)),
-        radial-gradient(220px 120px at 20% 0%, rgba(155, 89, 182, 0.12), transparent 68%);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.22);
       display: grid;
       gap: 12px;
     }
@@ -454,7 +442,7 @@
       position: fixed;
       left: max(calc(var(--safe-left) + 18px), 50%);
       transform: translateX(-50%);
-      bottom: calc(var(--safe-bottom) + 14px);
+      bottom: max(8px, calc(var(--safe-bottom) + 2px));
       z-index: 34;
       width: min(calc(100vw - 24px), var(--max-w));
       padding: 12px 16px;
@@ -694,7 +682,7 @@
       body {
         padding-left: calc(var(--safe-left) + 12px);
         padding-right: calc(var(--safe-right) + 12px);
-        padding-bottom: calc(var(--safe-bottom) + 196px);
+        padding-bottom: calc(var(--safe-bottom) + 102px);
       }
 
       .topbar {
@@ -711,12 +699,6 @@
 
       .sheet-actions {
         grid-template-columns: 1fr;
-      }
-
-      .action-dock {
-        width: calc(100vw - 24px);
-        bottom: calc(var(--safe-bottom) + 92px);
-        padding: 14px;
       }
 
       .bottom-dock {
@@ -792,7 +774,6 @@
       <div class="stats-line">
         <span id="wordCount">0 words</span>
         <span id="charCount">0 chars</span>
-        <span id="draftState">No local fragment draft yet.</span>
       </div>
 
       <div class="field-group">
@@ -916,7 +897,6 @@
     const identityBadge = document.getElementById('identityBadge');
     const publishKeyInput = document.getElementById('publishKeyInput');
 
-    const draftState = document.getElementById('draftState');
     const wordCount = document.getElementById('wordCount');
     const charCount = document.getElementById('charCount');
     const tagSelect = document.getElementById('tagSelect');
@@ -1093,11 +1073,9 @@
       const body = fragmentBody.value.trim();
       const words = body ? body.split(/\s+/).filter(Boolean).length : 0;
       const chars = fragmentBody.value.length;
-      const hasDraft = Boolean(body);
 
       wordCount.textContent = `${words} words`;
       charCount.textContent = `${chars} chars`;
-      draftState.textContent = hasDraft ? 'Local draft saved.' : 'No local fragment draft yet.';
     }
 
     function clearDraft() {
