@@ -575,6 +575,10 @@
             return `${post.date || 'undated'}--${slugify(post.title || 'untitled')}`;
         }
 
+        function buildArchiveReactionDomId(post) {
+            return `archive-reactions-${slugify(buildPostId(post))}`;
+        }
+
         function renderArchiveMarkdown(body) {
             const normalizedBody = String(body || '')
                 .replace(/\*\*<div class="otw-center">([\s\S]*?)<\/div>\*\*/g, '<div class="otw-center">$1</div>');
@@ -720,6 +724,7 @@
             const post = current_narrative[index];
             if (!post) return;
             const postId = buildPostId(post);
+            const reactionDomId = buildArchiveReactionDomId(post);
 
             document.body.style.background = `radial-gradient(circle at top left, rgba(155, 89, 182, 0.1) 0%, var(--bg-dark) 100%)`;
             container.classList.remove('visible');
@@ -737,7 +742,7 @@
                     <div class="entry-body">${renderArchiveMarkdown(post.body)}</div>
                     <div class="entry-reactions-row">
                         <div class="entry-reactions-meta">BLOG <span aria-hidden="true">•</span> OTW</div>
-                        <div class="entry-reactions" id="archive-reactions-${postId}"></div>
+                        <div class="entry-reactions" id="${reactionDomId}"></div>
                     </div>
                 `;
                 container.classList.add('visible');
@@ -772,7 +777,7 @@
             }
 
             const postId = buildPostId(post);
-            const selector = `#archive-reactions-${postId}`;
+            const selector = `#${buildArchiveReactionDomId(post)}`;
             const target = document.querySelector(selector);
             if (!target || target.dataset.reactionsReady === 'true') {
                 return;

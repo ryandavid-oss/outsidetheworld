@@ -2015,6 +2015,10 @@
             return `${post.date || 'undated'}--${slugify(post.title || 'untitled')}`;
         }
 
+        function buildBlogReactionDomId(post) {
+            return `blog-reactions-${slugify(buildBlogPostId(post))}`;
+        }
+
         function getPostMetrics(body) {
             const plainText = String(body || '')
                 .replace(/!\[[^\]]*\]\([^)]+\)/g, ' ')
@@ -2083,7 +2087,7 @@
 
             posts.forEach((post) => {
                 const postId = buildBlogPostId(post);
-                const selector = `#blog-reactions-${postId}`;
+                const selector = `#${buildBlogReactionDomId(post)}`;
                 const target = document.querySelector(selector);
                 if (!target || target.dataset.reactionsReady === 'true') {
                     return;
@@ -2188,6 +2192,7 @@
 
                 contentArea.innerHTML = displayFeed.map((post, index) => {
                     const postId = buildBlogPostId(post);
+                    const reactionDomId = buildBlogReactionDomId(post);
                     const statsMarkup = index === 0
                         ? (() => {
                             const metrics = getPostMetrics(post.body);
@@ -2215,7 +2220,7 @@
 
       <div class="blog-foot">
         <div class="blog-foot-meta">BLOG <span aria-hidden="true">•</span> OTW</div>
-        <div class="blog-reactions" id="blog-reactions-${postId}"></div>
+        <div class="blog-reactions" id="${reactionDomId}"></div>
       </div>
     </article>
   `;
