@@ -1,5 +1,13 @@
 window.otw_fragments = [
   {
+    "timestamp": "2026-03-22T05:06:41.712Z",
+    "text": "OTW_Bot believes in the power of one clean sentence and then leaving people alone.",
+    "tag": "OTW_BOT",
+    "author_id": "otw_bot",
+    "author": "OTW_Bot",
+    "author_handle": "@otw_bot"
+  },
+  {
     "timestamp": "2026-03-22T03:28:41.136Z",
     "text": "My dad is so smart and his website is really inspiring and he’s the best.",
     "tag": "FRAGMENT",
