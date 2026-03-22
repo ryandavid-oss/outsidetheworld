@@ -1,4 +1,5 @@
 const FRAGMENTS_PATH = "fragments_data.js";
+const FRAGMENTS_USER_REGISTRY_PATH = "fragments_users.json";
 const CHANGELOG_PATH = "changelog.json";
 const IMAGE_MANIFEST_PATH = "image_manifest.json";
 const WORDPERSON_MANIFEST_PATH = "wordperson_manifest.json";
@@ -116,6 +117,10 @@ function normalizeFragmentEntry(entry) {
     tag: normalizeTag(entry.tag)
   };
 
+  if (entry.author_id) {
+    normalized.author_id = String(entry.author_id).trim();
+  }
+
   if (entry.author) {
     normalized.author = String(entry.author).trim();
   }
@@ -125,6 +130,55 @@ function normalizeFragmentEntry(entry) {
   }
 
   return normalized;
+}
+
+function normalizeFragmentsUser(entry) {
+  if (!entry || typeof entry !== "object") {
+    throw new Error("Fragments user registry entry must be an object");
+  }
+
+  const id = String(entry.id || "").trim();
+  const name = String(entry.name || "").trim();
+  const handle = String(entry.handle || "").trim();
+  const avatar = String(entry.avatar || "").trim();
+  const publishKeySecretName = entry.publishKeySecretName == null
+    ? null
+    : String(entry.publishKeySecretName).trim();
+
+  if (!id) {
+    throw new Error("Fragments user registry entry is missing id");
+  }
+
+  if (!name) {
+    throw new Error(`Fragments user ${id} is missing name`);
+  }
+
+  if (!handle) {
+    throw new Error(`Fragments user ${id} is missing handle`);
+  }
+
+  if (!avatar) {
+    throw new Error(`Fragments user ${id} is missing avatar`);
+  }
+
+  return {
+    id,
+    name,
+    handle: handle.startsWith("@") ? handle : `@${handle}`,
+    avatar,
+    publishKeySecretName,
+    verified: entry.verified === true
+  };
+}
+
+function publicFragmentsUser(user) {
+  return {
+    id: user.id,
+    name: user.name,
+    handle: user.handle,
+    avatar: user.avatar,
+    verified: user.verified === true
+  };
 }
 
 function dedupeFragments(entries) {
@@ -501,6 +555,63 @@ async function loadFragmentsFile(env) {
   return { ...file, fragments };
 }
 
+async function loadFragmentsUserRegistry(env) {
+  const file = await loadRepoFile(env, FRAGMENTS_USER_REGISTRY_PATH);
+  let entries;
+
+  try {
+    entries = JSON.parse(file.raw);
+  } catch (error) {
+    throw new Error(`Could not parse ${FRAGMENTS_USER_REGISTRY_PATH}: ${error.message}`);
+  }
+
+  if (!Array.isArray(entries)) {
+    throw new Error(`${FRAGMENTS_USER_REGISTRY_PATH} is not an array`);
+  }
+
+  return entries.map(normalizeFragmentsUser);
+}
+
+function resolveRegisteredFragmentsUser(key, env, users) {
+  const publishKey = String(key || "").trim();
+  if (!publishKey) {
+    return null;
+  }
+
+  for (const user of users) {
+    if (!user.publishKeySecretName) {
+      continue;
+    }
+
+    const expectedSecret = String(env[user.publishKeySecretName] || "").trim();
+    if (matchesSecret(publishKey, expectedSecret)) {
+      return user;
+    }
+  }
+
+  return null;
+}
+
+function getFragmentsUserById(users, id) {
+  return users.find((user) => user.id === id) || null;
+}
+
+async function getAuthorizedFragmentsUser(request, env) {
+  const users = await loadFragmentsUserRegistry(env);
+  const user = resolveRegisteredFragmentsUser(getPublishHeader(request), env, users);
+  return { users, user };
+}
+
+function buildRegisteredFragmentEntry(payload, user) {
+  const normalized = normalizeFragmentEntry(payload);
+  return {
+    ...normalized,
+    author_id: user.id,
+    author: user.name,
+    author_handle: user.handle
+  };
+}
+
 function replaceFragmentsArray(raw, entries) {
   const replacement = `window.otw_fragments = ${JSON.stringify(entries, null, 2)};`;
   return raw.replace(FRAGMENTS_PATTERN, replacement);
@@ -656,6 +767,7 @@ export default {
         service: "otw-fragments-publish",
         routes: {
           publish_fragment: "POST /publish-fragment",
+          fragments_user_profile: "GET /fragments-user-profile",
           publish_bot_fragment: "POST /publish-bot-fragment",
           publish_changelog_entry: "POST /publish-changelog-entry",
           publish_ghost_draft: "POST /publish-ghost-draft",
@@ -665,19 +777,37 @@ export default {
       });
     }
 
-    if (request.method === "POST" && url.pathname === "/publish-fragment") {
-      if (!isFamilyFeedAuthorized(request, env)) {
-        return jsonResponse({ ok: false, error: "Unauthorized" }, 401);
-      }
-
+    if (request.method === "GET" && url.pathname === "/fragments-user-profile") {
       try {
+        const { user } = await getAuthorizedFragmentsUser(request, env);
+        if (!user) {
+          return jsonResponse({ ok: false, error: "Unauthorized" }, 401);
+        }
+
+        return jsonResponse({
+          ok: true,
+          user: publicFragmentsUser(user)
+        });
+      } catch (error) {
+        return jsonResponse({ ok: false, error: error.message || "Could not load fragments user profile" }, 400);
+      }
+    }
+
+    if (request.method === "POST" && url.pathname === "/publish-fragment") {
+      try {
+        const { user } = await getAuthorizedFragmentsUser(request, env);
+        if (!user) {
+          return jsonResponse({ ok: false, error: "Unauthorized" }, 401);
+        }
+
         const body = await request.json();
-        const entry = normalizeFragmentEntry(body);
+        const entry = buildRegisteredFragmentEntry(body, user);
         const { result } = await saveFragmentEntryWithRetry(env, entry, "Publish fragment");
 
         return jsonResponse({
           ok: true,
           published: entry,
+          user: publicFragmentsUser(user),
           commit: result.commit?.sha || null
         });
       } catch (error) {
@@ -691,6 +821,8 @@ export default {
       }
 
       try {
+        const users = await loadFragmentsUserRegistry(env);
+        const botUser = getFragmentsUserById(users, "otw_bot");
         const file = await loadFragmentsFile(env);
         const existingBotTexts = new Set(
           file.fragments
@@ -702,11 +834,14 @@ export default {
         const pool = available.length ? available : BOT_POOL;
         const text = pool[Math.floor(Math.random() * pool.length)];
 
-        const entry = normalizeFragmentEntry({
+        const entry = buildRegisteredFragmentEntry({
           timestamp: new Date().toISOString(),
           text,
-          tag: "OTW_BOT",
-          author: "OTW_Bot"
+          tag: "OTW_BOT"
+        }, botUser || {
+          id: "otw_bot",
+          name: "OTW_Bot",
+          handle: "@otw_bot"
         });
 
         const { result } = await saveFragmentEntryWithRetry(env, entry, "Publish OTW_Bot fragment");

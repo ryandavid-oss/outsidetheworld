@@ -502,6 +502,76 @@
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
+    .identity-card {
+      display: grid;
+      grid-template-columns: 56px minmax(0, 1fr);
+      gap: 12px;
+      align-items: center;
+      padding: 14px;
+      border-radius: 22px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .identity-avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-main);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 1rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .identity-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .identity-meta {
+      min-width: 0;
+      display: grid;
+      gap: 4px;
+    }
+
+    .identity-name {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .identity-handle {
+      color: var(--text-soft);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.76rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .identity-badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      padding: 0 10px;
+      border-radius: 999px;
+      background: rgba(160, 190, 245, 0.12);
+      color: var(--brand-light-blue);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.64rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
     .toast {
       position: fixed;
       left: 50%;
@@ -682,14 +752,19 @@
   <div class="sheet" id="settingsSheet" aria-hidden="true">
     <div class="sheet-panel">
       <h2 class="sheet-title">Posting settings</h2>
-      <p class="sheet-copy">Each device can keep its own identity and publish key. That is what makes the family feed feel shared instead of anonymous.</p>
+      <p class="sheet-copy">Each device keeps only its own publish key. The Worker matches that key to the registered family identity, so every post lands with the right name, handle, avatar, and badge.</p>
       <div class="field-group">
-        <label class="field-label" for="authorNameInput">Display name</label>
-        <input class="field-input" id="authorNameInput" type="text" placeholder="Emily" autocomplete="name" />
-      </div>
-      <div class="field-group">
-        <label class="field-label" for="authorHandleInput">Handle</label>
-        <input class="field-input" id="authorHandleInput" type="text" placeholder="@word.person" autocomplete="off" />
+        <div class="field-label">Registered identity</div>
+        <div class="identity-card" id="identityCard" hidden>
+          <div class="identity-avatar" id="identityAvatar">OT</div>
+          <div class="identity-meta">
+            <div class="identity-name">
+              <span id="identityName">Waiting for a key</span>
+              <span class="identity-badge" id="identityBadge" hidden>Verified</span>
+            </div>
+            <div class="identity-handle" id="identityHandle">@family</div>
+          </div>
+        </div>
       </div>
       <div class="field-group">
         <label class="field-label" for="publishKeyInput">Publish key</label>
@@ -714,8 +789,10 @@
 
   <script>
     const DRAFT_KEY = 'familyFragmentsDraft';
-    const PROFILE_KEY = 'familyFragmentsProfile';
+    const PUBLISH_KEY_STORAGE = 'familyFragmentsPublishKey';
+    const IDENTITY_CACHE_KEY = 'familyFragmentsIdentity';
     const PUBLISH_ENDPOINT = 'https://otw-fragments-publish.ryandavid.workers.dev/publish-fragment';
+    const PROFILE_ENDPOINT = 'https://otw-fragments-publish.ryandavid.workers.dev/fragments-user-profile';
 
     const fragmentBody = document.getElementById('fragmentBody');
     const statusLine = document.getElementById('statusLine');
@@ -729,8 +806,11 @@
     const closeSettingsBtn = document.getElementById('closeSettingsBtn');
     const saveSettingsBtn = document.getElementById('saveSettingsBtn');
     const settingsStatus = document.getElementById('settingsStatus');
-    const authorNameInput = document.getElementById('authorNameInput');
-    const authorHandleInput = document.getElementById('authorHandleInput');
+    const identityCard = document.getElementById('identityCard');
+    const identityAvatar = document.getElementById('identityAvatar');
+    const identityName = document.getElementById('identityName');
+    const identityHandle = document.getElementById('identityHandle');
+    const identityBadge = document.getElementById('identityBadge');
     const publishKeyInput = document.getElementById('publishKeyInput');
 
     const draftState = document.getElementById('draftState');
@@ -760,14 +840,24 @@
       return parts.map((part) => part.charAt(0).toUpperCase()).join('');
     }
 
-    function normalizeHandle(value, fallbackName) {
-      const trimmed = String(value || '').trim();
-      if (!trimmed) {
-        const fallback = String(fallbackName || 'family').trim().toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
-        return `@${fallback || 'family'}`;
-      }
+    function getStoredPublishKey() {
+      return window.localStorage.getItem(PUBLISH_KEY_STORAGE) || '';
+    }
 
-      return trimmed.startsWith('@') ? trimmed : `@${trimmed}`;
+    function getCachedIdentity() {
+      try {
+        return JSON.parse(window.localStorage.getItem(IDENTITY_CACHE_KEY) || 'null');
+      } catch (error) {
+        return null;
+      }
+    }
+
+    function cacheIdentity(identity) {
+      if (identity) {
+        window.localStorage.setItem(IDENTITY_CACHE_KEY, JSON.stringify(identity));
+      } else {
+        window.localStorage.removeItem(IDENTITY_CACHE_KEY);
+      }
     }
 
     function formatLongDate(timestamp) {
@@ -783,33 +873,47 @@
       return new Date().toISOString();
     }
 
-    function getProfile() {
-      const raw = window.localStorage.getItem(PROFILE_KEY);
-      if (!raw) {
-        return {
-          author: 'The_RyanDavid',
-          author_handle: '@outsidetheworld',
-          publish_key: ''
-        };
+    function renderIdentity(identity) {
+      if (!identity) {
+        identityCard.hidden = true;
+        identityAvatar.textContent = 'OT';
+        identityAvatar.innerHTML = 'OT';
+        identityName.textContent = 'Waiting for a key';
+        identityHandle.textContent = '@family';
+        identityBadge.hidden = true;
+        return;
       }
 
-      try {
-        const parsed = JSON.parse(raw);
-        const author = String(parsed.author || '').trim() || 'The_RyanDavid';
-        const author_handle = normalizeHandle(parsed.author_handle, author);
-        const publish_key = String(parsed.publish_key || '').trim();
-        return { author, author_handle, publish_key };
-      } catch (error) {
-        return {
-          author: 'The_RyanDavid',
-          author_handle: '@outsidetheworld',
-          publish_key: ''
-        };
+      identityCard.hidden = false;
+      const avatar = String(identity.avatar || '').trim();
+      const displayName = String(identity.name || '').trim() || 'Family';
+      const handle = String(identity.handle || '').trim() || '@family';
+
+      if (avatar) {
+        identityAvatar.innerHTML = `<img src="${avatar.replace(/"/g, '&quot;')}" alt="${displayName.replace(/"/g, '&quot;')}" />`;
+      } else {
+        identityAvatar.textContent = initialsFor(displayName);
       }
+
+      identityName.textContent = displayName;
+      identityHandle.textContent = handle;
+      identityBadge.hidden = identity.verified !== true;
     }
 
-    function saveProfile(profile) {
-      window.localStorage.setItem(PROFILE_KEY, JSON.stringify(profile));
+    async function fetchRegisteredIdentity(publishKey) {
+      const response = await fetch(PROFILE_ENDPOINT, {
+        method: 'GET',
+        headers: {
+          'x-publish-key': publishKey
+        }
+      });
+
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok || !payload.ok || !payload.user) {
+        throw new Error(payload.error || `Identity lookup failed with status ${response.status}`);
+      }
+
+      return payload.user;
     }
 
     function getDraft() {
@@ -837,10 +941,16 @@
     }
 
     function updateProfilePresentation() {
-      const profile = getProfile();
-      settingsStatus.textContent = profile.publish_key
-        ? 'A publish key is saved on this device.'
+      const publishKey = getStoredPublishKey();
+      const identity = getCachedIdentity();
+
+      settingsStatus.textContent = publishKey
+        ? identity
+          ? `This device is registered as ${identity.name} (${identity.handle}).`
+          : 'A publish key is saved on this device.'
         : 'No publish key is saved on this device yet.';
+
+      renderIdentity(identity);
     }
 
     function selectTag(tag) {
@@ -891,13 +1001,33 @@
       }, 1400);
     }
 
-    function openSettings() {
-      const profile = getProfile();
-      authorNameInput.value = profile.author;
-      authorHandleInput.value = profile.author_handle;
-      publishKeyInput.value = profile.publish_key;
+    async function refreshIdentityFromStoredKey() {
+      const publishKey = getStoredPublishKey();
+      if (!publishKey) {
+        cacheIdentity(null);
+        updateProfilePresentation();
+        return null;
+      }
+
+      const identity = await fetchRegisteredIdentity(publishKey);
+      cacheIdentity(identity);
+      updateProfilePresentation();
+      return identity;
+    }
+
+    async function openSettings() {
+      publishKeyInput.value = getStoredPublishKey();
+      updateProfilePresentation();
       settingsSheet.classList.add('is-open');
       settingsSheet.setAttribute('aria-hidden', 'false');
+
+      if (publishKeyInput.value.trim()) {
+        try {
+          await refreshIdentityFromStoredKey();
+        } catch (error) {
+          settingsStatus.textContent = error.message || 'Could not verify this publish key right now.';
+        }
+      }
     }
 
     function closeSettings() {
@@ -905,26 +1035,45 @@
       settingsSheet.setAttribute('aria-hidden', 'true');
     }
 
-    function persistSettings() {
-      const author = String(authorNameInput.value || '').trim() || 'OTW Family';
-      const author_handle = normalizeHandle(authorHandleInput.value, author);
+    async function persistSettings() {
       const publish_key = String(publishKeyInput.value || '').trim();
-      saveProfile({ author, author_handle, publish_key });
-      updateProfilePresentation();
-      statusLine.textContent = 'Settings saved on this device.';
+
+      if (!publish_key) {
+        window.localStorage.removeItem(PUBLISH_KEY_STORAGE);
+        cacheIdentity(null);
+        updateProfilePresentation();
+        statusLine.textContent = 'The publish key was cleared from this device.';
+        closeSettings();
+        return;
+      }
+
+      settingsStatus.textContent = 'Checking this publish key against the registered family roster...';
+
+      try {
+        const identity = await fetchRegisteredIdentity(publish_key);
+        window.localStorage.setItem(PUBLISH_KEY_STORAGE, publish_key);
+        cacheIdentity(identity);
+        updateProfilePresentation();
+        statusLine.textContent = `Settings saved. This device will post as ${identity.name}.`;
+      } catch (error) {
+        settingsStatus.textContent = error.message || 'That publish key could not be verified.';
+        statusLine.textContent = error.message || 'That publish key could not be verified.';
+        return;
+      }
+
       closeSettings();
     }
 
     async function publishFragment() {
       const body = fragmentBody.value.trim();
-      const profile = getProfile();
+      const publishKey = getStoredPublishKey();
 
       if (!body) {
         statusLine.textContent = 'Write the fragment first.';
         return;
       }
 
-      if (!profile.publish_key) {
+      if (!publishKey) {
         statusLine.textContent = 'A publish key is needed before this device can share live.';
         openSettings();
         return;
@@ -937,14 +1086,12 @@
           method: 'POST',
           headers: {
             'content-type': 'application/json',
-            'x-publish-key': profile.publish_key
+            'x-publish-key': publishKey
           },
           body: JSON.stringify({
             timestamp: getNowIso(),
             text: body,
-            tag: activeTag,
-            author: profile.author,
-            author_handle: profile.author_handle
+            tag: activeTag
           })
         });
 
@@ -957,7 +1104,13 @@
         fragmentBody.value = '';
         selectTag('FRAGMENT');
         updatePreview();
-        statusLine.textContent = 'Fragment published successfully. It should appear in the live family feed shortly.';
+        if (payload.user) {
+          cacheIdentity(payload.user);
+          updateProfilePresentation();
+          statusLine.textContent = `Fragment published successfully as ${payload.user.name}. It should appear in the live family feed shortly.`;
+        } else {
+          statusLine.textContent = 'Fragment published successfully. It should appear in the live family feed shortly.';
+        }
         celebratePublish();
         showToast('Fragment published', 'Your fragment is on its way to the shared family feed.');
       } catch (error) {
@@ -979,6 +1132,10 @@
         showToast('Draft restored', 'The last fragment draft is back and ready for you.');
       } else {
         updatePreview();
+      }
+
+      if (getStoredPublishKey()) {
+        refreshIdentityFromStoredKey().catch(() => {});
       }
     }
 

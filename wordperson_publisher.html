@@ -1183,12 +1183,12 @@
   <div class="sheet" id="settingsSheet" aria-hidden="true">
     <div class="sheet-panel">
       <h2 class="sheet-title">Publishing settings</h2>
-      <p class="sheet-copy">This stays tucked away so the writing spaces can stay gentle. Emily’s publish key is only saved on this device.</p>
+      <p class="sheet-copy">This stays tucked away so the writing spaces can stay gentle. The fragments publish key is only saved on this device, and the Worker matches it to the registered family identity.</p>
       <div class="field-group">
         <label class="field-label" for="publishKeyInput">Publish key</label>
-        <input class="field-input" id="publishKeyInput" type="password" placeholder="Paste the word.person key here" autocomplete="off" />
+        <input class="field-input" id="publishKeyInput" type="password" placeholder="Paste the fragments publish key here" autocomplete="off" />
       </div>
-      <p class="status-line" id="publishKeyStatus">No word.person publish key is saved on this device.</p>
+      <p class="status-line" id="publishKeyStatus">No fragments publish key is saved on this device.</p>
       <div class="secondary-actions">
         <button class="action-btn" id="saveKeyBtn" type="button">Save key</button>
         <button class="action-btn" id="closeSheetBtn" type="button">Close</button>
@@ -1212,6 +1212,7 @@
     const PUBLISH_KEY_STORAGE = 'wordPersonPublishKey';
     const WORD_PUBLISH_ENDPOINT = 'https://otw-fragments-publish.ryandavid.workers.dev/publish-wordperson-entry';
     const FRAGMENT_PUBLISH_ENDPOINT = 'https://otw-fragments-publish.ryandavid.workers.dev/publish-fragment';
+    const FRAGMENTS_PROFILE_ENDPOINT = 'https://otw-fragments-publish.ryandavid.workers.dev/fragments-user-profile';
 
     const homeWorkspace = document.getElementById('homeWorkspace');
     const fragmentsWorkspace = document.getElementById('fragmentsWorkspace');
@@ -1297,10 +1298,26 @@
       return window.localStorage.getItem(PUBLISH_KEY_STORAGE) || '';
     }
 
+    async function fetchFragmentsProfile(publishKey) {
+      const response = await fetch(FRAGMENTS_PROFILE_ENDPOINT, {
+        method: 'GET',
+        headers: {
+          'x-publish-key': publishKey
+        }
+      });
+
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok || !payload.ok || !payload.user) {
+        throw new Error(payload.error || `Profile lookup failed with status ${response.status}`);
+      }
+
+      return payload.user;
+    }
+
     function updatePublishKeyStatus() {
       publishKeyStatus.textContent = getPublishKey()
-        ? 'Emily’s publish key is saved on this device.'
-        : 'No word.person publish key is saved on this device.';
+        ? 'A fragments publish key is saved on this device.'
+        : 'No fragments publish key is saved on this device.';
     }
 
     function openSettingsSheet() {
@@ -1308,6 +1325,16 @@
       updatePublishKeyStatus();
       settingsSheet.classList.add('is-open');
       settingsSheet.setAttribute('aria-hidden', 'false');
+
+      if (publishKeyInput.value.trim()) {
+        fetchFragmentsProfile(publishKeyInput.value.trim())
+          .then((user) => {
+            publishKeyStatus.textContent = `This key posts to frgm<nts as ${user.name} (${user.handle}).`;
+          })
+          .catch((error) => {
+            publishKeyStatus.textContent = error.message || 'Could not verify this fragments key right now.';
+          });
+      }
     }
 
     function closeSettingsSheet() {
@@ -1315,25 +1342,32 @@
       settingsSheet.setAttribute('aria-hidden', 'true');
     }
 
-    function savePublishKey() {
+    async function savePublishKey() {
       const value = publishKeyInput.value.trim();
       if (!value) {
         window.localStorage.removeItem(PUBLISH_KEY_STORAGE);
         updatePublishKeyStatus();
         if (activeWorkspace === 'fragments') {
-          fragmentStatusLine.textContent = 'Emily’s publish key was cleared from this device.';
+          fragmentStatusLine.textContent = 'The fragments publish key was cleared from this device.';
         } else if (activeWorkspace === 'wordperson') {
-          statusLine.textContent = 'Emily’s publish key was cleared from this device.';
+          statusLine.textContent = 'The fragments publish key was cleared from this device.';
         }
         return;
       }
 
-      window.localStorage.setItem(PUBLISH_KEY_STORAGE, value);
-      updatePublishKeyStatus();
-      if (activeWorkspace === 'fragments') {
-        fragmentStatusLine.textContent = 'Emily’s publish key was saved locally on this device.';
-      } else if (activeWorkspace === 'wordperson') {
-        statusLine.textContent = 'Emily’s publish key was saved locally on this device.';
+      publishKeyStatus.textContent = 'Checking this fragments key against the family roster...';
+
+      try {
+        const user = await fetchFragmentsProfile(value);
+        window.localStorage.setItem(PUBLISH_KEY_STORAGE, value);
+        publishKeyStatus.textContent = `This key posts to frgm<nts as ${user.name} (${user.handle}).`;
+        if (activeWorkspace === 'fragments') {
+          fragmentStatusLine.textContent = `This device will publish fragments as ${user.name}.`;
+        } else if (activeWorkspace === 'wordperson') {
+          statusLine.textContent = `Fragments publishing is now connected as ${user.name}.`;
+        }
+      } catch (error) {
+        publishKeyStatus.textContent = error.message || 'That fragments key could not be verified.';
       }
     }
 
@@ -1451,12 +1485,12 @@
       }
 
       if (!publishKey) {
-        fragmentStatusLine.textContent = 'Emily’s publish key is needed before this device can share to frgm<nts.';
+        fragmentStatusLine.textContent = 'A fragments publish key is needed before this device can share to frgm<nts.';
         openSettingsSheet();
         return;
       }
 
-      fragmentStatusLine.textContent = 'Sharing Emily’s fragment into the live feed...';
+      fragmentStatusLine.textContent = 'Sharing this fragment into the live feed...';
 
       try {
         const response = await fetch(FRAGMENT_PUBLISH_ENDPOINT, {
@@ -1468,9 +1502,7 @@
           body: JSON.stringify({
             timestamp: currentTimestamp(),
             text,
-            tag: activeFragmentTag,
-            author: 'Emily',
-            author_handle: '@word.person'
+            tag: activeFragmentTag
           })
         });
 
@@ -1481,16 +1513,23 @@
 
         if (publishKeyInput.value.trim()) {
           window.localStorage.setItem(PUBLISH_KEY_STORAGE, publishKeyInput.value.trim());
-          updatePublishKeyStatus();
+          try {
+            const user = await fetchFragmentsProfile(publishKeyInput.value.trim());
+            publishKeyStatus.textContent = `This key posts to frgm<nts as ${user.name} (${user.handle}).`;
+          } catch (error) {
+            updatePublishKeyStatus();
+          }
         }
 
         clearFragmentDraftStorage();
         fragmentBody.value = '';
         selectFragmentTag('FRAGMENT');
         updateFragmentPreview();
-        fragmentStatusLine.textContent = 'Fragment published successfully. It should appear in the shared feed shortly.';
+        fragmentStatusLine.textContent = payload.user
+          ? `Fragment published successfully as ${payload.user.name}. It should appear in the shared feed shortly.`
+          : 'Fragment published successfully. It should appear in the shared feed shortly.';
         celebratePublish(fragmentPublishBtn, 'Share to frgm<nts', 'Shared');
-        showPublishToast('Fragment published', 'Emily’s fragment is on its way to the shared feed.');
+        showPublishToast('Fragment published', 'Your fragment is on its way to the shared feed.');
       } catch (error) {
         fragmentStatusLine.textContent = error.message || 'Publish failed.';
       }
@@ -1719,6 +1758,13 @@
 
     postDate.value = todayValue();
     updatePublishKeyStatus();
+    if (getPublishKey()) {
+      fetchFragmentsProfile(getPublishKey())
+        .then((user) => {
+          publishKeyStatus.textContent = `This key posts to frgm<nts as ${user.name} (${user.handle}).`;
+        })
+        .catch(() => {});
+    }
     setActiveDock('dockHomeBtn');
     hydrateFragmentDraft();
     hydrateWordDraft();
