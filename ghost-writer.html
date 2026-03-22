@@ -1164,6 +1164,7 @@
     const DRAFT_KEY = 'otw_ghost_writer_draft_v4';
     let autosaveTimer = null;
     let dirty = false;
+    let selectionState = { start: 0, end: 0 };
 
     const elTitle = document.getElementById('title');
     const elDate = document.getElementById('entryDate');
@@ -1184,6 +1185,13 @@
     const elMdPreview = document.getElementById('mdPreview');
 
     const elSubline = document.getElementById('subline');
+
+    function rememberSelection() {
+      selectionState = {
+        start: elContent.selectionStart || 0,
+        end: elContent.selectionEnd || 0
+      };
+    }
 
     function slugify(str) {
       return String(str || '')
@@ -1392,46 +1400,49 @@
     }
 
     function insertAtCursor(snippet) {
-      const start = elContent.selectionStart;
-      const end = elContent.selectionEnd;
-      const current = elContent.value;
-      elContent.value = `${current.slice(0, start)}${snippet}${current.slice(end)}`;
-      const nextPos = start + snippet.length;
+      const start = selectionState.start;
+      const end = selectionState.end;
       elContent.focus();
+      elContent.setSelectionRange(start, end);
+      elContent.setRangeText(snippet, start, end, 'end');
+      const nextPos = start + snippet.length;
       elContent.setSelectionRange(nextPos, nextPos);
+      rememberSelection();
       updateMetrics();
       markDirty();
       scheduleAutosave();
     }
 
     function wrapSelection(before, after = before, fallback = 'text') {
-      const start = elContent.selectionStart;
-      const end = elContent.selectionEnd;
-      const current = elContent.value;
-      const selected = current.slice(start, end) || fallback;
+      const start = selectionState.start;
+      const end = selectionState.end;
+      const selected = elContent.value.slice(start, end) || fallback;
       const replacement = `${before}${selected}${after}`;
-      elContent.value = `${current.slice(0, start)}${replacement}${current.slice(end)}`;
       const cursorStart = start + before.length;
       const cursorEnd = cursorStart + selected.length;
       elContent.focus();
+      elContent.setSelectionRange(start, end);
+      elContent.setRangeText(replacement, start, end, 'end');
       elContent.setSelectionRange(cursorStart, cursorEnd);
+      rememberSelection();
       updateMetrics();
       markDirty();
       scheduleAutosave();
     }
 
     function prefixSelectedLines(prefix, fallback = 'List item') {
-      const start = elContent.selectionStart;
-      const end = elContent.selectionEnd;
-      const current = elContent.value;
-      const selected = current.slice(start, end) || fallback;
+      const start = selectionState.start;
+      const end = selectionState.end;
+      const selected = elContent.value.slice(start, end) || fallback;
       const replacement = selected
         .split('\n')
         .map(line => `${prefix}${line}`)
         .join('\n');
-      elContent.value = `${current.slice(0, start)}${replacement}${current.slice(end)}`;
       elContent.focus();
+      elContent.setSelectionRange(start, end);
+      elContent.setRangeText(replacement, start, end, 'end');
       elContent.setSelectionRange(start, start + replacement.length);
+      rememberSelection();
       updateMetrics();
       markDirty();
       scheduleAutosave();
@@ -1471,8 +1482,20 @@
       elSlug.addEventListener('input', onAnyChange);
 
       elContent.addEventListener('input', onAnyChange);
+      elContent.addEventListener('keyup', rememberSelection);
+      elContent.addEventListener('mouseup', rememberSelection);
+      elContent.addEventListener('select', rememberSelection);
+      elContent.addEventListener('focus', rememberSelection);
 
-      document.querySelector('.format-toolbar').addEventListener('click', (event) => {
+      const toolbar = document.querySelector('.format-toolbar');
+      toolbar.addEventListener('mousedown', (event) => {
+        if (event.target.closest('.format-btn')) {
+          event.preventDefault();
+          rememberSelection();
+        }
+      });
+
+      toolbar.addEventListener('click', (event) => {
         const button = event.target.closest('.format-btn');
         if (!button) return;
 
