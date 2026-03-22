@@ -268,6 +268,54 @@
             color: #ccc;
         }
 
+        .entry-body p {
+            margin: 0 0 1.5rem 0;
+        }
+
+        .entry-body p:last-child {
+            margin-bottom: 0;
+        }
+
+        .entry-body .otw-center {
+            text-align: center;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.92rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--brand-teal);
+            margin: 2.2rem auto;
+            opacity: 0.95;
+        }
+
+        .entry-body hr {
+            border: 0;
+            border-top: 1px solid rgba(145, 175, 179, 0.16);
+            margin: 2.5rem 0;
+        }
+
+        .entry-body strong {
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+            text-shadow: 0 0 2px rgba(255, 255, 255, 0.3);
+        }
+
+        .entry-body a {
+            color: var(--brand-teal);
+            text-decoration: none;
+            font-weight: 700;
+            border-bottom: 1px dashed rgba(145, 175, 179, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .entry-body a:hover {
+            color: #fff;
+            border-bottom-color: var(--brand-teal);
+            text-shadow: 0 0 8px rgba(145, 175, 179, 0.4);
+        }
+
         /* --- IMAGE ARCHIVE PROTOCOL --- */
         .entry-body img {
             max-width: 80%;
@@ -402,24 +450,6 @@
                 background: rgba(0, 0, 0, 0.85);
             }
 
-        .entry-body .otw-center {
-            text-align: center;
-            font-family: 'Fira Code', monospace;
-            font-size: 0.9rem;
-            font-weight: 700;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--brand-teal);
-            margin: 2.2rem auto;
-            opacity: 0.95;
-        }
-
-        .entry-body hr {
-            border: 0;
-            border-top: 1px solid rgba(145, 175, 179, 0.16);
-            margin: 2.5rem 0;
-        }
-
             .entry-title {
                 font-size: 1.8rem;
             }
@@ -543,6 +573,13 @@
 
         function buildPostId(post) {
             return `${post.date || 'undated'}--${slugify(post.title || 'untitled')}`;
+        }
+
+        function renderArchiveMarkdown(body) {
+            const normalizedBody = String(body || '')
+                .replace(/\*\*<div class="otw-center">([\s\S]*?)<\/div>\*\*/g, '<div class="otw-center">$1</div>');
+
+            return marked.parse(normalizedBody);
         }
 
         function buildShareUrl(post) {
@@ -697,7 +734,7 @@
                             <span class="share-status" id="share-status">SHAREABLE_ARCHIVE_SIGNAL</span>
                         </div>
                     </div>
-                    <div class="entry-body">${marked.parse(post.body)}</div>
+                    <div class="entry-body">${renderArchiveMarkdown(post.body)}</div>
                     <div class="entry-reactions-row">
                         <div class="entry-reactions-meta">BLOG <span aria-hidden="true">•</span> OTW</div>
                         <div class="entry-reactions" id="archive-reactions-${postId}"></div>
