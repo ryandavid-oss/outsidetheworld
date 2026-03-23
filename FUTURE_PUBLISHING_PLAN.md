@@ -71,6 +71,12 @@ Hardening.
 - Vercel Functions
 - Other serverless endpoint tied back to GitHub
 
+## Low-priority nice to have
+
+- Revisit static asset caching/expires behavior if the site moves beyond plain GitHub Pages hosting.
+- Goal: allow longer-lived cache headers for truly static assets without risking stale HTML, manifests, or frequently updated data files.
+- This is a performance/publishing polish item, not an urgent problem.
+
 ## Short version
 
 This is not a CMS migration plan.
