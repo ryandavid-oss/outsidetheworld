@@ -2151,6 +2151,16 @@
       }
     }
 
+    @media (max-width: 1220px) {
+      .gfull-title-row {
+        grid-template-columns: 1fr;
+      }
+
+      .gfull-date-input {
+        max-width: 220px;
+      }
+    }
+
     @media (max-width: 640px) {
       .gfull-root {
         padding: 14px;
@@ -2357,8 +2367,9 @@
 
     .bottom-dock {
       position: fixed;
-      left: max(11px, calc(50vw - 340px));
-      right: max(11px, calc(50vw - 340px));
+      left: 50%;
+      right: auto;
+      width: min(calc(100vw - 22px), 1040px);
       bottom: max(12px, calc(env(safe-area-inset-bottom) + 8px));
       z-index: 45;
       padding: 8px;
@@ -2372,6 +2383,8 @@
       box-shadow: 0 18px 44px rgba(0, 0, 0, 0.34), 0 0 34px rgba(99, 149, 238, 0.08);
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
+      transform: translateX(-50%);
+      transition: transform 0.24s var(--ease), opacity 0.24s var(--ease);
     }
 
     body[data-theme="light"] .bottom-dock {
@@ -2382,6 +2395,12 @@
         rgba(244, 239, 230, 0.9);
       border-color: rgba(27, 54, 93, 0.12);
       box-shadow: 0 16px 34px rgba(27, 54, 93, 0.12);
+    }
+
+    body.is-editing .bottom-dock {
+      opacity: 0;
+      pointer-events: none;
+      transform: translate(-50%, calc(100% + 24px));
     }
 
     .bottom-dock-grid {
@@ -2582,8 +2601,9 @@
       }
 
       .bottom-dock {
-        left: 7px;
-        right: 7px;
+        left: 50%;
+        right: auto;
+        width: calc(100vw - 14px);
         bottom: max(8px, calc(env(safe-area-inset-bottom) + 6px));
       }
 
@@ -2594,6 +2614,14 @@
 
       .dock-btn-label {
         font-size: 0.66rem;
+      }
+    }
+
+    @media (pointer: coarse) {
+      input,
+      textarea,
+      select {
+        font-size: 16px;
       }
     }
   </style>
@@ -5368,6 +5396,25 @@
       menuToggle.setAttribute('aria-expanded', String(isOpen));
     }
 
+    function isEditableElement(element) {
+      return Boolean(
+        element
+        && (
+          element.matches?.('input, textarea, select')
+          || element.isContentEditable
+        )
+      );
+    }
+
+    function syncEditingState() {
+      if (!window.matchMedia('(pointer: coarse)').matches) {
+        document.body.classList.remove('is-editing');
+        return;
+      }
+
+      document.body.classList.toggle('is-editing', isEditableElement(document.activeElement));
+    }
+
     function openExternalUrl(url) {
       const popup = window.open(url, '_blank');
       if (!popup) {
@@ -5539,8 +5586,15 @@
         setMenuState(false);
       }
     });
+    document.addEventListener('focusin', () => {
+      syncEditingState();
+    });
+    document.addEventListener('focusout', () => {
+      window.setTimeout(syncEditingState, 0);
+    });
     window.addEventListener('resize', () => {
       setMenuState(false);
+      syncEditingState();
     });
     window.addEventListener('online', () => {
       showPublishToast(
@@ -5648,6 +5702,7 @@
     hydrateTheme();
     hydratePublishKey();
     updateQueueStatus();
+    syncEditingState();
     hydrateDraft();
     hydrateChangelogDraft();
     hydrateIotdDraft();
