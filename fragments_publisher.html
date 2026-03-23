@@ -878,6 +878,7 @@
     .field {
       display: grid;
       gap: 8px;
+      min-width: 0;
     }
 
     label {
@@ -894,12 +895,12 @@
     }
 
     .fragments-meta-row {
-      grid-template-columns: minmax(240px, 1.1fr) minmax(300px, 0.95fr);
+      grid-template-columns: minmax(0, 1fr) minmax(0, 320px);
       align-items: start;
     }
 
     .changelog-meta-row {
-      grid-template-columns: 190px minmax(220px, 0.9fr);
+      grid-template-columns: minmax(0, 156px) minmax(0, 1fr);
       align-items: end;
       max-width: 560px;
     }
@@ -908,6 +909,7 @@
     textarea,
     select {
       width: 100%;
+      min-width: 0;
       border: 1px solid var(--border);
       background: rgba(255, 255, 255, 0.04);
       color: var(--text-main);
@@ -1238,7 +1240,7 @@
 
     .iotd-meta-row {
       align-items: start;
-      grid-template-columns: 190px minmax(0, 1fr);
+      grid-template-columns: minmax(0, 156px) minmax(0, 1fr);
     }
 
     .iotd-form-grid .helper {
@@ -1398,11 +1400,11 @@
 
     @media (min-width: 861px) and (max-width: 1180px) {
       .fragments-meta-row {
-        grid-template-columns: minmax(220px, 1fr) minmax(280px, 0.95fr);
+        grid-template-columns: minmax(0, 1fr) minmax(0, 292px);
       }
 
       .changelog-meta-row {
-        grid-template-columns: 176px minmax(200px, 0.92fr);
+        grid-template-columns: minmax(0, 148px) minmax(0, 1fr);
       }
 
       .iotd-layout {
@@ -1411,7 +1413,7 @@
       }
 
       .iotd-meta-row {
-        grid-template-columns: 170px minmax(0, 1fr);
+        grid-template-columns: minmax(0, 148px) minmax(0, 1fr);
         gap: 12px;
       }
 
