@@ -1396,6 +1396,60 @@
       font-weight: 700;
     }
 
+    .full-ghost-shell {
+      display: grid;
+      gap: 14px;
+    }
+
+    .full-ghost-topline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .full-ghost-copy {
+      margin: 0;
+      max-width: 54ch;
+    }
+
+    .full-ghost-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .full-ghost-frame {
+      width: 100%;
+      min-height: clamp(720px, 84vh, 1180px);
+      border-radius: 28px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      background:
+        radial-gradient(260px 120px at 14% 0%, rgba(99, 149, 238, 0.08), transparent 70%),
+        radial-gradient(240px 120px at 86% 0%, rgba(155, 89, 182, 0.08), transparent 70%),
+        linear-gradient(180deg, rgba(4, 8, 12, 0.92), rgba(4, 8, 12, 0.76));
+      box-shadow: 0 24px 56px rgba(0, 0, 0, 0.22);
+    }
+
+    .full-ghost-frame iframe {
+      width: 100%;
+      min-height: clamp(720px, 84vh, 1180px);
+      border: 0;
+      display: block;
+      background: transparent;
+    }
+
+    body[data-theme="light"] .full-ghost-frame {
+      background:
+        radial-gradient(260px 120px at 14% 0%, rgba(99, 149, 238, 0.08), transparent 70%),
+        radial-gradient(240px 120px at 86% 0%, rgba(155, 89, 182, 0.08), transparent 70%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(244, 239, 230, 0.92));
+      border-color: rgba(27, 54, 93, 0.12);
+      box-shadow: 0 18px 40px rgba(27, 54, 93, 0.1);
+    }
+
     .dot {
       width: 5px;
       height: 5px;
@@ -1904,6 +1958,14 @@
           <p class="app-tile-meta"></p>
         </button>
 
+        <button class="app-tile" id="openGhostFullApp" type="button">
+          <div class="app-icon" aria-hidden="true">
+            <img src="Images/Equal.svg" alt="" />
+          </div>
+          <h2 class="app-tile-label">Ghost Writer</h2>
+          <p class="app-tile-meta">Full Console</p>
+        </button>
+
         <button class="app-tile" id="openBotApp" type="button">
           <div class="app-icon" aria-hidden="true">
             <img src="Images/otw_bot_summon_icon.svg" alt="" />
@@ -2227,6 +2289,27 @@
       </div>
     </section>
 
+    <section class="workspace" id="ghostFullWorkspace">
+      <div class="full-ghost-shell">
+        <section class="panel">
+          <div class="full-ghost-topline">
+            <div>
+              <h2 class="section-title" style="margin-bottom: 8px;">Ghost Writer</h2>
+              <p class="helper full-ghost-copy">The full Ghost Writer console now lives inside the OTW app shell too. Best on iPad and Mac when you want the complete drafting experience without leaving the suite.</p>
+            </div>
+            <div class="full-ghost-actions">
+              <button class="secondary-btn" id="openGhostStandaloneBtn" type="button">Open Standalone</button>
+              <button class="secondary-btn" id="reloadGhostFrameBtn" type="button">Reload Lane</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="full-ghost-frame" aria-label="Embedded Ghost Writer">
+          <iframe id="ghostFullFrame" src="ghost-writer.html" title="Ghost Writer full console" loading="lazy"></iframe>
+        </section>
+      </div>
+    </section>
+
     <section class="workspace" id="botWorkspace">
       <div class="bot-shell">
         <section class="panel bot-hero">
@@ -2338,13 +2421,18 @@
     const changelogWorkspace = document.getElementById('changelogWorkspace');
     const iotdWorkspace = document.getElementById('iotdWorkspace');
     const ghostWorkspace = document.getElementById('ghostWorkspace');
+    const ghostFullWorkspace = document.getElementById('ghostFullWorkspace');
     const botWorkspace = document.getElementById('botWorkspace');
     const openFragmentsApp = document.getElementById('openFragmentsApp');
     const openChangelogApp = document.getElementById('openChangelogApp');
     const openIotdApp = document.getElementById('openIotdApp');
     const openGhostApp = document.getElementById('openGhostApp');
+    const openGhostFullApp = document.getElementById('openGhostFullApp');
     const openBotApp = document.getElementById('openBotApp');
     const openSiteApp = document.getElementById('openSiteApp');
+    const openGhostStandaloneBtn = document.getElementById('openGhostStandaloneBtn');
+    const reloadGhostFrameBtn = document.getElementById('reloadGhostFrameBtn');
+    const ghostFullFrame = document.getElementById('ghostFullFrame');
     const headerBackBtn = document.getElementById('headerBackBtn');
     const botDeployBtn = document.getElementById('botDeployBtn');
     const botStatusLine = document.getElementById('botStatusLine');
@@ -3462,13 +3550,14 @@
     }
 
     function setWorkspace(view) {
-      const nextView = ['home', 'fragments', 'changelog', 'iotd', 'ghost', 'bot'].includes(view) ? view : 'home';
+      const nextView = ['home', 'fragments', 'changelog', 'iotd', 'ghost', 'ghost-full', 'bot'].includes(view) ? view : 'home';
 
       homeWorkspace.classList.toggle('is-active', nextView === 'home');
       fragmentsWorkspace.classList.toggle('is-active', nextView === 'fragments');
       changelogWorkspace.classList.toggle('is-active', nextView === 'changelog');
       iotdWorkspace.classList.toggle('is-active', nextView === 'iotd');
       ghostWorkspace.classList.toggle('is-active', nextView === 'ghost');
+      ghostFullWorkspace.classList.toggle('is-active', nextView === 'ghost-full');
       botWorkspace.classList.toggle('is-active', nextView === 'bot');
       headerBackBtn.classList.toggle('is-visible', nextView !== 'home');
       dockHomeBtn.classList.toggle('is-active', nextView === 'home');
@@ -3546,11 +3635,20 @@
         ghostBodyInput.focus();
       }, 120);
     });
+    openGhostFullApp.addEventListener('click', () => {
+      setWorkspace('ghost-full');
+    });
     openBotApp.addEventListener('click', () => {
       setWorkspace('bot');
     });
     openSiteApp.addEventListener('click', () => {
       window.open('index.html', '_blank', 'noopener,noreferrer');
+    });
+    openGhostStandaloneBtn.addEventListener('click', () => {
+      window.open('ghost-writer.html', '_blank', 'noopener,noreferrer');
+    });
+    reloadGhostFrameBtn.addEventListener('click', () => {
+      ghostFullFrame.src = ghostFullFrame.src;
     });
     dockHomeBtn.addEventListener('click', () => {
       setWorkspace('home');
