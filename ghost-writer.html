@@ -443,6 +443,40 @@
       white-space: nowrap;
     }
 
+    .head-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .icon-btn {
+      cursor: pointer;
+      width: 38px;
+      height: 38px;
+      border: 1px solid rgba(145, 175, 179, 0.22);
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--ink);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .2s ease, border-color .2s ease, transform .15s ease;
+    }
+
+    .icon-btn:hover,
+    .icon-btn:focus-visible {
+      background: rgba(145, 175, 179, 0.12);
+      border-color: rgba(145, 175, 179, 0.4);
+      transform: translateY(-1px);
+    }
+
+    .icon-btn svg {
+      width: 16px;
+      height: 16px;
+      display: block;
+    }
+
     /* Fields */
     .fields {
       display: grid;
@@ -457,6 +491,20 @@
       }
     }
 
+    .title-row {
+      display: grid;
+      grid-template-columns: 152px minmax(0, 1fr);
+      gap: 12px;
+      align-items: end;
+      margin-bottom: 12px;
+    }
+
+    @media (max-width: 640px) {
+      .title-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
     label {
       display: block;
       font-family: var(--font-code);
@@ -465,6 +513,19 @@
       text-transform: uppercase;
       color: rgba(160, 190, 245, 0.92);
       margin: 0 0 6px;
+    }
+
+    .field-note {
+      margin-top: 6px;
+      font-family: var(--font-code);
+      font-size: 0.58rem;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .field-block.is-hidden {
+      display: none;
     }
 
     input,
@@ -517,6 +578,12 @@
       font-size: 1.6rem;
       padding: 14px 12px;
       text-transform: none;
+    }
+
+    #entryDate {
+      min-height: 62px;
+      padding: 14px 12px;
+      font-size: 1.05rem;
     }
 
     /* Actions */
@@ -711,6 +778,34 @@
       background: var(--toolbar-bg);
     }
 
+    .toolbar-stats {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      justify-content: flex-start;
+      padding-top: 2px;
+    }
+
+    .toolbar-stat {
+      border: 1px solid rgba(145, 175, 179, 0.18);
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--muted);
+      padding: 8px 10px;
+      font-family: var(--font-code);
+      font-size: 0.58rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    body[data-writer-mode="light"] .toolbar-stat,
+    body[data-writer-mode="sepia"] .toolbar-stat {
+      background: rgba(0, 0, 0, 0.03);
+      border-color: var(--borderx);
+    }
+
     .format-btn {
       cursor: pointer;
       border: 1px solid rgba(145, 175, 179, 0.22);
@@ -762,6 +857,155 @@
       #content {
         min-height: 420px;
       }
+    }
+
+    .image-insert-panel {
+      border: 1px solid var(--borderx);
+      background: rgba(145, 175, 179, 0.04);
+      padding: 14px;
+      display: none;
+      margin-bottom: 14px;
+    }
+
+    .image-insert-panel.is-open {
+      display: block;
+    }
+
+    body[data-writer-mode="light"] .image-insert-panel,
+    body[data-writer-mode="sepia"] .image-insert-panel {
+      background: rgba(0, 0, 0, 0.03);
+    }
+
+    .image-panel-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .image-panel-title {
+      margin: 0;
+      font-family: var(--font-code);
+      font-size: 0.65rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(160, 190, 245, 0.92);
+    }
+
+    .image-panel-close {
+      cursor: pointer;
+      border: 1px solid rgba(145, 175, 179, 0.22);
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--ink);
+      padding: 8px 10px;
+      font-family: var(--font-code);
+      font-size: 0.58rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: background .2s ease, border-color .2s ease;
+    }
+
+    .image-panel-close:hover,
+    .image-panel-close:focus-visible {
+      background: rgba(145, 175, 179, 0.12);
+      border-color: rgba(145, 175, 179, 0.4);
+    }
+
+    .image-panel-grid {
+      display: grid;
+      grid-template-columns: 92px minmax(0, 1fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    @media (max-width: 720px) {
+      .image-panel-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .image-preview-box {
+      border: 1px solid rgba(145, 175, 179, 0.18);
+      background: rgba(0, 0, 0, 0.18);
+      width: 92px;
+      aspect-ratio: 1 / 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    body[data-writer-mode="light"] .image-preview-box,
+    body[data-writer-mode="sepia"] .image-preview-box {
+      background: rgba(255, 255, 255, 0.4);
+      border-color: var(--borderx);
+    }
+
+    .image-preview-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .image-preview-rail {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: stretch;
+    }
+
+    .image-preview-empty {
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      background:
+        linear-gradient(135deg, rgba(99, 149, 238, 0.06), rgba(145, 175, 179, 0.02)),
+        rgba(0, 0, 0, 0.16);
+    }
+
+    .image-controls {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .image-control-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 170px;
+      gap: 16px;
+      align-items: end;
+    }
+
+    @media (max-width: 860px) {
+      .image-control-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .image-panel-actions {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      align-items: stretch;
+    }
+
+    @media (max-width: 560px) {
+      .image-panel-actions {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .image-status {
+      margin-top: 10px;
+      font-family: var(--font-code);
+      font-size: 0.6rem;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      line-height: 1.5;
     }
 
     /* Right side list */
@@ -872,24 +1116,6 @@
       margin-bottom: 20px;
     }
 
-    .render-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin: 12px 0 18px;
-    }
-
-    .render-tags span {
-      border: 1px solid rgba(145, 175, 179, 0.22);
-      background: rgba(145, 175, 179, 0.06);
-      padding: 4px 8px;
-      font-family: var(--font-code);
-      font-size: 0.58rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
     .render-body {
       font-family: "IBM Plex Serif", serif;
       font-size: 1.02rem;
@@ -935,6 +1161,11 @@
       font-size: 0.92rem;
     }
 
+    .render-body figure {
+      margin-left: 0;
+      margin-right: 0;
+    }
+
     .render-body .otw-center {
       text-align: center;
       margin: 1.5rem 0;
@@ -948,6 +1179,112 @@
     /* Hide main until auth passes */
     #app {
       display: none;
+    }
+
+    .settings-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 9998;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+      background: rgba(0, 0, 0, 0.72);
+      -webkit-backdrop-filter: blur(14px);
+      backdrop-filter: blur(14px);
+    }
+
+    .settings-modal.is-open {
+      display: flex;
+    }
+
+    .settings-panel {
+      width: min(560px, 100%);
+      max-height: min(88vh, 760px);
+      overflow: auto;
+      border: 1px solid var(--borderx);
+      background: rgba(16, 20, 24, 0.94);
+      padding: 18px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.34);
+    }
+
+    body[data-writer-mode="light"] .settings-panel,
+    body[data-writer-mode="sepia"] .settings-panel {
+      background: rgba(255, 255, 255, 0.94);
+    }
+
+    .settings-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .settings-title {
+      margin: 0;
+      font-family: var(--font-code);
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(160, 190, 245, 0.92);
+    }
+
+    .settings-group {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .settings-section-label {
+      font-family: var(--font-code);
+      font-size: 0.58rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .settings-toggle {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px;
+      border: 1px solid rgba(145, 175, 179, 0.18);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    body[data-writer-mode="light"] .settings-toggle,
+    body[data-writer-mode="sepia"] .settings-toggle {
+      background: rgba(0, 0, 0, 0.03);
+      border-color: var(--borderx);
+    }
+
+    .settings-toggle input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      margin: 2px 0 0;
+      padding: 0;
+      accent-color: var(--brand-blue);
+    }
+
+    .settings-toggle-copy {
+      display: grid;
+      gap: 4px;
+    }
+
+    .settings-toggle-title {
+      font-family: var(--font-code);
+      font-size: 0.64rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+
+    .settings-toggle-body {
+      font-size: 0.92rem;
+      line-height: 1.45;
+      color: var(--muted);
     }
   </style>
 </head>
@@ -998,34 +1335,31 @@
       <section class="card" aria-label="Entry composer">
         <div class="card-head">
           <p class="card-label">01 // ENTRY_COMPOSER</p>
-          <span class="chip" id="saveChip">AUTOSAVE: OFF</span>
+          <div class="head-actions">
+            <span class="chip" id="saveChip">Autosave off</span>
+            <button class="icon-btn" id="settingsBtn" type="button" aria-label="Open settings">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="3.2"></circle>
+                <path d="M19.4 15a1.6 1.6 0 0 0 .32 1.76l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06A1.6 1.6 0 0 0 15 19.4a1.6 1.6 0 0 0-1 .94 1.6 1.6 0 0 1-3 0 1.6 1.6 0 0 0-1-.94 1.6 1.6 0 0 0-1.76.32l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.6 1.6 0 0 0 4.6 15a1.6 1.6 0 0 0-.94-1 1.6 1.6 0 0 1 0-3 1.6 1.6 0 0 0 .94-1 1.6 1.6 0 0 0-.32-1.76l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.6 1.6 0 0 0 9 4.6a1.6 1.6 0 0 0 1-.94 1.6 1.6 0 0 1 3 0 1.6 1.6 0 0 0 1 .94 1.6 1.6 0 0 0 1.76-.32l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.6 1.6 0 0 0 19.4 9c0 .42.16.82.46 1.12.3.3.7.46 1.12.46a1.6 1.6 0 0 1 0 3c-.42 0-.82.16-1.12.46-.3.3-.46.7-.46 1.12Z"></path>
+              </svg>
+            </button>
+          </div>
         </div>
 
-        <div class="fields">
+        <div class="title-row">
           <div>
             <label for="entryDate">DATE</label>
             <input id="entryDate" type="date" />
           </div>
           <div>
-            <label for="typeHint">MODE</label>
-            <input id="typeHint" type="text" value="MARKDOWN_SIGNAL" disabled />
+            <label for="title">TITLE</label>
+            <input id="title" placeholder="Blog Title…" type="text" />
           </div>
         </div>
 
-        <div style="margin-bottom:12px;">
-          <label for="title">TITLE</label>
-          <input id="title" placeholder="Blog Title…" type="text" />
-        </div>
-
-        <div class="fields">
-          <div>
-            <label for="tags">TAGS (comma-separated)</label>
-            <input id="tags" placeholder="e.g., family, desert, systems" type="text" />
-          </div>
-          <div>
-            <label for="slug">SLUG (optional override)</label>
-            <input id="slug" placeholder="auto-generated-from-title" type="text" />
-          </div>
+        <div style="margin-bottom:12px;" class="field-block is-hidden" id="slugFieldBlock">
+          <label for="slug">SLUG (optional override)</label>
+          <input id="slug" placeholder="auto-generated-from-title" type="text" />
         </div>
 
         <div>
@@ -1034,38 +1368,35 @@
             <div class="format-toolbar" aria-label="Formatting controls">
               <button class="format-btn" data-action="bold" type="button">B</button>
               <button class="format-btn" data-action="italic" type="button">I</button>
-              <button class="format-btn" data-action="heading" type="button">H2</button>
-              <button class="format-btn" data-action="quote" type="button">QUOTE</button>
-              <button class="format-btn" data-action="list" type="button">LIST</button>
-              <button class="format-btn" data-action="link" type="button">LINK</button>
-              <button class="format-btn" data-action="image" type="button">IMAGE</button>
-              <button class="format-btn" data-action="figure" type="button">FIGURE</button>
-              <button class="format-btn" data-action="center" type="button">CENTER</button>
-              <button class="format-btn" data-action="date-header" type="button">DATE</button>
-              <button class="format-btn" data-action="divider" type="button">DIVIDER</button>
+              <button class="format-btn" data-action="quote" type="button">Quote</button>
+              <button class="format-btn" data-action="link" type="button">Link</button>
+              <button class="format-btn" data-action="image" type="button">Image</button>
+              <button class="format-btn" data-action="center" type="button">Center</button>
+              <button class="format-btn" data-action="divider" type="button">Divider</button>
+              <div class="toolbar-stats" aria-label="Writing stats">
+                <span class="toolbar-stat">Words: <span id="mWords">0</span></span>
+                <span class="toolbar-stat">Chars: <span id="mChars">0</span></span>
+                <span class="toolbar-stat">Read: <span id="mRead">0</span> min</span>
+              </div>
             </div>
             <textarea id="content" spellcheck="true" autocapitalize="sentences" autocorrect="on"
-              placeholder="Start with the sentence."></textarea>
+              placeholder="Just start writing."></textarea>
           </div>
         </div>
 
         <div class="metrics">
-          <div class="meter" id="meter">
-            <span class="pill">WORDS: <span id="mWords">0</span></span>
-            <span class="pill">CHARS: <span id="mChars">0</span></span>
-            <span class="pill">READ: <span id="mRead">0</span> MIN</span>
-          </div>
           <div class="meter">
             <span class="pill ok" id="saveState">DRAFT: CLEAN</span>
           </div>
         </div>
 
         <div class="actions">
-          <button class="btn primary" id="downloadBtn" type="button">DOWNLOAD_MD</button>
-          <button class="btn ghost" id="copyBtn" type="button">COPY_MD_TO_CLIPBOARD</button>
-          <button class="btn ghost" id="loadDraftBtn" type="button">LOAD_DRAFT</button>
-          <button class="btn danger" id="resetAllBtn" type="button">RESET_ALL</button>
-          <button class="btn danger" id="clearDraftBtn" type="button">CLEAR_DRAFT</button>
+          <button class="btn primary" id="publishBtn" type="button">Publish to OTW</button>
+          <button class="btn ghost" id="downloadBtn" type="button">Download Markdown</button>
+          <button class="btn ghost" id="copyBtn" type="button">Copy Markdown</button>
+          <button class="btn ghost" id="loadDraftBtn" type="button">Load Draft</button>
+          <button class="btn danger" id="resetAllBtn" type="button">Reset Draft</button>
+          <button class="btn danger" id="clearDraftBtn" type="button">Clear Local Draft</button>
         </div>
 
         <div class="mini" id="miniNote">
@@ -1080,6 +1411,44 @@
           <span class="chip" id="fileChip">FILE: —</span>
         </div>
 
+        <input id="narrativeImageInput" type="file" accept="image/*" hidden />
+        <div class="image-insert-panel" aria-label="Image insertion" id="imageInsertPanel">
+          <div class="image-panel-head">
+            <p class="image-panel-title">Inline Images</p>
+            <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+              <span class="chip" id="imageChip">No image selected</span>
+              <button class="image-panel-close" id="closeImagePanelBtn" type="button">Close</button>
+            </div>
+          </div>
+          <div class="image-panel-grid">
+            <div class="image-preview-rail">
+              <div class="image-preview-box" id="imagePreviewBox">
+                <div class="image-preview-empty" id="imagePreviewEmpty" aria-hidden="true"></div>
+                <img id="imagePreview" alt="Selected narrative image preview" hidden />
+              </div>
+              <button class="btn ghost" id="chooseImageBtn" type="button">Choose</button>
+              <div>
+                <label for="imageStyle">INSERT STYLE</label>
+                <select id="imageStyle">
+                  <option value="markdown">Inline image</option>
+                  <option value="figure">Figure with caption</option>
+                </select>
+              </div>
+            </div>
+            <div class="image-controls">
+              <div>
+                <label for="imageCaption">CAPTION (optional)</label>
+                <input id="imageCaption" type="text" placeholder="Shown below the image when you use Figure style" />
+              </div>
+              <div class="image-panel-actions">
+                <button class="btn primary" id="insertImageBtn" type="button">Insert</button>
+                <button class="btn ghost" id="clearImageBtn" type="button">Clear</button>
+              </div>
+              <div class="image-status" id="imageStatus">Pick a photo, add alt text if you want, and Ghost Writer will upload it and insert it for you.</div>
+            </div>
+          </div>
+        </div>
+
         <div class="preview-shell">
           <div class="preview-meta">
             <span id="lastSavedTag">LAST_SAVED: —</span>
@@ -1088,6 +1457,42 @@
           <article class="render-preview" id="mdPreview"></article>
         </div>
       </aside>
+    </div>
+  </div>
+
+  <div class="settings-modal" id="settingsModal" aria-hidden="true">
+    <div class="settings-panel" role="dialog" aria-modal="true" aria-label="Ghost Writer settings">
+      <div class="settings-head">
+        <h2 class="settings-title">Writer Settings</h2>
+        <button class="image-panel-close" id="settingsCloseBtn" type="button">Close</button>
+      </div>
+
+      <div class="settings-group">
+        <p class="settings-section-label">Publishing</p>
+        <div>
+          <label for="publishKey">PUBLISH KEY</label>
+          <input id="publishKey" type="password" placeholder="Saved only on this device" autocomplete="off" />
+          <div class="field-note">Used for image upload and direct publishing from iPad or iPhone.</div>
+        </div>
+      </div>
+
+      <div class="settings-group">
+        <p class="settings-section-label">Composer</p>
+        <label class="settings-toggle" for="showSlugToggle">
+          <input id="showSlugToggle" type="checkbox" />
+          <span class="settings-toggle-copy">
+            <span class="settings-toggle-title">Show Slug Field</span>
+            <span class="settings-toggle-body">Keep the slug override hidden unless you need a specific filename.</span>
+          </span>
+        </label>
+        <label class="settings-toggle" for="keepImagePanelOpenToggle">
+          <input id="keepImagePanelOpenToggle" type="checkbox" />
+          <span class="settings-toggle-copy">
+            <span class="settings-toggle-title">Keep Image Panel Open</span>
+            <span class="settings-toggle-body">Leave the image panel open after inserting media so you can place several images in a row.</span>
+          </span>
+        </label>
+      </div>
     </div>
   </div>
 
@@ -1162,14 +1567,20 @@
     // Editor + UX features
     // -----------------------
     const DRAFT_KEY = 'otw_ghost_writer_draft_v4';
+    const SETTINGS_KEY = 'otw_ghost_writer_settings_v1';
+    const PUBLISH_KEY_STORAGE = 'otw_ghost_writer_publish_key';
+    const PUBLISH_ENDPOINT = 'https://otw-fragments-publish.ryandavid.workers.dev/publish-ghost-draft';
+    const UPLOAD_GHOST_IMAGE_ENDPOINT = 'https://otw-fragments-publish.ryandavid.workers.dev/upload-ghost-image';
     let autosaveTimer = null;
     let dirty = false;
     let selectionState = { start: 0, end: 0 };
+    let pendingImageObjectUrl = null;
 
     const elTitle = document.getElementById('title');
     const elDate = document.getElementById('entryDate');
-    const elTags = document.getElementById('tags');
     const elSlug = document.getElementById('slug');
+    const elSlugFieldBlock = document.getElementById('slugFieldBlock');
+    const elPublishKey = document.getElementById('publishKey');
 
     const elContent = document.getElementById('content');
     const elWords = document.getElementById('mWords');
@@ -1185,6 +1596,76 @@
     const elMdPreview = document.getElementById('mdPreview');
 
     const elSubline = document.getElementById('subline');
+    const elSettingsBtn = document.getElementById('settingsBtn');
+    const elSettingsModal = document.getElementById('settingsModal');
+    const elSettingsCloseBtn = document.getElementById('settingsCloseBtn');
+    const elShowSlugToggle = document.getElementById('showSlugToggle');
+    const elKeepImagePanelOpenToggle = document.getElementById('keepImagePanelOpenToggle');
+    const elNarrativeImageInput = document.getElementById('narrativeImageInput');
+    const elImagePreview = document.getElementById('imagePreview');
+    const elImagePreviewEmpty = document.getElementById('imagePreviewEmpty');
+    const elImageChip = document.getElementById('imageChip');
+    const elImageInsertPanel = document.getElementById('imageInsertPanel');
+    const elImageCaption = document.getElementById('imageCaption');
+    const elImageStyle = document.getElementById('imageStyle');
+    const elImageStatus = document.getElementById('imageStatus');
+    const elChooseImageBtn = document.getElementById('chooseImageBtn');
+    const elInsertImageBtn = document.getElementById('insertImageBtn');
+    const elClearImageBtn = document.getElementById('clearImageBtn');
+    const elCloseImagePanelBtn = document.getElementById('closeImagePanelBtn');
+    const elPublishBtn = document.getElementById('publishBtn');
+    let settingsState = {
+      showSlugField: false,
+      keepImagePanelOpen: false
+    };
+
+    function getPublishKey() {
+      return (elPublishKey.value || localStorage.getItem(PUBLISH_KEY_STORAGE) || '').trim();
+    }
+
+    function loadSettings() {
+      try {
+        const raw = localStorage.getItem(SETTINGS_KEY);
+        if (!raw) return { ...settingsState };
+        const parsed = JSON.parse(raw);
+        return {
+          showSlugField: parsed.showSlugField === true,
+          keepImagePanelOpen: parsed.keepImagePanelOpen === true
+        };
+      } catch {
+        return { ...settingsState };
+      }
+    }
+
+    function applySettings() {
+      elSlugFieldBlock.classList.toggle('is-hidden', !settingsState.showSlugField);
+      elShowSlugToggle.checked = settingsState.showSlugField;
+      elKeepImagePanelOpenToggle.checked = settingsState.keepImagePanelOpen;
+    }
+
+    function saveSettings() {
+      localStorage.setItem(SETTINGS_KEY, JSON.stringify(settingsState));
+      applySettings();
+    }
+
+    function openSettingsModal() {
+      elSettingsModal.classList.add('is-open');
+      elSettingsModal.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeSettingsModal() {
+      elSettingsModal.classList.remove('is-open');
+      elSettingsModal.setAttribute('aria-hidden', 'true');
+    }
+
+    function persistPublishKey() {
+      const value = elPublishKey.value.trim();
+      if (!value) {
+        localStorage.removeItem(PUBLISH_KEY_STORAGE);
+        return;
+      }
+      localStorage.setItem(PUBLISH_KEY_STORAGE, value);
+    }
 
     function rememberSelection() {
       selectionState = {
@@ -1208,15 +1689,10 @@
     }
 
     function buildMarkdown() {
-      const title = elTitle.value.trim();
+      const title = elTitle.value.trim() || 'Untitled draft';
       const chosenDate = elDate.value;
-      const tags = elTags.value.trim();
-
-      const formattedDate = formatDateLong(chosenDate);
       const content = elContent.value.trim();
-
-      const tagLine = tags ? `Tags: ${tags}\n` : '';
-      return `# ${title}\nDate: ${formattedDate}\n${tagLine}\n${content}`;
+      return `# ${title}\nDate: ${chosenDate}\n\n${content}`.trim();
     }
 
     function buildFilename() {
@@ -1248,7 +1724,6 @@
     function renderPreview() {
       const title = elTitle.value.trim() || 'Untitled draft';
       const dateValue = elDate.value || localISOTime;
-      const tags = elTags.value.split(',').map(tag => tag.trim()).filter(Boolean);
       const body = elContent.value.trim();
       const renderedBody = body
         ? marked.parse(body, { breaks: true, gfm: true })
@@ -1257,7 +1732,6 @@
       elMdPreview.innerHTML = `
         <div class="render-kicker">${formatDateLong(dateValue)}</div>
         <h2 class="render-title">${title}</h2>
-        ${tags.length ? `<div class="render-tags">${tags.map(tag => `<span>#${tag}</span>`).join('')}</div>` : ''}
         <div class="render-body">${renderedBody}</div>
       `;
     }
@@ -1284,7 +1758,6 @@
       const payload = {
         title: elTitle.value,
         date: elDate.value,
-        tags: elTags.value,
         slug: elSlug.value,
         content: elContent.value,
         savedAt: new Date().toLocaleString()
@@ -1292,7 +1765,7 @@
 
       try {
         localStorage.setItem(DRAFT_KEY, JSON.stringify(payload));
-        elSaveChip.textContent = 'AUTOSAVE: ON';
+        elSaveChip.textContent = 'Autosave on';
         setLastSaved(payload.savedAt);
         markClean();
         setStatus('SAVED', 'ok');
@@ -1317,12 +1790,11 @@
 
         elTitle.value = payload.title || '';
         elDate.value = payload.date || localISOTime;
-        elTags.value = payload.tags || '';
         elSlug.value = payload.slug || '';
         elContent.value = payload.content || '';
 
         setLastSaved(payload.savedAt || null);
-        elSaveChip.textContent = 'AUTOSAVE: ON';
+        elSaveChip.textContent = 'Autosave on';
         markClean();
         updateMetrics();
         setStatus('DRAFT_LOADED', 'ok');
@@ -1337,6 +1809,7 @@
     function clearDraft() {
       localStorage.removeItem(DRAFT_KEY);
       setLastSaved(null);
+      elSaveChip.textContent = 'Autosave off';
       setStatus('DRAFT_CLEARED', 'warn');
     }
     function resetAll() {
@@ -1347,13 +1820,13 @@
       // 2) Reset fields to defaults
       elTitle.value = '';
       elDate.value = localISOTime;
-      elTags.value = '';
       elSlug.value = '';
 
       elContent.value = '';
+      clearSelectedImage();
 
       // 4) Reset UI chips/state
-      elSaveChip.textContent = 'AUTOSAVE: OFF';
+      elSaveChip.textContent = 'Autosave off';
       markClean();
       updateMetrics();
       setStatus('RESET', 'warn');
@@ -1377,11 +1850,10 @@
     }
 
     function downloadMarkdown() {
-      const title = elTitle.value.trim();
       const chosenDate = elDate.value;
       const content = elContent.value.trim();
 
-      if (!title || !content || !chosenDate) {
+      if (!content || !chosenDate) {
         alert("ERROR: LOG_INCOMPLETE");
         setStatus('INCOMPLETE', 'bad');
         return;
@@ -1397,6 +1869,162 @@
       a.click();
 
       setStatus('DOWNLOADED', 'ok');
+    }
+
+    function clearSelectedImage() {
+      if (pendingImageObjectUrl) {
+        URL.revokeObjectURL(pendingImageObjectUrl);
+        pendingImageObjectUrl = null;
+      }
+
+      elNarrativeImageInput.value = '';
+      elImageCaption.value = '';
+      elImageStyle.value = 'markdown';
+      elImageChip.textContent = 'No image selected';
+      elImagePreview.hidden = true;
+      elImagePreview.removeAttribute('src');
+      elImagePreviewEmpty.hidden = false;
+      elImageStatus.textContent = 'Pick a photo, add alt text if you want, and Ghost Writer will upload it and insert it for you.';
+    }
+
+    function openImagePanel(mode = 'markdown') {
+      elImageInsertPanel.classList.add('is-open');
+      elImageStyle.value = mode;
+      elImageStatus.textContent = 'Choose a photo when you are ready, then insert it where your cursor is.';
+      requestAnimationFrame(() => {
+        elImageInsertPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      });
+    }
+
+    function closeImagePanel() {
+      elImageInsertPanel.classList.remove('is-open');
+    }
+
+    function setSelectedImage(file) {
+      if (pendingImageObjectUrl) {
+        URL.revokeObjectURL(pendingImageObjectUrl);
+        pendingImageObjectUrl = null;
+      }
+
+      if (!file) {
+        clearSelectedImage();
+        return;
+      }
+
+      pendingImageObjectUrl = URL.createObjectURL(file);
+      elImagePreview.src = pendingImageObjectUrl;
+      elImagePreview.hidden = false;
+      elImagePreviewEmpty.hidden = true;
+      elImageChip.textContent = file.name || 'Image ready';
+      elImageStatus.textContent = 'Image ready. Insert it where your cursor is currently sitting.';
+    }
+
+    async function uploadSelectedImageAndInsert() {
+      const file = elNarrativeImageInput.files && elNarrativeImageInput.files[0];
+      if (!file) {
+        elImageStatus.textContent = 'Choose a photo first.';
+        return;
+      }
+
+      const publishKey = getPublishKey();
+      if (!publishKey) {
+        elImageStatus.textContent = 'Add your publish key first so this device can upload narrative images.';
+        setStatus('PUBLISH_KEY_REQUIRED', 'warn');
+        return;
+      }
+
+      persistPublishKey();
+      const formData = new FormData();
+      formData.append('image', file);
+      formData.append('date', elDate.value || localISOTime);
+      formData.append('title', elTitle.value.trim() || 'Untitled draft');
+      formData.append('alt', elTitle.value.trim() || 'Narrative image');
+      formData.append('caption', elImageCaption.value.trim());
+
+      elImageStatus.textContent = 'Uploading image to OTW media storage...';
+      setStatus('UPLOADING_IMAGE', 'warn');
+
+      try {
+        const response = await fetch(UPLOAD_GHOST_IMAGE_ENDPOINT, {
+          method: 'POST',
+          headers: {
+            'x-publish-key': publishKey
+          },
+          body: formData
+        });
+
+        const payload = await response.json().catch(() => ({}));
+        if (!response.ok || !payload.ok || !payload.uploaded) {
+          throw new Error(payload.error || `Image upload failed with status ${response.status}`);
+        }
+
+        const snippet = elImageStyle.value === 'figure'
+          ? `${payload.uploaded.figure}\n`
+          : `${payload.uploaded.markdown}\n`;
+        insertAtCursor(snippet);
+        elImageStatus.textContent = 'Image uploaded and inserted into your draft.';
+        setStatus('IMAGE_INSERTED', 'ok');
+        clearSelectedImage();
+        if (!settingsState.keepImagePanelOpen) {
+          closeImagePanel();
+        }
+      } catch (error) {
+        elImageStatus.textContent = error.message || 'Image upload failed.';
+        setStatus('IMAGE_UPLOAD_FAILED', 'bad');
+      }
+    }
+
+    async function publishDraft() {
+      const body = elContent.value.trim();
+      const publishKey = getPublishKey();
+
+      if (!body) {
+        setStatus('INCOMPLETE', 'bad');
+        elSubline.textContent = 'Write the draft first, then publish it.';
+        return;
+      }
+
+      if (!publishKey) {
+        setStatus('PUBLISH_KEY_REQUIRED', 'warn');
+        elSubline.textContent = 'Add your publish key so this device can publish directly to current_narrative.';
+        return;
+      }
+
+      persistPublishKey();
+      elPublishBtn.disabled = true;
+      elPublishBtn.textContent = 'Publishing...';
+      setStatus('PUBLISHING', 'warn');
+      elSubline.textContent = 'Publishing draft to current_narrative...';
+
+      try {
+        const response = await fetch(PUBLISH_ENDPOINT, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-publish-key': publishKey
+          },
+          body: JSON.stringify({
+            title: elTitle.value.trim(),
+            body: elContent.value,
+            date: elDate.value || localISOTime
+          })
+        });
+
+        const payload = await response.json().catch(() => ({}));
+        if (!response.ok || !payload.ok) {
+          throw new Error(payload.error || `Publish failed with status ${response.status}`);
+        }
+
+        saveDraft();
+        setStatus('PUBLISHED', 'ok');
+        elSubline.textContent = `Published to ${payload.file || 'current_narrative'}.`;
+      } catch (error) {
+        setStatus('PUBLISH_FAILED', 'bad');
+        elSubline.textContent = error.message || 'Publish failed.';
+      } finally {
+        elPublishBtn.disabled = false;
+        elPublishBtn.textContent = 'Publish to OTW';
+      }
     }
 
     function insertAtCursor(snippet) {
@@ -1448,38 +2076,29 @@
       scheduleAutosave();
     }
 
-    function buildFigureSnippet(filename, altText, caption) {
-      const url = `/Images/Blog/${filename}`;
-      const alt = altText || 'Alt_Text';
-      const cap = caption || '';
-      return `<figure>\n  <img src="${url}" alt="${alt}">\n  <figcaption><em>${cap}</em></figcaption>\n</figure>\n`;
-    }
-
     function buildCenteredTextSnippet(text) {
       const safeText = (text || 'Centered text').trim() || 'Centered text';
       return `\n\n<div class="otw-center">${safeText}</div>\n\n`;
     }
 
-    function promptForFigure() {
-      const filename = prompt("ENTER_FILENAME (e.g., photo.jpg):", "");
-      if (!filename) return null;
-
-      const altText = prompt("ALT_TEXT (describe image for accessibility):", "Alt_Text") || "Alt_Text";
-      const caption = prompt("CAPTION (will appear italic below image):", "Caption...") || "Caption...";
-
-      return buildFigureSnippet(filename, altText, caption);
-    }
-
     function initEditorAfterAuth() {
       loadDraft();
+      settingsState = loadSettings();
+      applySettings();
+      const storedPublishKey = localStorage.getItem(PUBLISH_KEY_STORAGE) || '';
+      if (storedPublishKey) {
+        elPublishKey.value = storedPublishKey;
+      }
+      clearSelectedImage();
 
       // Live metrics + autosave
       const onAnyChange = () => { updateMetrics(); markDirty(); scheduleAutosave(); };
 
       elTitle.addEventListener('input', onAnyChange);
       elDate.addEventListener('change', onAnyChange);
-      elTags.addEventListener('input', onAnyChange);
       elSlug.addEventListener('input', onAnyChange);
+      elPublishKey.addEventListener('change', persistPublishKey);
+      elPublishKey.addEventListener('blur', persistPublishKey);
 
       elContent.addEventListener('input', onAnyChange);
       elContent.addEventListener('keyup', rememberSelection);
@@ -1502,9 +2121,7 @@
         const action = button.dataset.action;
         if (action === 'bold') wrapSelection('**', '**', 'bold text');
         if (action === 'italic') wrapSelection('*', '*', 'italic text');
-        if (action === 'heading') insertAtCursor(`\n\n## Section heading\n\n`);
         if (action === 'quote') prefixSelectedLines('> ', 'Quoted line');
-        if (action === 'list') prefixSelectedLines('- ', 'List item');
         if (action === 'link') {
           const url = prompt('ENTER_URL:', 'https://');
           if (!url) return;
@@ -1512,28 +2129,18 @@
           insertAtCursor(`[${text}](${url})`);
         }
         if (action === 'image') {
-          const filename = prompt('ENTER_FILENAME (e.g., photo.jpg):', '');
-          if (!filename) return;
-          insertAtCursor(`![Alt_Text](/Images/Blog/${filename})`);
-        }
-        if (action === 'figure') {
-          const snippet = promptForFigure();
-          if (snippet) insertAtCursor(snippet);
+          openImagePanel('markdown');
         }
         if (action === 'center') {
           const text = prompt('CENTERED_TEXT:', 'Centered text');
           if (text === null) return;
           insertAtCursor(buildCenteredTextSnippet(text));
         }
-        if (action === 'date-header') {
-          const iso = elDate.value || localISOTime;
-          const formatted = formatDateLong(iso);
-          insertAtCursor(`\n\n---\n\n**${formatted}**\n\n`);
-        }
         if (action === 'divider') insertAtCursor(`\n\n---\n\n`);
       });
 
       // Buttons
+      document.getElementById('publishBtn').addEventListener('click', publishDraft);
       document.getElementById('downloadBtn').addEventListener('click', downloadMarkdown);
 
       document.getElementById('copyBtn').addEventListener('click', async () => {
@@ -1555,10 +2162,41 @@
         if (!ok) return;
         clearDraft();
       });
+      elSettingsBtn.addEventListener('click', openSettingsModal);
+      elSettingsCloseBtn.addEventListener('click', closeSettingsModal);
+      elSettingsModal.addEventListener('click', (event) => {
+        if (event.target === elSettingsModal) {
+          closeSettingsModal();
+        }
+      });
+      elShowSlugToggle.addEventListener('change', () => {
+        settingsState.showSlugField = elShowSlugToggle.checked;
+        saveSettings();
+      });
+      elKeepImagePanelOpenToggle.addEventListener('change', () => {
+        settingsState.keepImagePanelOpen = elKeepImagePanelOpenToggle.checked;
+        saveSettings();
+      });
+      elChooseImageBtn.addEventListener('click', () => {
+        rememberSelection();
+        elNarrativeImageInput.click();
+      });
+      elNarrativeImageInput.addEventListener('change', () => {
+        const file = elNarrativeImageInput.files && elNarrativeImageInput.files[0];
+        setSelectedImage(file || null);
+      });
+      elInsertImageBtn.addEventListener('click', uploadSelectedImageAndInsert);
+      elClearImageBtn.addEventListener('click', clearSelectedImage);
+      elCloseImagePanelBtn.addEventListener('click', closeImagePanel);
       document.getElementById('resetAllBtn').addEventListener('click', () => {
         const ok = confirm('RESET_ALL? This clears fields + draft + editor.');
         if (!ok) return;
         resetAll();
+      });
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && elSettingsModal.classList.contains('is-open')) {
+          closeSettingsModal();
+        }
       });
       // Initial UI state
       setStatus('READY', 'ok');

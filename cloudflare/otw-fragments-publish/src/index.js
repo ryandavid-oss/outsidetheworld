@@ -315,6 +315,52 @@ function buildIotdImageUrl(env, objectKey) {
   return `${base}/${objectKey}`;
 }
 
+function normalizeNarrativeImageAlt(raw) {
+  return String(raw || "").trim() || "Narrative image";
+}
+
+function normalizeNarrativeImageCaption(raw) {
+  return String(raw || "").trim();
+}
+
+function getNarrativePublicBaseUrl(env) {
+  const base = String(env.NARRATIVE_PUBLIC_BASE_URL || env.IOTD_PUBLIC_BASE_URL || "").replace(/\/+$/g, "");
+  if (!base) {
+    throw new Error("Narrative public base URL is not configured");
+  }
+  return base;
+}
+
+function buildNarrativeImageUrl(env, objectKey) {
+  return `${getNarrativePublicBaseUrl(env)}/${objectKey}`;
+}
+
+function buildNarrativeImageObjectKey(date, title, extension) {
+  const titleSlug = slugify(title) || "untitled-draft";
+  const stamp = Date.now().toString(36);
+  return `narrative/${date}-${titleSlug}-${stamp}.${extension}`;
+}
+
+function escapeHtmlAttr(value) {
+  return String(value || "")
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+function buildNarrativeImageSnippets({ url, alt, caption }) {
+  const safeUrl = escapeHtmlAttr(url);
+  const safeAlt = escapeHtmlAttr(alt);
+  const safeCaption = escapeHtmlAttr(caption);
+  const markdown = `![${alt}](${url})`;
+  const figure = caption
+    ? `<figure>\n  <img src="${safeUrl}" alt="${safeAlt}">\n  <figcaption><em>${safeCaption}</em></figcaption>\n</figure>`
+    : `<figure>\n  <img src="${safeUrl}" alt="${safeAlt}">\n</figure>`;
+
+  return { markdown, figure };
+}
+
 function normalizeIotdCaption(raw) {
   return String(raw || "").trim();
 }
@@ -767,6 +813,7 @@ export default {
           publish_bot_fragment: "POST /publish-bot-fragment",
           publish_changelog_entry: "POST /publish-changelog-entry",
           publish_ghost_draft: "POST /publish-ghost-draft",
+          upload_ghost_image: "POST /upload-ghost-image",
           publish_iotd_entry: "POST /publish-iotd-entry",
           publish_wordperson_entry: "POST /publish-wordperson-entry"
         }
@@ -894,6 +941,55 @@ export default {
         });
       } catch (error) {
         return jsonResponse({ ok: false, error: error.message || "Unknown ghost publish error" }, 400);
+      }
+    }
+
+    if (request.method === "POST" && url.pathname === "/upload-ghost-image") {
+      if (!isAuthorized(request, env)) {
+        return jsonResponse({ ok: false, error: "Unauthorized" }, 401);
+      }
+
+      try {
+        if (!env.IOTD_BUCKET) {
+          throw new Error("Image bucket binding is not configured");
+        }
+
+        const formData = await request.formData();
+        const file = formData.get("image");
+        if (!(file instanceof File)) {
+          throw new Error("Narrative image file is required");
+        }
+
+        const date = normalizeNarrativeDate(formData.get("date"));
+        const title = String(formData.get("title") || "").trim() || "Untitled draft";
+        const alt = normalizeNarrativeImageAlt(formData.get("alt"));
+        const caption = normalizeNarrativeImageCaption(formData.get("caption"));
+        const extension = detectImageExtension(file);
+        const objectKey = buildNarrativeImageObjectKey(date, title, extension);
+        const imageUrl = buildNarrativeImageUrl(env, objectKey);
+
+        await env.IOTD_BUCKET.put(objectKey, await file.arrayBuffer(), {
+          httpMetadata: {
+            contentType: file.type || "application/octet-stream"
+          }
+        });
+
+        return jsonResponse({
+          ok: true,
+          uploaded: {
+            object_key: objectKey,
+            url: imageUrl,
+            alt,
+            caption,
+            ...buildNarrativeImageSnippets({
+              url: imageUrl,
+              alt,
+              caption
+            })
+          }
+        });
+      } catch (error) {
+        return jsonResponse({ ok: false, error: error.message || "Unknown ghost image upload error" }, 400);
       }
     }
 
