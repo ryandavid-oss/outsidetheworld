@@ -893,6 +893,17 @@
       gap: 12px;
     }
 
+    .fragments-meta-row {
+      grid-template-columns: minmax(240px, 1.1fr) minmax(300px, 0.95fr);
+      align-items: start;
+    }
+
+    .changelog-meta-row {
+      grid-template-columns: 190px minmax(220px, 0.9fr);
+      align-items: end;
+      max-width: 560px;
+    }
+
     input,
     textarea,
     select {
@@ -983,6 +994,11 @@
     .side-stack {
       display: grid;
       gap: 14px;
+    }
+
+    #fragmentsWorkspace .layout {
+      grid-template-columns: minmax(0, 920px);
+      justify-content: center;
     }
 
     .compose-row {
@@ -1222,6 +1238,7 @@
 
     .iotd-meta-row {
       align-items: start;
+      grid-template-columns: 190px minmax(0, 1fr);
     }
 
     .iotd-form-grid .helper {
@@ -1380,14 +1397,22 @@
     }
 
     @media (min-width: 861px) and (max-width: 1180px) {
+      .fragments-meta-row {
+        grid-template-columns: minmax(220px, 1fr) minmax(280px, 0.95fr);
+      }
+
+      .changelog-meta-row {
+        grid-template-columns: 176px minmax(200px, 0.92fr);
+      }
+
       .iotd-layout {
         grid-template-columns: minmax(0, 1fr) minmax(320px, 0.84fr);
         gap: 12px;
       }
 
       .iotd-meta-row {
-        grid-template-columns: 1fr;
-        gap: 14px;
+        grid-template-columns: 170px minmax(0, 1fr);
+        gap: 12px;
       }
 
       .iotd-form-grid .action-row {
@@ -2770,7 +2795,7 @@
             </div>
           </div>
 
-          <div class="meta-row">
+          <div class="meta-row fragments-meta-row">
             <div class="field">
               <label for="fragmentTag">Tag</label>
               <select id="fragmentTag" name="fragmentTag">
@@ -2807,7 +2832,7 @@
           <div class="status-line" id="changelogStatusLine">Quick-drop mode: write one clean update, then stage or export it without fighting JSON by hand.</div>
 
           <form class="form-grid" id="changelogForm">
-            <div class="meta-row">
+            <div class="meta-row changelog-meta-row">
               <div class="field">
                 <label for="changelogDate">Date</label>
                 <input id="changelogDate" name="changelogDate" type="date" />
