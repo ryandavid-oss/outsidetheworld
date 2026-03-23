@@ -18,6 +18,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" />
   <link rel="stylesheet" href="theme.css" />
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <style>
     :root {
       --safe-top: env(safe-area-inset-top);
@@ -40,7 +41,7 @@
       --radius-xl: 28px;
       --radius-lg: 22px;
       --radius-md: 16px;
-      --max-width: 920px;
+      --max-width: 1320px;
       --ease: cubic-bezier(0.23, 1, 0.32, 1);
     }
 
@@ -94,7 +95,7 @@
     .shell {
       width: min(var(--max-width), calc(100% - 20px));
       margin: 0 auto;
-      padding: calc(var(--safe-top) + 10px) 0 56px;
+      padding: calc(var(--safe-top) + 10px) 0 calc(env(safe-area-inset-bottom) + 158px);
     }
 
     .topbar {
@@ -125,6 +126,57 @@
       justify-content: space-between;
       gap: 12px;
       flex-wrap: wrap;
+    }
+
+    .topbar-controls {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .status-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      padding: 0;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.04);
+      cursor: pointer;
+      transition: 0.25s var(--ease);
+    }
+
+    body[data-theme="light"] .status-toggle {
+      background: rgba(255, 255, 255, 0.48);
+    }
+
+    .status-toggle:hover,
+    .status-toggle:focus-visible {
+      border-color: var(--brand-blue);
+      background: rgba(160, 190, 245, 0.08);
+      outline: none;
+    }
+
+    .status-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      background: var(--signal-green);
+      box-shadow: 0 0 0 5px rgba(75, 227, 110, 0.12);
+      transition: 0.25s var(--ease);
+    }
+
+    .status-dot.is-caution {
+      background: #f0c44c;
+      box-shadow: 0 0 0 5px rgba(240, 196, 76, 0.14);
+    }
+
+    .status-dot.is-halt {
+      background: #de6673;
+      box-shadow: 0 0 0 5px rgba(222, 102, 115, 0.14);
     }
 
     .brand {
@@ -173,6 +225,50 @@
       height: 18px;
     }
 
+    .topbar-profile {
+      position: relative;
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 50% 12%, rgba(160, 190, 245, 0.18), transparent 54%),
+        rgba(255, 255, 255, 0.04);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.18);
+      flex: 0 0 auto;
+    }
+
+    body[data-theme="light"] .topbar-profile {
+      background:
+        radial-gradient(circle at 50% 12%, rgba(99, 149, 238, 0.12), transparent 54%),
+        rgba(255, 255, 255, 0.5);
+      box-shadow: 0 10px 18px rgba(27, 54, 93, 0.08);
+    }
+
+    .topbar-profile img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .topbar-profile::after {
+      content: "";
+      position: absolute;
+      right: 4px;
+      bottom: 4px;
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--signal-green);
+      box-shadow: 0 0 0 3px rgba(6, 8, 12, 0.9);
+    }
+
+    body[data-theme="light"] .topbar-profile::after {
+      box-shadow: 0 0 0 3px rgba(247, 243, 235, 0.95);
+    }
+
     .topbar-actions {
       position: absolute;
       top: calc(100% + 8px);
@@ -204,6 +300,37 @@
       opacity: 1;
       pointer-events: auto;
       transform: translateY(0);
+    }
+
+    .menu-status-card {
+      padding: 12px 14px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background:
+        radial-gradient(180px 80px at 50% 0%, rgba(99, 149, 238, 0.08), transparent 72%),
+        rgba(255, 255, 255, 0.03);
+    }
+
+    body[data-theme="light"] .menu-status-card {
+      background:
+        radial-gradient(180px 80px at 50% 0%, rgba(99, 149, 238, 0.06), transparent 72%),
+        rgba(255, 255, 255, 0.5);
+    }
+
+    .menu-status-title {
+      margin: 0;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-main);
+    }
+
+    .menu-status-copy {
+      margin: 8px 0 0;
+      color: var(--text-soft);
+      font-size: 0.84rem;
+      line-height: 1.55;
     }
 
     .pill-btn,
@@ -295,101 +422,12 @@
       max-width: 560px;
     }
 
-    .status-card {
-      width: 100%;
-      max-width: 720px;
-      margin-top: 10px;
-      padding: 16px 18px;
-      border-radius: 28px;
-      border: 1px solid rgba(75, 227, 110, 0.18);
-      background:
-        radial-gradient(240px 96px at 50% 0%, rgba(75, 227, 110, 0.12), transparent 72%),
-        linear-gradient(180deg, rgba(11, 20, 15, 0.88), rgba(8, 13, 10, 0.82));
-      box-shadow:
-        0 24px 48px rgba(0, 0, 0, 0.26),
-        0 0 30px rgba(75, 227, 110, 0.08);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-    }
-
-    body[data-theme="light"] .status-card {
-      background:
-        radial-gradient(240px 96px at 50% 0%, rgba(75, 227, 110, 0.1), transparent 72%),
-        linear-gradient(180deg, rgba(247, 250, 246, 0.96), rgba(238, 245, 239, 0.92));
-      border-color: rgba(75, 227, 110, 0.16);
-      box-shadow: 0 18px 40px rgba(27, 54, 93, 0.1), 0 0 24px rgba(75, 227, 110, 0.06);
-    }
-
-    .status-pill {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      min-height: 60px;
-      padding: 12px 16px;
-      border-radius: 999px;
-      border: 1px solid rgba(75, 227, 110, 0.16);
-      background:
-        linear-gradient(135deg, rgba(75, 227, 110, 0.18), rgba(35, 71, 42, 0.36)),
-        rgba(8, 18, 11, 0.72);
-      box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.06),
-        0 14px 34px rgba(0, 0, 0, 0.22),
-        0 0 24px rgba(75, 227, 110, 0.08);
-    }
-
-    body[data-theme="light"] .status-pill {
-      background:
-        linear-gradient(135deg, rgba(75, 227, 110, 0.16), rgba(210, 244, 220, 0.68)),
-        rgba(246, 250, 246, 0.9);
-      border-color: rgba(75, 227, 110, 0.14);
-      box-shadow: 0 14px 30px rgba(27, 54, 93, 0.08), 0 0 18px rgba(75, 227, 110, 0.06);
-    }
-
-    .status-state-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 999px;
-      display: grid;
-      place-items: center;
-      color: #071108;
-      background: var(--signal-green);
-      box-shadow:
-        0 0 0 6px rgba(75, 227, 110, 0.08),
-        0 0 24px rgba(75, 227, 110, 0.2);
-      flex-shrink: 0;
-    }
-
-    .status-state-icon svg {
-      width: 18px;
-      height: 18px;
-      display: block;
-    }
-
-    .status-state-icon.is-caution {
-      background: #f0c44c;
-      box-shadow:
-        0 0 0 6px rgba(240, 196, 76, 0.12),
-        0 0 24px rgba(240, 196, 76, 0.18);
-    }
-
-    .status-state-icon.is-halt {
-      background: #de6673;
-      box-shadow:
-        0 0 0 6px rgba(222, 102, 115, 0.12),
-        0 0 24px rgba(222, 102, 115, 0.18);
-    }
-
-    .status-pill-text {
-      margin: 0;
-      color: #dfffe7;
-      font-family: "IBM Plex Mono", monospace;
-      font-size: clamp(0.94rem, 2.5vw, 1.05rem);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    body[data-theme="light"] .status-pill-text {
-      color: #1f5c31;
+    @media (min-width: 900px) {
+      .app-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        max-width: 960px;
+        gap: 22px 18px;
+      }
     }
 
     @keyframes signalPulse {
@@ -594,16 +632,22 @@
     .back-icon-btn {
       display: none;
       appearance: none;
-      width: 42px;
       height: 42px;
+      min-width: 42px;
       border-radius: 999px;
       border: 1px solid var(--border);
       background: rgba(255, 255, 255, 0.04);
       color: var(--text-main);
       align-items: center;
       justify-content: center;
+      gap: 8px;
+      padding: 0 14px;
       cursor: pointer;
       transition: 0.25s var(--ease);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
     }
 
     .back-icon-btn.is-visible {
@@ -620,6 +664,10 @@
     .back-icon-btn svg {
       width: 18px;
       height: 18px;
+    }
+
+    .back-icon-label {
+      display: inline;
     }
 
     .workspace-nav {
@@ -1161,6 +1209,25 @@
       gap: 18px;
     }
 
+    .iotd-preview-card.is-empty .iotd-kicker,
+    .iotd-preview-card.is-empty .iotd-title,
+    .iotd-preview-card.is-empty .iotd-caption {
+      display: none;
+    }
+
+    .iotd-layout {
+      grid-template-columns: minmax(0, 1.06fr) minmax(340px, 0.94fr);
+      align-items: start;
+    }
+
+    .iotd-meta-row {
+      align-items: start;
+    }
+
+    .iotd-form-grid .helper {
+      max-width: 52ch;
+    }
+
     .iotd-image-frame {
       position: relative;
       overflow: hidden;
@@ -1187,28 +1254,16 @@
       display: block;
     }
 
+    .iotd-image-frame img[hidden] {
+      display: none !important;
+    }
+
     .iotd-image-placeholder {
       display: grid;
-      gap: 12px;
-      justify-items: center;
+      place-items: center;
       padding: 28px;
       text-align: center;
       color: var(--text-soft);
-    }
-
-    .iotd-image-placeholder img {
-      width: 88px;
-      height: 88px;
-      object-fit: contain;
-      display: block;
-      filter: drop-shadow(0 0 18px rgba(75, 227, 110, 0.18));
-    }
-
-    .iotd-image-placeholder strong {
-      color: var(--text-main);
-      font-size: 0.98rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
     }
 
     .iotd-kicker {
@@ -1286,6 +1341,70 @@
     body[data-theme="light"] .iotd-manifest-preview {
       background: rgba(231, 239, 235, 0.95);
       color: #23453f;
+    }
+
+    .iotd-details {
+      display: grid;
+      gap: 12px;
+    }
+
+    .iotd-details summary {
+      cursor: pointer;
+      list-style: none;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--brand-teal);
+      user-select: none;
+    }
+
+    .iotd-details summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .iotd-details summary::before {
+      content: "+";
+      display: inline-block;
+      margin-right: 10px;
+      color: var(--brand-light-blue);
+    }
+
+    .iotd-details[open] summary::before {
+      content: "−";
+    }
+
+    .iotd-details-body {
+      display: grid;
+      gap: 12px;
+    }
+
+    @media (min-width: 861px) and (max-width: 1180px) {
+      .iotd-layout {
+        grid-template-columns: minmax(0, 1fr) minmax(320px, 0.84fr);
+        gap: 12px;
+      }
+
+      .iotd-meta-row {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+
+      .iotd-form-grid .action-row {
+        gap: 10px;
+      }
+
+      .iotd-side-stack {
+        gap: 12px;
+      }
+
+      .iotd-preview-card {
+        gap: 14px;
+      }
+
+      .iotd-title {
+        font-size: clamp(1.7rem, 2.5vw, 2.15rem);
+      }
     }
 
     .ghost-preview-meta {
@@ -1398,56 +1517,665 @@
 
     .full-ghost-shell {
       display: grid;
-      gap: 14px;
+      gap: 0;
     }
 
-    .full-ghost-topline {
+    .gfull-root {
+      --gfull-ink: rgba(255, 255, 255, 0.92);
+      --gfull-muted: rgba(145, 175, 179, 0.75);
+      --gfull-surface: rgba(145, 175, 179, 0.045);
+      --gfull-border: rgba(145, 175, 179, 0.18);
+      --gfull-toolbar: rgba(5, 5, 5, 0.55);
+      --gfull-editor: rgba(0, 0, 0, 0.45);
+      --gfull-input: rgba(5, 5, 5, 0.72);
+      --gfull-cursor: var(--brand-teal);
+      --gfull-control-bg: rgba(255, 255, 255, 0.03);
+      --gfull-control-border: rgba(145, 175, 179, 0.22);
+      --gfull-control-ink: var(--gfull-ink);
+      --gfull-control-muted: var(--gfull-muted);
+      color: var(--gfull-ink);
+      background:
+        radial-gradient(circle at 16% 0%, rgba(99, 149, 238, 0.08), transparent 44%),
+        radial-gradient(circle at 84% 0%, rgba(155, 89, 182, 0.08), transparent 40%),
+        linear-gradient(180deg, rgba(9, 13, 18, 0.96), rgba(6, 8, 12, 0.92));
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 18px;
+      box-shadow: 0 24px 56px rgba(0, 0, 0, 0.24);
+    }
+
+    .gfull-root[data-writer-mode="light"] {
+      --gfull-ink: #111;
+      --gfull-muted: rgba(0, 0, 0, 0.58);
+      --gfull-surface: rgba(255, 255, 255, 0.72);
+      --gfull-border: rgba(0, 0, 0, 0.1);
+      --gfull-toolbar: rgba(255, 255, 255, 0.72);
+      --gfull-editor: rgba(255, 255, 255, 0.86);
+      --gfull-input: rgba(255, 255, 255, 0.78);
+      --gfull-cursor: #234A9D;
+      --gfull-control-bg: rgba(27, 54, 93, 0.05);
+      --gfull-control-border: rgba(27, 54, 93, 0.18);
+      --gfull-control-ink: #1b365d;
+      --gfull-control-muted: rgba(27, 54, 93, 0.72);
+      background:
+        radial-gradient(circle at 16% 0%, rgba(99, 149, 238, 0.06), transparent 44%),
+        radial-gradient(circle at 84% 0%, rgba(155, 89, 182, 0.06), transparent 40%),
+        linear-gradient(180deg, rgba(247, 243, 235, 0.96), rgba(238, 232, 223, 0.94));
+      border-color: rgba(27, 54, 93, 0.12);
+      box-shadow: 0 18px 40px rgba(27, 54, 93, 0.1);
+    }
+
+    .gfull-root[data-writer-mode="sepia"] {
+      --gfull-ink: #1f1a12;
+      --gfull-muted: rgba(31, 26, 18, 0.58);
+      --gfull-surface: rgba(245, 236, 215, 0.76);
+      --gfull-border: rgba(25, 15, 10, 0.12);
+      --gfull-toolbar: rgba(245, 236, 215, 0.82);
+      --gfull-editor: rgba(245, 236, 215, 0.92);
+      --gfull-input: rgba(245, 236, 215, 0.82);
+      --gfull-cursor: #2d4f9a;
+      --gfull-control-bg: rgba(68, 53, 39, 0.06);
+      --gfull-control-border: rgba(68, 53, 39, 0.18);
+      --gfull-control-ink: #443527;
+      --gfull-control-muted: rgba(68, 53, 39, 0.74);
+      background:
+        radial-gradient(circle at 16% 0%, rgba(99, 149, 238, 0.05), transparent 44%),
+        radial-gradient(circle at 84% 0%, rgba(155, 89, 182, 0.05), transparent 40%),
+        linear-gradient(180deg, rgba(245, 236, 215, 0.98), rgba(237, 226, 204, 0.96));
+      border-color: rgba(99, 85, 68, 0.16);
+    }
+
+    .gfull-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.18fr) minmax(340px, 0.82fr);
+      gap: 16px;
+      align-items: start;
+    }
+
+    .gfull-card {
+      position: relative;
+      background: var(--gfull-surface);
+      border: 1px solid var(--gfull-border);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      padding: 16px;
+      overflow: hidden;
+    }
+
+    .gfull-card-head,
+    .gfull-image-panel-head,
+    .gfull-settings-head,
+    .gfull-preview-meta {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .full-ghost-copy {
-      margin: 0;
-      max-width: 54ch;
-    }
-
-    .full-ghost-actions {
-      display: flex;
       gap: 10px;
       flex-wrap: wrap;
     }
 
-    .full-ghost-frame {
-      width: 100%;
-      min-height: clamp(720px, 84vh, 1180px);
-      border-radius: 28px;
-      border: 1px solid var(--border);
-      overflow: hidden;
-      background:
-        radial-gradient(260px 120px at 14% 0%, rgba(99, 149, 238, 0.08), transparent 70%),
-        radial-gradient(240px 120px at 86% 0%, rgba(155, 89, 182, 0.08), transparent 70%),
-        linear-gradient(180deg, rgba(4, 8, 12, 0.92), rgba(4, 8, 12, 0.76));
-      box-shadow: 0 24px 56px rgba(0, 0, 0, 0.22);
+    .gfull-card-label,
+    .gfull-image-panel-title,
+    .gfull-preview-meta,
+    .gfull-label,
+    .gfull-settings-section,
+    .gfull-mini,
+    .gfull-btn,
+    .gfull-chip,
+    .gfull-toolbar-stat,
+    .gfull-format-btn,
+    .gfull-format-select,
+    .gfull-settings-title {
+      font-family: "IBM Plex Mono", monospace;
     }
 
-    .full-ghost-frame iframe {
-      width: 100%;
-      min-height: clamp(720px, 84vh, 1180px);
-      border: 0;
+    .gfull-card-label,
+    .gfull-image-panel-title {
+      margin: 0;
+      font-size: 0.64rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(160, 190, 245, 0.92);
+    }
+
+    .gfull-card-label::after {
+      content: "";
+      display: inline-block;
+      width: 36px;
+      height: 1px;
+      margin-left: 10px;
+      vertical-align: middle;
+      background: rgba(145, 175, 179, 0.22);
+    }
+
+    .gfull-chip {
+      font-size: 0.55rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 6px 8px;
+      border: 1px solid rgba(160, 190, 245, 0.16);
+      color: rgba(160, 190, 245, 0.9);
+      background: rgba(160, 190, 245, 0.05);
+      white-space: nowrap;
+    }
+
+    .gfull-head-actions,
+    .gfull-actions,
+    .gfull-toolbar,
+    .gfull-toolbar-stats,
+    .gfull-image-panel-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .gfull-head-actions {
+      justify-content: flex-end;
+    }
+
+    .gfull-icon-btn,
+    .gfull-format-btn,
+    .gfull-image-close,
+    .gfull-btn {
+      appearance: none;
+      cursor: pointer;
+      border: 1px solid var(--gfull-control-border);
+      background: var(--gfull-control-bg);
+      color: var(--gfull-control-ink);
+      transition: background .2s ease, border-color .2s ease, transform .15s ease, box-shadow .2s ease;
+    }
+
+    .gfull-icon-btn {
+      width: 38px;
+      height: 38px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .gfull-icon-btn svg {
+      width: 16px;
+      height: 16px;
       display: block;
-      background: transparent;
     }
 
-    body[data-theme="light"] .full-ghost-frame {
+    .gfull-title-row {
+      display: grid;
+      grid-template-columns: 152px minmax(0, 1fr);
+      gap: 12px;
+      align-items: end;
+      margin-bottom: 12px;
+    }
+
+    .gfull-field-hidden {
+      display: none;
+    }
+
+    .gfull-label,
+    .gfull-field-note,
+    .gfull-status-text,
+    .gfull-toolbar-mode-label {
+      display: block;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .gfull-label {
+      margin: 0 0 6px;
+      font-size: 0.55rem;
+      color: rgba(160, 190, 245, 0.92);
+    }
+
+    .gfull-field-note,
+    .gfull-mini,
+    .gfull-status-text {
+      font-size: 0.58rem;
+      color: var(--gfull-muted);
+      line-height: 1.5;
+    }
+
+    .gfull-input,
+    .gfull-select,
+    .gfull-textarea {
+      width: 100%;
+      box-sizing: border-box;
+      background: var(--gfull-input);
+      border: 1px solid var(--gfull-border);
+      color: var(--gfull-ink);
+      outline: none;
+      padding: 12px;
+      transition: border-color .2s ease, background .2s ease, box-shadow .2s ease;
+    }
+
+    .gfull-input:focus,
+    .gfull-select:focus,
+    .gfull-textarea:focus {
+      border-color: rgba(99, 149, 238, 0.65);
+      box-shadow: 0 0 0 3px rgba(99, 149, 238, 0.12);
+    }
+
+    .gfull-title-input {
+      font-family: "IBM Plex Sans", system-ui, sans-serif;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      font-size: 1.6rem;
+      padding: 14px 12px;
+    }
+
+    .gfull-date-input {
+      min-height: 62px;
+      font-size: 1.05rem;
+      padding: 14px 12px;
+    }
+
+    .gfull-editor-shell {
+      border: 1px solid var(--gfull-border);
+      background: var(--gfull-editor);
+    }
+
+    .gfull-toolbar {
+      padding: 10px;
+      border-bottom: 1px solid var(--gfull-border);
+      background: var(--gfull-toolbar);
+    }
+
+    .gfull-format-btn,
+    .gfull-btn,
+    .gfull-image-close,
+    .gfull-format-select {
+      padding: 8px 10px;
+      font-size: 0.6rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .gfull-format-btn:hover,
+    .gfull-icon-btn:hover,
+    .gfull-image-close:hover,
+    .gfull-btn:hover,
+    .gfull-format-btn:focus-visible,
+    .gfull-icon-btn:focus-visible,
+    .gfull-image-close:focus-visible,
+    .gfull-btn:focus-visible {
+      background: rgba(145, 175, 179, 0.12);
+      border-color: rgba(145, 175, 179, 0.4);
+      transform: translateY(-1px);
+      outline: none;
+    }
+
+    .gfull-toolbar-stats {
+      width: 100%;
+      padding-top: 2px;
+    }
+
+    .gfull-toolbar-stat {
+      border: 1px solid var(--gfull-control-border);
+      background: var(--gfull-control-bg);
+      color: var(--gfull-control-muted);
+      padding: 8px 10px;
+      font-size: 0.58rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .gfull-toolbar-mode {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .gfull-format-select {
+      background: transparent;
+      border: none;
+      color: var(--gfull-control-ink);
+      padding: 0;
+    }
+
+    .gfull-textarea {
+      min-height: 520px;
+      resize: vertical;
+      border: none;
+      background: transparent;
+      font-family: "IBM Plex Serif", serif;
+      font-size: 1.02rem;
+      line-height: 1.8;
+      padding: 18px 16px 22px;
+      caret-color: var(--gfull-cursor);
+      box-shadow: none;
+    }
+
+    .gfull-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 8px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.03);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gfull-ink);
+    }
+
+    .gfull-pill.ok {
+      border-color: rgba(120, 240, 198, 0.25);
+      color: rgba(120, 240, 198, 0.9);
+    }
+
+    .gfull-pill.warn {
+      border-color: rgba(255, 211, 110, 0.25);
+      color: rgba(255, 211, 110, 0.9);
+    }
+
+    .gfull-btn-primary {
+      background: var(--brand-blue);
+      color: #0a0a0a;
+      box-shadow: 0 10px 26px rgba(99, 149, 238, 0.22);
+      border-color: transparent;
+    }
+
+    .gfull-btn-danger {
+      background: rgba(255, 77, 77, 0.10);
+      color: rgba(255, 255, 255, 0.9);
+      border-color: rgba(255, 77, 77, 0.25);
+    }
+
+    .gfull-image-panel {
+      border: 1px solid var(--gfull-border);
+      background: rgba(145, 175, 179, 0.04);
+      padding: 14px;
+      display: none;
+      margin-bottom: 14px;
+    }
+
+    .gfull-image-panel.is-open {
+      display: block;
+    }
+
+    .gfull-image-panel-grid {
+      display: grid;
+      grid-template-columns: 108px minmax(0, 1fr);
+      gap: 20px;
+      align-items: start;
+    }
+
+    .gfull-image-preview-rail {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .gfull-image-preview-box {
+      width: 108px;
+      aspect-ratio: 1 / 1;
+      border: 1px solid rgba(145, 175, 179, 0.18);
+      background: rgba(0, 0, 0, 0.18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .gfull-image-preview-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .gfull-image-preview-empty {
+      width: 100%;
+      height: 100%;
       background:
-        radial-gradient(260px 120px at 14% 0%, rgba(99, 149, 238, 0.08), transparent 70%),
-        radial-gradient(240px 120px at 86% 0%, rgba(155, 89, 182, 0.08), transparent 70%),
-        linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(244, 239, 230, 0.92));
-      border-color: rgba(27, 54, 93, 0.12);
-      box-shadow: 0 18px 40px rgba(27, 54, 93, 0.1);
+        linear-gradient(135deg, rgba(99, 149, 238, 0.06), rgba(145, 175, 179, 0.02)),
+        rgba(0, 0, 0, 0.16);
+    }
+
+    .gfull-image-controls {
+      display: grid;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .gfull-image-panel-actions {
+      justify-content: flex-start;
+    }
+
+    .gfull-preview-shell {
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(0, 0, 0, 0.22);
+      padding: 14px;
+      min-height: 540px;
+    }
+
+    .gfull-preview-meta {
+      margin-bottom: 14px;
+      font-size: 0.58rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gfull-muted);
+    }
+
+    .gfull-preview-file {
+      color: var(--gfull-ink);
+      word-break: break-word;
+    }
+
+    .gfull-render-preview {
+      max-width: 760px;
+    }
+
+    .gfull-render-title {
+      margin: 0 0 10px;
+      font-family: "IBM Plex Serif", serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+      color: var(--gfull-ink);
+    }
+
+    .gfull-render-kicker {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(160, 190, 245, 0.92);
+      margin-bottom: 20px;
+    }
+
+    .gfull-render-body {
+      font-family: "IBM Plex Serif", serif;
+      font-size: 1.02rem;
+      line-height: 1.85;
+      color: var(--gfull-ink);
+    }
+
+    .gfull-render-body p,
+    .gfull-render-body ul,
+    .gfull-render-body ol,
+    .gfull-render-body blockquote,
+    .gfull-render-body figure,
+    .gfull-render-body hr,
+    .gfull-render-body h2,
+    .gfull-render-body h3 {
+      margin: 0 0 1.25rem;
+    }
+
+    .gfull-render-body blockquote {
+      margin-left: 0;
+      padding-left: 16px;
+      border-left: 2px solid rgba(160, 190, 245, 0.3);
+      color: var(--gfull-muted);
+    }
+
+    .gfull-render-body img {
+      max-width: 100%;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .gfull-render-body figcaption {
+      margin-top: 10px;
+      text-align: center;
+      color: var(--gfull-muted);
+      font-size: 0.92rem;
+    }
+
+    .gfull-render-empty {
+      color: var(--gfull-muted);
+      font-style: italic;
+    }
+
+    .gfull-settings-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 70;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+      background: rgba(0, 0, 0, 0.72);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    .gfull-settings-modal.is-open {
+      display: flex;
+    }
+
+    .gfull-settings-panel {
+      width: min(560px, 100%);
+      max-height: min(88vh, 760px);
+      overflow: auto;
+      border: 1px solid var(--gfull-border);
+      background:
+        radial-gradient(220px 120px at 82% 0%, rgba(155, 89, 182, 0.12), transparent 72%),
+        radial-gradient(240px 130px at 18% 0%, rgba(99, 149, 238, 0.1), transparent 72%),
+        color-mix(in srgb, var(--gfull-surface) 88%, black 12%);
+      padding: 18px;
+      border-radius: 24px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.34);
+    }
+
+    .gfull-settings-title {
+      margin: 0;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(160, 190, 245, 0.92);
+    }
+
+    .gfull-settings-head {
+      padding-bottom: 12px;
+      margin-bottom: 14px;
+      border-bottom: 1px solid var(--gfull-border);
+    }
+
+    .gfull-settings-intro {
+      margin: 8px 0 0;
+      font-size: 0.95rem;
+      line-height: 1.55;
+      color: var(--gfull-muted);
+      max-width: 42ch;
+    }
+
+    .gfull-settings-group {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 18px;
+      padding: 14px;
+      border: 1px solid var(--gfull-border);
+      border-radius: 20px;
+      background: color-mix(in srgb, var(--gfull-surface) 92%, white 8%);
+    }
+
+    .gfull-settings-section {
+      margin: 0;
+      font-size: 0.58rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gfull-muted);
+    }
+
+    .gfull-settings-toggle {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px;
+      border: 1px solid var(--gfull-control-border);
+      border-radius: 18px;
+      background: var(--gfull-control-bg);
+    }
+
+    .gfull-settings-toggle input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      margin: 2px 0 0;
+      accent-color: var(--brand-blue);
+    }
+
+    .gfull-settings-toggle-copy {
+      display: grid;
+      gap: 4px;
+    }
+
+    .gfull-settings-toggle-title {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.64rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gfull-ink);
+    }
+
+    .gfull-settings-toggle-body {
+      font-size: 0.92rem;
+      line-height: 1.45;
+      color: var(--gfull-muted);
+    }
+
+    .gfull-settings-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    @media (max-width: 980px) {
+      .gfull-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .gfull-textarea {
+        min-height: 420px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .gfull-root {
+        padding: 14px;
+      }
+
+      .gfull-title-row,
+      .gfull-image-panel-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .gfull-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .gfull-btn,
+      .gfull-image-panel-actions .gfull-btn {
+        justify-content: center;
+        width: 100%;
+      }
+
+      .gfull-image-panel-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
     }
 
     .dot {
@@ -1578,19 +2306,20 @@
 
     .ghost-recovery-toast {
       position: fixed;
-      inset: 50% auto auto 50%;
-      transform: translate(-50%, -50%) scale(0.98);
+      top: calc(var(--safe-top) + 88px);
+      right: 18px;
+      transform: translateY(-10px);
       z-index: 60;
-      width: min(420px, calc(100vw - 36px));
-      padding: 16px 18px;
-      border-radius: 22px;
+      width: min(320px, calc(100vw - 28px));
+      padding: 12px 14px;
+      border-radius: 18px;
       border: 1px solid rgba(145, 175, 179, 0.22);
       background:
         radial-gradient(220px 100px at 50% 0%, rgba(155, 89, 182, 0.12), transparent 74%),
         rgba(10, 10, 10, 0.92);
       color: var(--text-main);
-      text-align: center;
-      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.32);
+      text-align: left;
+      box-shadow: 0 18px 34px rgba(0, 0, 0, 0.28);
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
       opacity: 0;
@@ -1607,7 +2336,7 @@
 
     .ghost-recovery-toast.show {
       opacity: 1;
-      transform: translate(-50%, -50%) scale(1);
+      transform: translateY(0);
     }
 
     .ghost-recovery-kicker {
@@ -1622,8 +2351,8 @@
 
     .ghost-recovery-copy {
       margin: 0;
-      font-size: 0.96rem;
-      line-height: 1.6;
+      font-size: 0.86rem;
+      line-height: 1.5;
     }
 
     .bottom-dock {
@@ -1739,8 +2468,28 @@
         position: relative;
       }
 
+      .topbar-controls {
+        gap: 8px;
+      }
+
+      .back-icon-btn {
+        width: 42px;
+        padding: 0;
+      }
+
+      .back-icon-label {
+        display: none;
+      }
+
       .brand img {
-        width: min(52vw, 220px);
+        width: min(40vw, 168px);
+      }
+
+      .topbar-profile,
+      .status-toggle,
+      .menu-toggle {
+        width: 38px;
+        height: 38px;
       }
 
       .pill-btn,
@@ -1815,30 +2564,12 @@
         width: 100%;
       }
 
-      .status-card {
-        margin-top: 14px;
-        padding: 18px 14px 16px;
-      }
-
-      .status-pill {
-        min-height: 54px;
-        padding: 10px 14px;
-        gap: 10px;
-      }
-
-      .status-state-icon {
-        width: 32px;
-        height: 32px;
-      }
-
-      .status-state-icon svg {
-        width: 16px;
-        height: 16px;
-      }
-
-      .status-pill-text {
-        font-size: 0.84rem;
-        letter-spacing: 0.1em;
+      .ghost-recovery-toast {
+        top: auto;
+        right: 12px;
+        left: 12px;
+        bottom: calc(env(safe-area-inset-bottom) + 108px);
+        width: auto;
       }
 
       .bot-hero {
@@ -1874,19 +2605,32 @@
         <a class="brand" href="fragments.html" aria-label="Open fragments feed">
           <img id="publisherLogo" src="Images/Equal.svg" alt="Outside The World" />
         </a>
-        <button class="back-icon-btn" id="headerBackBtn" type="button" aria-label="Back to publisher hub">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M15 18L9 12L15 6"></path>
-          </svg>
-        </button>
-        <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="topbarActions" aria-label="Open settings menu">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
-            <path d="M4 7h16"></path>
-            <path d="M4 12h16"></path>
-            <path d="M4 17h16"></path>
-          </svg>
-        </button>
+        <div class="topbar-controls">
+          <button class="back-icon-btn" id="headerBackBtn" type="button" aria-label="Back to publisher hub">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 18L9 12L15 6"></path>
+            </svg>
+            <span class="back-icon-label">Back</span>
+          </button>
+          <button class="status-toggle" id="systemStatusBtn" type="button" aria-label="Open system status">
+            <span class="status-dot is-go" id="systemStatusDot" aria-hidden="true"></span>
+          </button>
+          <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="topbarActions" aria-label="Open settings menu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+              <path d="M4 7h16"></path>
+              <path d="M4 12h16"></path>
+              <path d="M4 17h16"></path>
+            </svg>
+          </button>
+          <div class="topbar-profile" aria-label="Signed in as RyanDavid" title="Signed in as RyanDavid">
+            <img src="Images/Profile.jpg" alt="RyanDavid Burningham" />
+          </div>
+        </div>
         <div class="topbar-actions" id="topbarActions">
+          <div class="menu-status-card">
+            <p class="menu-status-title" id="systemStatusTitle">System Status: GO</p>
+            <p class="menu-status-copy" id="systemStatusDetail">Publish key is saved and the suite is ready to publish.</p>
+          </div>
           <div class="publish-box">
             <div class="field">
               <label for="publishKeyInput">Publish Key</label>
@@ -1897,6 +2641,11 @@
             <div class="action-row" style="margin-top: 0;">
               <button class="secondary-btn" id="savePublishKeyBtn" type="button">Save Publish Key</button>
             </div>
+          </div>
+          <div class="menu-status-card">
+            <p class="menu-status-title" id="queueStatusTitle">Queued Publishes: 0</p>
+            <p class="menu-status-copy" id="queueStatusDetail">Nothing is waiting to sync right now.</p>
+            <button class="pill-btn" id="retryQueueBtn" type="button">Retry Queued Publishes</button>
           </div>
           <button class="pill-btn" id="summonBotBtn" type="button">Summon OTW_Bot</button>
           <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false">Light Mode</button>
@@ -1960,7 +2709,7 @@
 
         <button class="app-tile" id="openGhostFullApp" type="button">
           <div class="app-icon" aria-hidden="true">
-            <img src="Images/Equal.svg" alt="" />
+            <img src="Images/ghost_writer_full_icon.svg" alt="" />
           </div>
           <h2 class="app-tile-label">Ghost Writer</h2>
           <p class="app-tile-meta">Full Console</p>
@@ -1974,16 +2723,6 @@
           <p class="app-tile-meta"></p>
         </button>
       </div>
-      <section class="status-card" aria-labelledby="systemStatusTitle">
-        <div class="status-pill">
-          <span class="status-state-icon is-go" id="systemStatusIcon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M6 12.5l4 4L18 8.5"></path>
-            </svg>
-          </span>
-          <p class="status-pill-text" id="systemStatusTitle">System Status: GO</p>
-        </div>
-      </section>
     </section>
 
     <section class="workspace" id="fragmentsWorkspace">
@@ -2102,18 +2841,18 @@
     </section>
 
     <section class="workspace" id="iotdWorkspace">
-      <div class="layout">
+      <div class="layout iotd-layout">
         <main class="panel composer">
           <div class="status-line" id="iotdStatusLine">Pick the image, shape the metadata, and publish Image of the Day straight from this device.</div>
 
-          <form class="form-grid" id="iotdForm">
+          <form class="form-grid iotd-form-grid" id="iotdForm">
             <div class="field">
               <label for="iotdImage">Photo</label>
               <input id="iotdImage" name="iotdImage" type="file" accept="image/*" />
               <div class="helper">Pick the photo from your phone or Files. This lane will upload it to the OTW image bucket when you publish.</div>
             </div>
 
-            <div class="meta-row">
+            <div class="meta-row iotd-meta-row">
               <div class="field">
                 <label for="iotdDate">Date</label>
                 <input id="iotdDate" name="iotdDate" type="date" />
@@ -2121,7 +2860,7 @@
 
               <div class="field">
                 <label for="iotdTitle">Title</label>
-                <input id="iotdTitle" name="iotdTitle" type="text" placeholder="WINDOW_VISITATION" />
+                <input id="iotdTitle" name="iotdTitle" type="text" placeholder="UNTITLED_SIGNAL" />
                 <div class="helper">Uppercase signal names still feel native here, but the image itself now has a real publishing lane.</div>
               </div>
             </div>
@@ -2139,17 +2878,13 @@
           </form>
         </main>
 
-        <aside class="side-stack">
+        <aside class="side-stack iotd-side-stack">
           <section class="panel preview-panel">
             <h2 class="section-title">Image Preview</h2>
-            <article class="iotd-preview-card">
+            <article class="iotd-preview-card is-empty" id="iotdPreviewCard">
               <div class="iotd-image-frame">
-                <div class="iotd-image-placeholder" id="iotdImagePlaceholder">
-                  <img src="Images/iotd_icon.svg" alt="" />
-                  <strong>Image of the Day</strong>
-                  <span>Select a photo and this lane will preview it here in the same shape the public page expects.</span>
-                </div>
-                <img id="iotdPreviewImage" alt="IOTD preview" hidden />
+                <div class="iotd-image-placeholder" id="iotdImagePlaceholder"></div>
+                <img id="iotdPreviewImage" alt="" hidden />
               </div>
               <p class="iotd-kicker" id="iotdPreviewDate">TODAY</p>
               <h3 class="iotd-title" id="iotdPreviewTitle">UNTITLED_SIGNAL</h3>
@@ -2158,27 +2893,27 @@
           </section>
 
           <section class="panel outbox-panel">
-            <h2 class="section-title">Entry Wiring</h2>
-            <div class="iotd-meta-grid">
-              <div class="iotd-stat">
-                <span class="iotd-stat-label">Image URL</span>
-                <span class="iotd-stat-value" id="iotdTargetPath">https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/2026-03-19.jpg</span>
-              </div>
-              <div class="iotd-stat">
-                <span class="iotd-stat-label">Selected File</span>
-                <span class="iotd-stat-value" id="iotdFileMeta">No image selected yet.</span>
-              </div>
-            </div>
-          </section>
-
-          <section class="panel outbox-panel">
-            <h2 class="section-title">Manifest Payload</h2>
-            <pre class="iotd-manifest-preview" id="iotdManifestPreview">{
+            <details class="iotd-details">
+              <summary>Publishing Details</summary>
+              <div class="iotd-details-body">
+                <div class="iotd-meta-grid">
+                  <div class="iotd-stat">
+                    <span class="iotd-stat-label">Image URL</span>
+                    <span class="iotd-stat-value" id="iotdTargetPath">https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/2026-03-19.jpg</span>
+                  </div>
+                  <div class="iotd-stat">
+                    <span class="iotd-stat-label">Selected File</span>
+                    <span class="iotd-stat-value" id="iotdFileMeta">No image selected yet.</span>
+                  </div>
+                </div>
+                <pre class="iotd-manifest-preview" id="iotdManifestPreview">{
   "date": "2026-03-19",
   "title": "UNTITLED_SIGNAL",
   "caption": "",
   "image": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/2026-03-19.jpg"
 }</pre>
+              </div>
+            </details>
           </section>
         </aside>
       </div>
@@ -2291,22 +3026,175 @@
 
     <section class="workspace" id="ghostFullWorkspace">
       <div class="full-ghost-shell">
-        <section class="panel">
-          <div class="full-ghost-topline">
-            <div>
-              <h2 class="section-title" style="margin-bottom: 8px;">Ghost Writer</h2>
-              <p class="helper full-ghost-copy">The full Ghost Writer console now lives inside the OTW app shell too. Best on iPad and Mac when you want the complete drafting experience without leaving the suite.</p>
-            </div>
-            <div class="full-ghost-actions">
-              <button class="secondary-btn" id="openGhostStandaloneBtn" type="button">Open Standalone</button>
-              <button class="secondary-btn" id="reloadGhostFrameBtn" type="button">Reload Lane</button>
+        <div class="gfull-root" id="gfullRoot" data-writer-mode="dark">
+          <div class="gfull-grid">
+            <section class="gfull-card" aria-label="Entry composer">
+              <div class="gfull-card-head">
+                <p class="gfull-card-label">01 // ENTRY_COMPOSER</p>
+                <div class="gfull-head-actions">
+                  <span class="gfull-chip" id="gfullSaveChip">Autosave off</span>
+                  <button class="gfull-icon-btn" id="gfullSettingsBtn" type="button" aria-label="Open Ghost Writer settings">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <circle cx="12" cy="12" r="3.2"></circle>
+                      <path d="M19.4 15a1.6 1.6 0 0 0 .32 1.76l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06A1.6 1.6 0 0 0 15 19.4a1.6 1.6 0 0 0-1 .94 1.6 1.6 0 0 1-3 0 1.6 1.6 0 0 0-1-.94 1.6 1.6 0 0 0-1.76.32l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.6 1.6 0 0 0 4.6 15a1.6 1.6 0 0 0-.94-1 1.6 1.6 0 0 1 0-3 1.6 1.6 0 0 0 .94-1 1.6 1.6 0 0 0-.32-1.76l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.6 1.6 0 0 0 9 4.6a1.6 1.6 0 0 0 1-.94 1.6 1.6 0 0 1 3 0 1.6 1.6 0 0 0 1 .94 1.6 1.6 0 0 0 1.76-.32l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.6 1.6 0 0 0 19.4 9c0 .42.16.82.46 1.12.3.3.7.46 1.12.46a1.6 1.6 0 0 1 0 3c-.42 0-.82.16-1.12.46-.3.3-.46.7-.46 1.12Z"></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <div class="gfull-title-row">
+                <div>
+                  <label class="gfull-label" for="gfullEntryDate">Date</label>
+                  <input class="gfull-input gfull-date-input" id="gfullEntryDate" type="date" />
+                </div>
+                <div>
+                  <label class="gfull-label" for="gfullTitle">Title</label>
+                  <input class="gfull-input gfull-title-input" id="gfullTitle" type="text" placeholder="Blog Title..." />
+                </div>
+              </div>
+
+              <div class="gfull-field-hidden" id="gfullSlugField">
+                <label class="gfull-label" for="gfullSlug">Slug</label>
+                <input class="gfull-input" id="gfullSlug" type="text" placeholder="auto-generated-from-title" />
+              </div>
+
+              <div>
+                <label class="gfull-label" for="gfullContent">Content</label>
+                <div class="gfull-editor-shell">
+                  <div class="gfull-toolbar" id="gfullToolbar" aria-label="Formatting controls">
+                    <button class="gfull-format-btn" data-action="bold" type="button">B</button>
+                    <button class="gfull-format-btn" data-action="italic" type="button">I</button>
+                    <button class="gfull-format-btn" data-action="quote" type="button">Quote</button>
+                    <button class="gfull-format-btn" data-action="link" type="button">Link</button>
+                    <button class="gfull-format-btn" data-action="image" type="button">Image</button>
+                    <button class="gfull-format-btn" data-action="center" type="button">Center</button>
+                    <button class="gfull-format-btn" data-action="divider" type="button">Divider</button>
+                    <div class="gfull-toolbar-stats">
+                      <span class="gfull-toolbar-stat">Words: <span id="gfullWords">0</span></span>
+                      <span class="gfull-toolbar-stat">Chars: <span id="gfullChars">0</span></span>
+                      <span class="gfull-toolbar-stat">Read: <span id="gfullRead">0</span> min</span>
+                      <span class="gfull-toolbar-stat gfull-toolbar-mode">
+                        <span class="gfull-toolbar-mode-label">Mode:</span>
+                        <select class="gfull-format-select" id="gfullMode" aria-label="Writer mode">
+                          <option value="dark">Void</option>
+                          <option value="light">White</option>
+                          <option value="sepia">Paper</option>
+                        </select>
+                      </span>
+                    </div>
+                  </div>
+                  <textarea class="gfull-textarea" id="gfullContent" spellcheck="true" autocapitalize="sentences" autocorrect="on" placeholder="Just start writing."></textarea>
+                </div>
+              </div>
+
+              <div class="gfull-actions">
+                <span class="gfull-pill ok" id="gfullSaveState">Draft: Clean</span>
+              </div>
+
+              <div class="gfull-actions">
+                <button class="gfull-btn gfull-btn-primary" id="gfullPublishBtn" type="button">Publish to OTW</button>
+                <button class="gfull-btn" id="gfullDownloadBtn" type="button">Download Markdown</button>
+                <button class="gfull-btn" id="gfullCopyBtn" type="button">Copy Markdown</button>
+                <button class="gfull-btn" id="gfullLoadBtn" type="button">Load Draft</button>
+                <button class="gfull-btn gfull-btn-danger" id="gfullResetBtn" type="button">Reset Draft</button>
+                <button class="gfull-btn gfull-btn-danger" id="gfullClearBtn" type="button">Clear Local Draft</button>
+              </div>
+
+              <div class="gfull-mini" id="gfullMiniNote">Native editor active. Spellcheck and writing tools should come from the device, not a custom editor layer.</div>
+              <div class="gfull-status-text" id="gfullStatusText">Ghost Writer full is ready.</div>
+            </section>
+
+            <aside class="gfull-card" aria-label="Rendered preview">
+              <div class="gfull-card-head">
+                <p class="gfull-card-label">02 // LIVE_PREVIEW</p>
+                <span class="gfull-chip" id="gfullFileChip">FILE: —</span>
+              </div>
+
+              <input id="gfullImageInput" type="file" accept="image/*" hidden />
+              <div class="gfull-image-panel" id="gfullImagePanel">
+                <div class="gfull-image-panel-head">
+                  <p class="gfull-image-panel-title">Inline Images</p>
+                  <div class="gfull-head-actions">
+                    <span class="gfull-chip" id="gfullImageChip">No image selected</span>
+                    <button class="gfull-image-close" id="gfullImageCloseBtn" type="button">Close</button>
+                  </div>
+                </div>
+                <div class="gfull-image-panel-grid">
+                  <div class="gfull-image-preview-rail">
+                    <div class="gfull-image-preview-box">
+                      <div class="gfull-image-preview-empty" id="gfullImagePreviewEmpty" aria-hidden="true"></div>
+                      <img id="gfullImagePreview" alt="" hidden />
+                    </div>
+                    <button class="gfull-btn" id="gfullChooseImageBtn" type="button">Choose</button>
+                    <div>
+                      <label class="gfull-label" for="gfullImageStyle">Insert Style</label>
+                      <select class="gfull-select" id="gfullImageStyle">
+                        <option value="markdown">Inline image</option>
+                        <option value="figure">Figure with caption</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="gfull-image-controls">
+                    <div>
+                      <label class="gfull-label" for="gfullImageCaption">Caption (optional)</label>
+                      <input class="gfull-input" id="gfullImageCaption" type="text" placeholder="Shown below the image when you use Figure style" />
+                    </div>
+                    <div class="gfull-image-panel-actions">
+                      <button class="gfull-btn gfull-btn-primary" id="gfullInsertImageBtn" type="button">Insert</button>
+                      <button class="gfull-btn" id="gfullClearImageBtn" type="button">Clear</button>
+                    </div>
+                    <div class="gfull-status-text" id="gfullImageStatus">Choose a photo when you are ready, then insert it where your cursor is.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="gfull-preview-shell">
+                <div class="gfull-preview-meta">
+                  <span id="gfullLastSaved">LAST_SAVED: —</span>
+                  <span class="gfull-preview-file" id="gfullFilePreview">—</span>
+                </div>
+                <article class="gfull-render-preview" id="gfullPreview"></article>
+              </div>
+            </aside>
+          </div>
+
+          <div class="gfull-settings-modal" id="gfullSettingsModal" aria-hidden="true">
+            <div class="gfull-settings-panel" role="dialog" aria-modal="true" aria-label="Ghost Writer settings">
+              <div class="gfull-settings-head">
+                <h2 class="gfull-settings-title">Writer Settings</h2>
+                <button class="gfull-image-close" id="gfullSettingsCloseBtn" type="button">Close</button>
+              </div>
+
+              <div class="gfull-settings-group">
+                <p class="gfull-settings-section">Publishing</p>
+                <div>
+                  <div class="gfull-field-note">Ghost Writer uses the suite publish key from the mega app settings menu. There is only one key to manage on this device now.</div>
+                </div>
+                <div class="gfull-settings-actions">
+                  <button class="gfull-btn" id="gfullOpenSuiteSettingsBtn" type="button">Open Suite Settings</button>
+                </div>
+              </div>
+
+              <div class="gfull-settings-group">
+                <p class="gfull-settings-section">Composer</p>
+                <label class="gfull-settings-toggle" for="gfullShowSlugToggle">
+                  <input id="gfullShowSlugToggle" type="checkbox" />
+                  <span class="gfull-settings-toggle-copy">
+                    <span class="gfull-settings-toggle-title">Show Slug Field</span>
+                    <span class="gfull-settings-toggle-body">Keep the slug override hidden unless you need a specific filename.</span>
+                  </span>
+                </label>
+                <label class="gfull-settings-toggle" for="gfullKeepImagePanelOpenToggle">
+                  <input id="gfullKeepImagePanelOpenToggle" type="checkbox" />
+                  <span class="gfull-settings-toggle-copy">
+                    <span class="gfull-settings-toggle-title">Keep Image Panel Open</span>
+                    <span class="gfull-settings-toggle-body">Leave the image panel open after inserting media so you can place several images in a row.</span>
+                  </span>
+                </label>
+              </div>
             </div>
           </div>
-        </section>
-
-        <section class="full-ghost-frame" aria-label="Embedded Ghost Writer">
-          <iframe id="ghostFullFrame" src="ghost-writer.html" title="Ghost Writer full console" loading="lazy"></iframe>
-        </section>
+        </div>
       </div>
     </section>
 
@@ -2351,7 +3239,7 @@
         </svg>
         <span class="dock-btn-label">Home</span>
       </button>
-      <button class="dock-btn is-disabled" id="dockAnalyticsBtn" type="button" aria-disabled="true">
+      <button class="dock-btn" id="dockAnalyticsBtn" type="button">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M5 18V12"></path>
           <path d="M12 18V7"></path>
@@ -2391,12 +3279,17 @@
     const IOTD_DRAFT_KEY = 'otwIotdPublisherDraft';
     const THEME_KEY = 'otwFragmentsPublisherTheme';
     const PUBLISH_KEY_STORAGE = 'otwFragmentsPublishKey';
+    const PUBLISH_QUEUE_KEY = 'otwPublisherPendingPublishes';
     const PUBLISH_ENDPOINT = 'https://otw-fragments-publish.ryandavid.workers.dev/publish-fragment';
     const PUBLISH_BOT_ENDPOINT = 'https://otw-fragments-publish.ryandavid.workers.dev/publish-bot-fragment';
     const PUBLISH_CHANGELOG_ENDPOINT = 'https://otw-fragments-publish.ryandavid.workers.dev/publish-changelog-entry';
     const PUBLISH_GHOST_ENDPOINT = 'https://otw-fragments-publish.ryandavid.workers.dev/publish-ghost-draft';
     const PUBLISH_IOTD_ENDPOINT = 'https://otw-fragments-publish.ryandavid.workers.dev/publish-iotd-entry';
+    const UPLOAD_GHOST_IMAGE_ENDPOINT = 'https://otw-fragments-publish.ryandavid.workers.dev/upload-ghost-image';
     const IOTD_PUBLIC_BASE_URL = 'https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev';
+    const GHOST_FULL_DRAFT_KEY = 'otw_ghost_writer_draft_v4';
+    const GHOST_FULL_SETTINGS_KEY = 'otw_ghost_writer_settings_v1';
+    const GHOST_FULL_PUBLISH_KEY_STORAGE = 'otw_ghost_writer_publish_key';
 
     const textInput = document.getElementById('fragmentText');
     const tagInput = document.getElementById('fragmentTag');
@@ -2430,9 +3323,6 @@
     const openGhostFullApp = document.getElementById('openGhostFullApp');
     const openBotApp = document.getElementById('openBotApp');
     const openSiteApp = document.getElementById('openSiteApp');
-    const openGhostStandaloneBtn = document.getElementById('openGhostStandaloneBtn');
-    const reloadGhostFrameBtn = document.getElementById('reloadGhostFrameBtn');
-    const ghostFullFrame = document.getElementById('ghostFullFrame');
     const headerBackBtn = document.getElementById('headerBackBtn');
     const botDeployBtn = document.getElementById('botDeployBtn');
     const botStatusLine = document.getElementById('botStatusLine');
@@ -2441,8 +3331,13 @@
     const dockGithubBtn = document.getElementById('dockGithubBtn');
     const dockCloudflareBtn = document.getElementById('dockCloudflareBtn');
     const dockSettingsBtn = document.getElementById('dockSettingsBtn');
-    const systemStatusIcon = document.getElementById('systemStatusIcon');
+    const systemStatusBtn = document.getElementById('systemStatusBtn');
+    const systemStatusDot = document.getElementById('systemStatusDot');
     const systemStatusTitle = document.getElementById('systemStatusTitle');
+    const systemStatusDetail = document.getElementById('systemStatusDetail');
+    const queueStatusTitle = document.getElementById('queueStatusTitle');
+    const queueStatusDetail = document.getElementById('queueStatusDetail');
+    const retryQueueBtn = document.getElementById('retryQueueBtn');
     const changelogDateInput = document.getElementById('changelogDate');
     const changelogTypeInput = document.getElementById('changelogType');
     const changelogTextInput = document.getElementById('changelogText');
@@ -2462,6 +3357,7 @@
     const iotdPreviewDate = document.getElementById('iotdPreviewDate');
     const iotdPreviewTitle = document.getElementById('iotdPreviewTitle');
     const iotdPreviewCaption = document.getElementById('iotdPreviewCaption');
+    const iotdPreviewCard = document.getElementById('iotdPreviewCard');
     const iotdPreviewImage = document.getElementById('iotdPreviewImage');
     const iotdImagePlaceholder = document.getElementById('iotdImagePlaceholder');
     const iotdTargetPath = document.getElementById('iotdTargetPath');
@@ -2477,11 +3373,63 @@
     const ghostPreviewTitle = document.getElementById('ghostPreviewTitle');
     const ghostPreviewBody = document.getElementById('ghostPreviewBody');
     const ghostPublishBtn = document.getElementById('ghostPublishBtn');
+    const gfullRoot = document.getElementById('gfullRoot');
+    const gfullSaveChip = document.getElementById('gfullSaveChip');
+    const gfullSettingsBtn = document.getElementById('gfullSettingsBtn');
+    const gfullEntryDate = document.getElementById('gfullEntryDate');
+    const gfullTitle = document.getElementById('gfullTitle');
+    const gfullSlugField = document.getElementById('gfullSlugField');
+    const gfullSlug = document.getElementById('gfullSlug');
+    const gfullToolbar = document.getElementById('gfullToolbar');
+    const gfullWords = document.getElementById('gfullWords');
+    const gfullChars = document.getElementById('gfullChars');
+    const gfullRead = document.getElementById('gfullRead');
+    const gfullMode = document.getElementById('gfullMode');
+    const gfullContent = document.getElementById('gfullContent');
+    const gfullSaveState = document.getElementById('gfullSaveState');
+    const gfullPublishBtn = document.getElementById('gfullPublishBtn');
+    const gfullDownloadBtn = document.getElementById('gfullDownloadBtn');
+    const gfullCopyBtn = document.getElementById('gfullCopyBtn');
+    const gfullLoadBtn = document.getElementById('gfullLoadBtn');
+    const gfullResetBtn = document.getElementById('gfullResetBtn');
+    const gfullClearBtn = document.getElementById('gfullClearBtn');
+    const gfullMiniNote = document.getElementById('gfullMiniNote');
+    const gfullStatusText = document.getElementById('gfullStatusText');
+    const gfullFileChip = document.getElementById('gfullFileChip');
+    const gfullImageInput = document.getElementById('gfullImageInput');
+    const gfullImagePanel = document.getElementById('gfullImagePanel');
+    const gfullImageChip = document.getElementById('gfullImageChip');
+    const gfullImageCloseBtn = document.getElementById('gfullImageCloseBtn');
+    const gfullImagePreviewEmpty = document.getElementById('gfullImagePreviewEmpty');
+    const gfullImagePreview = document.getElementById('gfullImagePreview');
+    const gfullChooseImageBtn = document.getElementById('gfullChooseImageBtn');
+    const gfullImageStyle = document.getElementById('gfullImageStyle');
+    const gfullImageCaption = document.getElementById('gfullImageCaption');
+    const gfullInsertImageBtn = document.getElementById('gfullInsertImageBtn');
+    const gfullClearImageBtn = document.getElementById('gfullClearImageBtn');
+    const gfullImageStatus = document.getElementById('gfullImageStatus');
+    const gfullLastSaved = document.getElementById('gfullLastSaved');
+    const gfullFilePreview = document.getElementById('gfullFilePreview');
+    const gfullPreview = document.getElementById('gfullPreview');
+    const gfullSettingsModal = document.getElementById('gfullSettingsModal');
+    const gfullSettingsCloseBtn = document.getElementById('gfullSettingsCloseBtn');
+    const gfullOpenSuiteSettingsBtn = document.getElementById('gfullOpenSuiteSettingsBtn');
+    const gfullShowSlugToggle = document.getElementById('gfullShowSlugToggle');
+    const gfullKeepImagePanelOpenToggle = document.getElementById('gfullKeepImagePanelOpenToggle');
     let publishToastTimer = null;
     let ghostRecoveryToastTimer = null;
     let loadedChangelog = [];
     let iotdObjectUrl = null;
     let fragmentTimestampWasManual = false;
+    let isProcessingPublishQueue = false;
+    let gfullAutosaveTimer = null;
+    let gfullDirty = false;
+    let gfullSelectionState = { start: 0, end: 0 };
+    let gfullPendingImageObjectUrl = null;
+    let gfullSettingsState = {
+      showSlugField: false,
+      keepImagePanelOpen: false
+    };
 
     function escapeHtml(value) {
       return String(value)
@@ -2630,7 +3578,9 @@
     }
 
     function getPublishKey() {
-      return window.localStorage.getItem(PUBLISH_KEY_STORAGE) || '';
+      return window.localStorage.getItem(PUBLISH_KEY_STORAGE)
+        || window.localStorage.getItem(GHOST_FULL_PUBLISH_KEY_STORAGE)
+        || '';
     }
 
     function readChangelogOutbox() {
@@ -2638,6 +3588,125 @@
         return JSON.parse(window.localStorage.getItem(CHANGELOG_OUTBOX_KEY) || '[]');
       } catch {
         return [];
+      }
+    }
+
+    function readPublishQueue() {
+      try {
+        const parsed = JSON.parse(window.localStorage.getItem(PUBLISH_QUEUE_KEY) || '[]');
+        return Array.isArray(parsed) ? parsed : [];
+      } catch {
+        return [];
+      }
+    }
+
+    function writePublishQueue(items) {
+      window.localStorage.setItem(PUBLISH_QUEUE_KEY, JSON.stringify(items));
+      updateQueueStatus();
+      refreshSystemStatus();
+    }
+
+    function updateQueueStatus() {
+      const queue = readPublishQueue();
+      const count = queue.length;
+      queueStatusTitle.textContent = `Queued Publishes: ${count}`;
+      if (!count) {
+        queueStatusDetail.textContent = window.navigator.onLine
+          ? 'Nothing is waiting to sync right now.'
+          : 'You are offline. New text publishes will queue here until the connection returns.';
+        retryQueueBtn.disabled = true;
+        return;
+      }
+
+      const latest = queue[0];
+      const typeLabel = String(latest.kind || 'publish').replace(/-/g, ' ');
+      queueStatusDetail.textContent = window.navigator.onLine
+        ? `${count} item${count === 1 ? '' : 's'} waiting. Oldest queued item: ${typeLabel}.`
+        : `${count} item${count === 1 ? '' : 's'} waiting for a connection before they can publish.`;
+      retryQueueBtn.disabled = !window.navigator.onLine;
+    }
+
+    function enqueuePublishJob(job) {
+      const queue = readPublishQueue();
+      queue.push({
+        id: `${Date.now()}-${Math.random().toString(16).slice(2, 8)}`,
+        createdAt: new Date().toISOString(),
+        ...job
+      });
+      writePublishQueue(queue);
+    }
+
+    function isLikelyNetworkFailure(error) {
+      if (!error) return false;
+      const message = String(error.message || error);
+      return !window.navigator.onLine
+        || /Failed to fetch|NetworkError|Load failed|Network request failed/i.test(message);
+    }
+
+    async function processPublishQueue() {
+      if (isProcessingPublishQueue || !window.navigator.onLine) {
+        updateQueueStatus();
+        return;
+      }
+
+      const publishKey = getPublishKey();
+      if (!publishKey) {
+        updateQueueStatus();
+        return;
+      }
+
+      const queue = readPublishQueue();
+      if (!queue.length) {
+        updateQueueStatus();
+        return;
+      }
+
+      isProcessingPublishQueue = true;
+      let processedCount = 0;
+
+      try {
+        let remaining = [...queue];
+        while (remaining.length && window.navigator.onLine) {
+          const item = remaining[0];
+          const response = await fetch(item.endpoint, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'x-publish-key': publishKey
+            },
+            body: JSON.stringify(item.payload)
+          });
+
+          const payload = await response.json().catch(() => ({}));
+          if (!response.ok || !payload.ok) {
+            throw new Error(payload.error || `Publish failed with status ${response.status}`);
+          }
+
+          remaining.shift();
+          processedCount += 1;
+          window.localStorage.setItem(PUBLISH_KEY_STORAGE, publishKey);
+          window.localStorage.setItem(GHOST_FULL_PUBLISH_KEY_STORAGE, publishKey);
+          updatePublishKeyStatus();
+          writePublishQueue(remaining);
+        }
+
+        if (processedCount > 0) {
+          showPublishToast(
+            'Queued publishes synced.',
+            `${processedCount} queued item${processedCount === 1 ? '' : 's'} reached the Worker after the connection came back.`
+          );
+        }
+      } catch (error) {
+        if (!isLikelyNetworkFailure(error)) {
+          showPublishToast(
+            'Queued publish needs attention.',
+            error.message || 'One queued publish could not be sent. It is still waiting in the queue.'
+          );
+        }
+      } finally {
+        isProcessingPublishQueue = false;
+        updateQueueStatus();
+        refreshSystemStatus();
       }
     }
 
@@ -2658,37 +3727,36 @@
       const fragmentsDraft = textInput.value.trim();
       const changelogDraft = changelogTextInput.value.trim();
       const changelogOutboxCount = readChangelogOutbox().length;
+      const queuedPublishCount = readPublishQueue().length;
       let state = 'GO';
-      let iconClass = 'status-state-icon is-go';
-      let iconMarkup = `
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M6 12.5l4 4L18 8.5"></path>
-        </svg>
-      `;
+      let dotClass = 'status-dot is-go';
+      let detail = 'Publish key is saved and the suite is ready to publish.';
 
       if (!hasPublishKey) {
         state = 'HALT';
-        iconClass = 'status-state-icon is-halt';
-        iconMarkup = `
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M9.2 9a3.1 3.1 0 1 1 5.45 2.03c-.78.77-1.55 1.28-1.55 2.47"></path>
-            <path d="M12 17.2h.01"></path>
-          </svg>
-        `;
+        dotClass = 'status-dot is-halt';
+        detail = 'Save a publish key in the menu before trying to publish from this device.';
+      } else if (!window.navigator.onLine) {
+        state = 'CAUTION';
+        dotClass = 'status-dot is-caution';
+        detail = queuedPublishCount > 0
+          ? `You are offline. ${queuedPublishCount} queued publish${queuedPublishCount === 1 ? ' is' : 'es are'} waiting for the connection to return.`
+          : 'You are offline. Drafts still save locally, and new text publishes will queue until the connection returns.';
+      } else if (queuedPublishCount > 0) {
+        state = 'CAUTION';
+        dotClass = 'status-dot is-caution';
+        detail = `${queuedPublishCount} queued publish${queuedPublishCount === 1 ? ' is' : 'es are'} waiting to sync from this device.`;
       } else if (changelogOutboxCount > 0 || fragmentsDraft || changelogDraft || !loadedChangelog.length) {
         state = 'CAUTION';
-        iconClass = 'status-state-icon is-caution';
-        iconMarkup = `
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 7.2v6.2"></path>
-            <path d="M12 17.3h.01"></path>
-          </svg>
-        `;
+        dotClass = 'status-dot is-caution';
+        detail = changelogOutboxCount > 0
+          ? 'You have staged changelog entries waiting to be published.'
+          : 'A local draft or feed refresh still needs attention before the suite feels fully clear.';
       }
 
-      systemStatusIcon.className = iconClass;
-      systemStatusIcon.innerHTML = iconMarkup;
+      systemStatusDot.className = dotClass;
       systemStatusTitle.textContent = `System Status: ${state}`;
+      systemStatusDetail.textContent = detail;
     }
 
     function showPublishToast(title, copy) {
@@ -2754,14 +3822,17 @@
       const value = publishKeyInput.value.trim();
       if (!value) {
         window.localStorage.removeItem(PUBLISH_KEY_STORAGE);
+        window.localStorage.removeItem(GHOST_FULL_PUBLISH_KEY_STORAGE);
         updatePublishKeyStatus();
         statusLine.textContent = 'Publish key cleared from this device.';
         return;
       }
 
       window.localStorage.setItem(PUBLISH_KEY_STORAGE, value);
+      window.localStorage.setItem(GHOST_FULL_PUBLISH_KEY_STORAGE, value);
       updatePublishKeyStatus();
       statusLine.textContent = 'Publish key saved locally on this device.';
+      processPublishQueue();
     }
 
     function buildEntryFromForm() {
@@ -2940,6 +4011,7 @@
       }
 
       if (!file) {
+        iotdPreviewCard.classList.add('is-empty');
         iotdPreviewImage.hidden = true;
         iotdPreviewImage.removeAttribute('src');
         iotdImagePlaceholder.hidden = false;
@@ -2947,6 +4019,7 @@
         return;
       }
 
+      iotdPreviewCard.classList.remove('is-empty');
       iotdObjectUrl = URL.createObjectURL(file);
       iotdPreviewImage.src = iotdObjectUrl;
       iotdPreviewImage.hidden = false;
@@ -3089,6 +4162,20 @@
         return;
       }
 
+      if (!window.navigator.onLine) {
+        enqueuePublishJob({
+          kind: 'changelog',
+          endpoint: PUBLISH_CHANGELOG_ENDPOINT,
+          payload: entry
+        });
+        changelogStatusLine.textContent = 'Offline. The changelog entry was queued on this device and will publish when the connection returns.';
+        showPublishToast(
+          'Changelog queued.',
+          'The entry is safe in the local queue and will publish automatically once you are back online.'
+        );
+        return;
+      }
+
       changelogStatusLine.textContent = 'Publishing changelog entry to the OTW Worker...';
 
       try {
@@ -3125,6 +4212,19 @@
         loadRecentChangelog();
         refreshSystemStatus();
       } catch (error) {
+        if (isLikelyNetworkFailure(error)) {
+          enqueuePublishJob({
+            kind: 'changelog',
+            endpoint: PUBLISH_CHANGELOG_ENDPOINT,
+            payload: entry
+          });
+          changelogStatusLine.textContent = 'Connection failed. The changelog entry was queued on this device and will retry automatically.';
+          showPublishToast(
+            'Changelog queued.',
+            'The connection dropped, so the entry was moved into the local queue instead of being lost.'
+          );
+          return;
+        }
         changelogStatusLine.textContent = error.message || 'Publish failed.';
       }
     }
@@ -3141,6 +4241,26 @@
       const publishKey = publishKeyInput.value.trim() || getPublishKey();
       if (!publishKey) {
         statusLine.textContent = 'Add your publish key first so this device can post securely.';
+        return;
+      }
+
+      if (!window.navigator.onLine) {
+        enqueuePublishJob({
+          kind: 'fragment',
+          endpoint: PUBLISH_ENDPOINT,
+          payload: entry
+        });
+        clearDraftStorage();
+        textInput.value = '';
+        tagInput.value = 'FRAGMENT';
+        setFragmentTimestampToNow();
+        charCount.textContent = '0 characters';
+        statusLine.textContent = 'Offline. The fragment was queued on this device and will publish when the connection returns.';
+        showPublishToast(
+          'Fragment queued.',
+          'The thought is safe in the local queue and will publish automatically once the network comes back.'
+        );
+        refreshSystemStatus();
         return;
       }
 
@@ -3178,6 +4298,25 @@
         );
         refreshSystemStatus();
       } catch (error) {
+        if (isLikelyNetworkFailure(error)) {
+          enqueuePublishJob({
+            kind: 'fragment',
+            endpoint: PUBLISH_ENDPOINT,
+            payload: entry
+          });
+          clearDraftStorage();
+          textInput.value = '';
+          tagInput.value = 'FRAGMENT';
+          setFragmentTimestampToNow();
+          charCount.textContent = '0 characters';
+          statusLine.textContent = 'Connection failed. The fragment was queued on this device and will retry automatically.';
+          showPublishToast(
+            'Fragment queued.',
+            'The connection dropped, so the fragment was moved into the local queue instead of being lost.'
+          );
+          refreshSystemStatus();
+          return;
+        }
         statusLine.textContent = error.message || 'Publish failed.';
       }
     }
@@ -3306,6 +4445,30 @@
 
       const now = new Date();
       const localDate = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+      const ghostPayload = {
+        title,
+        body: ghostBodyInput.value,
+        date: localDate
+      };
+
+      if (!window.navigator.onLine) {
+        enqueuePublishJob({
+          kind: 'ghost-lite',
+          endpoint: PUBLISH_GHOST_ENDPOINT,
+          payload: ghostPayload
+        });
+        clearGhostDraftStorage();
+        ghostTitleInput.value = '';
+        ghostBodyInput.value = '';
+        updateGhostPreview();
+        ghostStatusLine.textContent = 'Offline. The Ghost-Writer Lite draft was queued on this device and will publish when the connection returns.';
+        showPublishToast(
+          'Ghost draft queued.',
+          'The markdown draft is safe in the local queue and will publish automatically when you are back online.'
+        );
+        refreshSystemStatus();
+        return;
+      }
 
       ghostStatusLine.textContent = 'Publishing Ghost-Writer Lite draft to the OTW Worker...';
 
@@ -3315,11 +4478,7 @@
           'Content-Type': 'application/json',
           'x-publish-key': publishKey
         },
-        body: JSON.stringify({
-          title,
-          body: ghostBodyInput.value,
-          date: localDate
-        })
+        body: JSON.stringify(ghostPayload)
       }).then(async (response) => {
         const payload = await response.json().catch(() => ({}));
         if (!response.ok || !payload.ok) {
@@ -3343,6 +4502,24 @@
         );
         refreshSystemStatus();
       }).catch((error) => {
+        if (isLikelyNetworkFailure(error)) {
+          enqueuePublishJob({
+            kind: 'ghost-lite',
+            endpoint: PUBLISH_GHOST_ENDPOINT,
+            payload: ghostPayload
+          });
+          clearGhostDraftStorage();
+          ghostTitleInput.value = '';
+          ghostBodyInput.value = '';
+          updateGhostPreview();
+          ghostStatusLine.textContent = 'Connection failed. The Ghost-Writer Lite draft was queued on this device and will retry automatically.';
+          showPublishToast(
+            'Ghost draft queued.',
+            'The connection dropped, so the draft was moved into the local queue instead of being lost.'
+          );
+          refreshSystemStatus();
+          return;
+        }
         ghostStatusLine.textContent = error.message || 'Publish failed.';
       });
     }
@@ -3375,6 +4552,15 @@
       const publishKey = publishKeyInput.value.trim() || getPublishKey();
       if (!publishKey) {
         iotdStatusLine.textContent = 'Add your publish key first so this device can post IOTD entries securely.';
+        return;
+      }
+
+      if (!window.navigator.onLine) {
+        iotdStatusLine.textContent = 'You are offline. IOTD still needs a live connection because the image file itself is not queued locally yet.';
+        showPublishToast(
+          'IOTD needs connection.',
+          'The metadata draft is still safe on this device, but the image upload waits for a live connection.'
+        );
         return;
       }
 
@@ -3419,6 +4605,14 @@
           'Your image and manifest entry are on their way to the live site.'
         );
       } catch (error) {
+        if (isLikelyNetworkFailure(error)) {
+          iotdStatusLine.textContent = 'The connection dropped during image upload. The metadata draft is still here, but re-select the image and try again when you are back online.';
+          showPublishToast(
+            'IOTD upload interrupted.',
+            'The image itself is not queued yet, so this lane still needs a live connection for the final publish.'
+          );
+          return;
+        }
         iotdStatusLine.textContent = error.message || 'IOTD publish failed.';
       }
     }
@@ -3453,6 +4647,626 @@
       updateGhostPreview();
       ghostStatusLine.textContent = 'Ghost-Writer Lite draft cleared on this device.';
       refreshSystemStatus();
+    }
+
+    function getGfullLocalDate() {
+      return new Date().toISOString().slice(0, 10);
+    }
+
+    function getGfullPublishKey() {
+      return (
+        publishKeyInput.value.trim()
+        || window.localStorage.getItem(PUBLISH_KEY_STORAGE)
+        || window.localStorage.getItem(GHOST_FULL_PUBLISH_KEY_STORAGE)
+        || getPublishKey()
+        || ''
+      ).trim();
+    }
+
+    function syncPublishKeys(value) {
+      const trimmed = String(value || '').trim();
+      if (!trimmed) {
+        window.localStorage.removeItem(GHOST_FULL_PUBLISH_KEY_STORAGE);
+        return;
+      }
+      window.localStorage.setItem(GHOST_FULL_PUBLISH_KEY_STORAGE, trimmed);
+      window.localStorage.setItem(PUBLISH_KEY_STORAGE, trimmed);
+      publishKeyInput.value = trimmed;
+      updatePublishKeyStatus();
+    }
+
+    function loadGfullSettings() {
+      try {
+        const raw = window.localStorage.getItem(GHOST_FULL_SETTINGS_KEY);
+        if (!raw) return { ...gfullSettingsState };
+        const parsed = JSON.parse(raw);
+        return {
+          showSlugField: parsed.showSlugField === true,
+          keepImagePanelOpen: parsed.keepImagePanelOpen === true
+        };
+      } catch {
+        return { ...gfullSettingsState };
+      }
+    }
+
+    function applyGfullSettings() {
+      gfullSlugField.classList.toggle('is-hidden', !gfullSettingsState.showSlugField);
+      gfullShowSlugToggle.checked = gfullSettingsState.showSlugField;
+      gfullKeepImagePanelOpenToggle.checked = gfullSettingsState.keepImagePanelOpen;
+    }
+
+    function saveGfullSettings() {
+      window.localStorage.setItem(GHOST_FULL_SETTINGS_KEY, JSON.stringify(gfullSettingsState));
+      applyGfullSettings();
+    }
+
+    function openGfullSettingsModal() {
+      gfullSettingsModal.classList.add('is-open');
+      gfullSettingsModal.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeGfullSettingsModal() {
+      gfullSettingsModal.classList.remove('is-open');
+      gfullSettingsModal.setAttribute('aria-hidden', 'true');
+    }
+
+    function gfullSlugify(value) {
+      return String(value || '')
+        .toLowerCase()
+        .trim()
+        .replace(/['"]/g, '')
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '') || 'untitled';
+    }
+
+    function formatLongDate(dateString) {
+      if (!dateString) return '';
+      const value = new Date(`${dateString}T12:00:00`);
+      if (Number.isNaN(value.getTime())) return dateString;
+      return new Intl.DateTimeFormat('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      }).format(value);
+    }
+
+    function buildGfullFilename() {
+      const date = gfullEntryDate.value || getGfullLocalDate();
+      const slugValue = gfullSlug.value.trim() ? gfullSlugify(gfullSlug.value) : gfullSlugify(gfullTitle.value);
+      return `${date}-${slugValue}.md`;
+    }
+
+    function buildGfullMarkdown() {
+      const title = gfullTitle.value.trim() || 'Untitled draft';
+      const date = gfullEntryDate.value || getGfullLocalDate();
+      const body = gfullContent.value.trim();
+      return `# ${title}\nDate: ${date}\n\n${body}`.trim();
+    }
+
+    function setGfullStatus(message, tone = 'ok') {
+      gfullStatusText.textContent = message;
+      gfullStatusText.classList.remove('ok', 'warn', 'bad');
+      gfullStatusText.classList.add(tone);
+    }
+
+    function setGfullMiniNote(message) {
+      gfullMiniNote.textContent = message;
+    }
+
+    function setGfullLastSaved(value) {
+      gfullLastSaved.textContent = value ? `LAST_SAVED: ${value}` : 'LAST_SAVED: —';
+    }
+
+    function markGfullDirty() {
+      gfullDirty = true;
+      gfullSaveState.textContent = 'Draft: Dirty';
+      gfullSaveState.classList.remove('ok');
+      gfullSaveState.classList.add('warn');
+    }
+
+    function markGfullClean() {
+      gfullDirty = false;
+      gfullSaveState.textContent = 'Draft: Clean';
+      gfullSaveState.classList.remove('warn');
+      gfullSaveState.classList.add('ok');
+    }
+
+    function rememberGfullSelection() {
+      gfullSelectionState = {
+        start: gfullContent.selectionStart || 0,
+        end: gfullContent.selectionEnd || 0
+      };
+    }
+
+    function renderGfullPreview() {
+      const title = gfullTitle.value.trim() || 'Untitled draft';
+      const date = gfullEntryDate.value || getGfullLocalDate();
+      const body = gfullContent.value.trim();
+      const renderedBody = body
+        ? marked.parse(body, { breaks: true, gfm: true })
+        : '<p class="gfull-render-empty">Just start writing. The live preview will follow your draft here.</p>';
+
+      gfullPreview.innerHTML = `
+        <div class="gfull-render-kicker">${formatLongDate(date)}</div>
+        <h2 class="gfull-render-title">${escapeHtml(title)}</h2>
+        <div class="gfull-render-body">${renderedBody}</div>
+      `;
+    }
+
+    function updateGfullMetrics() {
+      const text = normalizeFragmentText(gfullContent.value || '').trim();
+      const wordCount = text ? text.split(/\s+/).filter(Boolean).length : 0;
+      const charCountValue = text.length;
+      const readMin = Math.max(1, Math.round(wordCount / 200));
+      const filename = buildGfullFilename();
+
+      gfullWords.textContent = String(wordCount);
+      gfullChars.textContent = String(charCountValue);
+      gfullRead.textContent = String(readMin);
+      gfullFileChip.textContent = `FILE: ${filename.toUpperCase()}`;
+      gfullFilePreview.textContent = filename;
+      renderGfullPreview();
+    }
+
+    function saveGfullDraft() {
+      const payload = {
+        title: gfullTitle.value,
+        date: gfullEntryDate.value,
+        slug: gfullSlug.value,
+        content: gfullContent.value,
+        mode: gfullMode.value,
+        savedAt: new Date().toLocaleString()
+      };
+
+      try {
+        window.localStorage.setItem(GHOST_FULL_DRAFT_KEY, JSON.stringify(payload));
+        gfullSaveChip.textContent = 'Autosave on';
+        setGfullLastSaved(payload.savedAt);
+        markGfullClean();
+        setGfullStatus('Draft saved on this device.', 'ok');
+        setGfullMiniNote(`Native editor active. Last autosave ${payload.savedAt}.`);
+      } catch {
+        setGfullStatus('Save failed on this device.', 'bad');
+      }
+    }
+
+    function scheduleGfullAutosave() {
+      if (gfullAutosaveTimer) {
+        window.clearTimeout(gfullAutosaveTimer);
+      }
+      gfullAutosaveTimer = window.setTimeout(() => {
+        if (gfullDirty) {
+          saveGfullDraft();
+        }
+      }, 650);
+    }
+
+    function loadGfullDraft() {
+      try {
+        const raw = window.localStorage.getItem(GHOST_FULL_DRAFT_KEY);
+        if (!raw) return false;
+        const payload = JSON.parse(raw);
+        gfullTitle.value = payload.title || '';
+        gfullEntryDate.value = payload.date || getGfullLocalDate();
+        gfullSlug.value = payload.slug || '';
+        gfullContent.value = payload.content || '';
+        gfullMode.value = payload.mode || 'dark';
+        gfullRoot.dataset.writerMode = gfullMode.value;
+        setGfullLastSaved(payload.savedAt || null);
+        gfullSaveChip.textContent = 'Autosave on';
+        markGfullClean();
+        updateGfullMetrics();
+        setGfullStatus('Recovered the last full Ghost Writer draft from this device.', 'ok');
+        setGfullMiniNote('Native editor active. Draft restored from this device.');
+        return true;
+      } catch {
+        setGfullStatus('Could not recover the last full Ghost Writer draft.', 'bad');
+        return false;
+      }
+    }
+
+    function clearSelectedGfullImage() {
+      if (gfullPendingImageObjectUrl) {
+        URL.revokeObjectURL(gfullPendingImageObjectUrl);
+        gfullPendingImageObjectUrl = null;
+      }
+
+      gfullImageInput.value = '';
+      gfullImageCaption.value = '';
+      gfullImageStyle.value = 'markdown';
+      gfullImageChip.textContent = 'No image selected';
+      gfullImagePreview.hidden = true;
+      gfullImagePreview.removeAttribute('src');
+      gfullImagePreviewEmpty.hidden = false;
+      gfullImageStatus.textContent = 'Choose a photo when you are ready, then insert it where your cursor is.';
+    }
+
+    function openGfullImagePanel(mode = 'markdown') {
+      gfullImagePanel.classList.add('is-open');
+      gfullImageStyle.value = mode;
+      gfullImageStatus.textContent = 'Choose a photo when you are ready, then insert it where your cursor is.';
+    }
+
+    function closeGfullImagePanel() {
+      gfullImagePanel.classList.remove('is-open');
+    }
+
+    function setSelectedGfullImage(file) {
+      if (gfullPendingImageObjectUrl) {
+        URL.revokeObjectURL(gfullPendingImageObjectUrl);
+        gfullPendingImageObjectUrl = null;
+      }
+
+      if (!file) {
+        clearSelectedGfullImage();
+        return;
+      }
+
+      gfullPendingImageObjectUrl = URL.createObjectURL(file);
+      gfullImagePreview.src = gfullPendingImageObjectUrl;
+      gfullImagePreview.hidden = false;
+      gfullImagePreviewEmpty.hidden = true;
+      gfullImageChip.textContent = file.name || 'Image ready';
+      gfullImageStatus.textContent = 'Image ready. Insert it where your cursor is currently sitting.';
+    }
+
+    function insertAtGfullCursor(snippet) {
+      const start = gfullSelectionState.start;
+      const end = gfullSelectionState.end;
+      gfullContent.focus();
+      gfullContent.setSelectionRange(start, end);
+      gfullContent.setRangeText(snippet, start, end, 'end');
+      const nextPos = start + snippet.length;
+      gfullContent.setSelectionRange(nextPos, nextPos);
+      rememberGfullSelection();
+      updateGfullMetrics();
+      markGfullDirty();
+      scheduleGfullAutosave();
+    }
+
+    function wrapGfullSelection(before, after = before, fallback = 'text') {
+      const start = gfullSelectionState.start;
+      const end = gfullSelectionState.end;
+      const selected = gfullContent.value.slice(start, end) || fallback;
+      const replacement = `${before}${selected}${after}`;
+      const cursorStart = start + before.length;
+      const cursorEnd = cursorStart + selected.length;
+      gfullContent.focus();
+      gfullContent.setSelectionRange(start, end);
+      gfullContent.setRangeText(replacement, start, end, 'end');
+      gfullContent.setSelectionRange(cursorStart, cursorEnd);
+      rememberGfullSelection();
+      updateGfullMetrics();
+      markGfullDirty();
+      scheduleGfullAutosave();
+    }
+
+    function prefixGfullSelectedLines(prefix, fallback = 'Quoted line') {
+      const start = gfullSelectionState.start;
+      const end = gfullSelectionState.end;
+      const selected = gfullContent.value.slice(start, end) || fallback;
+      const replacement = selected.split('\n').map((line) => `${prefix}${line}`).join('\n');
+      gfullContent.focus();
+      gfullContent.setSelectionRange(start, end);
+      gfullContent.setRangeText(replacement, start, end, 'end');
+      gfullContent.setSelectionRange(start, start + replacement.length);
+      rememberGfullSelection();
+      updateGfullMetrics();
+      markGfullDirty();
+      scheduleGfullAutosave();
+    }
+
+    function buildGfullCenteredSnippet(text) {
+      const safeText = (text || 'Centered text').trim() || 'Centered text';
+      return `\n\n<div class="otw-center">${safeText}</div>\n\n`;
+    }
+
+    async function uploadSelectedGfullImageAndInsert() {
+      const file = gfullImageInput.files && gfullImageInput.files[0];
+      if (!file) {
+        gfullImageStatus.textContent = 'Choose a photo first.';
+        return;
+      }
+
+      const publishKey = getGfullPublishKey();
+      if (!publishKey) {
+        gfullImageStatus.textContent = 'Add your publish key first so this device can upload narrative images.';
+        setGfullStatus('Publish key required before uploading narrative images.', 'warn');
+        return;
+      }
+
+      syncPublishKeys(publishKey);
+      const formData = new FormData();
+      formData.append('image', file);
+      formData.append('date', gfullEntryDate.value || getGfullLocalDate());
+      formData.append('title', gfullTitle.value.trim() || 'Untitled draft');
+      formData.append('alt', gfullTitle.value.trim() || 'Narrative image');
+      formData.append('caption', gfullImageCaption.value.trim());
+
+      gfullImageStatus.textContent = 'Uploading image to OTW media storage...';
+      setGfullStatus('Uploading image to OTW media storage...', 'warn');
+
+      try {
+        const response = await fetch(UPLOAD_GHOST_IMAGE_ENDPOINT, {
+          method: 'POST',
+          headers: { 'x-publish-key': publishKey },
+          body: formData
+        });
+        const payload = await response.json().catch(() => ({}));
+        if (!response.ok || !payload.ok || !payload.uploaded) {
+          throw new Error(payload.error || `Image upload failed with status ${response.status}`);
+        }
+
+        const snippet = gfullImageStyle.value === 'figure'
+          ? `${payload.uploaded.figure}\n`
+          : `${payload.uploaded.markdown}\n`;
+        insertAtGfullCursor(snippet);
+        gfullImageStatus.textContent = 'Image uploaded and inserted into your draft.';
+        setGfullStatus('Image uploaded and inserted.', 'ok');
+        clearSelectedGfullImage();
+        if (!gfullSettingsState.keepImagePanelOpen) {
+          closeGfullImagePanel();
+        }
+      } catch (error) {
+        gfullImageStatus.textContent = error.message || 'Image upload failed.';
+        setGfullStatus(error.message || 'Image upload failed.', 'bad');
+      }
+    }
+
+    async function publishGfullDraft() {
+      const body = gfullContent.value.trim();
+      const publishKey = getGfullPublishKey();
+
+      if (!body) {
+        setGfullStatus('Write the draft first, then publish it.', 'bad');
+        return;
+      }
+
+      if (!publishKey) {
+        setGfullStatus('Add your publish key so this device can publish directly to current_narrative.', 'warn');
+        return;
+      }
+
+      const gfullPayload = {
+        title: gfullTitle.value.trim(),
+        body: gfullContent.value,
+        date: gfullEntryDate.value || getGfullLocalDate()
+      };
+
+      if (!window.navigator.onLine) {
+        enqueuePublishJob({
+          kind: 'ghost-full',
+          endpoint: PUBLISH_GHOST_ENDPOINT,
+          payload: gfullPayload
+        });
+        saveGfullDraft();
+        setGfullStatus('Offline. The full Ghost Writer draft was queued on this device and will publish when the connection returns.', 'warn');
+        showPublishToast(
+          'Ghost Writer queued.',
+          'The full draft is safe in the local queue and will publish automatically once the network comes back.'
+        );
+        return;
+      }
+
+      syncPublishKeys(publishKey);
+      gfullPublishBtn.disabled = true;
+      gfullPublishBtn.textContent = 'Publishing...';
+      setGfullStatus('Publishing draft to current_narrative...', 'warn');
+
+      try {
+        const response = await fetch(PUBLISH_GHOST_ENDPOINT, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-publish-key': publishKey
+          },
+          body: JSON.stringify(gfullPayload)
+        });
+        const payload = await response.json().catch(() => ({}));
+        if (!response.ok || !payload.ok) {
+          throw new Error(payload.error || `Publish failed with status ${response.status}`);
+        }
+
+        saveGfullDraft();
+        setGfullStatus(`Published to ${payload.file || 'current_narrative'}.`, 'ok');
+        showPublishToast(
+          'Ghost Writer published.',
+          'A new markdown entry just landed in current_narrative and should sync into the site shortly.'
+        );
+      } catch (error) {
+        if (isLikelyNetworkFailure(error)) {
+          enqueuePublishJob({
+            kind: 'ghost-full',
+            endpoint: PUBLISH_GHOST_ENDPOINT,
+            payload: gfullPayload
+          });
+          saveGfullDraft();
+          setGfullStatus('Connection failed. The full Ghost Writer draft was queued on this device and will retry automatically.', 'warn');
+          showPublishToast(
+            'Ghost Writer queued.',
+            'The connection dropped, so the full draft was moved into the local queue instead of being lost.'
+          );
+          return;
+        }
+        setGfullStatus(error.message || 'Publish failed.', 'bad');
+      } finally {
+        gfullPublishBtn.disabled = false;
+        gfullPublishBtn.textContent = 'Publish to OTW';
+      }
+    }
+
+    async function copyGfullMarkdown() {
+      const ok = await navigator.clipboard.writeText(buildGfullMarkdown()).then(() => true).catch(() => false);
+      setGfullStatus(ok ? 'Markdown copied to clipboard.' : 'Clipboard copy failed on this device.', ok ? 'ok' : 'bad');
+    }
+
+    function downloadGfullMarkdown() {
+      const markdown = buildGfullMarkdown();
+      if (!gfullContent.value.trim()) {
+        setGfullStatus('There is nothing to download yet. Write a line first.', 'bad');
+        return;
+      }
+      const blob = new Blob([markdown], { type: 'text/markdown;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = buildGfullFilename();
+      link.click();
+      URL.revokeObjectURL(url);
+      setGfullStatus('Draft downloaded as markdown.', 'ok');
+    }
+
+    function clearLocalGfullDraft() {
+      window.localStorage.removeItem(GHOST_FULL_DRAFT_KEY);
+      setGfullLastSaved(null);
+      gfullSaveChip.textContent = 'Autosave off';
+      markGfullClean();
+      setGfullStatus('Local draft cleared from this device.', 'warn');
+    }
+
+    function resetGfullDraft() {
+      window.localStorage.removeItem(GHOST_FULL_DRAFT_KEY);
+      setGfullLastSaved(null);
+      gfullTitle.value = '';
+      gfullEntryDate.value = getGfullLocalDate();
+      gfullSlug.value = '';
+      gfullContent.value = '';
+      gfullMode.value = 'dark';
+      gfullRoot.dataset.writerMode = 'dark';
+      clearSelectedGfullImage();
+      gfullSaveChip.textContent = 'Autosave off';
+      markGfullClean();
+      updateGfullMetrics();
+      setGfullStatus('Draft reset complete.', 'warn');
+      setGfullMiniNote('Native editor active. Fresh console ready.');
+    }
+
+    function hydrateGfullDraft() {
+      const didLoad = loadGfullDraft();
+      if (!didLoad) {
+        gfullEntryDate.value = getGfullLocalDate();
+        gfullMode.value = 'dark';
+        gfullRoot.dataset.writerMode = 'dark';
+        updateGfullMetrics();
+        markGfullClean();
+        gfullSaveChip.textContent = 'Autosave off';
+        setGfullStatus('Ghost Writer full is ready.', 'ok');
+        setGfullMiniNote('Native editor active. Spellcheck and writing tools should come from the device, not a custom editor layer.');
+      }
+    }
+
+    function initGfullEditor() {
+      gfullSettingsState = loadGfullSettings();
+      applyGfullSettings();
+      const storedPublishKey = getPublishKey();
+      if (storedPublishKey && !publishKeyInput.value.trim()) {
+        publishKeyInput.value = storedPublishKey;
+      }
+      clearSelectedGfullImage();
+      hydrateGfullDraft();
+
+      const onAnyChange = () => {
+        updateGfullMetrics();
+        markGfullDirty();
+        scheduleGfullAutosave();
+      };
+
+      [gfullTitle, gfullEntryDate, gfullSlug, gfullContent].forEach((element) => {
+        const eventName = element === gfullEntryDate ? 'change' : 'input';
+        element.addEventListener(eventName, onAnyChange);
+      });
+      gfullContent.addEventListener('change', onAnyChange);
+      gfullContent.addEventListener('keyup', rememberGfullSelection);
+      gfullContent.addEventListener('mouseup', rememberGfullSelection);
+      gfullContent.addEventListener('select', rememberGfullSelection);
+      gfullContent.addEventListener('focus', rememberGfullSelection);
+      gfullMode.addEventListener('change', () => {
+        gfullRoot.dataset.writerMode = gfullMode.value;
+        updateGfullMetrics();
+        markGfullDirty();
+        scheduleGfullAutosave();
+      });
+
+      gfullToolbar.addEventListener('mousedown', (event) => {
+        if (event.target.closest('.gfull-format-btn')) {
+          event.preventDefault();
+          rememberGfullSelection();
+        }
+      });
+
+      gfullToolbar.addEventListener('click', (event) => {
+        const button = event.target.closest('.gfull-format-btn');
+        if (!button) return;
+        const action = button.dataset.action;
+        if (action === 'bold') wrapGfullSelection('**', '**', 'bold text');
+        if (action === 'italic') wrapGfullSelection('*', '*', 'italic text');
+        if (action === 'quote') prefixGfullSelectedLines('> ', 'Quoted line');
+        if (action === 'link') {
+          const url = window.prompt('Enter URL:', 'https://');
+          if (!url) return;
+          const text = window.prompt('Link text:', 'Link text') || 'Link text';
+          insertAtGfullCursor(`[${text}](${url})`);
+        }
+        if (action === 'image') openGfullImagePanel('markdown');
+        if (action === 'center') {
+          const text = window.prompt('Centered text:', 'Centered text');
+          if (text === null) return;
+          insertAtGfullCursor(buildGfullCenteredSnippet(text));
+        }
+        if (action === 'divider') insertAtGfullCursor('\n\n---\n\n');
+      });
+
+      gfullSettingsBtn.addEventListener('click', openGfullSettingsModal);
+      gfullSettingsCloseBtn.addEventListener('click', closeGfullSettingsModal);
+      gfullOpenSuiteSettingsBtn.addEventListener('click', () => {
+        closeGfullSettingsModal();
+        setMenuState(true);
+      });
+      gfullSettingsModal.addEventListener('click', (event) => {
+        if (event.target === gfullSettingsModal) {
+          closeGfullSettingsModal();
+        }
+      });
+      gfullShowSlugToggle.addEventListener('change', () => {
+        gfullSettingsState.showSlugField = gfullShowSlugToggle.checked;
+        saveGfullSettings();
+      });
+      gfullKeepImagePanelOpenToggle.addEventListener('change', () => {
+        gfullSettingsState.keepImagePanelOpen = gfullKeepImagePanelOpenToggle.checked;
+        saveGfullSettings();
+      });
+
+      gfullChooseImageBtn.addEventListener('click', () => {
+        rememberGfullSelection();
+        gfullImageInput.click();
+      });
+      gfullImageInput.addEventListener('change', () => {
+        const file = gfullImageInput.files && gfullImageInput.files[0];
+        setSelectedGfullImage(file || null);
+      });
+      gfullInsertImageBtn.addEventListener('click', uploadSelectedGfullImageAndInsert);
+      gfullClearImageBtn.addEventListener('click', clearSelectedGfullImage);
+      gfullImageCloseBtn.addEventListener('click', closeGfullImagePanel);
+
+      gfullPublishBtn.addEventListener('click', publishGfullDraft);
+      gfullDownloadBtn.addEventListener('click', downloadGfullMarkdown);
+      gfullCopyBtn.addEventListener('click', copyGfullMarkdown);
+      gfullLoadBtn.addEventListener('click', () => {
+        const ok = loadGfullDraft();
+        if (!ok) {
+          setGfullStatus('No saved draft found on this device.', 'warn');
+        }
+      });
+      gfullResetBtn.addEventListener('click', () => {
+        const ok = window.confirm('Reset full Ghost Writer draft? This clears fields, local draft, and image selection.');
+        if (!ok) return;
+        resetGfullDraft();
+      });
+      gfullClearBtn.addEventListener('click', () => {
+        const ok = window.confirm('Clear the local autosaved Ghost Writer draft from this device?');
+        if (!ok) return;
+        clearLocalGfullDraft();
+      });
     }
 
     function hydrateDraft() {
@@ -3540,13 +5354,30 @@
     }
 
     function hydratePublishKey() {
-      publishKeyInput.value = getPublishKey();
+      const publishKey = getPublishKey();
+      publishKeyInput.value = publishKey;
+      if (publishKey) {
+        window.localStorage.setItem(PUBLISH_KEY_STORAGE, publishKey);
+        window.localStorage.setItem(GHOST_FULL_PUBLISH_KEY_STORAGE, publishKey);
+      }
       updatePublishKeyStatus();
     }
 
     function setMenuState(isOpen) {
       topbarActions.classList.toggle('is-open', isOpen);
       menuToggle.setAttribute('aria-expanded', String(isOpen));
+    }
+
+    function openExternalUrl(url) {
+      const popup = window.open(url, '_blank');
+      if (!popup) {
+        window.location.href = url;
+      }
+    }
+
+    function getWorkspaceFromHash() {
+      const raw = window.location.hash.replace(/^#/, '').trim().toLowerCase();
+      return ['home', 'fragments', 'changelog', 'iotd', 'ghost', 'ghost-full', 'bot'].includes(raw) ? raw : 'home';
     }
 
     function setWorkspace(view) {
@@ -3565,9 +5396,18 @@
       if (nextView === 'fragments') {
         maybeRefreshFragmentTimestamp();
       }
+      if (nextView === 'ghost-full') {
+        window.setTimeout(() => {
+          gfullContent.focus();
+        }, 120);
+      }
 
       setMenuState(false);
       refreshSystemStatus();
+      const nextHash = nextView === 'home' ? '' : `#${nextView}`;
+      if (window.location.hash !== nextHash) {
+        window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}${nextHash}`);
+      }
       requestAnimationFrame(() => {
         window.scrollTo(0, 0);
       });
@@ -3616,6 +5456,9 @@
       ghostStatusLine.textContent = 'Divider inserted into the draft.';
     });
     document.getElementById('savePublishKeyBtn').addEventListener('click', savePublishKey);
+    retryQueueBtn.addEventListener('click', () => {
+      processPublishQueue();
+    });
     summonBotBtn.addEventListener('click', summonOtwBot);
     openFragmentsApp.addEventListener('click', () => {
       setWorkspace('fragments');
@@ -3644,22 +5487,22 @@
     openSiteApp.addEventListener('click', () => {
       window.open('index.html', '_blank', 'noopener,noreferrer');
     });
-    openGhostStandaloneBtn.addEventListener('click', () => {
-      window.open('ghost-writer.html', '_blank', 'noopener,noreferrer');
-    });
-    reloadGhostFrameBtn.addEventListener('click', () => {
-      ghostFullFrame.src = ghostFullFrame.src;
-    });
     dockHomeBtn.addEventListener('click', () => {
       setWorkspace('home');
     });
+    dockAnalyticsBtn.addEventListener('click', () => {
+      openExternalUrl('https://analytics.google.com/analytics/web/?utm_source=marketingplatform.google.com&utm_medium=et&utm_campaign=marketingplatform.google.com%2Fabout%2Fanalytics%2F#/a2309442p526627830/reports/intelligenthome?params=_u..nav%3Dmaui');
+    });
     dockGithubBtn.addEventListener('click', () => {
-      window.open('https://github.com/ryandavid-oss/outsidetheworld', '_blank', 'noopener,noreferrer');
+      openExternalUrl('https://github.com/ryandavid-oss/outsidetheworld/actions');
     });
     dockCloudflareBtn.addEventListener('click', () => {
-      window.open('https://dash.cloudflare.com/', '_blank', 'noopener,noreferrer');
+      openExternalUrl('https://dash.cloudflare.com/');
     });
     dockSettingsBtn.addEventListener('click', () => {
+      setMenuState(!topbarActions.classList.contains('is-open'));
+    });
+    systemStatusBtn.addEventListener('click', () => {
       setMenuState(!topbarActions.classList.contains('is-open'));
     });
     headerBackBtn.addEventListener('click', () => {
@@ -3687,12 +5530,35 @@
       setMenuState(!topbarActions.classList.contains('is-open'));
     });
     document.addEventListener('click', (event) => {
-      if (!topbarActions.contains(event.target) && !menuToggle.contains(event.target)) {
+      if (
+        !topbarActions.contains(event.target)
+        && !menuToggle.contains(event.target)
+        && !systemStatusBtn.contains(event.target)
+        && !dockSettingsBtn.contains(event.target)
+      ) {
         setMenuState(false);
       }
     });
     window.addEventListener('resize', () => {
       setMenuState(false);
+    });
+    window.addEventListener('online', () => {
+      showPublishToast(
+        'Connection restored.',
+        'The app is back online. Queued text publishes will start syncing automatically.'
+      );
+      processPublishQueue();
+    });
+    window.addEventListener('offline', () => {
+      updateQueueStatus();
+      refreshSystemStatus();
+      showPublishToast(
+        'Offline mode.',
+        'Drafts still save locally. Text-based publishes will queue until the connection returns.'
+      );
+    });
+    window.addEventListener('hashchange', () => {
+      setWorkspace(getWorkspaceFromHash());
     });
 
     [textInput, tagInput].forEach((element) => {
@@ -3781,18 +5647,21 @@
 
     hydrateTheme();
     hydratePublishKey();
+    updateQueueStatus();
     hydrateDraft();
     hydrateChangelogDraft();
     hydrateIotdDraft();
     hydrateGhostDraft();
+    initGfullEditor();
     updatePreview();
     updateChangelogPreview();
     updateIotdPreview();
     updateGhostPreview();
     renderChangelogOutbox();
     loadRecentChangelog();
-    setWorkspace('home');
+    setWorkspace(getWorkspaceFromHash());
     refreshSystemStatus();
+    processPublishQueue();
   </script>
 </body>
 </html>

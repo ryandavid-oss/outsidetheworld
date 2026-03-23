@@ -127,102 +127,15 @@
     }
 
     /* Topbar */
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      -webkit-backdrop-filter: blur(14px);
-      backdrop-filter: blur(14px);
-      background: linear-gradient(to bottom, rgba(5, 5, 5, 0.95) 70%, rgba(5, 5, 5, 0) 100%);
-      border-bottom: 1px solid rgba(145, 175, 179, 0.12);
-      padding: 14px 0 10px;
-      margin: 0 -16px 18px;
-      padding-left: 16px;
-      padding-right: 16px;
-    }
-
-    body[data-writer-mode="light"] .topbar,
-    body[data-writer-mode="sepia"] .topbar {
-      background: linear-gradient(to bottom, rgba(255, 255, 255, 0.80) 70%, rgba(255, 255, 255, 0) 100%);
-      border-bottom-color: var(--borderx);
-    }
-
-    .topbar-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      max-width: 1220px;
-      margin: 0 auto;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      min-width: 0;
-    }
-
-    .brand img {
-      width: 92px;
-      height: auto;
-      filter: drop-shadow(0 0 18px rgba(99, 149, 238, 0.22));
-    }
-
-    .titleblock {
-      min-width: 0;
-    }
-
-    .title {
-      font-weight: 900;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      font-size: 0.95rem;
-      margin: 0;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      color: var(--ink);
-    }
-
-    .subtitle {
-      font-family: var(--font-code);
-      font-size: 0.6rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-top: 4px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    /* Writer mode control UI */
-    .writer-controls {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-family: var(--font-code);
-      font-size: 0.6rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--muted);
-      white-space: nowrap;
-    }
-
-    .writer-label {
-      opacity: 0.9;
-    }
-
     .writer-select {
       font-family: var(--font-code);
-      font-size: 0.6rem;
-      letter-spacing: 2px;
+      font-size: 0.58rem;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--ink);
-      background: var(--toolbar-bg);
-      border: 1px solid var(--borderx);
-      padding: 8px 10px;
+      background: transparent;
+      border: none;
+      padding: 0;
       outline: none;
       appearance: none;
     }
@@ -261,105 +174,6 @@
       .status {
         display: none;
       }
-
-      .topbar-inner {
-        flex-wrap: wrap;
-        align-items: flex-start;
-      }
-
-      .writer-controls {
-        width: 100%;
-        justify-content: space-between;
-      }
-    }
-
-    /* Auth overlay */
-    #auth-container {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.92);
-      -webkit-backdrop-filter: blur(18px);
-      backdrop-filter: blur(18px);
-      z-index: 9999;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 24px;
-      text-align: center;
-    }
-
-    .auth-box {
-      width: min(520px, 92vw);
-      border: 1px solid rgba(145, 175, 179, 0.22);
-      background: rgba(145, 175, 179, 0.05);
-      padding: 22px;
-      position: relative;
-    }
-
-    .auth-box::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background:
-        linear-gradient(to right, rgba(145, 175, 179, 0.55), rgba(145, 175, 179, 0)) top left / 90px 2px no-repeat,
-        linear-gradient(to bottom, rgba(145, 175, 179, 0.55), rgba(145, 175, 179, 0)) top left / 2px 90px no-repeat,
-        linear-gradient(to left, rgba(145, 175, 179, 0.40), rgba(145, 175, 179, 0)) bottom right / 90px 2px no-repeat,
-        linear-gradient(to top, rgba(145, 175, 179, 0.40), rgba(145, 175, 179, 0)) bottom right / 2px 90px no-repeat;
-      opacity: 0.95;
-    }
-
-    .auth-label {
-      font-family: var(--font-code);
-      font-size: 0.7rem;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: rgba(160, 190, 245, 0.9);
-      margin: 0 0 10px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .auth-sub {
-      font-family: "IBM Plex Serif", serif;
-      color: rgba(255, 255, 255, 0.78);
-      margin: 0 0 16px;
-      position: relative;
-      z-index: 1;
-      line-height: 1.5;
-    }
-
-    #passwordInput {
-      width: 100%;
-      box-sizing: border-box;
-      background: rgba(5, 5, 5, 0.72);
-      border: 1px solid rgba(145, 175, 179, 0.28);
-      color: #fff;
-      outline: none;
-      padding: 14px;
-      font-family: var(--font-code);
-      font-size: 1.1rem;
-      letter-spacing: 2px;
-      text-align: center;
-      position: relative;
-      z-index: 1;
-    }
-
-    #passwordInput:focus {
-      border-color: rgba(99, 149, 238, 0.65);
-      box-shadow: 0 0 0 3px rgba(99, 149, 238, 0.12);
-    }
-
-    .auth-hint {
-      margin-top: 12px;
-      font-family: var(--font-code);
-      font-size: 0.55rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: rgba(145, 175, 179, 0.65);
-      position: relative;
-      z-index: 1;
     }
 
     /* Layout */
@@ -370,8 +184,35 @@
       align-items: start;
     }
 
+    body[data-embedded="true"] .wrap {
+      max-width: none;
+      padding-left: 12px;
+      padding-right: 12px;
+    }
+
+    body[data-embedded="true"] .grid {
+      grid-template-columns: minmax(0, 1.16fr) minmax(360px, 0.84fr);
+      gap: 14px;
+    }
+
+    body[data-embedded="true"] .wrap {
+      padding-top: 12px;
+    }
+
     @media (max-width: 980px) {
       .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 1180px) {
+      body[data-embedded="true"] .grid {
+        grid-template-columns: minmax(0, 1fr) minmax(330px, 0.88fr);
+      }
+    }
+
+    @media (max-width: 920px) {
+      body[data-embedded="true"] .grid {
         grid-template-columns: 1fr;
       }
     }
@@ -615,21 +456,6 @@
         padding: 14px 12px 72px;
       }
 
-      .topbar {
-        padding-top: 12px;
-      }
-
-      .brand img {
-        width: 78px;
-      }
-
-      .title {
-        font-size: 0.8rem;
-        letter-spacing: 2px;
-      }
-
-      .subtitle,
-      .writer-controls,
       .writer-select {
         font-size: 0.55rem;
         letter-spacing: 1.5px;
@@ -806,6 +632,23 @@
       border-color: var(--borderx);
     }
 
+    .toolbar-mode {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .toolbar-mode-label {
+      display: flex;
+      align-items: center;
+      font-family: var(--font-code);
+      font-size: 0.58rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
     .format-btn {
       cursor: pointer;
       border: 1px solid rgba(145, 175, 179, 0.22);
@@ -920,6 +763,11 @@
       align-items: start;
     }
 
+    body[data-embedded="true"] .image-panel-grid {
+      grid-template-columns: 108px minmax(0, 1fr);
+      gap: 20px;
+    }
+
     @media (max-width: 720px) {
       .image-panel-grid {
         grid-template-columns: 1fr;
@@ -935,6 +783,10 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
+    }
+
+    body[data-embedded="true"] .image-preview-box {
+      width: 108px;
     }
 
     body[data-writer-mode="light"] .image-preview-box,
@@ -955,6 +807,10 @@
       flex-direction: column;
       gap: 10px;
       align-items: stretch;
+    }
+
+    body[data-embedded="true"] .image-preview-rail {
+      gap: 12px;
     }
 
     .image-preview-empty {
@@ -991,6 +847,11 @@
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 10px;
       align-items: stretch;
+    }
+
+    body[data-embedded="true"] .image-panel-actions {
+      grid-template-columns: repeat(2, minmax(160px, 220px));
+      justify-content: start;
     }
 
     @media (max-width: 560px) {
@@ -1176,11 +1037,6 @@
       font-style: italic;
     }
 
-    /* Hide main until auth passes */
-    #app {
-      display: none;
-    }
-
     .settings-modal {
       position: fixed;
       inset: 0;
@@ -1290,44 +1146,9 @@
 </head>
 
 <body>
-  <!-- Auth -->
-  <div id="auth-container" role="dialog" aria-modal="true" aria-label="Restricted access">
-    <div class="auth-box">
-      <div class="auth-label">RESTRICTED_ACCESS // UPLINK_AUTHORIZATION</div>
-      <div class="auth-sub">
-        Enter passphrase to unlock the authoring console.
-      </div>
-      <input autofocus id="passwordInput" placeholder="••••••••" type="password" autocomplete="current-password" />
-      <div class="auth-hint">PRESS_ENTER // TO_AUTHENTICATE</div>
-    </div>
+  <div class="status" id="statusBox" hidden><span class="dot" id="statusDot"></span><span id="statusText">LOCKED</span>
   </div>
-
-  <!-- Topbar -->
-  <div class="topbar">
-    <div class="topbar-inner">
-      <div class="brand">
-        <a href="./index.html" aria-label="Back to home" style="display:flex; align-items:center;">
-          <img src="./Images/Equal.svg" alt="Outside The World" />
-        </a>
-        <div class="titleblock">
-          <h1 class="title">GHOST_WRITER // AUTHORING_CONSOLE</h1>
-          <div class="subtitle" id="subline">INITIALIZING_HANDSHAKE…</div>
-        </div>
-      </div>
-
-      <div class="writer-controls" aria-label="Writer mode">
-        <label class="writer-label" for="writer-mode">MODE //</label>
-        <select id="writer-mode" class="writer-select">
-          <option value="dark">VOID</option>
-          <option value="light">INVERT</option>
-          <option value="sepia">PAPER</option>
-        </select>
-      </div>
-
-      <div class="status" id="statusBox"><span class="dot" id="statusDot"></span><span id="statusText">LOCKED</span>
-      </div>
-    </div>
-  </div>
+  <div id="subline" hidden>INITIALIZING_HANDSHAKE…</div>
 
   <div class="wrap" id="app">
     <div class="grid">
@@ -1377,6 +1198,14 @@
                 <span class="toolbar-stat">Words: <span id="mWords">0</span></span>
                 <span class="toolbar-stat">Chars: <span id="mChars">0</span></span>
                 <span class="toolbar-stat">Read: <span id="mRead">0</span> min</span>
+                <span class="toolbar-stat toolbar-mode">
+                  <span class="toolbar-mode-label">Mode:</span>
+                  <select id="writer-mode" class="writer-select" aria-label="Writer mode">
+                    <option value="dark">Void</option>
+                    <option value="light">White</option>
+                    <option value="sepia">Paper</option>
+                  </select>
+                </span>
               </div>
             </div>
             <textarea id="content" spellcheck="true" autocapitalize="sentences" autocorrect="on"
@@ -1497,6 +1326,12 @@
   </div>
 
   <script>
+    const searchParams = new URLSearchParams(window.location.search);
+    const isEmbedded = searchParams.get('embedded') === '1' || window.location.hash === '#embedded';
+    if (isEmbedded) {
+      document.body.dataset.embedded = 'true';
+    }
+
     // -----------------------
     // Writer mode (VOID / INVERT / PAPER)
     // -----------------------
@@ -1515,26 +1350,6 @@
 
       select.addEventListener('change', () => apply(select.value));
     })();
-
-    // -----------------------
-    // Auth (kept intact)
-    // -----------------------
-    function login() {
-      // Keeping your password check intact as requested
-      if (document.getElementById('passwordInput').value === 'Stockton12!') {
-        document.getElementById('auth-container').style.display = 'none';
-        document.getElementById('app').style.display = 'block';
-
-        setStatus('UNLOCKED', 'ok');
-        initEditorAfterAuth();
-      } else {
-        alert('ACCESS_DENIED // SECURITY_HANDSHAKE_FAILED');
-        setStatus('DENIED', 'bad');
-      }
-    }
-    document.getElementById('passwordInput').addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') login();
-    });
 
     // -----------------------
     // Status UI
@@ -2081,7 +1896,7 @@
       return `\n\n<div class="otw-center">${safeText}</div>\n\n`;
     }
 
-    function initEditorAfterAuth() {
+    function initEditor() {
       loadDraft();
       settingsState = loadSettings();
       applySettings();
@@ -2204,6 +2019,8 @@
       updateMetrics();
       elContent.focus();
     }
+
+    initEditor();
   </script>
 </body>
 

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'otw-fragments-publisher-v3';
+const CACHE_NAME = 'otw-fragments-publisher-v4';
 const CORE_ASSETS = [
   '/fragments_publisher.html',
   '/fragments_publisher.webmanifest',
@@ -6,7 +6,12 @@ const CORE_ASSETS = [
   '/favicon.svg',
   '/Images/Equal.svg',
   '/Images/Equal_dark.svg',
-  '/Images/Profile.jpg'
+  '/Images/Profile.jpg',
+  '/Images/otw_brandmark_stroke.svg',
+  '/Images/iotd_icon.svg',
+  '/Images/ghost_writer_lite_icon.svg',
+  '/Images/ghost_writer_full_icon.svg',
+  '/Images/otw_bot_summon_icon.svg'
 ];
 
 const PUBLISHER_PATHS = new Set(CORE_ASSETS.concat(['/fragments_publisher_sw.js']));
