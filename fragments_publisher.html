@@ -5415,6 +5415,10 @@
       document.body.classList.toggle('is-editing', isEditableElement(document.activeElement));
     }
 
+    function shouldAutoFocusWorkspaceFields() {
+      return !window.matchMedia('(pointer: coarse)').matches;
+    }
+
     function openExternalUrl(url) {
       const popup = window.open(url, '_blank');
       if (!popup) {
@@ -5443,7 +5447,7 @@
       if (nextView === 'fragments') {
         maybeRefreshFragmentTimestamp();
       }
-      if (nextView === 'ghost-full') {
+      if (nextView === 'ghost-full' && shouldAutoFocusWorkspaceFields()) {
         window.setTimeout(() => {
           gfullContent.focus();
         }, 120);
@@ -5509,9 +5513,11 @@
     summonBotBtn.addEventListener('click', summonOtwBot);
     openFragmentsApp.addEventListener('click', () => {
       setWorkspace('fragments');
-      window.setTimeout(() => {
-        textInput.focus();
-      }, 120);
+      if (shouldAutoFocusWorkspaceFields()) {
+        window.setTimeout(() => {
+          textInput.focus();
+        }, 120);
+      }
     });
     openChangelogApp.addEventListener('click', () => {
       setWorkspace('changelog');
@@ -5521,9 +5527,11 @@
     });
     openGhostApp.addEventListener('click', () => {
       setWorkspace('ghost');
-      window.setTimeout(() => {
-        ghostBodyInput.focus();
-      }, 120);
+      if (shouldAutoFocusWorkspaceFields()) {
+        window.setTimeout(() => {
+          ghostBodyInput.focus();
+        }, 120);
+      }
     });
     openGhostFullApp.addEventListener('click', () => {
       setWorkspace('ghost-full');
