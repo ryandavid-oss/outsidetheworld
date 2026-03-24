@@ -5616,17 +5616,15 @@
     // When a physical keyboard (e.g. Magic Keyboard) is in use, iOS does not show
     // the soft keyboard, so the viewport does not shrink. The soft-keyboard
     // stabilization code below would incorrectly fight iOS's natural
-    // scroll-to-focused-input behavior and cause a visible jump. We track recent
-    // physical key presses and suspend the hacks while the hardware keyboard is active.
+    // scroll-to-focused-input behavior and cause a visible jump. Once a physical
+    // key is detected we stay in this mode for the session — the keyboard does
+    // not disconnect between sub-app views, and resetting the flag on a timer
+    // caused the glitch to return after navigating away and back.
     let physicalKeyboardActive = false;
-    let physicalKeyboardTimer = null;
     document.addEventListener('keydown', (event) => {
+      if (physicalKeyboardActive) return;
       if (event.isComposing || event.key === 'Process' || event.key === 'Unidentified') return;
       physicalKeyboardActive = true;
-      if (physicalKeyboardTimer) window.clearTimeout(physicalKeyboardTimer);
-      physicalKeyboardTimer = window.setTimeout(() => {
-        physicalKeyboardActive = false;
-      }, 3000);
     }, true);
 
     function rememberViewportBeforeFocus(target) {
