@@ -3634,8 +3634,30 @@
         return new Date().toISOString();
       }
 
-      const parsed = new Date(localValue);
-      return parsed.toISOString();
+      // datetime-local values like "2024-03-24T14:30" have no timezone suffix.
+      // Appending ":00" ensures consistent parsing as local time across browsers.
+      const withSeconds = localValue.length === 16 ? `${localValue}:00` : localValue;
+      const parsed = new Date(withSeconds);
+      if (Number.isNaN(parsed.getTime())) {
+        return new Date().toISOString();
+      }
+
+      // Build an ISO string that preserves the local time with the correct offset
+      // instead of converting silently to UTC (which toISOString() would do).
+      const offsetMinutes = parsed.getTimezoneOffset();
+      const sign = offsetMinutes <= 0 ? '+' : '-';
+      const absMinutes = Math.abs(offsetMinutes);
+      const offsetHrs = String(Math.floor(absMinutes / 60)).padStart(2, '0');
+      const offsetMins = String(absMinutes % 60).padStart(2, '0');
+
+      const year = parsed.getFullYear();
+      const month = String(parsed.getMonth() + 1).padStart(2, '0');
+      const day = String(parsed.getDate()).padStart(2, '0');
+      const hours = String(parsed.getHours()).padStart(2, '0');
+      const minutes = String(parsed.getMinutes()).padStart(2, '0');
+      const seconds = String(parsed.getSeconds()).padStart(2, '0');
+
+      return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}${sign}${offsetHrs}:${offsetMins}`;
     }
 
     function normalizeFragmentText(value) {
@@ -4121,7 +4143,7 @@
           continue;
         }
 
-        const centeredMatch = rawLine.match(/<div class="otw-center">([\s\S]*?)<\/div>/i);
+        const centeredMatch = rawLine.match(/<div class="otw-center">([\s\S]*?)<\/div>/);
         if (centeredMatch) {
           flushParagraph();
           blocks.push(`<div class="otw-center">${formatGhostInline(centeredMatch[1].trim())}</div>`);
@@ -5212,7 +5234,7 @@
 
       const gfullPayload = {
         title: gfullTitle.value.trim(),
-        body: gfullContent.value,
+        body,
         date: formatLongDate(gfullEntryDate.value || getGfullLocalDate())
       };
 
@@ -5358,7 +5380,6 @@
         const eventName = element === gfullEntryDate ? 'change' : 'input';
         element.addEventListener(eventName, onAnyChange);
       });
-      gfullContent.addEventListener('change', onAnyChange);
       gfullContent.addEventListener('keyup', rememberGfullSelection);
       gfullContent.addEventListener('mouseup', rememberGfullSelection);
       gfullContent.addEventListener('select', rememberGfullSelection);
@@ -5386,9 +5407,12 @@
         if (action === 'quote') prefixGfullSelectedLines('> ', 'Quoted line');
         if (action === 'link') {
           const url = window.prompt('Enter URL:', 'https://');
-          if (!url) return;
+          if (!url || !url.trim()) return;
           const text = window.prompt('Link text:', 'Link text') || 'Link text';
-          insertAtGfullCursor(`[${text}](${url})`);
+          // Strip characters that would break the markdown link syntax
+          const safeUrl = url.trim().replace(/[()]/g, (c) => encodeURIComponent(c));
+          const safeText = text.replace(/[\[\]]/g, '');
+          insertAtGfullCursor(`[${safeText}](${safeUrl})`);
         }
         if (action === 'image') openGfullImagePanel('markdown');
         if (action === 'center') {
