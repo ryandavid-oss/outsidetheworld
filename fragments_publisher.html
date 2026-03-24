@@ -63,6 +63,7 @@
 
     html,
     body {
+      height: 100%;
       width: 100%;
       max-width: 100%;
       overflow-x: hidden;
@@ -96,6 +97,23 @@
       width: min(var(--max-width), calc(100% - 20px));
       margin: 0 auto;
       padding: calc(var(--safe-top) + 10px) 0 calc(env(safe-area-inset-bottom) + 158px);
+    }
+
+    body.is-standalone-app {
+      min-height: 100dvh;
+      height: 100dvh;
+      overflow: hidden;
+    }
+
+    body.is-standalone-app .shell {
+      height: 100dvh;
+      overflow-y: auto;
+      overscroll-behavior-y: contain;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    body.is-standalone-app.is-editing .topbar {
+      position: static;
     }
 
     .topbar {
@@ -3473,6 +3491,7 @@
     const GHOST_FULL_SETTINGS_KEY = 'otw_ghost_writer_settings_v1';
     const GHOST_FULL_PUBLISH_KEY_STORAGE = 'otw_ghost_writer_publish_key';
 
+    const appShell = document.querySelector('.shell');
     const textInput = document.getElementById('fragmentText');
     const tagInput = document.getElementById('fragmentTag');
     const timestampInput = document.getElementById('fragmentTimestamp');
@@ -3565,6 +3584,29 @@
     const gfullToolbar = document.getElementById('gfullToolbar');
     const gfullWords = document.getElementById('gfullWords');
     const gfullChars = document.getElementById('gfullChars');
+
+    function isStandaloneApp() {
+      return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+    }
+
+    function applyAppEnvironment() {
+      document.body.classList.toggle('is-standalone-app', isStandaloneApp());
+    }
+
+    function getScrollOffset() {
+      if (document.body.classList.contains('is-standalone-app') && appShell) {
+        return appShell.scrollTop;
+      }
+      return window.scrollY || window.pageYOffset || 0;
+    }
+
+    function setScrollOffset(value) {
+      if (document.body.classList.contains('is-standalone-app') && appShell) {
+        appShell.scrollTo({ top: value, behavior: 'auto' });
+        return;
+      }
+      window.scrollTo({ top: value, behavior: 'auto' });
+    }
     const gfullRead = document.getElementById('gfullRead');
     const gfullMode = document.getElementById('gfullMode');
     const gfullContent = document.getElementById('gfullContent');
@@ -5593,7 +5635,7 @@
         return;
       }
 
-      focusViewportState.scrollY = window.scrollY || window.pageYOffset || 0;
+      focusViewportState.scrollY = getScrollOffset();
       focusViewportState.viewportHeight = getViewportHeight();
       focusViewportState.target = target;
       focusViewportState.active = true;
@@ -5610,14 +5652,14 @@
       }
 
       const viewportDelta = Math.abs(getViewportHeight() - focusViewportState.viewportHeight);
-      const scrollDelta = Math.abs((window.scrollY || window.pageYOffset || 0) - focusViewportState.scrollY);
+      const scrollDelta = Math.abs(getScrollOffset() - focusViewportState.scrollY);
 
       if (scrollDelta < 56) {
         return;
       }
 
       if (viewportDelta <= 120) {
-        window.scrollTo({ top: focusViewportState.scrollY, behavior: 'auto' });
+        setScrollOffset(focusViewportState.scrollY);
       }
     }
 
@@ -5681,7 +5723,7 @@
         window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}${nextHash}`);
       }
       requestAnimationFrame(() => {
-        window.scrollTo(0, 0);
+        setScrollOffset(0);
       });
     }
 
@@ -5852,9 +5894,14 @@
       window.setTimeout(syncEditingState, 0);
     });
     window.addEventListener('resize', () => {
+      applyAppEnvironment();
       setMenuState(false);
       syncEditingState();
     });
+    const standaloneModeQuery = window.matchMedia('(display-mode: standalone)');
+    if (typeof standaloneModeQuery.addEventListener === 'function') {
+      standaloneModeQuery.addEventListener('change', applyAppEnvironment);
+    }
     if (window.visualViewport) {
       window.visualViewport.addEventListener('resize', () => {
         if (document.body.classList.contains('is-editing')) {
@@ -5965,6 +6012,7 @@
       });
     }
 
+    applyAppEnvironment();
     hydrateTheme();
     hydratePublishKey();
     updateQueueStatus();
