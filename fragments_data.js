@@ -1,5 +1,13 @@
 window.otw_fragments = [
   {
+    "timestamp": "2026-03-24T21:03:00.000Z",
+    "text": "Interesting developments afoot. Stay tuned.",
+    "tag": "FRAGMENT",
+    "author_id": "ryan",
+    "author": "The_RyanDavid",
+    "author_handle": "@outsidetheworld"
+  },
+  {
     "timestamp": "2026-03-24T16:17:00.000Z",
     "text": "Each new day brings new challenges and opportunities to learn. \n\nKeep your eyes open, listen to your friends. Don't dismiss their questions as annoyances or as trivia. \n\nUse it instead to learn a new skill or to broaden your own horizons. You may just find out how much you don't know.",
     "tag": "CHECK_IN",
