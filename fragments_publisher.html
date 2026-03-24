@@ -5560,6 +5560,56 @@
       );
     }
 
+    function getViewportHeight() {
+      return window.visualViewport?.height || window.innerHeight || 0;
+    }
+
+    const focusViewportState = {
+      scrollY: 0,
+      viewportHeight: 0,
+      target: null,
+      active: false
+    };
+
+    function rememberViewportBeforeFocus(target) {
+      if (!window.matchMedia('(pointer: coarse)').matches || !isEditableElement(target)) {
+        return;
+      }
+
+      focusViewportState.scrollY = window.scrollY || window.pageYOffset || 0;
+      focusViewportState.viewportHeight = getViewportHeight();
+      focusViewportState.target = target;
+      focusViewportState.active = true;
+    }
+
+    function maybeStabilizeFocusedViewport() {
+      if (!focusViewportState.active || !window.matchMedia('(pointer: coarse)').matches) {
+        return;
+      }
+
+      const activeElement = document.activeElement;
+      if (!isEditableElement(activeElement) || activeElement !== focusViewportState.target) {
+        return;
+      }
+
+      const viewportDelta = Math.abs(getViewportHeight() - focusViewportState.viewportHeight);
+      const scrollDelta = Math.abs((window.scrollY || window.pageYOffset || 0) - focusViewportState.scrollY);
+
+      if (scrollDelta < 56) {
+        return;
+      }
+
+      if (viewportDelta <= 120) {
+        window.scrollTo({ top: focusViewportState.scrollY, behavior: 'auto' });
+      }
+    }
+
+    function scheduleViewportStabilize() {
+      window.setTimeout(maybeStabilizeFocusedViewport, 0);
+      window.setTimeout(maybeStabilizeFocusedViewport, 120);
+      window.setTimeout(maybeStabilizeFocusedViewport, 260);
+    }
+
     function syncEditingState() {
       if (!window.matchMedia('(pointer: coarse)').matches) {
         document.body.classList.remove('is-editing');
@@ -5748,16 +5798,32 @@
         setMenuState(false);
       }
     });
+    document.addEventListener('touchstart', (event) => {
+      rememberViewportBeforeFocus(event.target);
+    }, { passive: true, capture: true });
+    document.addEventListener('pointerdown', (event) => {
+      rememberViewportBeforeFocus(event.target);
+    }, true);
     document.addEventListener('focusin', () => {
       syncEditingState();
+      scheduleViewportStabilize();
     });
     document.addEventListener('focusout', () => {
+      focusViewportState.active = false;
+      focusViewportState.target = null;
       window.setTimeout(syncEditingState, 0);
     });
     window.addEventListener('resize', () => {
       setMenuState(false);
       syncEditingState();
     });
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', () => {
+        if (document.body.classList.contains('is-editing')) {
+          scheduleViewportStabilize();
+        }
+      });
+    }
     window.addEventListener('online', () => {
       showPublishToast(
         'Connection restored.',
