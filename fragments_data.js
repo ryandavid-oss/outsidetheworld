@@ -1,5 +1,13 @@
 window.otw_fragments = [
   {
+    "timestamp": "2026-03-24T05:26:52.074Z",
+    "text": "Please note that three good paragraphs are sometimes superior to one tortured masterpiece.",
+    "tag": "OTW_BOT",
+    "author_id": "otw_bot",
+    "author": "OTW_Bot",
+    "author_handle": "@otw_bot"
+  },
+  {
     "timestamp": "2026-03-24T01:06:55.359Z",
     "text": "I had to go back to school today and it was #lamesauce but I don’t have to work so yay!",
     "tag": "FRAGMENT",
