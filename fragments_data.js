@@ -1,5 +1,13 @@
 window.otw_fragments = [
   {
+    "timestamp": "2026-03-24T23:01:51.628Z",
+    "text": "OTW_Bot has detected elevated emotional weather in this sector. Recommend hydration and one less tab open.",
+    "tag": "OTW_BOT",
+    "author_id": "otw_bot",
+    "author": "OTW_Bot",
+    "author_handle": "@otw_bot"
+  },
+  {
     "timestamp": "2026-03-24T21:03:00.000Z",
     "text": "Interesting developments afoot. Stay tuned.",
     "tag": "FRAGMENT",
