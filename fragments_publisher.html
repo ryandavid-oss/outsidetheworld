@@ -38,7 +38,6 @@
       --amethyst: #9B59B6;
       --signal-green: #4BE36E;
       --signal-green-soft: rgba(75, 227, 110, 0.16);
-      --app-height: 100dvh;
       --radius-xl: 28px;
       --radius-lg: 22px;
       --radius-md: 16px;
@@ -64,7 +63,6 @@
 
     html,
     body {
-      height: 100%;
       width: 100%;
       max-width: 100%;
       overflow-x: hidden;
@@ -98,23 +96,6 @@
       width: min(var(--max-width), calc(100% - 20px));
       margin: 0 auto;
       padding: calc(var(--safe-top) + 10px) 0 calc(env(safe-area-inset-bottom) + 158px);
-    }
-
-    body.is-standalone-app {
-      min-height: var(--app-height);
-      height: var(--app-height);
-      overflow: hidden;
-    }
-
-    body.is-standalone-app .shell {
-      height: var(--app-height);
-      overflow-y: auto;
-      overscroll-behavior-y: contain;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    body.is-standalone-app.is-editing .topbar {
-      position: static;
     }
 
     .topbar {
@@ -3492,7 +3473,6 @@
     const GHOST_FULL_SETTINGS_KEY = 'otw_ghost_writer_settings_v1';
     const GHOST_FULL_PUBLISH_KEY_STORAGE = 'otw_ghost_writer_publish_key';
 
-    const appShell = document.querySelector('.shell');
     const textInput = document.getElementById('fragmentText');
     const tagInput = document.getElementById('fragmentTag');
     const timestampInput = document.getElementById('fragmentTimestamp');
@@ -3586,36 +3566,6 @@
     const gfullWords = document.getElementById('gfullWords');
     const gfullChars = document.getElementById('gfullChars');
 
-    function isStandaloneApp() {
-      return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
-    }
-
-    function updateAppHeightVariable() {
-      const nextHeight = getViewportHeight();
-      if (nextHeight) {
-        document.documentElement.style.setProperty('--app-height', `${Math.round(nextHeight)}px`);
-      }
-    }
-
-    function applyAppEnvironment() {
-      document.body.classList.toggle('is-standalone-app', isStandaloneApp());
-      updateAppHeightVariable();
-    }
-
-    function getScrollOffset() {
-      if (document.body.classList.contains('is-standalone-app') && appShell) {
-        return appShell.scrollTop;
-      }
-      return window.scrollY || window.pageYOffset || 0;
-    }
-
-    function setScrollOffset(value) {
-      if (document.body.classList.contains('is-standalone-app') && appShell) {
-        appShell.scrollTo({ top: value, behavior: 'auto' });
-        return;
-      }
-      window.scrollTo({ top: value, behavior: 'auto' });
-    }
     const gfullRead = document.getElementById('gfullRead');
     const gfullMode = document.getElementById('gfullMode');
     const gfullContent = document.getElementById('gfullContent');
@@ -5644,7 +5594,7 @@
         return;
       }
 
-      focusViewportState.scrollY = getScrollOffset();
+      focusViewportState.scrollY = window.scrollY || window.pageYOffset || 0;
       focusViewportState.viewportHeight = getViewportHeight();
       focusViewportState.target = target;
       focusViewportState.active = true;
@@ -5661,14 +5611,14 @@
       }
 
       const viewportDelta = Math.abs(getViewportHeight() - focusViewportState.viewportHeight);
-      const scrollDelta = Math.abs(getScrollOffset() - focusViewportState.scrollY);
+      const scrollDelta = Math.abs((window.scrollY || window.pageYOffset || 0) - focusViewportState.scrollY);
 
       if (scrollDelta < 56) {
         return;
       }
 
       if (viewportDelta <= 120) {
-        setScrollOffset(focusViewportState.scrollY);
+        window.scrollTo({ top: focusViewportState.scrollY, behavior: 'auto' });
       }
     }
 
@@ -5732,7 +5682,7 @@
         window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}${nextHash}`);
       }
       requestAnimationFrame(() => {
-        setScrollOffset(0);
+        window.scrollTo(0, 0);
       });
     }
 
@@ -5903,22 +5853,11 @@
       window.setTimeout(syncEditingState, 0);
     });
     window.addEventListener('resize', () => {
-      applyAppEnvironment();
       setMenuState(false);
       syncEditingState();
     });
-    const standaloneModeQuery = window.matchMedia('(display-mode: standalone)');
-    if (typeof standaloneModeQuery.addEventListener === 'function') {
-      standaloneModeQuery.addEventListener('change', applyAppEnvironment);
-    }
     if (window.visualViewport) {
       window.visualViewport.addEventListener('resize', () => {
-        updateAppHeightVariable();
-        if (document.body.classList.contains('is-editing')) {
-          scheduleViewportStabilize();
-        }
-      });
-      window.visualViewport.addEventListener('scroll', () => {
         if (document.body.classList.contains('is-editing')) {
           scheduleViewportStabilize();
         }
@@ -6027,7 +5966,6 @@
       });
     }
 
-    applyAppEnvironment();
     hydrateTheme();
     hydratePublishKey();
     updateQueueStatus();
