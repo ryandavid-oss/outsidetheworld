@@ -169,6 +169,39 @@
       gap: 10px;
     }
 
+    .feed-back-btn {
+      appearance: none;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-main);
+      min-height: 42px;
+      padding: 0 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: 0.22s var(--ease);
+      margin-left: auto;
+    }
+
+    .feed-back-btn:hover,
+    .feed-back-btn:focus-visible {
+      border-color: var(--brand-blue);
+      color: var(--brand-blue);
+      outline: none;
+    }
+
+    .feed-back-btn svg {
+      width: 15px;
+      height: 15px;
+      flex-shrink: 0;
+    }
+
     .menu-toggle {
       display: none;
       appearance: none;
@@ -732,9 +765,14 @@
         width: min(50vw, 198px);
       }
 
+      .feed-back-btn {
+        min-height: 40px;
+        padding: 0 14px;
+        font-size: 0.67rem;
+      }
+
       .menu-toggle {
         display: inline-flex;
-        margin-left: auto;
       }
 
       .masthead-actions {
@@ -858,9 +896,15 @@
     <header class="masthead">
       <div class="masthead-inner">
         <a class="brand" href="personal.html" aria-label="Return to OTW feed">
-          <img class="brand-mark" src="Images/OTW_Brandmark_Main.svg" alt="Outside The World" />
-          <img class="brand-wordmark" id="fragmentsLogo" src="Images/fragments.svg" alt="Fragments" />
+          <img class="brand-mark" src="Images/OTW_Brandmark_Main.svg?v=20260323b" alt="Outside The World" />
+          <img class="brand-wordmark" id="fragmentsLogo" src="Images/fragments.svg?v=20260323b" alt="Fragments" />
         </a>
+        <button class="feed-back-btn" id="feedBackBtn" type="button" aria-label="Go back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M15 18L9 12L15 6"></path>
+          </svg>
+          <span>Back</span>
+        </button>
         <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mastheadActions" aria-label="Open settings menu">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
             <path d="M4 7h16"></path>
@@ -1390,10 +1434,10 @@
         toggle.setAttribute('aria-pressed', String(nextTheme === 'light'));
       }
       if (logo) {
-        logo.src = nextTheme === 'light' ? 'Images/fragments_dark.svg' : 'Images/fragments.svg';
+        logo.src = nextTheme === 'light' ? 'Images/fragments_dark.svg?v=20260323b' : 'Images/fragments.svg?v=20260323b';
       }
       if (brandMark) {
-        brandMark.src = nextTheme === 'light' ? 'Images/OTW_Brandmark_dark.svg' : 'Images/OTW_Brandmark_Main.svg';
+        brandMark.src = nextTheme === 'light' ? 'Images/OTW_Brandmark_dark.svg?v=20260323b' : 'Images/OTW_Brandmark_Main.svg?v=20260323b';
       }
       if (themeMeta) {
         themeMeta.setAttribute('content', nextTheme === 'light' ? '#f4efe6' : '#0a0a0a');
@@ -1405,6 +1449,14 @@
       const saved = window.localStorage.getItem('otwFragmentsTheme');
       applyTheme(saved || 'dark');
     }
+
+    document.getElementById('feedBackBtn').addEventListener('click', () => {
+      if (window.history.length > 1) {
+        window.history.back();
+        return;
+      }
+      window.location.href = 'personal.html';
+    });
 
     function setMenuState(isOpen) {
       const menu = document.getElementById('mastheadActions');

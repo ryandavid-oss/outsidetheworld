@@ -1,5 +1,5 @@
 # A Map of the Sleeping Mind
-Date: 2026-03-23
+Date: March 23, 2026
 
 **Like most dreams, it just begins;** dropped into the frame like an afterthought. What I see is familiar: cracked asphalt laid down decades ago, its surface buckled by gnarled tree roots and years of forgotten traffic. Faded yellow traffic lines trace the ground, bearing no further responsibility for direction. The mall facade is a stained archetype under the artificial lights. Its walls, once a clean, creamy beauty of human imagination, have been damned by leaking pipes and exposed rebar into a rusty gradient of browns.
 

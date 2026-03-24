@@ -1507,7 +1507,7 @@
       const title = elTitle.value.trim() || 'Untitled draft';
       const chosenDate = elDate.value;
       const content = elContent.value.trim();
-      return `# ${title}\nDate: ${chosenDate}\n\n${content}`.trim();
+      return `# ${title}\nDate: ${formatDateLong(chosenDate)}\n\n${content}`.trim();
     }
 
     function buildFilename() {
@@ -1821,7 +1821,7 @@
           body: JSON.stringify({
             title: elTitle.value.trim(),
             body: elContent.value,
-            date: elDate.value || localISOTime
+            date: formatDateLong(elDate.value || localISOTime)
           })
         });
 
