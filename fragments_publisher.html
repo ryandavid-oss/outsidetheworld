@@ -38,6 +38,7 @@
       --amethyst: #9B59B6;
       --signal-green: #4BE36E;
       --signal-green-soft: rgba(75, 227, 110, 0.16);
+      --app-height: 100dvh;
       --radius-xl: 28px;
       --radius-lg: 22px;
       --radius-md: 16px;
@@ -100,13 +101,13 @@
     }
 
     body.is-standalone-app {
-      min-height: 100dvh;
-      height: 100dvh;
+      min-height: var(--app-height);
+      height: var(--app-height);
       overflow: hidden;
     }
 
     body.is-standalone-app .shell {
-      height: 100dvh;
+      height: var(--app-height);
       overflow-y: auto;
       overscroll-behavior-y: contain;
       -webkit-overflow-scrolling: touch;
@@ -3589,8 +3590,16 @@
       return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
     }
 
+    function updateAppHeightVariable() {
+      const nextHeight = getViewportHeight();
+      if (nextHeight) {
+        document.documentElement.style.setProperty('--app-height', `${Math.round(nextHeight)}px`);
+      }
+    }
+
     function applyAppEnvironment() {
       document.body.classList.toggle('is-standalone-app', isStandaloneApp());
+      updateAppHeightVariable();
     }
 
     function getScrollOffset() {
@@ -5904,6 +5913,12 @@
     }
     if (window.visualViewport) {
       window.visualViewport.addEventListener('resize', () => {
+        updateAppHeightVariable();
+        if (document.body.classList.contains('is-editing')) {
+          scheduleViewportStabilize();
+        }
+      });
+      window.visualViewport.addEventListener('scroll', () => {
         if (document.body.classList.contains('is-editing')) {
           scheduleViewportStabilize();
         }
