@@ -5613,8 +5613,24 @@
       active: false
     };
 
+    // When a physical keyboard (e.g. Magic Keyboard) is in use, iOS does not show
+    // the soft keyboard, so the viewport does not shrink. The soft-keyboard
+    // stabilization code below would incorrectly fight iOS's natural
+    // scroll-to-focused-input behavior and cause a visible jump. We track recent
+    // physical key presses and suspend the hacks while the hardware keyboard is active.
+    let physicalKeyboardActive = false;
+    let physicalKeyboardTimer = null;
+    document.addEventListener('keydown', (event) => {
+      if (event.isComposing || event.key === 'Process' || event.key === 'Unidentified') return;
+      physicalKeyboardActive = true;
+      if (physicalKeyboardTimer) window.clearTimeout(physicalKeyboardTimer);
+      physicalKeyboardTimer = window.setTimeout(() => {
+        physicalKeyboardActive = false;
+      }, 3000);
+    }, true);
+
     function rememberViewportBeforeFocus(target) {
-      if (!window.matchMedia('(pointer: coarse)').matches || !isEditableElement(target)) {
+      if (physicalKeyboardActive || !window.matchMedia('(pointer: coarse)').matches || !isEditableElement(target)) {
         return;
       }
 
@@ -5841,7 +5857,7 @@
       }
     });
     document.addEventListener('pointerdown', (event) => {
-      if (!window.matchMedia('(pointer: coarse)').matches || !isTextEntryElement(event.target)) {
+      if (physicalKeyboardActive || !window.matchMedia('(pointer: coarse)').matches || !isTextEntryElement(event.target)) {
         return;
       }
 
