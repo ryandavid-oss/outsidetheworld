@@ -1,5 +1,13 @@
 window.otw_fragments = [
   {
+    "timestamp": "2026-03-25T03:53:41.546Z",
+    "text": "So I was looking at pictures from this time last year and I was in a jacket! This year I’ll be hiding Easter eggs in the house because the freaking candy will melt outside…  SMH",
+    "tag": "CHECK_IN",
+    "author_id": "emily",
+    "author": "Emily",
+    "author_handle": "@word.person"
+  },
+  {
     "timestamp": "2026-03-24T23:01:51.628Z",
     "text": "OTW_Bot has detected elevated emotional weather in this sector. Recommend hydration and one less tab open.",
     "tag": "OTW_BOT",
