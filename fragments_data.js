@@ -1,5 +1,13 @@
 window.otw_fragments = [
   {
+    "timestamp": "2026-03-25T20:31:58.691Z",
+    "text": "How many Diet Coke’s can one have, before it’s considered an unhealthy addiction??? Asking for a friend….",
+    "tag": "FRAGMENT",
+    "author_id": "emily",
+    "author": "Emily",
+    "author_handle": "@word.person"
+  },
+  {
     "timestamp": "2026-03-25T03:53:41.546Z",
     "text": "So I was looking at pictures from this time last year and I was in a jacket! This year I’ll be hiding Easter eggs in the house because the freaking candy will melt outside…  SMH",
     "tag": "CHECK_IN",
