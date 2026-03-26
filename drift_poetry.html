@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-YKRKPFV2MB"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-YKRKPFV2MB');
+  </script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <title>The Drift | Outside The World</title>
+  <meta name="description" content="The Drift is the living poetry ledger from Outside The World: returned poems, current signals, and newer verse still moving through the dark." />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="canonical" href="https://outsidetheworld.com/drift_poetry.html" />
+  <meta name="theme-color" content="#050505" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta property="og:title" content="The Drift | Outside The World" />
+  <meta property="og:description" content="The living poetry ledger from Outside The World: current signal, returned signal, and the pieces still drifting toward their final form." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://outsidetheworld.com/drift_poetry.html" />
+  <meta property="og:image" content="https://outsidetheworld.com/Images/og/otw-feed-1200x630.jpg" />
+  <meta property="og:image:alt" content="The Drift poetry interface from Outside The World." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="The Drift | Outside The World" />
+  <meta name="twitter:description" content="A living book of newer and recovered poems from Outside The World." />
+  <meta name="twitter:image" content="https://outsidetheworld.com/Images/og/otw-feed-1200x630.jpg" />
+  <link rel="stylesheet" href="theme.css" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@300;400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Serif:wght@400;500;600&display=swap');
+
+    :root {
+      --page-bg: #06070a;
+      --page-bg-soft: #0d1116;
+      --ink: #f3eee6;
+      --soft-ink: rgba(243, 238, 230, 0.78);
+      --faint-ink: rgba(243, 238, 230, 0.54);
+      --line: rgba(255, 255, 255, 0.1);
+      --line-soft: rgba(255, 255, 255, 0.05);
+      --card: rgba(8, 10, 14, 0.72);
+      --card-strong: rgba(10, 12, 18, 0.9);
+      --blue: #6395EE;
+      --light-blue: #A0BEF5;
+      --teal: #91AFB3;
+      --lilac: #c7b6ef;
+      --rose: rgba(224, 191, 184, 0.8);
+      --safe-top: env(safe-area-inset-top);
+      --safe-bottom: env(safe-area-inset-bottom);
+      --drift-wash:
+        radial-gradient(720px 420px at 16% 12%, rgba(99, 149, 238, 0.12), transparent 62%),
+        radial-gradient(620px 380px at 84% 10%, rgba(155, 89, 182, 0.16), transparent 58%),
+        radial-gradient(780px 440px at 50% 100%, rgba(145, 175, 179, 0.12), transparent 64%);
+      --poem-glow: linear-gradient(135deg, #324868 0%, #1a2436 100%);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: 'IBM Plex Sans', system-ui, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.04), transparent 20%),
+        var(--drift-wash),
+        linear-gradient(180deg, #050505 0%, #07080b 100%);
+      overflow-x: hidden;
+      transition: background 0.7s ease;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+      background-size: 140px 140px;
+      opacity: 0.28;
+      pointer-events: none;
+      mask-image: radial-gradient(circle at center, black 50%, transparent 100%);
+    }
+
+    .drift-shell {
+      width: min(1380px, calc(100% - 24px));
+      margin: 0 auto;
+      padding: calc(var(--safe-top) + 18px) 0 calc(var(--safe-bottom) + 28px);
+      display: grid;
+      grid-template-columns: minmax(290px, 360px) minmax(0, 1fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .rail,
+    .stage {
+      border: 1px solid var(--line);
+      background:
+        radial-gradient(320px 120px at 70% 0%, rgba(155, 89, 182, 0.12), transparent 72%),
+        linear-gradient(180deg, rgba(10, 12, 18, 0.92), rgba(8, 10, 14, 0.82));
+      box-shadow: 0 28px 80px rgba(0, 0, 0, 0.42);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .rail {
+      position: sticky;
+      top: calc(var(--safe-top) + 18px);
+      border-radius: 30px;
+      overflow: hidden;
+    }
+
+    .rail-head {
+      padding: 28px 26px 22px;
+      border-bottom: 1px solid var(--line-soft);
+    }
+
+    .rail-back {
+      display: inline-flex;
+      align-items: center;
+      justify-content: flex-start;
+      margin-bottom: 18px;
+      text-decoration: none;
+    }
+
+    .rail-back:hover,
+    .rail-back:focus-visible {
+      outline: none;
+    }
+
+    .rail-back img {
+      width: min(250px, 100%);
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 0 18px rgba(99, 149, 238, 0.16));
+      transition: transform 0.22s ease, opacity 0.22s ease, filter 0.22s ease;
+    }
+
+    .rail-back:hover img,
+    .rail-back:focus-visible img {
+      transform: translateY(-1px) scale(1.015);
+      opacity: 0.95;
+      filter: drop-shadow(0 0 22px rgba(160, 190, 245, 0.22));
+    }
+
+    .drift-kicker {
+      margin: 0 0 10px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.66rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--teal);
+    }
+
+    .drift-title {
+      margin: 0;
+      font-family: 'Fraunces', 'IBM Plex Serif', serif;
+      font-size: clamp(2.4rem, 7vw, 4.4rem);
+      line-height: 0.96;
+      font-weight: 400;
+      letter-spacing: -0.05em;
+      color: #f6f0e6;
+    }
+
+    .drift-intro {
+      margin: 16px 0 0;
+      max-width: 27ch;
+      color: var(--soft-ink);
+      line-height: 1.75;
+      font-size: 0.96rem;
+    }
+
+    .filter-panel {
+      padding: 22px 26px 20px;
+      border-bottom: 1px solid var(--line-soft);
+    }
+
+    .filter-label {
+      display: block;
+      margin-bottom: 12px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--faint-ink);
+    }
+
+    .filter-wrap {
+      position: relative;
+    }
+
+    .filter-wrap::after {
+      content: "⌄";
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-54%);
+      color: rgba(160, 190, 245, 0.85);
+      pointer-events: none;
+      font-size: 1rem;
+    }
+
+    .era-filter {
+      width: 100%;
+      padding: 14px 40px 14px 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(160, 190, 245, 0.2);
+      background: rgba(6, 8, 12, 0.94);
+      color: #dce6f2;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      appearance: none;
+      outline: none;
+    }
+
+    .era-filter:hover,
+    .era-filter:focus {
+      border-color: rgba(160, 190, 245, 0.34);
+    }
+
+    .filter-copy {
+      margin: 12px 0 0;
+      color: var(--faint-ink);
+      line-height: 1.7;
+      font-size: 0.76rem;
+    }
+
+    .file-list {
+      max-height: calc(100vh - 310px);
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .file-item {
+      width: 100%;
+      padding: 18px 26px;
+      border: 0;
+      border-left: 3px solid transparent;
+      border-bottom: 1px solid var(--line-soft);
+      background: transparent;
+      color: inherit;
+      text-align: left;
+      cursor: pointer;
+      transition: background 0.22s ease, border-color 0.22s ease, transform 0.22s ease;
+    }
+
+    .file-item:hover,
+    .file-item:focus-visible {
+      background: rgba(255, 255, 255, 0.03);
+      border-left-color: rgba(199, 182, 239, 0.55);
+      outline: none;
+    }
+
+    .file-item.active {
+      background:
+        linear-gradient(90deg, rgba(199, 182, 239, 0.12), transparent 68%),
+        rgba(255, 255, 255, 0.03);
+      border-left-color: var(--lilac);
+    }
+
+    .file-item-title {
+      margin: 0 0 8px;
+      font-family: 'IBM Plex Serif', serif;
+      font-size: 1rem;
+      font-weight: 500;
+      color: #f5f0e9;
+    }
+
+    .file-item-meta {
+      display: block;
+      color: var(--faint-ink);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      line-height: 1.7;
+    }
+
+    .stage {
+      min-height: calc(100vh - 48px);
+      border-radius: 36px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .stage::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(720px 260px at 50% -4%, rgba(255,255,255,0.06), transparent 56%),
+        var(--poem-glow);
+      opacity: 0.55;
+      transition: opacity 0.6s ease, background 0.6s ease;
+      pointer-events: none;
+    }
+
+    .stage-inner {
+      position: relative;
+      z-index: 1;
+      min-height: calc(100vh - 48px);
+      padding: 34px;
+      display: grid;
+      align-content: start;
+    }
+
+    .stage-topline {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: center;
+      margin-bottom: 26px;
+      flex-wrap: wrap;
+    }
+
+    .stage-line {
+      color: rgba(160, 190, 245, 0.82);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.66rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .share-btn {
+      appearance: none;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 999px;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.02);
+      color: var(--soft-ink);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: 0.22s ease;
+    }
+
+    .share-btn:hover,
+    .share-btn:focus-visible {
+      color: var(--ink);
+      border-color: rgba(160, 190, 245, 0.32);
+      background: rgba(255,255,255,0.05);
+      outline: none;
+    }
+
+    .share-status {
+      color: var(--teal);
+    }
+
+    .poem-card {
+      max-width: 920px;
+      padding: clamp(28px, 5vw, 54px);
+      border-radius: 30px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background:
+        linear-gradient(180deg, rgba(10, 12, 18, 0.72), rgba(7, 8, 12, 0.82)),
+        rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: 0 36px 90px rgba(0, 0, 0, 0.38);
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.45s ease, transform 0.45s ease;
+    }
+
+    .poem-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .poem-kicker {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 22px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--teal);
+    }
+
+    .poem-pill {
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .poem-title {
+      margin: 0 0 10px;
+      font-family: 'Fraunces', 'IBM Plex Serif', serif;
+      font-size: clamp(2.2rem, 4.4vw, 4.7rem);
+      line-height: 0.98;
+      font-weight: 400;
+      letter-spacing: -0.05em;
+      color: #f7f0e6;
+      max-width: 12ch;
+    }
+
+    .poem-meta {
+      margin-bottom: 28px;
+      color: var(--rose);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .poem-body {
+      color: #e2ddd4;
+      font-family: 'IBM Plex Serif', serif;
+      font-size: clamp(1.02rem, 1.5vw, 1.16rem);
+      line-height: 2.06;
+      white-space: pre-line;
+      text-wrap: pretty;
+    }
+
+    .poem-note {
+      margin-top: 34px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      color: var(--faint-ink);
+      line-height: 1.8;
+      font-size: 0.84rem;
+      max-width: 58ch;
+    }
+
+    .empty-state {
+      padding: 42px 36px;
+      border-radius: 28px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.02);
+      color: var(--soft-ink);
+      max-width: 720px;
+    }
+
+    @media (max-width: 1040px) {
+      .drift-shell {
+        grid-template-columns: 1fr;
+      }
+
+      .rail {
+        position: relative;
+        top: 0;
+      }
+
+      .file-list {
+        max-height: 38vh;
+      }
+
+      .stage,
+      .stage-inner {
+        min-height: 0;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .drift-shell {
+        width: calc(100% - 12px);
+        gap: 12px;
+        padding-top: calc(var(--safe-top) + 12px);
+      }
+
+      .rail-head,
+      .filter-panel {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      .file-item {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      .stage {
+        border-radius: 28px;
+      }
+
+      .stage-inner {
+        padding: 18px;
+      }
+
+      .poem-card {
+        border-radius: 24px;
+      }
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.12);
+      border-radius: 999px;
+    }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "The Drift",
+    "description": "The living poetry ledger from Outside The World: returned poems, current signals, and the pieces still drifting toward their final form.",
+    "url": "https://outsidetheworld.com/drift_poetry.html"
+  }
+  </script>
+</head>
+<body>
+  <div class="drift-shell">
+    <aside class="rail">
+      <div class="rail-head">
+        <a class="rail-back" href="personal.html" aria-label="Back to personal feed">
+          <img src="Images/Equal.svg" alt="Outside The World" />
+        </a>
+        <p class="drift-kicker">Outside The World // Living Book</p>
+        <h1 class="drift-title">The Drift</h1>
+      </div>
+
+      <div class="filter-panel">
+        <label class="filter-label" for="era-select">Tune By Theme</label>
+        <div class="filter-wrap">
+          <select class="era-filter" id="era-select">
+            <option value="ALL">All Themes</option>
+          </select>
+        </div>
+        <p class="filter-copy">Let the book regroup itself by emotional weather, recurring image, and the subject humming loudest beneath the lines.</p>
+      </div>
+
+      <div class="file-list" id="file-list" aria-label="The Drift entries"></div>
+    </aside>
+
+    <main class="stage">
+      <div class="stage-inner">
+        <div class="stage-topline">
+          <div class="stage-line" id="stageLine">Poem selected // ready to drift</div>
+          <button class="share-btn" id="shareBtn" type="button">
+            <span>Copy / Share</span>
+            <span class="share-status" id="shareStatus">Ready</span>
+          </button>
+        </div>
+        <article class="poem-card" id="poemCard"></article>
+      </div>
+    </main>
+  </div>
+
+  <script src="new_poetry_data.js"></script>
+  <script>
+    const fileList = document.getElementById('file-list');
+    const eraSelect = document.getElementById('era-select');
+    const poemCard = document.getElementById('poemCard');
+    const shareBtn = document.getElementById('shareBtn');
+    const shareStatus = document.getElementById('shareStatus');
+    const stageLine = document.getElementById('stageLine');
+
+    let activePoemIndex = -1;
+
+    function inferDriftTheme(poem) {
+      const text = `${poem.title || ''} ${poem.body || ''}`.toLowerCase();
+      const themeRules = [
+        { theme: 'Longing', words: ['long', 'wish', 'promise', 'yearn', 'waiting', 'remember', 'memory'] },
+        { theme: 'Night', words: ['night', 'moon', 'stars', 'winter', 'dark', 'evening'] },
+        { theme: 'Nature', words: ['wind', 'mountain', 'desert', 'sky', 'rain', 'cloud', 'horizon'] },
+        { theme: 'Becoming', words: ['grow', 'become', 'change', 'path', 'begin', 'future'] },
+        { theme: 'Devotion', words: ['believe', 'faith', 'promise', 'grace', 'soul', 'heart'] },
+        { theme: 'Solitude', words: ['alone', 'solitary', 'quiet', 'silence', 'friend', 'invisible'] }
+      ];
+
+      let bestTheme = 'Drift';
+      let bestScore = 0;
+      themeRules.forEach(({ theme, words }) => {
+        const score = words.reduce((total, word) => total + (text.includes(word) ? 1 : 0), 0);
+        if (score > bestScore) {
+          bestTheme = theme;
+          bestScore = score;
+        }
+      });
+
+      return bestTheme;
+    }
+
+    function getPoemTheme(poem) {
+      if (!poem) return 'Drift';
+      if (!poem._driftTheme) {
+        poem._driftTheme = inferDriftTheme(poem);
+      }
+      return poem._driftTheme;
+    }
+
+    function populateThemeFilter() {
+      const themes = [...new Set(livingVerse.map((poem) => getPoemTheme(poem)))].sort();
+      themes.forEach((theme) => {
+        const option = document.createElement('option');
+        option.value = theme;
+        option.textContent = theme;
+        eraSelect.appendChild(option);
+      });
+    }
+
+    function escapeHtml(value) {
+      return String(value || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function renderList(filter) {
+      const activeId = activePoemIndex >= 0 ? livingVerse[activePoemIndex]?.id : null;
+      const filtered = livingVerse
+        .map((poem, index) => ({ poem, index }))
+        .filter(({ poem }) => filter === 'ALL' || getPoemTheme(poem) === filter);
+
+      fileList.innerHTML = filtered.map(({ poem, index }) => `
+        <button class="file-item${poem.id === activeId ? ' active' : ''}" data-index="${index}" type="button">
+          <div class="file-item-title">${escapeHtml(poem.title)}</div>
+          <span class="file-item-meta">${escapeHtml(getPoemTheme(poem))} // ${escapeHtml(poem.date)} // ${escapeHtml(poem.source)}</span>
+        </button>
+      `).join('');
+
+      Array.from(fileList.querySelectorAll('.file-item')).forEach((button) => {
+        button.addEventListener('click', () => {
+          const index = Number(button.dataset.index);
+          displayPoem(index);
+          if (window.innerWidth <= 1040) {
+            document.querySelector('.stage').scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+
+      if (filtered.length && !filtered.some(({ poem }) => poem.id === activeId)) {
+        displayPoem(filtered[0].index, { replaceUrl: true });
+      } else if (!filtered.length) {
+        activePoemIndex = -1;
+        poemCard.classList.remove('visible');
+        poemCard.innerHTML = '<div class="empty-state">No pieces match this signal family yet. Tune the water another way.</div>';
+        stageLine.textContent = 'No entries in this signal family';
+      }
+    }
+
+    function updateUrlForPoem(poem, replace = false) {
+      const url = new URL(window.location.href);
+      url.searchParams.set('poem', poem.id || '');
+      const next = `${url.pathname}${url.search}${url.hash}`;
+      const state = { poemId: poem.id || '' };
+      if (replace) {
+        history.replaceState(state, '', next);
+      } else {
+        history.pushState(state, '', next);
+      }
+    }
+
+    function findPoemIndexById(poemId) {
+      if (!poemId) return -1;
+      return livingVerse.findIndex((poem) => poem.id === poemId);
+    }
+
+    function buildShareUrl(poem) {
+      const url = new URL(window.location.href);
+      url.searchParams.set('poem', poem.id || '');
+      return url.toString();
+    }
+
+    async function copyToClipboard(text) {
+      try {
+        await navigator.clipboard.writeText(text);
+        return true;
+      } catch {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.left = '-9999px';
+        document.body.appendChild(ta);
+        ta.select();
+        const ok = document.execCommand('copy');
+        ta.remove();
+        return ok;
+      }
+    }
+
+    async function shareActivePoem() {
+      const poem = livingVerse[activePoemIndex];
+      if (!poem) return;
+
+      const shareUrl = buildShareUrl(poem);
+      try {
+        if (navigator.share) {
+          await navigator.share({
+            title: poem.title || 'The Drift',
+            text: `${poem.title} // The Drift`,
+            url: shareUrl
+          });
+          shareStatus.textContent = 'Shared';
+          return;
+        }
+
+        const ok = await copyToClipboard(shareUrl);
+        shareStatus.textContent = ok ? 'Copied' : 'Failed';
+      } catch {
+        shareStatus.textContent = 'Cancelled';
+      }
+    }
+
+    function displayPoem(index, options = {}) {
+      const poem = livingVerse[index];
+      if (!poem) return;
+
+      const { replaceUrl = false } = options;
+      activePoemIndex = index;
+
+      document.body.style.background = `
+        radial-gradient(circle at 50% 0%, rgba(255,255,255,0.04), transparent 18%),
+        ${poem.thumbprint},
+        var(--drift-wash),
+        linear-gradient(180deg, #050505 0%, #07080b 100%)
+      `;
+      stageLine.textContent = `${getPoemTheme(poem)} // ${poem.source}`;
+      shareStatus.textContent = 'Ready';
+
+      poemCard.classList.remove('visible');
+      window.setTimeout(() => {
+        poemCard.innerHTML = `
+          <div class="poem-kicker">
+            <span class="poem-pill">${escapeHtml(getPoemTheme(poem))}</span>
+            <span class="poem-pill">${escapeHtml(poem.source)}</span>
+          </div>
+          <h2 class="poem-title">${escapeHtml(poem.title)}</h2>
+          <div class="poem-meta">${escapeHtml(poem.date)}</div>
+          <div class="poem-body">${escapeHtml(poem.body)}</div>
+          <div class="poem-note">The Drift holds pieces that are still in motion: recovered poems, newer poems, and fragments of a future book not yet ready to become stone.</div>
+        `;
+        poemCard.classList.add('visible');
+      }, 120);
+
+      Array.from(fileList.querySelectorAll('.file-item')).forEach((item) => {
+        item.classList.toggle('active', Number(item.dataset.index) === index);
+      });
+
+      updateUrlForPoem(poem, replaceUrl);
+    }
+
+    function applyFilterForPoem(index) {
+      const poem = livingVerse[index];
+      if (!poem) return;
+      const theme = getPoemTheme(poem);
+      if (eraSelect.value !== theme) {
+        eraSelect.value = theme;
+      }
+      renderList(theme);
+    }
+
+    eraSelect.addEventListener('change', () => {
+      renderList(eraSelect.value);
+    });
+
+    shareBtn.addEventListener('click', shareActivePoem);
+
+    window.addEventListener('load', () => {
+      populateThemeFilter();
+      const requestedPoemId = new URLSearchParams(window.location.search).get('poem');
+      const requestedIndex = findPoemIndexById(requestedPoemId);
+
+      if (requestedIndex >= 0) {
+        applyFilterForPoem(requestedIndex);
+        displayPoem(requestedIndex, { replaceUrl: true });
+        return;
+      }
+
+      renderList('ALL');
+      if (livingVerse.length) {
+        displayPoem(0, { replaceUrl: true });
+      }
+    });
+
+    window.addEventListener('popstate', () => {
+      const requestedPoemId = new URLSearchParams(window.location.search).get('poem');
+      const requestedIndex = findPoemIndexById(requestedPoemId);
+      if (requestedIndex >= 0) {
+        applyFilterForPoem(requestedIndex);
+        displayPoem(requestedIndex, { replaceUrl: true });
+      }
+    });
+  </script>
+</body>
+</html>

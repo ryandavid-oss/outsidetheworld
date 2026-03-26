@@ -1393,7 +1393,7 @@
                         kind: 'Living verse',
                         title: poem.title || 'Untitled poem',
                         date: poem.date || '',
-                        url: `new_poetry.html?poem=${encodeURIComponent(poem.id || '')}`,
+                        url: `drift_poetry.html?poem=${encodeURIComponent(poem.id || '')}`,
                         snippet: buildExcerpt(body),
                         text: `${poem.title || ''} ${poem.date || ''} ${poem.era || ''} ${poem.source || ''} ${body}`.toLowerCase()
                     });

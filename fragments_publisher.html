@@ -1326,6 +1326,79 @@
         linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.028));
     }
 
+    .drift-preview-card {
+      padding: 22px 22px 20px;
+      border-radius: 24px;
+      border: 1px solid var(--border);
+      background:
+        radial-gradient(240px 120px at 50% 0%, rgba(145, 175, 179, 0.14), transparent 72%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.024));
+      display: grid;
+      gap: 14px;
+      min-height: 320px;
+    }
+
+    .drift-preview-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .drift-preview-pill,
+    .drift-preview-date {
+      width: fit-content;
+      padding: 7px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .drift-preview-pill {
+      color: var(--brand-light-blue);
+    }
+
+    .drift-preview-title {
+      margin: 0;
+      font-family: "IBM Plex Serif", serif;
+      font-size: clamp(1.45rem, 3vw, 2rem);
+      letter-spacing: -0.03em;
+      line-height: 1.08;
+    }
+
+    .drift-prose {
+      display: grid;
+      gap: 16px;
+      color: var(--text-main);
+      font-size: 1rem;
+      line-height: 1.82;
+    }
+
+    .drift-stanza {
+      margin: 0;
+      white-space: normal;
+    }
+
+    .drift-prose br {
+      content: "";
+    }
+
+    .drift-preview-note {
+      margin-top: auto;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      color: var(--text-faint);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
     .iotd-preview-card {
       display: grid;
       gap: 18px;
@@ -2883,6 +2956,14 @@
           <p class="app-tile-meta"></p>
         </button>
 
+        <button class="app-tile" id="openDriftApp" type="button">
+          <div class="app-icon" aria-hidden="true">
+            <img src="Images/assets/poetry.svg" alt="" />
+          </div>
+          <h2 class="app-tile-label">The Drift</h2>
+          <p class="app-tile-meta">Poetry Publisher</p>
+        </button>
+
         <button class="app-tile" id="openGhostFullApp" type="button">
           <div class="app-icon" aria-hidden="true">
             <img src="Images/ghost_writer_full_icon.svg" alt="" />
@@ -3206,6 +3287,89 @@
       </div>
     </section>
 
+    <section class="workspace" id="driftWorkspace">
+      <div class="layout">
+        <main class="panel composer">
+          <div class="status-line" id="driftStatusLine">A quiet lane for poems that are still moving. Drafts stay local until you send them into The Drift.</div>
+
+          <form class="form-grid" id="driftForm">
+            <div class="meta-row iotd-meta-row">
+              <div class="field">
+                <label for="driftDate">Date</label>
+                <div class="native-input-shell">
+                  <input id="driftDate" name="driftDate" type="date" />
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="driftTitle">Title</label>
+                <input id="driftTitle" name="driftTitle" type="text" placeholder="Leave untitled if the poem wants to tell us later." />
+              </div>
+            </div>
+
+            <div class="ghost-stats">
+              <div class="ghost-stat">
+                <span class="ghost-stat-label">Words</span>
+                <span class="ghost-stat-value" id="driftWordCount">0</span>
+              </div>
+              <div class="ghost-stat">
+                <span class="ghost-stat-label">Chars</span>
+                <span class="ghost-stat-value" id="driftCharCount">0</span>
+              </div>
+              <div class="ghost-stat">
+                <span class="ghost-stat-label">Read</span>
+                <span class="ghost-stat-value" id="driftReadTime">1 min</span>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="driftBody">Poem</label>
+              <textarea id="driftBody" name="driftBody" placeholder="Write the poem the way it wants to break. Theme and atmosphere will tune themselves from the words."></textarea>
+              <div class="helper">Line breaks are preserved here. The published Drift page will infer theme and carry the poem into its own atmosphere.</div>
+            </div>
+
+            <div class="action-row">
+              <button class="primary-btn" id="driftPublishBtn" type="button">Publish</button>
+              <button class="secondary-btn" id="driftDownloadBtn" type="button">Download Draft</button>
+              <button class="secondary-btn" id="driftClearBtn" type="button">Clear Draft</button>
+            </div>
+          </form>
+        </main>
+
+        <aside class="side-stack">
+          <section class="panel preview-panel">
+            <h2 class="section-title">Stage Preview</h2>
+            <article class="drift-preview-card" id="driftPreviewCard">
+              <div class="drift-preview-meta">
+                <span class="drift-preview-pill" id="driftPreviewTheme">DRIFT</span>
+                <span class="drift-preview-date" id="driftPreviewDate">TODAY</span>
+              </div>
+              <h3 class="drift-preview-title" id="driftPreviewTitle">Untitled drift</h3>
+              <div class="drift-prose" id="driftPreviewBody">
+                <p class="drift-stanza">The preview will breathe here as you write.</p>
+              </div>
+              <div class="drift-preview-note">The Drift // Theme and color tuned from the poem itself</div>
+            </article>
+          </section>
+
+          <section class="panel outbox-panel">
+            <h2 class="section-title">How It Moves</h2>
+            <div class="recent-list">
+              <article class="recent-item">
+                <p class="recent-empty">This lane writes directly into <code>new_poetry_data.js</code>, which now feeds <code>drift_poetry.html</code>.</p>
+              </article>
+              <article class="recent-item">
+                <p class="recent-empty">Leave the title blank if you want. The first true line can become the title automatically.</p>
+              </article>
+              <article class="recent-item">
+                <p class="recent-empty">The Drift page will infer theme from the poem and choose its atmosphere the same way every time.</p>
+              </article>
+            </div>
+          </section>
+        </aside>
+      </div>
+    </section>
+
     <section class="workspace" id="ghostFullWorkspace">
       <div class="full-ghost-shell">
         <div class="gfull-root" id="gfullRoot" data-writer-mode="dark">
@@ -3459,6 +3623,7 @@
     const CHANGELOG_OUTBOX_KEY = 'otwChangelogPublisherOutbox';
     const GHOST_DRAFT_KEY = 'otwGhostWriterLiteDraft';
     const IOTD_DRAFT_KEY = 'otwIotdPublisherDraft';
+    const DRIFT_DRAFT_KEY = 'otwDriftPublisherDraft';
     const THEME_KEY = 'otwFragmentsPublisherTheme';
     const PUBLISH_KEY_STORAGE = 'otwFragmentsPublishKey';
     const PUBLISH_QUEUE_KEY = 'otwPublisherPendingPublishes';
@@ -3467,6 +3632,7 @@
     const PUBLISH_CHANGELOG_ENDPOINT = 'https://otw-fragments-publish.ryandavid.workers.dev/publish-changelog-entry';
     const PUBLISH_GHOST_ENDPOINT = 'https://otw-fragments-publish.ryandavid.workers.dev/publish-ghost-draft';
     const PUBLISH_IOTD_ENDPOINT = 'https://otw-fragments-publish.ryandavid.workers.dev/publish-iotd-entry';
+    const PUBLISH_DRIFT_ENDPOINT = 'https://otw-fragments-publish.ryandavid.workers.dev/publish-drift-poem';
     const UPLOAD_GHOST_IMAGE_ENDPOINT = 'https://otw-fragments-publish.ryandavid.workers.dev/upload-ghost-image';
     const IOTD_PUBLIC_BASE_URL = 'https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev';
     const GHOST_FULL_DRAFT_KEY = 'otw_ghost_writer_draft_v4';
@@ -3496,12 +3662,14 @@
     const changelogWorkspace = document.getElementById('changelogWorkspace');
     const iotdWorkspace = document.getElementById('iotdWorkspace');
     const ghostWorkspace = document.getElementById('ghostWorkspace');
+    const driftWorkspace = document.getElementById('driftWorkspace');
     const ghostFullWorkspace = document.getElementById('ghostFullWorkspace');
     const botWorkspace = document.getElementById('botWorkspace');
     const openFragmentsApp = document.getElementById('openFragmentsApp');
     const openChangelogApp = document.getElementById('openChangelogApp');
     const openIotdApp = document.getElementById('openIotdApp');
     const openGhostApp = document.getElementById('openGhostApp');
+    const openDriftApp = document.getElementById('openDriftApp');
     const openGhostFullApp = document.getElementById('openGhostFullApp');
     const openBotApp = document.getElementById('openBotApp');
     const openSiteApp = document.getElementById('openSiteApp');
@@ -3555,6 +3723,19 @@
     const ghostPreviewTitle = document.getElementById('ghostPreviewTitle');
     const ghostPreviewBody = document.getElementById('ghostPreviewBody');
     const ghostPublishBtn = document.getElementById('ghostPublishBtn');
+    const driftDateInput = document.getElementById('driftDate');
+    const driftTitleInput = document.getElementById('driftTitle');
+    const driftBodyInput = document.getElementById('driftBody');
+    const driftStatusLine = document.getElementById('driftStatusLine');
+    const driftWordCount = document.getElementById('driftWordCount');
+    const driftCharCount = document.getElementById('driftCharCount');
+    const driftReadTime = document.getElementById('driftReadTime');
+    const driftPreviewCard = document.getElementById('driftPreviewCard');
+    const driftPreviewTheme = document.getElementById('driftPreviewTheme');
+    const driftPreviewDate = document.getElementById('driftPreviewDate');
+    const driftPreviewTitle = document.getElementById('driftPreviewTitle');
+    const driftPreviewBody = document.getElementById('driftPreviewBody');
+    const driftPublishBtn = document.getElementById('driftPublishBtn');
     const gfullRoot = document.getElementById('gfullRoot');
     const gfullSaveChip = document.getElementById('gfullSaveChip');
     const gfullSettingsBtn = document.getElementById('gfullSettingsBtn');
@@ -3782,6 +3963,19 @@
       window.localStorage.removeItem(IOTD_DRAFT_KEY);
     }
 
+    function writeDriftDraft() {
+      const draft = {
+        date: driftDateInput.value,
+        title: driftTitleInput.value,
+        body: driftBodyInput.value
+      };
+      window.localStorage.setItem(DRIFT_DRAFT_KEY, JSON.stringify(draft));
+    }
+
+    function clearDriftDraftStorage() {
+      window.localStorage.removeItem(DRIFT_DRAFT_KEY);
+    }
+
     function getPublishKey() {
       return window.localStorage.getItem(PUBLISH_KEY_STORAGE)
         || window.localStorage.getItem(GHOST_FULL_PUBLISH_KEY_STORAGE)
@@ -3931,6 +4125,7 @@
       const hasPublishKey = Boolean(getPublishKey() || publishKeyInput.value.trim());
       const fragmentsDraft = textInput.value.trim();
       const changelogDraft = changelogTextInput.value.trim();
+      const driftDraft = driftBodyInput.value.trim();
       const changelogOutboxCount = readChangelogOutbox().length;
       const queuedPublishCount = readPublishQueue().length;
       let state = 'GO';
@@ -3951,7 +4146,7 @@
         state = 'CAUTION';
         dotClass = 'status-dot is-caution';
         detail = `${queuedPublishCount} queued publish${queuedPublishCount === 1 ? ' is' : 'es are'} waiting to sync from this device.`;
-      } else if (changelogOutboxCount > 0 || fragmentsDraft || changelogDraft || !loadedChangelog.length) {
+      } else if (changelogOutboxCount > 0 || fragmentsDraft || changelogDraft || driftDraft || !loadedChangelog.length) {
         state = 'CAUTION';
         dotClass = 'status-dot is-caution';
         detail = changelogOutboxCount > 0
@@ -4176,6 +4371,115 @@
         .replace(/`(.+?)`/g, '<code>$1</code>');
     }
 
+    function inferDriftTheme(poem) {
+      const text = `${poem?.title || ''} ${poem?.body || ''}`.toLowerCase();
+      const themeRules = [
+        { theme: 'Longing', words: ['long', 'wish', 'promise', 'yearn', 'waiting', 'remember', 'memory'] },
+        { theme: 'Night', words: ['night', 'moon', 'stars', 'winter', 'dark', 'evening'] },
+        { theme: 'Nature', words: ['wind', 'mountain', 'desert', 'sky', 'rain', 'cloud', 'horizon'] },
+        { theme: 'Becoming', words: ['grow', 'become', 'change', 'path', 'begin', 'future'] },
+        { theme: 'Devotion', words: ['believe', 'faith', 'promise', 'grace', 'soul', 'heart'] },
+        { theme: 'Solitude', words: ['alone', 'solitary', 'quiet', 'silence', 'friend', 'invisible'] }
+      ];
+
+      let bestTheme = 'Drift';
+      let bestScore = 0;
+      themeRules.forEach(({ theme, words }) => {
+        const score = words.reduce((total, word) => total + (text.includes(word) ? 1 : 0), 0);
+        if (score > bestScore) {
+          bestTheme = theme;
+          bestScore = score;
+        }
+      });
+
+      return bestTheme;
+    }
+
+    function hashDriftText(value) {
+      let hash = 0;
+      for (const char of String(value || '')) {
+        hash = ((hash << 5) - hash) + char.charCodeAt(0);
+        hash |= 0;
+      }
+      return Math.abs(hash);
+    }
+
+    function buildDriftThumbprint(poem) {
+      const theme = inferDriftTheme(poem);
+      const palettes = {
+        Drift: [
+          'linear-gradient(135deg, #1f3558 0%, #0f1728 46%, #47285f 100%)',
+          'linear-gradient(135deg, #192c4b 0%, #1b2438 48%, #39506f 100%)'
+        ],
+        Longing: [
+          'linear-gradient(135deg, #5c3659 0%, #182848 52%, #c06c84 100%)',
+          'linear-gradient(135deg, #4a2947 0%, #1f3558 54%, #b4769f 100%)'
+        ],
+        Night: [
+          'linear-gradient(135deg, #0f2027 0%, #203a43 48%, #2c5364 100%)',
+          'linear-gradient(135deg, #182848 0%, #1f3558 45%, #4b6cb7 100%)'
+        ],
+        Nature: [
+          'linear-gradient(135deg, #1f4037 0%, #213b3a 46%, #6ca485 100%)',
+          'linear-gradient(135deg, #29443a 0%, #355c7d 50%, #6c8b6f 100%)'
+        ],
+        Becoming: [
+          'linear-gradient(135deg, #355c7d 0%, #6c5b7b 52%, #8aa7d9 100%)',
+          'linear-gradient(135deg, #2d4a69 0%, #5f4f86 52%, #88a4db 100%)'
+        ],
+        Devotion: [
+          'linear-gradient(135deg, #3d2a55 0%, #5e3f76 52%, #d9c08c 100%)',
+          'linear-gradient(135deg, #4f2853 0%, #5a4580 56%, #c9a86a 100%)'
+        ],
+        Solitude: [
+          'linear-gradient(135deg, #22313f 0%, #3a4c63 52%, #7f8fa6 100%)',
+          'linear-gradient(135deg, #233142 0%, #37445c 50%, #6f82a1 100%)'
+        ]
+      };
+
+      const palette = palettes[theme] || palettes.Drift;
+      const index = hashDriftText(`${poem?.title || ''} ${poem?.body || ''}`) % palette.length;
+      return palette[index];
+    }
+
+    function deriveDriftTitle(body) {
+      const firstLine = normalizeFragmentText(body || '')
+        .split(/\r?\n/)
+        .map((line) => line.replace(/[*`#>-]/g, ' ').trim())
+        .find(Boolean);
+
+      if (!firstLine) return 'Untitled drift';
+      return firstLine.length > 72 ? `${firstLine.slice(0, 69).trimEnd()}...` : firstLine;
+    }
+
+    function renderDriftMarkup(source) {
+      const normalized = normalizeFragmentText(source || '').trim();
+      if (!normalized) {
+        return '<p class="drift-stanza">The preview will breathe here as you write.</p>';
+      }
+
+      return normalized
+        .split(/\n\s*\n/)
+        .map((stanza) => stanza
+          .split(/\r?\n/)
+          .map((line) => formatGhostInline(line.trim() || ' '))
+          .join('<br>'))
+        .map((html) => `<p class="drift-stanza">${html}</p>`)
+        .join('');
+    }
+
+    function buildDriftEntry() {
+      const date = driftDateInput.value || new Date().toISOString().slice(0, 10);
+      const body = normalizeFragmentText(driftBodyInput.value).trim();
+      const title = driftTitleInput.value.trim() || deriveDriftTitle(body);
+
+      if (!body) {
+        throw new Error('Write the poem first. Even one stanza is enough to begin.');
+      }
+
+      return { date, title, body };
+    }
+
     function updateGhostPreview() {
       const title = ghostTitleInput.value.trim();
       const body = ghostBodyInput.value;
@@ -4193,6 +4497,33 @@
       ghostWordCount.textContent = String(wordCount);
       ghostCharCount.textContent = String(charCountValue);
       ghostReadTime.textContent = `${readMins} min`;
+    }
+
+    function updateDriftPreview() {
+      const title = driftTitleInput.value.trim() || deriveDriftTitle(driftBodyInput.value);
+      const body = driftBodyInput.value;
+      const date = driftDateInput.value || new Date().toISOString().slice(0, 10);
+      const plainText = normalizeFragmentText(body)
+        .replace(/\s+/g, ' ')
+        .trim();
+      const wordCount = plainText ? plainText.split(/\s+/).filter(Boolean).length : 0;
+      const charCountValue = body.length;
+      const readMins = Math.max(1, Math.ceil(wordCount / 180));
+      const theme = inferDriftTheme({ title, body });
+      const thumbprint = buildDriftThumbprint({ title, body });
+
+      driftPreviewTheme.textContent = theme.toUpperCase();
+      driftPreviewDate.textContent = formatLongDate(date).toUpperCase() || 'TODAY';
+      driftPreviewTitle.textContent = title || 'Untitled drift';
+      driftPreviewBody.innerHTML = renderDriftMarkup(body);
+      driftWordCount.textContent = String(wordCount);
+      driftCharCount.textContent = String(charCountValue);
+      driftReadTime.textContent = `${readMins} min`;
+      driftPreviewCard.style.background = `
+        radial-gradient(240px 120px at 50% 0%, rgba(145, 175, 179, 0.14), transparent 72%),
+        ${thumbprint},
+        linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.024))
+      `;
     }
 
     function updateIotdPreview() {
@@ -4744,6 +5075,137 @@
       link.click();
       URL.revokeObjectURL(url);
       ghostStatusLine.textContent = 'Draft downloaded as markdown.';
+    }
+
+    async function publishDriftEntry() {
+      let entry;
+      try {
+        entry = buildDriftEntry();
+      } catch (error) {
+        driftStatusLine.textContent = error.message || 'Could not publish the poem.';
+        return;
+      }
+
+      const publishKey = publishKeyInput.value.trim() || getPublishKey();
+      if (!publishKey) {
+        driftStatusLine.textContent = 'Add your publish key first so this device can post into The Drift securely.';
+        return;
+      }
+
+      if (!window.navigator.onLine) {
+        enqueuePublishJob({
+          kind: 'drift-poem',
+          endpoint: PUBLISH_DRIFT_ENDPOINT,
+          payload: entry
+        });
+        clearDriftDraftStorage();
+        driftTitleInput.value = '';
+        driftBodyInput.value = '';
+        driftDateInput.value = new Date().toISOString().slice(0, 10);
+        updateDriftPreview();
+        driftStatusLine.textContent = 'Offline. The poem was queued on this device and will publish when the connection returns.';
+        showPublishToast(
+          'Drift poem queued.',
+          'The poem is safe in the local queue and will move into The Drift automatically once the network comes back.'
+        );
+        refreshSystemStatus();
+        return;
+      }
+
+      driftStatusLine.textContent = 'Publishing poem to The Drift...';
+
+      try {
+        const response = await fetch(PUBLISH_DRIFT_ENDPOINT, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-publish-key': publishKey
+          },
+          body: JSON.stringify(entry)
+        });
+
+        const payload = await response.json().catch(() => ({}));
+        if (!response.ok || !payload.ok) {
+          throw new Error(payload.error || `Publish failed with status ${response.status}`);
+        }
+
+        if (publishKeyInput.value.trim()) {
+          window.localStorage.setItem(PUBLISH_KEY_STORAGE, publishKeyInput.value.trim());
+          updatePublishKeyStatus();
+        }
+
+        clearDriftDraftStorage();
+        driftTitleInput.value = '';
+        driftBodyInput.value = '';
+        driftDateInput.value = new Date().toISOString().slice(0, 10);
+        updateDriftPreview();
+        driftStatusLine.textContent = 'The poem entered The Drift successfully. The page should pick it up shortly.';
+        driftPublishBtn.classList.add('is-success');
+        driftPublishBtn.textContent = 'Published';
+        window.setTimeout(() => {
+          driftPublishBtn.classList.remove('is-success');
+          driftPublishBtn.textContent = 'Publish';
+        }, 1400);
+        showPublishToast(
+          'Drift poem published.',
+          'A new poem just moved into The Drift and should be visible on the live page shortly.'
+        );
+        refreshSystemStatus();
+      } catch (error) {
+        if (isLikelyNetworkFailure(error)) {
+          enqueuePublishJob({
+            kind: 'drift-poem',
+            endpoint: PUBLISH_DRIFT_ENDPOINT,
+            payload: entry
+          });
+          clearDriftDraftStorage();
+          driftTitleInput.value = '';
+          driftBodyInput.value = '';
+          driftDateInput.value = new Date().toISOString().slice(0, 10);
+          updateDriftPreview();
+          driftStatusLine.textContent = 'Connection failed. The poem was queued on this device and will retry automatically.';
+          showPublishToast(
+            'Drift poem queued.',
+            'The connection dropped, so the poem was moved into the local queue instead of being lost.'
+          );
+          refreshSystemStatus();
+          return;
+        }
+        driftStatusLine.textContent = error.message || 'Publish failed.';
+      }
+    }
+
+    function downloadDriftDraft() {
+      const entry = {
+        title: driftTitleInput.value.trim() || deriveDriftTitle(driftBodyInput.value),
+        date: driftDateInput.value || new Date().toISOString().slice(0, 10),
+        body: driftBodyInput.value.trim()
+      };
+
+      if (!entry.body) {
+        driftStatusLine.textContent = 'There is nothing to download yet. Write the poem first.';
+        return;
+      }
+
+      const markdown = `# ${entry.title}\nDate: ${formatLongDate(entry.date)}\n\n${entry.body}`.trim();
+      const blob = new Blob([markdown], { type: 'text/markdown;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `${slugifyGhostTitle(entry.title)}.md`;
+      link.click();
+      URL.revokeObjectURL(url);
+      driftStatusLine.textContent = 'Poem draft downloaded as markdown.';
+    }
+
+    function clearDriftDraft() {
+      driftTitleInput.value = '';
+      driftBodyInput.value = '';
+      driftDateInput.value = new Date().toISOString().slice(0, 10);
+      clearDriftDraftStorage();
+      updateDriftPreview();
+      driftStatusLine.textContent = 'The local Drift draft was cleared on this device.';
+      refreshSystemStatus();
     }
 
     async function publishIotdEntry() {
@@ -5508,6 +5970,23 @@
       }
     }
 
+    function hydrateDriftDraft() {
+      try {
+        const draft = JSON.parse(window.localStorage.getItem(DRIFT_DRAFT_KEY) || 'null');
+        if (draft) {
+          driftDateInput.value = draft.date || new Date().toISOString().slice(0, 10);
+          driftTitleInput.value = draft.title || '';
+          driftBodyInput.value = draft.body || '';
+          driftStatusLine.textContent = 'Recovered the last Drift draft from this device.';
+          return;
+        }
+      } catch {
+        // Ignore malformed local draft state.
+      }
+
+      driftDateInput.value = new Date().toISOString().slice(0, 10);
+    }
+
     function hydrateIotdDraft() {
       try {
         const draft = JSON.parse(window.localStorage.getItem(IOTD_DRAFT_KEY) || 'null');
@@ -5688,17 +6167,18 @@
 
     function getWorkspaceFromHash() {
       const raw = window.location.hash.replace(/^#/, '').trim().toLowerCase();
-      return ['home', 'fragments', 'changelog', 'iotd', 'ghost', 'ghost-full', 'bot'].includes(raw) ? raw : 'home';
+      return ['home', 'fragments', 'changelog', 'iotd', 'ghost', 'drift', 'ghost-full', 'bot'].includes(raw) ? raw : 'home';
     }
 
     function setWorkspace(view) {
-      const nextView = ['home', 'fragments', 'changelog', 'iotd', 'ghost', 'ghost-full', 'bot'].includes(view) ? view : 'home';
+      const nextView = ['home', 'fragments', 'changelog', 'iotd', 'ghost', 'drift', 'ghost-full', 'bot'].includes(view) ? view : 'home';
 
       homeWorkspace.classList.toggle('is-active', nextView === 'home');
       fragmentsWorkspace.classList.toggle('is-active', nextView === 'fragments');
       changelogWorkspace.classList.toggle('is-active', nextView === 'changelog');
       iotdWorkspace.classList.toggle('is-active', nextView === 'iotd');
       ghostWorkspace.classList.toggle('is-active', nextView === 'ghost');
+      driftWorkspace.classList.toggle('is-active', nextView === 'drift');
       ghostFullWorkspace.classList.toggle('is-active', nextView === 'ghost-full');
       botWorkspace.classList.toggle('is-active', nextView === 'bot');
       headerBackBtn.classList.toggle('is-visible', nextView !== 'home');
@@ -5710,6 +6190,11 @@
       if (nextView === 'ghost-full' && shouldAutoFocusWorkspaceFields()) {
         window.setTimeout(() => {
           gfullContent.focus();
+        }, 120);
+      }
+      if (nextView === 'drift' && shouldAutoFocusWorkspaceFields()) {
+        window.setTimeout(() => {
+          driftBodyInput.focus();
         }, 120);
       }
 
@@ -5790,6 +6275,14 @@
       if (shouldAutoFocusWorkspaceFields()) {
         window.setTimeout(() => {
           ghostBodyInput.focus();
+        }, 120);
+      }
+    });
+    openDriftApp.addEventListener('click', () => {
+      setWorkspace('drift');
+      if (shouldAutoFocusWorkspaceFields()) {
+        window.setTimeout(() => {
+          driftBodyInput.focus();
         }, 120);
       }
     });
@@ -5992,6 +6485,23 @@
       });
     });
 
+    [driftDateInput, driftTitleInput, driftBodyInput].forEach((element) => {
+      element.addEventListener('input', () => {
+        writeDriftDraft();
+        updateDriftPreview();
+        refreshSystemStatus();
+      });
+      element.addEventListener('change', () => {
+        writeDriftDraft();
+        updateDriftPreview();
+        refreshSystemStatus();
+      });
+    });
+
+    driftPublishBtn.addEventListener('click', publishDriftEntry);
+    document.getElementById('driftDownloadBtn').addEventListener('click', downloadDriftDraft);
+    document.getElementById('driftClearBtn').addEventListener('click', clearDriftDraft);
+
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('fragments_publisher_sw.js', { updateViaCache: 'none' }).then((registration) => {
@@ -6012,11 +6522,13 @@
     hydrateChangelogDraft();
     hydrateIotdDraft();
     hydrateGhostDraft();
+    hydrateDriftDraft();
     initGfullEditor();
     updatePreview();
     updateChangelogPreview();
     updateIotdPreview();
     updateGhostPreview();
+    updateDriftPreview();
     renderChangelogOutbox();
     loadRecentChangelog();
     setWorkspace(getWorkspaceFromHash());

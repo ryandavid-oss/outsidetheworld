@@ -3,8 +3,10 @@ const FRAGMENTS_USER_REGISTRY_PATH = "fragments_users.json";
 const CHANGELOG_PATH = "changelog.json";
 const IMAGE_MANIFEST_PATH = "image_manifest.json";
 const WORDPERSON_MANIFEST_PATH = "wordperson_manifest.json";
+const DRIFT_POETRY_PATH = "new_poetry_data.js";
 const CURRENT_NARRATIVE_DIR = "current_narrative";
 const FRAGMENTS_PATTERN = /window\.otw_fragments\s*=\s*(\[[\s\S]*?\])\s*;/m;
+const DRIFT_POETRY_PATTERN = /const livingVerse\s*=\s*(\[[\s\S]*?\])\s*;/m;
 
 const BOT_POOL = [
   "OTW_Bot has detected elevated emotional weather in this sector. Recommend hydration and one less tab open.",
@@ -270,6 +272,140 @@ function normalizeNarrativeEntry(entry) {
   }
 
   return { title, date, body };
+}
+
+function normalizeDriftDate(raw) {
+  const date = String(raw || "").trim();
+  if (date.length !== 10 || date[4] !== "-" || date[7] !== "-") {
+    throw new Error("Drift date must be in YYYY-MM-DD format");
+  }
+  return date;
+}
+
+function formatDriftDate(raw) {
+  const date = normalizeDriftDate(raw);
+  const value = new Date(`${date}T12:00:00`);
+  if (Number.isNaN(value.getTime())) {
+    throw new Error("Drift date could not be formatted");
+  }
+  return new Intl.DateTimeFormat("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric"
+  }).format(value);
+}
+
+function deriveDriftTitle(body) {
+  const firstLine = String(body || "")
+    .split(/\r?\n/)
+    .map((line) => stripMarkdownForTitle(line))
+    .find(Boolean);
+
+  if (!firstLine) {
+    return "Untitled drift";
+  }
+
+  return firstLine.length > 72
+    ? `${firstLine.slice(0, 69).trimEnd()}...`
+    : firstLine;
+}
+
+function inferDriftTheme(entry) {
+  const text = `${entry?.title || ""} ${entry?.body || ""}`.toLowerCase();
+  const themeRules = [
+    { theme: "Longing", words: ["long", "wish", "promise", "yearn", "waiting", "remember", "memory"] },
+    { theme: "Night", words: ["night", "moon", "stars", "winter", "dark", "evening"] },
+    { theme: "Nature", words: ["wind", "mountain", "desert", "sky", "rain", "cloud", "horizon"] },
+    { theme: "Becoming", words: ["grow", "become", "change", "path", "begin", "future"] },
+    { theme: "Devotion", words: ["believe", "faith", "promise", "grace", "soul", "heart"] },
+    { theme: "Solitude", words: ["alone", "solitary", "quiet", "silence", "friend", "invisible"] }
+  ];
+
+  let bestTheme = "Drift";
+  let bestScore = 0;
+
+  themeRules.forEach(({ theme, words }) => {
+    const score = words.reduce((total, word) => total + (text.includes(word) ? 1 : 0), 0);
+    if (score > bestScore) {
+      bestTheme = theme;
+      bestScore = score;
+    }
+  });
+
+  return bestTheme;
+}
+
+function hashString(value) {
+  let hash = 0;
+  for (const char of String(value || "")) {
+    hash = ((hash << 5) - hash) + char.charCodeAt(0);
+    hash |= 0;
+  }
+  return Math.abs(hash);
+}
+
+function buildDriftThumbprint(entry) {
+  const theme = inferDriftTheme(entry);
+  const palettes = {
+    Drift: [
+      "linear-gradient(135deg, #1f3558 0%, #0f1728 46%, #47285f 100%)",
+      "linear-gradient(135deg, #192c4b 0%, #1b2438 48%, #39506f 100%)"
+    ],
+    Longing: [
+      "linear-gradient(135deg, #5c3659 0%, #182848 52%, #c06c84 100%)",
+      "linear-gradient(135deg, #4a2947 0%, #1f3558 54%, #b4769f 100%)"
+    ],
+    Night: [
+      "linear-gradient(135deg, #0f2027 0%, #203a43 48%, #2c5364 100%)",
+      "linear-gradient(135deg, #182848 0%, #1f3558 45%, #4b6cb7 100%)"
+    ],
+    Nature: [
+      "linear-gradient(135deg, #1f4037 0%, #213b3a 46%, #6ca485 100%)",
+      "linear-gradient(135deg, #29443a 0%, #355c7d 50%, #6c8b6f 100%)"
+    ],
+    Becoming: [
+      "linear-gradient(135deg, #355c7d 0%, #6c5b7b 52%, #8aa7d9 100%)",
+      "linear-gradient(135deg, #2d4a69 0%, #5f4f86 52%, #88a4db 100%)"
+    ],
+    Devotion: [
+      "linear-gradient(135deg, #3d2a55 0%, #5e3f76 52%, #d9c08c 100%)",
+      "linear-gradient(135deg, #4f2853 0%, #5a4580 56%, #c9a86a 100%)"
+    ],
+    Solitude: [
+      "linear-gradient(135deg, #22313f 0%, #3a4c63 52%, #7f8fa6 100%)",
+      "linear-gradient(135deg, #233142 0%, #37445c 50%, #6f82a1 100%)"
+    ]
+  };
+
+  const palette = palettes[theme] || palettes.Drift;
+  const index = hashString(`${entry.title} ${entry.body}`) % palette.length;
+  return palette[index];
+}
+
+function normalizeDriftPoemEntry(entry) {
+  if (!entry || typeof entry !== "object") {
+    throw new Error("Drift payload must be an object");
+  }
+
+  const body = String(entry.body || "").trim();
+  if (!body) {
+    throw new Error("Drift body is required");
+  }
+
+  const date = normalizeDriftDate(entry.date);
+  const title = String(entry.title || "").trim() || deriveDriftTitle(body);
+  const source = String(entry.source || "drift_publisher").trim() || "drift_publisher";
+  const era = String(entry.era || "CURRENT_SIGNAL").trim().toUpperCase() || "CURRENT_SIGNAL";
+  const thumbprint = String(entry.thumbprint || "").trim() || buildDriftThumbprint({ title, body });
+
+  return {
+    title,
+    date: formatDriftDate(date),
+    era,
+    source,
+    thumbprint,
+    body
+  };
 }
 
 function normalizeIotdDate(raw) {
@@ -733,6 +869,27 @@ async function loadWordpersonManifestFile(env) {
   return { ...file, entries };
 }
 
+async function loadDriftPoetryFile(env) {
+  const file = await loadRepoFile(env, DRIFT_POETRY_PATH);
+  const match = file.raw.match(DRIFT_POETRY_PATTERN);
+  if (!match) {
+    throw new Error("Could not locate livingVerse in new_poetry_data.js");
+  }
+
+  let entries;
+  try {
+    entries = JSON.parse(match[1]);
+  } catch (error) {
+    throw new Error(`Could not parse livingVerse array: ${error.message}`);
+  }
+
+  if (!Array.isArray(entries)) {
+    throw new Error("livingVerse is not an array");
+  }
+
+  return { ...file, entries };
+}
+
 function sortFragments(entries) {
   return entries.slice().sort((a, b) => String(b.timestamp || "").localeCompare(String(a.timestamp || "")));
 }
@@ -747,6 +904,51 @@ function sortIotd(entries) {
 
 function sortWordperson(entries) {
   return entries.slice().sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")));
+}
+
+function sortDriftPoetry(entries) {
+  return entries.slice().sort((a, b) => {
+    const aTime = new Date(String(a.date || "")).getTime() || 0;
+    const bTime = new Date(String(b.date || "")).getTime() || 0;
+    if (bTime !== aTime) {
+      return bTime - aTime;
+    }
+    return String(a.title || "").localeCompare(String(b.title || ""));
+  });
+}
+
+function buildUniqueDriftId(existingEntries, date, title) {
+  const titleSlug = slugify(title);
+  for (let attempt = 0; attempt < 50; attempt += 1) {
+    const suffix = attempt === 0 ? "" : `-${attempt + 1}`;
+    const id = titleSlug
+      ? `living-poem-${date}-${titleSlug}${suffix}`
+      : `living-poem-${date}${suffix}`;
+    if (!existingEntries.some((entry) => String(entry.id || "") === id)) {
+      return id;
+    }
+  }
+
+  throw new Error("Could not find an available Drift poem id");
+}
+
+function dedupeDriftPoetry(entries) {
+  const seen = new Set();
+  const out = [];
+
+  for (const entry of entries) {
+    const id = String(entry?.id || "").trim();
+    if (!id || seen.has(id)) continue;
+    seen.add(id);
+    out.push(entry);
+  }
+
+  return out;
+}
+
+function replaceDriftPoetryArray(raw, entries) {
+  const replacement = `const livingVerse = ${JSON.stringify(entries, null, 4)};`;
+  return raw.replace(DRIFT_POETRY_PATTERN, replacement);
 }
 
 function buildUniqueWordpersonIdentity(existingEntries, date, title, extension) {
@@ -815,7 +1017,8 @@ export default {
           publish_ghost_draft: "POST /publish-ghost-draft",
           upload_ghost_image: "POST /upload-ghost-image",
           publish_iotd_entry: "POST /publish-iotd-entry",
-          publish_wordperson_entry: "POST /publish-wordperson-entry"
+          publish_wordperson_entry: "POST /publish-wordperson-entry",
+          publish_drift_poem: "POST /publish-drift-poem"
         }
       });
     }
@@ -1105,6 +1308,33 @@ export default {
         });
       } catch (error) {
         return jsonResponse({ ok: false, error: error.message || "Unknown word.person publish error" }, 400);
+      }
+    }
+
+    if (request.method === "POST" && url.pathname === "/publish-drift-poem") {
+      if (!isAuthorized(request, env)) {
+        return jsonResponse({ ok: false, error: "Unauthorized" }, 401);
+      }
+
+      try {
+        const body = await request.json();
+        const normalized = normalizeDriftPoemEntry(body);
+        const file = await loadDriftPoetryFile(env);
+        const entry = {
+          id: buildUniqueDriftId(file.entries, normalizeDriftDate(body.date), normalized.title),
+          ...normalized
+        };
+        const merged = sortDriftPoetry(dedupeDriftPoetry([entry, ...file.entries]));
+        const updatedRaw = replaceDriftPoetryArray(file.raw, merged);
+        const result = await saveRepoFile(env, DRIFT_POETRY_PATH, updatedRaw, file.sha, "Publish Drift poem");
+
+        return jsonResponse({
+          ok: true,
+          published: entry,
+          commit: result.commit?.sha || null
+        });
+      } catch (error) {
+        return jsonResponse({ ok: false, error: error.message || "Unknown Drift publish error" }, 400);
       }
     }
 
