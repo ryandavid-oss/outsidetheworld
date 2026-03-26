@@ -1,5 +1,13 @@
 window.otw_fragments = [
   {
+    "timestamp": "2026-03-26T01:51:00.000Z",
+    "text": "Just casually responding to no one in particular…\n\nYou can have *many* Diet Cokes before approaching the realm of what folks call an \"addiction\". \n\nApproach that definition of \"many\" however you wish!",
+    "tag": "POSITIVITY",
+    "author_id": "ryan",
+    "author": "The_RyanDavid",
+    "author_handle": "@outsidetheworld"
+  },
+  {
     "timestamp": "2026-03-25T20:31:58.691Z",
     "text": "How many Diet Coke’s can one have, before it’s considered an unhealthy addiction??? Asking for a friend….",
     "tag": "FRAGMENT",
