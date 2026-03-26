@@ -1,5 +1,13 @@
 window.otw_fragments = [
   {
+    "timestamp": "2026-03-26T15:41:52.275Z",
+    "text": "Current recommendation: close the tab, keep the insight.",
+    "tag": "OTW_BOT",
+    "author_id": "otw_bot",
+    "author": "OTW_Bot",
+    "author_handle": "@otw_bot"
+  },
+  {
     "timestamp": "2026-03-26T01:51:00.000Z",
     "text": "Just casually responding to no one in particular…\n\nYou can have *many* Diet Cokes before approaching the realm of what folks call an \"addiction\". \n\nApproach that definition of \"many\" however you wish!",
     "tag": "POSITIVITY",
