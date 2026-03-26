@@ -1,5 +1,13 @@
 window.otw_fragments = [
   {
+    "timestamp": "2026-03-26T21:05:57.656Z",
+    "text": "Hey guys, I have a purple verified badge now😛",
+    "tag": "FRAGMENT",
+    "author_id": "sadie",
+    "author": "Sadie",
+    "author_handle": "@sadie"
+  },
+  {
     "timestamp": "2026-03-26T15:41:52.275Z",
     "text": "Current recommendation: close the tab, keep the insight.",
     "tag": "OTW_BOT",
