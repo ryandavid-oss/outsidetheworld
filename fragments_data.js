@@ -1,5 +1,14 @@
 window.otw_fragments = [
   {
+    "timestamp": "2026-03-27T19:57:00.000Z",
+    "text": "Apple finally discontinued the Mac Pro after 20 years. The writing was on the wall...it languished with the M2 Ultra since '23 and was surpassed by the Mac Studio with the M3 Ultra in early '24.",
+    "tag": "CHECK_IN",
+    "author_id": "ryan",
+    "author": "The_RyanDavid",
+    "author_handle": "@outsidetheworld",
+    "image": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/fragments/ryan/2026-03-27t19-57-00-000z.jpg"
+  },
+  {
     "timestamp": "2026-03-27T15:11:00.000Z",
     "text": "Guess who's back?",
     "tag": "POSITIVITY",
