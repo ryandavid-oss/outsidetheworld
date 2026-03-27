@@ -1134,6 +1134,7 @@
     let allFragments = [];
     let fragmentsUserRegistry = [];
     let visibleFragmentCount = FRAGMENTS_PAGE_SIZE;
+    let fragmentMediaRenderNonce = Date.now();
 
     function shuffleArray(items) {
       const copy = [...items];
@@ -1337,6 +1338,16 @@
       }).format(value);
     }
 
+    function buildFragmentImageSrc(imageUrl) {
+      const base = String(imageUrl || '').trim();
+      if (!base) {
+        return '';
+      }
+
+      const separator = base.includes('?') ? '&' : '?';
+      return `${base}${separator}fr=${fragmentMediaRenderNonce}`;
+    }
+
     function renderEmptyState(container) {
       container.innerHTML = `
         <section class="empty-card">
@@ -1450,15 +1461,16 @@
       const isBot = authorProfile.isBot;
       const fragmentId = buildFragmentId(fragment);
       const image = String(fragment.image || '').trim();
+      const imageSrc = image ? buildFragmentImageSrc(image) : '';
       const media = image
         ? `
           <div class="fragment-media" data-media-id="${fragmentId}" data-expanded="false">
             <button class="fragment-media-toggle" type="button" data-media-toggle="${fragmentId}" aria-expanded="false" aria-label="Expand image">
-              <img src="${escapeHtml(image)}" alt="" loading="lazy" />
+              <img src="${escapeHtml(imageSrc)}" alt="" loading="lazy" />
             </button>
             <div class="fragment-media-panel">
               <button class="fragment-media-collapse" type="button" data-media-toggle="${fragmentId}" aria-expanded="true" aria-label="Collapse image">
-                <img src="${escapeHtml(image)}" alt="" loading="lazy" />
+                <img src="${escapeHtml(imageSrc)}" alt="" loading="lazy" />
               </button>
             </div>
           </div>
@@ -1522,6 +1534,7 @@
     function renderVisibleFragments(requestedEntryId = null) {
       const container = document.getElementById('fragmentsFeed');
       const items = allFragments.slice(0, visibleFragmentCount);
+      fragmentMediaRenderNonce = Date.now();
       container.innerHTML = items.map(buildFragmentCard).join('');
       initReactionWidgets(items);
       initFragmentMediaToggles(items);

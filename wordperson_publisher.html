@@ -581,6 +581,106 @@
       gap: 12px;
     }
 
+    .fragment-media-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .fragment-media-beta {
+      color: var(--warm-plum);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.66rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .fragment-media-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .fragment-media-btn {
+      appearance: none;
+      min-height: 42px;
+      padding: 0 16px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.6);
+      color: var(--soft-charcoal);
+      font: inherit;
+      font-size: 0.92rem;
+      cursor: pointer;
+      transition: transform 0.22s var(--ease), border-color 0.22s var(--ease), background 0.22s var(--ease);
+    }
+
+    .fragment-media-btn:hover,
+    .fragment-media-btn:focus-visible {
+      transform: translateY(-1px);
+      border-color: rgba(195, 143, 160, 0.34);
+      background: rgba(255, 255, 255, 0.86);
+    }
+
+    .fragment-media-btn:disabled {
+      opacity: 0.56;
+      cursor: default;
+      transform: none;
+    }
+
+    .fragment-media-btn[hidden] {
+      display: none;
+    }
+
+    .fragment-media-preview {
+      display: none;
+      align-items: center;
+      gap: 10px;
+      color: var(--ink-soft);
+      font-size: 0.9rem;
+    }
+
+    .fragment-media-preview.is-active {
+      display: inline-flex;
+    }
+
+    .fragment-media-preview-thumb {
+      width: 52px;
+      height: 52px;
+      border-radius: 999px;
+      overflow: hidden;
+      border: 1px solid rgba(195, 143, 160, 0.2);
+      box-shadow: 0 10px 18px rgba(103, 81, 104, 0.12);
+      background: rgba(255, 255, 255, 0.7);
+      flex: 0 0 auto;
+    }
+
+    .fragment-media-preview-thumb img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .fragment-media-preview-copy {
+      display: grid;
+      gap: 2px;
+    }
+
+    .fragment-media-preview-title {
+      font-weight: 600;
+      color: var(--soft-charcoal);
+    }
+
+    .fragment-media-preview-meta {
+      color: var(--ink-soft);
+      font-size: 0.82rem;
+    }
+
     details.advanced {
       border-radius: 24px;
       border: 1px solid rgba(47, 42, 49, 0.1);
@@ -1058,6 +1158,23 @@
               <span class="helper-mono" id="fragmentCharCount">0 chars</span>
             </div>
 
+            <div class="fragment-media-row">
+              <div class="fragment-media-beta">Beta photo fragments</div>
+              <div class="fragment-media-actions">
+                <input id="fragmentImageInput" type="file" accept="image/*" hidden />
+                <button class="fragment-media-btn" id="fragmentAttachImageBtn" type="button">Add photo</button>
+                <button class="fragment-media-btn" id="fragmentRemoveImageBtn" type="button" hidden>Remove photo</button>
+              </div>
+            </div>
+
+            <div class="fragment-media-preview" id="fragmentMediaPreview">
+              <div class="fragment-media-preview-thumb" id="fragmentMediaPreviewThumb"></div>
+              <div class="fragment-media-preview-copy">
+                <div class="fragment-media-preview-title">Photo ready</div>
+                <div class="fragment-media-preview-meta" id="fragmentMediaPreviewMeta">1 image • compressed on share</div>
+              </div>
+            </div>
+
             <p class="status-line" id="fragmentStatusLine">Short thoughts save quietly on this device while you shape them.</p>
           </section>
         </div>
@@ -1237,6 +1354,12 @@
     const fragmentCharCount = document.getElementById('fragmentCharCount');
     const fragmentPublishBtn = document.getElementById('fragmentPublishBtn');
     const fragmentClearBtn = document.getElementById('fragmentClearBtn');
+    const fragmentImageInput = document.getElementById('fragmentImageInput');
+    const fragmentAttachImageBtn = document.getElementById('fragmentAttachImageBtn');
+    const fragmentRemoveImageBtn = document.getElementById('fragmentRemoveImageBtn');
+    const fragmentMediaPreview = document.getElementById('fragmentMediaPreview');
+    const fragmentMediaPreviewThumb = document.getElementById('fragmentMediaPreviewThumb');
+    const fragmentMediaPreviewMeta = document.getElementById('fragmentMediaPreviewMeta');
     const fragmentsDock = document.getElementById('fragmentsDock');
 
     const imageInput = document.getElementById('imageInput');
@@ -1265,8 +1388,11 @@
     let activeWorkspace = 'home';
     let activeFragmentTag = 'FRAGMENT';
     let imageObjectUrl = null;
+    let fragmentImageObjectUrl = null;
+    let selectedFragmentImageFile = null;
     let recoveryToastTimer = null;
     let publishToastTimer = null;
+    let isPublishingFragment = false;
 
     function setActiveDock(activeId) {
       [dockHomeBtn, dockWordpersonBtn, dockFragmentsBtn, dockSettingsBtn].forEach((button) => {
@@ -1403,6 +1529,15 @@
       }, 1400);
     }
 
+    function setFragmentPublishingState(nextState) {
+      isPublishingFragment = nextState;
+      fragmentPublishBtn.disabled = nextState;
+      fragmentClearBtn.disabled = nextState;
+      fragmentAttachImageBtn.disabled = nextState || Boolean(selectedFragmentImageFile);
+      fragmentRemoveImageBtn.disabled = nextState;
+      fragmentPublishBtn.textContent = nextState ? 'Sharing...' : 'Share to frgm<nts';
+    }
+
     function setWorkspace(nextWorkspace) {
       activeWorkspace = nextWorkspace;
       homeWorkspace.classList.toggle('is-active', nextWorkspace === 'home');
@@ -1452,6 +1587,93 @@
       };
     }
 
+    function revokeFragmentImagePreview() {
+      if (!fragmentImageObjectUrl) {
+        return;
+      }
+      URL.revokeObjectURL(fragmentImageObjectUrl);
+      fragmentImageObjectUrl = null;
+    }
+
+    function clearSelectedFragmentImage() {
+      selectedFragmentImageFile = null;
+      fragmentImageInput.value = '';
+      revokeFragmentImagePreview();
+      fragmentMediaPreview.classList.remove('is-active');
+      fragmentMediaPreviewThumb.innerHTML = '';
+      fragmentMediaPreviewMeta.textContent = '1 image • compressed on share';
+      fragmentRemoveImageBtn.hidden = true;
+      fragmentAttachImageBtn.disabled = false;
+      fragmentAttachImageBtn.textContent = 'Add photo';
+    }
+
+    function formatFragmentImageMeta(file) {
+      const sizeKb = Math.max(1, Math.round((file?.size || 0) / 1024));
+      return `${sizeKb} KB before compression`;
+    }
+
+    function setSelectedFragmentImage(file) {
+      selectedFragmentImageFile = file;
+      revokeFragmentImagePreview();
+      fragmentImageObjectUrl = URL.createObjectURL(file);
+      fragmentMediaPreviewThumb.innerHTML = `<img src="${fragmentImageObjectUrl}" alt="" />`;
+      fragmentMediaPreviewMeta.textContent = formatFragmentImageMeta(file);
+      fragmentMediaPreview.classList.add('is-active');
+      fragmentRemoveImageBtn.hidden = false;
+      fragmentAttachImageBtn.disabled = true;
+      fragmentAttachImageBtn.textContent = 'Photo attached';
+    }
+
+    function loadFragmentImageElement(file) {
+      return new Promise((resolve, reject) => {
+        const objectUrl = URL.createObjectURL(file);
+        const image = new Image();
+        image.onload = () => {
+          URL.revokeObjectURL(objectUrl);
+          resolve(image);
+        };
+        image.onerror = () => {
+          URL.revokeObjectURL(objectUrl);
+          reject(new Error('Could not read this image.'));
+        };
+        image.src = objectUrl;
+      });
+    }
+
+    function canvasToBlob(canvas, type, quality) {
+      return new Promise((resolve, reject) => {
+        canvas.toBlob((blob) => {
+          if (blob) {
+            resolve(blob);
+          } else {
+            reject(new Error('Could not compress this image.'));
+          }
+        }, type, quality);
+      });
+    }
+
+    async function compressFragmentImage(file) {
+      const image = await loadFragmentImageElement(file);
+      const maxDimension = 1400;
+      const scale = Math.min(1, maxDimension / Math.max(image.width, image.height));
+      const width = Math.max(1, Math.round(image.width * scale));
+      const height = Math.max(1, Math.round(image.height * scale));
+      const canvas = document.createElement('canvas');
+      canvas.width = width;
+      canvas.height = height;
+      const context = canvas.getContext('2d', { alpha: false });
+      if (!context) {
+        throw new Error('Image compression is unavailable on this device.');
+      }
+
+      context.fillStyle = '#f7f0ea';
+      context.fillRect(0, 0, width, height);
+      context.drawImage(image, 0, 0, width, height);
+
+      const blob = await canvasToBlob(canvas, 'image/jpeg', 0.78);
+      return new File([blob], 'fragment-photo.jpg', { type: 'image/jpeg' });
+    }
+
     function saveFragmentDraft() {
       window.localStorage.setItem(FRAGMENT_DRAFT_KEY, JSON.stringify(currentFragmentDraft()));
     }
@@ -1471,11 +1693,16 @@
       fragmentBody.value = '';
       selectFragmentTag('FRAGMENT');
       clearFragmentDraftStorage();
+      clearSelectedFragmentImage();
       updateFragmentPreview();
       fragmentStatusLine.textContent = 'Fragment draft cleared on this device.';
     }
 
     async function publishFragment() {
+      if (isPublishingFragment) {
+        return;
+      }
+
       const text = fragmentBody.value.trim();
       const publishKey = getPublishKey() || publishKeyInput.value.trim();
 
@@ -1490,20 +1717,38 @@
         return;
       }
 
-      fragmentStatusLine.textContent = 'Sharing this fragment into the live feed...';
+      fragmentStatusLine.textContent = selectedFragmentImageFile
+        ? 'Compressing the photo and sharing this fragment into the live feed...'
+        : 'Sharing this fragment into the live feed...';
+      setFragmentPublishingState(true);
 
       try {
-        const response = await fetch(FRAGMENT_PUBLISH_ENDPOINT, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'x-publish-key': publishKey
-          },
-          body: JSON.stringify({
+        const headers = {
+          'x-publish-key': publishKey
+        };
+        let body;
+
+        if (selectedFragmentImageFile) {
+          const compressedImage = await compressFragmentImage(selectedFragmentImageFile);
+          const formData = new FormData();
+          formData.append('timestamp', currentTimestamp());
+          formData.append('text', text);
+          formData.append('tag', activeFragmentTag);
+          formData.append('image', compressedImage);
+          body = formData;
+        } else {
+          headers['Content-Type'] = 'application/json';
+          body = JSON.stringify({
             timestamp: currentTimestamp(),
             text,
             tag: activeFragmentTag
-          })
+          });
+        }
+
+        const response = await fetch(FRAGMENT_PUBLISH_ENDPOINT, {
+          method: 'POST',
+          headers,
+          body
         });
 
         const payload = await response.json().catch(() => ({}));
@@ -1524,6 +1769,7 @@
         clearFragmentDraftStorage();
         fragmentBody.value = '';
         selectFragmentTag('FRAGMENT');
+        clearSelectedFragmentImage();
         updateFragmentPreview();
         fragmentStatusLine.textContent = payload.user
           ? `Fragment published successfully as ${payload.user.name}. It should appear in the shared feed shortly.`
@@ -1532,6 +1778,8 @@
         showPublishToast('Fragment published', 'Your fragment is on its way to the shared feed.');
       } catch (error) {
         fragmentStatusLine.textContent = error.message || 'Publish failed.';
+      } finally {
+        setFragmentPublishingState(false);
       }
     }
 
@@ -1736,6 +1984,27 @@
       updateFragmentPreview();
     });
 
+    fragmentAttachImageBtn.addEventListener('click', () => fragmentImageInput.click());
+    fragmentRemoveImageBtn.addEventListener('click', () => {
+      clearSelectedFragmentImage();
+      fragmentStatusLine.textContent = 'Photo removed from the fragment draft.';
+    });
+    fragmentImageInput.addEventListener('change', () => {
+      const file = fragmentImageInput.files && fragmentImageInput.files[0];
+      if (!file) {
+        return;
+      }
+
+      if (!String(file.type || '').startsWith('image/')) {
+        clearSelectedFragmentImage();
+        fragmentStatusLine.textContent = 'Choose an image file for the photo fragment.';
+        return;
+      }
+
+      setSelectedFragmentImage(file);
+      fragmentStatusLine.textContent = 'Photo attached. It will be compressed when you share.';
+    });
+
     fragmentPublishBtn.addEventListener('click', publishFragment);
     fragmentClearBtn.addEventListener('click', clearFragmentDraft);
 
@@ -1770,6 +2039,10 @@
     hydrateWordDraft();
     updateFragmentPreview();
     updateWordPreview();
+    clearSelectedFragmentImage();
+    window.addEventListener('beforeunload', () => {
+      revokeFragmentImagePreview();
+    });
   </script>
 </body>
 </html>
