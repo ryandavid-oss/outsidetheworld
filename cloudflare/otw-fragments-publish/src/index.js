@@ -131,6 +131,10 @@ function normalizeFragmentEntry(entry) {
     normalized.author_handle = String(entry.author_handle).trim();
   }
 
+  if (entry.image) {
+    normalized.image = String(entry.image).trim();
+  }
+
   return normalized;
 }
 
@@ -437,6 +441,20 @@ function detectImageExtension(file) {
   if (mime === "image/webp") return "webp";
 
   return "jpg";
+}
+
+function buildFragmentImageObjectKey(userId, timestamp, extension) {
+  const safeUserId = String(userId || "family").trim().replace(/[^a-z0-9_-]+/gi, "_").toLowerCase() || "family";
+  const safeStamp = String(timestamp || new Date().toISOString()).replace(/[^0-9a-z]+/gi, "-").replace(/^-+|-+$/g, "").toLowerCase();
+  return `fragments/${safeUserId}/${safeStamp}.${extension}`;
+}
+
+function buildFragmentImageUrl(env, objectKey) {
+  const base = String(env.IOTD_PUBLIC_BASE_URL || "").replace(/\/+$/g, "");
+  if (!base) {
+    throw new Error("Fragment image base URL is not configured");
+  }
+  return `${base}/${objectKey}`;
 }
 
 function buildIotdObjectKey(date, extension) {
@@ -790,6 +808,42 @@ function buildRegisteredFragmentEntry(payload, user) {
   };
 }
 
+async function buildRegisteredFragmentEntryFromRequest(request, env, user) {
+  const contentType = String(request.headers.get("content-type") || "").toLowerCase();
+
+  if (contentType.includes("multipart/form-data")) {
+    if (!env.IOTD_BUCKET) {
+      throw new Error("Image bucket binding is not configured");
+    }
+
+    const formData = await request.formData();
+    const file = formData.get("image");
+    const payload = {
+      timestamp: formData.get("timestamp"),
+      text: formData.get("text"),
+      tag: formData.get("tag")
+    };
+
+    const entry = buildRegisteredFragmentEntry(payload, user);
+
+    if (file instanceof File && file.size > 0) {
+      const extension = detectImageExtension(file);
+      const objectKey = buildFragmentImageObjectKey(user.id, entry.timestamp, extension);
+      await env.IOTD_BUCKET.put(objectKey, await file.arrayBuffer(), {
+        httpMetadata: {
+          contentType: file.type || "application/octet-stream"
+        }
+      });
+      entry.image = buildFragmentImageUrl(env, objectKey);
+    }
+
+    return entry;
+  }
+
+  const body = await request.json();
+  return buildRegisteredFragmentEntry(body, user);
+}
+
 function replaceFragmentsArray(raw, entries) {
   const replacement = `window.otw_fragments = ${JSON.stringify(entries, null, 2)};`;
   return raw.replace(FRAGMENTS_PATTERN, replacement);
@@ -1046,8 +1100,7 @@ export default {
           return jsonResponse({ ok: false, error: "Unauthorized" }, 401);
         }
 
-        const body = await request.json();
-        const entry = buildRegisteredFragmentEntry(body, user);
+        const entry = await buildRegisteredFragmentEntryFromRequest(request, env, user);
         const { result } = await saveFragmentEntryWithRetry(env, entry, "Publish fragment");
 
         return jsonResponse({

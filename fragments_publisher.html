@@ -195,36 +195,6 @@
       filter: drop-shadow(0 0 14px rgba(27, 54, 93, 0.08));
     }
 
-    .menu-toggle {
-      display: inline-flex;
-      appearance: none;
-      width: 42px;
-      height: 42px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: rgba(255, 255, 255, 0.04);
-      color: var(--text-main);
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: 0.25s var(--ease);
-    }
-
-    body[data-theme="light"] .menu-toggle {
-      background: rgba(255, 255, 255, 0.48);
-    }
-
-    .menu-toggle:hover,
-    .menu-toggle:focus-visible {
-      border-color: var(--brand-blue);
-      background: rgba(160, 190, 245, 0.08);
-    }
-
-    .menu-toggle svg {
-      width: 18px;
-      height: 18px;
-    }
-
     .topbar-profile {
       position: relative;
       width: 42px;
@@ -274,8 +244,10 @@
       top: calc(100% + 8px);
       right: 0;
       z-index: 30;
-      width: min(280px, calc(100vw - 32px));
-      padding: 10px;
+      width: min(420px, calc(100vw - 24px));
+      max-height: min(calc(100dvh - 132px), calc(100svh - 132px));
+      padding: 12px;
+      padding-bottom: max(16px, calc(env(safe-area-inset-bottom) + 8px));
       border-radius: 18px;
       border: 1px solid var(--border);
       background: rgba(10, 10, 10, 0.94);
@@ -285,9 +257,11 @@
       flex-direction: column;
       align-items: stretch;
       gap: 8px;
+      overflow-y: auto;
       opacity: 0;
       pointer-events: none;
-      transform: translateY(-6px);
+      transform: translateY(12px);
+      transform-origin: top right;
       transition: 0.22s var(--ease);
     }
 
@@ -349,6 +323,18 @@
       text-decoration: none;
       cursor: pointer;
       transition: 0.25s var(--ease);
+    }
+
+    .topbar-actions > .pill-btn,
+    .topbar-actions > .theme-toggle {
+      width: 100%;
+    }
+
+    .topbar-actions > .feed-link {
+      width: auto;
+      min-width: 160px;
+      align-self: center;
+      text-align: center;
     }
 
     body[data-theme="light"] .pill-btn,
@@ -415,11 +401,11 @@
 
     .app-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px 12px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px 10px;
       align-items: start;
       width: 100%;
-      max-width: 560px;
+      max-width: 620px;
     }
 
     @media (min-width: 900px) {
@@ -854,6 +840,19 @@
       color: var(--text-main);
     }
 
+    .status-line.is-quiet {
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      color: var(--text-faint);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      line-height: 1.6;
+    }
+
     .status-prefix {
       display: none;
     }
@@ -1053,6 +1052,44 @@
       text-transform: uppercase;
     }
 
+    .field-label {
+      color: var(--text-faint);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.74rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .field-select {
+      width: 100%;
+      min-height: 52px;
+      padding: 0 16px;
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-main);
+      font: inherit;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      appearance: none;
+      background-image:
+        linear-gradient(45deg, transparent 50%, rgba(245, 247, 251, 0.7) 50%),
+        linear-gradient(135deg, rgba(245, 247, 251, 0.7) 50%, transparent 50%);
+      background-position:
+        calc(100% - 22px) calc(50% - 3px),
+        calc(100% - 16px) calc(50% - 3px);
+      background-size: 6px 6px, 6px 6px;
+      background-repeat: no-repeat;
+    }
+
+    .field-select:focus {
+      outline: none;
+      border-color: rgba(160, 190, 245, 0.24);
+      box-shadow: 0 0 0 4px rgba(99, 149, 238, 0.08);
+    }
+
     .action-row {
       display: flex;
       flex-wrap: wrap;
@@ -1153,6 +1190,153 @@
       border: none;
       box-shadow: none;
       background: transparent;
+    }
+
+    .fragments-tools {
+      display: grid;
+      gap: 12px;
+      margin-top: -4px;
+    }
+
+    .fragments-stats-line {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: -2px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+    }
+
+    .media-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .media-beta {
+      color: var(--brand-light-blue);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.66rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .media-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .media-btn {
+      appearance: none;
+      min-height: 42px;
+      padding: 0 16px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-main);
+      font: inherit;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: 0.22s var(--ease);
+    }
+
+    .media-btn:hover,
+    .media-btn:focus-visible {
+      border-color: rgba(160, 190, 245, 0.22);
+      background: rgba(255, 255, 255, 0.06);
+      transform: translateY(-1px);
+    }
+
+    .media-btn:disabled {
+      opacity: 0.56;
+      cursor: default;
+      transform: none;
+    }
+
+    .media-btn[hidden] {
+      display: none;
+    }
+
+    .media-preview {
+      display: none;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-soft);
+      font-size: 0.9rem;
+    }
+
+    .media-preview.is-active {
+      display: inline-flex;
+    }
+
+    .media-preview-thumb {
+      width: 52px;
+      height: 52px;
+      border-radius: 999px;
+      overflow: hidden;
+      border: 1px solid rgba(160, 190, 245, 0.16);
+      box-shadow:
+        0 0 0 3px rgba(155, 89, 182, 0.08),
+        0 10px 18px rgba(0, 0, 0, 0.18);
+      flex: 0 0 auto;
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .media-preview-thumb img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .media-preview-copy {
+      display: grid;
+      gap: 2px;
+    }
+
+    .media-preview-title {
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .media-preview-meta {
+      color: var(--text-soft);
+      font-size: 0.82rem;
+    }
+
+    .fragments-controls {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 12px;
+      max-width: 360px;
+    }
+
+    .menu-section {
+      display: grid;
+      gap: 10px;
+      padding: 14px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background:
+        radial-gradient(180px 80px at 50% 0%, rgba(99, 149, 238, 0.08), transparent 74%),
+        rgba(255, 255, 255, 0.03);
+    }
+
+    .menu-section-title {
+      margin: 0;
+      color: var(--text-main);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
     }
 
     .preview-panel,
@@ -2693,7 +2877,7 @@
       }
 
       .app-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: repeat(3, minmax(0, 1fr));
       }
     }
 
@@ -2828,6 +3012,11 @@
         bottom: max(8px, calc(env(safe-area-inset-bottom) + 6px));
       }
 
+      .topbar-actions {
+        width: calc(100vw - 14px);
+        max-height: calc(100dvh - 148px);
+      }
+
       .dock-btn {
         min-height: 68px;
         padding: 8px 4px 10px;
@@ -2861,31 +3050,19 @@
             </svg>
             <span class="back-icon-label">Back</span>
           </button>
-          <button class="status-toggle" id="systemStatusBtn" type="button" aria-label="Open system status">
+          <div class="status-toggle" id="systemStatusBtn" role="img" aria-label="System status: GO">
             <span class="status-dot is-go" id="systemStatusDot" aria-hidden="true"></span>
-          </button>
-          <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="topbarActions" aria-label="Open settings menu">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
-              <path d="M4 7h16"></path>
-              <path d="M4 12h16"></path>
-              <path d="M4 17h16"></path>
-            </svg>
-          </button>
+          </div>
           <div class="topbar-profile" aria-label="Signed in as RyanDavid" title="Signed in as RyanDavid">
             <img src="Images/Profile.jpg" alt="RyanDavid Burningham" />
           </div>
         </div>
         <div class="topbar-actions" id="topbarActions">
-          <div class="menu-status-card">
-            <p class="menu-status-title" id="systemStatusTitle">System Status: GO</p>
-            <p class="menu-status-copy" id="systemStatusDetail">Publish key is saved and the suite is ready to publish.</p>
-          </div>
           <div class="publish-box">
             <div class="field">
               <label for="publishKeyInput">Publish Key</label>
               <input id="publishKeyInput" name="publishKeyInput" type="password" autocomplete="off" placeholder="Stored locally on this device" />
               <div class="helper" id="publishKeyStatus">No publish key saved on this device.</div>
-              <div class="helper">Used only for secure Worker publishing. Saved locally on this device, never in the repo.</div>
             </div>
             <div class="action-row" style="margin-top: 0;">
               <button class="secondary-btn" id="savePublishKeyBtn" type="button">Save Publish Key</button>
@@ -2896,9 +3073,20 @@
             <p class="menu-status-copy" id="queueStatusDetail">Nothing is waiting to sync right now.</p>
             <button class="pill-btn" id="retryQueueBtn" type="button">Retry Queued Publishes</button>
           </div>
-          <button class="pill-btn" id="summonBotBtn" type="button">Summon OTW_Bot</button>
+          <div class="menu-section">
+            <p class="menu-section-title">Fragment Settings</p>
+            <div class="fragments-controls">
+              <div class="field">
+                <label for="fragmentTimestamp">Publish Timestamp</label>
+                <div class="native-input-shell">
+                  <input id="fragmentTimestamp" name="fragmentTimestamp" type="datetime-local" />
+                </div>
+                <div class="helper">Defaults to now unless you set a manual time.</div>
+              </div>
+            </div>
+          </div>
           <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false">Light Mode</button>
-          <a class="pill-btn" href="fragments.html">Open Feed</a>
+          <a class="pill-btn feed-link" href="fragments.html">Open Feed</a>
         </div>
       </div>
     </header>
@@ -2993,8 +3181,6 @@
     <section class="workspace" id="fragmentsWorkspace">
     <div class="layout">
       <main class="panel composer">
-        <div class="status-line" id="statusLine">Drafts save locally on this device. Publish when it feels ready.</div>
-
         <form class="form-grid" id="publisherForm">
           <div class="compose-row">
             <img class="compose-avatar" src="Images/Profile.jpg" alt="RyanDavid Burningham" />
@@ -3002,15 +3188,35 @@
               <div class="field">
                 <label for="fragmentText" class="helper">Compose</label>
                 <textarea class="compose-input" id="fragmentText" name="fragmentText" placeholder="What's happening?"></textarea>
-                <div class="char-count" id="charCount">0 characters</div>
               </div>
             </div>
           </div>
 
-          <div class="meta-row fragments-meta-row">
-            <div class="field">
-              <label for="fragmentTag">Tag</label>
-              <select id="fragmentTag" name="fragmentTag">
+          <div class="fragments-tools">
+            <div class="fragments-stats-line">
+              <span class="char-count" id="charCount">0 characters</span>
+            </div>
+
+            <div class="media-row">
+              <div class="media-beta">Beta photo fragments</div>
+              <div class="media-actions">
+                <input id="fragmentImageInput" type="file" accept="image/*" hidden />
+                <button class="media-btn" id="attachImageBtn" type="button">Add photo</button>
+                <button class="media-btn" id="removeImageBtn" type="button" hidden>Remove photo</button>
+              </div>
+            </div>
+
+            <div class="media-preview" id="mediaPreview">
+              <div class="media-preview-thumb" id="mediaPreviewThumb"></div>
+              <div class="media-preview-copy">
+                <div class="media-preview-title">Photo ready</div>
+                <div class="media-preview-meta" id="mediaPreviewMeta">1 image • compressed on publish</div>
+              </div>
+            </div>
+
+            <div class="field fragments-controls">
+              <label class="field-label" for="fragmentTag">Signal Type</label>
+              <select class="field-select" id="fragmentTag" name="fragmentTag">
                 <option value="FRAGMENT">Fragment</option>
                 <option value="POSITIVITY">Positivity</option>
                 <option value="CHECK_IN">Check-In</option>
@@ -3019,15 +3225,6 @@
                 <option value="RESIDUE">Residue</option>
                 <option value="COMPLAINT">Complaint</option>
               </select>
-              <div class="helper">Choose the lane and keep moving.</div>
-            </div>
-
-            <div class="field">
-              <label for="fragmentTimestamp">Timestamp</label>
-              <div class="native-input-shell">
-                <input id="fragmentTimestamp" name="fragmentTimestamp" type="datetime-local" />
-              </div>
-              <div class="helper">Defaults to now. You can adjust before publishing.</div>
             </div>
           </div>
 
@@ -3035,6 +3232,8 @@
             <button class="primary-btn" id="publishBtn" type="button">Publish Now</button>
             <button class="secondary-btn" id="clearDraftBtn" type="button">Clear Draft</button>
           </div>
+
+          <p class="status-line is-quiet" id="statusLine" aria-live="polite"></p>
         </form>
       </main>
     </div>
@@ -3579,11 +3778,6 @@
     <p class="publish-toast-copy" id="publishToastCopy">Your fragment has been sent to the live feed.</p>
   </div>
 
-  <div class="ghost-recovery-toast" id="ghostRecoveryToast" role="status" aria-live="polite" aria-atomic="true">
-    <span class="ghost-recovery-kicker">// DRAFT_RECOVERED</span>
-    <p class="ghost-recovery-copy">Recovered the last Ghost-Writer Lite draft from this device.</p>
-  </div>
-
   <nav class="bottom-dock" aria-label="Publisher dock">
     <div class="bottom-dock-grid">
       <button class="dock-btn is-active" id="dockHomeBtn" type="button">
@@ -3650,21 +3844,24 @@
     const textInput = document.getElementById('fragmentText');
     const tagInput = document.getElementById('fragmentTag');
     const timestampInput = document.getElementById('fragmentTimestamp');
+    const fragmentImageInput = document.getElementById('fragmentImageInput');
+    const attachImageBtn = document.getElementById('attachImageBtn');
+    const removeImageBtn = document.getElementById('removeImageBtn');
+    const mediaPreview = document.getElementById('mediaPreview');
+    const mediaPreviewThumb = document.getElementById('mediaPreviewThumb');
+    const mediaPreviewMeta = document.getElementById('mediaPreviewMeta');
     const publishKeyInput = document.getElementById('publishKeyInput');
     const publishKeyStatus = document.getElementById('publishKeyStatus');
     const charCount = document.getElementById('charCount');
     const statusLine = document.getElementById('statusLine');
     const themeToggle = document.getElementById('themeToggle');
     const publisherLogo = document.getElementById('publisherLogo');
-    const menuToggle = document.getElementById('menuToggle');
     const topbarActions = document.getElementById('topbarActions');
     const publishBtn = document.getElementById('publishBtn');
-    const summonBotBtn = document.getElementById('summonBotBtn');
     const publishToast = document.getElementById('publishToast');
     const publishToastTitle = document.getElementById('publishToastTitle');
     const publishToastCopy = document.getElementById('publishToastCopy');
     const publishToastClose = document.getElementById('publishToastClose');
-    const ghostRecoveryToast = document.getElementById('ghostRecoveryToast');
     const homeWorkspace = document.getElementById('homeWorkspace');
     const fragmentsWorkspace = document.getElementById('fragmentsWorkspace');
     const changelogWorkspace = document.getElementById('changelogWorkspace');
@@ -3692,8 +3889,6 @@
     const dockSettingsBtn = document.getElementById('dockSettingsBtn');
     const systemStatusBtn = document.getElementById('systemStatusBtn');
     const systemStatusDot = document.getElementById('systemStatusDot');
-    const systemStatusTitle = document.getElementById('systemStatusTitle');
-    const systemStatusDetail = document.getElementById('systemStatusDetail');
     const queueStatusTitle = document.getElementById('queueStatusTitle');
     const queueStatusDetail = document.getElementById('queueStatusDetail');
     const retryQueueBtn = document.getElementById('retryQueueBtn');
@@ -3790,10 +3985,12 @@
     const gfullShowSlugToggle = document.getElementById('gfullShowSlugToggle');
     const gfullKeepImagePanelOpenToggle = document.getElementById('gfullKeepImagePanelOpenToggle');
     let publishToastTimer = null;
-    let ghostRecoveryToastTimer = null;
     let loadedChangelog = [];
     let iotdObjectUrl = null;
     let fragmentTimestampWasManual = false;
+    let selectedFragmentImageFile = null;
+    let selectedFragmentImagePreviewUrl = null;
+    let isPublishingFragment = false;
     let isProcessingPublishQueue = false;
     let gfullAutosaveTimer = null;
     let gfullDirty = false;
@@ -3910,6 +4107,93 @@
         image: `${IOTD_PUBLIC_BASE_URL}/${objectKey}`,
         objectKey
       };
+    }
+
+    function revokeSelectedFragmentImagePreview() {
+      if (!selectedFragmentImagePreviewUrl) {
+        return;
+      }
+      URL.revokeObjectURL(selectedFragmentImagePreviewUrl);
+      selectedFragmentImagePreviewUrl = null;
+    }
+
+    function clearSelectedFragmentImage() {
+      selectedFragmentImageFile = null;
+      fragmentImageInput.value = '';
+      revokeSelectedFragmentImagePreview();
+      mediaPreview.classList.remove('is-active');
+      mediaPreviewThumb.innerHTML = '';
+      mediaPreviewMeta.textContent = '1 image • compressed on publish';
+      removeImageBtn.hidden = true;
+      attachImageBtn.disabled = false;
+      attachImageBtn.textContent = 'Add photo';
+    }
+
+    function formatFragmentImageMeta(file) {
+      const sizeKb = Math.max(1, Math.round((file?.size || 0) / 1024));
+      return `${sizeKb} KB before compression`;
+    }
+
+    function setSelectedFragmentImage(file) {
+      selectedFragmentImageFile = file;
+      revokeSelectedFragmentImagePreview();
+      selectedFragmentImagePreviewUrl = URL.createObjectURL(file);
+      mediaPreviewThumb.innerHTML = `<img src="${selectedFragmentImagePreviewUrl}" alt="" />`;
+      mediaPreviewMeta.textContent = formatFragmentImageMeta(file);
+      mediaPreview.classList.add('is-active');
+      removeImageBtn.hidden = false;
+      attachImageBtn.disabled = true;
+      attachImageBtn.textContent = 'Photo attached';
+    }
+
+    function loadFragmentImageElement(file) {
+      return new Promise((resolve, reject) => {
+        const objectUrl = URL.createObjectURL(file);
+        const image = new Image();
+        image.onload = () => {
+          URL.revokeObjectURL(objectUrl);
+          resolve(image);
+        };
+        image.onerror = () => {
+          URL.revokeObjectURL(objectUrl);
+          reject(new Error('Could not read this image.'));
+        };
+        image.src = objectUrl;
+      });
+    }
+
+    function canvasToBlob(canvas, type, quality) {
+      return new Promise((resolve, reject) => {
+        canvas.toBlob((blob) => {
+          if (blob) {
+            resolve(blob);
+          } else {
+            reject(new Error('Could not compress this image.'));
+          }
+        }, type, quality);
+      });
+    }
+
+    async function compressFragmentImage(file) {
+      const image = await loadFragmentImageElement(file);
+      const maxDimension = 1400;
+      const scale = Math.min(1, maxDimension / Math.max(image.width, image.height));
+      const width = Math.max(1, Math.round(image.width * scale));
+      const height = Math.max(1, Math.round(image.height * scale));
+      const canvas = document.createElement('canvas');
+      canvas.width = width;
+      canvas.height = height;
+      const context = canvas.getContext('2d', { alpha: false });
+      if (!context) {
+        throw new Error('Image compression is unavailable on this device.');
+      }
+
+      context.fillStyle = '#0d0d0f';
+      context.fillRect(0, 0, width, height);
+      context.drawImage(image, 0, 0, width, height);
+
+      const blob = await canvasToBlob(canvas, 'image/jpeg', 0.78);
+      return new File([blob], 'fragment-photo.jpg', { type: 'image/jpeg' });
     }
 
     function slugifyGhostTitle(value) {
@@ -4164,8 +4448,8 @@
       }
 
       systemStatusDot.className = dotClass;
-      systemStatusTitle.textContent = `System Status: ${state}`;
-      systemStatusDetail.textContent = detail;
+      systemStatusBtn.setAttribute('aria-label', `System status ${state}. ${detail}`);
+      systemStatusBtn.setAttribute('title', `System Status: ${state}\n${detail}`);
     }
 
     function showPublishToast(title, copy) {
@@ -4180,16 +4464,6 @@
       }, 3200);
     }
 
-    function showGhostRecoveryToast() {
-      if (ghostRecoveryToastTimer) {
-        window.clearTimeout(ghostRecoveryToastTimer);
-      }
-
-      ghostRecoveryToast.classList.add('show');
-      ghostRecoveryToastTimer = window.setTimeout(() => {
-        ghostRecoveryToast.classList.remove('show');
-      }, 4200);
-    }
 
     function celebratePublish() {
       publishBtn.classList.add('is-success');
@@ -4198,6 +4472,15 @@
         publishBtn.classList.remove('is-success');
         publishBtn.textContent = 'Publish Now';
       }, 1400);
+    }
+
+    function setFragmentPublishingState(nextState) {
+      isPublishingFragment = nextState;
+      publishBtn.disabled = nextState;
+      document.getElementById('clearDraftBtn').disabled = nextState;
+      attachImageBtn.disabled = nextState || Boolean(selectedFragmentImageFile);
+      removeImageBtn.disabled = nextState;
+      publishBtn.textContent = nextState ? 'Publishing...' : 'Publish Now';
     }
 
     function celebrateChangelogPublish() {
@@ -4775,6 +5058,10 @@
     }
 
     async function publishFragment() {
+      if (isPublishingFragment) {
+        return;
+      }
+
       let entry;
       try {
         entry = buildEntryFromForm();
@@ -4789,6 +5076,11 @@
         return;
       }
 
+      if (!window.navigator.onLine && selectedFragmentImageFile) {
+        statusLine.textContent = 'Photo fragments still need a live connection. The text draft is safe, but the image is not queued locally yet.';
+        return;
+      }
+
       if (!window.navigator.onLine) {
         enqueuePublishJob({
           kind: 'fragment',
@@ -4799,6 +5091,7 @@
         textInput.value = '';
         tagInput.value = 'FRAGMENT';
         setFragmentTimestampToNow();
+        clearSelectedFragmentImage();
         charCount.textContent = '0 characters';
         statusLine.textContent = 'Offline. The fragment was queued on this device and will publish when the connection returns.';
         showPublishToast(
@@ -4809,16 +5102,34 @@
         return;
       }
 
-      statusLine.textContent = 'Publishing fragment to the OTW Worker...';
+      statusLine.textContent = selectedFragmentImageFile
+        ? 'Compressing the photo and publishing the fragment to the OTW Worker...'
+        : 'Publishing fragment to the OTW Worker...';
+      setFragmentPublishingState(true);
 
       try {
+        const headers = {
+          'x-publish-key': publishKey
+        };
+        let body;
+
+        if (selectedFragmentImageFile) {
+          const compressedImage = await compressFragmentImage(selectedFragmentImageFile);
+          const formData = new FormData();
+          formData.append('timestamp', entry.timestamp);
+          formData.append('text', entry.text);
+          formData.append('tag', entry.tag);
+          formData.append('image', compressedImage);
+          body = formData;
+        } else {
+          headers['Content-Type'] = 'application/json';
+          body = JSON.stringify(entry);
+        }
+
         const response = await fetch(PUBLISH_ENDPOINT, {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'x-publish-key': publishKey
-          },
-          body: JSON.stringify(entry)
+          headers,
+          body
         });
 
         const payload = await response.json().catch(() => ({}));
@@ -4834,6 +5145,7 @@
         textInput.value = '';
         tagInput.value = 'FRAGMENT';
         setFragmentTimestampToNow();
+        clearSelectedFragmentImage();
         charCount.textContent = '0 characters';
         statusLine.textContent = 'Fragment published successfully. The live feed should update shortly.';
         celebratePublish();
@@ -4844,6 +5156,14 @@
         refreshSystemStatus();
       } catch (error) {
         if (isLikelyNetworkFailure(error)) {
+          if (selectedFragmentImageFile) {
+            statusLine.textContent = 'The connection dropped during the photo publish. Your text is still here, but reselect the image and try again when you are back online.';
+            showPublishToast(
+              'Photo publish interrupted.',
+              'The image itself was not queued locally, so this one still needs a live connection.'
+            );
+            return;
+          }
           enqueuePublishJob({
             kind: 'fragment',
             endpoint: PUBLISH_ENDPOINT,
@@ -4853,6 +5173,7 @@
           textInput.value = '';
           tagInput.value = 'FRAGMENT';
           setFragmentTimestampToNow();
+          clearSelectedFragmentImage();
           charCount.textContent = '0 characters';
           statusLine.textContent = 'Connection failed. The fragment was queued on this device and will retry automatically.';
           showPublishToast(
@@ -4863,6 +5184,8 @@
           return;
         }
         statusLine.textContent = error.message || 'Publish failed.';
+      } finally {
+        setFragmentPublishingState(false);
       }
     }
 
@@ -4880,8 +5203,6 @@
 
       statusLine.textContent = 'Summoning OTW_Bot...';
       botStatusLine.textContent = 'Summoning OTW_Bot...';
-      summonBotBtn.disabled = true;
-      summonBotBtn.textContent = 'Deploying...';
       botDeployBtn.disabled = true;
       botDeployBtn.textContent = 'Deploying...';
 
@@ -4915,8 +5236,6 @@
         statusLine.textContent = error.message || 'OTW_Bot publish failed.';
         botStatusLine.textContent = error.message || 'OTW_Bot publish failed.';
       } finally {
-        summonBotBtn.disabled = false;
-        summonBotBtn.textContent = 'Summon OTW_Bot';
         botDeployBtn.disabled = false;
         botDeployBtn.textContent = 'Deploy Quip';
       }
@@ -4927,6 +5246,7 @@
       tagInput.value = 'FRAGMENT';
       setFragmentTimestampToNow();
       clearDraftStorage();
+      clearSelectedFragmentImage();
       updatePreview();
       statusLine.textContent = 'Draft cleared on this device.';
       refreshSystemStatus();
@@ -5971,7 +6291,6 @@
         if (draft) {
           ghostTitleInput.value = draft.title || '';
           ghostBodyInput.value = draft.body || '';
-          showGhostRecoveryToast();
           return;
         }
       } catch {
@@ -6060,7 +6379,6 @@
 
     function setMenuState(isOpen) {
       topbarActions.classList.toggle('is-open', isOpen);
-      menuToggle.setAttribute('aria-expanded', String(isOpen));
     }
 
     function isEditableElement(element) {
@@ -6261,10 +6579,29 @@
       ghostStatusLine.textContent = 'Divider inserted into the draft.';
     });
     document.getElementById('savePublishKeyBtn').addEventListener('click', savePublishKey);
+    attachImageBtn.addEventListener('click', () => fragmentImageInput.click());
+    removeImageBtn.addEventListener('click', () => {
+      clearSelectedFragmentImage();
+      statusLine.textContent = 'Photo removed from the fragment draft.';
+    });
+    fragmentImageInput.addEventListener('change', () => {
+      const file = fragmentImageInput.files && fragmentImageInput.files[0];
+      if (!file) {
+        return;
+      }
+
+      if (!String(file.type || '').startsWith('image/')) {
+        clearSelectedFragmentImage();
+        statusLine.textContent = 'Choose an image file for the photo fragment.';
+        return;
+      }
+
+      setSelectedFragmentImage(file);
+      statusLine.textContent = 'Photo attached. It will be compressed when you publish.';
+    });
     retryQueueBtn.addEventListener('click', () => {
       processPublishQueue();
     });
-    summonBotBtn.addEventListener('click', summonOtwBot);
     openFragmentsApp.addEventListener('click', () => {
       setWorkspace('fragments');
       if (shouldAutoFocusWorkspaceFields()) {
@@ -6322,9 +6659,6 @@
     dockSettingsBtn.addEventListener('click', () => {
       setMenuState(!topbarActions.classList.contains('is-open'));
     });
-    systemStatusBtn.addEventListener('click', () => {
-      setMenuState(!topbarActions.classList.contains('is-open'));
-    });
     headerBackBtn.addEventListener('click', () => {
       setWorkspace('home');
     });
@@ -6346,14 +6680,9 @@
         applyTheme(getSystemTheme());
       }
     });
-    menuToggle.addEventListener('click', () => {
-      setMenuState(!topbarActions.classList.contains('is-open'));
-    });
     document.addEventListener('click', (event) => {
       if (
         !topbarActions.contains(event.target)
-        && !menuToggle.contains(event.target)
-        && !systemStatusBtn.contains(event.target)
         && !dockSettingsBtn.contains(event.target)
       ) {
         setMenuState(false);
@@ -6420,6 +6749,9 @@
         'Offline mode.',
         'Drafts still save locally. Text-based publishes will queue until the connection returns.'
       );
+    });
+    window.addEventListener('beforeunload', () => {
+      revokeSelectedFragmentImagePreview();
     });
     window.addEventListener('hashchange', () => {
       setWorkspace(getWorkspaceFromHash());
@@ -6530,6 +6862,7 @@
     hydratePublishKey();
     updateQueueStatus();
     syncEditingState();
+    clearSelectedFragmentImage();
     hydrateDraft();
     hydrateChangelogDraft();
     hydrateIotdDraft();

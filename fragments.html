@@ -629,6 +629,94 @@
       word-break: break-word;
     }
 
+    .fragment-content {
+      display: flow-root;
+    }
+
+    .fragment-media {
+      float: right;
+      margin: 2px 0 10px 16px;
+    }
+
+    .fragment-media-toggle {
+      appearance: none;
+      width: 84px;
+      height: 84px;
+      display: block;
+      padding: 0;
+      border: 1px solid rgba(160, 190, 245, 0.16);
+      border-radius: 999px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 30% 25%, rgba(160, 190, 245, 0.14), transparent 38%),
+        linear-gradient(145deg, rgba(155, 89, 182, 0.32), rgba(99, 149, 238, 0.22));
+      box-shadow:
+        0 0 0 3px rgba(155, 89, 182, 0.08),
+        0 12px 26px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      transition: transform 0.22s var(--ease), border-color 0.22s var(--ease), box-shadow 0.22s var(--ease);
+    }
+
+    .fragment-media-toggle:hover,
+    .fragment-media-toggle:focus-visible {
+      transform: translateY(-1px);
+      border-color: rgba(160, 190, 245, 0.28);
+      box-shadow:
+        0 0 0 3px rgba(155, 89, 182, 0.12),
+        0 14px 28px rgba(0, 0, 0, 0.24);
+    }
+
+    .fragment-media-toggle img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: center;
+      transform: scale(1.14);
+      transform-origin: center;
+    }
+
+    .fragment-media-panel {
+      display: none;
+      clear: both;
+      margin-top: 14px;
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid rgba(160, 190, 245, 0.12);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02)),
+        rgba(255, 255, 255, 0.02);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+      width: min(100%, 560px);
+    }
+
+    .fragment-media.is-expanded .fragment-media-panel {
+      display: block;
+    }
+
+    .fragment-media.is-expanded .fragment-media-toggle {
+      display: none;
+    }
+
+    .fragment-media-panel img {
+      width: 100%;
+      display: block;
+      aspect-ratio: 16 / 10;
+      max-height: 220px;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .fragment-media-collapse {
+      appearance: none;
+      width: 100%;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      display: block;
+    }
+
     .fragment-foot {
       display: flex;
       align-items: center;
@@ -841,6 +929,19 @@
       .fragment-body {
         font-size: 0.98rem;
         line-height: 1.68;
+      }
+
+      .fragment-media-toggle {
+        width: 78px;
+        height: 78px;
+      }
+
+      .fragment-media-panel {
+        width: 100%;
+      }
+
+      .fragment-media-panel img {
+        max-height: 250px;
       }
 
       .fragment-foot {
@@ -1305,12 +1406,64 @@
       });
     }
 
+    function initFragmentMediaToggles(items) {
+      if (!Array.isArray(items) || !items.length) {
+        return;
+      }
+
+      items.forEach((fragment) => {
+        const fragmentId = buildFragmentId(fragment);
+        const buttons = Array.from(document.querySelectorAll(`[data-media-toggle="${fragmentId}"]`));
+        if (!buttons.length) {
+          return;
+        }
+
+        buttons.forEach((button) => {
+          if (button.dataset.mediaReady === 'true') {
+            return;
+          }
+
+          button.dataset.mediaReady = 'true';
+          button.addEventListener('click', () => {
+            const media = document.querySelector(`[data-media-id="${fragmentId}"]`);
+            if (!media) {
+              return;
+            }
+
+            const nextExpanded = media.dataset.expanded !== 'true';
+            media.dataset.expanded = nextExpanded ? 'true' : 'false';
+            media.classList.toggle('is-expanded', nextExpanded);
+
+            buttons.forEach((control) => {
+              control.setAttribute('aria-expanded', nextExpanded ? 'true' : 'false');
+              control.setAttribute('aria-label', nextExpanded ? 'Collapse image' : 'Expand image');
+            });
+          });
+        });
+      });
+    }
+
     function buildFragmentCard(fragment) {
       const tag = fragment.tag ? `<div class="fragment-tag">${escapeHtml(fragment.tag)}</div>` : '';
       const timestamp = formatTimestamp(fragment.timestamp || '');
       const authorProfile = getAuthorProfile(fragment);
       const isBot = authorProfile.isBot;
       const fragmentId = buildFragmentId(fragment);
+      const image = String(fragment.image || '').trim();
+      const media = image
+        ? `
+          <div class="fragment-media" data-media-id="${fragmentId}" data-expanded="false">
+            <button class="fragment-media-toggle" type="button" data-media-toggle="${fragmentId}" aria-expanded="false" aria-label="Expand image">
+              <img src="${escapeHtml(image)}" alt="" loading="lazy" />
+            </button>
+            <div class="fragment-media-panel">
+              <button class="fragment-media-collapse" type="button" data-media-toggle="${fragmentId}" aria-expanded="true" aria-label="Collapse image">
+                <img src="${escapeHtml(image)}" alt="" loading="lazy" />
+              </button>
+            </div>
+          </div>
+        `
+        : '';
       const verifiedBadge = authorProfile.isVerified ? `
                     <svg class="verified-badge" viewBox="0 0 24 24" aria-label="Verified">
                       <path fill="#9B59B6" d="M12 1.8l2.76 1.58 3.16-.23 1.58 2.76 2.76 1.58-.23 3.16L23 12l-1.97 2.55.23 3.16-2.76 1.58-1.58 2.76-3.16-.23L12 22.2l-2.76-1.58-3.16.23-1.58-2.76-2.76-1.58.23-3.16L1 12l1.97-2.55-.23-3.16 2.76-1.58 1.58-2.76 3.16.23L12 1.8z"></path>
@@ -1336,7 +1489,10 @@
             </div>
             <div class="fragment-time">${timestamp}</div>
           </div>
-          <p class="fragment-body">${escapeHtml(fragment.text || '')}</p>
+          <div class="fragment-content">
+            ${media}
+            <p class="fragment-body">${escapeHtml(fragment.text || '')}</p>
+          </div>
           <div class="fragment-foot">
             <div class="fragment-foot-meta">
               <span>Fragment</span>
@@ -1368,6 +1524,7 @@
       const items = allFragments.slice(0, visibleFragmentCount);
       container.innerHTML = items.map(buildFragmentCard).join('');
       initReactionWidgets(items);
+      initFragmentMediaToggles(items);
       updateLoadMoreControls();
 
       if (requestedEntryId && typeof CSS !== 'undefined' && CSS.escape) {
