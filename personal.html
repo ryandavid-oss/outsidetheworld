@@ -139,6 +139,7 @@
             transform: translateZ(0);
         }
 
+
         /* Keyboard focus (no visual change for mouse users) */
         :focus-visible {
             outline: 2px solid var(--brand-teal);
@@ -178,6 +179,10 @@
 
         .header-right {
             text-align: right;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 10px;
         }
 
         .weather-uplink {
@@ -188,6 +193,70 @@
             margin-bottom: 8px;
             text-transform: uppercase;
             opacity: 0.92;
+        }
+
+        .weather-uplink.live-signal {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            color: var(--brand-teal);
+            margin-bottom: 0;
+            min-height: 32px;
+            padding: 6px 12px;
+            border: 1px solid rgba(224, 191, 184, 0.26);
+            background: rgba(224, 191, 184, 0.06);
+            box-shadow:
+                inset 0 0 0 1px rgba(255, 255, 255, 0.02),
+                0 0 18px rgba(224, 191, 184, 0.08);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .weather-uplink.live-signal.is-link {
+            cursor: pointer;
+        }
+
+        .weather-uplink.live-signal.is-link:hover,
+        .weather-uplink.live-signal.is-link:focus-visible {
+            border-color: rgba(224, 191, 184, 0.44);
+            background: rgba(224, 191, 184, 0.09);
+            box-shadow:
+                inset 0 0 0 1px rgba(255, 255, 255, 0.03),
+                0 0 22px rgba(224, 191, 184, 0.12);
+        }
+
+        .weather-uplink.live-signal.is-live {
+            border-color: rgba(224, 191, 184, 0.48);
+            background: rgba(224, 191, 184, 0.1);
+            box-shadow:
+                inset 0 0 0 1px rgba(255, 255, 255, 0.03),
+                0 0 22px rgba(224, 191, 184, 0.14),
+                0 0 36px rgba(160, 190, 245, 0.1);
+        }
+
+        .live-signal-icon {
+            width: 14px;
+            height: 14px;
+            flex-shrink: 0;
+            display: block;
+            opacity: 0.9;
+            filter: drop-shadow(0 0 6px rgba(224, 191, 184, 0.18));
+        }
+
+        .live-signal-copy {
+            display: inline-flex;
+            align-items: baseline;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .live-signal-state {
+            color: var(--rose-gold);
+            font-weight: 700;
+        }
+
+        .live-signal-track {
+            color: rgba(224, 230, 237, 0.9);
         }
 
         .top-quadrant-text {
@@ -207,7 +276,7 @@
         .main-interface {
             display: flex;
             max-width: 1400px;
-            margin: 190px auto 100px;
+            margin: 156px auto 100px;
             padding: 0 40px;
             gap: 60px;
         }
@@ -849,7 +918,7 @@
 
         .archive-card {
             display: block;
-            padding: 35px;
+            padding: 24px;
             text-decoration: none;
             color: inherit;
             position: relative;
@@ -864,7 +933,7 @@
             font-weight: 900;
             letter-spacing: 4px;
             text-transform: uppercase;
-            margin: 0 0 10px 0;
+            margin: 0 0 7px 0;
             transition: 0.3s;
         }
 
@@ -949,6 +1018,24 @@
         }
 
         .dossier-card:hover h3 {
+            opacity: 1;
+        }
+
+        .light-blue-card {
+            border-color: rgba(160, 190, 245, 0.24);
+        }
+
+        .light-blue-card h3 {
+            color: #A0BEF5;
+            opacity: 0.98;
+        }
+
+        .light-blue-card:hover {
+            border-color: #A0BEF5;
+            background: rgba(160, 190, 245, 0.08);
+        }
+
+        .light-blue-card:hover h3 {
             opacity: 1;
         }
 
@@ -1099,6 +1186,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            object-position: center center;
             display: block;
             filter: saturate(1.02) contrast(1.03);
             transition: transform 0.45s cubic-bezier(0.23, 1, 0.32, 1);
@@ -1203,6 +1291,10 @@
             margin-bottom: 10px;
         }
 
+        .podcast-widget.is-link {
+            cursor: pointer;
+        }
+
         .podcast-item {
             display: flex;
             align-items: center;
@@ -1210,6 +1302,23 @@
             margin-bottom: 20px;
             text-decoration: none;
             transition: 0.3s;
+        }
+
+        .podcast-icon {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .podcast-icon img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: contain;
+            opacity: 0.94;
         }
 
         .podcast-info span {
@@ -1557,9 +1666,50 @@
                 justify-content: center;
             }
 
+            .header-right {
+                align-items: center;
+                text-align: center;
+                width: 100%;
+            }
+
             .interface-header .nav-logo {
                 width: 140px;
                 margin: 0 auto 5px;
+            }
+
+            .weather-uplink.live-signal {
+                align-self: center;
+                justify-content: center;
+                max-width: min(94vw, 520px);
+                width: 100%;
+                margin: 2px auto 0;
+                padding: 6px 12px;
+            }
+
+            .live-signal-copy {
+                justify-content: center;
+                flex-wrap: nowrap;
+                gap: 6px;
+                width: 100%;
+                min-width: 0;
+                white-space: nowrap;
+                overflow: hidden;
+            }
+
+            .live-signal-icon {
+                width: 17px;
+                height: 17px;
+            }
+
+            .live-signal-state,
+            .live-signal-track {
+                font-size: 0.56rem;
+                letter-spacing: 1.2px;
+            }
+
+            .live-signal-track {
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
 
             .top-quadrant-text {
@@ -1637,7 +1787,7 @@
             }
 
             .archive-card {
-                padding: 20px;
+                padding: 16px;
                 background: rgba(255, 255, 255, 0.03) !important;
                 margin-bottom: 10px;
             }
@@ -1760,7 +1910,13 @@
                 <img src="Images/Equal.svg" alt="Outside The World home" class="nav-logo" decoding="async">
             </a>
             <div class="header-right">
-                <div class="weather-uplink" id="system-clock">SYSTEM_TIME // --:--:--</div>
+                <div class="weather-uplink live-signal" id="header-live-now">
+                    <img src="Images/otw_brandmark_stroke.svg" alt="" class="live-signal-icon" id="header-signal-icon" aria-hidden="true">
+                    <span class="live-signal-copy">
+                        <span class="live-signal-state" id="header-live-state">LISTENING_SIGNAL //</span>
+                        <span class="live-signal-track" id="header-live-track">SYNCHRONIZING...</span>
+                    </span>
+                </div>
                 <h1 class="top-quadrant-text">
                     A QUARTER-CENTURY OF <span class="mobile-break">DIGITAL RESIDUE</span>
                 </h1>
@@ -1811,10 +1967,16 @@
                 <p>Sun. Moon. Stars. The Core Sanctuary.</p>
             </a>
 
-            <a href="residue_archive.html" class="archive-card amethyst-card">
+            <a href="residue_archive.html" class="archive-card teal-card">
                 <div class="card-beacon" aria-hidden="true"></div>
                 <h3>THE NEW ARCHIVE</h3>
-                <p>Modern Narrative Archive // 2026 - Present</p>
+                <p>MODERN BLOG ARCHIVE 2026-PRESENT</p>
+            </a>
+
+            <a href="drift_poetry.html" class="archive-card light-blue-card">
+                <div class="card-beacon" aria-hidden="true"></div>
+                <h3>THE DRIFT</h3>
+                <p>NEW PUBLISHED POETRY</p>
             </a>
 
             <a href="image_of_the_day.html" class="archive-card dossier-card builder-card iotd-preview-card"
@@ -1835,9 +1997,9 @@
                 </div>
             </a>
 
-            <a href="wayback.html" class="archive-card teal-card">
+            <a href="wayback.html" class="archive-card dossier-card">
                 <div class="card-beacon" aria-hidden="true"></div>
-                <h3>The Static Past</h3>
+                <h3>THE OLD ARCHIVE</h3>
                 <p>Historical residue from 2001 to 2025.</p>
             </a>
 
@@ -1847,32 +2009,13 @@
                 <p>Visual depot and verbal residue.</p>
             </a>
 
-            <a href="resume.html" class="archive-card dossier-card">
-                <div class="card-beacon" aria-hidden="true"></div>
-                <h3>The Curriculum Vitae</h3>
-                <p>Professional history // Inquires</p>
-            </a>
-
             <a href="transform_gate.html" class="archive-card amethyst-card">
                 <div class="card-beacon" aria-hidden="true"></div>
                 <h3>The Transform</h3>
                 <p>Spiritual Truth // fundamental identity.</p>
             </a>
 
-            <div class="column-label">02 // LIVE_LISTENING_SIGNAL</div>
-            <div class="podcast-widget" id="listening-feed"
-                style="transition: 0.5s; border: 1px solid rgba(145, 175, 179, 0.1);">
-                <div class="podcast-item" style="margin-bottom: 0;">
-                    <div class="podcast-icon" id="signal-status" aria-hidden="true">📡</div>
-                    <div class="podcast-info">
-                        <span id="current-track" style="color: #fff; text-transform: uppercase;">SYNCHRONIZING...</span>
-                        <label id="current-artist"
-                            style="color: var(--brand-teal); font-size: 0.55rem; letter-spacing: 2px;">ESTABLISHING_UPLINK</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="column-label">03 // CHANGE_LOG</div>
+            <div class="column-label">02 // CHANGE_LOG</div>
 
             <a href="change_log.html" class="changelog-card" aria-label="Open Change Log">
                 <div class="card-beacon" aria-hidden="true"></div>
@@ -1899,7 +2042,7 @@
                 <div class="changelog-cta">OPEN_CHANGE_LOG →</div>
             </a>
 
-            <div class="column-label">04 // PROVISIONS_UPLINK</div>
+            <div class="column-label">03 // PROVISIONS_UPLINK</div>
             <div class="provisions-card">
                 <div class="provisions-display">
                     <img src="Images/OTW_Shirt_Front.png" alt="OTW Shirt" class="shirt-render" id="shirt-img"
@@ -2101,21 +2244,6 @@
                 }).init();
             });
         }
-
-        // --- SYSTEM CLOCK PROTOCOL ---
-        function updateClock() {
-            const now = new Date();
-            const timeString = now.toLocaleTimeString('en-US', {
-                hour12: false,
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit'
-            });
-            document.getElementById('system-clock').textContent = `SYSTEM_TIME // ${timeString} MST`;
-        }
-
-        updateClock();
-        setInterval(updateClock, 1000);
 
         // --- PROVISIONS UI LOGIC (improved mobile behavior + ARIA) ---
         let lastFocusedEl = null;
@@ -2323,12 +2451,43 @@
         // --- LAST.FM SIGNAL UPLINK ---
         const LFM_API_KEY = '0cb4714c22caddc9beedf7afe2e35284';
         const LFM_USER = 'ryandavid_rylee';
+        let currentArtistSignalUrl = '';
+
+        function buildLastFmArtistUrl(artistName) {
+            const artist = String(artistName || '').trim();
+            if (!artist) return '';
+            return `https://www.last.fm/music/${encodeURIComponent(artist).replace(/%20/g, '+')}`;
+        }
+
+        function applyArtistSignalLink(url) {
+            const headerLiveNow = document.getElementById('header-live-now');
+            const isActive = Boolean(url);
+
+            [headerLiveNow].forEach((element) => {
+                if (!element) return;
+                element.classList.toggle('is-link', isActive);
+                element.setAttribute('role', isActive ? 'link' : 'presentation');
+                element.setAttribute('tabindex', isActive ? '0' : '-1');
+                if (isActive) {
+                    element.setAttribute('title', 'Open artist signal in a new tab');
+                } else {
+                    element.removeAttribute('title');
+                }
+            });
+        }
+
+        function openArtistSignal() {
+            if (!currentArtistSignalUrl) return;
+            window.open(currentArtistSignalUrl, '_blank', 'noopener,noreferrer');
+        }
 
         async function syncMusicSignal() {
-            const trackTarget = document.getElementById('current-track');
-            const artistTarget = document.getElementById('current-artist');
-            const statusIcon = document.getElementById('signal-status');
-            const feedContainer = document.getElementById('listening-feed');
+            const headerLiveNow = document.getElementById('header-live-now');
+            const headerState = document.getElementById('header-live-state');
+            const headerTrack = document.getElementById('header-live-track');
+            const headerSignalIcon = document.getElementById('header-signal-icon');
+            const inactiveIcon = 'Images/otw_brandmark_stroke.svg';
+            const activeIcon = 'Images/assets/BRAND_BROADCAST.svg';
 
             const url = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${LFM_USER}&api_key=${LFM_API_KEY}&format=json&limit=1`;
             const controller = new AbortController();
@@ -2340,24 +2499,32 @@
                 const latest = data.recenttracks.track[0];
 
                 const isLive = latest['@attr'] && latest['@attr'].nowplaying === 'true';
+                const trackName = (latest.name || 'UNKNOWN_SIGNAL').toUpperCase();
+                const artistName = (latest.artist['#text'] || 'UNKNOWN_ARTIST').toUpperCase();
+                currentArtistSignalUrl = buildLastFmArtistUrl(latest.artist['#text']);
+                applyArtistSignalLink(currentArtistSignalUrl);
 
-                trackTarget.innerText = latest.name.toUpperCase();
-                artistTarget.innerText = isLive
-                    ? `LIVE_NOW // ${latest.artist['#text'].toUpperCase()}`
-                    : `LAST_PLAYED // ${latest.artist['#text'].toUpperCase()}`;
+                if (headerState) {
+                    headerState.textContent = isLive ? 'LIVE_NOW //' : 'LAST_PLAYED //';
+                }
+                if (headerTrack) {
+                    headerTrack.textContent = `${trackName} // ${artistName}`;
+                }
 
                 if (isLive) {
-                    statusIcon.innerText = "📶";
-                    feedContainer.style.borderColor = "var(--brand-blue)";
-                    feedContainer.style.background = "rgba(99, 149, 238, 0.05)";
+                    if (headerSignalIcon) headerSignalIcon.src = activeIcon;
+                    if (headerLiveNow) headerLiveNow.classList.add('is-live');
                 } else {
-                    statusIcon.innerText = "📡";
-                    feedContainer.style.borderColor = "rgba(145, 175, 179, 0.1)";
-                    feedContainer.style.background = "rgba(145, 175, 179, 0.02)";
+                    if (headerSignalIcon) headerSignalIcon.src = inactiveIcon;
+                    if (headerLiveNow) headerLiveNow.classList.remove('is-live');
                 }
             } catch (e) {
-                trackTarget.innerText = "SIGNAL_LOST";
-                artistTarget.innerText = "CHECK_UPLINK_PROTOCOL";
+                currentArtistSignalUrl = '';
+                applyArtistSignalLink('');
+                if (headerLiveNow) headerLiveNow.classList.remove('is-live');
+                if (headerState) headerState.textContent = 'SIGNAL_LOST //';
+                if (headerTrack) headerTrack.textContent = 'CHECK_UPLINK_PROTOCOL';
+                if (headerSignalIcon) headerSignalIcon.src = inactiveIcon;
             } finally {
                 clearTimeout(timeoutId);
             }
@@ -2394,6 +2561,14 @@
 
         syncMusicSignal();
         setInterval(syncMusicSignal, 30000);
+
+        document.getElementById('header-live-now')?.addEventListener('click', openArtistSignal);
+        document.getElementById('header-live-now')?.addEventListener('keydown', (event) => {
+            if ((event.key === 'Enter' || event.key === ' ') && currentArtistSignalUrl) {
+                event.preventDefault();
+                openArtistSignal();
+            }
+        });
 
         // --- CHANGE LOG PREVIEW (latest entry) ---
         (async function hydrateChangelogCard() {

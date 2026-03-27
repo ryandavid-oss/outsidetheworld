@@ -100,6 +100,11 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.03);
         }
 
+        .filter-grid {
+            display: grid;
+            gap: 10px;
+        }
+
         .knob-label {
             font-family: 'Fira Code';
             font-size: 0.55rem;
@@ -120,6 +125,11 @@
             width: 100%;
             outline: none;
             cursor: pointer;
+        }
+
+        select.era-filter:disabled,
+        select.era-filter option:disabled {
+            color: #5d636b;
         }
 
         .post-list {
@@ -545,8 +555,12 @@
             <label class="knob-label">
                 Temporal Selection
             </label>
-            <select class="era-filter" id="year-select" onchange="updateYear()">
-            </select>
+            <div class="filter-grid">
+                <select class="era-filter" id="year-select" onchange="updateYear()">
+                </select>
+                <select class="era-filter" id="month-select" onchange="updateMonth()">
+                </select>
+            </div>
         </div>
         <div class="post-list" id="post-list">
         </div>
@@ -562,6 +576,10 @@
     </script>
     <script>
         let groupedMatrix = {};
+        const MONTH_ORDER = [
+            'January', 'February', 'March', 'April', 'May', 'June',
+            'July', 'August', 'September', 'October', 'November', 'December'
+        ];
 
         function slugify(value) {
             return String(value || '')
@@ -666,6 +684,7 @@
             });
 
             const yearSelect = document.getElementById('year-select');
+            const monthSelect = document.getElementById('month-select');
             const years = Object.keys(groupedMatrix).sort((a, b) => b - a);
 
             years.forEach(y => {
@@ -675,6 +694,8 @@
                 yearSelect.appendChild(opt);
             });
 
+            monthSelect.innerHTML = '';
+
             if (years.length > 0) {
                 const requestedPostId = new URLSearchParams(window.location.search).get('post');
                 const requestedIndex = findPostIndexById(requestedPostId);
@@ -683,18 +704,46 @@
                     : groupedMatrix[years[0]][Object.keys(groupedMatrix[years[0]])[0]][0].originalIndex;
                 const initialPost = current_narrative[initialIndex];
                 const initialYear = initialPost.date.split(' ').slice(-1)[0];
+                const initialMonth = initialPost.date.split(' ')[0];
 
                 yearSelect.value = initialYear;
-                renderYear(initialYear);
+                populateMonthSelect(initialYear, initialMonth);
+                renderYear(initialYear, initialMonth);
                 displayEntry(initialIndex, { replaceUrl: true });
             }
         }
 
-        function renderYear(year) {
+        function populateMonthSelect(year, preferredMonth = 'ALL') {
+            const monthSelect = document.getElementById('month-select');
+            const availableMonths = groupedMatrix[year] ? Object.keys(groupedMatrix[year]) : [];
+
+            monthSelect.innerHTML = '';
+
+            const allOption = document.createElement('option');
+            allOption.value = 'ALL';
+            allOption.textContent = 'ALL_MONTHS';
+            monthSelect.appendChild(allOption);
+
+            MONTH_ORDER.forEach(month => {
+                const opt = document.createElement('option');
+                opt.value = month;
+                opt.textContent = month.toUpperCase();
+                opt.disabled = !availableMonths.includes(month);
+                monthSelect.appendChild(opt);
+            });
+
+            monthSelect.value = availableMonths.includes(preferredMonth) ? preferredMonth : 'ALL';
+        }
+
+        function renderYear(year, selectedMonth = 'ALL') {
             const list = document.getElementById('post-list');
             list.innerHTML = "";
             const months = groupedMatrix[year];
-            for (const month in months) {
+            const visibleMonths = MONTH_ORDER.filter(month =>
+                months[month] && (selectedMonth === 'ALL' || selectedMonth === month)
+            );
+
+            visibleMonths.forEach(month => {
                 const mHeader = document.createElement('div');
                 mHeader.className = 'month-header';
                 mHeader.textContent = month;
@@ -714,10 +763,21 @@
                     item.innerHTML = `<h3>${post.title}</h3><span>${post.date}</span>`;
                     list.appendChild(item);
                 });
-            }
+            });
         }
 
-        function updateYear() { renderYear(document.getElementById('year-select').value); }
+        function updateYear() {
+            const year = document.getElementById('year-select').value;
+            populateMonthSelect(year);
+            renderYear(year, document.getElementById('month-select').value);
+        }
+
+        function updateMonth() {
+            renderYear(
+                document.getElementById('year-select').value,
+                document.getElementById('month-select').value
+            );
+        }
 
         function displayEntry(index, options = {}) {
             const container = document.getElementById('glass-container');
@@ -797,8 +857,10 @@
             if (index >= 0) {
                 const post = current_narrative[index];
                 const year = post.date.split(' ').slice(-1)[0];
+                const month = post.date.split(' ')[0];
                 document.getElementById('year-select').value = year;
-                renderYear(year);
+                populateMonthSelect(year, month);
+                renderYear(year, month);
                 displayEntry(index, { replaceUrl: true });
             }
         });
