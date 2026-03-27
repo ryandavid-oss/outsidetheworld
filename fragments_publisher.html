@@ -2940,6 +2940,14 @@
           <p class="app-tile-meta"></p>
         </button>
 
+        <button class="app-tile" id="openPaletteApp" type="button">
+          <div class="app-icon" aria-hidden="true">
+            <img src="Images/assets/stripes.svg" alt="" />
+          </div>
+          <h2 class="app-tile-label">Palette</h2>
+          <p class="app-tile-meta">Brand System</p>
+        </button>
+
         <button class="app-tile" id="openIotdApp" type="button">
           <div class="app-icon" aria-hidden="true">
             <img src="Images/iotd_icon.svg" alt="" />
@@ -3673,6 +3681,7 @@
     const openGhostFullApp = document.getElementById('openGhostFullApp');
     const openBotApp = document.getElementById('openBotApp');
     const openSiteApp = document.getElementById('openSiteApp');
+    const openPaletteApp = document.getElementById('openPaletteApp');
     const headerBackBtn = document.getElementById('headerBackBtn');
     const botDeployBtn = document.getElementById('botDeployBtn');
     const botStatusLine = document.getElementById('botStatusLine');
@@ -6294,6 +6303,9 @@
     });
     openSiteApp.addEventListener('click', () => {
       window.open('index.html', '_blank', 'noopener,noreferrer');
+    });
+    openPaletteApp.addEventListener('click', () => {
+      window.open('palette.html', '_blank', 'noopener,noreferrer');
     });
     dockHomeBtn.addEventListener('click', () => {
       setWorkspace('home');

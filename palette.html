@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0a0a0a" />
+  <title>OTW Palette | Outside The World</title>
+  <meta name="description"
+    content="A visual palette board for Outside The World, including core colors, supporting accents, and logo specimens across dark and light themes." />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --safe-top: env(safe-area-inset-top);
+      --safe-bottom: env(safe-area-inset-bottom);
+      --safe-left: env(safe-area-inset-left);
+      --safe-right: env(safe-area-inset-right);
+
+      --brand-blue: #6395EE;
+      --brand-light-blue: #A0BEF5;
+      --brand-teal: #91AFB3;
+      --logo-navy: #1B365D;
+      --logo-teal: #3D5255;
+      --logo-ink: #1A1C20;
+      --bg-dark: #0A0A0A;
+      --text-main: #EEEEEE;
+      --brand-gold: #D9C08C;
+      --amethyst: #9B59B6;
+      --rose-gold: #E0BFB8;
+      --brand-pink: #FF69B4;
+      --signal-green: #4BE36E;
+      --index-blue: #77A3FF;
+      --index-teal: #9EC5C1;
+
+      --wp-cream: #F7F0EA;
+      --wp-parchment: #EFE3D8;
+      --wp-soft-charcoal: #2E2831;
+      --wp-muted-rose: #C38FA0;
+      --wp-warm-plum: #675168;
+      --wp-gold: #C9A96F;
+
+      --page-bg: #090A0D;
+      --page-bg-deep: #050608;
+      --surface: rgba(255, 255, 255, 0.05);
+      --surface-strong: rgba(255, 255, 255, 0.08);
+      --border: rgba(255, 255, 255, 0.12);
+      --text: #F5F7FB;
+      --text-soft: rgba(245, 247, 251, 0.74);
+      --shadow: 0 30px 80px rgba(0, 0, 0, 0.32);
+      --radius-xl: 34px;
+      --radius-lg: 26px;
+      --radius-md: 20px;
+      --ease: cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    html[data-theme="light"] {
+      --page-bg: #F5F0E9;
+      --page-bg-deep: #EAE3DA;
+      --surface: rgba(255, 255, 255, 0.72);
+      --surface-strong: rgba(255, 255, 255, 0.9);
+      --border: rgba(27, 54, 93, 0.12);
+      --text: #1A1C20;
+      --text-soft: rgba(26, 28, 32, 0.68);
+      --shadow: 0 24px 60px rgba(41, 38, 33, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+    }
+
+    html {
+      background: var(--page-bg-deep);
+      transition: background 0.35s var(--ease);
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: "IBM Plex Sans", sans-serif;
+      color: var(--text);
+      padding-top: var(--safe-top);
+      padding-bottom: var(--safe-bottom);
+      padding-left: var(--safe-left);
+      padding-right: var(--safe-right);
+      background:
+        radial-gradient(720px 460px at 12% 10%, rgba(119, 163, 255, 0.12), transparent 62%),
+        radial-gradient(640px 420px at 86% 12%, rgba(158, 197, 193, 0.10), transparent 58%),
+        radial-gradient(520px 320px at 18% 78%, rgba(255, 105, 180, 0.09), transparent 58%),
+        radial-gradient(460px 300px at 82% 82%, rgba(224, 191, 184, 0.09), transparent 56%),
+        linear-gradient(180deg, var(--page-bg) 0%, var(--page-bg-deep) 100%);
+      transition: background 0.35s var(--ease), color 0.35s var(--ease);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+      background-size: 68px 68px;
+      mask-image: radial-gradient(circle at 50% 18%, black 0%, transparent 74%);
+      opacity: 0.35;
+    }
+
+    .shell {
+      width: min(1220px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 24px 0 72px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.4fr minmax(220px, 320px);
+      gap: 22px;
+      align-items: stretch;
+      margin-bottom: 28px;
+    }
+
+    .hero-card,
+    .control-card,
+    .section-card,
+    .logo-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      backdrop-filter: blur(18px);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card {
+      padding: 30px 30px 26px;
+      min-height: 250px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .hero-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 22px;
+    }
+
+    .hero-logo {
+      width: clamp(180px, 26vw, 260px);
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 0 28px rgba(99, 149, 238, 0.16));
+    }
+
+    .hero-title {
+      margin: 0;
+      font-family: "IBM Plex Serif", serif;
+      font-size: clamp(2.2rem, 5vw, 4.4rem);
+      line-height: 0.96;
+      letter-spacing: -0.05em;
+    }
+
+    .control-card {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 250px;
+      gap: 20px;
+    }
+
+    .theme-label {
+      margin: 0;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.68rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-soft);
+      text-align: center;
+    }
+
+    .toggle-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      width: 100%;
+      max-width: 240px;
+      margin: 0 auto;
+    }
+
+    .theme-btn {
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text);
+      border-radius: 999px;
+      min-height: 84px;
+      padding: 18px 14px;
+      font: 700 0.96rem/1.15 "IBM Plex Sans", sans-serif;
+      cursor: pointer;
+      text-align: center;
+      transition: transform 0.18s var(--ease), border-color 0.18s var(--ease), background 0.18s var(--ease), box-shadow 0.18s var(--ease);
+    }
+
+    .theme-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .theme-btn.is-active {
+      border-color: rgba(160, 190, 245, 0.34);
+      background: linear-gradient(135deg, rgba(119, 163, 255, 0.16), rgba(158, 197, 193, 0.12));
+      box-shadow: 0 0 0 1px rgba(160, 190, 245, 0.12) inset;
+    }
+
+    .section-card {
+      padding: 26px;
+      margin-bottom: 22px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      margin: 0;
+      font-family: "IBM Plex Serif", serif;
+      font-size: clamp(1.5rem, 3vw, 2.15rem);
+      letter-spacing: -0.03em;
+    }
+
+    .section-meta {
+      margin: 0;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.68rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-soft);
+      white-space: nowrap;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .cards-grid.compact {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .pantone-card {
+      overflow: hidden;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.86);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 12px 34px rgba(0, 0, 0, 0.14);
+      min-height: 320px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    html[data-theme="light"] .pantone-card {
+      box-shadow: 0 16px 32px rgba(22, 18, 14, 0.08);
+    }
+
+    .swatch {
+      min-height: 226px;
+      width: 100%;
+      flex: 1 1 auto;
+    }
+
+    .swatch-meta {
+      background: #ffffff;
+      color: #141414;
+      padding: 18px 18px 20px;
+      border-top: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    .swatch-code {
+      margin: 0 0 6px;
+      font-family: "IBM Plex Sans", sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: -0.02em;
+    }
+
+    .swatch-name {
+      margin: 0;
+      font-size: 0.96rem;
+      color: #3e3e3e;
+    }
+
+    .logos-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .logo-card {
+      padding: 22px;
+    }
+
+    .logo-kicker {
+      margin: 0 0 14px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.68rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-soft);
+    }
+
+    .logo-surface {
+      border-radius: 22px;
+      padding: 28px;
+      min-height: 162px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .logo-surface.dark {
+      background:
+        radial-gradient(circle at 24% 20%, rgba(99, 149, 238, 0.16), transparent 52%),
+        radial-gradient(circle at 86% 16%, rgba(158, 197, 193, 0.12), transparent 56%),
+        linear-gradient(180deg, #0b0d11 0%, #050608 100%);
+    }
+
+    .logo-surface.light {
+      background:
+        radial-gradient(circle at 20% 18%, rgba(224, 191, 184, 0.22), transparent 50%),
+        radial-gradient(circle at 82% 16%, rgba(160, 190, 245, 0.16), transparent 54%),
+        linear-gradient(180deg, #f8f3eb 0%, #ede6dc 100%);
+      border-color: rgba(27, 54, 93, 0.08);
+    }
+
+    .logo-lockup {
+      width: min(100%, 320px);
+      height: auto;
+      display: block;
+    }
+
+    .logo-mark {
+      width: min(100%, 120px);
+      height: auto;
+      display: block;
+    }
+
+    .logo-label {
+      margin: 14px 0 0;
+      color: var(--text-soft);
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    .ledger {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px 26px;
+      margin-top: 10px;
+    }
+
+    .ledger-group {
+      padding-top: 4px;
+    }
+
+    .ledger-group h3 {
+      margin: 0 0 12px;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .ledger-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 9px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.82rem;
+      letter-spacing: 0.02em;
+    }
+
+    html[data-theme="light"] .ledger-item {
+      border-bottom-color: rgba(27, 54, 93, 0.08);
+    }
+
+    .ledger-name {
+      color: var(--text-soft);
+    }
+
+    .ledger-code {
+      color: var(--text);
+    }
+
+    @media (max-width: 980px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .cards-grid,
+      .cards-grid.compact,
+      .logos-grid,
+      .ledger {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 680px) {
+      .shell {
+        width: min(100%, calc(100% - 16px));
+        padding-top: 14px;
+      }
+
+      .hero-card,
+      .control-card,
+      .section-card,
+      .logo-card {
+        border-radius: 26px;
+      }
+
+      .hero-card,
+      .section-card,
+      .logo-card {
+        padding: 20px;
+      }
+
+      .hero-card,
+      .control-card {
+        min-height: 0;
+      }
+
+      .hero-top {
+        justify-content: center;
+        margin-bottom: 18px;
+      }
+
+      .hero-card {
+        align-items: center;
+        text-align: center;
+      }
+
+      .logos-grid,
+      .ledger,
+      .toggle-row {
+        grid-template-columns: 1fr;
+      }
+
+      .cards-grid,
+      .cards-grid.compact {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .control-card {
+        padding: 20px;
+      }
+
+      .toggle-row {
+        max-width: none;
+      }
+
+      .theme-btn {
+        min-height: 64px;
+        font-size: 0.9rem;
+      }
+
+      .swatch {
+        min-height: 92px;
+      }
+
+      .pantone-card {
+        min-height: 150px;
+        border-radius: 14px;
+      }
+
+      .swatch-meta {
+        padding: 10px 10px 12px;
+      }
+
+      .swatch-code {
+        font-size: 0.82rem;
+        margin-bottom: 3px;
+      }
+
+      .swatch-name {
+        font-size: 0.76rem;
+        line-height: 1.25;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="shell">
+    <section class="hero">
+      <div class="hero-card">
+        <div class="hero-top">
+          <img id="heroLogo" class="hero-logo" src="Images/Equal.svg" alt="Outside The World logo" />
+        </div>
+        <h1 class="hero-title">The OTW Brand.</h1>
+      </div>
+
+      <aside class="control-card">
+        <p class="theme-label">View Mode</p>
+        <div class="toggle-row">
+          <button class="theme-btn is-active" type="button" data-theme-target="dark">Dark Surface</button>
+          <button class="theme-btn" type="button" data-theme-target="light">Light Surface</button>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section-card">
+      <div class="section-header">
+        <h2 class="section-title">Core OTW palette</h2>
+        <p class="section-meta">Signature system colors</p>
+      </div>
+      <div class="cards-grid">
+        <article class="pantone-card">
+          <div class="swatch" style="background:#6395EE;"></div>
+          <div class="swatch-meta">
+            <p class="swatch-code">#6395EE</p>
+            <p class="swatch-name">Brand Blue</p>
+          </div>
+        </article>
+        <article class="pantone-card">
+          <div class="swatch" style="background:#A0BEF5;"></div>
+          <div class="swatch-meta">
+            <p class="swatch-code">#A0BEF5</p>
+            <p class="swatch-name">Brand Light Blue</p>
+          </div>
+        </article>
+        <article class="pantone-card">
+          <div class="swatch" style="background:#91AFB3;"></div>
+          <div class="swatch-meta">
+            <p class="swatch-code">#91AFB3</p>
+            <p class="swatch-name">Brand Teal</p>
+          </div>
+        </article>
+        <article class="pantone-card">
+          <div class="swatch" style="background:#1B365D;"></div>
+          <div class="swatch-meta">
+            <p class="swatch-code">#1B365D</p>
+            <p class="swatch-name">Logo Navy</p>
+          </div>
+        </article>
+        <article class="pantone-card">
+          <div class="swatch" style="background:#3D5255;"></div>
+          <div class="swatch-meta">
+            <p class="swatch-code">#3D5255</p>
+            <p class="swatch-name">Logo Teal</p>
+          </div>
+        </article>
+        <article class="pantone-card">
+          <div class="swatch" style="background:#1A1C20;"></div>
+          <div class="swatch-meta">
+            <p class="swatch-code">#1A1C20</p>
+            <p class="swatch-name">Logo Ink</p>
+          </div>
+        </article>
+        <article class="pantone-card">
+          <div class="swatch" style="background:#0A0A0A;"></div>
+          <div class="swatch-meta">
+            <p class="swatch-code">#0A0A0A</p>
+            <p class="swatch-name">Void Dark</p>
+          </div>
+        </article>
+        <article class="pantone-card">
+          <div class="swatch" style="background:#EEEEEE;"></div>
+          <div class="swatch-meta">
+            <p class="swatch-code">#EEEEEE</p>
+            <p class="swatch-name">Text Main</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <div class="section-header">
+        <h2 class="section-title">Supporting OTW colors</h2>
+        <p class="section-meta">Accent and interaction colors</p>
+      </div>
+      <div class="cards-grid compact">
+        <article class="pantone-card">
+          <div class="swatch" style="background:#D9C08C;"></div>
+          <div class="swatch-meta">
+            <p class="swatch-code">#D9C08C</p>
+            <p class="swatch-name">Brand Gold</p>
+          </div>
+        </article>
+        <article class="pantone-card">
+          <div class="swatch" style="background:#9B59B6;"></div>
+          <div class="swatch-meta">
+            <p class="swatch-code">#9B59B6</p>
+            <p class="swatch-name">Amethyst</p>
+          </div>
+        </article>
+        <article class="pantone-card">
+          <div class="swatch" style="background:#E0BFB8;"></div>
+          <div class="swatch-meta">
+            <p class="swatch-code">#E0BFB8</p>
+            <p class="swatch-name">Rose Gold</p>
+          </div>
+        </article>
+        <article class="pantone-card">
+          <div class="swatch" style="background:#FF69B4;"></div>
+          <div class="swatch-meta">
+            <p class="swatch-code">#FF69B4</p>
+            <p class="swatch-name">Brand Pink</p>
+          </div>
+        </article>
+        <article class="pantone-card">
+          <div class="swatch" style="background:#4BE36E;"></div>
+          <div class="swatch-meta">
+            <p class="swatch-code">#4BE36E</p>
+            <p class="swatch-name">Signal Green</p>
+          </div>
+        </article>
+        <article class="pantone-card">
+          <div class="swatch" style="background:#77A3FF;"></div>
+          <div class="swatch-meta">
+            <p class="swatch-code">#77A3FF</p>
+            <p class="swatch-name">Index Blue</p>
+          </div>
+        </article>
+        <article class="pantone-card">
+          <div class="swatch" style="background:#9EC5C1;"></div>
+          <div class="swatch-meta">
+            <p class="swatch-code">#9EC5C1</p>
+            <p class="swatch-name">Index Teal</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <div class="section-header">
+        <h2 class="section-title">Word.person companion palette</h2>
+        <p class="section-meta">Emily lane / OTW-adjacent</p>
+      </div>
+      <div class="cards-grid compact">
+        <article class="pantone-card">
+          <div class="swatch" style="background:#F7F0EA;"></div>
+          <div class="swatch-meta">
+            <p class="swatch-code">#F7F0EA</p>
+            <p class="swatch-name">Cream</p>
+          </div>
+        </article>
+        <article class="pantone-card">
+          <div class="swatch" style="background:#EFE3D8;"></div>
+          <div class="swatch-meta">
+            <p class="swatch-code">#EFE3D8</p>
+            <p class="swatch-name">Parchment</p>
+          </div>
+        </article>
+        <article class="pantone-card">
+          <div class="swatch" style="background:#2E2831;"></div>
+          <div class="swatch-meta">
+            <p class="swatch-code">#2E2831</p>
+            <p class="swatch-name">Soft Charcoal</p>
+          </div>
+        </article>
+        <article class="pantone-card">
+          <div class="swatch" style="background:#C38FA0;"></div>
+          <div class="swatch-meta">
+            <p class="swatch-code">#C38FA0</p>
+            <p class="swatch-name">Muted Rose</p>
+          </div>
+        </article>
+        <article class="pantone-card">
+          <div class="swatch" style="background:#675168;"></div>
+          <div class="swatch-meta">
+            <p class="swatch-code">#675168</p>
+            <p class="swatch-name">Warm Plum</p>
+          </div>
+        </article>
+        <article class="pantone-card">
+          <div class="swatch" style="background:#C9A96F;"></div>
+          <div class="swatch-meta">
+            <p class="swatch-code">#C9A96F</p>
+            <p class="swatch-name">Companion Gold</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <div class="section-header">
+        <h2 class="section-title">Logos and brandmarks</h2>
+        <p class="section-meta">Dark and light efficacy</p>
+      </div>
+      <div class="logos-grid">
+        <article class="logo-card">
+          <p class="logo-kicker">Equal / Dark Surface</p>
+          <div class="logo-surface dark">
+            <img class="logo-lockup" src="Images/Equal.svg" alt="OTW Equal logo for dark surfaces" />
+          </div>
+          <p class="logo-label">Primary Equal lockup used against dark OTW surfaces.</p>
+        </article>
+
+        <article class="logo-card">
+          <p class="logo-kicker">Equal / Light Surface</p>
+          <div class="logo-surface light">
+            <img class="logo-lockup" src="Images/Equal_dark.svg" alt="OTW Equal logo for light surfaces" />
+          </div>
+          <p class="logo-label">Light-surface Equal variant for paper, cream, and warm editorial backgrounds.</p>
+        </article>
+
+        <article class="logo-card">
+          <p class="logo-kicker">Brandmark / Dark Surface</p>
+          <div class="logo-surface dark">
+            <img class="logo-mark" src="Images/OTW_Brandmark_Main.svg" alt="OTW primary brandmark" />
+          </div>
+          <p class="logo-label">Primary OTW brandmark for dark environments and app lockups.</p>
+        </article>
+
+        <article class="logo-card">
+          <p class="logo-kicker">Brandmark / Light Surface</p>
+          <div class="logo-surface light">
+            <img class="logo-mark" src="Images/otw_brandmark_dark.svg" alt="OTW brandmark for light surfaces" />
+          </div>
+          <p class="logo-label">Light-surface OTW brandmark for lighter editorial or utility contexts.</p>
+        </article>
+
+        <article class="logo-card">
+          <p class="logo-kicker">Brandmark / Stroke</p>
+          <div class="logo-surface dark">
+            <img class="logo-mark" src="Images/otw_brandmark_stroke.svg" alt="OTW stroke brandmark" />
+          </div>
+          <p class="logo-label">Stroke-only brandmark for buttons, launchers, and lighter-weight icon use.</p>
+        </article>
+
+        <article class="logo-card">
+          <p class="logo-kicker">Fragments Wordmark</p>
+          <div class="logo-surface dark">
+            <img class="logo-lockup" src="Images/fragments.svg" alt="frgmnts wordmark" />
+          </div>
+          <p class="logo-label">Sub-brand wordmark used in the shared fragments feed and family-facing tools.</p>
+        </article>
+
+        <article class="logo-card">
+          <p class="logo-kicker">word.person App Icon</p>
+          <div class="logo-surface light">
+            <img class="logo-mark" src="Images/wordperson/WP_Icon.svg" alt="word.person app icon" />
+          </div>
+          <p class="logo-label">Emily lane icon, shown on a softer light surface where it breathes well.</p>
+        </article>
+
+        <article class="logo-card">
+          <p class="logo-kicker">Equal / PNG Reference</p>
+          <div class="logo-surface dark">
+            <img class="logo-lockup" src="Images/Equal.png" alt="OTW Equal PNG reference" />
+          </div>
+          <p class="logo-label">PNG reference for app contexts that prefer raster icons or previews.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <div class="section-header">
+        <h2 class="section-title">Palette ledger</h2>
+        <p class="section-meta">Quick readout</p>
+      </div>
+
+      <div class="ledger">
+        <div class="ledger-group">
+          <h3>Core OTW</h3>
+          <div class="ledger-item"><span class="ledger-name">Brand Blue</span><span class="ledger-code">#6395EE</span></div>
+          <div class="ledger-item"><span class="ledger-name">Brand Light Blue</span><span class="ledger-code">#A0BEF5</span></div>
+          <div class="ledger-item"><span class="ledger-name">Brand Teal</span><span class="ledger-code">#91AFB3</span></div>
+          <div class="ledger-item"><span class="ledger-name">Logo Navy</span><span class="ledger-code">#1B365D</span></div>
+          <div class="ledger-item"><span class="ledger-name">Logo Teal</span><span class="ledger-code">#3D5255</span></div>
+          <div class="ledger-item"><span class="ledger-name">Logo Ink</span><span class="ledger-code">#1A1C20</span></div>
+          <div class="ledger-item"><span class="ledger-name">Void Dark</span><span class="ledger-code">#0A0A0A</span></div>
+          <div class="ledger-item"><span class="ledger-name">Text Main</span><span class="ledger-code">#EEEEEE</span></div>
+        </div>
+
+        <div class="ledger-group">
+          <h3>Supporting OTW</h3>
+          <div class="ledger-item"><span class="ledger-name">Brand Gold</span><span class="ledger-code">#D9C08C</span></div>
+          <div class="ledger-item"><span class="ledger-name">Amethyst</span><span class="ledger-code">#9B59B6</span></div>
+          <div class="ledger-item"><span class="ledger-name">Rose Gold</span><span class="ledger-code">#E0BFB8</span></div>
+          <div class="ledger-item"><span class="ledger-name">Brand Pink</span><span class="ledger-code">#FF69B4</span></div>
+          <div class="ledger-item"><span class="ledger-name">Signal Green</span><span class="ledger-code">#4BE36E</span></div>
+          <div class="ledger-item"><span class="ledger-name">Index Blue</span><span class="ledger-code">#77A3FF</span></div>
+          <div class="ledger-item"><span class="ledger-name">Index Teal</span><span class="ledger-code">#9EC5C1</span></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const root = document.documentElement;
+    const heroLogo = document.getElementById('heroLogo');
+    const themeButtons = Array.from(document.querySelectorAll('.theme-btn'));
+
+    function applyTheme(theme) {
+      root.dataset.theme = theme;
+      heroLogo.src = theme === 'light' ? 'Images/Equal_dark.svg' : 'Images/Equal.svg';
+      themeButtons.forEach((button) => {
+        button.classList.toggle('is-active', button.dataset.themeTarget === theme);
+      });
+      localStorage.setItem('otw_palette_theme', theme);
+    }
+
+    const savedTheme = localStorage.getItem('otw_palette_theme') || 'dark';
+    applyTheme(savedTheme);
+
+    themeButtons.forEach((button) => {
+      button.addEventListener('click', () => applyTheme(button.dataset.themeTarget));
+    });
+  </script>
+</body>
+
+</html>
