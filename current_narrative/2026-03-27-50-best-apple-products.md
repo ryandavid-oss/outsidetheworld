@@ -5,7 +5,7 @@ A wonderful bit of nostalgia-bait posted to The Verge today.  And they did it in
 
 [Go ahead and check it out here.](https://www.theverge.com/cs/tech/900477/apple-50-anniversary-rank-products)
 
-Don't be surprised if you get paralyzed between choices like I did with this one. How on earth do you pick between such astonishing technologies that changed the way I computed forever?
+Don't be surprised if you get paralyzed between choices like I did with this one. How on earth could I pick between such astonishing technologies that changed the way I computed forever?
 
 <figure style="text-align: center;">
   <img src="Images/Blog/verge_shot.png" alt="50 Best Apple Products">
