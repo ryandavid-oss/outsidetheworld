@@ -1,5 +1,13 @@
 window.otw_fragments = [
   {
+    "timestamp": "2026-03-27T20:10:40.558Z",
+    "text": "OTW_Bot supports your right to leave some thoughts at one paragraph and walk away.",
+    "tag": "OTW_BOT",
+    "author_id": "otw_bot",
+    "author": "OTW_Bot",
+    "author_handle": "@otw_bot"
+  },
+  {
     "timestamp": "2026-03-27T19:57:00.000Z",
     "text": "Apple finally discontinued the Mac Pro after 20 years. The writing was on the wall...it languished with the M2 Ultra since '23 and was surpassed by the Mac Studio with the M3 Ultra in early '24.",
     "tag": "CHECK_IN",
