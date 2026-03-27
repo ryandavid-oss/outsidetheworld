@@ -937,6 +937,30 @@
             transition: 0.3s;
         }
 
+        .archive-card .card-title {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .archive-card .card-new-tag {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 18px;
+            padding: 2px 7px;
+            border: 1px solid rgba(160, 190, 245, 0.32);
+            background: rgba(160, 190, 245, 0.08);
+            color: #A0BEF5;
+            font-family: var(--font-code);
+            font-size: 0.52rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            line-height: 1;
+            text-shadow: 0 0 10px rgba(160, 190, 245, 0.18);
+        }
+
         .archive-card p {
             font-size: 0.7rem;
             color: #919894;
@@ -1667,17 +1691,20 @@
             }
 
             .header-right {
+                display: flex;
+                flex-direction: column;
                 align-items: center;
                 text-align: center;
                 width: 100%;
             }
 
             .interface-header .nav-logo {
-                width: 140px;
+                width: 88px;
                 margin: 0 auto 5px;
             }
 
             .weather-uplink.live-signal {
+                order: 2;
                 align-self: center;
                 justify-content: center;
                 max-width: min(94vw, 520px);
@@ -1713,25 +1740,25 @@
             }
 
             .top-quadrant-text {
-                font-size: 1.05rem !important;
-                letter-spacing: 1px !important;
-                line-height: 1.4 !important;
-                margin: 0 !important;
+                order: 1;
+                font-size: 0.86rem !important;
+                letter-spacing: 0.55px !important;
+                line-height: 1.15 !important;
+                margin: 0 0 4px 0 !important;
                 width: 100%;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
+                display: block;
                 text-align: center;
                 background: none !important;
                 -webkit-text-fill-color: #fff !important;
                 color: #fff !important;
+                white-space: nowrap;
             }
 
             .top-quadrant-text .mobile-break {
-                display: block;
-                width: fit-content;
-                margin: 4px auto 0 !important;
-                font-weight: 900;
+                display: inline;
+                width: auto;
+                margin: 0 !important;
+                font-weight: inherit;
             }
 
             .mobile-jump-strip {
@@ -1975,7 +2002,7 @@
 
             <a href="drift_poetry.html" class="archive-card light-blue-card">
                 <div class="card-beacon" aria-hidden="true"></div>
-                <h3>THE DRIFT</h3>
+                <h3 class="card-title">THE DRIFT <span class="card-new-tag">NEW</span></h3>
                 <p>NEW PUBLISHED POETRY</p>
             </a>
 
