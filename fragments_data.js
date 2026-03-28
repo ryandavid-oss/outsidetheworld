@@ -1,5 +1,14 @@
 window.otw_fragments = [
   {
+    "timestamp": "2026-03-28T19:42:41.502Z",
+    "text": "But I think we all just need to see how freaking cute this little Japanese girl is…",
+    "tag": "FRAGMENT",
+    "author_id": "emily",
+    "author": "Emily",
+    "author_handle": "@word.person",
+    "image": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/fragments/emily/2026-03-28t19-42-41-502z.jpg"
+  },
+  {
     "timestamp": "2026-03-28T19:17:00.000Z",
     "text": "Definitely not me at Costco.",
     "tag": "CHECK_IN",
