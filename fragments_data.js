@@ -1,5 +1,14 @@
 window.otw_fragments = [
   {
+    "timestamp": "2026-03-28T19:17:00.000Z",
+    "text": "Definitely not me at Costco.",
+    "tag": "CHECK_IN",
+    "author_id": "ryan",
+    "author": "The_RyanDavid",
+    "author_handle": "@outsidetheworld",
+    "image": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/fragments/ryan/2026-03-28t19-17-00-000z.jpg"
+  },
+  {
     "timestamp": "2026-03-28T15:36:00.000Z",
     "text": "It has a pulse.",
     "tag": "FRAGMENT",
