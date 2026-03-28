@@ -1,5 +1,13 @@
 window.otw_fragments = [
   {
+    "timestamp": "2026-03-28T06:07:00.000Z",
+    "text": "Let's see if we can bring this dream to life, shall we?",
+    "tag": "POSITIVITY",
+    "author_id": "ryan",
+    "author": "The_RyanDavid",
+    "author_handle": "@outsidetheworld"
+  },
+  {
     "timestamp": "2026-03-28T01:40:00.000Z",
     "text": "Always want.",
     "tag": "REGRET",
