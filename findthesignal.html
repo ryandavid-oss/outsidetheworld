@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Win a Shirt. | Outside The World</title>
-  <meta name="description" content="Enter for a chance to win one of three Purple Frost giveaway shirts from Outside The World." />
+  <title>Find the Signal | Outside The World</title>
+  <meta name="description" content="The Find the Signal giveaway has ended. Stay tuned for more from Outside The World." />
 
   <style>
     :root {
@@ -632,22 +632,22 @@
 
     <section class="hero">
       <div class="panel hero-copy">
-        <span class="eyebrow">2026_GIVEAWAY</span>
-        <h1>Win a Shirt.</h1>
+        <span class="eyebrow">SIGNAL_ARCHIVE</span>
+        <h1>The contest is over.</h1>
         <p class="lede">
-          Enter your name and email for a chance to win one of three limited-edition
-          <span class="accent">Purple Frost</span> shirts. If you want a little context first,
-          you can still explore <span class="accent">Outside The World</span> before you enter.
+          The <span class="accent">Find the Signal</span> giveaway has now closed. Thank you to everyone
+          who wandered through, looked closely, and entered. Stay tuned. There will be more
+          from <span class="accent">Outside The World</span>.
         </p>
 
         <div class="cta-stack">
           <div class="cta-row">
-            <a href="#entry" class="btn btn-primary">Jump to Entry Form</a>
-            <a href="image_of_the_day.html" class="btn btn-text">Want to look around first? Open Image of the Day</a>
+            <a href="image_of_the_day.html" class="btn btn-primary">Open Image of the Day</a>
+            <a href="personal.html" class="btn btn-text">Return to the site</a>
           </div>
 
           <p class="sub-note">
-            No purchase necessary. Open to eligible U.S. residents in the 48 contiguous states. Ends March 27, 2026.
+            The March 2026 giveaway period has ended. Keep an eye on OTW for whatever strange little thing comes next.
           </p>
         </div>
       </div>
@@ -672,15 +672,15 @@
 
     <section class="panel form-panel" id="entry">
       <div class="form-copy">
-        <h2>Enter the Giveaway</h2>
-        <p>Keep it simple. Enter your name and email and you’re in for a chance at one of the three giveaway shirts.</p>
+        <h2>Giveaway Closed</h2>
+        <p>This entry form is no longer accepting submissions, but the signal is still out there. Stay tuned for future drops, experiments, and small strange invitations.</p>
 
         <div class="manifest">
-          <div><b>Entry closes</b><span>March 27, 2026</span></div>
-          <div><b>Winners</b><span>3 random winners</span></div>
-          <div><b>Eligibility</b><span>U.S. residents in the 48 contiguous states</span></div>
+          <div><b>Status</b><span>Closed</span></div>
+          <div><b>Signal window</b><span>March 13 - March 27, 2026</span></div>
           <div><b>Prize</b><span>Purple Frost giveaway shirt</span></div>
-          <div><b>Shipping</b><span>Free U.S. shipping</span></div>
+          <div><b>Next</b><span>More to come</span></div>
+          <div><b>Meanwhile</b><span>Keep exploring OTW</span></div>
         </div>
 
         <div class="success-state" id="successState">
@@ -697,25 +697,18 @@
       </div>
 
       <div>
-        <form id="signalForm" action="https://formspree.io/f/mbdzgndj" method="POST" novalidate>
-          <input type="hidden" name="source" value="find-the-signal-giveaway" />
-          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
-
-          <div class="field">
-            <label for="name">Full Name</label>
-            <input id="name" type="text" name="name" placeholder="Your name" required />
+        <div class="success-state show" id="closedState" style="margin-top: 0;">
+          <div class="success-kicker">// CONTEST_COMPLETE</div>
+          <h3>This round has ended.</h3>
+          <p>
+            The entry form is closed for now. Thank you for spending a little time with the signal.
+            Stay tuned for more to come.
+          </p>
+          <div class="success-actions">
+            <a href="image_of_the_day.html" class="btn btn-primary">Open Image of the Day</a>
+            <a href="personal.html" class="btn btn-secondary">Return to Site</a>
           </div>
-
-          <div class="field">
-            <label for="email">Email address</label>
-            <input id="email" type="email" name="email" placeholder="explorer@domain.com" required />
-          </div>
-
-          <div class="form-actions">
-            <button id="submitBtn" type="submit" class="btn btn-primary" style="width: 100%;">Submit Entry</button>
-            <div class="submit-status" id="submitStatus" aria-live="polite"></div>
-          </div>
-        </form>
+        </div>
       </div>
     </section>
 
@@ -736,7 +729,7 @@
     </section>
 
     <footer class="footer">
-      OUTSIDE THE WORLD // GIVEAWAY ENTRY PORTAL
+      OUTSIDE THE WORLD // SIGNAL ARCHIVE
     </footer>
   </div>
 
@@ -764,7 +757,8 @@
     const submitBtn = document.getElementById('submitBtn');
     const submitStatus = document.getElementById('submitStatus');
     const successState = document.getElementById('successState');
-    form.addEventListener('submit', async function (e) {
+    if (form && submitBtn && submitStatus && successState) {
+      form.addEventListener('submit', async function (e) {
       e.preventDefault();
 
       submitStatus.textContent = '';
@@ -814,7 +808,8 @@
         submitBtn.textContent = 'Submit Entry';
         submitBtn.style.opacity = '1';
       }
-    });
+      });
+    }
   </script>
 </body>
 </html>
