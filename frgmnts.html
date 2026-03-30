@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>frgm&lt;nts | The Anti-Social Media</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
@@ -11,7 +11,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Fira+Code:wght@300;400;700&family=IBM+Plex+Serif:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Fira+Code:wght@400;700&family=IBM+Plex+Serif:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap"
         rel="stylesheet">
 
     <script>
@@ -21,7 +21,6 @@
                     colors: {
                         voidDark: '#0A0A0A',
                         logoInk: '#1A1C20',
-                        textMain: '#EEEEEE',
                         brandBlue: '#6395EE',
                         amethyst: '#9B59B6',
                         roseGold: '#E0BFB8',
@@ -43,12 +42,19 @@
             color: #EEEEEE;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
+            /* Prevents overscroll bounce on mobile */
+            fixed: overflow;
+        }
+
+        /* Uses Dynamic Viewport Height for mobile browser UI consistency */
+        .h-screen-dvh {
+            height: 100dvh;
         }
 
         .liquid-glass {
-            background: rgba(26, 28, 32, 0.4);
-            backdrop-filter: blur(40px);
-            -webkit-backdrop-filter: blur(40px);
+            background: rgba(26, 28, 32, 0.6);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
             border: 1px solid rgba(224, 191, 184, 0.1);
         }
 
@@ -56,7 +62,6 @@
             display: none;
         }
 
-        /* The Pernicious Glow */
         .pernicious {
             color: #9B59B6;
             text-shadow: 0 0 15px rgba(155, 89, 182, 0.7), 0 0 30px rgba(155, 89, 182, 0.4);
@@ -74,10 +79,6 @@
                 opacity: 0.8;
                 text-shadow: 0 0 25px rgba(155, 89, 182, 0.9);
             }
-
-            52% {
-                opacity: 1;
-            }
         }
 
         .text-glow-blue {
@@ -92,39 +93,40 @@
 
 <body class="font-sans">
 
-    <div id="scroll-indicator" class="fixed bottom-10 left-1/2 -translate-x-1/2 z-40 flex flex-col items-center gap-2">
-        <p class="font-mono text-[10px] tracking-[0.3em] text-roseGold/60 uppercase">Scroll</p>
-        <svg class="w-5 h-5 text-roseGold/40 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <div id="scroll-indicator" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 flex flex-col items-center gap-1">
+        <p class="font-mono text-[8px] tracking-[0.3em] text-roseGold/60 uppercase">Scroll</p>
+        <svg class="w-4 h-4 text-roseGold/40 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
         </svg>
     </div>
 
     <section id="manifesto-container" class="relative w-full">
-        <div class="sticky-wrapper h-screen w-full sticky top-0 overflow-hidden flex items-center justify-center">
+        <div class="sticky-wrapper h-screen-dvh w-full sticky top-0 overflow-hidden flex items-center justify-center">
 
-            <div class="beat absolute inset-0 flex items-center justify-center px-8 md:px-24 opacity-0">
-                <div class="flex flex-col md:flex-row items-center justify-center gap-12 max-w-7xl w-full">
+            <div class="beat absolute inset-0 flex items-center justify-center px-6 md:px-24 opacity-0">
+                <div class="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-12 max-w-7xl w-full">
                     <div class="text-left flex-1">
-                        <p class="serif text-3xl md:text-6xl leading-tight">
+                        <p class="serif text-2xl md:text-6xl leading-tight">
                             Social Media was slowly <br><span class="text-brandBlue text-glow-blue font-black">poisoning
                                 me.</span>
                         </p>
                     </div>
                     <div class="flex-1 flex justify-center md:justify-end">
                         <img src="Images/assets/IG_FB_melting.png" alt="Poisoning"
-                            class="w-full max-w-sm md:max-w-md h-auto object-contain">
+                            class="w-2/3 md:w-full max-w-[280px] md:max-w-md h-auto object-contain">
                     </div>
                 </div>
             </div>
 
-            <div class="beat absolute inset-0 flex items-center justify-center px-8 md:px-24 opacity-0">
-                <div class="flex flex-col md:flex-row items-center justify-center gap-12 max-w-7xl w-full">
+            <div class="beat absolute inset-0 flex items-center justify-center px-6 md:px-24 opacity-0">
+                <div
+                    class="flex flex-col-reverse md:flex-row items-center justify-center gap-6 md:gap-12 max-w-7xl w-full">
                     <div class="flex-1 flex justify-center md:justify-start">
                         <img src="Images/assets/IG_Hug2.png" alt="Necessary"
-                            class="w-full max-w-sm md:max-w-md h-auto object-contain drop-shadow-[0_0_20px_rgba(224,191,184,0.2)]">
+                            class="w-2/3 md:w-full max-w-[280px] md:max-w-md h-auto object-contain drop-shadow-[0_0_20px_rgba(224,191,184,0.2)]">
                     </div>
                     <div class="text-left md:text-right flex-1">
-                        <p class="serif text-3xl md:text-6xl leading-tight">
+                        <p class="serif text-2xl md:text-6xl leading-tight">
                             But sometimes, <br><span class="text-roseGold font-black uppercase tracking-tight">it’s
                                 necessary.</span>
                         </p>
@@ -132,29 +134,29 @@
                 </div>
             </div>
 
-            <div class="beat absolute inset-0 flex items-center justify-center px-8 opacity-0">
-                <p class="serif text-3xl md:text-5xl text-center leading-relaxed max-w-5xl font-light">
-                    Instead of succumbing to the <span
-                        class="pernicious font-mono font-bold uppercase tracking-widest">algorithm</span>...<br>I asked
-                    myself a question.
+            <div class="beat absolute inset-0 flex items-center justify-center px-6 opacity-0">
+                <p class="serif text-xl md:text-5xl text-center leading-relaxed max-w-5xl font-light">
+                    Instead of succumbing to the <br class="md:hidden">
+                    <span class="pernicious font-mono font-bold uppercase tracking-widest">algorithm</span>...<br>I
+                    asked myself a question.
                 </p>
             </div>
 
-            <div class="beat absolute inset-0 flex items-center justify-center px-8 opacity-0">
-                <p class="serif text-3xl md:text-6xl text-center leading-tight max-w-4xl">
-                    "What do I <span class="text-roseGold text-glow-rose font-black italic">like</span> about social
-                    media?"<br>I ran with that.
+            <div class="beat absolute inset-0 flex items-center justify-center px-6 opacity-0">
+                <p class="serif text-2xl md:text-6xl text-center leading-tight max-w-4xl">
+                    What did I <span class="text-roseGold text-glow-rose font-black italic">love</span> about social
+                    media?<br>And I ran with that.
                 </p>
             </div>
 
-            <div class="beat absolute inset-0 flex items-center justify-center px-8 opacity-0">
-                <p class="serif text-3xl md:text-6xl text-center leading-tight max-w-4xl font-medium">
-                    I created my own platform.
+            <div class="beat absolute inset-0 flex items-center justify-center px-6 opacity-0">
+                <p class="serif text-2xl md:text-6xl text-center leading-tight max-w-4xl font-medium">
+                    And I created my own platform.
                 </p>
             </div>
 
-            <div class="beat absolute inset-0 flex items-center justify-center px-8 opacity-0">
-                <p class="serif text-5xl md:text-8xl text-center font-light tracking-[0.2em] text-roseGold/80">
+            <div class="beat absolute inset-0 flex items-center justify-center px-6 opacity-0">
+                <p class="serif text-4xl md:text-8xl text-center font-light tracking-[0.2em] text-roseGold/80">
                     frgm&lt;nts&trade;
                 </p>
             </div>
@@ -163,68 +165,77 @@
     </section>
 
     <section id="hero" class="relative h-[200vh] w-full">
-        <div class="sticky top-0 h-screen w-full flex flex-col items-center justify-center bg-voidDark">
-            <h1 id="hero-text" class="serif text-6xl md:text-9xl font-black tracking-tighter text-center opacity-0">
+        <div class="sticky top-0 h-screen-dvh w-full flex flex-col items-center justify-center bg-voidDark">
+            <h1 id="hero-text"
+                class="serif text-4xl md:text-9xl font-black tracking-tighter text-center opacity-0 leading-none">
                 THE ANTI-SOCIAL MEDIA.
             </h1>
-            <p id="sub-hero" class="serif text-roseGold text-xl md:text-4xl mt-12 opacity-0 font-light italic">
+            <p id="sub-hero"
+                class="serif text-roseGold text-lg md:text-4xl mt-6 md:mt-12 opacity-0 font-light italic text-center px-6">
                 Love your neighbor. Not his vacation.
             </p>
         </div>
     </section>
 
     <section id="contrast" class="relative h-[300vh] w-full">
-        <div class="sticky top-0 h-screen w-full flex flex-col items-center justify-center px-6">
-            <div id="anxiety-text" class="serif text-5xl md:text-8xl text-center leading-tight opacity-0">
-                Be social. <span class="text-brandBlue text-glow-blue italic font-black">Not anxious.</span>
+        <div class="sticky top-0 h-screen-dvh w-full flex flex-col items-center justify-center px-6">
+            <div id="anxiety-text" class="serif text-3xl md:text-8xl text-center leading-tight opacity-0">
+                Be social. <br class="md:hidden"><span class="text-brandBlue text-glow-blue italic font-black">Not
+                    anxious.</span>
             </div>
-            <div id="depressed-text" class="serif text-5xl md:text-8xl text-center leading-tight mt-16 opacity-0">
-                Get connected. <span class="text-brandBlue text-glow-blue italic font-black">Not depressed.</span>
+            <div id="depressed-text"
+                class="serif text-3xl md:text-8xl text-center leading-tight mt-12 md:mt-16 opacity-0">
+                Get connected. <br class="md:hidden"><span class="text-brandBlue text-glow-blue italic font-black">Not
+                    depressed.</span>
             </div>
         </div>
     </section>
 
     <section id="mission" class="relative h-[150vh] w-full">
-        <div class="sticky top-0 h-screen w-full flex flex-col items-center justify-center px-6">
+        <div class="sticky top-0 h-screen-dvh w-full flex flex-col items-center justify-center px-6">
             <h2 id="era-text"
-                class="serif text-5xl md:text-9xl text-center font-black uppercase tracking-tighter text-roseGold text-glow-rose opacity-0">
+                class="serif text-3xl md:text-9xl text-center font-black uppercase tracking-tighter text-roseGold text-glow-rose opacity-0 leading-none">
                 SOCIAL CONNECTION <br>FOR A FRAGMENTED ERA.
             </h2>
         </div>
     </section>
 
     <section id="ledge-reveal" class="relative h-[200vh] w-full">
-        <div class="sticky top-0 h-screen w-full flex items-center justify-center p-6">
+        <div class="sticky top-0 h-screen-dvh w-full flex items-center justify-center p-4 md:p-6">
             <div id="ledge-card"
-                class="liquid-glass w-full max-w-6xl rounded-[40px] p-10 md:p-20 shadow-2xl translate-y-20 opacity-0">
-                <div class="grid md:grid-cols-2 gap-16 items-center">
-                    <div>
-                        <h2 class="serif text-5xl md:text-6xl mb-8 text-roseGold font-black">Step onto the Ledge.</h2>
-                        <p class="text-xl text-gray-400 leading-relaxed mb-10 font-light">
-                            We don't need another algorithm. We need a table. <br><br>
-                            frgm&lt;nts is a narrow, quiet place for the signals that actually matter.
+                class="liquid-glass w-full max-w-6xl rounded-[32px] md:rounded-[40px] p-6 md:p-20 shadow-2xl translate-y-10 opacity-0">
+                <div class="flex flex-row items-center gap-4 md:gap-16">
+
+                    <div class="flex-[1.5] md:flex-1">
+                        <h2 class="serif text-2xl md:text-6xl mb-4 md:mb-8 text-roseGold font-black leading-tight">Step
+                            onto the Ledge.</h2>
+                        <p
+                            class="text-[10px] md:text-xl text-gray-400 leading-relaxed mb-6 md:mb-10 font-light hidden sm:block">
+                            We don't need another algorithm. We need a table.
                         </p>
-                        <div class="flex flex-col gap-4 max-w-sm">
-                            <input type="email" placeholder="Email for the Waitlist"
-                                class="bg-white/5 border border-white/10 rounded-full px-6 py-4 focus:outline-none focus:border-roseGold/50 transition-all text-sm font-sans">
+                        <div class="flex flex-col gap-2 md:gap-4 w-full">
+                            <input type="email" placeholder="Email"
+                                class="bg-white/5 border border-white/10 rounded-full px-4 py-2 md:px-6 md:py-4 focus:outline-none focus:border-roseGold/50 text-[10px] md:text-sm">
                             <button
-                                class="bg-roseGold text-voidDark font-bold rounded-full px-8 py-4 uppercase tracking-widest text-[10px] hover:bg-white transition-colors font-sans">
-                                Inquire about a Seat
+                                class="bg-roseGold text-voidDark font-bold rounded-full px-4 py-2 md:px-8 md:py-4 uppercase tracking-widest text-[8px] md:text-[10px] hover:bg-white transition-colors">
+                                Inquire
                             </button>
                         </div>
                     </div>
-                    <div class="flex justify-center items-center">
-                        <img src="Images/assets/app_screen.png" alt="frgm<nts App"
-                            class="w-full max-w-sm h-auto rounded-[32px] shadow-2xl border border-white/10">
+
+                    <div class="flex-1 flex justify-center items-center">
+                        <img src="Images/assets/app_screen.png" alt="App"
+                            class="w-full h-auto max-h-[40vh] md:max-h-full object-contain rounded-[16px] md:rounded-[32px] shadow-2xl border border-white/10">
                     </div>
+
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="py-20 px-6 bg-voidDark border-t border-white/5">
+    <footer class="py-12 px-6 bg-voidDark border-t border-white/5">
         <div class="max-w-4xl mx-auto flex flex-col items-center">
-            <p class="font-mono text-[10px] text-gray-500 leading-loose tracking-[0.2em] text-center uppercase">
+            <p class="font-mono text-[8px] text-gray-500 leading-loose tracking-[0.2em] text-center uppercase">
                 © 2026 Outside the World is New, LLC. <br>
                 frgm&lt;nts™ and the frgm&lt;nts™ logo are trademarks of <br>
                 Outside the World is New, LLC.
@@ -247,14 +258,14 @@
 
         const beats = gsap.utils.toArray(".beat");
         beats.forEach((beat, i) => {
-            manifestoTl.to(beat, { opacity: 1, y: -20, duration: 1 });
+            manifestoTl.to(beat, { opacity: 1, y: -10, duration: 1 });
             manifestoTl.to(beat, { opacity: 1, duration: 0.5 });
             if (i < beats.length - 1) {
-                manifestoTl.to(beat, { opacity: 0, y: -60, filter: "blur(20px)", duration: 1 });
+                manifestoTl.to(beat, { opacity: 0, y: -40, filter: "blur(15px)", duration: 1 });
             }
         });
 
-        // --- BRAND REVEAL ---
+        // --- THE BRAND REVEAL ---
         const heroTl = gsap.timeline({
             scrollTrigger: {
                 trigger: "#hero",
@@ -263,11 +274,11 @@
                 scrub: true,
             }
         });
-        heroTl.to("#hero-text", { opacity: 1, scale: 1, duration: 2 })
-            .to("#sub-hero", { opacity: 1, y: -20, duration: 1 }, "-=1")
+        heroTl.to("#hero-text", { opacity: 1, duration: 2 })
+            .to("#sub-hero", { opacity: 1, y: -10, duration: 1 }, "-=1")
             .to("#scroll-indicator", { opacity: 0, duration: 0.5 }, "0");
 
-        // --- CONTRAST (Fixed Ghosting) ---
+        // --- CONTRAST (Anti-Ghosting Fix) ---
         const contrastTl = gsap.timeline({
             scrollTrigger: {
                 trigger: "#contrast",
@@ -276,13 +287,13 @@
                 scrub: 1,
             }
         });
-        contrastTl.to("#anxiety-text", { opacity: 1, y: -20, duration: 2 })
-            .to("#anxiety-text", { opacity: 0, y: -100, filter: "blur(20px)", duration: 2 }) // Fully clears out
-            .to("#depressed-text", { opacity: 1, y: -20, duration: 2 });
+        contrastTl.to("#anxiety-text", { opacity: 1, y: -10, duration: 2 })
+            .to("#anxiety-text", { opacity: 0, y: -80, filter: "blur(20px)", duration: 2 })
+            .to("#depressed-text", { opacity: 1, y: -10, duration: 2 });
 
         // --- MISSION ---
         gsap.to("#era-text", {
-            opacity: 1, y: -20,
+            opacity: 1, y: -10,
             scrollTrigger: {
                 trigger: "#mission",
                 start: "top center",
@@ -296,12 +307,13 @@
             opacity: 1, y: 0,
             scrollTrigger: {
                 trigger: "#ledge-reveal",
-                start: "top center",
+                start: "top 80%",
                 end: "top top",
                 scrub: 1
             }
         });
 
+        // Mobile Background Finish
         gsap.to("body", {
             backgroundColor: "#1A1C20",
             scrollTrigger: {
