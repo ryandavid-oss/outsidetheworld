@@ -1,5 +1,14 @@
 window.otw_fragments = [
   {
+    "timestamp": "2026-03-31T21:59:03.735Z",
+    "text": "Midday power boost.",
+    "tag": "FRAGMENT",
+    "author_id": "emily",
+    "author": "Emily",
+    "author_handle": "@word.person",
+    "image": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/fragments/emily/2026-03-31t21-59-03-735z.jpg"
+  },
+  {
     "timestamp": "2026-03-31T02:14:59.157Z",
     "text": "I think everyone here is so cool",
     "tag": "FRAGMENT",
