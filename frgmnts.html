@@ -162,6 +162,122 @@
             color: rgba(224, 191, 184, 0.62);
         }
 
+        .manifesto-text-wrap {
+            width: 100%;
+            max-width: 70rem;
+            margin-inline: auto;
+            text-align: center;
+            padding-inline: 1.5rem;
+        }
+
+        .manifesto-copy {
+            max-width: 56rem;
+            margin-inline: auto;
+            text-wrap: balance;
+        }
+
+        .manifesto-copy-wide {
+            max-width: 68rem;
+        }
+
+        .manifesto-copy-tight {
+            max-width: 42rem;
+        }
+
+        .manifesto-brand {
+            line-height: 1.08;
+        }
+
+        .prelude {
+            position: relative;
+            min-height: 100dvh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem 1.5rem 6rem;
+            background:
+                radial-gradient(circle at 50% 38%, rgba(224, 191, 184, 0.1), rgba(224, 191, 184, 0) 36%),
+                #0A0A0A;
+        }
+
+        .prelude-title {
+            max-width: 48rem;
+            text-align: center;
+            text-wrap: balance;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            left: 50%;
+            bottom: 1.4rem;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.55rem;
+        }
+
+        .scroll-indicator-label {
+            font-family: "Fira Code", monospace;
+            font-size: 0.82rem;
+            letter-spacing: 0.34em;
+            text-transform: uppercase;
+            color: rgba(224, 191, 184, 0.9);
+            font-weight: 700;
+        }
+
+        .scroll-indicator-line {
+            width: 1px;
+            height: 3.1rem;
+            background: linear-gradient(180deg, rgba(224, 191, 184, 0.08), rgba(224, 191, 184, 0.75));
+        }
+
+        .scroll-indicator-arrow {
+            width: 1.25rem;
+            height: 1.25rem;
+            color: rgba(224, 191, 184, 0.92);
+            animation: preludePulse 1.8s ease-in-out infinite;
+        }
+
+        .signal-mark {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.85rem;
+            font-family: "Fira Code", monospace;
+            font-size: 0.8rem;
+            letter-spacing: 0.32em;
+            text-transform: uppercase;
+            color: rgba(224, 191, 184, 0.72);
+        }
+
+        .signal-mark::before,
+        .signal-mark::after {
+            content: "";
+            width: 4rem;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(224, 191, 184, 0), rgba(224, 191, 184, 0.45), rgba(224, 191, 184, 0));
+        }
+
+        .promise-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 0.75rem;
+            margin-top: 1.25rem;
+            margin-bottom: 1.75rem;
+        }
+
+        .promise-pill {
+            border: 1px solid rgba(224, 191, 184, 0.14);
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 999px;
+            padding: 0.9rem 1rem;
+            font-size: 0.72rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: rgba(238, 238, 238, 0.92);
+            text-align: center;
+        }
+
         .hero-shell {
             position: relative;
         }
@@ -173,6 +289,19 @@
             height: 1px;
             background: linear-gradient(90deg, rgba(224, 191, 184, 0), rgba(224, 191, 184, 0.32), rgba(224, 191, 184, 0));
             pointer-events: none;
+        }
+
+        @keyframes preludePulse {
+            0%,
+            100% {
+                transform: translateY(0);
+                opacity: 0.85;
+            }
+
+            50% {
+                transform: translateY(8px);
+                opacity: 1;
+            }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -243,28 +372,58 @@
                 width: 20rem;
                 height: 20rem;
             }
+
+            .signal-mark {
+                gap: 0.6rem;
+                font-size: 0.62rem;
+                letter-spacing: 0.24em;
+            }
+
+            .signal-mark::before,
+            .signal-mark::after {
+                width: 2.4rem;
+            }
+
+            .promise-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .manifesto-text-wrap {
+                padding-inline: 1rem;
+            }
+
+            .scroll-indicator-label {
+                font-size: 0.72rem;
+                letter-spacing: 0.28em;
+            }
         }
     </style>
 </head>
 
 <body class="font-sans">
 
-    <div id="scroll-indicator" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 flex flex-col items-center gap-1">
-        <p class="font-mono text-[8px] tracking-[0.3em] text-roseGold/60 uppercase">Scroll</p>
-        <svg class="w-4 h-4 text-roseGold/40 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-        </svg>
-    </div>
+    <section class="prelude" aria-label="Manifesto opening">
+        <div class="prelude-title">
+            <p class="serif text-5xl md:text-8xl leading-none font-black tracking-tight">Let&apos;s Face It.</p>
+        </div>
+        <div id="scroll-indicator" class="scroll-indicator" aria-hidden="true">
+            <p class="scroll-indicator-label">Scroll</p>
+            <div class="scroll-indicator-line"></div>
+            <svg class="scroll-indicator-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M6 10l6 7 6-7"></path>
+            </svg>
+        </div>
+    </section>
 
     <section id="manifesto-container" class="relative w-full">
         <div class="sticky-wrapper h-screen-dvh w-full sticky top-0 overflow-hidden flex items-center justify-center">
 
             <div class="beat absolute inset-0 flex items-center justify-center px-6 md:px-24 opacity-0">
                 <div class="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-12 max-w-7xl w-full">
-                    <div class="text-left flex-1">
-                        <p class="serif text-2xl md:text-6xl leading-tight">
-                            Social Media was slowly <br><span class="text-brandBlue text-glow-blue font-black">poisoning
-                                me.</span>
+                    <div class="text-center md:text-left flex-1">
+                        <p class="serif text-2xl md:text-6xl leading-[1.08] text-balance">
+                            Social Media is slowly
+                            <span class="block text-brandBlue text-glow-blue font-black">taking away our peace.</span>
                         </p>
                     </div>
                     <div class="flex-1 flex justify-center md:justify-end">
@@ -276,6 +435,15 @@
             </div>
 
             <div class="beat absolute inset-0 flex items-center justify-center px-6 md:px-24 opacity-0">
+                <div class="manifesto-text-wrap">
+                    <p class="manifesto-copy serif text-2xl md:text-6xl text-center leading-[1.12]">
+                        We try to distance ourselves.
+                        <span class="block mt-3 md:mt-5">We quit, only to come back.</span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="beat absolute inset-0 flex items-center justify-center px-6 md:px-24 opacity-0">
                 <div
                     class="flex flex-col-reverse md:flex-row items-center justify-center gap-6 md:gap-12 max-w-7xl w-full">
                     <div class="flex-1 flex justify-center md:justify-start">
@@ -283,43 +451,73 @@
                             loading="eager" decoding="async"
                             class="w-2/3 md:w-full max-w-[280px] md:max-w-md h-auto object-contain drop-shadow-[0_0_20px_rgba(224,191,184,0.2)]">
                     </div>
-                    <div class="text-left md:text-right flex-1">
-                        <p class="serif text-2xl md:text-6xl leading-tight">
-                            But sometimes, <br><span class="text-roseGold font-black uppercase tracking-tight">it’s
-                                necessary.</span>
+                    <div class="text-center md:text-right flex-1">
+                        <p class="serif text-2xl md:text-6xl leading-[1.08] text-balance">
+                            We are human.
+                            <span class="block text-roseGold font-black uppercase tracking-tight mt-2 md:mt-3">We crave connection.</span>
                         </p>
                     </div>
                 </div>
             </div>
 
             <div class="beat absolute inset-0 flex items-center justify-center px-6 opacity-0">
-                <p class="serif text-xl md:text-5xl text-center leading-relaxed max-w-5xl font-light">
-                    Instead of succumbing to the <br class="md:hidden">
-                    <span class="pernicious font-mono font-bold uppercase tracking-widest">algorithm</span>...<br>I
-                    asked myself a question.
-                </p>
+                <div class="manifesto-text-wrap">
+                    <p class="manifesto-copy serif text-2xl md:text-6xl text-center leading-[1.12] font-light">
+                        I felt this deeply.
+                        <span class="block mt-3 md:mt-5">So, I asked myself:</span>
+                    </p>
+                </div>
             </div>
 
             <div class="beat absolute inset-0 flex items-center justify-center px-6 opacity-0">
-                <p class="serif text-2xl md:text-6xl text-center leading-tight max-w-4xl">
-                    What do I <span class="text-roseGold text-glow-rose font-black italic">love</span> about social
-                    media?<br>And I ran with that.
-                </p>
+                <div class="manifesto-text-wrap">
+                    <p class="manifesto-copy manifesto-copy-tight serif text-2xl md:text-6xl text-center leading-[1.12]">
+                        What do I want <span class="text-roseGold text-glow-rose font-black italic">Social Media</span> to be?
+                    </p>
+                </div>
             </div>
 
             <div class="beat absolute inset-0 flex items-center justify-center px-6 opacity-0">
-                <p class="serif text-2xl md:text-6xl text-center leading-tight max-w-4xl font-medium">
-                    I created my own platform.
-                </p>
+                <div class="manifesto-text-wrap">
+                    <p class="manifesto-copy manifesto-copy-wide serif text-xl md:text-5xl text-center leading-[1.22] font-light">
+                        I knew in my heart that online connection is too <span class="text-roseGold text-glow-rose font-black">entrenched</span>.
+                        <span class="block mt-3 md:mt-5">Too <span class="text-brandBlue text-glow-blue font-black">ingrained</span> in the fabric of our society to abandon.</span>
+                        <span class="block mt-3 md:mt-5">The path forward was never to <span class="text-roseGold text-glow-rose font-black">disappear</span>. It was to <span class="text-brandBlue text-glow-blue font-black">rebuild</span>.</span>
+                    </p>
+                </div>
             </div>
 
             <div class="beat absolute inset-0 flex items-center justify-center px-6 opacity-0">
-                <p class="serif text-4xl md:text-8xl text-center font-light tracking-[0.2em] text-roseGold/80">
-                    frgm&lt;nts&trade;
+                <div class="manifesto-text-wrap">
+                    <p class="manifesto-copy manifesto-copy-wide serif text-xl md:text-5xl text-center leading-[1.22] font-light">
+                        But I also knew that the <span class="pernicious font-mono font-bold uppercase tracking-widest">algorithm</span> hurts us.
+                        <span class="block mt-3 md:mt-5">Its truest purpose is to subvert our deepest passions and expose our fears.</span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="beat absolute inset-0 flex items-center justify-center px-6 opacity-0">
+                <div class="manifesto-text-wrap">
+                    <p class="manifesto-copy manifesto-copy-tight serif text-2xl md:text-6xl text-center leading-[1.12] font-medium">
+                        I created my own platform.
+                    </p>
+                </div>
+            </div>
+
+            <div class="beat absolute inset-0 flex items-center justify-center px-6 opacity-0">
+                <div class="text-center">
+                    <div class="signal-mark">A Better Way Through</div>
+                </div>
+            </div>
+
+            <div class="beat absolute inset-0 flex items-center justify-center px-6 opacity-0">
+                <p class="manifesto-brand serif text-4xl md:text-8xl text-center font-light tracking-[0.12em] md:tracking-[0.18em] text-roseGold/80">
+                    Introducing...
+                    <span class="block mt-3 md:mt-5 font-normal">frgm&lt;nts&trade;</span>
                 </p>
             </div>
         </div>
-        <div class="h-[560vh] md:h-[640vh]"></div>
+        <div class="h-[760vh] md:h-[900vh]"></div>
     </section>
 
     <section id="hero" class="relative h-[160vh] md:h-[180vh] w-full">
@@ -331,7 +529,7 @@
             </h1>
             <p id="sub-hero"
                 class="serif text-roseGold text-lg md:text-4xl mt-6 md:mt-12 opacity-0 font-light italic text-center px-6">
-                Built for the people you actually know.
+                Love your Neighbor. Not Their Vacation.
             </p>
         </div>
     </section>
@@ -339,8 +537,8 @@
     <section id="contrast" class="relative h-[220vh] md:h-[260vh] w-full">
         <div class="sticky top-0 h-screen-dvh w-full flex flex-col items-center justify-center px-6">
             <div id="anxiety-text" class="serif text-3xl md:text-8xl text-center leading-tight opacity-0">
-                Be together. <br class="md:hidden"><span class="text-brandBlue text-glow-blue italic font-black">Not
-                    on display.</span>
+                Be social. <br class="md:hidden"><span class="text-brandBlue text-glow-blue italic font-black">Not
+                    anxious.</span>
             </div>
             <div id="depressed-text"
                 class="serif text-3xl md:text-8xl text-center leading-tight mt-12 md:mt-16 opacity-0">
@@ -371,8 +569,14 @@
                             onto the Ledge.</h2>
                         <p
                             class="text-sm md:text-xl text-gray-400 leading-relaxed mb-6 md:mb-10 font-light">
-                            frgm&lt;nts is being built slowly and on purpose. If you want first access when the doors open, leave your email here.
+                            frgm&lt;nts is being built slowly and on purpose for people who still believe the internet can feel human. If you want first access when the doors open, leave your email here.
                         </p>
+                        <div class="promise-grid" aria-label="frgmnts promises">
+                            <div class="promise-pill">No Algorithm</div>
+                            <div class="promise-pill">No Ads</div>
+                            <div class="promise-pill">No Toxicity</div>
+                            <div class="promise-pill">Just Connection</div>
+                        </div>
                         <form id="waitlist-form" class="flex flex-col gap-2 md:gap-4 w-full">
                             <label for="waitlist-email" class="sr-only">Email address for the frgm&lt;nts waitlist</label>
                             <div class="sr-only" aria-hidden="true">
@@ -393,7 +597,7 @@
                     <div class="flex-1 flex justify-center items-center w-full">
                         <img src="Images/assets/app_screen.png" alt="A frgm<nts app preview showing the in-progress interface"
                             loading="lazy" decoding="async"
-                            class="w-full h-auto max-h-[34vh] md:max-h-full object-contain rounded-[16px] md:rounded-[32px] shadow-2xl border border-white/10">
+                            class="w-full max-w-[240px] md:max-w-[320px] h-auto max-h-[30vh] md:max-h-[56vh] object-contain rounded-[16px] md:rounded-[32px] shadow-2xl border border-white/10">
                     </div>
 
                 </div>
@@ -514,8 +718,7 @@
             });
             heroTl.to("#hero-kicker", { opacity: 1, y: -6, duration: 0.8 })
                 .to("#hero-text", { opacity: 1, duration: 2 }, "-=0.15")
-                .to("#sub-hero", { opacity: 1, y: -10, duration: 1 }, "-=1")
-                .to("#scroll-indicator", { opacity: 0, duration: 0.5 }, "0");
+                .to("#sub-hero", { opacity: 1, y: -10, duration: 1 }, "-=1");
 
             // --- CONTRAST (Anti-Ghosting Fix) ---
             const contrastTl = gsap.timeline({
