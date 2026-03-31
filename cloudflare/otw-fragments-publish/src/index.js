@@ -4,6 +4,7 @@ const CHANGELOG_PATH = "changelog.json";
 const IMAGE_MANIFEST_PATH = "image_manifest.json";
 const WORDPERSON_MANIFEST_PATH = "wordperson_manifest.json";
 const DRIFT_POETRY_PATH = "new_poetry_data.js";
+const FRGMNTS_WAITLIST_PATH = "frgmnts_waitlist.json";
 const CURRENT_NARRATIVE_DIR = "current_narrative";
 const FRAGMENTS_PATTERN = /window\.otw_fragments\s*=\s*(\[[\s\S]*?\])\s*;/m;
 const DRIFT_POETRY_PATTERN = /const livingVerse\s*=\s*(\[[\s\S]*?\])\s*;/m;
@@ -223,6 +224,63 @@ function normalizeChangelogEntry(entry) {
   }
 
   return { date, type, text };
+}
+
+function normalizeWaitlistEmail(raw) {
+  const email = String(raw || "").trim().toLowerCase();
+  if (!email) {
+    throw new Error("Email is required");
+  }
+
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    throw new Error("A valid email address is required");
+  }
+
+  if (email.length > 320) {
+    throw new Error("Email is too long");
+  }
+
+  return email;
+}
+
+function normalizeWaitlistEntry(entry) {
+  if (!entry || typeof entry !== "object") {
+    throw new Error("Waitlist payload must be an object");
+  }
+
+  const email = normalizeWaitlistEmail(entry.email);
+  const trap = String(entry.website || "").trim();
+  if (trap) {
+    throw new Error("Spam check failed");
+  }
+
+  const source = String(entry.source || "frgmnts_launch_page").trim().slice(0, 80) || "frgmnts_launch_page";
+  const note = String(entry.note || "").trim().slice(0, 200);
+
+  return {
+    email,
+    source,
+    note,
+    timestamp: new Date().toISOString()
+  };
+}
+
+function normalizeStoredWaitlistEntry(entry) {
+  if (!entry || typeof entry !== "object") {
+    throw new Error("Stored waitlist entry must be an object");
+  }
+
+  const email = normalizeWaitlistEmail(entry.email);
+  const source = String(entry.source || "frgmnts_launch_page").trim().slice(0, 80) || "frgmnts_launch_page";
+  const note = String(entry.note || "").trim().slice(0, 200);
+  const timestamp = normalizeTimestamp(entry.timestamp);
+
+  return {
+    email,
+    source,
+    note,
+    timestamp
+  };
 }
 
 function formatNarrativeDisplayDate(date) {
@@ -731,6 +789,26 @@ async function loadRepoFile(env, path) {
   return { sha: payload.sha, raw };
 }
 
+async function loadOptionalRepoFile(env, path) {
+  const response = await githubRequest(
+    env,
+    `/repos/${env.GITHUB_OWNER}/${env.GITHUB_REPO}/contents/${path}?ref=${env.GITHUB_BRANCH}`
+  );
+
+  if (response.status === 404) {
+    return null;
+  }
+
+  if (!response.ok) {
+    const text = await response.text();
+    throw new Error(`Could not load ${path}: ${response.status} ${text}`);
+  }
+
+  const payload = await response.json();
+  const raw = decodeBase64Utf8(payload.content);
+  return { sha: payload.sha, raw };
+}
+
 async function saveRepoFile(env, path, content, sha, message) {
   const encoded = encodeBase64Utf8(content);
   const response = await githubRequest(
@@ -972,12 +1050,82 @@ async function loadDriftPoetryFile(env) {
   return { ...file, entries };
 }
 
+async function loadFrgmntsWaitlistFile(env) {
+  const file = await loadOptionalRepoFile(env, FRGMNTS_WAITLIST_PATH);
+  if (!file) {
+    return { sha: null, entries: [] };
+  }
+
+  let entries;
+  try {
+    entries = JSON.parse(file.raw);
+  } catch (error) {
+    throw new Error(`Could not parse ${FRGMNTS_WAITLIST_PATH}: ${error.message}`);
+  }
+
+  if (!Array.isArray(entries)) {
+    throw new Error(`${FRGMNTS_WAITLIST_PATH} is not an array`);
+  }
+
+  return { ...file, entries: entries.map(normalizeStoredWaitlistEntry) };
+}
+
 function sortFragments(entries) {
   return entries.slice().sort((a, b) => String(b.timestamp || "").localeCompare(String(a.timestamp || "")));
 }
 
 function sortChangelog(entries) {
   return entries.slice().sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")));
+}
+
+function dedupeWaitlist(entries) {
+  const seen = new Set();
+  const out = [];
+
+  for (const entry of entries) {
+    const normalized = normalizeStoredWaitlistEntry(entry);
+    if (seen.has(normalized.email)) continue;
+    seen.add(normalized.email);
+    out.push(normalized);
+  }
+
+  return out;
+}
+
+function sortWaitlist(entries) {
+  return entries.slice().sort((a, b) => String(b.timestamp || "").localeCompare(String(a.timestamp || "")));
+}
+
+async function saveWaitlistEntryWithRetry(env, entry, maxAttempts = 3) {
+  let lastError = null;
+
+  for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
+    try {
+      const file = await loadFrgmntsWaitlistFile(env);
+      const existing = file.entries.some((item) => normalizeWaitlistEmail(item.email) === entry.email);
+      if (existing) {
+        return { duplicate: true, entry, count: file.entries.length };
+      }
+
+      const merged = sortWaitlist(dedupeWaitlist([entry, ...file.entries]));
+      const updatedRaw = `${JSON.stringify(merged, null, 2)}\n`;
+      const result = await saveRepoFile(
+        env,
+        FRGMNTS_WAITLIST_PATH,
+        updatedRaw,
+        file.sha,
+        "Add frgmnts waitlist entry"
+      );
+      return { duplicate: false, entry, result, count: merged.length };
+    } catch (error) {
+      lastError = error;
+      if (!isGithubConflictError(error) || attempt === maxAttempts) {
+        throw error;
+      }
+    }
+  }
+
+  throw lastError || new Error("Waitlist save retry failed");
 }
 
 function sortIotd(entries) {
@@ -1097,6 +1245,7 @@ export default {
           publish_bot_fragment: "POST /publish-bot-fragment",
           publish_changelog_entry: "POST /publish-changelog-entry",
           publish_ghost_draft: "POST /publish-ghost-draft",
+          subscribe_frgmnts_waitlist: "POST /subscribe-frgmnts-waitlist",
           upload_ghost_image: "POST /upload-ghost-image",
           publish_iotd_entry: "POST /publish-iotd-entry",
           publish_wordperson_entry: "POST /publish-wordperson-entry",
@@ -1225,6 +1374,26 @@ export default {
         });
       } catch (error) {
         return jsonResponse({ ok: false, error: error.message || "Unknown ghost publish error" }, 400);
+      }
+    }
+
+    if (request.method === "POST" && url.pathname === "/subscribe-frgmnts-waitlist") {
+      try {
+        const body = await request.json();
+        const entry = normalizeWaitlistEntry(body);
+        const result = await saveWaitlistEntryWithRetry(env, entry);
+
+        return jsonResponse({
+          ok: true,
+          duplicate: result.duplicate === true,
+          subscribed: entry.email,
+          message: result.duplicate
+            ? "This email is already on the frgmnts waitlist."
+            : "You are on the frgmnts waitlist.",
+          commit: result.result?.commit?.sha || null
+        });
+      } catch (error) {
+        return jsonResponse({ ok: false, error: error.message || "Unknown waitlist subscribe error" }, 400);
       }
     }
 

@@ -3,16 +3,35 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>frgm&lt;nts | The Anti-Social Media</title>
+    <meta name="description" content="frgm<nts is an in-progress anti-social app from Outside The World, built for quieter, more human connection.">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Fira+Code:wght@400;700&family=IBM+Plex+Serif:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap"
         rel="stylesheet">
+    <noscript>
+        <style>
+            .beat,
+            #hero-kicker,
+            #hero-text,
+            #sub-hero,
+            #anxiety-text,
+            #depressed-text,
+            #era-text,
+            #ledge-card {
+                opacity: 1 !important;
+                transform: none !important;
+                filter: none !important;
+            }
+        </style>
+    </noscript>
 
     <script>
         tailwind.config = {
@@ -41,9 +60,38 @@
             background-color: #0A0A0A;
             color: #EEEEEE;
             overflow-x: hidden;
+            overscroll-behavior-y: none;
             -webkit-font-smoothing: antialiased;
-            /* Prevents overscroll bounce on mobile */
-            fixed: overflow;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        body::before,
+        body::after {
+            content: "";
+            position: fixed;
+            inset: auto;
+            pointer-events: none;
+            z-index: -1;
+            border-radius: 999px;
+            filter: blur(80px);
+            opacity: 0.5;
+        }
+
+        body::before {
+            top: -8rem;
+            left: -6rem;
+            width: 24rem;
+            height: 24rem;
+            background: radial-gradient(circle, rgba(99, 149, 238, 0.22) 0%, rgba(99, 149, 238, 0) 70%);
+        }
+
+        body::after {
+            right: -8rem;
+            bottom: 12vh;
+            width: 28rem;
+            height: 28rem;
+            background: radial-gradient(circle, rgba(224, 191, 184, 0.16) 0%, rgba(224, 191, 184, 0) 72%);
         }
 
         /* Uses Dynamic Viewport Height for mobile browser UI consistency */
@@ -52,10 +100,13 @@
         }
 
         .liquid-glass {
-            background: rgba(26, 28, 32, 0.6);
+            background:
+                linear-gradient(180deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.02) 100%),
+                rgba(26, 28, 32, 0.62);
             backdrop-filter: blur(30px);
             -webkit-backdrop-filter: blur(30px);
             border: 1px solid rgba(224, 191, 184, 0.1);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
         }
 
         ::-webkit-scrollbar {
@@ -88,6 +139,111 @@
         .text-glow-rose {
             text-shadow: 0 0 30px rgba(224, 191, 184, 0.2);
         }
+
+        .beat,
+        #hero-kicker,
+        #hero-text,
+        #sub-hero,
+        #anxiety-text,
+        #depressed-text,
+        #era-text,
+        #ledge-card {
+            will-change: transform, opacity;
+        }
+
+        .signup-status {
+            min-height: 1.5rem;
+        }
+
+        .section-kicker {
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            font-size: 0.625rem;
+            color: rgba(224, 191, 184, 0.62);
+        }
+
+        .hero-shell {
+            position: relative;
+        }
+
+        .hero-shell::before {
+            content: "";
+            position: absolute;
+            inset: 12% 10% auto;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(224, 191, 184, 0), rgba(224, 191, 184, 0.32), rgba(224, 191, 184, 0));
+            pointer-events: none;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            #scroll-indicator {
+                display: none;
+            }
+
+            #manifesto-container,
+            #hero,
+            #contrast,
+            #mission,
+            #ledge-reveal {
+                height: auto !important;
+                min-height: 0 !important;
+            }
+
+            .sticky-wrapper,
+            #hero > div,
+            #contrast > div,
+            #mission > div,
+            #ledge-reveal > div {
+                position: relative !important;
+                top: auto !important;
+                height: auto !important;
+                min-height: 0 !important;
+                padding-top: 4rem;
+                padding-bottom: 4rem;
+            }
+
+            #manifesto-container > div:last-child {
+                display: none;
+            }
+
+            .beat {
+                position: relative !important;
+                inset: auto !important;
+                opacity: 1 !important;
+                transform: none !important;
+                filter: none !important;
+                padding-top: 2rem;
+                padding-bottom: 2rem;
+            }
+
+            #hero-text,
+            #hero-kicker,
+            #sub-hero,
+            #anxiety-text,
+            #depressed-text,
+            #era-text,
+            #ledge-card {
+                opacity: 1 !important;
+                transform: none !important;
+                filter: none !important;
+            }
+        }
+
+        @media (max-width: 767px) {
+            body::before {
+                width: 18rem;
+                height: 18rem;
+            }
+
+            body::after {
+                width: 20rem;
+                height: 20rem;
+            }
+        }
     </style>
 </head>
 
@@ -112,7 +268,8 @@
                         </p>
                     </div>
                     <div class="flex-1 flex justify-center md:justify-end">
-                        <img src="Images/assets/IG_FB_melting.png" alt="Poisoning"
+                        <img src="Images/assets/IG_FB_melting.png" alt="Social apps melting into a toxic, distorted feed"
+                            loading="eager" decoding="async"
                             class="w-2/3 md:w-full max-w-[280px] md:max-w-md h-auto object-contain">
                     </div>
                 </div>
@@ -122,7 +279,8 @@
                 <div
                     class="flex flex-col-reverse md:flex-row items-center justify-center gap-6 md:gap-12 max-w-7xl w-full">
                     <div class="flex-1 flex justify-center md:justify-start">
-                        <img src="Images/assets/IG_Hug2.png" alt="Necessary"
+                        <img src="Images/assets/IG_Hug2.png" alt="A softer social moment that suggests connection can still matter"
+                            loading="eager" decoding="async"
                             class="w-2/3 md:w-full max-w-[280px] md:max-w-md h-auto object-contain drop-shadow-[0_0_20px_rgba(224,191,184,0.2)]">
                     </div>
                     <div class="text-left md:text-right flex-1">
@@ -161,37 +319,38 @@
                 </p>
             </div>
         </div>
-        <div class="h-[800vh]"></div>
+        <div class="h-[560vh] md:h-[640vh]"></div>
     </section>
 
-    <section id="hero" class="relative h-[200vh] w-full">
-        <div class="sticky top-0 h-screen-dvh w-full flex flex-col items-center justify-center bg-voidDark">
+    <section id="hero" class="relative h-[160vh] md:h-[180vh] w-full">
+        <div class="hero-shell sticky top-0 h-screen-dvh w-full flex flex-col items-center justify-center bg-voidDark">
+            <p class="section-kicker mb-5 md:mb-8 opacity-0" id="hero-kicker">Private Beta in Progress</p>
             <h1 id="hero-text"
                 class="serif text-4xl md:text-9xl font-black tracking-tighter text-center opacity-0 leading-none">
                 THE ANTI-SOCIAL MEDIA.
             </h1>
             <p id="sub-hero"
                 class="serif text-roseGold text-lg md:text-4xl mt-6 md:mt-12 opacity-0 font-light italic text-center px-6">
-                Love your neighbor. Not his vacation.
+                Built for the people you actually know.
             </p>
         </div>
     </section>
 
-    <section id="contrast" class="relative h-[300vh] w-full">
+    <section id="contrast" class="relative h-[220vh] md:h-[260vh] w-full">
         <div class="sticky top-0 h-screen-dvh w-full flex flex-col items-center justify-center px-6">
             <div id="anxiety-text" class="serif text-3xl md:text-8xl text-center leading-tight opacity-0">
-                Be social. <br class="md:hidden"><span class="text-brandBlue text-glow-blue italic font-black">Not
-                    anxious.</span>
+                Be together. <br class="md:hidden"><span class="text-brandBlue text-glow-blue italic font-black">Not
+                    on display.</span>
             </div>
             <div id="depressed-text"
                 class="serif text-3xl md:text-8xl text-center leading-tight mt-12 md:mt-16 opacity-0">
-                Get connected. <br class="md:hidden"><span class="text-brandBlue text-glow-blue italic font-black">Not
-                    depressed.</span>
+                Stay in touch. <br class="md:hidden"><span class="text-brandBlue text-glow-blue italic font-black">Not
+                    swallowed whole.</span>
             </div>
         </div>
     </section>
 
-    <section id="mission" class="relative h-[150vh] w-full">
+    <section id="mission" class="relative h-[120vh] md:h-[140vh] w-full">
         <div class="sticky top-0 h-screen-dvh w-full flex flex-col items-center justify-center px-6">
             <h2 id="era-text"
                 class="serif text-3xl md:text-9xl text-center font-black uppercase tracking-tighter text-roseGold text-glow-rose opacity-0 leading-none">
@@ -200,32 +359,41 @@
         </div>
     </section>
 
-    <section id="ledge-reveal" class="relative h-[200vh] w-full">
+    <section id="ledge-reveal" class="relative h-[150vh] md:h-[180vh] w-full">
         <div class="sticky top-0 h-screen-dvh w-full flex items-center justify-center p-4 md:p-6">
             <div id="ledge-card"
                 class="liquid-glass w-full max-w-6xl rounded-[32px] md:rounded-[40px] p-6 md:p-20 shadow-2xl translate-y-10 opacity-0">
-                <div class="flex flex-row items-center gap-4 md:gap-16">
+                <div class="flex flex-col md:flex-row items-center gap-8 md:gap-16">
 
-                    <div class="flex-[1.5] md:flex-1">
+                    <div class="flex-[1.5] md:flex-1 w-full">
+                        <p class="section-kicker mb-3 md:mb-5">Early Access</p>
                         <h2 class="serif text-2xl md:text-6xl mb-4 md:mb-8 text-roseGold font-black leading-tight">Step
                             onto the Ledge.</h2>
                         <p
-                            class="text-[10px] md:text-xl text-gray-400 leading-relaxed mb-6 md:mb-10 font-light hidden sm:block">
-                            We don't need another algorithm. We need a table.
+                            class="text-sm md:text-xl text-gray-400 leading-relaxed mb-6 md:mb-10 font-light">
+                            frgm&lt;nts is being built slowly and on purpose. If you want first access when the doors open, leave your email here.
                         </p>
-                        <div class="flex flex-col gap-2 md:gap-4 w-full">
-                            <input type="email" placeholder="Email"
-                                class="bg-white/5 border border-white/10 rounded-full px-4 py-2 md:px-6 md:py-4 focus:outline-none focus:border-roseGold/50 text-[10px] md:text-sm">
-                            <button
-                                class="bg-roseGold text-voidDark font-bold rounded-full px-4 py-2 md:px-8 md:py-4 uppercase tracking-widest text-[8px] md:text-[10px] hover:bg-white transition-colors">
-                                Inquire
+                        <form id="waitlist-form" class="flex flex-col gap-2 md:gap-4 w-full">
+                            <label for="waitlist-email" class="sr-only">Email address for the frgm&lt;nts waitlist</label>
+                            <div class="sr-only" aria-hidden="true">
+                                <label for="waitlist-website">Website</label>
+                                <input id="waitlist-website" name="website" type="text" tabindex="-1" autocomplete="off">
+                            </div>
+                            <input id="waitlist-email" name="email" type="email" inputmode="email" autocomplete="email"
+                                placeholder="Email" aria-describedby="waitlist-status"
+                                class="bg-white/5 border border-white/10 rounded-full px-4 py-3 md:px-6 md:py-4 focus:outline-none focus:border-roseGold/50 focus:ring-2 focus:ring-roseGold/20 text-sm md:text-sm">
+                            <button id="waitlist-submit" type="submit" aria-label="Join the frgm<nts waitlist"
+                                class="bg-roseGold text-voidDark font-bold rounded-full px-4 py-3 md:px-8 md:py-4 uppercase tracking-[0.28em] text-[10px] md:text-[10px] hover:bg-white transition-colors">
+                                Join the List
                             </button>
-                        </div>
+                            <p id="waitlist-status" class="signup-status text-xs md:text-xs text-roseGold/80" role="status" aria-live="polite"></p>
+                        </form>
                     </div>
 
-                    <div class="flex-1 flex justify-center items-center">
-                        <img src="Images/assets/app_screen.png" alt="App"
-                            class="w-full h-auto max-h-[40vh] md:max-h-full object-contain rounded-[16px] md:rounded-[32px] shadow-2xl border border-white/10">
+                    <div class="flex-1 flex justify-center items-center w-full">
+                        <img src="Images/assets/app_screen.png" alt="A frgm<nts app preview showing the in-progress interface"
+                            loading="lazy" decoding="async"
+                            class="w-full h-auto max-h-[34vh] md:max-h-full object-contain rounded-[16px] md:rounded-[32px] shadow-2xl border border-white/10">
                     </div>
 
                 </div>
@@ -244,85 +412,157 @@
     </footer>
 
     <script>
-        gsap.registerPlugin(ScrollTrigger);
+        const WAITLIST_ENDPOINT = "https://otw-fragments-publish.ryandavid.workers.dev/subscribe-frgmnts-waitlist";
+        const waitlistForm = document.getElementById("waitlist-form");
+        const waitlistEmail = document.getElementById("waitlist-email");
+        const waitlistWebsite = document.getElementById("waitlist-website");
+        const waitlistStatus = document.getElementById("waitlist-status");
+        const waitlistSubmit = document.getElementById("waitlist-submit");
+        const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-        // --- MANIFESTO MASTER TIMELINE ---
-        const manifestoTl = gsap.timeline({
-            scrollTrigger: {
-                trigger: "#manifesto-container",
-                start: "top top",
-                end: "bottom bottom",
-                scrub: 1,
-            }
-        });
+        if (waitlistForm && waitlistEmail && waitlistStatus) {
+            waitlistForm.addEventListener("submit", async (event) => {
+                event.preventDefault();
 
-        const beats = gsap.utils.toArray(".beat");
-        beats.forEach((beat, i) => {
-            manifestoTl.to(beat, { opacity: 1, y: -10, duration: 1 });
-            manifestoTl.to(beat, { opacity: 1, duration: 0.5 });
-            if (i < beats.length - 1) {
-                manifestoTl.to(beat, { opacity: 0, y: -40, filter: "blur(15px)", duration: 1 });
-            }
-        });
+                const email = waitlistEmail.value.trim();
+                if (!email) {
+                    waitlistStatus.textContent = "Add your email first and then inquire.";
+                    waitlistEmail.focus();
+                    return;
+                }
 
-        // --- THE BRAND REVEAL ---
-        const heroTl = gsap.timeline({
-            scrollTrigger: {
-                trigger: "#hero",
-                start: "top top",
-                end: "bottom bottom",
-                scrub: true,
-            }
-        });
-        heroTl.to("#hero-text", { opacity: 1, duration: 2 })
-            .to("#sub-hero", { opacity: 1, y: -10, duration: 1 }, "-=1")
-            .to("#scroll-indicator", { opacity: 0, duration: 0.5 }, "0");
+                if (!waitlistEmail.checkValidity()) {
+                    waitlistStatus.textContent = "Please use a valid email address.";
+                    waitlistEmail.focus();
+                    return;
+                }
 
-        // --- CONTRAST (Anti-Ghosting Fix) ---
-        const contrastTl = gsap.timeline({
-            scrollTrigger: {
-                trigger: "#contrast",
-                start: "top top",
-                end: "bottom bottom",
-                scrub: 1,
-            }
-        });
-        contrastTl.to("#anxiety-text", { opacity: 1, y: -10, duration: 2 })
-            .to("#anxiety-text", { opacity: 0, y: -80, filter: "blur(20px)", duration: 2 })
-            .to("#depressed-text", { opacity: 1, y: -10, duration: 2 });
+                if (waitlistSubmit) {
+                    waitlistSubmit.disabled = true;
+                    waitlistSubmit.textContent = "Submitting...";
+                }
+                waitlistStatus.textContent = "Submitting your request...";
 
-        // --- MISSION ---
-        gsap.to("#era-text", {
-            opacity: 1, y: -10,
-            scrollTrigger: {
-                trigger: "#mission",
-                start: "top center",
-                end: "center center",
-                scrub: true
-            }
-        });
+                try {
+                    const response = await fetch(WAITLIST_ENDPOINT, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            email,
+                            website: waitlistWebsite ? waitlistWebsite.value : "",
+                            source: "frgmnts_launch_page"
+                        })
+                    });
 
-        // --- LEDGE CARD ---
-        gsap.to("#ledge-card", {
-            opacity: 1, y: 0,
-            scrollTrigger: {
-                trigger: "#ledge-reveal",
-                start: "top 80%",
-                end: "top top",
-                scrub: 1
-            }
-        });
+                    const payload = await response.json().catch(() => ({}));
+                    if (!response.ok || !payload.ok) {
+                        throw new Error(payload.error || `Waitlist request failed with status ${response.status}`);
+                    }
 
-        // Mobile Background Finish
-        gsap.to("body", {
-            backgroundColor: "#1A1C20",
-            scrollTrigger: {
-                trigger: "#ledge-reveal",
-                start: "top center",
-                end: "bottom center",
-                scrub: true
-            }
-        });
+                    waitlistStatus.textContent = payload.message || "You are on the frgmnts waitlist.";
+                    if (!payload.duplicate) {
+                        waitlistForm.reset();
+                    }
+                } catch (error) {
+                    const subject = encodeURIComponent("frgm<nts waitlist");
+                    const body = encodeURIComponent(
+                        `Please add this address to the frgm<nts waitlist:\n\n${email}\n`
+                    );
+                    waitlistStatus.textContent = "The live waitlist is unavailable, so opening your email app instead.";
+                    window.location.href = `mailto:ryandavid@outsidetheworld.com?subject=${subject}&body=${body}`;
+                } finally {
+                    if (waitlistSubmit) {
+                        waitlistSubmit.disabled = false;
+                        waitlistSubmit.textContent = "Join the List";
+                    }
+                }
+            });
+        }
+
+        if (!reduceMotion) {
+            gsap.registerPlugin(ScrollTrigger);
+
+            // --- MANIFESTO MASTER TIMELINE ---
+            const manifestoTl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: "#manifesto-container",
+                    start: "top top",
+                    end: "bottom bottom",
+                    scrub: 1,
+                }
+            });
+
+            const beats = gsap.utils.toArray(".beat");
+            beats.forEach((beat, i) => {
+                manifestoTl.to(beat, { opacity: 1, y: -10, duration: 0.9 });
+                manifestoTl.to(beat, { opacity: 1, duration: 0.35 });
+                if (i < beats.length - 1) {
+                    manifestoTl.to(beat, { opacity: 0, y: -26, duration: 0.8 });
+                }
+            });
+
+            // --- THE BRAND REVEAL ---
+            const heroTl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: "#hero",
+                    start: "top top",
+                    end: "bottom bottom",
+                    scrub: true,
+                }
+            });
+            heroTl.to("#hero-kicker", { opacity: 1, y: -6, duration: 0.8 })
+                .to("#hero-text", { opacity: 1, duration: 2 }, "-=0.15")
+                .to("#sub-hero", { opacity: 1, y: -10, duration: 1 }, "-=1")
+                .to("#scroll-indicator", { opacity: 0, duration: 0.5 }, "0");
+
+            // --- CONTRAST (Anti-Ghosting Fix) ---
+            const contrastTl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: "#contrast",
+                    start: "top top",
+                    end: "bottom bottom",
+                    scrub: 1,
+                }
+            });
+            contrastTl.to("#anxiety-text", { opacity: 1, y: -10, duration: 1.5 })
+                .to("#anxiety-text", { opacity: 0, y: -44, duration: 1.2 })
+                .to("#depressed-text", { opacity: 1, y: -10, duration: 1.5 });
+
+            // --- MISSION ---
+            gsap.to("#era-text", {
+                opacity: 1, y: -10,
+                scrollTrigger: {
+                    trigger: "#mission",
+                    start: "top center",
+                    end: "center center",
+                    scrub: true
+                }
+            });
+
+            // --- LEDGE CARD ---
+            gsap.to("#ledge-card", {
+                opacity: 1, y: 0,
+                scrollTrigger: {
+                    trigger: "#ledge-reveal",
+                    start: "top 80%",
+                    end: "top top",
+                    scrub: 1
+                }
+            });
+
+            // Mobile Background Finish
+            gsap.to("body", {
+                backgroundColor: "#1A1C20",
+                scrollTrigger: {
+                    trigger: "#ledge-reveal",
+                    start: "top center",
+                    end: "bottom center",
+                    scrub: true
+                }
+            });
+        }
     </script>
 </body>
 
