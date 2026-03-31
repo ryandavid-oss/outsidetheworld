@@ -76,6 +76,9 @@ Hardening.
 - Revisit static asset caching/expires behavior if the site moves beyond plain GitHub Pages hosting.
 - Goal: allow longer-lived cache headers for truly static assets without risking stale HTML, manifests, or frequently updated data files.
 - This is a performance/publishing polish item, not an urgent problem.
+- Replace `WebReactionz` with OTW-owned reactions using the same reaction language as `frgmnts`, but keep the implementation separate from the app's current reaction tables/routes.
+- Safest version: add a dedicated OTW reactions store and OTW-specific endpoints for blog/archive posts so the live app reaction flow is not disturbed.
+- This should be treated as a phased infrastructure improvement, with reactions first and comments only later if moderation/auth tooling is ready.
 
 ## Short version
 
