@@ -1,5 +1,11 @@
 const current_narrative = [
     {
+        "title": "Just checking in, y'all",
+        "date": "March 31, 2026",
+        "body": "**The sheer volume** of projects I have going right now is keeping me from attending to the most sincere and critical areas of OTW right now, but I promise it'll be worth it. Stay close to this feed for more information in the near future.\n\nThe t-shirt contest ended with a fair amount of success. It accomplished what I need it to: show people that OTW exists and deserves a place in their hearts. I am so appreciative of everyone who submitted entries, visited the site, and gave me feedback. To have a voice again online is a privilege that I do not take for granted. To carve out a space for sacred ideas is even more paramount to me, and I crave the capacity to maintain momentum into the future.\n\n**I also hope to run** a few more contests soon, which may or may not involve more prizes. I've also begun production of a few more pieces of merchandise that I hope to begin selling very soon. As a brand, OTW sticks the landing. \n\nThanks, as always, for the visit. As the neighborhood birds sing their midnight songs, I big you a fond farewell for now.",
+        "file": "2026-03-31-just-checking-in-y-all.md"
+    },
+    {
         "title": "50 Best Apple Products",
         "date": "March 27, 2026",
         "body": "A wonderful bit of nostalgia-bait posted to The Verge today.  And they did it in the best way possible: a pitch-perfect recreation of the Classic Mac OS. I wish I had more experience with the products the staff chose; items like the black MacBook, PowerBooks, and Bondi Blue iMac took me right back to working at Best Buy in the 1990s. \n\n[Go ahead and check it out here.](https://www.theverge.com/cs/tech/900477/apple-50-anniversary-rank-products)\n\nDon't be surprised if you get paralyzed between choices like I did with this one. How on earth could I pick between such astonishing technologies that changed the way I computed forever?\n\n<figure style=\"text-align: center;\">\n  <img src=\"Images/Blog/verge_shot.png\" alt=\"50 Best Apple Products\">\n  <figcaption><em>It's just apples to oranges to me</em></figcaption>\n</figure>\n\nI miss those early days of Apple computing. And FYI - each time the ranker placed the HyperCard system in front of me, I absolutely chose that one. That was 1991 for me.",
