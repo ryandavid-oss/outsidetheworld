@@ -225,12 +225,40 @@ function normalizeChangelogEntry(entry) {
   return { date, type, text };
 }
 
+function formatNarrativeDisplayDate(date) {
+  return new Intl.DateTimeFormat("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric"
+  }).format(date);
+}
+
 function normalizeNarrativeDate(raw) {
   const date = String(raw || "").trim();
-  if (date.length !== 10 || date[4] !== "-" || date[7] !== "-") {
-    throw new Error("Narrative date must be in YYYY-MM-DD format");
+  if (!date) {
+    throw new Error("Narrative date is required");
   }
-  return date;
+
+  if (/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+    const value = new Date(`${date}T12:00:00`);
+    if (Number.isNaN(value.getTime())) {
+      throw new Error("Narrative date could not be parsed");
+    }
+    return {
+      display: formatNarrativeDisplayDate(value),
+      fileDate: date
+    };
+  }
+
+  const value = new Date(`${date} UTC`);
+  if (Number.isNaN(value.getTime())) {
+    throw new Error("Narrative date must be in 'March 27, 2026' format");
+  }
+
+  return {
+    display: formatNarrativeDisplayDate(value),
+    fileDate: value.toISOString().slice(0, 10)
+  };
 }
 
 function stripMarkdownForTitle(value) {
@@ -275,7 +303,7 @@ function normalizeNarrativeEntry(entry) {
     throw new Error("Narrative title could not be derived");
   }
 
-  return { title, date, body };
+  return { title, date: date.display, fileDate: date.fileDate, body };
 }
 
 function normalizeDriftDate(raw) {
@@ -1185,7 +1213,7 @@ export default {
       try {
         const body = await request.json();
         const entry = normalizeNarrativeEntry(body);
-        const path = await findAvailableNarrativePath(env, entry.date, entry.title);
+        const path = await findAvailableNarrativePath(env, entry.fileDate, entry.title);
         const markdown = buildNarrativeMarkdown(entry);
         const result = await saveRepoFile(env, path, markdown, null, "Publish ghost draft");
 
@@ -1221,7 +1249,7 @@ export default {
         const alt = normalizeNarrativeImageAlt(formData.get("alt"));
         const caption = normalizeNarrativeImageCaption(formData.get("caption"));
         const extension = detectImageExtension(file);
-        const objectKey = buildNarrativeImageObjectKey(date, title, extension);
+        const objectKey = buildNarrativeImageObjectKey(date.fileDate, title, extension);
         const imageUrl = buildNarrativeImageUrl(env, objectKey);
 
         await env.IOTD_BUCKET.put(objectKey, await file.arrayBuffer(), {
