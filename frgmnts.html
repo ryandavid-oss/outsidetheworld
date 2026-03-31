@@ -266,6 +266,27 @@
             margin-bottom: 1.75rem;
         }
 
+        .legal-inline {
+            margin-top: 0.8rem;
+            color: rgba(238, 238, 238, 0.58);
+            font-size: 0.76rem;
+            line-height: 1.6;
+        }
+
+        .legal-inline a,
+        .footer-links a {
+            color: rgba(224, 191, 184, 0.86);
+            text-decoration: none;
+        }
+
+        .legal-inline a:hover,
+        .legal-inline a:focus-visible,
+        .footer-links a:hover,
+        .footer-links a:focus-visible {
+            color: #ffffff;
+            outline: none;
+        }
+
         .promise-pill {
             border: 1px solid rgba(224, 191, 184, 0.14);
             background: rgba(255, 255, 255, 0.03);
@@ -591,6 +612,7 @@
                                 Join the List
                             </button>
                             <p id="waitlist-status" class="signup-status text-xs md:text-xs text-roseGold/80" role="status" aria-live="polite"></p>
+                            <p class="legal-inline">By joining the list, you acknowledge the <a href="privacy.html">Privacy Notice</a> and <a href="terms.html">Terms of Use</a>.</p>
                         </form>
                     </div>
 
@@ -607,6 +629,11 @@
 
     <footer class="py-12 px-6 bg-voidDark border-t border-white/5">
         <div class="max-w-4xl mx-auto flex flex-col items-center">
+            <div class="footer-links" style="display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-bottom:12px;font-family:'IBM Plex Mono',monospace;font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;">
+                <a href="privacy.html">Privacy</a>
+                <a href="terms.html">Terms</a>
+                <a href="trademarks.html">Trademarks</a>
+            </div>
             <p class="font-mono text-[8px] text-gray-500 leading-loose tracking-[0.2em] text-center uppercase">
                 © 2026 Outside the World is New, LLC. <br>
                 frgm&lt;nts™ and the frgm&lt;nts™ logo are trademarks of <br>
