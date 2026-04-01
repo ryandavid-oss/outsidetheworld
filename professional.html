@@ -11,7 +11,7 @@
     <!-- Primary SEO -->
     <title>Professional Archive | Web Development, Design & Systems Practice | Outside The World</title>
     <meta name="description"
-        content="A professional archive documenting web development, digital design, systems practice, and brand architecture from Queen Creek, Arizona. Outside The World serves as a record of professional capabilities, research, and long-form technical observation.">
+        content="A professional archive documenting web development, iOS app development, digital design, systems practice, and brand architecture from Queen Creek, Arizona. Outside The World serves as a record of professional capabilities, research, and long-form technical observation.">
     <meta name="robots" content="index,follow,max-image-preview:large" />
     <meta name="author" content="Outside the World is New, LLC" />
     <link rel="canonical" href="https://outsidetheworld.com/professional.html" />
@@ -32,13 +32,13 @@
     <meta property="og:locale" content="en_US" />
     <meta property="og:title" content="Outside The World | Professional Archive & Systems Practice">
     <meta property="og:description"
-        content="A professional archive of web development, digital design, systems practice, and brand architecture from Queen Creek, Arizona.">
+        content="A professional archive of web development, iOS app development, digital design, systems practice, and brand architecture from Queen Creek, Arizona.">
     <meta property="og:image" content="https://outsidetheworld.com/Images/SocialPreview.jpg">
     <meta property="og:url" content="https://outsidetheworld.com/professional.html">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Outside The World | Professional Archive & Systems Practice">
     <meta name="twitter:description"
-        content="A professional archive of web development, digital design, systems practice, and brand architecture from Queen Creek, Arizona.">
+        content="A professional archive of web development, iOS app development, digital design, systems practice, and brand architecture from Queen Creek, Arizona.">
     <meta name="twitter:image" content="https://outsidetheworld.com/Images/SocialPreview.jpg">
 
     <!-- Analytics -->
@@ -490,6 +490,11 @@
             padding: 34px 0 92px;
         }
 
+        .dossier-stack {
+            display: grid;
+            gap: 18px;
+        }
+
         .dossier-footer-card {
             display: flex;
             justify-content: space-between;
@@ -555,6 +560,74 @@
 
         .dossier-footer-card:hover .dossier-arrow {
             transform: translateX(12px);
+        }
+
+        .dossier-note-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 24px;
+            background: rgba(145, 175, 179, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: var(--r-lg);
+            padding: 28px 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dossier-note-card::before {
+            content: "";
+            position: absolute;
+            inset: -2px;
+            background: radial-gradient(700px 200px at 25% 0%, rgba(99, 149, 238, 0.14), transparent 60%);
+            opacity: 0.9;
+            pointer-events: none;
+        }
+
+        .dossier-note-meta {
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+        }
+
+        .dossier-note-meta span {
+            display: inline-block;
+            margin-bottom: 8px;
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: var(--brand-teal);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .dossier-note-meta h4 {
+            margin: 0 0 10px;
+            font-size: 1.1rem;
+            color: #fff;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .dossier-note-meta p {
+            margin: 0;
+            color: #b8c0c7;
+            line-height: 1.8;
+        }
+
+        .dossier-note-badge {
+            position: relative;
+            z-index: 1;
+            flex-shrink: 0;
+            padding: 10px 14px;
+            border-radius: 999px;
+            border: 1px solid rgba(99, 149, 238, 0.3);
+            background: rgba(99, 149, 238, 0.08);
+            color: var(--brand-light-blue);
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            white-space: nowrap;
         }
 
         /* Knowledge exchange — cleaner, more commanding */
@@ -666,6 +739,11 @@
                 text-align: center;
                 gap: 16px;
             }
+
+            .dossier-note-card {
+                flex-direction: column;
+                text-align: center;
+            }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -705,9 +783,10 @@
   "name": "Outside the World is New, LLC",
   "url": "https://outsidetheworld.com/professional.html",
   "image": "https://outsidetheworld.com/Images/Equal.svg",
-  "description": "A professional archive documenting web development, digital design, systems practice, and brand architecture from Queen Creek, Arizona.",
+  "description": "A professional archive documenting web development, iOS app development, digital design, systems practice, and brand architecture from Queen Creek, Arizona.",
   "serviceType": [
     "Web Development",
+    "iOS App Development",
     "Web Design",
     "Technical Consulting",
     "Brand Architecture"
@@ -763,7 +842,7 @@
                 <h1>The Outside Vantage.</h1>
 
                 <p>
-                    A professional archive documenting web development, digital design, and systems practice.
+                    A professional archive documenting web development, iOS app development, digital design, and systems practice.
                     This space records the intersection of resilient infrastructure, brand systems,
                     and the online experiences built to endure.
                 </p>
@@ -811,6 +890,19 @@
                         <p>
                             Building expressive, standards-aware web experiences that balance design, performance,
                             accessibility, and long-term maintainability across desktop and mobile contexts.
+                        </p>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-number" style="color: var(--brand-blue);">
+                            04
+                        </div>
+                        <h3>
+                            iOS App Development
+                        </h3>
+                        <p>
+                            Designing and building focused mobile app experiences for Apple platforms with an emphasis
+                            on clarity, usability, performance, and product cohesion.
                         </p>
                     </div>
                 </div>
@@ -873,13 +965,27 @@
 
         <div class="dossier-uplink-container">
             <div class="container">
-                <a href="resume.html" class="dossier-footer-card">
-                    <div class="dossier-label-group">
-                        <span>FILE_ENCLOSURE //</span>
-                        <h4>Access Professional Dossier</h4>
+                <div class="dossier-stack">
+                    <a href="resume.html" class="dossier-footer-card">
+                        <div class="dossier-label-group">
+                            <span>FILE_ENCLOSURE //</span>
+                            <h4>Access Professional Dossier</h4>
+                        </div>
+                        <div class="dossier-arrow">→</div>
+                    </a>
+
+                    <div class="dossier-note-card">
+                        <div class="dossier-note-meta">
+                            <span>Product Signal //</span>
+                            <h4>frgmnts.app for iOS</h4>
+                            <p>
+                                An iOS app currently in development. A more focused, private social experience is
+                                taking shape and will be coming soon.
+                            </p>
+                        </div>
+                        <div class="dossier-note-badge">Coming Soon</div>
                     </div>
-                    <div class="dossier-arrow">→</div>
-                </a>
+                </div>
             </div>
         </div>
 
