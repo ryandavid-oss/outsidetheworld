@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&family=Fira+Code:wght@300;400;500;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap"
     rel="stylesheet" />
   <style>
     :root {
@@ -312,6 +312,79 @@
       gap: 18px;
     }
 
+    .type-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .type-card {
+      padding: 22px;
+      border-radius: 24px;
+      background:
+        radial-gradient(220px 120px at 84% 0%, rgba(160, 190, 245, 0.08), transparent 68%),
+        rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .type-kicker {
+      margin: 0;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.68rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-soft);
+    }
+
+    .type-name {
+      margin: 0;
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    .type-role {
+      margin: -6px 0 0;
+      color: var(--text-soft);
+      font-size: 0.94rem;
+      line-height: 1.55;
+    }
+
+    .type-sample {
+      margin: 6px 0 0;
+      color: var(--text);
+      line-height: 1.2;
+    }
+
+    .type-sample.display {
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+    }
+
+    .type-sample.body {
+      font-size: 1.02rem;
+      line-height: 1.65;
+    }
+
+    .type-sample.code {
+      font-size: 0.88rem;
+      letter-spacing: 0.04em;
+      line-height: 1.7;
+      white-space: pre-wrap;
+    }
+
+    .type-note {
+      margin: auto 0 0;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text-soft);
+      font-size: 0.86rem;
+      line-height: 1.6;
+    }
+
     .logo-card {
       padding: 22px;
     }
@@ -417,6 +490,7 @@
 
       .cards-grid,
       .cards-grid.compact,
+      .type-grid,
       .logos-grid,
       .ledger {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -458,6 +532,7 @@
       }
 
       .logos-grid,
+      .type-grid,
       .ledger,
       .toggle-row {
         grid-template-columns: 1fr;
@@ -702,6 +777,73 @@
             <p class="swatch-code">#C9A96F</p>
             <p class="swatch-name">Companion Gold</p>
           </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <div class="section-header">
+        <h2 class="section-title">Typography system</h2>
+        <p class="section-meta">Current OTW type voices</p>
+      </div>
+      <div class="type-grid">
+        <article class="type-card">
+          <p class="type-kicker">Primary Sans</p>
+          <h3 class="type-name">Inter</h3>
+          <p class="type-role">Clean public-facing body copy, modern UI text, and readable utility language across OTW and Professional.</p>
+          <p class="type-sample body" style="font-family:'Inter', sans-serif;">A quarter-century of digital residue keeps finding its way back to the signal.</p>
+          <p class="type-note">Best for: body copy, navigation, modern utility text, calmer public surfaces.</p>
+        </article>
+
+        <article class="type-card">
+          <p class="type-kicker">Signal Mono</p>
+          <h3 class="type-name">Fira Code</h3>
+          <p class="type-role">Instrument-panel text, timestamps, coordinates, labels, and anything that should feel live, coded, or operational.</p>
+          <p class="type-sample code" style="font-family:'Fira Code', monospace;">LIVE_NOW // QUEEN_CREEK_SIGNAL
+03_31_2026 // BROADCAST_LOCKED</p>
+          <p class="type-note">Best for: metadata, system labels, OTW signal language, technical framing.</p>
+        </article>
+
+        <article class="type-card">
+          <p class="type-kicker">Brand Sans</p>
+          <h3 class="type-name">IBM Plex Sans</h3>
+          <p class="type-role">More authored and technical than Inter. Used heavily in core OTW brand pages, fragments surfaces, and private app lanes.</p>
+          <p class="type-sample body" style="font-family:'IBM Plex Sans', sans-serif;">The suite stays calm, precise, and atmospheric even when the work itself is complicated.</p>
+          <p class="type-note">Best for: OTW-branded UI, denser layouts, app shells, and structured editorial surfaces.</p>
+        </article>
+
+        <article class="type-card">
+          <p class="type-kicker">Brand Mono</p>
+          <h3 class="type-name">IBM Plex Mono</h3>
+          <p class="type-role">The strongest OTW coded identity font. Carries panel labels, chips, toggles, queue states, and launcher language.</p>
+          <p class="type-sample code" style="font-family:'IBM Plex Mono', monospace;">QUEUE_STATUS: CLEAR
+GHOST_WRITER // READY
+FRAGMENTS // LIVE</p>
+          <p class="type-note">Best for: OTW app chrome, cards, section labels, control surfaces, internal tools.</p>
+        </article>
+
+        <article class="type-card">
+          <p class="type-kicker">Editorial Serif</p>
+          <h3 class="type-name">IBM Plex Serif</h3>
+          <p class="type-role">Reflective OTW serif voice. It adds gravity and humanity without drifting out of the system.</p>
+          <p class="type-sample display" style="font-family:'IBM Plex Serif', serif;">Returned signal from the sleeping mind.</p>
+          <p class="type-note">Best for: article titles, reflective intros, pull-quote energy, public OTW editorial moments.</p>
+        </article>
+
+        <article class="type-card">
+          <p class="type-kicker">Word.Person Display</p>
+          <h3 class="type-name">Fraunces</h3>
+          <p class="type-role">Warm, intimate, devotional, and image-led. This is the signature display voice for Word.Person and Drift-adjacent poetry surfaces.</p>
+          <p class="type-sample display" style="font-family:'Fraunces', serif;">A room made of light, paper, and wanting.</p>
+          <p class="type-note">Best for: emotional display copy, poetry titles, sanctuary/editorial lanes, feminine warmth.</p>
+        </article>
+
+        <article class="type-card">
+          <p class="type-kicker">Archive Serif</p>
+          <h3 class="type-name">Merriweather</h3>
+          <p class="type-role">Used most clearly in the modern residue archive. It gives archive reading a quieter literary depth than the main OTW serif set.</p>
+          <p class="type-sample body" style="font-family:'Merriweather', serif;">The archive does not just remember; it re-frames, softens, and returns.</p>
+          <p class="type-note">Best for: archive reading surfaces, longer-form literary bodies, slower reflective text.</p>
         </article>
       </div>
     </section>
