@@ -26,12 +26,16 @@
     <meta name="twitter:description" content="frgm<nts is an in-progress anti-social app from Outside The World, built for quieter, more human connection.">
     <meta name="twitter:image" content="https://outsidetheworld.com/Images/assets/comingsoon.png">
 
+    <!-- TODO: Replace CDN Tailwind with a production build (tailwindcss CLI)
+         to eliminate ~300KB runtime JS and avoid FOUC on slow mobile connections -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Fira+Code:wght@400;700&family=IBM+Plex+Serif:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap">
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Fira+Code:wght@400;700&family=IBM+Plex+Serif:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap"
         rel="stylesheet">
@@ -173,16 +177,8 @@
             text-shadow: 0 0 22px rgba(255, 105, 180, 0.28);
         }
 
-        .beat,
-        #hero-kicker,
-        #hero-text,
-        #sub-hero,
-        #anxiety-text,
-        #depressed-text,
-        #era-text,
-        #ledge-card {
-            will-change: transform, opacity;
-        }
+        /* will-change omitted — GSAP handles GPU promotion;
+           blanket will-change layers hurt low-end mobile devices */
 
         .signup-status {
             min-height: 1.5rem;
@@ -372,7 +368,7 @@
             border: 1px solid rgba(155, 89, 182, 0.32);
             background: rgba(155, 89, 182, 0.08);
             color: rgba(245, 247, 251, 0.88);
-            font-family: "IBM Plex Mono", monospace;
+            font-family: "Fira Code", monospace;
             font-size: 0.76rem;
             font-weight: 600;
             letter-spacing: 0.05em;
@@ -392,7 +388,7 @@
 
         .site-footer-legal {
             margin: 0;
-            font-family: "IBM Plex Mono", monospace;
+            font-family: "Fira Code", monospace;
             font-size: 0.72rem;
             line-height: 1.8;
             letter-spacing: 0.08em;
@@ -627,7 +623,7 @@
 
     <section class="prelude" aria-label="Manifesto opening">
         <div class="prelude-title">
-            <p class="serif text-5xl md:text-8xl leading-none font-black tracking-tight">Let&apos;s Face It.</p>
+            <h1 class="font-serif text-5xl md:text-8xl leading-none font-black tracking-tight">Let&rsquo;s Face It.</h1>
         </div>
         <div id="scroll-indicator" class="scroll-indicator" aria-hidden="true">
             <p class="scroll-indicator-label">Scroll</p>
@@ -644,14 +640,14 @@
             <div class="beat absolute inset-0 flex items-center justify-center px-6 md:px-24 opacity-0">
                 <div class="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-12 max-w-7xl w-full">
                     <div class="text-center md:text-left flex-1">
-                        <p class="serif text-[2.5rem] md:text-6xl leading-[1.04] text-balance">
+                        <p class="font-serif text-[clamp(2rem,8vw,2.5rem)] md:text-6xl leading-[1.04] text-balance">
                             Social Media is
                             <span class="block text-amethyst text-glow-amethyst font-black">taking away our peace.</span>
                         </p>
                     </div>
                     <div class="flex-1 flex justify-center md:justify-end">
                         <img src="Images/assets/IG_FB_melting.png" alt="Social apps melting into a toxic, distorted feed"
-                            loading="eager" decoding="async"
+                            loading="lazy" decoding="async"
                             class="w-2/3 md:w-full max-w-[280px] md:max-w-md h-auto object-contain">
                     </div>
                 </div>
@@ -659,7 +655,7 @@
 
             <div class="beat absolute inset-0 flex items-center justify-center px-6 md:px-24 opacity-0">
                 <div class="manifesto-text-wrap">
-                    <p class="manifesto-copy serif text-[2.5rem] md:text-6xl text-center leading-[1.08]">
+                    <p class="manifesto-copy font-serif text-[clamp(2rem,8vw,2.5rem)] md:text-6xl text-center leading-[1.08]">
                         We try to distance ourselves.
                         <span class="block mt-3 md:mt-5">We <span class="text-amethyst text-glow-amethyst font-black">quit</span>. We <span class="text-brandPink text-glow-pink font-black">crave</span>. We <span class="text-amethyst text-glow-amethyst font-black">return</span>.</span>
                     </p>
@@ -671,11 +667,11 @@
                     class="flex flex-col-reverse md:flex-row items-center justify-center gap-6 md:gap-12 max-w-7xl w-full">
                     <div class="flex-1 flex justify-center md:justify-start">
                         <img src="Images/assets/IG_Hug2.png" alt="A softer social moment that suggests connection can still matter"
-                            loading="eager" decoding="async"
+                            loading="lazy" decoding="async"
                             class="w-2/3 md:w-full max-w-[280px] md:max-w-md h-auto object-contain drop-shadow-[0_0_20px_rgba(224,191,184,0.2)]">
                     </div>
                     <div class="text-center md:text-right flex-1">
-                        <p class="serif text-[2.35rem] md:text-6xl leading-[1.04] text-balance">
+                        <p class="font-serif text-[clamp(1.9rem,7.5vw,2.35rem)] md:text-6xl leading-[1.04] text-balance">
                             Because we are human.
                             <span class="block text-roseGold font-black uppercase tracking-tight mt-2 md:mt-3">Because we crave connection.</span>
                         </p>
@@ -685,7 +681,7 @@
 
             <div class="beat absolute inset-0 flex items-center justify-center px-6 opacity-0">
                 <div class="manifesto-text-wrap">
-                    <p class="manifesto-copy serif text-[2.3rem] md:text-6xl text-center leading-[1.08] font-light">
+                    <p class="manifesto-copy font-serif text-[clamp(1.9rem,7.5vw,2.3rem)] md:text-6xl text-center leading-[1.08] font-light">
                         I felt this deeply.
                         <span class="block mt-3 md:mt-5">So, I asked myself:</span>
                     </p>
@@ -694,7 +690,7 @@
 
             <div class="beat absolute inset-0 flex items-center justify-center px-6 opacity-0">
                 <div class="manifesto-text-wrap">
-                    <p class="manifesto-copy manifesto-copy-tight serif text-[2.35rem] md:text-6xl text-center leading-[1.08]">
+                    <p class="manifesto-copy manifesto-copy-tight font-serif text-[clamp(1.9rem,7.5vw,2.35rem)] md:text-6xl text-center leading-[1.08]">
                         What do I want <span class="text-amethyst text-glow-amethyst font-black italic">Social Media</span> to be?
                     </p>
                 </div>
@@ -702,7 +698,7 @@
 
             <div class="beat absolute inset-0 flex items-center justify-center px-6 opacity-0">
                 <div class="manifesto-text-wrap">
-                    <p class="manifesto-copy manifesto-copy-tight serif text-[2.55rem] md:text-6xl text-center leading-[1.08] font-light">
+                    <p class="manifesto-copy manifesto-copy-tight font-serif text-[clamp(2rem,8vw,2.55rem)] md:text-6xl text-center leading-[1.08] font-light">
                         The <span class="pernicious font-mono font-bold uppercase tracking-widest">algorithm</span> does not care about our peace.
                     </p>
                 </div>
@@ -710,7 +706,7 @@
 
             <div class="beat absolute inset-0 flex items-center justify-center px-6 opacity-0">
                 <div class="manifesto-text-wrap">
-                    <p class="manifesto-copy manifesto-copy-wide serif text-[2.45rem] md:text-5xl text-center leading-[1.12] font-light">
+                    <p class="manifesto-copy manifesto-copy-wide font-serif text-[clamp(1.9rem,7.8vw,2.45rem)] md:text-5xl text-center leading-[1.12] font-light">
                         It rewards <span class="font-black text-brandPink text-glow-pink">compulsion</span>, amplifies <span class="font-black text-amethyst text-glow-amethyst">insecurity</span>, and calls that <span class="font-black text-brandPink text-glow-pink">engagement</span>.
                     </p>
                 </div>
@@ -718,14 +714,14 @@
 
             <div class="beat absolute inset-0 flex items-center justify-center px-6 opacity-0">
                 <div class="manifesto-text-wrap">
-                    <p class="manifesto-copy manifesto-copy-tight serif text-[2.3rem] md:text-6xl text-center leading-[1.08] font-medium">
+                    <p class="manifesto-copy manifesto-copy-tight font-serif text-[clamp(1.9rem,7.5vw,2.3rem)] md:text-6xl text-center leading-[1.08] font-medium">
                         So, I created a new place to call home.
                     </p>
                 </div>
             </div>
 
             <div class="beat absolute inset-0 flex items-center justify-center px-6 opacity-0">
-                <p class="manifesto-brand brand-arrival serif text-center">
+                <p class="manifesto-brand brand-arrival font-serif text-center">
                     <span class="brand-arrival-intro">Introducing</span>
                     <span class="brand-arrival-word">
                         <span class="brand-arrival-name">frgm&lt;nts</span>
@@ -734,20 +730,21 @@
                 </p>
             </div>
         </div>
+        <!-- Scroll spacer: ~9 beats × 110vh each; update if beat count changes -->
         <div class="h-[980vh] md:h-[900vh]"></div>
     </section>
 
     <section id="hero" class="relative h-[160vh] md:h-[180vh] w-full">
         <div class="hero-shell sticky top-0 h-screen-dvh w-full flex flex-col items-center justify-center bg-voidDark">
             <p class="section-kicker mb-5 md:mb-8 opacity-0" id="hero-kicker">Private Beta in Progress</p>
-            <h1 id="hero-text"
-                class="serif text-[3.35rem] md:text-9xl font-black tracking-tighter text-center opacity-0 leading-[0.9]">
+            <h2 id="hero-text"
+                class="font-serif text-[clamp(2.8rem,10vw,3.35rem)] md:text-9xl font-black tracking-tighter text-center opacity-0 leading-[0.9]">
                 <span class="block">THE</span>
                 <span class="block text-brandBlue text-glow-blue">ANTI-SOCIAL</span>
                 <span class="block">MEDIA</span>
-            </h1>
+            </h2>
             <p id="sub-hero"
-                class="serif text-brandTeal text-lg md:text-4xl mt-6 md:mt-12 opacity-0 font-light italic text-center px-6">
+                class="font-serif text-brandTeal text-lg md:text-4xl mt-6 md:mt-12 opacity-0 font-light italic text-center px-6">
                 Love your Neighbor. Not Their Vacation.
             </p>
         </div>
@@ -755,7 +752,7 @@
 
     <section id="contrast" class="relative h-[220vh] md:h-[260vh] w-full">
         <div class="sticky top-0 h-screen-dvh w-full flex flex-col items-center justify-center px-6">
-            <div id="anxiety-text" class="serif text-3xl md:text-8xl text-center leading-tight opacity-0">
+            <div id="anxiety-text" class="font-serif text-3xl md:text-8xl text-center leading-tight opacity-0">
                 Be social. <br class="md:hidden"><span class="text-amethyst text-glow-amethyst italic font-black">Not
                     anxious.</span>
             </div>
@@ -770,11 +767,11 @@
 
                     <div class="flex-[1.5] md:flex-1 w-full">
                         <p class="section-kicker mb-3 md:mb-5">Early Access</p>
-                        <h2 class="ledge-signal serif text-3xl md:text-7xl mb-4 md:mb-6 text-brandBlue text-glow-blue font-black uppercase tracking-tight leading-none">
+                        <h2 class="ledge-signal font-serif text-3xl md:text-7xl mb-4 md:mb-6 text-brandBlue text-glow-blue font-black uppercase tracking-tight leading-none">
                             Social Connection <br>for a Fragmented Era.
                         </h2>
-                        <h2 class="serif text-2xl md:text-6xl mb-4 md:mb-8 text-roseGold font-black leading-tight">Step
-                            onto the Ledge.</h2>
+                        <h3 class="font-serif text-2xl md:text-6xl mb-4 md:mb-8 text-roseGold font-black leading-tight">Step
+                            onto the Ledge.</h3>
                         <p
                             class="text-sm md:text-xl text-gray-400 leading-relaxed mb-6 md:mb-10 font-light">
                             frgm&lt;nts is being built on purpose for people who still believe the internet can feel human. If you want first access when the doors open, enter your email here.
@@ -793,9 +790,9 @@
                             </div>
                             <input id="waitlist-email" name="email" type="email" inputmode="email" autocomplete="email"
                                 placeholder="Enter your email" aria-describedby="waitlist-status"
-                                class="bg-white/5 border border-white/10 rounded-full px-4 py-3 md:px-6 md:py-4 focus:outline-none focus:border-roseGold/50 focus:ring-2 focus:ring-roseGold/20 text-sm md:text-sm">
+                                class="bg-white/5 border border-white/10 rounded-full px-4 py-3.5 md:px-6 md:py-4 focus:outline-none focus:border-roseGold/50 focus:ring-2 focus:ring-roseGold/20 text-sm md:text-sm">
                             <button id="waitlist-submit" type="submit" aria-label="Join the frgm<nts waitlist"
-                                class="bg-roseGold text-voidDark font-bold rounded-full px-4 py-3 md:px-8 md:py-4 uppercase tracking-[0.28em] text-[10px] md:text-[10px] hover:bg-white transition-colors">
+                                class="bg-roseGold text-voidDark font-bold rounded-full px-4 py-3.5 md:px-8 md:py-4 uppercase tracking-[0.28em] text-[10px] md:text-[10px] hover:bg-white transition-colors">
                                 Join the List
                             </button>
                             <p id="waitlist-status" class="signup-status text-xs md:text-xs text-roseGold/80" role="status" aria-live="polite"></p>
@@ -806,7 +803,7 @@
                     <div class="flex-1 flex justify-center items-center w-full">
                         <img src="Images/assets/app_screen.png" alt="A frgm<nts app preview showing the in-progress interface"
                             loading="lazy" decoding="async"
-                            class="w-full max-w-[240px] md:max-w-[320px] h-auto max-h-[30vh] md:max-h-[56vh] object-contain rounded-[16px] md:rounded-[32px] shadow-2xl border border-white/10">
+                            class="w-full max-w-[240px] md:max-w-[320px] h-auto md:max-h-[56vh] object-contain rounded-[16px] md:rounded-[32px] shadow-2xl border border-white/10">
                     </div>
 
                 </div>
@@ -883,9 +880,9 @@
                         waitlistForm.reset();
                     }
                 } catch (error) {
-                    const subject = encodeURIComponent("frgm<nts waitlist");
+                    const subject = encodeURIComponent("frgmnts waitlist");
                     const body = encodeURIComponent(
-                        `Please add this address to the frgm<nts waitlist:\n\n${email}\n`
+                        `Please add this address to the frgmnts waitlist:\n\n${email}\n`
                     );
                     waitlistStatus.textContent = "The live waitlist is unavailable, so opening your email app instead.";
                     window.location.href = `mailto:support@outsidetheworld.com?subject=${subject}&body=${body}`;
