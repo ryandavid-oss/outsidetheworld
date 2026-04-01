@@ -42,6 +42,7 @@
                         logoInk: '#1A1C20',
                         brandBlue: '#6395EE',
                         amethyst: '#9B59B6',
+                        brandPink: '#FF69B4',
                         roseGold: '#E0BFB8',
                         logoNavy: '#1B365D',
                     },
@@ -94,6 +95,10 @@
             background: radial-gradient(circle, rgba(224, 191, 184, 0.16) 0%, rgba(224, 191, 184, 0) 72%);
         }
 
+        a {
+            color: inherit;
+        }
+
         /* Uses Dynamic Viewport Height for mobile browser UI consistency */
         .h-screen-dvh {
             height: 100dvh;
@@ -138,6 +143,14 @@
 
         .text-glow-rose {
             text-shadow: 0 0 30px rgba(224, 191, 184, 0.2);
+        }
+
+        .text-glow-amethyst {
+            text-shadow: 0 0 22px rgba(155, 89, 182, 0.34);
+        }
+
+        .text-glow-pink {
+            text-shadow: 0 0 22px rgba(255, 105, 180, 0.28);
         }
 
         .beat,
@@ -188,16 +201,119 @@
             line-height: 1.08;
         }
 
+        .brand-arrival {
+            font-size: clamp(3rem, 10vw, 7rem);
+            line-height: 0.96;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            color: rgba(224, 191, 184, 0.92);
+            text-shadow:
+                0 0 30px rgba(224, 191, 184, 0.16),
+                0 0 60px rgba(155, 89, 182, 0.12);
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .brand-arrival-intro {
+            display: block;
+            margin-bottom: 0.8rem;
+            font-family: "Fira Code", monospace;
+            font-size: clamp(0.9rem, 2.1vw, 1.15rem);
+            letter-spacing: 0.38em;
+            text-transform: uppercase;
+            color: rgba(224, 191, 184, 0.7);
+        }
+
+        .brand-arrival-name {
+            display: block;
+            font-weight: 900;
+            letter-spacing: 0.14em;
+        }
+
         .prelude {
             position: relative;
             min-height: 100dvh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 1.5rem 1.5rem 6rem;
+            padding: 5.75rem 1.5rem 6rem;
             background:
                 radial-gradient(circle at 50% 38%, rgba(224, 191, 184, 0.1), rgba(224, 191, 184, 0) 36%),
                 #0A0A0A;
+        }
+
+        .site-rail {
+            position: absolute;
+            top: 1.1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: min(1120px, calc(100% - 24px));
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.25rem;
+            z-index: 2;
+        }
+
+        .site-lockup {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.9rem;
+            text-decoration: none;
+            min-width: 0;
+        }
+
+        .site-lockup img {
+            width: 48px;
+            height: auto;
+            opacity: 0.9;
+        }
+
+        .site-lockup-copy {
+            display: grid;
+            gap: 0.2rem;
+            min-width: 0;
+        }
+
+        .site-lockup-kicker,
+        .site-rail-meta {
+            font-family: "Fira Code", monospace;
+            text-transform: uppercase;
+        }
+
+        .site-lockup-kicker {
+            margin: 0;
+            font-size: 0.66rem;
+            letter-spacing: 0.24em;
+            color: rgba(238, 238, 238, 0.86);
+        }
+
+        .site-lockup-subline {
+            margin: 0;
+            font-size: 0.82rem;
+            color: rgba(224, 191, 184, 0.72);
+            letter-spacing: 0.02em;
+        }
+
+        .site-rail-meta {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            gap: 0.75rem;
+            font-size: 0.62rem;
+            letter-spacing: 0.24em;
+            color: rgba(224, 191, 184, 0.74);
+        }
+
+        .site-rail-meta span {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .site-rail-meta span:not(:last-child)::after {
+            content: "/";
+            color: rgba(224, 191, 184, 0.36);
         }
 
         .prelude-title {
@@ -256,6 +372,68 @@
             width: 4rem;
             height: 1px;
             background: linear-gradient(90deg, rgba(224, 191, 184, 0), rgba(224, 191, 184, 0.45), rgba(224, 191, 184, 0));
+        }
+
+        .site-footer {
+            margin-top: 0;
+            padding: 2rem 1.5rem 3.6rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            background:
+                linear-gradient(180deg, rgba(10, 10, 10, 0.92), rgba(10, 10, 10, 1)),
+                radial-gradient(circle at 50% 0%, rgba(155, 89, 182, 0.08), transparent 46%);
+        }
+
+        .site-footer-shell {
+            width: min(980px, 100%);
+            margin: 0 auto;
+            display: grid;
+            gap: 1rem;
+            justify-items: center;
+            text-align: center;
+        }
+
+        .site-footer .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.85rem;
+            margin-bottom: 0;
+        }
+
+        .site-footer .footer-links a {
+            display: inline-flex;
+            align-items: center;
+            min-height: 40px;
+            padding: 0 14px;
+            border-radius: 999px;
+            border: 1px solid rgba(155, 89, 182, 0.32);
+            background: rgba(155, 89, 182, 0.08);
+            color: rgba(245, 247, 251, 0.88);
+            font-family: "IBM Plex Mono", monospace;
+            font-size: 0.76rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-decoration: none;
+            transition: border-color 0.28s ease, color 0.28s ease, transform 0.28s ease, background 0.28s ease, box-shadow 0.28s ease;
+        }
+
+        .site-footer .footer-links a:hover,
+        .site-footer .footer-links a:focus-visible {
+            transform: translateY(-1px);
+            color: #ffffff;
+            border-color: rgba(155, 89, 182, 0.64);
+            background: rgba(155, 89, 182, 0.14);
+            box-shadow: 0 0 20px rgba(155, 89, 182, 0.14);
+            outline: none;
+        }
+
+        .site-footer-legal {
+            margin: 0;
+            font-family: "IBM Plex Mono", monospace;
+            font-size: 0.72rem;
+            line-height: 1.8;
+            letter-spacing: 0.08em;
+            color: rgba(245, 247, 251, 0.38);
         }
 
         .promise-grid {
@@ -405,6 +583,19 @@
                 width: 2.4rem;
             }
 
+            .site-rail {
+                top: 0.9rem;
+                width: calc(100% - 24px);
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.8rem;
+            }
+
+            .site-rail-meta {
+                justify-content: flex-start;
+                gap: 0.55rem;
+            }
+
             .promise-grid {
                 grid-template-columns: 1fr;
             }
@@ -424,6 +615,20 @@
 <body class="font-sans">
 
     <section class="prelude" aria-label="Manifesto opening">
+        <div class="site-rail" aria-label="frgmnts page rail">
+            <a class="site-lockup" href="index.html">
+                <img src="Images/Equal.svg" alt="Outside The World" />
+                <div class="site-lockup-copy">
+                    <p class="site-lockup-kicker">Outside The World // frgm&lt;nts</p>
+                    <p class="site-lockup-subline">A quieter social product in progress.</p>
+                </div>
+            </a>
+            <div class="site-rail-meta">
+                <span>Private Beta</span>
+                <span>Human Scale</span>
+                <span>iPhone Friendly</span>
+            </div>
+        </div>
         <div class="prelude-title">
             <p class="serif text-5xl md:text-8xl leading-none font-black tracking-tight">Let&apos;s Face It.</p>
         </div>
@@ -443,8 +648,8 @@
                 <div class="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-12 max-w-7xl w-full">
                     <div class="text-center md:text-left flex-1">
                         <p class="serif text-2xl md:text-6xl leading-[1.08] text-balance">
-                            Social Media is slowly
-                            <span class="block text-brandBlue text-glow-blue font-black">taking away our peace.</span>
+                            Social Media is
+                            <span class="block text-amethyst text-glow-amethyst font-black">taking away our peace.</span>
                         </p>
                     </div>
                     <div class="flex-1 flex justify-center md:justify-end">
@@ -459,7 +664,7 @@
                 <div class="manifesto-text-wrap">
                     <p class="manifesto-copy serif text-2xl md:text-6xl text-center leading-[1.12]">
                         We try to distance ourselves.
-                        <span class="block mt-3 md:mt-5">We quit, only to come back.</span>
+                        <span class="block mt-3 md:mt-5">We <span class="text-amethyst text-glow-amethyst font-black">quit</span>. We <span class="text-brandPink text-glow-pink font-black">crave</span>. We <span class="text-amethyst text-glow-amethyst font-black">return</span>.</span>
                     </p>
                 </div>
             </div>
@@ -474,8 +679,8 @@
                     </div>
                     <div class="text-center md:text-right flex-1">
                         <p class="serif text-2xl md:text-6xl leading-[1.08] text-balance">
-                            We are human.
-                            <span class="block text-roseGold font-black uppercase tracking-tight mt-2 md:mt-3">We crave connection.</span>
+                            Because we are human.
+                            <span class="block text-roseGold font-black uppercase tracking-tight mt-2 md:mt-3">Because we crave connection.</span>
                         </p>
                     </div>
                 </div>
@@ -493,7 +698,7 @@
             <div class="beat absolute inset-0 flex items-center justify-center px-6 opacity-0">
                 <div class="manifesto-text-wrap">
                     <p class="manifesto-copy manifesto-copy-tight serif text-2xl md:text-6xl text-center leading-[1.12]">
-                        What do I want <span class="text-roseGold text-glow-rose font-black italic">Social Media</span> to be?
+                        What do I want <span class="text-amethyst text-glow-amethyst font-black italic">Social Media</span> to be?
                     </p>
                 </div>
             </div>
@@ -501,18 +706,8 @@
             <div class="beat absolute inset-0 flex items-center justify-center px-6 opacity-0">
                 <div class="manifesto-text-wrap">
                     <p class="manifesto-copy manifesto-copy-wide serif text-xl md:text-5xl text-center leading-[1.22] font-light">
-                        I knew in my heart that online connection is too <span class="text-roseGold text-glow-rose font-black">entrenched</span>.
-                        <span class="block mt-3 md:mt-5">Too <span class="text-brandBlue text-glow-blue font-black">ingrained</span> in the fabric of our society to abandon.</span>
-                        <span class="block mt-3 md:mt-5">The path forward was never to <span class="text-roseGold text-glow-rose font-black">disappear</span>. It was to <span class="text-brandBlue text-glow-blue font-black">rebuild</span>.</span>
-                    </p>
-                </div>
-            </div>
-
-            <div class="beat absolute inset-0 flex items-center justify-center px-6 opacity-0">
-                <div class="manifesto-text-wrap">
-                    <p class="manifesto-copy manifesto-copy-wide serif text-xl md:text-5xl text-center leading-[1.22] font-light">
-                        But I also knew that the <span class="pernicious font-mono font-bold uppercase tracking-widest">algorithm</span> hurts us.
-                        <span class="block mt-3 md:mt-5">Its truest purpose is to subvert our deepest passions and expose our fears.</span>
+                        The <span class="pernicious font-mono font-bold uppercase tracking-widest">algorithm</span> does not care about our peace.
+                        <span class="block mt-3 md:mt-5">It rewards <span class="font-black text-brandPink text-glow-pink">compulsion</span>, amplifies <span class="font-black text-amethyst text-glow-amethyst">insecurity</span>, and calls that <span class="font-black text-brandPink text-glow-pink">engagement</span>.</span>
                     </p>
                 </div>
             </div>
@@ -520,21 +715,15 @@
             <div class="beat absolute inset-0 flex items-center justify-center px-6 opacity-0">
                 <div class="manifesto-text-wrap">
                     <p class="manifesto-copy manifesto-copy-tight serif text-2xl md:text-6xl text-center leading-[1.12] font-medium">
-                        I created my own platform.
+                        So, I created a new place to call home.
                     </p>
                 </div>
             </div>
 
             <div class="beat absolute inset-0 flex items-center justify-center px-6 opacity-0">
-                <div class="text-center">
-                    <div class="signal-mark">A Better Way Through</div>
-                </div>
-            </div>
-
-            <div class="beat absolute inset-0 flex items-center justify-center px-6 opacity-0">
-                <p class="manifesto-brand serif text-4xl md:text-8xl text-center font-light tracking-[0.12em] md:tracking-[0.18em] text-roseGold/80">
-                    Introducing...
-                    <span class="block mt-3 md:mt-5 font-normal">frgm&lt;nts&trade;</span>
+                <p class="manifesto-brand brand-arrival serif text-center">
+                    <span class="brand-arrival-intro">Introducing</span>
+                    <span class="brand-arrival-name">frgm&lt;nts&trade;</span>
                 </p>
             </div>
         </div>
@@ -549,7 +738,7 @@
                 THE ANTI-SOCIAL MEDIA.
             </h1>
             <p id="sub-hero"
-                class="serif text-roseGold text-lg md:text-4xl mt-6 md:mt-12 opacity-0 font-light italic text-center px-6">
+                class="serif text-brandBlue text-glow-blue text-lg md:text-4xl mt-6 md:mt-12 opacity-0 font-light italic text-center px-6">
                 Love your Neighbor. Not Their Vacation.
             </p>
         </div>
@@ -558,13 +747,8 @@
     <section id="contrast" class="relative h-[220vh] md:h-[260vh] w-full">
         <div class="sticky top-0 h-screen-dvh w-full flex flex-col items-center justify-center px-6">
             <div id="anxiety-text" class="serif text-3xl md:text-8xl text-center leading-tight opacity-0">
-                Be social. <br class="md:hidden"><span class="text-brandBlue text-glow-blue italic font-black">Not
+                Be social. <br class="md:hidden"><span class="text-amethyst text-glow-amethyst italic font-black">Not
                     anxious.</span>
-            </div>
-            <div id="depressed-text"
-                class="serif text-3xl md:text-8xl text-center leading-tight mt-12 md:mt-16 opacity-0">
-                Stay in touch. <br class="md:hidden"><span class="text-brandBlue text-glow-blue italic font-black">Not
-                    swallowed whole.</span>
             </div>
         </div>
     </section>
@@ -572,7 +756,7 @@
     <section id="mission" class="relative h-[120vh] md:h-[140vh] w-full">
         <div class="sticky top-0 h-screen-dvh w-full flex flex-col items-center justify-center px-6">
             <h2 id="era-text"
-                class="serif text-3xl md:text-9xl text-center font-black uppercase tracking-tighter text-roseGold text-glow-rose opacity-0 leading-none">
+                class="serif text-3xl md:text-9xl text-center font-black uppercase tracking-tighter text-brandBlue text-glow-blue opacity-0 leading-none">
                 SOCIAL CONNECTION <br>FOR A FRAGMENTED ERA.
             </h2>
         </div>
@@ -581,7 +765,7 @@
     <section id="ledge-reveal" class="relative h-[150vh] md:h-[180vh] w-full">
         <div class="sticky top-0 h-screen-dvh w-full flex items-center justify-center p-4 md:p-6">
             <div id="ledge-card"
-                class="liquid-glass w-full max-w-6xl rounded-[32px] md:rounded-[40px] p-6 md:p-20 shadow-2xl translate-y-10 opacity-0">
+                class="liquid-glass w-full max-w-6xl rounded-[32px] md:rounded-[40px] p-6 md:p-20 shadow-2xl translate-y-4 md:translate-y-10 opacity-0">
                 <div class="flex flex-col md:flex-row items-center gap-8 md:gap-16">
 
                     <div class="flex-[1.5] md:flex-1 w-full">
@@ -590,7 +774,7 @@
                             onto the Ledge.</h2>
                         <p
                             class="text-sm md:text-xl text-gray-400 leading-relaxed mb-6 md:mb-10 font-light">
-                            frgm&lt;nts is being built slowly and on purpose for people who still believe the internet can feel human. If you want first access when the doors open, leave your email here.
+                            frgm&lt;nts is being built on purpose for people who still believe the internet can feel human. If you want first access when the doors open, enter your email here.
                         </p>
                         <div class="promise-grid" aria-label="frgmnts promises">
                             <div class="promise-pill">No Algorithm</div>
@@ -605,7 +789,7 @@
                                 <input id="waitlist-website" name="website" type="text" tabindex="-1" autocomplete="off">
                             </div>
                             <input id="waitlist-email" name="email" type="email" inputmode="email" autocomplete="email"
-                                placeholder="Email" aria-describedby="waitlist-status"
+                                placeholder="Enter your email" aria-describedby="waitlist-status"
                                 class="bg-white/5 border border-white/10 rounded-full px-4 py-3 md:px-6 md:py-4 focus:outline-none focus:border-roseGold/50 focus:ring-2 focus:ring-roseGold/20 text-sm md:text-sm">
                             <button id="waitlist-submit" type="submit" aria-label="Join the frgm<nts waitlist"
                                 class="bg-roseGold text-voidDark font-bold rounded-full px-4 py-3 md:px-8 md:py-4 uppercase tracking-[0.28em] text-[10px] md:text-[10px] hover:bg-white transition-colors">
@@ -627,18 +811,16 @@
         </div>
     </section>
 
-    <footer class="py-12 px-6 bg-voidDark border-t border-white/5">
-        <div class="max-w-4xl mx-auto flex flex-col items-center">
-            <div class="footer-links" style="display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-bottom:12px;font-family:'IBM Plex Mono',monospace;font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;">
+    <footer class="site-footer">
+        <div class="site-footer-shell">
+            <div class="footer-links">
                 <a href="privacy.html">Privacy</a>
                 <a href="terms.html">Terms</a>
                 <a href="trademarks.html">Trademarks</a>
                 <a href="support.html">Support</a>
             </div>
-            <p class="font-mono text-[8px] text-gray-500 leading-loose tracking-[0.2em] text-center uppercase">
-                © 2026 Outside the World is New, LLC. <br>
-                frgm&lt;nts™ and the frgm&lt;nts™ logo are trademarks of <br>
-                Outside the World is New, LLC.
+            <p class="site-footer-legal">
+                © 2026 Outside the World is New, LLC. frgm&lt;nts™ and the frgm&lt;nts™ logo are trademarks of Outside the World is New, LLC.
             </p>
         </div>
     </footer>
@@ -703,7 +885,7 @@
                         `Please add this address to the frgm<nts waitlist:\n\n${email}\n`
                     );
                     waitlistStatus.textContent = "The live waitlist is unavailable, so opening your email app instead.";
-                    window.location.href = `mailto:ryandavid@outsidetheworld.com?subject=${subject}&body=${body}`;
+                    window.location.href = `mailto:support@outsidetheworld.com?subject=${subject}&body=${body}`;
                 } finally {
                     if (waitlistSubmit) {
                         waitlistSubmit.disabled = false;
@@ -758,8 +940,7 @@
                 }
             });
             contrastTl.to("#anxiety-text", { opacity: 1, y: -10, duration: 1.5 })
-                .to("#anxiety-text", { opacity: 0, y: -44, duration: 1.2 })
-                .to("#depressed-text", { opacity: 1, y: -10, duration: 1.5 });
+                .to("#anxiety-text", { opacity: 0.08, y: -78, duration: 1.35 });
 
             // --- MISSION ---
             gsap.to("#era-text", {
@@ -774,12 +955,13 @@
 
             // --- LEDGE CARD ---
             gsap.to("#ledge-card", {
-                opacity: 1, y: 0,
+                opacity: 1,
+                y: 0,
                 scrollTrigger: {
                     trigger: "#ledge-reveal",
-                    start: "top 80%",
-                    end: "top top",
-                    scrub: 1
+                    start: window.matchMedia("(max-width: 767px)").matches ? "top 92%" : "top 80%",
+                    end: window.matchMedia("(max-width: 767px)").matches ? "top 48%" : "top top",
+                    scrub: window.matchMedia("(max-width: 767px)").matches ? 0.45 : 1
                 }
             });
 
