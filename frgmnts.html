@@ -236,84 +236,10 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 5.75rem 1.5rem 6rem;
+            padding: 1.5rem 1.5rem 6rem;
             background:
                 radial-gradient(circle at 50% 38%, rgba(224, 191, 184, 0.1), rgba(224, 191, 184, 0) 36%),
                 #0A0A0A;
-        }
-
-        .site-rail {
-            position: absolute;
-            top: 1.1rem;
-            left: 50%;
-            transform: translateX(-50%);
-            width: min(1120px, calc(100% - 24px));
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1.25rem;
-            z-index: 2;
-        }
-
-        .site-lockup {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.9rem;
-            text-decoration: none;
-            min-width: 0;
-        }
-
-        .site-lockup img {
-            width: 48px;
-            height: auto;
-            opacity: 0.9;
-        }
-
-        .site-lockup-copy {
-            display: grid;
-            gap: 0.2rem;
-            min-width: 0;
-        }
-
-        .site-lockup-kicker,
-        .site-rail-meta {
-            font-family: "Fira Code", monospace;
-            text-transform: uppercase;
-        }
-
-        .site-lockup-kicker {
-            margin: 0;
-            font-size: 0.66rem;
-            letter-spacing: 0.24em;
-            color: rgba(238, 238, 238, 0.86);
-        }
-
-        .site-lockup-subline {
-            margin: 0;
-            font-size: 0.82rem;
-            color: rgba(224, 191, 184, 0.72);
-            letter-spacing: 0.02em;
-        }
-
-        .site-rail-meta {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: flex-end;
-            gap: 0.75rem;
-            font-size: 0.62rem;
-            letter-spacing: 0.24em;
-            color: rgba(224, 191, 184, 0.74);
-        }
-
-        .site-rail-meta span {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .site-rail-meta span:not(:last-child)::after {
-            content: "/";
-            color: rgba(224, 191, 184, 0.36);
         }
 
         .prelude-title {
@@ -583,25 +509,31 @@
                 width: 2.4rem;
             }
 
-            .site-rail {
-                top: 0.9rem;
-                width: calc(100% - 24px);
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0.8rem;
-            }
-
-            .site-rail-meta {
-                justify-content: flex-start;
-                gap: 0.55rem;
-            }
-
             .promise-grid {
                 grid-template-columns: 1fr;
             }
 
             .manifesto-text-wrap {
                 padding-inline: 1rem;
+            }
+
+            .manifesto-copy {
+                max-width: 24rem;
+            }
+
+            .manifesto-copy-tight,
+            .manifesto-copy-wide {
+                max-width: 24rem;
+            }
+
+            .brand-arrival {
+                font-size: clamp(3.4rem, 15vw, 4.8rem);
+                letter-spacing: 0.06em;
+            }
+
+            .brand-arrival-intro {
+                font-size: 0.88rem;
+                letter-spacing: 0.28em;
             }
 
             .scroll-indicator-label {
@@ -615,20 +547,6 @@
 <body class="font-sans">
 
     <section class="prelude" aria-label="Manifesto opening">
-        <div class="site-rail" aria-label="frgmnts page rail">
-            <a class="site-lockup" href="index.html">
-                <img src="Images/Equal.svg" alt="Outside The World" />
-                <div class="site-lockup-copy">
-                    <p class="site-lockup-kicker">Outside The World // frgm&lt;nts</p>
-                    <p class="site-lockup-subline">A quieter social product in progress.</p>
-                </div>
-            </a>
-            <div class="site-rail-meta">
-                <span>Private Beta</span>
-                <span>Human Scale</span>
-                <span>iPhone Friendly</span>
-            </div>
-        </div>
         <div class="prelude-title">
             <p class="serif text-5xl md:text-8xl leading-none font-black tracking-tight">Let&apos;s Face It.</p>
         </div>
@@ -647,7 +565,7 @@
             <div class="beat absolute inset-0 flex items-center justify-center px-6 md:px-24 opacity-0">
                 <div class="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-12 max-w-7xl w-full">
                     <div class="text-center md:text-left flex-1">
-                        <p class="serif text-2xl md:text-6xl leading-[1.08] text-balance">
+                        <p class="serif text-[2.5rem] md:text-6xl leading-[1.04] text-balance">
                             Social Media is
                             <span class="block text-amethyst text-glow-amethyst font-black">taking away our peace.</span>
                         </p>
@@ -662,7 +580,7 @@
 
             <div class="beat absolute inset-0 flex items-center justify-center px-6 md:px-24 opacity-0">
                 <div class="manifesto-text-wrap">
-                    <p class="manifesto-copy serif text-2xl md:text-6xl text-center leading-[1.12]">
+                    <p class="manifesto-copy serif text-[2.5rem] md:text-6xl text-center leading-[1.08]">
                         We try to distance ourselves.
                         <span class="block mt-3 md:mt-5">We <span class="text-amethyst text-glow-amethyst font-black">quit</span>. We <span class="text-brandPink text-glow-pink font-black">crave</span>. We <span class="text-amethyst text-glow-amethyst font-black">return</span>.</span>
                     </p>
@@ -678,7 +596,7 @@
                             class="w-2/3 md:w-full max-w-[280px] md:max-w-md h-auto object-contain drop-shadow-[0_0_20px_rgba(224,191,184,0.2)]">
                     </div>
                     <div class="text-center md:text-right flex-1">
-                        <p class="serif text-2xl md:text-6xl leading-[1.08] text-balance">
+                        <p class="serif text-[2.35rem] md:text-6xl leading-[1.04] text-balance">
                             Because we are human.
                             <span class="block text-roseGold font-black uppercase tracking-tight mt-2 md:mt-3">Because we crave connection.</span>
                         </p>
@@ -688,7 +606,7 @@
 
             <div class="beat absolute inset-0 flex items-center justify-center px-6 opacity-0">
                 <div class="manifesto-text-wrap">
-                    <p class="manifesto-copy serif text-2xl md:text-6xl text-center leading-[1.12] font-light">
+                    <p class="manifesto-copy serif text-[2.3rem] md:text-6xl text-center leading-[1.08] font-light">
                         I felt this deeply.
                         <span class="block mt-3 md:mt-5">So, I asked myself:</span>
                     </p>
@@ -697,7 +615,7 @@
 
             <div class="beat absolute inset-0 flex items-center justify-center px-6 opacity-0">
                 <div class="manifesto-text-wrap">
-                    <p class="manifesto-copy manifesto-copy-tight serif text-2xl md:text-6xl text-center leading-[1.12]">
+                    <p class="manifesto-copy manifesto-copy-tight serif text-[2.35rem] md:text-6xl text-center leading-[1.08]">
                         What do I want <span class="text-amethyst text-glow-amethyst font-black italic">Social Media</span> to be?
                     </p>
                 </div>
@@ -705,7 +623,7 @@
 
             <div class="beat absolute inset-0 flex items-center justify-center px-6 opacity-0">
                 <div class="manifesto-text-wrap">
-                    <p class="manifesto-copy manifesto-copy-wide serif text-xl md:text-5xl text-center leading-[1.22] font-light">
+                    <p class="manifesto-copy manifesto-copy-wide serif text-[2rem] md:text-5xl text-center leading-[1.18] font-light">
                         The <span class="pernicious font-mono font-bold uppercase tracking-widest">algorithm</span> does not care about our peace.
                         <span class="block mt-3 md:mt-5">It rewards <span class="font-black text-brandPink text-glow-pink">compulsion</span>, amplifies <span class="font-black text-amethyst text-glow-amethyst">insecurity</span>, and calls that <span class="font-black text-brandPink text-glow-pink">engagement</span>.</span>
                     </p>
@@ -714,7 +632,7 @@
 
             <div class="beat absolute inset-0 flex items-center justify-center px-6 opacity-0">
                 <div class="manifesto-text-wrap">
-                    <p class="manifesto-copy manifesto-copy-tight serif text-2xl md:text-6xl text-center leading-[1.12] font-medium">
+                    <p class="manifesto-copy manifesto-copy-tight serif text-[2.3rem] md:text-6xl text-center leading-[1.08] font-medium">
                         So, I created a new place to call home.
                     </p>
                 </div>
@@ -727,7 +645,7 @@
                 </p>
             </div>
         </div>
-        <div class="h-[760vh] md:h-[900vh]"></div>
+        <div class="h-[980vh] md:h-[900vh]"></div>
     </section>
 
     <section id="hero" class="relative h-[160vh] md:h-[180vh] w-full">
@@ -910,10 +828,10 @@
 
             const beats = gsap.utils.toArray(".beat");
             beats.forEach((beat, i) => {
-                manifestoTl.to(beat, { opacity: 1, y: -10, duration: 0.9 });
-                manifestoTl.to(beat, { opacity: 1, duration: 0.35 });
+                manifestoTl.to(beat, { opacity: 1, y: -10, duration: 1.05 });
+                manifestoTl.to(beat, { opacity: 1, duration: 0.95 });
                 if (i < beats.length - 1) {
-                    manifestoTl.to(beat, { opacity: 0, y: -26, duration: 0.8 });
+                    manifestoTl.to(beat, { opacity: 0, y: -26, duration: 0.95 });
                 }
             });
 
