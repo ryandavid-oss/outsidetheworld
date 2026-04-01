@@ -202,14 +202,10 @@
         }
 
         .brand-arrival {
-            font-size: clamp(3rem, 10vw, 7rem);
-            line-height: 0.96;
-            font-weight: 700;
-            letter-spacing: 0.08em;
+            display: grid;
+            justify-items: center;
+            gap: 1rem;
             color: rgba(224, 191, 184, 0.92);
-            text-shadow:
-                0 0 30px rgba(224, 191, 184, 0.16),
-                0 0 60px rgba(155, 89, 182, 0.12);
             user-select: none;
             -webkit-user-select: none;
         }
@@ -224,10 +220,44 @@
             color: rgba(224, 191, 184, 0.7);
         }
 
+        .brand-arrival-icon {
+            width: clamp(88px, 12vw, 132px);
+            height: auto;
+            border-radius: 28px;
+            box-shadow:
+                0 18px 44px rgba(0, 0, 0, 0.34),
+                0 0 36px rgba(155, 89, 182, 0.12);
+        }
+
+        .brand-arrival-word {
+            position: relative;
+            display: inline-block;
+            padding-right: 0.72em;
+            font-size: clamp(3.35rem, 10.5vw, 7.2rem);
+            line-height: 0.94;
+            font-weight: 900;
+            letter-spacing: 0.08em;
+            color: rgba(224, 191, 184, 0.96);
+            text-shadow:
+                0 0 30px rgba(224, 191, 184, 0.16),
+                0 0 60px rgba(155, 89, 182, 0.12);
+        }
+
+        .brand-arrival-mark {
+            position: absolute;
+            top: 0.12em;
+            right: 0;
+            font-size: 0.28em;
+            letter-spacing: 0.02em;
+            line-height: 1;
+            color: rgba(224, 191, 184, 0.72);
+            text-shadow: none;
+        }
+
         .brand-arrival-name {
             display: block;
-            font-weight: 900;
-            letter-spacing: 0.14em;
+            font-weight: inherit;
+            letter-spacing: inherit;
         }
 
         .prelude {
@@ -527,13 +557,28 @@
             }
 
             .brand-arrival {
-                font-size: clamp(3.4rem, 15vw, 4.8rem);
-                letter-spacing: 0.06em;
+                gap: 0.8rem;
             }
 
             .brand-arrival-intro {
                 font-size: 0.88rem;
                 letter-spacing: 0.28em;
+            }
+
+            .brand-arrival-icon {
+                width: 94px;
+                border-radius: 24px;
+            }
+
+            .brand-arrival-word {
+                padding-right: 0.62em;
+                font-size: clamp(3.6rem, 15vw, 5rem);
+                letter-spacing: 0.05em;
+            }
+
+            .brand-arrival-mark {
+                top: 0.16em;
+                font-size: 0.24em;
             }
 
             .scroll-indicator-label {
@@ -641,7 +686,11 @@
             <div class="beat absolute inset-0 flex items-center justify-center px-6 opacity-0">
                 <p class="manifesto-brand brand-arrival serif text-center">
                     <span class="brand-arrival-intro">Introducing</span>
-                    <span class="brand-arrival-name">frgm&lt;nts&trade;</span>
+                    <img class="brand-arrival-icon" src="Images/assets/app_logo1.png" alt="frgmnts app icon" loading="lazy" decoding="async" />
+                    <span class="brand-arrival-word">
+                        <span class="brand-arrival-name">frgm&lt;nts</span>
+                        <span class="brand-arrival-mark">&trade;</span>
+                    </span>
                 </p>
             </div>
         </div>
@@ -680,7 +729,7 @@
         </div>
     </section>
 
-    <section id="ledge-reveal" class="relative h-[150vh] md:h-[180vh] w-full">
+    <section id="ledge-reveal" class="relative h-[185vh] md:h-[180vh] w-full">
         <div class="sticky top-0 h-screen-dvh w-full flex items-center justify-center p-4 md:p-6">
             <div id="ledge-card"
                 class="liquid-glass w-full max-w-6xl rounded-[32px] md:rounded-[40px] p-6 md:p-20 shadow-2xl translate-y-4 md:translate-y-10 opacity-0">
