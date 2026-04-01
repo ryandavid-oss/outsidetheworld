@@ -192,6 +192,38 @@
       text-align: center;
     }
 
+    .jump-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+      max-width: 240px;
+      margin-top: 2px;
+    }
+
+    .jump-select {
+      width: 100%;
+      min-height: 50px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text);
+      padding: 12px 14px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      outline: none;
+      cursor: pointer;
+      transition: border-color 0.18s var(--ease), background 0.18s var(--ease);
+    }
+
+    .jump-select:hover,
+    .jump-select:focus-visible {
+      border-color: rgba(160, 190, 245, 0.34);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
     .toggle-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -604,10 +636,22 @@
           <button class="theme-btn is-active" type="button" data-theme-target="dark">Dark Surface</button>
           <button class="theme-btn" type="button" data-theme-target="light">Light Surface</button>
         </div>
+        <div class="jump-wrap">
+          <p class="theme-label">Jump To</p>
+          <select class="jump-select" id="jumpSelect" aria-label="Jump to palette section">
+            <option value="">Select section</option>
+            <option value="core-palette">Core OTW palette</option>
+            <option value="supporting-palette">Supporting OTW colors</option>
+            <option value="wordperson-palette">Word.person palette</option>
+            <option value="type-system">Typography system</option>
+            <option value="logos-brandmarks">Logos and brandmarks</option>
+            <option value="palette-ledger">Palette ledger</option>
+          </select>
+        </div>
       </aside>
     </section>
 
-    <section class="section-card">
+    <section class="section-card" id="core-palette">
       <div class="section-header">
         <h2 class="section-title">Core OTW palette</h2>
         <p class="section-meta">Signature system colors</p>
@@ -672,7 +716,7 @@
       </div>
     </section>
 
-    <section class="section-card">
+    <section class="section-card" id="supporting-palette">
       <div class="section-header">
         <h2 class="section-title">Supporting OTW colors</h2>
         <p class="section-meta">Accent and interaction colors</p>
@@ -730,7 +774,7 @@
       </div>
     </section>
 
-    <section class="section-card">
+    <section class="section-card" id="wordperson-palette">
       <div class="section-header">
         <h2 class="section-title">Word.person companion palette</h2>
         <p class="section-meta">Emily lane / OTW-adjacent</p>
@@ -781,7 +825,7 @@
       </div>
     </section>
 
-    <section class="section-card">
+    <section class="section-card" id="type-system">
       <div class="section-header">
         <h2 class="section-title">Typography system</h2>
         <p class="section-meta">Current OTW type voices</p>
@@ -848,7 +892,7 @@ FRAGMENTS // LIVE</p>
       </div>
     </section>
 
-    <section class="section-card">
+    <section class="section-card" id="logos-brandmarks">
       <div class="section-header">
         <h2 class="section-title">Logos and brandmarks</h2>
         <p class="section-meta">Dark and light efficacy</p>
@@ -920,7 +964,7 @@ FRAGMENTS // LIVE</p>
       </div>
     </section>
 
-    <section class="section-card">
+    <section class="section-card" id="palette-ledger">
       <div class="section-header">
         <h2 class="section-title">Palette ledger</h2>
         <p class="section-meta">Quick readout</p>
@@ -957,6 +1001,7 @@ FRAGMENTS // LIVE</p>
     const root = document.documentElement;
     const heroLogo = document.getElementById('heroLogo');
     const themeButtons = Array.from(document.querySelectorAll('.theme-btn'));
+    const jumpSelect = document.getElementById('jumpSelect');
 
     function applyTheme(theme) {
       root.dataset.theme = theme;
@@ -972,6 +1017,14 @@ FRAGMENTS // LIVE</p>
 
     themeButtons.forEach((button) => {
       button.addEventListener('click', () => applyTheme(button.dataset.themeTarget));
+    });
+
+    jumpSelect?.addEventListener('change', (event) => {
+      const targetId = event.target.value;
+      if (!targetId) return;
+      const section = document.getElementById(targetId);
+      section?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      event.target.value = '';
     });
   </script>
 </body>
