@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#090a0d" />
   <meta name="color-scheme" content="dark" />
-  <title>Privacy Notice | Outside The World</title>
+  <title>Support | Outside The World</title>
   <meta
     name="description"
-    content="Privacy notice for Outside The World, frgmnts, and related pages operated by Outside the World is New, LLC."
+    content="Support and contact information for Outside The World, frgmnts, and related pages operated by Outside the World is New, LLC."
   />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -43,8 +43,8 @@
       color: var(--text-main);
       font-family: "IBM Plex Sans", system-ui, sans-serif;
       background:
-        radial-gradient(720px 460px at 16% 12%, rgba(99, 149, 238, 0.14), transparent 60%),
-        radial-gradient(640px 420px at 84% 18%, rgba(145, 175, 179, 0.1), transparent 58%),
+        radial-gradient(720px 460px at 18% 12%, rgba(224, 191, 184, 0.14), transparent 60%),
+        radial-gradient(640px 420px at 84% 18%, rgba(99, 149, 238, 0.12), transparent 58%),
         linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 100%);
     }
 
@@ -112,7 +112,9 @@
     .topline a:hover,
     .topline a:focus-visible,
     .footer a:hover,
-    .footer a:focus-visible {
+    .footer a:focus-visible,
+    .support-link:hover,
+    .support-link:focus-visible {
       color: var(--brand-blue);
       outline: none;
     }
@@ -149,6 +151,13 @@
       letter-spacing: -0.06em;
     }
 
+    .hero-mark {
+      display: block;
+      width: 198px;
+      height: auto;
+      margin-top: -2px;
+    }
+
     .subtitle {
       margin: 0;
       color: var(--text-soft);
@@ -173,7 +182,11 @@
       white-space: nowrap;
     }
 
-    .sections { display: grid; gap: 14px; margin-top: 22px; }
+    .sections {
+      display: grid;
+      gap: 14px;
+      margin-top: 22px;
+    }
 
     .section {
       padding: 20px 22px;
@@ -199,6 +212,34 @@
     .section ul { margin: 12px 0 0; padding-left: 18px; }
     .section li + li { margin-top: 6px; }
 
+    .contact-panel {
+      display: grid;
+      gap: 14px;
+      margin-top: 10px;
+    }
+
+    .support-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: fit-content;
+      padding: 12px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(160, 190, 245, 0.28);
+      background: rgba(160, 190, 245, 0.08);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: border-color 160ms ease, background 160ms ease, color 160ms ease;
+    }
+
+    .support-link:hover,
+    .support-link:focus-visible {
+      border-color: rgba(160, 190, 245, 0.58);
+      background: rgba(160, 190, 245, 0.14);
+    }
+
     @media (max-width: 640px) {
       .card { padding: 22px; }
       .topline, .footer { justify-content: center; text-align: center; }
@@ -210,105 +251,70 @@
   <main class="shell">
     <div class="topline">
       <a href="./index.html">Back to Outside The World</a>
-      <span>Privacy Notice</span>
+      <span>Support</span>
     </div>
 
     <section class="card">
       <div class="hero">
-        <p class="eyebrow">Outside The World // Privacy Notice</p>
-        <h1 class="title">A Smaller, Clearer Privacy Notice.</h1>
+        <p class="eyebrow">Outside The World // Support</p>
+        <img class="hero-mark" src="Images/Equal.svg" alt="Equal mark" />
+        <h1 class="title">Need a Hand?</h1>
         <p class="subtitle">
-          Outside the World is New, LLC operates Outside The World and related brand pages, including the
-          frgm&lt;nts teaser currently hosted at <code>outsidetheworld.com</code>. We try to collect as little as
-          possible, explain plainly what is collected, and avoid turning visitors into behavioral inventory.
+          This page is the front door for support questions related to Outside The World, frgm&lt;nts, word.person,
+          and related public pages operated by Outside the World is New, LLC.
         </p>
-        <div class="updated">Updated March 30, 2026</div>
+        <div class="updated">Updated 3/26/2026</div>
       </div>
 
       <div class="sections">
         <section class="section">
-          <h2>1. What We Collect</h2>
-          <p>Most public OTW pages can be viewed without creating an account or submitting personal information.</p>
+          <h2>1. Best Way to Reach Us</h2>
+          <p>
+            Email is currently the best support channel for site issues, access questions, brand inquiries, waitlist
+            questions, broken links, and general help requests.
+          </p>
+          <div class="contact-panel">
+            <a class="support-link" href="mailto:support@outsidetheworld.com?subject=OTW%20Support">Email Support</a>
+            <p>
+              Primary contact:
+              <a href="mailto:support@outsidetheworld.com?subject=OTW%20Support">support@outsidetheworld.com</a>
+            </p>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>2. What to Include</h2>
           <ul>
-            <li>If you join the frgm&lt;nts waitlist, we collect the email address you submit.</li>
-            <li>If you email us directly, we receive whatever information you include in that email.</li>
-            <li>Some site pages may use analytics or third-party widgets that collect technical usage information such as browser, device, page view, or interaction data.</li>
+            <li>A short description of the issue or request.</li>
+            <li>The page or product area involved.</li>
+            <li>Your device, browser, and any error message if something is not working.</li>
+            <li>A screenshot if the issue is visual or layout-related.</li>
           </ul>
         </section>
 
         <section class="section">
-          <h2>2. Waitlist Information</h2>
-          <p>
-            The frgm&lt;nts waitlist currently stores submitted email addresses in a private repo-backed ledger used to
-            review interest and prepare launch outreach. We use that information to manage the waitlist and contact
-            people about frgm&lt;nts launch-related updates. We do not sell that list.
-          </p>
-        </section>
-
-        <section class="section">
-          <h2>3. Analytics and Third Parties</h2>
-          <p>
-            Some OTW pages currently use Google Analytics. Some pages also use third-party integrations such as Web
-            Reactionz or other embedded tools. Those services may collect information according to their own terms and
-            privacy practices.
-          </p>
-          <p>
-            If a page includes a third-party script, browser/device data or interaction data may be processed by that
-            provider when the page loads or when you interact with the embedded feature.
-          </p>
-        </section>
-
-        <section class="section">
-          <h2>4. Local Storage and Drafts</h2>
-          <p>
-            Some OTW tools and private publisher surfaces store drafts, settings, theme preferences, or publish-key
-            related data in local browser storage on the device being used. That storage is meant to support drafts,
-            recovery, or app behavior on that device.
-          </p>
-        </section>
-
-        <section class="section">
-          <h2>5. How We Use Information</h2>
+          <h2>3. Topics We Can Help With</h2>
           <ul>
-            <li>To operate the site and related publishing/app surfaces</li>
-            <li>To maintain the frgm&lt;nts waitlist</li>
-            <li>To understand basic site usage and keep pages functioning</li>
-            <li>To respond to support or contact requests</li>
+            <li>Broken pages, missing assets, or malfunctioning links.</li>
+            <li>Questions about the frgm&lt;nts waitlist or related launch pages.</li>
+            <li>Trademark, permissions, or brand-usage questions.</li>
+            <li>General questions about OTW public pages and content.</li>
           </ul>
         </section>
 
         <section class="section">
-          <h2>6. Sharing</h2>
+          <h2>4. Response Expectations</h2>
           <p>
-            We do not sell personal information submitted through the current OTW waitlist flow. Information may be
-            processed by infrastructure and service providers used to host the site, run analytics, or support embedded
-            features.
+            Support is handled on a best-effort basis. We aim to respond as promptly as practical, but response times
+            may vary depending on message volume and the nature of the request.
           </p>
         </section>
 
         <section class="section">
-          <h2>7. Retention</h2>
+          <h2>5. Privacy Note</h2>
           <p>
-            We keep submitted waitlist information for as long as reasonably needed to manage launch communications,
-            evaluate interest, or maintain business records, unless a longer retention period is required for legal or
-            operational reasons.
-          </p>
-        </section>
-
-        <section class="section">
-          <h2>8. Your Choices</h2>
-          <p>
-            If you want your waitlist email removed, or if you have a privacy question about OTW or frgm&lt;nts, contact
-            <a href="mailto:ryandavid@outsidetheworld.com?subject=OTW%20Privacy">ryandavid@outsidetheworld.com</a>.
-          </p>
-        </section>
-
-        <section class="section">
-          <h2>9. Scope</h2>
-          <p>
-            This notice covers the OTW site and related teaser/legal pages presently hosted in this repo. Separate app
-            experiences, private tooling, or later product launches may publish more specific privacy disclosures where
-            needed.
+            If you contact us for support, we will use the information you provide to review and respond to your
+            request. For more detail, please review the <a href="./privacy.html">Privacy Notice</a>.
           </p>
         </section>
       </div>
