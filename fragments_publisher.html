@@ -12,7 +12,8 @@
   <meta name="mobile-web-app-capable" content="yes" />
   <title>Fragments Publisher | Outside The World</title>
   <meta name="description" content="Private installable OTW fragments publisher for drafting and staging short-form thoughts." />
-  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="icon" type="image/png" sizes="512x512" href="Images/assets/fragments_icon_512.png" />
+  <link rel="apple-touch-icon" href="Images/assets/fragments_icon_512.png" />
   <link rel="manifest" href="fragments_publisher.webmanifest" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -801,6 +802,132 @@
       margin: 0;
       color: var(--text-soft);
       line-height: 1.7;
+    }
+
+    .waitlist-shell {
+      display: grid;
+      gap: 14px;
+    }
+
+    .waitlist-overview {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .waitlist-stat {
+      padding: 14px 16px;
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.035);
+      display: grid;
+      gap: 6px;
+    }
+
+    .waitlist-stat-label {
+      color: var(--text-faint);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.64rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .waitlist-stat-value {
+      color: var(--brand-light-blue);
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      word-break: break-word;
+    }
+
+    .waitlist-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .waitlist-item {
+      padding: 14px 16px;
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.035);
+      display: grid;
+      gap: 8px;
+    }
+
+    .waitlist-item-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .waitlist-email {
+      margin: 0;
+      color: var(--text-main);
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      word-break: break-word;
+    }
+
+    .waitlist-time {
+      color: var(--text-faint);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.64rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .waitlist-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .waitlist-pill {
+      width: fit-content;
+      padding: 5px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .waitlist-note {
+      margin: 0;
+      color: var(--text-soft);
+      line-height: 1.7;
+    }
+
+    .waitlist-export {
+      margin: 0;
+      padding: 18px;
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      background: rgba(4, 8, 12, 0.8);
+      color: #dffbf0;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.78rem;
+      line-height: 1.75;
+      white-space: pre-wrap;
+      word-break: break-word;
+      max-height: 320px;
+      overflow: auto;
+    }
+
+    .inquiry-type-label {
+      color: var(--brand-light-blue);
+    }
+
+    body[data-theme="light"] .waitlist-export {
+      background: rgba(231, 239, 235, 0.95);
+      color: #23453f;
     }
 
     .panel {
@@ -1809,6 +1936,10 @@
         display: grid;
         grid-template-columns: 1fr;
         max-width: none;
+      }
+
+      .waitlist-overview {
+        grid-template-columns: 1fr;
       }
     }
 
@@ -3175,6 +3306,30 @@
           <h2 class="app-tile-label">Summon OTW_Bot</h2>
           <p class="app-tile-meta"></p>
         </button>
+
+        <button class="app-tile" id="openWaitlistApp" type="button">
+          <div class="app-icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="8" y="12" width="32" height="24" rx="4"></rect>
+              <path d="M10.5 15.5L24 26L37.5 15.5"></path>
+            </svg>
+          </div>
+          <h2 class="app-tile-label">frgmnts Waitlist</h2>
+          <p class="app-tile-meta">Interest Viewer</p>
+        </button>
+
+        <button class="app-tile" id="openInquiriesApp" type="button">
+          <div class="app-icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M13 16h22"></path>
+              <path d="M13 24h22"></path>
+              <path d="M13 32h14"></path>
+              <path d="M34 13l5 5-5 5"></path>
+            </svg>
+          </div>
+          <h2 class="app-tile-label">Professional Inbox</h2>
+          <p class="app-tile-meta">Inquiry Viewer</p>
+        </button>
       </div>
     </section>
 
@@ -3765,6 +3920,116 @@
         <p class="bot-status panel" id="botStatusLine">OTW_Bot is idle and mildly judgmental.</p>
       </div>
     </section>
+
+    <section class="workspace" id="waitlistWorkspace">
+      <div class="waitlist-shell">
+        <main class="panel composer">
+          <div class="status-line" id="waitlistStatusLine">Load the live frgmnts waitlist, review who has raised a hand, and export it without digging through raw JSON.</div>
+          <div class="waitlist-overview">
+            <div class="waitlist-stat">
+              <span class="waitlist-stat-label">Total Signups</span>
+              <span class="waitlist-stat-value" id="waitlistCount">0</span>
+            </div>
+            <div class="waitlist-stat">
+              <span class="waitlist-stat-label">Latest Signal</span>
+              <span class="waitlist-stat-value" id="waitlistLatest">No entries yet</span>
+            </div>
+            <div class="waitlist-stat">
+              <span class="waitlist-stat-label">Primary Source</span>
+              <span class="waitlist-stat-value" id="waitlistSource">—</span>
+            </div>
+          </div>
+
+          <div class="action-row">
+            <button class="primary-btn" id="waitlistRefreshBtn" type="button">Refresh</button>
+            <button class="secondary-btn" id="waitlistCopyEmailsBtn" type="button">Copy Emails</button>
+            <button class="secondary-btn" id="waitlistDownloadCsvBtn" type="button">Download CSV</button>
+            <button class="secondary-btn" id="waitlistDownloadJsonBtn" type="button">Download JSON</button>
+          </div>
+        </main>
+
+        <div class="layout">
+          <section class="panel preview-panel">
+            <h2 class="section-title">Recent Interest</h2>
+            <div class="waitlist-list" id="waitlistList"></div>
+          </section>
+
+          <aside class="side-stack">
+            <section class="panel outbox-panel">
+              <h2 class="section-title">Export Preview</h2>
+              <pre class="waitlist-export" id="waitlistExportPreview">Loading…</pre>
+            </section>
+
+            <section class="panel outbox-panel">
+              <h2 class="section-title">How This Works</h2>
+              <div class="recent-list">
+                <article class="recent-item">
+                  <p class="recent-empty">This viewer reads <code>frgmnts_waitlist.json</code>, which is updated by the live Cloudflare worker each time someone joins the list.</p>
+                </article>
+                <article class="recent-item">
+                  <p class="recent-empty">Entries are shown newest first so you can quickly see fresh interest without leaving the OTW tool suite.</p>
+                </article>
+              </div>
+            </section>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="workspace" id="inquiriesWorkspace">
+      <div class="waitlist-shell">
+        <main class="panel composer">
+          <div class="status-line" id="inquiriesStatusLine">Load professional inquiries, review who reached out, and export the ledger without hunting through raw JSON.</div>
+          <div class="waitlist-overview">
+            <div class="waitlist-stat">
+              <span class="waitlist-stat-label">Total Inquiries</span>
+              <span class="waitlist-stat-value" id="inquiriesCount">0</span>
+            </div>
+            <div class="waitlist-stat">
+              <span class="waitlist-stat-label">Latest Inquiry</span>
+              <span class="waitlist-stat-value" id="inquiriesLatest">No inquiries yet</span>
+            </div>
+            <div class="waitlist-stat">
+              <span class="waitlist-stat-label">Primary Type</span>
+              <span class="waitlist-stat-value" id="inquiriesPrimaryType">—</span>
+            </div>
+          </div>
+
+          <div class="action-row">
+            <button class="primary-btn" id="inquiriesRefreshBtn" type="button">Refresh</button>
+            <button class="secondary-btn" id="inquiriesCopyContactsBtn" type="button">Copy Contacts</button>
+            <button class="secondary-btn" id="inquiriesDownloadCsvBtn" type="button">Download CSV</button>
+            <button class="secondary-btn" id="inquiriesDownloadJsonBtn" type="button">Download JSON</button>
+          </div>
+        </main>
+
+        <div class="layout">
+          <section class="panel preview-panel">
+            <h2 class="section-title">Recent Inquiries</h2>
+            <div class="waitlist-list" id="inquiriesList"></div>
+          </section>
+
+          <aside class="side-stack">
+            <section class="panel outbox-panel">
+              <h2 class="section-title">Export Preview</h2>
+              <pre class="waitlist-export" id="inquiriesExportPreview">Loading…</pre>
+            </section>
+
+            <section class="panel outbox-panel">
+              <h2 class="section-title">How This Works</h2>
+              <div class="recent-list">
+                <article class="recent-item">
+                  <p class="recent-empty">This viewer reads <code>professional_inquiries.json</code>, which is updated by the live Cloudflare worker each time someone uses the professional contact form.</p>
+                </article>
+                <article class="recent-item">
+                  <p class="recent-empty">Entries are shown newest first so you can quickly gauge interest and respond without relying on a public email link.</p>
+                </article>
+              </div>
+            </section>
+          </aside>
+        </div>
+      </div>
+    </section>
   </div>
 
   <div class="publish-toast" id="publishToast" role="status" aria-live="polite" aria-atomic="true">
@@ -3837,6 +4102,8 @@
     const PUBLISH_DRIFT_ENDPOINT = 'https://otw-fragments-publish.ryandavid.workers.dev/publish-drift-poem';
     const UPLOAD_GHOST_IMAGE_ENDPOINT = 'https://otw-fragments-publish.ryandavid.workers.dev/upload-ghost-image';
     const IOTD_PUBLIC_BASE_URL = 'https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev';
+    const FRGMNTS_WAITLIST_PATH = 'frgmnts_waitlist.json';
+    const PROFESSIONAL_INQUIRIES_PATH = 'professional_inquiries.json';
     const GHOST_FULL_DRAFT_KEY = 'otw_ghost_writer_draft_v4';
     const GHOST_FULL_SETTINGS_KEY = 'otw_ghost_writer_settings_v1';
     const GHOST_FULL_PUBLISH_KEY_STORAGE = 'otw_ghost_writer_publish_key';
@@ -3870,6 +4137,8 @@
     const driftWorkspace = document.getElementById('driftWorkspace');
     const ghostFullWorkspace = document.getElementById('ghostFullWorkspace');
     const botWorkspace = document.getElementById('botWorkspace');
+    const waitlistWorkspace = document.getElementById('waitlistWorkspace');
+    const inquiriesWorkspace = document.getElementById('inquiriesWorkspace');
     const openFragmentsApp = document.getElementById('openFragmentsApp');
     const openChangelogApp = document.getElementById('openChangelogApp');
     const openIotdApp = document.getElementById('openIotdApp');
@@ -3877,11 +4146,33 @@
     const openDriftApp = document.getElementById('openDriftApp');
     const openGhostFullApp = document.getElementById('openGhostFullApp');
     const openBotApp = document.getElementById('openBotApp');
+    const openWaitlistApp = document.getElementById('openWaitlistApp');
+    const openInquiriesApp = document.getElementById('openInquiriesApp');
     const openSiteApp = document.getElementById('openSiteApp');
     const openPaletteApp = document.getElementById('openPaletteApp');
     const headerBackBtn = document.getElementById('headerBackBtn');
     const botDeployBtn = document.getElementById('botDeployBtn');
     const botStatusLine = document.getElementById('botStatusLine');
+    const waitlistStatusLine = document.getElementById('waitlistStatusLine');
+    const waitlistCount = document.getElementById('waitlistCount');
+    const waitlistLatest = document.getElementById('waitlistLatest');
+    const waitlistSource = document.getElementById('waitlistSource');
+    const waitlistList = document.getElementById('waitlistList');
+    const waitlistExportPreview = document.getElementById('waitlistExportPreview');
+    const waitlistRefreshBtn = document.getElementById('waitlistRefreshBtn');
+    const waitlistCopyEmailsBtn = document.getElementById('waitlistCopyEmailsBtn');
+    const waitlistDownloadCsvBtn = document.getElementById('waitlistDownloadCsvBtn');
+    const waitlistDownloadJsonBtn = document.getElementById('waitlistDownloadJsonBtn');
+    const inquiriesStatusLine = document.getElementById('inquiriesStatusLine');
+    const inquiriesCount = document.getElementById('inquiriesCount');
+    const inquiriesLatest = document.getElementById('inquiriesLatest');
+    const inquiriesPrimaryType = document.getElementById('inquiriesPrimaryType');
+    const inquiriesList = document.getElementById('inquiriesList');
+    const inquiriesExportPreview = document.getElementById('inquiriesExportPreview');
+    const inquiriesRefreshBtn = document.getElementById('inquiriesRefreshBtn');
+    const inquiriesCopyContactsBtn = document.getElementById('inquiriesCopyContactsBtn');
+    const inquiriesDownloadCsvBtn = document.getElementById('inquiriesDownloadCsvBtn');
+    const inquiriesDownloadJsonBtn = document.getElementById('inquiriesDownloadJsonBtn');
     const dockHomeBtn = document.getElementById('dockHomeBtn');
     const dockAnalyticsBtn = document.getElementById('dockAnalyticsBtn');
     const dockGithubBtn = document.getElementById('dockGithubBtn');
@@ -3996,6 +4287,8 @@
     let gfullDirty = false;
     let gfullSelectionState = { start: 0, end: 0 };
     let gfullPendingImageObjectUrl = null;
+    let frgmntsWaitlistEntries = [];
+    let professionalInquiryEntries = [];
     let gfullSettingsState = {
       showSlugField: false,
       keepImagePanelOpen: false
@@ -4079,6 +4372,318 @@
         day: 'numeric',
         year: 'numeric'
       }).format(value).toUpperCase();
+    }
+
+    function formatWaitlistTimestamp(timestamp) {
+      const value = new Date(timestamp);
+      if (Number.isNaN(value.getTime())) {
+        return String(timestamp || 'Unknown time');
+      }
+      return new Intl.DateTimeFormat('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+        hour: 'numeric',
+        minute: '2-digit'
+      }).format(value);
+    }
+
+    function normalizeWaitlistEntries(items) {
+      if (!Array.isArray(items)) {
+        return [];
+      }
+
+      return items
+        .filter((item) => item && typeof item === 'object')
+        .map((item) => ({
+          email: String(item.email || '').trim(),
+          source: String(item.source || 'unknown').trim() || 'unknown',
+          note: String(item.note || '').trim(),
+          timestamp: String(item.timestamp || '').trim()
+        }))
+        .filter((item) => item.email)
+        .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
+    }
+
+    function getPrimaryWaitlistSource(entries) {
+      if (!entries.length) {
+        return '—';
+      }
+
+      const counts = new Map();
+      entries.forEach((entry) => {
+        counts.set(entry.source, (counts.get(entry.source) || 0) + 1);
+      });
+
+      let winner = entries[0].source;
+      let winnerCount = counts.get(winner) || 0;
+      for (const [source, count] of counts.entries()) {
+        if (count > winnerCount) {
+          winner = source;
+          winnerCount = count;
+        }
+      }
+
+      return winner;
+    }
+
+    function buildWaitlistCsv(entries) {
+      const rows = [
+        ['email', 'source', 'note', 'timestamp'],
+        ...entries.map((entry) => [entry.email, entry.source, entry.note, entry.timestamp])
+      ];
+
+      return rows.map((row) => row.map((value) => {
+        const text = String(value ?? '');
+        return /[",\n]/.test(text) ? `"${text.replace(/"/g, '""')}"` : text;
+      }).join(',')).join('\n');
+    }
+
+    function humanizeInquiryType(value) {
+      const labels = {
+        web_systems: 'Web Systems',
+        ios_product_work: 'iOS Product Work',
+        design: 'Digital Design',
+        collaboration: 'Collaboration',
+        other: 'Other'
+      };
+      return labels[String(value || '').trim()] || String(value || 'Other');
+    }
+
+    function renderWaitlist(entries) {
+      frgmntsWaitlistEntries = entries;
+      waitlistCount.textContent = String(entries.length);
+      waitlistLatest.textContent = entries[0] ? formatWaitlistTimestamp(entries[0].timestamp) : 'No entries yet';
+      waitlistSource.textContent = getPrimaryWaitlistSource(entries);
+      waitlistExportPreview.textContent = JSON.stringify(entries, null, 2);
+
+      if (!entries.length) {
+        waitlistList.innerHTML = '<article class="recent-item"><p class="recent-empty">No one has joined the list yet.</p></article>';
+        return;
+      }
+
+      waitlistList.innerHTML = entries.map((entry) => `
+        <article class="waitlist-item">
+          <div class="waitlist-item-head">
+            <p class="waitlist-email">${escapeHtml(entry.email)}</p>
+            <div class="waitlist-time">${escapeHtml(formatWaitlistTimestamp(entry.timestamp))}</div>
+          </div>
+          <div class="waitlist-meta">
+            <span class="waitlist-pill">${escapeHtml(entry.source)}</span>
+            ${entry.note ? `<span class="waitlist-pill">note attached</span>` : ''}
+          </div>
+          ${entry.note ? `<p class="waitlist-note">${escapeHtml(entry.note)}</p>` : ''}
+        </article>
+      `).join('');
+    }
+
+    async function refreshWaitlist() {
+      waitlistRefreshBtn.disabled = true;
+      waitlistRefreshBtn.textContent = 'Refreshing...';
+      waitlistStatusLine.textContent = 'Loading the live waitlist...';
+
+      try {
+        const response = await fetch(FRGMNTS_WAITLIST_PATH, { cache: 'no-store' });
+        if (!response.ok) {
+          throw new Error(`Waitlist load failed with status ${response.status}`);
+        }
+
+        const payload = await response.json();
+        const entries = normalizeWaitlistEntries(payload);
+        renderWaitlist(entries);
+        waitlistStatusLine.textContent = entries.length
+          ? `Loaded ${entries.length} waitlist entr${entries.length === 1 ? 'y' : 'ies'} from the live ledger.`
+          : 'The waitlist is live, but no entries have landed yet.';
+      } catch (error) {
+        waitlistStatusLine.textContent = error.message || 'Could not load the waitlist right now.';
+        waitlistList.innerHTML = '<article class="recent-item"><p class="recent-empty">The waitlist could not be loaded from this device right now.</p></article>';
+        waitlistExportPreview.textContent = '[]';
+      } finally {
+        waitlistRefreshBtn.disabled = false;
+        waitlistRefreshBtn.textContent = 'Refresh';
+      }
+    }
+
+    function normalizeProfessionalInquiries(items) {
+      if (!Array.isArray(items)) {
+        return [];
+      }
+
+      return items
+        .filter((item) => item && typeof item === 'object')
+        .map((item) => ({
+          name: String(item.name || '').trim(),
+          contact: String(item.contact || '').trim(),
+          inquiry_type: String(item.inquiry_type || 'other').trim(),
+          comment: String(item.comment || '').trim(),
+          source: String(item.source || 'professional_archive_contact_form').trim() || 'professional_archive_contact_form',
+          timestamp: String(item.timestamp || '').trim()
+        }))
+        .filter((item) => item.name && item.contact)
+        .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
+    }
+
+    function getPrimaryInquiryType(entries) {
+      if (!entries.length) {
+        return '—';
+      }
+
+      const counts = new Map();
+      entries.forEach((entry) => {
+        counts.set(entry.inquiry_type, (counts.get(entry.inquiry_type) || 0) + 1);
+      });
+
+      let winner = entries[0].inquiry_type;
+      let winnerCount = counts.get(winner) || 0;
+      for (const [type, count] of counts.entries()) {
+        if (count > winnerCount) {
+          winner = type;
+          winnerCount = count;
+        }
+      }
+
+      return humanizeInquiryType(winner);
+    }
+
+    function buildProfessionalInquiryCsv(entries) {
+      const rows = [
+        ['name', 'contact', 'inquiry_type', 'comment', 'source', 'timestamp'],
+        ...entries.map((entry) => [entry.name, entry.contact, entry.inquiry_type, entry.comment, entry.source, entry.timestamp])
+      ];
+
+      return rows.map((row) => row.map((value) => {
+        const text = String(value ?? '');
+        return /[",\n]/.test(text) ? `"${text.replace(/"/g, '""')}"` : text;
+      }).join(',')).join('\n');
+    }
+
+    function renderProfessionalInquiries(entries) {
+      professionalInquiryEntries = entries;
+      inquiriesCount.textContent = String(entries.length);
+      inquiriesLatest.textContent = entries[0] ? formatWaitlistTimestamp(entries[0].timestamp) : 'No inquiries yet';
+      inquiriesPrimaryType.textContent = getPrimaryInquiryType(entries);
+      inquiriesExportPreview.textContent = JSON.stringify(entries, null, 2);
+
+      if (!entries.length) {
+        inquiriesList.innerHTML = '<article class="recent-item"><p class="recent-empty">No professional inquiries have landed yet.</p></article>';
+        return;
+      }
+
+      inquiriesList.innerHTML = entries.map((entry) => `
+        <article class="waitlist-item">
+          <div class="waitlist-item-head">
+            <p class="waitlist-email">${escapeHtml(entry.name)}</p>
+            <div class="waitlist-time">${escapeHtml(formatWaitlistTimestamp(entry.timestamp))}</div>
+          </div>
+          <div class="waitlist-meta">
+            <span class="waitlist-pill inquiry-type-label">${escapeHtml(humanizeInquiryType(entry.inquiry_type))}</span>
+            <span class="waitlist-pill">${escapeHtml(entry.source)}</span>
+          </div>
+          <p class="waitlist-note"><strong>Contact:</strong> ${escapeHtml(entry.contact)}</p>
+          <p class="waitlist-note">${escapeHtml(entry.comment)}</p>
+        </article>
+      `).join('');
+    }
+
+    async function refreshProfessionalInquiries() {
+      inquiriesRefreshBtn.disabled = true;
+      inquiriesRefreshBtn.textContent = 'Refreshing...';
+      inquiriesStatusLine.textContent = 'Loading professional inquiries...';
+
+      try {
+        const response = await fetch(PROFESSIONAL_INQUIRIES_PATH, { cache: 'no-store' });
+        if (!response.ok) {
+          throw new Error(`Inquiry load failed with status ${response.status}`);
+        }
+
+        const payload = await response.json();
+        const entries = normalizeProfessionalInquiries(payload);
+        renderProfessionalInquiries(entries);
+        inquiriesStatusLine.textContent = entries.length
+          ? `Loaded ${entries.length} professional inquir${entries.length === 1 ? 'y' : 'ies'} from the live ledger.`
+          : 'The inquiry inbox is ready, but no one has reached out yet.';
+      } catch (error) {
+        inquiriesStatusLine.textContent = error.message || 'Could not load the professional inquiry ledger right now.';
+        inquiriesList.innerHTML = '<article class="recent-item"><p class="recent-empty">The professional inquiry ledger could not be loaded from this device right now.</p></article>';
+        inquiriesExportPreview.textContent = '[]';
+      } finally {
+        inquiriesRefreshBtn.disabled = false;
+        inquiriesRefreshBtn.textContent = 'Refresh';
+      }
+    }
+
+    async function copyProfessionalContacts() {
+      const contacts = professionalInquiryEntries
+        .map((entry) => `${entry.name} — ${entry.contact}`)
+        .join('\n');
+      if (!contacts) {
+        inquiriesStatusLine.textContent = 'There are no inquiry contacts to copy yet.';
+        return;
+      }
+
+      const ok = await navigator.clipboard.writeText(contacts).then(() => true).catch(() => false);
+      inquiriesStatusLine.textContent = ok
+        ? 'Inquiry contacts copied to the clipboard.'
+        : 'Clipboard copy failed on this device.';
+    }
+
+    function downloadProfessionalInquiriesCsv() {
+      const csv = buildProfessionalInquiryCsv(professionalInquiryEntries);
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `professional-inquiries-${new Date().toISOString().slice(0, 10)}.csv`;
+      link.click();
+      URL.revokeObjectURL(url);
+      inquiriesStatusLine.textContent = 'Professional inquiry CSV download started.';
+    }
+
+    function downloadProfessionalInquiriesJson() {
+      const blob = new Blob([JSON.stringify(professionalInquiryEntries, null, 2)], { type: 'application/json;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `professional-inquiries-${new Date().toISOString().slice(0, 10)}.json`;
+      link.click();
+      URL.revokeObjectURL(url);
+      inquiriesStatusLine.textContent = 'Professional inquiry JSON download started.';
+    }
+
+    async function copyWaitlistEmails() {
+      const emails = frgmntsWaitlistEntries.map((entry) => entry.email).join('\n');
+      if (!emails) {
+        waitlistStatusLine.textContent = 'There are no waitlist emails to copy yet.';
+        return;
+      }
+
+      const ok = await navigator.clipboard.writeText(emails).then(() => true).catch(() => false);
+      waitlistStatusLine.textContent = ok
+        ? 'Email addresses copied to the clipboard.'
+        : 'Clipboard copy failed on this device.';
+    }
+
+    function downloadWaitlistCsv() {
+      const csv = buildWaitlistCsv(frgmntsWaitlistEntries);
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `frgmnts-waitlist-${new Date().toISOString().slice(0, 10)}.csv`;
+      link.click();
+      URL.revokeObjectURL(url);
+      waitlistStatusLine.textContent = 'CSV download started.';
+    }
+
+    function downloadWaitlistJson() {
+      const blob = new Blob([JSON.stringify(frgmntsWaitlistEntries, null, 2)], { type: 'application/json;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `frgmnts-waitlist-${new Date().toISOString().slice(0, 10)}.json`;
+      link.click();
+      URL.revokeObjectURL(url);
+      waitlistStatusLine.textContent = 'JSON download started.';
     }
 
     function escapeJsonString(value) {
@@ -6494,11 +7099,11 @@
 
     function getWorkspaceFromHash() {
       const raw = window.location.hash.replace(/^#/, '').trim().toLowerCase();
-      return ['home', 'fragments', 'changelog', 'iotd', 'ghost', 'drift', 'ghost-full', 'bot'].includes(raw) ? raw : 'home';
+      return ['home', 'fragments', 'changelog', 'iotd', 'ghost', 'drift', 'ghost-full', 'bot', 'waitlist', 'inquiries'].includes(raw) ? raw : 'home';
     }
 
     function setWorkspace(view) {
-      const nextView = ['home', 'fragments', 'changelog', 'iotd', 'ghost', 'drift', 'ghost-full', 'bot'].includes(view) ? view : 'home';
+      const nextView = ['home', 'fragments', 'changelog', 'iotd', 'ghost', 'drift', 'ghost-full', 'bot', 'waitlist', 'inquiries'].includes(view) ? view : 'home';
 
       homeWorkspace.classList.toggle('is-active', nextView === 'home');
       fragmentsWorkspace.classList.toggle('is-active', nextView === 'fragments');
@@ -6508,6 +7113,8 @@
       driftWorkspace.classList.toggle('is-active', nextView === 'drift');
       ghostFullWorkspace.classList.toggle('is-active', nextView === 'ghost-full');
       botWorkspace.classList.toggle('is-active', nextView === 'bot');
+      waitlistWorkspace.classList.toggle('is-active', nextView === 'waitlist');
+      inquiriesWorkspace.classList.toggle('is-active', nextView === 'inquiries');
       headerBackBtn.classList.toggle('is-visible', nextView !== 'home');
       dockHomeBtn.classList.toggle('is-active', nextView === 'home');
 
@@ -6518,6 +7125,12 @@
         window.setTimeout(() => {
           gfullContent.focus();
         }, 120);
+      }
+      if (nextView === 'waitlist') {
+        refreshWaitlist();
+      }
+      if (nextView === 'inquiries') {
+        refreshProfessionalInquiries();
       }
       if (nextView === 'drift' && shouldAutoFocusWorkspaceFields()) {
         window.setTimeout(() => {
@@ -6638,12 +7251,26 @@
     openBotApp.addEventListener('click', () => {
       setWorkspace('bot');
     });
+    openWaitlistApp.addEventListener('click', () => {
+      setWorkspace('waitlist');
+    });
+    openInquiriesApp.addEventListener('click', () => {
+      setWorkspace('inquiries');
+    });
     openSiteApp.addEventListener('click', () => {
       window.open('index.html', '_blank', 'noopener,noreferrer');
     });
     openPaletteApp.addEventListener('click', () => {
       window.open('palette.html', '_blank', 'noopener,noreferrer');
     });
+    waitlistRefreshBtn.addEventListener('click', refreshWaitlist);
+    waitlistCopyEmailsBtn.addEventListener('click', copyWaitlistEmails);
+    waitlistDownloadCsvBtn.addEventListener('click', downloadWaitlistCsv);
+    waitlistDownloadJsonBtn.addEventListener('click', downloadWaitlistJson);
+    inquiriesRefreshBtn.addEventListener('click', refreshProfessionalInquiries);
+    inquiriesCopyContactsBtn.addEventListener('click', copyProfessionalContacts);
+    inquiriesDownloadCsvBtn.addEventListener('click', downloadProfessionalInquiriesCsv);
+    inquiriesDownloadJsonBtn.addEventListener('click', downloadProfessionalInquiriesJson);
     dockHomeBtn.addEventListener('click', () => {
       setWorkspace('home');
     });

@@ -840,9 +840,9 @@
         }
 
         .cta-panel {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(320px, 420px);
+            align-items: start;
             gap: 26px;
             padding: clamp(24px, 4vw, 34px);
             border-radius: var(--r-lg);
@@ -868,9 +868,82 @@
             max-width: 64ch;
         }
 
-        .contact-btn {
-            display: inline-block;
-            padding: 18px 56px;
+        .contact-copy {
+            display: grid;
+            gap: 14px;
+        }
+
+        .contact-form {
+            display: grid;
+            gap: 12px;
+            padding: 20px;
+            border-radius: var(--r-md);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.028);
+        }
+
+        .contact-form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+        }
+
+        .contact-field,
+        .contact-form label {
+            display: grid;
+            gap: 8px;
+            min-width: 0;
+        }
+
+        .contact-form label span,
+        .contact-helper,
+        .contact-legal,
+        .contact-status {
+            font-family: var(--font-mono);
+        }
+
+        .contact-form label span {
+            color: rgba(245, 247, 251, 0.76);
+            font-size: 0.68rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
+        .contact-form input,
+        .contact-form select,
+        .contact-form textarea {
+            width: 100%;
+            min-width: 0;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(0, 0, 0, 0.24);
+            color: #eef2f6;
+            border-radius: 14px;
+            padding: 14px 16px;
+            font: inherit;
+            transition: border-color 0.25s var(--ease), box-shadow 0.25s var(--ease), background 0.25s var(--ease);
+        }
+
+        .contact-form textarea {
+            min-height: 132px;
+            resize: vertical;
+            line-height: 1.7;
+        }
+
+        .contact-form input:focus,
+        .contact-form select:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: rgba(99, 149, 238, 0.72);
+            box-shadow: 0 0 0 4px rgba(99, 149, 238, 0.12);
+            background: rgba(0, 0, 0, 0.34);
+        }
+
+        .contact-submit {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 52px;
+            padding: 0 24px;
             text-decoration: none;
             font-weight: 900;
             text-transform: uppercase;
@@ -880,13 +953,56 @@
             background: transparent;
             border: 1px solid rgba(255, 255, 255, 0.85);
             color: #fff;
+            cursor: pointer;
         }
 
-        .contact-btn:hover {
+        .contact-submit:hover,
+        .contact-submit:focus-visible {
             transform: translateY(-2px);
             background: rgba(99, 149, 238, 0.18);
             border-color: rgba(99, 149, 238, 0.65);
             box-shadow: 0 0 35px rgba(99, 149, 238, 0.18);
+            outline: none;
+        }
+
+        .contact-helper {
+            margin: 0;
+            color: rgba(245, 247, 251, 0.48);
+            font-size: 0.68rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            line-height: 1.6;
+        }
+
+        .contact-legal {
+            margin: 0;
+            color: rgba(245, 247, 251, 0.48);
+            font-size: 0.68rem;
+            line-height: 1.7;
+        }
+
+        .contact-legal a {
+            color: inherit;
+        }
+
+        .contact-status {
+            min-height: 1.4rem;
+            margin: 0;
+            color: rgba(160, 190, 245, 0.9);
+            font-size: 0.74rem;
+            line-height: 1.7;
+        }
+
+        .contact-form .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
         }
 
         .site-footer {
@@ -913,7 +1029,8 @@
         @media (max-width: 1024px) {
             .hero-shell,
             .thesis-layout,
-            .memo-layout {
+            .memo-layout,
+            .cta-panel {
                 grid-template-columns: 1fr;
             }
 
@@ -967,10 +1084,13 @@
                 grid-column: span 12;
             }
 
-            .cta-panel,
             .signature {
                 flex-direction: column;
                 text-align: center;
+            }
+
+            .contact-form-grid {
+                grid-template-columns: 1fr;
             }
 
             .nav-meta {
@@ -1249,7 +1369,7 @@
             <section class="cta-section">
                 <div class="container-wide">
                     <div class="cta-panel">
-                        <div>
+                        <div class="contact-copy">
                             <h2 class="cta-kicker">
                                 KNOWLEDGE_EXCHANGE
                             </h2>
@@ -1257,11 +1377,45 @@
                                 Open to focused professional dialogue around web systems, iOS product work, digital
                                 design, and selected collaborations. Base of operations: Queen Creek, Arizona.
                             </p>
+                            <p class="contact-helper">Structured inquiries land in a private OTW ledger instead of an exposed inbox.</p>
                         </div>
-                        <a class="contact-btn" href="mailto:hello@outsidetheworld.com"
-                            style="background: transparent; border: 1px solid white; color: white;">
-                            Initiate Dialogue
-                        </a>
+                        <form class="contact-form" id="professionalInquiryForm">
+                            <div class="contact-form-grid">
+                                <label class="contact-field" for="inquiryName">
+                                    <span>Name</span>
+                                    <input id="inquiryName" name="name" type="text" autocomplete="name" required />
+                                </label>
+                                <label class="contact-field" for="inquiryContact">
+                                    <span>Contact Information</span>
+                                    <input id="inquiryContact" name="contact" type="text" autocomplete="email" placeholder="Email, phone, or preferred contact path" required />
+                                </label>
+                            </div>
+
+                            <label class="contact-field" for="inquiryType">
+                                <span>Inquiry Type</span>
+                                <select id="inquiryType" name="inquiry_type" required>
+                                    <option value="web_systems">Web Systems</option>
+                                    <option value="ios_product_work">iOS Product Work</option>
+                                    <option value="design">Digital Design</option>
+                                    <option value="collaboration">Collaboration</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </label>
+
+                            <label class="contact-field" for="inquiryComment">
+                                <span>Brief Comment</span>
+                                <textarea id="inquiryComment" name="comment" placeholder="Describe the project, problem, or collaboration you have in mind." required></textarea>
+                            </label>
+
+                            <div class="sr-only" aria-hidden="true">
+                                <label for="inquiryWebsite">Website</label>
+                                <input id="inquiryWebsite" name="website" type="text" tabindex="-1" autocomplete="off" />
+                            </div>
+
+                            <button class="contact-submit" id="professionalInquirySubmit" type="submit">Send Inquiry</button>
+                            <p class="contact-status" id="professionalInquiryStatus" role="status" aria-live="polite"></p>
+                            <p class="contact-legal">By sending an inquiry, you acknowledge the <a href="privacy.html">Privacy Notice</a> and <a href="terms.html">Terms of Use</a>.</p>
+                        </form>
                     </div>
                 </div>
             </section>
@@ -1348,6 +1502,69 @@
             <p class="legal"><a href="privacy.html">Privacy</a> &nbsp; | &nbsp; <a href="terms.html">Terms</a> &nbsp; | &nbsp; <a href="trademarks.html">Trademarks</a> &nbsp; | &nbsp; <a href="support.html">Support</a></p>
         </footer>
     </div>
+    <script>
+        const PROFESSIONAL_INQUIRY_ENDPOINT = "https://otw-fragments-publish.ryandavid.workers.dev/submit-professional-inquiry";
+        const professionalInquiryForm = document.getElementById("professionalInquiryForm");
+        const professionalInquirySubmit = document.getElementById("professionalInquirySubmit");
+        const professionalInquiryStatus = document.getElementById("professionalInquiryStatus");
+
+        if (professionalInquiryForm && professionalInquiryStatus) {
+            professionalInquiryForm.addEventListener("submit", async (event) => {
+                event.preventDefault();
+
+                const formData = new FormData(professionalInquiryForm);
+                const name = String(formData.get("name") || "").trim();
+                const contact = String(formData.get("contact") || "").trim();
+                const inquiryType = String(formData.get("inquiry_type") || "").trim();
+                const comment = String(formData.get("comment") || "").trim();
+                const website = String(formData.get("website") || "").trim();
+
+                if (!name || !contact || !inquiryType || !comment) {
+                    professionalInquiryStatus.textContent = "Please complete each field before sending the inquiry.";
+                    return;
+                }
+
+                if (professionalInquirySubmit) {
+                    professionalInquirySubmit.disabled = true;
+                    professionalInquirySubmit.textContent = "Sending...";
+                }
+
+                professionalInquiryStatus.textContent = "Sending your inquiry...";
+
+                try {
+                    const response = await fetch(PROFESSIONAL_INQUIRY_ENDPOINT, {
+                        method: "POST",
+                        headers: {
+                            "content-type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            name,
+                            contact,
+                            inquiry_type: inquiryType,
+                            comment,
+                            website,
+                            source: "professional_archive_contact_form"
+                        })
+                    });
+
+                    const payload = await response.json().catch(() => ({}));
+                    if (!response.ok || !payload.ok) {
+                        throw new Error(payload.error || `Inquiry failed with status ${response.status}`);
+                    }
+
+                    professionalInquiryForm.reset();
+                    professionalInquiryStatus.textContent = payload.message || "Your inquiry has been received.";
+                } catch (error) {
+                    professionalInquiryStatus.textContent = error.message || "The inquiry could not be sent right now.";
+                } finally {
+                    if (professionalInquirySubmit) {
+                        professionalInquirySubmit.disabled = false;
+                        professionalInquirySubmit.textContent = "Send Inquiry";
+                    }
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>

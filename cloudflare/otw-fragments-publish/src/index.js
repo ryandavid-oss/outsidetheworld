@@ -5,6 +5,7 @@ const IMAGE_MANIFEST_PATH = "image_manifest.json";
 const WORDPERSON_MANIFEST_PATH = "wordperson_manifest.json";
 const DRIFT_POETRY_PATH = "new_poetry_data.js";
 const FRGMNTS_WAITLIST_PATH = "frgmnts_waitlist.json";
+const PROFESSIONAL_INQUIRIES_PATH = "professional_inquiries.json";
 const CURRENT_NARRATIVE_DIR = "current_narrative";
 const FRAGMENTS_PATTERN = /window\.otw_fragments\s*=\s*(\[[\s\S]*?\])\s*;/m;
 const DRIFT_POETRY_PATTERN = /const livingVerse\s*=\s*(\[[\s\S]*?\])\s*;/m;
@@ -280,6 +281,62 @@ function normalizeStoredWaitlistEntry(entry) {
     source,
     note,
     timestamp
+  };
+}
+
+function normalizeProfessionalInquiryField(raw, label, maxLength) {
+  const value = String(raw || "").trim();
+  if (!value) {
+    throw new Error(`${label} is required`);
+  }
+  if (value.length > maxLength) {
+    throw new Error(`${label} is too long`);
+  }
+  return value;
+}
+
+function normalizeProfessionalInquiryType(raw) {
+  const value = String(raw || "").trim();
+  const normalized = value.toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "");
+  const allowed = new Set(["web_systems", "ios_product_work", "design", "collaboration", "other"]);
+  if (!allowed.has(normalized)) {
+    throw new Error("Inquiry type is invalid");
+  }
+  return normalized;
+}
+
+function normalizeProfessionalInquiryEntry(entry) {
+  if (!entry || typeof entry !== "object") {
+    throw new Error("Professional inquiry payload must be an object");
+  }
+
+  const trap = String(entry.website || "").trim();
+  if (trap) {
+    throw new Error("Spam check failed");
+  }
+
+  return {
+    name: normalizeProfessionalInquiryField(entry.name, "Name", 120),
+    contact: normalizeProfessionalInquiryField(entry.contact, "Contact information", 200),
+    inquiry_type: normalizeProfessionalInquiryType(entry.inquiry_type),
+    comment: normalizeProfessionalInquiryField(entry.comment, "Comment", 4000),
+    source: String(entry.source || "professional_archive_contact_form").trim().slice(0, 80) || "professional_archive_contact_form",
+    timestamp: new Date().toISOString()
+  };
+}
+
+function normalizeStoredProfessionalInquiryEntry(entry) {
+  if (!entry || typeof entry !== "object") {
+    throw new Error("Stored professional inquiry entry must be an object");
+  }
+
+  return {
+    name: normalizeProfessionalInquiryField(entry.name, "Stored inquiry name", 120),
+    contact: normalizeProfessionalInquiryField(entry.contact, "Stored inquiry contact", 200),
+    inquiry_type: normalizeProfessionalInquiryType(entry.inquiry_type),
+    comment: normalizeProfessionalInquiryField(entry.comment, "Stored inquiry comment", 4000),
+    source: String(entry.source || "professional_archive_contact_form").trim().slice(0, 80) || "professional_archive_contact_form",
+    timestamp: normalizeTimestamp(entry.timestamp)
   };
 }
 
@@ -1070,6 +1127,26 @@ async function loadFrgmntsWaitlistFile(env) {
   return { ...file, entries: entries.map(normalizeStoredWaitlistEntry) };
 }
 
+async function loadProfessionalInquiriesFile(env) {
+  const file = await loadOptionalRepoFile(env, PROFESSIONAL_INQUIRIES_PATH);
+  if (!file) {
+    return { sha: null, entries: [] };
+  }
+
+  let entries;
+  try {
+    entries = JSON.parse(file.raw);
+  } catch (error) {
+    throw new Error(`Could not parse ${PROFESSIONAL_INQUIRIES_PATH}: ${error.message}`);
+  }
+
+  if (!Array.isArray(entries)) {
+    throw new Error(`${PROFESSIONAL_INQUIRIES_PATH} is not an array`);
+  }
+
+  return { ...file, entries: entries.map(normalizeStoredProfessionalInquiryEntry) };
+}
+
 function sortFragments(entries) {
   return entries.slice().sort((a, b) => String(b.timestamp || "").localeCompare(String(a.timestamp || "")));
 }
@@ -1093,6 +1170,30 @@ function dedupeWaitlist(entries) {
 }
 
 function sortWaitlist(entries) {
+  return entries.slice().sort((a, b) => String(b.timestamp || "").localeCompare(String(a.timestamp || "")));
+}
+
+function dedupeProfessionalInquiries(entries) {
+  const seen = new Set();
+  const out = [];
+
+  for (const entry of entries) {
+    const normalized = normalizeStoredProfessionalInquiryEntry(entry);
+    const key = [
+      normalized.name.toLowerCase(),
+      normalized.contact.toLowerCase(),
+      normalized.inquiry_type,
+      normalized.comment.toLowerCase()
+    ].join("||");
+    if (seen.has(key)) continue;
+    seen.add(key);
+    out.push(normalized);
+  }
+
+  return out;
+}
+
+function sortProfessionalInquiries(entries) {
   return entries.slice().sort((a, b) => String(b.timestamp || "").localeCompare(String(a.timestamp || "")));
 }
 
@@ -1126,6 +1227,33 @@ async function saveWaitlistEntryWithRetry(env, entry, maxAttempts = 3) {
   }
 
   throw lastError || new Error("Waitlist save retry failed");
+}
+
+async function saveProfessionalInquiryWithRetry(env, entry, maxAttempts = 3) {
+  let lastError = null;
+
+  for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
+    try {
+      const file = await loadProfessionalInquiriesFile(env);
+      const merged = sortProfessionalInquiries(dedupeProfessionalInquiries([entry, ...file.entries]));
+      const updatedRaw = `${JSON.stringify(merged, null, 2)}\n`;
+      const result = await saveRepoFile(
+        env,
+        PROFESSIONAL_INQUIRIES_PATH,
+        updatedRaw,
+        file.sha,
+        "Add professional inquiry"
+      );
+      return { entry, result, count: merged.length };
+    } catch (error) {
+      lastError = error;
+      if (!isGithubConflictError(error) || attempt === maxAttempts) {
+        throw error;
+      }
+    }
+  }
+
+  throw lastError || new Error("Professional inquiry save retry failed");
 }
 
 function sortIotd(entries) {
@@ -1246,6 +1374,7 @@ export default {
           publish_changelog_entry: "POST /publish-changelog-entry",
           publish_ghost_draft: "POST /publish-ghost-draft",
           subscribe_frgmnts_waitlist: "POST /subscribe-frgmnts-waitlist",
+          submit_professional_inquiry: "POST /submit-professional-inquiry",
           upload_ghost_image: "POST /upload-ghost-image",
           publish_iotd_entry: "POST /publish-iotd-entry",
           publish_wordperson_entry: "POST /publish-wordperson-entry",
@@ -1394,6 +1523,27 @@ export default {
         });
       } catch (error) {
         return jsonResponse({ ok: false, error: error.message || "Unknown waitlist subscribe error" }, 400);
+      }
+    }
+
+    if (request.method === "POST" && url.pathname === "/submit-professional-inquiry") {
+      try {
+        const body = await request.json();
+        const entry = normalizeProfessionalInquiryEntry(body);
+        const result = await saveProfessionalInquiryWithRetry(env, entry);
+
+        return jsonResponse({
+          ok: true,
+          submitted: {
+            name: entry.name,
+            inquiry_type: entry.inquiry_type,
+            timestamp: entry.timestamp
+          },
+          message: "Your inquiry has been received.",
+          commit: result.result?.commit?.sha || null
+        });
+      } catch (error) {
+        return jsonResponse({ ok: false, error: error.message || "Unknown professional inquiry error" }, 400);
       }
     }
 
