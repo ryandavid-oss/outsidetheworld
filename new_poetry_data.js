@@ -4,6 +4,15 @@
 
 const livingVerse = [
     {
+        "id": "living-poem-2026-04-02-rampart",
+        "title": "Rampart",
+        "date": "April 2, 2026",
+        "era": "CURRENT_SIGNAL",
+        "source": "drift_publisher",
+        "thumbprint": "linear-gradient(135deg, #5c3659 0%, #182848 52%, #c06c84 100%)",
+        "body": "Arrows, drawn back\nsubordinate -\ntoward a principle god\n\nI cannot exist\nwhere curves contain\ntreachery \n\nWhere faithless\ncommoditize duplicity\nIn grey matter real estate\n\nLucre, a vehicle - an escape\nLanding, taking off\nMuseum pieces the only memory\n\nDoes the anxiety crush?\nIn the hallway likely\nBut the ceiling is high\n\nYour tremor, it built \nNot a facade but a rampart\nSheltering fragile ego.\n\nThe egress - \nMy river followed the sun\nI can't help but note the pleasant result\n\nAnd smile for the pain."
+    },
+    {
         "id": "living-poem-2026-03-26-ignorance-and",
         "title": "Ignorance and",
         "date": "March 26, 2026",
