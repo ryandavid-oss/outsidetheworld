@@ -1159,6 +1159,21 @@
     }
 
     async function loadFragmentsData() {
+      try {
+        const response = await fetch('https://api.frgmnts.app/v1/public/fragments/outsidetheworld?limit=200', {
+          cache: 'no-store'
+        });
+
+        if (response.ok) {
+          const payload = await response.json();
+          if (payload && Array.isArray(payload.items)) {
+            return payload.items;
+          }
+        }
+      } catch (error) {
+        console.warn('Live fragments mirror unavailable, falling back to local fragments_data.js.', error);
+      }
+
       const cacheBust = `ts=${Date.now()}`;
       const response = await fetch(`fragments_data.js?${cacheBust}`, {
         cache: 'no-store'
