@@ -3330,6 +3330,32 @@
           <h2 class="app-tile-label">Professional Inbox</h2>
           <p class="app-tile-meta">Inquiry Viewer</p>
         </button>
+
+        <button class="app-tile" id="openSupportInboxApp" type="button">
+          <div class="app-icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 15h24"></path>
+              <path d="M12 23h18"></path>
+              <path d="M12 31h14"></path>
+              <path d="M34 28l4 4 7-9"></path>
+            </svg>
+          </div>
+          <h2 class="app-tile-label">frgmnts Support</h2>
+          <p class="app-tile-meta">Support Inbox</p>
+        </button>
+
+        <button class="app-tile" id="openSeatCheckinsApp" type="button">
+          <div class="app-icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 18c0-3.314 2.686-6 6-6h12c3.314 0 6 2.686 6 6v10c0 3.314-2.686 6-6 6H18c-3.314 0-6-2.686-6-6V18z"></path>
+              <path d="M18 22h12"></path>
+              <path d="M18 28h8"></path>
+              <path d="M33 30l2 2 4-5"></path>
+            </svg>
+          </div>
+          <h2 class="app-tile-label">Seat Check-ins</h2>
+          <p class="app-tile-meta">Follow-up Inbox</p>
+        </button>
       </div>
     </section>
 
@@ -4030,6 +4056,116 @@
         </div>
       </div>
     </section>
+
+    <section class="workspace" id="supportInboxWorkspace">
+      <div class="waitlist-shell">
+        <main class="panel composer">
+          <div class="status-line" id="supportInboxStatusLine">Load frgmnts support requests, review who needs help, and export the ledger without digging through raw JSON.</div>
+          <div class="waitlist-overview">
+            <div class="waitlist-stat">
+              <span class="waitlist-stat-label">Total Requests</span>
+              <span class="waitlist-stat-value" id="supportInboxCount">0</span>
+            </div>
+            <div class="waitlist-stat">
+              <span class="waitlist-stat-label">Latest Request</span>
+              <span class="waitlist-stat-value" id="supportInboxLatest">No requests yet</span>
+            </div>
+            <div class="waitlist-stat">
+              <span class="waitlist-stat-label">Primary Topic</span>
+              <span class="waitlist-stat-value" id="supportInboxPrimaryTopic">—</span>
+            </div>
+          </div>
+
+          <div class="action-row">
+            <button class="primary-btn" id="supportInboxRefreshBtn" type="button">Refresh</button>
+            <button class="secondary-btn" id="supportInboxCopyContactsBtn" type="button">Copy Contacts</button>
+            <button class="secondary-btn" id="supportInboxDownloadCsvBtn" type="button">Download CSV</button>
+            <button class="secondary-btn" id="supportInboxDownloadJsonBtn" type="button">Download JSON</button>
+          </div>
+        </main>
+
+        <div class="layout">
+          <section class="panel preview-panel">
+            <h2 class="section-title">Recent Support Requests</h2>
+            <div class="waitlist-list" id="supportInboxList"></div>
+          </section>
+
+          <aside class="side-stack">
+            <section class="panel outbox-panel">
+              <h2 class="section-title">Export Preview</h2>
+              <pre class="waitlist-export" id="supportInboxExportPreview">Loading…</pre>
+            </section>
+
+            <section class="panel outbox-panel">
+              <h2 class="section-title">How This Works</h2>
+              <div class="recent-list">
+                <article class="recent-item">
+                  <p class="recent-empty">This viewer reads <code>frgmnts_support_requests.json</code>, which is updated by the OTW Cloudflare worker whenever the frgmnts FAQ help form is submitted.</p>
+                </article>
+                <article class="recent-item">
+                  <p class="recent-empty">Requests are shown newest first so you can triage fresh support and safety issues from the same publisher surface you already use for waitlist and inquiry review.</p>
+                </article>
+              </div>
+            </section>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="workspace" id="seatCheckinsWorkspace">
+      <div class="waitlist-shell">
+        <main class="panel composer">
+          <div class="status-line" id="seatCheckinsStatusLine">Load gentle seat follow-ups, review what is holding people back, and export the ledger without digging through raw JSON.</div>
+          <div class="waitlist-overview">
+            <div class="waitlist-stat">
+              <span class="waitlist-stat-label">Total Check-ins</span>
+              <span class="waitlist-stat-value" id="seatCheckinsCount">0</span>
+            </div>
+            <div class="waitlist-stat">
+              <span class="waitlist-stat-label">Latest Check-in</span>
+              <span class="waitlist-stat-value" id="seatCheckinsLatest">No check-ins yet</span>
+            </div>
+            <div class="waitlist-stat">
+              <span class="waitlist-stat-label">Primary Signal</span>
+              <span class="waitlist-stat-value" id="seatCheckinsPrimarySignal">—</span>
+            </div>
+          </div>
+
+          <div class="action-row">
+            <button class="primary-btn" id="seatCheckinsRefreshBtn" type="button">Refresh</button>
+            <button class="secondary-btn" id="seatCheckinsCopyContactsBtn" type="button">Copy Contacts</button>
+            <button class="secondary-btn" id="seatCheckinsDownloadCsvBtn" type="button">Download CSV</button>
+            <button class="secondary-btn" id="seatCheckinsDownloadJsonBtn" type="button">Download JSON</button>
+          </div>
+        </main>
+
+        <div class="layout">
+          <section class="panel preview-panel">
+            <h2 class="section-title">Recent Seat Check-ins</h2>
+            <div class="waitlist-list" id="seatCheckinsList"></div>
+          </section>
+
+          <aside class="side-stack">
+            <section class="panel outbox-panel">
+              <h2 class="section-title">Export Preview</h2>
+              <pre class="waitlist-export" id="seatCheckinsExportPreview">Loading…</pre>
+            </section>
+
+            <section class="panel outbox-panel">
+              <h2 class="section-title">How This Works</h2>
+              <div class="recent-list">
+                <article class="recent-item">
+                  <p class="recent-empty">This viewer reads <code>frgmnts_seat_checkins.json</code>, which is updated by the OTW Cloudflare worker whenever the frgmnts seat follow-up page is submitted.</p>
+                </article>
+                <article class="recent-item">
+                  <p class="recent-empty">These responses are meant to surface hesitation, confusion, trust concerns, and simple inertia from people who were given a seat but have not made the jump yet.</p>
+                </article>
+              </div>
+            </section>
+          </aside>
+        </div>
+      </div>
+    </section>
   </div>
 
   <div class="publish-toast" id="publishToast" role="status" aria-live="polite" aria-atomic="true">
@@ -4103,6 +4239,8 @@
     const UPLOAD_GHOST_IMAGE_ENDPOINT = 'https://otw-fragments-publish.ryandavid.workers.dev/upload-ghost-image';
     const IOTD_PUBLIC_BASE_URL = 'https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev';
     const FRGMNTS_WAITLIST_PATH = 'frgmnts_waitlist.json';
+    const FRGMNTS_SUPPORT_REQUESTS_PATH = 'frgmnts_support_requests.json';
+    const FRGMNTS_SEAT_CHECKINS_PATH = 'frgmnts_seat_checkins.json';
     const PROFESSIONAL_INQUIRIES_PATH = 'professional_inquiries.json';
     const GHOST_FULL_DRAFT_KEY = 'otw_ghost_writer_draft_v4';
     const GHOST_FULL_SETTINGS_KEY = 'otw_ghost_writer_settings_v1';
@@ -4139,6 +4277,8 @@
     const botWorkspace = document.getElementById('botWorkspace');
     const waitlistWorkspace = document.getElementById('waitlistWorkspace');
     const inquiriesWorkspace = document.getElementById('inquiriesWorkspace');
+    const supportInboxWorkspace = document.getElementById('supportInboxWorkspace');
+    const seatCheckinsWorkspace = document.getElementById('seatCheckinsWorkspace');
     const openFragmentsApp = document.getElementById('openFragmentsApp');
     const openChangelogApp = document.getElementById('openChangelogApp');
     const openIotdApp = document.getElementById('openIotdApp');
@@ -4148,6 +4288,8 @@
     const openBotApp = document.getElementById('openBotApp');
     const openWaitlistApp = document.getElementById('openWaitlistApp');
     const openInquiriesApp = document.getElementById('openInquiriesApp');
+    const openSupportInboxApp = document.getElementById('openSupportInboxApp');
+    const openSeatCheckinsApp = document.getElementById('openSeatCheckinsApp');
     const openSiteApp = document.getElementById('openSiteApp');
     const openPaletteApp = document.getElementById('openPaletteApp');
     const headerBackBtn = document.getElementById('headerBackBtn');
@@ -4173,6 +4315,26 @@
     const inquiriesCopyContactsBtn = document.getElementById('inquiriesCopyContactsBtn');
     const inquiriesDownloadCsvBtn = document.getElementById('inquiriesDownloadCsvBtn');
     const inquiriesDownloadJsonBtn = document.getElementById('inquiriesDownloadJsonBtn');
+    const supportInboxStatusLine = document.getElementById('supportInboxStatusLine');
+    const supportInboxCount = document.getElementById('supportInboxCount');
+    const supportInboxLatest = document.getElementById('supportInboxLatest');
+    const supportInboxPrimaryTopic = document.getElementById('supportInboxPrimaryTopic');
+    const supportInboxList = document.getElementById('supportInboxList');
+    const supportInboxExportPreview = document.getElementById('supportInboxExportPreview');
+    const supportInboxRefreshBtn = document.getElementById('supportInboxRefreshBtn');
+    const supportInboxCopyContactsBtn = document.getElementById('supportInboxCopyContactsBtn');
+    const supportInboxDownloadCsvBtn = document.getElementById('supportInboxDownloadCsvBtn');
+    const supportInboxDownloadJsonBtn = document.getElementById('supportInboxDownloadJsonBtn');
+    const seatCheckinsStatusLine = document.getElementById('seatCheckinsStatusLine');
+    const seatCheckinsCount = document.getElementById('seatCheckinsCount');
+    const seatCheckinsLatest = document.getElementById('seatCheckinsLatest');
+    const seatCheckinsPrimarySignal = document.getElementById('seatCheckinsPrimarySignal');
+    const seatCheckinsList = document.getElementById('seatCheckinsList');
+    const seatCheckinsExportPreview = document.getElementById('seatCheckinsExportPreview');
+    const seatCheckinsRefreshBtn = document.getElementById('seatCheckinsRefreshBtn');
+    const seatCheckinsCopyContactsBtn = document.getElementById('seatCheckinsCopyContactsBtn');
+    const seatCheckinsDownloadCsvBtn = document.getElementById('seatCheckinsDownloadCsvBtn');
+    const seatCheckinsDownloadJsonBtn = document.getElementById('seatCheckinsDownloadJsonBtn');
     const dockHomeBtn = document.getElementById('dockHomeBtn');
     const dockAnalyticsBtn = document.getElementById('dockAnalyticsBtn');
     const dockGithubBtn = document.getElementById('dockGithubBtn');
@@ -4289,6 +4451,8 @@
     let gfullPendingImageObjectUrl = null;
     let frgmntsWaitlistEntries = [];
     let professionalInquiryEntries = [];
+    let frgmntsSupportRequestEntries = [];
+    let frgmntsSeatCheckinEntries = [];
     let gfullSettingsState = {
       showSlugField: false,
       keepImagePanelOpen: false
@@ -4450,6 +4614,53 @@
       return labels[String(value || '').trim()] || String(value || 'Other');
     }
 
+    function humanizeSupportTopic(value) {
+      const labels = {
+        account_access: 'Account Access',
+        seat_code_or_invite: 'Seat Code or Invite',
+        safety_issue: 'Safety Issue',
+        bug_report: 'Bug Report',
+        other: 'Other'
+      };
+      return labels[String(value || '').trim()] || String(value || 'Other');
+    }
+
+    function humanizeSeatCheckinStatus(value) {
+      const labels = {
+        not_yet: 'Did not try yet',
+        a_little: 'Tried a little',
+        yes_but_stopped: 'Started but stopped'
+      };
+      return labels[String(value || '').trim()] || String(value || 'Unknown');
+    }
+
+    function humanizeSeatCheckinStopPoint(value) {
+      const labels = {
+        didnt_start: 'Did not start',
+        testflight: 'TestFlight step',
+        code_prompt: 'Code prompt',
+        seat_code: 'Seat code step',
+        profile_setup: 'Profile setup',
+        still_deciding: 'Still deciding',
+        other: 'Other'
+      };
+      return labels[String(value || '').trim()] || String(value || 'Other');
+    }
+
+    function humanizeSeatCheckinSignal(value) {
+      const labels = {
+        too_many_apps: 'Too many apps already',
+        trust_and_privacy: 'Trust and privacy concerns',
+        install_confusing: 'Install flow felt confusing',
+        not_enough_time: 'Not enough time',
+        not_sure_its_for_me: 'Not sure it is for me',
+        not_sure_who_is_there: 'Not sure who is there yet',
+        already_too_much_social: 'Already too much social noise',
+        other: 'Other'
+      };
+      return labels[String(value || '').trim()] || String(value || 'Other');
+    }
+
     function renderWaitlist(entries) {
       frgmntsWaitlistEntries = entries;
       waitlistCount.textContent = String(entries.length);
@@ -4557,6 +4768,138 @@
       }).join(',')).join('\n');
     }
 
+    function normalizeFrgmntsSupportRequests(items) {
+      if (!Array.isArray(items)) {
+        return [];
+      }
+
+      return items
+        .filter((item) => item && typeof item === 'object')
+        .map((item) => ({
+          name: String(item.name || '').trim(),
+          email: String(item.email || '').trim().toLowerCase(),
+          handle: String(item.handle || '').trim(),
+          topic: String(item.topic || 'other').trim(),
+          message: String(item.message || '').trim(),
+          urgent: item.urgent === true,
+          source: String(item.source || 'frgmnts_faq_modal').trim() || 'frgmnts_faq_modal',
+          timestamp: String(item.timestamp || '').trim()
+        }))
+        .filter((item) => item.email && item.message)
+        .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
+    }
+
+    function getPrimarySupportTopic(entries) {
+      if (!entries.length) {
+        return '—';
+      }
+
+      const counts = new Map();
+      entries.forEach((entry) => {
+        counts.set(entry.topic, (counts.get(entry.topic) || 0) + 1);
+      });
+
+      let winner = entries[0].topic;
+      let winnerCount = counts.get(winner) || 0;
+      for (const [topic, count] of counts.entries()) {
+        if (count > winnerCount) {
+          winner = topic;
+          winnerCount = count;
+        }
+      }
+
+      return humanizeSupportTopic(winner);
+    }
+
+    function buildFrgmntsSupportRequestsCsv(entries) {
+      const rows = [
+        ['name', 'email', 'handle', 'topic', 'urgent', 'message', 'source', 'timestamp'],
+        ...entries.map((entry) => [
+          entry.name,
+          entry.email,
+          entry.handle,
+          entry.topic,
+          entry.urgent ? 'yes' : 'no',
+          entry.message,
+          entry.source,
+          entry.timestamp
+        ])
+      ];
+
+      return rows.map((row) => row.map((value) => {
+        const text = String(value ?? '');
+        return /[",\n]/.test(text) ? `"${text.replace(/"/g, '""')}"` : text;
+      }).join(',')).join('\n');
+    }
+
+    function normalizeFrgmntsSeatCheckins(items) {
+      if (!Array.isArray(items)) {
+        return [];
+      }
+
+      return items
+        .filter((item) => item && typeof item === 'object')
+        .map((item) => ({
+          name: String(item.name || '').trim(),
+          email: String(item.email || '').trim().toLowerCase(),
+          did_try: String(item.did_try || '').trim(),
+          stopped_at: String(item.stopped_at || '').trim(),
+          signals: Array.isArray(item.signals) ? item.signals.map((signal) => String(signal || '').trim()).filter(Boolean) : [],
+          message: String(item.message || '').trim(),
+          wants_reply: item.wants_reply === true,
+          source: String(item.source || 'frgmnts_seat_checkin_page').trim() || 'frgmnts_seat_checkin_page',
+          timestamp: String(item.timestamp || '').trim()
+        }))
+        .filter((item) => item.email && item.did_try && item.stopped_at && item.signals.length)
+        .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
+    }
+
+    function getPrimarySeatCheckinSignal(entries) {
+      if (!entries.length) {
+        return '—';
+      }
+
+      const counts = new Map();
+      entries.forEach((entry) => {
+        entry.signals.forEach((signal) => {
+          counts.set(signal, (counts.get(signal) || 0) + 1);
+        });
+      });
+
+      let winner = null;
+      let winnerCount = 0;
+      for (const [signal, count] of counts.entries()) {
+        if (count > winnerCount) {
+          winner = signal;
+          winnerCount = count;
+        }
+      }
+
+      return winner ? humanizeSeatCheckinSignal(winner) : '—';
+    }
+
+    function buildFrgmntsSeatCheckinsCsv(entries) {
+      const rows = [
+        ['name', 'email', 'did_try', 'stopped_at', 'signals', 'wants_reply', 'message', 'source', 'timestamp'],
+        ...entries.map((entry) => [
+          entry.name,
+          entry.email,
+          entry.did_try,
+          entry.stopped_at,
+          entry.signals.join('|'),
+          entry.wants_reply ? 'yes' : 'no',
+          entry.message,
+          entry.source,
+          entry.timestamp
+        ])
+      ];
+
+      return rows.map((row) => row.map((value) => {
+        const text = String(value ?? '');
+        return /[",\n]/.test(text) ? `"${text.replace(/"/g, '""')}"` : text;
+      }).join(',')).join('\n');
+    }
+
     function renderProfessionalInquiries(entries) {
       professionalInquiryEntries = entries;
       inquiriesCount.textContent = String(entries.length);
@@ -4610,6 +4953,196 @@
         inquiriesRefreshBtn.disabled = false;
         inquiriesRefreshBtn.textContent = 'Refresh';
       }
+    }
+
+    function renderFrgmntsSupportRequests(entries) {
+      frgmntsSupportRequestEntries = entries;
+      supportInboxCount.textContent = String(entries.length);
+      supportInboxLatest.textContent = entries[0] ? formatWaitlistTimestamp(entries[0].timestamp) : 'No requests yet';
+      supportInboxPrimaryTopic.textContent = getPrimarySupportTopic(entries);
+      supportInboxExportPreview.textContent = JSON.stringify(entries, null, 2);
+
+      if (!entries.length) {
+        supportInboxList.innerHTML = '<article class="recent-item"><p class="recent-empty">No support requests have landed yet.</p></article>';
+        return;
+      }
+
+      supportInboxList.innerHTML = entries.map((entry) => `
+        <article class="waitlist-item">
+          <div class="waitlist-item-head">
+            <p class="waitlist-email">${escapeHtml(entry.name || entry.email)}</p>
+            <div class="waitlist-time">${escapeHtml(formatWaitlistTimestamp(entry.timestamp))}</div>
+          </div>
+          <div class="waitlist-meta">
+            <span class="waitlist-pill inquiry-type-label">${escapeHtml(humanizeSupportTopic(entry.topic))}</span>
+            <span class="waitlist-pill">${escapeHtml(entry.source)}</span>
+            ${entry.urgent ? '<span class="waitlist-pill">urgent safety</span>' : ''}
+          </div>
+          <p class="waitlist-note"><strong>Email:</strong> ${escapeHtml(entry.email)}</p>
+          ${entry.handle ? `<p class="waitlist-note"><strong>Handle:</strong> @${escapeHtml(entry.handle.replace(/^@+/, ''))}</p>` : ''}
+          <p class="waitlist-note">${escapeHtml(entry.message)}</p>
+        </article>
+      `).join('');
+    }
+
+    function renderFrgmntsSeatCheckins(entries) {
+      frgmntsSeatCheckinEntries = entries;
+      seatCheckinsCount.textContent = String(entries.length);
+      seatCheckinsLatest.textContent = entries[0] ? formatWaitlistTimestamp(entries[0].timestamp) : 'No check-ins yet';
+      seatCheckinsPrimarySignal.textContent = getPrimarySeatCheckinSignal(entries);
+      seatCheckinsExportPreview.textContent = JSON.stringify(entries, null, 2);
+
+      if (!entries.length) {
+        seatCheckinsList.innerHTML = '<article class="recent-item"><p class="recent-empty">No seat check-ins have landed yet.</p></article>';
+        return;
+      }
+
+      seatCheckinsList.innerHTML = entries.map((entry) => `
+        <article class="waitlist-item">
+          <div class="waitlist-item-head">
+            <p class="waitlist-email">${escapeHtml(entry.name || entry.email)}</p>
+            <div class="waitlist-time">${escapeHtml(formatWaitlistTimestamp(entry.timestamp))}</div>
+          </div>
+          <div class="waitlist-meta">
+            <span class="waitlist-pill inquiry-type-label">${escapeHtml(humanizeSeatCheckinStatus(entry.did_try))}</span>
+            <span class="waitlist-pill">${escapeHtml(humanizeSeatCheckinStopPoint(entry.stopped_at))}</span>
+            ${entry.wants_reply ? '<span class="waitlist-pill">wants reply</span>' : ''}
+          </div>
+          <p class="waitlist-note"><strong>Email:</strong> ${escapeHtml(entry.email)}</p>
+          <p class="waitlist-note"><strong>Signals:</strong> ${entry.signals.map((signal) => escapeHtml(humanizeSeatCheckinSignal(signal))).join(' • ')}</p>
+          ${entry.message ? `<p class="waitlist-note">${escapeHtml(entry.message)}</p>` : ''}
+        </article>
+      `).join('');
+    }
+
+    async function refreshFrgmntsSupportRequests() {
+      supportInboxRefreshBtn.disabled = true;
+      supportInboxRefreshBtn.textContent = 'Refreshing...';
+      supportInboxStatusLine.textContent = 'Loading frgmnts support requests...';
+
+      try {
+        const response = await fetch(FRGMNTS_SUPPORT_REQUESTS_PATH, { cache: 'no-store' });
+        if (!response.ok) {
+          throw new Error(`Support request load failed with status ${response.status}`);
+        }
+
+        const payload = await response.json();
+        const entries = normalizeFrgmntsSupportRequests(payload);
+        renderFrgmntsSupportRequests(entries);
+        supportInboxStatusLine.textContent = entries.length
+          ? `Loaded ${entries.length} support request${entries.length === 1 ? '' : 's'} from the live ledger.`
+          : 'The support inbox is ready, but nothing has landed yet.';
+      } catch (error) {
+        supportInboxStatusLine.textContent = error.message || 'Could not load the support request ledger right now.';
+        supportInboxList.innerHTML = '<article class="recent-item"><p class="recent-empty">The frgmnts support ledger could not be loaded from this device right now.</p></article>';
+        supportInboxExportPreview.textContent = '[]';
+      } finally {
+        supportInboxRefreshBtn.disabled = false;
+        supportInboxRefreshBtn.textContent = 'Refresh';
+      }
+    }
+
+    async function refreshFrgmntsSeatCheckins() {
+      seatCheckinsRefreshBtn.disabled = true;
+      seatCheckinsRefreshBtn.textContent = 'Refreshing...';
+      seatCheckinsStatusLine.textContent = 'Loading frgmnts seat check-ins...';
+
+      try {
+        const response = await fetch(FRGMNTS_SEAT_CHECKINS_PATH, { cache: 'no-store' });
+        if (!response.ok) {
+          throw new Error(`Seat check-in load failed with status ${response.status}`);
+        }
+
+        const payload = await response.json();
+        const entries = normalizeFrgmntsSeatCheckins(payload);
+        renderFrgmntsSeatCheckins(entries);
+        seatCheckinsStatusLine.textContent = entries.length
+          ? `Loaded ${entries.length} seat check-in${entries.length === 1 ? '' : 's'} from the live ledger.`
+          : 'The seat check-in inbox is ready, but nothing has landed yet.';
+      } catch (error) {
+        seatCheckinsStatusLine.textContent = error.message || 'Could not load the seat check-in ledger right now.';
+        seatCheckinsList.innerHTML = '<article class="recent-item"><p class="recent-empty">The seat check-in ledger could not be loaded from this device right now.</p></article>';
+        seatCheckinsExportPreview.textContent = '[]';
+      } finally {
+        seatCheckinsRefreshBtn.disabled = false;
+        seatCheckinsRefreshBtn.textContent = 'Refresh';
+      }
+    }
+
+    async function copyFrgmntsSupportContacts() {
+      const contacts = frgmntsSupportRequestEntries
+        .map((entry) => `${entry.name || '-'} — ${entry.email}${entry.handle ? ` — @${entry.handle.replace(/^@+/, '')}` : ''}`)
+        .join('\n');
+      if (!contacts) {
+        supportInboxStatusLine.textContent = 'There are no support contacts to copy yet.';
+        return;
+      }
+
+      const ok = await navigator.clipboard.writeText(contacts).then(() => true).catch(() => false);
+      supportInboxStatusLine.textContent = ok
+        ? 'Support contacts copied to the clipboard.'
+        : 'Clipboard copy failed on this device.';
+    }
+
+    async function copyFrgmntsSeatCheckinContacts() {
+      const contacts = frgmntsSeatCheckinEntries
+        .map((entry) => `${entry.name || '-'} — ${entry.email}${entry.wants_reply ? ' — wants reply' : ''}`)
+        .join('\n');
+      if (!contacts) {
+        seatCheckinsStatusLine.textContent = 'There are no seat check-in contacts to copy yet.';
+        return;
+      }
+
+      const ok = await navigator.clipboard.writeText(contacts).then(() => true).catch(() => false);
+      seatCheckinsStatusLine.textContent = ok
+        ? 'Seat check-in contacts copied to the clipboard.'
+        : 'Clipboard copy failed on this device.';
+    }
+
+    function downloadFrgmntsSupportRequestsCsv() {
+      const csv = buildFrgmntsSupportRequestsCsv(frgmntsSupportRequestEntries);
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `frgmnts-support-requests-${new Date().toISOString().slice(0, 10)}.csv`;
+      link.click();
+      URL.revokeObjectURL(url);
+      supportInboxStatusLine.textContent = 'Support request CSV download started.';
+    }
+
+    function downloadFrgmntsSupportRequestsJson() {
+      const blob = new Blob([JSON.stringify(frgmntsSupportRequestEntries, null, 2)], { type: 'application/json;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `frgmnts-support-requests-${new Date().toISOString().slice(0, 10)}.json`;
+      link.click();
+      URL.revokeObjectURL(url);
+      supportInboxStatusLine.textContent = 'Support request JSON download started.';
+    }
+
+    function downloadFrgmntsSeatCheckinsCsv() {
+      const csv = buildFrgmntsSeatCheckinsCsv(frgmntsSeatCheckinEntries);
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `frgmnts-seat-checkins-${new Date().toISOString().slice(0, 10)}.csv`;
+      link.click();
+      URL.revokeObjectURL(url);
+      seatCheckinsStatusLine.textContent = 'Seat check-in CSV download started.';
+    }
+
+    function downloadFrgmntsSeatCheckinsJson() {
+      const blob = new Blob([JSON.stringify(frgmntsSeatCheckinEntries, null, 2)], { type: 'application/json;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `frgmnts-seat-checkins-${new Date().toISOString().slice(0, 10)}.json`;
+      link.click();
+      URL.revokeObjectURL(url);
+      seatCheckinsStatusLine.textContent = 'Seat check-in JSON download started.';
     }
 
     async function copyProfessionalContacts() {
@@ -7099,11 +7632,11 @@
 
     function getWorkspaceFromHash() {
       const raw = window.location.hash.replace(/^#/, '').trim().toLowerCase();
-      return ['home', 'fragments', 'changelog', 'iotd', 'ghost', 'drift', 'ghost-full', 'bot', 'waitlist', 'inquiries'].includes(raw) ? raw : 'home';
+      return ['home', 'fragments', 'changelog', 'iotd', 'ghost', 'drift', 'ghost-full', 'bot', 'waitlist', 'inquiries', 'support-inbox', 'seat-checkins'].includes(raw) ? raw : 'home';
     }
 
     function setWorkspace(view) {
-      const nextView = ['home', 'fragments', 'changelog', 'iotd', 'ghost', 'drift', 'ghost-full', 'bot', 'waitlist', 'inquiries'].includes(view) ? view : 'home';
+      const nextView = ['home', 'fragments', 'changelog', 'iotd', 'ghost', 'drift', 'ghost-full', 'bot', 'waitlist', 'inquiries', 'support-inbox', 'seat-checkins'].includes(view) ? view : 'home';
 
       homeWorkspace.classList.toggle('is-active', nextView === 'home');
       fragmentsWorkspace.classList.toggle('is-active', nextView === 'fragments');
@@ -7115,6 +7648,8 @@
       botWorkspace.classList.toggle('is-active', nextView === 'bot');
       waitlistWorkspace.classList.toggle('is-active', nextView === 'waitlist');
       inquiriesWorkspace.classList.toggle('is-active', nextView === 'inquiries');
+      supportInboxWorkspace.classList.toggle('is-active', nextView === 'support-inbox');
+      seatCheckinsWorkspace.classList.toggle('is-active', nextView === 'seat-checkins');
       headerBackBtn.classList.toggle('is-visible', nextView !== 'home');
       dockHomeBtn.classList.toggle('is-active', nextView === 'home');
 
@@ -7131,6 +7666,12 @@
       }
       if (nextView === 'inquiries') {
         refreshProfessionalInquiries();
+      }
+      if (nextView === 'support-inbox') {
+        refreshFrgmntsSupportRequests();
+      }
+      if (nextView === 'seat-checkins') {
+        refreshFrgmntsSeatCheckins();
       }
       if (nextView === 'drift' && shouldAutoFocusWorkspaceFields()) {
         window.setTimeout(() => {
@@ -7257,6 +7798,12 @@
     openInquiriesApp.addEventListener('click', () => {
       setWorkspace('inquiries');
     });
+    openSupportInboxApp.addEventListener('click', () => {
+      setWorkspace('support-inbox');
+    });
+    openSeatCheckinsApp.addEventListener('click', () => {
+      setWorkspace('seat-checkins');
+    });
     openSiteApp.addEventListener('click', () => {
       window.open('index.html', '_blank', 'noopener,noreferrer');
     });
@@ -7271,6 +7818,14 @@
     inquiriesCopyContactsBtn.addEventListener('click', copyProfessionalContacts);
     inquiriesDownloadCsvBtn.addEventListener('click', downloadProfessionalInquiriesCsv);
     inquiriesDownloadJsonBtn.addEventListener('click', downloadProfessionalInquiriesJson);
+    supportInboxRefreshBtn.addEventListener('click', refreshFrgmntsSupportRequests);
+    supportInboxCopyContactsBtn.addEventListener('click', copyFrgmntsSupportContacts);
+    supportInboxDownloadCsvBtn.addEventListener('click', downloadFrgmntsSupportRequestsCsv);
+    supportInboxDownloadJsonBtn.addEventListener('click', downloadFrgmntsSupportRequestsJson);
+    seatCheckinsRefreshBtn.addEventListener('click', refreshFrgmntsSeatCheckins);
+    seatCheckinsCopyContactsBtn.addEventListener('click', copyFrgmntsSeatCheckinContacts);
+    seatCheckinsDownloadCsvBtn.addEventListener('click', downloadFrgmntsSeatCheckinsCsv);
+    seatCheckinsDownloadJsonBtn.addEventListener('click', downloadFrgmntsSeatCheckinsJson);
     dockHomeBtn.addEventListener('click', () => {
       setWorkspace('home');
     });

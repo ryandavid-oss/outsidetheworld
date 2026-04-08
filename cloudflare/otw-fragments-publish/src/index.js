@@ -6,6 +6,8 @@ const WORDPERSON_MANIFEST_PATH = "wordperson_manifest.json";
 const DRIFT_POETRY_PATH = "new_poetry_data.js";
 const FRGMNTS_WAITLIST_PATH = "frgmnts_waitlist.json";
 const PROFESSIONAL_INQUIRIES_PATH = "professional_inquiries.json";
+const FRGMNTS_SUPPORT_REQUESTS_PATH = "frgmnts_support_requests.json";
+const FRGMNTS_SEAT_CHECKINS_PATH = "frgmnts_seat_checkins.json";
 const CURRENT_NARRATIVE_DIR = "current_narrative";
 const FRAGMENTS_PATTERN = /window\.otw_fragments\s*=\s*(\[[\s\S]*?\])\s*;/m;
 const DRIFT_POETRY_PATTERN = /const livingVerse\s*=\s*(\[[\s\S]*?\])\s*;/m;
@@ -322,6 +324,208 @@ function normalizeProfessionalInquiryEntry(entry) {
     comment: normalizeProfessionalInquiryField(entry.comment, "Comment", 4000),
     source: String(entry.source || "professional_archive_contact_form").trim().slice(0, 80) || "professional_archive_contact_form",
     timestamp: new Date().toISOString()
+  };
+}
+
+function normalizeFrgmntsSupportTopic(value) {
+  const normalized = String(value || "").trim().toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "");
+  const allowed = new Set(["account_access", "seat_code_or_invite", "safety_issue", "bug_report", "other"]);
+  if (!allowed.has(normalized)) {
+    throw new Error("Support topic is invalid");
+  }
+  return normalized;
+}
+
+function normalizeFrgmntsSupportEmail(raw) {
+  const email = String(raw || "").trim().toLowerCase();
+  if (!email) {
+    throw new Error("Email is required");
+  }
+  if (email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    throw new Error("A valid email address is required");
+  }
+  return email;
+}
+
+function normalizeOptionalSupportText(raw, fieldName, maxLength) {
+  const value = String(raw || "").trim().replace(/\s+/g, " ");
+  if (!value) {
+    return "";
+  }
+  if (value.length > maxLength) {
+    throw new Error(`${fieldName} is too long`);
+  }
+  return value;
+}
+
+function normalizeOptionalFrgmntsHandle(raw) {
+  const value = String(raw || "").trim().toLowerCase().replace(/^@+/, "");
+  if (!value) {
+    return "";
+  }
+  if (!/^[a-z0-9._]{3,24}$/.test(value)) {
+    throw new Error("Handle must be 3-24 characters using lowercase letters, numbers, dots, or underscores");
+  }
+  return value;
+}
+
+function normalizeFrgmntsSupportMessage(raw) {
+  const value = String(raw || "").trim().replace(/\r\n/g, "\n");
+  if (value.length < 8 || value.length > 4000) {
+    throw new Error("Message must be between 8 and 4000 characters");
+  }
+  return value;
+}
+
+function normalizeSeatCheckinStatus(raw) {
+  const value = String(raw || "").trim();
+  const allowed = new Set(["not_yet", "a_little", "yes_but_stopped"]);
+  if (!allowed.has(value)) {
+    throw new Error("Please choose how far you got");
+  }
+  return value;
+}
+
+function normalizeSeatCheckinStopPoint(raw) {
+  const value = String(raw || "").trim();
+  const allowed = new Set(["didnt_start", "testflight", "code_prompt", "seat_code", "profile_setup", "still_deciding", "other"]);
+  if (!allowed.has(value)) {
+    throw new Error("Please choose where things stalled");
+  }
+  return value;
+}
+
+function normalizeSeatCheckinSignal(raw) {
+  const value = String(raw || "").trim();
+  const allowed = new Set([
+    "too_many_apps",
+    "trust_and_privacy",
+    "install_confusing",
+    "not_enough_time",
+    "not_sure_its_for_me",
+    "not_sure_who_is_there",
+    "already_too_much_social",
+    "other"
+  ]);
+  if (!allowed.has(value)) {
+    throw new Error("One of the selected signals is invalid");
+  }
+  return value;
+}
+
+function normalizeSeatCheckinSignals(raw) {
+  if (!Array.isArray(raw)) {
+    throw new Error("Please choose at least one signal");
+  }
+
+  const unique = [];
+  const seen = new Set();
+  for (const item of raw) {
+    const normalized = normalizeSeatCheckinSignal(item);
+    if (seen.has(normalized)) continue;
+    seen.add(normalized);
+    unique.push(normalized);
+  }
+
+  if (!unique.length) {
+    throw new Error("Please choose at least one signal");
+  }
+
+  if (unique.length > 6) {
+    throw new Error("Please keep the selected signals to six or fewer");
+  }
+
+  return unique;
+}
+
+function normalizeOptionalSeatCheckinMessage(raw) {
+  const value = String(raw || "").trim().replace(/\r\n/g, "\n");
+  if (!value) {
+    return "";
+  }
+  if (value.length > 3000) {
+    throw new Error("Response note must be 3000 characters or fewer");
+  }
+  return value;
+}
+
+function normalizeFrgmntsSeatCheckinEntry(entry) {
+  if (!entry || typeof entry !== "object") {
+    throw new Error("Seat check-in payload must be an object");
+  }
+
+  const trap = String(entry.website || "").trim();
+  if (trap) {
+    throw new Error("Spam check failed");
+  }
+
+  return {
+    name: normalizeOptionalSupportText(entry.name, "Name", 120),
+    email: normalizeFrgmntsSupportEmail(entry.email),
+    did_try: normalizeSeatCheckinStatus(entry.did_try),
+    stopped_at: normalizeSeatCheckinStopPoint(entry.stopped_at),
+    signals: normalizeSeatCheckinSignals(entry.signals),
+    message: normalizeOptionalSeatCheckinMessage(entry.message),
+    wants_reply: entry.wants_reply === true,
+    source: String(entry.source || "frgmnts_seat_checkin_page").trim().slice(0, 80) || "frgmnts_seat_checkin_page",
+    timestamp: new Date().toISOString()
+  };
+}
+
+function normalizeStoredFrgmntsSeatCheckinEntry(entry) {
+  if (!entry || typeof entry !== "object") {
+    throw new Error("Stored seat check-in entry must be an object");
+  }
+
+  return {
+    name: normalizeOptionalSupportText(entry.name, "Stored seat check-in name", 120),
+    email: normalizeFrgmntsSupportEmail(entry.email),
+    did_try: normalizeSeatCheckinStatus(entry.did_try),
+    stopped_at: normalizeSeatCheckinStopPoint(entry.stopped_at),
+    signals: normalizeSeatCheckinSignals(entry.signals),
+    message: normalizeOptionalSeatCheckinMessage(entry.message),
+    wants_reply: entry.wants_reply === true,
+    source: String(entry.source || "frgmnts_seat_checkin_page").trim().slice(0, 80) || "frgmnts_seat_checkin_page",
+    timestamp: normalizeTimestamp(entry.timestamp)
+  };
+}
+
+function normalizeFrgmntsSupportRequestEntry(entry) {
+  if (!entry || typeof entry !== "object") {
+    throw new Error("Support request payload must be an object");
+  }
+
+  const trap = String(entry.website || "").trim();
+  if (trap) {
+    throw new Error("Spam check failed");
+  }
+
+  return {
+    name: normalizeOptionalSupportText(entry.name, "Name", 120),
+    email: normalizeFrgmntsSupportEmail(entry.email),
+    handle: normalizeOptionalFrgmntsHandle(entry.handle),
+    topic: normalizeFrgmntsSupportTopic(entry.topic),
+    message: normalizeFrgmntsSupportMessage(entry.message),
+    urgent: entry.urgent === true,
+    source: String(entry.source || "frgmnts_faq_modal").trim().slice(0, 80) || "frgmnts_faq_modal",
+    timestamp: new Date().toISOString()
+  };
+}
+
+function normalizeStoredFrgmntsSupportRequestEntry(entry) {
+  if (!entry || typeof entry !== "object") {
+    throw new Error("Stored support request entry must be an object");
+  }
+
+  return {
+    name: normalizeOptionalSupportText(entry.name, "Stored support request name", 120),
+    email: normalizeFrgmntsSupportEmail(entry.email),
+    handle: normalizeOptionalFrgmntsHandle(entry.handle),
+    topic: normalizeFrgmntsSupportTopic(entry.topic),
+    message: normalizeFrgmntsSupportMessage(entry.message),
+    urgent: entry.urgent === true,
+    source: String(entry.source || "frgmnts_faq_modal").trim().slice(0, 80) || "frgmnts_faq_modal",
+    timestamp: normalizeTimestamp(entry.timestamp)
   };
 }
 
@@ -1147,6 +1351,46 @@ async function loadProfessionalInquiriesFile(env) {
   return { ...file, entries: entries.map(normalizeStoredProfessionalInquiryEntry) };
 }
 
+async function loadFrgmntsSupportRequestsFile(env) {
+  const file = await loadOptionalRepoFile(env, FRGMNTS_SUPPORT_REQUESTS_PATH);
+  if (!file) {
+    return { sha: null, entries: [] };
+  }
+
+  let entries;
+  try {
+    entries = JSON.parse(file.raw);
+  } catch (error) {
+    throw new Error(`Could not parse ${FRGMNTS_SUPPORT_REQUESTS_PATH}: ${error.message}`);
+  }
+
+  if (!Array.isArray(entries)) {
+    throw new Error(`${FRGMNTS_SUPPORT_REQUESTS_PATH} is not an array`);
+  }
+
+  return { ...file, entries: entries.map(normalizeStoredFrgmntsSupportRequestEntry) };
+}
+
+async function loadFrgmntsSeatCheckinsFile(env) {
+  const file = await loadOptionalRepoFile(env, FRGMNTS_SEAT_CHECKINS_PATH);
+  if (!file) {
+    return { sha: null, entries: [] };
+  }
+
+  let entries;
+  try {
+    entries = JSON.parse(file.raw);
+  } catch (error) {
+    throw new Error(`Could not parse ${FRGMNTS_SEAT_CHECKINS_PATH}: ${error.message}`);
+  }
+
+  if (!Array.isArray(entries)) {
+    throw new Error(`${FRGMNTS_SEAT_CHECKINS_PATH} is not an array`);
+  }
+
+  return { ...file, entries: entries.map(normalizeStoredFrgmntsSeatCheckinEntry) };
+}
+
 function sortFragments(entries) {
   return entries.slice().sort((a, b) => String(b.timestamp || "").localeCompare(String(a.timestamp || "")));
 }
@@ -1194,6 +1438,14 @@ function dedupeProfessionalInquiries(entries) {
 }
 
 function sortProfessionalInquiries(entries) {
+  return entries.slice().sort((a, b) => String(b.timestamp || "").localeCompare(String(a.timestamp || "")));
+}
+
+function sortFrgmntsSupportRequests(entries) {
+  return entries.slice().sort((a, b) => String(b.timestamp || "").localeCompare(String(a.timestamp || "")));
+}
+
+function sortFrgmntsSeatCheckins(entries) {
   return entries.slice().sort((a, b) => String(b.timestamp || "").localeCompare(String(a.timestamp || "")));
 }
 
@@ -1254,6 +1506,60 @@ async function saveProfessionalInquiryWithRetry(env, entry, maxAttempts = 3) {
   }
 
   throw lastError || new Error("Professional inquiry save retry failed");
+}
+
+async function saveFrgmntsSupportRequestWithRetry(env, entry, maxAttempts = 3) {
+  let lastError = null;
+
+  for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
+    try {
+      const file = await loadFrgmntsSupportRequestsFile(env);
+      const merged = sortFrgmntsSupportRequests([entry, ...file.entries]);
+      const updatedRaw = `${JSON.stringify(merged, null, 2)}\n`;
+      const result = await saveRepoFile(
+        env,
+        FRGMNTS_SUPPORT_REQUESTS_PATH,
+        updatedRaw,
+        file.sha,
+        "Add frgmnts support request"
+      );
+      return { entry, result, count: merged.length };
+    } catch (error) {
+      lastError = error;
+      if (!isGithubConflictError(error) || attempt === maxAttempts) {
+        throw error;
+      }
+    }
+  }
+
+  throw lastError || new Error("frgmnts support request save retry failed");
+}
+
+async function saveFrgmntsSeatCheckinWithRetry(env, entry, maxAttempts = 3) {
+  let lastError = null;
+
+  for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
+    try {
+      const file = await loadFrgmntsSeatCheckinsFile(env);
+      const merged = sortFrgmntsSeatCheckins([entry, ...file.entries]);
+      const updatedRaw = `${JSON.stringify(merged, null, 2)}\n`;
+      const result = await saveRepoFile(
+        env,
+        FRGMNTS_SEAT_CHECKINS_PATH,
+        updatedRaw,
+        file.sha,
+        "Add frgmnts seat check-in"
+      );
+      return { entry, result, count: merged.length };
+    } catch (error) {
+      lastError = error;
+      if (!isGithubConflictError(error) || attempt === maxAttempts) {
+        throw error;
+      }
+    }
+  }
+
+  throw lastError || new Error("frgmnts seat check-in save retry failed");
 }
 
 function sortIotd(entries) {
@@ -1374,6 +1680,8 @@ export default {
           publish_changelog_entry: "POST /publish-changelog-entry",
           publish_ghost_draft: "POST /publish-ghost-draft",
           subscribe_frgmnts_waitlist: "POST /subscribe-frgmnts-waitlist",
+          submit_frgmnts_support_request: "POST /submit-frgmnts-support-request",
+          submit_frgmnts_seat_checkin: "POST /submit-frgmnts-seat-checkin",
           submit_professional_inquiry: "POST /submit-professional-inquiry",
           upload_ghost_image: "POST /upload-ghost-image",
           publish_iotd_entry: "POST /publish-iotd-entry",
@@ -1523,6 +1831,44 @@ export default {
         });
       } catch (error) {
         return jsonResponse({ ok: false, error: error.message || "Unknown waitlist subscribe error" }, 400);
+      }
+    }
+
+    if (request.method === "POST" && url.pathname === "/submit-frgmnts-support-request") {
+      try {
+        const body = await request.json();
+        const entry = normalizeFrgmntsSupportRequestEntry(body);
+        const result = await saveFrgmntsSupportRequestWithRetry(env, entry);
+
+        return jsonResponse({
+          ok: true,
+          message: entry.urgent
+            ? "Your urgent safety request has been received."
+            : "Your support request has been received.",
+          count: result.count,
+          commit: result.result?.commit?.sha || null
+        });
+      } catch (error) {
+        return jsonResponse({ ok: false, error: error.message || "Unknown frgmnts support request error" }, 400);
+      }
+    }
+
+    if (request.method === "POST" && url.pathname === "/submit-frgmnts-seat-checkin") {
+      try {
+        const body = await request.json();
+        const entry = normalizeFrgmntsSeatCheckinEntry(body);
+        const result = await saveFrgmntsSeatCheckinWithRetry(env, entry);
+
+        return jsonResponse({
+          ok: true,
+          message: entry.wants_reply
+            ? "Thanks. Your note came through, and we can follow up."
+            : "Thanks. Your note came through.",
+          count: result.count,
+          commit: result.result?.commit?.sha || null
+        });
+      } catch (error) {
+        return jsonResponse({ ok: false, error: error.message || "Unknown frgmnts seat check-in error" }, 400);
       }
     }
 
