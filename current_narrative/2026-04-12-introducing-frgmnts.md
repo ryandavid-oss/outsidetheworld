@@ -1,3 +1,6 @@
+# Introducing frgmnts
+Date: April 12, 2026
+
 **Something has been bothering me** for a long time. Not in a vague, ambient way -- in the specific way that eventually makes a person stop complaining and start building.
 
 The social apps I use -- the ones most of us use -- were not designed to help me stay close to my people. They were designed to keep me producing, reacting, performing, and returning. The closeness is real enough to feel. The machinery underneath it is something else entirely.
