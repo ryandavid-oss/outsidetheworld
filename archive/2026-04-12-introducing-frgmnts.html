@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Introducing frgmnts | Outside The World</title>
+    <link rel="canonical" href="https://outsidetheworld.com/archive/2026-04-12-introducing-frgmnts.html" />
+    <link href="../favicon.svg" rel="icon" type="image/svg+xml" />
+    <link href="../theme.css" rel="stylesheet" />
+    <meta name="description" content="Something has been bothering me for a long time. Not in a vague, ambient way in the specific way that eventually makes a person stop complaining and start building. The social..." />
+    <meta name="theme-color" content="#0a0a0a" />
+    <meta property="og:site_name" content="Outside The World" />
+    <meta property="og:type" content="article" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="Introducing frgmnts" />
+    <meta property="og:description" content="Something has been bothering me for a long time. Not in a vague, ambient way in the specific way that eventually makes a person stop complaining and start building. The social..." />
+    <meta property="og:url" content="https://outsidetheworld.com/archive/2026-04-12-introducing-frgmnts.html" />
+    <meta property="og:image" content="https://outsidetheworld.com/Images/og/archive/2026-04-12-introducing-frgmnts.png" />
+    <meta property="og:image:secure_url" content="https://outsidetheworld.com/Images/og/archive/2026-04-12-introducing-frgmnts.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Introducing frgmnts — Outside The World archive card" />
+    <meta property="article:published_time" content="2026-04-12" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Introducing frgmnts" />
+    <meta name="twitter:description" content="Something has been bothering me for a long time. Not in a vague, ambient way in the specific way that eventually makes a person stop complaining and start building. The social..." />
+    <meta name="twitter:image" content="https://outsidetheworld.com/Images/og/archive/2026-04-12-introducing-frgmnts.png" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;900&family=Fira+Code:wght@300;500;700&family=Merriweather:ital,wght@0,300;0,700;1,300&display=swap');
+
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: radial-gradient(circle at top left, rgba(155, 89, 182, 0.1) 0%, var(--bg-dark) 100%);
+            color: #e0e6ed;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .share-shell {
+            width: min(100%, 960px);
+            margin: 0 auto;
+            padding: clamp(20px, 6vw, 72px);
+        }
+
+        .share-card {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: clamp(24px, 7vw, 80px);
+            background: rgba(0, 0, 0, 0.78);
+            border: 1px solid rgba(145, 175, 179, 0.12);
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8);
+        }
+
+        .entry-title {
+            margin: 0 0 14px;
+            color: #fff;
+            font-size: clamp(2rem, 12vw, 2.8rem);
+            font-weight: 900;
+            line-height: 1.08;
+            overflow-wrap: anywhere;
+        }
+
+        .entry-toolbar {
+            display: flex;
+            gap: 14px;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: clamp(34px, 6vw, 56px);
+            min-width: 0;
+        }
+
+        .entry-meta,
+        .share-btn,
+        .share-status,
+        .archive-link,
+        .archive-legal {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.62rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            overflow-wrap: anywhere;
+        }
+
+        .entry-meta {
+            color: var(--brand-teal);
+        }
+
+        .share-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            max-width: 100%;
+        }
+
+        .share-btn,
+        .archive-link {
+            min-height: 44px;
+            border: 1px solid rgba(145, 175, 179, 0.18);
+            background: rgba(145, 175, 179, 0.04);
+            color: var(--brand-teal);
+            padding: 10px 14px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .share-status {
+            color: rgba(224, 230, 237, 0.65);
+        }
+
+        .entry-body {
+            color: #d1d1d1;
+            font-family: 'Merriweather', serif;
+            font-size: clamp(1rem, 3.8vw, 1.1rem);
+            font-weight: 300;
+            line-height: 1.85;
+            overflow-wrap: break-word;
+        }
+
+        .entry-body p {
+            margin: 0 0 1.5rem;
+        }
+
+        .entry-body strong {
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
+        }
+
+        .entry-body a {
+            color: var(--brand-teal);
+            text-decoration: none;
+            border-bottom: 1px dashed rgba(145, 175, 179, 0.4);
+        }
+
+        .entry-body img {
+            display: block;
+            max-width: min(100%, 720px);
+            height: auto;
+            margin: 40px auto;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .entry-body hr {
+            border: 0;
+            border-top: 1px solid rgba(145, 175, 179, 0.16);
+            margin: 2.5rem 0;
+        }
+
+        .archive-actions {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 42px;
+            padding-top: 18px;
+            border-top: 1px solid rgba(145, 175, 179, 0.12);
+        }
+
+        .archive-legal {
+            width: min(100%, 800px);
+            margin: 0 auto;
+            padding: 24px 12px 0;
+            color: rgba(224, 224, 224, 0.5);
+            line-height: 1.9;
+            text-align: center;
+        }
+
+        .archive-legal a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .archive-legal-brand {
+            margin-top: 6px;
+        }
+
+        @media (max-width: 899px) {
+            .share-card {
+                border: none;
+                background: rgba(0, 0, 0, 0.85);
+            }
+
+            .share-controls,
+            .share-btn,
+            .share-status,
+            .archive-link {
+                width: 100%;
+            }
+
+            .share-btn,
+            .archive-link {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="share-shell">
+        <article class="share-card">
+            <h1 class="entry-title">Introducing frgmnts</h1>
+            <div class="entry-toolbar">
+                <div class="entry-meta">TEMPORAL_MARK: APRIL 12, 2026</div>
+                <div class="share-controls">
+                    <button type="button" class="share-btn" onclick="copyShareLink()">COPY / SHARE LINK</button>
+                    <span class="share-status" id="share-status">STATIC_ARCHIVE_SIGNAL</span>
+                </div>
+            </div>
+            <div class="entry-body">
+<p><strong>Something has been bothering me</strong> for a long time. Not in a vague, ambient way -- in the specific way that eventually makes a person stop complaining and start building.</p>
+<p>The social apps I use -- the ones most of us use -- were not designed to help me stay close to my people. They were designed to keep me producing, reacting, performing, and returning. The closeness is real enough to feel. The machinery underneath it is something else entirely.</p>
+<p>I wanted something smaller. Warmer. Less extractive. Something that didn't mistake broadcasting for belonging.</p>
+<p>So I built it.</p>
+<p><strong>What frgmnts is</strong></p>
+<p>frgmnts is a quiet social app. Not a content machine. Not a public-performance platform. Not another feed designed to convert your life into material.</p>
+<p>It is a more human, lower-pressure way to stay present with the people you actually care about.</p>
+<p><strong>The core idea is simple:</strong> leave tiny signals for your people. Read theirs. Move on with your day. No infinite scroll engineered to dissolve your evening. No algorithm deciding what you should feel next. No engagement trap dressed up as connection.</p>
+<p>The feed is chronological. When you reach the end, you are done. You can leave. That is not a bug. That is the entire point.</p>
+<p><strong>The two things you can post</strong></p>
+<p><strong>frgmnts are short text posts</strong> -- tiny observations, passing thoughts, things worth saying without needing an audience. The format was, genuinely, an accident. I stumbled into it while rebuilding my personal site and realized almost immediately that it was the thing I had been missing.</p>
+<p><strong>embrs are six-second photo or video signals.</strong> Not a story. Not a reel. Not a performance. An ember -- something still going, compressed, warm. The name matters. We are not trying to be a bonfire here.</p>
+<p>Both formats are built around the same value: lightweight presence over endless feed production. This is for people, not audiences.</p>
+<p><strong>What I am trying to protect</strong></p>
+<p>Most social products push volume. They reward reaction loops and personal branding. They take the ordinary human desire to be seen and repackage it as spectacle. I have watched this happen to people I love, and I have watched it happen to me, and I have found it very difficult to look away from.</p>
+<p>frgmnts is built around closeness instead of broadcasting. It is quiet by design. It is relationship-first by architecture. There is no forced-onboarding energy, no growth-hack mechanic hiding behind a friendly interface, no feature that subtly encourages you to perform for strangers when what you actually wanted was to say something to a friend.</p>
+<p>The product favors intention over scale theater. I mean that. I did not build this to become the next large platform. I built it because I missed my people and the existing options required too much of me in exchange for too little of them.</p>
+<p><strong>What is live right now</strong></p>
+<p>This is an honest accounting of where things stand today:</p>
+<ul><li>frgmnts posting is live</li><li>embrs are live</li><li>Mentions are working</li><li>Photo filters are in</li><li>The ledges and community layer are live</li><li>Ongoing polish and performance work is constant</li></ul>
+<p>It is early. Some parts are intentionally still evolving. I am not pretending otherwise.</p>
+<p><strong>What stage this is in</strong></p>
+<p>frgmnts is in early beta, available via TestFlight on iPhone.</p>
+<p>I am shaping it in the open, which means what you experience today is not the finished version. It means the finished version will be better because of what people notice right now. I am actively listening to how the app feels, not just whether it technically works. Those are different questions and I care about both, but I care about the first one more.</p>
+<p><strong>What I need from you</strong></p>
+<p>Try it. Use it for a few days the way you would actually use it -- not as a reviewer, not as a tester looking for bugs, but as a person trying to stay close to someone.</p>
+<p>Then tell me:</p>
+<p>Where does it feel good? Where does it feel quiet in the right way, or fast in the right way, or surprising in a way you didn't expect?</p>
+<p>And where does it feel off? Where is it confusing, or noisy, or slow, or -- worst of all -- too familiar to the apps we are trying to move away from?</p>
+<p>I want the second kind of feedback as much as the first. Maybe more.</p>
+<p><strong>How to join</strong></p>
+<ul><li>The main page is at <a href="https://frgmnts.app">frgmnts.app</a>.</li><li>If you want a walkthrough before diving in: <a href="https://frgmnts.app/install">frgmnts.app/install</a></li><li>To install the beta directly: <a href="https://testflight.apple.com/join/PtcUtEw1">TestFlight</a></li></ul>
+<p><strong>The real invitation</strong></p>
+<p>This is not "download my app."</p>
+<p>It is: help me shape a better social feeling. Help me figure out what it means to build something that strengthens the connections between real people without asking them to hand their attention over to a machine that was never designed to love them back.</p>
+<p>If you care about calmer, more deliberate online spaces -- if you have felt the cost of the current arrangement and wondered if something different was possible -- this is for you.</p>
+<p>I hope you'll give it a try.</p>
+<p>-- RyanDavid</p>
+            </div>
+            <div class="archive-actions">
+                <a class="archive-link" href="https://outsidetheworld.com/residue_archive.html?post=April%2012%2C%202026--introducing-frgmnts">OPEN ARCHIVE MATRIX</a>
+                <a class="archive-link" href="../personal.html">RETURN TO OTW</a>
+            </div>
+        </article>
+        <div class="archive-legal">
+            <a href="../privacy.html">Privacy</a>
+            <span aria-hidden="true">&nbsp;|&nbsp;</span>
+            <a href="../terms.html">Terms</a>
+            <span aria-hidden="true">&nbsp;|&nbsp;</span>
+            <a href="../trademarks.html">Trademarks</a>
+            <span aria-hidden="true">&nbsp;|&nbsp;</span>
+            <a href="../support.html">Support</a>
+            <div class="archive-legal-brand">© 2026 Outside the World is New, LLC. Outside The World is a claimed brand identifier.</div>
+        </div>
+    </main>
+    <script>
+        async function copyShareLink() {
+            const statusEl = document.getElementById('share-status');
+            const url = window.location.href.split('#')[0];
+            try {
+                if (navigator.share) {
+                    await navigator.share({ title: document.title, text: 'Outside The World archive signal', url });
+                    statusEl.textContent = 'LINK_SHARED';
+                    return;
+                }
+                await navigator.clipboard.writeText(url);
+                statusEl.textContent = 'LINK_COPIED';
+            } catch {
+                statusEl.textContent = 'COPY_FAILED';
+            }
+        }
+    </script>
+</body>
+</html>

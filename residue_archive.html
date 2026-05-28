@@ -699,6 +699,10 @@
         }
 
         function buildShareUrl(post) {
+            if (post && post.share_path) {
+                return new URL(post.share_path, window.location.origin).toString();
+            }
+
             const url = new URL(window.location.href);
             url.searchParams.set('post', buildPostId(post));
             return url.toString();

@@ -102,7 +102,7 @@ def build_entries() -> list[dict]:
     for post in narratives:
         updated = parse_narrative_date(post["date"])
         post_id = build_archive_post_id(post)
-        url = f"{SITE_URL}/residue_archive.html?post={quote(post_id)}"
+        url = f"{SITE_URL}/{post['share_path']}" if post.get("share_path") else f"{SITE_URL}/residue_archive.html?post={quote(post_id)}"
         summary = build_excerpt(post.get("body", ""))
         entries.append(
             {

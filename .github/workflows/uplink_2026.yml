@@ -24,6 +24,9 @@ jobs:
         with:
           python-version: '3.x'
 
+      - name: Install publishing dependencies
+        run: python -m pip install pillow
+
       - name: Run Narrative Sync
         run: |
           python narrative_sync.py
@@ -35,5 +38,5 @@ jobs:
         run: |
           git config --global user.name "OTW-Bot"
           git config --global user.email "bot@outsidetheworld.com"
-          git add narrative_data.js
+          git add narrative_data.js archive Images/og/archive
           git diff --quiet && git diff --staged --quiet || (git commit -m "Uplink sync" && git push)
