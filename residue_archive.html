@@ -37,6 +37,12 @@
             /* A softer gray for meta-data */
         }
 
+        html,
+        body {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
         body {
             background-color: var(--bg-dark);
             color: var(--text-primary);
@@ -44,20 +50,22 @@
             font-family: 'Inter', sans-serif;
             margin: 0;
             display: flex;
-            height: 100vh;
-            overflow: hidden;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow-y: auto;
             transition: background 1.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .entry-body {
             font-family: 'Merriweather', serif;
-            font-size: 1.1rem;
-            line-height: 1.9;
+            font-size: clamp(1rem, 3.8vw, 1.1rem);
+            line-height: 1.85;
             color: #d1d1d1;
             /* Slightly brighter than #ccc to help the serif thin lines */
             font-weight: 300;
             /* Merriweather looks best at 300 or 400 on dark backgrounds */
             letter-spacing: 0.01rem;
+            overflow-wrap: break-word;
         }
 
         .entry-meta {
@@ -67,23 +75,26 @@
 
         /* --- SIDEBAR DIRECTORY --- */
         .directory {
-            width: 380px;
-            border-right: 1px solid var(--border-low);
+            order: 2;
+            width: 100%;
+            max-width: 100%;
+            border-top: 1px solid var(--border-low);
             display: flex;
             flex-direction: column;
             background: #070707;
             z-index: 100;
-            flex-shrink: 0;
+            flex: 0 0 auto;
+            padding-top: env(safe-area-inset-top);
         }
 
         .dir-header {
-            padding: 40px;
+            padding: clamp(24px, 8vw, 40px);
             border-bottom: 1px solid var(--border-low);
             text-align: center;
         }
 
         .sidebar-logo {
-            width: 180px;
+            width: min(180px, 52vw);
             display: block;
             margin: 0 auto;
             opacity: 0.8;
@@ -96,7 +107,7 @@
         }
 
         .tuning-knob {
-            padding: 20px 40px;
+            padding: 20px clamp(20px, 6vw, 40px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.03);
         }
 
@@ -133,13 +144,14 @@
         }
 
         .post-list {
-            flex-grow: 1;
+            max-height: 42vh;
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
+            border-top: 1px solid var(--border-low);
         }
 
         .month-header {
-            padding: 20px 40px 10px;
+            padding: 20px clamp(20px, 6vw, 40px) 10px;
             font-family: 'Fira Code';
             font-size: 0.65rem;
             color: var(--warm-amber);
@@ -148,11 +160,12 @@
         }
 
         .post-item {
-            padding: 15px 40px;
+            padding: 15px clamp(20px, 6vw, 40px);
             cursor: pointer;
             transition: 0.3s;
             border-left: 3px solid transparent;
             border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+            overflow-wrap: anywhere;
         }
 
         .post-item:hover {
@@ -178,12 +191,16 @@
 
         /* --- READER PANE --- */
         .extraction-pane {
-            flex-grow: 1;
-            padding: 60px;
+            order: 1;
+            width: 100%;
+            max-width: 100%;
+            padding: clamp(20px, 6vw, 48px);
             overflow-y: auto;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: flex-start;
+            gap: clamp(18px, 6vw, 28px);
         }
 
         .glass-card {
@@ -191,9 +208,10 @@
             backdrop-filter: blur(40px);
             -webkit-backdrop-filter: blur(40px);
             border: 1px solid rgba(145, 175, 179, 0.1);
-            padding: 80px;
+            padding: clamp(24px, 7vw, 80px);
             max-width: 800px;
             width: 100%;
+            min-width: 0;
             box-shadow: 0 40px 100px rgba(0, 0, 0, 0.9);
             opacity: 0;
             transform: translateY(20px);
@@ -209,18 +227,20 @@
         .entry-title {
             font-family: 'Inter';
             font-weight: 900;
-            font-size: 2.5rem;
+            font-size: clamp(2rem, 12vw, 2.5rem);
             margin: 0 0 10px 0;
             color: #fff;
             line-height: 1.1;
+            overflow-wrap: anywhere;
         }
 
         .entry-meta {
             font-family: 'Fira Code';
-            font-size: 0.65rem;
+            font-size: clamp(0.58rem, 2.7vw, 0.65rem);
             color: var(--brand-teal);
             margin-bottom: 50px;
             letter-spacing: 3px;
+            overflow-wrap: anywhere;
         }
 
         .entry-toolbar {
@@ -230,6 +250,7 @@
             gap: 16px;
             margin-bottom: 50px;
             flex-wrap: wrap;
+            min-width: 0;
         }
 
         .entry-toolbar .entry-meta {
@@ -241,6 +262,8 @@
             align-items: center;
             gap: 10px;
             flex-wrap: wrap;
+            min-width: 0;
+            max-width: 100%;
         }
 
         .share-btn,
@@ -249,13 +272,16 @@
             font-size: 0.58rem;
             letter-spacing: 2px;
             text-transform: uppercase;
+            overflow-wrap: anywhere;
         }
 
         .share-btn {
             border: 1px solid rgba(145, 175, 179, 0.18);
             background: rgba(145, 175, 179, 0.04);
             color: var(--brand-teal);
-            padding: 9px 12px;
+            min-height: 44px;
+            max-width: 100%;
+            padding: 10px 14px;
             cursor: pointer;
             transition: 0.25s ease;
         }
@@ -273,8 +299,8 @@
 
         .entry-body {
             font-family: 'Merriweather', serif;
-            font-size: 1.1rem;
-            line-height: 1.9;
+            font-size: clamp(1rem, 3.8vw, 1.1rem);
+            line-height: 1.85;
             color: #ccc;
         }
 
@@ -328,7 +354,7 @@
 
         /* --- IMAGE ARCHIVE PROTOCOL --- */
         .entry-body img {
-            max-width: 80%;
+            max-width: min(100%, 720px);
             /* Constrains image to the glass-card width */
             height: auto;
             /* Maintains aspect ratio */
@@ -359,6 +385,8 @@
             letter-spacing: 3px;
             text-transform: uppercase;
             color: rgba(224, 230, 237, 0.56);
+            flex-wrap: wrap;
+            overflow-wrap: anywhere;
         }
 
         .entry-reactions-meta {
@@ -428,52 +456,77 @@
             backdrop-filter: blur(5px);
         }
 
-        /* --- MOBILE REFINEMENTS (POETRY PROTOCOL) --- */
-        @media (max-width: 1024px) {
+        .archive-legal {
+            width: 100%;
+            max-width: 800px;
+            padding: 18px clamp(12px, 4vw, 20px) 28px;
+            text-align: center;
+            color: rgba(224, 224, 224, 0.5);
+            font-family: 'Fira Code', monospace;
+            font-size: 0.66rem;
+            letter-spacing: 0.12em;
+            line-height: 1.9;
+            text-transform: uppercase;
+            overflow-wrap: anywhere;
+        }
+
+        .archive-legal a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .archive-legal-brand {
+            margin-top: 6px;
+        }
+
+        @media (min-width: 900px) {
             body {
-                flex-direction: column;
-                height: auto;
-                overflow-y: auto;
+                flex-direction: row;
+                height: 100vh;
+                overflow: hidden;
             }
 
             .directory {
-                width: 100%;
-                height: auto;
-                border-right: none;
-                border-bottom: 1px solid var(--border-low);
-                padding-top: env(safe-area-inset-top);
+                order: 0;
+                width: 380px;
+                height: 100vh;
+                border-top: none;
+                border-right: 1px solid var(--border-low);
+                padding-top: 0;
+                flex-shrink: 0;
             }
 
             .post-list {
-                max-height: 45vh;
-                border-top: 1px solid var(--border-low);
+                flex-grow: 1;
+                max-height: none;
+                border-top: none;
             }
 
             .extraction-pane {
-                padding: 20px;
-                min-height: 60vh;
+                order: 0;
+                flex: 1 1 auto;
+                width: auto;
+                min-width: 0;
+                height: 100vh;
+                padding: clamp(36px, 4.8vw, 60px);
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                gap: clamp(18px, 3vw, 28px);
             }
 
             .glass-card {
-                padding: 50px 25px;
-                border: none;
-                background: rgba(0, 0, 0, 0.85);
+                padding: clamp(56px, 6vw, 80px);
             }
 
             .entry-title {
-                font-size: 1.8rem;
-            }
-
-            .entry-toolbar {
-                margin-bottom: 34px;
-                gap: 12px;
+                font-size: clamp(2.1rem, 3.2vw, 2.5rem);
             }
 
             .entry-reactions-row {
                 align-items: center;
                 justify-content: space-between;
                 gap: 12px;
-                flex-wrap: nowrap;
                 font-size: 0.58rem;
                 letter-spacing: 2px;
             }
@@ -517,8 +570,39 @@
                 margin-left: 10px;
             }
 
-            .share-controls {
+            .archive-legal {
                 width: 100%;
+                max-width: 800px;
+                padding: 18px 20px 28px;
+            }
+        }
+
+        /* --- MOBILE REFINEMENTS (POETRY PROTOCOL) --- */
+        @media (max-width: 899px) {
+            .glass-card {
+                border: none;
+                background: rgba(0, 0, 0, 0.85);
+            }
+
+            .entry-toolbar {
+                margin-bottom: 34px;
+                gap: 12px;
+            }
+
+            .entry-toolbar,
+            .share-controls,
+            .share-btn,
+            .share-status {
+                width: 100%;
+            }
+
+            .share-btn {
+                text-align: center;
+            }
+
+            .entry-reactions-row,
+            .entry-reactions-meta {
+                align-items: flex-start;
             }
 
             .back-nav {
@@ -571,15 +655,15 @@
                 SELECT_SIGNAL_FROM_DIRECTORY...
             </div>
         </div>
-        <div style="padding: 18px 20px 28px; text-align: center; color: rgba(224, 224, 224, 0.5); font-family: 'Fira Code', monospace; font-size: 0.66rem; letter-spacing: 0.12em; line-height: 1.9; text-transform: uppercase;">
-            <a href="privacy.html" style="color: inherit; text-decoration: none;">Privacy</a>
+        <div class="archive-legal">
+            <a href="privacy.html">Privacy</a>
             <span aria-hidden="true">&nbsp;|&nbsp;</span>
-            <a href="terms.html" style="color: inherit; text-decoration: none;">Terms</a>
+            <a href="terms.html">Terms</a>
             <span aria-hidden="true">&nbsp;|&nbsp;</span>
-            <a href="trademarks.html" style="color: inherit; text-decoration: none;">Trademarks</a>
+            <a href="trademarks.html">Trademarks</a>
             <span style="opacity: 0.45;">|</span>
-            <a href="support.html" style="color: inherit; text-decoration: none;">Support</a>
-            <div style="margin-top: 6px;">© 2026 Outside the World is New, LLC. Outside The World is a claimed brand identifier.</div>
+            <a href="support.html">Support</a>
+            <div class="archive-legal-brand">© 2026 Outside the World is New, LLC. Outside The World is a claimed brand identifier.</div>
         </div>
     </main>
     <script src="narrative_data.js">
@@ -630,7 +714,9 @@
                 ta.style.position = 'fixed';
                 ta.style.left = '-9999px';
                 document.body.appendChild(ta);
+                ta.focus();
                 ta.select();
+                ta.setSelectionRange(0, ta.value.length);
                 const ok = document.execCommand('copy');
                 ta.remove();
                 return ok;
