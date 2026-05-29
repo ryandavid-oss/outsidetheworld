@@ -620,7 +620,6 @@
       font-family: var(--serif);
       font-size: clamp(1.08rem, 1.5vw, 1.24rem);
       line-height: 1.5;
-      white-space: pre-wrap;
       outline: none;
     }
 
@@ -644,6 +643,10 @@
     .editor h2,
     .editor blockquote {
       margin: 0 0 1.2em;
+    }
+
+    .editor p {
+      min-height: 1.5em;
     }
 
     .editor h2 {
@@ -732,6 +735,17 @@
       max-width: min(var(--figure-max-width, 520px), 100%);
       margin-right: auto;
       margin-left: auto;
+    }
+
+    .publisher-figure.is-selected,
+    .publisher-figure:focus-visible {
+      border-color: rgba(36, 79, 158, 0.38);
+      box-shadow: 0 0 0 3px rgba(36, 79, 158, 0.08);
+      outline: none;
+    }
+
+    .publisher-figure.is-dragging {
+      opacity: 0.55;
     }
 
     .publisher-figure[data-display-size="small"] {
@@ -845,18 +859,39 @@
     }
 
     .figure-meta {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      z-index: 8;
+      width: min(360px, calc(100% - 16px));
       display: grid;
       grid-template-columns: minmax(0, 1fr);
       gap: 10px;
       align-items: start;
-      margin-top: 8px;
-      opacity: 0.72;
-      transition: opacity 160ms ease;
+      padding: 8px;
+      border: 1px solid rgba(41, 39, 35, 0.12);
+      background: rgba(255, 250, 240, 0.94);
+      box-shadow: 0 14px 32px rgba(62, 50, 34, 0.16);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-4px);
+      transition: opacity 140ms ease, transform 140ms ease;
+      user-select: none;
     }
 
     .publisher-figure:focus-within .figure-meta,
-    .publisher-figure:hover .figure-meta {
+    .publisher-figure:hover .figure-meta,
+    .publisher-figure.is-selected .figure-meta {
       opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .publisher-figure[data-controls-hidden="true"] .figure-meta {
+      opacity: 0 !important;
+      pointer-events: none !important;
+      transform: translateY(-4px) !important;
+      transition: none !important;
     }
 
     .figure-alt {
@@ -878,11 +913,13 @@
       justify-content: flex-end;
       min-width: 0;
       max-width: 100%;
+      user-select: none;
     }
 
     .figure-size-controls,
     .figure-align-controls,
-    .figure-wrap-controls {
+    .figure-wrap-controls,
+    .figure-move-controls {
       display: inline-flex;
       align-items: center;
       gap: 2px;
@@ -905,7 +942,8 @@
 
     .figure-size-option,
     .figure-align-option,
-    .figure-wrap-option {
+    .figure-wrap-option,
+    .figure-move-option {
       min-width: 28px;
       min-height: 26px;
       padding: 0 7px;
@@ -918,6 +956,14 @@
       text-transform: uppercase;
     }
 
+    .figure-drag-handle {
+      cursor: grab;
+    }
+
+    .figure-drag-handle:active {
+      cursor: grabbing;
+    }
+
     .figure-action:hover,
     .figure-action:focus-visible,
     .figure-size-option:hover,
@@ -925,7 +971,9 @@
     .figure-align-option:hover,
     .figure-align-option:focus-visible,
     .figure-wrap-option:hover,
-    .figure-wrap-option:focus-visible {
+    .figure-wrap-option:focus-visible,
+    .figure-move-option:hover,
+    .figure-move-option:focus-visible {
       background: #fff;
       color: var(--blue);
       outline: none;
@@ -949,6 +997,24 @@
     .publisher-figure[data-upload-status="failed"] .figure-action[data-role="retry"] {
       display: inline-flex;
       align-items: center;
+    }
+
+    .image-drop-indicator {
+      position: absolute;
+      left: 0;
+      right: 0;
+      z-index: 7;
+      height: 2px;
+      background: rgba(36, 79, 158, 0.68);
+      box-shadow: 0 0 0 3px rgba(36, 79, 158, 0.08);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-1px);
+      transition: opacity 120ms ease;
+    }
+
+    .image-drop-indicator.is-active {
+      opacity: 1;
     }
 
     .unsupported-block {
@@ -1498,6 +1564,11 @@
     let draftCreatedAt = new Date().toISOString();
     let currentSaveLabel = 'Local draft';
     let currentReadinessLabel = '';
+    let selectedFigure = null;
+    let lastBodyCursorRange = null;
+    let draggedFigure = null;
+    let imageDropTarget = null;
+    let imageDropIndicator = null;
     const lineSpacingValues = ['1.0', '1.15', '1.5', '2.0'];
     const lineSpacingClasses = {
       '1.0': 'line-spacing-10',
@@ -1581,8 +1652,12 @@
       return `${prefix}_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 8)}`;
     }
 
+    function stripEditorCaretMarkers(value) {
+      return String(value || '').replace(/\u200B/g, '');
+    }
+
     function escapeHtml(value) {
-      return String(value || '')
+      return stripEditorCaretMarkers(value)
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;')
@@ -1915,7 +1990,7 @@
 
       function cleanNode(node) {
         if (node.nodeType === Node.TEXT_NODE) {
-          return document.createTextNode(node.textContent || '');
+          return document.createTextNode(stripEditorCaretMarkers(node.textContent));
         }
         if (node.nodeType !== Node.ELEMENT_NODE) {
           return document.createDocumentFragment();
@@ -1988,23 +2063,26 @@
     function plainTextFragment(text) {
       const fragment = document.createDocumentFragment();
       const paragraphs = String(text || '')
-        .replace(/\r/g, '')
-        .split(/\n{2,}/)
+        .replace(/\r\n?/g, '\n')
+        .trim()
+        .split(/\n+/)
         .map((paragraph) => paragraph.trim())
         .filter(Boolean);
 
       paragraphs.forEach((paragraph) => {
         const p = document.createElement('p');
-        paragraph.split(/\n/).forEach((line, index) => {
-          if (index) {
-            p.append(document.createElement('br'));
-          }
-          p.append(document.createTextNode(line));
-        });
+        p.append(document.createTextNode(paragraph));
         fragment.append(p);
       });
 
       return fragment;
+    }
+
+    function pastedNodeHasBlockChildren(node) {
+      return Array.from(node.childNodes || []).some((child) => {
+        return child.nodeType === Node.ELEMENT_NODE &&
+          child.matches('p, div, section, article, main, h1, h2, h3, h4, h5, h6, blockquote, ul, ol, li, hr, table, figure');
+      });
     }
 
     function cleanPastedNode(node) {
@@ -2020,6 +2098,13 @@
         const p = document.createElement('p');
         p.append(document.createElement('br'));
         return p;
+      }
+      if (['div', 'section', 'article', 'main'].includes(tag) && pastedNodeHasBlockChildren(node)) {
+        const fragment = document.createDocumentFragment();
+        node.childNodes.forEach((child) => {
+          fragment.append(cleanPastedNode(child));
+        });
+        return fragment;
       }
       if (['p', 'div', 'section', 'article', 'main'].includes(tag)) {
         const p = document.createElement('p');
@@ -2088,16 +2173,21 @@
         editor.append(fragment);
       } else {
         const range = selection.getRangeAt(0);
-        range.deleteContents();
-        const lastNode = fragment.lastChild;
-        range.insertNode(fragment);
-        if (lastNode) {
-          range.setStartAfter(lastNode);
-          range.collapse(true);
-          selection.removeAllRanges();
-          selection.addRange(range);
+        if (fragmentContainsBlockNodes(fragment)) {
+          insertBlockFragmentAtRange(fragment, range);
+        } else {
+          range.deleteContents();
+          const lastNode = fragment.lastChild;
+          range.insertNode(fragment);
+          if (lastNode) {
+            range.setStartAfter(lastNode);
+            range.collapse(true);
+            selection.removeAllRanges();
+            selection.addRange(range);
+          }
         }
       }
+      normalizeEditorStructure();
       rememberSelection();
       markChanged();
       scheduleToolbarStateUpdate();
@@ -2125,6 +2215,256 @@
       return true;
     }
 
+    function isFigureNode(node) {
+      return node &&
+        node.nodeType === Node.ELEMENT_NODE &&
+        node.classList.contains('publisher-figure');
+    }
+
+    function isEditorChromeNode(node) {
+      return node &&
+        node.nodeType === Node.ELEMENT_NODE &&
+        node.dataset.editorChrome === 'true';
+    }
+
+    function isEditableTextBlockElement(element) {
+      return Boolean(
+        element &&
+        element.nodeType === Node.ELEMENT_NODE &&
+        ['p', 'h2', 'blockquote'].includes(element.tagName.toLowerCase())
+      );
+    }
+
+    function isListItemElement(element) {
+      return Boolean(
+        element &&
+        element.nodeType === Node.ELEMENT_NODE &&
+        element.tagName.toLowerCase() === 'li'
+      );
+    }
+
+    function isSupportedTopLevelBlock(node) {
+      if (!node || node.nodeType !== Node.ELEMENT_NODE) {
+        return false;
+      }
+      if (isFigureNode(node) || node.classList.contains('unsupported-block')) {
+        return true;
+      }
+      return ['p', 'h2', 'blockquote', 'ul', 'ol', 'hr'].includes(node.tagName.toLowerCase());
+    }
+
+    function fragmentContainsBlockNodes(fragment) {
+      return Array.from(fragment.childNodes || []).some((node) => {
+        if (node.nodeType === Node.TEXT_NODE) {
+          return Boolean(node.textContent.trim());
+        }
+        return node.nodeType === Node.ELEMENT_NODE && !canBufferAsInline(node);
+      });
+    }
+
+    function normalizeEmptyTextBlock(block) {
+      if (!isEditableTextBlockElement(block) && !isListItemElement(block)) {
+        return;
+      }
+      if (nodeHasVisualContent(block)) {
+        return;
+      }
+      block.replaceChildren(document.createElement('br'));
+    }
+
+    function emptyBlockCaretTextNode(block) {
+      if ((!isEditableTextBlockElement(block) && !isListItemElement(block)) || nodeHasVisualContent(block)) {
+        return null;
+      }
+      const text = document.createTextNode('');
+      block.replaceChildren(text);
+      return text;
+    }
+
+    function textBlockFromRange(range) {
+      if (!range) {
+        return null;
+      }
+      const element = elementFromNode(range.startContainer);
+      if (!element || !editor.contains(element)) {
+        return null;
+      }
+      const listItem = element.closest('li');
+      if (listItem && editor.contains(listItem)) {
+        return listItem;
+      }
+      const block = element.closest('p, h2, blockquote');
+      return block && editor.contains(block) ? block : null;
+    }
+
+    function placeCaretAtStart(node) {
+      const emptyText = emptyBlockCaretTextNode(node);
+      const range = document.createRange();
+      if (emptyText) {
+        range.setStart(emptyText, 0);
+      } else {
+        range.selectNodeContents(node);
+        range.collapse(true);
+      }
+      const selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+      savedRange = range.cloneRange();
+      lastBodyCursorRange = range.cloneRange();
+      editor.focus();
+    }
+
+    function placeCaretAfterInsertedBlocks(insertedNodes, tailBlock = null) {
+      if (tailBlock && editor.contains(tailBlock)) {
+        placeCaretAtStart(tailBlock);
+        return;
+      }
+      const editableTarget = [...insertedNodes].reverse().find((node) => {
+        if (isEditableTextBlockElement(node)) {
+          return true;
+        }
+        if (node && node.nodeType === Node.ELEMENT_NODE && ['ul', 'ol'].includes(node.tagName.toLowerCase())) {
+          return node.lastElementChild;
+        }
+        return false;
+      });
+      if (editableTarget) {
+        if (['ul', 'ol'].includes(editableTarget.tagName.toLowerCase()) && editableTarget.lastElementChild) {
+          placeCaretInside(editableTarget.lastElementChild);
+        } else {
+          placeCaretInside(editableTarget);
+        }
+        return;
+      }
+      const lastInserted = insertedNodes[insertedNodes.length - 1];
+      const paragraph = createTrailingParagraph();
+      if (lastInserted && editor.contains(lastInserted)) {
+        lastInserted.after(paragraph);
+      } else {
+        editor.append(paragraph);
+      }
+      placeCaretInside(paragraph);
+    }
+
+    function splitBlockForInsertion(block, range, insertedNodes) {
+      range.deleteContents();
+      const tailRange = document.createRange();
+      tailRange.setStart(range.startContainer, range.startOffset);
+      tailRange.setEnd(block, block.childNodes.length);
+      const tail = tailRange.extractContents();
+      const beforeHasContent = nodeHasVisualContent(block);
+      const afterHasContent = nodeHasVisualContent(tail);
+      let tailBlock = null;
+
+      normalizeEmptyTextBlock(block);
+      insertedNodes.forEach((node) => {
+        if (isEditableTextBlockElement(node) || isListItemElement(node)) {
+          normalizeEmptyTextBlock(node);
+        }
+      });
+
+      if (beforeHasContent) {
+        block.after(...insertedNodes);
+      } else {
+        block.replaceWith(...insertedNodes);
+      }
+
+      if (afterHasContent) {
+        tailBlock = document.createElement(block.tagName && block.tagName.toLowerCase() === 'li' ? 'li' : 'p');
+        tailBlock.dataset.blockId = blockId(tailBlock.tagName.toLowerCase() === 'li' ? 'item' : 'paragraph');
+        tailBlock.append(tail);
+        normalizeEmptyTextBlock(tailBlock);
+        insertedNodes[insertedNodes.length - 1].after(tailBlock);
+      }
+
+      placeCaretAfterInsertedBlocks(insertedNodes, tailBlock);
+    }
+
+    function insertBlockFragmentAtRange(fragment, range) {
+      const insertedNodes = Array.from(fragment.childNodes).filter((node) => {
+        return node.nodeType !== Node.TEXT_NODE || Boolean(node.textContent.trim());
+      });
+      if (!insertedNodes.length) {
+        return;
+      }
+
+      const block = textBlockFromRange(range);
+      if (block && !isListItemElement(block)) {
+        splitBlockForInsertion(block, range, insertedNodes);
+        return;
+      }
+      if (isListItemElement(block)) {
+        range.deleteContents();
+        const list = block.closest('ul, ol');
+        if (list && editor.contains(list)) {
+          list.after(...insertedNodes);
+          placeCaretAfterInsertedBlocks(insertedNodes);
+          return;
+        }
+      }
+
+      range.deleteContents();
+      range.insertNode(fragment);
+      placeCaretAfterInsertedBlocks(insertedNodes);
+    }
+
+    function normalizeEditorStructure() {
+      const normalized = document.createDocumentFragment();
+      const inlineBuffer = [];
+
+      function flushInlineBuffer() {
+        if (!inlineBuffer.length) {
+          return;
+        }
+        const paragraph = document.createElement('p');
+        paragraph.dataset.blockId = blockId('paragraph');
+        inlineBuffer.splice(0).forEach((node) => paragraph.append(node));
+        normalizeEmptyTextBlock(paragraph);
+        normalized.append(paragraph);
+      }
+
+      Array.from(editor.childNodes).forEach((node) => {
+        if (isEditorChromeNode(node)) {
+          return;
+        }
+        if (node.nodeType === Node.TEXT_NODE) {
+          if (node.textContent.trim()) {
+            inlineBuffer.push(node);
+          }
+          return;
+        }
+        if (node.nodeType !== Node.ELEMENT_NODE) {
+          return;
+        }
+        if (isSupportedTopLevelBlock(node)) {
+          flushInlineBuffer();
+          if (isEditableTextBlockElement(node)) {
+            normalizeEmptyTextBlock(node);
+          }
+          normalized.append(node);
+          return;
+        }
+        if (canBufferAsInline(node)) {
+          inlineBuffer.push(node);
+          return;
+        }
+        flushInlineBuffer();
+        Array.from(node.childNodes).forEach((child) => {
+          if (child.nodeType === Node.TEXT_NODE && !child.textContent.trim()) {
+            return;
+          }
+          normalized.append(child);
+        });
+      });
+
+      flushInlineBuffer();
+      editor.replaceChildren(normalized);
+      if (imageDropIndicator) {
+        editor.append(imageDropIndicator);
+      }
+      wireAllFigures();
+    }
+
     function inlineMarkdownFromHtml(html, issues = [], context = {}) {
       const template = document.createElement('template');
       template.innerHTML = sanitizeInlineHtml(html);
@@ -2135,7 +2475,7 @@
 
       function nodeToMarkdown(node) {
         if (node.nodeType === Node.TEXT_NODE) {
-          return escapeMarkdownText(node.textContent || '');
+          return escapeMarkdownText(stripEditorCaretMarkers(node.textContent));
         }
         if (node.nodeType !== Node.ELEMENT_NODE) {
           return '';
@@ -2212,7 +2552,7 @@
       if (block.type === 'list') {
         return block.items.some((item) => item.html.replace(/<br\s*\/?>/gi, '').trim());
       }
-      return String(block.html || '').replace(/<br\s*\/?>/gi, '').trim().length > 0;
+      return stripEditorCaretMarkers(block.html || '').replace(/<br\s*\/?>/gi, '').trim().length > 0;
     }
 
     function normalizeImageUploadStatus(status, source = {}) {
@@ -2387,7 +2727,7 @@
         id: element.dataset.blockId || blockId(type),
         type,
         html,
-        text: element.textContent.trim(),
+        text: stripEditorCaretMarkers(element.textContent).trim(),
         ...extra
       };
       const lineSpacing = getElementLineSpacing(element);
@@ -2480,13 +2820,13 @@
           .map((item) => ({
             id: item.dataset.blockId || blockId('item'),
             html: sanitizeInlineHtml(item.innerHTML),
-            text: item.textContent.trim()
+            text: stripEditorCaretMarkers(item.textContent).trim()
           }))
       };
     }
 
     function serializePlainText(value) {
-      return String(value || '')
+      return stripEditorCaretMarkers(value)
         .split(/\n+/)
         .map((line) => line.trim())
         .filter(Boolean)
@@ -2531,7 +2871,7 @@
         id: blockId('paragraph'),
         type: 'paragraph',
         html: sanitizeInlineHtml(container.innerHTML).replace(/\n/g, '<br>'),
-        text: container.textContent.trim()
+        text: stripEditorCaretMarkers(container.textContent).trim()
       }];
     }
 
@@ -3039,6 +3379,9 @@
       const figure = document.createElement('figure');
       figure.className = 'publisher-figure';
       figure.contentEditable = 'false';
+      figure.tabIndex = 0;
+      figure.setAttribute('role', 'group');
+      figure.setAttribute('aria-label', 'Image card');
       figure.dataset.blockId = id;
       figure.dataset.displaySize = normalizeFigureDisplaySize(displaySize);
       figure.dataset.alignment = normalizeFigureAlignment(alignment);
@@ -3076,6 +3419,7 @@
         const image = document.createElement('img');
         image.src = src;
         image.alt = alt;
+        image.draggable = false;
         if (fileName) {
           image.setAttribute('data-file-name', fileName);
         }
@@ -3102,6 +3446,7 @@
 
       const meta = document.createElement('div');
       meta.className = 'figure-meta';
+      meta.dataset.editorChrome = 'true';
 
       const details = document.createElement('div');
       details.className = 'figure-details';
@@ -3167,6 +3512,30 @@
         wrapControls.append(button);
       });
 
+      const moveControls = document.createElement('div');
+      moveControls.className = 'figure-move-controls';
+      moveControls.setAttribute('aria-label', 'Image placement');
+
+      [
+        { role: 'drag', label: 'Drag', title: 'Drag to move' },
+        { role: 'move-up', label: 'Up', title: 'Move image up' },
+        { role: 'move-down', label: 'Down', title: 'Move image down' },
+        { role: 'move-cursor', label: 'Cursor', title: 'Move image to cursor' }
+      ].forEach((option) => {
+        const button = document.createElement('button');
+        button.className = 'figure-move-option';
+        button.type = 'button';
+        button.textContent = option.label;
+        button.title = option.title;
+        button.setAttribute('aria-label', option.title);
+        button.dataset.role = option.role;
+        if (option.role === 'drag') {
+          button.classList.add('figure-drag-handle');
+          button.draggable = true;
+        }
+        moveControls.append(button);
+      });
+
       const retry = document.createElement('button');
       retry.className = 'figure-action';
       retry.type = 'button';
@@ -3189,7 +3558,7 @@
       remove.title = 'Remove image';
       remove.dataset.role = 'remove';
 
-      actions.append(sizeControls, alignControls, wrapControls, retry, replace, remove);
+      actions.append(sizeControls, alignControls, wrapControls, moveControls, retry, replace, remove);
       details.append(status, altInput);
       meta.append(details, actions);
       figure.append(figcaption, meta);
@@ -3276,13 +3645,13 @@
           editor.append(node);
         }
       });
-      wireAllFigures();
+      normalizeEditorStructure();
     }
 
     function legacyDraftToArticle(draft) {
       const originalHtml = editor.innerHTML;
       editor.innerHTML = draft.bodyHtml || '';
-      wireAllFigures();
+      normalizeEditorStructure();
       const article = {
         schema: ARTICLE_SCHEMA,
         version: 2,
@@ -3475,12 +3844,34 @@
       );
     }
 
+    function elementFromNode(node) {
+      if (!node) {
+        return null;
+      }
+      return node.nodeType === Node.ELEMENT_NODE ? node : node.parentElement;
+    }
+
+    function rangeIsInsideFigure(range, figure = null) {
+      if (!range) {
+        return false;
+      }
+      const element = elementFromNode(range.commonAncestorContainer);
+      const containingFigure = element && element.closest('.publisher-figure');
+      return Boolean(containingFigure && (!figure || containingFigure === figure));
+    }
+
     function rememberSelection() {
       const selection = window.getSelection();
       if (!selection || !selection.rangeCount || !selectionIsInsideEditor()) {
         return;
       }
-      savedRange = selection.getRangeAt(0).cloneRange();
+      const range = selection.getRangeAt(0).cloneRange();
+      if (rangeIsInsideFigure(range)) {
+        return;
+      }
+      savedRange = range.cloneRange();
+      lastBodyCursorRange = range.cloneRange();
+      lastBodyCursorRange.collapse(false);
     }
 
     function restoreSelection() {
@@ -3524,10 +3915,54 @@
       return element.closest('li, p, h2, blockquote') || editor;
     }
 
+    function clearFigureSelection(figureToKeep = null) {
+      editor.querySelectorAll('.publisher-figure.is-selected').forEach((figure) => {
+        if (figure !== figureToKeep) {
+          figure.classList.remove('is-selected');
+          figure.setAttribute('aria-selected', 'false');
+          setFigureChromeFocusable(figure, false);
+        }
+      });
+      if (!figureToKeep && selectedFigure) {
+        selectedFigure = null;
+      }
+    }
+
+    function setFigureChromeFocusable(figure, focusable) {
+      if (!figure) {
+        return;
+      }
+      figure.querySelectorAll('.figure-meta button, .figure-meta input').forEach((control) => {
+        control.tabIndex = focusable ? 0 : -1;
+      });
+    }
+
+    function selectFigure(figure, options = {}) {
+      if (!figure || !editor.contains(figure)) {
+        clearFigureSelection();
+        return;
+      }
+      clearFigureSelection(figure);
+      selectedFigure = figure;
+      delete figure.dataset.controlsHidden;
+      figure.classList.add('is-selected');
+      figure.setAttribute('aria-selected', 'true');
+      setFigureChromeFocusable(figure, true);
+      setActiveEditable(editor);
+      if (options.focus) {
+        figure.focus({ preventScroll: true });
+      }
+    }
+
     function placeCaretInside(node) {
+      const emptyText = emptyBlockCaretTextNode(node);
       const range = document.createRange();
-      range.selectNodeContents(node);
-      range.collapse(false);
+      if (emptyText) {
+        range.setStart(emptyText, 0);
+      } else {
+        range.selectNodeContents(node);
+        range.collapse(false);
+      }
       const selection = window.getSelection();
       selection.removeAllRanges();
       selection.addRange(range);
@@ -3535,32 +3970,345 @@
       editor.focus();
     }
 
+    function nodeHasVisualContent(node) {
+      if (!node) {
+        return false;
+      }
+      if (node.nodeType === Node.TEXT_NODE) {
+        return Boolean(stripEditorCaretMarkers(node.textContent).trim());
+      }
+      if (node.nodeType !== Node.ELEMENT_NODE && node.nodeType !== Node.DOCUMENT_FRAGMENT_NODE) {
+        return false;
+      }
+      if (node.querySelector && node.querySelector('img, figure, hr')) {
+        return true;
+      }
+      return Boolean(stripEditorCaretMarkers(node.textContent).trim());
+    }
+
+    function cloneEmptyTextBlock(block) {
+      const clone = block.cloneNode(false);
+      clone.dataset.blockId = blockId(block.tagName ? block.tagName.toLowerCase() : 'paragraph');
+      return clone;
+    }
+
+    function rangeAtEditorEnd() {
+      const range = document.createRange();
+      range.selectNodeContents(editor);
+      range.collapse(false);
+      return range;
+    }
+
+    function rangeCanReceiveFigure(range, figure = null) {
+      if (!range || !editor.contains(range.commonAncestorContainer)) {
+        return false;
+      }
+      return !rangeIsInsideFigure(range) && !(figure && figure.contains(range.commonAncestorContainer));
+    }
+
+    function setSelectionAfterNode(node) {
+      const range = document.createRange();
+      range.setStartAfter(node);
+      range.collapse(true);
+      const selection = window.getSelection();
+      if (selection) {
+        selection.removeAllRanges();
+        selection.addRange(range);
+      }
+      savedRange = range.cloneRange();
+    }
+
+    function insertBlockNodeAtRange(node, range) {
+      const targetRange = rangeCanReceiveFigure(range, node) ? range.cloneRange() : rangeAtEditorEnd();
+      const startElement = elementFromNode(targetRange.startContainer);
+      const containingTextBlock = startElement && startElement.closest('p, h2, blockquote');
+      const containingList = startElement && startElement.closest('ul, ol');
+      const insertsBlock = node.matches && node.matches('figure, hr');
+
+      if (insertsBlock && containingTextBlock && editor.contains(containingTextBlock)) {
+        targetRange.deleteContents();
+        const tailRange = document.createRange();
+        tailRange.setStart(targetRange.startContainer, targetRange.startOffset);
+        tailRange.setEnd(containingTextBlock, containingTextBlock.childNodes.length);
+        const tail = tailRange.extractContents();
+        const beforeHasContent = nodeHasVisualContent(containingTextBlock);
+        const afterHasContent = nodeHasVisualContent(tail);
+
+        if (beforeHasContent) {
+          containingTextBlock.after(node);
+        } else {
+          containingTextBlock.before(node);
+          containingTextBlock.remove();
+        }
+
+        if (afterHasContent) {
+          const trailingBlock = cloneEmptyTextBlock(containingTextBlock);
+          trailingBlock.append(tail);
+          node.after(trailingBlock);
+        }
+        setSelectionAfterNode(node);
+        return;
+      }
+
+      if (insertsBlock && containingList && editor.contains(containingList)) {
+        containingList.after(node);
+        setSelectionAfterNode(node);
+        return;
+      }
+
+      targetRange.deleteContents();
+      targetRange.insertNode(node);
+      setSelectionAfterNode(node);
+    }
+
     function insertNodeAtSavedRange(node) {
       restoreSelection();
       const selection = window.getSelection();
-      if (!selection || !selection.rangeCount) {
-        editor.append(node);
-      } else {
-        const range = selection.getRangeAt(0);
-        const startElement = range.startContainer.nodeType === Node.ELEMENT_NODE
-          ? range.startContainer
-          : range.startContainer.parentElement;
-        const containingTextBlock = startElement && startElement.closest('p, h2, blockquote');
-        const insertsBlock = node.matches && node.matches('figure, hr');
-        if (insertsBlock && containingTextBlock && editor.contains(containingTextBlock)) {
-          range.deleteContents();
-          containingTextBlock.after(node);
-        } else {
-          range.deleteContents();
-          range.insertNode(node);
+      const range = selection && selection.rangeCount ? selection.getRangeAt(0) : rangeAtEditorEnd();
+      insertBlockNodeAtRange(node, range);
+      markChanged();
+    }
+
+    function significantEditorNodes() {
+      return Array.from(editor.childNodes).filter((node) => {
+        if (node.nodeType === Node.TEXT_NODE) {
+          return Boolean(node.textContent.trim());
         }
-        const nextRange = document.createRange();
-        nextRange.setStartAfter(node);
-        nextRange.collapse(true);
-        selection.removeAllRanges();
-        selection.addRange(nextRange);
+        return node.nodeType === Node.ELEMENT_NODE;
+      });
+    }
+
+    function directEditorNode(node) {
+      let current = node;
+      while (current && current.parentNode !== editor) {
+        current = current.parentNode;
       }
-      savedRange = window.getSelection().getRangeAt(0).cloneRange();
+      return current && current.parentNode === editor ? current : null;
+    }
+
+    function editableNeighborForFigure(figure, direction = 'next') {
+      const nodes = significantEditorNodes();
+      const reference = directEditorNode(figure);
+      const index = nodes.indexOf(reference);
+      if (index === -1) {
+        return null;
+      }
+      const step = direction === 'previous' ? -1 : 1;
+      for (let cursor = index + step; cursor >= 0 && cursor < nodes.length; cursor += step) {
+        const node = nodes[cursor];
+        if (
+          node.nodeType === Node.ELEMENT_NODE &&
+          !node.classList.contains('publisher-figure') &&
+          ['p', 'h2', 'blockquote', 'li'].includes(node.tagName.toLowerCase())
+        ) {
+          return node;
+        }
+      }
+      return null;
+    }
+
+    function ensureEditableParagraphAfterFigure(figure) {
+      const next = figure.nextSibling;
+      if (
+        next &&
+        next.nodeType === Node.ELEMENT_NODE &&
+        ['p', 'h2', 'blockquote'].includes(next.tagName.toLowerCase())
+      ) {
+        return next;
+      }
+      const paragraph = createTrailingParagraph();
+      figure.after(paragraph);
+      return paragraph;
+    }
+
+    function focusNearFigure(figure, direction = 'next') {
+      const target = editableNeighborForFigure(figure, direction) ||
+        editableNeighborForFigure(figure, direction === 'next' ? 'previous' : 'next');
+      if (target) {
+        placeCaretInside(target);
+        return;
+      }
+      const paragraph = createTrailingParagraph();
+      editor.append(paragraph);
+      placeCaretInside(paragraph);
+    }
+
+    function removeFigure(figure) {
+      if (!figure || !editor.contains(figure)) {
+        return;
+      }
+      revokeFigureUrl(figure);
+      stagedImageFiles.delete(figure);
+      const focusTarget = editableNeighborForFigure(figure, 'next') ||
+        editableNeighborForFigure(figure, 'previous');
+      figure.remove();
+      if (selectedFigure === figure) {
+        selectedFigure = null;
+      }
+      clearFigureSelection();
+      if (focusTarget && editor.contains(focusTarget)) {
+        placeCaretInside(focusTarget);
+      } else {
+        const paragraph = createTrailingParagraph();
+        editor.append(paragraph);
+        placeCaretInside(paragraph);
+      }
+      setSaveState('Image removed', true);
+      markChanged();
+    }
+
+    function moveFigureByBlock(figure, direction) {
+      const reference = directEditorNode(figure);
+      const nodes = significantEditorNodes();
+      const index = nodes.indexOf(reference);
+      if (!figure || index === -1) {
+        return;
+      }
+      const target = direction === 'up' ? nodes[index - 1] : nodes[index + 1];
+      if (!target) {
+        setSaveState(direction === 'up' ? 'Image is already first' : 'Image is already last', true);
+        selectFigure(figure, { focus: true });
+        return;
+      }
+      if (direction === 'up') {
+        target.before(figure);
+      } else {
+        target.after(figure);
+      }
+      selectFigure(figure, { focus: true });
+      setSaveState(direction === 'up' ? 'Image moved up' : 'Image moved down', true);
+      markChanged();
+    }
+
+    function moveFigureToCursor(figure) {
+      if (!figure || !editor.contains(figure)) {
+        return;
+      }
+      const range = rangeCanReceiveFigure(lastBodyCursorRange, figure)
+        ? lastBodyCursorRange.cloneRange()
+        : rangeAtEditorEnd();
+      insertBlockNodeAtRange(figure, range);
+      ensureEditableParagraphAfterFigure(figure);
+      selectFigure(figure, { focus: true });
+      setSaveState('Image moved to cursor', true);
+      markChanged();
+    }
+
+    function ensureImageDropIndicator() {
+      if (imageDropIndicator) {
+        return imageDropIndicator;
+      }
+      imageDropIndicator = document.createElement('div');
+      imageDropIndicator.className = 'image-drop-indicator';
+      imageDropIndicator.dataset.editorChrome = 'true';
+      editor.append(imageDropIndicator);
+      return imageDropIndicator;
+    }
+
+    function hideImageDropIndicator() {
+      if (imageDropIndicator) {
+        imageDropIndicator.classList.remove('is-active');
+      }
+      imageDropTarget = null;
+    }
+
+    function articleDropNodes(excludeFigure = null) {
+      return significantEditorNodes().filter((node) => {
+        if (node === imageDropIndicator || node === excludeFigure) {
+          return false;
+        }
+        if (node.nodeType !== Node.ELEMENT_NODE) {
+          return false;
+        }
+        return node.parentNode === editor;
+      });
+    }
+
+    function imageDragTargetFromPoint(clientY, excludeFigure = null) {
+      const nodes = articleDropNodes(excludeFigure);
+      if (!nodes.length) {
+        return { reference: null, position: 'end' };
+      }
+      for (const node of nodes) {
+        const rect = node.getBoundingClientRect();
+        if (clientY < rect.top + (rect.height / 2)) {
+          return { reference: node, position: 'before' };
+        }
+      }
+      return { reference: nodes[nodes.length - 1], position: 'after' };
+    }
+
+    function positionImageDropIndicator(target) {
+      const indicator = ensureImageDropIndicator();
+      const editorRect = editor.getBoundingClientRect();
+      let top = 0;
+      if (target.reference) {
+        const rect = target.reference.getBoundingClientRect();
+        top = (target.position === 'before' ? rect.top : rect.bottom) - editorRect.top;
+      } else {
+        top = editor.scrollHeight;
+      }
+      indicator.style.top = `${Math.max(0, top)}px`;
+      indicator.classList.add('is-active');
+    }
+
+    function beginFigureDrag(figure, event) {
+      if (!figure || !editor.contains(figure) || !event.dataTransfer) {
+        return;
+      }
+      draggedFigure = figure;
+      selectFigure(figure, { focus: true });
+      figure.classList.add('is-dragging');
+      event.dataTransfer.effectAllowed = 'move';
+      event.dataTransfer.setData('application/x-otw-image-card', figure.dataset.blockId || '');
+      event.dataTransfer.setData('text/plain', 'Move image');
+      imageDropTarget = imageDragTargetFromPoint(event.clientY, figure);
+      positionImageDropIndicator(imageDropTarget);
+    }
+
+    function endFigureDrag() {
+      if (draggedFigure) {
+        draggedFigure.classList.remove('is-dragging');
+      }
+      draggedFigure = null;
+      hideImageDropIndicator();
+    }
+
+    function eventHasInternalImageDrag(event) {
+      return Boolean(
+        draggedFigure ||
+        Array.from(event.dataTransfer?.types || []).includes('application/x-otw-image-card')
+      );
+    }
+
+    function updateInternalImageDragTarget(event) {
+      if (!draggedFigure) {
+        return;
+      }
+      imageDropTarget = imageDragTargetFromPoint(event.clientY, draggedFigure);
+      positionImageDropIndicator(imageDropTarget);
+      event.preventDefault();
+      if (event.dataTransfer) {
+        event.dataTransfer.dropEffect = 'move';
+      }
+    }
+
+    function moveFigureToDropTarget(figure, target) {
+      if (!figure || !editor.contains(figure) || !target) {
+        return;
+      }
+      if (target.reference) {
+        if (target.position === 'before') {
+          target.reference.before(figure);
+        } else {
+          target.reference.after(figure);
+        }
+      } else {
+        editor.append(figure);
+      }
+      ensureEditableParagraphAfterFigure(figure);
+      selectFigure(figure, { focus: true });
+      setSaveState('Image moved', true);
       markChanged();
     }
 
@@ -3608,6 +4356,134 @@
       const paragraph = document.createElement('p');
       paragraph.append(document.createElement('br'));
       return paragraph;
+    }
+
+    function currentEditorRange() {
+      ensureEditorSelection();
+      const selection = window.getSelection();
+      return selection && selection.rangeCount ? selection.getRangeAt(0) : null;
+    }
+
+    function insertSoftLineBreak() {
+      const range = currentEditorRange();
+      if (!range || rangeIsInsideFigure(range)) {
+        return;
+      }
+      range.deleteContents();
+      const br = document.createElement('br');
+      const caret = document.createTextNode('\u200B');
+      range.insertNode(br);
+      br.after(caret);
+      range.setStart(caret, 0);
+      range.setEnd(caret, caret.textContent.length);
+      const selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+      savedRange = range.cloneRange();
+      lastBodyCursorRange = range.cloneRange();
+      markChanged();
+      scheduleToolbarStateUpdate();
+    }
+
+    function splitListItemAtRange(item, range) {
+      range.deleteContents();
+      const list = item.closest('ul, ol');
+      if (!list) {
+        return false;
+      }
+      const tailRange = document.createRange();
+      tailRange.setStart(range.startContainer, range.startOffset);
+      tailRange.setEnd(item, item.childNodes.length);
+      const tail = tailRange.extractContents();
+      const itemWasEmpty = !nodeHasVisualContent(item);
+
+      if (itemWasEmpty) {
+        const paragraph = createTrailingParagraph();
+        list.after(paragraph);
+        item.remove();
+        if (!list.children.length) {
+          list.remove();
+        }
+        placeCaretInside(paragraph);
+        return true;
+      }
+
+      normalizeEmptyTextBlock(item);
+      const nextItem = document.createElement('li');
+      nextItem.dataset.blockId = blockId('item');
+      if (nodeHasVisualContent(tail)) {
+        nextItem.append(tail);
+      }
+      normalizeEmptyTextBlock(nextItem);
+      item.after(nextItem);
+      placeCaretAtStart(nextItem);
+      return true;
+    }
+
+    function insertParagraphBreak() {
+      if (selectedFigure && document.activeElement === selectedFigure) {
+        const paragraph = ensureEditableParagraphAfterFigure(selectedFigure);
+        clearFigureSelection();
+        placeCaretInside(paragraph);
+        markChanged();
+        return;
+      }
+
+      const range = currentEditorRange();
+      if (!range || rangeIsInsideFigure(range)) {
+        const paragraph = createTrailingParagraph();
+        if (selectedFigure && editor.contains(selectedFigure)) {
+          selectedFigure.after(paragraph);
+        } else {
+          editor.append(paragraph);
+        }
+        clearFigureSelection();
+        placeCaretInside(paragraph);
+        markChanged();
+        return;
+      }
+
+      const block = textBlockFromRange(range);
+      if (isListItemElement(block)) {
+        if (splitListItemAtRange(block, range)) {
+          markChanged();
+          scheduleToolbarStateUpdate();
+        }
+        return;
+      }
+
+      if (isEditableTextBlockElement(block)) {
+        range.deleteContents();
+        const tailRange = document.createRange();
+        tailRange.setStart(range.startContainer, range.startOffset);
+        tailRange.setEnd(block, block.childNodes.length);
+        const tail = tailRange.extractContents();
+        const beforeHasContent = nodeHasVisualContent(block);
+        const afterHasContent = nodeHasVisualContent(tail);
+        const nextParagraph = createTrailingParagraph();
+        nextParagraph.dataset.blockId = blockId('paragraph');
+        if (afterHasContent) {
+          nextParagraph.replaceChildren(tail);
+        }
+        normalizeEmptyTextBlock(block);
+        normalizeEmptyTextBlock(nextParagraph);
+        block.after(nextParagraph);
+        if (!beforeHasContent && afterHasContent) {
+          placeCaretInside(block);
+        } else {
+          placeCaretAtStart(nextParagraph);
+        }
+        markChanged();
+        scheduleToolbarStateUpdate();
+        return;
+      }
+
+      const paragraph = createTrailingParagraph();
+      range.deleteContents();
+      range.insertNode(paragraph);
+      placeCaretInside(paragraph);
+      markChanged();
+      scheduleToolbarStateUpdate();
     }
 
     function uploadTitleForImage() {
@@ -3797,6 +4673,7 @@
       image.addEventListener('load', () => updateFigureNaturalWidth(figure), { once: true });
       image.src = imageUrl;
       image.alt = figure.querySelector('.figure-alt')?.value || '';
+      image.draggable = false;
       image.setAttribute('data-file-name', file.name || '');
       image.setAttribute('data-mime', file.type || '');
       figure.dataset.localFileName = file.name || '';
@@ -3845,18 +4722,59 @@
       const sizeButtons = figure.querySelectorAll('.figure-size-option');
       const alignButtons = figure.querySelectorAll('.figure-align-option');
       const wrapButtons = figure.querySelectorAll('.figure-wrap-option');
+      const dragHandle = figure.querySelector('[data-role="drag"]');
+      const moveUp = figure.querySelector('[data-role="move-up"]');
+      const moveDown = figure.querySelector('[data-role="move-down"]');
+      const moveCursor = figure.querySelector('[data-role="move-cursor"]');
       const retry = figure.querySelector('[data-role="retry"]');
       const replace = figure.querySelector('[data-role="replace"]');
       const remove = figure.querySelector('[data-role="remove"]');
 
+      figure.addEventListener('pointerdown', () => {
+        selectFigure(figure);
+      });
+
+      figure.addEventListener('click', (event) => {
+        selectFigure(figure, {
+          focus: !event.target.closest('button, input, .figure-caption')
+        });
+      });
+
+      figure.addEventListener('pointerleave', () => {
+        delete figure.dataset.controlsHidden;
+      });
+
+      figure.addEventListener('focus', () => {
+        selectFigure(figure);
+      });
+
+      figure.addEventListener('keydown', (event) => {
+        if (event.target !== figure) {
+          return;
+        }
+        if (event.key === 'Backspace' || event.key === 'Delete') {
+          event.preventDefault();
+          removeFigure(figure);
+        } else if (event.key === 'Escape') {
+          clearFigureSelection();
+          editor.focus();
+        }
+      });
+
       if (caption) {
         caption.contentEditable = 'true';
-        caption.addEventListener('focus', () => setActiveEditable(caption));
+        caption.addEventListener('focus', () => {
+          selectFigure(figure);
+          setActiveEditable(caption);
+        });
         caption.addEventListener('input', markChanged);
       }
 
       if (alt) {
-        alt.addEventListener('focus', () => setActiveEditable(alt));
+        alt.addEventListener('focus', () => {
+          selectFigure(figure);
+          setActiveEditable(alt);
+        });
         alt.addEventListener('input', () => {
           const currentImage = figure.querySelector('img');
           if (currentImage) {
@@ -3875,25 +4793,57 @@
 
       sizeButtons.forEach((button) => {
         button.addEventListener('click', () => {
+          selectFigure(figure);
           setFigureDisplaySize(figure, button.dataset.size);
         });
       });
 
       alignButtons.forEach((button) => {
         button.addEventListener('click', () => {
+          selectFigure(figure);
           setFigureAlignment(figure, button.dataset.alignment);
         });
       });
 
       wrapButtons.forEach((button) => {
         button.addEventListener('click', () => {
+          selectFigure(figure);
           setFigureWrapMode(figure, button.dataset.wrapMode);
         });
       });
 
+      if (dragHandle) {
+        dragHandle.title = 'Drag to move';
+        dragHandle.addEventListener('dragstart', (event) => {
+          beginFigureDrag(figure, event);
+        });
+        dragHandle.addEventListener('dragend', () => {
+          endFigureDrag();
+        });
+      }
+
+      if (moveUp) {
+        moveUp.addEventListener('click', () => {
+          moveFigureByBlock(figure, 'up');
+        });
+      }
+
+      if (moveDown) {
+        moveDown.addEventListener('click', () => {
+          moveFigureByBlock(figure, 'down');
+        });
+      }
+
+      if (moveCursor) {
+        moveCursor.addEventListener('click', () => {
+          moveFigureToCursor(figure);
+        });
+      }
+
       if (retry) {
         retry.title = 'Retry upload';
         retry.addEventListener('click', () => {
+          selectFigure(figure);
           retryFigureUpload(figure);
         });
       }
@@ -3901,6 +4851,7 @@
       if (replace) {
         replace.title = 'Replace image';
         replace.addEventListener('click', () => {
+          selectFigure(figure);
           activeFigure = figure;
           localImageInput.click();
         });
@@ -3909,22 +4860,15 @@
       if (remove) {
         remove.title = 'Remove image';
         remove.addEventListener('click', () => {
-          revokeFigureUrl(figure);
-          stagedImageFiles.delete(figure);
-          const next = figure.nextSibling;
-          figure.remove();
-          if (next && next.nodeType === Node.ELEMENT_NODE) {
-            placeCaretInside(next);
-          } else {
-            focusBodyEnd();
-          }
-          markChanged();
+          removeFigure(figure);
         });
       }
 
       figure.dataset.wired = 'true';
       syncFigureStatus(figure);
       syncFigureSizeControls(figure);
+      syncFigurePlacementControls(figure);
+      setFigureChromeFocusable(figure, figure.classList.contains('is-selected'));
     }
 
     function wireAllFigures() {
@@ -4269,7 +5213,11 @@
         event.preventDefault();
       }
     });
-    editor.addEventListener('click', () => {
+    editor.addEventListener('click', (event) => {
+      if (event.target.closest('.publisher-figure')) {
+        return;
+      }
+      clearFigureSelection();
       setActiveEditable(editor);
       rememberSelection();
     });
@@ -4310,6 +5258,20 @@
     });
 
     editor.addEventListener('keydown', (event) => {
+      if (selectedFigure && (event.key === 'Backspace' || event.key === 'Delete')) {
+        event.preventDefault();
+        removeFigure(selectedFigure);
+        return;
+      }
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        if (event.shiftKey) {
+          insertSoftLineBreak();
+        } else {
+          insertParagraphBreak();
+        }
+        return;
+      }
       if (event.key !== 'Tab') {
         return;
       }
@@ -4325,6 +5287,11 @@
     document.addEventListener('selectionchange', () => {
       rememberSelection();
       if (selectionIsInsideEditor()) {
+        const selection = window.getSelection();
+        const range = selection && selection.rangeCount ? selection.getRangeAt(0) : null;
+        if (range && !rangeIsInsideFigure(range)) {
+          clearFigureSelection();
+        }
         setActiveEditable(editor);
       }
       const focused = document.activeElement;
@@ -4514,6 +5481,10 @@
     });
 
     editor.addEventListener('dragover', (event) => {
+      if (eventHasInternalImageDrag(event)) {
+        updateInternalImageDragTarget(event);
+        return;
+      }
       const hasImage = Array.from(event.dataTransfer.items || []).some((item) => {
         return item.kind === 'file' && String(item.type || '').startsWith('image/');
       });
@@ -4523,7 +5494,23 @@
       event.preventDefault();
     });
 
+    editor.addEventListener('dragleave', (event) => {
+      if (
+        eventHasInternalImageDrag(event) &&
+        !editor.contains(event.relatedTarget)
+      ) {
+        hideImageDropIndicator();
+      }
+    });
+
     editor.addEventListener('drop', (event) => {
+      if (eventHasInternalImageDrag(event)) {
+        event.preventDefault();
+        const target = imageDropTarget || imageDragTargetFromPoint(event.clientY, draggedFigure);
+        moveFigureToDropTarget(draggedFigure, target);
+        endFigureDrag();
+        return;
+      }
       const file = Array.from(event.dataTransfer.files || []).find((item) => {
         return String(item.type || '').startsWith('image/');
       });
@@ -4563,6 +5550,26 @@
       insertFragmentAtSavedRange(fragment);
     });
 
+    editor.addEventListener('copy', (event) => {
+      if (
+        (event.target.matches && event.target.matches('input, textarea')) ||
+        !event.clipboardData ||
+        !selectionIsInsideEditor()
+      ) {
+        return;
+      }
+      const selection = window.getSelection();
+      if (!selection || !selection.rangeCount || selection.isCollapsed) {
+        return;
+      }
+      const container = document.createElement('div');
+      container.append(selection.getRangeAt(0).cloneContents());
+      container.querySelectorAll('[data-editor-chrome]').forEach((node) => node.remove());
+      event.clipboardData.setData('text/html', container.innerHTML);
+      event.clipboardData.setData('text/plain', container.textContent);
+      event.preventDefault();
+    });
+
     settingsToggle.addEventListener('click', () => {
       const isOpen = settingsSheet.classList.toggle('is-open');
       settingsToggle.setAttribute('aria-expanded', String(isOpen));
@@ -4593,6 +5600,10 @@
 
     document.addEventListener('keydown', (event) => {
       if (event.key === 'Escape') {
+        editor.querySelectorAll('.publisher-figure').forEach((figure) => {
+          figure.dataset.controlsHidden = 'true';
+        });
+        clearFigureSelection();
         closeToolbarPopover();
       }
     });
@@ -4607,6 +5618,10 @@
     });
 
     window.addEventListener('beforeunload', () => {
+      if (imageDropIndicator) {
+        imageDropIndicator.remove();
+        imageDropIndicator = null;
+      }
       imageObjectUrls.forEach((url) => URL.revokeObjectURL(url));
       imageObjectUrls.clear();
     });
