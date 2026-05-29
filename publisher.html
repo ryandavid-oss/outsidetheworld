@@ -624,6 +624,12 @@
       outline: none;
     }
 
+    .editor::after {
+      content: "";
+      display: block;
+      clear: both;
+    }
+
     .editor:empty::before {
       content: attr(data-placeholder);
       color: rgba(32, 32, 32, 0.34);
@@ -721,6 +727,54 @@
       padding: 10px;
       border: 1px solid rgba(41, 39, 35, 0.12);
       background: rgba(255, 255, 255, 0.42);
+      box-sizing: border-box;
+      width: 100%;
+      max-width: min(var(--figure-max-width, 520px), 100%);
+      margin-right: auto;
+      margin-left: auto;
+    }
+
+    .publisher-figure[data-display-size="small"] {
+      --figure-max-width: 320px;
+    }
+
+    .publisher-figure[data-display-size="medium"] {
+      --figure-max-width: 520px;
+    }
+
+    .publisher-figure[data-display-size="large"] {
+      --figure-max-width: 760px;
+    }
+
+    .publisher-figure[data-display-size="original"] {
+      --figure-max-width: var(--figure-natural-width, 100%);
+    }
+
+    .publisher-figure[data-alignment="left"] {
+      margin-left: 0;
+      margin-right: auto;
+    }
+
+    .publisher-figure[data-alignment="center"] {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .publisher-figure[data-alignment="right"] {
+      margin-left: auto;
+      margin-right: 0;
+    }
+
+    .publisher-figure[data-wrap-mode="wrap-left"] {
+      float: left;
+      clear: left;
+      margin: 0.35em 1.35em 1em 0;
+    }
+
+    .publisher-figure[data-wrap-mode="wrap-right"] {
+      float: right;
+      clear: right;
+      margin: 0.35em 0 1em 1.35em;
     }
 
     .publisher-figure img {
@@ -792,9 +846,9 @@
 
     .figure-meta {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-columns: minmax(0, 1fr);
       gap: 10px;
-      align-items: center;
+      align-items: start;
       margin-top: 8px;
       opacity: 0.72;
       transition: opacity 160ms ease;
@@ -819,7 +873,22 @@
 
     .figure-actions {
       display: inline-flex;
+      flex-wrap: wrap;
       gap: 6px;
+      justify-content: flex-end;
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    .figure-size-controls,
+    .figure-align-controls,
+    .figure-wrap-controls {
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+      padding: 2px;
+      border: 1px solid rgba(41, 39, 35, 0.1);
+      background: rgba(255, 255, 255, 0.34);
     }
 
     .figure-action {
@@ -834,11 +903,43 @@
       text-transform: uppercase;
     }
 
+    .figure-size-option,
+    .figure-align-option,
+    .figure-wrap-option {
+      min-width: 28px;
+      min-height: 26px;
+      padding: 0 7px;
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.56rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
     .figure-action:hover,
-    .figure-action:focus-visible {
+    .figure-action:focus-visible,
+    .figure-size-option:hover,
+    .figure-size-option:focus-visible,
+    .figure-align-option:hover,
+    .figure-align-option:focus-visible,
+    .figure-wrap-option:hover,
+    .figure-wrap-option:focus-visible {
       background: #fff;
       color: var(--blue);
       outline: none;
+    }
+
+    .figure-size-option.is-active,
+    .figure-size-option[aria-pressed="true"],
+    .figure-align-option.is-active,
+    .figure-align-option[aria-pressed="true"],
+    .figure-wrap-option.is-active,
+    .figure-wrap-option[aria-pressed="true"] {
+      background: rgba(36, 79, 158, 0.14);
+      color: var(--blue);
+      box-shadow: inset 0 -2px 0 rgba(36, 79, 158, 0.42);
     }
 
     .figure-action[data-role="retry"] {
@@ -1025,6 +1126,13 @@
 
       .figure-actions {
         justify-content: flex-end;
+      }
+
+      .publisher-figure[data-wrap-mode="wrap-left"],
+      .publisher-figure[data-wrap-mode="wrap-right"] {
+        float: none;
+        clear: both;
+        margin: 1.8em auto;
       }
     }
 
@@ -1397,6 +1505,22 @@
       '1.5': 'line-spacing-15',
       '2.0': 'line-spacing-20'
     };
+    const figureDisplaySizeOptions = [
+      { value: 'small', label: 'S', title: 'Small' },
+      { value: 'medium', label: 'M', title: 'Medium' },
+      { value: 'large', label: 'L', title: 'Large' },
+      { value: 'original', label: 'Original', title: 'Original Size' }
+    ];
+    const figureAlignmentOptions = [
+      { value: 'left', label: 'L', title: 'Left aligned image block' },
+      { value: 'center', label: 'C', title: 'Centered image block' },
+      { value: 'right', label: 'R', title: 'Right aligned image block' }
+    ];
+    const figureWrapModeOptions = [
+      { value: 'none', label: 'None', title: 'No text wrap' },
+      { value: 'wrap-left', label: 'WL', title: 'Wrap left: text flows on the right' },
+      { value: 'wrap-right', label: 'WR', title: 'Wrap right: text flows on the left' }
+    ];
     const bodyOnlyCommands = new Set([
       'bold',
       'italic',
@@ -2162,6 +2286,101 @@
       }
     }
 
+    function normalizeFigureDisplaySize(value) {
+      const size = String(value || '').toLowerCase();
+      return figureDisplaySizeOptions.some((option) => option.value === size)
+        ? size
+        : 'medium';
+    }
+
+    function normalizeFigureAlignment(value) {
+      const alignment = String(value || '').toLowerCase();
+      return figureAlignmentOptions.some((option) => option.value === alignment)
+        ? alignment
+        : 'center';
+    }
+
+    function normalizeFigureWrapMode(value) {
+      const wrapMode = String(value || '').toLowerCase();
+      return figureWrapModeOptions.some((option) => option.value === wrapMode)
+        ? wrapMode
+        : 'none';
+    }
+
+    function syncFigureSizeControls(figure) {
+      if (!figure) {
+        return;
+      }
+      const size = normalizeFigureDisplaySize(figure.dataset.displaySize);
+      figure.dataset.displaySize = size;
+      figure.querySelectorAll('.figure-size-option').forEach((button) => {
+        const active = button.dataset.size === size;
+        button.classList.toggle('is-active', active);
+        button.setAttribute('aria-pressed', String(active));
+      });
+    }
+
+    function syncFigurePlacementControls(figure) {
+      if (!figure) {
+        return;
+      }
+      const alignment = normalizeFigureAlignment(figure.dataset.alignment);
+      const wrapMode = normalizeFigureWrapMode(figure.dataset.wrapMode);
+      figure.dataset.alignment = alignment;
+      figure.dataset.wrapMode = wrapMode;
+      figure.querySelectorAll('.figure-align-option').forEach((button) => {
+        const active = button.dataset.alignment === alignment;
+        button.classList.toggle('is-active', active);
+        button.setAttribute('aria-pressed', String(active));
+      });
+      figure.querySelectorAll('.figure-wrap-option').forEach((button) => {
+        const active = button.dataset.wrapMode === wrapMode;
+        button.classList.toggle('is-active', active);
+        button.setAttribute('aria-pressed', String(active));
+      });
+    }
+
+    function setFigureDisplaySize(figure, size, shouldMarkChanged = true) {
+      if (!figure) {
+        return;
+      }
+      figure.dataset.displaySize = normalizeFigureDisplaySize(size);
+      syncFigureSizeControls(figure);
+      if (shouldMarkChanged) {
+        markChanged();
+      }
+    }
+
+    function setFigureAlignment(figure, alignment, shouldMarkChanged = true) {
+      if (!figure) {
+        return;
+      }
+      figure.dataset.alignment = normalizeFigureAlignment(alignment);
+      syncFigurePlacementControls(figure);
+      if (shouldMarkChanged) {
+        markChanged();
+      }
+    }
+
+    function setFigureWrapMode(figure, wrapMode, shouldMarkChanged = true) {
+      if (!figure) {
+        return;
+      }
+      figure.dataset.wrapMode = normalizeFigureWrapMode(wrapMode);
+      syncFigurePlacementControls(figure);
+      if (shouldMarkChanged) {
+        markChanged();
+      }
+    }
+
+    function updateFigureNaturalWidth(figure) {
+      const image = figure && figure.querySelector('img');
+      if (!figure || !image || !image.naturalWidth) {
+        return;
+      }
+      figure.style.setProperty('--figure-natural-width', `${image.naturalWidth}px`);
+    }
+
     function serializeInlineBlock(element, type, extra = {}) {
       const html = sanitizeInlineHtml(element.innerHTML);
       const block = {
@@ -2189,6 +2408,9 @@
       const objectKey = figure.dataset.objectKey || '';
       const uploadError = figure.dataset.uploadError || '';
       const uploadStatus = figure.dataset.uploadStatus || '';
+      const displaySize = normalizeFigureDisplaySize(figure.dataset.displaySize);
+      const alignment = normalizeFigureAlignment(figure.dataset.alignment);
+      const wrapMode = normalizeFigureWrapMode(figure.dataset.wrapMode);
       let source = { kind: 'local-missing' };
       if (uploadedUrl) {
         source = {
@@ -2233,6 +2455,9 @@
         source,
         alt: (altInput && altInput.value) || (image && image.alt) || '',
         caption: caption ? caption.textContent.trim() : '',
+        displaySize,
+        alignment,
+        wrapMode,
         status,
         upload: {
           status,
@@ -2310,6 +2535,30 @@
       }];
     }
 
+    function serializeMixedContainer(node) {
+      const blocks = [];
+      let inlineBuffer = [];
+
+      Array.from(node.childNodes).forEach((child) => {
+        if (child.nodeType === Node.ELEMENT_NODE && child.classList.contains('publisher-figure')) {
+          blocks.push(...serializeInlineNodes(inlineBuffer));
+          inlineBuffer = [];
+          blocks.push(serializeImageBlock(child));
+          return;
+        }
+        if (canBufferAsInline(child)) {
+          inlineBuffer.push(child);
+          return;
+        }
+        blocks.push(...serializeInlineNodes(inlineBuffer));
+        inlineBuffer = [];
+        blocks.push(...serializeBodyNode(child));
+      });
+
+      blocks.push(...serializeInlineNodes(inlineBuffer));
+      return blocks.filter(blockHasContent);
+    }
+
     function serializeBodyNode(node) {
       if (node.nodeType === Node.TEXT_NODE) {
         return serializeTextNode(node);
@@ -2333,6 +2582,9 @@
         }];
       }
       if (tag === 'p') {
+        if (node.querySelector('.publisher-figure')) {
+          return serializeMixedContainer(node);
+        }
         return [serializeInlineBlock(node, 'paragraph')].filter(blockHasContent);
       }
       if (/^h[1-6]$/.test(tag)) {
@@ -2407,6 +2659,9 @@
         order: index,
         alt: String(block.alt || '').trim(),
         caption: String(block.caption || '').trim(),
+        displaySize: normalizeFigureDisplaySize(block.displaySize),
+        alignment: normalizeFigureAlignment(block.alignment),
+        wrapMode: normalizeFigureWrapMode(block.wrapMode),
         requiresUpload: status !== 'uploaded',
         status,
         uploadError: block.upload?.error || '',
@@ -2455,6 +2710,14 @@
         markdown: imageMarkdown(image.alt, markdownSource, image.caption),
         alt: image.alt,
         caption: image.caption,
+        displaySize: image.displaySize,
+        alignment: image.alignment,
+        wrapMode: image.wrapMode,
+        presentation: {
+          displaySize: image.displaySize,
+          alignment: image.alignment,
+          wrapMode: image.wrapMode
+        },
         imageRef: image.id,
         requiresUpload: image.requiresUpload,
         status: image.status
@@ -2765,6 +3028,9 @@
       byteEstimate = 0,
       dataUrlLength = 0,
       tooLargeForLocalDraft = false,
+      displaySize = 'medium',
+      alignment = 'center',
+      wrapMode = 'none',
       uploadStatus = '',
       uploadError = '',
       uploadedUrl = '',
@@ -2774,6 +3040,9 @@
       figure.className = 'publisher-figure';
       figure.contentEditable = 'false';
       figure.dataset.blockId = id;
+      figure.dataset.displaySize = normalizeFigureDisplaySize(displaySize);
+      figure.dataset.alignment = normalizeFigureAlignment(alignment);
+      figure.dataset.wrapMode = normalizeFigureWrapMode(wrapMode);
       figure.dataset.uploadStatus = normalizeImageUploadStatus(uploadStatus || (uploadedUrl ? 'uploaded' : 'local'));
       if (uploadedUrl) {
         figure.dataset.uploadedUrl = uploadedUrl;
@@ -2813,7 +3082,11 @@
         if (mime) {
           image.setAttribute('data-mime', mime);
         }
+        image.addEventListener('load', () => updateFigureNaturalWidth(figure), { once: true });
         figure.append(image);
+        if (image.complete) {
+          updateFigureNaturalWidth(figure);
+        }
       } else {
         const missing = document.createElement('div');
         missing.className = 'image-missing';
@@ -2846,6 +3119,54 @@
       const actions = document.createElement('div');
       actions.className = 'figure-actions';
 
+      const sizeControls = document.createElement('div');
+      sizeControls.className = 'figure-size-controls';
+      sizeControls.setAttribute('aria-label', 'Image display size');
+
+      figureDisplaySizeOptions.forEach((option) => {
+        const button = document.createElement('button');
+        button.className = 'figure-size-option';
+        button.type = 'button';
+        button.textContent = option.label;
+        button.title = option.title;
+        button.setAttribute('aria-label', option.title);
+        button.setAttribute('aria-pressed', 'false');
+        button.dataset.size = option.value;
+        sizeControls.append(button);
+      });
+
+      const alignControls = document.createElement('div');
+      alignControls.className = 'figure-align-controls';
+      alignControls.setAttribute('aria-label', 'Image alignment');
+
+      figureAlignmentOptions.forEach((option) => {
+        const button = document.createElement('button');
+        button.className = 'figure-align-option';
+        button.type = 'button';
+        button.textContent = option.label;
+        button.title = option.title;
+        button.setAttribute('aria-label', option.title);
+        button.setAttribute('aria-pressed', 'false');
+        button.dataset.alignment = option.value;
+        alignControls.append(button);
+      });
+
+      const wrapControls = document.createElement('div');
+      wrapControls.className = 'figure-wrap-controls';
+      wrapControls.setAttribute('aria-label', 'Image text wrap');
+
+      figureWrapModeOptions.forEach((option) => {
+        const button = document.createElement('button');
+        button.className = 'figure-wrap-option';
+        button.type = 'button';
+        button.textContent = option.label;
+        button.title = option.title;
+        button.setAttribute('aria-label', option.title);
+        button.setAttribute('aria-pressed', 'false');
+        button.dataset.wrapMode = option.value;
+        wrapControls.append(button);
+      });
+
       const retry = document.createElement('button');
       retry.className = 'figure-action';
       retry.type = 'button';
@@ -2868,11 +3189,13 @@
       remove.title = 'Remove image';
       remove.dataset.role = 'remove';
 
-      actions.append(retry, replace, remove);
+      actions.append(sizeControls, alignControls, wrapControls, retry, replace, remove);
       details.append(status, altInput);
       meta.append(details, actions);
       figure.append(figcaption, meta);
       syncFigureStatus(figure);
+      syncFigureSizeControls(figure);
+      syncFigurePlacementControls(figure);
       wireFigure(figure);
       return figure;
     }
@@ -2894,6 +3217,9 @@
         byteEstimate: source.byteEstimate || 0,
         dataUrlLength: source.dataUrlLength || 0,
         tooLargeForLocalDraft: Boolean(source.tooLargeForLocalDraft),
+        displaySize: block.displaySize || 'medium',
+        alignment: block.alignment || 'center',
+        wrapMode: block.wrapMode || 'none',
         uploadStatus: restoredStatus || block.upload?.status || '',
         uploadError: block.upload?.error || '',
         uploadedUrl: source.kind === 'url' ? source.url : block.upload?.uploadedUrl || '',
@@ -3216,12 +3542,23 @@
         editor.append(node);
       } else {
         const range = selection.getRangeAt(0);
-        range.deleteContents();
-        range.insertNode(node);
-        range.setStartAfter(node);
-        range.collapse(true);
+        const startElement = range.startContainer.nodeType === Node.ELEMENT_NODE
+          ? range.startContainer
+          : range.startContainer.parentElement;
+        const containingTextBlock = startElement && startElement.closest('p, h2, blockquote');
+        const insertsBlock = node.matches && node.matches('figure, hr');
+        if (insertsBlock && containingTextBlock && editor.contains(containingTextBlock)) {
+          range.deleteContents();
+          containingTextBlock.after(node);
+        } else {
+          range.deleteContents();
+          range.insertNode(node);
+        }
+        const nextRange = document.createRange();
+        nextRange.setStartAfter(node);
+        nextRange.collapse(true);
         selection.removeAllRanges();
-        selection.addRange(range);
+        selection.addRange(nextRange);
       }
       savedRange = window.getSelection().getRangeAt(0).cloneRange();
       markChanged();
@@ -3290,6 +3627,8 @@
       }
 
       const currentObjectUrl = figure.dataset.objectUrl || '';
+      figure.style.removeProperty('--figure-natural-width');
+      image.addEventListener('load', () => updateFigureNaturalWidth(figure), { once: true });
       image.src = uploadedUrl;
       image.alt = figure.querySelector('.figure-alt')?.value || uploaded.alt || '';
       figure.dataset.savedSrc = uploadedUrl;
@@ -3306,6 +3645,9 @@
         URL.revokeObjectURL(currentObjectUrl);
         imageObjectUrls.delete(currentObjectUrl);
         delete figure.dataset.objectUrl;
+      }
+      if (image.complete) {
+        updateFigureNaturalWidth(figure);
       }
       stagedImageFiles.delete(figure);
     }
@@ -3417,6 +3759,9 @@
         src: imageUrl,
         fileName: file.name || '',
         mime: file.type || '',
+        displaySize: 'medium',
+        alignment: 'center',
+        wrapMode: 'none',
         uploadStatus: 'local'
       });
       figure.dataset.objectUrl = imageUrl;
@@ -3448,6 +3793,8 @@
         image = document.createElement('img');
         figure.querySelector('.image-missing')?.replaceWith(image);
       }
+      figure.style.removeProperty('--figure-natural-width');
+      image.addEventListener('load', () => updateFigureNaturalWidth(figure), { once: true });
       image.src = imageUrl;
       image.alt = figure.querySelector('.figure-alt')?.value || '';
       image.setAttribute('data-file-name', file.name || '');
@@ -3495,6 +3842,9 @@
       const image = figure.querySelector('img');
       const caption = figure.querySelector('.figure-caption');
       const alt = figure.querySelector('.figure-alt');
+      const sizeButtons = figure.querySelectorAll('.figure-size-option');
+      const alignButtons = figure.querySelectorAll('.figure-align-option');
+      const wrapButtons = figure.querySelectorAll('.figure-wrap-option');
       const retry = figure.querySelector('[data-role="retry"]');
       const replace = figure.querySelector('[data-role="replace"]');
       const remove = figure.querySelector('[data-role="remove"]');
@@ -3515,6 +3865,31 @@
           markChanged();
         });
       }
+
+      if (image) {
+        image.addEventListener('load', () => updateFigureNaturalWidth(figure));
+        if (image.complete) {
+          updateFigureNaturalWidth(figure);
+        }
+      }
+
+      sizeButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          setFigureDisplaySize(figure, button.dataset.size);
+        });
+      });
+
+      alignButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          setFigureAlignment(figure, button.dataset.alignment);
+        });
+      });
+
+      wrapButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          setFigureWrapMode(figure, button.dataset.wrapMode);
+        });
+      });
 
       if (retry) {
         retry.title = 'Retry upload';
@@ -3549,6 +3924,7 @@
 
       figure.dataset.wired = 'true';
       syncFigureStatus(figure);
+      syncFigureSizeControls(figure);
     }
 
     function wireAllFigures() {
