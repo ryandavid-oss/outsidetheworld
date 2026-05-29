@@ -760,6 +760,36 @@
       color: rgba(91, 81, 71, 0.5);
     }
 
+    .figure-details {
+      min-width: 0;
+      display: grid;
+      gap: 4px;
+    }
+
+    .figure-status {
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.56rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .publisher-figure[data-upload-status="uploading"] .figure-status {
+      color: var(--teal);
+    }
+
+    .publisher-figure[data-upload-status="uploaded"] .figure-status {
+      color: var(--blue);
+    }
+
+    .publisher-figure[data-upload-status="failed"] .figure-status {
+      color: #7a372d;
+    }
+
+    .publisher-figure[data-upload-status="needs-key"] .figure-status {
+      color: #7a372d;
+    }
+
     .figure-meta {
       display: grid;
       grid-template-columns: minmax(0, 1fr) auto;
@@ -811,6 +841,15 @@
       outline: none;
     }
 
+    .figure-action[data-role="retry"] {
+      display: none;
+    }
+
+    .publisher-figure[data-upload-status="failed"] .figure-action[data-role="retry"] {
+      display: inline-flex;
+      align-items: center;
+    }
+
     .unsupported-block {
       margin: 1.4em 0;
       padding: 12px 14px;
@@ -857,6 +896,25 @@
       gap: 6px;
     }
 
+    .access-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto auto;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .access-state {
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+    }
+
+    .access-state.has-key {
+      color: var(--blue);
+    }
+
     .field-label {
       color: var(--muted);
       font-family: var(--mono);
@@ -866,7 +924,8 @@
     }
 
     .side-input,
-    .side-select {
+    .side-select,
+    .key-action {
       width: 100%;
       min-height: 38px;
       border: 1px solid var(--line);
@@ -876,8 +935,26 @@
       outline: none;
     }
 
+    .key-action {
+      width: auto;
+      padding: 0 10px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.56rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .key-action:hover,
+    .key-action:focus-visible {
+      background: #fff;
+      color: var(--blue);
+      outline: none;
+    }
+
     .side-input:focus,
     .side-select:focus,
+    .key-action:focus-visible,
     .article-date:focus,
     .figure-alt:focus {
       border-color: rgba(36, 79, 158, 0.38);
@@ -987,7 +1064,7 @@
       <div class="save-state" id="saveState">Local draft</div>
 
       <div class="top-actions">
-        <button class="icon-btn" id="settingsToggle" type="button" aria-label="Article settings" aria-expanded="false">
+        <button class="icon-btn" id="settingsToggle" type="button" aria-label="Article settings and publisher access" aria-expanded="false">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M12 15.5A3.5 3.5 0 1 0 12 8a3.5 3.5 0 0 0 0 7.5Z"></path>
             <path d="M19.4 15a1.8 1.8 0 0 0 .4 2l.1.1a2 2 0 0 1-2.8 2.8l-.1-.1a1.8 1.8 0 0 0-2-.4 1.8 1.8 0 0 0-1.1 1.7V21a2 2 0 0 1-4 0v-.1a1.8 1.8 0 0 0-1.1-1.7 1.8 1.8 0 0 0-2 .4l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.8 1.8 0 0 0 .4-2A1.8 1.8 0 0 0 2.7 14H2a2 2 0 0 1 0-4h.7a1.8 1.8 0 0 0 1.7-1.1 1.8 1.8 0 0 0-.4-2l-.1-.1A2 2 0 1 1 6.7 4l.1.1a1.8 1.8 0 0 0 2 .4A1.8 1.8 0 0 0 10 2.8V2a2 2 0 0 1 4 0v.8a1.8 1.8 0 0 0 1.1 1.7 1.8 1.8 0 0 0 2-.4l.1-.1A2 2 0 1 1 20 6.8l-.1.1a1.8 1.8 0 0 0-.4 2 1.8 1.8 0 0 0 1.7 1.1h.8a2 2 0 0 1 0 4h-.8a1.8 1.8 0 0 0-1.8 1Z"></path>
@@ -1190,7 +1267,7 @@
       </div>
     </div>
 
-    <aside class="settings-sheet" id="settingsSheet" aria-label="Article settings">
+    <aside class="settings-sheet" id="settingsSheet" aria-label="Article settings and publisher access">
       <h2 class="settings-title">Article Settings</h2>
       <div class="field-group">
         <label class="field-label" for="publishDate">Date</label>
@@ -1206,6 +1283,15 @@
           <option>Outside The World Article</option>
           <option>Private Draft</option>
         </select>
+      </div>
+      <div class="field-group">
+        <label class="field-label" for="publisherAccessKey">Publisher Access</label>
+        <div class="access-row">
+          <input class="side-input" id="publisherAccessKey" type="text" autocomplete="off" spellcheck="false" placeholder="Paste private key" aria-label="Publisher access key" />
+          <button class="key-action" id="savePublisherKeyBtn" type="button">Save</button>
+          <button class="key-action" id="clearPublisherKeyBtn" type="button">Clear</button>
+        </div>
+        <div class="access-state" id="publisherKeyState">No publisher key saved</div>
       </div>
     </aside>
 
@@ -1251,6 +1337,10 @@
     const publishDate = document.getElementById('publishDate');
     const publishSlug = document.getElementById('publishSlug');
     const publishSurface = document.getElementById('publishSurface');
+    const publisherAccessKey = document.getElementById('publisherAccessKey');
+    const savePublisherKeyBtn = document.getElementById('savePublisherKeyBtn');
+    const clearPublisherKeyBtn = document.getElementById('clearPublisherKeyBtn');
+    const publisherKeyState = document.getElementById('publisherKeyState');
     const insertImageBtn = document.getElementById('insertImageBtn');
     const dividerBtn = document.getElementById('dividerBtn');
     const linkBtn = document.getElementById('linkBtn');
@@ -1272,7 +1362,14 @@
     const ARTICLE_SCHEMA = 'otw.publisher.article';
     const PUBLISH_PAYLOAD_SCHEMA = 'otw.publisher.publishPayload';
     const DRAFT_KEY = 'otw.publisher.localDraft.v3';
+    const PUBLISHER_KEY_STORAGE = 'otw.publisher.accessKey.v1';
+    const PUBLISHER_KEY_MIGRATION_STORAGE = 'otw.publisher.accessKeyLegacyMigration.v1';
+    const LEGACY_PUBLISH_KEY_STORAGE = 'otwFragmentsPublishKey';
+    const LEGACY_GHOST_FULL_PUBLISH_KEY_STORAGE = 'otw_ghost_writer_publish_key';
+    const UPLOAD_GHOST_IMAGE_ENDPOINT = 'https://otw-fragments-publish.ryandavid.workers.dev/upload-ghost-image';
     const MAX_INLINE_IMAGE_DATA_URL_LENGTH = 1800000;
+    const MAX_STAGED_IMAGE_BYTES = 25 * 1024 * 1024;
+    const SUPPORTED_STAGED_IMAGE_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp', 'image/gif']);
     const LEGACY_DRAFT_KEYS = [
       'otw.publisher.localDraft.v2',
       'otw.publisher.localDraft.v1'
@@ -1282,6 +1379,7 @@
     let activeEditable = editor;
     let activeFigure = null;
     let imageObjectUrls = new Set();
+    let stagedImageFiles = new WeakMap();
     let saveTimer = null;
     let statusTimer = null;
     let isHydrating = false;
@@ -1408,9 +1506,226 @@
       return Math.round((dataUrl.length - comma - 1) * 0.75);
     }
 
+    function formatBytes(bytes) {
+      const value = Number(bytes) || 0;
+      if (value >= 1024 * 1024) {
+        return `${(value / (1024 * 1024)).toFixed(1)} MB`;
+      }
+      return `${Math.max(1, Math.round(value / 1024))} KB`;
+    }
+
+    function validateStagedImageFile(file) {
+      if (!file) {
+        return 'Choose an image first.';
+      }
+      const type = String(file.type || '').toLowerCase();
+      if (type && !SUPPORTED_STAGED_IMAGE_TYPES.has(type)) {
+        return 'Use a JPEG, PNG, WebP, or GIF image.';
+      }
+      if ((file.size || 0) > MAX_STAGED_IMAGE_BYTES) {
+        return `Use an image smaller than ${formatBytes(MAX_STAGED_IMAGE_BYTES)} before compression.`;
+      }
+      return '';
+    }
+
+    function shouldCompressStagedImage(file) {
+      return String(file?.type || '').toLowerCase() !== 'image/gif';
+    }
+
+    function getStoredPublisherKey() {
+      try {
+        return localStorage.getItem(PUBLISHER_KEY_STORAGE) || '';
+      } catch (error) {
+        return '';
+      }
+    }
+
+    function getLegacyPublisherKey() {
+      try {
+        return localStorage.getItem(LEGACY_PUBLISH_KEY_STORAGE)
+          || localStorage.getItem(LEGACY_GHOST_FULL_PUBLISH_KEY_STORAGE)
+          || '';
+      } catch (error) {
+        return '';
+      }
+    }
+
+    function getPublisherPublishKey() {
+      return getStoredPublisherKey();
+    }
+
+    function maskPublisherKey(value) {
+      const key = String(value || '').trim();
+      if (!key) {
+        return '';
+      }
+      return `Saved •••• ${key.slice(-4)}`;
+    }
+
+    function setPublisherKeyInputMasked(key = getStoredPublisherKey()) {
+      publisherAccessKey.value = key ? maskPublisherKey(key) : '';
+      publisherAccessKey.dataset.masked = key ? 'true' : 'false';
+      publisherAccessKey.readOnly = Boolean(key);
+    }
+
+    function renderPublisherKeyState(message = '') {
+      const key = getStoredPublisherKey();
+      publisherKeyState.textContent = message || (key ? 'Publisher access saved' : 'No publisher key saved');
+      publisherKeyState.classList.toggle('has-key', Boolean(key));
+      if (document.activeElement !== publisherAccessKey || publisherAccessKey.dataset.masked === 'true') {
+        setPublisherKeyInputMasked(key);
+      }
+    }
+
+    function savePublisherKey() {
+      const masked = publisherAccessKey.dataset.masked === 'true';
+      const value = masked ? getStoredPublisherKey() : publisherAccessKey.value.trim();
+      if (!value) {
+        renderPublisherKeyState('Paste a key to save');
+        setSaveState('Publisher key needed', true);
+        return false;
+      }
+      try {
+        localStorage.setItem(PUBLISHER_KEY_STORAGE, value);
+        localStorage.setItem(PUBLISHER_KEY_MIGRATION_STORAGE, 'saved');
+      } catch (error) {
+        renderPublisherKeyState('Could not save key');
+        setSaveState('Could not save key', true);
+        return false;
+      }
+      setPublisherKeyInputMasked(value);
+      renderPublisherKeyState('Publisher access saved');
+      setSaveState('Publisher access saved', true);
+      retryImagesWaitingForKey();
+      updateArticlePayload();
+      return true;
+    }
+
+    function clearPublisherKey() {
+      try {
+        localStorage.removeItem(PUBLISHER_KEY_STORAGE);
+        localStorage.setItem(PUBLISHER_KEY_MIGRATION_STORAGE, 'cleared');
+      } catch (error) {
+        // The UI state below still reflects that no key can be read.
+      }
+      publisherAccessKey.value = '';
+      publisherAccessKey.dataset.masked = 'false';
+      publisherAccessKey.readOnly = false;
+      renderPublisherKeyState('No publisher key saved');
+      setSaveState('Publisher access cleared', true);
+      updateArticlePayload();
+    }
+
+    function migrateLegacyPublisherKey() {
+      if (getStoredPublisherKey()) {
+        return false;
+      }
+      try {
+        if (localStorage.getItem(PUBLISHER_KEY_MIGRATION_STORAGE)) {
+          return false;
+        }
+      } catch (error) {
+        return false;
+      }
+      const legacyKey = getLegacyPublisherKey();
+      if (!legacyKey) {
+        return false;
+      }
+      try {
+        localStorage.setItem(PUBLISHER_KEY_STORAGE, legacyKey);
+        localStorage.setItem(PUBLISHER_KEY_MIGRATION_STORAGE, 'imported');
+        return true;
+      } catch (error) {
+        return false;
+      }
+    }
+
+    function preparePublisherKeyInputForEdit() {
+      if (publisherAccessKey.dataset.masked !== 'true') {
+        return;
+      }
+      publisherAccessKey.value = '';
+      publisherAccessKey.dataset.masked = 'false';
+      publisherAccessKey.readOnly = false;
+      publisherAccessKey.placeholder = 'Paste new private key';
+    }
+
+    function loadPublisherImageElement(file) {
+      return new Promise((resolve, reject) => {
+        const url = URL.createObjectURL(file);
+        const image = new Image();
+        image.onload = () => {
+          URL.revokeObjectURL(url);
+          resolve(image);
+        };
+        image.onerror = () => {
+          URL.revokeObjectURL(url);
+          reject(new Error('Could not read this image.'));
+        };
+        image.src = url;
+      });
+    }
+
+    function canvasToBlob(canvas, type, quality) {
+      return new Promise((resolve, reject) => {
+        canvas.toBlob((blob) => {
+          if (blob) {
+            resolve(blob);
+          } else {
+            reject(new Error('Could not prepare this image.'));
+          }
+        }, type, quality);
+      });
+    }
+
+    async function compressStagedImage(file, options = {}) {
+      const image = await loadPublisherImageElement(file);
+      const maxDimension = Number(options.maxDimension) || 1400;
+      const quality = Number(options.quality) || 0.78;
+      const fileName = options.fileName || 'narrative-image.jpg';
+      const scale = Math.min(1, maxDimension / Math.max(image.width, image.height));
+      const width = Math.max(1, Math.round(image.width * scale));
+      const height = Math.max(1, Math.round(image.height * scale));
+      const canvas = document.createElement('canvas');
+      canvas.width = width;
+      canvas.height = height;
+      const context = canvas.getContext('2d', { alpha: false });
+      if (!context) {
+        throw new Error('Image preparation is unavailable on this device.');
+      }
+      context.fillStyle = '#fffaf0';
+      context.fillRect(0, 0, width, height);
+      context.drawImage(image, 0, 0, width, height);
+      const blob = await canvasToBlob(canvas, 'image/jpeg', quality);
+      return new File([blob], fileName, { type: 'image/jpeg' });
+    }
+
+    function dataUrlToFile(dataUrl, fileName = 'staged-image.png', mime = '') {
+      const match = String(dataUrl || '').match(/^data:([^;,]+)?(;base64)?,(.*)$/);
+      if (!match) {
+        return null;
+      }
+      const type = mime || match[1] || 'image/png';
+      const body = match[3] || '';
+      const binary = match[2] ? atob(body) : decodeURIComponent(body);
+      const bytes = new Uint8Array(binary.length);
+      for (let index = 0; index < binary.length; index += 1) {
+        bytes[index] = binary.charCodeAt(index);
+      }
+      return new File([bytes], fileName, { type });
+    }
+
     function localImageSourceMeta(source) {
       if (!source) {
         return { kind: 'missing' };
+      }
+      if (source.kind === 'url') {
+        return {
+          kind: 'url',
+          url: source.url || '',
+          objectKey: source.objectKey || '',
+          retainedInLocalDraft: false
+        };
       }
       if (source.kind === 'local-data-url') {
         return {
@@ -1776,6 +2091,77 @@
       return String(block.html || '').replace(/<br\s*\/?>/gi, '').trim().length > 0;
     }
 
+    function normalizeImageUploadStatus(status, source = {}) {
+      const value = String(status || '').toLowerCase();
+      if (value === 'uploaded' || source.kind === 'url') {
+        return 'uploaded';
+      }
+      if (value === 'uploading') {
+        return 'uploading';
+      }
+      if (value === 'failed') {
+        return 'failed';
+      }
+      if (value === 'needs-key') {
+        return 'needs-key';
+      }
+      if (value === 'missing-local-preview' || source.kind === 'local-missing') {
+        return 'missing-local-preview';
+      }
+      return 'local';
+    }
+
+    function setFigureUploadState(figure, status, error = '') {
+      if (!figure) {
+        return;
+      }
+      figure.dataset.uploadStatus = normalizeImageUploadStatus(status);
+      if (error) {
+        figure.dataset.uploadError = error;
+      } else {
+        delete figure.dataset.uploadError;
+      }
+      syncFigureStatus(figure);
+    }
+
+    function figureStatusLabel(figure) {
+      const status = normalizeImageUploadStatus(figure?.dataset.uploadStatus);
+      if (status === 'uploading') {
+        return 'Preparing image';
+      }
+      if (status === 'uploaded') {
+        return 'Uploaded';
+      }
+      if (status === 'failed') {
+        return 'Upload failed';
+      }
+      if (status === 'needs-key') {
+        return 'Publisher key needed';
+      }
+      if (status === 'missing-local-preview') {
+        return 'Needs image';
+      }
+      return 'Needs upload';
+    }
+
+    function syncFigureStatus(figure) {
+      if (!figure) {
+        return;
+      }
+      const status = normalizeImageUploadStatus(figure.dataset.uploadStatus);
+      figure.dataset.uploadStatus = status;
+      const statusElement = figure.querySelector('.figure-status');
+      if (statusElement) {
+        statusElement.textContent = figureStatusLabel(figure);
+        const uploadError = figure.dataset.uploadError || '';
+        statusElement.title = uploadError || statusElement.textContent;
+      }
+      const retry = figure.querySelector('[data-role="retry"]');
+      if (retry) {
+        retry.hidden = status !== 'failed';
+      }
+    }
+
     function serializeInlineBlock(element, type, extra = {}) {
       const html = sanitizeInlineHtml(element.innerHTML);
       const block = {
@@ -1799,8 +2185,18 @@
       const src = figure.dataset.savedSrc || (image && image.getAttribute('src')) || '';
       const fileName = (image && image.getAttribute('data-file-name')) || figure.dataset.localFileName || '';
       const mime = (image && image.getAttribute('data-mime')) || figure.dataset.localMime || '';
+      const uploadedUrl = safeImagePublishUrl(figure.dataset.uploadedUrl || '');
+      const objectKey = figure.dataset.objectKey || '';
+      const uploadError = figure.dataset.uploadError || '';
+      const uploadStatus = figure.dataset.uploadStatus || '';
       let source = { kind: 'local-missing' };
-      if (src.startsWith('data:')) {
+      if (uploadedUrl) {
+        source = {
+          kind: 'url',
+          url: uploadedUrl,
+          objectKey
+        };
+      } else if (src.startsWith('data:')) {
         if (src.length > MAX_INLINE_IMAGE_DATA_URL_LENGTH) {
           source = {
             kind: 'local-placeholder',
@@ -1818,7 +2214,7 @@
           };
         }
       } else if (src && !src.startsWith('blob:')) {
-        source = { kind: 'url', url: src };
+        source = { kind: 'url', url: src, objectKey };
       } else if (fileName) {
         source = {
           kind: 'local-placeholder',
@@ -1829,13 +2225,7 @@
           tooLargeForLocalDraft: figure.dataset.localTooLarge === 'true'
         };
       }
-      const status = source.kind === 'local-missing'
-        ? 'missing-local-preview'
-        : source.kind === 'url'
-          ? 'uploaded'
-          : source.tooLargeForLocalDraft
-            ? 'local-placeholder-too-large'
-            : 'local-only';
+      const status = normalizeImageUploadStatus(uploadStatus, source);
 
       return {
         id: figure.dataset.blockId || blockId('image'),
@@ -1843,7 +2233,13 @@
         source,
         alt: (altInput && altInput.value) || (image && image.alt) || '',
         caption: caption ? caption.textContent.trim() : '',
-        status
+        status,
+        upload: {
+          status,
+          uploadedUrl: source.kind === 'url' ? source.url : '',
+          objectKey,
+          error: uploadError
+        }
       };
     }
 
@@ -1983,7 +2379,7 @@
     function serializeArticle() {
       return {
         schema: ARTICLE_SCHEMA,
-        version: 2,
+        version: 3,
         createdAt: draftCreatedAt,
         updatedAt: new Date().toISOString(),
         title: titleField.value.trim(),
@@ -2001,50 +2397,67 @@
       };
     }
 
-    function convertImageBlock(block, index, issues) {
+    function imageManifestFromBlock(block, index) {
       const source = block.source || { kind: 'local-missing' };
       const uploadedUrl = source.kind === 'url' ? safeImagePublishUrl(source.url) : '';
       const imageId = block.id || blockId('image');
-      const requiresUpload = source.kind !== 'url';
-      const markdownSource = uploadedUrl || `otw-local-image:${imageId}`;
-      const image = {
+      const status = normalizeImageUploadStatus(block.status || block.upload?.status, source);
+      return {
         id: imageId,
         order: index,
         alt: String(block.alt || '').trim(),
         caption: String(block.caption || '').trim(),
-        requiresUpload,
-        status: block.status || (uploadedUrl ? 'uploaded' : 'local-only'),
+        requiresUpload: status !== 'uploaded',
+        status,
+        uploadError: block.upload?.error || '',
         media: {
           url: uploadedUrl || '',
-          publishUrl: uploadedUrl || ''
+          publishUrl: uploadedUrl || '',
+          objectKey: source.objectKey || block.upload?.objectKey || ''
         },
         localPreview: localImageSourceMeta(source)
       };
+    }
 
-      if (source.kind === 'url' && !uploadedUrl) {
-        issues.push(issue('error', 'image-unsupported-url', 'An image has an unsupported publish URL.', { blockId: imageId }));
+    function addImagePublishIssues(image, source, issues) {
+      if (source.kind === 'url' && !image.media.url) {
+        issues.push(issue('error', 'image-unsupported-url', 'An image has an unsupported publish URL.', { blockId: image.id }));
       }
-      if (source.kind === 'local-missing') {
-        issues.push(issue('error', 'image-source-missing', 'An image is missing local preview or upload metadata.', { blockId: imageId }));
+      if (image.status === 'missing-local-preview' || source.kind === 'local-missing') {
+        issues.push(issue('error', 'image-source-missing', 'An image is missing local preview or upload metadata.', { blockId: image.id }));
+      } else if (image.status === 'needs-key') {
+        issues.push(issue('error', 'publisher-key-required', 'Publisher access key is required before image upload.', { blockId: image.id }));
+      } else if (image.status === 'uploading') {
+        issues.push(issue('error', 'image-uploading', 'An image upload is still in progress.', { blockId: image.id }));
+      } else if (image.status === 'failed') {
+        issues.push(issue('error', 'image-upload-failed', 'An image upload failed.', { blockId: image.id }));
+      } else if (image.requiresUpload) {
+        issues.push(issue('error', 'image-needs-upload', 'A local image needs upload before final publishing.', { blockId: image.id }));
       }
+
       if (!image.alt) {
-        issues.push(issue('warning', 'image-missing-alt', 'An image is missing alt text.', { blockId: imageId }));
+        issues.push(issue('warning', 'image-missing-alt', 'An image is missing alt text.', { blockId: image.id }));
       }
       if (source.tooLargeForLocalDraft) {
-        issues.push(issue('warning', 'image-local-placeholder', 'A large local image was kept as upload metadata instead of being stored in the draft.', { blockId: imageId }));
+        issues.push(issue('warning', 'image-local-placeholder', 'A large local image was kept as upload metadata instead of being stored in the draft.', { blockId: image.id }));
       }
-      if (requiresUpload) {
-        issues.push(issue('info', 'image-needs-upload', 'A local image will need upload before final publishing.', { blockId: imageId }));
-      }
+    }
+
+    function convertImageBlock(block, index, issues) {
+      const source = block.source || { kind: 'local-missing' };
+      const image = imageManifestFromBlock(block, index);
+      const markdownSource = image.media.url || `otw-local-image:${image.id}`;
+      addImagePublishIssues(image, source, issues);
 
       return {
         type: 'image',
-        id: imageId,
+        id: image.id,
         markdown: imageMarkdown(image.alt, markdownSource, image.caption),
         alt: image.alt,
         caption: image.caption,
         imageRef: image.id,
-        requiresUpload
+        requiresUpload: image.requiresUpload,
+        status: image.status
       };
     }
 
@@ -2142,21 +2555,7 @@
       const convertedBlocks = blocks.map((block, index) => {
         const converted = convertBlockToPublish(block, index, issues);
         if (block && block.type === 'image') {
-          const source = block.source || { kind: 'local-missing' };
-          const uploadedUrl = source.kind === 'url' ? safeImagePublishUrl(source.url) : '';
-          images.push({
-            id: block.id || converted?.imageRef || blockId('image'),
-            order: index,
-            alt: String(block.alt || '').trim(),
-            caption: String(block.caption || '').trim(),
-            requiresUpload: source.kind !== 'url',
-            status: block.status || (uploadedUrl ? 'uploaded' : 'local-only'),
-            media: {
-              url: uploadedUrl || '',
-              publishUrl: uploadedUrl || ''
-            },
-            localPreview: localImageSourceMeta(source)
-          });
+          images.push(imageManifestFromBlock(block, index));
         }
         return converted;
       }).filter(Boolean);
@@ -2222,6 +2621,18 @@
       }
       if (issues.some((item) => item.code === 'body-required')) {
         return 'Needs body';
+      }
+      if (issues.some((item) => item.code === 'publisher-key-required')) {
+        return 'Needs publisher key';
+      }
+      if (issues.some((item) => item.code === 'image-uploading')) {
+        return 'Image upload in progress';
+      }
+      if (issues.some((item) => item.code === 'image-upload-failed')) {
+        return 'Image upload failed';
+      }
+      if (issues.some((item) => item.code === 'image-needs-upload' || item.code === 'image-source-missing')) {
+        return 'Images need upload';
       }
       if (issues.some((item) => item.level === 'error' || item.code === 'block-unsupported' || item.code === 'block-unknown')) {
         return 'Unsupported content found';
@@ -2353,12 +2764,26 @@
       mime = '',
       byteEstimate = 0,
       dataUrlLength = 0,
-      tooLargeForLocalDraft = false
+      tooLargeForLocalDraft = false,
+      uploadStatus = '',
+      uploadError = '',
+      uploadedUrl = '',
+      objectKey = ''
     } = {}) {
       const figure = document.createElement('figure');
       figure.className = 'publisher-figure';
       figure.contentEditable = 'false';
       figure.dataset.blockId = id;
+      figure.dataset.uploadStatus = normalizeImageUploadStatus(uploadStatus || (uploadedUrl ? 'uploaded' : 'local'));
+      if (uploadedUrl) {
+        figure.dataset.uploadedUrl = uploadedUrl;
+      }
+      if (objectKey) {
+        figure.dataset.objectKey = objectKey;
+      }
+      if (uploadError) {
+        figure.dataset.uploadError = uploadError;
+      }
       if (savedSrc) {
         figure.dataset.savedSrc = savedSrc;
       }
@@ -2405,6 +2830,12 @@
       const meta = document.createElement('div');
       meta.className = 'figure-meta';
 
+      const details = document.createElement('div');
+      details.className = 'figure-details';
+
+      const status = document.createElement('div');
+      status.className = 'figure-status';
+
       const altInput = document.createElement('input');
       altInput.className = 'figure-alt';
       altInput.type = 'text';
@@ -2415,21 +2846,33 @@
       const actions = document.createElement('div');
       actions.className = 'figure-actions';
 
+      const retry = document.createElement('button');
+      retry.className = 'figure-action';
+      retry.type = 'button';
+      retry.textContent = 'Retry';
+      retry.title = 'Retry upload';
+      retry.dataset.role = 'retry';
+      retry.hidden = true;
+
       const replace = document.createElement('button');
       replace.className = 'figure-action';
       replace.type = 'button';
       replace.textContent = 'Replace';
       replace.title = 'Replace image';
+      replace.dataset.role = 'replace';
 
       const remove = document.createElement('button');
       remove.className = 'figure-action';
       remove.type = 'button';
       remove.textContent = 'Remove';
       remove.title = 'Remove image';
+      remove.dataset.role = 'remove';
 
-      actions.append(replace, remove);
-      meta.append(altInput, actions);
+      actions.append(retry, replace, remove);
+      details.append(status, altInput);
+      meta.append(details, actions);
       figure.append(figcaption, meta);
+      syncFigureStatus(figure);
       wireFigure(figure);
       return figure;
     }
@@ -2437,6 +2880,9 @@
     function renderImageBlock(block) {
       const source = block.source || {};
       const src = source.dataUrl || source.url || '';
+      const restoredStatus = block.status === 'uploading' && source.kind !== 'url'
+        ? 'local'
+        : block.status;
       const figure = createFigureElement({
         id: block.id,
         src,
@@ -2447,7 +2893,11 @@
         mime: source.mime || '',
         byteEstimate: source.byteEstimate || 0,
         dataUrlLength: source.dataUrlLength || 0,
-        tooLargeForLocalDraft: Boolean(source.tooLargeForLocalDraft)
+        tooLargeForLocalDraft: Boolean(source.tooLargeForLocalDraft),
+        uploadStatus: restoredStatus || block.upload?.status || '',
+        uploadError: block.upload?.error || '',
+        uploadedUrl: source.kind === 'url' ? source.url : block.upload?.uploadedUrl || '',
+        objectKey: source.objectKey || block.upload?.objectKey || ''
       });
       if (!src) {
         figure.dataset.localStatus = block.status || 'missing-local-preview';
@@ -2539,7 +2989,7 @@
           localStorage.removeItem(DRAFT_KEY);
         } else {
           localStorage.setItem(DRAFT_KEY, JSON.stringify({
-            version: 2,
+            version: 3,
             article
           }));
         }
@@ -2561,7 +3011,7 @@
 
       isHydrating = true;
       const draft = stored.draft;
-      const article = draft.version === 2 && draft.article
+      const article = draft.article
         ? draft.article
         : legacyDraftToArticle(draft);
       hydrateArticle(article);
@@ -2629,7 +3079,8 @@
         focused === articleDate ||
         focused === publishDate ||
         focused === publishSlug ||
-        focused === publishSurface
+        focused === publishSurface ||
+        focused === publisherAccessKey
       ) {
         return false;
       }
@@ -2822,6 +3273,134 @@
       return paragraph;
     }
 
+    function uploadTitleForImage() {
+      return titleField.value.trim() || docName.value.trim() || 'Untitled Article';
+    }
+
+    function updateFigureFromSuccessfulUpload(figure, uploaded) {
+      const uploadedUrl = safeImagePublishUrl(uploaded?.url);
+      if (!uploadedUrl) {
+        throw new Error('Upload completed without a usable image URL.');
+      }
+
+      const image = figure.querySelector('img') || document.createElement('img');
+      if (!image.parentElement) {
+        figure.querySelector('.image-missing')?.replaceWith(image);
+        figure.prepend(image);
+      }
+
+      const currentObjectUrl = figure.dataset.objectUrl || '';
+      image.src = uploadedUrl;
+      image.alt = figure.querySelector('.figure-alt')?.value || uploaded.alt || '';
+      figure.dataset.savedSrc = uploadedUrl;
+      figure.dataset.uploadedUrl = uploadedUrl;
+      figure.dataset.objectKey = uploaded.object_key || uploaded.objectKey || '';
+      delete figure.dataset.localTooLarge;
+      delete figure.dataset.localByteEstimate;
+      delete figure.dataset.localDataUrlLength;
+      delete figure.dataset.uploadToken;
+      delete figure.dataset.uploadError;
+      setFigureUploadState(figure, 'uploaded');
+
+      if (currentObjectUrl) {
+        URL.revokeObjectURL(currentObjectUrl);
+        imageObjectUrls.delete(currentObjectUrl);
+        delete figure.dataset.objectUrl;
+      }
+      stagedImageFiles.delete(figure);
+    }
+
+    async function stageFigureUpload(figure, file) {
+      const error = validateStagedImageFile(file);
+      if (error) {
+        setFigureUploadState(figure, 'failed', error);
+        markChanged();
+        return;
+      }
+
+      const publishKey = getPublisherPublishKey();
+      if (!publishKey) {
+        setFigureUploadState(figure, 'needs-key', 'Publisher access key is required before image upload.');
+        setSaveState('Publisher key needed', true);
+        markChanged();
+        return;
+      }
+
+      const uploadToken = blockId('upload');
+      figure.dataset.uploadToken = uploadToken;
+      stagedImageFiles.set(figure, file);
+      setFigureUploadState(figure, 'uploading');
+      markChanged();
+
+      try {
+        const uploadFile = shouldCompressStagedImage(file)
+          ? await compressStagedImage(file, { fileName: 'narrative-image.jpg' })
+          : file;
+        if (figure.dataset.uploadToken !== uploadToken) {
+          return;
+        }
+
+        const formData = new FormData();
+        formData.append('image', uploadFile);
+        formData.append('date', publishDate.value || new Date().toISOString().slice(0, 10));
+        formData.append('title', uploadTitleForImage());
+        formData.append('alt', figure.querySelector('.figure-alt')?.value || '');
+        formData.append('caption', figure.querySelector('.figure-caption')?.textContent.trim() || '');
+
+        const response = await fetch(UPLOAD_GHOST_IMAGE_ENDPOINT, {
+          method: 'POST',
+          headers: {
+            'x-publish-key': publishKey
+          },
+          body: formData
+        });
+        const payload = await response.json().catch(() => null);
+        if (!response.ok || !payload || payload.ok === false || !payload.uploaded) {
+          throw new Error(payload?.error || `Image upload failed (${response.status})`);
+        }
+        if (figure.dataset.uploadToken !== uploadToken) {
+          return;
+        }
+        updateFigureFromSuccessfulUpload(figure, payload.uploaded);
+        markChanged();
+      } catch (uploadError) {
+        if (figure.dataset.uploadToken !== uploadToken) {
+          return;
+        }
+        delete figure.dataset.uploadToken;
+        setFigureUploadState(figure, 'failed', uploadError.message || 'Image upload failed.');
+        markChanged();
+      }
+    }
+
+    function retryFigureUpload(figure) {
+      const storedFile = stagedImageFiles.get(figure);
+      if (storedFile) {
+        stageFigureUpload(figure, storedFile);
+        return;
+      }
+
+      const src = figure.dataset.savedSrc || figure.querySelector('img')?.getAttribute('src') || '';
+      const file = src.startsWith('data:')
+        ? dataUrlToFile(src, figure.dataset.localFileName || 'staged-image.png', figure.dataset.localMime || '')
+        : null;
+      if (!file) {
+        setFigureUploadState(figure, 'failed', 'Replace this image to retry upload.');
+        markChanged();
+        return;
+      }
+      stageFigureUpload(figure, file);
+    }
+
+    function retryImagesWaitingForKey() {
+      if (!getPublisherPublishKey()) {
+        return;
+      }
+      editor.querySelectorAll('.publisher-figure[data-upload-status="needs-key"]').forEach((figure) => {
+        retryFigureUpload(figure);
+      });
+    }
+
     function insertFigure(file, range) {
       if (!file || !String(file.type || '').startsWith('image/')) {
         return;
@@ -2834,58 +3413,22 @@
       const imageUrl = URL.createObjectURL(file);
       imageObjectUrls.add(imageUrl);
 
-      const figure = document.createElement('figure');
-      figure.className = 'publisher-figure';
-      figure.contentEditable = 'false';
-      figure.dataset.blockId = blockId('image');
+      const figure = createFigureElement({
+        src: imageUrl,
+        fileName: file.name || '',
+        mime: file.type || '',
+        uploadStatus: 'local'
+      });
       figure.dataset.objectUrl = imageUrl;
 
-      const image = document.createElement('img');
-      image.src = imageUrl;
-      image.alt = '';
-      image.setAttribute('data-file-name', file.name || '');
-      image.setAttribute('data-mime', file.type || '');
-
-      const caption = document.createElement('figcaption');
-      caption.className = 'figure-caption';
-      caption.contentEditable = 'true';
-      caption.dataset.placeholder = 'Add a caption';
-
-      const meta = document.createElement('div');
-      meta.className = 'figure-meta';
-
-      const alt = document.createElement('input');
-      alt.className = 'figure-alt';
-      alt.type = 'text';
-      alt.placeholder = 'Alt text';
-      alt.setAttribute('aria-label', 'Image alt text');
-
-      const actions = document.createElement('div');
-      actions.className = 'figure-actions';
-
-      const replace = document.createElement('button');
-      replace.className = 'figure-action';
-      replace.type = 'button';
-      replace.textContent = 'Replace';
-      replace.title = 'Replace image';
-
-      const remove = document.createElement('button');
-      remove.className = 'figure-action';
-      remove.type = 'button';
-      remove.textContent = 'Remove';
-      remove.title = 'Remove image';
-
-      actions.append(replace, remove);
-      meta.append(alt, actions);
-      figure.append(image, caption, meta);
-
       persistFigureFile(figure, file);
-      wireFigure(figure);
+      stagedImageFiles.set(figure, file);
 
       insertNodeAtSavedRange(figure);
       const paragraph = createTrailingParagraph();
       figure.after(paragraph);
       placeCaretInside(paragraph);
+      stageFigureUpload(figure, file);
     }
 
     function replaceFigureImage(figure, file) {
@@ -2893,6 +3436,10 @@
         return;
       }
       revokeFigureUrl(figure);
+      delete figure.dataset.uploadedUrl;
+      delete figure.dataset.objectKey;
+      delete figure.dataset.uploadError;
+      delete figure.dataset.uploadToken;
       const imageUrl = URL.createObjectURL(file);
       imageObjectUrls.add(imageUrl);
       figure.dataset.objectUrl = imageUrl;
@@ -2905,8 +3452,13 @@
       image.alt = figure.querySelector('.figure-alt')?.value || '';
       image.setAttribute('data-file-name', file.name || '');
       image.setAttribute('data-mime', file.type || '');
+      figure.dataset.localFileName = file.name || '';
+      figure.dataset.localMime = file.type || '';
+      setFigureUploadState(figure, 'local');
       persistFigureFile(figure, file);
+      stagedImageFiles.set(figure, file);
       markChanged();
+      stageFigureUpload(figure, file);
     }
 
     function persistFigureFile(figure, file) {
@@ -2915,6 +3467,9 @@
       }
       const reader = new FileReader();
       reader.addEventListener('load', () => {
+        if (figure.dataset.uploadStatus === 'uploaded') {
+          return;
+        }
         const result = String(reader.result || '');
         if (result.length > MAX_INLINE_IMAGE_DATA_URL_LENGTH) {
           delete figure.dataset.savedSrc;
@@ -2940,8 +3495,9 @@
       const image = figure.querySelector('img');
       const caption = figure.querySelector('.figure-caption');
       const alt = figure.querySelector('.figure-alt');
-      const replace = figure.querySelector('.figure-action:first-of-type');
-      const remove = figure.querySelector('.figure-action:last-of-type');
+      const retry = figure.querySelector('[data-role="retry"]');
+      const replace = figure.querySelector('[data-role="replace"]');
+      const remove = figure.querySelector('[data-role="remove"]');
 
       if (caption) {
         caption.contentEditable = 'true';
@@ -2960,6 +3516,13 @@
         });
       }
 
+      if (retry) {
+        retry.title = 'Retry upload';
+        retry.addEventListener('click', () => {
+          retryFigureUpload(figure);
+        });
+      }
+
       if (replace) {
         replace.title = 'Replace image';
         replace.addEventListener('click', () => {
@@ -2972,6 +3535,7 @@
         remove.title = 'Remove image';
         remove.addEventListener('click', () => {
           revokeFigureUrl(figure);
+          stagedImageFiles.delete(figure);
           const next = figure.nextSibling;
           figure.remove();
           if (next && next.nodeType === Node.ELEMENT_NODE) {
@@ -2984,6 +3548,7 @@
       }
 
       figure.dataset.wired = 'true';
+      syncFigureStatus(figure);
     }
 
     function wireAllFigures() {
@@ -3399,6 +3964,10 @@
     });
 
     document.addEventListener('input', (event) => {
+      if (event.target === publisherAccessKey) {
+        publisherAccessKey.dataset.masked = 'false';
+        return;
+      }
       if (
         event.target.matches('input, textarea, select') ||
         event.target.isContentEditable
@@ -3512,6 +4081,28 @@
       saveDraft();
       setSaveState('Saved locally', true);
     });
+
+    publisherAccessKey.addEventListener('focus', preparePublisherKeyInputForEdit);
+
+    publisherAccessKey.addEventListener('blur', () => {
+      if (!publisherAccessKey.value.trim()) {
+        setPublisherKeyInputMasked();
+        renderPublisherKeyState();
+      }
+    });
+
+    publisherAccessKey.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        savePublisherKey();
+      }
+      if (event.key === 'Escape') {
+        publisherAccessKey.blur();
+      }
+    });
+
+    savePublisherKeyBtn.addEventListener('click', savePublisherKey);
+    clearPublisherKeyBtn.addEventListener('click', clearPublisherKey);
 
     publishBtn.addEventListener('click', () => {
       const article = updateArticlePayload();
@@ -3659,6 +4250,8 @@
     });
 
     document.execCommand('defaultParagraphSeparator', false, 'p');
+    const publisherKeyWasImported = migrateLegacyPublisherKey();
+    renderPublisherKeyState(publisherKeyWasImported ? 'Publisher access imported' : '');
     if (!importArticleFromHash()) {
       loadDraft();
     }
@@ -3675,6 +4268,9 @@
       },
       getPublishPayload() {
         return JSON.parse(publishPayload.textContent || 'null');
+      },
+      hasPublisherKey() {
+        return Boolean(getPublisherPublishKey());
       },
       hydrateArticleForTest(article) {
         isHydrating = true;
