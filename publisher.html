@@ -1,0 +1,3692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OTW Publisher</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23fffaf0'/%3E%3Ccircle cx='16' cy='16' r='12' fill='%23244f9e'/%3E%3C/svg%3E" />
+  <style>
+    :root {
+      --ink: #202020;
+      --muted: #69645d;
+      --soft: #938b80;
+      --paper: #fffaf0;
+      --paper-edge: #e3d7c6;
+      --desk: #e9dfd0;
+      --desk-deep: #d8cbb8;
+      --blue: #244f9e;
+      --blue-dark: #173f83;
+      --teal: #587f85;
+      --line: rgba(42, 38, 32, 0.14);
+      --toolbar: rgba(255, 252, 246, 0.94);
+      --shadow: 0 24px 80px rgba(62, 50, 34, 0.16);
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --serif: Georgia, "Times New Roman", serif;
+      --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      min-height: 100%;
+      background: var(--desk);
+      color: var(--ink);
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      background:
+        linear-gradient(180deg, rgba(255, 250, 240, 0.78), rgba(233, 223, 208, 0.94)),
+        var(--desk);
+      font-family: var(--sans);
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    button {
+      border: 0;
+      cursor: pointer;
+    }
+
+    .app-shell {
+      min-height: 100vh;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+      align-items: center;
+      gap: 18px;
+      min-height: 68px;
+      padding: 10px 22px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(247, 240, 227, 0.92);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .brand-mark {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.54);
+    }
+
+    .brand-mark img {
+      width: 28px;
+      height: 28px;
+      display: block;
+    }
+
+    .brand-copy {
+      min-width: 0;
+    }
+
+    .brand-title {
+      margin: 0 0 3px;
+      color: var(--blue-dark);
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      line-height: 1;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .doc-name {
+      width: min(280px, 52vw);
+      min-width: 0;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: #161411;
+      outline: none;
+    }
+
+    .save-state {
+      justify-self: center;
+      color: #554f47;
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .icon-btn,
+    .text-btn,
+    .publish-btn {
+      min-height: 38px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.54);
+      color: #27231d;
+      transition:
+        background 160ms ease,
+        border-color 160ms ease,
+        color 160ms ease,
+        transform 160ms ease;
+    }
+
+    .icon-btn {
+      width: 38px;
+      padding: 0;
+    }
+
+    .text-btn,
+    .publish-btn {
+      padding: 0 14px;
+      font-family: var(--mono);
+      font-size: 0.66rem;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .publish-btn {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: #fffaf0;
+      box-shadow: 0 10px 26px rgba(36, 79, 158, 0.2);
+    }
+
+    .icon-btn:hover,
+    .text-btn:hover,
+    .publish-btn:hover,
+    .icon-btn:focus-visible,
+    .text-btn:focus-visible,
+    .publish-btn:focus-visible {
+      background: #fff;
+      border-color: rgba(36, 79, 158, 0.32);
+      outline: none;
+      transform: translateY(-1px);
+    }
+
+    .publish-btn:hover,
+    .publish-btn:focus-visible {
+      background: var(--blue-dark);
+      border-color: var(--blue-dark);
+    }
+
+    .toolbar {
+      position: sticky;
+      top: 68px;
+      z-index: 24;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      min-height: 48px;
+      padding: 6px 18px;
+      border-bottom: 1px solid var(--line);
+      background: var(--toolbar);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .toolbar-group {
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+      padding: 0 7px;
+      border-left: 1px solid rgba(41, 39, 35, 0.13);
+    }
+
+    .tool-btn {
+      position: relative;
+      min-width: 30px;
+      height: 30px;
+      padding: 0 6px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: transparent;
+      color: #332f28;
+      font-size: 0.8rem;
+    }
+
+    .tool-btn[data-tooltip]::after,
+    .tool-btn[data-tooltip]::before,
+    .select-wrap[data-tooltip]::after,
+    .select-wrap[data-tooltip]::before {
+      position: absolute;
+      left: 50%;
+      opacity: 0;
+      pointer-events: none;
+      transform: translate(-50%, 4px);
+      transition:
+        opacity 120ms ease,
+        transform 120ms ease;
+    }
+
+    .tool-btn[data-tooltip]::after,
+    .select-wrap[data-tooltip]::after {
+      content: attr(data-tooltip);
+      top: calc(100% + 8px);
+      z-index: 80;
+      padding: 5px 7px;
+      background: #25211c;
+      color: #fffaf0;
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      line-height: 1;
+      white-space: nowrap;
+      box-shadow: 0 8px 22px rgba(42, 38, 32, 0.18);
+    }
+
+    .tool-btn[data-tooltip]::before,
+    .select-wrap[data-tooltip]::before {
+      content: "";
+      top: calc(100% + 3px);
+      z-index: 81;
+      width: 8px;
+      height: 8px;
+      background: #25211c;
+      transform: translate(-50%, 4px) rotate(45deg);
+    }
+
+    .tool-btn[data-tooltip]:hover::after,
+    .tool-btn[data-tooltip]:hover::before,
+    .tool-btn[data-tooltip]:focus-visible::after,
+    .tool-btn[data-tooltip]:focus-visible::before,
+    .select-wrap[data-tooltip]:hover::after,
+    .select-wrap[data-tooltip]:hover::before,
+    .select-wrap[data-tooltip]:focus-within::after,
+    .select-wrap[data-tooltip]:focus-within::before {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    .tool-btn[data-tooltip]:hover::before,
+    .tool-btn[data-tooltip]:focus-visible::before,
+    .select-wrap[data-tooltip]:hover::before,
+    .select-wrap[data-tooltip]:focus-within::before {
+      transform: translate(-50%, 0) rotate(45deg);
+    }
+
+    .tool-btn:hover,
+    .tool-btn:focus-visible {
+      background: rgba(36, 79, 158, 0.05);
+      color: var(--blue);
+      outline: none;
+    }
+
+    .tool-btn.is-active,
+    .tool-btn[aria-pressed="true"] {
+      background: rgba(36, 79, 158, 0.14);
+      color: var(--blue);
+      box-shadow: inset 0 -2px 0 rgba(36, 79, 158, 0.48);
+    }
+
+    .tool-btn.is-active:hover,
+    .tool-btn[aria-pressed="true"]:hover,
+    .tool-btn.is-active:focus-visible,
+    .tool-btn[aria-pressed="true"]:focus-visible {
+      background: rgba(36, 79, 158, 0.18);
+    }
+
+    .tool-btn:disabled {
+      cursor: default;
+      color: rgba(51, 47, 40, 0.34);
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .tool-value {
+      min-width: 2.3em;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.04em;
+    }
+
+    .tool-label {
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .tool-label.is-underlined {
+      text-decoration: underline;
+      text-underline-offset: 0.18em;
+    }
+
+    .tool-label.is-italic {
+      font-style: italic;
+    }
+
+    .tool-color {
+      position: relative;
+      font-weight: 700;
+    }
+
+    .tool-color .tool-label {
+      position: relative;
+      padding-bottom: 5px;
+    }
+
+    .tool-color .tool-label::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      height: 3px;
+      background: var(--tool-color, var(--blue));
+    }
+
+    .tool-swatch {
+      width: 16px;
+      height: 16px;
+      display: block;
+      border: 1px solid rgba(41, 39, 35, 0.18);
+      background: var(--highlight-color, #fff2a8);
+    }
+
+    .select-wrap {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .toolbar-select {
+      min-height: 32px;
+      border: 0;
+      background: transparent;
+      color: #332f28;
+      padding: 0 24px 0 8px;
+      outline: none;
+    }
+
+    .toolbar-select.compact {
+      width: 36px;
+      min-width: 36px;
+      padding: 0;
+      color: transparent;
+    }
+
+    .toolbar-select.compact option {
+      color: #332f28;
+    }
+
+    .color-input {
+      position: fixed;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .toolbar-popover {
+      position: fixed;
+      z-index: 95;
+      display: grid;
+      gap: 10px;
+      min-width: 172px;
+      padding: 10px;
+      border: 1px solid rgba(41, 39, 35, 0.15);
+      background: rgba(255, 252, 246, 0.98);
+      box-shadow: 0 18px 46px rgba(62, 50, 34, 0.18);
+    }
+
+    .toolbar-popover[hidden] {
+      display: none;
+    }
+
+    .popover-title {
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .color-grid,
+    .spacing-grid {
+      display: grid;
+      gap: 6px;
+    }
+
+    .color-grid {
+      grid-template-columns: repeat(5, 1fr);
+    }
+
+    .color-swatch-btn {
+      width: 26px;
+      height: 26px;
+      border: 1px solid rgba(41, 39, 35, 0.15);
+      background: var(--swatch-color);
+    }
+
+    .color-swatch-btn:hover,
+    .color-swatch-btn:focus-visible,
+    .color-swatch-btn[aria-pressed="true"] {
+      outline: none;
+      border-color: rgba(36, 79, 158, 0.56);
+      box-shadow: 0 0 0 2px rgba(36, 79, 158, 0.12);
+    }
+
+    .custom-color-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 0.75rem;
+    }
+
+    .custom-color-row input {
+      width: 34px;
+      height: 28px;
+      padding: 0;
+      border: 1px solid rgba(41, 39, 35, 0.15);
+      background: transparent;
+    }
+
+    .spacing-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .spacing-option {
+      min-height: 32px;
+      border: 1px solid rgba(41, 39, 35, 0.12);
+      background: rgba(255, 255, 255, 0.52);
+      color: #332f28;
+      font-family: var(--mono);
+      font-size: 0.68rem;
+    }
+
+    .spacing-option:hover,
+    .spacing-option:focus-visible,
+    .spacing-option[aria-pressed="true"] {
+      background: rgba(36, 79, 158, 0.1);
+      border-color: rgba(36, 79, 158, 0.34);
+      color: var(--blue);
+      outline: none;
+    }
+
+    .document-shell {
+      width: min(920px, calc(100% - 40px));
+      margin: 26px auto 70px;
+    }
+
+    .paper {
+      min-height: calc(100vh - 180px);
+      padding: clamp(34px, 6vw, 70px);
+      border: 1px solid rgba(41, 39, 35, 0.11);
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+
+    .article-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      padding-bottom: 16px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid rgba(41, 39, 35, 0.14);
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.66rem;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .article-date {
+      width: 138px;
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.66rem;
+      letter-spacing: 0.08em;
+      outline: none;
+      text-transform: uppercase;
+    }
+
+    .article-title-stack {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .title-block,
+    .subhead-block,
+    .body-block {
+      border: 1px solid rgba(41, 39, 35, 0.11);
+      background: rgba(255, 255, 255, 0.38);
+      transition:
+        background 160ms ease,
+        border-color 160ms ease,
+        box-shadow 160ms ease;
+    }
+
+    .title-block {
+      padding: 15px 18px 13px;
+    }
+
+    .subhead-block {
+      padding: 11px 18px 12px;
+    }
+
+    .body-block {
+      min-height: 660px;
+      padding: 22px 18px;
+    }
+
+    .title-block:focus-within,
+    .subhead-block:focus-within,
+    .body-block:focus-within,
+    .title-block.is-active,
+    .subhead-block.is-active,
+    .body-block.is-active {
+      background: rgba(255, 255, 255, 0.58);
+      border-color: rgba(36, 79, 158, 0.28);
+      box-shadow: 0 10px 26px rgba(36, 79, 158, 0.07);
+    }
+
+    .title-field {
+      width: 100%;
+      min-height: 1.08em;
+      margin: 0;
+      border: 0;
+      background: transparent;
+      color: #171511;
+      font-family: var(--serif);
+      font-size: clamp(2.35rem, 4.6vw, 3.55rem);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: 0;
+      outline: none;
+      resize: none;
+      overflow: hidden;
+    }
+
+    .subhead-field {
+      width: 100%;
+      min-height: 1.65em;
+      margin: 0;
+      border: 0;
+      background: transparent;
+      color: #51483d;
+      font-family: var(--serif);
+      font-size: clamp(1.12rem, 1.9vw, 1.45rem);
+      line-height: 1.5;
+      outline: none;
+      resize: none;
+      overflow: hidden;
+    }
+
+    .editor {
+      position: relative;
+      min-height: 610px;
+      color: var(--ink);
+      font-family: var(--serif);
+      font-size: clamp(1.08rem, 1.5vw, 1.24rem);
+      line-height: 1.5;
+      white-space: pre-wrap;
+      outline: none;
+    }
+
+    .editor:empty::before {
+      content: attr(data-placeholder);
+      color: rgba(32, 32, 32, 0.34);
+      pointer-events: none;
+    }
+
+    .editor:focus {
+      outline: none;
+    }
+
+    .editor p,
+    .editor h2,
+    .editor blockquote {
+      margin: 0 0 1.2em;
+    }
+
+    .editor h2 {
+      margin-top: 1.8em;
+      font-family: var(--serif);
+      font-size: 1.75rem;
+      line-height: 1.18;
+    }
+
+    .editor blockquote {
+      margin: 1.45em 0;
+      padding-left: 18px;
+      border-left: 3px solid rgba(36, 79, 158, 0.3);
+      color: #403a32;
+      font-size: 1.26rem;
+      font-style: italic;
+    }
+
+    .editor a {
+      color: var(--blue);
+      text-decoration-thickness: 0.08em;
+      text-underline-offset: 0.18em;
+    }
+
+    .editor hr {
+      margin: 2.4em auto;
+      width: 44%;
+      border: 0;
+      border-top: 1px solid rgba(41, 39, 35, 0.24);
+    }
+
+    .editor ul,
+    .editor ol {
+      margin: 0 0 1.2em;
+      padding-left: 1.45em;
+    }
+
+    .editor li {
+      margin: 0.25em 0;
+    }
+
+    .editor .line-spacing-10 {
+      line-height: 1;
+    }
+
+    .editor .line-spacing-115 {
+      line-height: 1.15;
+    }
+
+    .editor .line-spacing-15 {
+      line-height: 1.5;
+    }
+
+    .editor .line-spacing-20 {
+      line-height: 2;
+    }
+
+    .editor ul.editor-checklist {
+      list-style: none;
+      padding-left: 1.6em;
+    }
+
+    .editor ul.editor-checklist li {
+      position: relative;
+    }
+
+    .editor ul.editor-checklist li::before {
+      content: "";
+      position: absolute;
+      left: -1.45em;
+      top: 0.72em;
+      width: 0.72em;
+      height: 0.72em;
+      border: 1px solid rgba(41, 39, 35, 0.46);
+      background: rgba(255, 255, 255, 0.34);
+    }
+
+    .publisher-figure {
+      position: relative;
+      margin: 1.8em 0;
+      padding: 10px;
+      border: 1px solid rgba(41, 39, 35, 0.12);
+      background: rgba(255, 255, 255, 0.42);
+    }
+
+    .publisher-figure img {
+      width: 100%;
+      max-height: 560px;
+      display: block;
+      object-fit: contain;
+      background: #ece4d7;
+    }
+
+    .image-missing {
+      min-height: 180px;
+      display: grid;
+      place-items: center;
+      background: rgba(236, 228, 215, 0.72);
+      color: rgba(48, 43, 36, 0.56);
+      font-family: var(--mono);
+      font-size: 0.66rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .figure-caption {
+      min-height: 1.6em;
+      margin-top: 10px;
+      color: #5b5147;
+      font-family: var(--serif);
+      font-size: 0.98rem;
+      font-style: italic;
+      line-height: 1.45;
+      text-align: center;
+      outline: none;
+    }
+
+    .figure-caption:empty::before {
+      content: attr(data-placeholder);
+      color: rgba(91, 81, 71, 0.5);
+    }
+
+    .figure-meta {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 10px;
+      align-items: center;
+      margin-top: 8px;
+      opacity: 0.72;
+      transition: opacity 160ms ease;
+    }
+
+    .publisher-figure:focus-within .figure-meta,
+    .publisher-figure:hover .figure-meta {
+      opacity: 1;
+    }
+
+    .figure-alt {
+      min-width: 0;
+      border: 0;
+      border-bottom: 1px solid rgba(41, 39, 35, 0.16);
+      background: transparent;
+      color: var(--muted);
+      padding: 6px 0;
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      outline: none;
+    }
+
+    .figure-actions {
+      display: inline-flex;
+      gap: 6px;
+    }
+
+    .figure-action {
+      min-height: 30px;
+      padding: 0 10px;
+      border: 1px solid rgba(41, 39, 35, 0.12);
+      background: rgba(255, 255, 255, 0.5);
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .figure-action:hover,
+    .figure-action:focus-visible {
+      background: #fff;
+      color: var(--blue);
+      outline: none;
+    }
+
+    .unsupported-block {
+      margin: 1.4em 0;
+      padding: 12px 14px;
+      border: 1px dashed rgba(122, 55, 45, 0.34);
+      background: rgba(255, 245, 233, 0.58);
+      color: #7a372d;
+      font-family: var(--mono);
+      font-size: 0.66rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .settings-sheet {
+      position: fixed;
+      top: 82px;
+      right: 18px;
+      z-index: 40;
+      width: min(340px, calc(100vw - 36px));
+      display: none;
+      gap: 14px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      background: rgba(255, 250, 240, 0.96);
+      box-shadow: 0 24px 70px rgba(62, 50, 34, 0.18);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .settings-sheet.is-open {
+      display: grid;
+    }
+
+    .settings-title {
+      margin: 0;
+      color: #302b25;
+      font-family: var(--mono);
+      font-size: 0.66rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .field-group {
+      display: grid;
+      gap: 6px;
+    }
+
+    .field-label {
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .side-input,
+    .side-select {
+      width: 100%;
+      min-height: 38px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.58);
+      color: #26221d;
+      padding: 8px 9px;
+      outline: none;
+    }
+
+    .side-input:focus,
+    .side-select:focus,
+    .article-date:focus,
+    .figure-alt:focus {
+      border-color: rgba(36, 79, 158, 0.38);
+    }
+
+    svg {
+      width: 18px;
+      height: 18px;
+      display: block;
+      stroke: currentColor;
+    }
+
+    @media (max-width: 820px) {
+      .topbar {
+        grid-template-columns: 1fr auto;
+        gap: 10px;
+        padding: 10px 12px;
+      }
+
+      .save-state {
+        display: none;
+      }
+
+      .top-actions .text-btn {
+        display: none;
+      }
+
+      .toolbar {
+        top: 65px;
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+
+      .toolbar::-webkit-scrollbar {
+        display: none;
+      }
+
+      .document-shell {
+        width: calc(100% - 24px);
+        margin-top: 14px;
+        margin-bottom: 34px;
+      }
+
+      .paper {
+        padding: 28px 20px 42px;
+      }
+
+      .article-title-stack {
+        margin-bottom: 22px;
+      }
+
+      .title-block,
+      .subhead-block,
+      .body-block {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .title-field {
+        font-size: clamp(2.1rem, 10vw, 2.75rem);
+      }
+
+      .figure-meta {
+        grid-template-columns: 1fr;
+      }
+
+      .figure-actions {
+        justify-content: flex-end;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .brand-title {
+        max-width: 210px;
+      }
+
+      .doc-name {
+        width: 190px;
+      }
+
+      .publish-btn {
+        padding: 0 11px;
+      }
+
+      .article-meta {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">
+          <img src="Images/otw_brandmark_dark.svg" alt="" />
+        </div>
+        <div class="brand-copy">
+          <p class="brand-title">Outside The World Publisher</p>
+          <input class="doc-name" type="text" value="Untitled Article" aria-label="Document name" />
+        </div>
+      </div>
+
+      <div class="save-state" id="saveState">Local draft</div>
+
+      <div class="top-actions">
+        <button class="icon-btn" id="settingsToggle" type="button" aria-label="Article settings" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 15.5A3.5 3.5 0 1 0 12 8a3.5 3.5 0 0 0 0 7.5Z"></path>
+            <path d="M19.4 15a1.8 1.8 0 0 0 .4 2l.1.1a2 2 0 0 1-2.8 2.8l-.1-.1a1.8 1.8 0 0 0-2-.4 1.8 1.8 0 0 0-1.1 1.7V21a2 2 0 0 1-4 0v-.1a1.8 1.8 0 0 0-1.1-1.7 1.8 1.8 0 0 0-2 .4l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.8 1.8 0 0 0 .4-2A1.8 1.8 0 0 0 2.7 14H2a2 2 0 0 1 0-4h.7a1.8 1.8 0 0 0 1.7-1.1 1.8 1.8 0 0 0-.4-2l-.1-.1A2 2 0 1 1 6.7 4l.1.1a1.8 1.8 0 0 0 2 .4A1.8 1.8 0 0 0 10 2.8V2a2 2 0 0 1 4 0v.8a1.8 1.8 0 0 0 1.1 1.7 1.8 1.8 0 0 0 2-.4l.1-.1A2 2 0 1 1 20 6.8l-.1.1a1.8 1.8 0 0 0-.4 2 1.8 1.8 0 0 0 1.7 1.1h.8a2 2 0 0 1 0 4h-.8a1.8 1.8 0 0 0-1.8 1Z"></path>
+          </svg>
+        </button>
+        <button class="text-btn" id="saveDraftBtn" type="button" title="Save local draft">Save Draft</button>
+        <button class="publish-btn" id="publishBtn" type="button" title="Publishing is not wired yet">Publish</button>
+      </div>
+    </header>
+
+    <nav class="toolbar" aria-label="Writing tools">
+      <div class="toolbar-group">
+        <button class="tool-btn" type="button" data-command="undo" aria-label="Undo" title="Undo" data-tooltip="Undo">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M9 14 4 9l5-5"></path>
+            <path d="M4 9h10.5a5.5 5.5 0 1 1 0 11H11"></path>
+          </svg>
+        </button>
+        <button class="tool-btn" type="button" data-command="redo" aria-label="Redo" title="Redo" data-tooltip="Redo">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="m15 14 5-5-5-5"></path>
+            <path d="M20 9H9.5a5.5 5.5 0 1 0 0 11H13"></path>
+          </svg>
+        </button>
+      </div>
+
+      <div class="toolbar-group">
+        <span class="select-wrap" title="Text style" data-tooltip="Text style">
+          <select class="toolbar-select" id="formatSelect" aria-label="Text style">
+            <option value="p">Body</option>
+            <option value="h2">Heading</option>
+            <option value="blockquote">Quote</option>
+          </select>
+        </span>
+      </div>
+
+      <div class="toolbar-group">
+        <button class="tool-btn" type="button" data-command="bold" aria-label="Bold" title="Bold" data-tooltip="Bold" aria-pressed="false">
+          <span class="tool-label">B</span>
+        </button>
+        <button class="tool-btn" type="button" data-command="italic" aria-label="Italic" title="Italic" data-tooltip="Italic" aria-pressed="false">
+          <span class="tool-label is-italic">I</span>
+        </button>
+        <button class="tool-btn" type="button" data-command="underline" aria-label="Underline" title="Underline" data-tooltip="Underline" aria-pressed="false">
+          <span class="tool-label is-underlined">U</span>
+        </button>
+        <button class="tool-btn tool-color" id="textColorBtn" type="button" aria-label="Text color" title="Text color" data-tooltip="Text color" aria-expanded="false" style="--tool-color: #244f9e">
+          <span class="tool-label">A</span>
+        </button>
+        <button class="tool-btn" id="highlightBtn" type="button" aria-label="Highlight" title="Highlight" data-tooltip="Highlight" aria-expanded="false">
+          <span class="tool-swatch" aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <div class="toolbar-group">
+        <button class="tool-btn" id="linkBtn" type="button" aria-label="Insert link" title="Insert link" data-tooltip="Insert link" aria-pressed="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M10 13a5 5 0 0 0 7.1 0l2-2a5 5 0 0 0-7.1-7.1l-1.1 1.1"></path>
+            <path d="M14 11a5 5 0 0 0-7.1 0l-2 2A5 5 0 0 0 12 20.1l1.1-1.1"></path>
+          </svg>
+        </button>
+        <button class="tool-btn" id="insertImageBtn" type="button" aria-label="Insert image at cursor" title="Insert image" data-tooltip="Insert image">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+            <circle cx="8.5" cy="10" r="1.5"></circle>
+            <path d="m21 15-5-5L5 19"></path>
+          </svg>
+        </button>
+        <button class="tool-btn" id="dividerBtn" type="button" aria-label="Insert divider" title="Insert divider" data-tooltip="Insert divider">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4 12h16"></path>
+          </svg>
+        </button>
+      </div>
+
+      <div class="toolbar-group">
+        <button class="tool-btn is-active" type="button" data-command="justifyLeft" aria-label="Align left" title="Align left" data-tooltip="Align left" aria-pressed="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4 6h14"></path>
+            <path d="M4 10h10"></path>
+            <path d="M4 14h14"></path>
+            <path d="M4 18h9"></path>
+          </svg>
+        </button>
+        <button class="tool-btn" type="button" data-command="justifyCenter" aria-label="Align center" title="Align center" data-tooltip="Align center" aria-pressed="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 6h14"></path>
+            <path d="M8 10h8"></path>
+            <path d="M5 14h14"></path>
+            <path d="M8 18h8"></path>
+          </svg>
+        </button>
+        <button class="tool-btn" type="button" data-command="justifyRight" aria-label="Align right" title="Align right" data-tooltip="Align right" aria-pressed="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M6 6h14"></path>
+            <path d="M10 10h10"></path>
+            <path d="M6 14h14"></path>
+            <path d="M11 18h9"></path>
+          </svg>
+        </button>
+        <button class="tool-btn" id="lineSpacingBtn" type="button" aria-label="Line spacing" title="Line spacing" data-tooltip="Line spacing" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M8 5h11"></path>
+            <path d="M8 12h11"></path>
+            <path d="M8 19h11"></path>
+            <path d="M4 5v14"></path>
+            <path d="m2 7 2-2 2 2"></path>
+            <path d="m2 17 2 2 2-2"></path>
+          </svg>
+          <span class="tool-value" id="lineSpacingValue">1.5</span>
+        </button>
+      </div>
+
+      <div class="toolbar-group">
+        <button class="tool-btn" id="checklistBtn" type="button" aria-label="Checklist" title="Checklist" data-tooltip="Checklist" aria-pressed="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="m4 7 2 2 4-4"></path>
+            <path d="M13 7h7"></path>
+            <path d="m4 17 2 2 4-4"></path>
+            <path d="M13 17h7"></path>
+          </svg>
+        </button>
+        <button class="tool-btn" type="button" data-command="insertUnorderedList" aria-label="Bulleted list" title="Bulleted list" data-tooltip="Bulleted list" aria-pressed="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M8 6h12"></path>
+            <path d="M8 12h12"></path>
+            <path d="M8 18h12"></path>
+            <path d="M4 6h.01"></path>
+            <path d="M4 12h.01"></path>
+            <path d="M4 18h.01"></path>
+          </svg>
+        </button>
+        <button class="tool-btn" type="button" data-command="insertOrderedList" aria-label="Numbered list" title="Numbered list" data-tooltip="Numbered list" aria-pressed="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M10 6h10"></path>
+            <path d="M10 12h10"></path>
+            <path d="M10 18h10"></path>
+            <path d="M4 6h1v4"></path>
+            <path d="M4 10h2"></path>
+            <path d="M4 14h2l-2 4h2"></path>
+          </svg>
+        </button>
+      </div>
+
+      <div class="toolbar-group">
+        <button class="tool-btn" type="button" data-command="outdent" aria-label="Decrease indent" title="Decrease indent" data-tooltip="Decrease indent">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M11 6h9"></path>
+            <path d="M11 12h9"></path>
+            <path d="M11 18h9"></path>
+            <path d="m7 8-4 4 4 4"></path>
+          </svg>
+        </button>
+        <button class="tool-btn" type="button" data-command="indent" aria-label="Increase indent" title="Increase indent" data-tooltip="Increase indent">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M11 6h9"></path>
+            <path d="M11 12h9"></path>
+            <path d="M11 18h9"></path>
+            <path d="m3 8 4 4-4 4"></path>
+          </svg>
+        </button>
+        <button class="tool-btn" type="button" data-command="removeFormat" aria-label="Clear formatting" title="Clear formatting" data-tooltip="Clear formatting">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4 4h16"></path>
+            <path d="m7 20 5-12 5 12"></path>
+            <path d="M9 15h6"></path>
+            <path d="m3 3 18 18"></path>
+          </svg>
+        </button>
+      </div>
+    </nav>
+
+    <div class="toolbar-popover color-popover" id="colorPopover" role="dialog" aria-label="Choose color" hidden>
+      <div class="popover-title" id="colorPopoverTitle">Text Color</div>
+      <div class="color-grid" aria-label="Color choices">
+        <button class="color-swatch-btn" type="button" data-color="#202020" aria-label="Ink" title="Ink" style="--swatch-color: #202020"></button>
+        <button class="color-swatch-btn" type="button" data-color="#244f9e" aria-label="OTW blue" title="OTW blue" style="--swatch-color: #244f9e"></button>
+        <button class="color-swatch-btn" type="button" data-color="#587f85" aria-label="Teal" title="Teal" style="--swatch-color: #587f85"></button>
+        <button class="color-swatch-btn" type="button" data-color="#7a372d" aria-label="Brick" title="Brick" style="--swatch-color: #7a372d"></button>
+        <button class="color-swatch-btn" type="button" data-color="#6f5a31" aria-label="Ochre" title="Ochre" style="--swatch-color: #6f5a31"></button>
+        <button class="color-swatch-btn" type="button" data-color="#fff2a8" aria-label="Soft yellow" title="Soft yellow" style="--swatch-color: #fff2a8"></button>
+        <button class="color-swatch-btn" type="button" data-color="#d9edf0" aria-label="Soft blue" title="Soft blue" style="--swatch-color: #d9edf0"></button>
+        <button class="color-swatch-btn" type="button" data-color="#eadfd0" aria-label="Warm paper" title="Warm paper" style="--swatch-color: #eadfd0"></button>
+        <button class="color-swatch-btn" type="button" data-color="#d8eddf" aria-label="Soft green" title="Soft green" style="--swatch-color: #d8eddf"></button>
+        <button class="color-swatch-btn" type="button" data-color="#ffffff" aria-label="White" title="White" style="--swatch-color: #ffffff"></button>
+      </div>
+      <label class="custom-color-row" for="customColorInput">
+        Custom
+        <input id="customColorInput" type="color" value="#244f9e" aria-label="Custom color" />
+      </label>
+    </div>
+
+    <div class="toolbar-popover spacing-popover" id="lineSpacingPopover" role="dialog" aria-label="Line spacing" hidden>
+      <div class="popover-title">Line Spacing</div>
+      <div class="spacing-grid">
+        <button class="spacing-option" type="button" data-spacing="1.0" aria-pressed="false">1.0</button>
+        <button class="spacing-option" type="button" data-spacing="1.15" aria-pressed="false">1.15</button>
+        <button class="spacing-option" type="button" data-spacing="1.5" aria-pressed="true">1.5</button>
+        <button class="spacing-option" type="button" data-spacing="2.0" aria-pressed="false">2.0</button>
+      </div>
+    </div>
+
+    <aside class="settings-sheet" id="settingsSheet" aria-label="Article settings">
+      <h2 class="settings-title">Article Settings</h2>
+      <div class="field-group">
+        <label class="field-label" for="publishDate">Date</label>
+        <input class="side-input" id="publishDate" type="date" value="2026-05-29" />
+      </div>
+      <div class="field-group">
+        <label class="field-label" for="publishSlug">Slug</label>
+        <input class="side-input" id="publishSlug" type="text" placeholder="auto-from-title" />
+      </div>
+      <div class="field-group">
+        <label class="field-label" for="publishSurface">Surface</label>
+        <select class="side-select" id="publishSurface">
+          <option>Outside The World Article</option>
+          <option>Private Draft</option>
+        </select>
+      </div>
+    </aside>
+
+    <main class="document-shell">
+      <article class="paper" aria-label="Article document">
+        <div class="article-meta">
+          <span>Outside The World Article</span>
+          <input class="article-date" type="text" value="May 29, 2026" aria-label="Article date" />
+        </div>
+
+        <div class="article-title-stack">
+          <div class="title-block">
+            <textarea class="title-field" id="titleField" rows="1" aria-label="Article title" placeholder="Title"></textarea>
+          </div>
+          <div class="subhead-block">
+            <textarea class="subhead-field" id="subheadField" rows="1" aria-label="Article subhead" placeholder="Add a subhead"></textarea>
+          </div>
+        </div>
+
+        <div class="body-block">
+          <div class="editor" id="editor" contenteditable="true" spellcheck="true" data-placeholder="Start writing..."></div>
+        </div>
+      </article>
+    </main>
+  </div>
+
+  <input id="localImageInput" type="file" accept="image/*" hidden />
+  <template id="articlePayload"></template>
+  <template id="publishPayload"></template>
+
+  <script>
+    const editor = document.getElementById('editor');
+    const saveState = document.getElementById('saveState');
+    const localImageInput = document.getElementById('localImageInput');
+    const articlePayload = document.getElementById('articlePayload');
+    const publishPayload = document.getElementById('publishPayload');
+    const docName = document.querySelector('.doc-name');
+    const titleField = document.getElementById('titleField');
+    const subheadField = document.getElementById('subheadField');
+    const bodyBlock = document.querySelector('.body-block');
+    const toolbar = document.querySelector('.toolbar');
+    const articleDate = document.querySelector('.article-date');
+    const publishDate = document.getElementById('publishDate');
+    const publishSlug = document.getElementById('publishSlug');
+    const publishSurface = document.getElementById('publishSurface');
+    const insertImageBtn = document.getElementById('insertImageBtn');
+    const dividerBtn = document.getElementById('dividerBtn');
+    const linkBtn = document.getElementById('linkBtn');
+    const textColorBtn = document.getElementById('textColorBtn');
+    const highlightBtn = document.getElementById('highlightBtn');
+    const saveDraftBtn = document.getElementById('saveDraftBtn');
+    const publishBtn = document.getElementById('publishBtn');
+    const lineSpacingBtn = document.getElementById('lineSpacingBtn');
+    const lineSpacingValue = document.getElementById('lineSpacingValue');
+    const lineSpacingPopover = document.getElementById('lineSpacingPopover');
+    const checklistBtn = document.getElementById('checklistBtn');
+    const formatSelect = document.getElementById('formatSelect');
+    const settingsToggle = document.getElementById('settingsToggle');
+    const settingsSheet = document.getElementById('settingsSheet');
+    const colorPopover = document.getElementById('colorPopover');
+    const colorPopoverTitle = document.getElementById('colorPopoverTitle');
+    const customColorInput = document.getElementById('customColorInput');
+
+    const ARTICLE_SCHEMA = 'otw.publisher.article';
+    const PUBLISH_PAYLOAD_SCHEMA = 'otw.publisher.publishPayload';
+    const DRAFT_KEY = 'otw.publisher.localDraft.v3';
+    const MAX_INLINE_IMAGE_DATA_URL_LENGTH = 1800000;
+    const LEGACY_DRAFT_KEYS = [
+      'otw.publisher.localDraft.v2',
+      'otw.publisher.localDraft.v1'
+    ];
+    const statusRestDelay = 1100;
+    let savedRange = null;
+    let activeEditable = editor;
+    let activeFigure = null;
+    let imageObjectUrls = new Set();
+    let saveTimer = null;
+    let statusTimer = null;
+    let isHydrating = false;
+    let activePopover = null;
+    let activeColorCommand = '';
+    let activeColorButton = null;
+    let ignoreNextSelectionClose = false;
+    let draftCreatedAt = new Date().toISOString();
+    let currentSaveLabel = 'Local draft';
+    let currentReadinessLabel = '';
+    const lineSpacingValues = ['1.0', '1.15', '1.5', '2.0'];
+    const lineSpacingClasses = {
+      '1.0': 'line-spacing-10',
+      '1.15': 'line-spacing-115',
+      '1.5': 'line-spacing-15',
+      '2.0': 'line-spacing-20'
+    };
+    const bodyOnlyCommands = new Set([
+      'bold',
+      'italic',
+      'underline',
+      'foreColor',
+      'hiliteColor',
+      'createLink',
+      'formatBlock',
+      'justifyLeft',
+      'justifyCenter',
+      'justifyRight',
+      'insertUnorderedList',
+      'insertOrderedList',
+      'outdent',
+      'indent',
+      'removeFormat'
+    ]);
+
+    function autoResizeTextarea(textarea) {
+      textarea.style.height = 'auto';
+      textarea.style.height = `${textarea.scrollHeight}px`;
+    }
+
+    function renderStatusLine() {
+      saveState.textContent = currentReadinessLabel
+        ? `${currentSaveLabel} · ${currentReadinessLabel}`
+        : currentSaveLabel;
+    }
+
+    function setReadinessLabel(text) {
+      currentReadinessLabel = text || '';
+      renderStatusLine();
+    }
+
+    function setSaveState(text, temporary = false) {
+      currentSaveLabel = text;
+      renderStatusLine();
+      window.clearTimeout(statusTimer);
+      if (temporary) {
+        statusTimer = window.setTimeout(() => {
+          currentSaveLabel = 'Saved locally';
+          renderStatusLine();
+        }, statusRestDelay);
+      }
+    }
+
+    function markChanged() {
+      if (isHydrating) {
+        return;
+      }
+      updateArticlePayload();
+      setSaveState('Unsaved changes');
+      window.clearTimeout(saveTimer);
+      saveTimer = window.setTimeout(saveDraft, 650);
+    }
+
+    function blockId(prefix = 'block') {
+      return `${prefix}_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 8)}`;
+    }
+
+    function escapeHtml(value) {
+      return String(value || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function safeUrl(value) {
+      const url = String(value || '').trim();
+      if (!url) {
+        return '';
+      }
+      if (/^(https?:|mailto:|#|\/)/i.test(url)) {
+        return url;
+      }
+      return '';
+    }
+
+    function safeImagePublishUrl(value) {
+      const url = String(value || '').trim();
+      if (!url) {
+        return '';
+      }
+      if (/^(https?:|\/)/i.test(url)) {
+        return url;
+      }
+      return '';
+    }
+
+    function slugify(value) {
+      return String(value || '')
+        .toLowerCase()
+        .trim()
+        .replace(/['"]/g, '')
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '')
+        .slice(0, 96) || 'untitled-article';
+    }
+
+    function dataUrlByteEstimate(value) {
+      const dataUrl = String(value || '');
+      const comma = dataUrl.indexOf(',');
+      if (comma === -1) {
+        return dataUrl.length;
+      }
+      return Math.round((dataUrl.length - comma - 1) * 0.75);
+    }
+
+    function localImageSourceMeta(source) {
+      if (!source) {
+        return { kind: 'missing' };
+      }
+      if (source.kind === 'local-data-url') {
+        return {
+          kind: 'local-data-url',
+          mime: source.mime || '',
+          byteEstimate: dataUrlByteEstimate(source.dataUrl),
+          dataUrlLength: String(source.dataUrl || '').length,
+          retainedInLocalDraft: true
+        };
+      }
+      if (source.kind === 'local-placeholder') {
+        return {
+          kind: 'local-placeholder',
+          fileName: source.fileName || '',
+          mime: source.mime || '',
+          byteEstimate: source.byteEstimate || 0,
+          dataUrlLength: source.dataUrlLength || 0,
+          tooLargeForLocalDraft: Boolean(source.tooLargeForLocalDraft)
+        };
+      }
+      if (source.kind === 'local-missing') {
+        return { kind: 'local-missing' };
+      }
+      return { kind: source.kind || 'unknown' };
+    }
+
+    function escapeMarkdownText(value) {
+      return String(value || '')
+        .replace(/\\/g, '\\\\')
+        .replace(/([*_`[\]])/g, '\\$1');
+    }
+
+    function escapeMarkdownAlt(value) {
+      return String(value || '')
+        .replace(/\\/g, '\\\\')
+        .replace(/]/g, '\\]')
+        .replace(/\n+/g, ' ')
+        .trim();
+    }
+
+    function escapeMarkdownTitle(value) {
+      return String(value || '')
+        .replace(/\\/g, '\\\\')
+        .replace(/"/g, '\\"')
+        .replace(/\n+/g, ' ')
+        .trim();
+    }
+
+    function escapeMarkdownUrl(value) {
+      return String(value || '')
+        .replace(/\s/g, '%20')
+        .replace(/\(/g, '%28')
+        .replace(/\)/g, '%29');
+    }
+
+    function issue(level, code, message, context = {}) {
+      return { level, code, message, ...context };
+    }
+
+    function sanitizeInlineHtml(html) {
+      const template = document.createElement('template');
+      template.innerHTML = String(html || '');
+
+      function cleanNode(node) {
+        if (node.nodeType === Node.TEXT_NODE) {
+          return document.createTextNode(node.textContent || '');
+        }
+        if (node.nodeType !== Node.ELEMENT_NODE) {
+          return document.createDocumentFragment();
+        }
+
+        const tag = node.tagName.toLowerCase();
+        const allowed = new Set(['b', 'strong', 'i', 'em', 'u', 'a', 'span', 'br', 'font']);
+        const outputChildren = () => {
+          const fragment = document.createDocumentFragment();
+          node.childNodes.forEach((child) => fragment.append(cleanNode(child)));
+          return fragment;
+        };
+
+        if (!allowed.has(tag)) {
+          return outputChildren();
+        }
+        if (tag === 'br') {
+          return document.createElement('br');
+        }
+
+        const cleanTag = tag === 'font' ? 'span' : tag;
+        const clean = document.createElement(cleanTag);
+        if (tag === 'a') {
+          const href = safeUrl(node.getAttribute('href'));
+          if (href) {
+            clean.setAttribute('href', href);
+          }
+        }
+        if (tag === 'font' && node.getAttribute('color')) {
+          clean.style.color = node.getAttribute('color');
+        }
+        if (tag === 'span') {
+          const style = node.style;
+          if (style.color) {
+            clean.style.color = style.color;
+          }
+          if (style.backgroundColor) {
+            clean.style.backgroundColor = style.backgroundColor;
+          }
+          if (style.fontWeight) {
+            clean.style.fontWeight = style.fontWeight;
+          }
+          if (style.fontStyle) {
+            clean.style.fontStyle = style.fontStyle;
+          }
+          if (style.textDecorationLine) {
+            clean.style.textDecoration = style.textDecorationLine;
+          }
+        }
+        node.childNodes.forEach((child) => clean.append(cleanNode(child)));
+        return clean;
+      }
+
+      const cleanTemplate = document.createElement('template');
+      template.content.childNodes.forEach((node) => cleanTemplate.content.append(cleanNode(node)));
+      return cleanTemplate.innerHTML.trim();
+    }
+
+    function insertTextIntoTextarea(textarea, value) {
+      const text = String(value || '').replace(/\s+/g, ' ').trim();
+      const start = textarea.selectionStart || 0;
+      const end = textarea.selectionEnd || start;
+      textarea.value = `${textarea.value.slice(0, start)}${text}${textarea.value.slice(end)}`;
+      const caret = start + text.length;
+      textarea.setSelectionRange(caret, caret);
+      autoResizeTextarea(textarea);
+      markChanged();
+    }
+
+    function plainTextFragment(text) {
+      const fragment = document.createDocumentFragment();
+      const paragraphs = String(text || '')
+        .replace(/\r/g, '')
+        .split(/\n{2,}/)
+        .map((paragraph) => paragraph.trim())
+        .filter(Boolean);
+
+      paragraphs.forEach((paragraph) => {
+        const p = document.createElement('p');
+        paragraph.split(/\n/).forEach((line, index) => {
+          if (index) {
+            p.append(document.createElement('br'));
+          }
+          p.append(document.createTextNode(line));
+        });
+        fragment.append(p);
+      });
+
+      return fragment;
+    }
+
+    function cleanPastedNode(node) {
+      if (node.nodeType === Node.TEXT_NODE) {
+        return plainTextFragment(node.textContent);
+      }
+      if (node.nodeType !== Node.ELEMENT_NODE) {
+        return document.createDocumentFragment();
+      }
+
+      const tag = node.tagName.toLowerCase();
+      if (tag === 'br') {
+        const p = document.createElement('p');
+        p.append(document.createElement('br'));
+        return p;
+      }
+      if (['p', 'div', 'section', 'article', 'main'].includes(tag)) {
+        const p = document.createElement('p');
+        p.innerHTML = sanitizeInlineHtml(node.innerHTML);
+        return p.textContent.trim() || p.querySelector('br') ? p : document.createDocumentFragment();
+      }
+      if (/^h[1-6]$/.test(tag)) {
+        const heading = document.createElement('h2');
+        heading.innerHTML = sanitizeInlineHtml(node.innerHTML);
+        return heading.textContent.trim() ? heading : document.createDocumentFragment();
+      }
+      if (tag === 'blockquote') {
+        const quote = document.createElement('blockquote');
+        quote.innerHTML = sanitizeInlineHtml(node.innerHTML);
+        return quote.textContent.trim() ? quote : document.createDocumentFragment();
+      }
+      if (tag === 'ul' || tag === 'ol') {
+        const list = document.createElement(tag);
+        Array.from(node.children).forEach((child) => {
+          if (child.tagName && child.tagName.toLowerCase() === 'li') {
+            const li = document.createElement('li');
+            li.innerHTML = sanitizeInlineHtml(child.innerHTML);
+            if (li.textContent.trim()) {
+              list.append(li);
+            }
+          }
+        });
+        return list.children.length ? list : document.createDocumentFragment();
+      }
+      if (tag === 'hr') {
+        return document.createElement('hr');
+      }
+      if (['b', 'strong', 'i', 'em', 'u', 'a', 'span', 'font'].includes(tag)) {
+        const p = document.createElement('p');
+        p.innerHTML = sanitizeInlineHtml(node.outerHTML);
+        return p.textContent.trim() ? p : document.createDocumentFragment();
+      }
+
+      const fragment = document.createDocumentFragment();
+      node.childNodes.forEach((child) => {
+        fragment.append(cleanPastedNode(child));
+      });
+      return fragment;
+    }
+
+    function htmlPasteFragment(html, fallbackText = '') {
+      const template = document.createElement('template');
+      template.innerHTML = String(html || '');
+      const fragment = document.createDocumentFragment();
+      template.content.childNodes.forEach((node) => {
+        fragment.append(cleanPastedNode(node));
+      });
+      if (!fragment.childNodes.length && fallbackText) {
+        return plainTextFragment(fallbackText);
+      }
+      return fragment;
+    }
+
+    function insertFragmentAtSavedRange(fragment) {
+      if (!fragment || !fragment.childNodes.length) {
+        return;
+      }
+      restoreSelection();
+      const selection = window.getSelection();
+      if (!selection || !selection.rangeCount) {
+        editor.append(fragment);
+      } else {
+        const range = selection.getRangeAt(0);
+        range.deleteContents();
+        const lastNode = fragment.lastChild;
+        range.insertNode(fragment);
+        if (lastNode) {
+          range.setStartAfter(lastNode);
+          range.collapse(true);
+          selection.removeAllRanges();
+          selection.addRange(range);
+        }
+      }
+      rememberSelection();
+      markChanged();
+      scheduleToolbarStateUpdate();
+    }
+
+    function pasteIsInline(html, text) {
+      if (html) {
+        const template = document.createElement('template');
+        template.innerHTML = html;
+        return !template.content.querySelector('p, div, section, article, main, h1, h2, h3, h4, h5, h6, blockquote, ul, ol, li, hr, table');
+      }
+      return Boolean(text && !/[\r\n]/.test(text));
+    }
+
+    function insertInlinePaste(html, text) {
+      const inlineHtml = html ? sanitizeInlineHtml(html) : escapeHtml(text);
+      if (!inlineHtml) {
+        return false;
+      }
+      ensureEditorSelection(true);
+      document.execCommand('insertHTML', false, inlineHtml);
+      rememberSelection();
+      markChanged();
+      scheduleToolbarStateUpdate();
+      return true;
+    }
+
+    function inlineMarkdownFromHtml(html, issues = [], context = {}) {
+      const template = document.createElement('template');
+      template.innerHTML = sanitizeInlineHtml(html);
+
+      function childrenToMarkdown(node) {
+        return Array.from(node.childNodes).map(nodeToMarkdown).join('');
+      }
+
+      function nodeToMarkdown(node) {
+        if (node.nodeType === Node.TEXT_NODE) {
+          return escapeMarkdownText(node.textContent || '');
+        }
+        if (node.nodeType !== Node.ELEMENT_NODE) {
+          return '';
+        }
+
+        const tag = node.tagName.toLowerCase();
+        const inner = childrenToMarkdown(node);
+        if (tag === 'br') {
+          return '\n';
+        }
+        if (tag === 'strong' || tag === 'b') {
+          return inner ? `**${inner}**` : '';
+        }
+        if (tag === 'em' || tag === 'i') {
+          return inner ? `_${inner}_` : '';
+        }
+        if (tag === 'u') {
+          return inner ? `<u>${inner}</u>` : '';
+        }
+        if (tag === 'a') {
+          const href = safeUrl(node.getAttribute('href'));
+          if (!href) {
+            issues.push(issue('warning', 'link-unsupported-url', 'A link has an unsupported URL and will be plain text.', context));
+            return inner;
+          }
+          return `[${inner || escapeMarkdownText(href)}](${escapeMarkdownUrl(href)})`;
+        }
+        if (tag === 'span') {
+          if (node.getAttribute('style')) {
+            issues.push(issue('warning', 'inline-style-dropped', 'Styled text cannot be represented in publish Markdown yet.', context));
+          }
+          return inner;
+        }
+        issues.push(issue('warning', 'inline-markup-dropped', `Inline <${tag}> markup is not supported for publishing yet.`, context));
+        return inner;
+      }
+
+      return childrenToMarkdown(template.content)
+        .replace(/[ \t]+\n/g, '\n')
+        .replace(/\n{3,}/g, '\n\n')
+        .trim();
+    }
+
+    function blockMarkdownLines(value) {
+      return String(value || '').split(/\n/);
+    }
+
+    function imageMarkdown(alt, src, caption = '') {
+      const altText = escapeMarkdownAlt(alt);
+      const url = escapeMarkdownUrl(src);
+      const title = escapeMarkdownTitle(caption);
+      return title ? `![${altText}](${url} "${title}")` : `![${altText}](${url})`;
+    }
+
+    function markdownBodyIsEmpty(blocks) {
+      return !blocks.some((block) => {
+        if (block.type === 'image' || block.type === 'divider') {
+          return true;
+        }
+        if (block.type === 'list') {
+          return block.items.some((item) => String(item.markdown || item.text || '').trim());
+        }
+        return String(block.markdown || block.text || '').trim();
+      });
+    }
+
+    function blockHasContent(block) {
+      if (!block) {
+        return false;
+      }
+      if (block.type === 'divider' || block.type === 'image') {
+        return true;
+      }
+      if (block.type === 'list') {
+        return block.items.some((item) => item.html.replace(/<br\s*\/?>/gi, '').trim());
+      }
+      return String(block.html || '').replace(/<br\s*\/?>/gi, '').trim().length > 0;
+    }
+
+    function serializeInlineBlock(element, type, extra = {}) {
+      const html = sanitizeInlineHtml(element.innerHTML);
+      const block = {
+        id: element.dataset.blockId || blockId(type),
+        type,
+        html,
+        text: element.textContent.trim(),
+        ...extra
+      };
+      const lineSpacing = getElementLineSpacing(element);
+      if (lineSpacing) {
+        block.lineSpacing = lineSpacing;
+      }
+      return block;
+    }
+
+    function serializeImageBlock(figure) {
+      const image = figure.querySelector('img');
+      const altInput = figure.querySelector('.figure-alt');
+      const caption = figure.querySelector('.figure-caption');
+      const src = figure.dataset.savedSrc || (image && image.getAttribute('src')) || '';
+      const fileName = (image && image.getAttribute('data-file-name')) || figure.dataset.localFileName || '';
+      const mime = (image && image.getAttribute('data-mime')) || figure.dataset.localMime || '';
+      let source = { kind: 'local-missing' };
+      if (src.startsWith('data:')) {
+        if (src.length > MAX_INLINE_IMAGE_DATA_URL_LENGTH) {
+          source = {
+            kind: 'local-placeholder',
+            fileName,
+            mime: mime || src.slice(5, src.indexOf(';')) || '',
+            byteEstimate: dataUrlByteEstimate(src),
+            dataUrlLength: src.length,
+            tooLargeForLocalDraft: true
+          };
+        } else {
+          source = {
+            kind: 'local-data-url',
+            mime: src.slice(5, src.indexOf(';')) || mime || '',
+            dataUrl: src
+          };
+        }
+      } else if (src && !src.startsWith('blob:')) {
+        source = { kind: 'url', url: src };
+      } else if (fileName) {
+        source = {
+          kind: 'local-placeholder',
+          fileName,
+          mime,
+          byteEstimate: Number(figure.dataset.localByteEstimate || 0),
+          dataUrlLength: Number(figure.dataset.localDataUrlLength || 0),
+          tooLargeForLocalDraft: figure.dataset.localTooLarge === 'true'
+        };
+      }
+      const status = source.kind === 'local-missing'
+        ? 'missing-local-preview'
+        : source.kind === 'url'
+          ? 'uploaded'
+          : source.tooLargeForLocalDraft
+            ? 'local-placeholder-too-large'
+            : 'local-only';
+
+      return {
+        id: figure.dataset.blockId || blockId('image'),
+        type: 'image',
+        source,
+        alt: (altInput && altInput.value) || (image && image.alt) || '',
+        caption: caption ? caption.textContent.trim() : '',
+        status
+      };
+    }
+
+    function serializeListBlock(list) {
+      return {
+        id: list.dataset.blockId || blockId('list'),
+        type: 'list',
+        ordered: list.tagName.toLowerCase() === 'ol',
+        checklist: list.classList.contains('editor-checklist'),
+        lineSpacing: getElementLineSpacing(list),
+        items: Array.from(list.children)
+          .filter((item) => item.tagName && item.tagName.toLowerCase() === 'li')
+          .map((item) => ({
+            id: item.dataset.blockId || blockId('item'),
+            html: sanitizeInlineHtml(item.innerHTML),
+            text: item.textContent.trim()
+          }))
+      };
+    }
+
+    function serializePlainText(value) {
+      return String(value || '')
+        .split(/\n+/)
+        .map((line) => line.trim())
+        .filter(Boolean)
+        .map((line) => ({
+          id: blockId('paragraph'),
+          type: 'paragraph',
+          html: escapeHtml(line),
+          text: line
+        }));
+    }
+
+    function serializeTextNode(node) {
+      return serializePlainText(node.textContent);
+    }
+
+    function canBufferAsInline(node) {
+      if (node.nodeType === Node.TEXT_NODE) {
+        return true;
+      }
+      if (node.nodeType !== Node.ELEMENT_NODE) {
+        return false;
+      }
+      return ['b', 'strong', 'i', 'em', 'u', 'a', 'span', 'font', 'br'].includes(node.tagName.toLowerCase());
+    }
+
+    function serializeInlineNodes(nodes) {
+      if (!nodes.length) {
+        return [];
+      }
+      const container = document.createElement('div');
+      nodes.forEach((node) => container.append(node.cloneNode(true)));
+      if (!container.textContent.trim()) {
+        return [];
+      }
+      const hasInlineMarkup = Array.from(container.childNodes).some((node) => {
+        return node.nodeType === Node.ELEMENT_NODE && node.tagName.toLowerCase() !== 'br';
+      });
+      if (!hasInlineMarkup) {
+        return serializePlainText(container.textContent.replace(/\r/g, '\n'));
+      }
+      return [{
+        id: blockId('paragraph'),
+        type: 'paragraph',
+        html: sanitizeInlineHtml(container.innerHTML).replace(/\n/g, '<br>'),
+        text: container.textContent.trim()
+      }];
+    }
+
+    function serializeBodyNode(node) {
+      if (node.nodeType === Node.TEXT_NODE) {
+        return serializeTextNode(node);
+      }
+      if (node.nodeType !== Node.ELEMENT_NODE) {
+        return [];
+      }
+
+      const tag = node.tagName.toLowerCase();
+      if (node.classList.contains('publisher-figure')) {
+        return [serializeImageBlock(node)];
+      }
+      if (node.classList.contains('unsupported-block')) {
+        return [{
+          id: node.dataset.blockId || blockId('unsupported'),
+          type: node.dataset.blockType || 'unsupported',
+          originalType: node.dataset.originalType || node.dataset.blockType || 'unknown',
+          raw: node.dataset.raw || '',
+          html: escapeHtml(node.textContent || 'Unsupported content preserved'),
+          text: node.textContent.trim()
+        }];
+      }
+      if (tag === 'p') {
+        return [serializeInlineBlock(node, 'paragraph')].filter(blockHasContent);
+      }
+      if (/^h[1-6]$/.test(tag)) {
+        return [serializeInlineBlock(node, 'heading', {
+          level: Number(tag.replace('h', ''))
+        })].filter(blockHasContent);
+      }
+      if (tag === 'blockquote') {
+        return [serializeInlineBlock(node, 'quote')].filter(blockHasContent);
+      }
+      if (tag === 'hr') {
+        return [{
+          id: node.dataset.blockId || blockId('divider'),
+          type: 'divider'
+        }];
+      }
+      if (tag === 'ul' || tag === 'ol') {
+        return [serializeListBlock(node)].filter(blockHasContent);
+      }
+      if (node.childNodes.length) {
+        return Array.from(node.childNodes).flatMap(serializeBodyNode);
+      }
+      return [];
+    }
+
+    function serializeBodyBlocks() {
+      const blocks = [];
+      let inlineBuffer = [];
+
+      Array.from(editor.childNodes).forEach((node) => {
+        if (canBufferAsInline(node)) {
+          inlineBuffer.push(node);
+          return;
+        }
+        blocks.push(...serializeInlineNodes(inlineBuffer));
+        inlineBuffer = [];
+        blocks.push(...serializeBodyNode(node));
+      });
+
+      blocks.push(...serializeInlineNodes(inlineBuffer));
+      return blocks.filter(blockHasContent);
+    }
+
+    function serializeArticle() {
+      return {
+        schema: ARTICLE_SCHEMA,
+        version: 2,
+        createdAt: draftCreatedAt,
+        updatedAt: new Date().toISOString(),
+        title: titleField.value.trim(),
+        subhead: subheadField.value.trim(),
+        metadata: {
+          docName: docName.value.trim(),
+          articleDate: articleDate.value.trim(),
+          publishDate: publishDate.value,
+          slug: publishSlug.value.trim(),
+          surface: publishSurface.value
+        },
+        body: {
+          blocks: serializeBodyBlocks()
+        }
+      };
+    }
+
+    function convertImageBlock(block, index, issues) {
+      const source = block.source || { kind: 'local-missing' };
+      const uploadedUrl = source.kind === 'url' ? safeImagePublishUrl(source.url) : '';
+      const imageId = block.id || blockId('image');
+      const requiresUpload = source.kind !== 'url';
+      const markdownSource = uploadedUrl || `otw-local-image:${imageId}`;
+      const image = {
+        id: imageId,
+        order: index,
+        alt: String(block.alt || '').trim(),
+        caption: String(block.caption || '').trim(),
+        requiresUpload,
+        status: block.status || (uploadedUrl ? 'uploaded' : 'local-only'),
+        media: {
+          url: uploadedUrl || '',
+          publishUrl: uploadedUrl || ''
+        },
+        localPreview: localImageSourceMeta(source)
+      };
+
+      if (source.kind === 'url' && !uploadedUrl) {
+        issues.push(issue('error', 'image-unsupported-url', 'An image has an unsupported publish URL.', { blockId: imageId }));
+      }
+      if (source.kind === 'local-missing') {
+        issues.push(issue('error', 'image-source-missing', 'An image is missing local preview or upload metadata.', { blockId: imageId }));
+      }
+      if (!image.alt) {
+        issues.push(issue('warning', 'image-missing-alt', 'An image is missing alt text.', { blockId: imageId }));
+      }
+      if (source.tooLargeForLocalDraft) {
+        issues.push(issue('warning', 'image-local-placeholder', 'A large local image was kept as upload metadata instead of being stored in the draft.', { blockId: imageId }));
+      }
+      if (requiresUpload) {
+        issues.push(issue('info', 'image-needs-upload', 'A local image will need upload before final publishing.', { blockId: imageId }));
+      }
+
+      return {
+        type: 'image',
+        id: imageId,
+        markdown: imageMarkdown(image.alt, markdownSource, image.caption),
+        alt: image.alt,
+        caption: image.caption,
+        imageRef: image.id,
+        requiresUpload
+      };
+    }
+
+    function convertBlockToPublish(block, index, issues) {
+      if (!block || !block.type) {
+        issues.push(issue('error', 'block-unknown', 'An unknown body block cannot be converted for publishing.', { blockIndex: index }));
+        return null;
+      }
+
+      if (block.type === 'paragraph') {
+        const markdown = inlineMarkdownFromHtml(block.html || escapeHtml(block.text || ''), issues, { blockId: block.id });
+        return {
+          id: block.id || blockId('paragraph'),
+          type: 'paragraph',
+          markdown,
+          text: block.text || '',
+          lineSpacing: block.lineSpacing || ''
+        };
+      }
+
+      if (block.type === 'heading') {
+        const level = Math.min(Math.max(Number(block.level) || 2, 2), 6);
+        const markdown = inlineMarkdownFromHtml(block.html || escapeHtml(block.text || ''), issues, { blockId: block.id });
+        return {
+          id: block.id || blockId('heading'),
+          type: 'heading',
+          level,
+          markdown: markdown ? `${'#'.repeat(level)} ${markdown}` : '',
+          text: block.text || '',
+          lineSpacing: block.lineSpacing || ''
+        };
+      }
+
+      if (block.type === 'quote') {
+        const markdown = inlineMarkdownFromHtml(block.html || escapeHtml(block.text || ''), issues, { blockId: block.id });
+        return {
+          id: block.id || blockId('quote'),
+          type: 'quote',
+          markdown: blockMarkdownLines(markdown).map((line) => `> ${line}`.trimEnd()).join('\n'),
+          text: block.text || '',
+          lineSpacing: block.lineSpacing || ''
+        };
+      }
+
+      if (block.type === 'list') {
+        const ordered = Boolean(block.ordered);
+        const checklist = Boolean(block.checklist);
+        const items = (block.items || []).map((item, itemIndex) => {
+          const markdown = inlineMarkdownFromHtml(item.html || escapeHtml(item.text || ''), issues, {
+            blockId: block.id,
+            itemId: item.id
+          });
+          const marker = checklist ? '- [ ] ' : ordered ? `${itemIndex + 1}. ` : '- ';
+          return {
+            id: item.id || blockId('item'),
+            markdown,
+            text: item.text || '',
+            line: `${marker}${markdown}`
+          };
+        }).filter((item) => item.markdown.trim());
+        return {
+          id: block.id || blockId('list'),
+          type: 'list',
+          ordered,
+          checklist,
+          items,
+          markdown: items.map((item) => item.line).join('\n'),
+          lineSpacing: block.lineSpacing || ''
+        };
+      }
+
+      if (block.type === 'divider') {
+        return {
+          id: block.id || blockId('divider'),
+          type: 'divider',
+          markdown: '---'
+        };
+      }
+
+      if (block.type === 'image') {
+        return convertImageBlock(block, index, issues);
+      }
+
+      issues.push(issue('error', 'block-unsupported', `Unsupported ${block.type} block found.`, { blockId: block.id, blockIndex: index }));
+      return {
+        id: block.id || blockId('unsupported'),
+        type: block.type,
+        markdown: ''
+      };
+    }
+
+    function convertBodyToPublish(blocks = []) {
+      const issues = [];
+      const images = [];
+      const convertedBlocks = blocks.map((block, index) => {
+        const converted = convertBlockToPublish(block, index, issues);
+        if (block && block.type === 'image') {
+          const source = block.source || { kind: 'local-missing' };
+          const uploadedUrl = source.kind === 'url' ? safeImagePublishUrl(source.url) : '';
+          images.push({
+            id: block.id || converted?.imageRef || blockId('image'),
+            order: index,
+            alt: String(block.alt || '').trim(),
+            caption: String(block.caption || '').trim(),
+            requiresUpload: source.kind !== 'url',
+            status: block.status || (uploadedUrl ? 'uploaded' : 'local-only'),
+            media: {
+              url: uploadedUrl || '',
+              publishUrl: uploadedUrl || ''
+            },
+            localPreview: localImageSourceMeta(source)
+          });
+        }
+        return converted;
+      }).filter(Boolean);
+
+      return {
+        blocks: convertedBlocks,
+        markdown: convertedBlocks
+          .map((block) => block.markdown)
+          .filter((markdown) => String(markdown || '').trim())
+          .join('\n\n')
+          .trim(),
+        images,
+        issues
+      };
+    }
+
+    function composeMarkdownDocument(article, bodyMarkdown) {
+      const lines = [
+        `# ${String(article.title || '').trim()}`,
+        `Date: ${article.metadata?.articleDate || article.metadata?.publishDate || ''}`,
+        ''
+      ];
+      if (article.subhead) {
+        lines.push(`_${escapeMarkdownText(article.subhead)}_`, '');
+      }
+      if (bodyMarkdown) {
+        lines.push(bodyMarkdown);
+      }
+      return `${lines.join('\n').replace(/\n{3,}/g, '\n\n').trim()}\n`;
+    }
+
+    function validatePublishPayload(payload, conversionIssues = []) {
+      const issues = [...conversionIssues];
+      if (!payload.title) {
+        issues.push(issue('error', 'title-required', 'Title required.'));
+      }
+      if (markdownBodyIsEmpty(payload.body.blocks)) {
+        issues.push(issue('error', 'body-required', 'Body should not be empty.'));
+      }
+
+      payload.images.forEach((image) => {
+        if (!image.localPreview || image.localPreview.kind === 'missing' || image.localPreview.kind === 'local-missing') {
+          issues.push(issue('error', 'image-metadata-missing', 'An image is missing usable metadata.', { imageId: image.id }));
+        }
+      });
+
+      const blocking = issues.filter((item) => item.level === 'error');
+      const warnings = issues.filter((item) => item.level === 'warning');
+      const readiness = readinessFromIssues(issues);
+      return {
+        canPublish: blocking.length === 0,
+        readiness,
+        issueCount: issues.length,
+        blockingCount: blocking.length,
+        warningCount: warnings.length,
+        issues
+      };
+    }
+
+    function readinessFromIssues(issues) {
+      if (issues.some((item) => item.code === 'title-required')) {
+        return 'Needs title';
+      }
+      if (issues.some((item) => item.code === 'body-required')) {
+        return 'Needs body';
+      }
+      if (issues.some((item) => item.level === 'error' || item.code === 'block-unsupported' || item.code === 'block-unknown')) {
+        return 'Unsupported content found';
+      }
+      if (issues.some((item) => item.code === 'image-missing-alt')) {
+        return 'Image missing alt text';
+      }
+      if (issues.some((item) => item.code === 'inline-style-dropped' || item.code === 'inline-markup-dropped')) {
+        return 'Unsupported content found';
+      }
+      return 'Ready to publish';
+    }
+
+    function buildPublishPayload(article = serializeArticle()) {
+      const body = convertBodyToPublish(article.body?.blocks || []);
+      const slugSource = article.metadata?.slug || article.title || article.metadata?.docName || '';
+      const payload = {
+        schema: PUBLISH_PAYLOAD_SCHEMA,
+        version: 1,
+        generatedAt: new Date().toISOString(),
+        title: article.title || '',
+        subhead: article.subhead || '',
+        slugCandidate: slugify(slugSource),
+        metadata: {
+          ...article.metadata,
+          createdAt: article.createdAt || draftCreatedAt,
+          updatedAt: article.updatedAt || new Date().toISOString(),
+          sourceSchema: article.schema,
+          sourceVersion: article.version
+        },
+        body: {
+          format: 'markdown',
+          markdown: body.markdown,
+          blocks: body.blocks
+        },
+        content: {
+          format: 'markdown',
+          bodyMarkdown: body.markdown,
+          markdown: ''
+        },
+        images: body.images
+      };
+
+      payload.content.markdown = composeMarkdownDocument(article, body.markdown);
+      payload.validation = validatePublishPayload(payload, body.issues);
+      return payload;
+    }
+
+    function articleIsEmpty(article) {
+      return !article.title &&
+        !article.subhead &&
+        !article.metadata.slug &&
+        article.body.blocks.length === 0;
+    }
+
+    function updateArticlePayload(article = serializeArticle()) {
+      articlePayload.textContent = JSON.stringify(article, null, 2);
+      window.otwPublisherArticle = article;
+      const payload = buildPublishPayload(article);
+      publishPayload.textContent = JSON.stringify(payload, null, 2);
+      window.otwPublisherPublishPayload = payload;
+      setReadinessLabel(payload.validation.readiness);
+      return article;
+    }
+
+    function readStoredDraft() {
+      const keys = [DRAFT_KEY, ...LEGACY_DRAFT_KEYS];
+      for (const key of keys) {
+        try {
+          const draft = JSON.parse(localStorage.getItem(key) || 'null');
+          if (draft) {
+            return { key, draft };
+          }
+        } catch (error) {
+          // Keep looking for a readable draft.
+        }
+      }
+      return null;
+    }
+
+    function renderInlineHtml(target, html) {
+      target.innerHTML = sanitizeInlineHtml(html);
+    }
+
+    function renderTextBlock(block) {
+      const element = document.createElement(block.type === 'heading' ? `h${block.level || 2}` : 'p');
+      if (block.type === 'quote') {
+        const quote = document.createElement('blockquote');
+        quote.dataset.blockId = block.id || blockId('quote');
+        renderInlineHtml(quote, block.html || escapeHtml(block.text || ''));
+        if (block.lineSpacing) {
+          applyLineSpacingClass(quote, block.lineSpacing);
+        }
+        return quote;
+      }
+      element.dataset.blockId = block.id || blockId(block.type);
+      renderInlineHtml(element, block.html || escapeHtml(block.text || ''));
+      if (block.lineSpacing) {
+        applyLineSpacingClass(element, block.lineSpacing);
+      }
+      return element;
+    }
+
+    function renderListBlock(block) {
+      const list = document.createElement(block.ordered ? 'ol' : 'ul');
+      list.dataset.blockId = block.id || blockId('list');
+      if (block.checklist) {
+        list.classList.add('editor-checklist');
+      }
+      if (block.lineSpacing) {
+        applyLineSpacingClass(list, block.lineSpacing);
+      }
+      block.items.forEach((item) => {
+        const li = document.createElement('li');
+        li.dataset.blockId = item.id || blockId('item');
+        renderInlineHtml(li, item.html || escapeHtml(item.text || ''));
+        list.append(li);
+      });
+      return list;
+    }
+
+    function createFigureElement({
+      id = blockId('image'),
+      src = '',
+      savedSrc = '',
+      alt = '',
+      caption = '',
+      fileName = '',
+      mime = '',
+      byteEstimate = 0,
+      dataUrlLength = 0,
+      tooLargeForLocalDraft = false
+    } = {}) {
+      const figure = document.createElement('figure');
+      figure.className = 'publisher-figure';
+      figure.contentEditable = 'false';
+      figure.dataset.blockId = id;
+      if (savedSrc) {
+        figure.dataset.savedSrc = savedSrc;
+      }
+      if (fileName) {
+        figure.dataset.localFileName = fileName;
+      }
+      if (mime) {
+        figure.dataset.localMime = mime;
+      }
+      if (byteEstimate) {
+        figure.dataset.localByteEstimate = String(byteEstimate);
+      }
+      if (dataUrlLength) {
+        figure.dataset.localDataUrlLength = String(dataUrlLength);
+      }
+      if (tooLargeForLocalDraft) {
+        figure.dataset.localTooLarge = 'true';
+      }
+
+      if (src) {
+        const image = document.createElement('img');
+        image.src = src;
+        image.alt = alt;
+        if (fileName) {
+          image.setAttribute('data-file-name', fileName);
+        }
+        if (mime) {
+          image.setAttribute('data-mime', mime);
+        }
+        figure.append(image);
+      } else {
+        const missing = document.createElement('div');
+        missing.className = 'image-missing';
+        missing.textContent = 'Local image placeholder';
+        figure.append(missing);
+      }
+
+      const figcaption = document.createElement('figcaption');
+      figcaption.className = 'figure-caption';
+      figcaption.contentEditable = 'true';
+      figcaption.dataset.placeholder = 'Add a caption';
+      figcaption.textContent = caption;
+
+      const meta = document.createElement('div');
+      meta.className = 'figure-meta';
+
+      const altInput = document.createElement('input');
+      altInput.className = 'figure-alt';
+      altInput.type = 'text';
+      altInput.placeholder = 'Alt text';
+      altInput.value = alt;
+      altInput.setAttribute('aria-label', 'Image alt text');
+
+      const actions = document.createElement('div');
+      actions.className = 'figure-actions';
+
+      const replace = document.createElement('button');
+      replace.className = 'figure-action';
+      replace.type = 'button';
+      replace.textContent = 'Replace';
+      replace.title = 'Replace image';
+
+      const remove = document.createElement('button');
+      remove.className = 'figure-action';
+      remove.type = 'button';
+      remove.textContent = 'Remove';
+      remove.title = 'Remove image';
+
+      actions.append(replace, remove);
+      meta.append(altInput, actions);
+      figure.append(figcaption, meta);
+      wireFigure(figure);
+      return figure;
+    }
+
+    function renderImageBlock(block) {
+      const source = block.source || {};
+      const src = source.dataUrl || source.url || '';
+      const figure = createFigureElement({
+        id: block.id,
+        src,
+        alt: block.alt || '',
+        caption: block.caption || '',
+        savedSrc: src,
+        fileName: source.fileName || '',
+        mime: source.mime || '',
+        byteEstimate: source.byteEstimate || 0,
+        dataUrlLength: source.dataUrlLength || 0,
+        tooLargeForLocalDraft: Boolean(source.tooLargeForLocalDraft)
+      });
+      if (!src) {
+        figure.dataset.localStatus = block.status || 'missing-local-preview';
+        if (source.tooLargeForLocalDraft) {
+          figure.dataset.localTooLarge = 'true';
+        }
+      }
+      return figure;
+    }
+
+    function renderBodyBlock(block) {
+      if (block.type === 'paragraph' || block.type === 'heading' || block.type === 'quote') {
+        return renderTextBlock(block);
+      }
+      if (block.type === 'list') {
+        return renderListBlock(block);
+      }
+      if (block.type === 'divider') {
+        const divider = document.createElement('hr');
+        divider.dataset.blockId = block.id || blockId('divider');
+        return divider;
+      }
+      if (block.type === 'image') {
+        return renderImageBlock(block);
+      }
+      const unsupported = document.createElement('div');
+      unsupported.className = 'unsupported-block';
+      unsupported.contentEditable = 'false';
+      unsupported.dataset.blockId = block.id || blockId('unsupported');
+      unsupported.dataset.blockType = block.type || 'unsupported';
+      unsupported.dataset.originalType = block.originalType || block.type || 'unknown';
+      unsupported.dataset.raw = JSON.stringify(block);
+      unsupported.textContent = `Unsupported ${block.type || 'content'} preserved`;
+      return unsupported;
+    }
+
+    function hydrateArticle(article) {
+      draftCreatedAt = article.createdAt || article.updatedAt || draftCreatedAt || new Date().toISOString();
+      docName.value = article.metadata?.docName || docName.value;
+      titleField.value = article.title || '';
+      subheadField.value = article.subhead || '';
+      articleDate.value = article.metadata?.articleDate || articleDate.value;
+      publishDate.value = article.metadata?.publishDate || publishDate.value;
+      publishSlug.value = article.metadata?.slug || '';
+      publishSurface.value = article.metadata?.surface || publishSurface.value;
+      editor.replaceChildren();
+      (article.body?.blocks || []).forEach((block) => {
+        const node = renderBodyBlock(block);
+        if (node) {
+          editor.append(node);
+        }
+      });
+      wireAllFigures();
+    }
+
+    function legacyDraftToArticle(draft) {
+      const originalHtml = editor.innerHTML;
+      editor.innerHTML = draft.bodyHtml || '';
+      wireAllFigures();
+      const article = {
+        schema: ARTICLE_SCHEMA,
+        version: 2,
+        createdAt: draft.createdAt || draft.updatedAt || new Date().toISOString(),
+        updatedAt: draft.updatedAt || new Date().toISOString(),
+        title: draft.title || '',
+        subhead: draft.subhead || '',
+        metadata: {
+          docName: draft.docName || '',
+          articleDate: draft.articleDate || '',
+          publishDate: draft.publishDate || '',
+          slug: draft.publishSlug || '',
+          surface: draft.publishSurface || 'Outside The World Article'
+        },
+        body: {
+          blocks: serializeBodyBlocks()
+        }
+      };
+      editor.innerHTML = originalHtml;
+      return article;
+    }
+
+    function saveDraft() {
+      if (isHydrating) {
+        return;
+      }
+      const article = serializeArticle();
+      try {
+        if (articleIsEmpty(article)) {
+          localStorage.removeItem(DRAFT_KEY);
+        } else {
+          localStorage.setItem(DRAFT_KEY, JSON.stringify({
+            version: 2,
+            article
+          }));
+        }
+        updateArticlePayload(article);
+        setSaveState('Saved locally');
+      } catch (error) {
+        updateArticlePayload(article);
+        setSaveState('Local storage limit', true);
+      }
+    }
+
+    function loadDraft() {
+      const stored = readStoredDraft();
+      if (!stored) {
+        updateArticlePayload();
+        setSaveState('Saved locally');
+        return;
+      }
+
+      isHydrating = true;
+      const draft = stored.draft;
+      const article = draft.version === 2 && draft.article
+        ? draft.article
+        : legacyDraftToArticle(draft);
+      hydrateArticle(article);
+      autoResizeTextarea(titleField);
+      autoResizeTextarea(subheadField);
+      isHydrating = false;
+      updateArticlePayload();
+      if (stored.key !== DRAFT_KEY) {
+        saveDraft();
+      } else {
+        setSaveState('Saved locally');
+      }
+    }
+
+    function importArticleFromHash() {
+      const prefix = '#article=';
+      if (!window.location.hash.startsWith(prefix)) {
+        return false;
+      }
+      try {
+        const article = JSON.parse(decodeURIComponent(window.location.hash.slice(prefix.length)));
+        if (!article || article.schema !== ARTICLE_SCHEMA) {
+          return false;
+        }
+        isHydrating = true;
+        hydrateArticle(article);
+        autoResizeTextarea(titleField);
+        autoResizeTextarea(subheadField);
+        isHydrating = false;
+        saveDraft();
+        window.history.replaceState(null, '', window.location.pathname);
+        setSaveState('Imported locally', true);
+        return true;
+      } catch (error) {
+        setSaveState('Could not import', true);
+        return false;
+      }
+    }
+
+    function setActiveEditable(target) {
+      activeEditable = target || editor;
+      document.querySelectorAll('.title-block, .subhead-block, .body-block').forEach((block) => {
+        block.classList.remove('is-active');
+      });
+      if (activeEditable === titleField) {
+        document.querySelector('.title-block').classList.add('is-active');
+      } else if (activeEditable === subheadField) {
+        document.querySelector('.subhead-block').classList.add('is-active');
+      } else {
+        bodyBlock.classList.add('is-active');
+      }
+      scheduleToolbarStateUpdate();
+    }
+
+    function commandTargetsBody(command) {
+      return bodyOnlyCommands.has(command);
+    }
+
+    function bodyIsActiveTarget() {
+      const focused = document.activeElement;
+      if (
+        focused === titleField ||
+        focused === subheadField ||
+        focused === docName ||
+        focused === articleDate ||
+        focused === publishDate ||
+        focused === publishSlug ||
+        focused === publishSurface
+      ) {
+        return false;
+      }
+      if (focused === editor || editor.contains(focused)) {
+        return true;
+      }
+      if (
+        activeEditable &&
+        activeEditable !== editor &&
+        !editor.contains(activeEditable)
+      ) {
+        return false;
+      }
+      return activeEditable === editor ||
+        editor.contains(activeEditable) ||
+        selectionIsInsideEditor();
+    }
+
+    function showBodyOnlyStatus() {
+      setSaveState('Body formatting only', true);
+      const focused = document.activeElement;
+      if (
+        activeEditable &&
+        activeEditable !== editor &&
+        !editor.contains(activeEditable) &&
+        typeof activeEditable.focus === 'function'
+      ) {
+        activeEditable.focus();
+      } else if (
+        focused &&
+        focused !== document.body &&
+        typeof focused.focus === 'function'
+      ) {
+        focused.focus();
+      }
+    }
+
+    function focusBodyEnd() {
+      setActiveEditable(editor);
+      editor.focus();
+      restoreSelection();
+    }
+
+    function editorIsVisiblyEmpty() {
+      return !editor.textContent.trim() && !editor.querySelector('img, hr');
+    }
+
+    function selectionIsAtEditorStart() {
+      const selection = window.getSelection();
+      if (!selection || !selection.rangeCount || !selectionIsInsideEditor()) {
+        return false;
+      }
+      const range = selection.getRangeAt(0);
+      const before = range.cloneRange();
+      before.selectNodeContents(editor);
+      before.setEnd(range.startContainer, range.startOffset);
+      return before.toString().length === 0;
+    }
+
+    function selectionIsInsideEditor() {
+      const selection = window.getSelection();
+      return Boolean(
+        selection &&
+        selection.rangeCount &&
+        editor.contains(selection.anchorNode)
+      );
+    }
+
+    function rememberSelection() {
+      const selection = window.getSelection();
+      if (!selection || !selection.rangeCount || !selectionIsInsideEditor()) {
+        return;
+      }
+      savedRange = selection.getRangeAt(0).cloneRange();
+    }
+
+    function restoreSelection() {
+      editor.focus();
+      const selection = window.getSelection();
+      if (!selection) {
+        return;
+      }
+      selection.removeAllRanges();
+      if (savedRange && editor.contains(savedRange.commonAncestorContainer)) {
+        selection.addRange(savedRange);
+        return;
+      }
+      const range = document.createRange();
+      range.selectNodeContents(editor);
+      range.collapse(false);
+      selection.addRange(range);
+      savedRange = range.cloneRange();
+    }
+
+    function selectedElement() {
+      const selection = window.getSelection();
+      if (!selection || !selection.rangeCount || !selectionIsInsideEditor()) {
+        return null;
+      }
+      const node = selection.anchorNode;
+      if (!node) {
+        return null;
+      }
+      if (node.nodeType === Node.ELEMENT_NODE) {
+        return node;
+      }
+      return node.parentElement;
+    }
+
+    function selectedBlock() {
+      const element = selectedElement();
+      if (!element || !editor.contains(element)) {
+        return null;
+      }
+      return element.closest('li, p, h2, blockquote') || editor;
+    }
+
+    function placeCaretInside(node) {
+      const range = document.createRange();
+      range.selectNodeContents(node);
+      range.collapse(false);
+      const selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+      savedRange = range.cloneRange();
+      editor.focus();
+    }
+
+    function insertNodeAtSavedRange(node) {
+      restoreSelection();
+      const selection = window.getSelection();
+      if (!selection || !selection.rangeCount) {
+        editor.append(node);
+      } else {
+        const range = selection.getRangeAt(0);
+        range.deleteContents();
+        range.insertNode(node);
+        range.setStartAfter(node);
+        range.collapse(true);
+        selection.removeAllRanges();
+        selection.addRange(range);
+      }
+      savedRange = window.getSelection().getRangeAt(0).cloneRange();
+      markChanged();
+    }
+
+    function ensureEditorSelection(force = false) {
+      if (force || !selectionIsInsideEditor()) {
+        restoreSelection();
+        return;
+      }
+      editor.focus();
+    }
+
+    function applyEditorCommand(command, value = null, options = {}) {
+      if (
+        (command === 'undo' || command === 'redo') &&
+        activeEditable &&
+        activeEditable !== editor &&
+        !editor.contains(activeEditable)
+      ) {
+        activeEditable.focus();
+        document.execCommand(command, false, null);
+        markChanged();
+        updateToolbarState();
+        return true;
+      }
+      if (commandTargetsBody(command) && !bodyIsActiveTarget()) {
+        showBodyOnlyStatus();
+        return false;
+      }
+      ensureEditorSelection(Boolean(options.forceRestore));
+      document.execCommand(command, false, value);
+      rememberSelection();
+      markChanged();
+      updateToolbarState();
+      return true;
+    }
+
+    function applyColor(command, value) {
+      if (!value) {
+        return;
+      }
+      applyEditorCommand(command, value, { forceRestore: true });
+    }
+
+    function createTrailingParagraph() {
+      const paragraph = document.createElement('p');
+      paragraph.append(document.createElement('br'));
+      return paragraph;
+    }
+
+    function insertFigure(file, range) {
+      if (!file || !String(file.type || '').startsWith('image/')) {
+        return;
+      }
+
+      if (range) {
+        savedRange = range.cloneRange();
+      }
+
+      const imageUrl = URL.createObjectURL(file);
+      imageObjectUrls.add(imageUrl);
+
+      const figure = document.createElement('figure');
+      figure.className = 'publisher-figure';
+      figure.contentEditable = 'false';
+      figure.dataset.blockId = blockId('image');
+      figure.dataset.objectUrl = imageUrl;
+
+      const image = document.createElement('img');
+      image.src = imageUrl;
+      image.alt = '';
+      image.setAttribute('data-file-name', file.name || '');
+      image.setAttribute('data-mime', file.type || '');
+
+      const caption = document.createElement('figcaption');
+      caption.className = 'figure-caption';
+      caption.contentEditable = 'true';
+      caption.dataset.placeholder = 'Add a caption';
+
+      const meta = document.createElement('div');
+      meta.className = 'figure-meta';
+
+      const alt = document.createElement('input');
+      alt.className = 'figure-alt';
+      alt.type = 'text';
+      alt.placeholder = 'Alt text';
+      alt.setAttribute('aria-label', 'Image alt text');
+
+      const actions = document.createElement('div');
+      actions.className = 'figure-actions';
+
+      const replace = document.createElement('button');
+      replace.className = 'figure-action';
+      replace.type = 'button';
+      replace.textContent = 'Replace';
+      replace.title = 'Replace image';
+
+      const remove = document.createElement('button');
+      remove.className = 'figure-action';
+      remove.type = 'button';
+      remove.textContent = 'Remove';
+      remove.title = 'Remove image';
+
+      actions.append(replace, remove);
+      meta.append(alt, actions);
+      figure.append(image, caption, meta);
+
+      persistFigureFile(figure, file);
+      wireFigure(figure);
+
+      insertNodeAtSavedRange(figure);
+      const paragraph = createTrailingParagraph();
+      figure.after(paragraph);
+      placeCaretInside(paragraph);
+    }
+
+    function replaceFigureImage(figure, file) {
+      if (!figure || !file || !String(file.type || '').startsWith('image/')) {
+        return;
+      }
+      revokeFigureUrl(figure);
+      const imageUrl = URL.createObjectURL(file);
+      imageObjectUrls.add(imageUrl);
+      figure.dataset.objectUrl = imageUrl;
+      let image = figure.querySelector('img');
+      if (!image) {
+        image = document.createElement('img');
+        figure.querySelector('.image-missing')?.replaceWith(image);
+      }
+      image.src = imageUrl;
+      image.alt = figure.querySelector('.figure-alt')?.value || '';
+      image.setAttribute('data-file-name', file.name || '');
+      image.setAttribute('data-mime', file.type || '');
+      persistFigureFile(figure, file);
+      markChanged();
+    }
+
+    function persistFigureFile(figure, file) {
+      if (!window.FileReader || !figure || !file) {
+        return;
+      }
+      const reader = new FileReader();
+      reader.addEventListener('load', () => {
+        const result = String(reader.result || '');
+        if (result.length > MAX_INLINE_IMAGE_DATA_URL_LENGTH) {
+          delete figure.dataset.savedSrc;
+          figure.dataset.localTooLarge = 'true';
+          figure.dataset.localByteEstimate = String(dataUrlByteEstimate(result));
+          figure.dataset.localDataUrlLength = String(result.length);
+          setSaveState('Image saved as placeholder', true);
+        } else {
+          figure.dataset.savedSrc = result;
+          delete figure.dataset.localTooLarge;
+          delete figure.dataset.localByteEstimate;
+          delete figure.dataset.localDataUrlLength;
+        }
+        markChanged();
+      });
+      reader.readAsDataURL(file);
+    }
+
+    function wireFigure(figure) {
+      if (!figure || figure.dataset.wired === 'true') {
+        return;
+      }
+      const image = figure.querySelector('img');
+      const caption = figure.querySelector('.figure-caption');
+      const alt = figure.querySelector('.figure-alt');
+      const replace = figure.querySelector('.figure-action:first-of-type');
+      const remove = figure.querySelector('.figure-action:last-of-type');
+
+      if (caption) {
+        caption.contentEditable = 'true';
+        caption.addEventListener('focus', () => setActiveEditable(caption));
+        caption.addEventListener('input', markChanged);
+      }
+
+      if (alt) {
+        alt.addEventListener('focus', () => setActiveEditable(alt));
+        alt.addEventListener('input', () => {
+          const currentImage = figure.querySelector('img');
+          if (currentImage) {
+            currentImage.alt = alt.value;
+          }
+          markChanged();
+        });
+      }
+
+      if (replace) {
+        replace.title = 'Replace image';
+        replace.addEventListener('click', () => {
+          activeFigure = figure;
+          localImageInput.click();
+        });
+      }
+
+      if (remove) {
+        remove.title = 'Remove image';
+        remove.addEventListener('click', () => {
+          revokeFigureUrl(figure);
+          const next = figure.nextSibling;
+          figure.remove();
+          if (next && next.nodeType === Node.ELEMENT_NODE) {
+            placeCaretInside(next);
+          } else {
+            focusBodyEnd();
+          }
+          markChanged();
+        });
+      }
+
+      figure.dataset.wired = 'true';
+    }
+
+    function wireAllFigures() {
+      editor.querySelectorAll('.publisher-figure').forEach(wireFigure);
+    }
+
+    function revokeFigureUrl(figure) {
+      const url = figure && figure.dataset.objectUrl;
+      if (!url) {
+        return;
+      }
+      URL.revokeObjectURL(url);
+      imageObjectUrls.delete(url);
+      delete figure.dataset.objectUrl;
+    }
+
+    function rangeFromPoint(x, y) {
+      if (document.caretRangeFromPoint) {
+        return document.caretRangeFromPoint(x, y);
+      }
+      if (document.caretPositionFromPoint) {
+        const position = document.caretPositionFromPoint(x, y);
+        if (!position) {
+          return null;
+        }
+        const range = document.createRange();
+        range.setStart(position.offsetNode, position.offset);
+        range.collapse(true);
+        return range;
+      }
+      return null;
+    }
+
+    function commandButton(command) {
+      return toolbar.querySelector(`[data-command="${command}"]`);
+    }
+
+    function setButtonPressed(button, active) {
+      if (!button) {
+        return;
+      }
+      button.classList.toggle('is-active', Boolean(active));
+      if (button.hasAttribute('aria-pressed')) {
+        button.setAttribute('aria-pressed', String(Boolean(active)));
+      }
+    }
+
+    function setButtonDisabled(button, disabled) {
+      if (!button) {
+        return;
+      }
+      button.disabled = Boolean(disabled);
+      button.setAttribute('aria-disabled', String(Boolean(disabled)));
+    }
+
+    function queryCommandState(command) {
+      try {
+        return Boolean(document.queryCommandState(command));
+      } catch (error) {
+        return false;
+      }
+    }
+
+    function queryCommandEnabled(command) {
+      try {
+        return Boolean(document.queryCommandEnabled(command));
+      } catch (error) {
+        return true;
+      }
+    }
+
+    function selectedList() {
+      const element = selectedElement();
+      return element && editor.contains(element)
+        ? element.closest('ul, ol')
+        : null;
+    }
+
+    function selectedLineSpacingTarget() {
+      const element = selectedElement();
+      if (!element || !editor.contains(element)) {
+        return null;
+      }
+      return element.closest('ul, ol, p, h2, blockquote') || editor;
+    }
+
+    function selectedAlignmentTarget() {
+      const element = selectedElement();
+      if (!element || !editor.contains(element)) {
+        return null;
+      }
+      return element.closest('li, p, h2, blockquote') || editor;
+    }
+
+    function normalizeAlignment(value) {
+      const alignment = String(value || '').toLowerCase();
+      if (alignment === 'center') {
+        return 'center';
+      }
+      if (alignment === 'right' || alignment === 'end') {
+        return 'right';
+      }
+      return 'left';
+    }
+
+    function getCurrentAlignment() {
+      const target = selectedAlignmentTarget();
+      if (!target) {
+        return 'left';
+      }
+      return normalizeAlignment(window.getComputedStyle(target).textAlign);
+    }
+
+    function getElementLineSpacing(element) {
+      if (!element) {
+        return '';
+      }
+      return lineSpacingValues.find((value) => {
+        return element.classList.contains(lineSpacingClasses[value]);
+      }) || '';
+    }
+
+    function getCurrentLineSpacing() {
+      const target = selectedLineSpacingTarget();
+      if (!target) {
+        return '1.5';
+      }
+      return getElementLineSpacing(target) || '1.5';
+    }
+
+    function applyLineSpacingClass(element, value) {
+      if (!element || !lineSpacingClasses[value]) {
+        return;
+      }
+      Object.values(lineSpacingClasses).forEach((className) => {
+        element.classList.remove(className);
+      });
+      element.classList.add(lineSpacingClasses[value]);
+    }
+
+    function applyLineSpacing(value) {
+      if (!lineSpacingClasses[value]) {
+        return;
+      }
+      restoreSelection();
+      const target = selectedLineSpacingTarget() || editor;
+      applyLineSpacingClass(target, value);
+      updateLineSpacingState(value);
+      setSaveState(`Line spacing ${value}`, true);
+      rememberSelection();
+      markChanged();
+    }
+
+    function updateLineSpacingState(value = getCurrentLineSpacing()) {
+      lineSpacingValue.textContent = value;
+      lineSpacingBtn.dataset.tooltip = `Line spacing ${value}`;
+      lineSpacingBtn.title = `Line spacing ${value}`;
+      lineSpacingPopover.querySelectorAll('.spacing-option').forEach((option) => {
+        option.setAttribute('aria-pressed', String(option.dataset.spacing === value));
+      });
+    }
+
+    function activeInlineElement(selector) {
+      const element = selectedElement();
+      return element && editor.contains(element)
+        ? element.closest(selector)
+        : null;
+    }
+
+    function rgbToHex(value) {
+      const color = String(value || '').trim();
+      if (/^#[0-9a-f]{6}$/i.test(color)) {
+        return color.toLowerCase();
+      }
+      const match = color.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?/i);
+      if (!match) {
+        return '';
+      }
+      if (match[4] !== undefined && Number(match[4]) === 0) {
+        return '';
+      }
+      return `#${[1, 2, 3].map((index) => {
+        return Number(match[index]).toString(16).padStart(2, '0');
+      }).join('')}`;
+    }
+
+    function updateColorSwatch(command, color) {
+      const hex = rgbToHex(color);
+      if (!hex) {
+        return;
+      }
+      if (command === 'foreColor') {
+        textColorBtn.style.setProperty('--tool-color', hex);
+      }
+      if (command === 'hiliteColor') {
+        highlightBtn.style.setProperty('--highlight-color', hex);
+      }
+    }
+
+    function updateColorPopoverSwatches(color) {
+      const hex = rgbToHex(color);
+      colorPopover.querySelectorAll('.color-swatch-btn').forEach((button) => {
+        button.setAttribute('aria-pressed', String(Boolean(hex) && button.dataset.color.toLowerCase() === hex));
+      });
+      if (hex) {
+        customColorInput.value = hex;
+      }
+    }
+
+    function positionPopover(popover, anchor) {
+      const anchorRect = anchor.getBoundingClientRect();
+      const margin = 10;
+      popover.hidden = false;
+      const popoverRect = popover.getBoundingClientRect();
+      const left = Math.min(
+        Math.max(margin, anchorRect.left + (anchorRect.width / 2) - (popoverRect.width / 2)),
+        window.innerWidth - popoverRect.width - margin
+      );
+      const top = Math.min(
+        anchorRect.bottom + 8,
+        window.innerHeight - popoverRect.height - margin
+      );
+      popover.style.left = `${left}px`;
+      popover.style.top = `${Math.max(margin, top)}px`;
+    }
+
+    function closeToolbarPopover() {
+      if (!activePopover) {
+        return;
+      }
+      activePopover.hidden = true;
+      activePopover = null;
+      activeColorCommand = '';
+      activeColorButton = null;
+      lineSpacingBtn.setAttribute('aria-expanded', 'false');
+      textColorBtn.setAttribute('aria-expanded', 'false');
+      highlightBtn.setAttribute('aria-expanded', 'false');
+    }
+
+    function openToolbarPopover(popover, anchor) {
+      if (activePopover && activePopover !== popover) {
+        closeToolbarPopover();
+      }
+      activePopover = popover;
+      ignoreNextSelectionClose = true;
+      window.setTimeout(() => {
+        ignoreNextSelectionClose = false;
+      }, 120);
+      positionPopover(popover, anchor);
+    }
+
+    function openColorPopover(command, anchor) {
+      activeColorCommand = command;
+      activeColorButton = anchor;
+      colorPopoverTitle.textContent = command === 'foreColor' ? 'Text Color' : 'Highlight';
+      const element = selectedElement();
+      const style = element ? window.getComputedStyle(element) : null;
+      const currentColor = command === 'foreColor'
+        ? rgbToHex(style?.color) || '#244f9e'
+        : rgbToHex(style?.backgroundColor) || '#fff2a8';
+      customColorInput.value = currentColor === '#000000' && command === 'hiliteColor'
+        ? '#fff2a8'
+        : currentColor;
+      updateColorPopoverSwatches(customColorInput.value);
+      anchor.setAttribute('aria-expanded', 'true');
+      openToolbarPopover(colorPopover, anchor);
+    }
+
+    function applyPopoverColor(color, shouldClose = true) {
+      if (!activeColorCommand || !color) {
+        return;
+      }
+      updateColorSwatch(activeColorCommand, color);
+      applyColor(activeColorCommand, color);
+      updateColorPopoverSwatches(color);
+      if (shouldClose) {
+        closeToolbarPopover();
+      }
+    }
+
+    function updateToolbarState() {
+      const bodyActive = bodyIsActiveTarget();
+      const element = selectedElement();
+      const list = bodyActive ? selectedList() : null;
+      const alignment = bodyActive ? getCurrentAlignment() : '';
+      const link = bodyActive ? activeInlineElement('a') : null;
+
+      setButtonDisabled(commandButton('undo'), !queryCommandEnabled('undo'));
+      setButtonDisabled(commandButton('redo'), !queryCommandEnabled('redo'));
+      setButtonPressed(commandButton('bold'), bodyActive && (queryCommandState('bold') || Boolean(activeInlineElement('b, strong'))));
+      setButtonPressed(commandButton('italic'), bodyActive && (queryCommandState('italic') || Boolean(activeInlineElement('i, em'))));
+      setButtonPressed(commandButton('underline'), bodyActive && (queryCommandState('underline') || Boolean(activeInlineElement('u'))));
+      setButtonPressed(commandButton('insertUnorderedList'), bodyActive && Boolean(list && list.tagName.toLowerCase() === 'ul' && !list.classList.contains('editor-checklist')));
+      setButtonPressed(commandButton('insertOrderedList'), bodyActive && Boolean(list && list.tagName.toLowerCase() === 'ol'));
+      setButtonPressed(checklistBtn, bodyActive && Boolean(list && list.classList.contains('editor-checklist')));
+      setButtonPressed(commandButton('justifyLeft'), bodyActive && alignment === 'left');
+      setButtonPressed(commandButton('justifyCenter'), bodyActive && alignment === 'center');
+      setButtonPressed(commandButton('justifyRight'), bodyActive && alignment === 'right');
+      setButtonPressed(linkBtn, Boolean(link));
+
+      if (bodyActive) {
+        updateLineSpacingState();
+        const block = selectedBlock();
+        const tag = block && block.tagName ? block.tagName.toLowerCase() : 'p';
+        formatSelect.value = tag === 'blockquote' ? 'blockquote' : tag === 'h2' ? 'h2' : 'p';
+        if (element) {
+          const style = window.getComputedStyle(element);
+          updateColorSwatch('foreColor', style.color);
+          updateColorSwatch('hiliteColor', style.backgroundColor);
+        }
+      } else {
+        updateLineSpacingState('1.5');
+        formatSelect.value = 'p';
+      }
+    }
+
+    function scheduleToolbarStateUpdate() {
+      window.requestAnimationFrame(updateToolbarState);
+    }
+
+    titleField.addEventListener('focus', () => setActiveEditable(titleField));
+    subheadField.addEventListener('focus', () => setActiveEditable(subheadField));
+    editor.addEventListener('focus', () => setActiveEditable(editor));
+    document.addEventListener('focusin', (event) => {
+      if (event.target === titleField) {
+        setActiveEditable(titleField);
+      } else if (event.target === subheadField) {
+        setActiveEditable(subheadField);
+      } else if (event.target === editor || editor.contains(event.target)) {
+        setActiveEditable(event.target);
+      }
+    });
+    toolbar.addEventListener('pointerdown', (event) => {
+      const focused = document.activeElement;
+      if (focused === titleField || focused === subheadField) {
+        setActiveEditable(focused);
+      } else if (focused === editor || editor.contains(focused)) {
+        setActiveEditable(focused);
+        rememberSelection();
+      }
+      if (event.target.closest('button')) {
+        event.preventDefault();
+      }
+    });
+    editor.addEventListener('click', () => {
+      setActiveEditable(editor);
+      rememberSelection();
+    });
+
+    bodyBlock.addEventListener('click', (event) => {
+      if (event.target === bodyBlock) {
+        focusBodyEnd();
+      }
+    });
+
+    titleField.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || (event.key === 'Tab' && !event.shiftKey)) {
+        event.preventDefault();
+        subheadField.focus();
+        subheadField.setSelectionRange(subheadField.value.length, subheadField.value.length);
+      }
+    });
+
+    titleField.addEventListener('paste', (event) => {
+      event.preventDefault();
+      insertTextIntoTextarea(titleField, event.clipboardData.getData('text/plain'));
+    });
+
+    subheadField.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || (event.key === 'Tab' && !event.shiftKey)) {
+        event.preventDefault();
+        focusBodyEnd();
+      } else if (event.key === 'Tab' && event.shiftKey) {
+        event.preventDefault();
+        titleField.focus();
+        titleField.setSelectionRange(titleField.value.length, titleField.value.length);
+      }
+    });
+
+    subheadField.addEventListener('paste', (event) => {
+      event.preventDefault();
+      insertTextIntoTextarea(subheadField, event.clipboardData.getData('text/plain'));
+    });
+
+    editor.addEventListener('keydown', (event) => {
+      if (event.key !== 'Tab') {
+        return;
+      }
+      event.preventDefault();
+      if (event.shiftKey && (editorIsVisiblyEmpty() || selectionIsAtEditorStart())) {
+        subheadField.focus();
+        subheadField.setSelectionRange(subheadField.value.length, subheadField.value.length);
+        return;
+      }
+      applyEditorCommand(event.shiftKey ? 'outdent' : 'indent');
+    });
+
+    document.addEventListener('selectionchange', () => {
+      rememberSelection();
+      if (selectionIsInsideEditor()) {
+        setActiveEditable(editor);
+      }
+      const focused = document.activeElement;
+      if (
+        activePopover &&
+        !ignoreNextSelectionClose &&
+        !activePopover.contains(focused) &&
+        !toolbar.contains(focused)
+      ) {
+        closeToolbarPopover();
+      }
+      scheduleToolbarStateUpdate();
+    });
+
+    document.addEventListener('input', (event) => {
+      if (
+        event.target.matches('input, textarea, select') ||
+        event.target.isContentEditable
+      ) {
+        if (event.target === titleField || event.target === subheadField) {
+          autoResizeTextarea(event.target);
+        }
+        markChanged();
+        scheduleToolbarStateUpdate();
+      }
+    });
+
+    document.addEventListener('keyup', scheduleToolbarStateUpdate);
+    editor.addEventListener('mouseup', scheduleToolbarStateUpdate);
+
+    document.querySelectorAll('[data-command]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const applied = applyEditorCommand(button.dataset.command);
+        if (applied) {
+          scheduleToolbarStateUpdate();
+        }
+      });
+    });
+
+    formatSelect.addEventListener('change', () => {
+      applyEditorCommand('formatBlock', formatSelect.value);
+    });
+
+    textColorBtn.addEventListener('click', () => {
+      if (!bodyIsActiveTarget()) {
+        showBodyOnlyStatus();
+        return;
+      }
+      rememberSelection();
+      openColorPopover('foreColor', textColorBtn);
+    });
+
+    highlightBtn.addEventListener('click', () => {
+      if (!bodyIsActiveTarget()) {
+        showBodyOnlyStatus();
+        return;
+      }
+      rememberSelection();
+      openColorPopover('hiliteColor', highlightBtn);
+    });
+
+    colorPopover.querySelectorAll('.color-swatch-btn').forEach((button) => {
+      button.addEventListener('click', () => {
+        applyPopoverColor(button.dataset.color);
+      });
+    });
+
+    customColorInput.addEventListener('input', () => {
+      applyPopoverColor(customColorInput.value, false);
+    });
+
+    customColorInput.addEventListener('change', () => {
+      applyPopoverColor(customColorInput.value);
+    });
+
+    linkBtn.addEventListener('click', () => {
+      if (!bodyIsActiveTarget()) {
+        showBodyOnlyStatus();
+        return;
+      }
+      restoreSelection();
+      const url = window.prompt('Link URL');
+      if (!url) {
+        return;
+      }
+      document.execCommand('createLink', false, url);
+      rememberSelection();
+      markChanged();
+    });
+
+    lineSpacingBtn.addEventListener('click', () => {
+      if (!bodyIsActiveTarget()) {
+        showBodyOnlyStatus();
+        return;
+      }
+      rememberSelection();
+      updateLineSpacingState();
+      lineSpacingBtn.setAttribute('aria-expanded', 'true');
+      openToolbarPopover(lineSpacingPopover, lineSpacingBtn);
+    });
+
+    lineSpacingPopover.querySelectorAll('.spacing-option').forEach((button) => {
+      button.addEventListener('click', () => {
+        applyLineSpacing(button.dataset.spacing);
+        closeToolbarPopover();
+      });
+    });
+
+    checklistBtn.addEventListener('click', () => {
+      if (!bodyIsActiveTarget()) {
+        showBodyOnlyStatus();
+        return;
+      }
+      restoreSelection();
+      document.execCommand('insertUnorderedList', false, null);
+      const element = selectedElement();
+      const list = element && element.closest('ul');
+      if (list && editor.contains(list)) {
+        list.classList.add('editor-checklist');
+      }
+      rememberSelection();
+      markChanged();
+    });
+
+    saveDraftBtn.addEventListener('click', () => {
+      saveDraft();
+      setSaveState('Saved locally', true);
+    });
+
+    publishBtn.addEventListener('click', () => {
+      const article = updateArticlePayload();
+      const payload = buildPublishPayload(article);
+      publishPayload.textContent = JSON.stringify(payload, null, 2);
+      window.otwPublisherPublishPayload = payload;
+      setSaveState(payload.validation.canPublish ? 'Ready locally' : payload.validation.readiness, true);
+    });
+
+    insertImageBtn.addEventListener('click', () => {
+      rememberSelection();
+      activeFigure = null;
+      localImageInput.click();
+    });
+
+    dividerBtn.addEventListener('click', () => {
+      const divider = document.createElement('hr');
+      insertNodeAtSavedRange(divider);
+      const paragraph = createTrailingParagraph();
+      divider.after(paragraph);
+      placeCaretInside(paragraph);
+    });
+
+    localImageInput.addEventListener('change', () => {
+      const file = localImageInput.files && localImageInput.files[0];
+      if (activeFigure) {
+        replaceFigureImage(activeFigure, file);
+        activeFigure = null;
+      } else {
+        insertFigure(file);
+      }
+      localImageInput.value = '';
+    });
+
+    editor.addEventListener('dragover', (event) => {
+      const hasImage = Array.from(event.dataTransfer.items || []).some((item) => {
+        return item.kind === 'file' && String(item.type || '').startsWith('image/');
+      });
+      if (!hasImage) {
+        return;
+      }
+      event.preventDefault();
+    });
+
+    editor.addEventListener('drop', (event) => {
+      const file = Array.from(event.dataTransfer.files || []).find((item) => {
+        return String(item.type || '').startsWith('image/');
+      });
+      if (!file) {
+        return;
+      }
+      event.preventDefault();
+      const range = rangeFromPoint(event.clientX, event.clientY);
+      if (range && editor.contains(range.commonAncestorContainer)) {
+        insertFigure(file, range);
+      } else {
+        insertFigure(file);
+      }
+    });
+
+    editor.addEventListener('paste', (event) => {
+      const file = Array.from(event.clipboardData.files || []).find((item) => {
+        return String(item.type || '').startsWith('image/');
+      });
+      if (file) {
+        event.preventDefault();
+        insertFigure(file);
+        return;
+      }
+
+      const html = event.clipboardData.getData('text/html');
+      const text = event.clipboardData.getData('text/plain');
+      if (!html && !text) {
+        return;
+      }
+
+      event.preventDefault();
+      if (pasteIsInline(html, text) && insertInlinePaste(html, text)) {
+        return;
+      }
+      const fragment = html ? htmlPasteFragment(html, text) : plainTextFragment(text);
+      insertFragmentAtSavedRange(fragment);
+    });
+
+    settingsToggle.addEventListener('click', () => {
+      const isOpen = settingsSheet.classList.toggle('is-open');
+      settingsToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    document.addEventListener('click', (event) => {
+      if (
+        settingsSheet.classList.contains('is-open') &&
+        !settingsSheet.contains(event.target) &&
+        !settingsToggle.contains(event.target)
+      ) {
+        settingsSheet.classList.remove('is-open');
+        settingsToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    document.addEventListener('pointerdown', (event) => {
+      if (
+        activePopover &&
+        !activePopover.contains(event.target) &&
+        !lineSpacingBtn.contains(event.target) &&
+        !textColorBtn.contains(event.target) &&
+        !highlightBtn.contains(event.target)
+      ) {
+        closeToolbarPopover();
+      }
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        closeToolbarPopover();
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      if (activePopover) {
+        const anchor = activePopover === lineSpacingPopover
+          ? lineSpacingBtn
+          : activeColorButton || textColorBtn;
+        positionPopover(activePopover, anchor);
+      }
+    });
+
+    window.addEventListener('beforeunload', () => {
+      imageObjectUrls.forEach((url) => URL.revokeObjectURL(url));
+      imageObjectUrls.clear();
+    });
+
+    document.querySelectorAll('button, input, select, textarea').forEach((control) => {
+      if (control.title || control.hidden || control.classList.contains('color-input')) {
+        return;
+      }
+      const name =
+        control.getAttribute('aria-label') ||
+        control.textContent.trim() ||
+        control.placeholder ||
+        control.value;
+      if (name) {
+        control.title = name;
+      }
+    });
+
+    document.execCommand('defaultParagraphSeparator', false, 'p');
+    if (!importArticleFromHash()) {
+      loadDraft();
+    }
+    updateToolbarState();
+    window.otwPublisher = {
+      draftKey: DRAFT_KEY,
+      serializeArticle,
+      buildPublishPayload,
+      validatePublishPayload,
+      saveDraft,
+      loadDraft,
+      getArticlePayload() {
+        return JSON.parse(articlePayload.textContent || 'null');
+      },
+      getPublishPayload() {
+        return JSON.parse(publishPayload.textContent || 'null');
+      },
+      hydrateArticleForTest(article) {
+        isHydrating = true;
+        hydrateArticle(article);
+        autoResizeTextarea(titleField);
+        autoResizeTextarea(subheadField);
+        isHydrating = false;
+        return updateArticlePayload();
+      }
+    };
+    autoResizeTextarea(titleField);
+    autoResizeTextarea(subheadField);
+  </script>
+</body>
+</html>
