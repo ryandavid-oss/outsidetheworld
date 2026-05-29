@@ -60,9 +60,32 @@ def excerpt(value, limit=180):
 def smartypants_safe(value):
     return html.escape(value or '', quote=True)
 
+IMAGE_MARKDOWN_PATTERN = re.compile(r'!\[([^\]]*)\]\((\S+?)(?:\s+"((?:\\"|[^"])*)")?\)')
+
+def markdown_unescape(value):
+    return (value or '').replace('\\"', '"').replace('\\[', '[').replace('\\]', ']').replace('\\\\', '\\')
+
+def render_markdown_image(match, as_block=False):
+    alt = markdown_unescape(html.unescape(match.group(1) or ''))
+    src = html.unescape(match.group(2) or '')
+    caption = markdown_unescape(html.unescape(match.group(3) or '')).strip()
+    safe_src = html.escape(src, quote=True)
+    safe_alt = html.escape(alt, quote=True)
+    title_attr = f' title="{html.escape(caption, quote=True)}"' if caption else ''
+    image_html = f'<img src="{safe_src}" alt="{safe_alt}"{title_attr}>'
+    if as_block and caption:
+        safe_caption = html.escape(caption, quote=False)
+        return f'<figure class="otw-figure"><img src="{safe_src}" alt="{safe_alt}"><figcaption><em>{safe_caption}</em></figcaption></figure>'
+    return image_html
+
+def is_trusted_figure_block(value):
+    raw = (value or '').strip()
+    lowered = raw.lower()
+    return lowered.startswith('<figure') and lowered.endswith('</figure>') and '<script' not in lowered
+
 def inline_markdown(value):
     value = html.escape(value or '', quote=False)
-    value = re.sub(r'!\[([^\]]*)\]\(([^)]+)\)', lambda m: f'<img src="{html.escape(m.group(2), quote=True)}" alt="{html.escape(m.group(1), quote=True)}">', value)
+    value = IMAGE_MARKDOWN_PATTERN.sub(lambda m: render_markdown_image(m), value)
     value = re.sub(r'\[([^\]]+)\]\(([^)]+)\)', lambda m: f'<a href="{html.escape(m.group(2), quote=True)}">{m.group(1)}</a>', value)
     value = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', value)
     value = re.sub(r'`([^`]+)`', r'<code>\1</code>', value)
@@ -81,6 +104,14 @@ def markdown_to_html(markdown):
             continue
         if raw.startswith('<div class="otw-center">') and raw.endswith('</div>'):
             html_blocks.append(raw)
+            continue
+        if is_trusted_figure_block(raw):
+            html_blocks.append(raw)
+            continue
+
+        image_match = IMAGE_MARKDOWN_PATTERN.fullmatch(raw)
+        if image_match:
+            html_blocks.append(render_markdown_image(image_match, as_block=True))
             continue
 
         lines = raw.splitlines()
@@ -353,6 +384,26 @@ def render_share_page(post):
             margin: 40px auto;
             border: 1px solid rgba(255, 255, 255, 0.08);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }}
+
+        .entry-body figure,
+        .entry-body .otw-figure {{
+            margin: 40px auto;
+            max-width: min(100%, 720px);
+        }}
+
+        .entry-body figure img,
+        .entry-body .otw-figure img {{
+            margin: 0 auto;
+        }}
+
+        .entry-body figure figcaption,
+        .entry-body .otw-figure figcaption {{
+            margin-top: 12px;
+            color: var(--muted);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            text-align: center;
         }}
 
         .entry-body hr {{

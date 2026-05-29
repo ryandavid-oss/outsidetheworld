@@ -512,13 +512,15 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
-        .md-render figure {
+        .md-render figure,
+        .md-render .otw-figure {
             margin: 30px auto;
             max-width: 100%;
         }
 
-        .md-render figure img {
-            margin-bottom: 12px;
+        .md-render figure img,
+        .md-render .otw-figure img {
+            margin: 0 auto 12px;
         }
 
         .md-render figcaption,
@@ -3550,6 +3552,7 @@
 
     <script src="./narrative_data.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="./otw_markdown.js"></script>
 
     <script>
         const typeTarget = document.getElementById('typing-text');
@@ -3567,7 +3570,9 @@
             const markdown = String(body || '');
             let html = '';
             // current_narrative is trusted local build output; sanitize here if it ever becomes user-generated.
-            if (window.marked && typeof window.marked.parse === 'function') {
+            if (window.renderOtwMarkdown) {
+                html = window.renderOtwMarkdown(markdown);
+            } else if (window.marked && typeof window.marked.parse === 'function') {
                 html = window.marked.parse(markdown);
             } else {
                 html = markdown

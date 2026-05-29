@@ -16,6 +16,8 @@
   </title>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js">
   </script>
+  <script src="otw_markdown.js">
+  </script>
   <style>
    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;900&family=Fira+Code:wght@500;700&family=Merriweather:ital,wght@0,300;0,700;1,300&display=swap');
 
@@ -74,13 +76,42 @@
         .post-date { font-family: 'Fira Code'; font-size: 0.8rem; color: var(--brand-teal); margin-bottom: 10px; display: block; }
         .post-title { font-size: 2.5rem; font-weight: 900; line-height: 1.1; margin: 0 0 40px 0; letter-spacing: -1px; }
         
-        #md-render { 
+        .md-render {
             font-family: 'Merriweather', serif; font-weight: 300; 
             font-size: 1.1rem; line-height: 1.9; color: #d1d1d1; 
         }
 
         /* SPACE FIXES */
-        #md-render p:first-child { margin-top: 0; }
+        .md-render p:first-child { margin-top: 0; }
+
+        .md-render img {
+            display: block;
+            max-width: min(100%, 720px);
+            height: auto;
+            margin: 38px auto;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+        }
+
+        .md-render figure,
+        .md-render .otw-figure {
+            margin: 38px auto;
+            max-width: min(100%, 720px);
+        }
+
+        .md-render figure img,
+        .md-render .otw-figure img {
+            margin: 0 auto;
+        }
+
+        .md-render figure figcaption,
+        .md-render .otw-figure figcaption {
+            margin-top: 12px;
+            color: rgba(209, 209, 209, 0.72);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            text-align: center;
+        }
   
 /* THE CLEAN ATMOSPHERIC WASH */
 
@@ -123,7 +154,7 @@
                     display.innerHTML = `
                         <span class="post-date">${post.date.toUpperCase()}</span>
                         <h1 class="post-title">${post.title}</h1>
-                        <div id="md-render">${marked.parse(post.body)}</div>
+                        <div class="md-render">${window.renderOtwMarkdown ? window.renderOtwMarkdown(post.body) : marked.parse(post.body)}</div>
                     `;
                     return;
                 }

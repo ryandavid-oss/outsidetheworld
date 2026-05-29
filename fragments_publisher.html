@@ -20,6 +20,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" />
   <link rel="stylesheet" href="theme.css" />
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="otw_markdown.js"></script>
   <style>
     :root {
       --safe-top: env(safe-area-inset-top);
@@ -3863,15 +3864,15 @@
                     <div>
                       <label class="gfull-label" for="gfullImageStyle">Insert Style</label>
                       <select class="gfull-select" id="gfullImageStyle">
-                        <option value="markdown">Inline image</option>
-                        <option value="figure">Figure with caption</option>
+                        <option value="markdown">Markdown image + caption title</option>
+                        <option value="figure">Raw figure HTML</option>
                       </select>
                     </div>
                   </div>
                   <div class="gfull-image-controls">
                     <div>
                       <label class="gfull-label" for="gfullImageCaption">Caption (optional)</label>
-                      <input class="gfull-input" id="gfullImageCaption" type="text" placeholder="Shown below the image when you use Figure style" />
+                      <input class="gfull-input" id="gfullImageCaption" type="text" placeholder="Visible caption for markdown title or figure" />
                     </div>
                     <div class="gfull-image-panel-actions">
                       <button class="gfull-btn gfull-btn-primary" id="gfullInsertImageBtn" type="button">Insert</button>
@@ -4449,6 +4450,7 @@
     let gfullDirty = false;
     let gfullSelectionState = { start: 0, end: 0 };
     let gfullPendingImageObjectUrl = null;
+    let gfullImageUploading = false;
     let frgmntsWaitlistEntries = [];
     let professionalInquiryEntries = [];
     let frgmntsSupportRequestEntries = [];
@@ -5312,9 +5314,11 @@
       });
     }
 
-    async function compressFragmentImage(file) {
+    async function compressFragmentImage(file, options = {}) {
       const image = await loadFragmentImageElement(file);
-      const maxDimension = 1400;
+      const maxDimension = Number(options.maxDimension) || 1400;
+      const quality = Number(options.quality) || 0.78;
+      const fileName = options.fileName || 'fragment-photo.jpg';
       const scale = Math.min(1, maxDimension / Math.max(image.width, image.height));
       const width = Math.max(1, Math.round(image.width * scale));
       const height = Math.max(1, Math.round(image.height * scale));
@@ -5330,8 +5334,8 @@
       context.fillRect(0, 0, width, height);
       context.drawImage(image, 0, 0, width, height);
 
-      const blob = await canvasToBlob(canvas, 'image/jpeg', 0.78);
-      return new File([blob], 'fragment-photo.jpg', { type: 'image/jpeg' });
+      const blob = await canvasToBlob(canvas, 'image/jpeg', quality);
+      return new File([blob], fileName, { type: 'image/jpeg' });
     }
 
     function slugifyGhostTitle(value) {
@@ -6877,6 +6881,54 @@
       return `# ${title}\nDate: ${formatLongDate(date)}\n\n${body}`.trim();
     }
 
+    function getGfullSlugOverride() {
+      const slug = gfullSlug.value.trim();
+      return slug ? gfullSlugify(slug) : '';
+    }
+
+    function buildGfullPublishPayload(body) {
+      const payload = {
+        title: gfullTitle.value.trim(),
+        body,
+        date: formatLongDate(gfullEntryDate.value || getGfullLocalDate())
+      };
+      const slug = getGfullSlugOverride();
+      if (slug) {
+        payload.slug = slug;
+      }
+      return payload;
+    }
+
+    function findGfullLocalImageReferences(markdown) {
+      const value = String(markdown || '');
+      const localReferences = [];
+      const markdownImagePattern = /!\[[^\]]*\]\(\s*(blob:|data:|file:|about:)[^)]+\)/gi;
+      const htmlImagePattern = /<img\b[^>]*\bsrc\s*=\s*["']?\s*(blob:|data:|file:|about:)/gi;
+      if (markdownImagePattern.test(value)) {
+        localReferences.push('markdown image');
+      }
+      if (htmlImagePattern.test(value)) {
+        localReferences.push('HTML image');
+      }
+      return localReferences;
+    }
+
+    function runGfullPublishPreflight(body) {
+      const selectedImage = gfullImageInput.files && gfullImageInput.files[0];
+      if (gfullImageUploading) {
+        return 'Wait for the current image upload to finish before publishing.';
+      }
+      if (selectedImage) {
+        return 'An image is selected but not inserted yet. Insert it, or clear the image panel, before publishing.';
+      }
+
+      const localImages = findGfullLocalImageReferences(body);
+      if (localImages.length) {
+        return 'This draft contains a local image reference. Upload the image first so the published markdown uses a durable OTW media URL.';
+      }
+      return '';
+    }
+
     function setGfullStatus(message, tone = 'ok') {
       gfullStatusText.textContent = message;
       gfullStatusText.classList.remove('ok', 'warn', 'bad');
@@ -6917,7 +6969,9 @@
       const date = gfullEntryDate.value || getGfullLocalDate();
       const body = gfullContent.value.trim();
       const renderedBody = body
-        ? marked.parse(body, { breaks: true, gfm: true })
+        ? (window.renderOtwMarkdown
+          ? window.renderOtwMarkdown(body, { breaks: true, gfm: true })
+          : marked.parse(body, { breaks: true, gfm: true }))
         : '<p class="gfull-render-empty">Just start writing. The live preview will follow your draft here.</p>';
 
       gfullPreview.innerHTML = `
@@ -6999,6 +7053,48 @@
       }
     }
 
+    function formatGfullImageSize(bytes) {
+      const value = Number(bytes) || 0;
+      if (value >= 1024 * 1024) {
+        return `${(value / (1024 * 1024)).toFixed(1)} MB`;
+      }
+      return `${Math.max(1, Math.round(value / 1024))} KB`;
+    }
+
+    function validateGfullImageFile(file) {
+      if (!file) {
+        return 'Choose a photo first.';
+      }
+
+      const type = String(file.type || '').toLowerCase();
+      const supportedTypes = new Set(['image/jpeg', 'image/png', 'image/webp', 'image/gif']);
+      if (type && !supportedTypes.has(type)) {
+        return 'Choose a web-ready image: JPEG, PNG, WebP, or GIF.';
+      }
+
+      const maxBytes = 25 * 1024 * 1024;
+      if ((file.size || 0) > maxBytes) {
+        return 'Choose an image smaller than 25 MB before compression.';
+      }
+      return '';
+    }
+
+    function shouldCompressGfullImage(file) {
+      return String(file?.type || '').toLowerCase() !== 'image/gif';
+    }
+
+    function setGfullImageUploadState(isUploading, message = '') {
+      gfullImageUploading = Boolean(isUploading);
+      gfullInsertImageBtn.disabled = gfullImageUploading;
+      gfullChooseImageBtn.disabled = gfullImageUploading;
+      gfullClearImageBtn.disabled = gfullImageUploading;
+      gfullImageStyle.disabled = gfullImageUploading;
+      gfullImageCaption.disabled = gfullImageUploading;
+      if (message) {
+        gfullImageStatus.textContent = message;
+      }
+    }
+
     function clearSelectedGfullImage() {
       if (gfullPendingImageObjectUrl) {
         URL.revokeObjectURL(gfullPendingImageObjectUrl);
@@ -7036,12 +7132,22 @@
         return;
       }
 
+      const validationMessage = validateGfullImageFile(file);
+      if (validationMessage) {
+        clearSelectedGfullImage();
+        gfullImageStatus.textContent = validationMessage;
+        setGfullStatus(validationMessage, 'bad');
+        return;
+      }
+
       gfullPendingImageObjectUrl = URL.createObjectURL(file);
       gfullImagePreview.src = gfullPendingImageObjectUrl;
       gfullImagePreview.hidden = false;
       gfullImagePreviewEmpty.hidden = true;
-      gfullImageChip.textContent = file.name || 'Image ready';
-      gfullImageStatus.textContent = 'Image ready. Insert it where your cursor is currently sitting.';
+      gfullImageChip.textContent = `${file.name || 'Image ready'} • ${formatGfullImageSize(file.size)}`;
+      gfullImageStatus.textContent = shouldCompressGfullImage(file)
+        ? 'Image ready. It will be compressed before upload, then inserted where your cursor is sitting.'
+        : 'GIF ready. It will upload without compression so animation is preserved.';
     }
 
     function insertAtGfullCursor(snippet) {
@@ -7096,9 +7202,22 @@
     }
 
     async function uploadSelectedGfullImageAndInsert() {
+      if (gfullImageUploading) {
+        gfullImageStatus.textContent = 'The current image upload is still running.';
+        return;
+      }
+
       const file = gfullImageInput.files && gfullImageInput.files[0];
-      if (!file) {
-        gfullImageStatus.textContent = 'Choose a photo first.';
+      const validationMessage = validateGfullImageFile(file);
+      if (validationMessage) {
+        gfullImageStatus.textContent = validationMessage;
+        setGfullStatus(validationMessage, 'bad');
+        return;
+      }
+
+      if (!window.navigator.onLine) {
+        gfullImageStatus.textContent = 'Image uploads need a live connection. Text drafts can queue, but media cannot yet.';
+        setGfullStatus('Image upload paused because this device is offline.', 'warn');
         return;
       }
 
@@ -7110,17 +7229,27 @@
       }
 
       syncPublishKeys(publishKey);
-      const formData = new FormData();
-      formData.append('image', file);
-      formData.append('date', gfullEntryDate.value || getGfullLocalDate());
-      formData.append('title', gfullTitle.value.trim() || 'Untitled draft');
-      formData.append('alt', gfullTitle.value.trim() || 'Narrative image');
-      formData.append('caption', gfullImageCaption.value.trim());
-
-      gfullImageStatus.textContent = 'Uploading image to OTW media storage...';
-      setGfullStatus('Uploading image to OTW media storage...', 'warn');
+      setGfullImageUploadState(true, shouldCompressGfullImage(file)
+        ? 'Compressing image for OTW media storage...'
+        : 'Preparing GIF upload for OTW media storage...');
+      setGfullStatus('Preparing narrative image upload...', 'warn');
 
       try {
+        const uploadFile = shouldCompressGfullImage(file)
+          ? await compressFragmentImage(file, { fileName: 'narrative-image.jpg' })
+          : file;
+        const formData = new FormData();
+        formData.append('image', uploadFile);
+        formData.append('date', gfullEntryDate.value || getGfullLocalDate());
+        formData.append('title', gfullTitle.value.trim() || 'Untitled draft');
+        formData.append('alt', gfullTitle.value.trim() || 'Narrative image');
+        formData.append('caption', gfullImageCaption.value.trim());
+
+        gfullImageStatus.textContent = shouldCompressGfullImage(file)
+          ? `Uploading compressed image (${formatGfullImageSize(uploadFile.size)}) to OTW media storage...`
+          : `Uploading GIF (${formatGfullImageSize(uploadFile.size)}) to OTW media storage...`;
+        setGfullStatus('Uploading image to OTW media storage...', 'warn');
+
         const response = await fetch(UPLOAD_GHOST_IMAGE_ENDPOINT, {
           method: 'POST',
           headers: { 'x-publish-key': publishKey },
@@ -7135,15 +7264,17 @@
           ? `${payload.uploaded.figure}\n`
           : `${payload.uploaded.markdown}\n`;
         insertAtGfullCursor(snippet);
-        gfullImageStatus.textContent = 'Image uploaded and inserted into your draft.';
         setGfullStatus('Image uploaded and inserted.', 'ok');
         clearSelectedGfullImage();
+        gfullImageStatus.textContent = 'Image uploaded and inserted into your draft.';
         if (!gfullSettingsState.keepImagePanelOpen) {
           closeGfullImagePanel();
         }
       } catch (error) {
         gfullImageStatus.textContent = error.message || 'Image upload failed.';
         setGfullStatus(error.message || 'Image upload failed.', 'bad');
+      } finally {
+        setGfullImageUploadState(false);
       }
     }
 
@@ -7161,11 +7292,13 @@
         return;
       }
 
-      const gfullPayload = {
-        title: gfullTitle.value.trim(),
-        body,
-        date: formatLongDate(gfullEntryDate.value || getGfullLocalDate())
-      };
+      const preflightMessage = runGfullPublishPreflight(body);
+      if (preflightMessage) {
+        setGfullStatus(preflightMessage, 'bad');
+        return;
+      }
+
+      const gfullPayload = buildGfullPublishPayload(body);
 
       if (!window.navigator.onLine) {
         enqueuePublishJob({

@@ -20,6 +20,8 @@
     <meta content="var(--bg-dark)" name="theme-color" />
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js">
     </script>
+    <script src="otw_markdown.js">
+    </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;900&family=Fira+Code:wght@300;500;700&family=Merriweather:ital,wght@0,300;0,700;1,300&display=swap');
 
@@ -372,6 +374,26 @@
             border-color: var(--brand-teal);
         }
 
+        .entry-body figure,
+        .entry-body .otw-figure {
+            margin: 40px auto;
+            max-width: min(100%, 720px);
+        }
+
+        .entry-body figure img,
+        .entry-body .otw-figure img {
+            margin: 0 auto;
+        }
+
+        .entry-body figure figcaption,
+        .entry-body .otw-figure figcaption {
+            margin-top: 12px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            text-align: center;
+        }
+
         .entry-reactions-row {
             display: flex;
             align-items: center;
@@ -695,7 +717,9 @@
             const normalizedBody = String(body || '')
                 .replace(/\*\*<div class="otw-center">([\s\S]*?)<\/div>\*\*/g, '<div class="otw-center">$1</div>');
 
-            return marked.parse(normalizedBody);
+            return window.renderOtwMarkdown
+                ? window.renderOtwMarkdown(normalizedBody)
+                : marked.parse(normalizedBody);
         }
 
         function buildShareUrl(post) {
@@ -921,6 +945,10 @@
 
         function initArchiveReactionWidget(post) {
             if (!post) {
+                return;
+            }
+
+            if (window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost') {
                 return;
             }
 

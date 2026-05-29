@@ -105,6 +105,26 @@ body::after {
     transform: translateZ(0);
 }
 
+.otw-figure {
+    margin: 2.25rem auto;
+    max-width: min(100%, 720px);
+}
+
+.otw-figure img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+}
+
+.otw-figure figcaption {
+    margin-top: 0.75rem;
+    color: var(--text-muted, rgba(238, 238, 238, 0.68));
+    font-size: 0.9rem;
+    line-height: 1.5;
+    text-align: center;
+}
+
 /* 6. NAVIGATION CHASSIS (Consistency Engine) */
 .hero-logo-container {
     display: flex;

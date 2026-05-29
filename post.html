@@ -18,6 +18,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&amp;display=swap" rel="stylesheet"/>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js">
   </script>
+  <script src="otw_markdown.js">
+  </script>
   <style>
    :root {
             --brand-blue: var(--brand-blue);
@@ -76,6 +78,14 @@
             border: 1px solid rgba(255,255,255,0.1); /* Keeps the subtle frame */
         }
 
+        #content .otw-figure {
+            margin: 30px auto;
+        }
+
+        #content .otw-figure img {
+            margin: 0 auto;
+        }
+
         #content p {
             margin-bottom: 25px;
             font-size: 1.1rem;
@@ -124,7 +134,7 @@
             fetch('blogger_posts/' + fileName)
                 .then(response => response.text())
                 .then(text => {
-                    document.getElementById('content').innerHTML = marked.parse(text);
+                    document.getElementById('content').innerHTML = window.renderOtwMarkdown ? window.renderOtwMarkdown(text) : marked.parse(text);
                     // Extract the date from the filename for a subtitle
                     const dateParts = fileName.split('-');
                     const dateStr = dateParts[1] + '/' + dateParts[2] + '/' + dateParts[0];

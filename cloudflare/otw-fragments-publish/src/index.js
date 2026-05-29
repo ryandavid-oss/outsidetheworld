@@ -546,6 +546,7 @@ function normalizeStoredProfessionalInquiryEntry(entry) {
 
 function formatNarrativeDisplayDate(date) {
   return new Intl.DateTimeFormat("en-US", {
+    timeZone: "UTC",
     year: "numeric",
     month: "long",
     day: "numeric"
@@ -559,7 +560,7 @@ function normalizeNarrativeDate(raw) {
   }
 
   if (/^\d{4}-\d{2}-\d{2}$/.test(date)) {
-    const value = new Date(`${date}T12:00:00`);
+    const value = new Date(`${date}T12:00:00Z`);
     if (Number.isNaN(value.getTime())) {
       throw new Error("Narrative date could not be parsed");
     }
@@ -569,7 +570,7 @@ function normalizeNarrativeDate(raw) {
     };
   }
 
-  const value = new Date(`${date} UTC`);
+  const value = new Date(`${date} 12:00:00 UTC`);
   if (Number.isNaN(value.getTime())) {
     throw new Error("Narrative date must be in 'March 27, 2026' format");
   }
@@ -595,6 +596,10 @@ function slugify(value) {
     .replace(/^-+|-+$/g, "");
 }
 
+function normalizeNarrativeSlug(value) {
+  return slugify(value).slice(0, 96);
+}
+
 function deriveNarrativeTitle(body) {
   const lines = String(body || "")
     .split(/\r?\n/)
@@ -617,12 +622,13 @@ function normalizeNarrativeEntry(entry) {
   const date = normalizeNarrativeDate(entry.date);
   const rawTitle = String(entry.title || "").trim();
   const title = rawTitle || deriveNarrativeTitle(body);
+  const slug = normalizeNarrativeSlug(entry.slug);
 
   if (!title) {
     throw new Error("Narrative title could not be derived");
   }
 
-  return { title, date: date.display, fileDate: date.fileDate, body };
+  return { title, date: date.display, fileDate: date.fileDate, slug, body };
 }
 
 function normalizeDriftDate(raw) {
@@ -778,7 +784,8 @@ function detectImageExtension(file) {
   const fromName = String(file?.name || "").trim().toLowerCase();
   if (fromName.includes(".")) {
     const ext = fromName.split(".").pop();
-    if (ext) return ext;
+    if (ext === "jpeg") return "jpg";
+    if (["jpg", "png", "gif", "webp"].includes(ext)) return ext;
   }
 
   const mime = String(file?.type || "").toLowerCase();
@@ -824,6 +831,19 @@ function normalizeNarrativeImageCaption(raw) {
   return String(raw || "").trim();
 }
 
+function validateNarrativeImageFile(file) {
+  const maxBytes = 25 * 1024 * 1024;
+  if ((file.size || 0) > maxBytes) {
+    throw new Error("Narrative image must be smaller than 25 MB");
+  }
+
+  const type = String(file.type || "").toLowerCase();
+  const supportedTypes = new Set(["image/jpeg", "image/png", "image/webp", "image/gif"]);
+  if (type && !supportedTypes.has(type)) {
+    throw new Error("Narrative image must be JPEG, PNG, WebP, or GIF");
+  }
+}
+
 function getNarrativePublicBaseUrl(env) {
   const base = String(env.NARRATIVE_PUBLIC_BASE_URL || env.IOTD_PUBLIC_BASE_URL || "").replace(/\/+$/g, "");
   if (!base) {
@@ -850,11 +870,32 @@ function escapeHtmlAttr(value) {
     .replace(/>/g, "&gt;");
 }
 
+function escapeMarkdownImageAlt(value) {
+  return String(value || "")
+    .replace(/[\r\n]+/g, " ")
+    .replace(/\\/g, "\\\\")
+    .replace(/\[/g, "\\[")
+    .replace(/\]/g, "\\]")
+    .trim();
+}
+
+function escapeMarkdownImageTitle(value) {
+  return String(value || "")
+    .replace(/[\r\n]+/g, " ")
+    .replace(/\\/g, "\\\\")
+    .replace(/"/g, '\\"')
+    .trim();
+}
+
 function buildNarrativeImageSnippets({ url, alt, caption }) {
   const safeUrl = escapeHtmlAttr(url);
   const safeAlt = escapeHtmlAttr(alt);
   const safeCaption = escapeHtmlAttr(caption);
-  const markdown = `![${alt}](${url})`;
+  const markdownAlt = escapeMarkdownImageAlt(alt);
+  const markdownCaption = escapeMarkdownImageTitle(caption);
+  const markdown = markdownCaption
+    ? `![${markdownAlt}](${url} "${markdownCaption}")`
+    : `![${markdownAlt}](${url})`;
   const figure = caption
     ? `<figure>\n  <img src="${safeUrl}" alt="${safeAlt}">\n  <figcaption><em>${safeCaption}</em></figcaption>\n</figure>`
     : `<figure>\n  <img src="${safeUrl}" alt="${safeAlt}">\n</figure>`;
@@ -1633,8 +1674,8 @@ function buildUniqueWordpersonIdentity(existingEntries, date, title, extension) 
   throw new Error("Could not find an available word.person post identity");
 }
 
-async function findAvailableNarrativePath(env, date, title) {
-  const baseSlug = slugify(title) || "untitled-draft";
+async function findAvailableNarrativePath(env, date, title, slugOverride = "") {
+  const baseSlug = normalizeNarrativeSlug(slugOverride) || slugify(title) || "untitled-draft";
 
   for (let attempt = 0; attempt < 50; attempt += 1) {
     const suffix = attempt === 0 ? "" : `-${attempt + 1}`;
@@ -1799,7 +1840,7 @@ export default {
       try {
         const body = await request.json();
         const entry = normalizeNarrativeEntry(body);
-        const path = await findAvailableNarrativePath(env, entry.fileDate, entry.title);
+        const path = await findAvailableNarrativePath(env, entry.fileDate, entry.title, entry.slug);
         const markdown = buildNarrativeMarkdown(entry);
         const result = await saveRepoFile(env, path, markdown, null, "Publish ghost draft");
 
@@ -1908,6 +1949,7 @@ export default {
         if (!(file instanceof File)) {
           throw new Error("Narrative image file is required");
         }
+        validateNarrativeImageFile(file);
 
         const date = normalizeNarrativeDate(formData.get("date"));
         const title = String(formData.get("title") || "").trim() || "Untitled draft";
