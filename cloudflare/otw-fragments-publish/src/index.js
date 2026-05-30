@@ -9,6 +9,9 @@ const PROFESSIONAL_INQUIRIES_PATH = "professional_inquiries.json";
 const FRGMNTS_SUPPORT_REQUESTS_PATH = "frgmnts_support_requests.json";
 const FRGMNTS_SEAT_CHECKINS_PATH = "frgmnts_seat_checkins.json";
 const CURRENT_NARRATIVE_DIR = "current_narrative";
+const PUBLISHER_DRAFT_OBJECT_KEY = "publisher_drafts/current.json.enc";
+const PUBLISHER_DRAFT_SCHEMA = "otw.publisher.serverDraft";
+const PUBLISHER_DRAFT_MAX_BYTES = 1024 * 1024;
 const FRAGMENTS_PATTERN = /window\.otw_fragments\s*=\s*(\[[\s\S]*?\])\s*;/m;
 const DRIFT_POETRY_PATTERN = /const livingVerse\s*=\s*(\[[\s\S]*?\])\s*;/m;
 
@@ -89,6 +92,52 @@ function encodeBase64Utf8(content) {
     binary += String.fromCharCode(byte);
   });
   return btoa(binary);
+}
+
+function bytesToBase64(bytes) {
+  let binary = "";
+  bytes.forEach((byte) => {
+    binary += String.fromCharCode(byte);
+  });
+  return btoa(binary);
+}
+
+function base64ToBytes(value) {
+  const binary = atob(String(value || ""));
+  return Uint8Array.from(binary, (char) => char.charCodeAt(0));
+}
+
+async function draftCryptoKey(secret) {
+  const keyMaterial = await crypto.subtle.digest(
+    "SHA-256",
+    new TextEncoder().encode(String(secret || ""))
+  );
+  return crypto.subtle.importKey("raw", keyMaterial, "AES-GCM", false, ["encrypt", "decrypt"]);
+}
+
+async function encryptPublisherDraft(secret, draft) {
+  const iv = crypto.getRandomValues(new Uint8Array(12));
+  const key = await draftCryptoKey(secret);
+  const plaintext = new TextEncoder().encode(JSON.stringify(draft));
+  const ciphertext = await crypto.subtle.encrypt({ name: "AES-GCM", iv }, key, plaintext);
+  return {
+    schema: "otw.publisher.encryptedDraft",
+    version: 1,
+    algorithm: "AES-GCM",
+    iv: bytesToBase64(iv),
+    ciphertext: bytesToBase64(new Uint8Array(ciphertext))
+  };
+}
+
+async function decryptPublisherDraft(secret, envelope) {
+  if (!envelope || envelope.schema !== "otw.publisher.encryptedDraft" || envelope.algorithm !== "AES-GCM") {
+    throw new Error("Stored publisher draft is not readable");
+  }
+  const key = await draftCryptoKey(secret);
+  const iv = base64ToBytes(envelope.iv);
+  const ciphertext = base64ToBytes(envelope.ciphertext);
+  const plaintext = await crypto.subtle.decrypt({ name: "AES-GCM", iv }, key, ciphertext);
+  return JSON.parse(new TextDecoder("utf-8").decode(plaintext));
 }
 
 function normalizeTag(raw) {
@@ -1702,6 +1751,185 @@ function buildNarrativeMarkdown(entry) {
   return `# ${entry.title}\nDate: ${entry.date}\n\n${entry.body.trim()}\n`;
 }
 
+function isPlainObject(value) {
+  return Boolean(value && typeof value === "object" && !Array.isArray(value));
+}
+
+function sanitizePublisherDraftValue(value, publishKey, depth = 0) {
+  if (depth > 24) {
+    throw new Error("Draft payload is too deeply nested");
+  }
+
+  if (Array.isArray(value)) {
+    if (value.length > 1000) {
+      throw new Error("Draft payload contains too many array items");
+    }
+    return value.map((item) => sanitizePublisherDraftValue(item, publishKey, depth + 1));
+  }
+
+  if (isPlainObject(value)) {
+    const output = {};
+    Object.entries(value).forEach(([key, child]) => {
+      const normalizedKey = key.toLowerCase().replace(/[^a-z0-9]/g, "");
+      if (
+        normalizedKey === "publishkey" ||
+        normalizedKey === "publisherkey" ||
+        normalizedKey === "publisheraccesskey" ||
+        normalizedKey === "accesskey"
+      ) {
+        return;
+      }
+      if (key === "dataUrl") {
+        output.dataUrlLength = String(child || "").length;
+        return;
+      }
+      output[key] = sanitizePublisherDraftValue(child, publishKey, depth + 1);
+    });
+    return output;
+  }
+
+  if (typeof value === "string") {
+    if (publishKey && value.includes(publishKey)) {
+      throw new Error("Draft payload must not contain the publisher key");
+    }
+    return value
+      .replace(/data:image\/[a-z0-9.+-]+(?:;[a-z0-9=:+/.-]+)*,[^\s)"']+/gi, "")
+      .replace(/blob:[^\s)"']+/gi, "");
+  }
+
+  if (typeof value === "number" || typeof value === "boolean" || value == null || typeof value === "string") {
+    return value;
+  }
+
+  return null;
+}
+
+function normalizePublisherDraftImageBlock(block) {
+  const normalized = { ...block };
+  const source = isPlainObject(normalized.source) ? { ...normalized.source } : {};
+  if (source.kind === "local-data-url" || source.dataUrl) {
+    source.kind = "local-placeholder";
+    source.dataUrlLength = Number(source.dataUrlLength || String(source.dataUrl || "").length || 0);
+    delete source.dataUrl;
+  }
+  if (source.url && String(source.url).startsWith("blob:")) {
+    source.kind = "local-placeholder";
+    source.urlLength = String(source.url).length;
+    delete source.url;
+  }
+  if (source.kind === "url" && !source.url) {
+    source.kind = "local-placeholder";
+    delete source.url;
+  }
+  normalized.source = source;
+  return normalized;
+}
+
+function normalizePublisherDraftArticle(article) {
+  if (!isPlainObject(article) || article.schema !== "otw.publisher.article") {
+    throw new Error("Publisher draft article is invalid");
+  }
+
+  const body = isPlainObject(article.body) ? article.body : {};
+  const blocks = Array.isArray(body.blocks) ? body.blocks : [];
+  const normalizedBlocks = blocks.map((block) => {
+    if (!isPlainObject(block)) {
+      throw new Error("Publisher draft contains an invalid block");
+    }
+    return block.type === "image" ? normalizePublisherDraftImageBlock(block) : block;
+  });
+
+  return {
+    ...article,
+    title: String(article.title || ""),
+    subhead: String(article.subhead || ""),
+    createdAt: normalizeTimestamp(article.createdAt || new Date().toISOString()),
+    updatedAt: normalizeTimestamp(article.updatedAt || new Date().toISOString()),
+    body: {
+      ...body,
+      blocks: normalizedBlocks
+    }
+  };
+}
+
+function normalizePublisherDraftPayload(payload, publishKey) {
+  if (!isPlainObject(payload)) {
+    throw new Error("Publisher draft payload must be an object");
+  }
+
+  const sanitized = sanitizePublisherDraftValue(payload, publishKey);
+  const article = normalizePublisherDraftArticle(sanitized.article);
+  const draftId = normalizeNarrativeSlug(sanitized.draftId || sanitized.id || article.metadata?.slug || article.title) || "current";
+  const savedAt = new Date().toISOString();
+  const clientUpdatedAt = normalizeTimestamp(sanitized.clientUpdatedAt || article.updatedAt || savedAt);
+  const readiness = String(sanitized.readiness || sanitized.publishPayload?.validation?.readiness || "").trim().slice(0, 120);
+  const publishPayload = isPlainObject(sanitized.publishPayload)
+    ? sanitized.publishPayload
+    : null;
+
+  const draft = {
+    schema: PUBLISHER_DRAFT_SCHEMA,
+    version: 1,
+    draftId,
+    savedAt,
+    clientUpdatedAt,
+    article,
+    readiness,
+    publishPayload
+  };
+
+  const encoded = new TextEncoder().encode(JSON.stringify(draft));
+  if (encoded.byteLength > PUBLISHER_DRAFT_MAX_BYTES) {
+    throw new Error("Publisher draft is too large to save");
+  }
+
+  return draft;
+}
+
+function publicPublisherDraft(draft) {
+  if (!draft) {
+    return null;
+  }
+  return {
+    schema: draft.schema,
+    version: draft.version,
+    draftId: draft.draftId,
+    savedAt: draft.savedAt,
+    clientUpdatedAt: draft.clientUpdatedAt,
+    article: draft.article,
+    readiness: draft.readiness || "",
+    publishPayload: draft.publishPayload || null
+  };
+}
+
+async function loadPublisherDraft(env) {
+  if (!env.IOTD_BUCKET) {
+    throw new Error("Draft bucket binding is not configured");
+  }
+  const object = await env.IOTD_BUCKET.get(PUBLISHER_DRAFT_OBJECT_KEY);
+  if (!object) {
+    return null;
+  }
+  const envelope = await object.json();
+  return decryptPublisherDraft(env.PUBLISH_KEY, envelope);
+}
+
+async function savePublisherDraft(env, draft) {
+  if (!env.IOTD_BUCKET) {
+    throw new Error("Draft bucket binding is not configured");
+  }
+  const envelope = await encryptPublisherDraft(env.PUBLISH_KEY, draft);
+  await env.IOTD_BUCKET.put(PUBLISHER_DRAFT_OBJECT_KEY, JSON.stringify(envelope), {
+    httpMetadata: {
+      contentType: "application/json; charset=utf-8"
+    },
+    customMetadata: {
+      schema: PUBLISHER_DRAFT_SCHEMA,
+      savedAt: draft.savedAt
+    }
+  });
+}
+
 export default {
   async fetch(request, env) {
     if (request.method === "OPTIONS") {
@@ -1720,6 +1948,7 @@ export default {
           publish_bot_fragment: "POST /publish-bot-fragment",
           publish_changelog_entry: "POST /publish-changelog-entry",
           publish_ghost_draft: "POST /publish-ghost-draft",
+          publisher_draft: "GET,POST /publisher-draft",
           subscribe_frgmnts_waitlist: "POST /subscribe-frgmnts-waitlist",
           submit_frgmnts_support_request: "POST /submit-frgmnts-support-request",
           submit_frgmnts_seat_checkin: "POST /submit-frgmnts-seat-checkin",
@@ -1852,6 +2081,41 @@ export default {
         });
       } catch (error) {
         return jsonResponse({ ok: false, error: error.message || "Unknown ghost publish error" }, 400);
+      }
+    }
+
+    if (request.method === "GET" && url.pathname === "/publisher-draft") {
+      if (!isAuthorized(request, env)) {
+        return jsonResponse({ ok: false, error: "Unauthorized" }, 401);
+      }
+
+      try {
+        const draft = await loadPublisherDraft(env);
+        return jsonResponse({
+          ok: true,
+          draft: publicPublisherDraft(draft)
+        });
+      } catch (error) {
+        return jsonResponse({ ok: false, error: error.message || "Could not load publisher draft" }, 400);
+      }
+    }
+
+    if (request.method === "POST" && url.pathname === "/publisher-draft") {
+      if (!isAuthorized(request, env)) {
+        return jsonResponse({ ok: false, error: "Unauthorized" }, 401);
+      }
+
+      try {
+        const body = await request.json();
+        const draft = normalizePublisherDraftPayload(body, getPublishHeader(request));
+        await savePublisherDraft(env, draft);
+
+        return jsonResponse({
+          ok: true,
+          draft: publicPublisherDraft(draft)
+        });
+      } catch (error) {
+        return jsonResponse({ ok: false, error: error.message || "Could not save publisher draft" }, 400);
       }
     }
 

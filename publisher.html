@@ -1244,7 +1244,7 @@
             <path d="M19.4 15a1.8 1.8 0 0 0 .4 2l.1.1a2 2 0 0 1-2.8 2.8l-.1-.1a1.8 1.8 0 0 0-2-.4 1.8 1.8 0 0 0-1.1 1.7V21a2 2 0 0 1-4 0v-.1a1.8 1.8 0 0 0-1.1-1.7 1.8 1.8 0 0 0-2 .4l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.8 1.8 0 0 0 .4-2A1.8 1.8 0 0 0 2.7 14H2a2 2 0 0 1 0-4h.7a1.8 1.8 0 0 0 1.7-1.1 1.8 1.8 0 0 0-.4-2l-.1-.1A2 2 0 1 1 6.7 4l.1.1a1.8 1.8 0 0 0 2 .4A1.8 1.8 0 0 0 10 2.8V2a2 2 0 0 1 4 0v.8a1.8 1.8 0 0 0 1.1 1.7 1.8 1.8 0 0 0 2-.4l.1-.1A2 2 0 1 1 20 6.8l-.1.1a1.8 1.8 0 0 0-.4 2 1.8 1.8 0 0 0 1.7 1.1h.8a2 2 0 0 1 0 4h-.8a1.8 1.8 0 0 0-1.8 1Z"></path>
           </svg>
         </button>
-        <button class="text-btn" id="saveDraftBtn" type="button" title="Save local draft">Save Draft</button>
+        <button class="text-btn" id="saveDraftBtn" type="button" title="Save server draft">Save Draft</button>
         <button class="publish-btn" id="publishBtn" type="button" title="Publishing is not wired yet">Publish</button>
       </div>
     </header>
@@ -1541,6 +1541,8 @@
     const LEGACY_PUBLISH_KEY_STORAGE = 'otwFragmentsPublishKey';
     const LEGACY_GHOST_FULL_PUBLISH_KEY_STORAGE = 'otw_ghost_writer_publish_key';
     const UPLOAD_GHOST_IMAGE_ENDPOINT = 'https://otw-fragments-publish.ryandavid.workers.dev/upload-ghost-image';
+    const PUBLISHER_DRAFT_ENDPOINT = 'https://otw-fragments-publish.ryandavid.workers.dev/publisher-draft';
+    const SERVER_DRAFT_META_KEY = 'otw.publisher.serverDraftMeta.v1';
     const MAX_INLINE_IMAGE_DATA_URL_LENGTH = 1800000;
     const MAX_STAGED_IMAGE_BYTES = 25 * 1024 * 1024;
     const SUPPORTED_STAGED_IMAGE_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp', 'image/gif']);
@@ -1557,6 +1559,8 @@
     let saveTimer = null;
     let statusTimer = null;
     let isHydrating = false;
+    let isCheckingServerDraft = false;
+    let serverDraftMeta = readServerDraftMeta();
     let activePopover = null;
     let activeColorCommand = '';
     let activeColorButton = null;
@@ -1753,6 +1757,271 @@
       return getStoredPublisherKey();
     }
 
+    function readServerDraftMeta() {
+      try {
+        return JSON.parse(localStorage.getItem(SERVER_DRAFT_META_KEY) || 'null') || null;
+      } catch (error) {
+        return null;
+      }
+    }
+
+    function writeServerDraftMeta(draft) {
+      serverDraftMeta = draft ? {
+        draftId: draft.draftId || 'current',
+        savedAt: draft.savedAt || '',
+        clientUpdatedAt: draft.clientUpdatedAt || draft.article?.updatedAt || ''
+      } : null;
+      try {
+        if (serverDraftMeta) {
+          localStorage.setItem(SERVER_DRAFT_META_KEY, JSON.stringify(serverDraftMeta));
+        } else {
+          localStorage.removeItem(SERVER_DRAFT_META_KEY);
+        }
+      } catch (error) {
+        // Server metadata is only used for gentle conflict hints.
+      }
+      window.otwPublisherServerDraftMeta = serverDraftMeta;
+    }
+
+    function compareIsoDates(left, right) {
+      const leftTime = Date.parse(left || '');
+      const rightTime = Date.parse(right || '');
+      if (!Number.isFinite(leftTime) && !Number.isFinite(rightTime)) {
+        return 0;
+      }
+      if (!Number.isFinite(leftTime)) {
+        return -1;
+      }
+      if (!Number.isFinite(rightTime)) {
+        return 1;
+      }
+      const delta = leftTime - rightTime;
+      return Math.abs(delta) < 1000 ? 0 : delta;
+    }
+
+    function localStoredArticleSnapshot() {
+      try {
+        const stored = JSON.parse(localStorage.getItem(DRAFT_KEY) || 'null');
+        return stored?.article || null;
+      } catch (error) {
+        return null;
+      }
+    }
+
+    function draftHasVisibleContent(article) {
+      return Boolean(
+        article &&
+        (
+          String(article.title || '').trim() ||
+          String(article.subhead || '').trim() ||
+          String(article.metadata?.slug || '').trim() ||
+          (article.body?.blocks || []).some(blockHasContent)
+        )
+      );
+    }
+
+    function sanitizeServerDraftValue(value, publishKey = getPublisherPublishKey()) {
+      if (Array.isArray(value)) {
+        return value.map((item) => sanitizeServerDraftValue(item, publishKey));
+      }
+      if (value && typeof value === 'object') {
+        const output = {};
+        Object.entries(value).forEach(([key, child]) => {
+          const normalizedKey = key.toLowerCase().replace(/[^a-z0-9]/g, '');
+          if (
+            normalizedKey === 'publishkey' ||
+            normalizedKey === 'publisherkey' ||
+            normalizedKey === 'publisheraccesskey' ||
+            normalizedKey === 'accesskey'
+          ) {
+            return;
+          }
+          if (key === 'dataUrl') {
+            output.dataUrlLength = String(child || '').length;
+            return;
+          }
+          output[key] = sanitizeServerDraftValue(child, publishKey);
+        });
+        return output;
+      }
+      if (typeof value === 'string') {
+        let output = value;
+        if (publishKey && output.includes(publishKey)) {
+          output = output.split(publishKey).join('');
+        }
+        return output
+          .replace(/data:image\/[a-z0-9.+-]+(?:;[a-z0-9=:+/.-]+)*,[^\s)"']+/gi, '')
+          .replace(/blob:[^\s)"']+/gi, '');
+      }
+      return value;
+    }
+
+    function prepareArticleForServerDraft(article) {
+      const clone = sanitizeServerDraftValue(article);
+      const blocks = clone.body?.blocks || [];
+      blocks.forEach((block) => {
+        if (block.type !== 'image' || !block.source) {
+          return;
+        }
+        if (block.source.kind === 'local-data-url' || block.source.dataUrl) {
+          block.source.kind = 'local-placeholder';
+          block.source.dataUrlLength = Number(block.source.dataUrlLength || 0);
+          delete block.source.dataUrl;
+        }
+        if (block.source.url && String(block.source.url).startsWith('blob:')) {
+          block.source.kind = 'local-placeholder';
+          block.source.urlLength = String(block.source.url).length;
+          delete block.source.url;
+        }
+        if (block.source.kind === 'url' && !block.source.url) {
+          block.source.kind = 'local-placeholder';
+          delete block.source.url;
+        }
+      });
+      return clone;
+    }
+
+    function serverDraftRequestBody(article = updateArticlePayload()) {
+      const publishPayloadForServer = buildPublishPayload(article);
+      return {
+        draftId: slugify(article.metadata?.slug || article.title || article.metadata?.docName || 'current'),
+        clientUpdatedAt: article.updatedAt,
+        readiness: publishPayloadForServer.validation.readiness,
+        article: prepareArticleForServerDraft(article),
+        publishPayload: sanitizeServerDraftValue(publishPayloadForServer)
+      };
+    }
+
+    async function fetchServerDraft({ silent = false } = {}) {
+      const publishKey = getPublisherPublishKey();
+      if (!publishKey) {
+        if (!silent) {
+          setSaveState('Publisher key needed', true);
+        }
+        return null;
+      }
+
+      const response = await fetch(PUBLISHER_DRAFT_ENDPOINT, {
+        method: 'GET',
+        headers: {
+          'x-publish-key': publishKey
+        }
+      });
+      const payload = await response.json().catch(() => null);
+      if (!response.ok || !payload || payload.ok === false) {
+        throw new Error(payload?.error || `Draft load failed (${response.status})`);
+      }
+      return payload.draft || null;
+    }
+
+    function restoreServerDraft(draft, message = 'Server draft restored') {
+      if (!draft?.article) {
+        return false;
+      }
+      isHydrating = true;
+      hydrateArticle(draft.article);
+      autoResizeTextarea(titleField);
+      autoResizeTextarea(subheadField);
+      isHydrating = false;
+      saveDraft();
+      writeServerDraftMeta(draft);
+      setSaveState(message, true);
+      updateArticlePayload();
+      return true;
+    }
+
+    async function checkServerDraftOnLoad() {
+      if (isCheckingServerDraft || !getPublisherPublishKey()) {
+        return;
+      }
+      isCheckingServerDraft = true;
+      try {
+        const draft = await fetchServerDraft({ silent: true });
+        if (!draft) {
+          return;
+        }
+
+        const localArticle = localStoredArticleSnapshot();
+        if (!draftHasVisibleContent(localArticle)) {
+          restoreServerDraft(draft);
+          return;
+        }
+
+        const serverTime = draft.clientUpdatedAt || draft.savedAt;
+        const localTime = localArticle.updatedAt || localArticle.createdAt;
+        if (compareIsoDates(serverTime, localTime) > 0) {
+          const shouldRestore = window.confirm('A newer server draft is available. Restore it? Cancel keeps your local draft.');
+          if (shouldRestore) {
+            restoreServerDraft(draft);
+          } else {
+            writeServerDraftMeta(draft);
+            setSaveState('Local draft kept', true);
+          }
+        } else if (compareIsoDates(localTime, serverTime) > 0) {
+          writeServerDraftMeta(draft);
+          setSaveState('Local draft newer than server', true);
+        } else {
+          writeServerDraftMeta(draft);
+        }
+      } catch (error) {
+        setSaveState('Server draft unavailable', true);
+      } finally {
+        isCheckingServerDraft = false;
+      }
+    }
+
+    async function saveServerDraft() {
+      const hadUnsavedChanges = currentSaveLabel === 'Unsaved changes';
+      const localSnapshot = localStoredArticleSnapshot();
+      saveDraft();
+      const publishKey = getPublisherPublishKey();
+      if (!publishKey) {
+        setSaveState('Publisher key needed', true);
+        return false;
+      }
+
+      const article = updateArticlePayload();
+      try {
+        setSaveState('Saving draft');
+        const serverDraft = await fetchServerDraft({ silent: true });
+        const serverTime = serverDraft?.clientUpdatedAt || serverDraft?.savedAt;
+        const localTime = hadUnsavedChanges
+          ? article.updatedAt || article.createdAt
+          : localSnapshot?.updatedAt || localSnapshot?.createdAt || article.updatedAt || article.createdAt;
+        const serverChangedSinceKnown = !serverDraftMeta?.savedAt || serverDraft?.savedAt !== serverDraftMeta.savedAt;
+        if (
+          serverDraft &&
+          compareIsoDates(serverTime, localTime) > 0 &&
+          serverChangedSinceKnown &&
+          !window.confirm('The server draft looks newer. Save this local draft over it?')
+        ) {
+          writeServerDraftMeta(serverDraft);
+          setSaveState('Server draft kept', true);
+          return false;
+        }
+
+        const response = await fetch(PUBLISHER_DRAFT_ENDPOINT, {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json; charset=utf-8',
+            'x-publish-key': publishKey
+          },
+          body: JSON.stringify(serverDraftRequestBody(article))
+        });
+        const payload = await response.json().catch(() => null);
+        if (!response.ok || !payload || payload.ok === false || !payload.draft) {
+          throw new Error(payload?.error || `Draft save failed (${response.status})`);
+        }
+        writeServerDraftMeta(payload.draft);
+        setSaveState('Draft saved', true);
+        updateArticlePayload();
+        return true;
+      } catch (error) {
+        setSaveState(error.message === 'Unauthorized' ? 'Publisher key needed' : 'Server save failed', true);
+        return false;
+      }
+    }
+
     function maskPublisherKey(value) {
       const key = String(value || '').trim();
       if (!key) {
@@ -1796,6 +2065,7 @@
       renderPublisherKeyState('Publisher access saved');
       setSaveState('Publisher access saved', true);
       retryImagesWaitingForKey();
+      window.setTimeout(checkServerDraftOnLoad, 0);
       updateArticlePayload();
       return true;
     }
@@ -1810,6 +2080,7 @@
       publisherAccessKey.value = '';
       publisherAccessKey.dataset.masked = 'false';
       publisherAccessKey.readOnly = false;
+      writeServerDraftMeta(null);
       renderPublisherKeyState('No publisher key saved');
       setSaveState('Publisher access cleared', true);
       updateArticlePayload();
@@ -5421,8 +5692,7 @@
     });
 
     saveDraftBtn.addEventListener('click', () => {
-      saveDraft();
-      setSaveState('Saved locally', true);
+      saveServerDraft();
     });
 
     publisherAccessKey.addEventListener('focus', preparePublisherKeyInputForEdit);
@@ -5646,6 +5916,7 @@
     if (!importArticleFromHash()) {
       loadDraft();
     }
+    window.setTimeout(checkServerDraftOnLoad, 0);
     updateToolbarState();
     window.otwPublisher = {
       draftKey: DRAFT_KEY,
@@ -5653,6 +5924,9 @@
       buildPublishPayload,
       validatePublishPayload,
       saveDraft,
+      saveServerDraft,
+      fetchServerDraft,
+      restoreServerDraft,
       loadDraft,
       getArticlePayload() {
         return JSON.parse(articlePayload.textContent || 'null');
@@ -5662,6 +5936,9 @@
       },
       hasPublisherKey() {
         return Boolean(getPublisherPublishKey());
+      },
+      getServerDraftMeta() {
+        return serverDraftMeta;
       },
       hydrateArticleForTest(article) {
         isHydrating = true;
