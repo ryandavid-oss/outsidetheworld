@@ -115,6 +115,14 @@ async function draftCryptoKey(secret) {
   return crypto.subtle.importKey("raw", keyMaterial, "AES-GCM", false, ["encrypt", "decrypt"]);
 }
 
+function getPublisherDraftEncryptionSecret(env) {
+  const secret = String(env.PUBLISHER_DRAFT_KEY || env.PUBLISHER_DRAFT_ENCRYPTION_KEY || "").trim();
+  if (!secret) {
+    throw new Error("Publisher draft encryption key is not configured");
+  }
+  return secret;
+}
+
 async function encryptPublisherDraft(secret, draft) {
   const iv = crypto.getRandomValues(new Uint8Array(12));
   const key = await draftCryptoKey(secret);
@@ -1906,19 +1914,20 @@ async function loadPublisherDraft(env) {
   if (!env.IOTD_BUCKET) {
     throw new Error("Draft bucket binding is not configured");
   }
+  const encryptionSecret = getPublisherDraftEncryptionSecret(env);
   const object = await env.IOTD_BUCKET.get(PUBLISHER_DRAFT_OBJECT_KEY);
   if (!object) {
     return null;
   }
   const envelope = await object.json();
-  return decryptPublisherDraft(env.PUBLISH_KEY, envelope);
+  return decryptPublisherDraft(encryptionSecret, envelope);
 }
 
 async function savePublisherDraft(env, draft) {
   if (!env.IOTD_BUCKET) {
     throw new Error("Draft bucket binding is not configured");
   }
-  const envelope = await encryptPublisherDraft(env.PUBLISH_KEY, draft);
+  const envelope = await encryptPublisherDraft(getPublisherDraftEncryptionSecret(env), draft);
   await env.IOTD_BUCKET.put(PUBLISHER_DRAFT_OBJECT_KEY, JSON.stringify(envelope), {
     httpMetadata: {
       contentType: "application/json; charset=utf-8"

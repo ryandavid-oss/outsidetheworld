@@ -32,10 +32,12 @@ class MockR2Bucket {
 
 const draftObjectKey = "publisher_drafts/current.json.enc";
 const publishKey = "test-publisher-key";
+const draftEncryptionKey = "test-publisher-draft-encryption-key";
 
 function env(bucket = new MockR2Bucket()) {
   return {
     PUBLISH_KEY: publishKey,
+    PUBLISHER_DRAFT_KEY: draftEncryptionKey,
     IOTD_BUCKET: bucket,
     GITHUB_OWNER: "owner",
     GITHUB_REPO: "repo",
@@ -217,6 +219,29 @@ function authorizedHeaders(key = publishKey) {
 }
 
 {
+  const testEnv = env();
+  delete testEnv.PUBLISHER_DRAFT_KEY;
+
+  const save = await json(request("/publisher-draft", {
+    method: "POST",
+    headers: authorizedHeaders(),
+    body: JSON.stringify(draftRequestBody())
+  }), testEnv);
+  assert.equal(save.status, 400);
+  assert.equal(save.body.ok, false);
+  assert.match(save.body.error, /encryption key is not configured/i);
+
+  const load = await json(request("/publisher-draft", {
+    headers: {
+      "x-publish-key": publishKey
+    }
+  }), testEnv);
+  assert.equal(load.status, 400);
+  assert.equal(load.body.ok, false);
+  assert.match(load.body.error, /encryption key is not configured/i);
+}
+
+{
   const bucket = new MockR2Bucket();
   const testEnv = env(bucket);
   const result = await json(request("/publisher-draft", {
@@ -249,6 +274,7 @@ function authorizedHeaders(key = publishKey) {
   assert.ok(envelope.ciphertext);
   assert.equal(stored.includes("Server Draft Test"), false);
   assert.equal(stored.includes(publishKey), false);
+  assert.equal(stored.includes(draftEncryptionKey), false);
   assert.equal(bucket.options.get(draftObjectKey).customMetadata.draftId, undefined);
   assert.equal(bucket.options.get(draftObjectKey).customMetadata.schema, "otw.publisher.serverDraft");
 
@@ -363,13 +389,33 @@ function authorizedHeaders(key = publishKey) {
     body: JSON.stringify(draftRequestBody())
   }), testEnv);
   assert.equal(saved.status, 200);
+  const rotatedPublishKeyEnv = { ...testEnv, PUBLISH_KEY: "rotated-publish-key" };
+  const loadAfterPublishKeyRotation = await json(request("/publisher-draft", {
+    headers: {
+      "x-publish-key": "rotated-publish-key"
+    }
+  }), rotatedPublishKeyEnv);
+  assert.equal(loadAfterPublishKeyRotation.status, 200);
+  assert.equal(loadAfterPublishKeyRotation.body.ok, true);
+  assert.equal(loadAfterPublishKeyRotation.body.draft.article.title, "Server Draft Test");
+}
+
+{
+  const bucket = new MockR2Bucket();
+  const testEnv = env(bucket);
+  const saved = await json(request("/publisher-draft", {
+    method: "POST",
+    headers: authorizedHeaders(),
+    body: JSON.stringify(draftRequestBody())
+  }), testEnv);
+  assert.equal(saved.status, 200);
   const stored = bucket.objects.get(draftObjectKey);
-  const wrongKeyEnv = { ...testEnv, PUBLISH_KEY: "different-test-key" };
+  const wrongDraftKeyEnv = { ...testEnv, PUBLISHER_DRAFT_KEY: "different-draft-encryption-key" };
   const load = await json(request("/publisher-draft", {
     headers: {
-      "x-publish-key": "different-test-key"
+      "x-publish-key": publishKey
     }
-  }), wrongKeyEnv);
+  }), wrongDraftKeyEnv);
   assert.equal(load.status, 400);
   assert.equal(load.body.ok, false);
   assert.equal(bucket.objects.get(draftObjectKey), stored);
