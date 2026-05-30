@@ -22,6 +22,7 @@ SITE_TITLE = "Outside The World"
 SITE_SUBTITLE = "Blog posts and fragments from Outside The World."
 PHOENIX = ZoneInfo("America/Phoenix")
 ATOM_NS = "http://www.w3.org/2005/Atom"
+PUBLISHER_METADATA_RE = re.compile(r"<!--\s*otw-publisher\s*[\s\S]*?\s*-->", re.I)
 
 
 def extract_json_array(path: Path, pattern: str) -> list[dict]:
@@ -48,6 +49,7 @@ def build_fragment_id(fragment: dict) -> str:
 
 def clean_text(value: str) -> str:
     text = html.unescape(str(value or ""))
+    text = PUBLISHER_METADATA_RE.sub(" ", text)
     text = re.sub(r"<[^>]+>", " ", text)
     text = re.sub(r"!\[[^\]]*\]\(([^)]+)\)", " ", text)
     text = re.sub(r"\[([^\]]+)\]\(([^)]+)\)", r"\1", text)

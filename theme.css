@@ -105,9 +105,14 @@ body::after {
     transform: translateZ(0);
 }
 
+/* OTW publisher image presentation contract:
+   sizes: small, medium, large, original
+   alignments: left, center, right
+   wraps: none, wrap-left, wrap-right; wrapped images collapse to block layout on mobile. */
 .otw-figure {
     margin: 2.25rem auto;
-    max-width: min(100%, 720px);
+    max-width: min(100%, var(--otw-figure-max-width, 720px));
+    clear: both;
 }
 
 .otw-figure img {
@@ -123,6 +128,67 @@ body::after {
     font-size: 0.9rem;
     line-height: 1.5;
     text-align: center;
+}
+
+.otw-figure--small {
+    --otw-figure-max-width: 320px;
+}
+
+.otw-figure--medium {
+    --otw-figure-max-width: 520px;
+}
+
+.otw-figure--large {
+    --otw-figure-max-width: 760px;
+}
+
+.otw-figure--original {
+    --otw-figure-max-width: 100%;
+}
+
+.otw-figure--align-left {
+    margin-left: 0;
+    margin-right: auto;
+}
+
+.otw-figure--align-center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.otw-figure--align-right {
+    margin-left: auto;
+    margin-right: 0;
+}
+
+.otw-figure--wrap-left,
+.otw-figure--wrap-right {
+    clear: none;
+    max-width: min(45%, var(--otw-figure-max-width, 520px));
+    margin-top: 0.35rem;
+    margin-bottom: 1rem;
+}
+
+.otw-figure--wrap-left {
+    float: left;
+    margin-right: 1.5rem;
+    margin-left: 0;
+}
+
+.otw-figure--wrap-right {
+    float: right;
+    margin-right: 0;
+    margin-left: 1.5rem;
+}
+
+@media (max-width: 720px) {
+    .otw-figure--wrap-left,
+    .otw-figure--wrap-right {
+        float: none;
+        clear: both;
+        max-width: min(100%, var(--otw-figure-max-width, 520px));
+        margin: 2.25rem auto;
+    }
 }
 
 /* 6. NAVIGATION CHASSIS (Consistency Engine) */

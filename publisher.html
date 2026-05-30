@@ -3446,12 +3446,91 @@
       };
     }
 
-    function composeMarkdownDocument(article, bodyMarkdown) {
+    function publicPublisherImageMetadata(image) {
+      const url = safeImagePublishUrl(image?.media?.publishUrl || image?.media?.url || '');
+      if (!url) {
+        return null;
+      }
+      return {
+        id: image.id || blockId('image'),
+        url,
+        objectKey: image.media?.objectKey || '',
+        alt: image.alt || '',
+        caption: image.caption || '',
+        displaySize: normalizeFigureDisplaySize(image.displaySize),
+        alignment: normalizeFigureAlignment(image.alignment),
+        wrapMode: normalizeFigureWrapMode(image.wrapMode)
+      };
+    }
+
+    function buildPublisherPostMetadata(article, body) {
+      const images = (body.images || [])
+        .map(publicPublisherImageMetadata)
+        .filter(Boolean);
+      const imageById = new Map(images.map((image) => [image.id, image]));
+      const blocks = (body.blocks || [])
+        .map((block) => {
+          if (!block || !block.type) {
+            return null;
+          }
+          if (block.type === 'image') {
+            const image = imageById.get(block.imageRef || block.id);
+            if (!image) {
+              return null;
+            }
+            return {
+              id: block.id || image.id,
+              type: 'image',
+              imageRef: image.id,
+              url: image.url,
+              objectKey: image.objectKey,
+              displaySize: image.displaySize,
+              alignment: image.alignment,
+              wrapMode: image.wrapMode
+            };
+          }
+          return {
+            id: block.id || '',
+            type: block.type,
+            level: block.level || undefined,
+            ordered: block.ordered === true || undefined,
+            checklist: block.checklist === true || undefined
+          };
+        })
+        .filter(Boolean);
+
+      return {
+        schema: 'otw.publisher.post',
+        version: 1,
+        source: 'publisher.html',
+        subhead: article.subhead || '',
+        blocks,
+        images
+      };
+    }
+
+    function publisherMetadataComment(metadata) {
+      if (!metadata || (!metadata.subhead && !metadata.images?.length && !metadata.blocks?.length)) {
+        return '';
+      }
+      const json = JSON.stringify(metadata, null, 2)
+        .replace(/--/g, '\\u002d\\u002d')
+        .replace(/</g, '\\u003c')
+        .replace(/>/g, '\\u003e')
+        .replace(/&/g, '\\u0026');
+      return `<!-- otw-publisher\n${json}\n-->`;
+    }
+
+    function composeMarkdownDocument(article, bodyMarkdown, publisherMetadata = null) {
       const lines = [
         `# ${String(article.title || '').trim()}`,
         `Date: ${article.metadata?.articleDate || article.metadata?.publishDate || ''}`,
         ''
       ];
+      const metadataComment = publisherMetadataComment(publisherMetadata);
+      if (metadataComment) {
+        lines.push(metadataComment, '');
+      }
       if (article.subhead) {
         lines.push(`_${escapeMarkdownText(article.subhead)}_`, '');
       }
@@ -3523,6 +3602,7 @@
     function buildPublishPayload(article = serializeArticle()) {
       const body = convertBodyToPublish(article.body?.blocks || []);
       const slugSource = article.metadata?.slug || article.title || article.metadata?.docName || '';
+      const publisherMetadata = buildPublisherPostMetadata(article, body);
       const payload = {
         schema: PUBLISH_PAYLOAD_SCHEMA,
         version: 1,
@@ -3550,7 +3630,8 @@
         images: body.images
       };
 
-      payload.content.markdown = composeMarkdownDocument(article, body.markdown);
+      payload.publisher = publisherMetadata;
+      payload.content.markdown = composeMarkdownDocument(article, body.markdown, publisherMetadata);
       payload.validation = validatePublishPayload(payload, body.issues);
       return payload;
     }

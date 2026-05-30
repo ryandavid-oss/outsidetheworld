@@ -61,21 +61,198 @@ def smartypants_safe(value):
     return html.escape(value or '', quote=True)
 
 IMAGE_MARKDOWN_PATTERN = re.compile(r'!\[([^\]]*)\]\((\S+?)(?:\s+"((?:\\"|[^"])*)")?\)')
+PUBLISHER_METADATA_PATTERN = re.compile(r'<!--\s*otw-publisher\s*([\s\S]*?)\s*-->', re.I)
 
 def markdown_unescape(value):
     return (value or '').replace('\\"', '"').replace('\\[', '[').replace('\\]', ']').replace('\\\\', '\\')
 
-def render_markdown_image(match, as_block=False):
+def safe_link_url(value):
+    url = str(value or '').strip()
+    if re.match(r'^(https?:|mailto:|#|/)', url, re.I):
+        return url
+    return ''
+
+def safe_image_url(value):
+    url = str(value or '').strip()
+    if not url or re.match(r'^(javascript:|data:|blob:)', url, re.I):
+        return ''
+    if re.match(r'^(https?:|/)', url, re.I):
+        return url
+    return ''
+
+def normalize_choice(value, allowed, fallback):
+    value = str(value or '').strip().lower()
+    return value if value in allowed else fallback
+
+def normalize_image_presentation(value):
+    value = value or {}
+    return {
+        'displaySize': normalize_choice(value.get('displaySize'), ['small', 'medium', 'large', 'original'], 'medium'),
+        'alignment': normalize_choice(value.get('alignment'), ['left', 'center', 'right'], 'center'),
+        'wrapMode': normalize_choice(value.get('wrapMode'), ['none', 'wrap-left', 'wrap-right'], 'none'),
+    }
+
+def normalize_publisher_images(metadata):
+    images = metadata.get('images') if isinstance(metadata, dict) else []
+    blocks = metadata.get('blocks') if isinstance(metadata, dict) else []
+    by_url = {}
+    by_id = {}
+
+    if not isinstance(images, list):
+        images = []
+    if not isinstance(blocks, list):
+        blocks = []
+
+    for image in images:
+        if not isinstance(image, dict):
+            continue
+        media = image.get('media') if isinstance(image.get('media'), dict) else {}
+        url = safe_image_url(image.get('url') or media.get('url') or media.get('publishUrl'))
+        if not url:
+            continue
+        normalized = {
+            'id': str(image.get('id') or image.get('imageRef') or ''),
+            'url': url,
+            'objectKey': str(image.get('objectKey') or media.get('objectKey') or ''),
+            'alt': str(image.get('alt') or ''),
+            'caption': str(image.get('caption') or ''),
+            **normalize_image_presentation(image),
+        }
+        by_url[url] = normalized
+        if normalized['id']:
+            by_id[normalized['id']] = normalized
+
+    for block in blocks:
+        if not isinstance(block, dict) or block.get('type') != 'image':
+            continue
+        media = block.get('media') if isinstance(block.get('media'), dict) else {}
+        url = safe_image_url(block.get('url') or media.get('url') or media.get('publishUrl'))
+        image = by_id.get(str(block.get('imageRef') or block.get('id') or '')) or by_url.get(url)
+        if not image and not url:
+            continue
+        normalized = {
+            **(image or {}),
+            'id': str(block.get('imageRef') or block.get('id') or (image or {}).get('id') or ''),
+            'url': url or image['url'],
+            'objectKey': str(block.get('objectKey') or (image or {}).get('objectKey') or ''),
+            'alt': str(block.get('alt') or (image or {}).get('alt') or ''),
+            'caption': str(block.get('caption') or (image or {}).get('caption') or ''),
+            **normalize_image_presentation({**(image or {}), **block}),
+        }
+        by_url[normalized['url']] = normalized
+        if normalized['id']:
+            by_id[normalized['id']] = normalized
+
+    return by_url
+
+def normalize_publisher_image_sequence(metadata):
+    images = metadata.get('images') if isinstance(metadata, dict) else []
+    blocks = metadata.get('blocks') if isinstance(metadata, dict) else []
+    by_url = {}
+    by_id = {}
+    ordered = []
+
+    if not isinstance(blocks, list):
+        blocks = []
+    if not isinstance(images, list):
+        images = []
+
+    for image in images:
+        if not isinstance(image, dict):
+            continue
+        media = image.get('media') if isinstance(image.get('media'), dict) else {}
+        url = safe_image_url(image.get('url') or media.get('url') or media.get('publishUrl'))
+        if not url:
+            continue
+        normalized = {
+            'id': str(image.get('id') or image.get('imageRef') or ''),
+            'url': url,
+            'objectKey': str(image.get('objectKey') or media.get('objectKey') or ''),
+            'alt': str(image.get('alt') or ''),
+            'caption': str(image.get('caption') or ''),
+            **normalize_image_presentation(image),
+        }
+        by_url[url] = normalized
+        if normalized['id']:
+            by_id[normalized['id']] = normalized
+
+    for block in blocks:
+        if not isinstance(block, dict) or block.get('type') != 'image':
+            continue
+        url = safe_image_url(block.get('url'))
+        image = by_id.get(str(block.get('imageRef') or block.get('id') or '')) or by_url.get(url)
+        if not image and not url:
+            continue
+        ordered.append({
+            **(image or {}),
+            'id': str(block.get('imageRef') or block.get('id') or (image or {}).get('id') or ''),
+            'url': url or image['url'],
+            'objectKey': str(block.get('objectKey') or (image or {}).get('objectKey') or ''),
+            'alt': str(block.get('alt') or (image or {}).get('alt') or ''),
+            'caption': str(block.get('caption') or (image or {}).get('caption') or ''),
+            **normalize_image_presentation({**(image or {}), **block}),
+        })
+
+    return ordered or list(by_url.values())
+
+def sanitize_publisher_image_list(metadata):
+    raw_images = metadata.get('images') if isinstance(metadata.get('images'), list) else []
+    sanitized_images = []
+
+    for image in raw_images:
+        if not isinstance(image, dict):
+            continue
+        media = image.get('media') if isinstance(image.get('media'), dict) else {}
+        url = safe_image_url(image.get('url') or media.get('url') or media.get('publishUrl'))
+        if not url:
+            continue
+        normalized = {
+            'id': str(image.get('id') or image.get('imageRef') or '')[:120],
+            'url': url,
+            'objectKey': str(image.get('objectKey') or media.get('objectKey') or '')[:300],
+            'alt': str(image.get('alt') or ''),
+            'caption': str(image.get('caption') or ''),
+            **normalize_image_presentation(image),
+        }
+        sanitized_images.append(normalized)
+
+    return sanitized_images
+
+def figure_classes(presentation):
+    normalized = normalize_image_presentation(presentation or {})
+    return ' '.join([
+        'otw-figure',
+        f"otw-figure--{normalized['displaySize']}",
+        f"otw-figure--align-{normalized['alignment']}",
+        f"otw-figure--{normalized['wrapMode']}",
+    ])
+
+def render_markdown_image(match, as_block=False, image_metadata=None, image_queue=None):
     alt = markdown_unescape(html.unescape(match.group(1) or ''))
-    src = html.unescape(match.group(2) or '')
+    src = safe_image_url(html.unescape(match.group(2) or ''))
     caption = markdown_unescape(html.unescape(match.group(3) or '')).strip()
+    if not src:
+        return ''
     safe_src = html.escape(src, quote=True)
+    metadata = None
+    queued = image_queue.get(src) if image_queue else None
+    if queued:
+        metadata = queued.pop(0)
+    elif image_metadata:
+        metadata = image_metadata.get(src)
+    if metadata:
+        alt = metadata.get('alt') or alt
+        caption = metadata.get('caption') or caption
     safe_alt = html.escape(alt, quote=True)
     title_attr = f' title="{html.escape(caption, quote=True)}"' if caption else ''
     image_html = f'<img src="{safe_src}" alt="{safe_alt}"{title_attr}>'
     if as_block and caption:
         safe_caption = html.escape(caption, quote=False)
-        return f'<figure class="otw-figure"><img src="{safe_src}" alt="{safe_alt}"><figcaption><em>{safe_caption}</em></figcaption></figure>'
+        classes = figure_classes(metadata) if metadata else 'otw-figure'
+        return f'<figure class="{classes}"><img src="{safe_src}" alt="{safe_alt}"><figcaption><em>{safe_caption}</em></figcaption></figure>'
+    if as_block and metadata:
+        classes = figure_classes(metadata)
+        return f'<figure class="{classes}"><img src="{safe_src}" alt="{safe_alt}"></figure>'
     return image_html
 
 def is_trusted_figure_block(value):
@@ -83,15 +260,39 @@ def is_trusted_figure_block(value):
     lowered = raw.lower()
     return lowered.startswith('<figure') and lowered.endswith('</figure>') and '<script' not in lowered
 
-def inline_markdown(value):
+def sanitize_trusted_html_block(value):
+    sanitized = re.sub(r'<\s*(script|iframe|object|embed)\b[\s\S]*?<\s*/\s*\1\s*>', '', value or '', flags=re.I)
+    sanitized = re.sub(r'\s+on[a-z0-9_-]+\s*=\s*"[^"]*"', '', sanitized, flags=re.I)
+    sanitized = re.sub(r"\s+on[a-z0-9_-]+\s*=\s*'[^']*'", '', sanitized, flags=re.I)
+    sanitized = re.sub(r'\s+on[a-z0-9_-]+\s*=\s*[^\s>]+', '', sanitized, flags=re.I)
+
+    def clean_url_attr(match):
+        attr = match.group(1)
+        quote_char = match.group(2)
+        url = match.group(3)
+        safe_url = safe_image_url(url) if attr.lower() == 'src' else safe_link_url(url)
+        return f' {attr}={quote_char}{html.escape(safe_url, quote=True)}{quote_char}' if safe_url else ''
+
+    sanitized = re.sub(r'\s+(src|href)\s*=\s*(["\'])(.*?)\2', clean_url_attr, sanitized, flags=re.I)
+    return sanitized
+
+def inline_markdown(value, image_metadata=None, image_queue=None):
     value = html.escape(value or '', quote=False)
-    value = IMAGE_MARKDOWN_PATTERN.sub(lambda m: render_markdown_image(m), value)
-    value = re.sub(r'\[([^\]]+)\]\(([^)]+)\)', lambda m: f'<a href="{html.escape(m.group(2), quote=True)}">{m.group(1)}</a>', value)
+    value = IMAGE_MARKDOWN_PATTERN.sub(lambda m: render_markdown_image(m, image_metadata=image_metadata, image_queue=image_queue), value)
+    value = re.sub(
+        r'\[([^\]]+)\]\(([^)]+)\)',
+        lambda m: f'<a href="{html.escape(safe_link_url(m.group(2)), quote=True)}">{m.group(1)}</a>' if safe_link_url(m.group(2)) else m.group(1),
+        value
+    )
     value = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', value)
     value = re.sub(r'`([^`]+)`', r'<code>\1</code>', value)
     return value
 
-def markdown_to_html(markdown):
+def markdown_to_html(markdown, publisher_metadata=None):
+    image_metadata = normalize_publisher_images(publisher_metadata or {})
+    image_queue = {}
+    for image in normalize_publisher_image_sequence(publisher_metadata or {}):
+        image_queue.setdefault(image.get('url'), []).append(image)
     blocks = re.split(r'\n\s*\n', (markdown or '').strip())
     html_blocks = []
 
@@ -103,36 +304,103 @@ def markdown_to_html(markdown):
             html_blocks.append('<hr>')
             continue
         if raw.startswith('<div class="otw-center">') and raw.endswith('</div>'):
-            html_blocks.append(raw)
+            html_blocks.append(sanitize_trusted_html_block(raw))
             continue
         if is_trusted_figure_block(raw):
-            html_blocks.append(raw)
+            html_blocks.append(sanitize_trusted_html_block(raw))
             continue
 
         image_match = IMAGE_MARKDOWN_PATTERN.fullmatch(raw)
         if image_match:
-            html_blocks.append(render_markdown_image(image_match, as_block=True))
+            html_blocks.append(render_markdown_image(image_match, as_block=True, image_metadata=image_metadata, image_queue=image_queue))
             continue
 
         lines = raw.splitlines()
         if all(re.match(r'^\s*[-*]\s+', line) for line in lines):
-            items = ''.join(f'<li>{inline_markdown(re.sub(r"^\s*[-*]\s+", "", line))}</li>' for line in lines)
+            items = ''.join(f'<li>{inline_markdown(re.sub(r"^\s*[-*]\s+", "", line), image_metadata, image_queue)}</li>' for line in lines)
             html_blocks.append(f'<ul>{items}</ul>')
             continue
         if all(re.match(r'^\s*\d+\.\s+', line) for line in lines):
-            items = ''.join(f'<li>{inline_markdown(re.sub(r"^\s*\d+\.\s+", "", line))}</li>' for line in lines)
+            items = ''.join(f'<li>{inline_markdown(re.sub(r"^\s*\d+\.\s+", "", line), image_metadata, image_queue)}</li>' for line in lines)
             html_blocks.append(f'<ol>{items}</ol>')
             continue
         if raw.startswith('### '):
-            html_blocks.append(f'<h3>{inline_markdown(raw[4:].strip())}</h3>')
+            html_blocks.append(f'<h3>{inline_markdown(raw[4:].strip(), image_metadata, image_queue)}</h3>')
             continue
         if raw.startswith('## '):
-            html_blocks.append(f'<h2>{inline_markdown(raw[3:].strip())}</h2>')
+            html_blocks.append(f'<h2>{inline_markdown(raw[3:].strip(), image_metadata, image_queue)}</h2>')
             continue
 
-        html_blocks.append(f'<p>{inline_markdown(raw).replace(chr(10), "<br>")}</p>')
+        html_blocks.append(f'<p>{inline_markdown(raw, image_metadata, image_queue).replace(chr(10), "<br>")}</p>')
 
     return '\n'.join(html_blocks)
+
+def sanitize_publisher_metadata(metadata):
+    if not isinstance(metadata, dict) or metadata.get('schema') != 'otw.publisher.post' or metadata.get('version') != 1:
+        return {}
+
+    images = sanitize_publisher_image_list(metadata)
+    blocks = []
+    raw_blocks = metadata.get('blocks') if isinstance(metadata.get('blocks'), list) else []
+
+    for block in raw_blocks:
+        if not isinstance(block, dict):
+            continue
+        block_type = normalize_choice(
+            block.get('type'),
+            ['paragraph', 'heading', 'quote', 'divider', 'list', 'image', 'raw'],
+            ''
+        )
+        if not block_type:
+            continue
+
+        sanitized = {
+            'id': str(block.get('id') or '')[:120],
+            'type': block_type,
+        }
+        if block_type == 'image':
+            url = safe_image_url(block.get('url'))
+            image_ref = str(block.get('imageRef') or block.get('id') or '')[:120]
+            if image_ref:
+                sanitized['imageRef'] = image_ref
+            if url:
+                sanitized['url'] = url
+            object_key = str(block.get('objectKey') or '')[:300]
+            if object_key:
+                sanitized['objectKey'] = object_key
+            sanitized.update(normalize_image_presentation(block))
+        elif block_type == 'heading':
+            try:
+                level = int(block.get('level') or 2)
+            except (TypeError, ValueError):
+                level = 2
+            sanitized['level'] = min(6, max(1, level))
+        elif block_type == 'list':
+            sanitized['ordered'] = bool(block.get('ordered'))
+            sanitized['checklist'] = bool(block.get('checklist'))
+        blocks.append(sanitized)
+
+    cleaned = {
+        'schema': 'otw.publisher.post',
+        'version': 1,
+        'source': 'publisher.html',
+        'subhead': str(metadata.get('subhead') or ''),
+        'blocks': blocks,
+        'images': images,
+    }
+    return cleaned
+
+def extract_publisher_metadata(body):
+    match = PUBLISHER_METADATA_PATTERN.search(body or '')
+    if not match:
+        return {}, body
+    try:
+        metadata = json.loads(match.group(1))
+        metadata = sanitize_publisher_metadata(metadata)
+    except json.JSONDecodeError:
+        metadata = {}
+    cleaned = PUBLISHER_METADATA_PATTERN.sub('', body or '', count=1).strip()
+    return metadata, cleaned
 
 def absolute_url(path):
     if not path:
@@ -232,7 +500,7 @@ def render_share_page(post):
     description = excerpt(post['body'])
     published = parse_display_date(post['date'])
     published_meta = f'<meta property="article:published_time" content="{published.date().isoformat()}" />' if published else ''
-    body_html = markdown_to_html(post['body'])
+    body_html = markdown_to_html(post['body'], post.get('publisher'))
 
     return f'''<!DOCTYPE html>
 <html lang="en">
@@ -389,7 +657,7 @@ def render_share_page(post):
         .entry-body figure,
         .entry-body .otw-figure {{
             margin: 40px auto;
-            max-width: min(100%, 720px);
+            max-width: min(100%, var(--otw-figure-max-width, 720px));
         }}
 
         .entry-body figure img,
@@ -404,6 +672,46 @@ def render_share_page(post):
             font-size: 0.9rem;
             line-height: 1.5;
             text-align: center;
+        }}
+
+        .entry-body .otw-figure--small {{ --otw-figure-max-width: 320px; }}
+        .entry-body .otw-figure--medium {{ --otw-figure-max-width: 520px; }}
+        .entry-body .otw-figure--large {{ --otw-figure-max-width: 760px; }}
+        .entry-body .otw-figure--original {{ --otw-figure-max-width: 100%; }}
+
+        .entry-body .otw-figure--align-left {{
+            margin-left: 0;
+            margin-right: auto;
+        }}
+
+        .entry-body .otw-figure--align-center {{
+            margin-left: auto;
+            margin-right: auto;
+        }}
+
+        .entry-body .otw-figure--align-right {{
+            margin-left: auto;
+            margin-right: 0;
+        }}
+
+        .entry-body .otw-figure--wrap-left,
+        .entry-body .otw-figure--wrap-right {{
+            clear: none;
+            max-width: min(45%, var(--otw-figure-max-width, 520px));
+            margin-top: 0.35rem;
+            margin-bottom: 1rem;
+        }}
+
+        .entry-body .otw-figure--wrap-left {{
+            float: left;
+            margin-left: 0;
+            margin-right: 1.5rem;
+        }}
+
+        .entry-body .otw-figure--wrap-right {{
+            float: right;
+            margin-left: 1.5rem;
+            margin-right: 0;
         }}
 
         .entry-body hr {{
@@ -441,6 +749,14 @@ def render_share_page(post):
         }}
 
         @media (max-width: 899px) {{
+            .entry-body .otw-figure--wrap-left,
+            .entry-body .otw-figure--wrap-right {{
+                float: none;
+                clear: both;
+                max-width: min(100%, var(--otw-figure-max-width, 520px));
+                margin: 40px auto;
+            }}
+
             .share-card {{
                 border: none;
                 background: rgba(0, 0, 0, 0.85);
@@ -549,14 +865,18 @@ def sync_production():
 
             # 2. Preserve EVERYTHING from line 2 (the 3rd line) onward
             # This keeps your spacing, your poems, and your formatting intact
-            body_content = "".join(lines[2:]).strip()
+            raw_body_content = "".join(lines[2:]).strip()
+            publisher_metadata, body_content = extract_publisher_metadata(raw_body_content)
 
-            posts.append({
+            post = {
                 "title": title,
                 "date": date_str,
                 "body": body_content,
                 "file": filename
-            })
+            }
+            if publisher_metadata:
+                post["publisher"] = publisher_metadata
+            posts.append(post)
         except Exception as e:
             print(f"Error processing {filename}: {e}")
 
