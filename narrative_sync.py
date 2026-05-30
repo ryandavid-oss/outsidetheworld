@@ -331,7 +331,12 @@ def markdown_to_html(markdown, publisher_metadata=None):
             html_blocks.append(f'<h2>{inline_markdown(raw[3:].strip(), image_metadata, image_queue)}</h2>')
             continue
 
-        html_blocks.append(f'<p>{inline_markdown(raw, image_metadata, image_queue).replace(chr(10), "<br>")}</p>')
+        emphasis_match = re.match(r'^\s*(?:_([^_\n]+)_|\*([^*\n]+)\*)\s*$', raw)
+        if emphasis_match:
+            emphasized = emphasis_match.group(1) or emphasis_match.group(2) or ''
+            html_blocks.append(f'<p><em>{inline_markdown(emphasized, image_metadata, image_queue)}</em></p>')
+        else:
+            html_blocks.append(f'<p>{inline_markdown(raw, image_metadata, image_queue).replace(chr(10), "<br>")}</p>')
 
     return '\n'.join(html_blocks)
 

@@ -426,6 +426,7 @@ def test_realistic_publisher_fixture_end_to_end():
         assert_no_public_leaks(narrative_json)
 
         for expected in [
+            "<em>A field note from the new desk</em>",
             "otw-figure--small",
             "otw-figure--align-right",
             "otw-figure--wrap-left",
