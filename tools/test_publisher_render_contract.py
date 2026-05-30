@@ -256,6 +256,8 @@ def test_all_image_presentation_options_render_and_css_agrees():
     assert "alignments: left, center, right" in css
     assert "wraps: none, wrap-left, wrap-right" in css
     assert "max-width: 100%" in css
+    assert "width: min(100%, var(--otw-figure-max-width, 720px))" in css
+    assert "width: min(45%, var(--otw-figure-max-width, 520px))" in css
     assert "height: auto" in css
     assert "float: none" in css
     assert "object-fit: cover" not in css[css.index(".otw-figure"):css.index("/* 6. NAVIGATION")]

@@ -684,6 +684,18 @@ def render_share_page(post):
         .entry-body .otw-figure--large {{ --otw-figure-max-width: 760px; }}
         .entry-body .otw-figure--original {{ --otw-figure-max-width: 100%; }}
 
+        .entry-body .otw-figure--small,
+        .entry-body .otw-figure--medium,
+        .entry-body .otw-figure--large {{
+            width: min(100%, var(--otw-figure-max-width, 720px));
+        }}
+
+        .entry-body .otw-figure--small img,
+        .entry-body .otw-figure--medium img,
+        .entry-body .otw-figure--large img {{
+            width: 100%;
+        }}
+
         .entry-body .otw-figure--align-left {{
             margin-left: 0;
             margin-right: auto;
@@ -702,6 +714,7 @@ def render_share_page(post):
         .entry-body .otw-figure--wrap-left,
         .entry-body .otw-figure--wrap-right {{
             clear: none;
+            width: min(45%, var(--otw-figure-max-width, 520px));
             max-width: min(45%, var(--otw-figure-max-width, 520px));
             margin-top: 0.35rem;
             margin-bottom: 1rem;
@@ -758,6 +771,7 @@ def render_share_page(post):
             .entry-body .otw-figure--wrap-right {{
                 float: none;
                 clear: both;
+                width: min(100%, var(--otw-figure-max-width, 520px));
                 max-width: min(100%, var(--otw-figure-max-width, 520px));
                 margin: 40px auto;
             }}
