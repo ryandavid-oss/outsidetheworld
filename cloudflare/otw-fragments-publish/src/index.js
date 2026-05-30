@@ -657,6 +657,80 @@ function normalizeNarrativeSlug(value) {
   return slugify(value).slice(0, 96);
 }
 
+function narrativeMarkdownDocumentFromEntry(entry) {
+  if (!entry || typeof entry !== "object") {
+    return "";
+  }
+  if (typeof entry.markdown === "string") {
+    return entry.markdown;
+  }
+  if (typeof entry.fullMarkdown === "string") {
+    return entry.fullMarkdown;
+  }
+  if (entry.content && typeof entry.content.markdown === "string") {
+    return entry.content.markdown;
+  }
+  return "";
+}
+
+function parseNarrativeMarkdownDocument(markdown) {
+  const normalized = String(markdown || "").replace(/\r\n/g, "\n").trim();
+  if (!normalized) {
+    return null;
+  }
+  const lines = normalized.split("\n");
+  const titleMatch = String(lines[0] || "").match(/^#\s+(.+?)\s*$/);
+  const dateMatch = String(lines[1] || "").match(/^Date:\s*(.+?)\s*$/i);
+  if (!titleMatch || !dateMatch) {
+    throw new Error("Narrative markdown document must start with title and date lines");
+  }
+  return {
+    title: stripMarkdownForTitle(titleMatch[1]),
+    date: dateMatch[1].trim(),
+    body: lines.slice(2).join("\n").trim()
+  };
+}
+
+function assertPublishSafeNarrativeMarkdown(markdown, publishKey = "") {
+  const value = String(markdown || "");
+  if (publishKey && value.includes(publishKey)) {
+    throw new Error("Narrative markdown must not contain the publisher key");
+  }
+  if (/data:image\/[a-z0-9.+-]+(?:;[a-z0-9=:+/.-]+)*,/i.test(value)) {
+    throw new Error("Narrative markdown must not contain inline image data");
+  }
+  if (/\bblob:/i.test(value) || /\botw-local-image:/i.test(value)) {
+    throw new Error("Narrative markdown must not contain local image references");
+  }
+  if (/\bjavascript:/i.test(value)) {
+    throw new Error("Narrative markdown must not contain unsafe URLs");
+  }
+  if (/<\s*(script|iframe|object|embed)\b/i.test(value)) {
+    throw new Error("Narrative markdown must not contain unsafe HTML");
+  }
+  if (/\son[a-z0-9_-]+\s*=/i.test(value)) {
+    throw new Error("Narrative markdown must not contain event handler attributes");
+  }
+}
+
+function assertPublisherMetadataComment(markdown) {
+  const match = String(markdown || "").match(/<!--\s*otw-publisher\s*([\s\S]*?)-->/i);
+  if (!match) {
+    throw new Error("Publisher markdown must include publisher metadata");
+  }
+
+  let metadata;
+  try {
+    metadata = JSON.parse(match[1].trim());
+  } catch {
+    throw new Error("Publisher metadata must be valid JSON");
+  }
+
+  if (!metadata || metadata.schema !== "otw.publisher.post" || metadata.version !== 1) {
+    throw new Error("Publisher metadata schema is invalid");
+  }
+}
+
 function deriveNarrativeTitle(body) {
   const lines = String(body || "")
     .split(/\r?\n/)
@@ -666,23 +740,34 @@ function deriveNarrativeTitle(body) {
   return lines[0] || "Untitled draft";
 }
 
-function normalizeNarrativeEntry(entry) {
+function normalizeNarrativeEntry(entry, options = {}) {
   if (!entry || typeof entry !== "object") {
     throw new Error("Narrative payload must be an object");
   }
 
-  const body = String(entry.body || "").trim();
+  const markdownDocument = narrativeMarkdownDocumentFromEntry(entry);
+  const parsedMarkdown = markdownDocument ? parseNarrativeMarkdownDocument(markdownDocument) : null;
+  const rawBody = parsedMarkdown ? parsedMarkdown.body : entry.body;
+  const body = String(rawBody || "").trim();
   if (!body) {
     throw new Error("Narrative body is required");
   }
 
-  const date = normalizeNarrativeDate(entry.date);
+  assertPublishSafeNarrativeMarkdown(body, options.publishKey);
+  if (String(entry.source || "").trim() === "publisher.html") {
+    assertPublisherMetadataComment(body);
+  }
+
+  const date = normalizeNarrativeDate(entry.date || parsedMarkdown?.date);
   const rawTitle = String(entry.title || "").trim();
-  const title = rawTitle || deriveNarrativeTitle(body);
+  const title = rawTitle || parsedMarkdown?.title || deriveNarrativeTitle(body);
   const slug = normalizeNarrativeSlug(entry.slug);
 
   if (!title) {
     throw new Error("Narrative title could not be derived");
+  }
+  if (options.publishKey && `${title}\n${date.display}`.includes(options.publishKey)) {
+    throw new Error("Narrative markdown must not contain the publisher key");
   }
 
   return { title, date: date.display, fileDate: date.fileDate, slug, body };
@@ -2077,7 +2162,7 @@ export default {
 
       try {
         const body = await request.json();
-        const entry = normalizeNarrativeEntry(body);
+        const entry = normalizeNarrativeEntry(body, { publishKey: getPublishHeader(request) });
         const path = await findAvailableNarrativePath(env, entry.fileDate, entry.title, entry.slug);
         const markdown = buildNarrativeMarkdown(entry);
         const result = await saveRepoFile(env, path, markdown, null, "Publish ghost draft");

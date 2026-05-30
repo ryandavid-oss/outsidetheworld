@@ -201,6 +201,13 @@
       border-color: var(--blue-dark);
     }
 
+    .publish-btn[disabled],
+    .text-btn[aria-disabled="true"] {
+      cursor: not-allowed;
+      opacity: 0.62;
+      transform: none;
+    }
+
     .toolbar {
       position: sticky;
       top: 68px;
@@ -1245,7 +1252,8 @@
           </svg>
         </button>
         <button class="text-btn" id="saveDraftBtn" type="button" title="Save server draft">Save Draft</button>
-        <button class="publish-btn" id="publishBtn" type="button" title="Publishing is not wired yet">Publish</button>
+        <button class="publish-btn" id="publishBtn" type="button" title="Publish article">Publish</button>
+        <a class="text-btn" id="publishedLink" href="#" target="_blank" rel="noopener" hidden>Open Article</a>
       </div>
     </header>
 
@@ -1522,6 +1530,7 @@
     const highlightBtn = document.getElementById('highlightBtn');
     const saveDraftBtn = document.getElementById('saveDraftBtn');
     const publishBtn = document.getElementById('publishBtn');
+    const publishedLink = document.getElementById('publishedLink');
     const lineSpacingBtn = document.getElementById('lineSpacingBtn');
     const lineSpacingValue = document.getElementById('lineSpacingValue');
     const lineSpacingPopover = document.getElementById('lineSpacingPopover');
@@ -1542,6 +1551,7 @@
     const LEGACY_GHOST_FULL_PUBLISH_KEY_STORAGE = 'otw_ghost_writer_publish_key';
     const UPLOAD_GHOST_IMAGE_ENDPOINT = 'https://otw-fragments-publish.ryandavid.workers.dev/upload-ghost-image';
     const PUBLISHER_DRAFT_ENDPOINT = 'https://otw-fragments-publish.ryandavid.workers.dev/publisher-draft';
+    const PUBLISH_GHOST_DRAFT_ENDPOINT = 'https://otw-fragments-publish.ryandavid.workers.dev/publish-ghost-draft';
     const SERVER_DRAFT_META_KEY = 'otw.publisher.serverDraftMeta.v1';
     const MAX_INLINE_IMAGE_DATA_URL_LENGTH = 1800000;
     const MAX_STAGED_IMAGE_BYTES = 25 * 1024 * 1024;
@@ -3555,6 +3565,32 @@
         }
       });
 
+      const markdown = String(payload.content?.markdown || '');
+      if (!payload.publisher || payload.publisher.schema !== 'otw.publisher.post' || payload.publisher.version !== 1) {
+        issues.push(issue('error', 'publisher-metadata-invalid', 'Publisher metadata is invalid.'));
+      } else if (!markdown.includes('<!-- otw-publisher')) {
+        issues.push(issue('error', 'publisher-metadata-missing', 'Publisher metadata is missing from the Markdown document.'));
+      }
+      if (/data:image\/[a-z0-9.+-]+(?:;[a-z0-9=:+/.-]+)*,/i.test(markdown)) {
+        issues.push(issue('error', 'markdown-data-url', 'Published Markdown cannot contain inline image data.'));
+      }
+      if (/\bblob:/i.test(markdown) || /\botw-local-image:/i.test(markdown)) {
+        issues.push(issue('error', 'markdown-local-image', 'Published Markdown cannot contain local image references.'));
+      }
+      if (/\bjavascript:/i.test(markdown)) {
+        issues.push(issue('error', 'markdown-unsafe-url', 'Published Markdown contains an unsafe URL.'));
+      }
+      if (/<\s*(script|iframe|object|embed)\b/i.test(markdown) || /\son[a-z0-9_-]+\s*=/i.test(markdown)) {
+        issues.push(issue('error', 'markdown-unsafe-html', 'Published Markdown contains unsafe HTML.'));
+      }
+      if (/\b(Retry upload|Replace image|Remove image|Move image)\b/.test(markdown)) {
+        issues.push(issue('error', 'editor-control-text', 'Published Markdown contains editor control text.'));
+      }
+      const publishKey = getPublisherPublishKey();
+      if (publishKey && markdown.includes(publishKey)) {
+        issues.push(issue('error', 'publisher-key-leak', 'Published Markdown must not contain the publisher key.'));
+      }
+
       const blocking = issues.filter((item) => item.level === 'error');
       const warnings = issues.filter((item) => item.level === 'warning');
       const readiness = readinessFromIssues(issues);
@@ -3586,6 +3622,9 @@
       }
       if (issues.some((item) => item.code === 'image-needs-upload' || item.code === 'image-source-missing')) {
         return 'Images need upload';
+      }
+      if (issues.some((item) => item.code === 'publisher-metadata-invalid' || item.code === 'publisher-metadata-missing')) {
+        return 'Unsupported content found';
       }
       if (issues.some((item) => item.level === 'error' || item.code === 'block-unsupported' || item.code === 'block-unknown')) {
         return 'Unsupported content found';
@@ -3634,6 +3673,91 @@
       payload.content.markdown = composeMarkdownDocument(article, body.markdown, publisherMetadata);
       payload.validation = validatePublishPayload(payload, body.issues);
       return payload;
+    }
+
+    function publishRequestBodyFromPayload(payload) {
+      return {
+        title: payload.title,
+        date: payload.metadata?.publishDate || payload.metadata?.articleDate || '',
+        slug: payload.slugCandidate,
+        markdown: payload.content?.markdown || '',
+        source: 'publisher.html'
+      };
+    }
+
+    function publishedUrlFromWorkerFile(file) {
+      const name = String(file || '').split('/').pop() || '';
+      const stem = name.replace(/\.md$/i, '');
+      return stem ? `https://outsidetheworld.com/archive/${encodeURIComponent(stem)}.html` : '';
+    }
+
+    function setPublishBusy(isBusy) {
+      publishBtn.disabled = Boolean(isBusy);
+      publishBtn.textContent = isBusy ? 'Publishing' : 'Publish';
+    }
+
+    function revealPublishedLink(url) {
+      if (!url) {
+        publishedLink.hidden = true;
+        publishedLink.removeAttribute('href');
+        return;
+      }
+      publishedLink.href = url;
+      publishedLink.hidden = false;
+    }
+
+    async function publishArticle() {
+      saveDraft();
+      const publishKey = getPublisherPublishKey();
+      if (!publishKey) {
+        setSaveState('Publisher key needed', true);
+        renderPublisherKeyState('Publisher key required');
+        settingsSheet.classList.add('is-open');
+        settingsToggle.setAttribute('aria-expanded', 'true');
+        return null;
+      }
+
+      const article = updateArticlePayload();
+      const payload = buildPublishPayload(article);
+      publishPayload.textContent = JSON.stringify(payload, null, 2);
+      window.otwPublisherPublishPayload = payload;
+      if (!payload.validation.canPublish) {
+        setSaveState(payload.validation.readiness || 'Publish failed', true);
+        return null;
+      }
+
+      setPublishBusy(true);
+      setSaveState('Publishing');
+      try {
+        const response = await fetch(PUBLISH_GHOST_DRAFT_ENDPOINT, {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json; charset=utf-8',
+            'x-publish-key': publishKey
+          },
+          body: JSON.stringify(publishRequestBodyFromPayload(payload))
+        });
+        const result = await response.json().catch(() => null);
+        if (!response.ok || !result || result.ok === false) {
+          throw new Error(result?.error || `Publish failed (${response.status})`);
+        }
+        const articleUrl = publishedUrlFromWorkerFile(result.file);
+        revealPublishedLink(articleUrl);
+        setSaveState('Published');
+        window.otwPublisherLastPublish = {
+          file: result.file || '',
+          url: articleUrl,
+          commit: result.commit || null,
+          publishedAt: new Date().toISOString()
+        };
+        return result;
+      } catch (error) {
+        revealPublishedLink('');
+        setSaveState(error.message === 'Unauthorized' ? 'Publisher key needed' : 'Publish failed', true);
+        return null;
+      } finally {
+        setPublishBusy(false);
+      }
     }
 
     function articleIsEmpty(article) {
@@ -5798,13 +5922,7 @@
     savePublisherKeyBtn.addEventListener('click', savePublisherKey);
     clearPublisherKeyBtn.addEventListener('click', clearPublisherKey);
 
-    publishBtn.addEventListener('click', () => {
-      const article = updateArticlePayload();
-      const payload = buildPublishPayload(article);
-      publishPayload.textContent = JSON.stringify(payload, null, 2);
-      window.otwPublisherPublishPayload = payload;
-      setSaveState(payload.validation.canPublish ? 'Ready locally' : payload.validation.readiness, true);
-    });
+    publishBtn.addEventListener('click', publishArticle);
 
     insertImageBtn.addEventListener('click', () => {
       rememberSelection();
@@ -6004,6 +6122,9 @@
       serializeArticle,
       buildPublishPayload,
       validatePublishPayload,
+      publishArticle,
+      publishRequestBodyFromPayload,
+      publishedUrlFromWorkerFile,
       saveDraft,
       saveServerDraft,
       fetchServerDraft,
