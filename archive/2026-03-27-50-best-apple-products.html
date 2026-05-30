@@ -153,7 +153,7 @@
         .entry-body figure,
         .entry-body .otw-figure {
             margin: 40px auto;
-            max-width: min(100%, 720px);
+            max-width: min(100%, var(--otw-figure-max-width, 720px));
         }
 
         .entry-body figure img,
@@ -168,6 +168,46 @@
             font-size: 0.9rem;
             line-height: 1.5;
             text-align: center;
+        }
+
+        .entry-body .otw-figure--small { --otw-figure-max-width: 320px; }
+        .entry-body .otw-figure--medium { --otw-figure-max-width: 520px; }
+        .entry-body .otw-figure--large { --otw-figure-max-width: 760px; }
+        .entry-body .otw-figure--original { --otw-figure-max-width: 100%; }
+
+        .entry-body .otw-figure--align-left {
+            margin-left: 0;
+            margin-right: auto;
+        }
+
+        .entry-body .otw-figure--align-center {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .entry-body .otw-figure--align-right {
+            margin-left: auto;
+            margin-right: 0;
+        }
+
+        .entry-body .otw-figure--wrap-left,
+        .entry-body .otw-figure--wrap-right {
+            clear: none;
+            max-width: min(45%, var(--otw-figure-max-width, 520px));
+            margin-top: 0.35rem;
+            margin-bottom: 1rem;
+        }
+
+        .entry-body .otw-figure--wrap-left {
+            float: left;
+            margin-left: 0;
+            margin-right: 1.5rem;
+        }
+
+        .entry-body .otw-figure--wrap-right {
+            float: right;
+            margin-left: 1.5rem;
+            margin-right: 0;
         }
 
         .entry-body hr {
@@ -205,6 +245,14 @@
         }
 
         @media (max-width: 899px) {
+            .entry-body .otw-figure--wrap-left,
+            .entry-body .otw-figure--wrap-right {
+                float: none;
+                clear: both;
+                max-width: min(100%, var(--otw-figure-max-width, 520px));
+                margin: 40px auto;
+            }
+
             .share-card {
                 border: none;
                 background: rgba(0, 0, 0, 0.85);
@@ -240,7 +288,7 @@
 <p><a href="https://www.theverge.com/cs/tech/900477/apple-50-anniversary-rank-products">Go ahead and check it out here.</a></p>
 <p>Don't be surprised if you get paralyzed between choices like I did with this one. How on earth could I pick between such astonishing technologies that changed the way I computed forever?</p>
 <figure style="text-align: center;">
-  <img src="Images/Blog/verge_shot.png" alt="50 Best Apple Products">
+  <img alt="50 Best Apple Products">
   <figcaption><em>It's just apples to oranges to me</em></figcaption>
 </figure>
 <p>I miss those early days of Apple computing. And FYI - each time the ranker placed the HyperCard system in front of me, I absolutely chose that one. That was 1991 for me.</p>

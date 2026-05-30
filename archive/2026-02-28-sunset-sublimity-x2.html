@@ -153,7 +153,7 @@
         .entry-body figure,
         .entry-body .otw-figure {
             margin: 40px auto;
-            max-width: min(100%, 720px);
+            max-width: min(100%, var(--otw-figure-max-width, 720px));
         }
 
         .entry-body figure img,
@@ -168,6 +168,46 @@
             font-size: 0.9rem;
             line-height: 1.5;
             text-align: center;
+        }
+
+        .entry-body .otw-figure--small { --otw-figure-max-width: 320px; }
+        .entry-body .otw-figure--medium { --otw-figure-max-width: 520px; }
+        .entry-body .otw-figure--large { --otw-figure-max-width: 760px; }
+        .entry-body .otw-figure--original { --otw-figure-max-width: 100%; }
+
+        .entry-body .otw-figure--align-left {
+            margin-left: 0;
+            margin-right: auto;
+        }
+
+        .entry-body .otw-figure--align-center {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .entry-body .otw-figure--align-right {
+            margin-left: auto;
+            margin-right: 0;
+        }
+
+        .entry-body .otw-figure--wrap-left,
+        .entry-body .otw-figure--wrap-right {
+            clear: none;
+            max-width: min(45%, var(--otw-figure-max-width, 520px));
+            margin-top: 0.35rem;
+            margin-bottom: 1rem;
+        }
+
+        .entry-body .otw-figure--wrap-left {
+            float: left;
+            margin-left: 0;
+            margin-right: 1.5rem;
+        }
+
+        .entry-body .otw-figure--wrap-right {
+            float: right;
+            margin-left: 1.5rem;
+            margin-right: 0;
         }
 
         .entry-body hr {
@@ -205,6 +245,14 @@
         }
 
         @media (max-width: 899px) {
+            .entry-body .otw-figure--wrap-left,
+            .entry-body .otw-figure--wrap-right {
+                float: none;
+                clear: both;
+                max-width: min(100%, var(--otw-figure-max-width, 520px));
+                margin: 40px auto;
+            }
+
             .share-card {
                 border: none;
                 background: rgba(0, 0, 0, 0.85);
@@ -237,7 +285,7 @@
             </div>
             <div class="entry-body">
 <p><strong>The last two days</strong> have been a right treat for sunsets here in AZ.  Tonight's in particular was especially tasty; one of those viciously red blasts that eminate on the horizon and paint the entire celestial dome with a thousand different shades of orange, pink, purple, and blue. Take a look:</p>
-<img src="Images/Blog/az_skies.jpeg" alt="Saturday Skies">
+
 <p>I was especially stoked for this display tonight, as my MIL was in town from Utah and can't get enough of the Sonoran skyscapes.  She landed just in time to catch the tail end of it. Here's to hoping we get another round of God tossing the bucket of paint on us tomorrow.</p>
 <p><strong>While I was on my</strong> long ride this morning, I had a dozen ideas for things to write here for the weekend's entry.  As the day draws to a successfuly close, all those thoughts have flitted away as easily as they came.  I had hoped that as I sat here to type, the gears would turn and shake the cobwebs of excess contemplation, but alas; tis not to be.</p>
 <p>My greatest wish for now is that I can keep up some sort of momentum, and gain back a few of you who used to frequent this site in the decades past.  <a href="mailto:ryandavid@outsidetheworld.com?subject=OTW">Drop me a line</a> if you do stop by, as I have no other way to gauge visitorship or views at the moment.</p>
