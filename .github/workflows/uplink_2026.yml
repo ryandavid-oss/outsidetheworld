@@ -30,6 +30,7 @@ jobs:
       - name: Run Narrative Sync
         run: |
           python narrative_sync.py
+          python tools/generate_atom_feed.py
           echo "--- VERIFYING FILE CONTENT ---"
           cat narrative_data.js  # This will show the content in the GitHub log
           echo "--- VERIFICATION COMPLETE ---"
@@ -38,5 +39,5 @@ jobs:
         run: |
           git config --global user.name "OTW-Bot"
           git config --global user.email "bot@outsidetheworld.com"
-          git add narrative_data.js archive Images/og/archive
+          git add narrative_data.js atom.xml archive Images/og/archive
           git diff --quiet && git diff --staged --quiet || (git commit -m "Uplink sync" && git push)
