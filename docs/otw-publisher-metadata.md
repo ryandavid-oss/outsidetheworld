@@ -6,7 +6,7 @@ Publisher posts remain Markdown-first. The published `.md` file contains readabl
 <!-- otw-publisher
 {
   "schema": "otw.publisher.post",
-  "version": 2,
+  "version": 1,
   "formatting": {
     "mode": "otw-enhanced-markdown",
     "version": 1,
@@ -18,8 +18,9 @@ Publisher posts remain Markdown-first. The published `.md` file contains readabl
 
 ## Compatibility
 
-- Version 1 metadata is still accepted for existing posts.
-- Version 2 adds rich editorial formatting metadata.
+- Version 1 metadata is the current live publisher contract.
+- Rich editorial formatting is carried by the `formatting` object and block-level fields.
+- Version 2 is accepted by the updated renderer and Worker code, but the publisher currently emits version 1 so it remains compatible with the already deployed Worker contract.
 - Non-OTW Markdown renderers ignore the comment and render the fallback Markdown body.
 - OTW renderers sanitize the metadata before applying it.
 
@@ -39,7 +40,7 @@ The Markdown image syntax remains:
 
 ## Rich Text
 
-Version 2 body blocks can include sanitized inline HTML:
+Publisher body blocks can include sanitized inline HTML:
 
 - `blocks[].html`
 - `blocks[].items[].html` for list items

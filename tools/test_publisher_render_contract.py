@@ -326,10 +326,9 @@ def test_all_image_presentation_options_render_and_css_agrees():
                 assert "<figcaption><em>Caption</em></figcaption>" in html
 
 
-def test_publisher_v2_rich_formatting_metadata_restores_visual_styles():
-    metadata = {
+def test_publisher_rich_formatting_metadata_restores_visual_styles():
+    base_metadata = {
         "schema": "otw.publisher.post",
-        "version": 2,
         "formatting": {
             "mode": "otw-enhanced-markdown",
             "version": 1,
@@ -382,18 +381,21 @@ First styled paragraph.
 - One strong
 - Two
 """
-    sanitized = narrative_sync.sanitize_publisher_metadata(metadata)
-    html = narrative_sync.markdown_to_html(markdown, sanitized)
+    for version in [1, 2]:
+        metadata = {**base_metadata, "version": version}
+        sanitized = narrative_sync.sanitize_publisher_metadata(metadata)
+        html = narrative_sync.markdown_to_html(markdown, sanitized)
 
-    assert sanitized["version"] == 2
-    assert sanitized["formatting"]["mode"] == "otw-enhanced-markdown"
-    assert '<p><em>A field note from the new desk</em></p>' in html
-    assert '<p style="line-height: 1.5;">First <span style="color: #6395EE; background-color: #A0BEF5; text-decoration: underline">styled</span> paragraph.</p>' in html
-    assert '<h2 style="line-height: 1.15;">Publisher <u>heading</u></h2>' in html
-    assert '<blockquote style="line-height: 2;"><span style="font-style: italic">Quoted field note</span></blockquote>' in html
-    assert '<ul style="line-height: 1;"><li>One <span style="font-weight: 700">strong</span></li><li><span style="background-color: #91AFB3">Two</span></li></ul>' in html
-    assert "position: fixed" not in html
-    assert_no_public_leaks(html)
+        assert sanitized["version"] == version
+        if version == 2:
+            assert sanitized["formatting"]["mode"] == "otw-enhanced-markdown"
+        assert '<p><em>A field note from the new desk</em></p>' in html
+        assert '<p style="line-height: 1.5;">First <span style="color: #6395EE; background-color: #A0BEF5; text-decoration: underline">styled</span> paragraph.</p>' in html
+        assert '<h2 style="line-height: 1.15;">Publisher <u>heading</u></h2>' in html
+        assert '<blockquote style="line-height: 2;"><span style="font-style: italic">Quoted field note</span></blockquote>' in html
+        assert '<ul style="line-height: 1;"><li>One <span style="font-weight: 700">strong</span></li><li><span style="background-color: #91AFB3">Two</span></li></ul>' in html
+        assert "position: fixed" not in html
+        assert_no_public_leaks(html)
 
 
 def test_sanitization_security_for_markdown_and_metadata():
