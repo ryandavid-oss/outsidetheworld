@@ -3159,6 +3159,18 @@
       return text;
     }
 
+    function collapseConsecutiveEmptyTextBlocks(root) {
+      let previousWasEmpty = false;
+      Array.from(root.children || []).forEach((node) => {
+        const isEmptyTextBlock = isEditableTextBlockElement(node) && !nodeHasVisualContent(node);
+        if (isEmptyTextBlock && previousWasEmpty) {
+          node.remove();
+          return;
+        }
+        previousWasEmpty = isEmptyTextBlock;
+      });
+    }
+
     function textBlockFromRange(range) {
       if (!range) {
         return null;
@@ -3336,6 +3348,7 @@
       });
 
       flushInlineBuffer();
+      collapseConsecutiveEmptyTextBlocks(normalized);
       editor.replaceChildren(normalized);
       if (imageDropIndicator) {
         editor.append(imageDropIndicator);
@@ -5802,6 +5815,28 @@
       return paragraph;
     }
 
+    function carryBlockEditingState(source, target) {
+      if (!source || !target) {
+        return target;
+      }
+      Object.values(lineSpacingClasses).forEach((className) => {
+        if (source.classList.contains(className)) {
+          target.classList.add(className);
+        } else {
+          target.classList.remove(className);
+        }
+      });
+      const textAlign = source.style.textAlign;
+      if (textAlign) {
+        target.style.textAlign = textAlign;
+      }
+      return target;
+    }
+
+    function blockIsVisiblyEmpty(block) {
+      return Boolean(block && !nodeHasVisualContent(block));
+    }
+
     function currentEditorRange() {
       ensureEditorSelection();
       const selection = window.getSelection();
@@ -5897,6 +5932,12 @@
       }
 
       if (isEditableTextBlockElement(block)) {
+        if (blockIsVisiblyEmpty(block)) {
+          normalizeEmptyTextBlock(block);
+          placeCaretInside(block);
+          scheduleToolbarStateUpdate();
+          return;
+        }
         range.deleteContents();
         const tailRange = document.createRange();
         tailRange.setStart(range.startContainer, range.startOffset);
@@ -5904,7 +5945,7 @@
         const tail = tailRange.extractContents();
         const beforeHasContent = nodeHasVisualContent(block);
         const afterHasContent = nodeHasVisualContent(tail);
-        const nextParagraph = createTrailingParagraph();
+        const nextParagraph = carryBlockEditingState(block, createTrailingParagraph());
         nextParagraph.dataset.blockId = blockId('paragraph');
         if (afterHasContent) {
           nextParagraph.replaceChildren(tail);
@@ -6414,6 +6455,25 @@
       return element.closest('ul, ol, p, h2, blockquote') || editor;
     }
 
+    function selectedLineSpacingTargets() {
+      const selection = window.getSelection();
+      if (!selection || !selection.rangeCount || !selectionIsInsideEditor()) {
+        return [];
+      }
+      const range = selection.getRangeAt(0);
+      if (range.collapsed) {
+        return [selectedLineSpacingTarget()].filter(Boolean);
+      }
+      const targets = Array.from(editor.querySelectorAll('p, h2, blockquote, ul, ol')).filter((node) => {
+        try {
+          return range.intersectsNode(node);
+        } catch (error) {
+          return false;
+        }
+      });
+      return targets.length ? targets : [selectedLineSpacingTarget()].filter(Boolean);
+    }
+
     function selectedAlignmentTarget() {
       const element = selectedElement();
       if (!element || !editor.contains(element)) {
@@ -6473,8 +6533,12 @@
         return;
       }
       restoreSelection();
-      const target = selectedLineSpacingTarget() || editor;
-      applyLineSpacingClass(target, value);
+      const targets = selectedLineSpacingTargets();
+      if (targets.length) {
+        targets.forEach((target) => applyLineSpacingClass(target, value));
+      } else {
+        applyLineSpacingClass(editor, value);
+      }
       updateLineSpacingState(value);
       setSaveState(`Line spacing ${value}`, true);
       rememberSelection();
