@@ -49,6 +49,41 @@ def extract_share_entry_body(value):
     return match.group(1)
 
 
+def extract_meta(html_value):
+    meta = {}
+    for name in [
+        "description",
+        "twitter:card",
+        "twitter:title",
+        "twitter:description",
+        "twitter:image",
+    ]:
+        match = re.search(rf'<meta\s+name="{re.escape(name)}"\s+content="([^"]*)"', html_value)
+        if match:
+            meta[name] = match.group(1)
+    for prop in [
+        "og:site_name",
+        "og:type",
+        "og:locale",
+        "og:title",
+        "og:description",
+        "og:url",
+        "og:image",
+        "og:image:secure_url",
+        "og:image:type",
+        "og:image:width",
+        "og:image:height",
+        "og:image:alt",
+    ]:
+        match = re.search(rf'<meta\s+property="{re.escape(prop)}"\s+content="([^"]*)"', html_value)
+        if match:
+            meta[prop] = match.group(1)
+    canonical = re.search(r'<link\s+rel="canonical"\s+href="([^"]*)"', html_value)
+    if canonical:
+        meta["canonical"] = canonical.group(1)
+    return meta
+
+
 def fixture_metadata():
     return {
         "schema": "otw.publisher.post",
@@ -467,6 +502,87 @@ def test_realistic_publisher_fixture_end_to_end():
         assert_no_public_leaks(atom_text)
 
 
+def test_canonical_archive_page_emits_full_preview_metadata():
+    share_html = narrative_sync.render_share_page({
+        "title": "Publisher Fixture",
+        "date": "May 29, 2026",
+        "file": "2026-05-29-publisher-fixture.md",
+        "body": "A field note from the new desk with enough detail for a preview.",
+    })
+    meta = extract_meta(share_html)
+
+    assert meta["canonical"] == "https://outsidetheworld.com/archive/2026-05-29-publisher-fixture.html"
+    assert meta["og:url"] == "https://outsidetheworld.com/archive/2026-05-29-publisher-fixture.html"
+    assert meta["og:title"] == "Publisher Fixture"
+    assert meta["og:site_name"] == "Outside The World"
+    assert meta["og:type"] == "article"
+    assert meta["og:image"] == "https://outsidetheworld.com/Images/og/archive/2026-05-29-publisher-fixture.png"
+    assert meta["og:image:secure_url"] == meta["og:image"]
+    assert meta["og:image:width"] == "1200"
+    assert meta["og:image:height"] == "630"
+    assert meta["twitter:card"] == "summary_large_image"
+    assert meta["twitter:title"] == "Publisher Fixture"
+    assert meta["twitter:image"] == meta["og:image"]
+    assert "A field note from the new desk" in meta["og:description"]
+    assert "residue_archive.html?post=" not in share_html
+
+
+def test_residue_archive_legacy_urls_resolve_to_canonical_archive_paths():
+    residue = (ROOT / "residue_archive.html").read_text(encoding="utf-8")
+
+    assert "function redirectLegacyPostUrlIfNeeded()" in residue
+    assert "window.location.replace(canonicalUrl.toString())" in residue
+    assert "const postId = params.get('post')" in residue
+    assert "return new URL(buildCanonicalArchivePath(post), window.location.origin).toString();" in residue
+    assert "url.searchParams.set('post'" not in residue
+    assert "residue_archive.html?post=" not in residue
+
+
+def test_share_copy_search_and_feed_paths_do_not_emit_legacy_residue_urls():
+    index = (ROOT / "index.html").read_text(encoding="utf-8")
+    residue = (ROOT / "residue_archive.html").read_text(encoding="utf-8")
+    archive_pages = "".join(path.read_text(encoding="utf-8") for path in (ROOT / "archive").glob("*.html"))
+
+    assert "residue_archive.html?post=" not in index
+    assert "residue_archive.html?post=" not in residue
+    assert "residue_archive.html?post=" not in archive_pages
+    assert "buildCanonicalArchivePath(post)" in index
+    assert "buildCanonicalArchivePath(post)" in residue
+
+    with tempfile.TemporaryDirectory() as temp_dir:
+        temp = Path(temp_dir)
+        narrative_data = temp / "narrative_data.js"
+        fragments_data = temp / "fragments_data.js"
+        output = temp / "atom.xml"
+        narrative_data.write_text(
+            'const current_narrative = [{'
+            '"title":"Missing Share Path",'
+            '"date":"May 30, 2026",'
+            '"file":"2026-05-30-missing-share-path.md",'
+            '"body":"Visible summary text."'
+            '}];',
+            encoding="utf-8",
+        )
+        fragments_data.write_text("window.otw_fragments = [];", encoding="utf-8")
+
+        old_narrative = atom_feed.NARRATIVE_DATA
+        old_fragments = atom_feed.FRAGMENTS_DATA
+        old_output = atom_feed.OUTPUT
+        try:
+            atom_feed.NARRATIVE_DATA = narrative_data
+            atom_feed.FRAGMENTS_DATA = fragments_data
+            atom_feed.OUTPUT = output
+            atom_feed.main()
+        finally:
+            atom_feed.NARRATIVE_DATA = old_narrative
+            atom_feed.FRAGMENTS_DATA = old_fragments
+            atom_feed.OUTPUT = old_output
+
+        atom_text = output.read_text(encoding="utf-8")
+        assert "https://outsidetheworld.com/archive/2026-05-30-missing-share-path.html" in atom_text
+        assert "residue_archive.html?post=" not in atom_text
+
+
 def test_public_pages_use_shared_post_renderer():
     personal = (ROOT / "personal.html").read_text(encoding="utf-8")
     view_post = (ROOT / "view_post.html").read_text(encoding="utf-8")
@@ -514,6 +630,9 @@ def run():
         test_reused_image_url_can_keep_distinct_presentation_by_order_after_sanitization,
         test_atom_feed_strips_publisher_metadata_and_stays_valid_xml,
         test_realistic_publisher_fixture_end_to_end,
+        test_canonical_archive_page_emits_full_preview_metadata,
+        test_residue_archive_legacy_urls_resolve_to_canonical_archive_paths,
+        test_share_copy_search_and_feed_paths_do_not_emit_legacy_residue_urls,
         test_public_pages_use_shared_post_renderer,
         test_public_css_contract_exists_everywhere,
     ]

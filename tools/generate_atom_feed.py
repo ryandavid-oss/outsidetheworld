@@ -41,6 +41,24 @@ def build_archive_post_id(post: dict) -> str:
     return f"{post.get('date', 'undated')}--{slugify(post.get('title', 'untitled'))}"
 
 
+def build_canonical_archive_path(post: dict) -> str:
+    if post.get("share_path"):
+        return str(post["share_path"])
+
+    file_name = Path(str(post.get("file") or "")).name
+    stem = re.sub(r"\.md$", "", file_name, flags=re.I)
+    if stem:
+        return f"archive/{quote(stem)}.html"
+
+    try:
+        parsed = datetime.strptime(str(post.get("date") or ""), "%B %d, %Y")
+    except ValueError:
+        return "residue_archive.html"
+
+    slug = slugify(post.get("title", "untitled"))
+    return f"archive/{parsed:%Y-%m-%d}-{quote(slug)}.html" if slug else "residue_archive.html"
+
+
 def build_fragment_id(fragment: dict) -> str:
     stamp = re.sub(r"[^0-9]", "", str(fragment.get("timestamp", "undated")))
     body_stub = slugify(" ".join(str(fragment.get("text", "")).split()[:8])) or "fragment"
@@ -103,8 +121,7 @@ def build_entries() -> list[dict]:
 
     for post in narratives:
         updated = parse_narrative_date(post["date"])
-        post_id = build_archive_post_id(post)
-        url = f"{SITE_URL}/{post['share_path']}" if post.get("share_path") else f"{SITE_URL}/residue_archive.html?post={quote(post_id)}"
+        url = f"{SITE_URL}/{build_canonical_archive_path(post)}"
         summary = build_excerpt(post.get("body", ""))
         entries.append(
             {

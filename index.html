@@ -1296,6 +1296,25 @@
             return `${post.date || 'undated'}--${slugify(post.title || 'untitled')}`;
         }
 
+        function buildCanonicalArchivePath(post) {
+            if (post && post.share_path) return post.share_path;
+
+            const file = String(post && post.file ? post.file : '').split('/').pop();
+            const stem = file.replace(/\.md$/i, '');
+            if (stem) return `archive/${encodeURIComponent(stem)}.html`;
+
+            const date = new Date(post && post.date ? post.date : '');
+            if (!Number.isNaN(date.valueOf())) {
+                const year = date.getFullYear();
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const day = String(date.getDate()).padStart(2, '0');
+                const slug = slugify(post && post.title ? post.title : 'untitled');
+                if (slug) return `archive/${year}-${month}-${day}-${slug}.html`;
+            }
+
+            return 'residue_archive.html';
+        }
+
         function buildFragmentId(fragment) {
             const stamp = String(fragment.timestamp || 'undated').replace(/[^0-9]/g, '');
             const bodyStub = slugify(String(fragment.text || '').split(/\s+/).slice(0, 8).join(' ')) || 'fragment';
@@ -1370,7 +1389,7 @@
                         kind: 'Blog',
                         title: post.title || 'Untitled entry',
                         date: post.date || '',
-                        url: post.share_path || `residue_archive.html?post=${encodeURIComponent(buildArchivePostId(post))}`,
+                        url: buildCanonicalArchivePath(post),
                         snippet: buildExcerpt(body),
                         text: `${post.title || ''} ${post.date || ''} ${body}`.toLowerCase()
                     });

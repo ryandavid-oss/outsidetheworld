@@ -4,7 +4,6 @@ import os
 import re
 from datetime import datetime
 from pathlib import Path
-from urllib.parse import quote
 
 # --- CONFIG ---
 input_folder = 'current_narrative'
@@ -36,6 +35,14 @@ def build_post_id(post):
 
 def post_stem(filename):
     return Path(filename).stem
+
+def canonical_share_path(post):
+    stem = post_stem(post.get('file') or '')
+    return f"{share_output_folder}/{stem}.html" if stem else ''
+
+def canonical_share_url(post):
+    share_path = post.get('share_path') or canonical_share_path(post)
+    return f"{site_url}/{share_path}" if share_path else site_url
 
 def parse_display_date(value):
     try:
@@ -317,11 +324,19 @@ def markdown_to_html(markdown, publisher_metadata=None):
 
         lines = raw.splitlines()
         if all(re.match(r'^\s*[-*]\s+', line) for line in lines):
-            items = ''.join(f'<li>{inline_markdown(re.sub(r"^\s*[-*]\s+", "", line), image_metadata, image_queue)}</li>' for line in lines)
+            item_values = [
+                inline_markdown(re.sub(r'^\s*[-*]\s+', '', line), image_metadata, image_queue)
+                for line in lines
+            ]
+            items = ''.join(f'<li>{item}</li>' for item in item_values)
             html_blocks.append(f'<ul>{items}</ul>')
             continue
         if all(re.match(r'^\s*\d+\.\s+', line) for line in lines):
-            items = ''.join(f'<li>{inline_markdown(re.sub(r"^\s*\d+\.\s+", "", line), image_metadata, image_queue)}</li>' for line in lines)
+            item_values = [
+                inline_markdown(re.sub(r'^\s*\d+\.\s+', '', line), image_metadata, image_queue)
+                for line in lines
+            ]
+            items = ''.join(f'<li>{item}</li>' for item in item_values)
             html_blocks.append(f'<ol>{items}</ol>')
             continue
         if raw.startswith('### '):
@@ -497,10 +512,9 @@ def generate_og_image(post, og_path):
 
 def render_share_page(post):
     stem = post_stem(post['file'])
-    post_id = build_post_id(post)
     share_path = f"{share_output_folder}/{stem}.html"
-    share_url = f"{site_url}/{share_path}"
-    archive_url = f"{site_url}/residue_archive.html?post={quote(post_id)}"
+    share_url = canonical_share_url({**post, 'share_path': share_path})
+    archive_url = "../residue_archive.html"
     og_image = f"{site_url}/{og_output_folder}/{stem}.png"
     description = excerpt(post['body'])
     published = parse_display_date(post['date'])
@@ -853,7 +867,7 @@ def write_share_pages(posts):
     for post in posts:
         stem = post_stem(post['file'])
         post['post_id'] = build_post_id(post)
-        post['share_path'] = f"{share_output_folder}/{stem}.html"
+        post['share_path'] = canonical_share_path(post)
         post['og_image'] = f"{og_output_folder}/{stem}.png"
 
         share_file = Path(post['share_path'])

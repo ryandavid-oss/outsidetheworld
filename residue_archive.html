@@ -771,6 +771,37 @@
             return `${post.date || 'undated'}--${slugify(post.title || 'untitled')}`;
         }
 
+        function buildCanonicalArchivePath(post) {
+            if (post && post.share_path) return post.share_path;
+
+            const file = String(post && post.file ? post.file : '').split('/').pop();
+            const stem = file.replace(/\.md$/i, '');
+            if (stem) return `archive/${encodeURIComponent(stem)}.html`;
+
+            const date = new Date(post && post.date ? post.date : '');
+            if (!Number.isNaN(date.valueOf())) {
+                const year = date.getFullYear();
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const day = String(date.getDate()).padStart(2, '0');
+                const slug = slugify(post && post.title ? post.title : 'untitled');
+                if (slug) return `archive/${year}-${month}-${day}-${slug}.html`;
+            }
+
+            return 'residue_archive.html';
+        }
+
+        function redirectLegacyPostUrlIfNeeded() {
+            const params = new URLSearchParams(window.location.search);
+            const postId = params.get('post');
+            if (!postId || typeof current_narrative === 'undefined') return;
+
+            const post = current_narrative.find((candidate) => buildPostId(candidate) === postId);
+            if (!post) return;
+
+            const canonicalUrl = new URL(buildCanonicalArchivePath(post), window.location.origin);
+            window.location.replace(canonicalUrl.toString());
+        }
+
         function buildArchiveReactionDomId(post) {
             return `archive-reactions-${slugify(buildPostId(post))}`;
         }
@@ -787,13 +818,7 @@
         }
 
         function buildShareUrl(post) {
-            if (post && post.share_path) {
-                return new URL(post.share_path, window.location.origin).toString();
-            }
-
-            const url = new URL(window.location.href);
-            url.searchParams.set('post', buildPostId(post));
-            return url.toString();
+            return new URL(buildCanonicalArchivePath(post), window.location.origin).toString();
         }
 
         async function copyToClipboard(text) {
@@ -847,8 +872,7 @@
         }
 
         function updateUrlForPost(post, replace = false) {
-            const url = new URL(window.location.href);
-            url.searchParams.set('post', buildPostId(post));
+            const url = new URL(buildCanonicalArchivePath(post), window.location.origin);
             const next = `${url.pathname}${url.search}${url.hash}`;
             const state = { postId: buildPostId(post) };
 
@@ -861,6 +885,7 @@
 
         function initMatrix() {
             if (typeof current_narrative === 'undefined') return;
+            redirectLegacyPostUrlIfNeeded();
 
             current_narrative.forEach((post, index) => {
                 const parts = post.date.split(' ');
