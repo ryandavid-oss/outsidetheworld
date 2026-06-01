@@ -41,7 +41,12 @@ function decodeBase64Utf8(content) {
 function publisherMetadata(imageUrl = baseImageUrl) {
   return {
     schema: "otw.publisher.post",
-    version: 1,
+    version: 2,
+    formatting: {
+      mode: "otw-enhanced-markdown",
+      version: 1,
+      fallback: "markdown"
+    },
     generatedAt: "2026-05-29T20:00:00.000Z",
     images: [
       {
@@ -55,7 +60,11 @@ function publisherMetadata(imageUrl = baseImageUrl) {
       }
     ],
     blocks: [
-      { type: "paragraph" },
+      {
+        type: "paragraph",
+        html: 'Paragraph before the image with a <span style="color: #6395EE; text-decoration: underline">normal link</span>.',
+        text: "Paragraph before the image with a normal link."
+      },
       { type: "divider" },
       { type: "image", imageIndex: 0 },
       { type: "paragraph" }
@@ -214,6 +223,12 @@ for (const markdown of [
     metadata: {
       schema: "wrong.schema",
       version: 1
+    }
+  }),
+  publisherMarkdown({
+    metadata: {
+      schema: "otw.publisher.post",
+      version: 3
     }
   })
 ]) {

@@ -113,17 +113,20 @@
             text-align: center;
         }
 
+        .md-render .otw-figure--x-small { --otw-figure-max-width: 220px; }
         .md-render .otw-figure--small { --otw-figure-max-width: 320px; }
         .md-render .otw-figure--medium { --otw-figure-max-width: 520px; }
         .md-render .otw-figure--large { --otw-figure-max-width: 760px; }
         .md-render .otw-figure--original { --otw-figure-max-width: 100%; }
 
+        .md-render .otw-figure--x-small,
         .md-render .otw-figure--small,
         .md-render .otw-figure--medium,
         .md-render .otw-figure--large {
             width: min(100%, var(--otw-figure-max-width, 720px));
         }
 
+        .md-render .otw-figure--x-small img,
         .md-render .otw-figure--small img,
         .md-render .otw-figure--medium img,
         .md-render .otw-figure--large img {

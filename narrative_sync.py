@@ -3,6 +3,7 @@ import json
 import os
 import re
 from datetime import datetime
+from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote
 
@@ -112,7 +113,7 @@ def normalize_choice(value, allowed, fallback):
 def normalize_image_presentation(value):
     value = value or {}
     return {
-        'displaySize': normalize_choice(value.get('displaySize'), ['small', 'medium', 'large', 'original'], 'medium'),
+        'displaySize': normalize_choice(value.get('displaySize'), ['x-small', 'small', 'medium', 'large', 'original'], 'medium'),
         'alignment': normalize_choice(value.get('alignment'), ['left', 'center', 'right'], 'center'),
         'wrapMode': normalize_choice(value.get('wrapMode'), ['none', 'wrap-left', 'wrap-right'], 'none'),
     }
@@ -303,6 +304,158 @@ def sanitize_trusted_html_block(value):
     sanitized = re.sub(r'\s+(src|href)\s*=\s*(["\'])(.*?)\2', clean_url_attr, sanitized, flags=re.I)
     return sanitized
 
+PUBLISHER_METADATA_VERSIONS = {1, 2}
+PUBLISHER_INLINE_TAGS = {'a', 'b', 'br', 'code', 'em', 'font', 'i', 'span', 'strong', 'u'}
+PUBLISHER_INLINE_STYLES = {
+    'background-color',
+    'color',
+    'font-style',
+    'font-weight',
+    'text-decoration',
+    'text-decoration-line',
+}
+PUBLISHER_LINE_SPACING = {
+    '1.0': '1',
+    '1.15': '1.15',
+    '1.5': '1.5',
+    '2.0': '2',
+}
+
+def safe_visual_style_value(value):
+    value = str(value or '').strip()
+    if not value:
+        return ''
+    if re.search(r'(url\s*\(|expression\s*\(|javascript:|data:|blob:)', value, re.I):
+        return ''
+    return value
+
+def sanitize_publisher_style(value):
+    declarations = []
+    for declaration in str(value or '').split(';'):
+        if ':' not in declaration:
+            continue
+        prop, raw_value = declaration.split(':', 1)
+        prop = prop.strip().lower()
+        style_value = safe_visual_style_value(raw_value)
+        if prop in PUBLISHER_INLINE_STYLES and style_value:
+            declarations.append(f'{prop}: {style_value}')
+    return '; '.join(declarations)
+
+class PublisherInlineSanitizer(HTMLParser):
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.parts = []
+
+    def handle_starttag(self, tag, attrs):
+        tag = tag.lower()
+        if tag not in PUBLISHER_INLINE_TAGS:
+            return
+        if tag == 'br':
+            self.parts.append('<br>')
+            return
+
+        attrs_dict = {name.lower(): value for name, value in attrs}
+        clean_tag = 'span' if tag == 'font' else tag
+        clean_attrs = []
+        if tag == 'a':
+            href = safe_link_url(attrs_dict.get('href'))
+            if href:
+                clean_attrs.append(f'href="{html.escape(href, quote=True)}"')
+        style_parts = []
+        if tag == 'font' and attrs_dict.get('color'):
+            color = safe_visual_style_value(attrs_dict.get('color'))
+            if color:
+                style_parts.append(f'color: {color}')
+        style = sanitize_publisher_style(attrs_dict.get('style'))
+        if style:
+            style_parts.append(style)
+        if style_parts:
+            clean_attrs.append(f'style="{html.escape("; ".join(style_parts), quote=True)}"')
+        attr_text = f' {" ".join(clean_attrs)}' if clean_attrs else ''
+        self.parts.append(f'<{clean_tag}{attr_text}>')
+
+    def handle_endtag(self, tag):
+        tag = tag.lower()
+        if tag not in PUBLISHER_INLINE_TAGS or tag == 'br':
+            return
+        clean_tag = 'span' if tag == 'font' else tag
+        self.parts.append(f'</{clean_tag}>')
+
+    def handle_data(self, data):
+        self.parts.append(html.escape(data or '', quote=False))
+
+    def get_html(self):
+        return ''.join(self.parts).strip()
+
+def sanitize_publisher_inline_html(value):
+    parser = PublisherInlineSanitizer()
+    try:
+        parser.feed(str(value or ''))
+        parser.close()
+    except Exception:
+        return html.escape(str(value or ''), quote=False)
+    return parser.get_html()
+
+def normalize_publisher_line_spacing(value):
+    value = str(value or '').strip()
+    return value if value in PUBLISHER_LINE_SPACING else ''
+
+def publisher_line_spacing_attr(block):
+    line_spacing = normalize_publisher_line_spacing((block or {}).get('lineSpacing'))
+    if not line_spacing:
+        return ''
+    return f' style="line-height: {PUBLISHER_LINE_SPACING[line_spacing]};"'
+
+def plain_text_from_html(value):
+    text = re.sub(r'<[^>]+>', '', value or '')
+    return re.sub(r'\s+', ' ', html.unescape(text)).strip()
+
+def publisher_block_matches_render_type(block, render_type):
+    block_type = block.get('type') if isinstance(block, dict) else ''
+    if block_type == 'image':
+        return render_type == 'image'
+    if block_type == 'divider':
+        return render_type == 'divider'
+    return block_type == render_type
+
+def render_publisher_enhanced_block(render_type, rendered_html, block):
+    if not isinstance(block, dict):
+        return rendered_html
+    block_type = block.get('type')
+    if block_type in {'paragraph', 'heading', 'quote'}:
+        content = sanitize_publisher_inline_html(block.get('html'))
+        if not content:
+            content = sanitize_publisher_inline_html(block.get('text'))
+        if not content:
+            return rendered_html
+        style_attr = publisher_line_spacing_attr(block)
+        if block_type == 'heading':
+            try:
+                level = int(block.get('level') or 2)
+            except (TypeError, ValueError):
+                level = 2
+            level = min(6, max(1, level))
+            return f'<h{level}{style_attr}>{content}</h{level}>'
+        if block_type == 'quote':
+            return f'<blockquote{style_attr}>{content}</blockquote>'
+        return f'<p{style_attr}>{content}</p>'
+
+    if block_type == 'list':
+        items = block.get('items') if isinstance(block.get('items'), list) else []
+        if not items:
+            return rendered_html
+        tag = 'ol' if block.get('ordered') else 'ul'
+        class_attr = ' class="otw-list--checklist"' if block.get('checklist') else ''
+        style_attr = publisher_line_spacing_attr(block)
+        item_html = ''.join(
+            f'<li>{sanitize_publisher_inline_html(item.get("html") or item.get("text") or "")}</li>'
+            for item in items
+            if isinstance(item, dict)
+        )
+        return f'<{tag}{class_attr}{style_attr}>{item_html}</{tag}>' if item_html else rendered_html
+
+    return rendered_html
+
 def inline_markdown(value, image_metadata=None, image_queue=None):
     value = html.escape(value or '', quote=False)
     value = IMAGE_MARKDOWN_PATTERN.sub(lambda m: render_markdown_image(m, image_metadata=image_metadata, image_queue=image_queue), value)
@@ -320,36 +473,61 @@ def markdown_to_html(markdown, publisher_metadata=None):
     image_queue = {}
     for image in normalize_publisher_image_sequence(publisher_metadata or {}):
         image_queue.setdefault(image.get('url'), []).append(image)
+    publisher_blocks = publisher_metadata.get('blocks') if isinstance(publisher_metadata, dict) and isinstance(publisher_metadata.get('blocks'), list) else []
+    publisher_block_index = 0
+    publisher_subhead = publisher_metadata.get('subhead') if isinstance(publisher_metadata, dict) else ''
     blocks = re.split(r'\n\s*\n', (markdown or '').strip())
     html_blocks = []
+
+    def next_publisher_block(render_type):
+        nonlocal publisher_block_index
+        while publisher_block_index < len(publisher_blocks):
+            block = publisher_blocks[publisher_block_index]
+            publisher_block_index += 1
+            if publisher_block_matches_render_type(block, render_type):
+                return block
+        return None
+
+    def append_rendered_block(rendered_html, render_type):
+        if render_type == 'paragraph' and publisher_subhead:
+            if plain_text_from_html(rendered_html) == re.sub(r'\s+', ' ', str(publisher_subhead)).strip():
+                html_blocks.append(rendered_html)
+                return
+        metadata_block = next_publisher_block(render_type)
+        html_blocks.append(render_publisher_enhanced_block(render_type, rendered_html, metadata_block))
 
     for block in blocks:
         raw = block.strip()
         if not raw:
             continue
         if raw == '---':
-            html_blocks.append('<hr>')
+            append_rendered_block('<hr>', 'divider')
             continue
         if raw.startswith('<div class="otw-center">') and raw.endswith('</div>'):
             html_blocks.append(sanitize_trusted_html_block(raw))
             continue
         if is_trusted_figure_block(raw):
-            html_blocks.append(sanitize_trusted_html_block(raw))
+            append_rendered_block(sanitize_trusted_html_block(raw), 'image')
             continue
 
         image_match = IMAGE_MARKDOWN_PATTERN.fullmatch(raw)
         if image_match:
-            html_blocks.append(render_markdown_image(image_match, as_block=True, image_metadata=image_metadata, image_queue=image_queue))
+            append_rendered_block(render_markdown_image(image_match, as_block=True, image_metadata=image_metadata, image_queue=image_queue), 'image')
             continue
 
         lines = raw.splitlines()
+        if all(re.match(r'^\s*>\s?', line) for line in lines):
+            quote = '\n'.join(re.sub(r'^\s*>\s?', '', line) for line in lines)
+            rendered = f'<blockquote>{inline_markdown(quote, image_metadata, image_queue).replace(chr(10), "<br>")}</blockquote>'
+            append_rendered_block(rendered, 'quote')
+            continue
         if all(re.match(r'^\s*[-*]\s+', line) for line in lines):
             item_values = [
-                inline_markdown(re.sub(r'^\s*[-*]\s+', '', line), image_metadata, image_queue)
+                inline_markdown(re.sub(r'^\s*[-*]\s+(?:\[[ xX]\]\s+)?', '', line), image_metadata, image_queue)
                 for line in lines
             ]
             items = ''.join(f'<li>{item}</li>' for item in item_values)
-            html_blocks.append(f'<ul>{items}</ul>')
+            append_rendered_block(f'<ul>{items}</ul>', 'list')
             continue
         if all(re.match(r'^\s*\d+\.\s+', line) for line in lines):
             item_values = [
@@ -357,26 +535,32 @@ def markdown_to_html(markdown, publisher_metadata=None):
                 for line in lines
             ]
             items = ''.join(f'<li>{item}</li>' for item in item_values)
-            html_blocks.append(f'<ol>{items}</ol>')
+            append_rendered_block(f'<ol>{items}</ol>', 'list')
             continue
-        if raw.startswith('### '):
-            html_blocks.append(f'<h3>{inline_markdown(raw[4:].strip(), image_metadata, image_queue)}</h3>')
-            continue
-        if raw.startswith('## '):
-            html_blocks.append(f'<h2>{inline_markdown(raw[3:].strip(), image_metadata, image_queue)}</h2>')
+        heading_match = re.match(r'^(#{2,6})\s+(.+)$', raw)
+        if heading_match:
+            level = len(heading_match.group(1))
+            rendered = f'<h{level}>{inline_markdown(heading_match.group(2).strip(), image_metadata, image_queue)}</h{level}>'
+            append_rendered_block(rendered, 'heading')
             continue
 
         emphasis_match = re.match(r'^\s*(?:_([^_\n]+)_|\*([^*\n]+)\*)\s*$', raw)
         if emphasis_match:
             emphasized = emphasis_match.group(1) or emphasis_match.group(2) or ''
-            html_blocks.append(f'<p><em>{inline_markdown(emphasized, image_metadata, image_queue)}</em></p>')
+            append_rendered_block(f'<p><em>{inline_markdown(emphasized, image_metadata, image_queue)}</em></p>', 'paragraph')
         else:
-            html_blocks.append(f'<p>{inline_markdown(raw, image_metadata, image_queue).replace(chr(10), "<br>")}</p>')
+            append_rendered_block(f'<p>{inline_markdown(raw, image_metadata, image_queue).replace(chr(10), "<br>")}</p>', 'paragraph')
 
     return '\n'.join(html_blocks)
 
 def sanitize_publisher_metadata(metadata):
-    if not isinstance(metadata, dict) or metadata.get('schema') != 'otw.publisher.post' or metadata.get('version') != 1:
+    if not isinstance(metadata, dict) or metadata.get('schema') != 'otw.publisher.post':
+        return {}
+    try:
+        version = int(metadata.get('version') or 0)
+    except (TypeError, ValueError):
+        return {}
+    if version not in PUBLISHER_METADATA_VERSIONS:
         return {}
 
     images = sanitize_publisher_image_list(metadata)
@@ -415,19 +599,63 @@ def sanitize_publisher_metadata(metadata):
             except (TypeError, ValueError):
                 level = 2
             sanitized['level'] = min(6, max(1, level))
+            html_value = sanitize_publisher_inline_html(block.get('html'))
+            text_value = str(block.get('text') or '')
+            line_spacing = normalize_publisher_line_spacing(block.get('lineSpacing'))
+            if html_value:
+                sanitized['html'] = html_value
+            if text_value:
+                sanitized['text'] = text_value
+            if line_spacing:
+                sanitized['lineSpacing'] = line_spacing
+        elif block_type in {'paragraph', 'quote'}:
+            html_value = sanitize_publisher_inline_html(block.get('html'))
+            text_value = str(block.get('text') or '')
+            line_spacing = normalize_publisher_line_spacing(block.get('lineSpacing'))
+            if html_value:
+                sanitized['html'] = html_value
+            if text_value:
+                sanitized['text'] = text_value
+            if line_spacing:
+                sanitized['lineSpacing'] = line_spacing
         elif block_type == 'list':
             sanitized['ordered'] = bool(block.get('ordered'))
             sanitized['checklist'] = bool(block.get('checklist'))
+            line_spacing = normalize_publisher_line_spacing(block.get('lineSpacing'))
+            if line_spacing:
+                sanitized['lineSpacing'] = line_spacing
+            raw_items = block.get('items') if isinstance(block.get('items'), list) else []
+            items = []
+            for item in raw_items:
+                if not isinstance(item, dict):
+                    continue
+                item_html = sanitize_publisher_inline_html(item.get('html'))
+                item_text = str(item.get('text') or '')
+                item_metadata = {'id': str(item.get('id') or '')[:120]}
+                if item_html:
+                    item_metadata['html'] = item_html
+                if item_text:
+                    item_metadata['text'] = item_text
+                if item_metadata.get('html') or item_metadata.get('text'):
+                    items.append(item_metadata)
+            if items:
+                sanitized['items'] = items
         blocks.append(sanitized)
 
     cleaned = {
         'schema': 'otw.publisher.post',
-        'version': 1,
+        'version': version,
         'source': 'publisher.html',
         'subhead': str(metadata.get('subhead') or ''),
         'blocks': blocks,
         'images': images,
     }
+    if version >= 2:
+        cleaned['formatting'] = {
+            'mode': 'otw-enhanced-markdown',
+            'version': 1,
+            'fallback': 'markdown',
+        }
     return cleaned
 
 def extract_publisher_metadata(body):
@@ -800,17 +1028,20 @@ def render_share_page(post):
             text-align: center;
         }}
 
+        .entry-body .otw-figure--x-small {{ --otw-figure-max-width: 220px; }}
         .entry-body .otw-figure--small {{ --otw-figure-max-width: 320px; }}
         .entry-body .otw-figure--medium {{ --otw-figure-max-width: 520px; }}
         .entry-body .otw-figure--large {{ --otw-figure-max-width: 760px; }}
         .entry-body .otw-figure--original {{ --otw-figure-max-width: 100%; }}
 
+        .entry-body .otw-figure--x-small,
         .entry-body .otw-figure--small,
         .entry-body .otw-figure--medium,
         .entry-body .otw-figure--large {{
             width: min(100%, var(--otw-figure-max-width, 720px));
         }}
 
+        .entry-body .otw-figure--x-small img,
         .entry-body .otw-figure--small img,
         .entry-body .otw-figure--medium img,
         .entry-body .otw-figure--large img {{

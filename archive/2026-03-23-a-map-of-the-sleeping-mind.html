@@ -170,17 +170,20 @@
             text-align: center;
         }
 
+        .entry-body .otw-figure--x-small { --otw-figure-max-width: 220px; }
         .entry-body .otw-figure--small { --otw-figure-max-width: 320px; }
         .entry-body .otw-figure--medium { --otw-figure-max-width: 520px; }
         .entry-body .otw-figure--large { --otw-figure-max-width: 760px; }
         .entry-body .otw-figure--original { --otw-figure-max-width: 100%; }
 
+        .entry-body .otw-figure--x-small,
         .entry-body .otw-figure--small,
         .entry-body .otw-figure--medium,
         .entry-body .otw-figure--large {
             width: min(100%, var(--otw-figure-max-width, 720px));
         }
 
+        .entry-body .otw-figure--x-small img,
         .entry-body .otw-figure--small img,
         .entry-body .otw-figure--medium img,
         .entry-body .otw-figure--large img {

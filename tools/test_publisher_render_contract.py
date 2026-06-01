@@ -231,7 +231,7 @@ def test_metadata_parser_edge_cases_fail_closed():
     cases = [
         ('<!-- otw-publisher\n{"schema":\n-->\nText.', "malformed"),
         (publisher_comment({"schema": "wrong.schema", "version": 1}) + "\nText.", "wrong schema"),
-        (publisher_comment({"schema": "otw.publisher.post", "version": 2, "images": [], "blocks": []}) + "\nText.", "wrong version"),
+        (publisher_comment({"schema": "otw.publisher.post", "version": 3, "images": [], "blocks": []}) + "\nText.", "wrong version"),
     ]
 
     for body, _label in cases:
@@ -294,12 +294,12 @@ def test_metadata_cardinality_edge_cases_do_not_break_rendering():
 
 
 def test_all_image_presentation_options_render_and_css_agrees():
-    sizes = ["small", "medium", "large", "original"]
+    sizes = ["x-small", "small", "medium", "large", "original"]
     alignments = ["left", "center", "right"]
     wraps = ["none", "wrap-left", "wrap-right"]
     css = (ROOT / "theme.css").read_text(encoding="utf-8")
 
-    assert "sizes: small, medium, large, original" in css
+    assert "sizes: x-small, small, medium, large, original" in css
     assert "alignments: left, center, right" in css
     assert "wraps: none, wrap-left, wrap-right" in css
     assert "max-width: 100%" in css
@@ -324,6 +324,76 @@ def test_all_image_presentation_options_render_and_css_agrees():
                 assert f"otw-figure--{wrap}" in html
                 assert 'alt="Alt"' in html
                 assert "<figcaption><em>Caption</em></figcaption>" in html
+
+
+def test_publisher_v2_rich_formatting_metadata_restores_visual_styles():
+    metadata = {
+        "schema": "otw.publisher.post",
+        "version": 2,
+        "formatting": {
+            "mode": "otw-enhanced-markdown",
+            "version": 1,
+            "fallback": "markdown",
+        },
+        "subhead": "A field note from the new desk",
+        "images": [],
+        "blocks": [
+            {
+                "id": "p1",
+                "type": "paragraph",
+                "html": 'First <span style="color: #6395EE; background-color: #A0BEF5; text-decoration: underline; position: fixed">styled</span> paragraph.',
+                "text": "First styled paragraph.",
+                "lineSpacing": "1.5",
+            },
+            {
+                "id": "h1",
+                "type": "heading",
+                "level": 2,
+                "html": 'Publisher <u>heading</u>',
+                "text": "Publisher heading",
+                "lineSpacing": "1.15",
+            },
+            {
+                "id": "quote",
+                "type": "quote",
+                "html": '<span style="font-style: italic">Quoted field note</span>',
+                "text": "Quoted field note",
+                "lineSpacing": "2.0",
+            },
+            {
+                "id": "list",
+                "type": "list",
+                "items": [
+                    {"id": "li1", "html": 'One <span style="font-weight: 700">strong</span>', "text": "One strong"},
+                    {"id": "li2", "html": '<span style="background-color: #91AFB3">Two</span>', "text": "Two"},
+                ],
+                "lineSpacing": "1.0",
+            },
+        ],
+    }
+    markdown = """_A field note from the new desk_
+
+First styled paragraph.
+
+## Publisher heading
+
+> Quoted field note
+
+- One strong
+- Two
+"""
+    sanitized = narrative_sync.sanitize_publisher_metadata(metadata)
+    html = narrative_sync.markdown_to_html(markdown, sanitized)
+
+    assert sanitized["version"] == 2
+    assert sanitized["formatting"]["mode"] == "otw-enhanced-markdown"
+    assert '<p><em>A field note from the new desk</em></p>' in html
+    assert '<p style="line-height: 1.5;">First <span style="color: #6395EE; background-color: #A0BEF5; text-decoration: underline">styled</span> paragraph.</p>' in html
+    assert '<h2 style="line-height: 1.15;">Publisher <u>heading</u></h2>' in html
+    assert '<blockquote style="line-height: 2;"><span style="font-style: italic">Quoted field note</span></blockquote>' in html
+    assert '<ul style="line-height: 1;"><li>One <span style="font-weight: 700">strong</span></li><li><span style="background-color: #91AFB3">Two</span></li></ul>' in html
+    assert "position: fixed" not in html
+    assert_no_public_leaks(html)
 
 
 def test_sanitization_security_for_markdown_and_metadata():

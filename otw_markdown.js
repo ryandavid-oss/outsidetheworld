@@ -40,7 +40,7 @@
 
   function normalizeImagePresentation(value = {}) {
     return {
-      displaySize: normalizeChoice(value.displaySize, ["small", "medium", "large", "original"], "medium"),
+      displaySize: normalizeChoice(value.displaySize, ["x-small", "small", "medium", "large", "original"], "medium"),
       alignment: normalizeChoice(value.alignment, ["left", "center", "right"], "center"),
       wrapMode: normalizeChoice(value.wrapMode, ["none", "wrap-left", "wrap-right"], "none")
     };
@@ -107,6 +107,182 @@
           node.removeAttribute(attr.name);
         }
       });
+    });
+  }
+
+  const richInlineTags = new Set(["A", "B", "BR", "CODE", "EM", "FONT", "I", "SPAN", "STRONG", "U"]);
+  const richInlineStyleProperties = new Set([
+    "background-color",
+    "color",
+    "font-style",
+    "font-weight",
+    "text-decoration",
+    "text-decoration-line"
+  ]);
+  const richLineSpacing = {
+    "1.0": "1",
+    "1.15": "1.15",
+    "1.5": "1.5",
+    "2.0": "2"
+  };
+
+  function safeStyleValue(value) {
+    const normalized = String(value || "").trim();
+    if (!normalized || /(url\s*\(|expression\s*\(|javascript:|data:|blob:)/i.test(normalized)) return "";
+    return normalized;
+  }
+
+  function sanitizeInlineStyle(value) {
+    const probe = document.createElement("span");
+    probe.setAttribute("style", String(value || ""));
+    const clean = document.createElement("span");
+    Array.from(probe.style).forEach((property) => {
+      const normalized = property.toLowerCase();
+      if (!richInlineStyleProperties.has(normalized)) return;
+      const styleValue = safeStyleValue(probe.style.getPropertyValue(property));
+      if (styleValue) {
+        clean.style.setProperty(normalized, styleValue);
+      }
+    });
+    return clean.getAttribute("style") || "";
+  }
+
+  function sanitizeEnhancedInlineHtml(value) {
+    const source = document.createElement("template");
+    source.innerHTML = String(value || "");
+
+    function cleanNode(node) {
+      if (node.nodeType === Node.TEXT_NODE) {
+        return document.createTextNode(node.textContent || "");
+      }
+      if (node.nodeType !== Node.ELEMENT_NODE) {
+        return document.createDocumentFragment();
+      }
+
+      const tag = node.tagName.toUpperCase();
+      const fragmentChildren = () => {
+        const fragment = document.createDocumentFragment();
+        node.childNodes.forEach((child) => fragment.append(cleanNode(child)));
+        return fragment;
+      };
+      if (!richInlineTags.has(tag)) {
+        return fragmentChildren();
+      }
+      if (tag === "BR") {
+        return document.createElement("br");
+      }
+
+      const clean = document.createElement(tag === "FONT" ? "span" : tag.toLowerCase());
+      if (tag === "A") {
+        const href = safeLinkUrl(node.getAttribute("href") || "");
+        if (href) {
+          clean.setAttribute("href", href);
+        }
+      }
+      if (tag === "FONT" && node.getAttribute("color")) {
+        const color = safeStyleValue(node.getAttribute("color"));
+        if (color) {
+          clean.style.color = color;
+        }
+      }
+      if (node.getAttribute("style")) {
+        const style = sanitizeInlineStyle(node.getAttribute("style"));
+        if (style) {
+          clean.setAttribute("style", style);
+        }
+      }
+      node.childNodes.forEach((child) => clean.append(cleanNode(child)));
+      return clean;
+    }
+
+    const clean = document.createElement("template");
+    source.content.childNodes.forEach((node) => clean.content.append(cleanNode(node)));
+    return clean.innerHTML.trim();
+  }
+
+  function normalizedText(value) {
+    return String(value || "").replace(/\s+/g, " ").trim();
+  }
+
+  function isPublisherSubheadElement(element, metadata) {
+    return Boolean(
+      metadata
+      && metadata.subhead
+      && element
+      && element.tagName === "P"
+      && normalizedText(element.textContent) === normalizedText(metadata.subhead)
+    );
+  }
+
+  function publisherBlockMatchesElement(block, element) {
+    if (!block || !element) return false;
+    const tag = element.tagName;
+    if (block.type === "paragraph") return tag === "P";
+    if (block.type === "heading") return /^H[1-6]$/.test(tag);
+    if (block.type === "quote") return tag === "BLOCKQUOTE";
+    if (block.type === "list") return tag === "UL" || tag === "OL";
+    if (block.type === "divider") return tag === "HR";
+    if (block.type === "image") return tag === "FIGURE" || tag === "IMG" || Boolean(element.querySelector("img"));
+    return false;
+  }
+
+  function applyPublisherLineSpacing(element, value) {
+    const lineHeight = richLineSpacing[String(value || "").trim()];
+    if (element && lineHeight) {
+      element.style.lineHeight = lineHeight;
+    }
+  }
+
+  function applyPublisherTextBlock(element, block) {
+    if (!element || !block) return;
+    const htmlValue = typeof block.html === "string" ? block.html : "";
+    if (htmlValue.trim()) {
+      element.innerHTML = sanitizeEnhancedInlineHtml(htmlValue);
+    }
+    applyPublisherLineSpacing(element, block.lineSpacing);
+  }
+
+  function applyPublisherListBlock(element, block) {
+    if (!element || !block) return;
+    const items = Array.from(element.children).filter((child) => child.tagName === "LI");
+    const metadataItems = Array.isArray(block.items) ? block.items : [];
+    items.forEach((item, index) => {
+      const metadataItem = metadataItems[index];
+      const htmlValue = typeof metadataItem?.html === "string" ? metadataItem.html : "";
+      if (htmlValue.trim()) {
+        item.innerHTML = sanitizeEnhancedInlineHtml(htmlValue);
+      }
+    });
+    applyPublisherLineSpacing(element, block.lineSpacing);
+  }
+
+  function applyPublisherRichBlocks(root, metadata = {}) {
+    const blocks = Array.isArray(metadata.blocks) ? metadata.blocks : [];
+    if (!blocks.length) return;
+
+    const elements = Array.from(root.children).filter((element) => {
+      return /^(P|H[1-6]|BLOCKQUOTE|UL|OL|HR|FIGURE|IMG)$/.test(element.tagName)
+        || Boolean(element.querySelector && element.querySelector("img"));
+    });
+    let cursor = 0;
+
+    blocks.forEach((block) => {
+      if (!block || !block.type) return;
+      while (cursor < elements.length && isPublisherSubheadElement(elements[cursor], metadata)) {
+        cursor += 1;
+      }
+      while (cursor < elements.length && !publisherBlockMatchesElement(block, elements[cursor])) {
+        cursor += 1;
+      }
+      if (cursor >= elements.length) return;
+
+      const element = elements[cursor];
+      cursor += 1;
+      if (block.type === "paragraph" || block.type === "heading" || block.type === "quote") {
+        applyPublisherTextBlock(element, block);
+      } else if (block.type === "list") {
+        applyPublisherListBlock(element, block);
+      }
     });
   }
 
@@ -189,7 +365,6 @@
     const template = document.createElement("template");
     template.innerHTML = html;
     sanitizeRenderedHtml(template.content);
-    if (!images.byUrl.size) return template.innerHTML;
 
     const orderedByUrl = new Map();
     images.ordered.forEach((image) => {
@@ -231,6 +406,7 @@
       }
     });
 
+    applyPublisherRichBlocks(template.content, metadata);
     return template.innerHTML;
   }
 

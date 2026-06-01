@@ -726,7 +726,7 @@ function assertPublisherMetadataComment(markdown) {
     throw new Error("Publisher metadata must be valid JSON");
   }
 
-  if (!metadata || metadata.schema !== "otw.publisher.post" || metadata.version !== 1) {
+  if (!metadata || metadata.schema !== "otw.publisher.post" || ![1, 2].includes(Number(metadata.version || 0))) {
     throw new Error("Publisher metadata schema is invalid");
   }
 }

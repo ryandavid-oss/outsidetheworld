@@ -106,7 +106,7 @@ body::after {
 }
 
 /* OTW publisher image presentation contract:
-   sizes: small, medium, large, original
+   sizes: x-small, small, medium, large, original
    alignments: left, center, right
    wraps: none, wrap-left, wrap-right; wrapped images collapse to block layout on mobile. */
 .otw-figure {
@@ -130,6 +130,10 @@ body::after {
     text-align: center;
 }
 
+.otw-figure--x-small {
+    --otw-figure-max-width: 220px;
+}
+
 .otw-figure--small {
     --otw-figure-max-width: 320px;
 }
@@ -142,12 +146,14 @@ body::after {
     --otw-figure-max-width: 760px;
 }
 
+.otw-figure--x-small,
 .otw-figure--small,
 .otw-figure--medium,
 .otw-figure--large {
     width: min(100%, var(--otw-figure-max-width, 720px));
 }
 
+.otw-figure--x-small img,
 .otw-figure--small img,
 .otw-figure--medium img,
 .otw-figure--large img {

@@ -34,6 +34,9 @@
       --control-shadow: 0 10px 28px rgba(27, 54, 93, 0.09);
       --focus-ring: 0 0 0 3px rgba(99, 149, 238, 0.16);
       --radius: 8px;
+      --composer-body-size: clamp(1.05rem, 1.2vw, 1.16rem);
+      --composer-subhead-size: clamp(1.31rem, 1.5vw, 1.45rem);
+      --composer-head-size: clamp(1.58rem, 1.8vw, 1.74rem);
       --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       --serif: Georgia, "Times New Roman", serif;
       --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
@@ -543,9 +546,19 @@
       outline: none;
     }
 
-    .document-shell {
-      width: min(980px, calc(100% - 44px));
+    .workspace {
+      width: min(1320px, calc(100% - 44px));
       margin: 34px auto 82px;
+      display: grid;
+      grid-template-columns: minmax(620px, 980px) minmax(280px, 320px);
+      gap: 22px;
+      align-items: start;
+      justify-content: center;
+    }
+
+    .document-shell {
+      width: 100%;
+      margin: 0;
     }
 
     .paper {
@@ -557,6 +570,271 @@
         linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(248, 251, 255, 0.98)),
         var(--paper);
       box-shadow: var(--shadow);
+    }
+
+    .editor-panels {
+      position: sticky;
+      top: 132px;
+      display: grid;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .composer-panel {
+      display: grid;
+      gap: 13px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(248, 251, 255, 0.88)),
+        var(--surface);
+      box-shadow: 0 18px 48px rgba(27, 54, 93, 0.1);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .panel-header-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      min-width: 0;
+    }
+
+    .panel-title {
+      margin: 0;
+      color: var(--blue-dark);
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .panel-pill {
+      min-width: 0;
+      padding: 4px 7px;
+      border: 1px solid rgba(99, 149, 238, 0.22);
+      border-radius: 999px;
+      background: rgba(160, 190, 245, 0.18);
+      color: var(--blue-dark);
+      font-family: var(--mono);
+      font-size: 0.54rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .panel-toggle {
+      width: 28px;
+      height: 28px;
+      display: inline-grid;
+      place-items: center;
+      border: 1px solid rgba(27, 54, 93, 0.12);
+      border-radius: 7px;
+      background: rgba(255, 255, 255, 0.62);
+      color: var(--blue-dark);
+    }
+
+    .panel-toggle:hover,
+    .panel-toggle:focus-visible {
+      background: rgba(99, 149, 238, 0.14);
+      border-color: rgba(99, 149, 238, 0.36);
+      outline: none;
+    }
+
+    .panel-toggle svg {
+      width: 14px;
+      height: 14px;
+      transition: transform 160ms ease;
+    }
+
+    .structure-panel.is-collapsed .panel-toggle svg {
+      transform: rotate(-90deg);
+    }
+
+    .structure-panel.is-collapsed .structure-stats,
+    .structure-panel.is-collapsed .panel-alerts,
+    .structure-panel.is-collapsed .structure-list {
+      display: none;
+    }
+
+    .panel-empty {
+      padding: 16px 12px;
+      border: 1px dashed rgba(27, 54, 93, 0.16);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.52);
+      color: var(--muted);
+      font-size: 0.82rem;
+      line-height: 1.35;
+    }
+
+    .structure-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 7px;
+    }
+
+    .structure-stat {
+      min-width: 0;
+      padding: 8px 7px;
+      border: 1px solid rgba(27, 54, 93, 0.1);
+      border-radius: 7px;
+      background: rgba(255, 255, 255, 0.58);
+    }
+
+    .structure-stat-value {
+      display: block;
+      color: var(--blue-dark);
+      font-family: var(--serif);
+      font-size: 1.08rem;
+      line-height: 1;
+    }
+
+    .structure-stat-label {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.52rem;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+
+    .structure-list,
+    .panel-alerts {
+      display: grid;
+      gap: 7px;
+    }
+
+    .structure-list {
+      max-height: 270px;
+      overflow: auto;
+      padding-right: 2px;
+    }
+
+    .structure-item {
+      width: 100%;
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      gap: 9px;
+      align-items: center;
+      padding: 9px;
+      border: 1px solid rgba(27, 54, 93, 0.1);
+      border-radius: 7px;
+      background: rgba(255, 255, 255, 0.62);
+      color: var(--ink);
+      text-align: left;
+    }
+
+    .structure-item:hover,
+    .structure-item:focus-visible {
+      border-color: rgba(99, 149, 238, 0.38);
+      background: rgba(160, 190, 245, 0.16);
+      outline: none;
+    }
+
+    .structure-kind,
+    .structure-state,
+    .panel-alert {
+      font-family: var(--mono);
+      font-size: 0.54rem;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+
+    .structure-kind {
+      min-width: 42px;
+      color: var(--blue);
+    }
+
+    .structure-label {
+      min-width: 0;
+      color: var(--ink);
+      font-size: 0.82rem;
+      line-height: 1.25;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .structure-state {
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .panel-alert {
+      padding: 7px 8px;
+      border: 1px solid rgba(145, 175, 179, 0.24);
+      border-radius: 7px;
+      background: rgba(145, 175, 179, 0.12);
+      color: var(--logo-teal);
+      line-height: 1.28;
+    }
+
+    .panel-alert.is-error {
+      border-color: rgba(138, 60, 53, 0.24);
+      background: rgba(138, 60, 53, 0.08);
+      color: #8A3C35;
+    }
+
+    .inspector-controls,
+    .panel-field,
+    .panel-control-group {
+      display: grid;
+      gap: 7px;
+    }
+
+    .panel-textarea {
+      min-height: 72px;
+      resize: vertical;
+    }
+
+    .panel-segmented {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 5px;
+    }
+
+    .panel-segmented.is-three {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .panel-option,
+    .panel-action {
+      min-height: 32px;
+      border: 1px solid rgba(27, 54, 93, 0.12);
+      border-radius: 7px;
+      background: rgba(255, 255, 255, 0.66);
+      color: var(--blue-dark);
+      font-family: var(--mono);
+      font-size: 0.56rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .panel-option:hover,
+    .panel-option:focus-visible,
+    .panel-option[aria-pressed="true"],
+    .panel-action:hover,
+    .panel-action:focus-visible {
+      background: rgba(99, 149, 238, 0.15);
+      border-color: rgba(99, 149, 238, 0.38);
+      outline: none;
+    }
+
+    .panel-actions {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 7px;
     }
 
     .article-meta {
@@ -637,9 +915,9 @@
       background: transparent;
       color: var(--blue-dark);
       font-family: var(--serif);
-      font-size: clamp(2.35rem, 4.6vw, 3.55rem);
+      font-size: var(--composer-head-size);
       font-weight: 700;
-      line-height: 1.05;
+      line-height: 1.18;
       letter-spacing: 0;
       outline: none;
       resize: none;
@@ -658,7 +936,7 @@
       background: transparent;
       color: var(--logo-teal);
       font-family: var(--serif);
-      font-size: clamp(1.12rem, 1.9vw, 1.45rem);
+      font-size: var(--composer-subhead-size);
       line-height: 1.5;
       outline: none;
       resize: none;
@@ -674,7 +952,7 @@
       min-height: 610px;
       color: var(--ink);
       font-family: var(--serif);
-      font-size: clamp(1.08rem, 1.5vw, 1.24rem);
+      font-size: var(--composer-body-size);
       line-height: 1.62;
       outline: none;
     }
@@ -708,7 +986,7 @@
     .editor h2 {
       margin-top: 1.8em;
       font-family: var(--serif);
-      font-size: 1.75rem;
+      font-size: var(--composer-head-size);
       line-height: 1.18;
       color: var(--blue-dark);
     }
@@ -718,7 +996,7 @@
       padding-left: 18px;
       border-left: 3px solid rgba(99, 149, 238, 0.42);
       color: var(--logo-teal);
-      font-size: 1.26rem;
+      font-size: var(--composer-subhead-size);
       font-style: italic;
     }
 
@@ -806,6 +1084,10 @@
 
     .publisher-figure.is-dragging {
       opacity: 0.55;
+    }
+
+    .publisher-figure[data-display-size="x-small"] {
+      --figure-max-width: 220px;
     }
 
     .publisher-figure[data-display-size="small"] {
@@ -921,40 +1203,7 @@
     }
 
     .figure-meta {
-      position: absolute;
-      top: 8px;
-      right: 8px;
-      z-index: 8;
-      width: min(360px, calc(100% - 16px));
-      display: grid;
-      grid-template-columns: minmax(0, 1fr);
-      gap: 10px;
-      align-items: start;
-      padding: 8px;
-      border: 1px solid rgba(27, 54, 93, 0.12);
-      border-radius: var(--radius);
-      background: rgba(254, 254, 255, 0.96);
-      box-shadow: 0 16px 38px rgba(27, 54, 93, 0.14);
-      opacity: 0;
-      pointer-events: none;
-      transform: translateY(-4px);
-      transition: opacity 140ms ease, transform 140ms ease;
-      user-select: none;
-    }
-
-    .publisher-figure:focus-within .figure-meta,
-    .publisher-figure:hover .figure-meta,
-    .publisher-figure.is-selected .figure-meta {
-      opacity: 1;
-      pointer-events: auto;
-      transform: translateY(0);
-    }
-
-    .publisher-figure[data-controls-hidden="true"] .figure-meta {
-      opacity: 0 !important;
-      pointer-events: none !important;
-      transform: translateY(-4px) !important;
-      transition: none !important;
+      display: none;
     }
 
     .figure-alt {
@@ -1204,6 +1453,22 @@
       stroke: currentColor;
     }
 
+    @media (max-width: 1180px) {
+      .workspace {
+        grid-template-columns: 1fr;
+      }
+
+      .editor-panels {
+        position: static;
+        order: -1;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .structure-list {
+        max-height: 220px;
+      }
+    }
+
     @media (max-width: 820px) {
       .topbar {
         grid-template-columns: 1fr auto;
@@ -1231,10 +1496,19 @@
         display: none;
       }
 
-      .document-shell {
+      .workspace {
         width: calc(100% - 24px);
         margin-top: 14px;
         margin-bottom: 34px;
+      }
+
+      .editor-panels {
+        grid-template-columns: 1fr;
+      }
+
+      .document-shell {
+        width: 100%;
+        margin: 0;
       }
 
       .paper {
@@ -1253,15 +1527,7 @@
       }
 
       .title-field {
-        font-size: clamp(2.1rem, 10vw, 2.75rem);
-      }
-
-      .figure-meta {
-        grid-template-columns: 1fr;
-      }
-
-      .figure-actions {
-        justify-content: flex-end;
+        font-size: var(--composer-head-size);
       }
 
       .publisher-figure[data-wrap-mode="wrap-left"],
@@ -1540,27 +1806,91 @@
       </div>
     </aside>
 
-    <main class="document-shell">
-      <article class="paper" aria-label="Article document">
-        <div class="article-meta">
-          <span>Outside The World Article</span>
-          <input class="article-date" type="text" value="May 29, 2026" aria-label="Article date" />
-        </div>
-
-        <div class="article-title-stack">
-          <div class="title-block">
-            <textarea class="title-field" id="titleField" rows="1" aria-label="Article title" placeholder="Title"></textarea>
+    <div class="workspace">
+      <main class="document-shell">
+        <article class="paper" aria-label="Article document">
+          <div class="article-meta">
+            <span>Outside The World Article</span>
+            <input class="article-date" type="text" value="May 29, 2026" aria-label="Article date" />
           </div>
-          <div class="subhead-block">
-            <textarea class="subhead-field" id="subheadField" rows="1" aria-label="Article subhead" placeholder="Add a subhead"></textarea>
-          </div>
-        </div>
 
-        <div class="body-block">
-          <div class="editor" id="editor" contenteditable="true" spellcheck="true" data-placeholder="Start writing..."></div>
-        </div>
-      </article>
-    </main>
+          <div class="article-title-stack">
+            <div class="title-block">
+              <textarea class="title-field" id="titleField" rows="1" aria-label="Article title" placeholder="Title"></textarea>
+            </div>
+            <div class="subhead-block">
+              <textarea class="subhead-field" id="subheadField" rows="1" aria-label="Article subhead" placeholder="Add a subhead"></textarea>
+            </div>
+          </div>
+
+          <div class="body-block">
+            <div class="editor" id="editor" contenteditable="true" spellcheck="true" data-placeholder="Start writing..."></div>
+          </div>
+        </article>
+      </main>
+
+      <aside class="editor-panels" aria-label="Composer panels">
+        <section class="composer-panel image-inspector" id="imageInspector" aria-label="Image inspector">
+          <div class="panel-header">
+            <h2 class="panel-title">Image</h2>
+            <span class="panel-pill" id="imageInspectorStatus">No selection</span>
+          </div>
+          <div class="panel-empty" id="imageInspectorEmpty">No image selected</div>
+          <div class="inspector-controls" id="imageInspectorControls" hidden>
+            <div class="panel-control-group">
+              <span class="field-label">Size</span>
+              <div class="panel-segmented" id="imageInspectorSizeControls" aria-label="Image size"></div>
+            </div>
+            <div class="panel-control-group">
+              <span class="field-label">Align</span>
+              <div class="panel-segmented is-three" id="imageInspectorAlignControls" aria-label="Image alignment"></div>
+            </div>
+            <div class="panel-control-group">
+              <span class="field-label">Wrap</span>
+              <div class="panel-segmented is-three" id="imageInspectorWrapControls" aria-label="Image text wrap"></div>
+            </div>
+            <div class="panel-control-group">
+              <span class="field-label">Move</span>
+              <div class="panel-segmented is-three" id="imageInspectorMoveControls" aria-label="Image movement">
+                <button class="panel-option" type="button" data-move="up">Up</button>
+                <button class="panel-option" type="button" data-move="down">Down</button>
+                <button class="panel-option" type="button" data-move="cursor">Cursor</button>
+              </div>
+            </div>
+            <div class="panel-actions">
+              <button class="panel-action" id="imageInspectorRetry" type="button">Retry</button>
+              <button class="panel-action" id="imageInspectorReplace" type="button">Replace</button>
+              <button class="panel-action" id="imageInspectorRemove" type="button">Remove</button>
+            </div>
+            <label class="panel-field" for="imageInspectorAlt">
+              <span class="field-label">Alt Text</span>
+              <input class="side-input" id="imageInspectorAlt" type="text" />
+            </label>
+            <label class="panel-field" for="imageInspectorCaption">
+              <span class="field-label">Caption</span>
+              <textarea class="side-input panel-textarea" id="imageInspectorCaption" rows="3"></textarea>
+            </label>
+          </div>
+        </section>
+
+        <section class="composer-panel structure-panel is-collapsed" id="structurePanel" aria-label="Article structure">
+          <div class="panel-header">
+            <h2 class="panel-title">Structure</h2>
+            <div class="panel-header-actions">
+              <span class="panel-pill" id="structureReadiness">Local draft</span>
+              <button class="panel-toggle" id="structureToggle" type="button" aria-label="Expand structure panel" aria-expanded="false">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="m6 9 6 6 6-6"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div class="structure-stats" id="structureStats" aria-label="Article counts"></div>
+          <div class="panel-alerts" id="structureAlerts"></div>
+          <div class="structure-list" id="structureList"></div>
+        </section>
+      </aside>
+    </div>
   </div>
 
   <input id="localImageInput" type="file" accept="image/*" hidden />
@@ -1604,6 +1934,24 @@
     const colorPopover = document.getElementById('colorPopover');
     const colorPopoverTitle = document.getElementById('colorPopoverTitle');
     const customColorInput = document.getElementById('customColorInput');
+    const structureStats = document.getElementById('structureStats');
+    const structureAlerts = document.getElementById('structureAlerts');
+    const structureList = document.getElementById('structureList');
+    const structureReadiness = document.getElementById('structureReadiness');
+    const structurePanel = document.getElementById('structurePanel');
+    const structureToggle = document.getElementById('structureToggle');
+    const imageInspectorEmpty = document.getElementById('imageInspectorEmpty');
+    const imageInspectorControls = document.getElementById('imageInspectorControls');
+    const imageInspectorStatus = document.getElementById('imageInspectorStatus');
+    const imageInspectorAlt = document.getElementById('imageInspectorAlt');
+    const imageInspectorCaption = document.getElementById('imageInspectorCaption');
+    const imageInspectorSizeControls = document.getElementById('imageInspectorSizeControls');
+    const imageInspectorAlignControls = document.getElementById('imageInspectorAlignControls');
+    const imageInspectorWrapControls = document.getElementById('imageInspectorWrapControls');
+    const imageInspectorMoveControls = document.getElementById('imageInspectorMoveControls');
+    const imageInspectorRetry = document.getElementById('imageInspectorRetry');
+    const imageInspectorReplace = document.getElementById('imageInspectorReplace');
+    const imageInspectorRemove = document.getElementById('imageInspectorRemove');
 
     const ARTICLE_SCHEMA = 'otw.publisher.article';
     const PUBLISH_PAYLOAD_SCHEMA = 'otw.publisher.publishPayload';
@@ -1646,6 +1994,9 @@
     let draggedFigure = null;
     let imageDropTarget = null;
     let imageDropIndicator = null;
+    let panelUpdateFrame = 0;
+    let isSyncingImageInspector = false;
+    let removedFigureUndo = null;
     const lineSpacingValues = ['1.0', '1.15', '1.5', '2.0'];
     const lineSpacingClasses = {
       '1.0': 'line-spacing-10',
@@ -1654,10 +2005,11 @@
       '2.0': 'line-spacing-20'
     };
     const figureDisplaySizeOptions = [
+      { value: 'x-small', label: 'XS', title: 'Extra Small' },
       { value: 'small', label: 'S', title: 'Small' },
       { value: 'medium', label: 'M', title: 'Medium' },
       { value: 'large', label: 'L', title: 'Large' },
-      { value: 'original', label: 'Original', title: 'Original Size' }
+      { value: 'original', label: 'OG', title: 'Original Size' }
     ];
     const figureAlignmentOptions = [
       { value: 'left', label: 'L', title: 'Left aligned image block' },
@@ -1669,6 +2021,24 @@
       { value: 'wrap-left', label: 'WL', title: 'Wrap left: text flows on the right' },
       { value: 'wrap-right', label: 'WR', title: 'Wrap right: text flows on the left' }
     ];
+    function renderPanelOptionButtons(container, options, datasetName) {
+      options.forEach((option) => {
+        const button = document.createElement('button');
+        button.className = 'panel-option';
+        button.type = 'button';
+        button.textContent = option.label;
+        button.title = option.title;
+        button.setAttribute('aria-label', option.title);
+        button.setAttribute('aria-pressed', 'false');
+        button.dataset[datasetName] = option.value;
+        container.append(button);
+      });
+    }
+
+    renderPanelOptionButtons(imageInspectorSizeControls, figureDisplaySizeOptions, 'size');
+    renderPanelOptionButtons(imageInspectorAlignControls, figureAlignmentOptions, 'alignment');
+    renderPanelOptionButtons(imageInspectorWrapControls, figureWrapModeOptions, 'wrapMode');
+
     const bodyOnlyCommands = new Set([
       'bold',
       'italic',
@@ -1715,9 +2085,20 @@
       }
     }
 
-    function markChanged() {
+    function discardRemovedFigureUndo() {
+      if (removedFigureUndo?.figure && !editor.contains(removedFigureUndo.figure)) {
+        revokeFigureUrl(removedFigureUndo.figure);
+        stagedImageFiles.delete(removedFigureUndo.figure);
+      }
+      removedFigureUndo = null;
+    }
+
+    function markChanged({ preserveImageUndo = false } = {}) {
       if (isHydrating) {
         return;
+      }
+      if (!preserveImageUndo) {
+        discardRemovedFigureUndo();
       }
       updateArticlePayload();
       setSaveState('Unsaved changes');
@@ -2849,7 +3230,7 @@
         }
         if (tag === 'span') {
           if (node.getAttribute('style')) {
-            issues.push(issue('warning', 'inline-style-dropped', 'Styled text cannot be represented in publish Markdown yet.', context));
+            return inner;
           }
           return inner;
         }
@@ -2968,6 +3349,9 @@
       if (retry) {
         retry.hidden = status !== 'failed';
       }
+      if (figure === selectedFigure) {
+        schedulePanelUpdate();
+      }
     }
 
     function normalizeFigureDisplaySize(value) {
@@ -3063,6 +3447,224 @@
         return;
       }
       figure.style.setProperty('--figure-natural-width', `${image.naturalWidth}px`);
+    }
+
+    function shortPanelText(value, fallback = 'Untitled') {
+      const text = stripEditorCaretMarkers(value).replace(/\s+/g, ' ').trim();
+      if (!text) {
+        return fallback;
+      }
+      return text.length > 68 ? `${text.slice(0, 65).trim()}...` : text;
+    }
+
+    function displaySizeLabel(value) {
+      const size = normalizeFigureDisplaySize(value);
+      const option = figureDisplaySizeOptions.find((item) => item.value === size);
+      return option ? option.label : size.toUpperCase();
+    }
+
+    function selectedFigureInEditor() {
+      return selectedFigure && editor.contains(selectedFigure) ? selectedFigure : null;
+    }
+
+    function setPressedOption(container, dataName, value) {
+      container.querySelectorAll('.panel-option').forEach((button) => {
+        const active = button.dataset[dataName] === value;
+        button.classList.toggle('is-active', active);
+        button.setAttribute('aria-pressed', String(active));
+      });
+    }
+
+    function syncImageInspectorOptions(figure) {
+      setPressedOption(imageInspectorSizeControls, 'size', normalizeFigureDisplaySize(figure.dataset.displaySize));
+      setPressedOption(imageInspectorAlignControls, 'alignment', normalizeFigureAlignment(figure.dataset.alignment));
+      setPressedOption(imageInspectorWrapControls, 'wrapMode', normalizeFigureWrapMode(figure.dataset.wrapMode));
+    }
+
+    function updateImageInspector() {
+      const figure = selectedFigureInEditor();
+      const hasFigure = Boolean(figure);
+      imageInspectorEmpty.hidden = hasFigure;
+      imageInspectorControls.hidden = !hasFigure;
+
+      if (!figure) {
+        imageInspectorStatus.textContent = 'No selection';
+        imageInspectorAlt.value = '';
+        imageInspectorCaption.value = '';
+        return;
+      }
+
+      const altInput = figure.querySelector('.figure-alt');
+      const caption = figure.querySelector('.figure-caption');
+      const image = figure.querySelector('img');
+
+      isSyncingImageInspector = true;
+      imageInspectorStatus.textContent = figureStatusLabel(figure);
+      if (document.activeElement !== imageInspectorAlt) {
+        imageInspectorAlt.value = altInput ? altInput.value : image?.alt || '';
+      }
+      if (document.activeElement !== imageInspectorCaption) {
+        imageInspectorCaption.value = caption ? caption.textContent : '';
+      }
+      imageInspectorRetry.hidden = normalizeImageUploadStatus(figure.dataset.uploadStatus) !== 'failed';
+      syncImageInspectorOptions(figure);
+      isSyncingImageInspector = false;
+    }
+
+    function appendStructureStat(label, value) {
+      const item = document.createElement('div');
+      item.className = 'structure-stat';
+      const valueEl = document.createElement('span');
+      valueEl.className = 'structure-stat-value';
+      valueEl.textContent = String(value);
+      const labelEl = document.createElement('span');
+      labelEl.className = 'structure-stat-label';
+      labelEl.textContent = label;
+      item.append(valueEl, labelEl);
+      structureStats.append(item);
+    }
+
+    function appendPanelAlert(issue) {
+      const item = document.createElement('div');
+      item.className = `panel-alert${issue.level === 'error' ? ' is-error' : ''}`;
+      item.textContent = issue.message || issue.code || 'Review needed';
+      structureAlerts.append(item);
+    }
+
+    function focusStructureTarget(target) {
+      if (!target) {
+        return;
+      }
+      if (target === titleField || target === subheadField) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        target.focus();
+        target.setSelectionRange(target.value.length, target.value.length);
+        return;
+      }
+      if (!editor.contains(target)) {
+        return;
+      }
+      target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      if (target.classList && target.classList.contains('publisher-figure')) {
+        selectFigure(target, { focus: true });
+      } else {
+        placeCaretInside(target);
+      }
+    }
+
+    function appendStructureItem({ kind, label, state, target }) {
+      const button = document.createElement('button');
+      button.className = 'structure-item';
+      button.type = 'button';
+
+      const kindEl = document.createElement('span');
+      kindEl.className = 'structure-kind';
+      kindEl.textContent = kind;
+      const labelEl = document.createElement('span');
+      labelEl.className = 'structure-label';
+      labelEl.textContent = label;
+      const stateEl = document.createElement('span');
+      stateEl.className = 'structure-state';
+      stateEl.textContent = state || '';
+
+      button.append(kindEl, labelEl, stateEl);
+      button.addEventListener('click', () => focusStructureTarget(target));
+      structureList.append(button);
+    }
+
+    function figureStructureLabel(figure) {
+      const caption = figure.querySelector('.figure-caption')?.textContent || '';
+      const alt = figure.querySelector('.figure-alt')?.value || figure.querySelector('img')?.alt || '';
+      const fileName = figure.dataset.localFileName || figure.querySelector('img')?.getAttribute('data-file-name') || '';
+      return shortPanelText(caption || alt || fileName, 'Image');
+    }
+
+    function collectStructureItems() {
+      const items = [
+        {
+          kind: 'Title',
+          label: shortPanelText(titleField.value, 'Untitled'),
+          state: titleField.value.trim() ? '' : 'Missing',
+          target: titleField
+        },
+        {
+          kind: 'Sub',
+          label: shortPanelText(subheadField.value, 'No subhead'),
+          state: subheadField.value.trim() ? '' : 'Optional',
+          target: subheadField
+        }
+      ];
+
+      editor.querySelectorAll('h2, .publisher-figure, .unsupported-block').forEach((node) => {
+        if (node.classList.contains('publisher-figure')) {
+          items.push({
+            kind: 'Image',
+            label: figureStructureLabel(node),
+            state: displaySizeLabel(node.dataset.displaySize),
+            target: node
+          });
+          return;
+        }
+        if (node.classList.contains('unsupported-block')) {
+          items.push({
+            kind: 'Block',
+            label: shortPanelText(node.textContent, 'Unsupported block'),
+            state: 'Review',
+            target: node
+          });
+          return;
+        }
+        items.push({
+          kind: 'Head',
+          label: shortPanelText(node.textContent, 'Heading'),
+          state: '',
+          target: node
+        });
+      });
+
+      return items;
+    }
+
+    function updateStructurePanel(article = window.otwPublisherArticle, payload = window.otwPublisherPublishPayload) {
+      const blocks = article?.body?.blocks || [];
+      const imageCount = blocks.filter((block) => block.type === 'image').length;
+      const headingCount = blocks.filter((block) => block.type === 'heading').length;
+      const bodyCount = blocks.filter((block) => blockHasContent(block)).length;
+      const validation = payload?.validation || {};
+      const issues = validation.issues || [];
+
+      structureReadiness.textContent = validation.readiness || 'Local draft';
+      structureStats.replaceChildren();
+      appendStructureStat('Blocks', bodyCount);
+      appendStructureStat('Heads', headingCount);
+      appendStructureStat('Images', imageCount);
+
+      structureAlerts.replaceChildren();
+      if (issues.length) {
+        issues.slice(0, 3).forEach(appendPanelAlert);
+      } else {
+        appendPanelAlert({ level: 'info', message: 'Ready to publish' });
+      }
+
+      structureList.replaceChildren();
+      collectStructureItems().forEach(appendStructureItem);
+    }
+
+    function updateComposerPanels() {
+      const article = window.otwPublisherArticle || serializeArticle();
+      const payload = window.otwPublisherPublishPayload || buildPublishPayload(article);
+      updateStructurePanel(article, payload);
+      updateImageInspector();
+    }
+
+    function schedulePanelUpdate() {
+      if (panelUpdateFrame) {
+        return;
+      }
+      panelUpdateFrame = window.requestAnimationFrame(() => {
+        panelUpdateFrame = 0;
+        updateComposerPanels();
+      });
     }
 
     function serializeInlineBlock(element, type, extra = {}) {
@@ -3536,12 +4138,56 @@
       };
     }
 
+    function publicPublisherLineSpacing(value) {
+      return lineSpacingValues.includes(value) ? value : '';
+    }
+
+    function publicPublisherInlineBlockMetadata(block, type = block?.type) {
+      const html = sanitizeInlineHtml(block?.html || '');
+      const metadata = {
+        id: block?.id || blockId(type || 'block'),
+        type,
+        html,
+        text: block?.text || ''
+      };
+      const lineSpacing = publicPublisherLineSpacing(block?.lineSpacing);
+      if (lineSpacing) {
+        metadata.lineSpacing = lineSpacing;
+      }
+      if (type === 'heading') {
+        metadata.level = Math.min(Math.max(Number(block?.level) || 2, 2), 6);
+      }
+      return metadata;
+    }
+
+    function publicPublisherListBlockMetadata(block) {
+      const metadata = {
+        id: block?.id || blockId('list'),
+        type: 'list',
+        ordered: block?.ordered === true || undefined,
+        checklist: block?.checklist === true || undefined,
+        items: Array.isArray(block?.items)
+          ? block.items.map((item) => ({
+            id: item?.id || blockId('item'),
+            html: sanitizeInlineHtml(item?.html || ''),
+            text: item?.text || ''
+          }))
+          : []
+      };
+      const lineSpacing = publicPublisherLineSpacing(block?.lineSpacing);
+      if (lineSpacing) {
+        metadata.lineSpacing = lineSpacing;
+      }
+      return metadata;
+    }
+
     function buildPublisherPostMetadata(article, body) {
       const images = (body.images || [])
         .map(publicPublisherImageMetadata)
         .filter(Boolean);
       const imageById = new Map(images.map((image) => [image.id, image]));
-      const blocks = (body.blocks || [])
+      const sourceBlocks = article?.body?.blocks?.length ? article.body.blocks : body.blocks || [];
+      const blocks = sourceBlocks
         .map((block) => {
           if (!block || !block.type) {
             return null;
@@ -3562,20 +4208,31 @@
               wrapMode: image.wrapMode
             };
           }
-          return {
-            id: block.id || '',
-            type: block.type,
-            level: block.level || undefined,
-            ordered: block.ordered === true || undefined,
-            checklist: block.checklist === true || undefined
-          };
+          if (block.type === 'paragraph' || block.type === 'heading' || block.type === 'quote') {
+            return publicPublisherInlineBlockMetadata(block);
+          }
+          if (block.type === 'list') {
+            return publicPublisherListBlockMetadata(block);
+          }
+          if (block.type === 'divider') {
+            return {
+              id: block.id || blockId('divider'),
+              type: 'divider'
+            };
+          }
+          return null;
         })
         .filter(Boolean);
 
       return {
         schema: 'otw.publisher.post',
-        version: 1,
+        version: 2,
         source: 'publisher.html',
+        formatting: {
+          mode: 'otw-enhanced-markdown',
+          version: 1,
+          fallback: 'markdown'
+        },
         subhead: article.subhead || '',
         blocks,
         images
@@ -3629,7 +4286,8 @@
       });
 
       const markdown = String(payload.content?.markdown || '');
-      if (!payload.publisher || payload.publisher.schema !== 'otw.publisher.post' || payload.publisher.version !== 1) {
+      const publisherVersion = Number(payload.publisher?.version || 0);
+      if (!payload.publisher || payload.publisher.schema !== 'otw.publisher.post' || ![1, 2].includes(publisherVersion)) {
         issues.push(issue('error', 'publisher-metadata-invalid', 'Publisher metadata is invalid.'));
       } else if (!markdown.includes('<!-- otw-publisher')) {
         issues.push(issue('error', 'publisher-metadata-missing', 'Publisher metadata is missing from the Markdown document.'));
@@ -3695,7 +4353,7 @@
       if (issues.some((item) => item.code === 'image-missing-alt')) {
         return 'Image missing alt text';
       }
-      if (issues.some((item) => item.code === 'inline-style-dropped' || item.code === 'inline-markup-dropped')) {
+      if (issues.some((item) => item.code === 'inline-markup-dropped')) {
         return 'Unsupported content found';
       }
       return 'Ready to publish';
@@ -3837,6 +4495,7 @@
       publishPayload.textContent = JSON.stringify(payload, null, 2);
       window.otwPublisherPublishPayload = payload;
       setReadinessLabel(payload.validation.readiness);
+      schedulePanelUpdate();
       return article;
     }
 
@@ -4465,6 +5124,7 @@
       if (!figureToKeep && selectedFigure) {
         selectedFigure = null;
       }
+      schedulePanelUpdate();
     }
 
     function setFigureChromeFocusable(figure, focusable) {
@@ -4491,6 +5151,8 @@
       if (options.focus) {
         figure.focus({ preventScroll: true });
       }
+      updateImageInspector();
+      schedulePanelUpdate();
     }
 
     function placeCaretInside(node) {
@@ -4672,14 +5334,42 @@
       placeCaretInside(paragraph);
     }
 
+    function rememberRemovedFigureUndo(figure) {
+      discardRemovedFigureUndo();
+      removedFigureUndo = {
+        figure,
+        previous: figure.previousSibling,
+        next: figure.nextSibling
+      };
+    }
+
+    function restoreRemovedFigureUndo() {
+      if (!removedFigureUndo?.figure || editor.contains(removedFigureUndo.figure)) {
+        removedFigureUndo = null;
+        return false;
+      }
+      const { figure, previous, next } = removedFigureUndo;
+      removedFigureUndo = null;
+      if (next && next.parentNode === editor) {
+        editor.insertBefore(figure, next);
+      } else if (previous && previous.parentNode === editor) {
+        previous.after(figure);
+      } else {
+        editor.append(figure);
+      }
+      selectFigure(figure, { focus: true });
+      setSaveState('Image restored', true);
+      markChanged();
+      return true;
+    }
+
     function removeFigure(figure) {
       if (!figure || !editor.contains(figure)) {
         return;
       }
-      revokeFigureUrl(figure);
-      stagedImageFiles.delete(figure);
       const focusTarget = editableNeighborForFigure(figure, 'next') ||
         editableNeighborForFigure(figure, 'previous');
+      rememberRemovedFigureUndo(figure);
       figure.remove();
       if (selectedFigure === figure) {
         selectedFigure = null;
@@ -4693,7 +5383,8 @@
         placeCaretInside(paragraph);
       }
       setSaveState('Image removed', true);
-      markChanged();
+      markChanged({ preserveImageUndo: true });
+      updateToolbarState();
     }
 
     function moveFigureByBlock(figure, direction) {
@@ -4860,6 +5551,10 @@
     }
 
     function applyEditorCommand(command, value = null, options = {}) {
+      if (command === 'undo' && restoreRemovedFigureUndo()) {
+        updateToolbarState();
+        return true;
+      }
       if (
         (command === 'undo' || command === 'redo') &&
         activeEditable &&
@@ -5269,13 +5964,18 @@
       const replace = figure.querySelector('[data-role="replace"]');
       const remove = figure.querySelector('[data-role="remove"]');
 
-      figure.addEventListener('pointerdown', () => {
-        selectFigure(figure);
+      figure.addEventListener('pointerdown', (event) => {
+        const editsInsideFigure = event.target.closest('button, input, textarea, select, .figure-caption');
+        selectFigure(figure, { focus: !editsInsideFigure });
+        if (!editsInsideFigure) {
+          event.preventDefault();
+        }
       });
 
       figure.addEventListener('click', (event) => {
+        const editsInsideFigure = event.target.closest('button, input, textarea, select, .figure-caption');
         selectFigure(figure, {
-          focus: !event.target.closest('button, input, .figure-caption')
+          focus: !editsInsideFigure
         });
       });
 
@@ -5324,6 +6024,16 @@
       }
 
       if (image) {
+        image.addEventListener('pointerdown', (event) => {
+          selectFigure(figure, { focus: true });
+          event.stopPropagation();
+          event.preventDefault();
+        });
+        image.addEventListener('click', (event) => {
+          selectFigure(figure, { focus: true });
+          event.stopPropagation();
+          event.preventDefault();
+        });
         image.addEventListener('load', () => updateFigureNaturalWidth(figure));
         if (image.complete) {
           updateFigureNaturalWidth(figure);
@@ -5695,7 +6405,7 @@
       const alignment = bodyActive ? getCurrentAlignment() : '';
       const link = bodyActive ? activeInlineElement('a') : null;
 
-      setButtonDisabled(commandButton('undo'), !queryCommandEnabled('undo'));
+      setButtonDisabled(commandButton('undo'), !removedFigureUndo && !queryCommandEnabled('undo'));
       setButtonDisabled(commandButton('redo'), !queryCommandEnabled('redo'));
       setButtonPressed(commandButton('bold'), bodyActive && (queryCommandState('bold') || Boolean(activeInlineElement('b, strong'))));
       setButtonPressed(commandButton('italic'), bodyActive && (queryCommandState('italic') || Boolean(activeInlineElement('i, em'))));
@@ -5797,7 +6507,11 @@
     });
 
     editor.addEventListener('keydown', (event) => {
-      if (selectedFigure && (event.key === 'Backspace' || event.key === 'Delete')) {
+      if (
+        selectedFigure &&
+        event.target === selectedFigure &&
+        (event.key === 'Backspace' || event.key === 'Delete')
+      ) {
         event.preventDefault();
         removeFigure(selectedFigure);
         return;
@@ -5848,6 +6562,9 @@
     document.addEventListener('input', (event) => {
       if (event.target === publisherAccessKey) {
         publisherAccessKey.dataset.masked = 'false';
+        return;
+      }
+      if (event.target.closest('.image-inspector')) {
         return;
       }
       if (
@@ -5941,6 +6658,118 @@
         applyLineSpacing(button.dataset.spacing);
         closeToolbarPopover();
       });
+    });
+
+    function setStructurePanelCollapsed(collapsed) {
+      structurePanel.classList.toggle('is-collapsed', collapsed);
+      structureToggle.setAttribute('aria-expanded', String(!collapsed));
+      structureToggle.setAttribute('aria-label', collapsed ? 'Expand structure panel' : 'Collapse structure panel');
+    }
+
+    structureToggle.addEventListener('click', () => {
+      setStructurePanelCollapsed(!structurePanel.classList.contains('is-collapsed'));
+    });
+
+    imageInspectorSizeControls.addEventListener('click', (event) => {
+      const button = event.target.closest('.panel-option');
+      const figure = selectedFigureInEditor();
+      if (!button || !figure) {
+        return;
+      }
+      setFigureDisplaySize(figure, button.dataset.size);
+      selectFigure(figure);
+    });
+
+    imageInspectorAlignControls.addEventListener('click', (event) => {
+      const button = event.target.closest('.panel-option');
+      const figure = selectedFigureInEditor();
+      if (!button || !figure) {
+        return;
+      }
+      setFigureAlignment(figure, button.dataset.alignment);
+      selectFigure(figure);
+    });
+
+    imageInspectorWrapControls.addEventListener('click', (event) => {
+      const button = event.target.closest('.panel-option');
+      const figure = selectedFigureInEditor();
+      if (!button || !figure) {
+        return;
+      }
+      setFigureWrapMode(figure, button.dataset.wrapMode);
+      selectFigure(figure);
+    });
+
+    imageInspectorMoveControls.addEventListener('click', (event) => {
+      const button = event.target.closest('.panel-option');
+      const figure = selectedFigureInEditor();
+      if (!button || !figure) {
+        return;
+      }
+      if (button.dataset.move === 'up') {
+        moveFigureByBlock(figure, 'up');
+      } else if (button.dataset.move === 'down') {
+        moveFigureByBlock(figure, 'down');
+      } else if (button.dataset.move === 'cursor') {
+        moveFigureToCursor(figure);
+      }
+    });
+
+    imageInspectorAlt.addEventListener('input', () => {
+      if (isSyncingImageInspector) {
+        return;
+      }
+      const figure = selectedFigureInEditor();
+      if (!figure) {
+        return;
+      }
+      const altInput = figure.querySelector('.figure-alt');
+      const image = figure.querySelector('img');
+      if (altInput) {
+        altInput.value = imageInspectorAlt.value;
+      }
+      if (image) {
+        image.alt = imageInspectorAlt.value;
+      }
+      markChanged();
+    });
+
+    imageInspectorCaption.addEventListener('input', () => {
+      if (isSyncingImageInspector) {
+        return;
+      }
+      const figure = selectedFigureInEditor();
+      const caption = figure && figure.querySelector('.figure-caption');
+      if (!caption) {
+        return;
+      }
+      caption.textContent = imageInspectorCaption.value;
+      markChanged();
+    });
+
+    imageInspectorRetry.addEventListener('click', () => {
+      const figure = selectedFigureInEditor();
+      if (!figure) {
+        return;
+      }
+      retryFigureUpload(figure);
+    });
+
+    imageInspectorReplace.addEventListener('click', () => {
+      const figure = selectedFigureInEditor();
+      if (!figure) {
+        return;
+      }
+      activeFigure = figure;
+      localImageInput.click();
+    });
+
+    imageInspectorRemove.addEventListener('click', () => {
+      const figure = selectedFigureInEditor();
+      if (!figure) {
+        return;
+      }
+      removeFigure(figure);
     });
 
     checklistBtn.addEventListener('click', () => {
@@ -6216,6 +7045,7 @@
     };
     autoResizeTextarea(titleField);
     autoResizeTextarea(subheadField);
+    updateComposerPanels();
   </script>
 </body>
 </html>
