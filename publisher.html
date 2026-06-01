@@ -854,15 +854,30 @@
     }
 
     .article-date {
-      width: 138px;
-      border: 0;
-      background: transparent;
+      width: 136px;
+      min-height: 32px;
+      border: 1px solid rgba(99, 149, 238, 0.18);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.38);
       color: var(--muted);
       font-family: var(--mono);
       font-size: 0.66rem;
       letter-spacing: 0.08em;
+      padding: 0 8px;
       outline: none;
       text-transform: uppercase;
+    }
+
+    .article-date-group,
+    .date-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .date-row .side-input {
+      min-width: 0;
     }
 
     .article-title-stack {
@@ -1431,7 +1446,9 @@
     }
 
     .key-action:hover,
-    .key-action:focus-visible {
+    .key-action:focus-visible,
+    .danger-action:hover,
+    .danger-action:focus-visible {
       background: var(--surface-strong);
       color: var(--blue);
       outline: none;
@@ -1440,10 +1457,26 @@
     .side-input:focus,
     .side-select:focus,
     .key-action:focus-visible,
+    .danger-action:focus-visible,
     .article-date:focus,
     .figure-alt:focus {
       border-color: rgba(99, 149, 238, 0.46);
       box-shadow: 0 1px 0 rgba(99, 149, 238, 0.28);
+    }
+
+    .danger-action {
+      width: 100%;
+      min-height: 40px;
+      border: 1px solid rgba(138, 60, 53, 0.24);
+      border-radius: var(--radius);
+      background: rgba(138, 60, 53, 0.06);
+      color: #8A3C35;
+      cursor: pointer;
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
     }
 
     svg {
@@ -1782,7 +1815,10 @@
       <h2 class="settings-title">Article Settings</h2>
       <div class="field-group">
         <label class="field-label" for="publishDate">Date</label>
-        <input class="side-input" id="publishDate" type="date" value="2026-05-29" />
+        <div class="date-row">
+          <input class="side-input" id="publishDate" type="date" />
+          <button class="key-action" id="publishTodayBtn" type="button">Today</button>
+        </div>
       </div>
       <div class="field-group">
         <label class="field-label" for="publishSlug">Slug</label>
@@ -1804,6 +1840,10 @@
         </div>
         <div class="access-state" id="publisherKeyState">No publisher key saved</div>
       </div>
+      <div class="field-group">
+        <button class="danger-action" id="clearDraftBtn" type="button">Clear Local Draft</button>
+        <div class="access-state">Resets this device only. Server drafts and publisher access stay intact.</div>
+      </div>
     </aside>
 
     <div class="workspace">
@@ -1811,7 +1851,10 @@
         <article class="paper" aria-label="Article document">
           <div class="article-meta">
             <span>Outside The World Article</span>
-            <input class="article-date" type="text" value="May 29, 2026" aria-label="Article date" />
+            <div class="article-date-group">
+              <input class="article-date" type="date" aria-label="Article date" />
+              <button class="key-action" id="articleTodayBtn" type="button">Today</button>
+            </div>
           </div>
 
           <div class="article-title-stack">
@@ -1910,6 +1953,8 @@
     const toolbar = document.querySelector('.toolbar');
     const articleDate = document.querySelector('.article-date');
     const publishDate = document.getElementById('publishDate');
+    const articleTodayBtn = document.getElementById('articleTodayBtn');
+    const publishTodayBtn = document.getElementById('publishTodayBtn');
     const publishSlug = document.getElementById('publishSlug');
     const publishSurface = document.getElementById('publishSurface');
     const publisherAccessKey = document.getElementById('publisherAccessKey');
@@ -1922,6 +1967,7 @@
     const textColorBtn = document.getElementById('textColorBtn');
     const highlightBtn = document.getElementById('highlightBtn');
     const saveDraftBtn = document.getElementById('saveDraftBtn');
+    const clearDraftBtn = document.getElementById('clearDraftBtn');
     const publishBtn = document.getElementById('publishBtn');
     const publishedLink = document.getElementById('publishedLink');
     const lineSpacingBtn = document.getElementById('lineSpacingBtn');
@@ -2104,6 +2150,56 @@
       setSaveState('Unsaved changes');
       window.clearTimeout(saveTimer);
       saveTimer = window.setTimeout(saveDraft, 650);
+    }
+
+    function localTodayIso() {
+      const now = new Date();
+      const local = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
+      return local.toISOString().slice(0, 10);
+    }
+
+    function normalizeDateInputValue(value) {
+      const raw = String(value || '').trim();
+      if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) {
+        return raw;
+      }
+      if (!raw) {
+        return '';
+      }
+      const parsed = new Date(`${raw} 12:00:00`);
+      if (Number.isNaN(parsed.getTime())) {
+        return '';
+      }
+      const local = new Date(parsed.getTime() - parsed.getTimezoneOffset() * 60000);
+      return local.toISOString().slice(0, 10);
+    }
+
+    function displayDateForMarkdown(value) {
+      const iso = normalizeDateInputValue(value);
+      if (!iso) {
+        return String(value || '').trim();
+      }
+      return new Intl.DateTimeFormat('en-US', {
+        timeZone: 'UTC',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      }).format(new Date(`${iso}T12:00:00Z`));
+    }
+
+    function setPublisherDate(value = localTodayIso(), { mark = false } = {}) {
+      const iso = normalizeDateInputValue(value) || localTodayIso();
+      articleDate.value = iso;
+      publishDate.value = iso;
+      if (mark) {
+        markChanged();
+      }
+      return iso;
+    }
+
+    function useTodayForPublisherDate() {
+      setPublisherDate(localTodayIso(), { mark: true });
+      setSaveState('Date set to today', true);
     }
 
     function blockId(prefix = 'block') {
@@ -4252,9 +4348,10 @@
     }
 
     function composeMarkdownDocument(article, bodyMarkdown, publisherMetadata = null) {
+      const markdownDate = displayDateForMarkdown(article.metadata?.publishDate || article.metadata?.articleDate || '');
       const lines = [
         `# ${String(article.title || '').trim()}`,
-        `Date: ${article.metadata?.articleDate || article.metadata?.publishDate || ''}`,
+        `Date: ${markdownDate}`,
         ''
       ];
       const metadataComment = publisherMetadataComment(publisherMetadata);
@@ -4832,8 +4929,7 @@
       docName.value = article.metadata?.docName || docName.value;
       titleField.value = article.title || '';
       subheadField.value = article.subhead || '';
-      articleDate.value = article.metadata?.articleDate || articleDate.value;
-      publishDate.value = article.metadata?.publishDate || publishDate.value;
+      setPublisherDate(article.metadata?.publishDate || article.metadata?.articleDate || localTodayIso());
       publishSlug.value = article.metadata?.slug || '';
       publishSurface.value = article.metadata?.surface || publishSurface.value;
       editor.replaceChildren();
@@ -4897,6 +4993,7 @@
     function loadDraft() {
       const stored = readStoredDraft();
       if (!stored) {
+        setPublisherDate(localTodayIso());
         updateArticlePayload();
         setSaveState('Saved locally');
         return;
@@ -4917,6 +5014,60 @@
       } else {
         setSaveState('Saved locally');
       }
+    }
+
+    function resetComposerForNewDraft() {
+      window.clearTimeout(saveTimer);
+      discardRemovedFigureUndo();
+      imageObjectUrls.forEach((url) => URL.revokeObjectURL(url));
+      imageObjectUrls.clear();
+      stagedImageFiles = new WeakMap();
+      selectedFigure = null;
+      activeFigure = null;
+      draggedFigure = null;
+      imageDropTarget = null;
+      if (imageDropIndicator) {
+        imageDropIndicator.remove();
+        imageDropIndicator = null;
+      }
+      draftCreatedAt = new Date().toISOString();
+      docName.value = 'Untitled Article';
+      titleField.value = '';
+      subheadField.value = '';
+      setPublisherDate(localTodayIso());
+      publishSlug.value = '';
+      publishSurface.value = 'Outside The World Article';
+      editor.replaceChildren(createTrailingParagraph());
+      normalizeEditorStructure();
+      autoResizeTextarea(titleField);
+      autoResizeTextarea(subheadField);
+      clearFigureSelection();
+      updateToolbarState();
+      updateArticlePayload();
+    }
+
+    function clearLocalDraft() {
+      const hasLocalDraft = Boolean(readStoredDraft());
+      const hasVisibleContent = draftHasVisibleContent(serializeArticle());
+      if (!hasLocalDraft && !hasVisibleContent) {
+        resetComposerForNewDraft();
+        setSaveState('Draft already clear', true);
+        return true;
+      }
+      const confirmed = window.confirm('Clear the local draft on this device and reset the composer? This cannot be undone.');
+      if (!confirmed) {
+        setSaveState('Draft kept', true);
+        return false;
+      }
+      try {
+        [DRAFT_KEY, ...LEGACY_DRAFT_KEYS].forEach((key) => localStorage.removeItem(key));
+      } catch (error) {
+        // Reset the composer even if localStorage is unavailable.
+      }
+      writeServerDraftMeta(null);
+      resetComposerForNewDraft();
+      setSaveState('Draft cleared', true);
+      return true;
     }
 
     function importArticleFromHash() {
@@ -6792,6 +6943,19 @@
       saveServerDraft();
     });
 
+    clearDraftBtn.addEventListener('click', clearLocalDraft);
+
+    articleDate.addEventListener('change', () => {
+      setPublisherDate(articleDate.value, { mark: true });
+    });
+
+    publishDate.addEventListener('change', () => {
+      setPublisherDate(publishDate.value, { mark: true });
+    });
+
+    articleTodayBtn.addEventListener('click', useTodayForPublisherDate);
+    publishTodayBtn.addEventListener('click', useTodayForPublisherDate);
+
     publisherAccessKey.addEventListener('focus', preparePublisherKeyInputForEdit);
 
     publisherAccessKey.addEventListener('blur', () => {
@@ -7019,6 +7183,7 @@
       publishedUrlFromWorkerFile,
       saveDraft,
       saveServerDraft,
+      clearLocalDraft,
       fetchServerDraft,
       restoreServerDraft,
       loadDraft,
