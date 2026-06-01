@@ -1842,7 +1842,7 @@
       </div>
       <div class="field-group">
         <button class="danger-action" id="clearDraftBtn" type="button">Clear Local Draft</button>
-        <div class="access-state">Resets this device only. Server drafts and publisher access stay intact.</div>
+        <div class="access-state">Resets this device and ignores the current server draft on reload. Server drafts and publisher access stay intact.</div>
       </div>
     </aside>
 
@@ -2010,6 +2010,7 @@
     const PUBLISHER_DRAFT_ENDPOINT = 'https://otw-fragments-publish.ryandavid.workers.dev/publisher-draft';
     const PUBLISH_GHOST_DRAFT_ENDPOINT = 'https://otw-fragments-publish.ryandavid.workers.dev/publish-ghost-draft';
     const SERVER_DRAFT_META_KEY = 'otw.publisher.serverDraftMeta.v1';
+    const SERVER_DRAFT_DISMISSAL_KEY = 'otw.publisher.serverDraftDismissal.v1';
     const MAX_INLINE_IMAGE_DATA_URL_LENGTH = 1800000;
     const MAX_STAGED_IMAGE_BYTES = 25 * 1024 * 1024;
     const SUPPORTED_STAGED_IMAGE_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp', 'image/gif']);
@@ -2333,6 +2334,37 @@
       window.otwPublisherServerDraftMeta = serverDraftMeta;
     }
 
+    function readServerDraftDismissal() {
+      try {
+        return JSON.parse(localStorage.getItem(SERVER_DRAFT_DISMISSAL_KEY) || 'null') || null;
+      } catch (error) {
+        return null;
+      }
+    }
+
+    function writeServerDraftDismissal(draft = serverDraftMeta) {
+      const dismissal = {
+        draftId: draft?.draftId || 'current',
+        savedAt: draft?.savedAt || '',
+        clientUpdatedAt: draft?.clientUpdatedAt || draft?.article?.updatedAt || '',
+        dismissedAt: new Date().toISOString()
+      };
+      try {
+        localStorage.setItem(SERVER_DRAFT_DISMISSAL_KEY, JSON.stringify(dismissal));
+      } catch (error) {
+        // Dismissal only controls automatic restore behavior on this device.
+      }
+      return dismissal;
+    }
+
+    function clearServerDraftDismissal() {
+      try {
+        localStorage.removeItem(SERVER_DRAFT_DISMISSAL_KEY);
+      } catch (error) {
+        // If localStorage is unavailable, the next server check can proceed normally.
+      }
+    }
+
     function compareIsoDates(left, right) {
       const leftTime = Date.parse(left || '');
       const rightTime = Date.parse(right || '');
@@ -2347,6 +2379,24 @@
       }
       const delta = leftTime - rightTime;
       return Math.abs(delta) < 1000 ? 0 : delta;
+    }
+
+    function serverDraftMatchesDismissal(draft, dismissal = readServerDraftDismissal()) {
+      if (!draft || !dismissal) {
+        return false;
+      }
+      const draftId = draft.draftId || 'current';
+      if (dismissal.draftId && dismissal.draftId !== draftId) {
+        return false;
+      }
+      if (dismissal.savedAt && draft.savedAt) {
+        return dismissal.savedAt === draft.savedAt;
+      }
+      if (dismissal.clientUpdatedAt && draft.clientUpdatedAt) {
+        return dismissal.clientUpdatedAt === draft.clientUpdatedAt;
+      }
+      const draftTime = draft.savedAt || draft.clientUpdatedAt || draft.article?.updatedAt || '';
+      return Boolean(dismissal.dismissedAt && draftTime && compareIsoDates(draftTime, dismissal.dismissedAt) <= 0);
     }
 
     function localStoredArticleSnapshot() {
@@ -2475,6 +2525,7 @@
       isHydrating = false;
       saveDraft();
       writeServerDraftMeta(draft);
+      clearServerDraftDismissal();
       setSaveState(message, true);
       updateArticlePayload();
       return true;
@@ -2488,6 +2539,11 @@
       try {
         const draft = await fetchServerDraft({ silent: true });
         if (!draft) {
+          return;
+        }
+        if (serverDraftMatchesDismissal(draft)) {
+          writeServerDraftMeta(draft);
+          setSaveState('Server draft ignored', true);
           return;
         }
 
@@ -2563,6 +2619,7 @@
           throw new Error(payload?.error || `Draft save failed (${response.status})`);
         }
         writeServerDraftMeta(payload.draft);
+        clearServerDraftDismissal();
         setSaveState('Draft saved', true);
         updateArticlePayload();
         return true;
@@ -5049,12 +5106,13 @@
     function clearLocalDraft() {
       const hasLocalDraft = Boolean(readStoredDraft());
       const hasVisibleContent = draftHasVisibleContent(serializeArticle());
-      if (!hasLocalDraft && !hasVisibleContent) {
+      const knownServerDraft = serverDraftMeta || readServerDraftMeta();
+      if (!hasLocalDraft && !hasVisibleContent && !knownServerDraft) {
         resetComposerForNewDraft();
         setSaveState('Draft already clear', true);
         return true;
       }
-      const confirmed = window.confirm('Clear the local draft on this device and reset the composer? This cannot be undone.');
+      const confirmed = window.confirm('Clear the local draft on this device, reset the composer, and stop the current server draft from auto-restoring on refresh?');
       if (!confirmed) {
         setSaveState('Draft kept', true);
         return false;
@@ -5064,6 +5122,7 @@
       } catch (error) {
         // Reset the composer even if localStorage is unavailable.
       }
+      writeServerDraftDismissal(knownServerDraft);
       writeServerDraftMeta(null);
       resetComposerForNewDraft();
       setSaveState('Draft cleared', true);
