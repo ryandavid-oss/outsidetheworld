@@ -4,6 +4,7 @@ import os
 import re
 from datetime import datetime
 from pathlib import Path
+from urllib.parse import unquote
 
 # --- CONFIG ---
 input_folder = 'current_narrative'
@@ -68,6 +69,8 @@ def smartypants_safe(value):
     return html.escape(value or '', quote=True)
 
 IMAGE_MARKDOWN_PATTERN = re.compile(r'!\[([^\]]*)\]\((\S+?)(?:\s+"((?:\\"|[^"])*)")?\)')
+HTML_IMAGE_PATTERN = re.compile(r'<img\b([^>]*)>', re.I)
+HTML_ATTR_PATTERN = re.compile(r'([a-zA-Z_:][-a-zA-Z0-9_:.]*)\s*=\s*(["\'])(.*?)\2', re.S)
 PUBLISHER_METADATA_PATTERN = re.compile(r'<!--\s*otw-publisher\s*([\s\S]*?)\s*-->', re.I)
 
 def markdown_unescape(value):
@@ -81,11 +84,26 @@ def safe_link_url(value):
 
 def safe_image_url(value):
     url = str(value or '').strip()
-    if not url or re.match(r'^(javascript:|data:|blob:)', url, re.I):
+    if not url:
         return ''
-    if re.match(r'^(https?:|/)', url, re.I):
+
+    lower = url.lower()
+    if lower.startswith(('javascript:', 'data:', 'blob:', '//')):
+        return ''
+    if re.match(r'^https?://', url, re.I):
         return url
-    return ''
+    if re.match(r'^[a-z][a-z0-9+.-]*:', url, re.I):
+        return ''
+
+    path_part = unquote(re.split(r'[?#]', url, 1)[0])
+    if any(part in ('.', '..') for part in path_part.split('/')):
+        return ''
+
+    if url.startswith('/'):
+        return url
+    if re.search(r'[\s<>]', url):
+        return ''
+    return f"/{url}"
 
 def normalize_choice(value, allowed, fallback):
     value = str(value or '').strip().lower()
@@ -237,6 +255,8 @@ def figure_classes(presentation):
 def render_markdown_image(match, as_block=False, image_metadata=None, image_queue=None):
     alt = markdown_unescape(html.unescape(match.group(1) or ''))
     src = safe_image_url(html.unescape(match.group(2) or ''))
+    if not src:
+        return ''
     caption = markdown_unescape(html.unescape(match.group(3) or '')).strip()
     if not src:
         return ''
@@ -429,6 +449,96 @@ def absolute_url(path):
         return path
     return f"{site_url}/{path.lstrip('/')}"
 
+def html_attrs(value):
+    return {
+        match.group(1).lower(): html.unescape(match.group(3) or '')
+        for match in HTML_ATTR_PATTERN.finditer(value or '')
+    }
+
+def image_mime_type(url):
+    path = re.sub(r'[?#].*$', '', str(url or '')).lower()
+    if path.endswith(('.jpg', '.jpeg')):
+        return 'image/jpeg'
+    if path.endswith('.png'):
+        return 'image/png'
+    if path.endswith('.webp'):
+        return 'image/webp'
+    if path.endswith('.gif'):
+        return 'image/gif'
+    return ''
+
+def first_article_image(post):
+    metadata = post.get('publisher') if isinstance(post.get('publisher'), dict) else {}
+
+    for image in normalize_publisher_image_sequence(metadata):
+        url = safe_image_url(image.get('url'))
+        if not url:
+            continue
+        return {
+            'url': absolute_url(url),
+            'alt': image.get('alt') or image.get('caption') or f"{post.get('title') or 'Outside The World'} article image",
+            'type': image_mime_type(url),
+            'width': '',
+            'height': '',
+        }
+
+    body = post.get('body') or ''
+    body_images = [
+        (match.start(), 'markdown', match)
+        for match in IMAGE_MARKDOWN_PATTERN.finditer(body)
+    ] + [
+        (match.start(), 'html', match)
+        for match in HTML_IMAGE_PATTERN.finditer(body)
+    ]
+
+    for _, image_type, match in sorted(body_images, key=lambda item: item[0]):
+        if image_type == 'markdown':
+            url = safe_image_url(html.unescape(match.group(2) or ''))
+            if not url:
+                continue
+            alt = markdown_unescape(html.unescape(match.group(1) or '')).strip()
+            caption = markdown_unescape(html.unescape(match.group(3) or '')).strip()
+            image_alt = alt or caption
+        else:
+            attrs = html_attrs(match.group(1))
+            url = safe_image_url(attrs.get('src'))
+            if not url:
+                continue
+            image_alt = str(attrs.get('alt') or attrs.get('title') or '').strip()
+
+        return {
+            'url': absolute_url(url),
+            'alt': image_alt or f"{post.get('title') or 'Outside The World'} article image",
+            'type': image_mime_type(url),
+            'width': '',
+            'height': '',
+        }
+
+    return None
+
+def archive_card_image(post, stem):
+    return {
+        'url': f"{site_url}/{og_output_folder}/{stem}.png",
+        'alt': f"{post.get('title') or 'Outside The World'} — Outside The World archive card",
+        'type': 'image/png',
+        'width': '1200',
+        'height': '630',
+    }
+
+def preview_image_meta_tags(preview_image):
+    tags = [
+        f'<meta property="og:image" content="{smartypants_safe(preview_image["url"])}" />',
+        f'<meta property="og:image:secure_url" content="{smartypants_safe(preview_image["url"])}" />',
+    ]
+    if preview_image.get('type'):
+        tags.append(f'<meta property="og:image:type" content="{smartypants_safe(preview_image["type"])}" />')
+    if preview_image.get('width'):
+        tags.append(f'<meta property="og:image:width" content="{smartypants_safe(preview_image["width"])}" />')
+    if preview_image.get('height'):
+        tags.append(f'<meta property="og:image:height" content="{smartypants_safe(preview_image["height"])}" />')
+    tags.append(f'<meta property="og:image:alt" content="{smartypants_safe(preview_image["alt"])}" />')
+    return '\n    '.join(tags)
+
 def find_font(candidates):
     for candidate in candidates:
         if os.path.exists(candidate):
@@ -515,7 +625,9 @@ def render_share_page(post):
     share_path = f"{share_output_folder}/{stem}.html"
     share_url = canonical_share_url({**post, 'share_path': share_path})
     archive_url = "../residue_archive.html"
-    og_image = f"{site_url}/{og_output_folder}/{stem}.png"
+    preview_image = first_article_image(post) or archive_card_image(post, stem)
+    og_image = preview_image['url']
+    og_image_tags = preview_image_meta_tags(preview_image)
     description = excerpt(post['body'])
     published = parse_display_date(post['date'])
     published_meta = f'<meta property="article:published_time" content="{published.date().isoformat()}" />' if published else ''
@@ -538,12 +650,7 @@ def render_share_page(post):
     <meta property="og:title" content="{smartypants_safe(post['title'])}" />
     <meta property="og:description" content="{smartypants_safe(description)}" />
     <meta property="og:url" content="{share_url}" />
-    <meta property="og:image" content="{og_image}" />
-    <meta property="og:image:secure_url" content="{og_image}" />
-    <meta property="og:image:type" content="image/png" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="{smartypants_safe(post['title'])} — Outside The World archive card" />
+    {og_image_tags}
     {published_meta}
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="{smartypants_safe(post['title'])}" />

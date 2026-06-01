@@ -210,6 +210,18 @@ def test_existing_markdown_without_metadata_degrades_cleanly():
     assert "Plain caption" in without_metadata
 
 
+def test_local_image_paths_normalize_to_root_relative_paths():
+    markdown = (
+        '![Local markdown image](Images/Blog/local-preview.png "Local caption")\n\n'
+        '<figure><img src="Images/Blog/legacy-figure.jpg" alt="Legacy figure"></figure>'
+    )
+    html = narrative_sync.markdown_to_html(markdown)
+
+    assert 'src="/Images/Blog/local-preview.png"' in html
+    assert 'src="/Images/Blog/legacy-figure.jpg"' in html
+    assert 'src="Images/' not in html
+
+
 def test_metadata_parser_edge_cases_fail_closed():
     missing_metadata = "Just body text."
     metadata, cleaned = narrative_sync.extract_publisher_metadata(missing_metadata)
@@ -338,6 +350,8 @@ def test_sanitization_security_for_markdown_and_metadata():
             {"id": "bad_js", "type": "image", "url": "javascript:alert(1)"},
             {"id": "bad_data", "type": "image", "url": "data:image/png;base64,abc"},
             {"id": "bad_blob", "type": "image", "url": "blob:https://example.test/local"},
+            {"id": "bad_protocol_relative", "type": "image", "url": "//example.test/local.png"},
+            {"id": "bad_traversal", "type": "image", "url": "../Images/secret.png"},
         ],
     }
     body = (
@@ -345,7 +359,11 @@ def test_sanitization_security_for_markdown_and_metadata():
         "[bad link](javascript:alert(1))\n\n"
         '![bad js](javascript:alert(1) "Bad")\n\n'
         '![bad data](data:image/png;base64,abc "Bad")\n\n'
-        '![bad blob](blob:https://example.test/local "Bad")'
+        '![bad blob](blob:https://example.test/local "Bad")\n\n'
+        '![bad protocol](//example.test/local.png "Bad")\n\n'
+        '![bad traversal](../Images/secret.png "Bad")\n\n'
+        '<figure><img src="" alt="Empty"></figure>\n\n'
+        '<figure><img src="../Images/secret.png" alt="Traversal"></figure>'
     )
     html = narrative_sync.markdown_to_html(body, malicious_metadata)
 
@@ -353,6 +371,9 @@ def test_sanitization_security_for_markdown_and_metadata():
     assert "&lt;script&gt;alert(\"caption\")&lt;/script&gt;" in html
     assert '<script>alert("alt")</script>' not in html
     assert '<script>alert("caption")</script>' not in html
+    assert 'src=""' not in html
+    assert 'src="//' not in html
+    assert "../Images/secret.png" not in html
     assert_no_public_leaks(html)
 
     metadata, cleaned = narrative_sync.extract_publisher_metadata(
@@ -527,6 +548,86 @@ def test_canonical_archive_page_emits_full_preview_metadata():
     assert "residue_archive.html?post=" not in share_html
 
 
+def test_canonical_archive_page_prefers_first_article_image_when_present():
+    share_html = narrative_sync.render_share_page({
+        "title": "Publisher Fixture",
+        "date": "May 29, 2026",
+        "file": "2026-05-29-publisher-fixture.md",
+        "body": f"Introductory paragraph.\n\n![Markdown alt text]({IMAGE_TWO} \"Markdown caption\")",
+        "publisher": fixture_metadata(),
+    })
+    meta = extract_meta(share_html)
+
+    assert meta["canonical"] == "https://outsidetheworld.com/archive/2026-05-29-publisher-fixture.html"
+    assert meta["og:url"] == "https://outsidetheworld.com/archive/2026-05-29-publisher-fixture.html"
+    assert meta["og:image"] == IMAGE_ONE
+    assert meta["og:image:secure_url"] == IMAGE_ONE
+    assert meta["twitter:image"] == IMAGE_ONE
+    assert meta["og:image:type"] == "image/png"
+    assert "og:image:width" not in meta
+    assert "og:image:height" not in meta
+    assert meta["og:image:alt"] == "Small right wrapped image"
+
+
+def test_canonical_archive_page_uses_markdown_image_when_no_publisher_image_exists():
+    share_html = narrative_sync.render_share_page({
+        "title": "Markdown Image Fixture",
+        "date": "May 30, 2026",
+        "file": "2026-05-30-markdown-image-fixture.md",
+        "body": f"Introductory paragraph.\n\n![Markdown alt text]({IMAGE_TWO} \"Markdown caption\")",
+    })
+    meta = extract_meta(share_html)
+
+    assert meta["og:image"] == IMAGE_TWO
+    assert meta["og:image:secure_url"] == IMAGE_TWO
+    assert meta["twitter:image"] == IMAGE_TWO
+    assert meta["og:image:type"] == "image/png"
+    assert "og:image:width" not in meta
+    assert "og:image:height" not in meta
+    assert meta["og:image:alt"] == "Markdown alt text"
+
+
+def test_canonical_archive_page_uses_normalized_local_article_image_for_preview():
+    share_html = narrative_sync.render_share_page({
+        "title": "Local Image Fixture",
+        "date": "May 31, 2026",
+        "file": "2026-05-31-local-image-fixture.md",
+        "body": 'Introductory paragraph.\n\n![Local image](Images/Blog/local-preview.png "Local caption")',
+    })
+    meta = extract_meta(share_html)
+
+    assert 'src="/Images/Blog/local-preview.png"' in share_html
+    assert meta["og:image"] == "https://outsidetheworld.com/Images/Blog/local-preview.png"
+    assert meta["og:image:secure_url"] == meta["og:image"]
+    assert meta["twitter:image"] == meta["og:image"]
+    assert meta["og:image:type"] == "image/png"
+    assert "og:image:width" not in meta
+    assert "og:image:height" not in meta
+    assert meta["og:image:alt"] == "Local image"
+
+
+def test_canonical_archive_page_uses_normalized_local_html_image_for_preview():
+    share_html = narrative_sync.render_share_page({
+        "title": "Local HTML Image Fixture",
+        "date": "June 1, 2026",
+        "file": "2026-06-01-local-html-image-fixture.md",
+        "body": (
+            "Introductory paragraph.\n\n"
+            '<figure><img src="Images/Blog/local-html-preview.jpeg" alt="Local HTML image"></figure>'
+        ),
+    })
+    meta = extract_meta(share_html)
+
+    assert 'src="/Images/Blog/local-html-preview.jpeg"' in share_html
+    assert meta["og:image"] == "https://outsidetheworld.com/Images/Blog/local-html-preview.jpeg"
+    assert meta["og:image:secure_url"] == meta["og:image"]
+    assert meta["twitter:image"] == meta["og:image"]
+    assert meta["og:image:type"] == "image/jpeg"
+    assert "og:image:width" not in meta
+    assert "og:image:height" not in meta
+    assert meta["og:image:alt"] == "Local HTML image"
+
+
 def test_residue_archive_legacy_urls_resolve_to_canonical_archive_paths():
     residue = (ROOT / "residue_archive.html").read_text(encoding="utf-8")
 
@@ -546,6 +647,9 @@ def test_share_copy_search_and_feed_paths_do_not_emit_legacy_residue_urls():
     assert "residue_archive.html?post=" not in index
     assert "residue_archive.html?post=" not in residue
     assert "residue_archive.html?post=" not in archive_pages
+    assert "archive/Images/" not in archive_pages
+    assert 'src="Images/' not in archive_pages
+    assert re.search(r'<img\b[^>]*\bsrc="(?!https?://|/)', archive_pages) is None
     assert "buildCanonicalArchivePath(post)" in index
     assert "buildCanonicalArchivePath(post)" in residue
 
@@ -622,6 +726,7 @@ def test_public_css_contract_exists_everywhere():
 def run():
     tests = [
         test_existing_markdown_without_metadata_degrades_cleanly,
+        test_local_image_paths_normalize_to_root_relative_paths,
         test_metadata_parser_edge_cases_fail_closed,
         test_metadata_cardinality_edge_cases_do_not_break_rendering,
         test_all_image_presentation_options_render_and_css_agrees,
@@ -631,6 +736,10 @@ def run():
         test_atom_feed_strips_publisher_metadata_and_stays_valid_xml,
         test_realistic_publisher_fixture_end_to_end,
         test_canonical_archive_page_emits_full_preview_metadata,
+        test_canonical_archive_page_prefers_first_article_image_when_present,
+        test_canonical_archive_page_uses_markdown_image_when_no_publisher_image_exists,
+        test_canonical_archive_page_uses_normalized_local_article_image_for_preview,
+        test_canonical_archive_page_uses_normalized_local_html_image_for_preview,
         test_residue_archive_legacy_urls_resolve_to_canonical_archive_paths,
         test_share_copy_search_and_feed_paths_do_not_emit_legacy_residue_urls,
         test_public_pages_use_shared_post_renderer,
