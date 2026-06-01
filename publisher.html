@@ -995,12 +995,7 @@
     }
 
     .editor p {
-      margin: 0;
       min-height: 1.5em;
-    }
-
-    .editor p + p {
-      padding-top: 0.9em;
     }
 
     .editor h2 {
@@ -3164,18 +3159,6 @@
       return text;
     }
 
-    function collapseConsecutiveEmptyTextBlocks(root) {
-      let previousWasEmpty = false;
-      Array.from(root.children || []).forEach((node) => {
-        const isEmptyTextBlock = isEditableTextBlockElement(node) && !nodeHasVisualContent(node);
-        if (isEmptyTextBlock && previousWasEmpty) {
-          node.remove();
-          return;
-        }
-        previousWasEmpty = isEmptyTextBlock;
-      });
-    }
-
     function textBlockFromRange(range) {
       if (!range) {
         return null;
@@ -3353,7 +3336,6 @@
       });
 
       flushInlineBuffer();
-      collapseConsecutiveEmptyTextBlocks(normalized);
       editor.replaceChildren(normalized);
       if (imageDropIndicator) {
         editor.append(imageDropIndicator);
@@ -5838,10 +5820,6 @@
       return target;
     }
 
-    function blockIsVisiblyEmpty(block) {
-      return Boolean(block && !nodeHasVisualContent(block));
-    }
-
     function currentEditorRange() {
       ensureEditorSelection();
       const selection = window.getSelection();
@@ -5937,12 +5915,6 @@
       }
 
       if (isEditableTextBlockElement(block)) {
-        if (blockIsVisiblyEmpty(block)) {
-          normalizeEmptyTextBlock(block);
-          placeCaretInside(block);
-          scheduleToolbarStateUpdate();
-          return;
-        }
         range.deleteContents();
         const tailRange = document.createRange();
         tailRange.setStart(range.startContainer, range.startOffset);
