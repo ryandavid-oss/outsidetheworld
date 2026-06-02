@@ -641,7 +641,6 @@
             --reader-body-font: 'IBM Plex Serif', Georgia, serif;
             --reader-font-size: 1.05rem;
             --reader-line-height: 1.85;
-            --paper-type-scale: 1;
 
             background: var(--reader-surface);
             border-color: var(--reader-border);
@@ -700,7 +699,7 @@
             --reader-link-border: rgba(27, 106, 92, 0.35);
             --reader-ui: var(--reader-accent);
             --reader-body-font: 'IBM Plex Serif', Georgia, 'Times New Roman', serif;
-            --reader-font-size: calc(1.08rem * var(--paper-type-scale));
+            --reader-font-size: 1.08rem;
             --reader-line-height: 1.83;
 
             --overflow-fg: var(--reader-accent);
@@ -710,12 +709,6 @@
             --overflow-hover-bg: var(--reader-accent);
             --overflow-hover-border: var(--reader-accent);
             --overflow-hover-shadow: none;
-        }
-
-        .feed-column[data-reader-mode="sepia"][data-paper-font="sans"] {
-            --reader-body-font: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            --reader-font-size: calc(1.02rem * var(--paper-type-scale));
-            --reader-line-height: 1.76;
         }
 
         .feed-topbar {
@@ -759,81 +752,8 @@
             appearance: none;
         }
 
-        .paper-controls {
-            display: none;
-            align-items: center;
-            gap: 10px;
-            flex: 1 1 100%;
-            flex-wrap: wrap;
-            max-width: 100%;
-            font-family: var(--font-code);
-            font-size: 0.62rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--reader-muted);
-            white-space: normal;
-        }
-
         .paper-masthead {
             display: none;
-        }
-
-        .feed-column[data-reader-mode="sepia"] .paper-controls {
-            display: flex;
-        }
-
-        .paper-size-slider {
-            width: auto;
-            min-width: min(100%, 140px);
-            flex: 1 1 180px;
-            min-height: 44px;
-            accent-color: var(--reader-accent);
-            cursor: pointer;
-        }
-
-        .paper-font-toggle {
-            display: inline-flex;
-            flex: 0 1 154px;
-            min-height: 44px;
-            border: 1px solid var(--reader-border);
-            background: rgba(255, 255, 255, 0.42);
-        }
-
-        .paper-option-toggle {
-            display: inline-flex;
-            flex: 1 1 220px;
-            min-width: min(100%, 210px);
-            min-height: 44px;
-            border: 1px solid var(--reader-border);
-            background: rgba(255, 255, 255, 0.42);
-        }
-
-        .paper-font-btn,
-        .paper-option-btn {
-            flex: 1 1 0;
-            min-width: 0;
-            min-height: 44px;
-            border: 0;
-            border-right: 1px solid var(--reader-border);
-            background: transparent;
-            color: var(--reader-muted);
-            font-family: var(--font-code);
-            font-size: 0.6rem;
-            letter-spacing: 2px;
-            padding: 0 12px;
-            cursor: pointer;
-            text-transform: uppercase;
-        }
-
-        .paper-font-btn:last-child,
-        .paper-option-btn:last-child {
-            border-right: 0;
-        }
-
-        .paper-font-btn[aria-pressed="true"],
-        .paper-option-btn[aria-pressed="true"] {
-            background: var(--reader-heading);
-            color: var(--reader-surface);
         }
 
         .feed-column[data-reader-mode="light"] .reader-select,
@@ -913,7 +833,6 @@
         .paper-article-deck,
         .paper-pullquote,
         .paper-folio,
-        .paper-issue-toc,
         .paper-reading-progress {
             display: none;
         }
@@ -1000,7 +919,7 @@
             --paper-signal-blue: #195d72;
             --paper-rule: rgba(61, 43, 25, 0.18);
             --paper-hairline: rgba(61, 43, 25, 0.10);
-            --paper-measure: 66ch;
+            --paper-measure: 74ch;
             --paper-paragraph-gap: 1.45em;
             --paper-reader-progress: 0;
             background:
@@ -1021,18 +940,6 @@
                 inset 0 0 96px rgba(92, 62, 31, 0.10);
             isolation: isolate;
             font-optical-sizing: auto;
-        }
-
-        .feed-column[data-reader-mode="sepia"][data-paper-measure="narrow"] {
-            --paper-measure: 58ch;
-        }
-
-        .feed-column[data-reader-mode="sepia"][data-paper-measure="classic"] {
-            --paper-measure: 66ch;
-        }
-
-        .feed-column[data-reader-mode="sepia"][data-paper-measure="wide"] {
-            --paper-measure: 74ch;
         }
 
         .feed-column[data-reader-mode="sepia"]::before,
@@ -1074,13 +981,14 @@
         }
 
         .feed-column[data-reader-mode="sepia"] .feed-topbar {
+            position: relative;
             max-width: min(100%, 78ch);
             align-items: center;
             gap: 6px 12px;
             margin: 0 auto clamp(18px, 3vw, 32px);
-            padding: 6px 0 8px;
+            padding: clamp(30px, 3.3vw, 38px) 0 8px;
             border-top: 1px solid var(--paper-hairline);
-            border-bottom: 3px double var(--paper-rule);
+            border-bottom: 0;
             justify-content: center;
         }
 
@@ -1098,42 +1006,18 @@
 
         .feed-column[data-reader-mode="sepia"] .paper-masthead {
             display: grid;
-            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-            align-items: end;
+            grid-template-columns: minmax(0, 1fr);
+            align-items: center;
             width: 100%;
-            column-gap: clamp(1.2rem, 3vw, 2.8rem);
             row-gap: 0;
             padding: 0 0 clamp(2px, 0.6vw, 6px);
             color: var(--paper-ink);
             text-align: center;
         }
 
-        .paper-extra {
-            align-self: end;
-            font-family: var(--font-code);
-            font-size: clamp(0.92rem, 1.55vw, 1.34rem);
-            font-weight: 700;
-            letter-spacing: 0.12em;
-            color: rgba(23, 19, 15, 0.76);
-            min-width: max-content;
-            transform: translateY(0.25em);
-        }
-
-        .paper-extra:first-child {
-            grid-column: 1;
-            grid-row: 1;
-            text-align: left;
-        }
-
-        .paper-extra:nth-child(3) {
-            grid-column: 2;
-            grid-row: 1;
-            text-align: right;
-        }
-
         .paper-nameplate {
             grid-column: 1 / -1;
-            grid-row: 2;
+            grid-row: 1;
             justify-self: center;
             display: inline-grid;
             grid-template-columns: auto auto;
@@ -1172,7 +1056,7 @@
 
         .paper-edition-line {
             grid-column: 1 / -1;
-            grid-row: 3;
+            grid-row: 2;
             display: grid;
             grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto;
             align-items: center;
@@ -1204,21 +1088,26 @@
             text-align: right;
         }
 
-        .feed-column[data-reader-mode="sepia"] .reader-controls,
-        .feed-column[data-reader-mode="sepia"] .paper-controls {
+        .feed-column[data-reader-mode="sepia"] .reader-controls {
             color: rgba(23, 19, 15, 0.62);
             font-size: 0.52rem;
             letter-spacing: 0.18em;
         }
 
         .feed-column[data-reader-mode="sepia"] .reader-controls {
-            gap: 8px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: 3;
+            gap: 6px;
         }
 
         .feed-column[data-reader-mode="sepia"] .reader-select {
             color: var(--paper-ink);
-            min-height: 34px;
-            padding: 5px 10px;
+            width: auto;
+            min-width: 74px;
+            min-height: 30px;
+            padding: 4px 9px;
             border-color: var(--paper-rule);
             background:
                 linear-gradient(180deg, rgba(255, 255, 255, 0.42), rgba(239, 229, 207, 0.44)),
@@ -1226,129 +1115,24 @@
             box-shadow:
                 inset 0 1px 0 rgba(255, 255, 255, 0.38),
                 inset 0 -1px 0 rgba(23, 19, 15, 0.07);
-            font-size: 0.52rem;
-            letter-spacing: 0.18em;
-        }
-
-        .feed-column[data-reader-mode="sepia"] .paper-controls {
-            gap: 6px 8px;
-            flex: 0 1 auto;
-            justify-content: center;
+            font-size: 0.48rem;
+            letter-spacing: 0.16em;
+            text-align: center;
+            text-align-last: center;
+            cursor: pointer;
         }
 
         .feed-column[data-reader-mode="sepia"] .reader-label {
-            color: rgba(23, 19, 15, 0.54);
-            font-size: 0.5rem;
-            letter-spacing: 0.2em;
-        }
-
-        .feed-column[data-reader-mode="sepia"] .paper-size-slider {
-            flex: 0 0 102px;
-            min-width: 92px;
-            min-height: 32px;
-        }
-
-        .feed-column[data-reader-mode="sepia"] .paper-size-slider::-webkit-slider-runnable-track {
-            height: 2px;
-            border: 1px solid rgba(23, 19, 15, 0.18);
-            background: rgba(23, 19, 15, 0.12);
-        }
-
-        .feed-column[data-reader-mode="sepia"] .paper-size-slider::-webkit-slider-thumb {
-            width: 12px;
-            height: 12px;
-            margin-top: -6px;
-            border: 2px solid var(--paper-stock);
-            border-radius: 50%;
-            background: var(--paper-ink);
-            box-shadow: 0 0 0 1px rgba(23, 19, 15, 0.34);
-            appearance: none;
-        }
-
-        .feed-column[data-reader-mode="sepia"] .paper-size-slider::-moz-range-track {
-            height: 2px;
-            border: 1px solid rgba(23, 19, 15, 0.18);
-            background: rgba(23, 19, 15, 0.12);
-        }
-
-        .feed-column[data-reader-mode="sepia"] .paper-size-slider::-moz-range-thumb {
-            width: 10px;
-            height: 10px;
-            border: 2px solid var(--paper-stock);
-            border-radius: 50%;
-            background: var(--paper-ink);
-            box-shadow: 0 0 0 1px rgba(23, 19, 15, 0.34);
-        }
-
-        .feed-column[data-reader-mode="sepia"] .paper-font-toggle {
-            flex: 0 0 108px;
-            min-height: 34px;
-            border-color: var(--paper-rule);
-            background:
-                linear-gradient(180deg, rgba(255, 255, 255, 0.34), rgba(239, 229, 207, 0.36)),
-                rgba(255, 255, 255, 0.16);
-            box-shadow:
-                inset 0 1px 0 rgba(255, 255, 255, 0.54),
-                inset 0 -2px 0 rgba(61, 43, 25, 0.10),
-                0 1px 0 rgba(255, 255, 255, 0.42),
-                0 2px 5px rgba(61, 43, 25, 0.08);
-        }
-
-        .feed-column[data-reader-mode="sepia"] .paper-option-toggle {
-            display: inline-flex;
-            flex: 0 1 auto;
-            min-width: 0;
-            min-height: 34px;
-            border: 1px solid var(--paper-rule);
-            background:
-                linear-gradient(180deg, rgba(255, 255, 255, 0.32), rgba(239, 229, 207, 0.34)),
-                rgba(255, 255, 255, 0.14);
-            box-shadow:
-                inset 0 1px 0 rgba(255, 255, 255, 0.52),
-                inset 0 -2px 0 rgba(61, 43, 25, 0.10),
-                0 1px 0 rgba(255, 255, 255, 0.40),
-                0 2px 5px rgba(61, 43, 25, 0.08);
-        }
-
-        .feed-column[data-reader-mode="sepia"] .paper-font-btn,
-        .feed-column[data-reader-mode="sepia"] .paper-option-btn {
-            color: rgba(23, 19, 15, 0.62);
-            border-right-color: var(--paper-rule);
-            min-height: 34px;
-            padding: 0 clamp(6px, 0.72vw, 9px);
-            font-size: 0.48rem;
-            letter-spacing: 0.18em;
-            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
-            transition:
-                background-color 120ms ease,
-                box-shadow 120ms ease,
-                transform 120ms ease,
-                color 120ms ease;
-        }
-
-        .feed-column[data-reader-mode="sepia"] .paper-font-btn[aria-pressed="true"],
-        .feed-column[data-reader-mode="sepia"] .paper-option-btn[aria-pressed="true"] {
-            background:
-                linear-gradient(180deg, #2a2118, var(--paper-ink));
-            color: var(--paper-stock);
-            box-shadow:
-                inset 0 2px 5px rgba(0, 0, 0, 0.44),
-                inset 0 -1px 0 rgba(255, 255, 255, 0.08);
-            text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
-            transform: translateY(1px);
-        }
-
-        .feed-column[data-reader-mode="sepia"] .paper-font-btn:hover,
-        .feed-column[data-reader-mode="sepia"] .paper-option-btn:hover {
-            color: var(--paper-ink);
-            background: rgba(255, 255, 255, 0.24);
-        }
-
-        .feed-column[data-reader-mode="sepia"] .paper-font-btn[aria-pressed="true"]:hover,
-        .feed-column[data-reader-mode="sepia"] .paper-option-btn[aria-pressed="true"]:hover {
-            color: var(--paper-stock);
-            background:
-                linear-gradient(180deg, #2a2118, var(--paper-ink));
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            clip-path: inset(50%);
+            white-space: nowrap;
+            border: 0;
         }
 
         .feed-column[data-reader-mode="sepia"] .paper-reading-progress {
@@ -1402,95 +1186,6 @@
             counter-reset: paper-signal;
         }
 
-        .feed-column[data-reader-mode="sepia"] .paper-issue-toc {
-            display: grid;
-            grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
-            gap: 0;
-            max-width: min(100%, 78ch);
-            margin: 0 auto clamp(38px, 5vw, 62px);
-            border-top: 2px solid var(--paper-ink);
-            border-bottom: 1px solid var(--paper-rule);
-            background: rgba(255, 255, 255, 0.16);
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.34);
-        }
-
-        .paper-toc-lead,
-        .paper-toc-briefs {
-            min-width: 0;
-            padding: clamp(14px, 2.2vw, 20px);
-        }
-
-        .paper-toc-lead {
-            border-right: 1px solid var(--paper-rule);
-        }
-
-        .paper-toc-kicker,
-        .paper-toc-date {
-            font-family: var(--font-code);
-            font-size: 0.56rem;
-            letter-spacing: 0.24em;
-            text-transform: uppercase;
-            color: var(--paper-press-red);
-        }
-
-        .paper-toc-title {
-            display: block;
-            margin: 8px 0 10px;
-            color: var(--paper-ink);
-            font-family: var(--reader-body-font);
-            font-size: clamp(1.45rem, 3vw, 2.35rem);
-            font-weight: 900;
-            line-height: 0.98;
-            text-decoration: none;
-            text-wrap: balance;
-        }
-
-        .paper-toc-title:hover,
-        .paper-toc-brief a:hover {
-            color: var(--paper-signal-blue);
-        }
-
-        .paper-toc-count {
-            font-family: var(--font-code);
-            font-size: 0.58rem;
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
-            color: rgba(23, 19, 15, 0.58);
-        }
-
-        .paper-toc-briefs {
-            display: grid;
-            align-content: center;
-            gap: 12px;
-        }
-
-        .paper-toc-brief {
-            padding-bottom: 12px;
-            border-bottom: 1px solid var(--paper-hairline);
-        }
-
-        .paper-toc-brief:last-child {
-            padding-bottom: 0;
-            border-bottom: 0;
-        }
-
-        .paper-toc-brief a {
-            display: block;
-            color: var(--paper-ink);
-            font-family: var(--reader-body-font);
-            font-weight: 900;
-            line-height: 1.08;
-            text-decoration: none;
-            text-wrap: balance;
-        }
-
-        .paper-toc-date {
-            display: block;
-            margin-top: 5px;
-            color: rgba(23, 19, 15, 0.50);
-            letter-spacing: 0.16em;
-        }
-
         .feed-column[data-reader-mode="sepia"] .residue-signal {
             counter-increment: paper-signal;
             display: flex;
@@ -1516,7 +1211,7 @@
         }
 
         .feed-column[data-reader-mode="sepia"] .paper-brief-story {
-            --paper-measure: min(58ch, 100%);
+            --paper-measure: min(74ch, 100%);
             margin-bottom: clamp(48px, 6vw, 72px);
             padding-bottom: clamp(38px, 5vw, 58px);
         }
@@ -1563,12 +1258,6 @@
             text-wrap: balance;
         }
 
-        .feed-column[data-reader-mode="sepia"][data-paper-font="sans"] .post-title {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            letter-spacing: 0;
-            line-height: 0.98;
-        }
-
         .feed-column[data-reader-mode="sepia"] .post-stats {
             order: 3;
             display: none;
@@ -1586,8 +1275,8 @@
             align-items: stretch;
             gap: 0;
             margin: 0 0 clamp(28px, 4vw, 40px);
-            border-top: 2px solid var(--paper-ink);
-            border-bottom: 3px double var(--paper-rule);
+            border-top: 1px solid var(--paper-ink);
+            border-bottom: 1px solid var(--paper-rule);
             background:
                 linear-gradient(90deg, rgba(141, 48, 36, 0.055), transparent 28%, transparent 72%, rgba(25, 93, 114, 0.045)),
                 rgba(255, 255, 255, 0.18);
@@ -3007,7 +2696,7 @@
             .feed-column[data-reader-mode="sepia"] .feed-topbar {
                 gap: 6px 8px;
                 margin-bottom: 22px;
-                padding-top: 5px;
+                padding-top: 30px;
                 padding-bottom: 7px;
             }
 
@@ -3015,10 +2704,6 @@
                 grid-template-columns: 1fr;
                 gap: 8px;
                 padding-bottom: 3px;
-            }
-
-            .feed-column[data-reader-mode="sepia"] .paper-extra {
-                display: none;
             }
 
             .feed-column[data-reader-mode="sepia"] .paper-nameplate {
@@ -3037,54 +2722,8 @@
                 letter-spacing: 0.08em;
             }
 
-            .feed-column[data-reader-mode="sepia"] .paper-controls {
-                display: grid;
-                grid-template-columns: max-content minmax(0, 1fr);
-                width: 100%;
-                gap: 6px 8px;
-            }
-
-            .feed-column[data-reader-mode="sepia"] .paper-size-slider {
-                width: 100%;
-                min-width: 0;
-                flex: none;
-            }
-
-            .feed-column[data-reader-mode="sepia"] .paper-font-toggle {
-                grid-column: 1 / -1;
-                width: 100%;
-                flex: none;
-                min-height: 38px;
-            }
-
-            .feed-column[data-reader-mode="sepia"] .paper-option-toggle {
-                grid-column: 1 / -1;
-                flex: none;
-                width: 100%;
-                min-height: 38px;
-            }
-
-            .feed-column[data-reader-mode="sepia"] .paper-font-btn,
-            .feed-column[data-reader-mode="sepia"] .paper-option-btn {
-                flex: 1;
-                min-height: 38px;
-                padding: 0 8px;
-                font-size: 0.46rem;
-                letter-spacing: 0.16em;
-            }
-
             .feed-column[data-reader-mode="sepia"] .paper-reading-progress {
                 display: none;
-            }
-
-            .feed-column[data-reader-mode="sepia"] .paper-issue-toc {
-                grid-template-columns: 1fr;
-                margin-bottom: 28px;
-            }
-
-            .feed-column[data-reader-mode="sepia"] .paper-toc-lead {
-                border-right: 0;
-                border-bottom: 1px solid var(--paper-rule);
             }
 
             .feed-column[data-reader-mode="sepia"] .post-title {
@@ -3137,7 +2776,7 @@
             .feed-column[data-reader-mode="sepia"] .feed-topbar {
                 gap: 4px 6px;
                 margin-bottom: 14px;
-                padding-top: 4px;
+                padding-top: 28px;
                 padding-bottom: 6px;
             }
 
@@ -3161,18 +2800,12 @@
             }
 
             .feed-column[data-reader-mode="sepia"] .reader-select {
+                width: auto;
+                min-width: 74px;
                 min-height: 30px;
                 padding: 4px 9px;
                 font-size: 0.46rem;
                 letter-spacing: 0.16em;
-            }
-
-            .feed-column[data-reader-mode="sepia"] .paper-controls {
-                display: none;
-            }
-
-            .feed-column[data-reader-mode="sepia"] .paper-issue-toc {
-                display: none;
             }
 
             .feed-column[data-reader-mode="sepia"] .paper-post-deck {
@@ -3226,7 +2859,6 @@
             .vertical-divider,
             footer,
             .reader-controls,
-            .paper-controls,
             .paper-reading-progress,
             .overflow-trigger-wrap {
                 display: none !important;
@@ -3257,7 +2889,6 @@
             }
 
             .paper-masthead,
-            .paper-issue-toc,
             .paper-post-deck,
             .paper-article-deck,
             .paper-folio {
@@ -3345,13 +2976,11 @@
                     <span id="typing-text" class="typing-line">SYNCHRONIZING...</span><span class="cursor" aria-hidden="true"></span>
                 </div>
                 <div class="paper-masthead" role="group" aria-label="OTW Tribune edition details">
-                    <span class="paper-extra" aria-hidden="true">EXTRA</span>
                     <div class="paper-nameplate">
                         <img src="Images/assets/otw-main-logo-dark.svg" alt="OTW" class="paper-nameplate-logo"
                             width="451" height="111" loading="eager" decoding="async">
                         <span class="paper-tribune-word">Tribune</span>
                     </div>
-                    <span class="paper-extra" aria-hidden="true">EXTRA</span>
                     <div class="paper-edition-line">
                         <span class="paper-volume" id="paper-volume">Vol. --, No. --</span>
                         <span class="paper-location">Queen Creek, Arizona</span>
@@ -3367,27 +2996,7 @@
                         <option value="sepia">PAPER</option>
                     </select>
                 </div>
-                <div class="paper-controls" id="paper-controls" role="group" aria-label="Paper reading controls">
-                    <label class="reader-label" for="paper-type-size">POINT</label>
-                    <input type="range" id="paper-type-size" class="paper-size-slider" min="92" max="128" step="2"
-                        value="100" aria-label="Paper type size">
-                    <div class="paper-font-toggle" role="group" aria-label="Paper font">
-                        <button type="button" class="paper-font-btn" data-paper-font="serif"
-                            aria-pressed="true">SERIF</button>
-                        <button type="button" class="paper-font-btn" data-paper-font="sans"
-                            aria-pressed="false">SANS</button>
-                    </div>
-                    <div class="paper-option-toggle" role="group" aria-label="Paper measure">
-                        <button type="button" class="paper-option-btn" data-paper-measure="narrow"
-                            aria-pressed="false">NARROW</button>
-                        <button type="button" class="paper-option-btn" data-paper-measure="classic"
-                            aria-pressed="true">CLASSIC</button>
-                        <button type="button" class="paper-option-btn" data-paper-measure="wide"
-                            aria-pressed="false">WIDE</button>
-                    </div>
-                </div>
             </div>
-            <nav class="paper-issue-toc" id="paper-issue-toc" aria-label="OTW Tribune issue contents"></nav>
             <div class="paper-reading-progress" aria-hidden="true">
                 <span class="paper-progress-track">
                     <span class="paper-progress-fill"></span>
@@ -3875,55 +3484,12 @@
             volumeEl.textContent = `Vol. ${issueYear}, No. ${issue}`;
         }
 
-        function hydratePaperIssueToc(posts = []) {
-            const toc = document.getElementById('paper-issue-toc');
-            if (!toc) return;
-
-            if (!Array.isArray(posts) || !posts.length) {
-                toc.innerHTML = '';
-                toc.hidden = true;
-                return;
-            }
-
-            toc.hidden = false;
-            const lead = posts[0];
-            const briefs = posts.slice(1, 3);
-            const leadMetrics = getPostMetrics(lead?.body);
-            const leadDate = escapeHtml(String(lead?.date || 'Undated').toUpperCase());
-            const leadTitle = escapeHtml(lead?.title || 'Untitled Signal');
-
-            toc.innerHTML = `
-                <div class="paper-toc-lead">
-                    <div class="paper-toc-kicker">Lead Story</div>
-                    <a class="paper-toc-title" href="#paper-story-1">${leadTitle}</a>
-                    <div class="paper-toc-count">${leadDate} / ${leadMetrics.words} words</div>
-                </div>
-                <div class="paper-toc-briefs">
-                    ${briefs.map((post, index) => {
-                        const page = index + 2;
-                        return `
-                            <div class="paper-toc-brief">
-                                <a href="#paper-story-${page}">${escapeHtml(post?.title || 'Untitled Signal')}</a>
-                                <span class="paper-toc-date">${escapeHtml(String(post?.date || 'Undated').toUpperCase())}</span>
-                            </div>
-                        `;
-                    }).join('')}
-                </div>
-            `;
-        }
-
         // --- READER MODE (feed-only) ---
         (function initReaderMode() {
             const feed = document.querySelector('.feed-column');
             const select = document.getElementById('reader-mode');
-            const paperControls = document.getElementById('paper-controls');
-            const paperSize = document.getElementById('paper-type-size');
-            const paperFontButtons = Array.from(document.querySelectorAll('[data-paper-font]'));
-            const paperMeasureButtons = Array.from(document.querySelectorAll('[data-paper-measure]'));
             if (!feed || !select) return;
             const modes = new Set(['dark', 'light', 'sepia']);
-            const paperFonts = new Set(['serif', 'sans']);
-            const paperMeasures = new Set(['narrow', 'classic', 'wide']);
 
             function getStoredValue(key, fallback) {
                 try {
@@ -3945,90 +3511,16 @@
                 return getStoredValue('otw_reader_mode', 'dark');
             }
 
-            function clampPaperScale(value) {
-                const parsed = Number.parseInt(value, 10);
-                if (!Number.isFinite(parsed)) return 100;
-                return Math.min(128, Math.max(92, parsed));
-            }
-
-            function getSavedPaperScale() {
-                return clampPaperScale(getStoredValue('otw_paper_type_scale', '100'));
-            }
-
-            function getSavedPaperFont() {
-                const font = getStoredValue('otw_paper_font', 'serif');
-                return paperFonts.has(font) ? font : 'serif';
-            }
-
-            function getSavedPaperMeasure() {
-                const measure = getStoredValue('otw_paper_measure', 'classic');
-                return paperMeasures.has(measure) ? measure : 'classic';
-            }
-
-            function applyPaperPreferences(
-                scale = getSavedPaperScale(),
-                font = getSavedPaperFont(),
-                measure = getSavedPaperMeasure()
-            ) {
-                const nextScale = clampPaperScale(scale);
-                const nextFont = paperFonts.has(font) ? font : 'serif';
-                const nextMeasure = paperMeasures.has(measure) ? measure : 'classic';
-
-                feed.style.setProperty('--paper-type-scale', (nextScale / 100).toFixed(2));
-                feed.dataset.paperFont = nextFont;
-                feed.dataset.paperMeasure = nextMeasure;
-
-                if (paperSize) {
-                    paperSize.value = String(nextScale);
-                    paperSize.setAttribute('aria-valuetext', `${nextScale}% paper type size`);
-                }
-
-                paperFontButtons.forEach((button) => {
-                    button.setAttribute('aria-pressed', String(button.dataset.paperFont === nextFont));
-                });
-
-                paperMeasureButtons.forEach((button) => {
-                    button.setAttribute('aria-pressed', String(button.dataset.paperMeasure === nextMeasure));
-                });
-            }
-
             function apply(mode) {
                 const nextMode = modes.has(mode) ? mode : 'dark';
                 feed.dataset.readerMode = nextMode; // -> data-reader-mode
                 setStoredValue('otw_reader_mode', nextMode);
                 select.value = nextMode;
-
-                if (paperControls) {
-                    paperControls.setAttribute('aria-hidden', String(nextMode !== 'sepia'));
-                }
             }
 
-            applyPaperPreferences();
             apply(getSavedMode());
 
             select.addEventListener('change', () => apply(select.value));
-
-            paperSize?.addEventListener('input', () => {
-                const nextScale = clampPaperScale(paperSize.value);
-                applyPaperPreferences(nextScale, feed.dataset.paperFont, feed.dataset.paperMeasure);
-                setStoredValue('otw_paper_type_scale', String(nextScale));
-            });
-
-            paperFontButtons.forEach((button) => {
-                button.addEventListener('click', () => {
-                    const nextFont = paperFonts.has(button.dataset.paperFont) ? button.dataset.paperFont : 'serif';
-                    applyPaperPreferences(paperSize?.value || getSavedPaperScale(), nextFont, feed.dataset.paperMeasure);
-                    setStoredValue('otw_paper_font', nextFont);
-                });
-            });
-
-            paperMeasureButtons.forEach((button) => {
-                button.addEventListener('click', () => {
-                    const nextMeasure = paperMeasures.has(button.dataset.paperMeasure) ? button.dataset.paperMeasure : 'classic';
-                    applyPaperPreferences(paperSize?.value || getSavedPaperScale(), feed.dataset.paperFont, nextMeasure);
-                    setStoredValue('otw_paper_measure', nextMeasure);
-                });
-            });
         })();
 
         (function initPaperProgress() {
@@ -4072,7 +3564,6 @@
             if (narrative.length > 0) {
                 // 2. SLICE the array based on your limit
                 const displayFeed = narrative.slice(0, postsToShow);
-                hydratePaperIssueToc(displayFeed);
 
                 contentArea.innerHTML = displayFeed.map((post, index) => {
                     const postDate = escapeHtml(String(post.date || 'Undated Signal').toUpperCase());
@@ -4085,7 +3576,7 @@
                         : '';
                     const metrics = getPostMetrics(post.body);
                     const paperPage = String(index + 1).padStart(2, '0');
-                    const paperSection = index === 0 ? 'Lead Story' : 'Below The Fold';
+                    const paperSection = index === 0 ? 'Front Page' : 'Below The Fold';
                     const storyClass = index === 0 ? 'paper-lead-story' : 'paper-brief-story';
                     const statsMarkup = index === 0
                         ? (() => {
@@ -4151,7 +3642,6 @@
                 runTypewriterProtocol();
                 requestAnimationFrame(() => window.dispatchEvent(new Event('resize')));
             } else {
-                hydratePaperIssueToc([]);
                 contentArea.innerHTML = "<div class='timestamp-glitch'>WAITING_FOR_2026_SIGNAL...</div>";
                 requestAnimationFrame(() => window.dispatchEvent(new Event('resize')));
             }
