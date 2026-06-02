@@ -90,8 +90,8 @@ Date: June 1, 2026
     {
       "id": "paragraph_mpvx7wur_01sv6i",
       "type": "paragraph",
-      "html": "There was a momentary window of panic as my faith abandoned me; the sun nestled itself beyond the measured west and I imagined myself stumbling back along the mile path I had followed, daylight abandoning fools who reckoned upon good fortune over solid plans. My instincts eventually proved the better, as the trail ultimately turned south and planted me beside the paved gravel path back to my campsite.",
-      "text": "There was a momentary window of panic as my faith abandoned me; the sun nestled itself beyond the measured west and I imagined myself stumbling back along the mile path I had followed, daylight abandoning fools who reckoned upon good fortune over solid plans. My instincts eventually proved the better, as the trail ultimately turned south and planted me beside the paved gravel path back to my campsite."
+      "html": "There was a momentary window of panic as my faith abandoned me; the sun nestled itself beyond the measured west and I imagined myself stumbling back along the mile path I had followed, daylight abandoning fools who reckoned upon good fortune over solid plans. My instincts eventually proved the better, as the trail ultimately turned south and planted me beside the gravel path back to my campsite.",
+      "text": "There was a momentary window of panic as my faith abandoned me; the sun nestled itself beyond the measured west and I imagined myself stumbling back along the mile path I had followed, daylight abandoning fools who reckoned upon good fortune over solid plans. My instincts eventually proved the better, as the trail ultimately turned south and planted me beside the gravel path back to my campsite."
     },
     {
       "id": "image_mpvwzmzq_bo5zw7",
@@ -421,7 +421,7 @@ I arrived at the campsite at Peralta Regional Park shortly before 7pm. This allo
 
 There is a kind of silence that merely removes sound, and there is another kind that begins to reveal what sound usually hides. This was the latter. The desert was not empty. It was simply unbothered by me.
 
-There was a momentary window of panic as my faith abandoned me; the sun nestled itself beyond the measured west and I imagined myself stumbling back along the mile path I had followed, daylight abandoning fools who reckoned upon good fortune over solid plans. My instincts eventually proved the better, as the trail ultimately turned south and planted me beside the paved gravel path back to my campsite.
+There was a momentary window of panic as my faith abandoned me; the sun nestled itself beyond the measured west and I imagined myself stumbling back along the mile path I had followed, daylight abandoning fools who reckoned upon good fortune over solid plans. My instincts eventually proved the better, as the trail ultimately turned south and planted me beside the gravel path back to my campsite.
 
 ![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-01-peralta-regional-park-mpvwzn2t.jpg)
 

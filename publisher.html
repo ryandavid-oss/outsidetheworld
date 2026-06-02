@@ -965,6 +965,7 @@
     .editor {
       position: relative;
       min-height: 610px;
+      --editor-paragraph-gap: 0.85em;
       color: var(--ink);
       font-family: var(--serif);
       font-size: var(--composer-body-size);
@@ -997,10 +998,11 @@
     .editor p {
       margin: 0;
       min-height: 1.5em;
+      padding-bottom: var(--editor-paragraph-gap);
     }
 
-    .editor p + p {
-      padding-top: 1.28em;
+    .editor p.is-empty {
+      padding-bottom: 0;
     }
 
     .editor h2 {
@@ -1941,7 +1943,7 @@
     </div>
   </div>
 
-  <input id="localImageInput" type="file" accept="image/*" hidden />
+  <input id="localImageInput" type="file" accept="image/*,.heic,.heif" hidden />
   <template id="articlePayload"></template>
   <template id="publishPayload"></template>
 
@@ -2018,7 +2020,9 @@
     const SERVER_DRAFT_DISMISSAL_KEY = 'otw.publisher.serverDraftDismissal.v1';
     const MAX_INLINE_IMAGE_DATA_URL_LENGTH = 1800000;
     const MAX_STAGED_IMAGE_BYTES = 25 * 1024 * 1024;
-    const SUPPORTED_STAGED_IMAGE_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp', 'image/gif']);
+    const SUPPORTED_STAGED_IMAGE_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/heic', 'image/heif']);
+    const SUPPORTED_STAGED_IMAGE_EXTENSIONS = new Set(['jpg', 'jpeg', 'png', 'webp', 'gif', 'heic', 'heif']);
+    const RAW_STAGED_IMAGE_EXTENSIONS = new Set(['dng']);
     const LEGACY_DRAFT_KEYS = [
       'otw.publisher.localDraft.v2',
       'otw.publisher.localDraft.v1'
@@ -2273,13 +2277,41 @@
       return `${Math.max(1, Math.round(value / 1024))} KB`;
     }
 
+    function stagedImageExtension(file) {
+      const name = String(file?.name || '').toLowerCase();
+      const extension = name.includes('.') ? name.split('.').pop() : '';
+      return extension || '';
+    }
+
+    function isHeicStagedImage(file) {
+      const type = String(file?.type || '').toLowerCase();
+      const extension = stagedImageExtension(file);
+      return type === 'image/heic' || type === 'image/heif' || extension === 'heic' || extension === 'heif';
+    }
+
+    function isSelectableImageFile(file) {
+      if (!file) {
+        return false;
+      }
+      const type = String(file.type || '').toLowerCase();
+      const extension = stagedImageExtension(file);
+      return type.startsWith('image/') || SUPPORTED_STAGED_IMAGE_EXTENSIONS.has(extension);
+    }
+
     function validateStagedImageFile(file) {
       if (!file) {
         return 'Choose an image first.';
       }
       const type = String(file.type || '').toLowerCase();
-      if (type && !SUPPORTED_STAGED_IMAGE_TYPES.has(type)) {
-        return 'Use a JPEG, PNG, WebP, or GIF image.';
+      const extension = stagedImageExtension(file);
+      if (RAW_STAGED_IMAGE_EXTENSIONS.has(extension)) {
+        return 'DNG raw files are not supported. Export this image as JPEG, PNG, or WebP first.';
+      }
+      if (
+        (type && !SUPPORTED_STAGED_IMAGE_TYPES.has(type) && !isHeicStagedImage(file)) ||
+        (!type && extension && !SUPPORTED_STAGED_IMAGE_EXTENSIONS.has(extension))
+      ) {
+        return 'Use a JPEG, PNG, WebP, GIF, or HEIC image.';
       }
       if ((file.size || 0) > MAX_STAGED_IMAGE_BYTES) {
         return `Use an image smaller than ${formatBytes(MAX_STAGED_IMAGE_BYTES)} before compression.`;
@@ -2742,7 +2774,11 @@
         };
         image.onerror = () => {
           URL.revokeObjectURL(url);
-          reject(new Error('Could not read this image.'));
+          reject(new Error(
+            isHeicStagedImage(file)
+              ? 'This browser could not read this HEIC image. Export it as JPEG, PNG, or WebP first.'
+              : 'Could not read this image.'
+          ));
         };
         image.src = url;
       });
@@ -3145,14 +3181,23 @@
       });
     }
 
+    function removeEmptyTextBlockClass(block) {
+      block.classList.remove('is-empty');
+      if (!block.getAttribute('class')) {
+        block.removeAttribute('class');
+      }
+    }
+
     function normalizeEmptyTextBlock(block) {
       if (!isEditableTextBlockElement(block) && !isListItemElement(block)) {
         return;
       }
       if (nodeHasVisualContent(block)) {
+        removeEmptyTextBlockClass(block);
         return;
       }
       block.replaceChildren(document.createElement('br'));
+      block.classList.add('is-empty');
     }
 
     function emptyBlockCaretTextNode(block) {
@@ -3161,7 +3206,26 @@
       }
       const text = document.createTextNode('');
       block.replaceChildren(text);
+      block.classList.add('is-empty');
       return text;
+    }
+
+    function syncTextBlockEmptyState(block) {
+      if (!isEditableTextBlockElement(block) && !isListItemElement(block)) {
+        return;
+      }
+      if (nodeHasVisualContent(block)) {
+        removeEmptyTextBlockClass(block);
+      } else {
+        block.classList.add('is-empty');
+      }
+    }
+
+    function syncEditorEmptyBlockStates(root = editor) {
+      if (!root || !root.querySelectorAll) {
+        return;
+      }
+      root.querySelectorAll('p, h2, blockquote, li').forEach(syncTextBlockEmptyState);
     }
 
     function textBlockFromRange(range) {
@@ -3341,6 +3405,7 @@
       });
 
       flushInlineBuffer();
+      syncEditorEmptyBlockStates(normalized);
       editor.replaceChildren(normalized);
       if (imageDropIndicator) {
         editor.append(imageDropIndicator);
@@ -5803,6 +5868,7 @@
 
     function createTrailingParagraph() {
       const paragraph = document.createElement('p');
+      paragraph.classList.add('is-empty');
       paragraph.append(document.createElement('br'));
       return paragraph;
     }
@@ -6087,7 +6153,7 @@
     }
 
     function insertFigure(file, range) {
-      if (!file || !String(file.type || '').startsWith('image/')) {
+      if (!isSelectableImageFile(file)) {
         return;
       }
 
@@ -6120,7 +6186,7 @@
     }
 
     function replaceFigureImage(figure, file) {
-      if (!figure || !file || !String(file.type || '').startsWith('image/')) {
+      if (!figure || !isSelectableImageFile(file)) {
         return;
       }
       revokeFigureUrl(figure);
@@ -6830,6 +6896,9 @@
         if (event.target === titleField || event.target === subheadField) {
           autoResizeTextarea(event.target);
         }
+        if (event.target === editor || editor.contains(event.target)) {
+          syncEditorEmptyBlockStates();
+        }
         markChanged();
         scheduleToolbarStateUpdate();
       }
@@ -7142,7 +7211,7 @@
         return;
       }
       const file = Array.from(event.dataTransfer.files || []).find((item) => {
-        return String(item.type || '').startsWith('image/');
+        return isSelectableImageFile(item);
       });
       if (!file) {
         return;
@@ -7158,7 +7227,7 @@
 
     editor.addEventListener('paste', (event) => {
       const file = Array.from(event.clipboardData.files || []).find((item) => {
-        return String(item.type || '').startsWith('image/');
+        return isSelectableImageFile(item);
       });
       if (file) {
         event.preventDefault();
