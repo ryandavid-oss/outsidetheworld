@@ -40,10 +40,14 @@ html[data-reader-mode="light"] {
 
 html[data-reader-mode] {
     background: var(--reader-page) !important;
+    min-height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 body.archive-reader-page {
     min-height: 100vh;
+    min-height: 100dvh;
     margin: 0;
     color: var(--reader-body);
     background:
@@ -52,6 +56,8 @@ body.archive-reader-page {
         linear-gradient(180deg, var(--reader-page), color-mix(in srgb, var(--reader-page) 86%, #000 14%));
     font-family: 'Inter', sans-serif;
     overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 body.archive-reader-page::before {

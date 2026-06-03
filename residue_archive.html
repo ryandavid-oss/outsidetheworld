@@ -990,6 +990,9 @@
 
         .extraction-pane {
             background: transparent;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            overscroll-behavior: contain;
         }
 
         .glass-card {
@@ -1195,16 +1198,36 @@
         }
 
         @media (min-width: 900px) {
+            html,
+            body {
+                height: 100%;
+            }
+
+            body {
+                overflow: hidden;
+            }
+
             .directory {
                 width: clamp(360px, 31vw, 440px);
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
             }
 
             .extraction-pane {
                 padding: clamp(34px, 4vw, 62px);
+                overflow-y: auto;
             }
         }
 
         @media (max-width: 899px) {
+            html,
+            body {
+                height: auto;
+                min-height: 100%;
+                overflow-x: hidden;
+                overflow-y: auto;
+            }
+
             .directory {
                 box-shadow: none;
             }
