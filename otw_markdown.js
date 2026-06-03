@@ -113,7 +113,6 @@
   const richInlineTags = new Set(["A", "B", "BR", "CODE", "EM", "FONT", "I", "SPAN", "STRONG", "U"]);
   const richInlineStyleProperties = new Set([
     "background-color",
-    "color",
     "font-style",
     "font-weight",
     "text-decoration",
@@ -177,12 +176,6 @@
         const href = safeLinkUrl(node.getAttribute("href") || "");
         if (href) {
           clean.setAttribute("href", href);
-        }
-      }
-      if (tag === "FONT" && node.getAttribute("color")) {
-        const color = safeStyleValue(node.getAttribute("color"));
-        if (color) {
-          clean.style.color = color;
         }
       }
       if (node.getAttribute("style")) {

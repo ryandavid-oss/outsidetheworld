@@ -353,13 +353,20 @@ html[data-reader-mode="dark"] .reader-mode-button[aria-pressed="true"] {
     font-size: clamp(1.28rem, 3vw, 1.55rem);
 }
 
+.entry-body b,
 .entry-body strong {
     color: var(--reader-ink);
     font-weight: 700;
 }
 
+.entry-body i,
 .entry-body em {
     color: color-mix(in srgb, var(--reader-body) 88%, var(--reader-accent) 12%);
+}
+
+.entry-body font,
+.entry-body span[style] {
+    color: inherit !important;
 }
 
 .entry-body a {
@@ -728,6 +735,7 @@ html[data-reader-mode="light"] .entry-body img {
     .entry-body,
     .entry-body h2,
     .entry-body h3,
+    .entry-body b,
     .entry-body strong {
         color: #111 !important;
     }

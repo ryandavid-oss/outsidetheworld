@@ -2940,14 +2940,8 @@
             clean.setAttribute('href', href);
           }
         }
-        if (tag === 'font' && node.getAttribute('color')) {
-          clean.style.color = node.getAttribute('color');
-        }
         if (tag === 'span') {
           const style = node.style;
-          if (style.color) {
-            clean.style.color = style.color;
-          }
           if (style.backgroundColor) {
             clean.style.backgroundColor = style.backgroundColor;
           }
@@ -3454,10 +3448,18 @@
           return `[${inner || escapeMarkdownText(href)}](${escapeMarkdownUrl(href)})`;
         }
         if (tag === 'span') {
-          if (node.getAttribute('style')) {
-            return inner;
+          const style = node.style;
+          let output = inner;
+          if (style.fontWeight === 'bold' || Number(style.fontWeight) >= 600) {
+            output = output ? `**${output}**` : '';
           }
-          return inner;
+          if (style.fontStyle === 'italic' || style.fontStyle === 'oblique') {
+            output = output ? `_${output}_` : '';
+          }
+          if (/\bunderline\b/i.test(style.textDecorationLine || style.textDecoration || '')) {
+            output = output ? `<u>${output}</u>` : '';
+          }
+          return output;
         }
         issues.push(issue('warning', 'inline-markup-dropped', `Inline <${tag}> markup is not supported for publishing yet.`, context));
         return inner;
