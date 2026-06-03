@@ -92,8 +92,7 @@
 
             if (!stored) stored = readCookieTheme();
 
-            const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
-            const theme = stored || (prefersLight ? 'light' : 'dark');
+            const theme = stored === 'light' ? 'light' : 'dark';
             document.documentElement.dataset.theme = theme === 'light' ? 'light' : 'dark';
         })();
     </script>
@@ -304,21 +303,58 @@
             margin: 0 auto;
             padding: 14px clamp(16px, 3vw, 34px);
             display: grid;
-            grid-template-columns: minmax(172px, 276px) minmax(0, 1fr) auto;
+            grid-template-columns: minmax(270px, 380px) minmax(0, 1fr) auto;
             gap: clamp(14px, 2vw, 24px);
             align-items: center;
         }
 
         .brand-link {
             display: inline-flex;
-            align-items: center;
+            align-items: flex-start;
+            gap: 12px;
             min-width: 0;
             text-decoration: none;
         }
 
         .brand-logo {
             width: clamp(164px, 20vw, 252px);
+            flex: 0 1 auto;
             filter: drop-shadow(0 0 18px rgba(99, 149, 238, 0.22));
+        }
+
+        .brand-pride-tag {
+            position: relative;
+            top: 0.12em;
+            flex: 0 0 auto;
+            color: #f6cf6a;
+            background:
+                linear-gradient(110deg, #8a5709 0%, #d89f27 21%, #fff2b8 42%, #f3be43 58%, #b47512 78%, #fff6c7 100%);
+            background-size: 220% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            font-family: var(--font-code-v2);
+            font-size: 1.28rem;
+            font-weight: 900;
+            letter-spacing: 0;
+            line-height: 1;
+            text-shadow:
+                0 1px 0 rgba(255, 255, 255, 0.32),
+                0 0 14px rgba(245, 196, 82, 0.32),
+                0 9px 24px rgba(0, 0, 0, 0.28);
+            -webkit-text-fill-color: transparent;
+            animation: prideGoldSheen 7.5s ease-in-out infinite;
+        }
+
+        @keyframes prideGoldSheen {
+            0%, 64%, 100% {
+                background-position: 0% 50%;
+                filter: brightness(1);
+            }
+
+            78% {
+                background-position: 100% 50%;
+                filter: brightness(1.18);
+            }
         }
 
         .brand-logo-light {
@@ -1246,11 +1282,23 @@
             margin-top: 16px;
         }
 
-        .music-dock p {
+        .receiver-caption {
             margin: 14px 0 0;
-            color: var(--text-soft-v2);
-            font-size: 0.94rem;
-            line-height: 1.6;
+            width: fit-content;
+            max-width: 100%;
+            color: var(--warm-amber-v2);
+            background:
+                linear-gradient(90deg, var(--warm-amber-v2), #ffe1a3 46%, var(--rose-gold-v2));
+            -webkit-background-clip: text;
+            background-clip: text;
+            font-family: var(--font-code-v2);
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 0.16em;
+            line-height: 1.35;
+            text-shadow: 0 0 18px rgba(255, 179, 71, 0.18);
+            text-transform: uppercase;
+            -webkit-text-fill-color: transparent;
         }
 
         .receiver-top {
@@ -2113,7 +2161,7 @@
 
         @media (max-width: 1180px) {
             .header-inner {
-                grid-template-columns: minmax(164px, 240px) minmax(0, 1fr) auto;
+                grid-template-columns: minmax(240px, 340px) minmax(0, 1fr) auto;
             }
 
             .header-nav {
@@ -2178,6 +2226,10 @@
 
             .brand-logo {
                 width: min(72vw, 238px);
+            }
+
+            .brand-pride-tag {
+                font-size: 1.12rem;
             }
 
             .header-actions {
@@ -2275,6 +2327,18 @@
         @media (max-width: 620px) {
             .page-shell {
                 padding-inline: 12px;
+            }
+
+            .brand-link {
+                gap: 8px;
+            }
+
+            .brand-logo {
+                width: min(62vw, 204px);
+            }
+
+            .brand-pride-tag {
+                font-size: 0.95rem;
             }
 
             .header-actions {
@@ -2426,6 +2490,10 @@
                 animation-duration: 0.01ms !important;
                 animation-iteration-count: 1 !important;
             }
+
+            .brand-pride-tag {
+                background-position: 48% 50%;
+            }
         }
     </style>
 </head>
@@ -2441,6 +2509,7 @@
                 <img class="brand-logo brand-logo-light" src="Images/assets/equal-pride-personal-2-dark.svg"
                     alt="Outside The World" width="451"
                     height="111" decoding="async" />
+                <span class="brand-pride-tag" aria-hidden="true">#PRIDE</span>
             </a>
 
             <div class="header-center">
@@ -2540,7 +2609,7 @@
                             </span>
                         </span>
                     </a>
-                    <p>What we're listening to now</p>
+                    <p class="receiver-caption">What we're listening to now</p>
                 </section>
 
                 <nav class="rail-card quick-grid" aria-label="Quick destinations">
@@ -2906,12 +2975,6 @@
                 applyTheme(next, true);
             });
 
-            if (!getStoredTheme() && window.matchMedia) {
-                const mq = window.matchMedia('(prefers-color-scheme: light)');
-                const onSystemChange = () => applyTheme(mq.matches ? 'light' : 'dark', false);
-                if (mq.addEventListener) mq.addEventListener('change', onSystemChange);
-                else if (mq.addListener) mq.addListener(onSystemChange);
-            }
         }
 
         function parseDate(value) {

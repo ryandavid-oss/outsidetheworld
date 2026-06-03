@@ -1674,6 +1674,7 @@
         </button>
         <button class="text-btn" id="saveDraftBtn" type="button" title="Save server draft">Save Draft</button>
         <button class="text-btn" id="previewDraftBtn" type="button" title="Preview local draft">Preview</button>
+        <button class="text-btn" id="downloadMarkdownBtn" type="button" title="Download draft as Markdown">Download MD</button>
         <button class="publish-btn" id="publishBtn" type="button" title="Publish article">Publish</button>
         <a class="text-btn" id="publishedLink" href="#" target="_blank" rel="noopener" hidden>Open Article</a>
       </div>
@@ -2042,6 +2043,7 @@
     const highlightBtn = document.getElementById('highlightBtn');
     const saveDraftBtn = document.getElementById('saveDraftBtn');
     const previewDraftBtn = document.getElementById('previewDraftBtn');
+    const downloadMarkdownBtn = document.getElementById('downloadMarkdownBtn');
     const clearDraftBtn = document.getElementById('clearDraftBtn');
     const publishBtn = document.getElementById('publishBtn');
     const publishedLink = document.getElementById('publishedLink');
@@ -5015,6 +5017,34 @@
       return payload;
     }
 
+    function markdownExportFilename(payload) {
+      const date = normalizeDateInputValue(payload.metadata?.publishDate || payload.metadata?.articleDate || '') || localTodayIso();
+      const slug = slugify(payload.metadata?.slug || payload.title || payload.metadata?.docName || 'untitled-article');
+      const stem = slug.startsWith(`${date}-`) ? slug : `${date}-${slug}`;
+      return `${stem}.md`;
+    }
+
+    function downloadTextFile(filename, contents, mime = 'text/plain;charset=utf-8') {
+      const blob = new Blob([contents], { type: mime });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = filename;
+      link.rel = 'noopener';
+      document.body.append(link);
+      link.click();
+      link.remove();
+      window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+    }
+
+    function downloadMarkdownDraft() {
+      const article = updateArticlePayload();
+      const payload = window.otwPublisherPublishPayload || buildPublishPayload(article);
+      const markdown = payload.content?.markdown || composeMarkdownDocument(article, payload.body?.markdown || '', payload.publisher);
+      downloadTextFile(markdownExportFilename(payload), markdown, 'text/markdown;charset=utf-8');
+      setSaveState('Markdown downloaded', true);
+    }
+
     function publishRequestBodyFromPayload(payload) {
       return {
         title: payload.title,
@@ -7552,6 +7582,8 @@
     });
 
     previewDraftBtn.addEventListener('click', openDraftPreview);
+
+    downloadMarkdownBtn.addEventListener('click', downloadMarkdownDraft);
 
     clearDraftBtn.addEventListener('click', clearLocalDraft);
 
