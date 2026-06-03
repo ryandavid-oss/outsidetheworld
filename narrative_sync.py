@@ -96,7 +96,7 @@ def safe_image_url(value):
     if re.match(r'^[a-z][a-z0-9+.-]*:', url, re.I):
         return ''
 
-    path_part = unquote(re.split(r'[?#]', url, 1)[0])
+    path_part = unquote(re.split(r'[?#]', url, maxsplit=1)[0])
     if any(part in ('.', '..') for part in path_part.split('/')):
         return ''
 
@@ -273,14 +273,15 @@ def render_markdown_image(match, as_block=False, image_metadata=None, image_queu
         caption = metadata.get('caption') or caption
     safe_alt = html.escape(alt, quote=True)
     title_attr = f' title="{html.escape(caption, quote=True)}"' if caption else ''
-    image_html = f'<img src="{safe_src}" alt="{safe_alt}"{title_attr}>'
+    image_attrs = f'src="{safe_src}" alt="{safe_alt}" loading="lazy" decoding="async"'
+    image_html = f'<img {image_attrs}{title_attr}>'
     if as_block and caption:
         safe_caption = html.escape(caption, quote=False)
         classes = figure_classes(metadata) if metadata else 'otw-figure'
-        return f'<figure class="{classes}"><img src="{safe_src}" alt="{safe_alt}"><figcaption><em>{safe_caption}</em></figcaption></figure>'
+        return f'<figure class="{classes}"><img {image_attrs}><figcaption><em>{safe_caption}</em></figcaption></figure>'
     if as_block and metadata:
         classes = figure_classes(metadata)
-        return f'<figure class="{classes}"><img src="{safe_src}" alt="{safe_alt}"></figure>'
+        return f'<figure class="{classes}"><img {image_attrs}></figure>'
     return image_html
 
 def is_trusted_figure_block(value):
@@ -767,6 +768,108 @@ def preview_image_meta_tags(preview_image):
     tags.append(f'<meta property="og:image:alt" content="{smartypants_safe(preview_image["alt"])}" />')
     return '\n    '.join(tags)
 
+def normalize_plain_text(value):
+    return re.sub(r'\s+', ' ', html.unescape(value or '')).strip()
+
+def publisher_subhead(post):
+    metadata = post.get('publisher') if isinstance(post.get('publisher'), dict) else {}
+    return normalize_plain_text(str(metadata.get('subhead') or ''))
+
+def markdown_without_leading_deck(markdown, deck):
+    if not deck:
+        return markdown or ''
+    blocks = re.split(r'\n\s*\n', (markdown or '').strip())
+    if blocks and normalize_plain_text(strip_markdown(blocks[0])) == normalize_plain_text(deck):
+        return '\n\n'.join(blocks[1:]).strip()
+    return markdown or ''
+
+def reader_description(post, deck):
+    if deck:
+        return deck
+    return excerpt(markdown_without_leading_deck(post.get('body') or '', deck))
+
+def article_plain_text(post, deck):
+    body = markdown_without_leading_deck(post.get('body') or '', deck)
+    return strip_markdown(body)
+
+def article_word_count(post, deck):
+    text = article_plain_text(post, deck)
+    return len(re.findall(r"[A-Za-z0-9]+(?:[’'][A-Za-z0-9]+)?", text))
+
+def article_read_minutes(word_count):
+    return max(1, (word_count + 224) // 225)
+
+def add_classes_to_tag(opening_tag, classes):
+    class_text = ' '.join(classes)
+    class_match = re.search(r'\bclass\s*=\s*(["\'])(.*?)\1', opening_tag, flags=re.I)
+    if class_match:
+        existing_classes = class_match.group(2).strip()
+        merged_classes = f"{existing_classes} {class_text}".strip()
+        return opening_tag[:class_match.start(2)] + merged_classes + opening_tag[class_match.end(2):]
+    return opening_tag[:-1] + f' class="{class_text}">'
+
+def remove_leading_duplicate_deck_html(body_html, deck):
+    if not deck:
+        return body_html
+    first_block = re.match(r'\s*<p\b[^>]*>[\s\S]*?</p>\s*', body_html or '', flags=re.I)
+    if not first_block:
+        return body_html
+    if normalize_plain_text(plain_text_from_html(first_block.group(0))) == normalize_plain_text(deck):
+        return (body_html or '')[first_block.end():].lstrip()
+    return body_html
+
+def enhance_reader_body_html(body_html, deck):
+    body_html = remove_leading_duplicate_deck_html(body_html, deck)
+    first_paragraph = re.match(r'(\s*)(<p\b[^>]*>)([\s\S]*?)(</p>)', body_html or '', flags=re.I)
+    if not first_paragraph:
+        return body_html
+
+    paragraph_html = first_paragraph.group(3)
+    if re.search(r'<\s*(img|figure|pre|code)\b', paragraph_html, flags=re.I):
+        return body_html
+
+    paragraph_text = normalize_plain_text(plain_text_from_html(paragraph_html))
+    if len(paragraph_text) < 80:
+        return body_html
+
+    classes = ['entry-body__opening']
+    if len(paragraph_text) >= 180 and len(paragraph_text.split()) >= 32:
+        classes.append('entry-body__dropcap')
+
+    opening_tag = add_classes_to_tag(first_paragraph.group(2), classes)
+    enhanced = ''.join([
+        first_paragraph.group(1),
+        opening_tag,
+        first_paragraph.group(3),
+        first_paragraph.group(4),
+    ])
+    return enhanced + (body_html or '')[first_paragraph.end():]
+
+def archive_relative_href(post):
+    return f"{post_stem(post.get('file') or '')}.html"
+
+def render_reader_nav(newer_post=None, older_post=None):
+    items = []
+    if newer_post:
+        items.append(
+            f'''<a class="reader-nav-card reader-nav-card--newer" href="{archive_relative_href(newer_post)}">
+                    <span class="reader-nav-label">Newer Essay</span>
+                    <span class="reader-nav-title">{smartypants_safe(newer_post.get('title'))}</span>
+                </a>'''
+        )
+    if older_post:
+        items.append(
+            f'''<a class="reader-nav-card reader-nav-card--older" href="{archive_relative_href(older_post)}">
+                    <span class="reader-nav-label">Older Essay</span>
+                    <span class="reader-nav-title">{smartypants_safe(older_post.get('title'))}</span>
+                </a>'''
+        )
+    if not items:
+        return ''
+    return f'''<nav class="reader-nav" aria-label="Adjacent essays">
+                {''.join(items)}
+            </nav>'''
+
 def find_font(candidates):
     for candidate in candidates:
         if os.path.exists(candidate):
@@ -848,7 +951,7 @@ def generate_og_image(post, og_path):
     img.save(og_path, 'PNG', optimize=True)
     return True
 
-def render_share_page(post):
+def render_share_page(post, newer_post=None, older_post=None):
     stem = post_stem(post['file'])
     share_path = f"{share_output_folder}/{stem}.html"
     share_url = canonical_share_url({**post, 'share_path': share_path})
@@ -856,13 +959,18 @@ def render_share_page(post):
     preview_image = first_article_image(post) or archive_card_image(post, stem)
     og_image = preview_image['url']
     og_image_tags = preview_image_meta_tags(preview_image)
-    description = excerpt(post['body'])
+    deck = publisher_subhead(post)
+    deck_html = f'\n                <p class="entry-deck">{smartypants_safe(deck)}</p>' if deck else ''
+    description = reader_description(post, deck)
     published = parse_display_date(post['date'])
     published_meta = f'<meta property="article:published_time" content="{published.date().isoformat()}" />' if published else ''
-    body_html = markdown_to_html(post['body'], post.get('publisher'))
+    word_count = article_word_count(post, deck)
+    read_minutes = article_read_minutes(word_count)
+    body_html = enhance_reader_body_html(markdown_to_html(post['body'], post.get('publisher')), deck)
+    reader_nav = render_reader_nav(newer_post, older_post)
 
     return f'''<!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-reader-mode="dark">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -870,8 +978,19 @@ def render_share_page(post):
     <link rel="canonical" href="{share_url}" />
     <link href="../favicon.svg" rel="icon" type="image/svg+xml" />
     <link href="../theme.css" rel="stylesheet" />
+    <script>
+        (function() {{
+            try {{
+                var storedMode = window.localStorage && window.localStorage.getItem('otw_archive_reader_mode');
+                if (storedMode === 'dark' || storedMode === 'light') {{
+                    document.documentElement.setAttribute('data-reader-mode', storedMode);
+                }}
+            }} catch (error) {{}}
+        }}());
+    </script>
+    <link href="../archive_reader.css" rel="stylesheet" />
     <meta name="description" content="{smartypants_safe(description)}" />
-    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="theme-color" content="#060809" />
     <meta property="og:site_name" content="Outside The World" />
     <meta property="og:type" content="article" />
     <meta property="og:locale" content="en_US" />
@@ -883,290 +1002,48 @@ def render_share_page(post):
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="{smartypants_safe(post['title'])}" />
     <meta name="twitter:description" content="{smartypants_safe(description)}" />
-    <meta name="twitter:image" content="{og_image}" />
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;900&family=Fira+Code:wght@300;500;700&family=Merriweather:ital,wght@0,300;0,700;1,300&display=swap');
-
-        html, body {{
-            max-width: 100%;
-            overflow-x: hidden;
-        }}
-
-        body {{
-            margin: 0;
-            min-height: 100vh;
-            background: radial-gradient(circle at top left, rgba(155, 89, 182, 0.1) 0%, var(--bg-dark) 100%);
-            color: #e0e6ed;
-            font-family: 'Inter', sans-serif;
-        }}
-
-        .share-shell {{
-            width: min(100%, 960px);
-            margin: 0 auto;
-            padding: clamp(20px, 6vw, 72px);
-        }}
-
-        .share-card {{
-            width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: clamp(24px, 7vw, 80px);
-            background: rgba(0, 0, 0, 0.78);
-            border: 1px solid rgba(145, 175, 179, 0.12);
-            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8);
-        }}
-
-        .entry-title {{
-            margin: 0 0 14px;
-            color: #fff;
-            font-size: clamp(2rem, 12vw, 2.8rem);
-            font-weight: 900;
-            line-height: 1.08;
-            overflow-wrap: anywhere;
-        }}
-
-        .entry-toolbar {{
-            display: flex;
-            gap: 14px;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            margin-bottom: clamp(34px, 6vw, 56px);
-            min-width: 0;
-        }}
-
-        .entry-meta,
-        .share-btn,
-        .share-status,
-        .archive-link,
-        .archive-legal {{
-            font-family: 'Fira Code', monospace;
-            font-size: 0.62rem;
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
-            overflow-wrap: anywhere;
-        }}
-
-        .entry-meta {{
-            color: var(--brand-teal);
-        }}
-
-        .share-controls {{
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
-            max-width: 100%;
-        }}
-
-        .share-btn,
-        .archive-link {{
-            min-height: 44px;
-            border: 1px solid rgba(145, 175, 179, 0.18);
-            background: rgba(145, 175, 179, 0.04);
-            color: var(--brand-teal);
-            padding: 10px 14px;
-            text-decoration: none;
-            cursor: pointer;
-        }}
-
-        .share-status {{
-            color: rgba(224, 230, 237, 0.65);
-        }}
-
-        .entry-body {{
-            color: #d1d1d1;
-            font-family: 'Merriweather', serif;
-            font-size: clamp(1rem, 3.8vw, 1.1rem);
-            font-weight: 300;
-            line-height: 1.85;
-            overflow-wrap: break-word;
-        }}
-
-        .entry-body p {{
-            margin: 0 0 1.5rem;
-        }}
-
-        .entry-body strong {{
-            color: #fff;
-            font-family: 'Inter', sans-serif;
-            font-weight: 900;
-        }}
-
-        .entry-body a {{
-            color: var(--brand-teal);
-            text-decoration: none;
-            border-bottom: 1px dashed rgba(145, 175, 179, 0.4);
-        }}
-
-        .entry-body img {{
-            display: block;
-            max-width: min(100%, 720px);
-            height: auto;
-            margin: 40px auto;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-        }}
-
-        .entry-body figure,
-        .entry-body .otw-figure {{
-            margin: 40px auto;
-            max-width: min(100%, var(--otw-figure-max-width, 720px));
-        }}
-
-        .entry-body figure img,
-        .entry-body .otw-figure img {{
-            margin: 0 auto;
-        }}
-
-        .entry-body figure figcaption,
-        .entry-body .otw-figure figcaption {{
-            margin-top: 12px;
-            color: var(--muted);
-            font-size: 0.9rem;
-            line-height: 1.5;
-            text-align: center;
-        }}
-
-        .entry-body .otw-figure--x-small {{ --otw-figure-max-width: 220px; }}
-        .entry-body .otw-figure--small {{ --otw-figure-max-width: 320px; }}
-        .entry-body .otw-figure--medium {{ --otw-figure-max-width: 520px; }}
-        .entry-body .otw-figure--large {{ --otw-figure-max-width: 760px; }}
-        .entry-body .otw-figure--original {{ --otw-figure-max-width: 100%; }}
-
-        .entry-body .otw-figure--x-small,
-        .entry-body .otw-figure--small,
-        .entry-body .otw-figure--medium,
-        .entry-body .otw-figure--large {{
-            width: min(100%, var(--otw-figure-max-width, 720px));
-        }}
-
-        .entry-body .otw-figure--x-small img,
-        .entry-body .otw-figure--small img,
-        .entry-body .otw-figure--medium img,
-        .entry-body .otw-figure--large img {{
-            width: 100%;
-        }}
-
-        .entry-body .otw-figure--align-left {{
-            margin-left: 0;
-            margin-right: auto;
-        }}
-
-        .entry-body .otw-figure--align-center {{
-            margin-left: auto;
-            margin-right: auto;
-        }}
-
-        .entry-body .otw-figure--align-right {{
-            margin-left: auto;
-            margin-right: 0;
-        }}
-
-        .entry-body .otw-figure--wrap-left,
-        .entry-body .otw-figure--wrap-right {{
-            clear: none;
-            width: min(45%, var(--otw-figure-max-width, 520px));
-            max-width: min(45%, var(--otw-figure-max-width, 520px));
-            margin-top: 0.35rem;
-            margin-bottom: 1rem;
-        }}
-
-        .entry-body .otw-figure--wrap-left {{
-            float: left;
-            margin-left: 0;
-            margin-right: 1.5rem;
-        }}
-
-        .entry-body .otw-figure--wrap-right {{
-            float: right;
-            margin-left: 1.5rem;
-            margin-right: 0;
-        }}
-
-        .entry-body hr {{
-            border: 0;
-            border-top: 1px solid rgba(145, 175, 179, 0.16);
-            margin: 2.5rem 0;
-        }}
-
-        .archive-actions {{
-            display: flex;
-            justify-content: space-between;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin-top: 42px;
-            padding-top: 18px;
-            border-top: 1px solid rgba(145, 175, 179, 0.12);
-        }}
-
-        .archive-legal {{
-            width: min(100%, 800px);
-            margin: 0 auto;
-            padding: 24px 12px 0;
-            color: rgba(224, 224, 224, 0.5);
-            line-height: 1.9;
-            text-align: center;
-        }}
-
-        .archive-legal a {{
-            color: inherit;
-            text-decoration: none;
-        }}
-
-        .archive-legal-brand {{
-            margin-top: 6px;
-        }}
-
-        @media (max-width: 899px) {{
-            .entry-body .otw-figure--wrap-left,
-            .entry-body .otw-figure--wrap-right {{
-                float: none;
-                clear: both;
-                width: min(100%, var(--otw-figure-max-width, 520px));
-                max-width: min(100%, var(--otw-figure-max-width, 520px));
-                margin: 40px auto;
-            }}
-
-            .share-card {{
-                border: none;
-                background: rgba(0, 0, 0, 0.85);
-            }}
-
-            .share-controls,
-            .share-btn,
-            .share-status,
-            .archive-link {{
-                width: 100%;
-            }}
-
-            .share-btn,
-            .archive-link {{
-                text-align: center;
-            }}
-        }}
-    </style>
+    <meta name="twitter:image" content="{smartypants_safe(og_image)}" />
+    <script src="../archive_reader.js" defer></script>
 </head>
-<body>
-    <main class="share-shell">
-        <article class="share-card">
-            <h1 class="entry-title">{smartypants_safe(post['title'])}</h1>
-            <div class="entry-toolbar">
-                <div class="entry-meta">TEMPORAL_MARK: {smartypants_safe(post['date'].upper())}</div>
+<body class="archive-reader-page">
+    <main class="archive-reader">
+        <article class="reader-card" aria-labelledby="entry-title">
+            <div class="reader-chrome">
+                <nav class="reader-breadcrumbs" aria-label="Archive navigation">
+                    <a href="../personal.html">Outside The World</a>
+                    <span class="reader-breadcrumb-separator" aria-hidden="true">/</span>
+                    <a href="{archive_url}">Archive Matrix</a>
+                </nav>
+                <div class="reader-mode-toggle" role="group" aria-label="Reader mode">
+                    <button class="reader-mode-button" type="button" data-reader-mode-option="dark" aria-pressed="true">Dark</button>
+                    <button class="reader-mode-button" type="button" data-reader-mode-option="light" aria-pressed="false">Light</button>
+                </div>
+            </div>
+            <header class="entry-header">
+                <p class="entry-label">Narrative Archive</p>
+                <h1 class="entry-title" id="entry-title">{smartypants_safe(post['title'])}</h1>{deck_html}
+                <div class="entry-meta-strip" aria-label="Essay details">
+                    <span class="entry-meta-item"><strong>Filed</strong> {smartypants_safe(post['date'])}</span>
+                    <span class="entry-meta-item"><strong>Words</strong> {word_count:,}</span>
+                    <span class="entry-meta-item"><strong>Read</strong> {read_minutes} min</span>
+                </div>
+            </header>
+            <div class="entry-share-row">
+                <span class="share-status" id="share-status" aria-live="polite">STATIC_ARCHIVE_SIGNAL</span>
                 <div class="share-controls">
-                    <button type="button" class="share-btn" onclick="copyShareLink()">COPY / SHARE LINK</button>
-                    <span class="share-status" id="share-status">STATIC_ARCHIVE_SIGNAL</span>
+                    <button type="button" class="share-btn" data-share-button>COPY / SHARE LINK</button>
                 </div>
             </div>
             <div class="entry-body">
 {body_html}
             </div>
+            {reader_nav}
             <div class="archive-actions">
                 <a class="archive-link" href="{archive_url}">OPEN ARCHIVE MATRIX</a>
                 <a class="archive-link" href="../personal.html">RETURN TO OTW</a>
             </div>
         </article>
-        <div class="archive-legal">
+        <footer class="archive-legal">
             <a href="../privacy.html">Privacy</a>
             <span aria-hidden="true">&nbsp;|&nbsp;</span>
             <a href="../terms.html">Terms</a>
@@ -1175,25 +1052,8 @@ def render_share_page(post):
             <span aria-hidden="true">&nbsp;|&nbsp;</span>
             <a href="../support.html">Support</a>
             <div class="archive-legal-brand">© 2026 Outside the World is New, LLC. Outside The World is a claimed brand identifier.</div>
-        </div>
+        </footer>
     </main>
-    <script>
-        async function copyShareLink() {{
-            const statusEl = document.getElementById('share-status');
-            const url = window.location.href.split('#')[0];
-            try {{
-                if (navigator.share) {{
-                    await navigator.share({{ title: document.title, text: 'Outside The World archive signal', url }});
-                    statusEl.textContent = 'LINK_SHARED';
-                    return;
-                }}
-                await navigator.clipboard.writeText(url);
-                statusEl.textContent = 'LINK_COPIED';
-            }} catch {{
-                statusEl.textContent = 'COPY_FAILED';
-            }}
-        }}
-    </script>
 </body>
 </html>
 '''
@@ -1202,14 +1062,16 @@ def write_share_pages(posts):
     Path(share_output_folder).mkdir(parents=True, exist_ok=True)
     Path(og_output_folder).mkdir(parents=True, exist_ok=True)
 
-    for post in posts:
+    for index, post in enumerate(posts):
         stem = post_stem(post['file'])
         post['post_id'] = build_post_id(post)
         post['share_path'] = canonical_share_path(post)
         post['og_image'] = f"{og_output_folder}/{stem}.png"
 
         share_file = Path(post['share_path'])
-        share_file.write_text(render_share_page(post), encoding='utf-8')
+        newer_post = posts[index - 1] if index > 0 else None
+        older_post = posts[index + 1] if index < len(posts) - 1 else None
+        share_file.write_text(render_share_page(post, newer_post, older_post), encoding='utf-8')
         generate_og_image(post, Path(post['og_image']))
 
 def sync_production():
