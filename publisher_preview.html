@@ -296,7 +296,8 @@
             }
 
             if (block.type === 'heading') {
-                const heading = document.createElement('h2');
+                const level = Math.min(Math.max(Number(block.level) || 2, 2), 6);
+                const heading = document.createElement(`h${level}`);
                 heading.innerHTML = sanitizeInlineHtml(block.html || escapeHtml(block.text || ''));
                 return heading;
             }

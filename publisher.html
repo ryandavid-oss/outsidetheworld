@@ -1028,6 +1028,7 @@
 
     .editor p,
     .editor h2,
+    .editor h3,
     .editor blockquote {
       margin: 0 0 1.28em;
     }
@@ -1048,6 +1049,14 @@
       font-size: var(--composer-head-size);
       line-height: 1.18;
       color: var(--blue-dark);
+    }
+
+    .editor h3 {
+      margin-top: 1.55em;
+      font-family: var(--serif);
+      font-size: var(--composer-subhead-size);
+      line-height: 1.22;
+      color: color-mix(in srgb, var(--blue-dark) 84%, var(--logo-teal) 16%);
     }
 
     .editor blockquote {
@@ -1691,6 +1700,7 @@
           <select class="toolbar-select" id="formatSelect" aria-label="Text style">
             <option value="p">Body</option>
             <option value="h2">Heading</option>
+            <option value="h3">Subheading</option>
             <option value="blockquote">Quote</option>
           </select>
         </span>
@@ -3193,11 +3203,12 @@
           continue;
         }
 
-        const heading = line.match(/^\s{0,3}#{1,6}\s+(.+)$/);
+        const heading = line.match(/^\s{0,3}(#{1,6})\s+(.+)$/);
         if (heading) {
-          const h2 = document.createElement('h2');
-          h2.innerHTML = markdownInlineToHtml(heading[1].replace(/\s+#+\s*$/, '').trim());
-          fragment.append(h2);
+          const level = heading[1].length >= 3 ? 'h3' : 'h2';
+          const headingElement = document.createElement(level);
+          headingElement.innerHTML = markdownInlineToHtml(heading[2].replace(/\s+#+\s*$/, '').trim());
+          fragment.append(headingElement);
           index += 1;
           continue;
         }
@@ -3331,7 +3342,7 @@
         return p.textContent.trim() || p.querySelector('br') ? p : document.createDocumentFragment();
       }
       if (/^h[1-6]$/.test(tag)) {
-        const heading = document.createElement('h2');
+        const heading = document.createElement(Number(tag.replace('h', '')) >= 3 ? 'h3' : 'h2');
         heading.innerHTML = sanitizeInlineHtml(node.innerHTML);
         return heading.textContent.trim() ? heading : document.createDocumentFragment();
       }
@@ -3450,7 +3461,7 @@
       return Boolean(
         element &&
         element.nodeType === Node.ELEMENT_NODE &&
-        ['p', 'h2', 'blockquote'].includes(element.tagName.toLowerCase())
+        ['p', 'h2', 'h3', 'blockquote'].includes(element.tagName.toLowerCase())
       );
     }
 
@@ -3469,7 +3480,7 @@
       if (isFigureNode(node) || node.classList.contains('unsupported-block')) {
         return true;
       }
-      return ['p', 'h2', 'blockquote', 'ul', 'ol', 'hr'].includes(node.tagName.toLowerCase());
+      return ['p', 'h2', 'h3', 'blockquote', 'ul', 'ol', 'hr'].includes(node.tagName.toLowerCase());
     }
 
     function fragmentContainsBlockNodes(fragment) {
@@ -3525,7 +3536,7 @@
       if (!root || !root.querySelectorAll) {
         return;
       }
-      root.querySelectorAll('p, h2, blockquote, li').forEach(syncTextBlockEmptyState);
+      root.querySelectorAll('p, h2, h3, blockquote, li').forEach(syncTextBlockEmptyState);
     }
 
     function textBlockFromRange(range) {
@@ -3540,7 +3551,7 @@
       if (listItem && editor.contains(listItem)) {
         return listItem;
       }
-      const block = element.closest('p, h2, blockquote');
+      const block = element.closest('p, h2, h3, blockquote');
       return block && editor.contains(block) ? block : null;
     }
 
@@ -4173,7 +4184,7 @@
         }
       ];
 
-      editor.querySelectorAll('h2, .publisher-figure, .unsupported-block').forEach((node) => {
+      editor.querySelectorAll('h2, h3, .publisher-figure, .unsupported-block').forEach((node) => {
         if (node.classList.contains('publisher-figure')) {
           items.push({
             kind: 'Image',
@@ -4193,7 +4204,7 @@
           return;
         }
         items.push({
-          kind: 'Head',
+          kind: node.tagName.toLowerCase() === 'h3' ? 'Sub' : 'Head',
           label: shortPanelText(node.textContent, 'Heading'),
           state: '',
           target: node
@@ -5760,7 +5771,7 @@
       if (!element || !editor.contains(element)) {
         return null;
       }
-      return element.closest('li, p, h2, blockquote') || editor;
+      return element.closest('li, p, h2, h3, blockquote') || editor;
     }
 
     function clearFigureSelection(figureToKeep = null) {
@@ -5872,7 +5883,7 @@
     function insertBlockNodeAtRange(node, range) {
       const targetRange = rangeCanReceiveFigure(range, node) ? range.cloneRange() : rangeAtEditorEnd();
       const startElement = elementFromNode(targetRange.startContainer);
-      const containingTextBlock = startElement && startElement.closest('p, h2, blockquote');
+      const containingTextBlock = startElement && startElement.closest('p, h2, h3, blockquote');
       const containingList = startElement && startElement.closest('ul, ol');
       const insertsBlock = node.matches && node.matches('figure, hr');
 
@@ -5950,7 +5961,7 @@
         if (
           node.nodeType === Node.ELEMENT_NODE &&
           !node.classList.contains('publisher-figure') &&
-          ['p', 'h2', 'blockquote', 'li'].includes(node.tagName.toLowerCase())
+          ['p', 'h2', 'h3', 'blockquote', 'li'].includes(node.tagName.toLowerCase())
         ) {
           return node;
         }
@@ -5963,7 +5974,7 @@
       if (
         next &&
         next.nodeType === Node.ELEMENT_NODE &&
-        ['p', 'h2', 'blockquote'].includes(next.tagName.toLowerCase())
+        ['p', 'h2', 'h3', 'blockquote'].includes(next.tagName.toLowerCase())
       ) {
         return next;
       }
@@ -6870,7 +6881,7 @@
       if (!element || !editor.contains(element)) {
         return null;
       }
-      return element.closest('ul, ol, p, h2, blockquote') || editor;
+      return element.closest('ul, ol, p, h2, h3, blockquote') || editor;
     }
 
     function selectedLineSpacingTargets() {
@@ -6882,7 +6893,7 @@
       if (range.collapsed) {
         return [selectedLineSpacingTarget()].filter(Boolean);
       }
-      const targets = Array.from(editor.querySelectorAll('p, h2, blockquote, ul, ol')).filter((node) => {
+      const targets = Array.from(editor.querySelectorAll('p, h2, h3, blockquote, ul, ol')).filter((node) => {
         try {
           return range.intersectsNode(node);
         } catch (error) {
@@ -6897,7 +6908,7 @@
       if (!element || !editor.contains(element)) {
         return null;
       }
-      return element.closest('li, p, h2, blockquote') || editor;
+      return element.closest('li, p, h2, h3, blockquote') || editor;
     }
 
     function normalizeAlignment(value) {
@@ -7114,7 +7125,7 @@
         updateLineSpacingState();
         const block = selectedBlock();
         const tag = block && block.tagName ? block.tagName.toLowerCase() : 'p';
-        formatSelect.value = tag === 'blockquote' ? 'blockquote' : tag === 'h2' ? 'h2' : 'p';
+        formatSelect.value = tag === 'blockquote' ? 'blockquote' : tag === 'h2' || tag === 'h3' ? tag : 'p';
         if (element) {
           const style = window.getComputedStyle(element);
           updateColorSwatch('foreColor', style.color);
