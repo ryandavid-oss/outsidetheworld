@@ -679,7 +679,7 @@
 
     .structure-stats {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(76px, 1fr));
       gap: 7px;
     }
 
@@ -1621,6 +1621,7 @@
           </svg>
         </button>
         <button class="text-btn" id="saveDraftBtn" type="button" title="Save server draft">Save Draft</button>
+        <button class="text-btn" id="previewDraftBtn" type="button" title="Preview local draft">Preview</button>
         <button class="publish-btn" id="publishBtn" type="button" title="Publish article">Publish</button>
         <a class="text-btn" id="publishedLink" href="#" target="_blank" rel="noopener" hidden>Open Article</a>
       </div>
@@ -1974,6 +1975,7 @@
     const textColorBtn = document.getElementById('textColorBtn');
     const highlightBtn = document.getElementById('highlightBtn');
     const saveDraftBtn = document.getElementById('saveDraftBtn');
+    const previewDraftBtn = document.getElementById('previewDraftBtn');
     const clearDraftBtn = document.getElementById('clearDraftBtn');
     const publishBtn = document.getElementById('publishBtn');
     const publishedLink = document.getElementById('publishedLink');
@@ -3747,6 +3749,38 @@
       structureStats.append(item);
     }
 
+    function articleReadableText(article = serializeArticle()) {
+      const readable = [];
+      (article.body?.blocks || []).forEach((block) => {
+        if (!block) {
+          return;
+        }
+        if (block.type === 'list') {
+          (block.items || []).forEach((item) => {
+            readable.push(item.text || '');
+          });
+          return;
+        }
+        if (['paragraph', 'heading', 'quote'].includes(block.type)) {
+          readable.push(block.text || '');
+        }
+      });
+      return readable.join(' ').replace(/\s+/g, ' ').trim();
+    }
+
+    function articleWordCount(article = serializeArticle()) {
+      const text = articleReadableText(article);
+      return (text.match(/[A-Za-z0-9]+(?:[’'][A-Za-z0-9]+)?/g) || []).length;
+    }
+
+    function articleReadMinutes(wordCount = 0) {
+      return wordCount > 0 ? Math.max(1, Math.ceil(wordCount / 225)) : 0;
+    }
+
+    function formatStatNumber(value) {
+      return Number(value || 0).toLocaleString('en-US');
+    }
+
     function appendPanelAlert(issue) {
       const item = document.createElement('div');
       item.className = `panel-alert${issue.level === 'error' ? ' is-error' : ''}`;
@@ -3853,11 +3887,15 @@
       const imageCount = blocks.filter((block) => block.type === 'image').length;
       const headingCount = blocks.filter((block) => block.type === 'heading').length;
       const bodyCount = blocks.filter((block) => blockHasContent(block)).length;
+      const wordCount = articleWordCount(article);
+      const readMinutes = articleReadMinutes(wordCount);
       const validation = payload?.validation || {};
       const issues = validation.issues || [];
 
       structureReadiness.textContent = validation.readiness || 'Local draft';
       structureStats.replaceChildren();
+      appendStructureStat('Words', formatStatNumber(wordCount));
+      appendStructureStat('Read', readMinutes ? `${readMinutes} min` : '0 min');
       appendStructureStat('Blocks', bodyCount);
       appendStructureStat('Heads', headingCount);
       appendStructureStat('Images', imageCount);
@@ -4702,6 +4740,17 @@
         return null;
       } finally {
         setPublishBusy(false);
+      }
+    }
+
+    function openDraftPreview() {
+      saveDraft();
+      const previewUrl = `publisher_preview.html?draft=${Date.now()}`;
+      const previewWindow = window.open(previewUrl, '_blank', 'noopener');
+      if (previewWindow) {
+        setSaveState('Preview opened', true);
+      } else {
+        setSaveState('Preview blocked', true);
       }
     }
 
@@ -7117,6 +7166,8 @@
       saveServerDraft();
     });
 
+    previewDraftBtn.addEventListener('click', openDraftPreview);
+
     clearDraftBtn.addEventListener('click', clearLocalDraft);
 
     articleDate.addEventListener('change', () => {
@@ -7353,6 +7404,7 @@
       buildPublishPayload,
       validatePublishPayload,
       publishArticle,
+      openDraftPreview,
       publishRequestBodyFromPayload,
       publishedUrlFromWorkerFile,
       saveDraft,

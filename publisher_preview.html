@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en" data-reader-mode="dark">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="robots" content="noindex, nofollow, noarchive" />
+    <title>Private Draft Preview | Outside The World</title>
+    <link href="favicon.svg" rel="icon" type="image/svg+xml" />
+    <link href="theme.css" rel="stylesheet" />
+    <script>
+        (function() {
+            try {
+                var storedMode = window.localStorage && window.localStorage.getItem('otw_archive_reader_mode');
+                if (storedMode === 'dark' || storedMode === 'light') {
+                    document.documentElement.setAttribute('data-reader-mode', storedMode);
+                }
+            } catch (error) {}
+        }());
+    </script>
+    <link href="archive_reader.css" rel="stylesheet" />
+    <meta name="theme-color" content="#060809" />
+    <style>
+        .publisher-preview-note {
+            margin: 18px 0 0;
+            color: var(--reader-faint);
+            font-family: 'Fira Code', monospace;
+            font-size: 0.66rem;
+            letter-spacing: 0.13em;
+            line-height: 1.7;
+            text-transform: uppercase;
+        }
+
+        .publisher-preview-empty {
+            position: relative;
+            z-index: 1;
+            padding: clamp(26px, 5vw, 44px);
+            border: 1px dashed var(--reader-border);
+            background: var(--reader-surface-soft);
+            color: var(--reader-muted);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            line-height: 1.65;
+        }
+
+        .preview-image-placeholder {
+            display: grid;
+            place-items: center;
+            min-height: 180px;
+            margin: 42px auto;
+            border: 1px dashed var(--reader-border);
+            background: var(--reader-surface-soft);
+            color: var(--reader-faint);
+            font-family: 'Fira Code', monospace;
+            font-size: 0.66rem;
+            letter-spacing: 0.13em;
+            text-transform: uppercase;
+            text-align: center;
+        }
+    </style>
+    <script src="archive_reader.js" defer></script>
+</head>
+<body class="archive-reader-page">
+    <main class="archive-reader">
+        <article class="reader-card" aria-labelledby="entry-title">
+            <div class="reader-chrome">
+                <nav class="reader-breadcrumbs" aria-label="Preview navigation">
+                    <a href="publisher.html">Publisher</a>
+                    <span class="reader-breadcrumb-separator" aria-hidden="true">/</span>
+                    <a href="personal.html">Outside The World</a>
+                </nav>
+                <div class="reader-mode-toggle" role="group" aria-label="Reader mode">
+                    <button class="reader-mode-button" type="button" data-reader-mode-option="dark" aria-pressed="true">Dark</button>
+                    <button class="reader-mode-button" type="button" data-reader-mode-option="light" aria-pressed="false">Light</button>
+                </div>
+            </div>
+
+            <header class="entry-header">
+                <p class="entry-label">Private Draft Preview</p>
+                <h1 class="entry-title" id="entry-title">Loading draft...</h1>
+                <p class="entry-deck" id="entry-deck" hidden></p>
+                <div class="entry-meta-strip" aria-label="Draft details">
+                    <span class="entry-meta-item"><strong>Filed</strong> <span id="entry-date">Draft</span></span>
+                    <span class="entry-meta-item"><strong>Words</strong> <span id="entry-words">0</span></span>
+                    <span class="entry-meta-item"><strong>Read</strong> <span id="entry-read">0 min</span></span>
+                </div>
+                <p class="publisher-preview-note">Local browser draft. Not in the feed, archive, sitemap, or public narrative data.</p>
+            </header>
+
+            <div class="entry-share-row">
+                <span class="share-status" id="share-status" aria-live="polite">PRIVATE_PREVIEW_SIGNAL</span>
+                <div class="share-controls">
+                    <a class="archive-link" href="publisher.html">RETURN TO PUBLISHER</a>
+                    <button type="button" class="share-btn" id="refreshPreviewBtn">REFRESH DRAFT</button>
+                </div>
+            </div>
+
+            <div class="entry-body" id="entry-body">
+                <div class="publisher-preview-empty">No local draft was found. Return to the publisher, write or restore a draft, then press Preview.</div>
+            </div>
+
+            <div class="archive-actions">
+                <a class="archive-link" href="publisher.html">RETURN TO PUBLISHER</a>
+                <a class="archive-link" href="personal.html">RETURN TO OTW</a>
+            </div>
+        </article>
+        <footer class="archive-legal">
+            <a href="privacy.html">Privacy</a>
+            <span aria-hidden="true">&nbsp;|&nbsp;</span>
+            <a href="terms.html">Terms</a>
+            <span aria-hidden="true">&nbsp;|&nbsp;</span>
+            <a href="trademarks.html">Trademarks</a>
+            <span aria-hidden="true">&nbsp;|&nbsp;</span>
+            <a href="support.html">Support</a>
+            <div class="archive-legal-brand">Private preview surface. Content is read from this browser's local draft storage.</div>
+        </footer>
+    </main>
+
+    <script>
+        const DRAFT_KEY = 'otw.publisher.localDraft.v3';
+        const LEGACY_DRAFT_KEYS = [
+            'otw.publisher.localDraft.v2',
+            'otw.publisher.localDraft.v1'
+        ];
+
+        const titleEl = document.getElementById('entry-title');
+        const deckEl = document.getElementById('entry-deck');
+        const dateEl = document.getElementById('entry-date');
+        const wordsEl = document.getElementById('entry-words');
+        const readEl = document.getElementById('entry-read');
+        const bodyEl = document.getElementById('entry-body');
+        const refreshPreviewBtn = document.getElementById('refreshPreviewBtn');
+
+        function escapeHtml(value) {
+            return String(value || '')
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
+
+        function safeUrl(value) {
+            const url = String(value || '').trim();
+            if (/^(https?:|mailto:|#|\/|data:image\/)/i.test(url)) {
+                return url;
+            }
+            return '';
+        }
+
+        function sanitizeInlineHtml(html) {
+            const template = document.createElement('template');
+            template.innerHTML = String(html || '');
+            const allowed = new Set(['b', 'strong', 'i', 'em', 'u', 'a', 'span', 'br']);
+
+            function cleanNode(node) {
+                if (node.nodeType === Node.TEXT_NODE) {
+                    return document.createTextNode(node.textContent || '');
+                }
+                if (node.nodeType !== Node.ELEMENT_NODE) {
+                    return document.createDocumentFragment();
+                }
+
+                const tag = node.tagName.toLowerCase();
+                const fragmentChildren = () => {
+                    const fragment = document.createDocumentFragment();
+                    node.childNodes.forEach((child) => fragment.append(cleanNode(child)));
+                    return fragment;
+                };
+
+                if (!allowed.has(tag)) {
+                    return fragmentChildren();
+                }
+                if (tag === 'br') {
+                    return document.createElement('br');
+                }
+
+                const clean = document.createElement(tag);
+                if (tag === 'a') {
+                    const href = safeUrl(node.getAttribute('href'));
+                    if (href) {
+                        clean.setAttribute('href', href);
+                    }
+                }
+                if (tag === 'span') {
+                    const style = node.style;
+                    if (style.color) clean.style.color = style.color;
+                    if (style.backgroundColor) clean.style.backgroundColor = style.backgroundColor;
+                    if (style.fontWeight) clean.style.fontWeight = style.fontWeight;
+                    if (style.fontStyle) clean.style.fontStyle = style.fontStyle;
+                    if (style.textDecorationLine) clean.style.textDecoration = style.textDecorationLine;
+                }
+                node.childNodes.forEach((child) => clean.append(cleanNode(child)));
+                return clean;
+            }
+
+            const cleanTemplate = document.createElement('template');
+            template.content.childNodes.forEach((node) => cleanTemplate.content.append(cleanNode(node)));
+            return cleanTemplate.innerHTML.trim();
+        }
+
+        function readStoredDraft() {
+            const keys = [DRAFT_KEY, ...LEGACY_DRAFT_KEYS];
+            for (const key of keys) {
+                try {
+                    const draft = JSON.parse(localStorage.getItem(key) || 'null');
+                    if (draft) {
+                        return draft.article || draft;
+                    }
+                } catch (error) {
+                    // Keep looking for a readable draft.
+                }
+            }
+            return null;
+        }
+
+        function formatDate(value) {
+            const raw = String(value || '').trim();
+            if (!raw) {
+                return 'Draft';
+            }
+            if (!/^\d{4}-\d{2}-\d{2}$/.test(raw)) {
+                return raw;
+            }
+            return new Intl.DateTimeFormat('en-US', {
+                timeZone: 'UTC',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            }).format(new Date(`${raw}T12:00:00Z`));
+        }
+
+        function articleReadableText(article) {
+            const readable = [];
+            (article?.body?.blocks || []).forEach((block) => {
+                if (!block) {
+                    return;
+                }
+                if (block.type === 'list') {
+                    (block.items || []).forEach((item) => readable.push(item.text || ''));
+                    return;
+                }
+                if (['paragraph', 'heading', 'quote'].includes(block.type)) {
+                    readable.push(block.text || '');
+                }
+            });
+            return readable.join(' ').replace(/\s+/g, ' ').trim();
+        }
+
+        function wordCount(article) {
+            return (articleReadableText(article).match(/[A-Za-z0-9]+(?:[’'][A-Za-z0-9]+)?/g) || []).length;
+        }
+
+        function readMinutes(words) {
+            return words > 0 ? Math.max(1, Math.ceil(words / 225)) : 0;
+        }
+
+        function figureClass(block) {
+            const size = String(block.displaySize || 'medium').toLowerCase();
+            const alignment = String(block.alignment || 'center').toLowerCase();
+            const wrapMode = String(block.wrapMode || 'none').toLowerCase();
+            return [
+                'otw-figure',
+                `otw-figure--${['x-small', 'small', 'medium', 'large', 'original'].includes(size) ? size : 'medium'}`,
+                `otw-figure--align-${['left', 'center', 'right'].includes(alignment) ? alignment : 'center'}`,
+                ['wrap-left', 'wrap-right'].includes(wrapMode) ? `otw-figure--${wrapMode}` : ''
+            ].filter(Boolean).join(' ');
+        }
+
+        function imageSource(block) {
+            const source = block.source || {};
+            if (source.kind === 'url' && source.url) {
+                return safeUrl(source.url);
+            }
+            if (source.kind === 'local-data-url' && source.dataUrl) {
+                return safeUrl(source.dataUrl);
+            }
+            return safeUrl(block.upload?.uploadedUrl || block.url || '');
+        }
+
+        function renderBlock(block, state) {
+            if (!block || !block.type) {
+                return document.createDocumentFragment();
+            }
+
+            if (block.type === 'paragraph') {
+                const paragraph = document.createElement('p');
+                paragraph.innerHTML = sanitizeInlineHtml(block.html || escapeHtml(block.text || ''));
+                const text = paragraph.textContent.replace(/\s+/g, ' ').trim();
+                if (!state.openingUsed && text.length >= 80) {
+                    paragraph.classList.add('entry-body__opening');
+                    if (text.length >= 180 && text.split(/\s+/).length >= 32) {
+                        paragraph.classList.add('entry-body__dropcap');
+                    }
+                    state.openingUsed = true;
+                }
+                return paragraph;
+            }
+
+            if (block.type === 'heading') {
+                const heading = document.createElement('h2');
+                heading.innerHTML = sanitizeInlineHtml(block.html || escapeHtml(block.text || ''));
+                return heading;
+            }
+
+            if (block.type === 'quote') {
+                const quote = document.createElement('blockquote');
+                quote.innerHTML = sanitizeInlineHtml(block.html || escapeHtml(block.text || ''));
+                return quote;
+            }
+
+            if (block.type === 'list') {
+                const list = document.createElement(block.ordered ? 'ol' : 'ul');
+                (block.items || []).forEach((item) => {
+                    const li = document.createElement('li');
+                    li.innerHTML = sanitizeInlineHtml(item.html || escapeHtml(item.text || ''));
+                    if (li.textContent.trim()) {
+                        list.append(li);
+                    }
+                });
+                return list.children.length ? list : document.createDocumentFragment();
+            }
+
+            if (block.type === 'divider') {
+                return document.createElement('hr');
+            }
+
+            if (block.type === 'image') {
+                const src = imageSource(block);
+                if (!src) {
+                    const placeholder = document.createElement('div');
+                    placeholder.className = 'preview-image-placeholder';
+                    placeholder.textContent = 'Image waits for upload';
+                    return placeholder;
+                }
+
+                const figure = document.createElement('figure');
+                figure.className = figureClass(block);
+                const image = document.createElement('img');
+                image.src = src;
+                image.alt = block.alt || '';
+                image.loading = 'lazy';
+                image.decoding = 'async';
+                figure.append(image);
+                if (block.caption) {
+                    const caption = document.createElement('figcaption');
+                    caption.textContent = block.caption;
+                    figure.append(caption);
+                }
+                return figure;
+            }
+
+            return document.createDocumentFragment();
+        }
+
+        function renderDraft() {
+            const article = readStoredDraft();
+            if (!article || !article.body) {
+                titleEl.textContent = 'No local draft found';
+                deckEl.hidden = true;
+                dateEl.textContent = 'Draft';
+                wordsEl.textContent = '0';
+                readEl.textContent = '0 min';
+                bodyEl.innerHTML = '<div class="publisher-preview-empty">No local draft was found. Return to the publisher, write or restore a draft, then press Preview.</div>';
+                return;
+            }
+
+            const words = wordCount(article);
+            const minutes = readMinutes(words);
+            titleEl.textContent = article.title || article.metadata?.docName || 'Untitled Article';
+            if (article.subhead) {
+                deckEl.textContent = article.subhead;
+                deckEl.hidden = false;
+            } else {
+                deckEl.hidden = true;
+            }
+            dateEl.textContent = formatDate(article.metadata?.publishDate || article.metadata?.articleDate || '');
+            wordsEl.textContent = words.toLocaleString('en-US');
+            readEl.textContent = `${minutes} min`;
+            document.title = `${titleEl.textContent} | Private Draft Preview`;
+
+            const state = { openingUsed: false };
+            const fragment = document.createDocumentFragment();
+            (article.body.blocks || []).forEach((block) => {
+                fragment.append(renderBlock(block, state));
+            });
+            if (!fragment.childNodes.length) {
+                bodyEl.innerHTML = '<div class="publisher-preview-empty">This draft has no body content yet.</div>';
+                return;
+            }
+            bodyEl.replaceChildren(fragment);
+        }
+
+        refreshPreviewBtn.addEventListener('click', renderDraft);
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', renderDraft);
+        } else {
+            renderDraft();
+        }
+    </script>
+</body>
+</html>
