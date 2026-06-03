@@ -38,6 +38,13 @@
     return allowed.includes(normalized) ? normalized : fallback;
   }
 
+  function normalizeTextAlign(value) {
+    const normalized = String(value || "").trim().toLowerCase();
+    if (normalized === "center" || normalized.includes("center")) return "center";
+    if (normalized === "right" || normalized === "end" || normalized.includes("right")) return "right";
+    return "";
+  }
+
   function normalizeImagePresentation(value = {}) {
     return {
       displaySize: normalizeChoice(value.displaySize, ["x-small", "small", "medium", "large", "original"], "medium"),
@@ -226,6 +233,13 @@
     }
   }
 
+  function applyPublisherTextAlign(element, value) {
+    const alignment = normalizeTextAlign(value);
+    if (element && alignment) {
+      element.style.textAlign = alignment;
+    }
+  }
+
   function applyPublisherTextBlock(element, block) {
     if (!element || !block) return;
     const htmlValue = typeof block.html === "string" ? block.html : "";
@@ -233,6 +247,7 @@
       element.innerHTML = sanitizeEnhancedInlineHtml(htmlValue);
     }
     applyPublisherLineSpacing(element, block.lineSpacing);
+    applyPublisherTextAlign(element, block.textAlign);
   }
 
   function applyPublisherListBlock(element, block) {
@@ -247,6 +262,7 @@
       }
     });
     applyPublisherLineSpacing(element, block.lineSpacing);
+    applyPublisherTextAlign(element, block.textAlign);
   }
 
   function applyPublisherRichBlocks(root, metadata = {}) {

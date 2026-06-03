@@ -253,6 +253,24 @@
             return words > 0 ? Math.max(1, Math.ceil(words / 225)) : 0;
         }
 
+        function normalizeTextAlign(value) {
+            const alignment = String(value || '').toLowerCase();
+            if (alignment === 'center' || alignment.includes('center')) {
+                return 'center';
+            }
+            if (alignment === 'right' || alignment === 'end' || alignment.includes('right')) {
+                return 'right';
+            }
+            return '';
+        }
+
+        function applyTextAlign(element, value) {
+            const alignment = normalizeTextAlign(value);
+            if (element && alignment) {
+                element.style.textAlign = alignment;
+            }
+        }
+
         function figureClass(block) {
             const size = String(block.displaySize || 'medium').toLowerCase();
             const alignment = String(block.alignment || 'center').toLowerCase();
@@ -284,6 +302,7 @@
             if (block.type === 'paragraph') {
                 const paragraph = document.createElement('p');
                 paragraph.innerHTML = sanitizeInlineHtml(block.html || escapeHtml(block.text || ''));
+                applyTextAlign(paragraph, block.textAlign);
                 const text = paragraph.textContent.replace(/\s+/g, ' ').trim();
                 if (!state.openingUsed && text.length >= 80) {
                     paragraph.classList.add('entry-body__opening');
@@ -299,17 +318,20 @@
                 const level = Math.min(Math.max(Number(block.level) || 2, 2), 6);
                 const heading = document.createElement(`h${level}`);
                 heading.innerHTML = sanitizeInlineHtml(block.html || escapeHtml(block.text || ''));
+                applyTextAlign(heading, block.textAlign);
                 return heading;
             }
 
             if (block.type === 'quote') {
                 const quote = document.createElement('blockquote');
                 quote.innerHTML = sanitizeInlineHtml(block.html || escapeHtml(block.text || ''));
+                applyTextAlign(quote, block.textAlign);
                 return quote;
             }
 
             if (block.type === 'list') {
                 const list = document.createElement(block.ordered ? 'ol' : 'ul');
+                applyTextAlign(list, block.textAlign);
                 (block.items || []).forEach((item) => {
                     const li = document.createElement('li');
                     li.innerHTML = sanitizeInlineHtml(item.html || escapeHtml(item.text || ''));

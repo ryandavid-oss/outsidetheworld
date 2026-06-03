@@ -4272,6 +4272,10 @@
       if (lineSpacing) {
         block.lineSpacing = lineSpacing;
       }
+      const textAlign = getElementTextAlign(element);
+      if (textAlign) {
+        block.textAlign = textAlign;
+      }
       return block;
     }
 
@@ -4347,7 +4351,7 @@
     }
 
     function serializeListBlock(list) {
-      return {
+      const block = {
         id: list.dataset.blockId || blockId('list'),
         type: 'list',
         ordered: list.tagName.toLowerCase() === 'ol',
@@ -4361,6 +4365,11 @@
             text: stripEditorCaretMarkers(item.textContent).trim()
           }))
       };
+      const textAlign = getElementTextAlign(list);
+      if (textAlign) {
+        block.textAlign = textAlign;
+      }
+      return block;
     }
 
     function serializePlainText(value) {
@@ -4615,7 +4624,8 @@
           type: 'paragraph',
           markdown,
           text: block.text || '',
-          lineSpacing: block.lineSpacing || ''
+          lineSpacing: block.lineSpacing || '',
+          textAlign: publicPublisherTextAlign(block.textAlign)
         };
       }
 
@@ -4628,7 +4638,8 @@
           level,
           markdown: markdown ? `${'#'.repeat(level)} ${markdown}` : '',
           text: block.text || '',
-          lineSpacing: block.lineSpacing || ''
+          lineSpacing: block.lineSpacing || '',
+          textAlign: publicPublisherTextAlign(block.textAlign)
         };
       }
 
@@ -4639,7 +4650,8 @@
           type: 'quote',
           markdown: blockMarkdownLines(markdown).map((line) => `> ${line}`.trimEnd()).join('\n'),
           text: block.text || '',
-          lineSpacing: block.lineSpacing || ''
+          lineSpacing: block.lineSpacing || '',
+          textAlign: publicPublisherTextAlign(block.textAlign)
         };
       }
 
@@ -4666,7 +4678,8 @@
           checklist,
           items,
           markdown: items.map((item) => item.line).join('\n'),
-          lineSpacing: block.lineSpacing || ''
+          lineSpacing: block.lineSpacing || '',
+          textAlign: publicPublisherTextAlign(block.textAlign)
         };
       }
 
@@ -4734,6 +4747,11 @@
       return lineSpacingValues.includes(value) ? value : '';
     }
 
+    function publicPublisherTextAlign(value) {
+      const alignment = normalizeAlignment(value);
+      return alignment === 'center' || alignment === 'right' ? alignment : '';
+    }
+
     function publicPublisherInlineBlockMetadata(block, type = block?.type) {
       const html = sanitizeInlineHtml(block?.html || '');
       const metadata = {
@@ -4745,6 +4763,10 @@
       const lineSpacing = publicPublisherLineSpacing(block?.lineSpacing);
       if (lineSpacing) {
         metadata.lineSpacing = lineSpacing;
+      }
+      const textAlign = publicPublisherTextAlign(block?.textAlign);
+      if (textAlign) {
+        metadata.textAlign = textAlign;
       }
       if (type === 'heading') {
         metadata.level = Math.min(Math.max(Number(block?.level) || 2, 2), 6);
@@ -4769,6 +4791,10 @@
       const lineSpacing = publicPublisherLineSpacing(block?.lineSpacing);
       if (lineSpacing) {
         metadata.lineSpacing = lineSpacing;
+      }
+      const textAlign = publicPublisherTextAlign(block?.textAlign);
+      if (textAlign) {
+        metadata.textAlign = textAlign;
       }
       return metadata;
     }
@@ -5132,6 +5158,7 @@
         if (block.lineSpacing) {
           applyLineSpacingClass(quote, block.lineSpacing);
         }
+        applyTextAlignment(quote, block.textAlign);
         return quote;
       }
       element.dataset.blockId = block.id || blockId(block.type);
@@ -5139,6 +5166,7 @@
       if (block.lineSpacing) {
         applyLineSpacingClass(element, block.lineSpacing);
       }
+      applyTextAlignment(element, block.textAlign);
       return element;
     }
 
@@ -5151,6 +5179,7 @@
       if (block.lineSpacing) {
         applyLineSpacingClass(list, block.lineSpacing);
       }
+      applyTextAlignment(list, block.textAlign);
       block.items.forEach((item) => {
         const li = document.createElement('li');
         li.dataset.blockId = item.id || blockId('item');
@@ -6913,13 +6942,33 @@
 
     function normalizeAlignment(value) {
       const alignment = String(value || '').toLowerCase();
-      if (alignment === 'center') {
+      if (alignment === 'center' || alignment.includes('center')) {
         return 'center';
       }
-      if (alignment === 'right' || alignment === 'end') {
+      if (alignment === 'right' || alignment === 'end' || alignment.includes('right')) {
         return 'right';
       }
       return 'left';
+    }
+
+    function getElementTextAlign(element) {
+      if (!element || !element.style) {
+        return '';
+      }
+      const alignment = normalizeAlignment(element.style.textAlign || window.getComputedStyle(element).textAlign);
+      return alignment === 'center' || alignment === 'right' ? alignment : '';
+    }
+
+    function applyTextAlignment(element, value) {
+      if (!element || !element.style) {
+        return;
+      }
+      const alignment = publicPublisherTextAlign(value);
+      if (alignment) {
+        element.style.textAlign = alignment;
+      } else {
+        element.style.removeProperty('text-align');
+      }
     }
 
     function getCurrentAlignment() {
