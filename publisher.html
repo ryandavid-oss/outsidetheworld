@@ -1651,6 +1651,9 @@
             <option value="blockquote">Quote</option>
           </select>
         </span>
+        <button class="tool-btn" id="markdownConvertBtn" type="button" aria-label="Convert Markdown in body" title="Convert Markdown in body" data-tooltip="Convert Markdown">
+          <span class="tool-label">MD</span>
+        </button>
       </div>
 
       <div class="toolbar-group">
@@ -1984,6 +1987,7 @@
     const lineSpacingPopover = document.getElementById('lineSpacingPopover');
     const checklistBtn = document.getElementById('checklistBtn');
     const formatSelect = document.getElementById('formatSelect');
+    const markdownConvertBtn = document.getElementById('markdownConvertBtn');
     const settingsToggle = document.getElementById('settingsToggle');
     const settingsSheet = document.getElementById('settingsSheet');
     const colorPopover = document.getElementById('colorPopover');
@@ -2918,7 +2922,7 @@
         }
 
         const tag = node.tagName.toLowerCase();
-        const allowed = new Set(['b', 'strong', 'i', 'em', 'u', 'a', 'span', 'br', 'font']);
+        const allowed = new Set(['b', 'strong', 'i', 'em', 'u', 'a', 'span', 'br', 'font', 'code']);
         const outputChildren = () => {
           const fragment = document.createDocumentFragment();
           node.childNodes.forEach((child) => fragment.append(cleanNode(child)));
@@ -2993,6 +2997,251 @@
       return fragment;
     }
 
+    function markdownTextLooksLikeMarkdown(text) {
+      const value = String(text || '').trim();
+      if (!value) {
+        return false;
+      }
+      return /(^|\n)\s{0,3}#{1,6}\s+\S/.test(value) ||
+        /(^|\n)\s{0,3}>\s+\S/.test(value) ||
+        /(^|\n)\s{0,3}(?:[-*+]|\d+[.)])\s+\S/.test(value) ||
+        /(^|\n)\s{0,3}(?:-{3,}|\*{3,}|_{3,})\s*$/.test(value) ||
+        /!\[[^\]]*]\([^)]+\)/.test(value) ||
+        /\[[^\]]+]\([^)]+\)/.test(value) ||
+        /(^|[^*])\*\*[^*\n][\s\S]*?\*\*/.test(value) ||
+        /(^|[^_])__[^_\n][\s\S]*?__/.test(value) ||
+        /(^|[\s([])\*[^*\s](?:[^*\n]*?[^*\s])?\*(?=[\s)\].,!?:;]|$)/.test(value) ||
+        /(^|[\s([])_[^_\s](?:[^_\n]*?[^_\s])?_(?=[\s)\].,!?:;]|$)/.test(value) ||
+        /`[^`\n]+`/.test(value);
+    }
+
+    function markdownInlineToHtml(value) {
+      const tokens = [];
+      const tokenFor = (html) => {
+        const index = tokens.push(html) - 1;
+        return `\uE000${index}\uE000`;
+      };
+
+      let source = String(value || '');
+      source = source.replace(/`([^`\n]+)`/g, (match, code) => {
+        return tokenFor(`<code>${escapeHtml(code)}</code>`);
+      });
+      source = source.replace(/\[([^\]]+)]\((\S+?)(?:\s+"[^"]*")?\)/g, (match, label, href) => {
+        const safeHref = safeUrl(href);
+        if (!safeHref) {
+          return label;
+        }
+        return tokenFor(`<a href="${escapeHtml(safeHref)}">${markdownInlineToHtml(label)}</a>`);
+      });
+
+      let html = escapeHtml(source);
+      html = html
+        .replace(/\*\*\*([^*\n](?:[\s\S]*?[^*\n])?)\*\*\*/g, '<strong><em>$1</em></strong>')
+        .replace(/___([^_\n](?:[\s\S]*?[^_\n])?)___/g, '<strong><em>$1</em></strong>')
+        .replace(/\*\*([^*\n](?:[\s\S]*?[^*\n])?)\*\*/g, '<strong>$1</strong>')
+        .replace(/__([^_\n](?:[\s\S]*?[^_\n])?)__/g, '<strong>$1</strong>')
+        .replace(/(^|[\s([])\*([^*\s](?:[^*\n]*?[^*\s])?)\*(?=[\s)\].,!?:;]|$)/g, '$1<em>$2</em>')
+        .replace(/(^|[\s([])_([^_\s](?:[^_\n]*?[^_\s])?)_(?=[\s)\].,!?:;]|$)/g, '$1<em>$2</em>');
+
+      html = html.replace(/\uE000(\d+)\uE000/g, (match, index) => tokens[Number(index)] || '');
+      return sanitizeInlineHtml(html);
+    }
+
+    function markdownImageFromLine(line) {
+      const match = String(line || '').trim().match(/^!\[([^\]]*)]\((\S+?)(?:\s+"((?:\\"|[^"])*)")?\)$/);
+      if (!match) {
+        return null;
+      }
+      const url = match[2];
+      if (/^(javascript:|data:|blob:)/i.test(url)) {
+        return null;
+      }
+      return {
+        alt: match[1] || '',
+        url,
+        caption: (match[3] || '').replace(/\\"/g, '"')
+      };
+    }
+
+    function markdownBlockStart(line) {
+      return /^\s{0,3}#{1,6}\s+\S/.test(line) ||
+        /^\s{0,3}>\s+\S/.test(line) ||
+        /^\s{0,3}(?:[-*+]|\d+[.)])\s+\S/.test(line) ||
+        /^\s{0,3}(?:-{3,}|\*{3,}|_{3,})\s*$/.test(line) ||
+        Boolean(markdownImageFromLine(line));
+    }
+
+    function appendMarkdownParagraph(fragment, lines) {
+      const text = lines.join(' ').replace(/\s+/g, ' ').trim();
+      if (!text) {
+        return;
+      }
+      const paragraph = document.createElement('p');
+      paragraph.innerHTML = markdownInlineToHtml(text);
+      fragment.append(paragraph);
+    }
+
+    function appendMarkdownList(fragment, lines, ordered) {
+      const list = document.createElement(ordered ? 'ol' : 'ul');
+      const checklist = lines.some((line) => /^\s{0,3}[-*+]\s+\[[ xX]\]\s+/.test(line));
+      if (checklist && !ordered) {
+        list.classList.add('editor-checklist');
+      }
+      lines.forEach((line) => {
+        const itemText = line
+          .replace(/^\s{0,3}\d+[.)]\s+/, '')
+          .replace(/^\s{0,3}[-*+]\s+(?:\[[ xX]\]\s+)?/, '')
+          .trim();
+        const item = document.createElement('li');
+        item.innerHTML = markdownInlineToHtml(itemText);
+        if (item.textContent.trim()) {
+          list.append(item);
+        }
+      });
+      if (list.children.length) {
+        fragment.append(list);
+      }
+    }
+
+    function appendMarkdownImage(fragment, image) {
+      const figure = createFigureElement({
+        src: image.url,
+        savedSrc: image.url,
+        alt: image.alt,
+        caption: image.caption,
+        uploadedUrl: /^(https?:|\/)/i.test(image.url) ? image.url : '',
+        displaySize: 'medium',
+        alignment: 'center',
+        wrapMode: 'none',
+        uploadStatus: /^(https?:|\/)/i.test(image.url) ? 'uploaded' : 'local'
+      });
+      fragment.append(figure);
+    }
+
+    function markdownTextFragment(markdown) {
+      const fragment = document.createDocumentFragment();
+      const lines = String(markdown || '').replace(/\r\n?/g, '\n').split('\n');
+      let index = 0;
+
+      while (index < lines.length) {
+        const line = lines[index];
+        const trimmed = line.trim();
+        if (!trimmed) {
+          index += 1;
+          continue;
+        }
+
+        const image = markdownImageFromLine(line);
+        if (image) {
+          appendMarkdownImage(fragment, image);
+          index += 1;
+          continue;
+        }
+
+        const heading = line.match(/^\s{0,3}#{1,6}\s+(.+)$/);
+        if (heading) {
+          const h2 = document.createElement('h2');
+          h2.innerHTML = markdownInlineToHtml(heading[1].replace(/\s+#+\s*$/, '').trim());
+          fragment.append(h2);
+          index += 1;
+          continue;
+        }
+
+        if (/^\s{0,3}(?:-{3,}|\*{3,}|_{3,})\s*$/.test(line)) {
+          fragment.append(document.createElement('hr'));
+          index += 1;
+          continue;
+        }
+
+        if (/^\s{0,3}>\s+/.test(line)) {
+          const quoteLines = [];
+          while (index < lines.length && /^\s{0,3}>\s?/.test(lines[index])) {
+            quoteLines.push(lines[index].replace(/^\s{0,3}>\s?/, ''));
+            index += 1;
+          }
+          const quote = document.createElement('blockquote');
+          quote.innerHTML = markdownInlineToHtml(quoteLines.join(' ').replace(/\s+/g, ' ').trim());
+          fragment.append(quote);
+          continue;
+        }
+
+        if (/^\s{0,3}(?:[-*+]|\d+[.)])\s+\S/.test(line)) {
+          const ordered = /^\s{0,3}\d+[.)]\s+/.test(line);
+          const listLines = [];
+          const listPattern = ordered
+            ? /^\s{0,3}\d+[.)]\s+\S/
+            : /^\s{0,3}[-*+]\s+\S/;
+          while (index < lines.length && listPattern.test(lines[index])) {
+            listLines.push(lines[index]);
+            index += 1;
+          }
+          appendMarkdownList(fragment, listLines, ordered);
+          continue;
+        }
+
+        const paragraphLines = [];
+        while (index < lines.length && lines[index].trim() && !markdownBlockStart(lines[index])) {
+          paragraphLines.push(lines[index].trim());
+          index += 1;
+        }
+        appendMarkdownParagraph(fragment, paragraphLines);
+      }
+
+      return fragment.childNodes.length ? fragment : plainTextFragment(markdown);
+    }
+
+    function textWithEditorBreaks(node) {
+      if (!node) {
+        return '';
+      }
+      if (node.nodeType === Node.TEXT_NODE) {
+        return stripEditorCaretMarkers(node.textContent || '');
+      }
+      if (node.nodeType !== Node.ELEMENT_NODE) {
+        return '';
+      }
+      if (node.tagName && node.tagName.toLowerCase() === 'br') {
+        return '\n';
+      }
+      return Array.from(node.childNodes || []).map(textWithEditorBreaks).join('');
+    }
+
+    function markdownTextFromEditor() {
+      return Array.from(editor.childNodes)
+        .map((node) => textWithEditorBreaks(node).trim())
+        .filter(Boolean)
+        .join('\n\n');
+    }
+
+    function convertMarkdownInEditor({ confirmConversion = true } = {}) {
+      const source = markdownTextFromEditor();
+      if (!markdownTextLooksLikeMarkdown(source)) {
+        setSaveState('No Markdown found', true);
+        return false;
+      }
+      if (confirmConversion) {
+        const confirmed = window.confirm('Convert Markdown markers in the body into editor formatting? This replaces the body layout, but keeps a temporary backup while this page stays open.');
+        if (!confirmed) {
+          setSaveState('Markdown kept', true);
+          return false;
+        }
+      }
+      window.otwPublisherMarkdownRecoveryBackup = {
+        savedAt: new Date().toISOString(),
+        html: editor.innerHTML,
+        text: source
+      };
+      editor.replaceChildren(markdownTextFragment(source));
+      normalizeEditorStructure();
+      wireAllFigures();
+      clearFigureSelection();
+      placeCaretInside(editor.lastElementChild || editor);
+      markChanged();
+      setSaveState('Markdown converted', true);
+      scheduleToolbarStateUpdate();
+      return true;
+    }
+
     function pastedNodeHasBlockChildren(node) {
       return Array.from(node.childNodes || []).some((child) => {
         return child.nodeType === Node.ELEMENT_NODE &&
@@ -3052,7 +3301,7 @@
       if (tag === 'hr') {
         return document.createElement('hr');
       }
-      if (['b', 'strong', 'i', 'em', 'u', 'a', 'span', 'font'].includes(tag)) {
+      if (['b', 'strong', 'i', 'em', 'u', 'a', 'span', 'font', 'code'].includes(tag)) {
         const p = document.createElement('p');
         p.innerHTML = sanitizeInlineHtml(node.outerHTML);
         return p.textContent.trim() ? p : document.createDocumentFragment();
@@ -3429,6 +3678,9 @@
         const inner = childrenToMarkdown(node);
         if (tag === 'br') {
           return '\n';
+        }
+        if (tag === 'code') {
+          return inner ? `\`${inner.replace(/`/g, '\\`')}\`` : '';
         }
         if (tag === 'strong' || tag === 'b') {
           return inner ? `**${inner}**` : '';
@@ -6971,6 +7223,10 @@
       applyEditorCommand('formatBlock', formatSelect.value);
     });
 
+    markdownConvertBtn.addEventListener('click', (event) => {
+      convertMarkdownInEditor({ confirmConversion: !event.shiftKey });
+    });
+
     textColorBtn.addEventListener('click', () => {
       if (!bodyIsActiveTarget()) {
         showBodyOnlyStatus();
@@ -7295,6 +7551,11 @@
       }
 
       event.preventDefault();
+      if (!html && markdownTextLooksLikeMarkdown(text)) {
+        insertFragmentAtSavedRange(markdownTextFragment(text));
+        setSaveState('Markdown pasted', true);
+        return;
+      }
       if (pasteIsInline(html, text) && insertInlinePaste(html, text)) {
         return;
       }
@@ -7407,6 +7668,8 @@
       validatePublishPayload,
       publishArticle,
       openDraftPreview,
+      convertMarkdownInEditor,
+      markdownTextLooksLikeMarkdown,
       publishRequestBodyFromPayload,
       publishedUrlFromWorkerFile,
       saveDraft,
