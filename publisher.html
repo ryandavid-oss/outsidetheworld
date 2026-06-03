@@ -876,6 +876,43 @@
       min-width: 0;
     }
 
+    .article-live-stats {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      min-width: 0;
+      padding: 6px 10px;
+      border: 1px solid rgba(27, 54, 93, 0.1);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.42);
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .article-live-stat {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 5px;
+      min-width: 0;
+    }
+
+    .article-live-stat + .article-live-stat {
+      padding-left: 12px;
+      border-left: 1px solid rgba(27, 54, 93, 0.12);
+    }
+
+    .article-live-stat-value {
+      color: var(--blue-dark);
+      font-weight: 800;
+      letter-spacing: 0.08em;
+    }
+
+    .article-live-stat-label {
+      font-size: 0.54rem;
+      letter-spacing: 0.12em;
+    }
+
     .date-row .side-input {
       min-width: 0;
     }
@@ -1595,6 +1632,12 @@
         align-items: flex-start;
         flex-direction: column;
       }
+
+      .article-live-stats {
+        justify-content: flex-start;
+        max-width: 100%;
+        overflow-x: auto;
+      }
     }
   </style>
 </head>
@@ -1862,6 +1905,16 @@
         <article class="paper" aria-label="Article document">
           <div class="article-meta">
             <span>Outside The World Article</span>
+            <div class="article-live-stats" aria-label="Article word count and estimated reading time">
+              <span class="article-live-stat">
+                <span class="article-live-stat-value" id="articleWordCount">0</span>
+                <span class="article-live-stat-label">Words</span>
+              </span>
+              <span class="article-live-stat">
+                <span class="article-live-stat-value" id="articleReadLength">0 min</span>
+                <span class="article-live-stat-label">Read</span>
+              </span>
+            </div>
             <div class="article-date-group">
               <input class="article-date" type="date" aria-label="Article date" />
               <button class="key-action" id="articleTodayBtn" type="button">Today</button>
@@ -1993,6 +2046,8 @@
     const colorPopover = document.getElementById('colorPopover');
     const colorPopoverTitle = document.getElementById('colorPopoverTitle');
     const customColorInput = document.getElementById('customColorInput');
+    const articleWordCountEl = document.getElementById('articleWordCount');
+    const articleReadLengthEl = document.getElementById('articleReadLength');
     const structureStats = document.getElementById('structureStats');
     const structureAlerts = document.getElementById('structureAlerts');
     const structureList = document.getElementById('structureList');
@@ -4035,6 +4090,18 @@
       return Number(value || 0).toLocaleString('en-US');
     }
 
+    function articleReadingMetrics(article = serializeArticle()) {
+      const wordCount = articleWordCount(article);
+      const readMinutes = articleReadMinutes(wordCount);
+      return { wordCount, readMinutes };
+    }
+
+    function updateArticleLiveStats(article = serializeArticle()) {
+      const { wordCount, readMinutes } = articleReadingMetrics(article);
+      articleWordCountEl.textContent = formatStatNumber(wordCount);
+      articleReadLengthEl.textContent = readMinutes ? `${readMinutes} min` : '0 min';
+    }
+
     function appendPanelAlert(issue) {
       const item = document.createElement('div');
       item.className = `panel-alert${issue.level === 'error' ? ' is-error' : ''}`;
@@ -4141,8 +4208,7 @@
       const imageCount = blocks.filter((block) => block.type === 'image').length;
       const headingCount = blocks.filter((block) => block.type === 'heading').length;
       const bodyCount = blocks.filter((block) => blockHasContent(block)).length;
-      const wordCount = articleWordCount(article);
-      const readMinutes = articleReadMinutes(wordCount);
+      const { wordCount, readMinutes } = articleReadingMetrics(article);
       const validation = payload?.validation || {};
       const issues = validation.issues || [];
 
@@ -5022,6 +5088,7 @@
       publishPayload.textContent = JSON.stringify(payload, null, 2);
       window.otwPublisherPublishPayload = payload;
       setReadinessLabel(payload.validation.readiness);
+      updateArticleLiveStats(article);
       schedulePanelUpdate();
       return article;
     }
