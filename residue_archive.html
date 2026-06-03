@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-reader-mode="dark">
 
 <head>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-YKRKPFV2MB"></script>
@@ -15,9 +15,19 @@
     <title>
         Residue Archive | Matrix Terminal
     </title>
-    <link href="favicon.svg" rel="icon" type="image/svg+xml" />
+    <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
     <link rel="alternate" type="application/atom+xml" title="Outside The World Atom Feed" href="https://outsidetheworld.com/atom.xml" />
-    <meta content="var(--bg-dark)" name="theme-color" />
+    <meta content="#060809" name="theme-color" />
+    <script>
+        (function() {
+            try {
+                var storedMode = window.localStorage && window.localStorage.getItem('otw_archive_reader_mode');
+                if (storedMode === 'dark' || storedMode === 'light') {
+                    document.documentElement.setAttribute('data-reader-mode', storedMode);
+                }
+            } catch (error) {}
+        }());
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js">
     </script>
     <script src="otw_markdown.js">
@@ -702,6 +712,546 @@
         /* THE CLEAN ATMOSPHERIC WASH */
     </style>
     <link href="theme.css" rel="stylesheet" />
+    <style>
+        html[data-reader-mode="dark"] {
+            --archive-page: #060809;
+            --archive-page-b: #0a0f12;
+            --archive-surface: rgba(8, 11, 13, 0.9);
+            --archive-surface-strong: rgba(5, 7, 9, 0.96);
+            --archive-surface-soft: rgba(145, 175, 179, 0.055);
+            --archive-ink: #f1f5f7;
+            --archive-body: #d8dddf;
+            --archive-muted: rgba(216, 221, 223, 0.68);
+            --archive-faint: rgba(216, 221, 223, 0.44);
+            --archive-border: rgba(145, 175, 179, 0.18);
+            --archive-rule: rgba(145, 175, 179, 0.24);
+            --archive-accent: #91afb3;
+            --archive-accent-strong: #a0bef5;
+            --archive-link: #a0bef5;
+            --archive-shadow: 0 36px 120px rgba(0, 0, 0, 0.68);
+        }
+
+        html[data-reader-mode="light"] {
+            --archive-page: #f4f1ea;
+            --archive-page-b: #e9edf3;
+            --archive-surface: rgba(255, 253, 248, 0.95);
+            --archive-surface-strong: rgba(255, 255, 255, 0.98);
+            --archive-surface-soft: rgba(99, 149, 238, 0.07);
+            --archive-ink: #15191f;
+            --archive-body: #252b32;
+            --archive-muted: rgba(37, 43, 50, 0.68);
+            --archive-faint: rgba(37, 43, 50, 0.46);
+            --archive-border: rgba(47, 58, 70, 0.16);
+            --archive-rule: rgba(47, 58, 70, 0.22);
+            --archive-accent: #346ebd;
+            --archive-accent-strong: #1c4f9b;
+            --archive-link: #1d5fb8;
+            --archive-shadow: 0 28px 90px rgba(53, 63, 78, 0.18);
+        }
+
+        html[data-reader-mode] {
+            background: var(--archive-page) !important;
+        }
+
+        body {
+            background:
+                radial-gradient(circle at 15% 0%, color-mix(in srgb, var(--archive-accent-strong) 16%, transparent), transparent 34rem),
+                radial-gradient(circle at 90% 10%, color-mix(in srgb, var(--archive-accent) 14%, transparent), transparent 30rem),
+                linear-gradient(135deg, var(--archive-page), var(--archive-page-b)) !important;
+            color: var(--archive-body);
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background-image:
+                linear-gradient(color-mix(in srgb, var(--archive-accent) 7%, transparent) 1px, transparent 1px),
+                linear-gradient(90deg, color-mix(in srgb, var(--archive-accent) 5%, transparent) 1px, transparent 1px);
+            background-size: 42px 42px;
+            mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.72), transparent 72%);
+            z-index: 0;
+        }
+
+        .directory,
+        .extraction-pane {
+            position: relative;
+            z-index: 1;
+        }
+
+        .directory {
+            background: color-mix(in srgb, var(--archive-surface-strong) 94%, transparent);
+            border-color: var(--archive-border);
+            box-shadow: 18px 0 70px color-mix(in srgb, #000 28%, transparent);
+        }
+
+        .dir-header {
+            padding: clamp(24px, 7vw, 42px);
+            text-align: left;
+            border-bottom: 1px solid var(--archive-rule);
+        }
+
+        .archive-brand {
+            display: inline-block;
+            max-width: min(220px, 64vw);
+            margin-bottom: 28px;
+        }
+
+        .sidebar-logo {
+            width: 100%;
+            margin: 0;
+            opacity: 0.95;
+        }
+
+        html[data-reader-mode="light"] .sidebar-logo {
+            content: url("Images/Equal_dark.svg");
+        }
+
+        .archive-kicker,
+        .knob-label,
+        .filter-field span,
+        .archive-count,
+        .entry-label,
+        .entry-meta-item,
+        .share-btn,
+        .share-status,
+        .reader-open-link,
+        .entry-reactions-row,
+        .archive-legal,
+        .back-link,
+        .archive-mode-button,
+        .post-item-date,
+        .post-item-action {
+            font-family: 'Fira Code', monospace;
+            text-transform: uppercase;
+        }
+
+        .archive-kicker {
+            margin: 0 0 10px;
+            color: var(--archive-accent);
+            font-size: 0.66rem;
+            letter-spacing: 0.18em;
+        }
+
+        .archive-title {
+            margin: 0;
+            color: var(--archive-ink);
+            font-size: clamp(1.9rem, 6vw, 2.75rem);
+            font-weight: 900;
+            letter-spacing: -0.035em;
+            line-height: 0.98;
+        }
+
+        .archive-subtitle {
+            max-width: 25rem;
+            margin: 14px 0 0;
+            color: var(--archive-muted);
+            font-family: 'Merriweather', serif;
+            font-size: 1rem;
+            line-height: 1.65;
+        }
+
+        .archive-mode-toggle {
+            display: inline-flex;
+            width: 100%;
+            min-height: 40px;
+            margin-top: 26px;
+            padding: 3px;
+            border: 1px solid var(--archive-border);
+            background: var(--archive-surface-soft);
+        }
+
+        .archive-mode-button {
+            flex: 1 1 0;
+            min-height: 34px;
+            border: 0;
+            background: transparent;
+            color: var(--archive-muted);
+            font-size: 0.62rem;
+            letter-spacing: 0.14em;
+            cursor: pointer;
+        }
+
+        .archive-mode-button[aria-pressed="true"] {
+            background: color-mix(in srgb, var(--archive-accent) 18%, transparent);
+            color: var(--archive-ink);
+            box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--archive-accent) 32%, transparent);
+        }
+
+        .tuning-knob {
+            padding: 22px clamp(20px, 6vw, 36px);
+            border-bottom: 1px solid var(--archive-rule);
+        }
+
+        .knob-label {
+            margin: 0 0 14px;
+            color: var(--archive-accent);
+            font-size: 0.68rem;
+            letter-spacing: 0.18em;
+        }
+
+        .filter-grid {
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .filter-field {
+            display: grid;
+            gap: 7px;
+        }
+
+        .filter-field span {
+            color: var(--archive-faint);
+            font-size: 0.56rem;
+            letter-spacing: 0.14em;
+        }
+
+        select.era-filter {
+            min-height: 44px;
+            border: 1px solid var(--archive-border);
+            background: var(--archive-surface-soft);
+            color: var(--archive-ink);
+            font-size: 0.72rem;
+            letter-spacing: 0.08em;
+        }
+
+        select.era-filter:focus-visible {
+            outline: 2px solid var(--archive-accent-strong);
+            outline-offset: 3px;
+        }
+
+        .archive-count {
+            margin-top: 14px;
+            color: var(--archive-faint);
+            font-size: 0.58rem;
+            letter-spacing: 0.14em;
+        }
+
+        .post-list {
+            border-top: 0;
+            background: linear-gradient(180deg, color-mix(in srgb, var(--archive-surface-soft) 56%, transparent), transparent);
+        }
+
+        .month-header {
+            color: var(--archive-accent);
+            font-size: 0.62rem;
+            letter-spacing: 0.16em;
+        }
+
+        .post-item {
+            display: block;
+            width: 100%;
+            border: 0;
+            border-left: 3px solid transparent;
+            border-bottom: 1px solid color-mix(in srgb, var(--archive-rule) 48%, transparent);
+            background: transparent;
+            color: inherit;
+            text-align: left;
+            appearance: none;
+        }
+
+        .post-item:hover,
+        .post-item:focus-visible {
+            background: color-mix(in srgb, var(--archive-accent) 10%, transparent);
+        }
+
+        .post-item:focus-visible {
+            outline: 2px solid var(--archive-accent-strong);
+            outline-offset: -2px;
+        }
+
+        .post-item.active {
+            background: linear-gradient(90deg, color-mix(in srgb, var(--archive-accent) 16%, transparent), transparent);
+            border-left-color: var(--archive-accent-strong);
+        }
+
+        .post-item h3 {
+            color: var(--archive-ink);
+            font-family: 'Merriweather', serif;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0;
+            line-height: 1.35;
+        }
+
+        .post-item-date,
+        .post-item-action {
+            display: block;
+            color: var(--archive-faint);
+            font-size: 0.56rem;
+            letter-spacing: 0.13em;
+        }
+
+        .post-item-action {
+            margin-top: 8px;
+            color: var(--archive-accent);
+        }
+
+        .extraction-pane {
+            background: transparent;
+        }
+
+        .glass-card {
+            max-width: 860px;
+            background: var(--archive-surface);
+            border: 1px solid var(--archive-border);
+            box-shadow: var(--archive-shadow);
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+            overflow: hidden;
+        }
+
+        .glass-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            border-top: 2px solid color-mix(in srgb, var(--archive-accent) 58%, transparent);
+            background:
+                linear-gradient(90deg, transparent, color-mix(in srgb, var(--archive-accent) 18%, transparent), transparent) 0 0 / 100% 1px no-repeat,
+                radial-gradient(circle at 12% 0%, color-mix(in srgb, var(--archive-accent-strong) 12%, transparent), transparent 28rem);
+        }
+
+        .entry-preview-header,
+        .entry-toolbar,
+        .entry-body,
+        .entry-reactions-row {
+            position: relative;
+            z-index: 1;
+        }
+
+        .entry-preview-header {
+            padding-bottom: clamp(24px, 5vw, 38px);
+            border-bottom: 1px solid var(--archive-rule);
+        }
+
+        .entry-label {
+            margin: 0 0 12px;
+            color: var(--archive-accent);
+            font-size: 0.68rem;
+            letter-spacing: 0.2em;
+        }
+
+        .entry-title {
+            color: var(--archive-ink);
+            font-size: clamp(2.15rem, 7vw, 4rem);
+            letter-spacing: -0.035em;
+            line-height: 0.98;
+            text-wrap: balance;
+        }
+
+        .entry-deck {
+            max-width: 36rem;
+            margin: clamp(16px, 3vw, 24px) 0 0;
+            color: var(--archive-muted);
+            font-family: 'Merriweather', serif;
+            font-size: clamp(1.08rem, 2.5vw, 1.28rem);
+            font-style: italic;
+            font-weight: 300;
+            line-height: 1.58;
+        }
+
+        .entry-meta-strip {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 18px;
+            margin-top: clamp(20px, 4vw, 30px);
+            padding-top: 18px;
+            border-top: 1px solid color-mix(in srgb, var(--archive-rule) 78%, transparent);
+        }
+
+        .entry-meta-item {
+            color: var(--archive-muted);
+            font-size: 0.66rem;
+            letter-spacing: 0.14em;
+        }
+
+        .entry-meta-item strong {
+            color: var(--archive-ink);
+        }
+
+        .entry-toolbar {
+            margin: 18px 0 clamp(28px, 5vw, 44px);
+            padding-bottom: 18px;
+            border-bottom: 1px solid color-mix(in srgb, var(--archive-rule) 64%, transparent);
+        }
+
+        .reader-open-link,
+        .share-btn {
+            min-height: 44px;
+            border: 1px solid var(--archive-border);
+            background: var(--archive-surface-soft);
+            color: var(--archive-accent-strong);
+            padding: 11px 14px;
+            text-decoration: none;
+            font-size: 0.66rem;
+            letter-spacing: 0.14em;
+        }
+
+        .reader-open-link:hover,
+        .share-btn:hover {
+            border-color: color-mix(in srgb, var(--archive-accent) 48%, transparent);
+            background: color-mix(in srgb, var(--archive-accent) 12%, transparent);
+            color: var(--archive-ink);
+        }
+
+        .share-status {
+            color: var(--archive-faint);
+            font-size: 0.62rem;
+            letter-spacing: 0.14em;
+        }
+
+        .entry-body {
+            color: var(--archive-body);
+            font-size: clamp(1.04rem, 2vw, 1.14rem);
+            line-height: 1.82;
+        }
+
+        .entry-body__opening {
+            color: var(--archive-ink);
+        }
+
+        .entry-body__dropcap::first-letter {
+            float: left;
+            margin: 0.12em 0.13em 0 0;
+            color: var(--archive-accent-strong);
+            font-family: 'Merriweather', serif;
+            font-size: 4.6em;
+            font-weight: 700;
+            line-height: 0.78;
+        }
+
+        .entry-body strong,
+        .entry-body h2,
+        .entry-body h3,
+        .entry-body h4 {
+            color: var(--archive-ink);
+            text-shadow: none;
+        }
+
+        .entry-body a {
+            color: var(--archive-link);
+            text-decoration: underline;
+            text-decoration-color: color-mix(in srgb, var(--archive-link) 42%, transparent);
+            text-decoration-thickness: 0.08em;
+            text-underline-offset: 0.22em;
+            border-bottom: 0;
+        }
+
+        .entry-body blockquote {
+            margin: 2.4rem 0;
+            padding: 1.1rem 0 1.1rem clamp(18px, 4vw, 28px);
+            border-left: 3px solid var(--archive-accent);
+            color: var(--archive-ink);
+            background: linear-gradient(90deg, color-mix(in srgb, var(--archive-accent) 10%, transparent), transparent);
+            font-size: clamp(1.13rem, 2.5vw, 1.32rem);
+            font-style: italic;
+            line-height: 1.7;
+        }
+
+        .entry-body hr {
+            width: min(240px, 58%);
+            height: 1px;
+            border: 0;
+            margin: 3rem auto;
+            background: linear-gradient(90deg, transparent, var(--archive-rule), transparent);
+        }
+
+        .entry-body img {
+            border-color: var(--archive-border);
+            box-shadow: 0 24px 64px color-mix(in srgb, #000 32%, transparent);
+        }
+
+        .entry-body img:hover {
+            transform: none;
+            border-color: var(--archive-accent);
+        }
+
+        .entry-body figure figcaption,
+        .entry-body .otw-figure figcaption {
+            color: var(--archive-muted);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .entry-reactions-row {
+            border-top-color: var(--archive-rule);
+            color: var(--archive-faint);
+        }
+
+        .back-link {
+            border-color: var(--archive-border);
+            background: var(--archive-surface);
+            color: var(--archive-accent-strong);
+            backdrop-filter: none;
+        }
+
+        .archive-legal {
+            color: var(--archive-faint);
+        }
+
+        .archive-legal a:hover {
+            color: var(--archive-accent-strong);
+        }
+
+        @media (min-width: 900px) {
+            .directory {
+                width: clamp(360px, 31vw, 440px);
+            }
+
+            .extraction-pane {
+                padding: clamp(34px, 4vw, 62px);
+            }
+        }
+
+        @media (max-width: 899px) {
+            .directory {
+                box-shadow: none;
+            }
+
+            .post-list {
+                max-height: 34vh;
+            }
+
+            .glass-card {
+                background: var(--archive-surface);
+                border-top: 1px solid var(--archive-border);
+                border-bottom: 1px solid var(--archive-border);
+            }
+
+            .entry-title {
+                font-size: clamp(2rem, 12vw, 3rem);
+            }
+
+            .entry-toolbar,
+            .share-controls,
+            .reader-open-link,
+            .share-btn {
+                width: 100%;
+            }
+
+            .reader-open-link,
+            .share-btn {
+                text-align: center;
+            }
+
+            .entry-body__dropcap::first-letter {
+                font-size: 3.5em;
+                line-height: 0.86;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition-duration: 0.01ms !important;
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -709,29 +1259,41 @@
     </div>
     <div id="cursor-dot">
     </div>
-    <nav class="back-nav">
+    <nav class="back-nav" aria-label="Return navigation">
         <a class="back-link" href="personal.html">
-            ← CLOSE_TERMINAL
+            Return to OTW
         </a>
     </nav>
-    <aside class="directory">
+    <aside class="directory" aria-label="Narrative archive directory">
         <div class="dir-header">
-            <a href="personal.html">
-                <div class="hero-logo-container">
-                    <img alt="OTW" class="sidebar-logo hero-logo" src="Images/Equal.svg" />
-                </div>
+            <a class="archive-brand" href="personal.html" aria-label="Outside The World home">
+                <img alt="Outside The World" class="sidebar-logo hero-logo" src="Images/Equal.svg" />
             </a>
-        </div>
-        <div class="tuning-knob">
-            <label class="knob-label">
-                Temporal Selection
-            </label>
-            <div class="filter-grid">
-                <select class="era-filter" id="year-select" onchange="updateYear()">
-                </select>
-                <select class="era-filter" id="month-select" onchange="updateMonth()">
-                </select>
+            <p class="archive-kicker">Outside The World</p>
+            <h1 class="archive-title">Residue Archive</h1>
+            <p class="archive-subtitle">Browse the current narrative by year and month, then open the full reader when a signal catches.</p>
+            <div class="archive-mode-toggle" role="group" aria-label="Archive reader mode">
+                <button class="archive-mode-button" type="button" data-reader-mode-option="dark" aria-pressed="true">Dark</button>
+                <button class="archive-mode-button" type="button" data-reader-mode-option="light" aria-pressed="false">Light</button>
             </div>
+        </div>
+        <div class="tuning-knob" aria-labelledby="temporal-selection-heading">
+            <h2 class="knob-label" id="temporal-selection-heading">
+                Temporal Selection
+            </h2>
+            <div class="filter-grid">
+                <label class="filter-field" for="year-select">
+                    <span>Year</span>
+                    <select class="era-filter" id="year-select" onchange="updateYear()">
+                    </select>
+                </label>
+                <label class="filter-field" for="month-select">
+                    <span>Month</span>
+                    <select class="era-filter" id="month-select" onchange="updateMonth()">
+                    </select>
+                </label>
+            </div>
+            <div class="archive-count" id="archive-count" aria-live="polite"></div>
         </div>
         <div class="post-list" id="post-list">
         </div>
@@ -761,6 +1323,107 @@
             'January', 'February', 'March', 'April', 'May', 'June',
             'July', 'August', 'September', 'October', 'November', 'December'
         ];
+        const ARCHIVE_READER_MODE_KEY = 'otw_archive_reader_mode';
+
+        function escapeHtml(value) {
+            return String(value || '')
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
+
+        function normalizePlainText(value) {
+            const probe = document.createElement('span');
+            probe.innerHTML = String(value || '');
+            return probe.textContent.replace(/\s+/g, ' ').trim();
+        }
+
+        function stripMarkdownText(value) {
+            return String(value || '')
+                .replace(/<!--\s*otw-publisher\s*[\s\S]*?\s*-->/gi, '')
+                .replace(/!\[[^\]]*\]\([^)]+\)/g, '')
+                .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+                .replace(/<[^>]+>/g, ' ')
+                .replace(/[*_`>#-]+/g, ' ')
+                .replace(/\s+/g, ' ')
+                .trim();
+        }
+
+        function publisherSubhead(post) {
+            return normalizePlainText(post && post.publisher && post.publisher.subhead ? post.publisher.subhead : '');
+        }
+
+        function markdownWithoutLeadingDeck(markdown, deck) {
+            if (!deck) return String(markdown || '');
+            const blocks = String(markdown || '').trim().split(/\n\s*\n/);
+            if (blocks.length && normalizePlainText(stripMarkdownText(blocks[0])) === normalizePlainText(deck)) {
+                return blocks.slice(1).join('\n\n').trim();
+            }
+            return String(markdown || '');
+        }
+
+        function articleWordCount(post, deck) {
+            const text = stripMarkdownText(markdownWithoutLeadingDeck(post && post.body, deck));
+            return (text.match(/[A-Za-z0-9]+(?:[’'][A-Za-z0-9]+)?/g) || []).length;
+        }
+
+        function articleReadMinutes(wordCount) {
+            return Math.max(1, Math.ceil(wordCount / 225));
+        }
+
+        function formatNumber(value) {
+            return Number(value || 0).toLocaleString('en-US');
+        }
+
+        function applyArchiveMode(mode, shouldPersist = false) {
+            const safeMode = mode === 'light' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-reader-mode', safeMode);
+            document.querySelector('meta[name="theme-color"]')?.setAttribute('content', safeMode === 'light' ? '#f4f1ea' : '#060809');
+
+            document.querySelectorAll('[data-reader-mode-option]').forEach((button) => {
+                button.setAttribute('aria-pressed', button.dataset.readerModeOption === safeMode ? 'true' : 'false');
+            });
+
+            if (shouldPersist) {
+                try {
+                    window.localStorage.setItem(ARCHIVE_READER_MODE_KEY, safeMode);
+                } catch (error) {}
+            }
+        }
+
+        function initArchiveMode() {
+            let storedMode = '';
+            try {
+                storedMode = window.localStorage.getItem(ARCHIVE_READER_MODE_KEY) || '';
+            } catch (error) {}
+
+            applyArchiveMode(storedMode || document.documentElement.getAttribute('data-reader-mode') || 'dark', false);
+            document.querySelectorAll('[data-reader-mode-option]').forEach((button) => {
+                button.addEventListener('click', () => applyArchiveMode(button.dataset.readerModeOption, true));
+            });
+        }
+
+        function enhanceArchivePreviewHtml(renderedHtml) {
+            const template = document.createElement('template');
+            template.innerHTML = renderedHtml;
+            const firstParagraph = template.content.querySelector('p');
+            if (!firstParagraph || firstParagraph.querySelector('img, figure, pre, code')) {
+                return template.innerHTML;
+            }
+
+            const paragraphText = normalizePlainText(firstParagraph.textContent);
+            if (paragraphText.length < 80) {
+                return template.innerHTML;
+            }
+
+            firstParagraph.classList.add('entry-body__opening');
+            if (paragraphText.length >= 180 && paragraphText.split(/\s+/).length >= 32) {
+                firstParagraph.classList.add('entry-body__dropcap');
+            }
+            return template.innerHTML;
+        }
 
         function slugify(value) {
             return String(value || '')
@@ -958,6 +1621,11 @@
             const visibleMonths = MONTH_ORDER.filter(month =>
                 months[month] && (selectedMonth === 'ALL' || selectedMonth === month)
             );
+            const visibleCount = visibleMonths.reduce((count, month) => count + months[month].length, 0);
+            const countEl = document.getElementById('archive-count');
+            if (countEl) {
+                countEl.textContent = `${visibleCount} signal${visibleCount === 1 ? '' : 's'} available`;
+            }
 
             visibleMonths.forEach(month => {
                 const mHeader = document.createElement('div');
@@ -966,8 +1634,9 @@
                 list.appendChild(mHeader);
 
                 months[month].forEach(post => {
-                    const item = document.createElement('div');
+                    const item = document.createElement('button');
                     item.className = 'post-item';
+                    item.type = 'button';
                     item.id = `item-${post.originalIndex}`;
                     item.dataset.postId = buildPostId(post);
                     item.onclick = () => {
@@ -976,7 +1645,11 @@
                             document.getElementById('scroll-target').scrollIntoView({ behavior: 'smooth' });
                         }
                     };
-                    item.innerHTML = `<h3>${post.title}</h3><span>${post.date}</span>`;
+                    item.innerHTML = `
+                        <span class="post-item-date">${escapeHtml(post.date)}</span>
+                        <h3>${escapeHtml(post.title)}</h3>
+                        <span class="post-item-action">Preview signal</span>
+                    `;
                     list.appendChild(item);
                 });
             });
@@ -1001,21 +1674,36 @@
             if (!post) return;
             const postId = buildPostId(post);
             const reactionDomId = buildArchiveReactionDomId(post);
+            const deck = publisherSubhead(post);
+            const deckHtml = deck ? `<p class="entry-deck">${escapeHtml(deck)}</p>` : '';
+            const wordCount = articleWordCount(post, deck);
+            const readMinutes = articleReadMinutes(wordCount);
+            const bodyForPreview = markdownWithoutLeadingDeck(post.body, deck);
+            const previewBody = enhanceArchivePreviewHtml(renderArchiveMarkdown(bodyForPreview, { ...post, body: bodyForPreview }));
+            const readerPath = buildCanonicalArchivePath(post);
 
-            document.body.style.background = `radial-gradient(circle at top left, rgba(155, 89, 182, 0.1) 0%, var(--bg-dark) 100%)`;
             container.classList.remove('visible');
 
             setTimeout(() => {
                 container.innerHTML = `
-                    <h1 class="entry-title">${post.title}</h1>
+                    <header class="entry-preview-header">
+                        <p class="entry-label">Selected Signal</p>
+                        <h1 class="entry-title">${escapeHtml(post.title)}</h1>
+                        ${deckHtml}
+                        <div class="entry-meta-strip" aria-label="Essay details">
+                            <span class="entry-meta-item"><strong>Filed</strong> ${escapeHtml(post.date)}</span>
+                            <span class="entry-meta-item"><strong>Words</strong> ${formatNumber(wordCount)}</span>
+                            <span class="entry-meta-item"><strong>Read</strong> ${readMinutes} min</span>
+                        </div>
+                    </header>
                     <div class="entry-toolbar">
-                        <div class="entry-meta">TEMPORAL_MARK: ${post.date.toUpperCase()}</div>
+                        <a class="reader-open-link" href="${escapeHtml(readerPath)}">Open Full Reader</a>
                         <div class="share-controls">
                             <button type="button" class="share-btn" onclick="sharePostLink(${index})">COPY / SHARE LINK</button>
                             <span class="share-status" id="share-status">SHAREABLE_ARCHIVE_SIGNAL</span>
                         </div>
                     </div>
-                    <div class="entry-body">${renderArchiveMarkdown(post.body, post)}</div>
+                    <div class="entry-body">${previewBody}</div>
                     <div class="entry-reactions-row">
                         <div class="entry-reactions-meta">BLOG <span aria-hidden="true">•</span> OTW</div>
                         <div class="entry-reactions" id="${reactionDomId}"></div>
@@ -1085,7 +1773,10 @@
             }
         });
 
-        window.onload = initMatrix;
+        window.addEventListener('DOMContentLoaded', () => {
+            initArchiveMode();
+            initMatrix();
+        });
     </script>
     <script async defer src="https://cdn.jsdelivr.net/gh/intersect-software/web-reactionz@1/public/setup.min.js" data-siteid="0b926b89-1467-4ef1-a8d4-ca95543047a3" data-noautoinit="1"></script>
 </body>
