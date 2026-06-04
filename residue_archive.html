@@ -77,6 +77,8 @@
             font-weight: 300;
             /* Merriweather looks best at 300 or 400 on dark backgrounds */
             letter-spacing: 0.01rem;
+            max-width: min(100%, 49rem);
+            margin-inline: auto;
             overflow-wrap: break-word;
         }
 
@@ -221,7 +223,7 @@
             -webkit-backdrop-filter: blur(40px);
             border: 1px solid rgba(145, 175, 179, 0.1);
             padding: clamp(24px, 7vw, 80px);
-            max-width: 800px;
+            max-width: 1120px;
             width: 100%;
             min-width: 0;
             box-shadow: 0 40px 100px rgba(0, 0, 0, 0.9);
@@ -546,7 +548,7 @@
 
         .archive-legal {
             width: 100%;
-            max-width: 800px;
+            max-width: 1120px;
             padding: 18px clamp(12px, 4vw, 20px) 28px;
             text-align: center;
             color: rgba(224, 224, 224, 0.5);
@@ -996,7 +998,7 @@
         }
 
         .glass-card {
-            max-width: 860px;
+            max-width: 1120px;
             flex: 0 0 auto;
             background: var(--archive-surface);
             border: 1px solid var(--archive-border);
@@ -1046,7 +1048,7 @@
         }
 
         .entry-deck {
-            max-width: 36rem;
+            max-width: 44rem;
             margin: clamp(16px, 3vw, 24px) 0 0;
             color: var(--archive-muted);
             font-family: 'Merriweather', serif;
@@ -1110,6 +1112,8 @@
             color: var(--archive-body);
             font-size: clamp(1.04rem, 2vw, 1.14rem);
             line-height: 1.82;
+            max-width: min(100%, 49rem);
+            margin-inline: auto;
         }
 
         .entry-body__opening {
@@ -1209,7 +1213,7 @@
             }
 
             .directory {
-                width: clamp(360px, 31vw, 440px);
+                width: clamp(340px, 27vw, 410px);
                 overflow-y: auto;
                 -webkit-overflow-scrolling: touch;
             }
