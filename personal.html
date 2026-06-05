@@ -125,10 +125,20 @@
             --radius-v2: 8px;
             --radius-large-v2: 12px;
             --header-height-v2: 92px;
+            --signal-field-base: linear-gradient(180deg, #080a0f 0%, #05070a 52%, #030405 100%);
+            --signal-field-blue: rgba(99, 149, 238, 0.2);
+            --signal-field-teal: rgba(145, 175, 179, 0.14);
+            --signal-field-amber: rgba(255, 179, 71, 0.09);
+            --signal-field-amethyst: rgba(155, 89, 182, 0.12);
+            --signal-field-rose: rgba(224, 191, 184, 0.08);
+            --signal-field-rail: rgba(160, 190, 245, 0.1);
+            --signal-field-rail-soft: rgba(160, 190, 245, 0.045);
+            --signal-field-vignette: rgba(0, 0, 0, 0.38);
+            --signal-field-grain: rgba(255, 255, 255, 0.055);
         }
 
         [data-theme="light"] {
-            --bg-v2: #f3f6fb;
+            --bg-v2: #f6f2ea;
             --bg-deep-v2: #e7eef8;
             --surface-v2: rgba(255, 255, 255, 0.78);
             --surface-strong-v2: rgba(255, 255, 255, 0.94);
@@ -141,6 +151,16 @@
             --shadow-v2: 0 24px 70px rgba(30, 49, 77, 0.16);
             --glow-v2: 0 0 30px rgba(35, 74, 157, 0.12);
             --focus-v2: 0 0 0 3px rgba(35, 74, 157, 0.28);
+            --signal-field-base: linear-gradient(180deg, #f6f2ea 0%, #f3f6fb 48%, #e8eef7 100%);
+            --signal-field-blue: rgba(99, 149, 238, 0.13);
+            --signal-field-teal: rgba(145, 175, 179, 0.09);
+            --signal-field-amber: rgba(255, 179, 71, 0.08);
+            --signal-field-amethyst: rgba(155, 89, 182, 0.07);
+            --signal-field-rose: rgba(183, 119, 96, 0.07);
+            --signal-field-rail: rgba(35, 74, 157, 0.09);
+            --signal-field-rail-soft: rgba(22, 48, 82, 0.038);
+            --signal-field-vignette: rgba(47, 58, 70, 0.16);
+            --signal-field-grain: rgba(16, 23, 39, 0.06);
         }
 
         *,
@@ -159,9 +179,12 @@
             min-height: 100vh;
             margin: 0;
             background:
-                radial-gradient(circle at 18% 0%, rgba(99, 149, 238, 0.18), transparent 32rem),
-                radial-gradient(circle at 88% 8%, rgba(145, 175, 179, 0.14), transparent 30rem),
-                linear-gradient(180deg, var(--bg-v2), var(--bg-deep-v2));
+                radial-gradient(ellipse at 18% 4%, var(--signal-field-blue), transparent 34rem),
+                radial-gradient(ellipse at 88% 16%, var(--signal-field-teal), transparent 32rem),
+                radial-gradient(ellipse at 16% 52%, var(--signal-field-amber), transparent 38rem),
+                radial-gradient(ellipse at 82% 88%, var(--signal-field-amethyst), transparent 42rem),
+                radial-gradient(ellipse at 52% 115%, var(--signal-field-rose), transparent 34rem),
+                var(--signal-field-base);
             color: var(--text-v2);
             font-family: var(--font-sans-v2);
             overflow-x: hidden;
@@ -176,20 +199,15 @@
             z-index: 0;
             pointer-events: none;
             background:
-                linear-gradient(to right, rgba(160, 190, 245, 0.044) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(145, 175, 179, 0.03) 1px, transparent 1px),
-                linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 42%);
-            background-size: 76px 76px, 76px 76px, 100% 100%;
-            opacity: 0.82;
-            mask-image: linear-gradient(180deg, black, black 58%, transparent 100%);
+                linear-gradient(90deg, var(--signal-field-rail) 0 1px, transparent 1px calc(100% - 1px), var(--signal-field-rail) calc(100% - 1px)),
+                linear-gradient(180deg, var(--signal-field-rail-soft) 0 1px, transparent 1px 88%, var(--signal-field-rail-soft)),
+                radial-gradient(ellipse at 50% -16%, rgba(255, 255, 255, 0.04), transparent 30rem),
+                radial-gradient(ellipse at 50% 112%, var(--signal-field-vignette), transparent 42rem);
+            opacity: 0.88;
         }
 
         [data-theme="light"] body::before {
-            opacity: 0.5;
-            background:
-                linear-gradient(to right, rgba(35, 74, 157, 0.045) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(10, 108, 112, 0.032) 1px, transparent 1px);
-            background-size: 76px 76px;
+            opacity: 0.72;
         }
 
         body::after {
@@ -198,20 +216,17 @@
             inset: 0;
             z-index: 0;
             pointer-events: none;
-            background: repeating-linear-gradient(
-                180deg,
-                rgba(255, 255, 255, 0.018) 0,
-                rgba(255, 255, 255, 0.018) 1px,
-                transparent 1px,
-                transparent 8px
-            );
-            opacity: 0.42;
-            mix-blend-mode: screen;
+            background:
+                radial-gradient(circle at 20% 18%, var(--signal-field-grain) 0 1px, transparent 1.4px),
+                radial-gradient(circle at 72% 68%, var(--signal-field-grain) 0 1px, transparent 1.4px),
+                linear-gradient(180deg, transparent 0%, var(--signal-field-vignette) 100%);
+            background-size: 180px 180px, 240px 240px, 100% 100%;
+            background-position: 0 0, 68px 86px, 0 0;
+            opacity: 0.18;
         }
 
         [data-theme="light"] body::after {
-            opacity: 0.14;
-            mix-blend-mode: multiply;
+            opacity: 0.12;
         }
 
         a {
@@ -597,14 +612,14 @@
             inset: 0;
             pointer-events: none;
             background:
-                linear-gradient(90deg, rgba(255, 255, 255, 0.06), transparent 28%, transparent 72%, rgba(255, 255, 255, 0.035)),
-                repeating-linear-gradient(180deg, rgba(255, 255, 255, 0.024) 0, rgba(255, 255, 255, 0.024) 1px, transparent 1px, transparent 9px);
-            opacity: 0.58;
+                linear-gradient(110deg, rgba(255, 255, 255, 0.052), transparent 30%, transparent 74%, rgba(255, 255, 255, 0.028)),
+                radial-gradient(circle at 18% 0%, rgba(160, 190, 245, 0.045), transparent 42%);
+            opacity: 0.44;
         }
 
         [data-theme="light"] .panel::before,
         [data-theme="light"] .module-card::before {
-            opacity: 0.28;
+            opacity: 0.2;
         }
 
         .eyebrow,
@@ -916,7 +931,7 @@
         .recent-stack {
             border-top: 1px solid var(--line-v2);
             background:
-                linear-gradient(90deg, rgba(99, 149, 238, 0.14), rgba(255, 79, 216, 0.11) 33%, rgba(217, 192, 140, 0.12) 66%, rgba(75, 227, 110, 0.12)),
+                linear-gradient(90deg, rgba(99, 149, 238, 0.14), rgba(145, 175, 179, 0.12) 33%, rgba(99, 149, 238, 0.11) 66%, rgba(145, 175, 179, 0.1)),
                 linear-gradient(180deg, var(--surface-muted-v2), transparent);
         }
 
@@ -929,6 +944,9 @@
         .recent-link {
             --recent-accent: var(--brand-blue-v2);
             --recent-glow: rgba(99, 149, 238, 0.22);
+            --recent-orbit: circle at 16% 10%;
+            --recent-sweep: 135deg;
+            --recent-rule-direction: 90deg;
             position: relative;
             min-height: 152px;
             overflow: hidden;
@@ -938,8 +956,8 @@
             gap: 16px;
             border-right: 1px solid var(--line-v2);
             background:
-                radial-gradient(circle at 16% 10%, color-mix(in srgb, var(--recent-accent) 34%, transparent), transparent 48%),
-                linear-gradient(135deg, color-mix(in srgb, var(--recent-accent) 14%, transparent), transparent 54%),
+                radial-gradient(var(--recent-orbit), color-mix(in srgb, var(--recent-accent) 34%, transparent), transparent 48%),
+                linear-gradient(var(--recent-sweep), color-mix(in srgb, var(--recent-accent) 14%, transparent), transparent 54%),
                 linear-gradient(180deg, rgba(255, 255, 255, 0.025), transparent 58%);
             color: var(--text-v2);
             text-decoration: none;
@@ -951,18 +969,25 @@
         }
 
         .recent-link:nth-child(2) {
-            --recent-accent: #ff4fd8;
-            --recent-glow: rgba(255, 79, 216, 0.28);
+            --recent-accent: var(--brand-teal-v2);
+            --recent-glow: rgba(145, 175, 179, 0.2);
+            --recent-orbit: circle at 18% 18%;
         }
 
         .recent-link:nth-child(3) {
-            --recent-accent: #d9c08c;
-            --recent-glow: rgba(217, 192, 140, 0.26);
+            --recent-accent: var(--brand-blue-v2);
+            --recent-glow: rgba(99, 149, 238, 0.2);
+            --recent-orbit: circle at 84% 14%;
+            --recent-sweep: 225deg;
+            --recent-rule-direction: 270deg;
         }
 
         .recent-link:nth-child(4) {
-            --recent-accent: #4be36e;
-            --recent-glow: rgba(75, 227, 110, 0.25);
+            --recent-accent: var(--brand-teal-v2);
+            --recent-glow: rgba(145, 175, 179, 0.18);
+            --recent-orbit: circle at 82% 82%;
+            --recent-sweep: 225deg;
+            --recent-rule-direction: 270deg;
         }
 
         .recent-link::before,
@@ -975,7 +1000,7 @@
         .recent-link::before {
             inset: 0 0 auto;
             height: 3px;
-            background: linear-gradient(90deg, var(--recent-accent), transparent 88%);
+            background: linear-gradient(var(--recent-rule-direction), var(--recent-accent), transparent 88%);
             opacity: 0.82;
         }
 
@@ -993,12 +1018,19 @@
             border-right: 0;
         }
 
+        .recent-link:nth-child(n + 3)::after {
+            right: auto;
+            left: 16px;
+            border-right: 0;
+            border-left: 1px solid color-mix(in srgb, var(--recent-accent) 58%, transparent);
+        }
+
         .recent-link:hover,
         .recent-link:focus-visible {
             border-color: color-mix(in srgb, var(--recent-accent) 42%, var(--line-v2));
             background:
-                radial-gradient(circle at 16% 10%, color-mix(in srgb, var(--recent-accent) 48%, transparent), transparent 50%),
-                linear-gradient(135deg, color-mix(in srgb, var(--recent-accent) 20%, transparent), transparent 56%),
+                radial-gradient(var(--recent-orbit), color-mix(in srgb, var(--recent-accent) 48%, transparent), transparent 50%),
+                linear-gradient(var(--recent-sweep), color-mix(in srgb, var(--recent-accent) 20%, transparent), transparent 56%),
                 linear-gradient(180deg, rgba(255, 255, 255, 0.045), transparent 58%);
             box-shadow:
                 inset 0 0 0 1px color-mix(in srgb, var(--recent-accent) 26%, transparent),
@@ -1056,22 +1088,22 @@
 
         [data-theme="light"] .recent-stack {
             background:
-                linear-gradient(90deg, rgba(99, 149, 238, 0.16), rgba(255, 79, 216, 0.12) 33%, rgba(217, 192, 140, 0.16) 66%, rgba(75, 227, 110, 0.14)),
+                linear-gradient(90deg, rgba(99, 149, 238, 0.15), rgba(145, 175, 179, 0.13) 33%, rgba(99, 149, 238, 0.12) 66%, rgba(145, 175, 179, 0.12)),
                 linear-gradient(180deg, var(--surface-muted-v2), transparent);
         }
 
         [data-theme="light"] .recent-link {
             background:
-                radial-gradient(circle at 16% 10%, color-mix(in srgb, var(--recent-accent) 25%, transparent), transparent 48%),
-                linear-gradient(135deg, color-mix(in srgb, var(--recent-accent) 11%, transparent), transparent 54%),
+                radial-gradient(var(--recent-orbit), color-mix(in srgb, var(--recent-accent) 25%, transparent), transparent 48%),
+                linear-gradient(var(--recent-sweep), color-mix(in srgb, var(--recent-accent) 11%, transparent), transparent 54%),
                 linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.18));
         }
 
         [data-theme="light"] .recent-link:hover,
         [data-theme="light"] .recent-link:focus-visible {
             background:
-                radial-gradient(circle at 16% 10%, color-mix(in srgb, var(--recent-accent) 36%, transparent), transparent 50%),
-                linear-gradient(135deg, color-mix(in srgb, var(--recent-accent) 16%, transparent), transparent 56%),
+                radial-gradient(var(--recent-orbit), color-mix(in srgb, var(--recent-accent) 36%, transparent), transparent 50%),
+                linear-gradient(var(--recent-sweep), color-mix(in srgb, var(--recent-accent) 16%, transparent), transparent 56%),
                 linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.22));
         }
 
@@ -1106,10 +1138,10 @@
             inset: 0;
             z-index: -1;
             background:
-                linear-gradient(90deg, rgba(255, 255, 255, 0.08), transparent 22%, transparent 78%, rgba(255, 255, 255, 0.04)),
-                repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.055) 0 1px, transparent 1px 34px),
-                repeating-linear-gradient(180deg, rgba(255, 255, 255, 0.045) 0 1px, transparent 1px 34px);
-            opacity: 0.56;
+                radial-gradient(circle at 82% 18%, rgba(255, 255, 255, 0.12), transparent 34%),
+                radial-gradient(circle at 20% 86%, rgba(255, 255, 255, 0.08), transparent 38%),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.08), transparent 26%, transparent 76%, rgba(255, 255, 255, 0.04));
+            opacity: 0.4;
             pointer-events: none;
         }
 
@@ -1848,11 +1880,6 @@
             grid-template-columns: repeat(2, minmax(0, 1fr));
         }
 
-        .room-stack {
-            display: grid;
-            gap: 14px;
-        }
-
         .deep-card {
             min-height: 0;
             border-radius: var(--radius-large-v2);
@@ -2206,8 +2233,12 @@
                 --header-height-v2: auto;
             }
 
+            body::before {
+                opacity: 0.58;
+            }
+
             body::after {
-                opacity: 0.22;
+                opacity: 0.08;
             }
 
             .interface-header {
@@ -2697,7 +2728,7 @@
             <section class="deep-zone" aria-labelledby="archive-rooms-title" style="--zone-tone: var(--brand-teal-v2);">
                 <div class="zone-heading">
                     <h3 id="archive-rooms-title">Archives / Memory</h3>
-                    <p>Modern signal, static past, and the small logbook of site changes.</p>
+                    <p>Modern signal and static past: the living archive beside the older residue.</p>
                 </div>
                 <div class="room-map room-map--archive">
                     <a class="module-card deep-card deep-card--primary" href="residue_archive.html" data-tone="teal">
@@ -2709,25 +2740,14 @@
                         <span class="module-cta">Open Archive</span>
                     </a>
 
-                    <div class="room-stack">
-                        <a class="module-card deep-card deep-card--quiet" href="wayback.html" data-tone="rose">
-                            <span class="module-kicker">THE STATIC PAST</span>
-                            <div>
-                                <h3>The Old Archive</h3>
-                                <p>Historical residue from 2001 to 2025.</p>
-                            </div>
-                            <span class="module-cta">Access Past</span>
-                        </a>
-
-                        <a class="module-card deep-card deep-card--quiet" href="change_log.html" data-tone="teal">
-                            <span class="module-kicker" id="changelog-latest-meta">LATEST_PATCH_NOTES</span>
-                            <div>
-                                <h3>Change Log</h3>
-                                <p id="changelog-latest-text">Recent fixes, features, and site edits - chronicle of the residue.</p>
-                            </div>
-                            <span class="module-cta">Open Change Log</span>
-                        </a>
-                    </div>
+                    <a class="module-card deep-card deep-card--quiet" href="wayback.html" data-tone="rose">
+                        <span class="module-kicker">THE STATIC PAST</span>
+                        <div>
+                            <h3>The Old Archive</h3>
+                            <p>Historical residue from 2001 to 2025.</p>
+                        </div>
+                        <span class="module-cta">Access Past</span>
+                    </a>
                 </div>
             </section>
 
@@ -3240,28 +3260,6 @@
             }
         }
 
-        async function hydrateChangelog() {
-            const textEl = document.getElementById('changelog-latest-text');
-            const metaEl = document.getElementById('changelog-latest-meta');
-            if (!textEl || !metaEl) return;
-
-            try {
-                const response = await fetch('./changelog.json', { cache: 'no-store' });
-                if (!response.ok) throw new Error(`HTTP_${response.status}`);
-
-                const entries = await response.json();
-                if (!Array.isArray(entries) || !entries.length) throw new Error('NO_CHANGELOG');
-
-                const latest = entries.slice().sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')))[0];
-                if (latest?.text) textEl.textContent = String(latest.text);
-                metaEl.textContent = latest?.date
-                    ? `LATEST // ${latest.date} // ${(latest.type || 'Other').toUpperCase()}`
-                    : `LATEST // ${(latest?.type || 'Other').toUpperCase()}`;
-            } catch (error) {
-                metaEl.textContent = 'LATEST // UNAVAILABLE';
-            }
-        }
-
         async function hydrateIotd() {
             const imageEl = document.getElementById('iotd-image');
             const dateEl = document.getElementById('iotd-date');
@@ -3455,7 +3453,6 @@
             initThemeToggle();
             hydrateNarrative();
             syncMusicSignal();
-            hydrateChangelog();
             hydrateIotd();
             initJumpButtons();
             initShirtToggle();
