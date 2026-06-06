@@ -1485,40 +1485,152 @@
         }
 
         .quick-grid {
+            position: relative;
+            isolation: isolate;
+            overflow: hidden;
             display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
+            grid-template-rows: repeat(2, minmax(0, 1fr));
+            border-color: color-mix(in srgb, var(--brand-teal-v2) 34%, transparent);
+            background:
+                radial-gradient(circle at 0% 0%, rgba(255, 179, 71, 0.14), transparent 36%),
+                radial-gradient(circle at 100% 0%, rgba(145, 175, 179, 0.16), transparent 38%),
+                radial-gradient(circle at 0% 100%, rgba(160, 190, 245, 0.15), transparent 42%),
+                radial-gradient(circle at 100% 100%, rgba(155, 89, 182, 0.16), transparent 40%),
+                linear-gradient(145deg, rgba(99, 149, 238, 0.08), rgba(145, 175, 179, 0.035) 48%, transparent),
+                var(--surface-v2);
+            box-shadow:
+                var(--shadow-v2),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.025);
+        }
+
+        .quick-grid::before,
+        .quick-grid::after {
+            content: "";
+            position: absolute;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .quick-grid::before {
+            inset: 50% auto auto 50%;
+            width: 34px;
+            height: 34px;
+            border: 1px solid color-mix(in srgb, var(--brand-light-blue-v2) 34%, transparent);
+            border-radius: 999px;
+            background:
+                radial-gradient(circle, rgba(160, 190, 245, 0.2) 0 2px, transparent 3px),
+                color-mix(in srgb, var(--bg-v2) 72%, transparent);
+            box-shadow:
+                0 0 18px rgba(99, 149, 238, 0.14),
+                inset 0 0 12px rgba(145, 175, 179, 0.08);
+            transform: translate(-50%, -50%);
+            opacity: 0.78;
+        }
+
+        .quick-grid::after {
+            inset: 50% auto auto 50%;
+            width: 72px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--brand-light-blue-v2) 42%, transparent), transparent);
+            box-shadow: 0 0 0 1px transparent, 0 0 18px rgba(99, 149, 238, 0.12);
+            transform: translate(-50%, -50%);
+            opacity: 0.62;
         }
 
         .quick-card {
             --quick-tone: var(--brand-teal-v2);
-            min-height: 148px;
-            padding: 20px;
+            --quick-tone-secondary: var(--brand-blue-v2);
+            --quick-orbit: circle at 14% 14%;
+            --quick-sweep: 135deg;
+            position: relative;
+            z-index: 1;
+            min-height: 158px;
+            padding: 22px;
             display: grid;
             align-content: space-between;
-            gap: 12px;
-            border-right: 1px solid rgba(145, 175, 179, 0.16);
-            border-bottom: 1px solid rgba(145, 175, 179, 0.16);
+            gap: 14px;
+            border-right: 1px solid color-mix(in srgb, var(--quick-tone) 28%, transparent);
+            border-bottom: 1px solid color-mix(in srgb, var(--quick-tone) 28%, transparent);
             background:
-                linear-gradient(135deg, color-mix(in srgb, var(--quick-tone) 12%, transparent), transparent 68%);
+                radial-gradient(var(--quick-orbit), color-mix(in srgb, var(--quick-tone) 28%, transparent), transparent 48%),
+                linear-gradient(var(--quick-sweep), color-mix(in srgb, var(--quick-tone-secondary) 12%, transparent), transparent 64%);
             color: var(--text-v2);
             text-decoration: none;
-            transition: background-color 160ms ease, transform 160ms ease;
+            transition:
+                background-color 180ms ease,
+                border-color 180ms ease,
+                box-shadow 180ms ease,
+                transform 180ms ease;
+        }
+
+        .quick-card::before,
+        .quick-card::after {
+            content: "";
+            position: absolute;
+            pointer-events: none;
+        }
+
+        .quick-card::before {
+            inset: 0;
+            z-index: 0;
+            background:
+                radial-gradient(circle at 50% 0%, color-mix(in srgb, var(--quick-tone) 16%, transparent), transparent 45%),
+                linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 56%);
+            opacity: 0;
+            transition: opacity 180ms ease;
+        }
+
+        .quick-card::after {
+            z-index: 1;
+            right: 16px;
+            bottom: 16px;
+            width: 18px;
+            height: 18px;
+            border-right: 2px solid color-mix(in srgb, var(--quick-tone) 68%, transparent);
+            border-bottom: 2px solid color-mix(in srgb, var(--quick-tone) 68%, transparent);
+            opacity: 0.58;
+            transition: opacity 180ms ease, transform 180ms ease;
         }
 
         .quick-card[data-tone="amber"] {
             --quick-tone: var(--warm-amber-v2);
+            --quick-tone-secondary: var(--rose-gold-v2);
         }
 
         .quick-card[data-tone="teal"] {
             --quick-tone: var(--brand-teal-v2);
+            --quick-tone-secondary: var(--brand-blue-v2);
         }
 
         .quick-card[data-tone="rose"] {
             --quick-tone: var(--rose-gold-v2);
+            --quick-tone-secondary: var(--warm-amber-v2);
         }
 
         .quick-card[data-tone="light-blue"] {
             --quick-tone: var(--brand-light-blue-v2);
+            --quick-tone-secondary: var(--amethyst-v2);
+        }
+
+        .quick-card[data-tone="amethyst"] {
+            --quick-tone: var(--amethyst-v2);
+            --quick-tone-secondary: var(--brand-blue-v2);
+        }
+
+        .quick-card:nth-child(2) {
+            --quick-orbit: circle at 86% 14%;
+            --quick-sweep: 225deg;
+        }
+
+        .quick-card:nth-child(3) {
+            --quick-orbit: circle at 14% 86%;
+            --quick-sweep: 45deg;
+        }
+
+        .quick-card:nth-child(4) {
+            --quick-orbit: circle at 86% 86%;
+            --quick-sweep: 315deg;
         }
 
         .quick-card:nth-child(2n) {
@@ -1530,29 +1642,72 @@
         }
 
         .quick-card:hover {
+            border-color: color-mix(in srgb, var(--quick-tone) 52%, transparent);
             background:
-                linear-gradient(135deg, color-mix(in srgb, var(--quick-tone) 18%, transparent), transparent 68%),
+                radial-gradient(var(--quick-orbit), color-mix(in srgb, var(--quick-tone) 38%, transparent), transparent 50%),
+                linear-gradient(var(--quick-sweep), color-mix(in srgb, var(--quick-tone-secondary) 18%, transparent), transparent 66%),
                 rgba(255, 255, 255, 0.035);
+            box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--quick-tone) 22%, transparent);
+            transform: translateY(-1px);
+        }
+
+        .quick-card:hover::before,
+        .quick-card:focus::before,
+        .quick-card:focus-visible::before {
+            opacity: 1;
+        }
+
+        .quick-card:hover::after,
+        .quick-card:focus::after,
+        .quick-card:focus-visible::after {
+            opacity: 0.95;
+            transform: translate(2px, 2px);
+        }
+
+        .quick-card:focus,
+        .quick-card:focus-visible {
+            outline: 2px solid var(--quick-tone);
+            outline-offset: -3px;
+            border-color: var(--quick-tone);
+            box-shadow:
+                inset 0 0 0 1px var(--quick-tone),
+                var(--focus-v2);
         }
 
         .quick-icon {
-            width: 38px;
-            height: 38px;
+            position: relative;
+            z-index: 1;
+            width: 48px;
+            height: 48px;
             color: color-mix(in srgb, var(--quick-tone) 82%, var(--text-v2));
-            filter: drop-shadow(0 0 14px color-mix(in srgb, var(--quick-tone) 24%, transparent));
+            filter: drop-shadow(0 0 16px color-mix(in srgb, var(--quick-tone) 28%, transparent));
+            transition: color 180ms ease, filter 180ms ease, transform 180ms ease;
+        }
+
+        .quick-card:hover .quick-icon,
+        .quick-card:focus .quick-icon,
+        .quick-card:focus-visible .quick-icon {
+            color: color-mix(in srgb, var(--quick-tone) 92%, var(--text-v2));
+            filter: drop-shadow(0 0 22px color-mix(in srgb, var(--quick-tone) 42%, transparent));
+            transform: translateY(-1px);
         }
 
         .quick-card strong {
+            position: relative;
+            z-index: 1;
             color: var(--text-v2);
             font-family: var(--font-serif-v2);
-            font-size: 1.08rem;
+            font-size: 1.18rem;
             line-height: 1.2;
         }
 
         .quick-card span {
-            color: var(--text-faint-v2);
+            position: relative;
+            z-index: 1;
+            color: color-mix(in srgb, var(--text-soft-v2) 82%, var(--quick-tone));
             font-family: var(--font-code-v2);
             font-size: 0.55rem;
+            font-weight: 700;
             letter-spacing: 0.13em;
             text-transform: uppercase;
         }
@@ -2398,6 +2553,10 @@
                 grid-template-columns: 1fr;
             }
 
+            .quick-grid {
+                grid-template-rows: none;
+            }
+
             .deep-rooms {
                 gap: 42px;
             }
@@ -2422,6 +2581,11 @@
             .quick-card,
             .quick-card:nth-child(2n) {
                 border-right: 0;
+            }
+
+            .quick-grid::before,
+            .quick-grid::after {
+                display: none;
             }
 
             .quick-card:nth-last-child(-n + 2) {
@@ -2678,14 +2842,14 @@
                         <strong>The Drift</strong>
                         <span>Published Poetry</span>
                     </a>
-                    <a class="quick-card" href="frgmnts.html" data-tone="light-blue">
+                    <a class="quick-card" href="fragments.html" data-tone="amethyst">
                         <svg class="quick-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
                             <path d="M12 12h10v10H12zM26 10h10v10H26zM14 27h9v9H14zM28 28h8v8h-8z" fill="none"
                                 stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
                             <path d="M22 17h4M23 31h5M18 22v5M32 20v8" fill="none" stroke="currentColor"
                                 stroke-width="2" stroke-linecap="round" opacity="0.68" />
                         </svg>
-                        <strong>frgmnts</strong>
+                        <strong>frgmnts prvw</strong>
                         <span>Anti-Social Signal</span>
                     </a>
                 </nav>
