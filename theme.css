@@ -132,18 +132,22 @@ body::after {
 
 .otw-figure--x-small {
     --otw-figure-max-width: 220px;
+    --otw-figure-wrap-width: 180px;
 }
 
 .otw-figure--small {
     --otw-figure-max-width: 320px;
+    --otw-figure-wrap-width: 240px;
 }
 
 .otw-figure--medium {
     --otw-figure-max-width: 520px;
+    --otw-figure-wrap-width: 340px;
 }
 
 .otw-figure--large {
     --otw-figure-max-width: 760px;
+    --otw-figure-wrap-width: 460px;
 }
 
 .otw-figure--x-small,
@@ -162,6 +166,7 @@ body::after {
 
 .otw-figure--original {
     --otw-figure-max-width: 100%;
+    --otw-figure-wrap-width: 52%;
 }
 
 .otw-figure--align-left {
@@ -182,8 +187,8 @@ body::after {
 .otw-figure--wrap-left,
 .otw-figure--wrap-right {
     clear: none;
-    width: min(45%, var(--otw-figure-max-width, 520px));
-    max-width: min(45%, var(--otw-figure-max-width, 520px));
+    width: min(100%, var(--otw-figure-wrap-width, 340px));
+    max-width: min(100%, var(--otw-figure-wrap-width, 340px));
     margin-top: 0.35rem;
     margin-bottom: 1rem;
 }

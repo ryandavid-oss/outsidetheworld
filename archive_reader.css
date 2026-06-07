@@ -442,11 +442,30 @@ html[data-reader-mode="light"] .entry-body img {
     text-align: center;
 }
 
-.entry-body .otw-figure--x-small { --otw-figure-max-width: 220px; }
-.entry-body .otw-figure--small { --otw-figure-max-width: 320px; }
-.entry-body .otw-figure--medium { --otw-figure-max-width: 520px; }
-.entry-body .otw-figure--large { --otw-figure-max-width: 760px; }
-.entry-body .otw-figure--original { --otw-figure-max-width: 100%; }
+.entry-body .otw-figure--x-small {
+    --otw-figure-max-width: 220px;
+    --otw-figure-wrap-width: 180px;
+}
+
+.entry-body .otw-figure--small {
+    --otw-figure-max-width: 320px;
+    --otw-figure-wrap-width: 240px;
+}
+
+.entry-body .otw-figure--medium {
+    --otw-figure-max-width: 520px;
+    --otw-figure-wrap-width: 340px;
+}
+
+.entry-body .otw-figure--large {
+    --otw-figure-max-width: 760px;
+    --otw-figure-wrap-width: 460px;
+}
+
+.entry-body .otw-figure--original {
+    --otw-figure-max-width: 100%;
+    --otw-figure-wrap-width: 52%;
+}
 
 .entry-body .otw-figure--x-small,
 .entry-body .otw-figure--small,
@@ -480,8 +499,8 @@ html[data-reader-mode="light"] .entry-body img {
 .entry-body .otw-figure--wrap-left,
 .entry-body .otw-figure--wrap-right {
     clear: none;
-    width: min(42%, var(--otw-figure-max-width, 520px));
-    max-width: min(42%, var(--otw-figure-max-width, 520px));
+    width: min(100%, var(--otw-figure-wrap-width, 340px));
+    max-width: min(100%, var(--otw-figure-wrap-width, 340px));
     margin-top: 0.45rem;
     margin-bottom: 1rem;
 }
