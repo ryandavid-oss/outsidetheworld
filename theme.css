@@ -19,6 +19,10 @@
     --nav-logo-width: 220px;
     --nav-logo-mobile-width: 80vw;
     --nav-logo-mobile-max: 350px;
+    --otw-published-image-shadow:
+        0 20px 52px rgba(238, 238, 238, 0.13),
+        0 5px 22px rgba(160, 190, 245, 0.1),
+        0 18px 44px rgba(0, 0, 0, 0.42);
 
     /* SHARED TYPOGRAPHY */
     --font-main: 'Inter', sans-serif;
@@ -120,6 +124,7 @@ body::after {
     max-width: 100%;
     height: auto;
     margin: 0 auto;
+    box-shadow: var(--otw-published-image-shadow);
 }
 
 .otw-figure figcaption {
