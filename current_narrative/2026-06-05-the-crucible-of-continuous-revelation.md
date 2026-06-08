@@ -1,5 +1,5 @@
 # The Crucible of Continuous Revelation
-Date: June 5, 2026
+Date: June 7, 2026
 
 <!-- otw-publisher
 {
@@ -323,8 +323,8 @@ Date: June 5, 2026
     {
       "id": "heading_mq02rr08_rlusgx",
       "type": "heading",
-      "html": "The Hazard of Steadying the Ark\u003cspan\u003eThe line is not always ours to move.\u003c/span\u003e",
-      "text": "The Hazard of Steadying the ArkThe line is not always ours to move.",
+      "html": "The Hazard of Steadying the Ark",
+      "text": "The Hazard of Steadying the Ark",
       "level": 3
     },
     {
@@ -1290,14 +1290,8 @@ Date: June 5, 2026
     {
       "id": "paragraph_mq2vk5rc_xuvaux",
       "type": "paragraph",
-      "html": "The crucible this debate creates does not \u003cb\u003eresolve\u003c/b\u003e the tension. It \u003cb\u003erefines\u003c/b\u003e the people willing to",
-      "text": "The crucible this debate creates does not resolve the tension. It refines the people willing to"
-    },
-    {
-      "id": "p_mq2w1pm4_vg6tin",
-      "type": "paragraph",
-      "html": "stay inside it.\u003cspan\u003eA path through holy heat.\u003c/span\u003e\u003cspan\u003eA path through holy heat.\u003c/span\u003e",
-      "text": "stay inside it.A path through holy heat.A path through holy heat."
+      "html": "The crucible this debate creates does not \u003cb\u003eresolve\u003c/b\u003e the tension. It \u003cb\u003erefines\u003c/b\u003e the people willing to stay inside it.",
+      "text": "The crucible this debate creates does not resolve the tension. It refines the people willing to stay inside it."
     },
     {
       "id": "paragraph_mq2vk5rc_b3lu8t",
@@ -1399,7 +1393,7 @@ Date: June 5, 2026
       "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kevfy.jpg",
       "objectKey": "narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kevfy.jpg",
       "alt": "Narrative image",
-      "caption": "The line is not always our to move",
+      "caption": "",
       "displaySize": "medium",
       "alignment": "center",
       "wrapMode": "wrap-left"
@@ -1570,9 +1564,9 @@ It is not a broken path but the wrong road entirely; one that, however beautiful
 
 This is the most honest presentation of the traditional case.
 
-### The Hazard of Steadying the ArkThe line is not always ours to move.
+### The Hazard of Steadying the Ark
 
-![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kevfy.jpg "The line is not always our to move")
+![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kevfy.jpg)
 
 The third pillar of the orthodox argument is not about theology at all. And it is specifically Latter-day Saint in character. It is the question of **authority**.
 
@@ -1880,9 +1874,7 @@ But they do not tell us the timetable. They do not tell us the content. And they
 
 ![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq2w1prt.jpg "Faith does not always arrive. Sometimes it continues.")
 
-The crucible this debate creates does not **resolve** the tension. It **refines** the people willing to
-
-stay inside it.A path through holy heat.A path through holy heat.
+The crucible this debate creates does not **resolve** the tension. It **refines** the people willing to stay inside it.
 
 That is how the orthodox and affirming claims can sit together without pretending to agree. They do not cancel each other out. They press against each other, painfully and honestly, until something deeper is required of everyone involved.
 
