@@ -2126,6 +2126,7 @@
     let panelUpdateFrame = 0;
     let isSyncingImageInspector = false;
     let removedFigureUndo = null;
+    let lastPublishError = null;
     const lineSpacingValues = ['1.0', '1.15', '1.5', '2.0'];
     const lineSpacingClasses = {
       '1.0': 'line-spacing-10',
@@ -4122,6 +4123,14 @@
       structureAlerts.append(item);
     }
 
+    function orderedPanelIssues(issues = []) {
+      return [...issues].sort((left, right) => {
+        const leftWeight = left.level === 'error' ? 0 : 1;
+        const rightWeight = right.level === 'error' ? 0 : 1;
+        return leftWeight - rightWeight;
+      });
+    }
+
     function focusStructureTarget(target) {
       if (!target) {
         return;
@@ -4223,9 +4232,12 @@
       const bodyCount = blocks.filter((block) => blockHasContent(block)).length;
       const { wordCount, readMinutes } = articleReadingMetrics(article);
       const validation = payload?.validation || {};
-      const issues = validation.issues || [];
+      const issues = [
+        ...(lastPublishError ? [lastPublishError] : []),
+        ...(validation.issues || [])
+      ];
 
-      structureReadiness.textContent = validation.readiness || 'Local draft';
+      structureReadiness.textContent = lastPublishError ? 'Publish failed' : (validation.readiness || 'Local draft');
       structureStats.replaceChildren();
       appendStructureStat('Words', formatStatNumber(wordCount));
       appendStructureStat('Read', readMinutes ? `${readMinutes} min` : '0 min');
@@ -4235,7 +4247,14 @@
 
       structureAlerts.replaceChildren();
       if (issues.length) {
-        issues.slice(0, 3).forEach(appendPanelAlert);
+        const visibleIssues = orderedPanelIssues(issues).slice(0, 4);
+        visibleIssues.forEach(appendPanelAlert);
+        if (issues.length > visibleIssues.length) {
+          appendPanelAlert({
+            level: 'info',
+            message: `${issues.length - visibleIssues.length} more review item${issues.length - visibleIssues.length === 1 ? '' : 's'}`
+          });
+        }
       } else {
         appendPanelAlert({ level: 'info', message: 'Ready to publish' });
       }
@@ -5066,6 +5085,22 @@
       publishBtn.textContent = isBusy ? 'Publishing' : 'Publish';
     }
 
+    function shortStatusMessage(value) {
+      const message = String(value || '').replace(/\s+/g, ' ').trim();
+      return message.length > 96 ? `${message.slice(0, 93)}...` : message;
+    }
+
+    function rememberPublishError(message) {
+      const normalized = String(message || 'Unknown publish error').trim() || 'Unknown publish error';
+      lastPublishError = issue('error', 'publish-worker-error', `Publish failed: ${normalized}`);
+      window.otwPublisherLastPublishError = {
+        message: normalized,
+        capturedAt: new Date().toISOString()
+      };
+      setReadinessLabel('Publish failed');
+      schedulePanelUpdate();
+    }
+
     function revealPublishedLink(url) {
       if (!url) {
         publishedLink.hidden = true;
@@ -5091,6 +5126,8 @@
       const payload = buildPublishPayload(article);
       publishPayload.textContent = JSON.stringify(payload, null, 2);
       window.otwPublisherPublishPayload = payload;
+      lastPublishError = null;
+      window.otwPublisherLastPublishError = null;
       if (!payload.validation.canPublish) {
         setSaveState(payload.validation.readiness || 'Publish failed', true);
         return null;
@@ -5114,6 +5151,8 @@
         const articleUrl = publishedUrlFromWorkerFile(result.file);
         revealPublishedLink(articleUrl);
         setSaveState('Published');
+        lastPublishError = null;
+        window.otwPublisherLastPublishError = null;
         window.otwPublisherLastPublish = {
           file: result.file || '',
           url: articleUrl,
@@ -5123,7 +5162,13 @@
         return result;
       } catch (error) {
         revealPublishedLink('');
-        setSaveState(error.message === 'Unauthorized' ? 'Publisher key needed' : 'Publish failed', true);
+        if (error.message === 'Unauthorized') {
+          rememberPublishError('Unauthorized. Check the publisher access key.');
+          setSaveState('Publisher key needed', true);
+        } else {
+          rememberPublishError(error.message || 'Unknown publish error');
+          setSaveState(shortStatusMessage(`Publish failed: ${error.message || 'Unknown publish error'}`), true);
+        }
         return null;
       } finally {
         setPublishBusy(false);
