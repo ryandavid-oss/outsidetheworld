@@ -1429,7 +1429,7 @@ Date: June 5, 2026
       "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4ki9cd.jpg",
       "objectKey": "narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4ki9cd.jpg",
       "alt": "Narrative image",
-      "caption": "",
+      "caption": "The text does not prioritize. We do.",
       "displaySize": "medium",
       "alignment": "center",
       "wrapMode": "wrap-left"
@@ -1664,7 +1664,7 @@ To apply their words to that situation is to use an ancient hammer on a nail the
 
 Before leaving the New Testament scriptures, there is one more thing to notice about **how we read**. Sometimes our use of the text reveals more about us than the text itself.
 
-![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4ki9cd.jpg)
+![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4ki9cd.jpg "The text does not prioritize. We do.")
 
 The “vice list” in 1 Corinthians 6:9-10 is a single catalog. Paul names those who “will not inherit the kingdom of God,” then lists them without ranking one above another: the sexually immoral, idolaters, adulterers, thieves, the greedy, drunkards, revilers, and swindlers.
 
