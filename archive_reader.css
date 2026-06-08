@@ -129,8 +129,8 @@ html[data-reader-mode="light"] body.archive-reader-page::before {
     flex: 0 0 auto;
     align-items: center;
     justify-content: center;
-    width: 34px;
-    height: 34px;
+    width: clamp(132px, 12vw, 190px);
+    min-height: 34px;
     opacity: 0.88;
     transition: opacity 180ms ease, transform 180ms ease;
 }
@@ -142,8 +142,8 @@ html[data-reader-mode="light"] body.archive-reader-page::before {
 
 .reader-mark-image {
     display: block;
-    width: 28px;
-    height: 28px;
+    width: 100%;
+    height: auto;
     object-fit: contain;
 }
 
