@@ -30,7 +30,38 @@ def extract_json_array(path: Path, pattern: str) -> list[dict]:
     match = re.search(pattern, text, re.S)
     if not match:
         raise ValueError(f"Could not find JSON array in {path.name}")
-    return json.loads(match.group(1))
+    return json.loads(read_balanced_json_array(text, match.start(1)))
+
+
+def read_balanced_json_array(text: str, start: int) -> str:
+    if start < 0 or start >= len(text) or text[start] != "[":
+        raise ValueError("JSON array start was not found")
+
+    depth = 0
+    in_string = False
+    escaping = False
+
+    for index in range(start, len(text)):
+        char = text[index]
+        if in_string:
+            if escaping:
+                escaping = False
+            elif char == "\\":
+                escaping = True
+            elif char == '"':
+                in_string = False
+            continue
+
+        if char == '"':
+            in_string = True
+        elif char == "[":
+            depth += 1
+        elif char == "]":
+            depth -= 1
+            if depth == 0:
+                return text[start:index + 1]
+
+    raise ValueError("JSON array was not closed")
 
 
 def slugify(value: str) -> str:

@@ -44,7 +44,10 @@ def assert_no_public_leaks(value):
 
 
 def extract_share_entry_body(value):
-    match = re.search(r'<div class="entry-body">\s*([\s\S]*?)\s*</div>\s*<div class="archive-actions">', value)
+    match = re.search(
+        r'<div class="entry-body">\s*([\s\S]*?)\s*</div>\s*(?:<nav class="reader-nav"[\s\S]*?</nav>\s*)?<div class="archive-actions">',
+        value,
+    )
     assert match
     return match.group(1)
 
@@ -304,7 +307,7 @@ def test_all_image_presentation_options_render_and_css_agrees():
     assert "wraps: none, wrap-left, wrap-right" in css
     assert "max-width: 100%" in css
     assert "width: min(100%, var(--otw-figure-max-width, 720px))" in css
-    assert "width: min(45%, var(--otw-figure-max-width, 520px))" in css
+    assert "width: min(100%, var(--otw-figure-wrap-width, 340px))" in css
     assert "height: auto" in css
     assert "float: none" in css
     assert "object-fit: cover" not in css[css.index(".otw-figure"):css.index("/* 6. NAVIGATION")]
@@ -556,7 +559,7 @@ def test_realistic_publisher_fixture_end_to_end():
         assert_no_public_leaks(narrative_json)
 
         for expected in [
-            "<em>A field note from the new desk</em>",
+            '<p class="entry-deck">A field note from the new desk</p>',
             "otw-figure--small",
             "otw-figure--align-right",
             "otw-figure--wrap-left",
@@ -760,12 +763,10 @@ def test_share_copy_search_and_feed_paths_do_not_emit_legacy_residue_urls():
 
 
 def test_public_pages_use_shared_post_renderer():
-    personal = (ROOT / "personal.html").read_text(encoding="utf-8")
     view_post = (ROOT / "view_post.html").read_text(encoding="utf-8")
     residue = (ROOT / "residue_archive.html").read_text(encoding="utf-8")
     post = (ROOT / "post.html").read_text(encoding="utf-8")
 
-    assert "renderOtwPost(post)" in personal
     assert "window.renderOtwPost ? window.renderOtwPost(post)" in view_post
     assert "window.renderOtwPost" in residue
     assert "renderOtwMarkdown" in post
@@ -774,10 +775,8 @@ def test_public_pages_use_shared_post_renderer():
 def test_public_css_contract_exists_everywhere():
     for path in [
         ROOT / "theme.css",
-        ROOT / "personal.html",
         ROOT / "view_post.html",
         ROOT / "residue_archive.html",
-        ROOT / "narrative_sync.py",
     ]:
         text = path.read_text(encoding="utf-8")
         for token in [

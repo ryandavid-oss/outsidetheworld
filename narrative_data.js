@@ -1,5 +1,1472 @@
 const current_narrative = [
     {
+        "title": "The Crucible of Continuous Revelation",
+        "date": "June 5, 2026",
+        "body": "_Navigating Same-Sex Relationships Within the Restoration_\n\n## **A Note Before You Read**\n\n---\n\n![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq2vjclq.jpg \"Where fire and mercy meet.\")\n\nWhat you are about to read below is the result of nearly two weeks of research, meditation,\u00a0prayer, and revision. But it is also the result of a lifelong struggle to understand the world around me, and my conscious effort to disentangle myself from rigid echo chambers and my own snuggly, comfortable confirmation bias.\n\nI am not a theologian. I love history, but I am not a historian. I am a 47-year-old person who grew up inside a faith tradition that shaped much of my inner and outer life.\u00a0It is where I learned what to do with the terrifying perspective of eternity. That tradition is The Church of Jesus Christ of Latter-day Saints, and I carry it the way you carry anything you were handed as a child: not always carefully, not always without grief, but with a deep recognition and appreciation that it made me.\n\nI have also lived long enough to accumulate a life that is complicated in the ways real lives are. I have been broken by things and rebuilt by others. I have watched people I love be told, in the loving language of doctrine, that who they are is structurally incompatible with the highest salvation. I have sat in Sunday meetings and felt the specific loneliness of holding a question that the meeting was not designed to answer. I have also felt, in those same meetings and in the quieter places of personal prayer, distant mountain tops, and desert landscapes, something that I can only describe as the presence of something real and good. I have not been able to dismiss any of those experiences. I am grateful that I have not sincerely tried to do so.\n\nWhat follows is my honest and, at times, clumsy attempt to think through one of the most contested questions at the intersection of my faith and my life: the question of same-sex and queer relationships within an ongoing Restoration. I want to be clear about what this essay is and is not. It is not an admonition. It is not a faith crisis document. It is no Reddit screed.\n\n**It is not a demand that the Church change, or a declaration that it won't. **It is an attempt to take both the traditional or \"orthodox\" case and the affirming or \"progressive\" case seriously enough to let them actually touch each other, and to do that work inside the ongoing Restoration itself, which has its own wild countenance that most of the broader cultural debate never accounts for.\n\nI say this plainly: there are chapters of Latter-day Saint history that are genuinely hard to reckon with. Not hard in a way that requires quotation marks, or in a way that can be resolved with a careful reframe. Simply hard. Men went to prison for a practice later abandoned. People were excluded from sacred ordinances for over a century on theological grounds the Church has since explicitly disavowed. These are not footnotes. I have not treated them as footnotes here.\n\nBut I have also come to believe, at great cost and over some time, that the existence of errors does not cancel out the existence of goodness and intention.\u00a0That institutions, like people, can be simultaneously broken and worth staying in relationship with. That the fire is not only where things are destroyed. It is also, sometimes, where they are made.\n\nI wrote this essay because I could not stop thinking about it.\n\nThe timing is not accidental. Themes like this fall tenderly on my heart this time of year, and I have felt an unusual urgency to be ready to publish this in June. I offer it as a small pledge to all of God\u2019s children who have wondered whether they are seen, wanted, or remembered, including those who hold this question differently than I do. I see you as best I can. I am trying to see more clearly.\n\nI offer it to you as believers, skeptics, ex-members, curious strangers, and persons I love in that same spirit. Come as you are. \u00a0Think what you think.\n\nThe crucible has room.\n\n---\n\n## The Debate We Keep Performing\n\nThere is no more polarizing and treacherous terrain in modern-day religious life than the intersection of sexuality (specifically homosexuality) and scripture. Every denomination, every seminary, every kitchen table where faith is still taken seriously has been touched by it. The argument has become so well trod, that the combatants no longer engage the actual evidence. They simply perform their side's greatest hits.\n\nConservatives cite Genesis and a handful of New Testament vice lists, declaring the matter settled. Progressives point to ancient context as if history alone can make the problem disappear. Both sides have become so practiced at arguing against the weakest version of the other that they have forgotten what the strongest version looks like.\n\nI think both sides talk past each other with tired fluency; we stopped listening to each other years ago.\n\nBut here is the problem: both positions, as people usually use them, have grown intellectually lazy. And inside Latter-day Saint theology, **both fall even shorter.**\n\nThe ongoing Restoration is not a static archive of ancient texts. It is a living system. It introduced something mainstream Christianity does not possess: living prophets,\u00a0an open canon, continuous revelation, and the belief that God has not finished speaking to mankind.\n\nThis wild card does not simplify the discussion. It makes it far more demanding and absurdly complicated. An affirming Latter-day Saint cannot simply point to what Paul did not understand about sexual orientation and call it a day. And an orthodox Latter-day Saint cannot declare the matter settled by the current prophetic position while ignoring the fact that, on more than one occasion in this Church\u2019s own history, teachings once defended as eternal have later been revised, abandoned, or disavowed.\n\nTo navigate this debate honestly inside the Restoration, we have to hold two deeply uncomfortable things at once: **the real strength of the orthodox case, and the real disruption caused by the Church\u2019s own history.**\n\nAnyone who finds this easy has not understood the actual argument.\n\n---\n\n## **I. The Traditional Case**\n\nWe begin where honesty requires us to begin: by taking the orthodox position **seriously**.\u00a0Not the watered-down, strawman version that progressives love to debunk, but the full weight of the argument as its most sophisticated defenders actually make it.\n\n### **The Mainstream Christian Argument: Creation Design and Sacred Symbolism**\n\nThe traditional Christian case against same-sex sexual relationships is not, at its core, an argument from Leviticus. Leviticus is the weakest piece of the traditionalist platform, and good faith defenders of orthodoxy know it. The stronger arguments come from the creation story and from the role heterosexual marriage plays in scripture\u2019s larger story.\n\nIn Genesis 1 and 2, the creation of humanity as male and female is not a footnote. It is the final statement of the creation story.\u00a0\"Male and female He created them\" (Genesis 1:27) is placed within the very passage that defines the\u00a0image of God. Humanity\u2019s resemblance to God is shown through a male-female pair, different from each other and joined together.\n\nThe subsequent institution of marriage in Genesis 2:24; \"Therefore a man shall leave his father and mother and hold fast to his wife, and they shall become one flesh\" is presented as the natural completion of this design. Crucially, it is precisely the **otherness of the other** that makes union possible. Adam's recognition of Eve is not a recognition of sameness but of difference: \"at last, bone of my bone, flesh of my flesh\", the one made from him that is, specifically, not him.\n\nWhen Jesus is pressed on divorce in Matthew 19, he does not appeal to the law of Moses. He reaches all the way back to Genesis 1 and 2, citing the creation design as the guiding pattern. \"Have you not read that he who created them from the beginning made them male and female, and said, 'Therefore a man shall leave his father and mother and hold fast to his wife'?\" (Matthew 19:4-5). Jesus treats marriage as the union of male and female, rooted in the Creator\u2019s design, not merely in culture. This is a feature of the created order that predates Mosaic law entirely.\n\n**This is why Genesis **remains so central to the traditional Christian argument. It is not treated as one isolated passage, but as the foundation later scripture keeps returning to and building upon.\n\nEphesians 5 takes that argument one step further. Here, Paul presents the husband-wife relationship not only as a moral rule, but as a sacred symbol that points to Christ and the Church. The husband represents Christ; the wife represents the Church.\n\nThe analogy only works because of the _difference_ between the two partners. Christ and the Church are not the same thing.\u00a0Christ gives, the Church receives; Christ leads, the Church follows.\n\nThat gap, that otherness between them, is the whole point of the comparison. If both partners in a marriage are the same, if there's no \"other\" in the relevant sense, the analogy breaks down completely. The symbolism doesn't just weaken. It disappears.\n\nIn this view, the male-female structure of marriage is not just a rule about behavior. It is the **symbol** itself, a visible sign of the unseen relationship between Christ and the Church.\n\nThis is the strongest version of the mainstream Christian argument. We owe it serious engagement before we ask whether it is the final word.\n\n### Where Mormonism Changes Everything\n\nIf the mainstream Christian argument is strong, the Latter-day Saint argument is much stronger.\n\n![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kvfnb.jpg \"The question becomes larger inside the Restoration.\")\n\nIn Latter-day Saint doctrine, male-female marriage is not merely a sacred symbol or a pattern from creation.\u00a0It is embedded in an account of the creation that has no parallel in mainstream\u00a0Christian thought. **The Family: A Proclamation to the World** declares that _\"gender is an essential characteristic of individual premortal, mortal, and eternal identity and purpose.\"_\n\n**In this view**, gender is not only biology. It is not just a social idea placed on top of a neutral self.\u00a0It is a feature of the eternal soul, equally eternal with personal identity itself. It existed before mortal life, structures the mortal experience, and persists into the eternities.\n\nFurthermore, the highest degree of the Celestial Kingdom (the domain of exaltation and godhood, what Latter-day Saints are told to strive for without ceasing) is clearly structured around a sealed, procreative pair. Doctrine and Covenants 131:1-4 states:\n\n> \"In the celestial glory there are three heavens or degrees; And in order to obtain the highest, a man must enter into this order of the priesthood \\[meaning the new and everlasting covenant of marriage\\]; And if he does not, he cannot obtain it. He may enter into the other, but that is the end of his kingdom; he cannot have an increase.\"\n\n'Eternal increase' means the continuation of procreative family relationships into the eternities, the bearing of spirit children, and the becoming of a god who creates. This is the highest goal of the Latter-day Saint \u2018Plan of Happiness.\u2019\u00a0And it requires what LDS doctrine calls the divine masculine and the divine feminine, sealed together in an eternal covenant.\n\nAnd it is understood in LDS faith that Heavenly Father is not a solitary deity. He is part of a sealed pair; **Heavenly Mother exists**, though she is rarely discussed. She is required by the doctrine, yet often hidden by the same patriarchal culture the Restoration was meant to move beyond. The divine template for exaltation is, by definition, a heterosexual sealed pair who together possess the power of eternal creation.\n\nThis is why the orthodox Latter-day Saint argument is different from mainstream Christian traditionalism. The mainstream argument says same-sex relationships are morally forbidden. The orthodox LDS argument goes further: it says **they do not fit the structure of exaltation itself**. In this view, the problem is not only sin. It is architecture.\n\nIt is not a broken path but the wrong road entirely; one that, however beautiful the relationship, does not lead to the destination.\n\nThis is the most honest presentation of the traditional case.\n\n### The Hazard of Steadying the ArkThe line is not always ours to move.\n\n![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kevfy.jpg \"The line is not always our to move\")\n\nThe third pillar of the orthodox argument is not about theology at all. And it is specifically Latter-day Saint in character. It is the question of **authority**.\n\nThis is not a difference of opinion. It is a challenge to the entire architecture of the Restoration, and those of us who hold affirming views while remaining in the Church owe it to ourselves to sit with that friction honestly.\n\nThe Church\u2019s claim to divine authority rests on the belief that prophetic keys actually work.\u00a0It rests on the belief that the collective prophetic voice is more reliable than any individual\u2019s spiritual intuition, precisely because the individual is subject to self-deception, cultural conditioning, and the very human tendency to let love for a specific person override a principle that was never meant to be comfortable.\n\nThe scriptural metaphor for this danger is **\"steadying the ark\"**, drawn from the account in 2 Samuel 6:6-7, where Uzzah reaches out to prevent the ark of the covenant from falling and is struck dead for his presumption. The lesson is uncomfortable: well-intentioned corrections that bypass established divine order are not rewarded. In Latter-day Saint culture, this story functions as a warning against the impulse to correct the institutional Church, however good one's intentions.\n\nThe tradition does not ask members to suppress their spiritual experience. It asks them to be honest about what that experience gives them authority to do.\u00a0Guidance for a personal life is one thing. A settled conclusion that the institutional framework is simply wrong about a matter the First Presidency has repeatedly addressed as doctrine is another. The former is the birthright of every member. The latter requires a level of confidence in one's own spiritual perception that Latter-day Saint theology specifically, and repeatedly, counsels against.\n\n---\n\n## **II. The Affirming Case**\n\nThe orthodox case has been made at full strength. Now the ground shifts.\n\n![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kggav.jpg \"Not an issue. A household.\")\n\nThe affirming case begins with reality: for some people, suppressing or denying a core part of who they are is not a matter of spiritual discipline. It is a slow erasure. Being told, repeatedly and institutionally, that you are the problem does not produce holiness. It produces alienation, despair, and in too many cases, exits from life itself that we do not talk about enough.\n\nThis is why many affirming Latter-day Saints are not simply trying to overrule the prophets with private revelation. That framing is too simple, and it is not the experience most of them would describe. More often, what they are holding is something quieter and more desperate than a theological position. It is love for a real person. It is the witness of a life they cannot dismiss. It is the belief that God made this person, God knows this person\u2019s path, and God will cause all things to be made right in ways and on a timetable that are not ours to dictate.\n\nThat is not necessarily a claim that private revelation outranks prophetic authority. It is a posture of radical trust in a God whose mercy is larger than any single institutional moment, and a refusal to treat another person\u2019s survival as an acceptable casualty of doctrinal tidiness.\n\nBut here the orthodox response returns with force. From inside the orthodox frame, compassion does not settle the question.\n\nThe orthodox response to this position is not a dismissal of its human weight.\u00a0It is something harder than dismissal. The covenant does not ask you to pretend the cost is small. It has never pretended that. It points to martyrs, to pioneers, to people who buried children and kept their covenants anyway, to generations of men and women who bore unbearable things inside this tradition and were promised that the bearing meant something eternal. The invitation to endure is not indifference dressed up as doctrine. It is a very old and very hard promise: that the story is not over, that mortality is temporary, and that covenants kept now have consequences that outweigh the present cost in ways the individual, in pain, may not yet be able to see.\n\nFrom the orthodox perspective, reframing a doctrinal position as a survival necessity does not answer that contradiction. It changes the form of it. Because God, in this telling, is not asking whether your suffering is real. He already knows it is. He is asking whether you trust the promiser enough to carry it anyway.\n\nThe question remains, no matter how the affirming position is framed. Whether a member says, \u201cthe Spirit told me this is approved,\u201d or \u201cGod\u2019s mercy is larger than this moment,\u201d or \u201cmy friend cannot survive being asked to carry this,\u201d they are reaching the same practical conclusion: the current prophetic position does not apply here.\n\nAnd in Latter-day Saint thought, that is not a small move. The moment a member becomes the one deciding which prophetic boundaries apply and which ones give way to higher mercy, spiritual authority has quietly moved from the Church to the individual.\n\nThat is the orthodox case at its most honest and its most demanding. It is not a small thing to answer. But an honest reckoning requires asking what the argument is actually standing on.\n\n### **Sexual Orientation as a Modern Category**\n\nWhat follows in this section is necessarily dense. I won't pretend otherwise. But I want you to know where it came from before you read it.\n\nDr. Dan McClellan is a Latter-day Saint scripture translation supervisor who spends his professional life inside the same tradition this essay is wrestling with. Encountering his work was the moment I understood that it was possible to look directly at the historical record, unflinchingly, and still remain. That realization is the reason this section exists. Stay with it.\n\nI have always suspected language. I think it comes with the territory of a mind that reads into what people say more than what they mean, that forgets intention and humanity in the search for precision. Certitudes from the pulpit have always made me uneasy. The thee and thou of the King James Version has always made my brain turn off mid-verse.\n\nSo when I found someone who knew Hebrew, who knew the Ancient Near East, who knew the Greco-Roman world from the inside out, I paid attention. And what McClellan's work, alongside scholars like Robin Scroggs and Martti Nissinen, revealed was not a progressive reinterpretation of scripture. It was an excavation of what the words actually meant before centuries of translation, cultural assumption, and institutional convenience buried them.\n\n![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq2w048e.jpg \"What time leaves behind, careful reading uncovers.\")\n\nI teach Gospel Doctrine in my ward. I try to do the legwork. I try to find out where the people of Israel actually were, what was happening around them, and what the words meant in the language where they were first spoken. Hebrew especially. Hebrew has meanings that outpace even the most explanatory English translations.\u00a0I learned recently, preparing a lesson on Ruth, that the word hesed, which King James translators variously rendered as mercy, kindness, lovingkindness, and faithfulness, actually means something far more specific: an active, enduring loyalty practiced within a relationship, especially when one party has the power to meet a critical need for a weaker party. None of those English words carry that. The Hebrew carries that. And knowing it changes everything about how you read the story.\n\nThat is what good scholarship does. It gives the scriptures room to breathe. It gives them life and color. It stops you from reading Nephi slaying Laban through a 21st century lens of murder and starts you reading it through the ancient lens of theft, betrayal, and breach of contract that the original audience would have understood immediately.\n\nSo why would we do any differently with matters of the heart?\n\nThe most important insight biblical scholarship brings to this debate is also the most surprising: ancient people did not think about sexual orientation the way we do. The idea of sexual orientation as a stable, inborn part of personal identity did not exist in the Ancient Near East or the Greco-Roman world. It did not exist anywhere on earth until the late nineteenth century, when European sexologists coined the term homosexuality in 1869 and began sorting people by sexual type.\n\nThis is not a progressive talking point. It is a** historical fact.** In the ancient world, sexual behavior was not mainly understood through attraction or identity. It was understood through power and social rank: who had power, who did not, who acted, who was acted upon, who was free, and who was not.\n\nScroggs argued in his landmark 1983 study that what Paul was actually condemning was pederasty: the Greek practice of an adult man taking an adolescent boy as his sexual ward. This was the most visible form of male same-sex activity in the Greco-Roman world. Paul\u2019s condemnations targeted exploitation across age and power, not two adults entering a committed relationship as equals.\n\nNissinen\u2019s research showed that this pattern reached across cultures and centuries. Ancient writers were not mainly worried about the gender of a person\u2019s sexual partner. They were worried about power, rank, and shame. A free Roman man taking the passive role in sex was condemned not because his partner was male, but because it lowered his status. The concern was honor and dominance, not two adults choosing a committed relationship as equals.\n\nWith that established, the specific prohibitions look different.\n\nLeviticus 18:22 and 20:13 prohibit a man from lying with another man as with a woman. In both passages, the act is called an \u201cabomination.\u201d That word matters. The Hebrew word behind it is\u00a0_to\u2019evah_, and it does not always mean universal moral evil. It often refers to ritual impurity, taboo, or a forbidden crossing of categories. The same word is used elsewhere for things like eating shellfish and wearing clothing made of mixed fabrics.\n\nThat matters because these laws belonged to Israel\u2019s covenant code. They helped define Israel as a people set apart from the nations around them. They were part of Israel\u2019s way of ordering holiness, purity, worship, food, clothing, family, bodies, and boundaries. They were not written as a moral dictionary for the entire outside world, detached from Israel\u2019s ritual life and covenant identity.\n\nThe Sodom story has often been treated as though it were about consensual same-sex relationships. But that is not what the text describes. The actual story is about a mob demanding to gang rape divine visitors. It is a scene of violence, domination, and humiliation. It is the opposite of hospitality.\n\nThe prophet Ezekiel later names Sodom\u2019s sin more directly. He does not describe it as a committed same-sex relationship. He describes it as arrogance, excess, and neglect of the poor and needy. So to use Sodom as a condemnation of two adults in a committed relationship is not just severe. It is a misreading of the story itself.\n\nRomans 1:26-27 is the hardest text in this part of the argument, and it needs careful reading. Paul uses the phrase \u201cagainst nature,\u201d but that phrase did not always mean what modern readers assume it means. In the Greco-Roman world, \u201cnature\u201d often referred to the accepted social order, not simply to biology. The same culture could call it \u201cagainst nature\u201d for a wealthy or high-status man to take the passive role in sex, not because of his partner\u2019s gender, but because it lowered his social rank.\n\nThat matters because Paul is not writing a modern statement about sexual orientation. He is describing excess, dishonor, and idolatry in the pagan world around him. He is not imagining two adults of equal standing building a committed life together. And in the same passage, his list of sins includes greed, gossip, and disobedience to parents, which rarely receive the same institutional weight.\n\nFirst Corinthians 6:9 raises a different problem. It contains two Greek words with long and disputed translation histories.\u00a0_Malakoi_, often translated as \u201ceffeminate\u201d or \u201csoft,\u201d referred to men who took the passive sexual role.\u00a0_Arsenokoitai_\u00a0is more difficult. Paul may have coined the word himself from the Greek translation of the Hebrew scriptures. In early Christian writings, it often appears near language about exploitation, economic abuse, and injustice. In First Timothy 1:10, it appears in the same list as slave dealers. The link to exploitation is hard to ignore.\n\nHere is what stopped me cold when I first encountered this material. The King James translators in 1611 rendered\u00a0_arsenokoitai_\u00a0as \u201cabusers of themselves with mankind,\u201d a phrase that does not map onto the modern idea of gay identity at all. The word was not translated as \u201chomosexual\u201d until 1946. Not in 1611. Not in 1769. 1946. Within living memory. A modern category was placed onto an ancient text that had no such category. That is not a footnote. That is part of the foundation for the entire enforcement gap. And once you see it, you cannot unsee it.\n\nThe honest conclusion is not that the biblical writers were secretly supportive of same-sex relationships. They were not. But the same-sex behavior they knew was usually tied to exploitation, shame, status, and power. They were speaking about the world they could see: adult men using boys, masters using enslaved people, powerful men lowering other men, and sexual acts shaped by domination rather than mutual love.\n\nWhat they did not have was our modern idea of sexual orientation. They did not imagine two adults, equal before each other, building a committed life out of a stable and deeply rooted same-sex love.\n\nTo apply their words to that situation is to use an ancient hammer on a nail they never saw.\n\n### The Selective Enforcement Problem: What Paul's Lists Reveal About Us\n\nBefore leaving the New Testament scriptures, there is one more thing to notice about\u00a0**how we read**. Sometimes our use of the text reveals more about us than the text itself.\n\n![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4ki9cd.jpg)\n\nThe \u201cvice list\u201d in 1 Corinthians 6:9-10 is a single catalog. Paul names those who \u201cwill not inherit the kingdom of God,\u201d then lists them without ranking one above another: the sexually immoral, idolaters, adulterers, thieves, the greedy, drunkards, revilers, and swindlers.\n\nOne list. No hierarchy.\n\nThe same is true of Romans 1:29-31, where the same-sex passage flows immediately into a long list of other sins: covetousness, malice, envy, murder, strife, deceit, gossip, slander, arrogance, and disobedience to parents. Again, the text does not rank them.\n\nThe text does not prioritize.\u00a0**We do.**\u00a0I cannot emphasize this enough.\n\nIn the institutional life of The Church of Jesus Christ of Latter-day Saints, same-sex sexual activity can lead to membership councils, loss of temple recommends, and formal discipline. Greed, though it appears in Paul\u2019s list, usually does not. Gossip does not. Disobedience to parents does not. A swindler may have far less trouble keeping a temple recommend than a gay couple trying to build a faithful life together.\n\nThat difference is not a detail. It reveals how we read.\n\nWhen readers take one item from Paul\u2019s list and give it formal Church consequences, while treating the rest as general moral counsel, they are not simply following the text. They are bringing a ranking to the text that the text itself does not provide.\n\nThat ranking comes from somewhere else: culture, fear, social pressure, or the need to protect a certain kind of order. Then scripture is brought in afterward to bless it.\n\nThe traditionalist answer is that same-sex sexual activity carries a scriptural weight that greed and gossip do not. It does not appear only in Paul\u2019s lists. It appears in the creation story, in Jesus\u2019 teaching on marriage, in the Holiness Code, and in more than one New Testament text.\n\nThat repeated witness, the argument goes, shows that this is a different kind of moral concern.\u00a0But that answer has its own problem.\n\nGreed does not appear only in lists either. It is condemned in the Ten Commandments. It runs through the Hebrew prophets like a fault line. Jesus taught about wealth again and again: the rich young ruler, the camel and the needle\u2019s eye, the parable of the rich fool, the Sermon on the Mount\u2019s warnings about wealth and anxiety, and the flat declaration that you cannot serve God and mammon. Paul tells Timothy that the love of money is a root of all kinds of evil.\n\nIf repeated scriptural attention is the standard, greed should receive more formal Church attention than same-sex relationships, not less.\n\nSo what does consistent enforcement actually look like?\n\nDrive north along I-15 through Utah. Count the billboards for facial rejuvenation, breast implants, jewelry, and luxury. Drive up into the hills above Draper and approach the temple. What surrounds the House of the Lord? Large homes. Beautiful cars. Lush gardens. Property values lifted by proximity to something sacred.\n\nI am not condemning plastic surgery, nice clothes, beautiful homes, or people who have done well. That would be too easy, and too dishonest. Money does not equal greed. Beauty does not equal vanity. A nice house does not mean a corrupt soul.\n\nBut the contrast is hard to ignore. In some parts of Latter-day Saint culture, signs of wealth, polish, status, and success can sit very comfortably beside religious devotion. Sometimes they are even mistaken for it.\n\nDr. Julie De Azevedo identified the current precisely: \u201cThere\u2019s kind of this cultural belief in Utah that if you look perfect, if your kids look perfect, if your house is perfect, then somehow it\u2019s tied to your righteousness.\u201d\n\nBut I should catch myself here, because I almost became the thing I am critiquing. I live in an affluent ward. My house is older, on a street with less than stellar circumstances by local standards. But compared to many Latter-day Saints outside the United States, I live in a mansion. I am afflicted too. I am human.\n\nThat is the point. The selective use of Paul\u2019s vice lists reveals a gap not only in the text, but in us. It reveals what we notice, what we excuse, what we fear, and what we have learned to leave alone.\n\nThis does not dissolve the traditional argument. It does make any honest reader ask a harder question: are we following the text, or are we following ourselves?\n\n### What Ancient Prohibitions Were Actually About\n\nThe consistent thread running through all of this evidence is not complicated once you see it. In both the Hebrew and Greco-Roman worlds, sexual ethics were organized around power. Who held it. Who did not. What happened when that order was violated.\n\nWhat was actually being condemned was the sexual exploitation of those with little or no power to refuse: the adult man who took a boy as his sexual ward, the master who used an enslaved person\u2019s body as property, the creditor who extracted sex as payment for debt, the subordinate forced into passivity they never chose. These were real evils. Serious evils. **Evils that deserve to be named as such.**\n\nBut here is the thing. None of those situations involve two adults, equal before each other, choosing a committed life together. Not one. The ancient prohibitions were not confused. They were not foolish. They were targeting something real and specific and terrible.\n\nThey simply were not targeting anything that resembles a contemporary same-sex marriage. **Not even close.**\n\nI think about the people I know. The couples raising children, paying tithing, serving in their communities, sitting in the same pews I sit in, or wishing they still could. I think about what it means to tell them that their relationship is condemned by texts written in worlds of rape, slavery, domination, status, and exploitation. The distance between those two things is not a technicality. It is the entire argument.\n\nSo the textual case has been made. At least, the affirming textual case has been made. But if we are being honest, the strongest version of the orthodox Latter-day Saint argument was never mainly about Leviticus, Sodom, Romans, or Paul\u2019s vice lists.\n\nThat is where the harder question begins.\n\n---\n\n## **III. The Synthesis**\n\nHere is where the work gets hard.\n\nEverything in the previous section is true. The scholarship is solid. The textual argument holds. Paul was addressing real abuses in the sexual world he knew, but not the modern question now in front of us. The ancient world had no concept of sexual orientation as a stable part of personal identity. The prohibitions were aimed at exploitation, status, domination, and shame, not at two adults building a committed life together.\n\nAnd none of that resolves the specific problem the Restoration presents.\n\nBecause the Latter-day Saint case for the eternal necessity of male-female marriage does not finally rest on Leviticus. It does not finally rest on Paul. It does not finally rest on the Greco-Roman world or the Ancient Near East or any text that a biblical scholar can place back into its ancient setting.\n\n**It rests on modern revelation.**\n\nOn a living prophet. On the Family Proclamation and D&C 132. On a theology that says gender is eternal, exaltation requires a sealed male-female pair, and God has spoken on this matter in our own time through his chosen servants.\n\nThat is why the affirming textual argument, even when it succeeds, does not end the debate for Latter-day Saints. It may weaken the inherited use of ancient scripture. It may expose how much modern readers have brought to the text. But it does not, by itself, answer the Restoration\u2019s deeper claim: that God still speaks, and that he has spoken through prophets now.\n\nA historically sophisticated reading of Leviticus does not touch that. Not even a little.\n\nBut here is what Latter-day Saint history does provide, and it is genuinely extraordinary: a record of the institutional Church holding claims about what eternal life requires. Claims supported by living prophets, modern revelation, and the language of eternity.\n\nBefore we look at those claims, we need to name the principle that makes this possible.\n\n### Jesus Said This First\n\n![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kjvl3.jpg \"The way down is, sometimes, how we find the truth.\")\n\nThe basic problem is older than the Restoration: how can something given through prophetic\u00a0authority be real, binding, and divinely permitted, and still not be God\u2019s final ideal?\n\nJesus answers that question in the very Matthew 19 passage traditionalists often cite in defense of heterosexual marriage.\n\nThe Pharisees press Jesus about divorce, specifically about the permission Moses gave in Deuteronomy 24. Jesus\u2019 response is remarkable: \u201cMoses permitted you to divorce your wives because of your hardness of heart, but from the beginning it was not so\u201d (Matthew 19:8).\n\nRead that carefully. Jesus is not saying the Pharisees misunderstood Moses. He is saying Moses really did permit something that was less than the ideal. A command given through a prophet made room for people as they actually were, not as they should have been. God met Israel in its weakness, even while knowing that the weakness was not the final destination.\n\nThat principle matters. God does not always reveal everything at once. Sometimes he gives a people what they are able to receive, then calls them forward later. The Law was a step, not the end of the road. Israel just did not know that yet.\n\nNow consider what this may imply for the sexual rules of that same ancient world. If God allowed a divorce law because Israel was not ready for the full standard, it is at least fair to ask whether other parts of that same world also carried the marks of human hardness. This was a world where men held nearly all the power, and women, enslaved people, boys, and those lower in the social order were expected to stay in their place. The divorce laws and the sexual prohibitions came from the same soil.\n\nThat does not prove the ancient prohibitions were wrong. It does not make the modern question easy. But it does mean the question is not a progressive trick. Jesus himself showed that a law can be given through a prophet, serve a real purpose, and still fall short of God\u2019s final ideal.\n\n### **The Unfinished Building**\n\nThe Restoration did not leave this idea unstated. It wrote it into its founding articles:\n\n> We believe all that God has revealed, all that He does now reveal, and we believe that He will yet reveal many great and important things pertaining to the Kingdom of God.\n\nThat is not merely a statement that the canon is open. It is a statement that we do not yet have everything God intends to give. \u201cHe will yet reveal\u201d is not decorative language. It is a promise that more light is still coming.\n\nSo to treat any current doctrine, however confidently stated, however recently reaffirmed, as the final eternal word sits uneasily beside the Ninth Article of Faith itself.\n\nA living church is, **by definition**, a church that does not yet know everything.\n\nJoseph Smith seemed to understand this better than anyone. The Restoration, as he lived it, was not a finished system with occasional updates. It was an unfolding one. New revelation did not always add a small detail to what already existed. Sometimes it changed the scale of the whole thing.\n\nThat is what makes Joseph\u2019s final years so important. Near the end of his life, his teachings about God, eternity, and exaltation expanded far beyond the simpler Christian world many early Saints had first entered. In the King Follett discourse, Joseph described God in terms so bold that earlier converts could hardly have imagined where the Restoration was going. God was not only the eternal ruler of creation. God had a history. Human beings had a divine future. The distance between God and humanity was not erased, but it was radically reimagined.\n\nThe same disruptive pattern appears in the 1843 revelation on celestial marriage, now recorded in Doctrine and Covenants 132. That revelation did not merely adjust the Church\u2019s teaching on marriage. It introduced a new eternal structure around sealing, exaltation, and plural marriage. Whatever else one makes of that revelation, it shows that Joseph did not treat the Restoration as a closed building. He treated it as something still under construction.\n\nThat matters here because \u201cline upon line, precept upon precept\u201d is not just a comforting phrase about gradual improvement inside a stable religion. In Joseph\u2019s Restoration, new revelation could expand the faith so deeply that earlier assumptions had to be rebuilt around it. The new line did not always sit quietly beside the old one. Sometimes it changed the shape of the whole map.\n\n### When Eternal Laws Changed\n\nThe strongest affirming argument inside the Restoration is not only about ancient scripture. **It is about Latter-day Saint history itself.**\n\n![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kmres.jpg \"What looks fixed still belongs to time.\")\n\nThe Church has, more than once, taught something as bound up with eternity, salvation, priesthood, family, or exaltation, only to later change course. Not in minor matters. Not around the edges.\n\nIn some of the most sacred and painful chapters of its history.\n\n### Plural Marriage and Official Declaration 1\n\nThis is not a case of the Church quietly retiring an obscure policy preference. Plural marriage stood near the center of nineteenth-century Latter-day Saint sacrifice, identity, persecution, and temple theology.\n\nJoseph Smith introduced the practice through revelation, and Doctrine and Covenants 132 tied the new and everlasting covenant of marriage to exaltation in the starkest possible terms. The revelation warns that those who reject the covenant cannot enter God\u2019s glory, and it places eternal marriage, sealing, exaltation, eternal increase, and plural marriage inside the same revealed world.\n\nNineteenth-century leaders often spoke of plural marriage not as an optional practice, but as a divine law tied to the fullness of exaltation. Brigham Young declared, \u201cThe only men who become Gods, even the Sons of God, are those who enter into polygamy.\u201d In another sermon, he taught that a man in the Church who chose to live with only one wife might reach the celestial kingdom, but would find himself \u201cwithout any wife\u201d and \u201cremain single forever and ever.\u201d Joseph F. Smith later protested the idea that one sealed wife could bring the same fullness of exaltation as plural marriage, saying plainly, \u201cI know it is false.\u201d\n\nThat is the level of claim we are dealing with. Not a minor administrative rule. Not a cultural oddity at the edge of the faith. A practice many early leaders understood as a divine command, a test of loyalty, and part of the path toward the highest blessings God had promised.\n\nLorenzo Snow makes the point even sharper. Before he became Church President, he was convicted under federal anti-polygamy law and served eleven months in prison. He is widely reported to have said that God would not change the law of celestial marriage, even if obedience to it brought imprisonment. Four years later, while Snow was still an apostle, Wilford Woodruff issued the 1890 Manifesto, beginning the official end of new plural marriages. At the October 1890 conference, Snow himself, then President of the Quorum of the Twelve, moved that the Manifesto be accepted as \u201cauthoritative and binding.\u201d\n\nThe legal pressure was not imaginary. By 1890, the Church faced the confiscation of property, the loss of temples, the stopping of temple ordinances, and the imprisonment of the First Presidency, the Twelve, and heads of families. Woodruff later framed the decision not as an admission that the doctrine had been false, but as obedience to revelation. The Lord, he said, would not permit the President of the Church to lead the Saints astray.\n\nThat distinction matters. The Church did not simply say, \u201cWe were wrong.\u201d But the practical effect was still enormous. A practice that many leaders had taught as divinely commanded and bound to exaltation was stopped as a lived requirement for the Saints. It has never been resumed in its nineteenth-century form.\n\nIn much nineteenth-century Latter-day Saint usage, \u201ccelestial marriage\u201d was often used to mean plural marriage, or at least to include it. Today, the phrase usually means eternal monogamous marriage sealed in the temple. That shift in language is itself part of the story. It shows how dramatically the Church\u2019s living understanding of a sacred principle can change over time.\n\nThe implication is not that every doctrine is fragile, or that prophetic teaching means nothing. The implication is more precise, and more unsettling: the argument \u201cthis cannot change because prophets have taught it as eternal\u201d has been tested before in Latter-day Saint history. And in the case of plural marriage, the lived expression of an eternal law did change.\n\n### The Priesthood and Temple Restriction and Official Declaration 2\n\nThe priesthood and temple restriction is even more sobering.\n\nFor well over a century, Black members of African descent were denied priesthood ordination and temple ordinances. The restriction was not treated as a minor policy preference. It shaped who could hold priesthood office, who could enter the temple, who could be sealed, and who could receive the ordinances Latter-day Saints understand as necessary for exaltation.\n\nThe explanations offered for the restriction were often theological. Brigham Young invoked the curse of Cain. Later leaders and teachers pointed to theories about premortal worthiness, divine timing, interracial marriage, and inherited curse. These explanations were not whispered only at the edges of the Church. They were taught, repeated, published, and absorbed into the religious imagination of generations.\n\nThen, in 1978, President Spencer W. Kimball received the revelation now canonized as Official Declaration 2. The restriction ended. Priesthood and temple blessings were extended to all worthy members without regard to race.\n\nBut the story did not end there.\n\nDecades later, the Church published the Gospel Topics essay \u201cRace and the Priesthood,\u201d and the Church did something extraordinary. It did not merely say the restriction was over. It disavowed the theories that had been used to defend it. The essay rejected the ideas that Black skin was a sign of divine disfavor or curse, that it reflected unrighteousness in premortal life, that mixed-race marriage was a sin, or that Black people or people of any other race were inferior in any way.\n\nThat matters. The Church was not only moving beyond a restriction. It was also moving beyond the explanations that had once made the restriction seem holy.\n\nElder Bruce R. McConkie makes the point almost painfully clear. Before 1978, he had been one of the most visible defenders of the old theological explanations. After the revelation, he said: \u201cForget everything that I have said, or what President Brigham Young or President George Q. Cannon or whomsoever has said in days past that is contrary to the present revelation.\u201d Then he added the sentence that matters most here: \u201cWe spoke with a limited understanding and without the light and knowledge that now has come into the world.\u201d\n\nThat is the precedent.\n\nNot that the Church is unreliable. Not that prophets are useless. Not that revelation means nothing.\n\nThe precedent is that faithful leaders can speak with limited understanding, even on matters they believe are tied to God\u2019s will, until more light comes. **And when more light comes, the Church can turn, disavow the old explanations, and move forward.**\n\nThat is \u201cline upon line\u201d in its most disruptive form.\n\n### **Sitting in the Tension: What This Means Now**\n\nWhat this history makes clear is not comfortable. It does not resolve cleanly into either the affirming or orthodox camp.\n\nFor the orthodox member, the historical record demands a certain humility. The argument \"this doctrine cannot change because prophets have declared it an eternal law\" has been specifically and directly falsified by the Church's own history, not once but twice, on the two most doctrinally significant issues of the 19th and 20th centuries.\u00a0**This does not prove that the doctrine on same-sex marriage will change.**\u00a0It does prove that the argument that it\u00a0**cannot**\u00a0change is not available as a premise.\n\nFor the affirming member, the historical record also demands humility. The suffering is real. For some people, being fully seen and known is not a political preference or a modern slogan. It is bound up with survival. That cannot be waved away with a doctrine-shaped sentence.\n\nBut suffering, by itself, does not settle what the Church is authorized to teach or do. The Restoration asks something harder than simply saying, \u201cGod is merciful,\u201d and leaving the question there. It asks us to hold both: the urgency of real lives and the weight of prophetic authority, without letting one cancel the other.\n\nThe history of the Restoration contains people who saw further than the institution was ready to see. That does not mean they had authority to remake the Church on their own. But it does mean their faithfulness mattered. Their questions mattered. Their presence mattered. Their refusal to stop belonging mattered.\n\nThe change on race did not come because every wounded Saint simply walked away and left the institution to itself. Nor did it come because individual conviction, by itself, became Church doctrine. It came through years of pain, prayer, study, pressure, service, and faithful insistence from within the body of the Church, until revelation finally came through the prophet.\n\nThat precedent does not point in only one direction. It does not counsel passivity. It does not ask people to pretend harm is harmless. But it does counsel patience with the way revelation comes to the Church.\n\nTo hold an affirming personal conviction while remaining inside the covenantal life of the Church is not merely patient waiting or quiet defiance. It is something more demanding than either. It is the belief that staying can itself be a form of faithfulness. That love can apply pressure without becoming rebellion. That grief can remain in the pews and still tell the truth.\n\nIt is also the recognition that revelation for the Church and revelation for one person work in different ways. The prophet speaks to the Church as a body. The Holy Ghost speaks to the individual soul. One guards the covenant path for the whole people. The other helps a particular child of God walk through the actual terrain of an actual life.\n\nThese are not simple enemies. They are not always easy companions either. But Latter-day Saint theology has always held both: a Church led by prophets, and individual souls led by the Spirit.\n\n**I need to say this carefully. **Staying is not the holy answer for everyone. For some people, the faithful path, or simply the survivable one, may require distance. It may require stepping away, at least for a time. I do not judge that. I am describing one kind of faithfulness, not prescribing it as the only one.\n\nPaul\u2019s admonition to seek after anything virtuous, lovely, or of good report was not addressed to a committee. It was addressed to individual souls, each responsible for their own spiritual navigation. A loving set of Heavenly Parents who know their children intimately, who govern by persuasion rather than compulsion, and who refuse to override personal agency, are not parents who give one Church-wide instruction and expect it to solve every human situation it touches.\n\nThe question is not whether personal revelation is valid. It is whether the individual is humble enough to hold it honestly, without using it to dissolve every tension that belonging to this tradition creates.\n\nWhat the synthesis demands is something rarer and harder than either confident traditionalism or confident progressivism. This is my point:\n\nIt demands the willingness to live inside an unresolved tension.\n\nThe principle of divine accommodation, the line-upon-line doctrine, the Ninth Article of Faith, and the historical precedents of Official Declarations 1 and 2 do not tell us that the doctrine on same-sex marriage will change. They tell us that God\u2019s disclosure to humanity is ongoing, that the current prophetic position may reflect current understanding rather than final truth, and that the Church has shown it can move beyond earlier teachings, even strongly held ones, when a fuller truth becomes clear.\n\nBut they do not tell us the timetable. They do not tell us the content. And they offer cold comfort to the teenager who discovered something true about themselves and lost their family or church over it. To the mother who had to choose between her child and her community. To the person who spent decades trying to pray away something that never moved. The doctrine does not make the tension painless. It only insists the tension is worth holding.\n\n### **The Faith to Sit in Fire**\n\n![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq2w1prt.jpg \"Faith does not always arrive. Sometimes it continues.\")\n\nThe crucible this debate creates does not **resolve** the tension. It **refines** the people willing to\n\nstay inside it.A path through holy heat.A path through holy heat.\n\nThat is how the orthodox and affirming claims can sit together without pretending to agree. They do not cancel each other out. They press against each other, painfully and honestly, until something deeper is required of everyone involved.\n\nIt requires the orthodox member to hold certainty lightly enough to remember that every generation of the Church has been more confident about some teachings than it later had reason to be. That is not failure. It is part of what it means to belong to a living church that receives truth line by line.\n\nIt also requires them to care honestly about the real human cost of the Church\u2019s current position on LGBTQ+ Latter-day Saints. Not as unfortunate side damage. Not as a sad but necessary abstraction. But as a moral weight with a human face. The teenager. The mother. The person who prayed for decades.\n\n**A living church with an open canon is not permitted the comfort of abstraction when the cost is this specific.**\n\nAnd it requires the affirming member to hold their moral compass with enough honesty to recognize that trusting God's mercy for the people they love, while also trusting the way the Restoration moves, is not a contradiction. It is the actual content of Latter-day Saint faith. Living in patient, faithful tension inside the covenant, without abandoning the humanity of the people caught in it or the integrity of the institution that contains it, is not a surrender. It is the harder and more honest version of discipleship.\n\nThe strongest LDS affirming position is **not** simply that the current prophets are wrong. **It is that the Restoration may still have more to reveal. **The unfinished building may contain rooms we have not yet seen. And that hope is not a departure from the Restoration. It is one of the deepest things the Restoration has taught us to expect.\n\nThe precedents are real. The doctrine has room for revision. The Church has shown the humility required to make such a change.\n\nAnd the cost of the current position is real: lives diminished, faith abandoned, young people who found the distance between who they are and what they were told they must be unlivable, people who did not survive that distance, souls told that the fullest expression of their love and commitment is structurally incompatible with the highest salvation.\n\nThat is not a theoretical burden. It is a moral weight a living church built on continuous revelation cannot carry indefinitely without being asked about it again.\n\nNone of this is comfortable. All of it is honest.\n\nThe faith that the ongoing Restoration actually demands is not the faith of those who are certain the current map is complete.\u00a0It is the faith of those who trust the mapmaker enough to keep walking while the territory is still being drawn. They honor the best light they have now, while staying open to the next line, the next precept, the next great and important thing God has not yet revealed.\n\n**That is not a compromise. That is the Restoration.**",
+        "file": "2026-06-05-the-crucible-of-continuous-revelation.md",
+        "publisher": {
+            "schema": "otw.publisher.post",
+            "version": 1,
+            "source": "publisher.html",
+            "subhead": "Navigating Same-Sex Relationships Within the Restoration",
+            "blocks": [
+                {
+                    "id": "heading_mq02rr06_7e2ps5",
+                    "type": "heading",
+                    "level": 2,
+                    "html": "<strong>A Note Before You Read</strong>",
+                    "text": "A Note Before You Read"
+                },
+                {
+                    "id": "divider_mq2vk5r7_1mx196",
+                    "type": "divider"
+                },
+                {
+                    "id": "image_mq2vjbld_ulhm7g",
+                    "type": "image",
+                    "imageRef": "image_mq2vjbld_ulhm7g",
+                    "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq2vjclq.jpg",
+                    "objectKey": "narrative/2026-06-05-the-crucible-of-continuous-revelation-mq2vjclq.jpg",
+                    "displaySize": "large",
+                    "alignment": "center",
+                    "wrapMode": "wrap-right"
+                },
+                {
+                    "id": "p_mq1y5577_dgcknt",
+                    "type": "paragraph",
+                    "html": "<span>What you are about to read below is the result of nearly two weeks of research, meditation,\u00a0</span><span>prayer, and revision. But it is also the result of a lifelong struggle to understand the world around me, and my conscious effort to disentangle myself from rigid echo chambers and my own snuggly, comfortable confirmation bias</span><span>.</span>",
+                    "text": "What you are about to read below is the result of nearly two weeks of research, meditation,\u00a0prayer, and revision. But it is also the result of a lifelong struggle to understand the world around me, and my conscious effort to disentangle myself from rigid echo chambers and my own snuggly, comfortable confirmation bias."
+                },
+                {
+                    "id": "paragraph_mpz024md_doq22h",
+                    "type": "paragraph",
+                    "html": "<span>I am not a theologian. I love history, but I am not a historian. I am a 47-year-old person who grew up inside a faith tradition that shaped much of my inner and outer life.</span>\u00a0It is where I learned what to do with the terrifying perspective of eternity. That tradition is The Church of Jesus Christ of Latter-day Saints, and I carry it the way you carry anything you were handed as a child: not always carefully, not always without grief, but with a deep recognition and appreciation that it made me.",
+                    "text": "I am not a theologian. I love history, but I am not a historian. I am a 47-year-old person who grew up inside a faith tradition that shaped much of my inner and outer life.\u00a0It is where I learned what to do with the terrifying perspective of eternity. That tradition is The Church of Jesus Christ of Latter-day Saints, and I carry it the way you carry anything you were handed as a child: not always carefully, not always without grief, but with a deep recognition and appreciation that it made me."
+                },
+                {
+                    "id": "paragraph_mq02rr06_sjax7h",
+                    "type": "paragraph",
+                    "html": "I have also lived long enough to accumulate a life that is complicated in the ways real lives are. I have been broken by things and rebuilt by others. I have watched people I love be told, in the loving language of doctrine, that who they are is structurally incompatible with the highest salvation. I have sat in Sunday meetings and felt the specific loneliness of holding a question that the meeting was not designed to answer. I have also felt, in those same meetings and in the quieter places of personal prayer, distant mountain tops, and desert landscapes, something that I can only describe as the presence of something real and good. I have not been able to dismiss any of those experiences. I am grateful that I have not sincerely tried to do so.",
+                    "text": "I have also lived long enough to accumulate a life that is complicated in the ways real lives are. I have been broken by things and rebuilt by others. I have watched people I love be told, in the loving language of doctrine, that who they are is structurally incompatible with the highest salvation. I have sat in Sunday meetings and felt the specific loneliness of holding a question that the meeting was not designed to answer. I have also felt, in those same meetings and in the quieter places of personal prayer, distant mountain tops, and desert landscapes, something that I can only describe as the presence of something real and good. I have not been able to dismiss any of those experiences. I am grateful that I have not sincerely tried to do so."
+                },
+                {
+                    "id": "paragraph_mq02rr06_zcw9pz",
+                    "type": "paragraph",
+                    "html": "What follows is my honest and, at times, clumsy attempt to think through one of the most contested questions at the intersection of my faith and my life: the question of same-sex and queer relationships within an ongoing Restoration. I want to be clear about what this essay is and is not. It is not an admonition. It is not a faith crisis document. It is no Reddit screed.",
+                    "text": "What follows is my honest and, at times, clumsy attempt to think through one of the most contested questions at the intersection of my faith and my life: the question of same-sex and queer relationships within an ongoing Restoration. I want to be clear about what this essay is and is not. It is not an admonition. It is not a faith crisis document. It is no Reddit screed."
+                },
+                {
+                    "id": "paragraph_mpz0d704_54vrgv",
+                    "type": "paragraph",
+                    "html": "<b>It is not a demand that the Church change, or a declaration that it won't. </b>It is an attempt to take both the traditional or \"orthodox\" case and the affirming or \"progressive\" case seriously enough to let them actually touch each other, and to do that work inside the ongoing Restoration itself, which has its own wild countenance that most of the broader cultural debate never accounts for.",
+                    "text": "It is not a demand that the Church change, or a declaration that it won't. It is an attempt to take both the traditional or \"orthodox\" case and the affirming or \"progressive\" case seriously enough to let them actually touch each other, and to do that work inside the ongoing Restoration itself, which has its own wild countenance that most of the broader cultural debate never accounts for."
+                },
+                {
+                    "id": "paragraph_mq02rr07_cye901",
+                    "type": "paragraph",
+                    "html": "I say this plainly: there are chapters of Latter-day Saint history that are genuinely hard to reckon with. Not hard in a way that requires quotation marks, or in a way that can be resolved with a careful reframe. Simply hard. Men went to prison for a practice later abandoned. People were excluded from sacred ordinances for over a century on theological grounds the Church has since explicitly disavowed. These are not footnotes. I have not treated them as footnotes here.",
+                    "text": "I say this plainly: there are chapters of Latter-day Saint history that are genuinely hard to reckon with. Not hard in a way that requires quotation marks, or in a way that can be resolved with a careful reframe. Simply hard. Men went to prison for a practice later abandoned. People were excluded from sacred ordinances for over a century on theological grounds the Church has since explicitly disavowed. These are not footnotes. I have not treated them as footnotes here."
+                },
+                {
+                    "id": "paragraph_mq02rr07_x0aohd",
+                    "type": "paragraph",
+                    "html": "But I have also come to believe, at great cost and over some time, that the existence of errors does not cancel out the existence of goodness and intention.\u00a0<span>That institutions, like people, can be simultaneously broken and worth staying in relationship with. That the fire is not only where things are destroyed. It is also, sometimes, where they are made.\u00a0</span>",
+                    "text": "But I have also come to believe, at great cost and over some time, that the existence of errors does not cancel out the existence of goodness and intention.\u00a0That institutions, like people, can be simultaneously broken and worth staying in relationship with. That the fire is not only where things are destroyed. It is also, sometimes, where they are made."
+                },
+                {
+                    "id": "paragraph_mq02rr07_trl9fp",
+                    "type": "paragraph",
+                    "html": "I wrote this essay because I could not stop thinking about it.",
+                    "text": "I wrote this essay because I could not stop thinking about it."
+                },
+                {
+                    "id": "paragraph_mq2vk5r7_tb8zui",
+                    "type": "paragraph",
+                    "html": "The timing is not accidental. Themes like this fall tenderly on my heart this time of year, and I have felt an unusual urgency to be ready to publish this in June. I offer it as a small pledge to all of God\u2019s children who have wondered whether they are seen, wanted, or remembered, including those who hold this question differently than I do. I see you as best I can. I am trying to see more clearly.",
+                    "text": "The timing is not accidental. Themes like this fall tenderly on my heart this time of year, and I have felt an unusual urgency to be ready to publish this in June. I offer it as a small pledge to all of God\u2019s children who have wondered whether they are seen, wanted, or remembered, including those who hold this question differently than I do. I see you as best I can. I am trying to see more clearly."
+                },
+                {
+                    "id": "paragraph_mq1xiej8_f6drib",
+                    "type": "paragraph",
+                    "html": "I offer it to you as believers, skeptics, ex-members, curious strangers, and persons I love in that same spirit. Come as you are. \u00a0Think what you think.",
+                    "text": "I offer it to you as believers, skeptics, ex-members, curious strangers, and persons I love in that same spirit. Come as you are. \u00a0Think what you think."
+                },
+                {
+                    "id": "paragraph_mpz0mrzy_fxolqm",
+                    "type": "paragraph",
+                    "html": "The crucible has room.",
+                    "text": "The crucible has room."
+                },
+                {
+                    "id": "divider_mq02rr07_hgrhy3",
+                    "type": "divider"
+                },
+                {
+                    "id": "heading_mq2vk5r7_f3u0vv",
+                    "type": "heading",
+                    "level": 2,
+                    "html": "The Debate We Keep Performing",
+                    "text": "The Debate We Keep Performing"
+                },
+                {
+                    "id": "paragraph_mq1w10pr_qnlqsa",
+                    "type": "paragraph",
+                    "html": "There is no more polarizing and treacherous terrain in modern-day religious life than the intersection of sexuality (specifically homosexuality) and scripture. Every denomination, every seminary, every kitchen table where faith is still taken seriously has been touched by it. The argument has become so well trod, that the combatants no longer engage the actual evidence. They simply perform their side's greatest hits.",
+                    "text": "There is no more polarizing and treacherous terrain in modern-day religious life than the intersection of sexuality (specifically homosexuality) and scripture. Every denomination, every seminary, every kitchen table where faith is still taken seriously has been touched by it. The argument has become so well trod, that the combatants no longer engage the actual evidence. They simply perform their side's greatest hits."
+                },
+                {
+                    "id": "paragraph_mq02rr07_umsk4h",
+                    "type": "paragraph",
+                    "html": "Conservatives cite Genesis and a handful of New Testament vice lists, declaring the matter settled. Progressives point to ancient context as if history alone can make the problem disappear. Both sides have become so practiced at arguing against the weakest version of the other that they have forgotten what the strongest version looks like.<br>",
+                    "text": "Conservatives cite Genesis and a handful of New Testament vice lists, declaring the matter settled. Progressives point to ancient context as if history alone can make the problem disappear. Both sides have become so practiced at arguing against the weakest version of the other that they have forgotten what the strongest version looks like."
+                },
+                {
+                    "id": "paragraph_mq02rr07_yyghls",
+                    "type": "paragraph",
+                    "html": "I think both sides talk past each other with tired fluency; we stopped listening to each other years ago.",
+                    "text": "I think both sides talk past each other with tired fluency; we stopped listening to each other years ago."
+                },
+                {
+                    "id": "paragraph_mq02rr07_t0foch",
+                    "type": "paragraph",
+                    "html": "But here is the problem: both positions, as people usually use them, have grown intellectually lazy. And inside Latter-day Saint theology, <b>both fall even shorter.</b><br>",
+                    "text": "But here is the problem: both positions, as people usually use them, have grown intellectually lazy. And inside Latter-day Saint theology, both fall even shorter."
+                },
+                {
+                    "id": "paragraph_mq02rr07_k7nlle",
+                    "type": "paragraph",
+                    "html": "<span>The ongoing Restoration is not a static archive of ancient texts. It is a living system. It introduced something mainstream Christianity does not possess: living prophets,\u00a0</span><span>an open canon, continuous revelation, and the belief that God has not finished speaking to mankind.</span>",
+                    "text": "The ongoing Restoration is not a static archive of ancient texts. It is a living system. It introduced something mainstream Christianity does not possess: living prophets,\u00a0an open canon, continuous revelation, and the belief that God has not finished speaking to mankind."
+                },
+                {
+                    "id": "paragraph_mq02rr07_ewdp6s",
+                    "type": "paragraph",
+                    "html": "This wild card does not simplify the discussion. It makes it far more demanding and absurdly complicated. An affirming Latter-day Saint cannot simply point to what Paul did not understand about sexual orientation and call it a day. And an orthodox Latter-day Saint cannot declare the matter settled by the current prophetic position while ignoring the fact that, on more than one occasion in this Church\u2019s own history, teachings once defended as eternal have later been revised, abandoned, or disavowed.<br>",
+                    "text": "This wild card does not simplify the discussion. It makes it far more demanding and absurdly complicated. An affirming Latter-day Saint cannot simply point to what Paul did not understand about sexual orientation and call it a day. And an orthodox Latter-day Saint cannot declare the matter settled by the current prophetic position while ignoring the fact that, on more than one occasion in this Church\u2019s own history, teachings once defended as eternal have later been revised, abandoned, or disavowed."
+                },
+                {
+                    "id": "paragraph_mq02rr07_sgb6z3",
+                    "type": "paragraph",
+                    "html": "To navigate this debate honestly inside the Restoration, we have to hold two deeply uncomfortable things at once: <b>the real strength of the orthodox case, and the real disruption caused by the Church\u2019s own history.</b><br>",
+                    "text": "To navigate this debate honestly inside the Restoration, we have to hold two deeply uncomfortable things at once: the real strength of the orthodox case, and the real disruption caused by the Church\u2019s own history."
+                },
+                {
+                    "id": "paragraph_mq02rr07_7npkte",
+                    "type": "paragraph",
+                    "html": "Anyone who finds this easy has not understood the actual argument.",
+                    "text": "Anyone who finds this easy has not understood the actual argument."
+                },
+                {
+                    "id": "divider_mq2vk5r7_a2xv8f",
+                    "type": "divider"
+                },
+                {
+                    "id": "heading_mq02rr07_z2ptba",
+                    "type": "heading",
+                    "level": 2,
+                    "html": "<strong>I. The Traditional Case</strong>",
+                    "text": "I. The Traditional Case"
+                },
+                {
+                    "id": "paragraph_mq02rr07_r6uid4",
+                    "type": "paragraph",
+                    "html": "We begin where honesty requires us to begin: by taking the orthodox position <b>seriously</b>.\u00a0Not the watered-down, strawman version that progressives love to debunk, but the full weight of the argument as its most sophisticated defenders actually make it.",
+                    "text": "We begin where honesty requires us to begin: by taking the orthodox position seriously.\u00a0Not the watered-down, strawman version that progressives love to debunk, but the full weight of the argument as its most sophisticated defenders actually make it."
+                },
+                {
+                    "id": "heading_mq02rr07_gowvet",
+                    "type": "heading",
+                    "level": 3,
+                    "html": "<strong>The Mainstream Christian Argument: Creation Design and Sacred Symbolism</strong>",
+                    "text": "The Mainstream Christian Argument: Creation Design and Sacred Symbolism"
+                },
+                {
+                    "id": "paragraph_mq02rr07_zf3w9r",
+                    "type": "paragraph",
+                    "html": "The traditional Christian case against same-sex sexual relationships is not, at its core, an argument from Leviticus. Leviticus is the weakest piece of the traditionalist platform, and good faith defenders of orthodoxy know it. The stronger arguments come from the creation story and from the role heterosexual marriage plays in scripture\u2019s larger story.",
+                    "text": "The traditional Christian case against same-sex sexual relationships is not, at its core, an argument from Leviticus. Leviticus is the weakest piece of the traditionalist platform, and good faith defenders of orthodoxy know it. The stronger arguments come from the creation story and from the role heterosexual marriage plays in scripture\u2019s larger story."
+                },
+                {
+                    "id": "paragraph_mq02rr07_ac4efv",
+                    "type": "paragraph",
+                    "html": "In Genesis 1 and 2, the creation of humanity as male and female is not a footnote. It is the final statement of the creation story.\u00a0\"Male and female He created them\" (Genesis 1:27) is placed within the very passage that defines the\u00a0image of God. Humanity\u2019s resemblance to God is shown through a male-female pair, different from each other and joined together.",
+                    "text": "In Genesis 1 and 2, the creation of humanity as male and female is not a footnote. It is the final statement of the creation story.\u00a0\"Male and female He created them\" (Genesis 1:27) is placed within the very passage that defines the\u00a0image of God. Humanity\u2019s resemblance to God is shown through a male-female pair, different from each other and joined together."
+                },
+                {
+                    "id": "paragraph_mq1pqtd1_xquqka",
+                    "type": "paragraph",
+                    "html": "The subsequent institution of marriage in Genesis 2:24; \"Therefore a man shall leave his father and mother and hold fast to his wife, and they shall become one flesh\" is presented as the natural completion of this design. Crucially, it is precisely the <b>otherness of the other</b> that makes union possible. Adam's recognition of Eve is not a recognition of sameness but of difference: \"at last, bone of my bone, flesh of my flesh\", the one made from him that is, specifically, not him.",
+                    "text": "The subsequent institution of marriage in Genesis 2:24; \"Therefore a man shall leave his father and mother and hold fast to his wife, and they shall become one flesh\" is presented as the natural completion of this design. Crucially, it is precisely the otherness of the other that makes union possible. Adam's recognition of Eve is not a recognition of sameness but of difference: \"at last, bone of my bone, flesh of my flesh\", the one made from him that is, specifically, not him."
+                },
+                {
+                    "id": "paragraph_mq02rr07_d29oqw",
+                    "type": "paragraph",
+                    "html": "When Jesus is pressed on divorce in Matthew 19, he does not appeal to the law of Moses. He reaches all the way back to Genesis 1 and 2, citing the creation design as the guiding pattern. \"Have you not read that he who created them from the beginning made them male and female, and said, 'Therefore a man shall leave his father and mother and hold fast to his wife'?\" (Matthew 19:4-5). Jesus treats marriage as the union of male and female, rooted in the Creator\u2019s design, not merely in culture. This is a feature of the created order that predates Mosaic law entirely.",
+                    "text": "When Jesus is pressed on divorce in Matthew 19, he does not appeal to the law of Moses. He reaches all the way back to Genesis 1 and 2, citing the creation design as the guiding pattern. \"Have you not read that he who created them from the beginning made them male and female, and said, 'Therefore a man shall leave his father and mother and hold fast to his wife'?\" (Matthew 19:4-5). Jesus treats marriage as the union of male and female, rooted in the Creator\u2019s design, not merely in culture. This is a feature of the created order that predates Mosaic law entirely."
+                },
+                {
+                    "id": "paragraph_mq2vk5r7_0ig822",
+                    "type": "paragraph",
+                    "html": "<b>This is why Genesis </b>remains so central to the traditional Christian argument. It is not treated as one isolated passage, but as the foundation later scripture keeps returning to and building upon.",
+                    "text": "This is why Genesis remains so central to the traditional Christian argument. It is not treated as one isolated passage, but as the foundation later scripture keeps returning to and building upon."
+                },
+                {
+                    "id": "paragraph_mq2vk5r7_f5ucrr",
+                    "type": "paragraph",
+                    "html": "<span>Ephesians 5 takes that argument one step further. Here, Paul presents the husband-wife relationship not only as a moral rule, but as a sacred symbol that points to Christ and the Church. The husband represents Christ; the wife represents the Church.</span>",
+                    "text": "Ephesians 5 takes that argument one step further. Here, Paul presents the husband-wife relationship not only as a moral rule, but as a sacred symbol that points to Christ and the Church. The husband represents Christ; the wife represents the Church."
+                },
+                {
+                    "id": "paragraph_mq02rr08_d50e6d",
+                    "type": "paragraph",
+                    "html": "The analogy only works because of the <em>difference</em> between the two partners. Christ and the Church are not the same thing.\u00a0<span>Christ gives, the Church receives; Christ leads, the Church follows.</span>",
+                    "text": "The analogy only works because of the difference between the two partners. Christ and the Church are not the same thing.\u00a0Christ gives, the Church receives; Christ leads, the Church follows."
+                },
+                {
+                    "id": "paragraph_mpz1nl6t_w2d1do",
+                    "type": "paragraph",
+                    "html": "That gap, that otherness between them, is the whole point of the comparison. If both partners in a marriage are the same, if there's no \"other\" in the relevant sense, the analogy breaks down completely. The symbolism doesn't just weaken. It disappears.",
+                    "text": "That gap, that otherness between them, is the whole point of the comparison. If both partners in a marriage are the same, if there's no \"other\" in the relevant sense, the analogy breaks down completely. The symbolism doesn't just weaken. It disappears."
+                },
+                {
+                    "id": "paragraph_mq02rr08_4ukwfy",
+                    "type": "paragraph",
+                    "html": "In this view, the male-female structure of marriage is not just a rule about behavior. It is the <b>symbol</b> itself, a visible sign of the unseen relationship between Christ and the Church.<br>",
+                    "text": "In this view, the male-female structure of marriage is not just a rule about behavior. It is the symbol itself, a visible sign of the unseen relationship between Christ and the Church."
+                },
+                {
+                    "id": "paragraph_mq02rr08_q2znjn",
+                    "type": "paragraph",
+                    "html": "This is the strongest version of the mainstream Christian argument. We owe it serious engagement before we ask whether it is the final word.",
+                    "text": "This is the strongest version of the mainstream Christian argument. We owe it serious engagement before we ask whether it is the final word."
+                },
+                {
+                    "id": "heading_mq02rr08_v1sxch",
+                    "type": "heading",
+                    "level": 3,
+                    "html": "Where Mormonism Changes Everything<br>",
+                    "text": "Where Mormonism Changes Everything"
+                },
+                {
+                    "id": "paragraph_mq02rr08_495q7d",
+                    "type": "paragraph",
+                    "html": "If the mainstream Christian argument is strong, the Latter-day Saint argument is much stronger.<br>",
+                    "text": "If the mainstream Christian argument is strong, the Latter-day Saint argument is much stronger."
+                },
+                {
+                    "id": "image_mq4kvfdi_2szzlc",
+                    "type": "image",
+                    "imageRef": "image_mq4kvfdi_2szzlc",
+                    "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kvfnb.jpg",
+                    "objectKey": "narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kvfnb.jpg",
+                    "displaySize": "medium",
+                    "alignment": "center",
+                    "wrapMode": "wrap-left"
+                },
+                {
+                    "id": "paragraph_mq4ky2hs_5xi9mo",
+                    "type": "paragraph",
+                    "html": "<span>In Latter-day Saint doctrine, male-female marriage is not merely a sacred symbol or a pattern from creation.</span><span>\u00a0It is embedded in an account of the creation that has no parallel in mainstream\u00a0</span><span>Christian thought. </span><strong>The Family: A Proclamation to the World</strong><span> declares that </span><em>\"gender is an essential characteristic of individual premortal, mortal, and eternal identity and purpose.\"</em><br>",
+                    "text": "In Latter-day Saint doctrine, male-female marriage is not merely a sacred symbol or a pattern from creation.\u00a0It is embedded in an account of the creation that has no parallel in mainstream\u00a0Christian thought. The Family: A Proclamation to the World declares that \"gender is an essential characteristic of individual premortal, mortal, and eternal identity and purpose.\""
+                },
+                {
+                    "id": "paragraph_mq02rr08_6zlbwr",
+                    "type": "paragraph",
+                    "html": "<span><b>In this view</b>, gender is not only biology. It is not just a social idea placed on top of a neutral self.</span>\u00a0It is a feature of the eternal soul, equally eternal with personal identity itself. It existed before mortal life, structures the mortal experience, and persists into the eternities.",
+                    "text": "In this view, gender is not only biology. It is not just a social idea placed on top of a neutral self.\u00a0It is a feature of the eternal soul, equally eternal with personal identity itself. It existed before mortal life, structures the mortal experience, and persists into the eternities."
+                },
+                {
+                    "id": "paragraph_mq02rr08_9ei7a8",
+                    "type": "paragraph",
+                    "html": "Furthermore, the highest degree of the Celestial Kingdom (the domain of exaltation and godhood, what Latter-day Saints are told to strive for without ceasing) is clearly structured around a sealed, procreative pair. Doctrine and Covenants 131:1-4 states:",
+                    "text": "Furthermore, the highest degree of the Celestial Kingdom (the domain of exaltation and godhood, what Latter-day Saints are told to strive for without ceasing) is clearly structured around a sealed, procreative pair. Doctrine and Covenants 131:1-4 states:"
+                },
+                {
+                    "id": "quote_mq02rr08_tegb49",
+                    "type": "quote",
+                    "html": "\"In the celestial glory there are three heavens or degrees; And in order to obtain the highest, a man must enter into this order of the priesthood [meaning the new and everlasting covenant of marriage]; And if he does not, he cannot obtain it. He may enter into the other, but that is the end of his kingdom; he cannot have an increase.\"",
+                    "text": "\"In the celestial glory there are three heavens or degrees; And in order to obtain the highest, a man must enter into this order of the priesthood [meaning the new and everlasting covenant of marriage]; And if he does not, he cannot obtain it. He may enter into the other, but that is the end of his kingdom; he cannot have an increase.\""
+                },
+                {
+                    "id": "paragraph_mq02rr08_0l3qiz",
+                    "type": "paragraph",
+                    "html": "<span>'Eternal increase' means the continuation of procreative family relationships into the eternities, the bearing of spirit children, and the becoming of a god who creates. This is the highest goal of the Latter-day Saint \u2018Plan of Happiness.\u2019</span>\u00a0And it requires what LDS doctrine calls the divine masculine and the divine feminine, sealed together in an eternal covenant.",
+                    "text": "'Eternal increase' means the continuation of procreative family relationships into the eternities, the bearing of spirit children, and the becoming of a god who creates. This is the highest goal of the Latter-day Saint \u2018Plan of Happiness.\u2019\u00a0And it requires what LDS doctrine calls the divine masculine and the divine feminine, sealed together in an eternal covenant."
+                },
+                {
+                    "id": "paragraph_mq02rr08_fw46qe",
+                    "type": "paragraph",
+                    "html": "And it is understood in LDS faith that Heavenly Father is not a solitary deity. He is part of a sealed pair; <b>Heavenly Mother exists</b>, though she is rarely discussed. She is required by the doctrine, yet often hidden by the same patriarchal culture the Restoration was meant to move beyond. The divine template for exaltation is, by definition, a heterosexual sealed pair who together possess the power of eternal creation.",
+                    "text": "And it is understood in LDS faith that Heavenly Father is not a solitary deity. He is part of a sealed pair; Heavenly Mother exists, though she is rarely discussed. She is required by the doctrine, yet often hidden by the same patriarchal culture the Restoration was meant to move beyond. The divine template for exaltation is, by definition, a heterosexual sealed pair who together possess the power of eternal creation."
+                },
+                {
+                    "id": "paragraph_mq02rr08_1k88vu",
+                    "type": "paragraph",
+                    "html": "This is why the orthodox Latter-day Saint argument is different from mainstream Christian traditionalism. The mainstream argument says same-sex relationships are morally forbidden. The orthodox LDS argument goes further: it says <b>they do not fit the structure of exaltation itself</b>. In this view, the problem is not only sin. It is architecture.<br>",
+                    "text": "This is why the orthodox Latter-day Saint argument is different from mainstream Christian traditionalism. The mainstream argument says same-sex relationships are morally forbidden. The orthodox LDS argument goes further: it says they do not fit the structure of exaltation itself. In this view, the problem is not only sin. It is architecture."
+                },
+                {
+                    "id": "paragraph_mpz2uha0_7payj9",
+                    "type": "paragraph",
+                    "html": "It is not a broken path but the wrong road entirely; one that, however beautiful the relationship, does not lead to the destination.",
+                    "text": "It is not a broken path but the wrong road entirely; one that, however beautiful the relationship, does not lead to the destination."
+                },
+                {
+                    "id": "paragraph_mq02rr08_cag712",
+                    "type": "paragraph",
+                    "html": "This is the most honest presentation of the traditional case.",
+                    "text": "This is the most honest presentation of the traditional case."
+                },
+                {
+                    "id": "heading_mq02rr08_rlusgx",
+                    "type": "heading",
+                    "level": 3,
+                    "html": "The Hazard of Steadying the Ark<span>The line is not always ours to move.</span>",
+                    "text": "The Hazard of Steadying the ArkThe line is not always ours to move."
+                },
+                {
+                    "id": "image_mq4keuxl_cyw2ly",
+                    "type": "image",
+                    "imageRef": "image_mq4keuxl_cyw2ly",
+                    "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kevfy.jpg",
+                    "objectKey": "narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kevfy.jpg",
+                    "displaySize": "medium",
+                    "alignment": "center",
+                    "wrapMode": "wrap-left"
+                },
+                {
+                    "id": "p_mq4keuxp_r29as1",
+                    "type": "paragraph",
+                    "html": "The third pillar of the orthodox argument is not about theology at all. And it is specifically Latter-day Saint in character. It is the question of <b>authority</b>.",
+                    "text": "The third pillar of the orthodox argument is not about theology at all. And it is specifically Latter-day Saint in character. It is the question of authority."
+                },
+                {
+                    "id": "paragraph_mq2vk5r8_ugu85z",
+                    "type": "paragraph",
+                    "html": "This is not a difference of opinion. It is a challenge to the entire architecture of the Restoration, and those of us who hold affirming views while remaining in the Church owe it to ourselves to sit with that friction honestly.",
+                    "text": "This is not a difference of opinion. It is a challenge to the entire architecture of the Restoration, and those of us who hold affirming views while remaining in the Church owe it to ourselves to sit with that friction honestly."
+                },
+                {
+                    "id": "paragraph_mq2vk5r8_vqtgfi",
+                    "type": "paragraph",
+                    "html": "<span>The Church\u2019s claim to divine authority rests on the belief that prophetic keys actually work.\u00a0</span>It rests on the belief that the collective prophetic voice is more reliable than any individual\u2019s spiritual intuition, precisely because the individual is subject to self-deception, cultural conditioning, and the very human tendency to let love for a specific person override a principle that was never meant to be comfortable.",
+                    "text": "The Church\u2019s claim to divine authority rests on the belief that prophetic keys actually work.\u00a0It rests on the belief that the collective prophetic voice is more reliable than any individual\u2019s spiritual intuition, precisely because the individual is subject to self-deception, cultural conditioning, and the very human tendency to let love for a specific person override a principle that was never meant to be comfortable."
+                },
+                {
+                    "id": "paragraph_mq02rr08_79e4o5",
+                    "type": "paragraph",
+                    "html": "The scriptural metaphor for this danger is <b>\"steadying the ark\"</b>, drawn from the account in 2 Samuel 6:6-7, where Uzzah reaches out to prevent the ark of the covenant from falling and is struck dead for his presumption. The lesson is uncomfortable: well-intentioned corrections that bypass established divine order are not rewarded. In Latter-day Saint culture, this story functions as a warning against the impulse to correct the institutional Church, however good one's intentions.",
+                    "text": "The scriptural metaphor for this danger is \"steadying the ark\", drawn from the account in 2 Samuel 6:6-7, where Uzzah reaches out to prevent the ark of the covenant from falling and is struck dead for his presumption. The lesson is uncomfortable: well-intentioned corrections that bypass established divine order are not rewarded. In Latter-day Saint culture, this story functions as a warning against the impulse to correct the institutional Church, however good one's intentions."
+                },
+                {
+                    "id": "paragraph_mq02rr08_tn00k6",
+                    "type": "paragraph",
+                    "html": "<span>The tradition does not ask members to suppress their spiritual experience. It asks them to be honest about what that experience gives them authority to do.</span>\u00a0Guidance for a personal life is one thing. A settled conclusion that the institutional framework is simply wrong about a matter the First Presidency has repeatedly addressed as doctrine is another. The former is the birthright of every member. The latter requires a level of confidence in one's own spiritual perception that Latter-day Saint theology specifically, and repeatedly, counsels against.",
+                    "text": "The tradition does not ask members to suppress their spiritual experience. It asks them to be honest about what that experience gives them authority to do.\u00a0Guidance for a personal life is one thing. A settled conclusion that the institutional framework is simply wrong about a matter the First Presidency has repeatedly addressed as doctrine is another. The former is the birthright of every member. The latter requires a level of confidence in one's own spiritual perception that Latter-day Saint theology specifically, and repeatedly, counsels against."
+                },
+                {
+                    "id": "divider_mq2vk5r8_ljeo9u",
+                    "type": "divider"
+                },
+                {
+                    "id": "h2_mq1x4r5g_1bnm8z",
+                    "type": "heading",
+                    "level": 2,
+                    "html": "<strong>II. The Affirming Case</strong>",
+                    "text": "II. The Affirming Case"
+                },
+                {
+                    "id": "paragraph_mq2vk5r8_n1s1hr",
+                    "type": "paragraph",
+                    "html": "<span>The orthodox case has been made at full strength. Now the ground shifts.</span>",
+                    "text": "The orthodox case has been made at full strength. Now the ground shifts."
+                },
+                {
+                    "id": "image_mq4kgfzu_3a6diy",
+                    "type": "image",
+                    "imageRef": "image_mq4kgfzu_3a6diy",
+                    "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kggav.jpg",
+                    "objectKey": "narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kggav.jpg",
+                    "displaySize": "medium",
+                    "alignment": "center",
+                    "wrapMode": "wrap-right"
+                },
+                {
+                    "id": "paragraph_mq2vk5r8_zr8epm",
+                    "type": "paragraph",
+                    "html": "<span>The affirming case begins with reality: for some people, suppressing or denying a core part of who they are is not a matter of spiritual discipline. It is a slow erasure. Being told, repeatedly and institutionally, that you are the problem does not produce holiness. It produces alienation, despair, and in too many cases, exits from life itself that we do not talk about enough.</span>",
+                    "text": "The affirming case begins with reality: for some people, suppressing or denying a core part of who they are is not a matter of spiritual discipline. It is a slow erasure. Being told, repeatedly and institutionally, that you are the problem does not produce holiness. It produces alienation, despair, and in too many cases, exits from life itself that we do not talk about enough."
+                },
+                {
+                    "id": "paragraph_mq2vk5r8_gh302d",
+                    "type": "paragraph",
+                    "html": "<span>This is why many affirming Latter-day Saints are not simply trying to overrule the prophets with private revelation. That framing is too simple, and it is not the experience most of them would describe. More often, what they are holding is something quieter and more desperate than a theological position. It is love for a real person. It is the witness of a life they cannot dismiss. It is the belief that God made this person, God knows this person\u2019s path, and God will cause all things to be made right in ways and on a timetable that are not ours to dictate.</span>",
+                    "text": "This is why many affirming Latter-day Saints are not simply trying to overrule the prophets with private revelation. That framing is too simple, and it is not the experience most of them would describe. More often, what they are holding is something quieter and more desperate than a theological position. It is love for a real person. It is the witness of a life they cannot dismiss. It is the belief that God made this person, God knows this person\u2019s path, and God will cause all things to be made right in ways and on a timetable that are not ours to dictate."
+                },
+                {
+                    "id": "paragraph_mq2vk5r8_u4pl2d",
+                    "type": "paragraph",
+                    "html": "<span>That is not necessarily a claim that private revelation outranks prophetic authority. It is a posture of radical trust in a God whose mercy is larger than any single institutional moment, and a refusal to treat another person\u2019s survival as an acceptable casualty of doctrinal tidiness.</span>",
+                    "text": "That is not necessarily a claim that private revelation outranks prophetic authority. It is a posture of radical trust in a God whose mercy is larger than any single institutional moment, and a refusal to treat another person\u2019s survival as an acceptable casualty of doctrinal tidiness."
+                },
+                {
+                    "id": "paragraph_mq2vk5r8_29anco",
+                    "type": "paragraph",
+                    "html": "<span>But here the orthodox response returns with force. From inside the orthodox frame, compassion does not settle the question.</span>",
+                    "text": "But here the orthodox response returns with force. From inside the orthodox frame, compassion does not settle the question."
+                },
+                {
+                    "id": "paragraph_mq2vk5r9_ssb6tv",
+                    "type": "paragraph",
+                    "html": "<span>The orthodox response to this position is not a dismissal of its human weight.\u00a0</span><span>It is something harder than dismissal. The covenant does not ask you to pretend the cost is small. It has never pretended that. It points to martyrs, to pioneers, to people who buried children and kept their covenants anyway, to generations of men and women who bore unbearable things inside this tradition and were promised that the bearing meant something eternal. The invitation to endure is not indifference dressed up as doctrine. It is a very old and very hard promise: that the story is not over, that mortality is temporary, and that covenants kept now have consequences that outweigh the present cost in ways the individual, in pain, may not yet be able to see.</span>",
+                    "text": "The orthodox response to this position is not a dismissal of its human weight.\u00a0It is something harder than dismissal. The covenant does not ask you to pretend the cost is small. It has never pretended that. It points to martyrs, to pioneers, to people who buried children and kept their covenants anyway, to generations of men and women who bore unbearable things inside this tradition and were promised that the bearing meant something eternal. The invitation to endure is not indifference dressed up as doctrine. It is a very old and very hard promise: that the story is not over, that mortality is temporary, and that covenants kept now have consequences that outweigh the present cost in ways the individual, in pain, may not yet be able to see."
+                },
+                {
+                    "id": "paragraph_mq2vk5r9_9ojsdk",
+                    "type": "paragraph",
+                    "html": "From the orthodox perspective, reframing a doctrinal position as a survival necessity does not answer that contradiction. It changes the form of it. Because God, in this telling, is not asking whether your suffering is real. He already knows it is. He is asking whether you trust the promiser enough to carry it anyway.",
+                    "text": "From the orthodox perspective, reframing a doctrinal position as a survival necessity does not answer that contradiction. It changes the form of it. Because God, in this telling, is not asking whether your suffering is real. He already knows it is. He is asking whether you trust the promiser enough to carry it anyway."
+                },
+                {
+                    "id": "paragraph_mq2vk5r9_la40ow",
+                    "type": "paragraph",
+                    "html": "The question remains, no matter how the affirming position is framed. Whether a member says, \u201cthe Spirit told me this is approved,\u201d or \u201cGod\u2019s mercy is larger than this moment,\u201d or \u201cmy friend cannot survive being asked to carry this,\u201d they are reaching the same practical conclusion: the current prophetic position does not apply here.",
+                    "text": "The question remains, no matter how the affirming position is framed. Whether a member says, \u201cthe Spirit told me this is approved,\u201d or \u201cGod\u2019s mercy is larger than this moment,\u201d or \u201cmy friend cannot survive being asked to carry this,\u201d they are reaching the same practical conclusion: the current prophetic position does not apply here."
+                },
+                {
+                    "id": "paragraph_mq2vk5r9_t0r2nk",
+                    "type": "paragraph",
+                    "html": "And in Latter-day Saint thought, that is not a small move. The moment a member becomes the one deciding which prophetic boundaries apply and which ones give way to higher mercy, spiritual authority has quietly moved from the Church to the individual.",
+                    "text": "And in Latter-day Saint thought, that is not a small move. The moment a member becomes the one deciding which prophetic boundaries apply and which ones give way to higher mercy, spiritual authority has quietly moved from the Church to the individual."
+                },
+                {
+                    "id": "paragraph_mq2vk5r9_fc4opk",
+                    "type": "paragraph",
+                    "html": "That is the orthodox case at its most honest and its most demanding. It is not a small thing to answer. But an honest reckoning requires asking what the argument is actually standing on.",
+                    "text": "That is the orthodox case at its most honest and its most demanding. It is not a small thing to answer. But an honest reckoning requires asking what the argument is actually standing on."
+                },
+                {
+                    "id": "heading_mq02rr09_eotgnw",
+                    "type": "heading",
+                    "level": 3,
+                    "html": "<strong>Sexual Orientation as a Modern Category</strong>",
+                    "text": "Sexual Orientation as a Modern Category"
+                },
+                {
+                    "id": "paragraph_mq02rr09_snwfzk",
+                    "type": "paragraph",
+                    "html": "What follows in this section is necessarily dense. I won't pretend otherwise. But I want you to know where it came from before you read it.",
+                    "text": "What follows in this section is necessarily dense. I won't pretend otherwise. But I want you to know where it came from before you read it."
+                },
+                {
+                    "id": "paragraph_mq02rr09_rv1hul",
+                    "type": "paragraph",
+                    "html": "Dr. Dan McClellan is a Latter-day Saint scripture translation supervisor who spends his professional life inside the same tradition this essay is wrestling with. Encountering his work was the moment I understood that it was possible to look directly at the historical record, unflinchingly, and still remain. That realization is the reason this section exists. Stay with it.",
+                    "text": "Dr. Dan McClellan is a Latter-day Saint scripture translation supervisor who spends his professional life inside the same tradition this essay is wrestling with. Encountering his work was the moment I understood that it was possible to look directly at the historical record, unflinchingly, and still remain. That realization is the reason this section exists. Stay with it."
+                },
+                {
+                    "id": "paragraph_mq02rr09_m3ktkv",
+                    "type": "paragraph",
+                    "html": "I have always suspected language. I think it comes with the territory of a mind that reads into what people say more than what they mean, that forgets intention and humanity in the search for precision. Certitudes from the pulpit have always made me uneasy. The thee and thou of the King James Version has always made my brain turn off mid-verse.",
+                    "text": "I have always suspected language. I think it comes with the territory of a mind that reads into what people say more than what they mean, that forgets intention and humanity in the search for precision. Certitudes from the pulpit have always made me uneasy. The thee and thou of the King James Version has always made my brain turn off mid-verse."
+                },
+                {
+                    "id": "paragraph_mq02rr09_7w11fj",
+                    "type": "paragraph",
+                    "html": "So wh<span>en I found someone who knew Hebrew, who knew the Ancient Near East, who knew the Greco-Roman world from the inside out, I paid attention. And what McClellan's work, alongside scholars like Robin Scroggs and Martti Nissinen, revealed was not a progressive reinterpretation of scripture. It was an excavation of what the words actually meant before centuries of translation, cultural assumption, and institutional convenience buried them.</span>",
+                    "text": "So when I found someone who knew Hebrew, who knew the Ancient Near East, who knew the Greco-Roman world from the inside out, I paid attention. And what McClellan's work, alongside scholars like Robin Scroggs and Martti Nissinen, revealed was not a progressive reinterpretation of scripture. It was an excavation of what the words actually meant before centuries of translation, cultural assumption, and institutional convenience buried them."
+                },
+                {
+                    "id": "image_mq2w03t8_rdq6vv",
+                    "type": "image",
+                    "imageRef": "image_mq2w03t8_rdq6vv",
+                    "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq2w048e.jpg",
+                    "objectKey": "narrative/2026-06-05-the-crucible-of-continuous-revelation-mq2w048e.jpg",
+                    "displaySize": "medium",
+                    "alignment": "center",
+                    "wrapMode": "wrap-right"
+                },
+                {
+                    "id": "paragraph_mq02rr09_vcf3rm",
+                    "type": "paragraph",
+                    "html": "<span>I teach Gospel Doctrine in my ward. I try to do the legwork. I try to find out where the people of Israel actually were, what was happening around them, and what the words meant in the language where they were first spoken. Hebrew especially. Hebrew has meanings that outpace even the most explanatory English translations.</span>\u00a0I learned recently, preparing a lesson on Ruth, that the word hesed, which King James translators variously rendered as mercy, kindness, lovingkindness, and faithfulness, actually means something far more specific: an active, enduring loyalty practiced within a relationship, especially when one party has the power to meet a critical need for a weaker party. None of those English words carry that. The Hebrew carries that. And knowing it changes everything about how you read the story.",
+                    "text": "I teach Gospel Doctrine in my ward. I try to do the legwork. I try to find out where the people of Israel actually were, what was happening around them, and what the words meant in the language where they were first spoken. Hebrew especially. Hebrew has meanings that outpace even the most explanatory English translations.\u00a0I learned recently, preparing a lesson on Ruth, that the word hesed, which King James translators variously rendered as mercy, kindness, lovingkindness, and faithfulness, actually means something far more specific: an active, enduring loyalty practiced within a relationship, especially when one party has the power to meet a critical need for a weaker party. None of those English words carry that. The Hebrew carries that. And knowing it changes everything about how you read the story."
+                },
+                {
+                    "id": "paragraph_mq02rr09_3r89zz",
+                    "type": "paragraph",
+                    "html": "That is what good scholarship does. It gives the scriptures room to breathe. It gives them life and color. It stops you from reading Nephi slaying Laban through a 21st century lens of murder and starts you reading it through the ancient lens of theft, betrayal, and breach of contract that the original audience would have understood immediately.",
+                    "text": "That is what good scholarship does. It gives the scriptures room to breathe. It gives them life and color. It stops you from reading Nephi slaying Laban through a 21st century lens of murder and starts you reading it through the ancient lens of theft, betrayal, and breach of contract that the original audience would have understood immediately."
+                },
+                {
+                    "id": "paragraph_mq02rr09_v05vg0",
+                    "type": "paragraph",
+                    "html": "So why would we do any differently with matters of the heart?",
+                    "text": "So why would we do any differently with matters of the heart?"
+                },
+                {
+                    "id": "paragraph_mq02rr09_tp2jgq",
+                    "type": "paragraph",
+                    "html": "The most important insight biblical scholarship brings to this debate is also the most surprising: ancient people did not think about sexual orientation the way we do. The idea of sexual orientation as a stable, inborn part of personal identity did not exist in the Ancient Near East or the Greco-Roman world. It did not exist anywhere on earth until the late nineteenth century, when European sexologists coined the term homosexuality in 1869 and began sorting people by sexual type.<br>",
+                    "text": "The most important insight biblical scholarship brings to this debate is also the most surprising: ancient people did not think about sexual orientation the way we do. The idea of sexual orientation as a stable, inborn part of personal identity did not exist in the Ancient Near East or the Greco-Roman world. It did not exist anywhere on earth until the late nineteenth century, when European sexologists coined the term homosexuality in 1869 and began sorting people by sexual type."
+                },
+                {
+                    "id": "paragraph_mq2vk5r9_5tctn7",
+                    "type": "paragraph",
+                    "html": "This is not a progressive talking point. It is a<b> historical fact.</b> In the ancient world, sexual behavior was not mainly understood through attraction or identity. It was understood through power and social rank: who had power, who did not, who acted, who was acted upon, who was free, and who was not.",
+                    "text": "This is not a progressive talking point. It is a historical fact. In the ancient world, sexual behavior was not mainly understood through attraction or identity. It was understood through power and social rank: who had power, who did not, who acted, who was acted upon, who was free, and who was not."
+                },
+                {
+                    "id": "paragraph_mq2vk5r9_z5cugq",
+                    "type": "paragraph",
+                    "html": "Scroggs argued in his landmark 1983 study that what Paul was actually condemning was pederasty: the Greek practice of an adult man taking an adolescent boy as his sexual ward. This was the most visible form of male same-sex activity in the Greco-Roman world. Paul\u2019s condemnations targeted exploitation across age and power, not two adults entering a committed relationship as equals.",
+                    "text": "Scroggs argued in his landmark 1983 study that what Paul was actually condemning was pederasty: the Greek practice of an adult man taking an adolescent boy as his sexual ward. This was the most visible form of male same-sex activity in the Greco-Roman world. Paul\u2019s condemnations targeted exploitation across age and power, not two adults entering a committed relationship as equals."
+                },
+                {
+                    "id": "paragraph_mq2vk5r9_od7wqt",
+                    "type": "paragraph",
+                    "html": "Nissinen\u2019s research showed that this pattern reached across cultures and centuries. Ancient writers were not mainly worried about the gender of a person\u2019s sexual partner. They were worried about power, rank, and shame. A free Roman man taking the passive role in sex was condemned not because his partner was male, but because it lowered his status. The concern was honor and dominance, not two adults choosing a committed relationship as equals.",
+                    "text": "Nissinen\u2019s research showed that this pattern reached across cultures and centuries. Ancient writers were not mainly worried about the gender of a person\u2019s sexual partner. They were worried about power, rank, and shame. A free Roman man taking the passive role in sex was condemned not because his partner was male, but because it lowered his status. The concern was honor and dominance, not two adults choosing a committed relationship as equals."
+                },
+                {
+                    "id": "paragraph_mq02rr09_s2da0q",
+                    "type": "paragraph",
+                    "html": "With that established, the specific prohibitions look different.",
+                    "text": "With that established, the specific prohibitions look different."
+                },
+                {
+                    "id": "paragraph_mq2vk5r9_ytp8pd",
+                    "type": "paragraph",
+                    "html": "Leviticus 18:22 and 20:13 prohibit a man from lying with another man as with a woman. In both passages, the act is called an \u201cabomination.\u201d That word matters. The Hebrew word behind it is<span>\u00a0</span><em>to\u2019evah</em>, and it does not always mean universal moral evil. It often refers to ritual impurity, taboo, or a forbidden crossing of categories. The same word is used elsewhere for things like eating shellfish and wearing clothing made of mixed fabrics.",
+                    "text": "Leviticus 18:22 and 20:13 prohibit a man from lying with another man as with a woman. In both passages, the act is called an \u201cabomination.\u201d That word matters. The Hebrew word behind it is\u00a0to\u2019evah, and it does not always mean universal moral evil. It often refers to ritual impurity, taboo, or a forbidden crossing of categories. The same word is used elsewhere for things like eating shellfish and wearing clothing made of mixed fabrics."
+                },
+                {
+                    "id": "paragraph_mq2vk5r9_ujhd3b",
+                    "type": "paragraph",
+                    "html": "That matters because these laws belonged to Israel\u2019s covenant code. They helped define Israel as a people set apart from the nations around them. They were part of Israel\u2019s way of ordering holiness, purity, worship, food, clothing, family, bodies, and boundaries. They were not written as a moral dictionary for the entire outside world, detached from Israel\u2019s ritual life and covenant identity.",
+                    "text": "That matters because these laws belonged to Israel\u2019s covenant code. They helped define Israel as a people set apart from the nations around them. They were part of Israel\u2019s way of ordering holiness, purity, worship, food, clothing, family, bodies, and boundaries. They were not written as a moral dictionary for the entire outside world, detached from Israel\u2019s ritual life and covenant identity."
+                },
+                {
+                    "id": "paragraph_mq2vk5r9_hkn5ca",
+                    "type": "paragraph",
+                    "html": "The Sodom story has often been treated as though it were about consensual same-sex relationships. But that is not what the text describes. The actual story is about a mob demanding to gang rape divine visitors. It is a scene of violence, domination, and humiliation. It is the opposite of hospitality.",
+                    "text": "The Sodom story has often been treated as though it were about consensual same-sex relationships. But that is not what the text describes. The actual story is about a mob demanding to gang rape divine visitors. It is a scene of violence, domination, and humiliation. It is the opposite of hospitality."
+                },
+                {
+                    "id": "paragraph_mq2vk5r9_uynzsg",
+                    "type": "paragraph",
+                    "html": "The prophet Ezekiel later names Sodom\u2019s sin more directly. He does not describe it as a committed same-sex relationship. He describes it as arrogance, excess, and neglect of the poor and needy. So to use Sodom as a condemnation of two adults in a committed relationship is not just severe. It is a misreading of the story itself.",
+                    "text": "The prophet Ezekiel later names Sodom\u2019s sin more directly. He does not describe it as a committed same-sex relationship. He describes it as arrogance, excess, and neglect of the poor and needy. So to use Sodom as a condemnation of two adults in a committed relationship is not just severe. It is a misreading of the story itself."
+                },
+                {
+                    "id": "paragraph_mq2vk5r9_dmdw91",
+                    "type": "paragraph",
+                    "html": "Romans 1:26-27 is the hardest text in this part of the argument, and it needs careful reading. Paul uses the phrase \u201cagainst nature,\u201d but that phrase did not always mean what modern readers assume it means. In the Greco-Roman world, \u201cnature\u201d often referred to the accepted social order, not simply to biology. The same culture could call it \u201cagainst nature\u201d for a wealthy or high-status man to take the passive role in sex, not because of his partner\u2019s gender, but because it lowered his social rank.",
+                    "text": "Romans 1:26-27 is the hardest text in this part of the argument, and it needs careful reading. Paul uses the phrase \u201cagainst nature,\u201d but that phrase did not always mean what modern readers assume it means. In the Greco-Roman world, \u201cnature\u201d often referred to the accepted social order, not simply to biology. The same culture could call it \u201cagainst nature\u201d for a wealthy or high-status man to take the passive role in sex, not because of his partner\u2019s gender, but because it lowered his social rank."
+                },
+                {
+                    "id": "paragraph_mq2vk5r9_x7aaqz",
+                    "type": "paragraph",
+                    "html": "That matters because Paul is not writing a modern statement about sexual orientation. He is describing excess, dishonor, and idolatry in the pagan world around him. He is not imagining two adults of equal standing building a committed life together. And in the same passage, his list of sins includes greed, gossip, and disobedience to parents, which rarely receive the same institutional weight.",
+                    "text": "That matters because Paul is not writing a modern statement about sexual orientation. He is describing excess, dishonor, and idolatry in the pagan world around him. He is not imagining two adults of equal standing building a committed life together. And in the same passage, his list of sins includes greed, gossip, and disobedience to parents, which rarely receive the same institutional weight."
+                },
+                {
+                    "id": "paragraph_mq2vk5r9_ax2mem",
+                    "type": "paragraph",
+                    "html": "First Corinthians 6:9 raises a different problem. It contains two Greek words with long and disputed translation histories.<span>\u00a0</span><em>Malakoi</em>, often translated as \u201ceffeminate\u201d or \u201csoft,\u201d referred to men who took the passive sexual role.<span>\u00a0</span><em>Arsenokoitai</em><span>\u00a0</span>is more difficult. Paul may have coined the word himself from the Greek translation of the Hebrew scriptures. In early Christian writings, it often appears near language about exploitation, economic abuse, and injustice. In First Timothy 1:10, it appears in the same list as slave dealers. The link to exploitation is hard to ignore.",
+                    "text": "First Corinthians 6:9 raises a different problem. It contains two Greek words with long and disputed translation histories.\u00a0Malakoi, often translated as \u201ceffeminate\u201d or \u201csoft,\u201d referred to men who took the passive sexual role.\u00a0Arsenokoitai\u00a0is more difficult. Paul may have coined the word himself from the Greek translation of the Hebrew scriptures. In early Christian writings, it often appears near language about exploitation, economic abuse, and injustice. In First Timothy 1:10, it appears in the same list as slave dealers. The link to exploitation is hard to ignore."
+                },
+                {
+                    "id": "paragraph_mq2vk5r9_0by970",
+                    "type": "paragraph",
+                    "html": "Here is what stopped me cold when I first encountered this material. The King James translators in 1611 rendered<span>\u00a0</span><em>arsenokoitai</em><span>\u00a0</span>as \u201cabusers of themselves with mankind,\u201d a phrase that does not map onto the modern idea of gay identity at all. The word was not translated as \u201chomosexual\u201d until 1946. Not in 1611. Not in 1769. 1946. Within living memory. A modern category was placed onto an ancient text that had no such category. That is not a footnote. That is part of the foundation for the entire enforcement gap. And once you see it, you cannot unsee it.",
+                    "text": "Here is what stopped me cold when I first encountered this material. The King James translators in 1611 rendered\u00a0arsenokoitai\u00a0as \u201cabusers of themselves with mankind,\u201d a phrase that does not map onto the modern idea of gay identity at all. The word was not translated as \u201chomosexual\u201d until 1946. Not in 1611. Not in 1769. 1946. Within living memory. A modern category was placed onto an ancient text that had no such category. That is not a footnote. That is part of the foundation for the entire enforcement gap. And once you see it, you cannot unsee it."
+                },
+                {
+                    "id": "paragraph_mq2vk5r9_et5ine",
+                    "type": "paragraph",
+                    "html": "The honest conclusion is not that the biblical writers were secretly supportive of same-sex relationships. They were not. But the same-sex behavior they knew was usually tied to exploitation, shame, status, and power. They were speaking about the world they could see: adult men using boys, masters using enslaved people, powerful men lowering other men, and sexual acts shaped by domination rather than mutual love.",
+                    "text": "The honest conclusion is not that the biblical writers were secretly supportive of same-sex relationships. They were not. But the same-sex behavior they knew was usually tied to exploitation, shame, status, and power. They were speaking about the world they could see: adult men using boys, masters using enslaved people, powerful men lowering other men, and sexual acts shaped by domination rather than mutual love."
+                },
+                {
+                    "id": "paragraph_mq2vk5r9_ryctk8",
+                    "type": "paragraph",
+                    "html": "What they did not have was our modern idea of sexual orientation. They did not imagine two adults, equal before each other, building a committed life out of a stable and deeply rooted same-sex love.",
+                    "text": "What they did not have was our modern idea of sexual orientation. They did not imagine two adults, equal before each other, building a committed life out of a stable and deeply rooted same-sex love."
+                },
+                {
+                    "id": "paragraph_mq1slj7t_jvow9b",
+                    "type": "paragraph",
+                    "html": "To apply their words to that situation is to use an ancient hammer on a nail they never saw.",
+                    "text": "To apply their words to that situation is to use an ancient hammer on a nail they never saw."
+                },
+                {
+                    "id": "heading_mq02rr09_0dvlou",
+                    "type": "heading",
+                    "level": 3,
+                    "html": "The Selective Enforcement Problem: What Paul's Lists Reveal About Us<br>",
+                    "text": "The Selective Enforcement Problem: What Paul's Lists Reveal About Us"
+                },
+                {
+                    "id": "paragraph_mq2vk5ra_zbg55v",
+                    "type": "paragraph",
+                    "html": "Before leaving the New Testament scriptures, there is one more thing to notice about<span>\u00a0</span><strong>how we read</strong>. Sometimes our use of the text reveals more about us than the text itself.",
+                    "text": "Before leaving the New Testament scriptures, there is one more thing to notice about\u00a0how we read. Sometimes our use of the text reveals more about us than the text itself."
+                },
+                {
+                    "id": "image_mq4ki8un_6igyd8",
+                    "type": "image",
+                    "imageRef": "image_mq4ki8un_6igyd8",
+                    "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4ki9cd.jpg",
+                    "objectKey": "narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4ki9cd.jpg",
+                    "displaySize": "medium",
+                    "alignment": "center",
+                    "wrapMode": "wrap-left"
+                },
+                {
+                    "id": "paragraph_mq2vk5ra_f66acg",
+                    "type": "paragraph",
+                    "html": "The \u201cvice list\u201d in 1 Corinthians 6:9-10 is a single catalog. Paul names those who \u201cwill not inheri<span>t the kingdom of God,\u201d then lists them without ranking one above another: the sexually immoral, idolaters, adulterers, thieves, the greedy, drunkards, revilers, and swindlers.</span>",
+                    "text": "The \u201cvice list\u201d in 1 Corinthians 6:9-10 is a single catalog. Paul names those who \u201cwill not inherit the kingdom of God,\u201d then lists them without ranking one above another: the sexually immoral, idolaters, adulterers, thieves, the greedy, drunkards, revilers, and swindlers."
+                },
+                {
+                    "id": "paragraph_mq2vk5ra_7h5nx9",
+                    "type": "paragraph",
+                    "html": "One list. No hierarchy.",
+                    "text": "One list. No hierarchy."
+                },
+                {
+                    "id": "paragraph_mq2vk5ra_pqsbt1",
+                    "type": "paragraph",
+                    "html": "The same is true of Romans 1:29-31, where the same-sex passage flows immediately into a long list of other sins: covetousness, malice, envy, murder, strife, deceit, gossip, slander, arrogance, and disobedience to parents. Again, the text does not rank them.",
+                    "text": "The same is true of Romans 1:29-31, where the same-sex passage flows immediately into a long list of other sins: covetousness, malice, envy, murder, strife, deceit, gossip, slander, arrogance, and disobedience to parents. Again, the text does not rank them."
+                },
+                {
+                    "id": "paragraph_mq2vk5ra_xtwnc4",
+                    "type": "paragraph",
+                    "html": "The text does not prioritize.<span>\u00a0</span><strong>We do.</strong><span>\u00a0</span>I cannot emphasize this enough.",
+                    "text": "The text does not prioritize.\u00a0We do.\u00a0I cannot emphasize this enough."
+                },
+                {
+                    "id": "paragraph_mq2vk5ra_owcwz3",
+                    "type": "paragraph",
+                    "html": "In the institutional life of The Church of Jesus Christ of Latter-day Saints, same-sex sexual activity can lead to membership councils, loss of temple recommends, and formal discipline. Greed, though it appears in Paul\u2019s list, usually does not. Gossip does not. Disobedience to parents does not. A swindler may have far less trouble keeping a temple recommend than a gay couple trying to build a faithful life together.",
+                    "text": "In the institutional life of The Church of Jesus Christ of Latter-day Saints, same-sex sexual activity can lead to membership councils, loss of temple recommends, and formal discipline. Greed, though it appears in Paul\u2019s list, usually does not. Gossip does not. Disobedience to parents does not. A swindler may have far less trouble keeping a temple recommend than a gay couple trying to build a faithful life together."
+                },
+                {
+                    "id": "paragraph_mq2vk5ra_6svhag",
+                    "type": "paragraph",
+                    "html": "That difference is not a detail. It reveals how we read.",
+                    "text": "That difference is not a detail. It reveals how we read."
+                },
+                {
+                    "id": "paragraph_mq2vk5ra_9rh8bc",
+                    "type": "paragraph",
+                    "html": "When readers take one item from Paul\u2019s list and give it formal Church consequences, while treating the rest as general moral counsel, they are not simply following the text. They are bringing a ranking to the text that the text itself does not provide.",
+                    "text": "When readers take one item from Paul\u2019s list and give it formal Church consequences, while treating the rest as general moral counsel, they are not simply following the text. They are bringing a ranking to the text that the text itself does not provide."
+                },
+                {
+                    "id": "paragraph_mq2vk5ra_s1c2vd",
+                    "type": "paragraph",
+                    "html": "That ranking comes from somewhere else: culture, fear, social pressure, or the need to protect a certain kind of order. Then scripture is brought in afterward to bless it.",
+                    "text": "That ranking comes from somewhere else: culture, fear, social pressure, or the need to protect a certain kind of order. Then scripture is brought in afterward to bless it."
+                },
+                {
+                    "id": "paragraph_mq2vk5ra_9rejio",
+                    "type": "paragraph",
+                    "html": "<span>The traditionalist answer is that same-sex sexual activity carries a scriptural weight that greed and gossip do not. It does not appear only in Paul\u2019s lists. It appears in the creation story, in Jesus\u2019 teaching on marriage, in the Holiness Code, and in more than one New Testament text. </span>",
+                    "text": "The traditionalist answer is that same-sex sexual activity carries a scriptural weight that greed and gossip do not. It does not appear only in Paul\u2019s lists. It appears in the creation story, in Jesus\u2019 teaching on marriage, in the Holiness Code, and in more than one New Testament text."
+                },
+                {
+                    "id": "paragraph_mq1t5jyc_992i7k",
+                    "type": "paragraph",
+                    "html": "<span>That repeated witness, the argument goes, shows that this is a different kind of moral concern.\u00a0</span><span>But that answer has its own problem. </span>",
+                    "text": "That repeated witness, the argument goes, shows that this is a different kind of moral concern.\u00a0But that answer has its own problem."
+                },
+                {
+                    "id": "paragraph_mq1t5oeb_qwdnmk",
+                    "type": "paragraph",
+                    "html": "<span>Greed does not appear only in lists either. It is condemned in the Ten Commandments. It runs through the Hebrew prophets like a fault line. Jesus taught about wealth again and again: the rich young ruler, the camel and the needle\u2019s eye, the parable of the rich fool, the Sermon on the Mount\u2019s warnings about wealth and anxiety, and the flat declaration that you cannot serve God and mammon. Paul tells Timothy that the love of money is a root of all kinds of evil.</span>",
+                    "text": "Greed does not appear only in lists either. It is condemned in the Ten Commandments. It runs through the Hebrew prophets like a fault line. Jesus taught about wealth again and again: the rich young ruler, the camel and the needle\u2019s eye, the parable of the rich fool, the Sermon on the Mount\u2019s warnings about wealth and anxiety, and the flat declaration that you cannot serve God and mammon. Paul tells Timothy that the love of money is a root of all kinds of evil."
+                },
+                {
+                    "id": "paragraph_mq2vk5ra_3p6qc5",
+                    "type": "paragraph",
+                    "html": "<span>If repeated scriptural attention is the standard, greed should receive more formal Church attention than same-sex relationships, not less.</span>",
+                    "text": "If repeated scriptural attention is the standard, greed should receive more formal Church attention than same-sex relationships, not less."
+                },
+                {
+                    "id": "paragraph_mq2vk5ra_mwqhu6",
+                    "type": "paragraph",
+                    "html": "So what does consistent enforcement actually look like?",
+                    "text": "So what does consistent enforcement actually look like?"
+                },
+                {
+                    "id": "paragraph_mq2vk5ra_9j28n8",
+                    "type": "paragraph",
+                    "html": "Drive north along I-15 through Utah. Count the billboards for facial rejuvenation, breast implants, jewelry, and luxury. Drive up into the hills above Draper and approach the temple. What surrounds the House of the Lord? Large homes. Beautiful cars. Lush gardens. Property values lifted by proximity to something sacred.",
+                    "text": "Drive north along I-15 through Utah. Count the billboards for facial rejuvenation, breast implants, jewelry, and luxury. Drive up into the hills above Draper and approach the temple. What surrounds the House of the Lord? Large homes. Beautiful cars. Lush gardens. Property values lifted by proximity to something sacred."
+                },
+                {
+                    "id": "paragraph_mq2vk5ra_4wf43q",
+                    "type": "paragraph",
+                    "html": "I am not condemning plastic surgery, nice clothes, beautiful homes, or people who have done well. That would be too easy, and too dishonest. Money does not equal greed. Beauty does not equal vanity. A nice house does not mean a corrupt soul.",
+                    "text": "I am not condemning plastic surgery, nice clothes, beautiful homes, or people who have done well. That would be too easy, and too dishonest. Money does not equal greed. Beauty does not equal vanity. A nice house does not mean a corrupt soul."
+                },
+                {
+                    "id": "paragraph_mq2vk5ra_y7afc9",
+                    "type": "paragraph",
+                    "html": "But the contrast is hard to ignore. In some parts of Latter-day Saint culture, signs of wealth, polish, status, and success can sit very comfortably beside religious devotion. Sometimes they are even mistaken for it.",
+                    "text": "But the contrast is hard to ignore. In some parts of Latter-day Saint culture, signs of wealth, polish, status, and success can sit very comfortably beside religious devotion. Sometimes they are even mistaken for it."
+                },
+                {
+                    "id": "paragraph_mq2vk5ra_k0yym5",
+                    "type": "paragraph",
+                    "html": "Dr. Julie De Azevedo identified the current precisely: \u201cThere\u2019s kind of this cultural belief in Utah that if you look perfect, if your kids look perfect, if your house is perfect, then somehow it\u2019s tied to your righteousness.\u201d",
+                    "text": "Dr. Julie De Azevedo identified the current precisely: \u201cThere\u2019s kind of this cultural belief in Utah that if you look perfect, if your kids look perfect, if your house is perfect, then somehow it\u2019s tied to your righteousness.\u201d"
+                },
+                {
+                    "id": "paragraph_mq2vk5ra_vx3zlx",
+                    "type": "paragraph",
+                    "html": "But I should catch myself here, because I almost became the thing I am critiquing. I live in an affluent ward. My house is older, on a street with less than stellar circumstances by local standards. But compared to many Latter-day Saints outside the United States, I live in a mansion. I am afflicted too. I am human.",
+                    "text": "But I should catch myself here, because I almost became the thing I am critiquing. I live in an affluent ward. My house is older, on a street with less than stellar circumstances by local standards. But compared to many Latter-day Saints outside the United States, I live in a mansion. I am afflicted too. I am human."
+                },
+                {
+                    "id": "paragraph_mq2vk5ra_37ahad",
+                    "type": "paragraph",
+                    "html": "That is the point. The selective use of Paul\u2019s vice lists reveals a gap not only in the text, but in us. It reveals what we notice, what we excuse, what we fear, and what we have learned to leave alone.",
+                    "text": "That is the point. The selective use of Paul\u2019s vice lists reveals a gap not only in the text, but in us. It reveals what we notice, what we excuse, what we fear, and what we have learned to leave alone."
+                },
+                {
+                    "id": "paragraph_mq2vk5ra_odfxxr",
+                    "type": "paragraph",
+                    "html": "This does not dissolve the traditional argument. It does make any honest reader ask a harder question: are we following the text, or are we following ourselves?",
+                    "text": "This does not dissolve the traditional argument. It does make any honest reader ask a harder question: are we following the text, or are we following ourselves?"
+                },
+                {
+                    "id": "heading_mq02rr0a_kvowzo",
+                    "type": "heading",
+                    "level": 3,
+                    "html": "What Ancient Prohibitions Were Actually About",
+                    "text": "What Ancient Prohibitions Were Actually About"
+                },
+                {
+                    "id": "paragraph_mq2vk5ra_efrqag",
+                    "type": "paragraph",
+                    "html": "<span>The consistent thread running through all of this evidence is not complicated once you see it. In both the Hebrew and Greco-Roman worlds, sexual ethics were organized around power. Who held it. Who did not. What happened when that order was violated.</span>",
+                    "text": "The consistent thread running through all of this evidence is not complicated once you see it. In both the Hebrew and Greco-Roman worlds, sexual ethics were organized around power. Who held it. Who did not. What happened when that order was violated."
+                },
+                {
+                    "id": "paragraph_mq2vk5ra_v1j7u1",
+                    "type": "paragraph",
+                    "html": "What was actually being condemned was the sexual exploitation of those with little or no power to refuse: the adult man who took a boy as his sexual ward, the master who used an enslaved person\u2019s body as property, the creditor who extracted sex as payment for debt, the subordinate forced into passivity they never chose. These were real evils. Serious evils. <b>Evils that deserve to be named as such.</b>",
+                    "text": "What was actually being condemned was the sexual exploitation of those with little or no power to refuse: the adult man who took a boy as his sexual ward, the master who used an enslaved person\u2019s body as property, the creditor who extracted sex as payment for debt, the subordinate forced into passivity they never chose. These were real evils. Serious evils. Evils that deserve to be named as such."
+                },
+                {
+                    "id": "paragraph_mq2vk5ra_jk4mg0",
+                    "type": "paragraph",
+                    "html": "<span>But here is the thing. None of those situations involve two adults, equal before each other, choosing a committed life together. Not one. The ancient prohibitions were not confused. They were not foolish. They were targeting something real and specific and terrible.</span>",
+                    "text": "But here is the thing. None of those situations involve two adults, equal before each other, choosing a committed life together. Not one. The ancient prohibitions were not confused. They were not foolish. They were targeting something real and specific and terrible."
+                },
+                {
+                    "id": "paragraph_mq2vk5ra_9ic7wn",
+                    "type": "paragraph",
+                    "html": "They simply were not targeting anything that resembles a contemporary same-sex marriage. <b>Not even close.</b>",
+                    "text": "They simply were not targeting anything that resembles a contemporary same-sex marriage. Not even close."
+                },
+                {
+                    "id": "paragraph_mq2vk5ra_q0jedh",
+                    "type": "paragraph",
+                    "html": "<span>I think about the people I know. The couples raising children, paying tithing, serving in their communities, sitting in the same pews I sit in, or wishing they still could. I think about what it means to tell them that their relationship is condemned by texts written in worlds of rape, slavery, domination, status, and exploitation. The distance between those two things is not a technicality. It is the entire argument.</span>",
+                    "text": "I think about the people I know. The couples raising children, paying tithing, serving in their communities, sitting in the same pews I sit in, or wishing they still could. I think about what it means to tell them that their relationship is condemned by texts written in worlds of rape, slavery, domination, status, and exploitation. The distance between those two things is not a technicality. It is the entire argument."
+                },
+                {
+                    "id": "paragraph_mq2vk5ra_ymy0f9",
+                    "type": "paragraph",
+                    "html": "<span>So the textual case has been made. At least, the affirming textual case has been made. But if we are being honest, the strongest version of the orthodox Latter-day Saint argument was never mainly about Leviticus, Sodom, Romans, or Paul\u2019s vice lists.</span>",
+                    "text": "So the textual case has been made. At least, the affirming textual case has been made. But if we are being honest, the strongest version of the orthodox Latter-day Saint argument was never mainly about Leviticus, Sodom, Romans, or Paul\u2019s vice lists."
+                },
+                {
+                    "id": "paragraph_mq2vk5ra_a5czq8",
+                    "type": "paragraph",
+                    "html": "<span>That is where the harder question begins.</span>",
+                    "text": "That is where the harder question begins."
+                },
+                {
+                    "id": "divider_mq2vk5ra_8glqxl",
+                    "type": "divider"
+                },
+                {
+                    "id": "heading_mq02rr0a_oeyb87",
+                    "type": "heading",
+                    "level": 2,
+                    "html": "<strong>III. The Synthesis</strong>",
+                    "text": "III. The Synthesis"
+                },
+                {
+                    "id": "paragraph_mq02rr0a_ojtrhd",
+                    "type": "paragraph",
+                    "html": "Here is where the work gets hard.<br>",
+                    "text": "Here is where the work gets hard."
+                },
+                {
+                    "id": "paragraph_mq2vk5ra_q85apm",
+                    "type": "paragraph",
+                    "html": "Everything in the previous section is true. The scholarship is solid. The textual argument holds. Paul was addressing real abuses in the sexual world he knew, but not the modern question now in front of us. The ancient world had no concept of sexual orientation as a stable part of personal identity. The prohibitions were aimed at exploitation, status, domination, and shame, not at two adults building a committed life together.",
+                    "text": "Everything in the previous section is true. The scholarship is solid. The textual argument holds. Paul was addressing real abuses in the sexual world he knew, but not the modern question now in front of us. The ancient world had no concept of sexual orientation as a stable part of personal identity. The prohibitions were aimed at exploitation, status, domination, and shame, not at two adults building a committed life together."
+                },
+                {
+                    "id": "paragraph_mq2vk5ra_h0mygj",
+                    "type": "paragraph",
+                    "html": "And none of that resolves the specific problem the Restoration presents.",
+                    "text": "And none of that resolves the specific problem the Restoration presents."
+                },
+                {
+                    "id": "paragraph_mq2vk5ra_jhcprh",
+                    "type": "paragraph",
+                    "html": "Because the Latter-day Saint case for the eternal necessity of male-female marriage does not finally rest on Leviticus. It does not finally rest on Paul. It does not finally rest on the Greco-Roman world or the Ancient Near East or any text that a biblical scholar can place back into its ancient setting.",
+                    "text": "Because the Latter-day Saint case for the eternal necessity of male-female marriage does not finally rest on Leviticus. It does not finally rest on Paul. It does not finally rest on the Greco-Roman world or the Ancient Near East or any text that a biblical scholar can place back into its ancient setting."
+                },
+                {
+                    "id": "paragraph_mq2vk5ra_bil9v1",
+                    "type": "paragraph",
+                    "html": "<strong>It rests on modern revelation.</strong>",
+                    "text": "It rests on modern revelation."
+                },
+                {
+                    "id": "paragraph_mq2vk5ra_wbeutc",
+                    "type": "paragraph",
+                    "html": "On a living prophet. On the Family Proclamation and D&amp;C 132. On a theology that says gender is eternal, exaltation requires a sealed male-female pair, and God has spoken on this matter in our own time through his chosen servants.",
+                    "text": "On a living prophet. On the Family Proclamation and D&C 132. On a theology that says gender is eternal, exaltation requires a sealed male-female pair, and God has spoken on this matter in our own time through his chosen servants."
+                },
+                {
+                    "id": "paragraph_mq2vk5ra_sfxrwa",
+                    "type": "paragraph",
+                    "html": "That is why the affirming textual argument, even when it succeeds, does not end the debate for Latter-day Saints. It may weaken the inherited use of ancient scripture. It may expose how much modern readers have brought to the text. But it does not, by itself, answer the Restoration\u2019s deeper claim: that God still speaks, and that he has spoken through prophets now.",
+                    "text": "That is why the affirming textual argument, even when it succeeds, does not end the debate for Latter-day Saints. It may weaken the inherited use of ancient scripture. It may expose how much modern readers have brought to the text. But it does not, by itself, answer the Restoration\u2019s deeper claim: that God still speaks, and that he has spoken through prophets now."
+                },
+                {
+                    "id": "paragraph_mq02rr0a_26gap7",
+                    "type": "paragraph",
+                    "html": "A historically sophisticated reading of Leviticus does not touch that. Not even a little.",
+                    "text": "A historically sophisticated reading of Leviticus does not touch that. Not even a little."
+                },
+                {
+                    "id": "paragraph_mq2vk5ra_244gma",
+                    "type": "paragraph",
+                    "html": "But here is what Latter-day Saint history does provide, and it is genuinely extraordinary: a record of the institutional Church holding claims about what eternal life requires. Claims supported by living prophets, modern revelation, and the language of eternity.",
+                    "text": "But here is what Latter-day Saint history does provide, and it is genuinely extraordinary: a record of the institutional Church holding claims about what eternal life requires. Claims supported by living prophets, modern revelation, and the language of eternity."
+                },
+                {
+                    "id": "paragraph_mq2vk5ra_m7ud28",
+                    "type": "paragraph",
+                    "html": "Before we look at those claims, we need to name the principle that makes this possible.",
+                    "text": "Before we look at those claims, we need to name the principle that makes this possible."
+                },
+                {
+                    "id": "heading_mq2vk5ra_2jsa6c",
+                    "type": "heading",
+                    "level": 3,
+                    "html": "Jesus Said This First",
+                    "text": "Jesus Said This First"
+                },
+                {
+                    "id": "image_mq4kjv6y_ija10c",
+                    "type": "image",
+                    "imageRef": "image_mq4kjv6y_ija10c",
+                    "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kjvl3.jpg",
+                    "objectKey": "narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kjvl3.jpg",
+                    "displaySize": "medium",
+                    "alignment": "center",
+                    "wrapMode": "wrap-right"
+                },
+                {
+                    "id": "paragraph_mq2vk5ra_zix9ft",
+                    "type": "paragraph",
+                    "html": "The basic problem is older than the Restoration: how can something given through prophetic\u00a0<span>authority be real, binding, and divinely permitted, and still not be God\u2019s final ideal? </span>",
+                    "text": "The basic problem is older than the Restoration: how can something given through prophetic\u00a0authority be real, binding, and divinely permitted, and still not be God\u2019s final ideal?"
+                },
+                {
+                    "id": "paragraph_mq4klfcg_do9no3",
+                    "type": "paragraph",
+                    "html": "<span></span><span>Jesus answers that question in the very Matthew 19 passage traditionalists often cite in defense of heterosexual marriage.</span>",
+                    "text": "Jesus answers that question in the very Matthew 19 passage traditionalists often cite in defense of heterosexual marriage."
+                },
+                {
+                    "id": "paragraph_mq2vk5ra_uuo7g1",
+                    "type": "paragraph",
+                    "html": "The Pharisees press Jesus about divorce, specifically about the permission Moses gave in Deuteronomy 24. Jesus\u2019 response is remarkable: \u201cMoses permitted you to divorce your wives because of your hardness of heart, but from the beginning it was not so\u201d (Matthew 19:8).",
+                    "text": "The Pharisees press Jesus about divorce, specifically about the permission Moses gave in Deuteronomy 24. Jesus\u2019 response is remarkable: \u201cMoses permitted you to divorce your wives because of your hardness of heart, but from the beginning it was not so\u201d (Matthew 19:8)."
+                },
+                {
+                    "id": "paragraph_mq2vk5ra_cnipua",
+                    "type": "paragraph",
+                    "html": "Read that carefully. Jesus is not saying the Pharisees misunderstood Moses. He is saying Moses really did permit something that was less than the ideal. A command given through a prophet made room for people as they actually were, not as they should have been. God met Israel in its weakness, even while knowing that the weakness was not the final destination.",
+                    "text": "Read that carefully. Jesus is not saying the Pharisees misunderstood Moses. He is saying Moses really did permit something that was less than the ideal. A command given through a prophet made room for people as they actually were, not as they should have been. God met Israel in its weakness, even while knowing that the weakness was not the final destination."
+                },
+                {
+                    "id": "paragraph_mq2vk5rb_gw0irh",
+                    "type": "paragraph",
+                    "html": "That principle matters. God does not always reveal everything at once. Sometimes he gives a people what they are able to receive, then calls them forward later. The Law was a step, not the end of the road. Israel just did not know that yet.",
+                    "text": "That principle matters. God does not always reveal everything at once. Sometimes he gives a people what they are able to receive, then calls them forward later. The Law was a step, not the end of the road. Israel just did not know that yet."
+                },
+                {
+                    "id": "paragraph_mq2vk5rb_3baj6x",
+                    "type": "paragraph",
+                    "html": "Now consider what this may imply for the sexual rules of that same ancient world. If God allowed a divorce law because Israel was not ready for the full standard, it is at least fair to ask whether other parts of that same world also carried the marks of human hardness. This was a world where men held nearly all the power, and women, enslaved people, boys, and those lower in the social order were expected to stay in their place. The divorce laws and the sexual prohibitions came from the same soil.",
+                    "text": "Now consider what this may imply for the sexual rules of that same ancient world. If God allowed a divorce law because Israel was not ready for the full standard, it is at least fair to ask whether other parts of that same world also carried the marks of human hardness. This was a world where men held nearly all the power, and women, enslaved people, boys, and those lower in the social order were expected to stay in their place. The divorce laws and the sexual prohibitions came from the same soil."
+                },
+                {
+                    "id": "paragraph_mq2vk5rb_mxcijy",
+                    "type": "paragraph",
+                    "html": "That does not prove the ancient prohibitions were wrong. It does not make the modern question easy. But it does mean the question is not a progressive trick. Jesus himself showed that a law can be given through a prophet, serve a real purpose, and still fall short of God\u2019s final ideal.",
+                    "text": "That does not prove the ancient prohibitions were wrong. It does not make the modern question easy. But it does mean the question is not a progressive trick. Jesus himself showed that a law can be given through a prophet, serve a real purpose, and still fall short of God\u2019s final ideal."
+                },
+                {
+                    "id": "heading_mq02rr0a_z4p5lj",
+                    "type": "heading",
+                    "level": 3,
+                    "html": "<strong>The Unfinished Building</strong>",
+                    "text": "The Unfinished Building"
+                },
+                {
+                    "id": "paragraph_mq01ybmn_6fjeg6",
+                    "type": "paragraph",
+                    "html": "The Restoration did not leave this idea unstated. It wrote it into its founding articles:<br>",
+                    "text": "The Restoration did not leave this idea unstated. It wrote it into its founding articles:"
+                },
+                {
+                    "id": "quote_mq02rr0a_p9mo3m",
+                    "type": "quote",
+                    "html": "We believe all that God has revealed, all that He does now reveal, and we believe that He will yet reveal many great and important things pertaining to the Kingdom of God.",
+                    "text": "We believe all that God has revealed, all that He does now reveal, and we believe that He will yet reveal many great and important things pertaining to the Kingdom of God."
+                },
+                {
+                    "id": "paragraph_mq2vk5rb_rcjbkg",
+                    "type": "paragraph",
+                    "html": "<span>That is not merely a statement that the canon is open. It is a statement that we do not yet have everything God intends to give. \u201cHe will yet reveal\u201d is not decorative language. It is a promise that more light is still coming.</span>",
+                    "text": "That is not merely a statement that the canon is open. It is a statement that we do not yet have everything God intends to give. \u201cHe will yet reveal\u201d is not decorative language. It is a promise that more light is still coming."
+                },
+                {
+                    "id": "paragraph_mq2vk5rb_hicn3h",
+                    "type": "paragraph",
+                    "html": "<span>So to treat any current doctrine, however confidently stated, however recently reaffirmed, as the final eternal word sits uneasily beside the Ninth Article of Faith itself.</span>",
+                    "text": "So to treat any current doctrine, however confidently stated, however recently reaffirmed, as the final eternal word sits uneasily beside the Ninth Article of Faith itself."
+                },
+                {
+                    "id": "paragraph_mq2vk5rb_i4r63m",
+                    "type": "paragraph",
+                    "html": "A living church is, <b>by definition</b>, a church that does not yet know everything.",
+                    "text": "A living church is, by definition, a church that does not yet know everything."
+                },
+                {
+                    "id": "paragraph_mq2vk5rb_juxxp3",
+                    "type": "paragraph",
+                    "html": "Joseph Smith seemed to understand this better than anyone. The Restoration, as he lived it, was not a finished system with occasional updates. It was an unfolding one. New revelation did not always add a small detail to what already existed. Sometimes it changed the scale of the whole thing.",
+                    "text": "Joseph Smith seemed to understand this better than anyone. The Restoration, as he lived it, was not a finished system with occasional updates. It was an unfolding one. New revelation did not always add a small detail to what already existed. Sometimes it changed the scale of the whole thing."
+                },
+                {
+                    "id": "paragraph_mq2vk5rb_aq6f5x",
+                    "type": "paragraph",
+                    "html": "That is what makes Joseph\u2019s final years so important. Near the end of his life, his teachings about God, eternity, and exaltation expanded far beyond the simpler Christian world many early Saints had first entered. In the King Follett discourse, Joseph described God in terms so bold that earlier converts could hardly have imagined where the Restoration was going. God was not only the eternal ruler of creation. God had a history. Human beings had a divine future. The distance between God and humanity was not erased, but it was radically reimagined.",
+                    "text": "That is what makes Joseph\u2019s final years so important. Near the end of his life, his teachings about God, eternity, and exaltation expanded far beyond the simpler Christian world many early Saints had first entered. In the King Follett discourse, Joseph described God in terms so bold that earlier converts could hardly have imagined where the Restoration was going. God was not only the eternal ruler of creation. God had a history. Human beings had a divine future. The distance between God and humanity was not erased, but it was radically reimagined."
+                },
+                {
+                    "id": "paragraph_mq2vk5rb_416hsu",
+                    "type": "paragraph",
+                    "html": "The same disruptive pattern appears in the 1843 revelation on celestial marriage, now recorded in Doctrine and Covenants 132. That revelation did not merely adjust the Church\u2019s teaching on marriage. It introduced a new eternal structure around sealing, exaltation, and plural marriage. Whatever else one makes of that revelation, it shows that Joseph did not treat the Restoration as a closed building. He treated it as something still under construction.",
+                    "text": "The same disruptive pattern appears in the 1843 revelation on celestial marriage, now recorded in Doctrine and Covenants 132. That revelation did not merely adjust the Church\u2019s teaching on marriage. It introduced a new eternal structure around sealing, exaltation, and plural marriage. Whatever else one makes of that revelation, it shows that Joseph did not treat the Restoration as a closed building. He treated it as something still under construction."
+                },
+                {
+                    "id": "paragraph_mq2vk5rb_gfvf5t",
+                    "type": "paragraph",
+                    "html": "That matters here because \u201cline upon line, precept upon precept\u201d is not just a comforting phrase about gradual improvement inside a stable religion. In Joseph\u2019s Restoration, new revelation could expand the faith so deeply that earlier assumptions had to be rebuilt around it. The new line did not always sit quietly beside the old one. Sometimes it changed the shape of the whole map.",
+                    "text": "That matters here because \u201cline upon line, precept upon precept\u201d is not just a comforting phrase about gradual improvement inside a stable religion. In Joseph\u2019s Restoration, new revelation could expand the faith so deeply that earlier assumptions had to be rebuilt around it. The new line did not always sit quietly beside the old one. Sometimes it changed the shape of the whole map."
+                },
+                {
+                    "id": "heading_mq02rr0a_4pyxue",
+                    "type": "heading",
+                    "level": 3,
+                    "html": "When Eternal Laws Changed",
+                    "text": "When Eternal Laws Changed"
+                },
+                {
+                    "id": "paragraph_mq2vk5rb_s0srgo",
+                    "type": "paragraph",
+                    "html": "The strongest affirming argument inside the Restoration is not only about ancient scriptu<span>re. </span><b>It is about Latter-day Saint history itself.</b>",
+                    "text": "The strongest affirming argument inside the Restoration is not only about ancient scripture. It is about Latter-day Saint history itself."
+                },
+                {
+                    "id": "image_mq4kmr21_bynjs9",
+                    "type": "image",
+                    "imageRef": "image_mq4kmr21_bynjs9",
+                    "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kmres.jpg",
+                    "objectKey": "narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kmres.jpg",
+                    "displaySize": "medium",
+                    "alignment": "center",
+                    "wrapMode": "wrap-right"
+                },
+                {
+                    "id": "paragraph_mq2vk5rb_cybelr",
+                    "type": "paragraph",
+                    "html": "The Church has, more than once, taught something as bound up with eternity, salvation, priesthood, family, or exaltation, only to later change course. Not in minor matters. Not around the edges.",
+                    "text": "The Church has, more than once, taught something as bound up with eternity, salvation, priesthood, family, or exaltation, only to later change course. Not in minor matters. Not around the edges."
+                },
+                {
+                    "id": "paragraph_mq1u5jux_w47uq5",
+                    "type": "paragraph",
+                    "html": "In some of the most sacred and painful chapters of its history.",
+                    "text": "In some of the most sacred and painful chapters of its history."
+                },
+                {
+                    "id": "heading_mq2vk5rb_yjoe3u",
+                    "type": "heading",
+                    "level": 3,
+                    "html": "Plural Marriage and Official Declaration 1",
+                    "text": "Plural Marriage and Official Declaration 1"
+                },
+                {
+                    "id": "paragraph_mq2vk5rb_qgnkrq",
+                    "type": "paragraph",
+                    "html": "This is not a case of the Church quietly retiring an obscure policy preference. Plural marriage stood near the center of nineteenth-century Latter-day Saint sacrifice, identity, persecution, and temple theology.",
+                    "text": "This is not a case of the Church quietly retiring an obscure policy preference. Plural marriage stood near the center of nineteenth-century Latter-day Saint sacrifice, identity, persecution, and temple theology."
+                },
+                {
+                    "id": "paragraph_mq2vk5rb_scmxu0",
+                    "type": "paragraph",
+                    "html": "Joseph Smith introduced the practice through revelation, and Doctrine and Covenants 132 tied the new and everlasting covenant of marriage to exaltation in the starkest possible terms. The revelation warns that those who reject the covenant cannot enter God\u2019s glory, and it places eternal marriage, sealing, exaltation, eternal increase, and plural marriage inside the same revealed world.",
+                    "text": "Joseph Smith introduced the practice through revelation, and Doctrine and Covenants 132 tied the new and everlasting covenant of marriage to exaltation in the starkest possible terms. The revelation warns that those who reject the covenant cannot enter God\u2019s glory, and it places eternal marriage, sealing, exaltation, eternal increase, and plural marriage inside the same revealed world."
+                },
+                {
+                    "id": "paragraph_mq2vk5rb_bbw1jc",
+                    "type": "paragraph",
+                    "html": "Nineteenth-century leaders often spoke of plural marriage not as an optional practice, but as a divine law tied to the fullness of exaltation. Brigham Young declared, \u201cThe only men who become Gods, even the Sons of God, are those who enter into polygamy.\u201d In another sermon, he taught that a man in the Church who chose to live with only one wife might reach the celestial kingdom, but would find himself \u201cwithout any wife\u201d and \u201cremain single forever and ever.\u201d Joseph F. Smith later protested the idea that one sealed wife could bring the same fullness of exaltation as plural marriage, saying plainly, \u201cI know it is false.\u201d",
+                    "text": "Nineteenth-century leaders often spoke of plural marriage not as an optional practice, but as a divine law tied to the fullness of exaltation. Brigham Young declared, \u201cThe only men who become Gods, even the Sons of God, are those who enter into polygamy.\u201d In another sermon, he taught that a man in the Church who chose to live with only one wife might reach the celestial kingdom, but would find himself \u201cwithout any wife\u201d and \u201cremain single forever and ever.\u201d Joseph F. Smith later protested the idea that one sealed wife could bring the same fullness of exaltation as plural marriage, saying plainly, \u201cI know it is false.\u201d"
+                },
+                {
+                    "id": "paragraph_mq2vk5rb_fw2ydl",
+                    "type": "paragraph",
+                    "html": "That is the level of claim we are dealing with. Not a minor administrative rule. Not a cultural oddity at the edge of the faith. A practice many early leaders understood as a divine command, a test of loyalty, and part of the path toward the highest blessings God had promised.",
+                    "text": "That is the level of claim we are dealing with. Not a minor administrative rule. Not a cultural oddity at the edge of the faith. A practice many early leaders understood as a divine command, a test of loyalty, and part of the path toward the highest blessings God had promised."
+                },
+                {
+                    "id": "paragraph_mq2vk5rb_olxeij",
+                    "type": "paragraph",
+                    "html": "Lorenzo Snow makes the point even sharper. Before he became Church President, he was convicted under federal anti-polygamy law and served eleven months in prison. He is widely reported to have said that God would not change the law of celestial marriage, even if obedience to it brought imprisonment. Four years later, while Snow was still an apostle, Wilford Woodruff issued the 1890 Manifesto, beginning the official end of new plural marriages. At the October 1890 conference, Snow himself, then President of the Quorum of the Twelve, moved that the Manifesto be accepted as \u201cauthoritative and binding.\u201d",
+                    "text": "Lorenzo Snow makes the point even sharper. Before he became Church President, he was convicted under federal anti-polygamy law and served eleven months in prison. He is widely reported to have said that God would not change the law of celestial marriage, even if obedience to it brought imprisonment. Four years later, while Snow was still an apostle, Wilford Woodruff issued the 1890 Manifesto, beginning the official end of new plural marriages. At the October 1890 conference, Snow himself, then President of the Quorum of the Twelve, moved that the Manifesto be accepted as \u201cauthoritative and binding.\u201d"
+                },
+                {
+                    "id": "paragraph_mq2vk5rb_idohzc",
+                    "type": "paragraph",
+                    "html": "The legal pressure was not imaginary. By 1890, the Church faced the confiscation of property, the loss of temples, the stopping of temple ordinances, and the imprisonment of the First Presidency, the Twelve, and heads of families. Woodruff later framed the decision not as an admission that the doctrine had been false, but as obedience to revelation. The Lord, he said, would not permit the President of the Church to lead the Saints astray.",
+                    "text": "The legal pressure was not imaginary. By 1890, the Church faced the confiscation of property, the loss of temples, the stopping of temple ordinances, and the imprisonment of the First Presidency, the Twelve, and heads of families. Woodruff later framed the decision not as an admission that the doctrine had been false, but as obedience to revelation. The Lord, he said, would not permit the President of the Church to lead the Saints astray."
+                },
+                {
+                    "id": "paragraph_mq2vk5rb_5dujnq",
+                    "type": "paragraph",
+                    "html": "That distinction matters. The Church did not simply say, \u201cWe were wrong.\u201d But the practical effect was still enormous. A practice that many leaders had taught as divinely commanded and bound to exaltation was stopped as a lived requirement for the Saints. It has never been resumed in its nineteenth-century form.",
+                    "text": "That distinction matters. The Church did not simply say, \u201cWe were wrong.\u201d But the practical effect was still enormous. A practice that many leaders had taught as divinely commanded and bound to exaltation was stopped as a lived requirement for the Saints. It has never been resumed in its nineteenth-century form."
+                },
+                {
+                    "id": "paragraph_mq2vk5rb_psm3gv",
+                    "type": "paragraph",
+                    "html": "In much nineteenth-century Latter-day Saint usage, \u201ccelestial marriage\u201d was often used to mean plural marriage, or at least to include it. Today, the phrase usually means eternal monogamous marriage sealed in the temple. That shift in language is itself part of the story. It shows how dramatically the Church\u2019s living understanding of a sacred principle can change over time.",
+                    "text": "In much nineteenth-century Latter-day Saint usage, \u201ccelestial marriage\u201d was often used to mean plural marriage, or at least to include it. Today, the phrase usually means eternal monogamous marriage sealed in the temple. That shift in language is itself part of the story. It shows how dramatically the Church\u2019s living understanding of a sacred principle can change over time."
+                },
+                {
+                    "id": "paragraph_mq2vk5rb_3kv232",
+                    "type": "paragraph",
+                    "html": "The implication is not that every doctrine is fragile, or that prophetic teaching means nothing. The implication is more precise, and more unsettling: the argument \u201cthis cannot change because prophets have taught it as eternal\u201d has been tested before in Latter-day Saint history. And in the case of plural marriage, the lived expression of an eternal law did change.",
+                    "text": "The implication is not that every doctrine is fragile, or that prophetic teaching means nothing. The implication is more precise, and more unsettling: the argument \u201cthis cannot change because prophets have taught it as eternal\u201d has been tested before in Latter-day Saint history. And in the case of plural marriage, the lived expression of an eternal law did change."
+                },
+                {
+                    "id": "heading_mq2vk5rb_2hvmyv",
+                    "type": "heading",
+                    "level": 3,
+                    "html": "The Priesthood and Temple Restriction and Official Declaration 2",
+                    "text": "The Priesthood and Temple Restriction and Official Declaration 2"
+                },
+                {
+                    "id": "paragraph_mq2vk5rb_d6aeta",
+                    "type": "paragraph",
+                    "html": "The priesthood and temple restriction is even more sobering.",
+                    "text": "The priesthood and temple restriction is even more sobering."
+                },
+                {
+                    "id": "paragraph_mq2vk5rb_diqwo1",
+                    "type": "paragraph",
+                    "html": "For well over a century, Black members of African descent were denied priesthood ordination and temple ordinances. The restriction was not treated as a minor policy preference. It shaped who could hold priesthood office, who could enter the temple, who could be sealed, and who could receive the ordinances Latter-day Saints understand as necessary for exaltation.",
+                    "text": "For well over a century, Black members of African descent were denied priesthood ordination and temple ordinances. The restriction was not treated as a minor policy preference. It shaped who could hold priesthood office, who could enter the temple, who could be sealed, and who could receive the ordinances Latter-day Saints understand as necessary for exaltation."
+                },
+                {
+                    "id": "paragraph_mq2vk5rb_3pu850",
+                    "type": "paragraph",
+                    "html": "The explanations offered for the restriction were often theological. Brigham Young invoked the curse of Cain. Later leaders and teachers pointed to theories about premortal worthiness, divine timing, interracial marriage, and inherited curse. These explanations were not whispered only at the edges of the Church. They were taught, repeated, published, and absorbed into the religious imagination of generations.",
+                    "text": "The explanations offered for the restriction were often theological. Brigham Young invoked the curse of Cain. Later leaders and teachers pointed to theories about premortal worthiness, divine timing, interracial marriage, and inherited curse. These explanations were not whispered only at the edges of the Church. They were taught, repeated, published, and absorbed into the religious imagination of generations."
+                },
+                {
+                    "id": "paragraph_mq2vk5rb_lq8zwj",
+                    "type": "paragraph",
+                    "html": "Then, in 1978, President Spencer W. Kimball received the revelation now canonized as Official Declaration 2. The restriction ended. Priesthood and temple blessings were extended to all worthy members without regard to race.",
+                    "text": "Then, in 1978, President Spencer W. Kimball received the revelation now canonized as Official Declaration 2. The restriction ended. Priesthood and temple blessings were extended to all worthy members without regard to race."
+                },
+                {
+                    "id": "paragraph_mq2vk5rb_7gh692",
+                    "type": "paragraph",
+                    "html": "But the story did not end there.",
+                    "text": "But the story did not end there."
+                },
+                {
+                    "id": "paragraph_mq2vk5rb_y5mpcc",
+                    "type": "paragraph",
+                    "html": "Decades later, the Church published the Gospel Topics essay \u201cRace and the Priesthood,\u201d and the Church did something extraordinary. It did not merely say the restriction was over. It disavowed the theories that had been used to defend it. The essay rejected the ideas that Black skin was a sign of divine disfavor or curse, that it reflected unrighteousness in premortal life, that mixed-race marriage was a sin, or that Black people or people of any other race were inferior in any way.",
+                    "text": "Decades later, the Church published the Gospel Topics essay \u201cRace and the Priesthood,\u201d and the Church did something extraordinary. It did not merely say the restriction was over. It disavowed the theories that had been used to defend it. The essay rejected the ideas that Black skin was a sign of divine disfavor or curse, that it reflected unrighteousness in premortal life, that mixed-race marriage was a sin, or that Black people or people of any other race were inferior in any way."
+                },
+                {
+                    "id": "paragraph_mq2vk5rb_sxrmif",
+                    "type": "paragraph",
+                    "html": "That matters. The Church was not only moving beyond a restriction. It was also moving beyond the explanations that had once made the restriction seem holy.",
+                    "text": "That matters. The Church was not only moving beyond a restriction. It was also moving beyond the explanations that had once made the restriction seem holy."
+                },
+                {
+                    "id": "paragraph_mq2vk5rb_mwz21l",
+                    "type": "paragraph",
+                    "html": "Elder Bruce R. McConkie makes the point almost painfully clear. Before 1978, he had been one of the most visible defenders of the old theological explanations. After the revelation, he said: \u201cForget everything that I have said, or what President Brigham Young or President George Q. Cannon or whomsoever has said in days past that is contrary to the present revelation.\u201d Then he added the sentence that matters most here: \u201cWe spoke with a limited understanding and without the light and knowledge that now has come into the world.\u201d",
+                    "text": "Elder Bruce R. McConkie makes the point almost painfully clear. Before 1978, he had been one of the most visible defenders of the old theological explanations. After the revelation, he said: \u201cForget everything that I have said, or what President Brigham Young or President George Q. Cannon or whomsoever has said in days past that is contrary to the present revelation.\u201d Then he added the sentence that matters most here: \u201cWe spoke with a limited understanding and without the light and knowledge that now has come into the world.\u201d"
+                },
+                {
+                    "id": "paragraph_mq2vk5rb_z3dgh1",
+                    "type": "paragraph",
+                    "html": "That is the precedent.",
+                    "text": "That is the precedent."
+                },
+                {
+                    "id": "paragraph_mq2vk5rb_mfgag3",
+                    "type": "paragraph",
+                    "html": "Not that the Church is unreliable. Not that prophets are useless. Not that revelation means nothing.",
+                    "text": "Not that the Church is unreliable. Not that prophets are useless. Not that revelation means nothing."
+                },
+                {
+                    "id": "paragraph_mq2vk5rb_kdh23j",
+                    "type": "paragraph",
+                    "html": "The precedent is that faithful leaders can speak with limited understanding, even on matters they believe are tied to God\u2019s will, until more light comes. <b>And when more light comes, the Church can turn, disavow the old explanations, and move forward.</b>",
+                    "text": "The precedent is that faithful leaders can speak with limited understanding, even on matters they believe are tied to God\u2019s will, until more light comes. And when more light comes, the Church can turn, disavow the old explanations, and move forward."
+                },
+                {
+                    "id": "paragraph_mq2vk5rb_2trhf8",
+                    "type": "paragraph",
+                    "html": "That is \u201cline upon line\u201d in its most disruptive form.",
+                    "text": "That is \u201cline upon line\u201d in its most disruptive form."
+                },
+                {
+                    "id": "heading_mq02rr0b_e6ttjl",
+                    "type": "heading",
+                    "level": 3,
+                    "html": "<strong>Sitting in the Tension: What This Means Now</strong>",
+                    "text": "Sitting in the Tension: What This Means Now"
+                },
+                {
+                    "id": "paragraph_mq02rr0b_ed50j9",
+                    "type": "paragraph",
+                    "html": "What this history makes clear is not comfortable. It does not resolve cleanly into either the affirming or orthodox camp.",
+                    "text": "What this history makes clear is not comfortable. It does not resolve cleanly into either the affirming or orthodox camp."
+                },
+                {
+                    "id": "paragraph_mq02rr0b_qi9tai",
+                    "type": "paragraph",
+                    "html": "For the orthodox member, the historical record demands a certain humility. The argument \"this doctrine cannot change because prophets have declared it an eternal law\" has been specifically and directly falsified by the Church's own history, not once but twice, on the two most doctrinally significant issues of the 19th and 20th centuries.<span>\u00a0</span><strong>This does not prove that the doctrine on same-sex marriage will change.</strong><span>\u00a0</span>It does prove that the argument that it<span>\u00a0</span><strong>cannot</strong><span>\u00a0</span>change is not available as a premise.",
+                    "text": "For the orthodox member, the historical record demands a certain humility. The argument \"this doctrine cannot change because prophets have declared it an eternal law\" has been specifically and directly falsified by the Church's own history, not once but twice, on the two most doctrinally significant issues of the 19th and 20th centuries.\u00a0This does not prove that the doctrine on same-sex marriage will change.\u00a0It does prove that the argument that it\u00a0cannot\u00a0change is not available as a premise."
+                },
+                {
+                    "id": "paragraph_mq2vk5rc_t6yihr",
+                    "type": "paragraph",
+                    "html": "For the affirming member, the historical record also demands humility. The suffering is real. For some people, being fully seen and known is not a political preference or a modern slogan. It is bound up with survival. That cannot be waved away with a doctrine-shaped sentence.",
+                    "text": "For the affirming member, the historical record also demands humility. The suffering is real. For some people, being fully seen and known is not a political preference or a modern slogan. It is bound up with survival. That cannot be waved away with a doctrine-shaped sentence."
+                },
+                {
+                    "id": "paragraph_mq2vk5rc_daoici",
+                    "type": "paragraph",
+                    "html": "But suffering, by itself, does not settle what the Church is authorized to teach or do. The Restoration asks something harder than simply saying, \u201cGod is merciful,\u201d and leaving the question there. It asks us to hold both: the urgency of real lives and the weight of prophetic authority, without letting one cancel the other.",
+                    "text": "But suffering, by itself, does not settle what the Church is authorized to teach or do. The Restoration asks something harder than simply saying, \u201cGod is merciful,\u201d and leaving the question there. It asks us to hold both: the urgency of real lives and the weight of prophetic authority, without letting one cancel the other."
+                },
+                {
+                    "id": "paragraph_mq2vk5rc_x1t94p",
+                    "type": "paragraph",
+                    "html": "The history of the Restoration contains people who saw further than the institution was ready to see. That does not mean they had authority to remake the Church on their own. But it does mean their faithfulness mattered. Their questions mattered. Their presence mattered. Their refusal to stop belonging mattered.",
+                    "text": "The history of the Restoration contains people who saw further than the institution was ready to see. That does not mean they had authority to remake the Church on their own. But it does mean their faithfulness mattered. Their questions mattered. Their presence mattered. Their refusal to stop belonging mattered."
+                },
+                {
+                    "id": "paragraph_mq2vk5rc_a5gkzh",
+                    "type": "paragraph",
+                    "html": "The change on race did not come because every wounded Saint simply walked away and left the institution to itself. Nor did it come because individual conviction, by itself, became Church doctrine. It came through years of pain, prayer, study, pressure, service, and faithful insistence from within the body of the Church, until revelation finally came through the prophet.",
+                    "text": "The change on race did not come because every wounded Saint simply walked away and left the institution to itself. Nor did it come because individual conviction, by itself, became Church doctrine. It came through years of pain, prayer, study, pressure, service, and faithful insistence from within the body of the Church, until revelation finally came through the prophet."
+                },
+                {
+                    "id": "paragraph_mq2vk5rc_mlkszh",
+                    "type": "paragraph",
+                    "html": "That precedent does not point in only one direction. It does not counsel passivity. It does not ask people to pretend harm is harmless. But it does counsel patience with the way revelation comes to the Church.",
+                    "text": "That precedent does not point in only one direction. It does not counsel passivity. It does not ask people to pretend harm is harmless. But it does counsel patience with the way revelation comes to the Church."
+                },
+                {
+                    "id": "paragraph_mq2vk5rc_6n22i3",
+                    "type": "paragraph",
+                    "html": "To hold an affirming personal conviction while remaining inside the covenantal life of the Church is not merely patient waiting or quiet defiance. It is something more demanding than either. It is the belief that staying can itself be a form of faithfulness. That love can apply pressure without becoming rebellion. That grief can remain in the pews and still tell the truth.",
+                    "text": "To hold an affirming personal conviction while remaining inside the covenantal life of the Church is not merely patient waiting or quiet defiance. It is something more demanding than either. It is the belief that staying can itself be a form of faithfulness. That love can apply pressure without becoming rebellion. That grief can remain in the pews and still tell the truth."
+                },
+                {
+                    "id": "paragraph_mq2vk5rc_9zdvok",
+                    "type": "paragraph",
+                    "html": "It is also the recognition that revelation for the Church and revelation for one person work in different ways. The prophet speaks to the Church as a body. The Holy Ghost speaks to the individual soul. One guards the covenant path for the whole people. The other helps a particular child of God walk through the actual terrain of an actual life.",
+                    "text": "It is also the recognition that revelation for the Church and revelation for one person work in different ways. The prophet speaks to the Church as a body. The Holy Ghost speaks to the individual soul. One guards the covenant path for the whole people. The other helps a particular child of God walk through the actual terrain of an actual life."
+                },
+                {
+                    "id": "paragraph_mq2vk5rc_gn42oj",
+                    "type": "paragraph",
+                    "html": "These are not simple enemies. They are not always easy companions either. But Latter-day Saint theology has always held both: a Church led by prophets, and individual souls led by the Spirit.",
+                    "text": "These are not simple enemies. They are not always easy companions either. But Latter-day Saint theology has always held both: a Church led by prophets, and individual souls led by the Spirit."
+                },
+                {
+                    "id": "paragraph_mq2vk5rc_whchdz",
+                    "type": "paragraph",
+                    "html": "<b>I need to say this carefully. </b>Staying is not the holy answer for everyone. For some people, the faithful path, or simply the survivable one, may require distance. It may require stepping away, at least for a time. I do not judge that. I am describing one kind of faithfulness, not prescribing it as the only one.",
+                    "text": "I need to say this carefully. Staying is not the holy answer for everyone. For some people, the faithful path, or simply the survivable one, may require distance. It may require stepping away, at least for a time. I do not judge that. I am describing one kind of faithfulness, not prescribing it as the only one."
+                },
+                {
+                    "id": "paragraph_mq2vk5rc_9z89yx",
+                    "type": "paragraph",
+                    "html": "Paul\u2019s admonition to seek after anything virtuous, lovely, or of good report was not addressed to a committee. It was addressed to individual souls, each responsible for their own spiritual navigation. A loving set of Heavenly Parents who know their children intimately, who govern by persuasion rather than compulsion, and who refuse to override personal agency, are not parents who give one Church-wide instruction and expect it to solve every human situation it touches.",
+                    "text": "Paul\u2019s admonition to seek after anything virtuous, lovely, or of good report was not addressed to a committee. It was addressed to individual souls, each responsible for their own spiritual navigation. A loving set of Heavenly Parents who know their children intimately, who govern by persuasion rather than compulsion, and who refuse to override personal agency, are not parents who give one Church-wide instruction and expect it to solve every human situation it touches."
+                },
+                {
+                    "id": "paragraph_mq2vk5rc_ao7tn5",
+                    "type": "paragraph",
+                    "html": "The question is not whether personal revelation is valid. It is whether the individual is humble enough to hold it honestly, without using it to dissolve every tension that belonging to this tradition creates.",
+                    "text": "The question is not whether personal revelation is valid. It is whether the individual is humble enough to hold it honestly, without using it to dissolve every tension that belonging to this tradition creates."
+                },
+                {
+                    "id": "paragraph_mq2vk5rc_nloufv",
+                    "type": "paragraph",
+                    "html": "What the synthesis demands is something rarer and harder than either confident traditionalism or confident progressivism. This is my point:",
+                    "text": "What the synthesis demands is something rarer and harder than either confident traditionalism or confident progressivism. This is my point:"
+                },
+                {
+                    "id": "paragraph_mq2vk5rc_0gzr25",
+                    "type": "paragraph",
+                    "html": "It demands the willingness to live inside an unresolved tension.",
+                    "text": "It demands the willingness to live inside an unresolved tension."
+                },
+                {
+                    "id": "paragraph_mq2vk5rc_84zhkb",
+                    "type": "paragraph",
+                    "html": "The principle of divine accommodation, the line-upon-line doctrine, the Ninth Article of Faith, and the historical precedents of Official Declarations 1 and 2 do not tell us that the doctrine on same-sex marriage will change. They tell us that God\u2019s disclosure to humanity is ongoing, that the current prophetic position may reflect current understanding rather than final truth, and that the Church has shown it can move beyond earlier teachings, even strongly held ones, when a fuller truth becomes clear.",
+                    "text": "The principle of divine accommodation, the line-upon-line doctrine, the Ninth Article of Faith, and the historical precedents of Official Declarations 1 and 2 do not tell us that the doctrine on same-sex marriage will change. They tell us that God\u2019s disclosure to humanity is ongoing, that the current prophetic position may reflect current understanding rather than final truth, and that the Church has shown it can move beyond earlier teachings, even strongly held ones, when a fuller truth becomes clear."
+                },
+                {
+                    "id": "paragraph_mq2vk5rc_o0jlc0",
+                    "type": "paragraph",
+                    "html": "But they do not tell us the timetable. They do not tell us the content. And they offer cold comfort to the teenager who discovered something true about themselves and lost their family or church over it. To the mother who had to choose between her child and her community. To the person who spent decades trying to pray away something that never moved. The doctrine does not make the tension painless. It only insists the tension is worth holding.",
+                    "text": "But they do not tell us the timetable. They do not tell us the content. And they offer cold comfort to the teenager who discovered something true about themselves and lost their family or church over it. To the mother who had to choose between her child and her community. To the person who spent decades trying to pray away something that never moved. The doctrine does not make the tension painless. It only insists the tension is worth holding."
+                },
+                {
+                    "id": "heading_mq02rr0b_kzd3c9",
+                    "type": "heading",
+                    "level": 3,
+                    "html": "<strong>The Faith to Sit in Fire</strong>",
+                    "text": "The Faith to Sit in Fire"
+                },
+                {
+                    "id": "image_mq2w1ply_fan3yh",
+                    "type": "image",
+                    "imageRef": "image_mq2w1ply_fan3yh",
+                    "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq2w1prt.jpg",
+                    "objectKey": "narrative/2026-06-05-the-crucible-of-continuous-revelation-mq2w1prt.jpg",
+                    "displaySize": "medium",
+                    "alignment": "left",
+                    "wrapMode": "wrap-left"
+                },
+                {
+                    "id": "paragraph_mq2vk5rc_xuvaux",
+                    "type": "paragraph",
+                    "html": "The crucible this debate creates does not <b>resolve</b> the tension. It <b>refines</b> the people willing to",
+                    "text": "The crucible this debate creates does not resolve the tension. It refines the people willing to"
+                },
+                {
+                    "id": "p_mq2w1pm4_vg6tin",
+                    "type": "paragraph",
+                    "html": "stay inside it.<span>A path through holy heat.</span><span>A path through holy heat.</span>",
+                    "text": "stay inside it.A path through holy heat.A path through holy heat."
+                },
+                {
+                    "id": "paragraph_mq2vk5rc_b3lu8t",
+                    "type": "paragraph",
+                    "html": "<span>That is how the orthodox and affirming claims can sit together without pretending to agree. They do not cancel each other out. They press against each other, painfully and honestly, until something deeper is required of everyone involved.</span>",
+                    "text": "That is how the orthodox and affirming claims can sit together without pretending to agree. They do not cancel each other out. They press against each other, painfully and honestly, until something deeper is required of everyone involved."
+                },
+                {
+                    "id": "paragraph_mq2vk5rc_co1jpd",
+                    "type": "paragraph",
+                    "html": "It requires the orthodox member to hold certainty lightly enough to remember that every generation of the Church has been more confident about some teachings than it later had reason to be. That is not failure. It is part of what it means to belong to a living church that receives truth line by line.",
+                    "text": "It requires the orthodox member to hold certainty lightly enough to remember that every generation of the Church has been more confident about some teachings than it later had reason to be. That is not failure. It is part of what it means to belong to a living church that receives truth line by line."
+                },
+                {
+                    "id": "paragraph_mq2vk5rc_n06v9x",
+                    "type": "paragraph",
+                    "html": "It also requires them to care honestly about the real human cost of the Church\u2019s current position on LGBTQ+ Latter-day Saints. Not as unfortunate side damage. Not as a sad but necessary abstraction. But as a moral weight with a human face. The teenager. The mother. The person who prayed for decades.",
+                    "text": "It also requires them to care honestly about the real human cost of the Church\u2019s current position on LGBTQ+ Latter-day Saints. Not as unfortunate side damage. Not as a sad but necessary abstraction. But as a moral weight with a human face. The teenager. The mother. The person who prayed for decades."
+                },
+                {
+                    "id": "paragraph_mq2vk5rc_rft2sh",
+                    "type": "paragraph",
+                    "html": "<b>A living church with an open canon is not permitted the comfort of abstraction when the cost is this specific.</b>",
+                    "text": "A living church with an open canon is not permitted the comfort of abstraction when the cost is this specific."
+                },
+                {
+                    "id": "paragraph_mq02rr0b_mliq4r",
+                    "type": "paragraph",
+                    "html": "And it requires the affirming member to hold their moral compass with enough honesty to recognize that trusting God's mercy for the people they love, while also trusting the way the Restoration moves, is not a contradiction. It is the actual content of Latter-day Saint faith. Living in patient, faithful tension inside the covenant, without abandoning the humanity of the people caught in it or the integrity of the institution that contains it, is not a surrender. It is the harder and more honest version of discipleship.",
+                    "text": "And it requires the affirming member to hold their moral compass with enough honesty to recognize that trusting God's mercy for the people they love, while also trusting the way the Restoration moves, is not a contradiction. It is the actual content of Latter-day Saint faith. Living in patient, faithful tension inside the covenant, without abandoning the humanity of the people caught in it or the integrity of the institution that contains it, is not a surrender. It is the harder and more honest version of discipleship."
+                },
+                {
+                    "id": "paragraph_mq2vk5rc_k75m26",
+                    "type": "paragraph",
+                    "html": "The strongest LDS affirming position is <b>not</b> simply that the current prophets are wrong. <b>It is that the Restoration may still have more to reveal. </b>The unfinished building may contain rooms we have not yet seen. And that hope is not a departure from the Restoration. It is one of the deepest things the Restoration has taught us to expect.",
+                    "text": "The strongest LDS affirming position is not simply that the current prophets are wrong. It is that the Restoration may still have more to reveal. The unfinished building may contain rooms we have not yet seen. And that hope is not a departure from the Restoration. It is one of the deepest things the Restoration has taught us to expect."
+                },
+                {
+                    "id": "paragraph_mq2vk5rc_m6a4o5",
+                    "type": "paragraph",
+                    "html": "The precedents are real. The doctrine has room for revision. The Church has shown the humility required to make such a change.<br>",
+                    "text": "The precedents are real. The doctrine has room for revision. The Church has shown the humility required to make such a change."
+                },
+                {
+                    "id": "paragraph_mq2vk5rc_a9tozd",
+                    "type": "paragraph",
+                    "html": "And the cost of the current position is real: lives diminished, faith abandoned, young people who found the distance between who they are and what they were told they must be unlivable, people who did not survive that distance, souls told that the fullest expression of their love and commitment is structurally incompatible with the highest salvation.",
+                    "text": "And the cost of the current position is real: lives diminished, faith abandoned, young people who found the distance between who they are and what they were told they must be unlivable, people who did not survive that distance, souls told that the fullest expression of their love and commitment is structurally incompatible with the highest salvation."
+                },
+                {
+                    "id": "paragraph_mq2vk5rc_nw1b5k",
+                    "type": "paragraph",
+                    "html": "That is not a theoretical burden. It is a moral weight a living church built on continuous revelation cannot carry indefinitely without being asked about it again.",
+                    "text": "That is not a theoretical burden. It is a moral weight a living church built on continuous revelation cannot carry indefinitely without being asked about it again."
+                },
+                {
+                    "id": "paragraph_mq02rr0b_yx6lmy",
+                    "type": "paragraph",
+                    "html": "None of this is comfortable. All of it is honest.",
+                    "text": "None of this is comfortable. All of it is honest."
+                },
+                {
+                    "id": "paragraph_mq02rr0b_fypazt",
+                    "type": "paragraph",
+                    "html": "The faith that the ongoing Restoration actually demands is not the faith of those who are certain the current map is complete.\u00a0<span>It is the faith of those who trust the mapmaker enough to keep walking while the territory is still being drawn. They honor the best light they have now, while staying open to the next line, the next precept, the next great and important thing God has not yet revealed.</span>",
+                    "text": "The faith that the ongoing Restoration actually demands is not the faith of those who are certain the current map is complete.\u00a0It is the faith of those who trust the mapmaker enough to keep walking while the territory is still being drawn. They honor the best light they have now, while staying open to the next line, the next precept, the next great and important thing God has not yet revealed."
+                },
+                {
+                    "id": "paragraph_mq02rr0b_l6idrg",
+                    "type": "paragraph",
+                    "html": "<b>That is not a compromise. That is the Restoration.</b>",
+                    "text": "That is not a compromise. That is the Restoration."
+                }
+            ],
+            "images": [
+                {
+                    "id": "image_mq2vjbld_ulhm7g",
+                    "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq2vjclq.jpg",
+                    "objectKey": "narrative/2026-06-05-the-crucible-of-continuous-revelation-mq2vjclq.jpg",
+                    "alt": "Narrative image",
+                    "caption": "Where fire and mercy meet.",
+                    "displaySize": "large",
+                    "alignment": "center",
+                    "wrapMode": "wrap-right"
+                },
+                {
+                    "id": "image_mq4kvfdi_2szzlc",
+                    "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kvfnb.jpg",
+                    "objectKey": "narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kvfnb.jpg",
+                    "alt": "Narrative image",
+                    "caption": "The question becomes larger inside the Restoration.",
+                    "displaySize": "medium",
+                    "alignment": "center",
+                    "wrapMode": "wrap-left"
+                },
+                {
+                    "id": "image_mq4keuxl_cyw2ly",
+                    "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kevfy.jpg",
+                    "objectKey": "narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kevfy.jpg",
+                    "alt": "Narrative image",
+                    "caption": "The line is not always our to move",
+                    "displaySize": "medium",
+                    "alignment": "center",
+                    "wrapMode": "wrap-left"
+                },
+                {
+                    "id": "image_mq4kgfzu_3a6diy",
+                    "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kggav.jpg",
+                    "objectKey": "narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kggav.jpg",
+                    "alt": "Narrative image",
+                    "caption": "Not an issue. A household.",
+                    "displaySize": "medium",
+                    "alignment": "center",
+                    "wrapMode": "wrap-right"
+                },
+                {
+                    "id": "image_mq2w03t8_rdq6vv",
+                    "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq2w048e.jpg",
+                    "objectKey": "narrative/2026-06-05-the-crucible-of-continuous-revelation-mq2w048e.jpg",
+                    "alt": "Narrative image",
+                    "caption": "What time leaves behind, careful reading uncovers.",
+                    "displaySize": "medium",
+                    "alignment": "center",
+                    "wrapMode": "wrap-right"
+                },
+                {
+                    "id": "image_mq4ki8un_6igyd8",
+                    "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4ki9cd.jpg",
+                    "objectKey": "narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4ki9cd.jpg",
+                    "alt": "Narrative image",
+                    "caption": "",
+                    "displaySize": "medium",
+                    "alignment": "center",
+                    "wrapMode": "wrap-left"
+                },
+                {
+                    "id": "image_mq4kjv6y_ija10c",
+                    "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kjvl3.jpg",
+                    "objectKey": "narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kjvl3.jpg",
+                    "alt": "Narrative image",
+                    "caption": "The way down is, sometimes, how we find the truth.",
+                    "displaySize": "medium",
+                    "alignment": "center",
+                    "wrapMode": "wrap-right"
+                },
+                {
+                    "id": "image_mq4kmr21_bynjs9",
+                    "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kmres.jpg",
+                    "objectKey": "narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kmres.jpg",
+                    "alt": "Narrative image",
+                    "caption": "What looks fixed still belongs to time.",
+                    "displaySize": "medium",
+                    "alignment": "center",
+                    "wrapMode": "wrap-right"
+                },
+                {
+                    "id": "image_mq2w1ply_fan3yh",
+                    "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq2w1prt.jpg",
+                    "objectKey": "narrative/2026-06-05-the-crucible-of-continuous-revelation-mq2w1prt.jpg",
+                    "alt": "Narrative image",
+                    "caption": "Faith does not always arrive. Sometimes it continues.",
+                    "displaySize": "medium",
+                    "alignment": "left",
+                    "wrapMode": "wrap-left"
+                }
+            ]
+        },
+        "post_id": "June 5, 2026--the-crucible-of-continuous-revelation",
+        "share_path": "archive/2026-06-05-the-crucible-of-continuous-revelation.html",
+        "og_image": "Images/og/archive/2026-06-05-the-crucible-of-continuous-revelation.png"
+    },
+    {
         "title": "Different Mercies of the Same Light",
         "date": "June 1, 2026",
         "body": "_A night alone in the desert, the Milky Way, and a glimpse of heaven\u2019s hidden unity_\n\nIt is a rare occasion for me to be truly solitary. However, two Fridays back, an unexpected stillness settled in: my wife was away on her routine trip to California, and my children were either out of town or staying with their mother. I hadn\u2019t anticipated this sudden isolation, and the realization hit me with a sense of urgency. The prospect of returning to an empty house and sitting in silence felt suddenly unbearable. Not because I didn't want to be alone, but because the gift of true solitude was too precious to discard because of my own lack of forethought.\n\n![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-01-peralta-regional-park-mpvx0hrf.jpg)\n\nThere is a difference, I think, between being left alone and being invited into solitude. One feels like absence. The other feels like a door left open by providence. I did not yet know which one I had been given, but I knew enough not to waste it on the couch.\n\nAfter many sessions of back-and-forth with ChatGPT, I came to a decision. I would camp in my car somewhere, but where that would be was a mystery. I had no desire to drive all the way to Payson after a long day at work, and anything local would be too warm, too loud, and too polluted with city lights.\n\nThe problem, then, was not merely geographical. I was not looking for a place to park. I was looking for a place where the noise of my normal life might lose its authority over me for a few hours.\n\nBut after prompting ChatGPT into a corner, she finally revealed the answer to me, and it was actually embarrassing how obvious it was. Gold Canyon holds its own as a place apart; it's close enough to make the drive tolerable, but tucked up against the Superstitions and desolate enough to allow for stars to shine. Plus, there's a Maverik gas station on the way there, so...undeniable decision.\n\nI made it home, packed up the essentials (BT speaker, iPad, blanket, pillows) and headed out. The weather was absolutely divine. By the time I reached the town of Gold Canyon itself, the temperature was already a lovely 85\u00ba, and falling rapidly. I stopped at the Basha's grocer off the 60, got a few morsels to tide me over until morning, and kept the journey going. Alas, the 2nd stop, the Maverik gas station just a few miles further, proved fruitless and marginally frustrating, as they were out of all of my fountain beverages.\u00a0I believe it was all for the best, as I didn\u2019t need any more caffeine at that time of the day.\n\nIt is funny how often the sacred begins with errands. A grocery stop, a failed fountain drink, a few snacks in a plastic bag, the hum of tires on the highway. Nothing announced itself as holy. \u00a0I was simply driving east with pillows in the car and a half-formed hope that the desert might have something to say.\n\n![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-01-peralta-regional-park-mpvx02ja.jpg)\n\nI arrived at the campsite at Peralta Regional Park shortly before 7pm. This allowed me the opportunity to explore my surroundings, and what I found was the most remarkable silence and solitude I had experienced in a long, long time. Marching up toward the peaks of the adjacent hiking trail allowed me the opportunity to contemplate my surroundings, which confirmed exactly how alone I truly was. No other camping spaces were occupied. Not a soul nor vehicle could be seen. I kept along the path and, as the sun sank ever closer to the horizon, I silently hoped to myself that my instincts were true, and that the trail would dump me off somewhere close to the road, down a ways from where I had parked.\n\nThere is a kind of silence that merely removes sound, and there is another kind that begins to reveal what sound usually hides. This was the latter. The desert was not empty. It was simply unbothered by me.\n\nThere was a momentary window of panic as my faith abandoned me; the sun nestled itself beyond the measured west and I imagined myself stumbling back along the mile path I had followed, daylight abandoning fools who reckoned upon good fortune over solid plans. My instincts eventually proved the better, as the trail ultimately turned south and planted me beside the gravel path back to my campsite.\n\n![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-01-peralta-regional-park-mpvwzn2t.jpg)\n\nThat little panic mattered more than it should have. It reminded me that wonder is not always soft. Sometimes the soul opens because the body realizes it is small, poorly prepared, and dependent on mercies it did not arrange.\n\nHaving no further ambition for the evening, I broke open the box of Triscuits I purchased for myself and sat with my thoughts for a half hour or so. The vestiges of dusk trailed away completely, and having no better plans, I settled into my car to prepare my makeshift bed and watch a movie until I fell asleep. The moon rose high in the sky and, while itself only a half circle, bathed the desert surroundings with a pale blue light that magnified in strength beyond capacity and lengthened every shadow in excess of stature.\n\nThe moon did not merely illuminate things. It changed their proportions. Rocks became monuments. Shrubs became watchmen. The familiar grammar of the desert rearranged itself beneath borrowed light.\n\nI could not sit still. I could not ignore the situation I found myself in. I left the car and armed myself with my iPhone. I started shooting the landscapes around me, allowing night mode to drench the tiny phone sensor with all the light from our pale friend in the sky.\n\nIt felt absurd at first, this impulse to answer moonlight with a phone. But that is one of the small mercies of our age: even our devices, so often guilty of shrinking our souls, can occasionally be pressed into the service of awe.\n\nWhy, oh why had I forgotten to bring a tripod? I could have kicked myself in that moment.\n\nBack to the car, slightly peeved at myself, I lay back down and tried to subdue my racing thoughts so that sleep might overcome. Giving up after about an hour, I walked back outside to find that the moon had nearly descended to the horizon. It was placing itself firmly within the scopes of the light pollution of the Phoenix valley; indeed, it was nearly impossible to discern from where the remaining glow came.\n\n![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-01-peralta-regional-park-mpvwyw91.jpg)\n\nThe moon had been so commanding only a short while before, but now it was surrendering itself into the haze of the city. It was still there, still shining, still itself; but my ability to distinguish it had been compromised by lesser lights. I did not know it yet, but that would become the first lesson of the night.\n\nSitting at the concrete bench, I blinked a sleepy goodbye to the moon and glanced at my watch. 1am. I was due to breakfast with my niece the next morning, so sleep was a worthy prescription.\n\nI made it about 10 minutes before deciding upon a new plan. A makeshift tripod involving my iPad, a park bench, and my Apple Watch as a remote control.\n\nThis was not exactly the equipment of prophets or astronomers. It was a ridiculous little altar of consumer electronics: a tablet propped at the right angle, a phone trying very hard to remain still, and a watch on my wrist pretending to be a shutter release. But stillness, however improvised, was enough.\n\nWhat resulted from that arrangement was nothing short of astounding. The Milky Way erupted onto my tiny iPhone screen, captured intently by the iPhone's ability to take in 30 seconds worth of light at a time when it detected perfect stillness. My naked eyes could not perceive it at the time, but what was developing to the south of me was the hidden architecture of our own galaxy.\n\nThe glory had not arrived when the camera found it. It had been there all along. The difference was not in the sky, but in the instrument\u2019s patience, its steadiness, its willingness to gather what my unaided eyes could not.\n\n![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-01-peralta-regional-park-mpvwxife.jpg)\n\nThat thought has not left me. Maybe the difference is not always in the glory itself, but in our capacity to perceive it. Maybe heaven is nearer than we suppose, not because distance is an illusion, but because our senses are so easily outmatched by what God has already placed before us.\n\nI shot, and shot, and shot, treating each exposure as an exercise in patience, positioning, and prayer. The tiny sensor of even the best phone camera is a temperamental beast, and can easily become oversaturated or tricked by algorithmic persuasion. Within 30 minutes however, I managed to grab a few shots that made the hair on my neck stand on its own. It was then, as I laid down for the final time in the back of my car to edit these raw images, that I realized that I was exactly where I was supposed to be.\n\nNot because I had planned it well. Not because the night had obeyed me. But because the whole arrangement had begun to feel less like a sequence of conveniences and more like a conversation: solitude offered, restlessness permitted, light revealed, awe received.\n\nBecause in partnership with The Almighty, I made the decision to go camping, _right_. I made the decision to stay up, _right_. I made the decision to be alone, _right_.\n\nAnd by \u201cright,\u201d I do not mean efficient or impressive or even especially wise. I mean aligned. I mean that something in me had chosen, however clumsily, to move toward the place where God could show me what I would have missed at home.\n\nA few hours later, the sun made itself known to the inhabitants of the Sonora. Birds chimed in and gave their opinion on it, and it was loud and obnoxious. I opened the hatch of my car and dangled my legs out, letting the 60\u00ba air surround me and create goose bumps on my skin. I pondered the cosmos, and considered the Plan of Happiness that stitched itself into my culture and consciousness.\n\nI thought of this with my legs hanging from the back of my car, cold air moving over my shins, birds screaming at the sunrise as if they had invented morning. This is where my mind did what it often does when the world grows quiet enough around me: it turned the landscape into theology.\n\nWe are told that the heavens above are separated distinctly and purposefully, according to their power and glory. The Sun rules them all. The Moon is the lesser light. And the Stars? They simply round out the equation, an afterthought in the matrices of divine planning.\n\nAt least, that is the tidy version I had sometimes carried in my head: three lights, three categories, three degrees, each placed at a clean distance from the others. It is a useful order. I do not reject it. I do not wish to flatten what has been revealed into something vague and sentimental. Distinction matters. The sun is not the moon. The moon is not the stars.\n\nBut that night made me wonder whether we misunderstand heavenly glory when we imagine it only as distance, ranking, or separation. The sun, moon, and stars felt less like unrelated kingdoms and more like different ways light reaches us.\n\nThe sun had vanished, but its absence still shaped the world. The moon shone with borrowed fire and turned the desert blue. The stars were invisible until stillness revealed them. All of it was light. All of it belonged to the same heaven.\n\nBut as I sat with this contemplation and wrestled with the ambiguity and contradictions of my previous night's experience, I bore witness to the realization that whatever God has in store for us, it is certainly beyond our mortal comprehensions and abilities.\n\n![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-01-peralta-regional-park-mpvwszfl.jpg)\n\nI do not mean this as a rejection of distinct heavenly glories. I mean it as hope, and as carefully articulated curiosity. Perhaps the glories are distinct without being alienated from one another. Perhaps the heavens are ordered without being estranged. Perhaps God\u2019s house has many degrees of brightness, but no corner where His love is not, somehow, already at work.\n\nWhat we as human beings in the 21st century experience as passing for nature is a far cry from the definitive firmament endowed upon Mother Earth from the dawn of time. Our understanding has been whittled away bit by bit, leaving us with crippled appetites and vapid experience. I say 'our' in the limited capacity of one; I may ultimately dissolve in a more solitary explanation, but it certainly feels authentic to me that this is not a novel experience of mankind.\n\nWhat unsettled me most was not that the Milky Way was beautiful. I already knew, in the abstract, that beauty existed beyond the city. What unsettled me was that it had been present while I could not see it. I had mistaken my limitation for reality. I had assumed the sky was mostly empty because my eyes, exhausted and outmatched, reported emptiness back to me.\n\nThat is a dangerous way to live. It is also, perhaps, the ordinary way to live.\n\nI hold firm that the glories of our Father in Heaven rest upon the indistinguishable empyrean realm of the eternities...it is my burgeoning testimony that just as all things are a type and a shadow of bigger things in the hereafter, that the Sun, Moon, and Stars occupy the same great heavenly plane.\n\nBy that I do not mean sameness. I mean kinship. I mean that light may differ in intensity, nearness, office, and glory, while still proceeding from the same divine generosity. I mean that the heavens may be more unified, more merciful, and more wondrous than the mortal mind can comfortably diagram.\n\nWe will find more great comforts in our Father's plans for us than we could ever imagine. And you may discover this for yourself, too. Should you find yourself peering into the night sky, alone with nothing more than your own disquiet, you may discover that you see God in all his glory, and you will see that He is working. For all of us.\n\nNot always loudly. Not always visibly. Not always according to the instruments we happen to possess at the moment. But still working. Still shining. Still waiting, perhaps, for us to become quiet enough, steady enough, and patient enough to receive the light already given.",
