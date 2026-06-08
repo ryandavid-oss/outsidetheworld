@@ -124,6 +124,41 @@ html[data-reader-mode="light"] body.archive-reader-page::before {
     margin-bottom: clamp(34px, 6vw, 54px);
 }
 
+.reader-mark {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    opacity: 0.88;
+    transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.reader-mark:hover {
+    opacity: 1;
+    transform: translateY(-1px);
+}
+
+.reader-mark-image {
+    display: block;
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+}
+
+.reader-mark-image--light {
+    display: none;
+}
+
+html[data-reader-mode="light"] .reader-mark-image--dark {
+    display: none;
+}
+
+html[data-reader-mode="light"] .reader-mark-image--light {
+    display: block;
+}
+
 .reader-breadcrumbs {
     display: flex;
     align-items: center;

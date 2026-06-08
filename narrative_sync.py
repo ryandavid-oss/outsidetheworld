@@ -820,7 +820,16 @@ def remove_leading_duplicate_deck_html(body_html, deck):
 
 def enhance_reader_body_html(body_html, deck):
     body_html = remove_leading_duplicate_deck_html(body_html, deck)
-    first_paragraph = re.match(r'(\s*)(<p\b[^>]*>)([\s\S]*?)(</p>)', body_html or '', flags=re.I)
+    first_paragraph = None
+    for paragraph in re.finditer(r'(\s*)(<p\b[^>]*>)([\s\S]*?)(</p>)', body_html or '', flags=re.I):
+        paragraph_html = paragraph.group(3)
+        if re.search(r'<\s*(img|figure|pre|code)\b', paragraph_html, flags=re.I):
+            continue
+        paragraph_text = normalize_plain_text(plain_text_from_html(paragraph_html))
+        if len(paragraph_text) >= 80:
+            first_paragraph = paragraph
+            break
+
     if not first_paragraph:
         return body_html
 
@@ -829,9 +838,6 @@ def enhance_reader_body_html(body_html, deck):
         return body_html
 
     paragraph_text = normalize_plain_text(plain_text_from_html(paragraph_html))
-    if len(paragraph_text) < 80:
-        return body_html
-
     classes = ['entry-body__opening']
     if len(paragraph_text) >= 180 and len(paragraph_text.split()) >= 32:
         classes.append('entry-body__dropcap')
@@ -843,7 +849,11 @@ def enhance_reader_body_html(body_html, deck):
         first_paragraph.group(3),
         first_paragraph.group(4),
     ])
-    return enhanced + (body_html or '')[first_paragraph.end():]
+    return ''.join([
+        (body_html or '')[:first_paragraph.start()],
+        enhanced,
+        (body_html or '')[first_paragraph.end():],
+    ])
 
 def archive_relative_href(post):
     return f"{post_stem(post.get('file') or '')}.html"
@@ -1009,11 +1019,10 @@ def render_share_page(post, newer_post=None, older_post=None):
     <main class="archive-reader">
         <article class="reader-card" aria-labelledby="entry-title">
             <div class="reader-chrome">
-                <nav class="reader-breadcrumbs" aria-label="Archive navigation">
-                    <a href="../personal.html">Outside The World</a>
-                    <span class="reader-breadcrumb-separator" aria-hidden="true">/</span>
-                    <a href="{archive_url}">Archive Matrix</a>
-                </nav>
+                <a class="reader-mark" href="../personal.html" aria-label="Outside The World">
+                    <img class="reader-mark-image reader-mark-image--dark" src="/Images/Equal.svg" alt="" aria-hidden="true" />
+                    <img class="reader-mark-image reader-mark-image--light" src="/Images/Equal_dark.svg" alt="" aria-hidden="true" />
+                </a>
                 <div class="reader-mode-toggle" role="group" aria-label="Reader mode">
                     <button class="reader-mode-button" type="button" data-reader-mode-option="dark" aria-pressed="true">Dark</button>
                     <button class="reader-mode-button" type="button" data-reader-mode-option="light" aria-pressed="false">Light</button>
