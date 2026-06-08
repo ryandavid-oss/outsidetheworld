@@ -1393,7 +1393,7 @@ Date: June 7, 2026
       "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kevfy.jpg",
       "objectKey": "narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kevfy.jpg",
       "alt": "Narrative image",
-      "caption": "",
+      "caption": "The line is not always ours to move.",
       "displaySize": "medium",
       "alignment": "center",
       "wrapMode": "wrap-left"
@@ -1566,7 +1566,7 @@ This is the most honest presentation of the traditional case.
 
 ### The Hazard of Steadying the Ark
 
-![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kevfy.jpg)
+![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kevfy.jpg "The line is not always ours to move.")
 
 The third pillar of the orthodox argument is not about theology at all. And it is specifically Latter-day Saint in character. It is the question of **authority**.
 
