@@ -3193,19 +3193,32 @@
 
         function getPostImages(post) {
             const urls = [];
+            const addUrl = (url) => {
+                const cleanUrl = String(url || '').trim();
+                if (/^(https?:|\/|Images\/)/i.test(cleanUrl)) {
+                    urls.push(cleanUrl);
+                }
+            };
             const blocks = post?.publisher?.blocks;
             if (Array.isArray(blocks)) {
                 blocks.forEach((block) => {
-                    if (block?.type === 'image' && block?.url) urls.push(String(block.url));
+                    if (block?.type === 'image' && block?.url) addUrl(block.url);
                 });
             }
 
-            String(post?.body || '').replace(/!\[[^\]]*]\(([^)]+)\)/g, (_match, url) => {
-                urls.push(String(url));
+            String(post?.body || '').replace(/!\[[^\]]*]\(([^)]+)\)/g, (_match, target) => {
+                const source = String(target || '').trim();
+                if (source.startsWith('<')) {
+                    const end = source.indexOf('>');
+                    addUrl(end > 0 ? source.slice(1, end) : '');
+                    return '';
+                }
+
+                addUrl(source.split(/\s+/)[0]);
                 return '';
             });
 
-            return [...new Set(urls.map((url) => url.trim()).filter(Boolean))];
+            return [...new Set(urls)];
         }
 
         function getDeck(post) {
@@ -3244,11 +3257,25 @@
             if (reduceMotion) return;
 
             scope.querySelectorAll('[data-narrative-carousel]').forEach((carousel) => {
-                const slides = [...carousel.querySelectorAll('[data-carousel-slide]')];
+                let slides = [...carousel.querySelectorAll('[data-carousel-slide]')];
                 if (slides.length < 2) return;
 
                 let activeIndex = 0;
+                slides.forEach((slide) => {
+                    slide.addEventListener('error', () => {
+                        const wasActive = slide.classList.contains('is-active');
+                        slides = slides.filter((item) => item !== slide);
+                        slide.remove();
+                        if (!slides.length) return;
+                        activeIndex = Math.min(activeIndex, slides.length - 1);
+                        if (wasActive && !slides.some((item) => item.classList.contains('is-active'))) {
+                            slides[activeIndex].classList.add('is-active');
+                        }
+                    }, { once: true });
+                });
+
                 window.setInterval(() => {
+                    if (slides.length < 2) return;
                     slides[activeIndex]?.classList.remove('is-active');
                     activeIndex = (activeIndex + 1) % slides.length;
                     slides[activeIndex]?.classList.add('is-active');
