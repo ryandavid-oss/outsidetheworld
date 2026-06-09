@@ -1,3 +1,5 @@
+import argparse
+import hashlib
 import html
 import json
 import os
@@ -12,7 +14,9 @@ input_folder = 'current_narrative'
 output_file = 'narrative_data.js'
 share_output_folder = 'archive'
 og_output_folder = 'Images/og/archive'
+reading_aids_folder = 'reading_aids'
 site_url = 'https://outsidetheworld.com'
+READING_AIDS_PREVIEW_ENV = 'OTW_READING_AIDS_PREVIEW'
 
 MONTHS = {
     'January': 1,
@@ -799,6 +803,335 @@ def article_word_count(post, deck):
 def article_read_minutes(word_count):
     return max(1, (word_count + 224) // 225)
 
+def essay_slug_from_stem(stem):
+    return re.sub(r'^\d{4}-\d{2}-\d{2}-', '', stem or '')
+
+def essay_slug_from_post(post):
+    return essay_slug_from_stem(post_stem(post.get('file') or ''))
+
+def reading_aid_path_for_slug(slug):
+    return Path(reading_aids_folder) / f"{slug}.json"
+
+def reading_aid_path_for_post(post):
+    return reading_aid_path_for_slug(essay_slug_from_post(post))
+
+def essay_source_path(post):
+    filename = post.get('file') or ''
+    return Path(input_folder) / filename if filename else None
+
+def essay_hash_for_post(post):
+    path = essay_source_path(post)
+    if not path or not path.exists():
+        return ''
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+def should_assign_paragraph_id(paragraph_html):
+    if re.search(r'<\s*(img|figure|pre|script|iframe|object|embed)\b', paragraph_html or '', flags=re.I):
+        return False
+    paragraph_text = normalize_plain_text(plain_text_from_html(paragraph_html))
+    return bool(paragraph_text)
+
+def assign_reader_paragraph_ids(body_html):
+    paragraph_index = 0
+
+    def replace_paragraph(match):
+        nonlocal paragraph_index
+        opening_tag = match.group(2)
+        paragraph_html = match.group(3)
+        if not should_assign_paragraph_id(paragraph_html):
+            return match.group(0)
+
+        paragraph_index += 1
+        paragraph_id = f"p-{paragraph_index:03d}"
+        if re.search(r'\bid\s*=', opening_tag, flags=re.I):
+            opening_tag = re.sub(
+                r'\bid\s*=\s*(["\'])(.*?)\1',
+                f'id="{paragraph_id}"',
+                opening_tag,
+                count=1,
+                flags=re.I,
+            )
+        else:
+            opening_tag = opening_tag[:-1] + f' id="{paragraph_id}">'
+        return ''.join([match.group(1), opening_tag, paragraph_html, match.group(4)])
+
+    return re.sub(r'(\s*)(<p\b[^>]*>)([\s\S]*?)(</p>)', replace_paragraph, body_html or '', flags=re.I)
+
+def extract_reader_paragraphs(body_html):
+    paragraphs = []
+    for match in re.finditer(r'<p\b([^>]*)>([\s\S]*?)</p>', body_html or '', flags=re.I):
+        attrs = html_attrs(match.group(1))
+        paragraph_id = attrs.get('id')
+        if not paragraph_id:
+            continue
+        text = normalize_plain_text(plain_text_from_html(match.group(2)))
+        if text:
+            paragraphs.append({
+                'id': paragraph_id,
+                'text': text,
+                'word_count': len(re.findall(r"[A-Za-z0-9]+(?:[’'][A-Za-z0-9]+)?", text)),
+            })
+    return paragraphs
+
+def render_reader_body_html(post, deck=None):
+    resolved_deck = publisher_subhead(post) if deck is None else deck
+    body_html = enhance_reader_body_html(markdown_to_html(post.get('body') or '', post.get('publisher')), resolved_deck)
+    return assign_reader_paragraph_ids(body_html)
+
+def reading_aids_preview_enabled():
+    return str(os.environ.get(READING_AIDS_PREVIEW_ENV) or '').strip().lower() in {'1', 'true', 'yes', 'on'}
+
+def validate_text_field(value, label, max_length, errors):
+    text = str(value or '').strip()
+    if not text:
+        errors.append(f"{label} is empty.")
+    if len(text) > max_length:
+        errors.append(f"{label} is too long ({len(text)} characters, max {max_length}).")
+
+def validate_locked_flag(item, label, errors):
+    if 'locked' in item and not isinstance(item.get('locked'), bool):
+        errors.append(f"{label}.locked must be true or false.")
+
+def validate_allowed_keys(item, allowed, label, errors):
+    extra = sorted(set(item.keys()) - set(allowed))
+    if extra:
+        errors.append(f"{label} has unsupported fields: {', '.join(extra)}.")
+
+def validate_reading_aids(aids, slug, paragraph_ids, essay_hash=''):
+    errors = []
+    warnings = []
+    if not isinstance(aids, dict):
+        return ["Reading aid sidecar must be a JSON object."], warnings
+
+    validate_allowed_keys(
+        aids,
+        {'slug', 'essayHash', 'reviewStatus', 'generatedAt', 'approvedAt', 'model', 'signalBrief', 'readerMap', 'checkpoints', 'plainSignals'},
+        'sidecar',
+        errors,
+    )
+
+    if aids.get('slug') != slug:
+        errors.append(f"slug mismatch: expected {slug}, found {aids.get('slug')!r}.")
+    if aids.get('reviewStatus') not in {'draft', 'approved'}:
+        errors.append("reviewStatus must be draft or approved.")
+    if not aids.get('essayHash'):
+        errors.append("essayHash is required.")
+    elif essay_hash and aids.get('essayHash') != essay_hash:
+        warnings.append("essayHash is stale for the current essay source.")
+
+    signal_brief = aids.get('signalBrief')
+    if signal_brief is not None:
+        if not isinstance(signal_brief, dict):
+            errors.append("signalBrief must be an object.")
+        else:
+            validate_allowed_keys(signal_brief, {'text', 'locked'}, 'signalBrief', errors)
+            validate_text_field(signal_brief.get('text'), 'signalBrief.text', 1400, errors)
+            validate_locked_flag(signal_brief, 'signalBrief', errors)
+
+    reader_map = aids.get('readerMap') or []
+    if not isinstance(reader_map, list):
+        errors.append("readerMap must be a list.")
+    else:
+        for index, item in enumerate(reader_map):
+            label = f"readerMap[{index}]"
+            if not isinstance(item, dict):
+                errors.append(f"{label} must be an object.")
+                continue
+            validate_allowed_keys(item, {'label', 'title', 'summary', 'locked'}, label, errors)
+            validate_text_field(item.get('label'), f"{label}.label", 40, errors)
+            validate_text_field(item.get('title'), f"{label}.title", 180, errors)
+            validate_text_field(item.get('summary'), f"{label}.summary", 600, errors)
+            validate_locked_flag(item, label, errors)
+
+    checkpoint_ids = set()
+    checkpoints = aids.get('checkpoints') or []
+    if not isinstance(checkpoints, list):
+        errors.append("checkpoints must be a list.")
+    else:
+        for index, item in enumerate(checkpoints):
+            label = f"checkpoints[{index}]"
+            if not isinstance(item, dict):
+                errors.append(f"{label} must be an object.")
+                continue
+            validate_allowed_keys(item, {'afterParagraphId', 'label', 'text', 'locked'}, label, errors)
+            paragraph_id = item.get('afterParagraphId')
+            if not paragraph_id:
+                errors.append(f"{label}.afterParagraphId is required.")
+            elif paragraph_id not in paragraph_ids:
+                errors.append(f"{label}.afterParagraphId references missing paragraph {paragraph_id}.")
+            elif paragraph_id in checkpoint_ids:
+                errors.append(f"{label}.afterParagraphId duplicates {paragraph_id}.")
+            checkpoint_ids.add(paragraph_id)
+            validate_text_field(item.get('label'), f"{label}.label", 80, errors)
+            validate_text_field(item.get('text'), f"{label}.text", 800, errors)
+            validate_locked_flag(item, label, errors)
+
+    plain_signal_ids = set()
+    plain_signals = aids.get('plainSignals') or []
+    if not isinstance(plain_signals, list):
+        errors.append("plainSignals must be a list.")
+    else:
+        for index, item in enumerate(plain_signals):
+            label = f"plainSignals[{index}]"
+            if not isinstance(item, dict):
+                errors.append(f"{label} must be an object.")
+                continue
+            validate_allowed_keys(item, {'paragraphId', 'label', 'text', 'locked'}, label, errors)
+            paragraph_id = item.get('paragraphId')
+            if not paragraph_id:
+                errors.append(f"{label}.paragraphId is required.")
+            elif paragraph_id not in paragraph_ids:
+                errors.append(f"{label}.paragraphId references missing paragraph {paragraph_id}.")
+            elif paragraph_id in plain_signal_ids:
+                errors.append(f"{label}.paragraphId duplicates {paragraph_id}.")
+            plain_signal_ids.add(paragraph_id)
+            validate_text_field(item.get('label'), f"{label}.label", 80, errors)
+            validate_text_field(item.get('text'), f"{label}.text", 800, errors)
+            validate_locked_flag(item, label, errors)
+
+    return errors, warnings
+
+def load_reading_aids_for_post(post, paragraph_ids, include_drafts=False):
+    path = reading_aid_path_for_post(post)
+    if not path.exists():
+        return None
+
+    slug = essay_slug_from_post(post)
+    try:
+        aids = json.loads(path.read_text(encoding='utf-8'))
+    except json.JSONDecodeError as exc:
+        print(f"WARNING: Skipping reading aids for {slug}: invalid JSON ({exc}).")
+        return None
+
+    essay_hash = essay_hash_for_post(post)
+    errors, warnings = validate_reading_aids(aids, slug, paragraph_ids, essay_hash)
+    for warning in warnings:
+        print(f"WARNING: {slug}: {warning}")
+    if errors:
+        print(f"WARNING: Skipping reading aids for {slug}: {'; '.join(errors)}")
+        return None
+
+    if aids.get('reviewStatus') != 'approved' and not include_drafts:
+        return None
+    if aids.get('essayHash') != essay_hash and not include_drafts:
+        print(f"WARNING: Skipping stale approved reading aids for {slug}.")
+        return None
+    return aids
+
+def render_reading_aids_intro(aids):
+    if not aids:
+        return ''
+
+    pieces = ['<section class="reading-aids" id="reading-aids-panel" aria-label="Reading aids">']
+    if aids.get('reviewStatus') == 'draft':
+        pieces.append('<p class="reading-aids__draft">Draft reading aids visible in local preview.</p>')
+
+    controls = []
+    panels = []
+    signal_brief = aids.get('signalBrief') if isinstance(aids.get('signalBrief'), dict) else None
+    if signal_brief and signal_brief.get('text'):
+        controls.append(
+            '''<button type="button" class="reading-aid-tool reading-aid-tool--summary" aria-expanded="false" aria-controls="reading-aid-summary" data-reader-aid-toggle>
+                    <span class="reading-aid-tool__icon" aria-hidden="true">I</span>
+                    <span>Article Summary</span>
+                </button>'''
+        )
+        panels.append(
+            f'''<div class="reading-aid-panel reading-aid-panel--summary" id="reading-aid-summary" hidden>
+                    <p>{html.escape(str(signal_brief.get('text') or ''), quote=False)}</p>
+                </div>'''
+        )
+
+    reader_map = aids.get('readerMap') if isinstance(aids.get('readerMap'), list) else []
+    if reader_map:
+        map_items = []
+        for item in reader_map:
+            if not isinstance(item, dict):
+                continue
+            item_label = html.escape(str(item.get('label') or ''), quote=False)
+            item_title = html.escape(str(item.get('title') or ''), quote=False)
+            item_summary = html.escape(str(item.get('summary') or ''), quote=False)
+            map_items.append(
+                f'''<li>
+                        <div class="reading-aid-map__header">
+                            <span class="reading-aid-map__label">{item_label}</span>
+                            <strong>{item_title}</strong>
+                        </div>
+                        <p>{item_summary}</p>
+                    </li>'''
+            )
+        if map_items:
+            controls.append(
+                '''<button type="button" class="reading-aid-tool reading-aid-tool--map" aria-expanded="false" aria-controls="reading-aid-map" data-reader-aid-toggle>
+                        <span class="reading-aid-tool__icon" aria-hidden="true">II</span>
+                        <span>Reader Map</span>
+                    </button>'''
+            )
+            panels.append(
+                f'''<div class="reading-aid-panel reading-aid-panel--map" id="reading-aid-map" hidden>
+                        <ol class="reading-aid-map">{''.join(map_items)}</ol>
+                    </div>'''
+            )
+
+    if controls:
+        pieces.append(f'''<div class="reading-aid-tools" role="group" aria-label="Reader tools">{''.join(controls)}</div>''')
+    if panels:
+        pieces.append(f'''<div class="reading-aid-panels">{''.join(panels)}</div>''')
+
+    pieces.append('</section>')
+    return '\n'.join(pieces)
+
+def render_clarify_note(paragraph_id, item):
+    control_id = f"clarify-{paragraph_id}"
+    return f'''<div class="clarify-note" data-clarify-note>
+                <button type="button" class="clarify-note__toggle" aria-expanded="false" aria-controls="{control_id}" data-clarify-toggle>Clarify</button>
+                <div class="clarify-note__panel" id="{control_id}" hidden>
+                    <p>{html.escape(str(item.get('text') or ''), quote=False)}</p>
+                </div>
+            </div>'''
+
+def render_checkpoint(item):
+    return f'''<details class="reading-checkpoint">
+                <summary>Where We Are</summary>
+                <div class="reading-checkpoint__panel">
+                    <p>{html.escape(str(item.get('text') or ''), quote=False)}</p>
+                </div>
+            </details>'''
+
+def inject_reading_aid_body_notes(body_html, aids):
+    if not aids:
+        return body_html
+
+    plain_signals = {
+        item.get('paragraphId'): item
+        for item in aids.get('plainSignals') or []
+        if isinstance(item, dict) and item.get('paragraphId')
+    }
+    checkpoints = {
+        item.get('afterParagraphId'): item
+        for item in aids.get('checkpoints') or []
+        if isinstance(item, dict) and item.get('afterParagraphId')
+    }
+
+    def replace_paragraph(match):
+        attrs = html_attrs(match.group(1))
+        paragraph_id = attrs.get('id')
+        paragraph_block = match.group(0)
+        if not paragraph_id:
+            return paragraph_block
+        if paragraph_id in plain_signals:
+            paragraph_block = (
+                f'<div class="reading-aid-anchor" id="aid-anchor-{paragraph_id}">'
+                f'{paragraph_block}'
+                f'{render_clarify_note(paragraph_id, plain_signals[paragraph_id])}'
+                '</div>'
+            )
+        if paragraph_id in checkpoints:
+            paragraph_block += '\n' + render_checkpoint(checkpoints[paragraph_id])
+        return paragraph_block
+
+    return re.sub(r'<p\b([^>]*)>[\s\S]*?</p>', replace_paragraph, body_html or '', flags=re.I)
+
 def add_classes_to_tag(opening_tag, classes):
     class_text = ' '.join(classes)
     class_match = re.search(r'\bclass\s*=\s*(["\'])(.*?)\1', opening_tag, flags=re.I)
@@ -961,7 +1294,7 @@ def generate_og_image(post, og_path):
     img.save(og_path, 'PNG', optimize=True)
     return True
 
-def render_share_page(post, newer_post=None, older_post=None):
+def render_share_page(post, newer_post=None, older_post=None, include_draft_reading_aids=False):
     stem = post_stem(post['file'])
     share_path = f"{share_output_folder}/{stem}.html"
     share_url = canonical_share_url({**post, 'share_path': share_path})
@@ -976,7 +1309,18 @@ def render_share_page(post, newer_post=None, older_post=None):
     published_meta = f'<meta property="article:published_time" content="{published.date().isoformat()}" />' if published else ''
     word_count = article_word_count(post, deck)
     read_minutes = article_read_minutes(word_count)
-    body_html = enhance_reader_body_html(markdown_to_html(post['body'], post.get('publisher')), deck)
+    body_html = render_reader_body_html(post, deck)
+    paragraph_ids = {paragraph['id'] for paragraph in extract_reader_paragraphs(body_html)}
+    reading_aids = load_reading_aids_for_post(post, paragraph_ids, include_draft_reading_aids)
+    reading_aids_intro = render_reading_aids_intro(reading_aids)
+    reading_aids_block = f'\n            {reading_aids_intro}' if reading_aids_intro else ''
+    reading_tools_toggle = (
+        '<button type="button" class="share-btn reading-tools-toggle" '
+        'aria-pressed="false" aria-controls="reading-aids-panel" '
+        'data-reading-tools-toggle>Show Reading Tools</button>'
+    ) if reading_aids else ''
+    body_reading_tools_attr = ' data-reading-tools="off"' if reading_aids else ''
+    body_html = inject_reading_aid_body_notes(body_html, reading_aids)
     reader_nav = render_reader_nav(newer_post, older_post)
 
     return f'''<!DOCTYPE html>
@@ -1015,7 +1359,7 @@ def render_share_page(post, newer_post=None, older_post=None):
     <meta name="twitter:image" content="{smartypants_safe(og_image)}" />
     <script src="../archive_reader.js" defer></script>
 </head>
-<body class="archive-reader-page">
+<body class="archive-reader-page"{body_reading_tools_attr}>
     <main class="archive-reader">
         <article class="reader-card" aria-labelledby="entry-title">
             <div class="reader-chrome">
@@ -1040,9 +1384,10 @@ def render_share_page(post, newer_post=None, older_post=None):
             <div class="entry-share-row">
                 <span class="share-status" id="share-status" aria-live="polite">STATIC_ARCHIVE_SIGNAL</span>
                 <div class="share-controls">
+                    {reading_tools_toggle}
                     <button type="button" class="share-btn" data-share-button>COPY / SHARE LINK</button>
                 </div>
-            </div>
+            </div>{reading_aids_block}
             <div class="entry-body">
 {body_html}
             </div>
@@ -1067,7 +1412,7 @@ def render_share_page(post, newer_post=None, older_post=None):
 </html>
 '''
 
-def write_share_pages(posts):
+def write_share_pages(posts, include_draft_reading_aids=False):
     Path(share_output_folder).mkdir(parents=True, exist_ok=True)
     Path(og_output_folder).mkdir(parents=True, exist_ok=True)
 
@@ -1080,10 +1425,15 @@ def write_share_pages(posts):
         share_file = Path(post['share_path'])
         newer_post = posts[index - 1] if index > 0 else None
         older_post = posts[index + 1] if index < len(posts) - 1 else None
-        share_file.write_text(render_share_page(post, newer_post, older_post), encoding='utf-8')
-        generate_og_image(post, Path(post['og_image']))
+        share_file.write_text(
+            render_share_page(post, newer_post, older_post, include_draft_reading_aids),
+            encoding='utf-8',
+        )
+        og_path = Path(post['og_image'])
+        if not og_path.exists() or os.environ.get('OTW_REGENERATE_OG') == '1':
+            generate_og_image(post, og_path)
 
-def sync_production():
+def load_posts():
     posts = []
     if not os.path.exists(input_folder):
         os.makedirs(input_folder)
@@ -1124,7 +1474,11 @@ def sync_production():
 
     # Sort: Newest filename (YYYY-MM-DD) first
     posts.sort(key=lambda x: x['file'], reverse=True)
-    write_share_pages(posts)
+    return posts
+
+def sync_production(include_draft_reading_aids=False):
+    posts = load_posts()
+    write_share_pages(posts, include_draft_reading_aids)
 
     with open(output_file, 'w', encoding='utf-8') as out:
         out.write(f"const current_narrative = {json.dumps(posts, indent=4)};")
@@ -1132,4 +1486,11 @@ def sync_production():
     print(f"SUCCESS: {len(posts)} entries synced with preserved spacing and static share pages.")
 
 if __name__ == "__main__":
-    sync_production()
+    parser = argparse.ArgumentParser(description="Generate current narrative data and static archive essay pages.")
+    parser.add_argument(
+        "--reading-aids-preview",
+        action="store_true",
+        help="Include draft reading aid sidecars for explicit local preview only.",
+    )
+    args = parser.parse_args()
+    sync_production(include_draft_reading_aids=args.reading_aids_preview or reading_aids_preview_enabled())

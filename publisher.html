@@ -87,7 +87,7 @@
       top: 0;
       z-index: 30;
       display: grid;
-      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+      grid-template-columns: minmax(220px, max-content) minmax(0, 1fr) auto;
       align-items: center;
       gap: 18px;
       min-height: 68px;
@@ -100,6 +100,7 @@
     }
 
     .brand {
+      grid-column: 1;
       display: inline-flex;
       align-items: center;
       gap: 12px;
@@ -151,7 +152,12 @@
     }
 
     .save-state {
+      grid-column: 2;
       justify-self: center;
+      min-width: 0;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
       color: var(--muted);
       font-family: var(--mono);
       font-size: 0.68rem;
@@ -161,6 +167,7 @@
     }
 
     .top-actions {
+      grid-column: 3;
       display: flex;
       align-items: center;
       justify-content: flex-end;
@@ -1539,6 +1546,445 @@
       stroke: currentColor;
     }
 
+    .published-manager {
+      border-bottom: 1px solid var(--line);
+      background: rgba(250, 252, 255, 0.96);
+      box-shadow: 0 16px 44px rgba(27, 54, 93, 0.08);
+    }
+
+    .published-manager[hidden],
+    .pm-panel[hidden],
+    .revision-bar[hidden] {
+      display: none !important;
+    }
+
+    body.is-revising-published .topbar {
+      background: linear-gradient(180deg, rgba(237, 243, 250, 0.98), rgba(250, 252, 255, 0.96));
+      border-bottom-color: rgba(99, 149, 238, 0.28);
+    }
+
+    body.is-revising-published .save-state,
+    body.is-revising-published #saveDraftBtn,
+    body.is-revising-published #previewDraftBtn,
+    body.is-revising-published #publishBtn {
+      display: none;
+    }
+
+    .revision-bar {
+      display: grid;
+      gap: 12px;
+      padding: 14px 24px 16px;
+      border-bottom: 1px solid rgba(99, 149, 238, 0.22);
+      background: rgba(237, 243, 250, 0.92);
+      box-shadow: 0 10px 26px rgba(27, 54, 93, 0.08);
+    }
+
+    .revision-bar-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: start;
+      gap: 14px;
+    }
+
+    .revision-kicker {
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .revision-title {
+      margin: 2px 0 0;
+      color: var(--blue-dark);
+      font-size: 1rem;
+      line-height: 1.25;
+    }
+
+    .revision-status,
+    .revision-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      color: var(--muted);
+      font-size: 0.74rem;
+      line-height: 1.35;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+
+    .revision-meta-item {
+      display: inline-flex;
+      gap: 4px;
+      align-items: baseline;
+    }
+
+    .revision-meta-item strong {
+      color: var(--blue-dark);
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .revision-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .revision-action,
+    .revision-select {
+      min-height: 34px;
+      border: 1px solid rgba(27, 54, 93, 0.14);
+      border-radius: 7px;
+      background: rgba(255, 255, 255, 0.8);
+      color: var(--blue-dark);
+      padding: 0 10px;
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .revision-select {
+      max-width: min(260px, 100%);
+    }
+
+    .revision-action {
+      cursor: pointer;
+    }
+
+    .revision-action.is-primary {
+      border-color: rgba(99, 149, 238, 0.42);
+      background: rgba(99, 149, 238, 0.16);
+      color: var(--blue);
+    }
+
+    .revision-action.is-danger {
+      border-color: rgba(138, 60, 53, 0.28);
+      color: #8A3C35;
+    }
+
+    .revision-diff {
+      width: 100%;
+      min-height: 140px;
+      border: 1px solid rgba(27, 54, 93, 0.14);
+      border-radius: 7px;
+      background: rgba(255, 255, 255, 0.86);
+      color: var(--ink);
+      padding: 10px;
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      line-height: 1.45;
+      resize: vertical;
+    }
+
+    .pm-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 24px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .pm-title {
+      margin: 0;
+      color: var(--blue-dark);
+      font-family: var(--mono);
+      font-size: 0.74rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .pm-status {
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .pm-grid {
+      display: grid;
+      grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
+      min-height: min(760px, calc(100vh - 180px));
+    }
+
+    .pm-library {
+      border-right: 1px solid var(--line);
+      background: rgba(237, 243, 250, 0.72);
+      overflow: auto;
+    }
+
+    .pm-library-tools {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      display: grid;
+      gap: 8px;
+      padding: 12px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(250, 252, 255, 0.96);
+    }
+
+    .pm-input,
+    .pm-select,
+    .pm-textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: rgba(255, 255, 255, 0.88);
+      color: var(--ink);
+      outline: none;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.74);
+    }
+
+    .pm-input,
+    .pm-select {
+      min-height: 36px;
+      padding: 0 10px;
+    }
+
+    .pm-textarea {
+      min-height: 92px;
+      padding: 10px;
+      resize: vertical;
+      line-height: 1.45;
+    }
+
+    .pm-input:focus,
+    .pm-select:focus,
+    .pm-textarea:focus {
+      border-color: rgba(99, 149, 238, 0.52);
+      box-shadow: var(--focus-ring);
+    }
+
+    .pm-list {
+      display: grid;
+      gap: 1px;
+    }
+
+    .pm-essay {
+      width: 100%;
+      display: grid;
+      gap: 5px;
+      padding: 12px;
+      border: 0;
+      border-bottom: 1px solid rgba(27, 54, 93, 0.08);
+      background: transparent;
+      color: var(--ink);
+      text-align: left;
+    }
+
+    .pm-essay:hover,
+    .pm-essay:focus-visible,
+    .pm-essay.is-selected {
+      background: rgba(160, 190, 245, 0.18);
+      outline: none;
+    }
+
+    .pm-essay-title {
+      color: var(--blue-dark);
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .pm-essay-meta,
+    .pm-chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .pm-chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 20px;
+      padding: 0 6px;
+      border: 1px solid rgba(27, 54, 93, 0.12);
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.76);
+      color: var(--blue-dark);
+    }
+
+    .pm-chip.is-warning {
+      border-color: rgba(179, 117, 28, 0.28);
+      color: #8a5a15;
+    }
+
+    .pm-chip.is-danger {
+      border-color: rgba(143, 43, 43, 0.28);
+      color: #8f2b2b;
+    }
+
+    .pm-workspace {
+      overflow: auto;
+      padding: 18px 22px 28px;
+    }
+
+    .pm-empty {
+      display: grid;
+      place-items: center;
+      min-height: 240px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .pm-workspace-head,
+    .pm-form,
+    .pm-blocks,
+    .pm-reading-section,
+    .pm-aid-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .pm-workspace-head {
+      margin-bottom: 14px;
+    }
+
+    .pm-workspace-title {
+      margin: 0;
+      color: var(--blue-dark);
+      font-size: 1.25rem;
+      line-height: 1.2;
+    }
+
+    .pm-copy {
+      max-width: 760px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+
+    .pm-tabs,
+    .pm-actions,
+    .pm-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .pm-tab,
+    .pm-action {
+      min-height: 34px;
+      padding: 0 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: rgba(255, 255, 255, 0.76);
+      color: var(--blue-dark);
+      font-family: var(--mono);
+      font-size: 0.64rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .pm-tab[aria-selected="true"],
+    .pm-action.is-primary {
+      border-color: var(--blue);
+      background: var(--blue);
+      color: #fff;
+    }
+
+    .pm-action.is-danger {
+      border-color: rgba(143, 43, 43, 0.28);
+      color: #8f2b2b;
+    }
+
+    .pm-action[disabled] {
+      cursor: not-allowed;
+      opacity: 0.58;
+    }
+
+    .pm-field {
+      display: grid;
+      gap: 5px;
+    }
+
+    .pm-label {
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .pm-block,
+    .pm-paragraph,
+    .pm-aid-item {
+      display: grid;
+      gap: 7px;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: rgba(255, 255, 255, 0.64);
+    }
+
+    .pm-block.is-locked {
+      background: rgba(237, 243, 250, 0.82);
+    }
+
+    .pm-block-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .pm-diff {
+      min-height: 260px;
+      white-space: pre;
+      overflow: auto;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+    }
+
+    .pm-reading-layout {
+      display: grid;
+      grid-template-columns: minmax(260px, 0.9fr) minmax(300px, 1.1fr);
+      gap: 14px;
+    }
+
+    .pm-paragraph-list {
+      display: grid;
+      gap: 8px;
+      max-height: 560px;
+      overflow: auto;
+    }
+
+    .pm-paragraph {
+      text-align: left;
+    }
+
+    .pm-paragraph.is-selected {
+      border-color: rgba(99, 149, 238, 0.58);
+      box-shadow: var(--focus-ring);
+    }
+
+    .pm-small {
+      color: var(--muted);
+      font-size: 0.82rem;
+      line-height: 1.4;
+    }
+
     @media (max-width: 1180px) {
       .workspace {
         grid-template-columns: 1fr;
@@ -1622,6 +2068,17 @@
         clear: both;
         margin: 1.8em auto;
       }
+
+      .pm-grid,
+      .pm-reading-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .pm-library {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+        max-height: 340px;
+      }
     }
 
     @media (max-width: 480px) {
@@ -1674,11 +2131,34 @@
         </button>
         <button class="text-btn" id="saveDraftBtn" type="button" title="Save server draft">Save Draft</button>
         <button class="text-btn" id="previewDraftBtn" type="button" title="Preview local draft">Preview</button>
+        <button class="text-btn" id="publishedEssaysBtn" type="button" title="Open published essay manager">Published Essays</button>
         <button class="text-btn" id="downloadMarkdownBtn" type="button" title="Download draft as Markdown">Download MD</button>
         <button class="publish-btn" id="publishBtn" type="button" title="Publish article">Publish</button>
         <a class="text-btn" id="publishedLink" href="#" target="_blank" rel="noopener" hidden>Open Article</a>
       </div>
     </header>
+
+    <section class="revision-bar" id="publishedRevisionBar" aria-label="Published essay revision mode" hidden>
+      <div class="revision-bar-head">
+        <div>
+          <div class="revision-kicker">Revising published essay</div>
+          <h2 class="revision-title" id="revisionTitle">Published essay loaded</h2>
+          <div class="revision-meta" id="revisionMeta"></div>
+          <div class="revision-status" id="revisionStatus">Save a draft revision before republishing locally.</div>
+        </div>
+        <button class="revision-action" id="revisionExitBtn" type="button">Exit Revision</button>
+      </div>
+      <div class="revision-actions">
+        <button class="revision-action is-primary" id="revisionSaveBtn" type="button">Save Draft</button>
+        <button class="revision-action" id="revisionDiffBtn" type="button">View Diff</button>
+        <button class="revision-action" id="revisionPreviewBtn" type="button">Preview</button>
+        <button class="revision-action is-primary" id="revisionRepublishBtn" type="button">Republish Local</button>
+        <select class="revision-select" id="revisionBackupSelect" aria-label="Restore backup"></select>
+        <button class="revision-action is-danger" id="revisionRestoreBtn" type="button">Restore</button>
+        <button class="revision-action" id="revisionLiveBtn" type="button">Publish Live</button>
+      </div>
+      <textarea class="revision-diff" id="revisionDiff" readonly hidden></textarea>
+    </section>
 
     <nav class="toolbar" aria-label="Writing tools">
       <div class="toolbar-group">
@@ -1845,6 +2325,37 @@
         </button>
       </div>
     </nav>
+
+    <section class="published-manager" id="publishedManager" aria-label="Published Essay Manager" hidden>
+      <div class="pm-top">
+        <div>
+          <h2 class="pm-title">Published Essays</h2>
+          <div class="pm-status" id="pmStatus">Published essay launcher</div>
+        </div>
+        <div class="pm-actions">
+          <button class="pm-action" id="pmRefreshBtn" type="button">Refresh</button>
+          <button class="pm-action" id="pmComposeBtn" type="button">Compose New</button>
+        </div>
+      </div>
+      <div class="pm-grid">
+        <aside class="pm-library" aria-label="Essay library">
+          <div class="pm-library-tools">
+            <input class="pm-input" id="pmSearch" type="search" placeholder="Search essays" aria-label="Search essays" />
+            <select class="pm-select" id="pmFilter" aria-label="Filter essays">
+              <option value="latest">Latest</option>
+              <option value="published">All Published</option>
+              <option value="unpublished-revision">Has unpublished revision</option>
+              <option value="stale-aids">Stale reading aids</option>
+              <option value="long">Long essays</option>
+            </select>
+          </div>
+          <div class="pm-list" id="pmEssayList"></div>
+        </aside>
+        <div class="pm-workspace" id="pmWorkspace">
+          <div class="pm-empty">Select a published essay</div>
+        </div>
+      </div>
+    </section>
 
     <div class="toolbar-popover color-popover" id="colorPopover" role="dialog" aria-label="Choose color" hidden>
       <div class="popover-title" id="colorPopoverTitle">Text Color</div>
@@ -2047,6 +2558,19 @@
     const clearDraftBtn = document.getElementById('clearDraftBtn');
     const publishBtn = document.getElementById('publishBtn');
     const publishedLink = document.getElementById('publishedLink');
+    const publishedRevisionBar = document.getElementById('publishedRevisionBar');
+    const revisionTitle = document.getElementById('revisionTitle');
+    const revisionMeta = document.getElementById('revisionMeta');
+    const revisionStatus = document.getElementById('revisionStatus');
+    const revisionExitBtn = document.getElementById('revisionExitBtn');
+    const revisionSaveBtn = document.getElementById('revisionSaveBtn');
+    const revisionDiffBtn = document.getElementById('revisionDiffBtn');
+    const revisionPreviewBtn = document.getElementById('revisionPreviewBtn');
+    const revisionRepublishBtn = document.getElementById('revisionRepublishBtn');
+    const revisionBackupSelect = document.getElementById('revisionBackupSelect');
+    const revisionRestoreBtn = document.getElementById('revisionRestoreBtn');
+    const revisionLiveBtn = document.getElementById('revisionLiveBtn');
+    const revisionDiff = document.getElementById('revisionDiff');
     const lineSpacingBtn = document.getElementById('lineSpacingBtn');
     const lineSpacingValue = document.getElementById('lineSpacingValue');
     const lineSpacingPopover = document.getElementById('lineSpacingPopover');
@@ -2091,6 +2615,7 @@
     const PUBLISH_GHOST_DRAFT_ENDPOINT = 'https://otw-fragments-publish.ryandavid.workers.dev/publish-ghost-draft';
     const SERVER_DRAFT_META_KEY = 'otw.publisher.serverDraftMeta.v1';
     const SERVER_DRAFT_DISMISSAL_KEY = 'otw.publisher.serverDraftDismissal.v1';
+    const PUBLISHED_REVISION_KEY = 'otw.publisher.publishedRevision.v1';
     const MAX_INLINE_IMAGE_DATA_URL_LENGTH = 1800000;
     const MAX_STAGED_IMAGE_BYTES = 25 * 1024 * 1024;
     const SUPPORTED_STAGED_IMAGE_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/heic', 'image/heif']);
@@ -2127,6 +2652,7 @@
     let isSyncingImageInspector = false;
     let removedFigureUndo = null;
     let lastPublishError = null;
+    let activePublishedRevision = readPublishedRevisionMeta();
     const lineSpacingValues = ['1.0', '1.15', '1.5', '2.0'];
     const lineSpacingClasses = {
       '1.0': 'line-spacing-10',
@@ -2213,6 +2739,79 @@
           renderStatusLine();
         }, statusRestDelay);
       }
+    }
+
+    function revisionStatusText(text) {
+      if (revisionStatus) {
+        revisionStatus.textContent = text || 'Save a draft revision before republishing locally.';
+      }
+    }
+
+    function refreshRevisionBar() {
+      const revision = activePublishedRevision;
+      const isActive = Boolean(revision?.slug);
+      document.body.classList.toggle('is-revising-published', isActive);
+      if (publishedRevisionBar) {
+        publishedRevisionBar.hidden = !isActive;
+      }
+      saveDraftBtn.textContent = isActive ? 'Save Revision' : 'Save Draft';
+      saveDraftBtn.title = isActive ? 'Save local revision draft' : 'Save server draft';
+      previewDraftBtn.textContent = isActive ? 'Preview Revision' : 'Preview';
+      previewDraftBtn.title = isActive ? 'Preview revision without changing production output' : 'Preview local draft';
+      publishBtn.textContent = isActive ? 'Republish Local' : 'Publish';
+      publishBtn.title = isActive ? 'Regenerate the local archive. Live site unchanged.' : 'Publish article';
+      if (!isActive) {
+        if (revisionDiff) {
+          revisionDiff.hidden = true;
+          revisionDiff.value = '';
+        }
+        return;
+      }
+      if (revisionTitle) {
+        revisionTitle.textContent = revision.title || 'Published essay loaded';
+      }
+      if (revisionMeta) {
+        const pieces = [
+          revision.date ? ['Date', revision.date] : null,
+          revision.slug ? ['Slug', revision.slug] : null,
+          revision.archivePath ? ['Archive', revision.archivePath] : null,
+          revision.readingAidStatus?.status ? ['Aids', revision.readingAidStatus.status] : null
+        ].filter(Boolean);
+        revisionMeta.innerHTML = pieces.map(([label, value]) => (
+          `<span class="revision-meta-item"><strong>${escapeHtml(label)}</strong>${escapeHtml(value)}</span>`
+        )).join('');
+      }
+      if (revisionBackupSelect) {
+        const history = Array.isArray(revision.history) ? revision.history : [];
+        revisionBackupSelect.innerHTML = history.length
+          ? history.map((item) => {
+              const label = `${item.createdAt || item.id} - ${item.reason || 'backup'}`;
+              return `<option value="${escapeHtml(item.id)}">${escapeHtml(label)}</option>`;
+            }).join('')
+          : '<option value="">No backups yet</option>';
+        revisionBackupSelect.disabled = history.length === 0;
+      }
+      if (revisionRestoreBtn) {
+        revisionRestoreBtn.disabled = !(Array.isArray(revision.history) && revision.history.length);
+      }
+    }
+
+    function updateRevisionMetaFromDetail(detail) {
+      if (!detail?.essay) {
+        return null;
+      }
+      return writePublishedRevisionMeta({
+        slug: detail.essay.slug,
+        title: detail.essay.title,
+        date: detail.essay.date,
+        archivePath: detail.essay.archivePath,
+        ogPath: detail.essay.ogPath,
+        sourcePath: detail.essay.sourcePath,
+        sourceHash: detail.publishedSourceHash,
+        readingAidStatus: detail.sidecarStatus || detail.essay.readingAidStatus || null,
+        history: detail.history || [],
+        openedAt: new Date().toISOString()
+      });
     }
 
     function discardRemovedFigureUndo() {
@@ -2321,6 +2920,9 @@
       if (/^(https?:|\/)/i.test(url)) {
         return url;
       }
+      if (!/^(javascript:|data:|blob:)/i.test(url) && !/[<>"']/g.test(url)) {
+        return url;
+      }
       return '';
     }
 
@@ -2419,6 +3021,33 @@
       return getStoredPublisherKey();
     }
 
+    function getLocalPublisherToken() {
+      return document.querySelector('meta[name="otw-publisher-token"]')?.content || '';
+    }
+
+    async function localPublisherApi(path, options = {}) {
+      const token = getLocalPublisherToken();
+      if (!token) {
+        throw new Error('Start tools/publisher_server.py to revise published essays.');
+      }
+      const response = await fetch(path, {
+        ...options,
+        headers: {
+          'content-type': 'application/json; charset=utf-8',
+          'x-publisher-token': token,
+          ...(options.headers || {})
+        }
+      });
+      const payload = await response.json().catch(() => null);
+      if (!response.ok || !payload || payload.ok === false) {
+        const error = new Error(payload?.error || `Request failed (${response.status})`);
+        error.status = response.status;
+        error.payload = payload;
+        throw error;
+      }
+      return payload;
+    }
+
     function readServerDraftMeta() {
       try {
         return JSON.parse(localStorage.getItem(SERVER_DRAFT_META_KEY) || 'null') || null;
@@ -2443,6 +3072,39 @@
         // Server metadata is only used for gentle conflict hints.
       }
       window.otwPublisherServerDraftMeta = serverDraftMeta;
+    }
+
+    function readPublishedRevisionMeta() {
+      try {
+        return JSON.parse(localStorage.getItem(PUBLISHED_REVISION_KEY) || 'null') || null;
+      } catch (error) {
+        return null;
+      }
+    }
+
+    function writePublishedRevisionMeta(revision) {
+      activePublishedRevision = revision ? {
+        slug: revision.slug || '',
+        title: revision.title || '',
+        date: revision.date || '',
+        archivePath: revision.archivePath || '',
+        ogPath: revision.ogPath || '',
+        sourcePath: revision.sourcePath || '',
+        sourceHash: revision.sourceHash || '',
+        readingAidStatus: revision.readingAidStatus || null,
+        history: Array.isArray(revision.history) ? revision.history : [],
+        openedAt: revision.openedAt || new Date().toISOString()
+      } : null;
+      try {
+        if (activePublishedRevision) {
+          localStorage.setItem(PUBLISHED_REVISION_KEY, JSON.stringify(activePublishedRevision));
+        } else {
+          localStorage.removeItem(PUBLISHED_REVISION_KEY);
+        }
+      } catch (error) {
+        // Revision mode still works for this page load without localStorage.
+      }
+      return activePublishedRevision;
     }
 
     function readServerDraftDismissal() {
@@ -2688,6 +3350,9 @@
     }
 
     async function saveServerDraft() {
+      if (activePublishedRevision?.slug) {
+        return savePublishedRevisionDraft();
+      }
       const hadUnsavedChanges = currentSaveLabel === 'Unsaved changes';
       const localSnapshot = localStoredArticleSnapshot();
       saveDraft();
@@ -3796,6 +4461,29 @@
       return String(value || '').split(/\n/);
     }
 
+    function plainTextFromMarkdownForRevision(value) {
+      return String(value || '')
+        .replace(/<!--[\s\S]*?-->/g, ' ')
+        .replace(/!\[[^\]]*]\([^)]+\)/g, ' ')
+        .replace(/\[([^\]]+)]\(([^)]+)\)/g, '$1')
+        .replace(/<\/?[^>]+>/g, ' ')
+        .replace(/^\s{0,3}#{1,6}\s+/gm, '')
+        .replace(/^\s{0,3}>\s?/gm, '')
+        .replace(/^\s{0,3}(?:[-*+]|\d+[.)])\s+/gm, '')
+        .replace(/^\s{0,3}(?:-{3,}|\*{3,}|_{3,})\s*$/gm, ' ')
+        .replace(/[*_`~\\]/g, '')
+        .replace(/\s+/g, ' ')
+        .trim();
+    }
+
+    function originalMarkdownStillMatches(block, currentText = '') {
+      const sourceMarkdown = String(block.sourceMarkdown || '').trim();
+      if (!sourceMarkdown) {
+        return false;
+      }
+      return plainTextFromMarkdownForRevision(sourceMarkdown) === String(currentText || block.text || '').replace(/\s+/g, ' ').trim();
+    }
+
     function imageMarkdown(alt, src, caption = '') {
       const altText = escapeMarkdownAlt(alt);
       const url = escapeMarkdownUrl(src);
@@ -3821,6 +4509,9 @@
       }
       if (block.type === 'divider' || block.type === 'image') {
         return true;
+      }
+      if (block.type === 'raw' || block.raw || block.markdown) {
+        return String(block.raw || block.markdown || '').trim().length > 0;
       }
       if (block.type === 'list') {
         return block.items.some((item) => item.html.replace(/<br\s*\/?>/gi, '').trim());
@@ -4289,6 +4980,12 @@
         text: stripEditorCaretMarkers(element.textContent).trim(),
         ...extra
       };
+      if (element.dataset.sourceMarkdown) {
+        block.sourceMarkdown = element.dataset.sourceMarkdown;
+      }
+      if (element.dataset.sourceHtml) {
+        block.sourceHtml = element.dataset.sourceHtml;
+      }
       const lineSpacing = getElementLineSpacing(element);
       if (lineSpacing) {
         block.lineSpacing = lineSpacing;
@@ -4352,7 +5049,7 @@
       }
       const status = normalizeImageUploadStatus(uploadStatus, source);
 
-      return {
+      const block = {
         id: figure.dataset.blockId || blockId('image'),
         type: 'image',
         source,
@@ -4369,6 +5066,10 @@
           error: uploadError
         }
       };
+      if (figure.dataset.sourceMarkdown) {
+        block.sourceMarkdown = figure.dataset.sourceMarkdown;
+      }
+      return block;
     }
 
     function serializeListBlock(list) {
@@ -4386,6 +5087,9 @@
             text: stripEditorCaretMarkers(item.textContent).trim()
           }))
       };
+      if (list.dataset.sourceMarkdown) {
+        block.sourceMarkdown = list.dataset.sourceMarkdown;
+      }
       const textAlign = getElementTextAlign(list);
       if (textAlign) {
         block.textAlign = textAlign;
@@ -4506,7 +5210,8 @@
       if (tag === 'hr') {
         return [{
           id: node.dataset.blockId || blockId('divider'),
-          type: 'divider'
+          type: 'divider',
+          sourceMarkdown: node.dataset.sourceMarkdown || ''
         }];
       }
       if (tag === 'ul' || tag === 'ol') {
@@ -4639,6 +5344,14 @@
       }
 
       if (block.type === 'paragraph') {
+        if (originalMarkdownStillMatches(block)) {
+          return {
+            id: block.id || blockId('paragraph'),
+            type: 'paragraph',
+            markdown: block.sourceMarkdown,
+            text: block.text || ''
+          };
+        }
         const markdown = inlineMarkdownFromHtml(block.html || escapeHtml(block.text || ''), issues, { blockId: block.id });
         return {
           id: block.id || blockId('paragraph'),
@@ -4652,6 +5365,15 @@
 
       if (block.type === 'heading') {
         const level = Math.min(Math.max(Number(block.level) || 2, 2), 6);
+        if (originalMarkdownStillMatches(block)) {
+          return {
+            id: block.id || blockId('heading'),
+            type: 'heading',
+            level,
+            markdown: block.sourceMarkdown,
+            text: block.text || ''
+          };
+        }
         const markdown = inlineMarkdownFromHtml(block.html || escapeHtml(block.text || ''), issues, { blockId: block.id });
         return {
           id: block.id || blockId('heading'),
@@ -4665,6 +5387,14 @@
       }
 
       if (block.type === 'quote') {
+        if (originalMarkdownStillMatches(block)) {
+          return {
+            id: block.id || blockId('quote'),
+            type: 'quote',
+            markdown: block.sourceMarkdown,
+            text: block.text || ''
+          };
+        }
         const markdown = inlineMarkdownFromHtml(block.html || escapeHtml(block.text || ''), issues, { blockId: block.id });
         return {
           id: block.id || blockId('quote'),
@@ -4679,6 +5409,17 @@
       if (block.type === 'list') {
         const ordered = Boolean(block.ordered);
         const checklist = Boolean(block.checklist);
+        const currentListText = (block.items || []).map((item) => item.text || '').join(' ');
+        if (originalMarkdownStillMatches(block, currentListText)) {
+          return {
+            id: block.id || blockId('list'),
+            type: 'list',
+            ordered,
+            checklist,
+            items: block.items || [],
+            markdown: block.sourceMarkdown
+          };
+        }
         const items = (block.items || []).map((item, itemIndex) => {
           const markdown = inlineMarkdownFromHtml(item.html || escapeHtml(item.text || ''), issues, {
             blockId: block.id,
@@ -4708,12 +5449,38 @@
         return {
           id: block.id || blockId('divider'),
           type: 'divider',
-          markdown: '---'
+          markdown: block.sourceMarkdown || '---'
         };
       }
 
       if (block.type === 'image') {
+        if (block.sourceMarkdown) {
+          const originalImage = markdownImageFromLine(block.sourceMarkdown);
+          if (
+            originalImage &&
+            originalImage.alt === (block.alt || '') &&
+            originalImage.caption === (block.caption || '') &&
+            originalImage.url === (block.source?.url || block.upload?.uploadedUrl || '')
+          ) {
+            return {
+              id: block.id || blockId('image'),
+              type: 'image',
+              markdown: block.sourceMarkdown,
+              alt: block.alt || '',
+              caption: block.caption || '',
+              imageRef: block.id || blockId('image')
+            };
+          }
+        }
         return convertImageBlock(block, index, issues);
+      }
+
+      if (block.type === 'raw' || block.raw || block.markdown) {
+        return {
+          id: block.id || blockId('raw'),
+          type: 'raw',
+          markdown: String(block.raw || block.markdown || '').trim()
+        };
       }
 
       issues.push(issue('error', 'block-unsupported', `Unsupported ${block.type} block found.`, { blockId: block.id, blockIndex: index }));
@@ -4857,6 +5624,12 @@
             return {
               id: block.id || blockId('divider'),
               type: 'divider'
+            };
+          }
+          if (block.type === 'raw' || block.raw || block.markdown) {
+            return {
+              id: block.id || blockId('raw'),
+              type: 'raw'
             };
           }
           return null;
@@ -5111,7 +5884,228 @@
       publishedLink.hidden = false;
     }
 
+    function revisionPatchFromComposer() {
+      const article = updateArticlePayload();
+      const payload = buildPublishPayload(article);
+      window.otwPublisherPublishPayload = payload;
+      return {
+        title: article.title || '',
+        date: displayDateForMarkdown(article.metadata?.publishDate || article.metadata?.articleDate || ''),
+        subhead: article.subhead || '',
+        blocks: (payload.body?.blocks || []).map((block) => ({
+          id: block.id || blockId(block.type || 'block'),
+          type: block.type || 'raw',
+          markdown: block.markdown || '',
+          editable: block.type !== 'raw' && Boolean(block.markdown || block.type === 'divider'),
+          protectedReason: block.type === 'raw' ? 'Protected raw block' : ''
+        }))
+      };
+    }
+
+    async function refreshPublishedRevisionDetail() {
+      if (!activePublishedRevision?.slug) {
+        return null;
+      }
+      const detail = await localPublisherApi(`/api/published-essays/${encodeURIComponent(activePublishedRevision.slug)}`);
+      updateRevisionMetaFromDetail(detail);
+      refreshRevisionBar();
+      window.dispatchEvent(new CustomEvent('otw-published-revision-updated', { detail }));
+      return detail;
+    }
+
+    async function savePublishedRevisionDraft({ quiet = false } = {}) {
+      if (!activePublishedRevision?.slug) {
+        return false;
+      }
+      const patch = revisionPatchFromComposer();
+      revisionStatusText('Saving draft revision.');
+      const detail = await localPublisherApi(`/api/published-essays/${encodeURIComponent(activePublishedRevision.slug)}/draft-revision`, {
+        method: 'PATCH',
+        body: JSON.stringify(patch)
+      });
+      updateRevisionMetaFromDetail(detail);
+      refreshRevisionBar();
+      saveDraft();
+      if (!quiet) {
+        setSaveState('Revision draft saved', true);
+        revisionStatusText('Draft revision saved. Preview or republish locally when ready.');
+      }
+      window.dispatchEvent(new CustomEvent('otw-published-revision-updated', { detail }));
+      return true;
+    }
+
+    async function viewPublishedRevisionDiff() {
+      if (!activePublishedRevision?.slug) {
+        return null;
+      }
+      await savePublishedRevisionDraft({ quiet: true });
+      const payload = await localPublisherApi(`/api/published-essays/${encodeURIComponent(activePublishedRevision.slug)}/diff`);
+      if (revisionDiff) {
+        revisionDiff.hidden = false;
+        revisionDiff.value = payload.diff || 'No draft changes.';
+      }
+      revisionStatusText(payload.semanticSame ? 'No meaningful revision diff.' : 'Revision diff loaded.');
+      setSaveState('Revision diff loaded', true);
+      return payload;
+    }
+
+    async function previewPublishedRevision() {
+      if (!activePublishedRevision?.slug) {
+        return null;
+      }
+      await savePublishedRevisionDraft({ quiet: true });
+      const payload = await localPublisherApi(`/api/published-essays/${encodeURIComponent(activePublishedRevision.slug)}/preview`, {
+        method: 'POST',
+        body: JSON.stringify({ includeReadingAids: true })
+      });
+      window.open(payload.preview.url, '_blank', 'noopener');
+      revisionStatusText(payload.message || 'Preview generated from isolated temp output.');
+      setSaveState('Revision preview opened', true);
+      return payload;
+    }
+
+    function allowUnexpectedGeneratedFiles(error, actionLabel) {
+      const unexpected = error?.payload?.result?.unexpectedFiles || [];
+      if (!unexpected.length) {
+        return false;
+      }
+      return window.confirm(`${actionLabel} changed additional generated files:\n\n${unexpected.join('\n')}\n\nContinue with explicit generated-file override?`);
+    }
+
+    async function republishPublishedRevision() {
+      if (!activePublishedRevision?.slug) {
+        return null;
+      }
+      await savePublishedRevisionDraft({ quiet: true });
+      await viewPublishedRevisionDiff();
+      if (!window.confirm('Republish this revision locally? The live site will remain unchanged.')) {
+        revisionStatusText('Local republish canceled.');
+        return null;
+      }
+      const body = { confirmDiffViewed: true };
+      try {
+        const payload = await localPublisherApi(`/api/published-essays/${encodeURIComponent(activePublishedRevision.slug)}/republish-local`, {
+          method: 'POST',
+          body: JSON.stringify(body)
+        });
+        await refreshPublishedRevisionDetail();
+        revisionStatusText(payload.message || 'Local archive regenerated. Live site unchanged.');
+        setSaveState('Local archive regenerated', true);
+        return payload;
+      } catch (error) {
+        if (!allowUnexpectedGeneratedFiles(error, 'Local republish')) {
+          revisionStatusText(error.message);
+          setSaveState('Republish blocked', true);
+          return null;
+        }
+        const payload = await localPublisherApi(`/api/published-essays/${encodeURIComponent(activePublishedRevision.slug)}/republish-local`, {
+          method: 'POST',
+          body: JSON.stringify({ ...body, allowUnexpectedGeneratedFiles: true })
+        });
+        await refreshPublishedRevisionDetail();
+        revisionStatusText(payload.message || 'Local archive regenerated. Live site unchanged.');
+        setSaveState('Local archive regenerated', true);
+        return payload;
+      }
+    }
+
+    async function restorePublishedRevisionBackup() {
+      if (!activePublishedRevision?.slug) {
+        return null;
+      }
+      const backupId = revisionBackupSelect?.value || '';
+      if (!backupId) {
+        revisionStatusText('No backup is available for restore.');
+        return null;
+      }
+      if (!window.confirm('Restore this backup locally? A pre-restore backup will be created.')) {
+        return null;
+      }
+      try {
+        const payload = await localPublisherApi(`/api/published-essays/${encodeURIComponent(activePublishedRevision.slug)}/restore`, {
+          method: 'POST',
+          body: JSON.stringify({ backupId })
+        });
+        const detail = await refreshPublishedRevisionDetail();
+        if (detail?.composerArticle) {
+          openPublishedRevisionInComposer(detail, { skipConfirm: true, message: payload.message || 'Backup restored locally.' });
+        }
+        revisionStatusText(payload.message || 'Backup restored locally. Live site unchanged.');
+        setSaveState('Backup restored', true);
+        return payload;
+      } catch (error) {
+        if (!allowUnexpectedGeneratedFiles(error, 'Restore')) {
+          revisionStatusText(error.message);
+          setSaveState('Restore blocked', true);
+          return null;
+        }
+        const payload = await localPublisherApi(`/api/published-essays/${encodeURIComponent(activePublishedRevision.slug)}/restore`, {
+          method: 'POST',
+          body: JSON.stringify({ backupId, allowUnexpectedGeneratedFiles: true })
+        });
+        const detail = await refreshPublishedRevisionDetail();
+        if (detail?.composerArticle) {
+          openPublishedRevisionInComposer(detail, { skipConfirm: true, message: payload.message || 'Backup restored locally.' });
+        }
+        revisionStatusText(payload.message || 'Backup restored locally. Live site unchanged.');
+        setSaveState('Backup restored', true);
+        return payload;
+      }
+    }
+
+    async function livePublishPublishedRevision() {
+      if (!activePublishedRevision?.slug) {
+        return null;
+      }
+      if (!window.confirm('Publish Live will commit and push guarded local revision files. Continue?')) {
+        return null;
+      }
+      const payload = await localPublisherApi(`/api/published-essays/${encodeURIComponent(activePublishedRevision.slug)}/publish-live`, {
+        method: 'POST',
+        body: JSON.stringify({ confirmLivePublish: true })
+      });
+      revisionStatusText(payload.message || 'Live publish pushed.');
+      setSaveState('Live publish pushed', true);
+      return payload;
+    }
+
+    function openPublishedRevisionInComposer(detail, options = {}) {
+      if (!detail?.composerArticle || !detail?.essay) {
+        setSaveState('Published essay unavailable', true);
+        return false;
+      }
+      isHydrating = true;
+      hydrateArticle({
+        ...detail.composerArticle,
+        createdAt: detail.composerArticle.createdAt || new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      });
+      autoResizeTextarea(titleField);
+      autoResizeTextarea(subheadField);
+      isHydrating = false;
+      updateArticlePayload();
+      updateRevisionMetaFromDetail(detail);
+      refreshRevisionBar();
+      saveDraft();
+      if (publishedRevisionBar) {
+        publishedRevisionBar.scrollIntoView({ block: 'nearest' });
+      }
+      setSaveState(options.message || 'Published essay opened for revision', true);
+      revisionStatusText('You are editing a draft revision. Save revision draft before republishing locally.');
+      return true;
+    }
+
+    function exitPublishedRevisionMode() {
+      writePublishedRevisionMeta(null);
+      refreshRevisionBar();
+      revisionStatusText('');
+      setSaveState('Revision mode closed', true);
+    }
+
     async function publishArticle() {
+      if (activePublishedRevision?.slug) {
+        return republishPublishedRevision();
+      }
       saveDraft();
       const publishKey = getPublisherPublishKey();
       if (!publishKey) {
@@ -5176,6 +6170,13 @@
     }
 
     function openDraftPreview() {
+      if (activePublishedRevision?.slug) {
+        previewPublishedRevision().catch((error) => {
+          revisionStatusText(error.message);
+          setSaveState('Revision preview failed', true);
+        });
+        return;
+      }
       saveDraft();
       const previewUrl = `publisher_preview.html?draft=${Date.now()}`;
       const previewWindow = window.open(previewUrl, '_blank', 'noopener');
@@ -5229,6 +6230,8 @@
       if (block.type === 'quote') {
         const quote = document.createElement('blockquote');
         quote.dataset.blockId = block.id || blockId('quote');
+        if (block.sourceMarkdown) quote.dataset.sourceMarkdown = block.sourceMarkdown;
+        if (block.sourceHtml) quote.dataset.sourceHtml = block.sourceHtml;
         renderInlineHtml(quote, block.html || escapeHtml(block.text || ''));
         if (block.lineSpacing) {
           applyLineSpacingClass(quote, block.lineSpacing);
@@ -5237,6 +6240,8 @@
         return quote;
       }
       element.dataset.blockId = block.id || blockId(block.type);
+      if (block.sourceMarkdown) element.dataset.sourceMarkdown = block.sourceMarkdown;
+      if (block.sourceHtml) element.dataset.sourceHtml = block.sourceHtml;
       renderInlineHtml(element, block.html || escapeHtml(block.text || ''));
       if (block.lineSpacing) {
         applyLineSpacingClass(element, block.lineSpacing);
@@ -5248,6 +6253,7 @@
     function renderListBlock(block) {
       const list = document.createElement(block.ordered ? 'ol' : 'ul');
       list.dataset.blockId = block.id || blockId('list');
+      if (block.sourceMarkdown) list.dataset.sourceMarkdown = block.sourceMarkdown;
       if (block.checklist) {
         list.classList.add('editor-checklist');
       }
@@ -5501,6 +6507,9 @@
         uploadedUrl: source.kind === 'url' ? source.url : block.upload?.uploadedUrl || '',
         objectKey: source.objectKey || block.upload?.objectKey || ''
       });
+      if (block.sourceMarkdown) {
+        figure.dataset.sourceMarkdown = block.sourceMarkdown;
+      }
       if (!src) {
         figure.dataset.localStatus = block.status || 'missing-local-preview';
         if (source.tooLargeForLocalDraft) {
@@ -5520,6 +6529,7 @@
       if (block.type === 'divider') {
         const divider = document.createElement('hr');
         divider.dataset.blockId = block.id || blockId('divider');
+        if (block.sourceMarkdown) divider.dataset.sourceMarkdown = block.sourceMarkdown;
         return divider;
       }
       if (block.type === 'image') {
@@ -5531,8 +6541,11 @@
       unsupported.dataset.blockId = block.id || blockId('unsupported');
       unsupported.dataset.blockType = block.type || 'unsupported';
       unsupported.dataset.originalType = block.originalType || block.type || 'unknown';
-      unsupported.dataset.raw = JSON.stringify(block);
-      unsupported.textContent = `Unsupported ${block.type || 'content'} preserved`;
+      unsupported.dataset.raw = block.raw || block.markdown || '';
+      if (block.sourceMarkdown) unsupported.dataset.sourceMarkdown = block.sourceMarkdown;
+      unsupported.textContent = block.protectedReason
+        ? `${block.protectedReason}. Preserved during revision.`
+        : `Unsupported ${block.type || 'content'} preserved`;
       return unsupported;
     }
 
@@ -5605,8 +6618,10 @@
     function loadDraft() {
       const stored = readStoredDraft();
       if (!stored) {
+        writePublishedRevisionMeta(null);
         setPublisherDate(localTodayIso());
         updateArticlePayload();
+        refreshRevisionBar();
         setSaveState('Saved locally');
         return;
       }
@@ -5620,6 +6635,10 @@
       autoResizeTextarea(titleField);
       autoResizeTextarea(subheadField);
       isHydrating = false;
+      if (activePublishedRevision?.slug && article.metadata?.slug !== activePublishedRevision.slug) {
+        writePublishedRevisionMeta(null);
+      }
+      refreshRevisionBar();
       updateArticlePayload();
       if (stored.key !== DRAFT_KEY) {
         saveDraft();
@@ -5630,6 +6649,7 @@
 
     function resetComposerForNewDraft() {
       window.clearTimeout(saveTimer);
+      writePublishedRevisionMeta(null);
       discardRemovedFigureUndo();
       imageObjectUrls.forEach((url) => URL.revokeObjectURL(url));
       imageObjectUrls.clear();
@@ -5656,6 +6676,7 @@
       clearFigureSelection();
       updateToolbarState();
       updateArticlePayload();
+      refreshRevisionBar();
     }
 
     function clearLocalDraft() {
@@ -5684,13 +6705,43 @@
       return true;
     }
 
+    function decodeArticleHashPayload(value) {
+      if (typeof decodeURIComponent === 'function') {
+        return decodeURIComponent(value);
+      }
+      const source = String(value || '');
+      const decoder = typeof TextDecoder === 'function' ? new TextDecoder() : null;
+      let output = '';
+      let bytes = [];
+      const flushBytes = () => {
+        if (!bytes.length) {
+          return;
+        }
+        output += decoder
+          ? decoder.decode(new Uint8Array(bytes))
+          : bytes.map((byte) => String.fromCharCode(byte)).join('');
+        bytes = [];
+      };
+      for (let index = 0; index < source.length; index += 1) {
+        if (source[index] === '%' && /^[0-9A-Fa-f]{2}$/.test(source.slice(index + 1, index + 3))) {
+          bytes.push(Number.parseInt(source.slice(index + 1, index + 3), 16));
+          index += 2;
+        } else {
+          flushBytes();
+          output += source[index];
+        }
+      }
+      flushBytes();
+      return output;
+    }
+
     function importArticleFromHash() {
       const prefix = '#article=';
       if (!window.location.hash.startsWith(prefix)) {
         return false;
       }
       try {
-        const article = JSON.parse(decodeURIComponent(window.location.hash.slice(prefix.length)));
+        const article = JSON.parse(decodeArticleHashPayload(window.location.hash.slice(prefix.length)));
         if (!article || article.schema !== ARTICLE_SCHEMA) {
           return false;
         }
@@ -5699,6 +6750,20 @@
         autoResizeTextarea(titleField);
         autoResizeTextarea(subheadField);
         isHydrating = false;
+        if (article.metadata?.publishedRevision && article.metadata?.slug) {
+          writePublishedRevisionMeta({
+            slug: article.metadata.slug,
+            title: article.title || article.metadata.docName || '',
+            date: displayDateForMarkdown(article.metadata.publishDate || article.metadata.articleDate || ''),
+            archivePath: article.metadata.archivePath || '',
+            ogPath: article.metadata.ogPath || '',
+            sourcePath: article.metadata.sourcePath || '',
+            readingAidStatus: null,
+            history: [],
+            openedAt: new Date().toISOString()
+          });
+        }
+        refreshRevisionBar();
         saveDraft();
         window.history.replaceState(null, '', window.location.pathname);
         setSaveState('Imported locally', true);
@@ -7628,6 +8693,50 @@
 
     previewDraftBtn.addEventListener('click', openDraftPreview);
 
+    revisionSaveBtn.addEventListener('click', () => {
+      savePublishedRevisionDraft().catch((error) => {
+        revisionStatusText(error.message);
+        setSaveState('Revision save failed', true);
+      });
+    });
+
+    revisionDiffBtn.addEventListener('click', () => {
+      viewPublishedRevisionDiff().catch((error) => {
+        revisionStatusText(error.message);
+        setSaveState('Revision diff failed', true);
+      });
+    });
+
+    revisionPreviewBtn.addEventListener('click', () => {
+      previewPublishedRevision().catch((error) => {
+        revisionStatusText(error.message);
+        setSaveState('Revision preview failed', true);
+      });
+    });
+
+    revisionRepublishBtn.addEventListener('click', () => {
+      republishPublishedRevision().catch((error) => {
+        revisionStatusText(error.message);
+        setSaveState('Republish failed', true);
+      });
+    });
+
+    revisionRestoreBtn.addEventListener('click', () => {
+      restorePublishedRevisionBackup().catch((error) => {
+        revisionStatusText(error.message);
+        setSaveState('Restore failed', true);
+      });
+    });
+
+    revisionLiveBtn.addEventListener('click', () => {
+      livePublishPublishedRevision().catch((error) => {
+        revisionStatusText(error.message);
+        setSaveState('Live publish blocked', true);
+      });
+    });
+
+    revisionExitBtn.addEventListener('click', exitPublishedRevisionMode);
+
     downloadMarkdownBtn.addEventListener('click', downloadMarkdownDraft);
 
     clearDraftBtn.addEventListener('click', clearLocalDraft);
@@ -7864,48 +8973,68 @@
       loadDraft();
     }
     window.setTimeout(checkServerDraftOnLoad, 0);
-    updateToolbarState();
-    window.otwPublisher = {
-      draftKey: DRAFT_KEY,
-      serializeArticle,
-      buildPublishPayload,
-      validatePublishPayload,
-      publishArticle,
-      openDraftPreview,
-      convertMarkdownInEditor,
-      markdownTextLooksLikeMarkdown,
-      publishRequestBodyFromPayload,
-      publishedUrlFromWorkerFile,
-      saveDraft,
-      saveServerDraft,
-      clearLocalDraft,
-      fetchServerDraft,
-      restoreServerDraft,
-      loadDraft,
-      getArticlePayload() {
-        return JSON.parse(articlePayload.textContent || 'null');
-      },
-      getPublishPayload() {
-        return JSON.parse(publishPayload.textContent || 'null');
-      },
-      hasPublisherKey() {
-        return Boolean(getPublisherPublishKey());
-      },
-      getServerDraftMeta() {
-        return serverDraftMeta;
-      },
-      hydrateArticleForTest(article) {
-        isHydrating = true;
-        hydrateArticle(article);
-        autoResizeTextarea(titleField);
-        autoResizeTextarea(subheadField);
-        isHydrating = false;
-        return updateArticlePayload();
-      }
-    };
+    try {
+      window.otwPublisher = {
+        draftKey: DRAFT_KEY,
+        serializeArticle,
+        buildPublishPayload,
+        validatePublishPayload,
+        publishArticle,
+        openDraftPreview,
+        openPublishedRevisionInComposer,
+        savePublishedRevisionDraft,
+        viewPublishedRevisionDiff,
+        previewPublishedRevision,
+        republishPublishedRevision,
+        restorePublishedRevisionBackup,
+        livePublishPublishedRevision,
+        exitPublishedRevisionMode,
+        convertMarkdownInEditor,
+        markdownTextLooksLikeMarkdown,
+        publishRequestBodyFromPayload,
+        publishedUrlFromWorkerFile,
+        saveDraft,
+        saveServerDraft,
+        clearLocalDraft,
+        fetchServerDraft,
+        restoreServerDraft,
+        loadDraft,
+        getArticlePayload() {
+          return JSON.parse(articlePayload.textContent || 'null');
+        },
+        getPublishPayload() {
+          return JSON.parse(publishPayload.textContent || 'null');
+        },
+        hasPublisherKey() {
+          return Boolean(getPublisherPublishKey());
+        },
+        getActivePublishedRevision() {
+          return activePublishedRevision;
+        },
+        getServerDraftMeta() {
+          return serverDraftMeta;
+        },
+        hydrateArticleForTest(article) {
+          isHydrating = true;
+          hydrateArticle(article);
+          autoResizeTextarea(titleField);
+          autoResizeTextarea(subheadField);
+          isHydrating = false;
+          return updateArticlePayload();
+        }
+      };
+    } catch (error) {
+      console.error('Publisher composer API export failed', error);
+    }
+    try {
+      updateToolbarState();
+    } catch (error) {
+      setSaveState('Toolbar refresh deferred', true);
+    }
     autoResizeTextarea(titleField);
     autoResizeTextarea(subheadField);
     updateComposerPanels();
   </script>
+  <script src="publisher_manager.js" defer></script>
 </body>
 </html>

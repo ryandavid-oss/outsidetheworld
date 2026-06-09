@@ -88,13 +88,202 @@
         }
     };
 
+    const clarifyMedia = window.matchMedia('(min-width: 1180px)');
+
+    const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+
+    const restoreFloatingPanel = (panel) => {
+        if (!panel || !panel.classList.contains('clarify-note__panel--floating')) {
+            return;
+        }
+        const homeId = panel.getAttribute('data-clarify-home');
+        const home = homeId ? document.getElementById(homeId) : null;
+        panel.classList.remove('clarify-note__panel--floating');
+        panel.style.left = '';
+        panel.style.top = '';
+        if (home && !home.contains(panel)) {
+            home.appendChild(panel);
+        }
+    };
+
+    const setDisclosureState = (button, panel, isExpanded) => {
+        button.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+        if (!isExpanded) {
+            panel.hidden = true;
+            restoreFloatingPanel(panel);
+            return;
+        }
+        panel.hidden = !isExpanded;
+    };
+
+    const closeDisclosureGroup = (selector, exceptButton) => {
+        document.querySelectorAll(selector).forEach((button) => {
+            const panelId = button.getAttribute('aria-controls');
+            const panel = panelId ? document.getElementById(panelId) : null;
+            if (!panel || button === exceptButton) {
+                return;
+            }
+            setDisclosureState(button, panel, false);
+        });
+    };
+
+    const initReaderAidTools = () => {
+        document.querySelectorAll('[data-reader-aid-toggle]').forEach((button) => {
+            const panelId = button.getAttribute('aria-controls');
+            const panel = panelId ? document.getElementById(panelId) : null;
+            if (!panel) {
+                return;
+            }
+
+            button.addEventListener('click', () => {
+                const isExpanded = button.getAttribute('aria-expanded') === 'true';
+                closeDisclosureGroup('[data-reader-aid-toggle]', button);
+                setDisclosureState(button, panel, !isExpanded);
+            });
+        });
+    };
+
+    const prepareClarifyHome = (button, panel) => {
+        const note = button.closest('[data-clarify-note]');
+        if (!note) {
+            return;
+        }
+        if (!note.id) {
+            note.id = `${panel.id}-home`;
+        }
+        panel.setAttribute('data-clarify-home', note.id);
+    };
+
+    const positionClarifyPanel = (button, panel) => {
+        panel.style.left = '-9999px';
+        panel.style.top = '-9999px';
+        panel.hidden = false;
+        const buttonRect = button.getBoundingClientRect();
+        const panelWidth = panel.offsetWidth;
+        const panelHeight = panel.offsetHeight;
+        const margin = 16;
+        let left = buttonRect.right + 10;
+        if (left + panelWidth > window.innerWidth - margin) {
+            left = buttonRect.left - panelWidth - 10;
+        }
+        left = clamp(left, margin, Math.max(margin, window.innerWidth - panelWidth - margin));
+        const top = clamp(buttonRect.top - 4, margin, Math.max(margin, window.innerHeight - panelHeight - margin));
+        panel.style.left = `${left}px`;
+        panel.style.top = `${top}px`;
+    };
+
+    const openClarifyPanel = (button, panel) => {
+        closeDisclosureGroup('[data-clarify-toggle]', button);
+        button.setAttribute('aria-expanded', 'true');
+        if (clarifyMedia.matches) {
+            prepareClarifyHome(button, panel);
+            panel.classList.add('clarify-note__panel--floating');
+            document.body.appendChild(panel);
+            positionClarifyPanel(button, panel);
+            return;
+        }
+        restoreFloatingPanel(panel);
+        panel.hidden = false;
+    };
+
+    const repositionOpenClarifyPanel = () => {
+        const button = document.querySelector('[data-clarify-toggle][aria-expanded="true"]');
+        if (!button || !clarifyMedia.matches) {
+            return;
+        }
+        const panelId = button.getAttribute('aria-controls');
+        const panel = panelId ? document.getElementById(panelId) : null;
+        if (panel && panel.classList.contains('clarify-note__panel--floating')) {
+            positionClarifyPanel(button, panel);
+        }
+    };
+
+    const initClarifyNotes = () => {
+        document.querySelectorAll('[data-clarify-toggle]').forEach((button) => {
+            const panelId = button.getAttribute('aria-controls');
+            const panel = panelId ? document.getElementById(panelId) : null;
+            if (!panel) {
+                return;
+            }
+
+            button.addEventListener('click', () => {
+                const isExpanded = button.getAttribute('aria-expanded') === 'true';
+                if (isExpanded) {
+                    setDisclosureState(button, panel, false);
+                    return;
+                }
+                openClarifyPanel(button, panel);
+            });
+        });
+
+        document.addEventListener('click', (event) => {
+            if (
+                event.target.closest('[data-clarify-note]') ||
+                event.target.closest('.clarify-note__panel--floating')
+            ) {
+                return;
+            }
+            closeDisclosureGroup('[data-clarify-toggle]');
+        });
+
+        window.addEventListener('resize', repositionOpenClarifyPanel);
+        window.addEventListener('scroll', repositionOpenClarifyPanel, { passive: true });
+        if (clarifyMedia.addEventListener) {
+            clarifyMedia.addEventListener('change', () => closeDisclosureGroup('[data-clarify-toggle]'));
+        }
+    };
+
+    const closeCheckpoints = () => {
+        document.querySelectorAll('.reading-checkpoint[open]').forEach((checkpoint) => {
+            checkpoint.open = false;
+        });
+    };
+
+    const setReadingToolsState = (button, enabled) => {
+        document.body.setAttribute('data-reading-tools', enabled ? 'on' : 'off');
+        button.setAttribute('aria-pressed', enabled ? 'true' : 'false');
+        button.textContent = enabled ? 'Hide Reading Tools' : 'Show Reading Tools';
+        if (!enabled) {
+            closeDisclosureGroup('[data-reader-aid-toggle]');
+            closeDisclosureGroup('[data-clarify-toggle]');
+            closeCheckpoints();
+        }
+    };
+
+    const initReadingToolsMaster = () => {
+        const button = document.querySelector('[data-reading-tools-toggle]');
+        if (!button) {
+            return;
+        }
+        setReadingToolsState(button, document.body.getAttribute('data-reading-tools') === 'on');
+        button.addEventListener('click', () => {
+            const isEnabled = document.body.getAttribute('data-reading-tools') === 'on';
+            setReadingToolsState(button, !isEnabled);
+        });
+    };
+
+    const initReadingAids = () => {
+        initReadingToolsMaster();
+        initReaderAidTools();
+        initClarifyNotes();
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                closeDisclosureGroup('[data-reader-aid-toggle]');
+                closeDisclosureGroup('[data-clarify-toggle]');
+            }
+        });
+    };
+
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', () => {
             initReaderMode();
             initShare();
+            initReadingAids();
         });
     } else {
         initReaderMode();
         initShare();
+        initReadingAids();
     }
 }());

@@ -1,0 +1,145 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Outside The World archive reading aid sidecar",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "slug",
+    "essayHash",
+    "reviewStatus",
+    "generatedAt",
+    "model",
+    "signalBrief",
+    "readerMap",
+    "checkpoints",
+    "plainSignals"
+  ],
+  "properties": {
+    "slug": {
+      "type": "string",
+      "minLength": 1
+    },
+    "essayHash": {
+      "type": "string",
+      "minLength": 64,
+      "maxLength": 64
+    },
+    "reviewStatus": {
+      "type": "string",
+      "enum": ["draft", "approved"]
+    },
+    "generatedAt": {
+      "type": "string"
+    },
+    "approvedAt": {
+      "type": "string"
+    },
+    "model": {
+      "type": "string",
+      "minLength": 1
+    },
+    "signalBrief": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["text", "locked"],
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1400
+        },
+        "locked": {
+          "type": "boolean"
+        }
+      }
+    },
+    "readerMap": {
+      "type": "array",
+      "minItems": 0,
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["label", "title", "summary", "locked"],
+        "properties": {
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 40
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 180
+          },
+          "summary": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 600
+          },
+          "locked": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "checkpoints": {
+      "type": "array",
+      "minItems": 0,
+      "maxItems": 6,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["afterParagraphId", "label", "text", "locked"],
+        "properties": {
+          "afterParagraphId": {
+            "type": "string",
+            "pattern": "^p-[0-9]{3}$"
+          },
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "text": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 800
+          },
+          "locked": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "plainSignals": {
+      "type": "array",
+      "minItems": 0,
+      "maxItems": 12,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["paragraphId", "label", "text", "locked"],
+        "properties": {
+          "paragraphId": {
+            "type": "string",
+            "pattern": "^p-[0-9]{3}$"
+          },
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "text": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 800
+          },
+          "locked": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  }
+}

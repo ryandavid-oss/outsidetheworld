@@ -703,6 +703,95 @@ def test_canonical_archive_page_uses_normalized_local_html_image_for_preview():
     assert meta["og:image:alt"] == "Local HTML image"
 
 
+def test_archive_reader_assigns_body_paragraph_ids_only():
+    share_html = narrative_sync.render_share_page({
+        "title": "Paragraph Id Fixture",
+        "date": "June 2, 2026",
+        "file": "2026-06-02-paragraph-id-fixture.md",
+        "body": (
+            "First substantial body paragraph with enough shape to receive the opening reader treatment.\n\n"
+            "## A Heading That Should Not Become A Paragraph\n\n"
+            "Second body paragraph that can receive a stable generated paragraph id."
+        ),
+    })
+    body = extract_share_entry_body(share_html)
+
+    assert 'id="p-001"' in body
+    assert 'id="p-002"' in body
+    assert "<h2 id=" not in body
+
+
+def test_reading_aids_render_only_when_approved_or_previewed():
+    with tempfile.TemporaryDirectory() as temp_name:
+        temp = Path(temp_name)
+        input_dir = temp / "current_narrative"
+        reading_dir = temp / "reading_aids"
+        input_dir.mkdir()
+        reading_dir.mkdir()
+        filename = "2026-06-03-aid-fixture.md"
+        source = (
+            "# Aid Fixture\n"
+            "Date: June 3, 2026\n\n"
+            "First substantial paragraph that gives the reader a place to begin and enough language for a checkpoint.\n\n"
+            "Second substantial paragraph that is dense enough to carry a clarify note without attaching the note to page chrome.\n"
+        )
+        (input_dir / filename).write_text(source, encoding="utf-8")
+        post = {
+            "title": "Aid Fixture",
+            "date": "June 3, 2026",
+            "file": filename,
+            "body": "\n".join(source.splitlines()[2:]).strip(),
+        }
+
+        old_input = narrative_sync.input_folder
+        old_reading = narrative_sync.reading_aids_folder
+        try:
+            narrative_sync.input_folder = str(input_dir)
+            narrative_sync.reading_aids_folder = str(reading_dir)
+            sidecar = {
+                "slug": "aid-fixture",
+                "essayHash": narrative_sync.essay_hash_for_post(post),
+                "reviewStatus": "draft",
+                "generatedAt": "2026-06-03T00:00:00Z",
+                "model": "test-model",
+                "signalBrief": {"text": "A quiet orientation for local preview.", "locked": False},
+                "readerMap": [
+                    {"label": "01", "title": "Opening", "summary": "The essay begins by locating the reader.", "locked": False}
+                ],
+                "checkpoints": [
+                    {"afterParagraphId": "p-001", "label": "Where We Are", "text": "The first movement has established the ground.", "locked": False}
+                ],
+                "plainSignals": [
+                    {"paragraphId": "p-002", "label": "Plain Signal", "text": "In plain terms, this passage names the pressure point.", "locked": False}
+                ],
+            }
+            (reading_dir / "aid-fixture.json").write_text(json.dumps(sidecar), encoding="utf-8")
+
+            public_html = narrative_sync.render_share_page(post)
+            preview_html = narrative_sync.render_share_page(post, include_draft_reading_aids=True)
+            assert "Article Summary" not in public_html
+            assert "Article Summary" in preview_html
+            assert 'data-reading-tools="off"' in preview_html
+            assert 'data-reading-tools-toggle>Show Reading Tools</button>' in preview_html
+            assert "Signal Brief" not in preview_html
+            assert "Plain Signal" not in preview_html
+            assert 'aria-controls="reading-aid-summary"' in preview_html
+            assert 'id="reading-aid-summary" hidden' in preview_html
+            assert "Clarify" in preview_html
+            assert "Where We Are" in preview_html
+
+            sidecar["reviewStatus"] = "approved"
+            (reading_dir / "aid-fixture.json").write_text(json.dumps(sidecar), encoding="utf-8")
+            approved_html = narrative_sync.render_share_page(post)
+            assert "Article Summary" in approved_html
+            assert 'data-reading-tools-toggle>Show Reading Tools</button>' in approved_html
+            assert "Signal Brief" not in approved_html
+            assert "Plain Signal" not in approved_html
+        finally:
+            narrative_sync.input_folder = old_input
+            narrative_sync.reading_aids_folder = old_reading
+
+
 def test_residue_archive_legacy_urls_resolve_to_canonical_archive_paths():
     residue = (ROOT / "residue_archive.html").read_text(encoding="utf-8")
 
@@ -811,6 +900,8 @@ def run():
         test_canonical_archive_page_uses_markdown_image_when_no_publisher_image_exists,
         test_canonical_archive_page_uses_normalized_local_article_image_for_preview,
         test_canonical_archive_page_uses_normalized_local_html_image_for_preview,
+        test_archive_reader_assigns_body_paragraph_ids_only,
+        test_reading_aids_render_only_when_approved_or_previewed,
         test_residue_archive_legacy_urls_resolve_to_canonical_archive_paths,
         test_share_copy_search_and_feed_paths_do_not_emit_legacy_residue_urls,
         test_public_pages_use_shared_post_renderer,

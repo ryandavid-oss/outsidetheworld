@@ -12,9 +12,9 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="mobile-web-app-capable" content="yes" />
 
-    <title>Outside The World</title>
+    <title>Outside The World &mdash; Personal Archive &amp; Professional Work</title>
     <meta name="description"
-        content="Outside The World is a personal archive and professional practice spanning 25 years of writing, photography, systems thinking, and digital archaeology in Queen Creek, Arizona." />
+        content="The personal archive and professional work of Outside The World: writing, photography, poetry, advisory work, systems design, strategy, and leadership." />
     <link rel="canonical" href="https://outsidetheworld.com/" />
     <link rel="alternate" type="application/atom+xml" title="Outside The World Atom Feed" href="https://outsidetheworld.com/atom.xml" />
 
@@ -23,21 +23,21 @@
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Outside The World" />
     <meta property="og:locale" content="en_US" />
-    <meta property="og:title" content="Outside The World" />
+    <meta property="og:title" content="Outside The World &mdash; Personal Archive &amp; Professional Work" />
     <meta property="og:description"
-        content="A personal archive and professional practice spanning 25 years of writing, photography, systems thinking, and digital archaeology in Queen Creek, Arizona." />
+        content="The personal archive and professional work of Outside The World: writing, photography, poetry, advisory work, systems design, strategy, and leadership." />
     <meta property="og:image" content="https://outsidetheworld.com/Images/index_preview.jpg" />
     <meta property="og:image:secure_url" content="https://outsidetheworld.com/Images/index_preview.jpg" />
     <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content="1291" />
     <meta property="og:image:height" content="690" />
-    <meta property="og:image:alt" content="Outside The World homepage with a split between personal archive and professional practice." />
+    <meta property="og:image:alt" content="Outside The World homepage with a split between personal archive and professional work." />
     <meta property="og:url" content="https://outsidetheworld.com/" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Outside The World" />
+    <meta name="twitter:title" content="Outside The World &mdash; Personal Archive &amp; Professional Work" />
     <meta name="twitter:description"
-        content="A personal archive and professional practice spanning 25 years of writing, photography, systems thinking, and digital archaeology in Queen Creek, Arizona." />
+        content="The personal archive and professional work of Outside The World: writing, photography, poetry, advisory work, systems design, strategy, and leadership." />
     <meta name="twitter:image" content="https://outsidetheworld.com/Images/index_preview.jpg" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -481,9 +481,9 @@
         .hero-title {
             margin: 0;
             font-family: 'IBM Plex Serif', serif;
-            font-size: clamp(2.8rem, 8.7vw, 5.8rem);
-            line-height: 0.94;
-            letter-spacing: -0.05em;
+            font-size: clamp(2.35rem, 5.1vw, 4.1rem);
+            line-height: 1.02;
+            letter-spacing: -0.035em;
             font-weight: 600;
             text-wrap: balance;
         }
@@ -653,7 +653,7 @@
             color: var(--text-faint);
         }
 
-        .route-body h3 {
+        .route-body h2 {
             margin: 0 0 12px;
             font-family: 'IBM Plex Serif', serif;
             font-size: clamp(2.1rem, 6.1vw, 3.2rem);
@@ -1067,6 +1067,11 @@
                 font-size: 0.74rem;
             }
 
+            .hero-title {
+                font-size: clamp(1.95rem, 7.8vw, 2.35rem);
+                line-height: 1.07;
+            }
+
             .search-results {
                 max-height: min(62vh, 430px);
                 overflow-y: auto;
@@ -1127,7 +1132,7 @@
   "@id": "https://outsidetheworld.com/#website",
   "name": "Outside The World",
   "url": "https://outsidetheworld.com/",
-  "description": "A personal archive and professional practice spanning 25 years of writing, photography, systems thinking, and digital archaeology.",
+  "description": "The personal archive and professional work of Outside The World: writing, photography, poetry, advisory work, systems design, strategy, and leadership.",
   "publisher": {
     "@type": "Organization",
     "name": "Outside the World is New, LLC",
@@ -1146,19 +1151,15 @@
 </head>
 
 <body>
-    <h1 class="sr-only">Outside The World</h1>
-
     <div class="shell">
         <div class="frame">
             <main>
                 <section class="hero-panel" aria-label="Homepage introduction">
                     <div class="hero-grid">
                         <div class="hero-copy">
-                            <p class="hero-title">
-                                A life in <span class="accent">signal</span> and structure.
-                            </p>
+                            <h1 class="hero-title">Personal archive. Professional work.</h1>
                             <p class="hero-dek">
-                                Personal archive. Professional practice.
+                                Outside The World is the home of 25 years of writing, photography, poetry, strategy, systems design, and leadership.
                             </p>
                         </div>
 
@@ -1178,13 +1179,14 @@
                                         id="siteSearchInput"
                                         class="site-search-input"
                                         type="search"
-                                        placeholder="SEARCH THE WORLD"
+                                        placeholder="SEARCH OUTSIDE THE WORLD"
                                         autocomplete="off"
                                         spellcheck="false"
+                                        aria-label="Search Outside The World"
                                         aria-describedby="siteSearchHint"
                                         aria-controls="siteSearchResults" />
                                 </div>
-                                <p class="site-search-hint" id="siteSearchHint">Natural-language search across Outside The World.</p>
+                                <p class="site-search-hint" id="siteSearchHint">Natural-language search across the archive and professional work.</p>
                                 <div class="search-results" id="siteSearchResults" role="status" aria-live="polite"></div>
                             </div>
                         </div>
@@ -1192,7 +1194,7 @@
                 </section>
 
                 <section class="route-grid" aria-label="Primary site paths">
-                    <a class="route-card personal" href="personal.html" aria-label="Enter personal section">
+                    <a class="route-card personal" href="personal.html" aria-label="Explore the personal archive">
                         <div class="route-head">
                             <div class="route-label">[ Personal ]</div>
                             <div class="route-index">01</div>
@@ -1203,9 +1205,9 @@
                         </div>
 
                         <div class="route-body">
-                            <h3>Enter the living archive.</h3>
+                            <h2>Personal Archive</h2>
                             <p>
-                                Writing, photography, poetry, and memory.
+                                Writing, photography, poetry, memory, and fragments from a long-running creative record.
                             </p>
                             <div class="route-signals" aria-label="Personal highlights">
                                 <span class="signal-pill">writing</span>
@@ -1215,12 +1217,12 @@
                         </div>
 
                         <div class="route-footer">
-                            <span class="route-btn">Explore Personal</span>
+                            <span class="route-btn">Explore the Archive</span>
                         </div>
                     </a>
 
                     <a class="route-card professional" href="professional.html"
-                        aria-label="Enter professional section">
+                        aria-label="View professional work">
                         <div class="route-head">
                             <div class="route-label">[ Professional ]</div>
                             <div class="route-index">02</div>
@@ -1231,9 +1233,9 @@
                         </div>
 
                         <div class="route-body">
-                            <h3>Enter the practice.</h3>
+                            <h2>Professional Work</h2>
                             <p>
-                                Advisory work, systems design, and leadership.
+                                Advisory, strategy, systems design, and leadership for organizations building clearer systems.
                             </p>
                             <div class="route-signals" aria-label="Professional highlights">
                                 <span class="signal-pill">strategy</span>
@@ -1243,7 +1245,7 @@
                         </div>
 
                         <div class="route-footer">
-                            <span class="route-btn">Explore Professional</span>
+                            <span class="route-btn">View Professional Work</span>
                         </div>
                     </a>
                 </section>
