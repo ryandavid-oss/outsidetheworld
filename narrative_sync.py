@@ -1025,6 +1025,13 @@ def render_reading_aids_intro(aids):
     pieces = ['<section class="reading-aids" id="reading-aids-panel" aria-label="Reading aids">']
     if aids.get('reviewStatus') == 'draft':
         pieces.append('<p class="reading-aids__draft">Draft reading aids visible in local preview.</p>')
+    pieces.append(
+        '<p class="reading-aids__disclosure">'
+        'Reading tools are AI-assisted. They are provided to help readers navigate the essay. '
+        'They may not perfectly reflect the author&rsquo;s intent, beliefs, or emphasis. '
+        'The essay itself remains the source text.'
+        '</p>'
+    )
 
     controls = []
     panels = []
