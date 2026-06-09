@@ -198,6 +198,13 @@
         }
     };
 
+    const closeOpenClarifyOnScroll = () => {
+        if (!document.querySelector('[data-clarify-toggle][aria-expanded="true"]')) {
+            return;
+        }
+        closeDisclosureGroup('[data-clarify-toggle]');
+    };
+
     const initClarifyNotes = () => {
         document.querySelectorAll('[data-clarify-toggle]').forEach((button) => {
             const panelId = button.getAttribute('aria-controls');
@@ -227,7 +234,7 @@
         });
 
         window.addEventListener('resize', repositionOpenClarifyPanel);
-        window.addEventListener('scroll', repositionOpenClarifyPanel, { passive: true });
+        window.addEventListener('scroll', closeOpenClarifyOnScroll, { passive: true });
         if (clarifyMedia.addEventListener) {
             clarifyMedia.addEventListener('change', () => closeDisclosureGroup('[data-clarify-toggle]'));
         }

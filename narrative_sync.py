@@ -1357,7 +1357,7 @@ def render_share_page(post, newer_post=None, older_post=None, include_draft_read
     <meta name="twitter:title" content="{smartypants_safe(post['title'])}" />
     <meta name="twitter:description" content="{smartypants_safe(description)}" />
     <meta name="twitter:image" content="{smartypants_safe(og_image)}" />
-    <script src="../archive_reader.js" defer></script>
+    <script src="../archive_reader.js?v=20260609-clarify-scroll" defer></script>
 </head>
 <body class="archive-reader-page"{body_reading_tools_attr}>
     <main class="archive-reader">
@@ -1382,10 +1382,12 @@ def render_share_page(post, newer_post=None, older_post=None, include_draft_read
                 </div>
             </header>
             <div class="entry-share-row">
-                <span class="share-status" id="share-status" aria-live="polite">STATIC_ARCHIVE_SIGNAL</span>
-                <div class="share-controls">
+                <div class="reading-tools-control">
                     {reading_tools_toggle}
+                </div>
+                <div class="share-controls">
                     <button type="button" class="share-btn" data-share-button>COPY / SHARE LINK</button>
+                    <span class="share-status" id="share-status" aria-live="polite"></span>
                 </div>
             </div>{reading_aids_block}
             <div class="entry-body">
