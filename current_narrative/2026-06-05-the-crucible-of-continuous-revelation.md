@@ -37,8 +37,14 @@ Date: June 7, 2026
     {
       "id": "p_mq1y5577_dgcknt",
       "type": "paragraph",
-      "html": "\u003cspan\u003eWhat you are about to read below is the result of nearly two weeks of research, meditation,\u0026nbsp;\u003c/span\u003e\u003cspan\u003eprayer, and revision. But it is also the result of a lifelong struggle to understand the world around me, and my conscious effort to disentangle myself from rigid echo chambers and my own snuggly, comfortable confirmation bias\u003c/span\u003e\u003cspan\u003e.\u003c/span\u003e",
-      "text": "What you are about to read below is the result of nearly two weeks of research, meditation, prayer, and revision. But it is also the result of a lifelong struggle to understand the world around me, and my conscious effort to disentangle myself from rigid echo chambers and my own snuggly, comfortable confirmation bias."
+      "html": "This essay is the result of weeks of research, meditation, prayer, and revision. It is also the result of a much longer struggle: my attempt to understand the world more honestly, loosen my grip on comfortable assumptions, and listen beyond the rooms where I already feel agreed with.",
+      "text": "This essay is the result of weeks of research, meditation, prayer, and revision. It is also the result of a much longer struggle: my attempt to understand the world more honestly, loosen my grip on comfortable assumptions, and listen beyond the rooms where I already feel agreed with."
+    },
+    {
+      "id": "paragraph_crucible_preface_humane_conversation",
+      "type": "paragraph",
+      "html": "It is not an attempt to settle the argument for everyone. It aims to make room for a harder, more humane conversation, one where orthodox conviction and disruptive compassion are not treated as enemies, and where the people inside the disagreement are not reduced to symbols or abstractions.",
+      "text": "It is not an attempt to settle the argument for everyone. It aims to make room for a harder, more humane conversation, one where orthodox conviction and disruptive compassion are not treated as enemies, and where the people inside the disagreement are not reduced to symbols or abstractions."
     },
     {
       "id": "paragraph_mpz024md_doq22h",
@@ -1470,7 +1476,9 @@ _Navigating Same-Sex Relationships Within the Restoration_
 
 ![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq2vjclq.jpg "Where fire and mercy meet.")
 
-What you are about to read below is the result of nearly two weeks of research, meditation, prayer, and revision. But it is also the result of a lifelong struggle to understand the world around me, and my conscious effort to disentangle myself from rigid echo chambers and my own snuggly, comfortable confirmation bias.
+This essay is the result of weeks of research, meditation, prayer, and revision. It is also the result of a much longer struggle: my attempt to understand the world more honestly, loosen my grip on comfortable assumptions, and listen beyond the rooms where I already feel agreed with.
+
+It is not an attempt to settle the argument for everyone. It aims to make room for a harder, more humane conversation, one where orthodox conviction and disruptive compassion are not treated as enemies, and where the people inside the disagreement are not reduced to symbols or abstractions.
 
 I am not a theologian. I love history, but I am not a historian. I am a 47-year-old person who grew up inside a faith tradition that shaped much of my inner and outer life. It is where I learned what to do with the terrifying perspective of eternity. That tradition is The Church of Jesus Christ of Latter-day Saints, and I carry it the way you carry anything you were handed as a child: not always carefully, not always without grief, but with a deep recognition and appreciation that it made me.
 
