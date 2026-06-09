@@ -60,25 +60,56 @@
         }
     };
 
+    const legacyCopyText = (text) => {
+        const input = document.createElement('textarea');
+        input.value = text;
+        input.setAttribute('readonly', '');
+        input.style.position = 'fixed';
+        input.style.left = '-9999px';
+        input.style.top = '0';
+        document.body.appendChild(input);
+        input.focus({ preventScroll: true });
+        input.select();
+        input.setSelectionRange(0, input.value.length);
+        try {
+            return document.execCommand('copy');
+        } catch {
+            return false;
+        } finally {
+            input.remove();
+        }
+    };
+
+    const copyText = async (text) => {
+        try {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                await navigator.clipboard.writeText(text);
+                return true;
+            }
+        } catch {
+            // Fall through to the legacy copy path.
+        }
+        return legacyCopyText(text);
+    };
+
     window.copyShareLink = async function copyShareLink() {
         const url = window.location.href.split('#')[0];
+        if (await copyText(url)) {
+            setShareStatus('LINK_COPIED');
+            return;
+        }
+
         try {
             if (navigator.share) {
                 await navigator.share({ title: document.title, text: 'Outside The World archive signal', url });
                 setShareStatus('LINK_SHARED');
                 return;
             }
-
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-                await navigator.clipboard.writeText(url);
-                setShareStatus('LINK_COPIED');
-                return;
-            }
-
-            setShareStatus('COPY_UNAVAILABLE');
         } catch {
-            setShareStatus('COPY_FAILED');
+            // Fall through to a single failure state.
         }
+
+        setShareStatus('COPY_UNAVAILABLE');
     };
 
     const initShare = () => {

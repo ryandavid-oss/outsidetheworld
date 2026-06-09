@@ -1357,7 +1357,7 @@ def render_share_page(post, newer_post=None, older_post=None, include_draft_read
     <meta name="twitter:title" content="{smartypants_safe(post['title'])}" />
     <meta name="twitter:description" content="{smartypants_safe(description)}" />
     <meta name="twitter:image" content="{smartypants_safe(og_image)}" />
-    <script src="../archive_reader.js?v=20260609-clarify-scroll" defer></script>
+    <script src="../archive_reader.js?v=20260609-share-fallback" defer></script>
 </head>
 <body class="archive-reader-page"{body_reading_tools_attr}>
     <main class="archive-reader">
