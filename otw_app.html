@@ -1163,6 +1163,37 @@
       text-transform: none;
     }
 
+    #iotdWorkspace main.panel > .status-line.status-busy,
+    #iotdWorkspace main.panel > .status-line.status-success,
+    #iotdWorkspace main.panel > .status-line.status-error {
+      padding: 9px 11px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-weight: 600;
+      line-height: 1.35;
+    }
+
+    #iotdWorkspace main.panel > .status-line.status-busy {
+      background: rgba(125, 159, 128, 0.12);
+      color: var(--text-soft);
+    }
+
+    #iotdWorkspace main.panel > .status-line.status-success {
+      border-color: rgba(88, 121, 95, 0.34);
+      background: rgba(125, 159, 128, 0.22);
+      color: var(--text-main);
+    }
+
+    #iotdWorkspace main.panel > .status-line.status-error {
+      border-color: rgba(160, 74, 74, 0.34);
+      background: rgba(160, 74, 74, 0.12);
+      color: #7a2e2e;
+    }
+
+    body[data-theme="dark"] #iotdWorkspace main.panel > .status-line.status-error {
+      color: #f1b0aa;
+    }
+
     #iotdWorkspace .form-grid {
       gap: clamp(16px, 2.4vw, 22px);
     }
@@ -1711,6 +1742,7 @@
       #iotdWorkspace .field,
       #driftWorkspace .field {
         gap: 6px;
+        min-width: 0;
       }
 
       #iotdWorkspace .field label,
@@ -1723,18 +1755,20 @@
       #iotdWorkspace textarea,
       #driftWorkspace input,
       #driftWorkspace textarea {
+        min-width: 0;
         padding: 10px 12px;
         font-size: 0.96rem;
       }
 
       #iotdWorkspace .meta-row,
       #driftWorkspace .meta-row {
-        grid-template-columns: minmax(126px, 0.72fr) minmax(0, 1fr);
-        gap: 8px;
+        grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+        gap: 10px;
       }
 
       #iotdWorkspace input[type="date"],
       #driftWorkspace input[type="date"] {
+        font-size: 0.88rem;
         text-align: left;
       }
 
@@ -1842,6 +1876,13 @@
 
       .inbox-item-head {
         display: grid;
+      }
+    }
+
+    @media (max-width: 374px) {
+      #iotdWorkspace .meta-row,
+      #driftWorkspace .meta-row {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -2362,19 +2403,28 @@
       probe.src = objectUrl;
     }
 
+    function setIotdStatus(message, state = '') {
+      const line = $('#iotdStatusLine');
+      line.textContent = message;
+      line.classList.remove('status-busy', 'status-success', 'status-error');
+      if (state) line.classList.add(`status-${state}`);
+    }
+
     async function publishIotd() {
       const file = $('#iotdImage').files && $('#iotdImage').files[0];
       if (!file) {
-        $('#iotdStatusLine').textContent = 'Pick an image first.';
+        setIotdStatus('Pick an image first.', 'error');
         return;
       }
       const key = getPublishKey();
       if (!key) {
-        $('#iotdStatusLine').textContent = 'Save a publish key first.';
+        setIotdStatus('Save a publish key first.', 'error');
+        showToast('Publish key missing.', 'Open Settings and save the Worker publish key.');
         return;
       }
       if (!window.navigator.onLine) {
-        $('#iotdStatusLine').textContent = 'IOTD image uploads need a live connection.';
+        setIotdStatus('IOTD image uploads need a live connection.', 'error');
+        showToast('IOTD needs a connection.', 'Image uploads cannot be queued offline yet.');
         return;
       }
       const entry = buildIotdEntry();
@@ -2384,7 +2434,7 @@
       formData.append('title', entry.title);
       formData.append('caption', entry.caption);
       $('#iotdPublishBtn').disabled = true;
-      $('#iotdStatusLine').textContent = 'Publishing image and manifest entry...';
+      setIotdStatus('Publishing image and manifest entry...', 'busy');
       try {
         const response = await fetch(PUBLISH_IOTD_ENDPOINT, {
           method: 'POST',
@@ -2394,13 +2444,17 @@
         const payload = await response.json().catch(() => ({}));
         if (!response.ok || !payload.ok) throw new Error(payload.error || `Publish failed with status ${response.status}`);
         if (publishKeyInput.value.trim()) window.localStorage.setItem(PUBLISH_KEY_STORAGE, key);
-        clearIotd();
-        $('#iotdStatusLine').textContent = 'IOTD published successfully.';
+        const published = payload.published || entry;
+        const commit = payload.commit ? String(payload.commit).slice(0, 7) : '';
+        clearIotd({ resetStatus: false });
+        setIotdStatus(`Published ${formatLongDate(published.date || entry.date)}.${commit ? ` Commit ${commit}.` : ''} Deploy may take a moment.`, 'success');
         $('#iotdPublishBtn').classList.add('is-success');
         window.setTimeout(() => $('#iotdPublishBtn').classList.remove('is-success'), 1400);
-        showToast('IOTD published.', 'The image and manifest entry are on their way to the live site.');
+        showToast('IOTD published.', commit ? `GitHub commit ${commit}; Pages will refresh shortly.` : 'The image and manifest entry are on their way to the live site.');
       } catch (error) {
-        $('#iotdStatusLine').textContent = error.message || 'IOTD publish failed.';
+        const message = error.message || 'IOTD publish failed.';
+        setIotdStatus(message, 'error');
+        showToast('IOTD publish failed.', message);
       } finally {
         $('#iotdPublishBtn').disabled = false;
       }
@@ -2408,16 +2462,17 @@
 
     function downloadIotdMetadata() {
       downloadBlob(`iotd-entry-${buildIotdEntry().date}.json`, JSON.stringify(buildIotdEntry(), null, 2), 'application/json;charset=utf-8');
-      $('#iotdStatusLine').textContent = 'IOTD metadata downloaded.';
+      setIotdStatus('IOTD metadata downloaded.', 'success');
     }
 
-    function clearIotd() {
+    function clearIotd({ resetStatus = true } = {}) {
       $('#iotdDate').value = today();
       $('#iotdTitle').value = '';
       $('#iotdCaption').value = '';
       $('#iotdImage').value = '';
       window.localStorage.removeItem(IOTD_DRAFT_KEY);
       updateIotdFileMeta(null);
+      if (resetStatus) setIotdStatus('Ready.');
     }
 
     function inferDriftTheme(poem) {
