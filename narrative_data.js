@@ -11,6 +11,16 @@ const current_narrative = [
             "subhead": "On adulthood, technological fragility, and the exhaustion beneath adaptation.",
             "blocks": [
                 {
+                    "id": "image_mqkj_cover_expiration",
+                    "type": "image",
+                    "imageRef": "image_mqkj_cover_expiration",
+                    "url": "Images/archive/2026-06-18-every-solution-has-an-expiration-date.png",
+                    "objectKey": "Images/archive/2026-06-18-every-solution-has-an-expiration-date.png",
+                    "displaySize": "large",
+                    "alignment": "center",
+                    "wrapMode": "none"
+                },
+                {
                     "id": "paragraph_mqkj5z1g_k39k41",
                     "type": "paragraph",
                     "html": "<b>I've had some less-than-casual observations</b> lately about the world we find ourselves in. This began as a stream-of-thought essay, so prepare yourselves.",
@@ -228,7 +238,18 @@ const current_narrative = [
                     "text": "It's my own precarious position within that Fourth Humiliation, and my faltering ability to keep up with it."
                 }
             ],
-            "images": []
+            "images": [
+                {
+                    "id": "image_mqkj_cover_expiration",
+                    "url": "Images/archive/2026-06-18-every-solution-has-an-expiration-date.png",
+                    "objectKey": "Images/archive/2026-06-18-every-solution-has-an-expiration-date.png",
+                    "alt": "Desert neighborhood at dusk",
+                    "caption": "",
+                    "displaySize": "large",
+                    "alignment": "center",
+                    "wrapMode": "none"
+                }
+            ]
         },
         "post_id": "June 18, 2026--every-solution-has-an-expiration-date",
         "share_path": "archive/2026-06-18-every-solution-has-an-expiration-date.html",
