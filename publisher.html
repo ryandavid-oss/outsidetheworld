@@ -237,6 +237,7 @@
     }
 
     .publish-btn[disabled],
+    .text-btn[disabled],
     .text-btn[aria-disabled="true"] {
       cursor: not-allowed;
       opacity: 0.62;
@@ -2012,7 +2013,7 @@
         display: none;
       }
 
-      .top-actions .text-btn {
+      .top-actions .text-btn:not(#archivePrivateBtn) {
         display: none;
       }
 
@@ -2133,6 +2134,7 @@
         <button class="text-btn" id="previewDraftBtn" type="button" title="Preview local draft">Preview</button>
         <button class="text-btn" id="publishedEssaysBtn" type="button" title="Open published essay manager">Published Essays</button>
         <button class="text-btn" id="downloadMarkdownBtn" type="button" title="Download draft as Markdown">Download MD</button>
+        <button class="text-btn" id="archivePrivateBtn" type="button" title="Start tools/publisher_server.py to archive privately" aria-disabled="true" disabled>Archive Privately</button>
         <button class="publish-btn" id="publishBtn" type="button" title="Publish article">Publish</button>
         <a class="text-btn" id="publishedLink" href="#" target="_blank" rel="noopener" hidden>Open Article</a>
       </div>
@@ -2555,6 +2557,7 @@
     const saveDraftBtn = document.getElementById('saveDraftBtn');
     const previewDraftBtn = document.getElementById('previewDraftBtn');
     const downloadMarkdownBtn = document.getElementById('downloadMarkdownBtn');
+    const archivePrivateBtn = document.getElementById('archivePrivateBtn');
     const clearDraftBtn = document.getElementById('clearDraftBtn');
     const publishBtn = document.getElementById('publishBtn');
     const publishedLink = document.getElementById('publishedLink');
@@ -2758,6 +2761,15 @@
       saveDraftBtn.title = isActive ? 'Save local revision draft' : 'Save server draft';
       previewDraftBtn.textContent = isActive ? 'Preview Revision' : 'Preview';
       previewDraftBtn.title = isActive ? 'Preview revision without changing production output' : 'Preview local draft';
+      if (archivePrivateBtn) {
+        const canArchivePrivately = Boolean(getLocalPublisherToken());
+        archivePrivateBtn.hidden = false;
+        archivePrivateBtn.disabled = !canArchivePrivately;
+        archivePrivateBtn.setAttribute('aria-disabled', String(!canArchivePrivately));
+        archivePrivateBtn.title = canArchivePrivately
+          ? 'Archive draft to local private repo'
+          : 'Start tools/publisher_server.py to archive privately';
+      }
       publishBtn.textContent = isActive ? 'Republish Local' : 'Publish';
       publishBtn.title = isActive ? 'Regenerate the local archive. Live site unchanged.' : 'Publish article';
       if (!isActive) {
@@ -4463,16 +4475,16 @@
 
     function plainTextFromMarkdownForRevision(value) {
       return String(value || '')
-        .replace(/<!--[\s\S]*?-->/g, ' ')
-        .replace(/!\[[^\]]*]\([^)]+\)/g, ' ')
-        .replace(/\[([^\]]+)]\(([^)]+)\)/g, '$1')
-        .replace(/<\/?[^>]+>/g, ' ')
-        .replace(/^\s{0,3}#{1,6}\s+/gm, '')
-        .replace(/^\s{0,3}>\s?/gm, '')
-        .replace(/^\s{0,3}(?:[-*+]|\d+[.)])\s+/gm, '')
-        .replace(/^\s{0,3}(?:-{3,}|\*{3,}|_{3,})\s*$/gm, ' ')
-        .replace(/[*_`~\\]/g, '')
-        .replace(/\s+/g, ' ')
+        .replace(new RegExp('<!--[\\s\\S]*?-->', 'g'), ' ')
+        .replace(new RegExp('!\\[[^\\]]*\\]\\([^)]+\\)', 'g'), ' ')
+        .replace(new RegExp('\\[([^\\]]+)\\]\\(([^)]+)\\)', 'g'), '$1')
+        .replace(new RegExp('</?[^>]+>', 'g'), ' ')
+        .replace(new RegExp('^\\s{0,3}#{1,6}\\s+', 'gm'), '')
+        .replace(new RegExp('^\\s{0,3}>\\s?', 'gm'), '')
+        .replace(new RegExp('^\\s{0,3}(?:[-*+]|\\d+[.)])\\s+', 'gm'), '')
+        .replace(new RegExp('^\\s{0,3}(?:-{3,}|\\*{3,}|_{3,})\\s*$', 'gm'), ' ')
+        .replace(new RegExp('[*_`~\\\\]', 'g'), '')
+        .replace(new RegExp('\\s+', 'g'), ' ')
         .trim();
     }
 
@@ -5835,6 +5847,45 @@
       const markdown = payload.content?.markdown || composeMarkdownDocument(article, payload.body?.markdown || '', payload.publisher);
       downloadTextFile(markdownExportFilename(payload), markdown, 'text/markdown;charset=utf-8');
       setSaveState('Markdown downloaded', true);
+    }
+
+    async function archivePrivateDraft() {
+      saveDraft();
+      const article = updateArticlePayload();
+      const payload = buildPublishPayload(article);
+      window.otwPublisherPublishPayload = payload;
+      if (!draftHasVisibleContent(article)) {
+        setSaveState('Private archive needs writing', true);
+        return null;
+      }
+      if (archivePrivateBtn) {
+        archivePrivateBtn.disabled = true;
+        archivePrivateBtn.textContent = 'Archiving';
+      }
+      try {
+        const result = await localPublisherApi('/api/private-archive/drafts', {
+          method: 'POST',
+          body: JSON.stringify({
+            schema: 'otw.publisher.privateArchiveRequest',
+            version: 1,
+            article,
+            publishPayload: payload
+          })
+        });
+        const warning = Array.isArray(result.warnings) && result.warnings.length
+          ? ` ${result.warnings[0]}`
+          : '';
+        setSaveState(`Archived privately.${warning}`, true);
+        return result;
+      } catch (error) {
+        setSaveState(error.message || 'Private archive failed', true);
+        return null;
+      } finally {
+        if (archivePrivateBtn) {
+          archivePrivateBtn.disabled = false;
+          archivePrivateBtn.textContent = 'Archive Privately';
+        }
+      }
     }
 
     function publishRequestBodyFromPayload(payload) {
@@ -8738,6 +8789,9 @@
     revisionExitBtn.addEventListener('click', exitPublishedRevisionMode);
 
     downloadMarkdownBtn.addEventListener('click', downloadMarkdownDraft);
+    archivePrivateBtn?.addEventListener('click', () => {
+      archivePrivateDraft();
+    });
 
     clearDraftBtn.addEventListener('click', clearLocalDraft);
 
@@ -8980,6 +9034,7 @@
         buildPublishPayload,
         validatePublishPayload,
         publishArticle,
+        archivePrivateDraft,
         openDraftPreview,
         openPublishedRevisionInComposer,
         savePublishedRevisionDraft,

@@ -7,6 +7,7 @@ import re
 import socket
 import subprocess
 import sys
+import tempfile
 import time
 import urllib.error
 import urllib.request
@@ -36,61 +37,99 @@ def fetch(url, token=None, payload=None, method=None):
 
 def run_smoke():
     port = free_port()
-    proc = subprocess.Popen(
-        [sys.executable, "tools/publisher_server.py", "--port", str(port)],
-        cwd=ROOT,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        text=True,
-    )
-    base = f"http://127.0.0.1:{port}"
-    try:
-        token = None
-        for _attempt in range(60):
+    with tempfile.TemporaryDirectory() as temp:
+        private_repo = Path(temp) / "private-writing"
+        proc = subprocess.Popen(
+            [sys.executable, "tools/publisher_server.py", "--port", str(port), "--private-repo", str(private_repo)],
+            cwd=ROOT,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        base = f"http://127.0.0.1:{port}"
+        try:
+            token = None
+            for _attempt in range(60):
+                try:
+                    html = fetch(f"{base}/publisher.html")
+                    match = re.search(r'name="otw-publisher-token" content="([^"]+)"', html)
+                    if match:
+                        token = match.group(1)
+                        break
+                except Exception:
+                    time.sleep(0.1)
+            assert token
+
             try:
-                html = fetch(f"{base}/publisher.html")
-                match = re.search(r'name="otw-publisher-token" content="([^"]+)"', html)
-                if match:
-                    token = match.group(1)
-                    break
-            except Exception:
-                time.sleep(0.1)
-        assert token
+                fetch(f"{base}/api/published-essays")
+                raise AssertionError("API request without token should fail")
+            except urllib.error.HTTPError as exc:
+                assert exc.code == 401
 
-        try:
-            fetch(f"{base}/api/published-essays")
-            raise AssertionError("API request without token should fail")
-        except urllib.error.HTTPError as exc:
-            assert exc.code == 401
+            essays = json.loads(fetch(f"{base}/api/published-essays", token))
+            assert essays["ok"]
+            assert len(essays["essays"]) == 22
+            assert essays["essays"][0]["slug"] == "the-crucible-of-continuous-revelation"
 
-        essays = json.loads(fetch(f"{base}/api/published-essays", token))
-        assert essays["ok"]
-        assert len(essays["essays"]) == 22
-        assert essays["essays"][0]["slug"] == "the-crucible-of-continuous-revelation"
+            source = ROOT / "current_narrative" / "2026-06-05-the-crucible-of-continuous-revelation.md"
+            archive = ROOT / "archive" / "2026-06-05-the-crucible-of-continuous-revelation.html"
+            narrative = ROOT / "narrative_data.js"
+            before = (
+                hashlib.sha256(source.read_bytes()).hexdigest(),
+                hashlib.sha256(archive.read_bytes()).hexdigest(),
+                hashlib.sha256(narrative.read_bytes()).hexdigest(),
+            )
+            preview = json.loads(fetch(
+                f"{base}/api/published-essays/the-crucible-of-continuous-revelation/preview",
+                token,
+                {"includeReadingAids": True},
+                "POST",
+            ))
+            after = (
+                hashlib.sha256(source.read_bytes()).hexdigest(),
+                hashlib.sha256(archive.read_bytes()).hexdigest(),
+                hashlib.sha256(narrative.read_bytes()).hexdigest(),
+            )
+            assert preview["ok"]
+            assert preview["preview"]["url"].startswith("/preview/")
+            assert before == after
 
-        source = ROOT / "current_narrative" / "2026-06-05-the-crucible-of-continuous-revelation.md"
-        archive = ROOT / "archive" / "2026-06-05-the-crucible-of-continuous-revelation.html"
-        before = (hashlib.sha256(source.read_bytes()).hexdigest(), hashlib.sha256(archive.read_bytes()).hexdigest())
-        preview = json.loads(fetch(
-            f"{base}/api/published-essays/the-crucible-of-continuous-revelation/preview",
-            token,
-            {"includeReadingAids": True},
-            "POST",
-        ))
-        after = (hashlib.sha256(source.read_bytes()).hexdigest(), hashlib.sha256(archive.read_bytes()).hexdigest())
-        assert preview["ok"]
-        assert preview["preview"]["url"].startswith("/preview/")
-        assert before == after
-    finally:
-        proc.terminate()
-        try:
-            proc.wait(timeout=5)
-        except subprocess.TimeoutExpired:
-            proc.kill()
+            private_payload = {
+                "schema": "otw.publisher.privateArchiveRequest",
+                "version": 1,
+                "article": {
+                    "schema": "otw.publisher.article",
+                    "version": 3,
+                    "title": "Smoke Private Draft",
+                    "subhead": "",
+                    "metadata": {"publishDate": "2026-06-18", "slug": "smoke-private-draft"},
+                    "body": {"blocks": [{"type": "paragraph", "text": "Only local, only tonight."}]},
+                },
+                "publishPayload": {
+                    "schema": "otw.publisher.publishPayload",
+                    "version": 1,
+                    "content": {"markdown": "# Smoke Private Draft\nDate: June 18, 2026\n\nOnly local, only tonight.\n"},
+                },
+            }
+            private_result = json.loads(fetch(f"{base}/api/private-archive/drafts", token, private_payload, "POST"))
+            assert private_result["ok"]
+            assert (private_repo / private_result["path"]).exists()
+            log = subprocess.check_output(["git", "log", "--oneline", "--all"], cwd=private_repo, text=True)
+            assert "Archive private draft: Smoke Private Draft" in log
+            assert before == (
+                hashlib.sha256(source.read_bytes()).hexdigest(),
+                hashlib.sha256(archive.read_bytes()).hexdigest(),
+                hashlib.sha256(narrative.read_bytes()).hexdigest(),
+            )
+        finally:
+            proc.terminate()
+            try:
+                proc.wait(timeout=5)
+            except subprocess.TimeoutExpired:
+                proc.kill()
 
 
 if __name__ == "__main__":
     os.chdir(ROOT)
     run_smoke()
     print("ok publisher server smoke")
-

@@ -33,12 +33,22 @@ from tools import publisher_source_contract as source_contract
 
 BACKUP_ROOT = ROOT / "backups" / "published_essays"
 PREVIEW_ROOT = ROOT / ".publisher_preview"
+DEFAULT_PRIVATE_REPO = ROOT.parent / "otw-private-writing"
 READING_AIDS_ROOT = ROOT / narrative_sync.reading_aids_folder
 CURRENT_NARRATIVE_ROOT = ROOT / narrative_sync.input_folder
 ARCHIVE_ROOT = ROOT / narrative_sync.share_output_folder
 OG_ROOT = ROOT / narrative_sync.og_output_folder
 PUBLISHER_HTML = ROOT / "publisher.html"
 BACKUP_ID_PATTERN = re.compile(r"^[0-9]{8}T[0-9]{6}Z(?:-[A-Za-z0-9_-]{2,16})?$")
+SECRET_ASSIGNMENT_PATTERN = re.compile(
+    r"\b(?:OPENAI_API_KEY|GITHUB_TOKEN|PUBLISH_KEY|PUBLISHER_ACCESS_KEY)\s*[=:]\s*\S+",
+    re.I,
+)
+SECRET_VALUE_PATTERN = re.compile(r"\bsk-(?:proj-)?[A-Za-z0-9_-]{16,}\b")
+PRIVATE_ARCHIVE_SCHEMA = "otw.privateWritingArchive"
+PRIVATE_ARCHIVE_REQUEST_SCHEMA = "otw.publisher.privateArchiveRequest"
+PRIVATE_GIT_NAME = "OTW Private Publisher"
+PRIVATE_GIT_EMAIL = "private@localhost"
 
 ALLOWED_STATIC_ROOTS = {
     "Images": ROOT / "Images",
@@ -124,6 +134,345 @@ def changed_hashes(before: dict[str, str | None], after: dict[str, str | None]) 
     return sorted(key for key in keys if before.get(key) != after.get(key))
 
 
+def is_relative_to(child: Path, parent: Path) -> bool:
+    try:
+        child.resolve().relative_to(parent.resolve())
+        return True
+    except ValueError:
+        return False
+
+
+def private_repo_from_value(value: str | None = None) -> Path:
+    selected = value or os.environ.get("OTW_PRIVATE_WRITING_REPO") or str(DEFAULT_PRIVATE_REPO)
+    return Path(selected).expanduser().resolve()
+
+
+def private_rel(repo: Path, path: Path) -> str:
+    return str(path.resolve().relative_to(repo.resolve()))
+
+
+def run_private_git(repo: Path, args: list[str]) -> dict:
+    result = subprocess.run(["git", *args], cwd=repo, text=True, capture_output=True, check=False)
+    return {
+        "args": ["git", *args],
+        "returncode": result.returncode,
+        "stdout": result.stdout,
+        "stderr": result.stderr,
+        "ok": result.returncode == 0,
+    }
+
+
+def private_repo_has_remote(repo: Path) -> bool:
+    if not (repo / ".git").exists():
+        return False
+    result = run_private_git(repo, ["remote"])
+    return result["ok"] and bool(result["stdout"].strip())
+
+
+def private_repo_status(repo: Path) -> dict:
+    initialized = (repo / ".git").exists()
+    inside_public_repo = is_relative_to(repo, ROOT)
+    has_remote = private_repo_has_remote(repo) if initialized else False
+    dirty: list[str] = []
+    staged: list[str] = []
+    if initialized:
+        status = run_private_git(repo, ["status", "--porcelain"])
+        if status["ok"]:
+            dirty = [line for line in status["stdout"].splitlines() if line.strip()]
+        cached = run_private_git(repo, ["diff", "--cached", "--name-only"])
+        if cached["ok"]:
+            staged = [line for line in cached["stdout"].splitlines() if line.strip()]
+    available = not inside_public_repo and not has_remote
+    reason = ""
+    if inside_public_repo:
+        reason = "Private archive path is inside the public site repository."
+    elif has_remote:
+        reason = "Private archive repository has a remote configured."
+    return {
+        "repoPath": str(repo),
+        "initialized": initialized,
+        "insidePublicRepo": inside_public_repo,
+        "hasRemote": has_remote,
+        "dirty": dirty,
+        "staged": staged,
+        "available": available,
+        "reason": reason,
+    }
+
+
+def ensure_private_repo(repo: Path) -> dict:
+    status = private_repo_status(repo)
+    if status["insidePublicRepo"]:
+        raise ValueError("Private archive path must live outside the public site repository.")
+    repo.mkdir(parents=True, exist_ok=True)
+    if not (repo / ".git").exists():
+        result = run_private_git(repo, ["init"])
+        if not result["ok"]:
+            raise RuntimeError(f"Could not initialize private archive repository: {result['stderr'] or result['stdout']}")
+
+    if private_repo_has_remote(repo):
+        raise ValueError("Private archive repository has a remote configured; remove it before archiving private writing.")
+
+    configure_private_git_identity(repo)
+    readme = repo / "README.md"
+    created_readme = False
+    if not readme.exists():
+        readme.write_text(
+            "# OTW Private Writing Archive\n\n"
+            "Local-only source material archived from the Outside The World publisher.\n"
+            "This repository is intentionally private and should not have a remote.\n",
+            encoding="utf-8",
+        )
+        created_readme = True
+
+    if not run_private_git(repo, ["rev-parse", "--verify", "HEAD"]).get("ok"):
+        result = commit_private_paths(repo, ["README.md"], "Initialize private writing archive")
+        if not result.get("ok"):
+            raise RuntimeError(f"Could not create initial private archive commit: {result.get('stderr') or result.get('stdout')}")
+    elif created_readme:
+        result = commit_private_paths(repo, ["README.md"], "Add private writing archive README")
+        if not result.get("ok"):
+            raise RuntimeError(f"Could not commit private archive README: {result.get('stderr') or result.get('stdout')}")
+
+    staged = private_repo_status(repo).get("staged") or []
+    if staged:
+        raise ValueError("Private archive repository has staged changes; clear them before archiving.")
+    return private_repo_status(repo)
+
+
+def configure_private_git_identity(repo: Path) -> None:
+    name = run_private_git(repo, ["config", "--get", "user.name"])
+    email = run_private_git(repo, ["config", "--get", "user.email"])
+    if not name["ok"] or not name["stdout"].strip():
+        run_private_git(repo, ["config", "user.name", PRIVATE_GIT_NAME])
+    if not email["ok"] or not email["stdout"].strip():
+        run_private_git(repo, ["config", "user.email", PRIVATE_GIT_EMAIL])
+
+
+def commit_private_paths(repo: Path, paths: list[str], message: str) -> dict:
+    add = run_private_git(repo, ["add", *paths])
+    if not add["ok"]:
+        return add
+    commit = run_private_git(repo, ["commit", "-m", message])
+    if not commit["ok"]:
+        return commit
+    rev = run_private_git(repo, ["rev-parse", "HEAD"])
+    if rev["ok"]:
+        commit["commit"] = rev["stdout"].strip()
+    return commit
+
+
+def reject_secret_text(value: str) -> None:
+    text = str(value or "")
+    if SECRET_ASSIGNMENT_PATTERN.search(text) or SECRET_VALUE_PATTERN.search(text):
+        raise ValueError("Private archive blocked because the draft appears to contain a secret.")
+
+
+def sanitize_private_value(value):
+    if isinstance(value, list):
+        return [sanitize_private_value(item) for item in value]
+    if isinstance(value, dict):
+        output = {}
+        for key, child in value.items():
+            normalized = str(key).lower().replace("_", "").replace("-", "")
+            if normalized in {"publishkey", "publisherkey", "publisheraccesskey", "accesskey"}:
+                continue
+            if key == "dataUrl":
+                output["dataUrlLength"] = len(str(child or ""))
+                continue
+            output[key] = sanitize_private_value(child)
+        return output
+    if isinstance(value, str):
+        reject_secret_text(value)
+        return (
+            value
+            .replace("\r\n", "\n")
+            .replace("\r", "\n")
+            .replace("blob:", "local-blob-redacted:")
+        )
+    return value
+
+
+def block_has_visible_content(block: dict) -> bool:
+    if not isinstance(block, dict):
+        return False
+    for key in ("text", "html", "raw", "markdown", "alt", "caption"):
+        if re.sub(r"<[^>]+>", "", str(block.get(key) or "")).strip():
+            return True
+    items = block.get("items")
+    if isinstance(items, list):
+        return any(block_has_visible_content(item) for item in items if isinstance(item, dict))
+    return False
+
+
+def article_has_visible_content(article: dict) -> bool:
+    if not isinstance(article, dict):
+        return False
+    if str(article.get("title") or "").strip():
+        return True
+    body = article.get("body") if isinstance(article.get("body"), dict) else {}
+    blocks = body.get("blocks") if isinstance(body.get("blocks"), list) else []
+    return any(block_has_visible_content(block) for block in blocks)
+
+
+def private_archive_slug(article: dict) -> str:
+    metadata = article.get("metadata") if isinstance(article.get("metadata"), dict) else {}
+    raw_slug = str(metadata.get("slug") or "").strip()
+    if raw_slug and ("/" in raw_slug or "\\" in raw_slug or ".." in raw_slug):
+        raise ValueError("Private archive slug cannot contain path traversal characters.")
+    source = raw_slug or str(article.get("title") or metadata.get("docName") or "untitled-draft")
+    slug = narrative_sync.slugify(source) or "untitled-draft"
+    return slug[:96].strip("-") or "untitled-draft"
+
+
+def private_archive_date(article: dict) -> str:
+    metadata = article.get("metadata") if isinstance(article.get("metadata"), dict) else {}
+    for key in ("publishDate", "articleDate"):
+        value = str(metadata.get(key) or "").strip()
+        if re.fullmatch(r"\d{4}-\d{2}-\d{2}", value):
+            return value
+    return datetime.now().strftime("%Y-%m-%d")
+
+
+def private_archive_markdown(article: dict, publish_payload: dict) -> str:
+    content = publish_payload.get("content") if isinstance(publish_payload.get("content"), dict) else {}
+    markdown = str(content.get("markdown") or "").strip()
+    if markdown:
+        reject_secret_text(markdown)
+        return source_contract.normalize_newlines(markdown).strip() + "\n"
+
+    title = str(article.get("title") or "Untitled Draft").strip() or "Untitled Draft"
+    date = private_archive_date(article)
+    subhead = str(article.get("subhead") or "").strip()
+    lines = [f"# {title}", f"Date: {date}", ""]
+    if subhead:
+        lines.extend([f"_{subhead}_", ""])
+    body = article.get("body") if isinstance(article.get("body"), dict) else {}
+    blocks = body.get("blocks") if isinstance(body.get("blocks"), list) else []
+    for block in blocks:
+        if not isinstance(block, dict):
+            continue
+        markdown_block = str(block.get("sourceMarkdown") or block.get("markdown") or block.get("text") or "").strip()
+        if markdown_block:
+            lines.extend([markdown_block, ""])
+    markdown = "\n".join(lines).strip() + "\n"
+    reject_secret_text(markdown)
+    return markdown
+
+
+def local_image_warnings(article: dict) -> list[str]:
+    body = article.get("body") if isinstance(article.get("body"), dict) else {}
+    blocks = body.get("blocks") if isinstance(body.get("blocks"), list) else []
+    count = 0
+    for block in blocks:
+        if not isinstance(block, dict) or block.get("type") != "image":
+            continue
+        source = block.get("source") if isinstance(block.get("source"), dict) else {}
+        upload = block.get("upload") if isinstance(block.get("upload"), dict) else {}
+        url = source.get("url") or upload.get("uploadedUrl")
+        if source.get("kind") != "url" or not url:
+            count += 1
+    if not count:
+        return []
+    suffix = "s" if count != 1 else ""
+    return [f"{count} local-only image preview{suffix} were not embedded in the private archive."]
+
+
+def unique_private_paths(repo: Path, date: str, slug: str) -> tuple[Path, Path]:
+    year = date[:4]
+    folder = repo / "drafts" / year
+    for index in range(1, 1000):
+        suffix = "" if index == 1 else f"-{index}"
+        base = f"{date}-{slug}{suffix}"
+        markdown_path = folder / f"{base}.md"
+        article_path = folder / f"{base}.article.json"
+        if not markdown_path.exists() and not article_path.exists():
+            return markdown_path, article_path
+    raise RuntimeError("Could not find an available private archive filename.")
+
+
+def read_private_manifest(repo: Path) -> dict:
+    path = repo / "manifest.json"
+    if not path.exists():
+        return {"schema": PRIVATE_ARCHIVE_SCHEMA, "version": 1, "drafts": []}
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(payload, dict) or not isinstance(payload.get("drafts"), list):
+        raise ValueError("Private archive manifest is malformed.")
+    payload.setdefault("schema", PRIVATE_ARCHIVE_SCHEMA)
+    payload.setdefault("version", 1)
+    return payload
+
+
+def write_private_manifest(repo: Path, manifest: dict) -> None:
+    write_json(repo / "manifest.json", manifest)
+
+
+def archive_private_draft(repo: Path, payload: dict) -> dict:
+    ensure_private_repo(repo)
+    article = payload.get("article") if isinstance(payload.get("article"), dict) else {}
+    publish_payload = payload.get("publishPayload") if isinstance(payload.get("publishPayload"), dict) else {}
+    if payload.get("schema") not in {PRIVATE_ARCHIVE_REQUEST_SCHEMA, None}:
+        raise ValueError("Private archive request schema is invalid.")
+    if not article_has_visible_content(article):
+        raise ValueError("Private archive needs a title or body content.")
+
+    sanitized_article = sanitize_private_value(article)
+    sanitized_publish_payload = sanitize_private_value(publish_payload)
+    title = str(sanitized_article.get("title") or "Untitled Draft").strip() or "Untitled Draft"
+    date = private_archive_date(sanitized_article)
+    slug = private_archive_slug(sanitized_article)
+    markdown = private_archive_markdown(sanitized_article, sanitized_publish_payload)
+    markdown_path, article_path = unique_private_paths(repo, date, slug)
+    markdown_path.parent.mkdir(parents=True, exist_ok=True)
+    archived_at = utc_now()
+
+    article_snapshot = {
+        "schema": "otw.privateWritingArticle",
+        "version": 1,
+        "archivedAt": archived_at,
+        "article": sanitized_article,
+        "publishPayload": sanitized_publish_payload,
+    }
+    markdown_path.write_text(markdown, encoding="utf-8")
+    write_json(article_path, article_snapshot)
+
+    manifest = read_private_manifest(repo)
+    entry = {
+        "title": title,
+        "date": date,
+        "slug": slug,
+        "archivedAt": archived_at,
+        "path": private_rel(repo, markdown_path),
+        "articlePath": private_rel(repo, article_path),
+        "commit": None,
+    }
+    manifest["drafts"].append(entry)
+    write_private_manifest(repo, manifest)
+
+    commit_message = f"Archive private draft: {title}"[:180]
+    commit = commit_private_paths(repo, [entry["path"], entry["articlePath"], "manifest.json"], commit_message)
+    if not commit.get("ok"):
+        raise RuntimeError(f"Could not commit private archive draft: {commit.get('stderr') or commit.get('stdout')}")
+    draft_commit = commit.get("commit") or ""
+
+    manifest = read_private_manifest(repo)
+    manifest["drafts"][-1]["commit"] = draft_commit
+    write_private_manifest(repo, manifest)
+    manifest_commit = commit_private_paths(repo, ["manifest.json"], f"Record private archive manifest: {title}"[:180])
+    if not manifest_commit.get("ok"):
+        raise RuntimeError(f"Could not commit private archive manifest: {manifest_commit.get('stderr') or manifest_commit.get('stdout')}")
+
+    return {
+        "ok": True,
+        "path": entry["path"],
+        "articlePath": entry["articlePath"],
+        "commit": draft_commit,
+        "manifestCommit": manifest_commit.get("commit") or "",
+        "warnings": local_image_warnings(sanitized_article),
+        "message": "Private draft archived locally. Composer draft kept open.",
+    }
+
+
 def restore_snapshot(snapshot: dict[str, bytes | None]) -> None:
     for relative, content in snapshot.items():
         path = ROOT / relative
@@ -147,9 +496,10 @@ def snapshot_file_contents(paths: set[Path]) -> dict[str, bytes | None]:
 
 
 class PublisherState:
-    def __init__(self, port: int):
+    def __init__(self, port: int, private_repo: Path | None = None):
         self.port = port
         self.token = secrets.token_urlsafe(32)
+        self.private_repo = private_repo_from_value(str(private_repo) if private_repo else None)
         self.lock = threading.RLock()
         PREVIEW_ROOT.mkdir(parents=True, exist_ok=True)
         BACKUP_ROOT.mkdir(parents=True, exist_ok=True)
@@ -604,7 +954,14 @@ class PublisherHandler(BaseHTTPRequestHandler):
                     "ok": True,
                     "hasOpenAIKey": bool(os.environ.get("OPENAI_API_KEY")),
                     "origin": self.state.origin,
+                    "privateArchive": private_repo_status(self.state.private_repo),
                 })
+            if method == "GET" and path == "/api/private-archive/status":
+                return self.send_json({"ok": True, "privateArchive": private_repo_status(self.state.private_repo)})
+            if method == "POST" and path == "/api/private-archive/drafts":
+                with self.state.lock:
+                    result = archive_private_draft(self.state.private_repo, payload)
+                return self.send_json(result)
             if method == "GET" and path == "/api/published-essays":
                 docs = self.state.documents()
                 return self.send_json({"ok": True, "essays": [essay_summary(self.state, doc) for doc in docs]})
@@ -884,13 +1241,19 @@ def choose_port(start: int) -> int:
 def main():
     parser = argparse.ArgumentParser(description="Run the local OTW Publisher command center server.")
     parser.add_argument("--port", type=int, default=8765)
+    parser.add_argument(
+        "--private-repo",
+        default=None,
+        help="Local-only private writing archive repo. Defaults to OTW_PRIVATE_WRITING_REPO or a sibling otw-private-writing repo.",
+    )
     args = parser.parse_args()
 
     os.chdir(ROOT)
     port = choose_port(args.port)
-    state = PublisherState(port)
+    state = PublisherState(port, private_repo=private_repo_from_value(args.private_repo))
     server = PublisherHTTPServer(("127.0.0.1", port), PublisherHandler, state)
     print(f"OTW Publisher server running at http://127.0.0.1:{port}/publisher.html")
+    print(f"Private archive repo: {state.private_repo}")
     print("Bound to 127.0.0.1 only. Press Ctrl-C to stop.")
     try:
         server.serve_forever()
