@@ -14,7 +14,7 @@ const current_narrative = [
                     "id": "image_mqkj_cover_expiration",
                     "type": "image",
                     "imageRef": "image_mqkj_cover_expiration",
-                    "url": "Images/archive/2026-06-18-every-solution-has-an-expiration-date.png",
+                    "url": "/Images/archive/2026-06-18-every-solution-has-an-expiration-date.png",
                     "objectKey": "Images/archive/2026-06-18-every-solution-has-an-expiration-date.png",
                     "displaySize": "large",
                     "alignment": "center",
@@ -241,7 +241,7 @@ const current_narrative = [
             "images": [
                 {
                     "id": "image_mqkj_cover_expiration",
-                    "url": "Images/archive/2026-06-18-every-solution-has-an-expiration-date.png",
+                    "url": "/Images/archive/2026-06-18-every-solution-has-an-expiration-date.png",
                     "objectKey": "Images/archive/2026-06-18-every-solution-has-an-expiration-date.png",
                     "alt": "Desert neighborhood at dusk",
                     "caption": "",
