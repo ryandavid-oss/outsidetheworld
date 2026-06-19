@@ -1,6 +1,6 @@
 # Fragments Workflow
 
-The `Fragments` app is a mobile-friendly drafting and staging tool.
+The legacy `Fragments` publisher is retired. `fragments_publisher.html` now redirects to `otw_app.html`, and active narrative authoring lives in `publisher.html`.
 
 The public feed still reads from:
 
@@ -8,9 +8,9 @@ The public feed still reads from:
 
 That file remains the single source of truth for what appears on the site.
 
-## Phone to Site Flow
+## Legacy Phone to Site Flow
 
-1. Open `fragments_publisher.html` on your phone.
+1. Open the archived Fragments workflow if you intentionally restore it.
 2. Write a fragment and tap `Stage Fragment`.
 3. Tap `Download Outbox` to export a JSON file.
 4. On your Mac, import that JSON into `fragments_data.js`.

@@ -5,7 +5,7 @@ Goal: keep the site static and Git-backed, but restore the ability to publish fr
 ## Current state
 
 - Public site stays on GitHub Pages for now.
-- Authoring happens through `ghost-writer.html`.
+- Authoring happens through `publisher.html`.
 - New posts are stored as markdown in `current_narrative/`.
 - `narrative_sync.py` converts those markdown files into `narrative_data.js`.
 - GitHub automation handles the sync/publish side after content lands in the repo.
@@ -35,7 +35,7 @@ Intent:
 
 Text-only publishing.
 
-- Reuse the ideas behind `ghost-writer.html`.
+- Reuse the ideas behind `publisher.html`.
 - Add a mobile-friendly private publish UI.
 - Send title/body/date to a secure endpoint.
 - Endpoint writes a markdown file into `current_narrative/`.

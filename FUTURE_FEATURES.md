@@ -6,40 +6,17 @@ This file is intentionally practical. It is not a polished roadmap. It is a runn
 
 ## Current priorities
 
-### Fragments
+### OTW App
 
-- Keep refining the mobile publisher experience.
-- Consider a coordinated rename of the private app shell later:
-  - `fragments_publisher.html` -> `otw_app.html`
-  - only do this when the manifest, service worker, and installed-app cache behavior feel stable enough to avoid needless churn
-- Consider a stronger publish payoff animation or toast if the current success feedback still feels too subtle.
-- Revisit edit/delete later if the pain of typo correction keeps recurring.
-  - Likely requires stable fragment IDs plus Worker support for update/delete actions.
-- Keep the public feed simple and calm.
-- Continue improving cache behavior where needed.
-- Keep expanding the fake `Sponsored Signals` rail on `fragments.html`.
-  - Add more dry, Douglas Adams-style nonsense ads over time.
-  - Especially preserve and build on the tone of entries like `Signal Socks`.
-
-### OTW_Bot
-
-- Build a much larger quip library.
-- Decide whether quips should be:
-  - manually added
-  - scheduled automatically
-  - triggered by a helper tool
-- Long-term goal:
-  - OTW_Bot should post permanent entries into `fragments_data.js`
-  - avoid temporary render-time injection
-- Add repeat protection so the bot does not reuse lines too quickly.
-
-### Ghost Writer
-
-- Keep the new centered-text and divider tools lightweight and reliable.
-- Consider a second centered-text style later:
-  - quieter / reflective
-  - larger pull-quote / emphasis
-- Keep authoring controls expressive without turning the tool into a full CMS.
+- Keep `otw_app.html` focused on active maintenance tools:
+  - `publisher.html`
+  - Image of the Day
+  - The Drift
+  - Palette
+  - archived inbox viewers
+- Keep old `fragments_publisher.html` installs/bookmarks redirecting cleanly.
+- Continue improving install/cache behavior where needed.
+- Treat the retired Fragments, Changelog, Ghost Writer, OTW_Bot, and analytics lanes as historical unless they are intentionally rebuilt.
 
 ### Personal Feed
 
@@ -109,8 +86,7 @@ Possible future concept names:
 
 ## Nice-to-have later
 
-- Better commit/publish visibility from the mobile tools.
-- A small internal changelog for infrastructure changes.
+- Better commit/publish visibility from the active mobile tools.
 - More reusable writing components:
   - pull quotes
   - callout notes
