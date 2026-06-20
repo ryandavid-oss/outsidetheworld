@@ -14,6 +14,17 @@ import urllib.request
 
 
 ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from tools import publisher_source_contract as source_contract
+
+
+KNOWN_PUBLISHED_SLUG = "the-crucible-of-continuous-revelation"
+
+
+def canonical_essay_slugs():
+    return [source_contract.parse_source(path).slug for path in source_contract.current_narrative_paths()]
 
 
 def free_port():
@@ -68,11 +79,12 @@ def run_smoke():
 
             essays = json.loads(fetch(f"{base}/api/published-essays", token))
             assert essays["ok"]
-            assert len(essays["essays"]) == 22
-            assert essays["essays"][0]["slug"] == "the-crucible-of-continuous-revelation"
+            essay_slugs = [essay["slug"] for essay in essays["essays"]]
+            assert essay_slugs == canonical_essay_slugs()
+            assert KNOWN_PUBLISHED_SLUG in essay_slugs
 
-            source = ROOT / "current_narrative" / "2026-06-05-the-crucible-of-continuous-revelation.md"
-            archive = ROOT / "archive" / "2026-06-05-the-crucible-of-continuous-revelation.html"
+            source = ROOT / "current_narrative" / f"2026-06-05-{KNOWN_PUBLISHED_SLUG}.md"
+            archive = ROOT / "archive" / f"2026-06-05-{KNOWN_PUBLISHED_SLUG}.html"
             narrative = ROOT / "narrative_data.js"
             before = (
                 hashlib.sha256(source.read_bytes()).hexdigest(),
@@ -80,7 +92,7 @@ def run_smoke():
                 hashlib.sha256(narrative.read_bytes()).hexdigest(),
             )
             preview = json.loads(fetch(
-                f"{base}/api/published-essays/the-crucible-of-continuous-revelation/preview",
+                f"{base}/api/published-essays/{KNOWN_PUBLISHED_SLUG}/preview",
                 token,
                 {"includeReadingAids": True},
                 "POST",
