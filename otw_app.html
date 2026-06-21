@@ -921,10 +921,10 @@
 
     #iotdWorkspace .panel,
     #driftWorkspace .panel {
-      border-color: var(--border);
+      border-color: var(--control-line-soft, var(--border));
       border-radius: 8px;
       background: var(--surface);
-      box-shadow: 0 28px 84px rgba(27, 54, 93, 0.14);
+      box-shadow: 0 28px 84px rgba(52, 72, 59, 0.12);
     }
 
     body[data-theme="dark"] #iotdWorkspace .panel,
@@ -934,7 +934,9 @@
 
     #iotdWorkspace main.panel,
     #driftWorkspace main.panel {
-      background: var(--surface-strong);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.74), rgba(255, 255, 255, 0.28)),
+        var(--surface-strong);
     }
 
     #iotdWorkspace .section-title,
@@ -946,15 +948,15 @@
 
     body[data-theme="light"] #iotdWorkspace .section-title,
     body[data-theme="light"] #driftWorkspace .section-title {
-      color: #1b365d;
+      color: var(--brand-blue);
     }
 
     #iotdWorkspace .status-line,
     #driftWorkspace .status-line {
       padding: 10px 12px;
-      border: 1px solid var(--border);
+      border: 1px solid var(--control-line-soft, var(--border));
       border-radius: 8px;
-      background: rgba(160, 190, 245, 0.1);
+      background: var(--status-bg, rgba(125, 159, 128, 0.12));
       color: var(--text-soft);
       font-family: "IBM Plex Mono", monospace;
       font-size: 0.72rem;
@@ -964,7 +966,7 @@
 
     body[data-theme="light"] #iotdWorkspace .status-line,
     body[data-theme="light"] #driftWorkspace .status-line {
-      background: rgba(160, 190, 245, 0.16);
+      background: var(--status-bg, rgba(125, 159, 128, 0.12));
     }
 
     #iotdWorkspace input,
@@ -972,10 +974,22 @@
     #driftWorkspace input,
     #driftWorkspace textarea {
       border-radius: 8px;
-      border-color: var(--border);
-      background: rgba(255, 255, 255, 0.72);
-      color: #1a1c20;
+      border-color: var(--control-line, var(--border));
+      background: var(--input-bg, rgba(255, 254, 250, 0.9));
+      color: var(--text-main);
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.54);
+    }
+
+    #iotdWorkspace input::placeholder,
+    #driftWorkspace input::placeholder {
+      color: var(--placeholder-soft, var(--text-soft));
+      opacity: 1;
+    }
+
+    #iotdWorkspace textarea::placeholder,
+    #driftWorkspace textarea::placeholder {
+      color: var(--placeholder-strong, var(--text-soft));
+      opacity: 1;
     }
 
     body[data-theme="dark"] #iotdWorkspace input,
@@ -1004,23 +1018,33 @@
     #driftWorkspace .secondary-btn {
       min-height: 38px;
       border-radius: 7px;
+      border-color: var(--control-line, var(--border));
       box-shadow: 0 8px 22px rgba(27, 54, 93, 0.08);
+    }
+
+    #iotdWorkspace .primary-btn:focus-visible,
+    #iotdWorkspace .secondary-btn:focus-visible,
+    #driftWorkspace .primary-btn:focus-visible,
+    #driftWorkspace .secondary-btn:focus-visible {
+      outline: none;
+      border-color: var(--focus-border, var(--brand-light-blue));
+      box-shadow: var(--focus-ring, 0 0 0 4px rgba(160, 190, 245, 0.18));
     }
 
     #iotdWorkspace .secondary-btn,
     #driftWorkspace .secondary-btn {
-      background: var(--surface);
+      background: var(--secondary-action-bg, var(--surface));
       color: var(--brand-blue);
     }
 
     body[data-theme="light"] #iotdWorkspace .secondary-btn,
     body[data-theme="light"] #driftWorkspace .secondary-btn {
-      color: #1b365d;
+      color: var(--brand-blue);
     }
 
     #driftWorkspace .drift-preview-card {
       border-radius: 8px;
-      border-color: var(--border);
+      border-color: var(--control-line-soft, var(--border));
       background: var(--surface-strong);
       box-shadow: none;
     }
@@ -1030,7 +1054,7 @@
     }
 
     body[data-theme="light"] #driftWorkspace .preview-title {
-      color: #1b365d;
+      color: var(--text-main);
     }
 
     #driftWorkspace .preview-kicker {
@@ -1054,12 +1078,14 @@
     #iotdWorkspace .stat,
     #driftWorkspace .stat {
       border-radius: 8px;
-      background: rgba(160, 190, 245, 0.08);
+      border-color: var(--control-line-soft, var(--border));
+      background: var(--chip-bg, rgba(125, 159, 128, 0.1));
     }
 
     #iotdWorkspace .manifest-preview {
       border-radius: 8px;
-      background: rgba(10, 10, 10, 0.05);
+      border-color: var(--control-line-soft, var(--border));
+      background: var(--chip-bg, rgba(125, 159, 128, 0.1));
     }
 
     body[data-theme="dark"] #iotdWorkspace .manifest-preview {
@@ -1067,28 +1093,48 @@
     }
 
     body[data-theme="light"][data-workspace="iotd"] {
-      --page-bg: #eef3ec;
-      --surface: rgba(247, 250, 244, 0.74);
-      --surface-strong: rgba(253, 252, 247, 0.92);
-      --border: rgba(91, 119, 100, 0.18);
-      --border-strong: rgba(101, 132, 109, 0.32);
+      --page-bg: #f4efe6;
+      --surface: rgba(255, 254, 250, 0.88);
+      --surface-strong: rgba(255, 254, 250, 0.98);
+      --border: #879480;
+      --border-strong: #82917e;
+      --control-line: #82917e;
+      --control-line-soft: #879480;
+      --focus-border: #58795f;
+      --focus-ring: 0 0 0 2px rgba(88, 121, 95, 0.95), 0 0 0 4px rgba(88, 121, 95, 0.16);
+      --input-bg: rgba(255, 254, 250, 0.92);
+      --secondary-action-bg: rgba(255, 254, 250, 0.78);
+      --chip-bg: rgba(125, 159, 128, 0.13);
+      --status-bg: rgba(125, 159, 128, 0.1);
+      --placeholder-soft: rgba(52, 72, 59, 0.62);
+      --placeholder-strong: rgba(52, 72, 59, 0.72);
       --text-main: #24342a;
-      --text-soft: rgba(52, 72, 59, 0.76);
-      --text-faint: rgba(52, 72, 59, 0.52);
+      --text-soft: #425a49;
+      --text-faint: #657466;
       --brand-blue: #58795f;
       --brand-light-blue: #7d9f80;
       background:
-        linear-gradient(180deg, rgba(247, 250, 244, 0.95), rgba(226, 237, 223, 0.98)),
-        linear-gradient(120deg, rgba(139, 168, 139, 0.2), transparent 42%, rgba(179, 158, 116, 0.14)),
-        #eef3ec;
+        linear-gradient(180deg, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.62)),
+        linear-gradient(90deg, rgba(125, 159, 128, 0.09), transparent 46%, rgba(217, 192, 140, 0.08)),
+        #f4efe6;
     }
 
     body[data-theme="dark"][data-workspace="iotd"] {
       --page-bg: #101810;
       --surface: rgba(20, 31, 23, 0.78);
       --surface-strong: rgba(16, 24, 18, 0.94);
-      --border: rgba(139, 171, 145, 0.16);
-      --border-strong: rgba(139, 171, 145, 0.3);
+      --border: rgba(139, 171, 145, 0.32);
+      --border-strong: rgba(139, 171, 145, 0.48);
+      --control-line: #8bab91;
+      --control-line-soft: rgba(139, 171, 145, 0.46);
+      --focus-border: #c3d6bf;
+      --focus-ring: 0 0 0 2px rgba(195, 214, 191, 0.92), 0 0 0 4px rgba(195, 214, 191, 0.18);
+      --input-bg: rgba(7, 12, 9, 0.52);
+      --secondary-action-bg: rgba(255, 255, 255, 0.06);
+      --chip-bg: rgba(255, 255, 255, 0.06);
+      --status-bg: rgba(139, 171, 145, 0.12);
+      --placeholder-soft: rgba(226, 236, 224, 0.66);
+      --placeholder-strong: rgba(226, 236, 224, 0.74);
       --text-main: #edf4ec;
       --text-soft: rgba(226, 236, 224, 0.74);
       --text-faint: rgba(226, 236, 224, 0.48);
@@ -1101,7 +1147,7 @@
     }
 
     body[data-theme="light"][data-workspace="iotd"] .topbar {
-      background: rgba(247, 250, 244, 0.9);
+      background: rgba(255, 254, 250, 0.92);
       box-shadow: 0 8px 28px rgba(91, 119, 100, 0.1);
     }
 
@@ -1118,7 +1164,7 @@
     }
 
     #iotdWorkspace .panel {
-      border-color: var(--border);
+      border-color: var(--control-line-soft);
       background: var(--surface);
       box-shadow: 0 24px 70px rgba(52, 72, 59, 0.1);
     }
@@ -1130,7 +1176,7 @@
     #iotdWorkspace main.panel {
       padding: clamp(24px, 4vw, 38px);
       background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.54), rgba(255, 255, 255, 0.12)),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.76), rgba(255, 255, 255, 0.34)),
         var(--surface-strong);
     }
 
@@ -1156,7 +1202,7 @@
       padding: 0;
       border: 0;
       background: transparent;
-      color: var(--text-faint);
+      color: var(--text-soft);
       font-family: "IBM Plex Sans", system-ui, sans-serif;
       font-size: 0.92rem;
       letter-spacing: 0;
@@ -1167,7 +1213,7 @@
     #iotdWorkspace main.panel > .status-line.status-success,
     #iotdWorkspace main.panel > .status-line.status-error {
       padding: 9px 11px;
-      border: 1px solid var(--border);
+      border: 1px solid var(--control-line);
       border-radius: 8px;
       font-weight: 600;
       line-height: 1.35;
@@ -1179,7 +1225,7 @@
     }
 
     #iotdWorkspace main.panel > .status-line.status-success {
-      border-color: rgba(88, 121, 95, 0.34);
+      border-color: var(--focus-border);
       background: rgba(125, 159, 128, 0.22);
       color: var(--text-main);
     }
@@ -1203,30 +1249,30 @@
     }
 
     #iotdWorkspace .field label {
-      color: var(--text-faint);
+      color: var(--text-soft);
       font-size: 0.68rem;
       letter-spacing: 0.14em;
     }
 
     #iotdWorkspace input,
     #iotdWorkspace textarea {
-      border-color: rgba(91, 119, 100, 0.18);
-      background: rgba(253, 252, 247, 0.74);
+      border-color: var(--control-line);
+      background: var(--input-bg);
       color: var(--text-main);
       box-shadow: none;
     }
 
     body[data-theme="dark"] #iotdWorkspace input,
     body[data-theme="dark"] #iotdWorkspace textarea {
-      border-color: rgba(139, 171, 145, 0.16);
-      background: rgba(7, 12, 9, 0.36);
+      border-color: var(--control-line);
+      background: var(--input-bg);
       color: var(--text-main);
     }
 
     #iotdWorkspace input:focus,
     #iotdWorkspace textarea:focus {
-      border-color: rgba(88, 121, 95, 0.54);
-      box-shadow: 0 0 0 4px rgba(125, 159, 128, 0.12);
+      border-color: var(--focus-border);
+      box-shadow: var(--focus-ring);
     }
 
     #iotdWorkspace input[type="file"] {
@@ -1245,32 +1291,32 @@
       align-items: center;
       gap: 12px;
       min-width: 0;
-      border: 1px solid rgba(91, 119, 100, 0.18);
+      border: 1px solid var(--control-line);
       border-radius: 8px;
       padding: 10px 12px;
-      background: rgba(253, 252, 247, 0.74);
+      background: var(--input-bg);
       color: var(--text-main);
       cursor: pointer;
     }
 
     body[data-theme="dark"] #iotdWorkspace .file-picker {
-      border-color: rgba(139, 171, 145, 0.16);
-      background: rgba(7, 12, 9, 0.36);
+      border-color: var(--control-line);
+      background: var(--input-bg);
     }
 
     #iotdWorkspace input[type="file"]:focus-visible + .file-picker {
-      border-color: rgba(88, 121, 95, 0.54);
-      box-shadow: 0 0 0 4px rgba(125, 159, 128, 0.12);
+      border-color: var(--focus-border);
+      box-shadow: var(--focus-ring);
     }
 
     #iotdWorkspace .file-cta {
       min-height: 36px;
       display: inline-flex;
       align-items: center;
-      border: 1px solid rgba(88, 121, 95, 0.28);
+      border: 1px solid var(--control-line);
       border-radius: 999px;
       padding: 0 14px;
-      background: rgba(247, 250, 245, 0.72);
+      background: var(--chip-bg);
       color: var(--brand-blue);
       font-family: "IBM Plex Sans", system-ui, sans-serif;
       font-size: 0.82rem;
@@ -1304,14 +1350,14 @@
     #iotdWorkspace .helper {
       min-height: 20px;
       margin: -2px 0 0;
-      color: var(--text-faint);
+      color: var(--text-soft);
       font-size: 0.82rem;
       line-height: 1.4;
       overflow-wrap: anywhere;
     }
 
     #iotdWorkspace .primary-btn {
-      border-color: rgba(88, 121, 95, 0.44);
+      border-color: var(--focus-border);
       background: linear-gradient(135deg, #c8d9bd, #7d9f80);
       color: #142018;
       box-shadow: 0 12px 28px rgba(91, 119, 100, 0.14);
@@ -1322,7 +1368,7 @@
     }
 
     #iotdWorkspace .secondary-btn {
-      background: rgba(247, 250, 245, 0.48);
+      background: var(--secondary-action-bg);
       color: var(--brand-blue);
       box-shadow: none;
     }
@@ -1337,28 +1383,48 @@
     }
 
     body[data-theme="light"][data-workspace="drift"] {
-      --page-bg: #edf4ed;
-      --surface: rgba(247, 250, 245, 0.74);
-      --surface-strong: rgba(253, 252, 247, 0.92);
-      --border: rgba(82, 112, 91, 0.19);
-      --border-strong: rgba(100, 132, 107, 0.34);
+      --page-bg: #f4efe6;
+      --surface: rgba(255, 254, 250, 0.88);
+      --surface-strong: rgba(255, 254, 250, 0.98);
+      --border: #879480;
+      --border-strong: #82917e;
+      --control-line: #82917e;
+      --control-line-soft: #879480;
+      --focus-border: #58795f;
+      --focus-ring: 0 0 0 2px rgba(88, 121, 95, 0.95), 0 0 0 4px rgba(88, 121, 95, 0.16);
+      --input-bg: rgba(255, 254, 250, 0.92);
+      --secondary-action-bg: rgba(255, 254, 250, 0.78);
+      --chip-bg: rgba(125, 159, 128, 0.12);
+      --status-bg: rgba(125, 159, 128, 0.1);
+      --placeholder-soft: rgba(51, 72, 59, 0.62);
+      --placeholder-strong: rgba(51, 72, 59, 0.74);
       --text-main: #24342b;
-      --text-soft: rgba(51, 72, 59, 0.76);
-      --text-faint: rgba(51, 72, 59, 0.52);
+      --text-soft: #425a49;
+      --text-faint: #657466;
       --brand-blue: #58795f;
       --brand-light-blue: #7b9b81;
       background:
-        linear-gradient(180deg, rgba(246, 250, 244, 0.94), rgba(226, 237, 226, 0.98)),
-        linear-gradient(115deg, rgba(147, 174, 147, 0.22), transparent 42%, rgba(120, 154, 168, 0.18)),
-        #edf4ed;
+        linear-gradient(180deg, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.62)),
+        linear-gradient(90deg, rgba(123, 155, 129, 0.08), transparent 46%, rgba(161, 141, 108, 0.07)),
+        #f4efe6;
     }
 
     body[data-theme="dark"][data-workspace="drift"] {
       --page-bg: #101811;
       --surface: rgba(20, 31, 24, 0.78);
       --surface-strong: rgba(16, 24, 18, 0.94);
-      --border: rgba(139, 171, 145, 0.16);
-      --border-strong: rgba(139, 171, 145, 0.3);
+      --border: rgba(139, 171, 145, 0.32);
+      --border-strong: rgba(139, 171, 145, 0.48);
+      --control-line: #8bab91;
+      --control-line-soft: rgba(139, 171, 145, 0.46);
+      --focus-border: #c3d6bf;
+      --focus-ring: 0 0 0 2px rgba(195, 214, 191, 0.92), 0 0 0 4px rgba(195, 214, 191, 0.18);
+      --input-bg: rgba(7, 12, 9, 0.52);
+      --secondary-action-bg: rgba(255, 255, 255, 0.06);
+      --chip-bg: rgba(255, 255, 255, 0.06);
+      --status-bg: rgba(139, 171, 145, 0.12);
+      --placeholder-soft: rgba(226, 236, 224, 0.66);
+      --placeholder-strong: rgba(226, 236, 224, 0.76);
       --text-main: #edf4ec;
       --text-soft: rgba(226, 236, 224, 0.74);
       --text-faint: rgba(226, 236, 224, 0.48);
@@ -1371,7 +1437,7 @@
     }
 
     body[data-theme="light"][data-workspace="drift"] .topbar {
-      background: rgba(246, 250, 244, 0.9);
+      background: rgba(255, 254, 250, 0.92);
       box-shadow: 0 8px 28px rgba(82, 112, 91, 0.1);
     }
 
@@ -1394,7 +1460,7 @@
     }
 
     #driftWorkspace .panel {
-      border-color: var(--border);
+      border-color: var(--control-line-soft);
       background: var(--surface);
       box-shadow: 0 24px 70px rgba(51, 72, 59, 0.1);
     }
@@ -1406,7 +1472,7 @@
     #driftWorkspace main.panel {
       padding: clamp(24px, 4vw, 44px);
       background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.54), rgba(255, 255, 255, 0.14)),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.76), rgba(255, 255, 255, 0.34)),
         var(--surface-strong);
     }
 
@@ -1441,7 +1507,7 @@
       padding: 0;
       border: 0;
       background: transparent;
-      color: var(--text-faint);
+      color: var(--text-soft);
       font-family: "IBM Plex Sans", system-ui, sans-serif;
       font-size: 0.92rem;
       letter-spacing: 0;
@@ -1462,30 +1528,30 @@
     }
 
     #driftWorkspace .field label {
-      color: var(--text-faint);
+      color: var(--text-soft);
       font-size: 0.68rem;
       letter-spacing: 0.14em;
     }
 
     #driftWorkspace input,
     #driftWorkspace textarea {
-      border-color: rgba(82, 112, 91, 0.18);
-      background: rgba(253, 252, 247, 0.74);
+      border-color: var(--control-line);
+      background: var(--input-bg);
       color: var(--text-main);
       box-shadow: none;
     }
 
     body[data-theme="dark"] #driftWorkspace input,
     body[data-theme="dark"] #driftWorkspace textarea {
-      border-color: rgba(139, 171, 145, 0.16);
-      background: rgba(7, 12, 9, 0.36);
+      border-color: var(--control-line);
+      background: var(--input-bg);
       color: var(--text-main);
     }
 
     #driftWorkspace input:focus,
     #driftWorkspace textarea:focus {
-      border-color: rgba(88, 121, 95, 0.54);
-      box-shadow: 0 0 0 4px rgba(123, 155, 129, 0.12);
+      border-color: var(--focus-border);
+      box-shadow: var(--focus-ring);
     }
 
     #driftWorkspace #driftTitle {
@@ -1497,8 +1563,8 @@
       min-height: clamp(460px, 58vh, 740px);
       padding: clamp(20px, 3vw, 34px);
       background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.56), rgba(255, 255, 255, 0.24)),
-        rgba(253, 252, 247, 0.8);
+        linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.3)),
+        var(--input-bg);
       font-size: clamp(1.1rem, 1.45vw, 1.3rem);
       line-height: 1.9;
       caret-color: #58795f;
@@ -1516,7 +1582,7 @@
     }
 
     #driftWorkspace .primary-btn {
-      border-color: rgba(88, 121, 95, 0.44);
+      border-color: var(--focus-border);
       background: linear-gradient(135deg, #c1d6bb, #7b9b81);
       color: #142018;
       box-shadow: 0 12px 28px rgba(82, 112, 91, 0.14);
@@ -1527,7 +1593,7 @@
     }
 
     #driftWorkspace .secondary-btn {
-      background: rgba(247, 250, 245, 0.48);
+      background: var(--secondary-action-bg);
       color: var(--brand-blue);
       box-shadow: none;
     }
@@ -1552,8 +1618,9 @@
     #driftWorkspace .drift-preview-card {
       min-height: 400px;
       padding: clamp(22px, 3vw, 30px);
-      border-color: rgba(255, 255, 255, 0.34);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.24), 0 18px 42px rgba(51, 72, 59, 0.1);
+      border-color: var(--control-line-soft);
+      background: var(--surface-strong);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.32), 0 18px 42px rgba(51, 72, 59, 0.1);
     }
 
     body[data-theme="dark"] #driftWorkspace .drift-preview-card {
@@ -1574,7 +1641,7 @@
     }
 
     #driftWorkspace .drift-prose {
-      color: rgba(36, 52, 43, 0.78);
+      color: var(--text-soft);
       font-size: clamp(1rem, 1.15vw, 1.08rem);
       line-height: 1.88;
     }
@@ -1588,7 +1655,7 @@
     }
 
     #driftWorkspace .drift-stats-panel {
-      background: rgba(247, 250, 245, 0.54);
+      background: var(--surface);
     }
 
     body[data-theme="dark"] #driftWorkspace .drift-stats-panel {
@@ -1596,13 +1663,13 @@
     }
 
     #driftWorkspace .stat {
-      border-color: rgba(82, 112, 91, 0.14);
-      background: rgba(255, 255, 255, 0.34);
+      border-color: var(--control-line-soft);
+      background: var(--chip-bg);
     }
 
     body[data-theme="dark"] #driftWorkspace .stat {
-      border-color: rgba(139, 171, 145, 0.13);
-      background: rgba(255, 255, 255, 0.045);
+      border-color: var(--control-line-soft);
+      background: var(--chip-bg);
     }
 
     .is-success {
@@ -1762,7 +1829,7 @@
 
       #iotdWorkspace .meta-row,
       #driftWorkspace .meta-row {
-        grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+        grid-template-columns: 1fr;
         gap: 10px;
       }
 
