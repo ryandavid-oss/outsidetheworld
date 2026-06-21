@@ -1831,11 +1831,34 @@
       #driftWorkspace .meta-row {
         grid-template-columns: 1fr;
         gap: 10px;
+        max-width: 100%;
+        min-width: 0;
+      }
+
+      #iotdWorkspace .meta-row > .field,
+      #driftWorkspace .meta-row > .field {
+        max-width: 100%;
+        min-width: 0;
       }
 
       #iotdWorkspace input[type="date"],
       #driftWorkspace input[type="date"] {
+        -webkit-appearance: none;
+        appearance: none;
+        display: block;
+        inline-size: 100%;
+        max-inline-size: 100%;
+        min-inline-size: 0;
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
         font-size: 0.88rem;
+        text-align: left;
+      }
+
+      #iotdWorkspace input[type="date"]::-webkit-date-and-time-value,
+      #driftWorkspace input[type="date"]::-webkit-date-and-time-value {
+        min-width: 0;
         text-align: left;
       }
 
