@@ -4,6 +4,15 @@
 
 const livingVerse = [
     {
+        "id": "living-poem-2026-06-24-permission-to-fall",
+        "title": "Permission to Fall",
+        "date": "June 24, 2026",
+        "era": "CURRENT_SIGNAL",
+        "source": "drift_publisher",
+        "thumbprint": "linear-gradient(135deg, #1f4037 0%, #213b3a 46%, #6ca485 100%)",
+        "body": "Television static street\ninterrupted at times\nCorn stalk impressions\nMillisecond lives of imperfect persistence,\npockmarking the street.\nA few leaves let go too soon,\nsome weaker seam in them parting\nwhile the others held, and held,\nnow run aground in the static.\nSurely —\nI have seen before\nBlond vinyl torn, yawn…\nto splendid wood beneath,\ngrained, true, the thing worth seeing.\nNo weather did this. Forgetting did,\nslow, and shaped like a man who moved on.\nTurning aside, the poorly aimed washing\nDances upon my cottened toes\nA fair mist of poison to my devices…\nA blessing to the southern hell."
+    },
+    {
         "id": "living-poem-2026-04-02-rampart",
         "title": "Rampart",
         "date": "April 2, 2026",
