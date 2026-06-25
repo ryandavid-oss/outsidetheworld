@@ -3310,7 +3310,8 @@
         function getPoemPreview(poem, maxLines = 5) {
             const text = String(poem?.body || '').replace(/\r\n?/g, '\n').trim();
             if (!text) return '';
-            return text.split('\n').slice(0, maxLines).join('\n').trim();
+            const preview = text.split('\n').slice(0, maxLines).join('\n').trim();
+            return `${preview}\n\nContinue reading below`;
         }
 
         function getPoemImage(poem) {
