@@ -615,7 +615,8 @@
         .replace(/'/g, '&#39;');
     }
 
-    function renderList(filter) {
+    function renderList(filter, options = {}) {
+      const { autoDisplay = true } = options;
       const activeId = activePoemIndex >= 0 ? livingVerse[activePoemIndex]?.id : null;
       const filtered = livingVerse
         .map((poem, index) => ({ poem, index }))
@@ -638,7 +639,7 @@
         });
       });
 
-      if (filtered.length && !filtered.some(({ poem }) => poem.id === activeId)) {
+      if (autoDisplay && filtered.length && !filtered.some(({ poem }) => poem.id === activeId)) {
         displayPoem(filtered[0].index, { replaceUrl: true });
       } else if (!filtered.length) {
         activePoemIndex = -1;
@@ -715,7 +716,7 @@
       const poem = livingVerse[index];
       if (!poem) return;
 
-      const { replaceUrl = false } = options;
+      const { replaceUrl = false, updateUrl = true } = options;
       activePoemIndex = index;
 
       document.body.style.background = `
@@ -746,7 +747,9 @@
         item.classList.toggle('active', Number(item.dataset.index) === index);
       });
 
-      updateUrlForPoem(poem, replaceUrl);
+      if (updateUrl) {
+        updateUrlForPoem(poem, replaceUrl);
+      }
     }
 
     function applyFilterForPoem(index) {
@@ -776,9 +779,9 @@
         return;
       }
 
-      renderList('ALL');
+      renderList('ALL', { autoDisplay: false });
       if (livingVerse.length) {
-        displayPoem(0, { replaceUrl: true });
+        displayPoem(0, { updateUrl: false });
       }
     });
 
