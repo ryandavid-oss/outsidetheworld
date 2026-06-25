@@ -757,6 +757,13 @@
             filter: saturate(1.02) contrast(1.04);
         }
 
+        .latest-media.is-poem {
+            background:
+                radial-gradient(circle at 26% 18%, rgba(255, 255, 255, 0.14), transparent 30%),
+                var(--poem-thumbprint, linear-gradient(135deg, #223225 0%, #101811 46%, #263446 100%)),
+                linear-gradient(135deg, rgba(160, 190, 245, 0.2), transparent);
+        }
+
         .latest-media::after {
             content: "";
             position: absolute;
@@ -3087,6 +3094,7 @@
     </div>
 
     <script src="./narrative_data.js"></script>
+    <script src="./new_poetry_data.js"></script>
     <script>
         const THEME_KEY = 'otw_personal_theme';
         const LASTFM_API_KEY = '0cb4714c22caddc9beedf7afe2e35284';
@@ -3252,6 +3260,55 @@
             };
         }
 
+        function safeGradient(value) {
+            const gradient = String(value || '').trim();
+            if (!/gradient\(/i.test(gradient)) return '';
+            if (/url\(|expression\(|javascript:|[;"'<>]/i.test(gradient)) return '';
+            return gradient;
+        }
+
+        function getPoemMetrics(poem) {
+            const text = String(poem?.body || '').trim();
+            const words = text ? text.split(/\s+/).length : 0;
+            return {
+                words,
+                readMin: Math.max(1, Math.ceil(words / 180))
+            };
+        }
+
+        function getPoemUrl(poem) {
+            const id = String(poem?.id || '').trim();
+            if (!id) return 'drift_poetry.html';
+            return `drift_poetry.html?poem=${encodeURIComponent(id)}`;
+        }
+
+        function getPoemExcerpt(poem, maxLength = 330) {
+            const text = String(poem?.body || '').replace(/\s+/g, ' ').trim();
+            if (text.length <= maxLength) return text;
+            return `${text.slice(0, maxLength).replace(/\s+\S*$/, '')}...`;
+        }
+
+        function getLatestPoem() {
+            const poems = typeof livingVerse !== 'undefined' && Array.isArray(livingVerse)
+                ? livingVerse
+                : [];
+            return poems[0] || null;
+        }
+
+        function latestPieceFromSources(posts) {
+            const latestPost = posts[0] || null;
+            const latestPoem = getLatestPoem();
+            if (!latestPost) return latestPoem ? { type: 'poem', item: latestPoem } : null;
+            if (!latestPoem) return { type: 'essay', item: latestPost };
+
+            const postDate = parseDate(latestPost.date);
+            const poemDate = parseDate(latestPoem.date);
+            if (poemDate && (!postDate || poemDate > postDate)) {
+                return { type: 'poem', item: latestPoem };
+            }
+            return { type: 'essay', item: latestPost };
+        }
+
         function initNarrativeCarousels(scope = document) {
             const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
             if (reduceMotion) return;
@@ -3300,26 +3357,47 @@
                 return;
             }
 
-            const latest = posts[0];
+            const latestPiece = latestPieceFromSources(posts);
+            if (!latestPiece) {
+                target.innerHTML = '<p class="loading-signal">Waiting for 2026 signal...</p>';
+                if (ledgerLatest) ledgerLatest.textContent = 'Waiting';
+                return;
+            }
+
+            const isPoem = latestPiece.type === 'poem';
+            const latest = latestPiece.item;
             const metrics = getMetrics(latest);
+            const poemMetrics = isPoem ? getPoemMetrics(latest) : null;
             const date = parseDate(latest.date);
             const dateLabel = displayDate(latest.date);
             const images = getPostImages(latest);
             const deck = getDeck(latest);
-            const latestTitle = latest.title || 'Untitled Signal';
-            const archiveUrl = getArchiveUrl(latest);
+            const latestTitle = latest.title || (isPoem ? 'Untitled Poem' : 'Untitled Signal');
+            const archiveUrl = isPoem ? getPoemUrl(latest) : getArchiveUrl(latest);
             const recentPosts = posts.slice(1, 5);
+            const panelLabel = document.getElementById('current-narrative-title');
+            const featureLabel = isPoem ? 'Latest Poem' : 'Current Narrative';
+            const mediaLabel = isPoem ? 'Latest Poem' : 'Latest Narrative';
+            const excerpt = isPoem ? getPoemExcerpt(latest) : getExcerpt(latest);
+            const activeMetrics = poemMetrics || metrics;
+
+            if (panelLabel) panelLabel.textContent = featureLabel;
 
             if (ledgerLatest) ledgerLatest.textContent = date ? machineDate(date) : dateLabel;
 
-            const mediaMarkup = images.length
+            const poemGradient = isPoem ? safeGradient(latest.thumbprint) : '';
+            const mediaMarkup = isPoem
+                ? `<div class="latest-media is-poem"${poemGradient ? ` style="--poem-thumbprint: ${escapeHtml(poemGradient)}"` : ''}>
+                        <span class="latest-media-tag">${mediaLabel}</span>
+                    </div>`
+                : images.length
                 ? `<div class="latest-media">
                         <div class="latest-carousel" data-narrative-carousel role="img" aria-label="${escapeHtml(`Images from ${latestTitle}`)}">
                             ${images.map((image, index) => `<img class="latest-carousel-img${index === 0 ? ' is-active' : ''}" data-carousel-slide src="${escapeHtml(image)}" alt="" aria-hidden="true" loading="${index === 0 ? 'eager' : 'lazy'}" decoding="async" />`).join('')}
                         </div>
-                        <span class="latest-media-tag">Latest Narrative</span>
+                        <span class="latest-media-tag">${mediaLabel}</span>
                     </div>`
-                : `<div class="latest-media"><span class="latest-media-tag">Latest Narrative</span></div>`;
+                : `<div class="latest-media"><span class="latest-media-tag">${mediaLabel}</span></div>`;
 
             const recentMarkup = recentPosts.length
                 ? `<div class="recent-stack" aria-label="Recent posts">
@@ -3347,13 +3425,13 @@
                         ${deck ? `<p class="story-deck">${escapeHtml(deck)}</p>` : ''}
                         <div class="story-meta">
                             <time${date ? ` datetime="${machineDate(date)}"` : ''}>${escapeHtml(dateLabel)}</time>
-                            <span>${metrics.words} words</span>
-                            <span>${metrics.readMin} min read</span>
+                            <span>${activeMetrics.words} words</span>
+                            <span>${activeMetrics.readMin} min read</span>
                         </div>
-                        <p class="story-excerpt">${escapeHtml(getExcerpt(latest))}</p>
+                        <p class="story-excerpt">${escapeHtml(excerpt)}</p>
                         <div class="story-actions">
-                            <a class="button" href="${escapeHtml(archiveUrl)}">Continue Reading</a>
-                            <a class="ghost-button" href="residue_archive.html">Browse Archive</a>
+                            <a class="button" href="${escapeHtml(archiveUrl)}">${isPoem ? 'Read Poem' : 'Continue Reading'}</a>
+                            <a class="ghost-button" href="${isPoem ? 'drift_poetry.html' : 'residue_archive.html'}">${isPoem ? 'Open Drift' : 'Browse Archive'}</a>
                         </div>
                     </div>
                 </article>
