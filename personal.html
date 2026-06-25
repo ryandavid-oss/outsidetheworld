@@ -3307,12 +3307,10 @@
             return `drift_poetry.html?poem=${encodeURIComponent(id)}`;
         }
 
-        function getPoemPreview(poem, maxLength = 760) {
+        function getPoemPreview(poem, maxLines = 5) {
             const text = String(poem?.body || '').replace(/\r\n?/g, '\n').trim();
-            if (text.length <= maxLength) return text;
-            const slice = text.slice(0, maxLength);
-            const breakpoint = Math.max(slice.lastIndexOf('\n'), slice.lastIndexOf(' '));
-            return `${slice.slice(0, breakpoint > 120 ? breakpoint : maxLength).trim()}\n...`;
+            if (!text) return '';
+            return text.split('\n').slice(0, maxLines).join('\n').trim();
         }
 
         function getPoemImage(poem) {
