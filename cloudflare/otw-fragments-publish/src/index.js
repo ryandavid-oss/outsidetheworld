@@ -896,8 +896,9 @@ function normalizeDriftPoemEntry(entry) {
   const source = String(entry.source || "drift_publisher").trim() || "drift_publisher";
   const era = String(entry.era || "CURRENT_SIGNAL").trim().toUpperCase() || "CURRENT_SIGNAL";
   const thumbprint = String(entry.thumbprint || "").trim() || buildDriftThumbprint({ title, body });
+  const image = String(entry.image || entry.imageUrl || "").trim();
 
-  return {
+  const normalized = {
     title,
     date: formatDriftDate(date),
     era,
@@ -905,6 +906,10 @@ function normalizeDriftPoemEntry(entry) {
     thumbprint,
     body
   };
+  if (image) {
+    normalized.image = image;
+  }
+  return normalized;
 }
 
 function normalizeIotdDate(raw) {

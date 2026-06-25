@@ -38,6 +38,15 @@ function decodeBase64Utf8(content) {
   );
 }
 
+function encodeBase64Utf8(content) {
+  const bytes = new TextEncoder().encode(content);
+  let binary = "";
+  bytes.forEach((byte) => {
+    binary += String.fromCharCode(byte);
+  });
+  return btoa(binary);
+}
+
 function publisherMetadata(imageUrl = baseImageUrl) {
   return {
     schema: "otw.publisher.post",
@@ -114,6 +123,14 @@ async function postPublish(testEnv, body, key = publishKey) {
   }), testEnv));
 }
 
+async function postDrift(testEnv, body, key = publishKey) {
+  return json(await worker.fetch(request("/publish-drift-poem", {
+    method: "POST",
+    headers: key === null ? { "content-type": "application/json" } : authorizedHeaders(key),
+    body: JSON.stringify(body)
+  }), testEnv));
+}
+
 async function withMockGitHub(handler, testFn) {
   const originalFetch = globalThis.fetch;
   const calls = [];
@@ -154,6 +171,45 @@ function githubPublishMock(existingPaths = new Set()) {
     if (method === "PUT") {
       return new Response(JSON.stringify({
         commit: { sha: "published-commit-sha" },
+        path
+      }), {
+        status: 200,
+        headers: { "content-type": "application/json" }
+      });
+    }
+
+    return new Response(JSON.stringify({ error: "Unexpected GitHub request" }), {
+      status: 500,
+      headers: { "content-type": "application/json" }
+    });
+  };
+}
+
+function githubDriftMock(existingRaw = "const livingVerse = [];\n") {
+  return async (url, options) => {
+    const method = String(options.method || "GET").toUpperCase();
+    const path = decodeURIComponent(url.split("/contents/")[1]?.split("?")[0] || "");
+
+    if (path !== "new_poetry_data.js") {
+      return new Response(JSON.stringify({ message: "Not Found" }), {
+        status: 404,
+        headers: { "content-type": "application/json" }
+      });
+    }
+
+    if (method === "GET") {
+      return new Response(JSON.stringify({
+        sha: "existing-poetry-sha",
+        content: encodeBase64Utf8(existingRaw)
+      }), {
+        status: 200,
+        headers: { "content-type": "application/json" }
+      });
+    }
+
+    if (method === "PUT") {
+      return new Response(JSON.stringify({
+        commit: { sha: "published-drift-sha" },
         path
       }), {
         status: 200,
@@ -330,6 +386,27 @@ for (const markdown of [
     assert.equal(result.body.ok, true);
     assert.equal(result.body.file, "current_narrative/2026-05-29-publisher-contract-test-2.md");
     assert.equal(putCalls(calls).length, 1);
+  });
+}
+
+{
+  await withMockGitHub(githubDriftMock(), async (calls) => {
+    const image = "Images/poetry/permission-to-fall.jpg";
+    const result = await postDrift(env(), {
+      title: "Permission to Fall",
+      date: "2026-06-24",
+      body: "Line one\nLine two",
+      image
+    });
+    assert.equal(result.status, 200);
+    assert.equal(result.body.ok, true);
+
+    const writes = putCalls(calls);
+    assert.equal(writes.length, 1);
+    const requestBody = JSON.parse(writes[0].options.body);
+    const savedPoetry = decodeBase64Utf8(requestBody.content);
+    assert.ok(savedPoetry.includes('"title": "Permission to Fall"'));
+    assert.ok(savedPoetry.includes(`"image": "${image}"`));
   });
 }
 

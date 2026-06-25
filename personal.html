@@ -764,6 +764,12 @@
                 linear-gradient(135deg, rgba(160, 190, 245, 0.2), transparent);
         }
 
+        .latest-media.is-poem.has-image {
+            background:
+                linear-gradient(135deg, rgba(160, 190, 245, 0.18), transparent),
+                rgba(255, 255, 255, 0.035);
+        }
+
         .latest-media::after {
             content: "";
             position: absolute;
@@ -879,6 +885,19 @@
             font-weight: 700;
             line-height: 0.82;
             text-shadow: 0 0 18px rgba(160, 190, 245, 0.16);
+        }
+
+        .story-excerpt.is-poem-preview {
+            white-space: pre-line;
+        }
+
+        .story-excerpt.is-poem-preview::first-letter {
+            float: none;
+            margin: 0;
+            font-size: inherit;
+            font-weight: inherit;
+            line-height: inherit;
+            text-shadow: none;
         }
 
         [data-theme="light"] .story-excerpt::first-letter {
@@ -3267,6 +3286,12 @@
             return gradient;
         }
 
+        function safeImageUrl(value) {
+            const url = String(value || '').trim();
+            if (/^(https?:\/\/|\/|Images\/)/i.test(url)) return url;
+            return '';
+        }
+
         function getPoemMetrics(poem) {
             const text = String(poem?.body || '').trim();
             const words = text ? text.split(/\s+/).length : 0;
@@ -3282,10 +3307,16 @@
             return `drift_poetry.html?poem=${encodeURIComponent(id)}`;
         }
 
-        function getPoemExcerpt(poem, maxLength = 330) {
-            const text = String(poem?.body || '').replace(/\s+/g, ' ').trim();
+        function getPoemPreview(poem, maxLength = 760) {
+            const text = String(poem?.body || '').replace(/\r\n?/g, '\n').trim();
             if (text.length <= maxLength) return text;
-            return `${text.slice(0, maxLength).replace(/\s+\S*$/, '')}...`;
+            const slice = text.slice(0, maxLength);
+            const breakpoint = Math.max(slice.lastIndexOf('\n'), slice.lastIndexOf(' '));
+            return `${slice.slice(0, breakpoint > 120 ? breakpoint : maxLength).trim()}\n...`;
+        }
+
+        function getPoemImage(poem) {
+            return safeImageUrl(poem?.image || poem?.imageUrl);
         }
 
         function getLatestPoem() {
@@ -3378,7 +3409,7 @@
             const panelLabel = document.getElementById('current-narrative-title');
             const featureLabel = isPoem ? 'Latest Poem' : 'Current Narrative';
             const mediaLabel = isPoem ? 'Latest Poem' : 'Latest Narrative';
-            const excerpt = isPoem ? getPoemExcerpt(latest) : getExcerpt(latest);
+            const excerpt = isPoem ? getPoemPreview(latest) : getExcerpt(latest);
             const activeMetrics = poemMetrics || metrics;
 
             if (panelLabel) panelLabel.textContent = featureLabel;
@@ -3386,8 +3417,14 @@
             if (ledgerLatest) ledgerLatest.textContent = date ? machineDate(date) : dateLabel;
 
             const poemGradient = isPoem ? safeGradient(latest.thumbprint) : '';
+            const poemImage = isPoem ? getPoemImage(latest) : '';
             const mediaMarkup = isPoem
-                ? `<div class="latest-media is-poem"${poemGradient ? ` style="--poem-thumbprint: ${escapeHtml(poemGradient)}"` : ''}>
+                ? poemImage
+                    ? `<div class="latest-media is-poem has-image">
+                        <img src="${escapeHtml(poemImage)}" alt="${escapeHtml(latestTitle)}" loading="eager" decoding="async" />
+                        <span class="latest-media-tag">${mediaLabel}</span>
+                    </div>`
+                    : `<div class="latest-media is-poem"${poemGradient ? ` style="--poem-thumbprint: ${escapeHtml(poemGradient)}"` : ''}>
                         <span class="latest-media-tag">${mediaLabel}</span>
                     </div>`
                 : images.length
@@ -3428,7 +3465,7 @@
                             <span>${activeMetrics.words} words</span>
                             <span>${activeMetrics.readMin} min read</span>
                         </div>
-                        <p class="story-excerpt">${escapeHtml(excerpt)}</p>
+                        <p class="story-excerpt${isPoem ? ' is-poem-preview' : ''}">${escapeHtml(excerpt)}</p>
                         <div class="story-actions">
                             <a class="button" href="${escapeHtml(archiveUrl)}">${isPoem ? 'Read Poem' : 'Continue Reading'}</a>
                             <a class="ghost-button" href="${isPoem ? 'drift_poetry.html' : 'residue_archive.html'}">${isPoem ? 'Open Drift' : 'Browse Archive'}</a>
