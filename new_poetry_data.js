@@ -4,6 +4,15 @@
 
 const livingVerse = [
     {
+        "id": "living-poem-2026-06-29-terrible-nothing",
+        "title": "Terrible Nothing",
+        "date": "June 29, 2026",
+        "era": "CURRENT_SIGNAL",
+        "source": "drift_publisher",
+        "thumbprint": "linear-gradient(135deg, #182848 0%, #1f3558 45%, #4b6cb7 100%)",
+        "body": "I walked out, inflatable\nBut remained within orbit\nOf the pain and all it traveled with\n\nHeh - pain. Tiny flaccid syllable\nShared like sacramental wine from the cup of proximity\nLearned ambiguity by virtue of osmosis\n\nThis is to say, sorry-\nMoment to moment, violent - No trust to emotion\nMy life was a throat clearing tremble\n\nClosing off all sensory input\nI can still walk the paths of shame and emancipation\nDiscovery and wracking sobs, quieted so the visitors don't hear\n\nAnd that damn bird, it's dark outside\nIn sleeping temblor I imagined an axe\nOr even fire, or shaking, or a boulder cast from the sky to emancipate the noise from the night\n\nThe natural man disciplined. Another narrative, alas\nGoing under, rage gone soft.\nFight leaking into the dusty corners of the room\n\n90 cycles was an eye blink moment\nWooden rocking weight from a salted visitor\nUnkind finger-pointing, eyes pale. Purposeful, undelight.\n\nBelieved words crested as notes on parchment\nDrifting, a flow and float as my chest compresses\nBlink, damn you - and cease to invade unconscious slumber.\n\nAt dawn's first amber parade\nAll inquisitors mute or fervent, prescriptions implied\nWhat once bore weight in the frame, now rests upon mine\n\nIt was terrible, and it was nothing\nInference tattooed naively on a tired mind\nThe birdsong ordeal ended. The waking reality, severe."
+    },
+    {
         "id": "living-poem-2026-06-24-permission-to-fall",
         "title": "Permission to Fall",
         "date": "June 24, 2026",
