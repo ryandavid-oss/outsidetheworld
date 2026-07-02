@@ -1,5 +1,534 @@
 const current_narrative = [
     {
+        "title": "Who Is Taking Care of the Thing That Took Care of Us?",
+        "date": "July 1, 2026",
+        "body": "_How the children of cartridges inherited a medium increasingly shaped by risk._\n\n![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3tyaxu.jpg)\n\nWhen I was 10 years old, just after school ended on a cold winter Friday, I walked into the local movie rental store off of 500 south in Bountiful, Utah.\n\nThe building had an angled roofline and double doors, and when you stepped inside, the ceiling opened upward with exposed beams that made the place feel larger than it probably was. Huge, at least to me. The counter was near the front middle. To my left, there was a poster of Michael Keaton starring in his latest movie,\u00a0_Clean and Sober_. I didn't know what sober meant. That detail, however illogical, is seared into me.\n\nMy mom went one way, and I went another. I already knew where I was going. The video game wall was further down the right side, and my only purpose in being there was to see how the rental selection had grown. Opportunity buzzed inside me as I approached the wall of empty boxes, eagerness clouding my vision as I saw the usual suspects.\n\nIt was easy to see what was available to rent. The retail packaging was always in front of a nondescript plastic holder with the actual cartridge inside. If the edge of the box wasn't flush with the shelf, you were too late.\n\nMove on.\n\nAfter cataloging a few new arrivals, my eyes landed on something.\n\n_Friday the 13th._\n\nI grabbed both the retail box and the rental and rushed over to my mom. I had to try this game. I'm certain my eyes begged for\u00a0the positive answer. She looked hesitantly at the box art, a multi-colored fiasco reminiscent of everything glorious about late \u201980s design, sighed, and nodded her head.\n\nWe took\u00a0_Friday the 13th_\u00a0up to the counter, paid the employee, and the next two days of my life were set.\n\nMy childhood was replete with memories just like this. Christmas mornings that couldn't come soon enough. Late night gaming sessions with my closest friends. Running home from school to grab the latest issue of Nintendo Power from the mailbox. If it sounds like ritual, if I make it sound holy, maybe that's because to me, it filled a vacuum left by areas of my life untreated by normalcy.\n\nAm I being too grand? Do I spend too much time in vain nostalgic pining? After all...video games are not a hospital or a church. Just entertainment; software. Plastic. Boxes on shelves.\n\nAnd yet.\n\n![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3u03pw.jpg)\n\nIf you were born when I was born, video games were not just entertainment. They were part of the fabric of growing up. They were there in basements and wood-paneled bedrooms, in Blockbuster cases and Toys \"R\" Us aisles, in Nintendo Power previews and playground rumors and long summer sleepovers when time seemed inexhaustible.\n\nI was there when N64 controller cables crisscrossed berber carpeting, and four kids sat too close to the television set while playing GoldenEye. We blew into NES cartridges, even though we probably should not have. We stared at box art and invented the game in our heads before we ever played it.\n\nVideo games took care of us the way childhood things do. They sure as hell didn't solve anything for us. Rather, they gave us somewhere to go, especially when things got too heavy for a 14 year old, or a 9 year old.\n\n> So consider again the question posed by the title of this essay; Who is taking care of the thing that took care of us?\n\nThe obvious answer should be us, right?\n\nSo yes, maybe we who grew up loving the medium did inherit the industry, or at least enough of it to matter. But we inherited it at the curdled moment it became too expensive, too consolidated, too shareholder-bound, and too afraid of risk to behave like the thing we grew up loving.\n\nWe did not inherit the basement sleepovers. We inherited the boardroom built on top of them.\n\n![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3uows9.jpg)\n\nBy the time the N64 kids were old enough to have authority, the economics\u00a0underneath\u00a0had changed.\u00a0A video game, once a peculiar creation of a small group, something to be discovered in magazines and lucky encounters at the local Fred Meyer, was now a multifaceted entity. It was a platform strategy, a revenue forecast, a five-year plan, a franchise pillar, a live-service candidate, a licensing opportunity, and a risk profile.\n\n**And once something becomes that expensive, fear starts making the creative decisions.**\n\nAnd while there are still artists in the room (as well as designers, writers, composers, engineers, and producers) who are trying to infuse wonder into the space, there is always that pressure of fear that lingers. The walls have become thicker, the meetings larger, and the stakes more critical.\u00a0Yes, the people who remember the basement are still there. But too often, they are forced to justify wonder in the language of quarterly growth.\n\nThat is a hard space to exist inside of. \u00a0It probably feels impossible.\n\nPerhaps that\u2019s why so much of the industry feels haunted now. Haunted, not dead or devoid of brilliance, but haunted by the memory of what games felt like before every aspect of them had to justify their existence through monetization.\n\nThe industry feels exhausted and strangely careless, subject to cancellations and studio closures. Incredibly impersonal layoffs after successful launches. Broken games with day-one patches. Fans treated as both audience and nuisance. Creators treated as replaceable until the game needs a soul, at which point everyone acts surprised that soul isn't outsourced cheaply.\n\nI know the root of all this is money. It is always money, or fear of losing it, or the sickness that sets in when making money stops being enough. Modern games are expensive, and the teams that work on them are huge. Investors are impatient and always looking for growth and new sources of revenue. The whole system learned to speak in terms that are aggressively bloodless: Engagement. Retention. Monthly active users. Conversion.\n\nThat language itself? \u00a0Well, that's a warning sign in and of itself. Because God knows no child ever sat cross-legged in their basement and thought, \"I hope this experience optimizes retention.\"\u00a0We just wanted to **play**. We wanted to be somewhere else for a while.\n\nThat is why I hold so fast to Nintendo.\n\nNintendo appeared to be the company that truly understood the concept for a very long time. And no, not perfectly...but well enough. Nostalgia does, after all, aggressively sand the edges of disappointment.\n\nBut they understood, even under the heavy fire of critics and industry pros, that the graphics race was fruitless if it became the only race. They understood that hardware could still be toy-like, and that the controllers, the box art, the **whimsy** of all it was not to become trivial.\n\nThe Nintendo DS was weird, yet it functioned exceptionally well. The Wii was even more peculiar, and we all know how that turned out. The Wii U was a complete mess, but we are still thriving on the legacy of games that flowed from it.\n\nAnd the Switch, at its best, felt like a fantastic answer to a question we had all been asking without knowing it.\n\nNintendo would look at the industry running in one direction and quietly walk away. Sometimes that led to genius, sometimes to confusion. But I respect the refusal. They did not seem desperate to become everyone else.\n\nThis is why their silence in the current state of the beleaguered gaming industry feels so off to me. And not mysterious, like in years past. Not their usual theatrics, either. \u00a0Just...silent.\n\n![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3uvchx.jpg)\n\nSurely, there is a difference. Old Nintendo secrecy felt like ceremony; like a curtain in front of a\u00a0stage. You knew something was behind it. You could feel the heat behind it. How I pine for the days of the magazine covers, the E3 reveals, the demo kiosks, the new Mario games and demos that propelled the hardware into making sense.\n\nThe current silence feels like a closed, nondescript door, a Post-it note affixed, suggesting that everything is fine and that we should simply wait and understand. However, I am writing this to tell the world that I am standing outside that door, holding onto forty years of memories, and wondering if they truly comprehend what we are genuinely requesting.\n\nI don\u2019t need Nintendo to live in the past. I don\u2019t need Mario trapped forever in my childhood, Zelda to apologize for evolving, or Pok\u00e9mon to be targeted at me. My son loves what he loves, and his Nintendo is genuine because it\u2019s not mine. And vice versa.\n\nBut I want Nintendo, and the industry as a whole, to remember that the role of stewardship of this industry and medium is important, and it is dramatically different from extraction.\u00a0A steward asks what must be preserved so the thing can keep living. An extractor asks how much can be taken before it collapses. Do we feel the difference yet?\n\nThis is what I mean.\u00a0 Too often, games feel managed by extraction criteria. Wrench out more money from players, get every last drop of labor from developers, trigger every last bit of nostalgia from aging fans, siphon more attention from children. At some point, don't we all stop feeling like participants? Instead, maybe we all start feeling like a resource.\n\nThat is a poisonous thing to do to **play**.\n\nPlay is delicate, but not fragile in the way the word suggests. It can survive frustration and \u00a0difficulty. It can outlast waiting, bad graphics, weird controllers, glitches, and loading times. We know this because some of the greatest games ever made survived all of those things.\n\nWhat play has a harder time surviving is **contempt**. Even unintentionally, the industry oozes contempt for developers, for physical ownership, for the idea of a finished game, and the unique, sacred relationship people form within the worlds that shaped them.\n\nHaha. Maybe that sounds too precious. Maybe it is?\n\nBut I remember how it felt! I remember going into stores just to stand near the games. The neon tubes and cardboard standees. The agony of waiting for the next issue of Nintendo Power. The little emotional earthquake of seeing and experiencing a new Super Mario game.\n\nMy soul felt literal weight. The games themselves? They occupied actual space, both in the world and in my heart.\n\nI understand that the world has changed significantly. Today, children and young adults find their own sense of magic in places like Fortnite lobbies and Adopt Me sessions. These are games that I do not play, nor fully comprehend. I am also not naive enough to believe that the disappearance of my rituals means the disappearance of theirs.\n\n![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3v3h09.jpg)\n\nBut I am concerned that the gaming industry has mistaken availability for wonder. Everything\u00a0is available, yet less tangible. A game can be announced, leaked, datamined, patched, apologized for, monetized, and recontextualized before it even has the chance to exist in our imaginations.\n\nThis isn\u2019t entirely anyone\u2019s fault. It\u2019s the nature of the modern world. The machine feeds on information, and we all participate in it. Companies tease, insiders leak, fans speculate, algorithms amplify, dataminers excavate, and the marketing cycle begins earlier and earlier, making the game feel almost late to its own arrival.\n\nWaiting used to be unpleasant. I don\u2019t want to deny that. It could be maddening, especially when you were young, powerless, and dependent on parents, allowance, birthdays, Christmas, rentals, and the mysterious supply chain of a local store.\n\nHowever, waiting also gave our imaginations a chance to grow. We had time to live with a screenshot, turn rumors over in our heads, stare at a box in a magazine until the game inside it became partly real, and let anticipation gather weight.\n\nNow, we are constantly fed and rarely nourished. So, do I expect too much of my peers? Maybe.\n\nBut I don\u2019t think the answer is as simple as saying we loved the thing as children and then failed it as adults. That feels too simplistic and perhaps too harsh. Loving a thing as a child doesn\u2019t automatically teach you how to protect it within the industry. It doesn\u2019t teach you how to survive budgets, shareholders, platform demands, layoffs, licensing agreements, production timelines, subscription models, and the complex mathematics of modern risk.\n\n> **Sometimes, love gets into the building and still loses the meeting. **Sometimes, the people who remember the basement are there, doing their best, but the room is speaking a foreign language.\n\nThat\u2019s the aspect I keep returning to. The understanding of the immense power games possess is invaluable knowledge for artists. However, it poses a significant risk to marketers. In a thriving industry, artists would take the lead, leveraging this knowledge, while marketers would assist in disseminating it to the world. But today, the current order has been reversed.\n\nSigh. Perhaps all industries undergo a similar transformation. Maybe this is what happens. Wild creativity becomes culture. Culture hardens into business. Then the business learns to defend itself against the very culture that made it valuable. \u00a0Nevertheless, I refuse to relinquish that easily.\n\n> The truth is, the industry is still alive.\n\nYou can still sense it when a game is crafted with meticulous care. When a developer places their trust in the player. When an unconventional idea withstands the scrutiny of a meeting. When a soundtrack knows precisely where to strike the right chord. When a game arrives, and for a fleeting moment, the old circuit lights up again.\n\nThat is what I want from Nintendo. Not perfection. Not constant announcements. Not a direct pipeline from my childhood preferences to their release calendar.\n\nJust evidence of care. Evidence that someone remembers the craft is not valuable only because it can be licensed, filmed, bundled, and sold again. It is valuable because it meant something. It taught kids how to wait, how to share, how to fail and try again. It made lonely afternoons less lonely and Christmas mornings impossible to sleep through. It gave shape to chapters of our lives before we knew they were chapters.\n\nThat is not nothing. That is not just content.\n\nSo when Nintendo goes quiet, when studios close and games vanish before they are born, I feel something more complicated than disappointment.\u00a0I feel protective.\n\nProtective of the thing that protected a part of me. The part that stood in the aisles with no money, but all the time in the world. The part that believed the kid on the playground with the relative that worked at Nintendo. The part that sat on the floor with friends, cables everywhere, laughing too hard at a sudden\u00a0loss or a blue shell or a missed jump. The part that still wants to believe a plastic box can open a door.\n\nI guess I do not ultimately know who is taking care of the thing that took care of us. I can only place my hope that someone just like us is. I hope they are inside Nintendo, inside the studios, inside the indie teams, inside the places where decisions still get made by people and not only by forecasts. I hope some of them remember blowing into cartridges and staying up too late under the light of a CRT.\n\n![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3z4vqq.jpg)\n\nVideo games are not just software. They were the preludes and conclusions of our childhood; our safe place to retreat when life was messy. And they are places we still retreat to when we need somewhere to go.\n\nI hope, before too much more of this becomes atrophy and argument, someone remembers to leave the door open.\u00a0Because we\u00a0are still standing there. Older and tired, casually burnt out. Less easily astonished than we once were. But still looking for the lighted room that made the rest of the house feel survivable.",
+        "file": "2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us.md",
+        "publisher": {
+            "schema": "otw.publisher.post",
+            "version": 1,
+            "source": "publisher.html",
+            "subhead": "How the children of cartridges inherited a medium increasingly shaped by risk.",
+            "blocks": [
+                {
+                    "id": "image_mr3tyan6_pyxuvg",
+                    "type": "image",
+                    "imageRef": "image_mr3tyan6_pyxuvg",
+                    "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3tyaxu.jpg",
+                    "objectKey": "narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3tyaxu.jpg",
+                    "displaySize": "small",
+                    "alignment": "center",
+                    "wrapMode": "wrap-left"
+                },
+                {
+                    "id": "paragraph_mr3z7f9g_9e1804",
+                    "type": "paragraph",
+                    "html": "<span>When I was 10 years old, just after school ended on a cold winter Friday, I walked into the local movie rental store off of 500 south in Bountiful, Utah.</span>",
+                    "text": "When I was 10 years old, just after school ended on a cold winter Friday, I walked into the local movie rental store off of 500 south in Bountiful, Utah."
+                },
+                {
+                    "id": "paragraph_mr3z7f9g_4ydpxz",
+                    "type": "paragraph",
+                    "html": "<span>The building had an angled roofline and double doors, and when you stepped inside, the ceiling opened upward with exposed beams that made the place feel larger than it probably was. Huge, at least to me. The counter was near the front middle. To my left, there was a poster of Michael Keaton starring in his latest movie,<span>\u00a0</span></span><em><span>Clean and Sober</span></em><span>. I didn't know what sober meant. That detail, however illogical, is seared into me.</span>",
+                    "text": "The building had an angled roofline and double doors, and when you stepped inside, the ceiling opened upward with exposed beams that made the place feel larger than it probably was. Huge, at least to me. The counter was near the front middle. To my left, there was a poster of Michael Keaton starring in his latest movie,\u00a0Clean and Sober. I didn't know what sober meant. That detail, however illogical, is seared into me."
+                },
+                {
+                    "id": "paragraph_mr3z7f9g_bf92cy",
+                    "type": "paragraph",
+                    "html": "<span>My mom went one way, and I went another. I already knew where I was going. The video game wall was further down the right side, and my only purpose in being there was to see how the rental selection had grown. Opportunity buzzed inside me as I approached the wall of empty boxes, eagerness clouding my vision as I saw the usual suspects.</span>",
+                    "text": "My mom went one way, and I went another. I already knew where I was going. The video game wall was further down the right side, and my only purpose in being there was to see how the rental selection had grown. Opportunity buzzed inside me as I approached the wall of empty boxes, eagerness clouding my vision as I saw the usual suspects."
+                },
+                {
+                    "id": "paragraph_mr3z7f9g_tn4mhr",
+                    "type": "paragraph",
+                    "html": "<span>It was easy to see what was available to rent. The retail packaging was always in front of a nondescript plastic holder with the actual cartridge inside. If the edge of the box wasn't flush with the shelf, you were too late.</span>",
+                    "text": "It was easy to see what was available to rent. The retail packaging was always in front of a nondescript plastic holder with the actual cartridge inside. If the edge of the box wasn't flush with the shelf, you were too late."
+                },
+                {
+                    "id": "paragraph_mr3z7f9g_irb2q5",
+                    "type": "paragraph",
+                    "html": "<span>Move on.</span>",
+                    "text": "Move on."
+                },
+                {
+                    "id": "paragraph_mr3z7f9g_o7mwbf",
+                    "type": "paragraph",
+                    "html": "<span>After cataloging a few new arrivals, my eyes landed on something.</span>",
+                    "text": "After cataloging a few new arrivals, my eyes landed on something."
+                },
+                {
+                    "id": "paragraph_mr3z7f9g_7981w3",
+                    "type": "paragraph",
+                    "html": "<em><span>Friday the 13th.</span></em>",
+                    "text": "Friday the 13th."
+                },
+                {
+                    "id": "paragraph_mr3z7f9g_mvt262",
+                    "type": "paragraph",
+                    "html": "<span>I grabbed both the retail box and the rental and rushed over to my mom. I had to try this game. I'm certain my eyes begged for</span><span>\u00a0the positive answer. She looked hesitantly at the box art, a multi-colored fiasco reminiscent of everything glorious about late \u201980s design, sighed, and nodded her head.</span>",
+                    "text": "I grabbed both the retail box and the rental and rushed over to my mom. I had to try this game. I'm certain my eyes begged for\u00a0the positive answer. She looked hesitantly at the box art, a multi-colored fiasco reminiscent of everything glorious about late \u201980s design, sighed, and nodded her head."
+                },
+                {
+                    "id": "paragraph_mr3z7f9g_78cxf5",
+                    "type": "paragraph",
+                    "html": "<span>We took<span>\u00a0</span></span><em><span>Friday the 13th</span></em><span><span>\u00a0</span>up to the counter, paid the employee, and the next two days of my life were set.</span>",
+                    "text": "We took\u00a0Friday the 13th\u00a0up to the counter, paid the employee, and the next two days of my life were set."
+                },
+                {
+                    "id": "paragraph_mr3rjnbf_hv1scb",
+                    "type": "paragraph",
+                    "html": "My childhood was replete with memories just like this. Christmas mornings that couldn't come soon enough. Late night gaming sessions with my closest friends. Running home from school to grab the latest issue of Nintendo Power from the mailbox. If it sounds like ritual, if I make it sound holy, maybe that's because to me, it filled a vacuum left by areas of my life untreated by normalcy.",
+                    "text": "My childhood was replete with memories just like this. Christmas mornings that couldn't come soon enough. Late night gaming sessions with my closest friends. Running home from school to grab the latest issue of Nintendo Power from the mailbox. If it sounds like ritual, if I make it sound holy, maybe that's because to me, it filled a vacuum left by areas of my life untreated by normalcy."
+                },
+                {
+                    "id": "paragraph_mr3z7f9g_qf5zck",
+                    "type": "paragraph",
+                    "html": "Am I being too grand? Do I spend too much time in vain nostalgic pining? After all...video games are not a hospital or a church. Just entertainment; software. Plastic. Boxes on shelves.",
+                    "text": "Am I being too grand? Do I spend too much time in vain nostalgic pining? After all...video games are not a hospital or a church. Just entertainment; software. Plastic. Boxes on shelves."
+                },
+                {
+                    "id": "paragraph_mr3z7f9h_rokn4a",
+                    "type": "paragraph",
+                    "html": "And yet.",
+                    "text": "And yet."
+                },
+                {
+                    "id": "image_mr3u03ky_vpdqvn",
+                    "type": "image",
+                    "imageRef": "image_mr3u03ky_vpdqvn",
+                    "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3u03pw.jpg",
+                    "objectKey": "narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3u03pw.jpg",
+                    "displaySize": "x-small",
+                    "alignment": "center",
+                    "wrapMode": "wrap-right"
+                },
+                {
+                    "id": "paragraph_mr3z7f9h_23hidb",
+                    "type": "paragraph",
+                    "html": "I<span>f you were born when I was born, video games were not just entertainment. They were part of the fabric of growing up. They were there in basements and wood-paneled bedrooms, in Blockbuster cases and Toys \"R\" Us aisles, in Nintendo Power previews and playground rumors and long summer sleepovers when time seemed inexhaustible.\u00a0</span>",
+                    "text": "If you were born when I was born, video games were not just entertainment. They were part of the fabric of growing up. They were there in basements and wood-paneled bedrooms, in Blockbuster cases and Toys \"R\" Us aisles, in Nintendo Power previews and playground rumors and long summer sleepovers when time seemed inexhaustible."
+                },
+                {
+                    "id": "paragraph_mr3z7f9h_a9v9gn",
+                    "type": "paragraph",
+                    "html": "I was there when N64 controller cables crisscrossed berber carpeting, and four kids sat too close to the television set while playing GoldenEye. We blew into NES cartridges, even though we probably should not have. We stared at box art and invented the game in our heads before we ever played it.",
+                    "text": "I was there when N64 controller cables crisscrossed berber carpeting, and four kids sat too close to the television set while playing GoldenEye. We blew into NES cartridges, even though we probably should not have. We stared at box art and invented the game in our heads before we ever played it."
+                },
+                {
+                    "id": "paragraph_mr3z7f9h_ipzac7",
+                    "type": "paragraph",
+                    "html": "Video games took care of us the way childhood things do. They sure as hell didn't solve anything for us. Rather, they gave us somewhere to go, especially when things got too heavy for a 14 year old, or a 9 year old.",
+                    "text": "Video games took care of us the way childhood things do. They sure as hell didn't solve anything for us. Rather, they gave us somewhere to go, especially when things got too heavy for a 14 year old, or a 9 year old."
+                },
+                {
+                    "id": "quote_mr3z7f9h_4vn6kd",
+                    "type": "quote",
+                    "html": "So consider again the question posed by the title of this essay; Who is taking care of the thing that took care of us?",
+                    "text": "So consider again the question posed by the title of this essay; Who is taking care of the thing that took care of us?"
+                },
+                {
+                    "id": "paragraph_mr3z7f9h_sm2q10",
+                    "type": "paragraph",
+                    "html": "The obvious answer should be us, right?",
+                    "text": "The obvious answer should be us, right?"
+                },
+                {
+                    "id": "paragraph_mr3z7f9h_pla2fu",
+                    "type": "paragraph",
+                    "html": "So yes, maybe we who grew up loving the medium did inherit the industry, or at least enough of it to matter. But we inherited it at the curdled moment it became too expensive, too consolidated, too shareholder-bound, and too afraid of risk to behave like the thing we grew up loving.",
+                    "text": "So yes, maybe we who grew up loving the medium did inherit the industry, or at least enough of it to matter. But we inherited it at the curdled moment it became too expensive, too consolidated, too shareholder-bound, and too afraid of risk to behave like the thing we grew up loving."
+                },
+                {
+                    "id": "paragraph_mr3z7f9h_qegqj3",
+                    "type": "paragraph",
+                    "html": "We did not inherit the basement sleepovers. We inherited the boardroom built on top of them.<br>",
+                    "text": "We did not inherit the basement sleepovers. We inherited the boardroom built on top of them."
+                },
+                {
+                    "id": "image_mr3uowfj_rtvhx3",
+                    "type": "image",
+                    "imageRef": "image_mr3uowfj_rtvhx3",
+                    "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3uows9.jpg",
+                    "objectKey": "narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3uows9.jpg",
+                    "displaySize": "small",
+                    "alignment": "center",
+                    "wrapMode": "wrap-left"
+                },
+                {
+                    "id": "paragraph_mr3z7f9h_1oms0q",
+                    "type": "paragraph",
+                    "html": "<span>By the time the N64 kids were old enough to have authority, the economics\u00a0</span><span>underneath</span><span>\u00a0had changed.\u00a0</span><span>A video game, once a peculiar creation of a small group, something to be discovered in magazines and lucky encounters at the local Fred Meyer</span><span>, was now a multifaceted entity. It was a platform strategy, a revenue forecast, a five-year plan, a franchise pillar, a live-service candidate, a licensing opportunity, and a risk profile.</span><br>",
+                    "text": "By the time the N64 kids were old enough to have authority, the economics\u00a0underneath\u00a0had changed.\u00a0A video game, once a peculiar creation of a small group, something to be discovered in magazines and lucky encounters at the local Fred Meyer, was now a multifaceted entity. It was a platform strategy, a revenue forecast, a five-year plan, a franchise pillar, a live-service candidate, a licensing opportunity, and a risk profile."
+                },
+                {
+                    "id": "paragraph_mr3z7f9h_cv5jqp",
+                    "type": "paragraph",
+                    "html": "<b>And once something becomes that expensive, fear starts making the creative decisions.</b>",
+                    "text": "And once something becomes that expensive, fear starts making the creative decisions."
+                },
+                {
+                    "id": "paragraph_mr3z7f9h_56itvm",
+                    "type": "paragraph",
+                    "html": "And while there are still artists in the room (as well as designers, writers, composers, engineers, and producers) who are trying to infuse wonder into the space, there is always that pressure of fear that lingers. The walls have become thicker, the meetings larger, and the stakes more critical.\u00a0<span>Yes, the people who remember the basement are still there. But too often, they are forced to justify wonder in the language of quarterly growth.</span>",
+                    "text": "And while there are still artists in the room (as well as designers, writers, composers, engineers, and producers) who are trying to infuse wonder into the space, there is always that pressure of fear that lingers. The walls have become thicker, the meetings larger, and the stakes more critical.\u00a0Yes, the people who remember the basement are still there. But too often, they are forced to justify wonder in the language of quarterly growth."
+                },
+                {
+                    "id": "paragraph_mr3z7f9h_e9bnrz",
+                    "type": "paragraph",
+                    "html": "That is a hard space to exist inside of. \u00a0<span>It probably feels impossible.</span>",
+                    "text": "That is a hard space to exist inside of. \u00a0It probably feels impossible."
+                },
+                {
+                    "id": "paragraph_mr3z7f9h_ch1s56",
+                    "type": "paragraph",
+                    "html": "Perhaps that\u2019s why so much of the industry feels haunted now. Haunted, not dead or devoid of brilliance, but haunted by the memory of what games felt like before every aspect of them had to justify their existence through monetization.",
+                    "text": "Perhaps that\u2019s why so much of the industry feels haunted now. Haunted, not dead or devoid of brilliance, but haunted by the memory of what games felt like before every aspect of them had to justify their existence through monetization."
+                },
+                {
+                    "id": "paragraph_mr2kpvea_kwwmjg",
+                    "type": "paragraph",
+                    "html": "T<span>he industry feels exhausted and strangely careless, subject to c</span><span>ancellations and studio closures. Incredibly impersonal layoffs after successful launches. Broken games with day-one patches. Fans treated as both audience and nuisance. Creators treated as replaceable until the game needs a soul, at which point everyone acts surprised that soul isn't outsourced cheaply.</span>",
+                    "text": "The industry feels exhausted and strangely careless, subject to cancellations and studio closures. Incredibly impersonal layoffs after successful launches. Broken games with day-one patches. Fans treated as both audience and nuisance. Creators treated as replaceable until the game needs a soul, at which point everyone acts surprised that soul isn't outsourced cheaply."
+                },
+                {
+                    "id": "paragraph_mr3z7f9h_0sgv3u",
+                    "type": "paragraph",
+                    "html": "I know the root of all this is money. It is always money, or fear of losing it, or the sickness that sets in when making money stops being enough. Modern games are expensive, and the teams that work on them are huge. Investors are impatient and always looking for growth and new sources of revenue. The whole system learned to speak in terms that are aggressively bloodless: E<span>ngagement. Retention. Monthly active users. Conversion.</span>",
+                    "text": "I know the root of all this is money. It is always money, or fear of losing it, or the sickness that sets in when making money stops being enough. Modern games are expensive, and the teams that work on them are huge. Investors are impatient and always looking for growth and new sources of revenue. The whole system learned to speak in terms that are aggressively bloodless: Engagement. Retention. Monthly active users. Conversion."
+                },
+                {
+                    "id": "paragraph_mr3z7f9h_yapbx8",
+                    "type": "paragraph",
+                    "html": "That language itself? \u00a0Well, that's a warning sign in and of itself. Because God knows no child ever sat cross-legged in their basement and thought, \"I hope this experience optimizes retention.\"\u00a0<span>We just wanted to <b>play</b>. We wanted to be somewhere else for a while.</span>",
+                    "text": "That language itself? \u00a0Well, that's a warning sign in and of itself. Because God knows no child ever sat cross-legged in their basement and thought, \"I hope this experience optimizes retention.\"\u00a0We just wanted to play. We wanted to be somewhere else for a while."
+                },
+                {
+                    "id": "paragraph_mr3z7f9h_el5pba",
+                    "type": "paragraph",
+                    "html": "That is why I hold so fast to Nintendo.",
+                    "text": "That is why I hold so fast to Nintendo."
+                },
+                {
+                    "id": "paragraph_mr3z7f9h_15zqze",
+                    "type": "paragraph",
+                    "html": "Nintendo appeared to be the company that truly understood the concept for a very long time. And no, n<span>ot perfectly...but well enough. Nostalgia does, </span>after all<span>, aggressively sand the edges of disappointment. </span>",
+                    "text": "Nintendo appeared to be the company that truly understood the concept for a very long time. And no, not perfectly...but well enough. Nostalgia does, after all, aggressively sand the edges of disappointment."
+                },
+                {
+                    "id": "paragraph_mr2mws6r_j0cr62",
+                    "type": "paragraph",
+                    "html": "<span>But they understood, even under the heavy fire of critics and industry pros, that the graphics race was fruitless if it became the only race. They understood that hardware could still be toy-like, and that the controllers, the box art, the <b>whimsy</b> of all it was not to become trivial.</span>",
+                    "text": "But they understood, even under the heavy fire of critics and industry pros, that the graphics race was fruitless if it became the only race. They understood that hardware could still be toy-like, and that the controllers, the box art, the whimsy of all it was not to become trivial."
+                },
+                {
+                    "id": "paragraph_mr3z7f9h_8rls90",
+                    "type": "paragraph",
+                    "html": "The Nintendo DS was weird, yet it functioned exceptionally well. The Wii was even more peculiar, and we all know how that turned out. The Wii U was a complete mess, but we are still thriving on the legacy of games that flowed from it.",
+                    "text": "The Nintendo DS was weird, yet it functioned exceptionally well. The Wii was even more peculiar, and we all know how that turned out. The Wii U was a complete mess, but we are still thriving on the legacy of games that flowed from it."
+                },
+                {
+                    "id": "paragraph_mr2ju60x_yfafz8",
+                    "type": "paragraph",
+                    "html": "And the Switch, at its best, felt like a fantastic answer to a question we had all been asking without knowing it.",
+                    "text": "And the Switch, at its best, felt like a fantastic answer to a question we had all been asking without knowing it."
+                },
+                {
+                    "id": "paragraph_mr3sb4x7_oxdty4",
+                    "type": "paragraph",
+                    "html": "Nintendo would look at the industry running in one direction and quietly walk away. Sometimes that led to genius, sometimes to confusion. But I respect the refusal. They did not seem desperate to become everyone else.",
+                    "text": "Nintendo would look at the industry running in one direction and quietly walk away. Sometimes that led to genius, sometimes to confusion. But I respect the refusal. They did not seem desperate to become everyone else."
+                },
+                {
+                    "id": "paragraph_mr3z7f9h_7m3sxg",
+                    "type": "paragraph",
+                    "html": "This is why their silence in the current state of the beleaguered gaming industry feels so off to me. And not mysterious, like in years past. Not their usual theatrics, either. \u00a0Just...silent.",
+                    "text": "This is why their silence in the current state of the beleaguered gaming industry feels so off to me. And not mysterious, like in years past. Not their usual theatrics, either. \u00a0Just...silent."
+                },
+                {
+                    "id": "image_mr3uvc84_h6to3v",
+                    "type": "image",
+                    "imageRef": "image_mr3uvc84_h6to3v",
+                    "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3uvchx.jpg",
+                    "objectKey": "narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3uvchx.jpg",
+                    "displaySize": "medium",
+                    "alignment": "center",
+                    "wrapMode": "wrap-left"
+                },
+                {
+                    "id": "paragraph_mr3z7f9h_ta6ebg",
+                    "type": "paragraph",
+                    "html": "Surely, there is a difference. Old Nintendo secrecy felt like ceremony; like a curtain in front of a\u00a0<span>stage. You knew something was behind it. You could feel the heat behind it. How I pine for the days of the magazine covers, the E3 reveals, the demo kiosks, the new Mario games and demos that propelled the hardware into making sense.</span>",
+                    "text": "Surely, there is a difference. Old Nintendo secrecy felt like ceremony; like a curtain in front of a\u00a0stage. You knew something was behind it. You could feel the heat behind it. How I pine for the days of the magazine covers, the E3 reveals, the demo kiosks, the new Mario games and demos that propelled the hardware into making sense."
+                },
+                {
+                    "id": "paragraph_mr3z7f9h_x7fftm",
+                    "type": "paragraph",
+                    "html": "The current silence feels like a closed, nondescript door, a Post-it note affixed, suggesting that everything is fine and that we should simply wait and understand. However, I am writing this to tell the world that I am standing outside that door, holding onto forty years of memories, and wondering if they truly comprehend what we are genuinely requesting.",
+                    "text": "The current silence feels like a closed, nondescript door, a Post-it note affixed, suggesting that everything is fine and that we should simply wait and understand. However, I am writing this to tell the world that I am standing outside that door, holding onto forty years of memories, and wondering if they truly comprehend what we are genuinely requesting."
+                },
+                {
+                    "id": "paragraph_mr3z7f9h_3bk6wj",
+                    "type": "paragraph",
+                    "html": "I don\u2019t need Nintendo to live in the past. I don\u2019t need Mario trapped forever in my childhood, Zelda to apologize for evolving, or Pok\u00e9mon to be targeted at me. My son loves what he loves, and his Nintendo is genuine because it\u2019s not mine. And vice versa.",
+                    "text": "I don\u2019t need Nintendo to live in the past. I don\u2019t need Mario trapped forever in my childhood, Zelda to apologize for evolving, or Pok\u00e9mon to be targeted at me. My son loves what he loves, and his Nintendo is genuine because it\u2019s not mine. And vice versa."
+                },
+                {
+                    "id": "paragraph_mr3z7f9h_7kz701",
+                    "type": "paragraph",
+                    "html": "But I want Nintendo, and the industry as a whole, to remember that the role of stewardship of this industry and medium is important, and it is dramatically different from extraction.\u00a0<span>A steward asks what must be preserved so the thing can keep living. An extractor asks how much can be taken before it collapses. Do we feel the difference yet?</span>",
+                    "text": "But I want Nintendo, and the industry as a whole, to remember that the role of stewardship of this industry and medium is important, and it is dramatically different from extraction.\u00a0A steward asks what must be preserved so the thing can keep living. An extractor asks how much can be taken before it collapses. Do we feel the difference yet?"
+                },
+                {
+                    "id": "paragraph_mr3z7f9h_f8fzut",
+                    "type": "paragraph",
+                    "html": "<span>This is what I mean.</span>\u00a0 Too often, games feel managed by extraction criteria. Wrench out more money from players, get every last drop of labor from developers, trigger every last bit of nostalgia from aging fans, siphon more attention from children. At some point, don't we all stop feeling like participants? Instead, maybe we all start feeling like a resource.",
+                    "text": "This is what I mean.\u00a0 Too often, games feel managed by extraction criteria. Wrench out more money from players, get every last drop of labor from developers, trigger every last bit of nostalgia from aging fans, siphon more attention from children. At some point, don't we all stop feeling like participants? Instead, maybe we all start feeling like a resource."
+                },
+                {
+                    "id": "paragraph_mr3z7f9h_b2ixxd",
+                    "type": "paragraph",
+                    "html": "That is a poisonous thing to do to <b>play</b>.",
+                    "text": "That is a poisonous thing to do to play."
+                },
+                {
+                    "id": "paragraph_mr3z7f9h_99472k",
+                    "type": "paragraph",
+                    "html": "Play is delicate, but not fragile in the way the word suggests. It can survive frustration and \u00a0difficulty. It can outlast waiting, bad graphics, weird controllers, glitches, and loading times. We know this because some of the greatest games ever made survived all of those things.",
+                    "text": "Play is delicate, but not fragile in the way the word suggests. It can survive frustration and \u00a0difficulty. It can outlast waiting, bad graphics, weird controllers, glitches, and loading times. We know this because some of the greatest games ever made survived all of those things."
+                },
+                {
+                    "id": "paragraph_mr3z7f9h_hv1gcm",
+                    "type": "paragraph",
+                    "html": "What play has a harder time surviving is <b>contempt</b>. <span>Even unintentionally, the industry oozes contempt for developers, for physical ownership, for the idea of a finished game, and the unique, sacred relationship people form within the worlds that shaped them.</span>",
+                    "text": "What play has a harder time surviving is contempt. Even unintentionally, the industry oozes contempt for developers, for physical ownership, for the idea of a finished game, and the unique, sacred relationship people form within the worlds that shaped them."
+                },
+                {
+                    "id": "paragraph_mr3z7f9h_j24jdg",
+                    "type": "paragraph",
+                    "html": "Haha. Maybe that sounds too precious. Maybe it is?",
+                    "text": "Haha. Maybe that sounds too precious. Maybe it is?"
+                },
+                {
+                    "id": "paragraph_mr3z7f9h_1m7gki",
+                    "type": "paragraph",
+                    "html": "But I remember how it felt! I remember going into stores just to stand near the games. The neon tubes and cardboard standees. The agony of waiting for the next issue of Nintendo Power. The little emotional earthquake of seeing and experiencing a new Super Mario game.",
+                    "text": "But I remember how it felt! I remember going into stores just to stand near the games. The neon tubes and cardboard standees. The agony of waiting for the next issue of Nintendo Power. The little emotional earthquake of seeing and experiencing a new Super Mario game."
+                },
+                {
+                    "id": "paragraph_mr3z7f9h_qsu384",
+                    "type": "paragraph",
+                    "html": "My soul felt literal weight. The games themselves? They occupied actual space, both in the world and in my heart.",
+                    "text": "My soul felt literal weight. The games themselves? They occupied actual space, both in the world and in my heart."
+                },
+                {
+                    "id": "paragraph_mr3z7f9h_r8vobe",
+                    "type": "paragraph",
+                    "html": "I understand that the world has changed significantly. Today, children and young adults find their own sense of magic in places like Fortnite lobbies and Adopt Me sessions. These are games that I do not play, nor fully comprehend. I am also not naive enough to believe that the disappearance of my rituals means the disappearance of theirs.",
+                    "text": "I understand that the world has changed significantly. Today, children and young adults find their own sense of magic in places like Fortnite lobbies and Adopt Me sessions. These are games that I do not play, nor fully comprehend. I am also not naive enough to believe that the disappearance of my rituals means the disappearance of theirs."
+                },
+                {
+                    "id": "image_mr3v3gpp_43yci9",
+                    "type": "image",
+                    "imageRef": "image_mr3v3gpp_43yci9",
+                    "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3v3h09.jpg",
+                    "objectKey": "narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3v3h09.jpg",
+                    "displaySize": "medium",
+                    "alignment": "center",
+                    "wrapMode": "wrap-right"
+                },
+                {
+                    "id": "paragraph_mr3z7f9h_j61xq7",
+                    "type": "paragraph",
+                    "html": "But I am concerned that the gaming industry has mistaken availability for wonder. Everything\u00a0<span>is available, yet less tangible. A game can be announced, leaked, datamined, patched, apologized for, monetized, and recontextualized before it even has the chance to exist in our imaginations.</span>",
+                    "text": "But I am concerned that the gaming industry has mistaken availability for wonder. Everything\u00a0is available, yet less tangible. A game can be announced, leaked, datamined, patched, apologized for, monetized, and recontextualized before it even has the chance to exist in our imaginations."
+                },
+                {
+                    "id": "paragraph_mr3z7f9h_46ybhq",
+                    "type": "paragraph",
+                    "html": "This isn\u2019t entirely anyone\u2019s fault. It\u2019s the nature of the modern world. The machine feeds on information, and we all participate in it. Companies tease, insiders leak, fans speculate, algorithms amplify, dataminers excavate, and the marketing cycle begins earlier and earlier, making the game feel almost late to its own arrival.",
+                    "text": "This isn\u2019t entirely anyone\u2019s fault. It\u2019s the nature of the modern world. The machine feeds on information, and we all participate in it. Companies tease, insiders leak, fans speculate, algorithms amplify, dataminers excavate, and the marketing cycle begins earlier and earlier, making the game feel almost late to its own arrival."
+                },
+                {
+                    "id": "paragraph_mr3z7f9h_czq1r7",
+                    "type": "paragraph",
+                    "html": "Waiting used to be unpleasant. I don\u2019t want to deny that. It could be maddening, especially when you were young, powerless, and dependent on parents, allowance, birthdays, Christmas, rentals, and the mysterious supply chain of a local store.",
+                    "text": "Waiting used to be unpleasant. I don\u2019t want to deny that. It could be maddening, especially when you were young, powerless, and dependent on parents, allowance, birthdays, Christmas, rentals, and the mysterious supply chain of a local store."
+                },
+                {
+                    "id": "paragraph_mr3z7f9h_paob5d",
+                    "type": "paragraph",
+                    "html": "However, waiting also gave our imaginations a chance to grow. We had time to live with a screenshot, turn rumors over in our heads, stare at a box in a magazine until the game inside it became partly real, and let anticipation gather weight.",
+                    "text": "However, waiting also gave our imaginations a chance to grow. We had time to live with a screenshot, turn rumors over in our heads, stare at a box in a magazine until the game inside it became partly real, and let anticipation gather weight."
+                },
+                {
+                    "id": "paragraph_mr3z7f9h_rhtpey",
+                    "type": "paragraph",
+                    "html": "Now, we are constantly fed and rarely nourished. So, do I expect too much of my peers? Maybe.",
+                    "text": "Now, we are constantly fed and rarely nourished. So, do I expect too much of my peers? Maybe."
+                },
+                {
+                    "id": "paragraph_mr3z7f9h_4zk0qq",
+                    "type": "paragraph",
+                    "html": "But I don\u2019t think the answer is as simple as saying we loved the thing as children and then failed it as adults. That feels too simplistic and perhaps too harsh. Loving a thing as a child doesn\u2019t automatically teach you how to protect it within the industry. It doesn\u2019t teach you how to survive budgets, shareholders, platform demands, layoffs, licensing agreements, production timelines, subscription models, and the complex mathematics of modern risk.",
+                    "text": "But I don\u2019t think the answer is as simple as saying we loved the thing as children and then failed it as adults. That feels too simplistic and perhaps too harsh. Loving a thing as a child doesn\u2019t automatically teach you how to protect it within the industry. It doesn\u2019t teach you how to survive budgets, shareholders, platform demands, layoffs, licensing agreements, production timelines, subscription models, and the complex mathematics of modern risk."
+                },
+                {
+                    "id": "quote_mr3z7f9h_3umnsm",
+                    "type": "quote",
+                    "html": "<b>Sometimes, love gets into the building and still loses the meeting. </b>Sometimes, the people who remember the basement are there, doing their best, but the room is speaking a foreign language.",
+                    "text": "Sometimes, love gets into the building and still loses the meeting. Sometimes, the people who remember the basement are there, doing their best, but the room is speaking a foreign language."
+                },
+                {
+                    "id": "paragraph_mr3z7f9h_d4zxep",
+                    "type": "paragraph",
+                    "html": "That\u2019s the aspect I keep returning to. The understanding of the immense power games possess is invaluable knowledge for artists. However, it poses a significant risk to marketers. In a thriving industry, artists would take the lead, leveraging this knowledge, while marketers would assist in disseminating it to the world. But today, the current order has been reversed.",
+                    "text": "That\u2019s the aspect I keep returning to. The understanding of the immense power games possess is invaluable knowledge for artists. However, it poses a significant risk to marketers. In a thriving industry, artists would take the lead, leveraging this knowledge, while marketers would assist in disseminating it to the world. But today, the current order has been reversed."
+                },
+                {
+                    "id": "paragraph_mr3z7f9i_hmb4tm",
+                    "type": "paragraph",
+                    "html": "Sigh. Perhaps all industries undergo a similar transformation. Maybe this is what happens. Wild creativity becomes culture. Culture hardens into business. Then the business learns to defend itself against the very culture that made it valuable. \u00a0<span>Nevertheless, I refuse to relinquish that easily.</span>",
+                    "text": "Sigh. Perhaps all industries undergo a similar transformation. Maybe this is what happens. Wild creativity becomes culture. Culture hardens into business. Then the business learns to defend itself against the very culture that made it valuable. \u00a0Nevertheless, I refuse to relinquish that easily."
+                },
+                {
+                    "id": "quote_mr3z7f9i_1qdcni",
+                    "type": "quote",
+                    "html": "The truth is, the industry is still alive.",
+                    "text": "The truth is, the industry is still alive."
+                },
+                {
+                    "id": "paragraph_mr3z7f9i_86eehf",
+                    "type": "paragraph",
+                    "html": "You can still sense it when a game is crafted with meticulous care. When a developer places their trust in the player. When an unconventional idea withstands the scrutiny of a meeting. When a soundtrack knows precisely where to strike the right chord. When a game arrives, and for a fleeting moment, the old circuit lights up again.",
+                    "text": "You can still sense it when a game is crafted with meticulous care. When a developer places their trust in the player. When an unconventional idea withstands the scrutiny of a meeting. When a soundtrack knows precisely where to strike the right chord. When a game arrives, and for a fleeting moment, the old circuit lights up again."
+                },
+                {
+                    "id": "paragraph_mr3z7f9i_qkgbsz",
+                    "type": "paragraph",
+                    "html": "That is what I want from Nintendo. Not perfection. Not constant announcements. Not a direct pipeline from my childhood preferences to their release calendar.",
+                    "text": "That is what I want from Nintendo. Not perfection. Not constant announcements. Not a direct pipeline from my childhood preferences to their release calendar."
+                },
+                {
+                    "id": "paragraph_mr3z7f9i_90hrd5",
+                    "type": "paragraph",
+                    "html": "Just evidence of care. Evidence that someone remembers the craft is not valuable only because it can be licensed, filmed, bundled, and sold again. It is valuable because it meant something. It taught kids how to wait, how to share, how to fail and try again. It made lonely afternoons less lonely and Christmas mornings impossible to sleep through. It gave shape to chapters of our lives before we knew they were chapters.",
+                    "text": "Just evidence of care. Evidence that someone remembers the craft is not valuable only because it can be licensed, filmed, bundled, and sold again. It is valuable because it meant something. It taught kids how to wait, how to share, how to fail and try again. It made lonely afternoons less lonely and Christmas mornings impossible to sleep through. It gave shape to chapters of our lives before we knew they were chapters."
+                },
+                {
+                    "id": "paragraph_mr3z7f9i_vl93et",
+                    "type": "paragraph",
+                    "html": "That is not nothing. That is not just content.",
+                    "text": "That is not nothing. That is not just content."
+                },
+                {
+                    "id": "paragraph_mr3z7f9i_f3yo87",
+                    "type": "paragraph",
+                    "html": "So when Nintendo goes quiet, when studios close and games vanish before they are born, I feel something more complicated than disappointment.\u00a0<span>I feel protective. </span>",
+                    "text": "So when Nintendo goes quiet, when studios close and games vanish before they are born, I feel something more complicated than disappointment.\u00a0I feel protective."
+                },
+                {
+                    "id": "paragraph_mr3vsknj_23x197",
+                    "type": "paragraph",
+                    "html": "<span>Protective of the thing that protected a part of me. The part that stood in the aisles with no money, but all the time in the world. The part that believed the kid on the playground with the relative that worked at Nintendo. The part that sat on the floor with friends, cables everywhere, laughing too hard at a </span>sudden<span>\u00a0loss or a blue shell or a missed jump. The part that still wants to believe a plastic box can open a door.</span>",
+                    "text": "Protective of the thing that protected a part of me. The part that stood in the aisles with no money, but all the time in the world. The part that believed the kid on the playground with the relative that worked at Nintendo. The part that sat on the floor with friends, cables everywhere, laughing too hard at a sudden\u00a0loss or a blue shell or a missed jump. The part that still wants to believe a plastic box can open a door."
+                },
+                {
+                    "id": "paragraph_mr3z7f9i_y53ij6",
+                    "type": "paragraph",
+                    "html": "I guess I do not ultimately know who is taking care of the thing that took care of us. I can only place my hope that someone just like us is. I hope they are inside Nintendo, inside the studios, inside the indie teams, inside the places where decisions still get made by people and not only by forecasts. I hope some of them remember blowing into cartridges and staying up too late under the light of a CRT.",
+                    "text": "I guess I do not ultimately know who is taking care of the thing that took care of us. I can only place my hope that someone just like us is. I hope they are inside Nintendo, inside the studios, inside the indie teams, inside the places where decisions still get made by people and not only by forecasts. I hope some of them remember blowing into cartridges and staying up too late under the light of a CRT."
+                },
+                {
+                    "id": "image_mr3z4vg4_50s1ay",
+                    "type": "image",
+                    "imageRef": "image_mr3z4vg4_50s1ay",
+                    "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3z4vqq.jpg",
+                    "objectKey": "narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3z4vqq.jpg",
+                    "displaySize": "medium",
+                    "alignment": "center",
+                    "wrapMode": "wrap-left"
+                },
+                {
+                    "id": "paragraph_mr3z7f9i_10p89n",
+                    "type": "paragraph",
+                    "html": "<span>Video games are not just software. They were the preludes and conclusions of our childhood; our safe place to retreat when life was messy. And they are places we still retreat to when we need somewhere to go.\u00a0</span><br>",
+                    "text": "Video games are not just software. They were the preludes and conclusions of our childhood; our safe place to retreat when life was messy. And they are places we still retreat to when we need somewhere to go."
+                },
+                {
+                    "id": "paragraph_mr3z7f9i_ghvfqs",
+                    "type": "paragraph",
+                    "html": "I hope, before too much more of this becomes atrophy and argument, someone remembers to leave the door open.\u00a0Because we<span>\u00a0are still standing there. Older and tired, casually burnt out. Less easily astonished than we once were. But still looking for the lighted room that made the rest of the house feel survivable.</span>",
+                    "text": "I hope, before too much more of this becomes atrophy and argument, someone remembers to leave the door open.\u00a0Because we\u00a0are still standing there. Older and tired, casually burnt out. Less easily astonished than we once were. But still looking for the lighted room that made the rest of the house feel survivable."
+                }
+            ],
+            "images": [
+                {
+                    "id": "image_mr3tyan6_pyxuvg",
+                    "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3tyaxu.jpg",
+                    "objectKey": "narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3tyaxu.jpg",
+                    "alt": "Narrative image",
+                    "caption": "",
+                    "displaySize": "small",
+                    "alignment": "center",
+                    "wrapMode": "wrap-left"
+                },
+                {
+                    "id": "image_mr3u03ky_vpdqvn",
+                    "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3u03pw.jpg",
+                    "objectKey": "narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3u03pw.jpg",
+                    "alt": "Narrative image",
+                    "caption": "",
+                    "displaySize": "x-small",
+                    "alignment": "center",
+                    "wrapMode": "wrap-right"
+                },
+                {
+                    "id": "image_mr3uowfj_rtvhx3",
+                    "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3uows9.jpg",
+                    "objectKey": "narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3uows9.jpg",
+                    "alt": "Narrative image",
+                    "caption": "",
+                    "displaySize": "small",
+                    "alignment": "center",
+                    "wrapMode": "wrap-left"
+                },
+                {
+                    "id": "image_mr3uvc84_h6to3v",
+                    "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3uvchx.jpg",
+                    "objectKey": "narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3uvchx.jpg",
+                    "alt": "Narrative image",
+                    "caption": "",
+                    "displaySize": "medium",
+                    "alignment": "center",
+                    "wrapMode": "wrap-left"
+                },
+                {
+                    "id": "image_mr3v3gpp_43yci9",
+                    "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3v3h09.jpg",
+                    "objectKey": "narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3v3h09.jpg",
+                    "alt": "Narrative image",
+                    "caption": "",
+                    "displaySize": "medium",
+                    "alignment": "center",
+                    "wrapMode": "wrap-right"
+                },
+                {
+                    "id": "image_mr3z4vg4_50s1ay",
+                    "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3z4vqq.jpg",
+                    "objectKey": "narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3z4vqq.jpg",
+                    "alt": "Narrative image",
+                    "caption": "",
+                    "displaySize": "medium",
+                    "alignment": "center",
+                    "wrapMode": "wrap-left"
+                }
+            ]
+        },
+        "post_id": "July 1, 2026--who-is-taking-care-of-the-thing-that-took-care-of-us",
+        "share_path": "archive/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us.html",
+        "og_image": "Images/og/archive/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us.png"
+    },
+    {
         "title": "Every Solution Has an Expiration Date",
         "date": "June 18, 2026",
         "body": "_On adulthood, technological fragility, and the exhaustion beneath adaptation._\n\n**I've had some less-than-casual observations** lately about the world we find ourselves in. This began as a stream-of-thought essay, so prepare yourselves.\n\nExample: the surging prices of technological commodities such as RAM. Tim Cook explained it during a recent interview as a \u201c100-year flood,\u201d the likes of which he admitted he had not experienced in any area during his 40 years in the industry.\n\nIt all feels so...exhausting.\n\nAs a 47-year-old with the first vestiges of retirement just beginning to dawn on me, it really does feel like something new is more expensive each time I wake up. And as a functioning adult with children to clothe, bills to pay, and a future to somehow prepare for, I adjust. That is what adults do. We make the math work until the math changes again.\n\nGas is expensive, so I drive electric. Air conditioning is expensive, so I replace my roof with materials that are supposed to save money. Clothes, technology, cars, cell phones...it's all seemingly out of control. So I adapt, I move on.\n\nBut then letters arrive from SRP, saying my electricity plan will go away soon. The HOA says they must increase our rates. Car insurance fluctuates for no damn reason at all, causing consumers to hop around every 6-12 months.\n\n**Here in the American West,** even the weather feels like part of the negotiation now: heat, water, power, insurance, roof materials, utility plans, and the creeping sense that daily life itself is becoming more expensive to maintain.\n\nAnd these little magic rectangles in our back pockets that ping us every 15 seconds, reminding us just how narrow the ledge is that we find ourselves walking on? The human brain was not programmed to connect to and consume the amount of data that we feed ourselves daily.\n\nAnd please, let's not get started on food pricing. Great heaven above; we haven't seen\u00a0_any_\u00a0recovery since COVID-19. It genuinely feels like every corporation in America saw the chance to raise prices and never looked back. There are outliers. Costco, I'm looking fondly at you. But by and large, inflationary practices are here to stay.\n\nThe feeling is not simply that things are changing. Things have always changed. The feeling is that I am being asked to keep adapting faster than I can recover from the last adaptation. **At some point, adaptation itself becomes the burden.**\n\n**And jumping back **to matters of technology, as an IT professional, I've gradually felt the soles of my shoes split apart on the razor's edge we tread upon daily. The more I learn, the more powerless I feel.\n\nIt's absolutely astounding how reliant we are upon fragile networks and systems. As the years wear on, we comfort ourselves more profoundly within ecosystems and promises. Just this week, I witnessed the degradation of a tiny sliver of the systems that keep our lives afloat, and it terrified me in no small measure.\n\nI cannot imagine the constant state of tension companies like Google, Amazon, Apple, et al. feel as they implement even the smallest changes.\n\nTake, for example, a minor behind-the-scenes adjustment Google rolled out to its global content servers this week. The tweak accidentally caused Google\u2019s systems to act like an excited security guard at a public library, suddenly demanding to see an ID badge from anyone trying to walk through the digital doors.\n\nFor standard personal computers, the request went completely unnoticed because everyday users don't carry those types of digital badges. But company-managed MacBooks, which we use in greater numbers at my employer, are embedded with an invisible security certificate from corporate management platforms like Mosyle.\n\nWell, the internet browser got totally tripped up.\n\nRecognizing that the computer\u00a0_did_\u00a0have a badge on hand, it began frantically throwing up confusing pop-up windows, asking bewildered employees if they wanted to hand over their corporate enrollment credentials just to open a Google Doc or load an email profile picture.\n\nIt was a completely harmless ghost in the machine, but it perfectly illustrates how a single line of misplaced code altered in Silicon Valley can instantly trigger false alarms and IT panics for thousands of businesses around the world.\n\n**Because of these issues **this week, I felt the ripples of at least a half-dozen red herrings as I tried to troubleshoot numerous other problems at work. Part of it is just my own tendency to overreact and hallucinate root causes that don't exist. But the greater part is that these root issues can be very, very real...and very, very hard to diagnose in real time.\n\nAnyway, it all adds up to a weighty feeling on my soul. A trepidatious feeling of anxiety as I look into the not-so-distant future, as well as the world I will retire into in just 20 years\u2019 time.\n\nHow on earth will I keep up with all of the technological innovations and disruptions that take place over the next two decades? It makes me exhausted just thinking about it. I've already had to completely give up on ever trying to understand the world of cryptocurrency. And it's taken a significant toll on my physical, spiritual, and emotional battery to keep up with the world of AI.\n\n**In a tangential thought about AI**, I witnessed the most remarkable video online today, where comedian Jimmy Carr was doing some crowd work. He was asked what he thought about AI, and here's the basic summation of his answer.\n\n### The Four Great Humiliations:\n\n> \u201cI think there have been three great humiliations for humanity...\u201d\n\n**The First Humiliation, Copernicus: **he told us that we weren't the center of the universe.\n\n**The Second Humiliation, Darwin:** he told us that we're no different from the animals.\n\n**The Third Humiliation, Freud:** he told us we're not even in control of our own minds. There is our subconscious and our conscious mind, and we're not driving.\n\n**The Fourth Humiliation, AI:** we are now not even the smartest thing on Earth.\n\nGolly, but that certainly describes some of the currents churning just under the surface of my daily inner dialogue.\n\nWhether or not you subscribe to the thought that AI is actually \u201csmart,\u201d its mere existence is rewriting the human experience on the macro and micro level. It changes how we work, how we play, how we plan. And society as a whole has invested billions and billions of dollars into it, feeding this soulless entity all of the nutrients it needs to keep growing and \u201clearning.\u201d\n\n**And, by the way**, these resources we pour into AI? They\u2019re scarce. Water, electricity, GPUs, RAM...and we, you and me, will be the ones who ultimately pay the price for where this technology goes.\n\nThis is not an anti-AI rant. What's more, the irony in this associative little essay may be the fact that AI might just be the vehicle that allows me to endure the next two decades of technological advancement without severe burnout.\n\nBut for now, for this exact moment, my soft, mushy human brain is just about at capacity. My ability to see what's next for me is severely diminished, and it's not just because of my own anxious tendencies anymore.\n\nIt's something a bit deeper than that.\n\n**Something a bit more sinister.**\n\nIt's my own precarious position within that Fourth Humiliation, **and my faltering ability to keep up with it.**",
