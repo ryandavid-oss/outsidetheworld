@@ -164,8 +164,8 @@ Date: July 5, 2026
     {
       "id": "paragraph_mr8gw328_4cjugi",
       "type": "paragraph",
-      "html": "I believe, my dear world, because \u003ci\u003ean open heaven speaks to my soul more than a God who doesn't speak to his children\u003c/i\u003e. Human language is unstable, scripture is mediated, memory is fragile, prophets are human, and God, if He is still speaking, would need to keep speaking.\u0026nbsp;",
-      "text": "I believe, my dear world, because an open heaven speaks to my soul more than a God who doesn't speak to his children. Human language is unstable, scripture is mediated, memory is fragile, prophets are human, and God, if He is still speaking, would need to keep speaking."
+      "html": "I believe, my dear world, because \u003ci\u003ean open heaven speaks to my soul more than a God who doesn't speak to his children\u003c/i\u003e. Human language is unstable, scripture is mediated, memory is fragile, prophets are human, and God needs to keep speaking through it all.\u0026nbsp;",
+      "text": "I believe, my dear world, because an open heaven speaks to my soul more than a God who doesn't speak to his children. Human language is unstable, scripture is mediated, memory is fragile, prophets are human, and God needs to keep speaking through it all."
     },
     {
       "id": "paragraph_mr8gw328_5rca1h",
@@ -251,7 +251,7 @@ But my unsolicited advice is to know what clothes you put on in the morning; rea
 
 My bias is not hidden. I still believe in the Restoration. Not because every answer satisfies me. Today in particular, not many answers give me even the semblance of peace. I have eyes opened wide enough to realize that our present course is just as untidy as our pockmarked history. And it frustrates me more than I have time to explain.
 
-I believe, my dear world, because _an open heaven speaks to my soul more than a God who doesn't speak to his children_. Human language is unstable, scripture is mediated, memory is fragile, prophets are human, and God, if He is still speaking, would need to keep speaking.
+I believe, my dear world, because _an open heaven speaks to my soul more than a God who doesn't speak to his children_. Human language is unstable, scripture is mediated, memory is fragile, prophets are human, and God needs to keep speaking through it all.
 
 I believe in the Restoration less like a person defending their faith, and more like a person listening to God and looking for Jesus.
 
