@@ -127,6 +127,7 @@
         .work-card h2 a {
             -webkit-box-decoration-break: clone;
             box-decoration-break: clone;
+            overflow-wrap: anywhere;
             transition:
                 background-position 160ms ease,
                 color 160ms ease,
@@ -567,6 +568,7 @@
         }
 
         .lead-art img {
+            display: block;
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -620,6 +622,7 @@
         }
 
         .rail-item img {
+            display: block;
             width: 100%;
             aspect-ratio: 16 / 10;
             object-fit: cover;
@@ -669,6 +672,7 @@
         }
 
         .story-card img {
+            display: block;
             width: calc(100% + 2.1rem);
             max-width: none;
             margin: -1.05rem -1.05rem 0;
@@ -880,7 +884,8 @@
 
             .lead-story h1 {
                 max-width: 14ch;
-                font-size: clamp(2rem, 9vw, 3.15rem);
+                font-size: clamp(2rem, 8.5vw, 3.05rem);
+                line-height: 1;
                 letter-spacing: -0.025em;
             }
 
@@ -1061,49 +1066,49 @@
         <main class="front-page" aria-label="Outside The World front page">
             <div class="front-grid">
                 <div class="main-column">
-                    <article class="lead-story" aria-labelledby="lead-title">
+                    <article class="lead-story" aria-labelledby="lead-title" data-frontpage-slot="leadStory">
                         <div class="lead-copy">
                             <div>
-                                <span class="eyebrow">Latest essay</span>
-                                <h1 id="lead-title"><a href="archive/2026-07-02-religion-fills-me-with-anger-god-does-not.html">Religion fills me with anger. God does not.</a></h1>
+                                <span class="eyebrow" data-frontpage-tag>Latest essay</span>
+                                <h1 id="lead-title"><a data-frontpage-link href="archive/2026-07-02-religion-fills-me-with-anger-god-does-not.html">Religion fills me with anger. God does not.</a></h1>
                             </div>
-                            <p class="lead-dek">P.S.: agency is not an excuse for lazy certainty.</p>
-                            <div class="story-meta">
+                            <p class="lead-dek" data-frontpage-description>P.S.: agency is not an excuse for lazy certainty.</p>
+                            <div class="story-meta" data-frontpage-meta>
                                 <span>July 5, 2026</span>
                                 <span>Essay</span>
                                 <span>Current narrative</span>
                             </div>
-                            <a class="story-link" href="archive/2026-07-02-religion-fills-me-with-anger-god-does-not.html">Continue reading &rarr;</a>
+                            <a class="story-link" data-frontpage-cta href="archive/2026-07-02-religion-fills-me-with-anger-god-does-not.html">Continue reading &rarr;</a>
                         </div>
-                        <a class="lead-art" href="archive/2026-07-02-religion-fills-me-with-anger-god-does-not.html" aria-label="Continue reading Religion fills me with anger. God does not.">
-                            <img src="https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-02-religion-fills-me-with-anger-mr8g848e.jpg" alt="Narrative image" />
+                        <a class="lead-art" data-frontpage-art href="archive/2026-07-02-religion-fills-me-with-anger-god-does-not.html" aria-label="Continue reading Religion fills me with anger. God does not.">
+                            <img data-frontpage-image src="https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-02-religion-fills-me-with-anger-mr8g848e.jpg" alt="Image for Religion fills me with anger. God does not." decoding="async" />
                         </a>
                     </article>
 
                     <section class="modules" aria-label="More to read and see">
-                        <article class="story-card">
-                            <img src="Images/archive/2026-06-18-every-solution-has-an-expiration-date.png" alt="Desert neighborhood at dusk" />
-                            <span class="tag">Essay · June 18, 2026</span>
-                            <h2><a href="archive/2026-06-18-every-solution-has-an-expiration-date.html">Every Solution Has an Expiration Date</a></h2>
-                            <p>On adulthood, technological fragility, and the exhaustion beneath adaptation.</p>
+                        <article class="story-card" data-frontpage-slot="moduleEssay">
+                            <img data-frontpage-image src="Images/archive/2026-06-18-every-solution-has-an-expiration-date.png" alt="Image for Every Solution Has an Expiration Date" loading="lazy" decoding="async" />
+                            <span class="tag" data-frontpage-tag>Essay · June 18, 2026</span>
+                            <h2><a data-frontpage-link href="archive/2026-06-18-every-solution-has-an-expiration-date.html">Every Solution Has an Expiration Date</a></h2>
+                            <p data-frontpage-description>On adulthood, technological fragility, and the exhaustion beneath adaptation.</p>
                         </article>
-                        <article class="story-card">
-                            <img src="https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/2026-06-19.jpg" alt="" />
-                            <span class="tag">Image · June 19, 2026</span>
-                            <h2><a href="image_of_the_day.html">GOOD_STUFF_ARIZONA</a></h2>
-                            <p>Take me back to my staycation.</p>
+                        <article class="story-card" data-frontpage-slot="moduleImageLatest">
+                            <img data-frontpage-image src="https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/2026-07-06.jpg" alt="XTA" loading="lazy" decoding="async" />
+                            <span class="tag" data-frontpage-tag>Image · July 6, 2026</span>
+                            <h2><a data-frontpage-link href="image_of_the_day.html">XTA</a></h2>
+                            <p data-frontpage-description>The more &ldquo;XTA&rdquo; I see on my receipt, the better.</p>
                         </article>
-                        <article class="story-card">
-                            <img src="Images/poetry/permission-to-fall.jpg" alt="" />
-                            <span class="tag">Poem · June 24, 2026</span>
-                            <h2><a href="drift_poetry.html?poem=living-poem-2026-06-24-permission-to-fall">Permission to Fall</a></h2>
-                            <p>Television static street, corn stalk impressions, and leaves letting go too soon.</p>
+                        <article class="story-card" data-frontpage-slot="moduleDriftPrevious">
+                            <img data-frontpage-image src="Images/poetry/permission-to-fall.jpg" alt="Permission to Fall artwork" loading="lazy" decoding="async" />
+                            <span class="tag" data-frontpage-tag>Poem · June 24, 2026</span>
+                            <h2><a data-frontpage-link href="drift_poetry.html?poem=living-poem-2026-06-24-permission-to-fall">Permission to Fall</a></h2>
+                            <p data-frontpage-description>Television static street, corn stalk impressions, and leaves letting go too soon.</p>
                         </article>
-                        <article class="story-card">
-                            <img src="Images/IOTD/2026-03-19.jpg" alt="" />
-                            <span class="tag">Image · March 19, 2026</span>
-                            <h2><a href="image_of_the_day.html">WINDOW_VISITATION</a></h2>
-                            <p>A small interruption at the window.</p>
+                        <article class="story-card" data-frontpage-slot="moduleImagePrevious">
+                            <img data-frontpage-image src="https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/2026-06-21.jpg" alt="AIRPORT_OR_HOSPITAL?" loading="lazy" decoding="async" />
+                            <span class="tag" data-frontpage-tag>Image · June 21, 2026</span>
+                            <h2><a data-frontpage-link href="image_of_the_day.html">AIRPORT_OR_HOSPITAL?</a></h2>
+                            <p data-frontpage-description>From the Image of the Day run.</p>
                         </article>
                     </section>
                 </div>
@@ -1112,19 +1117,19 @@
                     <header>
                         <p class="section-label" id="rail-title">Alive now</p>
                     </header>
-                    <article class="rail-item">
-                        <span class="tag">Previous essay</span>
-                        <img src="https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3tyaxu.jpg" alt="Narrative image" />
-                        <h2><a href="archive/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us.html">Who Is Taking Care of the Thing That Took Care of Us?</a></h2>
-                        <p>How the children of cartridges inherited a medium increasingly shaped by risk.</p>
+                    <article class="rail-item" data-frontpage-slot="railPreviousEssay">
+                        <span class="tag" data-frontpage-tag>Previous essay</span>
+                        <img data-frontpage-image src="https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3tyaxu.jpg" alt="Image for Who Is Taking Care of the Thing That Took Care of Us?" loading="lazy" decoding="async" />
+                        <h2><a data-frontpage-link href="archive/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us.html">Who Is Taking Care of the Thing That Took Care of Us?</a></h2>
+                        <p data-frontpage-description>How the children of cartridges inherited a medium increasingly shaped by risk.</p>
                     </article>
-                    <article class="rail-item">
-                        <span class="tag">The Drift</span>
-                        <img src="Images/poetry/terrible-nothing.jpg" alt="" />
-                        <h2><a href="drift_poetry.html?poem=living-poem-2026-06-29-terrible-nothing">Terrible Nothing</a></h2>
-                        <p>June 29, 2026</p>
+                    <article class="rail-item" data-frontpage-slot="railLatestDrift">
+                        <span class="tag" data-frontpage-tag>The Drift</span>
+                        <img data-frontpage-image src="Images/poetry/terrible-nothing.jpg" alt="Terrible Nothing artwork" loading="lazy" decoding="async" />
+                        <h2><a data-frontpage-link href="drift_poetry.html?poem=living-poem-2026-06-29-terrible-nothing">Terrible Nothing</a></h2>
+                        <p data-frontpage-description>June 29, 2026</p>
                     </article>
-                    <article class="rail-item fragment-rotator" id="fragmentRotator">
+                    <article class="rail-item fragment-rotator" id="fragmentRotator" data-frontpage-slot="railFragments">
                         <span class="tag" id="fragmentRotatorTag">frgmnt</span>
                         <a class="fragment-rotator__body" id="fragmentRotatorLink" href="fragments.html?entry=20260331021459157--i-think-everyone-here-is-so-cool" aria-label="Open frgmnt by Emily">
                             <p class="quote-fragment" id="fragmentRotatorText">&ldquo;I think everyone here is so cool&rdquo;</p>
@@ -1132,11 +1137,11 @@
                         </a>
                         <div class="fragment-rotator__progress" aria-hidden="true"><span></span></div>
                     </article>
-                    <article class="work-card">
+                    <article class="work-card" data-frontpage-slot="work">
                         <span class="tag">Work</span>
-                        <h2><a href="professional.html">Systems, identity, product, and technical leadership.</a></h2>
-                        <p>Advisory, product judgment, operating systems, and brand-level technical direction.</p>
-                        <a class="story-link" href="professional.html">View professional work &rarr;</a>
+                        <h2><a data-frontpage-link href="professional.html">Systems, identity, product, and technical leadership.</a></h2>
+                        <p data-frontpage-description>Advisory, product judgment, operating systems, and brand-level technical direction.</p>
+                        <a class="story-link" data-frontpage-cta href="professional.html">View professional work &rarr;</a>
                     </article>
                 </aside>
             </div>
@@ -1253,44 +1258,352 @@
                 });
         }
 
-        async function loadPublishedFragments() {
+        async function loadFrontpageSource(label, loader, fallback = []) {
             try {
-                const response = await fetch('https://api.frgmnts.app/v1/public/fragments/outsidetheworld?limit=60', {
-                    cache: 'no-store'
-                });
-
-                if (response.ok) {
-                    const payload = await response.json();
-                    if (payload && Array.isArray(payload.items)) {
-                        return payload.items;
-                    }
-                }
+                const value = await loader();
+                return value;
             } catch (error) {
-                console.warn('Live fragments mirror unavailable, falling back to local fragments_data.js.', error);
+                console.warn(`Could not load ${label}; using an empty homepage source.`, error);
+                return fallback;
             }
-
-            return loadArrayFromScript(
-                'fragments_data.js',
-                'typeof window !== "undefined" && Array.isArray(window.otw_fragments) ? window.otw_fragments : []'
-            );
         }
 
-        function normalizeRailFragment(fragment) {
+        const DEFAULT_FRONTPAGE_MANIFEST = {
+            lead: { slot: 'leadStory', type: 'essay', mode: 'latest' },
+            modules: [
+                { slot: 'moduleEssay', type: 'essay', mode: 'offset', offset: 2 },
+                { slot: 'moduleImageLatest', type: 'iotd', mode: 'latest' },
+                { slot: 'moduleDriftPrevious', type: 'drift', mode: 'offset', offset: 1 },
+                { slot: 'moduleImagePrevious', type: 'iotd', mode: 'offset', offset: 1 }
+            ],
+            rail: [
+                { slot: 'railPreviousEssay', type: 'essay', mode: 'offset', offset: 1 },
+                { slot: 'railLatestDrift', type: 'drift', mode: 'latest' },
+                { slot: 'railFragments', type: 'fragment', mode: 'latest' }
+            ],
+            work: {
+                slot: 'work',
+                title: 'Systems, identity, product, and technical leadership.',
+                description: 'Advisory, product judgment, operating systems, and brand-level technical direction.',
+                url: 'professional.html'
+            }
+        };
+
+        function normalizeFrontpageManifest(manifest) {
+            const candidate = manifest && typeof manifest === 'object' ? manifest : {};
+            const work = candidate.work && typeof candidate.work === 'object'
+                ? { ...DEFAULT_FRONTPAGE_MANIFEST.work, ...candidate.work }
+                : DEFAULT_FRONTPAGE_MANIFEST.work;
+
+            return {
+                ...DEFAULT_FRONTPAGE_MANIFEST,
+                ...candidate,
+                lead: candidate.lead && typeof candidate.lead === 'object'
+                    ? candidate.lead
+                    : DEFAULT_FRONTPAGE_MANIFEST.lead,
+                modules: Array.isArray(candidate.modules)
+                    ? candidate.modules
+                    : DEFAULT_FRONTPAGE_MANIFEST.modules,
+                rail: Array.isArray(candidate.rail)
+                    ? candidate.rail
+                    : DEFAULT_FRONTPAGE_MANIFEST.rail,
+                work
+            };
+        }
+
+        function formatIotdDate(value) {
+            const match = String(value || '').match(/^(\d{4})-(\d{2})-(\d{2})$/);
+            if (!match) return '';
+            const date = new Date(Number(match[1]), Number(match[2]) - 1, Number(match[3]));
+            return new Intl.DateTimeFormat('en-US', {
+                month: 'long',
+                day: 'numeric',
+                year: 'numeric'
+            }).format(date);
+        }
+
+        function parseContentDate(value) {
+            const date = new Date(value || '');
+            return Number.isNaN(date.valueOf()) ? 0 : date.valueOf();
+        }
+
+        async function loadFrontpageManifest() {
+            try {
+                const response = await fetch(`frontpage_manifest.json?ts=${Date.now()}`, { cache: 'no-store' });
+                if (!response.ok) throw new Error(`Could not load frontpage_manifest.json: ${response.status}`);
+                const manifest = await response.json();
+                return normalizeFrontpageManifest(manifest);
+            } catch (error) {
+                console.warn('Could not load frontpage manifest; using homepage defaults.', error);
+                return DEFAULT_FRONTPAGE_MANIFEST;
+            }
+        }
+
+        async function loadImageManifest() {
+            const response = await fetch(`image_manifest.json?ts=${Date.now()}`, { cache: 'no-store' });
+            if (!response.ok) {
+                throw new Error(`Could not load image_manifest.json: ${response.status}`);
+            }
+            const manifest = await response.json();
+            return Array.isArray(manifest) ? manifest : [];
+        }
+
+        function extractMarkdownImage(value) {
+            const match = String(value || '').match(/!\[[^\]]*\]\(([^)\s]+)(?:\s+"[^"]*")?\)/);
+            return match ? match[1] : '';
+        }
+
+        function extractEssayImage(post) {
+            const publisher = post && post.publisher && typeof post.publisher === 'object' ? post.publisher : null;
+            const publisherImages = publisher && Array.isArray(publisher.images) ? publisher.images : [];
+            const publisherImage = publisherImages.find((image) => image && image.url);
+            if (publisherImage) return String(publisherImage.url || '');
+
+            const blocks = publisher && Array.isArray(publisher.blocks) ? publisher.blocks : [];
+            const blockImage = blocks.find((block) => block && block.type === 'image' && block.url);
+            if (blockImage) return String(blockImage.url || '');
+
+            return extractMarkdownImage(post && post.body ? post.body : '');
+        }
+
+        function normalizeEssayEntry(post) {
+            const publisher = post && post.publisher && typeof post.publisher === 'object' ? post.publisher : null;
+            const date = String(post && post.date ? post.date : '');
+            const title = stripHtml(post && post.title ? post.title : '').replace(/\s+/g, ' ').trim() || 'Untitled essay';
+            const description = cleanText(publisher && publisher.subhead ? publisher.subhead : '') || buildExcerpt(post && post.body ? post.body : '', 145);
+            const url = buildCanonicalArchivePath(post);
+
+            return {
+                type: 'essay',
+                title,
+                date,
+                dateSort: parseContentDate(date),
+                description,
+                image: extractEssayImage(post),
+                imageAlt: `Image for ${title}`,
+                url
+            };
+        }
+
+        function normalizeIotdEntry(entry) {
+            const title = stripHtml(entry && entry.title ? entry.title : '').replace(/\s+/g, ' ').trim() || 'Image of the Day';
+            return {
+                type: 'iotd',
+                date: String(entry && entry.date ? entry.date : ''),
+                title,
+                caption: cleanText(entry && entry.caption ? entry.caption : '') || 'From the Image of the Day run.',
+                description: cleanText(entry && entry.caption ? entry.caption : '') || 'From the Image of the Day run.',
+                image: String(entry && entry.image ? entry.image : ''),
+                imageAlt: title,
+                displayDate: formatIotdDate(entry && entry.date ? entry.date : ''),
+                dateSort: parseContentDate(entry && entry.date ? entry.date : ''),
+                url: 'image_of_the_day.html'
+            };
+        }
+
+        function normalizeDriftEntry(poem) {
+            const date = String(poem && poem.date ? poem.date : '');
+            const title = stripHtml(poem && poem.title ? poem.title : '').replace(/\s+/g, ' ').trim() || 'Untitled poem';
+
+            return {
+                type: 'drift',
+                title,
+                date,
+                dateSort: parseContentDate(date),
+                description: buildExcerpt(poem && poem.body ? poem.body : '', 135),
+                image: String(poem && poem.image ? poem.image : ''),
+                imageAlt: `${title} artwork`,
+                url: `drift_poetry.html?poem=${encodeURIComponent(poem && poem.id ? poem.id : '')}`
+            };
+        }
+
+        function normalizeFragmentEntry(fragment) {
             const text = buildExcerpt(fragment && fragment.text ? fragment.text : '', 156);
             const author = cleanText(fragment && fragment.author ? fragment.author : '') || 'Outside The World';
             const tag = cleanText(fragment && fragment.tag ? fragment.tag : '') || 'frgmnt';
             const date = formatFragmentDate(fragment && fragment.timestamp ? fragment.timestamp : '');
 
             return {
+                type: 'fragment',
                 text,
                 author,
                 tag,
                 date,
+                dateSort: parseContentDate(fragment && fragment.timestamp ? fragment.timestamp : ''),
                 url: `fragments.html?entry=${encodeURIComponent(buildFragmentId(fragment || {}))}`
             };
         }
 
-        function initFragmentRotator() {
+        function sourceForType(type, sources) {
+            if (type === 'essay') return sources.essays;
+            if (type === 'iotd') return sources.images;
+            if (type === 'drift') return sources.drift;
+            if (type === 'fragment') return sources.fragments;
+            return [];
+        }
+
+        function pickContent(rule, sources) {
+            const items = sourceForType(rule && rule.type, sources);
+            if (!items.length) return null;
+            if (rule && rule.mode === 'featured' && rule.url) {
+                return items.find((item) => item.url === rule.url) || null;
+            }
+            const offset = rule && rule.mode === 'offset' ? Number(rule.offset || 0) : 0;
+            return items[Math.max(0, offset)] || items[0] || null;
+        }
+
+        function tagForSlot(slot, item) {
+            if (!item) return '';
+            if (slot === 'leadStory') return 'Latest essay';
+            if (slot === 'railPreviousEssay') return 'Previous essay';
+            if (slot === 'railLatestDrift') return 'The Drift';
+            if (item.type === 'essay') return item.date ? `Essay · ${item.date}` : 'Essay';
+            if (item.type === 'iotd') return item.displayDate ? `Image · ${item.displayDate}` : 'Image';
+            if (item.type === 'drift') return item.date ? `Poem · ${item.date}` : 'Poem';
+            return item.tag || 'frgmnt';
+        }
+
+        function setText(selectorRoot, selector, value) {
+            const element = selectorRoot.querySelector(selector);
+            if (element && value) element.textContent = value;
+        }
+
+        function setHref(selectorRoot, selector, value) {
+            const element = selectorRoot.querySelector(selector);
+            if (element && value) element.href = value;
+        }
+
+        function renderContentSlot(slot, item) {
+            const root = document.querySelector(`[data-frontpage-slot="${slot}"]`);
+            if (!root || !item) return;
+
+            setText(root, '[data-frontpage-tag]', tagForSlot(slot, item));
+            setText(root, '[data-frontpage-link]', item.title);
+            setText(root, '[data-frontpage-description]', item.description || item.caption || item.date);
+            setHref(root, '[data-frontpage-link]', item.url);
+            setHref(root, '[data-frontpage-cta]', item.url);
+
+            const image = root.querySelector('[data-frontpage-image]');
+            if (image && item.image) {
+                image.src = item.image;
+                image.alt = item.imageAlt || item.title || '';
+                image.decoding = 'async';
+                if (slot !== 'leadStory') {
+                    image.loading = 'lazy';
+                }
+                image.hidden = false;
+            } else if (image) {
+                image.hidden = true;
+            }
+
+            const art = root.querySelector('[data-frontpage-art]');
+            if (art) {
+                art.href = item.url;
+                art.setAttribute('aria-label', `Continue reading ${item.title}`);
+                art.hidden = !item.image;
+            }
+
+            const meta = root.querySelector('[data-frontpage-meta]');
+            if (meta && item.type === 'essay') {
+                meta.innerHTML = `
+                    <span>${escapeHtml(item.date)}</span>
+                    <span>Essay</span>
+                    <span>Current narrative</span>
+                `;
+            }
+        }
+
+        function renderWorkSlot(work) {
+            const root = document.querySelector('[data-frontpage-slot="work"]');
+            if (!root || !work) return;
+            setText(root, '[data-frontpage-link]', work.title);
+            setText(root, '[data-frontpage-description]', work.description);
+            setHref(root, '[data-frontpage-link]', work.url);
+            setHref(root, '[data-frontpage-cta]', work.url);
+        }
+
+        function normalizeSources(narratives, imageManifest, driftPoems, fragments) {
+            return {
+                essays: (Array.isArray(narratives) ? narratives : [])
+                    .map(normalizeEssayEntry)
+                    .filter((entry) => entry.title && entry.url)
+                    .sort((a, b) => b.dateSort - a.dateSort),
+                images: (Array.isArray(imageManifest) ? imageManifest : [])
+                    .map(normalizeIotdEntry)
+                    .filter((entry) => entry.date && entry.image)
+                    .sort((a, b) => b.dateSort - a.dateSort),
+                drift: (Array.isArray(driftPoems) ? driftPoems : [])
+                    .map(normalizeDriftEntry)
+                    .filter((entry) => entry.title && entry.url)
+                    .sort((a, b) => b.dateSort - a.dateSort),
+                fragments: (Array.isArray(fragments) ? fragments : [])
+                    .filter((fragment) => {
+                        const body = cleanText(fragment && fragment.text ? fragment.text : '');
+                        const author = String(fragment && fragment.author ? fragment.author : '');
+                        const authorId = String(fragment && fragment.author_id ? fragment.author_id : '');
+                        const isBot = author === 'OTW_Bot' || authorId === 'otw_bot';
+                        const isTest = /worker test fragment/i.test(body);
+                        return body && !isBot && !isTest;
+                    })
+                    .map(normalizeFragmentEntry)
+                    .sort((a, b) => b.dateSort - a.dateSort)
+            };
+        }
+
+        function renderFrontPage(manifest, sources) {
+            const leadItem = pickContent(manifest.lead || DEFAULT_FRONTPAGE_MANIFEST.lead, sources);
+            renderContentSlot('leadStory', leadItem);
+
+            [...(manifest.modules || []), ...(manifest.rail || [])].forEach((rule) => {
+                if (!rule || !rule.slot || rule.type === 'fragment') return;
+                renderContentSlot(rule.slot, pickContent(rule, sources));
+            });
+
+            renderWorkSlot(manifest.work || DEFAULT_FRONTPAGE_MANIFEST.work);
+            initFragmentRotator(sources.fragments);
+        }
+
+        async function loadLocalFragments() {
+            return loadArrayFromScript(
+                'fragments_data.js',
+                'typeof window !== "undefined" && Array.isArray(window.otw_fragments) ? window.otw_fragments : []'
+            );
+        }
+
+        async function initFrontPageContent() {
+            const [
+                manifest,
+                narratives,
+                imageManifest,
+                livingVerse,
+                recoveredPoems,
+                fragments
+            ] = await Promise.all([
+                loadFrontpageManifest(),
+                loadFrontpageSource('narrative_data.js', () => loadArrayFromScript('narrative_data.js', 'typeof current_narrative !== "undefined" ? current_narrative : []')),
+                loadFrontpageSource('image_manifest.json', loadImageManifest),
+                loadFrontpageSource('new_poetry_data.js', () => loadArrayFromScript('new_poetry_data.js', 'typeof livingVerse !== "undefined" ? livingVerse : []')),
+                loadFrontpageSource('poetry_data.js', () => loadArrayFromScript('poetry_data.js', 'typeof archive !== "undefined" ? archive : []')),
+                loadFrontpageSource('fragments_data.js', loadLocalFragments)
+            ]);
+
+            const driftPoems = Array.isArray(livingVerse) && livingVerse.length ? livingVerse : recoveredPoems;
+            renderFrontPage(manifest, normalizeSources(narratives, imageManifest, driftPoems, fragments));
+        }
+
+        initFrontPageContent();
+
+        async function loadPublishedFragments() {
+            return loadLocalFragments();
+        }
+
+        function normalizeRailFragment(fragment) {
+            if (fragment && fragment.type === 'fragment') return fragment;
+
+            return normalizeFragmentEntry(fragment);
+        }
+
+        function initFragmentRotator(fragmentItems) {
             const root = document.getElementById('fragmentRotator');
             const tag = document.getElementById('fragmentRotatorTag');
             const link = document.getElementById('fragmentRotatorLink');
@@ -1298,6 +1611,11 @@
             const meta = document.getElementById('fragmentRotatorMeta');
 
             if (!root || !tag || !link || !text || !meta) return;
+
+            if (root.dataset.rotatorReady === 'true') {
+                return;
+            }
+            root.dataset.rotatorReady = 'true';
 
             const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
             const intervalMs = 7000;
@@ -1343,6 +1661,17 @@
                 }, 220);
             }
 
+            function hydrateRotator(items) {
+                fragments = (Array.isArray(items) ? items : [])
+                    .map(normalizeRailFragment)
+                    .filter((fragment) => fragment.text && fragment.url)
+                    .slice(0, 12);
+
+                if (!fragments.length) return;
+                showFragment(0, true);
+                resume();
+            }
+
             root.addEventListener('mouseenter', pause);
             root.addEventListener('mouseleave', resume);
             root.addEventListener('focusin', pause);
@@ -1355,31 +1684,33 @@
                 }
             });
 
+            if (Array.isArray(fragmentItems)) {
+                hydrateRotator(fragmentItems);
+                return;
+            }
+
             loadPublishedFragments()
                 .then((items) => {
-                    fragments = (Array.isArray(items) ? items : [])
-                        .filter((fragment) => {
-                            const body = cleanText(fragment && fragment.text ? fragment.text : '');
-                            const author = String(fragment && fragment.author ? fragment.author : '');
-                            const authorId = String(fragment && fragment.author_id ? fragment.author_id : '');
-                            const isBot = author === 'OTW_Bot' || authorId === 'otw_bot';
-                            const isTest = /worker test fragment/i.test(body);
-                            return body && !isBot && !isTest;
-                        })
-                        .sort((a, b) => String(b.timestamp || '').localeCompare(String(a.timestamp || '')))
-                        .slice(0, 12)
-                        .map(normalizeRailFragment);
-
-                    if (!fragments.length) return;
-                    showFragment(0, true);
-                    resume();
+                    hydrateRotator(items);
                 })
                 .catch((error) => {
                     console.warn('Could not initialize fragment rotator.', error);
                 });
         }
 
-        initFragmentRotator();
+        function initPopoverEscapeDismissal() {
+            ['search-panel', 'destinations'].forEach((id) => {
+                const popover = document.getElementById(id);
+                if (!popover || typeof popover.hidePopover !== 'function') return;
+                popover.addEventListener('keydown', (event) => {
+                    if (event.key !== 'Escape' || !popover.matches(':popover-open')) return;
+                    event.preventDefault();
+                    popover.hidePopover();
+                });
+            });
+        }
+
+        initPopoverEscapeDismissal();
 
         let searchIndexPromise;
 

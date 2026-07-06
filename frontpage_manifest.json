@@ -1,0 +1,58 @@
+{
+  "schema": "otw.frontpage.v1",
+  "version": 1,
+  "lead": {
+    "slot": "leadStory",
+    "type": "essay",
+    "mode": "latest"
+  },
+  "modules": [
+    {
+      "slot": "moduleEssay",
+      "type": "essay",
+      "mode": "offset",
+      "offset": 2
+    },
+    {
+      "slot": "moduleImageLatest",
+      "type": "iotd",
+      "mode": "latest"
+    },
+    {
+      "slot": "moduleDriftPrevious",
+      "type": "drift",
+      "mode": "offset",
+      "offset": 1
+    },
+    {
+      "slot": "moduleImagePrevious",
+      "type": "iotd",
+      "mode": "offset",
+      "offset": 1
+    }
+  ],
+  "rail": [
+    {
+      "slot": "railPreviousEssay",
+      "type": "essay",
+      "mode": "offset",
+      "offset": 1
+    },
+    {
+      "slot": "railLatestDrift",
+      "type": "drift",
+      "mode": "latest"
+    },
+    {
+      "slot": "railFragments",
+      "type": "fragment",
+      "mode": "latest"
+    }
+  ],
+  "work": {
+    "slot": "work",
+    "title": "Systems, identity, product, and technical leadership.",
+    "description": "Advisory, product judgment, operating systems, and brand-level technical direction.",
+    "url": "professional.html"
+  }
+}
