@@ -1106,15 +1106,18 @@
             }
         }
 
-        .rail-iotd-card {
+        .module-card.rail-iotd-card {
             min-height: 0;
+            padding: 16px;
+            gap: 10px;
             border-color: rgba(160, 190, 245, 0.32);
             box-shadow:
-                0 18px 52px rgba(0, 0, 0, 0.24),
-                0 0 26px rgba(160, 190, 245, 0.08);
+                0 14px 38px rgba(0, 0, 0, 0.2),
+                0 0 20px rgba(160, 190, 245, 0.06);
         }
 
         .rail-iotd-card .module-card-media {
+            margin: -16px -16px 2px;
             aspect-ratio: 16 / 10;
         }
 
@@ -1125,7 +1128,26 @@
         }
 
         .rail-iotd-card h3 {
-            font-size: clamp(1.3rem, 2vw, 1.75rem);
+            max-width: 100%;
+            box-sizing: border-box;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+            font-size: clamp(1.15rem, 1.45vw, 1.4rem);
+            line-height: 1.16;
+        }
+
+        .rail-iotd-card p {
+            font-size: 0.84rem;
+            line-height: 1.45;
+        }
+
+        .rail-iotd-card .module-kicker {
+            font-size: 0.56rem;
+        }
+
+        .rail-iotd-card .module-cta {
+            margin-top: 0;
+            font-size: 0.78rem;
         }
 
         .module-card {
@@ -1311,6 +1333,7 @@
         @media (max-width: 860px) {
             :root {
                 --header-height-v2: auto;
+                --mobile-gutter: clamp(18px, 5vw, 28px);
             }
 
             body::before {
@@ -1382,6 +1405,7 @@
             .latest-story {
                 grid-template-columns: 1fr;
                 min-height: 0;
+                padding-block: 30px 0;
             }
 
             .latest-copy {
@@ -1393,12 +1417,12 @@
             .story-meta,
             .story-excerpt,
             .story-actions {
-                margin-inline: clamp(22px, 5vw, 38px);
+                margin-inline: var(--mobile-gutter);
             }
 
             .latest-copy h2 {
                 order: 1;
-                margin-top: clamp(32px, 5vw, 44px);
+                margin-top: 0;
             }
 
             .story-deck {
@@ -1457,7 +1481,7 @@
                 width: clamp(112px, 38vw, 170px);
                 max-width: 40%;
                 height: auto;
-                margin: 0 0 8px 16px;
+                margin: 0 0 clamp(18px, 3vw, 24px) clamp(16px, 4vw, 20px);
                 border-radius: calc(var(--radius-v2) - 3px);
                 filter: saturate(1.02) contrast(1.04);
             }
@@ -1467,8 +1491,12 @@
                 display: flex;
                 flex-wrap: nowrap;
                 align-items: center;
-                gap: 10px;
-                margin-top: 20px;
+                gap: 12px;
+                clear: both;
+                margin-top: clamp(24px, 4vw, 32px);
+                margin-bottom: clamp(30px, 5vw, 36px);
+                width: calc(100% - (var(--mobile-gutter) * 2));
+                box-sizing: border-box;
             }
 
             .story-actions .button {
@@ -1484,8 +1512,13 @@
                 min-height: 44px;
             }
 
+            .recent-list {
+                padding: 30px var(--mobile-gutter) 4px;
+            }
+
             .signal-rail {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: var(--mobile-gutter);
             }
 
             .elsewhere-list a {
@@ -1529,7 +1562,6 @@
 
             .recent-list {
                 grid-template-columns: 1fr;
-                padding-inline: 22px;
             }
 
             .recent-link,
@@ -1550,15 +1582,25 @@
             .module-card,
             .quiet-card,
             .music-dock {
-                padding: 18px;
+                padding: var(--mobile-gutter);
+            }
+
+            .module-card.rail-iotd-card {
+                padding: var(--mobile-gutter);
+                gap: 10px;
             }
 
             .module-card-media {
-                margin: -18px -18px 2px;
+                margin: calc(var(--mobile-gutter) * -1) calc(var(--mobile-gutter) * -1) 2px;
             }
 
             .rail-iotd-card .module-card-media {
-                aspect-ratio: 4 / 3;
+                aspect-ratio: 16 / 10;
+                margin: calc(var(--mobile-gutter) * -1) calc(var(--mobile-gutter) * -1) 2px;
+            }
+
+            .rail-iotd-card h3 {
+                font-size: clamp(1.35rem, 5vw, 1.65rem);
             }
 
             .recent-link:last-child {
@@ -1572,11 +1614,12 @@
                 float: none;
                 width: min(68vw, 200px);
                 max-width: 100%;
-                margin: 0 auto 14px;
+                margin: 0 auto 18px;
             }
 
             .story-actions {
                 flex-wrap: wrap;
+                gap: 10px;
             }
 
             .story-actions .button,
