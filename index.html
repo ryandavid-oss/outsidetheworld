@@ -224,6 +224,9 @@
 
         .primary-nav a,
         .site-utilities button,
+        .mobile-menu-button,
+        .mobile-menu-popover a,
+        .mobile-menu-popover button,
         .search-popover button,
         .destination-popover button {
             min-height: 44px;
@@ -245,10 +248,30 @@
 
         .primary-nav a:hover,
         .site-utilities button:hover,
+        .mobile-menu-button:hover,
+        .mobile-menu-popover a:hover,
+        .mobile-menu-popover button:hover,
         .search-popover button:hover,
         .destination-popover button:hover {
             border-color: rgba(255, 255, 255, 0.34);
             background: rgba(255, 255, 255, 0.085);
+        }
+
+        .mobile-menu-button {
+            display: none;
+        }
+
+        .mobile-menu-glyph {
+            display: inline-grid;
+            gap: 0.18rem;
+            width: 0.88rem;
+        }
+
+        .mobile-menu-glyph span {
+            display: block;
+            height: 1px;
+            border-radius: 999px;
+            background: currentColor;
         }
 
         .dek {
@@ -266,6 +289,7 @@
         }
 
         .search-popover,
+        .mobile-menu-popover,
         .destination-popover {
             width: min(45rem, calc(100vw - 1.5rem));
             max-height: min(82svh, 44rem);
@@ -280,12 +304,14 @@
         }
 
         .search-popover::backdrop,
+        .mobile-menu-popover::backdrop,
         .destination-popover::backdrop {
             background: rgba(0, 0, 0, 0.68);
             backdrop-filter: blur(10px);
         }
 
         .search-popover__head,
+        .mobile-menu-popover__head,
         .destination-popover__head {
             position: sticky;
             top: 0;
@@ -301,6 +327,7 @@
         }
 
         .search-popover__head p,
+        .mobile-menu-popover__head p,
         .destination-popover__head p {
             margin: 0;
             font-family: var(--font-mono);
@@ -308,6 +335,43 @@
             letter-spacing: 0.14em;
             text-transform: uppercase;
             color: var(--gold);
+        }
+
+        .mobile-menu-popover {
+            width: min(26rem, calc(100vw - 1.5rem));
+            max-height: calc(100svh - 1.5rem);
+        }
+
+        .mobile-menu-groups {
+            display: grid;
+            gap: 1px;
+            background: var(--rule);
+        }
+
+        .mobile-menu-groups section {
+            display: grid;
+            gap: 0.5rem;
+            min-width: 0;
+            padding: 1rem;
+            background: var(--ink);
+        }
+
+        .mobile-menu-groups h2 {
+            margin: 0 0 0.15rem;
+            color: var(--gold);
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
+        .mobile-menu-popover a,
+        .mobile-menu-popover button {
+            width: 100%;
+            justify-content: flex-start;
+            border-radius: 8px;
+            padding-inline: 0.95rem;
+            background: rgba(255, 255, 255, 0.04);
         }
 
         .search-popover__form {
@@ -940,6 +1004,42 @@
             }
         }
 
+        @media (max-width: 900px) {
+            .masthead {
+                gap: 0.55rem;
+                padding-block: 0.55rem 0.7rem;
+            }
+
+            .masthead-top {
+                grid-template-columns: minmax(0, 1fr) auto;
+                gap: 0.75rem;
+            }
+
+            .site-logo img {
+                width: clamp(9.5rem, 43vw, 12rem);
+            }
+
+            .primary-nav,
+            .site-utilities {
+                display: none;
+            }
+
+            .mobile-menu-button {
+                display: inline-flex;
+                justify-self: end;
+                white-space: nowrap;
+            }
+
+            .dek {
+                max-width: 32rem;
+                font-size: clamp(0.95rem, 3.4vw, 1.04rem);
+            }
+
+            .front-page {
+                padding-top: 0.75rem;
+            }
+        }
+
         @media (prefers-reduced-motion: reduce) {
             *,
             *::before,
@@ -995,9 +1095,36 @@
                         <span class="all-destinations-label-short" aria-hidden="true">Menu</span>
                     </button>
                 </nav>
+
+                <button class="mobile-menu-button" type="button" popovertarget="mobile-menu" aria-label="Open site menu">
+                    <span class="mobile-menu-glyph" aria-hidden="true"><span></span><span></span><span></span></span>
+                    <span>Menu</span>
+                </button>
             </div>
 
             <p class="dek">A living record of writing, images, fragments, and work.</p>
+
+            <nav id="mobile-menu" class="mobile-menu-popover" popover aria-label="Site menu">
+                <div class="mobile-menu-popover__head">
+                    <p>Menu</p>
+                    <button type="button" popovertarget="mobile-menu" popovertargetaction="hide" aria-label="Close site menu">Close</button>
+                </div>
+                <div class="mobile-menu-groups">
+                    <section aria-labelledby="mobile-menu-primary">
+                        <h2 id="mobile-menu-primary">Primary</h2>
+                        <a href="personal.html">Read</a>
+                        <a href="image_of_the_day.html">Images</a>
+                        <a href="drift_poetry.html">Poems</a>
+                        <a href="fragments.html">Fragments</a>
+                        <a href="professional.html">Work</a>
+                    </section>
+                    <section aria-labelledby="mobile-menu-utilities">
+                        <h2 id="mobile-menu-utilities">Utilities</h2>
+                        <button type="button" data-mobile-popover-target="search-panel">Search</button>
+                        <button type="button" data-mobile-popover-target="destinations">All Destinations</button>
+                    </section>
+                </div>
+            </nav>
 
             <search id="search-panel" class="search-popover" popover aria-label="Search Outside The World">
                 <div class="search-popover__head">
@@ -1699,13 +1826,26 @@
         }
 
         function initPopoverEscapeDismissal() {
-            ['search-panel', 'destinations'].forEach((id) => {
+            ['search-panel', 'destinations', 'mobile-menu'].forEach((id) => {
                 const popover = document.getElementById(id);
                 if (!popover || typeof popover.hidePopover !== 'function') return;
                 popover.addEventListener('keydown', (event) => {
                     if (event.key !== 'Escape' || !popover.matches(':popover-open')) return;
                     event.preventDefault();
                     popover.hidePopover();
+                });
+            });
+
+            const mobileMenu = document.getElementById('mobile-menu');
+            document.querySelectorAll('[data-mobile-popover-target]').forEach((trigger) => {
+                trigger.addEventListener('click', () => {
+                    const target = document.getElementById(trigger.dataset.mobilePopoverTarget || '');
+                    if (!target || typeof target.showPopover !== 'function') return;
+                    if (mobileMenu && typeof mobileMenu.hidePopover === 'function' && mobileMenu.matches(':popover-open')) {
+                        mobileMenu.hidePopover();
+                    }
+                    target.showPopover();
+                    target.querySelector('input:not([type="hidden"]), button, a')?.focus();
                 });
             });
         }
