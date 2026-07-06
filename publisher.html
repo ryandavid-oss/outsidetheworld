@@ -1571,6 +1571,7 @@
       border-bottom: 1px solid var(--line);
       background: rgba(247, 250, 244, 0.96);
       box-shadow: 0 16px 44px rgba(52, 72, 59, 0.08);
+      scroll-margin-top: 124px;
     }
 
     .published-manager[hidden],
@@ -3476,8 +3477,10 @@
           pmEssayList.innerHTML = '<div class="pm-empty">Published essay editing requires the local publisher helper. Start <code>python3 tools/publisher_server.py</code>, then open this page from that server instead of a static live server.</div>';
         }
         renderPublishedWorkspace(null);
+        setSaveState('Published essays require local helper server');
         setPublishedManagerStatus('Start tools/publisher_server.py to revise published essays.', true);
         revealPublishedManager();
+        publishedManager.scrollIntoView({ block: 'nearest' });
         return { ok: false, essays: [] };
       }
       if (!publishedEssayItems.length) {
