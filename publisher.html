@@ -3326,6 +3326,14 @@
       pmStatus.classList.toggle('is-error', Boolean(isError));
     }
 
+    function revealPublishedManager() {
+      if (!publishedManager) {
+        return;
+      }
+      publishedManager.hidden = false;
+      publishedManager.removeAttribute('hidden');
+    }
+
     function publishedEssayMatchesFilter(essay, filter) {
       if (filter === 'unpublished-revision') {
         return essay.revisionStatus?.status === 'draft revision';
@@ -3426,9 +3434,7 @@
       try {
         const payload = await localPublisherApi('/api/published-essays');
         publishedEssayItems = Array.isArray(payload.essays) ? payload.essays : [];
-        if (publishedManager) {
-          publishedManager.hidden = false;
-        }
+        revealPublishedManager();
         renderPublishedEssayList();
         setPublishedManagerStatus(`${publishedEssayItems.length} published essays loaded.`);
         return payload;
@@ -3461,15 +3467,26 @@
       if (!publishedManager) {
         return null;
       }
-      publishedManager.hidden = false;
+      revealPublishedManager();
       publishedManager.scrollIntoView({ block: 'start' });
+      if (!getLocalPublisherToken()) {
+        publishedEssayItems = [];
+        selectedPublishedEssaySlug = '';
+        if (pmEssayList) {
+          pmEssayList.innerHTML = '<div class="pm-empty">Published essay editing requires the local publisher helper. Start <code>python3 tools/publisher_server.py</code>, then open this page from that server instead of a static live server.</div>';
+        }
+        renderPublishedWorkspace(null);
+        setPublishedManagerStatus('Start tools/publisher_server.py to revise published essays.', true);
+        revealPublishedManager();
+        return { ok: false, essays: [] };
+      }
       if (!publishedEssayItems.length) {
         const payload = await loadPublishedEssays();
-        publishedManager.hidden = false;
+        revealPublishedManager();
         return payload;
       }
       renderPublishedEssayList();
-      publishedManager.hidden = false;
+      revealPublishedManager();
       setPublishedManagerStatus(`${publishedEssayItems.length} published essays loaded.`);
       return { ok: true, essays: publishedEssayItems };
     }
@@ -9180,10 +9197,16 @@
     previewDraftBtn.addEventListener('click', openDraftPreview);
 
     publishedEssaysBtn?.addEventListener('click', () => {
-      showPublishedEssayManager().catch((error) => {
-        setSaveState('Published essays unavailable', true);
-        setPublishedManagerStatus(error.message, true);
-      });
+      revealPublishedManager();
+      showPublishedEssayManager()
+        .then(() => {
+          revealPublishedManager();
+        })
+        .catch((error) => {
+          revealPublishedManager();
+          setSaveState('Published essays unavailable', true);
+          setPublishedManagerStatus(error.message, true);
+        });
     });
 
     pmRefreshBtn?.addEventListener('click', () => {
