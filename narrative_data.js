@@ -1,5 +1,206 @@
 const current_narrative = [
     {
+        "title": "Religion fills me with anger. God does not.",
+        "date": "July 2, 2026",
+        "body": "_P.S.: agency is not an excuse for lazy certainty._\n\n![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-02-religion-fills-me-with-anger-mr8g848e.jpg \"A picture of Jesus, because this essay needs a better center than my anger.\")\n\nAbout a week ago, Meta\u2019s algorithm found it necessary to present me with a Facebook post.\n\nIt arrived wearing the colors of religion. And while that made the whole thing more suspect, it was still useful. Silly algorithms are rarely _pastoral_, but occasionally, the stars align and they are _timely_.\n\nIt was penned (typed? Bleated? Excreted?) by a man named Rexford, who described himself as having spent thirty-eight years as a faithful Latter-day Saint. He framed it as a labor of love. A warning. A careful explanation. A testimony of departure.\n\nI remember adjusting my posture in my chair. I sighed; familiar thoughts inside me moaned. \u00a0I've lived long enough to know when I\u2019ve seen this before.\n\nThose are the hardest things to read. While a cheap shot announces itself, a post written by someone who once lived inside the same religious house speaks with borrowed authority. It does not simply accuse from outside. It says, \"I know who you are, and I know right where it hurts.\"\n\nI read it with disquiet. Not panic, though I am known for both panic and anxiety. But I recognized the posture immediately: someone holding both the wound and the weapon, mistaking blood on his hands for clarity.\n\nSome of what Rexford wrote was familiar. Some fell flat. A small portion was predictably, yet undeniably, chilling. In the end, it was all choreographed to make LDS faith seem not merely strained, but impossible.\n\nWhere I am in life now, I have enough perspective and grace to avoid mistaking my first reaction for my final one. I am less interested in engaging the argument than understanding why these arguments keep happening. Over, and over.\n\nBecause we are not arguing only about facts. Faith has facts around it. Documents. Dates. DNA. Translations. Papyri. But faith itself is not a spreadsheet. It is closer to the old analogy of asking someone what salt tastes like.\n\nWhat is scripture? What is translation? What counts as evidence? What kind of thing is a prophet allowed to be? Can God speak through damaged people, unstable language, partial records, institutions, and memory? Or does human limitation disqualify the whole thing?\n\n_That is the argument beneath the argument._\n\nBoth sides wear lenses. Critics have them. Believers have them. Former believers have them. \u201cJust following the facts\u201d people have them too. I posit that nobody approaches questions of faith cleanly.\u00a0We all arrive with wounds, betrayals, favorite verses, unanswered prayers, and our desperate need for belonging.\n\nThat does not mean truth is unknowable. I do not believe that. It means truth is rarely received without static.\n\nAnd yes, dammit, the stakes are real.\n\nPeople lose faith over this material. Marriages crack. Families go quiet. Parents wonder what they did wrong. Children feel lied to. Former members feel dismissed. Believers feel mocked. Everyone claims, with such righteous violence, that they are finally telling the truth. Listen, and be saved.\n\nWhen the stakes are this high, the human brain craves safety. So we retreat to our corners. We become fluent in confirmation bias, calling it discernment when it agrees with us and bias when it belongs to someone else.\n\nCritics scour the record for facts that justify their anger. Believers hide inside filtered materials to protect their peace. Both sides end up doing the same thing: fingers in ears, eyes closed, hoping the uncomfortable parts disappear.\n\nThat is not medicine. It is _fragility_ paraded as testimony, or _pride_ laid bare and calling itself research and science.\n\nThis is where I part ways with the counsel that \u201cresearch is not the answer.\u201d I understand the pastoral instinct. Some people wander into the storm unprepared and get shredded. But when the stakes are families, marriages, integrity, and souls, any type of retreat feels less like faith and more like the abdication of free agency.\n\nIf the Restoration is a living search for all truth, we cannot honor God by keeping our minds half shut. If the gospel is as robust as we claim, it should not require managed ignorance to preserve our peace.\n\nSo yes, read Rexford. Read the critics. Read the apologists. Read the footnotes. Read Joseph Smith as strange, gifted, and flawed instead of a marble statue or a carnival fraud. Read the Book of Abraham honestly enough to admit it is difficult. Read DNA and archaeology without panic.\u00a0Have enough grace to hold sacred living ordinances without turning them into social checkpoints, theater, or rites of passage we use to measure one another.\n\nBut my unsolicited advice is to know what clothes you put on in the morning; read all of it with your lens in your hand.\n\nMy bias is not hidden. I still believe in the Restoration. Not because every answer satisfies me. Today, not many answers even give me the semblance of peace. I have eyes opened wide enough to realize that our present course is just as untidy as our pockmarked history. And it frustrates me more than I have time to explain.\n\nI believe, my dear world, because _a closed system makes less sense to me than an open heaven_. Human language is unstable, scripture is mediated, memory is fragile, prophets are human, and God, if He is still speaking, would need to keep speaking.\n\nI believe in the Restoration less like a person defending their faith, and more like a person listening to God and looking for Jesus.\n\nThat voice, for me, has not gone silent.\n\nAnd until it does, I refuse to confuse fear with faith, certainty with truth, or someone else\u2019s departure with my obligation to leave.",
+        "file": "2026-07-02-religion-fills-me-with-anger-god-does-not.md",
+        "publisher": {
+            "schema": "otw.publisher.post",
+            "version": 1,
+            "source": "publisher.html",
+            "subhead": "P.S.: agency is not an excuse for lazy certainty.",
+            "blocks": [
+                {
+                    "id": "image_mr8g83a8_4us44f",
+                    "type": "image",
+                    "imageRef": "image_mr8g83a8_4us44f",
+                    "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-02-religion-fills-me-with-anger-mr8g848e.jpg",
+                    "objectKey": "narrative/2026-07-02-religion-fills-me-with-anger-mr8g848e.jpg",
+                    "displaySize": "medium",
+                    "alignment": "center",
+                    "wrapMode": "wrap-left"
+                },
+                {
+                    "id": "paragraph_mr8gw328_isuuao",
+                    "type": "paragraph",
+                    "html": "<span>About a week ago, Meta\u2019s algorithm found it necessary to present me with a Facebook post.</span><br>",
+                    "text": "About a week ago, Meta\u2019s algorithm found it necessary to present me with a Facebook post."
+                },
+                {
+                    "id": "paragraph_mr8gw328_t1vbpn",
+                    "type": "paragraph",
+                    "html": "It arrived wearing the colors of religion. And while that made the whole thing more suspect, it was still useful. Silly algorithms are rarely <i>pastoral</i>, but occasionally, the stars align and they are <i>timely</i>.",
+                    "text": "It arrived wearing the colors of religion. And while that made the whole thing more suspect, it was still useful. Silly algorithms are rarely pastoral, but occasionally, the stars align and they are timely."
+                },
+                {
+                    "id": "paragraph_mr8gw328_7zc6h0",
+                    "type": "paragraph",
+                    "html": "It was penned (typed? Bleated? Excreted?) by a man named Rexford, who described himself as having spent thirty-eight years as a faithful Latter-day Saint. He framed it as a labor of love. A warning. A careful explanation. A testimony of departure.",
+                    "text": "It was penned (typed? Bleated? Excreted?) by a man named Rexford, who described himself as having spent thirty-eight years as a faithful Latter-day Saint. He framed it as a labor of love. A warning. A careful explanation. A testimony of departure."
+                },
+                {
+                    "id": "paragraph_mr8gw328_m7bk9z",
+                    "type": "paragraph",
+                    "html": "I remember adjusting my posture in my chair. I sighed; familiar thoughts inside me moaned. \u00a0I've lived long enough to know when I\u2019ve seen this before.",
+                    "text": "I remember adjusting my posture in my chair. I sighed; familiar thoughts inside me moaned. \u00a0I've lived long enough to know when I\u2019ve seen this before."
+                },
+                {
+                    "id": "paragraph_mr8gw328_72lsa2",
+                    "type": "paragraph",
+                    "html": "Those are the hardest things to read. While a cheap shot announces itself, a post written by someone who once lived inside the same religious house speaks with borrowed authority. It does not simply accuse from outside. It says, \"I know who you are, and I know right where it hurts.\"",
+                    "text": "Those are the hardest things to read. While a cheap shot announces itself, a post written by someone who once lived inside the same religious house speaks with borrowed authority. It does not simply accuse from outside. It says, \"I know who you are, and I know right where it hurts.\""
+                },
+                {
+                    "id": "paragraph_mr8gw328_0tvntg",
+                    "type": "paragraph",
+                    "html": "I read it with disquiet. Not panic, though I am known for both panic and anxiety. But I recognized the posture immediately: someone holding both the wound and the weapon, mistaking blood on his hands for clarity.",
+                    "text": "I read it with disquiet. Not panic, though I am known for both panic and anxiety. But I recognized the posture immediately: someone holding both the wound and the weapon, mistaking blood on his hands for clarity."
+                },
+                {
+                    "id": "paragraph_mr8gw328_fqv9cp",
+                    "type": "paragraph",
+                    "html": "Some of what Rexford wrote was familiar. Some fell flat. A small portion was predictably, yet undeniably, chilling. In the end, it was all choreographed to make LDS faith seem not merely strained, but impossible.",
+                    "text": "Some of what Rexford wrote was familiar. Some fell flat. A small portion was predictably, yet undeniably, chilling. In the end, it was all choreographed to make LDS faith seem not merely strained, but impossible."
+                },
+                {
+                    "id": "paragraph_mr8gw328_2lu8yx",
+                    "type": "paragraph",
+                    "html": "Where I am in life now, I have enough perspective and grace to avoid mistaking my first reaction for my final one. I am less interested in engaging the argument than understanding why these arguments keep happening. Over, and over.",
+                    "text": "Where I am in life now, I have enough perspective and grace to avoid mistaking my first reaction for my final one. I am less interested in engaging the argument than understanding why these arguments keep happening. Over, and over."
+                },
+                {
+                    "id": "paragraph_mr8gw328_1f8awz",
+                    "type": "paragraph",
+                    "html": "<span>Because we are not arguing only about facts. Faith has facts around it. Documents. Dates. DNA. Translations. Papyri. But faith itself is not a spreadsheet. It is closer to the old analogy of asking someone what salt tastes like.</span>",
+                    "text": "Because we are not arguing only about facts. Faith has facts around it. Documents. Dates. DNA. Translations. Papyri. But faith itself is not a spreadsheet. It is closer to the old analogy of asking someone what salt tastes like."
+                },
+                {
+                    "id": "paragraph_mr8gw328_z3zozj",
+                    "type": "paragraph",
+                    "html": "What is scripture? What is translation? What counts as evidence? What kind of thing is a prophet allowed to be? Can God speak through damaged people, unstable language, partial records, institutions, and memory? Or does human limitation disqualify the whole thing?",
+                    "text": "What is scripture? What is translation? What counts as evidence? What kind of thing is a prophet allowed to be? Can God speak through damaged people, unstable language, partial records, institutions, and memory? Or does human limitation disqualify the whole thing?"
+                },
+                {
+                    "id": "paragraph_mr8gw328_pfq82s",
+                    "type": "paragraph",
+                    "html": "<i>That is the argument beneath the argument.</i>",
+                    "text": "That is the argument beneath the argument."
+                },
+                {
+                    "id": "paragraph_mr8gw328_ulyax9",
+                    "type": "paragraph",
+                    "html": "Both sides wear lenses. Critics have them. Believers have them. Former believers have them. \u201cJust following the facts\u201d people have them too. I posit that nobody approaches questions of faith cleanly.\u00a0<span>We all arrive with wounds, betrayals, favorite verses, unanswered prayers, and our desperate need for belonging.</span>",
+                    "text": "Both sides wear lenses. Critics have them. Believers have them. Former believers have them. \u201cJust following the facts\u201d people have them too. I posit that nobody approaches questions of faith cleanly.\u00a0We all arrive with wounds, betrayals, favorite verses, unanswered prayers, and our desperate need for belonging."
+                },
+                {
+                    "id": "paragraph_mr8gw328_qsvg6r",
+                    "type": "paragraph",
+                    "html": "That does not mean truth is unknowable. I do not believe that. It means truth is rarely received without static.",
+                    "text": "That does not mean truth is unknowable. I do not believe that. It means truth is rarely received without static."
+                },
+                {
+                    "id": "paragraph_mr8gw328_1ynlfo",
+                    "type": "paragraph",
+                    "html": "And yes, dammit, the stakes are real.",
+                    "text": "And yes, dammit, the stakes are real."
+                },
+                {
+                    "id": "paragraph_mr8gw328_c3dmap",
+                    "type": "paragraph",
+                    "html": "People lose faith over this material. Marriages crack. Families go quiet. Parents wonder what they did wrong. Children feel lied to. Former members feel dismissed. Believers feel mocked. Everyone claims, with such righteous violence, that they are finally telling the truth. Listen, and be saved.",
+                    "text": "People lose faith over this material. Marriages crack. Families go quiet. Parents wonder what they did wrong. Children feel lied to. Former members feel dismissed. Believers feel mocked. Everyone claims, with such righteous violence, that they are finally telling the truth. Listen, and be saved."
+                },
+                {
+                    "id": "paragraph_mr8gw328_0st7la",
+                    "type": "paragraph",
+                    "html": "When the stakes are this high, the human brain craves safety. So we retreat to our corners. We become fluent in confirmation bias, calling it discernment when it agrees with us and bias when it belongs to someone else.",
+                    "text": "When the stakes are this high, the human brain craves safety. So we retreat to our corners. We become fluent in confirmation bias, calling it discernment when it agrees with us and bias when it belongs to someone else."
+                },
+                {
+                    "id": "paragraph_mr8gw328_81lx3q",
+                    "type": "paragraph",
+                    "html": "Critics scour the record for facts that justify their anger. Believers hide inside filtered materials to protect their peace. Both sides end up doing the same thing: fingers in ears, eyes closed, hoping the uncomfortable parts disappear.",
+                    "text": "Critics scour the record for facts that justify their anger. Believers hide inside filtered materials to protect their peace. Both sides end up doing the same thing: fingers in ears, eyes closed, hoping the uncomfortable parts disappear."
+                },
+                {
+                    "id": "paragraph_mr8gw328_dffs29",
+                    "type": "paragraph",
+                    "html": "That is not medicine. It is <i>fragility</i> paraded as testimony, or <i>pride</i> laid bare and calling itself research and science.<br>",
+                    "text": "That is not medicine. It is fragility paraded as testimony, or pride laid bare and calling itself research and science."
+                },
+                {
+                    "id": "paragraph_mr8gw328_j476lh",
+                    "type": "paragraph",
+                    "html": "This is where I part ways with the counsel that \u201cresearch is not the answer.\u201d I understand the pastoral instinct. Some people wander into the storm unprepared and get shredded. But when the stakes are families, marriages, integrity, and souls, any type of retreat feels less like faith and more like the abdication of free agency.",
+                    "text": "This is where I part ways with the counsel that \u201cresearch is not the answer.\u201d I understand the pastoral instinct. Some people wander into the storm unprepared and get shredded. But when the stakes are families, marriages, integrity, and souls, any type of retreat feels less like faith and more like the abdication of free agency."
+                },
+                {
+                    "id": "paragraph_mr8gw328_284zux",
+                    "type": "paragraph",
+                    "html": "If the Restoration is a living search for all truth, we cannot honor God by keeping our minds half shut. If the gospel is as robust as we claim, it should not require managed ignorance to preserve our peace.",
+                    "text": "If the Restoration is a living search for all truth, we cannot honor God by keeping our minds half shut. If the gospel is as robust as we claim, it should not require managed ignorance to preserve our peace."
+                },
+                {
+                    "id": "paragraph_mr8gw328_8ghjg0",
+                    "type": "paragraph",
+                    "html": "So yes, read Rexford. Read the critics. Read the apologists. Read the footnotes. Read Joseph Smith as strange, gifted, and flawed instead of a marble statue or a carnival fraud. Read the Book of Abraham honestly enough to admit it is difficult. Read DNA and archaeology without panic.\u00a0<span>Have enough grace to hold sacred living ordinances without turning them into social checkpoints, theater, or rites of passage we use to measure one another.</span>",
+                    "text": "So yes, read Rexford. Read the critics. Read the apologists. Read the footnotes. Read Joseph Smith as strange, gifted, and flawed instead of a marble statue or a carnival fraud. Read the Book of Abraham honestly enough to admit it is difficult. Read DNA and archaeology without panic.\u00a0Have enough grace to hold sacred living ordinances without turning them into social checkpoints, theater, or rites of passage we use to measure one another."
+                },
+                {
+                    "id": "paragraph_mr8gw328_5cj13v",
+                    "type": "paragraph",
+                    "html": "But my unsolicited advice is to know what clothes you put on in the morning; read all of it with your lens in your hand.",
+                    "text": "But my unsolicited advice is to know what clothes you put on in the morning; read all of it with your lens in your hand."
+                },
+                {
+                    "id": "paragraph_mr8gw328_tb98mm",
+                    "type": "paragraph",
+                    "html": "My bias is not hidden. I still believe in the Restoration. Not because every answer satisfies me. Today, not many answers even give me the semblance of peace. I have eyes opened wide enough to realize that our present course is just as untidy as our pockmarked history. And it frustrates me more than I have time to explain.",
+                    "text": "My bias is not hidden. I still believe in the Restoration. Not because every answer satisfies me. Today, not many answers even give me the semblance of peace. I have eyes opened wide enough to realize that our present course is just as untidy as our pockmarked history. And it frustrates me more than I have time to explain."
+                },
+                {
+                    "id": "paragraph_mr8gw328_4cjugi",
+                    "type": "paragraph",
+                    "html": "I believe, my dear world, because <i>a closed system makes less sense to me than an open heaven</i>. Human language is unstable, scripture is mediated, memory is fragile, prophets are human, and God, if He is still speaking, would need to keep speaking.",
+                    "text": "I believe, my dear world, because a closed system makes less sense to me than an open heaven. Human language is unstable, scripture is mediated, memory is fragile, prophets are human, and God, if He is still speaking, would need to keep speaking."
+                },
+                {
+                    "id": "paragraph_mr8gw328_5rca1h",
+                    "type": "paragraph",
+                    "html": "I believe in the Restoration less like a person defending their faith, and more like a person listening to God and looking for Jesus.",
+                    "text": "I believe in the Restoration less like a person defending their faith, and more like a person listening to God and looking for Jesus."
+                },
+                {
+                    "id": "paragraph_mr8gw328_3xqw6s",
+                    "type": "paragraph",
+                    "html": "That voice, for me, has not gone silent.",
+                    "text": "That voice, for me, has not gone silent."
+                },
+                {
+                    "id": "paragraph_mr8gw328_n6e32k",
+                    "type": "paragraph",
+                    "html": "And until it does, I refuse to confuse fear with faith, certainty with truth, or someone else\u2019s departure with my obligation to leave.",
+                    "text": "And until it does, I refuse to confuse fear with faith, certainty with truth, or someone else\u2019s departure with my obligation to leave."
+                }
+            ],
+            "images": [
+                {
+                    "id": "image_mr8g83a8_4us44f",
+                    "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-02-religion-fills-me-with-anger-mr8g848e.jpg",
+                    "objectKey": "narrative/2026-07-02-religion-fills-me-with-anger-mr8g848e.jpg",
+                    "alt": "Narrative image",
+                    "caption": "A picture of Jesus, because this essay needs a better center than my anger.",
+                    "displaySize": "medium",
+                    "alignment": "center",
+                    "wrapMode": "wrap-left"
+                }
+            ]
+        },
+        "post_id": "July 2, 2026--religion-fills-me-with-anger-god-does-not",
+        "share_path": "archive/2026-07-02-religion-fills-me-with-anger-god-does-not.html",
+        "og_image": "Images/og/archive/2026-07-02-religion-fills-me-with-anger-god-does-not.png"
+    },
+    {
         "title": "Who Is Taking Care of the Thing That Took Care of Us?",
         "date": "July 1, 2026",
         "body": "_How the children of cartridges inherited a medium increasingly shaped by risk._\n\n![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3tyaxu.jpg)\n\nWhen I was 10 years old, just after school ended on a cold winter Friday, I walked into the local movie rental store off of 500 south in Bountiful, Utah.\n\nThe building had an angled roofline and double doors, and when you stepped inside, the ceiling opened upward with exposed beams that made the place feel larger than it probably was. Huge, at least to me. The counter was near the front middle. To my left, there was a poster of Michael Keaton starring in his latest movie,\u00a0_Clean and Sober_. I didn't know what sober meant. That detail, however illogical, is seared into me.\n\nMy mom went one way, and I went another. I already knew where I was going. The video game wall was further down the right side, and my only purpose in being there was to see how the rental selection had grown. Opportunity buzzed inside me as I approached the wall of empty boxes, eagerness clouding my vision as I saw the usual suspects.\n\nIt was easy to see what was available to rent. The retail packaging was always in front of a nondescript plastic holder with the actual cartridge inside. If the edge of the box wasn't flush with the shelf, you were too late.\n\nMove on.\n\nAfter cataloging a few new arrivals, my eyes landed on something.\n\n_Friday the 13th._\n\nI grabbed both the retail box and the rental and rushed over to my mom. I had to try this game. I'm certain my eyes begged for\u00a0the positive answer. She looked hesitantly at the box art, a multi-colored fiasco reminiscent of everything glorious about late \u201980s design, sighed, and nodded her head.\n\nWe took\u00a0_Friday the 13th_\u00a0up to the counter, paid the employee, and the next two days of my life were set.\n\nMy childhood was replete with memories just like this. Christmas mornings that couldn't come soon enough. Late night gaming sessions with my closest friends. Running home from school to grab the latest issue of Nintendo Power from the mailbox. If it sounds like ritual, if I make it sound holy, maybe that's because to me, it filled a vacuum left by areas of my life untreated by normalcy.\n\nAm I being too grand? Do I spend too much time in vain nostalgic pining? After all...video games are not a hospital or a church. Just entertainment; software. Plastic. Boxes on shelves.\n\nAnd yet.\n\n![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3u03pw.jpg)\n\nIf you were born when I was born, video games were not just entertainment. They were part of the fabric of growing up. They were there in basements and wood-paneled bedrooms, in Blockbuster cases and Toys \"R\" Us aisles, in Nintendo Power previews and playground rumors and long summer sleepovers when time seemed inexhaustible.\n\nI was there when N64 controller cables crisscrossed berber carpeting, and four kids sat too close to the television set while playing GoldenEye. We blew into NES cartridges, even though we probably should not have. We stared at box art and invented the game in our heads before we ever played it.\n\nVideo games took care of us the way childhood things do. They sure as hell didn't solve anything for us. Rather, they gave us somewhere to go, especially when things got too heavy for a 14 year old, or a 9 year old.\n\n> So consider again the question posed by the title of this essay; Who is taking care of the thing that took care of us?\n\nThe obvious answer should be us, right?\n\nSo yes, maybe we who grew up loving the medium did inherit the industry, or at least enough of it to matter. But we inherited it at the curdled moment it became too expensive, too consolidated, too shareholder-bound, and too afraid of risk to behave like the thing we grew up loving.\n\nWe did not inherit the basement sleepovers. We inherited the boardroom built on top of them.\n\n![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3uows9.jpg)\n\nBy the time the N64 kids were old enough to have authority, the economics\u00a0underneath\u00a0had changed.\u00a0A video game, once a peculiar creation of a small group, something to be discovered in magazines and lucky encounters at the local Fred Meyer, was now a multifaceted entity. It was a platform strategy, a revenue forecast, a five-year plan, a franchise pillar, a live-service candidate, a licensing opportunity, and a risk profile.\n\n**And once something becomes that expensive, fear starts making the creative decisions.**\n\nAnd while there are still artists in the room (as well as designers, writers, composers, engineers, and producers) who are trying to infuse wonder into the space, there is always that pressure of fear that lingers. The walls have become thicker, the meetings larger, and the stakes more critical.\u00a0Yes, the people who remember the basement are still there. But too often, they are forced to justify wonder in the language of quarterly growth.\n\nThat is a hard space to exist inside of. \u00a0It probably feels impossible.\n\nPerhaps that\u2019s why so much of the industry feels haunted now. Haunted, not dead or devoid of brilliance, but haunted by the memory of what games felt like before every aspect of them had to justify their existence through monetization.\n\nThe industry feels exhausted and strangely careless, subject to cancellations and studio closures. Incredibly impersonal layoffs after successful launches. Broken games with day-one patches. Fans treated as both audience and nuisance. Creators treated as replaceable until the game needs a soul, at which point everyone acts surprised that soul isn't outsourced cheaply.\n\nI know the root of all this is money. It is always money, or fear of losing it, or the sickness that sets in when making money stops being enough. Modern games are expensive, and the teams that work on them are huge. Investors are impatient and always looking for growth and new sources of revenue. The whole system learned to speak in terms that are aggressively bloodless: Engagement. Retention. Monthly active users. Conversion.\n\nThat language itself? \u00a0Well, that's a warning sign in and of itself. Because God knows no child ever sat cross-legged in their basement and thought, \"I hope this experience optimizes retention.\"\u00a0We just wanted to **play**. We wanted to be somewhere else for a while.\n\nThat is why I hold so fast to Nintendo.\n\nNintendo appeared to be the company that truly understood the concept for a very long time. And no, not perfectly...but well enough. Nostalgia does, after all, aggressively sand the edges of disappointment.\n\nBut they understood, even under the heavy fire of critics and industry pros, that the graphics race was fruitless if it became the only race. They understood that hardware could still be toy-like, and that the controllers, the box art, the **whimsy** of all it was not to become trivial.\n\nThe Nintendo DS was weird, yet it functioned exceptionally well. The Wii was even more peculiar, and we all know how that turned out. The Wii U was a complete mess, but we are still thriving on the legacy of games that flowed from it.\n\nAnd the Switch, at its best, felt like a fantastic answer to a question we had all been asking without knowing it.\n\nNintendo would look at the industry running in one direction and quietly walk away. Sometimes that led to genius, sometimes to confusion. But I respect the refusal. They did not seem desperate to become everyone else.\n\nThis is why their silence in the current state of the beleaguered gaming industry feels so off to me. And not mysterious, like in years past. Not their usual theatrics, either. \u00a0Just...silent.\n\n![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3uvchx.jpg)\n\nSurely, there is a difference. Old Nintendo secrecy felt like ceremony; like a curtain in front of a\u00a0stage. You knew something was behind it. You could feel the heat behind it. How I pine for the days of the magazine covers, the E3 reveals, the demo kiosks, the new Mario games and demos that propelled the hardware into making sense.\n\nThe current silence feels like a closed, nondescript door, a Post-it note affixed, suggesting that everything is fine and that we should simply wait and understand. However, I am writing this to tell the world that I am standing outside that door, holding onto forty years of memories, and wondering if they truly comprehend what we are genuinely requesting.\n\nI don\u2019t need Nintendo to live in the past. I don\u2019t need Mario trapped forever in my childhood, Zelda to apologize for evolving, or Pok\u00e9mon to be targeted at me. My son loves what he loves, and his Nintendo is genuine because it\u2019s not mine. And vice versa.\n\nBut I want Nintendo, and the industry as a whole, to remember that the role of stewardship of this industry and medium is important, and it is dramatically different from extraction.\u00a0A steward asks what must be preserved so the thing can keep living. An extractor asks how much can be taken before it collapses. Do we feel the difference yet?\n\nThis is what I mean.\u00a0 Too often, games feel managed by extraction criteria. Wrench out more money from players, get every last drop of labor from developers, trigger every last bit of nostalgia from aging fans, siphon more attention from children. At some point, don't we all stop feeling like participants? Instead, maybe we all start feeling like a resource.\n\nThat is a poisonous thing to do to **play**.\n\nPlay is delicate, but not fragile in the way the word suggests. It can survive frustration and \u00a0difficulty. It can outlast waiting, bad graphics, weird controllers, glitches, and loading times. We know this because some of the greatest games ever made survived all of those things.\n\nWhat play has a harder time surviving is **contempt**. Even unintentionally, the industry oozes contempt for developers, for physical ownership, for the idea of a finished game, and the unique, sacred relationship people form within the worlds that shaped them.\n\nHaha. Maybe that sounds too precious. Maybe it is?\n\nBut I remember how it felt! I remember going into stores just to stand near the games. The neon tubes and cardboard standees. The agony of waiting for the next issue of Nintendo Power. The little emotional earthquake of seeing and experiencing a new Super Mario game.\n\nMy soul felt literal weight. The games themselves? They occupied actual space, both in the world and in my heart.\n\nI understand that the world has changed significantly. Today, children and young adults find their own sense of magic in places like Fortnite lobbies and Adopt Me sessions. These are games that I do not play, nor fully comprehend. I am also not naive enough to believe that the disappearance of my rituals means the disappearance of theirs.\n\n![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3v3h09.jpg)\n\nBut I am concerned that the gaming industry has mistaken availability for wonder. Everything\u00a0is available, yet less tangible. A game can be announced, leaked, datamined, patched, apologized for, monetized, and recontextualized before it even has the chance to exist in our imaginations.\n\nThis isn\u2019t entirely anyone\u2019s fault. It\u2019s the nature of the modern world. The machine feeds on information, and we all participate in it. Companies tease, insiders leak, fans speculate, algorithms amplify, dataminers excavate, and the marketing cycle begins earlier and earlier, making the game feel almost late to its own arrival.\n\nWaiting used to be unpleasant. I don\u2019t want to deny that. It could be maddening, especially when you were young, powerless, and dependent on parents, allowance, birthdays, Christmas, rentals, and the mysterious supply chain of a local store.\n\nHowever, waiting also gave our imaginations a chance to grow. We had time to live with a screenshot, turn rumors over in our heads, stare at a box in a magazine until the game inside it became partly real, and let anticipation gather weight.\n\nNow, we are constantly fed and rarely nourished. So, do I expect too much of my peers? Maybe.\n\nBut I don\u2019t think the answer is as simple as saying we loved the thing as children and then failed it as adults. That feels too simplistic and perhaps too harsh. Loving a thing as a child doesn\u2019t automatically teach you how to protect it within the industry. It doesn\u2019t teach you how to survive budgets, shareholders, platform demands, layoffs, licensing agreements, production timelines, subscription models, and the complex mathematics of modern risk.\n\n> **Sometimes, love gets into the building and still loses the meeting. **Sometimes, the people who remember the basement are there, doing their best, but the room is speaking a foreign language.\n\nThat\u2019s the aspect I keep returning to. The understanding of the immense power games possess is invaluable knowledge for artists. However, it poses a significant risk to marketers. In a thriving industry, artists would take the lead, leveraging this knowledge, while marketers would assist in disseminating it to the world. But today, the current order has been reversed.\n\nSigh. Perhaps all industries undergo a similar transformation. Maybe this is what happens. Wild creativity becomes culture. Culture hardens into business. Then the business learns to defend itself against the very culture that made it valuable. \u00a0Nevertheless, I refuse to relinquish that easily.\n\n> The truth is, the industry is still alive.\n\nYou can still sense it when a game is crafted with meticulous care. When a developer places their trust in the player. When an unconventional idea withstands the scrutiny of a meeting. When a soundtrack knows precisely where to strike the right chord. When a game arrives, and for a fleeting moment, the old circuit lights up again.\n\nThat is what I want from Nintendo. Not perfection. Not constant announcements. Not a direct pipeline from my childhood preferences to their release calendar.\n\nJust evidence of care. Evidence that someone remembers the craft is not valuable only because it can be licensed, filmed, bundled, and sold again. It is valuable because it meant something. It taught kids how to wait, how to share, how to fail and try again. It made lonely afternoons less lonely and Christmas mornings impossible to sleep through. It gave shape to chapters of our lives before we knew they were chapters.\n\nThat is not nothing. That is not just content.\n\nSo when Nintendo goes quiet, when studios close and games vanish before they are born, I feel something more complicated than disappointment.\u00a0I feel protective.\n\nProtective of the thing that protected a part of me. The part that stood in the aisles with no money, but all the time in the world. The part that believed the kid on the playground with the relative that worked at Nintendo. The part that sat on the floor with friends, cables everywhere, laughing too hard at a sudden\u00a0loss or a blue shell or a missed jump. The part that still wants to believe a plastic box can open a door.\n\nI guess I do not ultimately know who is taking care of the thing that took care of us. I can only place my hope that someone just like us is. I hope they are inside Nintendo, inside the studios, inside the indie teams, inside the places where decisions still get made by people and not only by forecasts. I hope some of them remember blowing into cartridges and staying up too late under the light of a CRT.\n\n![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3z4vqq.jpg)\n\nVideo games are not just software. They were the preludes and conclusions of our childhood; our safe place to retreat when life was messy. And they are places we still retreat to when we need somewhere to go.\n\nI hope, before too much more of this becomes atrophy and argument, someone remembers to leave the door open.\u00a0Because we\u00a0are still standing there. Older and tired, casually burnt out. Less easily astonished than we once were. But still looking for the lighted room that made the rest of the house feel survivable.",
