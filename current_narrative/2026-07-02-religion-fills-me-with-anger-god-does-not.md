@@ -1,5 +1,5 @@
 # Religion fills me with anger. God does not.
-Date: July 2, 2026
+Date: July 5, 2026
 
 <!-- otw-publisher
 {
@@ -146,8 +146,8 @@ Date: July 2, 2026
     {
       "id": "paragraph_mr8gw328_8ghjg0",
       "type": "paragraph",
-      "html": "So yes, read Rexford. Read the critics. Read the apologists. Read the footnotes. Read Joseph Smith as strange, gifted, and flawed instead of a marble statue or a carnival fraud. Read the Book of Abraham honestly enough to admit it is difficult. Read DNA and archaeology without panic.\u0026nbsp;\u003cspan\u003eHave enough grace to hold sacred living ordinances without turning them into social checkpoints, theater, or rites of passage we use to measure one another.\u003c/span\u003e",
-      "text": "So yes, read Rexford. Read the critics. Read the apologists. Read the footnotes. Read Joseph Smith as strange, gifted, and flawed instead of a marble statue or a carnival fraud. Read the Book of Abraham honestly enough to admit it is difficult. Read DNA and archaeology without panic. Have enough grace to hold sacred living ordinances without turning them into social checkpoints, theater, or rites of passage we use to measure one another."
+      "html": "So yes, read Rexford and other critics. Understand the apologists. Read the footnotes. Read Joseph Smith as strange, gifted, and flawed instead of a marble statue or a carnival fraud. Read the Book of Abraham honestly enough to admit it is difficult. Read DNA and archaeology without panic.\u0026nbsp;\u003cspan\u003eHave enough grace to hold sacred living ordinances without turning them into social checkpoints, theater, or rites of passage we use to measure one another.\u003c/span\u003e",
+      "text": "So yes, read Rexford and other critics. Understand the apologists. Read the footnotes. Read Joseph Smith as strange, gifted, and flawed instead of a marble statue or a carnival fraud. Read the Book of Abraham honestly enough to admit it is difficult. Read DNA and archaeology without panic. Have enough grace to hold sacred living ordinances without turning them into social checkpoints, theater, or rites of passage we use to measure one another."
     },
     {
       "id": "paragraph_mr8gw328_5cj13v",
@@ -158,14 +158,14 @@ Date: July 2, 2026
     {
       "id": "paragraph_mr8gw328_tb98mm",
       "type": "paragraph",
-      "html": "My bias is not hidden. I still believe in the Restoration. Not because every answer satisfies me. Today, not many answers even give me the semblance of peace. I have eyes opened wide enough to realize that our present course is just as untidy as our pockmarked history. And it frustrates me more than I have time to explain.",
-      "text": "My bias is not hidden. I still believe in the Restoration. Not because every answer satisfies me. Today, not many answers even give me the semblance of peace. I have eyes opened wide enough to realize that our present course is just as untidy as our pockmarked history. And it frustrates me more than I have time to explain."
+      "html": "My bias is not hidden. I still believe in the Restoration. Not because every answer satisfies me. Today in particular, not many answers give me even the semblance of peace. I have eyes opened wide enough to realize that our present course is just as untidy as our pockmarked history. And it frustrates me more than I have time to explain.",
+      "text": "My bias is not hidden. I still believe in the Restoration. Not because every answer satisfies me. Today in particular, not many answers give me even the semblance of peace. I have eyes opened wide enough to realize that our present course is just as untidy as our pockmarked history. And it frustrates me more than I have time to explain."
     },
     {
       "id": "paragraph_mr8gw328_4cjugi",
       "type": "paragraph",
-      "html": "I believe, my dear world, because \u003ci\u003ea closed system makes less sense to me than an open heaven\u003c/i\u003e. Human language is unstable, scripture is mediated, memory is fragile, prophets are human, and God, if He is still speaking, would need to keep speaking.\u0026nbsp;",
-      "text": "I believe, my dear world, because a closed system makes less sense to me than an open heaven. Human language is unstable, scripture is mediated, memory is fragile, prophets are human, and God, if He is still speaking, would need to keep speaking."
+      "html": "I believe, my dear world, because \u003ci\u003ean open heaven speaks to my soul more than a God who doesn't speak to his children\u003c/i\u003e. Human language is unstable, scripture is mediated, memory is fragile, prophets are human, and God, if He is still speaking, would need to keep speaking.\u0026nbsp;",
+      "text": "I believe, my dear world, because an open heaven speaks to my soul more than a God who doesn't speak to his children. Human language is unstable, scripture is mediated, memory is fragile, prophets are human, and God, if He is still speaking, would need to keep speaking."
     },
     {
       "id": "paragraph_mr8gw328_5rca1h",
@@ -245,13 +245,13 @@ This is where I part ways with the counsel that “research is not the answer.�
 
 If the Restoration is a living search for all truth, we cannot honor God by keeping our minds half shut. If the gospel is as robust as we claim, it should not require managed ignorance to preserve our peace.
 
-So yes, read Rexford. Read the critics. Read the apologists. Read the footnotes. Read Joseph Smith as strange, gifted, and flawed instead of a marble statue or a carnival fraud. Read the Book of Abraham honestly enough to admit it is difficult. Read DNA and archaeology without panic. Have enough grace to hold sacred living ordinances without turning them into social checkpoints, theater, or rites of passage we use to measure one another.
+So yes, read Rexford and other critics. Understand the apologists. Read the footnotes. Read Joseph Smith as strange, gifted, and flawed instead of a marble statue or a carnival fraud. Read the Book of Abraham honestly enough to admit it is difficult. Read DNA and archaeology without panic. Have enough grace to hold sacred living ordinances without turning them into social checkpoints, theater, or rites of passage we use to measure one another.
 
 But my unsolicited advice is to know what clothes you put on in the morning; read all of it with your lens in your hand.
 
-My bias is not hidden. I still believe in the Restoration. Not because every answer satisfies me. Today, not many answers even give me the semblance of peace. I have eyes opened wide enough to realize that our present course is just as untidy as our pockmarked history. And it frustrates me more than I have time to explain.
+My bias is not hidden. I still believe in the Restoration. Not because every answer satisfies me. Today in particular, not many answers give me even the semblance of peace. I have eyes opened wide enough to realize that our present course is just as untidy as our pockmarked history. And it frustrates me more than I have time to explain.
 
-I believe, my dear world, because _a closed system makes less sense to me than an open heaven_. Human language is unstable, scripture is mediated, memory is fragile, prophets are human, and God, if He is still speaking, would need to keep speaking.
+I believe, my dear world, because _an open heaven speaks to my soul more than a God who doesn't speak to his children_. Human language is unstable, scripture is mediated, memory is fragile, prophets are human, and God, if He is still speaking, would need to keep speaking.
 
 I believe in the Restoration less like a person defending their faith, and more like a person listening to God and looking for Jesus.
 
