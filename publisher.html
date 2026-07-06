@@ -2805,7 +2805,16 @@
     const archivePrivateBtn = document.getElementById('archivePrivateBtn');
     const clearDraftBtn = document.getElementById('clearDraftBtn');
     const publishBtn = document.getElementById('publishBtn');
+    const publishedEssaysBtn = document.getElementById('publishedEssaysBtn');
     const publishedLink = document.getElementById('publishedLink');
+    const publishedManager = document.getElementById('publishedManager');
+    const pmStatus = document.getElementById('pmStatus');
+    const pmRefreshBtn = document.getElementById('pmRefreshBtn');
+    const pmComposeBtn = document.getElementById('pmComposeBtn');
+    const pmSearch = document.getElementById('pmSearch');
+    const pmFilter = document.getElementById('pmFilter');
+    const pmEssayList = document.getElementById('pmEssayList');
+    const pmWorkspace = document.getElementById('pmWorkspace');
     const publishedRevisionBar = document.getElementById('publishedRevisionBar');
     const revisionTitle = document.getElementById('revisionTitle');
     const revisionMeta = document.getElementById('revisionMeta');
@@ -2903,6 +2912,8 @@
     let removedFigureUndo = null;
     let lastPublishError = null;
     let activePublishedRevision = readPublishedRevisionMeta();
+    let publishedEssayItems = [];
+    let selectedPublishedEssaySlug = '';
     const lineSpacingValues = ['1.0', '1.15', '1.5', '2.0'];
     const lineSpacingClasses = {
       '1.0': 'line-spacing-10',
@@ -3305,6 +3316,162 @@
         throw error;
       }
       return payload;
+    }
+
+    function setPublishedManagerStatus(text, isError = false) {
+      if (!pmStatus) {
+        return;
+      }
+      pmStatus.textContent = text || 'Published essay launcher';
+      pmStatus.classList.toggle('is-error', Boolean(isError));
+    }
+
+    function publishedEssayMatchesFilter(essay, filter) {
+      if (filter === 'unpublished-revision') {
+        return essay.revisionStatus?.status === 'draft revision';
+      }
+      if (filter === 'stale-aids') {
+        return ['stale', 'validation error'].includes(essay.readingAidStatus?.status || '');
+      }
+      if (filter === 'long') {
+        return Number(essay.wordCount || 0) >= 1200;
+      }
+      return true;
+    }
+
+    function filteredPublishedEssays() {
+      const query = String(pmSearch?.value || '').trim().toLowerCase();
+      const filter = pmFilter?.value || 'latest';
+      let essays = publishedEssayItems.filter((essay) => publishedEssayMatchesFilter(essay, filter));
+      if (query) {
+        essays = essays.filter((essay) => (
+          String(essay.title || '').toLowerCase().includes(query) ||
+          String(essay.date || '').toLowerCase().includes(query) ||
+          String(essay.slug || '').toLowerCase().includes(query)
+        ));
+      }
+      return filter === 'latest' ? essays.slice(0, 12) : essays;
+    }
+
+    function renderPublishedEssayList() {
+      if (!pmEssayList) {
+        return;
+      }
+      const essays = filteredPublishedEssays();
+      if (!essays.length) {
+        pmEssayList.innerHTML = '<div class="pm-empty">No published essays match this view.</div>';
+        renderPublishedWorkspace(null);
+        return;
+      }
+      if (!selectedPublishedEssaySlug || !essays.some((essay) => essay.slug === selectedPublishedEssaySlug)) {
+        selectedPublishedEssaySlug = essays[0].slug || '';
+      }
+      pmEssayList.innerHTML = essays.map((essay) => {
+        const isSelected = essay.slug === selectedPublishedEssaySlug;
+        const revisionStatus = essay.revisionStatus?.status || 'clean';
+        const aidStatus = essay.readingAidStatus?.status || 'none';
+        const warningClass = revisionStatus === 'draft revision' ? ' is-warning' : '';
+        const aidClass = ['stale', 'validation error'].includes(aidStatus) ? ' is-danger' : '';
+        return `
+          <button class="pm-essay${isSelected ? ' is-selected' : ''}" type="button" data-published-slug="${escapeHtml(essay.slug || '')}">
+            <span class="pm-essay-title">${escapeHtml(essay.title || 'Untitled essay')}</span>
+            <span class="pm-essay-meta">${escapeHtml(essay.date || '')} · ${escapeHtml(essay.wordCount || 0)} words · ${escapeHtml(essay.readMinutes || 1)} min</span>
+            <span class="pm-chip-row">
+              <span class="pm-chip${warningClass}">${escapeHtml(revisionStatus)}</span>
+              <span class="pm-chip${aidClass}">aids ${escapeHtml(aidStatus)}</span>
+            </span>
+          </button>
+        `;
+      }).join('');
+      renderPublishedWorkspace(publishedEssayItems.find((essay) => essay.slug === selectedPublishedEssaySlug) || essays[0]);
+    }
+
+    function renderPublishedWorkspace(essay) {
+      if (!pmWorkspace) {
+        return;
+      }
+      if (!essay) {
+        pmWorkspace.innerHTML = '<div class="pm-empty">Select a published essay</div>';
+        return;
+      }
+      const liveUrl = essay.archivePath ? `/${essay.archivePath}` : '#';
+      pmWorkspace.innerHTML = `
+        <div class="pm-workspace-head">
+          <div>
+            <h3 class="pm-workspace-title">${escapeHtml(essay.title || 'Untitled essay')}</h3>
+            <p class="pm-copy">${escapeHtml(essay.date || '')} · ${escapeHtml(essay.archivePath || '')}</p>
+          </div>
+          <div class="pm-actions">
+            <button class="pm-action is-primary" type="button" data-open-published="${escapeHtml(essay.slug || '')}">Open for Revision</button>
+            <a class="pm-action" href="${escapeHtml(liveUrl)}" target="_blank" rel="noopener">Open Live</a>
+          </div>
+        </div>
+        <div class="pm-row">
+          <span class="pm-chip">${escapeHtml(essay.revisionStatus?.status || 'clean')}</span>
+          <span class="pm-chip">aids ${escapeHtml(essay.readingAidStatus?.status || 'none')}</span>
+          <span class="pm-chip">${escapeHtml(essay.protectedBlockCount || 0)} protected</span>
+        </div>
+        <p class="pm-copy">Open this essay into the composer, save a draft revision, review the diff, then republish locally when ready.</p>
+      `;
+    }
+
+    async function loadPublishedEssays() {
+      if (!publishedManager) {
+        return null;
+      }
+      setPublishedManagerStatus('Loading published essays.');
+      if (pmEssayList) {
+        pmEssayList.innerHTML = '<div class="pm-empty">Loading published essays...</div>';
+      }
+      try {
+        const payload = await localPublisherApi('/api/published-essays');
+        publishedEssayItems = Array.isArray(payload.essays) ? payload.essays : [];
+        if (publishedManager) {
+          publishedManager.hidden = false;
+        }
+        renderPublishedEssayList();
+        setPublishedManagerStatus(`${publishedEssayItems.length} published essays loaded.`);
+        return payload;
+      } catch (error) {
+        publishedEssayItems = [];
+        selectedPublishedEssaySlug = '';
+        if (pmEssayList) {
+          pmEssayList.innerHTML = '<div class="pm-empty">Could not load published essays.</div>';
+        }
+        renderPublishedWorkspace(null);
+        setPublishedManagerStatus(error.message || 'Could not load published essays.', true);
+        throw error;
+      }
+    }
+
+    async function openPublishedEssayFromManager(slug) {
+      if (!slug) {
+        return null;
+      }
+      selectedPublishedEssaySlug = slug;
+      renderPublishedEssayList();
+      setPublishedManagerStatus('Opening published essay.');
+      const detail = await localPublisherApi(`/api/published-essays/${encodeURIComponent(slug)}`);
+      openPublishedRevisionInComposer(detail);
+      setPublishedManagerStatus('Published essay opened for revision.');
+      return detail;
+    }
+
+    async function showPublishedEssayManager() {
+      if (!publishedManager) {
+        return null;
+      }
+      publishedManager.hidden = false;
+      publishedManager.scrollIntoView({ block: 'start' });
+      if (!publishedEssayItems.length) {
+        const payload = await loadPublishedEssays();
+        publishedManager.hidden = false;
+        return payload;
+      }
+      renderPublishedEssayList();
+      publishedManager.hidden = false;
+      setPublishedManagerStatus(`${publishedEssayItems.length} published essays loaded.`);
+      return { ok: true, essays: publishedEssayItems };
     }
 
     function readServerDraftMeta() {
@@ -9011,6 +9178,50 @@
     });
 
     previewDraftBtn.addEventListener('click', openDraftPreview);
+
+    publishedEssaysBtn?.addEventListener('click', () => {
+      showPublishedEssayManager().catch((error) => {
+        setSaveState('Published essays unavailable', true);
+        setPublishedManagerStatus(error.message, true);
+      });
+    });
+
+    pmRefreshBtn?.addEventListener('click', () => {
+      loadPublishedEssays().catch((error) => {
+        setSaveState('Published refresh failed', true);
+        setPublishedManagerStatus(error.message, true);
+      });
+    });
+
+    pmComposeBtn?.addEventListener('click', () => {
+      if (publishedManager) {
+        publishedManager.hidden = true;
+      }
+      setSaveState('Composer ready', true);
+    });
+
+    pmSearch?.addEventListener('input', renderPublishedEssayList);
+    pmFilter?.addEventListener('change', renderPublishedEssayList);
+
+    pmEssayList?.addEventListener('click', (event) => {
+      const button = event.target.closest('[data-published-slug]');
+      if (!button) {
+        return;
+      }
+      selectedPublishedEssaySlug = button.dataset.publishedSlug || '';
+      renderPublishedEssayList();
+    });
+
+    pmWorkspace?.addEventListener('click', (event) => {
+      const button = event.target.closest('[data-open-published]');
+      if (!button) {
+        return;
+      }
+      openPublishedEssayFromManager(button.dataset.openPublished || '').catch((error) => {
+        setSaveState('Published essay open failed', true);
+        setPublishedManagerStatus(error.message, true);
+      });
+    });
 
     revisionSaveBtn.addEventListener('click', () => {
       savePublishedRevisionDraft().catch((error) => {

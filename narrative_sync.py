@@ -1326,6 +1326,12 @@ def render_share_page(post, newer_post=None, older_post=None, include_draft_read
         'aria-pressed="false" aria-controls="reading-aids-panel" '
         'data-reading-tools-toggle>Show Reading Tools</button>'
     ) if reading_aids else ''
+    reading_tools_control = (
+        f'''
+                        <span class="reading-tools-control">
+                            {reading_tools_toggle}
+                        </span>'''
+    ) if reading_tools_toggle else ''
     body_reading_tools_attr = ' data-reading-tools="off"' if reading_aids else ''
     body_html = inject_reading_aid_body_notes(body_html, reading_aids)
     reader_nav = render_reader_nav(newer_post, older_post)
@@ -1370,10 +1376,6 @@ def render_share_page(post, newer_post=None, older_post=None, include_draft_read
     <main class="archive-reader">
         <article class="reader-card" aria-labelledby="entry-title">
             <div class="reader-chrome">
-                <a class="reader-mark" href="../personal.html" aria-label="Outside The World">
-                    <img class="reader-mark-image reader-mark-image--dark" src="/Images/Equal.svg" alt="" aria-hidden="true" />
-                    <img class="reader-mark-image reader-mark-image--light" src="/Images/Equal_dark.svg" alt="" aria-hidden="true" />
-                </a>
                 <div class="reader-mode-toggle" role="group" aria-label="Reader mode">
                     <button class="reader-mode-button" type="button" data-reader-mode-option="dark" aria-pressed="true">Dark</button>
                     <button class="reader-mode-button" type="button" data-reader-mode-option="light" aria-pressed="false">Light</button>
@@ -1386,17 +1388,14 @@ def render_share_page(post, newer_post=None, older_post=None, include_draft_read
                     <span class="entry-meta-item"><strong>Filed</strong> {smartypants_safe(post['date'])}</span>
                     <span class="entry-meta-item"><strong>Words</strong> {word_count:,}</span>
                     <span class="entry-meta-item"><strong>Read</strong> {read_minutes} min</span>
+                    <span class="entry-meta-actions">{reading_tools_control}
+                        <span class="share-controls">
+                            <button type="button" class="share-btn" data-share-button>COPY / SHARE LINK</button>
+                            <span class="share-status" id="share-status" aria-live="polite"></span>
+                        </span>
+                    </span>
                 </div>
-            </header>
-            <div class="entry-share-row">
-                <div class="reading-tools-control">
-                    {reading_tools_toggle}
-                </div>
-                <div class="share-controls">
-                    <button type="button" class="share-btn" data-share-button>COPY / SHARE LINK</button>
-                    <span class="share-status" id="share-status" aria-live="polite"></span>
-                </div>
-            </div>{reading_aids_block}
+            </header>{reading_aids_block}
             <div class="entry-body">
 {body_html}
             </div>

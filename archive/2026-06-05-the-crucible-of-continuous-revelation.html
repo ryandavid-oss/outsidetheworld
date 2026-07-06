@@ -41,10 +41,6 @@
     <main class="archive-reader">
         <article class="reader-card" aria-labelledby="entry-title">
             <div class="reader-chrome">
-                <a class="reader-mark" href="../personal.html" aria-label="Outside The World">
-                    <img class="reader-mark-image reader-mark-image--dark" src="/Images/Equal.svg" alt="" aria-hidden="true" />
-                    <img class="reader-mark-image reader-mark-image--light" src="/Images/Equal_dark.svg" alt="" aria-hidden="true" />
-                </a>
                 <div class="reader-mode-toggle" role="group" aria-label="Reader mode">
                     <button class="reader-mode-button" type="button" data-reader-mode-option="dark" aria-pressed="true">Dark</button>
                     <button class="reader-mode-button" type="button" data-reader-mode-option="light" aria-pressed="false">Light</button>
@@ -58,17 +54,17 @@
                     <span class="entry-meta-item"><strong>Filed</strong> June 7, 2026</span>
                     <span class="entry-meta-item"><strong>Words</strong> 9,066</span>
                     <span class="entry-meta-item"><strong>Read</strong> 41 min</span>
+                    <span class="entry-meta-actions">
+                        <span class="reading-tools-control">
+                            <button type="button" class="share-btn reading-tools-toggle" aria-pressed="false" aria-controls="reading-aids-panel" data-reading-tools-toggle>Show Reading Tools</button>
+                        </span>
+                        <span class="share-controls">
+                            <button type="button" class="share-btn" data-share-button>COPY / SHARE LINK</button>
+                            <span class="share-status" id="share-status" aria-live="polite"></span>
+                        </span>
+                    </span>
                 </div>
             </header>
-            <div class="entry-share-row">
-                <div class="reading-tools-control">
-                    <button type="button" class="share-btn reading-tools-toggle" aria-pressed="false" aria-controls="reading-aids-panel" data-reading-tools-toggle>Show Reading Tools</button>
-                </div>
-                <div class="share-controls">
-                    <button type="button" class="share-btn" data-share-button>COPY / SHARE LINK</button>
-                    <span class="share-status" id="share-status" aria-live="polite"></span>
-                </div>
-            </div>
             <section class="reading-aids" id="reading-aids-panel" aria-label="Reading aids">
 <p class="reading-aids__disclosure">Reading tools are AI-assisted. They are provided to help readers navigate the essay. They may not perfectly reflect the author&rsquo;s intent, beliefs, or emphasis. The essay itself remains the source text.</p>
 <div class="reading-aid-tools" role="group" aria-label="Reader tools"><button type="button" class="reading-aid-tool reading-aid-tool--summary" aria-expanded="false" aria-controls="reading-aid-summary" data-reader-aid-toggle>
