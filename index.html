@@ -495,19 +495,24 @@
 
         .front-grid {
             display: grid;
-            grid-template-columns: minmax(0, 2fr) minmax(280px, 360px);
+            grid-template-columns: minmax(0, 2fr) minmax(320px, 1fr);
             gap: clamp(0.9rem, 1.8vw, 1.35rem);
             align-items: start;
+            min-height: 0;
         }
 
-        .main-column {
+        .front-main-feed {
             min-width: 0;
             display: grid;
             gap: clamp(0.9rem, 1.8vw, 1.35rem);
+            align-content: start;
         }
 
         .lead-story,
         .rail,
+        .feed-card,
+        .essay-rail-card,
+        .essay-rail-link,
         .story-card,
         .work-card {
             border: 1px solid var(--rule);
@@ -561,7 +566,7 @@
             max-width: 15ch;
             margin: 0.45rem 0 0;
             font-family: var(--font-serif);
-            font-size: clamp(2.45rem, 4.35vw, 4.65rem);
+            font-size: clamp(2.6rem, 4.8vw, 4.8rem);
             line-height: 0.98;
             letter-spacing: -0.025em;
             text-wrap: balance;
@@ -725,6 +730,155 @@
             gap: clamp(0.9rem, 1.6vw, 1.15rem);
         }
 
+        .mixed-feed {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: clamp(0.9rem, 1.6vw, 1.15rem);
+        }
+
+        .feed-card {
+            min-width: 0;
+            display: grid;
+            gap: 0.75rem;
+            align-content: start;
+            overflow: clip;
+        }
+
+        .feed-card img {
+            display: block;
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            object-fit: cover;
+            border-bottom: 1px solid var(--rule);
+            filter: saturate(0.92) brightness(0.84);
+        }
+
+        .feed-card__copy {
+            display: grid;
+            gap: 0.62rem;
+            padding: clamp(0.9rem, 1.5vw, 1.05rem);
+        }
+
+        .feed-card h2 {
+            margin: 0;
+            font-family: var(--font-serif);
+            font-size: clamp(1.1rem, 1.45vw, 1.55rem);
+            line-height: 1.08;
+            text-wrap: balance;
+        }
+
+        .feed-card p {
+            margin: 0;
+            color: var(--muted);
+            line-height: 1.45;
+        }
+
+        .feed-card--fragment {
+            border-left-color: rgba(224, 191, 184, 0.52);
+        }
+
+        .feed-card--fragment .feed-card__quote {
+            border-left: 2px solid var(--rose);
+            padding-left: 0.8rem;
+            color: var(--text);
+            font-family: var(--font-serif);
+            font-size: clamp(1.08rem, 1.35vw, 1.35rem);
+            line-height: 1.18;
+        }
+
+        .essay-rail {
+            display: grid;
+            min-width: 0;
+            align-content: start;
+            gap: 1px;
+            overflow: clip;
+            background: var(--rule);
+        }
+
+        .essay-rail header,
+        .essay-rail__items {
+            min-width: 0;
+            background: rgba(16, 17, 20, 0.94);
+        }
+
+        .essay-rail header {
+            position: sticky;
+            top: 0;
+            z-index: 2;
+            padding: 1rem;
+            border-bottom: 1px solid var(--rule);
+            background: rgba(16, 17, 20, 0.96);
+            backdrop-filter: blur(12px);
+        }
+
+        .essay-rail__items {
+            display: grid;
+            gap: 1px;
+            background: var(--rule);
+        }
+
+        .essay-month-marker {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            padding: 0.85rem 1rem 0.45rem;
+            color: var(--gold);
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            background: rgba(16, 17, 20, 0.94);
+        }
+
+        .essay-month-marker::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: rgba(217, 192, 140, 0.28);
+        }
+
+        .essay-rail-card,
+        .essay-rail-link {
+            display: grid;
+            gap: 0.55rem;
+            min-width: 0;
+            padding: 0.95rem;
+            background: rgba(16, 17, 20, 0.94);
+        }
+
+        .essay-rail-card img {
+            display: block;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            border-radius: 6px;
+            filter: saturate(0.92) brightness(0.84);
+        }
+
+        .essay-rail-card h2,
+        .essay-rail-link h2 {
+            margin: 0;
+            font-family: var(--font-serif);
+            text-wrap: balance;
+        }
+
+        .essay-rail-card h2 {
+            font-size: clamp(1.1rem, 1.4vw, 1.5rem);
+            line-height: 1.08;
+        }
+
+        .essay-rail-link h2 {
+            font-size: clamp(0.95rem, 1vw, 1.08rem);
+            line-height: 1.12;
+        }
+
+        .essay-rail-card p,
+        .essay-rail-link p {
+            margin: 0;
+            color: var(--muted);
+            line-height: 1.42;
+        }
+
         .story-card,
         .work-card {
             min-width: 0;
@@ -866,6 +1020,47 @@
             text-underline-offset: 0.2em;
         }
 
+        @media (min-width: 1001px) {
+            .masthead {
+                position: sticky;
+                top: 0;
+                z-index: 10;
+                background:
+                    radial-gradient(900px 520px at 14% 0%, rgba(99, 149, 238, 0.12), transparent 62%),
+                    rgba(10, 10, 10, 0.92);
+                backdrop-filter: blur(14px);
+            }
+
+            .front-page {
+                height: calc(100svh - 10.35rem);
+                min-height: 32rem;
+                overflow: hidden;
+            }
+
+            .front-grid {
+                height: 100%;
+                grid-template-columns: minmax(0, 2fr) minmax(320px, 1fr);
+            }
+
+            .front-main-feed,
+            .front-essay-rail {
+                height: 100%;
+                min-height: 0;
+                overflow-y: auto;
+                overscroll-behavior: contain;
+                scrollbar-color: rgba(217, 192, 140, 0.38) rgba(255, 255, 255, 0.05);
+                scrollbar-width: thin;
+            }
+
+            .front-main-feed {
+                padding-right: 0.15rem;
+            }
+
+            .front-essay-rail {
+                padding-left: 0.15rem;
+            }
+        }
+
         @media (max-width: 1000px) {
             .front-grid {
                 grid-template-columns: minmax(0, 1fr);
@@ -954,7 +1149,8 @@
             }
 
             .rail,
-            .modules {
+            .modules,
+            .mixed-feed {
                 grid-template-columns: minmax(0, 1fr);
             }
 
@@ -1081,11 +1277,11 @@
                 </a>
 
                 <nav class="primary-nav" aria-label="Primary">
-                    <a href="personal.html">Read</a>
+                    <a href="personal.html">Personal</a>
                     <a href="image_of_the_day.html">Images</a>
                     <a href="drift_poetry.html">Poems</a>
                     <a href="fragments.html">Fragments</a>
-                    <a href="professional.html">Work</a>
+                    <a href="professional.html">Professional</a>
                 </nav>
 
                 <nav class="site-utilities" aria-label="Site utilities">
@@ -1102,7 +1298,7 @@
                 </button>
             </div>
 
-            <p class="dek">A living record of writing, images, fragments, and work.</p>
+            <p class="dek">Writing, images, fragments, and other mish-mash.</p>
 
             <nav id="mobile-menu" class="mobile-menu-popover" popover aria-label="Site menu">
                 <div class="mobile-menu-popover__head">
@@ -1112,11 +1308,11 @@
                 <div class="mobile-menu-groups">
                     <section aria-labelledby="mobile-menu-primary">
                         <h2 id="mobile-menu-primary">Primary</h2>
-                        <a href="personal.html">Read</a>
+                        <a href="personal.html">Personal</a>
                         <a href="image_of_the_day.html">Images</a>
                         <a href="drift_poetry.html">Poems</a>
                         <a href="fragments.html">Fragments</a>
-                        <a href="professional.html">Work</a>
+                        <a href="professional.html">Professional</a>
                     </section>
                     <section aria-labelledby="mobile-menu-utilities">
                         <h2 id="mobile-menu-utilities">Utilities</h2>
@@ -1192,7 +1388,7 @@
 
         <main class="front-page" aria-label="Outside The World front page">
             <div class="front-grid">
-                <div class="main-column">
+                <div class="front-main-feed" aria-label="Editorial feed">
                     <article class="lead-story" aria-labelledby="lead-title" data-frontpage-slot="leadStory">
                         <div class="lead-copy">
                             <div>
@@ -1212,64 +1408,68 @@
                         </a>
                     </article>
 
-                    <section class="modules" aria-label="More to read and see">
-                        <article class="story-card" data-frontpage-slot="moduleEssay">
-                            <img data-frontpage-image src="Images/archive/2026-06-18-every-solution-has-an-expiration-date.png" alt="Image for Every Solution Has an Expiration Date" loading="lazy" decoding="async" />
-                            <span class="tag" data-frontpage-tag>Essay · June 18, 2026</span>
-                            <h2><a data-frontpage-link href="archive/2026-06-18-every-solution-has-an-expiration-date.html">Every Solution Has an Expiration Date</a></h2>
-                            <p data-frontpage-description>On adulthood, technological fragility, and the exhaustion beneath adaptation.</p>
+                    <section class="mixed-feed" aria-label="Recent poems, images, and fragments" data-frontpage-feed>
+                        <article class="feed-card">
+                            <img src="Images/poetry/terrible-nothing.jpg" alt="Terrible Nothing artwork" loading="lazy" decoding="async" />
+                            <div class="feed-card__copy">
+                                <span class="tag">Poem · June 29, 2026</span>
+                                <h2><a href="drift_poetry.html?poem=living-poem-2026-06-29-terrible-nothing">Terrible Nothing</a></h2>
+                                <p>I walked out, inflatable, but remained within orbit of the pain and all it traveled with.</p>
+                            </div>
                         </article>
-                        <article class="story-card" data-frontpage-slot="moduleImageLatest">
-                            <img data-frontpage-image src="https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/2026-07-06.jpg" alt="XTA" loading="lazy" decoding="async" />
-                            <span class="tag" data-frontpage-tag>Image · July 6, 2026</span>
-                            <h2><a data-frontpage-link href="image_of_the_day.html">XTA</a></h2>
-                            <p data-frontpage-description>The more &ldquo;XTA&rdquo; I see on my receipt, the better.</p>
+                        <article class="feed-card">
+                            <img src="https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/2026-07-06.jpg" alt="XTA" loading="lazy" decoding="async" />
+                            <div class="feed-card__copy">
+                                <span class="tag">Image · July 6, 2026</span>
+                                <h2><a href="image_of_the_day.html">XTA</a></h2>
+                                <p>The more &ldquo;XTA&rdquo; I see on my receipt, the better.</p>
+                            </div>
                         </article>
-                        <article class="story-card" data-frontpage-slot="moduleDriftPrevious">
-                            <img data-frontpage-image src="Images/poetry/permission-to-fall.jpg" alt="Permission to Fall artwork" loading="lazy" decoding="async" />
-                            <span class="tag" data-frontpage-tag>Poem · June 24, 2026</span>
-                            <h2><a data-frontpage-link href="drift_poetry.html?poem=living-poem-2026-06-24-permission-to-fall">Permission to Fall</a></h2>
-                            <p data-frontpage-description>Television static street, corn stalk impressions, and leaves letting go too soon.</p>
+                        <article class="feed-card">
+                            <img src="Images/poetry/permission-to-fall.jpg" alt="Permission to Fall artwork" loading="lazy" decoding="async" />
+                            <div class="feed-card__copy">
+                                <span class="tag">Poem · June 24, 2026</span>
+                                <h2><a href="drift_poetry.html?poem=living-poem-2026-06-24-permission-to-fall">Permission to Fall</a></h2>
+                                <p>Television static street, corn stalk impressions, and leaves letting go too soon.</p>
+                            </div>
                         </article>
-                        <article class="story-card" data-frontpage-slot="moduleImagePrevious">
-                            <img data-frontpage-image src="https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/2026-06-21.jpg" alt="AIRPORT_OR_HOSPITAL?" loading="lazy" decoding="async" />
-                            <span class="tag" data-frontpage-tag>Image · June 21, 2026</span>
-                            <h2><a data-frontpage-link href="image_of_the_day.html">AIRPORT_OR_HOSPITAL?</a></h2>
-                            <p data-frontpage-description>From the Image of the Day run.</p>
+                        <article class="feed-card">
+                            <img src="https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/2026-06-21.jpg" alt="AIRPORT_OR_HOSPITAL?" loading="lazy" decoding="async" />
+                            <div class="feed-card__copy">
+                                <span class="tag">Image · June 21, 2026</span>
+                                <h2><a href="image_of_the_day.html">AIRPORT_OR_HOSPITAL?</a></h2>
+                                <p>From the Image of the Day run.</p>
+                            </div>
                         </article>
                     </section>
-                </div>
 
-                <aside class="rail" aria-labelledby="rail-title">
-                    <header>
-                        <p class="section-label" id="rail-title">Alive now</p>
-                    </header>
-                    <article class="rail-item" data-frontpage-slot="railPreviousEssay">
-                        <span class="tag" data-frontpage-tag>Previous essay</span>
-                        <img data-frontpage-image src="https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3tyaxu.jpg" alt="Image for Who Is Taking Care of the Thing That Took Care of Us?" loading="lazy" decoding="async" />
-                        <h2><a data-frontpage-link href="archive/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us.html">Who Is Taking Care of the Thing That Took Care of Us?</a></h2>
-                        <p data-frontpage-description>How the children of cartridges inherited a medium increasingly shaped by risk.</p>
-                    </article>
-                    <article class="rail-item" data-frontpage-slot="railLatestDrift">
-                        <span class="tag" data-frontpage-tag>The Drift</span>
-                        <img data-frontpage-image src="Images/poetry/terrible-nothing.jpg" alt="Terrible Nothing artwork" loading="lazy" decoding="async" />
-                        <h2><a data-frontpage-link href="drift_poetry.html?poem=living-poem-2026-06-29-terrible-nothing">Terrible Nothing</a></h2>
-                        <p data-frontpage-description>June 29, 2026</p>
-                    </article>
-                    <article class="rail-item fragment-rotator" id="fragmentRotator" data-frontpage-slot="railFragments">
-                        <span class="tag" id="fragmentRotatorTag">frgmnt</span>
-                        <a class="fragment-rotator__body" id="fragmentRotatorLink" href="fragments.html?entry=20260331021459157--i-think-everyone-here-is-so-cool" aria-label="Open frgmnt by Emily">
-                            <p class="quote-fragment" id="fragmentRotatorText">&ldquo;I think everyone here is so cool&rdquo;</p>
-                            <p class="fragment-rotator__meta" id="fragmentRotatorMeta">Emily · March 31, 2026</p>
-                        </a>
-                        <div class="fragment-rotator__progress" aria-hidden="true"><span></span></div>
-                    </article>
                     <article class="work-card" data-frontpage-slot="work">
                         <span class="tag">Work</span>
                         <h2><a data-frontpage-link href="professional.html">Systems, identity, product, and technical leadership.</a></h2>
                         <p data-frontpage-description>Advisory, product judgment, operating systems, and brand-level technical direction.</p>
                         <a class="story-link" data-frontpage-cta href="professional.html">View professional work &rarr;</a>
                     </article>
+                </div>
+
+                <aside class="essay-rail front-essay-rail" aria-labelledby="latest-essays-title">
+                    <header>
+                        <p class="section-label" id="latest-essays-title">Latest essays</p>
+                    </header>
+                    <div class="essay-rail__items" data-essay-rail-items>
+                        <p class="essay-month-marker">July 2026</p>
+                        <article class="essay-rail-card">
+                            <img src="https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3tyaxu.jpg" alt="Image for Who Is Taking Care of the Thing That Took Care of Us?" loading="lazy" decoding="async" />
+                            <span class="tag">Essay · July 1, 2026</span>
+                            <h2><a href="archive/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us.html">Who Is Taking Care of the Thing That Took Care of Us?</a></h2>
+                            <p>How the children of cartridges inherited a medium increasingly shaped by risk.</p>
+                        </article>
+                        <article class="essay-rail-card">
+                            <img src="Images/archive/2026-06-18-every-solution-has-an-expiration-date.png" alt="Image for Every Solution Has an Expiration Date" loading="lazy" decoding="async" />
+                            <span class="tag">Essay · June 18, 2026</span>
+                            <h2><a href="archive/2026-06-18-every-solution-has-an-expiration-date.html">Every Solution Has an Expiration Date</a></h2>
+                            <p>On adulthood, technological fragility, and the exhaustion beneath adaptation.</p>
+                        </article>
+                    </div>
                 </aside>
             </div>
         </main>
@@ -1396,7 +1596,26 @@
         }
 
         const DEFAULT_FRONTPAGE_MANIFEST = {
+            layout: {
+                desktopSplit: '66/33',
+                independentScroll: true,
+                desktopBreakpoint: 1001
+            },
             lead: { slot: 'leadStory', type: 'essay', mode: 'latest' },
+            mainFeed: [
+                { source: 'drift', type: 'drift', mode: 'latest', count: 3, fallbackSource: 'poetry' },
+                { source: 'iotd', type: 'iotd', mode: 'latest', count: 4 },
+                { source: 'fragment', type: 'fragment', mode: 'latest', count: 2 }
+            ],
+            rightEssayRail: {
+                source: 'essays',
+                type: 'essay',
+                mode: 'latest',
+                offset: 1,
+                featuredCount: 4,
+                linkCount: 6,
+                groupBy: 'month'
+            },
             modules: [
                 { slot: 'moduleEssay', type: 'essay', mode: 'offset', offset: 2 },
                 { slot: 'moduleImageLatest', type: 'iotd', mode: 'latest' },
@@ -1434,6 +1653,12 @@
                 rail: Array.isArray(candidate.rail)
                     ? candidate.rail
                     : DEFAULT_FRONTPAGE_MANIFEST.rail,
+                mainFeed: Array.isArray(candidate.mainFeed)
+                    ? candidate.mainFeed
+                    : DEFAULT_FRONTPAGE_MANIFEST.mainFeed,
+                rightEssayRail: candidate.rightEssayRail && typeof candidate.rightEssayRail === 'object'
+                    ? { ...DEFAULT_FRONTPAGE_MANIFEST.rightEssayRail, ...candidate.rightEssayRail }
+                    : DEFAULT_FRONTPAGE_MANIFEST.rightEssayRail,
                 work
             };
         }
@@ -1552,7 +1777,9 @@
 
             return {
                 type: 'fragment',
+                title: buildFragmentTitle(fragment || {}),
                 text,
+                description: [author, date].filter(Boolean).join(' · '),
                 author,
                 tag,
                 date,
@@ -1649,6 +1876,116 @@
             setHref(root, '[data-frontpage-cta]', work.url);
         }
 
+        function displayDateForItem(item) {
+            return item.displayDate || item.date || '';
+        }
+
+        function labelForItem(item) {
+            if (!item) return '';
+            if (item.type === 'essay') return displayDateForItem(item) ? `Essay · ${displayDateForItem(item)}` : 'Essay';
+            if (item.type === 'iotd') return displayDateForItem(item) ? `Image · ${displayDateForItem(item)}` : 'Image';
+            if (item.type === 'drift') return displayDateForItem(item) ? `Poem · ${displayDateForItem(item)}` : 'Poem';
+            return item.tag || 'frgmnt';
+        }
+
+        function monthMarkerForItem(item) {
+            const date = new Date(item && item.date ? item.date : '');
+            if (Number.isNaN(date.valueOf())) return 'Recovered';
+            return new Intl.DateTimeFormat('en-US', {
+                month: 'long',
+                year: 'numeric'
+            }).format(date);
+        }
+
+        function itemsForFeedRule(rule, sources, sourceOrderStart) {
+            const items = sourceForType(rule && rule.type, sources);
+            const count = Math.max(0, Number(rule && rule.count ? rule.count : 0));
+            const offset = Math.max(0, Number(rule && rule.offset ? rule.offset : 0));
+            return items.slice(offset, count ? offset + count : undefined).map((item, index) => ({
+                ...item,
+                sourceOrder: sourceOrderStart + index
+            }));
+        }
+
+        function renderMixedFeed(manifest, sources) {
+            const root = document.querySelector('[data-frontpage-feed]');
+            if (!root) return;
+
+            const rules = Array.isArray(manifest.mainFeed) && manifest.mainFeed.length
+                ? manifest.mainFeed
+                : DEFAULT_FRONTPAGE_MANIFEST.mainFeed;
+            let sourceOrder = 0;
+            const items = rules.flatMap((rule) => {
+                const ruleItems = itemsForFeedRule(rule, sources, sourceOrder);
+                sourceOrder += 100;
+                return ruleItems;
+            }).sort((a, b) => {
+                if (a.dateSort || b.dateSort) return b.dateSort - a.dateSort;
+                return a.sourceOrder - b.sourceOrder;
+            });
+
+            if (!items.length) return;
+
+            root.innerHTML = items.map((item) => {
+                const title = item.type === 'fragment' ? item.text : item.title;
+                const description = item.type === 'fragment'
+                    ? [item.author, item.date].filter(Boolean).join(' · ')
+                    : item.description || item.caption || displayDateForItem(item);
+                const imageMarkup = item.image ? `
+                    <img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.imageAlt || item.title || '')}" loading="lazy" decoding="async" />
+                ` : '';
+                const titleClass = item.type === 'fragment' ? ' class="feed-card__quote"' : '';
+                const modifier = item.type === 'fragment' ? ' feed-card--fragment' : '';
+
+                return `
+                    <article class="feed-card${modifier}">
+                        ${imageMarkup}
+                        <div class="feed-card__copy">
+                            <span class="tag">${escapeHtml(labelForItem(item))}</span>
+                            <h2${titleClass}><a href="${escapeHtml(item.url)}">${escapeHtml(title)}</a></h2>
+                            ${description ? `<p>${escapeHtml(description)}</p>` : ''}
+                        </div>
+                    </article>
+                `;
+            }).join('');
+        }
+
+        function renderEssayRail(manifest, sources, leadItem) {
+            const root = document.querySelector('[data-essay-rail-items]');
+            if (!root) return;
+
+            const rule = manifest.rightEssayRail || DEFAULT_FRONTPAGE_MANIFEST.rightEssayRail;
+            const offset = Math.max(0, Number(rule.offset || 0));
+            const featuredCount = Math.max(0, Number(rule.featuredCount || 4));
+            const linkCount = Math.max(0, Number(rule.linkCount || 6));
+            const essays = sources.essays
+                .filter((item, index) => index >= offset && (!leadItem || item.url !== leadItem.url))
+                .slice(0, featuredCount + linkCount);
+
+            if (!essays.length) return;
+
+            let previousMonth = '';
+            root.innerHTML = essays.map((item, index) => {
+                const marker = monthMarkerForItem(item);
+                const markerMarkup = marker !== previousMonth ? `<p class="essay-month-marker">${escapeHtml(marker)}</p>` : '';
+                previousMonth = marker;
+                const isFeatured = index < featuredCount;
+                const imageMarkup = isFeatured && item.image ? `
+                    <img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.imageAlt || item.title)}" loading="lazy" decoding="async" />
+                ` : '';
+                const body = `
+                    ${markerMarkup}
+                    <article class="${isFeatured ? 'essay-rail-card' : 'essay-rail-link'}">
+                        ${imageMarkup}
+                        <span class="tag">${escapeHtml(labelForItem(item))}</span>
+                        <h2><a href="${escapeHtml(item.url)}">${escapeHtml(item.title)}</a></h2>
+                        ${isFeatured && item.description ? `<p>${escapeHtml(item.description)}</p>` : ''}
+                    </article>
+                `;
+                return body;
+            }).join('');
+        }
+
         function normalizeSources(narratives, imageManifest, driftPoems, fragments) {
             return {
                 essays: (Array.isArray(narratives) ? narratives : [])
@@ -1680,12 +2017,8 @@
         function renderFrontPage(manifest, sources) {
             const leadItem = pickContent(manifest.lead || DEFAULT_FRONTPAGE_MANIFEST.lead, sources);
             renderContentSlot('leadStory', leadItem);
-
-            [...(manifest.modules || []), ...(manifest.rail || [])].forEach((rule) => {
-                if (!rule || !rule.slot || rule.type === 'fragment') return;
-                renderContentSlot(rule.slot, pickContent(rule, sources));
-            });
-
+            renderMixedFeed(manifest, sources);
+            renderEssayRail(manifest, sources, leadItem);
             renderWorkSlot(manifest.work || DEFAULT_FRONTPAGE_MANIFEST.work);
             initFragmentRotator(sources.fragments);
         }
