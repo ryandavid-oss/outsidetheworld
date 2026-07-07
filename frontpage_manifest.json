@@ -1,45 +1,10 @@
 {
   "schema": "otw.frontpage.v1",
   "version": 1,
-  "layout": {
-    "desktopSplit": "66/33",
-    "independentScroll": true,
-    "desktopBreakpoint": 1001
-  },
   "lead": {
     "slot": "leadStory",
     "type": "essay",
     "mode": "latest"
-  },
-  "mainFeed": [
-    {
-      "source": "drift",
-      "type": "drift",
-      "mode": "latest",
-      "count": 3,
-      "fallbackSource": "poetry"
-    },
-    {
-      "source": "iotd",
-      "type": "iotd",
-      "mode": "latest",
-      "count": 4
-    },
-    {
-      "source": "fragment",
-      "type": "fragment",
-      "mode": "latest",
-      "count": 2
-    }
-  ],
-  "rightEssayRail": {
-    "source": "essays",
-    "type": "essay",
-    "mode": "latest",
-    "offset": 1,
-    "featuredCount": 4,
-    "linkCount": 6,
-    "groupBy": "month"
   },
   "modules": [
     {
