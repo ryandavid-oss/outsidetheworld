@@ -1,5 +1,202 @@
 const current_narrative = [
     {
+        "title": "The Midweek Weather",
+        "date": "July 8, 2026",
+        "body": "_This entry about a concert wasn't supposed to be about a concert at all_\n\n![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-08-the-midweek-weather-mrcndnnu.jpg)\n\nI am going to go back to my roots of organic, off-the-cuff writing once per week. While I am having the time of my life diving deep into the realms of religion, technology, and pop culture, I miss the times I would open up Blogger, dash off a (witty to me) explosion of thought, hit submit, and move on.\n\nIdeally, these entries will post sometime on Wednesdays, lending credibility to their name. Longer, fully thought out essays will come on the weekends, when time lends itself more fully to the careful cultivation of thoughts.\n\nCurrently listening to: Yellowcard. It's been in regular rotation for a couple of months now, leading up to the concert I went to with Emily and into the weeks following it. My wife was already a big fan; I remember her talking about them a lot when we first met and talked to each other in that new-relationship find-out verbiage common to fledgling couples. The only other band I remember her talking about more was Illenium, but in retrospect, the passion was always for the punk.\n\nI hadn't really exposed myself much to them. You can think of them in the same pop-punk vein as The All-American Rejects, which was about as much experience as I had with 2000s-era punk before the concert. If we give the genre a bit more license, I suppose my 2003 obsession with Fall Out Boy fits the punk label, though I really think they were more emo-punk.\n\n![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-08-the-midweek-weather-mrcnghjv.jpg \"Up Up Down Down was more than just a name\")\n\nThe tour was given the name of _The Up Up Down Down_ tour, and that admittedly piqued my interest. (If you know, you know.) Again, this was a concert for Emily, so I didn't dive deep or even visit their website. Had I done so, I surely would have found their branding suspicious, to say the least.\n\nAccompanied by the Plain White T's and New Found Glory, the show was full of forty-somethings and their teenage children. What an eclectic group. I really enjoyed people watching as we walked around Arizona Financial Theatre. Given that the show started around 7pm, many of the attendees were clearly just off work, wearing whatever corporate uniform gave them the means to pay for the concert. But there were also the ones who bathed themselves in the chance to relive their past by wearing the hard-edged staples of youth: Converse, leather, denim, battle jackets, and whatever band merch they had stashed in the back of their closets.\n\nYellowcard found themselves inside a wonderful niche of music that outlives its own moment; good rock music tends to do that. So I was not surprised that one of our 15-year-olds at home was fairly jealous when they discovered we went to the show.\n\nI became suspicious as Yellowcard revealed their set after NFG closed theirs. They pregamed their music with a band member dressed up as a Ghostbuster chasing the Stay-Puft Marshmallow Man around the stage. After a few minutes of dark silence, a single spotlight fell on a solitary figure: the lead guitarist playing the soaring and memorable \"Top Gun Anthem.\"\n\nThey're pandering to me, I thought. Why are they pandering to me? It's working.\n\nWhen the full stage was revealed, I saw familiar '80s-era logos. A backdrop suspiciously similar to an NES controller. A mid-concert state reset revealed the band members sitting on sofas in that hand-me-down palette of harvest gold and avocado green plaid, several movie posters in the background. The Goonies. Top Gun. The Karate Kid. Back to the Future. At this point, I might as well have been on stage with them beside my childhood friends, black cables snaking the carpeting toward the Super Nintendo as we whiled away our teenage years.\n\nThe music was undeniably not my generation. In high school, the years when most of us carve out our own musical tastes, my listening was dominated by Soundgarden, Pearl Jam, Stone Temple Pilots, et al. But everything on that set was speaking to me as if it were torn out of the pages of 16-year-old me's journal. I couldn't handle the discrepancy between what I had lived and what I was seeing. I did something that no one should do during an amazing concert.\n\n![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-08-the-midweek-weather-mrcno9hc.jpg \"Lloyd?\")\n\nI started Googling. And while I was doing so, someone on stage was holding a boombox up above his head, a la Lloyd Dobler outside Diane's bedroom window in the 1989 movie _Say Anything._\n\nI quickly found my answer. Yellowcard's lead singer, Ryan Key, was born in 1979. He was almost exactly my age. He hadn't peeked inside my journal; his memories were my memories. Ryan was the one holding the boombox. Ryan was me. He watched that movie at 11 years old, too.\n\nI didn't listen to Yellowcard in high school because Yellowcard was still in high school. The six-year gap between my wife and me was all it really took for \"my music\" and \"her music\" to stand apart in contrast, then all of a sudden fuse together in middle-aged angst.\n\nI can't remember the last time I enjoyed anything more. Like going to see a movie you have no great expectations for, I walked into that concert with little more than the enjoyment of being with my wife, doing something I knew she'd treasure.\n\nI walked out more appreciative of Yellowcard's style of punk music, likely because psychology had done its job and broken through all of my natural defenses by playing the nostalgia card. But it wasn't soulless and vapid sentimentality, like we see all too often from faceless corporations trying to cash in on an aging population's wistful memories.\n\nThis was real nostalgia with bite, carved out lovingly by five men on stage having the time of their middle-aged lives, speaking love through imagery and music to their generation. Meanwhile, a group of 16-year-olds in attendance saw that maybe, just maybe, their parents had been cool once upon a time.\n\n![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-08-the-midweek-weather-mrcntofx.jpg)",
+        "file": "2026-07-08-the-midweek-weather.md",
+        "publisher": {
+            "schema": "otw.publisher.post",
+            "version": 1,
+            "source": "publisher.html",
+            "subhead": "This entry about a concert wasn't supposed to be about a concert at all",
+            "blocks": [
+                {
+                    "id": "image_mrco2ke8_lpcm7l",
+                    "type": "image",
+                    "imageRef": "image_mrco2ke8_lpcm7l",
+                    "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-08-the-midweek-weather-mrcndnnu.jpg",
+                    "displaySize": "original",
+                    "alignment": "center",
+                    "wrapMode": "none"
+                },
+                {
+                    "id": "paragraph_mrco6tme_5spl25",
+                    "type": "paragraph",
+                    "html": "I am going to go back to my roots of organic, off-the-cuff writing once per week. While I am having the time of my life diving deep into the realms of religion, technology, and pop culture, I miss the times I would open up Blogger, dash off a (witty to me) explosion of thought, hit submit, and move on.",
+                    "text": "I am going to go back to my roots of organic, off-the-cuff writing once per week. While I am having the time of my life diving deep into the realms of religion, technology, and pop culture, I miss the times I would open up Blogger, dash off a (witty to me) explosion of thought, hit submit, and move on."
+                },
+                {
+                    "id": "paragraph_mrco6tme_8hm1o2",
+                    "type": "paragraph",
+                    "html": "Ideally, these entries will post sometime on Wednesdays, lending credibility to their name. Longer, fully thought out essays will come on the weekends, when time lends itself more fully to the careful cultivation of thoughts.",
+                    "text": "Ideally, these entries will post sometime on Wednesdays, lending credibility to their name. Longer, fully thought out essays will come on the weekends, when time lends itself more fully to the careful cultivation of thoughts."
+                },
+                {
+                    "id": "paragraph_mrco6tme_zbta5g",
+                    "type": "paragraph",
+                    "html": "Currently listening to: Yellowcard. It's been in regular rotation for a couple of months now, leading up to the concert I went to with Emily and into the weeks following it. My wife was already a big fan; I remember her talking about them a lot when we first met and talked to each other in that new-relationship find-out verbiage common to fledgling couples. The only other band I remember her talking about more was Illenium, but in retrospect, the passion was always for the punk.",
+                    "text": "Currently listening to: Yellowcard. It's been in regular rotation for a couple of months now, leading up to the concert I went to with Emily and into the weeks following it. My wife was already a big fan; I remember her talking about them a lot when we first met and talked to each other in that new-relationship find-out verbiage common to fledgling couples. The only other band I remember her talking about more was Illenium, but in retrospect, the passion was always for the punk."
+                },
+                {
+                    "id": "paragraph_mrco6tme_0h0jrr",
+                    "type": "paragraph",
+                    "html": "I hadn't really exposed myself much to them. You can think of them in the same pop-punk vein as The All-American Rejects, which was about as much experience as I had with 2000s-era punk before the concert. If we give the genre a bit more license, I suppose my 2003 obsession with Fall Out Boy fits the punk label, though I really think they were more emo-punk.",
+                    "text": "I hadn't really exposed myself much to them. You can think of them in the same pop-punk vein as The All-American Rejects, which was about as much experience as I had with 2000s-era punk before the concert. If we give the genre a bit more license, I suppose my 2003 obsession with Fall Out Boy fits the punk label, though I really think they were more emo-punk."
+                },
+                {
+                    "id": "image_mrco2kf2_mguy1q",
+                    "type": "image",
+                    "imageRef": "image_mrco2kf2_mguy1q",
+                    "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-08-the-midweek-weather-mrcnghjv.jpg",
+                    "displaySize": "medium",
+                    "alignment": "center",
+                    "wrapMode": "wrap-left"
+                },
+                {
+                    "id": "paragraph_mrco6tme_i0zoaf",
+                    "type": "paragraph",
+                    "html": "The tour was given the name of <em>The Up Up Down Down</em> tour, and that admittedly piqued my interest. (If you know, you know.) Again, this was a concert for Emily, so I didn't dive deep or even visit their website. Had I done so, I surely would have found their branding suspicious, to say the least.",
+                    "text": "The tour was given the name of The Up Up Down Down tour, and that admittedly piqued my interest. (If you know, you know.) Again, this was a concert for Emily, so I didn't dive deep or even visit their website. Had I done so, I surely would have found their branding suspicious, to say the least."
+                },
+                {
+                    "id": "paragraph_mrco6tme_ztgm3u",
+                    "type": "paragraph",
+                    "html": "Accompanied by the Plain White T's and New Found Glory, the show was full of forty-somethings and their teenage children. What an eclectic group. I really enjoyed people watching as we walked around Arizona Financial Theatre. Given that the show started around 7pm, many of the attendees were clearly just off work, wearing whatever corporate uniform gave them the means to pay for the concert. But there were also the ones who bathed themselves in the chance to relive their past by wearing the hard-edged staples of youth: Converse, leather, denim, battle jackets, and whatever band merch they had stashed in the back of their closets.",
+                    "text": "Accompanied by the Plain White T's and New Found Glory, the show was full of forty-somethings and their teenage children. What an eclectic group. I really enjoyed people watching as we walked around Arizona Financial Theatre. Given that the show started around 7pm, many of the attendees were clearly just off work, wearing whatever corporate uniform gave them the means to pay for the concert. But there were also the ones who bathed themselves in the chance to relive their past by wearing the hard-edged staples of youth: Converse, leather, denim, battle jackets, and whatever band merch they had stashed in the back of their closets."
+                },
+                {
+                    "id": "paragraph_mrco6tme_ah9dib",
+                    "type": "paragraph",
+                    "html": "Yellowcard found themselves inside a wonderful niche of music that outlives its own moment; good rock music tends to do that. So I was not surprised that one of our 15-year-olds at home was fairly jealous when they discovered we went to the show.",
+                    "text": "Yellowcard found themselves inside a wonderful niche of music that outlives its own moment; good rock music tends to do that. So I was not surprised that one of our 15-year-olds at home was fairly jealous when they discovered we went to the show."
+                },
+                {
+                    "id": "paragraph_mrco6tme_lgse5k",
+                    "type": "paragraph",
+                    "html": "I became suspicious as Yellowcard revealed their set after NFG closed theirs. They pregamed their music with a band member dressed up as a Ghostbuster chasing the Stay-Puft Marshmallow Man around the stage. After a few minutes of dark silence, a single spotlight fell on a solitary figure: the lead guitarist playing the soaring and memorable \"Top Gun Anthem.\"",
+                    "text": "I became suspicious as Yellowcard revealed their set after NFG closed theirs. They pregamed their music with a band member dressed up as a Ghostbuster chasing the Stay-Puft Marshmallow Man around the stage. After a few minutes of dark silence, a single spotlight fell on a solitary figure: the lead guitarist playing the soaring and memorable \"Top Gun Anthem.\""
+                },
+                {
+                    "id": "paragraph_mrco6tme_yf8amn",
+                    "type": "paragraph",
+                    "html": "They're pandering to me, I thought. Why are they pandering to me? It's working.",
+                    "text": "They're pandering to me, I thought. Why are they pandering to me? It's working."
+                },
+                {
+                    "id": "paragraph_mrco6tme_mgelph",
+                    "type": "paragraph",
+                    "html": "When the full stage was revealed, I saw familiar '80s-era logos. A backdrop suspiciously similar to an NES controller. A mid-concert state reset revealed the band members sitting on sofas in that hand-me-down palette of harvest gold and avocado green plaid, several movie posters in the background. The Goonies. Top Gun. The Karate Kid. Back to the Future. At this point, I might as well have been on stage with them beside my childhood friends, black cables snaking the carpeting toward the Super Nintendo as we whiled away our teenage years.",
+                    "text": "When the full stage was revealed, I saw familiar '80s-era logos. A backdrop suspiciously similar to an NES controller. A mid-concert state reset revealed the band members sitting on sofas in that hand-me-down palette of harvest gold and avocado green plaid, several movie posters in the background. The Goonies. Top Gun. The Karate Kid. Back to the Future. At this point, I might as well have been on stage with them beside my childhood friends, black cables snaking the carpeting toward the Super Nintendo as we whiled away our teenage years."
+                },
+                {
+                    "id": "paragraph_mrco6tme_uxu7c6",
+                    "type": "paragraph",
+                    "html": "The music was undeniably not my generation. In high school, the years when most of us carve out our own musical tastes, my listening was dominated by Soundgarden, Pearl Jam, Stone Temple Pilots, et al. But everything on that set was speaking to me as if it were torn out of the pages of 16-year-old me's journal. I couldn't handle the discrepancy between what I had lived and what I was seeing. I did something that no one should do during an amazing concert.",
+                    "text": "The music was undeniably not my generation. In high school, the years when most of us carve out our own musical tastes, my listening was dominated by Soundgarden, Pearl Jam, Stone Temple Pilots, et al. But everything on that set was speaking to me as if it were torn out of the pages of 16-year-old me's journal. I couldn't handle the discrepancy between what I had lived and what I was seeing. I did something that no one should do during an amazing concert."
+                },
+                {
+                    "id": "image_mrco2kf4_k7j2km",
+                    "type": "image",
+                    "imageRef": "image_mrco2kf4_k7j2km",
+                    "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-08-the-midweek-weather-mrcno9hc.jpg",
+                    "displaySize": "medium",
+                    "alignment": "center",
+                    "wrapMode": "wrap-right"
+                },
+                {
+                    "id": "paragraph_mrco6tmf_f95egk",
+                    "type": "paragraph",
+                    "html": "I started Googling. And while I was doing so, someone on stage was holding a boombox up above his head, a la Lloyd Dobler outside Diane's bedroom window in the 1989 movie <em>Say Anything.</em>",
+                    "text": "I started Googling. And while I was doing so, someone on stage was holding a boombox up above his head, a la Lloyd Dobler outside Diane's bedroom window in the 1989 movie Say Anything."
+                },
+                {
+                    "id": "paragraph_mrco6tmf_lpusj3",
+                    "type": "paragraph",
+                    "html": "I quickly found my answer. Yellowcard's lead singer, Ryan Key, was born in 1979. He was almost exactly my age. He hadn't peeked inside my journal; his memories were my memories. Ryan was the one holding the boombox. Ryan was me. He watched that movie at 11 years old, too.",
+                    "text": "I quickly found my answer. Yellowcard's lead singer, Ryan Key, was born in 1979. He was almost exactly my age. He hadn't peeked inside my journal; his memories were my memories. Ryan was the one holding the boombox. Ryan was me. He watched that movie at 11 years old, too."
+                },
+                {
+                    "id": "paragraph_mrco6tmf_fk20tl",
+                    "type": "paragraph",
+                    "html": "I didn't listen to Yellowcard in high school because Yellowcard was still in high school. The six-year gap between my wife and me was all it really took for \"my music\" and \"her music\" to stand apart in contrast, then all of a sudden fuse together in middle-aged angst.",
+                    "text": "I didn't listen to Yellowcard in high school because Yellowcard was still in high school. The six-year gap between my wife and me was all it really took for \"my music\" and \"her music\" to stand apart in contrast, then all of a sudden fuse together in middle-aged angst."
+                },
+                {
+                    "id": "paragraph_mrco6tmf_hvkqle",
+                    "type": "paragraph",
+                    "html": "I can't remember the last time I enjoyed anything more. Like going to see a movie you have no great expectations for, I walked into that concert with little more than the enjoyment of being with my wife, doing something I knew she'd treasure.",
+                    "text": "I can't remember the last time I enjoyed anything more. Like going to see a movie you have no great expectations for, I walked into that concert with little more than the enjoyment of being with my wife, doing something I knew she'd treasure."
+                },
+                {
+                    "id": "paragraph_mrco6tmf_6gjljb",
+                    "type": "paragraph",
+                    "html": "I walked out more appreciative of Yellowcard's style of punk music, likely because psychology had done its job and broken through all of my natural defenses by playing the nostalgia card. But it wasn't soulless and vapid sentimentality, like we see all too often from faceless corporations trying to cash in on an aging population's wistful memories.",
+                    "text": "I walked out more appreciative of Yellowcard's style of punk music, likely because psychology had done its job and broken through all of my natural defenses by playing the nostalgia card. But it wasn't soulless and vapid sentimentality, like we see all too often from faceless corporations trying to cash in on an aging population's wistful memories."
+                },
+                {
+                    "id": "paragraph_mrco6tmf_zw2r6w",
+                    "type": "paragraph",
+                    "html": "This was real nostalgia with bite, carved out lovingly by five men on stage having the time of their middle-aged lives, speaking love through imagery and music to their generation. Meanwhile, a group of 16-year-olds in attendance saw that maybe, just maybe, their parents had been cool once upon a time.",
+                    "text": "This was real nostalgia with bite, carved out lovingly by five men on stage having the time of their middle-aged lives, speaking love through imagery and music to their generation. Meanwhile, a group of 16-year-olds in attendance saw that maybe, just maybe, their parents had been cool once upon a time."
+                },
+                {
+                    "id": "image_mrco2kf6_8fun30",
+                    "type": "image",
+                    "imageRef": "image_mrco2kf6_8fun30",
+                    "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-08-the-midweek-weather-mrcntofx.jpg",
+                    "displaySize": "original",
+                    "alignment": "center",
+                    "wrapMode": "none"
+                }
+            ],
+            "images": [
+                {
+                    "id": "image_mrco2ke8_lpcm7l",
+                    "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-08-the-midweek-weather-mrcndnnu.jpg",
+                    "objectKey": "",
+                    "alt": "Narrative image",
+                    "caption": "",
+                    "displaySize": "original",
+                    "alignment": "center",
+                    "wrapMode": "none"
+                },
+                {
+                    "id": "image_mrco2kf2_mguy1q",
+                    "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-08-the-midweek-weather-mrcnghjv.jpg",
+                    "objectKey": "",
+                    "alt": "Narrative image",
+                    "caption": "Up Up Down Down was more than just a name",
+                    "displaySize": "medium",
+                    "alignment": "center",
+                    "wrapMode": "wrap-left"
+                },
+                {
+                    "id": "image_mrco2kf4_k7j2km",
+                    "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-08-the-midweek-weather-mrcno9hc.jpg",
+                    "objectKey": "",
+                    "alt": "Narrative image",
+                    "caption": "Lloyd?",
+                    "displaySize": "medium",
+                    "alignment": "center",
+                    "wrapMode": "wrap-right"
+                },
+                {
+                    "id": "image_mrco2kf6_8fun30",
+                    "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-08-the-midweek-weather-mrcntofx.jpg",
+                    "objectKey": "",
+                    "alt": "Narrative image",
+                    "caption": "",
+                    "displaySize": "original",
+                    "alignment": "center",
+                    "wrapMode": "none"
+                }
+            ]
+        },
+        "post_id": "July 8, 2026--the-midweek-weather",
+        "share_path": "archive/2026-07-08-the-midweek-weather.html",
+        "og_image": "Images/og/archive/2026-07-08-the-midweek-weather.png"
+    },
+    {
         "title": "Religion fills me with anger. God does not.",
         "date": "July 5, 2026",
         "body": "_P.S.: agency is not an excuse for lazy certainty._\n\n![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-02-religion-fills-me-with-anger-mr8g848e.jpg \"A picture of Jesus, because this essay needs a better center than my anger.\")\n\nAbout a week ago, Meta\u2019s algorithm found it necessary to present me with a Facebook post.\n\nIt arrived wearing the colors of religion. And while that made the whole thing more suspect, it was still useful. Silly algorithms are rarely _pastoral_, but occasionally, the stars align and they are _timely_.\n\nIt was penned (typed? Bleated? Excreted?) by a man named Rexford, who described himself as having spent thirty-eight years as a faithful Latter-day Saint. He framed it as a labor of love. A warning. A careful explanation. A testimony of departure.\n\nI remember adjusting my posture in my chair. I sighed; familiar thoughts inside me moaned. \u00a0I've lived long enough to know when I\u2019ve seen this before.\n\nThose are the hardest things to read. While a cheap shot announces itself, a post written by someone who once lived inside the same religious house speaks with borrowed authority. It does not simply accuse from outside. It says, \"I know who you are, and I know right where it hurts.\"\n\nI read it with disquiet. Not panic, though I am known for both panic and anxiety. But I recognized the posture immediately: someone holding both the wound and the weapon, mistaking blood on his hands for clarity.\n\nSome of what Rexford wrote was familiar. Some fell flat. A small portion was predictably, yet undeniably, chilling. In the end, it was all choreographed to make LDS faith seem not merely strained, but impossible.\n\nWhere I am in life now, I have enough perspective and grace to avoid mistaking my first reaction for my final one. I am less interested in engaging the argument than understanding why these arguments keep happening. Over, and over.\n\nBecause we are not arguing only about facts. Faith has facts around it. Documents. Dates. DNA. Translations. Papyri. But faith itself is not a spreadsheet. It is closer to the old analogy of asking someone what salt tastes like.\n\nWhat is scripture? What is translation? What counts as evidence? What kind of thing is a prophet allowed to be? Can God speak through damaged people, unstable language, partial records, institutions, and memory? Or does human limitation disqualify the whole thing?\n\n_That is the argument beneath the argument._\n\nBoth sides wear lenses. Critics have them. Believers have them. Former believers have them. \u201cJust following the facts\u201d people have them too. I posit that nobody approaches questions of faith cleanly.\u00a0We all arrive with wounds, betrayals, favorite verses, unanswered prayers, and our desperate need for belonging.\n\nThat does not mean truth is unknowable. I do not believe that. It means truth is rarely received without static.\n\nAnd yes, dammit, the stakes are real.\n\nPeople lose faith over this material. Marriages crack. Families go quiet. Parents wonder what they did wrong. Children feel lied to. Former members feel dismissed. Believers feel mocked. Everyone claims, with such righteous violence, that they are finally telling the truth. Listen, and be saved.\n\nWhen the stakes are this high, the human brain craves safety. So we retreat to our corners. We become fluent in confirmation bias, calling it discernment when it agrees with us and bias when it belongs to someone else.\n\nCritics scour the record for facts that justify their anger. Believers hide inside filtered materials to protect their peace. Both sides end up doing the same thing: fingers in ears, eyes closed, hoping the uncomfortable parts disappear.\n\nThat is not medicine. It is _fragility_ paraded as testimony, or _pride_ laid bare and calling itself research and science.\n\nThis is where I part ways with the counsel that \u201cresearch is not the answer.\u201d I understand the pastoral instinct. Some people wander into the storm unprepared and get shredded. But when the stakes are families, marriages, integrity, and souls, any type of retreat feels less like faith and more like the abdication of free agency.\n\nIf the Restoration is a living search for all truth, we cannot honor God by keeping our minds half shut. If the gospel is as robust as we claim, it should not require managed ignorance to preserve our peace.\n\nSo yes, read Rexford and other critics. Understand the apologists. Read the footnotes. Read Joseph Smith as strange, gifted, and flawed instead of a marble statue or a carnival fraud. Read the Book of Abraham honestly enough to admit it is difficult. Read DNA and archaeology without panic.\u00a0Have enough grace to hold sacred living ordinances without turning them into social checkpoints, theater, or rites of passage we use to measure one another.\n\nBut my unsolicited advice is to know what clothes you put on in the morning; read all of it with your lens in your hand.\n\nMy bias is not hidden. I still believe in the Restoration. Not because every answer satisfies me. Today in particular, not many answers give me even the semblance of peace. I have eyes opened wide enough to realize that our present course is just as untidy as our pockmarked history. And it frustrates me more than I have time to explain.\n\nI believe, my dear world, because _an open heaven speaks to my soul more than a God who doesn't speak to his children_. Human language is unstable, scripture is mediated, memory is fragile, prophets are human, and God needs to keep speaking through it all.\n\nI believe in the Restoration less like a person defending their faith, and more like a person listening to God and looking for Jesus.\n\nThat voice, for me, has not gone silent.\n\nAnd until it does, I refuse to confuse fear with faith, certainty with truth, or someone else\u2019s departure with my obligation to leave.",
