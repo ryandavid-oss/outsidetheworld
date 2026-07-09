@@ -631,6 +631,33 @@
             overflow: hidden;
         }
 
+        .lead-art[data-image-state="fallback"] {
+            display: grid;
+            place-items: end start;
+            padding: clamp(1rem, 2.4vw, 1.6rem);
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .lead-art[data-image-state="fallback"]::before,
+        .story-card[data-image-state="fallback"]::before,
+        .rail-item[data-image-state="fallback"]::before {
+            content: attr(data-image-fallback);
+            min-width: 0;
+            color: rgba(255, 255, 255, 0.76);
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            letter-spacing: 0.13em;
+            line-height: 1.45;
+            text-transform: uppercase;
+        }
+
+        .lead-art[data-image-state="fallback"]::before {
+            max-width: 22rem;
+            position: relative;
+            z-index: 1;
+        }
+
         .lead-art img {
             display: block;
             width: 100%;
@@ -649,6 +676,12 @@
                 linear-gradient(180deg, rgba(10, 10, 10, 0.02), rgba(10, 10, 10, 0.42)),
                 repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 18px);
             pointer-events: none;
+        }
+
+        .lead-art[data-image-state="fallback"] img,
+        .story-card[data-image-state="fallback"] > img,
+        .rail-item[data-image-state="fallback"] > img {
+            display: none;
         }
 
         .rail {
@@ -692,6 +725,21 @@
             object-fit: cover;
             border-radius: 6px;
             filter: saturate(0.92) brightness(0.86);
+        }
+
+        .rail-item[data-image-state="fallback"]::before {
+            display: grid;
+            min-height: 8rem;
+            place-items: end start;
+            border-radius: 6px;
+            padding: 0.8rem;
+            background:
+                radial-gradient(circle at 12% 14%, rgba(255, 105, 180, 0.18), transparent 34%),
+                radial-gradient(circle at 88% 84%, rgba(99, 149, 238, 0.16), transparent 40%),
+                linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.018)),
+                #0b0c0f;
+            aspect-ratio: 16 / 10;
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .rail-item h2,
@@ -744,6 +792,22 @@
             object-fit: cover;
             border-bottom: 1px solid var(--rule);
             filter: saturate(0.9) brightness(0.82);
+        }
+
+        .story-card[data-image-state="fallback"]::before {
+            display: grid;
+            width: calc(100% + 2.1rem);
+            min-height: 9rem;
+            place-items: end start;
+            margin: -1.05rem -1.05rem 0;
+            padding: 0.9rem 1.05rem;
+            border-bottom: 1px solid var(--rule);
+            background:
+                radial-gradient(circle at 12% 14%, rgba(255, 105, 180, 0.18), transparent 34%),
+                radial-gradient(circle at 88% 84%, rgba(99, 149, 238, 0.16), transparent 40%),
+                linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.018)),
+                #0b0c0f;
+            aspect-ratio: 16 / 10;
         }
 
         .work-card {
@@ -1208,7 +1272,7 @@
                             <a class="story-link" data-frontpage-cta href="archive/2026-07-02-religion-fills-me-with-anger-god-does-not.html">Continue reading &rarr;</a>
                         </div>
                         <a class="lead-art" data-frontpage-art href="archive/2026-07-02-religion-fills-me-with-anger-god-does-not.html" aria-label="Continue reading Religion fills me with anger. God does not.">
-                            <img data-frontpage-image src="https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-02-religion-fills-me-with-anger-mr8g848e.jpg" alt="Image for Religion fills me with anger. God does not." decoding="async" />
+                            <img data-frontpage-image src="https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-02-religion-fills-me-with-anger-mr8g848e.jpg" alt="Image for Religion fills me with anger. God does not." loading="eager" fetchpriority="high" decoding="async" width="1600" height="1000" />
                         </a>
                     </article>
 
@@ -1480,6 +1544,17 @@
             return match ? match[1] : '';
         }
 
+        function uniqueStrings(values) {
+            const seen = new Set();
+            return values
+                .map((value) => String(value || '').trim())
+                .filter((value) => {
+                    if (!value || seen.has(value)) return false;
+                    seen.add(value);
+                    return true;
+                });
+        }
+
         function extractEssayImage(post) {
             const publisher = post && post.publisher && typeof post.publisher === 'object' ? post.publisher : null;
             const publisherImages = publisher && Array.isArray(publisher.images) ? publisher.images : [];
@@ -1493,22 +1568,30 @@
             return extractMarkdownImage(post && post.body ? post.body : '');
         }
 
-        function normalizeEssayEntry(post) {
+        function normalizeEssayEntry(post, fallbackImage = '') {
             const publisher = post && post.publisher && typeof post.publisher === 'object' ? post.publisher : null;
             const date = String(post && post.date ? post.date : '');
             const title = stripHtml(post && post.title ? post.title : '').replace(/\s+/g, ' ').trim() || 'Untitled essay';
             const description = cleanText(publisher && publisher.subhead ? publisher.subhead : '') || buildExcerpt(post && post.body ? post.body : '', 145);
             const url = buildCanonicalArchivePath(post);
+            const imageCandidates = uniqueStrings([
+                extractEssayImage(post),
+                post && post.og_image,
+                fallbackImage
+            ]);
 
             return {
                 type: 'essay',
+                label: 'Essay',
                 title,
                 date,
                 dateSort: parseContentDate(date),
                 description,
-                image: extractEssayImage(post),
+                image: imageCandidates[0] || '',
+                imageCandidates,
                 imageAlt: `Image for ${title}`,
-                url
+                url,
+                sourceName: 'narrative_data.js'
             };
         }
 
@@ -1516,15 +1599,18 @@
             const title = stripHtml(entry && entry.title ? entry.title : '').replace(/\s+/g, ' ').trim() || 'Image of the Day';
             return {
                 type: 'iotd',
+                label: 'Image',
                 date: String(entry && entry.date ? entry.date : ''),
                 title,
                 caption: cleanText(entry && entry.caption ? entry.caption : '') || 'From the Image of the Day run.',
                 description: cleanText(entry && entry.caption ? entry.caption : '') || 'From the Image of the Day run.',
                 image: String(entry && entry.image ? entry.image : ''),
+                imageCandidates: uniqueStrings([entry && entry.image]),
                 imageAlt: title,
                 displayDate: formatIotdDate(entry && entry.date ? entry.date : ''),
                 dateSort: parseContentDate(entry && entry.date ? entry.date : ''),
-                url: 'image_of_the_day.html'
+                url: 'image_of_the_day.html',
+                sourceName: 'image_manifest.json'
             };
         }
 
@@ -1534,13 +1620,16 @@
 
             return {
                 type: 'drift',
+                label: 'Poem',
                 title,
                 date,
                 dateSort: parseContentDate(date),
                 description: buildExcerpt(poem && poem.body ? poem.body : '', 135),
                 image: String(poem && poem.image ? poem.image : ''),
+                imageCandidates: uniqueStrings([poem && poem.image]),
                 imageAlt: `${title} artwork`,
-                url: `drift_poetry.html?poem=${encodeURIComponent(poem && poem.id ? poem.id : '')}`
+                url: `drift_poetry.html?poem=${encodeURIComponent(poem && poem.id ? poem.id : '')}`,
+                sourceName: poem && poem.source ? String(poem.source) : 'new_poetry_data.js'
             };
         }
 
@@ -1552,12 +1641,16 @@
 
             return {
                 type: 'fragment',
+                label: 'frgmnt',
                 text,
+                title: buildFragmentTitle(fragment || {}),
+                description: text,
                 author,
                 tag,
                 date,
                 dateSort: parseContentDate(fragment && fragment.timestamp ? fragment.timestamp : ''),
-                url: `fragments.html?entry=${encodeURIComponent(buildFragmentId(fragment || {}))}`
+                url: `fragments.html?entry=${encodeURIComponent(buildFragmentId(fragment || {}))}`,
+                sourceName: 'fragments_data.js'
             };
         }
 
@@ -1600,9 +1693,103 @@
             if (element && value) element.href = value;
         }
 
+        function imageOwnerFor(image) {
+            return image.closest('[data-frontpage-art], .story-card, .rail-item');
+        }
+
+        function imageFallbackText(slot, item) {
+            const label = tagForSlot(slot, item) || item?.label || 'Outside The World';
+            const title = item?.title || item?.text || 'Image unavailable';
+            return `${label} / ${title}`;
+        }
+
+        function setImageFallback(image, slot, item) {
+            const owner = imageOwnerFor(image);
+            if (!owner) return;
+            owner.dataset.imageState = 'fallback';
+            owner.dataset.imageFallback = imageFallbackText(slot, item);
+            image.hidden = true;
+            image.removeAttribute('src');
+        }
+
+        function clearImageFallback(image) {
+            const owner = imageOwnerFor(image);
+            if (!owner) return;
+            owner.removeAttribute('data-image-state');
+            owner.removeAttribute('data-image-fallback');
+            image.hidden = false;
+        }
+
+        function renderFrontpageImage(image, item, slot) {
+            if (!image) return;
+            const candidates = uniqueStrings(
+                Array.isArray(item && item.imageCandidates) && item.imageCandidates.length
+                    ? item.imageCandidates
+                    : [item && item.image]
+            );
+            image.decoding = 'async';
+
+            if (slot === 'leadStory') {
+                image.loading = 'eager';
+                image.fetchPriority = 'high';
+                image.width = image.width || 1600;
+                image.height = image.height || 1000;
+            } else {
+                image.loading = 'lazy';
+                image.fetchPriority = 'auto';
+                image.width = image.width || 800;
+                image.height = image.height || 500;
+            }
+
+            if (!candidates.length) {
+                setImageFallback(image, slot, item);
+                return;
+            }
+
+            let candidateIndex = 0;
+            image.onload = () => {
+                clearImageFallback(image);
+            };
+            image.onerror = () => {
+                candidateIndex += 1;
+                if (candidateIndex < candidates.length) {
+                    image.src = candidates[candidateIndex];
+                    return;
+                }
+                console.warn('Homepage image failed; showing fallback panel.', {
+                    slot,
+                    title: item && item.title,
+                    candidates
+                });
+                setImageFallback(image, slot, item);
+            };
+
+            image.alt = item.imageAlt || item.title || '';
+            clearImageFallback(image);
+            image.src = candidates[0];
+        }
+
+        function initHomepageImageGuards() {
+            document.querySelectorAll('[data-frontpage-image]').forEach((image) => {
+                if (image.dataset.frontpageGuarded === 'true') return;
+                image.dataset.frontpageGuarded = 'true';
+                image.onerror = () => {
+                    setImageFallback(image, image.closest('[data-frontpage-slot]')?.dataset.frontpageSlot || '', {
+                        title: image.alt || 'Image unavailable',
+                        label: 'Outside The World'
+                    });
+                };
+            });
+        }
+
         function renderContentSlot(slot, item) {
             const root = document.querySelector(`[data-frontpage-slot="${slot}"]`);
-            if (!root || !item) return;
+            if (!root) return;
+            if (!item) {
+                if (slot !== 'leadStory') root.hidden = true;
+                return;
+            }
+            root.hidden = false;
 
             setText(root, '[data-frontpage-tag]', tagForSlot(slot, item));
             setText(root, '[data-frontpage-link]', item.title);
@@ -1611,23 +1798,13 @@
             setHref(root, '[data-frontpage-cta]', item.url);
 
             const image = root.querySelector('[data-frontpage-image]');
-            if (image && item.image) {
-                image.src = item.image;
-                image.alt = item.imageAlt || item.title || '';
-                image.decoding = 'async';
-                if (slot !== 'leadStory') {
-                    image.loading = 'lazy';
-                }
-                image.hidden = false;
-            } else if (image) {
-                image.hidden = true;
-            }
+            renderFrontpageImage(image, item, slot);
 
             const art = root.querySelector('[data-frontpage-art]');
             if (art) {
                 art.href = item.url;
                 art.setAttribute('aria-label', `Continue reading ${item.title}`);
-                art.hidden = !item.image;
+                art.hidden = false;
             }
 
             const meta = root.querySelector('[data-frontpage-meta]');
@@ -1650,19 +1827,22 @@
         }
 
         function normalizeSources(narratives, imageManifest, driftPoems, fragments) {
+            const images = (Array.isArray(imageManifest) ? imageManifest : [])
+                .map(normalizeIotdEntry)
+                .filter((entry) => entry.date && entry.image)
+                .sort((a, b) => b.dateSort - a.dateSort || String(b.date).localeCompare(String(a.date)));
+            const latestImageFallback = images[0] && images[0].image ? images[0].image : '';
+
             return {
                 essays: (Array.isArray(narratives) ? narratives : [])
-                    .map(normalizeEssayEntry)
+                    .map((post) => normalizeEssayEntry(post, latestImageFallback))
                     .filter((entry) => entry.title && entry.url)
-                    .sort((a, b) => b.dateSort - a.dateSort),
-                images: (Array.isArray(imageManifest) ? imageManifest : [])
-                    .map(normalizeIotdEntry)
-                    .filter((entry) => entry.date && entry.image)
-                    .sort((a, b) => b.dateSort - a.dateSort),
+                    .sort((a, b) => b.dateSort - a.dateSort || String(b.date).localeCompare(String(a.date))),
+                images,
                 drift: (Array.isArray(driftPoems) ? driftPoems : [])
                     .map(normalizeDriftEntry)
                     .filter((entry) => entry.title && entry.url)
-                    .sort((a, b) => b.dateSort - a.dateSort),
+                    .sort((a, b) => b.dateSort - a.dateSort || String(b.date).localeCompare(String(a.date))),
                 fragments: (Array.isArray(fragments) ? fragments : [])
                     .filter((fragment) => {
                         const body = cleanText(fragment && fragment.text ? fragment.text : '');
@@ -1673,11 +1853,11 @@
                         return body && !isBot && !isTest;
                     })
                     .map(normalizeFragmentEntry)
-                    .sort((a, b) => b.dateSort - a.dateSort)
+                    .sort((a, b) => b.dateSort - a.dateSort || String(b.date).localeCompare(String(a.date)))
             };
         }
 
-        function renderFrontPage(manifest, sources) {
+        function renderFrontPage(manifest, sources, options = {}) {
             const leadItem = pickContent(manifest.lead || DEFAULT_FRONTPAGE_MANIFEST.lead, sources);
             renderContentSlot('leadStory', leadItem);
 
@@ -1687,7 +1867,12 @@
             });
 
             renderWorkSlot(manifest.work || DEFAULT_FRONTPAGE_MANIFEST.work);
-            initFragmentRotator(sources.fragments);
+            if (options.renderFragments !== false && sources.fragments && sources.fragments.length) {
+                initFragmentRotator(sources.fragments);
+            } else if (options.renderFragments !== false) {
+                const fragmentRoot = document.querySelector('[data-frontpage-slot="railFragments"]');
+                if (fragmentRoot) fragmentRoot.hidden = true;
+            }
         }
 
         async function loadLocalFragments() {
@@ -1698,20 +1883,29 @@
         }
 
         async function initFrontPageContent() {
-            const [
+            initHomepageImageGuards();
+
+            const manifestPromise = loadFrontpageManifest();
+            const narrativesPromise = loadFrontpageSource('narrative_data.js', () => loadArrayFromScript('narrative_data.js', 'typeof current_narrative !== "undefined" ? current_narrative : []'));
+            const imageManifestPromise = loadFrontpageSource('image_manifest.json', loadImageManifest);
+            const livingVersePromise = loadFrontpageSource('new_poetry_data.js', () => loadArrayFromScript('new_poetry_data.js', 'typeof livingVerse !== "undefined" ? livingVerse : []'));
+            const recoveredPoemsPromise = loadFrontpageSource('poetry_data.js', () => loadArrayFromScript('poetry_data.js', 'typeof archive !== "undefined" ? archive : []'));
+            const fragmentsPromise = loadFrontpageSource('fragments_data.js', loadLocalFragments);
+
+            const manifest = await manifestPromise;
+            renderWorkSlot(manifest.work || DEFAULT_FRONTPAGE_MANIFEST.work);
+
+            const [narratives, imageManifest] = await Promise.all([narrativesPromise, imageManifestPromise]);
+            renderFrontPage(
                 manifest,
-                narratives,
-                imageManifest,
-                livingVerse,
-                recoveredPoems,
-                fragments
-            ] = await Promise.all([
-                loadFrontpageManifest(),
-                loadFrontpageSource('narrative_data.js', () => loadArrayFromScript('narrative_data.js', 'typeof current_narrative !== "undefined" ? current_narrative : []')),
-                loadFrontpageSource('image_manifest.json', loadImageManifest),
-                loadFrontpageSource('new_poetry_data.js', () => loadArrayFromScript('new_poetry_data.js', 'typeof livingVerse !== "undefined" ? livingVerse : []')),
-                loadFrontpageSource('poetry_data.js', () => loadArrayFromScript('poetry_data.js', 'typeof archive !== "undefined" ? archive : []')),
-                loadFrontpageSource('fragments_data.js', loadLocalFragments)
+                normalizeSources(narratives, imageManifest, [], []),
+                { renderFragments: false }
+            );
+
+            const [livingVerse, recoveredPoems, fragments] = await Promise.all([
+                livingVersePromise,
+                recoveredPoemsPromise,
+                fragmentsPromise
             ]);
 
             const driftPoems = Array.isArray(livingVerse) && livingVerse.length ? livingVerse : recoveredPoems;
@@ -1857,13 +2051,23 @@
         function buildSearchIndex() {
             if (searchIndexPromise) return searchIndexPromise;
 
-            searchIndexPromise = Promise.all([
-                loadArrayFromScript('narrative_data.js', 'typeof current_narrative !== "undefined" ? current_narrative : []'),
-                loadArrayFromScript('poetry_data.js', 'typeof archive !== "undefined" ? archive : []'),
-                loadArrayFromScript('new_poetry_data.js', 'typeof livingVerse !== "undefined" ? livingVerse : []'),
-                loadArrayFromScript('fragments_data.js', 'typeof window !== "undefined" && Array.isArray(window.otw_fragments) ? window.otw_fragments : []'),
-                loadArrayFromScript('wayback_purified.js', 'typeof wayback_raw_dump !== "undefined" ? wayback_raw_dump : []')
-            ]).then(([narratives, poems, livingVerse, fragments, wayback]) => {
+            const searchSources = [
+                ['narrative_data.js', () => loadArrayFromScript('narrative_data.js', 'typeof current_narrative !== "undefined" ? current_narrative : []')],
+                ['poetry_data.js', () => loadArrayFromScript('poetry_data.js', 'typeof archive !== "undefined" ? archive : []')],
+                ['new_poetry_data.js', () => loadArrayFromScript('new_poetry_data.js', 'typeof livingVerse !== "undefined" ? livingVerse : []')],
+                ['fragments_data.js', () => loadArrayFromScript('fragments_data.js', 'typeof window !== "undefined" && Array.isArray(window.otw_fragments) ? window.otw_fragments : []')],
+                ['wayback_purified.js', () => loadArrayFromScript('wayback_purified.js', 'typeof wayback_raw_dump !== "undefined" ? wayback_raw_dump : []')]
+            ];
+
+            searchIndexPromise = Promise.allSettled(searchSources.map(([, loader]) => loader()))
+                .then((results) => results.map((result, index) => {
+                    if (result.status === 'fulfilled' && Array.isArray(result.value)) {
+                        return result.value;
+                    }
+                    console.warn(`Could not load ${searchSources[index][0]} for search; continuing with partial index.`, result.reason);
+                    return [];
+                }))
+                .then(([narratives, poems, livingVerse, fragments, wayback]) => {
                 const entries = [];
 
                 narratives.forEach((post) => {
