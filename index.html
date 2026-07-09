@@ -12,31 +12,36 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="mobile-web-app-capable" content="yes" />
 
-    <title>Outside The World &mdash; Main Page</title>
-    <meta name="description" content="A living front page of Outside The World: essays, poems, images, fragments, and professional work." />
+    <title>Outside The World &mdash; Writing, Images, Fragments, and Work</title>
+    <meta name="description" content="Essays, poems, images, fragments, and professional work by Rylee Burningham." />
     <link rel="canonical" href="https://outsidetheworld.com/" />
     <link rel="alternate" type="application/atom+xml" title="Outside The World Atom Feed" href="https://outsidetheworld.com/atom.xml" />
+    <link rel="manifest" href="site.webmanifest" />
 
     <link href="favicon.svg" rel="icon" type="image/svg+xml" />
     <link rel="preload" as="image" href="Images/Equal.svg" type="image/svg+xml" />
-    <link rel="preload" as="image" href="https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-02-religion-fills-me-with-anger-mr8g848e.jpg" />
+    <link rel="preconnect" href="https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev" crossorigin />
+    <link rel="preload" as="image" href="https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-08-the-midweek-weather-mrcndnnu.jpg" />
     <link href="theme.css" rel="stylesheet" />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Outside The World" />
     <meta property="og:locale" content="en_US" />
-    <meta property="og:title" content="Outside The World &mdash; Front Page" />
-    <meta property="og:description" content="A living front page of essays, poems, images, fragments, and professional work." />
-    <meta property="og:image" content="https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-02-religion-fills-me-with-anger-mr8g848e.jpg" />
-    <meta property="og:image:secure_url" content="https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-02-religion-fills-me-with-anger-mr8g848e.jpg" />
+    <meta property="og:title" content="Outside The World" />
+    <meta property="og:description" content="Essays, poems, images, fragments, and professional work by Rylee Burningham." />
+    <meta property="og:image" content="https://outsidetheworld.com/Images/og/otw-feed-1200x630.jpg" />
+    <meta property="og:image:secure_url" content="https://outsidetheworld.com/Images/og/otw-feed-1200x630.jpg" />
     <meta property="og:image:type" content="image/jpeg" />
-    <meta property="og:image:alt" content="Narrative image for Religion fills me with anger. God does not." />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Outside The World front page." />
     <meta property="og:url" content="https://outsidetheworld.com/" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Outside The World &mdash; Front Page" />
-    <meta name="twitter:description" content="A living front page of essays, poems, images, fragments, and professional work." />
-    <meta name="twitter:image" content="https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-02-religion-fills-me-with-anger-mr8g848e.jpg" />
+    <meta name="twitter:title" content="Outside The World" />
+    <meta name="twitter:description" content="Essays, poems, images, fragments, and professional work by Rylee Burningham." />
+    <meta name="twitter:image" content="https://outsidetheworld.com/Images/og/otw-feed-1200x630.jpg" />
+    <meta name="twitter:image:alt" content="Outside The World front page." />
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-YKRKPFV2MB"></script>
     <script>
@@ -50,9 +55,6 @@
         :root {
             --void: #0a0a0a;
             --ink: #101114;
-            --panel: #16171b;
-            --panel-soft: rgba(255, 255, 255, 0.045);
-            --panel-strong: rgba(255, 255, 255, 0.075);
             --rule: rgba(238, 238, 238, 0.14);
             --rule-strong: rgba(238, 238, 238, 0.24);
             --text: #eeeeee;
@@ -121,7 +123,7 @@
             color: #fff;
         }
 
-        .lead-story h1 a,
+        .lead-story h2 a,
         .rail-item h2 a,
         .story-card h2 a,
         .work-card h2 a {
@@ -171,6 +173,18 @@
         :focus-visible {
             outline: 2px solid var(--rose);
             outline-offset: 4px;
+        }
+
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
         }
 
         .page {
@@ -282,10 +296,6 @@
             font-size: clamp(0.98rem, 1.25vw, 1.2rem);
             line-height: 1.35;
             text-wrap: balance;
-        }
-
-        .all-destinations-label-short {
-            display: none;
         }
 
         .search-popover,
@@ -557,7 +567,7 @@
             box-shadow: 0 0 18px rgba(75, 227, 110, 0.4);
         }
 
-        .lead-story h1 {
+        .lead-story h2 {
             max-width: 15ch;
             margin: 0.45rem 0 0;
             font-family: var(--font-serif);
@@ -567,13 +577,13 @@
             text-wrap: balance;
         }
 
-        .lead-story h1 a {
+        .lead-story h2 a {
             color: #fff;
             text-shadow: 0 5px 18px rgba(0, 0, 0, 0.78);
         }
 
-        .lead-story h1 a:hover,
-        .lead-story h1 a:focus-visible {
+        .lead-story h2 a:hover,
+        .lead-story h2 a:focus-visible {
             background:
                 linear-gradient(
                     to bottom,
@@ -949,19 +959,6 @@
         }
 
         @media (max-width: 900px) {
-            .masthead-top {
-                grid-template-columns: auto 1fr;
-                align-items: center;
-            }
-
-            .site-utilities {
-                justify-content: flex-end;
-            }
-
-            .primary-nav {
-                grid-column: 1 / -1;
-            }
-
             .lead-art {
                 aspect-ratio: 16 / 9;
             }
@@ -976,30 +973,10 @@
                 padding-inline: clamp(0.75rem, 4vw, 1rem);
             }
 
-            .masthead {
-                gap: 0.85rem;
-            }
-
-            .site-logo img {
-                width: clamp(10rem, 44vw, 13rem);
-            }
-
-            .primary-nav {
-                display: grid;
-                grid-template-columns: repeat(4, minmax(0, 1fr));
-                gap: 0.4rem;
-            }
-
-            .primary-nav a,
-            .site-utilities button,
             .search-popover button,
             .destination-popover button {
                 padding-inline: 0.68rem;
                 font-size: 0.66rem;
-            }
-
-            .front-page {
-                padding-top: 0.9rem;
             }
 
             .lead-story {
@@ -1010,7 +987,7 @@
                 padding: 1rem;
             }
 
-            .lead-story h1 {
+            .lead-story h2 {
                 max-width: 14ch;
                 font-size: clamp(2rem, 8.5vw, 3.05rem);
                 line-height: 1;
@@ -1032,33 +1009,6 @@
         }
 
         @media (max-width: 430px) {
-            .masthead-top {
-                gap: 0.75rem;
-            }
-
-            .site-utilities {
-                grid-column: 1 / -1;
-                width: 100%;
-                display: grid;
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-            }
-
-            .site-utilities button {
-                width: 100%;
-            }
-
-            .all-destinations-label-long {
-                display: none;
-            }
-
-            .all-destinations-label-short {
-                display: inline;
-            }
-
-            .primary-nav {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-            }
-
             .dek {
                 font-size: 1rem;
             }
@@ -1123,15 +1073,106 @@
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "Outside The World",
-  "url": "https://outsidetheworld.com/",
-  "description": "A living front page of essays, poems, images, fragments, and professional work.",
-  "publisher": {
-    "@type": "Organization",
-    "name": "Outside the World is New, LLC",
-    "logo": "https://outsidetheworld.com/Images/Equal.svg"
-  }
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://outsidetheworld.com/#website",
+      "name": "Outside The World",
+      "url": "https://outsidetheworld.com/",
+      "description": "Essays, poems, images, fragments, and professional work by Rylee Burningham.",
+      "publisher": {
+        "@id": "https://outsidetheworld.com/#organization"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://outsidetheworld.com/#organization",
+      "name": "Outside the World is New, LLC",
+      "url": "https://outsidetheworld.com/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://outsidetheworld.com/Images/Equal.svg",
+        "width": 1409,
+        "height": 347
+      },
+      "founder": {
+        "@id": "https://outsidetheworld.com/#person"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://outsidetheworld.com/#person",
+      "name": "Rylee Burningham",
+      "url": "https://outsidetheworld.com/"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://outsidetheworld.com/#webpage",
+      "url": "https://outsidetheworld.com/",
+      "name": "Outside The World \u2014 Writing, Images, Fragments, and Work",
+      "description": "Essays, poems, images, fragments, and professional work by Rylee Burningham.",
+      "isPartOf": {
+        "@id": "https://outsidetheworld.com/#website"
+      },
+      "author": {
+        "@id": "https://outsidetheworld.com/#person"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://outsidetheworld.com/Images/og/otw-feed-1200x630.jpg",
+        "width": 1200,
+        "height": 630
+      },
+      "mainEntity": {
+        "@id": "https://outsidetheworld.com/#frontpage-list"
+      }
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://outsidetheworld.com/#frontpage-list",
+      "name": "Outside The World front page",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "The Midweek Weather",
+          "url": "https://outsidetheworld.com/archive/2026-07-08-the-midweek-weather.html",
+          "image": "https://outsidetheworld.com/Images/og/archive/2026-07-08-the-midweek-weather.png"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Every Solution Has an Expiration Date",
+          "url": "https://outsidetheworld.com/archive/2026-06-18-every-solution-has-an-expiration-date.html",
+          "image": "https://outsidetheworld.com/Images/og/archive/2026-06-18-every-solution-has-an-expiration-date.png"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Image of the Day",
+          "url": "https://outsidetheworld.com/image_of_the_day.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "The Drift",
+          "url": "https://outsidetheworld.com/drift_poetry.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "name": "frgmnts",
+          "url": "https://outsidetheworld.com/fragments.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "name": "Professional work",
+          "url": "https://outsidetheworld.com/professional.html"
+        }
+      ]
+    }
+  ]
 }
     </script>
 </head>
@@ -1145,19 +1186,16 @@
                 </a>
 
                 <nav class="primary-nav" aria-label="Primary">
-                    <a href="personal.html">Read</a>
+                    <a href="personal.html">Personal</a>
                     <a href="image_of_the_day.html">Images</a>
                     <a href="drift_poetry.html">Poems</a>
                     <a href="fragments.html">Fragments</a>
-                    <a href="professional.html">Work</a>
+                    <a href="professional.html">Professional</a>
                 </nav>
 
                 <nav class="site-utilities" aria-label="Site utilities">
                     <button type="button" popovertarget="search-panel">Search</button>
-                    <button type="button" popovertarget="destinations" aria-label="All destinations">
-                        <span class="all-destinations-label-long">All destinations</span>
-                        <span class="all-destinations-label-short" aria-hidden="true">Menu</span>
-                    </button>
+                    <button type="button" popovertarget="destinations">All destinations</button>
                 </nav>
 
                 <button class="mobile-menu-button" type="button" popovertarget="mobile-menu" aria-label="Open site menu">
@@ -1166,7 +1204,7 @@
                 </button>
             </div>
 
-            <p class="dek">A living record of writing, images, fragments, and work.</p>
+            <p class="dek">Writing, images, fragments, and work.</p>
 
             <nav id="mobile-menu" class="mobile-menu-popover" popover aria-label="Site menu">
                 <div class="mobile-menu-popover__head">
@@ -1176,11 +1214,11 @@
                 <div class="mobile-menu-groups">
                     <section aria-labelledby="mobile-menu-primary">
                         <h2 id="mobile-menu-primary">Primary</h2>
-                        <a href="personal.html">Read</a>
+                        <a href="personal.html">Personal</a>
                         <a href="image_of_the_day.html">Images</a>
                         <a href="drift_poetry.html">Poems</a>
                         <a href="fragments.html">Fragments</a>
-                        <a href="professional.html">Work</a>
+                        <a href="professional.html">Professional</a>
                     </section>
                     <section aria-labelledby="mobile-menu-utilities">
                         <h2 id="mobile-menu-utilities">Utilities</h2>
@@ -1255,24 +1293,25 @@
         </header>
 
         <main class="front-page" aria-label="Outside The World front page">
+            <h1 class="visually-hidden">Outside The World</h1>
             <div class="front-grid">
                 <div class="main-column">
                     <article class="lead-story" aria-labelledby="lead-title" data-frontpage-slot="leadStory">
                         <div class="lead-copy">
                             <div>
                                 <span class="eyebrow" data-frontpage-tag>Latest essay</span>
-                                <h1 id="lead-title"><a data-frontpage-link href="archive/2026-07-02-religion-fills-me-with-anger-god-does-not.html">Religion fills me with anger. God does not.</a></h1>
+                                <h2 id="lead-title"><a data-frontpage-link href="archive/2026-07-08-the-midweek-weather.html">The Midweek Weather</a></h2>
                             </div>
-                            <p class="lead-dek" data-frontpage-description>P.S.: agency is not an excuse for lazy certainty.</p>
+                            <p class="lead-dek" data-frontpage-description>This entry about a concert wasn't supposed to be about a concert at all</p>
                             <div class="story-meta" data-frontpage-meta>
-                                <span>July 5, 2026</span>
+                                <span>July 8, 2026</span>
                                 <span>Essay</span>
                                 <span>Current narrative</span>
                             </div>
-                            <a class="story-link" data-frontpage-cta href="archive/2026-07-02-religion-fills-me-with-anger-god-does-not.html">Continue reading &rarr;</a>
+                            <a class="story-link" data-frontpage-cta href="archive/2026-07-08-the-midweek-weather.html">Continue reading The Midweek Weather &rarr;</a>
                         </div>
-                        <a class="lead-art" data-frontpage-art href="archive/2026-07-02-religion-fills-me-with-anger-god-does-not.html" aria-label="Continue reading Religion fills me with anger. God does not.">
-                            <img data-frontpage-image src="https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-02-religion-fills-me-with-anger-mr8g848e.jpg" alt="Image for Religion fills me with anger. God does not." loading="eager" fetchpriority="high" decoding="async" width="1600" height="1000" />
+                        <a class="lead-art" data-frontpage-art href="archive/2026-07-08-the-midweek-weather.html" aria-label="Continue reading The Midweek Weather">
+                            <img data-frontpage-image src="https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-08-the-midweek-weather-mrcndnnu.jpg" alt="Image for The Midweek Weather" loading="eager" fetchpriority="high" decoding="async" width="1600" height="1000" />
                         </a>
                     </article>
 
@@ -1284,10 +1323,10 @@
                             <p data-frontpage-description>On adulthood, technological fragility, and the exhaustion beneath adaptation.</p>
                         </article>
                         <article class="story-card" data-frontpage-slot="moduleImageLatest">
-                            <img data-frontpage-image src="https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/2026-07-06.jpg" alt="XTA" loading="lazy" decoding="async" />
-                            <span class="tag" data-frontpage-tag>Image · July 6, 2026</span>
-                            <h2><a data-frontpage-link href="image_of_the_day.html">XTA</a></h2>
-                            <p data-frontpage-description>The more &ldquo;XTA&rdquo; I see on my receipt, the better.</p>
+                            <img data-frontpage-image src="https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/2026-07-07.jpg" alt="MOON_PEAKING" loading="lazy" decoding="async" />
+                            <span class="tag" data-frontpage-tag>Image · July 7, 2026</span>
+                            <h2><a data-frontpage-link href="image_of_the_day.html">MOON_PEAKING</a></h2>
+                            <p data-frontpage-description>From the Image of the Day run.</p>
                         </article>
                         <article class="story-card" data-frontpage-slot="moduleDriftPrevious">
                             <img data-frontpage-image src="Images/poetry/permission-to-fall.jpg" alt="Permission to Fall artwork" loading="lazy" decoding="async" />
@@ -1296,10 +1335,10 @@
                             <p data-frontpage-description>Television static street, corn stalk impressions, and leaves letting go too soon.</p>
                         </article>
                         <article class="story-card" data-frontpage-slot="moduleImagePrevious">
-                            <img data-frontpage-image src="https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/2026-06-21.jpg" alt="AIRPORT_OR_HOSPITAL?" loading="lazy" decoding="async" />
-                            <span class="tag" data-frontpage-tag>Image · June 21, 2026</span>
-                            <h2><a data-frontpage-link href="image_of_the_day.html">AIRPORT_OR_HOSPITAL?</a></h2>
-                            <p data-frontpage-description>From the Image of the Day run.</p>
+                            <img data-frontpage-image src="https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/2026-07-06.jpg" alt="XTA" loading="lazy" decoding="async" />
+                            <span class="tag" data-frontpage-tag>Image · July 6, 2026</span>
+                            <h2><a data-frontpage-link href="image_of_the_day.html">XTA</a></h2>
+                            <p data-frontpage-description>The more &ldquo;XTA&rdquo; I see on my receipt, the better.</p>
                         </article>
                     </section>
                 </div>
@@ -1340,7 +1379,7 @@
 
         <footer class="footer">
             <p>&copy; 2026 Outside the World is New, LLC. All rights reserved.</p>
-            <p><a href="privacy.html">Privacy</a> &nbsp; | &nbsp; <a href="terms.html">Terms</a> &nbsp; | &nbsp; <a href="trademarks.html">Trademarks</a> &nbsp; | &nbsp; <a href="support.html">Support</a></p>
+            <p><a href="privacy.html">Privacy</a> &nbsp; | &nbsp; <a href="terms.html">Terms</a> &nbsp; | &nbsp; <a href="trademarks.html">Trademarks</a> &nbsp; | &nbsp; <a href="support.html">Support</a> &nbsp; | &nbsp; <a href="sitemap.xml">Sitemap</a></p>
         </footer>
     </div>
 
@@ -1796,6 +1835,9 @@
             setText(root, '[data-frontpage-description]', item.description || item.caption || item.date);
             setHref(root, '[data-frontpage-link]', item.url);
             setHref(root, '[data-frontpage-cta]', item.url);
+            if (slot === 'leadStory') {
+                setText(root, '[data-frontpage-cta]', `Continue reading ${item.title} \u2192`);
+            }
 
             const image = root.querySelector('[data-frontpage-image]');
             renderFrontpageImage(image, item, slot);
