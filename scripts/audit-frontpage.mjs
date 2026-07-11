@@ -108,6 +108,7 @@ const homepageRobots = extractTagContent(indexHtml, /<meta\s+name=["']robots["']
 const homepageOgImage = extractTagContent(indexHtml, /<meta\s+property=["']og:image["']\s+content=["']([^"']+)["']/i);
 const homepageTwitterImage = extractTagContent(indexHtml, /<meta\s+name=["']twitter:image["']\s+content=["']([^"']+)["']/i);
 const socialPreviewPath = 'Images/og/otw-feed-1200x630.jpg';
+const homepageArticleFallback = 'Images/editorial-fallback-v1.webp';
 
 if (homepageTitle !== 'Outside The World &mdash; Writing, Images, Fragments, and Work') {
   fail(`Homepage title is not the approved SEO title: ${homepageTitle || 'missing'}`);
@@ -126,6 +127,9 @@ if (!homepageOgImage.endsWith(`/${socialPreviewPath}`) || !localExists(socialPre
 }
 if (!homepageTwitterImage.endsWith(`/${socialPreviewPath}`)) {
   fail(`Homepage twitter:image should use the stable local preview: ${homepageTwitterImage || 'missing'}`);
+}
+if (!localExists(homepageArticleFallback) || !indexHtml.includes(homepageArticleFallback)) {
+  fail(`Homepage article fallback is missing or not wired up: ${homepageArticleFallback}`);
 }
 if (countMatches(indexHtml, /<h1\b/gi) !== 1) {
   fail('Homepage should contain exactly one h1 in initial HTML.');
@@ -187,6 +191,51 @@ const fragments = loadScriptArray('fragments_data.js', 'window.otw_fragments');
 });
 
 if (!frontpageManifest.lead?.type) fail('frontpage_manifest.json is missing a lead recipe.');
+if (frontpageManifest.schema !== 'otw.frontpage.v2' || frontpageManifest.version !== 2) {
+  fail('frontpage_manifest.json must use the otw.frontpage.v2 schema.');
+}
+if (!Array.isArray(frontpageManifest.sections) || !frontpageManifest.sections.length) {
+  fail('frontpage_manifest.json is missing dynamic editorial sections.');
+}
+
+const expectedSections = new Map([
+  ['recentWriting', 'essay'],
+  ['imageBand', 'iotd'],
+  ['currentDrift', 'drift'],
+  ['moreWriting', 'essay']
+]);
+const allowedSectionTypes = new Set(['essay', 'iotd', 'drift']);
+const allowedLayouts = new Set(['editorial-grid', 'image-band', 'drift-grid', 'compact-writing']);
+
+frontpageManifest.sections?.forEach((section) => {
+  if (!allowedSectionTypes.has(section?.type)) {
+    fail(`Homepage section ${section?.slot || 'unknown'} uses a non-current source type: ${section?.type || 'missing'}`);
+  }
+  if (!Number.isInteger(section?.count) || section.count < 1) {
+    fail(`Homepage section ${section?.slot || 'unknown'} must have a positive integer count.`);
+  }
+  if (!allowedLayouts.has(section?.layout)) {
+    fail(`Homepage section ${section?.slot || 'unknown'} has an unsupported layout: ${section?.layout || 'missing'}`);
+  }
+  if (!indexHtml.includes(`data-frontpage-section="${section?.slot}"`)) {
+    fail(`Homepage markup is missing the ${section?.slot || 'unknown'} section container.`);
+  }
+});
+
+expectedSections.forEach((type, slot) => {
+  const section = frontpageManifest.sections?.find((candidate) => candidate?.slot === slot);
+  if (!section || section.type !== type) fail(`Homepage section ${slot} must use the ${type} source.`);
+});
+
+if (indexHtml.includes('const recoveredPoemsPromise')) {
+  fail('Recovered poetry is still loaded by the homepage initialization path.');
+}
+if (!indexHtml.includes("const usedKeys = new Set()")) {
+  fail('Homepage renderer is missing content deduplication.');
+}
+if (!indexHtml.includes('updateFrontPageStructuredData(renderedItems)')) {
+  fail('Homepage renderer is not synchronizing structured data with rendered content.');
+}
 
 const sortedNarratives = [...(Array.isArray(narratives) ? narratives : [])]
   .filter((post) => post?.title && archivePath(post))
@@ -224,7 +273,7 @@ if (!latestEssay) {
   }
 }
 
-const jsonLdBlocks = [...indexHtml.matchAll(/<script\s+type=["']application\/ld\+json["']>([\s\S]*?)<\/script>/gi)]
+const jsonLdBlocks = [...indexHtml.matchAll(/<script\b[^>]*\btype=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)]
   .map((match) => match[1].trim());
 if (!jsonLdBlocks.length) {
   fail('Homepage is missing JSON-LD structured data.');
@@ -248,7 +297,7 @@ imageManifest.forEach((entry, index) => {
 });
 
 const duplicateSlots = new Set();
-[frontpageManifest.lead, ...(frontpageManifest.modules || []), ...(frontpageManifest.rail || [])]
+[frontpageManifest.lead, ...(frontpageManifest.modules || []), ...(frontpageManifest.rail || []), ...(frontpageManifest.sections || [])]
   .filter(Boolean)
   .forEach((rule) => {
     if (!rule.slot) fail('A frontpage recipe is missing slot.');

@@ -1,6 +1,6 @@
 {
-  "schema": "otw.frontpage.v1",
-  "version": 1,
+  "schema": "otw.frontpage.v2",
+  "version": 2,
   "lead": {
     "slot": "leadStory",
     "type": "essay",
@@ -46,13 +46,44 @@
     {
       "slot": "railFragments",
       "type": "fragment",
-      "mode": "latest"
+      "mode": "latest",
+      "count": 3
+    }
+  ],
+  "sections": [
+    {
+      "slot": "recentWriting",
+      "type": "essay",
+      "mode": "latest-unused",
+      "count": 6,
+      "layout": "editorial-grid"
+    },
+    {
+      "slot": "imageBand",
+      "type": "iotd",
+      "mode": "latest-unused",
+      "count": 4,
+      "layout": "image-band"
+    },
+    {
+      "slot": "currentDrift",
+      "type": "drift",
+      "mode": "latest-unused",
+      "count": 4,
+      "layout": "drift-grid"
+    },
+    {
+      "slot": "moreWriting",
+      "type": "essay",
+      "mode": "latest-unused",
+      "count": 4,
+      "layout": "compact-writing"
     }
   ],
   "work": {
     "slot": "work",
-    "title": "Systems, identity, product, and technical leadership.",
-    "description": "Advisory, product judgment, operating systems, and brand-level technical direction.",
+    "title": "Professional practice, systems work, and advisory shape.",
+    "description": "A separate door into product, identity, technical leadership, and operating work.",
     "url": "professional.html"
   }
 }
