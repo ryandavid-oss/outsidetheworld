@@ -71,7 +71,7 @@ def excerpt(value, limit=180):
     return text[:limit].rsplit(' ', 1)[0].rstrip('.,;:') + '...'
 
 def smartypants_safe(value):
-    return html.escape(value or '', quote=True)
+    return html.escape(str(value or ''), quote=True)
 
 IMAGE_MARKDOWN_PATTERN = re.compile(r'!\[([^\]]*)\]\((\S+?)(?:\s+"((?:\\"|[^"])*)")?\)')
 HTML_IMAGE_PATTERN = re.compile(r'<img\b([^>]*)>', re.I)
@@ -122,6 +122,20 @@ def normalize_image_presentation(value):
         'wrapMode': normalize_choice(value.get('wrapMode'), ['none', 'wrap-left', 'wrap-right'], 'none'),
     }
 
+def normalize_feature_layout(value):
+    return normalize_choice(value, ['natural', 'portrait', 'cinematic'], 'natural')
+
+def normalize_feature_focal(value):
+    return normalize_choice(value, ['top', 'center', 'bottom'], 'center')
+
+def normalize_image_dimensions(value):
+    try:
+        width = max(0, int(float((value or {}).get('width') or 0)))
+        height = max(0, int(float((value or {}).get('height') or 0)))
+    except (TypeError, ValueError):
+        width, height = 0, 0
+    return {'width': width, 'height': height}
+
 def normalize_publisher_images(metadata):
     images = metadata.get('images') if isinstance(metadata, dict) else []
     blocks = metadata.get('blocks') if isinstance(metadata, dict) else []
@@ -146,6 +160,10 @@ def normalize_publisher_images(metadata):
             'objectKey': str(image.get('objectKey') or media.get('objectKey') or ''),
             'alt': str(image.get('alt') or ''),
             'caption': str(image.get('caption') or ''),
+            'credit': str(image.get('credit') or ''),
+            'featureLayout': normalize_feature_layout(image.get('featureLayout')),
+            'featureFocal': normalize_feature_focal(image.get('featureFocal')),
+            **normalize_image_dimensions(image),
             **normalize_image_presentation(image),
         }
         by_url[url] = normalized
@@ -167,6 +185,10 @@ def normalize_publisher_images(metadata):
             'objectKey': str(block.get('objectKey') or (image or {}).get('objectKey') or ''),
             'alt': str(block.get('alt') or (image or {}).get('alt') or ''),
             'caption': str(block.get('caption') or (image or {}).get('caption') or ''),
+            'credit': str(block.get('credit') or (image or {}).get('credit') or ''),
+            'featureLayout': normalize_feature_layout(block.get('featureLayout') or (image or {}).get('featureLayout')),
+            'featureFocal': normalize_feature_focal(block.get('featureFocal') or (image or {}).get('featureFocal')),
+            **normalize_image_dimensions({**(image or {}), **block}),
             **normalize_image_presentation({**(image or {}), **block}),
         }
         by_url[normalized['url']] = normalized
@@ -200,6 +222,10 @@ def normalize_publisher_image_sequence(metadata):
             'objectKey': str(image.get('objectKey') or media.get('objectKey') or ''),
             'alt': str(image.get('alt') or ''),
             'caption': str(image.get('caption') or ''),
+            'credit': str(image.get('credit') or ''),
+            'featureLayout': normalize_feature_layout(image.get('featureLayout')),
+            'featureFocal': normalize_feature_focal(image.get('featureFocal')),
+            **normalize_image_dimensions(image),
             **normalize_image_presentation(image),
         }
         by_url[url] = normalized
@@ -220,6 +246,10 @@ def normalize_publisher_image_sequence(metadata):
             'objectKey': str(block.get('objectKey') or (image or {}).get('objectKey') or ''),
             'alt': str(block.get('alt') or (image or {}).get('alt') or ''),
             'caption': str(block.get('caption') or (image or {}).get('caption') or ''),
+            'credit': str(block.get('credit') or (image or {}).get('credit') or ''),
+            'featureLayout': normalize_feature_layout(block.get('featureLayout') or (image or {}).get('featureLayout')),
+            'featureFocal': normalize_feature_focal(block.get('featureFocal') or (image or {}).get('featureFocal')),
+            **normalize_image_dimensions({**(image or {}), **block}),
             **normalize_image_presentation({**(image or {}), **block}),
         })
 
@@ -242,6 +272,10 @@ def sanitize_publisher_image_list(metadata):
             'objectKey': str(image.get('objectKey') or media.get('objectKey') or '')[:300],
             'alt': str(image.get('alt') or ''),
             'caption': str(image.get('caption') or ''),
+            'credit': str(image.get('credit') or ''),
+            'featureLayout': normalize_feature_layout(image.get('featureLayout')),
+            'featureFocal': normalize_feature_focal(image.get('featureFocal')),
+            **normalize_image_dimensions(image),
             **normalize_image_presentation(image),
         }
         sanitized_images.append(normalized)
@@ -275,14 +309,22 @@ def render_markdown_image(match, as_block=False, image_metadata=None, image_queu
     if metadata:
         alt = metadata.get('alt') or alt
         caption = metadata.get('caption') or caption
+    credit = str((metadata or {}).get('credit') or '').strip()
     safe_alt = html.escape(alt, quote=True)
     title_attr = f' title="{html.escape(caption, quote=True)}"' if caption else ''
-    image_attrs = f'src="{safe_src}" alt="{safe_alt}" loading="lazy" decoding="async"'
+    dimensions = normalize_image_dimensions(metadata or {})
+    dimension_attrs = ''
+    if dimensions['width'] and dimensions['height']:
+        dimension_attrs = f' width="{dimensions["width"]}" height="{dimensions["height"]}"'
+    image_attrs = f'src="{safe_src}" alt="{safe_alt}" loading="lazy" decoding="async"{dimension_attrs}'
     image_html = f'<img {image_attrs}{title_attr}>'
-    if as_block and caption:
+    if as_block and (caption or credit):
         safe_caption = html.escape(caption, quote=False)
+        safe_credit = html.escape(credit, quote=False)
         classes = figure_classes(metadata) if metadata else 'otw-figure'
-        return f'<figure class="{classes}"><img {image_attrs}><figcaption><em>{safe_caption}</em></figcaption></figure>'
+        caption_part = f'<em>{safe_caption}</em>' if safe_caption else ''
+        credit_part = f'<span class="otw-figure-credit">{safe_credit}</span>' if safe_credit else ''
+        return f'<figure class="{classes}"><img {image_attrs}><figcaption>{caption_part}{credit_part}</figcaption></figure>'
     if as_block and metadata:
         classes = figure_classes(metadata)
         return f'<figure class="{classes}"><img {image_attrs}></figure>'
@@ -597,6 +639,13 @@ def sanitize_publisher_metadata(metadata):
             object_key = str(block.get('objectKey') or '')[:300]
             if object_key:
                 sanitized['objectKey'] = object_key
+            if block.get('featureLayout'):
+                sanitized['featureLayout'] = normalize_feature_layout(block.get('featureLayout'))
+            if block.get('featureFocal'):
+                sanitized['featureFocal'] = normalize_feature_focal(block.get('featureFocal'))
+            dimensions = normalize_image_dimensions(block)
+            if dimensions['width'] and dimensions['height']:
+                sanitized.update(dimensions)
             sanitized.update(normalize_image_presentation(block))
         elif block_type == 'heading':
             try:
@@ -655,6 +704,9 @@ def sanitize_publisher_metadata(metadata):
         'blocks': blocks,
         'images': images,
     }
+    feature_image_ref = str(metadata.get('featureImageRef') or '')[:120]
+    if feature_image_ref:
+        cleaned['featureImageRef'] = feature_image_ref
     if version >= 2:
         cleaned['formatting'] = {
             'mode': 'otw-enhanced-markdown',
@@ -702,17 +754,27 @@ def image_mime_type(url):
 
 def first_article_image(post):
     metadata = post.get('publisher') if isinstance(post.get('publisher'), dict) else {}
+    images = normalize_publisher_image_sequence(metadata)
+    feature_ref = str(metadata.get('featureImageRef') or '')
+    if feature_ref:
+        images = sorted(images, key=lambda image: image.get('id') != feature_ref)
 
-    for image in normalize_publisher_image_sequence(metadata):
+    for image in images:
         url = safe_image_url(image.get('url'))
         if not url:
             continue
         return {
+            'id': image.get('id') or '',
             'url': absolute_url(url),
+            'render_url': url,
             'alt': image.get('alt') or image.get('caption') or f"{post.get('title') or 'Outside The World'} article image",
+            'caption': image.get('caption') or '',
+            'credit': image.get('credit') or '',
+            'width': image.get('width') or 0,
+            'height': image.get('height') or 0,
+            'featureLayout': normalize_feature_layout(image.get('featureLayout')),
+            'featureFocal': normalize_feature_focal(image.get('featureFocal')),
             'type': image_mime_type(url),
-            'width': '',
-            'height': '',
         }
 
     body = post.get('body') or ''
@@ -740,11 +802,17 @@ def first_article_image(post):
             image_alt = str(attrs.get('alt') or attrs.get('title') or '').strip()
 
         return {
+            'id': '',
             'url': absolute_url(url),
+            'render_url': url,
             'alt': image_alt or f"{post.get('title') or 'Outside The World'} article image",
+            'caption': caption if image_type == 'markdown' else str(attrs.get('title') or ''),
+            'credit': '',
+            'featureLayout': 'natural',
+            'featureFocal': 'center',
             'type': image_mime_type(url),
-            'width': '',
-            'height': '',
+            'width': 0,
+            'height': 0,
         }
 
     return None
@@ -1181,12 +1249,13 @@ def enhance_reader_body_html(body_html, deck):
     classes = ['entry-body__opening']
     if len(paragraph_text) >= 180 and len(paragraph_text.split()) >= 32:
         classes.append('entry-body__dropcap')
+        paragraph_html = wrap_first_visible_letter(paragraph_html)
 
     opening_tag = add_classes_to_tag(first_paragraph.group(2), classes)
     enhanced = ''.join([
         first_paragraph.group(1),
         opening_tag,
-        first_paragraph.group(3),
+        paragraph_html,
         first_paragraph.group(4),
     ])
     return ''.join([
@@ -1195,30 +1264,112 @@ def enhance_reader_body_html(body_html, deck):
         (body_html or '')[first_paragraph.end():],
     ])
 
+def wrap_first_visible_letter(value):
+    parts = re.split(r'(<[^>]+>)', value or '')
+    for index, part in enumerate(parts):
+        if not part or part.startswith('<'):
+            continue
+        match = re.search(r'[A-Za-z0-9]', part)
+        if not match:
+            continue
+        letter = match.group(0)
+        parts[index] = f'{part[:match.start()]}<span class="entry-dropcap">{letter}</span>{part[match.end():]}'
+        break
+    return ''.join(parts)
+
 def archive_relative_href(post):
     return f"{post_stem(post.get('file') or '')}.html"
 
 def render_reader_nav(newer_post=None, older_post=None):
+    def render_item(post, direction):
+        image = first_article_image(post)
+        image_html = ''
+        text_only_class = ' reader-nav-card--text-only' if not image else ''
+        if image:
+            dimensions = normalize_image_dimensions(image)
+            dimension_attrs = ''
+            if dimensions['width'] and dimensions['height']:
+                dimension_attrs = f' width="{dimensions["width"]}" height="{dimensions["height"]}"'
+            image_html = (
+                f'<span class="reader-nav-media"><img src="{smartypants_safe(image["url"])}" '
+                f'alt="" loading="lazy" decoding="async"{dimension_attrs}></span>'
+            )
+        return f'''<a class="reader-nav-card reader-nav-card--{direction}{text_only_class}" href="{archive_relative_href(post)}">
+                    {image_html}<span class="reader-nav-copy">
+                        <span class="reader-nav-label">{direction.title()} Essay</span>
+                        <span class="reader-nav-title">{smartypants_safe(post.get('title'))}</span>
+                    </span>
+                </a>'''
+
     items = []
     if newer_post:
-        items.append(
-            f'''<a class="reader-nav-card reader-nav-card--newer" href="{archive_relative_href(newer_post)}">
-                    <span class="reader-nav-label">Newer Essay</span>
-                    <span class="reader-nav-title">{smartypants_safe(newer_post.get('title'))}</span>
-                </a>'''
-        )
+        items.append(render_item(newer_post, 'newer'))
     if older_post:
-        items.append(
-            f'''<a class="reader-nav-card reader-nav-card--older" href="{archive_relative_href(older_post)}">
-                    <span class="reader-nav-label">Older Essay</span>
-                    <span class="reader-nav-title">{smartypants_safe(older_post.get('title'))}</span>
-                </a>'''
-        )
+        items.append(render_item(older_post, 'older'))
     if not items:
         return ''
     return f'''<nav class="reader-nav" aria-label="Adjacent essays">
                 {''.join(items)}
             </nav>'''
+
+def promote_major_section_headings(body_html):
+    pattern = re.compile(r'<h([23])([^>]*)>([\s\S]*?)</h\1>', re.I)
+
+    def replace_heading(match):
+        heading_text = normalize_plain_text(plain_text_from_html(match.group(3)))
+        section_match = re.match(r'^((?:[IVXLCDM]+|\d+)[.)])\s+(.+)$', heading_text, re.I)
+        if not section_match:
+            return match.group(0)
+        opening = add_classes_to_tag(f'<h2{match.group(2)}>', ['entry-section-heading'])
+        return (
+            f'{opening}<span class="entry-section-index">{smartypants_safe(section_match.group(1))}</span>'
+            f' <span class="entry-section-title">{smartypants_safe(section_match.group(2))}</span></h2>'
+        )
+
+    return pattern.sub(replace_heading, body_html or '')
+
+def remove_feature_figure(body_html, feature_url):
+    normalized_feature = absolute_url(safe_image_url(feature_url))
+    removed = False
+
+    def replace_figure(match):
+        nonlocal removed
+        if removed:
+            return match.group(0)
+        image_match = HTML_IMAGE_PATTERN.search(match.group(0))
+        if not image_match:
+            return match.group(0)
+        src = safe_image_url(html_attrs(image_match.group(1)).get('src'))
+        if src and absolute_url(src) == normalized_feature:
+            removed = True
+            return ''
+        return match.group(0)
+
+    return re.sub(r'<figure\b[^>]*>[\s\S]*?</figure>', replace_figure, body_html or '', flags=re.I)
+
+def render_feature_figure(feature):
+    if not feature:
+        return ''
+    caption = feature.get('caption') or ''
+    credit = feature.get('credit') or ''
+    layout = normalize_feature_layout(feature.get('featureLayout'))
+    focal = normalize_feature_focal(feature.get('featureFocal'))
+    dimensions = normalize_image_dimensions(feature)
+    dimension_attrs = ''
+    aspect_style = ''
+    if dimensions['width'] and dimensions['height']:
+        dimension_attrs = f' width="{dimensions["width"]}" height="{dimensions["height"]}"'
+        aspect_style = f' style="--feature-aspect: {dimensions["width"]} / {dimensions["height"]};"'
+    caption_parts = []
+    if caption:
+        caption_parts.append(f'<span>{smartypants_safe(caption)}</span>')
+    if credit:
+        caption_parts.append(f'<span class="entry-feature-credit">{smartypants_safe(credit)}</span>')
+    caption_html = f'\n                <figcaption>{"".join(caption_parts)}</figcaption>' if caption_parts else ''
+    return f'''
+            <figure class="entry-feature entry-feature--{layout} entry-feature--focal-{focal}">
+                <div class="entry-feature-media"{aspect_style}><img src="{smartypants_safe(feature.get('render_url') or feature.get('url'))}" alt="{smartypants_safe(feature.get('alt'))}" decoding="async" fetchpriority="high"{dimension_attrs}></div>{caption_html}
+            </figure>'''
 
 def find_font(candidates):
     for candidate in candidates:
@@ -1306,7 +1457,8 @@ def render_share_page(post, newer_post=None, older_post=None, include_draft_read
     share_path = f"{share_output_folder}/{stem}.html"
     share_url = canonical_share_url({**post, 'share_path': share_path})
     archive_url = "../residue_archive.html"
-    preview_image = first_article_image(post) or archive_card_image(post, stem)
+    feature_image = first_article_image(post)
+    preview_image = feature_image or archive_card_image(post, stem)
     og_image = preview_image['url']
     og_image_tags = preview_image_meta_tags(preview_image)
     deck = publisher_subhead(post)
@@ -1316,7 +1468,13 @@ def render_share_page(post, newer_post=None, older_post=None, include_draft_read
     published_meta = f'<meta property="article:published_time" content="{published.date().isoformat()}" />' if published else ''
     word_count = article_word_count(post, deck)
     read_minutes = article_read_minutes(word_count)
+    length_tier = 'short' if word_count < 1200 else ('long' if word_count >= 2500 else 'standard')
+    media_tier = 'image-led' if feature_image else 'text-led'
+    reader_card_classes = f'reader-card reader-card--{length_tier} reader-card--{media_tier}'
     body_html = render_reader_body_html(post, deck)
+    body_html = promote_major_section_headings(body_html)
+    if feature_image:
+        body_html = remove_feature_figure(body_html, feature_image.get('render_url') or feature_image['url'])
     paragraph_ids = {paragraph['id'] for paragraph in extract_reader_paragraphs(body_html)}
     reading_aids = load_reading_aids_for_post(post, paragraph_ids, include_draft_reading_aids)
     reading_aids_intro = render_reading_aids_intro(reading_aids)
@@ -1335,6 +1493,55 @@ def render_share_page(post, newer_post=None, older_post=None, include_draft_read
     body_reading_tools_attr = ' data-reading-tools="off"' if reading_aids else ''
     body_html = inject_reading_aid_body_notes(body_html, reading_aids)
     reader_nav = render_reader_nav(newer_post, older_post)
+    feature_html = render_feature_figure(feature_image)
+    feature_preload = ''
+    if feature_image:
+        feature_preload = (
+            f'\n    <link rel="preload" as="image" href="{smartypants_safe(feature_image.get("render_url") or feature_image["url"])}" '
+            'fetchpriority="high" />'
+        )
+    article_schema = {
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        'headline': post['title'],
+        'description': description,
+        'author': {'@type': 'Person', 'name': 'Rylee Burningham'},
+        'publisher': {
+            '@type': 'Organization',
+            'name': 'Outside The World',
+            'logo': {'@type': 'ImageObject', 'url': f'{site_url}/Images/Equal.svg'},
+        },
+        'mainEntityOfPage': share_url,
+        'datePublished': published.date().isoformat() if published else post['date'],
+    }
+    if feature_image:
+        if feature_image.get('width') and feature_image.get('height'):
+            article_schema['image'] = {
+                '@type': 'ImageObject',
+                'url': feature_image['url'],
+                'width': feature_image['width'],
+                'height': feature_image['height'],
+            }
+        else:
+            article_schema['image'] = feature_image['url']
+    article_schema_json = json.dumps(article_schema, ensure_ascii=False).replace('<', '\\u003c')
+    reader_dock = ''
+    if length_tier == 'long':
+        reader_dock = f'''
+    <header class="reader-dock" data-reader-dock aria-label="Article reading controls">
+        <a class="reader-dock-mark" href="../index.html" aria-label="Outside The World home">=</a>
+        <div class="reader-dock-copy">
+            <span class="reader-dock-title">{smartypants_safe(post['title'])}</span>
+            <span class="reader-dock-section" data-reader-section>Introduction</span>
+        </div>
+        <div class="reader-dock-actions">
+            <button type="button" data-share-button aria-label="Copy article link">Copy</button>
+            <div class="reader-dock-modes" role="group" aria-label="Reader mode">
+                <button type="button" data-reader-mode-option="dark" aria-label="Use dark reader mode" aria-pressed="true">Dark</button>
+                <button type="button" data-reader-mode-option="light" aria-label="Use light reader mode" aria-pressed="false">Light</button>
+            </div>
+        </div>
+    </header>'''
 
     return f'''<!DOCTYPE html>
 <html lang="en" data-reader-mode="dark">
@@ -1344,6 +1551,7 @@ def render_share_page(post, newer_post=None, older_post=None, include_draft_read
     <title>{smartypants_safe(post['title'])} | Outside The World</title>
     <link rel="canonical" href="{share_url}" />
     <link href="../favicon.svg" rel="icon" type="image/svg+xml" />
+    <link rel="preload" as="image" href="/Images/Equal.svg" type="image/svg+xml" />{feature_preload}
     <link href="../theme.css" rel="stylesheet" />
     <script>
         (function() {{
@@ -1370,20 +1578,35 @@ def render_share_page(post, newer_post=None, older_post=None, include_draft_read
     <meta name="twitter:title" content="{smartypants_safe(post['title'])}" />
     <meta name="twitter:description" content="{smartypants_safe(description)}" />
     <meta name="twitter:image" content="{smartypants_safe(og_image)}" />
-    <script src="../archive_reader.js?v=20260609-share-fallback" defer></script>
+    <script type="application/ld+json">{article_schema_json}</script>
+    <script src="../archive_reader.js?v=20260711-editorial-reader" defer></script>
 </head>
-<body class="archive-reader-page"{body_reading_tools_attr}>
+<body class="archive-reader-page article-length-{length_tier} article-media-{media_tier}"{body_reading_tools_attr}>
+    <a class="reader-skip-link" href="#entry-body">Skip to essay</a>
+    <div class="reading-progress" aria-hidden="true"><span data-reading-progress></span></div>{reader_dock}
     <main class="archive-reader">
-        <article class="reader-card" aria-labelledby="entry-title">
-            <div class="reader-chrome">
-                <div class="reader-mode-toggle" role="group" aria-label="Reader mode">
-                    <button class="reader-mode-button" type="button" data-reader-mode-option="dark" aria-pressed="true">Dark</button>
-                    <button class="reader-mode-button" type="button" data-reader-mode-option="light" aria-pressed="false">Light</button>
+        <article class="{reader_card_classes}" aria-labelledby="entry-title">
+            <header class="reader-chrome">
+                <a class="reader-mark" href="../index.html" aria-label="Outside The World home">
+                    <img class="reader-mark-image reader-mark-image--dark" src="/Images/Equal.svg" alt="Outside The World">
+                    <img class="reader-mark-image reader-mark-image--light" src="/Images/Equal_dark.svg" alt="Outside The World">
+                </a>
+                <div class="reader-chrome-tools">
+                    <nav class="reader-breadcrumbs" aria-label="Publication navigation">
+                        <a href="../index.html">Home</a>
+                        <span class="reader-breadcrumb-separator" aria-hidden="true">/</span>
+                        <a href="{archive_url}">Archive</a>
+                    </nav>
+                    <div class="reader-mode-toggle" role="group" aria-label="Reader mode">
+                        <button class="reader-mode-button" type="button" data-reader-mode-option="dark" aria-pressed="true">Dark</button>
+                        <button class="reader-mode-button" type="button" data-reader-mode-option="light" aria-pressed="false">Light</button>
+                    </div>
                 </div>
-            </div>
+            </header>
             <header class="entry-header">
-                <p class="entry-label">Narrative Archive</p>
+                <p class="entry-label">Essay <span aria-hidden="true">/</span> Outside The World</p>
                 <h1 class="entry-title" id="entry-title">{smartypants_safe(post['title'])}</h1>{deck_html}
+                <p class="entry-byline">By <strong>Rylee Burningham</strong></p>
                 <div class="entry-meta-strip" aria-label="Essay details">
                     <span class="entry-meta-item"><strong>Filed</strong> {smartypants_safe(post['date'])}</span>
                     <span class="entry-meta-item"><strong>Words</strong> {word_count:,}</span>
@@ -1395,14 +1618,18 @@ def render_share_page(post, newer_post=None, older_post=None, include_draft_read
                         </span>
                     </span>
                 </div>
-            </header>{reading_aids_block}
-            <div class="entry-body">
+            </header>{feature_html}{reading_aids_block}
+            <div class="entry-body" id="entry-body">
 {body_html}
             </div>
+            <footer class="entry-signoff">
+                <span class="entry-signoff-mark" aria-hidden="true">=</span>
+                <p><strong>Outside The World</strong><br>Writing, images, fragments, and other mish-mash.</p>
+            </footer>
             {reader_nav}
             <div class="archive-actions">
-                <a class="archive-link" href="{archive_url}">OPEN ARCHIVE MATRIX</a>
-                <a class="archive-link" href="../personal.html">RETURN TO OTW</a>
+                <a class="archive-link" href="{archive_url}">OPEN ESSAY ARCHIVE</a>
+                <a class="archive-link" href="../index.html">RETURN TO OTW</a>
             </div>
         </article>
         <footer class="archive-legal">

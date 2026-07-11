@@ -850,6 +850,7 @@
     .panel-option:hover,
     .panel-option:focus-visible,
     .panel-option[aria-pressed="true"],
+    .panel-action[aria-pressed="true"],
     .panel-action:hover,
     .panel-action:focus-visible {
       background: rgba(125, 159, 128, 0.22);
@@ -862,6 +863,10 @@
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 7px;
+    }
+
+    #imageInspectorFeature {
+      grid-column: 1 / -1;
     }
 
     .article-meta {
@@ -1588,6 +1593,7 @@
     body.is-revising-published .save-state,
     body.is-revising-published #saveDraftBtn,
     body.is-revising-published #previewDraftBtn,
+    body.is-revising-published #productionPreviewBtn,
     body.is-revising-published #publishBtn {
       display: none;
     }
@@ -2375,7 +2381,8 @@
         </button>
         <div class="top-secondary-actions" id="mobileActionsMenu">
           <button class="text-btn" id="saveDraftBtn" type="button" title="Save server draft">Save Draft</button>
-          <button class="text-btn" id="previewDraftBtn" type="button" title="Preview local draft">Preview</button>
+          <button class="text-btn" id="previewDraftBtn" type="button" title="Preview local draft">Quick Preview</button>
+          <button class="text-btn" id="productionPreviewBtn" type="button" title="Preview with the production renderer">Production Preview</button>
           <button class="text-btn" id="publishedEssaysBtn" type="button" title="Open published essay manager">Published Essays</button>
           <button class="text-btn" id="downloadMarkdownBtn" type="button" title="Download draft as Markdown">Download MD</button>
           <a class="text-btn" id="publishedLink" href="#" target="_blank" rel="noopener" hidden>Open Article</a>
@@ -2735,9 +2742,18 @@
               </div>
             </div>
             <div class="panel-actions">
+              <button class="panel-action" id="imageInspectorFeature" type="button" aria-pressed="false">Use as Feature</button>
               <button class="panel-action" id="imageInspectorRetry" type="button">Retry</button>
               <button class="panel-action" id="imageInspectorReplace" type="button">Replace</button>
               <button class="panel-action" id="imageInspectorRemove" type="button">Remove</button>
+            </div>
+            <div class="panel-control-group" id="imageInspectorFeatureLayoutGroup" hidden>
+              <span class="field-label">Feature Layout</span>
+              <div class="panel-segmented is-three" id="imageInspectorFeatureLayoutControls" aria-label="Feature image layout"></div>
+            </div>
+            <div class="panel-control-group" id="imageInspectorFeatureFocalGroup" hidden>
+              <span class="field-label">Focal Position</span>
+              <div class="panel-segmented is-three" id="imageInspectorFeatureFocalControls" aria-label="Feature image focal position"></div>
             </div>
             <label class="panel-field" for="imageInspectorAlt">
               <span class="field-label">Alt Text</span>
@@ -2746,6 +2762,10 @@
             <label class="panel-field" for="imageInspectorCaption">
               <span class="field-label">Caption</span>
               <textarea class="side-input panel-textarea" id="imageInspectorCaption" rows="3"></textarea>
+            </label>
+            <label class="panel-field" for="imageInspectorCredit">
+              <span class="field-label">Credit</span>
+              <input class="side-input" id="imageInspectorCredit" type="text" />
             </label>
           </div>
         </section>
@@ -2802,6 +2822,7 @@
     const highlightBtn = document.getElementById('highlightBtn');
     const saveDraftBtn = document.getElementById('saveDraftBtn');
     const previewDraftBtn = document.getElementById('previewDraftBtn');
+    const productionPreviewBtn = document.getElementById('productionPreviewBtn');
     const downloadMarkdownBtn = document.getElementById('downloadMarkdownBtn');
     const archivePrivateBtn = document.getElementById('archivePrivateBtn');
     const clearDraftBtn = document.getElementById('clearDraftBtn');
@@ -2855,10 +2876,16 @@
     const imageInspectorStatus = document.getElementById('imageInspectorStatus');
     const imageInspectorAlt = document.getElementById('imageInspectorAlt');
     const imageInspectorCaption = document.getElementById('imageInspectorCaption');
+    const imageInspectorCredit = document.getElementById('imageInspectorCredit');
     const imageInspectorSizeControls = document.getElementById('imageInspectorSizeControls');
     const imageInspectorAlignControls = document.getElementById('imageInspectorAlignControls');
     const imageInspectorWrapControls = document.getElementById('imageInspectorWrapControls');
     const imageInspectorMoveControls = document.getElementById('imageInspectorMoveControls');
+    const imageInspectorFeature = document.getElementById('imageInspectorFeature');
+    const imageInspectorFeatureLayoutGroup = document.getElementById('imageInspectorFeatureLayoutGroup');
+    const imageInspectorFeatureLayoutControls = document.getElementById('imageInspectorFeatureLayoutControls');
+    const imageInspectorFeatureFocalGroup = document.getElementById('imageInspectorFeatureFocalGroup');
+    const imageInspectorFeatureFocalControls = document.getElementById('imageInspectorFeatureFocalControls');
     const imageInspectorRetry = document.getElementById('imageInspectorRetry');
     const imageInspectorReplace = document.getElementById('imageInspectorReplace');
     const imageInspectorRemove = document.getElementById('imageInspectorRemove');
@@ -2939,6 +2966,16 @@
       { value: 'wrap-left', label: 'WL', title: 'Wrap left: text flows on the right' },
       { value: 'wrap-right', label: 'WR', title: 'Wrap right: text flows on the left' }
     ];
+    const featureLayoutOptions = [
+      { value: 'natural', label: 'Natural', title: 'Show the complete image at its natural proportions' },
+      { value: 'portrait', label: 'Portrait', title: 'Use a narrower portrait-led feature presentation' },
+      { value: 'cinematic', label: 'Cinema', title: 'Use a wide cinematic crop' }
+    ];
+    const featureFocalOptions = [
+      { value: 'top', label: 'Top', title: 'Keep the top of the image in view' },
+      { value: 'center', label: 'Center', title: 'Keep the center of the image in view' },
+      { value: 'bottom', label: 'Bottom', title: 'Keep the bottom of the image in view' }
+    ];
     function renderPanelOptionButtons(container, options, datasetName) {
       options.forEach((option) => {
         const button = document.createElement('button');
@@ -2956,6 +2993,8 @@
     renderPanelOptionButtons(imageInspectorSizeControls, figureDisplaySizeOptions, 'size');
     renderPanelOptionButtons(imageInspectorAlignControls, figureAlignmentOptions, 'alignment');
     renderPanelOptionButtons(imageInspectorWrapControls, figureWrapModeOptions, 'wrapMode');
+    renderPanelOptionButtons(imageInspectorFeatureLayoutControls, featureLayoutOptions, 'featureLayout');
+    renderPanelOptionButtons(imageInspectorFeatureFocalControls, featureFocalOptions, 'featureFocal');
 
     const bodyOnlyCommands = new Set([
       'bold',
@@ -3018,7 +3057,7 @@
       }
       saveDraftBtn.textContent = isActive ? 'Save Revision' : 'Save Draft';
       saveDraftBtn.title = isActive ? 'Save local revision draft' : 'Save server draft';
-      previewDraftBtn.textContent = isActive ? 'Preview Revision' : 'Preview';
+      previewDraftBtn.textContent = isActive ? 'Preview Revision' : 'Quick Preview';
       previewDraftBtn.title = isActive ? 'Preview revision without changing production output' : 'Preview local draft';
       if (archivePrivateBtn) {
         const canArchivePrivately = Boolean(getLocalPublisherToken());
@@ -5060,6 +5099,20 @@
         : 'none';
     }
 
+    function normalizeFeatureLayout(value) {
+      const layout = String(value || '').toLowerCase();
+      return featureLayoutOptions.some((option) => option.value === layout)
+        ? layout
+        : 'natural';
+    }
+
+    function normalizeFeatureFocal(value) {
+      const focal = String(value || '').toLowerCase();
+      return featureFocalOptions.some((option) => option.value === focal)
+        ? focal
+        : 'center';
+    }
+
     function syncFigureSizeControls(figure) {
       if (!figure) {
         return;
@@ -5132,6 +5185,8 @@
         return;
       }
       figure.style.setProperty('--figure-natural-width', `${image.naturalWidth}px`);
+      figure.dataset.imageWidth = String(image.naturalWidth);
+      figure.dataset.imageHeight = String(image.naturalHeight);
     }
 
     function shortPanelText(value, fallback = 'Untitled') {
@@ -5164,6 +5219,8 @@
       setPressedOption(imageInspectorSizeControls, 'size', normalizeFigureDisplaySize(figure.dataset.displaySize));
       setPressedOption(imageInspectorAlignControls, 'alignment', normalizeFigureAlignment(figure.dataset.alignment));
       setPressedOption(imageInspectorWrapControls, 'wrapMode', normalizeFigureWrapMode(figure.dataset.wrapMode));
+      setPressedOption(imageInspectorFeatureLayoutControls, 'featureLayout', normalizeFeatureLayout(figure.dataset.featureLayout));
+      setPressedOption(imageInspectorFeatureFocalControls, 'featureFocal', normalizeFeatureFocal(figure.dataset.featureFocal));
     }
 
     function updateImageInspector() {
@@ -5174,8 +5231,13 @@
 
       if (!figure) {
         imageInspectorStatus.textContent = 'No selection';
+        imageInspectorFeature.setAttribute('aria-pressed', 'false');
+        imageInspectorFeature.textContent = 'Use as Feature';
         imageInspectorAlt.value = '';
         imageInspectorCaption.value = '';
+        imageInspectorCredit.value = '';
+        imageInspectorFeatureLayoutGroup.hidden = true;
+        imageInspectorFeatureFocalGroup.hidden = true;
         return;
       }
 
@@ -5184,16 +5246,41 @@
       const image = figure.querySelector('img');
 
       isSyncingImageInspector = true;
-      imageInspectorStatus.textContent = figureStatusLabel(figure);
+      const isFeature = figure.dataset.featureImage === 'true';
+      imageInspectorStatus.textContent = isFeature ? 'Feature image' : figureStatusLabel(figure);
+      imageInspectorFeature.setAttribute('aria-pressed', String(isFeature));
+      imageInspectorFeature.textContent = isFeature ? 'Feature Selected' : 'Use as Feature';
+      imageInspectorFeatureLayoutGroup.hidden = !isFeature;
+      imageInspectorFeatureFocalGroup.hidden = !isFeature;
       if (document.activeElement !== imageInspectorAlt) {
         imageInspectorAlt.value = altInput ? altInput.value : image?.alt || '';
       }
       if (document.activeElement !== imageInspectorCaption) {
         imageInspectorCaption.value = caption ? caption.textContent : '';
       }
+      if (document.activeElement !== imageInspectorCredit) {
+        imageInspectorCredit.value = figure.dataset.imageCredit || '';
+      }
       imageInspectorRetry.hidden = normalizeImageUploadStatus(figure.dataset.uploadStatus) !== 'failed';
       syncImageInspectorOptions(figure);
       isSyncingImageInspector = false;
+    }
+
+    function setFeatureImage(figure) {
+      if (!figure || !editor.contains(figure)) {
+        return;
+      }
+      editor.querySelectorAll('.publisher-figure').forEach((candidate) => {
+        if (candidate === figure) {
+          candidate.dataset.featureImage = 'true';
+          candidate.dataset.featureLayout = normalizeFeatureLayout(candidate.dataset.featureLayout);
+          candidate.dataset.featureFocal = normalizeFeatureFocal(candidate.dataset.featureFocal);
+        } else {
+          delete candidate.dataset.featureImage;
+        }
+      });
+      updateImageInspector();
+      markChanged();
     }
 
     function appendStructureStat(label, value) {
@@ -5457,6 +5544,8 @@
       const displaySize = normalizeFigureDisplaySize(figure.dataset.displaySize);
       const alignment = normalizeFigureAlignment(figure.dataset.alignment);
       const wrapMode = normalizeFigureWrapMode(figure.dataset.wrapMode);
+      const imageWidth = Number(figure.dataset.imageWidth || image?.naturalWidth || 0);
+      const imageHeight = Number(figure.dataset.imageHeight || image?.naturalHeight || 0);
       let source = { kind: 'local-missing' };
       if (uploadedUrl) {
         source = {
@@ -5498,9 +5587,15 @@
       const block = {
         id: figure.dataset.blockId || blockId('image'),
         type: 'image',
+        isFeature: figure.dataset.featureImage === 'true',
+        featureLayout: normalizeFeatureLayout(figure.dataset.featureLayout),
+        featureFocal: normalizeFeatureFocal(figure.dataset.featureFocal),
         source,
         alt: (altInput && altInput.value) || (image && image.alt) || '',
         caption: caption ? caption.textContent.trim() : '',
+        credit: String(figure.dataset.imageCredit || '').trim(),
+        width: imageWidth > 0 ? imageWidth : 0,
+        height: imageHeight > 0 ? imageHeight : 0,
         displaySize,
         alignment,
         wrapMode,
@@ -5718,6 +5813,11 @@
         order: index,
         alt: String(block.alt || '').trim(),
         caption: String(block.caption || '').trim(),
+        credit: String(block.credit || '').trim(),
+        width: Math.max(0, Number(block.width || 0)),
+        height: Math.max(0, Number(block.height || 0)),
+        featureLayout: normalizeFeatureLayout(block.featureLayout),
+        featureFocal: normalizeFeatureFocal(block.featureFocal),
         displaySize: normalizeFigureDisplaySize(block.displaySize),
         alignment: normalizeFigureAlignment(block.alignment),
         wrapMode: normalizeFigureWrapMode(block.wrapMode),
@@ -5971,6 +6071,11 @@
         objectKey: image.media?.objectKey || '',
         alt: image.alt || '',
         caption: image.caption || '',
+        credit: image.credit || '',
+        width: Math.max(0, Number(image.width || 0)),
+        height: Math.max(0, Number(image.height || 0)),
+        featureLayout: normalizeFeatureLayout(image.featureLayout),
+        featureFocal: normalizeFeatureFocal(image.featureFocal),
         displaySize: normalizeFigureDisplaySize(image.displaySize),
         alignment: normalizeFigureAlignment(image.alignment),
         wrapMode: normalizeFigureWrapMode(image.wrapMode)
@@ -6055,6 +6160,8 @@
               imageRef: image.id,
               url: image.url,
               objectKey: image.objectKey,
+              featureLayout: image.featureLayout,
+              featureFocal: image.featureFocal,
               displaySize: image.displaySize,
               alignment: image.alignment,
               wrapMode: image.wrapMode
@@ -6084,7 +6191,7 @@
 
       return {
         schema: 'otw.publisher.post',
-        version: 1,
+        version: 2,
         source: 'publisher.html',
         formatting: {
           mode: 'otw-enhanced-markdown',
@@ -6092,6 +6199,7 @@
           fallback: 'markdown'
         },
         subhead: article.subhead || '',
+        featureImageRef: sourceBlocks.find((block) => block?.type === 'image' && block.isFeature)?.id || '',
         blocks,
         images
       };
@@ -6133,14 +6241,46 @@
       const issues = [...conversionIssues];
       if (!payload.title) {
         issues.push(issue('error', 'title-required', 'Title required.'));
+      } else if (payload.title.length > 72) {
+        issues.push(issue('warning', 'title-mobile-height', 'Long title: review the mobile production preview for excessive wrapping.'));
+      }
+      if (!payload.subhead) {
+        issues.push(issue('warning', 'subhead-missing', 'Add a subhead to strengthen the article opening.'));
       }
       if (markdownBodyIsEmpty(payload.body.blocks)) {
         issues.push(issue('error', 'body-required', 'Body should not be empty.'));
       }
 
+      if (payload.images.length && !payload.publisher?.featureImageRef) {
+        issues.push(issue('warning', 'feature-image-default', 'Choose a feature image, or the first image will be used automatically.'));
+      }
+      if (payload.images.length && Number(payload.images[0]?.order || 0) > 3) {
+        issues.push(issue('warning', 'feature-image-late', 'The first available feature image appears late in the draft.'));
+      }
+
+      const numberedHeadings = (payload.publisher?.blocks || []).filter((block) => (
+        block.type === 'heading' && /^(?:[IVXLCDM]+|\d+)[.)]\s+/i.test(String(block.text || ''))
+      ));
+      if (new Set(numberedHeadings.map((block) => Number(block.level || 2))).size > 1) {
+        issues.push(issue('warning', 'section-heading-levels', 'Numbered essay sections use inconsistent heading levels.'));
+      }
+
+      const longParagraphs = (payload.publisher?.blocks || []).filter((block) => (
+        block.type === 'paragraph' && String(block.text || '').trim().split(/\s+/).filter(Boolean).length > 250
+      ));
+      if (longParagraphs.length) {
+        issues.push(issue('warning', 'long-paragraph', `${longParagraphs.length} paragraph${longParagraphs.length === 1 ? '' : 's'} exceed 250 words.`, { blockId: longParagraphs[0].id }));
+      }
+
       payload.images.forEach((image) => {
         if (!image.localPreview || image.localPreview.kind === 'missing' || image.localPreview.kind === 'local-missing') {
           issues.push(issue('error', 'image-metadata-missing', 'An image is missing usable metadata.', { imageId: image.id }));
+        }
+        if (/^(?:narrative\s+)?image$|^photo$/i.test(String(image.alt || '').trim())) {
+          issues.push(issue('warning', 'image-generic-alt', 'Replace generic image alt text with a useful description.', { imageId: image.id }));
+        }
+        if (!Number(image.width) || !Number(image.height)) {
+          issues.push(issue('warning', 'image-dimensions-missing', 'Image dimensions are unavailable; reselecting the image will improve layout stability.', { imageId: image.id }));
         }
       });
 
@@ -6338,6 +6478,10 @@
       return stem ? `https://outsidetheworld.com/archive/${encodeURIComponent(stem)}.html` : '';
     }
 
+    function previewShellUrl(previewUrl) {
+      return `publisher_preview_shell.html?url=${encodeURIComponent(previewUrl)}`;
+    }
+
     function setPublishBusy(isBusy) {
       publishBtn.disabled = Boolean(isBusy);
       publishBtn.textContent = isBusy ? 'Publishing' : 'Publish';
@@ -6443,7 +6587,7 @@
         method: 'POST',
         body: JSON.stringify({ includeReadingAids: true })
       });
-      window.open(payload.preview.url, '_blank', 'noopener');
+      window.open(previewShellUrl(payload.preview.url), '_blank', 'noopener');
       revisionStatusText(payload.message || 'Preview generated from isolated temp output.');
       setSaveState('Revision preview opened', true);
       return payload;
@@ -6664,11 +6808,45 @@
       }
       saveDraft();
       const previewUrl = `publisher_preview.html?draft=${Date.now()}`;
-      const previewWindow = window.open(previewUrl, '_blank', 'noopener');
+      const previewWindow = window.open(previewShellUrl(previewUrl), '_blank', 'noopener');
       if (previewWindow) {
         setSaveState('Preview opened', true);
       } else {
         setSaveState('Preview blocked', true);
+      }
+    }
+
+    async function openProductionPreview() {
+      if (activePublishedRevision?.slug) {
+        return previewPublishedRevision();
+      }
+      saveDraft();
+      const article = updateArticlePayload();
+      const payload = buildPublishPayload(article);
+      if (!payload.validation.canPublish) {
+        setSaveState(payload.validation.readiness || 'Preview blocked', true);
+        return null;
+      }
+      productionPreviewBtn.disabled = true;
+      productionPreviewBtn.textContent = 'Rendering';
+      setSaveState('Rendering production preview');
+      try {
+        const result = await localPublisherApi('/api/draft-preview', {
+          method: 'POST',
+          body: JSON.stringify({
+            ...publishRequestBodyFromPayload(payload),
+            includeReadingAids: false
+          })
+        });
+        window.open(previewShellUrl(result.preview.url), '_blank', 'noopener');
+        setSaveState('Production preview opened', true);
+        return result;
+      } catch (error) {
+        setSaveState(error.message || 'Start tools/publisher_server.py for production preview.', true);
+        return null;
+      } finally {
+        productionPreviewBtn.disabled = false;
+        productionPreviewBtn.textContent = 'Production Preview';
       }
     }
 
@@ -6769,6 +6947,12 @@
       displaySize = 'medium',
       alignment = 'center',
       wrapMode = 'none',
+      isFeature = false,
+      featureLayout = 'natural',
+      featureFocal = 'center',
+      credit = '',
+      width = 0,
+      height = 0,
       uploadStatus = '',
       uploadError = '',
       uploadedUrl = '',
@@ -6784,6 +6968,20 @@
       figure.dataset.displaySize = normalizeFigureDisplaySize(displaySize);
       figure.dataset.alignment = normalizeFigureAlignment(alignment);
       figure.dataset.wrapMode = normalizeFigureWrapMode(wrapMode);
+      if (isFeature) {
+        figure.dataset.featureImage = 'true';
+      }
+      figure.dataset.featureLayout = normalizeFeatureLayout(featureLayout);
+      figure.dataset.featureFocal = normalizeFeatureFocal(featureFocal);
+      if (credit) {
+        figure.dataset.imageCredit = credit;
+      }
+      if (Number(width) > 0) {
+        figure.dataset.imageWidth = String(Math.round(Number(width)));
+      }
+      if (Number(height) > 0) {
+        figure.dataset.imageHeight = String(Math.round(Number(height)));
+      }
       figure.dataset.uploadStatus = normalizeImageUploadStatus(uploadStatus || (uploadedUrl ? 'uploaded' : 'local'));
       if (uploadedUrl) {
         figure.dataset.uploadedUrl = uploadedUrl;
@@ -6987,6 +7185,12 @@
         displaySize: block.displaySize || 'medium',
         alignment: block.alignment || 'center',
         wrapMode: block.wrapMode || 'none',
+        isFeature: Boolean(block.isFeature),
+        featureLayout: block.featureLayout || 'natural',
+        featureFocal: block.featureFocal || 'center',
+        credit: block.credit || '',
+        width: block.width || 0,
+        height: block.height || 0,
         uploadStatus: restoredStatus || block.upload?.status || '',
         uploadError: block.upload?.error || '',
         uploadedUrl: source.kind === 'url' ? source.url : block.upload?.uploadedUrl || '',
@@ -9120,6 +9324,36 @@
       }
     });
 
+    imageInspectorFeature.addEventListener('click', () => {
+      const figure = selectedFigureInEditor();
+      if (!figure || figure.dataset.featureImage === 'true') {
+        return;
+      }
+      setFeatureImage(figure);
+    });
+
+    imageInspectorFeatureLayoutControls.addEventListener('click', (event) => {
+      const button = event.target.closest('.panel-option');
+      const figure = selectedFigureInEditor();
+      if (!button || !figure || figure.dataset.featureImage !== 'true') {
+        return;
+      }
+      figure.dataset.featureLayout = normalizeFeatureLayout(button.dataset.featureLayout);
+      updateImageInspector();
+      markChanged();
+    });
+
+    imageInspectorFeatureFocalControls.addEventListener('click', (event) => {
+      const button = event.target.closest('.panel-option');
+      const figure = selectedFigureInEditor();
+      if (!button || !figure || figure.dataset.featureImage !== 'true') {
+        return;
+      }
+      figure.dataset.featureFocal = normalizeFeatureFocal(button.dataset.featureFocal);
+      updateImageInspector();
+      markChanged();
+    });
+
     imageInspectorAlt.addEventListener('input', () => {
       if (isSyncingImageInspector) {
         return;
@@ -9149,6 +9383,18 @@
         return;
       }
       caption.textContent = imageInspectorCaption.value;
+      markChanged();
+    });
+
+    imageInspectorCredit.addEventListener('input', () => {
+      if (isSyncingImageInspector) {
+        return;
+      }
+      const figure = selectedFigureInEditor();
+      if (!figure) {
+        return;
+      }
+      figure.dataset.imageCredit = imageInspectorCredit.value;
       markChanged();
     });
 
@@ -9198,6 +9444,11 @@
     });
 
     previewDraftBtn.addEventListener('click', openDraftPreview);
+    productionPreviewBtn.addEventListener('click', () => {
+      openProductionPreview().catch((error) => {
+        setSaveState(error.message || 'Production preview failed', true);
+      });
+    });
 
     publishedEssaysBtn?.addEventListener('click', () => {
       revealPublishedManager();

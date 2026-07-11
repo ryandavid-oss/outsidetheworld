@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Production Preview | Outside The World</title>
+  <link href="favicon.svg" rel="icon" type="image/svg+xml" />
+  <style>
+    :root {
+      color-scheme: dark;
+      --page: #060809;
+      --surface: #0b1012;
+      --ink: #f1f5f7;
+      --muted: #91afb3;
+      --accent: #a0bef5;
+      --line: rgba(145, 175, 179, 0.24);
+    }
+
+    * { box-sizing: border-box; }
+
+    html,
+    body {
+      min-height: 100%;
+      margin: 0;
+      background: var(--page);
+      color: var(--ink);
+      font-family: Inter, system-ui, sans-serif;
+    }
+
+    body {
+      display: grid;
+      grid-template-rows: auto 1fr;
+      min-height: 100vh;
+    }
+
+    .preview-toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      min-height: 64px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 10px 18px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(6, 8, 9, 0.96);
+    }
+
+    .preview-brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .preview-brand img {
+      display: block;
+      width: 138px;
+      height: auto;
+    }
+
+    .preview-label {
+      color: var(--muted);
+      font: 0.64rem/1.4 ui-monospace, SFMono-Regular, Menlo, monospace;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .preview-actions,
+    .preview-modes {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .preview-modes {
+      padding: 3px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+    }
+
+    button,
+    a {
+      min-height: 36px;
+      border: 1px solid transparent;
+      border-radius: 0;
+      padding: 9px 12px;
+      background: transparent;
+      color: var(--muted);
+      font: 0.62rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    button[aria-pressed="true"],
+    button:hover,
+    a:hover {
+      border-color: var(--line);
+      background: rgba(160, 190, 245, 0.12);
+      color: var(--ink);
+    }
+
+    button:focus-visible,
+    a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .preview-stage {
+      display: flex;
+      min-width: 0;
+      justify-content: center;
+      overflow: auto;
+      padding: 18px;
+      background: #111719;
+    }
+
+    .preview-frame {
+      display: block;
+      width: min(100%, 1440px);
+      min-height: calc(100vh - 101px);
+      border: 1px solid var(--line);
+      background: var(--page);
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.48);
+      transition: width 180ms ease;
+    }
+
+    body[data-preview-mode="mobile"] .preview-frame {
+      width: 390px;
+      min-width: 390px;
+      height: 844px;
+      min-height: 844px;
+    }
+
+    @media (max-width: 680px) {
+      .preview-toolbar {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .preview-brand img { width: 116px; }
+      .preview-label { display: none; }
+      .preview-actions { width: 100%; justify-content: space-between; }
+      .preview-stage { padding: 10px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .preview-frame { transition: none; }
+    }
+  </style>
+</head>
+<body data-preview-mode="desktop">
+  <header class="preview-toolbar">
+    <div class="preview-brand">
+      <img src="/Images/Equal.svg" alt="Outside The World" />
+      <span class="preview-label">Production Preview</span>
+    </div>
+    <div class="preview-actions">
+      <div class="preview-modes" role="group" aria-label="Preview viewport">
+        <button type="button" data-preview-mode="desktop" aria-pressed="true">Desktop</button>
+        <button type="button" data-preview-mode="mobile" aria-pressed="false">Mobile</button>
+      </div>
+      <a id="openPreview" href="#" target="_blank" rel="noopener">Open</a>
+    </div>
+  </header>
+  <main class="preview-stage">
+    <iframe class="preview-frame" id="previewFrame" title="Article production preview"></iframe>
+  </main>
+  <script>
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const requested = params.get('url') || 'publisher_preview.html';
+      let previewUrl;
+      try {
+        previewUrl = new URL(requested, window.location.href);
+      } catch (error) {
+        previewUrl = new URL('publisher_preview.html', window.location.href);
+      }
+      if (previewUrl.origin !== window.location.origin) {
+        previewUrl = new URL('publisher_preview.html', window.location.href);
+      }
+
+      const frame = document.getElementById('previewFrame');
+      const openPreview = document.getElementById('openPreview');
+      frame.src = previewUrl.href;
+      openPreview.href = previewUrl.href;
+
+      document.querySelectorAll('[data-preview-mode]').forEach((button) => {
+        button.addEventListener('click', () => {
+          const mode = button.dataset.previewMode === 'mobile' ? 'mobile' : 'desktop';
+          document.body.dataset.previewMode = mode;
+          document.querySelectorAll('[data-preview-mode]').forEach((candidate) => {
+            candidate.setAttribute('aria-pressed', String(candidate === button));
+          });
+        });
+      });
+    }());
+  </script>
+</body>
+</html>

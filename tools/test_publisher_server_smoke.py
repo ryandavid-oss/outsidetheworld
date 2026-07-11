@@ -71,6 +71,12 @@ def run_smoke():
                     time.sleep(0.1)
             assert token
 
+            app_html = fetch(f"{base}/otw_app.html")
+            assert 'data-open-url="publisher.html"' in app_html
+            assert "Outside The World" in app_html
+            manifest = json.loads(fetch(f"{base}/otw_app.webmanifest"))
+            assert manifest["name"] == "OTW App"
+
             try:
                 fetch(f"{base}/api/published-essays")
                 raise AssertionError("API request without token should fail")
@@ -105,6 +111,30 @@ def run_smoke():
             assert preview["ok"]
             assert preview["preview"]["url"].startswith("/preview/")
             assert before == after
+
+            shell_html = fetch(f"{base}/publisher_preview_shell.html")
+            assert 'id="previewFrame"' in shell_html
+            draft_preview = json.loads(fetch(
+                f"{base}/api/draft-preview",
+                token,
+                {
+                    "title": "Production Preview Smoke",
+                    "date": "2026-07-11",
+                    "slug": "production-preview-smoke",
+                    "markdown": "# Production Preview Smoke\nDate: July 11, 2026\n\nA production-shaped preview.\n",
+                    "includeReadingAids": False,
+                },
+                "POST",
+            ))
+            assert draft_preview["ok"]
+            draft_preview_html = fetch(f'{base}{draft_preview["preview"]["url"]}')
+            assert "Production Preview Smoke" in draft_preview_html
+            assert "reader-card--short reader-card--text-led" in draft_preview_html
+            assert before == (
+                hashlib.sha256(source.read_bytes()).hexdigest(),
+                hashlib.sha256(archive.read_bytes()).hexdigest(),
+                hashlib.sha256(narrative.read_bytes()).hexdigest(),
+            )
 
             private_payload = {
                 "schema": "otw.publisher.privateArchiveRequest",

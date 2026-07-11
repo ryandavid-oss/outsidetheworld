@@ -778,10 +778,16 @@ def preview_page(state: PublisherState, doc: source_contract.SourceDocument, sou
     preview_dir = PREVIEW_ROOT / session
     archive_dir = preview_dir / "archive"
     archive_dir.mkdir(parents=True, exist_ok=True)
-    for asset in ["archive_reader.css", "archive_reader.js"]:
+    for asset in ["archive_reader.css", "archive_reader.js", "theme.css", "favicon.svg"]:
         source_asset = ROOT / asset
         if source_asset.exists():
             shutil.copy2(source_asset, preview_dir / asset)
+    preview_images = preview_dir / "Images"
+    preview_images.mkdir(parents=True, exist_ok=True)
+    for asset in ["Equal.svg", "Equal_dark.svg"]:
+        source_asset = ROOT / "Images" / asset
+        if source_asset.exists():
+            shutil.copy2(source_asset, preview_images / asset)
     post = post_for_doc(doc, source)
     posts = narrative_sync.load_posts()
     stems = [narrative_sync.post_stem(item.get("file") or "") for item in posts]
@@ -804,6 +810,24 @@ def preview_page(state: PublisherState, doc: source_contract.SourceDocument, sou
         "path": rel(output),
         "url": f"/preview/{session}/archive/{doc.stem}.html",
         "includeReadingAids": include_reading_aids,
+    }
+
+
+def draft_preview_page(state: PublisherState, payload: dict) -> dict:
+    source = source_contract.normalize_newlines(str(payload.get("markdown") or ""))
+    if not source.strip():
+        raise ValueError("Draft preview requires generated Markdown.")
+    date = str(payload.get("date") or datetime.now(timezone.utc).date().isoformat())
+    if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", date):
+        date = datetime.now(timezone.utc).date().isoformat()
+    slug = safe_slug(str(payload.get("slug") or payload.get("title") or "untitled-draft"))
+    path = CURRENT_NARRATIVE_ROOT / f"{date}-{slug}.md"
+    doc = source_contract.document_from_source_text(path, source)
+    preview = preview_page(state, doc, source, bool(payload.get("includeReadingAids")))
+    return {
+        "ok": True,
+        "preview": preview,
+        "message": "Production preview generated without modifying archive output.",
     }
 
 
@@ -913,7 +937,18 @@ class PublisherHandler(BaseHTTPRequestHandler):
 
     def serve_static(self, path: str):
         clean = Path(unquote(path.lstrip("/")))
-        if clean.name in {"archive_reader.css", "archive_reader.js", "publisher_manager.js"}:
+        if clean.name in {
+            "archive_reader.css",
+            "archive_reader.js",
+            "publisher_manager.js",
+            "publisher_preview.html",
+            "publisher_preview_shell.html",
+            "otw_app.html",
+            "otw_app_sw.js",
+            "otw_app.webmanifest",
+            "theme.css",
+            "favicon.svg",
+        }:
             file_path = ROOT / clean.name
         elif clean.parts and clean.parts[0] in ALLOWED_STATIC_ROOTS:
             file_path = (ALLOWED_STATIC_ROOTS[clean.parts[0]] / Path(*clean.parts[1:])).resolve()
@@ -962,6 +997,8 @@ class PublisherHandler(BaseHTTPRequestHandler):
                 with self.state.lock:
                     result = archive_private_draft(self.state.private_repo, payload)
                 return self.send_json(result)
+            if method == "POST" and path == "/api/draft-preview":
+                return self.send_json(draft_preview_page(self.state, payload))
             if method == "GET" and path == "/api/published-essays":
                 docs = self.state.documents()
                 return self.send_json({"ok": True, "essays": [essay_summary(self.state, doc) for doc in docs]})

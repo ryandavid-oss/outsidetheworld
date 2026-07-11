@@ -470,6 +470,11 @@ def composer_block_from_source_block(block: SourceBlock) -> dict[str, Any]:
             },
             "alt": alt,
             "caption": caption,
+            "credit": str(metadata.get("credit") or ""),
+            "width": int(metadata.get("width") or 0),
+            "height": int(metadata.get("height") or 0),
+            "featureLayout": str(metadata.get("featureLayout") or "natural"),
+            "featureFocal": str(metadata.get("featureFocal") or "center"),
             "displaySize": display_size,
             "alignment": alignment,
             "wrapMode": wrap_mode,
@@ -505,6 +510,11 @@ def composer_block_from_source_block(block: SourceBlock) -> dict[str, Any]:
 def composer_article_for_document(document: SourceDocument, source: str | None = None) -> dict[str, Any]:
     doc = document if source is None else document_from_source_text(document.path, source)
     file_date = display_date_to_file_date(doc.date)
+    feature_image_ref = str((doc.metadata or {}).get("featureImageRef") or "")
+    composer_blocks = [composer_block_from_source_block(block) for block in doc.blocks]
+    for block in composer_blocks:
+        if block.get("type") == "image" and block.get("id") == feature_image_ref:
+            block["isFeature"] = True
     return {
         "schema": "otw.publisher.article",
         "version": 3,
@@ -524,7 +534,7 @@ def composer_article_for_document(document: SourceDocument, source: str | None =
             "ogPath": doc.og_path,
         },
         "body": {
-            "blocks": [composer_block_from_source_block(block) for block in doc.blocks],
+            "blocks": composer_blocks,
         },
     }
 
@@ -594,12 +604,22 @@ def update_metadata_for_blocks(metadata: dict[str, Any], blocks: list[SourceBloc
                 "url": url,
                 "alt": alt,
                 "caption": caption,
+                "credit": str(existing.get("credit") or ""),
+                "width": int(existing.get("width") or 0),
+                "height": int(existing.get("height") or 0),
+                "featureLayout": str(existing.get("featureLayout") or "natural"),
+                "featureFocal": str(existing.get("featureFocal") or "center"),
             })
             image_meta = {
                 "id": existing.get("imageRef") or block.id,
                 "url": url,
                 "alt": alt,
                 "caption": caption,
+                "credit": str(existing.get("credit") or ""),
+                "width": int(existing.get("width") or 0),
+                "height": int(existing.get("height") or 0),
+                "featureLayout": str(existing.get("featureLayout") or "natural"),
+                "featureFocal": str(existing.get("featureFocal") or "center"),
                 "displaySize": existing.get("displaySize", "medium"),
                 "alignment": existing.get("alignment", "center"),
                 "wrapMode": existing.get("wrapMode", "none"),

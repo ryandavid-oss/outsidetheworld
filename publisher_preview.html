@@ -171,22 +171,29 @@
 <body class="archive-reader-page publisher-preview-page">
     <main class="archive-reader">
         <article class="reader-card" aria-labelledby="entry-title">
-            <div class="reader-chrome">
-                <nav class="reader-breadcrumbs" aria-label="Preview navigation">
-                    <a href="publisher.html">Publisher</a>
-                    <span class="reader-breadcrumb-separator" aria-hidden="true">/</span>
-                    <a href="personal.html">Outside The World</a>
-                </nav>
-                <div class="reader-mode-toggle" role="group" aria-label="Reader mode">
-                    <button class="reader-mode-button" type="button" data-reader-mode-option="dark" aria-pressed="true">Dark</button>
-                    <button class="reader-mode-button" type="button" data-reader-mode-option="light" aria-pressed="false">Light</button>
+            <header class="reader-chrome">
+                <a class="reader-mark" href="index.html" aria-label="Outside The World home">
+                    <img class="reader-mark-image reader-mark-image--dark" src="/Images/Equal.svg" alt="Outside The World">
+                    <img class="reader-mark-image reader-mark-image--light" src="/Images/Equal_dark.svg" alt="Outside The World">
+                </a>
+                <div class="reader-chrome-tools">
+                    <nav class="reader-breadcrumbs" aria-label="Preview navigation">
+                        <a href="publisher.html">Publisher</a>
+                        <span class="reader-breadcrumb-separator" aria-hidden="true">/</span>
+                        <a href="index.html">Home</a>
+                    </nav>
+                    <div class="reader-mode-toggle" role="group" aria-label="Reader mode">
+                        <button class="reader-mode-button" type="button" data-reader-mode-option="dark" aria-pressed="true">Dark</button>
+                        <button class="reader-mode-button" type="button" data-reader-mode-option="light" aria-pressed="false">Light</button>
+                    </div>
                 </div>
-            </div>
+            </header>
 
             <header class="entry-header">
                 <p class="entry-label">Private Draft Preview</p>
                 <h1 class="entry-title" id="entry-title">Loading draft...</h1>
                 <p class="entry-deck" id="entry-deck" hidden></p>
+                <p class="entry-byline">By <strong>Rylee Burningham</strong></p>
                 <div class="entry-meta-strip" aria-label="Draft details">
                     <span class="entry-meta-item"><strong>Filed</strong> <span id="entry-date">Draft</span></span>
                     <span class="entry-meta-item"><strong>Words</strong> <span id="entry-words">0</span></span>
@@ -194,6 +201,11 @@
                 </div>
                 <p class="publisher-preview-note">Local browser draft. Not in the feed, archive, sitemap, or public narrative data.</p>
             </header>
+
+            <figure class="entry-feature" id="entry-feature" hidden>
+                <div class="entry-feature-media"><img id="entry-feature-image" alt="" decoding="async" fetchpriority="high"></div>
+                <figcaption id="entry-feature-caption" hidden></figcaption>
+            </figure>
 
             <div class="entry-share-row">
                 <span class="share-status" id="share-status" aria-live="polite">PRIVATE_PREVIEW_SIGNAL</span>
@@ -207,9 +219,14 @@
                 <div class="publisher-preview-empty">No local draft was found. Return to the publisher, write or restore a draft, then press Preview.</div>
             </div>
 
+            <footer class="entry-signoff">
+                <span class="entry-signoff-mark" aria-hidden="true">=</span>
+                <p><strong>Outside The World</strong><br>Writing, images, fragments, and other mish-mash.</p>
+            </footer>
+
             <div class="archive-actions">
                 <a class="archive-link" href="publisher.html">RETURN TO PUBLISHER</a>
-                <a class="archive-link" href="personal.html">RETURN TO OTW</a>
+                <a class="archive-link" href="index.html">RETURN TO OTW</a>
             </div>
         </article>
         <footer class="archive-legal">
@@ -237,6 +254,9 @@
         const wordsEl = document.getElementById('entry-words');
         const readEl = document.getElementById('entry-read');
         const bodyEl = document.getElementById('entry-body');
+        const featureEl = document.getElementById('entry-feature');
+        const featureImageEl = document.getElementById('entry-feature-image');
+        const featureCaptionEl = document.getElementById('entry-feature-caption');
         const refreshPreviewBtn = document.getElementById('refreshPreviewBtn');
         let autoPrintPending = new URLSearchParams(window.location.search).has('print');
 
@@ -414,6 +434,42 @@
             return safeUrl(block.upload?.uploadedUrl || block.url || '');
         }
 
+        function featureImageBlock(article) {
+            const images = (article?.body?.blocks || []).filter((block) => block?.type === 'image' && imageSource(block));
+            return images.find((block) => block.isFeature) || images[0] || null;
+        }
+
+        function renderFeatureImage(block) {
+            if (!block) {
+                featureEl.hidden = true;
+                featureImageEl.removeAttribute('src');
+                featureImageEl.alt = '';
+                featureCaptionEl.hidden = true;
+                featureCaptionEl.textContent = '';
+                return;
+            }
+            featureImageEl.src = imageSource(block);
+            featureImageEl.alt = block.alt || '';
+            const layout = ['natural', 'portrait', 'cinematic'].includes(block.featureLayout) ? block.featureLayout : 'natural';
+            const focal = ['top', 'center', 'bottom'].includes(block.featureFocal) ? block.featureFocal : 'center';
+            featureEl.className = `entry-feature entry-feature--${layout} entry-feature--focal-${focal}`;
+            const width = Math.max(0, Number(block.width || 0));
+            const height = Math.max(0, Number(block.height || 0));
+            const media = featureEl.querySelector('.entry-feature-media');
+            if (width && height) {
+                media.style.setProperty('--feature-aspect', `${width} / ${height}`);
+                featureImageEl.width = width;
+                featureImageEl.height = height;
+            } else {
+                media.style.removeProperty('--feature-aspect');
+                featureImageEl.removeAttribute('width');
+                featureImageEl.removeAttribute('height');
+            }
+            featureCaptionEl.textContent = [block.caption, block.credit].filter(Boolean).join(' / ');
+            featureCaptionEl.hidden = !featureCaptionEl.textContent;
+            featureEl.hidden = false;
+        }
+
         function renderBlock(block, state) {
             if (!block || !block.type) {
                 return document.createDocumentFragment();
@@ -482,10 +538,14 @@
                 image.alt = block.alt || '';
                 image.loading = 'lazy';
                 image.decoding = 'async';
+                if (Number(block.width) > 0 && Number(block.height) > 0) {
+                    image.width = Number(block.width);
+                    image.height = Number(block.height);
+                }
                 figure.append(image);
-                if (block.caption) {
+                if (block.caption || block.credit) {
                     const caption = document.createElement('figcaption');
-                    caption.textContent = block.caption;
+                    caption.textContent = [block.caption, block.credit].filter(Boolean).join(' / ');
                     figure.append(caption);
                 }
                 return figure;
@@ -503,6 +563,7 @@
                 wordsEl.textContent = '0';
                 readEl.textContent = '0 min';
                 bodyEl.innerHTML = '<div class="publisher-preview-empty">No local draft was found. Return to the publisher, write or restore a draft, then press Preview.</div>';
+                renderFeatureImage(null);
                 maybeAutoPrint();
                 return;
             }
@@ -521,9 +582,14 @@
             readEl.textContent = `${minutes} min`;
             document.title = `${titleEl.textContent} | Private Draft Preview`;
 
+            const featureBlock = featureImageBlock(article);
+            renderFeatureImage(featureBlock);
             const state = { openingUsed: false };
             const fragment = document.createDocumentFragment();
             (article.body.blocks || []).forEach((block) => {
+                if (block === featureBlock) {
+                    return;
+                }
                 fragment.append(renderBlock(block, state));
             });
             if (!fragment.childNodes.length) {

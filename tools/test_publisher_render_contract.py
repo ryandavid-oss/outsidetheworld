@@ -45,7 +45,7 @@ def assert_no_public_leaks(value):
 
 def extract_share_entry_body(value):
     match = re.search(
-        r'<div class="entry-body">\s*([\s\S]*?)\s*</div>\s*(?:<nav class="reader-nav"[\s\S]*?</nav>\s*)?<div class="archive-actions">',
+        r'<div class="entry-body"[^>]*>\s*([\s\S]*?)\s*</div>\s*(?:<footer class="entry-signoff"[\s\S]*?</footer>\s*)?(?:<nav class="reader-nav"[\s\S]*?</nav>\s*)?<div class="archive-actions">',
         value,
     )
     assert match
@@ -560,9 +560,8 @@ def test_realistic_publisher_fixture_end_to_end():
 
         for expected in [
             '<p class="entry-deck">A field note from the new desk</p>',
-            "otw-figure--small",
-            "otw-figure--align-right",
-            "otw-figure--wrap-left",
+            'class="entry-feature entry-feature--natural entry-feature--focal-center"',
+            'fetchpriority="high"',
             "otw-figure--large",
             "otw-figure--align-center",
             "otw-figure--none",
@@ -575,6 +574,8 @@ def test_realistic_publisher_fixture_end_to_end():
         assert "otw-publisher" not in share_html
         assert PUBLISHER_KEY_SENTINEL not in share_html
         assert_no_public_leaks(extract_share_entry_body(share_html))
+        assert share_html.count(IMAGE_ONE) >= 4
+        assert extract_share_entry_body(share_html).count(IMAGE_ONE) == 0
 
         fragments_data = temp / "fragments_data.js"
         fragments_data.write_text("window.otw_fragments = [];", encoding="utf-8")
@@ -642,6 +643,95 @@ def test_canonical_archive_page_prefers_first_article_image_when_present():
     assert "og:image:width" not in meta
     assert "og:image:height" not in meta
     assert meta["og:image:alt"] == "Small right wrapped image"
+
+
+def test_explicit_feature_image_drives_opening_and_is_not_duplicated_in_body():
+    metadata = fixture_metadata()
+    metadata["version"] = 2
+    metadata["featureImageRef"] = "image_two"
+    for image in metadata["images"]:
+        if image["id"] == "image_two":
+            image.update({
+                "width": 1600,
+                "height": 900,
+                "credit": "OTW Studio",
+                "featureLayout": "cinematic",
+                "featureFocal": "top",
+            })
+    metadata = narrative_sync.sanitize_publisher_metadata(metadata)
+    assert metadata["featureImageRef"] == "image_two"
+    share_html = narrative_sync.render_share_page({
+        "title": "Feature Selection Fixture",
+        "date": "May 29, 2026",
+        "file": "2026-05-29-feature-selection-fixture.md",
+        "body": f'![First]({IMAGE_ONE})\n\nBody copy.\n\n![Second]({IMAGE_TWO} "Chosen feature")',
+        "publisher": metadata,
+    })
+    body = extract_share_entry_body(share_html)
+
+    assert f'<img src="{IMAGE_TWO}"' in share_html
+    assert 'class="entry-feature entry-feature--cinematic entry-feature--focal-top"' in share_html
+    assert 'fetchpriority="high"' in share_html
+    assert 'style="--feature-aspect: 1600 / 900;"' in share_html
+    assert 'width="1600" height="900"' in share_html
+    assert 'class="entry-feature-credit">OTW Studio</span>' in share_html
+    assert body.count(IMAGE_TWO) == 0
+    assert body.count(IMAGE_ONE) == 1
+    assert narrative_sync.first_article_image({"title": "Feature", "publisher": metadata})["url"] == IMAGE_TWO
+
+
+def test_article_shell_has_home_identity_schema_and_consistent_section_levels():
+    share_html = narrative_sync.render_share_page({
+        "title": "Branded Reader Fixture",
+        "date": "July 11, 2026",
+        "file": "2026-07-11-branded-reader-fixture.md",
+        "body": "## I. First\n\nOpening copy.\n\n### II. Second\n\nClosing copy.",
+    })
+
+    assert 'href="../index.html" aria-label="Outside The World home"' in share_html
+    assert 'src="/Images/Equal.svg"' in share_html
+    assert 'src="/Images/Equal_dark.svg"' in share_html
+    assert 'By <strong>Rylee Burningham</strong>' in share_html
+    assert '<script type="application/ld+json">' in share_html
+    assert '"@type": "Article"' in share_html
+    assert '<span class="entry-section-index">II.</span> <span class="entry-section-title">Second</span>' in share_html
+    assert '<h3>II. Second</h3>' not in share_html
+
+
+def test_article_shell_adapts_to_length_media_and_opening_structure():
+    long_body = "## I. Opening\n\n" + " ".join(["substantial"] * 2800)
+    long_html = narrative_sync.render_share_page({
+        "title": "Long Reader Fixture",
+        "date": "July 11, 2026",
+        "file": "2026-07-11-long-reader-fixture.md",
+        "body": long_body,
+    })
+    short_html = narrative_sync.render_share_page({
+        "title": "Short Reader Fixture",
+        "date": "July 11, 2026",
+        "file": "2026-07-11-short-reader-fixture.md",
+        "body": "A concise field note with a complete thought.",
+    })
+
+    assert 'reader-card--long reader-card--text-led' in long_html
+    assert 'data-reader-dock' in long_html
+    assert 'article-length-long article-media-text-led' in long_html
+    assert 'reader-card--short reader-card--text-led' in short_html
+    assert 'data-reader-dock' not in short_html
+
+
+def test_opening_dropcap_wraps_first_visible_letter_inside_markup():
+    body = "**This opening begins in bold and continues with enough words to receive the intentional opening treatment. " + " ".join(["reader"] * 45) + "**"
+    share_html = narrative_sync.render_share_page({
+        "title": "Dropcap Fixture",
+        "date": "July 11, 2026",
+        "file": "2026-07-11-dropcap-fixture.md",
+        "body": body,
+    })
+    entry_body = extract_share_entry_body(share_html)
+
+    assert 'entry-body__opening entry-body__dropcap' in entry_body
+    assert '<strong><span class="entry-dropcap">T</span>his' in entry_body
 
 
 def test_canonical_archive_page_uses_markdown_image_when_no_publisher_image_exists():
@@ -897,6 +987,10 @@ def run():
         test_realistic_publisher_fixture_end_to_end,
         test_canonical_archive_page_emits_full_preview_metadata,
         test_canonical_archive_page_prefers_first_article_image_when_present,
+        test_explicit_feature_image_drives_opening_and_is_not_duplicated_in_body,
+        test_article_shell_has_home_identity_schema_and_consistent_section_levels,
+        test_article_shell_adapts_to_length_media_and_opening_structure,
+        test_opening_dropcap_wraps_first_visible_letter_inside_markup,
         test_canonical_archive_page_uses_markdown_image_when_no_publisher_image_exists,
         test_canonical_archive_page_uses_normalized_local_article_image_for_preview,
         test_canonical_archive_page_uses_normalized_local_html_image_for_preview,

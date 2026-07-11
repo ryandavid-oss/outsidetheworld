@@ -113,10 +113,93 @@
     };
 
     const initShare = () => {
-        const shareButton = document.querySelector('[data-share-button]');
-        if (shareButton) {
+        document.querySelectorAll('[data-share-button]').forEach((shareButton) => {
             shareButton.addEventListener('click', window.copyShareLink);
+        });
+    };
+
+    const initImageReveal = () => {
+        document.querySelectorAll('.entry-feature img, .entry-body img, .reader-nav-media img').forEach((image) => {
+            const reveal = () => image.classList.add('is-loaded');
+            if (image.complete) {
+                reveal();
+            } else {
+                image.addEventListener('load', reveal, { once: true });
+                image.addEventListener('error', reveal, { once: true });
+            }
+        });
+    };
+
+    const initReaderDock = () => {
+        const dock = document.querySelector('[data-reader-dock]');
+        if (!dock) {
+            return;
         }
+        const intro = document.querySelector('.entry-feature') || document.querySelector('.entry-header');
+        const sectionLabel = dock.querySelector('[data-reader-section]');
+        const headings = Array.from(document.querySelectorAll('.entry-body h2'));
+        let frame = 0;
+        let lastY = window.scrollY;
+
+        const update = () => {
+            frame = 0;
+            const currentY = window.scrollY;
+            const introEnd = intro
+                ? intro.getBoundingClientRect().bottom + currentY
+                : window.innerHeight;
+            const isVisible = currentY > Math.max(220, introEnd - 80);
+            dock.classList.toggle('is-visible', isVisible);
+            dock.classList.toggle('is-scrolling-down', isVisible && currentY > lastY + 4);
+
+            if (sectionLabel && headings.length) {
+                let currentHeading = null;
+                for (const heading of headings) {
+                    const headingTop = heading.getBoundingClientRect().top;
+                    if (headingTop <= 110) {
+                        currentHeading = heading;
+                    } else {
+                        break;
+                    }
+                }
+                sectionLabel.textContent = currentHeading
+                    ? currentHeading.textContent.replace(/\s+/g, ' ').trim()
+                    : 'Introduction';
+            }
+            lastY = currentY;
+        };
+
+        const schedule = () => {
+            if (!frame) {
+                frame = window.requestAnimationFrame(update);
+            }
+        };
+        update();
+        window.addEventListener('scroll', schedule, { passive: true });
+        window.addEventListener('resize', schedule);
+    };
+
+    const initReadingProgress = () => {
+        const progress = document.querySelector('[data-reading-progress]');
+        if (!progress) {
+            return;
+        }
+
+        let frame = 0;
+        const update = () => {
+            frame = 0;
+            const available = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+            const ratio = Math.min(1, Math.max(0, window.scrollY / available));
+            progress.style.transform = `scaleX(${ratio})`;
+        };
+        const schedule = () => {
+            if (!frame) {
+                frame = window.requestAnimationFrame(update);
+            }
+        };
+
+        update();
+        window.addEventListener('scroll', schedule, { passive: true });
+        window.addEventListener('resize', schedule);
     };
 
     const clarifyMedia = window.matchMedia('(min-width: 1180px)');
@@ -317,11 +400,17 @@
         document.addEventListener('DOMContentLoaded', () => {
             initReaderMode();
             initShare();
+            initReadingProgress();
+            initImageReveal();
+            initReaderDock();
             initReadingAids();
         });
     } else {
         initReaderMode();
         initShare();
+        initReadingProgress();
+        initImageReveal();
+        initReaderDock();
         initReadingAids();
     }
 }());
