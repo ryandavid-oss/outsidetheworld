@@ -2519,6 +2519,10 @@
       color: #526364;
     }
 
+    .just-write-exit {
+      display: none;
+    }
+
     @keyframes just-write-settle {
       from {
         opacity: 0.82;
@@ -2561,6 +2565,35 @@
       body.is-just-writing .editor {
         font-size: 1.12rem;
         line-height: 1.72;
+      }
+
+      body.is-just-writing .just-write-exit {
+        position: fixed;
+        top: max(14px, env(safe-area-inset-top));
+        right: max(14px, env(safe-area-inset-right));
+        z-index: 120;
+        display: grid;
+        width: 44px;
+        height: 44px;
+        place-items: center;
+        border: 1px solid rgba(238, 238, 238, 0.22);
+        border-radius: 50%;
+        background: rgba(25, 27, 25, 0.92);
+        color: #f6f2e8;
+        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
+        font-family: var(--sans);
+        font-size: 1.55rem;
+        font-weight: 300;
+        line-height: 1;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      body.is-just-writing .just-write-exit:hover,
+      body.is-just-writing .just-write-exit:focus-visible {
+        border-color: var(--otw-light-blue);
+        background: var(--logo-navy);
+        outline: 2px solid rgba(160, 190, 245, 0.72);
+        outline-offset: 3px;
       }
     }
 
@@ -3007,6 +3040,8 @@
     </div>
   </div>
 
+  <button class="just-write-exit" id="justWriteExitBtn" type="button" aria-label="Exit Just Write" title="Exit Just Write">&times;</button>
+
   <input id="localImageInput" type="file" accept="image/*,.heic,.heif" hidden />
   <template id="articlePayload"></template>
   <template id="publishPayload"></template>
@@ -3038,6 +3073,7 @@
     const textColorBtn = document.getElementById('textColorBtn');
     const highlightBtn = document.getElementById('highlightBtn');
     const justWriteBtn = document.getElementById('justWriteBtn');
+    const justWriteExitBtn = document.getElementById('justWriteExitBtn');
     const saveDraftBtn = document.getElementById('saveDraftBtn');
     const previewDraftBtn = document.getElementById('previewDraftBtn');
     const productionPreviewBtn = document.getElementById('productionPreviewBtn');
@@ -9779,6 +9815,7 @@
     });
 
     justWriteBtn.addEventListener('click', enterJustWrite);
+    justWriteExitBtn.addEventListener('click', exitJustWrite);
 
     previewDraftBtn.addEventListener('click', openDraftPreview);
     productionPreviewBtn.addEventListener('click', () => {

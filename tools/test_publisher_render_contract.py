@@ -989,7 +989,9 @@ def test_publisher_just_write_mode_preserves_the_composer_contract():
 
     for token in [
         'id="justWriteBtn"',
+        'id="justWriteExitBtn"',
         'aria-pressed="false">Just Write</button>',
+        'aria-label="Exit Just Write"',
         "function enterJustWrite()",
         "function exitJustWrite({ exitFullscreen = true } = {})",
         "requestFullscreen",
@@ -997,6 +999,7 @@ def test_publisher_just_write_mode_preserves_the_composer_contract():
         "fullscreenchange",
         "webkitfullscreenchange",
         "justWriteBtn.addEventListener('click', enterJustWrite)",
+        "justWriteExitBtn.addEventListener('click', exitJustWrite)",
         "document.documentElement.classList.add('is-just-writing')",
         "document.body.classList.add('is-just-writing')",
         "body.is-just-writing .editor",
