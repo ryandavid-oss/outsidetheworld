@@ -248,6 +248,28 @@
       color: #fff;
     }
 
+    .tool-btn.just-write-btn {
+      width: auto;
+      min-width: max-content;
+      padding: 0 12px;
+      border-color: var(--logo-ink);
+      background: var(--logo-ink);
+      color: var(--text-main);
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      box-shadow: 0 10px 26px rgba(26, 28, 32, 0.18);
+    }
+
+    .tool-btn.just-write-btn:hover,
+    .tool-btn.just-write-btn:focus-visible {
+      border-color: var(--otw-blue);
+      background: var(--logo-navy);
+      color: #fff;
+    }
+
     .publish-btn[disabled],
     .text-btn[disabled],
     .text-btn[aria-disabled="true"] {
@@ -2355,6 +2377,198 @@
         overflow-x: auto;
       }
     }
+
+    html.is-just-writing,
+    body.is-just-writing,
+    body.is-just-writing .app-shell {
+      min-height: 100%;
+      background: #191b19;
+    }
+
+    html.is-just-writing {
+      scrollbar-color: rgba(160, 190, 245, 0.38) #191b19;
+    }
+
+    html.is-just-writing::backdrop {
+      background: #191b19;
+    }
+
+    body.is-just-writing {
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body.is-just-writing .topbar,
+    body.is-just-writing .revision-bar,
+    body.is-just-writing .toolbar,
+    body.is-just-writing .toolbar-popover,
+    body.is-just-writing .settings-sheet,
+    body.is-just-writing .published-manager,
+    body.is-just-writing .editor-panels,
+    body.is-just-writing .article-meta,
+    body.is-just-writing .article-title-stack {
+      display: none !important;
+    }
+
+    body.is-just-writing .workspace {
+      display: block;
+      width: 100%;
+      min-height: 100vh;
+      margin: 0;
+      padding: clamp(28px, 5vh, 58px) 24px clamp(64px, 9vh, 112px);
+    }
+
+    body.is-just-writing .document-shell {
+      width: 100%;
+      margin: 0;
+    }
+
+    body.is-just-writing .paper {
+      width: min(780px, calc(100vw - 48px));
+      min-height: calc(100vh - 86px);
+      margin: 0 auto;
+      padding: clamp(70px, 9vh, 112px) clamp(48px, 7vw, 92px) clamp(108px, 14vh, 168px);
+      border: 1px solid rgba(116, 109, 90, 0.72);
+      border-radius: 5px;
+      background-color: #f6f2e8;
+      background-image: linear-gradient(
+        90deg,
+        rgba(73, 67, 52, 0.065) 0,
+        rgba(73, 67, 52, 0.018) 7%,
+        rgba(255, 255, 255, 0.18) 45%,
+        rgba(73, 67, 52, 0.018) 100%
+      );
+      box-shadow:
+        0 34px 92px rgba(0, 0, 0, 0.48),
+        0 7px 18px rgba(0, 0, 0, 0.24),
+        inset 18px 0 30px rgba(67, 59, 43, 0.055),
+        inset -1px 0 rgba(255, 255, 255, 0.56);
+      animation: just-write-settle 220ms ease-out both;
+    }
+
+    body.is-just-writing .body-block,
+    body.is-just-writing .body-block:focus-within,
+    body.is-just-writing .body-block.is-active {
+      min-height: calc(100vh - 310px);
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    body.is-just-writing .editor {
+      min-height: calc(100vh - 310px);
+      color: #292a26;
+      caret-color: var(--blue-dark);
+      font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+      font-size: 1.22rem;
+      line-height: 1.82;
+      text-rendering: optimizeLegibility;
+    }
+
+    body.is-just-writing .editor:empty::before {
+      content: "";
+    }
+
+    body.is-just-writing .editor p {
+      min-height: 1.82em;
+      padding-bottom: 0.78em;
+    }
+
+    body.is-just-writing .editor h2 {
+      color: #263d5d;
+      font-size: 1.78rem;
+      line-height: 1.25;
+    }
+
+    body.is-just-writing .editor h3 {
+      color: #365458;
+      font-size: 1.42rem;
+      line-height: 1.3;
+    }
+
+    body.is-just-writing .editor blockquote {
+      border-left-color: rgba(53, 105, 200, 0.42);
+      color: #46595a;
+    }
+
+    body.is-just-writing .editor a {
+      color: #285ebf;
+    }
+
+    body.is-just-writing .editor ::selection,
+    body.is-just-writing .editor::selection {
+      background: rgba(160, 190, 245, 0.58);
+      color: #171a1f;
+    }
+
+    body.is-just-writing .publisher-figure {
+      border-color: rgba(116, 109, 90, 0.34);
+      background: rgba(255, 255, 255, 0.22);
+      box-shadow: none;
+    }
+
+    body.is-just-writing .publisher-figure.is-selected,
+    body.is-just-writing .publisher-figure:focus-visible {
+      border-color: rgba(53, 105, 200, 0.46);
+      box-shadow: 0 0 0 2px rgba(53, 105, 200, 0.14);
+    }
+
+    body.is-just-writing .figure-caption {
+      color: #526364;
+    }
+
+    @keyframes just-write-settle {
+      from {
+        opacity: 0.82;
+        transform: translateY(7px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 700px) {
+      html.is-just-writing,
+      body.is-just-writing,
+      body.is-just-writing .app-shell {
+        background: #f6f2e8;
+      }
+
+      body.is-just-writing .workspace {
+        min-height: 100vh;
+        padding: 0;
+      }
+
+      body.is-just-writing .paper {
+        width: 100%;
+        min-height: 100vh;
+        padding: 54px 22px 104px;
+        border: 0;
+        border-radius: 0;
+        box-shadow: inset 10px 0 22px rgba(67, 59, 43, 0.04);
+      }
+
+      body.is-just-writing .body-block,
+      body.is-just-writing .body-block:focus-within,
+      body.is-just-writing .body-block.is-active,
+      body.is-just-writing .editor {
+        min-height: calc(100vh - 158px);
+      }
+
+      body.is-just-writing .editor {
+        font-size: 1.12rem;
+        line-height: 1.72;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      body.is-just-writing .paper {
+        animation: none;
+      }
+    }
   </style>
 </head>
 <body>
@@ -2381,7 +2595,7 @@
         </button>
         <div class="top-secondary-actions" id="mobileActionsMenu">
           <button class="text-btn" id="saveDraftBtn" type="button" title="Save server draft">Save Draft</button>
-          <button class="text-btn" id="previewDraftBtn" type="button" title="Preview local draft">Quick Preview</button>
+          <button class="text-btn" id="previewDraftBtn" type="button" title="Preview current draft with the live article renderer">Quick Preview</button>
           <button class="text-btn" id="productionPreviewBtn" type="button" title="Preview with the production renderer">Production Preview</button>
           <button class="text-btn" id="publishedEssaysBtn" type="button" title="Open published essay manager">Published Essays</button>
           <button class="text-btn" id="downloadMarkdownBtn" type="button" title="Download draft as Markdown">Download MD</button>
@@ -2416,6 +2630,9 @@
     </section>
 
     <nav class="toolbar" aria-label="Writing tools">
+      <div class="toolbar-group">
+        <button class="tool-btn just-write-btn" id="justWriteBtn" type="button" title="Enter distraction-free fullscreen writing mode" aria-pressed="false">Just Write</button>
+      </div>
       <div class="toolbar-group">
         <button class="tool-btn" type="button" data-command="undo" aria-label="Undo" title="Undo" data-tooltip="Undo">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -2820,6 +3037,7 @@
     const linkBtn = document.getElementById('linkBtn');
     const textColorBtn = document.getElementById('textColorBtn');
     const highlightBtn = document.getElementById('highlightBtn');
+    const justWriteBtn = document.getElementById('justWriteBtn');
     const saveDraftBtn = document.getElementById('saveDraftBtn');
     const previewDraftBtn = document.getElementById('previewDraftBtn');
     const productionPreviewBtn = document.getElementById('productionPreviewBtn');
@@ -2939,6 +3157,7 @@
     let isSyncingImageInspector = false;
     let removedFigureUndo = null;
     let lastPublishError = null;
+    let isJustWriting = false;
     let activePublishedRevision = readPublishedRevisionMeta();
     let publishedEssayItems = [];
     let selectedPublishedEssaySlug = '';
@@ -3058,7 +3277,7 @@
       saveDraftBtn.textContent = isActive ? 'Save Revision' : 'Save Draft';
       saveDraftBtn.title = isActive ? 'Save local revision draft' : 'Save server draft';
       previewDraftBtn.textContent = isActive ? 'Preview Revision' : 'Quick Preview';
-      previewDraftBtn.title = isActive ? 'Preview revision without changing production output' : 'Preview local draft';
+      previewDraftBtn.title = isActive ? 'Preview revision without changing production output' : 'Preview current draft with the live article renderer';
       if (archivePrivateBtn) {
         const canArchivePrivately = Boolean(getLocalPublisherToken());
         archivePrivateBtn.hidden = false;
@@ -6798,38 +7017,28 @@
       }
     }
 
-    function openDraftPreview() {
-      if (activePublishedRevision?.slug) {
-        previewPublishedRevision().catch((error) => {
-          revisionStatusText(error.message);
-          setSaveState('Revision preview failed', true);
-        });
-        return;
-      }
-      saveDraft();
-      const previewUrl = `publisher_preview.html?draft=${Date.now()}`;
-      const previewWindow = window.open(previewShellUrl(previewUrl), '_blank', 'noopener');
-      if (previewWindow) {
-        setSaveState('Preview opened', true);
-      } else {
-        setSaveState('Preview blocked', true);
-      }
-    }
-
-    async function openProductionPreview() {
-      if (activePublishedRevision?.slug) {
-        return previewPublishedRevision();
-      }
+    async function renderDraftWithProductionRenderer({
+      button,
+      requirePublishReady = false,
+      idleLabel = 'Preview',
+      successLabel = 'Preview opened'
+    } = {}) {
       saveDraft();
       const article = updateArticlePayload();
       const payload = buildPublishPayload(article);
-      if (!payload.validation.canPublish) {
+      if (requirePublishReady && !payload.validation.canPublish) {
         setSaveState(payload.validation.readiness || 'Preview blocked', true);
         return null;
       }
-      productionPreviewBtn.disabled = true;
-      productionPreviewBtn.textContent = 'Rendering';
-      setSaveState('Rendering production preview');
+      if (!String(payload.content?.markdown || '').trim()) {
+        setSaveState('Add article content before previewing', true);
+        return null;
+      }
+      if (button) {
+        button.disabled = true;
+        button.textContent = 'Rendering';
+      }
+      setSaveState('Rendering live-format preview');
       try {
         const result = await localPublisherApi('/api/draft-preview', {
           method: 'POST',
@@ -6839,15 +7048,46 @@
           })
         });
         window.open(previewShellUrl(result.preview.url), '_blank', 'noopener');
-        setSaveState('Production preview opened', true);
+        setSaveState(successLabel, true);
         return result;
       } catch (error) {
-        setSaveState(error.message || 'Start tools/publisher_server.py for production preview.', true);
+        setSaveState(error.message || 'Start tools/publisher_server.py for live-format preview.', true);
         return null;
       } finally {
-        productionPreviewBtn.disabled = false;
-        productionPreviewBtn.textContent = 'Production Preview';
+        if (button) {
+          button.disabled = false;
+          button.textContent = idleLabel;
+        }
       }
+    }
+
+    async function openDraftPreview() {
+      if (activePublishedRevision?.slug) {
+        try {
+          return await previewPublishedRevision();
+        } catch (error) {
+          revisionStatusText(error.message);
+          setSaveState('Revision preview failed', true);
+          return null;
+        }
+      }
+      return renderDraftWithProductionRenderer({
+        button: previewDraftBtn,
+        idleLabel: 'Quick Preview',
+        successLabel: 'Quick preview opened'
+      });
+    }
+
+    async function openProductionPreview() {
+      if (activePublishedRevision?.slug) {
+        return previewPublishedRevision();
+      }
+      return renderDraftWithProductionRenderer({
+        button: productionPreviewBtn,
+        requirePublishReady: true,
+        idleLabel: 'Production Preview',
+        successLabel: 'Production preview opened'
+      });
     }
 
     function articleIsEmpty(article) {
@@ -7534,6 +7774,101 @@
       setActiveEditable(editor);
       editor.focus();
       restoreSelection();
+    }
+
+    function activeFullscreenElement() {
+      return document.fullscreenElement || document.webkitFullscreenElement || null;
+    }
+
+    function requestJustWriteFullscreen() {
+      if (activeFullscreenElement()) {
+        return;
+      }
+      const request = document.documentElement.requestFullscreen
+        || document.documentElement.webkitRequestFullscreen;
+      if (typeof request !== 'function') {
+        return;
+      }
+      try {
+        const result = request.call(document.documentElement);
+        if (result && typeof result.catch === 'function') {
+          result.catch(() => {
+            // The notebook layout remains available when fullscreen is denied.
+          });
+        }
+      } catch (error) {
+        // Fullscreen is an enhancement; focus mode remains active without it.
+      }
+    }
+
+    function exitJustWriteFullscreen() {
+      if (!activeFullscreenElement()) {
+        return;
+      }
+      const exit = document.exitFullscreen || document.webkitExitFullscreen;
+      if (typeof exit !== 'function') {
+        return;
+      }
+      try {
+        const result = exit.call(document);
+        if (result && typeof result.catch === 'function') {
+          result.catch(() => {});
+        }
+      } catch (error) {
+        // The visual state still exits even if the browser owns fullscreen.
+      }
+    }
+
+    function focusJustWriteEditor() {
+      setActiveEditable(editor);
+      restoreSelection();
+      const selected = selectedElement();
+      const writingBlock = selected?.closest('p, h2, h3, blockquote, li, .publisher-figure') || editor;
+      writingBlock.scrollIntoView({ block: 'center', inline: 'nearest' });
+    }
+
+    function enterJustWrite() {
+      if (isJustWriting) {
+        return;
+      }
+      rememberSelection();
+      saveDraft();
+      closeToolbarPopover();
+      closeMobileActionsMenu();
+      settingsSheet.classList.remove('is-open');
+      settingsToggle.setAttribute('aria-expanded', 'false');
+      clearFigureSelection();
+      isJustWriting = true;
+      document.documentElement.classList.add('is-just-writing');
+      document.body.classList.add('is-just-writing');
+      justWriteBtn.setAttribute('aria-pressed', 'true');
+      requestJustWriteFullscreen();
+      window.requestAnimationFrame(focusJustWriteEditor);
+    }
+
+    function exitJustWrite({ exitFullscreen = true } = {}) {
+      if (!isJustWriting) {
+        return;
+      }
+      rememberSelection();
+      saveDraft();
+      isJustWriting = false;
+      document.documentElement.classList.remove('is-just-writing');
+      document.body.classList.remove('is-just-writing');
+      justWriteBtn.setAttribute('aria-pressed', 'false');
+      if (exitFullscreen) {
+        exitJustWriteFullscreen();
+      }
+      window.requestAnimationFrame(() => {
+        setActiveEditable(editor);
+        restoreSelection();
+      });
+    }
+
+    function syncJustWriteFullscreenExit() {
+      if (isJustWriting && !activeFullscreenElement()) {
+        exitJustWrite({ exitFullscreen: false });
+      }
     }
 
     function editorIsVisiblyEmpty() {
@@ -9443,6 +9778,8 @@
       saveServerDraft();
     });
 
+    justWriteBtn.addEventListener('click', enterJustWrite);
+
     previewDraftBtn.addEventListener('click', openDraftPreview);
     productionPreviewBtn.addEventListener('click', () => {
       openProductionPreview().catch((error) => {
@@ -9754,6 +10091,10 @@
 
     document.addEventListener('keydown', (event) => {
       if (event.key === 'Escape') {
+        if (isJustWriting) {
+          exitJustWrite();
+          return;
+        }
         editor.querySelectorAll('.publisher-figure').forEach((figure) => {
           figure.dataset.controlsHidden = 'true';
         });
@@ -9762,6 +10103,9 @@
         closeMobileActionsMenu();
       }
     });
+
+    document.addEventListener('fullscreenchange', syncJustWriteFullscreenExit);
+    document.addEventListener('webkitfullscreenchange', syncJustWriteFullscreenExit);
 
     window.addEventListener('resize', () => {
       if (activePopover) {
@@ -9810,6 +10154,8 @@
         validatePublishPayload,
         publishArticle,
         archivePrivateDraft,
+        enterJustWrite,
+        exitJustWrite,
         openDraftPreview,
         openPublishedRevisionInComposer,
         savePublishedRevisionDraft,
@@ -9843,6 +10189,9 @@
         },
         getServerDraftMeta() {
           return serverDraftMeta;
+        },
+        isJustWriting() {
+          return isJustWriting;
         },
         hydrateArticleForTest(article) {
           isHydrating = true;

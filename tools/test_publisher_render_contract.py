@@ -973,6 +973,45 @@ def test_public_css_contract_exists_everywhere():
             assert token in text
 
 
+def test_publisher_preview_buttons_share_the_production_renderer():
+    publisher = (ROOT / "publisher.html").read_text(encoding="utf-8")
+
+    assert "async function renderDraftWithProductionRenderer" in publisher
+    assert "async function openDraftPreview" in publisher
+    assert "publisher_preview.html?draft=" not in publisher
+    assert publisher.count("return renderDraftWithProductionRenderer({") == 2
+    assert publisher.count("localPublisherApi('/api/draft-preview'") == 1
+    assert "Preview current draft with the live article renderer" in publisher
+
+
+def test_publisher_just_write_mode_preserves_the_composer_contract():
+    publisher = (ROOT / "publisher.html").read_text(encoding="utf-8")
+
+    for token in [
+        'id="justWriteBtn"',
+        'aria-pressed="false">Just Write</button>',
+        "function enterJustWrite()",
+        "function exitJustWrite({ exitFullscreen = true } = {})",
+        "requestFullscreen",
+        "webkitRequestFullscreen",
+        "fullscreenchange",
+        "webkitfullscreenchange",
+        "justWriteBtn.addEventListener('click', enterJustWrite)",
+        "document.documentElement.classList.add('is-just-writing')",
+        "document.body.classList.add('is-just-writing')",
+        "body.is-just-writing .editor",
+        "body.is-just-writing .article-title-stack",
+        "saveDraft();",
+        "rememberSelection();",
+        "restoreSelection();",
+    ]:
+        assert token in publisher
+
+    assert publisher.count('id="editor"') == 1
+    assert "contenteditable=\"true\"" in publisher
+    assert "isJustWriting()" in publisher
+
+
 def run():
     tests = [
         test_existing_markdown_without_metadata_degrades_cleanly,
@@ -1000,6 +1039,8 @@ def run():
         test_share_copy_search_and_feed_paths_do_not_emit_legacy_residue_urls,
         test_public_pages_use_shared_post_renderer,
         test_public_css_contract_exists_everywhere,
+        test_publisher_preview_buttons_share_the_production_renderer,
+        test_publisher_just_write_mode_preserves_the_composer_contract,
     ]
     for test in tests:
         test()
