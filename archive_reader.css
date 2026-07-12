@@ -1528,23 +1528,28 @@ html[data-reader-mode="dark"] .clarify-note__toggle[aria-expanded="true"] {
     text-transform: uppercase;
 }
 
-.entry-section-heading {
+.entry-body .entry-section-heading {
     display: grid;
-    grid-template-columns: 3.6rem minmax(0, 1fr);
-    align-items: baseline;
-    gap: 14px;
-    margin-left: -4.25rem;
+    grid-template-columns: 3.75rem minmax(0, 1fr);
+    align-items: first baseline;
+    gap: 16px;
+    margin-left: -4.75rem;
+    font-size: 2rem;
+    text-align: left;
 }
 
 .entry-section-index {
     color: var(--reader-accent);
-    font: 0.68rem/1.4 'Fira Code', monospace;
-    letter-spacing: 0.12em;
+    font: 700 1.1rem/1.2 'Fira Code', monospace;
+    letter-spacing: 0.08em;
     text-align: right;
 }
 
 .entry-section-title {
+    display: block;
     min-width: 0;
+    text-align: left;
+    text-wrap: pretty;
 }
 
 .reader-card--long .entry-section-heading {
@@ -1708,14 +1713,16 @@ html[data-reader-mode="light"] .reader-dock {
 }
 
 @media (max-width: 899px) {
-    .entry-section-heading {
-        grid-template-columns: 2.55rem minmax(0, 1fr);
-        gap: 10px;
+    .entry-body .entry-section-heading {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 8px;
         margin-left: 0;
+        font-size: 1.75rem;
     }
 
     .entry-section-index {
-        font-size: 0.6rem;
+        font-size: 0.9rem;
+        text-align: left;
     }
 
     .entry-feature--portrait {
