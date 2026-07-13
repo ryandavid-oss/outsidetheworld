@@ -1007,6 +1007,9 @@ def test_publisher_just_write_mode_preserves_the_composer_contract():
         "saveDraft();",
         "rememberSelection();",
         "restoreSelection();",
+        "function wrapRootInlineRunAtRange(range)",
+        "wrapRootInlineRunAtRange(range);",
+        "editor.replaceChildren(initialParagraph);",
     ]:
         assert token in publisher
 

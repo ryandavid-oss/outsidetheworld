@@ -7583,6 +7583,9 @@
     function loadDraft() {
       const stored = readStoredDraft();
       if (!stored) {
+        const initialParagraph = createTrailingParagraph();
+        initialParagraph.dataset.blockId = blockId('paragraph');
+        editor.replaceChildren(initialParagraph);
         writePublishedRevisionMeta(null);
         setPublisherDate(localTodayIso());
         updateArticlePayload();
@@ -8563,6 +8566,47 @@
       return true;
     }
 
+    function wrapRootInlineRunAtRange(range) {
+      if (!range) {
+        return null;
+      }
+      let rootNode = range.startContainer;
+      if (rootNode === editor) {
+        const childIndex = Math.max(0, Math.min(editor.childNodes.length - 1, range.startOffset - 1));
+        rootNode = editor.childNodes[childIndex] || editor.childNodes[range.startOffset] || null;
+      }
+      while (rootNode && rootNode.parentNode && rootNode.parentNode !== editor) {
+        rootNode = rootNode.parentNode;
+      }
+      if (!rootNode || rootNode.parentNode !== editor || !canBufferAsInline(rootNode)) {
+        return null;
+      }
+
+      let first = rootNode;
+      let last = rootNode;
+      while (first.previousSibling && canBufferAsInline(first.previousSibling)) {
+        first = first.previousSibling;
+      }
+      while (last.nextSibling && canBufferAsInline(last.nextSibling)) {
+        last = last.nextSibling;
+      }
+
+      const paragraph = document.createElement('p');
+      paragraph.dataset.blockId = blockId('paragraph');
+      first.before(paragraph);
+      let current = first;
+      while (current) {
+        const next = current.nextSibling;
+        paragraph.append(current);
+        if (current === last) {
+          break;
+        }
+        current = next;
+      }
+      normalizeEmptyTextBlock(paragraph);
+      return paragraph;
+    }
+
     function insertParagraphBreak() {
       if (selectedFigure && document.activeElement === selectedFigure) {
         const paragraph = ensureEditableParagraphAfterFigure(selectedFigure);
@@ -8586,6 +8630,7 @@
         return;
       }
 
+      wrapRootInlineRunAtRange(range);
       const block = textBlockFromRange(range);
       if (isListItemElement(block)) {
         if (splitListItemAtRange(block, range)) {
