@@ -21,7 +21,6 @@
     <link href="favicon.svg" rel="icon" type="image/svg+xml" />
     <link rel="preload" as="image" href="Images/Equal.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev" crossorigin />
-    <link rel="preload" as="image" href="https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-08-the-midweek-weather-mrcndnnu.jpg" />
     <link href="theme.css" rel="stylesheet" />
 
     <meta property="og:type" content="website" />
@@ -564,6 +563,11 @@
             opacity: 0.9;
         }
 
+        .front-page[data-hydrating] [data-frontpage-image],
+        [data-frontpage-image][data-image-state="loading"] {
+            opacity: 0;
+        }
+
         .front-grid {
             display: grid;
             grid-template-columns: minmax(0, 2fr) minmax(280px, 360px);
@@ -766,7 +770,7 @@
             object-position: center;
             opacity: 1;
             filter: var(--image-rest-filter);
-            transition: filter var(--speed-medium) ease, transform 380ms var(--ease-editorial);
+            transition: opacity var(--speed-fast) ease, filter var(--speed-medium) ease, transform 380ms var(--ease-editorial);
         }
 
         .lead-art::after {
@@ -842,7 +846,7 @@
             object-fit: cover;
             border-radius: 6px;
             filter: var(--image-rest-filter);
-            transition: filter var(--speed-medium) ease, transform 380ms var(--ease-editorial);
+            transition: opacity var(--speed-fast) ease, filter var(--speed-medium) ease, transform 380ms var(--ease-editorial);
         }
 
         .rail-item__media {
@@ -934,7 +938,7 @@
             object-fit: cover;
             border-bottom: 1px solid rgba(238, 238, 238, 0.08);
             filter: var(--image-rest-filter);
-            transition: filter var(--speed-medium) ease, transform 380ms var(--ease-editorial);
+            transition: opacity var(--speed-fast) ease, filter var(--speed-medium) ease, transform 380ms var(--ease-editorial);
         }
 
         .story-card__media:hover img,
@@ -1186,7 +1190,7 @@
             aspect-ratio: 16 / 10;
             object-fit: cover;
             filter: var(--image-rest-filter);
-            transition: filter var(--speed-medium) ease, transform 380ms var(--ease-editorial);
+            transition: opacity var(--speed-fast) ease, filter var(--speed-medium) ease, transform 380ms var(--ease-editorial);
         }
 
         .editorial-media:hover img,
@@ -1829,8 +1833,8 @@
           "@type": "ListItem",
           "position": 1,
           "name": "The Midweek Weather",
-          "url": "https://outsidetheworld.com/archive/2026-07-08-the-midweek-weather.html",
-          "image": "https://outsidetheworld.com/Images/og/archive/2026-07-08-the-midweek-weather.png"
+          "url": "https://outsidetheworld.com/archive/2026-07-14-the-midweek-weather.html",
+          "image": "https://outsidetheworld.com/Images/og/archive/2026-07-14-the-midweek-weather.png"
         },
         {
           "@type": "ListItem",
@@ -1993,18 +1997,18 @@
                         <div class="lead-copy">
                             <div>
                                 <span class="eyebrow" data-frontpage-tag>Latest essay</span>
-                                <h2 id="lead-title"><a data-frontpage-link href="archive/2026-07-08-the-midweek-weather.html">The Midweek Weather</a></h2>
+                                <h2 id="lead-title"><a data-frontpage-link href="archive/2026-07-14-the-midweek-weather.html">The Midweek Weather</a></h2>
                             </div>
-                            <p class="lead-dek" data-frontpage-description>This entry about a concert wasn't supposed to be about a concert at all</p>
+                            <p class="lead-dek" data-frontpage-description>The Skipping Stone</p>
                             <div class="story-meta" data-frontpage-meta>
-                                <span>July 8, 2026</span>
+                                <span>July 14, 2026</span>
                                 <span>Essay</span>
                                 <span>Current narrative</span>
                             </div>
-                            <a class="story-link" data-frontpage-cta href="archive/2026-07-08-the-midweek-weather.html">Continue reading The Midweek Weather &rarr;</a>
+                            <a class="story-link" data-frontpage-cta href="archive/2026-07-14-the-midweek-weather.html">Continue reading The Midweek Weather &rarr;</a>
                         </div>
-                        <a class="lead-art" data-frontpage-art href="archive/2026-07-08-the-midweek-weather.html" aria-label="Continue reading The Midweek Weather">
-                            <img data-frontpage-image src="https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-08-the-midweek-weather-mrcndnnu.jpg" alt="Image for The Midweek Weather" loading="eager" fetchpriority="high" decoding="async" width="1600" height="1000" />
+                        <a class="lead-art" data-frontpage-art href="archive/2026-07-14-the-midweek-weather.html" aria-label="Continue reading The Midweek Weather">
+                            <img data-frontpage-image src="https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-14-the-midweek-weather-mrl9zyl0.jpg" alt="Image for The Midweek Weather" loading="eager" fetchpriority="high" decoding="async" width="1600" height="1000" />
                         </a>
                     </article>
 
@@ -2573,8 +2577,22 @@
             if (owner.classList.contains('editorial-entry') && image.parentElement) {
                 image.parentElement.dataset.imageFallback = fallbackText;
             }
+            image.removeAttribute('data-image-state');
             image.hidden = true;
             image.removeAttribute('src');
+        }
+
+        function setImageLoading(image) {
+            const owner = imageOwnerFor(image);
+            if (owner) {
+                owner.dataset.imageState = 'loading';
+                owner.removeAttribute('data-image-fallback');
+                if (owner.classList.contains('editorial-entry') && image.parentElement) {
+                    image.parentElement.removeAttribute('data-image-fallback');
+                }
+            }
+            image.dataset.imageState = 'loading';
+            image.hidden = false;
         }
 
         function clearImageFallback(image) {
@@ -2585,6 +2603,7 @@
             if (owner.classList.contains('editorial-entry') && image.parentElement) {
                 image.parentElement.removeAttribute('data-image-fallback');
             }
+            image.removeAttribute('data-image-state');
             image.hidden = false;
         }
 
@@ -2616,7 +2635,17 @@
 
             let candidateIndex = 0;
             image.onload = () => {
-                clearImageFallback(image);
+                const loadedSource = image.currentSrc || image.src;
+                const revealLoadedImage = () => {
+                    if ((image.currentSrc || image.src) === loadedSource) {
+                        clearImageFallback(image);
+                    }
+                };
+                if (typeof image.decode === 'function') {
+                    image.decode().then(revealLoadedImage, revealLoadedImage);
+                } else {
+                    revealLoadedImage();
+                }
             };
             image.onerror = () => {
                 candidateIndex += 1;
@@ -2635,7 +2664,7 @@
             image.alt = item && Object.prototype.hasOwnProperty.call(item, 'imageAlt')
                 ? item.imageAlt
                 : item && item.title ? item.title : '';
-            clearImageFallback(image);
+            setImageLoading(image);
             image.src = candidates[0];
         }
 

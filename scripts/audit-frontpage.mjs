@@ -131,6 +131,12 @@ if (!homepageTwitterImage.endsWith(`/${socialPreviewPath}`)) {
 if (!localExists(homepageArticleFallback) || !indexHtml.includes(homepageArticleFallback)) {
   fail(`Homepage article fallback is missing or not wired up: ${homepageArticleFallback}`);
 }
+if (/<link\b[^>]*\brel=["']preload["'][^>]*\bhref=["'][^"']*\/narrative\//i.test(indexHtml)) {
+  fail('Homepage must not preload a publication-specific narrative image before dynamic content resolves.');
+}
+if (!indexHtml.includes('function setImageLoading(image)') || !indexHtml.includes("image.decode().then(revealLoadedImage, revealLoadedImage)")) {
+  fail('Homepage image replacement must remain hidden until the manifest-selected image has decoded.');
+}
 if (countMatches(indexHtml, /<h1\b/gi) !== 1) {
   fail('Homepage should contain exactly one h1 in initial HTML.');
 }
