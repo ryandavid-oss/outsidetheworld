@@ -470,6 +470,26 @@
             featureEl.hidden = false;
         }
 
+        function wrapFirstVisibleLetter(element) {
+            const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
+            let textNode = walker.nextNode();
+            while (textNode) {
+                const match = textNode.textContent.match(/[A-Za-z0-9]/);
+                if (match) {
+                    const index = match.index;
+                    const fragment = document.createDocumentFragment();
+                    fragment.append(textNode.textContent.slice(0, index));
+                    const dropcap = document.createElement('span');
+                    dropcap.className = 'entry-dropcap';
+                    dropcap.textContent = match[0];
+                    fragment.append(dropcap, textNode.textContent.slice(index + 1));
+                    textNode.replaceWith(fragment);
+                    return;
+                }
+                textNode = walker.nextNode();
+            }
+        }
+
         function renderBlock(block, state) {
             if (!block || !block.type) {
                 return document.createDocumentFragment();
@@ -480,11 +500,10 @@
                 paragraph.innerHTML = sanitizeInlineHtml(block.html || escapeHtml(block.text || ''));
                 applyTextAlign(paragraph, block.textAlign);
                 const text = paragraph.textContent.replace(/\s+/g, ' ').trim();
-                if (!state.openingUsed && text.length >= 80) {
+                if (!state.openingUsed && text && !/^Tags:\s*/i.test(text)) {
                     paragraph.classList.add('entry-body__opening');
-                    if (text.length >= 180 && text.split(/\s+/).length >= 32) {
-                        paragraph.classList.add('entry-body__dropcap');
-                    }
+                    paragraph.classList.add('entry-body__dropcap');
+                    wrapFirstVisibleLetter(paragraph);
                     state.openingUsed = true;
                 }
                 return paragraph;

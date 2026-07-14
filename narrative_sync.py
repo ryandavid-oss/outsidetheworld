@@ -1234,7 +1234,7 @@ def enhance_reader_body_html(body_html, deck):
         if re.search(r'<\s*(img|figure|pre|code)\b', paragraph_html, flags=re.I):
             continue
         paragraph_text = normalize_plain_text(plain_text_from_html(paragraph_html))
-        if len(paragraph_text) >= 80:
+        if paragraph_text and not re.match(r'^Tags:\s*', paragraph_text, flags=re.I):
             first_paragraph = paragraph
             break
 
@@ -1245,11 +1245,8 @@ def enhance_reader_body_html(body_html, deck):
     if re.search(r'<\s*(img|figure|pre|code)\b', paragraph_html, flags=re.I):
         return body_html
 
-    paragraph_text = normalize_plain_text(plain_text_from_html(paragraph_html))
-    classes = ['entry-body__opening']
-    if len(paragraph_text) >= 180 and len(paragraph_text.split()) >= 32:
-        classes.append('entry-body__dropcap')
-        paragraph_html = wrap_first_visible_letter(paragraph_html)
+    classes = ['entry-body__opening', 'entry-body__dropcap']
+    paragraph_html = wrap_first_visible_letter(paragraph_html)
 
     opening_tag = add_classes_to_tag(first_paragraph.group(2), classes)
     enhanced = ''.join([

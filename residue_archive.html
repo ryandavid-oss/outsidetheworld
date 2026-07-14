@@ -1465,20 +1465,19 @@
         function enhanceArchivePreviewHtml(renderedHtml) {
             const template = document.createElement('template');
             template.innerHTML = renderedHtml;
-            const firstParagraph = template.content.querySelector('p');
-            if (!firstParagraph || firstParagraph.querySelector('img, figure, pre, code')) {
-                return template.innerHTML;
-            }
-
-            const paragraphText = normalizePlainText(firstParagraph.textContent);
-            if (paragraphText.length < 80) {
+            const firstParagraph = Array.from(template.content.querySelectorAll('p')).find((paragraph) => {
+                if (paragraph.querySelector('img, figure, pre, code')) {
+                    return false;
+                }
+                const text = normalizePlainText(paragraph.textContent);
+                return text && !/^Tags:\s*/i.test(text);
+            });
+            if (!firstParagraph) {
                 return template.innerHTML;
             }
 
             firstParagraph.classList.add('entry-body__opening');
-            if (paragraphText.length >= 180 && paragraphText.split(/\s+/).length >= 32) {
-                firstParagraph.classList.add('entry-body__dropcap');
-            }
+            firstParagraph.classList.add('entry-body__dropcap');
             return template.innerHTML;
         }
 

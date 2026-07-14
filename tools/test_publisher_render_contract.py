@@ -734,6 +734,38 @@ def test_opening_dropcap_wraps_first_visible_letter_inside_markup():
     assert '<strong><span class="entry-dropcap">T</span>his' in entry_body
 
 
+def test_opening_dropcap_stays_on_short_first_paragraph():
+    share_html = narrative_sync.render_share_page({
+        "title": "Short Opening Fixture",
+        "date": "July 14, 2026",
+        "file": "2026-07-14-short-opening-fixture.md",
+        "body": (
+            "**Did you know that I love taking mushrooms?**\n\n"
+            "Settle that into your brainpan a little bit before I proceed.\n\n"
+            "Ready?\n\n"
+            "Without wading into far too much detail, this deliberately longer paragraph should not receive "
+            "an opening drop cap merely because the paragraphs before it are short. " + "reader " * 35
+        ),
+    })
+    entry_body = extract_share_entry_body(share_html)
+
+    assert '<p class="entry-body__opening entry-body__dropcap" id="p-001"><strong><span class="entry-dropcap">D</span>id' in entry_body
+    assert '<p id="p-004"><span class="entry-dropcap">W</span>' not in entry_body
+
+
+def test_opening_dropcap_skips_legacy_tag_metadata():
+    share_html = narrative_sync.render_share_page({
+        "title": "Tagged Opening Fixture",
+        "date": "July 14, 2026",
+        "file": "2026-07-14-tagged-opening-fixture.md",
+        "body": "Tags: Apple News, Tech News\n\n**Once upon a time, the real essay began here.**",
+    })
+    entry_body = extract_share_entry_body(share_html)
+
+    assert '<p id="p-001">Tags: Apple News, Tech News</p>' in entry_body
+    assert '<p class="entry-body__opening entry-body__dropcap" id="p-002"><strong><span class="entry-dropcap">O</span>nce' in entry_body
+
+
 def test_canonical_archive_page_uses_markdown_image_when_no_publisher_image_exists():
     share_html = narrative_sync.render_share_page({
         "title": "Markdown Image Fixture",
@@ -1036,6 +1068,8 @@ def run():
         test_article_shell_has_home_identity_schema_and_consistent_section_levels,
         test_article_shell_adapts_to_length_media_and_opening_structure,
         test_opening_dropcap_wraps_first_visible_letter_inside_markup,
+        test_opening_dropcap_stays_on_short_first_paragraph,
+        test_opening_dropcap_skips_legacy_tag_metadata,
         test_canonical_archive_page_uses_markdown_image_when_no_publisher_image_exists,
         test_canonical_archive_page_uses_normalized_local_article_image_for_preview,
         test_canonical_archive_page_uses_normalized_local_html_image_for_preview,
