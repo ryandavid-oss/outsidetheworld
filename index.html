@@ -67,6 +67,7 @@
             --brand-light-blue: #a0bef5;
             --index-blue: #77a3ff;
             --teal: #91afb3;
+            --rose-gold: #e0bfb8;
             --rose: #ff69b4;
             --gold: #d9c08c;
             --green: #4be36e;
@@ -403,6 +404,334 @@
             border-radius: 8px;
             padding-inline: 0.95rem;
             background: rgba(255, 255, 255, 0.04);
+        }
+
+        .site-utilities .listening-trigger {
+            position: relative;
+            min-height: 44px;
+            border: 0;
+            border-radius: 0;
+            padding: 0.7rem 0.2rem;
+            background: transparent;
+            color: var(--muted);
+            box-shadow: none;
+            white-space: nowrap;
+        }
+
+        .site-utilities .listening-trigger::after {
+            content: "";
+            position: absolute;
+            right: 0.2rem;
+            bottom: 0.42rem;
+            left: 0.2rem;
+            height: 1px;
+            background: var(--gold);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform var(--speed-fast) var(--ease-editorial);
+        }
+
+        .site-utilities .listening-trigger:hover,
+        .site-utilities .listening-trigger:focus-visible {
+            border-color: transparent;
+            background: transparent;
+            color: #fff;
+            box-shadow: none;
+        }
+
+        .site-utilities .listening-trigger:hover::after,
+        .site-utilities .listening-trigger:focus-visible::after,
+        .site-utilities .listening-trigger[aria-expanded="true"]::after {
+            transform: scaleX(1);
+        }
+
+        .listening-trigger__light {
+            width: 0.42rem;
+            height: 0.42rem;
+            flex: 0 0 0.42rem;
+            border-radius: 999px;
+            background: color-mix(in srgb, var(--gold) 48%, var(--ink));
+            box-shadow: 0 0 8px rgba(217, 192, 140, 0.16);
+            opacity: 0.72;
+            transition: background-color var(--speed-fast) ease, box-shadow var(--speed-fast) ease, opacity var(--speed-fast) ease;
+        }
+
+        .listening-trigger.is-live .listening-trigger__light {
+            background: var(--green);
+            box-shadow: 0 0 8px rgba(75, 227, 110, 0.72), 0 0 18px rgba(75, 227, 110, 0.24);
+            opacity: 1;
+            animation: listeningLight 2.4s ease-in-out infinite;
+        }
+
+        .listening-trigger__short {
+            display: none;
+        }
+
+        .mobile-listening-trigger .listening-trigger__light {
+            margin-right: 0.1rem;
+        }
+
+        .listening-panel {
+            position: fixed;
+            top: var(--listening-top, auto);
+            right: auto;
+            bottom: auto;
+            left: var(--listening-left, auto);
+            width: min(21.5rem, calc(100vw - 2rem));
+            max-height: calc(100svh - 2rem);
+            margin: 0;
+            padding: 0;
+            overflow: auto;
+            border: 1px solid rgba(217, 192, 140, 0.34);
+            border-radius: var(--radius);
+            color: var(--text);
+            background:
+                radial-gradient(circle at 12% 10%, rgba(217, 192, 140, 0.15), transparent 38%),
+                linear-gradient(145deg, rgba(224, 191, 184, 0.08), transparent 58%),
+                rgba(16, 17, 20, 0.985);
+            box-shadow: 0 28px 72px rgba(0, 0, 0, 0.58), inset 0 1px 0 rgba(238, 238, 238, 0.055);
+            opacity: 0;
+            transform: translateY(-0.35rem);
+            transition:
+                opacity var(--speed-fast) ease,
+                transform var(--speed-medium) var(--ease-editorial),
+                overlay var(--speed-fast) allow-discrete,
+                display var(--speed-fast) allow-discrete;
+        }
+
+        .listening-panel:popover-open {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @starting-style {
+            .listening-panel:popover-open {
+                opacity: 0;
+                transform: translateY(-0.35rem);
+            }
+        }
+
+        .listening-panel::backdrop {
+            background: transparent;
+        }
+
+        .listening-panel__head {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto auto;
+            align-items: center;
+            gap: 0.55rem;
+            min-height: 2.75rem;
+            padding: 0.65rem 0.75rem;
+            border-bottom: 1px solid rgba(217, 192, 140, 0.18);
+        }
+
+        .listening-panel__label,
+        .listening-panel__status,
+        .listening-panel__state,
+        .listening-panel__track,
+        .listening-panel__album,
+        .listening-panel__close {
+            font-family: var(--font-mono);
+        }
+
+        .listening-panel__label {
+            color: var(--brand-light-blue);
+            font-size: 0.67rem;
+            font-weight: 700;
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+        }
+
+        .listening-panel__presence {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.42rem;
+        }
+
+        .listening-panel__status {
+            color: var(--faint);
+            font-size: 0.58rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .listening-panel__light {
+            width: 0.55rem;
+            height: 0.55rem;
+            border-radius: 999px;
+            background: color-mix(in srgb, var(--gold) 42%, var(--ink));
+            box-shadow: 0 0 8px rgba(217, 192, 140, 0.2);
+            opacity: 0.7;
+        }
+
+        .listening-panel.is-live .listening-panel__status {
+            color: var(--green);
+        }
+
+        .listening-panel.is-live .listening-panel__light {
+            background: var(--green);
+            box-shadow: 0 0 10px rgba(75, 227, 110, 0.72), 0 0 24px rgba(75, 227, 110, 0.22);
+            opacity: 1;
+            animation: listeningLight 2.4s ease-in-out infinite;
+        }
+
+        .listening-panel__close {
+            min-height: 2rem;
+            border: 0;
+            border-radius: 4px;
+            padding: 0.42rem 0.5rem;
+            background: transparent;
+            color: var(--muted);
+            font-size: 0.6rem;
+            letter-spacing: 0.08em;
+            line-height: 1;
+            text-transform: uppercase;
+        }
+
+        .listening-panel__close:hover,
+        .listening-panel__close:focus-visible {
+            background: rgba(160, 190, 245, 0.1);
+            color: #fff;
+        }
+
+        .listening-panel__signal {
+            display: grid;
+            grid-template-columns: 5.25rem minmax(0, 1fr);
+            gap: 0.85rem;
+            min-height: 7rem;
+            padding: 0.85rem;
+            color: var(--text);
+            background: linear-gradient(135deg, rgba(217, 192, 140, 0.08), rgba(224, 191, 184, 0.025));
+        }
+
+        .listening-panel__signal:hover,
+        .listening-panel__signal:focus-visible {
+            color: #fff;
+            background: linear-gradient(135deg, rgba(217, 192, 140, 0.13), rgba(224, 191, 184, 0.055));
+        }
+
+        .listening-panel__art {
+            width: 5.25rem;
+            height: 5.25rem;
+            display: grid;
+            place-items: center;
+            overflow: hidden;
+            border: 1px solid rgba(217, 192, 140, 0.26);
+            border-radius: 4px;
+            background:
+                radial-gradient(circle at center, rgba(217, 192, 140, 0.16), transparent 64%),
+                rgba(255, 255, 255, 0.035);
+        }
+
+        .listening-panel__art img:first-child {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .listening-panel__art img[hidden],
+        .listening-panel__fallback[hidden] {
+            display: none;
+        }
+
+        .listening-panel__fallback {
+            width: 2rem;
+            height: 2rem;
+            opacity: 0.82;
+            filter: drop-shadow(0 0 12px rgba(217, 192, 140, 0.2));
+        }
+
+        .listening-panel__copy {
+            min-width: 0;
+            display: grid;
+            align-content: start;
+            gap: 0.28rem;
+            padding-top: 0.1rem;
+        }
+
+        .listening-panel__state {
+            color: var(--rose-gold);
+            font-size: 0.58rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .listening-panel__track {
+            min-width: 0;
+            overflow-wrap: anywhere;
+            color: var(--text);
+            font-size: 0.71rem;
+            line-height: 1.4;
+        }
+
+        .listening-panel__album {
+            min-width: 0;
+            overflow-wrap: anywhere;
+            color: var(--muted);
+            font-size: 0.59rem;
+            line-height: 1.35;
+        }
+
+        .listening-panel__bars {
+            height: 1.1rem;
+            display: inline-flex;
+            align-items: end;
+            gap: 0.2rem;
+            margin-top: 0.15rem;
+        }
+
+        .listening-panel__bars span {
+            width: 0.2rem;
+            height: 0.32rem;
+            border-radius: 999px;
+            background: var(--gold);
+            box-shadow: 0 0 8px rgba(217, 192, 140, 0.24);
+            opacity: 0.4;
+            transform: scaleY(0.6);
+            transform-origin: bottom;
+        }
+
+        .listening-panel.is-live .listening-panel__bars span {
+            animation: listeningBars 1.45s ease-in-out infinite;
+            opacity: 0.78;
+        }
+
+        .listening-panel__bars span:nth-child(2) {
+            height: 0.85rem;
+            animation-delay: 120ms;
+        }
+
+        .listening-panel__bars span:nth-child(3) {
+            height: 0.58rem;
+            animation-delay: 240ms;
+        }
+
+        .listening-panel__bars span:nth-child(4) {
+            height: 1rem;
+            animation-delay: 360ms;
+        }
+
+        @keyframes listeningLight {
+            0%,
+            100% {
+                opacity: 0.72;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes listeningBars {
+            0%,
+            100% {
+                transform: scaleY(0.58);
+            }
+
+            50% {
+                transform: scaleY(1);
+            }
         }
 
         .search-popover__form {
@@ -1558,6 +1887,16 @@
             }
         }
 
+        @media (min-width: 901px) and (max-width: 1120px) {
+            .listening-trigger__full {
+                display: none;
+            }
+
+            .listening-trigger__short {
+                display: inline;
+            }
+        }
+
         @media (max-width: 1000px) {
             .front-grid {
                 grid-template-columns: minmax(0, 1fr);
@@ -1743,6 +2082,26 @@
             .front-page {
                 padding-top: 0.75rem;
             }
+
+            .listening-panel {
+                top: auto;
+                right: max(0.75rem, env(safe-area-inset-right));
+                bottom: max(0.75rem, env(safe-area-inset-bottom));
+                left: max(0.75rem, env(safe-area-inset-left));
+                width: auto;
+                max-height: calc(100svh - 1.5rem - env(safe-area-inset-bottom));
+                transform: translateY(0.7rem);
+            }
+
+            .listening-panel:popover-open {
+                transform: translateY(0);
+            }
+
+            .listening-panel::backdrop {
+                background: rgba(0, 0, 0, 0.62);
+                -webkit-backdrop-filter: blur(8px);
+                backdrop-filter: blur(8px);
+            }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -1883,14 +2242,18 @@
                 </a>
 
                 <nav class="primary-nav" aria-label="Primary">
-                    <a href="personal.html">Personal</a>
-                    <a href="image_of_the_day.html">Images</a>
+                    <a href="image_of_the_day.html">Image of the Day</a>
                     <a href="drift_poetry.html">Poems</a>
                     <a href="fragments.html">Fragments</a>
                     <a href="professional.html">Professional</a>
                 </nav>
 
                 <nav class="site-utilities" aria-label="Site utilities">
+                    <button class="listening-trigger" type="button" data-listening-trigger aria-controls="listening-panel" aria-expanded="false" aria-label="Open Live Listening">
+                        <span class="listening-trigger__light" aria-hidden="true"></span>
+                        <span class="listening-trigger__full">Live Listening</span>
+                        <span class="listening-trigger__short" aria-hidden="true">Live</span>
+                    </button>
                     <button type="button" popovertarget="search-panel">Search</button>
                     <button type="button" popovertarget="destinations">All destinations</button>
                 </nav>
@@ -1911,19 +2274,50 @@
                 <div class="mobile-menu-groups">
                     <section aria-labelledby="mobile-menu-primary">
                         <h2 id="mobile-menu-primary">Primary</h2>
-                        <a href="personal.html">Personal</a>
-                        <a href="image_of_the_day.html">Images</a>
+                        <a href="image_of_the_day.html">Image of the Day</a>
                         <a href="drift_poetry.html">Poems</a>
                         <a href="fragments.html">Fragments</a>
                         <a href="professional.html">Professional</a>
                     </section>
                     <section aria-labelledby="mobile-menu-utilities">
                         <h2 id="mobile-menu-utilities">Utilities</h2>
+                        <button class="mobile-listening-trigger listening-trigger" type="button" data-listening-trigger data-listening-mobile aria-controls="listening-panel" aria-expanded="false" aria-label="Open Live Listening">
+                            <span class="listening-trigger__light" aria-hidden="true"></span>
+                            <span>Live Listening</span>
+                        </button>
                         <button type="button" data-mobile-popover-target="search-panel">Search</button>
                         <button type="button" data-mobile-popover-target="destinations">All Destinations</button>
                     </section>
                 </div>
             </nav>
+
+            <section id="listening-panel" class="listening-panel" popover="manual" aria-labelledby="listening-panel-title">
+                <div class="listening-panel__head">
+                    <span class="listening-panel__label" id="listening-panel-title">Live Listening</span>
+                    <span class="listening-panel__presence">
+                        <span class="listening-panel__status" data-listening-presence>Connecting</span>
+                        <span class="listening-panel__light" aria-hidden="true"></span>
+                    </span>
+                    <button class="listening-panel__close" type="button" popovertarget="listening-panel" popovertargetaction="hide" aria-label="Close Live Listening">Close</button>
+                </div>
+                <a class="listening-panel__signal" data-listening-link href="https://www.last.fm/user/ryandavid_rylee" target="_blank" rel="noopener noreferrer" aria-label="Open Last.fm music profile">
+                    <span class="listening-panel__art">
+                        <img data-listening-art src="Images/otw_brandmark_stroke.svg" alt="" hidden />
+                        <img class="listening-panel__fallback" data-listening-icon src="Images/otw_brandmark_stroke.svg" alt="" aria-hidden="true" width="32" height="32" />
+                    </span>
+                    <span class="listening-panel__copy">
+                        <span class="listening-panel__state" data-listening-state>Listening</span>
+                        <span class="listening-panel__track" data-listening-track>Settling...</span>
+                        <span class="listening-panel__album" data-listening-album hidden></span>
+                        <span class="listening-panel__bars" aria-hidden="true">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </span>
+                    </span>
+                </a>
+            </section>
 
             <search id="search-panel" class="search-popover" popover aria-label="Search Outside The World">
                 <div class="search-popover__head">
@@ -2128,6 +2522,10 @@
     </div>
 
     <script>
+        const LASTFM_API_KEY = '0cb4714c22caddc9beedf7afe2e35284';
+        const LASTFM_USER = 'ryandavid_rylee';
+        const LASTFM_PROFILE_URL = `https://www.last.fm/user/${encodeURIComponent(LASTFM_USER)}`;
+
         function escapeHtml(value) {
             return String(value ?? '')
                 .replace(/&/g, '&amp;')
@@ -3125,6 +3523,304 @@
         }
 
         initPopoverEscapeDismissal();
+
+        function buildListeningArtistUrl(artistName) {
+            const artist = String(artistName || '').trim();
+            if (!artist) return LASTFM_PROFILE_URL;
+            return `https://www.last.fm/music/${encodeURIComponent(artist).replace(/%20/g, '+')}`;
+        }
+
+        function getListeningImage(track) {
+            const images = Array.isArray(track?.image) ? track.image : [];
+            const preferred = images
+                .slice()
+                .reverse()
+                .find((image) => image?.['#text']);
+            return preferred?.['#text'] || '';
+        }
+
+        function setListeningUi({ state, track, album, live, available, href, image }) {
+            const panel = document.getElementById('listening-panel');
+            panel?.classList.toggle('is-live', Boolean(live));
+
+            document.querySelectorAll('[data-listening-trigger]').forEach((trigger) => {
+                trigger.classList.toggle('is-live', Boolean(live));
+                trigger.setAttribute('aria-label', live ? `Live Listening: ${track}` : 'Open Live Listening');
+            });
+
+            document.querySelectorAll('[data-listening-presence]').forEach((element) => {
+                element.textContent = available ? (live ? 'Online' : 'Offline') : 'Unavailable';
+            });
+            document.querySelectorAll('[data-listening-state]').forEach((element) => {
+                element.textContent = state;
+            });
+            document.querySelectorAll('[data-listening-track]').forEach((element) => {
+                element.textContent = track;
+            });
+            document.querySelectorAll('[data-listening-album]').forEach((element) => {
+                const albumText = String(album || '').trim();
+                element.textContent = albumText;
+                element.hidden = !albumText;
+            });
+            document.querySelectorAll('[data-listening-link]').forEach((element) => {
+                element.href = href || LASTFM_PROFILE_URL;
+                element.setAttribute('aria-label', live ? 'Open current artist on Last.fm' : 'Open Last.fm music profile');
+                element.setAttribute('title', live ? 'Open current artist on Last.fm' : 'Open Last.fm music profile');
+            });
+            document.querySelectorAll('[data-listening-icon]').forEach((element) => {
+                element.src = live ? 'Images/assets/BRAND_BROADCAST.svg' : 'Images/otw_brandmark_stroke.svg';
+            });
+            document.querySelectorAll('[data-listening-art]').forEach((element) => {
+                if (image) {
+                    element.src = image;
+                    element.hidden = false;
+                } else {
+                    element.src = 'Images/otw_brandmark_stroke.svg';
+                    element.hidden = true;
+                }
+            });
+            document.querySelectorAll('.listening-panel__fallback').forEach((element) => {
+                element.hidden = Boolean(image);
+            });
+        }
+
+        let listeningSyncPromise;
+
+        function syncListeningSignal() {
+            if (listeningSyncPromise) return listeningSyncPromise;
+
+            const url = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${LASTFM_USER}&api_key=${LASTFM_API_KEY}&format=json&limit=1`;
+            const controller = new AbortController();
+            const timeout = window.setTimeout(() => controller.abort(), 6000);
+
+            listeningSyncPromise = fetch(url, { cache: 'no-store', signal: controller.signal })
+                .then((response) => {
+                    if (!response.ok) throw new Error(`HTTP_${response.status}`);
+                    return response.json();
+                })
+                .then((data) => {
+                    const tracks = data?.recenttracks?.track;
+                    const latest = Array.isArray(tracks) ? tracks[0] : tracks;
+                    if (!latest) throw new Error('NO_TRACK');
+
+                    const artistRaw = latest.artist?.['#text'] || latest.artist?.name || '';
+                    const isLive = latest['@attr']?.nowplaying === 'true';
+                    const trackName = String(latest.name || 'Unknown track');
+                    const artistName = String(artistRaw || 'Unknown artist');
+                    const albumName = String(latest.album?.['#text'] || latest.album?.name || '').trim();
+
+                    setListeningUi({
+                        state: isLive ? 'Listening now' : 'Last played',
+                        track: `${trackName} / ${artistName}`,
+                        album: albumName,
+                        live: isLive,
+                        available: true,
+                        href: buildListeningArtistUrl(artistRaw),
+                        image: getListeningImage(latest)
+                    });
+                })
+                .catch(() => {
+                    setListeningUi({
+                        state: 'Signal unavailable',
+                        track: 'No track showing',
+                        album: '',
+                        live: false,
+                        available: false,
+                        href: LASTFM_PROFILE_URL,
+                        image: ''
+                    });
+                })
+                .finally(() => {
+                    window.clearTimeout(timeout);
+                    listeningSyncPromise = null;
+                });
+
+            return listeningSyncPromise;
+        }
+
+        function initListeningPanel() {
+            const panel = document.getElementById('listening-panel');
+            const triggers = [...document.querySelectorAll('[data-listening-trigger]')];
+            const mobileMenu = document.getElementById('mobile-menu');
+            const desktopHover = window.matchMedia('(hover: hover) and (pointer: fine)');
+            if (!panel || !triggers.length || typeof panel.showPopover !== 'function') return;
+
+            let activeTrigger = triggers.find((trigger) => !trigger.hasAttribute('data-listening-mobile')) || triggers[0];
+            let closeTimer;
+            let pollTimer;
+            let pinned = false;
+
+            const isOpen = () => panel.matches(':popover-open');
+
+            const clearCloseTimer = () => {
+                window.clearTimeout(closeTimer);
+            };
+
+            const setExpanded = (expanded) => {
+                triggers.forEach((trigger) => {
+                    trigger.setAttribute('aria-expanded', String(expanded && trigger === activeTrigger));
+                });
+            };
+
+            const focusReturnTarget = () => activeTrigger.hasAttribute('data-listening-mobile')
+                ? document.querySelector('.mobile-menu-button')
+                : activeTrigger;
+
+            const positionPanel = () => {
+                if (window.innerWidth <= 900) {
+                    panel.style.removeProperty('--listening-left');
+                    panel.style.removeProperty('--listening-top');
+                    panel.style.removeProperty('max-height');
+                    return;
+                }
+
+                const rect = activeTrigger.getBoundingClientRect();
+                const panelWidth = Math.min(344, window.innerWidth - 32);
+                const left = Math.min(
+                    Math.max(16, rect.right - panelWidth),
+                    window.innerWidth - panelWidth - 16
+                );
+                const top = rect.bottom + 8;
+                panel.style.setProperty('--listening-left', `${Math.round(left)}px`);
+                panel.style.setProperty('--listening-top', `${Math.round(top)}px`);
+                panel.style.maxHeight = `${Math.max(180, window.innerHeight - top - 16)}px`;
+            };
+
+            const closePanel = () => {
+                clearCloseTimer();
+                pinned = false;
+                if (isOpen()) panel.hidePopover();
+            };
+
+            const openPanel = (trigger, options = {}) => {
+                clearCloseTimer();
+                activeTrigger = trigger || activeTrigger;
+                pinned = Boolean(options.pin);
+                positionPanel();
+                if (!isOpen()) panel.showPopover();
+                setExpanded(true);
+                syncListeningSignal();
+
+                if (options.focus) {
+                    window.requestAnimationFrame(() => panel.querySelector('.listening-panel__close')?.focus());
+                }
+            };
+
+            const scheduleClose = () => {
+                clearCloseTimer();
+                if (pinned) return;
+                closeTimer = window.setTimeout(() => {
+                    if (!panel.matches(':hover') && !activeTrigger.matches(':hover') && !panel.contains(document.activeElement)) {
+                        closePanel();
+                    }
+                }, 180);
+            };
+
+            triggers.forEach((trigger) => {
+                const isMobileTrigger = trigger.hasAttribute('data-listening-mobile');
+
+                trigger.addEventListener('click', (event) => {
+                    event.preventDefault();
+
+                    if (isMobileTrigger) {
+                        if (mobileMenu?.matches(':popover-open')) mobileMenu.hidePopover();
+                        openPanel(trigger, { pin: true, focus: true });
+                        return;
+                    }
+
+                    if (isOpen()) {
+                        if (pinned) {
+                            closePanel();
+                        } else {
+                            pinned = true;
+                            setExpanded(true);
+                        }
+                        return;
+                    }
+
+                    openPanel(trigger, { pin: true, focus: event.detail === 0 });
+                });
+
+                if (!isMobileTrigger) {
+                    trigger.addEventListener('pointerenter', () => {
+                        if (desktopHover.matches && !isOpen()) openPanel(trigger);
+                        clearCloseTimer();
+                    });
+                    trigger.addEventListener('pointerleave', scheduleClose);
+                    trigger.addEventListener('focus', () => {
+                        if (!isOpen()) openPanel(trigger);
+                    });
+                    trigger.addEventListener('blur', scheduleClose);
+                }
+            });
+
+            panel.addEventListener('pointerenter', clearCloseTimer);
+            panel.addEventListener('pointerleave', scheduleClose);
+            panel.addEventListener('focusin', clearCloseTimer);
+            panel.addEventListener('focusout', scheduleClose);
+            panel.addEventListener('toggle', () => {
+                if (!isOpen()) {
+                    pinned = false;
+                    setExpanded(false);
+                } else {
+                    positionPanel();
+                    setExpanded(true);
+                }
+            });
+
+            document.addEventListener('pointerdown', (event) => {
+                if (!isOpen()) return;
+                const clickedTrigger = triggers.some((trigger) => trigger.contains(event.target));
+                if (!clickedTrigger && !panel.contains(event.target)) closePanel();
+            });
+
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape' && isOpen()) {
+                    event.preventDefault();
+                    closePanel();
+                    focusReturnTarget()?.focus({ preventScroll: true });
+                }
+            });
+
+            panel.querySelector('.listening-panel__close')?.addEventListener('click', () => {
+                if (!activeTrigger.hasAttribute('data-listening-mobile')) return;
+                window.requestAnimationFrame(() => focusReturnTarget()?.focus({ preventScroll: true }));
+            });
+
+            window.addEventListener('resize', () => {
+                if (isOpen()) positionPanel();
+            });
+            window.addEventListener('scroll', () => {
+                if (isOpen() && window.innerWidth > 900) positionPanel();
+            }, { passive: true });
+
+            const startPolling = () => {
+                if (document.hidden || pollTimer) return;
+                syncListeningSignal();
+                pollTimer = window.setInterval(syncListeningSignal, 30000);
+            };
+
+            const stopPolling = () => {
+                window.clearInterval(pollTimer);
+                pollTimer = undefined;
+            };
+
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) {
+                    stopPolling();
+                } else {
+                    startPolling();
+                }
+            });
+
+            if ('requestIdleCallback' in window) {
+                window.requestIdleCallback(startPolling, { timeout: 2000 });
+            } else {
+                window.setTimeout(startPolling, 800);
+            }
+        }
+
+        initListeningPanel();
 
         let searchIndexPromise;
 
