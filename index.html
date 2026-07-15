@@ -1334,64 +1334,201 @@
             text-transform: uppercase;
         }
 
-        .quote-fragment {
-            border-left: 2px solid var(--rose);
-            padding-left: 0.8rem;
-            color: var(--text);
-            font-family: var(--font-serif);
-            font-size: clamp(1.1rem, 1.55vw, 1.35rem);
-            line-height: 1.18;
-        }
-
-        .fragment-rotator {
+        .latest-fragment {
             position: relative;
-            min-height: 10.5rem;
-        }
-
-        .fragment-rotator__body {
-            display: grid;
-            gap: 0.8rem;
-            color: inherit;
-            transition:
-                opacity 220ms ease,
-                transform 220ms var(--ease-editorial);
-        }
-
-        .fragment-rotator.is-transitioning .fragment-rotator__body {
-            opacity: 0;
-            transform: translateY(0.35rem);
-        }
-
-        .fragment-rotator__body:hover .quote-fragment,
-        .fragment-rotator__body:focus-visible .quote-fragment {
-            border-left-color: var(--green);
-        }
-
-        .fragment-rotator__meta {
-            color: var(--muted);
-        }
-
-        .fragment-rotator__progress {
-            position: absolute;
-            right: 1rem;
-            bottom: 0.75rem;
-            left: 1rem;
-            height: 1px;
+            gap: 0.78rem;
             overflow: hidden;
-            background: rgba(255, 255, 255, 0.10);
+            isolation: isolate;
         }
 
-        .fragment-rotator__progress span {
+        .latest-fragment__head,
+        .latest-fragment__brand,
+        .latest-fragment__identity,
+        .latest-fragment__identity-copy {
+            display: flex;
+            align-items: center;
+        }
+
+        .latest-fragment__head {
+            justify-content: space-between;
+            gap: 0.7rem;
+        }
+
+        .latest-fragment__brand {
+            min-width: 0;
+            gap: 0.45rem;
+        }
+
+        .rail-item img.latest-fragment__mark {
+            width: 1.65rem;
+            height: auto;
+            flex: 0 0 auto;
+            border-radius: 0;
+            filter: none;
+        }
+
+        .latest-fragment__date {
+            color: var(--muted);
+            font-family: var(--font-mono);
+            font-size: 0.64rem;
+            letter-spacing: 0.06em;
+            line-height: 1.3;
+            text-align: right;
+            text-transform: uppercase;
+        }
+
+        .latest-fragment__card {
+            position: relative;
+            z-index: 0;
+            display: grid;
+            gap: 0.78rem;
+            min-width: 0;
+            padding: 0.18rem 0.12rem 0.25rem;
+            color: inherit;
+        }
+
+        .latest-fragment__card::before {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            inset: -0.3rem -0.42rem -0.35rem -0.42rem;
+            border-left: 3px solid var(--green);
+            background: linear-gradient(90deg, rgba(75, 227, 110, 0.11), rgba(99, 149, 238, 0.075) 68%, transparent);
+            opacity: 0;
+            transform: translateX(-0.35rem);
+            transition: opacity var(--speed-fast) ease, transform var(--speed-medium) var(--ease-editorial);
+        }
+
+        .latest-fragment__card:hover::before,
+        .latest-fragment__card:focus-visible::before {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .latest-fragment__card:focus-visible {
+            outline: 1px solid var(--green);
+            outline-offset: 0.42rem;
+        }
+
+        .latest-fragment__identity {
+            gap: 0.62rem;
+            min-width: 0;
+        }
+
+        .rail-item img.latest-fragment__avatar {
+            width: 2.35rem;
+            height: 2.35rem;
+            flex: 0 0 auto;
+            aspect-ratio: 1;
+            border: 1px solid rgba(160, 190, 245, 0.18);
+            border-radius: 50%;
+            object-fit: cover;
+            filter: none;
+        }
+
+        .latest-fragment__identity-copy {
+            min-width: 0;
+            align-items: flex-start;
+            flex-direction: column;
+            gap: 0.08rem;
+        }
+
+        .latest-fragment__name {
+            color: var(--text);
+            font-size: 0.83rem;
+            font-weight: 700;
+            line-height: 1.25;
+        }
+
+        .latest-fragment__handle {
+            color: var(--muted);
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            line-height: 1.35;
+            overflow-wrap: anywhere;
+        }
+
+        .latest-fragment__text {
+            margin: 0;
+            color: var(--text);
+            font-family: var(--font-sans);
+            font-size: 0.98rem;
+            line-height: 1.58;
+            overflow-wrap: anywhere;
+            text-wrap: pretty;
+            white-space: pre-wrap;
+        }
+
+        .latest-fragment__media {
             display: block;
+            aspect-ratio: 16 / 10;
+            border-radius: 6px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.025);
+        }
+
+        .latest-fragment__media[hidden],
+        .latest-fragment__link-preview[hidden],
+        .latest-fragment__text[hidden],
+        .latest-fragment__link-description[hidden] {
+            display: none;
+        }
+
+        .rail-item .latest-fragment__media img {
             width: 100%;
             height: 100%;
-            transform-origin: left center;
-            background: linear-gradient(90deg, var(--rose), var(--brand-blue), var(--teal));
-            animation: fragmentProgress 7s linear infinite;
+            aspect-ratio: 16 / 10;
+            border-radius: 0;
+            object-fit: cover;
         }
 
-        .fragment-rotator.is-paused .fragment-rotator__progress span {
-            animation-play-state: paused;
+        .latest-fragment__link-preview {
+            display: grid;
+            gap: 0.32rem;
+            padding: 0.68rem 0.72rem;
+            border-top: 1px solid rgba(99, 149, 238, 0.25);
+            border-bottom: 1px solid rgba(99, 149, 238, 0.14);
+            background: rgba(99, 149, 238, 0.055);
+        }
+
+        .latest-fragment__link-host {
+            color: var(--teal);
+            font-family: var(--font-mono);
+            font-size: 0.61rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            overflow-wrap: anywhere;
+        }
+
+        .latest-fragment__link-title {
+            color: var(--text);
+            font-family: var(--font-serif);
+            font-size: 0.95rem;
+            line-height: 1.25;
+        }
+
+        .latest-fragment__link-description {
+            color: var(--muted);
+            font-size: 0.76rem;
+            line-height: 1.4;
+        }
+
+        .latest-fragment__more {
+            width: fit-content;
+            border-bottom: 1px solid rgba(75, 227, 110, 0.32);
+            color: var(--muted);
+            font-family: var(--font-mono);
+            font-size: 0.64rem;
+            letter-spacing: 0.08em;
+            line-height: 1.4;
+            text-transform: uppercase;
+            transition: color var(--speed-fast) ease, border-color var(--speed-fast) ease;
+        }
+
+        .latest-fragment__more:hover,
+        .latest-fragment__more:focus-visible {
+            border-color: var(--green);
+            color: var(--text);
         }
 
         .editorial-section {
@@ -1813,16 +1950,6 @@
             padding-top: 0;
         }
 
-        @keyframes fragmentProgress {
-            from {
-                transform: scaleX(0);
-            }
-
-            to {
-                transform: scaleX(1);
-            }
-        }
-
         .footer {
             display: flex;
             flex-wrap: wrap;
@@ -2112,10 +2239,6 @@
                 transition-duration: 0.001ms !important;
                 animation-duration: 0.001ms !important;
                 animation-iteration-count: 1 !important;
-            }
-
-            .fragment-rotator__progress {
-                display: none;
             }
 
             .front-page[data-hydrating] > .front-grid,
@@ -2462,13 +2585,33 @@
                         <h2><a data-frontpage-link href="drift_poetry.html?poem=living-poem-2026-06-29-terrible-nothing">Terrible Nothing</a></h2>
                         <p data-frontpage-description>June 29, 2026</p>
                     </article>
-                    <article class="rail-item fragment-rotator" id="fragmentRotator" data-frontpage-slot="railFragments">
-                        <span class="tag" id="fragmentRotatorTag">frgmnt</span>
-                        <a class="fragment-rotator__body" id="fragmentRotatorLink" href="fragments.html?entry=20260331021459157--i-think-everyone-here-is-so-cool" aria-label="Open frgmnt by Emily">
-                            <p class="quote-fragment" id="fragmentRotatorText">&ldquo;I think everyone here is so cool&rdquo;</p>
-                            <p class="fragment-rotator__meta" id="fragmentRotatorMeta">Emily · March 31, 2026</p>
+                    <article class="rail-item latest-fragment" id="latestFragment" data-frontpage-slot="railFragments">
+                        <div class="latest-fragment__head">
+                            <div class="latest-fragment__brand">
+                                <img class="latest-fragment__mark" src="Images/assets/frgmnts-mark.svg" alt="" width="27" height="19" />
+                                <span class="tag">Latest frgmnt</span>
+                            </div>
+                            <time class="latest-fragment__date" id="latestFragmentDate" datetime="2026-03-28T19:17:00.000Z">March 28, 2026</time>
+                        </div>
+                        <a class="latest-fragment__card" id="latestFragmentLink" href="fragments.html?entry=20260328191700000--definitely-not-me-at-costco" aria-label="Open latest frgmnt by The_RyanDavid">
+                            <div class="latest-fragment__identity">
+                                <img class="latest-fragment__avatar" src="Images/Profile.jpg" alt="" width="38" height="38" />
+                                <span class="latest-fragment__identity-copy">
+                                    <span class="latest-fragment__name" id="latestFragmentAuthor">The_RyanDavid</span>
+                                    <span class="latest-fragment__handle" id="latestFragmentHandle">@outsidetheworld</span>
+                                </span>
+                            </div>
+                            <span class="latest-fragment__media" id="latestFragmentMedia">
+                                <img id="latestFragmentImage" src="https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/fragments/ryan/2026-03-28t19-17-00-000z.jpg" alt="Image shared with the latest frgmnt" loading="lazy" decoding="async" width="800" height="500" />
+                            </span>
+                            <p class="latest-fragment__text" id="latestFragmentText">Definitely not me at Costco.</p>
+                            <span class="latest-fragment__link-preview" id="latestFragmentLinkPreview" hidden>
+                                <span class="latest-fragment__link-host" id="latestFragmentLinkHost"></span>
+                                <strong class="latest-fragment__link-title" id="latestFragmentLinkTitle"></strong>
+                                <span class="latest-fragment__link-description" id="latestFragmentLinkDescription"></span>
+                            </span>
                         </a>
-                        <div class="fragment-rotator__progress" aria-hidden="true"><span></span></div>
+                        <a class="latest-fragment__more" href="fragments.html">View all frgmnts &rarr;</a>
                     </article>
                 </aside>
             </div>
@@ -2525,6 +2668,10 @@
         const LASTFM_API_KEY = '0cb4714c22caddc9beedf7afe2e35284';
         const LASTFM_USER = 'ryandavid_rylee';
         const LASTFM_PROFILE_URL = `https://www.last.fm/user/${encodeURIComponent(LASTFM_USER)}`;
+        const FRGMNTS_PUBLIC_FEED_URL = 'https://api.frgmnts.app/v1/public/fragments/outsidetheworld?limit=10';
+        const FRGMNTS_PUBLIC_TIMEOUT_MS = 6000;
+        const FRGMNTS_PUBLIC_CACHE_KEY = 'otwFounderFragmentsCacheV1';
+        const FRGMNTS_PUBLIC_CACHE_MAX_AGE_MS = 24 * 60 * 60 * 1000;
 
         function escapeHtml(value) {
             return String(value ?? '')
@@ -2566,9 +2713,182 @@
             return 'residue_archive.html';
         }
 
+        function isObjectRecord(value) {
+            return Boolean(value) && typeof value === 'object' && !Array.isArray(value);
+        }
+
+        function firstTextValue(...values) {
+            for (const value of values) {
+                if (typeof value === 'string' && value.trim()) return value.trim();
+            }
+            return '';
+        }
+
+        function safeHttpUrl(value) {
+            const raw = typeof value === 'string' ? value.trim() : '';
+            if (!raw) return '';
+            try {
+                const url = new URL(raw);
+                return url.protocol === 'http:' || url.protocol === 'https:' ? url.href : '';
+            } catch (error) {
+                return '';
+            }
+        }
+
+        function fragmentEmbeddedAuthor(fragment) {
+            if (isObjectRecord(fragment && fragment.author)) return fragment.author;
+            if (isObjectRecord(fragment && fragment.user)) return fragment.user;
+            if (isObjectRecord(fragment && fragment.profile)) return fragment.profile;
+            return {};
+        }
+
+        function fragmentTextValue(fragment) {
+            return firstTextValue(
+                fragment && fragment.text,
+                fragment && fragment.body,
+                fragment && fragment.content,
+                fragment && fragment.message
+            );
+        }
+
+        function fragmentTimestampValue(fragment) {
+            return firstTextValue(
+                fragment && fragment.timestamp,
+                fragment && fragment.created_at,
+                fragment && fragment.createdAt,
+                fragment && fragment.published_at,
+                fragment && fragment.publishedAt
+            );
+        }
+
+        function fragmentAuthorData(fragment) {
+            const embedded = fragmentEmbeddedAuthor(fragment || {});
+            const authorValue = fragment && typeof fragment.author === 'string' ? fragment.author : '';
+            const name = firstTextValue(
+                authorValue,
+                fragment && fragment.author_name,
+                fragment && fragment.authorName,
+                embedded.name,
+                embedded.display_name,
+                embedded.displayName,
+                'The_RyanDavid'
+            );
+            const rawHandle = firstTextValue(
+                fragment && fragment.author_handle,
+                fragment && fragment.authorHandle,
+                fragment && fragment.handle,
+                embedded.handle,
+                embedded.username,
+                '@outsidetheworld'
+            );
+            return {
+                id: firstTextValue(fragment && fragment.author_id, fragment && fragment.authorId, embedded.id),
+                name,
+                handle: rawHandle.startsWith('@') ? rawHandle : `@${rawHandle}`
+            };
+        }
+
+        function isFounderFragment(fragment) {
+            const author = fragmentAuthorData(fragment || {});
+            const id = author.id.toLowerCase();
+            const handle = author.handle.toLowerCase().replace(/^@+/, '');
+            const name = author.name.toLowerCase();
+            const hasExplicitAuthor = Boolean(
+                firstTextValue(
+                    fragment && fragment.author_id,
+                    fragment && fragment.authorId,
+                    fragment && fragment.author_handle,
+                    fragment && fragment.authorHandle,
+                    fragment && fragment.handle,
+                    fragment && (typeof fragment.author === 'string' ? fragment.author : '')
+                ) || Object.keys(fragmentEmbeddedAuthor(fragment || {})).length
+            );
+
+            if (!hasExplicitAuthor) return true;
+            return id === 'ryan' ||
+                id === 'outsidetheworld' ||
+                handle === 'outsidetheworld' ||
+                name === 'the_ryandavid' ||
+                name === 'ryan david';
+        }
+
+        function fragmentImageValue(fragment) {
+            const values = [
+                fragment && fragment.image,
+                fragment && fragment.image_url,
+                fragment && fragment.imageUrl,
+                fragment && fragment.media_url,
+                fragment && fragment.mediaUrl,
+                fragment && fragment.media,
+                fragment && fragment.attachment,
+                fragment && fragment.attachments,
+                fragment && fragment.images
+            ];
+            const candidates = [];
+            values.forEach((value) => {
+                if (Array.isArray(value)) candidates.push(...value);
+                else if (isObjectRecord(value) && Array.isArray(value.items)) candidates.push(...value.items);
+                else if (value) candidates.push(value);
+            });
+
+            for (const candidate of candidates) {
+                const source = typeof candidate === 'string' ? { url: candidate } : candidate;
+                if (!isObjectRecord(source)) continue;
+                const type = firstTextValue(source.type, source.kind, source.media_type, source.mediaType, source.mime_type, source.mimeType).toLowerCase();
+                if (type.includes('video')) continue;
+                const url = safeHttpUrl(firstTextValue(
+                    source.url,
+                    source.src,
+                    source.image,
+                    source.image_url,
+                    source.imageUrl,
+                    source.public_url,
+                    source.publicUrl,
+                    source.cdn_url,
+                    source.cdnUrl
+                ));
+                if (url && !/\.(?:m4v|mov|mp4|webm)(?:$|\?)/i.test(url)) return url;
+            }
+            return '';
+        }
+
+        function fragmentLinkPreviewValue(fragment) {
+            const candidates = [
+                fragment && fragment.link_preview,
+                fragment && fragment.linkPreview,
+                fragment && fragment.shared_link,
+                fragment && fragment.sharedLink,
+                fragment && fragment.url_preview,
+                fragment && fragment.urlPreview,
+                fragment && fragment.link
+            ];
+            const candidate = candidates.find((value) => typeof value === 'string' || isObjectRecord(value));
+            const source = typeof candidate === 'string' ? { url: candidate } : (candidate || {});
+            const url = safeHttpUrl(firstTextValue(
+                source.url,
+                source.href,
+                source.external_url,
+                source.externalUrl,
+                fragment && fragment.link_url,
+                fragment && fragment.linkUrl,
+                fragment && fragment.shared_url,
+                fragment && fragment.sharedUrl
+            ));
+            if (!url) return null;
+
+            const parsed = new URL(url);
+            const host = firstTextValue(source.site_name, source.siteName, source.publisher, parsed.hostname.replace(/^www\./, ''));
+            return {
+                url,
+                host,
+                title: firstTextValue(source.title, source.headline, source.name, fragment && fragment.link_title, fragment && fragment.linkTitle, host),
+                description: firstTextValue(source.description, source.summary, source.excerpt, fragment && fragment.link_description, fragment && fragment.linkDescription)
+            };
+        }
+
         function buildFragmentId(fragment) {
-            const stamp = String(fragment.timestamp || 'undated').replace(/[^0-9]/g, '');
-            const bodyStub = slugify(String(fragment.text || '').split(/\s+/).slice(0, 8).join(' ')) || 'fragment';
+            const stamp = String(fragmentTimestampValue(fragment) || 'undated').replace(/[^0-9]/g, '');
+            const bodyStub = slugify(fragmentTextValue(fragment).split(/\s+/).slice(0, 8).join(' ')) || 'fragment';
             return `${stamp}--${bodyStub}`;
         }
 
@@ -2591,6 +2911,19 @@
                 .replace(/[*_`>#-]+/g, ' ')
                 .replace(/\s+/g, ' ')
                 .replace(/\s+([,.;:!?])/g, '$1')
+                .trim();
+        }
+
+        function cleanFragmentText(value) {
+            return stripHtml(String(value ?? '').replace(/\r\n?/g, '\n'))
+                .replace(/!\[[^\]]*\]\(([^)]+)\)/g, ' ')
+                .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '$1')
+                .replace(/^\s{0,3}(?:[-+*>#]+|\d+\.)\s*/gm, '')
+                .replace(/[*_`]+/g, '')
+                .replace(/[^\S\n]+/g, ' ')
+                .replace(/ *\n */g, '\n')
+                .replace(/\n{3,}/g, '\n\n')
+                .replace(/ +([,.;:!?])/g, '$1')
                 .trim();
         }
 
@@ -2624,7 +2957,7 @@
         }
 
         function buildFragmentTitle(fragment) {
-            const clean = cleanText(fragment.text || '');
+            const clean = cleanText(fragmentTextValue(fragment));
             if (!clean) return 'Untitled frgmnt';
             const words = clean.split(/\s+/).slice(0, 7).join(' ');
             return clean.split(/\s+/).length > 7 ? `${words}...` : words;
@@ -2665,7 +2998,7 @@
             rail: [
                 { slot: 'railPreviousEssay', type: 'essay', mode: 'offset', offset: 1 },
                 { slot: 'railLatestDrift', type: 'drift', mode: 'latest' },
-                { slot: 'railFragments', type: 'fragment', mode: 'latest', count: 3 }
+                { slot: 'railFragments', type: 'fragment', mode: 'latest', count: 1 }
             ],
             sections: [
                 { slot: 'recentWriting', type: 'essay', mode: 'latest-unused', count: 6, layout: 'editorial-grid' },
@@ -2891,12 +3224,16 @@
         }
 
         function normalizeFragmentEntry(fragment) {
-            const text = buildExcerpt(fragment && fragment.text ? fragment.text : '', 156);
-            const author = cleanText(fragment && fragment.author ? fragment.author : '') || 'Outside The World';
+            const rawText = fragmentTextValue(fragment || {});
+            const text = cleanFragmentText(rawText);
+            const authorData = fragmentAuthorData(fragment || {});
+            const author = cleanText(authorData.name) || 'The_RyanDavid';
             const tag = cleanText(fragment && fragment.tag ? fragment.tag : '') || 'frgmnt';
-            const date = formatFragmentDate(fragment && fragment.timestamp ? fragment.timestamp : '');
+            const timestamp = fragmentTimestampValue(fragment || {});
+            const date = formatFragmentDate(timestamp);
             const url = `fragments.html?entry=${encodeURIComponent(buildFragmentId(fragment || {}))}`;
-            const image = String(fragment && fragment.image ? fragment.image : '');
+            const image = fragmentImageValue(fragment || {});
+            const linkPreview = fragmentLinkPreviewValue(fragment || {});
 
             return {
                 key: `fragment:${buildFragmentId(fragment || {})}`,
@@ -2906,12 +3243,15 @@
                 title: buildFragmentTitle(fragment || {}),
                 description: text,
                 author,
+                handle: authorData.handle || '@outsidetheworld',
                 tag,
                 date,
-                dateSort: parseContentDate(fragment && fragment.timestamp ? fragment.timestamp : ''),
+                timestamp,
+                dateSort: parseContentDate(timestamp),
                 image,
                 imageCandidates: uniqueStrings([image]),
                 imageAlt: image ? `Image shared by ${author}` : '',
+                linkPreview,
                 url,
                 sourceName: 'fragments_data.js'
             };
@@ -3336,12 +3676,13 @@
                     .sort((a, b) => b.dateSort - a.dateSort || String(b.date).localeCompare(String(a.date))),
                 fragments: (Array.isArray(fragments) ? fragments : [])
                     .filter((fragment) => {
-                        const body = cleanText(fragment && fragment.text ? fragment.text : '');
+                        const body = cleanText(fragmentTextValue(fragment || {}));
                         const author = String(fragment && fragment.author ? fragment.author : '');
                         const authorId = String(fragment && fragment.author_id ? fragment.author_id : '');
                         const isBot = author === 'OTW_Bot' || authorId === 'otw_bot';
                         const isTest = /worker test fragment/i.test(body);
-                        return body && !isBot && !isTest;
+                        const hasLink = Boolean(fragmentLinkPreviewValue(fragment || {}));
+                        return (body || hasLink) && isFounderFragment(fragment) && !isBot && !isTest;
                     })
                     .map(normalizeFragmentEntry)
                     .sort((a, b) => b.dateSort - a.dateSort || String(b.date).localeCompare(String(a.date)))
@@ -3383,7 +3724,7 @@
                 const fragmentRule = (manifest.rail || []).find((rule) => rule && rule.type === 'fragment')
                     || DEFAULT_FRONTPAGE_MANIFEST.rail.find((rule) => rule.type === 'fragment');
                 const fragments = pickUnusedContent(fragmentRule, sources, usedKeys);
-                initFragmentRotator(fragments);
+                renderLatestFragment(fragments);
                 renderedItems.push(...fragments);
             } else if (options.renderFragments !== false) {
                 const fragmentRoot = document.querySelector('[data-frontpage-slot="railFragments"]');
@@ -3426,6 +3767,8 @@
                     fragmentsPromise
                 ]);
                 renderFrontPage(manifest, normalizeSources(narratives, imageManifest, livingVerse, fragments));
+                hydrateLatestFragmentFromCache();
+                void refreshLatestFragmentFromPublicFeed();
             } finally {
                 window.requestAnimationFrame(() => {
                     frontPage?.removeAttribute('data-hydrating');
@@ -3436,109 +3779,140 @@
 
         initFrontPageContent();
 
-        async function loadPublishedFragments() {
-            return loadLocalFragments();
-        }
-
         function normalizeRailFragment(fragment) {
-            if (fragment && fragment.type === 'fragment') return fragment;
+            if (fragment && fragment.type === 'fragment' && fragment.key && fragment.url) return fragment;
 
             return normalizeFragmentEntry(fragment);
         }
 
-        function initFragmentRotator(fragmentItems) {
-            const root = document.getElementById('fragmentRotator');
-            const tag = document.getElementById('fragmentRotatorTag');
-            const link = document.getElementById('fragmentRotatorLink');
-            const text = document.getElementById('fragmentRotatorText');
-            const meta = document.getElementById('fragmentRotatorMeta');
+        function latestFounderFragment(fragmentItems) {
+            return (Array.isArray(fragmentItems) ? fragmentItems : [])
+                .filter((fragment) => fragment && isFounderFragment(fragment))
+                .map(normalizeRailFragment)
+                .filter((fragment) => (fragment.text || fragment.linkPreview) && fragment.url)
+                .sort((a, b) => b.dateSort - a.dateSort || String(b.date).localeCompare(String(a.date)))[0] || null;
+        }
 
-            if (!root || !tag || !link || !text || !meta) return;
+        function renderLatestFragment(fragmentItems, options = {}) {
+            const root = document.getElementById('latestFragment');
+            const link = document.getElementById('latestFragmentLink');
+            const text = document.getElementById('latestFragmentText');
+            const date = document.getElementById('latestFragmentDate');
+            const author = document.getElementById('latestFragmentAuthor');
+            const handle = document.getElementById('latestFragmentHandle');
+            const media = document.getElementById('latestFragmentMedia');
+            const image = document.getElementById('latestFragmentImage');
+            const preview = document.getElementById('latestFragmentLinkPreview');
+            const previewHost = document.getElementById('latestFragmentLinkHost');
+            const previewTitle = document.getElementById('latestFragmentLinkTitle');
+            const previewDescription = document.getElementById('latestFragmentLinkDescription');
+            const fragment = latestFounderFragment(fragmentItems);
 
-            if (root.dataset.rotatorReady === 'true') {
-                return;
+            if (!root || !link || !text || !date || !author || !handle || !media || !image || !preview || !fragment) return;
+
+            const currentDateSort = Number(root.dataset.fragmentDateSort || 0);
+            if (options.onlyIfNewer && fragment.dateSort < currentDateSort) return;
+
+            root.hidden = false;
+            root.dataset.fragmentDateSort = String(fragment.dateSort || 0);
+            link.href = fragment.url;
+            link.setAttribute('aria-label', `Open latest frgmnt by ${fragment.author}`);
+            text.textContent = fragment.text;
+            text.hidden = !fragment.text;
+            date.textContent = fragment.date || 'Latest';
+            if (fragment.timestamp) date.dateTime = fragment.timestamp;
+            else date.removeAttribute('datetime');
+            author.textContent = fragment.author || 'The_RyanDavid';
+            handle.textContent = fragment.handle || '@outsidetheworld';
+
+            if (fragment.image) {
+                media.hidden = false;
+                image.alt = fragment.imageAlt || `Image shared by ${fragment.author}`;
+                image.onerror = () => {
+                    media.hidden = true;
+                };
+                image.src = fragment.image;
+            } else {
+                media.hidden = true;
             }
-            root.dataset.rotatorReady = 'true';
 
-            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-            const intervalMs = 7000;
-            let fragments = [];
-            let index = 0;
-            let intervalId;
+            if (fragment.linkPreview) {
+                preview.hidden = false;
+                previewHost.textContent = fragment.linkPreview.host;
+                previewTitle.textContent = fragment.linkPreview.title;
+                previewDescription.textContent = fragment.linkPreview.description;
+                previewDescription.hidden = !fragment.linkPreview.description;
+            } else {
+                preview.hidden = true;
+            }
+        }
 
-            const pause = () => {
-                root.classList.add('is-paused');
-                window.clearInterval(intervalId);
-            };
+        function extractPublicFragmentItems(payload) {
+            if (Array.isArray(payload)) return payload;
+            if (!isObjectRecord(payload)) return null;
+            if (Array.isArray(payload.items)) return payload.items;
+            if (Array.isArray(payload.fragments)) return payload.fragments;
+            if (Array.isArray(payload.data)) return payload.data;
+            if (isObjectRecord(payload.data) && Array.isArray(payload.data.items)) return payload.data.items;
+            return null;
+        }
 
-            const resume = () => {
-                if (prefersReducedMotion.matches || fragments.length < 2 || document.hidden) return;
-                root.classList.remove('is-paused');
-                window.clearInterval(intervalId);
-                intervalId = window.setInterval(() => {
-                    showFragment(index + 1);
-                }, intervalMs);
-            };
-
-            const writeFragment = (fragment) => {
-                tag.textContent = fragment.tag.toLowerCase() === 'fragment' ? 'frgmnt' : fragment.tag;
-                text.textContent = `“${fragment.text}”`;
-                meta.textContent = [fragment.author, fragment.date].filter(Boolean).join(' · ');
-                link.href = fragment.url;
-                link.setAttribute('aria-label', `Open frgmnt by ${fragment.author}`);
-            };
-
-            function showFragment(nextIndex, immediate = false) {
-                if (!fragments.length) return;
-                index = ((nextIndex % fragments.length) + fragments.length) % fragments.length;
-
-                if (immediate || prefersReducedMotion.matches) {
-                    writeFragment(fragments[index]);
-                    return;
+        function readLatestFragmentCache() {
+            try {
+                const raw = window.localStorage.getItem(FRGMNTS_PUBLIC_CACHE_KEY);
+                if (!raw) return null;
+                const cached = JSON.parse(raw);
+                const savedAt = Number(cached.savedAt || 0);
+                const isFresh = savedAt > 0 && Date.now() - savedAt <= FRGMNTS_PUBLIC_CACHE_MAX_AGE_MS;
+                if (cached.version !== 1 || !isFresh || !Array.isArray(cached.items) || !cached.items.length) {
+                    window.localStorage.removeItem(FRGMNTS_PUBLIC_CACHE_KEY);
+                    return null;
                 }
-
-                root.classList.add('is-transitioning');
-                window.setTimeout(() => {
-                    writeFragment(fragments[index]);
-                    root.classList.remove('is-transitioning');
-                }, 220);
+                return cached.items;
+            } catch (error) {
+                return null;
             }
+        }
 
-            function hydrateRotator(items) {
-                fragments = (Array.isArray(items) ? items : [])
-                    .map(normalizeRailFragment)
-                    .filter((fragment) => fragment.text && fragment.url)
-                    .slice(0, 12);
-
-                if (!fragments.length) return;
-                showFragment(0, true);
-                resume();
+        function writeLatestFragmentCache(items) {
+            if (!Array.isArray(items) || !items.length) return;
+            try {
+                window.localStorage.setItem(FRGMNTS_PUBLIC_CACHE_KEY, JSON.stringify({
+                    version: 1,
+                    savedAt: Date.now(),
+                    items
+                }));
+            } catch (error) {
+                // The homepage remains fully usable when browser storage is unavailable.
             }
+        }
 
-            root.addEventListener('mouseenter', pause);
-            root.addEventListener('mouseleave', resume);
-            root.addEventListener('focusin', pause);
-            root.addEventListener('focusout', resume);
-            document.addEventListener('visibilitychange', () => {
-                if (document.hidden) {
-                    pause();
-                } else {
-                    resume();
-                }
-            });
+        function hydrateLatestFragmentFromCache() {
+            const cachedItems = readLatestFragmentCache();
+            if (cachedItems) renderLatestFragment(cachedItems, { onlyIfNewer: true });
+        }
 
-            if (Array.isArray(fragmentItems)) {
-                hydrateRotator(fragmentItems);
-                return;
-            }
-
-            loadPublishedFragments()
-                .then((items) => {
-                    hydrateRotator(items);
-                })
-                .catch((error) => {
-                    console.warn('Could not initialize fragment rotator.', error);
+        async function refreshLatestFragmentFromPublicFeed() {
+            const controller = new AbortController();
+            const timeoutId = window.setTimeout(() => controller.abort(), FRGMNTS_PUBLIC_TIMEOUT_MS);
+            try {
+                const response = await fetch(FRGMNTS_PUBLIC_FEED_URL, {
+                    cache: 'default',
+                    credentials: 'omit',
+                    headers: { Accept: 'application/json' },
+                    signal: controller.signal
                 });
+                if (!response.ok) throw new Error(`Public frgmnts request failed: ${response.status}`);
+                const payload = await response.json();
+                const items = extractPublicFragmentItems(payload);
+                if (!Array.isArray(items) || !items.length) throw new Error('Public frgmnts response was empty');
+                writeLatestFragmentCache(items);
+                renderLatestFragment(items, { onlyIfNewer: true });
+            } catch (error) {
+                console.warn('Latest public frgmnt unavailable; keeping the last reliable homepage copy.', error);
+            } finally {
+                window.clearTimeout(timeoutId);
+            }
         }
 
         function initPopoverEscapeDismissal() {
