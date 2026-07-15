@@ -1336,6 +1336,132 @@
       white-space: nowrap;
     }
 
+    #driftWorkspace .image-upload-field input[type="file"] {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+
+    #driftWorkspace .image-upload-field .file-picker {
+      min-height: 56px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+      border: 1px solid var(--control-line);
+      border-radius: 8px;
+      padding: 10px 12px;
+      background: var(--input-bg);
+      color: var(--text-main);
+      cursor: pointer;
+    }
+
+    #driftWorkspace .image-upload-field input[type="file"]:focus-visible + .file-picker {
+      border-color: var(--focus-border);
+      box-shadow: var(--focus-ring);
+    }
+
+    #driftWorkspace .image-upload-field .file-cta {
+      min-height: 36px;
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--control-line);
+      border-radius: 999px;
+      padding: 0 14px;
+      background: var(--chip-bg);
+      color: var(--brand-blue);
+      font-family: "IBM Plex Sans", system-ui, sans-serif;
+      font-size: 0.82rem;
+      white-space: nowrap;
+    }
+
+    #driftWorkspace .image-upload-field .helper {
+      min-height: 0;
+      margin: 0;
+      overflow: hidden;
+      color: var(--text-soft);
+      font-size: 0.82rem;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .homepage-framing-control {
+      display: grid;
+      grid-template-columns: minmax(150px, 240px) auto;
+      align-items: center;
+      justify-content: start;
+      gap: 12px;
+    }
+
+    .homepage-framing-preview {
+      min-width: 0;
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      border: 1px solid var(--control-line);
+      border-radius: 8px;
+      background: var(--chip-bg);
+    }
+
+    .homepage-framing-preview img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: 50% 50%;
+    }
+
+    .homepage-framing-preview img[hidden] {
+      display: none;
+    }
+
+    .homepage-focal-grid {
+      width: 94px;
+      display: grid;
+      grid-template-columns: repeat(3, 28px);
+      grid-template-rows: repeat(3, 28px);
+      gap: 5px;
+    }
+
+    .homepage-focal-button {
+      position: relative;
+      width: 28px;
+      height: 28px;
+      border: 1px solid var(--control-line);
+      border-radius: 6px;
+      padding: 0;
+      background: var(--input-bg);
+      color: var(--brand-blue);
+    }
+
+    .homepage-focal-button::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 5px;
+      height: 5px;
+      border: 1px solid currentColor;
+      border-radius: 999px;
+      transform: translate(-50%, -50%);
+    }
+
+    .homepage-focal-button:hover,
+    .homepage-focal-button:focus-visible,
+    .homepage-focal-button[aria-pressed="true"] {
+      border-color: var(--focus-border);
+      background: var(--chip-bg);
+      outline: none;
+    }
+
+    .homepage-focal-button[aria-pressed="true"]::before {
+      background: currentColor;
+      box-shadow: 0 0 0 3px rgba(125, 159, 128, 0.2);
+    }
+
     #iotdWorkspace #iotdTitle {
       font-family: "IBM Plex Serif", Georgia, serif;
       font-size: 1.08rem;
@@ -1878,6 +2004,39 @@
         font-size: 0.76rem;
       }
 
+      #driftWorkspace .image-upload-field .file-picker {
+        min-height: 44px;
+        gap: 8px;
+        padding: 6px;
+      }
+
+      #driftWorkspace .image-upload-field .file-cta {
+        min-height: 32px;
+        padding: 0 10px;
+        font-size: 0.76rem;
+      }
+
+      #driftWorkspace .image-upload-field .helper {
+        font-size: 0.76rem;
+      }
+
+      .homepage-framing-control {
+        grid-template-columns: minmax(0, 1fr) 88px;
+        gap: 8px;
+      }
+
+      .homepage-focal-grid {
+        width: 88px;
+        grid-template-columns: repeat(3, 26px);
+        grid-template-rows: repeat(3, 26px);
+        gap: 5px;
+      }
+
+      .homepage-focal-button {
+        width: 26px;
+        height: 26px;
+      }
+
       #driftWorkspace #driftBody {
         min-height: clamp(310px, 44vh, 380px);
         padding: 16px;
@@ -2088,13 +2247,22 @@
           <h1 class="section-title">Image of the Day</h1>
           <p class="status-line" id="iotdStatusLine">Ready.</p>
           <form class="form-grid" id="iotdForm">
-            <div class="field">
+            <div class="field image-upload-field">
               <label for="iotdImage">Image</label>
               <input id="iotdImage" type="file" accept="image/*" />
               <label class="file-picker" for="iotdImage">
                 <span class="file-cta">Choose Image</span>
                 <span class="helper" id="iotdFileMeta">No image selected.</span>
               </label>
+            </div>
+            <div class="field homepage-framing-field">
+              <label>Homepage Card Framing</label>
+              <div class="homepage-framing-control">
+                <div class="homepage-framing-preview" aria-hidden="true">
+                  <img id="iotdHomepagePreview" alt="" hidden />
+                </div>
+                <div class="homepage-focal-grid" id="iotdHomepageFocal" role="group" aria-label="IOTD homepage card focal point" data-preview="iotdHomepagePreview"></div>
+              </div>
             </div>
             <div class="meta-row">
               <div class="field">
@@ -2137,6 +2305,23 @@
               <div class="field">
                 <label for="driftTitle">Title</label>
                 <input id="driftTitle" type="text" placeholder="Untitled drift" />
+              </div>
+            </div>
+            <div class="field image-upload-field">
+              <label for="driftImage">Homepage Image</label>
+              <input id="driftImage" type="file" accept="image/*" />
+              <label class="file-picker" for="driftImage">
+                <span class="file-cta">Choose Image</span>
+                <span class="helper" id="driftFileMeta">No image selected.</span>
+              </label>
+            </div>
+            <div class="field homepage-framing-field">
+              <label>Homepage Card Framing</label>
+              <div class="homepage-framing-control">
+                <div class="homepage-framing-preview" aria-hidden="true">
+                  <img id="driftHomepagePreview" alt="" hidden />
+                </div>
+                <div class="homepage-focal-grid" id="driftHomepageFocal" role="group" aria-label="Drift homepage card focal point" data-preview="driftHomepagePreview"></div>
               </div>
             </div>
             <div class="field">
@@ -2271,6 +2456,17 @@
     const PUBLISH_IOTD_ENDPOINT = 'https://otw-fragments-publish.ryandavid.workers.dev/publish-iotd-entry';
     const PUBLISH_DRIFT_ENDPOINT = 'https://otw-fragments-publish.ryandavid.workers.dev/publish-drift-poem';
     const IOTD_PUBLIC_BASE_URL = 'https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev';
+    const HOMEPAGE_FOCAL_OPTIONS = [
+      { value: 'top-left', label: 'Top left', x: 0, y: 0 },
+      { value: 'top', label: 'Top center', x: 50, y: 0 },
+      { value: 'top-right', label: 'Top right', x: 100, y: 0 },
+      { value: 'left', label: 'Center left', x: 0, y: 50 },
+      { value: 'center', label: 'Center', x: 50, y: 50 },
+      { value: 'right', label: 'Center right', x: 100, y: 50 },
+      { value: 'bottom-left', label: 'Bottom left', x: 0, y: 100 },
+      { value: 'bottom', label: 'Bottom center', x: 50, y: 100 },
+      { value: 'bottom-right', label: 'Bottom right', x: 100, y: 100 }
+    ];
     const FRGMNTS_WAITLIST_PATH = 'frgmnts_waitlist.json';
     const FRGMNTS_SUPPORT_REQUESTS_PATH = 'frgmnts_support_requests.json';
     const FRGMNTS_SEAT_CHECKINS_PATH = 'frgmnts_seat_checkins.json';
@@ -2298,6 +2494,8 @@
     let supportEntries = [];
     let seatEntries = [];
     let processingQueue = false;
+    let iotdImagePreviewUrl = '';
+    let driftImagePreviewUrl = '';
 
     function escapeHtml(value) {
       return String(value ?? '')
@@ -2346,6 +2544,75 @@
         .replace(/[^a-z0-9]+/g, '-')
         .replace(/^-+|-+$/g, '')
         .slice(0, 80) || 'untitled';
+    }
+
+    function normalizeHomepageFocal(value) {
+      const focal = String(value || '').toLowerCase();
+      return HOMEPAGE_FOCAL_OPTIONS.some((option) => option.value === focal)
+        ? focal
+        : 'center';
+    }
+
+    function homepageFocalPosition(value) {
+      const focal = normalizeHomepageFocal(value);
+      const option = HOMEPAGE_FOCAL_OPTIONS.find((item) => item.value === focal) || HOMEPAGE_FOCAL_OPTIONS[4];
+      return `${option.x}% ${option.y}%`;
+    }
+
+    function setHomepageFocal(controlId, value) {
+      const control = $(`#${controlId}`);
+      if (!control) return;
+      const focal = normalizeHomepageFocal(value);
+      control.dataset.value = focal;
+      control.querySelectorAll('.homepage-focal-button').forEach((button) => {
+        button.setAttribute('aria-pressed', String(button.dataset.homepageFocal === focal));
+      });
+      const preview = document.getElementById(control.dataset.preview || '');
+      if (preview) preview.style.objectPosition = homepageFocalPosition(focal);
+    }
+
+    function getHomepageFocal(controlId) {
+      return normalizeHomepageFocal($(`#${controlId}`)?.dataset.value);
+    }
+
+    function initializeHomepageFocalControl(controlId, onChange) {
+      const control = $(`#${controlId}`);
+      if (!control) return;
+      HOMEPAGE_FOCAL_OPTIONS.forEach((option) => {
+        const button = document.createElement('button');
+        button.className = 'homepage-focal-button';
+        button.type = 'button';
+        button.title = option.label;
+        button.setAttribute('aria-label', option.label);
+        button.setAttribute('aria-pressed', 'false');
+        button.dataset.homepageFocal = option.value;
+        control.append(button);
+      });
+      control.addEventListener('click', (event) => {
+        const button = event.target.closest('.homepage-focal-button');
+        if (!button) return;
+        setHomepageFocal(controlId, button.dataset.homepageFocal);
+        if (typeof onChange === 'function') onChange();
+      });
+      setHomepageFocal(controlId, 'center');
+    }
+
+    function updateImagePreview(inputId, previewId, previousUrl) {
+      if (previousUrl) URL.revokeObjectURL(previousUrl);
+      const input = $(`#${inputId}`);
+      const preview = $(`#${previewId}`);
+      const file = input?.files?.[0];
+      if (!preview || !file) {
+        if (preview) {
+          preview.hidden = true;
+          preview.removeAttribute('src');
+        }
+        return '';
+      }
+      const nextUrl = URL.createObjectURL(file);
+      preview.src = nextUrl;
+      preview.hidden = false;
+      return nextUrl;
     }
 
     function showToast(title, copy) {
@@ -2461,7 +2728,8 @@
         date,
         title,
         caption,
-        image: `${IOTD_PUBLIC_BASE_URL}/${date}.jpg`
+        image: `${IOTD_PUBLIC_BASE_URL}/${date}.jpg`,
+        homepageFocal: getHomepageFocal('iotdHomepageFocal')
       };
     }
 
@@ -2470,27 +2738,38 @@
       window.localStorage.setItem(IOTD_DRAFT_KEY, JSON.stringify({
         date: entry.date,
         title: $('#iotdTitle').value,
-        caption: entry.caption
+        caption: entry.caption,
+        homepageFocal: entry.homepageFocal
       }));
     }
 
-    function updateIotdFileMeta(file) {
+    function updateImageFileMeta(file, outputId) {
+      const output = $(`#${outputId}`);
+      if (!output) return;
       if (!file) {
-        $('#iotdFileMeta').textContent = 'No image selected.';
+        output.textContent = 'No image selected.';
         return;
       }
       const sizeKb = Math.max(1, Math.round(file.size / 1024));
       const objectUrl = URL.createObjectURL(file);
       const probe = new Image();
       probe.onload = () => {
-        $('#iotdFileMeta').textContent = `${file.name} // ${probe.naturalWidth}x${probe.naturalHeight} // ${sizeKb} KB`;
+        output.textContent = `${file.name} // ${probe.naturalWidth}x${probe.naturalHeight} // ${sizeKb} KB`;
         URL.revokeObjectURL(objectUrl);
       };
       probe.onerror = () => {
-        $('#iotdFileMeta').textContent = `${file.name} // ${sizeKb} KB`;
+        output.textContent = `${file.name} // ${sizeKb} KB`;
         URL.revokeObjectURL(objectUrl);
       };
       probe.src = objectUrl;
+    }
+
+    function updateIotdFileMeta(file) {
+      updateImageFileMeta(file, 'iotdFileMeta');
+    }
+
+    function updateDriftFileMeta(file) {
+      updateImageFileMeta(file, 'driftFileMeta');
     }
 
     function setIotdStatus(message, state = '') {
@@ -2523,6 +2802,7 @@
       formData.append('date', entry.date);
       formData.append('title', entry.title);
       formData.append('caption', entry.caption);
+      formData.append('homepageFocal', entry.homepageFocal);
       $('#iotdPublishBtn').disabled = true;
       setIotdStatus('Publishing image and manifest entry...', 'busy');
       try {
@@ -2560,8 +2840,10 @@
       $('#iotdTitle').value = '';
       $('#iotdCaption').value = '';
       $('#iotdImage').value = '';
+      setHomepageFocal('iotdHomepageFocal', 'center');
       window.localStorage.removeItem(IOTD_DRAFT_KEY);
       updateIotdFileMeta(null);
+      iotdImagePreviewUrl = updateImagePreview('iotdImage', 'iotdHomepagePreview', iotdImagePreviewUrl);
       if (resetStatus) setIotdStatus('Ready.');
     }
 
@@ -2632,7 +2914,8 @@
       return {
         date: $('#driftDate').value || today(),
         title: $('#driftTitle').value.trim() || deriveDriftTitle(body),
-        body
+        body,
+        homepageFocal: getHomepageFocal('driftHomepageFocal')
       };
     }
 
@@ -2640,7 +2923,8 @@
       window.localStorage.setItem(DRIFT_DRAFT_KEY, JSON.stringify({
         date: $('#driftDate').value || today(),
         title: $('#driftTitle').value,
-        body: $('#driftBody').value
+        body: $('#driftBody').value,
+        homepageFocal: getHomepageFocal('driftHomepageFocal')
       }));
     }
 
@@ -2691,28 +2975,34 @@
         $('#driftStatusLine').textContent = error.message || 'Could not publish the poem.';
         return;
       }
+      const file = $('#driftImage').files && $('#driftImage').files[0];
+      if (!file) {
+        $('#driftStatusLine').textContent = 'Choose the poem\'s homepage image first.';
+        return;
+      }
       const key = getPublishKey();
       if (!key) {
         $('#driftStatusLine').textContent = 'Save a publish key first.';
         return;
       }
       if (!window.navigator.onLine) {
-        enqueue({ kind: 'drift-poem', endpoint: PUBLISH_DRIFT_ENDPOINT, payload: entry });
-        clearDrift();
-        $('#driftStatusLine').textContent = 'Offline. The poem was queued.';
-        showToast('Drift poem queued.', 'The poem will publish when the connection returns.');
+        $('#driftStatusLine').textContent = 'Drift image uploads need a live connection.';
+        showToast('Drift needs a connection.', 'Image-backed poems cannot be queued offline.');
         return;
       }
+      const formData = new FormData();
+      formData.append('image', file);
+      formData.append('date', entry.date);
+      formData.append('title', entry.title);
+      formData.append('body', entry.body);
+      formData.append('homepageFocal', entry.homepageFocal);
       $('#driftPublishBtn').disabled = true;
       $('#driftStatusLine').textContent = 'Publishing poem to The Drift...';
       try {
         const response = await fetch(PUBLISH_DRIFT_ENDPOINT, {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'x-publish-key': key
-          },
-          body: JSON.stringify(entry)
+          headers: { 'x-publish-key': key },
+          body: formData
         });
         const payload = await response.json().catch(() => ({}));
         if (!response.ok || !payload.ok) throw new Error(payload.error || `Publish failed with status ${response.status}`);
@@ -2723,13 +3013,11 @@
         window.setTimeout(() => $('#driftPublishBtn').classList.remove('is-success'), 1400);
         showToast('Drift poem published.', 'A new poem is on its way to the live page.');
       } catch (error) {
+        const message = error.message || 'Publish failed.';
+        $('#driftStatusLine').textContent = message;
         if (isNetworkFailure(error)) {
-          enqueue({ kind: 'drift-poem', endpoint: PUBLISH_DRIFT_ENDPOINT, payload: entry });
-          clearDrift();
-          $('#driftStatusLine').textContent = 'Connection failed. The poem was queued.';
-          return;
+          showToast('Drift publish paused.', 'Keep this draft open and try again when the connection returns.');
         }
-        $('#driftStatusLine').textContent = error.message || 'Publish failed.';
       } finally {
         $('#driftPublishBtn').disabled = false;
         writeQueue(readQueue());
@@ -2752,7 +3040,11 @@
       $('#driftDate').value = today();
       $('#driftTitle').value = '';
       $('#driftBody').value = '';
+      $('#driftImage').value = '';
+      setHomepageFocal('driftHomepageFocal', 'center');
       window.localStorage.removeItem(DRIFT_DRAFT_KEY);
+      updateDriftFileMeta(null);
+      driftImagePreviewUrl = updateImagePreview('driftImage', 'driftHomepagePreview', driftImagePreviewUrl);
       updateDriftPreview();
     }
 
@@ -3025,16 +3317,20 @@
         $('#iotdDate').value = draft?.date || today();
         $('#iotdTitle').value = draft?.title || '';
         $('#iotdCaption').value = draft?.caption || '';
+        setHomepageFocal('iotdHomepageFocal', draft?.homepageFocal || 'center');
       } catch {
         $('#iotdDate').value = today();
+        setHomepageFocal('iotdHomepageFocal', 'center');
       }
       try {
         const draft = JSON.parse(window.localStorage.getItem(DRIFT_DRAFT_KEY) || 'null');
         $('#driftDate').value = draft?.date || today();
         $('#driftTitle').value = draft?.title || '';
         $('#driftBody').value = draft?.body || '';
+        setHomepageFocal('driftHomepageFocal', draft?.homepageFocal || 'center');
       } catch {
         $('#driftDate').value = today();
+        setHomepageFocal('driftHomepageFocal', 'center');
       }
     }
 
@@ -3071,6 +3367,8 @@
       applyTheme(next);
       updateDriftPreview();
     });
+    initializeHomepageFocalControl('iotdHomepageFocal', writeIotdDraft);
+    initializeHomepageFocalControl('driftHomepageFocal', writeDriftDraft);
     ['iotdDate', 'iotdTitle', 'iotdCaption'].forEach((id) => {
       $(`#${id}`).addEventListener('input', writeIotdDraft);
       $(`#${id}`).addEventListener('change', writeIotdDraft);
@@ -3078,6 +3376,7 @@
     $('#iotdImage').addEventListener('change', () => {
       const file = $('#iotdImage').files && $('#iotdImage').files[0];
       updateIotdFileMeta(file || null);
+      iotdImagePreviewUrl = updateImagePreview('iotdImage', 'iotdHomepagePreview', iotdImagePreviewUrl);
     });
     $('#iotdPublishBtn').addEventListener('click', publishIotd);
     $('#iotdDownloadBtn').addEventListener('click', downloadIotdMetadata);
@@ -3085,6 +3384,11 @@
     ['driftDate', 'driftTitle', 'driftBody'].forEach((id) => {
       $(`#${id}`).addEventListener('input', () => { writeDriftDraft(); updateDriftPreview(); });
       $(`#${id}`).addEventListener('change', () => { writeDriftDraft(); updateDriftPreview(); });
+    });
+    $('#driftImage').addEventListener('change', () => {
+      const file = $('#driftImage').files && $('#driftImage').files[0];
+      updateDriftFileMeta(file || null);
+      driftImagePreviewUrl = updateImagePreview('driftImage', 'driftHomepagePreview', driftImagePreviewUrl);
     });
     $('#driftPublishBtn').addEventListener('click', publishDrift);
     $('#driftDownloadBtn').addEventListener('click', downloadDriftDraft);
@@ -3124,6 +3428,7 @@
       savedDriftPreviewState !== null
     );
     updateIotdFileMeta(null);
+    updateDriftFileMeta(null);
     updateDriftPreview();
     setWorkspace(getWorkspaceFromHash());
     if ('serviceWorker' in navigator) {

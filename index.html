@@ -2655,7 +2655,7 @@
         }
 
         const DEFAULT_FRONTPAGE_MANIFEST = {
-            lead: { slot: 'leadStory', type: 'essay', mode: 'latest' },
+            lead: { slot: 'leadStory', type: 'editorial', mode: 'latest' },
             modules: [
                 { slot: 'moduleEssay', type: 'essay', mode: 'offset', offset: 2 },
                 { slot: 'moduleImageLatest', type: 'iotd', mode: 'latest' },
@@ -2773,6 +2773,24 @@
         }
 
         const HOMEPAGE_ARTICLE_FALLBACK = 'Images/editorial-fallback-v1.webp';
+        const HOMEPAGE_FOCAL_POSITIONS = {
+            'top-left': '0% 0%',
+            top: '50% 0%',
+            'top-right': '100% 0%',
+            left: '0% 50%',
+            center: '50% 50%',
+            right: '100% 50%',
+            'bottom-left': '0% 100%',
+            bottom: '50% 100%',
+            'bottom-right': '100% 100%'
+        };
+
+        function normalizeHomepageFocal(value) {
+            const focal = String(value || '').toLowerCase();
+            return Object.prototype.hasOwnProperty.call(HOMEPAGE_FOCAL_POSITIONS, focal)
+                ? focal
+                : 'center';
+        }
 
         function normalizeEssayEntry(post) {
             const publisher = post && post.publisher && typeof post.publisher === 'object' ? post.publisher : null;
@@ -2806,6 +2824,7 @@
                     : imageMetaAlt && !/^narrative image$/i.test(imageMetaAlt)
                     ? imageMetaAlt
                     : imageMetaCaption || `Image for ${title}`,
+                homepageFocal: normalizeHomepageFocal(imageMeta.homepageFocal),
                 usesEditorialFallback,
                 url,
                 sourceName: 'narrative_data.js'
@@ -2825,6 +2844,7 @@
                 image: String(entry && entry.image ? entry.image : ''),
                 imageCandidates: uniqueStrings([entry && entry.image]),
                 imageAlt: title,
+                homepageFocal: normalizeHomepageFocal(entry && entry.homepageFocal),
                 displayDate: formatIotdDate(entry && entry.date ? entry.date : ''),
                 dateSort: parseContentDate(entry && entry.date ? entry.date : ''),
                 url: 'image_of_the_day.html',
@@ -2860,6 +2880,7 @@
                 image: String(poem && poem.image ? poem.image : ''),
                 imageCandidates: uniqueStrings([poem && poem.image]),
                 imageAlt: `${title} artwork`,
+                homepageFocal: normalizeHomepageFocal(poem && poem.homepageFocal),
                 thumbprint: String(poem && poem.thumbprint ? poem.thumbprint : ''),
                 stanzaCount: stanzas.length,
                 lineCount: lines.length,
@@ -2901,6 +2922,10 @@
             if (type === 'iotd') return sources.images;
             if (type === 'drift') return sources.drift;
             if (type === 'fragment') return sources.fragments;
+            if (type === 'editorial') {
+                return [...sources.essays, ...sources.drift.filter((item) => item.imageCandidates.length)]
+                    .sort((a, b) => b.dateSort - a.dateSort || String(b.date).localeCompare(String(a.date)));
+            }
             return [];
         }
 
@@ -2936,7 +2961,7 @@
 
         function tagForSlot(slot, item) {
             if (!item) return '';
-            if (slot === 'leadStory') return 'Latest essay';
+            if (slot === 'leadStory') return item.type === 'drift' ? 'Latest poem' : 'Latest essay';
             if (slot === 'railPreviousEssay') return 'Previous essay';
             if (slot === 'railLatestDrift') return 'The Drift';
             if (item.type === 'essay') return item.date ? `Essay · ${item.date}` : 'Essay';
@@ -3013,6 +3038,12 @@
                     : [item && item.image]
             );
             image.decoding = 'async';
+            const supportsHomepageFocal = item && ['essay', 'drift', 'iotd'].includes(item.type);
+            if (supportsHomepageFocal && !item.usesEditorialFallback && slot !== 'leadStory') {
+                image.style.objectPosition = HOMEPAGE_FOCAL_POSITIONS[normalizeHomepageFocal(item.homepageFocal)];
+            } else {
+                image.style.removeProperty('object-position');
+            }
 
             if (slot === 'leadStory') {
                 image.loading = 'eager';
@@ -3108,12 +3139,22 @@
             }
 
             const meta = root.querySelector('[data-frontpage-meta]');
-            if (meta && item.type === 'essay') {
-                meta.innerHTML = `
-                    <span>${escapeHtml(item.date)}</span>
-                    <span>Essay</span>
-                    <span>Current narrative</span>
-                `;
+            if (meta) {
+                if (item.type === 'essay') {
+                    meta.innerHTML = `
+                        <span>${escapeHtml(item.date)}</span>
+                        <span>Essay</span>
+                        <span>Current narrative</span>
+                    `;
+                } else if (item.type === 'drift') {
+                    meta.innerHTML = `
+                        <span>${escapeHtml(item.date)}</span>
+                        <span>Poem</span>
+                        <span>Current Drift</span>
+                    `;
+                } else {
+                    meta.replaceChildren();
+                }
             }
         }
 
@@ -3329,7 +3370,10 @@
 
             [...(manifest.modules || []), ...(manifest.rail || [])].forEach((rule) => {
                 if (!rule || !rule.slot || rule.type === 'fragment') return;
-                const item = pickUniqueContent(rule, sources, usedKeys);
+                const adjustedRule = leadItem && leadItem.type !== 'essay' && rule.slot === 'moduleEssay'
+                    ? { ...rule, mode: 'latest', offset: 0 }
+                    : rule;
+                const item = pickUniqueContent(adjustedRule, sources, usedKeys);
                 renderContentSlot(rule.slot, item);
                 if (item) renderedItems.push(item);
             });

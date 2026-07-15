@@ -128,6 +128,13 @@ def normalize_feature_layout(value):
 def normalize_feature_focal(value):
     return normalize_choice(value, ['top', 'center', 'bottom'], 'center')
 
+def normalize_homepage_focal(value):
+    return normalize_choice(value, [
+        'top-left', 'top', 'top-right',
+        'left', 'center', 'right',
+        'bottom-left', 'bottom', 'bottom-right',
+    ], 'center')
+
 def normalize_image_dimensions(value):
     try:
         width = max(0, int(float((value or {}).get('width') or 0)))
@@ -163,6 +170,7 @@ def normalize_publisher_images(metadata):
             'credit': str(image.get('credit') or ''),
             'featureLayout': normalize_feature_layout(image.get('featureLayout')),
             'featureFocal': normalize_feature_focal(image.get('featureFocal')),
+            'homepageFocal': normalize_homepage_focal(image.get('homepageFocal')),
             **normalize_image_dimensions(image),
             **normalize_image_presentation(image),
         }
@@ -188,6 +196,7 @@ def normalize_publisher_images(metadata):
             'credit': str(block.get('credit') or (image or {}).get('credit') or ''),
             'featureLayout': normalize_feature_layout(block.get('featureLayout') or (image or {}).get('featureLayout')),
             'featureFocal': normalize_feature_focal(block.get('featureFocal') or (image or {}).get('featureFocal')),
+            'homepageFocal': normalize_homepage_focal(block.get('homepageFocal') or (image or {}).get('homepageFocal')),
             **normalize_image_dimensions({**(image or {}), **block}),
             **normalize_image_presentation({**(image or {}), **block}),
         }
@@ -225,6 +234,7 @@ def normalize_publisher_image_sequence(metadata):
             'credit': str(image.get('credit') or ''),
             'featureLayout': normalize_feature_layout(image.get('featureLayout')),
             'featureFocal': normalize_feature_focal(image.get('featureFocal')),
+            'homepageFocal': normalize_homepage_focal(image.get('homepageFocal')),
             **normalize_image_dimensions(image),
             **normalize_image_presentation(image),
         }
@@ -249,6 +259,7 @@ def normalize_publisher_image_sequence(metadata):
             'credit': str(block.get('credit') or (image or {}).get('credit') or ''),
             'featureLayout': normalize_feature_layout(block.get('featureLayout') or (image or {}).get('featureLayout')),
             'featureFocal': normalize_feature_focal(block.get('featureFocal') or (image or {}).get('featureFocal')),
+            'homepageFocal': normalize_homepage_focal(block.get('homepageFocal') or (image or {}).get('homepageFocal')),
             **normalize_image_dimensions({**(image or {}), **block}),
             **normalize_image_presentation({**(image or {}), **block}),
         })
@@ -275,6 +286,7 @@ def sanitize_publisher_image_list(metadata):
             'credit': str(image.get('credit') or ''),
             'featureLayout': normalize_feature_layout(image.get('featureLayout')),
             'featureFocal': normalize_feature_focal(image.get('featureFocal')),
+            'homepageFocal': normalize_homepage_focal(image.get('homepageFocal')),
             **normalize_image_dimensions(image),
             **normalize_image_presentation(image),
         }
@@ -643,6 +655,8 @@ def sanitize_publisher_metadata(metadata):
                 sanitized['featureLayout'] = normalize_feature_layout(block.get('featureLayout'))
             if block.get('featureFocal'):
                 sanitized['featureFocal'] = normalize_feature_focal(block.get('featureFocal'))
+            if block.get('homepageFocal'):
+                sanitized['homepageFocal'] = normalize_homepage_focal(block.get('homepageFocal'))
             dimensions = normalize_image_dimensions(block)
             if dimensions['width'] and dimensions['height']:
                 sanitized.update(dimensions)

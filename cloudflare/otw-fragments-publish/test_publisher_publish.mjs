@@ -4,14 +4,27 @@ import worker from "./src/index.js";
 const publishKey = "test-publisher-key";
 const baseImageUrl = "https://pub.example.test/narrative/publisher-test.jpg";
 
-function env() {
+function env(overrides = {}) {
   return {
     PUBLISH_KEY: publishKey,
     GITHUB_OWNER: "owner",
     GITHUB_REPO: "repo",
     GITHUB_BRANCH: "main",
-    GITHUB_TOKEN: "test-token"
+    GITHUB_TOKEN: "test-token",
+    ...overrides
   };
+}
+
+class MockR2Bucket {
+  constructor() {
+    this.objects = new Map();
+    this.options = new Map();
+  }
+
+  async put(key, value, options = {}) {
+    this.objects.set(key, value);
+    this.options.set(key, options);
+  }
 }
 
 function request(path, options = {}) {
@@ -63,6 +76,7 @@ function publisherMetadata(imageUrl = baseImageUrl) {
         alt: "Publisher image alt",
         caption: "Publisher image caption",
         objectKey: "narrative/publisher-test.jpg",
+        homepageFocal: "bottom-right",
         displaySize: "small",
         alignment: "right",
         wrapMode: "wrap-left"
@@ -128,6 +142,14 @@ async function postDrift(testEnv, body, key = publishKey) {
     method: "POST",
     headers: key === null ? { "content-type": "application/json" } : authorizedHeaders(key),
     body: JSON.stringify(body)
+  }), testEnv));
+}
+
+async function postMultipart(testEnv, path, formData, key = publishKey) {
+  return json(await worker.fetch(request(path, {
+    method: "POST",
+    headers: { "x-publish-key": key },
+    body: formData
   }), testEnv));
 }
 
@@ -210,6 +232,45 @@ function githubDriftMock(existingRaw = "const livingVerse = [];\n") {
     if (method === "PUT") {
       return new Response(JSON.stringify({
         commit: { sha: "published-drift-sha" },
+        path
+      }), {
+        status: 200,
+        headers: { "content-type": "application/json" }
+      });
+    }
+
+    return new Response(JSON.stringify({ error: "Unexpected GitHub request" }), {
+      status: 500,
+      headers: { "content-type": "application/json" }
+    });
+  };
+}
+
+function githubIotdMock(existingRaw = "[]\n") {
+  return async (url, options) => {
+    const method = String(options.method || "GET").toUpperCase();
+    const path = decodeURIComponent(url.split("/contents/")[1]?.split("?")[0] || "");
+
+    if (path !== "image_manifest.json") {
+      return new Response(JSON.stringify({ message: "Not Found" }), {
+        status: 404,
+        headers: { "content-type": "application/json" }
+      });
+    }
+
+    if (method === "GET") {
+      return new Response(JSON.stringify({
+        sha: "existing-iotd-sha",
+        content: encodeBase64Utf8(existingRaw)
+      }), {
+        status: 200,
+        headers: { "content-type": "application/json" }
+      });
+    }
+
+    if (method === "PUT") {
+      return new Response(JSON.stringify({
+        commit: { sha: "published-iotd-sha" },
         path
       }), {
         status: 200,
@@ -370,6 +431,7 @@ for (const markdown of [
     assert.ok(savedMarkdown.includes("\"displaySize\":\"small\""));
     assert.ok(savedMarkdown.includes("\"alignment\":\"right\""));
     assert.ok(savedMarkdown.includes("\"wrapMode\":\"wrap-left\""));
+    assert.ok(savedMarkdown.includes("\"homepageFocal\":\"bottom-right\""));
     assert.ok(savedMarkdown.includes(`![Publisher image alt](${baseImageUrl} "Publisher image caption")`));
     assert.equal(savedMarkdown.includes("data:image"), false);
     assert.equal(savedMarkdown.includes("blob:"), false);
@@ -407,6 +469,61 @@ for (const markdown of [
     const savedPoetry = decodeBase64Utf8(requestBody.content);
     assert.ok(savedPoetry.includes('"title": "Permission to Fall"'));
     assert.ok(savedPoetry.includes(`"image": "${image}"`));
+  });
+}
+
+{
+  const bucket = new MockR2Bucket();
+  const testEnv = env({
+    IOTD_BUCKET: bucket,
+    IOTD_PUBLIC_BASE_URL: "https://media.example.test"
+  });
+  const formData = new FormData();
+  formData.append("image", new File([new Uint8Array([1, 2, 3])], "poem.jpg", { type: "image/jpeg" }));
+  formData.append("title", "A New Signal");
+  formData.append("date", "2026-07-15");
+  formData.append("body", "First line\nSecond line");
+  formData.append("homepageFocal", "bottom-right");
+
+  await withMockGitHub(githubDriftMock(), async (calls) => {
+    const result = await postMultipart(testEnv, "/publish-drift-poem", formData);
+    assert.equal(result.status, 200);
+    assert.equal(result.body.ok, true);
+    assert.equal(result.body.published.homepageFocal, "bottom-right");
+    assert.match(result.body.published.image, /^https:\/\/media\.example\.test\/poetry\//);
+    assert.equal(bucket.objects.has(result.body.object_key), true);
+
+    const requestBody = JSON.parse(putCalls(calls)[0].options.body);
+    const savedPoetry = decodeBase64Utf8(requestBody.content);
+    assert.ok(savedPoetry.includes('"homepageFocal": "bottom-right"'));
+    assert.ok(savedPoetry.includes('"image": "https://media.example.test/poetry/'));
+  });
+}
+
+{
+  const bucket = new MockR2Bucket();
+  const testEnv = env({
+    IOTD_BUCKET: bucket,
+    IOTD_PUBLIC_BASE_URL: "https://media.example.test"
+  });
+  const formData = new FormData();
+  formData.append("image", new File([new Uint8Array([4, 5, 6])], "signal.jpg", { type: "image/jpeg" }));
+  formData.append("title", "DAILY SIGNAL");
+  formData.append("date", "2026-07-15");
+  formData.append("caption", "The day in one frame.");
+  formData.append("homepageFocal", "top-left");
+
+  await withMockGitHub(githubIotdMock(), async (calls) => {
+    const result = await postMultipart(testEnv, "/publish-iotd-entry", formData);
+    assert.equal(result.status, 200);
+    assert.equal(result.body.ok, true);
+    assert.equal(result.body.published.homepageFocal, "top-left");
+    assert.equal(result.body.published.image, "https://media.example.test/2026-07-15.jpg");
+    assert.equal(bucket.objects.has("2026-07-15.jpg"), true);
+
+    const requestBody = JSON.parse(putCalls(calls)[0].options.body);
+    const savedManifest = JSON.parse(decodeBase64Utf8(requestBody.content));
+    assert.equal(savedManifest[0].homepageFocal, "top-left");
   });
 }
 

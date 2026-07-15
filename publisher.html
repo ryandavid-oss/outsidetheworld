@@ -856,6 +856,65 @@
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
+    .homepage-focal-control {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .homepage-focal-preview {
+      position: relative;
+      min-width: 0;
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      border: 1px solid var(--control-line);
+      border-radius: 6px;
+      background: rgba(125, 159, 128, 0.1);
+    }
+
+    .homepage-focal-preview img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: 50% 50%;
+    }
+
+    .homepage-focal-selector {
+      width: 94px;
+      display: grid;
+      grid-template-columns: repeat(3, 28px);
+      grid-template-rows: repeat(3, 28px);
+      gap: 5px;
+    }
+
+    .homepage-focal-option {
+      position: relative;
+      min-width: 28px;
+      min-height: 28px;
+      padding: 0;
+      border-radius: 5px;
+    }
+
+    .homepage-focal-option::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 5px;
+      height: 5px;
+      border: 1px solid currentColor;
+      border-radius: 999px;
+      background: transparent;
+      transform: translate(-50%, -50%);
+    }
+
+    .homepage-focal-option[aria-pressed="true"]::before {
+      background: currentColor;
+      box-shadow: 0 0 0 3px rgba(125, 159, 128, 0.2);
+    }
+
     .panel-option,
     .panel-action {
       min-height: 32px;
@@ -3005,6 +3064,15 @@
               <span class="field-label">Focal Position</span>
               <div class="panel-segmented is-three" id="imageInspectorFeatureFocalControls" aria-label="Feature image focal position"></div>
             </div>
+            <div class="panel-control-group" id="imageInspectorHomepageFocalGroup" hidden>
+              <span class="field-label">Homepage Card Framing</span>
+              <div class="homepage-focal-control">
+                <div class="homepage-focal-preview" aria-hidden="true">
+                  <img id="imageInspectorHomepageFocalPreview" alt="" />
+                </div>
+                <div class="homepage-focal-selector" id="imageInspectorHomepageFocalControls" role="group" aria-label="Homepage image focal point"></div>
+              </div>
+            </div>
             <label class="panel-field" for="imageInspectorAlt">
               <span class="field-label">Alt Text</span>
               <input class="side-input" id="imageInspectorAlt" type="text" />
@@ -3140,6 +3208,9 @@
     const imageInspectorFeatureLayoutControls = document.getElementById('imageInspectorFeatureLayoutControls');
     const imageInspectorFeatureFocalGroup = document.getElementById('imageInspectorFeatureFocalGroup');
     const imageInspectorFeatureFocalControls = document.getElementById('imageInspectorFeatureFocalControls');
+    const imageInspectorHomepageFocalGroup = document.getElementById('imageInspectorHomepageFocalGroup');
+    const imageInspectorHomepageFocalControls = document.getElementById('imageInspectorHomepageFocalControls');
+    const imageInspectorHomepageFocalPreview = document.getElementById('imageInspectorHomepageFocalPreview');
     const imageInspectorRetry = document.getElementById('imageInspectorRetry');
     const imageInspectorReplace = document.getElementById('imageInspectorReplace');
     const imageInspectorRemove = document.getElementById('imageInspectorRemove');
@@ -3231,6 +3302,17 @@
       { value: 'center', label: 'Center', title: 'Keep the center of the image in view' },
       { value: 'bottom', label: 'Bottom', title: 'Keep the bottom of the image in view' }
     ];
+    const homepageFocalOptions = [
+      { value: 'top-left', title: 'Focus the homepage crop on the top left', x: 0, y: 0 },
+      { value: 'top', title: 'Focus the homepage crop on the top center', x: 50, y: 0 },
+      { value: 'top-right', title: 'Focus the homepage crop on the top right', x: 100, y: 0 },
+      { value: 'left', title: 'Focus the homepage crop on the center left', x: 0, y: 50 },
+      { value: 'center', title: 'Focus the homepage crop on the center', x: 50, y: 50 },
+      { value: 'right', title: 'Focus the homepage crop on the center right', x: 100, y: 50 },
+      { value: 'bottom-left', title: 'Focus the homepage crop on the bottom left', x: 0, y: 100 },
+      { value: 'bottom', title: 'Focus the homepage crop on the bottom center', x: 50, y: 100 },
+      { value: 'bottom-right', title: 'Focus the homepage crop on the bottom right', x: 100, y: 100 }
+    ];
     function renderPanelOptionButtons(container, options, datasetName) {
       options.forEach((option) => {
         const button = document.createElement('button');
@@ -3250,6 +3332,16 @@
     renderPanelOptionButtons(imageInspectorWrapControls, figureWrapModeOptions, 'wrapMode');
     renderPanelOptionButtons(imageInspectorFeatureLayoutControls, featureLayoutOptions, 'featureLayout');
     renderPanelOptionButtons(imageInspectorFeatureFocalControls, featureFocalOptions, 'featureFocal');
+    homepageFocalOptions.forEach((option) => {
+      const button = document.createElement('button');
+      button.className = 'panel-option homepage-focal-option';
+      button.type = 'button';
+      button.title = option.title;
+      button.setAttribute('aria-label', option.title);
+      button.setAttribute('aria-pressed', 'false');
+      button.dataset.homepageFocal = option.value;
+      imageInspectorHomepageFocalControls.append(button);
+    });
 
     const bodyOnlyCommands = new Set([
       'bold',
@@ -5368,6 +5460,19 @@
         : 'center';
     }
 
+    function normalizeHomepageFocal(value) {
+      const focal = String(value || '').toLowerCase();
+      return homepageFocalOptions.some((option) => option.value === focal)
+        ? focal
+        : 'center';
+    }
+
+    function homepageFocalObjectPosition(value) {
+      const focal = normalizeHomepageFocal(value);
+      const option = homepageFocalOptions.find((item) => item.value === focal) || homepageFocalOptions[4];
+      return `${option.x}% ${option.y}%`;
+    }
+
     function syncFigureSizeControls(figure) {
       if (!figure) {
         return;
@@ -5476,6 +5581,24 @@
       setPressedOption(imageInspectorWrapControls, 'wrapMode', normalizeFigureWrapMode(figure.dataset.wrapMode));
       setPressedOption(imageInspectorFeatureLayoutControls, 'featureLayout', normalizeFeatureLayout(figure.dataset.featureLayout));
       setPressedOption(imageInspectorFeatureFocalControls, 'featureFocal', normalizeFeatureFocal(figure.dataset.featureFocal));
+      setPressedOption(imageInspectorHomepageFocalControls, 'homepageFocal', normalizeHomepageFocal(figure.dataset.homepageFocal));
+    }
+
+    function homepageLeadFigure() {
+      return editor.querySelector('.publisher-figure');
+    }
+
+    function syncHomepageFocalPreview(figure) {
+      const sourceImage = figure?.querySelector('img');
+      const source = sourceImage?.currentSrc || sourceImage?.getAttribute('src') || '';
+      if (!source) {
+        imageInspectorHomepageFocalPreview.removeAttribute('src');
+        return;
+      }
+      if (imageInspectorHomepageFocalPreview.getAttribute('src') !== source) {
+        imageInspectorHomepageFocalPreview.src = source;
+      }
+      imageInspectorHomepageFocalPreview.style.objectPosition = homepageFocalObjectPosition(figure.dataset.homepageFocal);
     }
 
     function updateImageInspector() {
@@ -5493,6 +5616,8 @@
         imageInspectorCredit.value = '';
         imageInspectorFeatureLayoutGroup.hidden = true;
         imageInspectorFeatureFocalGroup.hidden = true;
+        imageInspectorHomepageFocalGroup.hidden = true;
+        imageInspectorHomepageFocalPreview.removeAttribute('src');
         return;
       }
 
@@ -5502,11 +5627,15 @@
 
       isSyncingImageInspector = true;
       const isFeature = figure.dataset.featureImage === 'true';
-      imageInspectorStatus.textContent = isFeature ? 'Feature image' : figureStatusLabel(figure);
+      const isHomepageLead = figure === homepageLeadFigure();
+      imageInspectorStatus.textContent = isHomepageLead
+        ? 'Homepage card image'
+        : isFeature ? 'Feature image' : figureStatusLabel(figure);
       imageInspectorFeature.setAttribute('aria-pressed', String(isFeature));
       imageInspectorFeature.textContent = isFeature ? 'Feature Selected' : 'Use as Feature';
       imageInspectorFeatureLayoutGroup.hidden = !isFeature;
       imageInspectorFeatureFocalGroup.hidden = !isFeature;
+      imageInspectorHomepageFocalGroup.hidden = !isHomepageLead || !image;
       if (document.activeElement !== imageInspectorAlt) {
         imageInspectorAlt.value = altInput ? altInput.value : image?.alt || '';
       }
@@ -5518,6 +5647,9 @@
       }
       imageInspectorRetry.hidden = normalizeImageUploadStatus(figure.dataset.uploadStatus) !== 'failed';
       syncImageInspectorOptions(figure);
+      if (isHomepageLead && image) {
+        syncHomepageFocalPreview(figure);
+      }
       isSyncingImageInspector = false;
     }
 
@@ -5845,6 +5977,7 @@
         isFeature: figure.dataset.featureImage === 'true',
         featureLayout: normalizeFeatureLayout(figure.dataset.featureLayout),
         featureFocal: normalizeFeatureFocal(figure.dataset.featureFocal),
+        homepageFocal: normalizeHomepageFocal(figure.dataset.homepageFocal),
         source,
         alt: (altInput && altInput.value) || (image && image.alt) || '',
         caption: caption ? caption.textContent.trim() : '',
@@ -6073,6 +6206,7 @@
         height: Math.max(0, Number(block.height || 0)),
         featureLayout: normalizeFeatureLayout(block.featureLayout),
         featureFocal: normalizeFeatureFocal(block.featureFocal),
+        homepageFocal: normalizeHomepageFocal(block.homepageFocal),
         displaySize: normalizeFigureDisplaySize(block.displaySize),
         alignment: normalizeFigureAlignment(block.alignment),
         wrapMode: normalizeFigureWrapMode(block.wrapMode),
@@ -6331,6 +6465,7 @@
         height: Math.max(0, Number(image.height || 0)),
         featureLayout: normalizeFeatureLayout(image.featureLayout),
         featureFocal: normalizeFeatureFocal(image.featureFocal),
+        homepageFocal: normalizeHomepageFocal(image.homepageFocal),
         displaySize: normalizeFigureDisplaySize(image.displaySize),
         alignment: normalizeFigureAlignment(image.alignment),
         wrapMode: normalizeFigureWrapMode(image.wrapMode)
@@ -6417,6 +6552,7 @@
               objectKey: image.objectKey,
               featureLayout: image.featureLayout,
               featureFocal: image.featureFocal,
+              homepageFocal: image.homepageFocal,
               displaySize: image.displaySize,
               alignment: image.alignment,
               wrapMode: image.wrapMode
@@ -7226,6 +7362,7 @@
       isFeature = false,
       featureLayout = 'natural',
       featureFocal = 'center',
+      homepageFocal = 'center',
       credit = '',
       width = 0,
       height = 0,
@@ -7249,6 +7386,7 @@
       }
       figure.dataset.featureLayout = normalizeFeatureLayout(featureLayout);
       figure.dataset.featureFocal = normalizeFeatureFocal(featureFocal);
+      figure.dataset.homepageFocal = normalizeHomepageFocal(homepageFocal);
       if (credit) {
         figure.dataset.imageCredit = credit;
       }
@@ -7464,6 +7602,7 @@
         isFeature: Boolean(block.isFeature),
         featureLayout: block.featureLayout || 'natural',
         featureFocal: block.featureFocal || 'center',
+        homepageFocal: block.homepageFocal || 'center',
         credit: block.credit || '',
         width: block.width || 0,
         height: block.height || 0,
@@ -9766,6 +9905,17 @@
         return;
       }
       figure.dataset.featureFocal = normalizeFeatureFocal(button.dataset.featureFocal);
+      updateImageInspector();
+      markChanged();
+    });
+
+    imageInspectorHomepageFocalControls.addEventListener('click', (event) => {
+      const button = event.target.closest('.panel-option');
+      const figure = selectedFigureInEditor();
+      if (!button || !figure || figure !== homepageLeadFigure()) {
+        return;
+      }
+      figure.dataset.homepageFocal = normalizeHomepageFocal(button.dataset.homepageFocal);
       updateImageInspector();
       markChanged();
     });

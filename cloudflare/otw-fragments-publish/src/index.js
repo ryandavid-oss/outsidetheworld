@@ -781,6 +781,16 @@ function normalizeDriftDate(raw) {
   return date;
 }
 
+function normalizeHomepageFocal(raw) {
+  const focal = String(raw || "").trim().toLowerCase();
+  const allowed = new Set([
+    "top-left", "top", "top-right",
+    "left", "center", "right",
+    "bottom-left", "bottom", "bottom-right"
+  ]);
+  return allowed.has(focal) ? focal : "center";
+}
+
 function formatDriftDate(raw) {
   const date = normalizeDriftDate(raw);
   const value = new Date(`${date}T12:00:00`);
@@ -897,6 +907,7 @@ function normalizeDriftPoemEntry(entry) {
   const era = String(entry.era || "CURRENT_SIGNAL").trim().toUpperCase() || "CURRENT_SIGNAL";
   const thumbprint = String(entry.thumbprint || "").trim() || buildDriftThumbprint({ title, body });
   const image = String(entry.image || entry.imageUrl || "").trim();
+  const homepageFocal = normalizeHomepageFocal(entry.homepageFocal);
 
   const normalized = {
     title,
@@ -908,6 +919,9 @@ function normalizeDriftPoemEntry(entry) {
   };
   if (image) {
     normalized.image = image;
+  }
+  if (entry.homepageFocal != null && String(entry.homepageFocal).trim()) {
+    normalized.homepageFocal = homepageFocal;
   }
   return normalized;
 }
@@ -966,6 +980,20 @@ function buildIotdImageUrl(env, objectKey) {
   const base = String(env.IOTD_PUBLIC_BASE_URL || "").replace(/\/+$/g, "");
   if (!base) {
     throw new Error("IOTD public base URL is not configured");
+  }
+  return `${base}/${objectKey}`;
+}
+
+function buildDriftImageObjectKey(date, title, extension) {
+  const titleSlug = slugify(title) || "untitled-drift";
+  const stamp = Date.now().toString(36);
+  return `poetry/${date}-${titleSlug}-${stamp}.${extension}`;
+}
+
+function buildDriftImageUrl(env, objectKey) {
+  const base = String(env.IOTD_PUBLIC_BASE_URL || "").replace(/\/+$/g, "");
+  if (!base) {
+    throw new Error("Drift image base URL is not configured");
   }
   return `${base}/${objectKey}`;
 }
@@ -1067,12 +1095,17 @@ function normalizeIotdEntry(entry) {
   const title = normalizeIotdTitleForFilename(entry.title);
   const caption = normalizeIotdCaption(entry.caption);
   const image = String(entry.image || "").trim();
+  const homepageFocal = normalizeHomepageFocal(entry.homepageFocal);
 
   if (!image) {
     throw new Error("IOTD image URL is required");
   }
 
-  return { date, title, caption, image };
+  const normalized = { date, title, caption, image };
+  if (entry.homepageFocal != null && String(entry.homepageFocal).trim()) {
+    normalized.homepageFocal = homepageFocal;
+  }
+  return normalized;
 }
 
 function normalizeWordpersonDate(raw) {
@@ -2366,6 +2399,7 @@ export default {
         const date = normalizeIotdDate(formData.get("date"));
         const title = normalizeIotdTitleForFilename(formData.get("title"));
         const caption = normalizeIotdCaption(formData.get("caption"));
+        const homepageFocal = normalizeHomepageFocal(formData.get("homepageFocal"));
         const extension = detectImageExtension(file);
         const objectKey = buildIotdObjectKey(date, extension);
         const imageUrl = buildIotdImageUrl(env, objectKey);
@@ -2380,7 +2414,8 @@ export default {
           date,
           title,
           caption,
-          image: imageUrl
+          image: imageUrl,
+          homepageFocal
         });
 
         const fileData = await loadImageManifestFile(env);
@@ -2468,11 +2503,48 @@ export default {
       }
 
       try {
-        const body = await request.json();
+        const contentType = String(request.headers.get("content-type") || "").toLowerCase();
+        let body;
+        let imageFile = null;
+
+        if (contentType.includes("multipart/form-data")) {
+          if (!env.IOTD_BUCKET) {
+            throw new Error("Drift image bucket binding is not configured");
+          }
+          const formData = await request.formData();
+          imageFile = formData.get("image");
+          if (!(imageFile instanceof File) || imageFile.size <= 0) {
+            throw new Error("Drift homepage image file is required");
+          }
+          body = {
+            date: formData.get("date"),
+            title: formData.get("title"),
+            body: formData.get("body"),
+            homepageFocal: formData.get("homepageFocal")
+          };
+        } else {
+          body = await request.json();
+        }
+
+        const publishDate = normalizeDriftDate(body.date);
         const normalized = normalizeDriftPoemEntry(body);
+
+        let objectKey = null;
+        if (imageFile) {
+          validateNarrativeImageFile(imageFile);
+          const extension = detectImageExtension(imageFile);
+          objectKey = buildDriftImageObjectKey(publishDate, normalized.title, extension);
+          await env.IOTD_BUCKET.put(objectKey, await imageFile.arrayBuffer(), {
+            httpMetadata: {
+              contentType: imageFile.type || "application/octet-stream"
+            }
+          });
+          normalized.image = buildDriftImageUrl(env, objectKey);
+        }
+
         const file = await loadDriftPoetryFile(env);
         const entry = {
-          id: buildUniqueDriftId(file.entries, normalizeDriftDate(body.date), normalized.title),
+          id: buildUniqueDriftId(file.entries, publishDate, normalized.title),
           ...normalized
         };
         const merged = sortDriftPoetry(dedupeDriftPoetry([entry, ...file.entries]));
@@ -2482,6 +2554,7 @@ export default {
         return jsonResponse({
           ok: true,
           published: entry,
+          object_key: objectKey,
           commit: result.commit?.sha || null
         });
       } catch (error) {
