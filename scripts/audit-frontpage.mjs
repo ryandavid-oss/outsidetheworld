@@ -100,6 +100,45 @@ function imageCandidates(post, fallbackImage = '') {
 const indexHtml = readText('index.html');
 const robotsTxt = readText('robots.txt');
 const sitemapXml = readText('sitemap.xml');
+const siteManifestSource = readText('site.webmanifest');
+const activeNavigationSources = [
+  '404.html',
+  'IOTD_Main.html',
+  'IOTD_Temp.html',
+  'archive/personal.html',
+  'archive/personal.htm',
+  'drift_poetry.html',
+  'emmy.html',
+  'findthesignal.html',
+  'flotsam.html',
+  'image_of_the_day.html',
+  'index.html',
+  'personal.html',
+  'personal.htm',
+  'personal_2.html',
+  'residue_archive.html',
+  'resume.html',
+  'transform_gate.html',
+  'transform_zion.html',
+  'wayback.html',
+  'wayback_old.html'
+];
+
+activeNavigationSources.forEach((relativePath) => {
+  const source = readText(relativePath);
+  if (/personal\.html/i.test(source)) {
+    fail(`Retired Personal route remains in active navigation: ${relativePath}`);
+  }
+});
+
+try {
+  const siteManifest = JSON.parse(siteManifestSource);
+  if (siteManifest.start_url !== '/') {
+    fail(`site.webmanifest should start at the homepage: ${siteManifest.start_url || 'missing'}`);
+  }
+} catch (error) {
+  fail(`Could not parse site.webmanifest: ${error.message}`);
+}
 
 const homepageTitle = extractTagContent(indexHtml, /<title>([\s\S]*?)<\/title>/i);
 const homepageDescription = extractTagContent(indexHtml, /<meta\s+name=["']description["']\s+content=["']([^"']+)["']/i);
@@ -141,7 +180,8 @@ if (countMatches(indexHtml, /<h1\b/gi) !== 1) {
   fail('Homepage should contain exactly one h1 in initial HTML.');
 }
 if (!indexHtml.includes('<main class="front-page"')) fail('Homepage is missing a main landmark.');
-if (!indexHtml.includes('href="personal.html"')) fail('Homepage is missing a crawlable Personal link.');
+if (indexHtml.includes('personal.html')) fail('Homepage still references the retired Personal route.');
+if (!indexHtml.includes('href="residue_archive.html"')) fail('Homepage is missing a crawlable current archive link.');
 if (!indexHtml.includes('href="image_of_the_day.html"')) fail('Homepage is missing a crawlable Image of the Day link.');
 if (!indexHtml.includes('href="drift_poetry.html"')) fail('Homepage is missing a crawlable Drift link.');
 if (!indexHtml.includes('href="fragments.html"')) fail('Homepage is missing a crawlable frgmnts link.');
@@ -151,6 +191,9 @@ if (!robotsTxt.includes('Sitemap: https://outsidetheworld.com/sitemap.xml')) {
 }
 if (!sitemapXml.includes('<loc>https://outsidetheworld.com/</loc>')) {
   fail('sitemap.xml is missing the homepage URL.');
+}
+if (sitemapXml.includes('personal.html')) {
+  fail('sitemap.xml still includes the retired Personal route.');
 }
 
 const frontpageManifest = (() => {

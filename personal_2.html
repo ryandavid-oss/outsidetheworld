@@ -1,22 +1,24 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="robots" content="noindex,follow" />
-    <meta http-equiv="refresh" content="0; url=personal.html" />
-    <link rel="canonical" href="https://outsidetheworld.com/personal.html" />
-    <title>OTW Feed moved | Outside The World</title>
-    <script>
-        window.location.replace('personal.html');
-    </script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,follow" />
+  <meta http-equiv="refresh" content="0; url=index.html" />
+  <link rel="canonical" href="https://outsidetheworld.com/" />
+  <title>Outside The World</title>
+  <script>
+    (() => {
+      const destination = new URL('index.html', window.location.href);
+      destination.search = window.location.search;
+      destination.hash = window.location.hash;
+      window.location.replace(destination.href);
+    })();
+  </script>
 </head>
-
 <body>
-    <main>
-        <p>The OTW Feed has moved to <a href="personal.html">personal.html</a>.</p>
-    </main>
+  <main>
+    <p>This page has moved to <a href="index.html">Outside The World</a>.</p>
+  </main>
 </body>
-
 </html>

@@ -1,168 +1,356 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
- <head>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-YKRKPFV2MB"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-YKRKPFV2MB');
-</script>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
-  <title>
-   404 // SIGNAL_TERMINATED
-  </title>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#050506" />
+  <meta name="robots" content="noindex,follow" />
+  <title>404 // SIGNAL_TERMINATED</title>
+  <link rel="stylesheet" href="theme.css" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-YKRKPFV2MB"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { window.dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-YKRKPFV2MB');
+  </script>
   <style>
-   @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@700&family=Inter:wght@900&display=swap');
+    :root {
+      --error-void: #050506;
+      --error-red: #ff2f42;
+      --error-red-hot: #ff7180;
+      --error-red-dim: rgba(255, 47, 66, 0.22);
+      --error-red-faint: rgba(255, 47, 66, 0.08);
+      --error-code: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      --error-display: "Helvetica Neue", Arial, sans-serif;
+    }
 
-        :root {
-            --vb-red: #ff0000;
-            --vb-red-dim: #440000;
-            --bg-dark: var(--bg-dark);
-        }
+    html,
+    body {
+      width: 100%;
+      min-height: 100%;
+      background: var(--error-void);
+    }
 
-        body {
-            background-color: var(--bg-dark);
-            color: var(--vb-red);
-            font-family: 'Fira Code', monospace;
-            height: 100vh;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            /* VIRTUAL BOY SCANLINE TEXTURE */
-            background-image: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255, 0, 0, 0.05) 3px);
-        }
+    body {
+      position: relative;
+      isolation: isolate;
+      display: grid;
+      min-height: 100svh;
+      margin: 0;
+      overflow: hidden;
+      place-items: center;
+      color: var(--error-red);
+      font-family: var(--error-code);
+      background:
+        radial-gradient(ellipse at 50% 63%, rgba(255, 47, 66, 0.055), transparent 30%),
+        linear-gradient(180deg, #030304 0%, #070709 62%, #020203 100%);
+    }
 
-        /* THE WIREFRAME ROOM */
-        .wireframe-environment {
-            position: absolute;
-            width: 200%;
-            height: 200%;
-            perspective: 1000px;
-            z-index: 1;
-        }
+    .wireframe-environment {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      overflow: hidden;
+      perspective: 620px;
+      perspective-origin: 50% 61%;
+      pointer-events: none;
+    }
 
-        .grid-box {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            transform: rotateX(60deg);
-            background-image:
-                linear-gradient(var(--vb-red-dim) 1px, transparent 1px),
-                linear-gradient(90deg, var(--vb-red-dim) 1px, transparent 1px);
-            background-size: 80px 80px;
-            animation: move-grid 4s linear infinite;
-        }
+    .wireframe-environment::before {
+      position: absolute;
+      top: 61%;
+      right: 7%;
+      left: 7%;
+      height: 1px;
+      content: "";
+      background: linear-gradient(90deg, transparent, rgba(255, 47, 66, 0.32), transparent);
+      box-shadow: 0 0 16px rgba(255, 47, 66, 0.16);
+      opacity: 0.7;
+    }
 
-        @keyframes move-grid {
-            0% {
-                transform: rotateX(60deg) translateY(0);
-            }
+    .grid-box {
+      position: absolute;
+      top: 61%;
+      left: 50%;
+      width: max(96rem, 160vw);
+      height: 78vh;
+      overflow: hidden;
+      transform: translateX(-50%) rotateX(68deg);
+      transform-origin: 50% 0;
+      background-image:
+        linear-gradient(var(--error-red-dim) 1px, transparent 1px),
+        linear-gradient(90deg, var(--error-red-dim) 1px, transparent 1px);
+      background-size: 64px 48px;
+      mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.32), #000 18%, #000 72%, transparent 100%);
+      opacity: 0.68;
+    }
 
-            100% {
-                transform: rotateX(60deg) translateY(80px);
-            }
-        }
+    .grid-box::after {
+      position: absolute;
+      inset: -25% 0;
+      content: "";
+      background: linear-gradient(
+        180deg,
+        transparent 0%,
+        rgba(255, 47, 66, 0.02) 38%,
+        rgba(255, 47, 66, 0.15) 50%,
+        rgba(255, 47, 66, 0.02) 62%,
+        transparent 100%
+      );
+      opacity: 0;
+      transform: translateY(-52%);
+      animation: range-sweep 12s ease-in-out 1.5s infinite;
+    }
 
-        /* TRON-BIKE TRACED NUMBERS */
-        .glitch-container {
-            z-index: 10;
-            position: relative;
-        }
+    @keyframes range-sweep {
+      0%, 12% {
+        opacity: 0;
+        transform: translateY(-52%);
+      }
+      30% {
+        opacity: 0.46;
+      }
+      66% {
+        opacity: 0.16;
+      }
+      78%, 100% {
+        opacity: 0;
+        transform: translateY(52%);
+      }
+    }
 
-        .big-error {
-            font-family: 'Inter', sans-serif;
-            font-size: 8rem;
-            font-weight: 900;
-            letter-spacing: -5px;
-            color: transparent;
-            -webkit-text-stroke: 2px var(--vb-red);
-            text-shadow: 0 0 20px var(--vb-red);
-            margin: 0;
-            /* ANIMATED TRACING EFFECT */
-            stroke-dasharray: 1000;
-            stroke-dashoffset: 1000;
-            animation: trace-text 3s ease-in-out infinite alternate;
-        }
+    .vignette {
+      position: fixed;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      background:
+        linear-gradient(180deg, rgba(0, 0, 0, 0.3), transparent 36%, rgba(0, 0, 0, 0.34)),
+        radial-gradient(ellipse at center, transparent 30%, rgba(0, 0, 0, 0.8) 100%);
+    }
 
-        @keyframes trace-text {
-            to {
-                text-shadow: 0 0 40px var(--vb-red), 0 0 60px var(--vb-red);
-            }
-        }
+    .error-console {
+      position: relative;
+      z-index: 10;
+      display: grid;
+      width: min(90vw, 52rem);
+      margin-top: -8vh;
+      place-items: center;
+      text-align: center;
+    }
 
-        .asplode {
-            font-size: 1.5rem;
-            font-weight: 700;
-            letter-spacing: 10px;
-            text-transform: uppercase;
-            margin-top: 20px;
-            color: var(--vb-red);
-            text-shadow: 0 0 10px var(--vb-red);
-        }
+    .etch-container {
+      width: 100%;
+    }
 
-        .recovery-link {
-            z-index: 20;
-            margin-top: 60px;
-            padding: 10px 20px;
-            border: 2px solid var(--vb-red);
-            color: var(--vb-red);
-            text-decoration: none;
-            font-family: 'Fira Code';
-            font-size: 0.7rem;
-            letter-spacing: 3px;
-            transition: 0.3s;
-        }
+    .etch-field {
+      position: relative;
+      width: fit-content;
+      margin: 0 auto;
+      isolation: isolate;
+    }
 
-        .recovery-link:hover {
-            background: var(--vb-red);
-            color: #000;
-            box-shadow: 0 0 30px var(--vb-red);
-        }
+    .big-error {
+      position: relative;
+      margin: 0;
+      color: transparent;
+      font-family: var(--error-display);
+      font-size: 8rem;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 0.92;
+      -webkit-text-stroke: 1px rgba(255, 47, 66, 0.16);
+    }
 
-        /* DARKEN THE BOTTOM FOR DEPTH */
-        .vignette {
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle, transparent 20%, black 100%);
-            z-index: 5;
-            pointer-events: none;
-        }
-  
-/* THE CLEAN ATMOSPHERIC WASH */
+    .big-error::after {
+      position: absolute;
+      inset: 0;
+      content: attr(data-text);
+      color: transparent;
+      -webkit-text-stroke: 1.5px var(--error-red);
+      text-shadow:
+        0 0 4px rgba(255, 47, 66, 0.66),
+        0 0 12px rgba(255, 47, 66, 0.2);
+      clip-path: inset(0 100% 0 0);
+      animation: laser-etch 2.7s cubic-bezier(0.22, 0.75, 0.2, 1) 0.35s forwards;
+    }
 
-    </style>
-  <link href="theme.css" rel="stylesheet"/>
-  <meta content="#0a0a0a" name="theme-color"/>
-  <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
-  <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
- </head>
- <body>
-  <div id="cursor-ring">
+    .laser-scribe {
+      position: absolute;
+      top: -8%;
+      bottom: -8%;
+      left: 0;
+      z-index: 2;
+      width: 1px;
+      opacity: 0;
+      background: var(--error-red-hot);
+      box-shadow:
+        0 0 5px var(--error-red-hot),
+        0 0 16px var(--error-red),
+        0 0 30px rgba(255, 47, 66, 0.52);
+      animation: laser-scribe 2.7s cubic-bezier(0.22, 0.75, 0.2, 1) 0.35s forwards;
+    }
+
+    @keyframes laser-etch {
+      0%, 10% {
+        clip-path: inset(0 100% 0 0);
+      }
+      76%, 100% {
+        clip-path: inset(0 0 0 0);
+      }
+    }
+
+    @keyframes laser-scribe {
+      0%, 8% {
+        left: 0;
+        opacity: 0;
+      }
+      12% {
+        opacity: 1;
+      }
+      74% {
+        left: 100%;
+        opacity: 0.92;
+      }
+      78%, 100% {
+        left: 100%;
+        opacity: 0;
+      }
+    }
+
+    .asplode {
+      margin: 1.4rem 0 0;
+      color: var(--error-red);
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0;
+      line-height: 1.4;
+      opacity: 0;
+      text-shadow: 0 0 10px rgba(255, 47, 66, 0.62);
+      text-transform: uppercase;
+      transform: translateY(8px);
+      animation: resolve-copy 520ms ease 2.55s forwards;
+    }
+
+    .recovery-link {
+      display: inline-flex;
+      min-height: 44px;
+      align-items: center;
+      justify-content: center;
+      margin-top: 3.5rem;
+      padding: 0.75rem 1.15rem;
+      border: 1px solid rgba(255, 47, 66, 0.72);
+      color: var(--error-red);
+      font-family: var(--error-code);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0;
+      line-height: 1.25;
+      opacity: 0;
+      text-decoration: none;
+      text-transform: uppercase;
+      transform: translateY(8px);
+      transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+      animation: resolve-copy 520ms ease 2.75s forwards;
+    }
+
+    @keyframes resolve-copy {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .recovery-link:hover,
+    .recovery-link:focus-visible {
+      border-color: var(--error-red-hot);
+      color: #050506;
+      outline: none;
+      background: var(--error-red-hot);
+      box-shadow: 0 0 22px rgba(255, 47, 66, 0.34);
+    }
+
+    @media (max-width: 640px) {
+      body {
+        min-height: 32rem;
+      }
+
+      .wireframe-environment {
+        perspective: 520px;
+        perspective-origin: 50% 66%;
+      }
+
+      .wireframe-environment::before,
+      .grid-box {
+        top: 66%;
+      }
+
+      .error-console {
+        width: min(88vw, 24rem);
+        margin-top: -5rem;
+      }
+
+      .big-error {
+        font-size: 4.75rem;
+      }
+
+      .asplode {
+        margin-top: 1rem;
+        font-size: 0.82rem;
+      }
+
+      .recovery-link {
+        width: min(100%, 20rem);
+        margin-top: 2.75rem;
+      }
+    }
+
+    @media (max-width: 390px) {
+      .big-error {
+        font-size: 4.1rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .grid-box::after,
+      .big-error::after,
+      .laser-scribe,
+      .asplode,
+      .recovery-link {
+        animation: none;
+      }
+
+      .big-error::after {
+        clip-path: inset(0);
+      }
+
+      .laser-scribe {
+        display: none;
+      }
+
+      .asplode,
+      .recovery-link {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wireframe-environment" aria-hidden="true">
+    <div class="grid-box"></div>
   </div>
-  <div id="cursor-dot">
-  </div>
-  <div class="wireframe-environment">
-   <div class="grid-box">
-   </div>
-  </div>
-  <div class="vignette">
-  </div>
-  <div class="glitch-container">
-   <h1 class="big-error">
-    404'd!
-   </h1>
-   <div class="asplode">
-    YOUR HEAD ASPLODE
-   </div>
-  </div>
-  <a class="recovery-link" href="personal.html">
-   [ RE-ESTABLISH_UPLINK ]
-  </a>
- </body>
+  <div class="vignette" aria-hidden="true"></div>
+  <main class="error-console">
+    <div class="etch-container">
+      <div class="etch-field">
+        <h1 class="big-error" data-text="404'd!">404'd!</h1>
+        <span class="laser-scribe" aria-hidden="true"></span>
+      </div>
+      <p class="asplode">Your head asplode</p>
+    </div>
+    <a class="recovery-link" href="index.html">[ Re-establish uplink ]</a>
+  </main>
+</body>
 </html>
