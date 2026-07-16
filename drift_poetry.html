@@ -421,8 +421,17 @@
       font-family: 'IBM Plex Serif', serif;
       font-size: clamp(1.02rem, 1.5vw, 1.16rem);
       line-height: 2.06;
-      white-space: pre-line;
       text-wrap: pretty;
+    }
+
+    .poem-body .poem-line {
+      padding-inline-start: 2em;
+      text-indent: -2em;
+    }
+
+    .poem-body .poem-stanza + .poem-stanza {
+      margin-top: 2.06em;
+      margin-top: 1lh;
     }
 
     .poem-note {
@@ -615,6 +624,17 @@
         .replace(/'/g, '&#39;');
     }
 
+    function renderPoemBody(source) {
+      const text = String(source || '').replace(/\r\n?/g, '\n').trim();
+      if (!text) return '';
+      return text.split(/\n\s*\n/).map((stanza) => {
+        const lines = stanza.split('\n').map((line) => (
+          `<div class="poem-line">${escapeHtml(line)}</div>`
+        )).join('');
+        return `<div class="poem-stanza">${lines}</div>`;
+      }).join('');
+    }
+
     function renderList(filter, options = {}) {
       const { autoDisplay = true } = options;
       const activeId = activePoemIndex >= 0 ? livingVerse[activePoemIndex]?.id : null;
@@ -737,7 +757,7 @@
           </div>
           <h2 class="poem-title">${escapeHtml(poem.title)}</h2>
           <div class="poem-meta">${escapeHtml(poem.date)}</div>
-          <div class="poem-body">${escapeHtml(poem.body)}</div>
+          <div class="poem-body">${renderPoemBody(poem.body)}</div>
           <div class="poem-note">The Drift holds pieces that are still in motion: recovered poems, newer poems, and fragments of a future book not yet ready to become stone.</div>
         `;
         poemCard.classList.add('visible');
