@@ -429,9 +429,26 @@
       text-indent: -2em;
     }
 
-    .poem-body .poem-stanza + .poem-stanza {
+    .poem-body .poem-block + .poem-block {
       margin-top: 2.06em;
       margin-top: 1lh;
+    }
+
+    .poem-body .poem-movement-label {
+      margin: 0;
+      color: inherit;
+      font-family: inherit;
+      font-size: inherit;
+      font-weight: inherit;
+      line-height: inherit;
+      letter-spacing: inherit;
+    }
+
+    .poem-body .poem-movement-break {
+      height: 6.18em;
+      height: 3lh;
+      margin: 0;
+      border: 0;
     }
 
     .poem-note {
@@ -627,11 +644,19 @@
     function renderPoemBody(source) {
       const text = String(source || '').replace(/\r\n?/g, '\n').trim();
       if (!text) return '';
-      return text.split(/\n\s*\n/).map((stanza) => {
-        const lines = stanza.split('\n').map((line) => (
+      return text.split(/\n\s*\n/).map((block) => {
+        const normalizedBlock = block.trim();
+        if (normalizedBlock === '---') {
+          return '<hr class="poem-movement-break" aria-label="Movement break">';
+        }
+        const movementLabel = normalizedBlock.match(/^###\s+(.+)$/);
+        if (movementLabel && !normalizedBlock.includes('\n')) {
+          return `<h3 class="poem-movement-label poem-block">${escapeHtml(movementLabel[1])}</h3>`;
+        }
+        const lines = block.split('\n').map((line) => (
           `<div class="poem-line">${escapeHtml(line)}</div>`
         )).join('');
-        return `<div class="poem-stanza">${lines}</div>`;
+        return `<div class="poem-stanza poem-block">${lines}</div>`;
       }).join('');
     }
 

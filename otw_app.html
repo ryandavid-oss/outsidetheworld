@@ -1785,9 +1785,44 @@
       text-indent: -2em;
     }
 
-    #driftWorkspace .drift-prose .poem-stanza + .poem-stanza {
+    #driftWorkspace .drift-prose .poem-block + .poem-block {
       margin-top: 1.88em;
       margin-top: 1lh;
+    }
+
+    #driftWorkspace .drift-prose .poem-movement-label {
+      margin: 0;
+      color: inherit;
+      font-family: inherit;
+      font-size: inherit;
+      font-weight: inherit;
+      line-height: inherit;
+      letter-spacing: inherit;
+    }
+
+    #driftWorkspace .drift-prose .poem-movement-break {
+      height: 5.64em;
+      height: 3lh;
+      margin: 0;
+      border: 0;
+    }
+
+    #driftWorkspace .poem-structure-tools {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    #driftWorkspace .poem-structure-tools .helper {
+      flex: 1 1 100%;
+      font-size: 0.72rem;
+      line-height: 1.5;
+    }
+
+    #driftWorkspace .poem-structure-tools code {
+      font-family: "IBM Plex Mono", monospace;
+      color: var(--text-main);
     }
 
     #driftWorkspace .drift-stats-panel {
@@ -2337,6 +2372,11 @@
             <div class="field">
               <label for="driftBody">Poem</label>
               <textarea id="driftBody" placeholder="Begin here."></textarea>
+            </div>
+            <div class="poem-structure-tools" role="group" aria-label="Insert poem structure">
+              <button class="secondary-btn" id="driftStanzaBreakBtn" type="button">Stanza Break</button>
+              <button class="secondary-btn" id="driftMovementBreakBtn" type="button">Movement Break</button>
+              <span class="helper">Blank line = stanza. <code>---</code> = movement. <code>### (1)</code> = movement label.</span>
             </div>
             <div class="action-row">
               <button class="primary-btn" id="driftPublishBtn" type="button">Publish</button>
@@ -2913,7 +2953,12 @@
     }
 
     function deriveDriftTitle(body) {
-      const first = normalizeText(body).split(/\r?\n/).map((line) => line.replace(/[*`#>-]/g, ' ').trim()).find(Boolean);
+      const first = normalizeText(body)
+        .split('\n')
+        .map((line) => line.trim())
+        .filter((line) => line !== '---' && !/^###\s+/.test(line))
+        .map((line) => line.replace(/[*`#>-]/g, ' ').trim())
+        .find(Boolean);
       if (!first) return 'Untitled drift';
       return first.length > 72 ? `${first.slice(0, 69).trimEnd()}...` : first;
     }
@@ -2941,19 +2986,42 @@
     function renderDriftBody(source) {
       const text = normalizeText(source);
       if (!text) return '<p>The preview will breathe here as you write.</p>';
-      return text.split(/\n\s*\n/).map((stanza) => {
-        const lines = stanza.split('\n').map((line) => (
+      return text.split(/\n\s*\n/).map((block) => {
+        const normalizedBlock = block.trim();
+        if (normalizedBlock === '---') {
+          return '<hr class="poem-movement-break" aria-label="Movement break">';
+        }
+        const movementLabel = normalizedBlock.match(/^###\s+(.+)$/);
+        if (movementLabel && !normalizedBlock.includes('\n')) {
+          return `<h4 class="poem-movement-label poem-block">${escapeHtml(movementLabel[1])}</h4>`;
+        }
+        const lines = block.split('\n').map((line) => (
           `<div class="poem-line">${escapeHtml(line)}</div>`
         )).join('');
-        return `<div class="poem-stanza">${lines}</div>`;
+        return `<div class="poem-stanza poem-block">${lines}</div>`;
       }).join('');
+    }
+
+    function insertDriftStructure(value) {
+      const textarea = $('#driftBody');
+      const start = textarea.selectionStart ?? textarea.value.length;
+      const end = textarea.selectionEnd ?? start;
+      textarea.setRangeText(value, start, end, 'end');
+      textarea.dispatchEvent(new Event('input', { bubbles: true }));
+      textarea.focus();
     }
 
     function updateDriftPreview() {
       const body = $('#driftBody').value;
       const title = $('#driftTitle').value.trim() || deriveDriftTitle(body);
       const date = $('#driftDate').value || today();
-      const plainText = normalizeText(body).replace(/\s+/g, ' ').trim();
+      const plainText = normalizeText(body)
+        .split('\n')
+        .filter((line) => line.trim() !== '---')
+        .map((line) => line.replace(/^\s*###\s+/, ''))
+        .join(' ')
+        .replace(/\s+/g, ' ')
+        .trim();
       const wordCount = plainText ? plainText.split(/\s+/).filter(Boolean).length : 0;
       const poem = { title, body };
       $('#driftPreviewTheme').textContent = inferDriftTheme(poem).toUpperCase();
@@ -3405,6 +3473,8 @@
     $('#driftPublishBtn').addEventListener('click', publishDrift);
     $('#driftDownloadBtn').addEventListener('click', downloadDriftDraft);
     $('#driftClearBtn').addEventListener('click', clearDrift);
+    $('#driftStanzaBreakBtn').addEventListener('click', () => insertDriftStructure('\n\n'));
+    $('#driftMovementBreakBtn').addEventListener('click', () => insertDriftStructure('\n\n---\n\n'));
     $('#driftPreviewToggle').addEventListener('click', () => {
       setDriftPreviewHidden(!driftWorkspace.classList.contains('is-preview-hidden'));
     });
