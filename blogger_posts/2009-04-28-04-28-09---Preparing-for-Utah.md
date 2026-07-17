@@ -1,7 +1,9 @@
-# 04/28/09 - Preparing for Utah
+# Preparing for Utah
 Date: April 28, 2009
 
-<img class="alignleft" src="http://photos-c.ak.fbcdn.net/photos-ak-snc1/v3357/13/66/1220240335/n1220240335_1283362_687945.jpg" alt="" width="150" height="113" />We're in full preparation mode now, it seems.  Spent a good portion of the morning cleaning out the van, and was surprised to find that it wasn't that bad.  Just one bag of trash, and it was a small one.  Most of the time, we extract at least a full trash bag worth of goodies from the nooks and crannies hidden away. When you have a five year old, you just can't seem to live a clean life.
+<figure class="entry-image entry-image--missing archive-media archive-media--missing"><figcaption>This photograph did not survive the archive.</figcaption></figure>
+
+We're in full preparation mode now, it seems.  Spent a good portion of the morning cleaning out the van, and was surprised to find that it wasn't that bad.  Just one bag of trash, and it was a small one.  Most of the time, we extract at least a full trash bag worth of goodies from the nooks and crannies hidden away. When you have a five year old, you just can't seem to live a clean life.
 
 Much still left to be done, I'm afraid.  There's laundry, packing, shopping, and cleaning.  I have to have a clean house house before we leave.  There's no worse feeling than coming home to a dirty house, right?.  No wait, there is a worse feeling; knowing you're coming home to a dirty house, and you still have eight hours left of the drive home.  So, I like to clean before I leave.  Gives me a sense of accomplishment for the whole trip.  And it saves my sanity.  Save it, so I can lose it another day.
 

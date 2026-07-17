@@ -257,6 +257,12 @@ def legacy_wayback_images(value: str) -> list[str]:
 
 def legacy_wayback_plain_text(value: str) -> str:
     decoded = html.unescape(str(value or ""))
+    decoded = re.sub(
+        r'<figure\b[^>]*class=["\'][^"\']*entry-image--missing[^"\']*["\'][^>]*>[\s\S]*?</figure>',
+        " ",
+        decoded,
+        flags=re.I,
+    )
 
     def caption_text(match: re.Match[str]) -> str:
         attributes = legacy_image_attributes(f'<caption {match.group("attributes")}>')

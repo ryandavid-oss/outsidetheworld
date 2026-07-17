@@ -274,6 +274,7 @@
             font-weight: 300;
             white-space: pre-wrap;
             word-wrap: break-word;
+            display: flow-root;
         }
 
         .entry-body img {
@@ -283,6 +284,61 @@
             border-radius: 8px;
             margin: 30px auto;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .archive-media {
+            margin: 30px auto;
+            white-space: normal;
+        }
+
+        .archive-media img {
+            margin: 0;
+        }
+
+        .archive-media figcaption {
+            margin-top: 10px;
+            color: rgba(224, 224, 224, 0.56);
+            font-family: 'Fira Code', monospace;
+            font-size: 0.68rem;
+            letter-spacing: 0.04em;
+            line-height: 1.55;
+        }
+
+        .archive-media--left,
+        .archive-media--right {
+            width: fit-content;
+            max-width: min(46%, 320px);
+            margin-top: 0.35rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .archive-media--left {
+            float: left;
+            margin-right: 1.65rem;
+        }
+
+        .archive-media--right {
+            float: right;
+            margin-left: 1.65rem;
+        }
+
+        .archive-media--center {
+            width: fit-content;
+            max-width: 100%;
+        }
+
+        .archive-media--missing {
+            float: none;
+            width: auto;
+            max-width: 100%;
+            margin: 1.5rem 0 2rem;
+            padding: 0.9rem 1rem;
+            border: 1px dashed rgba(145, 175, 179, 0.25);
+            background: rgba(145, 175, 179, 0.035);
+        }
+
+        .archive-media--missing figcaption {
+            margin: 0;
         }
 
         /* SHUFFLE BUTTON PROTOCOL */
@@ -371,6 +427,13 @@
 
             .share-controls {
                 width: 100%;
+            }
+
+            .archive-media--left,
+            .archive-media--right {
+                float: none;
+                max-width: 100%;
+                margin: 30px auto;
             }
         }
 
@@ -544,9 +607,88 @@
                 .replaceAll("'", '&#39;');
         }
 
+        function parseLegacyAttributes(value) {
+            const attributes = {};
+            const pattern = /([^\s=/>]+)\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/gi;
+            let match;
+
+            while ((match = pattern.exec(String(value || ''))) !== null) {
+                attributes[match[1].toLowerCase()] = decodeEntities(match[2] ?? match[3] ?? match[4] ?? '').trim();
+            }
+
+            return attributes;
+        }
+
+        function archiveAlignmentClass(value) {
+            return {
+                alignleft: 'archive-media--left',
+                alignright: 'archive-media--right',
+                aligncenter: 'archive-media--center'
+            }[String(value || '').toLowerCase()] || '';
+        }
+
+        function expandLegacyCaptionShortcodes(value) {
+            return String(value || '').replace(
+                /\[caption\b([^\]]*)\]\s*(<img\b[^>]*>)\s*\[\/caption\]/gi,
+                (_, rawAttributes, imageTag) => {
+                    const attributes = parseLegacyAttributes(rawAttributes);
+                    const alignment = archiveAlignmentClass(attributes.align);
+                    const caption = attributes.caption
+                        ? `<figcaption>${escapeHtml(attributes.caption)}</figcaption>`
+                        : '';
+                    return `<figure class="archive-media ${alignment}">${imageTag}${caption}</figure>`;
+                }
+            );
+        }
+
+        function renderMarkdownLinks(root) {
+            const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+            const textNodes = [];
+            let node;
+
+            while ((node = walker.nextNode())) {
+                if (!node.parentElement?.closest('a, script, style, figcaption')) {
+                    textNodes.push(node);
+                }
+            }
+
+            textNodes.forEach(textNode => {
+                const value = textNode.nodeValue || '';
+                const pattern = /\[([^\]\n]+)\]\(([^)\s]+)\)/g;
+                const fragment = document.createDocumentFragment();
+                let cursor = 0;
+                let match;
+                let changed = false;
+
+                while ((match = pattern.exec(value)) !== null) {
+                    let parsedUrl;
+                    try {
+                        parsedUrl = new URL(match[2], window.location.href);
+                    } catch {
+                        continue;
+                    }
+                    if (!['http:', 'https:', 'mailto:'].includes(parsedUrl.protocol)) continue;
+
+                    fragment.append(document.createTextNode(value.slice(cursor, match.index)));
+                    const anchor = document.createElement('a');
+                    anchor.href = parsedUrl.href;
+                    anchor.textContent = match[1];
+                    anchor.rel = 'noopener noreferrer';
+                    anchor.target = '_blank';
+                    fragment.append(anchor);
+                    cursor = pattern.lastIndex;
+                    changed = true;
+                }
+
+                if (!changed) return;
+                fragment.append(document.createTextNode(value.slice(cursor)));
+                textNode.replaceWith(fragment);
+            });
+        }
+
         function sanitizeArchiveBody(html) {
             const template = document.createElement('template');
-            template.innerHTML = decodeEntities(html);
+            template.innerHTML = expandLegacyCaptionShortcodes(decodeEntities(html));
 
             const blockedTags = ['script', 'style', 'iframe', 'object', 'embed', 'link', 'meta'];
             blockedTags.forEach(tag => {
@@ -586,7 +728,54 @@
                 }
             });
 
+            [...template.content.querySelectorAll('img')]
+                .filter(image => !image.closest('figure'))
+                .forEach(image => {
+                    const figure = document.createElement('figure');
+                    const alignment = ['alignleft', 'alignright', 'aligncenter']
+                        .find(className => image.classList.contains(className));
+                    figure.className = `archive-media ${archiveAlignmentClass(alignment)}`.trim();
+                    image.before(figure);
+                    figure.append(image);
+                });
+
+            template.content.querySelectorAll('figure').forEach(figure => {
+                const previous = figure.previousSibling;
+                const next = figure.nextSibling;
+                if (previous?.nodeType === Node.TEXT_NODE) {
+                    previous.nodeValue = (previous.nodeValue || '').replace(/(?:\r?\n[\t ]*)+$/, '');
+                }
+                if (next?.nodeType === Node.TEXT_NODE) {
+                    next.nodeValue = (next.nodeValue || '').replace(/^(?:[\t ]*\r?\n)+/, '');
+                }
+            });
+
+            renderMarkdownLinks(template.content);
+
             return template.innerHTML;
+        }
+
+        function markUnavailableArchiveImage(image) {
+            const figure = image.closest('figure');
+            if (!figure || figure.classList.contains('archive-media--missing')) return;
+
+            figure.classList.remove('archive-media--left', 'archive-media--right', 'archive-media--center');
+            figure.classList.add('archive-media', 'archive-media--missing');
+            image.remove();
+            if (!figure.querySelector('figcaption')) {
+                const caption = document.createElement('figcaption');
+                caption.textContent = 'This photograph did not survive the archive.';
+                figure.append(caption);
+            }
+        }
+
+        function monitorArchiveImages(root) {
+            root.querySelectorAll('.entry-body img').forEach(image => {
+                image.addEventListener('error', () => markUnavailableArchiveImage(image), { once: true });
+                if (image.complete && image.naturalWidth === 0) {
+                    markUnavailableArchiveImage(image);
+                }
+            });
         }
 
         const ERA_MAP = {
@@ -698,6 +887,7 @@
                     </div>
                     <div class="entry-body">${sanitizeArchiveBody(post.body)}</div>
                 `;
+                monitorArchiveImages(container);
                 container.classList.add('visible');
 
                 // --- THE MOBILE SNAP ---

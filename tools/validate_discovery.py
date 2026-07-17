@@ -15,6 +15,7 @@ from urllib.parse import unquote, urljoin, urlsplit
 ROOT = Path(__file__).resolve().parents[1]
 SITE_URL = "https://outsidetheworld.com"
 GENERATED_DIRS = ("wayback", "poems", "iotd", "fragments")
+FACEBOOK_CDN_PATTERN = re.compile(r"https?://[^\s\"'<>]*fbcdn\.net\b", re.I)
 
 
 class PageParser(HTMLParser):
@@ -69,6 +70,20 @@ def page_files() -> list[Path]:
 
 def main() -> int:
     errors: list[str] = []
+
+    media_audit_paths = [
+        ROOT / "wayback.html",
+        ROOT / "wayback_purified.js",
+        ROOT / "sitemap.xml",
+        *sorted((ROOT / "blogger_posts").glob("*.md")),
+        *sorted((ROOT / "wayback").glob("*.html")),
+    ]
+    for path in media_audit_paths:
+        if not path.exists():
+            continue
+        if FACEBOOK_CDN_PATTERN.search(path.read_text(encoding="utf-8")):
+            errors.append(f"retired Facebook CDN dependency: {path.relative_to(ROOT)}")
+
     sitemap_path = ROOT / "sitemap.xml"
     try:
         sitemap_root = ET.parse(sitemap_path).getroot()
