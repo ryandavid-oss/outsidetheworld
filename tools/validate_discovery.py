@@ -14,6 +14,7 @@ from urllib.parse import unquote, urljoin, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 SITE_URL = "https://outsidetheworld.com"
+SITE_HOSTS = {"outsidetheworld.com", "www.outsidetheworld.com"}
 GENERATED_DIRS = ("wayback", "poems", "iotd", "fragments")
 FACEBOOK_CDN_PATTERN = re.compile(r"https?://[^\s\"'<>]*fbcdn\.net\b", re.I)
 
@@ -50,7 +51,7 @@ class PageParser(HTMLParser):
 
 def public_path_from_url(url: str) -> Path | None:
     parsed = urlsplit(url)
-    if parsed.scheme and parsed.netloc and parsed.netloc != "outsidetheworld.com":
+    if parsed.scheme and parsed.netloc and parsed.netloc.lower() not in SITE_HOSTS:
         return None
     path = unquote(parsed.path)
     if path in {"", "/"}:
@@ -163,7 +164,7 @@ def main() -> int:
             parsed = urlsplit(reference)
             if parsed.scheme in {"mailto", "tel", "data", "blob", "javascript"}:
                 continue
-            if parsed.scheme in {"http", "https"} and parsed.netloc != "outsidetheworld.com":
+            if parsed.scheme in {"http", "https"} and parsed.netloc.lower() not in SITE_HOSTS:
                 continue
             target_url = urljoin(page_url, reference)
             target = public_path_from_url(target_url)

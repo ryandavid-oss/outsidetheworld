@@ -36,6 +36,7 @@ jobs:
         run: |
           python tools/build_discovery.py
           python tools/generate_atom_feed.py
+          python tools/audit_wayback_media.py --local-only --strict
           python tools/validate_discovery.py
 
       - name: Commit generated discovery files

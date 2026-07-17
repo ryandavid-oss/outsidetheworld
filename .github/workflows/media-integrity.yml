@@ -1,0 +1,38 @@
+name: OTW Wayback Media Integrity
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '23 8 * * 1'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: otw-wayback-media-integrity
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Audit local and external Wayback images
+        run: python tools/audit_wayback_media.py --strict --json wayback-media-audit.json
+
+      - name: Preserve audit report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: wayback-media-audit
+          path: wayback-media-audit.json
+          if-no-files-found: warn
+          retention-days: 30

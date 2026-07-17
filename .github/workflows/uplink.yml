@@ -27,6 +27,7 @@ jobs:
         run: |
           python tools/purify_v5.py
           python tools/build_discovery.py
+          python tools/audit_wayback_media.py --local-only --strict
           python tools/validate_discovery.py
 
       - name: Commit and Push Changes
