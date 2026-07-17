@@ -161,8 +161,9 @@
             padding: 60px;
             overflow-y: auto;
             display: flex;
-            justify-content: center;
-            align-items: flex-start;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
         }
 
         .glass-card {
@@ -183,6 +184,20 @@
         .glass-card.visible {
             opacity: 1;
             transform: translateY(0);
+        }
+
+        .wayback-footer {
+            box-sizing: border-box;
+            width: 100%;
+            max-width: 750px;
+            padding: 18px 20px 28px;
+            text-align: center;
+            color: rgba(224, 224, 224, 0.48);
+            font-family: 'Fira Code', monospace;
+            font-size: 0.66rem;
+            letter-spacing: 0.12em;
+            line-height: 1.9;
+            text-transform: uppercase;
         }
 
         .entry-title {
@@ -417,7 +432,7 @@
                 INITIALIZING_WAYBACK_UPLINK...
             </div>
         </div>
-        <div style="padding: 18px 20px 28px; text-align: center; color: rgba(224, 224, 224, 0.48); font-family: 'Fira Code', monospace; font-size: 0.66rem; letter-spacing: 0.12em; line-height: 1.9; text-transform: uppercase;">
+        <div class="wayback-footer">
             <a href="privacy.html" style="color: inherit; text-decoration: none;">Privacy</a>
             <span aria-hidden="true">&nbsp;|&nbsp;</span>
             <a href="terms.html" style="color: inherit; text-decoration: none;">Terms</a>
