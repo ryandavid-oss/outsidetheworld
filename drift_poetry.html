@@ -358,6 +358,7 @@
 
     .poem-card {
       max-width: 920px;
+      scroll-margin-top: calc(var(--safe-top) + 12px);
       padding: clamp(28px, 5vw, 54px);
       border-radius: 30px;
       border: 1px solid rgba(255,255,255,0.1);
@@ -677,10 +678,7 @@
       Array.from(fileList.querySelectorAll('.file-item')).forEach((button) => {
         button.addEventListener('click', () => {
           const index = Number(button.dataset.index);
-          displayPoem(index);
-          if (window.innerWidth <= 1040) {
-            document.querySelector('.stage').scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
+          displayPoem(index, { focusPoemOnMobile: true });
         });
       });
 
@@ -761,7 +759,12 @@
       const poem = livingVerse[index];
       if (!poem) return;
 
-      const { replaceUrl = false, updateUrl = true } = options;
+      const {
+        focusPoemOnMobile = false,
+        replaceUrl = false,
+        scrollBehavior = 'smooth',
+        updateUrl = true
+      } = options;
       activePoemIndex = index;
 
       document.body.style.background = `
@@ -786,6 +789,9 @@
           <div class="poem-note">The Drift holds pieces that are still in motion: recovered poems, newer poems, and fragments of a future book not yet ready to become stone.</div>
         `;
         poemCard.classList.add('visible');
+        if (focusPoemOnMobile && window.innerWidth <= 1040) {
+          poemCard.scrollIntoView({ behavior: scrollBehavior, block: 'start' });
+        }
       }, 120);
 
       Array.from(fileList.querySelectorAll('.file-item')).forEach((item) => {
@@ -820,7 +826,11 @@
 
       if (requestedIndex >= 0) {
         applyFilterForPoem(requestedIndex);
-        displayPoem(requestedIndex, { replaceUrl: true });
+        displayPoem(requestedIndex, {
+          focusPoemOnMobile: true,
+          replaceUrl: true,
+          scrollBehavior: 'auto'
+        });
         return;
       }
 
@@ -835,7 +845,11 @@
       const requestedIndex = findPoemIndexById(requestedPoemId);
       if (requestedIndex >= 0) {
         applyFilterForPoem(requestedIndex);
-        displayPoem(requestedIndex, { replaceUrl: true });
+        displayPoem(requestedIndex, {
+          focusPoemOnMobile: true,
+          replaceUrl: true,
+          scrollBehavior: 'auto'
+        });
       }
     });
   </script>
