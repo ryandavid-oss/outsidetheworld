@@ -873,6 +873,72 @@
             background: rgba(99, 149, 238, 0.075);
         }
 
+        @media (min-width: 901px) {
+            .site-utilities [data-utility-dropdown-trigger]::after {
+                content: "";
+                width: 0.36rem;
+                height: 0.36rem;
+                margin: -0.18rem 0 0 0.12rem;
+                border-right: 1px solid currentColor;
+                border-bottom: 1px solid currentColor;
+                opacity: 0.58;
+                transform: rotate(45deg);
+                transition: transform var(--speed-fast) var(--ease-editorial), opacity var(--speed-fast) ease;
+            }
+
+            .site-utilities [data-utility-dropdown-trigger][aria-expanded="true"]::after {
+                margin-top: 0.18rem;
+                opacity: 1;
+                transform: rotate(225deg);
+            }
+
+            .search-popover,
+            .destination-popover {
+                position: fixed;
+                inset: var(--utility-popover-top, 5rem) var(--utility-popover-right, 1rem) auto auto;
+                margin: 0;
+                max-height: min(44rem, var(--utility-popover-max-height, 72svh));
+                transform: translateY(-0.45rem) scale(0.985);
+                transform-origin: top right;
+                opacity: 0;
+                box-shadow: 0 24px 70px rgba(0, 0, 0, 0.58), inset 0 1px 0 rgba(160, 190, 245, 0.08);
+                transition:
+                    opacity 160ms ease,
+                    transform 190ms var(--ease-editorial),
+                    display 190ms allow-discrete,
+                    overlay 190ms allow-discrete;
+            }
+
+            .search-popover {
+                width: min(40rem, calc(100vw - 1.5rem));
+            }
+
+            .destination-popover {
+                width: min(48rem, calc(100vw - 1.5rem));
+            }
+
+            .search-popover:popover-open,
+            .destination-popover:popover-open {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+
+            @starting-style {
+                .search-popover:popover-open,
+                .destination-popover:popover-open {
+                    opacity: 0;
+                    transform: translateY(-0.45rem) scale(0.985);
+                }
+            }
+
+            .search-popover::backdrop,
+            .destination-popover::backdrop {
+                background: transparent;
+                -webkit-backdrop-filter: none;
+                backdrop-filter: none;
+            }
+        }
+
         .front-page {
             display: grid;
             gap: clamp(0.9rem, 1.8vw, 1.35rem);
@@ -2557,8 +2623,8 @@
                         <span class="listening-trigger__full">Live Listening</span>
                         <span class="listening-trigger__short" aria-hidden="true">Live</span>
                     </button>
-                    <button type="button" popovertarget="search-panel">Search</button>
-                    <button type="button" popovertarget="destinations">All destinations</button>
+                    <button type="button" popovertarget="search-panel" data-utility-dropdown-trigger aria-controls="search-panel" aria-expanded="false">Search</button>
+                    <button type="button" popovertarget="destinations" data-utility-dropdown-trigger aria-controls="destinations" aria-expanded="false">All destinations</button>
                 </nav>
 
                 <button class="mobile-menu-button" type="button" popovertarget="mobile-menu" aria-label="Open site menu">
@@ -4197,6 +4263,52 @@
         }
 
         initPopoverEscapeDismissal();
+
+        function initUtilityDropdowns() {
+            const desktopQuery = window.matchMedia('(min-width: 901px)');
+            const triggers = Array.from(document.querySelectorAll('.site-utilities [data-utility-dropdown-trigger]'));
+
+            const positionPanel = (trigger, panel) => {
+                if (!desktopQuery.matches) return;
+                const triggerRect = trigger.getBoundingClientRect();
+                const edge = 12;
+                const top = Math.round(triggerRect.bottom + 10);
+                const right = Math.max(edge, Math.round(window.innerWidth - triggerRect.right));
+                const availableHeight = Math.max(240, Math.round(window.innerHeight - top - edge));
+                panel.style.setProperty('--utility-popover-top', `${top}px`);
+                panel.style.setProperty('--utility-popover-right', `${right}px`);
+                panel.style.setProperty('--utility-popover-max-height', `${availableHeight}px`);
+            };
+
+            const repositionOpenPanels = () => {
+                triggers.forEach((trigger) => {
+                    const panel = document.getElementById(trigger.getAttribute('popovertarget') || '');
+                    if (panel?.matches(':popover-open')) positionPanel(trigger, panel);
+                });
+            };
+
+            triggers.forEach((trigger) => {
+                const panel = document.getElementById(trigger.getAttribute('popovertarget') || '');
+                if (!panel) return;
+
+                trigger.addEventListener('click', () => positionPanel(trigger, panel));
+                panel.addEventListener('beforetoggle', (event) => {
+                    if (event.newState === 'open') positionPanel(trigger, panel);
+                });
+                panel.addEventListener('toggle', () => {
+                    const isOpen = panel.matches(':popover-open');
+                    trigger.setAttribute('aria-expanded', String(isOpen));
+                    if (isOpen && desktopQuery.matches && panel.id === 'search-panel') {
+                        window.requestAnimationFrame(() => document.getElementById('siteSearchInput')?.focus());
+                    }
+                });
+            });
+
+            window.addEventListener('resize', repositionOpenPanels, { passive: true });
+            window.addEventListener('scroll', repositionOpenPanels, { passive: true });
+        }
+
+        initUtilityDropdowns();
 
         function buildListeningArtistUrl(artistName) {
             const artist = String(artistName || '').trim();
