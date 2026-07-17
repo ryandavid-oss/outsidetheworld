@@ -1,11 +1,16 @@
 import os
 import json
 import re
+import hashlib
 from datetime import datetime, timedelta
 
 # Settings
 posts_folder = 'blogger_posts'
 manifest_file = 'manifest.json'
+
+PRIVATE_SOURCE_HASHES = {
+    "e83d7bbca16ee63b2efbb00e906e5395a144c1131a649f84ae39c38d04ccbfe5",
+}
 
 az_time = datetime.utcnow() - timedelta(hours=7)
 current_date_str = az_time.strftime("%Y-%m-%d")
@@ -13,7 +18,8 @@ current_date_str = az_time.strftime("%Y-%m-%d")
 residue_list = []
 
 for filename in os.listdir(posts_folder):
-    if filename.endswith(".md"):
+    source_hash = hashlib.sha256(filename.encode("utf-8")).hexdigest()
+    if filename.endswith(".md") and source_hash not in PRIVATE_SOURCE_HASHES:
         parts = filename.replace(".md", "").split("-")
         
         if len(parts) >= 4:

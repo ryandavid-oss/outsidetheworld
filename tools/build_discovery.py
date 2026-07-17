@@ -32,6 +32,12 @@ AUTHOR_NAME = "RyanDavid Burningham"
 AUTHOR_URL = f"{SITE_URL}/ryandavid-burningham.html"
 DEFAULT_SOCIAL_IMAGE = f"{SITE_URL}/Images/og/otw-feed-1200x630.jpg"
 TODAY = datetime.now().date().isoformat()
+PRIVATE_SOURCE_HASHES = {
+    "e83d7bbca16ee63b2efbb00e906e5395a144c1131a649f84ae39c38d04ccbfe5",
+}
+PRIVATE_DISCOVERY_TOMBSTONES = (
+    "wayback/2009-08-10-private-record.html",
+)
 
 ROOT_PAGES = [
     ("index.html", 1.0),
@@ -181,6 +187,13 @@ def legacy_image_attributes(tag: str) -> dict[str, str]:
     return attributes
 
 
+def canonical_local_asset_path(value: str) -> str:
+    parts = list(Path(value).parts)
+    if parts and parts[0].casefold() == "images":
+        parts[0] = "Images"
+    return Path(*parts).as_posix() if parts else ""
+
+
 def normalize_legacy_image_source(value: str, *, page_relative: bool = False) -> str:
     raw = html.unescape(str(value or "")).strip().replace("\\", "/")
     if not raw or re.match(r"^(?:javascript|data|blob):", raw, re.I):
@@ -193,7 +206,11 @@ def normalize_legacy_image_source(value: str, *, page_relative: bool = False) ->
         if parsed.netloc.lower() in {"outsidetheworld.com", "www.outsidetheworld.com"}:
             raw_path = parsed.path.lstrip("/")
             local_path = next(
-                (candidate for candidate in (raw_path, unquote(raw_path)) if candidate and (ROOT / candidate).is_file()),
+                (
+                    canonical_local_asset_path(candidate)
+                    for candidate in (raw_path, unquote(raw_path))
+                    if candidate and (ROOT / canonical_local_asset_path(candidate)).is_file()
+                ),
                 "",
             )
             if local_path:
@@ -210,7 +227,14 @@ def normalize_legacy_image_source(value: str, *, page_relative: bool = False) ->
         encoded_path.removeprefix("./").lstrip("/"),
         raw_path.removeprefix("./").lstrip("/"),
     )
-    local_path = next((candidate for candidate in candidates if candidate and (ROOT / candidate).is_file()), "")
+    local_path = next(
+        (
+            canonical_local_asset_path(candidate)
+            for candidate in candidates
+            if candidate and (ROOT / canonical_local_asset_path(candidate)).is_file()
+        ),
+        "",
+    )
     if not local_path:
         return ""
     encoded = quote(local_path, safe="/+@,;=-_.()")
@@ -302,6 +326,10 @@ def load_records() -> dict[str, list[DiscoveryRecord]]:
     wayback: list[DiscoveryRecord] = []
     used_paths: set[str] = set()
     for index, item in enumerate(wayback_data):
+        source_name = str(item.get("file") or "")
+        source_hash = hashlib.sha256(source_name.encode("utf-8")).hexdigest()
+        if source_hash in PRIVATE_SOURCE_HASHES:
+            continue
         stem = Path(str(item.get("file") or f"wayback-{index + 1}")).stem
         base = slugify(stem, f"wayback-{index + 1}")[:150]
         path = f"wayback/{base}.html"
@@ -575,13 +603,24 @@ def write_records(groups: dict[str, list[DiscoveryRecord]]) -> None:
         (record for records in groups.values() for record in records),
         key=lambda record: record.path,
     )
+    tombstones = [
+        DiscoveryRecord(path=path, title="", description="", kind="wayback", source_path="__private_tombstone__")
+        for path in PRIVATE_DISCOVERY_TOMBSTONES
+    ]
 
     def select_dig_target(record: DiscoveryRecord) -> DiscoveryRecord | None:
-        candidates = [candidate for candidate in all_records if candidate.kind != record.kind]
+        candidates = sorted(
+            (candidate for candidate in (*all_records, *tombstones) if candidate.kind != record.kind),
+            key=lambda candidate: candidate.path,
+        )
         if not candidates:
             return None
         digest = hashlib.sha256(record.path.encode("utf-8")).digest()
-        return candidates[int.from_bytes(digest[:8], "big") % len(candidates)]
+        selected = candidates[int.from_bytes(digest[:8], "big") % len(candidates)]
+        if selected.source_path != "__private_tombstone__":
+            return selected
+        public_candidates = [candidate for candidate in candidates if candidate.source_path != "__private_tombstone__"]
+        return public_candidates[int.from_bytes(digest[8:16], "big") % len(public_candidates)] if public_candidates else None
 
     for kind, records in groups.items():
         output_name = {

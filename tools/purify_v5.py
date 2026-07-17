@@ -1,11 +1,41 @@
 import os
 import json
 import re
+import hashlib
 
 # --- CONFIG ---
 # Ensure these match your actual folder names in GitHub
 posts_folder = 'blogger_posts' 
 output_file = 'wayback_purified.js'
+
+# Public builds must never republish records whose source-name hash is listed here.
+PRIVATE_SOURCE_HASHES = {
+    "e83d7bbca16ee63b2efbb00e906e5395a144c1131a649f84ae39c38d04ccbfe5",
+}
+FORCE_REFRESH_SOURCE_HASHES = {
+    "829d2474e4238de680e0e934cd14b8a048dbcdaf29348269752e04f5dca17e13",
+}
+
+
+def is_public_source(filename):
+    digest = hashlib.sha256(filename.encode("utf-8")).hexdigest()
+    return digest not in PRIVATE_SOURCE_HASHES
+
+
+def load_curated_entries():
+    if not os.path.exists(output_file):
+        return {}
+    try:
+        with open(output_file, 'r', encoding='utf-8') as source:
+            text = source.read()
+        records = json.loads(text[text.index('['):text.rindex(']') + 1])
+        return {
+            str(record.get('file')): record
+            for record in records
+            if isinstance(record, dict) and record.get('file')
+        }
+    except (OSError, ValueError, json.JSONDecodeError):
+        return {}
 
 def goldilocks_purify():
     # 1. BOT-CHECK: Create folder if it's missing (prevents crash)
@@ -18,7 +48,10 @@ def goldilocks_purify():
     purified_data = []
     
     # 2. FILE-CHECK: Look for .md files
-    files = [f for f in os.listdir(posts_folder) if f.endswith('.md')]
+    files = [
+        f for f in os.listdir(posts_folder)
+        if f.endswith('.md') and is_public_source(f)
+    ]
     
     if not files:
         print("EMPTY_FEED: No markdown files found in the posts folder.")
@@ -26,8 +59,14 @@ def goldilocks_purify():
 
     print(f"PROCESSING_BATCH: {len(files)} entries found.")
 
+    curated_entries = load_curated_entries()
+
     for filename in files:
         file_path = os.path.join(posts_folder, filename)
+        source_hash = hashlib.sha256(filename.encode("utf-8")).hexdigest()
+        if filename in curated_entries and source_hash not in FORCE_REFRESH_SOURCE_HASHES:
+            purified_data.append(curated_entries[filename])
+            continue
         
         try:
             with open(file_path, 'r', encoding='utf-8') as f:
