@@ -250,12 +250,15 @@
         }
 
         .artifact-card {
+            display: block;
             background: #111;
             border: 1px solid rgba(255, 255, 255, 0.06);
             aspect-ratio: 1/1;
             overflow: hidden;
             cursor: pointer;
             position: relative;
+            color: inherit;
+            text-decoration: none;
         }
 
         .artifact-card img {
@@ -512,7 +515,7 @@
 
             // If you want iMessage preview to always show today:
             // (iMessage caches hard; but this helps browsers)
-            const absoluteImage = 'https://outsidetheworld.com/' + item.image.replace(/^\//, '');
+            const absoluteImage = new URL(item.image, window.location.origin).toString();
             document.querySelector('meta[property="og:image"]')?.setAttribute('content', absoluteImage);
             document.querySelector('meta[property="og:image:alt"]')?.setAttribute('content', heroImg.alt);
             document.querySelector('meta[name="twitter:image"]')?.setAttribute('content', absoluteImage);
@@ -525,13 +528,13 @@
             items.forEach((item) => {
                 if (item.date === heroDate) return; // skip the hero item
 
-                const card = document.createElement('div');
+                const card = document.createElement('a');
                 card.className = 'artifact-card';
+                card.href = `iotd/${item.date}-${String(item.title || 'image').toLowerCase().replace(/&/g, ' and ').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '')}.html`;
                 card.innerHTML = `
       <img src="${item.image}" loading="lazy" alt="${item.title || 'archive image'}">
       <div class="artifact-tag">${(item.date || '').replaceAll('-', '_')}</div>
     `;
-                card.onclick = () => window.open(item.image, '_blank', 'noopener');
                 grid.appendChild(card);
             });
         }

@@ -4,7 +4,7 @@ from __future__ import annotations
 import html
 import json
 import re
-from datetime import datetime, time
+from datetime import datetime, time, timezone
 from pathlib import Path
 from urllib.parse import quote
 from zoneinfo import ZoneInfo
@@ -18,6 +18,8 @@ OUTPUT = ROOT / "atom.xml"
 
 SITE_URL = "https://outsidetheworld.com"
 FEED_URL = f"{SITE_URL}/atom.xml"
+AUTHOR_NAME = "RyanDavid Burningham"
+AUTHOR_URL = f"{SITE_URL}/ryandavid-burningham.html"
 SITE_TITLE = "Outside The World"
 SITE_SUBTITLE = "Blog posts and fragments from Outside The World."
 PHOENIX = ZoneInfo("America/Phoenix")
@@ -123,8 +125,24 @@ def build_fragment_title(fragment: dict) -> str:
     return f"{title}..." if len(words) > 7 else title
 
 
+def is_founder_fragment(fragment: dict) -> bool:
+    author = fragment.get("author")
+    if isinstance(author, dict):
+        author = author.get("name") or author.get("display_name") or ""
+    author_id = str(fragment.get("author_id") or "").strip().lower()
+    handle = str(fragment.get("author_handle") or "").strip().lower().lstrip("@")
+    name = str(author or fragment.get("author_name") or "").strip().lower()
+    if not author_id and not handle and not name:
+        return True
+    return (
+        author_id in {"ryan", "outsidetheworld"}
+        or handle == "outsidetheworld"
+        or name in {"the_ryandavid", "ryandavid", "ryan david", "ryandavid burningham", "rylee burningham"}
+    )
+
+
 def format_updated(dt: datetime) -> str:
-    return dt.astimezone().replace(microsecond=0).isoformat()
+    return dt.astimezone(timezone.utc).replace(microsecond=0).isoformat()
 
 
 def parse_narrative_date(raw: str) -> datetime:
@@ -166,9 +184,11 @@ def build_entries() -> list[dict]:
         )
 
     for fragment in fragments:
+        if not is_founder_fragment(fragment):
+            continue
         updated = parse_fragment_date(fragment["timestamp"])
         fragment_id = build_fragment_id(fragment)
-        url = f"{SITE_URL}/fragments.html?entry={quote(fragment_id)}"
+        url = f"{SITE_URL}/fragments/{quote(fragment_id)}.html"
         tag = str(fragment.get("tag", "Fragment")).replace("_", " ").title()
         author = fragment.get("author")
         title = build_fragment_title(fragment)
@@ -201,8 +221,8 @@ def write_feed(entries: list[dict]) -> None:
     ET.SubElement(feed, f"{{{ATOM_NS}}}link", {"href": SITE_URL})
     ET.SubElement(feed, f"{{{ATOM_NS}}}link", {"href": FEED_URL, "rel": "self", "type": "application/atom+xml"})
     author = ET.SubElement(feed, f"{{{ATOM_NS}}}author")
-    add_text(author, "name", "RyanDavid")
-    add_text(author, "uri", SITE_URL)
+    add_text(author, "name", AUTHOR_NAME)
+    add_text(author, "uri", AUTHOR_URL)
 
     for item in entries:
         entry = ET.SubElement(feed, f"{{{ATOM_NS}}}entry")

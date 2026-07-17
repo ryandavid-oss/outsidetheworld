@@ -691,7 +691,7 @@ def test_article_shell_has_home_identity_schema_and_consistent_section_levels():
     assert 'href="../index.html" aria-label="Outside The World home"' in share_html
     assert 'src="/Images/Equal.svg"' in share_html
     assert 'src="/Images/Equal_dark.svg"' in share_html
-    assert 'By <strong>Rylee Burningham</strong>' in share_html
+    assert 'By <strong><a href="../ryandavid-burningham.html">Rylee Burningham</a></strong>' in share_html
     assert '<script type="application/ld+json">' in share_html
     assert '"@type": "Article"' in share_html
     assert '<span class="entry-section-index">II.</span> <span class="entry-section-title">Second</span>' in share_html

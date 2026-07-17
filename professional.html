@@ -776,6 +776,18 @@
             overflow-wrap: anywhere;
         }
 
+        .signature-name a {
+            color: inherit;
+            text-decoration-color: rgba(160, 190, 245, 0.38);
+            text-decoration-thickness: 1px;
+            text-underline-offset: 0.22em;
+        }
+
+        .signature-name a:hover,
+        .signature-name a:focus-visible {
+            color: var(--brand-light-blue);
+        }
+
         .signature-meta {
             margin: 8px 0 0;
             font-family: var(--font-mono);
@@ -1163,7 +1175,13 @@
     "@type": "Organization",
     "name": "Outside the World is New, LLC",
     "url": "https://outsidetheworld.com",
-    "logo": "https://outsidetheworld.com/Images/Equal.svg"
+    "logo": "https://outsidetheworld.com/Images/Equal.svg",
+    "founder": {
+      "@type": "Person",
+      "@id": "https://outsidetheworld.com/ryandavid-burningham.html#person",
+      "name": "RyanDavid Burningham",
+      "url": "https://outsidetheworld.com/ryandavid-burningham.html"
+    }
   }
 }
     </script>
@@ -1449,7 +1467,7 @@
                                     <img alt="RyanDavid Burningham" src="Images/Profile.jpg" loading="lazy" decoding="async" />
                                     <div>
                                         <p class="signature-name">
-                                            RyanDavid 'Rylee' Burningham
+                                            <a href="ryandavid-burningham.html">RyanDavid Burningham</a>
                                         </p>
                                         <p class="signature-meta">
                                             STRATEGIC_OVERSIGHT // ID_8402.RYN

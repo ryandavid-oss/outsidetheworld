@@ -18,6 +18,7 @@ The helper will:
 2. Validate the manifest
 3. Fail if the date or image already exists
 4. Fail if the image file is missing
+5. Rebuild the permanent image record and sitemap
 
 ## Recommended flow
 

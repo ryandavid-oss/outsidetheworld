@@ -13,7 +13,7 @@
     <meta name="mobile-web-app-capable" content="yes" />
 
     <title>Outside The World &mdash; Writing, Images, Fragments, and Work</title>
-    <meta name="description" content="Essays, poems, images, fragments, and professional work by Rylee Burningham." />
+    <meta name="description" content="Essays, poems, images, fragments, and professional work by RyanDavid Burningham." />
     <link rel="canonical" href="https://outsidetheworld.com/" />
     <link rel="alternate" type="application/atom+xml" title="Outside The World Atom Feed" href="https://outsidetheworld.com/atom.xml" />
     <link rel="manifest" href="site.webmanifest" />
@@ -27,7 +27,7 @@
     <meta property="og:site_name" content="Outside The World" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:title" content="Outside The World" />
-    <meta property="og:description" content="Essays, poems, images, fragments, and professional work by Rylee Burningham." />
+    <meta property="og:description" content="Essays, poems, images, fragments, and professional work by RyanDavid Burningham." />
     <meta property="og:image" content="https://outsidetheworld.com/Images/og/otw-feed-1200x630.jpg" />
     <meta property="og:image:secure_url" content="https://outsidetheworld.com/Images/og/otw-feed-1200x630.jpg" />
     <meta property="og:image:type" content="image/jpeg" />
@@ -38,7 +38,7 @@
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Outside The World" />
-    <meta name="twitter:description" content="Essays, poems, images, fragments, and professional work by Rylee Burningham." />
+    <meta name="twitter:description" content="Essays, poems, images, fragments, and professional work by RyanDavid Burningham." />
     <meta name="twitter:image" content="https://outsidetheworld.com/Images/og/otw-feed-1200x630.jpg" />
     <meta name="twitter:image:alt" content="Outside The World front page." />
 
@@ -968,6 +968,14 @@
                 linear-gradient(180deg, rgba(16, 17, 20, 0.2), rgba(16, 17, 20, 0.95) 4.7rem, rgba(16, 17, 20, 0.88));
         }
 
+        @media (min-width: 1001px) {
+            .lead-copy {
+                margin-top: clamp(-8.2rem, -10vw, -6.2rem);
+                background:
+                    linear-gradient(180deg, rgba(16, 17, 20, 0.06), rgba(16, 17, 20, 0.88) 5.7rem, rgba(16, 17, 20, 0.94) 8rem, rgba(16, 17, 20, 0.88));
+            }
+        }
+
         .eyebrow {
             display: inline-flex;
             width: fit-content;
@@ -1020,6 +1028,117 @@
             font-family: var(--font-serif);
             font-size: clamp(1.05rem, 1.45vw, 1.3rem);
             line-height: 1.34;
+        }
+
+        .lead-story[data-content-type="drift"] .lead-dek {
+            width: min(100%, 38rem);
+            font-family: var(--font-sans);
+        }
+
+        .lead-poem-complete {
+            display: block;
+            max-width: 34rem;
+            color: var(--faint);
+            font-family: var(--font-serif);
+            font-size: clamp(1.02rem, 1.35vw, 1.2rem);
+            line-height: 1.48;
+            white-space: pre-line;
+        }
+
+        .lead-poem-fingerprint {
+            display: grid;
+            grid-template-columns: minmax(8rem, 17rem) auto;
+            align-items: end;
+            gap: clamp(0.85rem, 1.8vw, 1.35rem);
+            width: min(100%, 34rem);
+        }
+
+        .lead-poem-fingerprint__lines {
+            display: grid;
+            gap: 0.34rem;
+            max-height: 5.2rem;
+            overflow: hidden;
+            padding: 0.15rem 0;
+            -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 82%, transparent 100%);
+            mask-image: linear-gradient(180deg, #000 0%, #000 82%, transparent 100%);
+        }
+
+        .lead-poem-fingerprint__stanza {
+            display: grid;
+            gap: 0.13rem;
+        }
+
+        .lead-poem-fingerprint__line {
+            display: block;
+            width: var(--line-width);
+            height: 1px;
+            max-width: 100%;
+            background: linear-gradient(90deg, rgba(160, 190, 245, 0.64), rgba(145, 175, 179, 0.38));
+        }
+
+        .lead-poem-fingerprint__structure {
+            padding-bottom: 0.08rem;
+            color: var(--muted);
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            letter-spacing: 0.08em;
+            line-height: 1.4;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .poem-card-summary {
+            font-family: var(--font-sans);
+        }
+
+        .poem-card-complete {
+            display: block;
+            color: var(--faint);
+            font-family: var(--font-serif);
+            line-height: 1.48;
+            white-space: pre-line;
+        }
+
+        .poem-card-fingerprint {
+            display: grid;
+            grid-template-columns: minmax(4.75rem, 7.5rem) auto;
+            align-items: end;
+            gap: 0.75rem;
+            width: min(100%, 20rem);
+        }
+
+        .poem-card-fingerprint__lines {
+            display: grid;
+            gap: 0.22rem;
+            max-height: 2.65rem;
+            overflow: hidden;
+            padding-block: 0.1rem;
+            -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 80%, transparent 100%);
+            mask-image: linear-gradient(180deg, #000 0%, #000 80%, transparent 100%);
+        }
+
+        .poem-card-fingerprint__stanza {
+            display: grid;
+            gap: 0.11rem;
+        }
+
+        .poem-card-fingerprint__line {
+            display: block;
+            width: var(--line-width);
+            height: 1px;
+            max-width: 100%;
+            background: linear-gradient(90deg, rgba(160, 190, 245, 0.58), rgba(145, 175, 179, 0.3));
+        }
+
+        .poem-card-fingerprint__structure {
+            padding-bottom: 0.02rem;
+            color: var(--muted);
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            letter-spacing: 0.07em;
+            line-height: 1.35;
+            text-transform: uppercase;
+            white-space: nowrap;
         }
 
         .story-meta {
@@ -1723,31 +1842,67 @@
 
         .image-band {
             grid-template-columns: repeat(12, minmax(0, 1fr));
+            grid-auto-flow: dense;
+            align-items: stretch;
             gap: clamp(0.65rem, 1.2vw, 0.95rem);
         }
 
         .image-band .editorial-entry {
-            grid-column: span 2;
+            grid-column: span 4;
         }
 
         .image-band .editorial-entry:first-child {
-            grid-column: span 6;
+            grid-column: span 7;
+            grid-row: span 2;
+            grid-template-rows: minmax(0, 1fr) auto;
+        }
+
+        .image-band .editorial-entry:nth-child(2),
+        .image-band .editorial-entry:nth-child(3) {
+            grid-column: span 5;
         }
 
         .image-band .editorial-entry:first-child h3 {
             font-size: clamp(1.45rem, 2.5vw, 2.4rem);
         }
 
-        .image-band .editorial-entry:not(:first-child) h3 {
+        .image-band .editorial-entry:nth-child(2) h3,
+        .image-band .editorial-entry:nth-child(3) h3 {
+            font-size: clamp(1.05rem, 1.55vw, 1.4rem);
+        }
+
+        .image-band .editorial-entry:nth-child(n + 4) h3 {
             font-size: clamp(0.95rem, 1.3vw, 1.2rem);
         }
 
+        .image-band .editorial-entry:nth-child(n + 4) p {
+            display: none;
+        }
+
+        .image-band .editorial-entry:first-child .editorial-media {
+            min-height: 100%;
+        }
+
         .image-band .editorial-entry:first-child .editorial-media img {
+            height: 100%;
+            min-height: 100%;
+            aspect-ratio: auto;
+        }
+
+        .image-band .editorial-entry:nth-child(2) .editorial-media img,
+        .image-band .editorial-entry:nth-child(3) .editorial-media img {
+            aspect-ratio: 16 / 9;
+        }
+
+        .image-band .editorial-entry:nth-child(n + 4) .editorial-media img {
             aspect-ratio: 4 / 3;
         }
 
-        .image-band .editorial-entry:not(:first-child) .editorial-media img {
-            aspect-ratio: 1 / 1;
+        .image-band .editorial-media img[data-image-fit="contain"] {
+            object-fit: contain;
+            background:
+                radial-gradient(circle at 50% 38%, rgba(99, 149, 238, 0.12), transparent 54%),
+                #08090b;
         }
 
         .drift-silhouette {
@@ -2063,9 +2218,19 @@
             }
 
             .image-band .editorial-entry,
-            .image-band .editorial-entry:first-child {
+            .image-band .editorial-entry:nth-child(n) {
                 grid-column: span 6;
                 grid-row: auto;
+            }
+
+            .image-band .editorial-entry:first-child {
+                grid-template-rows: auto;
+            }
+
+            .image-band .editorial-entry:first-child .editorial-media img {
+                height: auto;
+                min-height: 0;
+                aspect-ratio: 4 / 3;
             }
 
             .drift-grid {
@@ -2133,10 +2298,14 @@
 
             .editorial-grid .editorial-entry,
             .editorial-grid .editorial-entry:nth-child(1),
-            .editorial-grid .editorial-entry:nth-child(2),
-            .image-band .editorial-entry,
-            .image-band .editorial-entry:first-child {
+                .editorial-grid .editorial-entry:nth-child(2),
+                .image-band .editorial-entry,
+                .image-band .editorial-entry:nth-child(n) {
                 grid-column: auto;
+            }
+
+            .image-band .editorial-entry:nth-child(n + 4) p {
+                display: block;
             }
 
             .compact-writing .editorial-entry {
@@ -2259,7 +2428,7 @@
       "@id": "https://outsidetheworld.com/#website",
       "name": "Outside The World",
       "url": "https://outsidetheworld.com/",
-      "description": "Essays, poems, images, fragments, and professional work by Rylee Burningham.",
+      "description": "Essays, poems, images, fragments, and professional work by RyanDavid Burningham.",
       "publisher": {
         "@id": "https://outsidetheworld.com/#organization"
       }
@@ -2276,26 +2445,36 @@
         "height": 347
       },
       "founder": {
-        "@id": "https://outsidetheworld.com/#person"
+        "@id": "https://outsidetheworld.com/ryandavid-burningham.html#person"
       }
     },
     {
       "@type": "Person",
-      "@id": "https://outsidetheworld.com/#person",
-      "name": "Rylee Burningham",
-      "url": "https://outsidetheworld.com/"
+      "@id": "https://outsidetheworld.com/ryandavid-burningham.html#person",
+      "name": "RyanDavid Burningham",
+      "alternateName": [
+        "RD Burningham",
+        "Rylee Burningham",
+        "RyanDavid",
+        "The_RyanDavid"
+      ],
+      "url": "https://outsidetheworld.com/ryandavid-burningham.html",
+      "image": "https://outsidetheworld.com/Images/Profile.jpg",
+      "sameAs": [
+        "https://www.linkedin.com/in/ryandavid-burningham-711b4856/"
+      ]
     },
     {
       "@type": "WebPage",
       "@id": "https://outsidetheworld.com/#webpage",
       "url": "https://outsidetheworld.com/",
       "name": "Outside The World \u2014 Writing, Images, Fragments, and Work",
-      "description": "Essays, poems, images, fragments, and professional work by Rylee Burningham.",
+      "description": "Essays, poems, images, fragments, and professional work by RyanDavid Burningham.",
       "isPartOf": {
         "@id": "https://outsidetheworld.com/#website"
       },
       "author": {
-        "@id": "https://outsidetheworld.com/#person"
+        "@id": "https://outsidetheworld.com/ryandavid-burningham.html#person"
       },
       "primaryImageOfPage": {
         "@type": "ImageObject",
@@ -2478,6 +2657,7 @@
                     <section aria-labelledby="destinations-read">
                         <h2 id="destinations-read">Personal</h2>
                         <a href="residue_archive.html">Archive</a>
+                        <a href="threads.html">Threads</a>
                         <a href="poetry.html">Poems</a>
                         <a href="fragments.html">Fragments</a>
                         <a href="drift_poetry.html">The Drift</a>
@@ -2498,6 +2678,7 @@
                     </section>
                     <section aria-labelledby="destinations-meta">
                         <h2 id="destinations-meta">Meta</h2>
+                        <a href="ryandavid-burningham.html">About RyanDavid</a>
                         <a href="atom.xml">Atom Feed</a>
                         <a href="privacy.html">Privacy</a>
                         <a href="terms.html">Terms</a>
@@ -2520,8 +2701,6 @@
                             <p class="lead-dek" data-frontpage-description>The Skipping Stone</p>
                             <div class="story-meta" data-frontpage-meta>
                                 <span>July 14, 2026</span>
-                                <span>Essay</span>
-                                <span>Current narrative</span>
                             </div>
                             <a class="story-link" data-frontpage-cta href="archive/2026-07-14-the-midweek-weather.html">Continue reading The Midweek Weather &rarr;</a>
                         </div>
@@ -3003,7 +3182,7 @@
             ],
             sections: [
                 { slot: 'recentWriting', type: 'essay', mode: 'latest-unused', count: 6, layout: 'editorial-grid' },
-                { slot: 'imageBand', type: 'iotd', mode: 'latest-unused', count: 4, layout: 'image-band' },
+                { slot: 'imageBand', type: 'iotd', mode: 'latest-unused', count: 6, layout: 'image-band' },
                 { slot: 'currentDrift', type: 'drift', mode: 'latest-unused', count: 4, layout: 'drift-grid' },
                 { slot: 'moreWriting', type: 'essay', mode: 'latest-unused', count: 4, layout: 'compact-writing' }
             ],
@@ -3167,6 +3346,9 @@
 
         function normalizeIotdEntry(entry) {
             const title = stripHtml(entry && entry.title ? entry.title : '').replace(/\s+/g, ' ').trim() || 'Image of the Day';
+            const homepageFit = String(entry && entry.homepageFit ? entry.homepageFit : '').toLowerCase() === 'contain'
+                ? 'contain'
+                : 'cover';
             return {
                 key: `iotd:${String(entry && entry.date ? entry.date : '')}:${String(entry && entry.image ? entry.image : '')}`,
                 type: 'iotd',
@@ -3179,6 +3361,7 @@
                 imageCandidates: uniqueStrings([entry && entry.image]),
                 imageAlt: title,
                 homepageFocal: normalizeHomepageFocal(entry && entry.homepageFocal),
+                homepageFit,
                 displayDate: formatIotdDate(entry && entry.date ? entry.date : ''),
                 dateSort: parseContentDate(entry && entry.date ? entry.date : ''),
                 url: 'image_of_the_day.html',
@@ -3211,6 +3394,7 @@
                 date,
                 dateSort: parseContentDate(date),
                 description: buildExcerpt(body, 135),
+                poemBody: body,
                 image: String(poem && poem.image ? poem.image : ''),
                 imageCandidates: uniqueStrings([poem && poem.image]),
                 imageAlt: `${title} artwork`,
@@ -3300,10 +3484,12 @@
             return picked;
         }
 
-        function tagForSlot(slot, item) {
+        function tagForSlot(slot, item, context = {}) {
             if (!item) return '';
             if (slot === 'leadStory') return item.type === 'drift' ? 'Latest poem' : 'Latest essay';
-            if (slot === 'railPreviousEssay') return 'Previous essay';
+            if (slot === 'railPreviousEssay') return context.leadItem && context.leadItem.type !== 'essay'
+                ? 'Recent essay'
+                : 'Previous essay';
             if (slot === 'railLatestDrift') return 'The Drift';
             if (item.type === 'essay') return item.date ? `Essay · ${item.date}` : 'Essay';
             if (item.type === 'iotd') return item.displayDate ? `Image · ${item.displayDate}` : 'Image';
@@ -3380,10 +3566,15 @@
             );
             image.decoding = 'async';
             const supportsHomepageFocal = item && ['essay', 'drift', 'iotd'].includes(item.type);
-            if (supportsHomepageFocal && !item.usesEditorialFallback && slot !== 'leadStory') {
+            if (supportsHomepageFocal && !item.usesEditorialFallback) {
                 image.style.objectPosition = HOMEPAGE_FOCAL_POSITIONS[normalizeHomepageFocal(item.homepageFocal)];
             } else {
                 image.style.removeProperty('object-position');
+            }
+            if (item && item.homepageFit === 'contain') {
+                image.dataset.imageFit = 'contain';
+            } else {
+                image.removeAttribute('data-image-fit');
             }
 
             if (slot === 'leadStory') {
@@ -3451,7 +3642,72 @@
             });
         }
 
-        function renderContentSlot(slot, item) {
+        function driftFingerprintLinesMarkup(item, classPrefix, maxLines) {
+            const poemShape = Array.isArray(item && item.poemShape) ? item.poemShape : [];
+            const visibleStanzas = [];
+            let remainingLines = maxLines;
+            for (const stanza of poemShape) {
+                if (remainingLines <= 0) break;
+                const visibleLines = stanza.slice(0, remainingLines);
+                if (visibleLines.length) visibleStanzas.push(visibleLines);
+                remainingLines -= visibleLines.length;
+            }
+            return visibleStanzas.map((stanza) => `
+                <span class="${classPrefix}__stanza">
+                    ${stanza.map((line) => `<span class="${classPrefix}__line" style="--line-width: ${Number(line.width) || 18}%"></span>`).join('')}
+                </span>
+            `).join('');
+        }
+
+        function leadDriftFingerprintMarkup(item) {
+            const lineMarkup = driftFingerprintLinesMarkup(item, 'lead-poem-fingerprint', 34);
+            const structure = escapeHtml(driftStructureLabel(item));
+
+            return `
+                <span class="lead-poem-fingerprint" aria-label="${structure}">
+                    <span class="lead-poem-fingerprint__lines" aria-hidden="true">${lineMarkup}</span>
+                    <span class="lead-poem-fingerprint__structure">${structure}</span>
+                </span>
+            `;
+        }
+
+        function renderLeadDescription(root, item) {
+            const description = root.querySelector('[data-frontpage-description]');
+            if (!description) return;
+            if (item.type !== 'drift') {
+                description.textContent = item.description || item.caption || item.date || '';
+                return;
+            }
+
+            if (item.lineCount > 0 && item.lineCount <= 6 && item.poemBody) {
+                description.innerHTML = `<span class="lead-poem-complete">${escapeHtml(item.poemBody)}</span>`;
+                return;
+            }
+
+            description.innerHTML = leadDriftFingerprintMarkup(item);
+        }
+
+        function renderDriftCardDescription(root, item) {
+            const description = root.querySelector('[data-frontpage-description]');
+            if (!description) return;
+            description.classList.add('poem-card-summary');
+
+            if (item.lineCount > 0 && item.lineCount <= 6 && item.poemBody) {
+                description.innerHTML = `<span class="poem-card-complete">${escapeHtml(item.poemBody)}</span>`;
+                return;
+            }
+
+            const structure = escapeHtml(driftStructureLabel(item));
+            const lineMarkup = driftFingerprintLinesMarkup(item, 'poem-card-fingerprint', 12);
+            description.innerHTML = `
+                <span class="poem-card-fingerprint" aria-label="${structure}">
+                    <span class="poem-card-fingerprint__lines" aria-hidden="true">${lineMarkup}</span>
+                    <span class="poem-card-fingerprint__structure">${structure}</span>
+                </span>
+            `;
+        }
+
+        function renderContentSlot(slot, item, context = {}) {
             const root = document.querySelector(`[data-frontpage-slot="${slot}"]`);
             if (!root) return;
             if (!item) {
@@ -3459,14 +3715,25 @@
                 return;
             }
             root.hidden = false;
+            root.dataset.contentType = item.type || 'item';
 
-            setText(root, '[data-frontpage-tag]', tagForSlot(slot, item));
+            setText(root, '[data-frontpage-tag]', tagForSlot(slot, item, context));
             setText(root, '[data-frontpage-link]', item.title);
-            setText(root, '[data-frontpage-description]', item.description || item.caption || item.date);
+            if (slot === 'leadStory') {
+                renderLeadDescription(root, item);
+            } else if (item.type === 'drift') {
+                renderDriftCardDescription(root, item);
+            } else {
+                const description = root.querySelector('[data-frontpage-description]');
+                if (description) description.classList.remove('poem-card-summary');
+                setText(root, '[data-frontpage-description]', item.description || item.caption || item.date);
+            }
             setHref(root, '[data-frontpage-link]', item.url);
             setHref(root, '[data-frontpage-cta]', item.url);
             if (slot === 'leadStory') {
-                setText(root, '[data-frontpage-cta]', `Continue reading ${item.title} \u2192`);
+                setText(root, '[data-frontpage-cta]', item.type === 'drift'
+                    ? 'Read the poem \u2192'
+                    : `Continue reading ${item.title} \u2192`);
             }
 
             const image = root.querySelector('[data-frontpage-image]');
@@ -3481,21 +3748,9 @@
 
             const meta = root.querySelector('[data-frontpage-meta]');
             if (meta) {
-                if (item.type === 'essay') {
-                    meta.innerHTML = `
-                        <span>${escapeHtml(item.date)}</span>
-                        <span>Essay</span>
-                        <span>Current narrative</span>
-                    `;
-                } else if (item.type === 'drift') {
-                    meta.innerHTML = `
-                        <span>${escapeHtml(item.date)}</span>
-                        <span>Poem</span>
-                        <span>Current Drift</span>
-                    `;
-                } else {
-                    meta.replaceChildren();
-                }
+                meta.innerHTML = item.date
+                    ? `<span>${escapeHtml(item.date)}</span>`
+                    : '';
             }
         }
 
@@ -3707,7 +3962,7 @@
             const usedKeys = new Set();
             const renderedItems = [];
             const leadItem = pickUniqueContent(manifest.lead || DEFAULT_FRONTPAGE_MANIFEST.lead, sources, usedKeys);
-            renderContentSlot('leadStory', leadItem);
+            renderContentSlot('leadStory', leadItem, { leadItem });
             if (leadItem) renderedItems.push(leadItem);
 
             [...(manifest.modules || []), ...(manifest.rail || [])].forEach((rule) => {
@@ -3716,7 +3971,7 @@
                     ? { ...rule, mode: 'latest', offset: 0 }
                     : rule;
                 const item = pickUniqueContent(adjustedRule, sources, usedKeys);
-                renderContentSlot(rule.slot, item);
+                renderContentSlot(rule.slot, item, { leadItem });
                 if (item) renderedItems.push(item);
             });
 

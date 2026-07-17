@@ -1,0 +1,46 @@
+name: OTW Discovery Build
+
+on:
+  push:
+    paths:
+      - 'image_manifest.json'
+      - 'poetry_data.js'
+      - 'new_poetry_data.js'
+      - 'fragments_data.js'
+      - 'tools/build_discovery.py'
+      - 'archive_entry.css'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: otw-discovery-main
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ github.token }}
+          persist-credentials: true
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Build permanent records and sitemap
+        run: |
+          python tools/build_discovery.py
+          python tools/generate_atom_feed.py
+          python tools/validate_discovery.py
+
+      - name: Commit generated discovery files
+        run: |
+          git config --global user.name "OTW-Discovery-Bot"
+          git config --global user.email "bot@outsidetheworld.com"
+          git add sitemap.xml threads.html atom.xml wayback poems iotd fragments
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Refresh discovery records" && git push)

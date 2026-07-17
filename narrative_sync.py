@@ -16,6 +16,9 @@ share_output_folder = 'archive'
 og_output_folder = 'Images/og/archive'
 reading_aids_folder = 'reading_aids'
 site_url = 'https://outsidetheworld.com'
+author_url = f'{site_url}/ryandavid-burningham.html'
+author_identity_id = f'{author_url}#person'
+author_cutover_date = datetime(2026, 7, 17)
 READING_AIDS_PREVIEW_ENV = 'OTW_READING_AIDS_PREVIEW'
 
 MONTHS = {
@@ -55,6 +58,12 @@ def parse_display_date(value):
         return datetime.strptime(value, '%B %d, %Y')
     except ValueError:
         return None
+
+def author_name_for_post(post):
+    published = parse_display_date(post.get('date') or '')
+    if published and published < author_cutover_date:
+        return 'Rylee Burningham'
+    return 'RyanDavid Burningham'
 
 def strip_markdown(value):
     text = re.sub(r'!\[[^\]]*\]\([^)]+\)', '', value or '')
@@ -1511,12 +1520,18 @@ def render_share_page(post, newer_post=None, older_post=None, include_draft_read
             f'\n    <link rel="preload" as="image" href="{smartypants_safe(feature_image.get("render_url") or feature_image["url"])}" '
             'fetchpriority="high" />'
         )
+    author_name = author_name_for_post(post)
     article_schema = {
         '@context': 'https://schema.org',
         '@type': 'Article',
         'headline': post['title'],
         'description': description,
-        'author': {'@type': 'Person', 'name': 'Rylee Burningham'},
+        'author': {
+            '@type': 'Person',
+            '@id': author_identity_id,
+            'name': author_name,
+            'url': author_url,
+        },
         'publisher': {
             '@type': 'Organization',
             'name': 'Outside The World',
@@ -1617,7 +1632,7 @@ def render_share_page(post, newer_post=None, older_post=None, include_draft_read
             <header class="entry-header">
                 <p class="entry-label">Essay <span aria-hidden="true">/</span> Outside The World</p>
                 <h1 class="entry-title" id="entry-title">{smartypants_safe(post['title'])}</h1>{deck_html}
-                <p class="entry-byline">By <strong>Rylee Burningham</strong></p>
+                <p class="entry-byline">By <strong><a href="../ryandavid-burningham.html">{smartypants_safe(author_name)}</a></strong></p>
                 <div class="entry-meta-strip" aria-label="Essay details">
                     <span class="entry-meta-item"><strong>Filed</strong> {smartypants_safe(post['date'])}</span>
                     <span class="entry-meta-item"><strong>Words</strong> {word_count:,}</span>

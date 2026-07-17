@@ -8,6 +8,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST_PATH = ROOT / "image_manifest.json"
 VALIDATOR_PATH = ROOT / "tools" / "validate_iotd_manifest.py"
+DISCOVERY_BUILDER_PATH = ROOT / "tools" / "build_discovery.py"
 
 
 def load_manifest() -> list:
@@ -102,7 +103,15 @@ def main() -> int:
     if result.returncode != 0:
         return result.returncode
 
-    print(f"OK: added IOTD entry for {date}")
+    discovery_result = subprocess.run(
+        [sys.executable, str(DISCOVERY_BUILDER_PATH)],
+        cwd=ROOT,
+        check=False,
+    )
+    if discovery_result.returncode != 0:
+        return discovery_result.returncode
+
+    print(f"OK: added IOTD entry and permanent record for {date}")
     return 0
 
 
