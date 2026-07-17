@@ -443,5 +443,37 @@ const archive = [
         "frequency": "APPRECIATION",
         "thumbprint": "linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%)",
         "body": "Sometimes—\nit's easy to use what's real\nand apply it.\n\nIt glides so much better,\nlike the wind across the grass.\nIt makes me smile.\n\nSuch things are\nhard to come by at best.\n\nThat is,\nhard to come by\nif\nyou refuse to look."
+    },
+    {
+        "id": "poem22",
+        "title": "The World Looked Very Pleasing",
+        "date": "[RECOVERED_SIGNAL]",
+        "frequency": "DAILY_BEAUTY",
+        "thumbprint": "linear-gradient(135deg, #f6d365 0%, #fda085 100%)",
+        "body": "The world looked very pleasing to the eye today\nperhaps it was the way the sun graced the Shell Station\nof maybe the way the color matched perfectly with the houses.\n\nAnd what could match the way the clouds looked?\nPerhaps the way the sun looked\nbehind them......"
+    },
+    {
+        "id": "poem26",
+        "title": "Please Search the Sky",
+        "date": "[RECOVERED_SIGNAL]",
+        "frequency": "WANDERLUST",
+        "thumbprint": "linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%)",
+        "body": "Please feel free to search the sky\nplease don't forget to touch the clouds\nplease remember to take some soap\nyou might not be coming back for a while.\n\nSuch a hasty trip\nI don't see the end of it\nAnd I don't think there is\nbut it looks like fun.\n\nStrange\nI think I might come with you.........."
+    },
+    {
+        "id": "poem32",
+        "title": "I Swear I've Never Felt This Way",
+        "date": "[RECOVERED_SIGNAL]",
+        "frequency": "TRANSFORMATION",
+        "thumbprint": "linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)",
+        "body": "I swear I've never felt this way\nhow many feelings can one mind produce?\ncaught away\nI suppose in the train of thought that grasps me.\n\nI contemplate the real challenge\nThat I might be changing\nfrom 1 to 2\nor it could be vice-versa.\n\nBut I can only listen to understand\nfeel to experience\nand hold on to love.\n\nAgain\nI swear I have never felt this way\nbut maybe you have....."
+    },
+    {
+        "id": "poem36",
+        "title": "Drifting Along",
+        "date": "[RECOVERED_SIGNAL]",
+        "frequency": "DISLOCATION",
+        "thumbprint": "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+        "body": "Drifting along in the sea of\ntransparent love\nI wander past the alien objects\nThat I used to call my home.\n\nAnd calling out the forgotten name\nI seem to remember more.\n\nIn all my days\nhave I ever seen such a sight?\nWhat would be true?\nYes or no?"
     }
 ];

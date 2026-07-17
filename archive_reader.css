@@ -1467,6 +1467,16 @@ html[data-reader-mode="dark"] .clarify-note__toggle[aria-expanded="true"] {
 }
 
 @media (max-width: 420px) {
+    .entry-meta-actions,
+    .entry-meta-actions .share-controls,
+    .entry-meta-actions .share-btn {
+        width: 100%;
+    }
+
+    .entry-meta-actions {
+        flex-basis: 100%;
+    }
+
     .reader-breadcrumbs {
         align-items: flex-start;
         flex-direction: column;

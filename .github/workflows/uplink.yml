@@ -29,11 +29,12 @@ jobs:
           python tools/build_discovery.py
           python tools/audit_wayback_media.py --local-only --strict
           python tools/validate_discovery.py
+          git add wayback_purified.js sitemap.xml threads.html wayback poems iotd fragments
+          python tools/audit_public_site.py --strict
 
       - name: Commit and Push Changes
         run: |
           git config --global user.name "OTW-Archive-Bot"
           git config --global user.email "bot@outsidetheworld.com"
-          git add wayback_purified.js sitemap.xml threads.html wayback poems iotd fragments
           git commit -m "Uplink: New digital residue incorporated into ledger" || exit 0
           git push

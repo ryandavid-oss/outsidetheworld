@@ -38,10 +38,11 @@ jobs:
           python tools/generate_atom_feed.py
           python tools/audit_wayback_media.py --local-only --strict
           python tools/validate_discovery.py
+          git add sitemap.xml threads.html atom.xml wayback poems iotd fragments
+          python tools/audit_public_site.py --strict
 
       - name: Commit generated discovery files
         run: |
           git config --global user.name "OTW-Discovery-Bot"
           git config --global user.email "bot@outsidetheworld.com"
-          git add sitemap.xml threads.html atom.xml wayback poems iotd fragments
           git diff --quiet && git diff --staged --quiet || (git commit -m "Refresh discovery records" && git push)

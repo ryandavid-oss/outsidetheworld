@@ -655,12 +655,25 @@ def write_records(groups: dict[str, list[DiscoveryRecord]]) -> None:
         (record for records in groups.values() for record in records),
         key=lambda record: record.path,
     )
+    records_by_path = {record.path: record for record in all_records}
     tombstones = [
         DiscoveryRecord(path=path, title="", description="", kind="wayback", source_path="__private_tombstone__")
         for path in PRIVATE_DISCOVERY_TOMBSTONES
     ]
 
     def select_dig_target(record: DiscoveryRecord) -> DiscoveryRecord | None:
+        existing_page = ROOT / record.path
+        if existing_page.exists():
+            existing_match = re.search(
+                r'<a class="dig-path" href="\.\./([^"#?]+)',
+                existing_page.read_text(encoding="utf-8", errors="ignore"),
+            )
+            if existing_match:
+                existing_path = unquote(html.unescape(existing_match.group(1)))
+                existing_target = records_by_path.get(existing_path)
+                if existing_target and existing_target.kind != record.kind:
+                    return existing_target
+
         candidates = sorted(
             (candidate for candidate in (*all_records, *tombstones) if candidate.kind != record.kind),
             key=lambda candidate: candidate.path,
