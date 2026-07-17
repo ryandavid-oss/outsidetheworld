@@ -107,6 +107,29 @@ def main() -> int:
         if parser.h1_count != 1:
             errors.append(f"expected one h1: {relative}")
 
+        collection = relative.parts[0] if relative.parts else ""
+        if collection in GENERATED_DIRS and 'class="dig-path"' not in source:
+            errors.append(f"missing cross-archive dig path: {relative}")
+        if collection == "wayback":
+            if re.search(r"&lt;img\b", source, flags=re.I):
+                errors.append(f"escaped legacy image markup is visible: {relative}")
+            content_match = re.search(
+                r'<div class="record-content record-content--wayback">([\s\S]*?)</div>\s*</article>',
+                source,
+                flags=re.I,
+            )
+            content = content_match.group(1) if content_match else ""
+            if re.search(r"<(?:script|style|iframe|object|embed|link|meta)\b", content, flags=re.I):
+                errors.append(f"unsafe legacy element in record content: {relative}")
+            if re.search(r"\son[a-z]+\s*=|javascript:", content, flags=re.I):
+                errors.append(f"unsafe legacy attribute in record content: {relative}")
+        elif collection == "poems" and 'class="poem-text"' not in source:
+            errors.append(f"poem is not using stanza-preserving markup: {relative}")
+        elif collection == "iotd" and "entry-image--photograph" not in source:
+            errors.append(f"image record is missing photograph markup: {relative}")
+        elif collection == "fragments" and "fragment-text" not in source:
+            errors.append(f"fragment record is missing compact text markup: {relative}")
+
         json_scripts = re.findall(
             r'<script[^>]+type=["\']application/ld\+json["\'][^>]*>([\s\S]*?)</script>',
             source,

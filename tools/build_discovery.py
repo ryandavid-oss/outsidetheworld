@@ -8,6 +8,7 @@ feed readers, link unfurlers, and people without JavaScript can understand.
 
 from __future__ import annotations
 
+import hashlib
 import html
 import json
 import re
@@ -16,7 +17,7 @@ import xml.etree.ElementTree as ET
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
-from urllib.parse import quote
+from urllib.parse import quote, unquote, urlsplit
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -51,6 +52,12 @@ ROOT_PAGES = [
     ("mac30.html", 0.52),
     ("emmy.html", 0.50),
 ]
+
+LEGACY_IMAGE_TAG = re.compile(r"<img\b[^>]*>", re.I)
+LEGACY_ATTRIBUTE = re.compile(
+    r"([^\s=/>]+)\s*=\s*(?:\"([^\"]*)\"|'([^']*)'|([^\s>]+))",
+    re.I,
+)
 
 
 @dataclass
@@ -166,6 +173,103 @@ def asset_url(value: str, *, absolute: bool = False) -> str:
     return f"{SITE_URL}{path}" if absolute else path
 
 
+def legacy_image_attributes(tag: str) -> dict[str, str]:
+    attributes: dict[str, str] = {}
+    for match in LEGACY_ATTRIBUTE.finditer(tag):
+        value = next((group for group in match.groups()[1:] if group is not None), "")
+        attributes[match.group(1).lower()] = html.unescape(value).strip()
+    return attributes
+
+
+def normalize_legacy_image_source(value: str, *, page_relative: bool = False) -> str:
+    raw = html.unescape(str(value or "")).strip().replace("\\", "/")
+    if not raw or re.match(r"^(?:javascript|data|blob):", raw, re.I):
+        return ""
+    if raw.startswith("//"):
+        return f"https:{raw}"
+    if re.match(r"^https?://", raw, re.I):
+        secure = re.sub(r"^http://", "https://", raw, count=1, flags=re.I)
+        parsed = urlsplit(secure)
+        if parsed.netloc.lower() in {"outsidetheworld.com", "www.outsidetheworld.com"}:
+            raw_path = parsed.path.lstrip("/")
+            local_path = next(
+                (candidate for candidate in (raw_path, unquote(raw_path)) if candidate and (ROOT / candidate).is_file()),
+                "",
+            )
+            if local_path:
+                encoded = quote(local_path, safe="/+@,;=-_.()")
+                return f"../{encoded}" if page_relative else encoded
+            return ""
+        return secure
+
+    raw_path = unquote(raw.split("?", 1)[0].split("#", 1)[0])
+    encoded_path = raw.split("?", 1)[0].split("#", 1)[0]
+    if ".." in Path(encoded_path).parts or ".." in Path(raw_path).parts:
+        return ""
+    candidates = (
+        encoded_path.removeprefix("./").lstrip("/"),
+        raw_path.removeprefix("./").lstrip("/"),
+    )
+    local_path = next((candidate for candidate in candidates if candidate and (ROOT / candidate).is_file()), "")
+    if not local_path:
+        return ""
+    encoded = quote(local_path, safe="/+@,;=-_.()")
+    return f"../{encoded}" if page_relative else encoded
+
+
+def legacy_wayback_images(value: str) -> list[str]:
+    decoded = html.unescape(str(value or ""))
+    sources: list[str] = []
+    for tag in LEGACY_IMAGE_TAG.findall(decoded):
+        source = normalize_legacy_image_source(legacy_image_attributes(tag).get("src", ""))
+        if source and source not in sources:
+            sources.append(source)
+    return sources
+
+
+def render_legacy_wayback_body(value: str, title: str) -> str:
+    decoded = html.unescape(str(value or ""))
+    figures: dict[str, str] = {}
+    missing_count = 0
+    missing_token = "OTWLEGACYMISSINGTOKEN"
+
+    def replace_image(match: re.Match[str]) -> str:
+        nonlocal missing_count
+        attributes = legacy_image_attributes(match.group(0))
+        source = normalize_legacy_image_source(attributes.get("src", ""), page_relative=True)
+        if not source:
+            missing_count += 1
+            return f"\n\n{missing_token}\n\n" if missing_count == 1 else ""
+        token = f"OTWLEGACYIMAGE{len(figures):04d}TOKEN"
+        alt = clean_text(attributes.get("alt", "")) or f"Recovered image from {title}"
+        dimensions = ""
+        for name in ("width", "height"):
+            candidate = attributes.get(name, "")
+            if candidate.isdigit() and 0 < int(candidate) <= 10000:
+                dimensions += f' {name}="{candidate}"'
+        figures[token] = (
+            '<figure class="entry-image entry-image--wayback">'
+            f'<img src="{html.escape(source, quote=True)}" alt="{html.escape(alt, quote=True)}"'
+            f'{dimensions} loading="lazy" decoding="async" />'
+            "</figure>"
+        )
+        return f"\n\n{token}\n\n"
+
+    prepared = LEGACY_IMAGE_TAG.sub(replace_image, decoded)
+    if missing_count:
+        noun = "image file" if missing_count == 1 else "image files"
+        pronoun = "Its" if missing_count == 1 else "Their"
+        figures[missing_token] = (
+            '<figure class="entry-image entry-image--missing">'
+            f"<figcaption>{missing_count} {noun} did not survive this recovery. {pronoun} absence has been indexed.</figcaption>"
+            "</figure>"
+        )
+    rendered = markdown_to_html(prepared)
+    for token, figure in figures.items():
+        rendered = rendered.replace(f"<p>{token}</p>", figure).replace(token, figure)
+    return rendered
+
+
 def json_script(value: dict) -> str:
     return json.dumps(value, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
 
@@ -206,6 +310,11 @@ def load_records() -> dict[str, list[DiscoveryRecord]]:
         used_paths.add(path)
         title = str(item.get("title") or "Untitled recovered entry").strip()
         body = without_repeated_title(str(item.get("body") or ""), title)
+        legacy_images = legacy_wayback_images(body)
+        preferred_image = next(
+            (source for source in legacy_images if not re.match(r"^https?://", source, re.I)),
+            legacy_images[0] if legacy_images else "",
+        )
         wayback.append(
             DiscoveryRecord(
                 path=path,
@@ -215,6 +324,7 @@ def load_records() -> dict[str, list[DiscoveryRecord]]:
                 date_display=str(item.get("date") or item.get("year") or "Recovered date unknown"),
                 date_iso=parse_display_date(item.get("date") or ""),
                 body=body,
+                image=preferred_image,
                 label="Recovered weblog entry",
                 source_path=stem,
             )
@@ -298,7 +408,12 @@ def navigation_for(records: list[DiscoveryRecord], index: int) -> tuple[Discover
     return newer, older
 
 
-def render_record(record: DiscoveryRecord, newer: DiscoveryRecord | None, older: DiscoveryRecord | None) -> str:
+def render_record(
+    record: DiscoveryRecord,
+    newer: DiscoveryRecord | None,
+    older: DiscoveryRecord | None,
+    dig_target: DiscoveryRecord | None,
+) -> str:
     collection = {
         "wayback": ("The Wayback", "../wayback.html"),
         "poem": (record.label, "../drift_poetry.html" if record.label == "The Drift" else "../poetry.html"),
@@ -343,7 +458,7 @@ def render_record(record: DiscoveryRecord, newer: DiscoveryRecord | None, older:
         schema_type = "SocialMediaPosting"
         schema_extra = {"articleBody": record.body}
     else:
-        content = f'<div class="prose">{markdown_to_html(record.body)}</div>'
+        content = f'<div class="prose">{render_legacy_wayback_body(record.body, record.title)}</div>'
         schema_type = "BlogPosting"
         schema_extra = {"articleBody": clean_text(record.body)}
 
@@ -379,6 +494,16 @@ def render_record(record: DiscoveryRecord, newer: DiscoveryRecord | None, older:
     if record.date_display:
         datetime_attr = f' datetime="{record.date_iso}"' if record.date_iso else ""
         date_meta = f'<time{datetime_attr}>{html.escape(record.date_display)}</time><span aria-hidden="true">/</span>'
+
+    dig_html = ""
+    if dig_target:
+        dig_html = (
+            f'<a class="dig-path" href="../{html.escape(dig_target.path, quote=True)}">'
+            '<span>Dig somewhere else</span>'
+            f'<strong>{html.escape(dig_target.title)}</strong>'
+            f'<em>{html.escape(dig_target.label)}</em>'
+            "</a>"
+        )
 
     return f'''<!DOCTYPE html>
 <html lang="en">
@@ -434,6 +559,7 @@ def render_record(record: DiscoveryRecord, newer: DiscoveryRecord | None, older:
       {nav_card(newer, "newer")}
       {nav_card(older, "older")}
     </nav>
+    {dig_html}
   </main>
   <footer class="record-footer">
     <p>Filed where it can be found again.</p>
@@ -445,6 +571,18 @@ def render_record(record: DiscoveryRecord, newer: DiscoveryRecord | None, older:
 
 
 def write_records(groups: dict[str, list[DiscoveryRecord]]) -> None:
+    all_records = sorted(
+        (record for records in groups.values() for record in records),
+        key=lambda record: record.path,
+    )
+
+    def select_dig_target(record: DiscoveryRecord) -> DiscoveryRecord | None:
+        candidates = [candidate for candidate in all_records if candidate.kind != record.kind]
+        if not candidates:
+            return None
+        digest = hashlib.sha256(record.path.encode("utf-8")).digest()
+        return candidates[int.from_bytes(digest[:8], "big") % len(candidates)]
+
     for kind, records in groups.items():
         output_name = {
             "poem": "poems",
@@ -460,7 +598,10 @@ def write_records(groups: dict[str, list[DiscoveryRecord]]) -> None:
                 stale.unlink()
         for index, record in enumerate(records):
             newer, older = navigation_for(records, index)
-            (ROOT / record.path).write_text(render_record(record, newer, older), encoding="utf-8")
+            (ROOT / record.path).write_text(
+                render_record(record, newer, older, select_dig_target(record)),
+                encoding="utf-8",
+            )
 
 
 def resolve_record(groups: dict[str, list[DiscoveryRecord]], kind: str, title: str) -> DiscoveryRecord | None:

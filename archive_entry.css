@@ -224,6 +224,23 @@ img { display: block; max-width: 100%; }
   font: 0.82rem/1.6 var(--mono);
 }
 
+.entry-image--wayback img {
+  width: auto;
+  max-width: 100%;
+  margin-inline: auto;
+}
+
+.entry-image--missing {
+  padding: 1rem 1.1rem;
+  border: 1px dashed rgba(160, 190, 245, 0.18);
+  border-radius: 0.55rem;
+  background: rgba(16, 17, 20, 0.42);
+}
+
+.entry-image--missing figcaption {
+  margin: 0;
+}
+
 .entry-nav {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -258,6 +275,46 @@ img { display: block; max-width: 100%; }
 
 .entry-nav__card strong { align-self: end; line-height: 1.25; }
 .entry-nav__card--older { text-align: right; }
+
+.dig-path {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.8rem;
+  padding: 1rem 1.1rem;
+  color: var(--text);
+  border: 1px solid rgba(160, 190, 245, 0.13);
+  border-radius: 0.55rem;
+  background: rgba(16, 17, 20, 0.52);
+  text-decoration: none;
+}
+
+.dig-path span,
+.dig-path em {
+  color: var(--gold);
+  font: 0.67rem/1.25 var(--mono);
+  font-style: normal;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.dig-path strong {
+  min-width: 0;
+  line-height: 1.25;
+}
+
+.dig-path em {
+  color: var(--muted);
+  text-align: right;
+}
+
+.dig-path:hover,
+.dig-path:focus-visible {
+  color: var(--light-blue);
+  border-color: rgba(99, 149, 238, 0.48);
+  background: rgba(99, 149, 238, 0.08);
+}
 
 .record-footer {
   display: flex;
@@ -356,11 +413,14 @@ img { display: block; max-width: 100%; }
   .threads-hero h1 { font-size: clamp(2.7rem, 15vw, 4.6rem); }
   .entry-nav { grid-template-columns: 1fr; }
   .entry-nav__card--older { text-align: left; }
+  .dig-path { grid-template-columns: 1fr; gap: 0.4rem; }
+  .dig-path em { text-align: left; }
   .thread-section { grid-template-columns: 1fr; gap: 1.5rem; }
   .record-footer { display: grid; }
 }
 
 @media (prefers-reduced-motion: no-preference) {
   .thread-link,
-  .entry-nav__card { transition: transform 180ms ease, border-color 180ms ease, background-color 180ms ease, color 180ms ease; }
+  .entry-nav__card,
+  .dig-path { transition: transform 180ms ease, border-color 180ms ease, background-color 180ms ease, color 180ms ease; }
 }
