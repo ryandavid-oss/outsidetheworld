@@ -167,6 +167,8 @@ img { display: block; max-width: 100%; }
   font: clamp(1.05rem, 1.7vw, 1.26rem)/1.78 var(--serif);
 }
 
+.prose { display: flow-root; }
+
 .prose > :first-child { margin-top: 0; }
 .prose > :last-child { margin-bottom: 0; }
 .prose p { margin: 0 0 1.35em; }
@@ -228,6 +230,34 @@ img { display: block; max-width: 100%; }
   width: auto;
   max-width: 100%;
   margin-inline: auto;
+}
+
+.entry-image--align-left,
+.entry-image--align-right {
+  width: fit-content;
+  max-width: min(46%, 20rem);
+  margin-top: 0.4rem;
+  margin-bottom: 1.3rem;
+}
+
+.entry-image--align-left {
+  float: left;
+  margin-right: 1.65rem;
+}
+
+.entry-image--align-right {
+  float: right;
+  margin-left: 1.65rem;
+}
+
+.entry-image--align-left img,
+.entry-image--align-right img {
+  margin-block: 0;
+}
+
+.entry-image--align-left figcaption,
+.entry-image--align-right figcaption {
+  margin-top: 0.7rem;
 }
 
 .entry-image--missing {
@@ -417,6 +447,12 @@ img { display: block; max-width: 100%; }
   .dig-path em { text-align: left; }
   .thread-section { grid-template-columns: 1fr; gap: 1.5rem; }
   .record-footer { display: grid; }
+  .entry-image--align-left,
+  .entry-image--align-right {
+    float: none;
+    max-width: 100%;
+    margin: 2.2rem auto;
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {

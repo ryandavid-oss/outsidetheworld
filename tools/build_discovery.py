@@ -60,6 +60,10 @@ ROOT_PAGES = [
 ]
 
 LEGACY_IMAGE_TAG = re.compile(r"<img\b[^>]*>", re.I)
+LEGACY_WORDPRESS_CAPTION = re.compile(
+    r"\[caption\b(?P<attributes>[^\]]*)\]\s*(?P<image><img\b[^>]*>)\s*\[/caption\]",
+    re.I | re.S,
+)
 LEGACY_ATTRIBUTE = re.compile(
     r"([^\s=/>]+)\s*=\s*(?:\"([^\"]*)\"|'([^']*)'|([^\s>]+))",
     re.I,
@@ -251,35 +255,75 @@ def legacy_wayback_images(value: str) -> list[str]:
     return sources
 
 
+def legacy_wayback_plain_text(value: str) -> str:
+    decoded = html.unescape(str(value or ""))
+
+    def caption_text(match: re.Match[str]) -> str:
+        attributes = legacy_image_attributes(f'<caption {match.group("attributes")}>')
+        caption = clean_text(attributes.get("caption", ""))
+        return f" {caption} " if caption else " "
+
+    without_captions = LEGACY_WORDPRESS_CAPTION.sub(caption_text, decoded)
+    without_images = LEGACY_IMAGE_TAG.sub(" ", without_captions)
+    return clean_text(without_images)
+
+
 def render_legacy_wayback_body(value: str, title: str) -> str:
     decoded = html.unescape(str(value or ""))
     figures: dict[str, str] = {}
     missing_count = 0
     missing_token = "OTWLEGACYMISSINGTOKEN"
 
-    def replace_image(match: re.Match[str]) -> str:
+    def replace_image_tag(image_tag: str, caption: str = "", alignment: str = "") -> str:
         nonlocal missing_count
-        attributes = legacy_image_attributes(match.group(0))
+        attributes = legacy_image_attributes(image_tag)
         source = normalize_legacy_image_source(attributes.get("src", ""), page_relative=True)
         if not source:
             missing_count += 1
             return f"\n\n{missing_token}\n\n" if missing_count == 1 else ""
         token = f"OTWLEGACYIMAGE{len(figures):04d}TOKEN"
-        alt = clean_text(attributes.get("alt", "")) or f"Recovered image from {title}"
+        caption = clean_text(caption)
+        alt = clean_text(attributes.get("alt", "")) or caption or f"Recovered image from {title}"
         dimensions = ""
         for name in ("width", "height"):
             candidate = attributes.get(name, "")
             if candidate.isdigit() and 0 < int(candidate) <= 10000:
                 dimensions += f' {name}="{candidate}"'
+        image_classes = set(attributes.get("class", "").lower().split())
+        alignment = alignment.lower()
+        if not alignment:
+            alignment = next(
+                (candidate for candidate in ("alignleft", "alignright", "aligncenter") if candidate in image_classes),
+                "",
+            )
+        alignment_class = {
+            "alignleft": " entry-image--align-left",
+            "alignright": " entry-image--align-right",
+            "aligncenter": " entry-image--align-center",
+        }.get(alignment, "")
+        figcaption = f"<figcaption>{html.escape(caption)}</figcaption>" if caption else ""
         figures[token] = (
-            '<figure class="entry-image entry-image--wayback">'
+            f'<figure class="entry-image entry-image--wayback{alignment_class}">'
             f'<img src="{html.escape(source, quote=True)}" alt="{html.escape(alt, quote=True)}"'
             f'{dimensions} loading="lazy" decoding="async" />'
+            f"{figcaption}"
             "</figure>"
         )
         return f"\n\n{token}\n\n"
 
-    prepared = LEGACY_IMAGE_TAG.sub(replace_image, decoded)
+    def replace_caption(match: re.Match[str]) -> str:
+        caption_attributes = legacy_image_attributes(f'<caption {match.group("attributes")}>')
+        return replace_image_tag(
+            match.group("image"),
+            caption=caption_attributes.get("caption", ""),
+            alignment=caption_attributes.get("align", ""),
+        )
+
+    def replace_image(match: re.Match[str]) -> str:
+        return replace_image_tag(match.group(0))
+
+    prepared = LEGACY_WORDPRESS_CAPTION.sub(replace_caption, decoded)
+    prepared = LEGACY_IMAGE_TAG.sub(replace_image, prepared)
     if missing_count:
         noun = "image file" if missing_count == 1 else "image files"
         pronoun = "Its" if missing_count == 1 else "Their"
@@ -338,16 +382,18 @@ def load_records() -> dict[str, list[DiscoveryRecord]]:
         used_paths.add(path)
         title = str(item.get("title") or "Untitled recovered entry").strip()
         body = without_repeated_title(str(item.get("body") or ""), title)
+        plain_body = legacy_wayback_plain_text(body)
         legacy_images = legacy_wayback_images(body)
+        local_images = [source for source in legacy_images if not re.match(r"^https?://", source, re.I)]
         preferred_image = next(
-            (source for source in legacy_images if not re.match(r"^https?://", source, re.I)),
-            legacy_images[0] if legacy_images else "",
+            (source for source in local_images if not re.search(r"(?:^|[-_])150x150(?=\.)", source, re.I)),
+            local_images[0] if local_images else (legacy_images[0] if legacy_images else ""),
         )
         wayback.append(
             DiscoveryRecord(
                 path=path,
                 title=title,
-                description=excerpt(body) or f"A recovered Outside The World entry titled {title}.",
+                description=excerpt(plain_body) or f"A recovered Outside The World entry titled {title}.",
                 kind="wayback",
                 date_display=str(item.get("date") or item.get("year") or "Recovered date unknown"),
                 date_iso=parse_display_date(item.get("date") or ""),
@@ -488,7 +534,7 @@ def render_record(
     else:
         content = f'<div class="prose">{render_legacy_wayback_body(record.body, record.title)}</div>'
         schema_type = "BlogPosting"
-        schema_extra = {"articleBody": clean_text(record.body)}
+        schema_extra = {"articleBody": legacy_wayback_plain_text(record.body)}
 
     schema = {
         "@context": "https://schema.org",
