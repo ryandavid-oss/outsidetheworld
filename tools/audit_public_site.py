@@ -383,6 +383,12 @@ def data_image_references(data_paths: list[Path]) -> list[Reference]:
             value = match.group("value").replace("\\/", "/")
             if "\\" in value:
                 continue
+            parsed = urlsplit(value)
+            if parsed.scheme and parsed.scheme.lower() not in {"http", "https"}:
+                # JSON card identifiers can contain an image URL as one segment
+                # (for example, ``iotd:date:https://...jpg``). They are identity
+                # keys, not fetchable image references.
+                continue
             references.append(Reference(
                 source,
                 text.count("\n", 0, match.start()) + 1,

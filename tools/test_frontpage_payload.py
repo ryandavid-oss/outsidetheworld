@@ -15,6 +15,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from tools import build_frontpage_payload as builder  # noqa: E402
+from tools import audit_public_site  # noqa: E402
 
 
 def selection_keys(manifest: dict, sources: dict) -> list[str]:
@@ -88,6 +89,11 @@ def run_tests() -> None:
     for candidate in selected_candidates:
         if candidate in full_media:
             assert candidate in output["responsiveMedia"], f"missing responsive media for {candidate}"
+
+    audited_images = audit_public_site.data_image_references([Path("frontpage_payload.json")])
+    assert not any(reference.value.startswith("iotd:") for reference in audited_images), (
+        "homepage content keys must not be audited as external image URLs"
+    )
 
     compressed_size = len(gzip.compress(builder.OUTPUT_PATH.read_bytes(), compresslevel=9))
     assert compressed_size < 20_000, f"compact payload grew to {compressed_size:,} compressed bytes"
