@@ -22,9 +22,6 @@
     <!-- Performance: Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;700&family=Inter:wght@100;300;400;700;900&display=optional"
-        rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     <noscript><link
         href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;700&family=Inter:wght@100;300;400;700;900&display=optional"
         rel="stylesheet" /></noscript>
@@ -64,6 +61,16 @@
                 window.addEventListener(eventName, loadAnalytics, { once: true, passive: true });
             });
             window.addEventListener('load', () => window.setTimeout(loadAnalytics, 3500), { once: true });
+
+            const loadFonts = () => {
+                if (document.querySelector('[data-professional-fonts]')) return;
+                const stylesheet = document.createElement('link');
+                stylesheet.rel = 'stylesheet';
+                stylesheet.href = 'https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;700&family=Inter:wght@100;300;400;700;900&display=optional';
+                stylesheet.setAttribute('data-professional-fonts', '');
+                document.head.appendChild(stylesheet);
+            };
+            window.addEventListener('load', () => window.setTimeout(loadFonts, 1500), { once: true });
         })();
     </script>
 
