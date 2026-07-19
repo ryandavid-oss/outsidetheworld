@@ -1007,21 +1007,22 @@ def test_public_css_contract_exists_everywhere():
             assert token in text
 
 
-def test_publisher_preview_buttons_share_the_production_renderer():
+def test_publisher_preview_modes_keep_quick_preview_browser_only():
     publisher = (ROOT / "publisher.html").read_text(encoding="utf-8")
 
     assert "async function renderDraftWithProductionRenderer" in publisher
-    assert "async function openDraftPreview" in publisher
-    assert "publisher_preview.html?draft=" not in publisher
-    assert publisher.count("return renderDraftWithProductionRenderer({") == 2
+    assert "function openDraftPreview" in publisher
+    assert "publisher_preview.html?draft=" in publisher
+    assert publisher.count("return renderDraftWithProductionRenderer({") == 1
     assert publisher.count("localPublisherApi('/api/draft-preview'") == 1
-    assert "Preview current draft with the live article renderer" in publisher
+    assert "Preview saved Markdown in the browser" in publisher
     assert 'id="publisherServerNotice"' in publisher
     assert "function syncPublisherServerAvailability()" in publisher
     assert "function reservePreviewWindow()" in publisher
     assert "function navigateReservedPreviewWindow(previewWindow, previewUrl)" in publisher
     assert "Preview tab blocked. Allow pop-ups for this local publisher and try again." in publisher
     assert "window.open(previewShellUrl(" not in publisher
+    assert "Quick Preview still works." in publisher
 
 
 def test_publisher_just_write_mode_preserves_the_composer_contract():
@@ -1087,7 +1088,7 @@ def run():
         test_share_copy_search_and_feed_paths_do_not_emit_legacy_residue_urls,
         test_public_pages_use_appropriate_post_payloads,
         test_public_css_contract_exists_everywhere,
-        test_publisher_preview_buttons_share_the_production_renderer,
+        test_publisher_preview_modes_keep_quick_preview_browser_only,
         test_publisher_just_write_mode_preserves_the_composer_contract,
     ]
     for test in tests:
