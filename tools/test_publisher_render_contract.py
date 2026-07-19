@@ -1016,6 +1016,12 @@ def test_publisher_preview_buttons_share_the_production_renderer():
     assert publisher.count("return renderDraftWithProductionRenderer({") == 2
     assert publisher.count("localPublisherApi('/api/draft-preview'") == 1
     assert "Preview current draft with the live article renderer" in publisher
+    assert 'id="publisherServerNotice"' in publisher
+    assert "function syncPublisherServerAvailability()" in publisher
+    assert "function reservePreviewWindow()" in publisher
+    assert "function navigateReservedPreviewWindow(previewWindow, previewUrl)" in publisher
+    assert "Preview tab blocked. Allow pop-ups for this local publisher and try again." in publisher
+    assert "window.open(previewShellUrl(" not in publisher
 
 
 def test_publisher_just_write_mode_preserves_the_composer_contract():

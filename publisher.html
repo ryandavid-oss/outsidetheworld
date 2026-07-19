@@ -170,6 +170,39 @@
       white-space: nowrap;
     }
 
+    .publisher-server-notice {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 10px 20px;
+      border-bottom: 1px solid rgba(165, 113, 27, 0.28);
+      background: #fff4d6;
+      color: #68450e;
+      font-size: 0.82rem;
+      line-height: 1.4;
+      text-align: center;
+    }
+
+    .publisher-server-notice[hidden] {
+      display: none;
+    }
+
+    .publisher-server-notice strong {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .publisher-server-notice code {
+      padding: 2px 5px;
+      border-radius: 4px;
+      background: rgba(104, 69, 14, 0.09);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+    }
+
     .top-actions {
       grid-column: 3;
       display: flex;
@@ -246,6 +279,14 @@
       background: var(--blue-dark);
       border-color: var(--blue-dark);
       color: #fff;
+    }
+
+    .text-btn:disabled,
+    .revision-action:disabled {
+      cursor: not-allowed;
+      opacity: 0.48;
+      transform: none;
+      box-shadow: none;
     }
 
     .tool-btn.just-write-btn {
@@ -2699,6 +2740,11 @@
       </div>
     </header>
 
+    <section class="publisher-server-notice" id="publisherServerNotice" role="status" hidden>
+      <strong>Preview helper offline.</strong>
+      <span>Start <code>python3 tools/publisher_server.py</code>, then reopen the URL it prints.</span>
+    </section>
+
     <section class="revision-bar" id="publishedRevisionBar" aria-label="Published essay revision mode" hidden>
       <div class="revision-bar-head">
         <div>
@@ -3145,6 +3191,7 @@
     const saveDraftBtn = document.getElementById('saveDraftBtn');
     const previewDraftBtn = document.getElementById('previewDraftBtn');
     const productionPreviewBtn = document.getElementById('productionPreviewBtn');
+    const publisherServerNotice = document.getElementById('publisherServerNotice');
     const downloadMarkdownBtn = document.getElementById('downloadMarkdownBtn');
     const archivePrivateBtn = document.getElementById('archivePrivateBtn');
     const clearDraftBtn = document.getElementById('clearDraftBtn');
@@ -3406,6 +3453,7 @@
       saveDraftBtn.title = isActive ? 'Save local revision draft' : 'Save server draft';
       previewDraftBtn.textContent = isActive ? 'Preview Revision' : 'Quick Preview';
       previewDraftBtn.title = isActive ? 'Preview revision without changing production output' : 'Preview current draft with the live article renderer';
+      syncPublisherServerAvailability();
       if (archivePrivateBtn) {
         const canArchivePrivately = Boolean(getLocalPublisherToken());
         archivePrivateBtn.hidden = false;
@@ -3680,6 +3728,28 @@
 
     function getLocalPublisherToken() {
       return document.querySelector('meta[name="otw-publisher-token"]')?.content || '';
+    }
+
+    function syncPublisherServerAvailability() {
+      const isAvailable = Boolean(getLocalPublisherToken());
+      const offlineTitle = 'Start python3 tools/publisher_server.py, then open the URL it prints';
+      [previewDraftBtn, productionPreviewBtn, revisionPreviewBtn].forEach((button) => {
+        if (!button) {
+          return;
+        }
+        button.disabled = !isAvailable;
+        button.setAttribute('aria-disabled', String(!isAvailable));
+      });
+      if (!isAvailable) {
+        previewDraftBtn.title = offlineTitle;
+        productionPreviewBtn.title = offlineTitle;
+        if (revisionPreviewBtn) {
+          revisionPreviewBtn.title = offlineTitle;
+        }
+      }
+      if (publisherServerNotice) {
+        publisherServerNotice.hidden = isAvailable;
+      }
     }
 
     async function localPublisherApi(path, options = {}) {
@@ -6873,6 +6943,50 @@
       return `publisher_preview_shell.html?url=${encodeURIComponent(previewUrl)}`;
     }
 
+    function reservePreviewWindow() {
+      const previewWindow = window.open('', '_blank');
+      if (!previewWindow) {
+        return null;
+      }
+      try {
+        previewWindow.opener = null;
+        previewWindow.document.title = 'Rendering preview';
+        previewWindow.document.body.textContent = 'Rendering preview…';
+        previewWindow.document.body.style.cssText = 'margin:0;padding:3rem;background:#111;color:#eee;font:14px ui-monospace,monospace;';
+      } catch (error) {
+        // The reserved tab is still usable if its temporary loading message cannot be styled.
+      }
+      return previewWindow;
+    }
+
+    function closeReservedPreviewWindow(previewWindow) {
+      try {
+        if (previewWindow && !previewWindow.closed) {
+          previewWindow.close();
+        }
+      } catch (error) {
+        // The preview may already have navigated or been closed by the reader.
+      }
+    }
+
+    function navigateReservedPreviewWindow(previewWindow, previewUrl) {
+      if (!previewWindow || previewWindow.closed) {
+        return false;
+      }
+      try {
+        previewWindow.location.replace(previewShellUrl(previewUrl));
+        return true;
+      } catch (error) {
+        return false;
+      }
+    }
+
+    function reportBlockedPreviewWindow() {
+      const message = 'Preview tab blocked. Allow pop-ups for this local publisher and try again.';
+      setSaveState(message, true);
+      revisionStatusText(message);
+    }
+
     function setPublishBusy(isBusy) {
       publishBtn.disabled = Boolean(isBusy);
       publishBtn.textContent = isBusy ? 'Publishing' : 'Publish';
@@ -6973,15 +7087,27 @@
       if (!activePublishedRevision?.slug) {
         return null;
       }
-      await savePublishedRevisionDraft({ quiet: true });
-      const payload = await localPublisherApi(`/api/published-essays/${encodeURIComponent(activePublishedRevision.slug)}/preview`, {
-        method: 'POST',
-        body: JSON.stringify({ includeReadingAids: true })
-      });
-      window.open(previewShellUrl(payload.preview.url), '_blank', 'noopener');
-      revisionStatusText(payload.message || 'Preview generated from isolated temp output.');
-      setSaveState('Revision preview opened', true);
-      return payload;
+      const previewWindow = reservePreviewWindow();
+      if (!previewWindow) {
+        reportBlockedPreviewWindow();
+        return null;
+      }
+      try {
+        await savePublishedRevisionDraft({ quiet: true });
+        const payload = await localPublisherApi(`/api/published-essays/${encodeURIComponent(activePublishedRevision.slug)}/preview`, {
+          method: 'POST',
+          body: JSON.stringify({ includeReadingAids: true })
+        });
+        if (!navigateReservedPreviewWindow(previewWindow, payload.preview.url)) {
+          throw new Error('The preview was rendered, but its reserved tab could not be opened.');
+        }
+        revisionStatusText(payload.message || 'Preview generated from isolated temp output.');
+        setSaveState('Revision preview opened', true);
+        return payload;
+      } catch (error) {
+        closeReservedPreviewWindow(previewWindow);
+        throw error;
+      }
     }
 
     function allowUnexpectedGeneratedFiles(error, actionLabel) {
@@ -7206,6 +7332,11 @@
         setSaveState('Add article content before previewing', true);
         return null;
       }
+      const previewWindow = reservePreviewWindow();
+      if (!previewWindow) {
+        reportBlockedPreviewWindow();
+        return null;
+      }
       if (button) {
         button.disabled = true;
         button.textContent = 'Rendering';
@@ -7219,10 +7350,13 @@
             includeReadingAids: false
           })
         });
-        window.open(previewShellUrl(result.preview.url), '_blank', 'noopener');
+        if (!navigateReservedPreviewWindow(previewWindow, result.preview.url)) {
+          throw new Error('The preview was rendered, but its reserved tab could not be opened.');
+        }
         setSaveState(successLabel, true);
         return result;
       } catch (error) {
+        closeReservedPreviewWindow(previewWindow);
         setSaveState(error.message || 'Start tools/publisher_server.py for live-format preview.', true);
         return null;
       } finally {
@@ -10377,6 +10511,7 @@
     if (!importArticleFromHash()) {
       loadDraft();
     }
+    syncPublisherServerAvailability();
     window.setTimeout(checkServerDraftOnLoad, 0);
     try {
       window.otwPublisher = {
