@@ -2,13 +2,26 @@
 <html lang="en" data-reader-mode="dark">
 
 <head>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-YKRKPFV2MB"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-YKRKPFV2MB');
+  (() => {
+    let loaded = false;
+    const loadAnalytics = () => {
+      if (loaded) return;
+      loaded = true;
+      const script = document.createElement('script');
+      script.async = true;
+      script.src = 'https://www.googletagmanager.com/gtag/js?id=G-YKRKPFV2MB';
+      document.head.append(script);
+    };
+    ['pointerdown', 'keydown', 'touchstart'].forEach((eventName) => {
+      window.addEventListener(eventName, loadAnalytics, { once: true, passive: true });
+    });
+    window.addEventListener('load', () => window.setTimeout(loadAnalytics, 3500), { once: true });
+  })();
 </script>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport" />
@@ -39,13 +52,11 @@
             } catch (error) {}
         }());
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js">
-    </script>
-    <script src="otw_markdown.js">
-    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;900&family=Fira+Code:wght@300;500;700&family=Merriweather:ital,wght@0,300;0,700;1,300&display=optional" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;900&family=Fira+Code:wght@300;500;700&family=Merriweather:ital,wght@0,300;0,700;1,300&display=optional" /></noscript>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;900&family=Fira+Code:wght@300;500;700&family=Merriweather:ital,wght@0,300;0,700;1,300&display=swap');
-
         :root {
             --brand-blue: var(--brand-blue);
             --brand-teal: var(--brand-teal);
@@ -1278,6 +1289,7 @@
             }
 
             .post-list {
+                min-height: 34vh;
                 max-height: 34vh;
             }
 
@@ -1383,10 +1395,9 @@
             <div class="archive-legal-brand">© 2026 Outside the World is New, LLC. Outside The World is a claimed brand identifier.</div>
         </div>
     </main>
-    <script src="narrative_data.js">
-    </script>
     <script>
         let groupedMatrix = {};
+        let current_narrative = [];
         const MONTH_ORDER = [
             'January', 'February', 'March', 'April', 'May', 'June',
             'July', 'August', 'September', 'October', 'November', 'December'
@@ -1420,6 +1431,7 @@
         }
 
         function publisherSubhead(post) {
+            if (post && post.subhead) return normalizePlainText(post.subhead);
             return normalizePlainText(post && post.publisher && post.publisher.subhead ? post.publisher.subhead : '');
         }
 
@@ -1433,6 +1445,7 @@
         }
 
         function articleWordCount(post, deck) {
+            if (Number.isFinite(Number(post && post.wordCount))) return Number(post.wordCount);
             const text = stripMarkdownText(markdownWithoutLeadingDeck(post && post.body, deck));
             return (text.match(/[A-Za-z0-9]+(?:[’'][A-Za-z0-9]+)?/g) || []).length;
         }
@@ -1501,10 +1514,12 @@
         }
 
         function buildPostId(post) {
+            if (post && post.postId) return String(post.postId);
             return `${post.date || 'undated'}--${slugify(post.title || 'untitled')}`;
         }
 
         function buildCanonicalArchivePath(post) {
+            if (post && post.url) return String(post.url);
             if (post && post.share_path) return post.share_path;
 
             const file = String(post && post.file ? post.file : '').split('/').pop();
@@ -1526,7 +1541,7 @@
         function redirectLegacyPostUrlIfNeeded() {
             const params = new URLSearchParams(window.location.search);
             const postId = params.get('post');
-            if (!postId || typeof current_narrative === 'undefined') return;
+            if (!postId || !current_narrative.length) return;
 
             const post = current_narrative.find((candidate) => buildPostId(candidate) === postId);
             if (!post) return;
@@ -1537,17 +1552,6 @@
 
         function buildArchiveReactionDomId(post) {
             return `archive-reactions-${slugify(buildPostId(post))}`;
-        }
-
-        function renderArchiveMarkdown(body, post = null) {
-            const normalizedBody = String(body || '')
-                .replace(/\*\*<div class="otw-center">([\s\S]*?)<\/div>\*\*/g, '<div class="otw-center">$1</div>');
-
-            return post && window.renderOtwPost
-                ? window.renderOtwPost({ ...post, body: normalizedBody })
-                : window.renderOtwMarkdown
-                ? window.renderOtwMarkdown(normalizedBody)
-                : marked.parse(normalizedBody);
         }
 
         function buildShareUrl(post) {
@@ -1600,7 +1604,7 @@
         }
 
         function findPostIndexById(postId) {
-            if (!postId || typeof current_narrative === 'undefined') return -1;
+            if (!postId || !current_narrative.length) return -1;
             return current_narrative.findIndex((post) => buildPostId(post) === postId);
         }
 
@@ -1617,7 +1621,7 @@
         }
 
         function initMatrix() {
-            if (typeof current_narrative === 'undefined') return;
+            if (!current_narrative.length) return;
             redirectLegacyPostUrlIfNeeded();
 
             current_narrative.forEach((post, index) => {
@@ -1744,15 +1748,12 @@
             const deck = publisherSubhead(post);
             const deckHtml = deck ? `<p class="entry-deck">${escapeHtml(deck)}</p>` : '';
             const wordCount = articleWordCount(post, deck);
-            const readMinutes = articleReadMinutes(wordCount);
-            const bodyForPreview = markdownWithoutLeadingDeck(post.body, deck);
-            const previewBody = enhanceArchivePreviewHtml(renderArchiveMarkdown(bodyForPreview, { ...post, body: bodyForPreview }));
+            const readMinutes = Number(post.readMinutes) || articleReadMinutes(wordCount);
+            const previewBody = `<p class="entry-body__opening entry-body__dropcap">${escapeHtml(post.excerpt || '')}</p>`;
             const readerPath = buildCanonicalArchivePath(post);
 
             container.classList.remove('visible');
-
-            setTimeout(() => {
-                container.innerHTML = `
+            container.innerHTML = `
                     <header class="entry-preview-header">
                         <p class="entry-label">Selected Signal</p>
                         <h1 class="entry-title">${escapeHtml(post.title)}</h1>
@@ -1776,12 +1777,13 @@
                         <div class="entry-reactions" id="${reactionDomId}"></div>
                     </div>
                 `;
+            window.requestAnimationFrame(() => {
                 container.classList.add('visible');
                 if (window.innerWidth > 1024) {
                     document.getElementById('scroll-target').scrollTop = 0;
                 }
                 initArchiveReactionWidget(post);
-            }, 400);
+            });
 
             document.querySelectorAll('.post-item').forEach(el => el.classList.remove('active'));
             const activeItem = document.getElementById(`item-${index}`);
@@ -1840,9 +1842,67 @@
             }
         });
 
+        function normalizeLegacyNarrative(posts) {
+            return (Array.isArray(posts) ? posts : []).map((post) => {
+                const deck = publisherSubhead(post);
+                const body = markdownWithoutLeadingDeck(post && post.body, deck);
+                const text = stripMarkdownText(body);
+                const words = articleWordCount(post, deck);
+                const excerpt = text.length <= 520
+                    ? text
+                    : `${text.slice(0, 521).replace(/\s+\S*$/, '').trim()}...`;
+                return {
+                    postId: buildPostId(post),
+                    title: normalizePlainText(post && post.title) || 'Untitled essay',
+                    date: String(post && post.date || ''),
+                    url: buildCanonicalArchivePath(post),
+                    subhead: deck,
+                    excerpt,
+                    wordCount: words,
+                    readMinutes: articleReadMinutes(words)
+                };
+            });
+        }
+
+        async function loadNarrativeIndex() {
+            const response = await fetch('narrative_index.json', { cache: 'no-cache' });
+            if (!response.ok) throw new Error(`Could not load narrative_index.json: ${response.status}`);
+            const payload = await response.json();
+            if (payload && payload.schema === 'otw.narrative.index' && payload.version === 1 && Array.isArray(payload.posts) && payload.posts.length) {
+                return payload.posts;
+            }
+            throw new Error('narrative_index.json does not match the archive index contract.');
+        }
+
+        async function loadLegacyNarrative() {
+            const response = await fetch('narrative_data.js', { cache: 'default' });
+            if (!response.ok) throw new Error(`Could not load narrative_data.js: ${response.status}`);
+            const source = await response.text();
+            const posts = new Function(`${source}; return typeof current_narrative !== 'undefined' ? current_narrative : [];`)();
+            return normalizeLegacyNarrative(posts);
+        }
+
+        async function initNarrativeArchive() {
+            try {
+                try {
+                    current_narrative = await loadNarrativeIndex();
+                    document.documentElement.setAttribute('data-narrative-source', 'compact');
+                } catch (compactError) {
+                    console.warn('Compact narrative index unavailable; using the legacy corpus.', compactError);
+                    current_narrative = await loadLegacyNarrative();
+                    document.documentElement.setAttribute('data-narrative-source', 'legacy');
+                }
+                initMatrix();
+            } catch (error) {
+                console.error('Could not initialize the narrative archive.', error);
+                document.getElementById('glass-container').innerHTML = '<p class="entry-body">The archive signal is temporarily unavailable. Permanent essay pages remain available through Search.</p>';
+                document.getElementById('glass-container').classList.add('visible');
+            }
+        }
+
         window.addEventListener('DOMContentLoaded', () => {
             initArchiveMode();
-            initMatrix();
+            void initNarrativeArchive();
         });
     </script>
     <script async defer src="https://cdn.jsdelivr.net/gh/intersect-software/web-reactionz@1/public/setup.min.js" data-siteid="0b926b89-1467-4ef1-a8d4-ca95543047a3" data-noautoinit="1"></script>
