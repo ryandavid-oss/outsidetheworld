@@ -13,8 +13,9 @@
     <meta name="mobile-web-app-capable" content="yes" />
 
     <title>Outside The World &mdash; Writing, Images, Fragments, and Work</title>
-    <meta name="description" content="Essays, poems, images, fragments, and professional work by RyanDavid Burningham." />
+    <meta name="description" content="Outside The World follows RyanDavid Burningham's current writing, poetry, photography, technology, faith, and discoveries across a 26-year personal archive." />
     <link rel="canonical" href="https://outsidetheworld.com/" />
+    <link rel="author" href="https://outsidetheworld.com/ryandavid-burningham.html" />
     <link rel="alternate" type="application/atom+xml" title="Outside The World Atom Feed" href="https://outsidetheworld.com/atom.xml" />
     <link rel="manifest" href="/site.webmanifest" />
 
@@ -30,7 +31,7 @@
     <meta property="og:site_name" content="Outside The World" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:title" content="Outside The World" />
-    <meta property="og:description" content="Essays, poems, images, fragments, and professional work by RyanDavid Burningham." />
+    <meta property="og:description" content="Outside The World follows RyanDavid Burningham's current writing, poetry, photography, technology, faith, and discoveries across a 26-year personal archive." />
     <meta property="og:image" content="https://outsidetheworld.com/Images/og/otw-feed-1200x630.jpg" />
     <meta property="og:image:secure_url" content="https://outsidetheworld.com/Images/og/otw-feed-1200x630.jpg" />
     <meta property="og:image:type" content="image/jpeg" />
@@ -41,7 +42,7 @@
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Outside The World" />
-    <meta name="twitter:description" content="Essays, poems, images, fragments, and professional work by RyanDavid Burningham." />
+    <meta name="twitter:description" content="Outside The World follows RyanDavid Burningham's current writing, poetry, photography, technology, faith, and discoveries across a 26-year personal archive." />
     <meta name="twitter:image" content="https://outsidetheworld.com/Images/og/otw-feed-1200x630.jpg" />
     <meta name="twitter:image:alt" content="Outside The World front page." />
 
@@ -234,6 +235,12 @@
         .site-logo {
             display: inline-flex;
             min-width: 0;
+        }
+
+        .site-title {
+            min-width: 0;
+            margin: 0;
+            line-height: 0;
         }
 
         .site-logo img {
@@ -2517,8 +2524,12 @@
       "@type": "WebSite",
       "@id": "https://outsidetheworld.com/#website",
       "name": "Outside The World",
+      "alternateName": [
+        "OTW",
+        "outsidetheworld.com"
+      ],
       "url": "https://outsidetheworld.com/",
-      "description": "Essays, poems, images, fragments, and professional work by RyanDavid Burningham.",
+      "description": "Outside The World follows RyanDavid Burningham's current writing, poetry, photography, technology, faith, and discoveries across a 26-year personal archive.",
       "publisher": {
         "@id": "https://outsidetheworld.com/#organization"
       }
@@ -2526,7 +2537,9 @@
     {
       "@type": "Organization",
       "@id": "https://outsidetheworld.com/#organization",
-      "name": "Outside the World is New, LLC",
+      "name": "Outside The World",
+      "legalName": "Outside the World is New, LLC",
+      "alternateName": "OTW",
       "url": "https://outsidetheworld.com/",
       "logo": {
         "@type": "ImageObject",
@@ -2542,6 +2555,8 @@
       "@type": "Person",
       "@id": "https://outsidetheworld.com/ryandavid-burningham.html#person",
       "name": "RyanDavid Burningham",
+      "givenName": "RyanDavid",
+      "familyName": "Burningham",
       "alternateName": [
         "RD Burningham",
         "Rylee Burningham",
@@ -2551,7 +2566,8 @@
       "url": "https://outsidetheworld.com/ryandavid-burningham.html",
       "image": "https://outsidetheworld.com/Images/Profile.jpg",
       "sameAs": [
-        "https://www.linkedin.com/in/ryandavid-burningham-711b4856/"
+        "https://www.linkedin.com/in/ryandavid-burningham-711b4856/",
+        "https://github.com/ryandavid-oss"
       ]
     },
     {
@@ -2559,7 +2575,7 @@
       "@id": "https://outsidetheworld.com/#webpage",
       "url": "https://outsidetheworld.com/",
       "name": "Outside The World \u2014 Writing, Images, Fragments, and Work",
-      "description": "Essays, poems, images, fragments, and professional work by RyanDavid Burningham.",
+      "description": "Outside The World follows RyanDavid Burningham's current writing, poetry, photography, technology, faith, and discoveries across a 26-year personal archive.",
       "isPartOf": {
         "@id": "https://outsidetheworld.com/#website"
       },
@@ -2630,9 +2646,11 @@
     <div class="page">
         <header class="masthead">
             <div class="masthead-top">
-                <a class="site-logo" href="index.html" aria-label="Outside The World home">
-                    <img src="Images/Equal.svg" alt="Outside The World" />
-                </a>
+                <h1 class="site-title">
+                    <a class="site-logo" href="/" aria-label="Outside The World home">
+                        <img src="Images/Equal.svg" alt="Outside The World" />
+                    </a>
+                </h1>
 
                 <nav class="primary-nav" aria-label="Primary">
                     <a href="image_of_the_day.html">Image of the Day</a>
@@ -2657,7 +2675,7 @@
                 </button>
             </div>
 
-            <p class="dek">Writing, images, fragments, and other mish-mash.</p>
+            <p class="dek">Outside The World by RyanDavid Burningham. Writing, images, fragments, and other mish-mash.</p>
 
             <nav id="mobile-menu" class="mobile-menu-popover" popover aria-label="Site menu">
                 <div class="mobile-menu-popover__head">
@@ -2779,7 +2797,6 @@
         </header>
 
         <main class="front-page" data-hydrating aria-label="Outside The World front page" aria-busy="true">
-            <h1 class="visually-hidden">Outside The World</h1>
             <div class="front-grid">
                 <div class="main-column">
                     <article class="lead-story" aria-labelledby="lead-title" data-frontpage-slot="leadStory">

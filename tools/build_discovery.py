@@ -30,6 +30,7 @@ from narrative_sync import markdown_to_html  # noqa: E402
 SITE_URL = "https://outsidetheworld.com"
 AUTHOR_NAME = "RyanDavid Burningham"
 AUTHOR_URL = f"{SITE_URL}/ryandavid-burningham.html"
+AUTHOR_ID = f"{AUTHOR_URL}#person"
 DEFAULT_SOCIAL_IMAGE = f"{SITE_URL}/Images/og/otw-feed-1200x630.jpg"
 TODAY = datetime.now().date().isoformat()
 PRIVATE_SOURCE_HASHES = {
@@ -503,7 +504,9 @@ def render_record(
     social_image = asset_url(record.image, absolute=True) or DEFAULT_SOCIAL_IMAGE
     local_image = asset_url(record.image)
     author_url = AUTHOR_URL if founder_identity(record.author) else f"{SITE_URL}/fragments.html"
-    author_href = "../ryandavid-burningham.html" if founder_identity(record.author) else "../fragments.html"
+    is_founder = founder_identity(record.author)
+    author_href = "/ryandavid-burningham.html" if is_founder else "/fragments.html"
+    author_rel = ' rel="author"' if is_founder else ""
 
     if record.kind == "poem":
         image_html = ""
@@ -542,6 +545,14 @@ def render_record(
         schema_type = "BlogPosting"
         schema_extra = {"articleBody": legacy_wayback_plain_text(record.body)}
 
+    author_schema = {
+        "@type": "Person",
+        "name": record.author,
+        "url": author_url,
+    }
+    if is_founder:
+        author_schema["@id"] = AUTHOR_ID
+
     schema = {
         "@context": "https://schema.org",
         "@type": schema_type,
@@ -551,7 +562,7 @@ def render_record(
         "headline": record.title,
         "description": record.description,
         "isPartOf": {"@id": f"{SITE_URL}/#website"},
-        "author": {"@type": "Person", "name": record.author, "url": author_url},
+        "author": author_schema,
         "mainEntityOfPage": record.url,
         **schema_extra,
     }
@@ -614,7 +625,7 @@ def render_record(
 <body class="record-page record-page--{record.kind}">
   <a class="skip-link" href="#record">Skip to the record</a>
   <header class="record-masthead">
-    <a class="record-brand" href="../index.html" aria-label="Outside The World home">
+    <a class="record-brand" href="/" aria-label="Outside The World home">
       <img src="../Images/Equal.svg" alt="Outside The World" />
     </a>
     <nav aria-label="Record navigation">
@@ -628,7 +639,7 @@ def render_record(
         <p class="record-kicker"><span aria-hidden="true"></span>{html.escape(record.label)}</p>
         <h1>{html.escape(record.title)}</h1>
         <div class="record-meta">
-          {date_meta}<a href="{author_href}">{html.escape(record.author)}</a>
+          {date_meta}<a href="{author_href}"{author_rel}>{html.escape(record.author)}</a>
         </div>
       </header>
       <div class="record-content record-content--{record.kind}">
@@ -643,7 +654,7 @@ def render_record(
   </main>
   <footer class="record-footer">
     <p>Filed where it can be found again.</p>
-    <p><a href="../index.html">Outside The World</a> / <a href="../threads.html">Threads</a> / <a href="../atom.xml">Atom</a></p>
+    <p><a href="/">Outside The World</a> / <a href="../threads.html">Threads</a> / <a href="../atom.xml">Atom</a></p>
   </footer>
 </body>
 </html>
@@ -816,7 +827,7 @@ def write_threads(groups: dict[str, list[DiscoveryRecord]]) -> None:
 </head>
 <body class="threads-page">
   <header class="record-masthead">
-    <a class="record-brand" href="index.html" aria-label="Outside The World home"><img src="Images/Equal.svg" alt="Outside The World" /></a>
+    <a class="record-brand" href="/" aria-label="Outside The World home"><img src="Images/Equal.svg" alt="Outside The World" /></a>
     <nav aria-label="Threads navigation"><a href="residue_archive.html">Current archive</a><a href="wayback.html">Wayback</a></nav>
   </header>
   <main class="threads-shell">
@@ -827,7 +838,7 @@ def write_threads(groups: dict[str, list[DiscoveryRecord]]) -> None:
     </header>
     <div class="threads-list">{section_html}</div>
   </main>
-  <footer class="record-footer"><p>No taxonomy was harmed. It was merely asked to loosen up.</p><p><a href="index.html">Outside The World</a> / <a href="ryandavid-burningham.html">Who made this mess?</a></p></footer>
+  <footer class="record-footer"><p>No taxonomy was harmed. It was merely asked to loosen up.</p><p><a href="/">Outside The World</a> / <a href="ryandavid-burningham.html">Who made this mess?</a></p></footer>
 </body>
 </html>
 ''',

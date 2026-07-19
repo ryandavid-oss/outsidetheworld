@@ -1555,7 +1555,7 @@ def render_share_page(post, newer_post=None, older_post=None, include_draft_read
     if length_tier == 'long':
         reader_dock = f'''
     <header class="reader-dock" data-reader-dock aria-label="Article reading controls">
-        <a class="reader-dock-mark" href="../index.html" aria-label="Outside The World home">=</a>
+        <a class="reader-dock-mark" href="/" aria-label="Outside The World home">=</a>
         <div class="reader-dock-copy">
             <span class="reader-dock-title">{smartypants_safe(post['title'])}</span>
             <span class="reader-dock-section" data-reader-section>Introduction</span>
@@ -1576,6 +1576,7 @@ def render_share_page(post, newer_post=None, older_post=None, include_draft_read
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>{smartypants_safe(post['title'])} | Outside The World</title>
     <link rel="canonical" href="{share_url}" />
+    <link rel="author" href="{author_url}" />
     <link href="../favicon.svg" rel="icon" type="image/svg+xml" />
     <link rel="preload" as="image" href="/Images/Equal.svg" type="image/svg+xml" />{feature_preload}
     <link href="../theme.css" rel="stylesheet" />
@@ -1613,13 +1614,13 @@ def render_share_page(post, newer_post=None, older_post=None, include_draft_read
     <main class="archive-reader">
         <article class="{reader_card_classes}" aria-labelledby="entry-title">
             <header class="reader-chrome">
-                <a class="reader-mark" href="../index.html" aria-label="Outside The World home">
+                <a class="reader-mark" href="/" aria-label="Outside The World home">
                     <img class="reader-mark-image reader-mark-image--dark" src="/Images/Equal.svg" alt="Outside The World">
                     <img class="reader-mark-image reader-mark-image--light" src="/Images/Equal_dark.svg" alt="Outside The World">
                 </a>
                 <div class="reader-chrome-tools">
                     <nav class="reader-breadcrumbs" aria-label="Publication navigation">
-                        <a href="../index.html">Home</a>
+                        <a href="/">Home</a>
                         <span class="reader-breadcrumb-separator" aria-hidden="true">/</span>
                         <a href="{archive_url}">Archive</a>
                     </nav>
@@ -1632,7 +1633,7 @@ def render_share_page(post, newer_post=None, older_post=None, include_draft_read
             <header class="entry-header">
                 <p class="entry-label">Essay <span aria-hidden="true">/</span> Outside The World</p>
                 <h1 class="entry-title" id="entry-title">{smartypants_safe(post['title'])}</h1>{deck_html}
-                <p class="entry-byline">By <strong><a href="../ryandavid-burningham.html">{smartypants_safe(author_name)}</a></strong></p>
+                <p class="entry-byline">By <strong><a href="/ryandavid-burningham.html" rel="author">{smartypants_safe(author_name)}</a></strong></p>
                 <div class="entry-meta-strip" aria-label="Essay details">
                     <span class="entry-meta-item"><strong>Filed</strong> {smartypants_safe(post['date'])}</span>
                     <span class="entry-meta-item"><strong>Words</strong> {word_count:,}</span>
@@ -1655,7 +1656,7 @@ def render_share_page(post, newer_post=None, older_post=None, include_draft_read
             {reader_nav}
             <div class="archive-actions">
                 <a class="archive-link" href="{archive_url}">OPEN ESSAY ARCHIVE</a>
-                <a class="archive-link" href="../index.html">RETURN TO OTW</a>
+                <a class="archive-link" href="/">RETURN TO OTW</a>
             </div>
         </article>
         <footer class="archive-legal">
