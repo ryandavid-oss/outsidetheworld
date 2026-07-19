@@ -513,7 +513,7 @@ def probe_urls(
                 continue
             reference = urls[url][0]
             status = result.get("status")
-            if status in {401, 403, 405, 406, 409, 412, 417, 418, 425, 429, 451, 500, 502, 503, 600, 999} or status is None:
+            if status in {401, 403, 405, 406, 409, 412, 415, 417, 418, 425, 429, 451, 500, 502, 503, 600, 999} or status is None:
                 severity, code = "warning", "external_reference_unverified"
             else:
                 severity, code = "error", "broken_external_reference"
