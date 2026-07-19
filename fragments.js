@@ -13,6 +13,34 @@
   let visibleCount = PAGE_SIZE;
   let feedSource = 'loading';
   let loadActive = false;
+  let fragmentImageObserver = null;
+
+  function activateFragmentImage(image) {
+    if (!(image instanceof HTMLImageElement)) return;
+    const source = image.dataset.fragmentSrc;
+    if (!source || image.dataset.fragmentLoaded === 'true') return;
+    image.dataset.fragmentLoaded = 'true';
+    image.src = source;
+  }
+
+  function queueFragmentImages(root = document) {
+    const images = [...root.querySelectorAll('img[data-fragment-src]')];
+    if (!images.length) return;
+    if (!('IntersectionObserver' in window)) {
+      images.forEach(activateFragmentImage);
+      return;
+    }
+    if (!fragmentImageObserver) {
+      fragmentImageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          activateFragmentImage(entry.target);
+          observer.unobserve(entry.target);
+        });
+      }, { rootMargin: '300px 0px', threshold: 0.01 });
+    }
+    images.forEach((image) => fragmentImageObserver.observe(image));
+  }
 
   function isRecord(value) {
     return Boolean(value) && typeof value === 'object' && !Array.isArray(value);
@@ -368,7 +396,7 @@
     if (!preview) return '';
     const layoutClass = preview.image ? '' : ' is-text-only';
     const image = preview.image
-      ? `<span class="fragment-link-image"><img src="${escapeHtml(preview.image)}" alt="" loading="lazy" decoding="async" /></span>`
+      ? `<span class="fragment-link-image"><img data-fragment-src="${escapeHtml(preview.image)}" alt="" decoding="async" /></span>`
       : '';
     return `
       <a class="fragment-link-card${layoutClass}" href="${escapeHtml(preview.url)}" target="_blank" rel="noopener noreferrer">
@@ -463,7 +491,7 @@
       isFounder,
       isBot,
       avatarHtml: avatar
-        ? `<img class="fragment-avatar" src="${escapeHtml(avatar)}" alt="${escapeHtml(name)}" />`
+        ? `<img class="fragment-avatar" data-fragment-src="${escapeHtml(avatar)}" alt="${escapeHtml(name)}" decoding="async" />`
         : initialsAvatar(name)
     };
   }
@@ -503,7 +531,7 @@
       ? `
         <div class="fragment-media">
           <button class="fragment-media-button" type="button" data-media-open="${id}" data-media-caption="${escapeHtml(media.caption)}" aria-label="Open image">
-            <img src="${escapeHtml(media.url)}" alt="${escapeHtml(media.alt)}" loading="lazy" decoding="async" />
+            <img data-fragment-src="${escapeHtml(media.url)}" alt="${escapeHtml(media.alt)}" decoding="async" />
           </button>
         </div>
       `
@@ -560,6 +588,7 @@
         <p class="empty-copy">${escapeHtml(copy)}</p>
       </section>
     `;
+    document.body.dataset.feedState = 'ready';
   }
 
   function feedStatus() {
@@ -585,8 +614,10 @@
     const viewer = document.getElementById('mediaViewer');
     const viewerImage = document.getElementById('mediaViewerImage');
     const viewerCaption = document.getElementById('mediaViewerCaption');
-    if (!image?.src || !viewer || !viewerImage || !viewerCaption) return;
-    viewerImage.src = image.src;
+    const source = image?.currentSrc || image?.getAttribute('src') || image?.dataset.fragmentSrc;
+    if (!source || !viewer || !viewerImage || !viewerCaption) return;
+    activateFragmentImage(image);
+    viewerImage.src = source;
     viewerImage.alt = image.alt;
     viewerCaption.textContent = button.dataset.mediaCaption || '';
     viewerCaption.hidden = !viewerCaption.textContent;
@@ -604,7 +635,10 @@
   function renderVisible(requestedID = null) {
     const container = document.getElementById('fragmentsFeed');
     const items = allFragments.slice(0, visibleCount);
+    fragmentImageObserver?.disconnect();
     container.innerHTML = items.map(buildCard).join('') + feedStatus();
+    document.body.dataset.feedState = 'ready';
+    queueFragmentImages(container);
     bindMediaButtons();
     updateLoadMore();
 
