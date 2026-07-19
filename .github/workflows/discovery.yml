@@ -7,7 +7,10 @@ on:
       - 'poetry_data.js'
       - 'new_poetry_data.js'
       - 'fragments_data.js'
+      - 'frontpage_manifest.json'
+      - 'responsive_media.json'
       - 'tools/build_discovery.py'
+      - 'tools/build_frontpage_payload.py'
       - 'archive_entry.css'
 
 permissions:
@@ -35,10 +38,12 @@ jobs:
       - name: Build permanent records and sitemap
         run: |
           python tools/build_discovery.py
+          python tools/build_frontpage_payload.py
+          python tools/test_frontpage_payload.py
           python tools/generate_atom_feed.py
           python tools/audit_wayback_media.py --local-only --strict
           python tools/validate_discovery.py
-          git add sitemap.xml threads.html atom.xml wayback poems iotd fragments
+          git add frontpage_payload.json sitemap.xml threads.html atom.xml wayback poems iotd fragments
           python tools/audit_public_site.py --strict
 
       - name: Commit generated discovery files

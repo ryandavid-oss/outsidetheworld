@@ -32,8 +32,10 @@ jobs:
           python narrative_sync.py
           python tools/generate_atom_feed.py
           python tools/build_discovery.py
+          python tools/build_frontpage_payload.py
+          python tools/test_frontpage_payload.py
           python tools/validate_discovery.py
-          git add narrative_data.js atom.xml sitemap.xml threads.html archive poems iotd fragments wayback Images/og/archive
+          git add narrative_data.js frontpage_payload.json atom.xml sitemap.xml threads.html archive poems iotd fragments wayback Images/og/archive
           python tools/audit_public_site.py --strict
           echo "--- VERIFYING FILE CONTENT ---"
           cat narrative_data.js  # This will show the content in the GitHub log

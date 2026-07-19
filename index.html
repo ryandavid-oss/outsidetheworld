@@ -966,7 +966,11 @@
             transition: opacity 220ms ease;
         }
 
-        .front-page[data-hydrating] > .front-grid,
+        .front-page[data-hydrating] > .front-grid {
+            opacity: 0;
+            pointer-events: none;
+        }
+
         .front-page[data-hydrating] > .editorial-section,
         .front-page[data-hydrating] > .professional-note {
             opacity: 0.9;
@@ -2491,7 +2495,10 @@
                 animation-iteration-count: 1 !important;
             }
 
-            .front-page[data-hydrating] > .front-grid,
+            .front-page[data-hydrating] > .front-grid {
+                opacity: 0;
+            }
+
             .front-page[data-hydrating] > .editorial-section,
             .front-page[data-hydrating] > .professional-note {
                 opacity: 1;
@@ -3327,6 +3334,24 @@
             }
         }
 
+        async function loadFrontpagePayload() {
+            const response = await fetch('frontpage_payload.json', { cache: 'no-cache' });
+            if (!response.ok) {
+                throw new Error(`Could not load frontpage_payload.json: ${response.status}`);
+            }
+            const payload = await response.json();
+            const sources = payload && payload.sources;
+            const validSources = sources && typeof sources === 'object' &&
+                Array.isArray(sources.essays) && sources.essays.length &&
+                Array.isArray(sources.images) && sources.images.length &&
+                Array.isArray(sources.drift) && sources.drift.length &&
+                Array.isArray(sources.fragments);
+            if (payload && payload.schema === 'otw.frontpage.payload' && payload.version === 1 && validSources) {
+                return payload;
+            }
+            throw new Error('frontpage_payload.json does not match the homepage payload contract.');
+        }
+
         async function loadImageManifest() {
             const response = await fetch('image_manifest.json', { cache: 'default' });
             if (!response.ok) {
@@ -4120,6 +4145,43 @@
             };
         }
 
+        function normalizePreparedSources(sourcePayload) {
+            const expectedTypes = {
+                essays: 'essay',
+                images: 'iotd',
+                drift: 'drift',
+                fragments: 'fragment'
+            };
+            const prepared = {};
+            Object.entries(expectedTypes).forEach(([sourceName, expectedType]) => {
+                const items = Array.isArray(sourcePayload && sourcePayload[sourceName])
+                    ? sourcePayload[sourceName]
+                    : [];
+                prepared[sourceName] = items
+                    .filter((item) => item && typeof item === 'object' && item.type === expectedType && item.key && item.url)
+                    .map((item) => ({
+                        ...item,
+                        dateSort: parseContentDate(item.timestamp || item.date),
+                        imageCandidates: uniqueStrings(Array.isArray(item.imageCandidates)
+                            ? item.imageCandidates
+                            : [item.image]),
+                        homepageFocal: normalizeHomepageFocal(item.homepageFocal),
+                        ...(expectedType === 'iotd' ? {
+                            displayDate: item.displayDate || formatIotdDate(item.date),
+                            homepageFit: item.homepageFit === 'contain' ? 'contain' : 'cover'
+                        } : {}),
+                        ...(expectedType === 'fragment' ? {
+                            date: formatFragmentDate(item.timestamp)
+                        } : {})
+                    }))
+                    .sort((a, b) => b.dateSort - a.dateSort || String(b.date).localeCompare(String(a.date)));
+            });
+            if (!prepared.essays.length || !prepared.images.length || !prepared.drift.length) {
+                throw new Error('Compact homepage payload did not contain renderable source records.');
+            }
+            return prepared;
+        }
+
         function pickUniqueContent(rule, sources, usedKeys) {
             const preferred = pickContent(rule, sources);
             if (preferred && !usedKeys.has(contentKey(preferred))) {
@@ -4184,23 +4246,39 @@
             const frontPage = document.querySelector('.front-page');
 
             try {
-                const manifestPromise = loadFrontpageManifest();
-                const narrativesPromise = loadFrontpageSource('narrative_data.js', () => loadArrayFromScript('narrative_data.js', 'typeof current_narrative !== "undefined" ? current_narrative : []'));
-                const imageManifestPromise = loadFrontpageSource('image_manifest.json', loadImageManifest);
-                const livingVersePromise = loadFrontpageSource('new_poetry_data.js', () => loadArrayFromScript('new_poetry_data.js', 'typeof livingVerse !== "undefined" ? livingVerse : []'));
-                const fragmentsPromise = loadFrontpageSource('fragments_data.js', loadLocalFragments);
-                const responsiveMediaPromise = loadResponsiveMedia();
-
-                const [manifest, narratives, imageManifest, livingVerse, fragments, responsiveMedia] = await Promise.all([
-                    manifestPromise,
-                    narrativesPromise,
-                    imageManifestPromise,
-                    livingVersePromise,
-                    fragmentsPromise,
-                    responsiveMediaPromise
-                ]);
-                responsiveMediaSources = responsiveMedia;
-                renderFrontPage(manifest, normalizeSources(narratives, imageManifest, livingVerse, fragments));
+                try {
+                    const payload = await loadFrontpagePayload();
+                    responsiveMediaSources = payload.responsiveMedia && typeof payload.responsiveMedia === 'object'
+                        ? payload.responsiveMedia
+                        : {};
+                    renderFrontPage(
+                        normalizeFrontpageManifest(payload.manifest),
+                        normalizePreparedSources(payload.sources)
+                    );
+                    window.__otwFrontpageDataMode = 'compact';
+                    window.__otwFrontpagePayloadHash = String(payload.contentHash || '');
+                    frontPage?.setAttribute('data-frontpage-data', 'compact');
+                } catch (payloadError) {
+                    console.warn('Compact homepage payload unavailable; using legacy source files.', payloadError);
+                    const manifestPromise = loadFrontpageManifest();
+                    const narrativesPromise = loadFrontpageSource('narrative_data.js', () => loadArrayFromScript('narrative_data.js', 'typeof current_narrative !== "undefined" ? current_narrative : []'));
+                    const imageManifestPromise = loadFrontpageSource('image_manifest.json', loadImageManifest);
+                    const livingVersePromise = loadFrontpageSource('new_poetry_data.js', () => loadArrayFromScript('new_poetry_data.js', 'typeof livingVerse !== "undefined" ? livingVerse : []'));
+                    const fragmentsPromise = loadFrontpageSource('fragments_data.js', loadLocalFragments);
+                    const responsiveMediaPromise = loadResponsiveMedia();
+                    const [manifest, narratives, imageManifest, livingVerse, fragments, responsiveMedia] = await Promise.all([
+                        manifestPromise,
+                        narrativesPromise,
+                        imageManifestPromise,
+                        livingVersePromise,
+                        fragmentsPromise,
+                        responsiveMediaPromise
+                    ]);
+                    responsiveMediaSources = responsiveMedia;
+                    renderFrontPage(manifest, normalizeSources(narratives, imageManifest, livingVerse, fragments));
+                    window.__otwFrontpageDataMode = 'legacy';
+                    frontPage?.setAttribute('data-frontpage-data', 'legacy');
+                }
                 hydrateLatestFragmentFromCache();
                 void refreshLatestFragmentFromPublicFeed();
             } finally {

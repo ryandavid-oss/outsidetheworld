@@ -9,6 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 MANIFEST_PATH = ROOT / "image_manifest.json"
 VALIDATOR_PATH = ROOT / "tools" / "validate_iotd_manifest.py"
 DISCOVERY_BUILDER_PATH = ROOT / "tools" / "build_discovery.py"
+FRONTPAGE_BUILDER_PATH = ROOT / "tools" / "build_frontpage_payload.py"
 
 
 def load_manifest() -> list:
@@ -110,6 +111,14 @@ def main() -> int:
     )
     if discovery_result.returncode != 0:
         return discovery_result.returncode
+
+    frontpage_result = subprocess.run(
+        [sys.executable, str(FRONTPAGE_BUILDER_PATH)],
+        cwd=ROOT,
+        check=False,
+    )
+    if frontpage_result.returncode != 0:
+        return frontpage_result.returncode
 
     print(f"OK: added IOTD entry and permanent record for {date}")
     return 0

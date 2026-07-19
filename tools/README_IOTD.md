@@ -18,7 +18,7 @@ The helper will:
 2. Validate the manifest
 3. Fail if the date or image already exists
 4. Fail if the image file is missing
-5. Rebuild the permanent image record and sitemap
+5. Rebuild the permanent image record, sitemap, and compact homepage payload
 
 Responsive derivatives are generated separately so the published original
 remains available for opening and downloading:
@@ -27,9 +27,10 @@ remains available for opening and downloading:
 python3 tools/build_responsive_media.py --upload
 ```
 
-That command updates `responsive_media.json` and uploads immutable WebP/JPEG
-sizes used by the homepage and Image of the Day archive. Run it after adding or
-changing public homepage media.
+That command updates `responsive_media.json`, refreshes
+`frontpage_payload.json`, and uploads immutable WebP/JPEG sizes used by the
+homepage and Image of the Day archive. Run it after adding or changing public
+homepage media.
 
 ## Recommended flow
 

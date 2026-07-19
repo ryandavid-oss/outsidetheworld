@@ -698,6 +698,7 @@ def expected_output_paths(doc: source_contract.SourceDocument) -> set[Path]:
     return {
         doc.path,
         ROOT / "narrative_data.js",
+        ROOT / "frontpage_payload.json",
         ROOT / "atom.xml",
         ROOT / doc.archive_path,
         ROOT / doc.og_path,
@@ -709,6 +710,7 @@ def snapshot_generation_scope(doc: source_contract.SourceDocument) -> set[Path]:
     paths.update(ARCHIVE_ROOT.glob("*.html"))
     paths.update(OG_ROOT.glob("*.png"))
     paths.add(ROOT / "narrative_data.js")
+    paths.add(ROOT / "frontpage_payload.json")
     paths.add(ROOT / "atom.xml")
     paths.add(doc.path)
     return paths
@@ -717,7 +719,13 @@ def snapshot_generation_scope(doc: source_contract.SourceDocument) -> set[Path]:
 def run_generation(doc: source_contract.SourceDocument) -> dict:
     sync_result = run_command([sys.executable, "narrative_sync.py"])
     feed_result = run_command([sys.executable, "tools/generate_atom_feed.py"])
-    return {"sync": sync_result, "feed": feed_result, "ok": sync_result["ok"] and feed_result["ok"]}
+    frontpage_result = run_command([sys.executable, "tools/build_frontpage_payload.py"])
+    return {
+        "sync": sync_result,
+        "feed": feed_result,
+        "frontpage": frontpage_result,
+        "ok": sync_result["ok"] and feed_result["ok"] and frontpage_result["ok"],
+    }
 
 
 def regenerate_with_allowlist(doc: source_contract.SourceDocument, source: str, allow_unexpected: bool = False) -> dict:

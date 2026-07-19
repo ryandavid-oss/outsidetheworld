@@ -276,6 +276,14 @@ def main() -> int:
     print(f"Wrote {OUTPUT_PATH.relative_to(ROOT)} with {len(records)} lookup keys.")
     print(f"Prepared {len(unique_uploads)} immutable variants.")
 
+    frontpage_result = subprocess.run(
+        [sys.executable, str(ROOT / "tools" / "build_frontpage_payload.py")],
+        cwd=ROOT,
+        check=False,
+    )
+    if frontpage_result.returncode != 0:
+        return frontpage_result.returncode
+
     if skipped:
         print("Skipped sources:")
         for source, reason in skipped:
