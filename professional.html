@@ -23,8 +23,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;700&family=Inter:wght@100;300;400;700;900&display=swap"
-        rel="stylesheet" />
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;700&family=Inter:wght@100;300;400;700;900&display=optional"
+        rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;700&family=Inter:wght@100;300;400;700;900&display=optional"
+        rel="stylesheet" /></noscript>
 
     <!-- Social -->
     <meta property="og:type" content="website" />
@@ -42,12 +45,26 @@
     <meta name="twitter:image" content="https://outsidetheworld.com/Images/SocialPreview.jpg">
 
     <!-- Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YKRKPFV2MB"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
         gtag('config', 'G-YKRKPFV2MB');
+        (() => {
+            let analyticsLoaded = false;
+            const loadAnalytics = () => {
+                if (analyticsLoaded) return;
+                analyticsLoaded = true;
+                const script = document.createElement('script');
+                script.async = true;
+                script.src = 'https://www.googletagmanager.com/gtag/js?id=G-YKRKPFV2MB';
+                document.head.appendChild(script);
+            };
+            ['pointerdown', 'keydown', 'touchstart'].forEach((eventName) => {
+                window.addEventListener(eventName, loadAnalytics, { once: true, passive: true });
+            });
+            window.addEventListener('load', () => window.setTimeout(loadAnalytics, 3500), { once: true });
+        })();
     </script>
 
     <!-- Page CSS -->
