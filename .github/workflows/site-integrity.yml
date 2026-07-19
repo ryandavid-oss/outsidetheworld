@@ -31,6 +31,12 @@ jobs:
       - name: Install image validation support
         run: python -m pip install pillow
 
+      - name: Enforce first-click performance budgets
+        run: |
+          python tools/test_frontpage_payload.py
+          python tools/test_narrative_index.py
+          python tools/check_performance_budgets.py
+
       - name: Audit every deployed document, reference, image, and external dependency
         run: >-
           python tools/audit_public_site.py

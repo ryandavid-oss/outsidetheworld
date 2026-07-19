@@ -973,13 +973,15 @@ def test_share_copy_search_and_feed_paths_do_not_emit_legacy_residue_urls():
         assert "residue_archive.html?post=" not in atom_text
 
 
-def test_public_pages_use_shared_post_renderer():
+def test_public_pages_use_appropriate_post_payloads():
     view_post = (ROOT / "view_post.html").read_text(encoding="utf-8")
     residue = (ROOT / "residue_archive.html").read_text(encoding="utf-8")
     post = (ROOT / "post.html").read_text(encoding="utf-8")
 
     assert "window.renderOtwPost ? window.renderOtwPost(post)" in view_post
-    assert "window.renderOtwPost" in residue
+    assert "narrative_index.json" in residue
+    assert '<script src="narrative_data.js"' not in residue
+    assert "buildCanonicalArchivePath(post)" in residue
     assert "renderOtwMarkdown" in post
 
 
@@ -1077,7 +1079,7 @@ def run():
         test_reading_aids_render_only_when_approved_or_previewed,
         test_residue_archive_legacy_urls_resolve_to_canonical_archive_paths,
         test_share_copy_search_and_feed_paths_do_not_emit_legacy_residue_urls,
-        test_public_pages_use_shared_post_renderer,
+        test_public_pages_use_appropriate_post_payloads,
         test_public_css_contract_exists_everywhere,
         test_publisher_preview_buttons_share_the_production_renderer,
         test_publisher_just_write_mode_preserves_the_composer_contract,

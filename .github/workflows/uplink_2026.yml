@@ -7,6 +7,7 @@ on:
       - 'narrative_sync.py'
       - 'tools/build_narrative_index.py'
       - 'tools/test_narrative_index.py'
+      - 'tools/check_performance_budgets.py'
 
 permissions:
   contents: write
@@ -38,6 +39,7 @@ jobs:
           python tools/build_discovery.py
           python tools/build_frontpage_payload.py
           python tools/test_frontpage_payload.py
+          python tools/check_performance_budgets.py
           python tools/validate_discovery.py
           git add narrative_data.js narrative_index.json frontpage_payload.json atom.xml sitemap.xml threads.html archive poems iotd fragments wayback Images/og/archive
           python tools/audit_public_site.py --strict
