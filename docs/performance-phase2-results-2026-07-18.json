@@ -1,0 +1,80 @@
+{
+  "measuredAt": "2026-07-18",
+  "timezone": "America/Phoenix",
+  "lighthouseVersion": "13.0.3",
+  "homepageMobile": {
+    "method": "three cold production Lighthouse runs; medians reported",
+    "runs": [
+      {
+        "performanceScore": 93,
+        "firstContentfulPaintSeconds": 0.9946345,
+        "largestContentfulPaintSeconds": 2.9801535,
+        "speedIndexSeconds": 3.6690838303,
+        "totalBlockingTimeMilliseconds": 16.5,
+        "cumulativeLayoutShift": 0,
+        "transferBytes": 481782,
+        "requests": 18,
+        "frontpagePayloadTransferBytes": 9739,
+        "legacyHomepageDataRequests": 0
+      },
+      {
+        "performanceScore": 99,
+        "firstContentfulPaintSeconds": 0.941444,
+        "largestContentfulPaintSeconds": 2.180775,
+        "speedIndexSeconds": 0.941444,
+        "totalBlockingTimeMilliseconds": 45,
+        "cumulativeLayoutShift": 0,
+        "transferBytes": 315173,
+        "requests": 16,
+        "frontpagePayloadTransferBytes": 9737,
+        "legacyHomepageDataRequests": 0
+      },
+      {
+        "performanceScore": 97,
+        "firstContentfulPaintSeconds": 1.013098,
+        "largestContentfulPaintSeconds": 2.423381,
+        "speedIndexSeconds": 2.3543425058,
+        "totalBlockingTimeMilliseconds": 123,
+        "cumulativeLayoutShift": 0,
+        "transferBytes": 315384,
+        "requests": 17,
+        "frontpagePayloadTransferBytes": 9756,
+        "legacyHomepageDataRequests": 0
+      }
+    ],
+    "median": {
+      "performanceScore": 97,
+      "firstContentfulPaintSeconds": 0.9946345,
+      "largestContentfulPaintSeconds": 2.423381,
+      "speedIndexSeconds": 2.3543425058,
+      "totalBlockingTimeMilliseconds": 45,
+      "cumulativeLayoutShift": 0,
+      "transferBytes": 315384,
+      "requests": 17,
+      "frontpagePayloadTransferBytes": 9739,
+      "legacyHomepageDataRequests": 0
+    }
+  },
+  "compactPayload": {
+    "rawBytes": 58113,
+    "gzipBytes": 9260,
+    "sources": {
+      "essays": 12,
+      "images": 8,
+      "drift": 7,
+      "fragments": 1
+    },
+    "responsiveMediaLookups": 19,
+    "compressedBudgetBytes": 20000
+  },
+  "integrity": {
+    "selectionEquivalent": true,
+    "forcedLegacyFallbackEquivalent": true,
+    "staleTitleSuppressedDuringHydration": true,
+    "liveCompactMode": true,
+    "localErrors": 0,
+    "localWarnings": 0,
+    "productionWorkflow": "passed",
+    "productionCommit": "47cebc2"
+  }
+}
