@@ -5,7 +5,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST_PATH = ROOT / "image_manifest.json"
-IOTD_PUBLIC_BASE_URL = "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/"
+IOTD_PUBLIC_BASE_URL = "https://otw-media.ryandavid.workers.dev/o/"
 
 
 def fail(message: str) -> int:

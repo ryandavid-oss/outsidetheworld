@@ -20,9 +20,21 @@ The helper will:
 4. Fail if the image file is missing
 5. Rebuild the permanent image record and sitemap
 
+Responsive derivatives are generated separately so the published original
+remains available for opening and downloading:
+
+```bash
+python3 tools/build_responsive_media.py --upload
+```
+
+That command updates `responsive_media.json` and uploads immutable WebP/JPEG
+sizes used by the homepage and Image of the Day archive. Run it after adding or
+changing public homepage media.
+
 ## Recommended flow
 
 1. Place the image file in `Images/IOTD/`
 2. Run `add_iotd_entry.py`
-3. Review `git diff`
-4. Commit
+3. Run `build_responsive_media.py --upload`
+4. Review `git diff`
+5. Commit

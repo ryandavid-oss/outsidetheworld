@@ -17,7 +17,7 @@ Date: July 1, 2026
       "id": "image_mr3tyan6_pyxuvg",
       "type": "image",
       "imageRef": "image_mr3tyan6_pyxuvg",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3tyaxu.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3tyaxu.jpg",
       "objectKey": "narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3tyaxu.jpg",
       "displaySize": "small",
       "alignment": "center",
@@ -99,7 +99,7 @@ Date: July 1, 2026
       "id": "image_mr3u03ky_vpdqvn",
       "type": "image",
       "imageRef": "image_mr3u03ky_vpdqvn",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3u03pw.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3u03pw.jpg",
       "objectKey": "narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3u03pw.jpg",
       "displaySize": "x-small",
       "alignment": "center",
@@ -151,7 +151,7 @@ Date: July 1, 2026
       "id": "image_mr3uowfj_rtvhx3",
       "type": "image",
       "imageRef": "image_mr3uowfj_rtvhx3",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3uows9.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3uows9.jpg",
       "objectKey": "narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3uows9.jpg",
       "displaySize": "small",
       "alignment": "center",
@@ -251,7 +251,7 @@ Date: July 1, 2026
       "id": "image_mr3uvc84_h6to3v",
       "type": "image",
       "imageRef": "image_mr3uvc84_h6to3v",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3uvchx.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3uvchx.jpg",
       "objectKey": "narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3uvchx.jpg",
       "displaySize": "medium",
       "alignment": "center",
@@ -333,7 +333,7 @@ Date: July 1, 2026
       "id": "image_mr3v3gpp_43yci9",
       "type": "image",
       "imageRef": "image_mr3v3gpp_43yci9",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3v3h09.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3v3h09.jpg",
       "objectKey": "narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3v3h09.jpg",
       "displaySize": "medium",
       "alignment": "center",
@@ -445,7 +445,7 @@ Date: July 1, 2026
       "id": "image_mr3z4vg4_50s1ay",
       "type": "image",
       "imageRef": "image_mr3z4vg4_50s1ay",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3z4vqq.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3z4vqq.jpg",
       "objectKey": "narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3z4vqq.jpg",
       "displaySize": "medium",
       "alignment": "center",
@@ -467,7 +467,7 @@ Date: July 1, 2026
   "images": [
     {
       "id": "image_mr3tyan6_pyxuvg",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3tyaxu.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3tyaxu.jpg",
       "objectKey": "narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3tyaxu.jpg",
       "alt": "Narrative image",
       "caption": "",
@@ -477,7 +477,7 @@ Date: July 1, 2026
     },
     {
       "id": "image_mr3u03ky_vpdqvn",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3u03pw.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3u03pw.jpg",
       "objectKey": "narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3u03pw.jpg",
       "alt": "Narrative image",
       "caption": "",
@@ -487,7 +487,7 @@ Date: July 1, 2026
     },
     {
       "id": "image_mr3uowfj_rtvhx3",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3uows9.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3uows9.jpg",
       "objectKey": "narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3uows9.jpg",
       "alt": "Narrative image",
       "caption": "",
@@ -497,7 +497,7 @@ Date: July 1, 2026
     },
     {
       "id": "image_mr3uvc84_h6to3v",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3uvchx.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3uvchx.jpg",
       "objectKey": "narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3uvchx.jpg",
       "alt": "Narrative image",
       "caption": "",
@@ -507,7 +507,7 @@ Date: July 1, 2026
     },
     {
       "id": "image_mr3v3gpp_43yci9",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3v3h09.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3v3h09.jpg",
       "objectKey": "narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3v3h09.jpg",
       "alt": "Narrative image",
       "caption": "",
@@ -517,7 +517,7 @@ Date: July 1, 2026
     },
     {
       "id": "image_mr3z4vg4_50s1ay",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3z4vqq.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3z4vqq.jpg",
       "objectKey": "narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3z4vqq.jpg",
       "alt": "Narrative image",
       "caption": "",
@@ -531,7 +531,7 @@ Date: July 1, 2026
 
 _How the children of cartridges inherited a medium increasingly shaped by risk._
 
-![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3tyaxu.jpg)
+![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3tyaxu.jpg)
 
 When I was 10 years old, just after school ended on a cold winter Friday, I walked into the local movie rental store off of 500 south in Bountiful, Utah.
 
@@ -557,7 +557,7 @@ Am I being too grand? Do I spend too much time in vain nostalgic pining? After a
 
 And yet.
 
-![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3u03pw.jpg)
+![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3u03pw.jpg)
 
 If you were born when I was born, video games were not just entertainment. They were part of the fabric of growing up. They were there in basements and wood-paneled bedrooms, in Blockbuster cases and Toys "R" Us aisles, in Nintendo Power previews and playground rumors and long summer sleepovers when time seemed inexhaustible.
 
@@ -573,7 +573,7 @@ So yes, maybe we who grew up loving the medium did inherit the industry, or at l
 
 We did not inherit the basement sleepovers. We inherited the boardroom built on top of them.
 
-![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3uows9.jpg)
+![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3uows9.jpg)
 
 By the time the N64 kids were old enough to have authority, the economics underneath had changed. A video game, once a peculiar creation of a small group, something to be discovered in magazines and lucky encounters at the local Fred Meyer, was now a multifaceted entity. It was a platform strategy, a revenue forecast, a five-year plan, a franchise pillar, a live-service candidate, a licensing opportunity, and a risk profile.
 
@@ -605,7 +605,7 @@ Nintendo would look at the industry running in one direction and quietly walk aw
 
 This is why their silence in the current state of the beleaguered gaming industry feels so off to me. And not mysterious, like in years past. Not their usual theatrics, either.  Just...silent.
 
-![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3uvchx.jpg)
+![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3uvchx.jpg)
 
 Surely, there is a difference. Old Nintendo secrecy felt like ceremony; like a curtain in front of a stage. You knew something was behind it. You could feel the heat behind it. How I pine for the days of the magazine covers, the E3 reveals, the demo kiosks, the new Mario games and demos that propelled the hardware into making sense.
 
@@ -631,7 +631,7 @@ My soul felt literal weight. The games themselves? They occupied actual space, b
 
 I understand that the world has changed significantly. Today, children and young adults find their own sense of magic in places like Fortnite lobbies and Adopt Me sessions. These are games that I do not play, nor fully comprehend. I am also not naive enough to believe that the disappearance of my rituals means the disappearance of theirs.
 
-![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3v3h09.jpg)
+![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3v3h09.jpg)
 
 But I am concerned that the gaming industry has mistaken availability for wonder. Everything is available, yet less tangible. A game can be announced, leaked, datamined, patched, apologized for, monetized, and recontextualized before it even has the chance to exist in our imaginations.
 
@@ -667,7 +667,7 @@ Protective of the thing that protected a part of me. The part that stood in the 
 
 I guess I do not ultimately know who is taking care of the thing that took care of us. I can only place my hope that someone just like us is. I hope they are inside Nintendo, inside the studios, inside the indie teams, inside the places where decisions still get made by people and not only by forecasts. I hope some of them remember blowing into cartridges and staying up too late under the light of a CRT.
 
-![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3z4vqq.jpg)
+![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-01-who-is-taking-care-of-the-thing-that-took-care-of-us-mr3z4vqq.jpg)
 
 Video games are not just software. They were the preludes and conclusions of our childhood; our safe place to retreat when life was messy. And they are places we still retreat to when we need somewhere to go.
 

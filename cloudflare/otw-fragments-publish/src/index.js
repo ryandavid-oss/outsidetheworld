@@ -1419,7 +1419,8 @@ async function buildRegisteredFragmentEntryFromRequest(request, env, user) {
       const objectKey = buildFragmentImageObjectKey(user.id, entry.timestamp, extension);
       await env.IOTD_BUCKET.put(objectKey, await file.arrayBuffer(), {
         httpMetadata: {
-          contentType: file.type || "application/octet-stream"
+          contentType: file.type || "application/octet-stream",
+          cacheControl: "public,max-age=86400,stale-while-revalidate=604800"
         }
       });
       entry.image = buildFragmentImageUrl(env, objectKey);
@@ -2357,7 +2358,8 @@ export default {
 
         await env.IOTD_BUCKET.put(objectKey, await file.arrayBuffer(), {
           httpMetadata: {
-            contentType: file.type || "application/octet-stream"
+            contentType: file.type || "application/octet-stream",
+            cacheControl: "public,max-age=86400,stale-while-revalidate=604800"
           }
         });
 
@@ -2406,7 +2408,8 @@ export default {
 
         await env.IOTD_BUCKET.put(objectKey, await file.arrayBuffer(), {
           httpMetadata: {
-            contentType: file.type || "application/octet-stream"
+            contentType: file.type || "application/octet-stream",
+            cacheControl: "public,max-age=86400,stale-while-revalidate=604800"
           }
         });
 
@@ -2462,7 +2465,8 @@ export default {
 
         await env.IOTD_BUCKET.put(identity.objectKey, await file.arrayBuffer(), {
           httpMetadata: {
-            contentType: file.type || "application/octet-stream"
+            contentType: file.type || "application/octet-stream",
+            cacheControl: "public,max-age=86400,stale-while-revalidate=604800"
           }
         });
 
@@ -2536,7 +2540,8 @@ export default {
           objectKey = buildDriftImageObjectKey(publishDate, normalized.title, extension);
           await env.IOTD_BUCKET.put(objectKey, await imageFile.arrayBuffer(), {
             httpMetadata: {
-              contentType: imageFile.type || "application/octet-stream"
+              contentType: imageFile.type || "application/octet-stream",
+              cacheControl: "public,max-age=86400,stale-while-revalidate=604800"
             }
           });
           normalized.image = buildDriftImageUrl(env, objectKey);

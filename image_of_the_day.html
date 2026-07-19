@@ -415,7 +415,7 @@
     <!-- HERO -->
     <section class="hero">
         <div class="hero-card">
-            <img id="heroImg" class="hero-img" src="" alt="Image of the day" />
+            <img id="heroImg" class="hero-img" alt="Image of the day" />
             <div class="hero-meta">
                 <div id="heroDate" class="hero-date">LOADING_DATE…</div>
                 <h2 id="heroTitle" class="hero-title">LOADING_TITLE…</h2>
@@ -486,7 +486,7 @@
         }
 
         async function loadManifest() {
-            const res = await fetch('image_manifest.json', { cache: 'no-store' });
+            const res = await fetch('image_manifest.json', { cache: 'default' });
             if (!res.ok) throw new Error('MANIFEST_LOAD_FAIL');
             const data = await res.json();
             if (!Array.isArray(data) || !data.length) throw new Error('MANIFEST_EMPTY');
@@ -496,7 +496,59 @@
             return normalized;
         }
 
-        function setHero(item) {
+        async function loadResponsiveMedia() {
+            try {
+                const response = await fetch('responsive_media.json', { cache: 'default' });
+                if (!response.ok) throw new Error('RESPONSIVE_MEDIA_LOAD_FAIL');
+                const payload = await response.json();
+                return payload && payload.sources && typeof payload.sources === 'object'
+                    ? payload.sources
+                    : {};
+            } catch (error) {
+                console.warn('Responsive media metadata unavailable; using original images.', error);
+                return {};
+            }
+        }
+
+        function imagePlan(source, responsiveMedia, sizes) {
+            const media = responsiveMedia[source];
+            const variants = Array.isArray(media && media.variants) ? media.variants : [];
+            return {
+                src: variants.length ? variants[Math.min(variants.length - 1, 2)].url : source,
+                srcset: variants.map((variant) => `${variant.url} ${variant.width}w`).join(', '),
+                sizes,
+                original: media && media.original ? media.original : source,
+                width: Number(media && media.width) || 0,
+                height: Number(media && media.height) || 0
+            };
+        }
+
+        function activateImage(image) {
+            if (!image || image.dataset.loaded === 'true') return;
+            image.dataset.loaded = 'true';
+            if (image.dataset.srcset) image.srcset = image.dataset.srcset;
+            if (image.dataset.sizes) image.sizes = image.dataset.sizes;
+            image.src = image.dataset.src;
+        }
+
+        function observeArchiveImages(images) {
+            if (!('IntersectionObserver' in window)) {
+                images.forEach(activateImage);
+                return;
+            }
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (!entry.isIntersecting) return;
+                    activateImage(entry.target);
+                    observer.unobserve(entry.target);
+                });
+            }, { rootMargin: '500px 0px' });
+
+            images.forEach((image) => observer.observe(image));
+        }
+
+        function setHero(item, responsiveMedia) {
             const heroImg = document.getElementById('heroImg');
             const heroDate = document.getElementById('heroDate');
             const heroTitle = document.getElementById('heroTitle');
@@ -504,26 +556,48 @@
             const heroOpen = document.getElementById('heroOpen');
             const heroDownload = document.getElementById('heroDownload');
 
-            heroImg.src = item.image;
+            const plan = imagePlan(
+                item.image,
+                responsiveMedia,
+                '(max-width: 768px) 100vw, (max-width: 1320px) 94vw, 1280px'
+            );
+            heroImg.decoding = 'async';
+            heroImg.loading = 'eager';
+            heroImg.fetchPriority = 'high';
+            if (plan.srcset) heroImg.srcset = plan.srcset;
+            heroImg.sizes = plan.sizes;
+            if (plan.width && plan.height) {
+                heroImg.width = plan.width;
+                heroImg.height = plan.height;
+            }
+            heroImg.onerror = () => {
+                heroImg.removeAttribute('srcset');
+                heroImg.removeAttribute('sizes');
+                if (heroImg.src !== new URL(plan.original, window.location.href).href) {
+                    heroImg.src = plan.original;
+                }
+            };
+            heroImg.src = plan.src;
             heroImg.alt = item.title ? `${item.title} // Image of the day` : 'Image of the day';
             heroDate.textContent = (item.date || '').replaceAll('-', '_');
             heroTitle.textContent = item.title || 'DAILY_SIGNAL';
             heroCaption.textContent = item.caption || '';
 
-            heroOpen.href = item.image;
-            heroDownload.href = item.image;
+            heroOpen.href = plan.original;
+            heroDownload.href = plan.original;
 
             // If you want iMessage preview to always show today:
             // (iMessage caches hard; but this helps browsers)
-            const absoluteImage = new URL(item.image, window.location.origin).toString();
+            const absoluteImage = new URL(plan.original, window.location.origin).toString();
             document.querySelector('meta[property="og:image"]')?.setAttribute('content', absoluteImage);
             document.querySelector('meta[property="og:image:alt"]')?.setAttribute('content', heroImg.alt);
             document.querySelector('meta[name="twitter:image"]')?.setAttribute('content', absoluteImage);
         }
 
-        function buildGrid(items, heroDate) {
+        function buildGrid(items, heroDate, responsiveMedia) {
             const grid = document.getElementById('grid');
             grid.innerHTML = '';
+            const pendingImages = [];
 
             items.forEach((item) => {
                 if (item.date === heroDate) return; // skip the hero item
@@ -531,21 +605,52 @@
                 const card = document.createElement('a');
                 card.className = 'artifact-card';
                 card.href = `iotd/${item.date}-${String(item.title || 'image').toLowerCase().replace(/&/g, ' and ').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '')}.html`;
-                card.innerHTML = `
-      <img src="${item.image}" loading="lazy" alt="${item.title || 'archive image'}">
-      <div class="artifact-tag">${(item.date || '').replaceAll('-', '_')}</div>
-    `;
+                const plan = imagePlan(
+                    item.image,
+                    responsiveMedia,
+                    '(max-width: 768px) 34vw, (max-width: 1400px) 25vw, 340px'
+                );
+                const image = document.createElement('img');
+                image.alt = item.title || 'archive image';
+                image.loading = 'lazy';
+                image.decoding = 'async';
+                image.fetchPriority = 'low';
+                image.dataset.src = plan.src;
+                image.dataset.srcset = plan.srcset;
+                image.dataset.sizes = plan.sizes;
+                if (plan.width && plan.height) {
+                    image.width = plan.width;
+                    image.height = plan.height;
+                }
+                image.onerror = () => {
+                    image.removeAttribute('srcset');
+                    image.removeAttribute('sizes');
+                    if (image.src !== new URL(plan.original, window.location.href).href) {
+                        image.src = plan.original;
+                    }
+                };
+
+                const tag = document.createElement('div');
+                tag.className = 'artifact-tag';
+                tag.textContent = (item.date || '').replaceAll('-', '_');
+                card.append(image, tag);
                 grid.appendChild(card);
+                pendingImages.push(image);
             });
+
+            observeArchiveImages(pendingImages);
         }
 
         (async function init() {
             try {
-                const items = await loadManifest();
+                const [items, responsiveMedia] = await Promise.all([
+                    loadManifest(),
+                    loadResponsiveMedia()
+                ]);
                 const hero = items[0];
 
-                setHero(hero);
-                buildGrid(items, hero.date);
+                setHero(hero, responsiveMedia);
+                buildGrid(items, hero.date, responsiveMedia);
 
                 syncNav();
             } catch (e) {

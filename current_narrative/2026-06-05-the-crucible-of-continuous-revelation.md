@@ -28,7 +28,7 @@ Date: June 7, 2026
       "id": "image_mq2vjbld_ulhm7g",
       "type": "image",
       "imageRef": "image_mq2vjbld_ulhm7g",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq2vjclq.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq2vjclq.jpg",
       "objectKey": "narrative/2026-06-05-the-crucible-of-continuous-revelation-mq2vjclq.jpg",
       "displaySize": "large",
       "alignment": "center",
@@ -266,7 +266,7 @@ Date: June 7, 2026
       "id": "image_mq4kvfdi_2szzlc",
       "type": "image",
       "imageRef": "image_mq4kvfdi_2szzlc",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kvfnb.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kvfnb.jpg",
       "objectKey": "narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kvfnb.jpg",
       "displaySize": "medium",
       "alignment": "center",
@@ -337,7 +337,7 @@ Date: June 7, 2026
       "id": "image_mq4keuxl_cyw2ly",
       "type": "image",
       "imageRef": "image_mq4keuxl_cyw2ly",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kevfy.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kevfy.jpg",
       "objectKey": "narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kevfy.jpg",
       "displaySize": "medium",
       "alignment": "center",
@@ -394,7 +394,7 @@ Date: June 7, 2026
       "id": "image_mq4kgfzu_3a6diy",
       "type": "image",
       "imageRef": "image_mq4kgfzu_3a6diy",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kggav.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kggav.jpg",
       "objectKey": "narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kggav.jpg",
       "displaySize": "medium",
       "alignment": "center",
@@ -489,7 +489,7 @@ Date: June 7, 2026
       "id": "image_mq2w03t8_rdq6vv",
       "type": "image",
       "imageRef": "image_mq2w03t8_rdq6vv",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq2w048e.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq2w048e.jpg",
       "objectKey": "narrative/2026-06-05-the-crucible-of-continuous-revelation-mq2w048e.jpg",
       "displaySize": "medium",
       "alignment": "center",
@@ -626,7 +626,7 @@ Date: June 7, 2026
       "id": "image_mq4ki8un_6igyd8",
       "type": "image",
       "imageRef": "image_mq4ki8un_6igyd8",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4ki9cd.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4ki9cd.jpg",
       "objectKey": "narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4ki9cd.jpg",
       "displaySize": "medium",
       "alignment": "center",
@@ -883,7 +883,7 @@ Date: June 7, 2026
       "id": "image_mq4kjv6y_ija10c",
       "type": "image",
       "imageRef": "image_mq4kjv6y_ija10c",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kjvl3.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kjvl3.jpg",
       "objectKey": "narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kjvl3.jpg",
       "displaySize": "medium",
       "alignment": "center",
@@ -1009,7 +1009,7 @@ Date: June 7, 2026
       "id": "image_mq4kmr21_bynjs9",
       "type": "image",
       "imageRef": "image_mq4kmr21_bynjs9",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kmres.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kmres.jpg",
       "objectKey": "narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kmres.jpg",
       "displaySize": "medium",
       "alignment": "center",
@@ -1287,7 +1287,7 @@ Date: June 7, 2026
       "id": "image_mq2w1ply_fan3yh",
       "type": "image",
       "imageRef": "image_mq2w1ply_fan3yh",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq2w1prt.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq2w1prt.jpg",
       "objectKey": "narrative/2026-06-05-the-crucible-of-continuous-revelation-mq2w1prt.jpg",
       "displaySize": "medium",
       "alignment": "left",
@@ -1376,7 +1376,7 @@ Date: June 7, 2026
   "images": [
     {
       "id": "image_mq2vjbld_ulhm7g",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq2vjclq.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq2vjclq.jpg",
       "objectKey": "narrative/2026-06-05-the-crucible-of-continuous-revelation-mq2vjclq.jpg",
       "alt": "Narrative image",
       "caption": "Where fire and mercy meet.",
@@ -1386,7 +1386,7 @@ Date: June 7, 2026
     },
     {
       "id": "image_mq4kvfdi_2szzlc",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kvfnb.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kvfnb.jpg",
       "objectKey": "narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kvfnb.jpg",
       "alt": "Narrative image",
       "caption": "The question becomes larger inside the Restoration.",
@@ -1396,7 +1396,7 @@ Date: June 7, 2026
     },
     {
       "id": "image_mq4keuxl_cyw2ly",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kevfy.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kevfy.jpg",
       "objectKey": "narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kevfy.jpg",
       "alt": "Narrative image",
       "caption": "The line is not always ours to move.",
@@ -1406,7 +1406,7 @@ Date: June 7, 2026
     },
     {
       "id": "image_mq4kgfzu_3a6diy",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kggav.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kggav.jpg",
       "objectKey": "narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kggav.jpg",
       "alt": "Narrative image",
       "caption": "Not an issue. A household.",
@@ -1416,7 +1416,7 @@ Date: June 7, 2026
     },
     {
       "id": "image_mq2w03t8_rdq6vv",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq2w048e.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq2w048e.jpg",
       "objectKey": "narrative/2026-06-05-the-crucible-of-continuous-revelation-mq2w048e.jpg",
       "alt": "Narrative image",
       "caption": "What time leaves behind, careful reading uncovers.",
@@ -1426,7 +1426,7 @@ Date: June 7, 2026
     },
     {
       "id": "image_mq4ki8un_6igyd8",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4ki9cd.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4ki9cd.jpg",
       "objectKey": "narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4ki9cd.jpg",
       "alt": "Narrative image",
       "caption": "The text does not prioritize. We do.",
@@ -1436,7 +1436,7 @@ Date: June 7, 2026
     },
     {
       "id": "image_mq4kjv6y_ija10c",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kjvl3.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kjvl3.jpg",
       "objectKey": "narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kjvl3.jpg",
       "alt": "Narrative image",
       "caption": "The way down is, sometimes, how we find the truth.",
@@ -1446,7 +1446,7 @@ Date: June 7, 2026
     },
     {
       "id": "image_mq4kmr21_bynjs9",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kmres.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kmres.jpg",
       "objectKey": "narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kmres.jpg",
       "alt": "Narrative image",
       "caption": "What looks fixed still belongs to time.",
@@ -1456,7 +1456,7 @@ Date: June 7, 2026
     },
     {
       "id": "image_mq2w1ply_fan3yh",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq2w1prt.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq2w1prt.jpg",
       "objectKey": "narrative/2026-06-05-the-crucible-of-continuous-revelation-mq2w1prt.jpg",
       "alt": "Narrative image",
       "caption": "Faith does not always arrive. Sometimes it continues.",
@@ -1474,7 +1474,7 @@ _Navigating Same-Sex Relationships Within the Restoration_
 
 ---
 
-![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq2vjclq.jpg "Where fire and mercy meet.")
+![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq2vjclq.jpg "Where fire and mercy meet.")
 
 This essay is the result of weeks of research, meditation, prayer, and revision. It is also the result of a much longer struggle: my attempt to understand the world more honestly, loosen my grip on comfortable assumptions, and listen beyond the rooms where I already feel agreed with.
 
@@ -1552,7 +1552,7 @@ This is the strongest version of the mainstream Christian argument. We owe it se
 
 If the mainstream Christian argument is strong, the Latter-day Saint argument is much stronger.
 
-![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kvfnb.jpg "The question becomes larger inside the Restoration.")
+![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kvfnb.jpg "The question becomes larger inside the Restoration.")
 
 In Latter-day Saint doctrine, male-female marriage is not merely a sacred symbol or a pattern from creation. It is embedded in an account of the creation that has no parallel in mainstream Christian thought. **The Family: A Proclamation to the World** declares that _"gender is an essential characteristic of individual premortal, mortal, and eternal identity and purpose."_
 
@@ -1574,7 +1574,7 @@ This is the most honest presentation of the traditional case.
 
 ### The Hazard of Steadying the Ark
 
-![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kevfy.jpg "The line is not always ours to move.")
+![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kevfy.jpg "The line is not always ours to move.")
 
 The third pillar of the orthodox argument is not about theology at all. And it is specifically Latter-day Saint in character. It is the question of **authority**.
 
@@ -1592,7 +1592,7 @@ The tradition does not ask members to suppress their spiritual experience. It as
 
 The orthodox case has been made at full strength. Now the ground shifts.
 
-![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kggav.jpg "Not an issue. A household.")
+![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kggav.jpg "Not an issue. A household.")
 
 The affirming case begins with reality: for some people, suppressing or denying a core part of who they are is not a matter of spiritual discipline. It is a slow erasure. Being told, repeatedly and institutionally, that you are the problem does not produce holiness. It produces alienation, despair, and in too many cases, exits from life itself that we do not talk about enough.
 
@@ -1622,7 +1622,7 @@ I have always suspected language. I think it comes with the territory of a mind 
 
 So when I found someone who knew Hebrew, who knew the Ancient Near East, who knew the Greco-Roman world from the inside out, I paid attention. And what McClellan's work, alongside scholars like Robin Scroggs and Martti Nissinen, revealed was not a progressive reinterpretation of scripture. It was an excavation of what the words actually meant before centuries of translation, cultural assumption, and institutional convenience buried them.
 
-![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq2w048e.jpg "What time leaves behind, careful reading uncovers.")
+![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq2w048e.jpg "What time leaves behind, careful reading uncovers.")
 
 I teach Gospel Doctrine in my ward. I try to do the legwork. I try to find out where the people of Israel actually were, what was happening around them, and what the words meant in the language where they were first spoken. Hebrew especially. Hebrew has meanings that outpace even the most explanatory English translations. I learned recently, preparing a lesson on Ruth, that the word hesed, which King James translators variously rendered as mercy, kindness, lovingkindness, and faithfulness, actually means something far more specific: an active, enduring loyalty practiced within a relationship, especially when one party has the power to meet a critical need for a weaker party. None of those English words carry that. The Hebrew carries that. And knowing it changes everything about how you read the story.
 
@@ -1666,7 +1666,7 @@ To apply their words to that situation is to use an ancient hammer on a nail the
 
 Before leaving the New Testament scriptures, there is one more thing to notice about **how we read**. Sometimes our use of the text reveals more about us than the text itself.
 
-![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4ki9cd.jpg "The text does not prioritize. We do.")
+![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4ki9cd.jpg "The text does not prioritize. We do.")
 
 The “vice list” in 1 Corinthians 6:9-10 is a single catalog. Paul names those who “will not inherit the kingdom of God,” then lists them without ranking one above another: the sexually immoral, idolaters, adulterers, thieves, the greedy, drunkards, revilers, and swindlers.
 
@@ -1750,7 +1750,7 @@ Before we look at those claims, we need to name the principle that makes this po
 
 ### Jesus Said This First
 
-![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kjvl3.jpg "The way down is, sometimes, how we find the truth.")
+![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kjvl3.jpg "The way down is, sometimes, how we find the truth.")
 
 The basic problem is older than the Restoration: how can something given through prophetic authority be real, binding, and divinely permitted, and still not be God’s final ideal?
 
@@ -1790,7 +1790,7 @@ That matters here because “line upon line, precept upon precept” is not just
 
 The strongest affirming argument inside the Restoration is not only about ancient scripture. **It is about Latter-day Saint history itself.**
 
-![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kmres.jpg "What looks fixed still belongs to time.")
+![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq4kmres.jpg "What looks fixed still belongs to time.")
 
 The Church has, more than once, taught something as bound up with eternity, salvation, priesthood, family, or exaltation, only to later change course. Not in minor matters. Not around the edges.
 
@@ -1880,7 +1880,7 @@ But they do not tell us the timetable. They do not tell us the content. And they
 
 ### **The Faith to Sit in Fire**
 
-![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq2w1prt.jpg "Faith does not always arrive. Sometimes it continues.")
+![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-06-05-the-crucible-of-continuous-revelation-mq2w1prt.jpg "Faith does not always arrive. Sometimes it continues.")
 
 The crucible this debate creates does not **resolve** the tension. It **refines** the people willing to stay inside it.
 

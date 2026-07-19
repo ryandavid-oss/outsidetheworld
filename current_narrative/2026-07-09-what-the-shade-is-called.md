@@ -24,7 +24,7 @@ Date: July 9, 2026
       "id": "image_mrf6diqz_9my9ht",
       "type": "image",
       "imageRef": "image_mrf6diqz_9my9ht",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-09-what-the-shade-is-called-mrf6dj4n.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-09-what-the-shade-is-called-mrf6dj4n.jpg",
       "objectKey": "narrative/2026-07-09-what-the-shade-is-called-mrf6dj4n.jpg",
       "displaySize": "original",
       "alignment": "center",
@@ -165,7 +165,7 @@ Date: July 9, 2026
       "id": "image_mrf6knfl_1ft3u3",
       "type": "image",
       "imageRef": "image_mrf6knfl_1ft3u3",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-09-what-the-shade-is-called-mrf6knss.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-09-what-the-shade-is-called-mrf6knss.jpg",
       "objectKey": "narrative/2026-07-09-what-the-shade-is-called-mrf6knss.jpg",
       "displaySize": "original",
       "alignment": "center",
@@ -199,7 +199,7 @@ Date: July 9, 2026
       "id": "image_mrf6o5gi_g22z6y",
       "type": "image",
       "imageRef": "image_mrf6o5gi_g22z6y",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-09-what-the-shade-is-called-mrf6o5nc.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-09-what-the-shade-is-called-mrf6o5nc.jpg",
       "objectKey": "narrative/2026-07-09-what-the-shade-is-called-mrf6o5nc.jpg",
       "displaySize": "medium",
       "alignment": "center",
@@ -250,7 +250,7 @@ Date: July 9, 2026
       "id": "image_mrf6pdvb_q4rc0u",
       "type": "image",
       "imageRef": "image_mrf6pdvb_q4rc0u",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-09-what-the-shade-is-called-mrf6pe4y.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-09-what-the-shade-is-called-mrf6pe4y.jpg",
       "objectKey": "narrative/2026-07-09-what-the-shade-is-called-mrf6pe4y.jpg",
       "displaySize": "medium",
       "alignment": "center",
@@ -456,7 +456,7 @@ Date: July 9, 2026
       "id": "image_mrfdxk6n_7vhdy4",
       "type": "image",
       "imageRef": "image_mrfdxk6n_7vhdy4",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-09-what-the-shade-is-called-mrfdxkfj.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-09-what-the-shade-is-called-mrfdxkfj.jpg",
       "objectKey": "narrative/2026-07-09-what-the-shade-is-called-mrfdxkfj.jpg",
       "displaySize": "medium",
       "alignment": "center",
@@ -668,7 +668,7 @@ Date: July 9, 2026
       "id": "image_mrf6stg2_sulsut",
       "type": "image",
       "imageRef": "image_mrf6stg2_sulsut",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-09-what-the-shade-is-called-mrf6stnc.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-09-what-the-shade-is-called-mrf6stnc.jpg",
       "objectKey": "narrative/2026-07-09-what-the-shade-is-called-mrf6stnc.jpg",
       "displaySize": "original",
       "alignment": "center",
@@ -678,7 +678,7 @@ Date: July 9, 2026
   "images": [
     {
       "id": "image_mrf6diqz_9my9ht",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-09-what-the-shade-is-called-mrf6dj4n.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-09-what-the-shade-is-called-mrf6dj4n.jpg",
       "objectKey": "narrative/2026-07-09-what-the-shade-is-called-mrf6dj4n.jpg",
       "alt": "Narrative image",
       "caption": "",
@@ -688,7 +688,7 @@ Date: July 9, 2026
     },
     {
       "id": "image_mrf6knfl_1ft3u3",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-09-what-the-shade-is-called-mrf6knss.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-09-what-the-shade-is-called-mrf6knss.jpg",
       "objectKey": "narrative/2026-07-09-what-the-shade-is-called-mrf6knss.jpg",
       "alt": "Narrative image",
       "caption": "The Last Judgment, John Scott, 1974, © Intellectual Reserve, Inc.",
@@ -698,7 +698,7 @@ Date: July 9, 2026
     },
     {
       "id": "image_mrf6o5gi_g22z6y",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-09-what-the-shade-is-called-mrf6o5nc.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-09-what-the-shade-is-called-mrf6o5nc.jpg",
       "objectKey": "narrative/2026-07-09-what-the-shade-is-called-mrf6o5nc.jpg",
       "alt": "Narrative image",
       "caption": "",
@@ -708,7 +708,7 @@ Date: July 9, 2026
     },
     {
       "id": "image_mrf6pdvb_q4rc0u",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-09-what-the-shade-is-called-mrf6pe4y.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-09-what-the-shade-is-called-mrf6pe4y.jpg",
       "objectKey": "narrative/2026-07-09-what-the-shade-is-called-mrf6pe4y.jpg",
       "alt": "Narrative image",
       "caption": "",
@@ -718,7 +718,7 @@ Date: July 9, 2026
     },
     {
       "id": "image_mrfdxk6n_7vhdy4",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-09-what-the-shade-is-called-mrfdxkfj.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-09-what-the-shade-is-called-mrfdxkfj.jpg",
       "objectKey": "narrative/2026-07-09-what-the-shade-is-called-mrfdxkfj.jpg",
       "alt": "Narrative image",
       "caption": "",
@@ -728,7 +728,7 @@ Date: July 9, 2026
     },
     {
       "id": "image_mrf6stg2_sulsut",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-09-what-the-shade-is-called-mrf6stnc.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-09-what-the-shade-is-called-mrf6stnc.jpg",
       "objectKey": "narrative/2026-07-09-what-the-shade-is-called-mrf6stnc.jpg",
       "alt": "Narrative image",
       "caption": "",
@@ -744,7 +744,7 @@ _Vocabulary is more than language. It is personal scripture._
 
 ## I. Noise Without Language
 
-![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-09-what-the-shade-is-called-mrf6dj4n.jpg)
+![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-09-what-the-shade-is-called-mrf6dj4n.jpg)
 
 **This essay is about a painting. **I framed the outline with that in mind. I had it nailed down. But at the end of it, I bet we will all agree the painting had nothing to do with it.
 
@@ -790,7 +790,7 @@ I was the only one of my brothers and sisters being raised outside the influence
 
 It felt light in the moment. But my mind was already vulnerable, and that picture was **the strongest attack vector imaginable**, though I did not know it yet.
 
-![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-09-what-the-shade-is-called-mrf6knss.jpg "The Last Judgment, John Scott, 1974, © Intellectual Reserve, Inc.")
+![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-09-what-the-shade-is-called-mrf6knss.jpg "The Last Judgment, John Scott, 1974, © Intellectual Reserve, Inc.")
 
 If you grew up in or around the church in the eighties and nineties, you know the image by heart even if you do not know the artist, John Scott, or the title, _The Last Judgment_. The original is a mural, twelve feet tall and twenty-seven feet wide, painted in 1974 for the entryway of the Washington D.C. Temple. The widescreen prints went everywhere after that. The composition holds an entire cosmic scene in a single glance. In the center, Jesus Christ descends through a tear in the sky, bathed in a bright, vertical shaft of light.
 
@@ -800,7 +800,7 @@ But it was the left side of the canvas that caught my gaze and held it hostage. 
 
 I hung that widescreen canvas above my bed. I stared at it, fascinated by the people on the left side of Jesus, invariably finding myself among them. I became hyperfixated on two specific figures. There was a woman kneeling in the dust, praying desperately to God for a deliverance that was clearly too late. Unnamed emotions welled up inside me as I put myself in her shoes.
 
-![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-09-what-the-shade-is-called-mrf6o5nc.jpg)
+![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-09-what-the-shade-is-called-mrf6o5nc.jpg)
 
 And right at the edge of the crowd, standing immediately next to the bright shaft of light, was a man peering through the invisible veil of separation. His left hand brushes the back of a fallen man, and his right hand stretches toward the light, inches away.
 
@@ -816,7 +816,7 @@ It did not matter that the rulebook of OCD itself still had no name.
 
 When that painting went up over my bed, I was living a split life. At school, I had a crowd of friends I cussed around, and I got into fights often enough to get suspended. At church, I had another group of friends I tried to fit in with, desperately attempting to look like the clean-cut kid everyone expected.
 
-![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-09-what-the-shade-is-called-mrf6pe4y.jpg)
+![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-09-what-the-shade-is-called-mrf6pe4y.jpg)
 
 It was hypocrisy, and I knew it even then. But I cannot emphasize enough that I did not know who I was at that age. I had very, very low self-esteem. I could not see myself as smart, attractive, or charismatic, even though I wanted to be all of those things. And like most teenagers, I just wanted acceptance. I wanted to be around girls. I wanted to be good at sports. I just wanted to belong somewhere, anywhere, whether it was with the good crowd or the bad.
 
@@ -884,7 +884,7 @@ I can still attest through all of this that God does, in fact, listen to the lon
 
 But change does not always come from a dramatic, frontal assault on our problems. Sometimes it happens the way water finds its course, quietly tracing the path of least resistance, seeping through the smallest structural cracks until it pools into a mirror. But after years of suffering under the delusion of ritualistic cause and effect, I was bloodied into not looking for an answer. I had long since accepted the hostage situation in my head as my permanent reality, a legalistic contract written in a language I could not translate.
 
-![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-09-what-the-shade-is-called-mrfdxkfj.jpg)
+![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-09-what-the-shade-is-called-mrfdxkfj.jpg)
 
 But when I was eighteen, preparing to serve a full-time mission for the church, a lifeline appeared from a most unexpected place. Be it God or circumstance, I found language within the pages of Orson Scott Card's science fiction novel, _Xenocide_.
 
@@ -954,4 +954,4 @@ I would tell him that he is going to get a handle on this, and even though he wi
 
 Finally, I would explain the beautiful concept of nuance to him. I would tell him that grace is his most powerful tool as a human being, both in how he applies it to his own tired heart and how he offers it to the broken adults around him. I would tell him to let go of the rigid scorecards, the tallies, and the terrifying fear of the left side of the canvas. **I would tell him to seek first Jesus Christ and follow his example, and to see that everything else, the guilt and the performance and the dogmas and the rules, is just noise.**
 
-![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-09-what-the-shade-is-called-mrf6stnc.jpg)
+![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-09-what-the-shade-is-called-mrf6stnc.jpg)

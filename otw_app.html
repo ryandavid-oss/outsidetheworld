@@ -2505,7 +2505,7 @@
     const DRIFT_PREVIEW_HIDDEN_KEY = 'otwDriftPreviewHidden';
     const PUBLISH_IOTD_ENDPOINT = 'https://otw-fragments-publish.ryandavid.workers.dev/publish-iotd-entry';
     const PUBLISH_DRIFT_ENDPOINT = 'https://otw-fragments-publish.ryandavid.workers.dev/publish-drift-poem';
-    const IOTD_PUBLIC_BASE_URL = 'https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev';
+    const IOTD_PUBLIC_BASE_URL = 'https://otw-media.ryandavid.workers.dev/o';
     const HOMEPAGE_FOCAL_OPTIONS = [
       { value: 'top-left', label: 'Top left', x: 0, y: 0 },
       { value: 'top', label: 'Top center', x: 50, y: 0 },
@@ -2663,6 +2663,49 @@
       preview.src = nextUrl;
       preview.hidden = false;
       return nextUrl;
+    }
+
+    async function optimizePublishImage(file, maxDimension = 2400) {
+      if (!file || file.type === 'image/gif') return file;
+
+      const objectUrl = URL.createObjectURL(file);
+      try {
+        const image = await new Promise((resolve, reject) => {
+          const probe = new Image();
+          probe.onload = () => resolve(probe);
+          probe.onerror = () => reject(new Error('The selected image could not be decoded.'));
+          probe.src = objectUrl;
+        });
+        const sourceWidth = image.naturalWidth || image.width;
+        const sourceHeight = image.naturalHeight || image.height;
+        const longestEdge = Math.max(sourceWidth, sourceHeight);
+
+        if (longestEdge <= maxDimension && file.size <= 1_250_000 && /image\/(?:jpeg|webp)/i.test(file.type)) {
+          return file;
+        }
+
+        const scale = Math.min(1, maxDimension / longestEdge);
+        const width = Math.max(1, Math.round(sourceWidth * scale));
+        const height = Math.max(1, Math.round(sourceHeight * scale));
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        const context = canvas.getContext('2d', { alpha: false });
+        context.fillStyle = '#ffffff';
+        context.fillRect(0, 0, width, height);
+        context.drawImage(image, 0, 0, width, height);
+        const blob = await new Promise((resolve, reject) => {
+          canvas.toBlob(
+            (result) => result ? resolve(result) : reject(new Error('The optimized image could not be created.')),
+            'image/jpeg',
+            0.84
+          );
+        });
+        const baseName = String(file.name || 'image').replace(/\.[^.]+$/, '') || 'image';
+        return new File([blob], `${baseName}.jpg`, { type: 'image/jpeg', lastModified: Date.now() });
+      } finally {
+        URL.revokeObjectURL(objectUrl);
+      }
     }
 
     function showToast(title, copy) {
@@ -2854,8 +2897,11 @@
       formData.append('caption', entry.caption);
       formData.append('homepageFocal', entry.homepageFocal);
       $('#iotdPublishBtn').disabled = true;
-      setIotdStatus('Publishing image and manifest entry...', 'busy');
+      setIotdStatus('Optimizing image for the site...', 'busy');
       try {
+        const uploadFile = await optimizePublishImage(file);
+        formData.set('image', uploadFile);
+        setIotdStatus('Publishing image and manifest entry...', 'busy');
         const response = await fetch(PUBLISH_IOTD_ENDPOINT, {
           method: 'POST',
           headers: { 'x-publish-key': key },
@@ -3077,8 +3123,11 @@
       formData.append('body', entry.body);
       formData.append('homepageFocal', entry.homepageFocal);
       $('#driftPublishBtn').disabled = true;
-      $('#driftStatusLine').textContent = 'Publishing poem to The Drift...';
+      $('#driftStatusLine').textContent = 'Optimizing the poem image...';
       try {
+        const uploadFile = await optimizePublishImage(file);
+        formData.set('image', uploadFile);
+        $('#driftStatusLine').textContent = 'Publishing poem to The Drift...';
         const response = await fetch(PUBLISH_DRIFT_ENDPOINT, {
           method: 'POST',
           headers: { 'x-publish-key': key },

@@ -14,7 +14,7 @@ window.otw_fragments = [
     "author_id": "emily",
     "author": "Emily",
     "author_handle": "@word.person",
-    "image": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/fragments/emily/2026-03-31t21-59-03-735z.jpg"
+    "image": "https://otw-media.ryandavid.workers.dev/o/fragments/emily/2026-03-31t21-59-03-735z.jpg"
   },
   {
     "timestamp": "2026-03-31T02:14:59.157Z",
@@ -39,7 +39,7 @@ window.otw_fragments = [
     "author_id": "emily",
     "author": "Emily",
     "author_handle": "@word.person",
-    "image": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/fragments/emily/2026-03-28t19-42-41-502z.jpg"
+    "image": "https://otw-media.ryandavid.workers.dev/o/fragments/emily/2026-03-28t19-42-41-502z.jpg"
   },
   {
     "timestamp": "2026-03-28T19:17:00.000Z",
@@ -48,7 +48,7 @@ window.otw_fragments = [
     "author_id": "ryan",
     "author": "The_RyanDavid",
     "author_handle": "@outsidetheworld",
-    "image": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/fragments/ryan/2026-03-28t19-17-00-000z.jpg"
+    "image": "https://otw-media.ryandavid.workers.dev/o/fragments/ryan/2026-03-28t19-17-00-000z.jpg"
   },
   {
     "timestamp": "2026-03-28T15:36:00.000Z",
@@ -73,7 +73,7 @@ window.otw_fragments = [
     "author_id": "ryan",
     "author": "The_RyanDavid",
     "author_handle": "@outsidetheworld",
-    "image": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/fragments/ryan/2026-03-28t01-40-00-000z.jpg"
+    "image": "https://otw-media.ryandavid.workers.dev/o/fragments/ryan/2026-03-28t01-40-00-000z.jpg"
   },
   {
     "timestamp": "2026-03-27T20:10:40.558Z",
@@ -90,7 +90,7 @@ window.otw_fragments = [
     "author_id": "ryan",
     "author": "The_RyanDavid",
     "author_handle": "@outsidetheworld",
-    "image": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/fragments/ryan/2026-03-27t19-57-00-000z.jpg"
+    "image": "https://otw-media.ryandavid.workers.dev/o/fragments/ryan/2026-03-27t19-57-00-000z.jpg"
   },
   {
     "timestamp": "2026-03-27T15:11:00.000Z",
@@ -99,7 +99,7 @@ window.otw_fragments = [
     "author_id": "ryan",
     "author": "The_RyanDavid",
     "author_handle": "@outsidetheworld",
-    "image": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/fragments/ryan/2026-03-27t15-11-00-000z.jpg"
+    "image": "https://otw-media.ryandavid.workers.dev/o/fragments/ryan/2026-03-27t15-11-00-000z.jpg"
   },
   {
     "timestamp": "2026-03-27T06:23:00.000Z",
@@ -116,7 +116,7 @@ window.otw_fragments = [
     "author_id": "sumner",
     "author": "Sumner",
     "author_handle": "@sumnerjames",
-    "image": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/fragments/sumner/2026-03-27t04-08-33-337z.jpg"
+    "image": "https://otw-media.ryandavid.workers.dev/o/fragments/sumner/2026-03-27t04-08-33-337z.jpg"
   },
   {
     "timestamp": "2026-03-27T00:24:57.626Z",

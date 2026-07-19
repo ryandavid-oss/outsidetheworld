@@ -18,7 +18,7 @@ Date: July 14, 2026
       "id": "image_mrl9zy7k_ijsf4s",
       "type": "image",
       "imageRef": "image_mrl9zy7k_ijsf4s",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-14-the-midweek-weather-mrl9zyl0.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-14-the-midweek-weather-mrl9zyl0.jpg",
       "objectKey": "narrative/2026-07-14-the-midweek-weather-mrl9zyl0.jpg",
       "featureLayout": "natural",
       "featureFocal": "center",
@@ -120,7 +120,7 @@ Date: July 14, 2026
   "images": [
     {
       "id": "image_mrl9zy7k_ijsf4s",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-14-the-midweek-weather-mrl9zyl0.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-14-the-midweek-weather-mrl9zyl0.jpg",
       "objectKey": "narrative/2026-07-14-the-midweek-weather-mrl9zyl0.jpg",
       "alt": "Narrative image",
       "caption": "I have no access to A. a lake or B. a good skipping stone, so...AI to the rescue?",
@@ -139,7 +139,7 @@ Date: July 14, 2026
 
 _The Skipping Stone_
 
-![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-14-the-midweek-weather-mrl9zyl0.jpg "I have no access to A. a lake or B. a good skipping stone, so...AI to the rescue?")
+![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-14-the-midweek-weather-mrl9zyl0.jpg "I have no access to A. a lake or B. a good skipping stone, so...AI to the rescue?")
 
 **Did you know that I love taking mushrooms?**
 

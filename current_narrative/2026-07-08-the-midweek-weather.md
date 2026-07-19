@@ -17,7 +17,7 @@ Date: July 8, 2026
       "id": "image_mrco2ke8_lpcm7l",
       "type": "image",
       "imageRef": "image_mrco2ke8_lpcm7l",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-08-the-midweek-weather-mrcndnnu.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-08-the-midweek-weather-mrcndnnu.jpg",
       "objectKey": "",
       "displaySize": "original",
       "alignment": "center",
@@ -51,7 +51,7 @@ Date: July 8, 2026
       "id": "image_mrco2kf2_mguy1q",
       "type": "image",
       "imageRef": "image_mrco2kf2_mguy1q",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-08-the-midweek-weather-mrcnghjv.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-08-the-midweek-weather-mrcnghjv.jpg",
       "objectKey": "",
       "displaySize": "medium",
       "alignment": "center",
@@ -103,7 +103,7 @@ Date: July 8, 2026
       "id": "image_mrco2kf4_k7j2km",
       "type": "image",
       "imageRef": "image_mrco2kf4_k7j2km",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-08-the-midweek-weather-mrcno9hc.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-08-the-midweek-weather-mrcno9hc.jpg",
       "objectKey": "",
       "displaySize": "medium",
       "alignment": "center",
@@ -149,7 +149,7 @@ Date: July 8, 2026
       "id": "image_mrco2kf6_8fun30",
       "type": "image",
       "imageRef": "image_mrco2kf6_8fun30",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-08-the-midweek-weather-mrcntofx.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-08-the-midweek-weather-mrcntofx.jpg",
       "objectKey": "",
       "displaySize": "original",
       "alignment": "center",
@@ -159,7 +159,7 @@ Date: July 8, 2026
   "images": [
     {
       "id": "image_mrco2ke8_lpcm7l",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-08-the-midweek-weather-mrcndnnu.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-08-the-midweek-weather-mrcndnnu.jpg",
       "objectKey": "",
       "alt": "Narrative image",
       "caption": "",
@@ -169,7 +169,7 @@ Date: July 8, 2026
     },
     {
       "id": "image_mrco2kf2_mguy1q",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-08-the-midweek-weather-mrcnghjv.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-08-the-midweek-weather-mrcnghjv.jpg",
       "objectKey": "",
       "alt": "Narrative image",
       "caption": "Up Up Down Down was more than just a name",
@@ -179,7 +179,7 @@ Date: July 8, 2026
     },
     {
       "id": "image_mrco2kf4_k7j2km",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-08-the-midweek-weather-mrcno9hc.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-08-the-midweek-weather-mrcno9hc.jpg",
       "objectKey": "",
       "alt": "Narrative image",
       "caption": "Lloyd?",
@@ -189,7 +189,7 @@ Date: July 8, 2026
     },
     {
       "id": "image_mrco2kf6_8fun30",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-08-the-midweek-weather-mrcntofx.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-08-the-midweek-weather-mrcntofx.jpg",
       "objectKey": "",
       "alt": "Narrative image",
       "caption": "",
@@ -203,7 +203,7 @@ Date: July 8, 2026
 
 _This entry about a concert wasn't supposed to be about a concert at all_
 
-![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-08-the-midweek-weather-mrcndnnu.jpg)
+![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-08-the-midweek-weather-mrcndnnu.jpg)
 
 I am going to go back to my roots of organic, off-the-cuff writing once per week. While I am having the time of my life diving deep into the realms of religion, technology, and pop culture, I miss the times I would open up Blogger, dash off a (witty to me) explosion of thought, hit submit, and move on.
 
@@ -213,7 +213,7 @@ Currently listening to: Yellowcard. It's been in regular rotation for a couple o
 
 I hadn't really exposed myself much to them. You can think of them in the same pop-punk vein as The All-American Rejects, which was about as much experience as I had with 2000s-era punk before the concert. If we give the genre a bit more license, I suppose my 2003 obsession with Fall Out Boy fits the punk label, though I really think they were more emo-punk.
 
-![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-08-the-midweek-weather-mrcnghjv.jpg "Up Up Down Down was more than just a name")
+![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-08-the-midweek-weather-mrcnghjv.jpg "Up Up Down Down was more than just a name")
 
 The tour was given the name of _The Up Up Down Down_ tour, and that admittedly piqued my interest. (If you know, you know.) Again, this was a concert for Emily, so I didn't dive deep or even visit their website. Had I done so, I surely would have found their branding suspicious, to say the least.
 
@@ -229,7 +229,7 @@ When the full stage was revealed, I saw familiar '80s-era logos. A backdrop susp
 
 The music was undeniably not my generation. In high school, the years when most of us carve out our own musical tastes, my listening was dominated by Soundgarden, Pearl Jam, Stone Temple Pilots, et al. But everything on that set was speaking to me as if it were torn out of the pages of 16-year-old me's journal. I couldn't handle the discrepancy between what I had lived and what I was seeing. I did something that no one should do during an amazing concert.
 
-![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-08-the-midweek-weather-mrcno9hc.jpg "Lloyd?")
+![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-08-the-midweek-weather-mrcno9hc.jpg "Lloyd?")
 
 I started Googling. And while I was doing so, someone on stage was holding a boombox up above his head, a la Lloyd Dobler outside Diane's bedroom window in the 1989 movie _Say Anything._
 
@@ -243,4 +243,4 @@ I walked out more appreciative of Yellowcard's style of punk music, likely becau
 
 This was real nostalgia with bite, carved out lovingly by five men on stage having the time of their middle-aged lives, speaking love through imagery and music to their generation. Meanwhile, a group of 16-year-olds in attendance saw that maybe, just maybe, their parents had been cool once upon a time.
 
-![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-08-the-midweek-weather-mrcntofx.jpg)
+![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-08-the-midweek-weather-mrcntofx.jpg)

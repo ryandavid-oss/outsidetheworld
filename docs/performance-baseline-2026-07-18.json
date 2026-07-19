@@ -1,0 +1,49 @@
+{
+  "schema": "otw.performance-baseline.v1",
+  "measured_at_local": "2026-07-18",
+  "timezone": "America/Phoenix",
+  "target": "https://outsidetheworld.com/index.html",
+  "lighthouse_version": "13.0.1",
+  "production_code_changed": false,
+  "index": {
+    "mobile_runs": [
+      {"score": 70, "fcp_ms": 1016.713, "lcp_ms": 33449.1775, "speed_index_ms": 3901.5402, "tbt_ms": 206, "cls": 0, "transfer_bytes": 8894379, "requests": 29},
+      {"score": 76, "fcp_ms": 938.805, "lcp_ms": 7224.653, "speed_index_ms": 951.8757, "tbt_ms": 68, "cls": 0.0220725, "transfer_bytes": 13478909, "requests": 32},
+      {"score": 76, "fcp_ms": 938.9115, "lcp_ms": 7050.5605, "speed_index_ms": 980.9779, "tbt_ms": 68.5, "cls": 0.0220725, "transfer_bytes": 13478919, "requests": 32}
+    ],
+    "mobile_median": {"score": 76, "fcp_ms": 938.9115, "lcp_ms": 7224.653, "speed_index_ms": 980.9779, "tbt_ms": 68.5, "cls": 0.0220725, "transfer_bytes": 13478909, "cache_savings_bytes": 13020364, "image_savings_bytes": 12732367},
+    "desktop_runs": [
+      {"score": 75, "fcp_ms": 261.916, "lcp_ms": 7514.1255, "speed_index_ms": 387.2209, "tbt_ms": 0, "cls": 0.0423512, "transfer_bytes": 29606081, "requests": 40},
+      {"score": 75, "fcp_ms": 251.992, "lcp_ms": 9386.68, "speed_index_ms": 374.3223, "tbt_ms": 0, "cls": 0.0060772, "transfer_bytes": 30539858, "requests": 40},
+      {"score": 75, "fcp_ms": 250.446, "lcp_ms": 8796.0608, "speed_index_ms": 379.9872, "tbt_ms": 0, "cls": 0.0060772, "transfer_bytes": 31731982, "requests": 40}
+    ],
+    "desktop_median": {"score": 75, "fcp_ms": 251.992, "lcp_ms": 8796.0608, "speed_index_ms": 379.9872, "tbt_ms": 0, "cls": 0.0060772, "transfer_bytes": 30539858, "cache_savings_bytes": 27987582.8333, "image_savings_bytes": 27343814},
+    "live_browser": {"image_elements": 29, "initial_visible_images": 3, "initial_complete_images": 13, "initial_farthest_completed_top_px": 1896, "viewport_height_px": 720, "full_scroll_complete_images": 29, "full_scroll_unique_image_assets": 27},
+    "hero": {"name": "The Intake", "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/poetry/2026-07-16-the-intake-mro7eopm.jpg", "bytes": 2650465, "source_width_px": 3023, "source_height_px": 3023}
+  },
+  "cache": {
+    "sampled_unique_owned_assets": 84,
+    "hosts": [
+      {"host": "outsidetheworld.com", "assets": 47, "cache_control": "max-age=600"},
+      {"host": "pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev", "assets": 37, "cache_control": null}
+    ],
+    "cold_visit": {"owned_requests": 25, "encoded_bytes": 12416491, "disk_cache_hits": 0, "r2_requests": 9, "r2_disk_hits": 0, "data_requests": 5, "data_disk_hits": 0},
+    "immediate_return": {"owned_requests": 24, "encoded_bytes": 595, "disk_cache_hits": 19, "r2_requests": 9, "r2_disk_hits": 9, "data_requests": 5, "data_disk_hits": 0}
+  },
+  "ancillary_mobile_screening": [
+    {"name": "Image of the Day", "score": 66, "fcp_ms": 3365.565, "lcp_ms": 110131.2473, "speed_index_ms": 4767.7606, "tbt_ms": 30, "cls": 0, "transfer_bytes": 106365807, "requests": 53, "image_savings_bytes": 105913579},
+    {"name": "Fragments", "score": 56, "fcp_ms": 2623.8034, "lcp_ms": 4321.7606, "speed_index_ms": 4407.4519, "tbt_ms": 17, "cls": 0.6998785, "transfer_bytes": 3369253, "requests": 26, "image_savings_bytes": 3022426},
+    {"name": "Professional", "score": 99, "fcp_ms": 1637.7278, "lcp_ms": 1637.7278, "speed_index_ms": 1747.0265, "tbt_ms": 18, "cls": 0.0492286, "transfer_bytes": 271715, "requests": 9, "image_savings_bytes": 0},
+    {"name": "Current essay", "score": 70, "fcp_ms": 4125.422, "lcp_ms": 5065.7405, "speed_index_ms": 4833.1278, "tbt_ms": 0, "cls": 0, "transfer_bytes": 1180531, "requests": 14, "image_savings_bytes": 853622},
+    {"name": "The Drift", "score": null, "fcp_ms": 3017.95, "lcp_ms": null, "lighthouse_error": "NO_LCP", "speed_index_ms": 4709.1248, "cls": 0.1266932, "transfer_bytes": 305403, "requests": 13},
+    {"name": "Wayback", "score": null, "fcp_ms": 3307.862, "lcp_ms": null, "lighthouse_error": "NO_LCP", "speed_index_ms": 5322.9463, "cls": 0.0499369, "transfer_bytes": 670619, "requests": 12}
+  ],
+  "budgets": {
+    "mobile_lcp_ms": 2500,
+    "inp_ms": 200,
+    "cls": 0.1,
+    "hero_bytes": 350000,
+    "cold_homepage_before_scroll_bytes": 1000000,
+    "repeat_owned_transfer_bytes": 100000
+  }
+}

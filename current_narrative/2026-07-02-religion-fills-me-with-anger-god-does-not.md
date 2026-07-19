@@ -17,7 +17,7 @@ Date: July 5, 2026
       "id": "image_mr8g83a8_4us44f",
       "type": "image",
       "imageRef": "image_mr8g83a8_4us44f",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-02-religion-fills-me-with-anger-mr8g848e.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-02-religion-fills-me-with-anger-mr8g848e.jpg",
       "objectKey": "narrative/2026-07-02-religion-fills-me-with-anger-mr8g848e.jpg",
       "displaySize": "medium",
       "alignment": "center",
@@ -189,7 +189,7 @@ Date: July 5, 2026
   "images": [
     {
       "id": "image_mr8g83a8_4us44f",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-02-religion-fills-me-with-anger-mr8g848e.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-02-religion-fills-me-with-anger-mr8g848e.jpg",
       "objectKey": "narrative/2026-07-02-religion-fills-me-with-anger-mr8g848e.jpg",
       "alt": "Narrative image",
       "caption": "A picture of Jesus, because this essay needs a better center than my anger.",
@@ -203,7 +203,7 @@ Date: July 5, 2026
 
 _P.S.: agency is not an excuse for lazy certainty._
 
-![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-07-02-religion-fills-me-with-anger-mr8g848e.jpg "A picture of Jesus, because this essay needs a better center than my anger.")
+![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-02-religion-fills-me-with-anger-mr8g848e.jpg "A picture of Jesus, because this essay needs a better center than my anger.")
 
 About a week ago, Meta’s algorithm found it necessary to present me with a Facebook post.
 

@@ -23,7 +23,7 @@ Date: June 1, 2026
       "id": "image_mpvx0hny_utbqra",
       "type": "image",
       "imageRef": "image_mpvx0hny_utbqra",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-01-peralta-regional-park-mpvx0hrf.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-06-01-peralta-regional-park-mpvx0hrf.jpg",
       "objectKey": "narrative/2026-06-01-peralta-regional-park-mpvx0hrf.jpg",
       "displaySize": "small",
       "alignment": "center",
@@ -69,7 +69,7 @@ Date: June 1, 2026
       "id": "image_mpvx02fa_780wvj",
       "type": "image",
       "imageRef": "image_mpvx02fa_780wvj",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-01-peralta-regional-park-mpvx02ja.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-06-01-peralta-regional-park-mpvx02ja.jpg",
       "objectKey": "narrative/2026-06-01-peralta-regional-park-mpvx02ja.jpg",
       "displaySize": "small",
       "alignment": "center",
@@ -97,7 +97,7 @@ Date: June 1, 2026
       "id": "image_mpvwzmzq_bo5zw7",
       "type": "image",
       "imageRef": "image_mpvwzmzq_bo5zw7",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-01-peralta-regional-park-mpvwzn2t.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-06-01-peralta-regional-park-mpvwzn2t.jpg",
       "objectKey": "narrative/2026-06-01-peralta-regional-park-mpvwzn2t.jpg",
       "displaySize": "small",
       "alignment": "center",
@@ -149,7 +149,7 @@ Date: June 1, 2026
       "id": "image_mpvwyw5g_1hasnw",
       "type": "image",
       "imageRef": "image_mpvwyw5g_1hasnw",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-01-peralta-regional-park-mpvwyw91.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-06-01-peralta-regional-park-mpvwyw91.jpg",
       "objectKey": "narrative/2026-06-01-peralta-regional-park-mpvwyw91.jpg",
       "displaySize": "small",
       "alignment": "center",
@@ -195,7 +195,7 @@ Date: June 1, 2026
       "id": "image_mpvwxi8i_92jrwg",
       "type": "image",
       "imageRef": "image_mpvwxi8i_92jrwg",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-01-peralta-regional-park-mpvwxife.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-06-01-peralta-regional-park-mpvwxife.jpg",
       "objectKey": "narrative/2026-06-01-peralta-regional-park-mpvwxife.jpg",
       "displaySize": "small",
       "alignment": "center",
@@ -277,7 +277,7 @@ Date: June 1, 2026
       "id": "image_mpvwsz6t_hbibs7",
       "type": "image",
       "imageRef": "image_mpvwsz6t_hbibs7",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-01-peralta-regional-park-mpvwszfl.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-06-01-peralta-regional-park-mpvwszfl.jpg",
       "objectKey": "narrative/2026-06-01-peralta-regional-park-mpvwszfl.jpg",
       "displaySize": "medium",
       "alignment": "center",
@@ -335,7 +335,7 @@ Date: June 1, 2026
   "images": [
     {
       "id": "image_mpvx0hny_utbqra",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-01-peralta-regional-park-mpvx0hrf.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-06-01-peralta-regional-park-mpvx0hrf.jpg",
       "objectKey": "narrative/2026-06-01-peralta-regional-park-mpvx0hrf.jpg",
       "alt": "Narrative image",
       "caption": "",
@@ -345,7 +345,7 @@ Date: June 1, 2026
     },
     {
       "id": "image_mpvx02fa_780wvj",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-01-peralta-regional-park-mpvx02ja.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-06-01-peralta-regional-park-mpvx02ja.jpg",
       "objectKey": "narrative/2026-06-01-peralta-regional-park-mpvx02ja.jpg",
       "alt": "Narrative image",
       "caption": "",
@@ -355,7 +355,7 @@ Date: June 1, 2026
     },
     {
       "id": "image_mpvwzmzq_bo5zw7",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-01-peralta-regional-park-mpvwzn2t.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-06-01-peralta-regional-park-mpvwzn2t.jpg",
       "objectKey": "narrative/2026-06-01-peralta-regional-park-mpvwzn2t.jpg",
       "alt": "Narrative image",
       "caption": "",
@@ -365,7 +365,7 @@ Date: June 1, 2026
     },
     {
       "id": "image_mpvwyw5g_1hasnw",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-01-peralta-regional-park-mpvwyw91.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-06-01-peralta-regional-park-mpvwyw91.jpg",
       "objectKey": "narrative/2026-06-01-peralta-regional-park-mpvwyw91.jpg",
       "alt": "Narrative image",
       "caption": "",
@@ -375,7 +375,7 @@ Date: June 1, 2026
     },
     {
       "id": "image_mpvwxi8i_92jrwg",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-01-peralta-regional-park-mpvwxife.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-06-01-peralta-regional-park-mpvwxife.jpg",
       "objectKey": "narrative/2026-06-01-peralta-regional-park-mpvwxife.jpg",
       "alt": "Narrative image",
       "caption": "",
@@ -385,7 +385,7 @@ Date: June 1, 2026
     },
     {
       "id": "image_mpvwsz6t_hbibs7",
-      "url": "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-01-peralta-regional-park-mpvwszfl.jpg",
+      "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-06-01-peralta-regional-park-mpvwszfl.jpg",
       "objectKey": "narrative/2026-06-01-peralta-regional-park-mpvwszfl.jpg",
       "alt": "Narrative image",
       "caption": "",
@@ -401,7 +401,7 @@ _A night alone in the desert, the Milky Way, and a glimpse of heaven’s hidden 
 
 It is a rare occasion for me to be truly solitary. However, two Fridays back, an unexpected stillness settled in: my wife was away on her routine trip to California, and my children were either out of town or staying with their mother. I hadn’t anticipated this sudden isolation, and the realization hit me with a sense of urgency. The prospect of returning to an empty house and sitting in silence felt suddenly unbearable. Not because I didn't want to be alone, but because the gift of true solitude was too precious to discard because of my own lack of forethought.
 
-![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-01-peralta-regional-park-mpvx0hrf.jpg)
+![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-06-01-peralta-regional-park-mpvx0hrf.jpg)
 
 There is a difference, I think, between being left alone and being invited into solitude. One feels like absence. The other feels like a door left open by providence. I did not yet know which one I had been given, but I knew enough not to waste it on the couch.
 
@@ -415,7 +415,7 @@ I made it home, packed up the essentials (BT speaker, iPad, blanket, pillows) an
 
 It is funny how often the sacred begins with errands. A grocery stop, a failed fountain drink, a few snacks in a plastic bag, the hum of tires on the highway. Nothing announced itself as holy.  I was simply driving east with pillows in the car and a half-formed hope that the desert might have something to say.
 
-![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-01-peralta-regional-park-mpvx02ja.jpg)
+![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-06-01-peralta-regional-park-mpvx02ja.jpg)
 
 I arrived at the campsite at Peralta Regional Park shortly before 7pm. This allowed me the opportunity to explore my surroundings, and what I found was the most remarkable silence and solitude I had experienced in a long, long time. Marching up toward the peaks of the adjacent hiking trail allowed me the opportunity to contemplate my surroundings, which confirmed exactly how alone I truly was. No other camping spaces were occupied. Not a soul nor vehicle could be seen. I kept along the path and, as the sun sank ever closer to the horizon, I silently hoped to myself that my instincts were true, and that the trail would dump me off somewhere close to the road, down a ways from where I had parked.
 
@@ -423,7 +423,7 @@ There is a kind of silence that merely removes sound, and there is another kind 
 
 There was a momentary window of panic as my faith abandoned me; the sun nestled itself beyond the measured west and I imagined myself stumbling back along the mile path I had followed, daylight abandoning fools who reckoned upon good fortune over solid plans. My instincts eventually proved the better, as the trail ultimately turned south and planted me beside the gravel path back to my campsite.
 
-![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-01-peralta-regional-park-mpvwzn2t.jpg)
+![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-06-01-peralta-regional-park-mpvwzn2t.jpg)
 
 That little panic mattered more than it should have. It reminded me that wonder is not always soft. Sometimes the soul opens because the body realizes it is small, poorly prepared, and dependent on mercies it did not arrange.
 
@@ -439,7 +439,7 @@ Why, oh why had I forgotten to bring a tripod? I could have kicked myself in tha
 
 Back to the car, slightly peeved at myself, I lay back down and tried to subdue my racing thoughts so that sleep might overcome. Giving up after about an hour, I walked back outside to find that the moon had nearly descended to the horizon. It was placing itself firmly within the scopes of the light pollution of the Phoenix valley; indeed, it was nearly impossible to discern from where the remaining glow came.
 
-![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-01-peralta-regional-park-mpvwyw91.jpg)
+![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-06-01-peralta-regional-park-mpvwyw91.jpg)
 
 The moon had been so commanding only a short while before, but now it was surrendering itself into the haze of the city. It was still there, still shining, still itself; but my ability to distinguish it had been compromised by lesser lights. I did not know it yet, but that would become the first lesson of the night.
 
@@ -453,7 +453,7 @@ What resulted from that arrangement was nothing short of astounding. The Milky W
 
 The glory had not arrived when the camera found it. It had been there all along. The difference was not in the sky, but in the instrument’s patience, its steadiness, its willingness to gather what my unaided eyes could not.
 
-![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-01-peralta-regional-park-mpvwxife.jpg)
+![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-06-01-peralta-regional-park-mpvwxife.jpg)
 
 That thought has not left me. Maybe the difference is not always in the glory itself, but in our capacity to perceive it. Maybe heaven is nearer than we suppose, not because distance is an illusion, but because our senses are so easily outmatched by what God has already placed before us.
 
@@ -479,7 +479,7 @@ The sun had vanished, but its absence still shaped the world. The moon shone wit
 
 But as I sat with this contemplation and wrestled with the ambiguity and contradictions of my previous night's experience, I bore witness to the realization that whatever God has in store for us, it is certainly beyond our mortal comprehensions and abilities.
 
-![Narrative image](https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/2026-06-01-peralta-regional-park-mpvwszfl.jpg)
+![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-06-01-peralta-regional-park-mpvwszfl.jpg)
 
 I do not mean this as a rejection of distinct heavenly glories. I mean it as hope, and as carefully articulated curiosity. Perhaps the glories are distinct without being alienated from one another. Perhaps the heavens are ordered without being estranged. Perhaps God’s house has many degrees of brightness, but no corner where His love is not, somehow, already at work.
 
