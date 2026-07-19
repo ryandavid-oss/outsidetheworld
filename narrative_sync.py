@@ -1311,8 +1311,8 @@ def render_reader_nav(newer_post=None, older_post=None):
             if dimensions['width'] and dimensions['height']:
                 dimension_attrs = f' width="{dimensions["width"]}" height="{dimensions["height"]}"'
             image_html = (
-                f'<span class="reader-nav-media"><img src="{smartypants_safe(image["url"])}" '
-                f'alt="" loading="lazy" decoding="async"{dimension_attrs}></span>'
+                f'<span class="reader-nav-media"><img data-reader-src="{smartypants_safe(image["url"])}" '
+                f'alt="" decoding="async"{dimension_attrs}></span>'
             )
         return f'''<a class="reader-nav-card reader-nav-card--{direction}{text_only_class}" href="{archive_relative_href(post)}">
                     {image_html}<span class="reader-nav-copy">
@@ -1589,7 +1589,7 @@ def render_share_page(post, newer_post=None, older_post=None, include_draft_read
             }} catch (error) {{}}
         }}());
     </script>
-    <link href="../archive_reader.css?v=20260717-integrity" rel="stylesheet" />
+    <link href="../archive_reader.css?v=20260718-performance" rel="stylesheet" />
     <meta name="description" content="{smartypants_safe(description)}" />
     <meta name="theme-color" content="#060809" />
     <meta property="og:site_name" content="Outside The World" />
@@ -1605,7 +1605,7 @@ def render_share_page(post, newer_post=None, older_post=None, include_draft_read
     <meta name="twitter:description" content="{smartypants_safe(description)}" />
     <meta name="twitter:image" content="{smartypants_safe(og_image)}" />
     <script type="application/ld+json">{article_schema_json}</script>
-    <script src="../archive_reader.js?v=20260711-editorial-reader" defer></script>
+    <script src="../archive_reader.js?v=20260718-performance" defer></script>
 </head>
 <body class="archive-reader-page article-length-{length_tier} article-media-{media_tier}"{body_reading_tools_attr}>
     <a class="reader-skip-link" href="#entry-body">Skip to essay</a>

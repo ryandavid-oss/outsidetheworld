@@ -130,6 +130,57 @@
         });
     };
 
+    const initDeferredNavImages = () => {
+        const images = Array.from(document.querySelectorAll('.reader-nav-media img[data-reader-src]'));
+        if (!images.length) {
+            return;
+        }
+
+        const activate = (image) => {
+            const source = image.getAttribute('data-reader-src');
+            if (!source || image.getAttribute('src')) {
+                return;
+            }
+            image.setAttribute('src', source);
+        };
+
+        if (!('IntersectionObserver' in window)) {
+            images.forEach(activate);
+            return;
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) {
+                    return;
+                }
+                activate(entry.target);
+                observer.unobserve(entry.target);
+            });
+        }, { rootMargin: '240px 0px', threshold: 0.01 });
+
+        images.forEach((image) => observer.observe(image));
+    };
+
+    const initReaderFonts = () => {
+        const loadFonts = () => {
+            if (document.querySelector('[data-reader-fonts]')) {
+                return;
+            }
+            const stylesheet = document.createElement('link');
+            stylesheet.rel = 'stylesheet';
+            stylesheet.href = 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&family=Fira+Code:wght@300;500;700&family=Merriweather:ital,wght@0,300;0,700;1,300;1,700&display=optional';
+            stylesheet.setAttribute('data-reader-fonts', '');
+            document.head.appendChild(stylesheet);
+        };
+
+        if (document.readyState === 'complete') {
+            window.setTimeout(loadFonts, 1500);
+        } else {
+            window.addEventListener('load', () => window.setTimeout(loadFonts, 1500), { once: true });
+        }
+    };
+
     const initReaderDock = () => {
         const dock = document.querySelector('[data-reader-dock]');
         if (!dock) {
@@ -402,6 +453,8 @@
             initShare();
             initReadingProgress();
             initImageReveal();
+            initDeferredNavImages();
+            initReaderFonts();
             initReaderDock();
             initReadingAids();
         });
@@ -410,6 +463,8 @@
         initShare();
         initReadingProgress();
         initImageReveal();
+        initDeferredNavImages();
+        initReaderFonts();
         initReaderDock();
         initReadingAids();
     }
