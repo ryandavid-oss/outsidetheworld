@@ -1,0 +1,86 @@
+{
+  "measuredAt": "2026-07-18",
+  "timezone": "America/Phoenix",
+  "lighthouseVersion": "13.0.3",
+  "method": "three cold production mobile runs per modified route; medians reported",
+  "baselineMedians": {
+    "home": {"performanceScore": 94, "firstContentfulPaintSeconds": 0.943, "largestContentfulPaintSeconds": 2.190, "speedIndexSeconds": 0.946, "totalBlockingTimeMilliseconds": 143, "cumulativeLayoutShift": 0, "transferBytes": 315208, "requests": 17},
+    "currentWriting": {"performanceScore": 67, "firstContentfulPaintSeconds": 3.779, "largestContentfulPaintSeconds": 6.045, "speedIndexSeconds": 4.758, "totalBlockingTimeMilliseconds": 13, "cumulativeLayoutShift": 0, "transferBytes": 720590, "requests": 18},
+    "imageOfTheDay": {"performanceScore": 97, "firstContentfulPaintSeconds": 0.779, "largestContentfulPaintSeconds": 2.416, "speedIndexSeconds": 0.779, "totalBlockingTimeMilliseconds": 0, "cumulativeLayoutShift": 0.0553, "transferBytes": 408957, "requests": 18},
+    "poetry": {"performanceScore": 78, "firstContentfulPaintSeconds": 3.021, "largestContentfulPaintSeconds": 4.296, "speedIndexSeconds": 4.474, "totalBlockingTimeMilliseconds": 32, "cumulativeLayoutShift": 0, "transferBytes": 305303, "requests": 13},
+    "fragments": {"performanceScore": 56, "firstContentfulPaintSeconds": 2.622, "largestContentfulPaintSeconds": 4.195, "speedIndexSeconds": 4.297, "totalBlockingTimeMilliseconds": 24, "cumulativeLayoutShift": 0.6999, "transferBytes": 3369607, "requests": 26},
+    "professional": {"performanceScore": 79, "firstContentfulPaintSeconds": 2.867, "largestContentfulPaintSeconds": 4.162, "speedIndexSeconds": 4.338, "totalBlockingTimeMilliseconds": 16, "cumulativeLayoutShift": 0, "transferBytes": 271773, "requests": 9},
+    "currentEssay": {"performanceScore": 71, "firstContentfulPaintSeconds": 4.026, "largestContentfulPaintSeconds": 4.934, "speedIndexSeconds": 4.759, "totalBlockingTimeMilliseconds": 0, "cumulativeLayoutShift": 0, "transferBytes": 1181788, "requests": 14}
+  },
+  "after": {
+    "currentWriting": {
+      "runs": [
+        {"performanceScore": 75, "firstContentfulPaintSeconds": 3.883672, "largestContentfulPaintSeconds": 4.183672, "speedIndexSeconds": 4.823672, "totalBlockingTimeMilliseconds": 0, "cumulativeLayoutShift": 0, "transferBytes": 267310, "requests": 15},
+        {"performanceScore": 100, "firstContentfulPaintSeconds": 1.002897, "largestContentfulPaintSeconds": 1.002897, "speedIndexSeconds": 1.002897, "totalBlockingTimeMilliseconds": 4.38785, "cumulativeLayoutShift": 0.012366, "transferBytes": 267278, "requests": 16},
+        {"performanceScore": 100, "firstContentfulPaintSeconds": 0.93302, "largestContentfulPaintSeconds": 0.93302, "speedIndexSeconds": 0.93302, "totalBlockingTimeMilliseconds": 58.6956, "cumulativeLayoutShift": 0.012366, "transferBytes": 267286, "requests": 16}
+      ],
+      "median": {"performanceScore": 100, "firstContentfulPaintSeconds": 1.002897, "largestContentfulPaintSeconds": 1.002897, "speedIndexSeconds": 1.002897, "totalBlockingTimeMilliseconds": 4.38785, "cumulativeLayoutShift": 0.012366, "transferBytes": 267286, "requests": 16}
+    },
+    "fragments": {
+      "runs": [
+        {"performanceScore": 95, "firstContentfulPaintSeconds": 1.705126, "largestContentfulPaintSeconds": 2.630285, "speedIndexSeconds": 3.589591, "totalBlockingTimeMilliseconds": 12.5, "cumulativeLayoutShift": 0, "transferBytes": 499585, "requests": 20},
+        {"performanceScore": 97, "firstContentfulPaintSeconds": 0.803699, "largestContentfulPaintSeconds": 2.564492, "speedIndexSeconds": 1.804244, "totalBlockingTimeMilliseconds": 19, "cumulativeLayoutShift": 0, "transferBytes": 499039, "requests": 20},
+        {"performanceScore": 97, "firstContentfulPaintSeconds": 0.805126, "largestContentfulPaintSeconds": 2.552985, "speedIndexSeconds": 1.903233, "totalBlockingTimeMilliseconds": 11, "cumulativeLayoutShift": 0, "transferBytes": 499035, "requests": 20}
+      ],
+      "median": {"performanceScore": 97, "firstContentfulPaintSeconds": 0.805126, "largestContentfulPaintSeconds": 2.564492, "speedIndexSeconds": 1.903233, "totalBlockingTimeMilliseconds": 12.5, "cumulativeLayoutShift": 0, "transferBytes": 499039, "requests": 20}
+    },
+    "poetry": {
+      "runs": [
+        {"performanceScore": 99, "firstContentfulPaintSeconds": 1.721301, "largestContentfulPaintSeconds": 1.721301, "speedIndexSeconds": 2.529996, "totalBlockingTimeMilliseconds": 0, "cumulativeLayoutShift": 0, "transferBytes": 138683, "requests": 11},
+        {"performanceScore": 100, "firstContentfulPaintSeconds": 0.858995, "largestContentfulPaintSeconds": 0.979326, "speedIndexSeconds": 0.858995, "totalBlockingTimeMilliseconds": 70.6658, "cumulativeLayoutShift": 0, "transferBytes": 138601, "requests": 11},
+        {"performanceScore": 99, "firstContentfulPaintSeconds": 0.819041, "largestContentfulPaintSeconds": 0.939796, "speedIndexSeconds": 0.819041, "totalBlockingTimeMilliseconds": 107, "cumulativeLayoutShift": 0.018409, "transferBytes": 138613, "requests": 11}
+      ],
+      "median": {"performanceScore": 99, "firstContentfulPaintSeconds": 0.858995, "largestContentfulPaintSeconds": 0.979326, "speedIndexSeconds": 0.858995, "totalBlockingTimeMilliseconds": 70.6658, "cumulativeLayoutShift": 0, "transferBytes": 138613, "requests": 11}
+    },
+    "professional": {
+      "runs": [
+        {"performanceScore": 98, "firstContentfulPaintSeconds": 1.2527, "largestContentfulPaintSeconds": 1.645327, "speedIndexSeconds": 3.827855, "totalBlockingTimeMilliseconds": 22.5, "cumulativeLayoutShift": 0, "transferBytes": 271585, "requests": 12},
+        {"performanceScore": 100, "firstContentfulPaintSeconds": 0.820912, "largestContentfulPaintSeconds": 0.933047, "speedIndexSeconds": 0.820912, "totalBlockingTimeMilliseconds": 0, "cumulativeLayoutShift": 0, "transferBytes": 105047, "requests": 10},
+        {"performanceScore": 100, "firstContentfulPaintSeconds": 0.824387, "largestContentfulPaintSeconds": 0.939033, "speedIndexSeconds": 0.824387, "totalBlockingTimeMilliseconds": 0, "cumulativeLayoutShift": 0, "transferBytes": 105047, "requests": 10}
+      ],
+      "median": {"performanceScore": 100, "firstContentfulPaintSeconds": 0.824387, "largestContentfulPaintSeconds": 0.939033, "speedIndexSeconds": 0.824387, "totalBlockingTimeMilliseconds": 0, "cumulativeLayoutShift": 0, "transferBytes": 105047, "requests": 10}
+    },
+    "currentEssay": {
+      "runs": [
+        {"performanceScore": 96, "firstContentfulPaintSeconds": 0.828294, "largestContentfulPaintSeconds": 2.427545, "speedIndexSeconds": 3.779937, "totalBlockingTimeMilliseconds": 0, "cumulativeLayoutShift": 0, "transferBytes": 433018, "requests": 17},
+        {"performanceScore": 99, "firstContentfulPaintSeconds": 0.788064, "largestContentfulPaintSeconds": 2.219881, "speedIndexSeconds": 0.788064, "totalBlockingTimeMilliseconds": 0, "cumulativeLayoutShift": 0, "transferBytes": 148946, "requests": 17},
+        {"performanceScore": 98, "firstContentfulPaintSeconds": 0.787738, "largestContentfulPaintSeconds": 2.288203, "speedIndexSeconds": 0.787738, "totalBlockingTimeMilliseconds": 0, "cumulativeLayoutShift": 0, "transferBytes": 148953, "requests": 17}
+      ],
+      "median": {"performanceScore": 98, "firstContentfulPaintSeconds": 0.788064, "largestContentfulPaintSeconds": 2.288203, "speedIndexSeconds": 0.788064, "totalBlockingTimeMilliseconds": 0, "cumulativeLayoutShift": 0, "transferBytes": 148953, "requests": 17}
+    }
+  },
+  "warmReturn": {
+    "method": "fresh persistent Chrome profile with storage reset disabled",
+    "homepage": {
+      "cold": {"performanceScore": 98, "largestContentfulPaintSeconds": 2.2349, "transferBytes": 315502, "requests": 17},
+      "warm": {"performanceScore": 100, "largestContentfulPaintSeconds": 0.7919, "transferBytes": 1525, "requests": 16}
+    },
+    "currentWritingAfterHomepage": {
+      "firstClick": {"performanceScore": 100, "largestContentfulPaintSeconds": 0.8562, "transferBytes": 261214, "requests": 13},
+      "warmReturn": {"performanceScore": 100, "largestContentfulPaintSeconds": 0.0393, "transferBytes": 830, "requests": 13}
+    }
+  },
+  "budgets": {
+    "home": {"actualCompressedBytes": 45860, "budgetCompressedBytes": 60000},
+    "currentWriting": {"actualCompressedBytes": 23483, "budgetCompressedBytes": 32000},
+    "fragments": {"actualCompressedBytes": 15325, "budgetCompressedBytes": 22000},
+    "poetry": {"actualCompressedBytes": 13856, "budgetCompressedBytes": 20000},
+    "professional": {"actualCompressedBytes": 13171, "budgetCompressedBytes": 18000},
+    "currentEssay": {"actualCompressedBytes": 16900, "budgetCompressedBytes": 24000},
+    "imageOfTheDay": {"actualCompressedBytes": 16069, "budgetCompressedBytes": 23000}
+  },
+  "integrity": {
+    "compactWritingFallbackVerified": true,
+    "fragmentsMediaViewerVerified": true,
+    "deferredAdjacentEssayMediaVerified": true,
+    "publisherRenderContractTests": 29,
+    "wholeSiteIntegrity": "passed",
+    "pagesDeployment": "passed",
+    "productionCommit": "a850253"
+  }
+}
