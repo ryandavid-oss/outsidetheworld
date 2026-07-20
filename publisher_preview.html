@@ -178,7 +178,7 @@
                 </a>
                 <div class="reader-chrome-tools">
                     <nav class="reader-breadcrumbs" aria-label="Preview navigation">
-                        <a href="publisher.html">Publisher</a>
+                        <a href="publisher.html" data-publisher-return>Publisher</a>
                         <span class="reader-breadcrumb-separator" aria-hidden="true">/</span>
                         <a href="index.html">Home</a>
                     </nav>
@@ -210,7 +210,7 @@
             <div class="entry-share-row">
                 <span class="share-status" id="share-status" aria-live="polite">PRIVATE_PREVIEW_SIGNAL</span>
                 <div class="share-controls">
-                    <a class="archive-link" href="publisher.html">RETURN TO PUBLISHER</a>
+                    <a class="archive-link" href="publisher.html" data-publisher-return>RETURN TO PUBLISHER</a>
                     <button type="button" class="share-btn" id="refreshPreviewBtn">REFRESH DRAFT</button>
                 </div>
             </div>
@@ -225,7 +225,7 @@
             </footer>
 
             <div class="archive-actions">
-                <a class="archive-link" href="publisher.html">RETURN TO PUBLISHER</a>
+                <a class="archive-link" href="publisher.html" data-publisher-return>RETURN TO PUBLISHER</a>
                 <a class="archive-link" href="index.html">RETURN TO OTW</a>
             </div>
         </article>
@@ -259,6 +259,11 @@
         const featureCaptionEl = document.getElementById('entry-feature-caption');
         const refreshPreviewBtn = document.getElementById('refreshPreviewBtn');
         let autoPrintPending = new URLSearchParams(window.location.search).has('print');
+
+        const publisherReturnUrl = `publisher.html?resume=${Date.now()}`;
+        document.querySelectorAll('[data-publisher-return]').forEach((link) => {
+            link.href = publisherReturnUrl;
+        });
 
         function escapeHtml(value) {
             return String(value || '')

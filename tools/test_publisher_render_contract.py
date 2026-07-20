@@ -1009,20 +1009,25 @@ def test_public_css_contract_exists_everywhere():
 
 def test_publisher_preview_modes_keep_quick_preview_browser_only():
     publisher = (ROOT / "publisher.html").read_text(encoding="utf-8")
+    preview = (ROOT / "publisher_preview.html").read_text(encoding="utf-8")
 
     assert "async function renderDraftWithProductionRenderer" in publisher
     assert "function openDraftPreview" in publisher
     assert "publisher_preview.html?draft=" in publisher
     assert publisher.count("return renderDraftWithProductionRenderer({") == 1
     assert publisher.count("localPublisherApi('/api/draft-preview'") == 1
-    assert "Preview saved Markdown in the browser" in publisher
+    assert "Preview saved Markdown in this tab" in publisher
+    assert "window.location.assign(previewUrl);" in publisher
+    assert publisher.count("const previewWindow = reservePreviewWindow();") == 2
     assert 'id="publisherServerNotice"' in publisher
     assert "function syncPublisherServerAvailability()" in publisher
     assert "function reservePreviewWindow()" in publisher
     assert "function navigateReservedPreviewWindow(previewWindow, previewUrl)" in publisher
     assert "Preview tab blocked. Allow pop-ups for this local publisher and try again." in publisher
     assert "window.open(previewShellUrl(" not in publisher
-    assert "Quick Preview still works." in publisher
+    assert "Quick Preview opens in this tab." in publisher
+    assert preview.count("data-publisher-return") == 4
+    assert "publisher.html?resume=${Date.now()}" in preview
 
 
 def test_publisher_just_write_mode_preserves_the_composer_contract():

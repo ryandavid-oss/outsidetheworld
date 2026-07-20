@@ -2728,7 +2728,7 @@
         </button>
         <div class="top-secondary-actions" id="mobileActionsMenu">
           <button class="text-btn" id="saveDraftBtn" type="button" title="Save server draft">Save Draft</button>
-          <button class="text-btn" id="previewDraftBtn" type="button" title="Preview saved Markdown in the browser">Quick Preview</button>
+          <button class="text-btn" id="previewDraftBtn" type="button" title="Preview saved Markdown in this tab">Quick Preview</button>
           <button class="text-btn" id="productionPreviewBtn" type="button" title="Preview with the production renderer">Production Preview</button>
           <button class="text-btn" id="publishedEssaysBtn" type="button" title="Open published essay manager">Published Essays</button>
           <button class="text-btn" id="downloadMarkdownBtn" type="button" title="Download draft as Markdown">Download MD</button>
@@ -2742,7 +2742,7 @@
 
     <section class="publisher-server-notice" id="publisherServerNotice" role="status" hidden>
       <strong>Production preview offline.</strong>
-      <span>Quick Preview still works. For exact production rendering, start <code>python3 tools/publisher_server.py</code> and reopen the URL it prints.</span>
+      <span>Quick Preview opens in this tab. For exact production rendering, start <code>python3 tools/publisher_server.py</code> and reopen the URL it prints.</span>
     </section>
 
     <section class="revision-bar" id="publishedRevisionBar" aria-label="Published essay revision mode" hidden>
@@ -3452,7 +3452,7 @@
       saveDraftBtn.textContent = isActive ? 'Save Revision' : 'Save Draft';
       saveDraftBtn.title = isActive ? 'Save local revision draft' : 'Save server draft';
       previewDraftBtn.textContent = isActive ? 'Preview Revision' : 'Quick Preview';
-      previewDraftBtn.title = isActive ? 'Preview current revision Markdown in the browser' : 'Preview saved Markdown in the browser';
+      previewDraftBtn.title = isActive ? 'Preview current revision Markdown in this tab' : 'Preview saved Markdown in this tab';
       syncPublisherServerAvailability();
       if (archivePrivateBtn) {
         const canArchivePrivately = Boolean(getLocalPublisherToken());
@@ -7370,19 +7370,9 @@
 
     function openDraftPreview() {
       saveDraft();
-      const previewWindow = reservePreviewWindow();
-      if (!previewWindow) {
-        reportBlockedPreviewWindow();
-        return null;
-      }
       const previewUrl = `publisher_preview.html?draft=${Date.now()}`;
-      if (!navigateReservedPreviewWindow(previewWindow, previewUrl)) {
-        closeReservedPreviewWindow(previewWindow);
-        setSaveState('Quick preview could not be opened', true);
-        return null;
-      }
-      setSaveState('Quick preview opened', true);
-      return previewWindow;
+      window.location.assign(previewUrl);
+      return previewUrl;
     }
 
     async function openProductionPreview() {
