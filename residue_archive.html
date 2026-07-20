@@ -24,6 +24,7 @@
   })();
 </script>
     <meta charset="utf-8" />
+    <base href="/">
     <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport" />
     <title>Residue Archive | Outside The World</title>
     <meta name="description" content="The current Outside The World writing archive: essays, weblog entries, poems, technology, faith, memory, and other recent residue by RyanDavid Burningham." />
@@ -1167,6 +1168,102 @@
             margin-inline: auto;
         }
 
+        .entry-load-status,
+        .entry-load-fallback {
+            margin: 0;
+            color: var(--archive-muted);
+            font-family: 'Fira Code', monospace;
+            font-size: 0.72rem;
+            letter-spacing: 0.1em;
+            line-height: 1.7;
+            text-transform: uppercase;
+        }
+
+        .entry-load-status::before {
+            content: "";
+            display: inline-block;
+            width: 0.62rem;
+            height: 0.62rem;
+            margin-right: 0.72rem;
+            border: 1px solid var(--archive-accent);
+            border-top-color: transparent;
+            border-radius: 50%;
+            vertical-align: -0.04rem;
+            animation: archive-entry-spin 900ms linear infinite;
+        }
+
+        .entry-load-fallback {
+            margin-top: 1.5rem;
+            color: var(--archive-faint);
+        }
+
+        .entry-feature-slot:empty {
+            display: none;
+        }
+
+        .entry-feature-slot {
+            position: relative;
+            z-index: 1;
+        }
+
+        .entry-feature {
+            width: min(100%, 1000px);
+            margin: 0 auto clamp(42px, 7vw, 76px);
+        }
+
+        .entry-feature-media {
+            width: 100%;
+            aspect-ratio: var(--feature-aspect, 4 / 3);
+            background: color-mix(in srgb, var(--archive-surface) 88%, #000 12%);
+        }
+
+        .entry-feature img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border: 1px solid var(--archive-border);
+            box-shadow: var(--archive-image-shadow);
+        }
+
+        .entry-feature--cinematic .entry-feature-media {
+            aspect-ratio: var(--feature-aspect, 16 / 9);
+        }
+
+        .entry-feature--portrait .entry-feature-media {
+            width: min(100%, 720px);
+            margin-inline: auto;
+            aspect-ratio: var(--feature-aspect, 4 / 5);
+        }
+
+        .entry-feature--focal-top img {
+            object-position: center top;
+        }
+
+        .entry-feature--focal-bottom img {
+            object-position: center bottom;
+        }
+
+        .entry-feature figcaption {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 8px 18px;
+            margin-top: 12px;
+            color: var(--archive-muted);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.82rem;
+            line-height: 1.5;
+        }
+
+        .entry-feature-credit {
+            color: var(--archive-faint);
+        }
+
+        @keyframes archive-entry-spin {
+            to { transform: rotate(360deg); }
+        }
+
         .entry-body__opening {
             color: var(--archive-ink);
         }
@@ -1398,6 +1495,8 @@
     <script>
         let groupedMatrix = {};
         let current_narrative = [];
+        let activeEntryRequest = 0;
+        let activeEntryController = null;
         const MONTH_ORDER = [
             'January', 'February', 'March', 'April', 'May', 'June',
             'July', 'August', 'September', 'October', 'November', 'December'
@@ -1518,13 +1617,24 @@
             return `${post.date || 'undated'}--${slugify(post.title || 'untitled')}`;
         }
 
+        function normalizeCanonicalArchivePath(value) {
+            const candidate = String(value || '').trim() || 'residue_archive.html';
+            try {
+                const resolved = new URL(candidate, window.location.origin);
+                if (resolved.origin !== window.location.origin) return '/residue_archive.html';
+                return `${resolved.pathname}${resolved.search}${resolved.hash}`;
+            } catch (error) {
+                return '/residue_archive.html';
+            }
+        }
+
         function buildCanonicalArchivePath(post) {
-            if (post && post.url) return String(post.url);
-            if (post && post.share_path) return post.share_path;
+            if (post && post.url) return normalizeCanonicalArchivePath(post.url);
+            if (post && post.share_path) return normalizeCanonicalArchivePath(post.share_path);
 
             const file = String(post && post.file ? post.file : '').split('/').pop();
             const stem = file.replace(/\.md$/i, '');
-            if (stem) return `archive/${encodeURIComponent(stem)}.html`;
+            if (stem) return normalizeCanonicalArchivePath(`archive/${encodeURIComponent(stem)}.html`);
 
             const date = new Date(post && post.date ? post.date : '');
             if (!Number.isNaN(date.valueOf())) {
@@ -1532,10 +1642,10 @@
                 const month = String(date.getMonth() + 1).padStart(2, '0');
                 const day = String(date.getDate()).padStart(2, '0');
                 const slug = slugify(post && post.title ? post.title : 'untitled');
-                if (slug) return `archive/${year}-${month}-${day}-${slug}.html`;
+                if (slug) return normalizeCanonicalArchivePath(`archive/${year}-${month}-${day}-${slug}.html`);
             }
 
-            return 'residue_archive.html';
+            return '/residue_archive.html';
         }
 
         function redirectLegacyPostUrlIfNeeded() {
@@ -1739,6 +1849,54 @@
             );
         }
 
+        async function hydrateCanonicalEntry(index, post, readerPath, requestId, signal) {
+            const container = document.getElementById('glass-container');
+            const bodyTarget = container.querySelector('[data-entry-body]');
+            const featureTarget = container.querySelector('[data-entry-feature-slot]');
+            if (!bodyTarget || !featureTarget) return;
+
+            try {
+                const response = await fetch(readerPath, { cache: 'default', signal });
+                if (!response.ok) throw new Error(`Canonical reader returned ${response.status}`);
+
+                const canonicalMarkup = await response.text();
+                const canonicalDocument = new DOMParser().parseFromString(canonicalMarkup, 'text/html');
+                const canonicalBody = canonicalDocument.querySelector('.entry-body');
+                const canonicalFeature = canonicalDocument.querySelector('.entry-feature');
+                if (!canonicalBody) throw new Error('Canonical reader did not contain an article body.');
+
+                canonicalBody.querySelectorAll('.clarify-note, .reading-checkpoint').forEach((aid) => aid.remove());
+                canonicalBody.querySelectorAll('.reading-aid-anchor').forEach((anchor) => {
+                    anchor.replaceWith(...Array.from(anchor.childNodes));
+                });
+
+                if (requestId !== activeEntryRequest || container.dataset.postId !== buildPostId(post)) return;
+
+                featureTarget.replaceChildren();
+                if (canonicalFeature) {
+                    const importedFeature = document.importNode(canonicalFeature, true);
+                    featureTarget.appendChild(importedFeature);
+                }
+                bodyTarget.innerHTML = enhanceArchivePreviewHtml(canonicalBody.innerHTML);
+                container.dataset.entryState = 'complete';
+                container.setAttribute('aria-busy', 'false');
+            } catch (error) {
+                if (error && error.name === 'AbortError') return;
+                if (requestId !== activeEntryRequest || container.dataset.postId !== buildPostId(post)) return;
+
+                const excerpt = escapeHtml(post.excerpt || 'The complete entry remains available in its standalone reader.');
+                bodyTarget.innerHTML = `
+                    <p class="entry-body__opening entry-body__dropcap">${excerpt}</p>
+                    <p class="entry-load-fallback">The complete entry could not be loaded inside the archive. <a href="${escapeHtml(readerPath)}">Open the standalone reader.</a></p>
+                `;
+                container.dataset.entryState = 'fallback';
+                container.setAttribute('aria-busy', 'false');
+                console.error('Could not hydrate the complete archive entry.', error);
+            } finally {
+                if (requestId === activeEntryRequest) activeEntryController = null;
+            }
+        }
+
         function displayEntry(index, options = {}) {
             const container = document.getElementById('glass-container');
             const post = current_narrative[index];
@@ -1749,10 +1907,15 @@
             const deckHtml = deck ? `<p class="entry-deck">${escapeHtml(deck)}</p>` : '';
             const wordCount = articleWordCount(post, deck);
             const readMinutes = Number(post.readMinutes) || articleReadMinutes(wordCount);
-            const previewBody = `<p class="entry-body__opening entry-body__dropcap">${escapeHtml(post.excerpt || '')}</p>`;
             const readerPath = buildCanonicalArchivePath(post);
+            const requestId = ++activeEntryRequest;
+            if (activeEntryController) activeEntryController.abort();
+            activeEntryController = new AbortController();
 
             container.classList.remove('visible');
+            container.dataset.postId = postId;
+            container.dataset.entryState = 'loading';
+            container.setAttribute('aria-busy', 'true');
             container.innerHTML = `
                     <header class="entry-preview-header">
                         <p class="entry-label">Selected Signal</p>
@@ -1765,13 +1928,16 @@
                         </div>
                     </header>
                     <div class="entry-toolbar">
-                        <a class="reader-open-link" href="${escapeHtml(readerPath)}">Open Full Reader</a>
+                        <a class="reader-open-link" href="${escapeHtml(readerPath)}">Open Standalone Reader</a>
                         <div class="share-controls">
                             <button type="button" class="share-btn" onclick="sharePostLink(${index})">COPY / SHARE LINK</button>
                             <span class="share-status" id="share-status">SHAREABLE_ARCHIVE_SIGNAL</span>
                         </div>
                     </div>
-                    <div class="entry-body">${previewBody}</div>
+                    <div class="entry-feature-slot" data-entry-feature-slot></div>
+                    <div class="entry-body" data-entry-body>
+                        <p class="entry-load-status" role="status" aria-live="polite">Retrieving complete entry</p>
+                    </div>
                     <div class="entry-reactions-row">
                         <div class="entry-reactions-meta">BLOG <span aria-hidden="true">•</span> OTW</div>
                         <div class="entry-reactions" id="${reactionDomId}"></div>
@@ -1790,6 +1956,7 @@
             if (activeItem) activeItem.classList.add('active');
 
             updateUrlForPost(post, Boolean(options.replaceUrl));
+            void hydrateCanonicalEntry(index, post, readerPath, requestId, activeEntryController.signal);
         }
 
         function initArchiveReactionWidget(post) {
@@ -1828,9 +1995,14 @@
             }).init();
         }
 
-        window.addEventListener('popstate', () => {
-            const postId = new URLSearchParams(window.location.search).get('post');
-            const index = findPostIndexById(postId);
+        window.addEventListener('popstate', (event) => {
+            const statePostId = event.state && event.state.postId;
+            const legacyPostId = new URLSearchParams(window.location.search).get('post');
+            let index = findPostIndexById(statePostId || legacyPostId);
+            if (index < 0) {
+                const currentPath = normalizeCanonicalArchivePath(window.location.pathname);
+                index = current_narrative.findIndex((post) => buildCanonicalArchivePath(post) === currentPath);
+            }
             if (index >= 0) {
                 const post = current_narrative[index];
                 const year = post.date.split(' ').slice(-1)[0];

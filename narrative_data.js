@@ -1,5 +1,171 @@
 const current_narrative = [
     {
+        "title": "Cruising Around Couches",
+        "date": "July 19, 2026",
+        "body": "_Rereading April 2009 from the other end of it._\n\n![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-19-cruising-around-couches-mrsly74n.jpg \"The actual Mini 9. What a time to be alive.\")\n\n[C](https://outsidetheworld.com/wayback.html?post=April+23%2C+2009--04-22-09-sleep-doesn-t-come-easily-at-9pm)[ame across an old blog post last week.](https://outsidetheworld.com/wayback.html?post=April+23%2C+2009--04-22-09-sleep-doesn-t-come-easily-at-9pm)\n\n**17 years ago.**\u00a0I am intensely happy that I put forth the effort to record anything about those years. The snippet about the Hackintosh hit just right. Those were fine days, with narrow budgets and heady motivation to improvise. The machine in question was a Dell Inspiron Mini 9, and it was easily one of the most important devices in my DIY history.\n\nEvery component of that machine was seemingly purpose-built for the hack job. And that was key: hacking OS X onto a Windows machine back then usually meant compromises. Loss of the webcam, flaky wireless support, and non-existent audio were normal due to Apple's narrow approach to hardware support. On the Mini 9, however, every component worked nearly flawlessly because Apple had already written rock-solid, native drivers (kexts) for this exact hardware.\n\nBrief research online shows it cost $350. I remember spending a little less. Given that I had to purchase the OS X software as well, that puts the price of this project northward of $700 with inflation. Today, a MacBook Neo starts at $699. Incredible.\n\nI remember typing on that thing outside the Apple Store at the Arrowhead mall, hoping that it would come up in conversation during my interview.\n\nIt did not. Probably for the best, anyway.\n\n**During that period of my life**, I was playing the part of the stay-at-home parent. But it would seem, in retrospect, that I was a little antsy. I was young enough to switch gears without blowing up too much of a stable life, and I remember wanting to do something that mattered. Nursing seemed the way to go. But the advice I got was to volunteer at the nearby hospital first.\n\nEventually that came to fruition, and I was placed in the ICU. I think I lasted about three weeks before turning in my badge. The final straw was accidentally finding my way into the room of a patient with TB. I had zero PPE. While the chances of me contracting it were minimal, I had a panic attack and never returned. Needless to say, working in medicine was not the avenue for me.\n\nBut I digress. The real reason for bringing up this particular blog post is this paragraph:\n\n> As far as SaraJane goes, she cut two more teeth in the past week, with a few more looking ripe for departure. She's also cruising around the couches more and more, looking braver for that first big step away from the hand hold.\n>\n> It breaks my heart to see her grow so fast, because little girls turn into big girls, and big girls turn into young women that find a way to get married. 18 years is never enough with a daughter. I hope that, somehow, she sees how much her daddy loves her.\n\nWithout warning, the 18 years have passed. SaraJane graduated high school, and already has her sights set on an EMT cert and firefighting in the longer term. Gone are the days when she cruised around couches. She traded the contours of a baby-proofed family room for the open streets of Arizona. Constant warnings that time is a thief fell on deaf ears. I blinked. My bad.\n\n![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-19-cruising-around-couches-mrslslkr.jpg \"The two in question...picture taken same day as blog\")\n\nAnd as for the oldest of the children, Sumner is a father himself, with the cutest peanut of a baby girl. His career is taking off. He's fabulous. She's fabulous. As an aside, that makes me a grandfather (Poppy, to be precise), and it's everything it's cracked up to be.\n\nPS: Bringing it back to Apple, I ended up employed. I was so excited to make my first purchase as an employee: a 27\" iMac with a 3.06 GHz Core 2 Duo and 8GB of RAM. I loved that thing. I finally parted ways with it about a year ago, reluctantly. It was simply a relic of a bygone era.\n\nAnd with apologies to the old blog's format, we are well past the 500-word threshold. Time to bid farewell for now.",
+        "file": "2026-07-19-cruising-around-couches.md",
+        "publisher": {
+            "schema": "otw.publisher.post",
+            "version": 2,
+            "source": "publisher.html",
+            "subhead": "Rereading April 2009 from the other end of it.",
+            "blocks": [
+                {
+                    "id": "image_mrsly6as_kmwan4",
+                    "type": "image",
+                    "imageRef": "image_mrsly6as_kmwan4",
+                    "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-19-cruising-around-couches-mrsly74n.jpg",
+                    "objectKey": "narrative/2026-07-19-cruising-around-couches-mrsly74n.jpg",
+                    "featureLayout": "natural",
+                    "featureFocal": "center",
+                    "homepageFocal": "center",
+                    "displaySize": "large",
+                    "alignment": "center",
+                    "wrapMode": "none"
+                },
+                {
+                    "id": "paragraph_mrslzl5u_v1fu6b",
+                    "type": "paragraph",
+                    "html": "<a href=\"https://outsidetheworld.com/wayback.html?post=April+23%2C+2009--04-22-09-sleep-doesn-t-come-easily-at-9pm\">C</a><a href=\"https://outsidetheworld.com/wayback.html?post=April+23%2C+2009--04-22-09-sleep-doesn-t-come-easily-at-9pm\">ame across an old blog post last week.</a>",
+                    "text": "Came across an old blog post last week."
+                },
+                {
+                    "id": "paragraph_mrslzl5u_qg2upc",
+                    "type": "paragraph",
+                    "html": "<strong>17 years ago.</strong><span>\u00a0</span>I am intensely happy that I put forth the effort to record anything about those y<span>ears. The snippet about the Hackintosh hit just right. Those were fine days, with narrow budgets and heady motivation to improvise. The machine in question was a Dell Inspiron Mini 9, and it was easily one of the most important devices in my DIY history.</span>",
+                    "text": "17 years ago.\u00a0I am intensely happy that I put forth the effort to record anything about those years. The snippet about the Hackintosh hit just right. Those were fine days, with narrow budgets and heady motivation to improvise. The machine in question was a Dell Inspiron Mini 9, and it was easily one of the most important devices in my DIY history."
+                },
+                {
+                    "id": "paragraph_mrslzl5u_ynv8ek",
+                    "type": "paragraph",
+                    "html": "Every component of that machine was seemingly purpose-built for the hack job. And that was key: hacking OS X onto a Windows machine back then usually meant compromises. Loss of the webcam, flaky wireless support, and non-existent audio were normal due to Apple's narrow approach to hardware support. On the Mini 9, however, every component worked nearly flawlessly because Apple had already written rock-solid, native drivers (kexts) for this exact hardware.",
+                    "text": "Every component of that machine was seemingly purpose-built for the hack job. And that was key: hacking OS X onto a Windows machine back then usually meant compromises. Loss of the webcam, flaky wireless support, and non-existent audio were normal due to Apple's narrow approach to hardware support. On the Mini 9, however, every component worked nearly flawlessly because Apple had already written rock-solid, native drivers (kexts) for this exact hardware."
+                },
+                {
+                    "id": "paragraph_mrslzl5u_6pljlm",
+                    "type": "paragraph",
+                    "html": "Brief research online shows it cost $350. I remember spending a little less. Given that I had to purchase the OS X software as well, that puts the price of this project northward of $700 with inflation. Today, a MacBook Neo starts at $699. Incredible.",
+                    "text": "Brief research online shows it cost $350. I remember spending a little less. Given that I had to purchase the OS X software as well, that puts the price of this project northward of $700 with inflation. Today, a MacBook Neo starts at $699. Incredible."
+                },
+                {
+                    "id": "paragraph_mrslzl5u_evyh7s",
+                    "type": "paragraph",
+                    "html": "I remember typing on that thing outside the Apple Store at the Arrowhead mall, hoping that it would come up in conversation during my interview.",
+                    "text": "I remember typing on that thing outside the Apple Store at the Arrowhead mall, hoping that it would come up in conversation during my interview."
+                },
+                {
+                    "id": "paragraph_mrslzl5u_elxhvo",
+                    "type": "paragraph",
+                    "html": "It did not. Probably for the best, anyway.",
+                    "text": "It did not. Probably for the best, anyway."
+                },
+                {
+                    "id": "paragraph_mrslzl5u_x29lpq",
+                    "type": "paragraph",
+                    "html": "<strong>During that period of my life</strong>, I was playing the part of the stay-at-home parent. But it would seem, in retrospect, that I was a little antsy. I was young enough to switch gears without blowing up too much of a stable life, and I remember wanting to do something that mattered. Nursing seemed the way to go. But the advice I got was to volunteer at the nearby hospital first.",
+                    "text": "During that period of my life, I was playing the part of the stay-at-home parent. But it would seem, in retrospect, that I was a little antsy. I was young enough to switch gears without blowing up too much of a stable life, and I remember wanting to do something that mattered. Nursing seemed the way to go. But the advice I got was to volunteer at the nearby hospital first."
+                },
+                {
+                    "id": "paragraph_mrslzl5u_2aofr9",
+                    "type": "paragraph",
+                    "html": "Eventually that came to fruition, and I was placed in the ICU. I think I lasted about three weeks before turning in my badge. The final straw was accidentally finding my way into the room of a patient with TB. I had zero PPE. While the chances of me contracting it were minimal, I had a panic attack and never returned. Needless to say, working in medicine was not the avenue for me.",
+                    "text": "Eventually that came to fruition, and I was placed in the ICU. I think I lasted about three weeks before turning in my badge. The final straw was accidentally finding my way into the room of a patient with TB. I had zero PPE. While the chances of me contracting it were minimal, I had a panic attack and never returned. Needless to say, working in medicine was not the avenue for me."
+                },
+                {
+                    "id": "paragraph_mrslzl5u_xek0ok",
+                    "type": "paragraph",
+                    "html": "But I digress. The real reason for bringing up this particular blog post is this paragraph:",
+                    "text": "But I digress. The real reason for bringing up this particular blog post is this paragraph:"
+                },
+                {
+                    "id": "quote_mrslzl5u_cfttiu",
+                    "type": "quote",
+                    "html": "As far as SaraJane goes, she cut two more teeth in the past week, with a few more looking ripe for departure. She's also cruising around the couches more and more, looking braver for that first big step away from the hand hold.<br><br>It breaks my heart to see her grow so fast, because little girls turn into big girls, and big girls turn into young women that find a way to get married. 18 years is never enough with a daughter. I hope that, somehow, she sees how much her daddy loves her.",
+                    "text": "As far as SaraJane goes, she cut two more teeth in the past week, with a few more looking ripe for departure. She's also cruising around the couches more and more, looking braver for that first big step away from the hand hold.It breaks my heart to see her grow so fast, because little girls turn into big girls, and big girls turn into young women that find a way to get married. 18 years is never enough with a daughter. I hope that, somehow, she sees how much her daddy loves her."
+                },
+                {
+                    "id": "paragraph_mrslzl5u_sl9752",
+                    "type": "paragraph",
+                    "html": "Without warning, the 18 years have passed. SaraJane graduated high school, and already has her sights set on an EMT cert and firefighting in the longer term. Gone are the days when she cruised around couches. She traded the contours of a baby-proofed family room for the open streets of Arizona. Constant warnings that time is a thief fell on deaf ears. I blinked. My bad.",
+                    "text": "Without warning, the 18 years have passed. SaraJane graduated high school, and already has her sights set on an EMT cert and firefighting in the longer term. Gone are the days when she cruised around couches. She traded the contours of a baby-proofed family room for the open streets of Arizona. Constant warnings that time is a thief fell on deaf ears. I blinked. My bad."
+                },
+                {
+                    "id": "image_mrslsl9m_fq4x7v",
+                    "type": "image",
+                    "imageRef": "image_mrslsl9m_fq4x7v",
+                    "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-19-cruising-around-couches-mrslslkr.jpg",
+                    "objectKey": "narrative/2026-07-19-cruising-around-couches-mrslslkr.jpg",
+                    "featureLayout": "natural",
+                    "featureFocal": "center",
+                    "homepageFocal": "center",
+                    "displaySize": "medium",
+                    "alignment": "center",
+                    "wrapMode": "wrap-left"
+                },
+                {
+                    "id": "p_mrslsl9p_emphl7",
+                    "type": "paragraph",
+                    "html": "And as for the oldest of the children, Sumner is a father himself, with the cutest peanut of a baby girl. His career is taking off. He's fabulous. She's fabulous. As an aside, that makes me a grandfather (Poppy, to be precise), and it's everything it's cracked up to be.",
+                    "text": "And as for the oldest of the children, Sumner is a father himself, with the cutest peanut of a baby girl. His career is taking off. He's fabulous. She's fabulous. As an aside, that makes me a grandfather (Poppy, to be precise), and it's everything it's cracked up to be."
+                },
+                {
+                    "id": "paragraph_mrslzl5u_j0dz56",
+                    "type": "paragraph",
+                    "html": "PS: Bringing it back to Apple, I ended up employed. I was so excited to make my first purchase as an employee: a 27\" iMac with a 3.06 GHz Core 2 Duo and 8GB of RAM. I loved that thing. I finally parted ways with it about a year ago, reluctantly. It was simply a relic of a bygone era.",
+                    "text": "PS: Bringing it back to Apple, I ended up employed. I was so excited to make my first purchase as an employee: a 27\" iMac with a 3.06 GHz Core 2 Duo and 8GB of RAM. I loved that thing. I finally parted ways with it about a year ago, reluctantly. It was simply a relic of a bygone era."
+                },
+                {
+                    "id": "paragraph_mrslzl5u_zjnz1f",
+                    "type": "paragraph",
+                    "html": "And with apologies to the old blog's format, we are well past the 500-word threshold. Time to bid farewell for now.",
+                    "text": "And with apologies to the old blog's format, we are well past the 500-word threshold. Time to bid farewell for now."
+                }
+            ],
+            "images": [
+                {
+                    "id": "image_mrsly6as_kmwan4",
+                    "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-19-cruising-around-couches-mrsly74n.jpg",
+                    "objectKey": "narrative/2026-07-19-cruising-around-couches-mrsly74n.jpg",
+                    "alt": "Narrative image",
+                    "caption": "The actual Mini 9. What a time to be alive.",
+                    "credit": "",
+                    "featureLayout": "natural",
+                    "featureFocal": "center",
+                    "homepageFocal": "center",
+                    "width": 1400,
+                    "height": 1050,
+                    "displaySize": "large",
+                    "alignment": "center",
+                    "wrapMode": "none"
+                },
+                {
+                    "id": "image_mrslsl9m_fq4x7v",
+                    "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-19-cruising-around-couches-mrslslkr.jpg",
+                    "objectKey": "narrative/2026-07-19-cruising-around-couches-mrslslkr.jpg",
+                    "alt": "Narrative image",
+                    "caption": "The two in question...picture taken same day as blog",
+                    "credit": "",
+                    "featureLayout": "natural",
+                    "featureFocal": "center",
+                    "homepageFocal": "center",
+                    "width": 1400,
+                    "height": 1050,
+                    "displaySize": "medium",
+                    "alignment": "center",
+                    "wrapMode": "wrap-left"
+                }
+            ],
+            "formatting": {
+                "mode": "otw-enhanced-markdown",
+                "version": 1,
+                "fallback": "markdown"
+            }
+        },
+        "post_id": "July 19, 2026--cruising-around-couches",
+        "share_path": "archive/2026-07-19-cruising-around-couches.html",
+        "og_image": "Images/og/archive/2026-07-19-cruising-around-couches.png"
+    },
+    {
         "title": "The Midweek Weather",
         "date": "July 14, 2026",
         "body": "_The Skipping Stone_\n\n![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-14-the-midweek-weather-mrl9zyl0.jpg \"I have no access to A. a lake or B. a good skipping stone, so...AI to the rescue?\")\n\n**Did you know that I love taking mushrooms?**\n\nSettle that into your brainpan a little bit before I proceed.\n\nReady?\n\nWithout wading into far too much detail about the clinical side of life, I do have certain tendencies that make it harder for me to concentrate on a single task. And when I don't have a buffer, the world changes.\n\nWithout help and support, I feel like a rock skipping across a pond, thrown viciously enough to never feel appreciative of the wetness of the water, the crisp humidity of the air, or the quiet strength of the hand that threw me. I'm just skimming the surface of my own life, bouncing frantically from one task to the next, never actually touching down.\n\n**Which brings me to right now**, as I sit in my chair, trying to focus on writing this quick bit. Struggling mightily.\n\nI am currently knee-deep in the crash of losing my support. The brain fog is back, the jitters are settling in, and my focus is shattered. What makes it humiliating is that this is the _third time_ this has happened to me. I run out, the chaos returns, I realize how vital they are, and yet... **I still don't learn.**\n\nBut since I am stuck in this foggy, skipping-stone state today, I figured I'd do a bit of public service. I mentioned that I take mushrooms.\n\nLion's Mane. Reishi. Cordyceps. Turkey Tail. Chaga. Maitake. What sounds like Michael Scott's laundry list of troublesome illicit drugs is, I have come to find, the difference between a regular Tuesday and a really shitty one.\n\nTo be certain and clear, I know that almost everything I'm experiencing is anecdotal and reliant upon _how I feel_. But my anecdotal experience aligns perfectly with the expressed purpose of these ingredients.\n\nAnd it's always in the details that this matters, because our brains lie to us, taking whatever feels germane and grounded as the source of truth. So never mind that I spent two-thirds of my day wondering just what in the actual hell was happening to me. What is more important is that I was clairvoyant enough to realize that I'd missed the last two days of mushrooms before my brain told me that all evidence pointed to me going nuts.\n\n**So yes, I look forward** to my Amazon Prime same-day delivery. It will be nice to cut the brain fog, curb a tiny bit of the anxiety, and get my gut back to a baseline of normal that allows me to enjoy this box of Mike and Ike RedRageous fruit-flavored candies. Otherwise, the stress wins, and not even my nightly ritual of Confetti Cheerios will tame the clumsy dinosaur within me.\n\nI hate that I believe in this stuff, but having now taken it for well over a year, I have enough evidence that it works. If it didn't, I wouldn't have spent over $200 maintaining a subscription to it.\n\nThis isn't an ad. I am not even providing the link to the product. I just felt like writing about it. Because writing and working without it?\n\nCompletely different experience.",

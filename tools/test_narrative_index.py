@@ -27,6 +27,19 @@ def main() -> int:
     full_posts = builder.parse_js_array(ROOT / "narrative_data.js")
     posts = stored["posts"]
     assert len(posts) == len(full_posts)
+
+    source_files = sorted(path.name for path in (ROOT / "current_narrative").glob("*.md"))
+    generated_files = sorted(str(post.get("file") or "") for post in full_posts)
+    assert generated_files == source_files, (
+        "narrative_data.js does not represent every current_narrative source; "
+        "run narrative_sync.py before building the compact index"
+    )
+    archive_files = sorted(path.name for path in (ROOT / "archive").glob("2026-*.html"))
+    expected_archive_files = sorted(f"{Path(name).stem}.html" for name in source_files)
+    assert archive_files == expected_archive_files, (
+        "the canonical archive does not contain exactly one reader for every current_narrative source"
+    )
+
     assert len({post["postId"] for post in posts}) == len(posts)
     assert len({post["url"] for post in posts}) == len(posts)
     for post in posts:

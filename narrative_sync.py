@@ -18,7 +18,6 @@ reading_aids_folder = 'reading_aids'
 site_url = 'https://outsidetheworld.com'
 author_url = f'{site_url}/ryandavid-burningham.html'
 author_identity_id = f'{author_url}#person'
-author_cutover_date = datetime(2026, 7, 17)
 READING_AIDS_PREVIEW_ENV = 'OTW_READING_AIDS_PREVIEW'
 
 MONTHS = {
@@ -60,9 +59,6 @@ def parse_display_date(value):
         return None
 
 def author_name_for_post(post):
-    published = parse_display_date(post.get('date') or '')
-    if published and published < author_cutover_date:
-        return 'Rylee Burningham'
     return 'RyanDavid Burningham'
 
 def strip_markdown(value):
@@ -1590,7 +1586,7 @@ def render_share_page(post, newer_post=None, older_post=None, include_draft_read
             }} catch (error) {{}}
         }}());
     </script>
-    <link href="../archive_reader.css?v=20260718-performance" rel="stylesheet" />
+    <link href="../archive_reader.css?v=20260719-reader-identity" rel="stylesheet" />
     <meta name="description" content="{smartypants_safe(description)}" />
     <meta name="theme-color" content="#060809" />
     <meta property="og:site_name" content="Outside The World" />

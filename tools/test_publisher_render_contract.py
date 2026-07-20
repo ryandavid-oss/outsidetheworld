@@ -691,9 +691,10 @@ def test_article_shell_has_home_identity_schema_and_consistent_section_levels():
     assert 'href="/" aria-label="Outside The World home"' in share_html
     assert 'src="/Images/Equal.svg"' in share_html
     assert 'src="/Images/Equal_dark.svg"' in share_html
-    assert 'By <strong><a href="/ryandavid-burningham.html" rel="author">Rylee Burningham</a></strong>' in share_html
+    assert 'By <strong><a href="/ryandavid-burningham.html" rel="author">RyanDavid Burningham</a></strong>' in share_html
     assert '<script type="application/ld+json">' in share_html
     assert '"@type": "Article"' in share_html
+    assert '"name": "RyanDavid Burningham"' in share_html
     assert '<span class="entry-section-index">II.</span> <span class="entry-section-title">Second</span>' in share_html
     assert '<h3>II. Second</h3>' not in share_html
 
@@ -925,6 +926,28 @@ def test_residue_archive_legacy_urls_resolve_to_canonical_archive_paths():
     assert "residue_archive.html?post=" not in residue
 
 
+def test_residue_archive_hydrates_complete_canonical_entries_without_relative_path_drift():
+    residue = (ROOT / "residue_archive.html").read_text(encoding="utf-8")
+
+    assert '<base href="/">' in residue
+    assert "function normalizeCanonicalArchivePath" in residue
+    assert "async function hydrateCanonicalEntry" in residue
+    assert "new DOMParser()" in residue
+    assert "canonicalDocument.querySelector('.entry-body')" in residue
+    assert "canonicalDocument.querySelector('.entry-feature')" in residue
+    assert "fetch(readerPath" in residue
+    assert "Open Standalone Reader" in residue
+    assert "const previewBody =" not in residue
+    assert "event.state && event.state.postId" in residue
+
+
+def test_reader_byline_link_uses_reader_palette_instead_of_browser_blue():
+    reader_css = (ROOT / "archive_reader.css").read_text(encoding="utf-8")
+
+    assert ".entry-byline a" in reader_css
+    assert "color: inherit" in reader_css
+
+
 def test_share_copy_search_and_feed_paths_do_not_emit_legacy_residue_urls():
     index = (ROOT / "index.html").read_text(encoding="utf-8")
     residue = (ROOT / "residue_archive.html").read_text(encoding="utf-8")
@@ -1090,6 +1113,8 @@ def run():
         test_archive_reader_assigns_body_paragraph_ids_only,
         test_reading_aids_render_only_when_approved_or_previewed,
         test_residue_archive_legacy_urls_resolve_to_canonical_archive_paths,
+        test_residue_archive_hydrates_complete_canonical_entries_without_relative_path_drift,
+        test_reader_byline_link_uses_reader_palette_instead_of_browser_blue,
         test_share_copy_search_and_feed_paths_do_not_emit_legacy_residue_urls,
         test_public_pages_use_appropriate_post_payloads,
         test_public_css_contract_exists_everywhere,

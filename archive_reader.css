@@ -299,6 +299,19 @@ html[data-reader-mode="dark"] .reader-mode-button[aria-pressed="true"] {
     font-weight: 700;
 }
 
+.entry-byline a {
+    color: inherit;
+    text-decoration-color: color-mix(in srgb, var(--reader-accent) 45%, transparent);
+    text-decoration-thickness: 0.08em;
+    text-underline-offset: 0.22em;
+    transition: color 160ms ease, text-decoration-color 160ms ease;
+}
+
+.entry-byline a:hover {
+    color: var(--reader-accent-strong);
+    text-decoration-color: currentColor;
+}
+
 .entry-feature {
     position: relative;
     z-index: 1;
