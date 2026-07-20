@@ -1,5 +1,486 @@
 const current_narrative = [
     {
+        "title": "Can we take a break from cynicism?",
+        "date": "July 20, 2026",
+        "body": "_A lot of people had to put this back together just for you to roll your eyes at it._\n\n![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-19-can-we-take-a-break-from-cynicism-mrtt7bvh.jpg \"Cap is back and he took Thor's hammer again.\")\n\n## **Oh, my\u00a0_gosh_.**\n\nWhat should have been a remarkably fun announcement from Marvel and Disney has taken on a life of its own. And I am not surprised. But yeah...I'm still disappointed.\n\nFor those who may not have heard yet, Marvel Studios released the first full trailer for Avengers: Doomsday on July 20. The movie arrives in theaters on December 18, 2026.\n\nThe timing was interesting. San Diego Comic-Con officially begins July 23, with Preview Night on July 22. Marvel decided it did not need to wait until then to show us Doomsday. Which begs the obvious question: If Marvel was willing to release the full trailer before Comic-Con, what in the hell are they holding back for this weekend?\n\n![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-19-can-we-take-a-break-from-cynicism-mrtt81za.jpg \"May Patrick Stewart never, ever leave us. Baldies forever.\")\n\n**When I started writ****ing this**, roughly seven hours after the trailer appeared, the YouTube counter was already sitting just under\u00a0_24 million views_. That number will be obsolete by the time most people read this, but the point is simple: The interest is there.\n\nWe've waited seven years for the return of The Avengers, and we did this while existing in a world where the pandemic ruled the theaters and took the wind out of the industry's sails in more than a few ways. During that time, the entertainment industry was forced to rewrite its plans on the fly and Marvel's carefully constructed next chapter repeatedly came apart in its hands.\n\nSo, the internet has decided that the trailer is boring.\n\nNot everyone, of course. But the reliably vocal minority of commenters has once again arrived to inform the rest of us that it is far too sophisticated to enjoy any of this.\n\nThe comments range from legitimate criticism to the usual performance of being unimpressed:\n\n> \"Still have not in any way, shape, or form explained what this movie is except: Don't you want your favorite toys mashed together?\"\n\nAnother:\n\n> \"Is this a real trailer? It looks like another Disney marketing cameo reel.\"\n\nAnd another:\n\n> \"I think the problem for me is that this doesn't feel like the culmination of anything. There's been exactly zero Avengers movies without Chris Evans, so his 'return' doesn't leave much of an impression on me. This is also the fourth time Disney has trotted out the X-Men toys they bought from Fox.\"\n\nThis one at least made me laugh:\n\n> \"I cannot express to you how excited I am to have to watch at least eight middling Marvel films and several TV series I skipped first time round in order to understand what the hell is going on in this.\"\n\nThen there was this:\n\n> \"The cast is stacked with heroes whose movies all disappointed or outright bombed. Sam Wilson Capt. America, Falcon, the Thunderbolts, Fantastic Four. I'm surprised they didn't throw the Eternals and Marvels in there for good measure.\"\n\nIt's this comment with which I take particular umbrage. Not because Marvel has never disappointed, and not because all of those films were financial triumphs. I take issue with it because it takes several different realities and crushes them into one sneering sentence. The movies supposedly failed, so the characters must be failures, and therefore including them in an Avengers movie is itself a joke.\n\nBut when we look at the movies themselves, and look at them from a standpoint of audience scores, we see a different picture.\n\nCaptain America: Brave New World pulled in $200.5 million domestically with a 75 percent audience score. Thunderbolts\\* made less at the box office, $190.3 million, but audiences loved it, 93 percent. The Fantastic Four: First Steps did the best of the three, $274.3 million domestically and a 90 percent score to match.\n\nTo be clear, those are audience scores, not professional critical scores.\n\n![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-19-can-we-take-a-break-from-cynicism-mrtt8xf4.jpg \"Let's not forget that Black Panther lives on in Shuri.\")\n\nAnd because I am willing to be a little bitch about this, let us include the commenter's super-clever dig at two other movies: Eternals earned $164.9 million domestically with a 77 percent audience score, and The Marvels made just $84.5 million but still landed a 79 percent score with the people who actually showed up.\n\nCaptain America: Brave New World and Eternals were both rated rotten by critics. The Marvels was a commercial failure. Thunderbolts\\* was extremely well received but did not translate that affection into the kind of worldwide box office Marvel probably wanted. A domestic gross by itself is also not a definitive statement of fiduciary success. These movies are enormously expensive to produce and market.\n\nBut the mildly amusing problem with the original comment remains: Three of its five supposed punchlines were well received by critics and audiences alike. All five received positive audience scores. The people who actually bought tickets and rated these movies were generally pleased with what they saw...sometimes overwhelmingly so!\n\nI get it that the audience scores are a bit self-selecting. The people most likely to pay to see a Marvel movie are also the people most likely to enjoy a Marvel movie. But is that not part of the point? These characters have audiences.\n\n![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-19-can-we-take-a-break-from-cynicism-mrtt9rl7.jpg \"Long live the strong, female character. Whose makeup is astounding, I might add.\")\n\nAs for myself, I love Sam Wilson as Captain America. Yelena and Kamala Khan? I love seeing strong women who kick ass with humor in tow. And I guarantee David Harbour's Red Guardian will steal the scene at least once in the Doomsday movie.\n\nAnd Marvel's problem is not that it has created nothing worthwhile since Avengers: Endgame. Its problem is that Infinity War and Endgame were so enormous that everything afterward has been treated as hot garbage.\n\nAvengers: Infinity War and Avengers: Endgame were not merely successful franchise installments. They were cultural touchstones. People rearranged their lives to see them. The silence in a crowded theater when Thanos snapped his fingers?\n\n_Good hell._\n\nThat was something you could physically feel. And then, a year later, entire audiences erupted over Captain America lifting Mj\u00f6lnir. I think I may have peed a little when I heard Sam utter the words \"On your left.\"\n\nBut those moments were earned over more than a decade. By the time Endgame arrived, Marvel had spent 11 years and 22 films teaching audiences to care about these people. Tony Stark was not simply a recognizable character. We watched him become Iron Man, fall in love, make terrible choices, try to fix those choices and finally reach the end of his character arc.\n\nEndgame was not the normal operating condition of the Marvel Cinematic Universe, let alone the movie industry as a whole. It was the return on an investment that had been gathering since 2008.\u00a0_Endgame may never happen again._\u00a0That is not an insult to Doomsday. It is a recognition of what made Endgame special.\n\nThere are legitimate reasons that Doomsday does not yet feel like the culmination of something in the same way Infinity War did. The post-Endgame universe has been scattered. Characters (Shang Chi, I'm looking at you) have been introduced and then left untouched for years. Plotlines (Um, mutants? Where art thou) have been planted without meaningful follow-up. The relationship between the movies and Disney+ became confusing. I think many people stopped feeling rewarded for keeping up with the lore.\n\n![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-19-can-we-take-a-break-from-cynicism-mrttabv6.jpg \"Did you know? Gambit was my favorite X-Man, once upon a time...\")\n\nBut I mainly blame two things, and they were largely outside of Disney/Marvel's control: The pandemic, and Jonathan Majors.\n\nWhen the pandemic started and the schedule collapsed, the connective tissue collapsed with it. When Majors was convicted of assault and harassment, the studio abandoned the Kang storyline, leaving years of planning to be abandoned or radically reconstructed from scratch.\n\nThat's no small job. It's not just Chris Hemsworth's salary at stake. When a studio has to tear apart and rebuild years of planning because of a global pandemic and the criminal conviction of the actor at the center of its next saga, that disruption does not stop with executives and movie stars worrying about the payments on a third boat.\n\nA production is an entire temporary economy. It is stagehands, electricians, costume workers, drivers, editors and hundreds of other people whose names most audiences will never know. It is also the smaller vendors, local crews and support businesses that depend on those productions happening when they are supposed to happen. When release calendars collapse, scripts are rewritten, roles are recast and entire storylines are abandoned, thousands of ordinary working people absorb the instability.\n\n**And yes...I know.**\u00a0None of that is an excuse for a lazy, terrible movie that phones it in.\n\nBut this makes the problem more complicated than \"Disney should have planned better.\" Sometimes the machine is broken because the world is broken. Try to have some empathy for the people trying to put it back together.\n\n![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-19-can-we-take-a-break-from-cynicism-mrttb6gc.jpg \"My guess? Sue has something to fight for in this one. Also, where do I get that jacket?\")\n\nAll I am trying to say is...take a breath. Step back from your keyboard and consider your perspective. Pan the camera back...way back. This is entertainment. But it's also thousands of unseen lives working in the background to push their industry forward. That's no small task. It's a pleasure to see the \"endgame\" of seven years of cancellations, revisions, rewrites, and studio upheaval. Even if the movie stinks (which come on...will it, really?), the worst thing that can happen is that we move forward with a clean slate for the Marvel Cinematic Universe.\n\nI didn't have an hour to give to this today, but I gave it anyway. That should tell you something. Anyway, my money is on the safe bet.\u00a0RDJ proves to us why his casting was more than fan service, and we get another five years minimum of anticipation that rivals the lead up to Infinity War and Endgame.\n\n![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-19-can-we-take-a-break-from-cynicism-mrttekho.jpg \"Yep. Chills again. Counting down...\")",
+        "file": "2026-07-20-can-we-take-a-break-from-cynicism.md",
+        "publisher": {
+            "schema": "otw.publisher.post",
+            "version": 2,
+            "source": "publisher.html",
+            "subhead": "A lot of people had to put this back together just for you to roll your eyes at it.",
+            "blocks": [
+                {
+                    "id": "image_mrtt7bi0_bujlob",
+                    "type": "image",
+                    "imageRef": "image_mrtt7bi0_bujlob",
+                    "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-19-can-we-take-a-break-from-cynicism-mrtt7bvh.jpg",
+                    "objectKey": "narrative/2026-07-19-can-we-take-a-break-from-cynicism-mrtt7bvh.jpg",
+                    "featureLayout": "natural",
+                    "featureFocal": "center",
+                    "homepageFocal": "center",
+                    "displaySize": "large",
+                    "alignment": "center",
+                    "wrapMode": "none"
+                },
+                {
+                    "id": "heading_mrtuxgzu_i96y2w",
+                    "type": "heading",
+                    "level": 2,
+                    "html": "<strong>Oh, my<span>\u00a0</span><em>gosh</em>.</strong>",
+                    "text": "Oh, my\u00a0gosh."
+                },
+                {
+                    "id": "paragraph_mrttrv9l_cuoiia",
+                    "type": "paragraph",
+                    "html": "What should have been a remarkably fun announcement from Marvel and Disney has taken on a life of its own. And I am not surprised. But yeah...I'm still disappointed.",
+                    "text": "What should have been a remarkably fun announcement from Marvel and Disney has taken on a life of its own. And I am not surprised. But yeah...I'm still disappointed."
+                },
+                {
+                    "id": "paragraph_mrttrv9l_gy5gbk",
+                    "type": "paragraph",
+                    "html": "For those who may not have heard yet, Marvel Studios released the first full trailer for Avengers: Doomsday on July 20. The movie arrives in theaters on December 18, 2026.",
+                    "text": "For those who may not have heard yet, Marvel Studios released the first full trailer for Avengers: Doomsday on July 20. The movie arrives in theaters on December 18, 2026."
+                },
+                {
+                    "id": "paragraph_mrttrv9l_4ltppv",
+                    "type": "paragraph",
+                    "html": "The timing was interesting. San Diego Comic-Con officially begins July 23, with Preview Night on July 22. Marvel decided it did not need to wait until then to show us Doomsday. Which begs the obvious question: If Marvel was willing to release the full trailer before Comic-Con, what in the hell are they holding back for this weekend?",
+                    "text": "The timing was interesting. San Diego Comic-Con officially begins July 23, with Preview Night on July 22. Marvel decided it did not need to wait until then to show us Doomsday. Which begs the obvious question: If Marvel was willing to release the full trailer before Comic-Con, what in the hell are they holding back for this weekend?"
+                },
+                {
+                    "id": "image_mrtt81ve_a2bwmo",
+                    "type": "image",
+                    "imageRef": "image_mrtt81ve_a2bwmo",
+                    "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-19-can-we-take-a-break-from-cynicism-mrtt81za.jpg",
+                    "objectKey": "narrative/2026-07-19-can-we-take-a-break-from-cynicism-mrtt81za.jpg",
+                    "featureLayout": "natural",
+                    "featureFocal": "center",
+                    "homepageFocal": "center",
+                    "displaySize": "large",
+                    "alignment": "center",
+                    "wrapMode": "wrap-left"
+                },
+                {
+                    "id": "paragraph_mrttrv9l_xaait4",
+                    "type": "paragraph",
+                    "html": "<strong>When I started writ</strong><strong>ing this</strong><span>, roughly seven hours after the trailer appeared, the YouTube counter was already sitting just under</span><span>\u00a0</span><em>24 million views</em><span>. That number will be obsolete by the time most people read this, but the point is simple: The interest is there.</span>",
+                    "text": "When I started writing this, roughly seven hours after the trailer appeared, the YouTube counter was already sitting just under\u00a024 million views. That number will be obsolete by the time most people read this, but the point is simple: The interest is there."
+                },
+                {
+                    "id": "paragraph_mrttrv9l_241xt3",
+                    "type": "paragraph",
+                    "html": "We've waited seven years for the return of The Avengers, and we did this while existing in a world where the pandemic ruled the theaters and took the wind out of the industry's sails in more than a few ways. During that time, the entertainment industry was forced to rewrite its plans on the fly and Marvel's carefully constructed next chapter repeatedly came apart in its hands.",
+                    "text": "We've waited seven years for the return of The Avengers, and we did this while existing in a world where the pandemic ruled the theaters and took the wind out of the industry's sails in more than a few ways. During that time, the entertainment industry was forced to rewrite its plans on the fly and Marvel's carefully constructed next chapter repeatedly came apart in its hands."
+                },
+                {
+                    "id": "paragraph_mrttrv9l_uq2tet",
+                    "type": "paragraph",
+                    "html": "So, the internet has decided that the trailer is boring.",
+                    "text": "So, the internet has decided that the trailer is boring."
+                },
+                {
+                    "id": "paragraph_mrttrv9l_447ncb",
+                    "type": "paragraph",
+                    "html": "Not everyone, of course. But the reliably vocal minority of commenters has once again arrived to inform the rest of us that it is far too sophisticated to enjoy any of this.",
+                    "text": "Not everyone, of course. But the reliably vocal minority of commenters has once again arrived to inform the rest of us that it is far too sophisticated to enjoy any of this."
+                },
+                {
+                    "id": "paragraph_mrttrv9l_dwlxrz",
+                    "type": "paragraph",
+                    "html": "The comments range from legitimate criticism to the usual performance of being unimpressed:",
+                    "text": "The comments range from legitimate criticism to the usual performance of being unimpressed:"
+                },
+                {
+                    "id": "quote_mrttrv9l_t6n36n",
+                    "type": "quote",
+                    "html": "\"Still have not in any way, shape, or form explained what this movie is except: Don't you want your favorite toys mashed together?\"",
+                    "text": "\"Still have not in any way, shape, or form explained what this movie is except: Don't you want your favorite toys mashed together?\""
+                },
+                {
+                    "id": "paragraph_mrttrv9l_sdzv81",
+                    "type": "paragraph",
+                    "html": "Another:",
+                    "text": "Another:"
+                },
+                {
+                    "id": "quote_mrttrv9l_ba8d3z",
+                    "type": "quote",
+                    "html": "\"Is this a real trailer? It looks like another Disney marketing cameo reel.\"",
+                    "text": "\"Is this a real trailer? It looks like another Disney marketing cameo reel.\""
+                },
+                {
+                    "id": "paragraph_mrttrv9l_b6ymkq",
+                    "type": "paragraph",
+                    "html": "And another:",
+                    "text": "And another:"
+                },
+                {
+                    "id": "quote_mrttrv9l_l0fn5e",
+                    "type": "quote",
+                    "html": "\"I think the problem for me is that this doesn't feel like the culmination of anything. There's been exactly zero Avengers movies without Chris Evans, so his 'return' doesn't leave much of an impression on me. This is also the fourth time Disney has trotted out the X-Men toys they bought from Fox.\"",
+                    "text": "\"I think the problem for me is that this doesn't feel like the culmination of anything. There's been exactly zero Avengers movies without Chris Evans, so his 'return' doesn't leave much of an impression on me. This is also the fourth time Disney has trotted out the X-Men toys they bought from Fox.\""
+                },
+                {
+                    "id": "paragraph_mrttrv9l_k12253",
+                    "type": "paragraph",
+                    "html": "This one at least made me laugh:",
+                    "text": "This one at least made me laugh:"
+                },
+                {
+                    "id": "quote_mrttrv9l_q26t9d",
+                    "type": "quote",
+                    "html": "\"I cannot express to you how excited I am to have to watch at least eight middling Marvel films and several TV series I skipped first time round in order to understand what the hell is going on in this.\"",
+                    "text": "\"I cannot express to you how excited I am to have to watch at least eight middling Marvel films and several TV series I skipped first time round in order to understand what the hell is going on in this.\""
+                },
+                {
+                    "id": "paragraph_mrttrv9l_wlhc1i",
+                    "type": "paragraph",
+                    "html": "Then there was this:",
+                    "text": "Then there was this:"
+                },
+                {
+                    "id": "quote_mrttrv9l_kh71dr",
+                    "type": "quote",
+                    "html": "\"The cast is stacked with heroes whose movies all disappointed or outright bombed. Sam Wilson Capt. America, Falcon, the Thunderbolts, Fantastic Four. I'm surprised they didn't throw the Eternals and Marvels in there for good measure.\"",
+                    "text": "\"The cast is stacked with heroes whose movies all disappointed or outright bombed. Sam Wilson Capt. America, Falcon, the Thunderbolts, Fantastic Four. I'm surprised they didn't throw the Eternals and Marvels in there for good measure.\""
+                },
+                {
+                    "id": "paragraph_mrttrv9l_gbmx3v",
+                    "type": "paragraph",
+                    "html": "It's this comment with which I take particular umbrage. Not because Marvel has never disappointed, and not because all of those films were financial triumphs. I take issue with it because it takes several different realities and crushes them into one sneering sentence. The movies supposedly failed, so the characters must be failures, and therefore including them in an Avengers movie is itself a joke.",
+                    "text": "It's this comment with which I take particular umbrage. Not because Marvel has never disappointed, and not because all of those films were financial triumphs. I take issue with it because it takes several different realities and crushes them into one sneering sentence. The movies supposedly failed, so the characters must be failures, and therefore including them in an Avengers movie is itself a joke."
+                },
+                {
+                    "id": "paragraph_mrttrv9l_rwisa7",
+                    "type": "paragraph",
+                    "html": "But when we look at the movies themselves, and look at them from a standpoint of audience scores, we see a different picture.",
+                    "text": "But when we look at the movies themselves, and look at them from a standpoint of audience scores, we see a different picture."
+                },
+                {
+                    "id": "paragraph_mrttrv9l_1448hm",
+                    "type": "paragraph",
+                    "html": "Captain America: Brave New World pulled in $200.5 million domestically with a 75 percent audience score. Thunderbolts* made less at the box office, $190.3 million, but audiences loved it, 93 percent. The Fantastic Four: First Steps did the best of the three, $274.3 million domestically and a 90 percent score to match.",
+                    "text": "Captain America: Brave New World pulled in $200.5 million domestically with a 75 percent audience score. Thunderbolts* made less at the box office, $190.3 million, but audiences loved it, 93 percent. The Fantastic Four: First Steps did the best of the three, $274.3 million domestically and a 90 percent score to match."
+                },
+                {
+                    "id": "paragraph_mrttrv9l_go5x07",
+                    "type": "paragraph",
+                    "html": "To be clear, those are audience scores, not professional critical scores.",
+                    "text": "To be clear, those are audience scores, not professional critical scores."
+                },
+                {
+                    "id": "image_mrtt8xb7_480dck",
+                    "type": "image",
+                    "imageRef": "image_mrtt8xb7_480dck",
+                    "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-19-can-we-take-a-break-from-cynicism-mrtt8xf4.jpg",
+                    "objectKey": "narrative/2026-07-19-can-we-take-a-break-from-cynicism-mrtt8xf4.jpg",
+                    "featureLayout": "natural",
+                    "featureFocal": "center",
+                    "homepageFocal": "center",
+                    "displaySize": "large",
+                    "alignment": "center",
+                    "wrapMode": "wrap-right"
+                },
+                {
+                    "id": "paragraph_mrttrv9l_6el1f8",
+                    "type": "paragraph",
+                    "html": "<span>And because I am willing to be a little bitch about this, let us include the commenter's super-clever dig at two other movies: Eternals earned $164.9 million domestically with a 77 percent audience score, and The Marvels made just $84.5 million but still landed a 79 percent score with the people who actually showed up.</span><br>",
+                    "text": "And because I am willing to be a little bitch about this, let us include the commenter's super-clever dig at two other movies: Eternals earned $164.9 million domestically with a 77 percent audience score, and The Marvels made just $84.5 million but still landed a 79 percent score with the people who actually showed up."
+                },
+                {
+                    "id": "paragraph_mrttrv9l_klbc35",
+                    "type": "paragraph",
+                    "html": "Captain America: Brave New World and Eternals were both rated rotten by critics. The Marvels was a commercial failure. Thunderbolts* was extremely well received but did not translate that affection into the kind of worldwide box office Marvel probably wanted. A domestic gross by itself is also not a definitive statement of fiduciary success. These movies are enormously expensive to produce and market.",
+                    "text": "Captain America: Brave New World and Eternals were both rated rotten by critics. The Marvels was a commercial failure. Thunderbolts* was extremely well received but did not translate that affection into the kind of worldwide box office Marvel probably wanted. A domestic gross by itself is also not a definitive statement of fiduciary success. These movies are enormously expensive to produce and market."
+                },
+                {
+                    "id": "paragraph_mrttrv9l_8t95v7",
+                    "type": "paragraph",
+                    "html": "But the mildly amusing problem with the original comment remains: Three of its five supposed punchlines were well received by critics and audiences alike. All five received positive audience scores. The people who actually bought tickets and rated these movies were generally pleased with what they saw...sometimes overwhelmingly so!",
+                    "text": "But the mildly amusing problem with the original comment remains: Three of its five supposed punchlines were well received by critics and audiences alike. All five received positive audience scores. The people who actually bought tickets and rated these movies were generally pleased with what they saw...sometimes overwhelmingly so!"
+                },
+                {
+                    "id": "paragraph_mrttrv9l_8768ls",
+                    "type": "paragraph",
+                    "html": "I get it that the audience scores are a bit self-selecting. The people most likely to pay to see a Marvel movie are also the people most likely to enjoy a Marvel movie. But is that not part of the point? These characters have audiences.",
+                    "text": "I get it that the audience scores are a bit self-selecting. The people most likely to pay to see a Marvel movie are also the people most likely to enjoy a Marvel movie. But is that not part of the point? These characters have audiences."
+                },
+                {
+                    "id": "image_mrtt9rhd_2yt203",
+                    "type": "image",
+                    "imageRef": "image_mrtt9rhd_2yt203",
+                    "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-19-can-we-take-a-break-from-cynicism-mrtt9rl7.jpg",
+                    "objectKey": "narrative/2026-07-19-can-we-take-a-break-from-cynicism-mrtt9rl7.jpg",
+                    "featureLayout": "natural",
+                    "featureFocal": "center",
+                    "homepageFocal": "center",
+                    "displaySize": "large",
+                    "alignment": "center",
+                    "wrapMode": "wrap-left"
+                },
+                {
+                    "id": "paragraph_mrttrv9l_vf02z1",
+                    "type": "paragraph",
+                    "html": "<span>As for myself, I love Sam Wilson as Captain America. Yelena and Kamala Khan? I love seeing strong women who kick ass with humor in tow. And I guarantee David Harbour's Red Guardian will steal the scene at least once in the Doomsday movie.</span><br>",
+                    "text": "As for myself, I love Sam Wilson as Captain America. Yelena and Kamala Khan? I love seeing strong women who kick ass with humor in tow. And I guarantee David Harbour's Red Guardian will steal the scene at least once in the Doomsday movie."
+                },
+                {
+                    "id": "paragraph_mrttrv9l_f97f71",
+                    "type": "paragraph",
+                    "html": "And Marvel's problem is not that it has created nothing worthwhile since Avengers: Endgame. Its problem is that Infinity War and Endgame were so enormous that everything afterward has been treated as hot garbage.",
+                    "text": "And Marvel's problem is not that it has created nothing worthwhile since Avengers: Endgame. Its problem is that Infinity War and Endgame were so enormous that everything afterward has been treated as hot garbage."
+                },
+                {
+                    "id": "paragraph_mrttrv9m_7fmupp",
+                    "type": "paragraph",
+                    "html": "Avengers: Infinity War and Avengers: Endgame were not merely successful franchise installments. They were cultural touchstones. People rearranged their lives to see them. The silence in a crowded theater when Thanos snapped his fingers?",
+                    "text": "Avengers: Infinity War and Avengers: Endgame were not merely successful franchise installments. They were cultural touchstones. People rearranged their lives to see them. The silence in a crowded theater when Thanos snapped his fingers?"
+                },
+                {
+                    "id": "paragraph_mrttrv9m_vjbe83",
+                    "type": "paragraph",
+                    "html": "<em>Good hell.</em>",
+                    "text": "Good hell."
+                },
+                {
+                    "id": "paragraph_mrttrv9m_5kcx2g",
+                    "type": "paragraph",
+                    "html": "That was something you could physically feel. And then, a year later, entire audiences erupted over Captain America lifting Mj\u00f6lnir. I think I may have peed a little when I heard Sam utter the words \"On your left.\"",
+                    "text": "That was something you could physically feel. And then, a year later, entire audiences erupted over Captain America lifting Mj\u00f6lnir. I think I may have peed a little when I heard Sam utter the words \"On your left.\""
+                },
+                {
+                    "id": "paragraph_mrttrv9m_s4y9k1",
+                    "type": "paragraph",
+                    "html": "But those moments were earned over more than a decade. By the time Endgame arrived, Marvel had spent 11 years and 22 films teaching audiences to care about these people. Tony Stark was not simply a recognizable character. We watched him become Iron Man, fall in love, make terrible choices, try to fix those choices and finally reach the end of his character arc.",
+                    "text": "But those moments were earned over more than a decade. By the time Endgame arrived, Marvel had spent 11 years and 22 films teaching audiences to care about these people. Tony Stark was not simply a recognizable character. We watched him become Iron Man, fall in love, make terrible choices, try to fix those choices and finally reach the end of his character arc."
+                },
+                {
+                    "id": "paragraph_mrttrv9m_mpnskh",
+                    "type": "paragraph",
+                    "html": "Endgame was not the normal operating condition of the Marvel Cinematic Universe, let alone the movie industry as a whole. It was the return on an investment that had been gathering since 2008.<span>\u00a0</span><em>Endgame may never happen again.</em><span>\u00a0</span>That is not an insult to Doomsday. It is a recognition of what made Endgame special.",
+                    "text": "Endgame was not the normal operating condition of the Marvel Cinematic Universe, let alone the movie industry as a whole. It was the return on an investment that had been gathering since 2008.\u00a0Endgame may never happen again.\u00a0That is not an insult to Doomsday. It is a recognition of what made Endgame special."
+                },
+                {
+                    "id": "paragraph_mrttrv9m_ctlgui",
+                    "type": "paragraph",
+                    "html": "There are legitimate reasons that Doomsday does not yet feel like the culmination of something in the same way Infinity War did. The post-Endgame universe has been scattered. Characters (Shang Chi, I'm looking at you) have been introduced and then left untouched for years. Plotlines (Um, mutants? Where art thou) have been planted without meaningful follow-up. The relationship between the movies and Disney+ became confusing. I think many people stopped feeling rewarded for keeping up with the lore.",
+                    "text": "There are legitimate reasons that Doomsday does not yet feel like the culmination of something in the same way Infinity War did. The post-Endgame universe has been scattered. Characters (Shang Chi, I'm looking at you) have been introduced and then left untouched for years. Plotlines (Um, mutants? Where art thou) have been planted without meaningful follow-up. The relationship between the movies and Disney+ became confusing. I think many people stopped feeling rewarded for keeping up with the lore."
+                },
+                {
+                    "id": "image_mrttabr4_c0qso2",
+                    "type": "image",
+                    "imageRef": "image_mrttabr4_c0qso2",
+                    "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-19-can-we-take-a-break-from-cynicism-mrttabv6.jpg",
+                    "objectKey": "narrative/2026-07-19-can-we-take-a-break-from-cynicism-mrttabv6.jpg",
+                    "featureLayout": "natural",
+                    "featureFocal": "center",
+                    "homepageFocal": "center",
+                    "displaySize": "large",
+                    "alignment": "center",
+                    "wrapMode": "wrap-left"
+                },
+                {
+                    "id": "paragraph_mrttrv9m_kx8hen",
+                    "type": "paragraph",
+                    "html": "But I mainly blame two things, and they were largely outside of Disney/Marvel's control: The pandemic, and Jonathan Majors.",
+                    "text": "But I mainly blame two things, and they were largely outside of Disney/Marvel's control: The pandemic, and Jonathan Majors."
+                },
+                {
+                    "id": "paragraph_mrttrv9m_tn9e9o",
+                    "type": "paragraph",
+                    "html": "When the pandemic started and the schedule collapsed, the connective tissue collapsed with it. When Majors was convicted of assault and harassment, the studio abandoned the Kang storyline, leaving years of planning to be abandoned or radically reconstructed from scratch.",
+                    "text": "When the pandemic started and the schedule collapsed, the connective tissue collapsed with it. When Majors was convicted of assault and harassment, the studio abandoned the Kang storyline, leaving years of planning to be abandoned or radically reconstructed from scratch."
+                },
+                {
+                    "id": "paragraph_mrttrv9m_9takb6",
+                    "type": "paragraph",
+                    "html": "That's no small job. It's not just Chris Hemsworth's salary at stake. When a studio has to tear apart and rebuild years of planning because of a global pandemic and the criminal conviction of the actor at the center of its next saga, that disruption does not stop with executives and movie stars worrying about the payments on a third boat.",
+                    "text": "That's no small job. It's not just Chris Hemsworth's salary at stake. When a studio has to tear apart and rebuild years of planning because of a global pandemic and the criminal conviction of the actor at the center of its next saga, that disruption does not stop with executives and movie stars worrying about the payments on a third boat."
+                },
+                {
+                    "id": "paragraph_mrttrv9m_tadx64",
+                    "type": "paragraph",
+                    "html": "A production is an entire temporary economy. It is stagehands, electricians, costume workers, drivers, editors and hundreds of other people whose names most audiences will never know. It is also the smaller vendors, local crews and support businesses that depend on those productions happening when they are supposed to happen. When release calendars collapse, scripts are rewritten, roles are recast and entire storylines are abandoned, thousands of ordinary working people absorb the instability.",
+                    "text": "A production is an entire temporary economy. It is stagehands, electricians, costume workers, drivers, editors and hundreds of other people whose names most audiences will never know. It is also the smaller vendors, local crews and support businesses that depend on those productions happening when they are supposed to happen. When release calendars collapse, scripts are rewritten, roles are recast and entire storylines are abandoned, thousands of ordinary working people absorb the instability."
+                },
+                {
+                    "id": "paragraph_mrttrv9m_7wqsys",
+                    "type": "paragraph",
+                    "html": "<strong>And yes...I know.</strong><span>\u00a0</span>None of that is an excuse for a lazy, terrible movie that phones it in.",
+                    "text": "And yes...I know.\u00a0None of that is an excuse for a lazy, terrible movie that phones it in."
+                },
+                {
+                    "id": "paragraph_mrttrv9m_l60f9b",
+                    "type": "paragraph",
+                    "html": "But this makes the problem more complicated than \"Disney should have planned better.\" Sometimes the machine is broken because the world is broken. Try to have some empathy for the people trying to put it back together.",
+                    "text": "But this makes the problem more complicated than \"Disney should have planned better.\" Sometimes the machine is broken because the world is broken. Try to have some empathy for the people trying to put it back together."
+                },
+                {
+                    "id": "image_mrttb6cf_ivggp5",
+                    "type": "image",
+                    "imageRef": "image_mrttb6cf_ivggp5",
+                    "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-19-can-we-take-a-break-from-cynicism-mrttb6gc.jpg",
+                    "objectKey": "narrative/2026-07-19-can-we-take-a-break-from-cynicism-mrttb6gc.jpg",
+                    "featureLayout": "natural",
+                    "featureFocal": "center",
+                    "homepageFocal": "center",
+                    "displaySize": "large",
+                    "alignment": "center",
+                    "wrapMode": "wrap-left"
+                },
+                {
+                    "id": "paragraph_mrttrv9m_usmjba",
+                    "type": "paragraph",
+                    "html": "All I am trying to say is...take a breath. Step back from your keyboard and consider your perspective. Pan the camera back...way back. This is entertainment. But it's also thousands of unseen lives working in the background to push their industry forward. That's no small task. It's a pleasure to see the \"endgame\" of seven years of cancellations, revisions, rewrites, and studio upheaval. Even if the movie stinks (which come on...will it, really?), the worst thing that c<span>an happen is that we move forward with a clean slate for the Marvel Cinematic Universe.</span>",
+                    "text": "All I am trying to say is...take a breath. Step back from your keyboard and consider your perspective. Pan the camera back...way back. This is entertainment. But it's also thousands of unseen lives working in the background to push their industry forward. That's no small task. It's a pleasure to see the \"endgame\" of seven years of cancellations, revisions, rewrites, and studio upheaval. Even if the movie stinks (which come on...will it, really?), the worst thing that can happen is that we move forward with a clean slate for the Marvel Cinematic Universe."
+                },
+                {
+                    "id": "paragraph_mrttrv9m_apkjlz",
+                    "type": "paragraph",
+                    "html": "<span>I didn't have an hour to give to this today, but I gave it anyway. That should tell you something. Anyway, m</span>y money is on the safe bet.\u00a0<span>RDJ proves to us why his casting was more than fan service, and we get another five years minimum of anticipation that rivals the lead up to Infinity War and Endgame.</span>",
+                    "text": "I didn't have an hour to give to this today, but I gave it anyway. That should tell you something. Anyway, my money is on the safe bet.\u00a0RDJ proves to us why his casting was more than fan service, and we get another five years minimum of anticipation that rivals the lead up to Infinity War and Endgame."
+                },
+                {
+                    "id": "image_mrttekdi_hn5ay1",
+                    "type": "image",
+                    "imageRef": "image_mrttekdi_hn5ay1",
+                    "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-19-can-we-take-a-break-from-cynicism-mrttekho.jpg",
+                    "objectKey": "narrative/2026-07-19-can-we-take-a-break-from-cynicism-mrttekho.jpg",
+                    "featureLayout": "natural",
+                    "featureFocal": "center",
+                    "homepageFocal": "center",
+                    "displaySize": "original",
+                    "alignment": "center",
+                    "wrapMode": "none"
+                }
+            ],
+            "images": [
+                {
+                    "id": "image_mrtt7bi0_bujlob",
+                    "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-19-can-we-take-a-break-from-cynicism-mrtt7bvh.jpg",
+                    "objectKey": "narrative/2026-07-19-can-we-take-a-break-from-cynicism-mrtt7bvh.jpg",
+                    "alt": "Narrative image",
+                    "caption": "Cap is back and he took Thor's hammer again.",
+                    "credit": "",
+                    "featureLayout": "natural",
+                    "featureFocal": "center",
+                    "homepageFocal": "center",
+                    "width": 1400,
+                    "height": 669,
+                    "displaySize": "large",
+                    "alignment": "center",
+                    "wrapMode": "none"
+                },
+                {
+                    "id": "image_mrtt81ve_a2bwmo",
+                    "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-19-can-we-take-a-break-from-cynicism-mrtt81za.jpg",
+                    "objectKey": "narrative/2026-07-19-can-we-take-a-break-from-cynicism-mrtt81za.jpg",
+                    "alt": "Narrative image",
+                    "caption": "May Patrick Stewart never, ever leave us. Baldies forever.",
+                    "credit": "",
+                    "featureLayout": "natural",
+                    "featureFocal": "center",
+                    "homepageFocal": "center",
+                    "width": 741,
+                    "height": 414,
+                    "displaySize": "large",
+                    "alignment": "center",
+                    "wrapMode": "wrap-left"
+                },
+                {
+                    "id": "image_mrtt8xb7_480dck",
+                    "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-19-can-we-take-a-break-from-cynicism-mrtt8xf4.jpg",
+                    "objectKey": "narrative/2026-07-19-can-we-take-a-break-from-cynicism-mrtt8xf4.jpg",
+                    "alt": "Narrative image",
+                    "caption": "Let's not forget that Black Panther lives on in Shuri.",
+                    "credit": "",
+                    "featureLayout": "natural",
+                    "featureFocal": "center",
+                    "homepageFocal": "center",
+                    "width": 708,
+                    "height": 411,
+                    "displaySize": "large",
+                    "alignment": "center",
+                    "wrapMode": "wrap-right"
+                },
+                {
+                    "id": "image_mrtt9rhd_2yt203",
+                    "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-19-can-we-take-a-break-from-cynicism-mrtt9rl7.jpg",
+                    "objectKey": "narrative/2026-07-19-can-we-take-a-break-from-cynicism-mrtt9rl7.jpg",
+                    "alt": "Narrative image",
+                    "caption": "Long live the strong, female character. Whose makeup is astounding, I might add.",
+                    "credit": "",
+                    "featureLayout": "natural",
+                    "featureFocal": "center",
+                    "homepageFocal": "center",
+                    "width": 716,
+                    "height": 413,
+                    "displaySize": "large",
+                    "alignment": "center",
+                    "wrapMode": "wrap-left"
+                },
+                {
+                    "id": "image_mrttabr4_c0qso2",
+                    "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-19-can-we-take-a-break-from-cynicism-mrttabv6.jpg",
+                    "objectKey": "narrative/2026-07-19-can-we-take-a-break-from-cynicism-mrttabv6.jpg",
+                    "alt": "Narrative image",
+                    "caption": "Did you know? Gambit was my favorite X-Man, once upon a time...",
+                    "credit": "",
+                    "featureLayout": "natural",
+                    "featureFocal": "center",
+                    "homepageFocal": "center",
+                    "width": 944,
+                    "height": 416,
+                    "displaySize": "large",
+                    "alignment": "center",
+                    "wrapMode": "wrap-left"
+                },
+                {
+                    "id": "image_mrttb6cf_ivggp5",
+                    "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-19-can-we-take-a-break-from-cynicism-mrttb6gc.jpg",
+                    "objectKey": "narrative/2026-07-19-can-we-take-a-break-from-cynicism-mrttb6gc.jpg",
+                    "alt": "Narrative image",
+                    "caption": "My guess? Sue has something to fight for in this one. Also, where do I get that jacket?",
+                    "credit": "",
+                    "featureLayout": "natural",
+                    "featureFocal": "center",
+                    "homepageFocal": "center",
+                    "width": 560,
+                    "height": 414,
+                    "displaySize": "large",
+                    "alignment": "center",
+                    "wrapMode": "wrap-left"
+                },
+                {
+                    "id": "image_mrttekdi_hn5ay1",
+                    "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-19-can-we-take-a-break-from-cynicism-mrttekho.jpg",
+                    "objectKey": "narrative/2026-07-19-can-we-take-a-break-from-cynicism-mrttekho.jpg",
+                    "alt": "Narrative image",
+                    "caption": "Yep. Chills again. Counting down...",
+                    "credit": "",
+                    "featureLayout": "natural",
+                    "featureFocal": "center",
+                    "homepageFocal": "center",
+                    "width": 790,
+                    "height": 415,
+                    "displaySize": "original",
+                    "alignment": "center",
+                    "wrapMode": "none"
+                }
+            ],
+            "featureImageRef": "image_mrtt7bi0_bujlob",
+            "formatting": {
+                "mode": "otw-enhanced-markdown",
+                "version": 1,
+                "fallback": "markdown"
+            }
+        },
+        "post_id": "July 20, 2026--can-we-take-a-break-from-cynicism",
+        "share_path": "archive/2026-07-20-can-we-take-a-break-from-cynicism.html",
+        "og_image": "Images/og/archive/2026-07-20-can-we-take-a-break-from-cynicism.png"
+    },
+    {
         "title": "Cruising Around Couches",
         "date": "July 19, 2026",
         "body": "_Rereading April 2009 from the other end of it._\n\n![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-19-cruising-around-couches-mrsly74n.jpg \"The actual Mini 9. What a time to be alive.\")\n\n[C](https://outsidetheworld.com/wayback.html?post=April+23%2C+2009--04-22-09-sleep-doesn-t-come-easily-at-9pm)[ame across an old blog post last week.](https://outsidetheworld.com/wayback.html?post=April+23%2C+2009--04-22-09-sleep-doesn-t-come-easily-at-9pm)\n\n**17 years ago.**\u00a0I am intensely happy that I put forth the effort to record anything about those years. The snippet about the Hackintosh hit just right. Those were fine days, with narrow budgets and heady motivation to improvise. The machine in question was a Dell Inspiron Mini 9, and it was easily one of the most important devices in my DIY history.\n\nEvery component of that machine was seemingly purpose-built for the hack job. And that was key: hacking OS X onto a Windows machine back then usually meant compromises. Loss of the webcam, flaky wireless support, and non-existent audio were normal due to Apple's narrow approach to hardware support. On the Mini 9, however, every component worked nearly flawlessly because Apple had already written rock-solid, native drivers (kexts) for this exact hardware.\n\nBrief research online shows it cost $350. I remember spending a little less. Given that I had to purchase the OS X software as well, that puts the price of this project northward of $700 with inflation. Today, a MacBook Neo starts at $699. Incredible.\n\nI remember typing on that thing outside the Apple Store at the Arrowhead mall, hoping that it would come up in conversation during my interview.\n\nIt did not. Probably for the best, anyway.\n\n**During that period of my life**, I was playing the part of the stay-at-home parent. But it would seem, in retrospect, that I was a little antsy. I was young enough to switch gears without blowing up too much of a stable life, and I remember wanting to do something that mattered. Nursing seemed the way to go. But the advice I got was to volunteer at the nearby hospital first.\n\nEventually that came to fruition, and I was placed in the ICU. I think I lasted about three weeks before turning in my badge. The final straw was accidentally finding my way into the room of a patient with TB. I had zero PPE. While the chances of me contracting it were minimal, I had a panic attack and never returned. Needless to say, working in medicine was not the avenue for me.\n\nBut I digress. The real reason for bringing up this particular blog post is this paragraph:\n\n> As far as SaraJane goes, she cut two more teeth in the past week, with a few more looking ripe for departure. She's also cruising around the couches more and more, looking braver for that first big step away from the hand hold.\n>\n> It breaks my heart to see her grow so fast, because little girls turn into big girls, and big girls turn into young women that find a way to get married. 18 years is never enough with a daughter. I hope that, somehow, she sees how much her daddy loves her.\n\nWithout warning, the 18 years have passed. SaraJane graduated high school, and already has her sights set on an EMT cert and firefighting in the longer term. Gone are the days when she cruised around couches. She traded the contours of a baby-proofed family room for the open streets of Arizona. Constant warnings that time is a thief fell on deaf ears. I blinked. My bad.\n\n![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-19-cruising-around-couches-mrslslkr.jpg \"The two in question...picture taken same day as blog\")\n\nAnd as for the oldest of the children, Sumner is a father himself, with the cutest peanut of a baby girl. His career is taking off. He's fabulous. She's fabulous. As an aside, that makes me a grandfather (Poppy, to be precise), and it's everything it's cracked up to be.\n\nPS: Bringing it back to Apple, I ended up employed. I was so excited to make my first purchase as an employee: a 27\" iMac with a 3.06 GHz Core 2 Duo and 8GB of RAM. I loved that thing. I finally parted ways with it about a year ago, reluctantly. It was simply a relic of a bygone era.\n\nAnd with apologies to the old blog's format, we are well past the 500-word threshold. Time to bid farewell for now.",
