@@ -629,12 +629,23 @@
                 border-right: 1px solid var(--border-low);
                 padding-top: 0;
                 flex-shrink: 0;
+                overflow: hidden;
+            }
+
+            .dir-header,
+            .tuning-knob {
+                flex: 0 0 auto;
             }
 
             .post-list {
-                flex-grow: 1;
+                flex: 1 1 0;
+                min-height: 0;
                 max-height: none;
                 border-top: none;
+                overflow-y: auto;
+                overscroll-behavior-y: contain;
+                scrollbar-gutter: stable;
+                touch-action: pan-y;
             }
 
             .extraction-pane {
@@ -1362,13 +1373,69 @@
 
             .directory {
                 width: clamp(340px, 27vw, 410px);
-                overflow-y: auto;
-                -webkit-overflow-scrolling: touch;
+                overflow: hidden;
+            }
+
+            .dir-header {
+                padding: 20px 28px 18px;
+            }
+
+            .archive-brand {
+                max-width: 145px;
+                margin-bottom: 12px;
+            }
+
+            .archive-kicker {
+                margin-bottom: 6px;
+                font-size: 0.58rem;
+            }
+
+            .archive-title {
+                font-size: 2rem;
+            }
+
+            .archive-subtitle {
+                margin-top: 8px;
+                font-size: 0.82rem;
+                line-height: 1.5;
+            }
+
+            .archive-mode-toggle {
+                min-height: 36px;
+                margin-top: 12px;
+            }
+
+            .archive-mode-button {
+                min-height: 30px;
+            }
+
+            .tuning-knob {
+                padding: 14px 28px 16px;
+            }
+
+            .knob-label {
+                margin-bottom: 10px;
+                font-size: 0.6rem;
+            }
+
+            .filter-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 10px;
+            }
+
+            .archive-count {
+                margin-top: 9px;
             }
 
             .extraction-pane {
                 padding: clamp(34px, 4vw, 62px);
                 overflow-y: auto;
+            }
+        }
+
+        @media (min-width: 900px) and (max-height: 760px) {
+            .archive-subtitle {
+                display: none;
             }
         }
 
@@ -1798,6 +1865,7 @@
         function renderYear(year, selectedMonth = 'ALL') {
             const list = document.getElementById('post-list');
             list.innerHTML = "";
+            list.scrollTop = 0;
             const months = groupedMatrix[year];
             const visibleMonths = MONTH_ORDER.filter(month =>
                 months[month] && (selectedMonth === 'ALL' || selectedMonth === month)

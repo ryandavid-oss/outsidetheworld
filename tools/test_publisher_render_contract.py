@@ -948,6 +948,18 @@ def test_reader_byline_link_uses_reader_palette_instead_of_browser_blue():
     assert "color: inherit" in reader_css
 
 
+def test_residue_directory_keeps_controls_fixed_and_gives_the_post_list_one_scroll_owner():
+    residue = (ROOT / "residue_archive.html").read_text(encoding="utf-8")
+
+    assert "flex: 1 1 0" in residue
+    assert "min-height: 0" in residue
+    assert "overscroll-behavior-y: contain" in residue
+    assert "scrollbar-gutter: stable" in residue
+    assert "list.scrollTop = 0" in residue
+    assert "grid-template-columns: repeat(2, minmax(0, 1fr))" in residue
+    assert "@media (min-width: 900px) and (max-height: 760px)" in residue
+
+
 def test_share_copy_search_and_feed_paths_do_not_emit_legacy_residue_urls():
     index = (ROOT / "index.html").read_text(encoding="utf-8")
     residue = (ROOT / "residue_archive.html").read_text(encoding="utf-8")
@@ -1115,6 +1127,7 @@ def run():
         test_residue_archive_legacy_urls_resolve_to_canonical_archive_paths,
         test_residue_archive_hydrates_complete_canonical_entries_without_relative_path_drift,
         test_reader_byline_link_uses_reader_palette_instead_of_browser_blue,
+        test_residue_directory_keeps_controls_fixed_and_gives_the_post_list_one_scroll_owner,
         test_share_copy_search_and_feed_paths_do_not_emit_legacy_residue_urls,
         test_public_pages_use_appropriate_post_payloads,
         test_public_css_contract_exists_everywhere,
