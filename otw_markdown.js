@@ -69,6 +69,9 @@
         objectKey: String(image.objectKey || image.media?.objectKey || ""),
         alt: String(image.alt || ""),
         caption: String(image.caption || ""),
+        credit: String(image.credit || ""),
+        width: Math.max(0, Number(image.width || image.media?.width) || 0),
+        height: Math.max(0, Number(image.height || image.media?.height) || 0),
         ...normalizeImagePresentation(image)
       };
       byUrl.set(url, normalized);
@@ -87,6 +90,9 @@
         objectKey: String(block.objectKey || image?.objectKey || ""),
         alt: String(block.alt || image?.alt || ""),
         caption: String(block.caption || image?.caption || ""),
+        credit: String(block.credit || image?.credit || ""),
+        width: Math.max(0, Number(block.width || image?.width) || 0),
+        height: Math.max(0, Number(block.height || image?.height) || 0),
         ...normalizeImagePresentation({ ...image, ...block })
       };
       byUrl.set(normalized.url, normalized);
@@ -347,6 +353,9 @@
     figure.dataset.displaySize = normalized.displaySize;
     figure.dataset.alignment = normalized.alignment;
     figure.dataset.wrapMode = normalized.wrapMode;
+    if (Number(presentation.width) > 0) {
+      figure.style.setProperty("--otw-figure-natural-width", `${Math.round(Number(presentation.width))}px`);
+    }
   }
 
   function ensureFigureForImage(image) {
@@ -402,19 +411,25 @@
       }
 
       const caption = presentation.caption.trim();
-      if (caption) {
+      const credit = presentation.credit.trim();
+      if (caption || credit) {
         let figcaption = figure.querySelector("figcaption");
         if (!figcaption) {
           figcaption = document.createElement("figcaption");
           figure.appendChild(figcaption);
         }
-        let emphasis = figcaption.querySelector("em");
-        if (!emphasis) {
-          emphasis = document.createElement("em");
-          figcaption.textContent = "";
+        figcaption.textContent = "";
+        if (caption) {
+          const emphasis = document.createElement("em");
+          emphasis.textContent = caption;
           figcaption.appendChild(emphasis);
         }
-        emphasis.textContent = caption;
+        if (credit) {
+          const creditElement = document.createElement("span");
+          creditElement.className = "otw-figure-credit";
+          creditElement.textContent = credit;
+          figcaption.appendChild(creditElement);
+        }
       }
     });
 

@@ -1,8 +1,9 @@
-const CACHE_NAME = 'otw-app-v1';
+const CACHE_NAME = 'otw-app-v2';
 const CORE_ASSETS = [
   '/otw_app.html',
   '/otw_app.webmanifest',
   '/theme.css',
+  '/otw_markdown.js',
   '/favicon.svg',
   '/Images/Equal.svg',
   '/Images/Equal_dark.svg'

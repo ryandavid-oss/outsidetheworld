@@ -310,6 +310,10 @@ def test_all_image_presentation_options_render_and_css_agrees():
     assert "width: min(100%, var(--otw-figure-wrap-width, 340px))" in css
     assert "height: auto" in css
     assert "float: none" in css
+    assert "--otw-figure-max-width: var(--otw-figure-natural-width, 100%)" in css
+    assert "max-width: none" in css
+    assert "text-align: left" in css
+    assert "font-size: clamp(0.98rem, 1.2vw, 1.08rem)" in css
     assert "object-fit: cover" not in css[css.index(".otw-figure"):css.index("/* 6. NAVIGATION")]
 
     for size in sizes:
@@ -318,7 +322,7 @@ def test_all_image_presentation_options_render_and_css_agrees():
                 metadata = {
                     "schema": "otw.publisher.post",
                     "version": 1,
-                    "images": [{"id": "image", "url": IMAGE_ONE, "alt": "Alt", "caption": "Caption", "displaySize": size, "alignment": alignment, "wrapMode": wrap}],
+                    "images": [{"id": "image", "url": IMAGE_ONE, "alt": "Alt", "caption": "Caption", "width": 1400, "height": 800, "displaySize": size, "alignment": alignment, "wrapMode": wrap}],
                     "blocks": [{"id": "image", "type": "image", "imageRef": "image", "url": IMAGE_ONE, "displaySize": size, "alignment": alignment, "wrapMode": wrap}],
                 }
                 html = narrative_sync.markdown_to_html(f'![Alt]({IMAGE_ONE} "Caption")', metadata)
@@ -326,6 +330,7 @@ def test_all_image_presentation_options_render_and_css_agrees():
                 assert f"otw-figure--align-{alignment}" in html
                 assert f"otw-figure--{wrap}" in html
                 assert 'alt="Alt"' in html
+                assert 'style="--otw-figure-natural-width: 1400px;"' in html
                 assert "<figcaption><em>Caption</em></figcaption>" in html
 
 

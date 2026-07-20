@@ -331,8 +331,10 @@ def render_markdown_image(match, as_block=False, image_metadata=None, image_queu
     title_attr = f' title="{html.escape(caption, quote=True)}"' if caption else ''
     dimensions = normalize_image_dimensions(metadata or {})
     dimension_attrs = ''
+    figure_style = ''
     if dimensions['width'] and dimensions['height']:
         dimension_attrs = f' width="{dimensions["width"]}" height="{dimensions["height"]}"'
+        figure_style = f' style="--otw-figure-natural-width: {dimensions["width"]}px;"'
     image_attrs = f'src="{safe_src}" alt="{safe_alt}" loading="lazy" decoding="async"{dimension_attrs}'
     image_html = f'<img {image_attrs}{title_attr}>'
     if as_block and (caption or credit):
@@ -341,10 +343,10 @@ def render_markdown_image(match, as_block=False, image_metadata=None, image_queu
         classes = figure_classes(metadata) if metadata else 'otw-figure'
         caption_part = f'<em>{safe_caption}</em>' if safe_caption else ''
         credit_part = f'<span class="otw-figure-credit">{safe_credit}</span>' if safe_credit else ''
-        return f'<figure class="{classes}"><img {image_attrs}><figcaption>{caption_part}{credit_part}</figcaption></figure>'
+        return f'<figure class="{classes}"{figure_style}><img {image_attrs}><figcaption>{caption_part}{credit_part}</figcaption></figure>'
     if as_block and metadata:
         classes = figure_classes(metadata)
-        return f'<figure class="{classes}"><img {image_attrs}></figure>'
+        return f'<figure class="{classes}"{figure_style}><img {image_attrs}></figure>'
     return image_html
 
 def is_trusted_figure_block(value):
@@ -1586,7 +1588,7 @@ def render_share_page(post, newer_post=None, older_post=None, include_draft_read
             }} catch (error) {{}}
         }}());
     </script>
-    <link href="../archive_reader.css?v=20260719-reader-identity" rel="stylesheet" />
+    <link href="../archive_reader.css?v=20260720-caption-rail" rel="stylesheet" />
     <meta name="description" content="{smartypants_safe(description)}" />
     <meta name="theme-color" content="#060809" />
     <meta property="og:site_name" content="Outside The World" />

@@ -17,7 +17,7 @@
             } catch (error) {}
         }());
     </script>
-    <link href="archive_reader.css?v=20260717-integrity" rel="stylesheet" />
+    <link href="archive_reader.css?v=20260720-caption-rail" rel="stylesheet" />
     <meta name="theme-color" content="#060809" />
     <style>
         .publisher-preview-note {
@@ -470,8 +470,19 @@
                 featureImageEl.removeAttribute('width');
                 featureImageEl.removeAttribute('height');
             }
-            featureCaptionEl.textContent = [block.caption, block.credit].filter(Boolean).join(' / ');
-            featureCaptionEl.hidden = !featureCaptionEl.textContent;
+            featureCaptionEl.textContent = '';
+            if (block.caption) {
+                const caption = document.createElement('span');
+                caption.textContent = block.caption;
+                featureCaptionEl.append(caption);
+            }
+            if (block.credit) {
+                const credit = document.createElement('span');
+                credit.className = 'entry-feature-credit';
+                credit.textContent = block.credit;
+                featureCaptionEl.append(credit);
+            }
+            featureCaptionEl.hidden = !featureCaptionEl.childNodes.length;
             featureEl.hidden = false;
         }
 
@@ -557,6 +568,9 @@
 
                 const figure = document.createElement('figure');
                 figure.className = figureClass(block);
+                if (Number(block.width) > 0) {
+                    figure.style.setProperty('--otw-figure-natural-width', `${Math.round(Number(block.width))}px`);
+                }
                 const image = document.createElement('img');
                 image.src = src;
                 image.alt = block.alt || '';
@@ -569,7 +583,17 @@
                 figure.append(image);
                 if (block.caption || block.credit) {
                     const caption = document.createElement('figcaption');
-                    caption.textContent = [block.caption, block.credit].filter(Boolean).join(' / ');
+                    if (block.caption) {
+                        const captionText = document.createElement('em');
+                        captionText.textContent = block.caption;
+                        caption.append(captionText);
+                    }
+                    if (block.credit) {
+                        const credit = document.createElement('span');
+                        credit.className = 'otw-figure-credit';
+                        credit.textContent = block.credit;
+                        caption.append(credit);
+                    }
                     figure.append(caption);
                 }
                 return figure;

@@ -128,11 +128,36 @@ body::after {
 }
 
 .otw-figure figcaption {
-    margin-top: 0.75rem;
+    display: flex;
+    box-sizing: border-box;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    width: 100%;
+    max-width: none;
+    margin: 0.75rem 0 0;
+    border-top: 1px solid color-mix(in srgb, var(--text-muted, rgba(238, 238, 238, 0.68)) 34%, transparent);
+    padding: 0.75rem 0.2rem 0;
     color: var(--text-muted, rgba(238, 238, 238, 0.68));
-    font-size: 0.9rem;
-    line-height: 1.5;
-    text-align: center;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: clamp(0.98rem, 1.2vw, 1.08rem);
+    line-height: 1.6;
+    text-align: left;
+}
+
+.otw-figure figcaption > :first-child {
+    min-width: 0;
+}
+
+.otw-figure-credit {
+    flex: 0 0 auto;
+    margin-top: 0.22em;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.68rem;
+    font-style: normal;
+    letter-spacing: 0.08em;
+    line-height: 1.55;
+    text-transform: uppercase;
 }
 
 .otw-figure--x-small {
@@ -170,8 +195,9 @@ body::after {
 }
 
 .otw-figure--original {
-    --otw-figure-max-width: 100%;
+    --otw-figure-max-width: var(--otw-figure-natural-width, 100%);
     --otw-figure-wrap-width: 52%;
+    width: min(100%, var(--otw-figure-max-width));
 }
 
 .otw-figure--align-left {
@@ -211,6 +237,12 @@ body::after {
 }
 
 @media (max-width: 720px) {
+    .otw-figure figcaption {
+        align-items: stretch;
+        flex-direction: column;
+        gap: 0.3rem;
+    }
+
     .otw-figure--wrap-left,
     .otw-figure--wrap-right {
         float: none;
