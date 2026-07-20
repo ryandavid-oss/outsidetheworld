@@ -755,9 +755,11 @@ def test_opening_dropcap_stays_on_short_first_paragraph():
         ),
     })
     entry_body = extract_share_entry_body(share_html)
+    reader_css = (ROOT / "archive_reader.css").read_text(encoding="utf-8")
 
     assert '<p class="entry-body__opening entry-body__dropcap" id="p-001"><strong><span class="entry-dropcap">D</span>id' in entry_body
     assert '<p id="p-004"><span class="entry-dropcap">W</span>' not in entry_body
+    assert ".entry-body__opening {\n    display: flow-root;" in reader_css
 
 
 def test_opening_dropcap_skips_legacy_tag_metadata():
