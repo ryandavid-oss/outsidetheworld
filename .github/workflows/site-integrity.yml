@@ -5,6 +5,31 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      # These sources have generated companions. Audit the completed generator
+      # workflow instead of racing its initial source-only commit.
+      - 'current_narrative/**'
+      - 'blogger_posts/**'
+      - 'image_manifest.json'
+      - 'poetry_data.js'
+      - 'new_poetry_data.js'
+      - 'fragments_data.js'
+      - 'frontpage_manifest.json'
+      - 'responsive_media.json'
+      - 'narrative_sync.py'
+      - 'tools/build_narrative_index.py'
+      - 'tools/test_narrative_index.py'
+      - 'tools/check_performance_budgets.py'
+      - 'tools/build_discovery.py'
+      - 'tools/build_frontpage_payload.py'
+      - 'archive_entry.css'
+  workflow_run:
+    workflows:
+      - OTW_2026_Narrative_Sync
+      - OTW_Uplink_Protocol
+      - OTW Discovery Build
+    types:
+      - completed
   schedule:
     - cron: '41 8 * * 1'
 
@@ -17,11 +42,19 @@ concurrency:
 
 jobs:
   audit:
+    # A failed generator already reports its own actionable failure. Running
+    # integrity against its incomplete output would only create a second,
+    # misleading notification.
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          # workflow_run points at the triggering commit. Its generator may
+          # have pushed a newer commit, so audit the completed main branch.
+          ref: main
 
       - name: Set up Python
         uses: actions/setup-python@v5
