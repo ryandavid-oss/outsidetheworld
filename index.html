@@ -342,6 +342,30 @@
             text-wrap: balance;
         }
 
+        .dek > span {
+            display: block;
+        }
+
+        @media (min-width: 1100px) {
+            .dek {
+                display: flex;
+                align-items: baseline;
+                justify-content: space-between;
+                gap: clamp(2rem, 5vw, 6rem);
+                width: 100%;
+                max-width: none;
+                text-wrap: pretty;
+            }
+
+            .dek > span {
+                flex: 1 1 0;
+            }
+
+            .dek__counterline {
+                text-align: right;
+            }
+        }
+
         .search-popover,
         .mobile-menu-popover,
         .destination-popover {
@@ -2675,7 +2699,10 @@
                 </button>
             </div>
 
-            <p class="dek">Outside The World by RyanDavid Burningham. Writing, images, fragments, and other mish-mash.</p>
+            <p class="dek">
+                <span>Outside The World by RyanDavid Burningham.</span>
+                <span class="dek__counterline">Writing, images, fragments, and other mish-mash.</span>
+            </p>
 
             <nav id="mobile-menu" class="mobile-menu-popover" popover aria-label="Site menu">
                 <div class="mobile-menu-popover__head">
