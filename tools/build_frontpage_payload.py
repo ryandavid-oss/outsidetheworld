@@ -219,13 +219,16 @@ def display_date(value: Any) -> str:
 def normalize_iotd(entry: dict[str, Any]) -> dict[str, Any]:
     date = str(entry.get("date") or "")
     image = str(entry.get("image") or "")
+    entry_id = str(entry.get("id") or "")
+    published_at = str(entry.get("publishedAt") or "")
     title = re.sub(r"\s+", " ", strip_html(entry.get("title"))).strip() or "Image of the Day"
     caption = clean_text(entry.get("caption")) or "From the Image of the Day run."
     return {
-        "key": f"iotd:{date}:{image}",
+        "key": f"iotd:{entry_id or f'{date}:{image}'}",
         "type": "iotd",
         "label": "Image",
         "date": date,
+        "timestamp": published_at or date,
         "title": title,
         "caption": caption,
         "description": caption,

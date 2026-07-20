@@ -1,5 +1,7 @@
 import json
 import sys
+from collections import Counter
+from datetime import datetime
 from pathlib import Path
 
 
@@ -25,7 +27,8 @@ def main() -> int:
     if not isinstance(items, list) or not items:
         return fail("image_manifest.json must be a non-empty array")
 
-    seen_dates = set()
+    date_counts: Counter[str] = Counter()
+    seen_ids = set()
     seen_images = set()
 
     for index, item in enumerate(items, start=1):
@@ -36,6 +39,8 @@ def main() -> int:
         title = str(item.get("title", "")).strip()
         caption = str(item.get("caption", "")).strip()
         image = str(item.get("image", "")).strip()
+        entry_id = str(item.get("id", "")).strip()
+        published_at = str(item.get("publishedAt", "")).strip()
 
         if not date or len(date) != 10:
             return fail(f"Entry {index} has an invalid date: {date!r}")
@@ -50,10 +55,19 @@ def main() -> int:
             return fail(
                 f"Entry {index} image must live under Images/IOTD/ or the IOTD R2 public URL: {image}"
             )
-        if date in seen_dates:
-            return fail(f"Duplicate date detected: {date}")
+        try:
+            datetime.strptime(date, "%Y-%m-%d")
+        except ValueError:
+            return fail(f"Entry {index} has an invalid calendar date: {date!r}")
+        if entry_id and entry_id in seen_ids:
+            return fail(f"Duplicate id detected: {entry_id}")
         if image in seen_images:
             return fail(f"Duplicate image detected: {image}")
+        if published_at:
+            try:
+                datetime.fromisoformat(published_at.replace("Z", "+00:00"))
+            except ValueError:
+                return fail(f"Entry {index} has an invalid publishedAt value: {published_at!r}")
 
         if image.startswith("Images/IOTD/"):
             image_path = ROOT / image
@@ -64,14 +78,21 @@ def main() -> int:
         else:
             filename_date = Path(image).stem
 
-        if filename_date != date:
+        if entry_id and filename_date != entry_id:
+            return fail(f"Entry {index} id {entry_id!r} does not match image filename {Path(image).name!r}")
+        if not filename_date.startswith(date):
             print(
                 f"WARNING: entry {index} date {date} does not match filename {Path(image).name}"
             )
 
-        seen_dates.add(date)
+        date_counts[date] += 1
+        if entry_id:
+            seen_ids.add(entry_id)
         seen_images.add(image)
 
+    shared_dates = [date for date, count in date_counts.items() if count > 1]
+    if shared_dates:
+        print(f"INFO: multiple images are recorded for {', '.join(sorted(shared_dates))}")
     print(f"OK: validated {len(items)} image manifest entries")
     return 0
 

@@ -48,6 +48,8 @@ def main() -> int:
     parser.add_argument("--date", required=True, help="Date in YYYY-MM-DD format")
     parser.add_argument("--title", required=True, help="Display title")
     parser.add_argument("--caption", required=True, help="Caption text")
+    parser.add_argument("--id", default="", help="Stable entry id; defaults to the image filename")
+    parser.add_argument("--published-at", default="", help="Optional ISO publication timestamp")
     parser.add_argument(
         "--image",
         required=True,
@@ -59,6 +61,8 @@ def main() -> int:
     title = args.title.strip()
     caption = args.caption.strip()
     image = normalize_image_path(args.image)
+    entry_id = args.id.strip() or Path(image).stem
+    published_at = args.published_at.strip()
 
     if len(date) != 10 or date[4] != "-" or date[7] != "-":
         raise SystemExit("ERROR: --date must be in YYYY-MM-DD format")
@@ -78,19 +82,24 @@ def main() -> int:
 
     manifest = load_manifest()
 
-    if any(str(item.get("date", "")).strip() == date for item in manifest):
-        raise SystemExit(f"ERROR: an entry already exists for {date}")
-
     if any(str(item.get("image", "")).strip() == image for item in manifest):
         raise SystemExit(f"ERROR: an entry already exists for image {image}")
+    if any(str(item.get("id", "")).strip() == entry_id for item in manifest):
+        raise SystemExit(f"ERROR: an entry already exists for id {entry_id}")
 
-    manifest.append(
-        {
-            "date": date,
-            "title": title,
-            "caption": caption,
-            "image": image,
-        }
+    entry = {
+        "id": entry_id,
+        "date": date,
+        "title": title,
+        "caption": caption,
+        "image": image,
+    }
+    if published_at:
+        entry["publishedAt"] = published_at
+    manifest.append(entry)
+    manifest.sort(
+        key=lambda item: str(item.get("publishedAt") or item.get("date") or ""),
+        reverse=True,
     )
 
     MANIFEST_PATH.write_text(json.dumps(manifest, indent=4) + "\n", encoding="utf-8")

@@ -311,7 +311,7 @@
   function renderFallbackInline(value) {
     const snippets = [];
     const stash = (html) => {
-      const token = `@@OTW_RENDER_${snippets.length}@@`;
+      const token = `OTWRENDERPLACEHOLDER${snippets.length}END`;
       snippets.push({ token, html });
       return token;
     };
@@ -323,6 +323,9 @@
         return stash(safeUrl ? `<a href="${escapeHtml(safeUrl)}">${escapeHtml(label)}</a>` : escapeHtml(label));
       })
       .replace(/\*\*([^*]+)\*\*/g, (_match, text) => stash(`<strong>${escapeHtml(text)}</strong>`))
+      .replace(/__([^_]+)__/g, (_match, text) => stash(`<strong>${escapeHtml(text)}</strong>`))
+      .replace(/(^|[^*])\*([^*\n]+)\*(?!\*)/g, (_match, prefix, text) => `${prefix}${stash(`<em>${escapeHtml(text)}</em>`)}`)
+      .replace(/(^|[^_])_([^_\n]+)_(?!_)/g, (_match, prefix, text) => `${prefix}${stash(`<em>${escapeHtml(text)}</em>`)}`)
       .replace(/`([^`]+)`/g, (_match, text) => stash(`<code>${escapeHtml(text)}</code>`));
 
     rendered = escapeHtml(rendered);
@@ -421,14 +424,32 @@
 
   function renderFallbackMarkdown(markdown) {
     return String(markdown || "")
+      .replace(/\r\n?/g, "\n")
       .split(/\n{2,}/)
       .map((chunk) => {
         const raw = chunk.trim();
+        if (!raw) return "";
         const imageMatch = raw.match(imageMarkdownBlockPattern);
         if (imageMatch && imageMatch[0] === raw) {
           return renderFallbackImage(imageMatch, true);
         }
         if (raw === "---") return "<hr>";
+        const lines = raw.split("\n");
+        if (lines.every((line) => /^\s*>\s?/.test(line))) {
+          const quote = lines.map((line) => line.replace(/^\s*>\s?/, "")).join("\n");
+          return `<blockquote>${renderFallbackInline(quote).replace(/\n/g, "<br>")}</blockquote>`;
+        }
+        if (lines.every((line) => /^\s*[-+*]\s+/.test(line))) {
+          return `<ul>${lines.map((line) => `<li>${renderFallbackInline(line.replace(/^\s*[-+*]\s+/, ""))}</li>`).join("")}</ul>`;
+        }
+        if (lines.every((line) => /^\s*\d+[.)]\s+/.test(line))) {
+          return `<ol>${lines.map((line) => `<li>${renderFallbackInline(line.replace(/^\s*\d+[.)]\s+/, ""))}</li>`).join("")}</ol>`;
+        }
+        const heading = raw.match(/^(#{1,3})\s+(.+)$/s);
+        if (heading && !heading[2].includes("\n")) {
+          const level = heading[1].length;
+          return `<h${level}>${renderFallbackInline(heading[2])}</h${level}>`;
+        }
         return `<p>${renderFallbackInline(raw).replace(/\n/g, "<br>")}</p>`;
       })
       .join("");

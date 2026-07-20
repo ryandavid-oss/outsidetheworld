@@ -1473,6 +1473,67 @@
       resize: vertical;
     }
 
+    .iotd-caption-tools {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 8px;
+    }
+
+    .iotd-format-button {
+      min-width: 38px;
+      min-height: 34px;
+      border: 1px solid var(--control-line);
+      border-radius: 8px;
+      padding: 0 10px;
+      background: var(--secondary-action-bg);
+      color: var(--text);
+      font: 0.72rem/1 "IBM Plex Mono", monospace;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+    }
+
+    .iotd-format-button:hover,
+    .iotd-format-button:focus-visible {
+      border-color: var(--focus-border);
+      color: var(--brand-blue);
+      outline: none;
+    }
+
+    .iotd-caption-help {
+      margin: 0 0 10px;
+      color: var(--text-soft);
+      font: 0.76rem/1.5 "IBM Plex Mono", monospace;
+    }
+
+    .iotd-caption-preview {
+      min-height: 64px;
+      margin-top: 10px;
+      border: 1px dashed var(--control-line);
+      border-radius: 10px;
+      padding: 14px;
+      color: var(--text);
+      background: var(--input-bg);
+      font: 1rem/1.65 "IBM Plex Serif", Georgia, serif;
+    }
+
+    .iotd-caption-preview.is-empty {
+      color: var(--text-soft);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.76rem;
+    }
+
+    .iotd-caption-preview > :first-child { margin-top: 0; }
+    .iotd-caption-preview > :last-child { margin-bottom: 0; }
+    .iotd-caption-preview blockquote {
+      margin-left: 0;
+      border-left: 3px solid var(--focus-border);
+      padding-left: 1rem;
+      color: var(--text-soft);
+    }
+
+    .iotd-caption-preview a { color: var(--brand-blue); }
+
     #iotdWorkspace .helper {
       min-height: 20px;
       margin: -2px 0 0;
@@ -2321,7 +2382,16 @@
             </div>
             <div class="field">
               <label for="iotdCaption">Caption</label>
+              <div class="iotd-caption-tools" role="toolbar" aria-label="Caption formatting">
+                <button class="iotd-format-button" type="button" data-iotd-format="bold" aria-label="Bold"><strong>B</strong></button>
+                <button class="iotd-format-button" type="button" data-iotd-format="italic" aria-label="Italic"><em>I</em></button>
+                <button class="iotd-format-button" type="button" data-iotd-format="link" aria-label="Link">LINK</button>
+                <button class="iotd-format-button" type="button" data-iotd-format="list" aria-label="Bulleted list">LIST</button>
+                <button class="iotd-format-button" type="button" data-iotd-format="quote" aria-label="Quote">QUOTE</button>
+              </div>
+              <p class="iotd-caption-help">Line breaks are kept. Light Markdown is welcome.</p>
               <textarea id="iotdCaption" placeholder="A short note for the image."></textarea>
+              <div class="iotd-caption-preview is-empty" id="iotdCaptionPreview" aria-live="polite">Caption preview.</div>
             </div>
             <div class="action-row">
               <button class="primary-btn" id="iotdPublishBtn" type="button">Publish</button>
@@ -2496,6 +2566,7 @@
     <p id="toastCopy">Standing by.</p>
   </div>
 
+  <script src="otw_markdown.js?v=20260720-iotd"></script>
   <script>
     const THEME_KEY = 'otwAppTheme';
     const PUBLISH_KEY_STORAGE = 'otwFragmentsPublishKey';
@@ -2505,7 +2576,6 @@
     const DRIFT_PREVIEW_HIDDEN_KEY = 'otwDriftPreviewHidden';
     const PUBLISH_IOTD_ENDPOINT = 'https://otw-fragments-publish.ryandavid.workers.dev/publish-iotd-entry';
     const PUBLISH_DRIFT_ENDPOINT = 'https://otw-fragments-publish.ryandavid.workers.dev/publish-drift-poem';
-    const IOTD_PUBLIC_BASE_URL = 'https://otw-media.ryandavid.workers.dev/o';
     const HOMEPAGE_FOCAL_OPTIONS = [
       { value: 'top-left', label: 'Top left', x: 0, y: 0 },
       { value: 'top', label: 'Top center', x: 50, y: 0 },
@@ -2585,7 +2655,14 @@
     }
 
     function today() {
-      return new Date().toISOString().slice(0, 10);
+      const parts = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/Phoenix',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
+      }).formatToParts(new Date());
+      const values = Object.fromEntries(parts.map((part) => [part.type, part.value]));
+      return `${values.year}-${values.month}-${values.day}`;
     }
 
     function slugify(value) {
@@ -2821,9 +2898,54 @@
         date,
         title,
         caption,
-        image: `${IOTD_PUBLIC_BASE_URL}/${date}.jpg`,
+        image: '',
         homepageFocal: getHomepageFocal('iotdHomepageFocal')
       };
+    }
+
+    function updateIotdCaptionPreview() {
+      const preview = $('#iotdCaptionPreview');
+      const caption = $('#iotdCaption').value.trim();
+      preview.classList.toggle('is-empty', !caption);
+      preview.innerHTML = caption && window.renderOtwMarkdown
+        ? window.renderOtwMarkdown(caption)
+        : 'Caption preview.';
+    }
+
+    function formatIotdCaption(kind) {
+      const textarea = $('#iotdCaption');
+      const start = textarea.selectionStart;
+      const end = textarea.selectionEnd;
+      const selected = textarea.value.slice(start, end);
+      let replacement = selected;
+      let selectionStart = start;
+      let selectionEnd = end;
+
+      if (kind === 'bold' || kind === 'italic') {
+        const marker = kind === 'bold' ? '**' : '*';
+        const fallback = kind === 'bold' ? 'bold text' : 'italic text';
+        const content = selected || fallback;
+        replacement = `${marker}${content}${marker}`;
+        selectionStart = start + marker.length;
+        selectionEnd = selectionStart + content.length;
+      } else if (kind === 'link') {
+        const label = selected || 'link text';
+        replacement = `[${label}](https://)`;
+        selectionStart = start + label.length + 3;
+        selectionEnd = selectionStart + 8;
+      } else if (kind === 'list' || kind === 'quote') {
+        const prefix = kind === 'list' ? '- ' : '> ';
+        const content = selected || (kind === 'list' ? 'list item' : 'quoted thought');
+        replacement = content.split('\n').map((line) => `${prefix}${line}`).join('\n');
+        selectionStart = start + prefix.length;
+        selectionEnd = start + replacement.length;
+      }
+
+      textarea.setRangeText(replacement, start, end, 'end');
+      textarea.focus();
+      textarea.setSelectionRange(selectionStart, selectionEnd);
+      writeIotdDraft();
+      updateIotdCaptionPreview();
     }
 
     function writeIotdDraft() {
@@ -2890,24 +3012,42 @@
         return;
       }
       const entry = buildIotdEntry();
-      const formData = new FormData();
-      formData.append('image', file);
-      formData.append('date', entry.date);
-      formData.append('title', entry.title);
-      formData.append('caption', entry.caption);
-      formData.append('homepageFocal', entry.homepageFocal);
       $('#iotdPublishBtn').disabled = true;
       setIotdStatus('Optimizing image for the site...', 'busy');
       try {
         const uploadFile = await optimizePublishImage(file);
-        formData.set('image', uploadFile);
+        const sendPublish = async (allowSameDate = false) => {
+          const formData = new FormData();
+          formData.append('image', uploadFile);
+          formData.append('date', entry.date);
+          formData.append('title', entry.title);
+          formData.append('caption', entry.caption);
+          formData.append('homepageFocal', entry.homepageFocal);
+          if (allowSameDate) formData.append('allowSameDate', 'true');
+          const response = await fetch(PUBLISH_IOTD_ENDPOINT, {
+            method: 'POST',
+            headers: { 'x-publish-key': key },
+            body: formData
+          });
+          const payload = await response.json().catch(() => ({}));
+          return { response, payload };
+        };
         setIotdStatus('Publishing image and manifest entry...', 'busy');
-        const response = await fetch(PUBLISH_IOTD_ENDPOINT, {
-          method: 'POST',
-          headers: { 'x-publish-key': key },
-          body: formData
-        });
-        const payload = await response.json().catch(() => ({}));
+        let { response, payload } = await sendPublish();
+        if (response.status === 409 && payload.code === 'IOTD_DATE_OCCUPIED') {
+          const existingTitles = Array.isArray(payload.existing)
+            ? payload.existing.map((item) => item.title).filter(Boolean).join(', ')
+            : '';
+          const confirmed = window.confirm(
+            `${formatLongDate(entry.date)} already has an Image of the Day${existingTitles ? ` (${existingTitles})` : ''}.\n\nPublish this as another image for the same date?`
+          );
+          if (!confirmed) {
+            setIotdStatus('Publish cancelled. Your draft is still here.');
+            return;
+          }
+          setIotdStatus('Publishing the additional image...', 'busy');
+          ({ response, payload } = await sendPublish(true));
+        }
         if (!response.ok || !payload.ok) throw new Error(payload.error || `Publish failed with status ${response.status}`);
         if (publishKeyInput.value.trim()) window.localStorage.setItem(PUBLISH_KEY_STORAGE, key);
         const published = payload.published || entry;
@@ -2940,6 +3080,7 @@
       window.localStorage.removeItem(IOTD_DRAFT_KEY);
       updateIotdFileMeta(null);
       iotdImagePreviewUrl = updateImagePreview('iotdImage', 'iotdHomepagePreview', iotdImagePreviewUrl);
+      updateIotdCaptionPreview();
       if (resetStatus) setIotdStatus('Ready.');
     }
 
@@ -3451,6 +3592,7 @@
         $('#iotdDate').value = today();
         setHomepageFocal('iotdHomepageFocal', 'center');
       }
+      updateIotdCaptionPreview();
       try {
         const draft = JSON.parse(window.localStorage.getItem(DRIFT_DRAFT_KEY) || 'null');
         $('#driftDate').value = draft?.date || today();
@@ -3499,8 +3641,11 @@
     initializeHomepageFocalControl('iotdHomepageFocal', writeIotdDraft);
     initializeHomepageFocalControl('driftHomepageFocal', writeDriftDraft);
     ['iotdDate', 'iotdTitle', 'iotdCaption'].forEach((id) => {
-      $(`#${id}`).addEventListener('input', writeIotdDraft);
-      $(`#${id}`).addEventListener('change', writeIotdDraft);
+      $(`#${id}`).addEventListener('input', () => { writeIotdDraft(); updateIotdCaptionPreview(); });
+      $(`#${id}`).addEventListener('change', () => { writeIotdDraft(); updateIotdCaptionPreview(); });
+    });
+    $$('[data-iotd-format]').forEach((button) => {
+      button.addEventListener('click', () => formatIotdCaption(button.dataset.iotdFormat));
     });
     $('#iotdImage').addEventListener('change', () => {
       const file = $('#iotdImage').files && $('#iotdImage').files[0];

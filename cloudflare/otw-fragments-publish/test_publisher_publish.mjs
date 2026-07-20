@@ -510,7 +510,7 @@ for (const markdown of [
   formData.append("image", new File([new Uint8Array([4, 5, 6])], "signal.jpg", { type: "image/jpeg" }));
   formData.append("title", "DAILY SIGNAL");
   formData.append("date", "2026-07-15");
-  formData.append("caption", "The day in one frame.");
+  formData.append("caption", "The day in one frame.\n\n**Still here.**");
   formData.append("homepageFocal", "top-left");
 
   await withMockGitHub(githubIotdMock(), async (calls) => {
@@ -518,12 +518,59 @@ for (const markdown of [
     assert.equal(result.status, 200);
     assert.equal(result.body.ok, true);
     assert.equal(result.body.published.homepageFocal, "top-left");
-    assert.equal(result.body.published.image, "https://media.example.test/2026-07-15.jpg");
-    assert.equal(bucket.objects.has("2026-07-15.jpg"), true);
+    assert.equal(result.body.published.id, "2026-07-15-daily-signal-787c798e39a5");
+    assert.match(result.body.published.publishedAt, /^\d{4}-\d{2}-\d{2}T/);
+    assert.equal(result.body.published.caption, "The day in one frame.\n\n**Still here.**");
+    assert.equal(result.body.published.image, "https://media.example.test/iotd/2026-07-15-daily-signal-787c798e39a5.jpg");
+    assert.equal(bucket.objects.has("iotd/2026-07-15-daily-signal-787c798e39a5.jpg"), true);
 
     const requestBody = JSON.parse(putCalls(calls)[0].options.body);
     const savedManifest = JSON.parse(decodeBase64Utf8(requestBody.content));
     assert.equal(savedManifest[0].homepageFocal, "top-left");
+  });
+}
+
+{
+  const existing = [{
+    id: "2026-07-15-first-signal-abc123",
+    date: "2026-07-15",
+    publishedAt: "2026-07-15T17:00:00.000Z",
+    title: "FIRST_SIGNAL",
+    caption: "Already here.",
+    image: "https://media.example.test/iotd/2026-07-15-first-signal-abc123.jpg"
+  }];
+  const bucket = new MockR2Bucket();
+  const testEnv = env({
+    IOTD_BUCKET: bucket,
+    IOTD_PUBLIC_BASE_URL: "https://media.example.test"
+  });
+  const makeForm = (allowSameDate = false) => {
+    const formData = new FormData();
+    formData.append("image", new File([new Uint8Array([7, 8, 9])], "second.jpg", { type: "image/jpeg" }));
+    formData.append("title", "SECOND SIGNAL");
+    formData.append("date", "2026-07-15");
+    formData.append("caption", "Another frame from the same day.");
+    if (allowSameDate) formData.append("allowSameDate", "true");
+    return formData;
+  };
+
+  await withMockGitHub(githubIotdMock(`${JSON.stringify(existing, null, 2)}\n`), async (calls) => {
+    const blocked = await postMultipart(testEnv, "/publish-iotd-entry", makeForm());
+    assert.equal(blocked.status, 409);
+    assert.equal(blocked.body.code, "IOTD_DATE_OCCUPIED");
+    assert.equal(bucket.objects.size, 0);
+    assert.equal(putCalls(calls).length, 0);
+  });
+
+  await withMockGitHub(githubIotdMock(`${JSON.stringify(existing, null, 2)}\n`), async (calls) => {
+    const allowed = await postMultipart(testEnv, "/publish-iotd-entry", makeForm(true));
+    assert.equal(allowed.status, 200);
+    assert.equal(allowed.body.published.id, "2026-07-15-second-signal-66a6757151f8");
+
+    const requestBody = JSON.parse(putCalls(calls)[0].options.body);
+    const savedManifest = JSON.parse(decodeBase64Utf8(requestBody.content));
+    assert.equal(savedManifest.length, 2);
+    assert.equal(savedManifest.filter((item) => item.date === "2026-07-15").length, 2);
   });
 }
 

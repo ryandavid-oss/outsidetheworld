@@ -90,6 +90,10 @@ function variantCacheRequest(request, variant, format) {
   return new Request(url.toString(), { method: "GET" });
 }
 
+function isImmutableOriginalKey(key) {
+  return /^iotd\/\d{4}-\d{2}-\d{2}-[a-z0-9-]+-[a-f0-9]{12}\.(?:jpe?g|png|gif|webp)$/i.test(key);
+}
+
 async function serveVariant(request, env, ctx, cache) {
   const url = new URL(request.url);
   const variant = variantRequest(url.pathname, request);
@@ -132,7 +136,7 @@ async function serveOriginal(request, env, ctx, cache) {
     : await env.MEDIA_BUCKET.get(key);
   if (!object) return jsonResponse({ ok: false, error: "Media object not found" }, 404);
 
-  const headers = responseHeaders(object, ORIGINAL_BROWSER_CACHE);
+  const headers = responseHeaders(object, isImmutableOriginalKey(key) ? VARIANT_CACHE : ORIGINAL_BROWSER_CACHE);
   if (isNotModified(request, object)) return new Response(null, { status: 304, headers });
 
   const response = new Response(request.method === "HEAD" ? null : object.body, { headers });

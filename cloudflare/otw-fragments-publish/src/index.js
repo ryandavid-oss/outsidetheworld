@@ -972,8 +972,17 @@ function buildFragmentImageUrl(env, objectKey) {
   return `${base}/${objectKey}`;
 }
 
-function buildIotdObjectKey(date, extension) {
-  return `${date}.${extension}`;
+async function sha256Fingerprint(value, length = 12) {
+  const bytes = value instanceof ArrayBuffer ? value : new TextEncoder().encode(String(value || ""));
+  const digest = await crypto.subtle.digest("SHA-256", bytes);
+  return Array.from(new Uint8Array(digest), (byte) => byte.toString(16).padStart(2, "0"))
+    .join("")
+    .slice(0, length);
+}
+
+function buildIotdObjectKey(date, title, fingerprint, extension) {
+  const titleSlug = slugify(title) || "untitled-signal";
+  return `iotd/${date}-${titleSlug}-${fingerprint}.${extension}`;
 }
 
 function buildIotdImageUrl(env, objectKey) {
@@ -1079,7 +1088,7 @@ function buildNarrativeImageSnippets({ url, alt, caption }) {
 }
 
 function normalizeIotdCaption(raw) {
-  return String(raw || "").trim();
+  return String(raw || "").replace(/\r\n?/g, "\n").trim();
 }
 
 function normalizeIotdTitleForFilename(title) {
@@ -1096,12 +1105,20 @@ function normalizeIotdEntry(entry) {
   const caption = normalizeIotdCaption(entry.caption);
   const image = String(entry.image || "").trim();
   const homepageFocal = normalizeHomepageFocal(entry.homepageFocal);
+  const id = String(entry.id || "").trim();
+  const publishedAt = String(entry.publishedAt || "").trim();
 
   if (!image) {
     throw new Error("IOTD image URL is required");
   }
 
   const normalized = { date, title, caption, image };
+  if (id) {
+    normalized.id = id;
+  }
+  if (publishedAt && !Number.isNaN(Date.parse(publishedAt))) {
+    normalized.publishedAt = publishedAt;
+  }
   if (entry.homepageFocal != null && String(entry.homepageFocal).trim()) {
     normalized.homepageFocal = homepageFocal;
   }
@@ -1213,7 +1230,7 @@ function dedupeIotd(entries) {
 
   for (const entry of entries) {
     const normalized = normalizeIotdEntry(entry);
-    const key = normalized.date;
+    const key = normalized.id || normalized.image;
     if (seen.has(key)) continue;
     seen.add(key);
     out.push(normalized);
@@ -1785,7 +1802,13 @@ async function saveFrgmntsSeatCheckinWithRetry(env, entry, maxAttempts = 3) {
 }
 
 function sortIotd(entries) {
-  return entries.slice().sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")));
+  return entries.slice().sort((a, b) => {
+    const aStamp = String(a.publishedAt || a.date || "");
+    const bStamp = String(b.publishedAt || b.date || "");
+    const stampOrder = bStamp.localeCompare(aStamp);
+    if (stampOrder !== 0) return stampOrder;
+    return String(b.id || b.image || "").localeCompare(String(a.id || a.image || ""));
+  });
 }
 
 function sortWordperson(entries) {
@@ -2402,11 +2425,31 @@ export default {
         const title = normalizeIotdTitleForFilename(formData.get("title"));
         const caption = normalizeIotdCaption(formData.get("caption"));
         const homepageFocal = normalizeHomepageFocal(formData.get("homepageFocal"));
+        const allowSameDate = String(formData.get("allowSameDate") || "").toLowerCase() === "true";
         const extension = detectImageExtension(file);
-        const objectKey = buildIotdObjectKey(date, extension);
-        const imageUrl = buildIotdImageUrl(env, objectKey);
+        const fileData = await loadImageManifestFile(env);
+        const sameDateEntries = fileData.entries.filter((item) => String(item?.date || "").trim() === date);
+        if (sameDateEntries.length && !allowSameDate) {
+          return jsonResponse({
+            ok: false,
+            code: "IOTD_DATE_OCCUPIED",
+            error: `${date} already has ${sameDateEntries.length === 1 ? "an image" : `${sameDateEntries.length} images`}. Confirm to publish another.`,
+            existing: sameDateEntries.map((item) => ({
+              id: item?.id || "",
+              title: item?.title || "",
+              image: item?.image || ""
+            }))
+          }, 409);
+        }
 
-        await env.IOTD_BUCKET.put(objectKey, await file.arrayBuffer(), {
+        const imageBytes = await file.arrayBuffer();
+        const fingerprint = await sha256Fingerprint(imageBytes);
+        const objectKey = buildIotdObjectKey(date, title, fingerprint, extension);
+        const imageUrl = buildIotdImageUrl(env, objectKey);
+        const id = objectKey.split("/").pop().replace(/\.[^.]+$/, "");
+        const publishedAt = new Date().toISOString();
+
+        await env.IOTD_BUCKET.put(objectKey, imageBytes, {
           httpMetadata: {
             contentType: file.type || "application/octet-stream",
             cacheControl: "public,max-age=86400,stale-while-revalidate=604800"
@@ -2418,10 +2461,11 @@ export default {
           title,
           caption,
           image: imageUrl,
-          homepageFocal
+          homepageFocal,
+          id,
+          publishedAt
         });
 
-        const fileData = await loadImageManifestFile(env);
         const merged = sortIotd(dedupeIotd([entry, ...fileData.entries]));
         const updatedRaw = `${JSON.stringify(merged, null, 2)}\n`;
         const result = await saveRepoFile(env, IMAGE_MANIFEST_PATH, updatedRaw, fileData.sha, "Publish IOTD entry");

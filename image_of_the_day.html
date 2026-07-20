@@ -217,6 +217,20 @@
             font-size: 1rem;
         }
 
+        .hero-caption > :first-child { margin-top: 0; }
+        .hero-caption > :last-child { margin-bottom: 0; }
+        .hero-caption p { margin: 0 0 0.9rem; }
+        .hero-caption ul,
+        .hero-caption ol { width: fit-content; margin: 0.8rem auto; text-align: left; }
+        .hero-caption blockquote {
+            max-width: 62ch;
+            margin: 1rem auto;
+            border-left: 3px solid rgba(160, 190, 245, 0.65);
+            padding-left: 1rem;
+            text-align: left;
+        }
+        .hero-caption a { color: #A0BEF5; }
+
         .hero-actions {
             margin-top: 14px;
             display: flex;
@@ -446,7 +460,7 @@
             <div class="hero-meta">
                 <div id="heroDate" class="hero-date">LOADING_DATE…</div>
                 <h2 id="heroTitle" class="hero-title">LOADING_TITLE…</h2>
-                <p id="heroCaption" class="hero-caption">LOADING_CAPTION…</p>
+                <div id="heroCaption" class="hero-caption">LOADING_CAPTION…</div>
 
                 <div class="hero-actions">
                     <a id="heroOpen" class="hero-btn" href="#" target="_blank" rel="noopener">OPEN_IMAGE</a>
@@ -473,6 +487,7 @@
         <div>© 2026 Outside the World is New, LLC. Outside The World is a claimed brand identifier.</div>
     </footer>
 
+    <script src="otw_markdown.js?v=20260720-iotd"></script>
     <script>
         // Dynamic clearance
         function syncNav() {
@@ -489,7 +504,7 @@
         // Create: image_manifest.json (array of objects)
         // [{ "date":"2026-03-05", "title":"...", "caption":"...", "image":"Images/IOTD/2026-03-05.jpg" }, ...]
         function normalizeManifest(items) {
-            const seenDates = new Set();
+            const seenEntries = new Set();
             const normalized = [];
 
             items.forEach((item) => {
@@ -499,16 +514,22 @@
                 const title = String(item.title || '').trim();
                 const caption = String(item.caption || '').trim();
                 const image = String(item.image || '').trim();
+                const id = String(item.id || '').trim();
+                const publishedAt = String(item.publishedAt || '').trim();
 
                 if (!date || !image) return;
                 if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) return;
-                if (seenDates.has(date)) return;
+                const key = id || image;
+                if (seenEntries.has(key)) return;
 
-                seenDates.add(date);
-                normalized.push({ date, title, caption, image });
+                seenEntries.add(key);
+                normalized.push({ id, date, publishedAt, title, caption, image });
             });
 
-            normalized.sort((a, b) => String(b.date).localeCompare(String(a.date)));
+            normalized.sort((a, b) => {
+                const stampOrder = String(b.publishedAt || b.date).localeCompare(String(a.publishedAt || a.date));
+                return stampOrder || String(b.id || b.image).localeCompare(String(a.id || a.image));
+            });
             return normalized;
         }
 
@@ -608,7 +629,8 @@
             heroImg.alt = item.title ? `${item.title} // Image of the day` : 'Image of the day';
             heroDate.textContent = (item.date || '').replaceAll('-', '_');
             heroTitle.textContent = item.title || 'DAILY_SIGNAL';
-            heroCaption.textContent = item.caption || '';
+            if (window.renderOtwMarkdown) heroCaption.innerHTML = window.renderOtwMarkdown(item.caption || '');
+            else heroCaption.textContent = item.caption || '';
 
             heroOpen.href = plan.original;
             heroDownload.href = plan.original;
@@ -626,12 +648,13 @@
             grid.innerHTML = '';
             const pendingImages = [];
 
-            items.forEach((item) => {
-                if (item.date === heroDate) return; // skip the hero item
+            items.forEach((item, index) => {
+                if (index === 0) return; // skip only the hero item; another image may share its date
 
                 const card = document.createElement('a');
                 card.className = 'artifact-card';
-                card.href = `iotd/${item.date}-${String(item.title || 'image').toLowerCase().replace(/&/g, ' and ').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '')}.html`;
+                const recordStem = item.id || `${item.date}-${String(item.title || 'image').toLowerCase().replace(/&/g, ' and ').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '')}`;
+                card.href = `iotd/${recordStem}.html`;
                 const plan = imagePlan(
                     item.image,
                     responsiveMedia,

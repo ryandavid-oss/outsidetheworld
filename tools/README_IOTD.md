@@ -1,6 +1,11 @@
 # Image of the Day Helper
 
-Use this helper to add a new Image of the Day entry without hand-editing `image_manifest.json`.
+The online `otw_app.html#iotd` publisher is the primary publishing path. It uses
+Arizona's calendar date, uploads each image to a content-fingerprinted URL, and
+asks for confirmation before adding another image to an occupied date.
+
+Use this helper when adding a repo-local Image of the Day entry without the
+online publisher.
 
 ## Usage
 
@@ -12,11 +17,14 @@ python3 tools/add_iotd_entry.py \
   --image Images/IOTD/2026-03-11.jpg
 ```
 
+Captions accept light Markdown: paragraphs and line breaks, bold, italics,
+links, lists, and blockquotes.
+
 The helper will:
 
-1. Append the new entry to `image_manifest.json`
+1. Add and sort the new entry in `image_manifest.json`
 2. Validate the manifest
-3. Fail if the date or image already exists
+3. Allow multiple images on one date while rejecting duplicate IDs or images
 4. Fail if the image file is missing
 5. Rebuild the permanent image record, sitemap, and compact homepage payload
 
@@ -39,3 +47,9 @@ homepage media.
 3. Run `build_responsive_media.py --upload`
 4. Review `git diff`
 5. Commit
+
+## Manifest identity
+
+New online entries include `id` and `publishedAt`. The calendar `date` is for
+display and grouping; it is not an image filename or a unique key. Older
+entries without those fields remain supported.

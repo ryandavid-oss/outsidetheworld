@@ -39,6 +39,10 @@ PRIVATE_SOURCE_HASHES = {
 PRIVATE_DISCOVERY_TOMBSTONES = (
     "wayback/2009-08-10-private-record.html",
 )
+DISCOVERY_REDIRECTS = {
+    "iotd/2026-07-19-cute-little-car.html": "iotd/2026-07-18-cute-little-car-dc899bac89e3.html",
+    "iotd/2026-07-20-the-fire-dragon.html": "iotd/2026-07-20-the-fire-dragon-1f92010c12c6.html",
+}
 
 ROOT_PAGES = [
     ("index.html", 1.0),
@@ -439,19 +443,22 @@ def load_records() -> dict[str, list[DiscoveryRecord]]:
     for item in image_data:
         title = str(item.get("title") or "Image of the Day").strip()
         date_display = str(item.get("date") or "").strip()
-        caption = re.sub(r"\s+", " ", str(item.get("caption") or "")).strip()
+        caption = clean_source_lines(item.get("caption") or "")
+        plain_caption = clean_text(caption)
+        entry_id = str(item.get("id") or "").strip()
+        path_stem = slugify(entry_id, "") or f"{slugify(date_display, 'undated')}-{slugify(title)[:90]}"
         images.append(
             DiscoveryRecord(
-                path=f"iotd/{slugify(date_display, 'undated')}-{slugify(title)[:90]}.html",
+                path=f"iotd/{path_stem}.html",
                 title=title,
-                description=caption or f"An Image of the Day photograph from Outside The World, published {date_display}.",
+                description=excerpt(plain_caption) or f"An Image of the Day photograph from Outside The World, published {date_display}.",
                 kind="image",
                 date_display=date_display,
                 date_iso=parse_display_date(date_display),
                 body=caption,
                 image=str(item.get("image") or ""),
                 label="Image of the Day",
-                source_path=date_display,
+                source_path=entry_id or date_display,
             )
         )
 
@@ -520,16 +527,17 @@ def render_record(
         schema_type = "CreativeWork"
         schema_extra = {"genre": "Poetry"}
     elif record.kind == "image":
+        caption_html = markdown_to_html(record.body) if record.body else ""
         content = (
             '<figure class="entry-image entry-image--photograph">'
             f'<a href="{html.escape(local_image, quote=True)}">'
             f'<img src="{html.escape(local_image, quote=True)}" alt="{html.escape(record.title, quote=True)}" />'
             "</a>"
-            + (f'<figcaption>{html.escape(record.body)}</figcaption>' if record.body else "")
+            + (f'<figcaption class="iotd-caption prose">{caption_html}</figcaption>' if caption_html else "")
             + "</figure>"
         )
         schema_type = "ImageObject"
-        schema_extra = {"contentUrl": social_image, "caption": record.body}
+        schema_extra = {"contentUrl": social_image, "caption": clean_text(record.body)}
     elif record.kind == "fragment":
         content = f'<blockquote class="fragment-text">{html.escape(record.body)}</blockquote>'
         if local_image:
@@ -708,6 +716,12 @@ def write_records(groups: dict[str, list[DiscoveryRecord]]) -> None:
         output_dir = ROOT / output_name
         output_dir.mkdir(parents=True, exist_ok=True)
         expected = {Path(record.path).name for record in records}
+        redirects = {
+            source: target
+            for source, target in DISCOVERY_REDIRECTS.items()
+            if Path(source).parent.name == output_name
+        }
+        expected.update(Path(source).name for source in redirects)
         for stale in output_dir.glob("*.html"):
             if stale.name not in expected:
                 stale.unlink()
@@ -715,6 +729,27 @@ def write_records(groups: dict[str, list[DiscoveryRecord]]) -> None:
             newer, older = navigation_for(records, index)
             (ROOT / record.path).write_text(
                 render_record(record, newer, older, select_dig_target(record)),
+                encoding="utf-8",
+            )
+        for source, target in redirects.items():
+            target_url = f"{SITE_URL}/{target}"
+            relative_target = Path(target).name
+            (ROOT / source).write_text(
+                f'''<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,follow" />
+  <title>Record moved | Outside The World</title>
+  <link rel="canonical" href="{html.escape(target_url, quote=True)}" />
+  <meta http-equiv="refresh" content="0; url={html.escape(relative_target, quote=True)}" />
+</head>
+<body>
+  <p>This record moved to <a href="{html.escape(relative_target, quote=True)}">its permanent address</a>.</p>
+</body>
+</html>
+''',
                 encoding="utf-8",
             )
 

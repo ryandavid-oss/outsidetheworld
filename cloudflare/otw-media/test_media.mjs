@@ -51,6 +51,21 @@ const noCache = null;
 }
 
 {
+  const key = "iotd/2026-07-20-the-fire-dragon-1f92010c12c6.jpg";
+  const bucket = new MockBucket({ [key]: { body: "immutable-original" } });
+  const response = await handleRequest(
+    new Request(`https://media.example/o/${key}`),
+    { MEDIA_BUCKET: bucket },
+    {},
+    noCache
+  );
+  assert.equal(response.status, 200);
+  assert.equal(await response.text(), "immutable-original");
+  assert.equal(response.headers.get("cache-control"), "public, max-age=31536000, immutable");
+  assert.equal(response.headers.get("cloudflare-cdn-cache-control"), "public, max-age=31536000, immutable");
+}
+
+{
   const fingerprint = "abcdef1234567890";
   const bucket = new MockBucket({
     [`_variants/${fingerprint}/640.webp`]: { body: "webp", type: "image/webp" },

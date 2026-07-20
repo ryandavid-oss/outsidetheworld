@@ -111,20 +111,26 @@ def main() -> int:
         parser = PageParser()
         parser.feed(source)
         relative = path.relative_to(ROOT)
+        own_url = f"{SITE_URL}/{relative.as_posix()}"
+        is_redirect = (
+            "noindex" in parser.robots.lower()
+            and bool(parser.canonical)
+            and parser.canonical != own_url
+        )
 
         if not parser.canonical:
             errors.append(f"missing canonical: {relative}")
         elif parser.canonical not in sitemap_set:
             errors.append(f"canonical absent from sitemap: {relative} -> {parser.canonical}")
-        if "noindex" in parser.robots.lower():
+        if "noindex" in parser.robots.lower() and not is_redirect:
             errors.append(f"generated page is noindex: {relative}")
         if parser.title_count != 1:
             errors.append(f"expected one title element: {relative}")
-        if parser.h1_count != 1:
+        if parser.h1_count != 1 and not is_redirect:
             errors.append(f"expected one h1: {relative}")
 
         collection = relative.parts[0] if relative.parts else ""
-        if collection in GENERATED_DIRS and 'class="dig-path"' not in source:
+        if collection in GENERATED_DIRS and 'class="dig-path"' not in source and not is_redirect:
             errors.append(f"missing cross-archive dig path: {relative}")
         if collection == "wayback":
             if re.search(r"&lt;img\b", source, flags=re.I):
@@ -139,11 +145,11 @@ def main() -> int:
                 errors.append(f"unsafe legacy element in record content: {relative}")
             if re.search(r"\son[a-z]+\s*=|javascript:", content, flags=re.I):
                 errors.append(f"unsafe legacy attribute in record content: {relative}")
-        elif collection == "poems" and 'class="poem-text"' not in source:
+        elif collection == "poems" and 'class="poem-text"' not in source and not is_redirect:
             errors.append(f"poem is not using stanza-preserving markup: {relative}")
-        elif collection == "iotd" and "entry-image--photograph" not in source:
+        elif collection == "iotd" and "entry-image--photograph" not in source and not is_redirect:
             errors.append(f"image record is missing photograph markup: {relative}")
-        elif collection == "fragments" and "fragment-text" not in source:
+        elif collection == "fragments" and "fragment-text" not in source and not is_redirect:
             errors.append(f"fragment record is missing compact text markup: {relative}")
 
         json_scripts = re.findall(
@@ -151,7 +157,7 @@ def main() -> int:
             source,
             flags=re.I,
         )
-        if not json_scripts:
+        if not json_scripts and not is_redirect:
             errors.append(f"missing JSON-LD: {relative}")
         for payload in json_scripts:
             try:
