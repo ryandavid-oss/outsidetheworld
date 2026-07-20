@@ -1588,7 +1588,7 @@ def render_share_page(post, newer_post=None, older_post=None, include_draft_read
             }} catch (error) {{}}
         }}());
     </script>
-    <link href="../archive_reader.css?v=20260720-dropcap-containment" rel="stylesheet" />
+    <link href="../archive_reader.css?v=20260720-frgmnts-image-haze" rel="stylesheet" />
     <meta name="description" content="{smartypants_safe(description)}" />
     <meta name="theme-color" content="#060809" />
     <meta property="og:site_name" content="Outside The World" />

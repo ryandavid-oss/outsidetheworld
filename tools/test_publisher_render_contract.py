@@ -335,6 +335,20 @@ def test_all_image_presentation_options_render_and_css_agrees():
                 assert "<figcaption><em>Caption</em></figcaption>" in html
 
 
+def test_published_image_haze_uses_the_frgmnts_palette():
+    reader_css = (ROOT / "archive_reader.css").read_text(encoding="utf-8")
+    theme_css = (ROOT / "theme.css").read_text(encoding="utf-8")
+    residue_html = (ROOT / "residue_archive.html").read_text(encoding="utf-8")
+
+    for source in (reader_css, theme_css, residue_html):
+        assert "rgba(255, 105, 180" in source
+        assert "rgba(155, 89, 182" in source
+
+    assert "box-shadow: var(--reader-image-shadow)" in reader_css
+    assert "box-shadow: var(--otw-published-image-shadow)" in theme_css
+    assert "box-shadow: var(--archive-image-shadow)" in residue_html
+
+
 def test_publisher_rich_formatting_metadata_restores_visual_styles():
     base_metadata = {
         "schema": "otw.publisher.post",
@@ -1114,6 +1128,7 @@ def run():
         test_metadata_parser_edge_cases_fail_closed,
         test_metadata_cardinality_edge_cases_do_not_break_rendering,
         test_all_image_presentation_options_render_and_css_agrees,
+        test_published_image_haze_uses_the_frgmnts_palette,
         test_sanitization_security_for_markdown_and_metadata,
         test_trusted_legacy_figure_blocks_are_preserved_but_sanitized,
         test_reused_image_url_can_keep_distinct_presentation_by_order_after_sanitization,
