@@ -339,8 +339,8 @@ html[data-reader-mode="dark"] .reader-mode-button[aria-pressed="true"] {
     max-width: none;
     margin: clamp(10px, 1.1vw, 13px) 0 0;
     color: var(--reader-muted);
-    font: clamp(0.98rem, 1.2vw, 1.08rem)/1.6 Georgia, 'Times New Roman', serif;
-    text-align: left;
+    font: clamp(0.98rem, 1.2vw, 1.08rem)/1.6 'Inter', ui-sans-serif, system-ui, sans-serif;
+    text-align: center;
 }
 
 .entry-meta-strip {
@@ -811,10 +811,10 @@ html[data-reader-mode="light"] .entry-body img {
     max-width: none;
     margin: clamp(10px, 1.1vw, 13px) 0 0;
     color: var(--reader-muted);
-    font-family: Georgia, 'Times New Roman', serif;
+    font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
     font-size: clamp(0.98rem, 1.2vw, 1.08rem);
     line-height: 1.6;
-    text-align: left;
+    text-align: center;
 }
 
 .entry-body .otw-figure--x-small {
@@ -1536,18 +1536,19 @@ html[data-reader-mode="dark"] .clarify-note__toggle[aria-expanded="true"] {
 .entry-body .otw-figure figcaption {
     display: flex;
     box-sizing: border-box;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 18px;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 5px;
     width: 100%;
     max-width: none;
     margin: clamp(10px, 1.1vw, 13px) 0 0;
     border-top: 1px solid color-mix(in srgb, var(--reader-rule) 66%, transparent);
     padding: clamp(10px, 1.4vw, 14px) clamp(2px, 0.35vw, 6px) 0;
-    font-family: Georgia, 'Times New Roman', serif;
+    font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
     font-size: clamp(0.98rem, 1.2vw, 1.08rem);
     line-height: 1.6;
-    text-align: left;
+    text-align: center;
 }
 
 .entry-feature figcaption > :first-child,

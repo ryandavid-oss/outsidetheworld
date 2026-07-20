@@ -312,7 +312,8 @@ def test_all_image_presentation_options_render_and_css_agrees():
     assert "float: none" in css
     assert "--otw-figure-max-width: var(--otw-figure-natural-width, 100%)" in css
     assert "max-width: none" in css
-    assert "text-align: left" in css
+    assert "text-align: center" in css
+    assert "font-family: 'Inter', ui-sans-serif, system-ui" in css
     assert "font-size: clamp(0.98rem, 1.2vw, 1.08rem)" in css
     assert "object-fit: cover" not in css[css.index(".otw-figure"):css.index("/* 6. NAVIGATION")]
 
