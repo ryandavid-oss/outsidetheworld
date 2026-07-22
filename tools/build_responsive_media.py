@@ -240,13 +240,24 @@ def main() -> int:
     parser.add_argument("--upload", action="store_true", help="Upload generated variants to the otw-iotd R2 bucket")
     parser.add_argument("--workers", type=int, default=6, help="Concurrent generation/upload workers")
     parser.add_argument("--limit", type=int, default=0, help="Process only the first N sources (for diagnostics)")
+    parser.add_argument(
+        "--source",
+        action="append",
+        default=[],
+        help="Process one exact source URL and merge it into the existing manifest; repeat as needed",
+    )
     args = parser.parse_args()
 
-    sources = collect_sources()
+    sources = sorted({str(source).strip() for source in args.source if str(source).strip()}) or collect_sources()
     if args.limit > 0:
         sources = sources[: args.limit]
 
     records: dict[str, dict[str, Any]] = {}
+    if args.source and OUTPUT_PATH.exists():
+        existing = json.loads(OUTPUT_PATH.read_text(encoding="utf-8"))
+        existing_sources = existing.get("sources") if isinstance(existing, dict) else None
+        if isinstance(existing_sources, dict):
+            records.update(existing_sources)
     unique_uploads: dict[str, tuple[Path, str, str]] = {}
     skipped: list[tuple[str, str]] = []
 
@@ -275,6 +286,14 @@ def main() -> int:
     OUTPUT_PATH.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(f"Wrote {OUTPUT_PATH.relative_to(ROOT)} with {len(records)} lookup keys.")
     print(f"Prepared {len(unique_uploads)} immutable variants.")
+
+    landing_result = subprocess.run(
+        [sys.executable, str(ROOT / "tools" / "build_iotd_landing.py")],
+        cwd=ROOT,
+        check=False,
+    )
+    if landing_result.returncode != 0:
+        return landing_result.returncode
 
     frontpage_result = subprocess.run(
         [sys.executable, str(ROOT / "tools" / "build_frontpage_payload.py")],

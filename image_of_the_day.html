@@ -42,14 +42,20 @@
     <meta property="og:title" content="Image of the Day | Outside The World" />
     <meta property="og:description" content="Daily signal capture from Outside The World in Queen Creek, Arizona." />
     <meta property="og:url" content="https://outsidetheworld.com/image_of_the_day.html" />
-    <meta property="og:image" content="https://outsidetheworld.com/Images/og/otw-feed-1200x630.jpg" />
-    <meta property="og:image:alt" content="Image of the Day from Outside The World." />
+    <!-- IOTD_SOCIAL_START -->
+    <meta property="og:image" content="https://otw-media.ryandavid.workers.dev/o/iotd/2026-07-22-love-to-see-it-334f2966b0ac.jpg" />
+    <meta property="og:image:alt" content="LOVE_TO_SEE_IT // Image of the day" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Image of the Day | Outside The World" />
     <meta name="twitter:description" content="Daily signal capture from Outside The World in Queen Creek, Arizona." />
-    <meta name="twitter:image" content="https://outsidetheworld.com/Images/og/otw-feed-1200x630.jpg" />
+    <meta name="twitter:image" content="https://otw-media.ryandavid.workers.dev/o/iotd/2026-07-22-love-to-see-it-334f2966b0ac.jpg" />
+    <!-- IOTD_SOCIAL_END -->
 
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- IOTD_PRELOAD_START -->
+    <link rel="preload" as="image" href="https://otw-media.ryandavid.workers.dev/v/334f2966b0ac99be7a17/1200" fetchpriority="high" imagesrcset="https://otw-media.ryandavid.workers.dev/v/334f2966b0ac99be7a17/480 480w, https://otw-media.ryandavid.workers.dev/v/334f2966b0ac99be7a17/800 800w, https://otw-media.ryandavid.workers.dev/v/334f2966b0ac99be7a17/1200 1200w, https://otw-media.ryandavid.workers.dev/v/334f2966b0ac99be7a17/1600 1600w, https://otw-media.ryandavid.workers.dev/v/334f2966b0ac99be7a17/1800 1800w" imagesizes="(max-width: 768px) 100vw, (max-width: 1320px) 66vw, 960px" />
+    <!-- IOTD_PRELOAD_END -->
+    <link rel="preload" href="assets/fonts/inter-latin-variable.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="assets/fonts/fira-code-latin-variable.woff2" as="font" type="font/woff2" crossorigin />
 
     <style>
         @font-face {
@@ -57,7 +63,7 @@
             font-style: normal;
             font-weight: 400 900;
             font-display: swap;
-            src: url('https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2') format('woff2');
+            src: url('assets/fonts/inter-latin-variable.woff2') format('woff2');
         }
 
         @font-face {
@@ -65,7 +71,7 @@
             font-style: normal;
             font-weight: 300 500;
             font-display: swap;
-            src: url('https://fonts.gstatic.com/s/firacode/v27/uU9NCBsR6Z2vfE9aq3bh3dSDqFGedA.woff2') format('woff2');
+            src: url('assets/fonts/fira-code-latin-variable.woff2') format('woff2');
         }
 
         :root {
@@ -100,6 +106,7 @@
             padding: 22px 0;
             pointer-events: none;
             /* keep “only logo/title clickable” feel */
+            transition: padding 220ms ease, background 220ms ease;
         }
 
         .top-nav-inner {
@@ -126,6 +133,7 @@
             /* prevents logo from visually hogging the row */
             height: auto;
             filter: drop-shadow(0 0 20px rgba(99, 149, 238, 0.25));
+            transition: width 220ms ease, filter 220ms ease;
         }
 
         .top-nav .nav-right {
@@ -161,15 +169,34 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            transition: font-size 220ms ease, letter-spacing 220ms ease;
+        }
+
+        .top-nav.is-compact {
+            padding: 9px 0;
+            background: rgba(10, 10, 10, 0.91);
+        }
+
+        .top-nav.is-compact .nav-logo {
+            width: 154px;
+            filter: drop-shadow(0 0 13px rgba(99, 149, 238, 0.20));
+        }
+
+        .top-nav.is-compact .status-tag {
+            display: none;
+        }
+
+        .top-nav.is-compact .nav-title {
+            font-size: 0.82rem;
+            letter-spacing: 7px;
         }
 
         /* =========================
      HERO (Image of the Day)
      ========================= */
         .hero {
-            max-width: 1280px;
-            /* slightly wider than your old 1100 */
-            margin: 0 auto 40px;
+            max-width: 1400px;
+            margin: 0 auto 54px;
             padding: 0 20px;
         }
 
@@ -177,19 +204,71 @@
             background: rgba(255, 255, 255, 0.015);
             border: 1px solid rgba(255, 255, 255, 0.06);
             overflow: hidden;
+            display: grid;
+            grid-template-columns: minmax(0, 1.7fr) minmax(300px, 0.8fr);
+            min-height: min(78vh, 820px);
         }
 
-        .hero-img {
-            width: 100%;
-            height: 78vh;
-            object-fit: contain;
-            display: block;
+        .hero-visual {
+            position: relative;
+            isolation: isolate;
+            min-width: 0;
+            min-height: min(78vh, 820px);
+            display: grid;
+            place-items: center;
+            overflow: hidden;
             background: #050505;
         }
 
+        .hero-atmosphere {
+            position: absolute;
+            z-index: -1;
+            inset: -11%;
+            background-image: var(--hero-atmosphere, none);
+            background-position: center;
+            background-size: cover;
+            filter: blur(46px) saturate(1.05) brightness(0.58);
+            transform: scale(1.12);
+            opacity: 0.38;
+        }
+
+        .hero-visual::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            pointer-events: none;
+            background:
+                linear-gradient(90deg, rgba(5, 5, 5, 0.16), transparent 24%, transparent 76%, rgba(5, 5, 5, 0.16)),
+                radial-gradient(rgba(255, 255, 255, 0.07) 0.7px, transparent 0.7px);
+            background-size: auto, 3px 3px;
+            opacity: 0.24;
+            mix-blend-mode: overlay;
+        }
+
+        .hero-img {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            height: min(78vh, 820px);
+            object-fit: contain;
+            display: block;
+            filter: drop-shadow(0 20px 50px rgba(0, 0, 0, 0.38));
+        }
+
         .hero-meta {
-            padding: 18px 18px 20px;
-            text-align: center;
+            position: relative;
+            z-index: 3;
+            padding: clamp(28px, 4vw, 58px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            text-align: left;
+            background:
+                linear-gradient(145deg, rgba(14, 15, 17, 0.98), rgba(8, 9, 11, 0.96)),
+                #0b0c0e;
+            border-left: 1px solid rgba(160, 190, 245, 0.12);
         }
 
         .hero-date {
@@ -198,22 +277,24 @@
             letter-spacing: 3px;
             color: #A0BEF5;
             text-transform: uppercase;
-            margin-bottom: 10px;
+            margin-bottom: 18px;
         }
 
         .hero-title {
             font-weight: 900;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             text-transform: uppercase;
-            margin: 0 0 10px;
-            font-size: 1.2rem;
+            margin: 0 0 20px;
+            font-size: clamp(1.6rem, 3vw, 3.25rem);
+            line-height: 0.98;
+            overflow-wrap: anywhere;
         }
 
         .hero-caption {
             color: rgba(255, 255, 255, 0.78);
-            line-height: 1.7;
-            max-width: 900px;
-            margin: 0 auto;
+            line-height: 1.72;
+            max-width: 42ch;
+            margin: 0;
             font-size: 1rem;
         }
 
@@ -221,10 +302,10 @@
         .hero-caption > :last-child { margin-bottom: 0; }
         .hero-caption p { margin: 0 0 0.9rem; }
         .hero-caption ul,
-        .hero-caption ol { width: fit-content; margin: 0.8rem auto; text-align: left; }
+        .hero-caption ol { width: fit-content; margin: 0.8rem 0; text-align: left; }
         .hero-caption blockquote {
             max-width: 62ch;
-            margin: 1rem auto;
+            margin: 1rem 0;
             border-left: 3px solid rgba(160, 190, 245, 0.65);
             padding-left: 1rem;
             text-align: left;
@@ -232,10 +313,10 @@
         .hero-caption a { color: #A0BEF5; }
 
         .hero-actions {
-            margin-top: 14px;
+            margin-top: 24px;
             display: flex;
             gap: 10px;
-            justify-content: center;
+            justify-content: flex-start;
             flex-wrap: wrap;
         }
 
@@ -250,19 +331,103 @@
             color: #fff;
             text-decoration: none;
             cursor: pointer;
+            transition: border-color 160ms ease, color 160ms ease, background 160ms ease, transform 160ms ease;
         }
 
-        .hero-btn:hover {
+        .hero-btn:hover,
+        .hero-btn:focus-visible {
             border-color: #91AFB3;
             background: rgba(145, 175, 179, 0.14);
+            transform: translateY(-1px);
+        }
+
+        .hero-btn--primary {
+            border-color: rgba(160, 190, 245, 0.58);
+            background: rgba(99, 149, 238, 0.16);
+            color: #dfeaff;
+        }
+
+        .hero-paths {
+            width: 100%;
+            margin-top: 32px;
+            padding-top: 18px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            border-top: 1px solid rgba(145, 175, 179, 0.14);
+        }
+
+        .hero-paths .hero-btn {
+            width: 100%;
+            min-height: 42px;
+        }
+
+        .hero-card.is-landscape {
+            display: block;
+            min-height: 0;
+        }
+
+        .hero-card.is-landscape .hero-visual {
+            min-height: min(72vh, 760px);
+        }
+
+        .hero-card.is-landscape .hero-img {
+            height: min(72vh, 760px);
+        }
+
+        .hero-card.is-landscape .hero-meta {
+            display: grid;
+            grid-template-columns: minmax(210px, 0.7fr) minmax(280px, 1.3fr) auto;
+            gap: 18px 40px;
+            align-items: start;
+            padding: 30px clamp(26px, 4vw, 56px) 32px;
+            border-left: 0;
+            border-top: 1px solid rgba(160, 190, 245, 0.12);
+        }
+
+        .hero-card.is-landscape .hero-date {
+            grid-column: 1;
+            margin: 4px 0 0;
+        }
+
+        .hero-card.is-landscape .hero-title {
+            grid-column: 1;
+            margin: 34px 0 0;
+            font-size: clamp(1.45rem, 2.4vw, 2.7rem);
+        }
+
+        .hero-card.is-landscape .hero-caption {
+            grid-column: 2;
+            grid-row: 1 / span 2;
+            max-width: 60ch;
+        }
+
+        .hero-card.is-landscape .hero-actions {
+            grid-column: 3;
+            grid-row: 1;
+            margin-top: 0;
+            justify-content: flex-end;
+        }
+
+        .hero-card.is-landscape .hero-paths {
+            grid-column: 3;
+            grid-row: 2;
+            min-width: 270px;
+            margin-top: 0;
+            padding-top: 0;
+            border-top: 0;
         }
 
         /* =========================
      ARCHIVE GRID
      ========================= */
-        .section-label {
+        .archive-shell {
             max-width: 1400px;
-            margin: 0 auto 10px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            margin: 0 0 14px;
             padding: 0 20px;
             font-family: 'Fira Code', monospace;
             font-size: 0.6rem;
@@ -281,12 +446,76 @@
             background: rgba(145, 175, 179, 0.18);
         }
 
+        .archive-count {
+            color: rgba(255, 255, 255, 0.42);
+            letter-spacing: 2px;
+            white-space: nowrap;
+        }
+
+        .month-jump {
+            margin: 0 20px 34px;
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(160, 190, 245, 0.32) transparent;
+        }
+
+        .month-jump a {
+            flex: 0 0 auto;
+            padding: 8px 10px;
+            border: 1px solid rgba(145, 175, 179, 0.18);
+            color: rgba(255, 255, 255, 0.62);
+            font-family: 'Fira Code', monospace;
+            font-size: 0.56rem;
+            letter-spacing: 1.8px;
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: color 160ms ease, border-color 160ms ease, background 160ms ease;
+        }
+
+        .month-jump a:hover,
+        .month-jump a:focus-visible {
+            color: #dfeaff;
+            border-color: rgba(160, 190, 245, 0.55);
+            background: rgba(99, 149, 238, 0.10);
+        }
+
+        .month-section {
+            scroll-margin-top: 95px;
+            margin-bottom: 42px;
+        }
+
+        .month-header {
+            margin: 0 20px 12px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            color: #a0bef5;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.68rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .month-header::after {
+            content: "";
+            height: 1px;
+            flex: 1;
+            background: linear-gradient(90deg, rgba(160, 190, 245, 0.30), rgba(145, 175, 179, 0.08));
+        }
+
+        .month-header span:last-child {
+            color: rgba(255, 255, 255, 0.38);
+            font-size: 0.56rem;
+            letter-spacing: 2px;
+            white-space: nowrap;
+        }
+
         .vault-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
             gap: 12px;
-            max-width: 1400px;
-            margin: 0 auto;
             padding: 0 20px;
         }
 
@@ -300,6 +529,7 @@
             position: relative;
             color: inherit;
             text-decoration: none;
+            outline: none;
         }
 
         .artifact-card img {
@@ -311,15 +541,27 @@
             display: block;
         }
 
-        .artifact-card:hover img {
+        .artifact-card:hover img,
+        .artifact-card:focus-visible img {
             filter: grayscale(0%);
             transform: scale(1.04);
         }
 
-        .artifact-tag {
+        .artifact-copy {
             position: absolute;
-            bottom: 10px;
+            z-index: 2;
             left: 10px;
+            right: 10px;
+            bottom: 10px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 8px;
+            pointer-events: none;
+        }
+
+        .artifact-title,
+        .artifact-tag {
             font-family: 'Fira Code', monospace;
             font-size: 0.55rem;
             letter-spacing: 2px;
@@ -331,12 +573,38 @@
             backdrop-filter: blur(8px);
         }
 
+        .artifact-title {
+            max-width: calc(100% - 82px);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            color: #fff;
+            opacity: 0;
+            transform: translateY(5px);
+            transition: opacity 180ms ease, transform 180ms ease;
+        }
+
+        .artifact-card:hover .artifact-title,
+        .artifact-card:focus-visible .artifact-title {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .artifact-card:focus-visible {
+            border-color: rgba(160, 190, 245, 0.75);
+            box-shadow: 0 0 0 2px rgba(99, 149, 238, 0.18);
+        }
+
         /* =========================
      MOBILE
      ========================= */
         @media (max-width: 768px) {
             .top-nav {
                 padding: 18px 0;
+            }
+
+            .top-nav.is-compact {
+                padding: 10px 0;
             }
 
             .top-nav-inner {
@@ -355,7 +623,87 @@
             }
 
             .hero {
+                margin-bottom: 40px;
                 padding: 0 10px;
+            }
+
+            .hero-card,
+            .hero-card.is-landscape {
+                display: block;
+                min-height: 0;
+            }
+
+            .hero-visual,
+            .hero-card.is-landscape .hero-visual {
+                min-height: 0;
+            }
+
+            .hero-img,
+            .hero-card.is-landscape .hero-img {
+                width: 100%;
+                height: auto;
+                max-height: 72vh;
+                min-height: 44vh;
+                object-fit: contain;
+            }
+
+            .hero-meta,
+            .hero-card.is-landscape .hero-meta {
+                display: flex;
+                padding: 25px 20px 22px;
+                border-top: 1px solid rgba(160, 190, 245, 0.12);
+                border-left: 0;
+            }
+
+            .hero-card.is-landscape .hero-date,
+            .hero-card.is-landscape .hero-title,
+            .hero-card.is-landscape .hero-caption,
+            .hero-card.is-landscape .hero-actions,
+            .hero-card.is-landscape .hero-paths {
+                grid-column: auto;
+                grid-row: auto;
+            }
+
+            .hero-title,
+            .hero-card.is-landscape .hero-title {
+                margin: 0 0 15px;
+                font-size: clamp(1.5rem, 8vw, 2.3rem);
+            }
+
+            .hero-card.is-landscape .hero-date {
+                margin: 0 0 16px;
+            }
+
+            .hero-caption,
+            .hero-card.is-landscape .hero-caption {
+                max-width: none;
+            }
+
+            .hero-actions,
+            .hero-card.is-landscape .hero-actions {
+                justify-content: flex-start;
+            }
+
+            .hero-paths,
+            .hero-card.is-landscape .hero-paths {
+                min-width: 0;
+                margin-top: 24px;
+                padding-top: 18px;
+                border-top: 1px solid rgba(145, 175, 179, 0.14);
+            }
+
+            .month-jump {
+                margin: 0 10px 28px;
+            }
+
+            .month-section {
+                margin-bottom: 34px;
+            }
+
+            .month-header {
+                margin: 0 10px 9px;
+                font-size: 0.61rem;
+                letter-spacing: 2px;
             }
 
             .vault-grid {
@@ -366,6 +714,39 @@
 
             .section-label {
                 padding: 0 10px;
+            }
+
+            .artifact-copy {
+                left: 5px;
+                right: 5px;
+                bottom: 5px;
+                display: block;
+            }
+
+            .artifact-title,
+            .artifact-tag {
+                width: fit-content;
+                max-width: 100%;
+                padding: 4px 5px;
+                font-size: 0.46rem;
+                letter-spacing: 1px;
+            }
+
+            .artifact-title {
+                margin-bottom: 3px;
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .top-nav,
+            .top-nav .nav-logo,
+            .top-nav .nav-title,
+            .hero-btn,
+            .artifact-card img,
+            .artifact-title {
+                transition: none;
             }
         }
 
@@ -397,25 +778,9 @@
             pointer-events: none;
         }
 
-        /* 2) Hero film grain (very subtle) */
+        /* 2) Hero stage */
         .hero-card {
             position: relative;
-        }
-
-        .hero-card::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-
-            /* tiny dot grain */
-            background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px);
-            background-size: 3px 3px;
-
-            opacity: 0.055;
-            /* keep it low */
-            mix-blend-mode: overlay;
-            /* gentle texture */
         }
     </style>
     <script type="application/ld+json">
@@ -455,24 +820,41 @@
 
     <!-- HERO -->
     <section class="hero">
-        <div class="hero-card">
-            <img id="heroImg" class="hero-img" alt="Image of the day" />
+        <!-- IOTD_CURRENT_START -->
+        <div class="hero-card is-portrait" id="heroCard">
+            <div class="hero-visual">
+                <div class="hero-atmosphere" id="heroAtmosphere" aria-hidden="true" style="--hero-atmosphere: url(&quot;https://otw-media.ryandavid.workers.dev/v/334f2966b0ac99be7a17/1200&quot;)"></div>
+                <img id="heroImg" class="hero-img" src="https://otw-media.ryandavid.workers.dev/v/334f2966b0ac99be7a17/1200" width="1800" height="2400" srcset="https://otw-media.ryandavid.workers.dev/v/334f2966b0ac99be7a17/480 480w, https://otw-media.ryandavid.workers.dev/v/334f2966b0ac99be7a17/800 800w, https://otw-media.ryandavid.workers.dev/v/334f2966b0ac99be7a17/1200 1200w, https://otw-media.ryandavid.workers.dev/v/334f2966b0ac99be7a17/1600 1600w, https://otw-media.ryandavid.workers.dev/v/334f2966b0ac99be7a17/1800 1800w" sizes="(max-width: 768px) 100vw, (max-width: 1320px) 66vw, 960px" alt="LOVE_TO_SEE_IT // Image of the day" loading="eager" decoding="async" fetchpriority="high" />
+            </div>
             <div class="hero-meta">
-                <div id="heroDate" class="hero-date">LOADING_DATE…</div>
-                <h2 id="heroTitle" class="hero-title">LOADING_TITLE…</h2>
-                <div id="heroCaption" class="hero-caption">LOADING_CAPTION…</div>
+                <div id="heroDate" class="hero-date">2026_07_22</div>
+                <h2 id="heroTitle" class="hero-title">LOVE_TO_SEE_IT</h2>
+                <div id="heroCaption" class="hero-caption"><p>Straight Carrie Underwood vibes, this. I took this picture almost a year ago. I really felt myself rooting for the spurned lover. I hope she didn’t stop with the spray paint job.</p></div>
 
                 <div class="hero-actions">
-                    <a id="heroOpen" class="hero-btn" href="#" target="_blank" rel="noopener">OPEN_IMAGE</a>
-                    <a id="heroDownload" class="hero-btn" href="#" download>DOWNLOAD</a>
+                    <a id="heroRecord" class="hero-btn hero-btn--primary" href="iotd/2026-07-22-love-to-see-it-334f2966b0ac.html">VIEW_RECORD</a>
+                    <a id="heroOpen" class="hero-btn" href="https://otw-media.ryandavid.workers.dev/o/iotd/2026-07-22-love-to-see-it-334f2966b0ac.jpg" target="_blank" rel="noopener">OPEN_ORIGINAL</a>
+                    <a id="heroDownload" class="hero-btn" href="https://otw-media.ryandavid.workers.dev/o/iotd/2026-07-22-love-to-see-it-334f2966b0ac.jpg" download>DOWNLOAD</a>
+                </div>
+
+                <div class="hero-paths" aria-label="Image discovery">
+                    <a id="heroPrevious" class="hero-btn" href="iotd/2026-07-21-an-good-pup-d8cf3286e9cb.html">YESTERDAY</a>
+                    <button id="heroRandom" class="hero-btn" type="button">RANDOM_SIGNAL</button>
                 </div>
             </div>
         </div>
+        <!-- IOTD_CURRENT_END -->
     </section>
 
     <!-- ARCHIVE -->
-    <div class="section-label">ARCHIVE_GRID</div>
-    <div class="vault-grid" id="grid"></div>
+    <section class="archive-shell" aria-labelledby="archiveLabel">
+        <div class="section-label" id="archiveLabel">
+            <span>ARCHIVE_GRID</span>
+            <span class="archive-count" id="archiveCount">LOADING_SIGNALS…</span>
+        </div>
+        <nav class="month-jump" id="monthJump" aria-label="Jump to archive month"></nav>
+        <div id="archiveMonths"></div>
+    </section>
 
     <footer style="width:min(1100px,calc(100% - 32px));margin:40px auto 28px;text-align:center;color:rgba(244,244,240,0.62);font-size:0.76rem;line-height:1.9;letter-spacing:0.08em;text-transform:uppercase;">
         <div>
@@ -499,6 +881,14 @@
         }
         window.addEventListener('resize', syncNav);
         window.addEventListener('load', syncNav);
+
+        function syncCompactNav() {
+            const nav = document.querySelector('.top-nav');
+            if (!nav) return;
+            nav.classList.toggle('is-compact', window.scrollY > 120);
+        }
+        window.addEventListener('scroll', syncCompactNav, { passive: true });
+        window.addEventListener('load', syncCompactNav);
 
         // MANIFEST: newest first
         // Create: image_manifest.json (array of objects)
@@ -596,27 +986,77 @@
             images.forEach((image) => observer.observe(image));
         }
 
-        function setHero(item, responsiveMedia) {
+        function recordStem(item) {
+            return item.id || `${item.date}-${String(item.title || 'image')
+                .toLowerCase()
+                .replace(/&/g, ' and ')
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/^-+|-+$/g, '')}`;
+        }
+
+        function recordUrl(item) {
+            return `iotd/${recordStem(item)}.html`;
+        }
+
+        function orientationFor(width, height) {
+            if (!width || !height) return 'portrait';
+            const ratio = width / height;
+            if (ratio > 1.14) return 'landscape';
+            if (ratio < 0.88) return 'portrait';
+            return 'square';
+        }
+
+        function applyHeroOrientation(card, width, height) {
+            card.classList.remove('is-landscape', 'is-portrait', 'is-square');
+            card.classList.add(`is-${orientationFor(width, height)}`);
+        }
+
+        function cssImageUrl(value) {
+            const escaped = String(value || '')
+                .replace(/\\/g, '\\\\')
+                .replace(/"/g, '\\"')
+                .replace(/[\r\n]/g, '');
+            return `url("${escaped}")`;
+        }
+
+        function isPreviousDay(currentDate, candidateDate) {
+            const current = Date.parse(`${currentDate}T00:00:00Z`);
+            const candidate = Date.parse(`${candidateDate}T00:00:00Z`);
+            return Number.isFinite(current) && Number.isFinite(candidate) && current - candidate === 86400000;
+        }
+
+        function setHero(item, items, responsiveMedia) {
+            const heroCard = document.getElementById('heroCard');
             const heroImg = document.getElementById('heroImg');
+            const heroAtmosphere = document.getElementById('heroAtmosphere');
             const heroDate = document.getElementById('heroDate');
             const heroTitle = document.getElementById('heroTitle');
             const heroCaption = document.getElementById('heroCaption');
+            const heroRecord = document.getElementById('heroRecord');
             const heroOpen = document.getElementById('heroOpen');
             const heroDownload = document.getElementById('heroDownload');
+            const heroPrevious = document.getElementById('heroPrevious');
+            const heroRandom = document.getElementById('heroRandom');
 
             const plan = imagePlan(
                 item.image,
                 responsiveMedia,
-                '(max-width: 768px) 100vw, (max-width: 1320px) 94vw, 1280px'
+                '(max-width: 768px) 100vw, (max-width: 1320px) 66vw, 960px'
             );
             heroImg.decoding = 'async';
             heroImg.loading = 'eager';
             heroImg.fetchPriority = 'high';
+            heroImg.onload = () => applyHeroOrientation(
+                heroCard,
+                heroImg.naturalWidth || plan.width,
+                heroImg.naturalHeight || plan.height
+            );
             if (plan.srcset) heroImg.srcset = plan.srcset;
             heroImg.sizes = plan.sizes;
             if (plan.width && plan.height) {
                 heroImg.width = plan.width;
                 heroImg.height = plan.height;
+                applyHeroOrientation(heroCard, plan.width, plan.height);
             }
             heroImg.onerror = () => {
                 heroImg.removeAttribute('srcset');
@@ -626,14 +1066,35 @@
                 }
             };
             heroImg.src = plan.src;
+            heroAtmosphere.style.setProperty('--hero-atmosphere', cssImageUrl(plan.src));
             heroImg.alt = item.title ? `${item.title} // Image of the day` : 'Image of the day';
             heroDate.textContent = (item.date || '').replaceAll('-', '_');
             heroTitle.textContent = item.title || 'DAILY_SIGNAL';
             if (window.renderOtwMarkdown) heroCaption.innerHTML = window.renderOtwMarkdown(item.caption || '');
             else heroCaption.textContent = item.caption || '';
 
+            heroRecord.href = recordUrl(item);
             heroOpen.href = plan.original;
             heroDownload.href = plan.original;
+
+            const previous = items[1];
+            if (previous) {
+                heroPrevious.hidden = false;
+                heroPrevious.href = recordUrl(previous);
+                heroPrevious.textContent = isPreviousDay(item.date, previous.date)
+                    ? 'YESTERDAY'
+                    : 'PREVIOUS_SIGNAL';
+            } else {
+                heroPrevious.hidden = true;
+            }
+
+            const randomCandidates = items.slice(1);
+            heroRandom.disabled = randomCandidates.length === 0;
+            heroRandom.onclick = () => {
+                if (!randomCandidates.length) return;
+                const selected = randomCandidates[Math.floor(Math.random() * randomCandidates.length)];
+                window.location.assign(recordUrl(selected));
+            };
 
             // If you want iMessage preview to always show today:
             // (iMessage caches hard; but this helps browsers)
@@ -643,49 +1104,108 @@
             document.querySelector('meta[name="twitter:image"]')?.setAttribute('content', absoluteImage);
         }
 
-        function buildGrid(items, heroDate, responsiveMedia) {
-            const grid = document.getElementById('grid');
-            grid.innerHTML = '';
+        function monthLabel(monthKey) {
+            const [year, month] = monthKey.split('-').map(Number);
+            return new Intl.DateTimeFormat('en-US', {
+                month: 'long',
+                year: 'numeric',
+                timeZone: 'UTC'
+            }).format(new Date(Date.UTC(year, month - 1, 1))).replaceAll(' ', '_').toUpperCase();
+        }
+
+        function monthShortLabel(monthKey) {
+            const [year, month] = monthKey.split('-').map(Number);
+            return new Intl.DateTimeFormat('en-US', {
+                month: 'short',
+                timeZone: 'UTC'
+            }).format(new Date(Date.UTC(year, month - 1, 1))).toUpperCase();
+        }
+
+        function buildGrid(items, responsiveMedia) {
+            const archiveMonths = document.getElementById('archiveMonths');
+            const monthJump = document.getElementById('monthJump');
+            const archiveCount = document.getElementById('archiveCount');
+            archiveMonths.innerHTML = '';
+            monthJump.innerHTML = '';
+            archiveCount.textContent = `${items.length} SIGNALS`;
             const pendingImages = [];
+            const grouped = new Map();
 
-            items.forEach((item, index) => {
-                if (index === 0) return; // skip only the hero item; another image may share its date
+            items.forEach((item) => {
+                const monthKey = item.date.slice(0, 7);
+                if (!grouped.has(monthKey)) grouped.set(monthKey, []);
+                grouped.get(monthKey).push(item);
+            });
 
-                const card = document.createElement('a');
-                card.className = 'artifact-card';
-                const recordStem = item.id || `${item.date}-${String(item.title || 'image').toLowerCase().replace(/&/g, ' and ').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '')}`;
-                card.href = `iotd/${recordStem}.html`;
-                const plan = imagePlan(
-                    item.image,
-                    responsiveMedia,
-                    '(max-width: 768px) 34vw, (max-width: 1400px) 25vw, 340px'
-                );
-                const image = document.createElement('img');
-                image.alt = item.title || 'archive image';
-                image.loading = 'lazy';
-                image.decoding = 'async';
-                image.fetchPriority = 'low';
-                image.dataset.src = plan.src;
-                image.dataset.srcset = plan.srcset;
-                image.dataset.sizes = plan.sizes;
-                if (plan.width && plan.height) {
-                    image.width = plan.width;
-                    image.height = plan.height;
-                }
-                image.onerror = () => {
-                    image.removeAttribute('srcset');
-                    image.removeAttribute('sizes');
-                    if (image.src !== new URL(plan.original, window.location.href).href) {
-                        image.src = plan.original;
+            grouped.forEach((monthItems, monthKey) => {
+                const sectionId = `month-${monthKey}`;
+                const jump = document.createElement('a');
+                jump.href = `#${sectionId}`;
+                jump.textContent = `${monthShortLabel(monthKey)}_${monthItems.length}`;
+                monthJump.appendChild(jump);
+
+                const section = document.createElement('section');
+                section.className = 'month-section';
+                section.id = sectionId;
+
+                const heading = document.createElement('h2');
+                heading.className = 'month-header';
+                const headingLabel = document.createElement('span');
+                headingLabel.textContent = monthLabel(monthKey);
+                const headingCount = document.createElement('span');
+                headingCount.textContent = `${monthItems.length} ${monthItems.length === 1 ? 'SIGNAL' : 'SIGNALS'}`;
+                heading.append(headingLabel, headingCount);
+
+                const grid = document.createElement('div');
+                grid.className = 'vault-grid';
+                section.append(heading, grid);
+                archiveMonths.appendChild(section);
+
+                monthItems.forEach((item) => {
+                    if (item === items[0]) return;
+
+                    const card = document.createElement('a');
+                    card.className = 'artifact-card';
+                    card.href = recordUrl(item);
+                    card.setAttribute('aria-label', `${item.title || 'Image of the Day'}, ${item.date}`);
+                    const plan = imagePlan(
+                        item.image,
+                        responsiveMedia,
+                        '(max-width: 768px) 34vw, (max-width: 1400px) 25vw, 340px'
+                    );
+                    const image = document.createElement('img');
+                    image.alt = item.title || 'archive image';
+                    image.loading = 'lazy';
+                    image.decoding = 'async';
+                    image.fetchPriority = 'low';
+                    image.dataset.src = plan.src;
+                    image.dataset.srcset = plan.srcset;
+                    image.dataset.sizes = plan.sizes;
+                    if (plan.width && plan.height) {
+                        image.width = plan.width;
+                        image.height = plan.height;
                     }
-                };
+                    image.onerror = () => {
+                        image.removeAttribute('srcset');
+                        image.removeAttribute('sizes');
+                        if (image.src !== new URL(plan.original, window.location.href).href) {
+                            image.src = plan.original;
+                        }
+                    };
 
-                const tag = document.createElement('div');
-                tag.className = 'artifact-tag';
-                tag.textContent = (item.date || '').replaceAll('-', '_');
-                card.append(image, tag);
-                grid.appendChild(card);
-                pendingImages.push(image);
+                    const copy = document.createElement('div');
+                    copy.className = 'artifact-copy';
+                    const title = document.createElement('span');
+                    title.className = 'artifact-title';
+                    title.textContent = item.title || 'UNTITLED_SIGNAL';
+                    const tag = document.createElement('span');
+                    tag.className = 'artifact-tag';
+                    tag.textContent = (item.date || '').replaceAll('-', '_');
+                    copy.append(title, tag);
+                    card.append(image, copy);
+                    grid.appendChild(card);
+                    pendingImages.push(image);
+                });
             });
 
             observeArchiveImages(pendingImages);
@@ -699,10 +1219,11 @@
                 ]);
                 const hero = items[0];
 
-                setHero(hero, responsiveMedia);
-                buildGrid(items, hero.date, responsiveMedia);
+                setHero(hero, items, responsiveMedia);
+                buildGrid(items, responsiveMedia);
 
                 syncNav();
+                syncCompactNav();
             } catch (e) {
                 console.error(e);
                 document.getElementById('heroTitle').textContent = 'ERROR_LOADING_SIGNAL';

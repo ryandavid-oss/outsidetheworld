@@ -30,6 +30,12 @@ def main() -> int:
         "THE_FIRE_DRAGON": ("2026-07-20", "1f92010c12c6"),
     }
     by_title = {str(item.get("title") or ""): item for item in manifest}
+    latest = sorted(
+        manifest,
+        key=lambda item: (str(item.get("publishedAt") or item.get("date") or ""), str(item.get("id") or item.get("image") or "")),
+        reverse=True,
+    )[0]
+    require(latest["image"] in responsive, "latest IOTD has no responsive media record")
     for title, (date, fingerprint) in repaired.items():
         item = by_title.get(title)
         require(bool(item), f"missing repaired record {title}")
@@ -50,6 +56,17 @@ def main() -> int:
         source = (ROOT / filename).read_text(encoding="utf-8")
         require("renderOtwMarkdown" in source, f"{filename} does not render Markdown captions")
         require("seenEntries" in source and "seenDates" not in source, f"{filename} still discards same-date images")
+
+    landing = (ROOT / "image_of_the_day.html").read_text(encoding="utf-8")
+    require(
+        all(marker in landing for marker in ("IOTD_CURRENT_START", "IOTD_PRELOAD_START", "IOTD_SOCIAL_START")),
+        "IOTD pre-render markers are missing",
+    )
+    require(str(latest["image"]) in landing, "IOTD landing stage is not pre-rendered from the latest record")
+    require("month-jump" in landing and "grouped = new Map()" in landing, "IOTD archive is not grouped by month")
+    require("RANDOM_SIGNAL" in landing and "VIEW_RECORD" in landing, "IOTD discovery paths are missing")
+    require("assets/fonts/inter-latin-variable.woff2" in landing, "IOTD landing does not use self-hosted fonts")
+    require("fonts.gstatic.com" not in landing, "IOTD landing still depends on remote font delivery")
 
     print("OK: IOTD dates, immutable identity, responsive media, and rich captions are intact.")
     return 0

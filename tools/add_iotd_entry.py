@@ -10,6 +10,7 @@ MANIFEST_PATH = ROOT / "image_manifest.json"
 VALIDATOR_PATH = ROOT / "tools" / "validate_iotd_manifest.py"
 DISCOVERY_BUILDER_PATH = ROOT / "tools" / "build_discovery.py"
 FRONTPAGE_BUILDER_PATH = ROOT / "tools" / "build_frontpage_payload.py"
+LANDING_BUILDER_PATH = ROOT / "tools" / "build_iotd_landing.py"
 
 
 def load_manifest() -> list:
@@ -112,6 +113,14 @@ def main() -> int:
 
     if result.returncode != 0:
         return result.returncode
+
+    landing_result = subprocess.run(
+        [sys.executable, str(LANDING_BUILDER_PATH)],
+        cwd=ROOT,
+        check=False,
+    )
+    if landing_result.returncode != 0:
+        return landing_result.returncode
 
     discovery_result = subprocess.run(
         [sys.executable, str(DISCOVERY_BUILDER_PATH)],

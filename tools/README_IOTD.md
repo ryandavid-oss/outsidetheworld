@@ -40,6 +40,14 @@ That command updates `responsive_media.json`, refreshes
 homepage and Image of the Day archive. Run it after adding or changing public
 homepage media.
 
+To repair one or two newly published images without regenerating the entire
+media inventory, pass their exact public URLs:
+
+```bash
+python3 tools/build_responsive_media.py --upload \
+  --source "https://otw-media.ryandavid.workers.dev/o/iotd/example.jpg"
+```
+
 ## Recommended flow
 
 1. Place the image file in `Images/IOTD/`
