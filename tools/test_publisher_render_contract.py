@@ -349,6 +349,38 @@ def test_published_image_haze_uses_the_frgmnts_palette():
     assert "box-shadow: var(--archive-image-shadow)" in residue_html
 
 
+def test_archive_reader_fonts_are_local_preloaded_and_first_paint_stable():
+    font_files = [
+        "inter-latin-variable.woff2",
+        "merriweather-latin-variable.woff2",
+        "merriweather-latin-italic-variable.woff2",
+        "fira-code-latin-variable.woff2",
+    ]
+    reader_css = (ROOT / "archive_reader.css").read_text(encoding="utf-8")
+    preview_html = (ROOT / "publisher_preview.html").read_text(encoding="utf-8")
+    rendered = narrative_sync.render_share_page({
+        "title": "Local Font Fixture",
+        "date": "July 22, 2026",
+        "file": "2026-07-22-local-font-fixture.md",
+        "body": "The intended reader typography should be available before this sentence paints.",
+    })
+
+    assert reader_css.count("font-display: block") == 4
+    assert "fonts.googleapis.com" not in rendered
+    assert "fonts.gstatic.com" not in rendered
+    assert "archive_reader.css?v=20260722-self-hosted-fonts" in rendered
+
+    for filename in font_files:
+        font_path = ROOT / "assets" / "fonts" / filename
+        assert font_path.is_file()
+        assert font_path.stat().st_size > 30_000
+        assert font_path.read_bytes()[:4] == b"wOF2"
+        href = f'/assets/fonts/{filename}'
+        assert href in reader_css
+        assert f'rel="preload" as="font" href="{href}"' in rendered
+        assert f'rel="preload" as="font" href="{href}"' in preview_html
+
+
 def test_publisher_rich_formatting_metadata_restores_visual_styles():
     base_metadata = {
         "schema": "otw.publisher.post",
@@ -1129,6 +1161,7 @@ def run():
         test_metadata_cardinality_edge_cases_do_not_break_rendering,
         test_all_image_presentation_options_render_and_css_agrees,
         test_published_image_haze_uses_the_frgmnts_palette,
+        test_archive_reader_fonts_are_local_preloaded_and_first_paint_stable,
         test_sanitization_security_for_markdown_and_metadata,
         test_trusted_legacy_figure_blocks_are_preserved_but_sanitized,
         test_reused_image_url_can_keep_distinct_presentation_by_order_after_sanitization,
