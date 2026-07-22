@@ -356,6 +356,7 @@ def test_archive_reader_fonts_are_local_preloaded_and_first_paint_stable():
         "merriweather-latin-italic-variable.woff2",
         "fira-code-latin-variable.woff2",
     ]
+    font_css = (ROOT / "assets" / "fonts" / "otw-fonts.css").read_text(encoding="utf-8")
     reader_css = (ROOT / "archive_reader.css").read_text(encoding="utf-8")
     preview_html = (ROOT / "publisher_preview.html").read_text(encoding="utf-8")
     rendered = narrative_sync.render_share_page({
@@ -365,10 +366,14 @@ def test_archive_reader_fonts_are_local_preloaded_and_first_paint_stable():
         "body": "The intended reader typography should be available before this sentence paints.",
     })
 
-    assert reader_css.count("font-display: block") == 4
+    assert font_css.count("font-display: block") == 4
+    assert "@font-face" not in reader_css
+    assert "initReaderFonts" not in (ROOT / "archive_reader.js").read_text(encoding="utf-8")
     assert "fonts.googleapis.com" not in rendered
     assert "fonts.gstatic.com" not in rendered
-    assert "archive_reader.css?v=20260722-self-hosted-fonts" in rendered
+    assert "assets/fonts/otw-fonts.css?v=20260722a" in rendered
+    assert "archive_reader.css?v=20260722-typography-foundation" in rendered
+    assert "archive_reader.js?v=20260722-typography-foundation" in rendered
 
     for filename in font_files:
         font_path = ROOT / "assets" / "fonts" / filename
@@ -376,9 +381,42 @@ def test_archive_reader_fonts_are_local_preloaded_and_first_paint_stable():
         assert font_path.stat().st_size > 30_000
         assert font_path.read_bytes()[:4] == b"wOF2"
         href = f'/assets/fonts/{filename}'
-        assert href in reader_css
+        assert href in font_css
         assert f'rel="preload" as="font" href="{href}"' in rendered
         assert f'rel="preload" as="font" href="{href}"' in preview_html
+
+
+def test_public_typography_uses_one_deterministic_delivery_path():
+    font_href = "assets/fonts/otw-fonts.css?v=20260722a"
+    required_local_pages = [
+        "residue_archive.html",
+        "professional.html",
+        "wayback.html",
+        "image_of_the_day.html",
+        "poetry.html",
+        "drift_poetry.html",
+        "change_log.html",
+        "resume.html",
+        "museum.html",
+        "flotsam.html",
+        "favorites.html",
+        "mac30.html",
+        "emmy.html",
+        "ryandavid-burningham.html",
+        "insta.html",
+        "hipsta.html",
+        "post.html",
+        "view_post.html",
+    ]
+    for relative_path in required_local_pages:
+        source = (ROOT / relative_path).read_text(encoding="utf-8")
+        assert font_href in source, relative_path
+        assert "display=optional" not in source, relative_path
+        assert "@import url('https://fonts.googleapis.com" not in source, relative_path
+
+    discovery_generator = (ROOT / "tools" / "build_discovery.py").read_text(encoding="utf-8")
+    assert "../assets/fonts/otw-fonts.css?v=20260722a" in discovery_generator
+    assert "assets/fonts/otw-fonts.css?v=20260722a" in discovery_generator
 
 
 def test_publisher_rich_formatting_metadata_restores_visual_styles():
@@ -1162,6 +1200,7 @@ def run():
         test_all_image_presentation_options_render_and_css_agrees,
         test_published_image_haze_uses_the_frgmnts_palette,
         test_archive_reader_fonts_are_local_preloaded_and_first_paint_stable,
+        test_public_typography_uses_one_deterministic_delivery_path,
         test_sanitization_security_for_markdown_and_metadata,
         test_trusted_legacy_figure_blocks_are_preserved_but_sanitized,
         test_reused_image_url_can_keep_distinct_presentation_by_order_after_sanitization,

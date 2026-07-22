@@ -13,22 +13,23 @@ ROOT = Path(__file__).resolve().parents[1]
 
 ROUTE_BUDGETS = {
     "home": (60_000, ["index.html", "theme.css", "frontpage_payload.json"]),
-    "current-writing": (32_000, ["residue_archive.html", "theme.css", "narrative_index.json"]),
+    "current-writing": (32_000, ["residue_archive.html", "theme.css", "assets/fonts/otw-fonts.css", "narrative_index.json"]),
     "fragments": (22_000, ["fragments.html", "fragments.css", "fragments.js", "fragments_users.json"]),
-    "poetry": (20_000, ["drift_poetry.html", "theme.css", "new_poetry_data.js"]),
-    "professional": (18_000, ["professional.html", "theme.css"]),
+    "poetry": (20_000, ["drift_poetry.html", "theme.css", "assets/fonts/otw-fonts.css", "new_poetry_data.js"]),
+    "professional": (18_000, ["professional.html", "theme.css", "assets/fonts/otw-fonts.css"]),
     "current-essay": (
         24_000,
         [
             "@current-essay",
             "theme.css",
+            "assets/fonts/otw-fonts.css",
             "archive_reader.css",
             "archive_reader.js",
         ],
     ),
     "image-of-the-day": (
         23_000,
-        ["image_of_the_day.html", "IOTD_Main.html", "theme.css", "image_manifest.json"],
+        ["image_of_the_day.html", "IOTD_Main.html", "theme.css", "assets/fonts/otw-fonts.css", "image_manifest.json"],
     ),
 }
 
@@ -92,6 +93,9 @@ def check_loading_contracts() -> None:
 
     require("@import url('https://fonts.googleapis.com" not in poetry, "Poetry fonts must not block its inline CSS")
     require("@import url('https://fonts.googleapis.com" not in reader_css, "Reader fonts must not block article CSS")
+    require("display=optional" not in writing, "Current Writing must not make its intended fonts optional")
+    require("display=optional" not in professional, "Professional must not make its intended fonts optional")
+    require("fonts.googleapis.com" not in reader_js, "Reader JavaScript must not inject competing font definitions")
     require("data-fragment-src" in fragments_js, "Fragments must viewport-gate remote card media")
     require("IntersectionObserver" in fragments_js, "Fragments must retain its explicit image viewport gate")
     require("data-reader-src" in generator, "Generated adjacent-essay images must be source-deferred")
@@ -108,9 +112,66 @@ def check_loading_contracts() -> None:
             require("data-reader-src=" in tag and " src=" not in tag, f"{archive_path.name} eagerly loads adjacent media")
 
 
+def check_typography_contracts() -> None:
+    font_href = "assets/fonts/otw-fonts.css?v=20260722a"
+    font_css = (ROOT / "assets" / "fonts" / "otw-fonts.css").read_text(encoding="utf-8")
+    require(font_css.count("@font-face") == 4, "Shared typography must declare the four OTW core faces")
+    require(font_css.count("font-display: block") == 4, "Core OTW faces must remain stable at first paint")
+    require("fonts.googleapis.com" not in font_css, "Core OTW typography must stay same-origin")
+
+    required_root_pages = [
+        "residue_archive.html",
+        "professional.html",
+        "wayback.html",
+        "image_of_the_day.html",
+        "poetry.html",
+        "drift_poetry.html",
+        "change_log.html",
+        "resume.html",
+        "museum.html",
+        "flotsam.html",
+        "favorites.html",
+        "mac30.html",
+        "emmy.html",
+        "ryandavid-burningham.html",
+        "insta.html",
+        "hipsta.html",
+        "post.html",
+        "view_post.html",
+    ]
+    for relative_path in required_root_pages:
+        source = (ROOT / relative_path).read_text(encoding="utf-8")
+        require(font_href in source, f"{relative_path} is missing the shared typography foundation")
+        require("display=optional" not in source, f"{relative_path} makes its intended type optional")
+        require(
+            not re.search(r"@import\s+url\(['\"]https://fonts\.googleapis\.com", source),
+            f"{relative_path} blocks inline CSS on a remote font import",
+        )
+
+    for archive_path in sorted((ROOT / "archive").glob("*.html")):
+        source = archive_path.read_text(encoding="utf-8")
+        if "archive_reader.css" not in source:
+            continue
+        require("../assets/fonts/otw-fonts.css?v=20260722a" in source, f"{archive_path.name} lacks stable reader fonts")
+        require("archive_reader.css?v=20260722-typography-foundation" in source, f"{archive_path.name} has stale reader CSS")
+        require("archive_reader.js?v=20260722-typography-foundation" in source, f"{archive_path.name} has stale reader JavaScript")
+
+    generated_groups = ["wayback", "poems", "iotd", "fragments"]
+    for group in generated_groups:
+        for record_path in sorted((ROOT / group).glob("*.html")):
+            source = record_path.read_text(encoding="utf-8")
+            if "archive_entry.css" not in source:
+                continue
+            require("../assets/fonts/otw-fonts.css?v=20260722a" in source, f"{record_path} lacks stable record fonts")
+
+    threads = (ROOT / "threads.html").read_text(encoding="utf-8")
+    require(font_href in threads, "Threads lacks stable record fonts")
+
+
 def main() -> int:
     lines = check_route_budgets()
     check_loading_contracts()
+    check_typography_contracts()
     print("OK: first-click performance contracts are intact.")
     for line in lines:
         print(f"  {line}")

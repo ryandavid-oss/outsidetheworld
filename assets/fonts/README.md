@@ -10,3 +10,7 @@ pages do not depend on a third-party font request at reading time.
 The files were obtained from the Google Fonts distribution and are provided
 under the SIL Open Font License 1.1 in `OFL.txt`. They have been renamed only
 for stable local URLs.
+
+`otw-fonts.css` is the shared declaration layer. Public templates should link
+that stylesheet instead of declaring these faces again or injecting a remote
+font stylesheet after first paint.

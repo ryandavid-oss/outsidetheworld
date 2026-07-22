@@ -616,6 +616,8 @@ def render_record(
   <meta name="description" content="{html.escape(record.description, quote=True)}" />
   <link rel="canonical" href="{record.url}" />
   <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+  <link rel="preload" as="font" href="/assets/fonts/inter-latin-variable.woff2" type="font/woff2" crossorigin="anonymous" />
+  <link rel="stylesheet" href="../assets/fonts/otw-fonts.css?v=20260722a" />
   <link rel="stylesheet" href="../archive_entry.css" />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="Outside The World" />
@@ -847,6 +849,8 @@ def write_threads(groups: dict[str, list[DiscoveryRecord]]) -> None:
   <meta name="description" content="Recurring paths through Outside The World: Arizona, technology, faith, Latter-day Saint thought, poetry, and photography." />
   <link rel="canonical" href="{SITE_URL}/threads.html" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preload" as="font" href="/assets/fonts/inter-latin-variable.woff2" type="font/woff2" crossorigin="anonymous" />
+  <link rel="stylesheet" href="assets/fonts/otw-fonts.css?v=20260722a" />
   <link rel="stylesheet" href="archive_entry.css" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Outside The World" />

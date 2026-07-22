@@ -53,15 +53,16 @@
             } catch (error) {}
         }());
     </script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;900&family=Fira+Code:wght@300;500;700&family=Merriweather:ital,wght@0,300;0,700;1,300&display=optional" onload="this.onload=null;this.rel='stylesheet'" />
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;900&family=Fira+Code:wght@300;500;700&family=Merriweather:ital,wght@0,300;0,700;1,300&display=optional" /></noscript>
+    <link rel="preload" as="font" href="/assets/fonts/inter-latin-variable.woff2" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" as="font" href="/assets/fonts/merriweather-latin-variable.woff2" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" as="font" href="/assets/fonts/merriweather-latin-italic-variable.woff2" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" as="font" href="/assets/fonts/fira-code-latin-variable.woff2" type="font/woff2" crossorigin="anonymous" />
+    <link rel="stylesheet" href="assets/fonts/otw-fonts.css?v=20260722a" />
     <style>
         :root {
-            --brand-blue: var(--brand-blue);
-            --brand-teal: var(--brand-teal);
-            --bg-dark: var(--bg-dark);
+            --brand-blue: #6395EE;
+            --brand-teal: #91AFB3;
+            --bg-dark: #0a0a0a;
             --warm-amber: #FFB347;
             --rose-gold: #E0BFB8;
             --border-low: rgba(255, 255, 255, 0.08);
