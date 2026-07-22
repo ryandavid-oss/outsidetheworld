@@ -300,8 +300,8 @@
             letter-spacing: 0.035em;
             text-transform: uppercase;
             margin: 0;
-            font-size: clamp(2.8rem, 6.4vw, 6.6rem);
-            line-height: 0.88;
+            font-size: clamp(2.5rem, 5vw, 5.25rem);
+            line-height: 0.92;
             overflow-wrap: anywhere;
         }
 
@@ -682,8 +682,8 @@
 
             .hero-title {
                 margin: 0;
-                font-size: clamp(2.25rem, 11vw, 4.4rem);
-                line-height: 0.9;
+                font-size: clamp(2.05rem, 9.5vw, 3.8rem);
+                line-height: 0.92;
             }
 
             .hero-caption,
@@ -1143,7 +1143,7 @@
         function monthShortLabel(monthKey) {
             const [year, month] = monthKey.split('-').map(Number);
             return new Intl.DateTimeFormat('en-US', {
-                month: 'short',
+                month: 'long',
                 timeZone: 'UTC'
             }).format(new Date(Date.UTC(year, month - 1, 1))).toUpperCase();
         }
@@ -1168,7 +1168,7 @@
                 const sectionId = `month-${monthKey}`;
                 const jump = document.createElement('a');
                 jump.href = `#${sectionId}`;
-                jump.textContent = `${monthShortLabel(monthKey)}_${monthItems.length}`;
+                jump.textContent = `${monthShortLabel(monthKey)} · ${monthItems.length} ${monthItems.length === 1 ? 'IMAGE' : 'IMAGES'}`;
                 monthJump.appendChild(jump);
 
                 const section = document.createElement('section');
