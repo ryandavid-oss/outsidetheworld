@@ -198,7 +198,7 @@ const current_narrative = [
                     "objectKey": "narrative/2026-07-19-can-we-take-a-break-from-cynicism-mrtt7bvh.jpg",
                     "featureLayout": "natural",
                     "featureFocal": "center",
-                    "homepageFocal": "center",
+                    "homepageFocal": "left",
                     "displaySize": "large",
                     "alignment": "center",
                     "wrapMode": "none"
@@ -545,7 +545,7 @@ const current_narrative = [
                     "credit": "",
                     "featureLayout": "natural",
                     "featureFocal": "center",
-                    "homepageFocal": "center",
+                    "homepageFocal": "left",
                     "width": 1400,
                     "height": 669,
                     "displaySize": "large",
