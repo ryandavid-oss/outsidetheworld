@@ -78,6 +78,11 @@ def render_caption(markdown: str) -> str:
     return markdown_to_html(markdown or "")
 
 
+def render_signal_title(value: str) -> str:
+    # Preserve the underscore treatment while preferring meaningful wrap points.
+    return html.escape(value or "DAILY_SIGNAL").replace("_", "_<wbr>")
+
+
 def replace_marker(source: str, name: str, content: str) -> str:
     pattern = re.compile(
         rf"(?P<indent>^[ \t]*)<!-- {re.escape(name)}_START -->.*?^[ \t]*<!-- {re.escape(name)}_END -->",
@@ -117,13 +122,15 @@ def render_stage(items: list[dict[str, Any]], responsive: dict[str, Any]) -> tup
     atmosphere = f'--hero-atmosphere: url("{str(plan["src"]).replace(chr(34), "")}")'
 
     stage = f'''        <div class="hero-card is-{orientation(plan["width"], plan["height"])}" id="heroCard">
+            <header class="hero-heading">
+                <div id="heroDate" class="hero-date">{attr(str(current["date"]).replace("-", "_"))}</div>
+                <h2 id="heroTitle" class="hero-title">{render_signal_title(str(current.get("title") or "DAILY_SIGNAL"))}</h2>
+            </header>
             <div class="hero-visual">
                 <div class="hero-atmosphere" id="heroAtmosphere" aria-hidden="true" style="{attr(atmosphere)}"></div>
                 <img id="heroImg" class="hero-img" src="{attr(plan["src"])}"{size_attrs} alt="{attr(image_alt)}" loading="eager" decoding="async" fetchpriority="high" />
             </div>
             <div class="hero-meta">
-                <div id="heroDate" class="hero-date">{attr(str(current["date"]).replace("-", "_"))}</div>
-                <h2 id="heroTitle" class="hero-title">{html.escape(str(current.get("title") or "DAILY_SIGNAL"))}</h2>
                 <div id="heroCaption" class="hero-caption">{caption}</div>
 
                 <div class="hero-actions">
