@@ -65,7 +65,10 @@ def main() -> int:
     require(str(latest["image"]) in landing, "IOTD landing stage is not pre-rendered from the latest record")
     require("month-jump" in landing and "grouped = new Map()" in landing, "IOTD archive is not grouped by month")
     require("RANDOM_SIGNAL" in landing and "VIEW_RECORD" in landing, "IOTD discovery paths are missing")
-    require("hero-heading" in landing and "<wbr>" in landing, "IOTD title does not have a full-width wrapping strategy")
+    require(
+        "hero-heading" in landing and "hero-description" in landing and "<wbr>" in landing,
+        "IOTD masthead or description hierarchy is missing",
+    )
     require("assets/fonts/inter-latin-variable.woff2" in landing, "IOTD landing does not use self-hosted fonts")
     require("fonts.gstatic.com" not in landing, "IOTD landing still depends on remote font delivery")
 

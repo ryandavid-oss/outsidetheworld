@@ -121,9 +121,8 @@ def render_stage(items: list[dict[str, Any]], responsive: dict[str, Any]) -> tup
     image_alt = f"{current.get('title') or 'Image of the day'} // Image of the day"
     atmosphere = f'--hero-atmosphere: url("{str(plan["src"]).replace(chr(34), "")}")'
 
-    stage = f'''        <div class="hero-card is-{orientation(plan["width"], plan["height"])}" id="heroCard">
+    stage = f'''        <div class="hero-card is-{orientation(plan["width"], plan["height"])}" id="heroCard" style="{attr(atmosphere)}">
             <header class="hero-heading">
-                <div id="heroDate" class="hero-date">{attr(str(current["date"]).replace("-", "_"))}</div>
                 <h2 id="heroTitle" class="hero-title">{render_signal_title(str(current.get("title") or "DAILY_SIGNAL"))}</h2>
             </header>
             <div class="hero-visual">
@@ -131,7 +130,10 @@ def render_stage(items: list[dict[str, Any]], responsive: dict[str, Any]) -> tup
                 <img id="heroImg" class="hero-img" src="{attr(plan["src"])}"{size_attrs} alt="{attr(image_alt)}" loading="eager" decoding="async" fetchpriority="high" />
             </div>
             <div class="hero-meta">
-                <div id="heroCaption" class="hero-caption">{caption}</div>
+                <div class="hero-description">
+                    <div id="heroDate" class="hero-date">{attr(str(current["date"]).replace("-", "_"))}</div>
+                    <div id="heroCaption" class="hero-caption">{caption}</div>
+                </div>
 
                 <div class="hero-actions">
                     <a id="heroRecord" class="hero-btn hero-btn--primary" href="{attr(record_url(current))}">VIEW_RECORD</a>

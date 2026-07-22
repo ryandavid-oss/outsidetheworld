@@ -214,12 +214,41 @@
 
         .hero-heading {
             grid-area: heading;
+            position: relative;
+            isolation: isolate;
+            overflow: hidden;
             min-width: 0;
-            padding: clamp(25px, 3.5vw, 48px) clamp(28px, 5vw, 70px) clamp(28px, 4vw, 54px);
-            background:
-                linear-gradient(110deg, rgba(13, 15, 18, 0.99), rgba(8, 9, 11, 0.97)),
-                #0b0c0e;
+            min-height: clamp(150px, 15vw, 220px);
+            padding: clamp(30px, 4vw, 58px) clamp(28px, 5vw, 70px);
+            display: grid;
+            place-items: center;
+            text-align: center;
+            background: #0b0c0e;
             border-bottom: 1px solid rgba(160, 190, 245, 0.14);
+            box-shadow: inset 0 1px rgba(255, 255, 255, 0.035), inset 0 -1px rgba(0, 0, 0, 0.55);
+        }
+
+        .hero-heading::before {
+            content: "";
+            position: absolute;
+            z-index: -2;
+            inset: -34px;
+            background-image: var(--hero-atmosphere, none);
+            background-position: center;
+            background-size: cover;
+            filter: blur(38px) saturate(1.18) brightness(0.64);
+            transform: scale(1.09);
+            opacity: 0.74;
+        }
+
+        .hero-heading::after {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            inset: 0;
+            background:
+                linear-gradient(90deg, rgba(6, 8, 11, 0.76), rgba(6, 8, 11, 0.30) 50%, rgba(6, 8, 11, 0.76)),
+                linear-gradient(180deg, rgba(8, 10, 13, 0.18), rgba(8, 10, 13, 0.58));
         }
 
         .hero-visual {
@@ -277,7 +306,7 @@
             padding: clamp(28px, 4vw, 58px);
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
             align-items: flex-start;
             text-align: left;
             background:
@@ -296,13 +325,23 @@
         }
 
         .hero-title {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 18ch;
             font-weight: 900;
             letter-spacing: 0.035em;
             text-transform: uppercase;
             margin: 0;
             font-size: clamp(2.5rem, 5vw, 5.25rem);
             line-height: 0.92;
+            text-align: center;
+            text-shadow: 0 4px 34px rgba(0, 0, 0, 0.62);
             overflow-wrap: anywhere;
+        }
+
+        .hero-description {
+            width: 100%;
         }
 
         .hero-caption {
@@ -405,9 +444,12 @@
             border-top: 1px solid rgba(160, 190, 245, 0.12);
         }
 
-        .hero-card.is-landscape .hero-caption {
+        .hero-card.is-landscape .hero-description {
             grid-column: 1;
             grid-row: 1 / span 2;
+        }
+
+        .hero-card.is-landscape .hero-caption {
             max-width: 70ch;
         }
 
@@ -648,7 +690,8 @@
             }
 
             .hero-heading {
-                padding: 22px 20px 25px;
+                min-height: 132px;
+                padding: 26px 20px 29px;
             }
 
             .hero-visual,
@@ -673,7 +716,7 @@
                 border-left: 0;
             }
 
-            .hero-card.is-landscape .hero-caption,
+            .hero-card.is-landscape .hero-description,
             .hero-card.is-landscape .hero-actions,
             .hero-card.is-landscape .hero-paths {
                 grid-column: auto;
@@ -833,9 +876,8 @@
     <!-- HERO -->
     <section class="hero">
         <!-- IOTD_CURRENT_START -->
-        <div class="hero-card is-portrait" id="heroCard">
+        <div class="hero-card is-portrait" id="heroCard" style="--hero-atmosphere: url(&quot;https://otw-media.ryandavid.workers.dev/v/334f2966b0ac99be7a17/1200&quot;)">
             <header class="hero-heading">
-                <div id="heroDate" class="hero-date">2026_07_22</div>
                 <h2 id="heroTitle" class="hero-title">LOVE_<wbr>TO_<wbr>SEE_<wbr>IT</h2>
             </header>
             <div class="hero-visual">
@@ -843,7 +885,10 @@
                 <img id="heroImg" class="hero-img" src="https://otw-media.ryandavid.workers.dev/v/334f2966b0ac99be7a17/1200" width="1800" height="2400" srcset="https://otw-media.ryandavid.workers.dev/v/334f2966b0ac99be7a17/480 480w, https://otw-media.ryandavid.workers.dev/v/334f2966b0ac99be7a17/800 800w, https://otw-media.ryandavid.workers.dev/v/334f2966b0ac99be7a17/1200 1200w, https://otw-media.ryandavid.workers.dev/v/334f2966b0ac99be7a17/1600 1600w, https://otw-media.ryandavid.workers.dev/v/334f2966b0ac99be7a17/1800 1800w" sizes="(max-width: 768px) 100vw, (max-width: 1320px) 66vw, 960px" alt="LOVE_TO_SEE_IT // Image of the day" loading="eager" decoding="async" fetchpriority="high" />
             </div>
             <div class="hero-meta">
-                <div id="heroCaption" class="hero-caption"><p>Straight Carrie Underwood vibes, this. I took this picture almost a year ago. I really felt myself rooting for the spurned lover. I hope she didn’t stop with the spray paint job.</p></div>
+                <div class="hero-description">
+                    <div id="heroDate" class="hero-date">2026_07_22</div>
+                    <div id="heroCaption" class="hero-caption"><p>Straight Carrie Underwood vibes, this. I took this picture almost a year ago. I really felt myself rooting for the spurned lover. I hope she didn’t stop with the spray paint job.</p></div>
+                </div>
 
                 <div class="hero-actions">
                     <a id="heroRecord" class="hero-btn hero-btn--primary" href="iotd/2026-07-22-love-to-see-it-334f2966b0ac.html">VIEW_RECORD</a>
@@ -1093,6 +1138,7 @@
                 }
             };
             heroImg.src = plan.src;
+            heroCard.style.setProperty('--hero-atmosphere', cssImageUrl(plan.src));
             heroAtmosphere.style.setProperty('--hero-atmosphere', cssImageUrl(plan.src));
             heroImg.alt = item.title ? `${item.title} // Image of the day` : 'Image of the day';
             heroDate.textContent = (item.date || '').replaceAll('-', '_');
