@@ -1,0 +1,16 @@
+name = "otw-private-intake"
+main = "src/index.js"
+compatibility_date = "2026-07-23"
+workers_dev = true
+
+[vars]
+ALLOWED_ORIGINS = "https://outsidetheworld.com,https://www.outsidetheworld.com"
+
+[triggers]
+crons = ["17 9 * * *"]
+
+[[d1_databases]]
+binding = "INTAKE_DB"
+database_name = "otw-private-intake"
+database_id = "913d475a-7ff2-45e5-9cdd-b9bf09f667f4"
+migrations_dir = "migrations"

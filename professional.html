@@ -40,27 +40,6 @@
     <meta name="twitter:image" content="https://outsidetheworld.com/Images/SocialPreview.jpg">
 
     <!-- Analytics -->
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config', 'G-YKRKPFV2MB');
-        (() => {
-            let analyticsLoaded = false;
-            const loadAnalytics = () => {
-                if (analyticsLoaded) return;
-                analyticsLoaded = true;
-                const script = document.createElement('script');
-                script.async = true;
-                script.src = 'https://www.googletagmanager.com/gtag/js?id=G-YKRKPFV2MB';
-                document.head.appendChild(script);
-            };
-            ['pointerdown', 'keydown', 'touchstart'].forEach((eventName) => {
-                window.addEventListener(eventName, loadAnalytics, { once: true, passive: true });
-            });
-            window.addEventListener('load', () => window.setTimeout(loadAnalytics, 3500), { once: true });
-        })();
-    </script>
 
     <!-- Page CSS -->
     <style>
@@ -1444,7 +1423,7 @@
 
                             <button class="contact-submit" id="professionalInquirySubmit" type="submit">Send Inquiry</button>
                             <p class="contact-status" id="professionalInquiryStatus" role="status" aria-live="polite"></p>
-                            <p class="contact-legal">By sending an inquiry, you acknowledge the <a href="privacy.html">Privacy Notice</a> and <a href="terms.html">Terms of Use</a>.</p>
+                            <p class="contact-legal">We use these details to review and respond to your inquiry and ordinarily retain them for no more than two years. Please do not include sensitive or confidential information. See the <a href="privacy.html">Privacy Notice</a> and <a href="terms.html">Terms of Use</a>.</p>
                         </form>
                     </div>
                 </div>
@@ -1533,7 +1512,7 @@
         </footer>
     </div>
     <script>
-        const PROFESSIONAL_INQUIRY_ENDPOINT = "https://otw-fragments-publish.ryandavid.workers.dev/submit-professional-inquiry";
+        const PROFESSIONAL_INQUIRY_ENDPOINT = "https://otw-private-intake.ryandavid.workers.dev/submit-professional-inquiry";
         const professionalInquiryForm = document.getElementById("professionalInquiryForm");
         const professionalInquirySubmit = document.getElementById("professionalInquirySubmit");
         const professionalInquiryStatus = document.getElementById("professionalInquiryStatus");

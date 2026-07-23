@@ -4,10 +4,12 @@ const CHANGELOG_PATH = "changelog.json";
 const IMAGE_MANIFEST_PATH = "image_manifest.json";
 const WORDPERSON_MANIFEST_PATH = "wordperson_manifest.json";
 const DRIFT_POETRY_PATH = "new_poetry_data.js";
-const FRGMNTS_WAITLIST_PATH = "frgmnts_waitlist.json";
-const PROFESSIONAL_INQUIRIES_PATH = "professional_inquiries.json";
-const FRGMNTS_SUPPORT_REQUESTS_PATH = "frgmnts_support_requests.json";
-const FRGMNTS_SEAT_CHECKINS_PATH = "frgmnts_seat_checkins.json";
+const RETIRED_PUBLIC_INTAKE_PATHS = new Set([
+  "/subscribe-frgmnts-waitlist",
+  "/submit-frgmnts-support-request",
+  "/submit-frgmnts-seat-checkin",
+  "/submit-professional-inquiry"
+]);
 const CURRENT_NARRATIVE_DIR = "current_narrative";
 const PUBLISHER_DRAFT_OBJECT_KEY = "publisher_drafts/current.json.enc";
 const PUBLISHER_DRAFT_SCHEMA = "otw.publisher.serverDraft";
@@ -2094,6 +2096,16 @@ export default {
 
     const url = new URL(request.url);
 
+    if (
+      request.method === "POST" &&
+      RETIRED_PUBLIC_INTAKE_PATHS.has(url.pathname)
+    ) {
+      return jsonResponse({
+        ok: false,
+        error: "This submission route has moved to OTW's private intake service."
+      }, 410);
+    }
+
     if (request.method === "GET" && url.pathname === "/") {
       return jsonResponse({
         ok: true,
@@ -2105,10 +2117,6 @@ export default {
           publish_changelog_entry: "POST /publish-changelog-entry",
           publish_ghost_draft: "POST /publish-ghost-draft",
           publisher_draft: "GET,POST /publisher-draft",
-          subscribe_frgmnts_waitlist: "POST /subscribe-frgmnts-waitlist",
-          submit_frgmnts_support_request: "POST /submit-frgmnts-support-request",
-          submit_frgmnts_seat_checkin: "POST /submit-frgmnts-seat-checkin",
-          submit_professional_inquiry: "POST /submit-professional-inquiry",
           upload_ghost_image: "POST /upload-ghost-image",
           publish_iotd_entry: "POST /publish-iotd-entry",
           publish_wordperson_entry: "POST /publish-wordperson-entry",

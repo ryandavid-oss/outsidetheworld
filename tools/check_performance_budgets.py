@@ -87,8 +87,8 @@ def check_loading_contracts() -> None:
         "professional.html": professional,
     }.items():
         require(
-            not re.search(r'<script[^>]+src=["\']https://www\.googletagmanager\.com/gtag/js', text, re.I),
-            f"{path} must delay analytics instead of parser-discovering it",
+            "G-YKRKPFV2MB" not in text and "googletagmanager.com/gtag/js" not in text,
+            f"{path} must not load retired Google Analytics tracking",
         )
 
     require("@import url('https://fonts.googleapis.com" not in poetry, "Poetry fonts must not block its inline CSS")
