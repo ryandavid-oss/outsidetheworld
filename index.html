@@ -117,7 +117,7 @@
         html {
             min-width: 0;
             overflow-x: clip;
-            background: var(--void);
+            background: transparent !important;
         }
 
         body {
@@ -127,7 +127,8 @@
             overflow-x: clip;
             color: var(--text);
             font-family: var(--font-sans);
-            background:
+            background-color: var(--midnight-ink);
+            background-image:
                 linear-gradient(118deg, rgba(99, 149, 238, 0.13) 0%, rgba(99, 149, 238, 0.025) 28%, transparent 47%),
                 linear-gradient(242deg, rgba(145, 175, 179, 0.075) 0%, transparent 34%),
                 linear-gradient(180deg, var(--midnight-ink) 0%, var(--void) 46%, var(--deep-void) 100%);
