@@ -1225,6 +1225,10 @@
             opacity: 0.26;
         }
 
+        .color-button[hidden] {
+            display: none;
+        }
+
         .art-button {
             display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2400,6 +2404,7 @@
 
             var BASE_PATH = "/Images/Builder/";
             var SLOGAN_PATH = "/shirt_scripting.json";
+            var PRODUCT_CATALOG_PATH = "/data/products/dm132.json";
             var ORDER_ENDPOINT = "https://otw-private-intake.ryandavid.workers.dev/submit-shirt-order";
             var SHIRT_PRICE_CENTS = 2900;
             var NON_ARIZONA_SHIPPING_CENTS = 500;
@@ -2460,16 +2465,39 @@
             var COLOR_LOOKUP = new Map(DM130_COLORS.map(function (color) {
                 return [color.id, color];
             }));
+            var COLOR_OPTIONS = DM130_COLORS.slice();
             var COLOR_ALIASES = {
                 gray: "heathered-grey",
                 navyfrost: "navy-frost",
                 neptune: "heathered-neptune-blue"
             };
-            var LONG_SHIRT_FILES = {
-                black: "black",
-                "heathered-grey": "gray",
-                white: "white",
-                "navy-frost": "navyfrost"
+            var DM132_PRODUCT = {
+                style_number: "DM132",
+                product_name: "District Perfect Tri Long Sleeve Tee",
+                colors: [
+                    "Black",
+                    "Black Frost",
+                    "Blush Frost",
+                    "Flint Blue Heather",
+                    "Grey Frost",
+                    "Heathered Charcoal",
+                    "Military Green Frost",
+                    "Navy Frost",
+                    "New Navy",
+                    "Red Frost",
+                    "Royal Frost",
+                    "White"
+                ].map(function (colorName) {
+                    var slug = colorName.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+                    return {
+                        color_name: colorName,
+                        slug: slug,
+                        front_image: "/Images/Products/DM132/web/dm132-" + slug + "-front.webp",
+                        back_image: "/Images/Products/DM132/web/dm132-" + slug + "-back.webp",
+                        front_alt: "District DM132 Perfect Tri Long Sleeve Tee in " + colorName + " — front",
+                        back_alt: "District DM132 Perfect Tri Long Sleeve Tee in " + colorName + " — back"
+                    };
+                })
             };
             var LIGHT_SHIRTS = new Set([
                 "apricot",
@@ -2514,11 +2542,17 @@
             };
             var ART_OPTIONS = ["none", "brandmark", "full", "frgmnts"];
 
-            var SHIRT_COMBOS = DM130_COLORS.map(function (color) {
-                return { style: "short", color: color.id };
-            }).concat(Object.keys(LONG_SHIRT_FILES).map(function (color) {
-                return { style: "long", color: color };
-            }));
+            var SHIRT_COMBOS = [];
+
+            function rebuildShirtCombos() {
+                SHIRT_COMBOS = DM130_COLORS.map(function (color) {
+                    return { style: "short", color: color.id };
+                }).concat(DM132_PRODUCT.colors.map(function (color) {
+                    return { style: "long", color: color.slug };
+                }));
+            }
+
+            rebuildShirtCombos();
 
             var PLACEMENT = {
                 front: {
@@ -2647,12 +2681,29 @@
                 return color ? color.label : titleCase(value);
             }
 
-            function shirtFilename(color, style, side) {
+            function shirtImagePath(color, style, side) {
                 if (style === "short") {
-                    return "DM130/" + color + "-" + side + ".jpg";
+                    return BASE_PATH + "DM130/" + color + "-" + side + ".jpg";
                 }
 
-                return LONG_SHIRT_FILES[color] + "-long-" + side + ".jpg";
+                var productColor = DM132_PRODUCT.colors.find(function (candidate) {
+                    return candidate.slug === color;
+                });
+                if (!productColor) return "";
+                return side === "front" ? productColor.front_image : productColor.back_image;
+            }
+
+            function shirtPreviewAlt(color, style, side) {
+                if (style === "long") {
+                    var productColor = DM132_PRODUCT.colors.find(function (candidate) {
+                        return candidate.slug === color;
+                    });
+                    if (productColor) {
+                        return side === "front" ? productColor.front_alt : productColor.back_alt;
+                    }
+                }
+
+                return "District DM130 Perfect Tri Tee in " + colorLabel(color) + " — " + side;
             }
 
             function activeArt(side) {
@@ -2793,7 +2844,7 @@
             function renderColorButtons() {
                 colorGrid.innerHTML = "";
 
-                DM130_COLORS.forEach(function (color) {
+                COLOR_OPTIONS.forEach(function (color) {
                     var button = document.createElement("button");
                     button.className = "color-button";
                     button.type = "button";
@@ -2854,7 +2905,10 @@
                 editingSide.textContent = state.side;
                 colorAvailability.textContent = state.style === "short"
                     ? "DM130 · " + DM130_COLORS.length + " SanMar colors"
-                    : "Long sleeve · " + Object.keys(LONG_SHIRT_FILES).length + " available colors";
+                    : "DM132 · " + DM132_PRODUCT.colors.length + " SanMar colors";
+                canvas.dataset.frontImage = shirtImagePath(state.color, state.style, "front");
+                canvas.dataset.backImage = shirtImagePath(state.color, state.style, "back");
+                canvas.setAttribute("aria-label", shirtPreviewAlt(state.color, state.style, state.side));
 
                 var glow = LIGHT_SHIRTS.has(state.color)
                     ? "rgba(217, 192, 140, 0.26)"
@@ -2985,6 +3039,17 @@
                         2000,
                         2000
                     );
+                } else if (shirtImage.height / shirtImage.width > 1.35) {
+                    var containedHeight = 2000;
+                    var containedWidth = containedHeight * (shirtImage.width / shirtImage.height);
+                    var containedX = (2000 - containedWidth) / 2;
+                    targetContext.drawImage(
+                        shirtImage,
+                        containedX,
+                        0,
+                        containedWidth,
+                        containedHeight
+                    );
                 } else {
                     targetContext.drawImage(shirtImage, 0, 0, 2000, 2000);
                 }
@@ -2994,7 +3059,7 @@
 
             async function drawDesign(targetContext, side) {
                 var art = side === "front" ? state.frontArt : state.backArt;
-                var shirtUrl = BASE_PATH + shirtFilename(state.color, state.style, side);
+                var shirtUrl = shirtImagePath(state.color, state.style, side);
                 var logoUrl = resolveLogoPath(art, state.color);
                 var shirtPromise = loadImage(shirtUrl);
                 var logoPromise = logoUrl ? loadArtworkAsImage(logoUrl) : Promise.resolve(null);
@@ -3412,7 +3477,7 @@
                 document.querySelectorAll("[data-style]").forEach(function (button) {
                     button.addEventListener("click", function () {
                         state.style = button.dataset.style;
-                        var replacement = DM130_COLORS.find(function (color) {
+                        var replacement = COLOR_OPTIONS.find(function (color) {
                             return isValidCombo(state.style, color.id);
                         });
                         var colorChanged = !isValidCombo(state.style, state.color);
@@ -3421,6 +3486,7 @@
                             state.color = replacement.id;
                         }
 
+                        colorGrid.scrollTop = 0;
                         setMessage(
                             titleCase(state.style) + " sleeves selected." +
                             (colorChanged ? " Switched to " + colorLabel(state.color) + ", an available color." : "")
@@ -3521,9 +3587,59 @@
                 }
             }
 
+            async function loadProductCatalog() {
+                try {
+                    var response = await fetch(PRODUCT_CATALOG_PATH, { cache: "no-store" });
+                    if (!response.ok) throw new Error("Could not load DM132 product data");
+                    var product = await response.json();
+                    if (
+                        product.style_number !== "DM132" ||
+                        product.product_name !== "District Perfect Tri Long Sleeve Tee" ||
+                        !Array.isArray(product.colors) ||
+                        !product.colors.length
+                    ) {
+                        throw new Error("DM132 product data is incomplete");
+                    }
+
+                    var slugs = new Set();
+                    var imagePaths = new Set();
+                    product.colors.forEach(function (color) {
+                        if (
+                            !color.color_name ||
+                            !color.slug ||
+                            !color.front_image ||
+                            !color.back_image ||
+                            !color.front_alt ||
+                            !color.back_alt ||
+                            slugs.has(color.slug) ||
+                            imagePaths.has(color.front_image) ||
+                            imagePaths.has(color.back_image)
+                        ) {
+                            throw new Error("DM132 contains a missing or duplicate color asset");
+                        }
+                        slugs.add(color.slug);
+                        imagePaths.add(color.front_image);
+                        imagePaths.add(color.back_image);
+                    });
+
+                    DM132_PRODUCT = product;
+                } catch (error) {
+                    console.warn(error.message + "; using the bundled DM132 catalog fallback.");
+                }
+
+                DM132_PRODUCT.colors.forEach(function (color) {
+                    if (!COLOR_LOOKUP.has(color.slug)) {
+                        var option = { id: color.slug, label: color.color_name };
+                        COLOR_OPTIONS.push(option);
+                        COLOR_LOOKUP.set(option.id, option);
+                    }
+                });
+                rebuildShirtCombos();
+            }
+
             async function init() {
-                renderState.textContent = "Loading phrases";
-                await loadSlogans();
+                renderState.textContent = "Loading catalog";
+                await Promise.all([loadSlogans(), loadProductCatalog()]);
                 renderPhraseButtons();
                 renderColorButtons();
 
