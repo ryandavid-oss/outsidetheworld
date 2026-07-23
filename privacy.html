@@ -238,6 +238,7 @@
             <li><strong>Professional inquiries:</strong> name, contact information, inquiry type, comment, and submission time.</li>
             <li><strong>Support:</strong> name, email address, optional frgm&lt;nts handle, support topic, message, urgency choice, and submission time.</li>
             <li><strong>Seat check-ins:</strong> name, email address, onboarding responses, optional message, reply preference, and submission time.</li>
+            <li><strong>Shirt order requests:</strong> name, email address, Venmo username, shirt size, shipping address and state, optional note, selected design details, a rendered copy of the finished design, price and custom-order-terms confirmations, and submission time. We do not ask for Venmo passwords, PINs, bank accounts, or card numbers.</li>
             <li><strong>Direct communications:</strong> whatever information you choose to include when you email us.</li>
             <li><strong>Basic request data:</strong> hosting and security providers may process IP address, browser or device information, requested page, referring page, and request time when serving or protecting the site.</li>
           </ul>
@@ -258,6 +259,7 @@
             <li>Operate, secure, troubleshoot, and improve the site and related services.</li>
             <li>Maintain the frgm&lt;nts waitlist and send requested launch communications.</li>
             <li>Review and respond to professional inquiries, support requests, and seat check-ins.</li>
+            <li>Review, confirm, fulfill, and support shirt order requests and related payment communications.</li>
             <li>Prevent spam, abuse, unauthorized access, and other harmful activity.</li>
             <li>Comply with law and establish, exercise, or defend legal claims where necessary.</li>
           </ul>
@@ -266,13 +268,17 @@
         <section class="section">
           <h2>5. Storage and Service Providers</h2>
           <p>
-            New public form submissions are stored in a private Cloudflare D1 database and are not written into OTW's
-            public site repository. A previous repo-backed waitlist implementation was discontinued in July 2026.
+            New public form submissions are stored in a private Cloudflare D1 database. Rendered shirt-order artwork is
+            stored in a private Cloudflare R2 bucket. Shirt order details and a time-limited, unguessable artwork
+            download link may also be delivered to the site operator through Formspree as an order notification.
+            Submissions and order artwork are not written into OTW's public site repository. A previous repo-backed
+            waitlist implementation was discontinued in July 2026.
           </p>
           <p>
             We use service providers to operate the site, including Cloudflare for hosting, security, media, Workers,
-            and private database storage; GitHub for public site source and public content; and email providers for
-            direct communications. They may process information only as needed to provide their services to us and
+            and private database and object storage; GitHub for public site source and public content; Formspree for
+            shirt-order notifications; Venmo for separately authorized goods-and-services payments; and email providers
+            for direct communications. They may process information only as needed to provide their services to us and
             under their own applicable terms and privacy commitments.
           </p>
           <p>
@@ -306,6 +312,7 @@
             <li>Waitlist records: until launch outreach is complete, you request deletion, or two years after submission, whichever comes first.</li>
             <li>Professional inquiries: ordinarily no more than two years.</li>
             <li>Support requests and seat check-ins: ordinarily no more than twelve months.</li>
+            <li>Shirt order requests and rendered order artwork: ordinarily no more than two years.</li>
             <li>Privacy-request records: only as long as reasonably needed to document and complete the request.</li>
           </ul>
           <p>
@@ -351,8 +358,9 @@
           <h2>12. Security and Sensitive Information</h2>
           <p>
             We use reasonable administrative and technical measures appropriate to the information we hold. No internet
-            service is completely secure. Please do not submit government identifiers, payment information, medical
-            information, passwords, or other highly sensitive information through OTW forms.
+            service is completely secure. The shirt order form asks only for a Venmo username so we can send a separate
+            payment request. Please do not submit government identifiers, payment card or bank details, medical
+            information, passwords, PINs, or other highly sensitive information through OTW forms.
           </p>
         </section>
 

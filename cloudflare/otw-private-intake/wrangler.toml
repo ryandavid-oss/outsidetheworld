@@ -5,6 +5,7 @@ workers_dev = true
 
 [vars]
 ALLOWED_ORIGINS = "https://outsidetheworld.com,https://www.outsidetheworld.com"
+ORDER_NOTIFICATION_ENDPOINT = "https://formspree.io/f/xgolrnkb"
 
 [triggers]
 crons = ["17 9 * * *"]
@@ -14,3 +15,7 @@ binding = "INTAKE_DB"
 database_name = "otw-private-intake"
 database_id = "913d475a-7ff2-45e5-9cdd-b9bf09f667f4"
 migrations_dir = "migrations"
+
+[[r2_buckets]]
+binding = "ORDER_ARTIFACTS"
+bucket_name = "otw-private-orders"
