@@ -1137,6 +1137,32 @@
             grid-template-columns: repeat(2, minmax(0, 1fr));
         }
 
+        .art-side-switch {
+            display: grid;
+            grid-template-columns: auto minmax(220px, 1fr);
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            border: 2px solid rgba(255, 105, 180, 0.22);
+            border-radius: 11px;
+            background: rgba(255, 105, 180, 0.06);
+            padding: 10px;
+        }
+
+        .art-side-switch__label {
+            color: rgba(247, 242, 247, 0.72);
+            font-family: var(--font-game);
+            font-size: 0.54rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            line-height: 1.4;
+            text-transform: uppercase;
+        }
+
+        .art-side-switch .pixel-button {
+            min-height: 46px;
+        }
+
         .color-grid {
             display: grid;
             grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -2042,6 +2068,11 @@
                 grid-template-columns: repeat(2, minmax(0, 1fr));
             }
 
+            .art-side-switch {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
             .phrase-grid {
                 grid-template-columns: 1fr;
             }
@@ -2160,6 +2191,16 @@
                             aria-pressed="false">Lock</button>
                     </div>
 
+                    <div class="art-side-switch">
+                        <span class="art-side-switch__label">Artwork side</span>
+                        <div class="button-grid" aria-label="Choose which side to customize">
+                            <button class="pixel-button" type="button" data-side="front"
+                                aria-pressed="true">Front</button>
+                            <button class="pixel-button" type="button" data-side="back"
+                                aria-pressed="false">Back</button>
+                        </div>
+                    </div>
+
                     <div class="button-grid button-grid--four" aria-label="Artwork for the visible side">
                         <button class="pixel-button art-button" type="button" data-art="none"
                             aria-pressed="false">
@@ -2188,8 +2229,8 @@
                             </span>
                         </button>
                     </div>
-                    <p class="tiny-truth">You are editing the <strong id="editingSide">front</strong>. Flip the shirt to
-                        dress the other side.</p>
+                    <p class="tiny-truth" aria-live="polite">Changes apply to the <strong
+                            id="editingSide">front</strong> of the shirt.</p>
                 </section>
 
                 <section class="control-section" aria-labelledby="words-heading">
