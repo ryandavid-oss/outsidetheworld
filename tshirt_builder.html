@@ -604,8 +604,7 @@
             background: #a86b9d;
         }
 
-        .pixel-runner[data-motion="jump"] .pixel-runner__sprite,
-        .pixel-runner[data-motion="turn-hop"] .pixel-runner__sprite {
+        .pixel-runner[data-motion="jump"] .pixel-runner__sprite {
             animation: none;
             background-image: url("/Images/Builder/signal-ranger-jump-takeoff.png");
             background-position: center;
@@ -614,7 +613,6 @@
         }
 
         .pixel-runner[data-motion="jump"][data-jump-phase="airborne"] .pixel-runner__sprite,
-        .pixel-runner[data-motion="turn-hop"][data-jump-phase="airborne"] .pixel-runner__sprite,
         .pixel-runner[data-motion="fall"] .pixel-runner__sprite {
             background-image: url("/Images/Builder/signal-ranger-jump-airborne.png");
             background-position: center;
@@ -668,7 +666,6 @@
         }
 
         .pixel-runner[data-motion="jump"] .pixel-runner__dust,
-        .pixel-runner[data-motion="turn-hop"] .pixel-runner__dust,
         .pixel-runner[data-motion="crouch"] .pixel-runner__dust,
         .pixel-runner[data-motion="land"] .pixel-runner__dust,
         .pixel-runner[data-motion="idle"] .pixel-runner__dust,
@@ -681,7 +678,6 @@
         }
 
         .pixel-runner[data-motion="jump"] .pixel-runner__shadow,
-        .pixel-runner[data-motion="turn-hop"] .pixel-runner__shadow,
         .pixel-runner[data-motion="climb"] .pixel-runner__shadow,
         .pixel-runner[data-motion="fall"] .pixel-runner__shadow,
         .pixel-runner[data-motion="wall-slide"] .pixel-runner__shadow,
@@ -2766,7 +2762,7 @@
 
             var LOGOS = {
                 full_light: BASE_PATH + "Main Logo.svg",
-                full_dark: BASE_PATH + "Main Logo Dark.svg",
+                full_dark: BASE_PATH + "Main Logo Dark.png",
                 mark_light: BASE_PATH + "OTW_Brandmark.svg",
                 mark_dark: BASE_PATH + "OTW_Brandmark_dark.svg",
                 frgmnts: BASE_PATH + "frgmnts_logo_2026.png"
@@ -2906,12 +2902,9 @@
                     jumpPhaseUntil: 0,
                     landUntil: 0,
                     idleUntil: reducedMotion ? Infinity : 0,
-                    turnHopAt: 0,
-                    turnHopStartedAt: 0,
-                    turnBaseFeetY: 0,
-                    turnFlipped: false,
-                    nextPauseAt: startedAt + 3200 + Math.random() * 3200,
+                    nextPauseAt: startedAt + 2200 + Math.random() * 1800,
                     lapRoute: chooseLapRoute(),
+                    exploreHops: 0,
                     routeTriggered: false,
                     canCatch: Math.random() < 0.42,
                     wallSlideUntil: 0
@@ -2919,6 +2912,15 @@
 
                 function chooseLapRoute() {
                     var roll = Math.random();
+
+                    if (window.innerWidth >= 960) {
+                        if (roll < 0.18) return "buttons";
+                        if (roll < 0.34) return "section";
+                        if (roll < 0.50) return "channel";
+                        if (roll < 0.88) return "explore";
+                        return "parkour";
+                    }
+
                     if (roll < 0.28) return "buttons";
                     if (roll < 0.54) return "section";
                     if (roll < 0.80) return "channel";
@@ -3139,6 +3141,83 @@
                     return candidates[Math.floor(Math.random() * candidates.length)];
                 }
 
+                function desktopExploreTarget(excludeElement) {
+                    if (window.innerWidth < 960 || motion.direction < 0) return null;
+
+                    var startX = runnerFootX();
+                    var maximumForward = Math.min(560, window.innerWidth * 0.46);
+                    var maximumRise = Math.min(320, runnerWidth * 3.15);
+                    var candidates = terrain.filter(function (item) {
+                        var targetCenter = (item.left + item.right) / 2;
+
+                        return (
+                            item.element !== excludeElement &&
+                            targetCenter > startX + 28 &&
+                            targetCenter < startX + maximumForward &&
+                            item.top >= motion.feetY - maximumRise &&
+                            item.top < motion.feetY - 12 &&
+                            item.top > 8 &&
+                            item.right < window.innerWidth + 4 &&
+                            item.width >= 30
+                        );
+                    }).map(function (item) {
+                        var targetCenter = (item.left + item.right) / 2;
+                        var forward = targetCenter - startX;
+                        var rise = motion.feetY - item.top;
+                        var interactiveBonus = item.element.matches(
+                            ".pixel-button, .color-button, .readout-cell"
+                        ) ? 34 : 0;
+                        var score = (
+                            Math.abs(forward - 220) * 0.22 +
+                            Math.abs(rise - 105) * 0.18 -
+                            Math.min(item.width, 180) * 0.08 -
+                            interactiveBonus
+                        );
+
+                        return { item: item, score: score };
+                    }).sort(function (first, second) {
+                        return first.score - second.score;
+                    });
+
+                    if (!candidates.length) return null;
+                    var shortlist = candidates.slice(0, Math.min(3, candidates.length));
+                    return shortlist[Math.floor(Math.random() * shortlist.length)].item;
+                }
+
+                function maybeStartExploreRoute() {
+                    if (
+                        motion.direction < 0 ||
+                        motion.lapRoute !== "explore" ||
+                        motion.routeTriggered ||
+                        motion.x < runnerWidth * 0.15
+                    ) {
+                        return false;
+                    }
+
+                    var target = desktopExploreTarget(motion.support);
+                    if (!target) return false;
+
+                    motion.exploreHops = 1;
+                    return beginTargetedJump(target);
+                }
+
+                function maybeContinueExploreRoute(supportRect) {
+                    if (
+                        motion.direction < 0 ||
+                        motion.lapRoute !== "explore" ||
+                        !supportRect ||
+                        motion.exploreHops >= 4
+                    ) {
+                        return false;
+                    }
+
+                    var target = desktopExploreTarget(supportRect.element);
+                    if (!target) return false;
+
+                    motion.exploreHops += 1;
+                    return beginTargetedJump(target);
+                }
+
                 function channelGeometry(stageRect) {
                     if (!stageRect || !colorGrid) return null;
                     var swatchRect = colorGrid.getBoundingClientRect();
@@ -3269,25 +3348,46 @@
                     return true;
                 }
 
+                function canTurnOn(supportRect) {
+                    if (!supportRect) return true;
+                    if (supportRect.width < runnerWidth * 0.82) return false;
+
+                    var footX = runnerFootX();
+                    var margin = Math.min(
+                        runnerWidth * 0.28,
+                        supportRect.width * 0.22
+                    );
+
+                    return (
+                        footX >= supportRect.left + margin &&
+                        footX <= supportRect.right - margin
+                    );
+                }
+
                 function schedulePause(now) {
-                    motion.nextPauseAt = now + 4200 + Math.random() * 4200;
+                    motion.nextPauseAt = now + 5000 + Math.random() * 5000;
                 }
 
                 function beginIdle(now) {
                     motion.vx = 0;
-                    motion.idleUntil = now + 720 + Math.random() * 760;
-                    schedulePause(now);
+                    motion.idleUntil = now + 520 + Math.random() * 420;
                     setMotion("idle");
                 }
 
                 function beginTurn(now) {
                     motion.vx = 0;
-                    motion.turnHopAt = now + 90;
-                    motion.turnHopStartedAt = 0;
-                    motion.turnBaseFeetY = motion.feetY;
-                    motion.turnFlipped = false;
+                    setFacing(-motion.direction);
+
+                    if (motion.direction > 0) {
+                        motion.lapRoute = chooseLapRoute();
+                        motion.exploreHops = 0;
+                        motion.routeTriggered = false;
+                        motion.canCatch = Math.random() < 0.42;
+                    }
+
+                    motion.vx = runSpeed * motion.direction;
                     schedulePause(now);
-                    setMotion("crouch");
+                    setMotion("run");
                 }
 
                 function settleLanding(surface, now) {
@@ -3309,6 +3409,7 @@
                     motion.climbTarget = null;
                     motion.hangUntil = 0;
                     motion.lapRoute = chooseLapRoute();
+                    motion.exploreHops = 0;
                     motion.routeTriggered = false;
                     motion.canCatch = Math.random() < 0.42;
                     motion.wallSlideUntil = 0;
@@ -3327,47 +3428,9 @@
                         runnerWidth = measuredWidth;
                     }
 
-                    if (motion.mode === "crouch") {
-                        if (now >= motion.turnHopAt) {
-                            motion.turnHopStartedAt = now;
-                            setMotion("turn-hop");
-                            setJumpPhase("takeoff");
-                        }
-                    } else if (motion.mode === "turn-hop") {
-                        var turnProgress = Math.min(
-                            1,
-                            (now - motion.turnHopStartedAt) / 270
-                        );
-                        var turnLift = Math.sin(turnProgress * Math.PI) * Math.min(
-                            18,
-                            runnerWidth * 0.17
-                        );
-
-                        motion.feetY = motion.turnBaseFeetY - turnLift;
-
-                        if (
-                            turnProgress >= 0.22 &&
-                            pixelRunner.dataset.jumpPhase !== "airborne"
-                        ) {
-                            setJumpPhase("airborne");
-                        }
-
-                        if (!motion.turnFlipped && turnProgress >= 0.5) {
-                            setFacing(-motion.direction);
-                            motion.turnFlipped = true;
-                        }
-
-                        if (turnProgress >= 1) {
-                            settleLanding(null, now);
-                        }
-                    } else if (motion.mode === "idle") {
+                    if (motion.mode === "idle") {
                         if (now >= motion.idleUntil) {
-                            if (Math.random() < 0.72) {
-                                beginTurn(now);
-                            } else {
-                                motion.vx = runSpeed * motion.direction;
-                                setMotion("run");
-                            }
+                            beginTurn(now);
                         }
                     } else if (motion.mode === "land") {
                         if (now >= motion.landUntil) {
@@ -3459,13 +3522,15 @@
 
                         if (motion.mode === "run") {
                             var canPauseHere = (
-                                !motion.support &&
+                                canTurnOn(supportRect) &&
                                 motion.x > runnerWidth * 0.15 &&
                                 motion.x < window.innerWidth - runnerWidth * 1.15
                             );
 
                             if (canPauseHere && now >= motion.nextPauseAt) {
                                 beginIdle(now);
+                            } else if (maybeStartExploreRoute()) {
+                                supportRect = null;
                             } else if (maybeStartButtonRoute()) {
                                 supportRect = null;
                             } else {
@@ -3505,6 +3570,7 @@
                                         if (leftSupport) {
                                             if (
                                                 !maybeContinueButtonRoute(supportRect) &&
+                                                !maybeContinueExploreRoute(supportRect) &&
                                                 !maybeUseLedgeRoute(now, supportRect)
                                             ) {
                                                 beginJump(null);
