@@ -2824,10 +2824,6 @@
                 updatePressed("[data-color]", state.color, "color");
                 updatePressed("[data-art]", activeArt(state.side), "art");
 
-                document.querySelectorAll("[data-style]").forEach(function (button) {
-                    button.disabled = !isValidCombo(button.dataset.style, state.color);
-                });
-
                 document.querySelectorAll("[data-color]").forEach(function (button) {
                     var available = isValidCombo(state.style, button.dataset.color);
                     button.disabled = !available;
@@ -3415,9 +3411,20 @@
 
                 document.querySelectorAll("[data-style]").forEach(function (button) {
                     button.addEventListener("click", function () {
-                        if (button.disabled) return;
                         state.style = button.dataset.style;
-                        setMessage("Sleeves adjusted.");
+                        var replacement = DM130_COLORS.find(function (color) {
+                            return isValidCombo(state.style, color.id);
+                        });
+                        var colorChanged = !isValidCombo(state.style, state.color);
+
+                        if (colorChanged && replacement) {
+                            state.color = replacement.id;
+                        }
+
+                        setMessage(
+                            titleCase(state.style) + " sleeves selected." +
+                            (colorChanged ? " Switched to " + colorLabel(state.color) + ", an available color." : "")
+                        );
                         commit();
                     });
                 });
