@@ -1139,7 +1139,7 @@
 
         .color-grid {
             display: grid;
-            grid-template-columns: repeat(5, minmax(0, 1fr));
+            grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: 8px;
             max-height: 342px;
             margin-top: 10px;
@@ -1151,8 +1151,12 @@
 
         .color-button {
             position: relative;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            align-items: stretch;
             min-width: 0;
-            min-height: 58px;
+            min-height: 84px;
+            overflow: hidden;
             border: 2px solid rgba(255, 255, 255, 0.20);
             border-radius: 10px;
             background: linear-gradient(180deg, #2a2f3d, #151820 70%, #0c0e13);
@@ -1162,9 +1166,9 @@
                 0 5px 0 var(--void-deep);
             color: var(--ink);
             cursor: pointer;
-            padding: 7px 4px 6px;
+            padding: 0;
             font-family: var(--font-game);
-            font-size: 0.44rem;
+            font-size: 0.68rem;
             font-weight: 700;
             letter-spacing: 0.04em;
             line-height: 1.25;
@@ -1176,13 +1180,27 @@
         .color-button::before {
             content: "";
             display: block;
-            width: 24px;
-            height: 24px;
-            margin: 0 auto 5px;
-            border: 2px solid rgba(255, 255, 255, 0.48);
-            border-radius: 6px;
+            grid-column: 2;
+            grid-row: 1;
+            width: 100%;
+            height: 100%;
+            border-left: 2px solid rgba(255, 255, 255, 0.34);
+            border-radius: 0 8px 8px 0;
             background: #fff var(--swatch-image) center / cover no-repeat;
-            box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.80);
+            box-shadow:
+                inset 3px 0 0 rgba(0, 0, 0, 0.16),
+                inset 0 2px 0 rgba(255, 255, 255, 0.18);
+        }
+
+        .color-button__label {
+            display: grid;
+            grid-column: 1;
+            grid-row: 1;
+            min-width: 0;
+            place-items: center;
+            padding: 10px 7px 9px;
+            overflow-wrap: anywhere;
+            text-wrap: balance;
         }
 
         .color-button:hover:not(:disabled),
@@ -1406,10 +1424,11 @@
 
         .order-preview-frame {
             display: grid;
-            min-height: 180px;
+            width: 85%;
+            min-height: 153px;
             place-items: center;
             overflow: hidden;
-            margin-bottom: 20px;
+            margin: 0 auto 20px;
             border: 2px solid rgba(160, 190, 245, 0.24);
             border-radius: 12px;
             background:
@@ -1967,7 +1986,7 @@
             }
 
             .color-grid {
-                grid-template-columns: repeat(3, minmax(0, 1fr));
+                grid-template-columns: repeat(2, minmax(0, 1fr));
             }
 
             .button-grid--four {
@@ -2731,7 +2750,10 @@
                         "--swatch-image",
                         "url(\"" + BASE_PATH + "DM130/swatches/" + color.id + ".gif\")"
                     );
-                    button.textContent = color.label;
+                    var label = document.createElement("span");
+                    label.className = "color-button__label";
+                    label.textContent = color.label;
+                    button.appendChild(label);
                     colorGrid.appendChild(button);
                 });
             }
