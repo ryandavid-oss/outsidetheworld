@@ -530,25 +530,33 @@
         }
 
         .pixel-runner {
-            position: absolute;
-            bottom: 27.5%;
-            left: -140px;
-            z-index: 3;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 20;
             width: clamp(76px, 7vw, 112px);
             aspect-ratio: 1;
+            pointer-events: none;
             filter: drop-shadow(7px 8px 0 rgba(0, 0, 0, 0.38));
-            animation: foundry-cross 15s linear infinite;
+            transform: translate3d(-140px, calc(72.5vh - 100%), 0);
             will-change: transform;
         }
 
         .pixel-runner__sprite {
             position: absolute;
             inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
+            display: block;
+            background: url("/Images/Builder/signal-ranger-run-10pose-balanced-gait-sheet.png") 0 center / 1000% 100% no-repeat;
             image-rendering: pixelated;
+            scale: 1 1;
             transform-origin: center bottom;
+            animation:
+                ranger-run-frames 720ms steps(9, end) infinite,
+                foundry-stride 600ms steps(2, end) infinite;
+        }
+
+        .pixel-runner[data-facing="left"] .pixel-runner__sprite {
+            scale: -1 1;
         }
 
         .pixel-runner__shadow {
@@ -578,6 +586,12 @@
             animation: foundry-dust 600ms steps(10, end) infinite;
         }
 
+        .pixel-runner[data-facing="left"] .pixel-runner__dust {
+            right: 3px;
+            left: auto;
+            scale: -1 1;
+        }
+
         .pixel-runner__dust::before {
             top: -7px;
             left: -10px;
@@ -588,6 +602,106 @@
             top: 4px;
             left: -18px;
             background: #a86b9d;
+        }
+
+        .pixel-runner[data-motion="jump"] .pixel-runner__sprite,
+        .pixel-runner[data-motion="turn-hop"] .pixel-runner__sprite {
+            animation: none;
+            background-image: url("/Images/Builder/signal-ranger-jump-takeoff.png");
+            background-position: center;
+            background-size: 100% 100%;
+            transform: translateY(-1px);
+        }
+
+        .pixel-runner[data-motion="jump"][data-jump-phase="airborne"] .pixel-runner__sprite,
+        .pixel-runner[data-motion="turn-hop"][data-jump-phase="airborne"] .pixel-runner__sprite,
+        .pixel-runner[data-motion="fall"] .pixel-runner__sprite {
+            background-image: url("/Images/Builder/signal-ranger-jump-airborne.png");
+            background-position: center;
+            background-size: 100% 100%;
+            transform: translateY(-2px);
+        }
+
+        .pixel-runner[data-motion="crouch"] .pixel-runner__sprite,
+        .pixel-runner[data-motion="land"] .pixel-runner__sprite {
+            animation: ranger-crouch-settle 160ms steps(2, end) infinite alternate;
+            background-image: url("/Images/Builder/signal-ranger-crouch.png");
+            background-position: center;
+            background-size: 100% 100%;
+        }
+
+        .pixel-runner[data-motion="climb"] .pixel-runner__sprite {
+            animation:
+                ranger-climb-frames 380ms linear infinite,
+                foundry-climb 380ms steps(2, end) infinite alternate;
+            background-image: url("/Images/Builder/signal-ranger-climb-2frame-sheet.png");
+            background-position: 0 center;
+            background-size: 200% 100%;
+        }
+
+        .pixel-runner[data-motion="fall"] .pixel-runner__sprite {
+            animation: none;
+        }
+
+        .pixel-runner[data-motion="wall-slide"] .pixel-runner__sprite {
+            animation: ranger-wall-slide 320ms steps(2, end) infinite alternate;
+            background-position: 44.444% center;
+        }
+
+        .pixel-runner[data-motion="hang"] .pixel-runner__sprite {
+            animation: none;
+            background-position: 55.556% center;
+            transform: translate(5px, 5px) rotate(-14deg);
+        }
+
+        .pixel-runner[data-motion="idle"] .pixel-runner__sprite,
+        .pixel-runner[data-motion="idle"] .pixel-runner__dust,
+        .pixel-runner[data-motion="idle"] .pixel-runner__shadow {
+            animation: none;
+        }
+
+        .pixel-runner[data-motion="idle"] .pixel-runner__sprite {
+            animation: ranger-focused-idle 760ms steps(2, end) infinite alternate;
+            background-image: url("/Images/Builder/signal-ranger-idle-focused-v2.png");
+            background-position: center;
+            background-size: 100% 100%;
+        }
+
+        .pixel-runner[data-motion="jump"] .pixel-runner__dust,
+        .pixel-runner[data-motion="turn-hop"] .pixel-runner__dust,
+        .pixel-runner[data-motion="crouch"] .pixel-runner__dust,
+        .pixel-runner[data-motion="land"] .pixel-runner__dust,
+        .pixel-runner[data-motion="idle"] .pixel-runner__dust,
+        .pixel-runner[data-motion="climb"] .pixel-runner__dust,
+        .pixel-runner[data-motion="fall"] .pixel-runner__dust,
+        .pixel-runner[data-motion="wall-slide"] .pixel-runner__dust,
+        .pixel-runner[data-motion="hang"] .pixel-runner__dust {
+            animation: none;
+            opacity: 0;
+        }
+
+        .pixel-runner[data-motion="jump"] .pixel-runner__shadow,
+        .pixel-runner[data-motion="turn-hop"] .pixel-runner__shadow,
+        .pixel-runner[data-motion="climb"] .pixel-runner__shadow,
+        .pixel-runner[data-motion="fall"] .pixel-runner__shadow,
+        .pixel-runner[data-motion="wall-slide"] .pixel-runner__shadow,
+        .pixel-runner[data-motion="hang"] .pixel-runner__shadow {
+            animation: none;
+            opacity: 0.12;
+            scale: 0.5 0.42;
+        }
+
+        .pixel-runner[data-motion="crouch"] .pixel-runner__shadow,
+        .pixel-runner[data-motion="land"] .pixel-runner__shadow,
+        .pixel-runner[data-motion="idle"] .pixel-runner__shadow {
+            animation: none;
+            opacity: 0.48;
+            scale: 0.76 0.66;
+        }
+
+        .pixel-runner[data-motion="land"] .pixel-runner__dust {
+            opacity: 0.72;
+            animation: ranger-land-dust 140ms steps(3, end) 1 both;
         }
 
         button,
@@ -1844,9 +1958,81 @@
             }
         }
 
-        @keyframes foundry-cross {
+        @keyframes foundry-stride {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-3px) rotate(-1deg);
+            }
+        }
+
+        @keyframes ranger-run-frames {
             to {
-                transform: translateX(calc(100vw + 280px));
+                background-position: 100% center;
+            }
+        }
+
+        @keyframes ranger-focused-idle {
+            from {
+                transform: translateY(0);
+            }
+
+            to {
+                transform: translateY(1px);
+            }
+        }
+
+        @keyframes ranger-crouch-settle {
+            from {
+                transform: translateY(0);
+            }
+
+            to {
+                transform: translateY(2px);
+            }
+        }
+
+        @keyframes ranger-land-dust {
+            from {
+                translate: 0 0;
+                opacity: 0.72;
+            }
+
+            to {
+                translate: -18px -4px;
+                opacity: 0;
+            }
+        }
+
+        @keyframes ranger-climb-frames {
+            0%, 49.99% {
+                background-position: 0 center;
+            }
+
+            50%, 100% {
+                background-position: 100% center;
+            }
+        }
+
+        @keyframes ranger-wall-slide {
+            from {
+                transform: translate(-2px, 0) rotate(10deg);
+            }
+
+            to {
+                transform: translate(3px, 2px) rotate(15deg);
+            }
+        }
+
+        @keyframes foundry-climb {
+            from {
+                transform: translate(-2px, 1px) rotate(-18deg);
+            }
+
+            to {
+                transform: translate(3px, -3px) rotate(-10deg);
             }
         }
 
@@ -1990,7 +2176,6 @@
             }
 
             .pixel-runner {
-                bottom: 27%;
                 width: 78px;
                 opacity: 0.88;
             }
@@ -2119,12 +2304,11 @@
 </head>
 
 <body>
-    <div class="mode7-world pixel-world" aria-hidden="true">
-        <div class="pixel-runner">
-            <span class="pixel-runner__shadow"></span>
-            <span class="pixel-runner__dust"></span>
-            <img class="pixel-runner__sprite" src="/Images/Builder/signal-ranger-run-balanced-gait.png" alt="" width="112" height="112" />
-        </div>
+    <div class="mode7-world pixel-world" aria-hidden="true"></div>
+    <div class="pixel-runner" data-motion="run" aria-hidden="true">
+        <span class="pixel-runner__shadow"></span>
+        <span class="pixel-runner__dust"></span>
+        <span class="pixel-runner__sprite"></span>
     </div>
 
     <main>
@@ -2134,7 +2318,7 @@
                 <h1 id="page-title">Make a T-shirt</h1>
                 <p class="intro-copy">Pick a shirt. Buy it. Don't buy it. I won't force you.</p>
             </div>
-            <div class="intro-brand">
+            <div class="intro-brand" data-runner-terrain>
                 <a class="intro-brand__link" href="/index.html" aria-label="Return to Outside The World">
                     <img src="/Images/Equal.svg" alt="Outside The World" />
                 </a>
@@ -2154,7 +2338,7 @@
                     <span class="panel-bar__state" id="renderState">Loading shirt</span>
                 </div>
 
-                <div class="shirt-stage" id="shirtStage">
+                <div class="shirt-stage" id="shirtStage" data-runner-terrain>
                     <canvas id="preview" width="2000" height="2000" aria-label="Preview of your shirt design"></canvas>
                 </div>
 
@@ -2673,6 +2857,7 @@
             var orderPriceConfirmation = document.getElementById("orderPriceConfirmation");
             var pageMain = document.querySelector("main");
             var mode7World = document.querySelector(".mode7-world");
+            var pixelRunner = document.querySelector(".pixel-runner");
 
             if (mode7World && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
                 var parallaxFrame = 0;
@@ -2693,6 +2878,696 @@
                         parallaxFrame = 0;
                     });
                 }, { passive: true });
+            }
+
+            function startRunnerPhysics() {
+                if (!pixelRunner || pixelRunner.dataset.physicsReady === "true") return;
+                pixelRunner.dataset.physicsReady = "true";
+
+                var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+                var terrain = [];
+                var terrainDirty = true;
+                var lastTerrainRead = 0;
+                var lastFrame = 0;
+                var runnerWidth = pixelRunner.getBoundingClientRect().width || 96;
+                var gravity = 880;
+                var runSpeed = 105;
+                var startedAt = performance.now();
+                var motion = {
+                    x: reducedMotion ? 18 : -runnerWidth * 1.2,
+                    feetY: window.innerHeight * 0.725,
+                    vy: 0,
+                    vx: runSpeed,
+                    direction: 1,
+                    mode: reducedMotion ? "idle" : "run",
+                    support: null,
+                    climbTarget: null,
+                    hangUntil: 0,
+                    jumpPhaseUntil: 0,
+                    landUntil: 0,
+                    idleUntil: reducedMotion ? Infinity : 0,
+                    turnHopAt: 0,
+                    turnHopStartedAt: 0,
+                    turnBaseFeetY: 0,
+                    turnFlipped: false,
+                    nextPauseAt: startedAt + 3200 + Math.random() * 3200,
+                    lapRoute: chooseLapRoute(),
+                    routeTriggered: false,
+                    canCatch: Math.random() < 0.42,
+                    wallSlideUntil: 0
+                };
+
+                function chooseLapRoute() {
+                    var roll = Math.random();
+                    if (roll < 0.28) return "buttons";
+                    if (roll < 0.54) return "section";
+                    if (roll < 0.80) return "channel";
+                    return "parkour";
+                }
+
+                function groundY() {
+                    return Math.max(runnerWidth + 18, window.innerHeight * 0.725);
+                }
+
+                function collisionHullWidth() {
+                    return Math.min(34, runnerWidth * 0.3);
+                }
+
+                function setMotion(nextMode) {
+                    if (motion.mode === nextMode) return;
+                    motion.mode = nextMode;
+                    pixelRunner.dataset.motion = nextMode;
+                    if (nextMode !== "jump") {
+                        delete pixelRunner.dataset.jumpPhase;
+                    }
+                }
+
+                function setFacing(direction) {
+                    motion.direction = direction < 0 ? -1 : 1;
+                    motion.vx = Math.abs(motion.vx) * motion.direction;
+                    pixelRunner.dataset.facing = motion.direction < 0 ? "left" : "right";
+                }
+
+                function setJumpPhase(phase) {
+                    pixelRunner.dataset.jumpPhase = phase;
+                }
+
+                function runnerFootX() {
+                    return motion.x + runnerWidth * (motion.direction > 0 ? 0.56 : 0.44);
+                }
+
+                function paintRunner() {
+                    pixelRunner.style.transform = "translate3d(" +
+                        motion.x.toFixed(2) + "px, " +
+                        (motion.feetY - runnerWidth).toFixed(2) + "px, 0)";
+                }
+
+                function markTerrainDirty() {
+                    terrainDirty = true;
+                }
+
+                function refreshTerrain(now) {
+                    if (!terrainDirty && now - lastTerrainRead < 240) return;
+                    terrainDirty = false;
+                    lastTerrainRead = now;
+
+                    terrain = Array.from(document.querySelectorAll(
+                        "[data-runner-terrain], main .pixel-button, main .color-button, main .readout-cell"
+                    )).map(function (element) {
+                        var rect = element.getBoundingClientRect();
+                        if (
+                            element.hidden ||
+                            rect.width < 24 ||
+                            rect.height < 20 ||
+                            rect.right < -2 ||
+                            rect.left > window.innerWidth + 2 ||
+                            rect.bottom < -runnerWidth ||
+                            rect.top > window.innerHeight + runnerWidth
+                        ) {
+                            return null;
+                        }
+
+                        return {
+                            element: element,
+                            left: rect.left,
+                            right: rect.right,
+                            top: rect.top,
+                            bottom: rect.bottom,
+                            width: rect.width,
+                            height: rect.height
+                        };
+                    }).filter(Boolean);
+                }
+
+                function terrainFor(element) {
+                    if (!element) return null;
+                    return terrain.find(function (item) {
+                        return item.element === element;
+                    }) || null;
+                }
+
+                function obstacleAhead(distance) {
+                    var leadingX = motion.x + runnerWidth * (
+                        motion.direction > 0 ? 0.72 : 0.28
+                    );
+
+                    return terrain.filter(function (item) {
+                        var crossesPath = motion.direction > 0
+                            ? item.left <= leadingX + distance && item.right >= leadingX - 2
+                            : item.right >= leadingX - distance && item.left <= leadingX + 2;
+
+                        return crossesPath &&
+                            item.top < motion.feetY - 5 &&
+                            item.bottom > motion.feetY - 7;
+                    }).sort(function (first, second) {
+                        var firstDistance = motion.direction > 0
+                            ? Math.max(0, first.left - leadingX)
+                            : Math.max(0, leadingX - first.right);
+                        var secondDistance = motion.direction > 0
+                            ? Math.max(0, second.left - leadingX)
+                            : Math.max(0, leadingX - second.right);
+                        if (firstDistance !== secondDistance) return firstDistance - secondDistance;
+                        return second.top - first.top;
+                    })[0] || null;
+                }
+
+                function landingSurface(previousFeetY, nextFeetY) {
+                    var footX = runnerFootX();
+
+                    return terrain.filter(function (item) {
+                        return (
+                            footX >= item.left + 2 &&
+                            footX <= item.right - 2 &&
+                            item.top >= previousFeetY - 3 &&
+                            item.top <= nextFeetY + 3
+                        );
+                    }).sort(function (first, second) {
+                        return first.top - second.top;
+                    })[0] || null;
+                }
+
+                function beginClimb(obstacle) {
+                    motion.x = motion.direction > 0
+                        ? Math.min(
+                            motion.x,
+                            obstacle.left - runnerWidth * 0.72 - 1
+                        )
+                        : Math.max(
+                            motion.x,
+                            obstacle.right - runnerWidth * 0.28 + 1
+                        );
+                    motion.vy = 0;
+                    motion.vx = 0;
+                    motion.support = null;
+                    motion.climbTarget = obstacle.element;
+                    setMotion("climb");
+                }
+
+                function beginJump(obstacle) {
+                    var rise = obstacle ? motion.feetY - obstacle.top : 0;
+                    var clearance = rise + Math.min(54, runnerWidth * 0.55);
+                    motion.vy = -Math.max(430, Math.sqrt(2 * gravity * clearance));
+                    motion.vx = runSpeed * 2 * motion.direction;
+                    motion.support = null;
+                    motion.climbTarget = null;
+                    setMotion("jump");
+                    setJumpPhase("takeoff");
+                    motion.jumpPhaseUntil = performance.now() + 95;
+                }
+
+                function beginTargetedJump(target) {
+                    if (!target) return false;
+
+                    var startX = runnerFootX();
+                    var targetX = (target.left + target.right) / 2;
+                    var distanceX = targetX - startX;
+                    if (distanceX < 18) return false;
+
+                    var distanceY = target.top - motion.feetY;
+                    var minimumArcTime = (
+                        Math.sqrt(Math.max(0, 2 * distanceY / gravity)) + 0.18
+                    );
+                    var flightTime = Math.max(
+                        0.5,
+                        minimumArcTime,
+                        Math.min(1.45, distanceX / (runSpeed * 1.85))
+                    );
+                    var calculatedVy = (
+                        distanceY - 0.5 * gravity * flightTime * flightTime
+                    ) / flightTime;
+
+                    motion.vx = distanceX / flightTime;
+                    motion.vy = calculatedVy;
+                    motion.support = null;
+                    motion.climbTarget = null;
+                    motion.routeTriggered = true;
+                    setMotion("jump");
+                    setJumpPhase("takeoff");
+                    motion.jumpPhaseUntil = performance.now() + 95;
+                    return true;
+                }
+
+                function previewButtonTarget() {
+                    var startX = runnerFootX();
+                    return Array.from(document.querySelectorAll(
+                        ".view-controls .pixel-button"
+                    )).map(terrainFor).filter(function (item) {
+                        return item && item.right > startX + 18;
+                    }).sort(function (first, second) {
+                        return first.left - second.left;
+                    })[0] || null;
+                }
+
+                function sectionOneTarget() {
+                    var bodyHeading = document.getElementById("body-heading");
+                    var bodySection = bodyHeading ? bodyHeading.closest(".control-section") : null;
+                    if (!bodySection) return null;
+
+                    var startX = runnerFootX();
+                    var candidates = Array.from(bodySection.querySelectorAll(
+                        ".pixel-button, .color-button"
+                    )).map(terrainFor).filter(function (item) {
+                        return (
+                            item &&
+                            item.left > startX + collisionHullWidth() * 0.5 &&
+                            item.top > 4 &&
+                            item.top < window.innerHeight - 12
+                        );
+                    });
+
+                    if (!candidates.length) return null;
+                    return candidates[Math.floor(Math.random() * candidates.length)];
+                }
+
+                function channelGeometry(stageRect) {
+                    if (!stageRect || !colorGrid) return null;
+                    var swatchRect = colorGrid.getBoundingClientRect();
+                    var gap = swatchRect.left - stageRect.right;
+
+                    if (
+                        gap < collisionHullWidth() + 6 ||
+                        swatchRect.left >= window.innerWidth ||
+                        swatchRect.top >= window.innerHeight ||
+                        swatchRect.bottom <= 0
+                    ) {
+                        return null;
+                    }
+
+                    return {
+                        left: stageRect.right,
+                        right: swatchRect.left,
+                        bottom: Math.min(swatchRect.bottom, groundY() - 18)
+                    };
+                }
+
+                function beginChannelSlide(now, stageRect) {
+                    var channel = channelGeometry(stageRect);
+                    if (!channel) return false;
+
+                    var centerX = (channel.left + channel.right) / 2;
+                    motion.x = centerX - runnerWidth / 2;
+                    motion.vx = 0;
+                    motion.vy = 58;
+                    motion.support = null;
+                    motion.climbTarget = null;
+                    motion.wallSlideUntil = now + 680 + Math.random() * 620;
+                    motion.routeTriggered = true;
+                    setMotion("wall-slide");
+                    return true;
+                }
+
+                function beginWallKick() {
+                    setFacing(1);
+                    motion.vx = runSpeed * 2.25;
+                    motion.vy = -450;
+                    motion.support = null;
+                    motion.climbTarget = null;
+                    setMotion("jump");
+                    setJumpPhase("takeoff");
+                    motion.jumpPhaseUntil = performance.now() + 95;
+                }
+
+                function maybeStartButtonRoute() {
+                    if (
+                        motion.direction < 0 ||
+                        motion.lapRoute !== "buttons" ||
+                        motion.routeTriggered ||
+                        motion.support !== stage
+                    ) {
+                        return false;
+                    }
+
+                    return beginTargetedJump(previewButtonTarget());
+                }
+
+                function maybeContinueButtonRoute(supportRect) {
+                    if (
+                        motion.direction < 0 ||
+                        motion.lapRoute !== "buttons" ||
+                        !supportRect ||
+                        !supportRect.element.matches(".view-controls .pixel-button")
+                    ) {
+                        return false;
+                    }
+
+                    return beginTargetedJump(previewButtonTarget());
+                }
+
+                function maybeUseLedgeRoute(now, supportRect) {
+                    if (
+                        motion.direction < 0 ||
+                        motion.routeTriggered ||
+                        !supportRect ||
+                        supportRect.element !== stage
+                    ) {
+                        return false;
+                    }
+
+                    if (
+                        motion.lapRoute === "channel" &&
+                        beginChannelSlide(now, supportRect)
+                    ) {
+                        return true;
+                    }
+
+                    if (motion.lapRoute === "section") {
+                        return beginTargetedJump(sectionOneTarget());
+                    }
+
+                    return false;
+                }
+
+                function maybeCatchEdge(now) {
+                    if (motion.direction < 0 || !motion.canCatch || motion.vy < 150) {
+                        return false;
+                    }
+
+                    var handX = motion.x + runnerWidth * 0.74;
+                    var handY = motion.feetY - runnerWidth * 0.62;
+                    var catchRect = terrain.filter(function (item) {
+                        return (
+                            item.left >= handX - 10 &&
+                            item.left <= handX + 14 &&
+                            item.top >= handY - 15 &&
+                            item.top <= handY + 18
+                        );
+                    }).sort(function (first, second) {
+                        return first.left - second.left;
+                    })[0] || null;
+
+                    if (!catchRect) return false;
+
+                    motion.x = catchRect.left - runnerWidth * 0.72;
+                    motion.feetY = catchRect.top + runnerWidth * 0.58;
+                    motion.vx = 0;
+                    motion.vy = 0;
+                    motion.support = null;
+                    motion.climbTarget = catchRect.element;
+                    motion.hangUntil = now + 260;
+                    motion.canCatch = false;
+                    setMotion("hang");
+                    return true;
+                }
+
+                function schedulePause(now) {
+                    motion.nextPauseAt = now + 4200 + Math.random() * 4200;
+                }
+
+                function beginIdle(now) {
+                    motion.vx = 0;
+                    motion.idleUntil = now + 720 + Math.random() * 760;
+                    schedulePause(now);
+                    setMotion("idle");
+                }
+
+                function beginTurn(now) {
+                    motion.vx = 0;
+                    motion.turnHopAt = now + 90;
+                    motion.turnHopStartedAt = 0;
+                    motion.turnBaseFeetY = motion.feetY;
+                    motion.turnFlipped = false;
+                    schedulePause(now);
+                    setMotion("crouch");
+                }
+
+                function settleLanding(surface, now) {
+                    motion.feetY = surface ? surface.top : groundY();
+                    motion.vy = 0;
+                    motion.vx = 0;
+                    motion.support = surface ? surface.element : null;
+                    motion.landUntil = now + 105;
+                    setMotion("land");
+                }
+
+                function resetRunner() {
+                    motion.x = -runnerWidth * 1.2;
+                    motion.feetY = groundY();
+                    motion.vy = 0;
+                    motion.vx = runSpeed;
+                    setFacing(1);
+                    motion.support = null;
+                    motion.climbTarget = null;
+                    motion.hangUntil = 0;
+                    motion.lapRoute = chooseLapRoute();
+                    motion.routeTriggered = false;
+                    motion.canCatch = Math.random() < 0.42;
+                    motion.wallSlideUntil = 0;
+                    schedulePause(performance.now());
+                    setMotion("run");
+                }
+
+                function frame(now) {
+                    if (!lastFrame) lastFrame = now;
+                    var delta = Math.min((now - lastFrame) / 1000, 0.04);
+                    lastFrame = now;
+                    refreshTerrain(now);
+
+                    var measuredWidth = pixelRunner.getBoundingClientRect().width;
+                    if (measuredWidth && Math.abs(measuredWidth - runnerWidth) > 0.5) {
+                        runnerWidth = measuredWidth;
+                    }
+
+                    if (motion.mode === "crouch") {
+                        if (now >= motion.turnHopAt) {
+                            motion.turnHopStartedAt = now;
+                            setMotion("turn-hop");
+                            setJumpPhase("takeoff");
+                        }
+                    } else if (motion.mode === "turn-hop") {
+                        var turnProgress = Math.min(
+                            1,
+                            (now - motion.turnHopStartedAt) / 270
+                        );
+                        var turnLift = Math.sin(turnProgress * Math.PI) * Math.min(
+                            18,
+                            runnerWidth * 0.17
+                        );
+
+                        motion.feetY = motion.turnBaseFeetY - turnLift;
+
+                        if (
+                            turnProgress >= 0.22 &&
+                            pixelRunner.dataset.jumpPhase !== "airborne"
+                        ) {
+                            setJumpPhase("airborne");
+                        }
+
+                        if (!motion.turnFlipped && turnProgress >= 0.5) {
+                            setFacing(-motion.direction);
+                            motion.turnFlipped = true;
+                        }
+
+                        if (turnProgress >= 1) {
+                            settleLanding(null, now);
+                        }
+                    } else if (motion.mode === "idle") {
+                        if (now >= motion.idleUntil) {
+                            if (Math.random() < 0.72) {
+                                beginTurn(now);
+                            } else {
+                                motion.vx = runSpeed * motion.direction;
+                                setMotion("run");
+                            }
+                        }
+                    } else if (motion.mode === "land") {
+                        if (now >= motion.landUntil) {
+                            motion.vx = runSpeed * motion.direction;
+                            setMotion("run");
+                        }
+                    } else if (motion.mode === "climb") {
+                        var climbRect = terrainFor(motion.climbTarget);
+
+                        if (!climbRect || climbRect.top < 6) {
+                            motion.climbTarget = null;
+                            motion.vy = 0;
+                            motion.vx = runSpeed * motion.direction;
+                            setMotion("fall");
+                        } else {
+                            motion.x = motion.direction > 0
+                                ? Math.min(
+                                    motion.x,
+                                    climbRect.left - runnerWidth * 0.72 - 1
+                                )
+                                : Math.max(
+                                    motion.x,
+                                    climbRect.right - runnerWidth * 0.28 + 1
+                                );
+                            motion.feetY -= Math.max(145, runnerWidth * 1.55) * delta;
+
+                            if (motion.feetY <= climbRect.top) {
+                                motion.feetY = climbRect.top;
+                                motion.x = motion.direction > 0
+                                    ? climbRect.left - runnerWidth * 0.45
+                                    : climbRect.right - runnerWidth * 0.55;
+                                motion.support = climbRect.element;
+                                motion.climbTarget = null;
+                                motion.vx = runSpeed * motion.direction;
+                                setMotion("run");
+                            }
+                        }
+                    } else if (motion.mode === "hang") {
+                        var hangRect = terrainFor(motion.climbTarget);
+                        if (!hangRect) {
+                            motion.climbTarget = null;
+                            motion.vx = runSpeed * motion.direction;
+                            setMotion("fall");
+                        } else {
+                            motion.x = hangRect.left - runnerWidth * 0.72;
+                            motion.feetY = hangRect.top + runnerWidth * 0.58;
+                            if (now >= motion.hangUntil) {
+                                beginClimb(hangRect);
+                            }
+                        }
+                    } else if (motion.mode === "wall-slide") {
+                        var channel = channelGeometry(terrainFor(stage));
+                        if (!channel) {
+                            beginWallKick();
+                        } else {
+                            var channelCenter = (channel.left + channel.right) / 2;
+                            motion.x = (
+                                channelCenter -
+                                runnerWidth / 2 +
+                                Math.sin(now / 90) * 2
+                            );
+                            motion.vy = Math.min(118, motion.vy + gravity * 0.08 * delta);
+                            motion.feetY += motion.vy * delta;
+
+                            if (
+                                now >= motion.wallSlideUntil ||
+                                motion.feetY >= channel.bottom
+                            ) {
+                                beginWallKick();
+                            }
+                        }
+                    } else if (motion.mode === "run") {
+                        var supportRect = terrainFor(motion.support);
+                        if (supportRect) {
+                            var supportX = runnerFootX();
+                            if (
+                                supportX >= supportRect.left - 2 &&
+                                supportX <= supportRect.right + 2 &&
+                                supportRect.top >= 6
+                            ) {
+                                motion.feetY = supportRect.top;
+                            } else {
+                                motion.support = null;
+                                beginJump(null);
+                            }
+                        } else {
+                            motion.feetY = groundY();
+                        }
+
+                        if (motion.mode === "run") {
+                            var canPauseHere = (
+                                !motion.support &&
+                                motion.x > runnerWidth * 0.15 &&
+                                motion.x < window.innerWidth - runnerWidth * 1.15
+                            );
+
+                            if (canPauseHere && now >= motion.nextPauseAt) {
+                                beginIdle(now);
+                            } else if (maybeStartButtonRoute()) {
+                                supportRect = null;
+                            } else {
+                                var travel = runSpeed * delta;
+                                var obstacle = obstacleAhead(travel + 5);
+
+                                if (obstacle) {
+                                    var rise = motion.feetY - obstacle.top;
+                                    var canJump = (
+                                        rise <= Math.min(150, runnerWidth * 1.45) &&
+                                        obstacle.width <= runnerWidth * 2.4
+                                    );
+
+                                    if (canJump) {
+                                        motion.x = motion.direction > 0
+                                            ? Math.min(
+                                                motion.x,
+                                                obstacle.left - runnerWidth * 0.72 - 1
+                                            )
+                                            : Math.max(
+                                                motion.x,
+                                                obstacle.right - runnerWidth * 0.28 + 1
+                                            );
+                                        beginJump(obstacle);
+                                    } else {
+                                        beginClimb(obstacle);
+                                    }
+                                } else {
+                                    motion.x += travel * motion.direction;
+
+                                    if (supportRect) {
+                                        var nextSupportX = runnerFootX();
+                                        var leftSupport = motion.direction > 0
+                                            ? nextSupportX > supportRect.right + 2
+                                            : nextSupportX < supportRect.left - 2;
+
+                                        if (leftSupport) {
+                                            if (
+                                                !maybeContinueButtonRoute(supportRect) &&
+                                                !maybeUseLedgeRoute(now, supportRect)
+                                            ) {
+                                                beginJump(null);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        if (
+                            motion.mode === "jump" &&
+                            now >= motion.jumpPhaseUntil &&
+                            pixelRunner.dataset.jumpPhase !== "airborne"
+                        ) {
+                            setJumpPhase("airborne");
+                        }
+
+                        var previousFeetY = motion.feetY;
+                        motion.x += motion.vx * delta;
+                        motion.vy += gravity * delta;
+                        motion.feetY += motion.vy * delta;
+
+                        if (motion.vy >= 0) {
+                            var landing = landingSurface(previousFeetY, motion.feetY);
+                            if (landing) {
+                                settleLanding(landing, now);
+                            } else if (maybeCatchEdge(now)) {
+                                motion.vy = 0;
+                            } else if (motion.feetY >= groundY()) {
+                                settleLanding(null, now);
+                            }
+                        }
+                    }
+
+                    if (
+                        motion.direction < 0 &&
+                        motion.x <= -runnerWidth * 0.08 &&
+                        motion.mode === "run"
+                    ) {
+                        motion.x = -runnerWidth * 0.08;
+                        beginTurn(now);
+                    } else if (
+                        motion.direction > 0 &&
+                        motion.x > window.innerWidth + runnerWidth * 0.35
+                    ) {
+                        resetRunner();
+                    }
+
+                    paintRunner();
+                    window.requestAnimationFrame(frame);
+                }
+
+                window.addEventListener("resize", markTerrainDirty, { passive: true });
+                window.addEventListener("scroll", markTerrainDirty, { passive: true, capture: true });
+                pixelRunner.dataset.motion = motion.mode;
+                pixelRunner.dataset.facing = "right";
+                motion.feetY = groundY();
+                paintRunner();
+
+                if (!reducedMotion) {
+                    window.requestAnimationFrame(frame);
+                }
             }
 
             function cloneState(source) {
@@ -3696,6 +4571,7 @@
                 renderPhraseButtons();
                 bindControls();
                 syncUI();
+                startRunnerPhysics();
 
                 if (restoredFromLink) {
                     setMessage("Shared build loaded. Questionable decisions preserved.");
