@@ -553,7 +553,7 @@
             height: 8px;
             border-radius: 50%;
             background: rgba(0, 0, 0, 0.62);
-            animation: foundry-shadow 1250ms steps(20, end) infinite;
+            animation: foundry-shadow 600ms steps(10, end) infinite;
         }
 
         .pixel-runner__dust,
@@ -569,7 +569,7 @@
         .pixel-runner__dust {
             bottom: 8px;
             left: 3px;
-            animation: foundry-dust 650ms steps(4, end) infinite;
+            animation: foundry-dust 600ms steps(10, end) infinite;
         }
 
         .pixel-runner__dust::before {
@@ -1445,19 +1445,25 @@
         }
 
         @keyframes foundry-shadow {
-            0%, 100% {
+            0%, 50%, 100% {
                 scale: 1 0.82;
                 opacity: 0.62;
             }
 
-            50% {
+            30%, 80% {
                 scale: 0.66 0.54;
                 opacity: 0.28;
             }
         }
 
         @keyframes foundry-dust {
-            to {
+            0%, 50% {
+                translate: 0 0;
+                scale: 1;
+                opacity: 0.72;
+            }
+
+            20%, 49%, 70%, 100% {
                 translate: -32px -9px;
                 scale: 1.6;
                 opacity: 0;
@@ -1679,7 +1685,7 @@
         <div class="pixel-runner">
             <span class="pixel-runner__shadow"></span>
             <span class="pixel-runner__dust"></span>
-            <img class="pixel-runner__sprite" src="/Images/Builder/signal-ranger-run-20frame-headlocked-armswing.png" alt="" width="112" height="112" />
+            <img class="pixel-runner__sprite" src="/Images/Builder/signal-ranger-run-balanced-gait.png" alt="" width="112" height="112" />
         </div>
     </div>
 
