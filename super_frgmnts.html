@@ -96,6 +96,15 @@
             isolation: isolate;
         }
 
+        .game-app,
+        .game-app * {
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-user-drag: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
         .game-app::before {
             position: fixed;
             inset: 0;
@@ -1338,6 +1347,7 @@
             };
             var canvas = document.getElementById("gameCanvas");
             var ctx = canvas.getContext("2d");
+            var gameApp = document.querySelector(".game-app");
             var stageShell = document.getElementById("stageShell");
             var titleScreen = document.getElementById("titleScreen");
             var titleStartButton = document.getElementById("titleStartButton");
@@ -3284,6 +3294,26 @@
 
             stageShell.addEventListener("dblclick", function (event) {
                 event.preventDefault();
+            });
+
+            function clearNativeSelection() {
+                var selection = window.getSelection ? window.getSelection() : null;
+                if (selection && selection.rangeCount) {
+                    selection.removeAllRanges();
+                }
+            }
+
+            ["selectstart", "contextmenu", "dragstart"].forEach(function (eventName) {
+                gameApp.addEventListener(eventName, function (event) {
+                    event.preventDefault();
+                    clearNativeSelection();
+                }, { capture: true });
+            });
+
+            gameApp.addEventListener("pointerdown", clearNativeSelection, { capture: true });
+            gameApp.addEventListener("touchstart", clearNativeSelection, {
+                capture: true,
+                passive: true
             });
 
             window.addEventListener("resize", resizeGameViewport);
