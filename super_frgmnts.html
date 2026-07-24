@@ -217,6 +217,24 @@
             transform: translateY(2px);
         }
 
+        .pixel-button:disabled {
+            cursor: not-allowed;
+            filter: grayscale(0.35);
+            opacity: 0.5;
+            transform: none;
+        }
+
+        #pauseButton {
+            border-color: var(--index-blue);
+            background: linear-gradient(var(--brand-blue), var(--logo-navy));
+            color: var(--cream);
+        }
+
+        #pauseButton[aria-pressed="true"] {
+            border-color: var(--pink);
+            background: linear-gradient(var(--warm-plum), var(--soft-charcoal));
+        }
+
         #soundButton {
             border-color: var(--index-teal);
             background: linear-gradient(var(--logo-teal), var(--logo-navy));
@@ -918,6 +936,16 @@
                 background: rgba(61, 82, 85, 0.72);
             }
 
+            .top-actions #pauseButton {
+                border-color: var(--index-blue);
+                background: rgba(27, 54, 93, 0.76);
+            }
+
+            .top-actions #pauseButton[aria-pressed="true"] {
+                border-color: var(--pink);
+                background: rgba(103, 81, 104, 0.78);
+            }
+
             .top-actions #restartButton {
                 border-color: var(--rose-gold);
                 background: rgba(103, 81, 104, 0.72);
@@ -1219,6 +1247,15 @@
                 </div>
             </div>
             <div class="top-actions">
+                <button
+                    class="pixel-button"
+                    id="pauseButton"
+                    type="button"
+                    aria-controls="stageShell"
+                    aria-label="Pause game"
+                    aria-pressed="false"
+                    disabled
+                >Pause</button>
                 <button class="pixel-button" id="soundButton" type="button" aria-pressed="true">Sound: On</button>
                 <button class="pixel-button" id="restartButton" type="button">Restart</button>
             </div>
@@ -1358,6 +1395,7 @@
             var startButton = document.getElementById("startButton");
             var startOverButton = document.getElementById("startOverButton");
             var restartButton = document.getElementById("restartButton");
+            var pauseButton = document.getElementById("pauseButton");
             var soundButton = document.getElementById("soundButton");
             var shardCount = document.getElementById("shardCount");
             var timerDisplay = document.getElementById("timer");
@@ -1545,6 +1583,7 @@
             function resetGame(autostart) {
                 state = autostart ? "running" : "ready";
                 document.body.classList.toggle("is-running", autostart);
+                setPauseButton(false, autostart);
                 elapsed = 0;
                 timeLeft = START_TIME;
                 score = 0;
@@ -1698,10 +1737,87 @@
             }
 
             function startGame() {
+                if (state === "paused") {
+                    resumeGame();
+                    return;
+                }
                 ensureAudio();
                 playBackgroundMusic();
                 if (state === "ready" || state === "won" || state === "lost") {
                     resetGame(true);
+                }
+            }
+
+            function setPauseButton(paused, available) {
+                pauseButton.disabled = !available;
+                pauseButton.textContent = paused ? "Resume" : "Pause";
+                pauseButton.setAttribute("aria-label", paused ? "Resume game" : "Pause game");
+                pauseButton.setAttribute("aria-pressed", String(paused));
+            }
+
+            function pauseGame() {
+                if (state !== "running") return;
+
+                state = "paused";
+                document.body.classList.remove("is-running");
+                keys.left = false;
+                keys.right = false;
+                keys.down = false;
+                keys.jump = false;
+                keys.shoot = false;
+                jumpBuffer = 0;
+                shootBuffer = 0;
+                resetDirectionPad();
+                document.querySelectorAll("[data-control]").forEach(function (button) {
+                    button.classList.remove("is-pressed");
+                });
+
+                messageKicker.textContent = "Transmission Hold // Player Pause";
+                messageTitle.textContent = "Paused";
+                messageCopy.textContent = "The Shard Foundry is holding your position.";
+                startButton.textContent = "Resume";
+                startButton.disabled = false;
+                startButton.removeAttribute("title");
+                startOverButton.hidden = true;
+                messageCard.hidden = false;
+                setPauseButton(true, true);
+                resumeMusicAfterFocus = false;
+                pauseBackgroundMusic();
+                if (audioContext && audioContext.state === "running") {
+                    var suspendedAudio = audioContext.suspend();
+                    if (suspendedAudio && typeof suspendedAudio.catch === "function") {
+                        suspendedAudio.catch(function () {});
+                    }
+                }
+                announce("Game paused.");
+            }
+
+            function resumeGame() {
+                if (state !== "paused") return;
+
+                state = "running";
+                document.body.classList.add("is-running");
+                messageCard.hidden = true;
+                setPauseButton(false, true);
+                if (soundOn) {
+                    ensureAudio();
+                    if (audioContext && audioContext.state === "suspended") {
+                        var resumedAudio = audioContext.resume();
+                        if (resumedAudio && typeof resumedAudio.catch === "function") {
+                            resumedAudio.catch(function () {});
+                        }
+                    }
+                    playBackgroundMusic();
+                    playTone(330, 0.06, "square", 0.025);
+                }
+                announce("Game resumed.");
+            }
+
+            function togglePause() {
+                if (state === "paused") {
+                    resumeGame();
+                } else {
+                    pauseGame();
                 }
             }
 
@@ -1756,6 +1872,7 @@
             }
 
             function update(delta) {
+                if (state === "paused") return;
                 if (state !== "running") {
                     updateParticles(delta);
                     return;
@@ -2266,6 +2383,7 @@
                 if (state !== "running") return;
                 state = "won";
                 document.body.classList.remove("is-running");
+                setPauseButton(false, false);
                 var timeBonus = Math.max(0, Math.ceil(timeLeft) * 35);
                 score += timeBonus + Math.max(0, (MAX_HITS - hits) * 300);
                 updateHud();
@@ -2286,6 +2404,7 @@
                 if (state !== "running") return;
                 state = "lost";
                 document.body.classList.remove("is-running");
+                setPauseButton(false, false);
                 var lossCopy = reason === "time"
                     ? {
                         kicker: "Time Expired // Toxic Environment",
@@ -3136,6 +3255,7 @@
             }
 
             function setControl(control, pressed) {
+                if (state === "paused") return;
                 if (control === "jump") {
                     keys.jump = pressed;
                     if (pressed) queueJump();
@@ -3384,14 +3504,17 @@
                 playBackgroundMusic();
                 resetGame(true);
             });
+            pauseButton.addEventListener("click", togglePause);
             soundButton.addEventListener("click", function () {
                 soundOn = !soundOn;
                 soundButton.textContent = "Sound: " + (soundOn ? "On" : "Off");
                 soundButton.setAttribute("aria-pressed", String(soundOn));
                 if (soundOn) {
                     ensureAudio();
-                    playBackgroundMusic();
-                    playTone(440, 0.06, "square", 0.025);
+                    if (state !== "paused") {
+                        playBackgroundMusic();
+                        playTone(440, 0.06, "square", 0.025);
+                    }
                 } else {
                     resumeMusicAfterFocus = false;
                     pauseBackgroundMusic();
