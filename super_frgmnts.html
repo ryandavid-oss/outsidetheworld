@@ -1365,15 +1365,18 @@
         (function () {
             "use strict";
 
+            var expansionPreview =
+                new URLSearchParams(window.location.search).get("preview") === "foundry-expansion";
             var WIDTH = 1672;
             var HEIGHT = 941;
-            var SCREEN_COUNT = 4;
+            var WORLD_HEIGHT = expansionPreview ? 1882 : HEIGHT;
+            var SCREEN_COUNT = expansionPreview ? 1 : 4;
             var WORLD_WIDTH = WIDTH * SCREEN_COUNT;
             var viewWidth = WIDTH;
             var portraitMode = false;
             // The walkable plane is the top lip of the background's concrete deck.
-            var GROUND_Y = 663;
-            var START_TIME = 105;
+            var GROUND_Y = expansionPreview ? 1604 : 663;
+            var START_TIME = expansionPreview ? 300 : 105;
             var TOTAL_SHARDS = 12;
             var MAX_HITS = 5;
             var BLASTER_TIERS = [3, 7, 12];
@@ -1407,8 +1410,31 @@
             var backgroundMusic = document.getElementById("backgroundMusic");
             var directionPad = document.getElementById("directionPad");
 
+            if (expansionPreview) {
+                document.title = "SUPER FRGMNTS // Foundry Expansion Preview";
+                document.body.classList.add("is-expansion-preview");
+                document.querySelector(".eyebrow").textContent =
+                    "Prototype // Foundry Vertical Expansion";
+                document.querySelector(".title-screen__hero").innerHTML =
+                    "Signal Ranger // <strong>Aryn Sol-Mavi</strong> // Expansion Preview";
+                document.querySelector(".title-screen__hint").textContent =
+                    "Explore upward // Left/right to move // Space to jump // Down enters Deepworks";
+                document.querySelector(".mission strong").textContent =
+                    "ARYN SOL-MAVI // EXPLORE";
+                document.querySelector(".mission span").lastChild.textContent =
+                    "/12 → PROTOTYPE SUMMIT";
+                document.querySelector(".stage-wrap").setAttribute(
+                    "aria-label",
+                    "Super Frgmnts Foundry expansion preview"
+                );
+            }
+
             var assets = {
-                background0: loadImage("/Images/Builder/signal-foundry-bg.png"),
+                background0: loadImage(
+                    expansionPreview
+                        ? "/Images/Game/super-frgmnts-foundry-expanded-prototype-v1.png"
+                        : "/Images/Builder/signal-foundry-bg.png"
+                ),
                 background1: loadImage("/Images/Game/signal-foundry-refinery.png"),
                 background2: loadImage("/Images/Game/signal-foundry-biolab.png"),
                 background3: loadImage("/Images/Game/signal-foundry-uplink.png"),
@@ -1476,7 +1502,7 @@
             };
 
             var platforms = [
-                { x: 0, y: GROUND_Y, width: WORLD_WIDTH, height: HEIGHT - GROUND_Y, ground: true },
+                { x: 0, y: GROUND_Y, width: WORLD_WIDTH, height: WORLD_HEIGHT - GROUND_Y, ground: true },
                 { x: 318, y: 567, width: 204, height: 24 },
                 { x: 632, y: 443, width: 188, height: 24 },
                 { x: 954, y: 566, width: 218, height: 24 },
@@ -1515,14 +1541,86 @@
                 { x: WIDTH * 3 + 1438, y: 532, width: 148, height: 24 }
             ];
 
+            function buildExpansionPreviewPlatforms() {
+                var lanes = {
+                    LA: [0, 288],
+                    LB: [368, 688],
+                    M: [752, 920],
+                    RB: [992, 1312],
+                    RA: [1392, 1672]
+                };
+                var routeBands = [1476, 1348, 1220, 1092, 964, 836, 708, 580, 452, 324, 196, 68];
+                var previewPlatforms = [
+                    {
+                        x: 0,
+                        y: GROUND_Y,
+                        width: WIDTH,
+                        height: WORLD_HEIGHT - GROUND_Y,
+                        ground: true
+                    },
+                    { x: 318, y: 1508, width: 204, height: 24 },
+                    { x: 632, y: 1384, width: 188, height: 24 },
+                    { x: 954, y: 1507, width: 218, height: 24 },
+                    { x: 1239, y: 1388, width: 186, height: 24 }
+                ];
+
+                routeBands.forEach(function (y, index) {
+                    var left = lanes[index % 2 === 0 ? "LA" : "LB"];
+                    var right = lanes[index % 2 === 0 ? "RA" : "RB"];
+                    previewPlatforms.push({
+                        x: left[0],
+                        y: y,
+                        width: left[1] - left[0],
+                        height: 24,
+                        previewRoute: true
+                    });
+                    previewPlatforms.push({
+                        x: right[0],
+                        y: y,
+                        width: right[1] - right[0],
+                        height: 24,
+                        previewRoute: true
+                    });
+                });
+
+                [1092, 580, 68].forEach(function (y) {
+                    previewPlatforms.push({
+                        x: lanes.M[0],
+                        y: y,
+                        width: lanes.M[1] - lanes.M[0],
+                        height: 24,
+                        previewRoute: true
+                    });
+                });
+
+                previewPlatforms.push(
+                    { x: 0, y: 580, width: 288, height: 24, previewRoute: true },
+                    { x: 1392, y: 580, width: 280, height: 24, previewRoute: true },
+                    {
+                        x: 704,
+                        y: 900,
+                        width: 272,
+                        height: 24,
+                        previewRoute: true,
+                        motion: { axis: "y", range: 112, speed: 0.72, phase: 0 }
+                    }
+                );
+                return previewPlatforms;
+            }
+
+            if (expansionPreview) {
+                platforms = buildExpansionPreviewPlatforms();
+            }
+
             var deepworksRooms = Array.from({ length: SCREEN_COUNT }, function (_, roomIndex) {
                 var roomStart = roomIndex * WIDTH;
+                var deepworksY = expansionPreview ? 1816 : 875;
                 return {
                     roomIndex: roomIndex,
                     x: roomStart + 258,
-                    y: 875,
+                    y: deepworksY,
                     width: 866,
-                    height: HEIGHT - 875,
+                    height: WORLD_HEIGHT - deepworksY,
                     entryLeft: roomStart + 300,
                     entryRight: roomStart + 1082,
                     deepworks: true
@@ -1541,6 +1639,10 @@
                 { x: WIDTH * 3 + 1110, y: GROUND_Y - 15, width: 82, height: 18, phase: 1.9 }
             ];
             var uplink = { x: WORLD_WIDTH - 126, y: GROUND_Y - 128, width: 68, height: 128 };
+            if (expansionPreview) {
+                hazards = [];
+                uplink = { x: 1488, y: 68, width: 68, height: 128 };
+            }
 
             function loadImage(source) {
                 var image = new Image();
@@ -1576,7 +1678,7 @@
             })).then(function () {
                 state = "ready";
                 titleStartButton.disabled = false;
-                titleStartButton.textContent = "Start run";
+                titleStartButton.textContent = expansionPreview ? "Start preview" : "Start run";
                 draw();
             });
 
@@ -1596,7 +1698,7 @@
                 invulnerableTime = 0;
                 flashTime = 0;
                 cameraX = 0;
-                cameraY = 0;
+                cameraY = expansionPreview ? WORLD_HEIGHT - HEIGHT : 0;
                 cameraAnchor = 0.3;
                 cameraLookAhead = 0;
                 cameraFacing = 1;
@@ -1636,11 +1738,33 @@
                     makeShard(WIDTH * 3 + 628, 356, "#ffd36c"),
                     makeShard(WORLD_WIDTH - 312, 606, "#58f5df")
                 ];
+                if (expansionPreview) {
+                    shards = [
+                        makeShard(170, 1430, "#58f5df"),
+                        makeShard(520, 1302, "#ffd36c"),
+                        makeShard(1500, 1174, "#ff69b4"),
+                        makeShard(560, 1046, "#58f5df"),
+                        makeShard(170, 918, "#ffd36c"),
+                        makeShard(540, 790, "#ff69b4"),
+                        makeShard(1500, 662, "#58f5df"),
+                        makeShard(520, 534, "#ffd36c"),
+                        makeShard(150, 406, "#ff69b4"),
+                        makeShard(520, 278, "#58f5df"),
+                        makeShard(1500, 150, "#ffd36c"),
+                        makeShard(820, 24, "#ff69b4")
+                    ];
+                }
                 heartPickups = [
                     makeHeartPickup(842, 818),
                     makeHeartPickup(WIDTH * 2 + 842, 818),
                     makeHeartPickup(WIDTH * 3 + 842, 818)
                 ];
+                if (expansionPreview) {
+                    heartPickups = [
+                        makeHeartPickup(1480, 918),
+                        makeHeartPickup(820, 534)
+                    ];
+                }
                 enemies = [
                     makeEnemy("crawler", 890, GROUND_Y, 780, 1035, 132),
                     makeEnemy("walker", WIDTH + 650, GROUND_Y, WIDTH + 590, WIDTH + 850, -94),
@@ -1653,6 +1777,9 @@
                     makeEnemy("flyer", WIDTH * 3 + 1135, 340, WIDTH * 3 + 990, WIDTH * 3 + 1340, 82),
                     makeEnemy("crawler", WIDTH * 3 + 1440, GROUND_Y, WIDTH * 3 + 1375, WIDTH * 3 + 1570, -138)
                 ];
+                if (expansionPreview) {
+                    enemies = [];
+                }
                 updateHud();
                 timerDisplay.classList.remove("is-low");
                 titleScreen.hidden = autostart;
@@ -1661,9 +1788,17 @@
                 startButton.removeAttribute("title");
                 startOverButton.hidden = true;
                 if (!autostart) {
-                    titleStartButton.textContent = state === "loading" ? "Loading signal…" : "Start run";
+                    titleStartButton.textContent = state === "loading"
+                        ? "Loading signal…"
+                        : expansionPreview
+                            ? "Start preview"
+                            : "Start run";
                 } else {
-                    announce("Run started. Twelve Signal Shards remain.");
+                    announce(
+                        expansionPreview
+                            ? "Foundry expansion preview started. Twelve Signal Shards remain."
+                            : "Run started. Twelve Signal Shards remain."
+                    );
                     playTone(260, 0.08, "square", 0.035);
                 }
             }
@@ -1774,7 +1909,9 @@
 
                 messageKicker.textContent = "Transmission Hold // Player Pause";
                 messageTitle.textContent = "Paused";
-                messageCopy.textContent = "The Shard Foundry is holding your position.";
+                messageCopy.textContent = expansionPreview
+                    ? "The Foundry expansion preview is holding your position."
+                    : "The Shard Foundry is holding your position.";
                 startButton.textContent = "Resume";
                 startButton.disabled = false;
                 startButton.removeAttribute("title");
@@ -2011,7 +2148,7 @@
                     }
                 }
 
-                if (player.y > HEIGHT + 80) {
+                if (player.y > WORLD_HEIGHT + 80) {
                     takeHit("VOID CONTACT");
                     player.x = 82;
                     player.y = GROUND_Y - 180;
@@ -2043,7 +2180,16 @@
                 }
                 cameraTarget = Math.max(0, Math.min(WORLD_WIDTH - viewWidth, cameraTarget));
                 cameraX += (cameraTarget - cameraX) * Math.min(1, delta * 5.5);
-                var cameraYTarget = portraitMode && inDeepworks ? 145 : 0;
+                var cameraYTarget;
+                if (expansionPreview) {
+                    var verticalAnchor = portraitMode ? 0.56 : 0.62;
+                    var cameraYMaximum =
+                        WORLD_HEIGHT - HEIGHT + (portraitMode && inDeepworks ? 145 : 0);
+                    cameraYTarget = player.y + 50 - HEIGHT * verticalAnchor;
+                    cameraYTarget = Math.max(0, Math.min(cameraYMaximum, cameraYTarget));
+                } else {
+                    cameraYTarget = portraitMode && inDeepworks ? 145 : 0;
+                }
                 cameraY += (cameraYTarget - cameraY) * Math.min(1, delta * 5.8);
                 if (Math.abs(cameraYTarget - cameraY) < 0.15) {
                     cameraY = cameraYTarget;
@@ -2387,12 +2533,20 @@
                 var timeBonus = Math.max(0, Math.ceil(timeLeft) * 35);
                 score += timeBonus + Math.max(0, (MAX_HITS - hits) * 300);
                 updateHud();
-                messageKicker.textContent = "Transmission from Fleet // Success";
-                messageTitle.textContent = "Level Complete";
-                messageCopy.textContent = "Recovery of essential inventory is complete. Prepare for the next portal.";
-                startButton.textContent = "Next Level";
-                startButton.disabled = true;
-                startButton.title = "Level 2 is not yet available";
+                messageKicker.textContent = expansionPreview
+                    ? "Prototype Route // Traversal Complete"
+                    : "Transmission from Fleet // Success";
+                messageTitle.textContent = expansionPreview ? "Summit Reached" : "Level Complete";
+                messageCopy.textContent = expansionPreview
+                    ? "Aryn completed the Foundry expansion route. This remains a development preview."
+                    : "Recovery of essential inventory is complete. Prepare for the next portal.";
+                startButton.textContent = expansionPreview ? "Replay Preview" : "Next Level";
+                startButton.disabled = !expansionPreview;
+                if (expansionPreview) {
+                    startButton.removeAttribute("title");
+                } else {
+                    startButton.title = "Level 2 is not yet available";
+                }
                 startOverButton.hidden = false;
                 messageCard.hidden = false;
                 spawnBurst(uplink.x + 28, uplink.y + 34, "#4be36e", 44);
@@ -2519,7 +2673,7 @@
                             Math.round(room * WIDTH - cameraX),
                             -Math.round(cameraY),
                             WIDTH,
-                            HEIGHT
+                            WORLD_HEIGHT
                         );
                     }
                 }
@@ -3135,7 +3289,11 @@
                 scoreDisplay.textContent = formatScore(score);
                 var zoneNames = ["FOUNDRY", "REFINERY", "BIOLAB", "UPLINK"];
                 var zoneIndex = Math.max(0, Math.min(SCREEN_COUNT - 1, Math.floor((player.x + 56) / WIDTH)));
-                zoneNameDisplay.textContent = inDeepworks ? "DEEPWORKS" : zoneNames[zoneIndex];
+                zoneNameDisplay.textContent = inDeepworks
+                    ? "DEEPWORKS"
+                    : expansionPreview
+                        ? "EXPANDED FOUNDRY"
+                        : zoneNames[zoneIndex];
                 heartsDisplay.textContent = Array.from({ length: MAX_HITS }, function (_, index) {
                     return index < MAX_HITS - hits ? "♥" : "·";
                 }).join(" ");
