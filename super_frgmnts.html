@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#050713" />
     <meta name="color-scheme" content="dark" />
-    <meta name="description" content="Super Frgmnts: enter The Shard Foundry, recover twelve Signal Shards, and reach the Uplink Gate." />
+    <meta name="description" content="Guide Aryn Sol-Mavi through The Shard Foundry, recover twelve Signal Shards, and reach the Uplink Gate." />
     <meta property="og:title" content="SUPER FRGMNTS // THE SHARD FOUNDRY" />
-    <meta property="og:description" content="Cross The Shard Foundry, recover twelve Signal Shards, and reach the Uplink Gate." />
+    <meta property="og:description" content="Guide Aryn Sol-Mavi across The Shard Foundry, recover twelve Signal Shards, and reach the Uplink Gate." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://outsidetheworld.com/super_frgmnts.html" />
     <title>SUPER FRGMNTS // Outside The World</title>
@@ -25,6 +25,20 @@
             --pink: #ff69b4;
             --green: #4be36e;
             --gold: #ffd36c;
+            --brand-blue: #6395ee;
+            --brand-light-blue: #a0bef5;
+            --brand-teal: #91afb3;
+            --logo-navy: #1b365d;
+            --logo-teal: #3d5255;
+            --brand-gold: #d9c08c;
+            --amethyst: #9b59b6;
+            --rose-gold: #e0bfb8;
+            --index-blue: #77a3ff;
+            --index-teal: #9ec5c1;
+            --cream: #f7f0ea;
+            --soft-charcoal: #2e2831;
+            --muted-rose: #c38fa0;
+            --warm-plum: #675168;
             --panel: rgba(7, 10, 23, 0.88);
             --line: rgba(88, 245, 223, 0.34);
             --pixel-shadow: #02030a;
@@ -52,7 +66,9 @@
             min-height: 100dvh;
             font-family: var(--font-game);
             background:
-                radial-gradient(circle at 50% 20%, rgba(88, 245, 223, 0.12), transparent 35rem),
+                radial-gradient(circle at 18% 16%, rgba(99, 149, 238, 0.14), transparent 32rem),
+                radial-gradient(circle at 82% 18%, rgba(155, 89, 182, 0.1), transparent 30rem),
+                radial-gradient(circle at 50% 110%, rgba(224, 191, 184, 0.08), transparent 38rem),
                 #050713;
             touch-action: none;
             user-select: none;
@@ -115,12 +131,12 @@
             height: 36px;
             flex: 0 0 auto;
             place-items: center;
-            border: 2px solid var(--cyan);
-            background: #0c1324;
+            border: 2px solid var(--brand-light-blue);
+            background: var(--logo-navy);
             box-shadow:
-                3px 3px 0 var(--pink),
+                3px 3px 0 var(--muted-rose),
                 6px 6px 0 #000;
-            color: var(--cyan);
+            color: var(--cream);
             font-size: 17px;
             font-weight: 700;
             line-height: 1;
@@ -133,7 +149,7 @@
 
         .eyebrow {
             margin: 0 0 2px;
-            color: var(--cyan);
+            color: var(--index-teal);
             font-size: clamp(8px, 1.2vw, 11px);
             letter-spacing: 0.18em;
             line-height: 1.1;
@@ -165,9 +181,9 @@
         .pixel-button {
             min-height: 38px;
             padding: 8px 12px;
-            border: 2px solid rgba(160, 190, 245, 0.55);
+            border: 2px solid rgba(160, 190, 245, 0.62);
             border-radius: 0;
-            background: linear-gradient(#222b42, #111626);
+            background: linear-gradient(var(--logo-navy), #111626);
             box-shadow:
                 0 3px 0 var(--pixel-shadow),
                 inset 0 1px rgba(255, 255, 255, 0.12);
@@ -180,15 +196,27 @@
 
         .pixel-button:hover,
         .pixel-button:focus-visible {
-            border-color: var(--cyan);
+            border-color: var(--index-teal);
             outline: 2px solid transparent;
-            color: var(--cyan);
+            color: var(--brand-light-blue);
             transform: translateY(-1px);
         }
 
         .pixel-button:active {
             box-shadow: 0 1px 0 #000;
             transform: translateY(2px);
+        }
+
+        #soundButton {
+            border-color: var(--index-teal);
+            background: linear-gradient(var(--logo-teal), var(--logo-navy));
+            color: var(--cream);
+        }
+
+        #restartButton {
+            border-color: var(--rose-gold);
+            background: linear-gradient(var(--warm-plum), var(--soft-charcoal));
+            color: var(--cream);
         }
 
         .stage-wrap {
@@ -204,13 +232,13 @@
             max-height: calc(100svh - 144px);
             aspect-ratio: 1672 / 941;
             overflow: hidden;
-            border: 3px solid #343d5d;
+            border: 3px solid var(--logo-navy);
             background: #070b18;
             box-shadow:
-                0 0 0 2px #060810,
-                0 0 0 4px rgba(88, 245, 223, 0.32),
+                0 0 0 2px var(--warm-plum),
+                0 0 0 4px var(--brand-teal),
                 14px 16px 0 rgba(0, 0, 0, 0.45),
-                0 0 54px rgba(99, 149, 238, 0.12);
+                0 0 54px rgba(119, 163, 255, 0.16);
         }
 
         .stage-shell::before {
@@ -278,19 +306,34 @@
             justify-items: center;
             gap: 9px;
             padding: clamp(10px, 1.4vw, 16px) clamp(16px, 2.4vw, 28px);
-            border: 2px solid rgba(88, 245, 223, 0.74);
+            border: 2px solid var(--brand-light-blue);
             background: rgba(3, 7, 20, 0.82);
             box-shadow:
-                5px 5px 0 rgba(233, 75, 154, 0.74),
-                0 0 24px rgba(88, 245, 223, 0.2);
+                5px 5px 0 var(--muted-rose),
+                0 0 24px rgba(119, 163, 255, 0.24);
             backdrop-filter: blur(3px);
+        }
+
+        .title-screen__hero {
+            margin: 0;
+            color: var(--rose-gold);
+            font-size: clamp(8px, 1vw, 11px);
+            font-weight: 700;
+            letter-spacing: 0.16em;
+            text-align: center;
+            text-shadow: 2px 2px #000;
+            text-transform: uppercase;
+        }
+
+        .title-screen__hero strong {
+            color: var(--brand-light-blue);
         }
 
         .title-screen__controls .pixel-button {
             min-width: clamp(150px, 19vw, 218px);
-            border-color: var(--pink);
-            background: linear-gradient(#ef5ca7, #92295f);
-            color: #fff;
+            border-color: var(--rose-gold);
+            background: linear-gradient(var(--muted-rose), var(--warm-plum));
+            color: var(--cream);
             font-size: clamp(10px, 1.25vw, 14px);
             animation: title-prompt 1.15s steps(2, end) infinite;
         }
@@ -304,7 +347,7 @@
 
         .title-screen__hint {
             margin: 0;
-            color: #bafcf2;
+            color: var(--index-teal);
             font-size: clamp(7px, 0.9vw, 10px);
             letter-spacing: 0.15em;
             text-align: center;
@@ -327,14 +370,14 @@
         .mission {
             justify-self: start;
             padding: 7px 9px;
-            border-left: 3px solid var(--cyan);
+            border-left: 3px solid var(--index-teal);
             background: linear-gradient(90deg, rgba(4, 7, 17, 0.88), rgba(4, 7, 17, 0.12));
             text-shadow: 2px 2px #000;
         }
 
         .mission strong {
             display: block;
-            color: var(--cyan);
+            color: var(--brand-light-blue);
             font-size: clamp(7px, 1.05vw, 11px);
             letter-spacing: 0.18em;
         }
@@ -349,10 +392,10 @@
             justify-self: center;
             min-width: clamp(72px, 10vw, 118px);
             padding: 7px 12px;
-            border: 2px solid rgba(255, 211, 108, 0.76);
+            border: 2px solid var(--brand-gold);
             background: rgba(5, 7, 19, 0.9);
             box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.64);
-            color: var(--gold);
+            color: var(--brand-gold);
             font-size: clamp(11px, 1.6vw, 19px);
             font-weight: 700;
             letter-spacing: 0.08em;
@@ -377,7 +420,7 @@
         }
 
         .stats strong {
-            color: var(--cyan);
+            color: var(--index-blue);
         }
 
         .hearts {
@@ -397,11 +440,11 @@
             z-index: 7;
             width: min(82%, 520px);
             padding: clamp(16px, 3vw, 34px);
-            border: 3px solid var(--cyan);
+            border: 3px solid var(--amethyst);
             background:
                 linear-gradient(rgba(9, 13, 30, 0.97), rgba(4, 7, 17, 0.97));
             box-shadow:
-                8px 8px 0 var(--pink),
+                8px 8px 0 var(--rose-gold),
                 14px 14px 0 rgba(0, 0, 0, 0.62);
             text-align: center;
             transform: translate(-50%, -50%);
@@ -413,7 +456,7 @@
 
         .message-kicker {
             margin: 0 0 8px;
-            color: var(--cyan);
+            color: var(--brand-light-blue);
             font-size: clamp(8px, 1.1vw, 12px);
             font-weight: 700;
             letter-spacing: 0.2em;
@@ -457,9 +500,9 @@
         }
 
         .message-card .pixel-button--secondary {
-            border-color: var(--cyan);
-            background: linear-gradient(#26334a, #101725);
-            color: var(--cyan);
+            border-color: var(--index-teal);
+            background: linear-gradient(var(--logo-teal), var(--logo-navy));
+            color: var(--cream);
         }
 
         .message-card .pixel-button:disabled {
@@ -493,12 +536,28 @@
             min-height: 28px;
             padding: 4px 7px;
             place-items: center;
-            border: 2px solid #4c5778;
-            background: #141a2c;
+            border: 2px solid var(--brand-blue);
+            background: var(--logo-navy);
             box-shadow: 0 3px 0 #03040b;
             color: #fff;
             font-family: inherit;
             font-size: 10px;
+        }
+
+        kbd:nth-of-type(3) {
+            border-color: var(--brand-gold);
+        }
+
+        kbd:nth-of-type(4) {
+            border-color: var(--rose-gold);
+        }
+
+        kbd:nth-of-type(5) {
+            border-color: var(--index-teal);
+        }
+
+        kbd:nth-of-type(6) {
+            border-color: var(--amethyst);
         }
 
         .touch-controls {
@@ -518,9 +577,9 @@
             height: 44px;
             padding: 0;
             place-items: center;
-            border: 2px solid #4c5778;
+            border: 2px solid var(--brand-blue);
             border-radius: 0;
-            background: #141a2c;
+            background: var(--logo-navy);
             box-shadow: 0 4px 0 #03040b;
             color: #fff;
             cursor: pointer;
@@ -576,8 +635,8 @@
 
         .touch-key--jump {
             width: 86px;
-            border-color: rgba(255, 105, 180, 0.72);
-            color: var(--pink);
+            border-color: var(--muted-rose);
+            color: var(--rose-gold);
             font-size: 10px;
             font-weight: 700;
             letter-spacing: 0.1em;
@@ -585,21 +644,21 @@
 
         .touch-key--shoot {
             width: 64px;
-            border-color: rgba(88, 245, 223, 0.72);
-            color: var(--cyan);
+            border-color: var(--index-teal);
+            color: var(--index-teal);
             font-size: 10px;
             font-weight: 700;
             letter-spacing: 0.08em;
         }
 
         .touch-key--down {
-            border-color: rgba(255, 211, 108, 0.72);
-            color: var(--gold);
+            border-color: var(--brand-gold);
+            color: var(--brand-gold);
         }
 
         .touch-key.is-pressed,
         .touch-key:active {
-            background: #29314c;
+            background: var(--warm-plum);
             box-shadow: 0 1px 0 #03040b;
             transform: translateY(3px);
         }
@@ -744,12 +803,22 @@
                 min-width: 58px;
                 min-height: 32px;
                 padding: 5px 7px;
-                border-color: rgba(186, 252, 242, 0.48);
+                border-color: var(--brand-light-blue);
                 background: rgba(5, 9, 22, 0.64);
                 box-shadow: 0 2px 0 rgba(0, 0, 0, 0.55);
                 font-size: 7px;
                 opacity: 0.86;
                 backdrop-filter: blur(4px);
+            }
+
+            .top-actions #soundButton {
+                border-color: var(--index-teal);
+                background: rgba(61, 82, 85, 0.72);
+            }
+
+            .top-actions #restartButton {
+                border-color: var(--rose-gold);
+                background: rgba(103, 81, 104, 0.72);
             }
 
             .hud {
@@ -851,12 +920,12 @@
             .touch-key {
                 width: clamp(68px, 19vw, 78px);
                 height: clamp(68px, 19vw, 78px);
-                border: 2px solid rgba(186, 252, 242, 0.58);
+                border: 2px solid var(--brand-light-blue);
                 border-radius: 18px;
                 background: rgba(6, 11, 27, 0.34);
                 box-shadow:
                     0 5px 0 rgba(0, 0, 0, 0.38),
-                    inset 0 0 18px rgba(88, 245, 223, 0.08);
+                    inset 0 0 18px rgba(99, 149, 238, 0.12);
                 color: rgba(255, 255, 255, 0.92);
                 font-size: 27px;
                 opacity: 0.84;
@@ -883,26 +952,26 @@
             .touch-key--jump {
                 width: clamp(86px, 23vw, 96px);
                 height: clamp(86px, 23vw, 96px);
-                border-color: rgba(255, 105, 180, 0.72);
+                border-color: var(--muted-rose);
                 border-radius: 50%;
                 background: rgba(36, 7, 29, 0.36);
                 box-shadow:
                     0 5px 0 rgba(0, 0, 0, 0.38),
-                    inset 0 0 24px rgba(255, 105, 180, 0.12);
-                color: #ff9bce;
+                    inset 0 0 24px rgba(224, 191, 184, 0.14);
+                color: var(--rose-gold);
                 font-size: 11px;
             }
 
             .touch-key--shoot {
                 width: clamp(52px, 15vw, 62px);
                 height: clamp(52px, 15vw, 62px);
-                border-color: rgba(88, 245, 223, 0.72);
+                border-color: var(--index-teal);
                 border-radius: 50%;
                 background: rgba(6, 30, 27, 0.36);
                 box-shadow:
                     0 5px 0 rgba(0, 0, 0, 0.38),
-                    inset 0 0 24px rgba(88, 245, 223, 0.14);
-                color: var(--cyan);
+                    inset 0 0 24px rgba(158, 197, 193, 0.16);
+                color: var(--index-teal);
                 font-size: 10px;
             }
 
@@ -912,12 +981,12 @@
                 left: 50%;
                 width: clamp(52px, 15vw, 62px);
                 height: clamp(52px, 15vw, 62px);
-                border-color: rgba(255, 211, 108, 0.72);
+                border-color: var(--brand-gold);
                 border-radius: 50%;
                 background: rgba(35, 26, 7, 0.38);
                 box-shadow:
                     0 5px 0 rgba(0, 0, 0, 0.38),
-                    inset 0 0 24px rgba(255, 211, 108, 0.12);
+                    inset 0 0 24px rgba(217, 192, 140, 0.14);
                 transform: translateX(-50%);
             }
 
@@ -928,11 +997,11 @@
 
             .touch-key.is-pressed,
             .touch-key:active {
-                border-color: var(--cyan);
-                background: rgba(22, 48, 62, 0.7);
+                border-color: var(--brand-light-blue);
+                background: rgba(103, 81, 104, 0.72);
                 box-shadow:
                     0 1px 0 rgba(0, 0, 0, 0.55),
-                    0 0 24px rgba(88, 245, 223, 0.3);
+                    0 0 24px rgba(119, 163, 255, 0.3);
                 color: #fff;
                 opacity: 1;
                 transform: translateY(4px) scale(0.97);
@@ -944,7 +1013,8 @@
                     18px
                     max(28px, calc(env(safe-area-inset-bottom) + 12px));
                 background:
-                    radial-gradient(circle at 50% 45%, rgba(88, 245, 223, 0.14), transparent 46%),
+                    radial-gradient(circle at 35% 45%, rgba(99, 149, 238, 0.15), transparent 46%),
+                    radial-gradient(circle at 68% 55%, rgba(155, 89, 182, 0.1), transparent 42%),
                     linear-gradient(rgba(2, 4, 14, 0.2), rgba(2, 4, 14, 0.92)),
                     #030511;
             }
@@ -1039,9 +1109,10 @@
                     <img
                         class="title-screen__art"
                         src="/Images/Game/super-frgmnts-title-art.png"
-                        alt="Super Frgmnts concept art showing the Signal Ranger racing through the glowing foundry"
+                        alt="Super Frgmnts concept art showing Aryn Sol-Mavi, the Signal Ranger, racing through the glowing foundry"
                     >
                     <div class="title-screen__controls">
+                        <p class="title-screen__hero">Signal Ranger // <strong>Aryn Sol-Mavi</strong></p>
                         <button class="pixel-button" id="titleStartButton" type="button" disabled>Loading signal…</button>
                         <p class="title-screen__hint">Arrow keys to move // Down enters Deepworks // Space to jump // Ctrl to fire (unlocks at 3 shards)</p>
                     </div>
@@ -1049,7 +1120,7 @@
 
                 <div class="hud" aria-hidden="true">
                     <div class="mission">
-                        <strong>MISSION // RECOVER</strong>
+                        <strong>ARYN SOL-MAVI // RECOVER</strong>
                         <span>SHARDS <b id="shardCount">0</b>/12 → UPLINK GATE</span>
                     </div>
                     <div class="timer" id="timer">00:55</div>
@@ -1192,7 +1263,7 @@
                 crawler: loadImage("/Images/Game/enemy-crawler-ridge-skitter.png"),
                 flyer: loadImage("/Images/Game/enemy-flyer-spore-wisp.png"),
                 walker: loadImage("/Images/Game/enemy-walker-clacker-beetle.png"),
-                run: loadImage("/Images/Builder/signal-ranger-run-10pose-balanced-gait-sheet.png"),
+                run: loadImage("/Images/Builder/aryn-run-10pose-balanced-gait-sheet.png"),
                 idle: loadImage("/Images/Builder/signal-ranger-idle-focused-v2.png"),
                 takeoff: loadImage("/Images/Builder/signal-ranger-jump-takeoff.png"),
                 airborne: loadImage("/Images/Builder/signal-ranger-jump-airborne.png"),
@@ -1213,6 +1284,7 @@
             var collected = 0;
             var hits = 0;
             var soundOn = true;
+            var resumeMusicAfterFocus = false;
             var audioContext = null;
             var lastFrame = 0;
             var runFrameTime = 0;
@@ -2854,7 +2926,7 @@
             }
 
             function playBackgroundMusic() {
-                if (!soundOn || !backgroundMusic) return;
+                if (!soundOn || !backgroundMusic || document.visibilityState === "hidden") return;
                 backgroundMusic.volume = 0.32;
                 var playback = backgroundMusic.play();
                 if (playback && typeof playback.catch === "function") {
@@ -2866,6 +2938,39 @@
 
             function pauseBackgroundMusic() {
                 if (backgroundMusic) backgroundMusic.pause();
+            }
+
+            function pauseAudioForFocusLoss() {
+                if (
+                    backgroundMusic &&
+                    !backgroundMusic.paused &&
+                    soundOn &&
+                    state === "running"
+                ) {
+                    resumeMusicAfterFocus = true;
+                }
+                pauseBackgroundMusic();
+                if (audioContext && audioContext.state === "running") {
+                    var suspendedAudio = audioContext.suspend();
+                    if (suspendedAudio && typeof suspendedAudio.catch === "function") {
+                        suspendedAudio.catch(function () {});
+                    }
+                }
+            }
+
+            function resumeAudioAfterFocusGain() {
+                if (document.visibilityState === "hidden") return;
+                if (audioContext && soundOn && state === "running" && audioContext.state === "suspended") {
+                    var resumedAudio = audioContext.resume();
+                    if (resumedAudio && typeof resumedAudio.catch === "function") {
+                        resumedAudio.catch(function () {});
+                    }
+                }
+                if (!resumeMusicAfterFocus) return;
+                resumeMusicAfterFocus = false;
+                if (soundOn && state === "running") {
+                    playBackgroundMusic();
+                }
             }
 
             function playTone(frequency, duration, type, volume, delay) {
@@ -2962,6 +3067,18 @@
                 keys.down = false;
                 keys.jump = false;
                 keys.shoot = false;
+                pauseAudioForFocusLoss();
+            });
+
+            window.addEventListener("focus", resumeAudioAfterFocusGain);
+            window.addEventListener("pagehide", pauseAudioForFocusLoss);
+            window.addEventListener("pageshow", resumeAudioAfterFocusGain);
+            document.addEventListener("visibilitychange", function () {
+                if (document.visibilityState === "hidden") {
+                    pauseAudioForFocusLoss();
+                } else {
+                    resumeAudioAfterFocusGain();
+                }
             });
 
             window.addEventListener("resize", resizeGameViewport);
@@ -3006,6 +3123,7 @@
                     playBackgroundMusic();
                     playTone(440, 0.06, "square", 0.025);
                 } else {
+                    resumeMusicAfterFocus = false;
                     pauseBackgroundMusic();
                 }
             });
