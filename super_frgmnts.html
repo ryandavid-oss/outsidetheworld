@@ -564,6 +564,10 @@
             height: auto;
         }
 
+        .touch-key__icon--down {
+            transform: rotate(90deg);
+        }
+
         .action-controls {
             display: flex;
             align-items: center;
@@ -586,6 +590,11 @@
             font-size: 10px;
             font-weight: 700;
             letter-spacing: 0.08em;
+        }
+
+        .touch-key--down {
+            border-color: rgba(255, 211, 108, 0.72);
+            color: var(--gold);
         }
 
         .touch-key.is-pressed,
@@ -831,6 +840,7 @@
             }
 
             .move-controls {
+                position: relative;
                 gap: 12px;
             }
 
@@ -894,6 +904,26 @@
                     inset 0 0 24px rgba(88, 245, 223, 0.14);
                 color: var(--cyan);
                 font-size: 10px;
+            }
+
+            .touch-key--down {
+                position: absolute;
+                bottom: calc(100% + 12px);
+                left: 50%;
+                width: clamp(52px, 15vw, 62px);
+                height: clamp(52px, 15vw, 62px);
+                border-color: rgba(255, 211, 108, 0.72);
+                border-radius: 50%;
+                background: rgba(35, 26, 7, 0.38);
+                box-shadow:
+                    0 5px 0 rgba(0, 0, 0, 0.38),
+                    inset 0 0 24px rgba(255, 211, 108, 0.12);
+                transform: translateX(-50%);
+            }
+
+            .touch-key--down.is-pressed,
+            .touch-key--down:active {
+                transform: translate(-50%, 4px) scale(0.97);
             }
 
             .touch-key.is-pressed,
@@ -1013,7 +1043,7 @@
                     >
                     <div class="title-screen__controls">
                         <button class="pixel-button" id="titleStartButton" type="button" disabled>Loading signal…</button>
-                        <p class="title-screen__hint">Arrow keys to move // Space to jump // X to fire (unlocks at 3 shards)</p>
+                        <p class="title-screen__hint">Arrow keys to move // Down enters Deepworks // Space to jump // Ctrl to fire (unlocks at 3 shards)</p>
                     </div>
                 </div>
 
@@ -1048,8 +1078,9 @@
         <footer class="control-bar">
             <div class="keyboard-help" aria-label="Keyboard controls">
                 <kbd>←</kbd><kbd>→</kbd><span>move</span>
+                <kbd>↓</kbd><span>deepworks</span>
                 <kbd>SPACE</kbd><span>jump</span>
-                <kbd>X</kbd><span>blaster</span>
+                <kbd>CTRL</kbd><span>blaster</span>
                 <kbd>R</kbd><span>restart</span>
             </div>
             <div class="touch-controls" aria-label="Game controls">
@@ -1058,6 +1089,14 @@
                         <img
                             class="touch-key__icon"
                             src="/Images/Game/control-arrow-left.png"
+                            alt=""
+                            draggable="false"
+                        >
+                    </button>
+                    <button class="touch-key touch-key--down" type="button" data-control="down" aria-label="Drop into Deepworks">
+                        <img
+                            class="touch-key__icon touch-key__icon--down"
+                            src="/Images/Game/control-arrow-right.png"
                             alt=""
                             draggable="false"
                         >
@@ -1160,12 +1199,13 @@
                 crouch: loadImage("/Images/Builder/signal-ranger-crouch.png")
             };
 
-            var keys = { left: false, right: false, jump: false, shoot: false };
+            var keys = { left: false, right: false, down: false, jump: false, shoot: false };
             var bolts = [];
             var blasterTier = 0;
             var blasterHeat = 0;
             var blasterOverheated = false;
             var shootCooldown = 0;
+            var shootBuffer = 0;
             var state = "loading";
             var elapsed = 0;
             var timeLeft = START_TIME;
@@ -1190,6 +1230,10 @@
             var enemies = [];
             var energyOrbs = [];
             var heartPickups = [];
+            var inDeepworks = false;
+            var deepworksRoom = null;
+            var groundDropTimer = 0;
+            var deepworksPromptTimer = 0;
 
             var player = {
                 x: 82,
@@ -1242,6 +1286,20 @@
                 { x: WIDTH * 3 + 1184, y: 416, width: 188, height: 24 },
                 { x: WIDTH * 3 + 1438, y: 532, width: 148, height: 24 }
             ];
+
+            var deepworksRooms = Array.from({ length: SCREEN_COUNT }, function (_, roomIndex) {
+                var roomStart = roomIndex * WIDTH;
+                return {
+                    roomIndex: roomIndex,
+                    x: roomStart + 258,
+                    y: 875,
+                    width: 866,
+                    height: HEIGHT - 875,
+                    entryLeft: roomStart + 300,
+                    entryRight: roomStart + 1082,
+                    deepworks: true
+                };
+            });
 
             var shards = [];
             var hazards = [
@@ -1320,6 +1378,11 @@
                 blasterHeat = 0;
                 blasterOverheated = false;
                 shootCooldown = 0;
+                shootBuffer = 0;
+                inDeepworks = false;
+                deepworksRoom = null;
+                groundDropTimer = 0;
+                deepworksPromptTimer = 0;
                 resetPlatformMotion();
                 player.x = 82;
                 player.y = GROUND_Y - 100;
@@ -1329,23 +1392,23 @@
                 player.onGround = true;
                 player.supportPlatform = platforms[0];
                 shards = [
-                    makeShard(244, 606, "#58f5df"),
+                    makeShard(520, 818, "#58f5df"),
                     makeShard(726, 374, "#ffd36c"),
                     makeShard(1332, 378, "#ff69b4"),
-                    makeShard(WIDTH + 226, 606, "#ffd36c"),
+                    makeShard(WIDTH + 520, 818, "#ffd36c"),
                     makeShard(WIDTH + 706, 362, "#58f5df"),
                     makeShard(WIDTH + 1368, 350, "#ff69b4"),
-                    makeShard(WIDTH * 2 + 248, 606, "#58f5df"),
+                    makeShard(WIDTH * 2 + 520, 818, "#58f5df"),
                     makeShard(WIDTH * 2 + 610, 344, "#ff69b4"),
                     makeShard(WIDTH * 2 + 1266, 332, "#ffd36c"),
-                    makeShard(WIDTH * 3 + 254, 606, "#ff69b4"),
+                    makeShard(WIDTH * 3 + 520, 818, "#ff69b4"),
                     makeShard(WIDTH * 3 + 628, 356, "#ffd36c"),
                     makeShard(WORLD_WIDTH - 312, 606, "#58f5df")
                 ];
                 heartPickups = [
-                    makeHeartPickup(1492, 606),
-                    makeHeartPickup(WIDTH * 2 + 963, 390),
-                    makeHeartPickup(WIDTH * 3 + 650, 606)
+                    makeHeartPickup(842, 818),
+                    makeHeartPickup(WIDTH * 2 + 842, 818),
+                    makeHeartPickup(WIDTH * 3 + 842, 818)
                 ];
                 enemies = [
                     makeEnemy("crawler", 890, GROUND_Y, 780, 1035, 132),
@@ -1459,6 +1522,47 @@
                 }
             }
 
+            function findDeepworksEntry(x) {
+                return deepworksRooms.find(function (room) {
+                    return x >= room.entryLeft && x <= room.entryRight;
+                }) || null;
+            }
+
+            function enterDeepworks() {
+                if (
+                    state !== "running" ||
+                    inDeepworks ||
+                    !player.onGround ||
+                    !player.supportPlatform ||
+                    !player.supportPlatform.ground
+                ) {
+                    return false;
+                }
+
+                var room = findDeepworksEntry(player.x + 56);
+                if (!room) return false;
+
+                inDeepworks = true;
+                deepworksRoom = room;
+                groundDropTimer = 0.42;
+                player.y += 10;
+                player.vy = 180;
+                player.onGround = false;
+                player.supportPlatform = null;
+                energyOrbs.length = 0;
+                popups.push({
+                    x: player.x + 56,
+                    y: GROUND_Y - 142,
+                    text: "DEEPWORKS",
+                    life: 1,
+                    color: "#ffd36c"
+                });
+                playTone(168, 0.08, "square", 0.025);
+                playTone(112, 0.14, "square", 0.022, 0.06);
+                announce("Entering Deepworks. Jump back through the concrete deck to return.");
+                return true;
+            }
+
             function update(delta) {
                 if (state !== "running") {
                     updateParticles(delta);
@@ -1473,6 +1577,8 @@
                 }
                 timeLeft = Math.max(0, START_TIME - elapsed - hits * 4 + collected * 1.5);
                 jumpBuffer = Math.max(0, jumpBuffer - delta);
+                groundDropTimer = Math.max(0, groundDropTimer - delta);
+                deepworksPromptTimer = Math.max(0, deepworksPromptTimer - delta);
                 landPoseTime = Math.max(0, landPoseTime - delta);
                 invulnerableTime = Math.max(0, invulnerableTime - delta);
                 flashTime = Math.max(0, flashTime - delta);
@@ -1509,7 +1615,7 @@
                 }
 
                 if (jumpBuffer > 0 && coyoteTime > 0) {
-                    player.vy = -790;
+                    player.vy = inDeepworks ? -1040 : -790;
                     player.onGround = false;
                     player.supportPlatform = null;
                     coyoteTime = 0;
@@ -1524,6 +1630,12 @@
                 var oldBottom = player.y + 100;
                 player.x += player.vx * delta;
                 player.x = Math.max(-18, Math.min(WORLD_WIDTH - 94, player.x));
+                if (inDeepworks && deepworksRoom) {
+                    player.x = Math.max(
+                        deepworksRoom.x - 34,
+                        Math.min(deepworksRoom.x + deepworksRoom.width - 78, player.x)
+                    );
+                }
                 player.y += player.vy * delta;
                 var newBottom = player.y + 100;
                 var wasGrounded = player.onGround;
@@ -1536,6 +1648,7 @@
                     var landing = null;
 
                     platforms.forEach(function (platform) {
+                        if (platform.ground && groundDropTimer > 0) return;
                         var overlaps = bodyRight > platform.x + 4 && bodyLeft < platform.x + platform.width - 4;
                         var crosses = oldBottom <= platform.y + 3 && newBottom >= platform.y;
                         if (overlaps && crosses && (!landing || platform.y < landing.y)) {
@@ -1543,11 +1656,42 @@
                         }
                     });
 
+                    if (inDeepworks && deepworksRoom) {
+                        var overlapsDeepworks =
+                            bodyRight > deepworksRoom.x + 4 &&
+                            bodyLeft < deepworksRoom.x + deepworksRoom.width - 4;
+                        var crossesDeepworks =
+                            oldBottom <= deepworksRoom.y + 3 &&
+                            newBottom >= deepworksRoom.y;
+                        if (
+                            overlapsDeepworks &&
+                            crossesDeepworks &&
+                            (!landing || deepworksRoom.y < landing.y)
+                        ) {
+                            landing = deepworksRoom;
+                        }
+                    }
+
                     if (landing) {
                         player.y = landing.y - 100;
                         player.vy = 0;
                         player.onGround = true;
                         player.supportPlatform = landing;
+                        if (inDeepworks && !landing.deepworks) {
+                            inDeepworks = false;
+                            deepworksRoom = null;
+                            deepworksPromptTimer = 1;
+                            popups.push({
+                                x: player.x + 56,
+                                y: GROUND_Y - 138,
+                                text: "FOUNDRY DECK",
+                                life: 0.9,
+                                color: "#58f5df"
+                            });
+                            playTone(286, 0.08, "square", 0.025);
+                            playTone(430, 0.1, "square", 0.02, 0.055);
+                            announce("Returned above the foundry deck.");
+                        }
                         if (!wasGrounded) {
                             landPoseTime = 0.11;
                             spawnDust(player.x + 55, landing.y - 3, "#a86b9d", 9);
@@ -1707,6 +1851,7 @@
                         var inFiringView = enemyScreenX > -80 && enemyScreenX < viewWidth + 80;
                         if (
                             enemy.shootTimer <= 0 &&
+                            !inDeepworks &&
                             inFiringView &&
                             Math.abs((player.x + 56) - enemyCenterX) < (portraitMode ? viewWidth : 850)
                         ) {
@@ -1808,11 +1953,18 @@
 
             function updateBlaster(delta) {
                 shootCooldown = Math.max(0, shootCooldown - delta);
+                shootBuffer = Math.max(0, shootBuffer - delta);
                 blasterHeat = Math.max(0, blasterHeat - delta * (blasterOverheated ? 0.9 : 0.55));
                 if (blasterOverheated && blasterHeat <= 0.3) {
                     blasterOverheated = false;
                 }
-                if (blasterTier > 0 && keys.shoot && shootCooldown <= 0 && !blasterOverheated) {
+                if (
+                    blasterTier > 0 &&
+                    (keys.shoot || shootBuffer > 0) &&
+                    shootCooldown <= 0 &&
+                    !blasterOverheated
+                ) {
+                    shootBuffer = 0;
                     fireBlaster();
                 }
             }
@@ -2019,6 +2171,7 @@
                 drawAtmosphere();
                 ctx.save();
                 ctx.translate(-Math.round(cameraX), 0);
+                drawDeepworksPrompt();
                 drawPlatforms();
                 drawHazards();
                 drawEnemies();
@@ -2077,6 +2230,33 @@
                     ctx.fillStyle = index % 3 === 0 ? "#ff69b4" : "#58f5df";
                     ctx.fillRect(Math.round(x), y, 3, 3);
                 }
+                ctx.restore();
+            }
+
+            function drawDeepworksPrompt() {
+                if (
+                    inDeepworks ||
+                    deepworksPromptTimer > 0 ||
+                    !player.onGround ||
+                    !player.supportPlatform ||
+                    !player.supportPlatform.ground
+                ) {
+                    return;
+                }
+
+                var room = findDeepworksEntry(player.x + 56);
+                if (!room) return;
+
+                var promptX = Math.round(player.x + 56);
+                var pulse = 0.72 + Math.sin(elapsed * 5.5) * 0.2;
+                ctx.save();
+                ctx.globalAlpha = pulse;
+                ctx.fillStyle = "#03050d";
+                ctx.font = "700 17px Fira Code, monospace";
+                ctx.textAlign = "center";
+                ctx.fillText("↓ DEEPWORKS", promptX + 2, GROUND_Y - 137);
+                ctx.fillStyle = "#ffd36c";
+                ctx.fillText("↓ DEEPWORKS", promptX, GROUND_Y - 139);
                 ctx.restore();
             }
 
@@ -2639,7 +2819,7 @@
                 scoreDisplay.textContent = formatScore(score);
                 var zoneNames = ["FOUNDRY", "REFINERY", "BIOLAB", "UPLINK"];
                 var zoneIndex = Math.max(0, Math.min(SCREEN_COUNT - 1, Math.floor((player.x + 56) / WIDTH)));
-                zoneNameDisplay.textContent = zoneNames[zoneIndex];
+                zoneNameDisplay.textContent = inDeepworks ? "DEEPWORKS" : zoneNames[zoneIndex];
                 heartsDisplay.textContent = Array.from({ length: MAX_HITS }, function (_, index) {
                     return index < MAX_HITS - hits ? "♥" : "·";
                 }).join(" ");
@@ -2730,21 +2910,38 @@
                     keys.jump = pressed;
                     if (pressed) queueJump();
                     if (!pressed && player.vy < -310) player.vy = -310;
+                } else if (control === "down") {
+                    keys.down = pressed;
+                    if (pressed && state === "ready") startGame();
+                    if (pressed && state === "running") enterDeepworks();
                 } else {
                     keys[control] = pressed;
+                    if (control === "shoot" && pressed) shootBuffer = 0.12;
                     if (pressed && state === "ready") startGame();
                 }
             }
 
+            function isBlasterKey(event) {
+                return event.key === "Control" ||
+                    event.code === "ControlLeft" ||
+                    event.code === "ControlRight";
+            }
+
             window.addEventListener("keydown", function (event) {
-                if (event.code === "ArrowLeft" || event.code === "ArrowRight" || event.code === "Space") {
+                if (
+                    event.code === "ArrowLeft" ||
+                    event.code === "ArrowRight" ||
+                    event.code === "ArrowDown" ||
+                    event.code === "Space"
+                ) {
                     event.preventDefault();
                 }
-                if (event.repeat && event.code === "Space") return;
+                if (event.repeat && (event.code === "Space" || event.code === "ArrowDown")) return;
                 if (event.code === "ArrowLeft" || event.code === "KeyA") setControl("left", true);
                 if (event.code === "ArrowRight" || event.code === "KeyD") setControl("right", true);
+                if (event.code === "ArrowDown") setControl("down", true);
                 if (event.code === "Space" || event.code === "ArrowUp" || event.code === "KeyW") setControl("jump", true);
-                if (event.code === "KeyX") setControl("shoot", true);
+                if (isBlasterKey(event)) setControl("shoot", true);
                 if (event.code === "KeyR") {
                     playBackgroundMusic();
                     resetGame(true);
@@ -2754,13 +2951,15 @@
             window.addEventListener("keyup", function (event) {
                 if (event.code === "ArrowLeft" || event.code === "KeyA") setControl("left", false);
                 if (event.code === "ArrowRight" || event.code === "KeyD") setControl("right", false);
+                if (event.code === "ArrowDown") setControl("down", false);
                 if (event.code === "Space" || event.code === "ArrowUp" || event.code === "KeyW") setControl("jump", false);
-                if (event.code === "KeyX") setControl("shoot", false);
+                if (isBlasterKey(event)) setControl("shoot", false);
             });
 
             window.addEventListener("blur", function () {
                 keys.left = false;
                 keys.right = false;
+                keys.down = false;
                 keys.jump = false;
                 keys.shoot = false;
             });
