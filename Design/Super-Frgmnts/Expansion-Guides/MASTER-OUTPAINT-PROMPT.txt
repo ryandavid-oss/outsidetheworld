@@ -1,0 +1,37 @@
+USE CASE
+Precise vertical outpaint for a side-scrolling 16-bit platform game background.
+
+EDIT TARGET
+The attached 1672 × 1882 expansion canvas. Its transparent upper half is the new generation area. The original 1672 × 941 background occupies the lower half.
+
+PRIMARY REQUEST
+Extend the attached subterranean science-fiction room upward by one complete screen. Create a vast explorable industrial gantry with grated steel catwalks, gantry walkways, maintenance platforms, steel mezzanine decks, trussed service bridges, pipe-supported ledges, suspended machinery, vertical support towers, open shafts, and ventilation chambers.
+
+SEAM REQUIREMENTS
+Preserve every original pixel below y=1120. The area from y=941 through y=1120 is the only part of the original image that may be carefully inpainted. Continue major pipes, columns, rocks, cables, lights, shadows, and structural supports through that blend zone so the old/new boundary is invisible. Create at least two visually clear openings from the lower room into the new gantry.
+
+STYLE
+Strict orthographic side view. Crisp 16-bit pixel art. Match the source plate’s pixel scale, lighting direction, shadows, material treatment, palette, rock formations, steel architecture, crystals, vegetation, and atmospheric depth. No perspective shift, antialiasing, painterly blur, or vector-smooth edges.
+
+PLATFORM REQUIREMENTS
+Use the collision guide as the structural authority. Walkable surfaces must have crisp horizontal top edges and believable supports beneath them. Maintain at least 150 pixels of clear headroom. Keep normal vertical intervals near 105–135 pixels and optional powerup-only intervals near 170–220 pixels. Preserve the shared edge walkway at y=740 so neighboring rooms can connect seamlessly.
+
+READABILITY
+Maintain generous dark negative space around playable surfaces so the player, enemies, projectiles, shards, hearts, and powerups remain readable. Avoid foreground details that obscure walkable platform silhouettes.
+
+AVOID
+No characters, enemies, weapons, collectibles, powerups, text, letters, numbers, signs, logos, interface elements, fake exits, diagonal walkable floors, isometric perspective, floating unsupported platforms, tiny unusable ledges, impossible stairways, lighting discontinuities, or changes to the protected original area.
+
+ROOM-SPECIFIC ADDITIONS
+
+FOUNDRY
+Heavy furnaces, magnetic cranes, suspended casting machinery, reinforced steel frames, pink energy conduits, cyan mineral deposits, heat haze, and soot-darkened catwalks.
+
+REFINERY
+Dense pipe forests, pressure tanks, pumping stations, exhaust vents, amber safety lights, valve towers, maintenance bridges, and oily grated service decks.
+
+BIOLAB
+Glass growth chambers, containment bridges, dripping pipes, bioluminescent plants, teal and magenta organic contamination, observation platforms, and sealed research machinery.
+
+UPLINK
+Signal relays, antenna machinery, cable towers, luminous data conduits, suspended transmitter arrays, open central ascent space, and increasingly advanced infrastructure leading toward the final Uplink Gate.
