@@ -533,6 +533,17 @@
             height: auto;
         }
 
+        .touch-key__icon--shoot {
+            width: 42px;
+            height: auto;
+        }
+
+        .action-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
         .touch-key--jump {
             width: 86px;
             border-color: rgba(255, 105, 180, 0.72);
@@ -540,6 +551,15 @@
             font-size: 10px;
             font-weight: 700;
             letter-spacing: 0.1em;
+        }
+
+        .touch-key--shoot {
+            width: 64px;
+            border-color: rgba(88, 245, 223, 0.72);
+            color: var(--cyan);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
         }
 
         .touch-key.is-pressed,
@@ -788,6 +808,10 @@
                 gap: 12px;
             }
 
+            .action-controls {
+                gap: 10px;
+            }
+
             .touch-key {
                 width: clamp(68px, 19vw, 78px);
                 height: clamp(68px, 19vw, 78px);
@@ -815,6 +839,11 @@
                 height: auto;
             }
 
+            .touch-key__icon--shoot {
+                width: clamp(32px, 9vw, 38px);
+                height: auto;
+            }
+
             .touch-key--jump {
                 width: clamp(86px, 23vw, 96px);
                 height: clamp(86px, 23vw, 96px);
@@ -826,6 +855,19 @@
                     inset 0 0 24px rgba(255, 105, 180, 0.12);
                 color: #ff9bce;
                 font-size: 11px;
+            }
+
+            .touch-key--shoot {
+                width: clamp(52px, 15vw, 62px);
+                height: clamp(52px, 15vw, 62px);
+                border-color: rgba(88, 245, 223, 0.72);
+                border-radius: 50%;
+                background: rgba(6, 30, 27, 0.36);
+                box-shadow:
+                    0 5px 0 rgba(0, 0, 0, 0.38),
+                    inset 0 0 24px rgba(88, 245, 223, 0.14);
+                color: var(--cyan);
+                font-size: 10px;
             }
 
             .touch-key.is-pressed,
@@ -908,6 +950,10 @@
             .touch-key--jump {
                 width: 70px;
             }
+
+            .touch-key--shoot {
+                width: 52px;
+            }
         }
     </style>
 </head>
@@ -941,7 +987,7 @@
                     >
                     <div class="title-screen__controls">
                         <button class="pixel-button" id="titleStartButton" type="button" disabled>Loading signal…</button>
-                        <p class="title-screen__hint">Arrow keys to move // Space to jump</p>
+                        <p class="title-screen__hint">Arrow keys to move // Space to jump // X to fire (unlocks at 3 shards)</p>
                     </div>
                 </div>
 
@@ -954,6 +1000,7 @@
                     <div class="stats">
                         <span>SCORE <strong id="score">0000</strong></span>
                         <span>ZONE <strong id="zoneName">FOUNDRY</strong></span>
+                        <span>BLASTER <strong id="blasterStatus">LOCKED</strong></span>
                         <span class="hearts" id="hearts">♥ ♥ ♥ ♥ ♥</span>
                     </div>
                 </div>
@@ -973,6 +1020,7 @@
             <div class="keyboard-help" aria-label="Keyboard controls">
                 <kbd>←</kbd><kbd>→</kbd><span>move</span>
                 <kbd>SPACE</kbd><span>jump</span>
+                <kbd>X</kbd><span>blaster</span>
                 <kbd>R</kbd><span>restart</span>
             </div>
             <div class="touch-controls" aria-label="Game controls">
@@ -994,14 +1042,24 @@
                         >
                     </button>
                 </div>
-                <button class="touch-key touch-key--jump" type="button" data-control="jump" aria-label="Jump">
-                    <img
-                        class="touch-key__icon touch-key__icon--jump"
-                        src="/Images/Game/control-jump.png"
-                        alt=""
-                        draggable="false"
-                    >
-                </button>
+                <div class="action-controls">
+                    <button class="touch-key touch-key--shoot" type="button" data-control="shoot" aria-label="Fire blaster">
+                        <img
+                            class="touch-key__icon touch-key__icon--shoot"
+                            src="/Images/Game/control-fire.png"
+                            alt=""
+                            draggable="false"
+                        >
+                    </button>
+                    <button class="touch-key touch-key--jump" type="button" data-control="jump" aria-label="Jump">
+                        <img
+                            class="touch-key__icon touch-key__icon--jump"
+                            src="/Images/Game/control-jump.png"
+                            alt=""
+                            draggable="false"
+                        >
+                    </button>
+                </div>
             </div>
         </footer>
 
@@ -1030,6 +1088,12 @@
             var START_TIME = 105;
             var TOTAL_SHARDS = 12;
             var MAX_HITS = 5;
+            var BLASTER_TIERS = [3, 7, 12];
+            var BLASTER_STATS = {
+                1: { cooldown: 0.42, heatPerShot: 0.34, speed: 560, color: "#58f5df", size: 5 },
+                2: { cooldown: 0.22, heatPerShot: 0.24, speed: 620, color: "#58f5df", size: 6 },
+                3: { cooldown: 0.14, heatPerShot: 0.18, speed: 700, color: "#ff69b4", size: 8 }
+            };
             var canvas = document.getElementById("gameCanvas");
             var ctx = canvas.getContext("2d");
             var stageShell = document.getElementById("stageShell");
@@ -1046,6 +1110,7 @@
             var timerDisplay = document.getElementById("timer");
             var scoreDisplay = document.getElementById("score");
             var zoneNameDisplay = document.getElementById("zoneName");
+            var blasterStatusDisplay = document.getElementById("blasterStatus");
             var heartsDisplay = document.getElementById("hearts");
             var liveStatus = document.getElementById("liveStatus");
             var backgroundMusic = document.getElementById("backgroundMusic");
@@ -1065,7 +1130,12 @@
                 crouch: loadImage("/Images/Builder/signal-ranger-crouch.png")
             };
 
-            var keys = { left: false, right: false, jump: false };
+            var keys = { left: false, right: false, jump: false, shoot: false };
+            var bolts = [];
+            var blasterTier = 0;
+            var blasterHeat = 0;
+            var blasterOverheated = false;
+            var shootCooldown = 0;
             var state = "loading";
             var elapsed = 0;
             var timeLeft = START_TIME;
@@ -1195,6 +1265,11 @@
                 particles.length = 0;
                 popups.length = 0;
                 energyOrbs.length = 0;
+                bolts.length = 0;
+                blasterTier = 0;
+                blasterHeat = 0;
+                blasterOverheated = false;
+                shootCooldown = 0;
                 player.x = 82;
                 player.y = GROUND_Y - 100;
                 player.vx = 0;
@@ -1387,6 +1462,8 @@
                 checkHazards();
                 updateEnemies(delta, oldBottom, newBottom);
                 updateEnergyOrbs(delta);
+                updateBlaster(delta);
+                updateBolts(delta);
                 checkUplink();
                 var cameraTarget;
                 if (portraitMode) {
@@ -1429,6 +1506,25 @@
                         if (collected === TOTAL_SHARDS) {
                             popups.push({ x: uplink.x - 95, y: uplink.y - 32, text: "UPLINK OPEN", life: 1.8, color: "#4be36e" });
                             playTone(620, 0.14, "square", 0.035);
+                        }
+                        var newTier = BLASTER_TIERS.filter(function (threshold) {
+                            return collected >= threshold;
+                        }).length;
+                        if (newTier > blasterTier) {
+                            blasterTier = newTier;
+                            blasterOverheated = false;
+                            flashTime = Math.max(flashTime, 0.16);
+                            spawnBurst(player.x + 56, player.y + 40, "#58f5df", 20);
+                            popups.push({
+                                x: player.x + 56,
+                                y: player.y - 30,
+                                text: blasterTier === 1 ? "BLASTER ONLINE" : "BLASTER TIER " + blasterTier,
+                                life: 1.4,
+                                color: "#58f5df"
+                            });
+                            playTone(500, 0.12, "square", 0.03);
+                            playTone(760, 0.14, "square", 0.026, 0.08);
+                            announce("Blaster tier " + blasterTier + " unlocked.");
                         }
                     }
                 });
@@ -1572,6 +1668,80 @@
                 });
             }
 
+            function updateBlaster(delta) {
+                shootCooldown = Math.max(0, shootCooldown - delta);
+                blasterHeat = Math.max(0, blasterHeat - delta * (blasterOverheated ? 0.9 : 0.55));
+                if (blasterOverheated && blasterHeat <= 0.3) {
+                    blasterOverheated = false;
+                }
+                if (blasterTier > 0 && keys.shoot && shootCooldown <= 0 && !blasterOverheated) {
+                    fireBlaster();
+                }
+            }
+
+            function fireBlaster() {
+                var stats = BLASTER_STATS[blasterTier];
+                shootCooldown = stats.cooldown;
+                blasterHeat = Math.min(1, blasterHeat + stats.heatPerShot);
+                if (blasterHeat >= 1) {
+                    blasterOverheated = true;
+                }
+
+                var muzzleLocalX = 87 + blasterTier * 2;
+                var muzzleX = player.x + (player.facing > 0 ? muzzleLocalX : 112 - muzzleLocalX);
+                var muzzleY = player.y + 46;
+                bolts.push({
+                    x: muzzleX,
+                    y: muzzleY,
+                    vx: stats.speed * player.facing,
+                    life: 0.9,
+                    tier: blasterTier,
+                    color: stats.color,
+                    size: stats.size
+                });
+                spawnBurst(muzzleX, muzzleY, stats.color, 5);
+                playTone(720 + blasterTier * 60, 0.05, "square", 0.02);
+                playTone(360, 0.04, "sawtooth", 0.012, 0.01);
+            }
+
+            function updateBolts(delta) {
+                bolts.forEach(function (bolt) {
+                    if (bolt.life <= 0) return;
+                    bolt.life -= delta;
+                    bolt.x += bolt.vx * delta;
+
+                    enemies.forEach(function (enemy) {
+                        if (!enemy.alive || bolt.life <= 0) return;
+                        var enemyTop = enemy.y + (enemy.type === "flyer" ? 0 : Math.sin(elapsed * 4 + enemy.phase) * 2);
+                        var hit = bolt.x > enemy.x + 6 &&
+                            bolt.x < enemy.x + enemy.width - 6 &&
+                            bolt.y > enemyTop + 4 &&
+                            bolt.y < enemyTop + enemy.height - 4;
+                        if (!hit) return;
+
+                        bolt.life = 0;
+                        enemy.alive = false;
+                        score += 250;
+                        spawnBurst(enemy.x + enemy.width / 2, enemyTop + enemy.height / 2, enemyColor(enemy.type), 26);
+                        popups.push({
+                            x: enemy.x + enemy.width / 2,
+                            y: enemyTop - 10,
+                            text: enemyLabel(enemy.type) + " +250",
+                            life: 1.05,
+                            color: enemyColor(enemy.type)
+                        });
+                        playTone(150, 0.05, "square", 0.03);
+                        playTone(90, 0.08, "sawtooth", 0.025, 0.04);
+                    });
+                });
+
+                bolts = bolts.filter(function (bolt) {
+                    return bolt.life > 0 &&
+                        bolt.x > cameraX - 60 &&
+                        bolt.x < cameraX + viewWidth + 60;
+                });
+            }
+
             function takeHit(label) {
                 if (invulnerableTime > 0 || state !== "running") return;
                 hits += 1;
@@ -1700,6 +1870,7 @@
                 drawShards();
                 drawParticles();
                 drawEnergyOrbs();
+                drawBolts();
                 drawPlayer();
                 drawPopups();
                 ctx.restore();
@@ -2021,24 +2192,71 @@
                 if (invulnerableTime > 0 && Math.floor(invulnerableTime * 14) % 2 === 0) {
                     ctx.globalAlpha = 0.36;
                 }
+                ctx.translate(Math.round(player.x + (player.facing < 0 ? 112 : 0)), Math.round(player.y));
                 if (player.facing < 0) {
-                    ctx.translate(Math.round(player.x + 112), Math.round(player.y));
                     ctx.scale(-1, 1);
-                    ctx.drawImage(sprite, sourceX, 0, sourceWidth, 112, 0, 0, 112, 112);
-                } else {
-                    ctx.drawImage(
-                        sprite,
-                        sourceX,
-                        0,
-                        sourceWidth,
-                        112,
-                        Math.round(player.x),
-                        Math.round(player.y),
-                        112,
-                        112
-                    );
+                }
+                ctx.drawImage(sprite, sourceX, 0, sourceWidth, 112, 0, 0, 112, 112);
+                drawBlasterProp();
+                ctx.restore();
+            }
+
+            function drawBlasterProp() {
+                if (blasterTier <= 0) return;
+                var stats = BLASTER_STATS[blasterTier];
+                var justFired = shootCooldown > stats.cooldown - 0.06;
+                var bodyColor = blasterTier >= 3 ? "#ff69b4" : "#2a3a66";
+                var barrelLength = 8 + blasterTier * 2;
+                var barrelEnd = 9 + barrelLength;
+
+                ctx.save();
+                ctx.translate(68, 48);
+
+                // grip, angled down-back so the silhouette reads as an "L", not a rod
+                ctx.fillStyle = "#141a2c";
+                ctx.fillRect(-6, 0, 5, 11);
+
+                // main body block
+                ctx.fillStyle = bodyColor;
+                ctx.fillRect(-6, -6, 16, 7);
+
+                // sight nub on top breaks up the outline
+                ctx.fillStyle = "#141a2c";
+                ctx.fillRect(-2, -9, 4, 3);
+
+                // short, wide barrel (kept stubby so it can't read as a shaft)
+                ctx.fillStyle = bodyColor;
+                ctx.fillRect(9, -4, barrelLength, 5);
+
+                // muzzle accent cap
+                ctx.fillStyle = "#58f5df";
+                ctx.fillRect(barrelEnd - 3, -4, 4, 5);
+
+                // top highlight for a touch of shading
+                ctx.fillStyle = "rgba(255, 255, 255, 0.22)";
+                ctx.fillRect(-6, -6, 16, 2);
+
+                if (justFired) {
+                    ctx.globalAlpha = 0.85;
+                    ctx.fillStyle = "#eafff9";
+                    ctx.beginPath();
+                    ctx.arc(barrelEnd + 2, -2, 7, 0, Math.PI * 2);
+                    ctx.fill();
                 }
                 ctx.restore();
+            }
+
+            function drawBolts() {
+                bolts.forEach(function (bolt) {
+                    ctx.save();
+                    ctx.fillStyle = bolt.color;
+                    ctx.shadowColor = bolt.color;
+                    ctx.shadowBlur = 6;
+                    var width = 10 + bolt.size;
+                    var height = bolt.size;
+                    ctx.fillRect(Math.round(bolt.x - width / 2), Math.round(bolt.y - height / 2), width, height);
+                    ctx.restore();
+                });
             }
 
             function drawPopups() {
@@ -2064,6 +2282,14 @@
                 heartsDisplay.textContent = Array.from({ length: MAX_HITS }, function (_, index) {
                     return index < MAX_HITS - hits ? "♥" : "·";
                 }).join(" ");
+                if (blasterTier <= 0) {
+                    blasterStatusDisplay.textContent = "LOCKED";
+                    blasterStatusDisplay.style.color = "";
+                } else {
+                    blasterStatusDisplay.textContent = "T" + blasterTier + " " +
+                        (blasterOverheated ? "OVERHEAT" : Math.round(blasterHeat * 100) + "%");
+                    blasterStatusDisplay.style.color = blasterOverheated ? "var(--pink)" : "";
+                }
                 var displaySeconds = Math.max(0, Math.ceil(timeLeft));
                 var displayMinutes = Math.floor(displaySeconds / 60);
                 var remainingSeconds = displaySeconds % 60;
@@ -2157,6 +2383,7 @@
                 if (event.code === "ArrowLeft" || event.code === "KeyA") setControl("left", true);
                 if (event.code === "ArrowRight" || event.code === "KeyD") setControl("right", true);
                 if (event.code === "Space" || event.code === "ArrowUp" || event.code === "KeyW") setControl("jump", true);
+                if (event.code === "KeyX") setControl("shoot", true);
                 if (event.code === "KeyR") {
                     playBackgroundMusic();
                     resetGame(true);
@@ -2167,12 +2394,14 @@
                 if (event.code === "ArrowLeft" || event.code === "KeyA") setControl("left", false);
                 if (event.code === "ArrowRight" || event.code === "KeyD") setControl("right", false);
                 if (event.code === "Space" || event.code === "ArrowUp" || event.code === "KeyW") setControl("jump", false);
+                if (event.code === "KeyX") setControl("shoot", false);
             });
 
             window.addEventListener("blur", function () {
                 keys.left = false;
                 keys.right = false;
                 keys.jump = false;
+                keys.shoot = false;
             });
 
             window.addEventListener("resize", resizeGameViewport);
