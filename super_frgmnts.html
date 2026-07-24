@@ -1189,6 +1189,7 @@
             var popups = [];
             var enemies = [];
             var energyOrbs = [];
+            var heartPickups = [];
 
             var player = {
                 x: 82,
@@ -1341,6 +1342,11 @@
                     makeShard(WIDTH * 3 + 628, 356, "#ffd36c"),
                     makeShard(WORLD_WIDTH - 312, 606, "#58f5df")
                 ];
+                heartPickups = [
+                    makeHeartPickup(1492, 606),
+                    makeHeartPickup(WIDTH * 2 + 963, 390),
+                    makeHeartPickup(WIDTH * 3 + 650, 606)
+                ];
                 enemies = [
                     makeEnemy("crawler", 890, GROUND_Y, 780, 1035, 132),
                     makeEnemy("walker", WIDTH + 650, GROUND_Y, WIDTH + 590, WIDTH + 850, -94),
@@ -1370,6 +1376,15 @@
 
             function makeShard(x, y, color) {
                 return { x: x, y: y, color: color, collected: false, bob: Math.random() * Math.PI * 2 };
+            }
+
+            function makeHeartPickup(x, y) {
+                return {
+                    x: x,
+                    y: y,
+                    collected: false,
+                    bob: Math.random() * Math.PI * 2
+                };
             }
 
             function resetPlatformMotion() {
@@ -1551,6 +1566,7 @@
 
                 runFrameTime += delta * (Math.abs(player.vx) / maxSpeed);
                 checkShards();
+                checkHeartPickups();
                 checkHazards();
                 updateEnemies(delta, oldBottom, newBottom);
                 updateEnergyOrbs(delta);
@@ -1619,6 +1635,36 @@
                             announce("Blaster tier " + blasterTier + " unlocked.");
                         }
                     }
+                });
+            }
+
+            function checkHeartPickups() {
+                if (hits <= 0) return;
+
+                var centerX = player.x + 56;
+                var centerY = player.y + 52;
+
+                heartPickups.forEach(function (heart) {
+                    if (heart.collected) return;
+                    var dx = centerX - heart.x;
+                    var dy = centerY - heart.y;
+                    if (dx * dx + dy * dy >= 50 * 50) return;
+
+                    heart.collected = true;
+                    hits = Math.max(0, hits - 1);
+                    score += 150;
+                    flashTime = Math.max(flashTime, 0.08);
+                    spawnBurst(heart.x, heart.y, "#ff304f", 20);
+                    popups.push({
+                        x: heart.x,
+                        y: heart.y - 20,
+                        text: "+1 HEART",
+                        life: 1,
+                        color: "#ff5f76"
+                    });
+                    playTone(440, 0.08, "square", 0.025);
+                    playTone(660, 0.12, "square", 0.022, 0.07);
+                    announce("Heart restored. " + (MAX_HITS - hits) + " hearts remain.");
                 });
             }
 
@@ -1978,6 +2024,7 @@
                 drawEnemies();
                 drawUplink();
                 drawShards();
+                drawHeartPickups();
                 drawParticles();
                 drawEnergyOrbs();
                 drawBolts();
@@ -2414,6 +2461,65 @@
                     ctx.fillStyle = "#ffffff";
                     ctx.fillRect(24, -23, 4, 4);
                     ctx.fillRect(26, -27, 2, 2);
+                    ctx.restore();
+                });
+            }
+
+            function traceHeartSilhouette(scale) {
+                ctx.beginPath();
+                ctx.moveTo(0, 22 * scale);
+                ctx.lineTo(-18 * scale, 4 * scale);
+                ctx.lineTo(-18 * scale, -8 * scale);
+                ctx.lineTo(-11 * scale, -17 * scale);
+                ctx.lineTo(-3 * scale, -17 * scale);
+                ctx.lineTo(0, -12 * scale);
+                ctx.lineTo(3 * scale, -17 * scale);
+                ctx.lineTo(11 * scale, -17 * scale);
+                ctx.lineTo(18 * scale, -8 * scale);
+                ctx.lineTo(18 * scale, 4 * scale);
+                ctx.closePath();
+            }
+
+            function drawHeartPickups() {
+                heartPickups.forEach(function (heart) {
+                    if (heart.collected) return;
+
+                    var bobY = heart.y + Math.sin(elapsed * 3.6 + heart.bob) * 7;
+                    var pulse = 0.72 + Math.sin(elapsed * 6.2 + heart.bob) * 0.18;
+                    ctx.save();
+                    ctx.translate(Math.round(heart.x), Math.round(bobY));
+
+                    ctx.globalCompositeOperation = "screen";
+                    ctx.globalAlpha = (hits > 0 ? 0.18 : 0.08) * pulse;
+                    ctx.fillStyle = "#ff304f";
+                    ctx.shadowColor = "#ff304f";
+                    ctx.shadowBlur = 18;
+                    traceHeartSilhouette(1.45);
+                    ctx.fill();
+                    ctx.globalCompositeOperation = "source-over";
+                    ctx.globalAlpha = hits > 0 ? 1 : 0.58;
+                    ctx.shadowBlur = 0;
+
+                    ctx.fillStyle = "#3d0712";
+                    traceHeartSilhouette(1.08);
+                    ctx.fill();
+                    ctx.fillStyle = "#ff304f";
+                    traceHeartSilhouette(0.9);
+                    ctx.fill();
+
+                    ctx.fillStyle = "#ff7689";
+                    ctx.fillRect(-11, -10, 7, 7);
+                    ctx.fillRect(-7, -14, 6, 5);
+                    ctx.fillStyle = "#ffdbe1";
+                    ctx.fillRect(-8, -11, 4, 4);
+                    ctx.fillStyle = "#a50f2a";
+                    ctx.fillRect(5, 5, 5, 6);
+                    ctx.fillRect(1, 11, 5, 5);
+
+                    ctx.globalAlpha = hits > 0 ? 0.8 : 0.34;
+                    ctx.fillStyle = "#ffffff";
+                    ctx.fillRect(24, -20, 4, 4);
+                    ctx.fillRect(29, -25, 2, 2);
                     ctx.restore();
                 });
             }
