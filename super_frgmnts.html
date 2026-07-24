@@ -1276,7 +1276,7 @@
                     <div class="title-screen__controls">
                         <p class="title-screen__hero">Signal Ranger // <strong>Aryn Sol-Mavi</strong></p>
                         <button class="pixel-button" id="titleStartButton" type="button" disabled>Loading signal…</button>
-                        <p class="title-screen__hint">Left/right to move // Down enters Deepworks // Space to jump // Ctrl to fire (unlocks at 3 shards)</p>
+                        <p class="title-screen__hint">Left/right to move // Down drops through catwalks or enters Deepworks // Space to jump // Ctrl to fire (unlocks at 3 shards)</p>
                     </div>
                 </div>
 
@@ -1311,7 +1311,7 @@
         <footer class="control-bar">
             <div class="keyboard-help" aria-label="Keyboard controls">
                 <kbd>←</kbd><kbd>→</kbd><span>move</span>
-                <kbd>↓</kbd><span>deepworks</span>
+                <kbd>↓</kbd><span>drop</span>
                 <kbd>SPACE</kbd><span>jump</span>
                 <kbd>CTRL</kbd><span>blaster</span>
                 <kbd>R</kbd><span>restart</span>
@@ -1322,7 +1322,7 @@
                     id="directionPad"
                     role="group"
                     tabindex="0"
-                    aria-label="Directional stick. Drag left or right to move. Drag down to enter Deepworks."
+                    aria-label="Directional stick. Drag left or right to move. Drag down to drop through catwalks or enter Deepworks."
                     aria-keyshortcuts="ArrowLeft ArrowRight ArrowDown"
                 >
                     <span class="direction-pad__marker direction-pad__marker--left" aria-hidden="true">◀</span>
@@ -1418,7 +1418,7 @@
                 document.querySelector(".title-screen__hero").innerHTML =
                     "Signal Ranger // <strong>Aryn Sol-Mavi</strong> // Expansion Preview";
                 document.querySelector(".title-screen__hint").textContent =
-                    "Explore upward // Left/right to move // Space to jump // Down enters Deepworks";
+                    "Explore upward // Down drops through catwalks // Space jumps // Ctrl fires";
                 document.querySelector(".mission strong").textContent =
                     "ARYN SOL-MAVI // EXPLORE";
                 document.querySelector(".mission span").lastChild.textContent =
@@ -1483,7 +1483,8 @@
             var heartPickups = [];
             var inDeepworks = false;
             var deepworksRoom = null;
-            var groundDropTimer = 0;
+            var platformDropTimer = 0;
+            var dropThroughPlatform = null;
             var deepworksPromptTimer = 0;
             var directionPointerId = null;
             var directionPadStartedAt = 0;
@@ -1542,14 +1543,6 @@
             ];
 
             function buildExpansionPreviewPlatforms() {
-                var lanes = {
-                    LA: [0, 288],
-                    LB: [368, 688],
-                    M: [752, 920],
-                    RB: [992, 1312],
-                    RA: [1392, 1672]
-                };
-                var routeBands = [1476, 1348, 1220, 1092, 964, 836, 708, 580, 452, 324, 196, 68];
                 var previewPlatforms = [
                     {
                         x: 0,
@@ -1558,53 +1551,69 @@
                         height: WORLD_HEIGHT - GROUND_Y,
                         ground: true
                     },
-                    { x: 318, y: 1508, width: 204, height: 24 },
-                    { x: 632, y: 1384, width: 188, height: 24 },
-                    { x: 954, y: 1507, width: 218, height: 24 },
-                    { x: 1239, y: 1388, width: 186, height: 24 }
-                ];
-
-                routeBands.forEach(function (y, index) {
-                    var left = lanes[index % 2 === 0 ? "LA" : "LB"];
-                    var right = lanes[index % 2 === 0 ? "RA" : "RB"];
-                    previewPlatforms.push({
-                        x: left[0],
-                        y: y,
-                        width: left[1] - left[0],
-                        height: 24,
-                        previewRoute: true
-                    });
-                    previewPlatforms.push({
-                        x: right[0],
-                        y: y,
-                        width: right[1] - right[0],
-                        height: 24,
-                        previewRoute: true
-                    });
-                });
-
-                [1092, 580, 68].forEach(function (y) {
-                    previewPlatforms.push({
-                        x: lanes.M[0],
-                        y: y,
-                        width: lanes.M[1] - lanes.M[0],
-                        height: 24,
-                        previewRoute: true
-                    });
-                });
-
-                previewPlatforms.push(
-                    { x: 0, y: 580, width: 288, height: 24, previewRoute: true },
-                    { x: 1392, y: 580, width: 280, height: 24, previewRoute: true },
+                    // Lower Foundry ascent: five deliberate jumps, with one moving transfer.
                     {
-                        x: 704,
-                        y: 900,
-                        width: 272,
-                        height: 24,
+                        x: 318, y: 1508, width: 204, height: 18,
+                        previewRoute: true, theme: "cyan"
+                    },
+                    {
+                        x: 632, y: 1384, width: 188, height: 28,
+                        previewRoute: true, theme: "rose"
+                    },
+                    {
+                        x: 850,
+                        y: 1256,
+                        width: 192,
+                        height: 30,
                         previewRoute: true,
-                        motion: { axis: "y", range: 112, speed: 0.72, phase: 0 }
+                        theme: "gold",
+                        motion: { axis: "x", range: 160, speed: 0.68, phase: 0 }
+                    },
+                    {
+                        x: 1050, y: 1128, width: 220, height: 20,
+                        previewRoute: true, theme: "blue"
+                    },
+                    {
+                        x: 1230, y: 1021, width: 220, height: 26,
+                        previewRoute: true, theme: "violet"
+                    },
+
+                    // These collision surfaces follow the catwalks already painted into the upper plate.
+                    { x: 150, y: 891, width: 615, height: 24, artIntegrated: true },
+                    { x: 856, y: 891, width: 590, height: 24, artIntegrated: true },
+                    { x: 0, y: 600, width: 646, height: 24, artIntegrated: true },
+                    { x: 976, y: 600, width: 696, height: 24, artIntegrated: true },
+                    { x: 20, y: 338, width: 593, height: 24, artIntegrated: true },
+                    { x: 747, y: 338, width: 127, height: 24, artIntegrated: true },
+                    { x: 1004, y: 338, width: 644, height: 24, artIntegrated: true },
+
+                    // Sparse side-ledges bridge the large vertical voids between architectural decks.
+                    {
+                        x: 1360, y: 765, width: 260, height: 18,
+                        previewRoute: true, theme: "rose"
+                    },
+                    {
+                        x: 1070, y: 637, width: 240, height: 30,
+                        previewRoute: true, theme: "blue"
+                    },
+                    {
+                        x: 1240, y: 469, width: 240, height: 20,
+                        previewRoute: true, theme: "cyan"
+                    },
+                    {
+                        x: 715,
+                        y: 600,
+                        width: 210,
+                        height: 28,
+                        previewRoute: true,
+                        theme: "gold",
+                        motion: { axis: "x", range: 150, speed: 0.58, phase: Math.PI }
+                    },
+                    {
+                        x: 1392, y: 210, width: 280, height: 32,
+                        previewRoute: true, theme: "violet"
                     }
-                );
+                ];
                 return previewPlatforms;
             }
 
@@ -1641,7 +1650,7 @@
             var uplink = { x: WORLD_WIDTH - 126, y: GROUND_Y - 128, width: 68, height: 128 };
             if (expansionPreview) {
                 hazards = [];
-                uplink = { x: 1488, y: 68, width: 68, height: 128 };
+                uplink = { x: 1488, y: 82, width: 68, height: 128 };
             }
 
             function loadImage(source) {
@@ -1713,7 +1722,8 @@
                 shootBuffer = 0;
                 inDeepworks = false;
                 deepworksRoom = null;
-                groundDropTimer = 0;
+                platformDropTimer = 0;
+                dropThroughPlatform = null;
                 deepworksPromptTimer = 0;
                 resetDirectionPad();
                 resetPlatformMotion();
@@ -1740,18 +1750,18 @@
                 ];
                 if (expansionPreview) {
                     shards = [
-                        makeShard(170, 1430, "#58f5df"),
-                        makeShard(520, 1302, "#ffd36c"),
-                        makeShard(1500, 1174, "#ff69b4"),
-                        makeShard(560, 1046, "#58f5df"),
-                        makeShard(170, 918, "#ffd36c"),
-                        makeShard(540, 790, "#ff69b4"),
-                        makeShard(1500, 662, "#58f5df"),
-                        makeShard(520, 534, "#ffd36c"),
-                        makeShard(150, 406, "#ff69b4"),
-                        makeShard(520, 278, "#58f5df"),
-                        makeShard(1500, 150, "#ffd36c"),
-                        makeShard(820, 24, "#ff69b4")
+                        makeShard(430, 1454, "#58f5df"),
+                        makeShard(728, 1330, "#ffd36c"),
+                        makeShard(952, 1202, "#ff69b4"),
+                        makeShard(1160, 1074, "#58f5df"),
+                        makeShard(1328, 967, "#ffd36c"),
+                        makeShard(1320, 840, "#ff69b4"),
+                        makeShard(1490, 714, "#58f5df"),
+                        makeShard(1160, 548, "#ffd36c"),
+                        makeShard(1380, 421, "#ff69b4"),
+                        makeShard(1140, 292, "#58f5df"),
+                        makeShard(820, 292, "#ffd36c"),
+                        makeShard(1510, 158, "#ff69b4")
                     ];
                 }
                 heartPickups = [
@@ -1761,8 +1771,8 @@
                 ];
                 if (expansionPreview) {
                     heartPickups = [
-                        makeHeartPickup(1480, 918),
-                        makeHeartPickup(820, 534)
+                        makeHeartPickup(330, 840),
+                        makeHeartPickup(280, 548)
                     ];
                 }
                 enemies = [
@@ -1973,6 +1983,15 @@
                 }) || null;
             }
 
+            function beginPlatformDrop(platform) {
+                platformDropTimer = 0.42;
+                dropThroughPlatform = platform;
+                player.y += 10;
+                player.vy = 180;
+                player.onGround = false;
+                player.supportPlatform = null;
+            }
+
             function enterDeepworks() {
                 if (
                     state !== "running" ||
@@ -1989,11 +2008,7 @@
 
                 inDeepworks = true;
                 deepworksRoom = room;
-                groundDropTimer = 0.42;
-                player.y += 10;
-                player.vy = 180;
-                player.onGround = false;
-                player.supportPlatform = null;
+                beginPlatformDrop(player.supportPlatform);
                 energyOrbs.length = 0;
                 popups.push({
                     x: player.x + 56,
@@ -2005,6 +2020,36 @@
                 playTone(168, 0.08, "square", 0.025);
                 playTone(112, 0.14, "square", 0.022, 0.06);
                 announce("Entering Deepworks. Jump back through the concrete deck to return.");
+                return true;
+            }
+
+            function dropThroughCurrentPlatform() {
+                if (
+                    state !== "running" ||
+                    !player.onGround ||
+                    !player.supportPlatform
+                ) {
+                    return false;
+                }
+
+                if (player.supportPlatform.ground) {
+                    return enterDeepworks();
+                }
+                if (player.supportPlatform.deepworks) {
+                    return false;
+                }
+
+                var platform = player.supportPlatform;
+                beginPlatformDrop(platform);
+                popups.push({
+                    x: player.x + 56,
+                    y: platform.y - 34,
+                    text: "DROP",
+                    life: 0.65,
+                    color: "#58f5df"
+                });
+                playTone(176, 0.07, "square", 0.022);
+                announce("Dropping through catwalk.");
                 return true;
             }
 
@@ -2023,7 +2068,10 @@
                 }
                 timeLeft = Math.max(0, START_TIME - elapsed - hits * 4 + collected * 1.5);
                 jumpBuffer = Math.max(0, jumpBuffer - delta);
-                groundDropTimer = Math.max(0, groundDropTimer - delta);
+                platformDropTimer = Math.max(0, platformDropTimer - delta);
+                if (platformDropTimer === 0) {
+                    dropThroughPlatform = null;
+                }
                 deepworksPromptTimer = Math.max(0, deepworksPromptTimer - delta);
                 landPoseTime = Math.max(0, landPoseTime - delta);
                 invulnerableTime = Math.max(0, invulnerableTime - delta);
@@ -2094,7 +2142,7 @@
                     var landing = null;
 
                     platforms.forEach(function (platform) {
-                        if (platform.ground && groundDropTimer > 0) return;
+                        if (platformDropTimer > 0 && platform === dropThroughPlatform) return;
                         var overlaps = bodyRight > platform.x + 4 && bodyLeft < platform.x + platform.width - 4;
                         var crosses = oldBottom <= platform.y + 3 && newBottom >= platform.y;
                         if (overlaps && crosses && (!landing || platform.y < landing.y)) {
@@ -2732,13 +2780,76 @@
 
             function drawPlatforms() {
                 var roomAccents = ["#58f5df", "#e06aa9", "#78d96b", "#ffd36c"];
+                var platformThemes = {
+                    cyan: {
+                        accent: "#58f5df",
+                        shell: "#06141b",
+                        rim: "#366c74",
+                        body: "#12323b",
+                        panel: "#1e4852",
+                        insetA: "#0b2730",
+                        insetB: "#10343c",
+                        edge: "#4d7d85"
+                    },
+                    rose: {
+                        accent: "#e06aa9",
+                        shell: "#180a18",
+                        rim: "#74465f",
+                        body: "#3b1e35",
+                        panel: "#542a4a",
+                        insetA: "#241324",
+                        insetB: "#321a2d",
+                        edge: "#865370"
+                    },
+                    blue: {
+                        accent: "#77a3ff",
+                        shell: "#071021",
+                        rim: "#465f94",
+                        body: "#1a2b52",
+                        panel: "#29406f",
+                        insetA: "#101c39",
+                        insetB: "#172548",
+                        edge: "#607bb1"
+                    },
+                    gold: {
+                        accent: "#ffd36c",
+                        shell: "#1a1407",
+                        rim: "#8a713c",
+                        body: "#443616",
+                        panel: "#645026",
+                        insetA: "#2a210d",
+                        insetB: "#382c12",
+                        edge: "#9f8348"
+                    },
+                    violet: {
+                        accent: "#b897ff",
+                        shell: "#110b1f",
+                        rim: "#654f91",
+                        body: "#30224f",
+                        panel: "#49366d",
+                        insetA: "#211736",
+                        insetB: "#2b1d43",
+                        edge: "#765fa1"
+                    }
+                };
 
                 platforms.slice(1).forEach(function (platform, index) {
+                    if (platform.artIntegrated) return;
                     var roomIndex = Math.max(0, Math.min(
                         SCREEN_COUNT - 1,
                         Math.floor((platform.x + platform.width / 2) / WIDTH)
                     ));
-                    var accent = roomAccents[roomIndex];
+                    var theme = platformThemes[platform.theme] || {
+                        accent: platform.accent || roomAccents[roomIndex],
+                        shell: "#080d1a",
+                        rim: "#43526b",
+                        body: "#1b263a",
+                        panel: "#26334a",
+                        insetA: "#111a2b",
+                        insetB: "#151f31",
+                        edge: "#53627b"
+                    };
+                    var accent = theme.accent;
                     var panelY = platform.y + 8;
 
                     ctx.save();
@@ -2775,23 +2886,23 @@
                     ctx.fillStyle = "rgba(0, 0, 0, 0.48)";
                     ctx.fillRect(platform.x + 7, platform.y + platform.height, platform.width - 14, 9);
 
-                    ctx.fillStyle = "#080d1a";
+                    ctx.fillStyle = theme.shell;
                     ctx.fillRect(platform.x, platform.y, platform.width, platform.height);
-                    ctx.fillStyle = "#43526b";
+                    ctx.fillStyle = theme.rim;
                     ctx.fillRect(platform.x, platform.y, platform.width, 4);
-                    ctx.fillStyle = "#1b263a";
+                    ctx.fillStyle = theme.body;
                     ctx.fillRect(platform.x + 4, platform.y + 4, platform.width - 8, platform.height - 8);
                     ctx.fillStyle = accent;
                     ctx.fillRect(platform.x + 5, platform.y + 4, platform.width - 10, 3);
 
-                    ctx.fillStyle = "#26334a";
+                    ctx.fillStyle = theme.panel;
                     for (var panelX = platform.x + 8; panelX < platform.x + platform.width - 10; panelX += 34) {
                         var panelWidth = Math.min(25, platform.x + platform.width - panelX - 8);
                         if (panelWidth < 5) continue;
                         ctx.fillRect(panelX, panelY, panelWidth, 8);
-                        ctx.fillStyle = index % 2 ? "#111a2b" : "#151f31";
+                        ctx.fillStyle = index % 2 ? theme.insetA : theme.insetB;
                         ctx.fillRect(panelX + 3, panelY + 2, Math.max(2, panelWidth - 6), 4);
-                        ctx.fillStyle = "#26334a";
+                        ctx.fillStyle = theme.panel;
                     }
 
                     ctx.fillStyle = accent;
@@ -2808,7 +2919,7 @@
                         );
                     }
 
-                    ctx.fillStyle = "#53627b";
+                    ctx.fillStyle = theme.edge;
                     ctx.fillRect(platform.x, platform.y + 5, 5, platform.height - 7);
                     ctx.fillRect(platform.x + platform.width - 5, platform.y + 5, 5, platform.height - 7);
                     ctx.fillStyle = "#0b101e";
@@ -3421,7 +3532,7 @@
                 } else if (control === "down") {
                     keys.down = pressed;
                     if (pressed && state === "ready") startGame();
-                    if (pressed && state === "running") enterDeepworks();
+                    if (pressed && state === "running") dropThroughCurrentPlatform();
                 } else {
                     keys[control] = pressed;
                     if (control === "shoot" && pressed) shootBuffer = 0.12;
