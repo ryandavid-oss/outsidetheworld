@@ -1,0 +1,1504 @@
+{
+  "revision": 3,
+  "coordinate_authority": "super_frgmnts.html",
+  "canvas": [
+    1672,
+    1882
+  ],
+  "source_plate": [
+    1672,
+    941
+  ],
+  "new_upper_plate": [
+    0,
+    940
+  ],
+  "blend_zone": [
+    941,
+    1120
+  ],
+  "protected_from": 1121,
+  "live_game": {
+    "width": 1672,
+    "height": 941,
+    "ground_y": 663,
+    "deepworks_y": 875,
+    "jump_velocity": 790.0,
+    "gravity": 2050.0,
+    "delta_cap": 0.033
+  },
+  "composite_anchors": {
+    "concrete_deck_y": 1604,
+    "deepworks_floor_y": 1816,
+    "deepworks_playable_x": [
+      258,
+      1124
+    ],
+    "drop_entry_x": [
+      300,
+      1082
+    ],
+    "room_transition_y": 580
+  },
+  "movement_contract": {
+    "normal_rise": 128,
+    "boost_rise": 192,
+    "normal_jump_rise_at_delta_cap": 139.428,
+    "jump_safety_margin": 8,
+    "max_horizontal_gap": 160,
+    "player_collision_height": 100,
+    "player_draw_height": 112,
+    "grid": 16,
+    "grid_phase_y": 4
+  },
+  "rooms": {
+    "foundry": {
+      "source": "Images/Builder/signal-foundry-bg.png",
+      "lanes": {
+        "LA": [
+          0,
+          288
+        ],
+        "LB": [
+          368,
+          688
+        ],
+        "M": [
+          752,
+          920
+        ],
+        "RB": [
+          992,
+          1312
+        ],
+        "RA": [
+          1392,
+          1672
+        ],
+        "BOOST": [
+          704,
+          976
+        ]
+      },
+      "planned_platforms": [
+        {
+          "x0": 368,
+          "x1": 688,
+          "y": 68,
+          "kind": "proposed",
+          "role": "left-route",
+          "lane": "LB",
+          "bake_into_art": true
+        },
+        {
+          "x0": 752,
+          "x1": 920,
+          "y": 68,
+          "kind": "proposed",
+          "role": "cross-link",
+          "lane": "M",
+          "bake_into_art": true
+        },
+        {
+          "x0": 992,
+          "x1": 1312,
+          "y": 68,
+          "kind": "proposed",
+          "role": "right-route",
+          "lane": "RB",
+          "bake_into_art": true
+        },
+        {
+          "x0": 0,
+          "x1": 288,
+          "y": 196,
+          "kind": "proposed",
+          "role": "left-route",
+          "lane": "LA",
+          "bake_into_art": true
+        },
+        {
+          "x0": 1392,
+          "x1": 1672,
+          "y": 196,
+          "kind": "proposed",
+          "role": "right-route",
+          "lane": "RA",
+          "bake_into_art": true
+        },
+        {
+          "x0": 368,
+          "x1": 688,
+          "y": 324,
+          "kind": "proposed",
+          "role": "left-route",
+          "lane": "LB",
+          "bake_into_art": true
+        },
+        {
+          "x0": 992,
+          "x1": 1312,
+          "y": 324,
+          "kind": "proposed",
+          "role": "right-route",
+          "lane": "RB",
+          "bake_into_art": true
+        },
+        {
+          "x0": 704,
+          "x1": 976,
+          "y": 388,
+          "kind": "boost",
+          "role": "boost-perch",
+          "lane": "BOOST",
+          "bake_into_art": true
+        },
+        {
+          "x0": 0,
+          "x1": 288,
+          "y": 452,
+          "kind": "proposed",
+          "role": "left-route",
+          "lane": "LA",
+          "bake_into_art": true
+        },
+        {
+          "x0": 1392,
+          "x1": 1672,
+          "y": 452,
+          "kind": "proposed",
+          "role": "right-route",
+          "lane": "RA",
+          "bake_into_art": true
+        },
+        {
+          "x0": 0,
+          "x1": 288,
+          "y": 580,
+          "kind": "anchor",
+          "role": "room-transition",
+          "lane": "LA",
+          "bake_into_art": true
+        },
+        {
+          "x0": 368,
+          "x1": 688,
+          "y": 580,
+          "kind": "proposed",
+          "role": "left-route",
+          "lane": "LB",
+          "bake_into_art": true
+        },
+        {
+          "x0": 752,
+          "x1": 920,
+          "y": 580,
+          "kind": "proposed",
+          "role": "cross-link",
+          "lane": "M",
+          "bake_into_art": true
+        },
+        {
+          "x0": 992,
+          "x1": 1312,
+          "y": 580,
+          "kind": "proposed",
+          "role": "right-route",
+          "lane": "RB",
+          "bake_into_art": true
+        },
+        {
+          "x0": 1392,
+          "x1": 1672,
+          "y": 580,
+          "kind": "anchor",
+          "role": "room-transition",
+          "lane": "RA",
+          "bake_into_art": true
+        },
+        {
+          "x0": 0,
+          "x1": 288,
+          "y": 708,
+          "kind": "proposed",
+          "role": "left-route",
+          "lane": "LA",
+          "bake_into_art": true
+        },
+        {
+          "x0": 1392,
+          "x1": 1672,
+          "y": 708,
+          "kind": "proposed",
+          "role": "right-route",
+          "lane": "RA",
+          "bake_into_art": true
+        },
+        {
+          "x0": 368,
+          "x1": 688,
+          "y": 836,
+          "kind": "proposed",
+          "role": "left-route",
+          "lane": "LB",
+          "bake_into_art": true
+        },
+        {
+          "x0": 992,
+          "x1": 1312,
+          "y": 836,
+          "kind": "proposed",
+          "role": "right-route",
+          "lane": "RB",
+          "bake_into_art": true
+        },
+        {
+          "x0": 0,
+          "x1": 288,
+          "y": 964,
+          "kind": "proposed",
+          "role": "left-route",
+          "lane": "LA",
+          "bake_into_art": true
+        },
+        {
+          "x0": 1392,
+          "x1": 1672,
+          "y": 964,
+          "kind": "proposed",
+          "role": "right-route",
+          "lane": "RA",
+          "bake_into_art": true
+        },
+        {
+          "x0": 368,
+          "x1": 688,
+          "y": 1092,
+          "kind": "proposed",
+          "role": "left-route",
+          "lane": "LB",
+          "bake_into_art": true
+        },
+        {
+          "x0": 752,
+          "x1": 920,
+          "y": 1092,
+          "kind": "proposed",
+          "role": "cross-link",
+          "lane": "M",
+          "bake_into_art": true
+        },
+        {
+          "x0": 992,
+          "x1": 1312,
+          "y": 1092,
+          "kind": "proposed",
+          "role": "right-route",
+          "lane": "RB",
+          "bake_into_art": true
+        },
+        {
+          "x0": 0,
+          "x1": 288,
+          "y": 1220,
+          "kind": "annotation",
+          "role": "left-route",
+          "lane": "LA",
+          "bake_into_art": false
+        },
+        {
+          "x0": 1392,
+          "x1": 1672,
+          "y": 1220,
+          "kind": "annotation",
+          "role": "right-route",
+          "lane": "RA",
+          "bake_into_art": false
+        },
+        {
+          "x0": 368,
+          "x1": 688,
+          "y": 1348,
+          "kind": "annotation",
+          "role": "left-route",
+          "lane": "LB",
+          "bake_into_art": false
+        },
+        {
+          "x0": 992,
+          "x1": 1312,
+          "y": 1348,
+          "kind": "annotation",
+          "role": "right-route",
+          "lane": "RB",
+          "bake_into_art": false
+        },
+        {
+          "x0": 704,
+          "x1": 976,
+          "y": 1412,
+          "kind": "boost-annotation",
+          "role": "boost-launch",
+          "lane": "BOOST",
+          "bake_into_art": false
+        },
+        {
+          "x0": 0,
+          "x1": 288,
+          "y": 1476,
+          "kind": "annotation",
+          "role": "left-route",
+          "lane": "LA",
+          "bake_into_art": false
+        },
+        {
+          "x0": 1392,
+          "x1": 1672,
+          "y": 1476,
+          "kind": "annotation",
+          "role": "right-route",
+          "lane": "RA",
+          "bake_into_art": false
+        }
+      ],
+      "current_runtime_platforms": [
+        {
+          "x0": 318,
+          "x1": 522,
+          "y": 1508,
+          "kind": "current",
+          "role": "current-runtime",
+          "lane": "CURRENT",
+          "bake_into_art": false
+        },
+        {
+          "x0": 632,
+          "x1": 820,
+          "y": 1384,
+          "kind": "current",
+          "role": "current-runtime",
+          "lane": "CURRENT",
+          "bake_into_art": false
+        },
+        {
+          "x0": 954,
+          "x1": 1172,
+          "y": 1507,
+          "kind": "current",
+          "role": "current-runtime",
+          "lane": "CURRENT",
+          "bake_into_art": false
+        },
+        {
+          "x0": 1239,
+          "x1": 1425,
+          "y": 1388,
+          "kind": "current",
+          "role": "current-runtime",
+          "lane": "CURRENT",
+          "bake_into_art": false
+        }
+      ],
+      "moving_platform_concepts": [
+        {
+          "x0": 704,
+          "x1": 976,
+          "center_y": 900,
+          "travel": 56
+        }
+      ]
+    },
+    "refinery": {
+      "source": "Images/Game/signal-foundry-refinery.png",
+      "lanes": {
+        "LA": [
+          0,
+          304
+        ],
+        "LB": [
+          352,
+          672
+        ],
+        "M": [
+          752,
+          920
+        ],
+        "RB": [
+          1008,
+          1328
+        ],
+        "RA": [
+          1376,
+          1672
+        ],
+        "BOOST": [
+          704,
+          976
+        ]
+      },
+      "planned_platforms": [
+        {
+          "x0": 352,
+          "x1": 672,
+          "y": 68,
+          "kind": "proposed",
+          "role": "left-route",
+          "lane": "LB",
+          "bake_into_art": true
+        },
+        {
+          "x0": 752,
+          "x1": 920,
+          "y": 68,
+          "kind": "proposed",
+          "role": "cross-link",
+          "lane": "M",
+          "bake_into_art": true
+        },
+        {
+          "x0": 1008,
+          "x1": 1328,
+          "y": 68,
+          "kind": "proposed",
+          "role": "right-route",
+          "lane": "RB",
+          "bake_into_art": true
+        },
+        {
+          "x0": 0,
+          "x1": 304,
+          "y": 196,
+          "kind": "proposed",
+          "role": "left-route",
+          "lane": "LA",
+          "bake_into_art": true
+        },
+        {
+          "x0": 1376,
+          "x1": 1672,
+          "y": 196,
+          "kind": "proposed",
+          "role": "right-route",
+          "lane": "RA",
+          "bake_into_art": true
+        },
+        {
+          "x0": 352,
+          "x1": 672,
+          "y": 324,
+          "kind": "proposed",
+          "role": "left-route",
+          "lane": "LB",
+          "bake_into_art": true
+        },
+        {
+          "x0": 1008,
+          "x1": 1328,
+          "y": 324,
+          "kind": "proposed",
+          "role": "right-route",
+          "lane": "RB",
+          "bake_into_art": true
+        },
+        {
+          "x0": 704,
+          "x1": 976,
+          "y": 388,
+          "kind": "boost",
+          "role": "boost-perch",
+          "lane": "BOOST",
+          "bake_into_art": true
+        },
+        {
+          "x0": 0,
+          "x1": 304,
+          "y": 452,
+          "kind": "proposed",
+          "role": "left-route",
+          "lane": "LA",
+          "bake_into_art": true
+        },
+        {
+          "x0": 1376,
+          "x1": 1672,
+          "y": 452,
+          "kind": "proposed",
+          "role": "right-route",
+          "lane": "RA",
+          "bake_into_art": true
+        },
+        {
+          "x0": 0,
+          "x1": 304,
+          "y": 580,
+          "kind": "anchor",
+          "role": "room-transition",
+          "lane": "LA",
+          "bake_into_art": true
+        },
+        {
+          "x0": 352,
+          "x1": 672,
+          "y": 580,
+          "kind": "proposed",
+          "role": "left-route",
+          "lane": "LB",
+          "bake_into_art": true
+        },
+        {
+          "x0": 752,
+          "x1": 920,
+          "y": 580,
+          "kind": "proposed",
+          "role": "cross-link",
+          "lane": "M",
+          "bake_into_art": true
+        },
+        {
+          "x0": 1008,
+          "x1": 1328,
+          "y": 580,
+          "kind": "proposed",
+          "role": "right-route",
+          "lane": "RB",
+          "bake_into_art": true
+        },
+        {
+          "x0": 1376,
+          "x1": 1672,
+          "y": 580,
+          "kind": "anchor",
+          "role": "room-transition",
+          "lane": "RA",
+          "bake_into_art": true
+        },
+        {
+          "x0": 0,
+          "x1": 304,
+          "y": 708,
+          "kind": "proposed",
+          "role": "left-route",
+          "lane": "LA",
+          "bake_into_art": true
+        },
+        {
+          "x0": 1376,
+          "x1": 1672,
+          "y": 708,
+          "kind": "proposed",
+          "role": "right-route",
+          "lane": "RA",
+          "bake_into_art": true
+        },
+        {
+          "x0": 352,
+          "x1": 672,
+          "y": 836,
+          "kind": "proposed",
+          "role": "left-route",
+          "lane": "LB",
+          "bake_into_art": true
+        },
+        {
+          "x0": 1008,
+          "x1": 1328,
+          "y": 836,
+          "kind": "proposed",
+          "role": "right-route",
+          "lane": "RB",
+          "bake_into_art": true
+        },
+        {
+          "x0": 0,
+          "x1": 304,
+          "y": 964,
+          "kind": "proposed",
+          "role": "left-route",
+          "lane": "LA",
+          "bake_into_art": true
+        },
+        {
+          "x0": 1376,
+          "x1": 1672,
+          "y": 964,
+          "kind": "proposed",
+          "role": "right-route",
+          "lane": "RA",
+          "bake_into_art": true
+        },
+        {
+          "x0": 352,
+          "x1": 672,
+          "y": 1092,
+          "kind": "proposed",
+          "role": "left-route",
+          "lane": "LB",
+          "bake_into_art": true
+        },
+        {
+          "x0": 752,
+          "x1": 920,
+          "y": 1092,
+          "kind": "proposed",
+          "role": "cross-link",
+          "lane": "M",
+          "bake_into_art": true
+        },
+        {
+          "x0": 1008,
+          "x1": 1328,
+          "y": 1092,
+          "kind": "proposed",
+          "role": "right-route",
+          "lane": "RB",
+          "bake_into_art": true
+        },
+        {
+          "x0": 0,
+          "x1": 304,
+          "y": 1220,
+          "kind": "annotation",
+          "role": "left-route",
+          "lane": "LA",
+          "bake_into_art": false
+        },
+        {
+          "x0": 1376,
+          "x1": 1672,
+          "y": 1220,
+          "kind": "annotation",
+          "role": "right-route",
+          "lane": "RA",
+          "bake_into_art": false
+        },
+        {
+          "x0": 352,
+          "x1": 672,
+          "y": 1348,
+          "kind": "annotation",
+          "role": "left-route",
+          "lane": "LB",
+          "bake_into_art": false
+        },
+        {
+          "x0": 1008,
+          "x1": 1328,
+          "y": 1348,
+          "kind": "annotation",
+          "role": "right-route",
+          "lane": "RB",
+          "bake_into_art": false
+        },
+        {
+          "x0": 704,
+          "x1": 976,
+          "y": 1412,
+          "kind": "boost-annotation",
+          "role": "boost-launch",
+          "lane": "BOOST",
+          "bake_into_art": false
+        },
+        {
+          "x0": 0,
+          "x1": 304,
+          "y": 1476,
+          "kind": "annotation",
+          "role": "left-route",
+          "lane": "LA",
+          "bake_into_art": false
+        },
+        {
+          "x0": 1376,
+          "x1": 1672,
+          "y": 1476,
+          "kind": "annotation",
+          "role": "right-route",
+          "lane": "RA",
+          "bake_into_art": false
+        }
+      ],
+      "current_runtime_platforms": [
+        {
+          "x0": 278,
+          "x1": 483,
+          "y": 1495,
+          "kind": "current",
+          "role": "current-runtime",
+          "lane": "CURRENT",
+          "bake_into_art": false
+        },
+        {
+          "x0": 612,
+          "x1": 797,
+          "y": 1373,
+          "kind": "current",
+          "role": "current-runtime",
+          "lane": "CURRENT",
+          "bake_into_art": false
+        },
+        {
+          "x0": 954,
+          "x1": 1172,
+          "y": 1489,
+          "kind": "moving",
+          "role": "current-runtime",
+          "lane": "CURRENT",
+          "bake_into_art": false
+        },
+        {
+          "x0": 1282,
+          "x1": 1462,
+          "y": 1363,
+          "kind": "current",
+          "role": "current-runtime",
+          "lane": "CURRENT",
+          "bake_into_art": false
+        }
+      ],
+      "moving_platform_concepts": [
+        {
+          "x0": 688,
+          "x1": 976,
+          "center_y": 772,
+          "travel": 64
+        },
+        {
+          "x0": 704,
+          "x1": 976,
+          "center_y": 1028,
+          "travel": 48
+        }
+      ]
+    },
+    "biolab": {
+      "source": "Images/Game/signal-foundry-biolab.png",
+      "lanes": {
+        "LA": [
+          0,
+          320
+        ],
+        "LB": [
+          384,
+          720
+        ],
+        "M": [
+          752,
+          912
+        ],
+        "RB": [
+          960,
+          1296
+        ],
+        "RA": [
+          1360,
+          1672
+        ],
+        "BOOST": [
+          704,
+          976
+        ]
+      },
+      "planned_platforms": [
+        {
+          "x0": 384,
+          "x1": 720,
+          "y": 68,
+          "kind": "proposed",
+          "role": "left-route",
+          "lane": "LB",
+          "bake_into_art": true
+        },
+        {
+          "x0": 752,
+          "x1": 912,
+          "y": 68,
+          "kind": "proposed",
+          "role": "cross-link",
+          "lane": "M",
+          "bake_into_art": true
+        },
+        {
+          "x0": 960,
+          "x1": 1296,
+          "y": 68,
+          "kind": "proposed",
+          "role": "right-route",
+          "lane": "RB",
+          "bake_into_art": true
+        },
+        {
+          "x0": 0,
+          "x1": 320,
+          "y": 196,
+          "kind": "proposed",
+          "role": "left-route",
+          "lane": "LA",
+          "bake_into_art": true
+        },
+        {
+          "x0": 1360,
+          "x1": 1672,
+          "y": 196,
+          "kind": "proposed",
+          "role": "right-route",
+          "lane": "RA",
+          "bake_into_art": true
+        },
+        {
+          "x0": 384,
+          "x1": 720,
+          "y": 324,
+          "kind": "proposed",
+          "role": "left-route",
+          "lane": "LB",
+          "bake_into_art": true
+        },
+        {
+          "x0": 960,
+          "x1": 1296,
+          "y": 324,
+          "kind": "proposed",
+          "role": "right-route",
+          "lane": "RB",
+          "bake_into_art": true
+        },
+        {
+          "x0": 704,
+          "x1": 976,
+          "y": 388,
+          "kind": "boost",
+          "role": "boost-perch",
+          "lane": "BOOST",
+          "bake_into_art": true
+        },
+        {
+          "x0": 0,
+          "x1": 320,
+          "y": 452,
+          "kind": "proposed",
+          "role": "left-route",
+          "lane": "LA",
+          "bake_into_art": true
+        },
+        {
+          "x0": 1360,
+          "x1": 1672,
+          "y": 452,
+          "kind": "proposed",
+          "role": "right-route",
+          "lane": "RA",
+          "bake_into_art": true
+        },
+        {
+          "x0": 0,
+          "x1": 320,
+          "y": 580,
+          "kind": "anchor",
+          "role": "room-transition",
+          "lane": "LA",
+          "bake_into_art": true
+        },
+        {
+          "x0": 384,
+          "x1": 720,
+          "y": 580,
+          "kind": "proposed",
+          "role": "left-route",
+          "lane": "LB",
+          "bake_into_art": true
+        },
+        {
+          "x0": 752,
+          "x1": 912,
+          "y": 580,
+          "kind": "proposed",
+          "role": "cross-link",
+          "lane": "M",
+          "bake_into_art": true
+        },
+        {
+          "x0": 960,
+          "x1": 1296,
+          "y": 580,
+          "kind": "proposed",
+          "role": "right-route",
+          "lane": "RB",
+          "bake_into_art": true
+        },
+        {
+          "x0": 1360,
+          "x1": 1672,
+          "y": 580,
+          "kind": "anchor",
+          "role": "room-transition",
+          "lane": "RA",
+          "bake_into_art": true
+        },
+        {
+          "x0": 0,
+          "x1": 320,
+          "y": 708,
+          "kind": "proposed",
+          "role": "left-route",
+          "lane": "LA",
+          "bake_into_art": true
+        },
+        {
+          "x0": 1360,
+          "x1": 1672,
+          "y": 708,
+          "kind": "proposed",
+          "role": "right-route",
+          "lane": "RA",
+          "bake_into_art": true
+        },
+        {
+          "x0": 384,
+          "x1": 720,
+          "y": 836,
+          "kind": "proposed",
+          "role": "left-route",
+          "lane": "LB",
+          "bake_into_art": true
+        },
+        {
+          "x0": 960,
+          "x1": 1296,
+          "y": 836,
+          "kind": "proposed",
+          "role": "right-route",
+          "lane": "RB",
+          "bake_into_art": true
+        },
+        {
+          "x0": 0,
+          "x1": 320,
+          "y": 964,
+          "kind": "proposed",
+          "role": "left-route",
+          "lane": "LA",
+          "bake_into_art": true
+        },
+        {
+          "x0": 1360,
+          "x1": 1672,
+          "y": 964,
+          "kind": "proposed",
+          "role": "right-route",
+          "lane": "RA",
+          "bake_into_art": true
+        },
+        {
+          "x0": 384,
+          "x1": 720,
+          "y": 1092,
+          "kind": "proposed",
+          "role": "left-route",
+          "lane": "LB",
+          "bake_into_art": true
+        },
+        {
+          "x0": 752,
+          "x1": 912,
+          "y": 1092,
+          "kind": "proposed",
+          "role": "cross-link",
+          "lane": "M",
+          "bake_into_art": true
+        },
+        {
+          "x0": 960,
+          "x1": 1296,
+          "y": 1092,
+          "kind": "proposed",
+          "role": "right-route",
+          "lane": "RB",
+          "bake_into_art": true
+        },
+        {
+          "x0": 0,
+          "x1": 320,
+          "y": 1220,
+          "kind": "annotation",
+          "role": "left-route",
+          "lane": "LA",
+          "bake_into_art": false
+        },
+        {
+          "x0": 1360,
+          "x1": 1672,
+          "y": 1220,
+          "kind": "annotation",
+          "role": "right-route",
+          "lane": "RA",
+          "bake_into_art": false
+        },
+        {
+          "x0": 384,
+          "x1": 720,
+          "y": 1348,
+          "kind": "annotation",
+          "role": "left-route",
+          "lane": "LB",
+          "bake_into_art": false
+        },
+        {
+          "x0": 960,
+          "x1": 1296,
+          "y": 1348,
+          "kind": "annotation",
+          "role": "right-route",
+          "lane": "RB",
+          "bake_into_art": false
+        },
+        {
+          "x0": 704,
+          "x1": 976,
+          "y": 1412,
+          "kind": "boost-annotation",
+          "role": "boost-launch",
+          "lane": "BOOST",
+          "bake_into_art": false
+        },
+        {
+          "x0": 0,
+          "x1": 320,
+          "y": 1476,
+          "kind": "annotation",
+          "role": "left-route",
+          "lane": "LA",
+          "bake_into_art": false
+        },
+        {
+          "x0": 1360,
+          "x1": 1672,
+          "y": 1476,
+          "kind": "annotation",
+          "role": "right-route",
+          "lane": "RA",
+          "bake_into_art": false
+        }
+      ],
+      "current_runtime_platforms": [
+        {
+          "x0": 198,
+          "x1": 412,
+          "y": 1483,
+          "kind": "current",
+          "role": "current-runtime",
+          "lane": "CURRENT",
+          "bake_into_art": false
+        },
+        {
+          "x0": 514,
+          "x1": 702,
+          "y": 1355,
+          "kind": "current",
+          "role": "current-runtime",
+          "lane": "CURRENT",
+          "bake_into_art": false
+        },
+        {
+          "x0": 854,
+          "x1": 1072,
+          "y": 1473,
+          "kind": "moving",
+          "role": "current-runtime",
+          "lane": "CURRENT",
+          "bake_into_art": false
+        },
+        {
+          "x0": 1172,
+          "x1": 1360,
+          "y": 1343,
+          "kind": "current",
+          "role": "current-runtime",
+          "lane": "CURRENT",
+          "bake_into_art": false
+        },
+        {
+          "x0": 1452,
+          "x1": 1622,
+          "y": 1481,
+          "kind": "current",
+          "role": "current-runtime",
+          "lane": "CURRENT",
+          "bake_into_art": false
+        }
+      ],
+      "moving_platform_concepts": [
+        {
+          "x0": 704,
+          "x1": 976,
+          "center_y": 900,
+          "travel": 56
+        }
+      ]
+    },
+    "uplink": {
+      "source": "Images/Game/signal-foundry-uplink.png",
+      "lanes": {
+        "LA": [
+          0,
+          272
+        ],
+        "LB": [
+          336,
+          672
+        ],
+        "M": [
+          752,
+          920
+        ],
+        "RB": [
+          1008,
+          1344
+        ],
+        "RA": [
+          1408,
+          1672
+        ],
+        "BOOST": [
+          704,
+          976
+        ]
+      },
+      "planned_platforms": [
+        {
+          "x0": 336,
+          "x1": 672,
+          "y": 68,
+          "kind": "proposed",
+          "role": "left-route",
+          "lane": "LB",
+          "bake_into_art": true
+        },
+        {
+          "x0": 752,
+          "x1": 920,
+          "y": 68,
+          "kind": "proposed",
+          "role": "cross-link",
+          "lane": "M",
+          "bake_into_art": true
+        },
+        {
+          "x0": 1008,
+          "x1": 1344,
+          "y": 68,
+          "kind": "proposed",
+          "role": "right-route",
+          "lane": "RB",
+          "bake_into_art": true
+        },
+        {
+          "x0": 0,
+          "x1": 272,
+          "y": 196,
+          "kind": "proposed",
+          "role": "left-route",
+          "lane": "LA",
+          "bake_into_art": true
+        },
+        {
+          "x0": 1408,
+          "x1": 1672,
+          "y": 196,
+          "kind": "proposed",
+          "role": "right-route",
+          "lane": "RA",
+          "bake_into_art": true
+        },
+        {
+          "x0": 336,
+          "x1": 672,
+          "y": 324,
+          "kind": "proposed",
+          "role": "left-route",
+          "lane": "LB",
+          "bake_into_art": true
+        },
+        {
+          "x0": 1008,
+          "x1": 1344,
+          "y": 324,
+          "kind": "proposed",
+          "role": "right-route",
+          "lane": "RB",
+          "bake_into_art": true
+        },
+        {
+          "x0": 704,
+          "x1": 976,
+          "y": 388,
+          "kind": "boost",
+          "role": "boost-perch",
+          "lane": "BOOST",
+          "bake_into_art": true
+        },
+        {
+          "x0": 0,
+          "x1": 272,
+          "y": 452,
+          "kind": "proposed",
+          "role": "left-route",
+          "lane": "LA",
+          "bake_into_art": true
+        },
+        {
+          "x0": 1408,
+          "x1": 1672,
+          "y": 452,
+          "kind": "proposed",
+          "role": "right-route",
+          "lane": "RA",
+          "bake_into_art": true
+        },
+        {
+          "x0": 0,
+          "x1": 272,
+          "y": 580,
+          "kind": "anchor",
+          "role": "room-transition",
+          "lane": "LA",
+          "bake_into_art": true
+        },
+        {
+          "x0": 336,
+          "x1": 672,
+          "y": 580,
+          "kind": "proposed",
+          "role": "left-route",
+          "lane": "LB",
+          "bake_into_art": true
+        },
+        {
+          "x0": 752,
+          "x1": 920,
+          "y": 580,
+          "kind": "proposed",
+          "role": "cross-link",
+          "lane": "M",
+          "bake_into_art": true
+        },
+        {
+          "x0": 1008,
+          "x1": 1344,
+          "y": 580,
+          "kind": "proposed",
+          "role": "right-route",
+          "lane": "RB",
+          "bake_into_art": true
+        },
+        {
+          "x0": 1408,
+          "x1": 1672,
+          "y": 580,
+          "kind": "anchor",
+          "role": "room-transition",
+          "lane": "RA",
+          "bake_into_art": true
+        },
+        {
+          "x0": 0,
+          "x1": 272,
+          "y": 708,
+          "kind": "proposed",
+          "role": "left-route",
+          "lane": "LA",
+          "bake_into_art": true
+        },
+        {
+          "x0": 1408,
+          "x1": 1672,
+          "y": 708,
+          "kind": "proposed",
+          "role": "right-route",
+          "lane": "RA",
+          "bake_into_art": true
+        },
+        {
+          "x0": 336,
+          "x1": 672,
+          "y": 836,
+          "kind": "proposed",
+          "role": "left-route",
+          "lane": "LB",
+          "bake_into_art": true
+        },
+        {
+          "x0": 1008,
+          "x1": 1344,
+          "y": 836,
+          "kind": "proposed",
+          "role": "right-route",
+          "lane": "RB",
+          "bake_into_art": true
+        },
+        {
+          "x0": 0,
+          "x1": 272,
+          "y": 964,
+          "kind": "proposed",
+          "role": "left-route",
+          "lane": "LA",
+          "bake_into_art": true
+        },
+        {
+          "x0": 1408,
+          "x1": 1672,
+          "y": 964,
+          "kind": "proposed",
+          "role": "right-route",
+          "lane": "RA",
+          "bake_into_art": true
+        },
+        {
+          "x0": 336,
+          "x1": 672,
+          "y": 1092,
+          "kind": "proposed",
+          "role": "left-route",
+          "lane": "LB",
+          "bake_into_art": true
+        },
+        {
+          "x0": 752,
+          "x1": 920,
+          "y": 1092,
+          "kind": "proposed",
+          "role": "cross-link",
+          "lane": "M",
+          "bake_into_art": true
+        },
+        {
+          "x0": 1008,
+          "x1": 1344,
+          "y": 1092,
+          "kind": "proposed",
+          "role": "right-route",
+          "lane": "RB",
+          "bake_into_art": true
+        },
+        {
+          "x0": 0,
+          "x1": 272,
+          "y": 1220,
+          "kind": "annotation",
+          "role": "left-route",
+          "lane": "LA",
+          "bake_into_art": false
+        },
+        {
+          "x0": 1408,
+          "x1": 1672,
+          "y": 1220,
+          "kind": "annotation",
+          "role": "right-route",
+          "lane": "RA",
+          "bake_into_art": false
+        },
+        {
+          "x0": 336,
+          "x1": 672,
+          "y": 1348,
+          "kind": "annotation",
+          "role": "left-route",
+          "lane": "LB",
+          "bake_into_art": false
+        },
+        {
+          "x0": 1008,
+          "x1": 1344,
+          "y": 1348,
+          "kind": "annotation",
+          "role": "right-route",
+          "lane": "RB",
+          "bake_into_art": false
+        },
+        {
+          "x0": 704,
+          "x1": 976,
+          "y": 1412,
+          "kind": "boost-annotation",
+          "role": "boost-launch",
+          "lane": "BOOST",
+          "bake_into_art": false
+        },
+        {
+          "x0": 0,
+          "x1": 272,
+          "y": 1476,
+          "kind": "annotation",
+          "role": "left-route",
+          "lane": "LA",
+          "bake_into_art": false
+        },
+        {
+          "x0": 1408,
+          "x1": 1672,
+          "y": 1476,
+          "kind": "annotation",
+          "role": "right-route",
+          "lane": "RA",
+          "bake_into_art": false
+        }
+      ],
+      "current_runtime_platforms": [
+        {
+          "x0": 204,
+          "x1": 409,
+          "y": 1491,
+          "kind": "current",
+          "role": "current-runtime",
+          "lane": "CURRENT",
+          "bake_into_art": false
+        },
+        {
+          "x0": 532,
+          "x1": 720,
+          "y": 1367,
+          "kind": "current",
+          "role": "current-runtime",
+          "lane": "CURRENT",
+          "bake_into_art": false
+        },
+        {
+          "x0": 862,
+          "x1": 1080,
+          "y": 1489,
+          "kind": "moving",
+          "role": "current-runtime",
+          "lane": "CURRENT",
+          "bake_into_art": false
+        },
+        {
+          "x0": 1184,
+          "x1": 1372,
+          "y": 1357,
+          "kind": "current",
+          "role": "current-runtime",
+          "lane": "CURRENT",
+          "bake_into_art": false
+        },
+        {
+          "x0": 1438,
+          "x1": 1586,
+          "y": 1473,
+          "kind": "current",
+          "role": "current-runtime",
+          "lane": "CURRENT",
+          "bake_into_art": false
+        }
+      ],
+      "moving_platform_concepts": [
+        {
+          "x0": 704,
+          "x1": 976,
+          "center_y": 772,
+          "travel": 64
+        }
+      ]
+    }
+  }
+}

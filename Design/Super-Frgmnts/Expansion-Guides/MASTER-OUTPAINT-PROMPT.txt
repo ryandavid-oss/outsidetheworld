@@ -1,37 +1,100 @@
 USE CASE
-Precise vertical outpaint for a side-scrolling 16-bit platform game background.
+Production-oriented environment outpaint for a side-scrolling 16-bit platform game.
 
-EDIT TARGET
-The attached 1672 × 1882 expansion canvas. Its transparent upper half is the new generation area. The original 1672 × 941 background occupies the lower half.
+INPUT ROLES
+Image 1 is the edit target: a 1672 × 1882 expansion canvas. Its transparent
+upper half is the new generation area. The original 1672 × 941 room begins at
+y=941.
+
+Image 2 is a structural reference only: a collision guide showing required
+walkable edges. Do not reproduce its grid, labels, typography, colored bars,
+route lines, legend, translucent overlays, or interface styling.
 
 PRIMARY REQUEST
-Extend the attached subterranean science-fiction room upward by one complete screen. Create a vast explorable industrial gantry with grated steel catwalks, gantry walkways, maintenance platforms, steel mezzanine decks, trussed service bridges, pipe-supported ledges, suspended machinery, vertical support towers, open shafts, and ventilation chambers.
+Extend the subterranean science-fiction room upward by one complete screen.
+Create a vast explorable industrial gantry with grated steel catwalks,
+maintenance platforms, steel mezzanines, trussed service bridges,
+pipe-supported ledges, suspended machinery, vertical support towers, open
+shafts, and ventilation chambers.
+
+PRESERVATION CONTRACT
+Change only the transparent upper plate and the blend zone from y=941 through
+y=1120. Preserve rows y=1121 through y=1881 exactly. Do not redraw, relight,
+rescale, crop, stretch, or reinterpret the protected original plate.
 
 SEAM REQUIREMENTS
-Preserve every original pixel below y=1120. The area from y=941 through y=1120 is the only part of the original image that may be carefully inpainted. Continue major pipes, columns, rocks, cables, lights, shadows, and structural supports through that blend zone so the old/new boundary is invisible. Create at least two visually clear openings from the lower room into the new gantry.
+Continue major pipes, columns, rocks, cables, lights, shadows, and structural
+supports through the y=941–1120 blend zone so the old/new boundary disappears.
+Create at least two visually clear openings from the original room into the
+new gantry.
 
 STYLE
-Strict orthographic side view. Crisp 16-bit pixel art. Match the source plate’s pixel scale, lighting direction, shadows, material treatment, palette, rock formations, steel architecture, crystals, vegetation, and atmospheric depth. No perspective shift, antialiasing, painterly blur, or vector-smooth edges.
+Strict orthographic side view. Crisp, intentionally pixelated 16-bit game
+background art at the same pixel scale as Image 1. Match its lighting,
+shadows, palette, rock formations, steel architecture, cyan crystals, magenta
+energy, vegetation, and atmospheric depth. Retain generous navy-black negative
+space. No perspective shift, isometric construction, antialiasing, painterly
+blur, vector-smooth edges, or photorealism.
 
-PLATFORM REQUIREMENTS
-Use the collision guide as the structural authority. Walkable surfaces must have crisp horizontal top edges and believable supports beneath them. Maintain at least 150 pixels of clear headroom. Keep normal vertical intervals near 105–135 pixels and optional powerup-only intervals near 170–220 pixels. Preserve the shared edge walkway at y=740 so neighboring rooms can connect seamlessly.
+COLLISION STRUCTURE
+Use Image 2 only to locate required horizontal walkable top edges. Cyan and blue
+surfaces above y=1121 should become believable steel architecture with visible
+support beneath: trusses, brackets, columns, hangers, or pipe stanchions.
+
+Normal route elevations are 128px apart. Keep neighbouring platforms visually
+separate and preserve open space around them for a 112px-tall character.
+
+The room-transition structures at y=580 must reach x=0 and x=1672 exactly so
+adjacent rooms align. Keep their outer ends perfectly flat and undecorated
+across the canvas boundary.
+
+Pink geometry is an optional future jump-boost route. It must never be required
+to complete either normal path.
+
+Anything shown below y=1120 is collision annotation only. Do not generate
+platform artwork in the protected original plate.
 
 READABILITY
-Maintain generous dark negative space around playable surfaces so the player, enemies, projectiles, shards, hearts, and powerups remain readable. Avoid foreground details that obscure walkable platform silhouettes.
+Keep the playable silhouettes unmistakable. Maintain dark negative space
+around platforms so Aryn Sol-Mavi, enemies, projectiles, Signal Shards, hearts,
+and future powerups remain readable. Use background machinery at lower contrast
+than foreground walkable edges.
 
 AVOID
-No characters, enemies, weapons, collectibles, powerups, text, letters, numbers, signs, logos, interface elements, fake exits, diagonal walkable floors, isometric perspective, floating unsupported platforms, tiny unusable ledges, impossible stairways, lighting discontinuities, or changes to the protected original area.
+No characters, enemies, weapons, collectibles, powerups, text, letters,
+numbers, signs, logos, interface elements, guide labels, grids, colored guide
+bars, route lines, fake exits, diagonal walkable floors, floating unsupported
+platforms, tiny unusable ledges, lighting discontinuities, or watermarks.
 
 ROOM-SPECIFIC ADDITIONS
 
 FOUNDRY
-Heavy furnaces, magnetic cranes, suspended casting machinery, reinforced steel frames, pink energy conduits, cyan mineral deposits, heat haze, and soot-darkened catwalks.
+Heavy furnaces, magnetic cranes, suspended casting machinery, reinforced steel
+frames, magenta energy conduits, cyan mineral deposits, restrained heat haze,
+and soot-darkened catwalks. Preserve the existing DNA-like containment tower as
+a visual anchor without copying it into the upper room.
 
 REFINERY
-Dense pipe forests, pressure tanks, pumping stations, exhaust vents, amber safety lights, valve towers, maintenance bridges, and oily grated service decks.
+Dense pipe forests, pressure tanks, pumping stations, exhaust vents, amber
+safety lights, valve towers, maintenance bridges, and oily grated service
+decks. Keep the center readable rather than filling every void with pipes.
 
 BIOLAB
-Glass growth chambers, containment bridges, dripping pipes, bioluminescent plants, teal and magenta organic contamination, observation platforms, and sealed research machinery.
+Glass growth chambers, containment bridges, dripping pipes, bioluminescent
+plants, teal and magenta organic contamination, observation platforms, and
+sealed research machinery. Organic growth may wrap supports but must not cover
+walkable top edges.
 
 UPLINK
-Signal relays, antenna machinery, cable towers, luminous data conduits, suspended transmitter arrays, open central ascent space, and increasingly advanced infrastructure leading toward the final Uplink Gate.
+Signal relays, antenna machinery, cable towers, luminous data conduits,
+suspended transmitter arrays, an open central ascent space, and increasingly
+advanced infrastructure leading toward the Uplink Gate. Do not add a second
+gate or fake exit.
+
+ACCEPTANCE CHECK
+1. The final composite remains 1672 × 1882.
+2. Rows y=1121–1881 are pixel-identical to Image 1.
+3. Required walkable edges above y=1120 are crisp and horizontal.
+4. The y=580 room links reach both canvas edges exactly.
+5. No grid, labels, guide bars, or route lines appear in the artwork.
+6. No character, collectible, enemy, UI, logo, text, or watermark appears.
