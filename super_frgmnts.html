@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
     <meta name="theme-color" content="#050713" />
     <meta name="color-scheme" content="dark" />
     <meta name="description" content="Guide Aryn Sol-Mavi through The Shard Foundry, recover twelve Signal Shards, and reach the Uplink Gate." />
@@ -60,6 +60,7 @@
             overscroll-behavior: none;
             background: var(--void);
             color: var(--ink);
+            touch-action: none;
         }
 
         body {
@@ -224,6 +225,7 @@
             display: grid;
             min-height: 0;
             place-items: center;
+            touch-action: none;
         }
 
         .stage-shell {
@@ -239,6 +241,7 @@
                 0 0 0 4px var(--brand-teal),
                 14px 16px 0 rgba(0, 0, 0, 0.45),
                 0 0 54px rgba(119, 163, 255, 0.16);
+            touch-action: none;
         }
 
         .stage-shell::before {
@@ -265,6 +268,7 @@
             width: 100%;
             height: 100%;
             image-rendering: pixelated;
+            touch-action: none;
         }
 
         .title-screen {
@@ -566,9 +570,107 @@
             gap: 8px;
         }
 
-        .move-controls {
-            display: flex;
-            gap: 8px;
+        .direction-pad {
+            --stick-x: 0px;
+            --stick-y: 0px;
+            position: relative;
+            width: 72px;
+            height: 72px;
+            flex: 0 0 auto;
+            overflow: hidden;
+            border: 2px solid var(--brand-light-blue);
+            border-radius: 50%;
+            background:
+                radial-gradient(circle, rgba(27, 54, 93, 0.8) 0 30%, rgba(6, 11, 27, 0.78) 31% 100%);
+            box-shadow:
+                0 5px 0 rgba(0, 0, 0, 0.48),
+                inset 0 0 20px rgba(99, 149, 238, 0.18);
+            color: var(--brand-light-blue);
+            cursor: grab;
+            outline: none;
+            pointer-events: auto;
+            touch-action: none;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+        }
+
+        .direction-pad::before {
+            position: absolute;
+            inset: 9px;
+            border: 1px dashed rgba(160, 190, 245, 0.34);
+            border-radius: 50%;
+            content: "";
+            pointer-events: none;
+        }
+
+        .direction-pad:focus-visible {
+            border-color: var(--cream);
+            box-shadow:
+                0 5px 0 rgba(0, 0, 0, 0.48),
+                0 0 0 3px var(--amethyst),
+                inset 0 0 20px rgba(99, 149, 238, 0.22);
+        }
+
+        .direction-pad.is-active {
+            border-color: var(--index-teal);
+            cursor: grabbing;
+            box-shadow:
+                0 2px 0 rgba(0, 0, 0, 0.52),
+                0 0 24px rgba(119, 163, 255, 0.34),
+                inset 0 0 24px rgba(158, 197, 193, 0.2);
+        }
+
+        .direction-pad__marker {
+            position: absolute;
+            z-index: 1;
+            color: rgba(224, 191, 184, 0.7);
+            font-size: 9px;
+            line-height: 1;
+            pointer-events: none;
+        }
+
+        .direction-pad__marker--left {
+            top: 50%;
+            left: 7px;
+            transform: translateY(-50%);
+        }
+
+        .direction-pad__marker--right {
+            top: 50%;
+            right: 7px;
+            transform: translateY(-50%);
+        }
+
+        .direction-pad__marker--down {
+            bottom: 6px;
+            left: 50%;
+            color: var(--brand-gold);
+            transform: translateX(-50%);
+        }
+
+        .direction-pad__knob {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            z-index: 2;
+            width: 30px;
+            height: 30px;
+            border: 2px solid var(--index-teal);
+            border-radius: 50%;
+            background:
+                radial-gradient(circle at 36% 32%, var(--brand-light-blue), var(--brand-blue) 38%, var(--logo-navy) 72%);
+            box-shadow:
+                0 3px 0 rgba(0, 0, 0, 0.55),
+                0 0 12px rgba(158, 197, 193, 0.28);
+            pointer-events: none;
+            transform:
+                translate(
+                    calc(-50% + var(--stick-x)),
+                    calc(-50% + var(--stick-y))
+                );
+            transition: transform 80ms ease-out;
         }
 
         .touch-key {
@@ -623,10 +725,6 @@
             height: auto;
         }
 
-        .touch-key__icon--down {
-            transform: rotate(90deg);
-        }
-
         .action-controls {
             display: flex;
             align-items: center;
@@ -649,11 +747,6 @@
             font-size: 10px;
             font-weight: 700;
             letter-spacing: 0.08em;
-        }
-
-        .touch-key--down {
-            border-color: var(--brand-gold);
-            color: var(--brand-gold);
         }
 
         .touch-key.is-pressed,
@@ -908,9 +1001,42 @@
                 visibility: visible;
             }
 
-            .move-controls {
-                position: relative;
-                gap: 12px;
+            .direction-pad {
+                width: clamp(116px, 31vw, 132px);
+                height: clamp(116px, 31vw, 132px);
+                border-width: 3px;
+                background:
+                    radial-gradient(circle, rgba(27, 54, 93, 0.72) 0 28%, rgba(6, 11, 27, 0.5) 29% 100%);
+                box-shadow:
+                    0 6px 0 rgba(0, 0, 0, 0.4),
+                    inset 0 0 28px rgba(99, 149, 238, 0.18);
+                opacity: 0.88;
+            }
+
+            .direction-pad::before {
+                inset: 14px;
+            }
+
+            .direction-pad__marker {
+                font-size: 14px;
+            }
+
+            .direction-pad__marker--left {
+                left: 12px;
+            }
+
+            .direction-pad__marker--right {
+                right: 12px;
+            }
+
+            .direction-pad__marker--down {
+                bottom: 10px;
+            }
+
+            .direction-pad__knob {
+                width: clamp(46px, 12vw, 54px);
+                height: clamp(46px, 12vw, 54px);
+                border-width: 3px;
             }
 
             .action-controls {
@@ -973,26 +1099,6 @@
                     inset 0 0 24px rgba(158, 197, 193, 0.16);
                 color: var(--index-teal);
                 font-size: 10px;
-            }
-
-            .touch-key--down {
-                position: absolute;
-                bottom: calc(100% + 12px);
-                left: 50%;
-                width: clamp(52px, 15vw, 62px);
-                height: clamp(52px, 15vw, 62px);
-                border-color: var(--brand-gold);
-                border-radius: 50%;
-                background: rgba(35, 26, 7, 0.38);
-                box-shadow:
-                    0 5px 0 rgba(0, 0, 0, 0.38),
-                    inset 0 0 24px rgba(217, 192, 140, 0.14);
-                transform: translateX(-50%);
-            }
-
-            .touch-key--down.is-pressed,
-            .touch-key--down:active {
-                transform: translate(-50%, 4px) scale(0.97);
             }
 
             .touch-key.is-pressed,
@@ -1080,6 +1186,16 @@
             .touch-key--shoot {
                 width: 52px;
             }
+
+            .direction-pad {
+                width: 78px;
+                height: 78px;
+            }
+
+            .direction-pad__knob {
+                width: 32px;
+                height: 32px;
+            }
         }
     </style>
 </head>
@@ -1114,7 +1230,7 @@
                     <div class="title-screen__controls">
                         <p class="title-screen__hero">Signal Ranger // <strong>Aryn Sol-Mavi</strong></p>
                         <button class="pixel-button" id="titleStartButton" type="button" disabled>Loading signal…</button>
-                        <p class="title-screen__hint">Arrow keys to move // Down enters Deepworks // Space to jump // Ctrl to fire (unlocks at 3 shards)</p>
+                        <p class="title-screen__hint">Left/right to move // Down enters Deepworks // Space to jump // Ctrl to fire (unlocks at 3 shards)</p>
                     </div>
                 </div>
 
@@ -1155,31 +1271,18 @@
                 <kbd>R</kbd><span>restart</span>
             </div>
             <div class="touch-controls" aria-label="Game controls">
-                <div class="move-controls">
-                    <button class="touch-key" type="button" data-control="left" aria-label="Move left">
-                        <img
-                            class="touch-key__icon"
-                            src="/Images/Game/control-arrow-left.png"
-                            alt=""
-                            draggable="false"
-                        >
-                    </button>
-                    <button class="touch-key touch-key--down" type="button" data-control="down" aria-label="Drop into Deepworks">
-                        <img
-                            class="touch-key__icon touch-key__icon--down"
-                            src="/Images/Game/control-arrow-right.png"
-                            alt=""
-                            draggable="false"
-                        >
-                    </button>
-                    <button class="touch-key" type="button" data-control="right" aria-label="Move right">
-                        <img
-                            class="touch-key__icon"
-                            src="/Images/Game/control-arrow-right.png"
-                            alt=""
-                            draggable="false"
-                        >
-                    </button>
+                <div
+                    class="direction-pad"
+                    id="directionPad"
+                    role="group"
+                    tabindex="0"
+                    aria-label="Directional stick. Drag left or right to move. Drag down to enter Deepworks."
+                    aria-keyshortcuts="ArrowLeft ArrowRight ArrowDown"
+                >
+                    <span class="direction-pad__marker direction-pad__marker--left" aria-hidden="true">◀</span>
+                    <span class="direction-pad__marker direction-pad__marker--right" aria-hidden="true">▶</span>
+                    <span class="direction-pad__marker direction-pad__marker--down" aria-hidden="true">▼</span>
+                    <span class="direction-pad__knob" id="directionKnob" aria-hidden="true"></span>
                 </div>
                 <div class="action-controls">
                     <button class="touch-key touch-key--shoot" type="button" data-control="shoot" aria-label="Fire blaster">
@@ -1254,6 +1357,7 @@
             var heartsDisplay = document.getElementById("hearts");
             var liveStatus = document.getElementById("liveStatus");
             var backgroundMusic = document.getElementById("backgroundMusic");
+            var directionPad = document.getElementById("directionPad");
 
             var assets = {
                 background0: loadImage("/Images/Builder/signal-foundry-bg.png"),
@@ -1294,6 +1398,7 @@
             var invulnerableTime = 0;
             var flashTime = 0;
             var cameraX = 0;
+            var cameraY = 0;
             var cameraAnchor = 0.3;
             var cameraLookAhead = 0;
             var cameraFacing = 1;
@@ -1306,6 +1411,9 @@
             var deepworksRoom = null;
             var groundDropTimer = 0;
             var deepworksPromptTimer = 0;
+            var directionPointerId = null;
+            var directionPadStartedAt = 0;
+            var directionPadReleaseTimer = 0;
 
             var player = {
                 x: 82,
@@ -1439,6 +1547,7 @@
                 invulnerableTime = 0;
                 flashTime = 0;
                 cameraX = 0;
+                cameraY = 0;
                 cameraAnchor = 0.3;
                 cameraLookAhead = 0;
                 cameraFacing = 1;
@@ -1455,6 +1564,7 @@
                 deepworksRoom = null;
                 groundDropTimer = 0;
                 deepworksPromptTimer = 0;
+                resetDirectionPad();
                 resetPlatformMotion();
                 player.x = 82;
                 player.y = GROUND_Y - 100;
@@ -1806,6 +1916,11 @@
                 }
                 cameraTarget = Math.max(0, Math.min(WORLD_WIDTH - viewWidth, cameraTarget));
                 cameraX += (cameraTarget - cameraX) * Math.min(1, delta * 5.5);
+                var cameraYTarget = portraitMode && inDeepworks ? 145 : 0;
+                cameraY += (cameraYTarget - cameraY) * Math.min(1, delta * 5.8);
+                if (Math.abs(cameraYTarget - cameraY) < 0.15) {
+                    cameraY = cameraYTarget;
+                }
                 updateParticles(delta);
                 updateHud();
             }
@@ -2242,7 +2357,7 @@
 
                 drawAtmosphere();
                 ctx.save();
-                ctx.translate(-Math.round(cameraX), 0);
+                ctx.translate(-Math.round(cameraX), -Math.round(cameraY));
                 drawDeepworksPrompt();
                 drawPlatforms();
                 drawHazards();
@@ -2273,7 +2388,7 @@
                         ctx.drawImage(
                             background,
                             Math.round(room * WIDTH - cameraX),
-                            0,
+                            -Math.round(cameraY),
                             WIDTH,
                             HEIGHT
                         );
@@ -3026,6 +3141,69 @@
                 }
             }
 
+            function setDirectionPadVector(clientX, clientY) {
+                if (!directionPad) return;
+
+                var bounds = directionPad.getBoundingClientRect();
+                var centerX = bounds.left + bounds.width / 2;
+                var centerY = bounds.top + bounds.height / 2;
+                var deltaX = clientX - centerX;
+                var deltaY = clientY - centerY;
+                var distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+                var maxTravel = bounds.width * 0.29;
+                var travelScale = distance > maxTravel ? maxTravel / distance : 1;
+                var stickX = deltaX * travelScale;
+                var stickY = deltaY * travelScale;
+                var normalizedX = deltaX / Math.max(1, bounds.width / 2);
+                var normalizedY = deltaY / Math.max(1, bounds.height / 2);
+
+                directionPad.style.setProperty("--stick-x", stickX.toFixed(1) + "px");
+                directionPad.style.setProperty("--stick-y", stickY.toFixed(1) + "px");
+
+                var horizontal = 0;
+                if (
+                    Math.abs(normalizedX) > 0.22 &&
+                    Math.abs(normalizedX) > Math.abs(normalizedY) * 0.45
+                ) {
+                    horizontal = normalizedX > 0 ? 1 : -1;
+                }
+                var wantsDown =
+                    normalizedY > 0.48 &&
+                    normalizedY > Math.abs(normalizedX) * 0.65;
+
+                if (keys.left !== (horizontal < 0)) setControl("left", horizontal < 0);
+                if (keys.right !== (horizontal > 0)) setControl("right", horizontal > 0);
+                if (keys.down !== wantsDown) setControl("down", wantsDown);
+            }
+
+            function resetDirectionPad() {
+                if (directionPadReleaseTimer) {
+                    window.clearTimeout(directionPadReleaseTimer);
+                    directionPadReleaseTimer = 0;
+                }
+                directionPointerId = null;
+                if (directionPad) {
+                    directionPad.classList.remove("is-active");
+                    directionPad.style.setProperty("--stick-x", "0px");
+                    directionPad.style.setProperty("--stick-y", "0px");
+                }
+                setControl("left", false);
+                setControl("right", false);
+                setControl("down", false);
+            }
+
+            function releaseDirectionPad(pointerId, immediate) {
+                if (directionPointerId !== pointerId) return;
+                directionPointerId = null;
+                var heldFor = performance.now() - directionPadStartedAt;
+                var releaseDelay = immediate ? 0 : Math.max(0, 80 - heldFor);
+                if (releaseDelay > 0) {
+                    directionPadReleaseTimer = window.setTimeout(resetDirectionPad, releaseDelay);
+                } else {
+                    resetDirectionPad();
+                }
+            }
+
             function isBlasterKey(event) {
                 return event.key === "Control" ||
                     event.code === "ControlLeft" ||
@@ -3036,6 +3214,7 @@
                 if (
                     event.code === "ArrowLeft" ||
                     event.code === "ArrowRight" ||
+                    event.code === "ArrowUp" ||
                     event.code === "ArrowDown" ||
                     event.code === "Space"
                 ) {
@@ -3045,7 +3224,7 @@
                 if (event.code === "ArrowLeft" || event.code === "KeyA") setControl("left", true);
                 if (event.code === "ArrowRight" || event.code === "KeyD") setControl("right", true);
                 if (event.code === "ArrowDown") setControl("down", true);
-                if (event.code === "Space" || event.code === "ArrowUp" || event.code === "KeyW") setControl("jump", true);
+                if (event.code === "Space") setControl("jump", true);
                 if (isBlasterKey(event)) setControl("shoot", true);
                 if (event.code === "KeyR") {
                     playBackgroundMusic();
@@ -3057,7 +3236,7 @@
                 if (event.code === "ArrowLeft" || event.code === "KeyA") setControl("left", false);
                 if (event.code === "ArrowRight" || event.code === "KeyD") setControl("right", false);
                 if (event.code === "ArrowDown") setControl("down", false);
-                if (event.code === "Space" || event.code === "ArrowUp" || event.code === "KeyW") setControl("jump", false);
+                if (event.code === "Space") setControl("jump", false);
                 if (isBlasterKey(event)) setControl("shoot", false);
             });
 
@@ -3067,6 +3246,7 @@
                 keys.down = false;
                 keys.jump = false;
                 keys.shoot = false;
+                resetDirectionPad();
                 pauseAudioForFocusLoss();
             });
 
@@ -3081,7 +3261,67 @@
                 }
             });
 
+            ["gesturestart", "gesturechange", "gestureend"].forEach(function (eventName) {
+                document.addEventListener(eventName, function (event) {
+                    event.preventDefault();
+                }, { passive: false });
+            });
+
+            document.addEventListener("touchmove", function (event) {
+                if (event.touches && event.touches.length > 1) {
+                    event.preventDefault();
+                }
+            }, { passive: false });
+
+            var lastTouchEnd = 0;
+            document.addEventListener("touchend", function (event) {
+                var now = Date.now();
+                if (now - lastTouchEnd < 320) {
+                    event.preventDefault();
+                }
+                lastTouchEnd = now;
+            }, { passive: false });
+
+            stageShell.addEventListener("dblclick", function (event) {
+                event.preventDefault();
+            });
+
             window.addEventListener("resize", resizeGameViewport);
+
+            if (directionPad) {
+                directionPad.addEventListener("pointerdown", function (event) {
+                    if (directionPointerId !== null) return;
+                    event.preventDefault();
+                    if (directionPadReleaseTimer) {
+                        window.clearTimeout(directionPadReleaseTimer);
+                        directionPadReleaseTimer = 0;
+                    }
+                    directionPointerId = event.pointerId;
+                    directionPadStartedAt = performance.now();
+                    directionPad.setPointerCapture(event.pointerId);
+                    directionPad.classList.add("is-active");
+                    setDirectionPadVector(event.clientX, event.clientY);
+                });
+                directionPad.addEventListener("pointermove", function (event) {
+                    if (event.pointerId !== directionPointerId) return;
+                    event.preventDefault();
+                    setDirectionPadVector(event.clientX, event.clientY);
+                });
+                directionPad.addEventListener("pointerup", function (event) {
+                    releaseDirectionPad(event.pointerId, false);
+                });
+                directionPad.addEventListener("pointercancel", function (event) {
+                    releaseDirectionPad(event.pointerId, true);
+                });
+                directionPad.addEventListener("lostpointercapture", function (event) {
+                    releaseDirectionPad(event.pointerId, true);
+                });
+                ["contextmenu", "selectstart", "dragstart"].forEach(function (eventName) {
+                    directionPad.addEventListener(eventName, function (event) {
+                        event.preventDefault();
+                    });
+                });
+            }
 
             document.querySelectorAll("[data-control]").forEach(function (button) {
                 var control = button.dataset.control;
