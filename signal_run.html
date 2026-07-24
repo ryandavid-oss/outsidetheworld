@@ -231,6 +231,79 @@
             image-rendering: pixelated;
         }
 
+        .title-screen {
+            position: absolute;
+            inset: 0;
+            z-index: 6;
+            display: grid;
+            place-items: end center;
+            padding: clamp(18px, 3vw, 42px);
+            overflow: hidden;
+            background: #030511;
+            isolation: isolate;
+        }
+
+        .title-screen[hidden] {
+            display: none;
+        }
+
+        .title-screen::after {
+            position: absolute;
+            inset: 48% 0 0;
+            z-index: -1;
+            background: linear-gradient(transparent, rgba(2, 4, 14, 0.22) 38%, rgba(2, 4, 14, 0.86));
+            content: "";
+            pointer-events: none;
+        }
+
+        .title-screen__art {
+            position: absolute;
+            inset: 0;
+            z-index: -2;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .title-screen__controls {
+            display: grid;
+            justify-items: center;
+            gap: 9px;
+            padding: clamp(10px, 1.4vw, 16px) clamp(16px, 2.4vw, 28px);
+            border: 2px solid rgba(88, 245, 223, 0.74);
+            background: rgba(3, 7, 20, 0.82);
+            box-shadow:
+                5px 5px 0 rgba(233, 75, 154, 0.74),
+                0 0 24px rgba(88, 245, 223, 0.2);
+            backdrop-filter: blur(3px);
+        }
+
+        .title-screen__controls .pixel-button {
+            min-width: clamp(150px, 19vw, 218px);
+            border-color: var(--pink);
+            background: linear-gradient(#ef5ca7, #92295f);
+            color: #fff;
+            font-size: clamp(10px, 1.25vw, 14px);
+            animation: title-prompt 1.15s steps(2, end) infinite;
+        }
+
+        .title-screen__controls .pixel-button:disabled {
+            cursor: wait;
+            filter: grayscale(0.7);
+            opacity: 0.72;
+            animation: none;
+        }
+
+        .title-screen__hint {
+            margin: 0;
+            color: #bafcf2;
+            font-size: clamp(7px, 0.9vw, 10px);
+            letter-spacing: 0.15em;
+            text-align: center;
+            text-shadow: 2px 2px #000;
+            text-transform: uppercase;
+        }
+
         .hud {
             position: absolute;
             top: clamp(8px, 1.5vw, 18px);
@@ -313,7 +386,7 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            z-index: 6;
+            z-index: 7;
             width: min(82%, 520px);
             padding: clamp(16px, 3vw, 34px);
             border: 3px solid var(--cyan);
@@ -453,6 +526,13 @@
             50% { background: rgba(255, 105, 180, 0.2); }
         }
 
+        @keyframes title-prompt {
+            50% {
+                filter: brightness(1.24);
+                transform: translateY(-2px);
+            }
+        }
+
         @media (max-width: 720px) {
             .game-app {
                 grid-template-rows: auto 1fr auto;
@@ -560,6 +640,18 @@
                     Your browser needs canvas support to play Super Frgmnts.
                 </canvas>
 
+                <div class="title-screen" id="titleScreen">
+                    <img
+                        class="title-screen__art"
+                        src="/Images/Game/super-frgmnts-title-art.png"
+                        alt="Super Frgmnts concept art showing the Signal Ranger racing through the glowing foundry"
+                    >
+                    <div class="title-screen__controls">
+                        <button class="pixel-button" id="titleStartButton" type="button" disabled>Loading signal…</button>
+                        <p class="title-screen__hint">Arrow keys to move // Space to jump</p>
+                    </div>
+                </div>
+
                 <div class="hud" aria-hidden="true">
                     <div class="mission">
                         <strong>MISSION // RECOVER</strong>
@@ -573,7 +665,7 @@
                     </div>
                 </div>
 
-                <div class="message-card" id="messageCard">
+                <div class="message-card" id="messageCard" hidden>
                     <p class="message-kicker" id="messageKicker">Signal Foundry // Online</p>
                     <h2 class="message-title" id="messageTitle">Ready?</h2>
                     <p class="message-copy" id="messageCopy">
@@ -623,6 +715,8 @@
             var canvas = document.getElementById("gameCanvas");
             var ctx = canvas.getContext("2d");
             var stageShell = document.getElementById("stageShell");
+            var titleScreen = document.getElementById("titleScreen");
+            var titleStartButton = document.getElementById("titleStartButton");
             var messageCard = document.getElementById("messageCard");
             var messageKicker = document.getElementById("messageKicker");
             var messageTitle = document.getElementById("messageTitle");
@@ -738,9 +832,8 @@
                 });
             })).then(function () {
                 state = "ready";
-                messageKicker.textContent = "Signal Foundry // Online";
-                messageTitle.textContent = "Ready?";
-                startButton.textContent = "Start run";
+                titleStartButton.disabled = false;
+                titleStartButton.textContent = "Start run";
                 draw();
             });
 
@@ -795,12 +888,10 @@
                 ];
                 updateHud();
                 timerDisplay.classList.remove("is-low");
-                messageCard.hidden = autostart;
+                titleScreen.hidden = autostart;
+                messageCard.hidden = true;
                 if (!autostart) {
-                    messageKicker.textContent = "Signal Foundry // Online";
-                    messageTitle.textContent = "Ready?";
-                    messageCopy.textContent = "Cross four foundry sectors, recover twelve signal shards, survive the creatures, and reach the uplink.";
-                    startButton.textContent = "Start run";
+                    titleStartButton.textContent = state === "loading" ? "Loading signal…" : "Start run";
                 } else {
                     announce("Run started. Twelve signal shards remain.");
                     playTone(260, 0.08, "square", 0.035);
@@ -1736,6 +1827,7 @@
                 });
             });
 
+            titleStartButton.addEventListener("click", startGame);
             startButton.addEventListener("click", startGame);
             restartButton.addEventListener("click", function () {
                 playBackgroundMusic();
