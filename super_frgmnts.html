@@ -1974,20 +1974,57 @@
             }
 
             function drawPlatforms() {
+                var roomAccents = ["#58f5df", "#e06aa9", "#78d96b", "#ffd36c"];
+
                 platforms.slice(1).forEach(function (platform, index) {
+                    var roomIndex = Math.max(0, Math.min(
+                        SCREEN_COUNT - 1,
+                        Math.floor((platform.x + platform.width / 2) / WIDTH)
+                    ));
+                    var accent = roomAccents[roomIndex];
+                    var panelY = platform.y + 8;
+
                     ctx.save();
-                    ctx.fillStyle = "rgba(6, 10, 24, 0.92)";
+                    ctx.fillStyle = "rgba(0, 0, 0, 0.48)";
+                    ctx.fillRect(platform.x + 7, platform.y + platform.height, platform.width - 14, 9);
+
+                    ctx.fillStyle = "#080d1a";
                     ctx.fillRect(platform.x, platform.y, platform.width, platform.height);
-                    ctx.fillStyle = index % 2 ? "#a35ca0" : "#4c718e";
-                    ctx.fillRect(platform.x, platform.y, platform.width, 5);
-                    ctx.fillStyle = "#202b43";
-                    ctx.fillRect(platform.x + 8, platform.y + 8, platform.width - 16, 7);
-                    ctx.fillStyle = "#58f5df";
-                    for (var notch = platform.x + 17; notch < platform.x + platform.width - 12; notch += 36) {
-                        ctx.fillRect(notch, platform.y + 9, 9, 5);
+                    ctx.fillStyle = "#43526b";
+                    ctx.fillRect(platform.x, platform.y, platform.width, 4);
+                    ctx.fillStyle = "#1b263a";
+                    ctx.fillRect(platform.x + 4, platform.y + 4, platform.width - 8, platform.height - 8);
+                    ctx.fillStyle = accent;
+                    ctx.fillRect(platform.x + 5, platform.y + 4, platform.width - 10, 3);
+
+                    ctx.fillStyle = "#26334a";
+                    for (var panelX = platform.x + 8; panelX < platform.x + platform.width - 10; panelX += 34) {
+                        var panelWidth = Math.min(25, platform.x + platform.width - panelX - 8);
+                        if (panelWidth < 5) continue;
+                        ctx.fillRect(panelX, panelY, panelWidth, 8);
+                        ctx.fillStyle = index % 2 ? "#111a2b" : "#151f31";
+                        ctx.fillRect(panelX + 3, panelY + 2, Math.max(2, panelWidth - 6), 4);
+                        ctx.fillStyle = "#26334a";
                     }
-                    ctx.fillStyle = "rgba(0, 0, 0, 0.55)";
-                    ctx.fillRect(platform.x + 9, platform.y + platform.height, platform.width - 18, 7);
+
+                    ctx.fillStyle = accent;
+                    for (var lightX = platform.x + 15; lightX < platform.x + platform.width - 12; lightX += 48) {
+                        ctx.fillRect(lightX, platform.y + 11, 5, 3);
+                    }
+
+                    ctx.fillStyle = "#53627b";
+                    ctx.fillRect(platform.x, platform.y + 5, 5, platform.height - 7);
+                    ctx.fillRect(platform.x + platform.width - 5, platform.y + 5, 5, platform.height - 7);
+                    ctx.fillStyle = "#0b101e";
+                    ctx.fillRect(platform.x + 2, platform.y + 8, 3, platform.height - 11);
+                    ctx.fillRect(platform.x + platform.width - 5, platform.y + 8, 3, platform.height - 11);
+
+                    ctx.fillStyle = "#121a2a";
+                    ctx.fillRect(platform.x + 13, platform.y + platform.height, 7, 9);
+                    ctx.fillRect(platform.x + platform.width - 20, platform.y + platform.height, 7, 9);
+                    ctx.fillStyle = "#36445c";
+                    ctx.fillRect(platform.x + 15, platform.y + platform.height, 3, 6);
+                    ctx.fillRect(platform.x + platform.width - 18, platform.y + platform.height, 3, 6);
                     ctx.restore();
                 });
             }
@@ -2116,25 +2153,92 @@
 
             function drawUplink() {
                 var active = collected === TOTAL_SHARDS;
-                var pulse = 0.55 + Math.sin(elapsed * 7) * 0.22;
+                var pulse = 0.62 + Math.sin(elapsed * 6.4) * 0.2;
+                var roomStart = Math.floor(uplink.x / WIDTH) * WIDTH;
+                var portalX = roomStart + 1284;
+                var portalY = 408;
+                var portalColor = active ? "#4be36e" : "#b26898";
+
                 ctx.save();
-                ctx.fillStyle = "#151b30";
-                ctx.fillRect(uplink.x, uplink.y + 12, uplink.width, uplink.height - 12);
-                ctx.fillStyle = "#3d4867";
-                ctx.fillRect(uplink.x + 7, uplink.y + 20, uplink.width - 14, uplink.height - 30);
-                ctx.fillStyle = active ? "#4be36e" : "#6f365e";
-                ctx.globalAlpha = active ? pulse : 0.45;
-                ctx.fillRect(uplink.x + 18, uplink.y + 28, uplink.width - 36, uplink.height - 54);
+                ctx.translate(portalX, portalY);
+                ctx.globalCompositeOperation = "screen";
+
+                var coreGlow = ctx.createRadialGradient(0, 0, 10, 0, 0, 122);
+                coreGlow.addColorStop(0, active ? "rgba(226, 255, 231, 0.82)" : "rgba(178, 104, 152, 0.08)");
+                coreGlow.addColorStop(0.28, active ? "rgba(75, 227, 110, 0.46)" : "rgba(111, 54, 94, 0.12)");
+                coreGlow.addColorStop(0.72, active ? "rgba(88, 245, 223, 0.2)" : "rgba(88, 245, 223, 0.03)");
+                coreGlow.addColorStop(1, "rgba(0, 0, 0, 0)");
+                ctx.globalAlpha = active ? pulse : 0.52;
+                ctx.fillStyle = coreGlow;
+                ctx.beginPath();
+                ctx.arc(0, 0, 122, 0, Math.PI * 2);
+                ctx.fill();
+
+                ctx.globalAlpha = active ? 0.7 : 0.22;
+                ctx.strokeStyle = portalColor;
+                ctx.lineWidth = 7;
+                ctx.setLineDash([22, 13]);
+                ctx.lineDashOffset = active ? -elapsed * 46 : 0;
+                ctx.beginPath();
+                ctx.arc(0, 0, 135, 0, Math.PI * 2);
+                ctx.stroke();
+
+                ctx.globalAlpha = active ? 0.52 : 0.14;
+                ctx.strokeStyle = active ? "#58f5df" : "#6f365e";
+                ctx.lineWidth = 4;
+                ctx.setLineDash([9, 17]);
+                ctx.lineDashOffset = active ? elapsed * 34 : 0;
+                ctx.beginPath();
+                ctx.arc(0, 0, 151, 0, Math.PI * 2);
+                ctx.stroke();
+                ctx.setLineDash([]);
+
+                for (var shardIndex = 0; shardIndex < TOTAL_SHARDS; shardIndex += 1) {
+                    var angle = -Math.PI / 2 + shardIndex / TOTAL_SHARDS * Math.PI * 2;
+                    var indicatorX = Math.round(Math.cos(angle) * 165);
+                    var indicatorY = Math.round(Math.sin(angle) * 165);
+                    ctx.globalAlpha = shardIndex < collected ? 0.92 : 0.2;
+                    ctx.fillStyle = shardIndex < collected ? "#b8ffc7" : "#7a3d68";
+                    ctx.fillRect(indicatorX - 4, indicatorY - 4, 8, 8);
+                }
+                ctx.restore();
+
+                ctx.save();
+                ctx.fillStyle = "rgba(0, 0, 0, 0.55)";
+                ctx.fillRect(uplink.x - 12, uplink.y + uplink.height - 7, uplink.width + 24, 14);
+                ctx.fillStyle = "#101728";
+                ctx.fillRect(uplink.x - 3, uplink.y + 14, uplink.width + 6, uplink.height - 20);
+                ctx.fillStyle = "#46536d";
+                ctx.fillRect(uplink.x + 3, uplink.y + 20, uplink.width - 6, uplink.height - 31);
+                ctx.fillStyle = "#1c263b";
+                ctx.fillRect(uplink.x + 9, uplink.y + 27, uplink.width - 18, uplink.height - 45);
+                ctx.fillStyle = portalColor;
+                ctx.globalAlpha = active ? pulse : 0.38;
+                ctx.fillRect(uplink.x + 15, uplink.y + 34, uplink.width - 30, uplink.height - 62);
                 ctx.globalAlpha = 1;
-                ctx.fillStyle = active ? "#b8ffc7" : "#b26898";
-                ctx.fillRect(uplink.x + 23, uplink.y, 12, 24);
-                ctx.fillStyle = "#090c18";
-                ctx.fillRect(uplink.x - 10, uplink.y + uplink.height - 9, uplink.width + 20, 12);
+                ctx.fillStyle = active ? "#dfffe5" : "#c88bb3";
+                ctx.fillRect(uplink.x + 21, uplink.y + 3, uplink.width - 42, 19);
+                ctx.fillStyle = "#080c17";
+                ctx.fillRect(uplink.x + 26, uplink.y + 8, uplink.width - 52, 9);
+                ctx.fillStyle = active ? "#4be36e" : "#6f365e";
+                ctx.fillRect(uplink.x + 8, uplink.y + uplink.height - 19, 8, 6);
+                ctx.fillRect(uplink.x + uplink.width - 16, uplink.y + uplink.height - 19, 8, 6);
                 ctx.font = "700 13px Fira Code, monospace";
                 ctx.textAlign = "center";
-                ctx.fillStyle = active ? "#4be36e" : "#bd7da9";
-                ctx.fillText(active ? "OPEN" : "LOCKED", uplink.x + uplink.width / 2, uplink.y - 12);
+                ctx.fillStyle = active ? "#b8ffc7" : "#bd7da9";
+                ctx.fillText(active ? "GATE OPEN" : "GATE LOCKED", uplink.x + uplink.width / 2, uplink.y - 12);
                 ctx.restore();
+            }
+
+            function traceShardSilhouette(scale) {
+                ctx.beginPath();
+                ctx.moveTo(0, -32 * scale);
+                ctx.lineTo(19 * scale, -11 * scale);
+                ctx.lineTo(14 * scale, 22 * scale);
+                ctx.lineTo(0, 33 * scale);
+                ctx.lineTo(-17 * scale, 18 * scale);
+                ctx.lineTo(-20 * scale, -9 * scale);
+                ctx.closePath();
             }
 
             function drawShards() {
@@ -2149,23 +2253,25 @@
                     }[shard.color];
 
                     ctx.save();
-                    ctx.globalAlpha = 0.18 * pulse;
-                    ctx.fillStyle = shard.color;
-                    ctx.fillRect(shard.x - 30, bobY - 35, 60, 70);
-                    ctx.globalAlpha = 0.22 * pulse;
-                    ctx.fillRect(shard.x - 23, bobY - 28, 46, 56);
-                    ctx.globalAlpha = 1;
                     ctx.translate(Math.round(shard.x), Math.round(bobY));
+                    ctx.globalCompositeOperation = "screen";
+                    ctx.fillStyle = shard.color;
+                    ctx.shadowColor = shard.color;
+                    ctx.shadowBlur = 22 + pulse * 10;
+                    ctx.globalAlpha = 0.08 + pulse * 0.08;
+                    traceShardSilhouette(1.62);
+                    ctx.fill();
+                    ctx.shadowBlur = 12;
+                    ctx.globalAlpha = 0.13 + pulse * 0.1;
+                    traceShardSilhouette(1.3);
+                    ctx.fill();
+                    ctx.globalCompositeOperation = "source-over";
+                    ctx.shadowBlur = 0;
+                    ctx.globalAlpha = 1;
 
+                    ctx.fillStyle = shard.color;
                     ctx.fillStyle = "#080b18";
-                    ctx.beginPath();
-                    ctx.moveTo(0, -32);
-                    ctx.lineTo(19, -11);
-                    ctx.lineTo(14, 22);
-                    ctx.lineTo(0, 33);
-                    ctx.lineTo(-17, 18);
-                    ctx.lineTo(-20, -9);
-                    ctx.closePath();
+                    traceShardSilhouette(1);
                     ctx.fill();
 
                     ctx.fillStyle = tones[1];
