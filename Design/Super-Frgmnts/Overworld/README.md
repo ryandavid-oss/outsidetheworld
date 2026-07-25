@@ -89,6 +89,13 @@ height, continuous 1.6-second motion curve, inverse shadow pulse, restrained
 repulsor dust, and portrait framing. The next approval gate is Revision 3B:
 Dras Ehdre's definitive character master.
 
+Revision 3A.1 is also approved. Its `Phase-3/Ship/Collision/` addendum makes
+the hovering ship Aryn's first conquerable environment prop through a
+proximity-deployed gangway, synchronized one-way collision surfaces, an
+optional skill shortcut, and the existing Down-to-drop behavior. The proposed
+overworld spawn moves 120 pixels right to give the gangway safe deployment
+space.
+
 ## Phase 4 — atmosphere and charm
 
 - three drifting cloud-wisp layers;
