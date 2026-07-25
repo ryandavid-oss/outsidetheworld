@@ -12,6 +12,7 @@
     <meta property="og:url" content="https://outsidetheworld.com/super_frgmnts.html" />
     <title>SUPER FRGMNTS // Outside The World</title>
     <link rel="canonical" href="https://outsidetheworld.com/super_frgmnts.html" />
+    <link rel="preload" href="/Images/Game/super-frgmnts-title-art.png" as="image" fetchpriority="high" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet"
@@ -1272,6 +1273,8 @@
                         class="title-screen__art"
                         src="/Images/Game/super-frgmnts-title-art.png"
                         alt="Super Frgmnts concept art showing Aryn Sol-Mavi, the Signal Ranger, racing through the glowing foundry"
+                        decoding="async"
+                        fetchpriority="high"
                     >
                     <div class="title-screen__controls">
                         <p class="title-screen__hero">Signal Ranger // <strong>Aryn Sol-Mavi</strong></p>
@@ -1433,20 +1436,24 @@
                 background0: loadImage(
                     expansionPreview
                         ? "/Images/Game/super-frgmnts-foundry-expanded-prototype-v1.png"
-                        : "/Images/Builder/signal-foundry-bg.png"
+                        : "/Images/Builder/signal-foundry-bg.png",
+                    "high"
                 ),
-                background1: loadImage("/Images/Game/signal-foundry-refinery.png"),
-                background2: loadImage("/Images/Game/signal-foundry-biolab.png"),
-                background3: loadImage("/Images/Game/signal-foundry-uplink.png"),
-                crawler: loadImage("/Images/Game/enemy-crawler-ridge-skitter.png"),
-                flyer: loadImage("/Images/Game/enemy-flyer-spore-wisp.png"),
-                walker: loadImage("/Images/Game/enemy-walker-clacker-beetle.png"),
-                run: loadImage("/Images/Builder/aryn-run-10pose-balanced-gait-sheet.png"),
-                idle: loadImage("/Images/Builder/signal-ranger-idle-focused-v2.png"),
-                takeoff: loadImage("/Images/Builder/signal-ranger-jump-takeoff.png"),
-                airborne: loadImage("/Images/Builder/signal-ranger-jump-airborne.png"),
-                crouch: loadImage("/Images/Builder/signal-ranger-crouch.png")
+                run: loadImage("/Images/Builder/aryn-run-10pose-balanced-gait-sheet.png", "high"),
+                idle: loadImage("/Images/Builder/signal-ranger-idle-focused-v2.png", "high"),
+                takeoff: loadImage("/Images/Builder/signal-ranger-jump-takeoff.png", "high"),
+                airborne: loadImage("/Images/Builder/signal-ranger-jump-airborne.png", "high"),
+                crouch: loadImage("/Images/Builder/signal-ranger-crouch.png", "high")
             };
+
+            if (!expansionPreview) {
+                assets.background1 = loadImage("/Images/Game/signal-foundry-refinery.png", "low");
+                assets.background2 = loadImage("/Images/Game/signal-foundry-biolab.png", "low");
+                assets.background3 = loadImage("/Images/Game/signal-foundry-uplink.png", "low");
+                assets.crawler = loadImage("/Images/Game/enemy-crawler-ridge-skitter.png", "low");
+                assets.flyer = loadImage("/Images/Game/enemy-flyer-spore-wisp.png", "low");
+                assets.walker = loadImage("/Images/Game/enemy-walker-clacker-beetle.png", "low");
+            }
 
             var keys = { left: false, right: false, down: false, jump: false, shoot: false };
             var bolts = [];
@@ -1653,10 +1660,37 @@
                 uplink = { x: 1488, y: 82, width: 68, height: 128 };
             }
 
-            function loadImage(source) {
+            function loadImage(source, priority) {
                 var image = new Image();
+                image.decoding = "async";
+                image.fetchPriority = priority || "auto";
                 image.src = source;
                 return image;
+            }
+
+            function waitForImage(image) {
+                return new Promise(function (resolve) {
+                    var settled = false;
+                    var timeoutId;
+
+                    function finish() {
+                        if (settled) return;
+                        settled = true;
+                        window.clearTimeout(timeoutId);
+                        image.removeEventListener("load", finish);
+                        image.removeEventListener("error", finish);
+                        resolve();
+                    }
+
+                    if (!image || image.complete) {
+                        finish();
+                        return;
+                    }
+
+                    image.addEventListener("load", finish, { once: true });
+                    image.addEventListener("error", finish, { once: true });
+                    timeoutId = window.setTimeout(finish, 8000);
+                });
             }
 
             function resizeGameViewport() {
@@ -1675,15 +1709,17 @@
                 document.body.classList.toggle("is-portrait-game", portraitMode);
             }
 
-            Promise.all(Object.keys(assets).map(function (key) {
-                return new Promise(function (resolve) {
-                    if (assets[key].complete) {
-                        resolve();
-                    } else {
-                        assets[key].addEventListener("load", resolve, { once: true });
-                        assets[key].addEventListener("error", resolve, { once: true });
-                    }
-                });
+            var criticalAssetKeys = [
+                "background0",
+                "run",
+                "idle",
+                "takeoff",
+                "airborne",
+                "crouch"
+            ];
+
+            Promise.all(criticalAssetKeys.map(function (key) {
+                return waitForImage(assets[key]);
             })).then(function () {
                 state = "ready";
                 titleStartButton.disabled = false;
