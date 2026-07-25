@@ -1,0 +1,97 @@
+{
+  "revision": "3A",
+  "status": "approved",
+  "approval": {
+    "approved_on": "2026-07-25",
+    "approved_revision": "hover-preview-v2"
+  },
+  "scope": "Ship scale, placement, grounding, and portrait framing only",
+  "live_game_modified": false,
+  "coordinate_system": {
+    "plate_width": 1672,
+    "plate_height": 941,
+    "ground_y": 744
+  },
+  "assets": {
+    "ship": "Design/Super-Frgmnts/Overworld/Phase-3/Ship/Assets/aryn-ship-transparent-v1.png",
+    "ship_dimensions": {
+      "width": 1008,
+      "height": 396
+    },
+    "shadow": "Design/Super-Frgmnts/Overworld/Phase-3/Ship/Assets/aryn-ship-hover-field-v1.png",
+    "aryn_reference": "Images/Builder/signal-ranger-idle-focused-v2.png"
+  },
+  "matte_cleanup": {
+    "rule": "Alpha values below 64 set to zero; stronger pixels unchanged",
+    "reason": "Remove two faint low-opacity caps above the upper pods"
+  },
+  "placement": {
+    "ship": {
+      "x": 176,
+      "y": 417,
+      "width": 792,
+      "height": 311,
+      "bottom_y": 728,
+      "hover_gap": 16
+    },
+    "shadow": {
+      "x": 194,
+      "y": 702,
+      "width": 756,
+      "height": 42,
+      "bottom_y": 744
+    },
+    "aryn": {
+      "x": 1000,
+      "y": 632,
+      "width": 112,
+      "height": 112,
+      "feet_y": 744
+    }
+  },
+  "portrait_crop_candidate": {
+    "x": 620,
+    "y": 0,
+    "width": 560,
+    "height": 941
+  },
+  "hover_motion_proof": {
+    "preview": "Design/Super-Frgmnts/Overworld/Phase-3/Ship/Reviews/landing-flats-ship-hover-preview-v2.gif",
+    "keyframes": "Design/Super-Frgmnts/Overworld/Phase-3/Ship/Reviews/landing-flats-ship-hover-keyframes-v2.png",
+    "cycle_ms": 1600,
+    "frame_duration_ms": 100,
+    "ship_offset_y_px": [
+      0.0,
+      -0.9,
+      -1.9,
+      -2.7,
+      -3.2,
+      -2.7,
+      -1.9,
+      -0.9,
+      0.0,
+      0.9,
+      1.9,
+      2.7,
+      3.2,
+      2.7,
+      1.9,
+      0.9
+    ],
+    "curve": "Continuous eased loop with quarter-pixel rendering and no duplicated hold frames",
+    "runtime_interpolation": "Evaluate the curve every render frame rather than stepping through preview samples",
+    "shadow_behavior": "Fixed to ground; subtly widens and fades as the ship rises",
+    "repulsor_dust": {
+      "style": "Sparse sand pixels with restrained cyan energy flecks",
+      "direction": "Outward from the two lower repulsors",
+      "runtime_note": "Implement as a separate particle layer; never bake into the landscape plate"
+    }
+  },
+  "approval_questions": [
+    "Does the ship feel large enough to be Aryn's vessel without crowding the plate?",
+    "Is the gap between the ship and Aryn comfortable?",
+    "Does the 16-pixel hover gap read as deliberate sci-fi lift?",
+    "Does the restrained cyan ground field support the hover without becoming an effect spectacle?",
+    "Is the partial ship reveal in the portrait crop narratively acceptable?"
+  ]
+}

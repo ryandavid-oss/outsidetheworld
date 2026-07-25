@@ -83,6 +83,12 @@ prepared.
   Coreworks portal;
 - verify scale beside Aryn's 112-pixel draw height.
 
+Revision 3A is approved. Its design-only package lives in
+`Phase-3/Ship/` and locks the ship scale, transparent asset, 16-pixel hover
+height, continuous 1.6-second motion curve, inverse shadow pulse, restrained
+repulsor dust, and portrait framing. The next approval gate is Revision 3B:
+Dras Ehdre's definitive character master.
+
 ## Phase 4 — atmosphere and charm
 
 - three drifting cloud-wisp layers;
