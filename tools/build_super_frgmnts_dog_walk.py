@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the two-frame Veyra camp-dog walk cycle for the overworld."""
+"""Build the readable two-phase Veyra camp-dog gait for the overworld."""
 
 from pathlib import Path
 
@@ -13,16 +13,16 @@ PUBLIC_ASSETS = ROOT / "Images/Game/Super-Frgmnts"
 
 FRAME_SPECS = (
     (
-        ASSETS / "veyra-camp-dog-walk-a-master-v1.png",
-        ASSETS / "veyra-camp-dog-walk-a-runtime-v1.png",
+        ASSETS / "veyra-camp-dog-walk-contact-master-v2.png",
+        ASSETS / "veyra-camp-dog-walk-contact-runtime-v2.png",
     ),
     (
-        ASSETS / "veyra-camp-dog-walk-b-master-v1.png",
-        ASSETS / "veyra-camp-dog-walk-b-runtime-v1.png",
+        ASSETS / "veyra-camp-dog-walk-pass-master-v2.png",
+        ASSETS / "veyra-camp-dog-walk-pass-runtime-v2.png",
     ),
 )
-SHEET = ASSETS / "veyra-camp-dog-walk-sheet-v1.png"
-PUBLIC_SHEET = PUBLIC_ASSETS / "veyra-camp-dog-walk-sheet-v1.png"
+SHEET = ASSETS / "veyra-camp-dog-walk-sheet-v2.png"
+PUBLIC_SHEET = PUBLIC_ASSETS / "veyra-camp-dog-walk-sheet-v2.png"
 
 RUNTIME_SIZE = (96, 64)
 SUBJECT_LIMIT = (80, 56)

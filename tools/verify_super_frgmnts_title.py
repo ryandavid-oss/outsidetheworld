@@ -13,6 +13,7 @@ GAME = ROOT / "super_frgmnts.html"
 TITLE = ROOT / "Design" / "Super-Frgmnts" / "Title"
 ART = TITLE / "Assets" / "super-frgmnts-title-coreworks-v1.png"
 MANIFEST = TITLE / "title-screen-revision-1a-manifest.json"
+TITLE_MUSIC = ROOT / "Audio" / "super-frgmnts-title-cue.mp3"
 
 
 def png_size(path: Path) -> tuple[int, int]:
@@ -28,6 +29,8 @@ def main() -> None:
 
     assert ART.exists(), f"Missing title artwork: {ART}"
     assert png_size(ART) == (1672, 941)
+    assert TITLE_MUSIC.exists(), f"Missing title music: {TITLE_MUSIC}"
+    assert TITLE_MUSIC.stat().st_size > 1_000_000
     assert manifest["revision"] == "1A"
     assert manifest["status"] == "approved-production"
     assert manifest["scope"] == {
@@ -60,6 +63,13 @@ def main() -> None:
         "activateTitleAction()",
         'event.code === "Enter" || event.code === "Space"',
         "Opening Episode 01. Arrival on Veyra.",
+        'data-title-track="/Audio/super-frgmnts-title-cue.mp3"',
+        "var selectedMusicTrack = mainTitleScreen",
+        "backgroundMusic.loop = !mainTitleScreen",
+        "backgroundMusic.volume = mainTitleScreen",
+        "if (mainTitleScreen) {\n                    playBackgroundMusic();",
+        'playSoundEffect("deepSelect");',
+        "ensureAudio();\n                    playBackgroundMusic();",
     )
     for token in required_tokens:
         assert token in source, f"Missing title-screen contract: {token}"
@@ -79,6 +89,7 @@ def main() -> None:
     print("- Season One and Episode 01 identity are present")
     print("- keyboard, pointer, and automatic arrival handoff are present")
     print("- atmospheric motion and reduced-motion safeguards are present")
+    print("- dedicated one-shot title cue is selected and autoplay is attempted")
     print("- production integration and deployment scope is recorded")
 
 

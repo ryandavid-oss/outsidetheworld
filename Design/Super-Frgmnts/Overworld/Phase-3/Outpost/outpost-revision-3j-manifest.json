@@ -15,24 +15,26 @@
   },
   "volcano": {
     "source_plate_preserved": true,
-    "crater": "restrained orange heat pulse with cyan Resonant core",
-    "fissures": "screen-blended cyan flow aligned to the painted seams",
-    "essence": "deterministic travelling sparks and summit motes",
+    "crater": "low-opacity orange heat pulse and restrained shimmer",
+    "fissures": "source-plate fissures remain untraced and unpainted by the runtime",
+    "essence": "isolated one- and two-pixel warm pulses with sparse summit motes",
+    "seam_redraw": false,
     "reduced_motion_static": true
   },
   "camp_dog": {
     "rummage_asset": "Assets/veyra-camp-dog-runtime-v1.png",
-    "walk_sheet": "Assets/veyra-camp-dog-walk-sheet-v1.png",
+    "walk_sheet": "Assets/veyra-camp-dog-walk-sheet-v2.png",
     "walk_masters": [
-      "Assets/veyra-camp-dog-walk-a-master-v1.png",
-      "Assets/veyra-camp-dog-walk-b-master-v1.png"
+      "Assets/veyra-camp-dog-walk-contact-master-v2.png",
+      "Assets/veyra-camp-dog-walk-pass-master-v2.png"
     ],
     "runtime_frame_size": [96, 64],
     "walk_frames": 2,
     "camp_travel_pixels": 130,
     "cycle_seconds": 13.6,
-    "behavior": "rummage, walk into camp, pause, return",
-    "generation_path": "built-in ImageGen with local chroma-key removal"
+    "behavior": "rummage, walk into camp with readable contact/pass leg phases, pause, return",
+    "generation_path": "built-in ImageGen with local chroma-key removal",
+    "prompt_record": "veyra-camp-dog-walk-prompts-v2.txt"
   },
   "scope": {
     "live_game_modified": true,

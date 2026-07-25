@@ -14,18 +14,15 @@
     "visible_height": 90,
     "baseline_y_in_canvas": 105,
     "recommendation": "command-rest",
-    "alternate": "field-rest",
+    "alternate": "field-rest retained in the art archive only",
     "state_rule": {
-      "field_rest": "movement, landing, recent fire, or nearby threat",
-      "command_rest": "canonical idle after 1.8 calm seconds and exposition"
+      "command_rest": "immediate canonical idle and exposition pose",
+      "field_rest": "not used by the runtime"
     }
   },
   "transition": {
-    "duration_ms": [
-      180,
-      240
-    ],
-    "frames": "art pass pending; local prototype switches by state",
+    "duration_ms": 0,
+    "frames": "no idle-pose transition",
     "reduced_motion": "immediate command-rest"
   },
   "outputs": [

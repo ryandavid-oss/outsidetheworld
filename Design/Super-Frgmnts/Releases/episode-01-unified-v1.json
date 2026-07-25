@@ -32,11 +32,28 @@
     "aryn-dialogue-portrait-runtime-v3.png",
     "dras-dialogue-portrait-runtime-v2.png",
     "veyra-camp-dog-runtime-v1.png",
-    "veyra-camp-dog-walk-sheet-v1.png"
+    "veyra-camp-dog-walk-sheet-v2.png"
   ],
+  "audio": {
+    "title": "Audio/super-frgmnts-title-cue.mp3",
+    "overworld": "Audio/super-frgmnts-overworld-loop.mp3",
+    "foundry": "Audio/super-frgmnts-foundry-loop.mp3",
+    "title_mode": "one-shot",
+    "title_volume": 0.3,
+    "overworld_volume": 0.29,
+    "foundry_volume": 0.32,
+    "effects": {
+      "blaster": "Audio/super-frgmnts-blaster-shot.mp3",
+      "forward_confirm": "Audio/super-frgmnts-menu-select-deep.mp3",
+      "destructive_confirm": "Audio/super-frgmnts-menu-select-crash.mp3"
+    },
+    "blaster_channel_pool": 10,
+    "pause_on_focus_loss": true,
+    "resume_on_focus_gain": true
+  },
   "overworld_closing_pass": {
     "stray_landing_flats_collider_removed": true,
-    "resonant_volcano_runtime_layer": true,
+    "resonant_volcano_runtime_layer": "subtle heat and point pulses; no seam redraw",
     "camp_dog_walk_frames": 2
   },
   "verification": {

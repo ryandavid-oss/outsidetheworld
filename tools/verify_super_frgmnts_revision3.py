@@ -72,7 +72,7 @@ def verify_local_integration() -> None:
         "aryn-dialogue-portrait-runtime-v3.png",
         "dras-dialogue-portrait-runtime-v2.png",
         "veyra-camp-dog-runtime-v1.png",
-        "veyra-camp-dog-walk-sheet-v1.png",
+        "veyra-camp-dog-walk-sheet-v2.png",
         "drawOverworldVolcano()",
         "startArrivalDialogue()",
         "?preview=foundry-expansion",
@@ -211,19 +211,20 @@ def main() -> None:
     )
     verify_release_scope(closing_pass["scope"])
     assert closing_pass["volcano"]["source_plate_preserved"] is True
+    assert closing_pass["volcano"]["seam_redraw"] is False
     assert closing_pass["camp_dog"]["walk_frames"] == 2
     assert closing_pass["camp_dog"]["camp_travel_pixels"] == 130
     for walk_master in (
-        "veyra-camp-dog-walk-a-master-v1.png",
-        "veyra-camp-dog-walk-b-master-v1.png",
+        "veyra-camp-dog-walk-contact-master-v2.png",
+        "veyra-camp-dog-walk-pass-master-v2.png",
     ):
         verify_image(
             PHASE / "Outpost/Assets" / walk_master,
             alpha=True,
         )
     for walk_runtime in (
-        "veyra-camp-dog-walk-a-runtime-v1.png",
-        "veyra-camp-dog-walk-b-runtime-v1.png",
+        "veyra-camp-dog-walk-contact-runtime-v2.png",
+        "veyra-camp-dog-walk-pass-runtime-v2.png",
     ):
         verify_image(
             PHASE / "Outpost/Assets" / walk_runtime,
@@ -231,7 +232,7 @@ def main() -> None:
             alpha=True,
         )
     verify_image(
-        PHASE / "Outpost/Assets/veyra-camp-dog-walk-sheet-v1.png",
+        PHASE / "Outpost/Assets/veyra-camp-dog-walk-sheet-v2.png",
         expected_size=(192, 64),
         alpha=True,
     )

@@ -30,17 +30,13 @@ def main() -> None:
     require("drawPackEmitter(visual)" in source, "Pack emitter is not layered over the player")
     require("PACK_EMITTER_ANCHORS" in source, "Animation-specific antenna anchors are missing")
     require("assets.commandRest" in source, "Command Rest is not available to gameplay")
-    require("assets.fieldRest" in source, "Field Rest is not available to gameplay")
     require(
-        'pose: dialogueActive || calmIdleTime >= 1.8\n'
-        '                        ? "commandRest"\n'
-        '                        : "fieldRest"'
-        in source,
-        "Idle and dialogue states do not resolve to Command Rest correctly",
+        "sprite: assets.commandRest" in source and 'pose: "commandRest"' in source,
+        "Command Rest is not the immediate canonical idle",
     )
     require(
-        "activelyMoving || nearbyThreat || combatAlertTime > 0" in source,
-        "Field Rest is not coupled to movement, threats, and recent combat",
+        '? assets.commandRest\n                        : assets.fieldRest' not in source,
+        "The rejected Field Rest to Command Rest delay remains",
     )
 
     fire_body = function_body(source, "fireBlaster", "enemyCenter")
@@ -67,7 +63,7 @@ def main() -> None:
     print("- antenna origin mapped across locomotion states")
     print("- firing leaves player velocity untouched")
     print("- seeking and curved tracer enabled at all three tiers")
-    print("- Field Rest settles into Command Rest after the combat state clears")
+    print("- Command Rest is the immediate canonical idle")
 
 
 if __name__ == "__main__":

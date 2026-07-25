@@ -2036,9 +2036,10 @@
     </main>
     <audio
         id="backgroundMusic"
-        src="/Audio/super-frgmnts-foundry-loop.mp3"
+        data-title-track="/Audio/super-frgmnts-title-cue.mp3"
+        data-overworld-track="/Audio/super-frgmnts-overworld-loop.mp3"
+        data-foundry-track="/Audio/super-frgmnts-foundry-loop.mp3"
         preload="auto"
-        loop
         aria-hidden="true"
     ></audio>
 
@@ -2230,6 +2231,11 @@
             var heartsDisplay = document.getElementById("hearts");
             var liveStatus = document.getElementById("liveStatus");
             var backgroundMusic = document.getElementById("backgroundMusic");
+            var selectedMusicTrack = mainTitleScreen
+                ? backgroundMusic.dataset.titleTrack
+                : overworldPreview
+                    ? backgroundMusic.dataset.overworldTrack
+                    : backgroundMusic.dataset.foundryTrack;
             var directionPad = document.getElementById("directionPad");
             var dialogueLayer = document.getElementById("dialogueLayer");
             var dialoguePanel = document.getElementById("dialoguePanel");
@@ -2246,6 +2252,9 @@
             var dialogueSkipConfirm = document.getElementById("dialogueSkipConfirm");
             var dialogueReturn = document.getElementById("dialogueReturn");
             var dialogueSkipScene = document.getElementById("dialogueSkipScene");
+
+            backgroundMusic.src = selectedMusicTrack;
+            backgroundMusic.loop = !mainTitleScreen;
 
             document.body.classList.toggle("is-main-title", mainTitleScreen);
 
@@ -2285,7 +2294,6 @@
                 );
                 timerDisplay.textContent = "UNTIMED";
                 heartsDisplay.textContent = "SURFACE // STABLE";
-                backgroundMusic.src = "/Audio/super-frgmnts-foundry-loop.mp3";
                 keyboardHelp.innerHTML =
                     "<kbd>←</kbd><kbd>→</kbd><span>move</span>" +
                     "<kbd>↓</kbd><span>talk</span>" +
@@ -2421,7 +2429,7 @@
                     "high"
                 );
                 assets.campDogWalk = loadImage(
-                    "/Images/Game/Super-Frgmnts/veyra-camp-dog-walk-sheet-v1.png",
+                    "/Images/Game/Super-Frgmnts/veyra-camp-dog-walk-sheet-v2.png",
                     "high"
                 );
             }
@@ -2455,6 +2463,29 @@
             var soundOn = true;
             var resumeMusicAfterFocus = false;
             var audioContext = null;
+            var soundEffects = {
+                blaster: {
+                    src: "/Audio/super-frgmnts-blaster-shot.mp3",
+                    volume: 0.24,
+                    poolSize: 10,
+                    channels: [],
+                    next: 0
+                },
+                deepSelect: {
+                    src: "/Audio/super-frgmnts-menu-select-deep.mp3",
+                    volume: 0.3,
+                    poolSize: 3,
+                    channels: [],
+                    next: 0
+                },
+                crashSelect: {
+                    src: "/Audio/super-frgmnts-menu-select-crash.mp3",
+                    volume: 0.34,
+                    poolSize: 3,
+                    channels: [],
+                    next: 0
+                }
+            };
             var lastFrame = 0;
             var runFrameTime = 0;
             var jumpBuffer = 0;
@@ -3135,6 +3166,9 @@
                 return waitForImage(assets[key]);
             })).then(function () {
                 state = "ready";
+                if (mainTitleScreen) {
+                    playBackgroundMusic();
+                }
                 if (autostartRequested) {
                     resetGame(true);
                     draw();
@@ -3569,9 +3603,10 @@
                 titleStartButton.textContent = "Opening Veyra…";
                 titleScreen.classList.add("is-launching");
                 announce("Opening Episode 01. Arrival on Veyra.");
+                playSoundEffect("deepSelect");
                 if (soundOn) {
                     ensureAudio();
-                    playArpeggio(2);
+                    playBackgroundMusic();
                 }
                 window.setTimeout(function () {
                     window.location.href =
@@ -3718,6 +3753,7 @@
             function advanceArrivalDialogue() {
                 if (!dialogueActive || dialogueSkipOpen) return;
 
+                playSoundEffect("deepSelect", 0.58);
                 if (dialogueIndex >= dialogueCards.length - 1) {
                     finishArrivalDialogue(false);
                     return;
@@ -3738,6 +3774,7 @@
 
             function closeDialogueSkipConfirmation() {
                 if (!dialogueSkipOpen) return;
+                playSoundEffect("deepSelect");
                 dialogueSkipOpen = false;
                 dialogueSkipConfirm.hidden = true;
                 dialogueContinue.focus();
@@ -3802,6 +3839,7 @@
                 setPauseButton(true, true);
                 resumeMusicAfterFocus = false;
                 pauseBackgroundMusic();
+                pauseSoundEffects();
                 if (audioContext && audioContext.state === "running") {
                     var suspendedAudio = audioContext.suspend();
                     if (suspendedAudio && typeof suspendedAudio.catch === "function") {
@@ -3827,7 +3865,6 @@
                         }
                     }
                     playBackgroundMusic();
-                    playTone(330, 0.06, "square", 0.025);
                 }
                 announce("Game resumed.");
             }
@@ -4491,8 +4528,7 @@
                     trail: []
                 });
                 spawnBurst(muzzleX, muzzleY, stats.color, 7);
-                playTone(720 + blasterTier * 60, 0.05, "square", 0.02);
-                playTone(360, 0.04, "sawtooth", 0.012, 0.01);
+                playSoundEffect("blaster");
             }
 
             function enemyCenter(enemy) {
@@ -5198,13 +5234,18 @@
                 }
 
                 var now = prefersReducedMotion ? 0 : elapsed;
-                var pulse = 0.72 + Math.sin(now * 2.1) * 0.16;
-                var fissures = [
-                    [[1306, 286], [1310, 320], [1298, 344], [1310, 365], [1288, 390], [1281, 425], [1264, 451]],
-                    [[1299, 343], [1274, 359], [1256, 379], [1239, 397]],
-                    [[1310, 365], [1339, 389], [1332, 413], [1361, 448]],
-                    [[1288, 389], [1267, 407], [1248, 430]],
-                    [[1338, 390], [1358, 407], [1377, 430]]
+                var heatPulse = 0.5 + Math.sin(now * 1.45) * 0.5;
+                var seamPulsePoints = [
+                    [1307, 315],
+                    [1298, 344],
+                    [1289, 389],
+                    [1280, 423],
+                    [1265, 451],
+                    [1273, 359],
+                    [1255, 379],
+                    [1338, 389],
+                    [1332, 413],
+                    [1360, 448]
                 ];
 
                 ctx.save();
@@ -5217,117 +5258,78 @@
                     4,
                     1305,
                     282,
-                    112
+                    78
                 );
-                craterGlow.addColorStop(0, "rgba(255, 226, 136, 0.72)");
-                craterGlow.addColorStop(0.18, "rgba(255, 117, 65, 0.5)");
-                craterGlow.addColorStop(0.52, "rgba(223, 58, 106, 0.18)");
+                craterGlow.addColorStop(0, "rgba(255, 230, 153, 0.32)");
+                craterGlow.addColorStop(0.22, "rgba(255, 128, 75, 0.2)");
+                craterGlow.addColorStop(0.58, "rgba(223, 58, 106, 0.07)");
                 craterGlow.addColorStop(1, "rgba(223, 58, 106, 0)");
-                ctx.globalAlpha = pulse;
+                ctx.globalAlpha = 0.42 + heatPulse * 0.12;
                 ctx.fillStyle = craterGlow;
                 ctx.beginPath();
-                ctx.ellipse(1305, 282, 112, 68, 0, 0, Math.PI * 2);
+                ctx.ellipse(1305, 282, 78, 43, 0, 0, Math.PI * 2);
                 ctx.fill();
 
-                var resonanceGlow = ctx.createRadialGradient(
-                    1305,
-                    300,
-                    2,
-                    1305,
-                    300,
-                    62
-                );
-                resonanceGlow.addColorStop(0, "rgba(128, 255, 239, 0.48)");
-                resonanceGlow.addColorStop(0.4, "rgba(88, 245, 223, 0.2)");
-                resonanceGlow.addColorStop(1, "rgba(88, 245, 223, 0)");
-                ctx.globalAlpha = 0.5 + pulse * 0.25;
-                ctx.fillStyle = resonanceGlow;
-                ctx.beginPath();
-                ctx.ellipse(1305, 300, 64, 48, 0, 0, Math.PI * 2);
-                ctx.fill();
-
-                ctx.lineCap = "round";
-                ctx.lineJoin = "round";
-                fissures.forEach(function (points, fissureIndex) {
-                    ctx.beginPath();
-                    points.forEach(function (point, pointIndex) {
-                        if (pointIndex === 0) {
-                            ctx.moveTo(point[0], point[1]);
-                        } else {
-                            ctx.lineTo(point[0], point[1]);
-                        }
-                    });
-                    ctx.globalAlpha =
-                        0.13 +
-                        pulse * 0.08 +
-                        Math.sin(now * 2.8 + fissureIndex) * 0.025;
-                    ctx.strokeStyle = "#58f5df";
-                    ctx.shadowColor = "#58f5df";
-                    ctx.shadowBlur = 18;
-                    ctx.lineWidth = 8;
-                    ctx.stroke();
-
-                    ctx.globalAlpha = 0.38 + pulse * 0.22;
-                    ctx.shadowBlur = 5;
-                    ctx.lineWidth = 1.6;
-                    ctx.stroke();
-
-                    for (var sparkIndex = 0; sparkIndex < 3; sparkIndex += 1) {
-                        var progress =
-                            (now * (0.065 + fissureIndex * 0.006) +
-                                fissureIndex * 0.17 +
-                                sparkIndex * 0.31) %
-                            1;
-                        var pathPosition = progress * (points.length - 1);
-                        var segment = Math.min(
-                            points.length - 2,
-                            Math.floor(pathPosition)
-                        );
-                        var localProgress = pathPosition - segment;
-                        var from = points[segment];
-                        var to = points[segment + 1];
-                        var sparkX =
-                            from[0] + (to[0] - from[0]) * localProgress;
-                        var sparkY =
-                            from[1] + (to[1] - from[1]) * localProgress;
-                        var sparkle =
-                            0.46 +
-                            Math.sin(now * 8.4 + sparkIndex * 1.8) * 0.26;
-
-                        ctx.globalAlpha = sparkle;
-                        ctx.fillStyle =
-                            sparkIndex === 1 ? "#fff0b5" : "#9ffff2";
-                        ctx.shadowColor = ctx.fillStyle;
-                        ctx.shadowBlur = 9;
-                        ctx.fillRect(
-                            Math.round(sparkX) - 1,
-                            Math.round(sparkY) - 1,
+                if (!prefersReducedMotion) {
+                    for (var shimmerIndex = 0; shimmerIndex < 3; shimmerIndex += 1) {
+                        var shimmerCycle =
+                            (now * 0.12 + shimmerIndex * 0.31) % 1;
+                        ctx.globalAlpha = (1 - shimmerCycle) * 0.075;
+                        ctx.fillStyle = "#ffb36f";
+                        ctx.beginPath();
+                        ctx.ellipse(
+                            1305 +
+                                Math.sin(now * 0.9 + shimmerIndex * 2.1) *
+                                    (4 + shimmerIndex * 2),
+                            271 - shimmerCycle * 30,
+                            25 - shimmerIndex * 4,
                             3,
-                            3
+                            0,
+                            0,
+                            Math.PI * 2
                         );
+                        ctx.fill();
                     }
+                }
+
+                seamPulsePoints.forEach(function (point, pointIndex) {
+                    var pulseWave =
+                        Math.sin(now * 2.4 - pointIndex * 0.82);
+                    var sparkle = Math.pow(Math.max(0, pulseWave), 7);
+                    if (sparkle < 0.04) {
+                        return;
+                    }
+                    ctx.globalAlpha = sparkle * 0.32;
+                    ctx.fillStyle =
+                        pointIndex % 4 === 0 ? "#ffe09a" : "#ff9b78";
+                    ctx.shadowColor = ctx.fillStyle;
+                    ctx.shadowBlur = 3;
+                    ctx.fillRect(
+                        point[0],
+                        point[1],
+                        pointIndex % 3 === 0 ? 2 : 1,
+                        2
+                    );
                 });
 
-                for (var moteIndex = 0; moteIndex < 9; moteIndex += 1) {
+                for (var moteIndex = 0; moteIndex < 5; moteIndex += 1) {
                     var moteCycle =
-                        (now * (0.11 + moteIndex * 0.002) +
-                            moteIndex * 0.137) %
+                        (now * 0.085 + moteIndex * 0.193) %
                         1;
                     var moteX =
                         1305 +
-                        Math.sin(moteIndex * 2.4 + now * 0.6) *
-                            (18 + moteIndex * 4);
-                    var moteY = 273 - moteCycle * (38 + moteIndex * 4);
-                    ctx.globalAlpha = (1 - moteCycle) * 0.42;
-                    ctx.fillStyle =
-                        moteIndex % 3 === 0 ? "#ffd36c" : "#58f5df";
+                        Math.sin(moteIndex * 2.4 + now * 0.45) *
+                            (12 + moteIndex * 3);
+                    var moteY = 273 - moteCycle * (25 + moteIndex * 4);
+                    ctx.globalAlpha = (1 - moteCycle) * 0.24;
+                    ctx.fillStyle = moteIndex % 2 === 0 ? "#ffd36c" : "#ff8b68";
                     ctx.shadowColor = ctx.fillStyle;
-                    ctx.shadowBlur = 7;
+                    ctx.shadowBlur = 3;
                     ctx.fillRect(
                         Math.round(moteX),
                         Math.round(moteY),
-                        moteIndex % 3 === 0 ? 3 : 2,
-                        2
+                        moteIndex % 2 === 0 ? 2 : 1,
+                        1
                     );
                 }
                 ctx.restore();
@@ -5445,7 +5447,7 @@
                     assets.campDogWalk.naturalWidth
                 ) {
                     var walkFrame = walking
-                        ? Math.floor(now * 5.4) % 2
+                        ? Math.floor(now * 3.2) % 2
                         : 0;
                     ctx.save();
                     if (dogFacing < 0) {
@@ -6201,14 +6203,10 @@
 
             function getPlayerVisualState() {
                 var visual = {
-                    sprite: dialogueActive || calmIdleTime >= 1.8
-                        ? assets.commandRest
-                        : assets.fieldRest,
+                    sprite: assets.commandRest,
                     sourceX: 0,
                     sourceWidth: 112,
-                    pose: dialogueActive || calmIdleTime >= 1.8
-                        ? "commandRest"
-                        : "fieldRest",
+                    pose: "commandRest",
                     frame: 0
                 };
                 if (!player.onGround) {
@@ -6403,7 +6401,11 @@
 
             function playBackgroundMusic() {
                 if (!soundOn || !backgroundMusic || document.visibilityState === "hidden") return;
-                backgroundMusic.volume = 0.32;
+                backgroundMusic.volume = mainTitleScreen
+                    ? 0.3
+                    : overworldPreview
+                        ? 0.29
+                        : 0.32;
                 var playback = backgroundMusic.play();
                 if (playback && typeof playback.catch === "function") {
                     playback.catch(function () {
@@ -6416,6 +6418,51 @@
                 if (backgroundMusic) backgroundMusic.pause();
             }
 
+            function createSoundEffectChannel(effect) {
+                var channel = new Audio(effect.src);
+                channel.preload = "auto";
+                channel.playsInline = true;
+                effect.channels.push(channel);
+                return channel;
+            }
+
+            function playSoundEffect(name, volumeScale) {
+                if (!soundOn || document.visibilityState === "hidden") return;
+                var effect = soundEffects[name];
+                if (!effect) return;
+
+                var channel;
+                if (effect.channels.length < effect.poolSize) {
+                    channel = createSoundEffectChannel(effect);
+                } else {
+                    channel = effect.channels[effect.next];
+                }
+                effect.next = (effect.next + 1) % effect.poolSize;
+                channel.pause();
+                if (channel.readyState > 0) {
+                    channel.currentTime = 0;
+                }
+                channel.volume = Math.min(
+                    1,
+                    effect.volume * (volumeScale === undefined ? 1 : volumeScale)
+                );
+                var playback = channel.play();
+                if (playback && typeof playback.catch === "function") {
+                    playback.catch(function () {});
+                }
+            }
+
+            function pauseSoundEffects() {
+                Object.keys(soundEffects).forEach(function (name) {
+                    soundEffects[name].channels.forEach(function (channel) {
+                        channel.pause();
+                        if (channel.readyState > 0) {
+                            channel.currentTime = 0;
+                        }
+                    });
+                });
+            }
+
             function pauseAudioForFocusLoss() {
                 if (
                     backgroundMusic &&
@@ -6426,6 +6473,7 @@
                     resumeMusicAfterFocus = true;
                 }
                 pauseBackgroundMusic();
+                pauseSoundEffects();
                 if (audioContext && audioContext.state === "running") {
                     var suspendedAudio = audioContext.suspend();
                     if (suspendedAudio && typeof suspendedAudio.catch === "function") {
@@ -6633,6 +6681,7 @@
                 if (event.code === "Space") setControl("jump", true);
                 if (isBlasterKey(event)) setControl("shoot", true);
                 if (event.code === "KeyR") {
+                    playSoundEffect("crashSelect");
                     playBackgroundMusic();
                     resetGame(true);
                 }
@@ -6774,30 +6823,43 @@
             titleStartButton.addEventListener("click", activateTitleAction);
             startButton.addEventListener("click", function () {
                 if (startButton.dataset.overworldEnter === "true") {
-                    window.location.href =
-                        window.location.pathname +
-                        (episodeOneRun
-                            ? "?episode=01&stage=foundry&autostart=1"
-                            : "?preview=foundry-expansion");
+                    playSoundEffect("deepSelect");
+                    startButton.disabled = true;
+                    window.setTimeout(function () {
+                        window.location.href =
+                            window.location.pathname +
+                            (episodeOneRun
+                                ? "?episode=01&stage=foundry&autostart=1"
+                                : "?preview=foundry-expansion");
+                    }, 140);
                     return;
                 }
+                playSoundEffect(state === "lost" ? "crashSelect" : "deepSelect");
                 startGame();
             });
             dialogueContinue.addEventListener("click", advanceArrivalDialogue);
             dialogueSkip.addEventListener("click", openDialogueSkipConfirmation);
             dialogueReturn.addEventListener("click", closeDialogueSkipConfirmation);
             dialogueSkipScene.addEventListener("click", function () {
+                playSoundEffect("crashSelect");
                 finishArrivalDialogue(true);
             });
             startOverButton.addEventListener("click", function () {
+                playSoundEffect("crashSelect");
                 playBackgroundMusic();
                 resetGame(true);
             });
             restartButton.addEventListener("click", function () {
+                playSoundEffect("crashSelect");
                 playBackgroundMusic();
                 resetGame(true);
             });
-            pauseButton.addEventListener("click", togglePause);
+            pauseButton.addEventListener("click", function () {
+                if (state === "paused") {
+                    playSoundEffect("deepSelect");
+                }
+                togglePause();
+            });
             soundButton.addEventListener("click", function () {
                 soundOn = !soundOn;
                 soundButton.textContent = "Sound: " + (soundOn ? "On" : "Off");
@@ -6811,6 +6873,7 @@
                 } else {
                     resumeMusicAfterFocus = false;
                     pauseBackgroundMusic();
+                    pauseSoundEffects();
                 }
             });
 

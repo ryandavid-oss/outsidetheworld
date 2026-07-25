@@ -19,6 +19,7 @@ MANIFEST = DIALOGUE_DIR / "dialogue-revision-3c-manifest.json"
 PLATES = (
     ROOT / "Design" / "Super-Frgmnts" / "Overworld" / "Production" / "Plates"
 )
+OVERWORLD_MUSIC = ROOT / "Audio" / "super-frgmnts-overworld-loop.mp3"
 
 
 def require(condition: bool, message: str) -> None:
@@ -87,10 +88,15 @@ def main() -> None:
         "drawOverworldBirds",
         "drawCampDog",
         "veyra-camp-dog-runtime-v1.png",
-        "veyra-camp-dog-walk-sheet-v1.png",
+        "veyra-camp-dog-walk-sheet-v2.png",
         "drawOverworldVolcano",
-        "var fissures = [",
+        "var seamPulsePoints = [",
         "VEYRA // SUBSURFACE TREMOR",
+        'data-overworld-track="/Audio/super-frgmnts-overworld-loop.mp3"',
+        'data-foundry-track="/Audio/super-frgmnts-foundry-loop.mp3"',
+        "var selectedMusicTrack = mainTitleScreen",
+        "? backgroundMusic.dataset.overworldTrack",
+        ": overworldPreview\n                        ? 0.29\n                        : 0.32",
         "var overworldAnchor",
         "(0.48 - 0.7)",
         "portalCharge",
@@ -104,6 +110,11 @@ def main() -> None:
     )
     for token in required_runtime_tokens:
         require(token in source, f"Missing runtime contract: {token}")
+    require(OVERWORLD_MUSIC.exists(), "Missing dedicated overworld music")
+    require(
+        OVERWORLD_MUSIC.stat().st_size > 1_000_000,
+        "Overworld music asset is unexpectedly small",
+    )
     require(
         "drawOverworldGangway" not in source and "gangway: true" not in source,
         "The rejected visible ship staircase is still present",
@@ -115,6 +126,10 @@ def main() -> None:
     require(
         "Math.round(632 + drasBob)" not in source,
         "Dras is still anchored above Aryn's visible running plane",
+    )
+    require(
+        source.count('backgroundMusic.src = "/Audio/super-frgmnts-foundry-loop.mp3"') == 0,
+        "The overworld still overrides its route-selected music with the Foundry track",
     )
     require(
         "x: 1376,\n                        y: 680" not in source,
@@ -163,7 +178,8 @@ def main() -> None:
     print("- purpose-built close portraits and narrated tremor context are present")
     print("- Dras's boots align with Aryn's visible running plane")
     print("- Skip is left and Continue is the primary right-hand action")
-    print("- volumetric clouds, birds, walking camp dog, and Resonant volcano are present")
+    print("- volumetric clouds, birds, readable dog gait, and restrained volcano heat are present")
+    print("- Arrival on Veyra selects its dedicated overworld music track")
     print("- the stray Landing Flats collider is absent")
     print("- invisible ship-slope collision replaces the drawn gangway")
     print("- Fleet disconnect, Dras reaction, and portal ignition are staged")
