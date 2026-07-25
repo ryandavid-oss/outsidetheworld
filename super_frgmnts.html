@@ -3171,6 +3171,7 @@
                 }
                 if (autostartRequested) {
                     resetGame(true);
+                    playBackgroundMusic();
                     draw();
                     return;
                 }
@@ -6428,6 +6429,7 @@
 
             function playSoundEffect(name, volumeScale) {
                 if (!soundOn || document.visibilityState === "hidden") return;
+                engageSceneAudioFromGesture();
                 var effect = soundEffects[name];
                 if (!effect) return;
 
@@ -6449,6 +6451,26 @@
                 var playback = channel.play();
                 if (playback && typeof playback.catch === "function") {
                     playback.catch(function () {});
+                }
+            }
+
+            function engageSceneAudioFromGesture() {
+                if (
+                    !soundOn ||
+                    document.visibilityState === "hidden" ||
+                    state === "paused"
+                ) {
+                    return;
+                }
+                ensureAudio();
+                if (audioContext && audioContext.state === "suspended") {
+                    var resumedAudio = audioContext.resume();
+                    if (resumedAudio && typeof resumedAudio.catch === "function") {
+                        resumedAudio.catch(function () {});
+                    }
+                }
+                if (backgroundMusic && backgroundMusic.paused) {
+                    playBackgroundMusic();
                 }
             }
 
@@ -6540,6 +6562,9 @@
             }
 
             function setControl(control, pressed) {
+                if (pressed) {
+                    engageSceneAudioFromGesture();
+                }
                 if (state === "paused" || dialogueActive) return;
                 if (control === "jump") {
                     keys.jump = pressed;
@@ -6624,6 +6649,18 @@
                     event.code === "ControlLeft" ||
                     event.code === "ControlRight";
             }
+
+            window.addEventListener(
+                "pointerdown",
+                engageSceneAudioFromGesture,
+                { passive: true }
+            );
+            window.addEventListener(
+                "click",
+                engageSceneAudioFromGesture,
+                { passive: true }
+            );
+            window.addEventListener("keydown", engageSceneAudioFromGesture);
 
             window.addEventListener("keydown", function (event) {
                 if (
