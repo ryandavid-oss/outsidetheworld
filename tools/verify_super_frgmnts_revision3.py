@@ -75,7 +75,7 @@ def verify_local_integration() -> None:
         "veyra-camp-dog-walk-sheet-v2.png",
         "drawOverworldVolcano()",
         "startArrivalDialogue()",
-        "?preview=foundry-expansion",
+        'configureEpisodeScene("foundry")',
     ):
         assert token in source, f"Missing Revision 3 runtime integration: {token}"
 

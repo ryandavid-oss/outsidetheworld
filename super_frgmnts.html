@@ -317,6 +317,40 @@
             display: none;
         }
 
+        .signal-boot {
+            position: absolute;
+            inset: 0;
+            z-index: 10;
+            display: grid;
+            place-items: center;
+            padding: 24px;
+            background: #02030a;
+        }
+
+        .signal-boot[hidden] {
+            display: none;
+        }
+
+        .signal-boot__panel {
+            display: grid;
+            place-items: center;
+        }
+
+        .signal-boot__panel .pixel-button {
+            min-width: clamp(132px, 18vw, 180px);
+            padding: 10px 18px;
+            border-color: var(--index-teal);
+            background: #080c18;
+            font-size: clamp(9px, 1vw, 11px);
+            letter-spacing: 0.16em;
+        }
+
+        body.is-signal-locked .topbar,
+        body.is-signal-locked .control-bar {
+            visibility: hidden;
+            pointer-events: none;
+        }
+
         .title-screen::before {
             position: absolute;
             inset: -6%;
@@ -340,6 +374,10 @@
                 linear-gradient(transparent 42%, rgba(2, 4, 14, 0.06) 59%, rgba(2, 4, 14, 0.62));
             content: "";
             pointer-events: none;
+        }
+
+        .title-screen__picture {
+            display: contents;
         }
 
         .title-screen__art {
@@ -1671,24 +1709,76 @@
             }
 
             .title-screen {
-                padding:
-                    max(24px, env(safe-area-inset-top))
-                    18px
-                    max(28px, calc(env(safe-area-inset-bottom) + 12px));
+                display: block;
+                padding: 0;
                 background:
-                    radial-gradient(circle at 35% 45%, rgba(99, 149, 238, 0.15), transparent 46%),
-                    radial-gradient(circle at 68% 55%, rgba(155, 89, 182, 0.1), transparent 42%),
-                    linear-gradient(rgba(2, 4, 14, 0.2), rgba(2, 4, 14, 0.92)),
+                    radial-gradient(circle at 50% 28%, rgba(99, 149, 238, 0.17), transparent 42%),
+                    linear-gradient(rgba(2, 4, 14, 0.1), rgba(2, 4, 14, 0.9) 70%, #02040d),
                     #030511;
             }
 
             .title-screen__art {
+                top: clamp(58px, 10svh, 104px);
+                right: 0;
+                bottom: auto;
+                left: 0;
+                height: auto;
                 object-fit: contain;
+                animation-duration: 22s;
             }
 
             .title-screen__controls {
-                width: min(86vw, 330px);
-                margin-bottom: max(6px, env(safe-area-inset-bottom));
+                position: absolute;
+                right: max(16px, env(safe-area-inset-right));
+                bottom: max(28px, calc(env(safe-area-inset-bottom) + 18px));
+                left: max(16px, env(safe-area-inset-left));
+                width: auto;
+                margin: 0;
+                gap: 9px;
+                padding: 18px 14px 6px;
+                border: 0;
+                border-top: 2px solid rgba(158, 197, 193, 0.58);
+                border-bottom: 0;
+                background:
+                    linear-gradient(
+                        180deg,
+                        rgba(3, 7, 20, 0),
+                        rgba(3, 7, 20, 0.78) 24%,
+                        rgba(3, 7, 20, 0.92)
+                    );
+                box-shadow: none;
+                clip-path: none;
+                backdrop-filter: none;
+            }
+
+            .title-screen__controls .pixel-button {
+                width: min(100%, 360px);
+                min-height: 54px;
+                margin-block: 5px;
+                font-size: 12px;
+            }
+
+            .title-screen__season {
+                font-size: 8px;
+            }
+
+            .title-screen__hero {
+                font-size: 10px;
+            }
+
+            .title-screen__hint {
+                max-width: 30em;
+                font-size: 8px;
+                line-height: 1.45;
+            }
+
+            .title-screen__input-hint {
+                display: none;
+            }
+
+            body.is-main-title .topbar {
+                visibility: hidden;
+                pointer-events: none;
             }
 
             .message-card {
@@ -1882,14 +1972,34 @@
                     Your browser needs canvas support to play Super Frgmnts.
                 </canvas>
 
+                <div
+                    class="signal-boot"
+                    id="signalBoot"
+                    role="dialog"
+                    aria-modal="true"
+                    aria-label="Load Super Frgmnts"
+                >
+                    <div class="signal-boot__panel">
+                        <button class="pixel-button" id="signalBootButton" type="button">
+                            Load Game
+                        </button>
+                    </div>
+                </div>
+
                 <div class="title-screen" id="titleScreen">
-                    <img
-                        class="title-screen__art"
-                        src="/Images/Game/Super-Frgmnts/super-frgmnts-title-coreworks-v1.png"
-                        alt="The Super Frgmnts title suspended above the abandoned Veyra Coreworks and its distant sealed gate"
-                        decoding="async"
-                        fetchpriority="high"
-                    >
+                    <picture class="title-screen__picture">
+                        <source
+                            media="(max-width: 720px) and (orientation: portrait)"
+                            srcset="/Images/Game/Super-Frgmnts/super-frgmnts-title-coreworks-mobile-v1.png"
+                        >
+                        <img
+                            class="title-screen__art"
+                            src="/Images/Game/Super-Frgmnts/super-frgmnts-title-coreworks-v1.png"
+                            alt="The Super Frgmnts title suspended above the abandoned Veyra Coreworks and its distant sealed gate"
+                            decoding="async"
+                            fetchpriority="high"
+                        >
+                    </picture>
                     <div class="title-screen__atmosphere" aria-hidden="true">
                         <span class="title-screen__signal"></span>
                         <span class="title-screen__vesperite title-screen__vesperite--left"></span>
@@ -2042,6 +2152,7 @@
         preload="auto"
         aria-hidden="true"
     ></audio>
+    <audio id="backgroundMusicSecondary" preload="auto" aria-hidden="true"></audio>
 
     <script>
         (function () {
@@ -2214,6 +2325,8 @@
             var titleScreen = document.getElementById("titleScreen");
             var titleStartButton = document.getElementById("titleStartButton");
             var titleSeason = document.getElementById("titleSeason");
+            var signalBoot = document.getElementById("signalBoot");
+            var signalBootButton = document.getElementById("signalBootButton");
             var messageCard = document.getElementById("messageCard");
             var messageKicker = document.getElementById("messageKicker");
             var messageTitle = document.getElementById("messageTitle");
@@ -2231,6 +2344,8 @@
             var heartsDisplay = document.getElementById("hearts");
             var liveStatus = document.getElementById("liveStatus");
             var backgroundMusic = document.getElementById("backgroundMusic");
+            var backgroundMusicSecondary =
+                document.getElementById("backgroundMusicSecondary");
             var selectedMusicTrack = mainTitleScreen
                 ? backgroundMusic.dataset.titleTrack
                 : overworldPreview
@@ -2255,8 +2370,11 @@
 
             backgroundMusic.src = selectedMusicTrack;
             backgroundMusic.loop = !mainTitleScreen;
+            backgroundMusic.playsInline = true;
+            backgroundMusicSecondary.playsInline = true;
 
             document.body.classList.toggle("is-main-title", mainTitleScreen);
+            document.body.classList.add("is-signal-locked");
 
             if (overworldPreview) {
                 var keyboardHelp = document.querySelector(".keyboard-help");
@@ -2366,14 +2484,6 @@
             }
 
             var assets = {
-                background0: loadImage(
-                    overworldPreview
-                        ? "/Images/Game/Super-Frgmnts/overworld-landing-flats-v1.png"
-                        : expansionPreview
-                        ? "/Images/Game/super-frgmnts-foundry-expanded-prototype-v1.png"
-                        : "/Images/Builder/signal-foundry-bg.png",
-                    "high"
-                ),
                 run: loadImage("/Images/Builder/aryn-run-10pose-balanced-gait-sheet.png", "high"),
                 idle: loadImage("/Images/Builder/signal-ranger-idle-focused-v2.png", "high"),
                 commandRest: loadImage(
@@ -2389,50 +2499,79 @@
                 crouch: loadImage("/Images/Builder/signal-ranger-crouch.png", "high")
             };
 
-            assets.background1 = loadImage(
-                overworldPreview
-                    ? "/Images/Game/Super-Frgmnts/overworld-dras-outpost-v1.png"
-                    : "/Images/Game/signal-foundry-refinery.png",
-                overworldPreview ? "high" : "low"
+            assets.overworld0 = loadImage(
+                "/Images/Game/Super-Frgmnts/overworld-landing-flats-v1.png",
+                "high"
             );
-            assets.background2 = loadImage(
-                overworldPreview
-                    ? "/Images/Game/Super-Frgmnts/overworld-coreworks-threshold-v1.png"
-                    : "/Images/Game/signal-foundry-biolab.png",
-                overworldPreview ? "high" : "low"
+            assets.overworld1 = loadImage(
+                "/Images/Game/Super-Frgmnts/overworld-dras-outpost-v1.png",
+                "high"
             );
-            assets.background3 = loadImage("/Images/Game/signal-foundry-uplink.png", "low");
+            assets.overworld2 = loadImage(
+                "/Images/Game/Super-Frgmnts/overworld-coreworks-threshold-v1.png",
+                "high"
+            );
+            assets.foundryExpanded = loadImage(
+                "/Images/Game/super-frgmnts-foundry-expanded-prototype-v1.png",
+                "high"
+            );
+            assets.foundryLower0 = assets.foundryExpanded;
+            assets.foundryLower1 = loadImage(
+                "/Images/Game/signal-foundry-refinery.png",
+                "low"
+            );
+            assets.foundryLower2 = loadImage(
+                "/Images/Game/signal-foundry-biolab.png",
+                "low"
+            );
+            assets.foundryLower3 = loadImage(
+                "/Images/Game/signal-foundry-uplink.png",
+                "low"
+            );
+            assets.ship = loadImage(
+                "/Images/Game/Super-Frgmnts/aryn-ship-v1.png",
+                "high"
+            );
+            assets.shipHover = loadImage(
+                "/Images/Game/Super-Frgmnts/aryn-ship-hover-field-v1.png",
+                "high"
+            );
+            assets.dras = loadImage(
+                "/Images/Game/Super-Frgmnts/dras-ehdre-runtime-v1.png",
+                "high"
+            );
+            assets.arynDialoguePortrait = loadImage(
+                "/Images/Game/Super-Frgmnts/aryn-dialogue-portrait-runtime-v3.png",
+                "high"
+            );
+            assets.drasDialoguePortrait = loadImage(
+                "/Images/Game/Super-Frgmnts/dras-dialogue-portrait-runtime-v2.png",
+                "high"
+            );
+            assets.campDog = loadImage(
+                "/Images/Game/Super-Frgmnts/veyra-camp-dog-runtime-v1.png",
+                "high"
+            );
+            assets.campDogWalk = loadImage(
+                "/Images/Game/Super-Frgmnts/veyra-camp-dog-walk-sheet-v2.png",
+                "high"
+            );
 
-            if (overworldPreview) {
-                assets.ship = loadImage(
-                    "/Images/Game/Super-Frgmnts/aryn-ship-v1.png",
-                    "high"
-                );
-                assets.shipHover = loadImage(
-                    "/Images/Game/Super-Frgmnts/aryn-ship-hover-field-v1.png",
-                    "high"
-                );
-                assets.dras = loadImage(
-                    "/Images/Game/Super-Frgmnts/dras-ehdre-runtime-v1.png",
-                    "high"
-                );
-                assets.arynDialoguePortrait = loadImage(
-                    "/Images/Game/Super-Frgmnts/aryn-dialogue-portrait-runtime-v3.png",
-                    "high"
-                );
-                assets.drasDialoguePortrait = loadImage(
-                    "/Images/Game/Super-Frgmnts/dras-dialogue-portrait-runtime-v2.png",
-                    "high"
-                );
-                assets.campDog = loadImage(
-                    "/Images/Game/Super-Frgmnts/veyra-camp-dog-runtime-v1.png",
-                    "high"
-                );
-                assets.campDogWalk = loadImage(
-                    "/Images/Game/Super-Frgmnts/veyra-camp-dog-walk-sheet-v2.png",
-                    "high"
-                );
+            function applySceneAssets() {
+                if (overworldPreview) {
+                    assets.background0 = assets.overworld0;
+                    assets.background1 = assets.overworld1;
+                    assets.background2 = assets.overworld2;
+                    delete assets.background3;
+                    return;
+                }
+                assets.background0 = assets.foundryExpanded;
+                assets.background1 = assets.foundryLower1;
+                assets.background2 = assets.foundryLower2;
+                assets.background3 = assets.foundryLower3;
             }
+
+            applySceneAssets();
 
             if (surfaceCrawlerTrial) {
                 assets.squircle = loadImage(
@@ -2455,12 +2594,21 @@
             var shootCooldown = 0;
             var shootBuffer = 0;
             var state = "loading";
+            var assetsReady = false;
+            var signalInitialized = false;
             var elapsed = 0;
             var timeLeft = START_TIME;
             var score = 0;
             var collected = 0;
             var hits = 0;
             var soundOn = true;
+            try {
+                soundOn = window.localStorage.getItem("super-frgmnts-sound") !== "off";
+            } catch (storageError) {
+                soundOn = true;
+            }
+            soundButton.textContent = "Sound: " + (soundOn ? "On" : "Off");
+            soundButton.setAttribute("aria-pressed", String(soundOn));
             var resumeMusicAfterFocus = false;
             var audioContext = null;
             var soundEffects = {
@@ -2530,21 +2678,21 @@
                     speaker: "DRAS EHDRE",
                     role: "COREWORKS FOREMAN",
                     portrait: "dras",
-                    text: "Nice ship. Didn’t know the RD-42 was standard issue for the Interworld Fleet."
+                    text: "You came."
                 },
                 {
                     id: "D02",
                     speaker: "ARYN SOL-MAVI",
                     role: "SIGNAL RANGER",
                     portrait: "aryn",
-                    text: "It isn’t. She’s mine. I don’t trust travel to the Fleet. You must be Dras Ehdre."
+                    text: "Aryn Sol-Mavi. You must be Dras Ehdre."
                 },
                 {
                     id: "D03",
                     speaker: "DRAS EHDRE",
                     role: "COREWORKS FOREMAN",
                     portrait: "dras",
-                    text: "Glad someone still has standards. I was beginning to think no one beyond Veyra had heard us."
+                    text: "I am. I was beginning to think no one beyond Veyra had heard us."
                 },
                 {
                     id: "D04",
@@ -2837,14 +2985,14 @@
                 { x: WIDTH * 3 + 1438, y: 532, width: 148, height: 24 }
             ];
 
-            if (overworldPreview) {
+            function buildOverworldPlatforms() {
                 var shipHoverMotion = {
                     axis: "y",
                     range: 6.4,
                     speed: Math.PI * 2 / 1.6,
                     phase: 0
                 };
-                platforms = [
+                return [
                     {
                         x: 48,
                         y: GROUND_Y,
@@ -2906,6 +3054,10 @@
                         motion: shipHoverMotion
                     }
                 ];
+            }
+
+            if (overworldPreview) {
+                platforms = buildOverworldPlatforms();
             }
 
             function buildExpansionPreviewPlatforms() {
@@ -3015,29 +3167,33 @@
                 platforms = buildExpansionPreviewPlatforms();
             }
 
-            var deepworksRooms = Array.from(
-                { length: overworldPreview ? 0 : SCREEN_COUNT },
-                function (_, roomIndex) {
-                var roomStart = roomIndex * WIDTH;
-                var deepworksY = expansionPreview ? 1816 : 875;
-                var mirrored = expansionPreview &&
-                    previewRoomBlueprints[roomIndex] &&
-                    previewRoomBlueprints[roomIndex].mirror;
-                var corridorX = mirrored ? WIDTH - 258 - 866 : 258;
-                var entryLeft = mirrored ? WIDTH - 1082 : 300;
-                var entryRight = mirrored ? WIDTH - 300 : 1082;
-                return {
-                    roomIndex: roomIndex,
-                    x: roomStart + corridorX,
-                    y: deepworksY,
-                    width: 866,
-                    height: WORLD_HEIGHT - deepworksY,
-                    entryLeft: roomStart + entryLeft,
-                    entryRight: roomStart + entryRight,
-                    deepworks: true
-                };
-                }
-            );
+            function buildDeepworksRooms() {
+                return Array.from(
+                    { length: overworldPreview ? 0 : SCREEN_COUNT },
+                    function (_, roomIndex) {
+                        var roomStart = roomIndex * WIDTH;
+                        var deepworksY = expansionPreview ? 1816 : 875;
+                        var mirrored = expansionPreview &&
+                            previewRoomBlueprints[roomIndex] &&
+                            previewRoomBlueprints[roomIndex].mirror;
+                        var corridorX = mirrored ? WIDTH - 258 - 866 : 258;
+                        var entryLeft = mirrored ? WIDTH - 1082 : 300;
+                        var entryRight = mirrored ? WIDTH - 300 : 1082;
+                        return {
+                            roomIndex: roomIndex,
+                            x: roomStart + corridorX,
+                            y: deepworksY,
+                            width: 866,
+                            height: WORLD_HEIGHT - deepworksY,
+                            entryLeft: roomStart + entryLeft,
+                            entryRight: roomStart + entryRight,
+                            deepworks: true
+                        };
+                    }
+                );
+            }
+
+            var deepworksRooms = buildDeepworksRooms();
 
             var shards = [];
             var hazards = [
@@ -3120,28 +3276,28 @@
             }
 
             var criticalAssetKeys = [
-                "background0",
+                "overworld0",
+                "overworld1",
+                "overworld2",
+                "foundryExpanded",
+                "foundryLower1",
+                "foundryLower2",
+                "foundryLower3",
                 "run",
                 "idle",
                 "commandRest",
                 "fieldRest",
                 "takeoff",
                 "airborne",
-                "crouch"
+                "crouch",
+                "ship",
+                "shipHover",
+                "dras",
+                "campDog",
+                "campDogWalk",
+                "arynDialoguePortrait",
+                "drasDialoguePortrait"
             ];
-            if (overworldPreview) {
-                criticalAssetKeys.push(
-                    "background1",
-                    "background2",
-                    "ship",
-                    "shipHover",
-                    "dras",
-                    "campDog",
-                    "campDogWalk",
-                    "arynDialoguePortrait",
-                    "drasDialoguePortrait"
-                );
-            }
             if (surfaceCrawlerTrial) {
                 criticalAssetKeys.push("squircle");
             }
@@ -3165,21 +3321,21 @@
             Promise.all(criticalAssetKeys.map(function (key) {
                 return waitForImage(assets[key]);
             })).then(function () {
+                assetsReady = true;
                 state = "ready";
-                if (mainTitleScreen) {
-                    playBackgroundMusic();
-                }
-                if (autostartRequested) {
+                if (signalInitialized && autostartRequested) {
                     resetGame(true);
-                    playBackgroundMusic();
+                    setAudioScene(overworldPreview ? "overworld" : "foundry");
                     draw();
                     return;
                 }
                 titleStartButton.disabled = false;
                 titleStartButton.textContent = titleActionLabel();
-                window.requestAnimationFrame(function () {
-                    titleStartButton.focus({ preventScroll: true });
-                });
+                if (signalInitialized) {
+                    window.requestAnimationFrame(function () {
+                        titleStartButton.focus({ preventScroll: true });
+                    });
+                }
                 draw();
             });
 
@@ -3581,6 +3737,177 @@
                 }
             }
 
+            function applyEpisodePresentation(scene) {
+                var isOverworld = scene === "overworld";
+                var keyboardHelp = document.querySelector(".keyboard-help");
+                var missionHeading = document.querySelector(".mission strong");
+                var missionDetail = document.querySelector(".mission span");
+
+                document.body.classList.toggle("is-overworld-preview", isOverworld);
+                document.body.classList.toggle("is-expansion-preview", !isOverworld);
+                document.body.classList.remove("is-main-title");
+                document.title = isOverworld
+                    ? "SUPER FRGMNTS // Arrival on Veyra"
+                    : "SUPER FRGMNTS // The Shard Foundry";
+                document.querySelector(".eyebrow").textContent = isOverworld
+                    ? "Season One // Veyra"
+                    : "Episode 01 // The Shard Foundry";
+                document.querySelector(".stage-wrap").setAttribute(
+                    "aria-label",
+                    isOverworld
+                        ? "Super Frgmnts Arrival on Veyra"
+                        : "Super Frgmnts Episode 01 Shard Foundry"
+                );
+                missionHeading.textContent = isOverworld
+                    ? "ARYN SOL-MAVI // ARRIVAL"
+                    : "ARYN SOL-MAVI // INFILTRATE";
+                missionDetail.textContent = isOverworld
+                    ? "FIND DRAS EHDRE"
+                    : "CROSS THE SHARD FOUNDRY → UPLINK GATE";
+                directionPad.setAttribute(
+                    "aria-label",
+                    isOverworld
+                        ? "Directional stick. Drag left or right to move. Drag down near Dras to talk after first contact."
+                        : "Directional stick. Drag left or right to move. Drag down to drop through catwalks or enter Deepworks."
+                );
+                if (isOverworld) {
+                    keyboardHelp.innerHTML =
+                        "<kbd>←</kbd><kbd>→</kbd><span>move</span>" +
+                        "<kbd>↓</kbd><span>talk</span>" +
+                        "<kbd>SPACE</kbd><span>jump</span>" +
+                        "<kbd>R</kbd><span>restart</span>";
+                    keyboardHelp.setAttribute(
+                        "aria-label",
+                        "Keyboard controls: left and right arrows move, down arrow talks to Dras after first contact, Space jumps, R restarts"
+                    );
+                } else {
+                    keyboardHelp.innerHTML =
+                        "<kbd>←</kbd><kbd>→</kbd><span>move</span>" +
+                        "<kbd>↓</kbd><span>drop</span>" +
+                        "<kbd>SPACE</kbd><span>jump</span>" +
+                        "<kbd>CTRL</kbd><span>blaster</span>" +
+                        "<kbd>R</kbd><span>restart</span>";
+                    keyboardHelp.setAttribute(
+                        "aria-label",
+                        "Keyboard controls: left and right arrows move, down arrow drops, Space jumps, Control fires, R restarts"
+                    );
+                }
+            }
+
+            function configureEpisodeScene(scene, historyMode) {
+                var isOverworld = scene === "overworld";
+                episodeOneRun = true;
+                episodeStage = scene;
+                overworldPreview = isOverworld;
+                expansionPreview = !isOverworld;
+                mainTitleScreen = false;
+                surfaceCrawlerTrial = false;
+                arrivalDialoguePreview = false;
+                arrivalPortalPreview = false;
+                autostartRequested = false;
+                previewStartRoom = 0;
+                previewStartUpper = false;
+                WORLD_HEIGHT = isOverworld ? HEIGHT : 1882;
+                SCREEN_COUNT = isOverworld ? 3 : previewRoomBlueprints.length;
+                WORLD_WIDTH = WIDTH * SCREEN_COUNT;
+                GROUND_Y = isOverworld ? 744 : 1604;
+                DRAS_DRAW_Y = GROUND_Y - 100;
+                START_TIME = 480;
+                TOTAL_SHARDS = 0;
+
+                applySceneAssets();
+                platforms = isOverworld
+                    ? buildOverworldPlatforms()
+                    : buildExpansionPreviewPlatforms();
+                deepworksRooms = buildDeepworksRooms();
+                hazards = [];
+                uplink = isOverworld
+                    ? {
+                        x: WIDTH * 2 + 1490,
+                        y: 548,
+                        width: 112,
+                        height: 196
+                    }
+                    : {
+                        x: (SCREEN_COUNT - 1) * WIDTH + 116,
+                        y: 82,
+                        width: 68,
+                        height: 128
+                    };
+
+                applyEpisodePresentation(scene);
+                resizeGameViewport();
+                titleScreen.classList.remove("is-launching");
+                titleScreen.hidden = true;
+                messageCard.hidden = true;
+                if (historyMode === "replace") {
+                    window.history.replaceState(
+                        { superFrgmntsScene: scene },
+                        "",
+                        window.location.pathname +
+                            "?episode=01&stage=" + scene + "&autostart=1"
+                    );
+                } else if (historyMode !== "none") {
+                    window.history.pushState(
+                        { superFrgmntsScene: scene },
+                        "",
+                        window.location.pathname +
+                            "?episode=01&stage=" + scene + "&autostart=1"
+                    );
+                }
+                setAudioScene(scene);
+                resetGame(true);
+                draw();
+            }
+
+            function configureTitleScene() {
+                mainTitleScreen = true;
+                episodeOneRun = false;
+                episodeStage = "";
+                overworldPreview = false;
+                expansionPreview = false;
+                surfaceCrawlerTrial = false;
+                state = "ready";
+                document.body.classList.add("is-main-title");
+                document.body.classList.remove(
+                    "is-overworld-preview",
+                    "is-expansion-preview",
+                    "is-running",
+                    "is-dialogue",
+                    "is-dialogue-tremor"
+                );
+                document.title = "SUPER FRGMNTS";
+                titleSeason.textContent = "Season One // Veyra";
+                document.querySelector(".title-screen__hero").innerHTML =
+                    "Episode 01 // <strong>Arrival on Veyra</strong>";
+                document.querySelector(".title-screen__hint").textContent =
+                    "A distress signal from a world the Fleet abandoned.";
+                var titleArt = document.querySelector(".title-screen__art");
+                titleArt.src =
+                    "/Images/Game/Super-Frgmnts/super-frgmnts-title-coreworks-v1.png";
+                titleArt.alt =
+                    "The Super Frgmnts title suspended above the abandoned Veyra Coreworks and its distant sealed gate";
+                titleScreen.style.setProperty(
+                    "--title-art",
+                    'url("/Images/Game/Super-Frgmnts/super-frgmnts-title-coreworks-v1.png")'
+                );
+                titleScreen.classList.remove("is-launching");
+                titleScreen.hidden = false;
+                messageCard.hidden = true;
+                dialogueLayer.hidden = true;
+                setPauseButton(false, false);
+                titleStartButton.disabled = !assetsReady;
+                titleStartButton.textContent = assetsReady
+                    ? "Begin episode"
+                    : "Loading signal…";
+                setAudioScene("title");
+                window.requestAnimationFrame(function () {
+                    if (assetsReady) {
+                        titleStartButton.focus({ preventScroll: true });
+                    }
+                });
+            }
+
             function startGame() {
                 if (state === "paused") {
                     resumeGame();
@@ -3610,9 +3937,7 @@
                     playBackgroundMusic();
                 }
                 window.setTimeout(function () {
-                    window.location.href =
-                        window.location.pathname +
-                        "?episode=01&stage=overworld&autostart=1";
+                    configureEpisodeScene("overworld");
                 }, prefersReducedMotion ? 80 : 560);
             }
 
@@ -3797,7 +4122,6 @@
                 startButton.dataset.overworldEnter = "true";
                 startOverButton.hidden = false;
                 messageCard.hidden = false;
-                pauseBackgroundMusic();
                 announce("Episode 01. The Shard Foundry. Enter the Foundry or start over.");
             }
 
@@ -6400,23 +6724,119 @@
                 }
             }
 
-            function playBackgroundMusic() {
-                if (!soundOn || !backgroundMusic || document.visibilityState === "hidden") return;
-                backgroundMusic.volume = mainTitleScreen
-                    ? 0.3
-                    : overworldPreview
-                        ? 0.29
-                        : 0.32;
-                var playback = backgroundMusic.play();
+            var audioScene = mainTitleScreen
+                ? "title"
+                : overworldPreview
+                    ? "overworld"
+                    : "foundry";
+            var activeMusicChannel = backgroundMusic;
+            var idleMusicChannel = backgroundMusicSecondary;
+            var musicFadeTimer = 0;
+            var musicTracks = {
+                title: backgroundMusic.dataset.titleTrack,
+                overworld: backgroundMusic.dataset.overworldTrack,
+                foundry: backgroundMusic.dataset.foundryTrack
+            };
+            var musicVolumes = {
+                title: 0.3,
+                overworld: 0.29,
+                foundry: 0.32
+            };
+
+            activeMusicChannel.dataset.scene = audioScene;
+            activeMusicChannel.volume = musicVolumes[audioScene];
+
+            function musicIsPlaying() {
+                return [activeMusicChannel, idleMusicChannel].some(function (channel) {
+                    return channel && !channel.paused;
+                });
+            }
+
+            function startMusicChannel(channel) {
+                if (
+                    !signalInitialized ||
+                    !soundOn ||
+                    !channel ||
+                    document.visibilityState === "hidden"
+                ) {
+                    return;
+                }
+                var playback = channel.play();
                 if (playback && typeof playback.catch === "function") {
-                    playback.catch(function () {
-                        // The next keyboard or button interaction will try again.
-                    });
+                    playback.catch(function () {});
                 }
             }
 
+            function cancelMusicFade() {
+                if (!musicFadeTimer) return;
+                window.clearInterval(musicFadeTimer);
+                musicFadeTimer = 0;
+            }
+
+            function setAudioScene(nextScene, immediate) {
+                if (!musicTracks[nextScene]) return;
+                audioScene = nextScene;
+
+                if (
+                    activeMusicChannel.dataset.scene === nextScene &&
+                    activeMusicChannel.src
+                ) {
+                    activeMusicChannel.loop = nextScene !== "title";
+                    activeMusicChannel.volume = musicVolumes[nextScene];
+                    startMusicChannel(activeMusicChannel);
+                    return;
+                }
+
+                cancelMusicFade();
+                var outgoing = activeMusicChannel;
+                var incoming = idleMusicChannel;
+                incoming.pause();
+                incoming.src = musicTracks[nextScene];
+                incoming.dataset.scene = nextScene;
+                incoming.loop = nextScene !== "title";
+                incoming.currentTime = 0;
+                incoming.volume = immediate ? musicVolumes[nextScene] : 0;
+                startMusicChannel(incoming);
+
+                activeMusicChannel = incoming;
+                idleMusicChannel = outgoing;
+
+                if (immediate || !signalInitialized || !soundOn) {
+                    outgoing.pause();
+                    outgoing.currentTime = 0;
+                    return;
+                }
+
+                var fadeStart = performance.now();
+                var fadeDuration = prefersReducedMotion ? 80 : 480;
+                var outgoingStart = outgoing.volume;
+                function fadeMusic() {
+                    var progress = Math.min(
+                        1,
+                        (performance.now() - fadeStart) / fadeDuration
+                    );
+                    incoming.volume = musicVolumes[nextScene] * progress;
+                    outgoing.volume = outgoingStart * (1 - progress);
+                    if (progress < 1) return;
+                    window.clearInterval(musicFadeTimer);
+                    musicFadeTimer = 0;
+                    outgoing.pause();
+                    outgoing.currentTime = 0;
+                    outgoing.volume = 0;
+                }
+                musicFadeTimer = window.setInterval(fadeMusic, 24);
+                fadeMusic();
+            }
+
+            function playBackgroundMusic() {
+                activeMusicChannel.volume = musicVolumes[audioScene];
+                startMusicChannel(activeMusicChannel);
+            }
+
             function pauseBackgroundMusic() {
-                if (backgroundMusic) backgroundMusic.pause();
+                cancelMusicFade();
+                activeMusicChannel.pause();
+                idleMusicChannel.pause();
             }
 
             function createSoundEffectChannel(effect) {
@@ -6456,6 +6876,7 @@
 
             function engageSceneAudioFromGesture() {
                 if (
+                    !signalInitialized ||
                     !soundOn ||
                     document.visibilityState === "hidden" ||
                     state === "paused"
@@ -6469,7 +6890,7 @@
                         resumedAudio.catch(function () {});
                     }
                 }
-                if (backgroundMusic && backgroundMusic.paused) {
+                if (!musicIsPlaying()) {
                     playBackgroundMusic();
                 }
             }
@@ -6487,10 +6908,9 @@
 
             function pauseAudioForFocusLoss() {
                 if (
-                    backgroundMusic &&
-                    !backgroundMusic.paused &&
+                    musicIsPlaying() &&
                     soundOn &&
-                    (state === "running" || dialogueActive)
+                    (mainTitleScreen || state === "running" || dialogueActive)
                 ) {
                     resumeMusicAfterFocus = true;
                 }
@@ -6509,7 +6929,7 @@
                 if (
                     audioContext &&
                     soundOn &&
-                    (state === "running" || dialogueActive) &&
+                    (mainTitleScreen || state === "running" || dialogueActive) &&
                     audioContext.state === "suspended"
                 ) {
                     var resumedAudio = audioContext.resume();
@@ -6519,7 +6939,7 @@
                 }
                 if (!resumeMusicAfterFocus) return;
                 resumeMusicAfterFocus = false;
-                if (soundOn && (state === "running" || dialogueActive)) {
+                if (soundOn && (mainTitleScreen || state === "running" || dialogueActive)) {
                     playBackgroundMusic();
                 }
             }
@@ -6650,6 +7070,51 @@
                     event.code === "ControlRight";
             }
 
+            function initializeSignal() {
+                if (signalInitialized) return;
+                signalInitialized = true;
+                signalBoot.hidden = true;
+                document.body.classList.remove("is-signal-locked");
+                ensureAudio();
+                if (audioContext && audioContext.state === "suspended") {
+                    var resumedAudio = audioContext.resume();
+                    if (resumedAudio && typeof resumedAudio.catch === "function") {
+                        resumedAudio.catch(function () {});
+                    }
+                }
+                setAudioScene(audioScene, true);
+                playBackgroundMusic();
+                playSoundEffect("deepSelect", 0.72);
+                announce("Game loaded. Music and mission controls are online.");
+
+                if (assetsReady && autostartRequested) {
+                    resetGame(true);
+                    draw();
+                    return;
+                }
+                if (assetsReady) {
+                    window.requestAnimationFrame(function () {
+                        titleStartButton.focus({ preventScroll: true });
+                    });
+                }
+            }
+
+            signalBootButton.addEventListener("click", initializeSignal);
+            window.requestAnimationFrame(function () {
+                signalBootButton.focus({ preventScroll: true });
+            });
+
+            window.addEventListener("popstate", function () {
+                if (!signalInitialized) return;
+                var route = new URLSearchParams(window.location.search);
+                var routeStage = route.get("stage");
+                if (routeStage === "overworld" || routeStage === "foundry") {
+                    configureEpisodeScene(routeStage, "none");
+                    return;
+                }
+                configureTitleScene();
+            });
+
             window.addEventListener(
                 "pointerdown",
                 engageSceneAudioFromGesture,
@@ -6664,6 +7129,7 @@
 
             window.addEventListener("keydown", function (event) {
                 if (
+                    signalBoot.hidden &&
                     !titleScreen.hidden &&
                     state === "ready" &&
                     (event.code === "Enter" || event.code === "Space")
@@ -6863,11 +7329,7 @@
                     playSoundEffect("deepSelect");
                     startButton.disabled = true;
                     window.setTimeout(function () {
-                        window.location.href =
-                            window.location.pathname +
-                            (episodeOneRun
-                                ? "?episode=01&stage=foundry&autostart=1"
-                                : "?preview=foundry-expansion");
+                        configureEpisodeScene("foundry");
                     }, 140);
                     return;
                 }
@@ -6901,9 +7363,15 @@
                 soundOn = !soundOn;
                 soundButton.textContent = "Sound: " + (soundOn ? "On" : "Off");
                 soundButton.setAttribute("aria-pressed", String(soundOn));
+                try {
+                    window.localStorage.setItem(
+                        "super-frgmnts-sound",
+                        soundOn ? "on" : "off"
+                    );
+                } catch (storageError) {}
                 if (soundOn) {
                     ensureAudio();
-                    if (state !== "paused") {
+                    if (signalInitialized && state !== "paused") {
                         playBackgroundMusic();
                         playTone(440, 0.06, "square", 0.025);
                     }

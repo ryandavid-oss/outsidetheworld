@@ -12,6 +12,13 @@ ROOT = Path(__file__).resolve().parents[1]
 GAME = ROOT / "super_frgmnts.html"
 TITLE = ROOT / "Design" / "Super-Frgmnts" / "Title"
 ART = TITLE / "Assets" / "super-frgmnts-title-coreworks-v1.png"
+MOBILE_ART = (
+    ROOT
+    / "Images"
+    / "Game"
+    / "Super-Frgmnts"
+    / "super-frgmnts-title-coreworks-mobile-v1.png"
+)
 MANIFEST = TITLE / "title-screen-revision-1a-manifest.json"
 TITLE_MUSIC = ROOT / "Audio" / "super-frgmnts-title-cue.mp3"
 
@@ -29,6 +36,8 @@ def main() -> None:
 
     assert ART.exists(), f"Missing title artwork: {ART}"
     assert png_size(ART) == (1672, 941)
+    assert MOBILE_ART.exists(), f"Missing mobile title artwork: {MOBILE_ART}"
+    assert png_size(MOBILE_ART) == (941, 1672)
     assert TITLE_MUSIC.exists(), f"Missing title music: {TITLE_MUSIC}"
     assert TITLE_MUSIC.stat().st_size > 1_000_000
     assert manifest["revision"] == "1A"
@@ -43,6 +52,8 @@ def main() -> None:
 
     required_tokens = (
         "super-frgmnts-title-coreworks-v1.png",
+        "super-frgmnts-title-coreworks-mobile-v1.png",
+        'media="(max-width: 720px) and (orientation: portrait)"',
         "Season One // Veyra",
         "Episode 01 // <strong>Arrival on Veyra</strong>",
         "A distress signal from a world the Fleet abandoned.",
@@ -58,18 +69,22 @@ def main() -> None:
         'episodeStage === "overworld"',
         'episodeStage === "foundry"',
         'previewParameters.get("autostart") === "1"',
-        "?episode=01&stage=overworld&autostart=1",
-        "?episode=01&stage=foundry&autostart=1",
+        '"?episode=01&stage=" + scene + "&autostart=1"',
         "activateTitleAction()",
+        "configureEpisodeScene(\"overworld\")",
+        "configureEpisodeScene(\"foundry\")",
         'event.code === "Enter" || event.code === "Space"',
         "Opening Episode 01. Arrival on Veyra.",
         'data-title-track="/Audio/super-frgmnts-title-cue.mp3"',
         "var selectedMusicTrack = mainTitleScreen",
         "backgroundMusic.loop = !mainTitleScreen",
-        "backgroundMusic.volume = mainTitleScreen",
-        "if (mainTitleScreen) {\n                    playBackgroundMusic();",
+        'id="signalBoot"',
+        'id="signalBootButton"',
+        "Load Game",
+        "function initializeSignal()",
+        "function setAudioScene(nextScene, immediate)",
         'playSoundEffect("deepSelect");',
-        "ensureAudio();\n                    playBackgroundMusic();",
+        "signalBoot.hidden = true",
     )
     for token in required_tokens:
         assert token in source, f"Missing title-screen contract: {token}"
@@ -83,13 +98,14 @@ def main() -> None:
         "?episode=01&stage=foundry&autostart=1"
     )
     assert manifest["motion"]["reduced_motion_static"] is True
+    assert "window.location.href" not in source
 
     print("SUPER FRGMNTS title-screen Revision 1A: PASS")
     print("- native 1672 x 941 Coreworks title artwork is integrated")
     print("- Season One and Episode 01 identity are present")
-    print("- keyboard, pointer, and automatic arrival handoff are present")
+    print("- keyboard, pointer, and in-page arrival handoff are present")
     print("- atmospheric motion and reduced-motion safeguards are present")
-    print("- dedicated one-shot title cue is selected and autoplay is attempted")
+    print("- dedicated title cue starts from an intentional audio handshake")
     print("- production integration and deployment scope is recorded")
 
 

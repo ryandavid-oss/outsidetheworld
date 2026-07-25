@@ -38,6 +38,8 @@ def main() -> None:
     required_tokens = (
         "var selectedMusicTrack = mainTitleScreen",
         "backgroundMusic.loop = !mainTitleScreen",
+        'id="backgroundMusicSecondary"',
+        'id="signalBootButton"',
         "var soundEffects = {",
         "poolSize: 10",
         'playSoundEffect("blaster")',
@@ -45,12 +47,19 @@ def main() -> None:
         'playSoundEffect(state === "lost" ? "crashSelect" : "deepSelect")',
         'playSoundEffect("crashSelect")',
         "function engageSceneAudioFromGesture()",
-        "if (backgroundMusic && backgroundMusic.paused)",
+        "function initializeSignal()",
+        "function setAudioScene(nextScene, immediate)",
+        "function musicIsPlaying()",
+        "var musicTracks = {",
+        "var musicVolumes = {",
+        "musicFadeTimer = window.setInterval(fadeMusic, 24)",
+        "if (!musicIsPlaying())",
         "if (pressed) {\n                    engageSceneAudioFromGesture();",
         '"pointerdown",\n                engageSceneAudioFromGesture,',
         '"click",\n                engageSceneAudioFromGesture,',
         'window.addEventListener("keydown", engageSceneAudioFromGesture);',
-        "resetGame(true);\n                    playBackgroundMusic();",
+        "setAudioScene(scene);",
+        'configureEpisodeScene("foundry")',
         "function pauseSoundEffects()",
         "pauseAudioForFocusLoss()",
         "pauseSoundEffects();",
@@ -78,9 +87,14 @@ def main() -> None:
         source.count('playSoundEffect("crashSelect")') >= 4,
         "Crash select is not mapped across destructive actions",
     )
+    require(
+        "window.location.href" not in source,
+        "Episode audio can still be interrupted by a full-page scene reload",
+    )
 
     print("SUPER FRGMNTS audio contract: PASS")
-    print("- title, overworld, and Foundry music routes are distinct")
+    print("- explicit signal initialization unlocks title audio")
+    print("- title, overworld, and Foundry music crossfade without page reloads")
     print("- rapid-fire blaster uses a ten-channel sampled-audio pool")
     print("- deep select confirms forward actions and dialogue")
     print("- crash select confirms retry, restart, start-over, and skip")

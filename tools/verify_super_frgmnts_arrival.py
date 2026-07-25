@@ -96,7 +96,10 @@ def main() -> None:
         'data-foundry-track="/Audio/super-frgmnts-foundry-loop.mp3"',
         "var selectedMusicTrack = mainTitleScreen",
         "? backgroundMusic.dataset.overworldTrack",
-        ": overworldPreview\n                        ? 0.29\n                        : 0.32",
+        "overworld: 0.29",
+        "foundry: 0.32",
+        "function configureEpisodeScene(scene, historyMode)",
+        'configureEpisodeScene("foundry")',
         "var overworldAnchor",
         "(0.48 - 0.7)",
         "portalCharge",
@@ -105,8 +108,7 @@ def main() -> None:
         "var centerX = WIDTH * 2 + 1545",
         "var centerY = 615",
         "x: WIDTH * 2 + 1490",
-        "?preview=foundry-expansion",
-        "?episode=01&stage=foundry&autostart=1",
+        '"?episode=01&stage=" + scene + "&autostart=1"',
     )
     for token in required_runtime_tokens:
         require(token in source, f"Missing runtime contract: {token}")
@@ -130,6 +132,10 @@ def main() -> None:
     require(
         source.count('backgroundMusic.src = "/Audio/super-frgmnts-foundry-loop.mp3"') == 0,
         "The overworld still overrides its route-selected music with the Foundry track",
+    )
+    require(
+        "window.location.href" not in source,
+        "The overworld still reloads the page at the Foundry handoff",
     )
     require(
         "x: 1376,\n                        y: 680" not in source,

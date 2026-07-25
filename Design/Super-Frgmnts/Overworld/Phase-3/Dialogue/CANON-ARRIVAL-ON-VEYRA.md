@@ -7,16 +7,15 @@ The Shard Foundry.
 
 ### D01 // DRAS EHDRE
 
-Nice ship. Didn’t know the RD-42 was standard issue for the Interworld Fleet.
+You came.
 
 ### D02 // ARYN SOL-MAVI
 
-It isn’t. She’s mine. I don’t trust travel to the Fleet. You must be Dras Ehdre.
+Aryn Sol-Mavi. You must be Dras Ehdre.
 
 ### D03 // DRAS EHDRE
 
-Glad someone still has standards. I was beginning to think no one beyond Veyra
-had heard us.
+I am. I was beginning to think no one beyond Veyra had heard us.
 
 ### D04 // ARYN SOL-MAVI
 
