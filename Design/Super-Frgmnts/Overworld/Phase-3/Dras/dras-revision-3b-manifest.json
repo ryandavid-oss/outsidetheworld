@@ -1,0 +1,44 @@
+{
+  "revision": "3B",
+  "status": "approved-production",
+  "character": {
+    "name": "Dras Ehdre",
+    "identity_authority": "/Users/rylee/Projects/outsidetheworld/Design/Super-Frgmnts/Overworld/Phase-3/Dras/Raw/dras-identity-crop-v1.png",
+    "transparent_master": "/Users/rylee/Projects/outsidetheworld/Design/Super-Frgmnts/Overworld/Phase-3/Dras/Assets/dras-transparent-master-v1.png",
+    "master_size": [
+      560,
+      1372
+    ]
+  },
+  "runtime_candidate": {
+    "asset": "/Users/rylee/Projects/outsidetheworld/Design/Super-Frgmnts/Overworld/Phase-3/Dras/Assets/dras-runtime-candidate-v1.png",
+    "canvas": [
+      96,
+      112
+    ],
+    "visible_height": 104,
+    "world_anchor_local_plate_2": {
+      "x": 280,
+      "ground_y": 744
+    },
+    "aryn_draw_canvas": [
+      112,
+      112
+    ],
+    "recommendation": "Use 104px visible height inside a 96x112 transparent canvas. This keeps Dras human-scaled while preserving the coat's mass."
+  },
+  "motion_contract": {
+    "status": "production",
+    "idle_duration_ms": 1600,
+    "vertical_travel_px": 1,
+    "loop": "continuous; no held end frame",
+    "staff": "planted",
+    "reduced_motion": "static REST frame"
+  },
+  "scope": {
+    "live_game_modified": true,
+    "integrated": true,
+    "deployed": true,
+    "committed": true
+  }
+}

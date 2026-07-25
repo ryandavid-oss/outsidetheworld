@@ -1,0 +1,34 @@
+{
+  "revision": "3H",
+  "status": "approved-production",
+  "atmosphere": {
+    "cloud_layers": 3,
+    "cloud_rendering": "overlapping shaded volumes",
+    "distant_birds": 5,
+    "foreground_dust": true,
+    "reduced_motion_static": true
+  },
+  "camp_life": {
+    "dras_local_plate_2_x": 560,
+    "dog_local_plate_2_x": 810,
+    "dog_runtime_size": [96, 64],
+    "dog_asset": "Assets/veyra-camp-dog-runtime-v1.png",
+    "dog_master": "Assets/veyra-camp-dog-master-v1.png",
+    "dog_prompt": "veyra-camp-dog-prompt-v1.txt",
+    "dog_generation_path": "built-in ImageGen with local chroma-key removal",
+    "dog_behavior": "decorative rummaging; non-solid; non-hostile"
+  },
+  "dialogue_actions": {
+    "left": "Skip",
+    "right": "Continue",
+    "confirmation_left": "Skip scene",
+    "confirmation_right": "Keep listening"
+  },
+  "scope": {
+    "live_game_modified": true,
+    "integrated": true,
+    "committed": true,
+    "deployed": true,
+    "preview_route": "super_frgmnts.html?preview=overworld&scene=dialogue"
+  }
+}

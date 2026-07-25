@@ -1,0 +1,44 @@
+{
+  "revision": "3J",
+  "status": "approved-production",
+  "landing_flats": {
+    "removed_stray_collider": {
+      "x": 1376,
+      "y": 680,
+      "width": 168,
+      "height": 64
+    },
+    "remaining_collision_authorities": [
+      "continuous desert floor",
+      "approved moving ship-hull surfaces"
+    ]
+  },
+  "volcano": {
+    "source_plate_preserved": true,
+    "crater": "restrained orange heat pulse with cyan Resonant core",
+    "fissures": "screen-blended cyan flow aligned to the painted seams",
+    "essence": "deterministic travelling sparks and summit motes",
+    "reduced_motion_static": true
+  },
+  "camp_dog": {
+    "rummage_asset": "Assets/veyra-camp-dog-runtime-v1.png",
+    "walk_sheet": "Assets/veyra-camp-dog-walk-sheet-v1.png",
+    "walk_masters": [
+      "Assets/veyra-camp-dog-walk-a-master-v1.png",
+      "Assets/veyra-camp-dog-walk-b-master-v1.png"
+    ],
+    "runtime_frame_size": [96, 64],
+    "walk_frames": 2,
+    "camp_travel_pixels": 130,
+    "cycle_seconds": 13.6,
+    "behavior": "rummage, walk into camp, pause, return",
+    "generation_path": "built-in ImageGen with local chroma-key removal"
+  },
+  "scope": {
+    "live_game_modified": true,
+    "integrated": true,
+    "committed": true,
+    "deployed": true,
+    "review_route": "super_frgmnts.html?episode=01&stage=overworld&autostart=1"
+  }
+}

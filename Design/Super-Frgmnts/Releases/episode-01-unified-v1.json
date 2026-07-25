@@ -1,0 +1,48 @@
+{
+  "release": "episode-01-unified-v1",
+  "status": "approved-production",
+  "source": {
+    "branch": "main",
+    "release_commit": "this manifest's commit",
+    "published_url": "https://outsidetheworld.com/super_frgmnts.html"
+  },
+  "episode_flow": [
+    "title",
+    "arrival-on-veyra",
+    "dras-ehdre-first-contact",
+    "coreworks-portal",
+    "the-shard-foundry"
+  ],
+  "routes": {
+    "entry": "super_frgmnts.html",
+    "overworld": "super_frgmnts.html?episode=01&stage=overworld&autostart=1",
+    "foundry": "super_frgmnts.html?episode=01&stage=foundry&autostart=1"
+  },
+  "public_asset_root": "Images/Game/Super-Frgmnts",
+  "public_assets": [
+    "super-frgmnts-title-coreworks-v1.png",
+    "overworld-landing-flats-v1.png",
+    "overworld-dras-outpost-v1.png",
+    "overworld-coreworks-threshold-v1.png",
+    "aryn-command-rest-runtime-v1.png",
+    "aryn-field-rest-runtime-v1.png",
+    "aryn-ship-v1.png",
+    "aryn-ship-hover-field-v1.png",
+    "dras-ehdre-runtime-v1.png",
+    "aryn-dialogue-portrait-runtime-v3.png",
+    "dras-dialogue-portrait-runtime-v2.png",
+    "veyra-camp-dog-runtime-v1.png",
+    "veyra-camp-dog-walk-sheet-v1.png"
+  ],
+  "overworld_closing_pass": {
+    "stray_landing_flats_collider_removed": true,
+    "resonant_volcano_runtime_layer": true,
+    "camp_dog_walk_frames": 2
+  },
+  "verification": {
+    "episode_contracts": true,
+    "javascript_syntax": true,
+    "whole_site_integrity": true,
+    "browser_flow": true
+  }
+}

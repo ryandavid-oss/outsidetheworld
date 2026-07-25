@@ -1,0 +1,46 @@
+{
+  "revision": "3E",
+  "status": "approved-production",
+  "identity_authority": "/Users/rylee/Projects/outsidetheworld/Images/Builder/signal-ranger-idle-focused-v2.png",
+  "posture_references": [
+    "/Users/rylee/Downloads/Untitled.jpg",
+    "/var/folders/fw/ry1pp5b94xb50wnxsgcfds240000gp/T/codex-clipboard-35b5924e-7df5-4b75-85ab-96c6dd160a88.png"
+  ],
+  "runtime": {
+    "canvas": [
+      112,
+      112
+    ],
+    "visible_height": 90,
+    "baseline_y_in_canvas": 105,
+    "recommendation": "command-rest",
+    "alternate": "field-rest",
+    "state_rule": {
+      "field_rest": "movement, landing, recent fire, or nearby threat",
+      "command_rest": "canonical idle after 1.8 calm seconds and exposition"
+    }
+  },
+  "transition": {
+    "duration_ms": [
+      180,
+      240
+    ],
+    "frames": "art pass pending; local prototype switches by state",
+    "reduced_motion": "immediate command-rest"
+  },
+  "outputs": [
+    "/Users/rylee/Projects/outsidetheworld/Design/Super-Frgmnts/Overworld/Phase-3/Aryn/Assets/aryn-command-rest-master-v1.png",
+    "/Users/rylee/Projects/outsidetheworld/Design/Super-Frgmnts/Overworld/Phase-3/Aryn/Assets/aryn-field-rest-master-v1.png",
+    "/Users/rylee/Projects/outsidetheworld/Design/Super-Frgmnts/Overworld/Phase-3/Aryn/Assets/aryn-command-rest-runtime-candidate-v1.png",
+    "/Users/rylee/Projects/outsidetheworld/Design/Super-Frgmnts/Overworld/Phase-3/Aryn/Assets/aryn-field-rest-runtime-candidate-v1.png",
+    "/Users/rylee/Projects/outsidetheworld/Design/Super-Frgmnts/Overworld/Phase-3/Aryn/Reviews/aryn-rested-pose-comparison-v1.png",
+    "/Users/rylee/Projects/outsidetheworld/Design/Super-Frgmnts/Overworld/Phase-3/Aryn/Reviews/aryn-rested-pose-world-test-v1.png",
+    "/Users/rylee/Projects/outsidetheworld/Design/Super-Frgmnts/Overworld/Phase-3/Aryn/Reviews/aryn-idle-transition-contract-v1.png"
+  ],
+  "scope": {
+    "live_game_modified": true,
+    "integrated": true,
+    "deployed": true,
+    "committed": true
+  }
+}

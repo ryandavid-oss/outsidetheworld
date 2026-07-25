@@ -12,7 +12,7 @@
     <meta property="og:url" content="https://outsidetheworld.com/super_frgmnts.html" />
     <title>SUPER FRGMNTS // Outside The World</title>
     <link rel="canonical" href="https://outsidetheworld.com/super_frgmnts.html" />
-    <link rel="preload" href="/Images/Game/super-frgmnts-title-art.png" as="image" fetchpriority="high" />
+    <link rel="preload" href="/Images/Game/Super-Frgmnts/super-frgmnts-title-coreworks-v1.png" as="image" fetchpriority="high" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet"
@@ -300,11 +300,13 @@
         }
 
         .title-screen {
+            --title-art:
+                url("/Images/Game/Super-Frgmnts/super-frgmnts-title-coreworks-v1.png");
             position: absolute;
             inset: 0;
             z-index: 6;
             display: grid;
-            place-items: end center;
+            place-items: center;
             padding: clamp(18px, 3vw, 42px);
             overflow: hidden;
             background: #030511;
@@ -315,11 +317,27 @@
             display: none;
         }
 
+        .title-screen::before {
+            position: absolute;
+            inset: -6%;
+            z-index: -4;
+            background:
+                linear-gradient(rgba(3, 5, 17, 0.16), rgba(3, 5, 17, 0.5)),
+                var(--title-art) center / cover no-repeat;
+            content: "";
+            filter: blur(9px) saturate(0.86);
+            opacity: 0.52;
+            pointer-events: none;
+        }
+
         .title-screen::after {
             position: absolute;
-            inset: 48% 0 0;
+            inset: 0;
             z-index: -1;
-            background: linear-gradient(transparent, rgba(2, 4, 14, 0.22) 38%, rgba(2, 4, 14, 0.86));
+            background:
+                radial-gradient(circle at 50% 72%, transparent 0 19%, rgba(2, 4, 14, 0.2) 44%, rgba(2, 4, 14, 0.56) 100%),
+                linear-gradient(90deg, rgba(2, 4, 14, 0.36), transparent 18% 82%, rgba(2, 4, 14, 0.42)),
+                linear-gradient(transparent 42%, rgba(2, 4, 14, 0.06) 59%, rgba(2, 4, 14, 0.62));
             content: "";
             pointer-events: none;
         }
@@ -327,23 +345,127 @@
         .title-screen__art {
             position: absolute;
             inset: 0;
-            z-index: -2;
+            z-index: -3;
             width: 100%;
             height: 100%;
             object-fit: cover;
+            animation: title-scene-breathe 18s ease-in-out infinite alternate;
+            transition:
+                filter 520ms ease,
+                opacity 520ms ease,
+                transform 900ms cubic-bezier(0.2, 0.72, 0.2, 1);
+        }
+
+        .title-screen__atmosphere {
+            position: absolute;
+            inset: 0;
+            z-index: -2;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .title-screen__atmosphere::before {
+            position: absolute;
+            inset: -14% -8%;
+            background:
+                radial-gradient(circle at 18% 78%, rgba(255, 105, 180, 0.2) 0 1px, transparent 2px),
+                radial-gradient(circle at 72% 61%, rgba(88, 245, 223, 0.18) 0 1px, transparent 2px),
+                radial-gradient(circle at 43% 72%, rgba(255, 211, 108, 0.16) 0 1px, transparent 2px);
+            background-size: 91px 83px, 127px 109px, 157px 139px;
+            content: "";
+            opacity: 0.62;
+            animation: title-dust-drift 16s linear infinite;
+        }
+
+        .title-screen__atmosphere::after {
+            position: absolute;
+            inset: 0;
+            background:
+                repeating-linear-gradient(
+                    180deg,
+                    transparent 0 3px,
+                    rgba(1, 3, 11, 0.12) 3px 4px
+                );
+            content: "";
+            opacity: 0.48;
+        }
+
+        .title-screen__signal,
+        .title-screen__vesperite {
+            position: absolute;
+            display: block;
+            border-radius: 50%;
+            mix-blend-mode: screen;
+        }
+
+        .title-screen__signal {
+            top: 72%;
+            left: 50%;
+            width: clamp(52px, 8.8vw, 116px);
+            aspect-ratio: 1;
+            background:
+                radial-gradient(circle, rgba(255, 105, 180, 0.36), rgba(99, 149, 238, 0.14) 34%, transparent 68%);
+            filter: blur(2px);
+            opacity: 0.42;
+            transform: translate(-50%, -50%);
+            animation: title-signal-pulse 3.8s ease-in-out infinite;
+        }
+
+        .title-screen__vesperite {
+            width: clamp(42px, 6vw, 88px);
+            aspect-ratio: 0.62;
+            background:
+                radial-gradient(ellipse, rgba(255, 105, 180, 0.22), rgba(88, 245, 223, 0.08) 48%, transparent 72%);
+            filter: blur(5px);
+            opacity: 0.48;
+            animation: title-vesperite-glow 4.6s steps(3, end) infinite;
+        }
+
+        .title-screen__vesperite--left {
+            top: 66%;
+            left: 20%;
+        }
+
+        .title-screen__vesperite--right {
+            top: 62%;
+            right: 16%;
+            animation-delay: -2.1s;
         }
 
         .title-screen__controls {
+            position: relative;
             display: grid;
+            width: min(32vw, 390px);
+            margin-top: clamp(82px, 8.5vw, 128px);
             justify-items: center;
-            gap: 9px;
-            padding: clamp(10px, 1.4vw, 16px) clamp(16px, 2.4vw, 28px);
-            border: 2px solid var(--brand-light-blue);
-            background: rgba(3, 7, 20, 0.82);
+            gap: 8px;
+            padding: clamp(12px, 1.5vw, 18px) clamp(18px, 2.5vw, 30px);
+            border: 1px solid rgba(158, 197, 193, 0.74);
+            border-top: 3px solid var(--brand-gold);
+            border-bottom: 3px solid var(--pink);
+            background:
+                linear-gradient(90deg, rgba(88, 245, 223, 0.08), transparent 24% 76%, rgba(255, 105, 180, 0.08)),
+                rgba(3, 7, 20, 0.86);
             box-shadow:
-                5px 5px 0 var(--muted-rose),
-                0 0 24px rgba(119, 163, 255, 0.24);
-            backdrop-filter: blur(3px);
+                5px 6px 0 rgba(0, 0, 0, 0.54),
+                0 0 30px rgba(119, 163, 255, 0.18),
+                inset 0 0 28px rgba(99, 149, 238, 0.06);
+            clip-path: polygon(10px 0, calc(100% - 10px) 0, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0 calc(100% - 10px), 0 10px);
+            backdrop-filter: blur(4px);
+            transition:
+                opacity 360ms ease,
+                transform 520ms cubic-bezier(0.2, 0.72, 0.2, 1);
+        }
+
+        .title-screen__season {
+            margin: 0;
+            color: var(--brand-gold);
+            font-size: clamp(7px, 0.8vw, 10px);
+            font-weight: 700;
+            letter-spacing: 0.24em;
+            text-align: center;
+            text-shadow: 2px 2px #000;
+            text-transform: uppercase;
         }
 
         .title-screen__hero {
@@ -363,8 +485,11 @@
 
         .title-screen__controls .pixel-button {
             min-width: clamp(150px, 19vw, 218px);
-            border-color: var(--rose-gold);
-            background: linear-gradient(var(--muted-rose), var(--warm-plum));
+            margin-block: 2px;
+            border-color: var(--index-teal);
+            background:
+                linear-gradient(90deg, rgba(88, 245, 223, 0.13), rgba(255, 105, 180, 0.12)),
+                linear-gradient(var(--logo-teal), var(--logo-navy));
             color: var(--cream);
             font-size: clamp(10px, 1.25vw, 14px);
             animation: title-prompt 1.15s steps(2, end) infinite;
@@ -379,12 +504,51 @@
 
         .title-screen__hint {
             margin: 0;
-            color: var(--index-teal);
-            font-size: clamp(7px, 0.9vw, 10px);
-            letter-spacing: 0.15em;
+            max-width: 34em;
+            color: var(--brand-light-blue);
+            font-size: clamp(7px, 0.82vw, 9px);
+            line-height: 1.55;
+            letter-spacing: 0.11em;
             text-align: center;
             text-shadow: 2px 2px #000;
             text-transform: uppercase;
+        }
+
+        .title-screen__input-hint {
+            margin: 0;
+            color: var(--index-teal);
+            font-size: clamp(6px, 0.72vw, 8px);
+            letter-spacing: 0.16em;
+            text-align: center;
+            text-transform: uppercase;
+            opacity: 0.78;
+        }
+
+        .title-screen.is-launching .title-screen__controls {
+            opacity: 0;
+            transform: translateY(16px) scale(0.97);
+        }
+
+        .title-screen.is-launching .title-screen__art {
+            filter: brightness(0.64) saturate(1.18);
+            transform: scale(1.045);
+        }
+
+        .title-screen.is-launching .title-screen__signal {
+            opacity: 0.92;
+            transform: translate(-50%, -50%) scale(2.6);
+        }
+
+        body.is-main-title .topbar {
+            justify-content: flex-end;
+        }
+
+        body.is-main-title .brand,
+        body.is-main-title #pauseButton,
+        body.is-main-title #restartButton,
+        body.is-main-title .control-bar {
+            visibility: hidden;
+            pointer-events: none;
         }
 
         .hud {
@@ -542,6 +706,296 @@
             filter: grayscale(0.5);
             opacity: 0.48;
             transform: none;
+        }
+
+        .dialogue-layer {
+            position: absolute;
+            inset: 0;
+            z-index: 9;
+            display: grid;
+            align-items: end;
+            padding: clamp(18px, 3vw, 42px);
+            background:
+                linear-gradient(
+                    180deg,
+                    rgba(3, 5, 13, 0.02) 0 28%,
+                    rgba(3, 5, 13, 0.22) 58%,
+                    rgba(3, 5, 13, 0.64)
+                );
+            pointer-events: auto;
+        }
+
+        .dialogue-layer[hidden] {
+            display: none;
+        }
+
+        .dialogue-panel {
+            position: relative;
+            display: grid;
+            grid-template-columns: clamp(132px, 14vw, 190px) minmax(0, 1fr);
+            width: min(100%, 1160px);
+            height: clamp(230px, 23vw, 300px);
+            min-height: clamp(190px, 23vw, 252px);
+            margin: 0 auto;
+            overflow: hidden;
+            border: 3px solid var(--brand-teal);
+            background:
+                linear-gradient(90deg, rgba(27, 54, 93, 0.3), transparent 28%),
+                linear-gradient(rgba(5, 8, 20, 0.97), rgba(3, 6, 16, 0.98));
+            box-shadow:
+                6px 6px 0 var(--muted-rose),
+                12px 12px 0 rgba(0, 0, 0, 0.62),
+                inset 0 0 34px rgba(99, 149, 238, 0.09);
+        }
+
+        .dialogue-panel::before {
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            height: 5px;
+            background:
+                linear-gradient(
+                    90deg,
+                    var(--brand-teal) 0 18%,
+                    var(--brand-gold) 18% 37%,
+                    var(--brand-light-blue) 37% 69%,
+                    var(--pink) 69% 100%
+                );
+            content: "";
+        }
+
+        .dialogue-portrait {
+            position: relative;
+            display: grid;
+            min-height: 100%;
+            overflow: hidden;
+            padding: 22px 12px 16px;
+            place-items: end center;
+            border-right: 2px solid rgba(158, 197, 193, 0.42);
+            background:
+                repeating-linear-gradient(
+                    180deg,
+                    transparent 0 4px,
+                    rgba(119, 163, 255, 0.055) 4px 5px
+                ),
+                radial-gradient(circle at 50% 65%, rgba(88, 245, 223, 0.16), transparent 62%),
+                rgba(6, 10, 24, 0.82);
+        }
+
+        .dialogue-portrait::after {
+            position: absolute;
+            right: 10px;
+            bottom: 13px;
+            left: 10px;
+            height: 2px;
+            background: var(--index-teal);
+            box-shadow: 0 0 10px rgba(88, 245, 223, 0.52);
+            content: "";
+            opacity: 0.72;
+        }
+
+        .dialogue-portrait img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: 50% 0;
+            image-rendering: pixelated;
+            transform-origin: 50% 12%;
+            filter:
+                drop-shadow(4px 5px 0 rgba(0, 0, 0, 0.54))
+                drop-shadow(0 0 9px rgba(119, 163, 255, 0.16));
+        }
+
+        .dialogue-portrait img[data-character="aryn"] {
+            object-position: 50% 0;
+            transform: none;
+        }
+
+        .dialogue-portrait img[data-character="dras"] {
+            object-position: 50% 0;
+            transform: none;
+        }
+
+        .dialogue-content {
+            display: grid;
+            min-width: 0;
+            padding: clamp(20px, 2.2vw, 28px) clamp(18px, 2.7vw, 34px) 18px;
+            grid-template-rows: auto auto 1fr auto;
+            gap: 7px;
+        }
+
+        .dialogue-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-width: 0;
+            gap: 12px;
+        }
+
+        .dialogue-progress {
+            margin: 0;
+            color: var(--pink);
+            font-size: clamp(7px, 0.85vw, 10px);
+            font-weight: 700;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+        }
+
+        .dialogue-signal {
+            flex: 0 0 auto;
+            padding: 4px 7px;
+            border: 1px solid var(--index-teal);
+            background: rgba(61, 82, 85, 0.38);
+            color: var(--index-teal);
+            font-size: clamp(6px, 0.75vw, 9px);
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .dialogue-signal.is-disconnected {
+            border-color: var(--muted-rose);
+            background: rgba(103, 81, 104, 0.38);
+            color: var(--rose-gold);
+        }
+
+        .dialogue-speaker {
+            margin: 0;
+            color: var(--brand-gold);
+            font-size: clamp(13px, 1.55vw, 20px);
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            line-height: 1.05;
+            text-transform: uppercase;
+        }
+
+        .dialogue-speaker span {
+            margin-left: 8px;
+            color: var(--brand-light-blue);
+            font-size: 0.58em;
+            letter-spacing: 0.14em;
+        }
+
+        .dialogue-copy {
+            max-width: 72ch;
+            margin: 3px 0 0;
+            align-self: center;
+            color: var(--cream);
+            font-size: clamp(11px, 1.3vw, 16px);
+            line-height: 1.52;
+            text-shadow: 2px 2px #000;
+        }
+
+        .dialogue-stage {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            margin: 1px 0 3px;
+            gap: 6px 12px;
+            color: var(--brand-light-blue);
+            font-size: clamp(8px, 0.9vw, 11px);
+            line-height: 1.35;
+        }
+
+        .dialogue-stage[hidden] {
+            display: none;
+        }
+
+        .dialogue-stage strong {
+            color: var(--brand-gold);
+            font-size: 0.9em;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .dialogue-stage span {
+            color: var(--rose-gold);
+            font-style: italic;
+        }
+
+        .dialogue-actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .dialogue-actions .pixel-button {
+            min-width: 128px;
+            min-height: 44px;
+        }
+
+        .dialogue-continue {
+            margin-left: auto;
+            border-color: var(--brand-gold);
+            background: linear-gradient(#74603a, #352a1c);
+            color: var(--cream);
+        }
+
+        .dialogue-skip {
+            border-color: rgba(160, 190, 245, 0.42);
+            background: rgba(27, 54, 93, 0.46);
+            color: var(--brand-light-blue);
+        }
+
+        .dialogue-skip-confirm {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            display: grid;
+            padding: 22px;
+            place-content: center;
+            justify-items: center;
+            gap: 16px;
+            background: rgba(3, 6, 16, 0.98);
+            text-align: center;
+        }
+
+        .dialogue-skip-confirm[hidden] {
+            display: none;
+        }
+
+        .dialogue-skip-confirm p {
+            max-width: 42ch;
+            margin: 0;
+            color: var(--cream);
+            font-size: clamp(11px, 1.3vw, 16px);
+            line-height: 1.5;
+        }
+
+        .dialogue-skip-confirm div {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        body.is-dialogue .touch-controls {
+            opacity: 0 !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+        }
+
+        body.is-dialogue #pauseButton {
+            opacity: 0.45;
+            pointer-events: none;
+        }
+
+        body.is-overworld-preview .touch-key--shoot {
+            display: none;
+        }
+
+        body.is-overworld-preview .hearts {
+            color: var(--index-teal);
+            font-size: clamp(9px, 1.1vw, 13px);
+            letter-spacing: 0.08em;
+            text-shadow: 2px 2px #000;
+        }
+
+        body.is-dialogue-tremor .stage-shell {
+            animation: dialogue-tremor 620ms steps(2, end);
         }
 
         .control-bar {
@@ -808,6 +1262,71 @@
             50% {
                 filter: brightness(1.24);
                 transform: translateY(-2px);
+            }
+        }
+
+        @keyframes title-scene-breathe {
+            0% {
+                filter: brightness(0.94) saturate(0.98);
+                transform: scale(1.005) translate3d(-0.12%, 0, 0);
+            }
+            100% {
+                filter: brightness(1.04) saturate(1.04);
+                transform: scale(1.018) translate3d(0.12%, -0.16%, 0);
+            }
+        }
+
+        @keyframes title-dust-drift {
+            from { transform: translate3d(0, 0, 0); }
+            to { transform: translate3d(3.5%, -5.5%, 0); }
+        }
+
+        @keyframes title-signal-pulse {
+            0%, 100% {
+                filter: blur(2px) brightness(0.8);
+                opacity: 0.28;
+                transform: translate(-50%, -50%) scale(0.84);
+            }
+            50% {
+                filter: blur(3px) brightness(1.32);
+                opacity: 0.58;
+                transform: translate(-50%, -50%) scale(1.14);
+            }
+        }
+
+        @keyframes title-vesperite-glow {
+            0%, 100% {
+                filter: blur(5px) brightness(0.82);
+                opacity: 0.34;
+            }
+            52% {
+                filter: blur(7px) brightness(1.34);
+                opacity: 0.62;
+            }
+        }
+
+        @keyframes dialogue-tremor {
+            0%, 100% { transform: translate(0, 0); }
+            18% { transform: translate(-4px, 2px); }
+            36% { transform: translate(5px, -2px); }
+            54% { transform: translate(-3px, -1px); }
+            72% { transform: translate(3px, 2px); }
+            88% { transform: translate(-1px, 0); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .title-screen__art,
+            .title-screen__atmosphere::before,
+            .title-screen__signal,
+            .title-screen__vesperite,
+            .title-screen__controls .pixel-button {
+                animation: none;
+            }
+
+            .title-screen__art,
+            .title-screen__controls,
+            .title-screen__signal {
+                transition: none;
             }
         }
 
@@ -1176,6 +1695,101 @@
                 width: calc(100% - 36px);
                 padding: 20px 16px;
             }
+
+            .dialogue-layer {
+                align-items: end;
+                padding:
+                    0
+                    max(12px, env(safe-area-inset-right))
+                    max(16px, calc(env(safe-area-inset-bottom) + 8px))
+                    max(12px, env(safe-area-inset-left));
+            }
+
+            .dialogue-panel {
+                grid-template-columns: 76px minmax(0, 1fr);
+                width: 100%;
+                height: auto;
+                min-height: 0;
+                max-height: min(58dvh, 520px);
+                border-width: 2px;
+                box-shadow:
+                    4px 4px 0 var(--muted-rose),
+                    8px 8px 0 rgba(0, 0, 0, 0.58);
+            }
+
+            .dialogue-portrait {
+                padding: 12px 4px 9px;
+            }
+
+            .dialogue-portrait img {
+                width: 100%;
+                height: 100%;
+            }
+
+            .dialogue-content {
+                min-height: 0;
+                padding: 14px 12px 11px;
+                gap: 5px;
+            }
+
+            .dialogue-meta {
+                gap: 6px;
+            }
+
+            .dialogue-progress {
+                font-size: 7px;
+                letter-spacing: 0.11em;
+            }
+
+            .dialogue-signal {
+                padding: 3px 5px;
+                font-size: 6px;
+                letter-spacing: 0.08em;
+            }
+
+            .dialogue-speaker {
+                font-size: 12px;
+            }
+
+            .dialogue-speaker span {
+                display: block;
+                margin: 3px 0 0;
+                font-size: 7px;
+            }
+
+            .dialogue-copy {
+                max-height: 24dvh;
+                overflow-y: auto;
+                font-size: clamp(10px, 3vw, 12px);
+                line-height: 1.42;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .dialogue-stage {
+                display: block;
+                margin-top: 2px;
+                font-size: 8px;
+            }
+
+            .dialogue-stage strong,
+            .dialogue-stage span {
+                display: block;
+            }
+
+            .dialogue-actions {
+                margin-top: 3px;
+            }
+
+            .dialogue-actions .pixel-button {
+                min-width: 92px;
+                min-height: 44px;
+                padding: 7px 9px;
+                font-size: 8px;
+            }
+
+            .dialogue-skip-confirm {
+                padding: 18px;
+            }
         }
 
         @media (hover: hover) and (pointer: fine) and (min-width: 721px) {
@@ -1263,7 +1877,7 @@
         </header>
 
         <section class="stage-wrap" aria-label="Super Frgmnts game">
-            <div class="stage-shell" id="stageShell">
+            <div class="stage-shell" id="stageShell" tabindex="0">
                 <canvas id="gameCanvas" width="1672" height="941">
                     Your browser needs canvas support to play Super Frgmnts.
                 </canvas>
@@ -1271,15 +1885,22 @@
                 <div class="title-screen" id="titleScreen">
                     <img
                         class="title-screen__art"
-                        src="/Images/Game/super-frgmnts-title-art.png"
-                        alt="Super Frgmnts concept art showing Aryn Sol-Mavi, the Signal Ranger, racing through the glowing foundry"
+                        src="/Images/Game/Super-Frgmnts/super-frgmnts-title-coreworks-v1.png"
+                        alt="The Super Frgmnts title suspended above the abandoned Veyra Coreworks and its distant sealed gate"
                         decoding="async"
                         fetchpriority="high"
                     >
+                    <div class="title-screen__atmosphere" aria-hidden="true">
+                        <span class="title-screen__signal"></span>
+                        <span class="title-screen__vesperite title-screen__vesperite--left"></span>
+                        <span class="title-screen__vesperite title-screen__vesperite--right"></span>
+                    </div>
                     <div class="title-screen__controls">
-                        <p class="title-screen__hero">Signal Ranger // <strong>Aryn Sol-Mavi</strong></p>
+                        <p class="title-screen__season" id="titleSeason">Season One // Veyra</p>
+                        <p class="title-screen__hero">Episode 01 // <strong>Arrival on Veyra</strong></p>
                         <button class="pixel-button" id="titleStartButton" type="button" disabled>Loading signal…</button>
-                        <p class="title-screen__hint">Left/right to move // Down drops through catwalks or enters Deepworks // Space to jump // Ctrl to fire (unlocks at 3 shards)</p>
+                        <p class="title-screen__hint">A distress signal from a world the Fleet abandoned.</p>
+                        <p class="title-screen__input-hint">Enter / Space / Tap to begin</p>
                     </div>
                 </div>
 
@@ -1307,6 +1928,63 @@
                         <button class="pixel-button" id="startButton" type="button">Start run</button>
                         <button class="pixel-button pixel-button--secondary" id="startOverButton" type="button" hidden>Start over</button>
                     </div>
+                </div>
+
+                <div class="dialogue-layer" id="dialogueLayer" hidden>
+                    <section
+                        class="dialogue-panel"
+                        id="dialoguePanel"
+                        role="dialog"
+                        aria-modal="true"
+                        aria-labelledby="dialogueSpeaker"
+                        aria-describedby="dialogueCopy"
+                    >
+                        <div class="dialogue-portrait" aria-hidden="true">
+                            <img id="dialoguePortrait" src="" alt="">
+                        </div>
+                        <div class="dialogue-content">
+                            <div class="dialogue-meta">
+                                <p class="dialogue-progress" id="dialogueProgress">Arrival on Veyra // D01</p>
+                                <span class="dialogue-signal" id="dialogueSignal">Fleet link // Secure</span>
+                            </div>
+                            <h2 class="dialogue-speaker" id="dialogueSpeaker">
+                                Dras Ehdre <span>Veyra Coreworks</span>
+                            </h2>
+                            <p class="dialogue-copy" id="dialogueCopy"></p>
+                            <p
+                                class="dialogue-stage"
+                                id="dialogueStage"
+                                aria-label="Environmental event"
+                                hidden
+                            >
+                                <strong id="dialogueStageKicker"></strong>
+                                <span id="dialogueStageCopy"></span>
+                            </p>
+                            <div class="dialogue-actions">
+                                <button
+                                    class="pixel-button dialogue-skip"
+                                    id="dialogueSkip"
+                                    type="button"
+                                >Skip</button>
+                                <button
+                                    class="pixel-button dialogue-continue"
+                                    id="dialogueContinue"
+                                    type="button"
+                                >Continue</button>
+                            </div>
+                        </div>
+                        <div class="dialogue-skip-confirm" id="dialogueSkipConfirm" hidden>
+                            <p>Skip the first-contact transmission and return to the Veyra surface?</p>
+                            <div>
+                                <button class="pixel-button dialogue-skip" id="dialogueSkipScene" type="button">
+                                    Skip scene
+                                </button>
+                                <button class="pixel-button dialogue-continue" id="dialogueReturn" type="button">
+                                    Keep listening
+                                </button>
+                            </div>
+                        </div>
+                    </section>
                 </div>
             </div>
         </section>
@@ -1369,10 +2047,29 @@
             "use strict";
 
             var previewParameters = new URLSearchParams(window.location.search);
+            var episodeOneRun = previewParameters.get("episode") === "01";
+            var episodeStage = previewParameters.get("stage") || "";
+            var overworldPreview =
+                previewParameters.get("preview") === "overworld" ||
+                (episodeOneRun && episodeStage === "overworld");
+            var arrivalDialoguePreview =
+                overworldPreview &&
+                previewParameters.get("scene") === "dialogue";
+            var arrivalPortalPreview =
+                overworldPreview &&
+                previewParameters.get("scene") === "portal";
             var expansionPreview =
-                previewParameters.get("preview") === "foundry-expansion";
+                previewParameters.get("preview") === "foundry-expansion" ||
+                (episodeOneRun && episodeStage === "foundry");
             var surfaceCrawlerTrial =
-                expansionPreview && previewParameters.get("minion") === "1";
+                !episodeOneRun &&
+                expansionPreview &&
+                previewParameters.get("minion") === "1";
+            var mainTitleScreen =
+                !overworldPreview && !expansionPreview && !surfaceCrawlerTrial;
+            var autostartRequested =
+                (overworldPreview || expansionPreview) &&
+                previewParameters.get("autostart") === "1";
             var previewRoomBlueprints = [
                 {
                     zone: "FOUNDRY",
@@ -1434,7 +2131,11 @@
             var WIDTH = 1672;
             var HEIGHT = 941;
             var WORLD_HEIGHT = expansionPreview ? 1882 : HEIGHT;
-            var SCREEN_COUNT = expansionPreview ? previewRoomBlueprints.length : 4;
+            var SCREEN_COUNT = overworldPreview
+                ? 3
+                : expansionPreview
+                    ? previewRoomBlueprints.length
+                    : 4;
             var WORLD_WIDTH = WIDTH * SCREEN_COUNT;
             var requestedPreviewRoom = parseInt(previewParameters.get("room") || "0", 10);
             var previewStartRoom = expansionPreview && Number.isFinite(requestedPreviewRoom)
@@ -1446,15 +2147,64 @@
             var viewWidth = WIDTH;
             var portraitMode = false;
             // The walkable plane is the top lip of the background's concrete deck.
-            var GROUND_Y = expansionPreview ? 1604 : 663;
-            var START_TIME = expansionPreview ? 480 : 105;
-            var TOTAL_SHARDS = expansionPreview ? 0 : 12;
+            var GROUND_Y = overworldPreview ? 744 : expansionPreview ? 1604 : 663;
+            var DRAS_WORLD_X = WIDTH + 560;
+            var DRAS_DRAW_Y = GROUND_Y - 100;
+            var DOG_WORLD_X = WIDTH + 810;
+            var prefersReducedMotion =
+                window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+            var START_TIME = overworldPreview || expansionPreview ? 480 : 105;
+            var TOTAL_SHARDS = overworldPreview || expansionPreview ? 0 : 12;
             var MAX_HITS = 5;
             var BLASTER_TIERS = [3, 7, 12];
             var BLASTER_STATS = {
-                1: { cooldown: 0.42, heatPerShot: 0.34, speed: 560, color: "#58f5df", size: 5 },
-                2: { cooldown: 0.22, heatPerShot: 0.24, speed: 620, color: "#58f5df", size: 6 },
-                3: { cooldown: 0.14, heatPerShot: 0.18, speed: 700, color: "#ff69b4", size: 8 }
+                1: {
+                    cooldown: 0.42,
+                    heatPerShot: 0.34,
+                    speed: 560,
+                    color: "#58f5df",
+                    size: 5,
+                    seekRange: 420,
+                    seekResponse: 1.65
+                },
+                2: {
+                    cooldown: 0.22,
+                    heatPerShot: 0.24,
+                    speed: 620,
+                    color: "#58f5df",
+                    size: 6,
+                    seekRange: 680,
+                    seekResponse: 2.25
+                },
+                3: {
+                    cooldown: 0.14,
+                    heatPerShot: 0.18,
+                    speed: 700,
+                    color: "#ff69b4",
+                    size: 8,
+                    seekRange: 960,
+                    seekResponse: 2.9
+                }
+            };
+            var PACK_EMITTER_ANCHORS = {
+                commandRest: [{ x: 45, y: 16 }],
+                fieldRest: [{ x: 47, y: 16 }],
+                run: [
+                    { x: 55, y: 16 },
+                    { x: 57, y: 18 },
+                    { x: 58, y: 18 },
+                    { x: 55, y: 17 },
+                    { x: 55, y: 17 },
+                    { x: 55, y: 17 },
+                    { x: 58, y: 17 },
+                    { x: 56, y: 16 },
+                    { x: 56, y: 17 },
+                    { x: 56, y: 18 }
+                ],
+                takeoff: [{ x: 50, y: 19 }],
+                airborne: [{ x: 51, y: 21 }],
+                crouch: [{ x: 49, y: 15 }],
+                idle: [{ x: 56, y: 15 }]
             };
             var canvas = document.getElementById("gameCanvas");
             var ctx = canvas.getContext("2d");
@@ -1462,6 +2212,7 @@
             var stageShell = document.getElementById("stageShell");
             var titleScreen = document.getElementById("titleScreen");
             var titleStartButton = document.getElementById("titleStartButton");
+            var titleSeason = document.getElementById("titleSeason");
             var messageCard = document.getElementById("messageCard");
             var messageKicker = document.getElementById("messageKicker");
             var messageTitle = document.getElementById("messageTitle");
@@ -1480,27 +2231,116 @@
             var liveStatus = document.getElementById("liveStatus");
             var backgroundMusic = document.getElementById("backgroundMusic");
             var directionPad = document.getElementById("directionPad");
+            var dialogueLayer = document.getElementById("dialogueLayer");
+            var dialoguePanel = document.getElementById("dialoguePanel");
+            var dialoguePortrait = document.getElementById("dialoguePortrait");
+            var dialogueProgress = document.getElementById("dialogueProgress");
+            var dialogueSignal = document.getElementById("dialogueSignal");
+            var dialogueSpeaker = document.getElementById("dialogueSpeaker");
+            var dialogueCopy = document.getElementById("dialogueCopy");
+            var dialogueStage = document.getElementById("dialogueStage");
+            var dialogueStageKicker = document.getElementById("dialogueStageKicker");
+            var dialogueStageCopy = document.getElementById("dialogueStageCopy");
+            var dialogueContinue = document.getElementById("dialogueContinue");
+            var dialogueSkip = document.getElementById("dialogueSkip");
+            var dialogueSkipConfirm = document.getElementById("dialogueSkipConfirm");
+            var dialogueReturn = document.getElementById("dialogueReturn");
+            var dialogueSkipScene = document.getElementById("dialogueSkipScene");
 
-            if (expansionPreview) {
-                document.title = "SUPER FRGMNTS // Unified World Preview";
-                document.body.classList.add("is-expansion-preview");
+            document.body.classList.toggle("is-main-title", mainTitleScreen);
+
+            if (overworldPreview) {
+                var keyboardHelp = document.querySelector(".keyboard-help");
+                document.title = "SUPER FRGMNTS // Arrival on Veyra";
+                document.body.classList.add("is-overworld-preview");
                 document.querySelector(".eyebrow").textContent =
-                    "Level 01 // Unified World Layout";
+                    "Season One // Veyra";
                 document.querySelector(".title-screen__hero").innerHTML =
-                    "Signal Ranger // <strong>Aryn Sol-Mavi</strong> // Traversal Survey";
+                    arrivalPortalPreview
+                        ? "Revision 3F // <strong>Coreworks Threshold</strong>"
+                        : arrivalDialoguePreview
+                        ? "Revision 3I // <strong>Aryn Portrait</strong>"
+                        : "Episode 01 // <strong>Arrival on Veyra</strong>";
                 document.querySelector(".title-screen__hint").textContent =
-                    "Eight plates // Three traversal layers // Down drops // Space jumps";
+                    arrivalPortalPreview
+                        ? "Painted doorway alignment // Portal ignition // Interaction boundary"
+                        : arrivalDialoguePreview
+                        ? "Matched portrait fidelity // Atmospheric depth // Camp staging"
+                        : "Leave the landing flats // Find Dras Ehdre // Space jumps";
                 document.querySelector(".mission strong").textContent =
-                    "ARYN SOL-MAVI // SURVEY";
+                    "ARYN SOL-MAVI // ARRIVAL";
                 document.querySelector(".mission span").textContent =
-                    "8 PLATES → UPLINK GATE";
+                    "FIND DRAS EHDRE";
                 document.querySelector(".stage-wrap").setAttribute(
                     "aria-label",
-                    "Super Frgmnts unified world layout preview"
+                    "Super Frgmnts Arrival on Veyra playable preview"
                 );
+                document.querySelector(".title-screen__art").src =
+                    "/Images/Game/Super-Frgmnts/overworld-landing-flats-v1.png";
+                document.querySelector(".title-screen__art").alt =
+                    "The dusk desert and distant mountain ranges of Veyra";
+                titleScreen.style.setProperty(
+                    "--title-art",
+                    'url("/Images/Game/Super-Frgmnts/overworld-landing-flats-v1.png")'
+                );
+                timerDisplay.textContent = "UNTIMED";
+                heartsDisplay.textContent = "SURFACE // STABLE";
+                backgroundMusic.src = "/Audio/super-frgmnts-foundry-loop.mp3";
+                keyboardHelp.innerHTML =
+                    "<kbd>←</kbd><kbd>→</kbd><span>move</span>" +
+                    "<kbd>↓</kbd><span>talk</span>" +
+                    "<kbd>SPACE</kbd><span>jump</span>" +
+                    "<kbd>R</kbd><span>restart</span>";
+                keyboardHelp.setAttribute(
+                    "aria-label",
+                    "Keyboard controls: left and right arrows move, down arrow talks to Dras after first contact, Space jumps, R restarts"
+                );
+                directionPad.setAttribute(
+                    "aria-label",
+                    "Directional stick. Drag left or right to move. Drag down near Dras to talk after first contact."
+                );
+            }
+            if (expansionPreview) {
+                document.body.classList.add("is-expansion-preview");
+                if (episodeOneRun) {
+                    document.title = "SUPER FRGMNTS // The Shard Foundry";
+                    titleSeason.textContent = "Season One // Veyra";
+                    document.querySelector(".eyebrow").textContent =
+                        "Episode 01 // The Shard Foundry";
+                    document.querySelector(".title-screen__hero").innerHTML =
+                        "Episode 01 // <strong>The Shard Foundry</strong>";
+                    document.querySelector(".title-screen__hint").textContent =
+                        "Enter the Coreworks // Reach the Uplink Gate";
+                    document.querySelector(".mission strong").textContent =
+                        "ARYN SOL-MAVI // INFILTRATE";
+                    document.querySelector(".mission span").textContent =
+                        "CROSS THE SHARD FOUNDRY → UPLINK GATE";
+                    document.querySelector(".stage-wrap").setAttribute(
+                        "aria-label",
+                        "Super Frgmnts Episode 01 Shard Foundry"
+                    );
+                } else {
+                    document.title = "SUPER FRGMNTS // Unified World Preview";
+                    titleSeason.textContent = "Development Build // Traversal";
+                    document.querySelector(".eyebrow").textContent =
+                        "Level 01 // Unified World Layout";
+                    document.querySelector(".title-screen__hero").innerHTML =
+                        "Signal Ranger // <strong>Aryn Sol-Mavi</strong> // Traversal Survey";
+                    document.querySelector(".title-screen__hint").textContent =
+                        "Eight plates // Three traversal layers // Down drops // Space jumps";
+                    document.querySelector(".mission strong").textContent =
+                        "ARYN SOL-MAVI // SURVEY";
+                    document.querySelector(".mission span").textContent =
+                        "8 PLATES → UPLINK GATE";
+                    document.querySelector(".stage-wrap").setAttribute(
+                        "aria-label",
+                        "Super Frgmnts unified world layout preview"
+                    );
+                }
             }
             if (surfaceCrawlerTrial) {
                 document.title = "SUPER FRGMNTS // Surface Crawler Trial";
+                titleSeason.textContent = "Development Trial // Enemy Systems";
                 document.querySelector(".eyebrow").textContent =
                     "Development Trial // Platform Minion";
                 document.querySelector(".title-screen__hero").innerHTML =
@@ -1519,21 +2359,72 @@
 
             var assets = {
                 background0: loadImage(
-                    expansionPreview
+                    overworldPreview
+                        ? "/Images/Game/Super-Frgmnts/overworld-landing-flats-v1.png"
+                        : expansionPreview
                         ? "/Images/Game/super-frgmnts-foundry-expanded-prototype-v1.png"
                         : "/Images/Builder/signal-foundry-bg.png",
                     "high"
                 ),
                 run: loadImage("/Images/Builder/aryn-run-10pose-balanced-gait-sheet.png", "high"),
                 idle: loadImage("/Images/Builder/signal-ranger-idle-focused-v2.png", "high"),
+                commandRest: loadImage(
+                    "/Images/Game/Super-Frgmnts/aryn-command-rest-runtime-v1.png",
+                    "high"
+                ),
+                fieldRest: loadImage(
+                    "/Images/Game/Super-Frgmnts/aryn-field-rest-runtime-v1.png",
+                    "high"
+                ),
                 takeoff: loadImage("/Images/Builder/signal-ranger-jump-takeoff.png", "high"),
                 airborne: loadImage("/Images/Builder/signal-ranger-jump-airborne.png", "high"),
                 crouch: loadImage("/Images/Builder/signal-ranger-crouch.png", "high")
             };
 
-            assets.background1 = loadImage("/Images/Game/signal-foundry-refinery.png", "low");
-            assets.background2 = loadImage("/Images/Game/signal-foundry-biolab.png", "low");
+            assets.background1 = loadImage(
+                overworldPreview
+                    ? "/Images/Game/Super-Frgmnts/overworld-dras-outpost-v1.png"
+                    : "/Images/Game/signal-foundry-refinery.png",
+                overworldPreview ? "high" : "low"
+            );
+            assets.background2 = loadImage(
+                overworldPreview
+                    ? "/Images/Game/Super-Frgmnts/overworld-coreworks-threshold-v1.png"
+                    : "/Images/Game/signal-foundry-biolab.png",
+                overworldPreview ? "high" : "low"
+            );
             assets.background3 = loadImage("/Images/Game/signal-foundry-uplink.png", "low");
+
+            if (overworldPreview) {
+                assets.ship = loadImage(
+                    "/Images/Game/Super-Frgmnts/aryn-ship-v1.png",
+                    "high"
+                );
+                assets.shipHover = loadImage(
+                    "/Images/Game/Super-Frgmnts/aryn-ship-hover-field-v1.png",
+                    "high"
+                );
+                assets.dras = loadImage(
+                    "/Images/Game/Super-Frgmnts/dras-ehdre-runtime-v1.png",
+                    "high"
+                );
+                assets.arynDialoguePortrait = loadImage(
+                    "/Images/Game/Super-Frgmnts/aryn-dialogue-portrait-runtime-v3.png",
+                    "high"
+                );
+                assets.drasDialoguePortrait = loadImage(
+                    "/Images/Game/Super-Frgmnts/dras-dialogue-portrait-runtime-v2.png",
+                    "high"
+                );
+                assets.campDog = loadImage(
+                    "/Images/Game/Super-Frgmnts/veyra-camp-dog-runtime-v1.png",
+                    "high"
+                );
+                assets.campDogWalk = loadImage(
+                    "/Images/Game/Super-Frgmnts/veyra-camp-dog-walk-sheet-v1.png",
+                    "high"
+                );
+            }
 
             if (surfaceCrawlerTrial) {
                 assets.squircle = loadImage(
@@ -1542,7 +2433,7 @@
                 );
             }
 
-            if (!expansionPreview) {
+            if (!expansionPreview && !overworldPreview) {
                 assets.crawler = loadImage("/Images/Game/enemy-crawler-ridge-skitter.png", "low");
                 assets.flyer = loadImage("/Images/Game/enemy-flyer-spore-wisp.png", "low");
                 assets.walker = loadImage("/Images/Game/enemy-walker-clacker-beetle.png", "low");
@@ -1569,6 +2460,8 @@
             var jumpBuffer = 0;
             var coyoteTime = 0;
             var landPoseTime = 0;
+            var calmIdleTime = 0;
+            var combatAlertTime = 0;
             var invulnerableTime = 0;
             var flashTime = 0;
             var cameraX = 0;
@@ -1589,6 +2482,277 @@
             var directionPointerId = null;
             var directionPadStartedAt = 0;
             var directionPadReleaseTimer = 0;
+            var dialogueActive = false;
+            var dialogueIndex = 0;
+            var dialogueHasPlayed = false;
+            var dialogueSkipOpen = false;
+            var dialoguePreviousFocus = null;
+            var firstContactSettle = 0;
+            var drasAware = false;
+            var drasLookingEast = false;
+            var portalCharge = 0;
+            var portalIgniting = false;
+            var overworldTransitionReady = false;
+            var dialogueCards = [
+                {
+                    id: "D01",
+                    speaker: "DRAS EHDRE",
+                    role: "COREWORKS FOREMAN",
+                    portrait: "dras",
+                    text: "Nice ship. Didn’t know the RD-42 was standard issue for the Interworld Fleet."
+                },
+                {
+                    id: "D02",
+                    speaker: "ARYN SOL-MAVI",
+                    role: "SIGNAL RANGER",
+                    portrait: "aryn",
+                    text: "It isn’t. She’s mine. I don’t trust travel to the Fleet. You must be Dras Ehdre."
+                },
+                {
+                    id: "D03",
+                    speaker: "DRAS EHDRE",
+                    role: "COREWORKS FOREMAN",
+                    portrait: "dras",
+                    text: "Glad someone still has standards. I was beginning to think no one beyond Veyra had heard us."
+                },
+                {
+                    id: "D04",
+                    speaker: "ARYN SOL-MAVI",
+                    role: "SIGNAL RANGER",
+                    portrait: "aryn",
+                    text: "We heard you…eventually. Your signal was wrapped in an Expra-7 trisyllabic cipher. It took three weeks to authenticate."
+                },
+                {
+                    id: "D05",
+                    speaker: "DRAS EHDRE",
+                    role: "COREWORKS FOREMAN",
+                    portrait: "dras",
+                    text: "Plain speech wouldn’t have made it off-world."
+                },
+                {
+                    id: "D06",
+                    speaker: "ARYN SOL-MAVI",
+                    role: "SIGNAL RANGER",
+                    portrait: "aryn",
+                    text: "Excuse me?"
+                },
+                {
+                    id: "D07",
+                    speaker: "DRAS EHDRE",
+                    role: "COREWORKS FOREMAN",
+                    portrait: "dras",
+                    text: "Never mind. I hoped the Fleet would send more than one ranger."
+                },
+                {
+                    id: "D08",
+                    speaker: "ARYN SOL-MAVI",
+                    role: "SIGNAL RANGER",
+                    portrait: "aryn",
+                    text: "They classified Veyra as a Class Six containment risk. No deployment."
+                },
+                {
+                    id: "D09",
+                    speaker: "DRAS EHDRE",
+                    role: "COREWORKS FOREMAN",
+                    portrait: "dras",
+                    text: "Veyra supplied half the Arca System with Vesperite. If that doesn’t qualify as a priority, the Fleet has forgotten what keeps its lights on."
+                },
+                {
+                    id: "D10",
+                    speaker: "ARYN SOL-MAVI",
+                    role: "SIGNAL RANGER",
+                    portrait: "aryn",
+                    effect: "tremor",
+                    stageKicker: "VEYRA // SUBSURFACE TREMOR",
+                    stageText: "Dust slips from the outpost canopy.",
+                    text: "They haven’t forgotten."
+                },
+                {
+                    id: "D11",
+                    speaker: "DRAS EHDRE",
+                    role: "COREWORKS FOREMAN",
+                    portrait: "dras",
+                    text: "Then why did I wait twenty-seven days for one ranger to arrive?"
+                },
+                {
+                    id: "D12",
+                    speaker: "ARYN SOL-MAVI",
+                    role: "SIGNAL RANGER",
+                    portrait: "aryn",
+                    effect: "disconnect",
+                    text: "Because the Fleet rejected your call. I was in the room when they buried it."
+                },
+                {
+                    id: "D13",
+                    speaker: "DRAS EHDRE",
+                    role: "COREWORKS FOREMAN",
+                    portrait: "dras",
+                    text: "And yet here you are."
+                },
+                {
+                    id: "D14",
+                    speaker: "ARYN SOL-MAVI",
+                    role: "SIGNAL RANGER",
+                    portrait: "aryn",
+                    text: "On my ship. On my authority. Central doesn’t know I landed."
+                },
+                {
+                    id: "D15",
+                    speaker: "DRAS EHDRE",
+                    role: "COREWORKS FOREMAN",
+                    portrait: "dras",
+                    text: "Then you’re braver than I thought. Or maybe you’re just terrible at following orders."
+                },
+                {
+                    id: "D16",
+                    speaker: "ARYN SOL-MAVI",
+                    role: "SIGNAL RANGER",
+                    portrait: "aryn",
+                    text: "Those aren’t mutually exclusive."
+                },
+                {
+                    id: "D17",
+                    speaker: "DRAS EHDRE",
+                    role: "COREWORKS FOREMAN",
+                    portrait: "dras",
+                    text: "No. I suppose they aren’t."
+                },
+                {
+                    id: "D18",
+                    speaker: "ARYN SOL-MAVI",
+                    role: "SIGNAL RANGER",
+                    portrait: "aryn",
+                    text: "Start at the beginning. What happened beneath the Coreworks?"
+                },
+                {
+                    id: "D19",
+                    speaker: "DRAS EHDRE",
+                    role: "COREWORKS FOREMAN",
+                    portrait: "dras",
+                    text: "Eighteen months ago, a drill team in the Deepworks broke into a seam that wasn’t on any survey. Communications failed. Our Seam Integrity team went down to investigate. Then the entire shift disappeared. More than two hundred women and men. Gone."
+                },
+                {
+                    id: "D20",
+                    speaker: "DRAS EHDRE",
+                    role: "COREWORKS FOREMAN",
+                    portrait: "dras",
+                    text: "We sent team after team to investigate. Only one person made it back to the portal alive. What they described was clear: something had infested the Coreworks. By then, the atmospheric stabilizers had been destroyed."
+                },
+                {
+                    id: "D21",
+                    speaker: "ARYN SOL-MAVI",
+                    role: "SIGNAL RANGER",
+                    portrait: "aryn",
+                    text: "Is it contained below the surface?"
+                },
+                {
+                    id: "D22",
+                    speaker: "DRAS EHDRE",
+                    role: "COREWORKS FOREMAN",
+                    portrait: "dras",
+                    text: "For now. But the air below is lethal, and whatever killed those workers is still moving through the facility."
+                },
+                {
+                    id: "D23",
+                    speaker: "DRAS EHDRE",
+                    role: "COREWORKS FOREMAN",
+                    portrait: "dras",
+                    text: "When production stopped, so did the Vesperite payments. The economy collapsed in a week. Anyone who hadn’t already left took what they could and found work off-world."
+                },
+                {
+                    id: "D24",
+                    speaker: "ARYN SOL-MAVI",
+                    role: "SIGNAL RANGER",
+                    portrait: "aryn",
+                    text: "I’m sorry for your people. But you’re asking me to enter a poisoned facility after something erased two hundred workers. If you want my help, we speak plainly."
+                },
+                {
+                    id: "D25",
+                    speaker: "DRAS EHDRE",
+                    role: "COREWORKS FOREMAN",
+                    portrait: "dras",
+                    text: "Disobedient and wise. Who knew?"
+                },
+                {
+                    id: "D26",
+                    speaker: "ARYN SOL-MAVI",
+                    role: "SIGNAL RANGER",
+                    portrait: "aryn",
+                    text: "Apparently, just what Veyra needs. So we’re agreed. Tell me everything you know."
+                },
+                {
+                    id: "D27",
+                    speaker: "DRAS EHDRE",
+                    role: "COREWORKS FOREMAN",
+                    portrait: "dras",
+                    text: "You’re probably wondering why I stayed. The failures weren’t random. Before each one, the same pulse moved through the Vesperite seams. I don’t think this is an accident. I think it’s a response."
+                },
+                {
+                    id: "D28",
+                    speaker: "ARYN SOL-MAVI",
+                    role: "SIGNAL RANGER",
+                    portrait: "aryn",
+                    text: "A response? You make it sound like something down there is answering us. Whose response?"
+                },
+                {
+                    id: "D29",
+                    speaker: "DRAS EHDRE",
+                    role: "COREWORKS FOREMAN",
+                    portrait: "dras",
+                    text: "That’s what I’ll pay you to find out. If you accept—and if you survive—there are entire crates of Galactic Credits below. Whatever you recover is yours."
+                },
+                {
+                    id: "D30",
+                    speaker: "ARYN SOL-MAVI",
+                    role: "SIGNAL RANGER",
+                    portrait: "aryn",
+                    text: "My mind was made up before the credits. But I won’t say no to honest money."
+                },
+                {
+                    id: "D31",
+                    speaker: "ARYN SOL-MAVI",
+                    role: "SIGNAL RANGER",
+                    portrait: "aryn",
+                    text: "Where do I start?"
+                },
+                {
+                    id: "D32",
+                    speaker: "DRAS EHDRE",
+                    role: "COREWORKS FOREMAN",
+                    portrait: "dras",
+                    text: "The Foundry. Its atmospheric relay feeds the upper Coreworks. Bring it online. Clear the infestation. Recover whatever evidence survived."
+                },
+                {
+                    id: "D33",
+                    speaker: "ARYN SOL-MAVI",
+                    role: "SIGNAL RANGER",
+                    portrait: "aryn",
+                    text: "And the portal?"
+                },
+                {
+                    id: "D34",
+                    speaker: "DRAS EHDRE",
+                    role: "COREWORKS FOREMAN",
+                    portrait: "dras",
+                    effect: "look-portal",
+                    text: "It still opens."
+                },
+                {
+                    id: "D35",
+                    speaker: "DRAS EHDRE",
+                    role: "COREWORKS FOREMAN",
+                    portrait: "dras",
+                    text: "It just hasn’t brought anyone back."
+                },
+                {
+                    id: "D36",
+                    speaker: "ARYN SOL-MAVI",
+                    role: "SIGNAL RANGER",
+                    portrait: "aryn",
+                    effect: "prime-portal",
+                    text: "Then let’s improve its record."
+                }
+            ];
 
             var player = {
                 x: 82,
@@ -1641,6 +2805,77 @@
                 { x: WIDTH * 3 + 1184, y: 416, width: 188, height: 24 },
                 { x: WIDTH * 3 + 1438, y: 532, width: 148, height: 24 }
             ];
+
+            if (overworldPreview) {
+                var shipHoverMotion = {
+                    axis: "y",
+                    range: 6.4,
+                    speed: Math.PI * 2 / 1.6,
+                    phase: 0
+                };
+                platforms = [
+                    {
+                        x: 48,
+                        y: GROUND_Y,
+                        width: WORLD_WIDTH - 96,
+                        height: WORLD_HEIGHT - GROUND_Y,
+                        ground: true,
+                        artIntegrated: true
+                    },
+                    {
+                        x: 918,
+                        y: 704,
+                        width: 72,
+                        height: 10,
+                        shipSurface: true,
+                        invisibleStep: true,
+                        motion: shipHoverMotion
+                    },
+                    {
+                        x: 888,
+                        y: 668,
+                        width: 80,
+                        height: 10,
+                        shipSurface: true,
+                        invisibleStep: true,
+                        motion: shipHoverMotion
+                    },
+                    {
+                        x: 856,
+                        y: 632,
+                        width: 88,
+                        height: 10,
+                        shipSurface: true,
+                        invisibleStep: true,
+                        motion: shipHoverMotion
+                    },
+                    {
+                        x: 814,
+                        y: 600,
+                        width: 128,
+                        height: 12,
+                        shipSurface: true,
+                        invisibleStep: true,
+                        motion: shipHoverMotion
+                    },
+                    {
+                        x: 716,
+                        y: 520,
+                        width: 112,
+                        height: 10,
+                        shipSurface: true,
+                        motion: shipHoverMotion
+                    },
+                    {
+                        x: 528,
+                        y: 448,
+                        width: 176,
+                        height: 10,
+                        shipSurface: true,
+                        motion: shipHoverMotion
+                    }
+                ];
+            }
 
             function buildExpansionPreviewPlatforms() {
                 var previewPlatforms = [
@@ -1749,7 +2984,9 @@
                 platforms = buildExpansionPreviewPlatforms();
             }
 
-            var deepworksRooms = Array.from({ length: SCREEN_COUNT }, function (_, roomIndex) {
+            var deepworksRooms = Array.from(
+                { length: overworldPreview ? 0 : SCREEN_COUNT },
+                function (_, roomIndex) {
                 var roomStart = roomIndex * WIDTH;
                 var deepworksY = expansionPreview ? 1816 : 875;
                 var mirrored = expansionPreview &&
@@ -1768,7 +3005,8 @@
                     entryRight: roomStart + entryRight,
                     deepworks: true
                 };
-            });
+                }
+            );
 
             var shards = [];
             var hazards = [
@@ -1782,6 +3020,15 @@
                 { x: WIDTH * 3 + 1110, y: GROUND_Y - 15, width: 82, height: 18, phase: 1.9 }
             ];
             var uplink = { x: WORLD_WIDTH - 126, y: GROUND_Y - 128, width: 68, height: 128 };
+            if (overworldPreview) {
+                hazards = [];
+                uplink = {
+                    x: WIDTH * 2 + 1490,
+                    y: 548,
+                    width: 112,
+                    height: 196
+                };
+            }
             if (expansionPreview) {
                 hazards = [];
                 uplink = {
@@ -1845,24 +3092,59 @@
                 "background0",
                 "run",
                 "idle",
+                "commandRest",
+                "fieldRest",
                 "takeoff",
                 "airborne",
                 "crouch"
             ];
+            if (overworldPreview) {
+                criticalAssetKeys.push(
+                    "background1",
+                    "background2",
+                    "ship",
+                    "shipHover",
+                    "dras",
+                    "campDog",
+                    "campDogWalk",
+                    "arynDialoguePortrait",
+                    "drasDialoguePortrait"
+                );
+            }
             if (surfaceCrawlerTrial) {
                 criticalAssetKeys.push("squircle");
+            }
+
+            function titleActionLabel() {
+                return overworldPreview
+                    ? arrivalPortalPreview
+                        ? "Review threshold"
+                        : arrivalDialoguePreview
+                        ? "Review opening"
+                        : "Begin arrival"
+                    : surfaceCrawlerTrial
+                    ? "Start minion trial"
+                    : expansionPreview
+                    ? episodeOneRun
+                        ? "Enter Foundry"
+                        : "Start world preview"
+                    : "Begin episode";
             }
 
             Promise.all(criticalAssetKeys.map(function (key) {
                 return waitForImage(assets[key]);
             })).then(function () {
                 state = "ready";
+                if (autostartRequested) {
+                    resetGame(true);
+                    draw();
+                    return;
+                }
                 titleStartButton.disabled = false;
-                titleStartButton.textContent = surfaceCrawlerTrial
-                    ? "Start minion trial"
-                    : expansionPreview
-                        ? "Start world preview"
-                        : "Start run";
+                titleStartButton.textContent = titleActionLabel();
+                window.requestAnimationFrame(function () {
+                    titleStartButton.focus({ preventScroll: true });
+                });
                 draw();
             });
 
@@ -1879,14 +3161,36 @@
                 jumpBuffer = 0;
                 coyoteTime = 0;
                 landPoseTime = 0;
+                calmIdleTime = 0;
+                combatAlertTime = 0;
                 invulnerableTime = 0;
                 flashTime = 0;
+                dialogueActive = false;
+                dialogueIndex = 0;
+                dialogueHasPlayed = false;
+                dialogueSkipOpen = false;
+                firstContactSettle = 0;
+                drasAware = false;
+                drasLookingEast = false;
+                portalCharge = 0;
+                portalIgniting = false;
+                overworldTransitionReady = false;
+                dialogueLayer.hidden = true;
+                dialogueSkipConfirm.hidden = true;
+                document.body.classList.remove("is-dialogue", "is-dialogue-tremor");
+                delete startButton.dataset.overworldEnter;
                 var previewRoomMirror =
                     previewRoomBlueprints[previewStartRoom] &&
                     previewRoomBlueprints[previewStartRoom].mirror;
-                var previewSpawnX = surfaceCrawlerTrial
-                    ? 1000
-                    : previewStartUpper
+                var previewSpawnX = overworldPreview
+                    ? arrivalPortalPreview
+                        ? WIDTH * 2 + 1320
+                        : arrivalDialoguePreview
+                        ? DRAS_WORLD_X - 160
+                        : 1120
+                    : surfaceCrawlerTrial
+                        ? 1000
+                        : previewStartUpper
                         ? previewStartRoom * WIDTH + (previewRoomMirror ? 116 : 1488)
                         : previewStartRoom > 0
                             ? previewStartRoom * WIDTH + Math.round(WIDTH * 0.42)
@@ -1921,7 +3225,7 @@
                 var surfaceTrialPlatform = surfaceCrawlerTrial
                     ? findSurfaceCrawlerTrialPlatform()
                     : null;
-                player.x = expansionPreview ? previewSpawnX : 82;
+                player.x = overworldPreview || expansionPreview ? previewSpawnX : 82;
                 player.y = surfaceTrialPlatform
                     ? surfaceTrialPlatform.y - 100
                     : previewStartUpper
@@ -1932,6 +3236,12 @@
                 player.facing = 1;
                 player.onGround = true;
                 player.supportPlatform = surfaceTrialPlatform || platforms[0];
+                if (arrivalPortalPreview) {
+                    dialogueHasPlayed = true;
+                    portalCharge = 1;
+                    document.querySelector(".mission span").textContent =
+                        "REACH THE COREWORKS THRESHOLD";
+                }
                 shards = [
                     makeShard(520, 818, "#58f5df"),
                     makeShard(726, 374, "#ffd36c"),
@@ -1946,7 +3256,7 @@
                     makeShard(WIDTH * 3 + 628, 356, "#ffd36c"),
                     makeShard(WORLD_WIDTH - 312, 606, "#58f5df")
                 ];
-                if (expansionPreview) {
+                if (expansionPreview || overworldPreview) {
                     shards = [];
                 }
                 heartPickups = [
@@ -1954,7 +3264,7 @@
                     makeHeartPickup(WIDTH * 2 + 842, 818),
                     makeHeartPickup(WIDTH * 3 + 842, 818)
                 ];
-                if (expansionPreview) {
+                if (expansionPreview || overworldPreview) {
                     heartPickups = [];
                 }
                 enemies = [
@@ -1974,6 +3284,9 @@
                         ? [makeSurfaceCrawlerTrial()].filter(Boolean)
                         : [];
                 }
+                if (overworldPreview) {
+                    enemies = [];
+                }
                 updateHud();
                 timerDisplay.classList.remove("is-low");
                 titleScreen.hidden = autostart;
@@ -1984,20 +3297,25 @@
                 if (!autostart) {
                     titleStartButton.textContent = state === "loading"
                         ? "Loading signal…"
-                        : surfaceCrawlerTrial
-                            ? "Start minion trial"
-                            : expansionPreview
-                                ? "Start world preview"
-                                : "Start run";
+                        : titleActionLabel();
                 } else {
                     announce(
-                        surfaceCrawlerTrial
+                        overworldPreview
+                            ? arrivalPortalPreview
+                                ? "Coreworks threshold review started. The painted doorway is online."
+                                : "Arrival on Veyra started. Leave the landing flats and find Dras Ehdre."
+                            : surfaceCrawlerTrial
                             ? "Surface crawler trial started. Observe the minion on the upper Foundry catwalk."
                             : expansionPreview
-                                ? "Unified world traversal survey started. Reach the Uplink Gate."
+                                ? episodeOneRun
+                                    ? "The Shard Foundry started. Reach the Uplink Gate."
+                                    : "Unified world traversal survey started. Reach the Uplink Gate."
                                 : "Run started. Twelve Signal Shards remain."
                     );
                     playTone(260, 0.08, "square", 0.035);
+                    if (arrivalDialoguePreview) {
+                        window.setTimeout(startArrivalDialogue, 80);
+                    }
                 }
             }
 
@@ -2240,6 +3558,211 @@
                 }
             }
 
+            function activateTitleAction() {
+                if (titleStartButton.disabled || state === "loading") return;
+                if (!mainTitleScreen) {
+                    startGame();
+                    return;
+                }
+
+                titleStartButton.disabled = true;
+                titleStartButton.textContent = "Opening Veyra…";
+                titleScreen.classList.add("is-launching");
+                announce("Opening Episode 01. Arrival on Veyra.");
+                if (soundOn) {
+                    ensureAudio();
+                    playArpeggio(2);
+                }
+                window.setTimeout(function () {
+                    window.location.href =
+                        window.location.pathname +
+                        "?episode=01&stage=overworld&autostart=1";
+                }, prefersReducedMotion ? 80 : 560);
+            }
+
+            function isPlayerNearDras() {
+                var centerX = player.x + 56;
+                return overworldPreview &&
+                    centerX >= DRAS_WORLD_X - 180 &&
+                    centerX <= DRAS_WORLD_X + 220 &&
+                    player.y + 100 >= 680;
+            }
+
+            function dialoguePortraitSource(card) {
+                return card.portrait === "dras"
+                    ? assets.drasDialoguePortrait.src
+                    : assets.arynDialoguePortrait.src;
+            }
+
+            function applyDialogueEffect(card) {
+                if (!card.effect) return;
+
+                if (card.effect === "tremor") {
+                    document.body.classList.remove("is-dialogue-tremor");
+                    void stageShell.offsetWidth;
+                    document.body.classList.add("is-dialogue-tremor");
+                    spawnDust(DRAS_WORLD_X + 70, 608, "#d9c08c", 28);
+                    playTone(52, 0.44, "sawtooth", 0.035);
+                    window.setTimeout(function () {
+                        document.body.classList.remove("is-dialogue-tremor");
+                    }, 680);
+                } else if (card.effect === "disconnect") {
+                    dialogueSignal.textContent = "Fleet link // Disconnected";
+                    dialogueSignal.classList.add("is-disconnected");
+                    drasAware = true;
+                    popups.push({
+                        x: player.x + 56,
+                        y: player.y - 14,
+                        text: "FLEET LINK // OFFLINE",
+                        life: 2.4,
+                        color: "#e0bfb8"
+                    });
+                    playTone(610, 0.05, "square", 0.026);
+                    playTone(205, 0.12, "square", 0.024, 0.07);
+                } else if (card.effect === "look-portal") {
+                    drasLookingEast = true;
+                }
+            }
+
+            function renderDialogueCard() {
+                var card = dialogueCards[dialogueIndex];
+                if (!card) return;
+
+                dialogueProgress.textContent =
+                    "Arrival on Veyra // " + card.id + " // " +
+                    (dialogueIndex + 1) + " of " + dialogueCards.length;
+                dialoguePortrait.src = dialoguePortraitSource(card);
+                dialoguePortrait.dataset.character = card.portrait;
+                dialogueSpeaker.textContent = card.speaker;
+                dialogueSpeaker.setAttribute(
+                    "aria-label",
+                    card.speaker + ", " + card.role
+                );
+                var role = document.createElement("span");
+                role.textContent = card.role;
+                dialogueSpeaker.appendChild(role);
+                dialogueCopy.textContent = card.text;
+                dialogueCopy.scrollTop = 0;
+                dialogueStage.hidden = !card.stageText;
+                dialogueStageKicker.textContent = card.stageKicker || "";
+                dialogueStageCopy.textContent = card.stageText || "";
+                dialogueContinue.textContent =
+                    dialogueIndex === dialogueCards.length - 1
+                        ? "Return to surface"
+                        : "Continue";
+                applyDialogueEffect(card);
+                announce(
+                    card.speaker + ". " + card.text +
+                    (card.stageText
+                        ? " Environmental event. " +
+                            card.stageKicker + ". " + card.stageText
+                        : "")
+                );
+            }
+
+            function startArrivalDialogue() {
+                if (!overworldPreview || dialogueActive) return;
+
+                dialogueActive = true;
+                dialogueIndex = 0;
+                dialogueSkipOpen = false;
+                dialoguePreviousFocus = document.activeElement;
+                state = "dialogue";
+                document.body.classList.add("is-dialogue");
+                keys.left = false;
+                keys.right = false;
+                keys.down = false;
+                keys.jump = false;
+                keys.shoot = false;
+                player.vx = 0;
+                player.facing = 1;
+                resetDirectionPad();
+                dialogueSignal.textContent = "Fleet link // Secure";
+                dialogueSignal.classList.remove("is-disconnected");
+                dialogueSkipConfirm.hidden = true;
+                dialogueLayer.hidden = false;
+                setPauseButton(false, false);
+                renderDialogueCard();
+                window.setTimeout(function () {
+                    dialogueContinue.focus();
+                }, 0);
+            }
+
+            function finishArrivalDialogue(skipped) {
+                if (!dialogueActive) return;
+
+                dialogueActive = false;
+                dialogueHasPlayed = true;
+                dialogueSkipOpen = false;
+                dialogueLayer.hidden = true;
+                dialogueSkipConfirm.hidden = true;
+                document.body.classList.remove("is-dialogue", "is-dialogue-tremor");
+                state = "running";
+                document.body.classList.add("is-running");
+                setPauseButton(false, true);
+                portalIgniting = true;
+                document.querySelector(".mission span").textContent =
+                    "REACH THE COREWORKS PORTAL";
+                player.facing = 1;
+                stageShell.setAttribute("tabindex", "-1");
+                stageShell.focus({ preventScroll: true });
+                playTone(242, 0.1, "square", 0.026);
+                playTone(484, 0.16, "square", 0.024, 0.08);
+                announce(
+                    skipped
+                        ? "First contact skipped. Reach the Coreworks portal."
+                        : "First contact complete. The Coreworks portal is powering up."
+                );
+            }
+
+            function advanceArrivalDialogue() {
+                if (!dialogueActive || dialogueSkipOpen) return;
+
+                if (dialogueIndex >= dialogueCards.length - 1) {
+                    finishArrivalDialogue(false);
+                    return;
+                }
+
+                dialogueIndex += 1;
+                renderDialogueCard();
+                dialogueContinue.focus();
+            }
+
+            function openDialogueSkipConfirmation() {
+                if (!dialogueActive || dialogueSkipOpen) return;
+                dialogueSkipOpen = true;
+                dialogueSkipConfirm.hidden = false;
+                dialogueReturn.focus();
+                announce("Skip first-contact transmission?");
+            }
+
+            function closeDialogueSkipConfirmation() {
+                if (!dialogueSkipOpen) return;
+                dialogueSkipOpen = false;
+                dialogueSkipConfirm.hidden = true;
+                dialogueContinue.focus();
+            }
+
+            function showOverworldTransition() {
+                if (!overworldPreview || state !== "running") return;
+
+                state = "transition";
+                overworldTransitionReady = true;
+                document.body.classList.remove("is-running");
+                setPauseButton(false, false);
+                messageKicker.textContent = "Season One // Veyra";
+                messageTitle.textContent = "Episode 01";
+                messageCopy.textContent =
+                    "The Shard Foundry lies beyond the threshold. The eight-minute mission clock begins when Aryn enters.";
+                startButton.textContent = "Enter Foundry";
+                startButton.disabled = false;
+                startButton.dataset.overworldEnter = "true";
+                startOverButton.hidden = false;
+                messageCard.hidden = false;
+                pauseBackgroundMusic();
+                announce("Episode 01. The Shard Foundry. Enter the Foundry or start over.");
+            }
+
             function setPauseButton(paused, available) {
                 pauseButton.disabled = !available;
                 pauseButton.textContent = paused ? "Resume" : "Pause";
@@ -2266,9 +3789,11 @@
 
                 messageKicker.textContent = "Transmission Hold // Player Pause";
                 messageTitle.textContent = "Paused";
-                messageCopy.textContent = expansionPreview
-                    ? "The unified world survey is holding your position."
-                    : "The Shard Foundry is holding your position.";
+                messageCopy.textContent = overworldPreview
+                    ? "The Veyra surface is holding Aryn’s position."
+                    : expansionPreview
+                        ? "The unified world survey is holding your position."
+                        : "The Shard Foundry is holding your position.";
                 startButton.textContent = "Resume";
                 startButton.disabled = false;
                 startButton.removeAttribute("title");
@@ -2371,6 +3896,13 @@
             }
 
             function dropThroughCurrentPlatform() {
+                if (overworldPreview) {
+                    if (dialogueHasPlayed && isPlayerNearDras()) {
+                        startArrivalDialogue();
+                        return true;
+                    }
+                    return false;
+                }
                 if (
                     state !== "running" ||
                     !player.onGround ||
@@ -2402,6 +3934,16 @@
 
             function update(delta) {
                 if (state === "paused") return;
+                if (dialogueActive) {
+                    var dialogueCameraTarget = portraitMode
+                        ? WIDTH
+                        : Math.max(0, 1900 - viewWidth * 0.5);
+                    cameraX +=
+                        (dialogueCameraTarget - cameraX) *
+                        Math.min(1, delta * 4.4);
+                    updateParticles(delta);
+                    return;
+                }
                 if (state !== "running") {
                     updateParticles(delta);
                     return;
@@ -2409,11 +3951,26 @@
 
                 elapsed += delta;
                 updatePlatformMotion();
+                if (overworldPreview) {
+                    if (portalIgniting && portalCharge < 1) {
+                        portalCharge = Math.min(1, portalCharge + delta / 2.25);
+                        if (portalCharge === 1) {
+                            playTone(420, 0.12, "square", 0.023);
+                            playTone(630, 0.16, "square", 0.02, 0.08);
+                            announce("Coreworks portal online.");
+                        }
+                    }
+                }
                 if (player.onGround && player.supportPlatform && player.supportPlatform.motion) {
                     player.x += player.supportPlatform.deltaX;
                     player.y += player.supportPlatform.deltaY;
                 }
-                timeLeft = Math.max(0, START_TIME - elapsed - hits * 4 + collected * 1.5);
+                if (!overworldPreview) {
+                    timeLeft = Math.max(
+                        0,
+                        START_TIME - elapsed - hits * 4 + collected * 1.5
+                    );
+                }
                 jumpBuffer = Math.max(0, jumpBuffer - delta);
                 platformDropTimer = Math.max(0, platformDropTimer - delta);
                 if (platformDropTimer === 0) {
@@ -2421,10 +3978,11 @@
                 }
                 deepworksPromptTimer = Math.max(0, deepworksPromptTimer - delta);
                 landPoseTime = Math.max(0, landPoseTime - delta);
+                combatAlertTime = Math.max(0, combatAlertTime - delta);
                 invulnerableTime = Math.max(0, invulnerableTime - delta);
                 flashTime = Math.max(0, flashTime - delta);
 
-                if (timeLeft <= 0) {
+                if (!overworldPreview && timeLeft <= 0) {
                     loseGame("time");
                     return;
                 }
@@ -2470,7 +4028,14 @@
 
                 var oldBottom = player.y + 100;
                 player.x += player.vx * delta;
-                player.x = Math.max(-18, Math.min(WORLD_WIDTH - 94, player.x));
+                var playerMinimumX = overworldPreview ? 14 : -18;
+                var playerMaximumX = overworldPreview
+                    ? WORLD_WIDTH - 142
+                    : WORLD_WIDTH - 94;
+                player.x = Math.max(
+                    playerMinimumX,
+                    Math.min(playerMaximumX, player.x)
+                );
                 if (inDeepworks && deepworksRoom) {
                     player.x = Math.max(
                         deepworksRoom.x - 34,
@@ -2489,6 +4054,7 @@
                     var landing = null;
 
                     platforms.forEach(function (platform) {
+                        if (platform.disabled) return;
                         if (platformDropTimer > 0 && platform === dropThroughPlatform) return;
                         var overlaps = bodyRight > platform.x + 4 && bodyLeft < platform.x + platform.width - 4;
                         var crosses = oldBottom <= platform.y + 3 && newBottom >= platform.y;
@@ -2535,6 +4101,8 @@
                         }
                         if (!wasGrounded) {
                             landPoseTime = 0.11;
+                            combatAlertTime = Math.max(combatAlertTime, 0.72);
+                            calmIdleTime = 0;
                             spawnDust(player.x + 55, landing.y - 3, "#a86b9d", 9);
                             if (oldBottom < landing.y - 18) {
                                 playTone(116, 0.045, "square", 0.018);
@@ -2545,15 +4113,51 @@
 
                 if (player.y > WORLD_HEIGHT + 80) {
                     takeHit("VOID CONTACT");
-                    player.x = 82;
+                    player.x = overworldPreview ? 1120 : 82;
                     player.y = GROUND_Y - 180;
                 }
 
                 runFrameTime += delta * (Math.abs(player.vx) / maxSpeed);
+                if (overworldPreview && !dialogueHasPlayed) {
+                    if (isPlayerNearDras() && player.onGround) {
+                        player.vx *= Math.max(0, 1 - delta * 12);
+                        firstContactSettle += delta;
+                        if (firstContactSettle >= 0.32) {
+                            player.x = Math.min(
+                                player.x,
+                                DRAS_WORLD_X - 132
+                            );
+                            startArrivalDialogue();
+                            return;
+                        }
+                    } else {
+                        firstContactSettle = 0;
+                    }
+                }
                 checkShards();
                 checkHeartPickups();
                 checkHazards();
                 updateEnemies(delta, oldBottom, newBottom);
+                var nearbyThreat = enemies.some(function (enemy) {
+                    if (!enemy.alive) return false;
+                    var horizontalDistance = Math.abs(
+                        enemy.x + enemy.width / 2 - (player.x + 56)
+                    );
+                    var verticalDistance = Math.abs(
+                        enemy.y + enemy.height / 2 - (player.y + 52)
+                    );
+                    return horizontalDistance < 520 && verticalDistance < 330;
+                });
+                var activelyMoving =
+                    !player.onGround ||
+                    Math.abs(player.vx) > 26 ||
+                    direction !== 0 ||
+                    landPoseTime > 0;
+                if (activelyMoving || nearbyThreat || combatAlertTime > 0) {
+                    calmIdleTime = 0;
+                } else {
+                    calmIdleTime += delta;
+                }
                 updateEnergyOrbs(delta);
                 updateBlaster(delta);
                 updateBolts(delta);
@@ -2571,7 +4175,21 @@
                     cameraLookAhead += (targetLookAhead - cameraLookAhead) * Math.min(1, delta * 3.4);
                     cameraTarget = player.x + 56 + cameraLookAhead - viewWidth * cameraAnchor;
                 } else {
-                    cameraTarget = player.x - viewWidth * 0.38;
+                    if (overworldPreview) {
+                        var departureProgress = Math.max(
+                            0,
+                            Math.min(1, (player.x - 1120) / 560)
+                        );
+                        departureProgress =
+                            departureProgress * departureProgress *
+                            (3 - 2 * departureProgress);
+                        var overworldAnchor =
+                            0.7 + (0.48 - 0.7) * departureProgress;
+                        cameraTarget =
+                            player.x + 56 - viewWidth * overworldAnchor;
+                    } else {
+                        cameraTarget = player.x - viewWidth * 0.38;
+                    }
                 }
                 cameraTarget = Math.max(0, Math.min(WORLD_WIDTH - viewWidth, cameraTarget));
                 cameraX += (cameraTarget - cameraX) * Math.min(1, delta * 5.5);
@@ -2838,33 +4456,120 @@
             function fireBlaster() {
                 var stats = BLASTER_STATS[blasterTier];
                 shootCooldown = stats.cooldown;
+                combatAlertTime = Math.max(combatAlertTime, 1.35);
+                calmIdleTime = 0;
                 blasterHeat = Math.min(1, blasterHeat + stats.heatPerShot);
                 if (blasterHeat >= 1) {
                     blasterOverheated = true;
                 }
 
-                var muzzleLocalX = 87 + blasterTier * 2;
-                var muzzleX = player.x + (player.facing > 0 ? muzzleLocalX : 112 - muzzleLocalX);
-                var muzzleY = player.y + 46;
+                var visual = getPlayerVisualState();
+                var emitter = getPackEmitterAnchor(visual);
+                var muzzleX = player.x + (
+                    player.facing > 0
+                        ? emitter.x + 2
+                        : 112 - emitter.x - 2
+                );
+                var muzzleY = player.y + emitter.y;
+                var target = findSeekTarget(
+                    muzzleX,
+                    muzzleY,
+                    player.facing,
+                    stats.seekRange
+                );
                 bolts.push({
                     x: muzzleX,
                     y: muzzleY,
                     vx: stats.speed * player.facing,
+                    vy: 0,
                     life: 0.9,
                     tier: blasterTier,
                     color: stats.color,
-                    size: stats.size
+                    size: stats.size,
+                    heading: player.facing,
+                    target: target,
+                    trail: []
                 });
-                spawnBurst(muzzleX, muzzleY, stats.color, 5);
+                spawnBurst(muzzleX, muzzleY, stats.color, 7);
                 playTone(720 + blasterTier * 60, 0.05, "square", 0.02);
                 playTone(360, 0.04, "sawtooth", 0.012, 0.01);
+            }
+
+            function enemyCenter(enemy) {
+                return {
+                    x: enemy.x + enemy.width / 2,
+                    y: enemy.y + enemy.height / 2
+                };
+            }
+
+            function findSeekTarget(originX, originY, heading, seekRange) {
+                var bestTarget = null;
+                var bestScore = Infinity;
+
+                enemies.forEach(function (enemy) {
+                    if (!enemy.alive) return;
+                    var center = enemyCenter(enemy);
+                    var forwardDistance = (center.x - originX) * heading;
+                    if (forwardDistance < -12 || forwardDistance > seekRange) return;
+
+                    var verticalDistance = Math.abs(center.y - originY);
+                    var distance = Math.hypot(center.x - originX, center.y - originY);
+                    if (distance > seekRange) return;
+
+                    // Prefer enemies ahead, while still allowing the elevated
+                    // antenna shot to bend decisively toward floor crawlers.
+                    var score = forwardDistance + verticalDistance * 0.58;
+                    if (score < bestScore) {
+                        bestScore = score;
+                        bestTarget = enemy;
+                    }
+                });
+
+                return bestTarget;
             }
 
             function updateBolts(delta) {
                 bolts.forEach(function (bolt) {
                     if (bolt.life <= 0) return;
                     bolt.life -= delta;
+                    bolt.trail.push({ x: bolt.x, y: bolt.y });
+                    if (bolt.trail.length > 7) bolt.trail.shift();
+
+                    var stats = BLASTER_STATS[bolt.tier];
+                    if (
+                        !bolt.target ||
+                        !bolt.target.alive ||
+                        Math.hypot(
+                            enemyCenter(bolt.target).x - bolt.x,
+                            enemyCenter(bolt.target).y - bolt.y
+                        ) > stats.seekRange
+                    ) {
+                        bolt.target = findSeekTarget(
+                            bolt.x,
+                            bolt.y,
+                            bolt.heading,
+                            stats.seekRange
+                        );
+                    }
+
+                    if (bolt.target && bolt.target.alive) {
+                        var center = enemyCenter(bolt.target);
+                        var offsetX = center.x - bolt.x;
+                        var offsetY = center.y - bolt.y;
+                        var distance = Math.max(1, Math.hypot(offsetX, offsetY));
+                        var desiredVx = offsetX / distance * stats.speed;
+                        var desiredVy = offsetY / distance * stats.speed;
+                        var response = Math.min(1, stats.seekResponse * delta);
+                        bolt.vx += (desiredVx - bolt.vx) * response;
+                        bolt.vy += (desiredVy - bolt.vy) * response;
+
+                        var velocityLength = Math.max(1, Math.hypot(bolt.vx, bolt.vy));
+                        bolt.vx = bolt.vx / velocityLength * stats.speed;
+                        bolt.vy = bolt.vy / velocityLength * stats.speed;
+                    }
+
                     bolt.x += bolt.vx * delta;
+                    bolt.y += bolt.vy * delta;
 
                     enemies.forEach(function (enemy) {
                         if (!enemy.alive || bolt.life <= 0) return;
@@ -2924,6 +4629,19 @@
             }
 
             function checkUplink() {
+                if (overworldPreview) {
+                    if (!dialogueHasPlayed || portalCharge < 1) return;
+                    var overworldPlayerRight = player.x + 82;
+                    var overworldPlayerBottom = player.y + 100;
+                    if (
+                        overworldPlayerRight > uplink.x &&
+                        player.x + 32 < uplink.x + uplink.width &&
+                        overworldPlayerBottom > uplink.y
+                    ) {
+                        showOverworldTransition();
+                    }
+                    return;
+                }
                 if (collected < TOTAL_SHARDS) return;
                 var playerRight = player.x + 82;
                 var playerBottom = player.y + 100;
@@ -3048,6 +4766,19 @@
                 ctx.fillStyle = "#050713";
                 ctx.fillRect(0, 0, viewWidth, HEIGHT);
                 drawBackgroundRooms();
+
+                if (overworldPreview) {
+                    drawOverworldVolcano();
+                    drawOverworldAtmosphere();
+                    ctx.save();
+                    ctx.translate(-Math.round(cameraX), 0);
+                    drawOverworldProps();
+                    drawParticles();
+                    drawPlayer();
+                    drawPopups();
+                    ctx.restore();
+                    return;
+                }
 
                 drawAtmosphere();
                 ctx.save();
@@ -3208,6 +4939,8 @@
                     }
                 }
 
+                if (overworldPreview) return;
+
                 for (var seam = 1; seam < SCREEN_COUNT; seam += 1) {
                     var seamX = seam * WIDTH - cameraX;
                     if (seamX < -24 || seamX > viewWidth + 24) continue;
@@ -3231,6 +4964,632 @@
                     ctx.fillRect(Math.round(x), y, 3, 3);
                 }
                 ctx.restore();
+            }
+
+            function wrapAtmosphereX(value, span, margin) {
+                return ((value % span) + span) % span - margin;
+            }
+
+            function drawCloudVolume(x, y, scale, variant, opacity) {
+                var puffSets = [
+                    [
+                        [-92, 4, 64, 18],
+                        [-46, -8, 72, 28],
+                        [12, -13, 86, 34],
+                        [74, -2, 70, 23],
+                        [124, 7, 46, 15]
+                    ],
+                    [
+                        [-118, 8, 62, 16],
+                        [-74, -1, 80, 24],
+                        [-18, -18, 74, 36],
+                        [40, -9, 92, 30],
+                        [104, 2, 68, 19]
+                    ],
+                    [
+                        [-82, 3, 56, 17],
+                        [-40, -15, 64, 31],
+                        [14, -7, 94, 27],
+                        [78, -16, 70, 32],
+                        [130, 2, 48, 16]
+                    ]
+                ];
+                var puffs = puffSets[variant % puffSets.length];
+                var cloudShade = ctx.createLinearGradient(0, -44, 0, 34);
+                cloudShade.addColorStop(0, "rgba(247, 224, 228, 0.82)");
+                cloudShade.addColorStop(0.45, "rgba(213, 143, 176, 0.48)");
+                cloudShade.addColorStop(1, "rgba(85, 51, 111, 0.18)");
+
+                ctx.save();
+                ctx.translate(Math.round(x), Math.round(y));
+                ctx.scale(scale, scale);
+                ctx.globalCompositeOperation = "screen";
+
+                ctx.globalAlpha = opacity * 0.42;
+                ctx.fillStyle = "#6c3c79";
+                ctx.beginPath();
+                ctx.ellipse(12, 13, 156, 22, 0, 0, Math.PI * 2);
+                ctx.fill();
+
+                ctx.globalAlpha = opacity;
+                ctx.fillStyle = cloudShade;
+                puffs.forEach(function (puff) {
+                    ctx.beginPath();
+                    ctx.ellipse(
+                        puff[0],
+                        puff[1],
+                        puff[2],
+                        puff[3],
+                        0,
+                        0,
+                        Math.PI * 2
+                    );
+                    ctx.fill();
+                });
+
+                ctx.globalAlpha = opacity * 0.34;
+                ctx.fillStyle = "#fff0e7";
+                puffs.slice(1, 4).forEach(function (puff) {
+                    ctx.beginPath();
+                    ctx.ellipse(
+                        puff[0] - 7,
+                        puff[1] - puff[3] * 0.36,
+                        puff[2] * 0.64,
+                        puff[3] * 0.32,
+                        0,
+                        0,
+                        Math.PI * 2
+                    );
+                    ctx.fill();
+                });
+
+                ctx.globalAlpha = opacity * 0.22;
+                ctx.fillStyle = "#cc7ea8";
+                ctx.beginPath();
+                ctx.ellipse(-136, 20, 104, 8, -0.025, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.beginPath();
+                ctx.ellipse(126, 24, 92, 7, 0.02, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+
+            function drawDistantBird(x, y, size, flap) {
+                ctx.save();
+                ctx.translate(Math.round(x), Math.round(y));
+                ctx.globalAlpha = 0.44;
+                ctx.strokeStyle = "#211a33";
+                ctx.lineWidth = Math.max(1, size * 0.16);
+                ctx.lineCap = "round";
+                ctx.beginPath();
+                ctx.moveTo(-size, 1);
+                ctx.quadraticCurveTo(-size * 0.48, -flap, 0, 0);
+                ctx.quadraticCurveTo(size * 0.48, -flap, size, 1);
+                ctx.stroke();
+                ctx.globalAlpha = 0.22;
+                ctx.fillStyle = "#e0bfb8";
+                ctx.fillRect(-1, 0, 2, Math.max(1, size * 0.24));
+                ctx.restore();
+            }
+
+            function drawOverworldBirds(now) {
+                var flockSpan = viewWidth + 620;
+                var flockX = wrapAtmosphereX(
+                    now * 5.4 - cameraX * 0.14 + 930,
+                    flockSpan,
+                    310
+                );
+                var flockY = 228 + Math.sin(now * 0.34) * 8;
+                var birds = [
+                    [0, 0, 8],
+                    [31, -14, 6],
+                    [58, 5, 7],
+                    [87, -22, 5],
+                    [112, -3, 6]
+                ];
+
+                birds.forEach(function (bird, index) {
+                    var flap =
+                        2.2 +
+                        Math.sin(now * 4.2 + index * 0.82) *
+                        bird[2] *
+                        0.28;
+                    drawDistantBird(
+                        flockX + bird[0],
+                        flockY + bird[1],
+                        bird[2],
+                        flap
+                    );
+                });
+            }
+
+            function drawOverworldAtmosphere() {
+                var now = prefersReducedMotion ? 0 : performance.now() / 1000;
+                var cloudLayers = [
+                    {
+                        count: 3,
+                        spacing: 690,
+                        span: viewWidth + 760,
+                        margin: 380,
+                        speed: 2.2,
+                        parallax: 0.025,
+                        y: 104,
+                        scale: 0.68,
+                        opacity: 0.085
+                    },
+                    {
+                        count: 3,
+                        spacing: 830,
+                        span: viewWidth + 900,
+                        margin: 450,
+                        speed: 5.1,
+                        parallax: 0.055,
+                        y: 214,
+                        scale: 0.92,
+                        opacity: 0.12
+                    },
+                    {
+                        count: 2,
+                        spacing: 1060,
+                        span: viewWidth + 1100,
+                        margin: 550,
+                        speed: 8.4,
+                        parallax: 0.09,
+                        y: 344,
+                        scale: 1.14,
+                        opacity: 0.072
+                    }
+                ];
+
+                ctx.save();
+                cloudLayers.forEach(function (layer, layerIndex) {
+                    for (
+                        var cloudIndex = 0;
+                        cloudIndex < layer.count;
+                        cloudIndex += 1
+                    ) {
+                        var cloudX = wrapAtmosphereX(
+                            cloudIndex * layer.spacing +
+                                now * layer.speed -
+                                cameraX * layer.parallax +
+                                layerIndex * 271,
+                            layer.span,
+                            layer.margin
+                        );
+                        var cloudY =
+                            layer.y +
+                            cloudIndex * 29 +
+                            Math.sin(now * 0.12 + cloudIndex * 1.7) * 4;
+                        drawCloudVolume(
+                            cloudX,
+                            cloudY,
+                            layer.scale,
+                            cloudIndex + layerIndex,
+                            layer.opacity
+                        );
+                    }
+                });
+
+                drawOverworldBirds(now);
+
+                ctx.globalAlpha = 0.18;
+                for (var dustIndex = 0; dustIndex < 16; dustIndex += 1) {
+                    var dustX = wrapAtmosphereX(
+                        dustIndex * 139 + now * 22 - cameraX * 0.18,
+                        viewWidth + 80,
+                        40
+                    );
+                    var dustY = 674 + (dustIndex * 19) % 58;
+                    ctx.fillStyle =
+                        dustIndex % 5 === 0 ? "#58f5df" : "#d9c08c";
+                    ctx.fillRect(Math.round(dustX), dustY, 3, 2);
+                }
+                ctx.restore();
+            }
+
+            function drawOverworldVolcano() {
+                var plateX = WIDTH * 2 - cameraX;
+                var screenCenterX = plateX + 1304;
+                if (
+                    screenCenterX < -210 ||
+                    screenCenterX > viewWidth + 210
+                ) {
+                    return;
+                }
+
+                var now = prefersReducedMotion ? 0 : elapsed;
+                var pulse = 0.72 + Math.sin(now * 2.1) * 0.16;
+                var fissures = [
+                    [[1306, 286], [1310, 320], [1298, 344], [1310, 365], [1288, 390], [1281, 425], [1264, 451]],
+                    [[1299, 343], [1274, 359], [1256, 379], [1239, 397]],
+                    [[1310, 365], [1339, 389], [1332, 413], [1361, 448]],
+                    [[1288, 389], [1267, 407], [1248, 430]],
+                    [[1338, 390], [1358, 407], [1377, 430]]
+                ];
+
+                ctx.save();
+                ctx.translate(Math.round(plateX), 0);
+                ctx.globalCompositeOperation = "screen";
+
+                var craterGlow = ctx.createRadialGradient(
+                    1305,
+                    282,
+                    4,
+                    1305,
+                    282,
+                    112
+                );
+                craterGlow.addColorStop(0, "rgba(255, 226, 136, 0.72)");
+                craterGlow.addColorStop(0.18, "rgba(255, 117, 65, 0.5)");
+                craterGlow.addColorStop(0.52, "rgba(223, 58, 106, 0.18)");
+                craterGlow.addColorStop(1, "rgba(223, 58, 106, 0)");
+                ctx.globalAlpha = pulse;
+                ctx.fillStyle = craterGlow;
+                ctx.beginPath();
+                ctx.ellipse(1305, 282, 112, 68, 0, 0, Math.PI * 2);
+                ctx.fill();
+
+                var resonanceGlow = ctx.createRadialGradient(
+                    1305,
+                    300,
+                    2,
+                    1305,
+                    300,
+                    62
+                );
+                resonanceGlow.addColorStop(0, "rgba(128, 255, 239, 0.48)");
+                resonanceGlow.addColorStop(0.4, "rgba(88, 245, 223, 0.2)");
+                resonanceGlow.addColorStop(1, "rgba(88, 245, 223, 0)");
+                ctx.globalAlpha = 0.5 + pulse * 0.25;
+                ctx.fillStyle = resonanceGlow;
+                ctx.beginPath();
+                ctx.ellipse(1305, 300, 64, 48, 0, 0, Math.PI * 2);
+                ctx.fill();
+
+                ctx.lineCap = "round";
+                ctx.lineJoin = "round";
+                fissures.forEach(function (points, fissureIndex) {
+                    ctx.beginPath();
+                    points.forEach(function (point, pointIndex) {
+                        if (pointIndex === 0) {
+                            ctx.moveTo(point[0], point[1]);
+                        } else {
+                            ctx.lineTo(point[0], point[1]);
+                        }
+                    });
+                    ctx.globalAlpha =
+                        0.13 +
+                        pulse * 0.08 +
+                        Math.sin(now * 2.8 + fissureIndex) * 0.025;
+                    ctx.strokeStyle = "#58f5df";
+                    ctx.shadowColor = "#58f5df";
+                    ctx.shadowBlur = 18;
+                    ctx.lineWidth = 8;
+                    ctx.stroke();
+
+                    ctx.globalAlpha = 0.38 + pulse * 0.22;
+                    ctx.shadowBlur = 5;
+                    ctx.lineWidth = 1.6;
+                    ctx.stroke();
+
+                    for (var sparkIndex = 0; sparkIndex < 3; sparkIndex += 1) {
+                        var progress =
+                            (now * (0.065 + fissureIndex * 0.006) +
+                                fissureIndex * 0.17 +
+                                sparkIndex * 0.31) %
+                            1;
+                        var pathPosition = progress * (points.length - 1);
+                        var segment = Math.min(
+                            points.length - 2,
+                            Math.floor(pathPosition)
+                        );
+                        var localProgress = pathPosition - segment;
+                        var from = points[segment];
+                        var to = points[segment + 1];
+                        var sparkX =
+                            from[0] + (to[0] - from[0]) * localProgress;
+                        var sparkY =
+                            from[1] + (to[1] - from[1]) * localProgress;
+                        var sparkle =
+                            0.46 +
+                            Math.sin(now * 8.4 + sparkIndex * 1.8) * 0.26;
+
+                        ctx.globalAlpha = sparkle;
+                        ctx.fillStyle =
+                            sparkIndex === 1 ? "#fff0b5" : "#9ffff2";
+                        ctx.shadowColor = ctx.fillStyle;
+                        ctx.shadowBlur = 9;
+                        ctx.fillRect(
+                            Math.round(sparkX) - 1,
+                            Math.round(sparkY) - 1,
+                            3,
+                            3
+                        );
+                    }
+                });
+
+                for (var moteIndex = 0; moteIndex < 9; moteIndex += 1) {
+                    var moteCycle =
+                        (now * (0.11 + moteIndex * 0.002) +
+                            moteIndex * 0.137) %
+                        1;
+                    var moteX =
+                        1305 +
+                        Math.sin(moteIndex * 2.4 + now * 0.6) *
+                            (18 + moteIndex * 4);
+                    var moteY = 273 - moteCycle * (38 + moteIndex * 4);
+                    ctx.globalAlpha = (1 - moteCycle) * 0.42;
+                    ctx.fillStyle =
+                        moteIndex % 3 === 0 ? "#ffd36c" : "#58f5df";
+                    ctx.shadowColor = ctx.fillStyle;
+                    ctx.shadowBlur = 7;
+                    ctx.fillRect(
+                        Math.round(moteX),
+                        Math.round(moteY),
+                        moteIndex % 3 === 0 ? 3 : 2,
+                        2
+                    );
+                }
+                ctx.restore();
+            }
+
+            function drawOverworldPortal() {
+                var centerX = WIDTH * 2 + 1545;
+                var centerY = 615;
+                var pulse = 0.5 + Math.sin(elapsed * 4.2) * 0.18;
+                var charge = portalCharge;
+
+                ctx.save();
+                ctx.translate(centerX, centerY);
+                ctx.globalCompositeOperation = "screen";
+                ctx.globalAlpha = 0.1 + charge * 0.56;
+                ctx.strokeStyle = charge >= 1 ? "#58f5df" : "#77a3ff";
+                ctx.shadowColor = "#58f5df";
+                ctx.shadowBlur = 12 + charge * 34;
+                ctx.lineWidth = 3 + charge * 5;
+                ctx.beginPath();
+                ctx.ellipse(
+                    0,
+                    0,
+                    28 + charge * 8 + pulse * 2,
+                    56 + charge * 14,
+                    0,
+                    0,
+                    Math.PI * 2
+                );
+                ctx.stroke();
+
+                if (charge > 0) {
+                    var portalGradient = ctx.createRadialGradient(
+                        0,
+                        0,
+                        5,
+                        0,
+                        0,
+                        44
+                    );
+                    portalGradient.addColorStop(0, "rgba(247, 240, 234, 0.94)");
+                    portalGradient.addColorStop(0.16, "rgba(88, 245, 223, 0.62)");
+                    portalGradient.addColorStop(0.52, "rgba(99, 149, 238, 0.26)");
+                    portalGradient.addColorStop(1, "rgba(5, 7, 19, 0)");
+                    ctx.globalAlpha = charge * (0.48 + pulse * 0.18);
+                    ctx.fillStyle = portalGradient;
+                    ctx.beginPath();
+                    ctx.ellipse(0, 0, 34, 68, 0, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    ctx.globalAlpha = 0.5 + charge * 0.45;
+                    ctx.fillStyle = "#ff69b4";
+                    for (var spark = 0; spark < 8; spark += 1) {
+                        var angle = elapsed * (0.7 + spark * 0.05) + spark * 0.78;
+                        var radiusX = 34 + charge * 8;
+                        var radiusY = 64 + charge * 14;
+                        ctx.fillRect(
+                            Math.round(Math.cos(angle) * radiusX),
+                            Math.round(Math.sin(angle) * radiusY),
+                            4,
+                            4
+                        );
+                    }
+                }
+                ctx.restore();
+            }
+
+            function drawCampDog() {
+                var now = prefersReducedMotion ? 0 : elapsed;
+                var dogCycle = now % 13.6;
+                var walkingOut = dogCycle >= 4 && dogCycle < 6.6;
+                var campPause = dogCycle >= 6.6 && dogCycle < 8;
+                var walkingHome = dogCycle >= 8 && dogCycle < 10.6;
+                var walking = walkingOut || walkingHome;
+                var rummaging = !walking && !campPause;
+                var dogX = DOG_WORLD_X;
+                var dogFacing = 1;
+                if (walkingOut) {
+                    dogX -= ((dogCycle - 4) / 2.6) * 130;
+                    dogFacing = -1;
+                } else if (campPause) {
+                    dogX -= 130;
+                    dogFacing = -1;
+                } else if (walkingHome) {
+                    dogX -= 130 - ((dogCycle - 8) / 2.6) * 130;
+                }
+                var noseNudge =
+                    rummaging
+                        ? Math.round(Math.sin(now * 5.2) * 2)
+                        : 0;
+                var forageStep =
+                    rummaging
+                        ? Math.round(Math.sin(now * 2.6) * 2)
+                        : 0;
+                var forageBob =
+                    rummaging
+                        ? Math.round(Math.sin(now * 5.2))
+                        : 0;
+                var dogGroundY = GROUND_Y + 12;
+
+                ctx.save();
+                ctx.translate(dogX, dogGroundY);
+
+                ctx.globalAlpha = 0.28;
+                ctx.fillStyle = "#1a1422";
+                ctx.beginPath();
+                ctx.ellipse(-3, 2, 42, 6, 0, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.globalAlpha = 1;
+
+                if (
+                    (walking || campPause) &&
+                    assets.campDogWalk &&
+                    assets.campDogWalk.complete &&
+                    assets.campDogWalk.naturalWidth
+                ) {
+                    var walkFrame = walking
+                        ? Math.floor(now * 5.4) % 2
+                        : 0;
+                    ctx.save();
+                    if (dogFacing < 0) {
+                        ctx.scale(-1, 1);
+                    }
+                    ctx.drawImage(
+                        assets.campDogWalk,
+                        walkFrame * 96,
+                        0,
+                        96,
+                        64,
+                        -48,
+                        -64,
+                        96,
+                        64
+                    );
+                    ctx.restore();
+                } else if (
+                    assets.campDog &&
+                    assets.campDog.complete &&
+                    assets.campDog.naturalWidth
+                ) {
+                    ctx.drawImage(
+                        assets.campDog,
+                        -48 + forageStep,
+                        -64 + forageBob,
+                        96,
+                        64
+                    );
+                }
+                ctx.restore();
+
+                var scrapX = 47 + noseNudge;
+                ctx.save();
+                ctx.translate(DOG_WORLD_X, dogGroundY);
+                ctx.fillStyle = "#202334";
+                ctx.fillRect(scrapX, -5, 14, 6);
+                ctx.fillStyle = "#66728b";
+                ctx.fillRect(scrapX + 2, -7, 10, 3);
+                ctx.fillStyle = "#d9c08c";
+                ctx.fillRect(scrapX + 9, -6, 2, 2);
+
+                if (rummaging && !prefersReducedMotion) {
+                    ctx.globalAlpha = 0.3;
+                    ctx.fillStyle = "#d9c08c";
+                    ctx.fillRect(
+                        50 + Math.round(Math.sin(now * 3.1) * 7),
+                        -14 - Math.floor((now * 9) % 5),
+                        2,
+                        2
+                    );
+                }
+                ctx.restore();
+            }
+
+            function drawOverworldProps() {
+                var shipOffsetY =
+                    Math.sin(elapsed * (Math.PI * 2 / 1.6)) * 3.2;
+                var shadowScale = 1 - shipOffsetY * 0.008;
+
+                if (
+                    assets.shipHover &&
+                    assets.shipHover.complete &&
+                    assets.shipHover.naturalWidth
+                ) {
+                    ctx.save();
+                    ctx.globalAlpha = 0.68 - Math.abs(shipOffsetY) * 0.035;
+                    ctx.translate(572, 723);
+                    ctx.scale(shadowScale, 1);
+                    ctx.drawImage(assets.shipHover, -378, -21, 756, 42);
+                    ctx.restore();
+                }
+
+                if (assets.ship && assets.ship.complete && assets.ship.naturalWidth) {
+                    ctx.drawImage(
+                        assets.ship,
+                        176,
+                        Math.round(417 + shipOffsetY),
+                        792,
+                        311
+                    );
+                }
+
+                drawCampDog();
+
+                if (assets.dras && assets.dras.complete && assets.dras.naturalWidth) {
+                    var drasBob = Math.sin(elapsed * Math.PI * 1.25) * 0.5;
+                    ctx.save();
+                    if (drasLookingEast) {
+                        ctx.translate(DRAS_WORLD_X + 96, 0);
+                        ctx.scale(-1, 1);
+                        ctx.drawImage(
+                            assets.dras,
+                            0,
+                            Math.round(DRAS_DRAW_Y + drasBob),
+                            96,
+                            112
+                        );
+                    } else {
+                        ctx.drawImage(
+                            assets.dras,
+                            DRAS_WORLD_X,
+                            Math.round(DRAS_DRAW_Y + drasBob),
+                            96,
+                            112
+                        );
+                    }
+                    ctx.restore();
+                    if (drasAware) {
+                        ctx.save();
+                        ctx.globalAlpha = 0.56 + Math.sin(elapsed * 5) * 0.16;
+                        ctx.fillStyle = "#58f5df";
+                        ctx.shadowColor = "#58f5df";
+                        ctx.shadowBlur = 7;
+                        ctx.fillRect(
+                            DRAS_WORLD_X + 20,
+                            DRAS_DRAW_Y + 21,
+                            3,
+                            3
+                        );
+                        ctx.restore();
+                    }
+                }
+
+                drawOverworldPortal();
+
+                if (dialogueHasPlayed && isPlayerNearDras() && !dialogueActive) {
+                    ctx.save();
+                    ctx.font = "700 16px Fira Code, monospace";
+                    ctx.textAlign = "center";
+                    ctx.fillStyle = "#03050d";
+                    ctx.fillText(
+                        "↓ TALK",
+                        DRAS_WORLD_X + 50,
+                        DRAS_DRAW_Y - 36
+                    );
+                    ctx.fillStyle = "#ffd36c";
+                    ctx.fillText(
+                        "↓ TALK",
+                        DRAS_WORLD_X + 48,
+                        DRAS_DRAW_Y - 38
+                    );
+                    ctx.restore();
+                }
             }
 
             function drawDeepworksPrompt() {
@@ -3840,20 +6199,41 @@
                 });
             }
 
+            function getPlayerVisualState() {
+                var visual = {
+                    sprite: dialogueActive || calmIdleTime >= 1.8
+                        ? assets.commandRest
+                        : assets.fieldRest,
+                    sourceX: 0,
+                    sourceWidth: 112,
+                    pose: dialogueActive || calmIdleTime >= 1.8
+                        ? "commandRest"
+                        : "fieldRest",
+                    frame: 0
+                };
+                if (!player.onGround) {
+                    visual.sprite = player.vy < -180 ? assets.takeoff : assets.airborne;
+                    visual.pose = player.vy < -180 ? "takeoff" : "airborne";
+                } else if (landPoseTime > 0) {
+                    visual.sprite = assets.crouch;
+                    visual.pose = "crouch";
+                } else if (Math.abs(player.vx) > 26) {
+                    visual.sprite = assets.run;
+                    visual.pose = "run";
+                    visual.frame = Math.floor(runFrameTime * 12) % 10;
+                    visual.sourceX = visual.frame * 112;
+                }
+                return visual;
+            }
+
+            function getPackEmitterAnchor(visual) {
+                var anchors = PACK_EMITTER_ANCHORS[visual.pose] || PACK_EMITTER_ANCHORS.idle;
+                return anchors[Math.min(visual.frame, anchors.length - 1)];
+            }
+
             function drawPlayer() {
                 if (!assets.idle.complete) return;
-                var sprite = assets.idle;
-                var sourceX = 0;
-                var sourceWidth = 112;
-
-                if (!player.onGround) {
-                    sprite = player.vy < -180 ? assets.takeoff : assets.airborne;
-                } else if (landPoseTime > 0) {
-                    sprite = assets.crouch;
-                } else if (Math.abs(player.vx) > 26) {
-                    sprite = assets.run;
-                    sourceX = Math.floor(runFrameTime * 12) % 10 * 112;
-                }
+                var visual = getPlayerVisualState();
 
                 ctx.save();
                 if (invulnerableTime > 0 && Math.floor(invulnerableTime * 14) % 2 === 0) {
@@ -3863,51 +6243,45 @@
                 if (player.facing < 0) {
                     ctx.scale(-1, 1);
                 }
-                ctx.drawImage(sprite, sourceX, 0, sourceWidth, 112, 0, 0, 112, 112);
-                drawBlasterProp();
+                ctx.drawImage(
+                    visual.sprite,
+                    visual.sourceX,
+                    0,
+                    visual.sourceWidth,
+                    112,
+                    0,
+                    0,
+                    112,
+                    112
+                );
+                drawPackEmitter(visual);
                 ctx.restore();
             }
 
-            function drawBlasterProp() {
+            function drawPackEmitter(visual) {
                 if (blasterTier <= 0) return;
                 var stats = BLASTER_STATS[blasterTier];
                 var justFired = shootCooldown > stats.cooldown - 0.06;
-                var bodyColor = blasterTier >= 3 ? "#ff69b4" : "#2a3a66";
-                var barrelLength = 8 + blasterTier * 2;
-                var barrelEnd = 9 + barrelLength;
+                var anchor = getPackEmitterAnchor(visual);
+                var pulse = 0.55 + Math.sin(elapsed * 9) * 0.2;
 
                 ctx.save();
-                ctx.translate(68, 48);
-
-                // grip, angled down-back so the silhouette reads as an "L", not a rod
-                ctx.fillStyle = "#141a2c";
-                ctx.fillRect(-6, 0, 5, 11);
-
-                // main body block
-                ctx.fillStyle = bodyColor;
-                ctx.fillRect(-6, -6, 16, 7);
-
-                // sight nub on top breaks up the outline
-                ctx.fillStyle = "#141a2c";
-                ctx.fillRect(-2, -9, 4, 3);
-
-                // short, wide barrel (kept stubby so it can't read as a shaft)
-                ctx.fillStyle = bodyColor;
-                ctx.fillRect(9, -4, barrelLength, 5);
-
-                // muzzle accent cap
-                ctx.fillStyle = "#58f5df";
-                ctx.fillRect(barrelEnd - 3, -4, 4, 5);
-
-                // top highlight for a touch of shading
-                ctx.fillStyle = "rgba(255, 255, 255, 0.22)";
-                ctx.fillRect(-6, -6, 16, 2);
+                ctx.translate(anchor.x, anchor.y);
+                ctx.globalAlpha = pulse;
+                ctx.fillStyle = stats.color;
+                ctx.shadowColor = stats.color;
+                ctx.shadowBlur = 7;
+                ctx.fillRect(-1, -2, 3, 4);
 
                 if (justFired) {
-                    ctx.globalAlpha = 0.85;
+                    ctx.globalAlpha = 0.34;
+                    ctx.beginPath();
+                    ctx.arc(0, 0, 11 + blasterTier * 2, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.globalAlpha = 0.92;
                     ctx.fillStyle = "#eafff9";
                     ctx.beginPath();
-                    ctx.arc(barrelEnd + 2, -2, 7, 0, Math.PI * 2);
+                    ctx.arc(0, 0, 4 + blasterTier, 0, Math.PI * 2);
                     ctx.fill();
                 }
                 ctx.restore();
@@ -3916,12 +6290,31 @@
             function drawBolts() {
                 bolts.forEach(function (bolt) {
                     ctx.save();
+                    if (bolt.trail && bolt.trail.length > 1) {
+                        ctx.globalAlpha = 0.42;
+                        ctx.strokeStyle = bolt.color;
+                        ctx.lineWidth = Math.max(2, bolt.size * 0.55);
+                        ctx.lineCap = "round";
+                        ctx.beginPath();
+                        bolt.trail.forEach(function (point, index) {
+                            if (index === 0) {
+                                ctx.moveTo(point.x, point.y);
+                            } else {
+                                ctx.lineTo(point.x, point.y);
+                            }
+                        });
+                        ctx.lineTo(bolt.x, bolt.y);
+                        ctx.stroke();
+                    }
+                    ctx.globalAlpha = 1;
                     ctx.fillStyle = bolt.color;
                     ctx.shadowColor = bolt.color;
                     ctx.shadowBlur = 6;
                     var width = 10 + bolt.size;
                     var height = bolt.size;
-                    ctx.fillRect(Math.round(bolt.x - width / 2), Math.round(bolt.y - height / 2), width, height);
+                    ctx.translate(Math.round(bolt.x), Math.round(bolt.y));
+                    ctx.rotate(Math.atan2(bolt.vy, bolt.vx));
+                    ctx.fillRect(-width / 2, -height / 2, width, height);
                     ctx.restore();
                 });
             }
@@ -3943,6 +6336,29 @@
             function updateHud() {
                 shardCount.textContent = collected;
                 scoreDisplay.textContent = formatScore(score);
+                if (overworldPreview) {
+                    var overworldZones = [
+                        "LANDING FLATS",
+                        "DRAS OUTPOST",
+                        "COREWORKS THRESHOLD"
+                    ];
+                    var overworldRoomIndex = Math.max(
+                        0,
+                        Math.min(
+                            SCREEN_COUNT - 1,
+                            Math.floor((player.x + 56) / WIDTH)
+                        )
+                    );
+                    zoneNameDisplay.textContent = overworldZones[overworldRoomIndex];
+                    blasterStatusDisplay.textContent = "STANDBY";
+                    blasterStatusDisplay.style.color = "";
+                    heartsDisplay.textContent = dialogueHasPlayed
+                        ? "PORTAL // " + (portalCharge >= 1 ? "ONLINE" : "CHARGING")
+                        : "SURFACE // STABLE";
+                    timerDisplay.textContent = "UNTIMED";
+                    timerDisplay.classList.remove("is-low");
+                    return;
+                }
                 var zoneNames = ["FOUNDRY", "REFINERY", "BIOLAB", "UPLINK"];
                 var roomIndex = Math.max(
                     0,
@@ -4005,7 +6421,7 @@
                     backgroundMusic &&
                     !backgroundMusic.paused &&
                     soundOn &&
-                    state === "running"
+                    (state === "running" || dialogueActive)
                 ) {
                     resumeMusicAfterFocus = true;
                 }
@@ -4020,7 +6436,12 @@
 
             function resumeAudioAfterFocusGain() {
                 if (document.visibilityState === "hidden") return;
-                if (audioContext && soundOn && state === "running" && audioContext.state === "suspended") {
+                if (
+                    audioContext &&
+                    soundOn &&
+                    (state === "running" || dialogueActive) &&
+                    audioContext.state === "suspended"
+                ) {
                     var resumedAudio = audioContext.resume();
                     if (resumedAudio && typeof resumedAudio.catch === "function") {
                         resumedAudio.catch(function () {});
@@ -4028,7 +6449,7 @@
                 }
                 if (!resumeMusicAfterFocus) return;
                 resumeMusicAfterFocus = false;
-                if (soundOn && state === "running") {
+                if (soundOn && (state === "running" || dialogueActive)) {
                     playBackgroundMusic();
                 }
             }
@@ -4071,7 +6492,7 @@
             }
 
             function setControl(control, pressed) {
-                if (state === "paused") return;
+                if (state === "paused" || dialogueActive) return;
                 if (control === "jump") {
                     keys.jump = pressed;
                     if (pressed) queueJump();
@@ -4158,6 +6579,45 @@
 
             window.addEventListener("keydown", function (event) {
                 if (
+                    !titleScreen.hidden &&
+                    state === "ready" &&
+                    (event.code === "Enter" || event.code === "Space")
+                ) {
+                    event.preventDefault();
+                    if (!event.repeat) activateTitleAction();
+                    return;
+                }
+                if (dialogueActive) {
+                    if (
+                        event.code === "Enter" ||
+                        event.code === "Space" ||
+                        event.code === "Escape" ||
+                        event.code === "Tab"
+                    ) {
+                        event.preventDefault();
+                    }
+                    if (event.repeat) return;
+                    if (event.code === "Enter" || event.code === "Space") {
+                        if (!dialogueSkipOpen) advanceArrivalDialogue();
+                    } else if (event.code === "Escape") {
+                        if (dialogueSkipOpen) {
+                            closeDialogueSkipConfirmation();
+                        } else {
+                            openDialogueSkipConfirmation();
+                        }
+                    } else if (event.code === "Tab") {
+                        var focusable = dialogueSkipOpen
+                            ? [dialogueReturn, dialogueSkipScene]
+                            : [dialogueContinue, dialogueSkip];
+                        var focusIndex = focusable.indexOf(document.activeElement);
+                        var nextIndex = event.shiftKey
+                            ? (focusIndex <= 0 ? focusable.length - 1 : focusIndex - 1)
+                            : (focusIndex + 1) % focusable.length;
+                        focusable[nextIndex].focus();
+                    }
+                    return;
+                }
+                if (
                     event.code === "ArrowLeft" ||
                     event.code === "ArrowRight" ||
                     event.code === "ArrowUp" ||
@@ -4179,6 +6639,7 @@
             });
 
             window.addEventListener("keyup", function (event) {
+                if (dialogueActive) return;
                 if (event.code === "ArrowLeft" || event.code === "KeyA") setControl("left", false);
                 if (event.code === "ArrowRight" || event.code === "KeyD") setControl("right", false);
                 if (event.code === "ArrowDown") setControl("down", false);
@@ -4310,8 +6771,24 @@
                 });
             });
 
-            titleStartButton.addEventListener("click", startGame);
-            startButton.addEventListener("click", startGame);
+            titleStartButton.addEventListener("click", activateTitleAction);
+            startButton.addEventListener("click", function () {
+                if (startButton.dataset.overworldEnter === "true") {
+                    window.location.href =
+                        window.location.pathname +
+                        (episodeOneRun
+                            ? "?episode=01&stage=foundry&autostart=1"
+                            : "?preview=foundry-expansion");
+                    return;
+                }
+                startGame();
+            });
+            dialogueContinue.addEventListener("click", advanceArrivalDialogue);
+            dialogueSkip.addEventListener("click", openDialogueSkipConfirmation);
+            dialogueReturn.addEventListener("click", closeDialogueSkipConfirmation);
+            dialogueSkipScene.addEventListener("click", function () {
+                finishArrivalDialogue(true);
+            });
             startOverButton.addEventListener("click", function () {
                 playBackgroundMusic();
                 resetGame(true);

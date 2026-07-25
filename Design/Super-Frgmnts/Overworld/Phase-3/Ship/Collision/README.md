@@ -5,6 +5,13 @@ prop in the overworld. It does not modify the live game.
 
 Revision 3A.1 was approved on July 25, 2026.
 
+Revision 3F supersedes the visible-gangway treatment in the local overworld
+preview. The illustrated stairs and deployment behavior have been removed.
+The same forgiving ascent is retained as small, invisible one-way collision
+steps fitted to the painted slope of the ship. The hull remains conquerable
+without placing generic platform artwork over the ship design. A repulsor lift
+remains a possible later mechanic rather than part of this pass.
+
 Approaching the ship from Aryn's proposed spawn deploys a telescoping
 three-tread gangway. The forgiving route continues across a boarding deck,
 dorsal step, and cockpit perch. A near-limit running jump can skip directly

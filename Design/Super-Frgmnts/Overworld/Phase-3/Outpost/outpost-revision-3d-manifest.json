@@ -1,0 +1,72 @@
+{
+  "revision": "3D",
+  "status": "approved-production",
+  "anchors_local_plate_2": {
+    "dras": {
+      "x": 280,
+      "feet_y": 744
+    },
+    "zones": {
+      "arrival_runway": [
+        0,
+        560,
+        152,
+        744
+      ],
+      "first_contact": [
+        152,
+        560,
+        496,
+        744
+      ],
+      "camp_placeholder": [
+        428,
+        596,
+        772,
+        744
+      ],
+      "credit_terminal": [
+        1232,
+        586,
+        1468,
+        744
+      ],
+      "east_release": [
+        1468,
+        560,
+        1672,
+        744
+      ],
+      "walk_lane": [
+        0,
+        670,
+        1672,
+        744
+      ]
+    }
+  },
+  "first_visit": {
+    "trigger": "automatic after grounded camera settle",
+    "simulation": "paused",
+    "controls": "suppressed",
+    "dialogue_direction": "field-relay"
+  },
+  "return_visit": {
+    "trigger": "manual TALK prompt",
+    "npc_collision": "non-solid"
+  },
+  "reviews": {
+    "map": "/Users/rylee/Projects/outsidetheworld/Design/Super-Frgmnts/Overworld/Phase-3/Outpost/Reviews/outpost-blocking-map-v1.png",
+    "desktop_sequence": "/Users/rylee/Projects/outsidetheworld/Design/Super-Frgmnts/Overworld/Phase-3/Outpost/Reviews/outpost-desktop-sequence-v1.png",
+    "mobile_sequence": "/Users/rylee/Projects/outsidetheworld/Design/Super-Frgmnts/Overworld/Phase-3/Outpost/Reviews/outpost-mobile-sequence-v1.png",
+    "contact_sheet": "/Users/rylee/Projects/outsidetheworld/Design/Super-Frgmnts/Overworld/Phase-3/Outpost/Reviews/outpost-blocking-contact-sheet-v1.png"
+  },
+  "scope": {
+    "live_game_modified": true,
+    "integrated": true,
+    "deployed": true,
+    "committed": true,
+    "camp_art_final": false,
+    "terminal_behavior_final": false
+  }
+}

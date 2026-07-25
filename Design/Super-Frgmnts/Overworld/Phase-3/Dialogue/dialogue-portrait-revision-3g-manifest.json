@@ -1,0 +1,39 @@
+{
+  "revision": "3G",
+  "status": "approved-production",
+  "portrait_set": {
+    "aryn": {
+      "identity_authority": "../Aryn/Assets/aryn-command-rest-master-v1.png",
+      "prompt": "aryn-dialogue-portrait-prompt-v2.txt",
+      "chroma_source": "Raw/aryn-dialogue-portrait-chroma-v2.png",
+      "alpha_master": "Assets/aryn-dialogue-portrait-v2.png",
+      "runtime": "Assets/aryn-dialogue-portrait-runtime-v2.png"
+    },
+    "dras": {
+      "identity_authority": "../Dras/Raw/dras-identity-crop-v1.png",
+      "prompt": "dras-dialogue-portrait-prompt-v2.txt",
+      "chroma_source": "Raw/dras-dialogue-portrait-chroma-v2.png",
+      "alpha_master": "Assets/dras-dialogue-portrait-v2.png",
+      "runtime": "Assets/dras-dialogue-portrait-runtime-v2.png"
+    },
+    "generated_size": [1254, 1254],
+    "padded_master_size": [1318, 1318],
+    "runtime_size": [512, 512],
+    "generation_path": "built-in ImageGen with local chroma-key removal"
+  },
+  "dras_world_alignment": {
+    "physics_ground_y": 744,
+    "player_physics_height": 100,
+    "player_draw_height": 112,
+    "visible_boot_y": 756,
+    "dras_draw_top_y": 644,
+    "dras_draw_height": 112
+  },
+  "scope": {
+    "live_game_modified": true,
+    "integrated": true,
+    "committed": true,
+    "deployed": true,
+    "preview_route": "super_frgmnts.html?preview=overworld&scene=dialogue"
+  }
+}
