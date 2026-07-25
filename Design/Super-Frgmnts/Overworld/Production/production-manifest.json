@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "status": "phase-2b-production-landscape",
+  "target_plate": {
+    "width": 1672,
+    "height": 941,
+    "ground_y": 744
+  },
+  "world": {
+    "width": 5016,
+    "height": 941,
+    "plate_count": 3,
+    "seams_x": [
+      1672,
+      3344
+    ]
+  },
+  "seam_harmonization_width": 128,
+  "plates": [
+    {
+      "id": "landing_flats",
+      "name": "Landing Flats",
+      "raw": "Raw/landing-flats-raw-v1.png",
+      "output": "Plates/overworld-landing-flats-v1.png",
+      "source_ground_y": 792,
+      "target_ground_y": 744,
+      "vertical_shift": -48
+    },
+    {
+      "id": "dras_outpost",
+      "name": "Dras Outpost",
+      "raw": "Raw/dras-outpost-raw-v1.png",
+      "output": "Plates/overworld-dras-outpost-v1.png",
+      "source_ground_y": 792,
+      "target_ground_y": 744,
+      "vertical_shift": -48
+    },
+    {
+      "id": "coreworks_threshold",
+      "name": "Coreworks Threshold",
+      "raw": "Raw/coreworks-threshold-raw-v1.png",
+      "output": "Plates/overworld-coreworks-threshold-v1.png",
+      "source_ground_y": 765,
+      "target_ground_y": 744,
+      "vertical_shift": -21
+    }
+  ],
+  "outputs": {
+    "master": "overworld-production-master-v1.png",
+    "contact_sheet": "overworld-production-contact-sheet-v1.png",
+    "seam_audit": "overworld-production-seam-audit-v1.png"
+  },
+  "generation": {
+    "mode": "built-in-image-generation",
+    "prompt_file": "production-prompts-v1.txt",
+    "composition_reference": "../overworld-color-script-v1.png",
+    "style_reference": "../../../Images/Builder/signal-foundry-bg.png"
+  }
+}

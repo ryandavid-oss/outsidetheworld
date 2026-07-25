@@ -56,6 +56,25 @@ art passes at the exact plate dimensions.
 prompt. The composition guide and existing Foundry background were supplied as
 composition and style references respectively.
 
+### Phase 2B production landscape
+
+The approved color script was resolved into three exact production plates in
+`Production/`:
+
+- Landing Flats;
+- Dras Outpost;
+- Coreworks Threshold.
+
+The production builder aligns every walkable surface to y=744, applies
+color-only seam harmonization, exports the continuous 5,016 × 941 master, and
+regenerates the three exact 1,672 × 941 plate files. The raw built-in
+image-generation results and complete prompt set remain beside the outputs for
+reproducibility.
+
+Phase 2B is not wired into the live game. Runtime integration waits until the
+static landscape receives visual approval and the Phase 3 overlay assets are
+prepared.
+
 ## Phase 3 — hero props and characters
 
 - isolate Aryn's ship as a transparent overlay;
