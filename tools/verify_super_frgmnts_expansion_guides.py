@@ -112,9 +112,19 @@ def main() -> int:
 
     width = int(number(game_source, r"var WIDTH = (\d+);", "WIDTH"))
     height = int(number(game_source, r"var HEIGHT = (\d+);", "HEIGHT"))
-    ground_y = int(number(game_source, r"var GROUND_Y = (\d+);", "GROUND_Y"))
+    ground_y = int(
+        number(
+            game_source,
+            r"var GROUND_Y = expansionPreview \? \d+ : (\d+);",
+            "GROUND_Y",
+        )
+    )
     deepworks_y = int(
-        number(game_source, r"var deepworksRooms = .*?y: (\d+),", "Deepworks y")
+        number(
+            game_source,
+            r"var deepworksY = expansionPreview \? \d+ : (\d+);",
+            "Deepworks y",
+        )
     )
     velocity = number(
         game_source,

@@ -1368,19 +1368,84 @@
         (function () {
             "use strict";
 
+            var previewParameters = new URLSearchParams(window.location.search);
             var expansionPreview =
-                new URLSearchParams(window.location.search).get("preview") === "foundry-expansion";
+                previewParameters.get("preview") === "foundry-expansion";
+            var previewRoomBlueprints = [
+                {
+                    zone: "FOUNDRY",
+                    lowerKey: "background0",
+                    expanded: true,
+                    mirror: false,
+                    tint: "rgba(88, 245, 223, 0.025)"
+                },
+                {
+                    zone: "FOUNDRY",
+                    lowerKey: "background0",
+                    expanded: true,
+                    mirror: true,
+                    tint: "rgba(255, 105, 180, 0.035)"
+                },
+                {
+                    zone: "REFINERY",
+                    lowerKey: "background1",
+                    expanded: false,
+                    mirror: false,
+                    tint: "rgba(255, 211, 108, 0.055)"
+                },
+                {
+                    zone: "REFINERY",
+                    lowerKey: "background1",
+                    expanded: false,
+                    mirror: true,
+                    tint: "rgba(195, 143, 160, 0.05)"
+                },
+                {
+                    zone: "BIOLAB",
+                    lowerKey: "background2",
+                    expanded: false,
+                    mirror: false,
+                    tint: "rgba(75, 227, 110, 0.045)"
+                },
+                {
+                    zone: "BIOLAB",
+                    lowerKey: "background2",
+                    expanded: false,
+                    mirror: true,
+                    tint: "rgba(88, 245, 223, 0.045)"
+                },
+                {
+                    zone: "UPLINK",
+                    lowerKey: "background3",
+                    expanded: false,
+                    mirror: false,
+                    tint: "rgba(119, 163, 255, 0.055)"
+                },
+                {
+                    zone: "UPLINK",
+                    lowerKey: "background3",
+                    expanded: false,
+                    mirror: true,
+                    tint: "rgba(155, 89, 182, 0.055)"
+                }
+            ];
             var WIDTH = 1672;
             var HEIGHT = 941;
             var WORLD_HEIGHT = expansionPreview ? 1882 : HEIGHT;
-            var SCREEN_COUNT = expansionPreview ? 1 : 4;
+            var SCREEN_COUNT = expansionPreview ? previewRoomBlueprints.length : 4;
             var WORLD_WIDTH = WIDTH * SCREEN_COUNT;
+            var requestedPreviewRoom = parseInt(previewParameters.get("room") || "0", 10);
+            var previewStartRoom = expansionPreview && Number.isFinite(requestedPreviewRoom)
+                ? Math.max(0, Math.min(SCREEN_COUNT - 1, requestedPreviewRoom))
+                : 0;
+            var previewStartUpper =
+                expansionPreview && previewParameters.get("layer") === "upper";
             var viewWidth = WIDTH;
             var portraitMode = false;
             // The walkable plane is the top lip of the background's concrete deck.
             var GROUND_Y = expansionPreview ? 1604 : 663;
-            var START_TIME = expansionPreview ? 300 : 105;
-            var TOTAL_SHARDS = 12;
+            var START_TIME = expansionPreview ? 480 : 105;
+            var TOTAL_SHARDS = expansionPreview ? 0 : 12;
             var MAX_HITS = 5;
             var BLASTER_TIERS = [3, 7, 12];
             var BLASTER_STATS = {
@@ -1414,21 +1479,21 @@
             var directionPad = document.getElementById("directionPad");
 
             if (expansionPreview) {
-                document.title = "SUPER FRGMNTS // Foundry Expansion Preview";
+                document.title = "SUPER FRGMNTS // Unified World Preview";
                 document.body.classList.add("is-expansion-preview");
                 document.querySelector(".eyebrow").textContent =
-                    "Prototype // Foundry Vertical Expansion";
+                    "Level 01 // Unified World Layout";
                 document.querySelector(".title-screen__hero").innerHTML =
-                    "Signal Ranger // <strong>Aryn Sol-Mavi</strong> // Expansion Preview";
+                    "Signal Ranger // <strong>Aryn Sol-Mavi</strong> // Traversal Survey";
                 document.querySelector(".title-screen__hint").textContent =
-                    "Explore upward // Down drops through catwalks // Space jumps // Ctrl fires";
+                    "Eight plates // Three traversal layers // Down drops // Space jumps";
                 document.querySelector(".mission strong").textContent =
-                    "ARYN SOL-MAVI // EXPLORE";
-                document.querySelector(".mission span").lastChild.textContent =
-                    "/12 → PROTOTYPE SUMMIT";
+                    "ARYN SOL-MAVI // SURVEY";
+                document.querySelector(".mission span").textContent =
+                    "8 PLATES → UPLINK GATE";
                 document.querySelector(".stage-wrap").setAttribute(
                     "aria-label",
-                    "Super Frgmnts Foundry expansion preview"
+                    "Super Frgmnts unified world layout preview"
                 );
             }
 
@@ -1446,10 +1511,11 @@
                 crouch: loadImage("/Images/Builder/signal-ranger-crouch.png", "high")
             };
 
+            assets.background1 = loadImage("/Images/Game/signal-foundry-refinery.png", "low");
+            assets.background2 = loadImage("/Images/Game/signal-foundry-biolab.png", "low");
+            assets.background3 = loadImage("/Images/Game/signal-foundry-uplink.png", "low");
+
             if (!expansionPreview) {
-                assets.background1 = loadImage("/Images/Game/signal-foundry-refinery.png", "low");
-                assets.background2 = loadImage("/Images/Game/signal-foundry-biolab.png", "low");
-                assets.background3 = loadImage("/Images/Game/signal-foundry-uplink.png", "low");
                 assets.crawler = loadImage("/Images/Game/enemy-crawler-ridge-skitter.png", "low");
                 assets.flyer = loadImage("/Images/Game/enemy-flyer-spore-wisp.png", "low");
                 assets.walker = loadImage("/Images/Game/enemy-walker-clacker-beetle.png", "low");
@@ -1554,73 +1620,101 @@
                     {
                         x: 0,
                         y: GROUND_Y,
-                        width: WIDTH,
+                        width: WORLD_WIDTH,
                         height: WORLD_HEIGHT - GROUND_Y,
                         ground: true
-                    },
-                    // Lower Foundry ascent: five deliberate jumps, with one moving transfer.
-                    {
-                        x: 318, y: 1508, width: 204, height: 18,
-                        previewRoute: true, theme: "cyan"
-                    },
-                    {
-                        x: 632, y: 1384, width: 188, height: 28,
-                        previewRoute: true, theme: "rose"
-                    },
-                    {
-                        x: 850,
-                        y: 1256,
-                        width: 192,
-                        height: 30,
-                        previewRoute: true,
-                        theme: "gold",
-                        motion: { axis: "x", range: 160, speed: 0.68, phase: 0 }
-                    },
-                    {
-                        x: 1050, y: 1128, width: 220, height: 20,
-                        previewRoute: true, theme: "blue"
-                    },
-                    {
-                        x: 1230, y: 1021, width: 220, height: 26,
-                        previewRoute: true, theme: "violet"
-                    },
-
-                    // These collision surfaces follow the catwalks already painted into the upper plate.
-                    { x: 150, y: 891, width: 615, height: 24, artIntegrated: true },
-                    { x: 856, y: 891, width: 590, height: 24, artIntegrated: true },
-                    { x: 0, y: 600, width: 646, height: 24, artIntegrated: true },
-                    { x: 976, y: 600, width: 696, height: 24, artIntegrated: true },
-                    { x: 20, y: 338, width: 593, height: 24, artIntegrated: true },
-                    { x: 747, y: 338, width: 127, height: 24, artIntegrated: true },
-                    { x: 1004, y: 338, width: 644, height: 24, artIntegrated: true },
-
-                    // Sparse side-ledges bridge the large vertical voids between architectural decks.
-                    {
-                        x: 1360, y: 765, width: 260, height: 18,
-                        previewRoute: true, theme: "rose"
-                    },
-                    {
-                        x: 1070, y: 637, width: 240, height: 30,
-                        previewRoute: true, theme: "blue"
-                    },
-                    {
-                        x: 1240, y: 469, width: 240, height: 20,
-                        previewRoute: true, theme: "cyan"
-                    },
-                    {
-                        x: 715,
-                        y: 600,
-                        width: 210,
-                        height: 28,
-                        previewRoute: true,
-                        theme: "gold",
-                        motion: { axis: "x", range: 150, speed: 0.58, phase: Math.PI }
-                    },
-                    {
-                        x: 1392, y: 210, width: 280, height: 32,
-                        previewRoute: true, theme: "violet"
                     }
                 ];
+
+                var themeSets = [
+                    ["cyan", "rose", "gold", "blue", "violet"],
+                    ["gold", "rose", "blue", "cyan", "violet"],
+                    ["green", "cyan", "violet", "rose", "gold"],
+                    ["violet", "blue", "cyan", "rose", "gold"]
+                ];
+                var lowerRoute = [
+                    { x: 318, y: 1508, width: 204, height: 18, themeIndex: 0 },
+                    { x: 632, y: 1384, width: 188, height: 28, themeIndex: 1 },
+                    { x: 850, y: 1256, width: 192, height: 30, themeIndex: 2, lowerMover: true },
+                    { x: 1050, y: 1128, width: 220, height: 20, themeIndex: 3 },
+                    { x: 1230, y: 1021, width: 220, height: 26, themeIndex: 4 }
+                ];
+                var paintedCatwalks = [
+                    { x: 150, y: 891, width: 615, height: 24 },
+                    { x: 856, y: 891, width: 590, height: 24 },
+                    { x: 0, y: 600, width: 646, height: 24 },
+                    { x: 976, y: 600, width: 696, height: 24 },
+                    { x: 20, y: 338, width: 593, height: 24 },
+                    { x: 747, y: 338, width: 127, height: 24 },
+                    { x: 1004, y: 338, width: 644, height: 24 }
+                ];
+                var upperTransfers = [
+                    { x: 1360, y: 765, width: 260, height: 18, themeIndex: 1 },
+                    { x: 1070, y: 637, width: 240, height: 30, themeIndex: 3 },
+                    { x: 1240, y: 469, width: 240, height: 20, themeIndex: 0 },
+                    { x: 715, y: 600, width: 210, height: 28, themeIndex: 2, midMover: true },
+                    { x: 1392, y: 210, width: 280, height: 32, themeIndex: 4 }
+                ];
+
+                function localX(spec, mirrored) {
+                    return mirrored ? WIDTH - spec.x - spec.width : spec.x;
+                }
+
+                function addRuntimePlatform(roomIndex, mirrored, spec, themes) {
+                    var platform = {
+                        x: roomIndex * WIDTH + localX(spec, mirrored),
+                        y: spec.y,
+                        width: spec.width,
+                        height: spec.height,
+                        previewRoute: true,
+                        previewRoom: roomIndex,
+                        theme: themes[spec.themeIndex]
+                    };
+
+                    if (spec.lowerMover && roomIndex % 2 === 0) {
+                        platform.motion = {
+                            axis: "x",
+                            range: 160,
+                            speed: 0.62 + roomIndex * 0.018,
+                            phase: mirrored ? Math.PI : 0
+                        };
+                    }
+                    if (spec.midMover && roomIndex % 2 === 1) {
+                        platform.motion = {
+                            axis: "x",
+                            range: 150,
+                            speed: 0.54 + roomIndex * 0.016,
+                            phase: mirrored ? 0 : Math.PI
+                        };
+                    }
+                    previewPlatforms.push(platform);
+                }
+
+                previewRoomBlueprints.forEach(function (blueprint, roomIndex) {
+                    var mirrored = blueprint.mirror;
+                    var zoneIndex = Math.floor(roomIndex / 2);
+                    var themes = themeSets[zoneIndex];
+
+                    lowerRoute.forEach(function (spec) {
+                        addRuntimePlatform(roomIndex, mirrored, spec, themes);
+                    });
+
+                    paintedCatwalks.forEach(function (spec) {
+                        previewPlatforms.push({
+                            x: roomIndex * WIDTH + localX(spec, mirrored),
+                            y: spec.y,
+                            width: spec.width,
+                            height: spec.height,
+                            artIntegrated: true,
+                            previewRoom: roomIndex
+                        });
+                    });
+
+                    upperTransfers.forEach(function (spec) {
+                        addRuntimePlatform(roomIndex, mirrored, spec, themes);
+                    });
+                });
+
                 return previewPlatforms;
             }
 
@@ -1631,14 +1725,20 @@
             var deepworksRooms = Array.from({ length: SCREEN_COUNT }, function (_, roomIndex) {
                 var roomStart = roomIndex * WIDTH;
                 var deepworksY = expansionPreview ? 1816 : 875;
+                var mirrored = expansionPreview &&
+                    previewRoomBlueprints[roomIndex] &&
+                    previewRoomBlueprints[roomIndex].mirror;
+                var corridorX = mirrored ? WIDTH - 258 - 866 : 258;
+                var entryLeft = mirrored ? WIDTH - 1082 : 300;
+                var entryRight = mirrored ? WIDTH - 300 : 1082;
                 return {
                     roomIndex: roomIndex,
-                    x: roomStart + 258,
+                    x: roomStart + corridorX,
                     y: deepworksY,
                     width: 866,
                     height: WORLD_HEIGHT - deepworksY,
-                    entryLeft: roomStart + 300,
-                    entryRight: roomStart + 1082,
+                    entryLeft: roomStart + entryLeft,
+                    entryRight: roomStart + entryRight,
                     deepworks: true
                 };
             });
@@ -1657,7 +1757,12 @@
             var uplink = { x: WORLD_WIDTH - 126, y: GROUND_Y - 128, width: 68, height: 128 };
             if (expansionPreview) {
                 hazards = [];
-                uplink = { x: 1488, y: 82, width: 68, height: 128 };
+                uplink = {
+                    x: (SCREEN_COUNT - 1) * WIDTH + 116,
+                    y: 82,
+                    width: 68,
+                    height: 128
+                };
             }
 
             function loadImage(source, priority) {
@@ -1723,7 +1828,7 @@
             })).then(function () {
                 state = "ready";
                 titleStartButton.disabled = false;
-                titleStartButton.textContent = expansionPreview ? "Start preview" : "Start run";
+                titleStartButton.textContent = expansionPreview ? "Start world preview" : "Start run";
                 draw();
             });
 
@@ -1742,8 +1847,22 @@
                 landPoseTime = 0;
                 invulnerableTime = 0;
                 flashTime = 0;
-                cameraX = 0;
-                cameraY = expansionPreview ? WORLD_HEIGHT - HEIGHT : 0;
+                var previewRoomMirror =
+                    previewRoomBlueprints[previewStartRoom] &&
+                    previewRoomBlueprints[previewStartRoom].mirror;
+                var previewSpawnX = previewStartUpper
+                    ? previewStartRoom * WIDTH + (previewRoomMirror ? 116 : 1488)
+                    : previewStartRoom > 0
+                        ? previewStartRoom * WIDTH + Math.round(WIDTH * 0.42)
+                        : 82;
+                cameraX = expansionPreview
+                    ? Math.max(0, Math.min(WORLD_WIDTH - viewWidth, previewSpawnX - viewWidth * 0.38))
+                    : 0;
+                cameraY = expansionPreview
+                    ? previewStartUpper
+                        ? 0
+                        : WORLD_HEIGHT - HEIGHT
+                    : 0;
                 cameraAnchor = 0.3;
                 cameraLookAhead = 0;
                 cameraFacing = 1;
@@ -1763,8 +1882,8 @@
                 deepworksPromptTimer = 0;
                 resetDirectionPad();
                 resetPlatformMotion();
-                player.x = 82;
-                player.y = GROUND_Y - 100;
+                player.x = expansionPreview ? previewSpawnX : 82;
+                player.y = previewStartUpper ? 110 : GROUND_Y - 100;
                 player.vx = 0;
                 player.vy = 0;
                 player.facing = 1;
@@ -1785,20 +1904,7 @@
                     makeShard(WORLD_WIDTH - 312, 606, "#58f5df")
                 ];
                 if (expansionPreview) {
-                    shards = [
-                        makeShard(430, 1454, "#58f5df"),
-                        makeShard(728, 1330, "#ffd36c"),
-                        makeShard(952, 1202, "#ff69b4"),
-                        makeShard(1160, 1074, "#58f5df"),
-                        makeShard(1328, 967, "#ffd36c"),
-                        makeShard(1320, 840, "#ff69b4"),
-                        makeShard(1490, 714, "#58f5df"),
-                        makeShard(1160, 548, "#ffd36c"),
-                        makeShard(1380, 421, "#ff69b4"),
-                        makeShard(1140, 292, "#58f5df"),
-                        makeShard(820, 292, "#ffd36c"),
-                        makeShard(1510, 158, "#ff69b4")
-                    ];
+                    shards = [];
                 }
                 heartPickups = [
                     makeHeartPickup(842, 818),
@@ -1806,10 +1912,7 @@
                     makeHeartPickup(WIDTH * 3 + 842, 818)
                 ];
                 if (expansionPreview) {
-                    heartPickups = [
-                        makeHeartPickup(330, 840),
-                        makeHeartPickup(280, 548)
-                    ];
+                    heartPickups = [];
                 }
                 enemies = [
                     makeEnemy("crawler", 890, GROUND_Y, 780, 1035, 132),
@@ -1837,12 +1940,12 @@
                     titleStartButton.textContent = state === "loading"
                         ? "Loading signal…"
                         : expansionPreview
-                            ? "Start preview"
+                            ? "Start world preview"
                             : "Start run";
                 } else {
                     announce(
                         expansionPreview
-                            ? "Foundry expansion preview started. Twelve Signal Shards remain."
+                            ? "Unified world traversal survey started. Reach the Uplink Gate."
                             : "Run started. Twelve Signal Shards remain."
                     );
                     playTone(260, 0.08, "square", 0.035);
@@ -1956,7 +2059,7 @@
                 messageKicker.textContent = "Transmission Hold // Player Pause";
                 messageTitle.textContent = "Paused";
                 messageCopy.textContent = expansionPreview
-                    ? "The Foundry expansion preview is holding your position."
+                    ? "The unified world survey is holding your position."
                     : "The Shard Foundry is holding your position.";
                 startButton.textContent = "Resume";
                 startButton.disabled = false;
@@ -2618,13 +2721,13 @@
                 score += timeBonus + Math.max(0, (MAX_HITS - hits) * 300);
                 updateHud();
                 messageKicker.textContent = expansionPreview
-                    ? "Prototype Route // Traversal Complete"
+                    ? "World Survey // Traversal Complete"
                     : "Transmission from Fleet // Success";
-                messageTitle.textContent = expansionPreview ? "Summit Reached" : "Level Complete";
+                messageTitle.textContent = expansionPreview ? "Survey Complete" : "Level Complete";
                 messageCopy.textContent = expansionPreview
-                    ? "Aryn completed the Foundry expansion route. This remains a development preview."
+                    ? "Aryn crossed all eight plates and reached the Uplink Gate. World population comes next."
                     : "Recovery of essential inventory is complete. Prepare for the next portal.";
-                startButton.textContent = expansionPreview ? "Replay Preview" : "Next Level";
+                startButton.textContent = expansionPreview ? "Replay World" : "Next Level";
                 startButton.disabled = !expansionPreview;
                 if (expansionPreview) {
                     startButton.removeAttribute("title");
@@ -2745,20 +2848,139 @@
                 }
             }
 
+            function drawBackgroundLayer(
+                image,
+                sourceX,
+                sourceY,
+                sourceWidth,
+                sourceHeight,
+                destinationX,
+                destinationY,
+                destinationWidth,
+                destinationHeight,
+                mirrored
+            ) {
+                if (!image || !image.complete || !image.naturalWidth) return false;
+
+                ctx.save();
+                if (mirrored) {
+                    ctx.translate(destinationX + destinationWidth, 0);
+                    ctx.scale(-1, 1);
+                    destinationX = 0;
+                }
+                ctx.drawImage(
+                    image,
+                    sourceX,
+                    sourceY,
+                    sourceWidth,
+                    sourceHeight,
+                    destinationX,
+                    destinationY,
+                    destinationWidth,
+                    destinationHeight
+                );
+                ctx.restore();
+                return true;
+            }
+
+            function drawExpansionPreviewRoom(room) {
+                var blueprint = previewRoomBlueprints[room];
+                var roomX = Math.round(room * WIDTH - cameraX);
+                var roomY = -Math.round(cameraY);
+                var expandedBackground = assets.background0;
+
+                if (blueprint.expanded) {
+                    drawBackgroundLayer(
+                        expandedBackground,
+                        0,
+                        0,
+                        expandedBackground.naturalWidth || WIDTH,
+                        expandedBackground.naturalHeight || WORLD_HEIGHT,
+                        roomX,
+                        roomY,
+                        WIDTH,
+                        WORLD_HEIGHT,
+                        blueprint.mirror
+                    );
+                } else {
+                    drawBackgroundLayer(
+                        expandedBackground,
+                        0,
+                        0,
+                        WIDTH,
+                        HEIGHT,
+                        roomX,
+                        roomY,
+                        WIDTH,
+                        HEIGHT,
+                        blueprint.mirror
+                    );
+
+                    var lowerBackground = assets[blueprint.lowerKey];
+                    var lowerDrawn = drawBackgroundLayer(
+                        lowerBackground,
+                        0,
+                        0,
+                        lowerBackground && lowerBackground.naturalWidth
+                            ? lowerBackground.naturalWidth
+                            : WIDTH,
+                        lowerBackground && lowerBackground.naturalHeight
+                            ? lowerBackground.naturalHeight
+                            : HEIGHT,
+                        roomX,
+                        HEIGHT + roomY,
+                        WIDTH,
+                        HEIGHT,
+                        blueprint.mirror
+                    );
+
+                    if (!lowerDrawn) {
+                        drawBackgroundLayer(
+                            expandedBackground,
+                            0,
+                            HEIGHT,
+                            WIDTH,
+                            HEIGHT,
+                            roomX,
+                            HEIGHT + roomY,
+                            WIDTH,
+                            HEIGHT,
+                            blueprint.mirror
+                        );
+                    }
+
+                    var blendY = HEIGHT + roomY;
+                    var blend = ctx.createLinearGradient(0, blendY - 72, 0, blendY + 72);
+                    blend.addColorStop(0, "rgba(3, 5, 13, 0)");
+                    blend.addColorStop(0.48, "rgba(3, 5, 13, 0.34)");
+                    blend.addColorStop(0.52, "rgba(3, 5, 13, 0.34)");
+                    blend.addColorStop(1, "rgba(3, 5, 13, 0)");
+                    ctx.fillStyle = blend;
+                    ctx.fillRect(roomX, blendY - 72, WIDTH, 144);
+                }
+
+                ctx.fillStyle = blueprint.tint;
+                ctx.fillRect(roomX, roomY, WIDTH, WORLD_HEIGHT);
+            }
+
             function drawBackgroundRooms() {
                 var firstRoom = Math.max(0, Math.floor(cameraX / WIDTH));
                 var lastRoom = Math.min(SCREEN_COUNT - 1, Math.ceil((cameraX + viewWidth) / WIDTH));
 
                 for (var room = firstRoom; room <= lastRoom; room += 1) {
-                    var background = assets["background" + room];
-                    if (background && background.complete && background.naturalWidth) {
-                        ctx.drawImage(
-                            background,
-                            Math.round(room * WIDTH - cameraX),
-                            -Math.round(cameraY),
-                            WIDTH,
-                            WORLD_HEIGHT
-                        );
+                    if (expansionPreview) {
+                        drawExpansionPreviewRoom(room);
+                    } else {
+                        var background = assets["background" + room];
+                        if (background && background.complete && background.naturalWidth) {
+                            ctx.drawImage(
+                                background,
+                                Math.round(room * WIDTH - cameraX),
+                                -Math.round(cameraY),
+                                WIDTH,
+                                WORLD_HEIGHT
+                            );
+                        }
                     }
                 }
 
@@ -2866,11 +3088,27 @@
                         insetA: "#211736",
                         insetB: "#2b1d43",
                         edge: "#765fa1"
+                    },
+                    green: {
+                        accent: "#78d96b",
+                        shell: "#07170d",
+                        rim: "#447548",
+                        body: "#1c3d24",
+                        panel: "#2b5633",
+                        insetA: "#102919",
+                        insetB: "#173620",
+                        edge: "#5e8e61"
                     }
                 };
 
                 platforms.slice(1).forEach(function (platform, index) {
                     if (platform.artIntegrated) return;
+                    if (
+                        platform.x + platform.width < cameraX - 220 ||
+                        platform.x > cameraX + viewWidth + 220
+                    ) {
+                        return;
+                    }
                     var roomIndex = Math.max(0, Math.min(
                         SCREEN_COUNT - 1,
                         Math.floor((platform.x + platform.width / 2) / WIDTH)
@@ -3435,12 +3673,14 @@
                 shardCount.textContent = collected;
                 scoreDisplay.textContent = formatScore(score);
                 var zoneNames = ["FOUNDRY", "REFINERY", "BIOLAB", "UPLINK"];
-                var zoneIndex = Math.max(0, Math.min(SCREEN_COUNT - 1, Math.floor((player.x + 56) / WIDTH)));
+                var roomIndex = Math.max(
+                    0,
+                    Math.min(SCREEN_COUNT - 1, Math.floor((player.x + 56) / WIDTH))
+                );
+                var zoneIndex = expansionPreview ? Math.floor(roomIndex / 2) : roomIndex;
                 zoneNameDisplay.textContent = inDeepworks
                     ? "DEEPWORKS"
-                    : expansionPreview
-                        ? "EXPANDED FOUNDRY"
-                        : zoneNames[zoneIndex];
+                    : zoneNames[zoneIndex];
                 heartsDisplay.textContent = Array.from({ length: MAX_HITS }, function (_, index) {
                     return index < MAX_HITS - hits ? "♥" : "·";
                 }).join(" ");

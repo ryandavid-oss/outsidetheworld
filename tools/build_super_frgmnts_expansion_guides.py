@@ -150,11 +150,17 @@ def read_game_contract() -> dict[str, float | int]:
     return {
         "width": int(extract_number(source, r"var WIDTH = (\d+);", "WIDTH")),
         "height": int(extract_number(source, r"var HEIGHT = (\d+);", "HEIGHT")),
-        "ground_y": int(extract_number(source, r"var GROUND_Y = (\d+);", "GROUND_Y")),
+        "ground_y": int(
+            extract_number(
+                source,
+                r"var GROUND_Y = expansionPreview \? \d+ : (\d+);",
+                "GROUND_Y",
+            )
+        ),
         "deepworks_y": int(
             extract_number(
                 source,
-                r"var deepworksRooms = .*?y: (\d+),",
+                r"var deepworksY = expansionPreview \? \d+ : (\d+);",
                 "Deepworks y",
             )
         ),
