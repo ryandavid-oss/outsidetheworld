@@ -1,0 +1,358 @@
+{
+  "version": 2,
+  "status": "phase-1-composition-blueprint",
+  "scene": {
+    "id": "coreworks_overworld",
+    "name": "Coreworks Overworld",
+    "purpose": "Untimed prologue and persistent recovery hub before The Shard Foundry"
+  },
+  "coordinate_system": {
+    "origin": "top-left",
+    "units": "pixels",
+    "world_width": 5016,
+    "world_height": 941,
+    "plate_width": 1672,
+    "plate_height": 941,
+    "plate_seams_x": [
+      1672,
+      3344
+    ],
+    "ground_y": 744,
+    "player_draw_width": 112,
+    "player_draw_height": 112
+  },
+  "plates": [
+    {
+      "id": "landing_flats",
+      "name": "Landing Flats",
+      "x": 0,
+      "width": 1672,
+      "story_function": "Solitary arrival, Aryn's ship, safe movement, and the first voluntary journey into the world"
+    },
+    {
+      "id": "dras_outpost",
+      "name": "Dras Outpost",
+      "x": 1672,
+      "width": 1672,
+      "story_function": "Discovery of Dras Ehdre, his lived-in base camp, the abandoned exchange, and the human cost of the collapse"
+    },
+    {
+      "id": "coreworks_threshold",
+      "name": "Coreworks Threshold",
+      "x": 3344,
+      "width": 1672,
+      "story_function": "Failed atmospheric infrastructure, volcanic threat, and the Coreworks portal"
+    }
+  ],
+  "camera": {
+    "viewport_width": 1672,
+    "viewport_height": 941,
+    "min_x": 0,
+    "max_x": 3344,
+    "vertical_pan": false,
+    "notes": "The overworld is intentionally one screen high. The camera scrolls horizontally across one continuous panorama."
+  },
+  "collision": [
+    {
+      "id": "desert_floor",
+      "type": "solid",
+      "x": 64,
+      "y": 744,
+      "width": 4888,
+      "height": 197,
+      "art_contract": "Continuous walkable desert and buried freight-road surface"
+    },
+    {
+      "id": "tutorial_rock",
+      "type": "solid",
+      "x": 1376,
+      "y": 680,
+      "width": 168,
+      "height": 64,
+      "art_contract": "Single harmless jump-sized rock or broken freight slab"
+    },
+    {
+      "id": "left_world_bound",
+      "type": "invisible-wall",
+      "x": 48,
+      "y": 0,
+      "width": 16,
+      "height": 941
+    },
+    {
+      "id": "right_world_bound",
+      "type": "invisible-wall",
+      "x": 4952,
+      "y": 0,
+      "width": 16,
+      "height": 941
+    }
+  ],
+  "anchors": [
+    {
+      "id": "aryn_ship",
+      "label": "Aryn's ship",
+      "role": "decorative-overlay",
+      "x": 176,
+      "y": 392,
+      "width": 792,
+      "height": 344,
+      "z_layer": "hero-props",
+      "notes": "Separate transparent asset. Brightest cyan landmark on Plate 1."
+    },
+    {
+      "id": "aryn_spawn",
+      "label": "Aryn Sol-Mavi",
+      "role": "player-spawn",
+      "x": 1000,
+      "y": 632,
+      "width": 112,
+      "height": 112,
+      "z_layer": "actors"
+    },
+    {
+      "id": "dras_ehdre",
+      "label": "Dras Ehdre",
+      "role": "npc",
+      "x": 1952,
+      "y": 640,
+      "width": 96,
+      "height": 104,
+      "z_layer": "actors",
+      "notes": "He is beyond the starting viewport. Aryn must leave the ship and jog into Plate 2 before discovering him."
+    },
+    {
+      "id": "dras_camp",
+      "label": "Dras's camp",
+      "role": "decorative-prop-cluster",
+      "x": 2100,
+      "y": 610,
+      "width": 344,
+      "height": 134,
+      "z_layer": "hero-props",
+      "notes": "Patched awning, folding chair, kettle, tool case, radio, and Coreworks-part wind chime."
+    },
+    {
+      "id": "credit_terminal",
+      "label": "Abandoned credit terminal",
+      "role": "future-interactive",
+      "x": 2960,
+      "y": 600,
+      "width": 180,
+      "height": 144,
+      "z_layer": "hero-props"
+    },
+    {
+      "id": "atmosphere_tower",
+      "label": "Failed atmosphere tower",
+      "role": "narrative-landmark",
+      "x": 3784,
+      "y": 356,
+      "width": 230,
+      "height": 388,
+      "z_layer": "midground-ruins"
+    },
+    {
+      "id": "coreworks_portal",
+      "label": "Coreworks portal",
+      "role": "scene-exit",
+      "x": 4640,
+      "y": 432,
+      "width": 288,
+      "height": 312,
+      "z_layer": "hero-props",
+      "notes": "Brightest cyan-green landmark on Plate 3. Entering it starts the eight-minute level timer."
+    },
+    {
+      "id": "vesper_volcano",
+      "label": "Vesper volcano",
+      "role": "far-background-landmark",
+      "x": 3900,
+      "y": 170,
+      "width": 700,
+      "height": 480,
+      "z_layer": "far-mountains",
+      "notes": "Orange crater glow with an unnatural cyan underglow tied to the Resonant."
+    }
+  ],
+  "interaction_zones": [
+    {
+      "id": "dras_dialogue",
+      "type": "proximity-dialogue",
+      "x": 1824,
+      "y": 560,
+      "width": 344,
+      "height": 184,
+      "prompt": "Talk to Dras",
+      "skippable": true
+    },
+    {
+      "id": "credit_terminal_future",
+      "type": "future-shop",
+      "x": 2904,
+      "y": 544,
+      "width": 292,
+      "height": 200,
+      "enabled_in_phase": false
+    },
+    {
+      "id": "portal_transition",
+      "type": "scene-transition",
+      "x": 4712,
+      "y": 520,
+      "width": 152,
+      "height": 224,
+      "destination": "The Shard Foundry",
+      "starts_timer_seconds": 480
+    }
+  ],
+  "parallax_layers": [
+    {
+      "id": "sky",
+      "factor": 0.0,
+      "art": "Indigo-to-dusty-rose dusk gradient with sparse stars"
+    },
+    {
+      "id": "clouds_far",
+      "factor": 0.06,
+      "art": "Long, very faint high-altitude wisps"
+    },
+    {
+      "id": "mountains_far",
+      "factor": 0.12,
+      "art": "Continuous mountain range and volcano silhouette"
+    },
+    {
+      "id": "clouds_near",
+      "factor": 0.18,
+      "art": "Two restrained illuminated cloud ribbons"
+    },
+    {
+      "id": "mountains_near",
+      "factor": 0.24,
+      "art": "Closer eroded ridges and Vesperite fault glints"
+    },
+    {
+      "id": "decayed_infrastructure",
+      "factor": 0.42,
+      "art": "Collapsed viaduct, leaning towers, broken cables, and sand-buried worker housing"
+    },
+    {
+      "id": "ground",
+      "factor": 1.0,
+      "art": "Playable desert, buried freight road, rocks, and sparse hardy vegetation"
+    },
+    {
+      "id": "foreground_atmosphere",
+      "factor": 1.06,
+      "art": "Dust ribbons, heat shimmer, and occasional windblown debris"
+    }
+  ],
+  "ambient_motion": [
+    {
+      "id": "cloud_wisps",
+      "implementation": "Three transparent sprites moving at different speeds",
+      "intensity": "quiet"
+    },
+    {
+      "id": "volcanic_plume",
+      "implementation": "Slow smoke drift with rare orange and cyan crater pulses",
+      "intensity": "ominous"
+    },
+    {
+      "id": "desert_wind",
+      "implementation": "Sparse dust ribbons and subtle foreground vegetation movement",
+      "intensity": "quiet"
+    },
+    {
+      "id": "dras_idle",
+      "implementation": "Scarf and coat movement, amber probe flicker, blink, and occasional glance",
+      "intensity": "character"
+    },
+    {
+      "id": "ship_idle",
+      "implementation": "Cyan core breathing light and restrained magenta navigation blink",
+      "intensity": "character"
+    },
+    {
+      "id": "camp_life",
+      "implementation": "Worker banner, wind chime, kettle vapor, and radio-static pulse",
+      "intensity": "charm"
+    }
+  ],
+  "story_beats": [
+    {
+      "order": 1,
+      "x": 1000,
+      "beat": "Aryn arrives beside her ship. The scene is safe and untimed."
+    },
+    {
+      "order": 2,
+      "x": 1376,
+      "beat": "A single low obstacle quietly confirms movement and jumping while the empty horizon invites Aryn to continue right."
+    },
+    {
+      "order": 3,
+      "x": 1952,
+      "beat": "After leaving the landing site, Aryn discovers Dras and his base camp. He explains Vesperite, the infestation, the abandoned workforce, and the Coreworks."
+    },
+    {
+      "order": 4,
+      "x": 2960,
+      "beat": "The abandoned exchange makes the economic collapse visible before it is described as a game system."
+    },
+    {
+      "order": 5,
+      "x": 3784,
+      "beat": "Failed atmospheric infrastructure foreshadows the toxic timer."
+    },
+    {
+      "order": 6,
+      "x": 4712,
+      "beat": "Aryn enters the Coreworks portal; the eight-minute mission begins."
+    }
+  ],
+  "art_contract": {
+    "master_panorama": {
+      "width": 5016,
+      "height": 941,
+      "instruction": "Create as one continuous panorama before splitting at x=1672 and x=3344."
+    },
+    "split_rule": "No foreground hero prop or interaction zone may straddle x=1672 or x=3344. Mountains, sky, clouds, and distant ruins may cross both seams continuously.",
+    "separate_transparent_assets": [
+      "Aryn's ship",
+      "Dras Ehdre",
+      "Dras's camp accents",
+      "credit terminal",
+      "Coreworks portal",
+      "cloud wisps",
+      "volcanic smoke",
+      "dust ribbons"
+    ],
+    "palette": {
+      "sky": [
+        "#070B22",
+        "#171A3B",
+        "#6B385B",
+        "#B66A5A"
+      ],
+      "desert": [
+        "#2A1830",
+        "#5B3444",
+        "#8A4D48",
+        "#C47A56"
+      ],
+      "technology": [
+        "#4BF3E2",
+        "#2A9FC7",
+        "#E84EAD",
+        "#F1B85B"
+      ],
+      "danger": [
+        "#F07545",
+        "#B93A55",
+        "#62E0D2"
+      ]
+    }
+  }
+}
