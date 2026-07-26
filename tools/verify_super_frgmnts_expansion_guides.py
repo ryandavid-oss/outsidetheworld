@@ -115,15 +115,15 @@ def main() -> int:
     ground_y = int(
         number(
             game_source,
-            r"var GROUND_Y = expansionPreview \? \d+ : (\d+);",
-            "GROUND_Y",
+            r"var GROUND_Y = overworldPreview \? \d+ : expansionPreview \? (\d+) : \d+;",
+            "expanded GROUND_Y",
         )
     )
     deepworks_y = int(
         number(
             game_source,
-            r"var deepworksY = expansionPreview \? \d+ : (\d+);",
-            "Deepworks y",
+            r"var deepworksY = expansionPreview \? (\d+) : \d+;",
+            "expanded Deepworks y",
         )
     )
     velocity = number(
@@ -139,9 +139,9 @@ def main() -> int:
     )
 
     check((width, height) == (PLATE_WIDTH, PLATE_HEIGHT), "live game and plate dimensions differ")
-    check(anchors["concrete_deck_y"] == PLATE_HEIGHT + ground_y, "deck coordinate is not direct")
+    check(anchors["concrete_deck_y"] == ground_y, "deck coordinate is not direct")
     check(
-        anchors["deepworks_floor_y"] == PLATE_HEIGHT + deepworks_y,
+        anchors["deepworks_floor_y"] == deepworks_y,
         "Deepworks coordinate is not direct",
     )
     check(anchors["concrete_deck_y"] == 1604, "expected concrete deck y=1604")

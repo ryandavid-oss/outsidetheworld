@@ -54,6 +54,16 @@ than repetitions of the shared provisional route:
 - The Foundry prototype includes activation feedback, sound, and an
   accessibility announcement. Timer awards remain deferred until the timing
   rule is approved.
+- Restoring the Foundry station now produces a room-scale response: conduit
+  energy resumes, service lamps illuminate, a ventilation rotor restarts, and
+  the contaminated haze gains a restrained clean-air glow.
+- The Foundry/Refinery containment field remains physically closed until the
+  restart completes. It then powers down over a short mechanical beat, updates
+  the mission objective to **REFINERY ACCESS // OPEN**, and permits traversal
+  into the third plate.
+- This establishes the repeatable two-plate objective cadence:
+  **enter zone → learn its traversal → find its stabilizer → restore the
+  environment → unlock the next zone**.
 - The current timing candidate is a four-minute initial reserve plus two
   minutes per restored stabilizer; this is intentionally not wired into the
   runtime yet.

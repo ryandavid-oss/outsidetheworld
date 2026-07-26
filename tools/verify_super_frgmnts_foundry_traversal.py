@@ -47,15 +47,27 @@ def main() -> None:
         ": sharedLowerRoute.concat(sharedUpperTransfers);",
         "paintedCatwalks.forEach",
         "runtimeRoute.forEach",
-        "var atmosphericStabilizers = expansionPreview",
+        "function buildAtmosphericStabilizers()",
+        "var atmosphericStabilizers = buildAtmosphericStabilizers();",
+        "atmosphericStabilizers = buildAtmosphericStabilizers();",
         'previewParameters.get("stabilizer") === "1"',
+        'previewParameters.get("gate") === "1"',
+        'previewParameters.get("restored") === "1"',
         'id: "foundry-atmospheric-stabilizer"',
         "function activateNearbyAtmosphericStabilizer()",
         "function updateAtmosphericStabilizers(delta)",
         "function drawAtmosphericStabilizers()",
+        "function drawFoundryRestorationSystems()",
+        "function constrainFoundryGateMovement(previousPlayerX)",
+        "function foundryGateIsOpen()",
+        "drawFoundryRestorationSystems();",
         "drawAtmosphericStabilizers();",
         "updateAtmosphericStabilizers(delta);",
         "if (activateNearbyAtmosphericStabilizer())",
+        'canvas.dataset.stabilizerState',
+        'canvas.dataset.refineryGate',
+        '"REFINERY ACCESS // OPEN"',
+        '"REFINERY ROUTE // OPEN"',
     )
     for contract in runtime_contracts:
         require(contract in source, f"Missing Foundry traversal contract: {contract}")
@@ -112,6 +124,8 @@ def main() -> None:
         "Foundry Freight Shaft",
         "175 × 100 world-pixel",
         "2.35-second restart sequence",
+        "Foundry/Refinery containment field",
+        "enter zone → learn its traversal",
         "four-minute initial reserve plus two",
         "intentionally not wired into the runtime yet",
     )
@@ -128,6 +142,8 @@ def main() -> None:
     print("- later zones retain their provisional shared traversal")
     print("- the first two-plate zone ends at an interactive stabilizer")
     print("- matched dormant/active alpha artwork crossfades over 2.35 seconds")
+    print("- restored Foundry machinery and conduit lighting respond room-wide")
+    print("- the Refinery route remains gated until restoration completes")
     print("- three later stabilizer stations remain reserved")
     print("- timer awards remain deliberately unimplemented")
     print(f"- hardest rise {max(mandatory_rises):.0f}px / jump apex {jump_apex:.1f}px")

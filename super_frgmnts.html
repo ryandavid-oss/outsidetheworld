@@ -2175,8 +2175,17 @@
                 previewParameters.get("preview") === "foundry-expansion" ||
                 (episodeOneRun && episodeStage === "foundry");
             var stabilizerTrial =
+                !episodeOneRun &&
                 expansionPreview &&
                 previewParameters.get("stabilizer") === "1";
+            var foundryGateTrial =
+                !episodeOneRun &&
+                expansionPreview &&
+                previewParameters.get("gate") === "1";
+            var restoredStabilizerTrial =
+                !episodeOneRun &&
+                expansionPreview &&
+                previewParameters.get("restored") === "1";
             var surfaceCrawlerTrial =
                 !episodeOneRun &&
                 expansionPreview &&
@@ -2254,7 +2263,7 @@
                     : 4;
             var WORLD_WIDTH = WIDTH * SCREEN_COUNT;
             var requestedPreviewRoom = parseInt(previewParameters.get("room") || "0", 10);
-            var previewStartRoom = stabilizerTrial
+            var previewStartRoom = stabilizerTrial || foundryGateTrial
                 ? 1
                 : expansionPreview && Number.isFinite(requestedPreviewRoom)
                     ? Math.max(0, Math.min(SCREEN_COUNT - 1, requestedPreviewRoom))
@@ -2563,16 +2572,14 @@
                 "/Images/Game/Super-Frgmnts/veyra-camp-dog-walk-sheet-v2.png",
                 "high"
             );
-            if (expansionPreview) {
-                assets.stabilizerDormant = loadImage(
-                    "/Images/Game/Super-Frgmnts/atmospheric-stabilizer-dormant-v1.png",
-                    "high"
-                );
-                assets.stabilizerActive = loadImage(
-                    "/Images/Game/Super-Frgmnts/atmospheric-stabilizer-active-v1.png",
-                    "high"
-                );
-            }
+            assets.stabilizerDormant = loadImage(
+                "/Images/Game/Super-Frgmnts/atmospheric-stabilizer-dormant-v1.png",
+                expansionPreview ? "high" : "low"
+            );
+            assets.stabilizerActive = loadImage(
+                "/Images/Game/Super-Frgmnts/atmospheric-stabilizer-active-v1.png",
+                expansionPreview ? "high" : "low"
+            );
 
             function applySceneAssets() {
                 if (overworldPreview) {
@@ -3268,8 +3275,13 @@
                 { x: WIDTH * 3 + 1110, y: GROUND_Y - 15, width: 82, height: 18, phase: 1.9 }
             ];
             var STABILIZER_ACTIVATION_DURATION = 2.35;
-            var atmosphericStabilizers = expansionPreview
-                ? [
+            var FOUNDRY_REFINERY_GATE_X = WIDTH * 2;
+            var FOUNDRY_GATE_OPEN_DURATION = 1.25;
+
+            function buildAtmosphericStabilizers() {
+                if (!expansionPreview) return [];
+
+                return [
                     {
                         id: "foundry-atmospheric-stabilizer",
                         roomIndex: 1,
@@ -3281,8 +3293,12 @@
                         activating: false,
                         activationElapsed: 0
                     }
-                ]
-                : [];
+                ];
+            }
+
+            var atmosphericStabilizers = buildAtmosphericStabilizers();
+            var foundryGateOpenElapsed = 0;
+            var foundryGateAnnounced = false;
             var uplink = { x: WORLD_WIDTH - 126, y: GROUND_Y - 128, width: 68, height: 128 };
             if (overworldPreview) {
                 hazards = [];
@@ -3648,7 +3664,9 @@
                         : arrivalDialoguePreview
                         ? DRAS_WORLD_X - 160
                         : OVERWORLD_SHIP_SPAWN_X
-                    : stabilizerTrial
+                    : foundryGateTrial
+                        ? FOUNDRY_REFINERY_GATE_X - 240
+                        : stabilizerTrial
                         ? WIDTH + 1110
                         : surfaceCrawlerTrial
                         ? 1000
@@ -3687,6 +3705,23 @@
                     stabilizer.activating = false;
                     stabilizer.activationElapsed = 0;
                 });
+                foundryGateOpenElapsed = 0;
+                foundryGateAnnounced = false;
+                if (restoredStabilizerTrial) {
+                    atmosphericStabilizers.forEach(function (stabilizer) {
+                        stabilizer.active = true;
+                        stabilizer.activationElapsed =
+                            STABILIZER_ACTIVATION_DURATION;
+                    });
+                    foundryGateOpenElapsed = FOUNDRY_GATE_OPEN_DURATION;
+                    foundryGateAnnounced = true;
+                }
+                if (expansionPreview) {
+                    document.querySelector(".mission span").textContent =
+                        restoredStabilizerTrial
+                            ? "REFINERY ACCESS // OPEN"
+                            : "RESTORE FOUNDRY ATMOSPHERE";
+                }
                 resetDirectionPad();
                 resetPlatformMotion();
                 var surfaceTrialPlatform = surfaceCrawlerTrial
@@ -4114,6 +4149,7 @@
                     ? buildOverworldPlatforms()
                     : buildExpansionPreviewPlatforms();
                 deepworksRooms = buildDeepworksRooms();
+                atmosphericStabilizers = buildAtmosphericStabilizers();
                 hazards = [];
                 uplink = isOverworld
                     ? {
@@ -4505,6 +4541,48 @@
                 player.supportPlatform = null;
             }
 
+            function findFoundryAtmosphericStabilizer() {
+                return atmosphericStabilizers.find(function (stabilizer) {
+                    return stabilizer.id === "foundry-atmospheric-stabilizer";
+                }) || null;
+            }
+
+            function foundryGateProgress() {
+                return Math.max(
+                    0,
+                    Math.min(
+                        1,
+                        foundryGateOpenElapsed / FOUNDRY_GATE_OPEN_DURATION
+                    )
+                );
+            }
+
+            function foundryGateIsOpen() {
+                return foundryGateProgress() >= 0.98;
+            }
+
+            function constrainFoundryGateMovement(previousPlayerX) {
+                if (!expansionPreview || foundryGateIsOpen()) return;
+
+                var previousCenter = previousPlayerX + 56;
+                var currentBodyLeft = player.x + 34;
+                var currentBodyRight = player.x + 78;
+
+                if (
+                    previousCenter < FOUNDRY_REFINERY_GATE_X &&
+                    currentBodyRight > FOUNDRY_REFINERY_GATE_X - 18
+                ) {
+                    player.x = FOUNDRY_REFINERY_GATE_X - 96;
+                    player.vx = Math.min(0, player.vx);
+                } else if (
+                    previousCenter > FOUNDRY_REFINERY_GATE_X &&
+                    currentBodyLeft < FOUNDRY_REFINERY_GATE_X + 18
+                ) {
+                    player.x = FOUNDRY_REFINERY_GATE_X - 16;
+                    player.vx = Math.max(0, player.vx);
+                }
+            }
+
             function findNearbyAtmosphericStabilizer() {
                 if (!expansionPreview || !player.onGround) return null;
 
@@ -4654,6 +4732,53 @@
                     playTone(448, 0.2, "square", 0.022, 0.17);
                     announce("Foundry atmospheric stabilizer online.");
                 });
+
+                var foundryStabilizer = findFoundryAtmosphericStabilizer();
+                canvas.dataset.stabilizerState = !foundryStabilizer
+                    ? "absent"
+                    : foundryStabilizer.active
+                        ? "active"
+                        : foundryStabilizer.activating
+                            ? "activating"
+                            : "dormant";
+                canvas.dataset.refineryGate = foundryGateIsOpen()
+                    ? "open"
+                    : foundryStabilizer && foundryStabilizer.active
+                        ? "opening"
+                        : "locked";
+                if (!foundryStabilizer || !foundryStabilizer.active) {
+                    foundryGateOpenElapsed = 0;
+                    return;
+                }
+
+                foundryGateOpenElapsed = Math.min(
+                    FOUNDRY_GATE_OPEN_DURATION,
+                    foundryGateOpenElapsed + delta
+                );
+                if (!foundryGateIsOpen() || foundryGateAnnounced) return;
+
+                foundryGateAnnounced = true;
+                document.querySelector(".mission span").textContent =
+                    "REFINERY ACCESS // OPEN";
+                popups.push({
+                    x: FOUNDRY_REFINERY_GATE_X - 92,
+                    y: GROUND_Y - 214,
+                    text: "REFINERY ROUTE // OPEN",
+                    life: 2.2,
+                    color: "#ffd36c"
+                });
+                spawnDust(
+                    FOUNDRY_REFINERY_GATE_X - 20,
+                    GROUND_Y - 30,
+                    "#ffd36c",
+                    22
+                );
+                playTone(188, 0.1, "square", 0.025);
+                playTone(282, 0.14, "square", 0.024, 0.07);
+                playTone(564, 0.22, "square", 0.022, 0.16);
+                announce(
+                    "Foundry atmosphere restored. Refinery access is now open."
+                );
             }
 
             function update(delta) {
@@ -4752,6 +4877,7 @@
                 player.vy = Math.min(player.vy, 1050);
 
                 var oldBottom = player.y + 100;
+                var previousPlayerX = player.x;
                 player.x += player.vx * delta;
                 var playerMinimumX = overworldPreview ? 14 : -18;
                 var playerMaximumX = overworldPreview
@@ -4761,6 +4887,7 @@
                     playerMinimumX,
                     Math.min(playerMaximumX, player.x)
                 );
+                constrainFoundryGateMovement(previousPlayerX);
                 if (inDeepworks && deepworksRoom) {
                     player.x = Math.max(
                         deepworksRoom.x - 34,
@@ -5518,6 +5645,7 @@
                 drawAtmosphere();
                 ctx.save();
                 ctx.translate(-Math.round(cameraX), -Math.round(cameraY));
+                drawFoundryRestorationSystems();
                 drawDeepworksPrompt();
                 drawPlatforms();
                 drawAtmosphericStabilizers();
@@ -6509,8 +6637,328 @@
                 return progress * progress * (3 - 2 * progress);
             }
 
-            function drawAtmosphericStabilizers() {
+            function drawFoundryRestorationSystems() {
                 if (!expansionPreview) return;
+
+                var stabilizer = findFoundryAtmosphericStabilizer();
+                var restoration = stabilizer
+                    ? atmosphericStabilizerProgress(stabilizer)
+                    : 0;
+                var gateProgress = foundryGateProgress();
+                var roomEndX = FOUNDRY_REFINERY_GATE_X;
+                var gateTop = 110;
+                var gateBottom = GROUND_Y;
+                var gateFieldAlpha = Math.max(0, 1 - gateProgress);
+                var flow = (elapsed * 150) % 180;
+
+                ctx.save();
+
+                if (restoration > 0.01) {
+                    var cleanAir = ctx.createLinearGradient(
+                        WIDTH * 0.62,
+                        0,
+                        roomEndX,
+                        0
+                    );
+                    cleanAir.addColorStop(0, "rgba(88, 245, 223, 0)");
+                    cleanAir.addColorStop(
+                        0.38,
+                        "rgba(88, 245, 223, " +
+                            (0.025 * restoration).toFixed(3) +
+                            ")"
+                    );
+                    cleanAir.addColorStop(
+                        0.76,
+                        "rgba(255, 105, 180, " +
+                            (0.045 * restoration).toFixed(3) +
+                            ")"
+                    );
+                    cleanAir.addColorStop(1, "rgba(255, 211, 108, 0)");
+                    ctx.fillStyle = cleanAir;
+                    ctx.fillRect(0, 0, roomEndX, GROUND_Y);
+                }
+
+                [258, 608].forEach(function (lampY, rowIndex) {
+                    for (
+                        var lampX = 148 + rowIndex * 92;
+                        lampX < roomEndX - 120;
+                        lampX += 286
+                    ) {
+                        ctx.globalAlpha = 0.28 + restoration * 0.72;
+                        ctx.fillStyle = "#101728";
+                        ctx.fillRect(lampX - 18, lampY - 7, 36, 14);
+                        ctx.fillStyle = restoration > 0.04
+                            ? rowIndex === 1
+                                ? "#ffd36c"
+                                : "#58f5df"
+                            : "#3a2940";
+                        ctx.fillRect(lampX - 10, lampY - 3, 20, 6);
+                        if (restoration > 0.04) {
+                            ctx.shadowColor = ctx.fillStyle;
+                            ctx.shadowBlur = 12 * restoration;
+                            ctx.globalAlpha = restoration * 0.9;
+                            ctx.fillRect(lampX - 5, lampY - 2, 10, 4);
+                            ctx.shadowBlur = 0;
+                        }
+                    }
+                });
+
+                ctx.globalAlpha = 0.6;
+                ctx.strokeStyle = "#16243b";
+                ctx.lineWidth = 9;
+                ctx.beginPath();
+                ctx.moveTo(74, GROUND_Y - 24);
+                ctx.lineTo(roomEndX - 22, GROUND_Y - 24);
+                ctx.stroke();
+
+                if (restoration > 0.02) {
+                    ctx.globalAlpha = 0.46 + restoration * 0.32;
+                    ctx.strokeStyle = "#58f5df";
+                    ctx.lineWidth = 3 + restoration * 2;
+                    ctx.setLineDash([52, 128]);
+                    ctx.lineDashOffset = -flow;
+                    ctx.beginPath();
+                    ctx.moveTo(74, GROUND_Y - 24);
+                    ctx.lineTo(roomEndX - 22, GROUND_Y - 24);
+                    ctx.stroke();
+                    ctx.setLineDash([]);
+
+                    [
+                        WIDTH + 110,
+                        WIDTH + 478,
+                        WIDTH + 890,
+                        WIDTH + 1138
+                    ].forEach(function (ventX, ventIndex) {
+                        var pool = ctx.createRadialGradient(
+                            ventX,
+                            GROUND_Y - 38,
+                            8,
+                            ventX,
+                            GROUND_Y - 38,
+                            94
+                        );
+                        pool.addColorStop(
+                            0,
+                            ventIndex % 2
+                                ? "rgba(255, 105, 180, 0.16)"
+                                : "rgba(88, 245, 223, 0.18)"
+                        );
+                        pool.addColorStop(1, "rgba(88, 245, 223, 0)");
+                        ctx.globalAlpha = restoration;
+                        ctx.fillStyle = pool;
+                        ctx.fillRect(
+                            ventX - 94,
+                            GROUND_Y - 132,
+                            188,
+                            132
+                        );
+
+                        ctx.globalAlpha = 0.1 + restoration * 0.13;
+                        ctx.fillStyle = ventIndex % 2 ? "#ff69b4" : "#58f5df";
+                        for (var wisp = 0; wisp < 3; wisp += 1) {
+                            var wispY =
+                                GROUND_Y - 48 -
+                                ((elapsed * (22 + wisp * 5) +
+                                    ventIndex * 37 +
+                                    wisp * 54) % 126);
+                            var wispX =
+                                ventX +
+                                Math.sin(
+                                    elapsed * 1.2 +
+                                    ventIndex +
+                                    wisp * 1.8
+                                ) * 16;
+                            ctx.beginPath();
+                            ctx.arc(wispX, wispY, 5 + wisp * 2, 0, Math.PI * 2);
+                            ctx.fill();
+                        }
+                    });
+                }
+
+                var rotorX = WIDTH + 656;
+                var rotorY = 360;
+                var rotorRadius = 88;
+                ctx.save();
+                ctx.translate(rotorX, rotorY);
+                ctx.globalAlpha = 0.34 + restoration * 0.2;
+                ctx.strokeStyle = "#31475e";
+                ctx.lineWidth = 12;
+                ctx.beginPath();
+                ctx.arc(0, 0, rotorRadius, 0, Math.PI * 2);
+                ctx.stroke();
+                ctx.strokeStyle = restoration > 0.02 ? "#58f5df" : "#3a2940";
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.arc(0, 0, rotorRadius - 13, 0, Math.PI * 2);
+                ctx.stroke();
+                ctx.rotate(restoration > 0.02 ? elapsed * 0.9 : 0.28);
+                ctx.fillStyle = restoration > 0.02
+                    ? "rgba(88, 245, 223, 0.3)"
+                    : "rgba(27, 38, 58, 0.72)";
+                for (var blade = 0; blade < 4; blade += 1) {
+                    ctx.rotate(Math.PI / 2);
+                    ctx.beginPath();
+                    ctx.moveTo(12, -10);
+                    ctx.lineTo(rotorRadius - 22, -24);
+                    ctx.lineTo(rotorRadius - 10, 8);
+                    ctx.lineTo(20, 14);
+                    ctx.closePath();
+                    ctx.fill();
+                }
+                ctx.fillStyle = "#101728";
+                ctx.beginPath();
+                ctx.arc(0, 0, 18, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.fillStyle = restoration > 0.02 ? "#ffd36c" : "#4a3543";
+                ctx.fillRect(-6, -6, 12, 12);
+                ctx.restore();
+
+                if (gateProgress > 0.01) {
+                    var openThreshold = ctx.createLinearGradient(
+                        FOUNDRY_REFINERY_GATE_X - 58,
+                        0,
+                        FOUNDRY_REFINERY_GATE_X + 58,
+                        0
+                    );
+                    openThreshold.addColorStop(0, "rgba(3, 5, 13, 0)");
+                    openThreshold.addColorStop(
+                        0.22,
+                        "rgba(3, 5, 13, " +
+                            (0.88 * gateProgress).toFixed(3) +
+                            ")"
+                    );
+                    openThreshold.addColorStop(
+                        0.78,
+                        "rgba(3, 5, 13, " +
+                            (0.88 * gateProgress).toFixed(3) +
+                            ")"
+                    );
+                    openThreshold.addColorStop(1, "rgba(3, 5, 13, 0)");
+                    ctx.fillStyle = openThreshold;
+                    ctx.fillRect(
+                        FOUNDRY_REFINERY_GATE_X - 58,
+                        gateTop + 20,
+                        116,
+                        gateBottom - gateTop - 42
+                    );
+                }
+
+                ctx.globalAlpha = 1 - gateProgress * 0.9;
+                ctx.fillStyle = "#080d19";
+                ctx.fillRect(
+                    FOUNDRY_REFINERY_GATE_X - 22,
+                    gateTop,
+                    44,
+                    gateBottom - gateTop
+                );
+                ctx.fillStyle = "#31415a";
+                ctx.fillRect(
+                    FOUNDRY_REFINERY_GATE_X - 20,
+                    gateTop,
+                    5,
+                    gateBottom - gateTop
+                );
+                ctx.fillRect(
+                    FOUNDRY_REFINERY_GATE_X + 15,
+                    gateTop,
+                    5,
+                    gateBottom - gateTop
+                );
+
+                if (gateFieldAlpha > 0.01) {
+                    var barrier = ctx.createLinearGradient(
+                        FOUNDRY_REFINERY_GATE_X - 18,
+                        0,
+                        FOUNDRY_REFINERY_GATE_X + 18,
+                        0
+                    );
+                    barrier.addColorStop(0, "rgba(255, 105, 180, 0)");
+                    barrier.addColorStop(
+                        0.5,
+                        "rgba(255, 105, 180, " +
+                            (0.48 * gateFieldAlpha).toFixed(3) +
+                            ")"
+                    );
+                    barrier.addColorStop(1, "rgba(255, 105, 180, 0)");
+                    ctx.fillStyle = barrier;
+                    ctx.fillRect(
+                        FOUNDRY_REFINERY_GATE_X - 42,
+                        gateTop + 36,
+                        84,
+                        gateBottom - gateTop - 72
+                    );
+                    ctx.globalAlpha = 0.55 + Math.sin(elapsed * 8) * 0.18;
+                    ctx.fillStyle = "#ff69b4";
+                    for (
+                        var fieldY = gateTop + 54;
+                        fieldY < gateBottom - 44;
+                        fieldY += 88
+                    ) {
+                        ctx.fillRect(
+                            FOUNDRY_REFINERY_GATE_X - 12,
+                            fieldY,
+                            24,
+                            4
+                        );
+                    }
+                }
+
+                ctx.globalAlpha = 1;
+                ctx.fillStyle = gateProgress >= 0.98 ? "#58f5df" : "#ff69b4";
+                ctx.shadowColor = ctx.fillStyle;
+                ctx.shadowBlur = gateProgress >= 0.98 ? 14 : 7;
+                ctx.fillRect(
+                    FOUNDRY_REFINERY_GATE_X - 7,
+                    gateTop + 16,
+                    14,
+                    14
+                );
+                ctx.shadowBlur = 0;
+                ctx.fillStyle = "#0b111e";
+                ctx.fillRect(
+                    FOUNDRY_REFINERY_GATE_X - 54,
+                    gateTop - 4,
+                    108,
+                    20
+                );
+                ctx.fillRect(
+                    FOUNDRY_REFINERY_GATE_X - 62,
+                    gateBottom - 22,
+                    124,
+                    22
+                );
+
+                if (
+                    gateProgress < 0.98 &&
+                    Math.abs(
+                        player.x + 56 - FOUNDRY_REFINERY_GATE_X
+                    ) < 430
+                ) {
+                    var gateLabelX = FOUNDRY_REFINERY_GATE_X + 152;
+                    var gateLabelY = GROUND_Y - 92;
+                    ctx.globalAlpha = 0.82 + Math.sin(elapsed * 4.8) * 0.12;
+                    ctx.fillStyle = "rgba(3, 5, 13, 0.84)";
+                    ctx.fillRect(gateLabelX - 142, gateLabelY - 22, 284, 31);
+                    ctx.font = "700 16px Fira Code, monospace";
+                    ctx.textAlign = "center";
+                    ctx.fillStyle = "#ff69b4";
+                    ctx.fillText(
+                        "REFINERY // ATMOSPHERE LOCK",
+                        gateLabelX,
+                        gateLabelY
+                    );
+                }
+                ctx.restore();
+            }
+
+            function drawAtmosphericStabilizers() {
+                if (
+                    !expansionPreview ||
+                    !imageHasPixels(assets.stabilizerDormant) ||
+                    !imageHasPixels(assets.stabilizerActive)
+                ) {
+                    return;
+                }
 
                 atmosphericStabilizers.forEach(function (stabilizer) {
                     if (
