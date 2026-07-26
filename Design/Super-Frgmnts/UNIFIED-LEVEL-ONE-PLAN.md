@@ -1,5 +1,10 @@
 # SUPER FRGMNTS // Unified Level 1 Plan
 
+> Platform baseline: all new systems and promotion reviews follow
+> [Platform Baseline 1](IOS-PORTABILITY-BASELINE.md), preserving the canonical
+> web game while keeping its runtime, content, and controls portable to a
+> future PWA and Capacitor/WKWebView iOS build.
+
 ## Locked world target
 
 - Canonical level: **The Shard Foundry**

@@ -1103,6 +1103,7 @@
             position: relative;
             width: 72px;
             height: 72px;
+            padding: 0;
             flex: 0 0 auto;
             overflow: hidden;
             border: 2px solid var(--brand-light-blue);
@@ -1114,12 +1115,25 @@
                 inset 0 0 20px rgba(99, 149, 238, 0.18);
             color: var(--brand-light-blue);
             cursor: grab;
+            appearance: none;
+            -webkit-appearance: none;
             outline: none;
             pointer-events: auto;
             touch-action: none;
             user-select: none;
+            -webkit-user-drag: none;
             -webkit-tap-highlight-color: transparent;
             -webkit-touch-callout: none;
+            -webkit-user-select: none;
+        }
+
+        .direction-pad *,
+        .direction-pad::before,
+        .direction-pad::after {
+            pointer-events: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+            -webkit-user-drag: none;
             -webkit-user-select: none;
         }
 
@@ -1253,9 +1267,32 @@
         }
 
         .action-controls {
+            position: relative;
             display: flex;
             align-items: center;
             gap: 8px;
+        }
+
+        .touch-key--weapon {
+            width: 54px;
+            border-color: var(--brand-gold);
+            color: var(--brand-gold);
+            font-size: 7px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            line-height: 1.15;
+            text-align: center;
+        }
+
+        .touch-key--weapon[hidden] {
+            display: none;
+        }
+
+        .touch-key--weapon strong {
+            display: block;
+            color: #fff;
+            font-size: 8px;
+            letter-spacing: 0.04em;
         }
 
         .touch-key--jump {
@@ -1643,6 +1680,24 @@
 
             .action-controls {
                 gap: 10px;
+            }
+
+            .touch-key--weapon {
+                position: absolute;
+                bottom: calc(100% + 9px);
+                left: 0;
+                width: 64px;
+                height: 32px;
+                border-color: var(--brand-gold);
+                border-radius: 16px;
+                background: rgba(39, 27, 6, 0.76);
+                color: var(--brand-gold);
+                font-size: 7px;
+                opacity: 0.94;
+            }
+
+            .touch-key--weapon strong {
+                font-size: 8px;
             }
 
             .touch-key {
@@ -2114,14 +2169,14 @@
                 <kbd>↓</kbd><span>drop</span>
                 <kbd>SPACE</kbd><span>jump</span>
                 <kbd>CTRL</kbd><span>blaster</span>
+                <kbd>V</kbd><span>switch</span>
                 <kbd>R</kbd><span>restart</span>
             </div>
             <div class="touch-controls" aria-label="Game controls">
-                <div
+                <button
                     class="direction-pad"
                     id="directionPad"
-                    role="group"
-                    tabindex="0"
+                    type="button"
                     aria-label="Directional stick. Drag left or right to move. Drag down to drop through catwalks or enter Deepworks."
                     aria-keyshortcuts="ArrowLeft ArrowRight ArrowDown"
                 >
@@ -2129,8 +2184,19 @@
                     <span class="direction-pad__marker direction-pad__marker--right" aria-hidden="true">▶</span>
                     <span class="direction-pad__marker direction-pad__marker--down" aria-hidden="true">▼</span>
                     <span class="direction-pad__knob" id="directionKnob" aria-hidden="true"></span>
-                </div>
+                </button>
                 <div class="action-controls">
+                    <button
+                        class="touch-key touch-key--weapon"
+                        id="weaponToggle"
+                        type="button"
+                        aria-label="Switch to heavy rifle"
+                        aria-keyshortcuts="V"
+                        hidden
+                    >
+                        MODE
+                        <strong id="weaponToggleMode">PACK</strong>
+                    </button>
                     <button class="touch-key touch-key--shoot" type="button" data-control="shoot" aria-label="Fire blaster">
                         <img
                             class="touch-key__icon touch-key__icon--shoot"
@@ -2186,8 +2252,12 @@
                 previewParameters.get("preview") === "foundry-expansion" ||
                 (episodeOneRun && episodeStage === "foundry");
             var episodeBetaRun = episodeOneRun && expansionPreview;
+            var episodeSurfaceReturn =
+                episodeOneRun &&
+                overworldPreview &&
+                previewParameters.get("return") === "1";
             var episodeArrivalTutorial =
-                episodeOneRun && overworldPreview;
+                episodeOneRun && overworldPreview && !episodeSurfaceReturn;
             var stabilizerTrial =
                 !episodeOneRun &&
                 expansionPreview &&
@@ -2467,6 +2537,10 @@
                     ? backgroundMusic.dataset.overworldTrack
                     : backgroundMusic.dataset.foundryTrack;
             var directionPad = document.getElementById("directionPad");
+            var weaponToggleButton =
+                document.getElementById("weaponToggle");
+            var weaponToggleMode =
+                document.getElementById("weaponToggleMode");
             var dialogueLayer = document.getElementById("dialogueLayer");
             var dialoguePanel = document.getElementById("dialoguePanel");
             var dialoguePortrait = document.getElementById("dialoguePortrait");
@@ -2881,6 +2955,18 @@
                     source: "/Images/Game/Super-Frgmnts/enemy-chitin-sentinel-death-sheet-v1.png",
                     priority: "high"
                 },
+                wasp: {
+                    source: "/Images/Game/Super-Frgmnts/enemy-flying-wasp-flight-sheet-v1.png",
+                    priority: "high"
+                },
+                gauntWalk: {
+                    source: "/Images/Game/Super-Frgmnts/enemy-tall-gaunt-alien-walk-sheet-v1.png",
+                    priority: "high"
+                },
+                gauntAttack: {
+                    source: "/Images/Game/Super-Frgmnts/enemy-tall-gaunt-alien-attack-sheet-v1.png",
+                    priority: "high"
+                },
                 vesperiteBoulder: {
                     source: "/Images/Game/Super-Frgmnts/vesperite-boulder-intact-runtime-v1.png",
                     priority: "high"
@@ -2971,6 +3057,9 @@
                 "mite",
                 "patroller",
                 "patrollerDeath",
+                "wasp",
+                "gauntWalk",
+                "gauntAttack",
                 "rifleDrawLudo",
                 "rifleFireLudo",
                 "jetpackLudo",
@@ -3122,6 +3211,8 @@
             var jetpackBoostAvailable = false;
             var jetpackPoseTime = 0;
             var heavyRifleOwned = false;
+            var selectedWeapon = "pack";
+            var surfaceReturnLoadout = null;
             var EPISODE_CREDITS_STORAGE_KEY =
                 "super-frgmnts-episode-01-credits";
             var inDeepworks = false;
@@ -3130,8 +3221,6 @@
             var dropThroughPlatform = null;
             var deepworksPromptTimer = 0;
             var directionPointerId = null;
-            var directionPadStartedAt = 0;
-            var directionPadReleaseTimer = 0;
             var dialogueActive = false;
             var dialogueIndex = 0;
             var dialogueHasPlayed = false;
@@ -4380,11 +4469,14 @@
                 dialogueSkipConfirm.hidden = true;
                 document.body.classList.remove("is-dialogue", "is-dialogue-tremor");
                 delete startButton.dataset.overworldEnter;
+                delete startButton.dataset.surfaceReturn;
                 var previewRoomMirror =
                     previewRoomBlueprints[previewStartRoom] &&
                     previewRoomBlueprints[previewStartRoom].mirror;
                 var previewSpawnX = overworldPreview
-                    ? arrivalPortalPreview
+                    ? episodeSurfaceReturn
+                        ? WIDTH * 2 + 1300
+                        : arrivalPortalPreview
                         ? WIDTH * 2 + 1320
                         : arrivalDialoguePreview
                         ? DRAS_WORLD_X - 160
@@ -4406,7 +4498,7 @@
                         : previewStartRoom > 0
                             ? previewStartRoom * WIDTH + Math.round(WIDTH * 0.42)
                             : 82;
-                cameraX = expansionPreview
+                cameraX = expansionPreview || episodeSurfaceReturn
                     ? Math.max(0, Math.min(WORLD_WIDTH - viewWidth, previewSpawnX - viewWidth * 0.38))
                     : 0;
                 cameraY = expansionPreview
@@ -4423,6 +4515,7 @@
                 bolts.length = 0;
                 blasterTier =
                     episodeArrivalTutorial ||
+                    episodeSurfaceReturn ||
                     episodeBetaRun ||
                     surfaceCrawlerTrial ||
                     vesperMiteTrial ||
@@ -4485,6 +4578,7 @@
                     : null;
                 var overworldShipSpawnPlatform =
                     overworldPreview &&
+                    !episodeSurfaceReturn &&
                     !arrivalPortalPreview &&
                     !arrivalDialoguePreview
                         ? platforms.find(function (platform) {
@@ -4548,6 +4642,26 @@
                     heartPickups = [];
                 }
                 resetEpisodeBetaPopulation();
+                if (episodeSurfaceReturn) {
+                    creditsCollected = readEpisodeCredits();
+                    if (surfaceReturnLoadout) {
+                        creditsCollected =
+                            surfaceReturnLoadout.creditsCollected;
+                        vesperiteCollected =
+                            surfaceReturnLoadout.vesperiteCollected;
+                        jetpackOwned =
+                            surfaceReturnLoadout.jetpackOwned;
+                        jetpackBoostAvailable = jetpackOwned;
+                        heavyRifleOwned =
+                            surfaceReturnLoadout.heavyRifleOwned;
+                        selectedWeapon =
+                            surfaceReturnLoadout.selectedWeapon;
+                    }
+                    dialogueHasPlayed = true;
+                    portalCharge = 1;
+                    document.querySelector(".mission span").textContent =
+                        "RETURNED TO VEYRA // REPORT TO DRAS";
+                }
                 if (episodeArrivalTutorial) {
                     creditCrates = [
                         makeCreditCrate(WIDTH * 2 + 456, 664, 6)
@@ -4588,6 +4702,7 @@
                 canvas.dataset.vesperite = String(vesperiteCollected);
                 canvas.dataset.jetpack = String(jetpackOwned);
                 canvas.dataset.heavyRifle = String(heavyRifleOwned);
+                canvas.dataset.weapon = selectedWeapon;
                 canvas.dataset.rifleObstacles = String(rifleObstacles.length);
                 canvas.dataset.creditCrates = String(creditCrates.length);
                 canvas.dataset.betaPickups = String(betaPickups.length);
@@ -4598,6 +4713,7 @@
                         return platform.electrified;
                     }).length
                 );
+                updateWeaponToggle();
                 updateHud();
                 timerDisplay.classList.remove("is-low");
                 titleScreen.hidden = autostart;
@@ -4693,7 +4809,71 @@
             }
 
             function heavyRifleActive() {
-                return riflePreview || heavyRifleOwned;
+                return riflePreview ||
+                    (heavyRifleOwned && selectedWeapon === "rifle");
+            }
+
+            function updateWeaponToggle() {
+                if (!weaponToggleButton || !weaponToggleMode) return;
+                var canSwitch = heavyRifleOwned && !riflePreview;
+                weaponToggleButton.hidden = !canSwitch;
+                weaponToggleMode.textContent =
+                    selectedWeapon === "rifle" ? "RIFLE" : "PACK";
+                weaponToggleButton.setAttribute(
+                    "aria-label",
+                    selectedWeapon === "rifle"
+                        ? "Switch to jet pack laser"
+                        : "Switch to heavy rifle"
+                );
+                weaponToggleButton.setAttribute(
+                    "aria-pressed",
+                    String(selectedWeapon === "rifle")
+                );
+                var shootButton =
+                    document.querySelector("[data-control='shoot']");
+                if (shootButton) {
+                    shootButton.setAttribute(
+                        "aria-label",
+                        selectedWeapon === "rifle"
+                            ? "Fire heavy rifle"
+                            : "Fire jet pack laser"
+                    );
+                }
+                canvas.dataset.weapon = selectedWeapon;
+            }
+
+            function selectWeapon(nextWeapon, shouldAnnounce) {
+                if (
+                    nextWeapon === "rifle" &&
+                    !heavyRifleOwned &&
+                    !riflePreview
+                ) {
+                    return;
+                }
+                stowRifle();
+                keys.shoot = false;
+                shootBuffer = 0;
+                selectedWeapon = nextWeapon === "rifle"
+                    ? "rifle"
+                    : "pack";
+                updateWeaponToggle();
+                updateHud();
+                if (shouldAnnounce) {
+                    announce(
+                        selectedWeapon === "rifle"
+                            ? "Heavy rifle selected."
+                            : "Jet pack laser selected."
+                    );
+                    playSoundEffect("deepSelect", 0.62);
+                }
+            }
+
+            function toggleWeaponMode() {
+                if (!heavyRifleOwned || riflePreview) return;
+                selectWeapon(
+                    selectedWeapon === "rifle" ? "pack" : "rifle",
+                    true
+                );
             }
 
             function stabilizersOnline() {
@@ -4717,6 +4897,7 @@
                     jetpackOwned = false;
                     jetpackBoostAvailable = false;
                     heavyRifleOwned = false;
+                    selectedWeapon = "pack";
                     return;
                 }
 
@@ -4754,6 +4935,7 @@
                 jetpackOwned = false;
                 jetpackBoostAvailable = false;
                 heavyRifleOwned = false;
+                selectedWeapon = "pack";
                 rifleObstacles = [
                     makeBetaRifleObstacle(WIDTH * 2 + 900, GROUND_Y)
                 ];
@@ -4987,10 +5169,15 @@
                     walker: { width: 82, height: 82 },
                     flyer: { width: 88, height: 88 },
                     mite: { width: 86, height: 76 },
-                    patroller: { width: 82, height: 98 }
+                    patroller: { width: 82, height: 98 },
+                    wasp: { width: 96, height: 74 },
+                    gaunt: { width: 88, height: 128 }
                 };
                 var size = sizes[type];
-                var isFlyer = type === "flyer" || type === "mite";
+                var isFlyer =
+                    type === "flyer" ||
+                    type === "mite" ||
+                    type === "wasp";
                 return {
                     type: type,
                     x: x,
@@ -5006,7 +5193,11 @@
                     phase: Math.random() * Math.PI * 2,
                     shootTimer: 3.8 + Math.random() * 2.6,
                     animationTime: 0,
-                    turnTimer: 0.72 + Math.random() * 1.4
+                    turnTimer: 0.72 + Math.random() * 1.4,
+                    attackTime: 0,
+                    attacking: false,
+                    attackLanded: false,
+                    patrolSpeed: speed
                 };
             }
 
@@ -5103,6 +5294,39 @@
                     betaEnemies.push(squircle);
                 }
 
+                var ridgeSkitter = makeEnemy(
+                    "crawler",
+                    1180,
+                    GROUND_Y,
+                    1080,
+                    1480,
+                    -118
+                );
+                ridgeSkitter.betaShowcase = true;
+                betaEnemies.push(ridgeSkitter);
+
+                var clacker = makeEnemy(
+                    "walker",
+                    WIDTH + 920,
+                    GROUND_Y,
+                    WIDTH + 760,
+                    WIDTH + 1320,
+                    94
+                );
+                clacker.betaShowcase = true;
+                betaEnemies.push(clacker);
+
+                var sporeWisp = makeEnemy(
+                    "flyer",
+                    WIDTH * 2 + 470,
+                    930,
+                    WIDTH * 2 + 280,
+                    WIDTH * 2 + 770,
+                    74
+                );
+                sporeWisp.betaShowcase = true;
+                betaEnemies.push(sporeWisp);
+
                 var mite = makeEnemy(
                     "mite",
                     WIDTH * 3 + 780,
@@ -5114,6 +5338,32 @@
                 mite.hoverFloorY = 1384;
                 mite.betaShowcase = true;
                 betaEnemies.push(mite);
+
+                var wasp = makeEnemy(
+                    "wasp",
+                    WIDTH * 4 + 870,
+                    760,
+                    WIDTH * 4 + 610,
+                    WIDTH * 4 + 1310,
+                    -116
+                );
+                wasp.betaShowcase = true;
+                betaEnemies.push(wasp);
+
+                var gaunt = makeEnemy(
+                    "gaunt",
+                    WIDTH * 5 + 820,
+                    GROUND_Y,
+                    WIDTH * 5 + 650,
+                    WIDTH * 5 + 1280,
+                    72
+                );
+                gaunt.maxHealth = 4;
+                gaunt.health = 4;
+                gaunt.noStomp = true;
+                gaunt.hurtFlash = 0;
+                gaunt.betaShowcase = true;
+                betaEnemies.push(gaunt);
 
                 var sentinel = makeEnemy(
                     "patroller",
@@ -5134,6 +5384,17 @@
                 sentinel.facing = -1;
                 sentinel.betaShowcase = true;
                 betaEnemies.push(sentinel);
+
+                var uplinkWisp = makeEnemy(
+                    "flyer",
+                    WIDTH * 7 + 770,
+                    520,
+                    WIDTH * 7 + 560,
+                    WIDTH * 7 + 1080,
+                    -86
+                );
+                uplinkWisp.betaShowcase = true;
+                betaEnemies.push(uplinkWisp);
                 return betaEnemies;
             }
 
@@ -5283,10 +5544,14 @@
                         : "Super Frgmnts Episode 01 Shard Foundry"
                 );
                 missionHeading.textContent = isOverworld
-                    ? "ARYN SOL-MAVI // ARRIVAL"
+                    ? episodeSurfaceReturn
+                        ? "ARYN SOL-MAVI // SURFACE RETURN"
+                        : "ARYN SOL-MAVI // ARRIVAL"
                     : "ARYN SOL-MAVI // INFILTRATE";
                 missionDetail.textContent = isOverworld
-                    ? "FIND DRAS EHDRE"
+                    ? episodeSurfaceReturn
+                        ? "RETURNED TO VEYRA // REPORT TO DRAS"
+                        : "FIND DRAS EHDRE"
                     : "CROSS THE SHARD FOUNDRY → UPLINK GATE";
                 directionPad.setAttribute(
                     "aria-label",
@@ -5300,10 +5565,11 @@
                         "<kbd>↓</kbd><span>talk</span>" +
                         "<kbd>SPACE</kbd><span>jump</span>" +
                         "<kbd>CTRL</kbd><span>fire</span>" +
+                        "<kbd>V</kbd><span>switch</span>" +
                         "<kbd>R</kbd><span>restart</span>";
                     keyboardHelp.setAttribute(
                         "aria-label",
-                        "Keyboard controls: left and right arrows move, down arrow talks to Dras after first contact, Space jumps, Control fires the pack emitter, R restarts"
+                        "Keyboard controls: left and right arrows move, down arrow talks to Dras after first contact, Space jumps, Control fires, V switches weapons after the heavy rifle is recovered, R restarts"
                     );
                 } else {
                     keyboardHelp.innerHTML =
@@ -5311,10 +5577,11 @@
                         "<kbd>↓</kbd><span>drop</span>" +
                         "<kbd>SPACE</kbd><span>jump</span>" +
                         "<kbd>CTRL</kbd><span>blaster</span>" +
+                        "<kbd>V</kbd><span>switch</span>" +
                         "<kbd>R</kbd><span>restart</span>";
                     keyboardHelp.setAttribute(
                         "aria-label",
-                        "Keyboard controls: left and right arrows move, down arrow drops, Space jumps, Control fires, R restarts"
+                        "Keyboard controls: left and right arrows move, down arrow drops, Space jumps, Control fires, V switches between the jet pack laser and heavy rifle after the rifle is recovered, R restarts"
                     );
                 }
             }
@@ -5332,23 +5599,39 @@
                     .concat(["foundryLower1"]);
             }
 
-            function loadAndConfigureEpisodeScene(scene, historyMode) {
+            function loadAndConfigureEpisodeScene(
+                scene,
+                historyMode,
+                sceneOptions
+            ) {
                 loadCriticalAssets(
                     episodeSceneAssetKeys(scene),
                     function () {
-                        configureEpisodeScene(scene, historyMode);
+                        configureEpisodeScene(
+                            scene,
+                            historyMode,
+                            sceneOptions
+                        );
                     }
                 );
             }
 
-            function configureEpisodeScene(scene, historyMode) {
+            function configureEpisodeScene(scene, historyMode, sceneOptions) {
                 var isOverworld = scene === "overworld";
+                var returningToSurface =
+                    isOverworld &&
+                    Boolean(
+                        sceneOptions &&
+                        sceneOptions.returningToSurface
+                    );
                 episodeOneRun = true;
                 episodeStage = scene;
                 overworldPreview = isOverworld;
                 expansionPreview = !isOverworld;
                 episodeBetaRun = !isOverworld;
-                episodeArrivalTutorial = isOverworld;
+                episodeSurfaceReturn = returningToSurface;
+                episodeArrivalTutorial =
+                    isOverworld && !episodeSurfaceReturn;
                 ludoRunPreview = true;
                 mainTitleScreen = false;
                 surfaceCrawlerTrial = false;
@@ -5400,14 +5683,20 @@
                         { superFrgmntsScene: scene },
                         "",
                         window.location.pathname +
-                            "?episode=01&stage=" + scene + "&autostart=1"
+                            "?episode=01&stage=" +
+                            scene +
+                            "&autostart=1" +
+                            (episodeSurfaceReturn ? "&return=1" : "")
                     );
                 } else if (historyMode !== "none") {
                     window.history.pushState(
                         { superFrgmntsScene: scene },
                         "",
                         window.location.pathname +
-                            "?episode=01&stage=" + scene + "&autostart=1"
+                            "?episode=01&stage=" +
+                            scene +
+                            "&autostart=1" +
+                            (episodeSurfaceReturn ? "&return=1" : "")
                     );
                 }
                 setAudioScene(scene);
@@ -5676,6 +5965,25 @@
                 startOverButton.hidden = false;
                 messageCard.hidden = false;
                 announce("Episode 01. The Shard Foundry. Enter the Foundry or start over.");
+            }
+
+            function returnToSurfaceAfterMission() {
+                persistEpisodeCredits();
+                surfaceReturnLoadout = {
+                    creditsCollected: creditsCollected,
+                    vesperiteCollected: vesperiteCollected,
+                    jetpackOwned: jetpackOwned,
+                    heavyRifleOwned: heavyRifleOwned,
+                    selectedWeapon: selectedWeapon
+                };
+                startButton.disabled = true;
+                startButton.textContent = "Returning…";
+                playSoundEffect("deepSelect");
+                loadAndConfigureEpisodeScene(
+                    "overworld",
+                    undefined,
+                    { returningToSurface: true }
+                );
             }
 
             function setPauseButton(paused, available) {
@@ -6778,11 +7086,12 @@
                     heavyRifleOwned = true;
                     rifleReady = false;
                     riflePendingFire = false;
+                    selectWeapon("rifle", false);
                     label = "HEAVY RIFLE ACQUIRED";
                     color = "#ffd36c";
                     score += 750;
                     announce(
-                        "Heavy rifle acquired. Fire three direct shots to clear solid Vesperite."
+                        "Heavy rifle acquired and selected. Fire three direct shots to clear solid Vesperite. Use Mode or V to switch back to the jet pack laser."
                     );
                 } else {
                     vesperiteCollected += 1;
@@ -6802,6 +7111,7 @@
                 playTone(740, 0.16, "square", 0.022, 0.08);
                 canvas.dataset.jetpack = String(jetpackOwned);
                 canvas.dataset.heavyRifle = String(heavyRifleOwned);
+                canvas.dataset.weapon = selectedWeapon;
                 canvas.dataset.vesperite = String(vesperiteCollected);
             }
 
@@ -6938,9 +7248,41 @@
                         }
                     }
 
+                    if (enemy.type === "gaunt") {
+                        enemy.hurtFlash = Math.max(0, enemy.hurtFlash - delta);
+                        enemy.animationTime += delta;
+                        var gauntDistance =
+                            Math.abs((player.x + 56) - (enemy.x + enemy.width / 2));
+                        var gauntSameTier =
+                            Math.abs((player.y + 100) - enemy.floorY) < 120;
+                        if (
+                            !enemy.attacking &&
+                            gauntSameTier &&
+                            gauntDistance < 176
+                        ) {
+                            enemy.attacking = true;
+                            enemy.attackTime = 0;
+                            enemy.attackLanded = false;
+                            enemy.facing =
+                                player.x + 56 < enemy.x + enemy.width / 2
+                                    ? -1
+                                    : 1;
+                            enemy.vx = 0;
+                        } else if (enemy.attacking) {
+                            enemy.attackTime += delta;
+                            if (enemy.attackTime >= 1.45) {
+                                enemy.attacking = false;
+                                enemy.attackTime = 0;
+                                enemy.vx =
+                                    enemy.facing *
+                                    Math.abs(enemy.patrolSpeed || 72);
+                            }
+                        }
+                    }
+
                     if (enemy.surfaceCrawler) {
                         updateSurfaceCrawler(enemy, delta);
-                    } else {
+                    } else if (!enemy.attacking) {
                         enemy.x += enemy.vx * delta;
                         if (enemy.x <= enemy.minX) {
                             enemy.x = enemy.minX;
@@ -6976,6 +7318,13 @@
                             shootEnergyOrb(enemy);
                             enemy.shootTimer = 6 + Math.random() * 3;
                         }
+                    }
+                    if (enemy.type === "wasp") {
+                        enemy.animationTime += delta;
+                        enemy.y =
+                            enemy.baseY +
+                            Math.sin(elapsed * 3.2 + enemy.phase) * 24 +
+                            Math.sin(elapsed * 8.4 + enemy.phase) * 5;
                     }
                     if (enemy.type === "mite") {
                         enemy.animationTime += delta;
@@ -7013,6 +7362,7 @@
                     var enemyTop = enemy.y + (
                         enemy.type === "flyer" ||
                         enemy.type === "mite" ||
+                        enemy.type === "wasp" ||
                         enemy.type === "patroller" ||
                         enemy.surfaceCrawler
                             ? 0
@@ -7358,6 +7708,7 @@
                         var enemyTop = enemy.y + (
                             enemy.type === "flyer" ||
                             enemy.type === "mite" ||
+                            enemy.type === "wasp" ||
                             enemy.type === "patroller" ||
                             enemy.surfaceCrawler
                                 ? 0
@@ -7390,12 +7741,15 @@
                 if (enemy.maxHealth > 1) {
                     enemy.health = Math.max(0, enemy.health - 1);
                     enemy.hurtFlash = 0.14;
-                    canvas.dataset.patrollerHealth = String(enemy.health);
+                    if (enemy.type === "patroller") {
+                        canvas.dataset.patrollerHealth = String(enemy.health);
+                    }
                     spawnBurst(centerX, centerY, color, enemy.health ? 14 : 34);
 
                     if (enemy.health > 0) {
                         document.querySelector(".mission span").textContent =
-                            "CHITIN SENTINEL ARMOR // " +
+                            enemyLabel(enemy.type) +
+                            " ARMOR // " +
                             enemy.health +
                             "/" +
                             enemy.maxHealth;
@@ -7416,6 +7770,25 @@
                             enemy.maxHealth +
                             "."
                         );
+                        return;
+                    }
+
+                    if (enemy.type !== "patroller") {
+                        enemy.alive = false;
+                        enemy.attacking = false;
+                        score += 900;
+                        document.querySelector(".mission span").textContent =
+                            enemyLabel(enemy.type) + " // NEUTRALIZED";
+                        popups.push({
+                            x: centerX,
+                            y: enemyTop - 18,
+                            text: enemyLabel(enemy.type) + " +900",
+                            life: 1.25,
+                            color: color
+                        });
+                        playTone(132, 0.08, "square", 0.035);
+                        playTone(82, 0.2, "sawtooth", 0.03, 0.055);
+                        announce(enemyLabel(enemy.type) + " defeated.");
                         return;
                     }
 
@@ -7559,10 +7932,13 @@
                     ? "Aryn crossed all eight plates and reached the Uplink Gate. World population comes next."
                     : "Recovery of essential inventory is complete. Prepare for the next portal.";
                 startButton.textContent = episodeBetaRun
-                    ? "Replay Beta"
+                    ? "Return to Surface"
                     : expansionPreview
                         ? "Replay World"
                         : "Next Level";
+                if (episodeBetaRun) {
+                    startButton.dataset.surfaceReturn = "true";
+                }
                 startButton.disabled = !expansionPreview;
                 if (expansionPreview) {
                     startButton.removeAttribute("title");
@@ -8955,6 +9331,70 @@
                     var bob =
                         Math.sin(elapsed * 3.2 + pickup.bob) * 7;
                     ctx.save();
+                    if (pickup.type === "rifle") {
+                        var riflePulse =
+                            0.72 + Math.sin(elapsed * 5.4 + pickup.bob) * 0.2;
+                        var rifleGlow = ctx.createRadialGradient(
+                            pickup.x,
+                            pickup.y + bob,
+                            8,
+                            pickup.x,
+                            pickup.y + bob,
+                            112
+                        );
+                        rifleGlow.addColorStop(
+                            0,
+                            "rgba(255, 249, 204, " +
+                                (0.52 * riflePulse).toFixed(3) +
+                                ")"
+                        );
+                        rifleGlow.addColorStop(
+                            0.38,
+                            "rgba(255, 211, 108, " +
+                                (0.34 * riflePulse).toFixed(3) +
+                                ")"
+                        );
+                        rifleGlow.addColorStop(1, "rgba(255, 211, 108, 0)");
+                        ctx.fillStyle = rifleGlow;
+                        ctx.beginPath();
+                        ctx.arc(
+                            pickup.x,
+                            pickup.y + bob,
+                            112,
+                            0,
+                            Math.PI * 2
+                        );
+                        ctx.fill();
+                        ctx.strokeStyle =
+                            "rgba(255, 231, 142, " +
+                            (0.72 * riflePulse).toFixed(3) +
+                            ")";
+                        ctx.lineWidth = 3;
+                        ctx.setLineDash([12, 9]);
+                        ctx.beginPath();
+                        ctx.ellipse(
+                            pickup.x,
+                            pickup.y + bob,
+                            86,
+                            50,
+                            0,
+                            0,
+                            Math.PI * 2
+                        );
+                        ctx.stroke();
+                        ctx.setLineDash([]);
+                        ctx.font = "700 15px Fira Code, monospace";
+                        ctx.textAlign = "center";
+                        ctx.fillStyle = "#fff4c7";
+                        ctx.shadowColor = "#ffd36c";
+                        ctx.shadowBlur = 10;
+                        ctx.fillText(
+                            "HEAVY RIFLE",
+                            pickup.x,
+                            pickup.y - 58 + bob
+                        );
+                        ctx.shadowBlur = 0;
+                    }
                     ctx.globalAlpha = 0.22;
                     ctx.fillStyle =
                         pickup.type === "rifle"
@@ -8972,6 +9412,11 @@
                     );
                     ctx.fill();
                     ctx.globalAlpha = 1;
+                    if (pickup.type === "rifle") {
+                        ctx.shadowColor = "#ffd36c";
+                        ctx.shadowBlur =
+                            18 + Math.sin(elapsed * 5.4) * 6;
+                    }
                     ctx.drawImage(
                         sprite,
                         Math.round(pickup.x - drawWidth / 2),
@@ -9906,7 +10351,9 @@
                     walker: "#f0932f",
                     squircle: "#6f9ef4",
                     mite: "#58d8e8",
-                    patroller: "#ffd36c"
+                    patroller: "#ffd36c",
+                    wasp: "#ffb84f",
+                    gaunt: "#c98cff"
                 }[type] || "#ff69b4";
             }
 
@@ -9917,7 +10364,9 @@
                     walker: "CLACKER BEETLE",
                     squircle: "SQUIRCLE MINION",
                     mite: "VESPER MITE",
-                    patroller: "CHITIN SENTINEL"
+                    patroller: "CHITIN SENTINEL",
+                    wasp: "EMBER WASP",
+                    gaunt: "SEAM HUNTER"
                 }[type] || "CREATURE";
             }
 
@@ -10101,11 +10550,149 @@
                 }
             }
 
+            function drawFlyingWasp(enemy) {
+                var sprite = assets.wasp;
+                if (!imageHasPixels(sprite)) return;
+                var frameIndex =
+                    Math.floor(enemy.animationTime / 0.046) % 36;
+                var sourceX = frameIndex % 6 * 112;
+                var sourceY = Math.floor(frameIndex / 6) * 86;
+                var centerX = Math.round(enemy.x + enemy.width / 2);
+                var centerY = Math.round(enemy.y + enemy.height / 2);
+
+                ctx.save();
+                ctx.globalAlpha = 0.28;
+                ctx.fillStyle = "#ffb84f";
+                ctx.beginPath();
+                ctx.ellipse(
+                    centerX,
+                    centerY + 46,
+                    34,
+                    6,
+                    0,
+                    0,
+                    Math.PI * 2
+                );
+                ctx.fill();
+                ctx.restore();
+
+                ctx.save();
+                ctx.translate(centerX, centerY);
+                if (enemy.vx < 0) ctx.scale(-1, 1);
+                ctx.imageSmoothingEnabled = false;
+                ctx.shadowColor = "#ffb84f";
+                ctx.shadowBlur = 16;
+                ctx.drawImage(
+                    sprite,
+                    sourceX,
+                    sourceY,
+                    112,
+                    86,
+                    -56,
+                    -43,
+                    112,
+                    86
+                );
+                ctx.restore();
+            }
+
+            function drawGauntEnemy(enemy) {
+                var attacking = enemy.attacking;
+                var sprite = attacking
+                    ? assets.gauntAttack
+                    : assets.gauntWalk;
+                if (!imageHasPixels(sprite)) return;
+                var frameCount = attacking ? 25 : 36;
+                var columns = attacking ? 5 : 6;
+                var frameWidth = attacking ? 160 : 128;
+                var frameHeight = 128;
+                var frameIndex = attacking
+                    ? Math.min(
+                        frameCount - 1,
+                        Math.floor(enemy.attackTime / (1.45 / frameCount))
+                    )
+                    : Math.floor(enemy.animationTime / 0.052) % frameCount;
+                var sourceX = frameIndex % columns * frameWidth;
+                var sourceY =
+                    Math.floor(frameIndex / columns) * frameHeight;
+                var centerX = Math.round(enemy.x + enemy.width / 2);
+                var groundY = Math.round(enemy.floorY);
+                var drawWidth = attacking ? 180 : 144;
+                var drawHeight = 144;
+                var facing = attacking
+                    ? enemy.facing || 1
+                    : enemy.vx >= 0
+                        ? 1
+                        : -1;
+
+                ctx.save();
+                ctx.translate(centerX, groundY);
+                if (facing < 0) ctx.scale(-1, 1);
+                ctx.imageSmoothingEnabled = false;
+                ctx.shadowColor = attacking ? "#ff69b4" : "#9b59b6";
+                ctx.shadowBlur = attacking ? 18 : 11;
+                ctx.drawImage(
+                    sprite,
+                    sourceX,
+                    sourceY,
+                    frameWidth,
+                    frameHeight,
+                    -drawWidth / 2,
+                    -drawHeight,
+                    drawWidth,
+                    drawHeight
+                );
+                if (enemy.hurtFlash > 0) {
+                    ctx.globalCompositeOperation = "screen";
+                    ctx.globalAlpha =
+                        0.45 + Math.sin(elapsed * 72) * 0.22;
+                    ctx.drawImage(
+                        sprite,
+                        sourceX,
+                        sourceY,
+                        frameWidth,
+                        frameHeight,
+                        -drawWidth / 2,
+                        -drawHeight,
+                        drawWidth,
+                        drawHeight
+                    );
+                }
+                ctx.restore();
+
+                var pipWidth = 10;
+                var pipGap = 4;
+                var barWidth =
+                    enemy.maxHealth * pipWidth +
+                    (enemy.maxHealth - 1) * pipGap;
+                var barX = Math.round(centerX - barWidth / 2);
+                var barY = Math.round(groundY - drawHeight - 10);
+                for (var pip = 0; pip < enemy.maxHealth; pip += 1) {
+                    ctx.fillStyle = pip < enemy.health
+                        ? "#c98cff"
+                        : "rgba(201, 140, 255, 0.18)";
+                    ctx.fillRect(
+                        barX + pip * (pipWidth + pipGap),
+                        barY,
+                        pipWidth,
+                        4
+                    );
+                }
+            }
+
             function drawEnemies() {
                 enemies.forEach(function (enemy) {
                     if (!enemy.alive && !enemy.defeated) return;
                     if (enemy.type === "patroller") {
                         drawChitinSentinel(enemy);
+                        return;
+                    }
+                    if (enemy.type === "wasp") {
+                        drawFlyingWasp(enemy);
+                        return;
+                    }
+                    if (enemy.type === "gaunt") {
+                        drawGauntEnemy(enemy);
                         return;
                     }
                     var sprite = assets[enemy.type];
@@ -10763,10 +11350,15 @@
                     );
                     zoneNameDisplay.textContent = overworldZones[overworldRoomIndex];
                     updateEpisodeArrivalTutorialMission();
-                    blasterStatusDisplay.textContent = episodeArrivalTutorial
-                        ? "PACK T1"
-                        : "STANDBY";
-                    blasterStatusDisplay.style.color = "";
+                    blasterStatusDisplay.textContent =
+                        episodeArrivalTutorial || episodeSurfaceReturn
+                            ? heavyRifleActive()
+                                ? "RIFLE"
+                                : "PACK T1"
+                            : "STANDBY";
+                    blasterStatusDisplay.style.color = heavyRifleActive()
+                        ? "#ffd36c"
+                        : "";
                     heartsDisplay.textContent = dialogueHasPlayed
                         ? episodeArrivalTutorial
                             ? "CREDITS " + creditsCollected +
@@ -10806,7 +11398,7 @@
                     blasterStatusDisplay.textContent = "LOCKED";
                     blasterStatusDisplay.style.color = "";
                 } else {
-                    blasterStatusDisplay.textContent = "T" + blasterTier + " " +
+                    blasterStatusDisplay.textContent = "PACK T" + blasterTier + " " +
                         (blasterOverheated ? "OVERHEAT" : Math.round(blasterHeat * 100) + "%");
                     blasterStatusDisplay.style.color = blasterOverheated ? "var(--pink)" : "";
                 }
@@ -11158,19 +11750,18 @@
             }
 
             function resetDirectionPad() {
-                if (directionPadReleaseTimer) {
-                    window.clearTimeout(directionPadReleaseTimer);
-                    directionPadReleaseTimer = 0;
-                }
                 directionPointerId = null;
                 if (directionPad) {
                     directionPad.classList.remove("is-active");
                     directionPad.style.setProperty("--stick-x", "0px");
                     directionPad.style.setProperty("--stick-y", "0px");
                 }
-                setControl("left", false);
-                setControl("right", false);
-                setControl("down", false);
+                // Reset the input state directly. setControl intentionally
+                // ignores some modal states, which can otherwise leave a
+                // captured mobile direction latched after an OS interruption.
+                keys.left = false;
+                keys.right = false;
+                keys.down = false;
             }
 
             function releaseAllControls() {
@@ -11189,16 +11780,15 @@
                     });
             }
 
-            function releaseDirectionPad(pointerId, immediate) {
-                if (directionPointerId !== pointerId) return;
-                directionPointerId = null;
-                var heldFor = performance.now() - directionPadStartedAt;
-                var releaseDelay = immediate ? 0 : Math.max(0, 80 - heldFor);
-                if (releaseDelay > 0) {
-                    directionPadReleaseTimer = window.setTimeout(resetDirectionPad, releaseDelay);
-                } else {
-                    resetDirectionPad();
+            function releaseDirectionPad(pointerId) {
+                if (
+                    directionPointerId !== null &&
+                    typeof pointerId === "number" &&
+                    directionPointerId !== pointerId
+                ) {
+                    return;
                 }
+                resetDirectionPad();
             }
 
             function isBlasterKey(event) {
@@ -11252,7 +11842,15 @@
                 var route = new URLSearchParams(window.location.search);
                 var routeStage = route.get("stage");
                 if (routeStage === "overworld" || routeStage === "foundry") {
-                    loadAndConfigureEpisodeScene(routeStage, "none");
+                    loadAndConfigureEpisodeScene(
+                        routeStage,
+                        "none",
+                        {
+                            returningToSurface:
+                                routeStage === "overworld" &&
+                                route.get("return") === "1"
+                        }
+                    );
                     return;
                 }
                 configureTitleScene();
@@ -11326,6 +11924,9 @@
                 if (event.code === "ArrowDown") setControl("down", true);
                 if (event.code === "Space") setControl("jump", true);
                 if (isBlasterKey(event)) setControl("shoot", true);
+                if (event.code === "KeyV" && !event.repeat) {
+                    toggleWeaponMode();
+                }
                 if (event.code === "KeyR") {
                     playSoundEffect("crashSelect");
                     playBackgroundMusic();
@@ -11383,7 +11984,17 @@
                     event.preventDefault();
                 }
                 lastTouchEnd = now;
+                if (
+                    directionPointerId !== null &&
+                    (!event.touches || event.touches.length === 0)
+                ) {
+                    resetDirectionPad();
+                }
             }, { passive: false });
+
+            document.addEventListener("touchcancel", function () {
+                resetDirectionPad();
+            }, { capture: true, passive: false });
 
             stageShell.addEventListener("dblclick", function (event) {
                 event.preventDefault();
@@ -11408,6 +12019,11 @@
                 capture: true,
                 passive: true
             });
+            document.addEventListener("selectionchange", function () {
+                if (directionPointerId !== null) {
+                    clearNativeSelection();
+                }
+            });
 
             window.addEventListener("resize", scheduleGameViewportResize);
             window.addEventListener(
@@ -11429,12 +12045,8 @@
                 directionPad.addEventListener("pointerdown", function (event) {
                     if (directionPointerId !== null) return;
                     event.preventDefault();
-                    if (directionPadReleaseTimer) {
-                        window.clearTimeout(directionPadReleaseTimer);
-                        directionPadReleaseTimer = 0;
-                    }
+                    clearNativeSelection();
                     directionPointerId = event.pointerId;
-                    directionPadStartedAt = performance.now();
                     directionPad.setPointerCapture(event.pointerId);
                     directionPad.classList.add("is-active");
                     setDirectionPadVector(event.clientX, event.clientY);
@@ -11445,13 +12057,13 @@
                     setDirectionPadVector(event.clientX, event.clientY);
                 });
                 directionPad.addEventListener("pointerup", function (event) {
-                    releaseDirectionPad(event.pointerId, false);
+                    releaseDirectionPad(event.pointerId);
                 });
                 directionPad.addEventListener("pointercancel", function (event) {
-                    releaseDirectionPad(event.pointerId, true);
+                    releaseDirectionPad(event.pointerId);
                 });
                 directionPad.addEventListener("lostpointercapture", function (event) {
-                    releaseDirectionPad(event.pointerId, true);
+                    releaseDirectionPad(event.pointerId);
                 });
                 ["contextmenu", "selectstart", "dragstart"].forEach(function (eventName) {
                     directionPad.addEventListener(eventName, function (event) {
@@ -11459,6 +12071,13 @@
                     });
                 });
             }
+
+            ["pointerup", "pointercancel"].forEach(function (eventName) {
+                window.addEventListener(eventName, function (event) {
+                    if (directionPointerId === null) return;
+                    releaseDirectionPad(event.pointerId);
+                }, { capture: true });
+            });
 
             document.querySelectorAll("[data-control]").forEach(function (button) {
                 var control = button.dataset.control;
@@ -11483,6 +12102,10 @@
 
             titleStartButton.addEventListener("click", activateTitleAction);
             startButton.addEventListener("click", function () {
+                if (startButton.dataset.surfaceReturn === "true") {
+                    returnToSurfaceAfterMission();
+                    return;
+                }
                 if (startButton.dataset.overworldEnter === "true") {
                     playSoundEffect("deepSelect");
                     startButton.disabled = true;
@@ -11494,6 +12117,10 @@
                 playSoundEffect(state === "lost" ? "crashSelect" : "deepSelect");
                 startGame();
             });
+            weaponToggleButton.addEventListener(
+                "click",
+                toggleWeaponMode
+            );
             dialogueContinue.addEventListener("click", advanceArrivalDialogue);
             dialogueSkip.addEventListener("click", openDialogueSkipConfirmation);
             dialogueReturn.addEventListener("click", closeDialogueSkipConfirmation);

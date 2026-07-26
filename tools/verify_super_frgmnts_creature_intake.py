@@ -39,19 +39,22 @@ def main() -> None:
     ):
         assert token in SOURCE, f"Missing live camp-dog contract: {token}"
 
-    for deferred_asset in (
+    for production_asset in (
         "enemy-tall-gaunt-alien-walk-sheet-v1.png",
         "enemy-tall-gaunt-alien-attack-sheet-v1.png",
-        "aryn-fleet-apparel-walk-sheet-v1.png",
     ):
-        assert deferred_asset not in SOURCE, (
-            f"{deferred_asset} must remain unloaded until its role is approved"
+        assert production_asset in SOURCE, (
+            f"{production_asset} is not loaded by the Episode beta"
         )
+
+    assert "aryn-fleet-apparel-walk-sheet-v1.png" not in SOURCE, (
+        "Fleet-apparel Aryn must remain outside the armored Episode runtime"
+    )
 
     print("SUPER FRGMNTS creature intake: PASS")
     print("- the dog faces its travel direction without moonwalking")
     print("- occasional sniff events dip and recover once across three seconds")
-    print("- monster walk and sweep atlases are review-ready but not spawned")
+    print("- Seam Hunter walk and sweep atlases are live in the Episode beta")
     print("- Fleet-apparel Aryn is canonically identified but not live-loaded")
 
 

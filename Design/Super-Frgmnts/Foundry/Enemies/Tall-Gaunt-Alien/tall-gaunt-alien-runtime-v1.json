@@ -1,7 +1,7 @@
 {
   "workingName": "Tall Gaunt Alien",
-  "status": "review-ready-not-spawned",
-  "productionPopulation": false,
+  "status": "episode-01-beta",
+  "productionPopulation": true,
   "runtimeAnimations": {
     "walk": {
       "asset": "Images/Game/Super-Frgmnts/enemy-tall-gaunt-alien-walk-sheet-v1.png",
@@ -26,11 +26,11 @@
     "damageWindow": "activate only during the visible white sweep",
     "recovery": "leave a readable punish window after the arc dissipates"
   },
-  "missingBeforeProduction": [
-    "canonical name",
-    "health and damage balance",
-    "hurt response",
-    "death animation",
-    "approved room population"
+  "episodeBetaContract": [
+    "runtime name: Seam Hunter",
+    "four pack-laser or heavy-rifle hits",
+    "stomp immune",
+    "visible melee sweep telegraph",
+    "temporary burst defeat until a dedicated death animation is supplied"
   ]
 }

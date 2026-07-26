@@ -98,7 +98,7 @@ def main() -> None:
         "? backgroundMusic.dataset.overworldTrack",
         "overworld: 0.29",
         "foundry: 0.32",
-        "function configureEpisodeScene(scene, historyMode)",
+        "function configureEpisodeScene(scene, historyMode, sceneOptions)",
         'loadAndConfigureEpisodeScene("foundry")',
         "var overworldAnchor",
         "(0.48 - 0.7)",
@@ -118,7 +118,7 @@ def main() -> None:
         "var centerX = WIDTH * 2 + 1545",
         "var centerY = 615",
         "x: WIDTH * 2 + 1490",
-        '"?episode=01&stage=" + scene + "&autostart=1"',
+        '"?episode=01&stage="',
     )
     for token in required_runtime_tokens:
         require(token in source, f"Missing runtime contract: {token}")

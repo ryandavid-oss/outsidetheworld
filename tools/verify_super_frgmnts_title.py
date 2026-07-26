@@ -69,7 +69,7 @@ def main() -> None:
         'episodeStage === "overworld"',
         'episodeStage === "foundry"',
         'previewParameters.get("autostart") === "1"',
-        '"?episode=01&stage=" + scene + "&autostart=1"',
+        '"?episode=01&stage="',
         "activateTitleAction()",
         "loadAndConfigureEpisodeScene(\"overworld\")",
         "loadAndConfigureEpisodeScene(\"foundry\")",

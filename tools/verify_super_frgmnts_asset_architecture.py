@@ -29,7 +29,7 @@ def main() -> None:
         "function requestAsset(key, priority)",
         "function releaseInactiveSceneAssets(scene)",
         "function maintainFoundryZoneAssets(force)",
-        "function loadAndConfigureEpisodeScene(scene, historyMode)",
+        "function loadAndConfigureEpisodeScene(",
         'loadAndConfigureEpisodeScene("overworld")',
         'loadAndConfigureEpisodeScene("foundry")',
         'releaseInactiveSceneAssets("title")',
@@ -93,8 +93,8 @@ def main() -> None:
         / "flying-wasp-runtime-v1.json"
     )
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-    if manifest["productionPopulation"] is not False:
-        raise SystemExit("Flying wasp must remain outside production balance")
+    if manifest["productionPopulation"] is not True:
+        raise SystemExit("Flying wasp must be populated in the Episode beta")
     if manifest["runtime"]["frameCount"] != 36:
         raise SystemExit("Flying-wasp manifest must retain all 36 frames")
 
@@ -103,7 +103,7 @@ def main() -> None:
     print("- inactive scene images are released")
     print("- Foundry lower plates stream by nearby room")
     print("- large machinery uses pixel-faithful runtime dimensions")
-    print("- flying wasp is normalized for review but not production-spawned")
+    print("- normalized Ember Wasp animation is populated in the Episode beta")
 
 
 if __name__ == "__main__":
