@@ -2998,6 +2998,19 @@
                     speed: Math.PI * 2 / 1.6,
                     phase: 0
                 };
+
+                function shipSurface(x, y, width) {
+                    return {
+                        x: x,
+                        y: y,
+                        width: width,
+                        height: 10,
+                        shipSurface: true,
+                        invisibleStep: true,
+                        motion: shipHoverMotion
+                    };
+                }
+
                 return [
                     {
                         x: 48,
@@ -3007,60 +3020,24 @@
                         ground: true,
                         artIntegrated: true
                     },
-                    {
-                        x: 918,
-                        y: 704,
-                        width: 72,
-                        height: 10,
-                        shipSurface: true,
-                        invisibleStep: true,
-                        motion: shipHoverMotion
-                    },
-                    {
-                        x: 888,
-                        y: 668,
-                        width: 80,
-                        height: 10,
-                        shipSurface: true,
-                        invisibleStep: true,
-                        motion: shipHoverMotion
-                    },
-                    {
-                        x: 856,
-                        y: 632,
-                        width: 88,
-                        height: 10,
-                        shipSurface: true,
-                        invisibleStep: true,
-                        motion: shipHoverMotion
-                    },
-                    {
-                        x: 814,
-                        y: 600,
-                        width: 128,
-                        height: 12,
-                        shipSurface: true,
-                        invisibleStep: true,
-                        motion: shipHoverMotion
-                    },
-                    {
-                        x: 716,
-                        y: 520,
-                        width: 112,
-                        height: 10,
-                        shipSurface: true,
-                        motion: shipHoverMotion
-                    },
-                    {
-                        x: 528,
-                        y: 448,
-                        width: 176,
-                        height: 10,
-                        shipSurface: true,
-                        motion: shipHoverMotion
-                    }
+                    // Center roof first so the default spawn binds to this perch.
+                    shipSurface(500, 448, 144),
+                    // Raised engine crowns reward the first exploratory jumps.
+                    shipSurface(340, 438, 116),
+                    shipSurface(688, 438, 116),
+                    // Overlapping terraces trace both sloped wings without fall-through seams.
+                    shipSurface(400, 504, 120),
+                    shipSurface(624, 504, 120),
+                    shipSurface(304, 552, 116),
+                    shipSurface(724, 552, 116),
+                    shipSurface(220, 600, 104),
+                    shipSurface(820, 600, 104),
+                    shipSurface(176, 648, 64),
+                    shipSurface(904, 648, 64)
                 ];
             }
+
+            var OVERWORLD_SHIP_SPAWN_X = 516;
 
             if (overworldPreview) {
                 platforms = buildOverworldPlatforms();
@@ -3570,7 +3547,7 @@
                         ? WIDTH * 2 + 1320
                         : arrivalDialoguePreview
                         ? DRAS_WORLD_X - 160
-                        : 1120
+                        : OVERWORLD_SHIP_SPAWN_X
                     : surfaceCrawlerTrial
                         ? 1000
                         : previewStartUpper
@@ -3608,17 +3585,35 @@
                 var surfaceTrialPlatform = surfaceCrawlerTrial
                     ? findSurfaceCrawlerTrialPlatform()
                     : null;
+                var overworldShipSpawnPlatform =
+                    overworldPreview &&
+                    !arrivalPortalPreview &&
+                    !arrivalDialoguePreview
+                        ? platforms.find(function (platform) {
+                            return (
+                                platform.shipSurface &&
+                                platform.x <= OVERWORLD_SHIP_SPAWN_X + 56 &&
+                                platform.x + platform.width >=
+                                    OVERWORLD_SHIP_SPAWN_X + 56
+                            );
+                        })
+                        : null;
                 player.x = overworldPreview || expansionPreview ? previewSpawnX : 82;
                 player.y = surfaceTrialPlatform
                     ? surfaceTrialPlatform.y - 100
-                    : previewStartUpper
-                        ? 110
-                        : GROUND_Y - 100;
+                    : overworldShipSpawnPlatform
+                        ? overworldShipSpawnPlatform.y - 100
+                        : previewStartUpper
+                            ? 110
+                            : GROUND_Y - 100;
                 player.vx = 0;
                 player.vy = 0;
                 player.facing = 1;
                 player.onGround = true;
-                player.supportPlatform = surfaceTrialPlatform || platforms[0];
+                player.supportPlatform =
+                    surfaceTrialPlatform ||
+                    overworldShipSpawnPlatform ||
+                    platforms[0];
                 if (arrivalPortalPreview) {
                     dialogueHasPlayed = true;
                     portalCharge = 1;

@@ -104,6 +104,16 @@ def main() -> None:
         "(0.48 - 0.7)",
         "portalCharge",
         "invisibleStep: true",
+        "var OVERWORLD_SHIP_SPAWN_X = 516",
+        "function shipSurface(x, y, width)",
+        "shipSurface(500, 448, 144)",
+        "shipSurface(340, 438, 116)",
+        "shipSurface(688, 438, 116)",
+        "shipSurface(176, 648, 64)",
+        "shipSurface(904, 648, 64)",
+        "var overworldShipSpawnPlatform =",
+        "player.supportPlatform =",
+        "overworldShipSpawnPlatform ||",
         'previewParameters.get("scene") === "portal"',
         "var centerX = WIDTH * 2 + 1545",
         "var centerY = 615",
@@ -187,7 +197,8 @@ def main() -> None:
     print("- volumetric clouds, birds, readable dog gait, and restrained volcano heat are present")
     print("- Arrival on Veyra selects its dedicated overworld music track")
     print("- the stray Landing Flats collider is absent")
-    print("- invisible ship-slope collision replaces the drawn gangway")
+    print("- overlapping ship-slope collision spans both wings and raised engine crowns")
+    print("- Aryn begins grounded on the ship's true central roof perch")
     print("- Fleet disconnect, Dras reaction, and portal ignition are staged")
     print("- the portal effect and trigger align with the painted Coreworks doorway")
     print("- all three 1672 × 941 overworld plates are present")
