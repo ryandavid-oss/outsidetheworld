@@ -13,7 +13,8 @@
 
 ## Current construction pass
 
-The current pass is platform-only. It establishes:
+The current pass is platform-first, with one contained atmospheric-control
+interaction prototype. It establishes:
 
 - room order and dimensions;
 - horizontal and vertical camera behavior;
@@ -22,6 +23,40 @@ The current pass is platform-only. It establishes:
 - runtime platform placement, thickness, color, and motion;
 - complete start-to-Uplink reachability;
 - desktop and portrait-mobile framing.
+
+### Foundry traversal pass
+
+The first two plates are now authored as a deliberate opening sequence rather
+than repetitions of the shared provisional route:
+
+- **Foundry Intake** teaches the complete movement language with generous
+  staging, a readable upward zigzag, one moving bridge, and aligned painted
+  catwalk collision.
+- **Foundry Freight Shaft** is taller and sparser. A vertical freight lift
+  replaces several static stepping stones, directional reversals become longer,
+  and a player entering from the upper room link may descend through the entire
+  chamber.
+- The concrete deck remains available while the traversal world is evaluated.
+  The first atmospheric stabilizer now anchors the far side of the Freight
+  Shaft and establishes the two-plate objective rhythm.
+
+### Atmospheric-control reservation
+
+- The approved stabilizer artwork has matched dormant and active alpha states.
+- The first Foundry station crossfades through a 2.35-second restart sequence
+  when Aryn approaches on the main deck and presses Down.
+- The provisional **175 × 100 world-pixel** footprint refers to the embedded
+  control interface, not the full environmental machine.
+- Reserve one approachable stabilizer station near the conclusion of each
+  two-plate zone: Foundry, Refinery, Biolab, and Uplink.
+- Each station needs approximately 260 pixels of clear standing width and must
+  remain reachable without a power-up.
+- The Foundry prototype includes activation feedback, sound, and an
+  accessibility announcement. Timer awards remain deferred until the timing
+  rule is approved.
+- The current timing candidate is a four-minute initial reserve plus two
+  minutes per restored stabilizer; this is intentionally not wired into the
+  runtime yet.
 
 Enemies, hazards, Signal Shards, recovery hearts, coin boxes, coins, bonuses, and
 power-ups are deliberately excluded until the traversal world is approved.

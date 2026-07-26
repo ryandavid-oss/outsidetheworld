@@ -2174,6 +2174,9 @@
             var expansionPreview =
                 previewParameters.get("preview") === "foundry-expansion" ||
                 (episodeOneRun && episodeStage === "foundry");
+            var stabilizerTrial =
+                expansionPreview &&
+                previewParameters.get("stabilizer") === "1";
             var surfaceCrawlerTrial =
                 !episodeOneRun &&
                 expansionPreview &&
@@ -2251,9 +2254,11 @@
                     : 4;
             var WORLD_WIDTH = WIDTH * SCREEN_COUNT;
             var requestedPreviewRoom = parseInt(previewParameters.get("room") || "0", 10);
-            var previewStartRoom = expansionPreview && Number.isFinite(requestedPreviewRoom)
-                ? Math.max(0, Math.min(SCREEN_COUNT - 1, requestedPreviewRoom))
-                : 0;
+            var previewStartRoom = stabilizerTrial
+                ? 1
+                : expansionPreview && Number.isFinite(requestedPreviewRoom)
+                    ? Math.max(0, Math.min(SCREEN_COUNT - 1, requestedPreviewRoom))
+                    : 0;
             var previewStartUpper =
                 expansionPreview &&
                 (previewParameters.get("layer") === "upper" || surfaceCrawlerTrial);
@@ -2558,6 +2563,16 @@
                 "/Images/Game/Super-Frgmnts/veyra-camp-dog-walk-sheet-v2.png",
                 "high"
             );
+            if (expansionPreview) {
+                assets.stabilizerDormant = loadImage(
+                    "/Images/Game/Super-Frgmnts/atmospheric-stabilizer-dormant-v1.png",
+                    "high"
+                );
+                assets.stabilizerActive = loadImage(
+                    "/Images/Game/Super-Frgmnts/atmospheric-stabilizer-active-v1.png",
+                    "high"
+                );
+            }
 
             function applySceneAssets() {
                 if (overworldPreview) {
@@ -3060,7 +3075,7 @@
                     ["green", "cyan", "violet", "rose", "gold"],
                     ["violet", "blue", "cyan", "rose", "gold"]
                 ];
-                var lowerRoute = [
+                var sharedLowerRoute = [
                     { x: 318, y: 1508, width: 204, height: 18, themeIndex: 0 },
                     { x: 632, y: 1384, width: 188, height: 28, themeIndex: 1 },
                     { x: 850, y: 1256, width: 192, height: 30, themeIndex: 2, lowerMover: true },
@@ -3076,12 +3091,64 @@
                     { x: 747, y: 338, width: 127, height: 24 },
                     { x: 1004, y: 338, width: 644, height: 24 }
                 ];
-                var upperTransfers = [
+                var sharedUpperTransfers = [
                     { x: 1360, y: 765, width: 260, height: 18, themeIndex: 1 },
                     { x: 1070, y: 637, width: 240, height: 30, themeIndex: 3 },
                     { x: 1240, y: 469, width: 240, height: 20, themeIndex: 0 },
                     { x: 715, y: 600, width: 210, height: 28, themeIndex: 2, midMover: true },
                     { x: 1392, y: 210, width: 280, height: 32, themeIndex: 4 }
+                ];
+                var foundryTraversalRoutes = [
+                    {
+                        id: "foundry-intake-ascent",
+                        platforms: [
+                            { x: 318, y: 1500, width: 204, height: 18, themeIndex: 0 },
+                            { x: 610, y: 1375, width: 188, height: 24, themeIndex: 1 },
+                            { x: 876, y: 1250, width: 184, height: 18, themeIndex: 2 },
+                            { x: 1088, y: 1124, width: 204, height: 28, themeIndex: 3 },
+                            { x: 1244, y: 1010, width: 210, height: 20, themeIndex: 4 },
+                            { x: 1120, y: 765, width: 220, height: 18, themeIndex: 1 },
+                            {
+                                x: 850,
+                                y: 640,
+                                width: 200,
+                                height: 24,
+                                themeIndex: 3,
+                                motion: {
+                                    axis: "x",
+                                    range: 110,
+                                    speed: 0.62,
+                                    phase: 0
+                                }
+                            },
+                            { x: 720, y: 475, width: 210, height: 18, themeIndex: 0 },
+                            { x: 1392, y: 210, width: 280, height: 28, themeIndex: 4 }
+                        ]
+                    },
+                    {
+                        id: "foundry-freight-shaft",
+                        platforms: [
+                            {
+                                x: 310,
+                                y: 1370,
+                                width: 210,
+                                height: 24,
+                                themeIndex: 0,
+                                motion: {
+                                    axis: "y",
+                                    range: 240,
+                                    speed: 0.78,
+                                    phase: 0
+                                }
+                            },
+                            { x: 650, y: 1122, width: 176, height: 18, themeIndex: 1 },
+                            { x: 990, y: 997, width: 176, height: 28, themeIndex: 2 },
+                            { x: 1180, y: 760, width: 170, height: 18, themeIndex: 3 },
+                            { x: 840, y: 635, width: 170, height: 24, themeIndex: 4 },
+                            { x: 490, y: 480, width: 170, height: 18, themeIndex: 0 },
+                            { x: 1392, y: 210, width: 280, height: 28, themeIndex: 4 }
+                        ]
+                    }
                 ];
 
                 function localX(spec, mirrored) {
@@ -3099,7 +3166,18 @@
                         theme: themes[spec.themeIndex]
                     };
 
-                    if (spec.lowerMover && roomIndex % 2 === 0) {
+                    if (spec.motion) {
+                        platform.motion = {
+                            axis: spec.motion.axis,
+                            range: spec.motion.range,
+                            speed: spec.motion.speed,
+                            phase: typeof spec.motion.phase === "number"
+                                ? spec.motion.phase
+                                : mirrored
+                                    ? Math.PI
+                                    : 0
+                        };
+                    } else if (spec.lowerMover && roomIndex % 2 === 0) {
                         platform.motion = {
                             axis: "x",
                             range: 160,
@@ -3122,10 +3200,10 @@
                     var mirrored = blueprint.mirror;
                     var zoneIndex = Math.floor(roomIndex / 2);
                     var themes = themeSets[zoneIndex];
-
-                    lowerRoute.forEach(function (spec) {
-                        addRuntimePlatform(roomIndex, mirrored, spec, themes);
-                    });
+                    var foundryRoute = foundryTraversalRoutes[roomIndex];
+                    var runtimeRoute = foundryRoute
+                        ? foundryRoute.platforms
+                        : sharedLowerRoute.concat(sharedUpperTransfers);
 
                     paintedCatwalks.forEach(function (spec) {
                         previewPlatforms.push({
@@ -3138,7 +3216,7 @@
                         });
                     });
 
-                    upperTransfers.forEach(function (spec) {
+                    runtimeRoute.forEach(function (spec) {
                         addRuntimePlatform(roomIndex, mirrored, spec, themes);
                     });
                 });
@@ -3189,6 +3267,22 @@
                 { x: WIDTH * 3 + 440, y: GROUND_Y - 15, width: 90, height: 18, phase: 0.4 },
                 { x: WIDTH * 3 + 1110, y: GROUND_Y - 15, width: 82, height: 18, phase: 1.9 }
             ];
+            var STABILIZER_ACTIVATION_DURATION = 2.35;
+            var atmosphericStabilizers = expansionPreview
+                ? [
+                    {
+                        id: "foundry-atmospheric-stabilizer",
+                        roomIndex: 1,
+                        x: WIDTH + 1210,
+                        baseY: GROUND_Y,
+                        width: 420,
+                        height: 735,
+                        active: false,
+                        activating: false,
+                        activationElapsed: 0
+                    }
+                ]
+                : [];
             var uplink = { x: WORLD_WIDTH - 126, y: GROUND_Y - 128, width: 68, height: 128 };
             if (overworldPreview) {
                 hazards = [];
@@ -3345,6 +3439,12 @@
             ];
             if (surfaceCrawlerTrial) {
                 criticalAssetKeys.push("squircle");
+            }
+            if (expansionPreview) {
+                criticalAssetKeys.push(
+                    "stabilizerDormant",
+                    "stabilizerActive"
+                );
             }
 
             function titleActionLabel() {
@@ -3548,7 +3648,9 @@
                         : arrivalDialoguePreview
                         ? DRAS_WORLD_X - 160
                         : OVERWORLD_SHIP_SPAWN_X
-                    : surfaceCrawlerTrial
+                    : stabilizerTrial
+                        ? WIDTH + 1110
+                        : surfaceCrawlerTrial
                         ? 1000
                         : previewStartUpper
                         ? previewStartRoom * WIDTH + (previewRoomMirror ? 116 : 1488)
@@ -3580,6 +3682,11 @@
                 platformDropTimer = 0;
                 dropThroughPlatform = null;
                 deepworksPromptTimer = 0;
+                atmosphericStabilizers.forEach(function (stabilizer) {
+                    stabilizer.active = false;
+                    stabilizer.activating = false;
+                    stabilizer.activationElapsed = 0;
+                });
                 resetDirectionPad();
                 resetPlatformMotion();
                 var surfaceTrialPlatform = surfaceCrawlerTrial
@@ -4398,6 +4505,48 @@
                 player.supportPlatform = null;
             }
 
+            function findNearbyAtmosphericStabilizer() {
+                if (!expansionPreview || !player.onGround) return null;
+
+                var playerCenterX = player.x + player.width / 2;
+                var playerBottom = player.y + 100;
+                return atmosphericStabilizers.find(function (stabilizer) {
+                    var stabilizerCenterX = stabilizer.x + stabilizer.width / 2;
+                    return (
+                        Math.abs(playerCenterX - stabilizerCenterX) <= 255 &&
+                        Math.abs(playerBottom - stabilizer.baseY) <= 48
+                    );
+                }) || null;
+            }
+
+            function activateNearbyAtmosphericStabilizer() {
+                var stabilizer = findNearbyAtmosphericStabilizer();
+                if (!stabilizer) return false;
+
+                if (stabilizer.active) {
+                    popups.push({
+                        x: stabilizer.x + stabilizer.width / 2,
+                        y: stabilizer.baseY - 322,
+                        text: "ATMOSPHERE // ONLINE",
+                        life: 0.9,
+                        color: "#58f5df"
+                    });
+                    playTone(520, 0.06, "square", 0.018);
+                    announce("Atmospheric stabilizer online.");
+                    return true;
+                }
+
+                if (stabilizer.activating) return true;
+
+                stabilizer.activating = true;
+                stabilizer.activationElapsed = 0;
+                player.vx *= 0.35;
+                playTone(118, 0.14, "square", 0.026);
+                playTone(177, 0.18, "square", 0.022, 0.09);
+                announce("Atmospheric stabilizer restart initiated.");
+                return true;
+            }
+
             function enterDeepworks() {
                 if (
                     state !== "running" ||
@@ -4437,6 +4586,9 @@
                     }
                     return false;
                 }
+                if (activateNearbyAtmosphericStabilizer()) {
+                    return true;
+                }
                 if (
                     state !== "running" ||
                     !player.onGround ||
@@ -4466,6 +4618,44 @@
                 return true;
             }
 
+            function updateAtmosphericStabilizers(delta) {
+                atmosphericStabilizers.forEach(function (stabilizer) {
+                    if (!stabilizer.activating || stabilizer.active) return;
+
+                    stabilizer.activationElapsed = Math.min(
+                        STABILIZER_ACTIVATION_DURATION,
+                        stabilizer.activationElapsed + delta
+                    );
+
+                    if (
+                        stabilizer.activationElapsed <
+                        STABILIZER_ACTIVATION_DURATION
+                    ) {
+                        return;
+                    }
+
+                    stabilizer.activating = false;
+                    stabilizer.active = true;
+                    popups.push({
+                        x: stabilizer.x + stabilizer.width / 2,
+                        y: stabilizer.baseY - 322,
+                        text: "ATMOSPHERE // ONLINE",
+                        life: 1.5,
+                        color: "#58f5df"
+                    });
+                    spawnDust(
+                        stabilizer.x + stabilizer.width / 2,
+                        stabilizer.baseY - 36,
+                        "#58f5df",
+                        18
+                    );
+                    playTone(224, 0.12, "square", 0.026);
+                    playTone(336, 0.14, "square", 0.024, 0.08);
+                    playTone(448, 0.2, "square", 0.022, 0.17);
+                    announce("Foundry atmospheric stabilizer online.");
+                });
+            }
+
             function update(delta) {
                 if (state === "paused") return;
                 if (dialogueActive) {
@@ -4485,6 +4675,7 @@
 
                 elapsed += delta;
                 updatePlatformMotion();
+                updateAtmosphericStabilizers(delta);
                 if (overworldPreview) {
                     if (portalIgniting && portalCharge < 1) {
                         portalCharge = Math.min(1, portalCharge + delta / 2.25);
@@ -4696,6 +4887,9 @@
                 updateBlaster(delta);
                 updateBolts(delta);
                 checkUplink();
+                var focusedStabilizer = portraitMode
+                    ? findNearbyAtmosphericStabilizer()
+                    : null;
                 var cameraTarget;
                 if (portraitMode) {
                     if (player.vx > 85) {
@@ -4708,6 +4902,9 @@
                     cameraAnchor += (targetCameraAnchor - cameraAnchor) * Math.min(1, delta * 2.25);
                     cameraLookAhead += (targetLookAhead - cameraLookAhead) * Math.min(1, delta * 3.4);
                     cameraTarget = player.x + 56 + cameraLookAhead - viewWidth * cameraAnchor;
+                    if (focusedStabilizer) {
+                        cameraTarget += 42;
+                    }
                 } else {
                     if (overworldPreview) {
                         var departureProgress = Math.max(
@@ -4733,6 +4930,11 @@
                     var cameraYMaximum =
                         WORLD_HEIGHT - HEIGHT + (portraitMode && inDeepworks ? 145 : 0);
                     cameraYTarget = player.y + 50 - HEIGHT * verticalAnchor;
+                    if (portraitMode && focusedStabilizer) {
+                        cameraYTarget -= focusedStabilizer.activating
+                            ? 150
+                            : 96;
+                    }
                     cameraYTarget = Math.max(0, Math.min(cameraYMaximum, cameraYTarget));
                 } else {
                     cameraYTarget = portraitMode && inDeepworks ? 145 : 0;
@@ -5318,6 +5520,7 @@
                 ctx.translate(-Math.round(cameraX), -Math.round(cameraY));
                 drawDeepworksPrompt();
                 drawPlatforms();
+                drawAtmosphericStabilizers();
                 drawHazards();
                 drawEnemies();
                 drawUplink();
@@ -6288,6 +6491,169 @@
                     ctx.fillStyle = "#36445c";
                     ctx.fillRect(platform.x + 15, platform.y + platform.height, 3, 6);
                     ctx.fillRect(platform.x + platform.width - 18, platform.y + platform.height, 3, 6);
+                    ctx.restore();
+                });
+            }
+
+            function atmosphericStabilizerProgress(stabilizer) {
+                if (stabilizer.active) return 1;
+                if (!stabilizer.activating) return 0;
+                var progress = Math.max(
+                    0,
+                    Math.min(
+                        1,
+                        stabilizer.activationElapsed /
+                        STABILIZER_ACTIVATION_DURATION
+                    )
+                );
+                return progress * progress * (3 - 2 * progress);
+            }
+
+            function drawAtmosphericStabilizers() {
+                if (!expansionPreview) return;
+
+                atmosphericStabilizers.forEach(function (stabilizer) {
+                    if (
+                        stabilizer.x + stabilizer.width < cameraX - 160 ||
+                        stabilizer.x > cameraX + viewWidth + 160
+                    ) {
+                        return;
+                    }
+
+                    var top = stabilizer.baseY - stabilizer.height;
+                    var progress = atmosphericStabilizerProgress(stabilizer);
+                    var flicker = stabilizer.activating
+                        ? 0.72 + Math.sin(elapsed * 31) * 0.18 +
+                            Math.sin(elapsed * 53) * 0.1
+                        : 1;
+                    var activeAlpha = Math.max(
+                        0,
+                        Math.min(1, progress * flicker)
+                    );
+                    var chamberX = stabilizer.x + stabilizer.width * 0.5;
+                    var chamberY = top + stabilizer.height * 0.43;
+                    var labelX = portraitMode
+                        ? Math.max(
+                            cameraX + 132,
+                            Math.min(
+                                cameraX + viewWidth - 132,
+                                chamberX
+                            )
+                        )
+                        : chamberX;
+
+                    ctx.save();
+                    if (activeAlpha > 0.02) {
+                        var glow = ctx.createRadialGradient(
+                            chamberX,
+                            chamberY,
+                            12,
+                            chamberX,
+                            chamberY,
+                            stabilizer.width * 0.55
+                        );
+                        glow.addColorStop(
+                            0,
+                            "rgba(255, 105, 180, " +
+                                (0.34 * activeAlpha).toFixed(3) +
+                                ")"
+                        );
+                        glow.addColorStop(
+                            0.42,
+                            "rgba(224, 106, 169, " +
+                                (0.18 * activeAlpha).toFixed(3) +
+                                ")"
+                        );
+                        glow.addColorStop(1, "rgba(224, 106, 169, 0)");
+                        ctx.fillStyle = glow;
+                        ctx.fillRect(
+                            stabilizer.x - stabilizer.width * 0.3,
+                            top + stabilizer.height * 0.08,
+                            stabilizer.width * 1.6,
+                            stabilizer.height * 0.72
+                        );
+                    }
+
+                    ctx.globalAlpha = Math.max(0, 1 - activeAlpha);
+                    ctx.drawImage(
+                        assets.stabilizerDormant,
+                        stabilizer.x,
+                        top,
+                        stabilizer.width,
+                        stabilizer.height
+                    );
+
+                    if (activeAlpha > 0) {
+                        ctx.globalAlpha = activeAlpha;
+                        ctx.shadowColor = "#ff69b4";
+                        ctx.shadowBlur = 10 + 18 * activeAlpha;
+                        ctx.drawImage(
+                            assets.stabilizerActive,
+                            stabilizer.x,
+                            top,
+                            stabilizer.width,
+                            stabilizer.height
+                        );
+                    }
+                    ctx.restore();
+
+                    if (stabilizer.activating) {
+                        var activationPercent = Math.min(
+                            99,
+                            Math.floor(
+                                stabilizer.activationElapsed /
+                                STABILIZER_ACTIVATION_DURATION *
+                                100
+                            )
+                        );
+                        ctx.save();
+                        ctx.font = "700 17px Fira Code, monospace";
+                        ctx.textAlign = "center";
+                        ctx.fillStyle = "#03050d";
+                        ctx.fillText(
+                            "STABILIZING // " + activationPercent + "%",
+                            labelX + 2,
+                            top + stabilizer.height * 0.69 + 2
+                        );
+                        ctx.fillStyle = "#ffd36c";
+                        ctx.fillText(
+                            "STABILIZING // " + activationPercent + "%",
+                            labelX,
+                            top + stabilizer.height * 0.69
+                        );
+                        ctx.restore();
+                        return;
+                    }
+
+                    if (findNearbyAtmosphericStabilizer() !== stabilizer) {
+                        return;
+                    }
+
+                    var promptText = stabilizer.active
+                        ? "↓ ATMOSPHERE ONLINE"
+                        : stabilizer.activating
+                            ? "↓ RESTART IN PROGRESS"
+                            : "↓ RESTART STABILIZER";
+                    var promptColor = stabilizer.active
+                        ? "#58f5df"
+                        : "#ffd36c";
+                    var pulse = 0.76 + Math.sin(elapsed * 5.5) * 0.18;
+                    ctx.save();
+                    ctx.globalAlpha = pulse;
+                    ctx.font = "700 18px Fira Code, monospace";
+                    ctx.textAlign = "center";
+                    ctx.fillStyle = "#03050d";
+                    ctx.fillText(
+                        promptText,
+                        labelX + 2,
+                        stabilizer.baseY - 86
+                    );
+                    ctx.fillStyle = promptColor;
+                    ctx.fillText(
+                        promptText,
+                        labelX,
+                        stabilizer.baseY - 88
+                    );
                     ctx.restore();
                 });
             }
