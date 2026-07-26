@@ -43,7 +43,7 @@ def main() -> None:
         'configureEpisodeScene("overworld")',
         'configureEpisodeScene("foundry")',
         "super-frgmnts-sound",
-        'window.addEventListener("pagehide", pauseAudioForFocusLoss)',
+        'window.addEventListener("pagehide", function ()',
         'document.addEventListener("visibilitychange"',
         "assets.overworld0 = loadImage(",
         "assets.foundryExpanded = loadImage(",

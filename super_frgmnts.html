@@ -19,6 +19,7 @@
         href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@500;600;700&family=Inter:wght@700;800;900&display=swap" />
     <style>
         :root {
+            --app-height: 100dvh;
             --void: #050713;
             --ink: #f4f1ff;
             --muted: #94a8ba;
@@ -65,7 +66,7 @@
         }
 
         body {
-            min-height: 100dvh;
+            min-height: var(--app-height, 100dvh);
             font-family: var(--font-game);
             background:
                 radial-gradient(circle at 18% 16%, rgba(99, 149, 238, 0.14), transparent 32rem),
@@ -88,7 +89,7 @@
             position: relative;
             display: grid;
             grid-template-rows: auto 1fr auto;
-            min-height: 100dvh;
+            min-height: var(--app-height, 100dvh);
             padding:
                 max(12px, env(safe-area-inset-top))
                 max(14px, env(safe-area-inset-right))
@@ -1412,7 +1413,7 @@
             .game-app {
                 display: block;
                 width: 100vw;
-                height: 100dvh;
+                height: var(--app-height, 100dvh);
                 min-height: 0;
                 padding: 0;
             }
@@ -1426,7 +1427,7 @@
                 inset: 0;
                 display: block;
                 width: 100vw;
-                height: 100dvh;
+                height: var(--app-height, 100dvh);
             }
 
             .stage-shell {
@@ -2323,6 +2324,7 @@
             var gameApp = document.querySelector(".game-app");
             var stageShell = document.getElementById("stageShell");
             var titleScreen = document.getElementById("titleScreen");
+            var titleArtImage = document.querySelector(".title-screen__art");
             var titleStartButton = document.getElementById("titleStartButton");
             var titleSeason = document.getElementById("titleSeason");
             var signalBoot = document.getElementById("signalBoot");
@@ -2595,6 +2597,9 @@
             var shootBuffer = 0;
             var state = "loading";
             var assetsReady = false;
+            var assetLoadInProgress = true;
+            var failedAssetKeys = [];
+            var assetRetryNonce = 0;
             var signalInitialized = false;
             var elapsed = 0;
             var timeLeft = START_TIME;
@@ -2635,6 +2640,7 @@
                 }
             };
             var lastFrame = 0;
+            var renderRequested = true;
             var runFrameTime = 0;
             var jumpBuffer = 0;
             var coyoteTime = 0;
@@ -3230,11 +3236,21 @@
                 var image = new Image();
                 image.decoding = "async";
                 image.fetchPriority = priority || "auto";
+                image.dataset.source = source;
                 image.src = source;
                 return image;
             }
 
-            function waitForImage(image) {
+            function imageHasPixels(image) {
+                return Boolean(
+                    image &&
+                    image.complete &&
+                    image.naturalWidth > 0 &&
+                    image.naturalHeight > 0
+                );
+            }
+
+            function waitForImage(image, key) {
                 return new Promise(function (resolve) {
                     var settled = false;
                     var timeoutId;
@@ -3243,9 +3259,14 @@
                         if (settled) return;
                         settled = true;
                         window.clearTimeout(timeoutId);
-                        image.removeEventListener("load", finish);
-                        image.removeEventListener("error", finish);
-                        resolve();
+                        if (image) {
+                            image.removeEventListener("load", finish);
+                            image.removeEventListener("error", finish);
+                        }
+                        resolve({
+                            key: key,
+                            ok: imageHasPixels(image)
+                        });
                     }
 
                     if (!image || image.complete) {
@@ -3255,14 +3276,42 @@
 
                     image.addEventListener("load", finish, { once: true });
                     image.addEventListener("error", finish, { once: true });
-                    timeoutId = window.setTimeout(finish, 8000);
+                    timeoutId = window.setTimeout(finish, 20000);
                 });
             }
 
+            var viewportResizeFrame = 0;
+            var orientationResizeTimer = 0;
+
+            function visibleViewportSize() {
+                var viewport = window.visualViewport;
+                return {
+                    width: viewport && viewport.width
+                        ? viewport.width
+                        : window.innerWidth,
+                    height: viewport && viewport.height
+                        ? viewport.height
+                        : window.innerHeight
+                };
+            }
+
             function resizeGameViewport() {
-                portraitMode = window.innerWidth <= 720 && window.innerHeight > window.innerWidth;
+                var viewport = visibleViewportSize();
+                document.documentElement.style.setProperty(
+                    "--app-height",
+                    Math.max(1, Math.round(viewport.height)) + "px"
+                );
+                portraitMode =
+                    viewport.width <= 720 &&
+                    viewport.height > viewport.width;
                 var nextViewWidth = portraitMode
-                    ? Math.max(430, Math.round(HEIGHT * window.innerWidth / Math.max(1, window.innerHeight)))
+                    ? Math.max(
+                        430,
+                        Math.round(
+                            HEIGHT * viewport.width /
+                            Math.max(1, viewport.height)
+                        )
+                    )
                     : WIDTH;
 
                 viewWidth = Math.min(WIDTH, nextViewWidth);
@@ -3273,6 +3322,25 @@
 
                 cameraX = Math.max(0, Math.min(WORLD_WIDTH - viewWidth, cameraX));
                 document.body.classList.toggle("is-portrait-game", portraitMode);
+                renderRequested = true;
+            }
+
+            function scheduleGameViewportResize() {
+                if (viewportResizeFrame) return;
+                viewportResizeFrame = window.requestAnimationFrame(function () {
+                    viewportResizeFrame = 0;
+                    resizeGameViewport();
+                });
+            }
+
+            function settleGameViewportAfterOrientationChange() {
+                releaseAllControls();
+                scheduleGameViewportResize();
+                window.clearTimeout(orientationResizeTimer);
+                orientationResizeTimer = window.setTimeout(
+                    scheduleGameViewportResize,
+                    260
+                );
             }
 
             var criticalAssetKeys = [
@@ -3318,11 +3386,89 @@
                     : "Begin episode";
             }
 
-            Promise.all(criticalAssetKeys.map(function (key) {
-                return waitForImage(assets[key]);
-            })).then(function () {
+            function retrySource(source) {
+                return source +
+                    (source.indexOf("?") === -1 ? "?" : "&") +
+                    "sf-retry=" + assetRetryNonce;
+            }
+
+            function refreshCriticalAsset(key) {
+                if (key === "titleArtwork") {
+                    document
+                        .querySelectorAll(".title-screen__picture source")
+                        .forEach(function (sourceNode) {
+                            var originalSource =
+                                sourceNode.dataset.source ||
+                                sourceNode.getAttribute("srcset");
+                            sourceNode.dataset.source = originalSource;
+                            sourceNode.setAttribute(
+                                "srcset",
+                                retrySource(originalSource)
+                            );
+                        });
+                    var originalTitleSource =
+                        titleArtImage.dataset.source ||
+                        titleArtImage.getAttribute("src");
+                    titleArtImage.dataset.source = originalTitleSource;
+                    titleArtImage.src = retrySource(originalTitleSource);
+                    return;
+                }
+
+                var previous = assets[key];
+                var originalSource =
+                    previous && previous.dataset
+                        ? previous.dataset.source
+                        : "";
+                if (!originalSource) return;
+                assets[key] = loadImage(
+                    retrySource(originalSource),
+                    "high"
+                );
+                assets[key].dataset.source = originalSource;
+                if (key === "foundryExpanded") {
+                    assets.foundryLower0 = assets[key];
+                }
+                applySceneAssets();
+            }
+
+            function showCriticalAssetFailure(keys) {
+                assetsReady = false;
+                assetLoadInProgress = false;
+                failedAssetKeys = keys.slice();
+                state = "loading";
+                releaseAllControls();
+                titleStartButton.disabled = true;
+                titleStartButton.textContent = "Artwork unavailable";
+                signalBoot.hidden = false;
+                signalBootButton.disabled = false;
+                signalBootButton.textContent = "Retry Load";
+                signalBoot.setAttribute(
+                    "aria-label",
+                    "Some game artwork did not load. Retry loading Super Frgmnts."
+                );
+                document.body.classList.add("is-signal-locked");
+                window.requestAnimationFrame(function () {
+                    signalBootButton.focus({ preventScroll: true });
+                });
+                if (signalInitialized) {
+                    announce(
+                        "Some game artwork did not load. Choose Retry Load."
+                    );
+                }
+            }
+
+            function completeCriticalAssetLoad() {
                 assetsReady = true;
+                assetLoadInProgress = false;
+                failedAssetKeys = [];
                 state = "ready";
+                signalBootButton.disabled = false;
+                signalBootButton.textContent = "Load Game";
+                signalBoot.setAttribute("aria-label", "Load Super Frgmnts");
+                if (signalInitialized) {
+                    signalBoot.hidden = true;
+                    document.body.classList.remove("is-signal-locked");
+                }
                 if (signalInitialized && autostartRequested) {
                     resetGame(true);
                     setAudioScene(overworldPreview ? "overworld" : "foundry");
@@ -3337,7 +3483,53 @@
                     });
                 }
                 draw();
-            });
+            }
+
+            function loadCriticalAssets(keys) {
+                assetLoadInProgress = true;
+                titleStartButton.disabled = true;
+                titleStartButton.textContent = "Loading signal…";
+                Promise.all(keys.map(function (key) {
+                    return waitForImage(
+                        key === "titleArtwork"
+                            ? titleArtImage
+                            : assets[key],
+                        key
+                    );
+                })).then(function (results) {
+                    var failures = results
+                        .filter(function (result) {
+                            return !result.ok;
+                        })
+                        .map(function (result) {
+                            return result.key;
+                        });
+                    if (failures.length) {
+                        showCriticalAssetFailure(failures);
+                        return;
+                    }
+                    completeCriticalAssetLoad();
+                });
+            }
+
+            function retryFailedCriticalAssets() {
+                if (!failedAssetKeys.length || assetLoadInProgress) return;
+                if (!signalInitialized) {
+                    initializeSignal();
+                }
+                signalBoot.hidden = false;
+                document.body.classList.add("is-signal-locked");
+                signalBootButton.disabled = true;
+                signalBootButton.textContent = "Retrying…";
+                assetRetryNonce += 1;
+                var retryKeys = failedAssetKeys.slice();
+                retryKeys.forEach(refreshCriticalAsset);
+                loadCriticalAssets(retryKeys);
+            }
+
+            loadCriticalAssets(
+                criticalAssetKeys.concat(["titleArtwork"])
+            );
 
             function resetGame(autostart) {
                 state = autostart ? "running" : "ready";
@@ -4030,14 +4222,9 @@
                 dialoguePreviousFocus = document.activeElement;
                 state = "dialogue";
                 document.body.classList.add("is-dialogue");
-                keys.left = false;
-                keys.right = false;
-                keys.down = false;
-                keys.jump = false;
-                keys.shoot = false;
+                releaseAllControls();
                 player.vx = 0;
                 player.facing = 1;
-                resetDirectionPad();
                 dialogueSignal.textContent = "Fleet link // Secure";
                 dialogueSignal.classList.remove("is-disconnected");
                 dialogueSkipConfirm.hidden = true;
@@ -4137,17 +4324,7 @@
 
                 state = "paused";
                 document.body.classList.remove("is-running");
-                keys.left = false;
-                keys.right = false;
-                keys.down = false;
-                keys.jump = false;
-                keys.shoot = false;
-                jumpBuffer = 0;
-                shootBuffer = 0;
-                resetDirectionPad();
-                document.querySelectorAll("[data-control]").forEach(function (button) {
-                    button.classList.remove("is-pressed");
-                });
+                releaseAllControls();
 
                 messageKicker.textContent = "Transmission Hold // Player Pause";
                 messageTitle.textContent = "Paused";
@@ -7052,6 +7229,22 @@
                 setControl("down", false);
             }
 
+            function releaseAllControls() {
+                keys.left = false;
+                keys.right = false;
+                keys.down = false;
+                keys.jump = false;
+                keys.shoot = false;
+                jumpBuffer = 0;
+                shootBuffer = 0;
+                resetDirectionPad();
+                document
+                    .querySelectorAll("[data-control]")
+                    .forEach(function (button) {
+                        button.classList.remove("is-pressed");
+                    });
+            }
+
             function releaseDirectionPad(pointerId, immediate) {
                 if (directionPointerId !== pointerId) return;
                 directionPointerId = null;
@@ -7099,7 +7292,13 @@
                 }
             }
 
-            signalBootButton.addEventListener("click", initializeSignal);
+            signalBootButton.addEventListener("click", function () {
+                if (failedAssetKeys.length) {
+                    retryFailedCriticalAssets();
+                    return;
+                }
+                initializeSignal();
+            });
             window.requestAnimationFrame(function () {
                 signalBootButton.focus({ preventScroll: true });
             });
@@ -7200,22 +7399,23 @@
             });
 
             window.addEventListener("blur", function () {
-                keys.left = false;
-                keys.right = false;
-                keys.down = false;
-                keys.jump = false;
-                keys.shoot = false;
-                resetDirectionPad();
+                releaseAllControls();
                 pauseAudioForFocusLoss();
             });
 
             window.addEventListener("focus", resumeAudioAfterFocusGain);
-            window.addEventListener("pagehide", pauseAudioForFocusLoss);
+            window.addEventListener("pagehide", function () {
+                releaseAllControls();
+                pauseAudioForFocusLoss();
+            });
             window.addEventListener("pageshow", resumeAudioAfterFocusGain);
             document.addEventListener("visibilitychange", function () {
                 if (document.visibilityState === "hidden") {
+                    releaseAllControls();
                     pauseAudioForFocusLoss();
                 } else {
+                    lastFrame = 0;
+                    renderRequested = true;
                     resumeAudioAfterFocusGain();
                 }
             });
@@ -7265,7 +7465,21 @@
                 passive: true
             });
 
-            window.addEventListener("resize", resizeGameViewport);
+            window.addEventListener("resize", scheduleGameViewportResize);
+            window.addEventListener(
+                "orientationchange",
+                settleGameViewportAfterOrientationChange
+            );
+            if (window.visualViewport) {
+                window.visualViewport.addEventListener(
+                    "resize",
+                    scheduleGameViewportResize
+                );
+                window.visualViewport.addEventListener(
+                    "scroll",
+                    scheduleGameViewportResize
+                );
+            }
 
             if (directionPad) {
                 directionPad.addEventListener("pointerdown", function (event) {
@@ -7383,10 +7597,24 @@
             });
 
             function frame(now) {
-                var delta = lastFrame ? Math.min(0.033, (now - lastFrame) / 1000) : 0;
+                var pageVisible = document.visibilityState !== "hidden";
+                var simulationActive =
+                    pageVisible &&
+                    (state === "running" || dialogueActive);
+                var delta = simulationActive && lastFrame
+                    ? Math.min(0.033, (now - lastFrame) / 1000)
+                    : 0;
                 lastFrame = now;
-                update(delta);
-                draw();
+                if (simulationActive) {
+                    update(delta);
+                    draw();
+                    renderRequested = false;
+                } else if (pageVisible && renderRequested) {
+                    draw();
+                    renderRequested = false;
+                } else if (!pageVisible) {
+                    lastFrame = 0;
+                }
                 window.requestAnimationFrame(frame);
             }
 
