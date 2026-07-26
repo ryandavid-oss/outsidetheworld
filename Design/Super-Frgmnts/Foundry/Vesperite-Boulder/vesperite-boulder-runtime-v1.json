@@ -1,0 +1,42 @@
+{
+  "asset": "Vesperite route-obstruction boulder",
+  "status": "Episode 01 early-beta route obstruction",
+  "preview_query": "aryn=ludo&weapon=rifle",
+  "runtime_contract": {
+    "frame_size": [
+      176,
+      184
+    ],
+    "baseline_y": 180,
+    "collision_size": [
+      166,
+      176
+    ],
+    "impact_frame_count": 16,
+    "impact_frame_ms": 55,
+    "collapse_frame_count": 16,
+    "collapse_frame_ms": 70
+  },
+  "states": {
+    "intact": "Images/Game/Super-Frgmnts/vesperite-boulder-intact-runtime-v1.png",
+    "impact": "Images/Game/Super-Frgmnts/vesperite-boulder-impact-runtime-v1.png",
+    "collapse": "Images/Game/Super-Frgmnts/vesperite-boulder-collapse-runtime-v1.png",
+    "rubble": "Images/Game/Super-Frgmnts/vesperite-boulder-rubble-runtime-v1.png"
+  },
+  "gameplay_contract": {
+    "collision": "solid while intact, impacted, or collapsing",
+    "damage_source": "heavy rifle direct round",
+    "hits_required": 3,
+    "traversal": "taller than Aryn's unassisted jump apex",
+    "remnant": "persistent rubble with no collision",
+    "pack_blaster": "does not clear the obstruction",
+    "preview_only": false,
+    "episode_beta_obstruction": true
+  },
+  "notes": [
+    "Each of the first two hits plays the impact sequence and leaves the boulder solid.",
+    "The third impact flows into collapse without restoring player control through the rock.",
+    "The solid top prevents platform drops from embedding Aryn inside the obstruction.",
+    "The final rubble remains as environmental continuity after collision is removed."
+  ]
+}

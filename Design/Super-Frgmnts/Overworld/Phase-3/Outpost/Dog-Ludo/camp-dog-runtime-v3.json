@@ -1,0 +1,33 @@
+{
+  "revision": "3K",
+  "identity": "Veyra camp dog",
+  "status": "integrated-local-review",
+  "solid": false,
+  "hostile": false,
+  "routePixels": 130,
+  "runtimeFrameSize": [100, 80],
+  "animations": {
+    "walk": {
+      "asset": "Images/Game/Super-Frgmnts/veyra-camp-dog-walk-sheet-v3.png",
+      "frames": 36,
+      "columns": 6,
+      "rows": 6,
+      "sourceFrameDurationMs": 59
+    },
+    "sniff": {
+      "asset": "Images/Game/Super-Frgmnts/veyra-camp-dog-sniff-sheet-v3.png",
+      "frames": 16,
+      "columns": 4,
+      "rows": 4,
+      "sourceFrameDurationMs": 55,
+      "runtimeDurationMs": 3000,
+      "schedule": "occasional seeded event"
+    }
+  },
+  "notes": [
+    "The supplied cycles replace the former two-frame contact/pass approximation.",
+    "The source gait faces left, so only rightward travel is mirrored.",
+    "The sniff sequence plays once per selected event rather than looping.",
+    "The dog remains decorative and cannot interrupt first contact."
+  ]
+}

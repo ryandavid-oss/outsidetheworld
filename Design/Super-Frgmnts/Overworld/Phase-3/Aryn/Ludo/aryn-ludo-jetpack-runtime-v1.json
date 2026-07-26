@@ -1,0 +1,46 @@
+{
+  "asset": "Aryn Sol-Mavi Ludo jetpack animation",
+  "status": "normalized preview candidate; gameplay not integrated",
+  "runtime": "Images/Game/Super-Frgmnts/aryn-jetpack-ludo-runtime-v1.png",
+  "runtime_contract": {
+    "frame_size": [
+      112,
+      112
+    ],
+    "baseline_y": 105,
+    "source_scale": 0.165,
+    "frame_count": 16,
+    "source_frame_ms": 120
+  },
+  "phase_map": {
+    "brace": [
+      0,
+      1,
+      2
+    ],
+    "ignition": [
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "lift_off": [
+      8,
+      9,
+      10,
+      11
+    ],
+    "sustained_thrust": [
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  "design_boundaries": [
+    "This build does not assign fuel, duration, height, or recharge behavior.",
+    "The animation remains separate from Aryn's unassisted jump.",
+    "The heavy rifle and jetpack cannot be assumed simultaneously equipped."
+  ]
+}

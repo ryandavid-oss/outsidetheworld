@@ -1,0 +1,133 @@
+{
+  "asset": "Aryn Sol-Mavi Ludo rifle special weapon",
+  "status": "Episode 01 early-beta pickup",
+  "preview_query": "aryn=ludo&weapon=rifle",
+  "runtime_contract": {
+    "frame_size": [
+      112,
+      112
+    ],
+    "baseline_y": 105,
+    "source_scale": 0.165,
+    "body_alignment": "fixed source canvas; never center on rifle bounds",
+    "draw_frame_count": 10,
+    "fire_frame_count": 12
+  },
+  "draw": {
+    "runtime": "Images/Game/Super-Frgmnts/aryn-rifle-draw-ludo-runtime-v1.png",
+    "components": [
+      {
+        "source_frame": 0,
+        "role": "stowed"
+      },
+      {
+        "source_frame": 3,
+        "role": "reach"
+      },
+      {
+        "source_frame": 6,
+        "role": "grip"
+      },
+      {
+        "source_frame": 9,
+        "role": "clear"
+      },
+      {
+        "source_frame": 11,
+        "role": "lift"
+      },
+      {
+        "source_frame": 13,
+        "role": "shoulder"
+      },
+      {
+        "source_frame": 16,
+        "role": "cross body"
+      },
+      {
+        "source_frame": 18,
+        "role": "low ready"
+      },
+      {
+        "source_frame": 20,
+        "role": "raise"
+      },
+      {
+        "source_frame": 22,
+        "role": "aim"
+      }
+    ]
+  },
+  "fire": {
+    "runtime": "Images/Game/Super-Frgmnts/aryn-rifle-fire-ludo-runtime-v1.png",
+    "components": [
+      {
+        "source_frame": 0,
+        "role": "aim"
+      },
+      {
+        "source_frame": 2,
+        "role": "ignition"
+      },
+      {
+        "source_frame": 4,
+        "role": "flash"
+      },
+      {
+        "source_frame": 7,
+        "role": "flash hold"
+      },
+      {
+        "source_frame": 10,
+        "role": "recoil"
+      },
+      {
+        "source_frame": 14,
+        "role": "recoil hold"
+      },
+      {
+        "source_frame": 18,
+        "role": "pulse"
+      },
+      {
+        "source_frame": 22,
+        "role": "pulse tail"
+      },
+      {
+        "source_frame": 26,
+        "role": "beam"
+      },
+      {
+        "source_frame": 30,
+        "role": "beam tail"
+      },
+      {
+        "source_frame": 34,
+        "role": "recover"
+      },
+      {
+        "source_frame": 35,
+        "role": "aim"
+      }
+    ]
+  },
+  "design_contract": {
+    "production_default": "pack-mounted seeking blaster",
+    "rifle_role": "optional route-clearing heavy special weapon",
+    "mobility_tradeoff": "Aryn braces briefly while firing",
+    "projectile": "fast, direct, amber heavy round",
+    "destruction_target": "Vesperite route obstructions",
+    "preview_only": false,
+    "episode_beta_pickup": true
+  },
+  "notes": [
+    "The rifle begins stowed.",
+    "The first firing input draws, braces, and then discharges.",
+    "Aryn holds the rifle ready while stationary after firing.",
+    "Running, jumping, or dropping stows the rifle; the next shot redraws it.",
+    "Three direct heavy rounds clear each Vesperite obstruction and leave non-colliding rubble.",
+    "The existing backpack remains visible and remains Aryn's upgrade hub.",
+    "The isolated weapon=rifle route remains available for review.",
+    "The Episode 01 beta activates the same behavior after Aryn collects the heavy-rifle pickup."
+  ]
+}

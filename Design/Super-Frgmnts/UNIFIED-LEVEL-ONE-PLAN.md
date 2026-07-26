@@ -11,10 +11,10 @@
 - Down drops through one-way platforms and enters Deepworks
 - Deepworks remains jump-exitable
 
-## Current construction pass
+## Current early-beta pass
 
-The current pass is platform-first, with one contained atmospheric-control
-interaction prototype. It establishes:
+The current pass assembles the approved systems into one intentionally scoped
+Episode 01 run. It establishes:
 
 - room order and dimensions;
 - horizontal and vertical camera behavior;
@@ -22,7 +22,17 @@ interaction prototype. It establishes:
 - painted catwalk collision;
 - runtime platform placement, thickness, color, and motion;
 - complete start-to-Uplink reachability;
-- desktop and portrait-mobile framing.
+- desktop and portrait-mobile framing;
+- a safe field-calibration lane between Dras's camp and the Coreworks portal;
+- a shootable credit cache whose coins burst into the world and carry into the
+  Foundry scene;
+- two atmospheric relays, twelve Signal Shards, recovery hearts, optional
+  Vesperite, and two credit caches;
+- a jet-assist pickup, heavy-rifle pickup, and mandatory three-shot Vesperite
+  obstruction;
+- one cycling electrified platform and representative crawler, flying, and
+  armored patrol enemies;
+- an eight-minute mission clock and an optional full-annihilation score bonus.
 
 ### Foundry traversal pass
 
@@ -32,13 +42,18 @@ than repetitions of the shared provisional route:
 - **Foundry Intake** teaches the complete movement language with generous
   staging, a readable upward zigzag, one moving bridge, and aligned painted
   catwalk collision.
-- **Foundry Freight Shaft** is taller and sparser. A vertical freight lift
-  replaces several static stepping stones, directional reversals become longer,
-  and a player entering from the upper room link may descend through the entire
-  chamber.
-- The concrete deck remains available while the traversal world is evaluated.
-  The first atmospheric stabilizer now anchors the far side of the Freight
-  Shaft and establishes the two-plate objective rhythm.
+- **The Breathing Chamber** is a one-way fall that becomes an ascent when it
+  breathes. Aryn enters from the upper-left room link, deliberately descends
+  through the dormant chamber, and reaches the atmospheric stabilizer at a
+  genuine deck-level dead end.
+- Restoration powers two ventilation fans, clears the poisoned haze, energizes
+  a full-height freight lift, and opens an upper-right route into Refinery.
+- The deck-level Foundry/Refinery boundary is now a sealed service bulkhead. It
+  never becomes a shortcut around the restored ascent.
+- The cavern-window patch spans the mirrored seam between Foundry Intake and
+  The Breathing Chamber. Its concrete sill aligns with the live Foundry deck;
+  the view itself remains non-collidable environmental storytelling with
+  restrained depth motes and a clearer restored state.
 
 ### Atmospheric-control reservation
 
@@ -55,12 +70,13 @@ than repetitions of the shared provisional route:
   accessibility announcement. Timer awards remain deferred until the timing
   rule is approved.
 - Restoring the Foundry station now produces a room-scale response: conduit
-  energy resumes, service lamps illuminate, a ventilation rotor restarts, and
-  the contaminated haze gains a restrained clean-air glow.
-- The Foundry/Refinery containment field remains physically closed until the
-  restart completes. It then powers down over a short mechanical beat, updates
-  the mission objective to **REFINERY ACCESS // OPEN**, and permits traversal
-  into the third plate.
+  energy resumes, service lamps illuminate, two ventilation fans restart at
+  offset beats, the contaminated haze recedes, and the freight-lift rail fills
+  from the deck upward.
+- The upper Foundry/Refinery containment field remains physically closed until
+  the restart completes. It then powers down over a short mechanical beat,
+  updates the mission objective to **FREIGHT LIFT ONLINE // REFINERY ABOVE**,
+  and permits traversal into the third plate only from the upper cross tier.
 - This establishes the repeatable two-plate objective cadence:
   **enter zone → learn its traversal → find its stabilizer → restore the
   environment → unlock the next zone**.
@@ -68,8 +84,9 @@ than repetitions of the shared provisional route:
   minutes per restored stabilizer; this is intentionally not wired into the
   runtime yet.
 
-Enemies, hazards, Signal Shards, recovery hearts, coin boxes, coins, bonuses, and
-power-ups are deliberately excluded until the traversal world is approved.
+This is an early beta, not a balance-complete episode. Enemy density, pickup
+economy, credit values, store prices, final relay count, and difficulty tuning
+remain deliberately provisional.
 
 ## Provisional artwork contract
 
@@ -80,7 +97,7 @@ power-ups are deliberately excluded until the traversal world is approved.
 - Replacement art must preserve the existing world coordinates and collision
   surfaces so final artwork can be swapped without redesigning gameplay.
 
-## Deferred population systems
+## Beta population systems
 
 ### Enemy-annihilation bonus
 
@@ -91,10 +108,12 @@ power-ups are deliberately excluded until the traversal world is approved.
 
 ### Coin boxes and coins
 
-- Coin boxes are shootable world objects.
-- A destroyed box releases a readable burst of collectible coins.
+- Credit caches are shootable world objects.
+- A hit cache releases a readable, physical burst of collectible coins.
 - Coins are optional and never required to complete a level.
-- Collected coins feed a between-level purchase screen.
+- Tutorial credits persist across the overworld-to-Foundry scene handoff.
+- Collected coins will feed a between-level purchase screen; that store is not
+  part of this beta.
 - Purchases provide start-of-next-level power-ups rather than permanent account
   upgrades.
 - Coin values, banking rules, death penalties, box density, and shop prices will

@@ -1,0 +1,36 @@
+{
+  "workingName": "Tall Gaunt Alien",
+  "status": "review-ready-not-spawned",
+  "productionPopulation": false,
+  "runtimeAnimations": {
+    "walk": {
+      "asset": "Images/Game/Super-Frgmnts/enemy-tall-gaunt-alien-walk-sheet-v1.png",
+      "frames": 36,
+      "columns": 6,
+      "rows": 6,
+      "frameSize": [128, 128],
+      "durationMs": 1872
+    },
+    "attack": {
+      "asset": "Images/Game/Super-Frgmnts/enemy-tall-gaunt-alien-attack-sheet-v1.png",
+      "frames": 25,
+      "columns": 5,
+      "rows": 5,
+      "frameSize": [160, 128],
+      "durationMs": 1450
+    }
+  },
+  "recommendedCombatGrammar": {
+    "role": "large melee predator",
+    "telegraph": "hold the opening attack frames before the sweeping arc",
+    "damageWindow": "activate only during the visible white sweep",
+    "recovery": "leave a readable punish window after the arc dissipates"
+  },
+  "missingBeforeProduction": [
+    "canonical name",
+    "health and damage balance",
+    "hurt response",
+    "death animation",
+    "approved room population"
+  ]
+}

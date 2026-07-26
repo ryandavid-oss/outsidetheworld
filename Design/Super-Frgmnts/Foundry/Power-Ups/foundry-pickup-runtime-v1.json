@@ -1,0 +1,62 @@
+{
+  "package": "SUPER FRGMNTS Foundry pickups and economy candidates",
+  "status": "normalized art only; gameplay integration pending",
+  "assets": {
+    "galactic_credit_coin": {
+      "source": "Design/Super-Frgmnts/Foundry/Power-Ups/Raw/galactic-credit-coin-source-v1.png",
+      "runtime": "Images/Game/Super-Frgmnts/foundry-credit-coin-runtime-v1.png",
+      "runtime_size": [
+        48,
+        48
+      ],
+      "role": "currency released by credit crates",
+      "status": "art ready; economy value deliberately unassigned"
+    },
+    "jetpack_pickup": {
+      "source": "Design/Super-Frgmnts/Foundry/Power-Ups/Raw/jetpack-pickup-source-v1.png",
+      "runtime": "Images/Game/Super-Frgmnts/foundry-jetpack-pickup-runtime-v1.png",
+      "runtime_size": [
+        72,
+        80
+      ],
+      "role": "pack-assisted traversal unlock",
+      "status": "art ready; duration and fuel model deliberately unassigned"
+    },
+    "galactic_credit_crate": {
+      "source": "Design/Super-Frgmnts/Foundry/Power-Ups/Raw/galactic-credit-crate-source-v1.png",
+      "runtime": "Images/Game/Super-Frgmnts/foundry-credit-crate-runtime-v1.png",
+      "runtime_size": [
+        112,
+        80
+      ],
+      "role": "shootable container that releases Galactic Credits",
+      "status": "art ready; opening and coin-burst animation pending"
+    },
+    "vesperite": {
+      "source": "Design/Super-Frgmnts/Foundry/Power-Ups/Raw/vesperite-source-v1.png",
+      "runtime": "Images/Game/Super-Frgmnts/foundry-vesperite-runtime-v1.png",
+      "runtime_size": [
+        72,
+        72
+      ],
+      "role": "Veyran energy material and mission-economy object",
+      "status": "art ready; collectible role deliberately unassigned"
+    },
+    "heavy_rifle_pickup": {
+      "source": "Design/Super-Frgmnts/Foundry/Power-Ups/Raw/heavy-rifle-pickup-source-v1.png",
+      "runtime": "Images/Game/Super-Frgmnts/foundry-heavy-rifle-pickup-runtime-v1.png",
+      "runtime_size": [
+        136,
+        64
+      ],
+      "role": "temporary route-clearing heavy weapon unlock",
+      "status": "art ready; placement and persistence deliberately unassigned"
+    }
+  },
+  "design_boundaries": [
+    "Galactic Credits and Signal Shards remain separate systems.",
+    "Vesperite is not assigned a collectible value by this build.",
+    "Power-up duration, persistence, and purchase prices remain open.",
+    "No runtime game code loads these candidates yet."
+  ]
+}

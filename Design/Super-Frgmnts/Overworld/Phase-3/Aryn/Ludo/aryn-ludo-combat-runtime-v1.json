@@ -1,0 +1,144 @@
+{
+  "asset": "Aryn Sol-Mavi curated Ludo combat reactions",
+  "status": "local preview candidate",
+  "preview_query": "aryn=ludo",
+  "runtime_contract": {
+    "frame_size": [
+      112,
+      112
+    ],
+    "baseline_y": 105,
+    "source_scale": 0.165,
+    "light_impact_frame_count": 6,
+    "heavy_impact_frame_count": 7,
+    "death_frame_count": 12
+  },
+  "light_impact": {
+    "runtime": "Images/Game/Super-Frgmnts/aryn-impact-light-ludo-runtime-v1.png",
+    "components": [
+      {
+        "frame": 0,
+        "role": "ready"
+      },
+      {
+        "frame": 2,
+        "role": "contact"
+      },
+      {
+        "frame": 4,
+        "role": "recoil"
+      },
+      {
+        "frame": 7,
+        "role": "recoil hold"
+      },
+      {
+        "frame": 10,
+        "role": "recover"
+      },
+      {
+        "frame": 14,
+        "role": "reset"
+      }
+    ]
+  },
+  "heavy_impact": {
+    "runtime": "Images/Game/Super-Frgmnts/aryn-impact-heavy-ludo-runtime-v1.png",
+    "components": [
+      {
+        "frame": 0,
+        "role": "ready"
+      },
+      {
+        "frame": 3,
+        "role": "contact"
+      },
+      {
+        "frame": 5,
+        "role": "deep recoil"
+      },
+      {
+        "frame": 7,
+        "role": "recoil hold"
+      },
+      {
+        "frame": 9,
+        "role": "recover low"
+      },
+      {
+        "frame": 12,
+        "role": "recover"
+      },
+      {
+        "frame": 15,
+        "role": "reset"
+      }
+    ]
+  },
+  "death": {
+    "runtime": "Images/Game/Super-Frgmnts/aryn-death-ludo-runtime-v1.png",
+    "components": [
+      {
+        "frame": 0,
+        "role": "ready"
+      },
+      {
+        "frame": 7,
+        "role": "stagger"
+      },
+      {
+        "frame": 12,
+        "role": "fold"
+      },
+      {
+        "frame": 18,
+        "role": "knee"
+      },
+      {
+        "frame": 20,
+        "role": "kneel"
+      },
+      {
+        "frame": 24,
+        "role": "collapse"
+      },
+      {
+        "frame": 26,
+        "role": "brace"
+      },
+      {
+        "frame": 27,
+        "role": "fall"
+      },
+      {
+        "frame": 28,
+        "role": "impact"
+      },
+      {
+        "frame": 29,
+        "role": "prone"
+      },
+      {
+        "frame": 30,
+        "role": "settle"
+      },
+      {
+        "frame": 31,
+        "role": "still"
+      }
+    ],
+    "final_frame_hold": true
+  },
+  "source_decisions": {
+    "rifle_shoot_reference": "source master only; curated into an isolated rifle preview",
+    "rifle_draw_reference": "source master only; curated into an isolated rifle preview",
+    "reason": "The pack-mounted seeking blaster remains the production default. The conventional rifle is now evaluated separately as a temporary heavy-weapon pickup."
+  },
+  "notes": [
+    "All runtime frames are baseline-normalized to prevent source drift.",
+    "Light and heavy impacts alternate across non-lethal contacts.",
+    "The death sequence is reserved for health depletion.",
+    "Pack-blaster firing remains compatible with running and jumping.",
+    "Production animation remains unchanged unless aryn=ludo is present."
+  ]
+}

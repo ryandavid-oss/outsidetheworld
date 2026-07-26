@@ -1,0 +1,102 @@
+{
+  "asset": "Aryn Sol-Mavi curated Ludo jump and platform drop",
+  "status": "local preview candidate",
+  "preview_query": "aryn=ludo",
+  "runtime_contract": {
+    "frame_size": [
+      112,
+      112
+    ],
+    "baseline_y": 105,
+    "source_scale": 0.165,
+    "jump_frame_count": 7,
+    "drop_frame_count": 4
+  },
+  "jump": {
+    "runtime": "Images/Game/Super-Frgmnts/aryn-jump-ludo-runtime-v1.png",
+    "components": [
+      {
+        "source": "jump",
+        "frame": 11,
+        "role": "launch crouch"
+      },
+      {
+        "source": "jump",
+        "frame": 13,
+        "role": "launch extension"
+      },
+      {
+        "source": "jump",
+        "frame": 14,
+        "role": "toe-off"
+      },
+      {
+        "source": "run",
+        "frame": 14,
+        "role": "airborne hold"
+      },
+      {
+        "source": "jump",
+        "frame": 26,
+        "role": "landing impact"
+      },
+      {
+        "source": "jump",
+        "frame": 30,
+        "role": "landing recovery"
+      },
+      {
+        "source": "jump",
+        "frame": 32,
+        "role": "landing settle"
+      }
+    ],
+    "launch_frames": [
+      0,
+      1,
+      2
+    ],
+    "airborne_frame": 3,
+    "landing_frames": [
+      4,
+      5,
+      6
+    ]
+  },
+  "drop": {
+    "runtime": "Images/Game/Super-Frgmnts/aryn-drop-ludo-runtime-v1.png",
+    "components": [
+      {
+        "source": "drop",
+        "frame": 14,
+        "role": "drop commit"
+      },
+      {
+        "source": "drop",
+        "frame": 16,
+        "role": "arms opening"
+      },
+      {
+        "source": "drop",
+        "frame": 19,
+        "role": "controlled fall"
+      },
+      {
+        "source": "drop",
+        "frame": 25,
+        "role": "fall release"
+      }
+    ],
+    "frames": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "notes": [
+    "All component frames are baseline-normalized before runtime export.",
+    "Game physics owns vertical movement; source-sheet translation is discarded.",
+    "The existing production jump remains the default animation."
+  ]
+}

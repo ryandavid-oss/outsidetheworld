@@ -1,0 +1,35 @@
+{
+  "status": "integrated-local-review",
+  "revision": "weapon-audio-v1",
+  "weapons": {
+    "heavyRifle": {
+      "standardShot": {
+        "asset": "Audio/super-frgmnts-heavy-rifle-shot.mp3",
+        "runtimeKey": "heavyRifleShot"
+      },
+      "overheatShot": {
+        "asset": "Audio/super-frgmnts-heavy-rifle-overheat.mp3",
+        "runtimeKey": "heavyRifleOverheat",
+        "trigger": "the shot that fills the heat meter"
+      }
+    },
+    "packLaserEmitter": {
+      "minimumPower": {
+        "asset": "Audio/super-frgmnts-pack-laser-shot.mp3",
+        "runtimeKey": "packLaserShot",
+        "tiers": [1]
+      },
+      "rapidFire": {
+        "asset": "Audio/super-frgmnts-pack-laser-quick.mp3",
+        "runtimeKey": "packLaserQuick",
+        "tiers": [2, 3]
+      }
+    }
+  },
+  "lifecycle": {
+    "pooledPlayback": true,
+    "pauseWithGame": true,
+    "pauseWhenHidden": true,
+    "respectSoundToggle": true
+  }
+}

@@ -15,7 +15,10 @@ TRACKS = {
     "title": "super-frgmnts-title-cue.mp3",
     "overworld": "super-frgmnts-overworld-loop.mp3",
     "foundry": "super-frgmnts-foundry-loop.mp3",
-    "blaster": "super-frgmnts-blaster-shot.mp3",
+    "heavy_rifle": "super-frgmnts-heavy-rifle-shot.mp3",
+    "heavy_rifle_overheat": "super-frgmnts-heavy-rifle-overheat.mp3",
+    "pack_laser": "super-frgmnts-pack-laser-shot.mp3",
+    "pack_laser_quick": "super-frgmnts-pack-laser-quick.mp3",
     "deep_select": "super-frgmnts-menu-select-deep.mp3",
     "crash_select": "super-frgmnts-menu-select-crash.mp3",
 }
@@ -42,7 +45,11 @@ def main() -> None:
         'id="signalBootButton"',
         "var soundEffects = {",
         "poolSize: 10",
-        'playSoundEffect("blaster")',
+        '"heavyRifleOverheat"',
+        '"heavyRifleShot"',
+        '"packLaserQuick"',
+        '"packLaserShot"',
+        "canvas.dataset.lastSoundEffect = name;",
         'playSoundEffect("deepSelect", 0.58)',
         'playSoundEffect(state === "lost" ? "crashSelect" : "deepSelect")',
         'playSoundEffect("crashSelect")',
@@ -59,7 +66,7 @@ def main() -> None:
         '"click",\n                engageSceneAudioFromGesture,',
         'window.addEventListener("keydown", engageSceneAudioFromGesture);',
         "setAudioScene(scene);",
-        'configureEpisodeScene("foundry")',
+        'loadAndConfigureEpisodeScene("foundry")',
         "function pauseSoundEffects()",
         "pauseAudioForFocusLoss()",
         "pauseSoundEffects();",
@@ -75,8 +82,14 @@ def main() -> None:
     )
     require(blaster_body is not None, "Could not inspect fireBlaster")
     require(
-        "playSoundEffect(\"blaster\")" in blaster_body.group(1),
-        "Blaster does not use the sampled shot",
+        '"heavyRifleOverheat"' in blaster_body.group(1)
+        and '"heavyRifleShot"' in blaster_body.group(1),
+        "Heavy rifle does not select its standard and overheat samples",
+    )
+    require(
+        '"packLaserQuick"' in blaster_body.group(1)
+        and '"packLaserShot"' in blaster_body.group(1),
+        "Pack emitter does not select its minimum and rapid-fire samples",
     )
     require(
         "playTone(" not in blaster_body.group(1),
@@ -95,7 +108,8 @@ def main() -> None:
     print("SUPER FRGMNTS audio contract: PASS")
     print("- explicit signal initialization unlocks title audio")
     print("- title, overworld, and Foundry music crossfade without page reloads")
-    print("- rapid-fire blaster uses a ten-channel sampled-audio pool")
+    print("- heavy-rifle fire switches to its overheat sample on the threshold shot")
+    print("- pack-emitter tiers select minimum-power or rapid-fire laser samples")
     print("- deep select confirms forward actions and dialogue")
     print("- crash select confirms retry, restart, start-over, and skip")
     print("- sampled effects stop on pause, mute, and focus loss")

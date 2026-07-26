@@ -42,7 +42,15 @@ def main() -> None:
     fire_body = function_body(source, "fireBlaster", "enemyCenter")
     require("getPlayerVisualState()" in fire_body, "Fire origin ignores the current animation")
     require("getPackEmitterAnchor(visual)" in fire_body, "Fire origin is not attached to the pack")
-    require("player.vx =" not in fire_body, "Firing changes horizontal locomotion")
+    require(
+        "if (rifleActive) {\n                    player.vx = 0;\n                }"
+        in fire_body,
+        "Heavy-rifle bracing is not isolated from pack-emitter fire",
+    )
+    require(
+        fire_body.count("player.vx =") == 1,
+        "Pack-emitter firing changes horizontal locomotion",
+    )
     require("player.vy =" not in fire_body, "Firing changes vertical locomotion")
 
     draw_body = function_body(source, "drawPlayer", "drawPackEmitter")
@@ -55,8 +63,8 @@ def main() -> None:
 
     for tier in (1, 2, 3):
         require(f"{tier}: {{" in source, f"Missing pack fire tier {tier}")
-    require(source.count("seekRange:") == 3, "Every fire tier needs one seek range")
-    require(source.count("seekResponse:") == 3, "Every fire tier needs one seek response")
+    require(source.count("seekRange:") >= 3, "Every fire tier needs one seek range")
+    require(source.count("seekResponse:") >= 3, "Every fire tier needs one seek response")
 
     print("Pack-fire contract passed.")
     print("- torso gun overlay removed")

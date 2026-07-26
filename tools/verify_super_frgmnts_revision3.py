@@ -71,11 +71,11 @@ def verify_local_integration() -> None:
         "aryn-command-rest-runtime-v1.png",
         "aryn-dialogue-portrait-runtime-v3.png",
         "dras-dialogue-portrait-runtime-v2.png",
-        "veyra-camp-dog-runtime-v1.png",
-        "veyra-camp-dog-walk-sheet-v2.png",
+        "veyra-camp-dog-walk-sheet-v3.png",
+        "veyra-camp-dog-sniff-sheet-v3.png",
         "drawOverworldVolcano()",
         "startArrivalDialogue()",
-        'configureEpisodeScene("foundry")',
+        'loadAndConfigureEpisodeScene("foundry")',
     ):
         assert token in source, f"Missing Revision 3 runtime integration: {token}"
 

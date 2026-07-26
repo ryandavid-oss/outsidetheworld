@@ -1,0 +1,81 @@
+{
+  "schema": "super-frgmnts-episode-beta-v1",
+  "episode": "01",
+  "title": "The Shard Foundry",
+  "status": "early-beta",
+  "timer_seconds": 480,
+  "route": [
+    {
+      "phase": "orientation",
+      "scene": "overworld",
+      "objective": "Meet Dras, then complete Field Calibration before entering the Coreworks.",
+      "systems": [
+        "ship traversal",
+        "run and jump",
+        "pack emitter",
+        "shootable credit cache",
+        "bursting collectible credits",
+        "moving platform",
+        "cycling electrified platform"
+      ]
+    },
+    {
+      "phase": "showcase",
+      "scene": "foundry",
+      "objective": "Recover equipment and learn the three traversal layers.",
+      "systems": [
+        "Signal Shards",
+        "recovery hearts",
+        "Galactic Credits",
+        "Vesperite sample",
+        "jet assist",
+        "heavy rifle",
+        "three-shot Vesperite obstruction",
+        "Deepworks drop-through"
+      ]
+    },
+    {
+      "phase": "challenge",
+      "scene": "foundry",
+      "objective": "Restore two atmospheric relays and reach the upper Uplink route.",
+      "systems": [
+        "tall-room platforming",
+        "moving platforms",
+        "electrified platform",
+        "surface crawler",
+        "Vesper Mite",
+        "five-hit Chitin Sentinel"
+      ]
+    },
+    {
+      "phase": "completion",
+      "scene": "foundry",
+      "objective": "Recover all twelve Signal Shards, restore both relays, and enter the Uplink Gate.",
+      "systems": [
+        "eight-minute timer",
+        "item and relay results",
+        "optional full-annihilation bonus"
+      ]
+    }
+  ],
+  "population": {
+    "signal_shards": 12,
+    "recovery_hearts": 3,
+    "atmospheric_relays": 2,
+    "credit_caches_overworld": 1,
+    "credit_caches_foundry": 2,
+    "vesperite_obstructions": 1,
+    "powerups": [
+      "jet-assist",
+      "heavy-rifle"
+    ]
+  },
+  "deferred": [
+    "final enemy density",
+    "credit economy",
+    "between-level store",
+    "final relay count",
+    "production balance",
+    "later episode content"
+  ]
+}

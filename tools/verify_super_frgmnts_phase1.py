@@ -40,13 +40,14 @@ def main() -> None:
         "window.history.pushState(",
         'window.addEventListener("popstate"',
         '"?episode=01&stage=" + scene + "&autostart=1"',
-        'configureEpisodeScene("overworld")',
-        'configureEpisodeScene("foundry")',
+        'loadAndConfigureEpisodeScene("overworld")',
+        'loadAndConfigureEpisodeScene("foundry")',
         "super-frgmnts-sound",
         'window.addEventListener("pagehide", function ()',
         'document.addEventListener("visibilitychange"',
-        "assets.overworld0 = loadImage(",
-        "assets.foundryExpanded = loadImage(",
+        "overworld0: {",
+        "foundryExpanded: {",
+        "function loadCriticalAssets(keys, completion)",
     )
     for token in required_tokens:
         require(token in source, f"Missing Phase 1 contract: {token}")

@@ -1,6 +1,6 @@
 # Veyra overworld atmosphere contract
 
-Status: Revision 3J production contract with post-release correction.
+Status: Revision 3K local review contract; not yet deployed.
 
 ## Depth system
 
@@ -31,10 +31,12 @@ Status: Revision 3J production contract with post-release correction.
 
 - Dras stands at local plate-two X 560, beneath the outpost's left shelter
   rather than in the empty approach.
-- A small weathered camp dog occupies local plate-two X 810. Its head searches
-  a scrap container, then it walks 130 pixels toward the shelter on a two-phase
-  contact/pass gait with clearly separated legs, pauses, and returns. Its cyan
-  collar ties it to the outpost technology.
+- A German shepherd camp dog occupies local plate-two X 810. A complete
+  36-frame gait carries it 130 pixels toward the shelter before it pauses and
+  returns, facing its actual direction of travel. Sniffing is an occasional
+  event: the full 16-frame head-dip cycle plays once across three seconds,
+  then resolves to the upright idle pose. Its bright collar keeps the
+  silhouette readable against the outpost.
 - The dog is decorative, non-solid, non-hostile, and cannot interrupt the
   first-contact sequence.
 

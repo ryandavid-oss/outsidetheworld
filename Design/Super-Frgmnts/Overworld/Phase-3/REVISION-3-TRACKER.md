@@ -1,6 +1,6 @@
 # SUPER FRGMNTS — Overworld Revision 3 tracker
 
-Last updated: 2026-07-25
+Last updated: 2026-07-26
 
 ## Approved foundations
 
@@ -22,6 +22,12 @@ Last updated: 2026-07-25
 | 3H | Volumetric cloud parallax, distant birds, rummaging camp dog, closer Dras staging, dialogue-action reversal | Add life and depth without obscuring traversal; Continue is the primary right-hand action | Production |
 | 3I | High-fidelity Aryn dialogue portrait | Match Dras's native portrait detail while preserving Aryn's approved identity, palette, signal pack, and opaque visor | Production |
 | 3J | Overworld closing atmosphere pass | Remove the stray collider; keep volcano animation to subtle heat and isolated sparks without tracing the plate; give the camp dog a readable contact/pass gait | Production |
+
+## Current local review
+
+| Revision | Scope | Direction | Status |
+|---|---|---|---|
+| 3K | Full camp-dog behavior animation | Replace the two-frame approximation with supplied 36-frame walking and 16-frame sniffing cycles while preserving the established non-solid camp route | Integrated locally; awaiting approval and deployment |
 
 ## Deliberately deferred
 
@@ -45,6 +51,8 @@ python3 tools/build_super_frgmnts_dras_review.py --build-reviews
 python3 tools/build_super_frgmnts_dialogue_review.py
 python3 tools/build_super_frgmnts_outpost_blocking.py
 python3 tools/build_super_frgmnts_dog_walk.py
+python3 tools/build_super_frgmnts_creature_intake.py
 python3 tools/build_super_frgmnts_revision3_review.py
 python3 tools/verify_super_frgmnts_revision3.py
+python3 tools/verify_super_frgmnts_creature_intake.py
 ```
