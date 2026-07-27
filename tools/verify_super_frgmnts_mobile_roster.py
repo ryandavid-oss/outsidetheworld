@@ -28,8 +28,12 @@ def main() -> None:
         "enemy-flying-wasp-flight-sheet-v1.png",
         "enemy-tall-gaunt-alien-walk-sheet-v1.png",
         "enemy-tall-gaunt-alien-attack-sheet-v1.png",
+        "enemy-fragment-spring-green-runtime-v1.png",
+        "enemy-fragment-bastion-purple-runtime-v1.png",
         'type === "wasp"',
         'type === "gaunt"',
+        'type === "fragmentSpring"',
+        'type === "fragmentBastion"',
         "HEAVY RIFLE",
     )
     for token in required:
@@ -44,14 +48,40 @@ def main() -> None:
         '"wasp"',
         '"gaunt"',
         '"patroller"',
+        '"fragmentSpring"',
+        '"fragmentBastion"',
     )
     for enemy_type in roster:
         assert enemy_type in SOURCE, f"Missing enemy roster type: {enemy_type}"
 
+    episode_asset_block = SOURCE.split(
+        "var episodeBetaAssetKeys = [",
+        1,
+    )[1].split("];", 1)[0]
+    enemy_assets = (
+        '"crawler"',
+        '"walker"',
+        '"flyer"',
+        '"squircle"',
+        '"mite"',
+        '"wasp"',
+        '"gauntWalk"',
+        '"gauntAttack"',
+        '"patroller"',
+        '"patrollerDeath"',
+        '"fragmentSpring"',
+        '"fragmentBastion"',
+    )
+    for enemy_asset in enemy_assets:
+        assert enemy_asset in episode_asset_block, (
+            "Episode beta spawns an enemy whose artwork is not loaded: "
+            f"{enemy_asset}"
+        )
+
     print("SUPER FRGMNTS mobile controls and full roster: PASS")
     print("- interrupted analog input releases without a delayed latch")
     print("- iOS selection/loupe paths are actively cleared")
-    print("- all eight legacy and new enemy families are populated")
+    print("- all legacy, creature, and two active Fragment families are populated and loaded")
     print("- rifle and pack laser can be switched on touch or keyboard")
     print("- the Uplink Gate returns Aryn with her recovered loadout")
 

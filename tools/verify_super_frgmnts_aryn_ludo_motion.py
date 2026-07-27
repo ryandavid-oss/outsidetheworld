@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Verify Aryn's opt-in Ludo run, jump, and platform-drop runtime contract."""
+"""Verify Aryn's active Episode run, jump, and platform-drop runtime contract."""
 
 from __future__ import annotations
 
@@ -58,6 +58,18 @@ def main() -> None:
     source = GAME.read_text(encoding="utf-8")
     run_manifest = json.loads(RUN_MANIFEST.read_text())
     jump_manifest = json.loads(JUMP_MANIFEST.read_text())
+    asset_definitions = source.split(
+        "var assetDefinitions = {",
+        1,
+    )[1].split("var sharedAssetKeys = [", 1)[0]
+    shared_assets = source.split(
+        "var sharedAssetKeys = [",
+        1,
+    )[1].split("];", 1)[0]
+    player_visuals = source.split(
+        "function getPlayerVisualState()",
+        1,
+    )[1].split("function drawPlayer()", 1)[0]
 
     verify_strip(
         RUN_RUNTIME,
@@ -90,9 +102,28 @@ def main() -> None:
         jump_manifest["jump"]["landing_frames"] == [4, 5, 6],
         "Jump landing sequencing changed",
     )
+    require(
+        'runLudo: {' in asset_definitions
+        and 'source: "/Images/Game/Super-Frgmnts/aryn-run-ludo-runtime-v2.png"'
+        in asset_definitions,
+        "The approved run is not defined as a route-independent asset",
+    )
+    require(
+        '"runLudo"' in shared_assets,
+        "The approved run is not loaded before the title-to-Episode handoff",
+    )
+    require(
+        "visual.sprite = runningWithReadyRifle" in player_visuals
+        and ": ludoRunPreview" in player_visuals
+        and "? assets.runLudo" in player_visuals
+        and ": assets.run;" in player_visuals,
+        "Episode locomotion does not retain the approved unarmed run branch",
+    )
 
     runtime_contracts = (
         "/Images/Game/Super-Frgmnts/aryn-run-ludo-runtime-v2.png",
+        "runLudo: {",
+        '"runLudo",',
         "/Images/Game/Super-Frgmnts/aryn-jump-ludo-runtime-v1.png",
         "/Images/Game/Super-Frgmnts/aryn-drop-ludo-runtime-v1.png",
         '"jumpLudo",',
@@ -105,6 +136,15 @@ def main() -> None:
         "canvas.dataset.arynPose = visual.pose;",
         "canvas.dataset.arynFrame = String(visual.frame);",
         "(ludoRunPreview ? 8 : 10)",
+        'var episodeOneRun = previewParameters.get("episode") === "01";',
+        'previewParameters.get("aryn") !== "legacy" &&',
+        'previewParameters.has("preview")',
+        "episodeOneRun ||",
+        "ludoRunPreview = true;",
+        "? assets.runLudo",
+        ": assets.run;",
+        ': "run";',
+        "Math.floor(runFrameTime * 12)",
     )
     for contract in runtime_contracts:
         require(contract in source, f"Missing Ludo motion contract: {contract}")
@@ -114,7 +154,7 @@ def main() -> None:
     print("- three-frame launch with a dedicated airborne hold")
     print("- three-frame baseline-normalized landing recovery")
     print("- four-frame front-facing platform drop")
-    print("- production animation remains the default")
+    print("- curated Ludo motion is active in unified Episode scenes")
 
 
 if __name__ == "__main__":

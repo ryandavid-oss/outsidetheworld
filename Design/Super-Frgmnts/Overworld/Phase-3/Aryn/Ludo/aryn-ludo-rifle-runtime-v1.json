@@ -10,6 +10,7 @@
     "baseline_y": 105,
     "source_scale": 0.165,
     "body_alignment": "fixed source canvas; never center on rifle bounds",
+    "standing_foresection_shift": 14,
     "draw_frame_count": 10,
     "fire_frame_count": 12
   },
@@ -114,7 +115,7 @@
   "design_contract": {
     "production_default": "pack-mounted seeking blaster",
     "rifle_role": "optional route-clearing heavy special weapon",
-    "mobility_tradeoff": "Aryn braces briefly while firing",
+    "mobility_tradeoff": "The first grounded draw is braced; the ready rifle supports ground and airborne movement",
     "projectile": "fast, direct, amber heavy round",
     "destruction_target": "Vesperite route obstructions",
     "preview_only": false,
@@ -123,8 +124,10 @@
   "notes": [
     "The rifle begins stowed.",
     "The first firing input draws, braces, and then discharges.",
-    "Aryn holds the rifle ready while stationary after firing.",
-    "Running, jumping, or dropping stows the rifle; the next shot redraws it.",
+    "Aryn holds the rifle ready after firing while running or airborne.",
+    "Jumping, dropping, and falling preserve the rifle and allow aerial fire.",
+    "The rifle automatically stows after 2.25 grounded seconds without firing.",
+    "The idle holster countdown pauses in the air and resumes on landing.",
     "Three direct heavy rounds clear each Vesperite obstruction and leave non-colliding rubble.",
     "The existing backpack remains visible and remains Aryn's upgrade hub.",
     "The isolated weapon=rifle route remains available for review.",

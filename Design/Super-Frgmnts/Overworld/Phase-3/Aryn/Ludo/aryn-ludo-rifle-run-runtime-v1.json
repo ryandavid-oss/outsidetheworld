@@ -1,0 +1,68 @@
+{
+  "asset": "Aryn Sol-Mavi authored heavy-rifle running set",
+  "status": "active Episode runtime",
+  "source_sheet": "Design/Super-Frgmnts/Overworld/Phase-3/Aryn/Ludo/Raw/aryn-ludo-rifle-run-fire-sheet-v1.png",
+  "source_metadata": "Design/Super-Frgmnts/Overworld/Phase-3/Aryn/Ludo/Raw/aryn-ludo-rifle-run-fire-sheet-v1.json",
+  "runtime_contract": {
+    "frame_size": [
+      112,
+      112
+    ],
+    "source_frame_size": [
+      592,
+      552
+    ],
+    "source_resize": [
+      98,
+      91
+    ],
+    "horizontal_offset": 7,
+    "baseline_y": 105,
+    "frame_duration_ms": 58
+  },
+  "ready_run": {
+    "source_frames": [
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23
+    ],
+    "frame_count": 9,
+    "runtime": "Images/Game/Super-Frgmnts/aryn-rifle-run-ready-ludo-runtime-v1.png",
+    "muzzle_treatment": "flash colors removed beyond source x=395; particles clipped at the shared barrel plane x=430"
+  },
+  "moving_fire": {
+    "source_frames": [
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17
+    ],
+    "frame_count": 8,
+    "runtime": "Images/Game/Super-Frgmnts/aryn-rifle-run-fire-ludo-runtime-v1.png",
+    "duration_ms": 464
+  },
+  "design_contract": {
+    "first_shot_still_draws": true,
+    "ground_running_does_not_stow_rifle": true,
+    "airborne_movement_preserves_rifle": true,
+    "airborne_fire_uses_authored_full_body_motion": true,
+    "moving_fire_uses_authored_full_body_motion": true,
+    "pack_blaster_remains_default": true
+  },
+  "notes": [
+    "The authored full-body motion replaces the split-body prototype.",
+    "The rifle-ready gait and firing pulse share the supplied body registration.",
+    "Stationary draw, ready, and firing animations remain available.",
+    "Aryn keeps the rifle through jumps, drops, and falls and can fire airborne."
+  ]
+}

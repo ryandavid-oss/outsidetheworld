@@ -2168,7 +2168,7 @@
                 <kbd>←</kbd><kbd>→</kbd><span>move</span>
                 <kbd>↓</kbd><span>drop</span>
                 <kbd>SPACE</kbd><span>jump</span>
-                <kbd>CTRL</kbd><span>blaster</span>
+                <kbd>X</kbd><span>blaster</span>
                 <kbd>V</kbd><span>switch</span>
                 <kbd>R</kbd><span>restart</span>
             </div>
@@ -2236,8 +2236,11 @@
             var previewParameters = new URLSearchParams(window.location.search);
             var episodeOneRun = previewParameters.get("episode") === "01";
             var ludoRunPreview =
-                previewParameters.get("aryn") === "ludo" ||
-                episodeOneRun;
+                previewParameters.get("aryn") !== "legacy" &&
+                (
+                    episodeOneRun ||
+                    previewParameters.has("preview")
+                );
             var episodeStage = previewParameters.get("stage") || "";
             var overworldPreview =
                 previewParameters.get("preview") === "overworld" ||
@@ -2398,7 +2401,8 @@
             var BLASTER_TIERS = [3, 7, 12];
             var PACK_FIRE_DURATION = 0.13;
             var RIFLE_DRAW_DURATION = 0.7;
-            var RIFLE_FIRE_DURATION = 0.456;
+            var RIFLE_FIRE_DURATION = 0.464;
+            var RIFLE_IDLE_STOW_DELAY = 2.25;
             var RIFLE_BOULDER_IMPACT_DURATION = 0.88;
             var RIFLE_BOULDER_COLLAPSE_DURATION = 1.12;
             var RIFLE_BOULDER_FRAME_WIDTH = 176;
@@ -2669,11 +2673,11 @@
                     "<kbd>←</kbd><kbd>→</kbd><span>move</span>" +
                     "<kbd>↓</kbd><span>talk</span>" +
                     "<kbd>SPACE</kbd><span>jump</span>" +
-                    "<kbd>CTRL</kbd><span>fire</span>" +
+                    "<kbd>X</kbd><span>fire</span>" +
                     "<kbd>R</kbd><span>restart</span>";
                 keyboardHelp.setAttribute(
                     "aria-label",
-                    "Keyboard controls: left and right arrows move, down arrow talks to Dras after first contact, Space jumps, Control fires the pack emitter, R restarts"
+                    "Keyboard controls: left and right arrows move, down arrow talks to Dras after first contact, Space jumps, X fires the pack emitter, R restarts"
                 );
                 directionPad.setAttribute(
                     "aria-label",
@@ -2780,11 +2784,11 @@
                 document.querySelector(".title-screen__hero").innerHTML =
                     "Aryn Sol-Mavi // <strong>Heavy Rifle Field Test</strong>";
                 document.querySelector(".title-screen__hint").textContent =
-                    "Draw to fire // Run or jump to stow // Clear the route";
+                    "Draw to fire // Ground and aerial combat // Idle to stow";
                 document.querySelector(".mission strong").textContent =
                     "SPECIAL WEAPON // HEAVY RIFLE";
                 document.querySelector(".mission span").textContent =
-                    "CTRL / FIRE → ANNIHILATE VESPERITE";
+                    "X / FIRE → ANNIHILATE VESPERITE";
                 document.querySelector(".touch-key--shoot").setAttribute(
                     "aria-label",
                     "Fire heavy rifle"
@@ -2798,9 +2802,11 @@
             var assets = {};
             var assetDefinitions = {
                 run: {
-                    source: ludoRunPreview
-                        ? "/Images/Game/Super-Frgmnts/aryn-run-ludo-runtime-v2.png"
-                        : "/Images/Builder/aryn-run-10pose-balanced-gait-sheet.png",
+                    source: "/Images/Builder/aryn-run-10pose-balanced-gait-sheet.png",
+                    priority: "high"
+                },
+                runLudo: {
+                    source: "/Images/Game/Super-Frgmnts/aryn-run-ludo-runtime-v2.png",
                     priority: "high"
                 },
                 idle: {
@@ -2853,6 +2859,14 @@
                 },
                 rifleFireLudo: {
                     source: "/Images/Game/Super-Frgmnts/aryn-rifle-fire-ludo-runtime-v1.png",
+                    priority: "high"
+                },
+                rifleRunReadyLudo: {
+                    source: "/Images/Game/Super-Frgmnts/aryn-rifle-run-ready-ludo-runtime-v1.png",
+                    priority: "high"
+                },
+                rifleRunFireLudo: {
+                    source: "/Images/Game/Super-Frgmnts/aryn-rifle-run-fire-ludo-runtime-v1.png",
                     priority: "high"
                 },
                 jetpackLudo: {
@@ -2967,6 +2981,14 @@
                     source: "/Images/Game/Super-Frgmnts/enemy-tall-gaunt-alien-attack-sheet-v1.png",
                     priority: "high"
                 },
+                fragmentSpring: {
+                    source: "/Images/Game/Super-Frgmnts/enemy-fragment-spring-green-runtime-v1.png",
+                    priority: "high"
+                },
+                fragmentBastion: {
+                    source: "/Images/Game/Super-Frgmnts/enemy-fragment-bastion-purple-runtime-v1.png",
+                    priority: "high"
+                },
                 vesperiteBoulder: {
                     source: "/Images/Game/Super-Frgmnts/vesperite-boulder-intact-runtime-v1.png",
                     priority: "high"
@@ -3005,19 +3027,20 @@
                 },
                 crawler: {
                     source: "/Images/Game/enemy-crawler-ridge-skitter.png",
-                    priority: "low"
+                    priority: "high"
                 },
                 flyer: {
                     source: "/Images/Game/enemy-flyer-spore-wisp.png",
-                    priority: "low"
+                    priority: "high"
                 },
                 walker: {
                     source: "/Images/Game/enemy-walker-clacker-beetle.png",
-                    priority: "low"
+                    priority: "high"
                 }
             };
             var sharedAssetKeys = [
                 "run",
+                "runLudo",
                 "idle",
                 "commandRest",
                 "fieldRest",
@@ -3030,7 +3053,9 @@
                 "impactHeavyLudo",
                 "deathLudo",
                 "rifleDrawLudo",
-                "rifleFireLudo"
+                "rifleFireLudo",
+                "rifleRunReadyLudo",
+                "rifleRunFireLudo"
             ];
             var overworldAssetKeys = [
                 "overworld0",
@@ -3053,6 +3078,9 @@
                 "foundrySeamWindow"
             ];
             var episodeBetaAssetKeys = [
+                "crawler",
+                "walker",
+                "flyer",
                 "squircle",
                 "mite",
                 "patroller",
@@ -3060,8 +3088,12 @@
                 "wasp",
                 "gauntWalk",
                 "gauntAttack",
+                "fragmentSpring",
+                "fragmentBastion",
                 "rifleDrawLudo",
                 "rifleFireLudo",
+                "rifleRunReadyLudo",
+                "rifleRunFireLudo",
                 "jetpackLudo",
                 "vesperiteBoulder",
                 "vesperiteBoulderImpact",
@@ -3185,6 +3217,7 @@
             var packFireTime = 0;
             var rifleDrawTime = 0;
             var rifleFireTime = 0;
+            var rifleIdleStowTime = 0;
             var rifleReady = false;
             var riflePendingFire = false;
             var rifleObstacles = [];
@@ -4225,6 +4258,8 @@
                 criticalAssetKeys.push(
                     "rifleDrawLudo",
                     "rifleFireLudo",
+                    "rifleRunReadyLudo",
+                    "rifleRunFireLudo",
                     "vesperiteBoulder",
                     "vesperiteBoulderImpact",
                     "vesperiteBoulderCollapse",
@@ -4448,6 +4483,7 @@
                 packFireTime = 0;
                 rifleDrawTime = 0;
                 rifleFireTime = 0;
+                rifleIdleStowTime = 0;
                 rifleReady = false;
                 riflePendingFire = false;
                 jetpackPoseTime = 0;
@@ -4982,15 +5018,19 @@
                 rifleReady = false;
                 riflePendingFire = false;
                 rifleDrawTime = 0;
+                rifleIdleStowTime = 0;
             }
 
             function beginRifleDraw() {
-                if (!heavyRifleActive() || !player.onGround) return;
+                if (!heavyRifleActive()) return;
                 rifleReady = false;
                 riflePendingFire = true;
                 rifleDrawTime = RIFLE_DRAW_DURATION;
+                rifleIdleStowTime = 0;
                 shootBuffer = 0;
-                player.vx = 0;
+                if (player.onGround) {
+                    player.vx = 0;
+                }
             }
 
             function updateRifleObstacles(delta) {
@@ -5171,13 +5211,17 @@
                     mite: { width: 86, height: 76 },
                     patroller: { width: 82, height: 98 },
                     wasp: { width: 96, height: 74 },
-                    gaunt: { width: 88, height: 128 }
+                    gaunt: { width: 88, height: 128 },
+                    fragmentSpring: { width: 60, height: 44 },
+                    fragmentBastion: { width: 66, height: 58 }
                 };
                 var size = sizes[type];
                 var isFlyer =
                     type === "flyer" ||
                     type === "mite" ||
-                    type === "wasp";
+                    type === "wasp" ||
+                    type === "fragmentSpring" ||
+                    type === "fragmentBastion";
                 return {
                     type: type,
                     x: x,
@@ -5364,6 +5408,33 @@
                 gaunt.hurtFlash = 0;
                 gaunt.betaShowcase = true;
                 betaEnemies.push(gaunt);
+
+                var springFragment = makeEnemy(
+                    "fragmentSpring",
+                    WIDTH * 2 + 1180,
+                    1288,
+                    WIDTH * 2 + 1030,
+                    WIDTH * 2 + 1510,
+                    -126
+                );
+                springFragment.betaShowcase = true;
+                betaEnemies.push(springFragment);
+
+                var bastionFragment = makeEnemy(
+                    "fragmentBastion",
+                    WIDTH * 5 + 420,
+                    1256,
+                    WIDTH * 5 + 300,
+                    WIDTH * 5 + 720,
+                    46
+                );
+                bastionFragment.maxHealth = 2;
+                bastionFragment.health = 2;
+                bastionFragment.noStomp = true;
+                bastionFragment.hurtFlash = 0;
+                bastionFragment.armored = false;
+                bastionFragment.betaShowcase = true;
+                betaEnemies.push(bastionFragment);
 
                 var sentinel = makeEnemy(
                     "patroller",
@@ -5564,24 +5635,24 @@
                         "<kbd>←</kbd><kbd>→</kbd><span>move</span>" +
                         "<kbd>↓</kbd><span>talk</span>" +
                         "<kbd>SPACE</kbd><span>jump</span>" +
-                        "<kbd>CTRL</kbd><span>fire</span>" +
+                        "<kbd>X</kbd><span>fire</span>" +
                         "<kbd>V</kbd><span>switch</span>" +
                         "<kbd>R</kbd><span>restart</span>";
                     keyboardHelp.setAttribute(
                         "aria-label",
-                        "Keyboard controls: left and right arrows move, down arrow talks to Dras after first contact, Space jumps, Control fires, V switches weapons after the heavy rifle is recovered, R restarts"
+                        "Keyboard controls: left and right arrows move, down arrow talks to Dras after first contact, Space jumps, X fires, V switches weapons after the heavy rifle is recovered, R restarts"
                     );
                 } else {
                     keyboardHelp.innerHTML =
                         "<kbd>←</kbd><kbd>→</kbd><span>move</span>" +
                         "<kbd>↓</kbd><span>drop</span>" +
                         "<kbd>SPACE</kbd><span>jump</span>" +
-                        "<kbd>CTRL</kbd><span>blaster</span>" +
+                        "<kbd>X</kbd><span>blaster</span>" +
                         "<kbd>V</kbd><span>switch</span>" +
                         "<kbd>R</kbd><span>restart</span>";
                     keyboardHelp.setAttribute(
                         "aria-label",
-                        "Keyboard controls: left and right arrows move, down arrow drops, Space jumps, Control fires, V switches between the jet pack laser and heavy rifle after the rifle is recovered, R restarts"
+                        "Keyboard controls: left and right arrows move, down arrow drops, Space jumps, X fires, V switches between the jet pack laser and heavy rifle after the rifle is recovered, R restarts"
                     );
                 }
             }
@@ -6090,7 +6161,6 @@
             }
 
             function beginPlatformDrop(platform) {
-                stowRifle();
                 platformDropTimer = 0.42;
                 dropPoseTime = ludoRunPreview ? 0.28 : 0;
                 jumpPoseTime = 0;
@@ -6576,6 +6646,21 @@
                 packFireTime = Math.max(0, packFireTime - delta);
                 rifleDrawTime = Math.max(0, rifleDrawTime - delta);
                 rifleFireTime = Math.max(0, rifleFireTime - delta);
+                if (
+                    heavyRifleActive() &&
+                    rifleReady &&
+                    player.onGround &&
+                    rifleDrawTime === 0 &&
+                    rifleFireTime === 0
+                ) {
+                    rifleIdleStowTime = Math.max(
+                        0,
+                        rifleIdleStowTime - delta
+                    );
+                    if (rifleIdleStowTime === 0) {
+                        stowRifle();
+                    }
+                }
                 jetpackPoseTime = Math.max(0, jetpackPoseTime - delta);
                 if (platformDropTimer === 0) {
                     dropThroughPlatform = null;
@@ -6593,18 +6678,10 @@
 
                 var requestedDirection =
                     (keys.right ? 1 : 0) - (keys.left ? 1 : 0);
-                if (
-                    heavyRifleActive() &&
-                    rifleReady &&
-                    requestedDirection !== 0 &&
-                    rifleDrawTime <= 0 &&
-                    rifleFireTime <= 0
-                ) {
-                    stowRifle();
-                }
                 var direction =
                     heavyRifleActive() &&
-                    (rifleDrawTime > 0 || rifleFireTime > 0)
+                    player.onGround &&
+                    rifleDrawTime > 0
                         ? 0
                         : requestedDirection;
                 var acceleration = player.onGround ? 2400 : 1450;
@@ -6633,7 +6710,6 @@
                 }
 
                 if (jumpBuffer > 0 && coyoteTime > 0) {
-                    stowRifle();
                     player.vy = inDeepworks ? -1040 : -790;
                     jumpPoseTime = ludoRunPreview ? 0.15 : 0;
                     dropPoseTime = 0;
@@ -6649,7 +6725,6 @@
                     jetpackOwned &&
                     jetpackBoostAvailable
                 ) {
-                    stowRifle();
                     player.vy = -720;
                     jetpackBoostAvailable = false;
                     jetpackPoseTime = 0.52;
@@ -7354,6 +7429,25 @@
                             canvas.dataset.miteAlive = String(enemy.alive);
                         }
                     }
+                    if (enemy.type === "fragmentSpring") {
+                        enemy.animationTime += delta;
+                        enemy.y =
+                            enemy.baseY +
+                            Math.sin(elapsed * 2.6 + enemy.phase) * 34 +
+                            Math.sin(elapsed * 6.2 + enemy.phase * 0.6) * 5;
+                    }
+                    if (enemy.type === "fragmentBastion") {
+                        enemy.hurtFlash = Math.max(0, enemy.hurtFlash - delta);
+                        enemy.animationTime += delta;
+                        enemy.fragmentFrame =
+                            Math.floor(enemy.animationTime / 0.049) % 36;
+                        enemy.armored =
+                            enemy.fragmentFrame >= 8 &&
+                            enemy.fragmentFrame <= 31;
+                        enemy.y =
+                            enemy.baseY +
+                            Math.sin(elapsed * 1.75 + enemy.phase) * 11;
+                    }
 
                     var playerLeft = player.x + 32;
                     var playerRight = player.x + 80;
@@ -7364,6 +7458,8 @@
                         enemy.type === "mite" ||
                         enemy.type === "wasp" ||
                         enemy.type === "patroller" ||
+                        enemy.type === "fragmentSpring" ||
+                        enemy.type === "fragmentBastion" ||
                         enemy.surfaceCrawler
                             ? 0
                             : Math.sin(elapsed * 4 + enemy.phase) * 2
@@ -7468,10 +7564,6 @@
                 }
 
                 if (heavyRifleActive()) {
-                    if (!player.onGround) {
-                        stowRifle();
-                        return;
-                    }
                     if (rifleDrawTime > 0 || rifleFireTime > 0) {
                         return;
                     }
@@ -7531,7 +7623,7 @@
                 packFireTime = rifleActive ? 0 : PACK_FIRE_DURATION;
                 rifleFireTime = rifleActive ? RIFLE_FIRE_DURATION : 0;
                 if (rifleActive) {
-                    player.vx = 0;
+                    rifleIdleStowTime = RIFLE_IDLE_STOW_DELAY;
                 }
                 combatAlertTime = Math.max(combatAlertTime, 1.35);
                 calmIdleTime = 0;
@@ -7710,6 +7802,8 @@
                             enemy.type === "mite" ||
                             enemy.type === "wasp" ||
                             enemy.type === "patroller" ||
+                            enemy.type === "fragmentSpring" ||
+                            enemy.type === "fragmentBastion" ||
                             enemy.surfaceCrawler
                                 ? 0
                                 : Math.sin(elapsed * 4 + enemy.phase) * 2
@@ -7737,6 +7831,24 @@
                 var centerX = enemy.x + enemy.width / 2;
                 var centerY = enemyTop + enemy.height / 2;
                 var color = enemyColor(enemy.type);
+
+                if (
+                    enemy.type === "fragmentBastion" &&
+                    enemy.armored
+                ) {
+                    enemy.hurtFlash = 0.1;
+                    spawnBurst(centerX, centerY, "#d8a6ff", 12);
+                    popups.push({
+                        x: centerX,
+                        y: enemyTop - 14,
+                        text: "SPIKE ARMOR",
+                        life: 0.68,
+                        color: "#d8a6ff"
+                    });
+                    playTone(112, 0.045, "square", 0.026);
+                    playTone(168, 0.04, "square", 0.018, 0.025);
+                    return;
+                }
 
                 if (enemy.maxHealth > 1) {
                     enemy.health = Math.max(0, enemy.health - 1);
@@ -10353,7 +10465,9 @@
                     mite: "#58d8e8",
                     patroller: "#ffd36c",
                     wasp: "#ffb84f",
-                    gaunt: "#c98cff"
+                    gaunt: "#c98cff",
+                    fragmentSpring: "#4be36e",
+                    fragmentBastion: "#b56cff"
                 }[type] || "#ff69b4";
             }
 
@@ -10366,7 +10480,9 @@
                     mite: "VESPER MITE",
                     patroller: "CHITIN SENTINEL",
                     wasp: "EMBER WASP",
-                    gaunt: "SEAM HUNTER"
+                    gaunt: "SEAM HUNTER",
+                    fragmentSpring: "SPRING FRAGMENT",
+                    fragmentBastion: "BASTION FRAGMENT"
                 }[type] || "CREATURE";
             }
 
@@ -10680,6 +10796,106 @@
                 }
             }
 
+            function drawFragmentEnemy(enemy) {
+                var bastion = enemy.type === "fragmentBastion";
+                var sprite = bastion
+                    ? assets.fragmentBastion
+                    : assets.fragmentSpring;
+                if (!imageHasPixels(sprite)) return;
+
+                var frameCount = bastion ? 36 : 25;
+                var columns = bastion ? 6 : 5;
+                var frameWidth = 80;
+                var frameHeight = bastion ? 70 : 57;
+                var frameDuration = bastion ? 0.049 : 0.068;
+                var frameIndex = bastion && enemy.fragmentFrame !== undefined
+                    ? enemy.fragmentFrame
+                    : Math.floor(enemy.animationTime / frameDuration) % frameCount;
+                var sourceX = frameIndex % columns * frameWidth;
+                var sourceY =
+                    Math.floor(frameIndex / columns) * frameHeight;
+                var centerX = Math.round(enemy.x + enemy.width / 2);
+                var centerY = Math.round(enemy.y + enemy.height / 2);
+                var drawWidth = bastion ? 72 : 68;
+                var drawHeight = bastion ? 63 : 48;
+                var color = bastion ? "#b56cff" : "#4be36e";
+                var armoredGlow = bastion && enemy.armored;
+
+                ctx.save();
+                ctx.globalAlpha = armoredGlow ? 0.3 : 0.18;
+                ctx.fillStyle = color;
+                ctx.beginPath();
+                ctx.ellipse(
+                    centerX,
+                    centerY + drawHeight / 2 + 7,
+                    drawWidth * 0.34,
+                    5,
+                    0,
+                    0,
+                    Math.PI * 2
+                );
+                ctx.fill();
+                ctx.restore();
+
+                ctx.save();
+                ctx.translate(centerX, centerY);
+                // The source artwork travels left; mirror it when the
+                // runtime patrol is moving right so its particle wake trails.
+                if (enemy.vx > 0) ctx.scale(-1, 1);
+                ctx.imageSmoothingEnabled = false;
+                ctx.shadowColor = color;
+                ctx.shadowBlur = armoredGlow ? 18 : 10;
+                ctx.drawImage(
+                    sprite,
+                    sourceX,
+                    sourceY,
+                    frameWidth,
+                    frameHeight,
+                    -drawWidth / 2,
+                    -drawHeight / 2,
+                    drawWidth,
+                    drawHeight
+                );
+                if (enemy.hurtFlash > 0) {
+                    ctx.globalCompositeOperation = "screen";
+                    ctx.globalAlpha =
+                        0.42 + Math.sin(elapsed * 72) * 0.18;
+                    ctx.drawImage(
+                        sprite,
+                        sourceX,
+                        sourceY,
+                        frameWidth,
+                        frameHeight,
+                        -drawWidth / 2,
+                        -drawHeight / 2,
+                        drawWidth,
+                        drawHeight
+                    );
+                }
+                ctx.restore();
+
+                if (bastion && enemy.maxHealth > 1) {
+                    var pipWidth = 9;
+                    var pipGap = 4;
+                    var barWidth =
+                        enemy.maxHealth * pipWidth +
+                        (enemy.maxHealth - 1) * pipGap;
+                    var barX = Math.round(centerX - barWidth / 2);
+                    var barY = Math.round(centerY - drawHeight / 2 - 10);
+                    for (var pip = 0; pip < enemy.maxHealth; pip += 1) {
+                        ctx.fillStyle = pip < enemy.health
+                            ? color
+                            : "rgba(181, 108, 255, 0.18)";
+                        ctx.fillRect(
+                            barX + pip * (pipWidth + pipGap),
+                            barY,
+                            pipWidth,
+                            3
+                        );
+                    }
+                }
+            }
+
             function drawEnemies() {
                 enemies.forEach(function (enemy) {
                     if (!enemy.alive && !enemy.defeated) return;
@@ -10693,6 +10909,13 @@
                     }
                     if (enemy.type === "gaunt") {
                         drawGauntEnemy(enemy);
+                        return;
+                    }
+                    if (
+                        enemy.type === "fragmentSpring" ||
+                        enemy.type === "fragmentBastion"
+                    ) {
+                        drawFragmentEnemy(enemy);
                         return;
                     }
                     var sprite = assets[enemy.type];
@@ -11082,21 +11305,32 @@
                     visual.sourceX = visual.frame * 112;
                 } else if (
                     heavyRifleActive() &&
-                    player.onGround &&
                     rifleFireTime > 0
                 ) {
-                    visual.sprite = assets.rifleFireLudo;
-                    visual.pose = "rifleFireLudo";
-                    visual.frame = Math.min(
-                        11,
-                        Math.floor(
-                            (RIFLE_FIRE_DURATION - rifleFireTime) / 0.038
+                    var movingRifleShot =
+                        !player.onGround || Math.abs(player.vx) > 26;
+                    visual.sprite = movingRifleShot
+                        ? assets.rifleRunFireLudo
+                        : assets.rifleFireLudo;
+                    visual.pose = movingRifleShot
+                        ? "rifleRunFireLudo"
+                        : "rifleFireLudo";
+                    visual.frame = movingRifleShot
+                        ? Math.min(
+                            7,
+                            Math.floor(
+                                (RIFLE_FIRE_DURATION - rifleFireTime) / 0.058
+                            )
                         )
-                    );
+                        : Math.min(
+                            11,
+                            Math.floor(
+                                (RIFLE_FIRE_DURATION - rifleFireTime) / 0.038
+                            )
+                        );
                     visual.sourceX = visual.frame * 112;
                 } else if (
                     heavyRifleActive() &&
-                    player.onGround &&
                     rifleDrawTime > 0
                 ) {
                     visual.sprite = assets.rifleDrawLudo;
@@ -11107,6 +11341,20 @@
                             (RIFLE_DRAW_DURATION - rifleDrawTime) / 0.07
                         )
                     );
+                    visual.sourceX = visual.frame * 112;
+                } else if (
+                    heavyRifleActive() &&
+                    rifleReady &&
+                    !player.onGround
+                ) {
+                    visual.sprite = assets.rifleRunReadyLudo;
+                    visual.pose = "rifleAirborneReadyLudo";
+                    visual.frame =
+                        player.vy < -180
+                            ? 2
+                            : player.vy > 220
+                                ? 6
+                                : 4;
                     visual.sourceX = visual.frame * 112;
                 } else if (
                     ludoRunPreview &&
@@ -11160,11 +11408,20 @@
                     visual.sprite = assets.crouch;
                     visual.pose = "crouch";
                 } else if (Math.abs(player.vx) > 26) {
-                    visual.sprite = assets.run;
-                    visual.pose = "run";
-                    visual.frame =
-                        Math.floor(runFrameTime * 12) %
-                        (ludoRunPreview ? 8 : 10);
+                    var runningWithReadyRifle =
+                        heavyRifleActive() && rifleReady;
+                    visual.sprite = runningWithReadyRifle
+                        ? assets.rifleRunReadyLudo
+                        : ludoRunPreview
+                            ? assets.runLudo
+                            : assets.run;
+                    visual.pose = runningWithReadyRifle
+                        ? "rifleRunReadyLudo"
+                        : "run";
+                    visual.frame = runningWithReadyRifle
+                        ? Math.floor(runFrameTime / 0.058) % 9
+                        : Math.floor(runFrameTime * 12) %
+                            (ludoRunPreview ? 8 : 10);
                     visual.sourceX = visual.frame * 112;
                 } else if (
                     heavyRifleActive() &&
@@ -11687,14 +11944,6 @@
                     engageSceneAudioFromGesture();
                 }
                 if (state === "paused" || dialogueActive) return;
-                if (
-                    pressed &&
-                    heavyRifleActive() &&
-                    rifleReady &&
-                    (control === "left" || control === "right")
-                ) {
-                    stowRifle();
-                }
                 if (control === "jump") {
                     keys.jump = pressed;
                     if (pressed) queueJump();
@@ -11792,9 +12041,7 @@
             }
 
             function isBlasterKey(event) {
-                return event.key === "Control" ||
-                    event.code === "ControlLeft" ||
-                    event.code === "ControlRight";
+                return event.code === "KeyX";
             }
 
             function initializeSignal() {

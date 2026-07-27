@@ -162,7 +162,7 @@ def build_animation(frames: list[Image.Image]) -> None:
 def write_manifest() -> None:
     manifest = {
         "asset": "Aryn Sol-Mavi curated Ludo run loop",
-        "status": "local preview candidate",
+        "status": "active Episode runtime",
         "source_sheet": str(SOURCE_SHEET.relative_to(PROJECT_ROOT)),
         "source_metadata": str(SOURCE_METADATA.relative_to(PROJECT_ROOT)),
         "source_frames": list(SOURCE_FRAME_INDICES),
@@ -185,7 +185,7 @@ def write_manifest() -> None:
             "Frames 15-22 form a complete eight-frame gait cycle.",
             "Source frame 23 closely matches frame 15, confirming the loop closure.",
             "The malformed arm reversal in the final generated gait cycle is excluded.",
-            "The existing production run remains the default asset.",
+            "The curated Ludo loop is the active armored Aryn locomotion set in unified Episode scenes.",
         ],
     }
     MANIFEST_OUTPUT.write_text(json.dumps(manifest, indent=2) + "\n")

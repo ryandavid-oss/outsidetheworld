@@ -43,13 +43,8 @@ def main() -> None:
     require("getPlayerVisualState()" in fire_body, "Fire origin ignores the current animation")
     require("getPackEmitterAnchor(visual)" in fire_body, "Fire origin is not attached to the pack")
     require(
-        "if (rifleActive) {\n                    player.vx = 0;\n                }"
-        in fire_body,
-        "Heavy-rifle bracing is not isolated from pack-emitter fire",
-    )
-    require(
-        fire_body.count("player.vx =") == 1,
-        "Pack-emitter firing changes horizontal locomotion",
+        fire_body.count("player.vx =") == 0,
+        "A firing route changes horizontal locomotion",
     )
     require("player.vy =" not in fire_body, "Firing changes vertical locomotion")
 
@@ -69,7 +64,7 @@ def main() -> None:
     print("Pack-fire contract passed.")
     print("- torso gun overlay removed")
     print("- antenna origin mapped across locomotion states")
-    print("- firing leaves player velocity untouched")
+    print("- pack and ready-rifle firing leave player velocity untouched")
     print("- seeking and curved tracer enabled at all three tiers")
     print("- Command Rest is the immediate canonical idle")
 

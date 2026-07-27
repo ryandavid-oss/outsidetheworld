@@ -38,6 +38,8 @@ MANIFEST_OUTPUT = LUDO_ROOT / "aryn-ludo-rifle-runtime-v1.json"
 FRAME_SIZE = 112
 BASELINE_Y = 105
 SOURCE_SCALE = 0.165
+RIFLE_FORESECTION_X = 82
+RIFLE_FORESECTION_SHIFT = 14
 REVIEW_BACKGROUND = (3, 6, 18, 255)
 
 # The generated draw contains a long idle lead and a firing tail. These frames
@@ -131,6 +133,23 @@ def normalize_fixed_canvas(source: Image.Image) -> Image.Image:
     return runtime
 
 
+def shorten_rifle_foresection(frame: Image.Image) -> Image.Image:
+    """Match the standing rifle silhouette to the authored running rifle."""
+    shortened = frame.copy()
+    foresection = frame.crop(
+        (RIFLE_FORESECTION_X, 0, FRAME_SIZE, FRAME_SIZE)
+    )
+    shortened.paste(
+        (0, 0, 0, 0),
+        (RIFLE_FORESECTION_X, 0, FRAME_SIZE, FRAME_SIZE),
+    )
+    shortened.alpha_composite(
+        foresection,
+        (RIFLE_FORESECTION_X - RIFLE_FORESECTION_SHIFT, 0),
+    )
+    return shortened
+
+
 def select_frames(
     source_frames: list[Image.Image],
     components: tuple[tuple[int, str], ...],
@@ -218,6 +237,14 @@ def main() -> None:
     fire_source_frames = load_frames(FIRE_SOURCE, FIRE_METADATA, (640, 556))
     draw_frames = select_frames(draw_source_frames, DRAW_COMPONENTS)
     fire_frames = select_frames(fire_source_frames, FIRE_COMPONENTS)
+    # Only the final horizontal draw pose needs the shortened silhouette. The
+    # preceding angled frames remain untouched so the authored draw reads
+    # naturally. All standing-fire frames share the corrected muzzle plane.
+    draw_frames[-1] = shorten_rifle_foresection(draw_frames[-1])
+    fire_frames = [
+        shorten_rifle_foresection(frame)
+        for frame in fire_frames
+    ]
 
     REVIEW_ROOT.mkdir(parents=True, exist_ok=True)
     RUNTIME_ROOT.mkdir(parents=True, exist_ok=True)
@@ -236,14 +263,15 @@ def main() -> None:
     build_contact_sheet(draw_frames, fire_frames)
 
     manifest = {
-        "asset": "Aryn Sol-Mavi Ludo rifle special-weapon preview",
-        "status": "local preview candidate",
+        "asset": "Aryn Sol-Mavi Ludo rifle special weapon",
+        "status": "Episode 01 early-beta pickup",
         "preview_query": "aryn=ludo&weapon=rifle",
         "runtime_contract": {
             "frame_size": [FRAME_SIZE, FRAME_SIZE],
             "baseline_y": BASELINE_Y,
             "source_scale": SOURCE_SCALE,
             "body_alignment": "fixed source canvas; never center on rifle bounds",
+            "standing_foresection_shift": RIFLE_FORESECTION_SHIFT,
             "draw_frame_count": len(draw_frames),
             "fire_frame_count": len(fire_frames),
         },
@@ -258,19 +286,26 @@ def main() -> None:
         "design_contract": {
             "production_default": "pack-mounted seeking blaster",
             "rifle_role": "optional route-clearing heavy special weapon",
-            "mobility_tradeoff": "Aryn braces briefly while firing",
+            "mobility_tradeoff": (
+                "The first grounded draw is braced; the ready rifle supports "
+                "ground and airborne movement"
+            ),
             "projectile": "fast, direct, amber heavy round",
             "destruction_target": "Vesperite route obstructions",
-            "preview_only": True,
+            "preview_only": False,
+            "episode_beta_pickup": True,
         },
         "notes": [
             "The rifle begins stowed.",
             "The first firing input draws, braces, and then discharges.",
-            "Aryn holds the rifle ready while stationary after firing.",
-            "Running, jumping, or dropping stows the rifle; the next shot redraws it.",
+            "Aryn holds the rifle ready after firing while running or airborne.",
+            "Jumping, dropping, and falling preserve the rifle and allow aerial fire.",
+            "The rifle automatically stows after 2.25 grounded seconds without firing.",
+            "The idle holster countdown pauses in the air and resumes on landing.",
             "Three direct heavy rounds clear each Vesperite obstruction and leave non-colliding rubble.",
             "The existing backpack remains visible and remains Aryn's upgrade hub.",
-            "No production weapon behavior changes without weapon=rifle.",
+            "The isolated weapon=rifle route remains available for review.",
+            "The Episode 01 beta activates the same behavior after Aryn collects the heavy-rifle pickup.",
         ],
     }
     MANIFEST_OUTPUT.write_text(json.dumps(manifest, indent=2) + "\n")
