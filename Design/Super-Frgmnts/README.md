@@ -7,6 +7,8 @@ runtime; they are not alternate sources of truth.
 
 ## Active baselines
 
+- [Working handoff](SUPER-FRGMNTS-HANDOFF.md) — canonical source, current
+  checkpoint, routes, controls, roster, verification, and deferred scope
 - [Platform Baseline 1](IOS-PORTABILITY-BASELINE.md) — web-first, iOS-ready
   architecture and feature acceptance rules
 - [Unified Level 1 Plan](UNIFIED-LEVEL-ONE-PLAN.md) — The Shard Foundry world,

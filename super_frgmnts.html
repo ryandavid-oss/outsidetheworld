@@ -2248,9 +2248,14 @@
             var arrivalDialoguePreview =
                 overworldPreview &&
                 previewParameters.get("scene") === "dialogue";
-            var arrivalPortalPreview =
+            var arrivalTransportPreview =
                 overworldPreview &&
-                previewParameters.get("scene") === "portal";
+                (
+                    previewParameters.get("scene") === "transport" ||
+                    // Preserve the historical review URL while standardizing
+                    // the runtime name around the physical transport.
+                    previewParameters.get("scene") === "portal"
+                );
             var expansionPreview =
                 previewParameters.get("preview") === "foundry-expansion" ||
                 (episodeOneRun && episodeStage === "foundry");
@@ -2387,6 +2392,15 @@
             var DRAS_WORLD_X = WIDTH + 560;
             var DRAS_DRAW_Y = GROUND_Y - 100;
             var DOG_WORLD_X = WIDTH + 810;
+            var COREWORKS_TRANSPORT_CENTER_X = WIDTH * 2 + 1532;
+            var COREWORKS_TRANSPORT_FRAME_WIDTH = 208;
+            var COREWORKS_TRANSPORT_FRAME_HEIGHT = 240;
+            var COREWORKS_TRANSPORT_DRAW_WIDTH = 260;
+            var COREWORKS_TRANSPORT_DRAW_HEIGHT = 300;
+            var COREWORKS_TRANSPORT_DECK_X = WIDTH * 2 + 1418;
+            var COREWORKS_TRANSPORT_DECK_WIDTH = 146;
+            var COREWORKS_TRANSPORT_DECK_OFFSET_Y = 70;
+            var COREWORKS_TRANSPORT_DURATION = 1.625;
             var prefersReducedMotion =
                 window.matchMedia("(prefers-reduced-motion: reduce)").matches;
             var START_TIME = overworldPreview || expansionPreview ? 480 : 105;
@@ -2642,14 +2656,14 @@
                 document.querySelector(".eyebrow").textContent =
                     "Season One // Veyra";
                 document.querySelector(".title-screen__hero").innerHTML =
-                    arrivalPortalPreview
+                    arrivalTransportPreview
                         ? "Revision 3F // <strong>Coreworks Threshold</strong>"
                         : arrivalDialoguePreview
                         ? "Revision 3I // <strong>Aryn Portrait</strong>"
                         : "Episode 01 // <strong>Arrival on Veyra</strong>";
                 document.querySelector(".title-screen__hint").textContent =
-                    arrivalPortalPreview
-                        ? "Painted doorway alignment // Portal ignition // Interaction boundary"
+                    arrivalTransportPreview
+                        ? "Physical deck alignment // Transport activation // Foundry handoff"
                         : arrivalDialoguePreview
                         ? "Matched portrait fidelity // Atmospheric depth // Camp staging"
                         : "Leave the landing flats // Find Dras Ehdre // Space jumps";
@@ -2744,11 +2758,11 @@
                 document.title = "SUPER FRGMNTS // Vesper Mite Trial";
                 titleSeason.textContent = "Development Trial // Enemy Systems";
                 document.querySelector(".eyebrow").textContent =
-                    "Development Trial // Low-Flight Infestation";
+                    "Development Trial // Ground Infestation";
                 document.querySelector(".title-screen__hero").innerHTML =
                     "Aryn Sol-Mavi // <strong>Vesper Mite Contact Test</strong>";
                 document.querySelector(".title-screen__hint").textContent =
-                    "Track the hover // Stomp or use the pack blaster";
+                    "Track the scuttle // Stomp or use the pack blaster";
                 document.querySelector(".mission strong").textContent =
                     "VESPER MITE // LIVE SPECIMEN";
                 document.querySelector(".mission span").textContent =
@@ -2917,6 +2931,14 @@
                     source: "/Images/Game/Super-Frgmnts/veyra-camp-dog-sniff-sheet-v3.png",
                     priority: "high"
                 },
+                coreworksTransportIdle: {
+                    source: "/Images/Game/Super-Frgmnts/coreworks-transport-idle-sheet-v1.png",
+                    priority: "high"
+                },
+                coreworksTransportActivate: {
+                    source: "/Images/Game/Super-Frgmnts/coreworks-transport-activate-sheet-v1.png",
+                    priority: "high"
+                },
                 foundryExpanded: {
                     source: "/Images/Game/super-frgmnts-foundry-expanded-prototype-v1.png",
                     priority: "high"
@@ -2958,7 +2980,7 @@
                     priority: "high"
                 },
                 mite: {
-                    source: "/Images/Game/Super-Frgmnts/enemy-vesper-mite-flight-sheet-v1.png",
+                    source: "/Images/Game/Super-Frgmnts/enemy-vesper-mite-ground-gait-sheet-v2.png",
                     priority: "high"
                 },
                 patroller: {
@@ -2987,6 +3009,18 @@
                 },
                 fragmentBastion: {
                     source: "/Images/Game/Super-Frgmnts/enemy-fragment-bastion-purple-runtime-v1.png",
+                    priority: "high"
+                },
+                coreLeech: {
+                    source: "/Images/Game/Super-Frgmnts/enemy-core-leech-hover-sheet-v1.png",
+                    priority: "high"
+                },
+                vesperFlare: {
+                    source: "/Images/Game/Super-Frgmnts/enemy-vesper-flare-hover-sheet-v1.png",
+                    priority: "high"
+                },
+                paleWatcher: {
+                    source: "/Images/Game/Super-Frgmnts/enemy-pale-watcher-stalk-sheet-v1.png",
                     priority: "high"
                 },
                 vesperiteBoulder: {
@@ -3066,6 +3100,8 @@
                 "dras",
                 "campDogWalk",
                 "campDogSniff",
+                "coreworksTransportIdle",
+                "coreworksTransportActivate",
                 "arynDialoguePortrait",
                 "drasDialoguePortrait"
             ];
@@ -3090,6 +3126,9 @@
                 "gauntAttack",
                 "fragmentSpring",
                 "fragmentBastion",
+                "coreLeech",
+                "vesperFlare",
+                "paleWatcher",
                 "rifleDrawLudo",
                 "rifleFireLudo",
                 "rifleRunReadyLudo",
@@ -3265,6 +3304,8 @@
             var portalCharge = 0;
             var portalIgniting = false;
             var overworldTransitionReady = false;
+            var coreworksTransportActive = false;
+            var coreworksTransportElapsed = 0;
 
             function readEpisodeCredits() {
                 try {
@@ -3655,7 +3696,15 @@
                     shipSurface(220, 600, 104),
                     shipSurface(820, 600, 104),
                     shipSurface(176, 648, 64),
-                    shipSurface(904, 648, 64)
+                    shipSurface(904, 648, 64),
+                    {
+                        x: COREWORKS_TRANSPORT_DECK_X,
+                        y: GROUND_Y - COREWORKS_TRANSPORT_DECK_OFFSET_Y,
+                        width: COREWORKS_TRANSPORT_DECK_WIDTH,
+                        height: 10,
+                        coreworksTransportDeck: true,
+                        invisibleStep: true
+                    }
                 ];
 
                 if (!episodeArrivalTutorial) {
@@ -3982,10 +4031,10 @@
             if (overworldPreview) {
                 hazards = [];
                 uplink = {
-                    x: WIDTH * 2 + 1490,
-                    y: 548,
-                    width: 112,
-                    height: 196
+                    x: COREWORKS_TRANSPORT_DECK_X,
+                    y: GROUND_Y - COREWORKS_TRANSPORT_DECK_OFFSET_Y,
+                    width: COREWORKS_TRANSPORT_DECK_WIDTH,
+                    height: 10
                 };
             }
             if (expansionPreview) {
@@ -4281,7 +4330,7 @@
 
             function titleActionLabel() {
                 return overworldPreview
-                    ? arrivalPortalPreview
+                    ? arrivalTransportPreview
                         ? "Review threshold"
                         : arrivalDialoguePreview
                         ? "Review opening"
@@ -4501,6 +4550,9 @@
                 portalCharge = 0;
                 portalIgniting = false;
                 overworldTransitionReady = false;
+                coreworksTransportActive = false;
+                coreworksTransportElapsed = 0;
+                canvas.dataset.coreworksTransport = "idle";
                 dialogueLayer.hidden = true;
                 dialogueSkipConfirm.hidden = true;
                 document.body.classList.remove("is-dialogue", "is-dialogue-tremor");
@@ -4512,8 +4564,10 @@
                 var previewSpawnX = overworldPreview
                     ? episodeSurfaceReturn
                         ? WIDTH * 2 + 1300
-                        : arrivalPortalPreview
-                        ? WIDTH * 2 + 1320
+                        : arrivalTransportPreview
+                        ? COREWORKS_TRANSPORT_DECK_X +
+                            COREWORKS_TRANSPORT_DECK_WIDTH * 0.5 -
+                            56
                         : arrivalDialoguePreview
                         ? DRAS_WORLD_X - 160
                         : OVERWORLD_SHIP_SPAWN_X
@@ -4534,7 +4588,10 @@
                         : previewStartRoom > 0
                             ? previewStartRoom * WIDTH + Math.round(WIDTH * 0.42)
                             : 82;
-                cameraX = expansionPreview || episodeSurfaceReturn
+                cameraX =
+                    expansionPreview ||
+                    episodeSurfaceReturn ||
+                    arrivalTransportPreview
                     ? Math.max(0, Math.min(WORLD_WIDTH - viewWidth, previewSpawnX - viewWidth * 0.38))
                     : 0;
                 cameraY = expansionPreview
@@ -4615,7 +4672,7 @@
                 var overworldShipSpawnPlatform =
                     overworldPreview &&
                     !episodeSurfaceReturn &&
-                    !arrivalPortalPreview &&
+                    !arrivalTransportPreview &&
                     !arrivalDialoguePreview
                         ? platforms.find(function (platform) {
                             return (
@@ -4626,8 +4683,16 @@
                             );
                         })
                         : null;
+                var overworldTransportPreviewPlatform =
+                    arrivalTransportPreview
+                        ? platforms.find(function (platform) {
+                            return platform.coreworksTransportDeck;
+                        })
+                        : null;
                 player.x = overworldPreview || expansionPreview ? previewSpawnX : 82;
-                player.y = surfaceTrialPlatform
+                player.y = overworldTransportPreviewPlatform
+                    ? overworldTransportPreviewPlatform.y - 100
+                    : surfaceTrialPlatform
                     ? surfaceTrialPlatform.y - 100
                     : overworldShipSpawnPlatform
                         ? overworldShipSpawnPlatform.y - 100
@@ -4639,6 +4704,7 @@
                 player.facing = 1;
                 player.onGround = true;
                 player.supportPlatform =
+                    overworldTransportPreviewPlatform ||
                     surfaceTrialPlatform ||
                     overworldShipSpawnPlatform ||
                     platforms[0];
@@ -4646,11 +4712,11 @@
                     ? makeRifleObstacles(surfaceTrialPlatform)
                     : [];
                 canvas.dataset.rifleObstacles = String(rifleObstacles.length);
-                if (arrivalPortalPreview) {
+                if (arrivalTransportPreview) {
                     dialogueHasPlayed = true;
                     portalCharge = 1;
                     document.querySelector(".mission span").textContent =
-                        "REACH THE COREWORKS THRESHOLD";
+                        "BOARD THE COREWORKS TRANSPORT";
                 }
                 shards = [
                     makeShard(520, 818, "#58f5df"),
@@ -4731,6 +4797,20 @@
                 if (overworldPreview) {
                     enemies = [];
                 }
+                canvas.dataset.enemyRoster = enemies
+                    .map(function (enemy) {
+                        return enemy.type;
+                    })
+                    .join(",");
+                canvas.dataset.enemyCount = String(enemies.length);
+                canvas.dataset.catalogEnemyAssets = [
+                    "coreLeech",
+                    "vesperFlare",
+                    "paleWatcher"
+                ].map(function (key) {
+                    return key + ":" +
+                        (imageHasPixels(assets[key]) ? "ready" : "missing");
+                }).join(",");
                 canvas.dataset.betaRun = String(episodeBetaRun);
                 canvas.dataset.arrivalTutorial =
                     String(episodeArrivalTutorial);
@@ -4767,13 +4847,13 @@
                 } else {
                     announce(
                         overworldPreview
-                            ? arrivalPortalPreview
+                            ? arrivalTransportPreview
                                 ? "Coreworks threshold review started. The painted doorway is online."
                                 : "Arrival on Veyra started. Leave the landing flats and find Dras Ehdre."
                             : surfaceCrawlerTrial
                             ? "Surface crawler trial started. Observe the minion on the upper Foundry catwalk."
                             : vesperMiteTrial
-                            ? "Vesper Mite trial started. Track its low hover and test stomp or blaster contact."
+                            ? "Vesper Mite trial started. Track its ground patrol and test stomp or blaster contact."
                             : riflePreview
                             ? "Heavy rifle trial started. Each Vesperite obstruction requires three direct hits."
                             : patrollerTrial
@@ -5213,15 +5293,19 @@
                     wasp: { width: 96, height: 74 },
                     gaunt: { width: 88, height: 128 },
                     fragmentSpring: { width: 60, height: 44 },
-                    fragmentBastion: { width: 66, height: 58 }
+                    fragmentBastion: { width: 66, height: 58 },
+                    coreLeech: { width: 78, height: 96 },
+                    vesperFlare: { width: 82, height: 86 },
+                    paleWatcher: { width: 66, height: 110 }
                 };
                 var size = sizes[type];
                 var isFlyer =
                     type === "flyer" ||
-                    type === "mite" ||
                     type === "wasp" ||
                     type === "fragmentSpring" ||
-                    type === "fragmentBastion";
+                    type === "fragmentBastion" ||
+                    type === "coreLeech" ||
+                    type === "vesperFlare";
                 return {
                     type: type,
                     x: x,
@@ -5291,7 +5375,7 @@
                 var enemy = makeEnemy(
                     "mite",
                     trialPlatform.x + 180,
-                    trialPlatform.y - 118,
+                    trialPlatform.y,
                     trialPlatform.x + 120,
                     trialPlatform.x + 520,
                     78
@@ -5299,7 +5383,6 @@
                 enemy.phase = 0;
                 enemy.animationTime = 0;
                 enemy.turnTimer = 1.15;
-                enemy.hoverFloorY = trialPlatform.y;
                 return enemy;
             }
 
@@ -5374,12 +5457,11 @@
                 var mite = makeEnemy(
                     "mite",
                     WIDTH * 3 + 780,
-                    1260,
+                    GROUND_Y,
                     WIDTH * 3 + 620,
                     WIDTH * 3 + 1160,
                     72
                 );
-                mite.hoverFloorY = 1384;
                 mite.betaShowcase = true;
                 betaEnemies.push(mite);
 
@@ -5436,6 +5518,35 @@
                 bastionFragment.betaShowcase = true;
                 betaEnemies.push(bastionFragment);
 
+                var coreLeech = makeEnemy(
+                    "coreLeech",
+                    WIDTH + 430,
+                    1240,
+                    WIDTH + 250,
+                    WIDTH + 720,
+                    58
+                );
+                coreLeech.maxHealth = 2;
+                coreLeech.health = 2;
+                coreLeech.hurtFlash = 0;
+                coreLeech.betaShowcase = true;
+                betaEnemies.push(coreLeech);
+
+                var vesperFlare = makeEnemy(
+                    "vesperFlare",
+                    WIDTH * 4 + 440,
+                    1175,
+                    WIDTH * 4 + 250,
+                    WIDTH * 4 + 760,
+                    104
+                );
+                vesperFlare.maxHealth = 2;
+                vesperFlare.health = 2;
+                vesperFlare.noStomp = true;
+                vesperFlare.hurtFlash = 0;
+                vesperFlare.betaShowcase = true;
+                betaEnemies.push(vesperFlare);
+
                 var sentinel = makeEnemy(
                     "patroller",
                     WIDTH * 6 + 1030,
@@ -5466,6 +5577,21 @@
                 );
                 uplinkWisp.betaShowcase = true;
                 betaEnemies.push(uplinkWisp);
+
+                var paleWatcher = makeEnemy(
+                    "paleWatcher",
+                    WIDTH * 7 + 1210,
+                    GROUND_Y,
+                    WIDTH * 7 + 1110,
+                    WIDTH * 7 + 1510,
+                    -62
+                );
+                paleWatcher.maxHealth = 3;
+                paleWatcher.health = 3;
+                paleWatcher.noStomp = true;
+                paleWatcher.hurtFlash = 0;
+                paleWatcher.betaShowcase = true;
+                betaEnemies.push(paleWatcher);
                 return betaEnemies;
             }
 
@@ -5709,7 +5835,7 @@
                 vesperMiteTrial = false;
                 patrollerTrial = false;
                 arrivalDialoguePreview = false;
-                arrivalPortalPreview = false;
+                arrivalTransportPreview = false;
                 autostartRequested = false;
                 previewStartRoom = 0;
                 previewStartUpper = false;
@@ -5731,10 +5857,10 @@
                 hazards = [];
                 uplink = isOverworld
                     ? {
-                        x: WIDTH * 2 + 1490,
-                        y: 548,
-                        width: 112,
-                        height: 196
+                        x: COREWORKS_TRANSPORT_DECK_X,
+                        y: GROUND_Y - COREWORKS_TRANSPORT_DECK_OFFSET_Y,
+                        width: COREWORKS_TRANSPORT_DECK_WIDTH,
+                        height: 10
                     }
                     : {
                         x: (SCREEN_COUNT - 1) * WIDTH + 1218,
@@ -5983,8 +6109,8 @@
                 playTone(484, 0.16, "square", 0.024, 0.08);
                 announce(
                     skipped
-                        ? "First contact skipped. Complete field calibration, then reach the Coreworks portal."
-                        : "First contact complete. Complete field calibration while the Coreworks portal powers up."
+                        ? "First contact skipped. Complete field calibration, then board the Coreworks transport."
+                        : "First contact complete. Complete field calibration while the Coreworks transport powers up."
                 );
             }
 
@@ -6018,24 +6144,115 @@
                 dialogueContinue.focus();
             }
 
+            function beginCoreworksTransport() {
+                if (
+                    !overworldPreview ||
+                    state !== "running" ||
+                    coreworksTransportActive
+                ) return;
+
+                coreworksTransportActive = true;
+                coreworksTransportElapsed = 0;
+                state = "transporting";
+                releaseAllControls();
+                stowRifle();
+                player.x =
+                    COREWORKS_TRANSPORT_DECK_X +
+                    COREWORKS_TRANSPORT_DECK_WIDTH * 0.5 -
+                    56;
+                player.y =
+                    GROUND_Y -
+                    COREWORKS_TRANSPORT_DECK_OFFSET_Y -
+                    100;
+                player.vx = 0;
+                player.vy = 0;
+                player.onGround = true;
+                player.supportPlatform = platforms.find(function (platform) {
+                    return platform.coreworksTransportDeck;
+                }) || null;
+                document.body.classList.remove("is-running");
+                setPauseButton(false, false);
+                canvas.dataset.coreworksTransport = "activating";
+                spawnBurst(
+                    player.x + 56,
+                    player.y + 91,
+                    "#58f5df",
+                    prefersReducedMotion ? 8 : 22
+                );
+                playTone(168, 0.16, "sawtooth", 0.026);
+                playTone(336, 0.22, "square", 0.022, 0.08);
+                playTone(672, 0.28, "square", 0.018, 0.2);
+                announce("Coreworks transport engaged.");
+            }
+
+            function updateCoreworksTransport(delta) {
+                var duration = prefersReducedMotion
+                    ? 0.52
+                    : COREWORKS_TRANSPORT_DURATION;
+                coreworksTransportElapsed = Math.min(
+                    duration,
+                    coreworksTransportElapsed + delta
+                );
+                elapsed += delta;
+                player.x =
+                    COREWORKS_TRANSPORT_DECK_X +
+                    COREWORKS_TRANSPORT_DECK_WIDTH * 0.5 -
+                    56;
+                player.y =
+                    GROUND_Y -
+                    COREWORKS_TRANSPORT_DECK_OFFSET_Y -
+                    100;
+                updateParticles(delta);
+                if (coreworksTransportElapsed >= duration) {
+                    playTone(820, 0.12, "square", 0.018);
+                    showOverworldTransition();
+                }
+            }
+
+            function coreworksTransportPlayerAlpha() {
+                if (
+                    overworldPreview &&
+                    overworldTransitionReady
+                ) return 0;
+                if (!coreworksTransportActive) return 1;
+                var duration = prefersReducedMotion
+                    ? 0.52
+                    : COREWORKS_TRANSPORT_DURATION;
+                var progress = Math.min(
+                    1,
+                    coreworksTransportElapsed / duration
+                );
+                return Math.max(
+                    0,
+                    1 - Math.max(0, progress - 0.22) / 0.62
+                );
+            }
+
             function showOverworldTransition() {
-                if (!overworldPreview || state !== "running") return;
+                if (
+                    !overworldPreview ||
+                    (state !== "running" && state !== "transporting")
+                ) return;
 
                 persistEpisodeCredits();
                 state = "transition";
                 overworldTransitionReady = true;
+                coreworksTransportActive = false;
+                canvas.dataset.coreworksTransport = "complete";
                 document.body.classList.remove("is-running");
                 setPauseButton(false, false);
                 messageKicker.textContent = "Season One // Veyra";
                 messageTitle.textContent = "Episode 01";
                 messageCopy.textContent =
-                    "The Shard Foundry lies beyond the threshold. The eight-minute mission clock begins when Aryn enters.";
+                    "Transport lock acquired. The eight-minute mission clock begins when Aryn materializes inside The Shard Foundry.";
                 startButton.textContent = "Enter Foundry";
                 startButton.disabled = false;
                 startButton.dataset.overworldEnter = "true";
                 startOverButton.hidden = false;
                 messageCard.hidden = false;
-                announce("Episode 01. The Shard Foundry. Enter the Foundry or start over.");
+                announce(
+                    "Transport complete. Episode 01. The Shard Foundry. Enter the Foundry or start over."
+                );
             }
 
             function returnToSurfaceAfterMission() {
@@ -6609,6 +6826,10 @@
                     }
                     return;
                 }
+                if (state === "transporting") {
+                    updateCoreworksTransport(delta);
+                    return;
+                }
                 if (state !== "running") {
                     updateParticles(delta);
                     return;
@@ -6624,7 +6845,7 @@
                         if (portalCharge === 1) {
                             playTone(420, 0.12, "square", 0.023);
                             playTone(630, 0.16, "square", 0.02, 0.08);
-                            announce("Coreworks portal online.");
+                            announce("Coreworks transport online.");
                         }
                     }
                 }
@@ -7272,7 +7493,7 @@
                     ? "FIND DRAS EHDRE"
                     : !crateOpened
                         ? "FIELD CALIBRATION // FIRE ON CREDIT CACHE"
-                        : "CROSS CALIBRATION CATWALKS // REACH PORTAL";
+                        : "CROSS CALIBRATION CATWALKS // BOARD TRANSPORT";
                 document.querySelector(".mission span").textContent = message;
                 canvas.dataset.arrivalTutorial = "true";
                 canvas.dataset.creditCrate =
@@ -7401,6 +7622,27 @@
                             Math.sin(elapsed * 3.2 + enemy.phase) * 24 +
                             Math.sin(elapsed * 8.4 + enemy.phase) * 5;
                     }
+                    if (enemy.type === "coreLeech") {
+                        enemy.hurtFlash = Math.max(0, enemy.hurtFlash - delta);
+                        enemy.animationTime += delta;
+                        enemy.y =
+                            enemy.baseY +
+                            Math.sin(elapsed * 1.45 + enemy.phase) * 38 +
+                            Math.sin(elapsed * 4.2 + enemy.phase * 0.6) * 5;
+                    }
+                    if (enemy.type === "vesperFlare") {
+                        enemy.hurtFlash = Math.max(0, enemy.hurtFlash - delta);
+                        enemy.animationTime += delta;
+                        enemy.y =
+                            enemy.baseY +
+                            Math.sin(elapsed * 3.4 + enemy.phase) * 28 +
+                            Math.sin(elapsed * 8.8 + enemy.phase * 0.4) * 8;
+                    }
+                    if (enemy.type === "paleWatcher") {
+                        enemy.hurtFlash = Math.max(0, enemy.hurtFlash - delta);
+                        enemy.animationTime += delta;
+                        enemy.y = enemy.floorY - enemy.height;
+                    }
                     if (enemy.type === "mite") {
                         enemy.animationTime += delta;
                         enemy.turnTimer -= delta;
@@ -7410,10 +7652,8 @@
                             }
                             enemy.turnTimer = 0.72 + Math.random() * 1.4;
                         }
-                        enemy.y =
-                            enemy.baseY +
-                            Math.sin(elapsed * 2.35 + enemy.phase) * 9 +
-                            Math.sin(elapsed * 6.8 + enemy.phase * 0.5) * 3;
+                        enemy.y = enemy.floorY - enemy.height;
+                        enemy.baseY = enemy.y;
                         if (vesperMiteTrial) {
                             canvas.dataset.miteFrame = String(
                                 Math.floor(
@@ -7460,6 +7700,9 @@
                         enemy.type === "patroller" ||
                         enemy.type === "fragmentSpring" ||
                         enemy.type === "fragmentBastion" ||
+                        enemy.type === "coreLeech" ||
+                        enemy.type === "vesperFlare" ||
+                        enemy.type === "paleWatcher" ||
                         enemy.surfaceCrawler
                             ? 0
                             : Math.sin(elapsed * 4 + enemy.phase) * 2
@@ -7804,6 +8047,9 @@
                             enemy.type === "patroller" ||
                             enemy.type === "fragmentSpring" ||
                             enemy.type === "fragmentBastion" ||
+                            enemy.type === "coreLeech" ||
+                            enemy.type === "vesperFlare" ||
+                            enemy.type === "paleWatcher" ||
                             enemy.surfaceCrawler
                                 ? 0
                                 : Math.sin(elapsed * 4 + enemy.phase) * 2
@@ -7972,15 +8218,24 @@
 
             function checkUplink() {
                 if (overworldPreview) {
-                    if (!dialogueHasPlayed || portalCharge < 1) return;
-                    var overworldPlayerRight = player.x + 82;
-                    var overworldPlayerBottom = player.y + 100;
                     if (
-                        overworldPlayerRight > uplink.x &&
-                        player.x + 32 < uplink.x + uplink.width &&
-                        overworldPlayerBottom > uplink.y
+                        !dialogueHasPlayed ||
+                        portalCharge < 1 ||
+                        coreworksTransportActive
+                    ) return;
+                    var overworldPlayerCenter = player.x + 56;
+                    var overworldPlayerBottom = player.y + 100;
+                    var standingOnCoreworksTransport =
+                        player.supportPlatform &&
+                        player.supportPlatform.coreworksTransportDeck;
+                    if (
+                        player.onGround &&
+                        standingOnCoreworksTransport &&
+                        overworldPlayerCenter > uplink.x + 8 &&
+                        overworldPlayerCenter < uplink.x + uplink.width - 6 &&
+                        Math.abs(overworldPlayerBottom - uplink.y) <= 6
                     ) {
-                        showOverworldTransition();
+                        beginCoreworksTransport();
                     }
                     return;
                 }
@@ -8192,7 +8447,12 @@
                     drawEpisodeBetaItems();
                     drawParticles();
                     drawBolts();
+                    ctx.save();
+                    ctx.globalAlpha =
+                        coreworksTransportPlayerAlpha();
                     drawPlayer();
+                    ctx.restore();
+                    drawCoreworksTransportEnergyForeground();
                     drawPopups();
                     ctx.restore();
                     return;
@@ -8821,66 +9081,105 @@
                 ctx.restore();
             }
 
-            function drawOverworldPortal() {
-                var centerX = WIDTH * 2 + 1545;
-                var centerY = 615;
-                var pulse = 0.5 + Math.sin(elapsed * 4.2) * 0.18;
-                var charge = portalCharge;
-
+            function drawCoreworksTransportFrame(
+                image,
+                frame,
+                columns,
+                alpha,
+                compositeOperation
+            ) {
+                if (!imageHasPixels(image)) return;
+                var sourceX =
+                    frame % columns * COREWORKS_TRANSPORT_FRAME_WIDTH;
+                var sourceY =
+                    Math.floor(frame / columns) *
+                    COREWORKS_TRANSPORT_FRAME_HEIGHT;
                 ctx.save();
-                ctx.translate(centerX, centerY);
-                ctx.globalCompositeOperation = "screen";
-                ctx.globalAlpha = 0.1 + charge * 0.56;
-                ctx.strokeStyle = charge >= 1 ? "#58f5df" : "#77a3ff";
-                ctx.shadowColor = "#58f5df";
-                ctx.shadowBlur = 12 + charge * 34;
-                ctx.lineWidth = 3 + charge * 5;
-                ctx.beginPath();
-                ctx.ellipse(
-                    0,
-                    0,
-                    28 + charge * 8 + pulse * 2,
-                    56 + charge * 14,
-                    0,
-                    0,
-                    Math.PI * 2
-                );
-                ctx.stroke();
-
-                if (charge > 0) {
-                    var portalGradient = ctx.createRadialGradient(
-                        0,
-                        0,
-                        5,
-                        0,
-                        0,
-                        44
-                    );
-                    portalGradient.addColorStop(0, "rgba(247, 240, 234, 0.94)");
-                    portalGradient.addColorStop(0.16, "rgba(88, 245, 223, 0.62)");
-                    portalGradient.addColorStop(0.52, "rgba(99, 149, 238, 0.26)");
-                    portalGradient.addColorStop(1, "rgba(5, 7, 19, 0)");
-                    ctx.globalAlpha = charge * (0.48 + pulse * 0.18);
-                    ctx.fillStyle = portalGradient;
-                    ctx.beginPath();
-                    ctx.ellipse(0, 0, 34, 68, 0, 0, Math.PI * 2);
-                    ctx.fill();
-
-                    ctx.globalAlpha = 0.5 + charge * 0.45;
-                    ctx.fillStyle = "#ff69b4";
-                    for (var spark = 0; spark < 8; spark += 1) {
-                        var angle = elapsed * (0.7 + spark * 0.05) + spark * 0.78;
-                        var radiusX = 34 + charge * 8;
-                        var radiusY = 64 + charge * 14;
-                        ctx.fillRect(
-                            Math.round(Math.cos(angle) * radiusX),
-                            Math.round(Math.sin(angle) * radiusY),
-                            4,
-                            4
-                        );
-                    }
+                ctx.globalAlpha = alpha;
+                if (compositeOperation) {
+                    ctx.globalCompositeOperation = compositeOperation;
                 }
+                ctx.drawImage(
+                    image,
+                    sourceX,
+                    sourceY,
+                    COREWORKS_TRANSPORT_FRAME_WIDTH,
+                    COREWORKS_TRANSPORT_FRAME_HEIGHT,
+                    Math.round(
+                        COREWORKS_TRANSPORT_CENTER_X -
+                        COREWORKS_TRANSPORT_DRAW_WIDTH * 0.5
+                    ),
+                    Math.round(
+                        GROUND_Y -
+                        COREWORKS_TRANSPORT_DRAW_HEIGHT +
+                        6
+                    ),
+                    COREWORKS_TRANSPORT_DRAW_WIDTH,
+                    COREWORKS_TRANSPORT_DRAW_HEIGHT
+                );
                 ctx.restore();
+            }
+
+            function coreworksTransportActiveFrame() {
+                var duration = prefersReducedMotion
+                    ? 0.52
+                    : COREWORKS_TRANSPORT_DURATION;
+                return Math.min(
+                    24,
+                    Math.floor(
+                        coreworksTransportElapsed / duration * 25
+                    )
+                );
+            }
+
+            function drawCoreworksTransport() {
+                var idleFrame = prefersReducedMotion
+                    ? 0
+                    : Math.floor(elapsed / 0.05) % 36;
+                drawCoreworksTransportFrame(
+                    assets.coreworksTransportIdle,
+                    idleFrame,
+                    6,
+                    0.54 + portalCharge * 0.46
+                );
+
+                if (!coreworksTransportActive) {
+                    canvas.dataset.coreworksTransport =
+                        overworldTransitionReady
+                            ? "complete"
+                            : portalCharge >= 1
+                                ? "online"
+                                : "charging";
+                    canvas.dataset.coreworksTransportFrame =
+                        String(idleFrame);
+                    return;
+                }
+
+                var activeAlpha = Math.min(
+                    1,
+                    coreworksTransportElapsed / 0.12
+                );
+                var activeFrame = coreworksTransportActiveFrame();
+                drawCoreworksTransportFrame(
+                    assets.coreworksTransportActivate,
+                    activeFrame,
+                    5,
+                    activeAlpha
+                );
+                canvas.dataset.coreworksTransport = "activating";
+                canvas.dataset.coreworksTransportFrame =
+                    String(activeFrame);
+            }
+
+            function drawCoreworksTransportEnergyForeground() {
+                if (!coreworksTransportActive) return;
+                drawCoreworksTransportFrame(
+                    assets.coreworksTransportActivate,
+                    coreworksTransportActiveFrame(),
+                    5,
+                    0.2,
+                    "screen"
+                );
             }
 
             function drawCampDog() {
@@ -9080,7 +9379,7 @@
                     }
                 }
 
-                drawOverworldPortal();
+                drawCoreworksTransport();
 
                 if (dialogueHasPlayed && isPlayerNearDras() && !dialogueActive) {
                     ctx.save();
@@ -10467,7 +10766,10 @@
                     wasp: "#ffb84f",
                     gaunt: "#c98cff",
                     fragmentSpring: "#4be36e",
-                    fragmentBastion: "#b56cff"
+                    fragmentBastion: "#b56cff",
+                    coreLeech: "#66e8ff",
+                    vesperFlare: "#ff8f45",
+                    paleWatcher: "#d8f4ff"
                 }[type] || "#ff69b4";
             }
 
@@ -10482,7 +10784,10 @@
                     wasp: "EMBER WASP",
                     gaunt: "SEAM HUNTER",
                     fragmentSpring: "SPRING FRAGMENT",
-                    fragmentBastion: "BASTION FRAGMENT"
+                    fragmentBastion: "BASTION FRAGMENT",
+                    coreLeech: "CORE LEECH",
+                    vesperFlare: "VESPER FLARE",
+                    paleWatcher: "PALE WATCHER"
                 }[type] || "CREATURE";
             }
 
@@ -10533,9 +10838,18 @@
                 var sourceX = frameIndex % 6 * 106;
                 var sourceY = Math.floor(frameIndex / 6) * 130;
                 var centerX = Math.round(enemy.x + enemy.width / 2);
-                var centerY = Math.round(enemy.y + enemy.height / 2);
-                var drawWidth = 118;
-                var drawHeight = 145;
+                var groundY = Math.round(enemy.floorY);
+                var gaitLift =
+                    Math.sin(elapsed * 8.2 + enemy.phase) * 1.2;
+                var drawWidth = 100;
+                var drawHeight = 122;
+                var frameBottomInsets = [
+                    23, 23, 23, 23, 25, 27,
+                    38, 47, 53, 55, 55, 55,
+                    53, 43, 30, 23, 23, 23
+                ];
+                var transparentFootInset =
+                    frameBottomInsets[frameIndex] * drawHeight / 130;
                 var glowPulse =
                     0.7 + Math.sin(elapsed * 7.4 + enemy.phase) * 0.16;
 
@@ -10545,9 +10859,9 @@
                 ctx.beginPath();
                 ctx.ellipse(
                     centerX,
-                    enemy.hoverFloorY + 4,
-                    37,
-                    6,
+                    groundY + 4,
+                    34,
+                    5,
                     0,
                     0,
                     Math.PI * 2
@@ -10556,7 +10870,10 @@
                 ctx.restore();
 
                 ctx.save();
-                ctx.translate(centerX, centerY);
+                ctx.translate(
+                    centerX,
+                    groundY + transparentFootInset + gaitLift
+                );
                 if (enemy.vx > 0) ctx.scale(-1, 1);
                 ctx.imageSmoothingEnabled = false;
                 ctx.globalAlpha = 0.24;
@@ -10569,7 +10886,7 @@
                     106,
                     130,
                     -drawWidth / 2,
-                    -drawHeight / 2,
+                    -drawHeight,
                     drawWidth,
                     drawHeight
                 );
@@ -10582,11 +10899,139 @@
                     106,
                     130,
                     -drawWidth / 2,
-                    -drawHeight / 2,
+                    -drawHeight,
                     drawWidth,
                     drawHeight
                 );
                 ctx.restore();
+            }
+
+            function drawCatalogEnemy(enemy) {
+                var sprite = assets[enemy.type];
+                if (!imageHasPixels(sprite)) return;
+                var specs = {
+                    coreLeech: {
+                        frameDuration: 0.05,
+                        drawSize: 122,
+                        ground: false
+                    },
+                    vesperFlare: {
+                        frameDuration: 0.053,
+                        drawSize: 116,
+                        ground: false
+                    },
+                    paleWatcher: {
+                        frameDuration: 0.053,
+                        drawSize: 120,
+                        ground: true
+                    }
+                };
+                var spec = specs[enemy.type];
+                var frameIndex =
+                    Math.floor(enemy.animationTime / spec.frameDuration) % 36;
+                var sourceX = frameIndex % 6 * 112;
+                var sourceY = Math.floor(frameIndex / 6) * 112;
+                var color = enemyColor(enemy.type);
+                var centerX = Math.round(enemy.x + enemy.width / 2);
+                var centerY = spec.ground
+                    ? Math.round(enemy.floorY - spec.drawSize / 2)
+                    : Math.round(enemy.y + enemy.height / 2);
+                var barTop = spec.ground
+                    ? Math.round(enemy.floorY - spec.drawSize - 10)
+                    : Math.round(centerY - spec.drawSize / 2 - 10);
+
+                if (!spec.ground) {
+                    var auraPulse =
+                        0.16 +
+                        Math.sin(elapsed * 6.8 + enemy.phase) * 0.04;
+                    ctx.save();
+                    ctx.globalAlpha = auraPulse;
+                    ctx.fillStyle = color;
+                    ctx.beginPath();
+                    ctx.ellipse(
+                        centerX,
+                        centerY,
+                        spec.drawSize * 0.42,
+                        spec.drawSize * 0.46,
+                        0,
+                        0,
+                        Math.PI * 2
+                    );
+                    ctx.fill();
+                    ctx.restore();
+                } else {
+                    ctx.save();
+                    ctx.globalAlpha = 0.22;
+                    ctx.fillStyle = color;
+                    ctx.beginPath();
+                    ctx.ellipse(
+                        centerX,
+                        enemy.floorY + 4,
+                        28,
+                        5,
+                        0,
+                        0,
+                        Math.PI * 2
+                    );
+                    ctx.fill();
+                    ctx.restore();
+                }
+
+                ctx.save();
+                ctx.translate(centerX, centerY);
+                if (enemy.vx < 0) ctx.scale(-1, 1);
+                ctx.imageSmoothingEnabled = false;
+                ctx.shadowColor = color;
+                ctx.shadowBlur =
+                    enemy.type === "vesperFlare" ? 20 : 13;
+                ctx.drawImage(
+                    sprite,
+                    sourceX,
+                    sourceY,
+                    112,
+                    112,
+                    -spec.drawSize / 2,
+                    -spec.drawSize / 2,
+                    spec.drawSize,
+                    spec.drawSize
+                );
+                if (enemy.hurtFlash > 0) {
+                    ctx.globalCompositeOperation = "screen";
+                    ctx.globalAlpha =
+                        0.45 + Math.sin(elapsed * 72) * 0.2;
+                    ctx.drawImage(
+                        sprite,
+                        sourceX,
+                        sourceY,
+                        112,
+                        112,
+                        -spec.drawSize / 2,
+                        -spec.drawSize / 2,
+                        spec.drawSize,
+                        spec.drawSize
+                    );
+                }
+                ctx.restore();
+
+                if (enemy.maxHealth > 1) {
+                    var pipWidth = 9;
+                    var pipGap = 4;
+                    var barWidth =
+                        enemy.maxHealth * pipWidth +
+                        (enemy.maxHealth - 1) * pipGap;
+                    var barX = Math.round(centerX - barWidth / 2);
+                    for (var pip = 0; pip < enemy.maxHealth; pip += 1) {
+                        ctx.fillStyle = pip < enemy.health
+                            ? color
+                            : "rgba(216, 244, 255, 0.18)";
+                        ctx.fillRect(
+                            barX + pip * (pipWidth + pipGap),
+                            barTop,
+                            pipWidth,
+                            3
+                        );
+                    }
+                }
             }
 
             function drawChitinSentinel(enemy) {
@@ -10916,6 +11361,14 @@
                         enemy.type === "fragmentBastion"
                     ) {
                         drawFragmentEnemy(enemy);
+                        return;
+                    }
+                    if (
+                        enemy.type === "coreLeech" ||
+                        enemy.type === "vesperFlare" ||
+                        enemy.type === "paleWatcher"
+                    ) {
+                        drawCatalogEnemy(enemy);
                         return;
                     }
                     var sprite = assets[enemy.type];
@@ -11619,9 +12072,9 @@
                     heartsDisplay.textContent = dialogueHasPlayed
                         ? episodeArrivalTutorial
                             ? "CREDITS " + creditsCollected +
-                                " // PORTAL " +
+                                " // TRANSPORT " +
                                 (portalCharge >= 1 ? "ONLINE" : "CHARGING")
-                            : "PORTAL // " +
+                            : "TRANSPORT // " +
                                 (portalCharge >= 1 ? "ONLINE" : "CHARGING")
                         : "SURFACE // STABLE";
                     timerDisplay.textContent = "UNTIMED";
@@ -12421,6 +12874,7 @@
                     (
                         state === "running" ||
                         state === "dying" ||
+                        state === "transporting" ||
                         dialogueActive
                     );
                 var delta = simulationActive && lastFrame

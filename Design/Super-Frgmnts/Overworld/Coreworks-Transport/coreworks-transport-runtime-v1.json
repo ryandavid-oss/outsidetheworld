@@ -1,0 +1,89 @@
+{
+  "name": "Coreworks Surface Transport",
+  "status": "episode-01-runtime",
+  "behavior": "Idle deck loops while online. Stepping onto its upper deck plays the one-shot vortex sequence, fades Aryn, and hands off to The Shard Foundry.",
+  "runtimeFrame": [
+    208,
+    240
+  ],
+  "sequences": [
+    {
+      "sequence": "idle",
+      "runtime": "Images/Game/Super-Frgmnts/coreworks-transport-idle-sheet-v1.png",
+      "review": "Design/Super-Frgmnts/Overworld/Coreworks-Transport/Reviews/coreworks-transport-idle-preview-v1.gif",
+      "sourceAtlas": [
+        3012,
+        2772
+      ],
+      "sourceFrame": [
+        502,
+        462
+      ],
+      "sourceUnion": [
+        1,
+        1,
+        500,
+        461
+      ],
+      "runtimeAtlas": [
+        1248,
+        1440
+      ],
+      "runtimeFrame": [
+        208,
+        240
+      ],
+      "content": [
+        198,
+        183
+      ],
+      "columns": 6,
+      "rows": 6,
+      "frames": 36,
+      "frameDurationMs": 50,
+      "sequenceDurationMs": 1800,
+      "alpha": "preserved",
+      "sampling": "nearest-neighbor",
+      "anchor": "bottom-center"
+    },
+    {
+      "sequence": "activate",
+      "runtime": "Images/Game/Super-Frgmnts/coreworks-transport-activate-sheet-v1.png",
+      "review": "Design/Super-Frgmnts/Overworld/Coreworks-Transport/Reviews/coreworks-transport-activate-preview-v1.gif",
+      "sourceAtlas": [
+        2140,
+        2720
+      ],
+      "sourceFrame": [
+        428,
+        544
+      ],
+      "sourceUnion": [
+        1,
+        0,
+        426,
+        467
+      ],
+      "runtimeAtlas": [
+        1040,
+        1200
+      ],
+      "runtimeFrame": [
+        208,
+        240
+      ],
+      "content": [
+        198,
+        218
+      ],
+      "columns": 5,
+      "rows": 5,
+      "frames": 25,
+      "frameDurationMs": 65,
+      "sequenceDurationMs": 1625,
+      "alpha": "preserved",
+      "sampling": "nearest-neighbor",
+      "anchor": "bottom-center"
+    }
+  ]
+}

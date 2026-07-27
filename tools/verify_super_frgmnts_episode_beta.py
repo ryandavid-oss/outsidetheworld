@@ -45,7 +45,7 @@ def main() -> None:
         '.concat(["creditCoin", "creditCrate"])',
         ".concat(episodeBetaAssetKeys)",
         "FIELD CALIBRATION // FIRE ON CREDIT CACHE",
-        "CROSS CALIBRATION CATWALKS // REACH PORTAL",
+        "CROSS CALIBRATION CATWALKS // BOARD TRANSPORT",
         "FIRE → RECOVER CREDITS",
         "LIVE // WAIT",
         "function openCreditCrate(crate)",
@@ -87,7 +87,7 @@ def main() -> None:
 
     print("SUPER FRGMNTS Episode 01 early beta: PASS")
     print("- title, overworld tutorial, and Foundry run share one in-page route")
-    print("- tutorial credits burst physically and carry through the portal")
+    print("- tutorial credits burst physically and carry through the transport")
     print("- Foundry contains pickups, caches, relays, shards, and obstruction")
     print("- moving and electrified platform lessons are present")
     print("- completion requires twelve shards and two restored relays")

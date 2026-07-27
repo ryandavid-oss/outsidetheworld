@@ -13,7 +13,7 @@ SHEET = (
     / "Images"
     / "Game"
     / "Super-Frgmnts"
-    / "enemy-vesper-mite-flight-sheet-v1.png"
+    / "enemy-vesper-mite-ground-gait-sheet-v2.png"
 )
 
 
@@ -22,7 +22,7 @@ def main() -> None:
     required = (
         'previewParameters.get("mite") === "1"',
         "mite: {",
-        "enemy-vesper-mite-flight-sheet-v1.png",
+        "enemy-vesper-mite-ground-gait-sheet-v2.png",
         "function makeVesperMiteTrial()",
         "function drawVesperMite(enemy, sprite)",
         "Math.floor(enemy.animationTime / 0.064) % 18",
@@ -46,7 +46,8 @@ def main() -> None:
 
     print("SUPER FRGMNTS Vesper Mite trial: PASS")
     print("- 36 supplied frames retained in a 6×6 mobile-safe runtime atlas")
-    print("- frames 0–17 form the provisional 64 ms low-hover cycle")
+    print("- frames 0–17 form the provisional 64 ms scuttling gait")
+    print("- the Mite patrols a solid deck and is not classified as a flyer")
     print("- isolated Foundry spawn supports stomp, seeking blaster, and contact damage")
     print("- trial begins with the tier-one pack blaster unlocked")
 

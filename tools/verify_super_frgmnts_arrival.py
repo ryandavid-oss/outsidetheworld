@@ -115,9 +115,15 @@ def main() -> None:
         "player.supportPlatform =",
         "overworldShipSpawnPlatform ||",
         'previewParameters.get("scene") === "portal"',
-        "var centerX = WIDTH * 2 + 1545",
-        "var centerY = 615",
-        "x: WIDTH * 2 + 1490",
+        "coreworks-transport-idle-sheet-v1.png",
+        "coreworks-transport-activate-sheet-v1.png",
+        "function beginCoreworksTransport()",
+        "function updateCoreworksTransport(delta)",
+        "function drawCoreworksTransport()",
+        "function drawCoreworksTransportEnergyForeground()",
+        "COREWORKS_TRANSPORT_DECK_X",
+        'state = "transporting"',
+        'canvas.dataset.coreworksTransport = "activating"',
         '"?episode=01&stage="',
     )
     for token in required_runtime_tokens:
@@ -199,10 +205,11 @@ def main() -> None:
     print("- the stray Landing Flats collider is absent")
     print("- overlapping ship-slope collision spans both wings and raised engine crowns")
     print("- Aryn begins grounded on the ship's true central roof perch")
-    print("- Fleet disconnect, Dras reaction, and portal ignition are staged")
-    print("- the portal effect and trigger align with the painted Coreworks doorway")
+    print("- Fleet disconnect, Dras reaction, and transport ignition are staged")
+    print("- the physical Coreworks transport has a walkable activation deck")
+    print("- its one-shot vortex fades Aryn before the Foundry handoff")
     print("- all three 1672 × 941 overworld plates are present")
-    print("- portal handoff supports the assembled Episode 01 Foundry and isolated review route")
+    print("- transport handoff supports the assembled Episode 01 Foundry and isolated review route")
 
 
 if __name__ == "__main__":

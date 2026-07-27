@@ -30,10 +30,16 @@ def main() -> None:
         "enemy-tall-gaunt-alien-attack-sheet-v1.png",
         "enemy-fragment-spring-green-runtime-v1.png",
         "enemy-fragment-bastion-purple-runtime-v1.png",
+        "enemy-core-leech-hover-sheet-v1.png",
+        "enemy-vesper-flare-hover-sheet-v1.png",
+        "enemy-pale-watcher-stalk-sheet-v1.png",
         'type === "wasp"',
         'type === "gaunt"',
         'type === "fragmentSpring"',
         'type === "fragmentBastion"',
+        'type === "coreLeech"',
+        'type === "vesperFlare"',
+        'type === "paleWatcher"',
         "HEAVY RIFLE",
     )
     for token in required:
@@ -50,6 +56,9 @@ def main() -> None:
         '"patroller"',
         '"fragmentSpring"',
         '"fragmentBastion"',
+        '"coreLeech"',
+        '"vesperFlare"',
+        '"paleWatcher"',
     )
     for enemy_type in roster:
         assert enemy_type in SOURCE, f"Missing enemy roster type: {enemy_type}"
@@ -71,6 +80,9 @@ def main() -> None:
         '"patrollerDeath"',
         '"fragmentSpring"',
         '"fragmentBastion"',
+        '"coreLeech"',
+        '"vesperFlare"',
+        '"paleWatcher"',
     )
     for enemy_asset in enemy_assets:
         assert enemy_asset in episode_asset_block, (
@@ -81,7 +93,7 @@ def main() -> None:
     print("SUPER FRGMNTS mobile controls and full roster: PASS")
     print("- interrupted analog input releases without a delayed latch")
     print("- iOS selection/loupe paths are actively cleared")
-    print("- all legacy, creature, and two active Fragment families are populated and loaded")
+    print("- all 13 cataloged enemy families are populated and loaded")
     print("- rifle and pack laser can be switched on touch or keyboard")
     print("- the Uplink Gate returns Aryn with her recovered loadout")
 

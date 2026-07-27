@@ -28,7 +28,10 @@ Episode 01 run. It establishes:
 - runtime platform placement, thickness, color, and motion;
 - complete start-to-Uplink reachability;
 - desktop and portrait-mobile framing;
-- a safe field-calibration lane between Dras's camp and the Coreworks portal;
+- a safe field-calibration lane between Dras's camp and the Coreworks surface
+  transport;
+- a physical, walkable transport deck whose one-shot energy vortex removes
+  Aryn from the surface before the Foundry handoff;
 - a shootable credit cache whose coins burst into the world and carry into the
   Foundry scene;
 - two atmospheric relays, twelve Signal Shards, recovery hearts, optional
