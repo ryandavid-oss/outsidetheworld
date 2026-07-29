@@ -22,13 +22,13 @@ def main() -> None:
         "patroller: {",
         "patrollerDeath: {",
         "function makeChitinSentinelTrial()",
-        "function damageEnemy(enemy, enemyTop)",
+        "function damageEnemy(",
         "function drawChitinSentinel(enemy)",
         "enemy.maxHealth = 5",
         'patroller: "CHITIN SENTINEL"',
         'canvas.dataset.patrollerHealth',
         'canvas.dataset.patrollerState',
-        "enemy.noStomp",
+        "function updateEnemies(delta)",
     )
     missing = [contract for contract in required if contract not in source]
     if missing:
@@ -51,9 +51,9 @@ def main() -> None:
 
     print("SUPER FRGMNTS Chitin Sentinel trial: PASS")
     print("- 36 patrol and 36 death frames retained in mobile-safe atlases")
-    print("- armored patrol requires exactly five pack-blaster hits")
+    print("- armored patrol requires exactly five seeker hits")
     print("- non-interruptible death sequence replaces instant removal")
-    print("- stomp immunity preserves the heavy-enemy combat contract")
+    print("- all hostile contact damages Aryn; no stomp attack exists")
 
 
 if __name__ == "__main__":

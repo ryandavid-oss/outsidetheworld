@@ -222,7 +222,7 @@ light; it does not flood the room with neon.
 | Time | Beat |
 | ---: | --- |
 | 0.00 s | Down input accepted; stabilizer interface responds |
-| 0.30 s | nearby amber relays illuminate |
+| 0.30 s | nearby amber relays illuminate; authored generator start begins |
 | 0.70 s | conduit pulse leaves the stabilizer |
 | 1.15 s | first fan stutters once |
 | 1.50 s | first fan reaches operating speed |
@@ -270,7 +270,9 @@ The room needs a layered machine performance rather than one generic power-up
 sound:
 
 - stabilizer relay clack;
-- low capacitor charge;
+- authored two-second generator wake layer
+  (`/Audio/super-frgmnts-generator-startup-v1.wav`) at 0.30 seconds;
+- low capacitor charge beneath the authored wake layer;
 - fan cough with a loose bearing;
 - second fan entering at a slightly different pitch;
 - freight brake releasing;
@@ -279,7 +281,8 @@ sound:
 - room tone changing from hiss-heavy to rotor-heavy.
 
 The Foundry music should continue. Restoration adds stems and machinery; it does
-not restart the track.
+not restart the track. The generator wake plays once per restart, follows the
+global sound toggle, and stops on pause or focus loss.
 
 ## Mobile and accessibility guardrails
 

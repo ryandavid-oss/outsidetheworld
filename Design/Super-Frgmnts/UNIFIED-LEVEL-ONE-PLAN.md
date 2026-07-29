@@ -26,7 +26,7 @@ Episode 01 run. It establishes:
 - concrete-deck and Deepworks alignment;
 - painted catwalk collision;
 - runtime platform placement, thickness, color, and motion;
-- complete start-to-Uplink reachability;
+- complete Arrival-to-Uplink-to-Wound-to-surface reachability;
 - desktop and portrait-mobile framing;
 - a safe field-calibration lane between Dras's camp and the Coreworks surface
   transport;
@@ -40,7 +40,11 @@ Episode 01 run. It establishes:
   obstruction;
 - one cycling electrified platform and representative crawler, flying, and
   armored patrol enemies;
-- an eight-minute mission clock and an optional full-annihilation score bonus.
+- an eight-minute mission clock and an optional full-annihilation score bonus;
+- a state-preserving Uplink checkpoint into the production Seam Hunter
+  encounter;
+- explicit Wound-touched Vesperite recovery as the completion action; and
+- a locked fade-to-black return to the complete Overworld surface.
 
 ### Foundry traversal pass
 
@@ -92,9 +96,38 @@ than repetitions of the shared provisional route:
   minutes per restored stabilizer; this is intentionally not wired into the
   runtime yet.
 
-This is an early beta, not a balance-complete episode. Enemy density, pickup
-economy, credit values, store prices, final relay count, and difficulty tuning
-remain deliberately provisional.
+This remains an early beta at the episode level. Credit values, store prices,
+weapon tuning, enemy damage, and later-episode economy remain deliberately
+provisional. The first-level platform, encounter, hazard, and recovery
+placements now have a bounded balance candidate.
+
+## Easy-to-medium level-design pass
+
+The active shipping candidate is specified in
+[`Foundry/SHARD-FOUNDRY-LEVEL-DESIGN-v1.md`](Foundry/SHARD-FOUNDRY-LEVEL-DESIGN-v1.md).
+It locks the current critical-path encounter order and fairness rules while
+leaving economy values and later-episode combat balance open.
+
+- Foundry teaches movement and guarantees jet-assist before any Deepworks
+  entry.
+- Refinery teaches the heavy rifle, makes the three-hit Vesperite lock
+  non-bypassable, and contains the single required Deepworks shard.
+- Biolab owns the one electrified-platform timing test, places its recovery
+  heart afterward, and moves its stabilizer to the end of the mirrored route.
+- Uplink separates the final arc leak from the Pale Watcher and places the last
+  shard at the gate.
+- Deepworks has exactly two curated entrances in this pass: a required,
+  enemy-free signal recovery in Refinery and an optional credit-cache route in
+  Biolab.
+- Every relay apron, ordinary room link, mandatory landing, and pickup
+  footprint remains free of initial contact damage.
+- The Uplink Gate requires twelve shards, both stabilizers, and the cleared
+  Vesperite lock. It opens The Wound and establishes the boss checkpoint; it
+  is not the Episode 01 completion card.
+
+These are release-candidate placement values, subject to the playtest
+acceptance checklist in the level-design contract. They should not be changed
+as isolated coordinates without updating that contract and its verifier.
 
 ## Provisional artwork contract
 
@@ -129,7 +162,7 @@ remain deliberately provisional.
 
 ### Candidate next-level power-ups
 
-- higher jump;
+- backpack jet-assist upgrade for higher jumps;
 - temporary invincibility;
 - rapid-fire blaster;
 - longer-range blaster;
@@ -137,6 +170,11 @@ remain deliberately provisional.
 
 Power-ups must not be required to escape a room unless the level explicitly
 guarantees that power-up before the route begins.
+
+Aryn's baseline jump height is fixed. Any higher jump or secondary airborne
+boost must visibly come from the backpack's jet-assist module.
+Deepworks entry remains unavailable until that module is online because the
+return through the concrete deck requires its secondary boost.
 
 ## Promotion rule
 
@@ -146,6 +184,10 @@ The unified preview replaces the canonical game only after:
 - every painted walkable surface has matching collision;
 - all eight plates and every Deepworks entrance are reachable;
 - the Uplink Gate can be completed from the intended route;
+- the Seam Hunter checkpoint preserves Foundry state and retries from the safe
+  portal bay;
+- Wound-touched Vesperite recovery completes the run and returns Aryn to the
+  surface through a locked black transition;
 - desktop and 360–390 px portrait-mobile testing passes;
 - no existing audio, pause, input, selection, or zoom protections regress;
 - the full-site audit reports zero errors and zero warnings.

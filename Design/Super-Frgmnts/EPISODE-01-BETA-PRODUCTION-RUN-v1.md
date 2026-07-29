@@ -1,0 +1,128 @@
+# SUPER FRGMNTS // Episode 01 Beta Production Run
+
+**Status:** Active production-beta contract
+**Episode:** Arrival on Veyra
+**Build target:** One uninterrupted in-page run
+**Completion state:** Returned to the Veyra surface with Wound-touched
+Vesperite secured
+
+## Player-facing sequence
+
+1. The title screen performs the intentional sound handshake.
+2. Arrival begins on the RD-42 above Landing Flats.
+3. The complete four-plate Overworld is available, including the optional
+   Western Signal Flats assignments.
+4. Dras's first-contact scene and the field-calibration lane prepare the
+   Coreworks transport.
+5. The physical transport locks Aryn in place, fades her out, and hands the
+   run to The Shard Foundry without reloading the page.
+6. The eight-plate Foundry run requires twelve Signal Shards, the Foundry and
+   Biolab atmospheric stabilizers, and the cleared three-hit Vesperite lock.
+7. Entering the complete Uplink Gate freezes the Foundry state, awards the
+   optional annihilation bonus once, and establishes the boss checkpoint.
+8. The Uplink route materializes Aryn in The Wound's safe portal bay. Crossing
+   the combat-runway threshold starts the skippable Seam Hunter announcement.
+9. Seam Hunter's defeat opens a playable aftermath. Completion still requires
+   approaching the exposed Wound-touched Vesperite and pressing Down.
+10. Recovery stores the specimen, applies the final time and health bonuses,
+    fades the entire stage to black, and automatically returns Aryn beside the
+    Coreworks transport on the surface.
+
+The production-beta endpoint is the stable surface-return state. The planned
+Dras scan, transport overload, RD-42 service-kit objective, and Primary Biolab
+continuation remain separate post-beta work.
+
+## Checkpoint contract
+
+The Uplink Gate is the only new production checkpoint in this assembly.
+
+The checkpoint carries:
+
+| State | Foundry → Wound | Wound retry | Wound → surface |
+| --- | --- | --- | --- |
+| Score | preserve | restore | preserve final |
+| Hearts already lost | preserve | restore | clear for safe surface |
+| Remaining mission time | preserve | restore | surface becomes untimed |
+| Signal Shards | preserve all 12 | restore | no longer an objective |
+| Galactic Credits | preserve | restore | preserve |
+| Optional Vesperite count | preserve | restore | preserve |
+| Jet assist | preserve | restore | preserve |
+| Heavy rifle | force ready | restore ready | preserve |
+| Seeker tier | preserve | restore | preserve |
+| Wound-touched Vesperite | unavailable | unavailable | store as pack material |
+
+A boss loss restarts at the safe Wound portal bay. It must never demand another
+eight-plate Foundry clear. A full episode restart remains available through
+the normal title/start-over path.
+
+## Transition safety
+
+### Surface transport → Foundry
+
+- Movement is locked for the authored transport cycle.
+- Aryn fades before the Foundry scene is configured.
+- Galactic Credits persist across the handoff.
+- The eight-minute mission clock begins only after Foundry materialization.
+
+### Uplink Gate → The Wound
+
+- The Gate cannot trigger until all three Foundry requirements are true.
+- Controls and the mission clock stop at contact.
+- The loading card is non-interactive and cannot double-trigger.
+- The Wound score is preloaded while the existing Foundry score continues
+  beneath the announcement.
+- Aryn begins inside the safe portal bay, outside Seam Hunter's activation
+  threshold.
+
+### Wound recovery → surface
+
+- Boss death alone never exits the room.
+- The timer remains frozen throughout corpse hold, dissolve, reward reveal,
+  approach, and material recovery.
+- The whole stage reaches opaque black before scene replacement.
+- Controls remain locked until the surface fade-in finishes.
+- Reduced-motion mode shortens both fades without bypassing the locked state.
+- The return URL is reloadable:
+  `?episode=01&stage=overworld&autostart=1&return=1`.
+
+## Failure and input rules
+
+- Pause, mute, focus loss, touch cancellation, and keyboard control release
+  remain valid in every scene.
+- Enter/Start only skips the boss announcement; held movement never does.
+- Down is the sole Vesperite recovery action on keyboard and touch.
+- Aryn cannot take contact, laser, or sweep damage before entering the combat
+  runway.
+- The production route and the isolated `preview=wound-boss` balancing route
+  use the same boss implementation.
+
+## Review routes
+
+- Full episode:
+  `super_frgmnts.html`
+- Overworld:
+  `super_frgmnts.html?episode=01&stage=overworld&autostart=1`
+- Foundry:
+  `super_frgmnts.html?episode=01&stage=foundry&autostart=1`
+- Production Wound checkpoint:
+  `super_frgmnts.html?episode=01&stage=wound&autostart=1`
+- Production recovery and return QA:
+  `super_frgmnts.html?episode=01&stage=wound&autostart=1&qa=reward`
+- Reloadable surface return:
+  `super_frgmnts.html?episode=01&stage=overworld&autostart=1&return=1`
+
+## Beta acceptance gate
+
+- Arrival, all four Overworld plates, transport, all eight Foundry plates,
+  The Wound, and surface return render without console errors or missing
+  critical artwork.
+- The Uplink checkpoint preserves the state matrix above.
+- Boss retry begins in the safe bay with the announcement rearmed.
+- Recovery is impossible before the corpse dissolve and material reveal.
+- The black transition cannot expose the scene swap or allow invisible input.
+- Desktop and 390 × 844 portrait framing keep Aryn, the current objective, and
+  the next commitment legible.
+- JavaScript syntax, every `verify_super_frgmnts_*.py` contract, and
+  `git diff --check` pass before a production deployment is considered.
+- Deployment still requires explicit approval and a separate live GitHub
+  Pages verification.

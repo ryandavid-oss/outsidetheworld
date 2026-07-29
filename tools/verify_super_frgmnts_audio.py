@@ -19,6 +19,7 @@ TRACKS = {
     "heavy_rifle_overheat": "super-frgmnts-heavy-rifle-overheat.mp3",
     "pack_laser": "super-frgmnts-pack-laser-shot.mp3",
     "pack_laser_quick": "super-frgmnts-pack-laser-quick.mp3",
+    "generator_startup": "super-frgmnts-generator-startup-v1.wav",
     "deep_select": "super-frgmnts-menu-select-deep.mp3",
     "crash_select": "super-frgmnts-menu-select-crash.mp3",
 }
@@ -49,6 +50,7 @@ def main() -> None:
         '"heavyRifleShot"',
         '"packLaserQuick"',
         '"packLaserShot"',
+        '"generatorStartup"',
         "canvas.dataset.lastSoundEffect = name;",
         'playSoundEffect("deepSelect", 0.58)',
         'playSoundEffect(state === "lost" ? "crashSelect" : "deepSelect")',
@@ -65,7 +67,7 @@ def main() -> None:
         '"pointerdown",\n                engageSceneAudioFromGesture,',
         '"click",\n                engageSceneAudioFromGesture,',
         'window.addEventListener("keydown", engageSceneAudioFromGesture);',
-        "setAudioScene(scene);",
+        'setAudioScene(isWound ? "foundry" : scene);',
         'loadAndConfigureEpisodeScene("foundry")',
         "function pauseSoundEffects()",
         "pauseAudioForFocusLoss()",
@@ -96,6 +98,22 @@ def main() -> None:
         "Legacy synthesized blaster tones still double the sampled shot",
     )
 
+    stabilizer_body = re.search(
+        r"function updateAtmosphericStabilizers\(delta\) \{(.*?)\n            \}\n\n"
+        r"            function getOverworldAssignment",
+        source,
+        flags=re.DOTALL,
+    )
+    require(
+        stabilizer_body is not None,
+        "Could not inspect atmospheric stabilizer activation",
+    )
+    require(
+        'stabilizer.activationElapsed >= 0.3' in stabilizer_body.group(1)
+        and 'playSoundEffect("generatorStartup")' in stabilizer_body.group(1),
+        "Generator startup sample is not synchronized to the relay beat",
+    )
+
     require(
         source.count('playSoundEffect("crashSelect")') >= 4,
         "Crash select is not mapped across destructive actions",
@@ -110,6 +128,7 @@ def main() -> None:
     print("- title, overworld, and Foundry music crossfade without page reloads")
     print("- heavy-rifle fire switches to its overheat sample on the threshold shot")
     print("- pack-emitter tiers select minimum-power or rapid-fire laser samples")
+    print("- atmospheric stabilizers trigger the authored generator wake at 0.30 s")
     print("- deep select confirms forward actions and dialogue")
     print("- crash select confirms retry, restart, start-over, and skip")
     print("- sampled effects stop on pause, mute, and focus loss")

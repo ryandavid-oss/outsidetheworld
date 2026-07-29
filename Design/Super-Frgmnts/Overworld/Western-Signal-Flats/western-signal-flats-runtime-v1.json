@@ -1,0 +1,67 @@
+{
+  "revision": "4A",
+  "status": "integrated-local-review",
+  "scene": "overworld",
+  "plate": {
+    "id": "western_signal_flats",
+    "name": "Western Signal Flats",
+    "width": 1672,
+    "height": 941,
+    "groundY": 744,
+    "raw": "Design/Super-Frgmnts/Overworld/Production/Raw/western-signal-flats-raw-v1.png",
+    "production": "Design/Super-Frgmnts/Overworld/Production/Plates/overworld-western-signal-flats-v1.png",
+    "runtime": "Images/Game/Super-Frgmnts/overworld-western-signal-flats-v1.png"
+  },
+  "world": {
+    "plateCount": 4,
+    "width": 6688,
+    "originalOverworldOriginX": 1672,
+    "plateOrder": [
+      "western_signal_flats",
+      "landing_flats",
+      "dras_outpost",
+      "coreworks_threshold"
+    ]
+  },
+  "assignments": [
+    {
+      "id": "survey_echo",
+      "x": 330,
+      "rewardCredits": 1,
+      "unlocks": "signal_sweep"
+    },
+    {
+      "id": "recover_trillian",
+      "x": 690,
+      "rewardCredits": 0,
+      "unlocks": "trillian_companion"
+    },
+    {
+      "id": "field_harness",
+      "x": 1080,
+      "rewardCredits": 1,
+      "unlocks": "trillian_armor"
+    },
+    {
+      "id": "sealed_salvage",
+      "x": 1430,
+      "rewardCredits": 5,
+      "requires": "trillian_armor",
+      "animation": "armored_energy_lunge"
+    },
+    {
+      "id": "worker_droid_service",
+      "x": 4524,
+      "rewardCredits": 2,
+      "requires": "first_contact"
+    }
+  ],
+  "abilities": [
+    "signal_sweep",
+    "trillian_follow",
+    "trillian_powered_launch",
+    "trillian_salvage_breach"
+  ],
+  "optional": true,
+  "gatesFoundry": false
+}

@@ -1,6 +1,6 @@
 # SUPER FRGMNTS — Overworld Revision 3 tracker
 
-Last updated: 2026-07-26
+Last updated: 2026-07-27
 
 ## Approved foundations
 
@@ -28,6 +28,8 @@ Last updated: 2026-07-26
 | Revision | Scope | Direction | Status |
 |---|---|---|---|
 | 3K | Full camp-dog behavior animation | Replace the two-frame approximation with supplied 36-frame walking and 16-frame sniffing cycles while preserving the established non-solid camp route | Integrated locally; awaiting approval and deployment |
+| 3L | Jane autonomous Overworld actor | Name and rescale Jane; replace the 130-pixel timed rail with terrain-aware wandering, player curiosity, safe first-contact staging, and a transport exclusion boundary | Integrated locally; awaiting approval and deployment |
+| 4A | Western Signal Flats expansion | Prepend one production plate west of the RD-42; add five optional assignments, Signal Sweep, Trillian surface states, hawk guidance, and worker-droid service without gating the original Foundry route | Integrated locally; awaiting approval and deployment |
 
 ## Deliberately deferred
 
@@ -55,4 +57,6 @@ python3 tools/build_super_frgmnts_creature_intake.py
 python3 tools/build_super_frgmnts_revision3_review.py
 python3 tools/verify_super_frgmnts_revision3.py
 python3 tools/verify_super_frgmnts_creature_intake.py
+python3 tools/build_super_frgmnts_overworld_western_expansion.py
+python3 tools/verify_super_frgmnts_overworld_western_expansion.py
 ```

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Verify normalized creature intake and the camp-dog production upgrade."""
 
+import json
 from pathlib import Path
 
 from PIL import Image
@@ -9,6 +10,13 @@ from PIL import Image
 ROOT = Path(__file__).resolve().parents[1]
 PUBLIC = ROOT / "Images/Game/Super-Frgmnts"
 SOURCE = (ROOT / "super_frgmnts.html").read_text(encoding="utf-8")
+DOG_MANIFEST = json.loads(
+    (
+        ROOT
+        / "Design/Super-Frgmnts/Overworld/Phase-3/Outpost/Dog-Ludo"
+        / "camp-dog-runtime-v3.json"
+    ).read_text(encoding="utf-8")
+)
 
 
 def require_image(name: str, size: tuple[int, int]) -> None:
@@ -31,13 +39,32 @@ def main() -> None:
     for token in (
         "veyra-camp-dog-walk-sheet-v3.png",
         "veyra-camp-dog-sniff-sheet-v3.png",
+        'var DOG_NAME = "Jane";',
+        "var DOG_DRAW_WIDTH = 85;",
+        "var DOG_DRAW_HEIGHT = 68;",
+        "function updateCampDog(delta)",
+        'campDog.behavior === "wander"',
+        'campDog.behavior === "approach"',
+        'campDog.behavior === "returnHome"',
+        "campDogHasGroundAhead(desiredDirection)",
+        "updateCampDog(delta);",
         "var walkFrame = walking",
-        "Math.floor((dogCycle / 3) * 16)",
-        "dogCycle < 3 &&\n                    sniffChance > 0.62",
-        'walkingHome ? "right" : "left"',
-        "if (mirrorDog) {",
+        "Math.floor(sniffProgress * 16)",
+        'campDog.facing > 0 ? "right" : "left"',
+        "if (campDog.facing > 0) {",
     ):
         assert token in SOURCE, f"Missing live camp-dog contract: {token}"
+
+    assert DOG_MANIFEST["revision"] == "3L"
+    assert DOG_MANIFEST["identity"] == "Jane"
+    assert DOG_MANIFEST["solid"] is False
+    assert DOG_MANIFEST["hostile"] is False
+    assert DOG_MANIFEST["runtimeDrawSize"] == [85, 68]
+    assert DOG_MANIFEST["physics"]["terrainCollision"] is True
+    assert DOG_MANIFEST["physics"]["playerCollision"] is False
+    assert {"idle", "wander", "sniff", "watch", "approach", "returnHome"} <= set(
+        DOG_MANIFEST["behavior"]["states"]
+    )
 
     for production_asset in (
         "enemy-tall-gaunt-alien-walk-sheet-v1.png",
@@ -52,8 +79,9 @@ def main() -> None:
     )
 
     print("SUPER FRGMNTS creature intake: PASS")
-    print("- the dog faces its travel direction without moonwalking")
-    print("- occasional sniff events dip and recover once across three seconds")
+    print("- Jane is a terrain-aware, non-solid Overworld actor")
+    print("- autonomous behavior can wander, sniff, watch, approach, and return")
+    print("- 85 x 68 rendering keeps Jane subordinate to Dras's human scale")
     print("- Seam Hunter walk and sweep atlases are live in the Episode beta")
     print("- Fleet-apparel Aryn is canonically identified but not live-loaded")
 

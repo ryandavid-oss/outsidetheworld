@@ -1,0 +1,30 @@
+{
+  "character": "Aryn Sol-Mavi",
+  "state": "standard Interworld Fleet apparel",
+  "status": "review-ready-reference",
+  "source": {
+    "croppedTarget": "Raw/aryn-fleet-apparel-standing-cropped-source-v1.png",
+    "legReference": "Raw/aryn-armored-fullbody-legs-reference-v1.png",
+    "generatedChromaExtension": "Raw/aryn-fleet-apparel-fullbody-chroma-v1.png"
+  },
+  "derivatives": {
+    "transparentGeneratedCandidate": "Reviews/aryn-fleet-apparel-fullbody-candidate-v1.png",
+    "identityPreservingComposite": "Assets/aryn-fleet-apparel-standing-fullbody-v1.png"
+  },
+  "canvas": {
+    "sourceSize": [768, 768],
+    "finalSize": [768, 1254],
+    "strategy": "extend downward without rescaling the source"
+  },
+  "preservation": {
+    "result": "pass",
+    "sourceRegion": [0, 0, 768, 768],
+    "sourceRegionChangedPixels": 0,
+    "extensionBeginsAtY": 768,
+    "alpha": "hard 0-or-255 pixel-art alpha"
+  },
+  "runtime": {
+    "integrated": false,
+    "purpose": "full-body identity and future animation reference"
+  }
+}

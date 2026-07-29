@@ -1,0 +1,49 @@
+{
+  "workingName": "Kihunter",
+  "runtimeType": "kihunter",
+  "status": "runtime-ready-unpopulated",
+  "productionPopulation": false,
+  "role": "winged airborne insect patrol",
+  "source": {
+    "image": "Raw/kihunter-source-v1.png",
+    "manifest": "Raw/kihunter-source-v1.json",
+    "columns": 6,
+    "rows": 6,
+    "frameWidth": 548,
+    "frameHeight": 456,
+    "frameCount": 36,
+    "frameDurationMs": 43
+  },
+  "validation": {
+    "result": "pass",
+    "edgeContactFrames": {}
+  },
+  "runtime": {
+    "image": "Images/Game/Super-Frgmnts/enemy-kihunter-flight-sheet-v1.png",
+    "preview": "Design/Super-Frgmnts/Foundry/Enemies/Kihunter/Reviews/kihunter-flight-preview-v1.gif",
+    "columns": 6,
+    "rows": 6,
+    "frameWidth": 112,
+    "frameHeight": 112,
+    "frameCount": 36,
+    "loopDurationMs": 1548,
+    "rendering": "nearest-neighbor",
+    "contentSize": [
+      104,
+      88
+    ],
+    "anchor": "center",
+    "hitboxSize": [
+      88,
+      78
+    ],
+    "drawSize": [
+      118,
+      118
+    ]
+  },
+  "behavior": {
+    "locomotion": "flying patrol",
+    "spawned": false
+  }
+}

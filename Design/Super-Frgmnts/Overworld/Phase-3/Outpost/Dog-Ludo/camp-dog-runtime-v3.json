@@ -1,11 +1,35 @@
 {
-  "revision": "3K",
-  "identity": "Veyra camp dog",
+  "revision": "3L",
+  "identity": "Jane",
+  "nameOrigin": "Jane from Orson Scott Card's Ender series",
   "status": "integrated-local-review",
   "solid": false,
   "hostile": false,
-  "routePixels": 130,
   "runtimeFrameSize": [100, 80],
+  "runtimeDrawSize": [85, 68],
+  "physics": {
+    "model": "lightweight kinematic actor",
+    "terrainCollision": true,
+    "playerCollision": false,
+    "gravity": 1450,
+    "forwardGroundProbe": true,
+    "movingPlatformSupport": true,
+    "worldBounds": true
+  },
+  "behavior": {
+    "states": [
+      "idle",
+      "wander",
+      "sniff",
+      "watch",
+      "approach",
+      "returnHome"
+    ],
+    "preFirstContact": "explores the camp side of Dras without entering the first-contact trigger",
+    "postFirstContact": "may explore the continuous Overworld floor and investigate nearby Aryn",
+    "transportSafety": "roaming ends before the Coreworks transport deck",
+    "reducedMotion": "idle at camp"
+  },
   "animations": {
     "walk": {
       "asset": "Images/Game/Super-Frgmnts/veyra-camp-dog-walk-sheet-v3.png",
@@ -28,6 +52,7 @@
     "The supplied cycles replace the former two-frame contact/pass approximation.",
     "The source gait faces left, so only rightward travel is mirrored.",
     "The sniff sequence plays once per selected event rather than looping.",
-    "The dog remains decorative and cannot interrupt first contact."
+    "Jane remains decorative, non-solid, and unable to interrupt first contact.",
+    "The former 130-pixel time-based rail is no longer a movement authority."
   ]
 }

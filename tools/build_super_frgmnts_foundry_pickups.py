@@ -61,7 +61,7 @@ ASSETS = {
         "runtime": RUNTIME_ROOT / "foundry-heavy-rifle-pickup-runtime-v1.png",
         "canvas": (136, 64),
         "visible": (128, 48),
-        "role": "temporary route-clearing heavy weapon unlock",
+        "role": "temporary route-clearing, boss-killing, and heavy-combat weapon unlock",
         "status": "art ready; placement and persistence deliberately unassigned",
     },
 }

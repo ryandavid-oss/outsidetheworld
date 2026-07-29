@@ -46,3 +46,21 @@ baked into the landscape.
 
 The manifest records the exact world coordinates, motion specification, and
 approval questions.
+
+## Integrated interior greybox
+
+The first RD-42 interior is now defined and integrated as an isolated
+one-plate playable greybox:
+
+- [`Interior/RD42-SHIP-INTERIOR-CONTRACT-v1.md`](Interior/RD42-SHIP-INTERIOR-CONTRACT-v1.md)
+  defines top-middle dorsal-hatch entry, Aryn's continuous descent, room
+  behavior, interactions, and lifecycle requirements.
+- [`Interior/RD42-SHIP-INTERIOR-WIREFRAME-v1.md`](Interior/RD42-SHIP-INTERIOR-WIREFRAME-v1.md)
+  defines the precise one-plate layout, collision, prop reservations, and
+  desktop/mobile camera targets.
+- [`Interior/RD42-SHIP-INTERIOR-WIREFRAME-v1.svg`](Interior/RD42-SHIP-INTERIOR-WIREFRAME-v1.svg)
+  is the visual review artifact.
+
+The exterior hatch, authored descent, interior interactions, service-kit
+state, exit, and exterior re-emergence are available through the review routes
+in the working handoff. The production episode path remains unchanged.

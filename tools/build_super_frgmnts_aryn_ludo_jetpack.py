@@ -169,7 +169,7 @@ def main() -> None:
 
     manifest = {
         "asset": "Aryn Sol-Mavi Ludo jetpack animation",
-        "status": "normalized preview candidate; gameplay not integrated",
+        "status": "normalized and integrated as the backpack jet-assist module",
         "runtime": str(RUNTIME.relative_to(PROJECT_ROOT)),
         "runtime_contract": {
             "frame_size": [FRAME_SIZE, FRAME_SIZE],
@@ -187,7 +187,7 @@ def main() -> None:
         "design_boundaries": [
             "This build does not assign fuel, duration, height, or recharge behavior.",
             "The animation remains separate from Aryn's unassisted jump.",
-            "The heavy rifle and jetpack cannot be assumed simultaneously equipped.",
+            "The jet-assist module remains part of the backpack while a temporary heavy-rifle tool is carried.",
         ],
     }
     MANIFEST.write_text(json.dumps(manifest, indent=2) + "\n")

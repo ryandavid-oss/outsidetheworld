@@ -1,11 +1,33 @@
 # SUPER FRGMNTS // Coreworks Overworld
 
-This directory defines the three-plate prologue and recovery hub that precedes
+This directory defines the four-plate prologue and recovery hub that precedes
 **The Shard Foundry**.
+
+## Western Signal Flats runtime expansion
+
+The live Overworld now prepends a fourth 1,672 × 941 plate west of the original
+Landing Flats. The original rightward route is preserved with a +1,672-pixel
+runtime origin offset:
+
+- Western Signal Flats — x=0;
+- Landing Flats — x=1,672;
+- Dras Outpost — x=3,344;
+- Coreworks Threshold — x=5,016.
+
+The western plate is an optional, untimed surface loop. It adds a survey echo
+that unlocks Signal Sweep, recovery of Trillian, a field-harness upgrade,
+powered companion traversal, and a noncombat sealed-salvage breach. The hawk
+circles the next unfinished western assignment while it is on screen. Dras
+first contact, the calibration route, and the Coreworks transport remain the
+critical path; none of the western assignments gates the Foundry.
+
+The expansion contract, exact prompt, source plate, seam audit, runtime
+manifest, and four-plate review sheet live in `Western-Signal-Flats/`.
 
 ## Phase 1 — composition blueprint
 
-Phase 1 fixes the spatial story before finished artwork or runtime integration:
+Phase 1 fixed the original three-plate spatial story before finished artwork or
+runtime integration:
 
 - one continuous 5,016 × 941 panorama;
 - three 1,672 × 941 plates;
@@ -16,9 +38,10 @@ Phase 1 fixes the spatial story before finished artwork or runtime integration:
 - dialogue, future shop, and portal-transition zones;
 - the parallax and ambient-motion contract.
 
-The composition source of truth is `overworld-layout.json`. The rendered guide
-is `overworld-composition-guide.png`; the three-plate review image is
-`overworld-plates-contact-sheet.png`.
+The current composition source of truth is `overworld-layout.json`. The
+original rendered guide is `overworld-composition-guide.png`; the current
+four-plate review image is
+`Western-Signal-Flats/Reviews/overworld-four-plate-contact-v1.png`.
 
 The overworld is untimed. Entering the Coreworks portal starts the eight-minute
 timer for The Shard Foundry.
@@ -71,14 +94,20 @@ regenerates the three exact 1,672 × 941 plate files. The raw built-in
 image-generation results and complete prompt set remain beside the outputs for
 reproducibility.
 
-Phase 2B is not wired into the live game. Runtime integration waits until the
-static landscape receives visual approval and the Phase 3 overlay assets are
-prepared.
+The three approved plates and Western Signal Flats are wired into the isolated
+Overworld runtime.
 
 ## Phase 3 — hero props and characters
 
 - isolate Aryn's ship as a transparent overlay;
 - isolate one clean Dras Ehdre master and derive controlled idle/talk frames;
+- add a non-hostile worker droid that drifts above the Outpost ground and
+  periodically performs a low-hover maintenance cycle, plus an optional
+  post-contact service assignment;
+- integrate Trillian as a separate, non-solid surface companion with unarmored
+  and armored follow states, powered launch, and a noncombat breach action;
+- integrate one non-hostile hawk with alternating sky passes and western
+  assignment guidance;
 - create Dras's camp, abandoned credit terminal, atmosphere tower accents, and
   Coreworks portal;
 - verify scale beside Aryn's 112-pixel draw height.

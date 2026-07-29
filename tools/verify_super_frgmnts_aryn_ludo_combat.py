@@ -128,8 +128,8 @@ def main() -> None:
     print("SUPER FRGMNTS Aryn Ludo combat contract: PASS")
     print("- alternating light and heavy baseline-normalized impacts")
     print("- delayed health-depletion collapse before the loss message")
-    print("- pack-emitter firing pulse remains independent of locomotion")
-    print("- pack blaster remains the production-default weapon")
+    print("- telescopic laser seeker firing remains independent of locomotion")
+    print("- telescopic laser seeker remains Aryn's intrinsic defense")
     print("- production animation remains the default")
 
 

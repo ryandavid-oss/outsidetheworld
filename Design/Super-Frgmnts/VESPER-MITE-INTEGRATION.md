@@ -14,7 +14,8 @@ The completed Episode 01 integration:
 - use frames 0–17 as a provisional 1.152-second scuttling gait;
 - bind the creature to a Foundry deck or catwalk rather than flyer physics;
 - add occasional randomized reversals inside a bounded patrol;
-- allow contact damage, a descending stomp, and the seeking pack blaster;
+- allow contact damage and telescopic laser seeker damage; descending contact
+  still hurts Aryn and never becomes a stomp attack;
 - retain the isolated specimen through `?preview=foundry-expansion&mite=1`;
 - populate one specimen in the Episode 01 beta roster.
 

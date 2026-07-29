@@ -48,8 +48,9 @@ def main() -> None:
     print("- 36 supplied frames retained in a 6×6 mobile-safe runtime atlas")
     print("- frames 0–17 form the provisional 64 ms scuttling gait")
     print("- the Mite patrols a solid deck and is not classified as a flyer")
-    print("- isolated Foundry spawn supports stomp, seeking blaster, and contact damage")
-    print("- trial begins with the tier-one pack blaster unlocked")
+    print("- isolated Foundry spawn supports seeker damage and hostile contact damage")
+    print("- descending contact cannot become a stomp attack")
+    print("- trial begins with the tier-one telescopic laser seeker")
 
 
 if __name__ == "__main__":

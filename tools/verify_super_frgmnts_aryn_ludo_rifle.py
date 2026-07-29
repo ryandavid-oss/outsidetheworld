@@ -94,12 +94,18 @@ def main() -> None:
 
     require(
         manifest["design_contract"]["production_default"]
-        == "pack-mounted seeking blaster",
-        "The rifle replaced the production-default pack blaster",
+        == "backpack telescopic laser seeker",
+        "The rifle replaced the production-default telescopic laser seeker",
     )
     require(
         manifest["design_contract"]["episode_beta_pickup"] is True,
         "The rifle is not marked as an Episode beta pickup",
+    )
+    require(
+        manifest["design_contract"]["combat_balance"].endswith(
+            "remain undecided"
+        ),
+        "The rifle manifest prematurely fixes combat balance",
     )
 
     runtime_contracts = (
@@ -119,7 +125,9 @@ def main() -> None:
         "function beginRifleDraw()",
         "rifleDrawTime = 0;",
         "function heavyRifleActive()",
-        "rifleFireTime = rifleActive ? RIFLE_FIRE_DURATION : 0;",
+        "var activeWeapon = heavyRifleActive()",
+        '? "Fire heavy rifle"',
+        "rifleFireTime = rifleActive\n                    ? activeRifleFireDuration()",
         "rifleIdleStowTime = RIFLE_IDLE_STOW_DELAY;",
         'visual.pose = "rifleDrawLudo";',
         'visual.pose = "rifleAirborneReadyLudo";',
@@ -200,7 +208,7 @@ def main() -> None:
         "Heavy rifle does not have the approved idle stow delay",
     )
     require(
-        "if (rifleIdleStowTime === 0) {\n                        stowRifle();"
+        "if (rifleIdleStowTime === 0) {\n                            stowRifle();"
         in source,
         "Heavy rifle does not return to the stowed traversal state",
     )
@@ -219,8 +227,9 @@ def main() -> None:
     print("- standing barrel length is normalized to the running silhouette")
     print("- rifle stows after 2.25 grounded seconds without firing")
     print("- keyboard fire uses X, avoiding the macOS Control-arrow shortcut")
-    print("- firing is a fast direct amber route-clearing round")
-    print("- pack blaster remains the production default")
+    print("- firing is a fast direct amber heavy-combat round")
+    print("- rifle ammo, damage, boss durability, and armor behavior remain open")
+    print("- telescopic laser seeker remains the production default")
 
 
 if __name__ == "__main__":

@@ -1,7 +1,8 @@
 # SUPER FRGMNTS // Coreworks Overworld Production Landscape
 
 This directory contains the Phase 2B static landscape production pass for the
-three-plate Coreworks overworld.
+original three-plate Coreworks overworld plus the approved Western Signal Flats
+runtime extension.
 
 ## Outputs
 
@@ -12,6 +13,13 @@ three-plate Coreworks overworld.
 - `overworld-production-contact-sheet-v1.png` — three-plate review image.
 - `overworld-production-seam-audit-v1.png` — full-height crops around both
   plate seams.
+- `Plates/overworld-western-signal-flats-v1.png` — the prepended western
+  runtime plate, 1,672 × 941.
+
+The four-plate contact sheet and western-to-landing seam audit are stored in
+`../Western-Signal-Flats/Reviews/`. The western source prompt and its dedicated
+builder live beside that review package so the original Phase 2B master remains
+reproducible without rewriting it.
 
 The unmodified built-in image-generation results are retained in `Raw/`.
 `production-prompts-v1.txt` records the complete prompt set.
@@ -54,3 +62,9 @@ python3 tools/build_super_frgmnts_overworld_production.py
 
 The script validates every dimension, ground shift, output plate, master seam,
 and final file before returning success.
+
+To validate and republish the prepended western plate:
+
+```sh
+python3 tools/build_super_frgmnts_overworld_western_expansion.py
+```

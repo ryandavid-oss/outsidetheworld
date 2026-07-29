@@ -1,0 +1,74 @@
+{
+  "workingName": "Gloam Roller",
+  "runtimeType": "gloamRoller",
+  "status": "runtime-ready-unpopulated",
+  "productionPopulation": false,
+  "role": "armored ground crawler with a crawl-to-roll patrol cycle",
+  "source": {
+    "image": "Raw/gloam-roller-source-v1.png",
+    "manifest": "Raw/gloam-roller-source-v1.json",
+    "columns": 6,
+    "rows": 6,
+    "frameWidth": 536,
+    "frameHeight": 344,
+    "frameCount": 36,
+    "frameDurationMs": 52
+  },
+  "validation": {
+    "result": "pass",
+    "edgeContactFrames": {}
+  },
+  "runtime": {
+    "image": "Images/Game/Super-Frgmnts/enemy-gloam-roller-sheet-v1.png",
+    "preview": "Design/Super-Frgmnts/Foundry/Enemies/Gloam-Roller/Reviews/gloam-roller-preview-v1.gif",
+    "behaviorPreview": "Design/Super-Frgmnts/Foundry/Enemies/Gloam-Roller/Reviews/gloam-roller-behavior-preview-v1.gif",
+    "columns": 6,
+    "rows": 6,
+    "frameWidth": 128,
+    "frameHeight": 80,
+    "frameCount": 36,
+    "loopDurationMs": 1872,
+    "rendering": "nearest-neighbor",
+    "contentSize": [
+      119,
+      72
+    ],
+    "anchor": "ground",
+    "hitboxSize": [
+      96,
+      50
+    ],
+    "drawSize": [
+      120,
+      72
+    ]
+  },
+  "behavior": {
+    "locomotion": "crawl-to-roll ground patrol",
+    "animationRead": "crawl, curl, accelerated shell roll, reverse uncurl",
+    "phases": {
+      "crawlFrames": [
+        0,
+        27
+      ],
+      "curlFrames": [
+        28,
+        31
+      ],
+      "rollingFrames": [
+        32,
+        35
+      ],
+      "uncurlFrames": [
+        31,
+        28
+      ]
+    },
+    "behaviorCycleDurationMs": 2912,
+    "rollDurationMs": 1040,
+    "rollSpeedMultiplier": 1.85,
+    "rotation": "distance-driven; clockwise right, counterclockwise left",
+    "spawned": false,
+    "combatBalance": "unassigned"
+  }
+}

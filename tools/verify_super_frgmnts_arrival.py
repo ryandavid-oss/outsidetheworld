@@ -82,7 +82,7 @@ def main() -> None:
         "drasDialoguePortrait",
         "aryn-dialogue-portrait-runtime-v3.png",
         "dras-dialogue-portrait-runtime-v2.png",
-        "var DRAS_WORLD_X = WIDTH + 560",
+        "OVERWORLD_ORIGIN_X + WIDTH + 560",
         "Math.round(DRAS_DRAW_Y + drasBob)",
         "drawCloudVolume",
         "drawOverworldBirds",
@@ -104,7 +104,7 @@ def main() -> None:
         "(0.48 - 0.7)",
         "portalCharge",
         "invisibleStep: true",
-        "var OVERWORLD_SHIP_SPAWN_X = 516",
+        "OVERWORLD_ORIGIN_X + 516",
         "function shipSurface(x, y, width)",
         "shipSurface(500, 448, 144)",
         "shipSurface(340, 438, 116)",
@@ -122,6 +122,9 @@ def main() -> None:
         "function drawCoreworksTransport()",
         "function drawCoreworksTransportEnergyForeground()",
         "COREWORKS_TRANSPORT_DECK_X",
+        "overworld-western-signal-flats-v1.png",
+        "function drawOverworldAssignments()",
+        "function activateSignalSweep()",
         'state = "transporting"',
         'canvas.dataset.coreworksTransport = "activating"',
         '"?episode=01&stage="',
@@ -164,6 +167,7 @@ def main() -> None:
     )
 
     for plate_name in (
+        "overworld-western-signal-flats-v1.png",
         "overworld-landing-flats-v1.png",
         "overworld-dras-outpost-v1.png",
         "overworld-coreworks-threshold-v1.png",
@@ -208,7 +212,7 @@ def main() -> None:
     print("- Fleet disconnect, Dras reaction, and transport ignition are staged")
     print("- the physical Coreworks transport has a walkable activation deck")
     print("- its one-shot vortex fades Aryn before the Foundry handoff")
-    print("- all three 1672 × 941 overworld plates are present")
+    print("- all four 1672 × 941 overworld plates are present")
     print("- transport handoff supports the assembled Episode 01 Foundry and isolated review route")
 
 

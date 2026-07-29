@@ -13,6 +13,16 @@ runtime; they are not alternate sources of truth.
   architecture and feature acceptance rules
 - [Unified Level 1 Plan](UNIFIED-LEVEL-ONE-PLAN.md) — The Shard Foundry world,
   traversal, systems, population, and promotion gate
+- [Shard Foundry Level Design v1](Foundry/SHARD-FOUNDRY-LEVEL-DESIGN-v1.md) —
+  easy-to-medium critical path, encounter order, placement coordinates, and
+  playtest acceptance
+- [Return to Dras Interlude v1](Post-Foundry/RETURN-TO-DRAS-INTERLUDE-v1.md) —
+  approved post-Wound story direction, transport failure, repair, and Primary
+  Biolab handoff
+- [RD-42 Ship Interior v1](Overworld/Phase-3/Ship/Interior/RD42-SHIP-INTERIOR-CONTRACT-v1.md) —
+  dorsal-hatch boarding, compact interior behavior, and service-kit objective
+- [RD-42 Interior Wireframe v1](Overworld/Phase-3/Ship/Interior/RD42-SHIP-INTERIOR-WIREFRAME-v1.md) —
+  precise greybox coordinates, collision, interactions, and camera targets
 - [Episode 01 release manifest](Releases/episode-01-unified-v1.json) — public
   routes, asset roots, audio map, and release verification
 - [Current asset intake](ASSET-INTAKE-2026-07-26.md) — normalized runtime

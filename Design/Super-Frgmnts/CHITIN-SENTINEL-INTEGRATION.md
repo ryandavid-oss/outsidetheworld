@@ -15,9 +15,9 @@ For the isolated integration:
 - retain all 36 frames from both sources in two nearest-neighbor 684 × 636
   runtime atlases;
 - patrol slowly and deliberately on one broad upper Foundry catwalk;
-- require exactly five tier-one pack-blaster hits;
+- require exactly five tier-one telescopic laser seeker hits;
 - flash the armor and report the remaining integrity after each hit;
-- do not allow stomps to bypass the armored encounter;
+- treat every physical contact as damage to Aryn; she has no stomp attack;
 - make the death animation non-interruptible and award 1,250 points only
   after the fifth hit;
 - expose one specimen through

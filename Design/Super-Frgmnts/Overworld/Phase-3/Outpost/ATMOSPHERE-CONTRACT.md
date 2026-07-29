@@ -1,6 +1,6 @@
 # Veyra overworld atmosphere contract
 
-Status: Revision 3K local review contract; not yet deployed.
+Status: Revision 3L local review contract; not yet deployed.
 
 ## Depth system
 
@@ -31,13 +31,20 @@ Status: Revision 3K local review contract; not yet deployed.
 
 - Dras stands at local plate-two X 560, beneath the outpost's left shelter
   rather than in the empty approach.
-- A German shepherd camp dog occupies local plate-two X 810. A complete
-  36-frame gait carries it 130 pixels toward the shelter before it pauses and
-  returns, facing its actual direction of travel. Sniffing is an occasional
-  event: the full 16-frame head-dip cycle plays once across three seconds,
-  then resolves to the upright idle pose. Its bright collar keeps the
-  silhouette readable against the outpost.
-- The dog is decorative, non-solid, non-hostile, and cannot interrupt the
+- **Jane**, Dras's German shepherd camp dog, begins at local plate-two X 810.
+  She renders at 85 × 68 pixels beside Dras's 96 × 112 canvas so her
+  silhouette remains clearly subordinate to the human scale. Her bright
+  collar keeps her readable against the outpost.
+- Jane is a lightweight terrain-aware actor rather than a timed decorative
+  rail. Her states are idle, wander, sniff, watch, approach, and return home.
+  The complete 36-frame gait follows her physical travel direction. The full
+  16-frame head-dip cycle plays once across three seconds for a selected sniff
+  event, then resolves to the upright idle pose.
+- Before first contact, Jane explores only the safe camp side of Dras. After
+  first contact, she may travel across the continuous Overworld floor and
+  investigate nearby Aryn. A forward ground probe prevents walking off future
+  ledges, and her roaming boundary ends before the Coreworks transport.
+- Jane remains decorative, non-solid, non-hostile, and unable to interrupt the
   first-contact sequence.
 
 ## Landing Flats collision correction

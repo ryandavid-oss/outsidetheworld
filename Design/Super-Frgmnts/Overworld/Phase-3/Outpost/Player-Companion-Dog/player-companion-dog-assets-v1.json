@@ -1,0 +1,320 @@
+{
+  "status": "overworld-surface-runtime",
+  "name": "Trillian",
+  "companionIdentity": "Trillian is the player's dog and is explicitly separate from Jane.",
+  "assetRelationship": "The unarmored movement, armored movement, armored attack, and armored jump-launch sheets all depict Trillian.",
+  "currentCanon": "Jane remains the German Shepherd camp dog and does not enter the Coreworks transport.",
+  "runtimeIntegration": true,
+  "behaviorProposal": "Trillian is an optional non-solid Overworld companion. She waits in Western Signal Flats, follows after recovery, equips a field harness, uses a physics-driven powered launch to reach raised terrain, and performs one noncombat energy breach on sealed salvage.",
+  "surfaceRuntime": {
+    "scene": "overworld",
+    "recoverAssignmentX": 690,
+    "harnessAssignmentX": 1080,
+    "salvageAssignmentX": 1430,
+    "followDistance": 112,
+    "followSpeed": 82,
+    "poweredLaunchVelocityY": -950,
+    "transportLimitX": 6276,
+    "friendlySeekerSafety": true,
+    "solid": false,
+    "hostile": false,
+    "enemyTargetable": false,
+    "combatDamage": false,
+    "foundryHandoff": false
+  },
+  "animations": [
+    {
+      "key": "unarmored",
+      "label": "Trillian \u2014 unarmored state",
+      "role": "movement",
+      "playback": "loop",
+      "runtimeEligible": true,
+      "source": {
+        "image": "Raw/companion-dog-unarmored-walk-source-v1.png",
+        "manifest": "Raw/companion-dog-unarmored-walk-source-v1.json",
+        "columns": 6,
+        "rows": 6,
+        "frameWidth": 572,
+        "frameHeight": 572,
+        "frameCount": 36,
+        "frameDurationMs": 42
+      },
+      "validation": {
+        "result": "pass",
+        "edgeContactFrames": {}
+      },
+      "runtime": {
+        "image": "Images/Game/Super-Frgmnts/companion-dog-unarmored-walk-sheet-v1.png",
+        "preview": "Design/Super-Frgmnts/Overworld/Phase-3/Outpost/Player-Companion-Dog/Reviews/companion-dog-unarmored-walk-preview-v1.gif",
+        "columns": 6,
+        "rows": 6,
+        "frameWidth": 120,
+        "frameHeight": 104,
+        "frameCount": 36,
+        "loopDurationMs": 1512,
+        "contentSize": [
+          93,
+          96
+        ],
+        "rendering": "nearest-neighbor",
+        "anchor": "ground"
+      }
+    },
+    {
+      "key": "armored",
+      "label": "Trillian \u2014 armored state",
+      "role": "movement",
+      "playback": "loop",
+      "runtimeEligible": true,
+      "source": {
+        "image": "Raw/companion-dog-armored-walk-source-v1.png",
+        "manifest": "Raw/companion-dog-armored-walk-source-v1.json",
+        "columns": 5,
+        "rows": 5,
+        "frameWidth": 640,
+        "frameHeight": 512,
+        "frameCount": 25,
+        "frameDurationMs": 58
+      },
+      "validation": {
+        "result": "pass-with-source-warning",
+        "edgeContactFrames": {
+          "right": [
+            7,
+            8,
+            16,
+            24
+          ]
+        }
+      },
+      "runtime": {
+        "image": "Images/Game/Super-Frgmnts/companion-dog-armored-walk-sheet-v1.png",
+        "preview": "Design/Super-Frgmnts/Overworld/Phase-3/Outpost/Player-Companion-Dog/Reviews/companion-dog-armored-walk-preview-v1.gif",
+        "columns": 5,
+        "rows": 5,
+        "frameWidth": 120,
+        "frameHeight": 104,
+        "frameCount": 25,
+        "loopDurationMs": 1450,
+        "contentSize": [
+          112,
+          94
+        ],
+        "rendering": "nearest-neighbor",
+        "anchor": "ground"
+      }
+    },
+    {
+      "key": "armoredAttack",
+      "label": "Trillian \u2014 armored attack",
+      "role": "close-range energy lunge",
+      "playback": "one-shot",
+      "runtimeEligible": true,
+      "source": {
+        "image": "Raw/companion-dog-armored-attack-source-v1.png",
+        "manifest": "Raw/companion-dog-armored-attack-source-v1.json",
+        "columns": 6,
+        "rows": 6,
+        "frameWidth": 624,
+        "frameHeight": 492,
+        "frameCount": 36,
+        "frameDurationMs": 46
+      },
+      "validation": {
+        "result": "pass-with-source-warning",
+        "edgeContactFrames": {
+          "top": [
+            35
+          ]
+        }
+      },
+      "runtime": {
+        "image": "Images/Game/Super-Frgmnts/companion-dog-armored-attack-sheet-v1.png",
+        "preview": "Design/Super-Frgmnts/Overworld/Phase-3/Outpost/Player-Companion-Dog/Reviews/companion-dog-armored-attack-preview-v1.gif",
+        "columns": 6,
+        "rows": 6,
+        "frameWidth": 120,
+        "frameHeight": 104,
+        "frameCount": 36,
+        "loopDurationMs": 1656,
+        "contentSize": [
+          112,
+          86
+        ],
+        "rendering": "nearest-neighbor",
+        "anchor": "ground"
+      },
+      "authoring": {
+        "interpretation": "brace and charge, bare teeth, lead-paw energy lunge, then recover",
+        "suggestedPhases": {
+          "windupFrames": [
+            0,
+            11
+          ],
+          "strikeFrames": [
+            12,
+            23
+          ],
+          "recoveryFrames": [
+            24,
+            35
+          ]
+        },
+        "damageWindow": "unassigned until combat implementation"
+      }
+    },
+    {
+      "key": "armoredJumpLaunch",
+      "label": "Trillian \u2014 armored jump launch",
+      "role": "powered jump charge and launch cue",
+      "playback": "one-shot",
+      "runtimeEligible": true,
+      "source": {
+        "image": "Raw/companion-dog-armored-jump-source-v1.png",
+        "manifest": "Raw/companion-dog-armored-jump-source-v1.json",
+        "columns": 6,
+        "rows": 6,
+        "frameWidth": 544,
+        "frameHeight": 556,
+        "frameCount": 36,
+        "frameDurationMs": 49
+      },
+      "validation": {
+        "result": "pass-with-source-warning",
+        "edgeContactFrames": {
+          "right": [
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            22,
+            23,
+            24,
+            25,
+            26,
+            33
+          ]
+        }
+      },
+      "runtime": {
+        "image": "Images/Game/Super-Frgmnts/companion-dog-armored-jump-launch-sheet-v1.png",
+        "preview": "Design/Super-Frgmnts/Overworld/Phase-3/Outpost/Player-Companion-Dog/Reviews/companion-dog-armored-jump-launch-preview-v1.gif",
+        "columns": 6,
+        "rows": 6,
+        "frameWidth": 120,
+        "frameHeight": 104,
+        "frameCount": 36,
+        "loopDurationMs": 1764,
+        "contentSize": [
+          97,
+          96
+        ],
+        "rendering": "nearest-neighbor",
+        "anchor": "ground"
+      },
+      "authoring": {
+        "interpretation": "rear, plant the forepaws, route energy through the armor, then hand off to a physics-driven jump",
+        "suggestedPhases": {
+          "windupFrames": [
+            0,
+            17
+          ],
+          "energyRampFrames": [
+            18,
+            29
+          ],
+          "launchHandoffFrames": [
+            30,
+            35
+          ]
+        },
+        "runtimeMotion": "The art has no baked vertical displacement. Apply the actual jump arc through actor physics after launch.",
+        "airborneAnimation": "not supplied",
+        "landingAnimation": "not supplied"
+      }
+    }
+  ],
+  "reviewOnlyAlternates": [
+    {
+      "key": "armoredRearAlternate",
+      "label": "Trillian \u2014 armored rear/power-up alternate",
+      "role": "rearing or power-up motion",
+      "playback": "one-shot",
+      "runtimeEligible": false,
+      "source": {
+        "image": "Raw/companion-dog-armored-rear-alternate-source-v1.png",
+        "manifest": "Raw/companion-dog-armored-rear-alternate-source-v1.json",
+        "columns": 5,
+        "rows": 5,
+        "frameWidth": 960,
+        "frameHeight": 910,
+        "frameCount": 25,
+        "frameDurationMs": 73
+      },
+      "validation": {
+        "result": "pass-with-source-warning",
+        "edgeContactFrames": {
+          "left": [
+            19,
+            20,
+            21,
+            22,
+            23,
+            24
+          ],
+          "right": [
+            12,
+            13
+          ],
+          "top": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17
+          ]
+        }
+      },
+      "runtime": {
+        "image": "Design/Super-Frgmnts/Overworld/Phase-3/Outpost/Player-Companion-Dog/Reviews/companion-dog-armored-rear-alternate-review-sheet-v1.png",
+        "preview": "Design/Super-Frgmnts/Overworld/Phase-3/Outpost/Player-Companion-Dog/Reviews/companion-dog-armored-rear-alternate-preview-v1.gif",
+        "columns": 5,
+        "rows": 5,
+        "frameWidth": 120,
+        "frameHeight": 104,
+        "frameCount": 25,
+        "loopDurationMs": 1825,
+        "contentSize": [
+          112,
+          93
+        ],
+        "rendering": "nearest-neighbor",
+        "anchor": "ground"
+      },
+      "authoring": {
+        "disposition": "preserved for review only",
+        "compatibility": "Do not splice into armoredJumpLaunch as an airborne or landing phase.",
+        "reason": [
+          "The sequence reads as a rear or power-up, not airborne travel.",
+          "Critical upright frames 9 through 17 are clipped at the top.",
+          "Frames 19 through 24 are clipped at the left edge.",
+          "Frames 12 and 13 are clipped at the right edge."
+        ]
+      }
+    }
+  ],
+  "futureCombatCompanionRequirements": [
+    "alert and target-acquisition animation",
+    "approved damage frame window and hitbox for armored attack",
+    "hurt, incapacitated, and recovery animation",
+    "Overworld-to-Foundry scene handoff and save-state contract",
+    "damage, cooldown, health, and enemy-priority balance"
+  ]
+}

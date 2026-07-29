@@ -53,14 +53,17 @@ def validate(manifest: dict) -> None:
     plate_height = coordinates["plate_height"]
     seams = coordinates["plate_seams_x"]
 
-    assert world_width == plate_width * 3
+    plate_count = len(manifest["plates"])
+    assert plate_count >= 1
+    assert world_width == plate_width * plate_count
     assert world_height == plate_height
-    assert seams == [plate_width, plate_width * 2]
-    assert len(manifest["plates"]) == 3
+    assert seams == [
+        plate_width * index
+        for index in range(1, plate_count)
+    ]
     assert [plate["x"] for plate in manifest["plates"]] == [
-        0,
-        plate_width,
-        plate_width * 2,
+        plate_width * index
+        for index in range(plate_count)
     ]
 
     floor = next(item for item in manifest["collision"] if item["id"] == "desert_floor")
@@ -154,6 +157,7 @@ def draw_cloud(
 
 def draw_background(draw: ImageDraw.ImageDraw, width: int, height: int) -> None:
     rng = random.Random(73)
+    legacy_origin_x = max(0, width - 5016)
 
     for _ in range(115):
         x = rng.randrange(width)
@@ -204,18 +208,49 @@ def draw_background(draw: ImageDraw.ImageDraw, width: int, height: int) -> None:
     draw.polygon(far_mountains, fill=(28, 25, 58, 255))
 
     volcano = [
-        (3680, 660),
-        (3940, 360),
-        (4200, 222),
-        (4280, 260),
-        (4360, 372),
-        (4650, 660),
+        (legacy_origin_x + 3680, 660),
+        (legacy_origin_x + 3940, 360),
+        (legacy_origin_x + 4200, 222),
+        (legacy_origin_x + 4280, 260),
+        (legacy_origin_x + 4360, 372),
+        (legacy_origin_x + 4650, 660),
     ]
     draw.polygon(volcano, fill=(35, 24, 48, 255))
-    draw.line([(4170, 258), (4200, 222), (4236, 251)], fill=(240, 117, 69, 220), width=8)
-    draw.line([(4192, 249), (4220, 235)], fill=(98, 224, 210, 180), width=3)
-    draw.ellipse((4140, 78, 4310, 236), fill=(101, 70, 102, 34))
-    draw.ellipse((4170, 46, 4360, 202), fill=(88, 67, 101, 25))
+    draw.line(
+        [
+            (legacy_origin_x + 4170, 258),
+            (legacy_origin_x + 4200, 222),
+            (legacy_origin_x + 4236, 251),
+        ],
+        fill=(240, 117, 69, 220),
+        width=8,
+    )
+    draw.line(
+        [
+            (legacy_origin_x + 4192, 249),
+            (legacy_origin_x + 4220, 235),
+        ],
+        fill=(98, 224, 210, 180),
+        width=3,
+    )
+    draw.ellipse(
+        (
+            legacy_origin_x + 4140,
+            78,
+            legacy_origin_x + 4310,
+            236,
+        ),
+        fill=(101, 70, 102, 34),
+    )
+    draw.ellipse(
+        (
+            legacy_origin_x + 4170,
+            46,
+            legacy_origin_x + 4360,
+            202,
+        ),
+        fill=(88, 67, 101, 25),
+    )
 
     near_mountains = [
         (0, 684),
@@ -245,17 +280,62 @@ def draw_background(draw: ImageDraw.ImageDraw, width: int, height: int) -> None:
     ]
     draw.polygon(near_mountains, fill=(43, 28, 58, 255))
 
-    for x in (560, 2420, 2780, 3500):
+    for local_x in (560, 2420, 2780, 3500):
+        x = legacy_origin_x + local_x
         draw.line((x, 486, x - 8, 700), fill=(74, 53, 79, 255), width=11)
         draw.line((x, 486, x + 28, 508), fill=(74, 53, 79, 255), width=7)
 
     # Collapsed viaduct and broken cables on the settlement plate.
-    draw.line((2460, 504, 4200, 470), fill=(66, 55, 76, 255), width=14)
-    draw.line((2460, 504, 3370, 528), fill=(102, 65, 83, 255), width=4)
-    for x in range(2500, 4180, 132):
+    draw.line(
+        (
+            legacy_origin_x + 2460,
+            504,
+            legacy_origin_x + 4200,
+            470,
+        ),
+        fill=(66, 55, 76, 255),
+        width=14,
+    )
+    draw.line(
+        (
+            legacy_origin_x + 2460,
+            504,
+            legacy_origin_x + 3370,
+            528,
+        ),
+        fill=(102, 65, 83, 255),
+        width=4,
+    )
+    for x in range(
+        legacy_origin_x + 2500,
+        legacy_origin_x + 4180,
+        132,
+    ):
         draw.line((x, 486, x - 28, 690), fill=(61, 48, 70, 255), width=8)
-    draw.arc((3050, 470, 3510, 650), 190, 350, fill=(87, 60, 82, 255), width=4)
-    draw.arc((3320, 450, 3860, 650), 190, 350, fill=(79, 54, 76, 255), width=3)
+    draw.arc(
+        (
+            legacy_origin_x + 3050,
+            470,
+            legacy_origin_x + 3510,
+            650,
+        ),
+        190,
+        350,
+        fill=(87, 60, 82, 255),
+        width=4,
+    )
+    draw.arc(
+        (
+            legacy_origin_x + 3320,
+            450,
+            legacy_origin_x + 3860,
+            650,
+        ),
+        190,
+        350,
+        fill=(79, 54, 76, 255),
+        width=3,
+    )
 
 
 def draw_ground(draw: ImageDraw.ImageDraw, manifest: dict) -> None:
@@ -290,7 +370,12 @@ def draw_ground(draw: ImageDraw.ImageDraw, manifest: dict) -> None:
     draw.line((64, ground_y + 7, width - 64, ground_y + 7), fill=(232, 78, 173, 110), width=2)
 
     # Buried freight-road fragments.
-    for x in range(2560, 4560, 132):
+    legacy_origin_x = max(0, width - 5016)
+    for x in range(
+        legacy_origin_x + 2560,
+        legacy_origin_x + 4560,
+        132,
+    ):
         draw.rounded_rectangle(
             (x, ground_y - 7, x + 102, ground_y + 10),
             radius=2,
@@ -466,7 +551,11 @@ def draw_annotations(image: Image.Image, manifest: dict) -> None:
     text_box(
         draw,
         (24, 65),
-        "5016 × 941 // THREE 1672 PX PLATES // GROUND Y 744 // UNTIL PORTAL: NO TIMER",
+        (
+            f"{width} × {height} // "
+            f"{len(manifest['plates'])} × {coordinates['plate_width']} PX "
+            f"PLATES // GROUND Y {ground_y} // UNTIL TRANSPORT: NO TIMER"
+        ),
         outline=COLORS["blue"],
         fill=COLORS["muted"],
         size=15,
@@ -480,26 +569,36 @@ def draw_annotations(image: Image.Image, manifest: dict) -> None:
             outline=COLORS["blue"],
             size=15,
         )
-    plate_colors = (COLORS["cyan"], COLORS["amber"], COLORS["orange"])
+    plate_colors = (
+        COLORS["cyan"],
+        COLORS["amber"],
+        COLORS["orange"],
+        COLORS["magenta"],
+    )
     for index, plate in enumerate(manifest["plates"]):
         text_box(
             draw,
             (plate["x"] + 26, 112),
             f"PLATE {index + 1} // {plate['name'].upper()}",
-            outline=plate_colors[index],
+            outline=plate_colors[index % len(plate_colors)],
             size=18,
             bold=True,
         )
 
     labels = {
-        "aryn_ship": (170, 350),
-        "aryn_spawn": (946, 566),
-        "dras_ehdre": (1840, 510),
-        "dras_camp": (2060, 548),
-        "credit_terminal": (2870, 520),
-        "atmosphere_tower": (3650, 288),
-        "coreworks_portal": (4538, 362),
-        "vesper_volcano": (3970, 134),
+        "western_survey_plinth": (190, 540),
+        "trillian_wait": (550, 540),
+        "trillian_field_harness": (910, 570),
+        "sealed_salvage": (1240, 540),
+        "aryn_ship": (1842, 350),
+        "aryn_spawn": (2510, 566),
+        "dras_ehdre": (3670, 510),
+        "dras_camp": (3800, 548),
+        "credit_terminal": (4470, 520),
+        "worker_droid": (4320, 430),
+        "atmosphere_tower": (5322, 288),
+        "coreworks_portal": (6210, 362),
+        "vesper_volcano": (5642, 134),
     }
     for anchor in manifest["anchors"]:
         label_position = labels[anchor["id"]]
@@ -515,22 +614,22 @@ def draw_annotations(image: Image.Image, manifest: dict) -> None:
 
     text_box(
         draw,
-        (1350, ground_y - 44),
+        (3022, ground_y - 44),
         "SAFE JUMP LESSON",
         outline=COLORS["amber"],
         size=13,
     )
     text_box(
         draw,
-        (1824, ground_y - 202),
+        (3496, ground_y - 202),
         "DRAS DIALOGUE ZONE",
         outline=COLORS["magenta"],
         size=13,
     )
     text_box(
         draw,
-        (4590, ground_y - 238),
-        "PORTAL STARTS 08:00",
+        (6262, ground_y - 238),
+        "TRANSPORT STARTS 08:00",
         outline=COLORS["magenta"],
         size=13,
     )
@@ -625,7 +724,12 @@ def main() -> None:
     contact_sheet.save(CONTACT_SHEET_PATH, optimize=True)
     print(f"Built {GUIDE_PATH.relative_to(ROOT)}")
     print(f"Built {CONTACT_SHEET_PATH.relative_to(ROOT)}")
-    print("Validated 5016×941 world, three plates, seams, ground, anchors, and zones.")
+    coordinates = manifest["coordinate_system"]
+    print(
+        "Validated "
+        f"{coordinates['world_width']}×{coordinates['world_height']} world, "
+        f"{len(manifest['plates'])} plates, seams, ground, anchors, and zones."
+    )
 
 
 if __name__ == "__main__":

@@ -4,6 +4,75 @@
   "title": "The Shard Foundry",
   "status": "early-beta",
   "timer_seconds": 480,
+  "difficulty_contract": {
+    "target": "easy-to-medium",
+    "critical_path_target_seconds": [
+      360,
+      450
+    ],
+    "baseline_rise_max_pixels": 128,
+    "jet_assist_rise_max_pixels": 270,
+    "minimum_primary_landing_width_pixels": 170,
+    "minimum_painted_connector_width_pixels": 127,
+    "minimum_enemy_buffer_from_landing_pixels": 180,
+    "electric_cycle_seconds": 3.6,
+    "electric_live_seconds": 1.25,
+    "electric_landing_grace_seconds": 0.28,
+    "damage_rule": "No damage may begin in a room transition, mandatory landing, relay interaction, or pickup collection footprint.",
+    "recovery_rule": "Each recovery heart sits after a challenge beat and never on an ordinary room spawn."
+  },
+  "zone_plan": [
+    {
+      "zone": "Foundry",
+      "plates": [
+        0,
+        1
+      ],
+      "purpose": "Teach the full movement language, guarantee jet-assist, descend through the Breathing Chamber, and restore the first atmospheric stabilizer.",
+      "challenge_peak": "One moving bridge followed by the powered freight-lift return.",
+      "recovery": "Heart beside the restored relay."
+    },
+    {
+      "zone": "Refinery",
+      "plates": [
+        2,
+        3
+      ],
+      "purpose": "Teach the heavy rifle, clear the mandatory Vesperite lock, then require one readable Deepworks recovery.",
+      "challenge_peak": "Rifle lock followed by a single ground patrol and one short thermal-vent jump.",
+      "recovery": "Deepworks is enemy-free and contains the zone's final Signal Shard."
+    },
+    {
+      "zone": "Biolab",
+      "plates": [
+        4,
+        5
+      ],
+      "purpose": "Test timing on the electrified catwalk, combine one air threat with one ground threat, and restore the second atmospheric stabilizer.",
+      "challenge_peak": "Electrified-platform timing followed later by a separated Bastion Fragment and Seam Hunter encounter.",
+      "recovery": "Heart after the electric timing beat; optional Deepworks credit cache before the relay."
+    },
+    {
+      "zone": "Uplink",
+      "plates": [
+        6,
+        7
+      ],
+      "purpose": "Run a short armored final exam, recover the last Signal Shard, and enter the Uplink Gate.",
+      "challenge_peak": "Chitin Sentinel, then a spaced arc-leak jump and Pale Watcher guard.",
+      "recovery": "Heart on the upper route before the final plate."
+    },
+    {
+      "zone": "Deepworks",
+      "plates": [
+        3,
+        5
+      ],
+      "purpose": "Provide a quiet contrast layer with one required signal recovery and one optional economic reward.",
+      "challenge_peak": "Commit to a one-way drop, then use the guaranteed jet-assist to return.",
+      "recovery": "No enemies and no contact hazards."
+    }
+  ],
   "route": [
     {
       "phase": "orientation",
@@ -12,7 +81,7 @@
       "systems": [
         "ship traversal",
         "run and jump",
-        "pack emitter",
+        "always-equipped telescopic laser seeker",
         "shootable credit cache",
         "bursting collectible credits",
         "moving platform",
@@ -29,7 +98,7 @@
         "recovery hearts",
         "Galactic Credits",
         "Vesperite sample",
-        "jet assist",
+        "backpack jet-assist module",
         "heavy rifle",
         "three-shot Vesperite obstruction",
         "Deepworks drop-through"
@@ -56,7 +125,7 @@
         "two-hit Core Leech",
         "two-hit Vesper Flare",
         "three-hit Pale Watcher",
-        "switchable jet pack laser and heavy rifle"
+        "switchable telescopic laser seeker and heavy rifle for route clearing, bosses, and heavy combat"
       ]
     },
     {
@@ -72,11 +141,16 @@
   ],
   "population": {
     "signal_shards": 12,
+    "signal_shards_deepworks": 1,
     "recovery_hearts": 3,
     "atmospheric_relays": 2,
     "credit_caches_overworld": 1,
     "credit_caches_foundry": 2,
+    "credit_caches_deepworks": 1,
     "vesperite_obstructions": 1,
+    "static_contact_hazards": 2,
+    "electrified_platforms": 1,
+    "deepworks_entries": 2,
     "powerups": [
       "jet-assist",
       "heavy-rifle"
@@ -98,6 +172,16 @@
     ],
     "surface_return": "Uplink Gate returns Aryn to Veyra with the recovered loadout"
   },
+  "encounter_order": [
+    "Foundry Intake: Ridge Skitter on the deck; Squircle Minion on an upper observation route",
+    "Breathing Chamber: Core Leech during the descent; Clacker Beetle before the relay",
+    "Refinery Entry: Spore Wisp and Spring Fragment separated vertically around the rifle lock",
+    "Refinery Exit: Vesper Mite patrol, thermal vent, then enemy-free Deepworks recovery",
+    "Biolab Entry: Vesper Flare low and Ember Wasp high with no overlapping mandatory landing",
+    "Biolab Relay: Bastion Fragment above, Seam Hunter on the middle deck, safe relay apron at far right",
+    "Uplink Approach: Chitin Sentinel before an upper-route recovery heart",
+    "Uplink Gate: Spore Wisp high, arc leak on deck, Pale Watcher beyond it, final shard at the gate"
+  ],
   "deferred": [
     "credit economy",
     "between-level store",

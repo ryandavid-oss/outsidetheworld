@@ -1,0 +1,105 @@
+{
+  "workingName": "Seam Lurker",
+  "runtimeType": "seamLurker",
+  "status": "runtime-ready-unpopulated",
+  "productionPopulation": false,
+  "role": "ceiling patrol and future drop ambusher",
+  "source": {
+    "image": "Raw/seam-lurker-crawl-source-v1.png",
+    "manifest": "Raw/seam-lurker-crawl-source-v1.json",
+    "columns": 5,
+    "rows": 5,
+    "frameWidth": 602,
+    "frameHeight": 284,
+    "frameCount": 25,
+    "frameDurationMs": 58,
+    "orientation": "ground-facing"
+  },
+  "validation": {
+    "result": "pass-with-source-warning",
+    "edgeContactFrames": {},
+    "nearEdgeThresholdPixels": 2,
+    "nearEdgeFrames": {
+      "left": [
+        22,
+        23,
+        24
+      ],
+      "top": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24
+      ],
+      "bottom": [
+        0,
+        1,
+        2,
+        3,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24
+      ]
+    },
+    "warning": "Source silhouettes approach cell edges but do not touch them; the runtime derivative adds padding without reconstructing art."
+  },
+  "runtime": {
+    "image": "Images/Game/Super-Frgmnts/enemy-seam-lurker-crawl-sheet-v1.png",
+    "preview": "Design/Super-Frgmnts/Foundry/Enemies/Seam-Lurker/Reviews/seam-lurker-crawl-preview-v1.gif",
+    "behaviorPreview": "Design/Super-Frgmnts/Foundry/Enemies/Seam-Lurker/Reviews/seam-lurker-ceiling-preview-v1.gif",
+    "columns": 5,
+    "rows": 5,
+    "frameWidth": 128,
+    "frameHeight": 64,
+    "frameCount": 25,
+    "loopDurationMs": 1450,
+    "rendering": "nearest-neighbor",
+    "orientation": "ceiling-facing vertical normalization",
+    "anchor": "ceiling",
+    "hitboxSize": [
+      104,
+      44
+    ],
+    "drawSize": [
+      120,
+      60
+    ]
+  },
+  "behavior": {
+    "locomotion": "horizontal ceiling patrol",
+    "crawlAnimation": "ready",
+    "dropAttackAnimation": "not supplied",
+    "dropAttackBehavior": "unimplemented",
+    "spawned": false,
+    "combatBalance": "unassigned"
+  }
+}

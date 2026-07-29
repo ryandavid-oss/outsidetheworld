@@ -1,0 +1,84 @@
+{
+  "workingName": "Overworld Hawk",
+  "status": "overworld-runtime",
+  "scene": "overworld",
+  "role": "ambient sky wildlife",
+  "hostile": false,
+  "solid": false,
+  "targetable": false,
+  "source": {
+    "image": "Raw/overworld-hawk-flight-source-v1.png",
+    "manifest": "Raw/overworld-hawk-flight-source-v1.json",
+    "columns": 5,
+    "rows": 5,
+    "frameWidth": 536,
+    "frameHeight": 608,
+    "frameCount": 25,
+    "frameDurationMs": 58
+  },
+  "validation": {
+    "result": "pass-with-source-warning",
+    "edgeContactFrames": {
+      "bottom": [
+        12,
+        13
+      ]
+    },
+    "note": "Frames 12 and 13 touch the supplied cell's bottom edge. Runtime padding prevents additional clipping but cannot reconstruct source pixels."
+  },
+  "runtime": {
+    "image": "Images/Game/Super-Frgmnts/overworld-hawk-flight-sheet-v1.png",
+    "preview": "Design/Super-Frgmnts/Overworld/Phase-3/Sky-Wildlife/Hawk-Ludo/Reviews/overworld-hawk-flight-preview-v1.gif",
+    "columns": 5,
+    "rows": 5,
+    "frameWidth": 144,
+    "frameHeight": 112,
+    "atlasFrameCount": 25,
+    "playbackFrameCount": 16,
+    "playbackSequence": [
+      5,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      22,
+      24
+    ],
+    "loopDurationMs": 928,
+    "contentSize": [
+      97,
+      104
+    ],
+    "rendering": "nearest-neighbor",
+    "anchor": "center",
+    "loopTuning": "Near-duplicate wings-up holds at the source loop boundary are omitted for an even flap cadence."
+  },
+  "behavior": {
+    "direction": "alternates between right-to-left and left-to-right",
+    "directionPattern": "alternate after every completed pass",
+    "westernAssignmentGuidance": "When an unfinished Western Signal Flats assignment is on screen, the hawk shifts from a sky pass into a non-blocking guide-circle centered above that assignment.",
+    "guideTargets": [
+      "survey-echo",
+      "recover-trillian",
+      "field-harness",
+      "sealed-salvage"
+    ],
+    "maxConcurrent": 1,
+    "speedPixelsPerSecond": 80,
+    "passGapPixels": 1400,
+    "screenAltitude": 150,
+    "altitudeDrift": 18,
+    "collision": false,
+    "friendlySeekerSafety": true,
+    "reducedMotion": "static flight pose"
+  }
+}

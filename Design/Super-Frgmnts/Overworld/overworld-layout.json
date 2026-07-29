@@ -1,6 +1,6 @@
 {
-  "version": 2,
-  "status": "phase-1-composition-blueprint",
+  "version": 3,
+  "status": "four-plate-overworld-runtime",
   "scene": {
     "id": "coreworks_overworld",
     "name": "Coreworks Overworld",
@@ -9,13 +9,14 @@
   "coordinate_system": {
     "origin": "top-left",
     "units": "pixels",
-    "world_width": 5016,
+    "world_width": 6688,
     "world_height": 941,
     "plate_width": 1672,
     "plate_height": 941,
     "plate_seams_x": [
       1672,
-      3344
+      3344,
+      5016
     ],
     "ground_y": 744,
     "player_draw_width": 112,
@@ -23,23 +24,30 @@
   },
   "plates": [
     {
+      "id": "western_signal_flats",
+      "name": "Western Signal Flats",
+      "x": 0,
+      "width": 1672,
+      "story_function": "Optional untimed survey route with Signal Sweep, Trillian recovery, the field harness, and sealed salvage"
+    },
+    {
       "id": "landing_flats",
       "name": "Landing Flats",
-      "x": 0,
+      "x": 1672,
       "width": 1672,
       "story_function": "Solitary arrival, Aryn's ship, safe movement, and the first voluntary journey into the world"
     },
     {
       "id": "dras_outpost",
       "name": "Dras Outpost",
-      "x": 1672,
+      "x": 3344,
       "width": 1672,
       "story_function": "Discovery of Dras Ehdre, his lived-in base camp, the abandoned exchange, and the human cost of the collapse"
     },
     {
       "id": "coreworks_threshold",
       "name": "Coreworks Threshold",
-      "x": 3344,
+      "x": 5016,
       "width": 1672,
       "story_function": "Failed atmospheric infrastructure, volcanic threat, and the Coreworks portal"
     }
@@ -48,7 +56,7 @@
     "viewport_width": 1672,
     "viewport_height": 941,
     "min_x": 0,
-    "max_x": 3344,
+    "max_x": 5016,
     "vertical_pan": false,
     "notes": "The overworld is intentionally one screen high. The camera scrolls horizontally across one continuous panorama."
   },
@@ -56,16 +64,16 @@
     {
       "id": "desert_floor",
       "type": "solid",
-      "x": 64,
+      "x": 48,
       "y": 744,
-      "width": 4888,
+      "width": 6592,
       "height": 197,
       "art_contract": "Continuous walkable desert and buried freight-road surface"
     },
     {
       "id": "tutorial_rock",
       "type": "solid",
-      "x": 1376,
+      "x": 3048,
       "y": 680,
       "width": 168,
       "height": 64,
@@ -82,7 +90,7 @@
     {
       "id": "right_world_bound",
       "type": "invisible-wall",
-      "x": 4952,
+      "x": 6624,
       "y": 0,
       "width": 16,
       "height": 941
@@ -90,10 +98,54 @@
   ],
   "anchors": [
     {
+      "id": "western_survey_plinth",
+      "label": "Survey echo plinth",
+      "role": "optional-assignment",
+      "x": 330,
+      "y": 682,
+      "width": 64,
+      "height": 62,
+      "z_layer": "hero-props",
+      "notes": "Unlocks Signal Sweep and awards one Galactic Credit."
+    },
+    {
+      "id": "trillian_wait",
+      "label": "Trillian",
+      "role": "optional-companion-recovery",
+      "x": 690,
+      "y": 661,
+      "width": 96,
+      "height": 83,
+      "z_layer": "actors",
+      "notes": "Separate from Jane. Non-solid, non-hostile, and surface-only."
+    },
+    {
+      "id": "trillian_field_harness",
+      "label": "Trillian field harness",
+      "role": "optional-ability-unlock",
+      "x": 1080,
+      "y": 710,
+      "width": 86,
+      "height": 34,
+      "z_layer": "hero-props",
+      "notes": "Unlocks powered launch and the noncombat salvage breach."
+    },
+    {
+      "id": "sealed_salvage",
+      "label": "Sealed western salvage",
+      "role": "optional-assignment",
+      "x": 1430,
+      "y": 692,
+      "width": 108,
+      "height": 52,
+      "z_layer": "hero-props",
+      "notes": "Requires Trillian's field harness and awards five Galactic Credits."
+    },
+    {
       "id": "aryn_ship",
       "label": "Aryn's ship",
       "role": "decorative-overlay",
-      "x": 176,
+      "x": 1848,
       "y": 392,
       "width": 792,
       "height": 344,
@@ -104,7 +156,7 @@
       "id": "aryn_spawn",
       "label": "Aryn Sol-Mavi",
       "role": "player-spawn",
-      "x": 1000,
+      "x": 2188,
       "y": 632,
       "width": 112,
       "height": 112,
@@ -114,7 +166,7 @@
       "id": "dras_ehdre",
       "label": "Dras Ehdre",
       "role": "npc",
-      "x": 1952,
+      "x": 3904,
       "y": 640,
       "width": 96,
       "height": 104,
@@ -125,7 +177,7 @@
       "id": "dras_camp",
       "label": "Dras's camp",
       "role": "decorative-prop-cluster",
-      "x": 2100,
+      "x": 3772,
       "y": 610,
       "width": 344,
       "height": 134,
@@ -136,17 +188,28 @@
       "id": "credit_terminal",
       "label": "Abandoned credit terminal",
       "role": "future-interactive",
-      "x": 2960,
+      "x": 4632,
       "y": 600,
       "width": 180,
       "height": 144,
       "z_layer": "hero-props"
     },
     {
+      "id": "worker_droid",
+      "label": "Worker Droid",
+      "role": "ambient-friendly-npc",
+      "x": 4524,
+      "y": 592,
+      "width": 126,
+      "height": 122,
+      "z_layer": "actors",
+      "notes": "Non-solid and non-hostile. Drifts above the Outpost ground and periodically descends into a dust-producing maintenance cycle near the abandoned credit terminal."
+    },
+    {
       "id": "atmosphere_tower",
       "label": "Failed atmosphere tower",
       "role": "narrative-landmark",
-      "x": 3784,
+      "x": 5456,
       "y": 356,
       "width": 230,
       "height": 388,
@@ -156,7 +219,7 @@
       "id": "coreworks_portal",
       "label": "Coreworks portal",
       "role": "scene-exit",
-      "x": 4640,
+      "x": 6312,
       "y": 432,
       "width": 288,
       "height": 312,
@@ -167,7 +230,7 @@
       "id": "vesper_volcano",
       "label": "Vesper volcano",
       "role": "far-background-landmark",
-      "x": 3900,
+      "x": 5572,
       "y": 170,
       "width": 700,
       "height": 480,
@@ -177,9 +240,47 @@
   ],
   "interaction_zones": [
     {
+      "id": "western_survey_echo",
+      "type": "optional-assignment",
+      "x": 218,
+      "y": 544,
+      "width": 224,
+      "height": 200,
+      "prompt": "Trace survey echo",
+      "reward": "Signal Sweep + 1 Galactic Credit"
+    },
+    {
+      "id": "recover_trillian",
+      "type": "optional-companion-recovery",
+      "x": 578,
+      "y": 544,
+      "width": 224,
+      "height": 200,
+      "prompt": "Call Trillian"
+    },
+    {
+      "id": "fit_field_harness",
+      "type": "optional-ability-unlock",
+      "x": 968,
+      "y": 544,
+      "width": 224,
+      "height": 200,
+      "prompt": "Fit field harness"
+    },
+    {
+      "id": "breach_sealed_salvage",
+      "type": "optional-assignment",
+      "x": 1318,
+      "y": 544,
+      "width": 224,
+      "height": 200,
+      "prompt": "Breach sealed salvage",
+      "reward": "5 Galactic Credits"
+    },
+    {
       "id": "dras_dialogue",
       "type": "proximity-dialogue",
-      "x": 1824,
+      "x": 3496,
       "y": 560,
       "width": 344,
       "height": 184,
@@ -189,16 +290,27 @@
     {
       "id": "credit_terminal_future",
       "type": "future-shop",
-      "x": 2904,
+      "x": 4576,
       "y": 544,
       "width": 292,
       "height": 200,
       "enabled_in_phase": false
     },
     {
+      "id": "service_worker_droid",
+      "type": "optional-assignment",
+      "x": 4412,
+      "y": 520,
+      "width": 224,
+      "height": 224,
+      "prompt": "Service worker droid",
+      "prerequisite": "Dras first contact",
+      "reward": "2 Galactic Credits"
+    },
+    {
       "id": "portal_transition",
       "type": "scene-transition",
-      "x": 4712,
+      "x": 6384,
       "y": 520,
       "width": 152,
       "height": 224,
@@ -278,50 +390,89 @@
       "id": "camp_life",
       "implementation": "Worker banner, wind chime, kettle vapor, and radio-static pulse",
       "intensity": "charm"
+    },
+    {
+      "id": "worker_droid",
+      "implementation": "Slow horizontal hover drift with a clean manipulation loop and periodic low-hover service animation",
+      "intensity": "character"
+    },
+    {
+      "id": "overworld_hawk",
+      "implementation": "Alternating sky passes plus a guide-circle over the next unfinished Western Signal Flats assignment",
+      "intensity": "character"
+    },
+    {
+      "id": "trillian",
+      "implementation": "Unarmored and armored follow loops, powered jump launch with physics arc, and noncombat salvage breach",
+      "intensity": "character"
     }
   ],
   "story_beats": [
     {
       "order": 1,
-      "x": 1000,
-      "beat": "Aryn arrives beside her ship. The scene is safe and untimed."
+      "x": 330,
+      "beat": "Aryn can travel west to trace a survey echo and unlock Signal Sweep."
     },
     {
       "order": 2,
-      "x": 1376,
-      "beat": "A single low obstacle quietly confirms movement and jumping while the empty horizon invites Aryn to continue right."
+      "x": 690,
+      "beat": "Aryn recovers Trillian as an optional non-solid surface companion."
     },
     {
       "order": 3,
-      "x": 1952,
-      "beat": "After leaving the landing site, Aryn discovers Dras and his base camp. He explains Vesperite, the infestation, the abandoned workforce, and the Coreworks."
+      "x": 1080,
+      "beat": "The field harness changes Trillian's gait and unlocks powered traversal."
     },
     {
       "order": 4,
-      "x": 2960,
-      "beat": "The abandoned exchange makes the economic collapse visible before it is described as a game system."
+      "x": 1430,
+      "beat": "Trillian breaches sealed salvage without entering a combat or damage state."
     },
     {
       "order": 5,
-      "x": 3784,
-      "beat": "Failed atmospheric infrastructure foreshadows the toxic timer."
+      "x": 2188,
+      "beat": "Aryn arrives beside her ship. The scene is safe and untimed, and either direction is open."
     },
     {
       "order": 6,
-      "x": 4712,
+      "x": 3048,
+      "beat": "A single low obstacle quietly confirms movement and jumping while the rightward story route remains clear."
+    },
+    {
+      "order": 7,
+      "x": 3904,
+      "beat": "Aryn discovers Dras and his base camp. He explains Vesperite, the infestation, the abandoned workforce, and the Coreworks."
+    },
+    {
+      "order": 8,
+      "x": 4524,
+      "beat": "The worker droid offers an optional service assignment after Dras clears first contact."
+    },
+    {
+      "order": 9,
+      "x": 5456,
+      "beat": "Failed atmospheric infrastructure foreshadows the toxic timer."
+    },
+    {
+      "order": 10,
+      "x": 6384,
       "beat": "Aryn enters the Coreworks portal; the eight-minute mission begins."
     }
   ],
   "art_contract": {
     "master_panorama": {
-      "width": 5016,
+      "width": 6688,
       "height": 941,
-      "instruction": "Create as one continuous panorama before splitting at x=1672 and x=3344."
+      "instruction": "Treat the four plates as one continuous panorama split at x=1672, x=3344, and x=5016."
     },
-    "split_rule": "No foreground hero prop or interaction zone may straddle x=1672 or x=3344. Mountains, sky, clouds, and distant ruins may cross both seams continuously.",
+    "split_rule": "No foreground hero prop or interaction zone may straddle x=1672, x=3344, or x=5016. Mountains, sky, clouds, and distant ruins may cross seams continuously.",
     "separate_transparent_assets": [
       "Aryn's ship",
       "Dras Ehdre",
+      "Jane",
+      "Trillian",
+      "worker droid",
+      "overworld hawk",
       "Dras's camp accents",
       "credit terminal",
       "Coreworks portal",

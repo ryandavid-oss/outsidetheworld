@@ -1,0 +1,49 @@
+{
+  "workingName": "Sova",
+  "runtimeType": "sova",
+  "status": "runtime-ready-unpopulated",
+  "productionPopulation": false,
+  "role": "low armored ground crawler",
+  "source": {
+    "image": "Raw/sova-source-v1.png",
+    "manifest": "Raw/sova-source-v1.json",
+    "columns": 6,
+    "rows": 6,
+    "frameWidth": 640,
+    "frameHeight": 400,
+    "frameCount": 36,
+    "frameDurationMs": 42
+  },
+  "validation": {
+    "result": "pass",
+    "edgeContactFrames": {}
+  },
+  "runtime": {
+    "image": "Images/Game/Super-Frgmnts/enemy-sova-crawl-sheet-v1.png",
+    "preview": "Design/Super-Frgmnts/Foundry/Enemies/Sova/Reviews/sova-crawl-preview-v1.gif",
+    "columns": 6,
+    "rows": 6,
+    "frameWidth": 128,
+    "frameHeight": 80,
+    "frameCount": 36,
+    "loopDurationMs": 1512,
+    "rendering": "nearest-neighbor",
+    "contentSize": [
+      120,
+      63
+    ],
+    "anchor": "ground",
+    "hitboxSize": [
+      92,
+      48
+    ],
+    "drawSize": [
+      116,
+      72
+    ]
+  },
+  "behavior": {
+    "locomotion": "ground patrol",
+    "spawned": false
+  }
+}

@@ -1,0 +1,147 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1672" height="941" viewBox="0 0 1672 941" role="img" aria-labelledby="title desc">
+  <title id="title">RD-42 ship interior wireframe v1</title>
+  <desc id="desc">A precise one-plate layout showing the cockpit, central dorsal-hatch airlock, habitation and pack bench, cargo and engineering bay, interaction radii, and main deck.</desc>
+  <defs>
+    <linearGradient id="void" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#050817"/>
+      <stop offset="1" stop-color="#0c0d20"/>
+    </linearGradient>
+    <linearGradient id="shell" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#171a36"/>
+      <stop offset="0.52" stop-color="#241b3d"/>
+      <stop offset="1" stop-color="#11192f"/>
+    </linearGradient>
+    <pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse">
+      <path d="M100 0H0V100" fill="none" stroke="#7aa3c8" stroke-opacity=".08" stroke-width="1"/>
+    </pattern>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <style>
+      .label { font-family: "Fira Code", "SFMono-Regular", Consolas, monospace; fill: #e7f4ff; }
+      .muted { fill: #93a7bf; }
+      .cyan { fill: #58f5df; }
+      .gold { fill: #ffd36c; }
+      .pink { fill: #ff77b7; }
+      .small { font-size: 18px; }
+      .body { font-size: 21px; }
+      .zone { font-size: 24px; font-weight: 700; letter-spacing: 1px; }
+      .title { font-size: 34px; font-weight: 800; letter-spacing: 1.4px; }
+      .coord { font-size: 16px; fill: #8192aa; }
+      .hairline { stroke: #89aac6; stroke-opacity: .42; stroke-width: 2; }
+      .dash { stroke-dasharray: 9 8; }
+    </style>
+  </defs>
+
+  <rect width="1672" height="941" fill="url(#void)"/>
+  <rect width="1672" height="941" fill="url(#grid)"/>
+
+  <text x="66" y="70" class="label title">RD-42 // INTERIOR WIREFRAME v1</text>
+  <text x="68" y="105" class="label body muted">Logical plate 1672 × 941  •  playable shell x220–1452  •  deck y744</text>
+
+  <path d="M220 744 L236 436 Q241 331 314 286 Q377 248 508 244 L590 244 Q623 214 684 214 Q745 214 778 244 L1162 244 Q1312 247 1392 319 Q1444 366 1452 468 L1452 744 L1418 840 L254 840 Z"
+        fill="url(#shell)" stroke="#58f5df" stroke-width="4"/>
+  <path d="M242 744 L258 454 Q266 359 332 319 Q388 285 510 282 L1160 282 Q1289 286 1360 347 Q1406 388 1414 478 L1428 744"
+        fill="none" stroke="#7585c7" stroke-opacity=".58" stroke-width="3"/>
+
+  <path d="M220 744H1452L1418 840H254Z" fill="#101527" stroke="#7585c7" stroke-width="3"/>
+  <path d="M244 744H1428" stroke="#ffd36c" stroke-width="5"/>
+  <text x="736" y="786" class="label body gold">MAIN DECK // y744</text>
+
+  <path d="M220 744L236 436Q241 331 314 286L548 282V744Z" fill="#163655" fill-opacity=".52"/>
+  <rect x="548" y="282" width="272" height="462" fill="#155261" fill-opacity=".42"/>
+  <rect x="820" y="282" width="310" height="462" fill="#562d52" fill-opacity=".34"/>
+  <path d="M1130 282H1160Q1289 286 1360 347Q1406 388 1414 478L1428 744H1130Z" fill="#66511d" fill-opacity=".30"/>
+
+  <path d="M548 282V744M820 282V744M1130 282V744" class="hairline dash" fill="none"/>
+  <text x="286" y="338" class="label zone cyan">COCKPIT</text>
+  <text x="610" y="338" class="label zone cyan">AIRLOCK</text>
+  <text x="858" y="338" class="label zone pink">HAB + PACK</text>
+  <text x="1170" y="338" class="label zone gold">CARGO + ENGINEERING</text>
+
+  <path d="M270 414Q325 337 396 350L396 518Q329 508 278 548Z" fill="#0a182c" stroke="#58f5df" stroke-width="3"/>
+  <path d="M286 430Q329 378 376 382V486Q331 482 296 510Z" fill="#236d83" fill-opacity=".46"/>
+  <text x="284" y="575" class="label small">forward canopy</text>
+
+  <rect x="318" y="620" width="90" height="88" rx="8" fill="#131a30" stroke="#58f5df" stroke-width="3"/>
+  <path d="M337 648H390M337 666H378" stroke="#58f5df" stroke-width="4"/>
+  <text x="305" y="718" class="label small cyan">local index</text>
+
+  <path d="M435 566Q486 566 496 624V716H417V625Q419 580 435 566Z" fill="#24294b" stroke="#8493d7" stroke-width="3"/>
+  <path d="M439 612H480V692H434Z" fill="#11172c"/>
+  <text x="411" y="548" class="label small muted">flight cradle</text>
+
+  <path d="M624 272V248Q624 218 654 214H714Q744 218 744 248V272Z" fill="#0d2635" stroke="#58f5df" stroke-width="4" filter="url(#glow)"/>
+  <path d="M684 216V272" stroke="#58f5df" stroke-width="3"/>
+  <text x="603" y="194" class="label small cyan">DORSAL HATCH</text>
+  <path d="M650 294V604M718 294V604" stroke="#7585c7" stroke-width="8" stroke-linecap="round"/>
+  <path d="M650 348H718M650 420H718M650 492H718M650 564H718" stroke="#7585c7" stroke-width="4"/>
+
+  <circle cx="684" cy="666" r="24" fill="#58f5df" fill-opacity=".18" stroke="#58f5df" stroke-width="3"/>
+  <path d="M684 540V632" stroke="#58f5df" stroke-width="5"/>
+  <path d="M672 560L684 578L696 560M672 592L684 610L696 592" fill="none" stroke="#58f5df" stroke-width="4"/>
+  <text x="623" y="640" class="label small">Aryn entry</text>
+
+  <rect x="756" y="458" width="48" height="230" rx="8" fill="#171c34" stroke="#7585c7" stroke-width="3"/>
+  <path d="M768 498H792M768 540H792M768 582H792" stroke="#ff77b7" stroke-width="4"/>
+  <text x="742" y="714" class="label coord">hardpoint</text>
+
+  <rect x="850" y="438" width="144" height="158" rx="8" fill="#1d1730" stroke="#ff77b7" stroke-opacity=".68" stroke-width="3"/>
+  <path d="M864 470H980M864 498H952" stroke="#a877b0" stroke-width="3"/>
+  <text x="870" y="530" class="label small">fold-down bunk</text>
+
+  <rect x="840" y="646" width="96" height="86" rx="18" fill="#231c36" stroke="#d99ac0" stroke-width="3"/>
+  <path d="M855 695Q888 664 920 695" fill="none" stroke="#d99ac0" stroke-width="3"/>
+  <text x="829" y="624" class="label small muted">Trillian berth</text>
+
+  <rect x="994" y="532" width="90" height="178" rx="8" fill="#171b31" stroke="#ff77b7" stroke-width="3"/>
+  <circle cx="1039" cy="584" r="20" fill="#572b69" stroke="#58f5df" stroke-width="3"/>
+  <path d="M1015 630H1063M1015 652H1050M1015 674H1067" stroke="#58f5df" stroke-width="4"/>
+  <text x="986" y="510" class="label small pink">pack bench</text>
+
+  <rect x="962" y="732" width="124" height="24" fill="#0c1020" stroke="#8493d7" stroke-width="2" stroke-dasharray="7 5"/>
+  <text x="942" y="820" class="label coord">sealed future service panel</text>
+
+  <rect x="1166" y="418" width="166" height="286" rx="8" fill="#181a2c" stroke="#ffd36c" stroke-width="3"/>
+  <path d="M1190 452H1308M1190 512H1308M1190 580H1308M1190 670H1308" stroke="#725f36" stroke-width="4"/>
+  <rect x="1238" y="608" width="72" height="64" rx="8" fill="#30243c" stroke="#58f5df" stroke-width="4" filter="url(#glow)"/>
+  <path d="M1252 626H1296V654H1252Z" fill="#172b3c" stroke="#ffd36c" stroke-width="3"/>
+  <text x="1198" y="398" class="label small gold">keyed cargo rack</text>
+  <text x="1208" y="700" class="label small cyan">SERVICE KIT</text>
+
+  <path d="M1334 386H1410V710H1334Z" fill="#10192a" stroke="#7585c7" stroke-width="3"/>
+  <path d="M1352 420H1392V478H1352ZM1352 508H1392V565H1352ZM1352 596H1392V672H1352Z" fill="#1f5862" stroke="#58f5df" stroke-width="2"/>
+  <circle cx="1372" cy="448" r="8" fill="#58f5df"/>
+  <circle cx="1372" cy="536" r="8" fill="#ff77b7"/>
+  <circle cx="1372" cy="624" r="8" fill="#58f5df"/>
+  <text x="1328" y="366" class="label small muted">engineering wall</text>
+
+  <circle cx="386" cy="676" r="86" fill="none" stroke="#58f5df" stroke-opacity=".55" stroke-width="3" stroke-dasharray="10 8"/>
+  <circle cx="684" cy="676" r="78" fill="none" stroke="#58f5df" stroke-opacity=".55" stroke-width="3" stroke-dasharray="10 8"/>
+  <circle cx="1026" cy="676" r="82" fill="none" stroke="#ff77b7" stroke-opacity=".55" stroke-width="3" stroke-dasharray="10 8"/>
+  <circle cx="1274" cy="652" r="92" fill="none" stroke="#ffd36c" stroke-opacity=".7" stroke-width="3" stroke-dasharray="10 8"/>
+
+  <text x="288" y="850" class="label coord">x220</text>
+  <text x="517" y="850" class="label coord">x548</text>
+  <text x="790" y="850" class="label coord">x820</text>
+  <text x="1092" y="850" class="label coord">x1130</text>
+  <text x="1398" y="850" class="label coord">x1452</text>
+  <path d="M220 856H1452" stroke="#8192aa" stroke-width="2"/>
+  <path d="M220 848V864M548 848V864M820 848V864M1130 848V864M1452 848V864" stroke="#8192aa" stroke-width="2"/>
+
+  <g transform="translate(70 892)">
+    <circle cx="0" cy="0" r="8" fill="none" stroke="#58f5df" stroke-width="3"/>
+    <text x="18" y="6" class="label small muted">optional interaction</text>
+    <circle cx="274" cy="0" r="8" fill="none" stroke="#ffd36c" stroke-width="3"/>
+    <text x="292" y="6" class="label small muted">mandatory objective</text>
+    <rect x="590" y="-9" width="18" height="18" fill="#58f5df" fill-opacity=".25" stroke="#58f5df" stroke-width="2"/>
+    <text x="620" y="6" class="label small muted">airlock / entry</text>
+    <path d="M835 0H881" stroke="#ffd36c" stroke-width="5"/>
+    <text x="895" y="6" class="label small muted">walkable deck</text>
+    <text x="1202" y="6" class="label small cyan">DESIGN ONLY // NOT RUNTIME</text>
+  </g>
+</svg>

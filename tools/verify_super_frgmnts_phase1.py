@@ -61,7 +61,7 @@ def main() -> None:
         "The signal initializer is not layered before the title scene",
     )
     require(
-        source.index("setAudioScene(scene);") <
+        source.index('setAudioScene(isWound ? "foundry" : scene);') <
         source.index("resetGame(true);", source.index("function configureEpisodeScene")),
         "Scene audio must switch before the new mission begins",
     )

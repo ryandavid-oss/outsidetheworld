@@ -344,16 +344,16 @@ def main() -> None:
                 "source master only; curated into an isolated rifle preview"
             ),
             "reason": (
-                "The pack-mounted seeking blaster remains the production "
-                "default. The conventional rifle is now evaluated separately "
-                "as a temporary heavy-weapon pickup."
+                "The backpack telescopic laser seeker remains the production "
+                "default. The conventional rifle is evaluated separately as "
+                "a special weapon for route clearing, bosses, and heavy combat."
             ),
         },
         "notes": [
             "All runtime frames are baseline-normalized to prevent source drift.",
             "Light and heavy impacts alternate across non-lethal contacts.",
             "The death sequence is reserved for health depletion.",
-            "Pack-blaster firing remains compatible with running and jumping.",
+            "Telescopic laser seeker firing remains compatible with running and jumping.",
             "Production animation remains unchanged unless aryn=ludo is present.",
         ],
     }

@@ -115,7 +115,11 @@ def main() -> int:
     ground_y = int(
         number(
             game_source,
-            r"var GROUND_Y = overworldPreview \? \d+ : expansionPreview \? (\d+) : \d+;",
+            r"var GROUND_Y =\s*"
+            r"overworldPreview(?:\s*\|\|\s*shipInteriorPreview)?"
+            r"\s*\?\s*\d+\s*:\s*"
+            r"woundBossPreview\s*\?\s*\d+\s*:\s*"
+            r"expansionPreview\s*\?\s*(\d+)\s*:\s*\d+;",
             "expanded GROUND_Y",
         )
     )
@@ -128,7 +132,8 @@ def main() -> int:
     )
     velocity = number(
         game_source,
-        r"player\.vy = inDeepworks \? -\d+ : -(\d+);",
+        r"if \(jumpBuffer > 0 && coyoteTime > 0\) \{\s+"
+        r"player\.vy = -(\d+);",
         "normal jump velocity",
     )
     gravity = number(game_source, r"player\.vy \+= (\d+) \* delta;", "gravity")
