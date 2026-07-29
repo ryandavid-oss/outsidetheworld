@@ -35,6 +35,11 @@ def main() -> None:
     manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
     level_design = LEVEL_DESIGN.read_text(encoding="utf-8")
 
+    require(manifest["release"] == "beta-2", "Release is not Beta 2")
+    require(
+        manifest["status"] == "beta-2-production",
+        "Beta 2 is not marked for production",
+    )
     require(manifest["timer_seconds"] == 480, "Beta timer is not eight minutes")
     difficulty = manifest["difficulty_contract"]
     require(
@@ -44,6 +49,10 @@ def main() -> None:
     require(
         difficulty["baseline_rise_max_pixels"] == 128,
         "Baseline platform-rise contract drifted",
+    )
+    require(
+        difficulty["minimum_powerup_item_separation_pixels"] == 240,
+        "Power-up separation contract drifted",
     )
     require(
         difficulty["electric_cycle_seconds"] == 3.6
@@ -68,6 +77,15 @@ def main() -> None:
         "Deepworks entry count drifted",
     )
     require(
+        manifest["population"]["credit_caches_overworld"] == 0,
+        "Overworld tutorial cache was not removed",
+    )
+    require(
+        manifest["population"]["enemy_count"] == 16
+        and manifest["population"]["chitin_sentinel_count"] == 7,
+        "Production enemy population drifted",
+    )
+    require(
         manifest["population"]["static_contact_hazards"] == 2
         and manifest["population"]["electrified_platforms"] == 1,
         "Hazard population drifted",
@@ -83,14 +101,10 @@ def main() -> None:
         'var isFoundry = scene === "foundry";',
         "episodeBetaRun = isFoundry;",
         "woundBossPreview = isWound;",
-        "episodeArrivalTutorial =\n                    isOverworld && !episodeSurfaceReturn;",
+        "episodeArrivalTutorial = false;",
         "TOTAL_SHARDS = isFoundry",
         '.concat(["creditCoin", "creditCrate"])',
         ".concat(episodeBetaAssetKeys)",
-        "FIELD CALIBRATION // FIRE ON CREDIT CACHE",
-        "CROSS CALIBRATION CATWALKS // BOARD TRANSPORT",
-        "FIRE → RECOVER CREDITS",
-        "LIVE // WAIT",
         "function openCreditCrate(crate)",
         "creditCoins.push({",
         "persistEpisodeCredits();",
@@ -123,8 +137,13 @@ def main() -> None:
         "canvas.dataset.deepworksShards",
         "canvas.dataset.requiredRouteLocks",
         "function makeEpisodeBetaEnemies()",
-        'makeEnemy(\n                    "wasp"',
-        'makeEnemy(\n                    "gaunt"',
+        '["wasp", WIDTH * 4 + 780',
+        '["gaunt", WIDTH * 5 + 500',
+        'canvas.dataset.betaSentinelCount = "7";',
+        '"spore-wisp,clacker-beetle,ridge-skitter"',
+        "foundryPlatformModule: {",
+        "function beginEpisodeApproach()",
+        "function beginWoundDescentBridge()",
         "function toggleWeaponMode()",
         "function beginEpisodeWoundTransition()",
         "function returnToSurfaceAfterMission()",
@@ -140,8 +159,8 @@ def main() -> None:
         "Runtime does not include the twelve-shard population",
     )
     require(
-        source.count("makeCreditCrate(") >= 4,
-        "Runtime does not include tutorial and Foundry credit caches",
+        source.count("makeCreditCrate(") >= 2,
+        "Runtime does not include the two Foundry credit caches",
     )
     require(
         "body.is-overworld-preview:not(.is-arrival-tutorial) "
@@ -163,12 +182,13 @@ def main() -> None:
         require(token in level_design, f"Missing level-design contract: {token}")
 
     print("SUPER FRGMNTS Episode 01 early beta: PASS")
-    print("- title, overworld tutorial, and Foundry run share one in-page route")
-    print("- tutorial credits burst physically and carry through the transport")
+    print("- title, atmospheric arrival, Overworld, and Foundry share one in-page route")
+    print("- Overworld tutorial platforms, cache, and prompts are disabled")
     print("- Foundry contains pickups, caches, relays, shards, and obstruction")
     print("- moving and forgiving electrified-platform lessons are present")
     print("- Deepworks has one required shard route and one optional cache route")
-    print("- room links, relay aprons, and recovery placements use safe buffers")
+    print("- power-ups, room links, relay aprons, and recovery placements use safe buffers")
+    print("- seven Chitin Sentinels establish the recurring encounter grammar")
     print("- telescopic laser seeker remains available on every Overworld route")
     print("- the Uplink checkpoint requires twelve shards, two relays, and the rifle lock")
 

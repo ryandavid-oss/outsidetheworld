@@ -52,11 +52,9 @@ def main() -> None:
     assert animations["drift"]["validation"]["edgeContactFrames"]["top"]
     assert animations["service"]["validation"]["edgeContactFrames"]["left"]
     assert animations["service"]["validation"]["edgeContactFrames"]["right"]
-    assignment = manifest["behavior"]["optionalAssignment"]
-    assert assignment["id"] == "service-worker-droid"
-    assert assignment["worldX"] == 4524
-    assert assignment["prerequisite"] == "Dras first contact"
-    assert assignment["rewardCredits"] == 2
+    assert manifest["behavior"]["optionalAssignment"] is None
+    assert manifest["behavior"]["discoveryHook"] is False
+    assert manifest["behavior"]["renderScale"] == 0.7
 
     for animation in animations.values():
         verify_atlas(ROOT / animation["runtime"]["image"])
@@ -72,10 +70,12 @@ def main() -> None:
         "function drawWorkerDroid()",
         'state: "drift"',
         'id: "worker-droid"',
-        'workerDroid.state = "service"',
         'canvas.dataset.workerDroidHostile = "false"',
-        'id: "service-worker-droid"',
-        "OUTPOST_DROID_ASSIGNMENT_X",
+        'canvas.dataset.workerDroidRole =',
+        '"ambient-maintenance"',
+        'canvas.dataset.workerDroidScale = "0.70";',
+        "var WORKER_DROID_DRAW_WIDTH = 88;",
+        "var WORKER_DROID_DRAW_HEIGHT = 85;",
     )
     for fragment in required_fragments:
         assert fragment in SOURCE, (
@@ -85,11 +85,14 @@ def main() -> None:
     assert 'makeEnemy("workerDroid"' not in SOURCE
     assert "enemies.push(workerDroid)" not in SOURCE
     assert 'enemy.type === "workerDroid"' not in SOURCE
+    assert 'id: "service-worker-droid"' not in SOURCE
+    assert "OUTPOST_DROID_ASSIGNMENT_X" not in SOURCE
 
     print("SUPER FRGMNTS Overworld worker droid: PASS")
     print("- two validated 25-frame animation states")
     print("- drift and periodic low-hover service behavior registered")
-    print("- Dras-cleared optional service assignment awards two credits")
+    print("- 70% render scale keeps the droid subordinate to the player")
+    print("- no discovery hook, prompt, reward, or service assignment")
     print("- friendly, non-solid, absent from every enemy system")
     print("- both 720x700 runtime atlases include transparent padding")
 

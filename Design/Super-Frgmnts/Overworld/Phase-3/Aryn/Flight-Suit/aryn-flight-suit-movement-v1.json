@@ -1,0 +1,144 @@
+{
+  "asset": "Aryn Sol-Mavi flight-suit movement",
+  "status": "normalized and integrated for persistent RD-42 movement",
+  "sequences": {
+    "run": {
+      "source": {
+        "image": "Design/Super-Frgmnts/Overworld/Phase-3/Aryn/Flight-Suit/Raw/aryn-flight-suit-run-source-v1.png",
+        "metadata": "Design/Super-Frgmnts/Overworld/Phase-3/Aryn/Flight-Suit/Raw/aryn-flight-suit-run-source-v1.json",
+        "frame_size": [
+          316,
+          626
+        ],
+        "grid": [
+          6,
+          6
+        ],
+        "frame_count": 36,
+        "frame_duration_ms": 78,
+        "total_duration_ms": 2808
+      },
+      "runtime": {
+        "image": "Images/Game/Super-Frgmnts/aryn-flight-suit-run-runtime-v1.png",
+        "frame_size": [
+          112,
+          112
+        ],
+        "atlas_size": [
+          672,
+          672
+        ],
+        "grid": [
+          6,
+          6
+        ],
+        "normalized_source_size": [
+          51,
+          100
+        ],
+        "normalized_offset": [
+          30,
+          5
+        ],
+        "baseline_y": 104
+      },
+      "phase_map": {
+        "neutral_lead_in": [
+          0,
+          6
+        ],
+        "run_cycle": [
+          7,
+          32
+        ],
+        "neutral_resolve": [
+          33,
+          35
+        ]
+      },
+      "reviews": {
+        "animation": "Design/Super-Frgmnts/Overworld/Phase-3/Aryn/Flight-Suit/Reviews/aryn-flight-suit-run-preview-v1.gif",
+        "contact_sheet": "Design/Super-Frgmnts/Overworld/Phase-3/Aryn/Flight-Suit/Reviews/aryn-flight-suit-run-contact-v1.png"
+      }
+    },
+    "jump": {
+      "source": {
+        "image": "Design/Super-Frgmnts/Overworld/Phase-3/Aryn/Flight-Suit/Raw/aryn-flight-suit-jump-source-v1.png",
+        "metadata": "Design/Super-Frgmnts/Overworld/Phase-3/Aryn/Flight-Suit/Raw/aryn-flight-suit-jump-source-v1.json",
+        "frame_size": [
+          284,
+          596
+        ],
+        "grid": [
+          6,
+          6
+        ],
+        "frame_count": 36,
+        "frame_duration_ms": 71,
+        "total_duration_ms": 2556
+      },
+      "runtime": {
+        "image": "Images/Game/Super-Frgmnts/aryn-flight-suit-jump-runtime-v1.png",
+        "frame_size": [
+          112,
+          112
+        ],
+        "atlas_size": [
+          672,
+          672
+        ],
+        "grid": [
+          6,
+          6
+        ],
+        "normalized_source_size": [
+          54,
+          113
+        ],
+        "normalized_offset": [
+          29,
+          1
+        ],
+        "baseline_y": 104
+      },
+      "phase_map": {
+        "anticipation": [
+          0,
+          10
+        ],
+        "takeoff_and_airborne": [
+          11,
+          17
+        ],
+        "descent_and_landing": [
+          18,
+          29
+        ],
+        "neutral_resolve": [
+          30,
+          35
+        ]
+      },
+      "reviews": {
+        "animation": "Design/Super-Frgmnts/Overworld/Phase-3/Aryn/Flight-Suit/Reviews/aryn-flight-suit-jump-preview-v1.gif",
+        "contact_sheet": "Design/Super-Frgmnts/Overworld/Phase-3/Aryn/Flight-Suit/Reviews/aryn-flight-suit-jump-contact-v1.png"
+      }
+    }
+  },
+  "runtime_behavior": {
+    "scope": "RD-42 interior only",
+    "idle_source": "armor-change frame 35 resolved flight-suit hold",
+    "run_source": "flight-suit run frames 7-32 loop",
+    "jump_source": "flight-suit jump phases mapped to physics",
+    "rearm": "return to the flight/suit alcove and press Down"
+  },
+  "design_boundaries": [
+    "Flight-suit locomotion persists while Aryn explores the RD-42 main deck.",
+    "The supplied run lead-in and resolve frames are retained for provenance but the runtime loop uses frames 7-32.",
+    "The authored jump poses are mapped to takeoff, airborne velocity, descent, and landing rather than forced into a 2.556 second canned jump.",
+    "Aryn must restore field armor before using the dorsal hatch or securing the service kit.",
+    "Unarmored damage, weapon, hatch traversal, and keel-deck animation remain outside this asset set.",
+    "Reverse armor-change playback remains provisional until an authored re-arm sequence exists."
+  ],
+  "review_route": "super_frgmnts.html?preview=ship-interior&autostart=1"
+}

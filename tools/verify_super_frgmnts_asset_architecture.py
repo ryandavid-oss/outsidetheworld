@@ -16,6 +16,7 @@ RUNTIME_PROPS = {
     "atmospheric-stabilizer-active-runtime-v2.png": (420, 735),
     "foundry-ventilation-fan-housing-runtime-v2.png": (326, 326),
     "foundry-ventilation-fan-rotor-runtime-v2.png": (326, 326),
+    "foundry-platform-module-runtime-v1.png": (416, 60),
 }
 
 
@@ -30,7 +31,8 @@ def main() -> None:
         "function releaseInactiveSceneAssets(scene)",
         "function maintainFoundryZoneAssets(force)",
         "function loadAndConfigureEpisodeScene(",
-        'loadAndConfigureEpisodeScene("overworld")',
+        "function beginEpisodeApproach()",
+        'showEpisodeBridge("approach", "overworld")',
         'loadAndConfigureEpisodeScene("foundry")',
         'releaseInactiveSceneAssets("title")',
         'preload="none" aria-hidden="true"></audio>',

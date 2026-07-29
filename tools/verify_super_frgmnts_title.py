@@ -54,7 +54,9 @@ def main() -> None:
         "super-frgmnts-title-coreworks-v1.png",
         "super-frgmnts-title-coreworks-mobile-v1.png",
         'media="(max-width: 720px) and (orientation: portrait)"',
-        "Season One // Veyra",
+        'meta name="release" content="SUPER FRGMNTS Episode 01 Beta 2"',
+        'body data-release="beta-2"',
+        "Season One // Veyra // Beta 2",
         "Episode 01 // <strong>Arrival on Veyra</strong>",
         "A distress signal from a world the Fleet abandoned.",
         "Begin episode",
@@ -71,7 +73,8 @@ def main() -> None:
         'previewParameters.get("autostart") === "1"',
         '"?episode=01&stage="',
         "activateTitleAction()",
-        "loadAndConfigureEpisodeScene(\"overworld\")",
+        "function beginEpisodeApproach()",
+        'showEpisodeBridge("approach", "overworld")',
         "loadAndConfigureEpisodeScene(\"foundry\")",
         'event.code === "Enter" || event.code === "Space"',
         "Opening Episode 01. Arrival on Veyra.",
@@ -102,7 +105,7 @@ def main() -> None:
 
     print("SUPER FRGMNTS title-screen Revision 1A: PASS")
     print("- native 1672 x 941 Coreworks title artwork is integrated")
-    print("- Season One and Episode 01 identity are present")
+    print("- Season One, Episode 01, and Beta 2 identity are present")
     print("- keyboard, pointer, and in-page arrival handoff are present")
     print("- atmospheric motion and reduced-motion safeguards are present")
     print("- dedicated title cue starts from an intentional audio handshake")

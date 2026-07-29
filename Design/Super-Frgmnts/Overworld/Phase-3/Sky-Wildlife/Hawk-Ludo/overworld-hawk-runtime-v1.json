@@ -65,13 +65,10 @@
   "behavior": {
     "direction": "alternates between right-to-left and left-to-right",
     "directionPattern": "alternate after every completed pass",
-    "westernAssignmentGuidance": "When an unfinished Western Signal Flats assignment is on screen, the hawk shifts from a sky pass into a non-blocking guide-circle centered above that assignment.",
-    "guideTargets": [
-      "survey-echo",
-      "recover-trillian",
-      "field-harness",
-      "sealed-salvage"
-    ],
+    "westernAssignmentGuidance": "none; the hawk is environmental wildlife rather than a navigation marker",
+    "guideTargets": [],
+    "worldSpaceFlight": true,
+    "cameraCoupling": false,
     "maxConcurrent": 1,
     "speedPixelsPerSecond": 80,
     "passGapPixels": 1400,
@@ -79,6 +76,6 @@
     "altitudeDrift": 18,
     "collision": false,
     "friendlySeekerSafety": true,
-    "reducedMotion": "static flight pose"
+    "reducedMotion": "static world-space flight pose"
   }
 }

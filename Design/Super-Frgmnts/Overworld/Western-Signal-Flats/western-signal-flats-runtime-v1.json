@@ -1,5 +1,5 @@
 {
-  "revision": "4A",
+  "revision": "5B",
   "status": "integrated-local-review",
   "scene": "overworld",
   "plate": {
@@ -22,6 +22,13 @@
       "dras_outpost",
       "coreworks_threshold"
     ]
+  },
+  "seamValidation": {
+    "boundaryWidth": 1,
+    "maxBoundaryDelta": 0.1,
+    "contextWidth": 96,
+    "maxStructureDelta": 5,
+    "reviewGuideLine": false
   },
   "assignments": [
     {
@@ -48,12 +55,6 @@
       "rewardCredits": 5,
       "requires": "trillian_armor",
       "animation": "armored_energy_lunge"
-    },
-    {
-      "id": "worker_droid_service",
-      "x": 4524,
-      "rewardCredits": 2,
-      "requires": "first_contact"
     }
   ],
   "abilities": [

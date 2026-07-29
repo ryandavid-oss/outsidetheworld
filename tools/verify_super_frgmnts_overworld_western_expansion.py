@@ -27,8 +27,23 @@ def verify_plate(path: Path) -> Image.Image:
 
 
 def seam_delta(left: Image.Image, right: Image.Image) -> float:
-    left_edge = left.crop((left.width - 8, 0, left.width, left.height))
-    right_edge = right.crop((0, 0, 8, right.height))
+    left_edge = left.crop((left.width - 1, 0, left.width, left.height))
+    right_edge = right.crop((0, 0, 1, right.height))
+    means = ImageStat.Stat(
+        ImageChops.difference(left_edge, right_edge)
+    ).mean
+    return sum(means) / 3
+
+
+def seam_structure_delta(
+    left: Image.Image,
+    right: Image.Image,
+    width: int = 96,
+) -> float:
+    left_edge = left.crop(
+        (left.width - width, 0, left.width, left.height)
+    ).transpose(Image.Transpose.FLIP_LEFT_RIGHT)
+    right_edge = right.crop((0, 0, width, right.height))
     means = ImageStat.Stat(
         ImageChops.difference(left_edge, right_edge)
     ).mean
@@ -66,12 +81,11 @@ def main() -> None:
         "recover_trillian": 690,
         "field_harness": 1080,
         "sealed_salvage": 1430,
-        "worker_droid_service": 4524,
     }
     assert sum(
         assignment["rewardCredits"]
         for assignment in assignments.values()
-    ) == 9
+    ) == 7
     assert set(manifest["abilities"]) == {
         "signal_sweep",
         "trillian_follow",
@@ -99,7 +113,15 @@ def main() -> None:
         / "Production/Plates/overworld-landing-flats-v1.png"
     )
     assert ImageChops.difference(west, runtime).getbbox() is None
-    assert seam_delta(west, landing) <= 16
+    assert seam_delta(west, landing) <= 0.1
+    assert seam_structure_delta(west, landing) <= 5
+    assert manifest["seamValidation"] == {
+        "boundaryWidth": 1,
+        "maxBoundaryDelta": 0.1,
+        "contextWidth": 96,
+        "maxStructureDelta": 5,
+        "reviewGuideLine": False,
+    }
 
     for review_name in (
         "overworld-four-plate-contact-v1.png",
@@ -116,7 +138,6 @@ def main() -> None:
         'id: "recover-trillian"',
         'id: "field-harness"',
         'id: "sealed-salvage"',
-        'id: "service-worker-droid"',
         "function activateSignalSweep()",
         "function activateNearbyOverworldAssignment()",
         "function updateTrillian(delta)",
@@ -124,19 +145,20 @@ def main() -> None:
         "function drawOverworldAssignments()",
         'canvas.dataset.trillianDamage = "noncombat-breach"',
         'canvas.dataset.overworldHawkState =',
-        '"guide-circle"',
+        '"world-space-sky-pass"',
     )
     for token in required_runtime_tokens:
         assert token in SOURCE, f"Missing western runtime token: {token}"
 
     assert 'makeEnemy("trillian"' not in SOURCE
     assert "gatesFoundry = true" not in SOURCE
+    assert 'id: "service-worker-droid"' not in SOURCE
 
     print("SUPER FRGMNTS Western Signal Flats: PASS")
     print("- four exact 1672 x 941 plates form a 6688-pixel world")
-    print("- western-to-landing seam stays within the approved color delta")
-    print("- five optional assignments award nine surface credits")
-    print("- Signal Sweep, Trillian, hawk guidance, and droid service are live")
+    print("- western-to-landing seam passes boundary and landscape checks")
+    print("- four optional assignments award seven surface credits")
+    print("- Signal Sweep and Trillian remain live without ambient-object errands")
     print("- no western assignment gates the existing Foundry route")
 
 

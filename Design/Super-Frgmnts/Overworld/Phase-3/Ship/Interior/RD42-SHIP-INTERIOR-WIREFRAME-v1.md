@@ -25,6 +25,26 @@ The behavioral authority is
 Visual review:
 [`RD42-SHIP-INTERIOR-WIREFRAME-v1.svg`](RD42-SHIP-INTERIOR-WIREFRAME-v1.svg).
 
+Pixel-art rear-plate review:
+[`Assets/rd42-interior-rear-plate-pixel-candidate-v2.png`](Assets/rd42-interior-rear-plate-pixel-candidate-v2.png).
+
+Aryn scale check:
+[`Reviews/rd42-interior-rear-plate-scale-check-v2.png`](Reviews/rd42-interior-rear-plate-scale-check-v2.png).
+
+The v2 rear plate is an approved **scale reference**, not approved runtime art.
+It uses the live 112 × 112 Aryn box for prop scale, places its brightest deck
+edge at y 743 against the y 744 gameplay plane, and follows the existing
+Foundry plate's hard-edged 16-bit pixel language. Hatch doors, rails,
+foreground occlusion, Trillian, and the service case remain separate layers.
+The normal occupied volume is y 438–744, or roughly 3.4 of Aryn's 89-pixel
+visible sprite heights. Only the dorsal hatch chimney continues into the
+upper hull.
+
+The next rear-plate pass must preserve this geometry while moving away from
+the Foundry's dark palette and dense pipe identity. Aryn's cobalt, pale cyan,
+violet, pink, warm orange, and lighter blue-gray materials lead instead. That
+pass must also show the flight/suit alcove and the sealed keel-deck hatch.
+
 ## Whole-room diagram
 
 ```text
@@ -33,14 +53,15 @@ WORLD x=0                                                                  x=167
 │                            NONPLAYABLE VOID                                  │
 │                                                                              │
 │      /======================= RD-42 PRESSURE SHELL =====================\     │
-│     /                                                                        \    y≈272
-│    /       COCKPIT             AIRLOCK            HAB / PACK       CARGO      \   │
+│     /                 OUTER HULL + DORSAL HOUSING                              \   │
+│    /================== OVERHEAD SYSTEMS BAY // to y438 ========================\  │
+│   /        COCKPIT             AIRLOCK            HAB / PACK       CARGO        \ │
 │   /                                                                            \  │
 │  |    canopy       nav       ╔══ DORSAL HATCH ══╗      bunk      parts rack    | │
 │  |   ┌──────┐   ┌──────┐     ║       ↓          ║    ┌────┐     ┌────────┐     | │
 │  |   │      │   │      │     ║   entry rails    ║    │    │     │ KIT ●  │     | │
 │  |   └──────┘   └──────┘     ╚══════════════════╝    └────┘     └────────┘     | │
-│  |       flight cradle              ARYN ↓        Trillian   pack     engineering| │
+│  |     flight / suit cradle         ARYN ↓        Trillian   pack     engineering| │
 │  |          ◇                         X=684         berth     bench        wall    | │
 │  |                                                                            | │
 │  |____________________________ MAIN DECK y=744 _______________________________| │
@@ -68,8 +89,9 @@ Vertical bands:
 | Band | Y range | Function |
 | --- | ---: | --- |
 | Upper void | 0–236 | Exterior darkness and camera breathing room |
-| Tapered shell ceiling | 236–320 | Sloped ribs and dorsal-hatch housing |
-| Habitable volume | 320–744 | Player, props, canopy, and machinery |
+| Outer shell / dorsal housing | 236–320 | Sloped ribs and dorsal-hatch housing |
+| Overhead systems bay | 320–438 | Dense inaccessible machinery; compresses the room scale |
+| Habitable volume | 438–744 | Player, reachable props, canopy, and machinery |
 | Main deck / underfloor | 744–840 | Solid deck and shallow service volume |
 | Lower void | 840–941 | Dark hull depth; nonplayable |
 
@@ -82,10 +104,15 @@ Vertical bands:
 | `rd42_main_deck` | solid | 244 | 744 | 1,184 | 96 | Continuous mandatory route |
 | `rd42_left_bound` | invisible wall | 220 | 236 | 24 | 604 | Follows the cockpit hull end |
 | `rd42_right_bound` | invisible wall | 1,428 | 236 | 24 | 604 | Follows the engineering hull end |
-| `rd42_ceiling_bound` | invisible ceiling | 244 | 236 | 1,184 | 20 | Disabled only during authored hatch transition |
+| `rd42_ceiling_left` | reserved invisible ceiling | 244 | 438 | 378 | 20 | Ends at the hatch chimney |
+| `rd42_ceiling_right` | reserved invisible ceiling | 746 | 438 | 682 | 20 | Begins after the hatch chimney |
 
 The mandatory route is flat. Painted ribs, floor plates, and low thresholds
 must not imply collidable steps that the greybox does not contain.
+
+The two ceiling bounds are the collision target for the art pass. The current
+runtime greybox establishes their visual line first; no false claim of an
+integrated ceiling collider is made.
 
 ### Reserved future collision
 
@@ -93,8 +120,10 @@ The floor panel at x = 962–1,086 is a sealed visual reservation only.
 
 - It is not interactive in v1.
 - It has no opening collider.
-- It does not imply a reachable lower deck.
-- It may later become a service trench under its own approved contract.
+- It establishes a future keel service deck without making it reachable.
+- It may later become a separate lower-deck scene under its own approved
+  contract.
+- The pack bench may retract before a future opening; it does not move now.
 
 ## Zone boundaries
 
@@ -117,8 +146,9 @@ sprite visually but never hide an active prompt.
 | Interior center X | 684 |
 | Opening X | 624–744 |
 | Opening width | 120 |
-| Closed ceiling Y | 272 |
-| Open visual depth | y = 252–326 |
+| Closed hatch-cap Y | 272 |
+| Normal occupied ceiling Y | 438 |
+| Open shaft depth | y = 252–438 |
 | Entry landing center | x = 684 |
 | Entry clear floor | x = 596–772 |
 | Exit interaction zone | x = 624–744, y = 596–744 |
@@ -137,6 +167,7 @@ not climbable collision during normal play.
 | --- | --- | ---: | ---: | ---: | --- |
 | `rd42_exit` | `▼ EXIT RD-42` | 684 | 744 | 78 | Whenever no mandatory pickup animation is active |
 | `rd42_flight_console` | `▼ ACCESS LOCAL INDEX` | 386 | 744 | 86 | Optional; partial match requires specimen |
+| `rd42_suit_cradle` | `▼ CHANGE OUT OF ARMOR` | 506 | 744 | 70 | Review locks Aryn in alcove until reverse re-arm |
 | `rd42_pack_bench` | `▼ INSPECT PACK BENCH` | 1,026 | 744 | 82 | Optional |
 | `rd42_service_kit` | `▼ RECOVER TRANSIT SERVICE KIT` | 1,274 | 744 | 92 | Only during the service-kit objective |
 | `rd42_berth` | `▼ CHECK TRILLIAN` | 894 | 744 | 72 | Optional and only if Trillian is present |
@@ -151,7 +182,7 @@ the interior contract.
 | Prop | Bounds | Layer | Notes |
 | --- | --- | --- | --- |
 | Forward canopy | x 252–390, y 356–548 | rear | View or sensor glass consistent with exterior scale |
-| Flight cradle | x 404–486, y 558–744 | mid | Non-solid silhouette; Aryn does not sit in v1 |
+| Flight/suit cradle | x 438–562, y 486–716 | rear/mid | Retractable screen and human-scale cradle; change alignment center x 506 |
 | Navigation table | x 318–408, y 612–710 | interactive rear | Owns local-index prompt |
 | Central-link indicator | x 466–526, y 432–500 | rear emissive | Reads disconnected; no live Fleet contact |
 
@@ -174,7 +205,7 @@ the interior contract.
 | Ration heater | x 948–1,004, y 576–686 | rear | Small warm-light accent |
 | Pack bench | x 994–1,084, y 532–710 | interactive rear | Specimen-reactive; no upgrade in v1 |
 | Personal shelf | x 864–970, y 374–430 | rear | Sparse Aryn details |
-| Sealed floor panel | x 962–1,086, y 732–760 | floor | Future service-trench reservation |
+| Sealed keel-deck hatch | x 962–1,086, y 732–760 | floor | Future separate repair/shelter deck; no current prompt |
 
 ### Cargo and engineering
 
@@ -188,8 +219,9 @@ the interior contract.
 
 ## Player positions
 
-The greybox treats Aryn as the current 112 × 112 draw silhouette with the
-existing narrower collision body.
+The greybox treats Aryn as the current 112 × 112 draw box with the existing
+narrower collision body. Her opaque art occupies 33 × 89 pixels inside that
+box; visible height, not transparent canvas height, is the room-scale check.
 
 | State | Center X | Feet Y | Facing |
 | --- | ---: | ---: | --- |
@@ -199,6 +231,7 @@ existing narrower collision body.
 | Exit alignment | 684 | 744 | last safe facing |
 | Service-kit pickup | 1,274 | 744 | right |
 | Cockpit interaction | 386 | 744 | left |
+| Armor-change alignment | 506 | 744 | right |
 
 The descent start is an authored pose and ignores normal ceiling collision.
 Normal player physics begins only at the grounded control-return state.
@@ -248,6 +281,7 @@ uses a target visible width of approximately 540 world pixels.
 | --- | ---: | --- |
 | Entry | 684 | Hatch, Aryn, both airlock thresholds |
 | Cockpit interaction | 386 | Aryn, console, canopy edge |
+| Armor-change review | 506 | Aryn, complete suit alcove, nearest console edge |
 | Pack interaction | 1,026 | Aryn, pack bench, nearest airlock frame |
 | Service-kit interaction | 1,274 | Aryn, service case, engineering wall |
 | Exit | 684 | Aryn, rails, ceiling hatch |
@@ -274,8 +308,8 @@ ceiling y
 236                         _________
                            /         \
 272          _____________/  HATCH    \________________
-300         /                                             \
-340        /                                               \
+320         /======= INACCESSIBLE OVERHEAD SYSTEMS =======\
+438        |______________/   SHAFT    \__________________|
            |                                               |
            |                                               |
 744        |_____________________ DECK ____________________|
@@ -291,11 +325,11 @@ retain a clear 112-pixel-high player lane.
 
 | Zone | Base light | Accent | Specimen response |
 | --- | --- | --- | --- |
-| Cockpit | dark indigo | cyan instruments | local-index magenta warning |
-| Airlock | graphite | cyan hatch seam | one restrained violet echo |
-| Habitation | muted violet | warm low amber | pack bench violet-blue pulse |
-| Cargo | graphite | cyan rack keys | service case cyan locator |
-| Engineering | deep blue-black | cyan conduits | no independent response |
+| Cockpit | pale blue-gray | cyan instruments | local-index pink warning |
+| Airlock | cool silver | cyan hatch seam | one restrained violet echo |
+| Habitation | light desaturated violet | warm orange | pack bench violet-blue pulse |
+| Cargo | medium cobalt-gray | amber rack keys | service case cyan locator |
+| Engineering | dark blue-gray | cyan conduits | no independent response |
 
 Lighting never communicates availability alone. Every interactive state also
 uses a prompt, silhouette change, text, or sound.
@@ -311,7 +345,9 @@ The greybox may use provisional existing cues. Final audio direction reserves:
 - grounded boot landing;
 - service-case release and magnetic pack latch;
 - pack-bench harmonic response; and
-- local-index access denial.
+- local-index access denial;
+- armor-change field rise, energy release, and soft resolve; and
+- a low hollow response from the sealed keel-deck hatch.
 
 No alarm loop plays during normal occupancy.
 

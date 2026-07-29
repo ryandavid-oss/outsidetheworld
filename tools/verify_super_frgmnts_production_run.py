@@ -47,7 +47,9 @@ def main() -> None:
         "WORLD_WIDTH = isWound",
         "? WOUND_BOSS_WORLD_WIDTH",
         "? buildWoundBossPlatforms()",
-        'setAudioScene(isWound ? "foundry" : scene);',
+        'setAudioScene(isWound ? "wound" : scene);',
+        "function beginEpisodeApproach()",
+        "function beginWoundDescentBridge()",
         'routeStage === "wound"',
         ".stage-shell.is-episode-blackout::after",
         'woundBossPreview &&\n                previewParameters.get("qa") === "reward"',
@@ -93,10 +95,27 @@ def main() -> None:
         "state = \"transition\";",
         "releaseAllControls();",
         "episodeWoundSnapshot = captureEpisodeWoundSnapshot();",
-        'loadAndConfigureEpisodeScene("wound");',
         'canvas.dataset.episodeTransition =\n                    "foundry-to-wound";',
+        "beginWoundDescentBridge();",
     ):
         require(token in wound_transition, f"Unsafe Wound transition: {token}")
+
+    wound_bridge = function_body(
+        source,
+        "beginWoundDescentBridge",
+        "episodeSceneAssetKeys",
+    )
+    for token in (
+        'showEpisodeBridge("wound", "wound");',
+        '"Uplink Gate // Checkpoint secured"',
+        '"Coreworks // Sublevel transit"',
+        '"Unknown chamber // Pressure seal"',
+        "completeEpisodeBridge",
+    ):
+        require(
+            token in wound_bridge,
+            f"Incomplete Foundry-to-Wound bridge: {token}",
+        )
 
     uplink = function_body(source, "checkUplink", "winGame")
     require(

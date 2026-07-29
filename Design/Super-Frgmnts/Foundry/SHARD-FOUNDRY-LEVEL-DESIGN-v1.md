@@ -48,10 +48,15 @@ Target completion bands:
    spawns or room-transition lines.
 10. Deepworks contains no enemies or contact hazards. Its challenge is the
     committed drop and readable jet-assisted return.
-11. The heavy-rifle Vesperite lock is visibly sealed on every traversal layer
-    and cannot be bypassed before three direct rifle hits.
+11. The heavy-rifle Vesperite obstruction is a physical containment cage on
+    the deck, not a full-height energy wall. Upper traversal may continue, but
+    the Uplink objective remains locked until three direct rifle hits clear it.
 12. The Uplink Gate opens only when twelve Signal Shards, two stabilizers, and
     the mandatory Vesperite lock are complete.
+13. A major power-up has at least 240 pixels of route separation from another
+    collectible and a safe acquisition apron before the next hostile lane.
+14. Runtime platforms use the unified 16-bit industrial module; zone color is
+    a restrained navigation accent, not a different material per room.
 
 ## Zone-by-zone critical path
 
@@ -64,13 +69,14 @@ restore-the-room loop.
 
 - Spawn apron is combat-free.
 - The first Signal Shard sits on the low, obvious route.
-- The Ridge Skitter teaches firing on a broad deck with retreat space.
+- A recurring three-hit Chitin Sentinel introduces the primary combat grammar
+  on a broad deck with retreat space.
 - The second shard leads upward through generous 184–210-pixel platforms.
-- Jet-assist sits on the mandatory ascent at world `(936, 1170)`.
+- Jet-assist sits alone on the mandatory ascent at world `(1340, 930)`.
 - The moving bridge has only 110 pixels of horizontal travel and no enemy on
   its landing.
-- The Squircle Minion is an optional upper observation encounter, not a
-  required landing blocker.
+- The Squircle Minion visibly circles the full perimeter of an upper platform
+  instead of behaving like a stationary prop.
 
 **Exit state:** player owns jet-assist and understands moving platforms.
 
@@ -78,13 +84,15 @@ restore-the-room loop.
 
 - Entry is upper-left and intentionally becomes a downward route.
 - Core Leech occupies the middle-air sightline but not a landing.
-- Clacker Beetle patrol is capped at local `x = 760–1120`, leaving the relay
-  apron clear.
+- Chitin Sentinel occupies a separate ground lane capped at local
+  `x = 760–1100`, leaving the relay apron clear.
 - The deck ends at the dormant stabilizer on the right.
 - The first recovery heart sits at world `(WIDTH + 1130, 1480)`, after the
   descent encounter and before the lift return.
 - Restoring the relay clears the chamber, starts the freight lift, and opens
   the upper Refinery threshold.
+- The first stabilizer progressively starts the ventilation rotors across the
+  Foundry and Refinery sectors.
 
 **Exit state:** one relay online; player has performed drop, interaction, lift,
 and assisted return.
@@ -96,22 +104,21 @@ Deepworks meaningful.
 
 #### Plate 2 // Compression Line
 
-- Heavy rifle waits on the deck at world `(WIDTH × 2 + 560, 1518)`.
-- A Signal Shard on the same approach pulls the player past the weapon without
-  hiding it.
-- The Vesperite obstruction begins at local `x = 900`.
-- Its boulder and full-height Vesperite lock make the three-hit requirement
-  visible on the deck, middle tier, and upper route.
-- Spore Wisp and Spring Fragment are vertically separated. Neither overlaps
-  the weapon pickup or rifle firing apron.
+- Heavy rifle waits on a safe deck apron at world
+  `(WIDTH × 2 + 700, 1518)`.
+- The closest Signal Shards remain at least 280 pixels away on the route.
+- A Kihunter introduces the air lane beyond the acquisition beat.
+- The physical Vesperite containment cage begins at local `x = 1280`.
+- A Chitin Sentinel occupies the far ground lane beyond the cage. Neither
+  hostile overlaps the weapon pickup or rifle firing apron.
 
 **Exit state:** player owns the rifle and has cleared one deliberate
 three-shot obstruction.
 
 #### Plate 3 // Pressure Exchange
 
-- Vesper Mite patrol is capped at local `x = 420–820`, away from the late-room
-  descent landing.
+- Sova and a recurring Chitin Sentinel occupy separate readable ground lanes,
+  away from the late-room descent landing.
 - A 76-pixel thermal vent begins at local `x = 1008`. It is one readable jump
   with clear runway on both sides.
 - The only required Deepworks entrance is inside this plate.
@@ -129,8 +136,8 @@ before the second relay.
 
 #### Plate 4 // Culture Vats
 
-- Vesper Flare owns the lower-air lane; Ember Wasp owns the upper-air lane.
-  Their patrols do not share a mandatory landing.
+- Ember Wasp is guaranteed in the upper-air lane; a Chitin Sentinel owns the
+  ground lane. Their patrols do not share a mandatory landing.
 - The electrified catwalk is the zone's single timing test.
 - The safe phase is longer than the live phase and the first 0.28 seconds
   after landing cannot damage Aryn.
@@ -142,8 +149,8 @@ before the second relay.
 
 #### Plate 5 // Specimen Relay
 
-- Bastion Fragment is the elevated read; Seam Hunter owns the middle deck.
-- Seam Hunter patrol is capped at local `x = 480–900`.
+- Seam Hunter owns the early ground lane; Chitin Sentinel guards the later
+  approach without entering the relay apron.
 - The far-right relay apron remains enemy-free.
 - The second curated Deepworks entrance is optional.
 - A seven-credit cache sits below at world
@@ -152,6 +159,8 @@ before the second relay.
   rather than at the room entrance.
 - Activation reports **Biolab**, authorizes Uplink access, and leaves a clear
   recovery pause before the final zone.
+- The second stabilizer starts every remaining Deepworks and Uplink ventilation
+  rotor, making the restoration state visible across all later shafts.
 
 **Exit state:** two relays online; player may carry the optional Deepworks
 credits.
@@ -162,9 +171,10 @@ credits.
 
 #### Plate 6 // Signal Spine
 
-- Chitin Sentinel begins far enough from the zone link to be seen before
-  contact.
-- Its broad deck is the primary rifle-versus-armor test.
+- Skree and Chitin Sentinel begin in separated lanes far enough from the zone
+  link to be seen before contact.
+- The broad deck repeats the rifle-versus-armor test without stacking both
+  enemies on one mandatory landing.
 - A recovery heart at world `(WIDTH × 6 + 1340, 970)` waits on the upper route
   after the Sentinel.
 - The plate contains one low shard and no environmental hazard.
@@ -174,9 +184,9 @@ and enters the final plate with a recovery opportunity.
 
 #### Plate 7 // Uplink Gate
 
-- Spore Wisp remains high and cannot fire while Aryn is in Deepworks.
+- Seam Lurker patrols the ceiling and never shares the deck hazard footprint.
 - A 76-pixel arc leak begins at local `x = 900`.
-- Pale Watcher patrol begins beyond the leak at local `x = 1110`, leaving more
+- Pale Watcher patrol begins beyond the leak at local `x = 1060`, leaving more
   than one player-width of stable recovery runway between the two demands.
 - The twelfth Signal Shard sits at the Uplink Gate at world
   `(WIDTH × 7 + 1284, 286)`.
@@ -200,7 +210,7 @@ the safe-bay checkpoint for The Wound.
 | Static contact hazards | 2 | Refinery thermal vent and final Uplink arc leak |
 | Electrified platforms | 1 | Biolab plate 4 |
 | Curated Deepworks entrances | 2 | Required signal route in plate 3; optional cache route in plate 5 |
-| Enemies | 14 | Thirteen catalog families, with the legacy Spore Wisp repeated only at the final Uplink read |
+| Enemies | 16 | Seven recurring Chitin Sentinels plus nine spaced support enemies across ten active families |
 
 Credits and full annihilation remain optional. Signal Shards, both stabilizers,
 and the Vesperite lock are completion requirements.
@@ -228,8 +238,8 @@ Promotion requires all of the following:
 - no recovery heart is collected by a standard room review spawn;
 - the Foundry relay apron and Biolab relay apron stay enemy-free for the full
   patrol cycle;
-- the Vesperite lock cannot be crossed on the deck, middle tier, or upper tier
-  while intact;
+- the Vesperite obstruction requires three direct rifle hits and the Uplink
+  remains unavailable until it is cleared;
 - the Deepworks shard and optional cache can both be recovered and exited
   using keyboard and touch controls;
 - the electric platform always shows a full safe phase between live phases and

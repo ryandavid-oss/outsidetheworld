@@ -1,0 +1,54 @@
+{
+  "id": "rd42-interior-rear-plate-pixel-candidate-v1",
+  "status": "rejected-scale-study",
+  "established": "2026-07-28",
+  "runtime_integrated": false,
+  "generation": {
+    "method": "OpenAI built-in image generation",
+    "intent": "new production-oriented bitmap generated from references",
+    "use_case": "style-transfer",
+    "composition_reference": "user-supplied RD-42 interior render",
+    "style_reference": "Images/Game/super-frgmnts-foundry-expanded-prototype-v1.png",
+    "ship_reference": "Images/Game/Super-Frgmnts/aryn-ship-v1.png",
+    "scale_reference": "Images/Game/Super-Frgmnts/aryn-field-rest-runtime-v1.png"
+  },
+  "asset": {
+    "path": "Design/Super-Frgmnts/Overworld/Phase-3/Ship/Interior/Assets/rd42-interior-rear-plate-pixel-candidate-v1.png",
+    "width": 1672,
+    "height": 941,
+    "format": "PNG",
+    "layer": "rear-only",
+    "style": "16-bit SNES-era pixel art"
+  },
+  "geometry": {
+    "gameplay_deck_y": 744,
+    "observed_art_deck_highlight_y": 743,
+    "dorsal_hatch_center_x": 684,
+    "player_reference_box": [
+      112,
+      112
+    ]
+  },
+  "separate_runtime_layers": [
+    "dorsal hatch doors",
+    "access rails",
+    "foreground hatch rim",
+    "service-kit case",
+    "Trillian",
+    "Aryn",
+    "interaction prompts",
+    "diagnostic response glows"
+  ],
+  "review": {
+    "scale_check": "Design/Super-Frgmnts/Overworld/Phase-3/Ship/Interior/Reviews/rd42-interior-rear-plate-scale-check-v1.png",
+    "modern_render_direction_rejected": "Design/Super-Frgmnts/Overworld/Phase-3/Ship/Interior/Reviews/rd42-interior-rear-plate-modern-rejected-v1.png",
+    "rejection": "The occupied volume remained nearly six visible Aryn heights tall, so furniture and the ship read oversized even after individual prop corrections.",
+    "superseded_by": "rd42-interior-rear-plate-pixel-candidate-v2",
+    "questions": [
+      "Does the cockpit chair read at Aryn scale?",
+      "Does the plate match the existing SNES-era background language?",
+      "Is the open shaft wide enough for the authored descent?",
+      "Are the pack bench and empty service-case slot independently readable?"
+    ]
+  }
+}

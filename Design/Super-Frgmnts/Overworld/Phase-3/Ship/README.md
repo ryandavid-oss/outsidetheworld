@@ -60,6 +60,23 @@ one-plate playable greybox:
   desktop/mobile camera targets.
 - [`Interior/RD42-SHIP-INTERIOR-WIREFRAME-v1.svg`](Interior/RD42-SHIP-INTERIOR-WIREFRAME-v1.svg)
   is the visual review artifact.
+- [`Interior/Assets/rd42-interior-rear-plate-pixel-candidate-v2.png`](Interior/Assets/rd42-interior-rear-plate-pixel-candidate-v2.png)
+  is the approved scale reference with a compressed y438–744 occupied volume.
+  Its dark Foundry-like palette is not approved runtime art.
+- [`Interior/Reviews/rd42-interior-rear-plate-scale-check-v2.png`](Interior/Reviews/rd42-interior-rear-plate-scale-check-v2.png)
+  overlays the live Aryn sprite at cockpit, pack, and cargo positions for
+  scale review.
+- The v1 pixel plate remains a rejected scale study; v2 supersedes it without
+  changing Aryn's established runtime size.
+- The next art pass uses Aryn's lighter cobalt, silver, cyan, violet, pink, and
+  warm-orange identity and adds the flight/suit alcove plus sealed keel hatch.
+- [`../Aryn/Armor-Change/README.md`](../Aryn/Armor-Change/README.md) documents
+  the 36-frame suit-change intake and the isolated alcove interaction.
+- [`../Aryn/Flight-Suit/README.md`](../Aryn/Flight-Suit/README.md) documents
+  the supplied run and jump sheets and persistent flight-suit exploration on
+  the RD-42 main deck.
+- [`Interior/RD42-KEEL-SERVICE-DECK-SEED-v1.md`](Interior/RD42-KEEL-SERVICE-DECK-SEED-v1.md)
+  reserves the future repair, concealment, and boarding-response lower deck.
 
 The exterior hatch, authored descent, interior interactions, service-kit
 state, exit, and exterior re-emergence are available through the review routes

@@ -193,7 +193,9 @@ The actual ship shell occupies only the central portion:
 - shell left bound = x 220;
 - shell right bound = x 1,452;
 - playable width = 1,232;
-- ceiling line = approximately y 272;
+- outer dorsal housing reaches approximately y 226–272;
+- normal occupied ceiling = y 438;
+- overhead systems bay = approximately y 320–438;
 - main deck = y 744; and
 - dorsal hatch center = x 684.
 
@@ -201,6 +203,11 @@ The interior is a gameplay-readable stage representation of the exterior, not
 an attempt to pretend the RD-42 contains kilometers of corridors. Sloping hull
 ribs, tapered ends, and visible engine-pod intrusions keep the room tied to the
 ship's manta-like silhouette.
+
+The 306-pixel occupied volume between y 438 and y 744 is approximately 3.4
+times the live sprite's 89-pixel visible height. The dorsal hatch chimney is
+the one deliberate tall exception. Aryn remains at her established runtime
+scale; the room and its furniture carry the scale correction.
 
 Detailed coordinates and prop reservations live in
 [`RD42-SHIP-INTERIOR-WIREFRAME-v1.md`](RD42-SHIP-INTERIOR-WIREFRAME-v1.md).
@@ -230,7 +237,7 @@ The cockpit occupies the left end of the shell.
 
 It contains:
 
-- Aryn's flight cradle;
+- Aryn's combined flight/suit cradle;
 - a shallow forward canopy or sensor window;
 - a navigation table;
 - the deliberately disconnected Central Command link;
@@ -250,6 +257,35 @@ CENTRAL AUTHORIZATION REQUIRED
 
 This is a hint, not proof. It does not identify the specimen, unlock a file,
 contact the Fleet, or explain the cover-up.
+
+### Flight/suit alcove // isolated review interaction
+
+The human-scale flight cradle at the cockpit edge doubles as Aryn's armor
+change station. A shallow wall dock and retractable privacy/decontamination
+screen define an alcove without enlarging the ship or blocking the cockpit
+route.
+
+The supplied 36-frame sequence is authoritative for **armored to flight
+suit**:
+
+- 36 frames at 76 ms each;
+- complete authored duration = 2.736 seconds;
+- Aryn remains stationary at the cradle;
+- the ordinary player sprite is hidden while the sequence plays; and
+- the final flight-suit pose supplies her main-deck standing state.
+
+The change asset is normalized and documented under
+[`../../Aryn/Armor-Change/README.md`](../../Aryn/Armor-Change/README.md).
+Supplied run and jump sheets documented under
+[`../../Aryn/Flight-Suit/README.md`](../../Aryn/Flight-Suit/README.md) now
+support persistent flight-suit locomotion on the main deck. Control returns
+after the forward sequence. Aryn can walk, run, jump, fall, and land in the
+flight suit, then return to the alcove and press Down to re-arm.
+
+The dorsal hatch and service-kit pack rail require field armor because the
+current unarmored set does not include hatch traversal, pack attachment,
+damage, or weapon poses. Reverse playback is still provisional; it is not a
+claim that an authored re-arm sequence exists.
 
 ### Airlock // required entry and exit
 
@@ -281,7 +317,7 @@ It contains:
 - one restrained unsanctioned-flight detail;
 - a conditional Trillian berth;
 - Aryn's pack service bench; and
-- a sealed lower service panel reserved for future expansion.
+- a sealed keel-deck hatch reserved for future expansion.
 
 The room should feel disciplined and used, not sterile and not cluttered into
 comic relief.
@@ -293,6 +329,31 @@ and display:
 
 The bench cannot consume the specimen or modify the pack during this
 interlude.
+
+### Keel service deck // reserved future area
+
+The sealed hatch beneath the pack bench establishes that the RD-42 continues
+below the occupied main deck. It is not a second room squeezed into the
+current rear plate. When eventually approved and unlocked, the hatch should
+transition through a short ladder or service lift into a separate lower-deck
+scene.
+
+Working uses for that future deck are:
+
+- direct access to repair manifolds, shield-braid conduits, and the phase
+  coupler bus;
+- a compact emergency shelter or concealment compartment;
+- a later lockdown sequence in which Aryn can hide from an enemy boarding
+  party; and
+- a constrained invasion route where damaged systems and enemy presence
+  change the room without turning the upper cabin into a combat arena.
+
+For the current chapter, the hatch is sealed, noninteractive, and free of
+collision changes. It may show a keyed seam and depth cues, but it does not
+open, accept a prompt, imply a secret collectible, or block the pack bench.
+
+The bounded future concept is recorded in
+[`RD42-KEEL-SERVICE-DECK-SEED-v1.md`](RD42-KEEL-SERVICE-DECK-SEED-v1.md).
 
 ### Cargo and engineering // required objective
 
@@ -457,14 +518,20 @@ The player still understands that Aryn descended through the top of the ship.
 
 ## Visual direction
 
-The interior derives from the approved exterior:
+The interior derives from Aryn's artwork and the approved exterior. The
+Foundry remains a reference for pixel density, hard clusters, and gameplay
+readability only; its dark industrial palette and pipe-heavy material identity
+must not carry into the ship.
 
-- graphite and deep violet alloy;
-- cyan operational structure;
-- restrained magenta warning accents;
+- pale blue-gray and cool silver occupied-cabin panels;
+- cobalt and soft violet structure drawn from Aryn's armor and jacket;
+- pale cyan operational light;
+- restrained pink accents drawn from her shoulder and pack energy;
+- warm orange around personal space, matching the resolved flight suit;
+- broader quiet panel shapes and less uniform micro-detail than the Foundry;
 - faceted ribs and angled bulkheads;
 - engine-pod intrusions rather than rectangular hallway walls;
-- dark mechanical voids outside the habitable shell;
+- a dark overhead systems bay that contrasts with the lighter cabin;
 - sparse warm habitation light around Aryn's bunk; and
 - crisp pixel-art silhouettes at gameplay scale.
 
@@ -508,6 +575,9 @@ Every final asset remains scene-scoped and locally installed.
 | Service kit | Small alpha sprite or short atlas | Below 2,048 px per axis |
 | Specimen-reactive light | Separate alpha overlay | Scene-scoped |
 | Conditional Trillian rest | Reuse or new bounded rest strip | Scene-scoped |
+| Aryn armor change | 672 × 672 grid; 36 frames at 112 × 112 | Integrated with flight-suit movement |
+| Flight/suit alcove screen | Small alpha animation or foreground layer | Scene-scoped |
+| Sealed keel-deck hatch | Rear/floor plate detail | Noninteractive in current chapter |
 
 The exterior ship master remains the identity authority. The dorsal hatch is a
 separate hover-linked layer unless a later approved art pass explicitly
@@ -525,6 +595,8 @@ The eventual runtime should expose reviewable values:
 - `data-ship-specimen-response="inactive|pulsing"`;
 - `data-ship-cockpit-match="locked|partial-match"`;
 - `data-ship-trillian-berth="empty|occupied"`;
+- `data-ship-suit-alcove="idle|aligning|changing|flight-suit|rearming"`;
+- `data-ship-keel-hatch="sealed"`;
 - `data-ship-camera-mode="entry|follow|interaction|exit"`;
 - `data-ship-transition-progress`;
 - `data-player-supported-by="ship-center-roof|ship-interior-deck"`; and
@@ -543,6 +615,10 @@ Canvas presentation state.
   on the exterior roof.
 - A failed optional cockpit or Trillian asset may degrade without blocking the
   required service-kit path.
+- A failed armor-change review asset leaves the cradle inert and Aryn armored.
+- A failed flight-suit movement asset also leaves the cradle inert and Aryn
+  armored; the runtime never substitutes armored locomotion after a visible
+  costume change.
 - Audio transition owns at most one ambient loop.
 - The ship interior must work offline with installed episode assets.
 
@@ -557,7 +633,8 @@ super_frgmnts.html?preview=ship-interior&objective=service-kit&autostart=1
 super_frgmnts.html?preview=ship-interior&state=post-wound&trillian=1&autostart=1
 ```
 
-These URLs are reservations, not current runtime claims.
+These are isolated runtime review routes, not claims that the sequence has
+joined the production episode path.
 
 ## Greybox acceptance
 
@@ -590,6 +667,10 @@ The interior is ready for final artwork only when:
 - a finished pack-upgrade economy;
 - weapon modification;
 - shipboard combat;
+- unarmored damage, weapon, pack, and hatch-traversal presentation;
+- an authored re-arm animation;
+- opening or entering the keel service deck;
+- enemy invasion of the RD-42;
 - Fleet communication;
 - voice acting;
 - final audio composition; and

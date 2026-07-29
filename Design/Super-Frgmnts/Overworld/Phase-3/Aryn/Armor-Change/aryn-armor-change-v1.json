@@ -1,0 +1,77 @@
+{
+  "asset": "Aryn Sol-Mavi armor-change animation",
+  "status": "normalized and integrated with persistent RD-42 flight-suit movement",
+  "source": {
+    "image": "Design/Super-Frgmnts/Overworld/Phase-3/Aryn/Armor-Change/Raw/aryn-armor-change-source-v1.png",
+    "metadata": "Design/Super-Frgmnts/Overworld/Phase-3/Aryn/Armor-Change/Raw/aryn-armor-change-source-v1.json",
+    "frame_size": [
+      360,
+      514
+    ],
+    "grid": [
+      6,
+      6
+    ],
+    "frame_count": 36,
+    "frame_duration_ms": 76,
+    "total_duration_ms": 2736
+  },
+  "runtime_candidate": {
+    "image": "Images/Game/Super-Frgmnts/aryn-armor-change-runtime-v1.png",
+    "frame_size": [
+      112,
+      112
+    ],
+    "atlas_size": [
+      672,
+      672
+    ],
+    "grid": [
+      6,
+      6
+    ],
+    "normalized_source_size": [
+      67,
+      95
+    ],
+    "normalized_offset": [
+      22,
+      10
+    ],
+    "baseline_y": 104
+  },
+  "phase_map": {
+    "armored_hold": [
+      0,
+      10
+    ],
+    "field_ignition": [
+      11,
+      17
+    ],
+    "armor_release": [
+      18,
+      29
+    ],
+    "flight_suit_resolve": [
+      30,
+      35
+    ]
+  },
+  "direction": {
+    "forward": "armored to flight suit",
+    "provisional_reverse": "flight suit to armored"
+  },
+  "design_boundaries": [
+    "The supplied sheet is a stationary costume-change interaction.",
+    "Separate supplied run and jump sheets now support persistent flight-suit movement on the RD-42 main deck.",
+    "It does not provide unarmored damage, weapon, descent, or hatch-traversal poses.",
+    "The isolated review returns movement control after the forward sequence resolves.",
+    "Reverse playback remains provisional until an authored re-arm sequence exists."
+  ],
+  "review_route": "super_frgmnts.html?preview=ship-interior&autostart=1",
+  "reviews": {
+    "animation": "Design/Super-Frgmnts/Overworld/Phase-3/Aryn/Armor-Change/Reviews/aryn-armor-change-preview-v1.gif",
+    "contact_sheet": "Design/Super-Frgmnts/Overworld/Phase-3/Aryn/Armor-Change/Reviews/aryn-armor-change-contact-v1.png"
+  }
+}

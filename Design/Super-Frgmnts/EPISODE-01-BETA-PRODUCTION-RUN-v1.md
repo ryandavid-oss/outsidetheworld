@@ -1,6 +1,7 @@
-# SUPER FRGMNTS // Episode 01 Beta Production Run
+# SUPER FRGMNTS // Episode 01 Beta 2 Production Run
 
-**Status:** Active production-beta contract
+**Status:** Beta 2 production release
+**Release:** `episode-01-beta-2`
 **Episode:** Arrival on Veyra
 **Build target:** One uninterrupted in-page run
 **Completion state:** Returned to the Veyra surface with Wound-touched
@@ -9,19 +10,23 @@ Vesperite secured
 ## Player-facing sequence
 
 1. The title screen performs the intentional sound handshake.
-2. Arrival begins on the RD-42 above Landing Flats.
+2. A skippable RD-42 atmospheric-approach beat bridges the title and planet;
+   arrival begins on the ship above Landing Flats.
 3. The complete four-plate Overworld is available, including the optional
    Western Signal Flats assignments.
-4. Dras's first-contact scene and the field-calibration lane prepare the
-   Coreworks transport.
+4. Dras's first-contact scene prepares the Coreworks transport. No tutorial
+   platforms, calibration lane, or worker-droid discovery task interrupts the
+   Overworld route.
 5. The physical transport locks Aryn in place, fades her out, and hands the
    run to The Shard Foundry without reloading the page.
 6. The eight-plate Foundry run requires twelve Signal Shards, the Foundry and
    Biolab atmospheric stabilizers, and the cleared three-hit Vesperite lock.
 7. Entering the complete Uplink Gate freezes the Foundry state, awards the
-   optional annihilation bonus once, and establishes the boss checkpoint.
-8. The Uplink route materializes Aryn in The Wound's safe portal bay. Crossing
-   the combat-runway threshold starts the skippable Seam Hunter announcement.
+   optional annihilation bonus once, establishes the boss checkpoint, and
+   plays a skippable five-second descent beat.
+8. The Uplink route materializes Aryn in The Wound's safe portal bay and starts
+   the boss music immediately. Crossing the combat-runway threshold starts the
+   skippable Seam Hunter announcement without restarting the score.
 9. Seam Hunter's defeat opens a playable aftermath. Completion still requires
    approaching the exposed Wound-touched Vesperite and pressing Down.
 10. Recovery stores the specimen, applies the final time and health bonuses,
@@ -68,9 +73,9 @@ the normal title/start-over path.
 
 - The Gate cannot trigger until all three Foundry requirements are true.
 - Controls and the mission clock stop at contact.
-- The loading card is non-interactive and cannot double-trigger.
-- The Wound score is preloaded while the existing Foundry score continues
-  beneath the announcement.
+- The descent bridge may be skipped once and cannot double-trigger.
+- The Wound score begins on room entry and remains audible beneath the
+  announcement.
 - Aryn begins inside the safe portal bay, outside Seam Hunter's activation
   threshold.
 
@@ -95,6 +100,8 @@ the normal title/start-over path.
   runway.
 - The production route and the isolated `preview=wound-boss` balancing route
   use the same boss implementation.
+- Coarse-pointer and portrait play automatically use the documented mobile
+  boss assist; desktop remains on the standard 50-health encounter.
 
 ## Review routes
 

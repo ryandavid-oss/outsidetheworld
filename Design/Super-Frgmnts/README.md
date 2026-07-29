@@ -23,7 +23,7 @@ runtime; they are not alternate sources of truth.
   dorsal-hatch boarding, compact interior behavior, and service-kit objective
 - [RD-42 Interior Wireframe v1](Overworld/Phase-3/Ship/Interior/RD42-SHIP-INTERIOR-WIREFRAME-v1.md) —
   precise greybox coordinates, collision, interactions, and camera targets
-- [Episode 01 release manifest](Releases/episode-01-unified-v1.json) — public
+- [Episode 01 Beta 2 release manifest](Releases/episode-01-beta-2.json) — public
   routes, asset roots, audio map, and release verification
 - [Current asset intake](ASSET-INTAKE-2026-07-26.md) — normalized runtime
   status for recent supplied artwork and animation

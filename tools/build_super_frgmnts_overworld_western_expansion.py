@@ -29,10 +29,26 @@ GROUND_Y = 744
 FONT_PATH = "/System/Library/Fonts/SFNSMono.ttf"
 
 
-def seam_delta(left: Image.Image, right: Image.Image, width: int = 8) -> float:
+def seam_delta(left: Image.Image, right: Image.Image, width: int = 1) -> float:
     left_edge = left.crop((left.width - width, 0, left.width, left.height))
     right_edge = right.crop((0, 0, width, right.height))
     means = ImageStat.Stat(ImageChops.difference(left_edge, right_edge)).mean
+    return sum(means) / 3
+
+
+def seam_structure_delta(
+    left: Image.Image,
+    right: Image.Image,
+    width: int = 96,
+) -> float:
+    """Compare enough mirrored edge context to catch landscape discontinuities."""
+    left_edge = left.crop(
+        (left.width - width, 0, left.width, left.height)
+    ).transpose(Image.Transpose.FLIP_LEFT_RIGHT)
+    right_edge = right.crop((0, 0, width, right.height))
+    means = ImageStat.Stat(
+        ImageChops.difference(left_edge, right_edge)
+    ).mean
     return sum(means) / 3
 
 
@@ -89,12 +105,6 @@ def build_seam_review(left: Image.Image, right: Image.Image) -> Image.Image:
         (0, 0),
     )
     review.paste(right.crop((0, 0, crop_width, right.height)), (crop_width, 0))
-    draw = ImageDraw.Draw(review)
-    draw.line(
-        (crop_width, 0, crop_width, review.height),
-        fill=(88, 245, 223),
-        width=2,
-    )
     return review
 
 
@@ -104,10 +114,15 @@ def main() -> None:
     outpost = validate_plate(Image.open(OUTPOST), OUTPOST.name)
     threshold = validate_plate(Image.open(THRESHOLD), THRESHOLD.name)
 
-    delta = seam_delta(west, landing)
-    assert delta <= 16, (
+    boundary_delta = seam_delta(west, landing)
+    structure_delta = seam_structure_delta(west, landing)
+    assert boundary_delta <= 0.1, (
         "Western-to-Landing boundary color delta is too high: "
-        f"{delta:.2f}"
+        f"{boundary_delta:.2f}"
+    )
+    assert structure_delta <= 5, (
+        "Western-to-Landing landscape continuity delta is too high: "
+        f"{structure_delta:.2f}"
     )
 
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
@@ -126,7 +141,8 @@ def main() -> None:
 
     print("SUPER FRGMNTS Western Signal Flats: BUILT")
     print(f"- runtime plate: {RUNTIME.relative_to(ROOT)}")
-    print(f"- right-edge seam RGB delta: {delta:.2f}")
+    print(f"- right-edge seam RGB delta: {boundary_delta:.2f}")
+    print(f"- 96px landscape continuity delta: {structure_delta:.2f}")
     print("- four 1672 x 941 plates // world width 6688 // ground y 744")
 
 

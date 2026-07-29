@@ -1,0 +1,83 @@
+{
+  "release": "episode-01-beta-2",
+  "status": "approved-production",
+  "source": {
+    "branch": "main",
+    "release_commit": "this manifest's commit",
+    "published_url": "https://outsidetheworld.com/super_frgmnts.html"
+  },
+  "episode": {
+    "number": "01",
+    "title": "Arrival on Veyra",
+    "level": "The Shard Foundry",
+    "difficulty": "easy-to-medium"
+  },
+  "episode_flow": [
+    "title",
+    "rd42-atmospheric-approach",
+    "arrival-on-veyra",
+    "western-signal-flats",
+    "dras-ehdre-first-contact",
+    "coreworks-transport",
+    "the-shard-foundry",
+    "the-wound",
+    "vesperite-recovery",
+    "surface-return"
+  ],
+  "routes": {
+    "entry": "super_frgmnts.html",
+    "overworld": "super_frgmnts.html?episode=01&stage=overworld&autostart=1",
+    "foundry": "super_frgmnts.html?episode=01&stage=foundry&autostart=1",
+    "wound": "super_frgmnts.html?episode=01&stage=wound&autostart=1",
+    "surface_return": "super_frgmnts.html?episode=01&stage=overworld&autostart=1&return=1"
+  },
+  "world": {
+    "overworld_plates": 4,
+    "foundry_plates": 8,
+    "foundry_zones": [
+      "Foundry",
+      "Refinery",
+      "Biolab",
+      "Deepworks",
+      "Uplink"
+    ],
+    "signal_shards": 12,
+    "atmospheric_stabilizers": 2,
+    "foundry_enemies": 16,
+    "chitin_sentinels": 7
+  },
+  "beta_2_changes": [
+    "separated power-up and item acquisition lanes",
+    "mobile-safe weapon control and Seam Hunter assist",
+    "authored Foundry-to-Wound descent beat",
+    "boss music begins on Wound room entry",
+    "physical Vesperite containment obstruction",
+    "unified 16-bit Foundry platform module",
+    "restored ventilation response after both generators",
+    "corrected Pale Watcher facing",
+    "Chitin Sentinel-led enemy population",
+    "reworked Core Leech scale and rendering",
+    "retired Ridge Skitter, Clacker Beetle, and Spore Wisp",
+    "mobile platform movement for Squircle Minions",
+    "production Ember Wasp encounter",
+    "tutorial-free Overworld",
+    "ambient-only reduced worker droid",
+    "autonomous hawk flight",
+    "repaired Western Signal Flats to Landing Flats seam"
+  ],
+  "audio": {
+    "title": "Audio/super-frgmnts-title-cue.mp3",
+    "overworld": "Audio/super-frgmnts-overworld-loop.mp3",
+    "foundry": "Audio/super-frgmnts-foundry-loop.mp3",
+    "wound": "Audio/super-frgmnts-seam-hunter-boss-v1.m4a",
+    "generator": "Audio/super-frgmnts-generator-startup-v1.wav"
+  },
+  "verification": {
+    "all_super_frgmnts_contracts": true,
+    "javascript_syntax": true,
+    "diff_check": true,
+    "desktop_browser_flow": true,
+    "portrait_browser_flow": true,
+    "live_github_pages_required": true
+  }
+}

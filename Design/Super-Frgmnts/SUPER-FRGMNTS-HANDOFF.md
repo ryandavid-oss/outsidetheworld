@@ -1,10 +1,10 @@
 # SUPER FRGMNTS // Working Handoff
 
-**Status:** Active development checkpoint
+**Status:** Beta 2 production release
 
 **Updated:** 2026-07-28
 
-**Checkpoint:** The `main` commit containing this file
+**Checkpoint:** Episode 01 Beta 2; approved for deployment from `main`
 
 This is the short-form operating context for future SUPER FRGMNTS work. Use it
 with the linked manifests and contracts instead of reconstructing the project
@@ -18,6 +18,8 @@ from old tasks, worktrees, or historical branches.
 - Design index: [`Design/Super-Frgmnts/README.md`](README.md)
 - Production URL:
   `https://outsidetheworld.com/super_frgmnts.html`
+- Active release manifest:
+  [`Releases/episode-01-beta-2.json`](Releases/episode-01-beta-2.json)
 - Hosting: GitHub Pages publishes from `main`.
 - Rollback tag: `super-frgmnts-pre-blaster-2026-07-23`
   (commit `6b759e8e`)
@@ -71,23 +73,28 @@ Important constraints:
 ## Current playable flow
 
 1. Title screen and intentional user-gesture audio unlock.
-2. Aryn arrives on Veyra standing on her hovering RD-42.
-3. The player may travel west into the optional Western Signal Flats to unlock
+2. A skippable RD-42 atmospheric-approach beat connects game start to Veyra,
+   hands the score from title music to Overworld music, and lands Aryn on her
+   hovering ship.
+3. Aryn arrives on Veyra standing on her hovering RD-42.
+4. The player may travel west into the optional Western Signal Flats to unlock
    Signal Sweep, recover Trillian, fit her field harness, and breach a sealed
-   salvage cache. The hawk guides unfinished western assignments.
-4. The player traverses the ship, reaches Dras's camp, and completes the
+   salvage cache.
+5. The player traverses the ship, reaches Dras's camp, and completes the
    canonical opening dialogue.
-5. A safe calibration lane teaches movement, firing, a shootable credit cache,
-   coin recovery, moving platforms, and an electrified platform.
-6. Aryn stands on the physical Coreworks surface transport. Its one-shot
+6. The Overworld contains no tutorial platforms, calibration prompts, or
+   discovery-task wrapper around the worker droid.
+7. Aryn stands on the physical Coreworks surface transport. Its one-shot
    energy vortex locks controls, fades Aryn, and hands off to the Foundry.
-7. The Shard Foundry provides eight horizontal plates, three traversal layers,
+8. The Shard Foundry provides eight horizontal plates, three traversal layers,
    two relays, twelve Signal Shards, two curated Deepworks entries, power-ups,
-   a non-bypassable three-hit Vesperite lock, fourteen spaced enemies, three
+   a three-hit physical Vesperite containment obstruction, sixteen spaced
+   enemies led by seven recurring Chitin Sentinels, three
    authored hazard beats, an eight-minute clock, and the Uplink Gate.
-8. The completed Uplink Gate freezes and preserves the Foundry run, then opens
-   The Wound at a safe portal-bay boss checkpoint.
-9. Seam Hunter's death reveals Wound-touched Vesperite. Deliberate Down-input
+9. The completed Uplink Gate freezes and preserves the Foundry run, then plays
+   a five-second descent beat before opening The Wound at a safe portal-bay
+   boss checkpoint.
+10. Seam Hunter's death reveals Wound-touched Vesperite. Deliberate Down-input
    recovery completes the beta, fades the stage to black, and automatically
    returns Aryn beside the Coreworks transport with the specimen and loadout
    preserved.
@@ -117,6 +124,26 @@ boarding and one-plate interior are implemented as isolated review greyboxes:
    physically descends into a compact, reusable ship interior.
 6. Aryn and Dras repair the transport together before she descends toward the
    Primary Biolab.
+
+The RD-42 interior now also reserves two later-facing features without adding
+them to the production route:
+
+- the human-scale flight cradle doubles as a retractable flight/suit alcove;
+  a supplied 36-frame, 2.736-second armored-to-flight-suit animation is live
+  in the isolated interior review. Supplied 36-frame run and jump sheets now
+  let Aryn persistently explore the main deck in her flight suit. Returning to
+  the alcove and pressing Down plays the provisional reverse re-arm; the
+  dorsal hatch and service-kit pack rail remain armor-locked because
+  unarmored descent, pack, damage, and weapon poses do not yet exist; and
+- the sealed floor panel beneath the pack bench is the future keel service
+  deck hatch. That later area should use a separate scene for repairs,
+  emergency concealment, or an enemy-boarding sequence rather than enlarging
+  the current one-plate cabin.
+
+The approved v2 interior plate is a scale reference only. Its y438–744
+occupied volume is correct, but the next art pass must move away from the
+Foundry's dark pipe-heavy identity toward Aryn's lighter blue-gray, silver,
+cobalt, violet, cyan, pink, and warm-orange palette.
 
 The story and staging contract is
 [`Post-Foundry/RETURN-TO-DRAS-INTERLUDE-v1.md`](Post-Foundry/RETURN-TO-DRAS-INTERLUDE-v1.md).
@@ -151,8 +178,8 @@ Then use:
   `http://127.0.0.1:8765/super_frgmnts.html?preview=overworld`
 - Western assignment review:
   `http://127.0.0.1:8765/super_frgmnts.html?episode=01&stage=overworld&scene=western&assignment=survey&autostart=1`
-  (`assignment` accepts `survey`, `trillian`, `harness`, `jump`, `salvage`,
-  or `droid`; prerequisite states are prepared without changing the production
+  (`assignment` accepts `survey`, `trillian`, `harness`, `jump`, or `salvage`;
+  prerequisite states are prepared without changing the production
   route)
 - Transport review:
   `http://127.0.0.1:8765/super_frgmnts.html?preview=overworld&scene=transport&autostart=1`
@@ -195,7 +222,10 @@ Seam Hunter is the first-level boss inside **The Wound**. The production route
 now enters the same implementation used by the isolated trial, carrying the
 Foundry loadout and forcing the recovered heavy rifle ready. The direct route
 and isolated trial grant the rifle for review. Seam Hunter retains 50
-provisional playtest hit points. His full authored body is vulnerable from
+provisional desktop playtest hit points. Coarse-pointer and portrait play use
+a 34-hit mobile assist profile with 72% pursuit speed, a 6.6-second laser
+cooldown, shorter sweep/beam damage windows, 1.65 seconds of post-hit
+invulnerability, and a 0.24-second rifle cadence. His full authored body is vulnerable from
 either direction, with no frontal ricochet or special face/rear requirement.
 His readable sweep remains damaging only during visible frames, and his
 laser-eye attack runs once every five seconds.
@@ -266,8 +296,7 @@ unchanged, and portrait framing uses a separate safe upper anchor. The
 developer-only `qa=sentry` variant starts Aryn on the moving gantry for this
 pose and camera review.
 
-These are playtest values, not final combat balance or a global rifle
-decision.
+These are production-beta balance values, not a global rifle decision.
 
 The heavy-rifle projectile now uses a longer gold discharge with a white-hot
 core, broken cyan/gold wake pixels, and localized muzzle and impact sparks.
@@ -315,10 +344,11 @@ integrated without changing combat balance. See
 Seam Hunter, his name, and his health bar remain concealed through the empty
 approach and the complete announcement, preventing wide desktop framing from
 spoiling his reveal. Once the words and darkness clear, the approved
-120-second **Subterranean Apex** score begins at increased volume and Seam
-Hunter materializes over 1.2 seconds. Gameplay and the health bar wait until
-he is fully visible. Skipping starts the same score immediately; victory,
-loss, and retry return to the Foundry score. See
+120-second **Subterranean Apex** score begins as soon as The Wound room loads.
+It remains clearly audible at 72% during the announcement and reaches full
+volume when Seam Hunter materializes over 1.2 seconds. Gameplay and the health
+bar wait until he is fully visible; victory, loss, and retry return to the
+Foundry score. See
 [`Foundry/Boss-Room/Music/WOUND-BOSS-MUSIC-v1.md`](Foundry/Boss-Room/Music/WOUND-BOSS-MUSIC-v1.md).
 
 ## Current equipment and world systems
@@ -358,20 +388,28 @@ loss, and retry return to the Foundry score. See
   handoff, combat targeting, hurt, incapacitated, recovery, and damage balance
   remain unimplemented. The clipped 25-frame rear/power-up alternate remains
   review-only and is not used as an airborne or landing continuation.
-- The non-solid, non-hostile Outpost worker droid drifts above the ground near
-  the abandoned credit terminal, periodically descends into a secondary
-  maintenance animation, and offers an optional post-contact service task.
+- The non-solid, non-hostile Outpost worker droid renders at 70% of its former
+  size, drifts above the ground near the abandoned credit terminal, and
+  periodically descends into its maintenance animation. It is ambient only:
+  there is no discovery hook, prompt, reward, or optional service task.
 - One non-hostile, non-solid, non-targetable hawk makes occasional passes
   through the Overworld sky, alternating direction after every pass. Its
   25-frame source atlas is preserved, while runtime uses a curated 16-frame
   cadence that removes near-duplicate wings-up holds at the loop boundary. It
-  circles above the next unfinished western assignment while that target is on
-  screen. It never enters enemy or seeker-targeting data.
+  follows an autonomous world-space route driven only by time; camera and Aryn
+  movement cannot steer or accelerate it. It never guides objectives or enters
+  enemy or seeker-targeting data.
 - The Overworld is now four 1,672 × 941 plates (6,688 pixels wide). Western
   Signal Flats is prepended at x=0; the original Landing Flats, Dras Outpost,
   and Coreworks Threshold retain their sequence with a +1,672-pixel runtime
-  origin offset. All five new assignments are optional and untimed, and none
+  origin offset. All four western assignments are optional and untimed, and none
   gates the Foundry.
+- The Western Signal Flats right-side landscape is repainted against the
+  Landing Flats source edge. Clouds, mountain layers, desert tracks, walkable
+  surface, and foreground shelf now continue across x=1,672. The production
+  check validates both the touching boundary columns and 96 pixels of landscape
+  context; its seam review deliberately has no guide line that could hide a
+  discontinuity.
 - Signal Sweep uses the shared Down/interact action away from closer
   interactions, emits a non-damaging radial pulse, and points to the nearest
   unfinished optional surface assignment.
@@ -381,34 +419,29 @@ loss, and retry return to the Foundry score. See
 
 ## Episode 01 enemy catalog
 
-The beta roster contains these 13 cataloged families:
+The production-beta Foundry population uses these ten families:
 
 | Runtime type | Working name | Role |
 | --- | --- | --- |
-| `crawler` | Ridge Skitter | Fast ground crawler |
-| `walker` | Clacker Beetle | Ground patrol |
-| `flyer` | Spore Wisp | Legacy airborne hazard |
 | `squircle` | Squircle Minion | Surface-crawling platform enemy |
-| `mite` | Vesper Mite | Ground-traveling scuttler; it does not fly |
 | `wasp` | Ember Wasp | Fast flying insect |
 | `gaunt` | Seam Hunter | Four-hit tall stalker |
-| `patroller` | Chitin Sentinel | Five-hit armored patrol |
-| `fragmentSpring` | Spring Fragment | Small fast airborne Fragment |
-| `fragmentBastion` | Bastion Fragment | Two-hit heavy Fragment |
+| `patroller` | Chitin Sentinel | Recurring three-hit armored patrol; seven placed |
 | `coreLeech` | Core Leech | Two-hit hovering parasite |
-| `vesperFlare` | Vesper Flare | Two-hit fast thermal flyer |
 | `paleWatcher` | Pale Watcher | Three-hit Uplink ground guard |
+| `skree` | Skree | Three-hit ground patrol |
+| `sova` | Sova | Two-hit ground crawler |
+| `seamLurker` | Seam Lurker | Two-hit ceiling patrol |
+| `kihunter` | Kihunter | Two-hit flying patrol |
 
-Additional intake assets are not part of the 13-family beta population:
+Ridge Skitter, Clacker Beetle, and Spore Wisp are permanently retired from
+runtime population and asset preloading. Other intake assets remain
+review-only:
 
 | Runtime type | Working name | Status |
 | --- | --- | --- |
 | — | Geemer | Source-only ground-and-platform walker |
-| `skree` | Skree | Runtime-ready ground patrol; not spawned |
-| `sova` | Sova | Runtime-ready ground crawler; not spawned |
 | `gloamRoller` | Gloam Roller | Runtime-ready crawl-to-roll ground patrol; not spawned |
-| `seamLurker` | Seam Lurker | Runtime-ready ceiling patrol; drop attack absent; not spawned |
-| `kihunter` | Kihunter | Runtime-ready flying patrol; not spawned |
 
 Raw masters and runtime manifests live under
 `Design/Super-Frgmnts/Foundry/Enemies/`. Normalized shipping atlases live under
@@ -420,16 +453,20 @@ The commit containing this handoff adds or finalizes:
 
 - the complete Arrival → Overworld → Foundry → Wound → Vesperite recovery →
   surface beta-production route;
+- the atmospheric arrival bridge and Foundry-to-Wound descent bridge;
+- the tutorial-free Overworld, ambient-only reduced worker droid, and
+  autonomous hawk;
 - the state-preserving Uplink boss checkpoint and automatic black surface
   return;
 - the physical Coreworks surface transport, including 36-frame idle and
   25-frame activation atlases;
-- the Core Leech, Vesper Flare, and Pale Watcher runtime families;
-- production population and preloading for the complete 13-family catalog;
-- ground-patrol physics and naming for the Vesper Mite;
+- the unified 16-bit Foundry platform module and restrained zone accents;
+- the Core Leech and Pale Watcher refinements plus Skree, Sova, Seam Lurker,
+  and Kihunter production population;
+- the recurring seven-Sentinel encounter grammar and mobile boss assist;
 - build scripts, manifests, review GIFs, and feature verifiers for the new
   assets;
-- updated arrival, beta, roster, and Vesper Mite contracts.
+- updated arrival, beta, roster, ambience, and production-route contracts.
 
 The transport sources and reviews are in
 `Design/Super-Frgmnts/Overworld/Coreworks-Transport/`. Regenerate derivatives

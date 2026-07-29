@@ -1,0 +1,69 @@
+{
+  "id": "rd42-interior-rear-plate-pixel-candidate-v2",
+  "status": "approved-scale-reference",
+  "established": "2026-07-28",
+  "runtime_integrated": false,
+  "generation": {
+    "method": "OpenAI built-in image generation",
+    "intent": "new production-oriented bitmap generated and edited from references",
+    "use_case": "style-transfer plus geometry correction",
+    "geometry_reference": "Design/Super-Frgmnts/Overworld/Phase-3/Ship/Interior/Reviews/rd42-interior-wireframe-compressed-v2.png",
+    "style_reference": "Images/Game/super-frgmnts-foundry-expanded-prototype-v1.png",
+    "ship_reference": "Images/Game/Super-Frgmnts/aryn-ship-v1.png",
+    "scale_reference": "Images/Game/Super-Frgmnts/aryn-field-rest-runtime-v1.png",
+    "postprocess": "Nearest-neighbor piecewise vertical normalization aligned the generated ceiling and deck bands to the logical y438 and y744 geometry without smoothing."
+  },
+  "asset": {
+    "path": "Design/Super-Frgmnts/Overworld/Phase-3/Ship/Interior/Assets/rd42-interior-rear-plate-pixel-candidate-v2.png",
+    "width": 1672,
+    "height": 941,
+    "format": "PNG",
+    "layer": "rear-only",
+    "style": "16-bit SNES-era pixel art"
+  },
+  "geometry": {
+    "normal_occupied_ceiling_y": 438,
+    "observed_art_ceiling_highlight_y": 436,
+    "gameplay_deck_y": 744,
+    "observed_art_deck_highlight_y": 743,
+    "occupied_volume_height": 306,
+    "dorsal_hatch_center_x": 684,
+    "dorsal_hatch_opening": [
+      624,
+      744
+    ],
+    "player_reference_box": [
+      112,
+      112
+    ],
+    "player_visible_bounds": [
+      33,
+      89
+    ],
+    "occupied_volume_to_visible_player_height": 3.44
+  },
+  "separate_runtime_layers": [
+    "dorsal hatch doors",
+    "access rails",
+    "foreground hatch rim",
+    "service-kit case",
+    "Trillian",
+    "Aryn",
+    "interaction prompts",
+    "diagnostic response glows"
+  ],
+  "review": {
+    "scale_check": "Design/Super-Frgmnts/Overworld/Phase-3/Ship/Interior/Reviews/rd42-interior-rear-plate-scale-check-v2.png",
+    "geometry_reference": "Design/Super-Frgmnts/Overworld/Phase-3/Ship/Interior/Reviews/rd42-interior-wireframe-compressed-v2.png",
+    "supersedes": "rd42-interior-rear-plate-pixel-candidate-v1",
+    "scale_approved": true,
+    "runtime_art_approved": false,
+    "revision_required": "The next rear plate must retain this geometry while replacing the Foundry-like darkness and dense pipe language with Aryn-led pale blue-gray, silver, cobalt, violet, cyan, pink, and warm orange materials. It must also add the flight/suit alcove and sealed keel-deck hatch.",
+    "questions": [
+      "Does Aryn now read as a person inside a compact one-room ship?",
+      "Does the flight cradle read as human-scale beside the live sprite?",
+      "Does the upper region read as inaccessible hull machinery?",
+      "Are the pack bench and empty service-kit slot independently readable?"
+    ]
+  }
+}

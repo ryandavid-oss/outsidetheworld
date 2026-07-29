@@ -73,12 +73,9 @@ def main() -> None:
     assert manifest["behavior"]["directionPattern"] == (
         "alternate after every completed pass"
     )
-    assert manifest["behavior"]["guideTargets"] == [
-        "survey-echo",
-        "recover-trillian",
-        "field-harness",
-        "sealed-salvage",
-    ]
+    assert manifest["behavior"]["guideTargets"] == []
+    assert manifest["behavior"]["worldSpaceFlight"] is True
+    assert manifest["behavior"]["cameraCoupling"] is False
     verify_atlas(ROOT / manifest["runtime"]["image"])
 
     required_fragments = (
@@ -93,10 +90,11 @@ def main() -> None:
         'canvas.dataset.overworldHawkSolid = "false";',
         'canvas.dataset.overworldHawkTargetable = "false";',
         'canvas.dataset.overworldHawkDirection =',
-        '"guide-circle"',
-        "canvas.dataset.overworldHawkGuideTarget",
-        "var hawkGuideTarget =",
-        "assignment.x < WIDTH",
+        '"world-space-sky-pass"',
+        'canvas.dataset.overworldHawkGuideTarget = "none";',
+        "var hawkWorldX;",
+        "hawkX = hawkWorldX - cameraX;",
+        "now * HAWK_FLIGHT_SPEED;",
         "hawkPassIndex % 2 === 0 ? -1 : 1;",
         "if (hawkDirection > 0) {",
     )
@@ -110,12 +108,22 @@ def main() -> None:
     assert 'makeEnemy("overworldHawk"' not in SOURCE
     assert "enemies.push(overworldHawk)" not in SOURCE
     assert 'enemy.type === "overworldHawk"' not in SOURCE
+    hawk_body = SOURCE.split(
+        "function drawOverworldHawk(now)",
+        1,
+    )[1].split("function drawOverworldBirds", 1)[0]
+    travel_body = hawk_body.split(
+        "var hawkTotalTravel =",
+        1,
+    )[1].split(";", 1)[0]
+    assert "cameraX" not in travel_body
+    assert "player." not in hawk_body
 
     print("SUPER FRGMNTS Overworld hawk: PASS")
     print("- validated 25-frame flight loop")
     print("- tuned 16-frame playback removes duplicate loop-boundary holds")
     print("- one hawk alternates direction after each atmospheric pass")
-    print("- on-screen western assignments receive a guide-circle")
+    print("- autonomous world-space flight is independent of Aryn and camera movement")
     print("- non-hostile, non-solid, and absent from enemy targeting")
     print("- 720x560 runtime atlas includes transparent padding")
 

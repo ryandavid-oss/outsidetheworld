@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
     <meta name="theme-color" content="#050713" />
     <meta name="color-scheme" content="dark" />
+    <meta name="release" content="SUPER FRGMNTS Episode 01 Beta 2" />
     <meta name="description" content="Guide Aryn Sol-Mavi through The Shard Foundry, recover twelve Signal Shards, and reach the Uplink Gate." />
     <meta property="og:title" content="SUPER FRGMNTS // THE SHARD FOUNDRY" />
     <meta property="og:description" content="Guide Aryn Sol-Mavi across The Shard Foundry, recover twelve Signal Shards, and reach the Uplink Gate." />
@@ -859,22 +860,22 @@
             display: block;
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            object-position: 50% 0;
+            object-fit: contain;
+            object-position: 50% 100%;
             image-rendering: pixelated;
-            transform-origin: 50% 12%;
+            transform-origin: 50% 100%;
             filter:
                 drop-shadow(4px 5px 0 rgba(0, 0, 0, 0.54))
                 drop-shadow(0 0 9px rgba(119, 163, 255, 0.16));
         }
 
         .dialogue-portrait img[data-character="aryn"] {
-            object-position: 50% 0;
+            object-position: 50% 100%;
             transform: none;
         }
 
         .dialogue-portrait img[data-character="dras"] {
-            object-position: 50% 0;
+            object-position: 50% 100%;
             transform: none;
         }
 
@@ -1316,6 +1317,191 @@
             color: #fff;
             font-size: 8px;
             letter-spacing: 0.04em;
+        }
+
+        .episode-bridge {
+            position: absolute;
+            inset: 0;
+            z-index: 12;
+            display: grid;
+            overflow: hidden;
+            padding:
+                max(28px, env(safe-area-inset-top))
+                max(28px, env(safe-area-inset-right))
+                max(28px, env(safe-area-inset-bottom))
+                max(28px, env(safe-area-inset-left));
+            place-items: center;
+            background:
+                radial-gradient(circle at 18% 24%, rgba(119, 163, 255, 0.14) 0 1px, transparent 2px),
+                radial-gradient(circle at 72% 18%, rgba(224, 191, 184, 0.16) 0 1px, transparent 2px),
+                radial-gradient(circle at 84% 47%, rgba(88, 245, 223, 0.13) 0 1px, transparent 2px),
+                linear-gradient(180deg, #02040d, #071126 66%, #111a2b);
+            background-size: 173px 137px, 211px 181px, 257px 223px, auto;
+            isolation: isolate;
+        }
+
+        .episode-bridge[hidden] {
+            display: none;
+        }
+
+        .episode-bridge::before {
+            position: absolute;
+            right: -12%;
+            bottom: -48%;
+            left: -12%;
+            z-index: -2;
+            height: 72%;
+            border: 4px solid rgba(119, 163, 255, 0.28);
+            border-radius: 50% 50% 0 0;
+            background:
+                radial-gradient(circle at 54% 10%, rgba(255, 211, 108, 0.2), transparent 24%),
+                linear-gradient(180deg, #5b4767 0 9%, #2b3859 28%, #11172a 72%);
+            box-shadow:
+                0 -16px 48px rgba(99, 149, 238, 0.18),
+                0 -3px 0 rgba(224, 191, 184, 0.18);
+            content: "";
+            transform: translateY(20%);
+            transition: transform 1.8s cubic-bezier(0.2, 0.72, 0.22, 1);
+        }
+
+        .episode-bridge.is-active::before {
+            transform: translateY(0);
+        }
+
+        .episode-bridge.is-wound {
+            background:
+                repeating-linear-gradient(
+                    90deg,
+                    transparent 0 92px,
+                    rgba(88, 245, 223, 0.035) 92px 94px
+                ),
+                linear-gradient(180deg, #03050d, #0a0d17 54%, #160d1d);
+        }
+
+        .episode-bridge.is-wound::before {
+            top: -12%;
+            right: 16%;
+            bottom: -12%;
+            left: 16%;
+            height: auto;
+            border: 0;
+            border-radius: 0;
+            background:
+                linear-gradient(90deg, #101522 0 8%, transparent 8% 92%, #101522 92%),
+                repeating-linear-gradient(
+                    180deg,
+                    transparent 0 68px,
+                    rgba(255, 211, 108, 0.16) 68px 72px
+                ),
+                linear-gradient(90deg, transparent, rgba(88, 245, 223, 0.08), transparent);
+            box-shadow:
+                inset 28px 0 0 rgba(0, 0, 0, 0.42),
+                inset -28px 0 0 rgba(0, 0, 0, 0.42);
+            transform: translateY(-6%);
+        }
+
+        .episode-bridge.is-wound.is-active::before {
+            transform: translateY(6%);
+        }
+
+        .episode-bridge__frame {
+            position: absolute;
+            inset: clamp(18px, 3vw, 46px);
+            z-index: -1;
+            border: 1px solid rgba(119, 163, 255, 0.28);
+            box-shadow: inset 0 0 70px rgba(3, 5, 13, 0.78);
+            pointer-events: none;
+        }
+
+        .episode-bridge__frame::before,
+        .episode-bridge__frame::after {
+            position: absolute;
+            width: 72px;
+            height: 8px;
+            background: var(--brand-gold);
+            box-shadow: 0 0 13px rgba(255, 211, 108, 0.38);
+            content: "";
+        }
+
+        .episode-bridge__frame::before {
+            top: -4px;
+            left: 9%;
+        }
+
+        .episode-bridge__frame::after {
+            right: 9%;
+            bottom: -4px;
+        }
+
+        .episode-bridge__content {
+            display: grid;
+            width: min(82%, 720px);
+            padding: clamp(22px, 4vw, 48px);
+            place-items: center;
+            border: 1px solid rgba(158, 197, 193, 0.38);
+            background: rgba(3, 6, 16, 0.78);
+            box-shadow:
+                8px 8px 0 rgba(0, 0, 0, 0.45),
+                inset 0 0 32px rgba(99, 149, 238, 0.08);
+            text-align: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .episode-bridge__kicker {
+            margin: 0 0 14px;
+            color: var(--index-teal);
+            font-size: clamp(8px, 1.1vw, 13px);
+            font-weight: 700;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+        }
+
+        .episode-bridge__title {
+            margin: 0;
+            color: var(--cream);
+            font-size: clamp(24px, 5vw, 62px);
+            letter-spacing: 0.08em;
+            line-height: 0.96;
+            text-shadow:
+                4px 4px 0 #03050d,
+                0 0 18px rgba(119, 163, 255, 0.22);
+            text-transform: uppercase;
+        }
+
+        .episode-bridge__copy {
+            max-width: 560px;
+            min-height: 3.4em;
+            margin: 20px 0 0;
+            color: #cad7ea;
+            font-size: clamp(10px, 1.35vw, 16px);
+            line-height: 1.65;
+        }
+
+        .episode-bridge__progress {
+            width: min(100%, 440px);
+            height: 4px;
+            margin-top: 24px;
+            overflow: hidden;
+            background: rgba(119, 163, 255, 0.14);
+        }
+
+        .episode-bridge__progress::after {
+            display: block;
+            width: var(--bridge-progress, 0%);
+            height: 100%;
+            background: linear-gradient(90deg, var(--index-teal), var(--brand-gold));
+            box-shadow: 0 0 12px var(--index-teal);
+            content: "";
+            transition: width 700ms ease;
+        }
+
+        .episode-bridge__skip {
+            position: absolute;
+            top: max(16px, env(safe-area-inset-top));
+            right: max(16px, env(safe-area-inset-right));
+            min-width: 92px;
+            min-height: 42px;
+            pointer-events: auto;
         }
 
         .touch-key--jump {
@@ -2282,22 +2468,21 @@
                 gap: 10px;
             }
 
-            .touch-key--weapon {
-                position: absolute;
-                bottom: calc(100% + 9px);
-                left: 0;
-                width: 64px;
-                height: 32px;
+            .touch-key.touch-key--weapon {
+                position: static;
+                width: clamp(42px, 11vw, 48px);
+                height: clamp(42px, 11vw, 48px);
+                flex: 0 0 clamp(42px, 11vw, 48px);
                 border-color: var(--brand-gold);
-                border-radius: 16px;
+                border-radius: 50%;
                 background: rgba(39, 27, 6, 0.76);
                 color: var(--brand-gold);
-                font-size: 7px;
-                opacity: 0.94;
+                font-size: 6px;
+                opacity: 0.86;
             }
 
             .touch-key--weapon strong {
-                font-size: 8px;
+                font-size: 7px;
             }
 
             .touch-key {
@@ -2603,7 +2788,7 @@
         }
     </style>
 </head>
-<body>
+<body data-release="beta-2">
     <main class="game-app">
         <header class="topbar">
             <div class="brand">
@@ -2707,6 +2892,40 @@
                     </button>
                 </section>
 
+                <section
+                    class="episode-bridge"
+                    id="episodeBridge"
+                    role="dialog"
+                    aria-modal="true"
+                    aria-labelledby="episodeBridgeTitle"
+                    aria-describedby="episodeBridgeCopy"
+                    hidden
+                >
+                    <div class="episode-bridge__frame" aria-hidden="true"></div>
+                    <div class="episode-bridge__content">
+                        <p class="episode-bridge__kicker" id="episodeBridgeKicker">
+                            RD-42 // Atmospheric approach
+                        </p>
+                        <h2 class="episode-bridge__title" id="episodeBridgeTitle">
+                            Veyra
+                        </h2>
+                        <p class="episode-bridge__copy" id="episodeBridgeCopy">
+                            Landing vector acquired.
+                        </p>
+                        <div
+                            class="episode-bridge__progress"
+                            id="episodeBridgeProgress"
+                            aria-hidden="true"
+                        ></div>
+                    </div>
+                    <button
+                        class="pixel-button episode-bridge__skip"
+                        id="episodeBridgeSkip"
+                        type="button"
+                        aria-label="Skip transition"
+                    >Skip</button>
+                </section>
+
                 <div
                     class="signal-boot"
                     id="signalBoot"
@@ -2743,7 +2962,7 @@
                         <span class="title-screen__vesperite title-screen__vesperite--right"></span>
                     </div>
                     <div class="title-screen__controls">
-                        <p class="title-screen__season" id="titleSeason">Season One // Veyra</p>
+                        <p class="title-screen__season" id="titleSeason">Season One // Veyra // Beta 2</p>
                         <p class="title-screen__hero">Episode 01 // <strong>Arrival on Veyra</strong></p>
                         <button class="pixel-button" id="titleStartButton" type="button" disabled>Loading signal…</button>
                         <p class="title-screen__hint">A distress signal from a world the Fleet abandoned.</p>
@@ -2971,8 +3190,7 @@
                 episodeOneRun &&
                 overworldPreview &&
                 previewParameters.get("return") === "1";
-            var episodeArrivalTutorial =
-                episodeOneRun && overworldPreview && !episodeSurfaceReturn;
+            var episodeArrivalTutorial = false;
             var stabilizerTrial =
                 !episodeOneRun &&
                 expansionPreview &&
@@ -3154,9 +3372,9 @@
             var WORKER_DROID_SERVICE_DESCENT = 22;
             var WORKER_DROID_FRAME_WIDTH = 144;
             var WORKER_DROID_FRAME_HEIGHT = 140;
-            var WORKER_DROID_DRAW_WIDTH = 126;
-            var WORKER_DROID_DRAW_HEIGHT = 122;
-            var WORKER_DROID_FRIENDLY_AVOID_RADIUS = 66;
+            var WORKER_DROID_DRAW_WIDTH = 88;
+            var WORKER_DROID_DRAW_HEIGHT = 85;
+            var WORKER_DROID_FRIENDLY_AVOID_RADIUS = 46;
             var TRILLIAN_FRAME_WIDTH = 120;
             var TRILLIAN_FRAME_HEIGHT = 104;
             var TRILLIAN_DRAW_WIDTH = 96;
@@ -3174,8 +3392,6 @@
             var WESTERN_TRILLIAN_X = 690;
             var WESTERN_HARNESS_X = 1080;
             var WESTERN_SALVAGE_X = 1430;
-            var OUTPOST_DROID_ASSIGNMENT_X =
-                OVERWORLD_ORIGIN_X + WIDTH + 1180;
             var HAWK_FRAME_WIDTH = 144;
             var HAWK_FRAME_HEIGHT = 112;
             var HAWK_DRAW_WIDTH = 144;
@@ -3315,6 +3531,16 @@
             var WOUND_BOSS_LASER_IMPACT_FRAME_DURATION = 0.065;
             var WOUND_BOSS_LASER_IMPACT_RENDER_SIZE = 192;
             var WOUND_BOSS_LASER_IMPACT_BASELINE = 93;
+            var WOUND_BOSS_MOBILE_HEALTH = 34;
+            var WOUND_BOSS_MOBILE_SPEED_SCALE = 0.72;
+            var WOUND_BOSS_MOBILE_LASER_COOLDOWN = 6.6;
+            var WOUND_BOSS_MOBILE_RIFLE_COOLDOWN = 0.24;
+            var WOUND_BOSS_MOBILE_INVULNERABILITY = 1.65;
+            var WOUND_BOSS_MOBILE_CONFUSION_DURATION = 2.35;
+            var WOUND_BOSS_MOBILE_SWEEP_FIRST_FRAME = 16;
+            var WOUND_BOSS_MOBILE_SWEEP_LAST_FRAME = 18;
+            var WOUND_BOSS_MOBILE_LASER_FIRST_ACTIVE_FRAME = 18;
+            var WOUND_BOSS_MOBILE_LASER_LAST_ACTIVE_FRAME = 26;
             var WOUND_BOSS_DEATH_FRAME_WIDTH = 280;
             var WOUND_BOSS_DEATH_FRAME_HEIGHT = 223;
             var WOUND_BOSS_DEATH_FRAME_COUNT = 25;
@@ -3376,6 +3602,21 @@
                 2, 2, 2, 2, 2, 2
             ];
             var WOUND_BOSS_ATTACK_BOTTOM_PAD = 5;
+
+            function woundBossMobileAssistActive() {
+                return (
+                    woundBossPreview &&
+                    (
+                        portraitMode ||
+                        (
+                            window.matchMedia &&
+                            window.matchMedia(
+                                "(pointer: coarse)"
+                            ).matches
+                        )
+                    )
+                );
+            }
             var LIGHT_IMPACT_DURATION = 0.3;
             var HEAVY_IMPACT_DURATION = 0.315;
             var DEATH_POSE_DURATION = 0.98;
@@ -3479,6 +3720,18 @@
             var bossIntroSkip = document.getElementById("bossIntroSkip");
             var bossIntroParticles =
                 document.getElementById("bossIntroParticles");
+            var episodeBridge =
+                document.getElementById("episodeBridge");
+            var episodeBridgeKicker =
+                document.getElementById("episodeBridgeKicker");
+            var episodeBridgeTitle =
+                document.getElementById("episodeBridgeTitle");
+            var episodeBridgeCopy =
+                document.getElementById("episodeBridgeCopy");
+            var episodeBridgeProgress =
+                document.getElementById("episodeBridgeProgress");
+            var episodeBridgeSkip =
+                document.getElementById("episodeBridgeSkip");
             var titleScreen = document.getElementById("titleScreen");
             var titleArtImage = document.querySelector(".title-screen__art");
             var titleStartButton = document.getElementById("titleStartButton");
@@ -3506,7 +3759,9 @@
                 document.getElementById("backgroundMusicSecondary");
             var selectedMusicTrack = mainTitleScreen
                 ? backgroundMusic.dataset.titleTrack
-                : overworldPreview || shipInteriorPreview
+                : woundBossPreview
+                    ? backgroundMusic.dataset.woundTrack
+                    : overworldPreview || shipInteriorPreview
                     ? backgroundMusic.dataset.overworldTrack
                     : backgroundMusic.dataset.foundryTrack;
             var directionPad = document.getElementById("directionPad");
@@ -3965,6 +4220,18 @@
                     source: "/Images/Game/Super-Frgmnts/aryn-field-rest-runtime-v1.png",
                     priority: "high"
                 },
+                armorChange: {
+                    source: "/Images/Game/Super-Frgmnts/aryn-armor-change-runtime-v1.png",
+                    priority: "high"
+                },
+                flightSuitRun: {
+                    source: "/Images/Game/Super-Frgmnts/aryn-flight-suit-run-runtime-v1.png",
+                    priority: "high"
+                },
+                flightSuitJump: {
+                    source: "/Images/Game/Super-Frgmnts/aryn-flight-suit-jump-runtime-v1.png",
+                    priority: "high"
+                },
                 takeoff: {
                     source: "/Images/Builder/signal-ranger-jump-takeoff.png",
                     priority: "high"
@@ -4103,6 +4370,10 @@
                 },
                 foundryExpanded: {
                     source: "/Images/Game/super-frgmnts-foundry-expanded-prototype-v1.png",
+                    priority: "high"
+                },
+                foundryPlatformModule: {
+                    source: "/Images/Game/Super-Frgmnts/foundry-platform-module-runtime-v1.png",
                     priority: "high"
                 },
                 woundBossBackgroundLeft: {
@@ -4296,18 +4567,6 @@
                 vesperitePickup: {
                     source: "/Images/Game/Super-Frgmnts/foundry-vesperite-runtime-v1.png",
                     priority: "high"
-                },
-                crawler: {
-                    source: "/Images/Game/enemy-crawler-ridge-skitter.png",
-                    priority: "high"
-                },
-                flyer: {
-                    source: "/Images/Game/enemy-flyer-spore-wisp.png",
-                    priority: "high"
-                },
-                walker: {
-                    source: "/Images/Game/enemy-walker-clacker-beetle.png",
-                    priority: "high"
                 }
             };
             var sharedAssetKeys = [
@@ -4353,6 +4612,7 @@
             ];
             var foundryCoreAssetKeys = [
                 "foundryExpanded",
+                "foundryPlatformModule",
                 "stabilizerDormant",
                 "stabilizerActive",
                 "foundryFanHousing",
@@ -4360,24 +4620,16 @@
                 "foundrySeamWindow"
             ];
             var episodeBetaAssetKeys = [
-                "crawler",
-                "walker",
-                "flyer",
                 "squircle",
-                "mite",
                 "patroller",
                 "patrollerDeath",
                 "wasp",
                 "gauntWalk",
                 "gauntAttack",
-                "fragmentSpring",
-                "fragmentBastion",
                 "coreLeech",
-                "vesperFlare",
                 "paleWatcher",
                 "skree",
                 "sova",
-                "gloamRoller",
                 "seamLurker",
                 "kihunter",
                 "rifleDrawLudo",
@@ -4608,6 +4860,8 @@
                 ? "available"
                 : "rack";
             var shipServiceKitElapsed = 0;
+            var shipSuitState = "armored";
+            var shipSuitElapsed = 0;
             var shipSpecimenActive =
                 shipPostWoundPreview || shipServiceKitObjective;
             var particles = [];
@@ -4648,6 +4902,10 @@
             var overworldTransitionReady = false;
             var coreworksTransportActive = false;
             var coreworksTransportElapsed = 0;
+            var episodeBridgeMode = "";
+            var episodeBridgeNextScene = "";
+            var episodeBridgeCompleting = false;
+            var episodeBridgeTimers = [];
 
             function readEpisodeCredits() {
                 try {
@@ -5018,14 +5276,6 @@
                     prompt: "↓ BREACH SALVAGE",
                     reward: 5,
                     complete: false
-                },
-                {
-                    id: "service-worker-droid",
-                    x: OUTPOST_DROID_ASSIGNMENT_X,
-                    label: "SERVICE WORKER DROID",
-                    prompt: "↓ SERVICE DROID",
-                    reward: 2,
-                    complete: false
                 }
             ];
             var signalSweepOwned = false;
@@ -5197,12 +5447,15 @@
             var SHIP_EXTERIOR_HATCH_X =
                 OVERWORLD_ORIGIN_X + 572;
             var SHIP_INTERIOR_HATCH_X = 684;
+            var SHIP_INTERIOR_CEILING_Y = 438;
             var SHIP_INTERIOR_DECK_Y = 744;
             var SHIP_INTERIOR_LEFT_X = 188;
             var SHIP_INTERIOR_RIGHT_X = 1340;
             var SHIP_CONSOLE_X = 386;
+            var SHIP_SUIT_CRADLE_X = 506;
             var SHIP_TRILLIAN_BERTH_X = 894;
             var SHIP_PACK_BENCH_X = 1026;
+            var SHIP_KEEL_HATCH_X = 1024;
             var SHIP_SERVICE_KIT_X = 1274;
 
             function buildShipInteriorPlatforms() {
@@ -5892,12 +6145,6 @@
                     } else {
                         criticalAssetKeys.push("foundryLower1");
                     }
-                } else {
-                    criticalAssetKeys.push(
-                        "crawler",
-                        "flyer",
-                        "walker"
-                    );
                 }
             }
             if (surfaceCrawlerTrial) {
@@ -5936,6 +6183,13 @@
             }
             if (episodeArrivalTutorial) {
                 criticalAssetKeys.push("creditCoin", "creditCrate");
+            }
+            if (shipEntryPreview || shipInteriorPreview) {
+                criticalAssetKeys.push(
+                    "armorChange",
+                    "flightSuitRun",
+                    "flightSuitJump"
+                );
             }
             if (
                 expansionPreview ||
@@ -6148,6 +6402,8 @@
                     ? "available"
                     : "rack";
                 shipServiceKitElapsed = 0;
+                shipSuitState = "armored";
+                shipSuitElapsed = 0;
                 shipSpecimenActive =
                     shipPostWoundPreview ||
                     shipServiceKitObjective;
@@ -6264,8 +6520,7 @@
                                 jump:
                                     OVERWORLD_SHIP_SPAWN_X +
                                     56,
-                                salvage: WESTERN_SALVAGE_X,
-                                droid: OUTPOST_DROID_ASSIGNMENT_X
+                                salvage: WESTERN_SALVAGE_X
                             }[requestedWesternAssignment] ||
                             WESTERN_SURVEY_X
                         ) - 56
@@ -6551,7 +6806,11 @@
                     canvas.dataset.woundBossTurnIntent = "0";
                     canvas.dataset.woundBossPostTurnCommit = "0";
                     canvas.dataset.woundBossHealth =
-                        String(WOUND_BOSS_HEALTH);
+                        String(
+                            woundBossMobileAssistActive()
+                                ? WOUND_BOSS_MOBILE_HEALTH
+                                : WOUND_BOSS_HEALTH
+                        );
                     canvas.dataset.woundBossState = "waiting";
                     canvas.dataset.woundBossBehavior = "waiting";
                     canvas.dataset.woundBossAttackFrame = "0";
@@ -6682,18 +6941,7 @@
                     clearEpisodeCredits();
                 }
                 configureWesternAssignmentPreviewState();
-                enemies = [
-                    makeEnemy("crawler", 890, GROUND_Y, 780, 1035, 132),
-                    makeEnemy("walker", WIDTH + 650, GROUND_Y, WIDTH + 590, WIDTH + 850, -94),
-                    makeEnemy("flyer", WIDTH + 1040, 366, WIDTH + 920, WIDTH + 1210, 78),
-                    makeEnemy("crawler", WIDTH + 1472, GROUND_Y, WIDTH + 1370, WIDTH + 1580, -142),
-                    makeEnemy("walker", WIDTH * 2 + 760, GROUND_Y, WIDTH * 2 + 690, WIDTH * 2 + 930, 102),
-                    makeEnemy("flyer", WIDTH * 2 + 1190, 332, WIDTH * 2 + 1040, WIDTH * 2 + 1400, -84),
-                    makeEnemy("crawler", WIDTH * 2 + 1490, 540, WIDTH * 2 + 1460, WIDTH * 2 + 1595, 124),
-                    makeEnemy("walker", WIDTH * 3 + 765, GROUND_Y, WIDTH * 3 + 720, WIDTH * 3 + 930, 104),
-                    makeEnemy("flyer", WIDTH * 3 + 1135, 340, WIDTH * 3 + 990, WIDTH * 3 + 1340, 82),
-                    makeEnemy("crawler", WIDTH * 3 + 1440, GROUND_Y, WIDTH * 3 + 1375, WIDTH * 3 + 1570, -138)
-                ];
+                enemies = [];
                 if (expansionPreview) {
                     enemies = episodeBetaRun
                         ? makeEpisodeBetaEnemies()
@@ -7055,8 +7303,8 @@
                     makeHeartPickup(WIDTH * 6 + 1340, 970)
                 ];
                 betaPickups = [
-                    makeBetaPickup("jetpack", 936, 1170),
-                    makeBetaPickup("rifle", WIDTH * 2 + 560, 1518),
+                    makeBetaPickup("jetpack", 1340, 930),
+                    makeBetaPickup("rifle", WIDTH * 2 + 700, 1518),
                     makeBetaPickup("vesperite", WIDTH * 3 + 500, 1070)
                 ];
                 creditCrates = [
@@ -7071,7 +7319,7 @@
                 heavyRifleOwned = false;
                 selectedWeapon = "pack";
                 rifleObstacles = [
-                    makeBetaRifleObstacle(WIDTH * 2 + 900, GROUND_Y)
+                    makeBetaRifleObstacle(WIDTH * 2 + 1280, GROUND_Y)
                 ];
             }
 
@@ -7368,7 +7616,9 @@
                     shipInteriorActive
                         ? state === "ship-transition"
                             ? shipTransitionMode
-                            : "active"
+                            : state === "ship-suit"
+                                ? "suit-" + shipSuitState
+                                : "active"
                         : "exterior";
                 canvas.dataset.shipServiceKit =
                     shipServiceKitState;
@@ -7384,6 +7634,9 @@
                     shipTrillianPreview
                         ? "occupied"
                         : "empty";
+                canvas.dataset.shipSuitAlcove =
+                    shipSuitState;
+                canvas.dataset.shipKeelHatch = "sealed";
                 canvas.dataset.shipCameraMode =
                     shipInteriorActive
                         ? portraitMode
@@ -7413,6 +7666,8 @@
 
             function configureShipInteriorWorld(descending) {
                 shipInteriorActive = true;
+                shipSuitState = "armored";
+                shipSuitElapsed = 0;
                 WORLD_HEIGHT = HEIGHT;
                 SCREEN_COUNT = 1;
                 WORLD_WIDTH = WIDTH;
@@ -7545,6 +7800,13 @@
                 ) {
                     return false;
                 }
+                if (shipSuitState === "flight-suit") {
+                    shipStationPopup(
+                        "FIELD ARMOR REQUIRED // HATCH LOCKED",
+                        "#ff69b4"
+                    );
+                    return true;
+                }
                 releaseAllControls();
                 state = "ship-transition";
                 setPauseButton(false, false);
@@ -7674,6 +7936,13 @@
                 ) {
                     return false;
                 }
+                if (shipSuitState === "flight-suit") {
+                    shipStationPopup(
+                        "FIELD ARMOR REQUIRED // PACK RAIL OFFLINE",
+                        "#ff69b4"
+                    );
+                    return true;
+                }
                 releaseAllControls();
                 state = "ship-kit";
                 setPauseButton(false, false);
@@ -7714,6 +7983,117 @@
                 updateHud();
             }
 
+            function shipSuitReviewDuration() {
+                return prefersReducedMotion ? 0.456 : 2.736;
+            }
+
+            function alignPlayerToShipSuitCradle() {
+                player.x = SHIP_SUIT_CRADLE_X - 56;
+                player.y = SHIP_INTERIOR_DECK_Y - 100;
+                player.vx = 0;
+                player.vy = 0;
+                player.facing = 1;
+                player.onGround = true;
+                player.supportPlatform = platforms[0] || null;
+            }
+
+            function beginShipSuitChange() {
+                if (
+                    !shipInteriorActive ||
+                    state !== "running" ||
+                    shipSuitState !== "armored" ||
+                    !playerNearShipInteriorAnchor(
+                        SHIP_SUIT_CRADLE_X,
+                        70
+                    ) ||
+                    !imageHasPixels(assets.armorChange) ||
+                    !imageHasPixels(assets.flightSuitRun) ||
+                    !imageHasPixels(assets.flightSuitJump)
+                ) {
+                    return false;
+                }
+                releaseAllControls();
+                state = "ship-suit";
+                shipSuitState = "changing";
+                shipSuitElapsed = 0;
+                alignPlayerToShipSuitCradle();
+                setPauseButton(false, false);
+                playTone(246, 0.12, "square", 0.022);
+                playTone(492, 0.18, "sine", 0.018, 0.08);
+                announce("Flight suit change initiated.");
+                updateShipTelemetry();
+                return true;
+            }
+
+            function beginShipSuitRearm() {
+                if (
+                    !shipInteriorActive ||
+                    state !== "running" ||
+                    shipSuitState !== "flight-suit" ||
+                    !playerNearShipInteriorAnchor(
+                        SHIP_SUIT_CRADLE_X,
+                        70
+                    ) ||
+                    !imageHasPixels(assets.armorChange)
+                ) {
+                    return false;
+                }
+                releaseAllControls();
+                state = "ship-suit";
+                shipSuitState = "rearming";
+                shipSuitElapsed = 0;
+                alignPlayerToShipSuitCradle();
+                setPauseButton(false, false);
+                playTone(492, 0.12, "sine", 0.019);
+                playTone(246, 0.18, "square", 0.021, 0.08);
+                announce("Field armor restoration initiated.");
+                updateShipTelemetry();
+                return true;
+            }
+
+            function updateShipSuitChange(delta) {
+                elapsed += delta;
+                updateParticles(delta);
+                alignPlayerToShipSuitCradle();
+                if (
+                    shipSuitState !== "changing" &&
+                    shipSuitState !== "rearming"
+                ) {
+                    updateShipTelemetry();
+                    return;
+                }
+
+                shipSuitElapsed = Math.min(
+                    shipSuitReviewDuration(),
+                    shipSuitElapsed + delta
+                );
+                if (
+                    shipSuitElapsed >=
+                    shipSuitReviewDuration()
+                ) {
+                    shipSuitElapsed = shipSuitReviewDuration();
+                    if (shipSuitState === "changing") {
+                        shipSuitState = "flight-suit";
+                        shipSuitElapsed = 0;
+                        state = "running";
+                        setPauseButton(false, true);
+                        playTone(660, 0.12, "sine", 0.02);
+                        announce(
+                            "Flight suit secure. Movement restored. Return to the alcove to restore field armor."
+                        );
+                    } else {
+                        shipSuitState = "armored";
+                        shipSuitElapsed = 0;
+                        state = "running";
+                        setPauseButton(false, true);
+                        playTone(330, 0.12, "square", 0.022);
+                        announce("Field armor restored.");
+                    }
+                }
+                updateShipTelemetry();
+                updateHud();
+            }
+
             function shipStationPopup(text, color) {
                 popups.push({
                     x: player.x + 56,
@@ -7734,6 +8114,12 @@
                     return true;
                 }
                 if (beginShipExit()) {
+                    return true;
+                }
+                if (beginShipSuitRearm()) {
+                    return true;
+                }
+                if (beginShipSuitChange()) {
                     return true;
                 }
                 if (
@@ -7795,7 +8181,7 @@
                     gaunt: { width: 88, height: 128 },
                     fragmentSpring: { width: 60, height: 44 },
                     fragmentBastion: { width: 66, height: 58 },
-                    coreLeech: { width: 78, height: 96 },
+                    coreLeech: { width: 90, height: 110 },
                     vesperFlare: { width: 82, height: 86 },
                     paleWatcher: { width: 66, height: 110 },
                     skree: { width: 92, height: 120 },
@@ -7933,13 +8319,18 @@
             }
 
             function makeWoundBoss() {
+                var mobileAssist =
+                    woundBossMobileAssistActive();
+                var bossSpeedScale = mobileAssist
+                    ? WOUND_BOSS_MOBILE_SPEED_SCALE
+                    : 1;
                 var boss = makeEnemy(
                     "gaunt",
                     WOUND_BOSS_SPAWN_X,
                     GROUND_Y,
                     WOUND_BOSS_PATROL_MIN_X,
                     WOUND_BOSS_PATROL_MAX_X,
-                    -WOUND_BOSS_STALK_SPEED
+                    -WOUND_BOSS_STALK_SPEED * bossSpeedScale
                 );
 
                 // The trial collider is intentionally narrower than the
@@ -7950,12 +8341,17 @@
                 boss.y = GROUND_Y - boss.height;
                 boss.baseY = boss.y;
                 boss.floorY = GROUND_Y;
-                boss.maxHealth = WOUND_BOSS_HEALTH;
-                boss.health = WOUND_BOSS_HEALTH;
+                boss.mobileAssist = mobileAssist;
+                boss.speedScale = bossSpeedScale;
+                boss.maxHealth = mobileAssist
+                    ? WOUND_BOSS_MOBILE_HEALTH
+                    : WOUND_BOSS_HEALTH;
+                boss.health = boss.maxHealth;
                 boss.hurtFlash = 0;
                 boss.facing = -1;
-                boss.patrolSpeed = WOUND_BOSS_STALK_SPEED;
-                boss.vx = -WOUND_BOSS_STALK_SPEED;
+                boss.patrolSpeed =
+                    WOUND_BOSS_STALK_SPEED * bossSpeedScale;
+                boss.vx = -boss.patrolSpeed;
                 boss.attackCooldown = 0;
                 boss.attackLanded = false;
                 boss.behavior = "waiting";
@@ -7995,8 +8391,26 @@
                 boss.laserAttacking = false;
                 boss.laserTime = 0;
                 boss.laserLastFrame = -1;
+                boss.laserCooldownDuration = mobileAssist
+                    ? WOUND_BOSS_MOBILE_LASER_COOLDOWN
+                    : WOUND_BOSS_LASER_COOLDOWN;
                 boss.laserCooldown =
-                    WOUND_BOSS_LASER_COOLDOWN;
+                    boss.laserCooldownDuration;
+                boss.confusionDuration = mobileAssist
+                    ? WOUND_BOSS_MOBILE_CONFUSION_DURATION
+                    : WOUND_BOSS_CONFUSION_DURATION;
+                boss.sweepFirstFrame = mobileAssist
+                    ? WOUND_BOSS_MOBILE_SWEEP_FIRST_FRAME
+                    : WOUND_BOSS_SWEEP_FIRST_FRAME;
+                boss.sweepLastFrame = mobileAssist
+                    ? WOUND_BOSS_MOBILE_SWEEP_LAST_FRAME
+                    : WOUND_BOSS_SWEEP_LAST_FRAME;
+                boss.laserFirstActiveFrame = mobileAssist
+                    ? WOUND_BOSS_MOBILE_LASER_FIRST_ACTIVE_FRAME
+                    : WOUND_BOSS_LASER_FIRST_ACTIVE_FRAME;
+                boss.laserLastActiveFrame = mobileAssist
+                    ? WOUND_BOSS_MOBILE_LASER_LAST_ACTIVE_FRAME
+                    : WOUND_BOSS_LASER_LAST_ACTIVE_FRAME;
                 boss.laserLanded = false;
                 boss.pendingLaser = false;
                 boss.laserAimAngle =
@@ -8014,6 +8428,8 @@
                 boss.deathImpactTriggered = false;
                 boss.queuedTurn = false;
                 boss.lastAttackLanded = false;
+                canvas.dataset.woundBossAssist =
+                    mobileAssist ? "mobile" : "standard";
                 return boss;
             }
 
@@ -8100,180 +8516,86 @@
                 return enemy;
             }
 
+            function configureBetaEnemy(enemy, health) {
+                enemy.maxHealth = health || 1;
+                enemy.health = enemy.maxHealth;
+                enemy.hurtFlash = 0;
+                enemy.betaShowcase = true;
+                return enemy;
+            }
+
+            function configureBetaSentinel(enemy) {
+                configureBetaEnemy(enemy, 3);
+                enemy.dying = false;
+                enemy.defeated = false;
+                enemy.deathTime = 0;
+                enemy.deathDuration = 36 * 0.061 + 0.45;
+                enemy.facing = enemy.vx < 0 ? -1 : 1;
+                return enemy;
+            }
+
             function makeEpisodeBetaEnemies() {
                 var betaEnemies = [];
                 var squircle = makeSurfaceCrawlerTrial();
                 if (squircle) {
                     squircle.betaShowcase = true;
+                    squircle.speed = 124;
                     betaEnemies.push(squircle);
                 }
 
-                var ridgeSkitter = makeEnemy(
-                    "crawler",
-                    1180,
-                    GROUND_Y,
-                    1080,
-                    1480,
-                    -118
-                );
-                ridgeSkitter.betaShowcase = true;
-                betaEnemies.push(ridgeSkitter);
+                [
+                    [1320, 1120, 1580, -54],
+                    [WIDTH + 900, WIDTH + 760, WIDTH + 1100, 52],
+                    [WIDTH * 2 + 1500, WIDTH * 2 + 1380, WIDTH * 2 + 1760, -54],
+                    [WIDTH * 3 + 1130, WIDTH * 3 + 900, WIDTH * 3 + 1420, 52],
+                    [WIDTH * 4 + 1240, WIDTH * 4 + 1010, WIDTH * 4 + 1510, -54],
+                    [WIDTH * 5 + 920, WIDTH * 5 + 800, WIDTH * 5 + 1060, 52],
+                    [WIDTH * 6 + 1120, WIDTH * 6 + 880, WIDTH * 6 + 1450, -54]
+                ].forEach(function (placement) {
+                    betaEnemies.push(
+                        configureBetaSentinel(
+                            makeEnemy(
+                                "patroller",
+                                placement[0],
+                                GROUND_Y,
+                                placement[1],
+                                placement[2],
+                                placement[3]
+                            )
+                        )
+                    );
+                });
 
-                var clacker = makeEnemy(
-                    "walker",
-                    WIDTH + 900,
-                    GROUND_Y,
-                    WIDTH + 760,
-                    WIDTH + 1120,
-                    94
-                );
-                clacker.betaShowcase = true;
-                betaEnemies.push(clacker);
+                [
+                    ["coreLeech", WIDTH + 430, 1180, WIDTH + 260, WIDTH + 720, 58, 2],
+                    ["kihunter", WIDTH * 2 + 950, 1080, WIDTH * 2 + 840, WIDTH * 2 + 1150, 76, 2],
+                    ["sova", WIDTH * 3 + 610, GROUND_Y, WIDTH * 3 + 390, WIDTH * 3 + 820, 82, 2],
+                    ["wasp", WIDTH * 4 + 780, 720, WIDTH * 4 + 520, WIDTH * 4 + 1120, -108, 2],
+                    ["gaunt", WIDTH * 5 + 500, GROUND_Y, WIDTH * 5 + 340, WIDTH * 5 + 700, 66, 4],
+                    ["skree", WIDTH * 6 + 520, GROUND_Y, WIDTH * 6 + 330, WIDTH * 6 + 760, 64, 3],
+                    ["seamLurker", WIDTH * 7 + 480, 330, WIDTH * 7 + 290, WIDTH * 7 + 760, 72, 2],
+                    ["paleWatcher", WIDTH * 7 + 1220, GROUND_Y, WIDTH * 7 + 1060, WIDTH * 7 + 1510, -62, 3]
+                ].forEach(function (placement) {
+                    betaEnemies.push(
+                        configureBetaEnemy(
+                            makeEnemy(
+                                placement[0],
+                                placement[1],
+                                placement[2],
+                                placement[3],
+                                placement[4],
+                                placement[5]
+                            ),
+                            placement[6]
+                        )
+                    );
+                });
 
-                var sporeWisp = makeEnemy(
-                    "flyer",
-                    WIDTH * 2 + 470,
-                    930,
-                    WIDTH * 2 + 280,
-                    WIDTH * 2 + 770,
-                    74
-                );
-                sporeWisp.betaShowcase = true;
-                betaEnemies.push(sporeWisp);
-
-                var mite = makeEnemy(
-                    "mite",
-                    WIDTH * 3 + 620,
-                    GROUND_Y,
-                    WIDTH * 3 + 420,
-                    WIDTH * 3 + 820,
-                    72
-                );
-                mite.betaShowcase = true;
-                betaEnemies.push(mite);
-
-                var wasp = makeEnemy(
-                    "wasp",
-                    WIDTH * 4 + 870,
-                    760,
-                    WIDTH * 4 + 610,
-                    WIDTH * 4 + 1310,
-                    -116
-                );
-                wasp.betaShowcase = true;
-                betaEnemies.push(wasp);
-
-                var gaunt = makeEnemy(
-                    "gaunt",
-                    WIDTH * 5 + 650,
-                    GROUND_Y,
-                    WIDTH * 5 + 480,
-                    WIDTH * 5 + 900,
-                    72
-                );
-                gaunt.maxHealth = 4;
-                gaunt.health = 4;
-                gaunt.hurtFlash = 0;
-                gaunt.betaShowcase = true;
-                betaEnemies.push(gaunt);
-
-                var springFragment = makeEnemy(
-                    "fragmentSpring",
-                    WIDTH * 2 + 1180,
-                    1288,
-                    WIDTH * 2 + 1030,
-                    WIDTH * 2 + 1510,
-                    -126
-                );
-                springFragment.betaShowcase = true;
-                betaEnemies.push(springFragment);
-
-                var bastionFragment = makeEnemy(
-                    "fragmentBastion",
-                    WIDTH * 5 + 420,
-                    1256,
-                    WIDTH * 5 + 300,
-                    WIDTH * 5 + 720,
-                    46
-                );
-                bastionFragment.maxHealth = 2;
-                bastionFragment.health = 2;
-                bastionFragment.hurtFlash = 0;
-                bastionFragment.armored = false;
-                bastionFragment.betaShowcase = true;
-                betaEnemies.push(bastionFragment);
-
-                var coreLeech = makeEnemy(
-                    "coreLeech",
-                    WIDTH + 430,
-                    1240,
-                    WIDTH + 250,
-                    WIDTH + 720,
-                    58
-                );
-                coreLeech.maxHealth = 2;
-                coreLeech.health = 2;
-                coreLeech.hurtFlash = 0;
-                coreLeech.betaShowcase = true;
-                betaEnemies.push(coreLeech);
-
-                var vesperFlare = makeEnemy(
-                    "vesperFlare",
-                    WIDTH * 4 + 440,
-                    1175,
-                    WIDTH * 4 + 250,
-                    WIDTH * 4 + 760,
-                    104
-                );
-                vesperFlare.maxHealth = 2;
-                vesperFlare.health = 2;
-                vesperFlare.hurtFlash = 0;
-                vesperFlare.betaShowcase = true;
-                betaEnemies.push(vesperFlare);
-
-                var sentinel = makeEnemy(
-                    "patroller",
-                    WIDTH * 6 + 1030,
-                    GROUND_Y,
-                    WIDTH * 6 + 870,
-                    WIDTH * 6 + 1450,
-                    -54
-                );
-                sentinel.maxHealth = 5;
-                sentinel.health = 5;
-                sentinel.hurtFlash = 0;
-                sentinel.dying = false;
-                sentinel.defeated = false;
-                sentinel.deathTime = 0;
-                sentinel.deathDuration = 36 * 0.061 + 0.45;
-                sentinel.facing = -1;
-                sentinel.betaShowcase = true;
-                betaEnemies.push(sentinel);
-
-                var uplinkWisp = makeEnemy(
-                    "flyer",
-                    WIDTH * 7 + 770,
-                    520,
-                    WIDTH * 7 + 560,
-                    WIDTH * 7 + 1080,
-                    -86
-                );
-                uplinkWisp.betaShowcase = true;
-                betaEnemies.push(uplinkWisp);
-
-                var paleWatcher = makeEnemy(
-                    "paleWatcher",
-                    WIDTH * 7 + 1210,
-                    GROUND_Y,
-                    WIDTH * 7 + 1110,
-                    WIDTH * 7 + 1510,
-                    -62
-                );
-                paleWatcher.maxHealth = 3;
-                paleWatcher.health = 3;
-                paleWatcher.hurtFlash = 0;
-                paleWatcher.betaShowcase = true;
-                betaEnemies.push(paleWatcher);
+                canvas.dataset.betaEnemyRoster =
+                    "squircle,chitin-sentinel,core-leech,kihunter,sova,ember-wasp,seam-hunter,skree,seam-lurker,pale-watcher";
+                canvas.dataset.betaSentinelCount = "7";
+                canvas.dataset.betaRetiredEnemies =
+                    "spore-wisp,clacker-beetle,ridge-skitter";
                 return betaEnemies;
             }
 
@@ -8408,7 +8730,7 @@
                 document.body.classList.toggle("is-expansion-preview", !isOverworld);
                 document.body.classList.toggle(
                     "is-arrival-tutorial",
-                    isOverworld && !episodeSurfaceReturn
+                    false
                 );
                 document.body.classList.remove("is-main-title");
                 document.title = isOverworld
@@ -8490,6 +8812,199 @@
                 }
             }
 
+            function clearEpisodeBridgeTimers() {
+                episodeBridgeTimers.forEach(function (timer) {
+                    window.clearTimeout(timer);
+                });
+                episodeBridgeTimers = [];
+            }
+
+            function scheduleEpisodeBridgeBeat(delay, callback) {
+                episodeBridgeTimers.push(
+                    window.setTimeout(callback, delay)
+                );
+            }
+
+            function setEpisodeBridgeBeat(
+                kicker,
+                title,
+                copy,
+                progress
+            ) {
+                episodeBridgeKicker.textContent = kicker;
+                episodeBridgeTitle.textContent = title;
+                episodeBridgeCopy.textContent = copy;
+                episodeBridgeProgress.style.setProperty(
+                    "--bridge-progress",
+                    progress + "%"
+                );
+                announce(kicker + ". " + title + ". " + copy);
+            }
+
+            function hideEpisodeBridge() {
+                clearEpisodeBridgeTimers();
+                episodeBridge.hidden = true;
+                episodeBridge.classList.remove(
+                    "is-active",
+                    "is-approach",
+                    "is-wound"
+                );
+                episodeBridge.setAttribute("aria-hidden", "true");
+                episodeBridgeProgress.style.setProperty(
+                    "--bridge-progress",
+                    "0%"
+                );
+                episodeBridgeMode = "";
+                episodeBridgeNextScene = "";
+                episodeBridgeCompleting = false;
+            }
+
+            function completeEpisodeBridge() {
+                if (
+                    episodeBridge.hidden ||
+                    episodeBridgeCompleting ||
+                    !episodeBridgeNextScene
+                ) {
+                    return;
+                }
+
+                clearEpisodeBridgeTimers();
+                episodeBridgeCompleting = true;
+                episodeBridgeSkip.disabled = true;
+                episodeBridgeProgress.style.setProperty(
+                    "--bridge-progress",
+                    "100%"
+                );
+                if (episodeBridgeNextScene === "overworld") {
+                    setAudioScene("overworld", false);
+                }
+                loadAndConfigureEpisodeScene(episodeBridgeNextScene);
+            }
+
+            function showEpisodeBridge(mode, nextScene) {
+                clearEpisodeBridgeTimers();
+                episodeBridgeMode = mode;
+                episodeBridgeNextScene = nextScene;
+                episodeBridgeCompleting = false;
+                episodeBridgeSkip.disabled = false;
+                episodeBridge.hidden = false;
+                episodeBridge.setAttribute("aria-hidden", "false");
+                episodeBridge.classList.remove(
+                    "is-active",
+                    "is-approach",
+                    "is-wound"
+                );
+                episodeBridge.classList.add(
+                    mode === "wound"
+                        ? "is-wound"
+                        : "is-approach"
+                );
+                void episodeBridge.offsetWidth;
+                episodeBridge.classList.add("is-active");
+                window.requestAnimationFrame(function () {
+                    episodeBridgeSkip.focus({
+                        preventScroll: true
+                    });
+                });
+            }
+
+            function beginEpisodeApproach() {
+                state = "transition";
+                releaseAllControls();
+                document.body.classList.remove("is-running");
+                setPauseButton(false, false);
+                titleScreen.hidden = true;
+                releaseTitleArtwork();
+                canvas.dataset.episodeTransition =
+                    "rd42-atmospheric-approach";
+                showEpisodeBridge("approach", "overworld");
+                setEpisodeBridgeBeat(
+                    "RD-42 // Departure burn",
+                    "Veyra",
+                    "Navigation has the Landing Flats corridor. Holding above the cloud line.",
+                    12
+                );
+                playTone(84, 0.42, "sine", 0.02);
+                playTone(126, 0.58, "sine", 0.016, 0.18);
+
+                if (prefersReducedMotion) {
+                    scheduleEpisodeBridgeBeat(
+                        520,
+                        completeEpisodeBridge
+                    );
+                    return;
+                }
+
+                scheduleEpisodeBridgeBeat(2600, function () {
+                    setAudioScene("overworld", false);
+                    setEpisodeBridgeBeat(
+                        "Dras Ehdre // Surface channel",
+                        "Atmospheric entry",
+                        "Coreworks beacon is below you. Wind is rough near the flats.",
+                        46
+                    );
+                    playTone(172, 0.2, "sine", 0.016);
+                });
+                scheduleEpisodeBridgeBeat(5400, function () {
+                    setEpisodeBridgeBeat(
+                        "RD-42 // Landing cycle",
+                        "Signal acquired",
+                        "Landing struts unlocked. Surface control transfers to Aryn.",
+                        78
+                    );
+                    playTone(232, 0.12, "square", 0.015);
+                    playTone(348, 0.16, "square", 0.012, 0.08);
+                });
+                scheduleEpisodeBridgeBeat(
+                    8200,
+                    completeEpisodeBridge
+                );
+            }
+
+            function beginWoundDescentBridge() {
+                canvas.dataset.episodeTransition =
+                    "foundry-to-wound-descent";
+                showEpisodeBridge("wound", "wound");
+                setEpisodeBridgeBeat(
+                    "Uplink Gate // Checkpoint secured",
+                    "Descending",
+                    "Foundry state locked. Mission time and recovered equipment are preserved.",
+                    18
+                );
+                playTone(118, 0.22, "square", 0.019);
+
+                if (prefersReducedMotion) {
+                    scheduleEpisodeBridgeBeat(
+                        420,
+                        completeEpisodeBridge
+                    );
+                    return;
+                }
+
+                scheduleEpisodeBridgeBeat(1400, function () {
+                    setEpisodeBridgeBeat(
+                        "Coreworks // Sublevel transit",
+                        "Below the Foundry",
+                        "The freight cage drops past the mapped processing floors.",
+                        48
+                    );
+                    playTone(92, 0.3, "sawtooth", 0.015);
+                });
+                scheduleEpisodeBridgeBeat(3200, function () {
+                    setEpisodeBridgeBeat(
+                        "Unknown chamber // Pressure seal",
+                        "The Wound",
+                        "A hostile signal is moving beyond the final bulkhead.",
+                        76
+                    );
+                    playSoundEffect("woundIgnition", 0.42);
+                });
+                scheduleEpisodeBridgeBeat(
+                    5000,
+                    completeEpisodeBridge
+                );
+            }
+
             function episodeSceneAssetKeys(scene) {
                 var sceneKeys = sharedAssetKeys.slice();
                 if (scene === "overworld") {
@@ -8545,8 +9060,7 @@
                 woundBossPreview = isWound;
                 episodeBetaRun = isFoundry;
                 episodeSurfaceReturn = returningToSurface;
-                episodeArrivalTutorial =
-                    isOverworld && !episodeSurfaceReturn;
+                episodeArrivalTutorial = false;
                 ludoRunPreview = true;
                 mainTitleScreen = false;
                 surfaceCrawlerTrial = false;
@@ -8619,6 +9133,7 @@
                 titleScreen.classList.remove("is-launching");
                 titleScreen.hidden = true;
                 releaseTitleArtwork();
+                hideEpisodeBridge();
                 messageCard.hidden = true;
                 if (historyMode === "replace") {
                     window.history.replaceState(
@@ -8641,14 +9156,7 @@
                             (episodeSurfaceReturn ? "&return=1" : "")
                     );
                 }
-                setAudioScene(isWound ? "foundry" : scene);
-                if (isWound && idleMusicChannel) {
-                    idleMusicChannel.preload = "auto";
-                    idleMusicChannel.src = musicTracks.wound;
-                    idleMusicChannel.dataset.scene = "wound";
-                    idleMusicChannel.loop = true;
-                    idleMusicChannel.load();
-                }
+                setAudioScene(isWound ? "wound" : scene);
                 lastFoundryAssetRoom = -1;
                 resetGame(true);
                 if (fadeFromBlack) {
@@ -8706,6 +9214,7 @@
                 episodeWoundSnapshot = null;
                 surfaceReturnLoadout = null;
                 stageShell.classList.remove("is-episode-blackout");
+                hideEpisodeBridge();
                 state = "ready";
                 releaseInactiveSceneAssets("title");
                 document.body.classList.add("is-main-title");
@@ -8770,7 +9279,7 @@
                     playBackgroundMusic();
                 }
                 window.setTimeout(function () {
-                    loadAndConfigureEpisodeScene("overworld");
+                    beginEpisodeApproach();
                 }, prefersReducedMotion ? 80 : 560);
             }
 
@@ -9094,17 +9603,12 @@
                 messageTitle.textContent = "THE WOUND";
                 messageCopy.textContent =
                     "Twelve Signal Shards resolve a deeper chamber. Mission time and recovered equipment will carry into the encounter.";
-                startButton.textContent = "Opening…";
-                startButton.disabled = true;
-                startOverButton.hidden = true;
-                messageCard.hidden = false;
+                messageCard.hidden = true;
                 playWinSound();
                 announce(
                     "Uplink Gate open. Descending to The Wound. Boss checkpoint secured."
                 );
-                window.setTimeout(function () {
-                    loadAndConfigureEpisodeScene("wound");
-                }, prefersReducedMotion ? 80 : 260);
+                beginWoundDescentBridge();
             }
 
             function beginEpisodeSurfaceReturn() {
@@ -10071,30 +10575,6 @@
                     return true;
                 }
 
-                if (assignment.id === "service-worker-droid") {
-                    if (!dialogueHasPlayed) {
-                        popups.push({
-                            x: assignment.x,
-                            y: GROUND_Y - 142,
-                            text: "CHECK IN WITH DRAS",
-                            life: 0.9,
-                            color: "#ff69b4"
-                        });
-                        announce(
-                            "Dras must clear the worker droid for field service."
-                        );
-                        return true;
-                    }
-                    workerDroid.state = "service";
-                    workerDroid.stateElapsed = 0;
-                    workerDroid.animationTime = 0;
-                    completeOverworldAssignment(assignment);
-                    announce(
-                        "Worker droid service cycle restored."
-                    );
-                    return true;
-                }
-
                 return false;
             }
 
@@ -10829,6 +11309,10 @@
                     updateShipServiceKit(delta);
                     return;
                 }
+                if (state === "ship-suit") {
+                    updateShipSuitChange(delta);
+                    return;
+                }
                 if (dialogueActive) {
                     var dialogueCameraTarget = portraitMode
                         ? DRAS_WORLD_X - 560
@@ -11010,7 +11494,13 @@
 
                 if (jumpBuffer > 0 && coyoteTime > 0) {
                     player.vy = -790;
-                    jumpPoseTime = ludoRunPreview ? 0.15 : 0;
+                    jumpPoseTime =
+                        shipInteriorActive &&
+                        shipSuitState === "flight-suit"
+                            ? 0.16
+                            : ludoRunPreview
+                                ? 0.15
+                                : 0;
                     dropPoseTime = 0;
                     player.onGround = false;
                     player.supportPlatform = null;
@@ -11149,7 +11639,13 @@
                             announce("Returned above the foundry deck.");
                         }
                         if (!wasGrounded) {
-                            landPoseTime = ludoRunPreview ? 0.18 : 0.11;
+                            landPoseTime =
+                                shipInteriorActive &&
+                                shipSuitState === "flight-suit"
+                                    ? 0.36
+                                    : ludoRunPreview
+                                        ? 0.18
+                                        : 0.11;
                             jumpPoseTime = 0;
                             dropPoseTime = 0;
                             combatAlertTime = Math.max(combatAlertTime, 0.72);
@@ -11936,7 +12432,7 @@
                     return;
                 }
                 activeMusicChannel.volume = ducked
-                    ? musicVolumes[audioScene] * 0.3
+                    ? musicVolumes[audioScene] * 0.72
                     : musicVolumes[audioScene];
             }
 
@@ -11952,11 +12448,7 @@
                 bossIntro.setAttribute("aria-hidden", "true");
                 stageShell.classList.remove("is-boss-intro");
                 document.body.classList.remove("is-boss-intro");
-                if (audioScene === "wound") {
-                    setAudioScene("foundry", true);
-                } else {
-                    setWoundBossIntroMusicDucked(false);
-                }
+                setWoundBossIntroMusicDucked(false);
                 canvas.dataset.woundBossIntro = "pending";
                 canvas.dataset.woundBossIntroPhase = "empty-room";
                 canvas.dataset.woundBossReveal = "concealed";
@@ -11972,9 +12464,6 @@
                 stopWoundBossIntroSounds();
                 woundBossIntroElapsed = 0;
                 woundBossIntroCueMask = 1;
-                if (audioScene === "wound") {
-                    setAudioScene("foundry", true);
-                }
                 bossIntro.classList.remove("is-active");
                 void bossIntro.offsetWidth;
                 bossIntro.classList.add("is-active");
@@ -12027,6 +12516,7 @@
                 bossIntro.classList.remove("is-active");
                 void bossIntro.offsetWidth;
                 bossIntro.classList.add("is-active");
+                setAudioScene("wound", false);
                 setWoundBossIntroMusicDucked(true);
                 playSoundEffect("woundIgnition");
 
@@ -12137,7 +12627,7 @@
                     !(woundBossIntroCueMask & 16)
                 ) {
                     woundBossIntroCueMask |= 16;
-                    setAudioScene("wound", false);
+                    setWoundBossIntroMusicDucked(false);
                     canvas.dataset.woundBossIntroCue =
                         "boss-reveal";
                     canvas.dataset.woundBossIntroPhase =
@@ -12240,7 +12730,8 @@
                 setWoundBossBehavior(
                     enemy,
                     "confused",
-                    WOUND_BOSS_CONFUSION_DURATION
+                    enemy.confusionDuration ||
+                        WOUND_BOSS_CONFUSION_DURATION
                 );
                 canvas.dataset.woundBossPerception =
                     "lost";
@@ -12848,7 +13339,8 @@
                 enemy.laserTime = 0;
                 enemy.laserLastFrame = -1;
                 enemy.laserCooldown =
-                    WOUND_BOSS_LASER_COOLDOWN;
+                    enemy.laserCooldownDuration ||
+                        WOUND_BOSS_LASER_COOLDOWN;
                 enemy.laserLanded = false;
                 enemy.pendingLaser = false;
                 enemy.laserReturnState =
@@ -12931,7 +13423,8 @@
                 if (!enemy.engaged) {
                     enemy.engaged = true;
                     enemy.laserCooldown =
-                        WOUND_BOSS_LASER_COOLDOWN;
+                        enemy.laserCooldownDuration ||
+                            WOUND_BOSS_LASER_COOLDOWN;
                     enemy.behaviorElapsed = 0;
                     setWoundBossBehavior(
                         enemy,
@@ -13210,8 +13703,10 @@
                         approachWoundBossVelocity(
                             enemy,
                             retreatDirection *
-                                WOUND_BOSS_SENTRY_RETREAT_SPEED,
-                            WOUND_BOSS_PURSUIT_ACCELERATION,
+                                WOUND_BOSS_SENTRY_RETREAT_SPEED *
+                                (enemy.speedScale || 1),
+                            WOUND_BOSS_PURSUIT_ACCELERATION *
+                                (enemy.speedScale || 1),
                             delta
                         );
                     }
@@ -13270,7 +13765,10 @@
                     if (
                         !enemy.confusionTurned &&
                         enemy.behaviorElapsed >=
-                            WOUND_BOSS_CONFUSION_DURATION *
+                            (
+                                enemy.confusionDuration ||
+                                WOUND_BOSS_CONFUSION_DURATION
+                            ) *
                             0.48
                     ) {
                         enemy.confusionTurned = true;
@@ -13312,7 +13810,8 @@
                     enemy.facing = enemy.searchDirection;
                     enemy.vx =
                         enemy.searchDirection *
-                        WOUND_BOSS_SEARCH_SPEED;
+                        WOUND_BOSS_SEARCH_SPEED *
+                        (enemy.speedScale || 1);
                 } else if (enemy.behavior === "laser") {
                     enemy.attacking = false;
                     enemy.laserAttacking = true;
@@ -13342,7 +13841,10 @@
                             );
                         } else if (
                             currentLaserFrame ===
-                            WOUND_BOSS_LASER_FIRST_ACTIVE_FRAME
+                            (
+                                enemy.laserFirstActiveFrame ||
+                                WOUND_BOSS_LASER_FIRST_ACTIVE_FRAME
+                            )
                         ) {
                             enemy.laserImpactTime = 0;
                             playTone(
@@ -13499,7 +14001,8 @@
                             committedAtBoundary
                                 ? 0
                                 : enemy.postTurnDirection *
-                                    WOUND_BOSS_POST_TURN_SPEED,
+                                    WOUND_BOSS_POST_TURN_SPEED *
+                                    (enemy.speedScale || 1),
                             committedAtBoundary
                                 ? WOUND_BOSS_PURSUIT_BRAKE
                                 : WOUND_BOSS_PURSUIT_ACCELERATION,
@@ -13539,6 +14042,7 @@
                                 : distance > 380
                                     ? WOUND_BOSS_MID_SPEED
                                     : WOUND_BOSS_STALK_SPEED;
+                        targetSpeed *= enemy.speedScale || 1;
                         approachWoundBossVelocity(
                             enemy,
                             atDesiredBoundary
@@ -13546,7 +14050,8 @@
                                 : desiredFacing * targetSpeed,
                             atDesiredBoundary
                                 ? WOUND_BOSS_PURSUIT_BRAKE
-                                : WOUND_BOSS_PURSUIT_ACCELERATION,
+                                : WOUND_BOSS_PURSUIT_ACCELERATION *
+                                    (enemy.speedScale || 1),
                             delta
                         );
                     }
@@ -13608,9 +14113,15 @@
                 var laserDamageActive =
                     enemy.laserAttacking &&
                     laserFrame >=
-                        WOUND_BOSS_LASER_FIRST_ACTIVE_FRAME &&
+                        (
+                            enemy.laserFirstActiveFrame ||
+                            WOUND_BOSS_LASER_FIRST_ACTIVE_FRAME
+                        ) &&
                     laserFrame <=
-                        WOUND_BOSS_LASER_LAST_ACTIVE_FRAME;
+                        (
+                            enemy.laserLastActiveFrame ||
+                            WOUND_BOSS_LASER_LAST_ACTIVE_FRAME
+                        );
                 canvas.dataset.woundBossLaserFrame =
                     String(laserFrame);
                 canvas.dataset.woundBossLaserDamageActive =
@@ -13622,7 +14133,10 @@
                         ? laserDamageActive
                             ? "firing"
                             : laserFrame <
-                                WOUND_BOSS_LASER_FIRST_ACTIVE_FRAME
+                                (
+                                    enemy.laserFirstActiveFrame ||
+                                    WOUND_BOSS_LASER_FIRST_ACTIVE_FRAME
+                                )
                                 ? "charge"
                                 : "recovery"
                         : "cooldown";
@@ -14021,9 +14535,15 @@
                         var woundSweepActive =
                             enemy.attacking &&
                             woundAttackFrame >=
-                                WOUND_BOSS_SWEEP_FIRST_FRAME &&
+                                (
+                                    enemy.sweepFirstFrame ||
+                                    WOUND_BOSS_SWEEP_FIRST_FRAME
+                                ) &&
                             woundAttackFrame <=
-                                WOUND_BOSS_SWEEP_LAST_FRAME;
+                                (
+                                    enemy.sweepLastFrame ||
+                                    WOUND_BOSS_SWEEP_LAST_FRAME
+                                );
                         canvas.dataset.woundBossPassage =
                             "closed";
                         var woundLaserFrame =
@@ -14035,22 +14555,34 @@
                         var woundLaserActive =
                             enemy.laserAttacking &&
                             woundLaserFrame >=
-                                WOUND_BOSS_LASER_FIRST_ACTIVE_FRAME &&
+                                (
+                                    enemy.laserFirstActiveFrame ||
+                                    WOUND_BOSS_LASER_FIRST_ACTIVE_FRAME
+                                ) &&
                             woundLaserFrame <=
-                                WOUND_BOSS_LASER_LAST_ACTIVE_FRAME;
+                                (
+                                    enemy.laserLastActiveFrame ||
+                                    WOUND_BOSS_LASER_LAST_ACTIVE_FRAME
+                                );
                         var woundState =
                             enemy.laserAttacking
                                 ? woundLaserActive
                                     ? "laser-fire"
                                     : woundLaserFrame <
-                                        WOUND_BOSS_LASER_FIRST_ACTIVE_FRAME
+                                        (
+                                            enemy.laserFirstActiveFrame ||
+                                            WOUND_BOSS_LASER_FIRST_ACTIVE_FRAME
+                                        )
                                         ? "laser-charge"
                                         : "laser-recovery"
                                 : enemy.attacking
                                     ? woundSweepActive
                                         ? "sweep"
                                         : woundAttackFrame <
-                                            WOUND_BOSS_SWEEP_FIRST_FRAME
+                                            (
+                                                enemy.sweepFirstFrame ||
+                                                WOUND_BOSS_SWEEP_FIRST_FRAME
+                                            )
                                             ? "windup"
                                             : "recovery"
                                     : enemy.behavior;
@@ -14256,7 +14788,11 @@
                 var stats = rifleActive
                     ? {
                         cooldown: woundBossPreview
-                            ? WOUND_BOSS_RIFLE_COOLDOWN
+                            ? (
+                                woundBossMobileAssistActive()
+                                    ? WOUND_BOSS_MOBILE_RIFLE_COOLDOWN
+                                    : WOUND_BOSS_RIFLE_COOLDOWN
+                            )
                             : 0.46,
                         heatPerShot: 0.28,
                         speed: 940,
@@ -14785,7 +15321,8 @@
                     if (!enemy.engaged) {
                         enemy.engaged = true;
                         enemy.laserCooldown =
-                            WOUND_BOSS_LASER_COOLDOWN;
+                            enemy.laserCooldownDuration ||
+                                WOUND_BOSS_LASER_COOLDOWN;
                         enemy.behaviorElapsed = 0;
                         setWoundBossBehavior(
                             enemy,
@@ -15048,7 +15585,10 @@
             function takeHit(label) {
                 if (invulnerableTime > 0 || state !== "running") return;
                 hits += 1;
-                invulnerableTime = 1.15;
+                invulnerableTime =
+                    woundBossMobileAssistActive()
+                        ? WOUND_BOSS_MOBILE_INVULNERABILITY
+                        : 1.15;
                 stageShell.classList.remove("is-hit");
                 void stageShell.offsetWidth;
                 stageShell.classList.add("is-hit");
@@ -15403,6 +15943,21 @@
                 }
                 if (
                     playerNearShipInteriorAnchor(
+                        SHIP_SUIT_CRADLE_X,
+                        70
+                    )
+                ) {
+                    return {
+                        text:
+                            shipSuitState === "flight-suit"
+                                ? "↓ RESTORE FIELD ARMOR"
+                                : "↓ CHANGE OUT OF ARMOR",
+                        x: SHIP_SUIT_CRADLE_X,
+                        y: 548
+                    };
+                }
+                if (
+                    playerNearShipInteriorAnchor(
                         SHIP_PACK_BENCH_X,
                         86
                     )
@@ -15475,6 +16030,154 @@
                 ctx.fillRect(31, 17, 14, 8);
                 ctx.fillStyle = "#03050d";
                 ctx.fillRect(24, -7, 28, 7);
+                ctx.restore();
+            }
+
+            function drawShipSuitChange() {
+                if (!imageHasPixels(assets.armorChange)) {
+                    return;
+                }
+                var progress = Math.min(
+                    1,
+                    shipSuitElapsed /
+                        Math.max(0.001, shipSuitReviewDuration())
+                );
+                var frameIndex = shipSuitState === "flight-suit"
+                    ? 35
+                    : Math.min(
+                        35,
+                        Math.floor(progress * 36)
+                    );
+                if (shipSuitState === "rearming") {
+                    frameIndex = 35 - frameIndex;
+                }
+                canvas.dataset.shipSuitFrame = String(frameIndex);
+
+                ctx.save();
+                if (shipSuitState !== "flight-suit") {
+                    ctx.globalCompositeOperation = "screen";
+                    ctx.globalAlpha =
+                        0.14 +
+                        Math.sin(elapsed * 14) * 0.04;
+                    ctx.fillStyle = "#58f5df";
+                    ctx.fillRect(446, 492, 112, 220);
+                    ctx.globalCompositeOperation = "source-over";
+                    ctx.globalAlpha = 1;
+                }
+                ctx.drawImage(
+                    assets.armorChange,
+                    (frameIndex % 6) * 112,
+                    Math.floor(frameIndex / 6) * 112,
+                    112,
+                    112,
+                    SHIP_SUIT_CRADLE_X - 56,
+                    SHIP_INTERIOR_DECK_Y - 104,
+                    112,
+                    112
+                );
+                ctx.restore();
+            }
+
+            function currentShipFlightSuitFrame() {
+                if (!player.onGround) {
+                    if (jumpPoseTime > 0) {
+                        return Math.min(
+                            11,
+                            9 +
+                                Math.floor(
+                                    (
+                                        1 -
+                                        jumpPoseTime / 0.16
+                                    ) *
+                                    3
+                                )
+                        );
+                    }
+                    if (player.vy < -620) return 11;
+                    if (player.vy < -440) return 12;
+                    if (player.vy < -240) return 13;
+                    if (player.vy < -80) return 14;
+                    if (player.vy < 160) return 15;
+                    if (player.vy < 440) return 16;
+                    return 17;
+                }
+                if (landPoseTime > 0) {
+                    return Math.min(
+                        29,
+                        18 +
+                            Math.floor(
+                                (
+                                    1 -
+                                    landPoseTime / 0.36
+                                ) *
+                                12
+                            )
+                    );
+                }
+                return -1;
+            }
+
+            function drawShipFlightSuitPlayer() {
+                if (
+                    !imageHasPixels(assets.armorChange) ||
+                    !imageHasPixels(assets.flightSuitRun) ||
+                    !imageHasPixels(assets.flightSuitJump)
+                ) {
+                    drawPlayer();
+                    return;
+                }
+
+                var pose = "flightSuitIdle";
+                var sprite = assets.armorChange;
+                var frameIndex = 35;
+                var jumpFrame = currentShipFlightSuitFrame();
+                if (jumpFrame >= 0) {
+                    pose = player.onGround
+                        ? "flightSuitLand"
+                        : "flightSuitJump";
+                    sprite = assets.flightSuitJump;
+                    frameIndex = jumpFrame;
+                } else if (Math.abs(player.vx) > 26) {
+                    pose = "flightSuitRun";
+                    sprite = assets.flightSuitRun;
+                    frameIndex =
+                        7 +
+                        (
+                            Math.floor(
+                                runFrameTime / 0.078
+                            ) %
+                            26
+                        );
+                }
+
+                canvas.dataset.arynPose = pose;
+                canvas.dataset.arynFrame = String(frameIndex);
+                canvas.dataset.arynCombat = "safe-interior";
+                canvas.dataset.arynWeapon = "none";
+                canvas.dataset.shipSuitFrame = String(frameIndex);
+
+                ctx.save();
+                ctx.translate(
+                    Math.round(
+                        player.x +
+                            (player.facing < 0 ? 112 : 0)
+                    ),
+                    Math.round(player.y - 4)
+                );
+                if (player.facing < 0) {
+                    ctx.scale(-1, 1);
+                }
+                ctx.drawImage(
+                    sprite,
+                    (frameIndex % 6) * 112,
+                    Math.floor(frameIndex / 6) * 112,
+                    112,
+                    112,
+                    0,
+                    0,
+                    112,
+                    112
+                );
                 ctx.restore();
             }
 
@@ -15554,11 +16257,25 @@
                     ctx.fillStyle = zone[2];
                     ctx.fillRect(
                         zone[0],
-                        214,
+                        SHIP_INTERIOR_CEILING_Y,
                         zone[1] - zone[0],
-                        SHIP_INTERIOR_DECK_Y - 214
+                        SHIP_INTERIOR_DECK_Y -
+                            SHIP_INTERIOR_CEILING_Y
                     );
                 });
+                ctx.fillStyle = "#090e1b";
+                ctx.fillRect(
+                    220,
+                    286,
+                    402,
+                    SHIP_INTERIOR_CEILING_Y - 286
+                );
+                ctx.fillRect(
+                    746,
+                    286,
+                    706,
+                    SHIP_INTERIOR_CEILING_Y - 286
+                );
                 ctx.restore();
 
                 traceShipInteriorShell();
@@ -15574,18 +16291,72 @@
                     ctx.fillStyle = "#263653";
                     ctx.fillRect(
                         ribX - 7,
-                        286,
+                        SHIP_INTERIOR_CEILING_Y,
                         14,
-                        SHIP_INTERIOR_DECK_Y - 286
+                        SHIP_INTERIOR_DECK_Y -
+                            SHIP_INTERIOR_CEILING_Y
                     );
                     ctx.fillStyle = "#58f5df";
                     ctx.fillRect(
                         ribX - 2,
-                        318,
+                        SHIP_INTERIOR_CEILING_Y + 20,
                         4,
-                        SHIP_INTERIOR_DECK_Y - 350
+                        SHIP_INTERIOR_DECK_Y -
+                            SHIP_INTERIOR_CEILING_Y -
+                            48
                     );
                 });
+
+                ctx.fillStyle = "#111a2d";
+                [
+                    [258, 326, 118, 84],
+                    [390, 304, 132, 106],
+                    [768, 310, 128, 100],
+                    [910, 326, 146, 84],
+                    [1070, 302, 138, 108],
+                    [1222, 324, 166, 86]
+                ].forEach(function (panel) {
+                    ctx.fillRect(
+                        panel[0],
+                        panel[1],
+                        panel[2],
+                        panel[3]
+                    );
+                    ctx.strokeStyle = "#263653";
+                    ctx.lineWidth = 3;
+                    ctx.strokeRect(
+                        panel[0],
+                        panel[1],
+                        panel[2],
+                        panel[3]
+                    );
+                });
+                ctx.fillStyle = "#1e2c46";
+                ctx.fillRect(
+                    244,
+                    SHIP_INTERIOR_CEILING_Y - 12,
+                    378,
+                    18
+                );
+                ctx.fillRect(
+                    746,
+                    SHIP_INTERIOR_CEILING_Y - 12,
+                    682,
+                    18
+                );
+                ctx.fillStyle = "#58f5df";
+                ctx.fillRect(
+                    262,
+                    SHIP_INTERIOR_CEILING_Y - 5,
+                    342,
+                    3
+                );
+                ctx.fillRect(
+                    764,
+                    SHIP_INTERIOR_CEILING_Y - 5,
+                    646,
+                    3
+                );
 
                 ctx.fillStyle = "#0a1020";
                 ctx.fillRect(
@@ -15616,36 +16387,51 @@
                 }
 
                 ctx.fillStyle = "#050713";
-                ctx.fillRect(248, 350, 224, 94);
+                ctx.fillRect(248, 456, 224, 88);
                 ctx.strokeStyle = "#63bfff";
                 ctx.lineWidth = 4;
-                ctx.strokeRect(248, 350, 224, 94);
+                ctx.strokeRect(248, 456, 224, 88);
                 ctx.fillStyle = "rgba(99, 191, 255, 0.16)";
-                ctx.fillRect(258, 360, 204, 74);
+                ctx.fillRect(258, 466, 204, 68);
 
                 ctx.fillStyle = "#1a263f";
-                ctx.fillRect(294, 570, 184, 108);
+                ctx.fillRect(294, 590, 184, 88);
                 ctx.fillStyle = "#07101f";
-                ctx.fillRect(312, 586, 148, 50);
+                ctx.fillRect(312, 602, 148, 38);
                 ctx.fillStyle = shipSpecimenActive
                     ? "#ff69b4"
                     : "#58f5df";
-                ctx.fillRect(328, 602, 52, 6);
-                ctx.fillRect(388, 602, 30, 6);
+                ctx.fillRect(328, 614, 52, 6);
+                ctx.fillRect(388, 614, 30, 6);
                 ctx.fillStyle = "#ffd36c";
-                ctx.fillRect(424, 602, 18, 6);
+                ctx.fillRect(424, 614, 18, 6);
                 ctx.strokeStyle = "#63bfff";
                 ctx.lineWidth = 3;
-                ctx.strokeRect(294, 570, 184, 108);
+                ctx.strokeRect(294, 590, 184, 88);
+
+                ctx.fillStyle = "rgba(39, 59, 91, 0.62)";
+                ctx.fillRect(438, 486, 124, 230);
+                ctx.strokeStyle = "#ff69b4";
+                ctx.lineWidth = 3;
+                ctx.strokeRect(438, 486, 124, 230);
+                ctx.strokeStyle = "#58f5df";
+                ctx.setLineDash([8, 7]);
+                ctx.beginPath();
+                ctx.moveTo(450, 510);
+                ctx.lineTo(450, 690);
+                ctx.moveTo(550, 510);
+                ctx.lineTo(550, 690);
+                ctx.stroke();
+                ctx.setLineDash([]);
 
                 ctx.fillStyle = "#17223a";
-                ctx.fillRect(486, 530, 42, 164);
-                ctx.fillRect(462, 610, 88, 28);
+                ctx.fillRect(486, 600, 42, 94);
+                ctx.fillRect(462, 642, 88, 24);
                 drawShipGreyboxLabel(
-                    "FLIGHT CRADLE",
+                    "FLIGHT / SUIT ALCOVE",
                     506,
-                    716,
-                    "#63bfff",
+                    474,
+                    "#ff69b4",
                     "center"
                 );
 
@@ -15759,6 +16545,21 @@
                     "center"
                 );
 
+                ctx.fillStyle = "#060b16";
+                ctx.fillRect(962, 732, 124, 24);
+                ctx.strokeStyle = "#8493d7";
+                ctx.lineWidth = 2;
+                ctx.setLineDash([7, 5]);
+                ctx.strokeRect(962, 732, 124, 24);
+                ctx.setLineDash([]);
+                drawShipGreyboxLabel(
+                    "KEEL ACCESS // SEALED",
+                    SHIP_KEEL_HATCH_X,
+                    722,
+                    "#8493d7",
+                    "center"
+                );
+
                 ctx.fillStyle = "#18233b";
                 ctx.fillRect(1152, 486, 204, 220);
                 ctx.strokeStyle = "#ffd36c";
@@ -15807,11 +16608,18 @@
                     drawShipGreyboxLabel(
                         label[0],
                         label[1],
-                        322,
+                        408,
                         label[2],
                         "center"
                     );
                 });
+                drawShipGreyboxLabel(
+                    "OVERHEAD SYSTEMS BAY // OCCUPIED CEILING y438",
+                    1080,
+                    286,
+                    "#73829a",
+                    "center"
+                );
                 drawShipGreyboxLabel(
                     "DESIGN GREYBOX // NOT FINAL ART",
                     836,
@@ -15828,7 +16636,14 @@
                 );
 
                 drawParticles();
-                drawPlayer();
+                if (state === "ship-suit") {
+                    drawShipSuitChange();
+                } else if (shipSuitState === "flight-suit") {
+                    drawShipFlightSuitPlayer();
+                } else {
+                    canvas.dataset.shipSuitFrame = "";
+                    drawPlayer();
+                }
 
                 if (
                     shipTransitionMode === "interior-enter" ||
@@ -16323,70 +17138,47 @@
                 var hawkX;
                 var hawkY;
                 var hawkDirection = -1;
-                var hawkGuideTarget =
-                    overworldAssignments.find(function (assignment) {
-                        return (
-                            !assignment.complete &&
-                            assignment.x < WIDTH
-                        );
-                    }) || null;
-                var hawkGuideScreenX = hawkGuideTarget
-                    ? hawkGuideTarget.x - cameraX
-                    : -999;
-                var hawkGuiding =
-                    Boolean(hawkGuideTarget) &&
-                    hawkGuideScreenX > -180 &&
-                    hawkGuideScreenX < viewWidth + 180;
+                var hawkRouteStart =
+                    OVERWORLD_ORIGIN_X - HAWK_DRAW_WIDTH;
+                var hawkRouteLength =
+                    WIDTH * 3 +
+                    HAWK_DRAW_WIDTH * 2 +
+                    HAWK_PASS_GAP;
+                var hawkWorldX;
 
-                if (hawkGuiding) {
-                    var guidePhase = prefersReducedMotion
-                        ? Math.PI * 0.35
-                        : now * 0.72;
-                    hawkX =
-                        hawkGuideScreenX +
-                        Math.cos(guidePhase) * 126;
-                    hawkY =
-                        154 +
-                        Math.sin(guidePhase * 1.4) * 24;
-                    hawkDirection =
-                        Math.sin(guidePhase) > 0 ? -1 : 1;
-                    canvas.dataset.overworldHawkState =
-                        "guide-circle";
-                    canvas.dataset.overworldHawkGuideTarget =
-                        hawkGuideTarget.id;
-                } else if (prefersReducedMotion) {
-                    hawkX = viewWidth * 0.78;
+                if (prefersReducedMotion) {
+                    hawkWorldX =
+                        OVERWORLD_ORIGIN_X + WIDTH * 1.45;
                     hawkY = 150;
                     canvas.dataset.overworldHawkState =
                         "static-flight-pose";
-                    canvas.dataset.overworldHawkGuideTarget =
-                        "none";
                 } else {
-                    var hawkTrack =
-                        viewWidth +
-                        HAWK_PASS_GAP +
-                        HAWK_DRAW_WIDTH * 2;
                     var hawkTotalTravel =
-                        now * HAWK_FLIGHT_SPEED +
-                        cameraX * 0.035 +
-                        viewWidth * 0.32;
+                        now * HAWK_FLIGHT_SPEED;
                     var hawkPassIndex =
-                        Math.floor(hawkTotalTravel / hawkTrack);
-                    var hawkTravel = hawkTotalTravel % hawkTrack;
+                        Math.floor(
+                            hawkTotalTravel / hawkRouteLength
+                        );
+                    var hawkTravel =
+                        hawkTotalTravel % hawkRouteLength;
                     hawkDirection =
                         hawkPassIndex % 2 === 0 ? -1 : 1;
-                    hawkX =
+                    hawkWorldX =
                         hawkDirection < 0
-                            ? viewWidth + HAWK_DRAW_WIDTH - hawkTravel
-                            : -HAWK_DRAW_WIDTH + hawkTravel;
+                            ? hawkRouteStart +
+                                hawkRouteLength -
+                                hawkTravel
+                            : hawkRouteStart + hawkTravel;
                     hawkY =
                         150 +
-                        Math.sin(now * 0.52 + cameraX * 0.0008) * 18;
+                        Math.sin(now * 0.52) * 18;
                     canvas.dataset.overworldHawkState =
-                        "sky-pass";
-                    canvas.dataset.overworldHawkGuideTarget =
-                        "none";
+                        "world-space-sky-pass";
                 }
+                hawkX = hawkWorldX - cameraX;
+                canvas.dataset.overworldHawkGuideTarget = "none";
+                canvas.dataset.overworldHawkWorldX =
+                    String(Math.round(hawkWorldX));
                 canvas.dataset.overworldHawkDirection =
                     hawkDirection < 0 ? "left" : "right";
 
@@ -17218,8 +18010,8 @@
                 ctx.ellipse(
                     centerX,
                     GROUND_Y + 4,
-                    37 - Math.min(10, hoverDistance * 0.16),
-                    6,
+                    26 - Math.min(7, hoverDistance * 0.11),
+                    4,
                     0,
                     0,
                     Math.PI * 2
@@ -17238,8 +18030,8 @@
                 ctx.ellipse(
                     centerX,
                     bottomY + 3,
-                    25,
-                    4,
+                    18,
+                    3,
                     0,
                     0,
                     Math.PI * 2
@@ -17254,8 +18046,8 @@
                 }
                 ctx.imageSmoothingEnabled = false;
                 ctx.shadowColor = "#58d8e8";
-                ctx.shadowBlur = servicing ? 8 : 11;
-                var drawOffsetX = servicing ? 0 : 18;
+                ctx.shadowBlur = servicing ? 6 : 8;
+                var drawOffsetX = servicing ? 0 : 13;
                 ctx.drawImage(
                     sprite,
                     sourceX,
@@ -17272,6 +18064,9 @@
 
                 canvas.dataset.workerDroidAnimation =
                     servicing ? "service" : "drift";
+                canvas.dataset.workerDroidRole =
+                    "ambient-maintenance";
+                canvas.dataset.workerDroidScale = "0.70";
                 canvas.dataset.workerDroidFacing =
                     workerDroid.facing < 0 ? "left" : "right";
             }
@@ -18034,6 +18829,50 @@
                     ctx.fillStyle = "rgba(0, 0, 0, 0.48)";
                     ctx.fillRect(platform.x + 7, platform.y + platform.height, platform.width - 14, 9);
 
+                    if (
+                        expansionPreview &&
+                        imageHasPixels(
+                            assets.foundryPlatformModule
+                        )
+                    ) {
+                        ctx.imageSmoothingEnabled = false;
+                        ctx.drawImage(
+                            assets.foundryPlatformModule,
+                            0,
+                            0,
+                            416,
+                            60,
+                            Math.round(platform.x),
+                            Math.round(platform.y),
+                            Math.round(platform.width),
+                            Math.round(platform.height)
+                        );
+                        ctx.globalAlpha = 0.24;
+                        ctx.fillStyle = accent;
+                        ctx.fillRect(
+                            platform.x + 5,
+                            platform.y + 3,
+                            platform.width - 10,
+                            2
+                        );
+                        if (platform.motion) {
+                            ctx.globalAlpha = 0.78;
+                            ctx.fillStyle = "#effffc";
+                            ctx.fillRect(
+                                Math.round(
+                                    platform.x +
+                                    platform.width / 2 -
+                                    8
+                                ),
+                                platform.y + 5,
+                                16,
+                                2
+                            );
+                        }
+                        ctx.restore();
+                        return;
+                    }
+
                     ctx.fillStyle = theme.shell;
                     ctx.fillRect(platform.x, platform.y, platform.width, platform.height);
                     ctx.fillStyle = theme.rim;
@@ -18381,6 +19220,18 @@
                 var restoration = stabilizer
                     ? atmosphericStabilizerProgress(stabilizer)
                     : 0;
+                var biolabStabilizer =
+                    atmosphericStabilizers.find(function (
+                        candidate
+                    ) {
+                        return candidate.id ===
+                            "biolab-atmospheric-stabilizer";
+                    }) || null;
+                var biolabRestoration = biolabStabilizer
+                    ? atmosphericStabilizerProgress(
+                        biolabStabilizer
+                    )
+                    : 0;
                 var gateProgress = foundryGateProgress();
                 var roomEndX = FOUNDRY_REFINERY_GATE_X;
                 var gateTop = FOUNDRY_UPPER_GATE_TOP;
@@ -18653,6 +19504,19 @@
                         }
                     });
 
+                    canvas.dataset.ventFanSectors =
+                        (restoration > 0.52 ? "foundry" : "none") +
+                        "," +
+                        (
+                            biolabRestoration > 0.52
+                                ? "deepworks-uplink"
+                                : "none"
+                        );
+                    canvas.dataset.ventFansMoving = String(
+                        (restoration > 0.52 ? 8 : 0) +
+                        (biolabRestoration > 0.52 ? 8 : 0)
+                    );
+
                     fanFixtures.forEach(function (fan) {
                         if (
                             fan.x < cameraX - 190 ||
@@ -18661,15 +19525,17 @@
                             return;
                         }
 
-                        var fanStart = fan.roomIndex === 1
-                            ? 0.42 + fan.fixtureIndex * 0.16
-                            : 0.58 + fan.fixtureIndex * 0.1;
-                        var fanRestoration = fan.roomIndex < 2
-                            ? smoothUnit(
-                                (restoration - fanStart) /
-                                    (1 - fanStart)
-                            )
-                            : 0;
+                        var fanStart =
+                            0.38 +
+                            fan.fixtureIndex * 0.14;
+                        var sectorRestoration =
+                            fan.roomIndex < 4
+                                ? restoration
+                                : biolabRestoration;
+                        var fanRestoration = smoothUnit(
+                            (sectorRestoration - fanStart) /
+                                (1 - fanStart)
+                        );
                         var fanAngle = fanRestoration > 0.02
                             ? elapsed * (
                                 1.44 +
@@ -19149,62 +20015,64 @@
                         obstacle.routeGate &&
                         !obstacle.destroyed
                     ) {
-                        var fieldTop = 128;
-                        var fieldBottom =
-                            obstacle.y + obstacle.height * 0.58;
-                        var fieldPulse =
-                            0.62 +
-                            Math.sin(elapsed * 5.2) * 0.16;
-
+                        var cageLeft = obstacle.x + 12;
+                        var cageRight =
+                            obstacle.x + obstacle.width - 12;
+                        var cageTop = obstacle.y - 34;
+                        var cageBottom =
+                            obstacle.y + obstacle.height - 8;
                         ctx.save();
-                        ctx.globalCompositeOperation = "screen";
-                        ctx.globalAlpha = 0.12 * fieldPulse;
-                        ctx.fillStyle = "#58f5df";
+                        ctx.fillStyle = "#18202c";
                         ctx.fillRect(
-                            obstacle.x + 18,
-                            fieldTop,
-                            obstacle.width - 36,
-                            fieldBottom - fieldTop
+                            cageLeft - 10,
+                            cageTop,
+                            20,
+                            cageBottom - cageTop
                         );
-                        ctx.globalAlpha = 0.62 * fieldPulse;
-                        ctx.strokeStyle = "#b8fff3";
-                        ctx.lineWidth = 3;
-                        ctx.setLineDash([18, 12]);
-                        ctx.strokeRect(
-                            obstacle.x + 18.5,
-                            fieldTop + 0.5,
-                            obstacle.width - 37,
-                            fieldBottom - fieldTop
+                        ctx.fillRect(
+                            cageRight - 10,
+                            cageTop,
+                            20,
+                            cageBottom - cageTop
                         );
-                        ctx.setLineDash([]);
-                        ctx.globalAlpha = 0.34 * fieldPulse;
-                        ctx.strokeStyle = "#58f5df";
-                        ctx.lineWidth = 2;
-                        for (
-                            var fieldY = fieldTop + 28;
-                            fieldY < fieldBottom - 18;
-                            fieldY += 62
-                        ) {
-                            ctx.beginPath();
-                            ctx.moveTo(obstacle.x + 20, fieldY);
-                            ctx.lineTo(
-                                obstacle.x +
-                                    obstacle.width -
-                                    20,
-                                fieldY + 34
-                            );
-                            ctx.stroke();
-                        }
-                        ctx.globalAlpha = 0.82;
-                        ctx.font =
-                            "700 14px Fira Code, monospace";
-                        ctx.textAlign = "center";
-                        ctx.fillStyle = "#d9fff8";
-                        ctx.fillText(
-                            "VESPERITE LOCK",
-                            obstacle.x + obstacle.width / 2,
-                            fieldTop + 28
+                        ctx.fillStyle = "#415063";
+                        ctx.fillRect(
+                            cageLeft - 6,
+                            cageTop + 6,
+                            12,
+                            cageBottom - cageTop - 12
                         );
+                        ctx.fillRect(
+                            cageRight - 6,
+                            cageTop + 6,
+                            12,
+                            cageBottom - cageTop - 12
+                        );
+                        ctx.fillStyle = "#263242";
+                        ctx.fillRect(
+                            cageLeft - 12,
+                            cageTop - 12,
+                            cageRight - cageLeft + 24,
+                            20
+                        );
+                        ctx.fillStyle = "#6c7a89";
+                        ctx.fillRect(
+                            cageLeft - 4,
+                            cageTop - 8,
+                            cageRight - cageLeft + 8,
+                            6
+                        );
+                        ctx.fillStyle = "#ffd36c";
+                        ctx.fillRect(cageLeft - 4, cageTop - 7, 8, 4);
+                        ctx.fillRect(cageRight - 4, cageTop - 7, 8, 4);
+                        ctx.strokeStyle = "#111722";
+                        ctx.lineWidth = 7;
+                        ctx.beginPath();
+                        ctx.moveTo(cageLeft, cageTop + 38);
+                        ctx.lineTo(cageRight, cageTop + 82);
+                        ctx.moveTo(cageRight, cageTop + 38);
+                        ctx.lineTo(cageLeft, cageTop + 82);
+                        ctx.stroke();
                         ctx.restore();
                     }
 
@@ -19675,7 +20543,7 @@
                 var specs = {
                     coreLeech: {
                         frameDuration: 0.05,
-                        drawSize: 122,
+                        drawSize: 140,
                         ground: false
                     },
                     vesperFlare: {
@@ -19703,7 +20571,10 @@
                     ? Math.round(enemy.floorY - spec.drawSize - 10)
                     : Math.round(centerY - spec.drawSize / 2 - 10);
 
-                if (!spec.ground) {
+                if (
+                    !spec.ground &&
+                    enemy.type !== "coreLeech"
+                ) {
                     var auraPulse =
                         0.16 +
                         Math.sin(elapsed * 6.8 + enemy.phase) * 0.04;
@@ -19742,11 +20613,19 @@
 
                 ctx.save();
                 ctx.translate(centerX, centerY);
-                if (enemy.vx < 0) ctx.scale(-1, 1);
+                var shouldMirror =
+                    enemy.type === "paleWatcher"
+                        ? enemy.vx > 0
+                        : enemy.vx < 0;
+                if (shouldMirror) ctx.scale(-1, 1);
                 ctx.imageSmoothingEnabled = false;
                 ctx.shadowColor = color;
                 ctx.shadowBlur =
-                    enemy.type === "vesperFlare" ? 20 : 13;
+                    enemy.type === "coreLeech"
+                        ? 0
+                        : enemy.type === "vesperFlare"
+                            ? 20
+                            : 13;
                 ctx.drawImage(
                     sprite,
                     sourceX,
@@ -19924,10 +20803,16 @@
                 enemy,
                 frameIndex
             ) {
+                var laserFirstActiveFrame =
+                    enemy.laserFirstActiveFrame ||
+                    WOUND_BOSS_LASER_FIRST_ACTIVE_FRAME;
+                var laserLastActiveFrame =
+                    enemy.laserLastActiveFrame ||
+                    WOUND_BOSS_LASER_LAST_ACTIVE_FRAME;
                 if (
                     !enemy.laserAttacking ||
                     frameIndex >
-                        WOUND_BOSS_LASER_LAST_ACTIVE_FRAME
+                        laserLastActiveFrame
                 ) {
                     return;
                 }
@@ -19938,7 +20823,7 @@
                         : enemy.laserAimAngle;
                 if (
                     frameIndex <
-                    WOUND_BOSS_LASER_FIRST_ACTIVE_FRAME
+                        laserFirstActiveFrame
                 ) {
                     if (frameIndex < 6) return;
                     var chargeProgress =
@@ -19946,7 +20831,7 @@
                             frameIndex - 6
                         ) /
                         (
-                            WOUND_BOSS_LASER_FIRST_ACTIVE_FRAME -
+                            laserFirstActiveFrame -
                             6
                         );
                     ctx.save();
@@ -19971,7 +20856,7 @@
                         WOUND_BOSS_LASER_BEAM_SOURCE_Y.length -
                             1,
                         frameIndex -
-                            WOUND_BOSS_LASER_FIRST_ACTIVE_FRAME
+                            laserFirstActiveFrame
                     )
                 );
                 var sourceX =
@@ -20236,10 +21121,19 @@
                 var spriteFrameIndex =
                     laserAttacking &&
                     frameIndex >=
-                        WOUND_BOSS_LASER_FIRST_ACTIVE_FRAME &&
+                        (
+                            enemy.laserFirstActiveFrame ||
+                            WOUND_BOSS_LASER_FIRST_ACTIVE_FRAME
+                        ) &&
                     frameIndex <=
-                        WOUND_BOSS_LASER_LAST_ACTIVE_FRAME
-                        ? WOUND_BOSS_LASER_FIRST_ACTIVE_FRAME -
+                        (
+                            enemy.laserLastActiveFrame ||
+                            WOUND_BOSS_LASER_LAST_ACTIVE_FRAME
+                        )
+                        ? (
+                            enemy.laserFirstActiveFrame ||
+                            WOUND_BOSS_LASER_FIRST_ACTIVE_FRAME
+                        ) -
                             1
                         : frameIndex;
                 var sourceX =
@@ -21459,13 +22353,20 @@
                 if (shipInteriorActive) {
                     zoneNameDisplay.textContent = "RD-42 INTERIOR";
                     blasterStatusDisplay.textContent =
-                        shipServiceKitState === "carried"
+                        shipSuitState === "flight-suit"
+                            ? "FLIGHT SUIT // ACTIVE"
+                            : shipSuitState === "changing" ||
+                                shipSuitState === "rearming"
+                                ? "SUIT FIELD // ACTIVE"
+                        : shipServiceKitState === "carried"
                             ? "SERVICE KIT // SECURED"
                             : shipSpecimenActive
                                 ? "SPECIMEN // RESTRICTED"
                                 : "SHIP SYSTEMS // STANDBY";
                     blasterStatusDisplay.style.color =
-                        shipSpecimenActive
+                        shipSuitState !== "armored"
+                            ? "#58f5df"
+                            : shipSpecimenActive
                             ? "#ff69b4"
                             : "";
                     heartsDisplay.textContent = "RD-42 // SAFE";
@@ -21570,7 +22471,9 @@
 
             var audioScene = mainTitleScreen
                 ? "title"
-                : overworldPreview || shipInteriorPreview
+                : woundBossPreview
+                    ? "wound"
+                    : overworldPreview || shipInteriorPreview
                     ? "overworld"
                     : "foundry";
             var activeMusicChannel = backgroundMusic;
@@ -21851,6 +22754,9 @@
                 if (pressed) {
                     engageSceneAudioFromGesture();
                 }
+                if (state === "ship-suit") {
+                    return;
+                }
                 if (
                     state === "paused" ||
                     state === "boss-intro" ||
@@ -22039,6 +22945,21 @@
             window.addEventListener("keydown", engageSceneAudioFromGesture);
 
             window.addEventListener("keydown", function (event) {
+                if (!episodeBridge.hidden) {
+                    if (
+                        !event.repeat &&
+                        (
+                            event.code === "Enter" ||
+                            event.code === "NumpadEnter" ||
+                            event.code === "Space" ||
+                            event.code === "Escape"
+                        )
+                    ) {
+                        event.preventDefault();
+                        completeEpisodeBridge();
+                    }
+                    return;
+                }
                 if (
                     signalBoot.hidden &&
                     !titleScreen.hidden &&
@@ -22321,6 +23242,10 @@
             bossIntroSkip.addEventListener("click", function () {
                 completeWoundBossIntro(true);
             });
+            episodeBridgeSkip.addEventListener(
+                "click",
+                completeEpisodeBridge
+            );
             startOverButton.addEventListener("click", function () {
                 playSoundEffect("crashSelect");
                 playBackgroundMusic();
@@ -22376,6 +23301,7 @@
                         state === "transporting" ||
                         state === "ship-transition" ||
                         state === "ship-kit" ||
+                        state === "ship-suit" ||
                         state === "boss-intro" ||
                         dialogueActive
                     );

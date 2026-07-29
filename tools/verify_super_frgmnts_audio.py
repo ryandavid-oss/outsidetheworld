@@ -15,6 +15,7 @@ TRACKS = {
     "title": "super-frgmnts-title-cue.mp3",
     "overworld": "super-frgmnts-overworld-loop.mp3",
     "foundry": "super-frgmnts-foundry-loop.mp3",
+    "wound": "super-frgmnts-seam-hunter-boss-v1.m4a",
     "heavy_rifle": "super-frgmnts-heavy-rifle-shot.mp3",
     "heavy_rifle_overheat": "super-frgmnts-heavy-rifle-overheat.mp3",
     "pack_laser": "super-frgmnts-pack-laser-shot.mp3",
@@ -67,7 +68,8 @@ def main() -> None:
         '"pointerdown",\n                engageSceneAudioFromGesture,',
         '"click",\n                engageSceneAudioFromGesture,',
         'window.addEventListener("keydown", engageSceneAudioFromGesture);',
-        'setAudioScene(isWound ? "foundry" : scene);',
+        'setAudioScene(isWound ? "wound" : scene);',
+        'setAudioScene("wound", false);',
         'loadAndConfigureEpisodeScene("foundry")',
         "function pauseSoundEffects()",
         "pauseAudioForFocusLoss()",
@@ -75,6 +77,27 @@ def main() -> None:
     )
     for token in required_tokens:
         require(token in source, f"Missing audio runtime contract: {token}")
+
+    require(
+        re.search(
+            r"var selectedMusicTrack = mainTitleScreen.*?"
+            r"woundBossPreview.*?backgroundMusic\.dataset\.woundTrack",
+            source,
+            flags=re.DOTALL,
+        )
+        is not None,
+        "Direct Wound loads do not select the boss score",
+    )
+    require(
+        re.search(
+            r"var audioScene = mainTitleScreen.*?"
+            r"woundBossPreview.*?\"wound\"",
+            source,
+            flags=re.DOTALL,
+        )
+        is not None,
+        "Direct Wound loads do not initialize the wound audio scene",
+    )
 
     blaster_body = re.search(
         r"function fireBlaster\(\) \{(.*?)\n            \}\n\n"

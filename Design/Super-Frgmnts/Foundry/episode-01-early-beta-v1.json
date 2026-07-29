@@ -1,8 +1,9 @@
 {
   "schema": "super-frgmnts-episode-beta-v1",
+  "release": "beta-2",
   "episode": "01",
   "title": "The Shard Foundry",
-  "status": "early-beta",
+  "status": "beta-2-production",
   "timer_seconds": 480,
   "difficulty_contract": {
     "target": "easy-to-medium",
@@ -15,6 +16,7 @@
     "minimum_primary_landing_width_pixels": 170,
     "minimum_painted_connector_width_pixels": 127,
     "minimum_enemy_buffer_from_landing_pixels": 180,
+    "minimum_powerup_item_separation_pixels": 240,
     "electric_cycle_seconds": 3.6,
     "electric_live_seconds": 1.25,
     "electric_landing_grace_seconds": 0.28,
@@ -39,7 +41,7 @@
         3
       ],
       "purpose": "Teach the heavy rifle, clear the mandatory Vesperite lock, then require one readable Deepworks recovery.",
-      "challenge_peak": "Rifle lock followed by a single ground patrol and one short thermal-vent jump.",
+      "challenge_peak": "A safe rifle acquisition, physical containment obstruction, recurring Sentinel, and one short thermal-vent jump.",
       "recovery": "Deepworks is enemy-free and contains the zone's final Signal Shard."
     },
     {
@@ -49,7 +51,7 @@
         5
       ],
       "purpose": "Test timing on the electrified catwalk, combine one air threat with one ground threat, and restore the second atmospheric stabilizer.",
-      "challenge_peak": "Electrified-platform timing followed later by a separated Bastion Fragment and Seam Hunter encounter.",
+      "challenge_peak": "Electrified-platform timing followed later by separated Ember Wasp, Chitin Sentinel, and Seam Hunter encounters.",
       "recovery": "Heart after the electric timing beat; optional Deepworks credit cache before the relay."
     },
     {
@@ -77,15 +79,12 @@
     {
       "phase": "orientation",
       "scene": "overworld",
-      "objective": "Meet Dras, then complete Field Calibration before entering the Coreworks.",
+      "objective": "Land on Veyra, meet Dras, and reach the Coreworks transport.",
       "systems": [
+        "atmospheric arrival bridge",
         "ship traversal",
         "run and jump",
         "always-equipped telescopic laser seeker",
-        "shootable credit cache",
-        "bursting collectible credits",
-        "moving platform",
-        "cycling electrified platform",
         "Coreworks surface transport"
       ]
     },
@@ -112,18 +111,15 @@
         "tall-room platforming",
         "moving platforms",
         "electrified platform",
-        "surface crawler",
-        "legacy Ridge Skitter",
-        "legacy Clacker Beetle",
-        "legacy Spore Wisp",
-        "ground-traveling Vesper Mite",
+        "platform-circling Squircle Minion",
+        "recurring three-hit Chitin Sentinel patrols",
+        "Core Leech",
+        "Kihunter",
+        "Sova",
         "Ember Wasp",
         "four-hit Seam Hunter",
-        "five-hit Chitin Sentinel",
-        "Spring Fragment",
-        "Bastion Fragment",
-        "two-hit Core Leech",
-        "two-hit Vesper Flare",
+        "Skree",
+        "Seam Lurker",
         "three-hit Pale Watcher",
         "switchable telescopic laser seeker and heavy rifle for route clearing, bosses, and heavy combat"
       ]
@@ -144,7 +140,7 @@
     "signal_shards_deepworks": 1,
     "recovery_hearts": 3,
     "atmospheric_relays": 2,
-    "credit_caches_overworld": 1,
+    "credit_caches_overworld": 0,
     "credit_caches_foundry": 2,
     "credit_caches_deepworks": 1,
     "vesperite_obstructions": 1,
@@ -156,31 +152,35 @@
       "heavy-rifle"
     ],
     "enemy_roster": [
-      "Ridge Skitter",
-      "Clacker Beetle",
-      "Spore Wisp",
       "Squircle Minion",
-      "Vesper Mite",
+      "Chitin Sentinel",
+      "Core Leech",
+      "Kihunter",
+      "Sova",
       "Ember Wasp",
       "Seam Hunter",
-      "Chitin Sentinel",
-      "Spring Fragment",
-      "Bastion Fragment",
-      "Core Leech",
-      "Vesper Flare",
+      "Skree",
+      "Seam Lurker",
       "Pale Watcher"
     ],
-    "surface_return": "Uplink Gate returns Aryn to Veyra with the recovered loadout"
+    "enemy_count": 16,
+    "chitin_sentinel_count": 7,
+    "retired_enemy_families": [
+      "Ridge Skitter",
+      "Clacker Beetle",
+      "Spore Wisp"
+    ],
+    "surface_return": "Wound-touched Vesperite recovery fades to black and returns Aryn to Veyra with the recovered loadout"
   },
   "encounter_order": [
-    "Foundry Intake: Ridge Skitter on the deck; Squircle Minion on an upper observation route",
-    "Breathing Chamber: Core Leech during the descent; Clacker Beetle before the relay",
-    "Refinery Entry: Spore Wisp and Spring Fragment separated vertically around the rifle lock",
-    "Refinery Exit: Vesper Mite patrol, thermal vent, then enemy-free Deepworks recovery",
-    "Biolab Entry: Vesper Flare low and Ember Wasp high with no overlapping mandatory landing",
-    "Biolab Relay: Bastion Fragment above, Seam Hunter on the middle deck, safe relay apron at far right",
-    "Uplink Approach: Chitin Sentinel before an upper-route recovery heart",
-    "Uplink Gate: Spore Wisp high, arc leak on deck, Pale Watcher beyond it, final shard at the gate"
+    "Foundry Intake: Chitin Sentinel on the broad ground lane; Squircle Minion visibly circles an upper platform",
+    "Breathing Chamber: Core Leech in the air lane, then Chitin Sentinel before the relay apron",
+    "Refinery Entry: safe heavy-rifle pickup, Kihunter read, physical obstruction, then Chitin Sentinel",
+    "Refinery Exit: Sova and Chitin Sentinel in separate lanes, thermal vent, then enemy-free Deepworks recovery",
+    "Biolab Entry: guaranteed Ember Wasp above a ground Chitin Sentinel with no shared mandatory landing",
+    "Biolab Relay: Seam Hunter and Chitin Sentinel are separated before a safe relay apron",
+    "Deepworks Approach: Skree and Chitin Sentinel are separated before the upper-route recovery heart",
+    "Uplink Gate: Seam Lurker above, arc leak on deck, Pale Watcher beyond it, and the final shard at the gate"
   ],
   "deferred": [
     "credit economy",

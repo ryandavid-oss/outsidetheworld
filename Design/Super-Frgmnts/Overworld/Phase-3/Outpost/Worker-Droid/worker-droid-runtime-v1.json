@@ -4,7 +4,7 @@
   "hostile": false,
   "solid": false,
   "scene": "overworld",
-  "role": "ambient worker near the abandoned credit terminal",
+  "role": "ambient maintenance worker near the abandoned credit terminal",
   "animations": [
     {
       "key": "drift",
@@ -133,13 +133,9 @@
     "serviceIntervalSeconds": 7.5,
     "serviceDurationSeconds": 1.75,
     "serviceDescent": 22,
+    "renderScale": 0.7,
     "friendlySeekerSafety": true,
-    "optionalAssignment": {
-      "id": "service-worker-droid",
-      "worldX": 4524,
-      "prerequisite": "Dras first contact",
-      "rewardCredits": 2,
-      "result": "Immediately enters the existing non-hostile service animation."
-    }
+    "discoveryHook": false,
+    "optionalAssignment": null
   }
 }
