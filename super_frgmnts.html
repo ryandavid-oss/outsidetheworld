@@ -3217,6 +3217,9 @@
             var shipTrillianPreview =
                 shipInteriorPreview &&
                 previewParameters.get("trillian") === "1";
+            var shipFlightSuitReview =
+                shipInteriorPreview &&
+                previewParameters.get("suit") === "flight";
             var arrivalDialoguePreview =
                 overworldPreview &&
                 previewParameters.get("scene") === "dialogue";
@@ -5021,7 +5024,9 @@
                 ? "available"
                 : "rack";
             var shipServiceKitElapsed = 0;
-            var shipSuitState = "armored";
+            var shipSuitState = shipFlightSuitReview
+                ? "flight-suit"
+                : "armored";
             var shipSuitElapsed = 0;
             var shipSpecimenActive =
                 shipPostWoundPreview || shipServiceKitObjective;
@@ -5822,6 +5827,11 @@
             var SHIP_PACK_BENCH_X = 1026;
             var SHIP_KEEL_HATCH_X = 1024;
             var SHIP_SERVICE_KIT_X = 1274;
+            var SHIP_ARYN_SOURCE_SIZE = 112;
+            var SHIP_ARYN_NORMALIZED_HEIGHT = 90;
+            var SHIP_ARYN_DRAW_SCALE = 1.5;
+            var SHIP_ARYN_DRAW_SIZE = 168;
+            var SHIP_ARYN_VISIBLE_HEIGHT = 135;
 
             function buildShipInteriorPlatforms() {
                 return [
@@ -6808,7 +6818,9 @@
                     ? "available"
                     : "rack";
                 shipServiceKitElapsed = 0;
-                shipSuitState = "armored";
+                shipSuitState = shipFlightSuitReview
+                    ? "flight-suit"
+                    : "armored";
                 shipSuitElapsed = 0;
                 shipSpecimenActive =
                     shipPostWoundPreview ||
@@ -16996,6 +17008,127 @@
                 ctx.restore();
             }
 
+            function currentShipArynDrawScale() {
+                if (shipTransitionMode === "interior-enter") {
+                    return (
+                        1 +
+                        (
+                            SHIP_ARYN_DRAW_SCALE - 1
+                        ) *
+                        smoothUnit(
+                            shipTransitionElapsed / 0.95
+                        )
+                    );
+                }
+                if (shipTransitionMode === "interior-exit") {
+                    return (
+                        SHIP_ARYN_DRAW_SCALE -
+                        (
+                            SHIP_ARYN_DRAW_SCALE - 1
+                        ) *
+                        smoothUnit(
+                            shipTransitionElapsed / 0.86
+                        )
+                    );
+                }
+                return SHIP_ARYN_DRAW_SCALE;
+            }
+
+            function currentShipArynDrawSize() {
+                if (shipTransitionMode === "none") {
+                    return SHIP_ARYN_DRAW_SIZE;
+                }
+                return Math.round(
+                    SHIP_ARYN_SOURCE_SIZE *
+                    currentShipArynDrawScale()
+                );
+            }
+
+            function drawShipArynFrame(
+                sprite,
+                frameIndex,
+                centerX,
+                cellBottomY,
+                facing
+            ) {
+                var drawSize = currentShipArynDrawSize();
+                var drawX = Math.round(
+                    centerX - drawSize / 2
+                );
+                var drawY = Math.round(
+                    cellBottomY - drawSize
+                );
+                canvas.dataset.arynDrawSize =
+                    String(drawSize);
+                canvas.dataset.arynInteriorScale =
+                    (
+                        drawSize /
+                        SHIP_ARYN_SOURCE_SIZE
+                    ).toFixed(3);
+                canvas.dataset.arynVisibleHeight =
+                    String(
+                        drawSize === SHIP_ARYN_DRAW_SIZE
+                            ? SHIP_ARYN_VISIBLE_HEIGHT
+                            : Math.round(
+                                SHIP_ARYN_NORMALIZED_HEIGHT *
+                                drawSize /
+                                SHIP_ARYN_SOURCE_SIZE
+                            )
+                    );
+
+                ctx.save();
+                ctx.translate(
+                    drawX + (facing < 0 ? drawSize : 0),
+                    drawY
+                );
+                if (facing < 0) {
+                    ctx.scale(-1, 1);
+                }
+                ctx.drawImage(
+                    sprite,
+                    (frameIndex % 6) *
+                        SHIP_ARYN_SOURCE_SIZE,
+                    Math.floor(frameIndex / 6) *
+                        SHIP_ARYN_SOURCE_SIZE,
+                    SHIP_ARYN_SOURCE_SIZE,
+                    SHIP_ARYN_SOURCE_SIZE,
+                    0,
+                    0,
+                    drawSize,
+                    drawSize
+                );
+                ctx.restore();
+            }
+
+            function drawShipArmoredPlayer() {
+                var drawScale = currentShipArynDrawScale();
+                var centerX =
+                    player.x + SHIP_ARYN_SOURCE_SIZE / 2;
+                var cellBottomY =
+                    player.y + SHIP_ARYN_SOURCE_SIZE;
+
+                canvas.dataset.arynDrawSize =
+                    String(currentShipArynDrawSize());
+                canvas.dataset.arynInteriorScale =
+                    drawScale.toFixed(3);
+                canvas.dataset.arynVisibleHeight =
+                    String(
+                        drawScale === SHIP_ARYN_DRAW_SCALE
+                            ? SHIP_ARYN_VISIBLE_HEIGHT
+                            : Math.round(
+                                SHIP_ARYN_NORMALIZED_HEIGHT *
+                                drawScale
+                            )
+                    );
+
+                ctx.save();
+                ctx.translate(centerX, cellBottomY);
+                ctx.scale(drawScale, drawScale);
+                ctx.translate(-centerX, -cellBottomY);
+                drawPlayer();
+                ctx.restore();
+            }
+
             function drawShipSuitChange() {
                 if (!imageHasPixels(assets.armorChange)) {
                     return;
@@ -17027,16 +17160,12 @@
                     ctx.globalCompositeOperation = "source-over";
                     ctx.globalAlpha = 1;
                 }
-                ctx.drawImage(
+                drawShipArynFrame(
                     assets.armorChange,
-                    (frameIndex % 6) * 112,
-                    Math.floor(frameIndex / 6) * 112,
-                    112,
-                    112,
-                    SHIP_SUIT_CRADLE_X - 56,
-                    SHIP_INTERIOR_DECK_Y - 104,
-                    112,
-                    112
+                    frameIndex,
+                    SHIP_SUIT_CRADLE_X,
+                    player.y + SHIP_ARYN_SOURCE_SIZE,
+                    player.facing
                 );
                 ctx.restore();
             }
@@ -17086,7 +17215,7 @@
                     !imageHasPixels(assets.flightSuitRun) ||
                     !imageHasPixels(assets.flightSuitJump)
                 ) {
-                    drawPlayer();
+                    drawShipArmoredPlayer();
                     return;
                 }
 
@@ -17119,29 +17248,13 @@
                 canvas.dataset.arynWeapon = "none";
                 canvas.dataset.shipSuitFrame = String(frameIndex);
 
-                ctx.save();
-                ctx.translate(
-                    Math.round(
-                        player.x +
-                            (player.facing < 0 ? 112 : 0)
-                    ),
-                    Math.round(player.y - 4)
-                );
-                if (player.facing < 0) {
-                    ctx.scale(-1, 1);
-                }
-                ctx.drawImage(
+                drawShipArynFrame(
                     sprite,
-                    (frameIndex % 6) * 112,
-                    Math.floor(frameIndex / 6) * 112,
-                    112,
-                    112,
-                    0,
-                    0,
-                    112,
-                    112
+                    frameIndex,
+                    player.x + SHIP_ARYN_SOURCE_SIZE / 2,
+                    player.y + SHIP_ARYN_SOURCE_SIZE,
+                    player.facing
                 );
-                ctx.restore();
             }
 
             function drawShipInteriorProductionArt() {
@@ -17250,7 +17363,7 @@
                     drawShipFlightSuitPlayer();
                 } else {
                     canvas.dataset.shipSuitFrame = "";
-                    drawPlayer();
+                    drawShipArmoredPlayer();
                 }
 
                 if (
@@ -17740,7 +17853,7 @@
                     drawShipFlightSuitPlayer();
                 } else {
                     canvas.dataset.shipSuitFrame = "";
-                    drawPlayer();
+                    drawShipArmoredPlayer();
                 }
 
                 if (

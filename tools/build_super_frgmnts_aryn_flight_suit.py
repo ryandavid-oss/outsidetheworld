@@ -78,8 +78,8 @@ SEQUENCES = (
         source_stem="aryn-flight-suit-run-source-v1",
         source_frame_size=(316, 626),
         frame_duration_ms=78,
-        normalized_size=(51, 100),
-        normalized_offset=(30, 5),
+        normalized_size=(46, 90),
+        normalized_offset=(33, 15),
         phase_map={
             "neutral_lead_in": [0, 6],
             "run_cycle": [7, 32],
@@ -91,8 +91,8 @@ SEQUENCES = (
         source_stem="aryn-flight-suit-jump-source-v1",
         source_frame_size=(284, 596),
         frame_duration_ms=71,
-        normalized_size=(54, 113),
-        normalized_offset=(29, 1),
+        normalized_size=(50, 105),
+        normalized_offset=(31, 8),
         phase_map={
             "anticipation": [0, 10],
             "takeoff_and_airborne": [11, 17],

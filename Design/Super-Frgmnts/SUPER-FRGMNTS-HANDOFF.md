@@ -158,7 +158,12 @@ the supplied OTW `#A0BEF5`, `#91AFB3`, `#6395EE`, and `#EEEEEE` colors;
 navy defines structure, and true black is limited to seams, canopy space,
 hatch depth, and inaccessible recesses. A faithful three-band OTW mark appears
 as an in-world 16-bit mosaic on the cockpit-side bulkhead. The flight/suit
-alcove and sealed keel hatch are present in the promoted artwork.
+alcove and sealed keel hatch are present in the promoted artwork. Aryn keeps
+her 112 px physics cell but renders at 168 px inside the RD-42, yielding an
+approximately 135 px standing figure scaled against the left cockpit control
+deck. The armor-change and flight-suit derivatives share a 90 px normalized
+standing-height target so the costume swap no longer changes her apparent
+height.
 
 The story and staging contract is
 [`Post-Foundry/RETURN-TO-DRAS-INTERLUDE-v1.md`](Post-Foundry/RETURN-TO-DRAS-INTERLUDE-v1.md).
@@ -219,6 +224,8 @@ Then use:
   `http://127.0.0.1:8765/super_frgmnts.html?preview=ship-interior&objective=service-kit&autostart=1`
 - RD-42 post-Wound/Trillian state:
   `http://127.0.0.1:8765/super_frgmnts.html?preview=ship-interior&state=post-wound&trillian=1&autostart=1`
+- RD-42 normalized flight-suit scale review:
+  `http://127.0.0.1:8765/super_frgmnts.html?preview=ship-interior&suit=flight&autostart=1`
 
 The historical `scene=portal` transport review URL remains an alias, but new
 work should use `scene=transport`.

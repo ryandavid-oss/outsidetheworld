@@ -204,10 +204,13 @@ an attempt to pretend the RD-42 contains kilometers of corridors. Sloping hull
 ribs, tapered ends, and visible engine-pod intrusions keep the room tied to the
 ship's manta-like silhouette.
 
-The 306-pixel occupied volume between y 438 and y 744 is approximately 3.4
-times the live sprite's 89-pixel visible height. The dorsal hatch chimney is
-the one deliberate tall exception. Aryn remains at her established runtime
-scale; the room and its furniture carry the scale correction.
+The 306-pixel occupied volume between y 438 and y 744 is approximately 2.27
+times Aryn's revised 135-pixel interior standing height. Her 112-pixel physics
+cell remains unchanged, but every interior costume renders in a 168-pixel cell
+at 1.5× visual scale. The left cockpit control deck is the human-scale anchor:
+Aryn reads clearly taller than its working surface without crowding the normal
+occupied ceiling. The dorsal hatch chimney remains the one deliberate tall
+exception.
 
 Detailed coordinates and prop reservations live in
 [`RD42-SHIP-INTERIOR-WIREFRAME-v1.md`](RD42-SHIP-INTERIOR-WIREFRAME-v1.md).
@@ -598,7 +601,7 @@ Every final asset remains scene-scoped and locally installed.
 | Service kit | Small alpha sprite or short atlas | Below 2,048 px per axis |
 | Specimen-reactive light | Separate alpha overlay | Scene-scoped |
 | Conditional Trillian rest | Reuse or new bounded rest strip | Scene-scoped |
-| Aryn armor change | 672 × 672 grid; 36 frames at 112 × 112 | Integrated with flight-suit movement |
+| Aryn armor change | 672 × 672 grid; 36 frames at 112 × 112; 90 px normalized visible height | Integrated with flight-suit movement |
 | Flight/suit alcove screen | Small alpha animation or foreground layer | Scene-scoped |
 | Sealed keel-deck hatch | Rear/floor plate detail | Noninteractive in current chapter |
 
@@ -621,6 +624,9 @@ The runtime exposes reviewable values:
 - `data-ship-suit-alcove="idle|aligning|changing|flight-suit|rearming"`;
 - `data-ship-keel-hatch="sealed"`;
 - `data-ship-art="production-v1|fallback-greybox"`;
+- `data-aryn-draw-size="112..168"`;
+- `data-aryn-interior-scale="1.000..1.500"`;
+- `data-aryn-visible-height="90..135"`;
 - `data-ship-camera-mode="entry|follow|interaction|exit"`;
 - `data-ship-transition-progress`;
 - `data-player-supported-by="ship-center-roof|ship-interior-deck"`; and
@@ -628,6 +634,10 @@ The runtime exposes reviewable values:
 
 The state model must be serializable and must never depend solely on DOM or
 Canvas presentation state.
+
+The direct review route may add `suit=flight` to start in the resolved
+flight-suit state for visual-scale comparison. This parameter is QA-only and
+does not bypass the armor-change interaction in the production route.
 
 ## Lifecycle and recovery
 

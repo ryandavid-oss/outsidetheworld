@@ -73,10 +73,12 @@ one-plate playable production-art review:
   records the authoritative palette, runtime path, OTW brandmark treatment,
   suit alcove, and sealed keel-hatch geometry.
 - [`Interior/Reviews/rd42-interior-rear-plate-scale-check-production-v1.png`](Interior/Reviews/rd42-interior-rear-plate-scale-check-production-v1.png)
-  verifies the live 112 px Aryn cell against the promoted rear plate.
+  verifies Aryn's unchanged 112 px physics cell and revised 168 px interior
+  render cell against the cockpit control deck and promoted rear plate.
 - The v1 pixel plate remains a rejected scale study; v2 supersedes it without
-  changing Aryn's established runtime size; production v1 supersedes v2 only
-  as the runtime artwork.
+  changing the room geometry; production v1 supersedes v2 as the runtime
+  artwork. The RD-42 scene now applies a dedicated 1.5× character render scale
+  without changing Aryn's collisions or her scale elsewhere in the game.
 - The cockpit-side bulkhead carries a faithful three-band OTW mark rendered as
   an in-world 16-bit mosaic, not a UI watermark.
 - [`../Aryn/Armor-Change/README.md`](../Aryn/Armor-Change/README.md) documents

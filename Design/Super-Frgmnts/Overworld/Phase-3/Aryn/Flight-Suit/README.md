@@ -44,6 +44,13 @@ frames 7–32 form the responsive gameplay loop. The jump frames are selected by
 takeoff, vertical velocity, and landing state so the sprite follows the real
 physics arc instead of imposing the source sheet's full canned duration.
 
+The movement derivatives use the same 90-pixel standing-height target as the
+armor-change sheet. The run source is normalized to a 90-pixel-high source
+field and the jump source to a 105-pixel field that preserves authored
+anticipation and airborne pose variation. All armored and flight-suit states
+then share the RD-42's 168-pixel render cell and approximately 135-pixel
+standing height.
+
 ## Current boundary
 
 Aryn must restore field armor before she can use the dorsal hatch or secure the

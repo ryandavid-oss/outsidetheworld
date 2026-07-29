@@ -36,9 +36,8 @@ GRID_COLUMNS = 6
 GRID_ROWS = 6
 FRAME_COUNT = GRID_COLUMNS * GRID_ROWS
 FRAME_DURATION_MS = 76
-NORMALIZED_SIZE = (67, 95)
-NORMALIZED_OFFSET = (22, 10)
 BASELINE_Y = 104
+VISIBLE_HEIGHT_TARGET = 90
 BACKGROUND = (3, 6, 18, 255)
 
 
@@ -84,16 +83,38 @@ def load_frames() -> list[Image.Image]:
 
 
 def normalize(source: Image.Image) -> Image.Image:
+    alpha_bounds = source.getchannel("A").getbbox()
+    if alpha_bounds is None:
+        return Image.new(
+            "RGBA",
+            (FRAME_SIZE, FRAME_SIZE),
+            (0, 0, 0, 0),
+        )
+
+    visible_height = alpha_bounds[3] - alpha_bounds[1]
+    scale = VISIBLE_HEIGHT_TARGET / visible_height
+    normalized_size = (
+        round(source.width * scale),
+        round(source.height * scale),
+    )
     reduced = source.resize(
-        NORMALIZED_SIZE,
+        normalized_size,
         Image.Resampling.LANCZOS,
+    )
+    reduced_bounds = reduced.getchannel("A").getbbox()
+    if reduced_bounds is None:
+        raise ValueError("Normalized armor-change frame has no visible pixels")
+
+    normalized_offset = (
+        round(FRAME_SIZE / 2 - source.width * scale / 2),
+        BASELINE_Y + 1 - reduced_bounds[3],
     )
     runtime = Image.new(
         "RGBA",
         (FRAME_SIZE, FRAME_SIZE),
         (0, 0, 0, 0),
     )
-    runtime.alpha_composite(reduced, NORMALIZED_OFFSET)
+    runtime.alpha_composite(reduced, normalized_offset)
     return runtime
 
 
@@ -198,9 +219,10 @@ def build_manifest() -> None:
                 GRID_ROWS * FRAME_SIZE,
             ],
             "grid": [GRID_COLUMNS, GRID_ROWS],
-            "normalized_source_size": list(NORMALIZED_SIZE),
-            "normalized_offset": list(NORMALIZED_OFFSET),
             "baseline_y": BASELINE_Y,
+            "visible_height_target": VISIBLE_HEIGHT_TARGET,
+            "normalization":
+                "per-frame visible height with source-center preservation",
         },
         "phase_map": {
             "armored_hold": [0, 10],

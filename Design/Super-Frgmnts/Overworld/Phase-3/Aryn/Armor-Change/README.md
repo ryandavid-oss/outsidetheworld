@@ -44,8 +44,12 @@ The isolated RD-42 preview supports a stationary interaction:
 6. Returning to the alcove and pressing Down reverses the sequence and
    restores her field armor.
 
-The normalized cell uses baseline y 104. At the RD-42 deck y 744, the review
-sequence draws from y 640 so the authored feet meet the deck.
+Every runtime frame is now normalized to a 90-pixel visible-height target
+around baseline y 104 while preserving the source-frame center. This removes
+the height jump between the 88-pixel armored source pose and the former
+95-pixel resolved flight-suit pose. Inside the RD-42, the shared 112-pixel
+physics cell renders at 168 pixels, producing an approximately 135-pixel
+visible Aryn in both costumes.
 
 This sheet remains authoritative only for the stationary costume change. The
 separate supplied flight-suit movement set now closes the main-deck locomotion

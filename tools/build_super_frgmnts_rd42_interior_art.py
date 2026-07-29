@@ -46,7 +46,10 @@ HEIGHT = 941
 OCCUPIED_CEILING_Y = 438
 GAMEPLAY_DECK_Y = 744
 DORSAL_HATCH_CENTER_X = 684
-PLAYER_CELL = 112
+PLAYER_PHYSICS_CELL = 112
+PLAYER_RENDER_CELL = 168
+PLAYER_VISIBLE_HEIGHT = 135
+PLAYER_INTERIOR_SCALE = 1.5
 PLAYER_SPRITE = (
     PROJECT_ROOT
     / "Images"
@@ -122,7 +125,7 @@ def write_scale_review(master: Image.Image) -> None:
     )
     draw.text(
         (40, 65),
-        "112 px cell  •  occupied volume 306 px  •  OTW light palette",
+        "112 px physics  •  168 px render  •  135 px visible height",
         font=font,
         fill=(160, 190, 245, 255),
     )
@@ -152,19 +155,40 @@ def write_scale_review(master: Image.Image) -> None:
         )
 
     player = Image.open(PLAYER_SPRITE).convert("RGBA")
+    player = player.resize(
+        (PLAYER_RENDER_CELL, PLAYER_RENDER_CELL),
+        Image.Resampling.NEAREST,
+    )
     for center_x in PLAYER_REVIEW_CENTERS:
-        player_x = center_x - PLAYER_CELL // 2
-        player_y = GAMEPLAY_DECK_Y - 100
+        player_x = center_x - PLAYER_RENDER_CELL // 2
+        player_y = (
+            GAMEPLAY_DECK_Y +
+            12 -
+            PLAYER_RENDER_CELL
+        )
         overlay.alpha_composite(player, (player_x, player_y))
         draw.rectangle(
             (
                 player_x,
-                GAMEPLAY_DECK_Y - 100,
-                player_x + PLAYER_CELL,
+                player_y,
+                player_x + PLAYER_RENDER_CELL,
                 GAMEPLAY_DECK_Y + 12,
             ),
             outline=(99, 149, 238, 255),
             width=2,
+        )
+        physics_x = (
+            center_x - PLAYER_PHYSICS_CELL // 2
+        )
+        draw.rectangle(
+            (
+                physics_x,
+                GAMEPLAY_DECK_Y - 100,
+                physics_x + PLAYER_PHYSICS_CELL,
+                GAMEPLAY_DECK_Y + 12,
+            ),
+            outline=(145, 175, 179, 210),
+            width=1,
         )
 
     review = Image.alpha_composite(review, overlay)
@@ -212,9 +236,17 @@ def write_manifest() -> None:
             "dorsal_hatch_center_x":
                 DORSAL_HATCH_CENTER_X,
             "player_reference_box": [
-                PLAYER_CELL,
-                PLAYER_CELL,
+                PLAYER_PHYSICS_CELL,
+                PLAYER_PHYSICS_CELL,
             ],
+            "player_render_box": [
+                PLAYER_RENDER_CELL,
+                PLAYER_RENDER_CELL,
+            ],
+            "player_visible_height": PLAYER_VISIBLE_HEIGHT,
+            "player_interior_scale":
+                PLAYER_INTERIOR_SCALE,
+            "cockpit_console_is_scale_anchor": True,
             "flight_suit_alcove_x": [438, 562],
             "sealed_keel_hatch_x": [962, 1086],
         },

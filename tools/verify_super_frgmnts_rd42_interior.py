@@ -7,6 +7,8 @@ import json
 import struct
 from pathlib import Path
 
+from PIL import Image
+
 
 ROOT = Path(__file__).resolve().parents[1]
 GAME = ROOT / "super_frgmnts.html"
@@ -143,6 +145,33 @@ def png_size(path: Path) -> tuple[int, int]:
     return struct.unpack(">II", signature[16:24])
 
 
+def frame_visible_height(
+    path: Path,
+    frame_index: int,
+    alpha_threshold: int = 8,
+) -> int:
+    atlas = Image.open(path).convert("RGBA")
+    column = frame_index % 6
+    row = frame_index // 6
+    alpha = atlas.crop(
+        (
+            column * 112,
+            row * 112,
+            (column + 1) * 112,
+            (row + 1) * 112,
+        )
+    ).getchannel("A")
+    visible = alpha.point(
+        lambda value:
+            255 if value >= alpha_threshold else 0
+    ).getbbox()
+    require(
+        visible is not None,
+        f"Frame {frame_index} has no visible pixels: {path}",
+    )
+    return visible[3] - visible[1]
+
+
 def main() -> None:
     source = GAME.read_text(encoding="utf-8")
 
@@ -255,6 +284,26 @@ def main() -> None:
         [962, 1086],
         "RD-42 production art lost the keel-hatch reservation",
     )
+    require(
+        production_manifest["geometry"]["player_reference_box"] ==
+        [112, 112],
+        "RD-42 physics-cell contract drifted",
+    )
+    require(
+        production_manifest["geometry"]["player_render_box"] ==
+        [168, 168],
+        "RD-42 interior render-cell contract drifted",
+    )
+    require(
+        production_manifest["geometry"]["player_visible_height"] ==
+        135,
+        "RD-42 interior visible-height contract drifted",
+    )
+    require(
+        production_manifest["geometry"]["player_interior_scale"] ==
+        1.5,
+        "RD-42 interior character scale drifted",
+    )
 
     require(
         ARMOR_CHANGE_MANIFEST.exists(),
@@ -281,12 +330,36 @@ def main() -> None:
         "Aryn armor-change duration drifted",
     )
     require(
+        armor_manifest["runtime_candidate"]["visible_height_target"] ==
+        90,
+        "Aryn armor-change visible-height normalization drifted",
+    )
+    require(
         png_size(ARMOR_CHANGE_ATLAS) == (672, 672),
         "Aryn armor-change runtime atlas must remain a 6x6 112 px grid",
     )
     require(
         ARMOR_CHANGE_PREVIEW.exists(),
         "Missing Aryn armor-change animated review",
+    )
+    armored_change_height = frame_visible_height(
+        ARMOR_CHANGE_ATLAS,
+        0,
+    )
+    flight_suit_change_height = frame_visible_height(
+        ARMOR_CHANGE_ATLAS,
+        35,
+    )
+    require(
+        abs(
+            armored_change_height -
+            flight_suit_change_height
+        ) <= 1,
+        "Armor-change endpoints no longer share one visible height",
+    )
+    require(
+        90 <= armored_change_height <= 91,
+        "Armor-change endpoint height left the 90 px normalization target",
     )
 
     require(
@@ -302,12 +375,14 @@ def main() -> None:
         "Aryn flight-suit movement integration boundary drifted",
     )
     expected_movement = {
-        "run": (78, 2808),
-        "jump": (71, 2556),
+        "run": (78, 2808, [46, 90], [33, 15]),
+        "jump": (71, 2556, [50, 105], [31, 8]),
     }
     for sequence_name, (
         frame_duration,
         total_duration,
+        normalized_size,
+        normalized_offset,
     ) in expected_movement.items():
         sequence = flight_suit_manifest["sequences"][
             sequence_name
@@ -327,6 +402,16 @@ def main() -> None:
             f"Aryn flight-suit {sequence_name} duration drifted",
         )
         require(
+            sequence["runtime"]["normalized_source_size"] ==
+            normalized_size,
+            f"Aryn flight-suit {sequence_name} height normalization drifted",
+        )
+        require(
+            sequence["runtime"]["normalized_offset"] ==
+            normalized_offset,
+            f"Aryn flight-suit {sequence_name} baseline alignment drifted",
+        )
+        require(
             png_size(FLIGHT_SUIT_ATLASES[sequence_name]) ==
             (672, 672),
             f"Aryn flight-suit {sequence_name} atlas must remain a "
@@ -336,6 +421,15 @@ def main() -> None:
             FLIGHT_SUIT_PREVIEWS[sequence_name].exists(),
             f"Missing Aryn flight-suit {sequence_name} animated review",
         )
+        resolved_height = frame_visible_height(
+            FLIGHT_SUIT_ATLASES[sequence_name],
+            35,
+            alpha_threshold=1,
+        )
+        require(
+            89 <= resolved_height <= 90,
+            f"Aryn flight-suit {sequence_name} resolved height drifted",
+        )
 
     required_runtime_tokens = (
         'previewParameters.get("preview") === "ship-interior"',
@@ -343,6 +437,7 @@ def main() -> None:
         'previewParameters.get("objective") === "service-kit"',
         'previewParameters.get("state") === "post-wound"',
         'previewParameters.get("trillian") === "1"',
+        'previewParameters.get("suit") === "flight"',
         "var SHIP_EXTERIOR_HATCH_X =",
         "OVERWORLD_ORIGIN_X + 572",
         "var SHIP_INTERIOR_HATCH_X = 684",
@@ -350,6 +445,10 @@ def main() -> None:
         "var SHIP_INTERIOR_DECK_Y = 744",
         "var SHIP_SUIT_CRADLE_X = 506",
         "var SHIP_KEEL_HATCH_X = 1024",
+        "var SHIP_ARYN_NORMALIZED_HEIGHT = 90",
+        "var SHIP_ARYN_DRAW_SCALE = 1.5",
+        "var SHIP_ARYN_DRAW_SIZE = 168",
+        "var SHIP_ARYN_VISIBLE_HEIGHT = 135",
         'source: "/Images/Game/Super-Frgmnts/aryn-armor-change-runtime-v1.png"',
         'source: "/Images/Game/Super-Frgmnts/aryn-flight-suit-run-runtime-v1.png"',
         'source: "/Images/Game/Super-Frgmnts/aryn-flight-suit-jump-runtime-v1.png"',
@@ -359,6 +458,7 @@ def main() -> None:
         "function playerNearShipExteriorHatch()",
         "function beginShipEntry()",
         "var shipEntryLoadPending = false",
+        "var shipSuitState = shipFlightSuitReview",
         "Hold position for hatch entry.",
         "missingShipAssets.map(function",
         "RD-42 interior systems are ready.",
@@ -378,6 +478,9 @@ def main() -> None:
         "function beginShipSuitRearm()",
         "function updateShipSuitChange(delta)",
         "function drawShipSuitChange()",
+        "function currentShipArynDrawScale()",
+        "function drawShipArynFrame(",
+        "function drawShipArmoredPlayer()",
         "function currentShipFlightSuitFrame()",
         "function drawShipFlightSuitPlayer()",
         "function drawShipInteriorProductionArt()",
@@ -411,6 +514,9 @@ def main() -> None:
         "canvas.dataset.shipSuitAlcove",
         'canvas.dataset.shipKeelHatch = "sealed"',
         "canvas.dataset.shipSuitFrame",
+        "canvas.dataset.arynDrawSize",
+        "canvas.dataset.arynInteriorScale",
+        "canvas.dataset.arynVisibleHeight",
         'canvas.dataset.shipArt = "production-v1"',
         "canvas.dataset.shipCameraMode",
         "canvas.dataset.shipTransitionProgress",
@@ -494,6 +600,8 @@ def main() -> None:
     print("- 306 px occupied volume is fixed between y438 and y744")
     print("- flight/suit alcove and sealed future keel access are reserved")
     print("- armor change persists into flight-suit main-deck movement")
+    print("- Aryn uses a 168 px RD-42 render cell with a 135 px standing height")
+    print("- armored and flight-suit states share a normalized 90 px source height")
     print("- 36-frame flight-suit run and jump atlases are integrated")
     print("- lighter 1672 x 941 OTW production rear plate is runtime-integrated")
     print("- in-world pixel brandmark, suit alcove, and keel hatch are present")
