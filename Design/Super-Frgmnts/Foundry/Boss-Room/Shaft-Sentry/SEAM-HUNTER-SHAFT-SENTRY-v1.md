@@ -16,7 +16,8 @@ not an attack.
 - Boss render: 396 × 448 px.
 - Upward presentation: entirely authored in the sprite; no programmatic body
   tilt.
-- Tracking: 110 px horizontal deadzone and 0.42-second facing confirmation.
+- Tracking: 110 px horizontal deadzone, 0.20-second facing confirmation, and
+  0.28-second exit grace.
 - Damage: none.
 - Grounding: frames are registered around the planted foot, with a shared
   deck baseline.
@@ -27,7 +28,7 @@ not an attack.
 - Runtime: 19 curated frames in a 5 × 4 atlas.
 - Runtime frame: 409 × 458 px.
 - Runtime atlas: 2045 × 1832 px RGBA.
-- Playback: 74 ms per frame; 1.406 seconds total.
+- Playback: 45 ms per frame; 0.855 seconds total.
 - Boss render: 400 × 448 px.
 - Damage: none.
 - Direction handling: the source plays forward for a right-to-left turn and
@@ -52,7 +53,7 @@ Seam Hunter on the horizontal construction gantry. He plants, settles into
 the upward pose, and tracks Aryn left or right without attacking. The
 deadzone and facing confirmation now begin the authored in-place turnaround
 instead of flipping the complete pose instantly. Once confirmed, the
-1.406-second turn commits through its frontal silhouette and settles into the
+0.855-second turn commits through its frontal silhouette and settles into the
 mirrored upward watch. Descending during the turn resolves to the nearer
 facing and immediately restores pursuit; leaving the gantry while still high
 returns him to the existing confusion/search response. Lasers remain

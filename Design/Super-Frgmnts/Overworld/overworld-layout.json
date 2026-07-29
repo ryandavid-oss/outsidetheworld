@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 4,
   "status": "four-plate-overworld-runtime",
   "scene": {
     "id": "coreworks_overworld",
@@ -28,7 +28,7 @@
       "name": "Western Signal Flats",
       "x": 0,
       "width": 1672,
-      "story_function": "Optional untimed survey route with Signal Sweep, Trillian recovery, the field harness, and sealed salvage"
+      "story_function": "Optional untimed environmental exploration with no objectives, rewards, or tutorials"
     },
     {
       "id": "landing_flats",
@@ -71,15 +71,6 @@
       "art_contract": "Continuous walkable desert and buried freight-road surface"
     },
     {
-      "id": "tutorial_rock",
-      "type": "solid",
-      "x": 3048,
-      "y": 680,
-      "width": 168,
-      "height": 64,
-      "art_contract": "Single harmless jump-sized rock or broken freight slab"
-    },
-    {
       "id": "left_world_bound",
       "type": "invisible-wall",
       "x": 48,
@@ -98,48 +89,15 @@
   ],
   "anchors": [
     {
-      "id": "western_survey_plinth",
-      "label": "Survey echo plinth",
-      "role": "optional-assignment",
-      "x": 330,
-      "y": 682,
-      "width": 64,
-      "height": 62,
-      "z_layer": "hero-props",
-      "notes": "Unlocks Signal Sweep and awards one Galactic Credit."
-    },
-    {
       "id": "trillian_wait",
       "label": "Trillian",
-      "role": "optional-companion-recovery",
+      "role": "surface-companion",
       "x": 690,
-      "y": 661,
-      "width": 96,
-      "height": 83,
+      "y": 702,
+      "width": 48,
+      "height": 42,
       "z_layer": "actors",
-      "notes": "Separate from Jane. Non-solid, non-hostile, and surface-only."
-    },
-    {
-      "id": "trillian_field_harness",
-      "label": "Trillian field harness",
-      "role": "optional-ability-unlock",
-      "x": 1080,
-      "y": 710,
-      "width": 86,
-      "height": 34,
-      "z_layer": "hero-props",
-      "notes": "Unlocks powered launch and the noncombat salvage breach."
-    },
-    {
-      "id": "sealed_salvage",
-      "label": "Sealed western salvage",
-      "role": "optional-assignment",
-      "x": 1430,
-      "y": 692,
-      "width": 108,
-      "height": 52,
-      "z_layer": "hero-props",
-      "notes": "Requires Trillian's field harness and awards five Galactic Credits."
+      "notes": "Separate from Jane. Joined from surface start, non-solid, non-hostile, and surface-only."
     },
     {
       "id": "aryn_ship",
@@ -240,44 +198,6 @@
   ],
   "interaction_zones": [
     {
-      "id": "western_survey_echo",
-      "type": "optional-assignment",
-      "x": 218,
-      "y": 544,
-      "width": 224,
-      "height": 200,
-      "prompt": "Trace survey echo",
-      "reward": "Signal Sweep + 1 Galactic Credit"
-    },
-    {
-      "id": "recover_trillian",
-      "type": "optional-companion-recovery",
-      "x": 578,
-      "y": 544,
-      "width": 224,
-      "height": 200,
-      "prompt": "Call Trillian"
-    },
-    {
-      "id": "fit_field_harness",
-      "type": "optional-ability-unlock",
-      "x": 968,
-      "y": 544,
-      "width": 224,
-      "height": 200,
-      "prompt": "Fit field harness"
-    },
-    {
-      "id": "breach_sealed_salvage",
-      "type": "optional-assignment",
-      "x": 1318,
-      "y": 544,
-      "width": 224,
-      "height": 200,
-      "prompt": "Breach sealed salvage",
-      "reward": "5 Galactic Credits"
-    },
-    {
       "id": "dras_dialogue",
       "type": "proximity-dialogue",
       "x": 3496,
@@ -363,7 +283,7 @@
   "ambient_motion": [
     {
       "id": "cloud_wisps",
-      "implementation": "Three transparent sprites moving at different speeds",
+      "implementation": "Deterministic low-frequency procedural wispy and storm masks with independent parallax and speed",
       "intensity": "quiet"
     },
     {
@@ -398,63 +318,38 @@
     },
     {
       "id": "overworld_hawk",
-      "implementation": "Alternating sky passes plus a guide-circle over the next unfinished Western Signal Flats assignment",
+      "implementation": "Autonomous time-driven world-space sky passes alternating direction",
       "intensity": "character"
     },
     {
       "id": "trillian",
-      "implementation": "Unarmored and armored follow loops, powered jump launch with physics arc, and noncombat salvage breach",
+      "implementation": "Half-size unarmored follow loop with 410 px/s follow and 480 px/s catch-up",
       "intensity": "character"
     }
   ],
   "story_beats": [
     {
       "order": 1,
-      "x": 330,
-      "beat": "Aryn can travel west to trace a survey echo and unlock Signal Sweep."
+      "x": 2188,
+      "beat": "Aryn arrives beside her ship. The scene is safe and untimed, either direction is open, and Trillian is already following."
     },
     {
       "order": 2,
-      "x": 690,
-      "beat": "Aryn recovers Trillian as an optional non-solid surface companion."
-    },
-    {
-      "order": 3,
-      "x": 1080,
-      "beat": "The field harness changes Trillian's gait and unlocks powered traversal."
-    },
-    {
-      "order": 4,
-      "x": 1430,
-      "beat": "Trillian breaches sealed salvage without entering a combat or damage state."
-    },
-    {
-      "order": 5,
-      "x": 2188,
-      "beat": "Aryn arrives beside her ship. The scene is safe and untimed, and either direction is open."
-    },
-    {
-      "order": 6,
-      "x": 3048,
-      "beat": "A single low obstacle quietly confirms movement and jumping while the rightward story route remains clear."
-    },
-    {
-      "order": 7,
       "x": 3904,
       "beat": "Aryn discovers Dras and his base camp. He explains Vesperite, the infestation, the abandoned workforce, and the Coreworks."
     },
     {
-      "order": 8,
+      "order": 3,
       "x": 6276,
       "beat": "A silent worker droid keeps station near the Coreworks portal; a future conversation can establish it as the repair bot after the route breaks."
     },
     {
-      "order": 9,
+      "order": 4,
       "x": 5456,
       "beat": "Failed atmospheric infrastructure foreshadows the toxic timer."
     },
     {
-      "order": 10,
+      "order": 5,
       "x": 6384,
       "beat": "Aryn enters the Coreworks portal; the eight-minute mission begins."
     }

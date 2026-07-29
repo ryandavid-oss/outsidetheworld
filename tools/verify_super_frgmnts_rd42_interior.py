@@ -37,6 +37,27 @@ ART_MANIFEST = (
     INTERIOR_DIR
     / "rd42-interior-rear-plate-candidate-v2.json"
 )
+PRODUCTION_ART = (
+    INTERIOR_DIR
+    / "Assets"
+    / "rd42-interior-rear-plate-production-v1.png"
+)
+PRODUCTION_RUNTIME_ART = (
+    ROOT
+    / "Images"
+    / "Game"
+    / "Super-Frgmnts"
+    / "rd42-interior-rear-plate-runtime-v1.png"
+)
+PRODUCTION_SCALE_CHECK = (
+    INTERIOR_DIR
+    / "Reviews"
+    / "rd42-interior-rear-plate-scale-check-production-v1.png"
+)
+PRODUCTION_ART_MANIFEST = (
+    INTERIOR_DIR
+    / "rd42-interior-rear-plate-production-v1.json"
+)
 REJECTED_ART_MANIFEST = (
     INTERIOR_DIR
     / "rd42-interior-rear-plate-candidate-v1.json"
@@ -185,6 +206,56 @@ def main() -> None:
         "The oversized v1 plate must remain recorded as rejected",
     )
 
+    for image in (
+        PRODUCTION_ART,
+        PRODUCTION_RUNTIME_ART,
+        PRODUCTION_SCALE_CHECK,
+    ):
+        require(
+            image.exists(),
+            f"Missing RD-42 production-art artifact: {image}",
+        )
+        require(
+            png_size(image) == (1672, 941),
+            f"Unexpected RD-42 production-art size: {image}",
+        )
+    require(
+        PRODUCTION_ART_MANIFEST.exists(),
+        "Missing RD-42 production-art manifest",
+    )
+    production_manifest = json.loads(
+        PRODUCTION_ART_MANIFEST.read_text(encoding="utf-8")
+    )
+    require(
+        production_manifest["status"] ==
+        "approved-runtime-art",
+        "RD-42 production plate must remain approved runtime art",
+    )
+    require(
+        production_manifest["runtime_integrated"] is True,
+        "RD-42 production manifest must claim its live integration",
+    )
+    require(
+        production_manifest["palette"]["usage"][
+            "dominant_occupied_cabin"
+        ] == ["#A0BEF5", "#91AFB3", "#EEEEEE"],
+        "RD-42 production plate lost its light OTW palette contract",
+    )
+    require(
+        production_manifest["brandmark"]["ui_watermark"] is False,
+        "The OTW mark must remain an in-world ship emblem",
+    )
+    require(
+        production_manifest["geometry"]["flight_suit_alcove_x"] ==
+        [438, 562],
+        "RD-42 production art lost the suit-alcove reservation",
+    )
+    require(
+        production_manifest["geometry"]["sealed_keel_hatch_x"] ==
+        [962, 1086],
+        "RD-42 production art lost the keel-hatch reservation",
+    )
+
     require(
         ARMOR_CHANGE_MANIFEST.exists(),
         "Missing Aryn armor-change manifest",
@@ -282,10 +353,15 @@ def main() -> None:
         'source: "/Images/Game/Super-Frgmnts/aryn-armor-change-runtime-v1.png"',
         'source: "/Images/Game/Super-Frgmnts/aryn-flight-suit-run-runtime-v1.png"',
         'source: "/Images/Game/Super-Frgmnts/aryn-flight-suit-jump-runtime-v1.png"',
+        'source: "/Images/Game/Super-Frgmnts/rd42-interior-rear-plate-runtime-v1.png"',
         "function buildShipInteriorPlatforms()",
         "shipInteriorDeck: true",
         "function playerNearShipExteriorHatch()",
         "function beginShipEntry()",
+        "var shipEntryLoadPending = false",
+        "Hold position for hatch entry.",
+        "missingShipAssets.map(function",
+        "RD-42 interior systems are ready.",
         'shipTransitionMode = "exterior-enter"',
         'shipTransitionMode = "interior-enter"',
         "function beginShipExit()",
@@ -293,6 +369,8 @@ def main() -> None:
         'shipTransitionMode = "exterior-exit"',
         "function configureShipInteriorWorld(descending)",
         "function configureShipExteriorWorld(emerging)",
+        'setAudioScene("interior", false);',
+        'preloadIdleMusicScene("interior");',
         "function updateShipTransition(delta)",
         "function activateShipInteriorInteraction()",
         "function beginShipServiceKitRecovery()",
@@ -302,6 +380,7 @@ def main() -> None:
         "function drawShipSuitChange()",
         "function currentShipFlightSuitFrame()",
         "function drawShipFlightSuitPlayer()",
+        "function drawShipInteriorProductionArt()",
         'shipServiceKitState = "recovering"',
         'shipServiceKitState = "carried"',
         "function drawShipInteriorGreybox()",
@@ -321,7 +400,7 @@ def main() -> None:
         "TRILLIAN // BERTH SECURE",
         "FLIGHT / SUIT ALCOVE",
         "KEEL ACCESS // SEALED",
-        "DESIGN GREYBOX // NOT FINAL ART",
+        "PRODUCTION ART LOAD FAILURE // FALLBACK",
         'canvas.dataset.scene = shipInteriorActive',
         "canvas.dataset.shipHatchArmed",
         "canvas.dataset.shipInteriorState",
@@ -332,6 +411,7 @@ def main() -> None:
         "canvas.dataset.shipSuitAlcove",
         'canvas.dataset.shipKeelHatch = "sealed"',
         "canvas.dataset.shipSuitFrame",
+        'canvas.dataset.shipArt = "production-v1"',
         "canvas.dataset.shipCameraMode",
         "canvas.dataset.shipTransitionProgress",
         "canvas.dataset.playerSupportedBy",
@@ -382,8 +462,16 @@ def main() -> None:
         )
     ]
     require(
-        "shipEntryPreview || shipInteriorPreview" in exterior_guard,
-        "Exterior hatch must remain isolated to explicit review routes",
+        "overworldPreview" in exterior_guard,
+        "Exterior hatch must be active in the production Overworld",
+    )
+    require(
+        "shipEntryPreview || shipInteriorPreview" not in exterior_guard,
+        "Exterior hatch is still isolated to explicit review routes",
+    )
+    require(
+        "RD-42 INTERIOR LOADING" in source,
+        "Production hatch does not safely prefetch missing interior art",
     )
 
     require(
@@ -396,7 +484,8 @@ def main() -> None:
     )
 
     print("RD-42 ship-interior contract passed.")
-    print("- dorsal hatch entry is isolated to explicit review routes")
+    print("- dorsal hatch entry is active throughout the production Overworld")
+    print("- missing interior art is prefetched before the hatch transition")
     print("- Aryn descends into and re-emerges from the ship")
     print("- one-plate cockpit, airlock, hab, pack, and cargo zones are present")
     print("- service-kit, post-Wound, and Trillian review states are wired")
@@ -406,7 +495,9 @@ def main() -> None:
     print("- flight/suit alcove and sealed future keel access are reserved")
     print("- armor change persists into flight-suit main-deck movement")
     print("- 36-frame flight-suit run and jump atlases are integrated")
-    print("- 1672 x 941 pixel-art rear plate and Aryn scale review are present")
+    print("- lighter 1672 x 941 OTW production rear plate is runtime-integrated")
+    print("- in-world pixel brandmark, suit alcove, and keel hatch are present")
+    print("- dedicated interior music preloads and crossfades at the hatch")
 
 
 if __name__ == "__main__":

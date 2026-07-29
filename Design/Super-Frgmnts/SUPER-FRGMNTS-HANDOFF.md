@@ -1,10 +1,11 @@
 # SUPER FRGMNTS // Working Handoff
 
-**Status:** Beta 2 production release
+**Status:** Beta 2 stabilization release approved for production
 
 **Updated:** 2026-07-28
 
-**Checkpoint:** Episode 01 Beta 2; approved for deployment from `main`
+**Checkpoint:** Post-Beta 2 polish approved for commit, `main` deployment, and
+live production verification
 
 This is the short-form operating context for future SUPER FRGMNTS work. Use it
 with the linked manifests and contracts instead of reconstructing the project
@@ -42,7 +43,7 @@ deployment approval, then verify GitHub Pages and the production URL.
   Fleet authorization
 - Surface contact: **Dras Ehdre**
 - Dras's camp dog: **Jane**
-- Aryn's optional surface companion: **Trillian** (separate from Jane)
+- Aryn's surface companion: **Trillian** (separate from Jane)
 - Strategic material: **Vesperite**
 - Currency: **Galactic Credits**
 - Collectibles: **Signal Shards**
@@ -77,9 +78,9 @@ Important constraints:
    hands the score from title music to Overworld music, and lands Aryn on her
    hovering ship.
 3. Aryn arrives on Veyra standing on her hovering RD-42.
-4. The player may travel west into the optional Western Signal Flats to unlock
-   Signal Sweep, recover Trillian, fit her field harness, and breach a sealed
-   salvage cache.
+4. The player may travel west into the Western Signal Flats as environmental
+   exploration space. Its objective props, Signal Sweep unlock chain, harness
+   task, and salvage task are removed. Trillian is joined from surface start.
 5. The player traverses the ship, reaches Dras's camp, and completes the
    canonical opening dialogue.
 6. The Overworld contains no tutorial platforms, calibration prompts, or
@@ -98,6 +99,12 @@ Important constraints:
    recovery completes the beta, fades the stage to black, and automatically
    returns Aryn beside the Coreworks transport with the specimen and loadout
    preserved.
+11. Dras relocates to the Coreworks Threshold for the post-Wound state. Aryn
+    reports both restored stabilizers and Seam Hunter's elimination; Dras
+    scans the Wound-touched Vesperite without taking it.
+12. The inert transport answers the specimen with an unsolicited violet-blue
+    harmonic. A Chapter 01 closing card holds on `THE SIGNAL ANSWERED` and
+    points Chapter 02 toward the Primary Biolab.
 
 The detailed level contract is
 [`UNIFIED-LEVEL-ONE-PLAN.md`](UNIFIED-LEVEL-ONE-PLAN.md). The current population
@@ -110,16 +117,18 @@ The assembled beta route and state-carry contract is
 
 ## Approved next design direction
 
-The automatic post-Wound surface return is now part of the current playable
-flow. The continuation after materialization remains outside it. Its RD-42
-boarding and one-plate interior are implemented as isolated review greyboxes:
+The automatic post-Wound surface return, Dras report, specimen scan, and
+Chapter 01 cliffhanger are part of the current playable flow. The RD-42
+boarding and production-art one-plate interior are also accessible from the
+normal Overworld:
 
 1. Aryn returns to the surface carrying Wound-touched Vesperite.
-2. Dras scans the specimen without taking it and directs Aryn toward the
-   Primary Biolab beneath the processing floors already crossed.
-3. The specimen participates in a deterministic Coreworks transport overload.
-4. Aryn returns to the RD-42 for one phase coupler and two shielded field
-   braids.
+2. Dras scans the specimen without taking it and identifies a signal beneath
+   the Primary Biolab processing floors already crossed.
+3. The inert transport answers the specimen and closes Chapter 01.
+4. In the reserved continuation, the specimen participates in a deterministic
+   Coreworks transport overload and Aryn returns to the RD-42 for one phase
+   coupler and two shielded field braids.
 5. She enters through the top-middle dorsal hatch by pressing Down and
    physically descends into a compact, reusable ship interior.
 6. Aryn and Dras repair the transport together before she descends toward the
@@ -130,7 +139,7 @@ them to the production route:
 
 - the human-scale flight cradle doubles as a retractable flight/suit alcove;
   a supplied 36-frame, 2.736-second armored-to-flight-suit animation is live
-  in the isolated interior review. Supplied 36-frame run and jump sheets now
+  in the ship interior. Supplied 36-frame run and jump sheets now
   let Aryn persistently explore the main deck in her flight suit. Returning to
   the alcove and pressing Down plays the provisional reverse re-arm; the
   dorsal hatch and service-kit pack rail remain armor-locked because
@@ -140,13 +149,19 @@ them to the production route:
   emergency concealment, or an enemy-boarding sequence rather than enlarging
   the current one-plate cabin.
 
-The approved v2 interior plate is a scale reference only. Its y438–744
-occupied volume is correct, but the next art pass must move away from the
-Foundry's dark pipe-heavy identity toward Aryn's lighter blue-gray, silver,
-cobalt, violet, cyan, pink, and warm-orange palette.
+The v2 interior plate remains the approved scale reference only. The
+1672 × 941 production-v1 rear plate now supersedes it in the runtime
+without changing the y438–744 occupied volume. The occupied cabin is led by
+the supplied OTW `#A0BEF5`, `#91AFB3`, `#6395EE`, and `#EEEEEE` colors;
+navy defines structure, and true black is limited to seams, canopy space,
+hatch depth, and inaccessible recesses. A faithful three-band OTW mark appears
+as an in-world 16-bit mosaic on the cockpit-side bulkhead. The flight/suit
+alcove and sealed keel hatch are present in the promoted artwork.
 
 The story and staging contract is
 [`Post-Foundry/RETURN-TO-DRAS-INTERLUDE-v1.md`](Post-Foundry/RETURN-TO-DRAS-INTERLUDE-v1.md).
+The Chapter 02 planning seed is
+[`Chapter-02/VEYRA-CHAPTER-02-PLAN-v1.md`](Chapter-02/VEYRA-CHAPTER-02-PLAN-v1.md).
 The ship behavior and precise greybox layout are
 [`Overworld/Phase-3/Ship/Interior/RD42-SHIP-INTERIOR-CONTRACT-v1.md`](Overworld/Phase-3/Ship/Interior/RD42-SHIP-INTERIOR-CONTRACT-v1.md)
 and
@@ -174,17 +189,18 @@ Then use:
   `http://127.0.0.1:8765/super_frgmnts.html?episode=01&stage=wound&autostart=1&qa=reward`
 - Reloadable surface return:
   `http://127.0.0.1:8765/super_frgmnts.html?episode=01&stage=overworld&autostart=1&return=1`
+- Return report and Chapter 01 close:
+  `http://127.0.0.1:8765/super_frgmnts.html?episode=01&stage=overworld&autostart=1&return=1&qa=report`
 - Overworld review:
   `http://127.0.0.1:8765/super_frgmnts.html?preview=overworld`
-- Western assignment review:
-  `http://127.0.0.1:8765/super_frgmnts.html?episode=01&stage=overworld&scene=western&assignment=survey&autostart=1`
-  (`assignment` accepts `survey`, `trillian`, `harness`, `jump`, or `salvage`;
-  prerequisite states are prepared without changing the production
-  route)
+- Western Signal Flats review:
+  `http://127.0.0.1:8765/super_frgmnts.html?episode=01&stage=overworld&scene=western&autostart=1`
 - Transport review:
   `http://127.0.0.1:8765/super_frgmnts.html?preview=overworld&scene=transport&autostart=1`
 - Expanded Foundry review:
   `http://127.0.0.1:8765/super_frgmnts.html?preview=foundry-expansion&autostart=1`
+- Uplink gate, arc, and desktop progress review:
+  `http://127.0.0.1:8765/super_frgmnts.html?episode=01&stage=foundry&room=7&qa=uplink&autostart=1`
 - Heavy-rifle review:
   `http://127.0.0.1:8765/super_frgmnts.html?preview=foundry-expansion&weapon=rifle&autostart=1`
 - The Wound boss trial:
@@ -212,6 +228,7 @@ work should use `scene=transport`.
 - X: fire the backpack's telescopic laser seeker
 - V: switch between the telescopic laser seeker and recovered heavy-rifle tool
 - R: restart
+- Escape: pause or resume gameplay
 - Touch: analog direction pad plus FIRE, JUMP, and weapon switch controls
 
 Up does not jump. The JUMP action is the only jump input.
@@ -255,8 +272,8 @@ The isolated trial now carries a provisional pursuit-and-elevator rhythm.
 Seam Hunter aggressively tracks Aryn across the main deck, closing far gaps
 at 160 px/s, transitioning through 108 px/s, and slowing to 72 px/s near
 attack range. His velocity ramps instead of snapping. Aryn must remain behind
-him for 0.16 seconds before he starts a 0.7-second turn; he brakes, flips once,
-then commits forward for 0.55 seconds before reconsidering. His body remains
+him for 0.10 seconds before he starts a 0.54-second turn; he brakes, flips once,
+then commits forward for 0.38 seconds before reconsidering. His body remains
 solid.
 Reaching 190 px above the deck for 0.25 seconds breaks his tracking and causes
 1.6 seconds of visible confusion; if Aryn remains upstairs, he searches
@@ -278,10 +295,10 @@ guard position; re-entering the lane restores pursuit. When Aryn is above him
 on the horizontal gantry, a dedicated 16-frame, 1.216-second rise leads into
 a held upward stare. The motion is fully authored in the sprite and requires
 no programmatic body tilt. He plants without attacking and tracks Aryn left
-or right using a 110 px deadzone and 0.42-second facing confirmation,
+or right using a 110 px deadzone and 0.20-second facing confirmation,
 preventing rapid flips as the gantry crosses his center. Descending restores
 pursuit. A confirmed tracking change now plays a curated 19-frame,
-1.406-second in-place turnaround through a frontal silhouette rather than
+0.855-second in-place turnaround through a frontal silhouette rather than
 flipping the held pose instantly. The same authored sequence mirrors for the
 opposite direction and remains non-damaging. See
 [`Foundry/Boss-Room/Shaft-Sentry/SEAM-HUNTER-SHAFT-SENTRY-v1.md`](Foundry/Boss-Room/Shaft-Sentry/SEAM-HUNTER-SHAFT-SENTRY-v1.md).
@@ -365,8 +382,9 @@ Foundry score. See
   requires the backpack's jet-assist module.
 - The heavy rifle is a recoverable special weapon for Vesperite route
   clearing, boss killing, and heavy combat. It supports draw, ready,
-  stationary firing, running firing, airborne firing, and holster timeout
-  states.
+  stationary firing, running firing, and airborne firing states. After its
+  first shot it remains shouldered until Aryn explicitly switches weapons or
+  leaves the scene.
 - The heavy rifle destroys mandatory Vesperite obstructions in three hits.
 - Rifle ammo, seeker overheat, seeker range and projectile lifetime, backpack
   range-versus-damage scaling, boss hit counts, and any additional weapon
@@ -379,12 +397,11 @@ Foundry score. See
   watches, approaches, and returns home without entering the transport deck.
 - **Trillian**, the player's dog, has separate unarmored and armored movement
   states plus an armored energy-lunge attack and powered-jump launch cue.
-  Trillian is not Jane. Her optional Overworld surface loop is live: she waits
-  in Western Signal Flats, follows after recovery, switches gait when the
-  field harness is fitted, uses the authored charge/launch cue with a
-  physics-driven vertical arc, and performs the energy lunge only against a
-  sealed salvage cache. The lunge has no combat damage, Trillian never enters
-  enemy targeting, and she stops before the Coreworks transport. Foundry
+  Trillian is not Jane. She now renders at 50% of the former size, joins from
+  surface start, follows at 410 px/s, and catches up at 480 px/s so Aryn cannot
+  permanently outrun her. The removed harness, salvage, and discovery chain
+  no longer places objectives west of the RD-42. Trillian never enters enemy
+  targeting and stops before the Coreworks transport. Foundry
   handoff, combat targeting, hurt, incapacitated, recovery, and damage balance
   remain unimplemented. The clipped 25-frame rear/power-up alternate remains
   review-only and is not used as an airborne or landing continuation.
@@ -404,16 +421,16 @@ Foundry score. See
 - The Overworld is now four 1,672 × 941 plates (6,688 pixels wide). Western
   Signal Flats is prepended at x=0; the original Landing Flats, Dras Outpost,
   and Coreworks Threshold retain their sequence with a +1,672-pixel runtime
-  origin offset. All four western assignments are optional and untimed, and none
-  gates the Foundry.
+  origin offset. The western assignment array is empty and no western
+  objective gates the Foundry.
 - The Western Signal Flats right-side landscape is repainted against the
   Landing Flats source edge. Clouds, mountain layers, desert tracks, walkable
   surface, and foreground shelf now continue across x=1,672. The production
   check validates both the touching boundary columns and 96 pixels of landscape
   context; its seam review deliberately has no guide line that could hide a
   discontinuity.
-- Signal Sweep uses the shared Down/interact action away from closer
-  interactions, emits a non-damaging radial pulse, and points to the nearest
+- The retired Signal Sweep code remains historical scaffolding only; no
+  production objective, prompt, or reward invokes it. It formerly pointed to the nearest
   unfinished optional surface assignment.
 - Atmospheric stabilizers restore room machinery and gate progression.
 - Pause, mute, focus-loss audio, control cancellation, touch-callout
@@ -451,28 +468,41 @@ Raw masters and runtime manifests live under
 
 ## Current checkpoint package
 
-The commit containing this handoff adds or finalizes:
+The working package represented by this handoff adds or finalizes:
 
 - the complete Arrival → Overworld → Foundry → Wound → Vesperite recovery →
-  surface beta-production route;
+  Dras report → Chapter 01 cliffhanger route;
 - the atmospheric arrival bridge and Foundry-to-Wound descent bridge;
 - the tutorial-free Overworld, ambient-only reduced worker droid, and
   autonomous hawk;
+- the scanline-free gameplay compositor and procedural low-frequency cloud
+  masks for independently parallaxed wispy and storm layers, including
+  stabilizer-driven clearing and a persistent Coreworks infestation remnant;
 - the state-preserving Uplink boss checkpoint and automatic black surface
   return;
+- the post-Wound Dras report, field-probe specimen scan, unsolicited transport
+  response, and `THE SIGNAL ANSWERED` Chapter 01 close;
 - the physical Coreworks surface transport, including 36-frame idle and
   25-frame activation atlases;
+- the live normal-route RD-42 dorsal hatch, production-art ship interior, and
+  dedicated two-minute interior score with hatch preload and bidirectional
+  crossfade;
 - the unified 16-bit Foundry platform module and restrained zone accents;
 - the Core Leech and Pale Watcher refinements plus Skree, Sova, Seam Lurker,
   and Kihunter production population;
 - the recurring seven-Sentinel encounter grammar and mobile boss assist;
+- the faster Seam Hunter main-deck and gantry-facing response;
 - the post-lift jet-assist placement, rifle-valid Sova silhouette, separated
   final shard, lift-edge boss trigger, and sealed post-recovery transport;
-- the 16-bit thermal purge and broken arc-coupler sprites with distinct
-  wait-versus-route-choice hazard grammar;
+- the larger desktop relay/shard indicators, persistent rifle-ready state,
+  Escape pause, music gesture priming, and scene-critical incremental loading;
+- the 16-bit thermal purge, broken arc-coupler, compact discharge, and physical
+  Uplink bulkhead sprites with distinct wait-versus-route-choice hazard
+  grammar;
 - build scripts, manifests, review GIFs, and feature verifiers for the new
   assets;
-- updated arrival, beta, roster, ambience, and production-route contracts.
+- updated arrival, beta, roster, ambience, post-Foundry, Chapter 02 seed, and
+  production-route contracts.
 
 The transport sources and reviews are in
 `Design/Super-Frgmnts/Overworld/Coreworks-Transport/`. Regenerate derivatives
@@ -522,6 +552,8 @@ direct check of the live GitHub Pages URL.
 - the between-level Galactic Credit store and start-of-next-level purchases;
 - email gating and the proposed one-time $5 web purchase;
 - PWA packaging, TestFlight, and the Capacitor iOS shell;
+- desktop fullscreen behind the Fullscreen API and production controller
+  support through the Gamepad API;
 - full separation of the monolithic HTML runtime into game-core, content,
   platform-service, and presentation modules;
 - replacement art for the provisional Refinery, Biolab, and Uplink upper

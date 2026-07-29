@@ -1,14 +1,39 @@
 # Veyra overworld atmosphere contract
 
-Status: Revision 3L local review contract; not yet deployed.
+Status: Beta 2 production progression integrated locally; not yet deployed.
+
+## World-state progression
+
+The Overworld sky is readable game state, not a fixed decorative plate.
+Atmospheric stabilizer failure and the infestation both contribute to the
+Arrival sky, so restoring machinery improves conditions without falsely
+implying that the deeper threat has vanished.
+
+| State | Cause and visual read |
+| --- | --- |
+| Arrival / `sky=arrival` | Both relays are offline. Dense low storm mass, violet pressure, and a darker horizon make the surface feel atmosphere-starved and infestation-heavy. |
+| First relay / `sky=relay-one` | The first break appears in the storm deck and some horizon warmth returns. This is an authored review state for future surface backtracking. |
+| Both relays / `sky=stabilized` | Storm opacity and low cloud pressure visibly fall, while the sky remains bruised around Coreworks. This is an authored review state for future surface backtracking. |
+| Seam Hunter cleared / `sky=cleared` | The post-Wound surface is warmer and more legible. A localized violet remnant remains over Coreworks because the infestation and Primary Biolab signal are unresolved. |
+| Report complete | The broad clearing holds, but the localized remnant persists as the visual bridge to `THE SIGNAL ANSWERED`. |
+
+The production Chapter 01 route exposes Arrival and the post-Wound clearing.
+The two relay states are already deterministic for review and later
+backtracking; they do not invent an additional surface trip in the current
+episode.
 
 ## Depth system
 
-- Three translucent cloud layers use different scale, speed, height, opacity,
-  and camera parallax values.
-- Clouds are built from overlapping shaded volumes rather than horizontal
-  strokes. Pale upper lobes catch the sunset; violet undersides keep them
-  embedded in Veyra's dusk palette.
+- Two generated low-frequency cloud masks create independently moving wispy
+  and storm layers with different speed, height, opacity, blend mode, and
+  camera parallax. A lightweight volume fallback covers texture-build delay.
+- Restoring the stabilizers progressively reduces storm opacity and raises the
+  storm deck while adding a restrained warm horizon lift.
+- The Coreworks remnant is a localized background-only multiply treatment. It
+  never crosses Aryn, the RD-42, dialogue portraits, props, or HUD.
+- The sky state is composited at runtime over the approved landscape plates;
+  the production art is not swapped, repainted, or contaminated with global
+  scanlines.
 - A small distant flock crosses the upper sky with independent wing phases.
 - Existing foreground dust remains the fastest atmospheric layer.
 - The Coreworks volcano keeps the approved plate intact. Runtime treatment is

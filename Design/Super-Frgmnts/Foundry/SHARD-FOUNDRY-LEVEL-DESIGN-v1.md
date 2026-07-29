@@ -192,17 +192,25 @@ and enters the final plate with a recovery opportunity.
 
 #### Plate 7 // Uplink Gate
 
-- Seam Lurker patrols the ceiling and never shares the deck hazard footprint.
+- Seam Lurker patrols the underside of the upper catwalk at `y = 362`,
+  physically rooted by two visible attachment brackets. It never shares the
+  deck hazard footprint.
 - A 280-pixel broken arc coupler begins at local `x = 830`. Its short
   1.15-second discharged state and 0.45-second warning are followed by a
   three-second live state. The intended solution is the insulated upper
-  transfer or the earned jet-assist; waiting remains possible.
+  transfer or the earned jet-assist; waiting remains possible. The active
+  discharge is a compact branching cyan-white 16-bit sprite rather than a
+  procedural parallel waveform.
 - Pale Watcher patrol begins at local `x = 1230`, leaving a full player-width
   of stable recovery runway beyond the coupler.
 - The twelfth Signal Shard sits in the left Uplink maintenance alcove at world
   `(WIDTH × 7 + 430, 548)`, 788 pixels before the gate trigger.
 - The gate never claims to be open while a relay or the Vesperite lock remains
   incomplete.
+- The gate is a 444 × 376 physical bulkhead rooted to the deck at `y = 600`.
+  Its locked state uses a mechanical shutter and twelve lintel progress pips;
+  its open state retracts the shutter and leaves a clear passage with restrained
+  motes. No magical ring, floating rectangle, or dashed barrier is permitted.
 
 **Exit state:** clear boss-transition read, no enemy or hazard inside the gate
 footprint. Entering the complete gate freezes Foundry state and establishes
@@ -258,6 +266,8 @@ Promotion requires all of the following:
 - all twelve shards remain reachable after taking the intended route;
 - desktop and 390 × 844 portrait runs show the next landing, threat, or reward
   before commitment;
+- desktop HUD displays separate large relay and Signal Shard counts without
+  covering play space; portrait uses the compact mission read;
 - two relays plus twelve shards plus the cleared Vesperite lock open the
   Uplink Gate with no contradictory HUD or accessibility announcement;
 - the Uplink Gate carries remaining mission time, score, damage, credits, jet

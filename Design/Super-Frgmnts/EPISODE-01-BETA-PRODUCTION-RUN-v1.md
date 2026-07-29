@@ -4,16 +4,16 @@
 **Release:** `episode-01-beta-2`
 **Episode:** Arrival on Veyra
 **Build target:** One uninterrupted in-page run
-**Completion state:** Returned to the Veyra surface with Wound-touched
-Vesperite secured
+**Completion state:** Dras briefed, Wound-touched Vesperite scanned, and
+Chapter 01 closed on the Primary Biolab response
 
 ## Player-facing sequence
 
 1. The title screen performs the intentional sound handshake.
 2. A skippable RD-42 atmospheric-approach beat bridges the title and planet;
    arrival begins on the ship above Landing Flats.
-3. The complete four-plate Overworld is available, including the optional
-   Western Signal Flats assignments.
+3. The complete four-plate Overworld is available. Western Signal Flats is
+   exploration space only; no assignment or tutorial objective appears there.
 4. Dras's first-contact scene prepares the Coreworks transport. No tutorial
    platforms, calibration lane, or worker-droid discovery task interrupts the
    Overworld route.
@@ -32,11 +32,20 @@ Vesperite secured
 10. Recovery stores the specimen, applies the final time and health bonuses,
     fades the entire stage to black, and automatically returns Aryn beside the
     Coreworks transport on the surface. The return route is sealed and cannot
-    send her back into the completed Foundry.
+    send her back into the completed Foundry. The restored stabilizers and
+    reduced infestation pressure visibly thin the storm deck and restore
+    horizon warmth, while a violet Coreworks remnant remains unresolved.
+11. Aryn walks back to Dras and reports both restored atmospheric stabilizers,
+    the eliminated Seam Hunter, the geological Wound, and the recovered
+    Wound-touched Vesperite. Dras's field probe confirms that the specimen
+    holds a signal without losing charge.
+12. The report distinguishes the processing-floor Biolab from the Primary
+    Biolab below. The transport answers the specimen without input, closing
+    Chapter 01 on the Primary Biolab signal.
 
-The production-beta endpoint is the stable surface-return state. The planned
-Dras scan, transport overload, RD-42 service-kit objective, and Primary Biolab
-continuation remain separate post-beta work.
+The production-beta endpoint is the stable post-report Chapter 01 completion
+state. The transport repair, RD-42 service-kit objective, and Chapter 02
+Primary Biolab expedition remain separate future work.
 
 ## Checkpoint contract
 
@@ -92,6 +101,8 @@ the normal title/start-over path.
   `?episode=01&stage=overworld&autostart=1&return=1`.
 - The Coreworks transport remains physically present but sealed. Stepping on
   its deck produces one clear status message and never starts activation.
+- Returning to Dras starts the report once. Completing it cannot reopen the
+  sealed transport or replay the arrival dialogue.
 
 ## Failure and input rules
 
@@ -121,6 +132,9 @@ the normal title/start-over path.
 - Reloadable surface return:
   `super_frgmnts.html?episode=01&stage=overworld&autostart=1&return=1`
 
+The reloadable surface-return route is the fastest report-and-cliffhanger QA
+entry. Walk left to Dras and press Down at `REPORT`.
+
 ## Beta acceptance gate
 
 - Arrival, all four Overworld plates, transport, all eight Foundry plates,
@@ -130,6 +144,15 @@ the normal title/start-over path.
 - Boss retry begins in the safe bay with the announcement rearmed.
 - Recovery is impossible before the corpse dissolve and material reveal.
 - The black transition cannot expose the scene swap or allow invisible input.
+- The return report names both stabilizers, the Seam Hunter, the Wound, the
+  Wound-touched Vesperite, and the Primary Biolab before the cliffhanger.
+- Chapter completion leaves Aryn on Veyra with the transport visible and
+  inactive.
+- Arrival and post-Wound return expose distinct sky states: the return is
+  clearer, but the Coreworks infestation remnant survives the stabilizer
+  restoration and supports the Primary Biolab cliffhanger.
+- Entering the RD-42 preloads and crossfades to its dedicated interior loop;
+  exiting returns to the Overworld score without a hard cut.
 - Desktop and 390 × 844 portrait framing keep Aryn, the current objective, and
   the next commitment legible.
 - JavaScript syntax, every `verify_super_frgmnts_*.py` contract, and

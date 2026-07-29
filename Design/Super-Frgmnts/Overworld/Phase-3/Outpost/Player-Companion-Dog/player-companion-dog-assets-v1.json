@@ -5,15 +5,18 @@
   "assetRelationship": "The unarmored movement, armored movement, armored attack, and armored jump-launch sheets all depict Trillian.",
   "currentCanon": "Jane remains the German Shepherd camp dog and does not enter the Coreworks transport.",
   "runtimeIntegration": true,
-  "behaviorProposal": "Trillian is an optional non-solid Overworld companion. She waits in Western Signal Flats, follows after recovery, equips a field harness, uses a physics-driven powered launch to reach raised terrain, and performs one noncombat energy breach on sealed salvage.",
+  "behaviorProposal": "Trillian is a non-solid Overworld companion joined from surface start. She follows Aryn in her unarmored state and stops before the Coreworks transport. The former recovery, field-harness, powered-launch, and salvage chain is retired.",
   "surfaceRuntime": {
     "scene": "overworld",
-    "recoverAssignmentX": 690,
-    "harnessAssignmentX": 1080,
-    "salvageAssignmentX": 1430,
-    "followDistance": 112,
-    "followSpeed": 82,
-    "poweredLaunchVelocityY": -950,
+    "availability": "joined-at-surface-start",
+    "drawScale": 0.5,
+    "drawSize": [
+      48,
+      42
+    ],
+    "followDistance": 86,
+    "followSpeed": 410,
+    "catchupSpeed": 480,
     "transportLimitX": 6276,
     "friendlySeekerSafety": true,
     "solid": false,
@@ -65,7 +68,7 @@
       "label": "Trillian \u2014 armored state",
       "role": "movement",
       "playback": "loop",
-      "runtimeEligible": true,
+      "runtimeEligible": false,
       "source": {
         "image": "Raw/companion-dog-armored-walk-source-v1.png",
         "manifest": "Raw/companion-dog-armored-walk-source-v1.json",
@@ -109,7 +112,7 @@
       "label": "Trillian \u2014 armored attack",
       "role": "close-range energy lunge",
       "playback": "one-shot",
-      "runtimeEligible": true,
+      "runtimeEligible": false,
       "source": {
         "image": "Raw/companion-dog-armored-attack-source-v1.png",
         "manifest": "Raw/companion-dog-armored-attack-source-v1.json",
@@ -168,7 +171,7 @@
       "label": "Trillian \u2014 armored jump launch",
       "role": "powered jump charge and launch cue",
       "playback": "one-shot",
-      "runtimeEligible": true,
+      "runtimeEligible": false,
       "source": {
         "image": "Raw/companion-dog-armored-jump-source-v1.png",
         "manifest": "Raw/companion-dog-armored-jump-source-v1.json",

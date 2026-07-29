@@ -1,0 +1,94 @@
+{
+  "id": "rd42-interior-rear-plate-production-v1",
+  "status": "approved-runtime-art",
+  "established": "2026-07-28",
+  "runtime_integrated": true,
+  "generation": {
+    "method": "OpenAI built-in image generation",
+    "mode": "style-transfer and geometry-preserving production pass",
+    "edit_target": "Design/Super-Frgmnts/Overworld/Phase-3/Ship/Interior/Assets/rd42-interior-rear-plate-pixel-candidate-v2.png",
+    "geometry_reference": "Design/Super-Frgmnts/Overworld/Phase-3/Ship/Interior/Reviews/rd42-interior-wireframe-compressed-v2.png",
+    "palette_reference": "Core OTW palette supplied 2026-07-28",
+    "logo_references": [
+      "Images/Builder/OTW_Brandmark.svg",
+      "Images/Builder/OTW_Brandmark_dark.svg"
+    ],
+    "prompt_summary": "Preserve the 1672x941 compact side-on geometry while replacing the Foundry-dark material language with the lighter OTW blue/teal palette, adding the flight/suit alcove, sealed keel hatch, and a faithful in-world pixel OTW mark."
+  },
+  "asset": {
+    "master": "Design/Super-Frgmnts/Overworld/Phase-3/Ship/Interior/Assets/rd42-interior-rear-plate-production-v1.png",
+    "runtime": "Images/Game/Super-Frgmnts/rd42-interior-rear-plate-runtime-v1.png",
+    "width": 1672,
+    "height": 941,
+    "format": "PNG",
+    "layer": "rear-only",
+    "style": "16-bit SNES-era pixel art"
+  },
+  "geometry": {
+    "normal_occupied_ceiling_y": 438,
+    "gameplay_deck_y": 744,
+    "occupied_volume_height": 306,
+    "dorsal_hatch_center_x": 684,
+    "player_reference_box": [
+      112,
+      112
+    ],
+    "flight_suit_alcove_x": [
+      438,
+      562
+    ],
+    "sealed_keel_hatch_x": [
+      962,
+      1086
+    ]
+  },
+  "palette": {
+    "authoritative": {
+      "brand_blue": "#6395EE",
+      "brand_light_blue": "#A0BEF5",
+      "brand_teal": "#91AFB3",
+      "logo_navy": "#1B365D",
+      "logo_teal": "#3D5255",
+      "logo_ink": "#1A1C20",
+      "void_dark": "#0A0A0A",
+      "text_main": "#EEEEEE"
+    },
+    "usage": {
+      "dominant_occupied_cabin": [
+        "#A0BEF5",
+        "#91AFB3",
+        "#EEEEEE"
+      ],
+      "structure_and_depth": [
+        "#6395EE",
+        "#1B365D",
+        "#3D5255"
+      ],
+      "sparse_only": [
+        "#1A1C20",
+        "#0A0A0A"
+      ]
+    }
+  },
+  "brandmark": {
+    "treatment": "faithful three-band OTW symbol translated into an in-world 16-bit cockpit bulkhead mosaic",
+    "placement": "cockpit-side bulkhead beside the flight/suit alcove",
+    "text": false,
+    "ui_watermark": false
+  },
+  "separate_runtime_layers": [
+    "dorsal hatch doors",
+    "service-kit case",
+    "Trillian occupied marker",
+    "specimen response glows",
+    "Aryn",
+    "particles",
+    "interaction prompts"
+  ],
+  "review": {
+    "scale_check": "Design/Super-Frgmnts/Overworld/Phase-3/Ship/Interior/Reviews/rd42-interior-rear-plate-scale-check-production-v1.png",
+    "supersedes": "rd42-interior-rear-plate-pixel-candidate-v2",
+    "scale_approved": true,
+    "runtime_art_approved": true
+  }
+}

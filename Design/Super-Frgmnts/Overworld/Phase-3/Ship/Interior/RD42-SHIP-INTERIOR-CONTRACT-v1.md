@@ -1,12 +1,12 @@
 # SUPER FRGMNTS // RD-42 Ship Interior Contract v1
 
-**Status:** Isolated playable greybox integrated
+**Status:** Isolated production-art interior integrated
 
 **Established:** 2026-07-28
 
 **Owning scene:** RD-42 interior
 
-**Runtime impact:** Review routes only; production episode flow unchanged
+**Runtime impact:** Live normal-route interior with isolated review routes
 
 This contract turns Aryn's climbable RD-42 into a small reusable interior
 scene. The first required visit occurs during the Return to Dras interlude,
@@ -228,6 +228,27 @@ The greybox is intentionally isolated from the current Episode 01 route:
 The direct interior routes can exit to the live ship exterior and re-enter
 through the same hatch. They do not connect the post-Wound interlude to the
 production chapter yet.
+
+## Interior music
+
+The RD-42 uses the dedicated two-minute `Spaceship Interior Loop`, not the
+Overworld or Foundry score.
+
+- The lossless stereo 48 kHz source is preserved at
+  [`Audio/Spaceship_Interior_Loop_2026-07-29T063049.wav`](Audio/Spaceship_Interior_Loop_2026-07-29T063049.wav).
+- The web runtime uses
+  `Audio/super-frgmnts-rd42-interior-loop-v1.m4a` at a nominal 192 kbps.
+- Runtime playback loops at `0.27`, slightly below the exterior Overworld mix.
+- Approaching the exterior hatch preloads the interior channel.
+- The authored descent crossfades to the interior score over 480 ms when the
+  interior world becomes active.
+- Exiting through the dorsal hatch crossfades back to the Overworld score over
+  the same interval.
+- Pause, mute, focus loss, mobile backgrounding, and gesture recovery use the
+  shared episode audio lifecycle.
+
+The source/runtime hashes and encoding contract live in
+[`Audio/rd42-interior-music-v1.json`](Audio/rd42-interior-music-v1.json).
 
 ## Required zones
 
@@ -518,21 +539,23 @@ The player still understands that Aryn descended through the top of the ship.
 
 ## Visual direction
 
-The interior derives from Aryn's artwork and the approved exterior. The
-Foundry remains a reference for pixel density, hard clusters, and gameplay
-readability only; its dark industrial palette and pipe-heavy material identity
-must not carry into the ship.
+The production interior derives from Aryn's artwork, the approved exterior,
+and the supplied Core OTW palette. The Foundry remains a reference for pixel
+density, hard clusters, and gameplay readability only; its dark industrial
+palette and pipe-heavy material identity do not carry into the ship.
 
-- pale blue-gray and cool silver occupied-cabin panels;
-- cobalt and soft violet structure drawn from Aryn's armor and jacket;
-- pale cyan operational light;
-- restrained pink accents drawn from her shoulder and pack energy;
-- warm orange around personal space, matching the resolved flight suit;
+- `#A0BEF5` light blue, `#91AFB3` teal, and `#EEEEEE` off-white dominate the
+  occupied cabin;
+- `#6395EE` brand blue supports interactive and identity details;
+- `#1B365D` navy and `#3D5255` dark teal define ribs and controlled depth;
+- `#1A1C20` ink and `#0A0A0A` void black appear sparingly in seams, the canopy,
+  hatch depth, and inaccessible recesses;
 - broader quiet panel shapes and less uniform micro-detail than the Foundry;
 - faceted ribs and angled bulkheads;
 - engine-pod intrusions rather than rectangular hallway walls;
 - a dark overhead systems bay that contrasts with the lighter cabin;
-- sparse warm habitation light around Aryn's bunk; and
+- a faithful three-band OTW symbol translated into a small cockpit-bulkhead
+  pixel mosaic rather than applied as a UI watermark; and
 - crisp pixel-art silhouettes at gameplay scale.
 
 Avoid:
@@ -567,7 +590,7 @@ Every final asset remains scene-scoped and locally installed.
 
 | Asset | Candidate runtime form | Limit |
 | --- | --- | --- |
-| Interior background | 1,672 × 941 plate | One texture below 2,048 px per axis |
+| Interior background | 1,672 × 941 production-v1 plate | Integrated |
 | Foreground shell/ribs | 1,672 × 941 alpha plate | One texture below 2,048 px per axis |
 | Exterior dorsal hatch | Small gridded animation atlas | Below 2,048 px per axis |
 | Interior ceiling hatch | Small gridded animation atlas | Below 2,048 px per axis |
@@ -585,7 +608,7 @@ updates the normalized ship derivative.
 
 ## Scene state and telemetry
 
-The eventual runtime should expose reviewable values:
+The runtime exposes reviewable values:
 
 - `data-scene="rd42-interior"`;
 - `data-ship-hatch="closed|prompt|aligning|opening|descending|transition|closing"`;
@@ -597,6 +620,7 @@ The eventual runtime should expose reviewable values:
 - `data-ship-trillian-berth="empty|occupied"`;
 - `data-ship-suit-alcove="idle|aligning|changing|flight-suit|rearming"`;
 - `data-ship-keel-hatch="sealed"`;
+- `data-ship-art="production-v1|fallback-greybox"`;
 - `data-ship-camera-mode="entry|follow|interaction|exit"`;
 - `data-ship-transition-progress`;
 - `data-player-supported-by="ship-center-roof|ship-interior-deck"`; and
@@ -636,9 +660,9 @@ super_frgmnts.html?preview=ship-interior&state=post-wound&trillian=1&autostart=1
 These are isolated runtime review routes, not claims that the sequence has
 joined the production episode path.
 
-## Greybox acceptance
+## Production-art acceptance
 
-The interior is ready for final artwork only when:
+The production plate retains the accepted greybox behavior:
 
 - Aryn can enter only from the live center roof perch;
 - Down chooses ship entry instead of Signal Sweep in the hatch range;
@@ -658,7 +682,6 @@ The interior is ready for final artwork only when:
 
 ## Explicitly outside this contract
 
-- final painted interior art;
 - a flyable ship;
 - moving the exterior ship to another Overworld plate;
 - fast travel;

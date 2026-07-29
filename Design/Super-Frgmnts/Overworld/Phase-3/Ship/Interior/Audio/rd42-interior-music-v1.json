@@ -1,0 +1,32 @@
+{
+  "schema": "super-frgmnts-rd42-interior-music-v1",
+  "status": "beta-production",
+  "title": "Spaceship Interior Loop",
+  "role": "dedicated RD-42 interior music",
+  "source": {
+    "path": "Design/Super-Frgmnts/Overworld/Phase-3/Ship/Interior/Audio/Spaceship_Interior_Loop_2026-07-29T063049.wav",
+    "format": "PCM WAV",
+    "channels": 2,
+    "sampleRateHz": 48000,
+    "bitDepth": 16,
+    "durationSeconds": 120,
+    "sha256": "86ca73af756cfa7475dbf9932ff88d21aa637207ba10108b66e80c51258f2139"
+  },
+  "runtime": {
+    "path": "Audio/super-frgmnts-rd42-interior-loop-v1.m4a",
+    "format": "AAC in M4A",
+    "channels": 2,
+    "sampleRateHz": 48000,
+    "targetBitrate": 192000,
+    "durationSeconds": 120,
+    "sha256": "ecdc47d1ef4151514c7cb14b9ccf819133d80798be924da81367e606448575ab",
+    "loop": true,
+    "volume": 0.27
+  },
+  "transitions": {
+    "enter": "Preload at the exterior hatch, then crossfade when the interior world configuration begins.",
+    "exit": "Crossfade to Overworld music when the exterior world configuration resumes.",
+    "crossfadeMs": 480,
+    "pauseLifecycle": "Shared pause, mute, visibility, focus, and gesture-retry contract."
+  }
+}

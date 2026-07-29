@@ -1,8 +1,8 @@
 {
   "workingName": "Kihunter",
   "runtimeType": "kihunter",
-  "status": "runtime-ready-unpopulated",
-  "productionPopulation": false,
+  "status": "production-populated",
+  "productionPopulation": true,
   "role": "winged airborne insect patrol",
   "source": {
     "image": "Raw/kihunter-source-v1.png",
@@ -44,6 +44,8 @@
   },
   "behavior": {
     "locomotion": "flying patrol",
-    "spawned": false
+    "spawned": true,
+    "productionPlacement": "Refinery plate 2 airborne patrol",
+    "combatBalance": "two rifle hits"
   }
 }

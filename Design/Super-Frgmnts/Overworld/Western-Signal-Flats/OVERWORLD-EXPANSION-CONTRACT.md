@@ -1,24 +1,24 @@
 # Western Signal Flats expansion contract
 
-**Status:** Revision 4A local review; not deployed
+**Status:** Revision 5C production exploration plate
 
 ## Purpose
 
 The Western Signal Flats add one full 1,672 × 941 plate west of Aryn's RD-42.
 The original Landing Flats, Dras Outpost, Coreworks Threshold, first-contact
-dialogue, calibration lane, and transport handoff remain intact.
+dialogue, and transport handoff remain intact.
 
-The west branch is optional and untimed. It makes arrival exploratory without
-delaying players who choose to follow the existing route directly to Dras.
+The west branch is optional, untimed environmental exploration. It carries no
+objective, reward, tutorial, discovery chain, or critical-path gate.
 
 ## Four-plate world
 
 | Plate | Runtime index | Story function |
 | --- | ---: | --- |
-| Western Signal Flats | 0 | Optional survey, Trillian recovery, surface abilities |
-| Landing Flats | 1 | RD-42 arrival and movement discovery |
+| Western Signal Flats | 0 | Optional environmental exploration |
+| Landing Flats | 1 | RD-42 arrival and ship access |
 | Dras Outpost | 2 | Jane, worker droid, and first contact |
-| Coreworks Threshold | 3 | Calibration lane and physical transport |
+| Coreworks Threshold | 3 | Physical transport |
 
 - World size: 6,688 × 941 pixels.
 - Ground top: y = 744 on all four plates.
@@ -26,50 +26,27 @@ delaying players who choose to follow the existing route directly to Dras.
   origin offset. Plate-local art and authored relationships do not move.
 - The camera starts on the RD-42 and can travel continuously to either side.
 
-## Optional western assignments
+## Removed production content
 
-The shared Down/interact action handles every assignment. No new mandatory
-input is introduced.
-
-1. **Trace the survey echo** — restart the western signal plinth. This unlocks
-   Signal Sweep.
-2. **Recover Trillian** — locate Aryn's dog at the failed route marker.
-   Trillian joins as a non-solid surface companion.
-3. **Restore the field harness** — route the second signal into Trillian's
-   armor. Her follow gait switches from unarmored to armored.
-4. **Breach the sealed salvage cache** — Trillian performs the authored
-   armored energy lunge against an abandoned cache. The action has no living
-   target and defines no combat damage.
-5. **Service the Outpost worker droid** — an optional post-contact maintenance
-   interaction near the abandoned exchange.
-
-Assignments grant small Galactic Credit recoveries but never gate Dras,
-calibration, the Coreworks transport, or the Foundry.
+The survey plinth, Signal Sweep, Trillian recovery, field harness, powered
+jump lesson, sealed salvage cache, and worker-droid discovery task are removed.
+Their source art and historical code do not authorize visible props, prompts,
+rewards, mission counters, or navigation guidance.
 
 ## Abilities and actor rules
-
-### Signal Sweep
-
-- Unlocked by the first western signal plinth.
-- Uses Down/interact when no closer interaction is available.
-- Emits a readable radial pulse and points toward the nearest unfinished
-  optional assignment.
-- Has a short cooldown and no damage hitbox.
 
 ### Trillian
 
 - Trillian is Aryn's dog and remains distinct from Dras's dog, Jane.
-- Before recovery she waits beside the western route marker.
-- After recovery she follows Aryn with acceleration, terrain support, gravity,
-  forward floor probes, and a comfortable trailing distance.
+- She joins from surface start and follows Aryn with acceleration, terrain
+  support, gravity, forward floor probes, and a comfortable trailing distance.
 - She is friendly, non-solid, non-hostile, and protected by seeker-friendly
   steering.
-- The unarmored and armored gait atlases are live movement states.
-- The powered-jump atlas supplies charge and launch; runtime physics supplies
-  the arc, and the final launch pose is held while airborne.
-- The armored lunge is used only for the sealed salvage assignment. Combat
-  damage, enemy targeting, hurt, incapacitated, and recovery behavior remain
-  deliberately unassigned.
+- She renders at 50% of the former size, follows at 410 px/s, and uses a
+  480 px/s catch-up speed so Aryn cannot permanently outrun her.
+- The unarmored gait is the only production movement state. Armored, powered
+  jump, lunge, combat damage, enemy targeting, hurt, incapacitated, and
+  recovery behavior remain unassigned.
 - Trillian stops at the Coreworks transport boundary during this Overworld
   pass and does not alter Foundry population.
 
@@ -87,13 +64,12 @@ calibration, the Coreworks transport, or the Foundry.
 
 - The hawk remains non-hostile, non-solid, and non-targetable.
 - Normal travel alternates direction between passes.
-- While Aryn is in the western plate with an unfinished assignment, the hawk
-  transitions to a restrained guide-circle over the next assignment.
+- Flight uses time-driven world-space passes only. Aryn and camera movement
+  cannot steer, accelerate, or redirect it.
 - Reduced-motion mode preserves one static flight pose.
 
 ## Safety and portability
 
-- All optional interactions map to the shared interact action.
 - Aryn, Jane, Trillian, Dras, and the worker droid never block one another.
 - Friendly actors never enter enemy arrays or hostile targeting.
 - All new runtime atlases stay under the 2,048-pixel texture ceiling.
@@ -105,9 +81,8 @@ calibration, the Coreworks transport, or the Foundry.
 
 Use:
 
-`?episode=01&stage=overworld&scene=western&assignment=survey&autostart=1`
+`?episode=01&stage=overworld&scene=western&autostart=1`
 
-The `assignment` value accepts `survey`, `trillian`, `harness`, `jump`,
-`salvage`, or `droid`. Each isolated review prepares only the prerequisite
-surface states needed for that animation or interaction; the production route
-still starts with every optional assignment incomplete.
+Acceptance requires no objective props, prompts, rewards, tutorial geometry,
+or hawk guidance; Trillian must be present, correctly scaled, and able to keep
+up.

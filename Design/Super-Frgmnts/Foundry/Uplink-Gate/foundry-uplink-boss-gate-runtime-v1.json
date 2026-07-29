@@ -1,0 +1,63 @@
+{
+  "schema": "super-frgmnts-uplink-boss-gate-v1",
+  "status": "beta-production",
+  "purpose": "A physical, catwalk-rooted bulkhead marking the transition from the Uplink to The Wound.",
+  "styleReference": [
+    "Images/Game/Super-Frgmnts/foundry-platform-module-runtime-v1.png",
+    "Images/Game/signal-foundry-uplink.png"
+  ],
+  "generation": {
+    "method": "built-in image generation with chroma-key removal",
+    "promptSummary": "Front-orthographic 16-bit industrial boss bulkhead with riveted gunmetal pylons, magenta instrument lamps, restrained cyan wiring, a hollow central passage, and a substantial threshold; no magical ring, vortex, text, environment, or floating parts.",
+    "background": "#ff00ff",
+    "rendering": "nearest-neighbor"
+  },
+  "assets": {
+    "chromaSource": {
+      "path": "Design/Super-Frgmnts/Foundry/Uplink-Gate/Raw/uplink-boss-gate-chroma-source-v1.png",
+      "size": [
+        1360,
+        1157
+      ],
+      "sha256": "e9d83d337881901171ed2ca4c789dc5f1bf70c2482b55dd4ef7c986cb9353666"
+    },
+    "alphaSource": {
+      "path": "Design/Super-Frgmnts/Foundry/Uplink-Gate/Raw/uplink-boss-gate-alpha-source-v1.png",
+      "size": [
+        1110,
+        940
+      ],
+      "sha256": "5da6601790cd1b82ea33220243b9137dc9aa51c2e2e8bc32448244790d491911"
+    },
+    "runtime": {
+      "path": "Images/Game/Super-Frgmnts/foundry-uplink-boss-gate-runtime-v1.png",
+      "size": [
+        444,
+        376
+      ],
+      "sha256": "502f13e35657be6aa650bf3d2e2d85faf79014763302dacf51ff9aef2ab1da71",
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    }
+  },
+  "placement": {
+    "room": 7,
+    "worldCenterX": 12988,
+    "bottomY": 600,
+    "drawWidth": 444,
+    "drawHeight": 376,
+    "trigger": {
+      "localX": 1218,
+      "y": 280,
+      "width": 132,
+      "height": 320
+    }
+  },
+  "states": {
+    "locked": "A dark mechanical shutter closes the aperture; twelve lintel pips show recovered Signal progress.",
+    "open": "The shutter retracts. Restrained cyan square motes move through the otherwise clear passage."
+  },
+  "replaces": "floating procedural green rectangle and dashed circular energy barrier"
+}

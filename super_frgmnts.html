@@ -278,12 +278,7 @@
             inset: 0;
             z-index: 2;
             background:
-                linear-gradient(90deg, rgba(2, 3, 10, 0.36), transparent 12% 88%, rgba(2, 3, 10, 0.38)),
-                repeating-linear-gradient(
-                    180deg,
-                    transparent 0 3px,
-                    rgba(3, 5, 13, 0.12) 3px 4px
-                );
+                linear-gradient(90deg, rgba(2, 3, 10, 0.36), transparent 12% 88%, rgba(2, 3, 10, 0.38));
             content: "";
             pointer-events: none;
         }
@@ -625,6 +620,7 @@
         }
 
         .mission {
+            min-width: min(390px, 35vw);
             justify-self: start;
             padding: 7px 9px;
             border-left: 3px solid var(--index-teal);
@@ -642,7 +638,44 @@
         .mission span {
             display: block;
             margin-top: 3px;
-            font-size: clamp(6px, 0.9vw, 10px);
+            font-size: clamp(7px, 0.95vw, 11px);
+        }
+
+        .mission-progress {
+            display: grid;
+            max-width: 330px;
+            margin-top: 8px;
+            grid-template-columns: repeat(2, minmax(112px, 1fr));
+            gap: 6px;
+        }
+
+        .mission-progress[hidden] {
+            display: none;
+        }
+
+        .mission-progress__item {
+            display: grid;
+            padding: 5px 8px 6px;
+            border: 1px solid rgba(119, 163, 255, 0.56);
+            background: rgba(6, 11, 27, 0.88);
+            box-shadow: inset 3px 0 0 rgba(88, 245, 223, 0.52);
+            grid-template-columns: auto 1fr;
+            align-items: baseline;
+            gap: 7px;
+        }
+
+        .mission-progress__item b {
+            color: var(--cream);
+            font-size: clamp(14px, 1.45vw, 21px);
+            letter-spacing: 0.03em;
+            line-height: 1;
+        }
+
+        .mission-progress__item small {
+            color: var(--index-teal);
+            font-size: clamp(7px, 0.72vw, 9px);
+            font-weight: 700;
+            letter-spacing: 0.12em;
         }
 
         .timer {
@@ -2301,12 +2334,7 @@
 
             .stage-shell::before {
                 background:
-                    linear-gradient(90deg, rgba(2, 3, 10, 0.28), transparent 11% 89%, rgba(2, 3, 10, 0.3)),
-                    repeating-linear-gradient(
-                        180deg,
-                        transparent 0 3px,
-                        rgba(3, 5, 13, 0.11) 3px 4px
-                    );
+                    linear-gradient(90deg, rgba(2, 3, 10, 0.28), transparent 11% 89%, rgba(2, 3, 10, 0.3));
             }
 
             #gameCanvas {
@@ -2399,6 +2427,7 @@
                 position: absolute;
                 top: 32px;
                 left: 0;
+                min-width: 0;
                 max-width: none;
                 padding: 5px 7px;
                 border-left-width: 2px;
@@ -2411,6 +2440,10 @@
             .mission span {
                 margin: 0;
                 font-size: 8px;
+            }
+
+            .mission-progress {
+                display: none;
             }
 
             .timer {
@@ -3004,7 +3037,17 @@
                 <div class="hud" aria-hidden="true">
                     <div class="mission">
                         <strong>ARYN SOL-MAVI // RECOVER</strong>
-                        <span>SHARDS <b id="shardCount">0</b>/12 → UPLINK GATE</span>
+                        <span id="missionDetail">SHARDS <b id="shardCount">0</b>/12 → UPLINK GATE</span>
+                        <div class="mission-progress" id="missionProgress" hidden>
+                            <div class="mission-progress__item">
+                                <b id="relayProgress">0/2</b>
+                                <small>RELAYS</small>
+                            </div>
+                            <div class="mission-progress__item">
+                                <b id="signalProgress">0/12</b>
+                                <small>SIGNALS</small>
+                            </div>
+                        </div>
                     </div>
                     <div class="timer" id="timer">00:55</div>
                     <div class="stats">
@@ -3148,6 +3191,7 @@
         data-overworld-track="/Audio/super-frgmnts-overworld-loop.mp3"
         data-foundry-track="/Audio/super-frgmnts-foundry-loop.mp3"
         data-wound-track="/Audio/super-frgmnts-seam-hunter-boss-v1.m4a"
+        data-interior-track="/Audio/super-frgmnts-rd42-interior-loop-v1.m4a"
         preload="auto"
         aria-hidden="true"
     ></audio>
@@ -3217,10 +3261,18 @@
                 previewParameters.get("preview") === "foundry-expansion" ||
                 (episodeOneRun && episodeStage === "foundry");
             var episodeBetaRun = episodeOneRun && expansionPreview;
+            var foundryUplinkQa =
+                expansionPreview &&
+                previewParameters.get("qa") === "uplink";
             var episodeSurfaceReturn =
                 episodeOneRun &&
                 overworldPreview &&
                 previewParameters.get("return") === "1";
+            var requestedOverworldSkyState =
+                previewParameters.get("sky") || "";
+            var returnReportQa =
+                episodeSurfaceReturn &&
+                previewParameters.get("qa") === "report";
             var episodeArrivalTutorial = false;
             var stabilizerTrial =
                 !episodeOneRun &&
@@ -3354,6 +3406,7 @@
                 expansionPreview &&
                 (
                     previewParameters.get("layer") === "upper" ||
+                    foundryUplinkQa ||
                     surfaceCrawlerTrial ||
                     vesperMiteTrial ||
                     patrollerTrial ||
@@ -3370,8 +3423,10 @@
                     : expansionPreview
                         ? 1604
                         : 663;
-            var DRAS_WORLD_X =
+            var DRAS_HOME_X =
                 OVERWORLD_ORIGIN_X + WIDTH + 560;
+            var DRAS_RETURN_X = 6090;
+            var DRAS_WORLD_X = DRAS_HOME_X;
             var DRAS_DRAW_Y = GROUND_Y - 100;
             var DOG_NAME = "Jane";
             var DOG_WORLD_X =
@@ -3408,16 +3463,17 @@
             var WORKER_DROID_FRIENDLY_AVOID_RADIUS = 46;
             var TRILLIAN_FRAME_WIDTH = 120;
             var TRILLIAN_FRAME_HEIGHT = 104;
-            var TRILLIAN_DRAW_WIDTH = 96;
-            var TRILLIAN_DRAW_HEIGHT = 83;
-            var TRILLIAN_BODY_HALF_WIDTH = 20;
+            var TRILLIAN_DRAW_WIDTH = 48;
+            var TRILLIAN_DRAW_HEIGHT = 42;
+            var TRILLIAN_BODY_HALF_WIDTH = 10;
             var TRILLIAN_GRAVITY = 1450;
-            var TRILLIAN_FOLLOW_SPEED = 82;
-            var TRILLIAN_FOLLOW_DISTANCE = 112;
+            var TRILLIAN_FOLLOW_SPEED = 410;
+            var TRILLIAN_CATCHUP_SPEED = 480;
+            var TRILLIAN_FOLLOW_DISTANCE = 86;
             var TRILLIAN_WAIT_X = 690;
             var TRILLIAN_TRANSPORT_LIMIT_X =
                 OVERWORLD_ORIGIN_X + WIDTH * 2 + 1260;
-            var TRILLIAN_FRIENDLY_AVOID_RADIUS = 58;
+            var TRILLIAN_FRIENDLY_AVOID_RADIUS = 30;
             var SIGNAL_SWEEP_COOLDOWN = 1.8;
             var WESTERN_SURVEY_X = 330;
             var WESTERN_TRILLIAN_X = 690;
@@ -3508,11 +3564,11 @@
             var WOUND_BOSS_SURGE_SPEED = 160;
             var WOUND_BOSS_PURSUIT_ACCELERATION = 210;
             var WOUND_BOSS_PURSUIT_BRAKE = 280;
-            var WOUND_BOSS_TURN_DURATION = 0.7;
-            var WOUND_BOSS_TURN_CONFIRM_TIME = 0.16;
-            var WOUND_BOSS_TURN_BRAKE_TIME = 0.22;
-            var WOUND_BOSS_TURN_FLIP_TIME = 0.32;
-            var WOUND_BOSS_POST_TURN_COMMIT = 0.55;
+            var WOUND_BOSS_TURN_DURATION = 0.54;
+            var WOUND_BOSS_TURN_CONFIRM_TIME = 0.1;
+            var WOUND_BOSS_TURN_BRAKE_TIME = 0.16;
+            var WOUND_BOSS_TURN_FLIP_TIME = 0.24;
+            var WOUND_BOSS_POST_TURN_COMMIT = 0.38;
             var WOUND_BOSS_POST_TURN_SPEED = 126;
             var WOUND_BOSS_RESET_DURATION = 0.9;
             var WOUND_BOSS_ATTACK_COOLDOWN = 0.38;
@@ -3530,12 +3586,12 @@
             var WOUND_BOSS_WATCH_RENDER_WIDTH = 396;
             var WOUND_BOSS_WATCH_RENDER_HEIGHT = 448;
             var WOUND_BOSS_WATCH_TRACK_DEADZONE = 110;
-            var WOUND_BOSS_WATCH_TRACK_CONFIRM = 0.42;
-            var WOUND_BOSS_WATCH_EXIT_GRACE = 0.45;
+            var WOUND_BOSS_WATCH_TRACK_CONFIRM = 0.2;
+            var WOUND_BOSS_WATCH_EXIT_GRACE = 0.28;
             var WOUND_BOSS_WATCH_TURN_FRAME_WIDTH = 409;
             var WOUND_BOSS_WATCH_TURN_FRAME_HEIGHT = 458;
             var WOUND_BOSS_WATCH_TURN_FRAME_COUNT = 19;
-            var WOUND_BOSS_WATCH_TURN_FRAME_DURATION = 0.074;
+            var WOUND_BOSS_WATCH_TURN_FRAME_DURATION = 0.045;
             var WOUND_BOSS_WATCH_TURN_RENDER_WIDTH = 400;
             var WOUND_BOSS_WATCH_TURN_RENDER_HEIGHT = 448;
             var WOUND_BOSS_WATCH_TURN_FOOT_ROOT_X = 197;
@@ -3779,6 +3835,12 @@
             var pauseButton = document.getElementById("pauseButton");
             var soundButton = document.getElementById("soundButton");
             var shardCount = document.getElementById("shardCount");
+            var missionProgress =
+                document.getElementById("missionProgress");
+            var relayProgress =
+                document.getElementById("relayProgress");
+            var signalProgress =
+                document.getElementById("signalProgress");
             var timerDisplay = document.getElementById("timer");
             var scoreDisplay = document.getElementById("score");
             var zoneNameDisplay = document.getElementById("zoneName");
@@ -3792,9 +3854,11 @@
                 ? backgroundMusic.dataset.titleTrack
                 : woundBossPreview
                     ? backgroundMusic.dataset.woundTrack
-                    : overworldPreview || shipInteriorPreview
-                    ? backgroundMusic.dataset.overworldTrack
-                    : backgroundMusic.dataset.foundryTrack;
+                    : shipInteriorPreview
+                        ? backgroundMusic.dataset.interiorTrack
+                        : overworldPreview
+                            ? backgroundMusic.dataset.overworldTrack
+                            : backgroundMusic.dataset.foundryTrack;
             var directionPad = document.getElementById("directionPad");
             var weaponToggleButton =
                 document.getElementById("weaponToggle");
@@ -4016,12 +4080,12 @@
                 var shipKeyboardHelp =
                     document.querySelector(".keyboard-help");
                 document.title =
-                    "SUPER FRGMNTS // RD-42 Interior Greybox";
+                    "SUPER FRGMNTS // RD-42 Interior Art";
                 document.body.classList.add("is-ship-interior");
                 titleSeason.textContent =
-                    "Development Build // Ship Interior";
+                    "Production Art Review // Ship Interior";
                 document.querySelector(".eyebrow").textContent =
-                    "RD-42 // One-Plate Greybox";
+                    "RD-42 // One-Plate Interior";
                 document.querySelector(".title-screen__hero").innerHTML =
                     "Aryn Sol-Mavi // <strong>Inside the RD-42</strong>";
                 document.querySelector(".title-screen__hint").textContent =
@@ -4034,7 +4098,7 @@
                         : "EXPLORE THE RD-42";
                 document.querySelector(".stage-wrap").setAttribute(
                     "aria-label",
-                    "Super Frgmnts RD-42 interior playable greybox"
+                    "Super Frgmnts RD-42 production-art interior preview"
                 );
                 setTitleArtwork(
                     "/Images/Game/Super-Frgmnts/overworld-landing-flats-v1.png",
@@ -4214,7 +4278,7 @@
                 document.querySelector(".title-screen__hero").innerHTML =
                     "Aryn Sol-Mavi // <strong>Heavy Rifle Field Test</strong>";
                 document.querySelector(".title-screen__hint").textContent =
-                    "Draw to fire // Ground and aerial combat // Idle to stow";
+                    "Draw once // Stays shouldered until weapon switch";
                 document.querySelector(".mission strong").textContent =
                     "SPECIAL WEAPON // HEAVY RIFLE";
                 document.querySelector(".mission span").textContent =
@@ -4265,6 +4329,10 @@
                 },
                 flightSuitJump: {
                     source: "/Images/Game/Super-Frgmnts/aryn-flight-suit-jump-runtime-v1.png",
+                    priority: "high"
+                },
+                shipInteriorRear: {
+                    source: "/Images/Game/Super-Frgmnts/rd42-interior-rear-plate-runtime-v1.png",
                     priority: "high"
                 },
                 takeoff: {
@@ -4417,6 +4485,14 @@
                 },
                 foundryArcCoupler: {
                     source: "/Images/Game/Super-Frgmnts/foundry-arc-coupler-runtime-v1.png",
+                    priority: "high"
+                },
+                foundryArcDischarge: {
+                    source: "/Images/Game/Super-Frgmnts/foundry-arc-discharge-runtime-v1.png",
+                    priority: "high"
+                },
+                foundryUplinkBossGate: {
+                    source: "/Images/Game/Super-Frgmnts/foundry-uplink-boss-gate-runtime-v1.png",
                     priority: "high"
                 },
                 woundBossBackgroundLeft: {
@@ -4645,19 +4721,24 @@
                 "workerDroidService",
                 "overworldHawk",
                 "trillianUnarmored",
-                "trillianArmored",
-                "trillianAttack",
-                "trillianJump",
                 "coreworksTransportIdle",
                 "coreworksTransportActivate",
                 "arynDialoguePortrait",
                 "drasDialoguePortrait"
+            ];
+            var shipInteriorAssetKeys = [
+                "armorChange",
+                "flightSuitRun",
+                "flightSuitJump",
+                "shipInteriorRear"
             ];
             var foundryCoreAssetKeys = [
                 "foundryExpanded",
                 "foundryPlatformModule",
                 "foundryThermalPurgeVent",
                 "foundryArcCoupler",
+                "foundryArcDischarge",
+                "foundryUplinkBossGate",
                 "stabilizerDormant",
                 "stabilizerActive",
                 "foundryFanHousing",
@@ -4898,9 +4979,12 @@
             var cameraFacing = 1;
             var shipInteriorActive = shipInteriorPreview;
             var shipHatchArmed =
-                shipEntryPreview || shipInteriorPreview;
+                shipEntryPreview ||
+                shipInteriorPreview ||
+                overworldPreview;
             var shipTransitionMode = "none";
             var shipTransitionElapsed = 0;
+            var shipEntryLoadPending = false;
             var shipServiceKitState = shipServiceKitObjective
                 ? "available"
                 : "rack";
@@ -4936,7 +5020,11 @@
             var directionPointerId = null;
             var dialogueActive = false;
             var dialogueIndex = 0;
+            var dialogueMode = "arrival";
             var dialogueHasPlayed = false;
+            var returnDialogueHasPlayed = false;
+            var postFoundryInterlude = "unstarted";
+            var primaryBiolabRoute = "unknown";
             var dialogueSkipOpen = false;
             var dialoguePreviousFocus = null;
             var firstContactSettle = 0;
@@ -5248,6 +5336,235 @@
                 }
             ];
 
+            var returnDialogueCards = [
+                {
+                    id: "R01",
+                    speaker: "DRAS EHDRE",
+                    role: "COREWORKS FOREMAN",
+                    portrait: "dras",
+                    text: "You came back."
+                },
+                {
+                    id: "R02",
+                    speaker: "ARYN SOL-MAVI",
+                    role: "SIGNAL RANGER",
+                    portrait: "aryn",
+                    text: "Your portal did most of the work."
+                },
+                {
+                    id: "R03",
+                    speaker: "DRAS EHDRE",
+                    role: "COREWORKS FOREMAN",
+                    portrait: "dras",
+                    text: "It has never done that before."
+                },
+                {
+                    id: "R04",
+                    speaker: "ARYN SOL-MAVI",
+                    role: "SIGNAL RANGER",
+                    portrait: "aryn",
+                    text: "You could sound happier."
+                },
+                {
+                    id: "R05",
+                    speaker: "DRAS EHDRE",
+                    role: "COREWORKS FOREMAN",
+                    portrait: "dras",
+                    text: "I had eighteen months to stop expecting good news."
+                },
+                {
+                    id: "R06",
+                    speaker: "DRAS EHDRE",
+                    role: "COREWORKS FOREMAN",
+                    portrait: "dras",
+                    text: "What did you find?"
+                },
+                {
+                    id: "R07",
+                    speaker: "ARYN SOL-MAVI",
+                    role: "SIGNAL RANGER",
+                    portrait: "aryn",
+                    text: "Both atmospheric stabilizers are online. The Foundry and Biolab processing floors are breathing again."
+                },
+                {
+                    id: "R08",
+                    speaker: "DRAS EHDRE",
+                    role: "COREWORKS FOREMAN",
+                    portrait: "dras",
+                    text: "I felt the pressure change from here. What destroyed them?"
+                },
+                {
+                    id: "R09",
+                    speaker: "ARYN SOL-MAVI",
+                    role: "SIGNAL RANGER",
+                    portrait: "aryn",
+                    text: "A Seam Hunter. It was nesting over a geological rupture."
+                },
+                {
+                    id: "R10",
+                    speaker: "DRAS EHDRE",
+                    role: "COREWORKS FOREMAN",
+                    portrait: "dras",
+                    text: "Was?"
+                },
+                {
+                    id: "R11",
+                    speaker: "ARYN SOL-MAVI",
+                    role: "SIGNAL RANGER",
+                    portrait: "aryn",
+                    text: "It won't break another relay."
+                },
+                {
+                    id: "R12",
+                    speaker: "ARYN SOL-MAVI",
+                    role: "SIGNAL RANGER",
+                    portrait: "aryn",
+                    effect: "reveal-specimen",
+                    stageKicker: "WOUND SPECIMEN // SECURED",
+                    stageText: "Aryn turns enough for the cyan-violet material in her pack to become visible.",
+                    text: "This was beneath the Seam Hunter when it fell."
+                },
+                {
+                    id: "R13",
+                    speaker: "DRAS EHDRE",
+                    role: "COREWORKS FOREMAN",
+                    portrait: "dras",
+                    text: "That's Vesperite."
+                },
+                {
+                    id: "R14",
+                    speaker: "ARYN SOL-MAVI",
+                    role: "SIGNAL RANGER",
+                    portrait: "aryn",
+                    text: "I gathered that."
+                },
+                {
+                    id: "R15",
+                    speaker: "DRAS EHDRE",
+                    role: "COREWORKS FOREMAN",
+                    portrait: "dras",
+                    text: "No. Vesperite lies still once it leaves the seam."
+                },
+                {
+                    id: "R16",
+                    speaker: "ARYN SOL-MAVI",
+                    role: "SIGNAL RANGER",
+                    portrait: "aryn",
+                    text: "This one doesn't."
+                },
+                {
+                    id: "R17",
+                    speaker: "DRAS EHDRE",
+                    role: "COREWORKS FOREMAN",
+                    portrait: "dras",
+                    effect: "scan-specimen",
+                    stageKicker: "DRAS FIELD PROBE // NO MATCH",
+                    stageText: "The probe repeats the specimen's pulse but cannot resolve its signal structure.",
+                    text: "It's holding a pulse without losing charge."
+                },
+                {
+                    id: "R18",
+                    speaker: "ARYN SOL-MAVI",
+                    role: "SIGNAL RANGER",
+                    portrait: "aryn",
+                    text: "Can you read it?"
+                },
+                {
+                    id: "R19",
+                    speaker: "DRAS EHDRE",
+                    role: "COREWORKS FOREMAN",
+                    portrait: "dras",
+                    text: "Not here. The Primary Biolab kept the old assays."
+                },
+                {
+                    id: "R20",
+                    speaker: "ARYN SOL-MAVI",
+                    role: "SIGNAL RANGER",
+                    portrait: "aryn",
+                    text: "I passed through a biolab."
+                },
+                {
+                    id: "R21",
+                    speaker: "DRAS EHDRE",
+                    role: "COREWORKS FOREMAN",
+                    portrait: "dras",
+                    text: "You crossed its processing floor. The main laboratory is below it."
+                },
+                {
+                    id: "R22",
+                    speaker: "ARYN SOL-MAVI",
+                    role: "SIGNAL RANGER",
+                    portrait: "aryn",
+                    text: "Sealed?"
+                },
+                {
+                    id: "R23",
+                    speaker: "DRAS EHDRE",
+                    role: "COREWORKS FOREMAN",
+                    portrait: "dras",
+                    text: "From production. Not from the portal—if it left us a route."
+                },
+                {
+                    id: "R24",
+                    speaker: "ARYN SOL-MAVI",
+                    role: "SIGNAL RANGER",
+                    portrait: "aryn",
+                    text: "Then I go back."
+                },
+                {
+                    id: "R25",
+                    speaker: "DRAS EHDRE",
+                    role: "COREWORKS FOREMAN",
+                    portrait: "dras",
+                    text: "You say that as if the first trip went well."
+                },
+                {
+                    id: "R26",
+                    speaker: "ARYN SOL-MAVI",
+                    role: "SIGNAL RANGER",
+                    portrait: "aryn",
+                    text: "It went forward."
+                },
+                {
+                    id: "R27",
+                    speaker: "DRAS EHDRE",
+                    role: "COREWORKS FOREMAN",
+                    portrait: "dras",
+                    text: "That's not the same thing."
+                },
+                {
+                    id: "R28",
+                    speaker: "ARYN SOL-MAVI",
+                    role: "SIGNAL RANGER",
+                    portrait: "aryn",
+                    text: "It was enough."
+                },
+                {
+                    id: "R29",
+                    speaker: "DRAS EHDRE",
+                    role: "COREWORKS FOREMAN",
+                    portrait: "dras",
+                    effect: "transport-answer",
+                    stageKicker: "COREWORKS TRANSPORT // UNSOLICITED RESPONSE",
+                    stageText: "The inert field answers the specimen with one thin violet-blue pulse.",
+                    text: "Aryn. You didn't touch it."
+                },
+                {
+                    id: "R30",
+                    speaker: "ARYN SOL-MAVI",
+                    role: "SIGNAL RANGER",
+                    portrait: "aryn",
+                    text: "No."
+                },
+                {
+                    id: "R31",
+                    speaker: "DRAS EHDRE",
+                    role: "COREWORKS FOREMAN",
+                    portrait: "dras",
+                    text: "Then something below the Primary Biolab just answered your pack."
+                }
+            ];
+
             var player = {
                 x: 82,
                 y: GROUND_Y - 100,
@@ -5290,44 +5607,10 @@
                 phase: 0.8
             };
 
-            var overworldAssignments = [
-                {
-                    id: "survey-echo",
-                    x: WESTERN_SURVEY_X,
-                    label: "TRACE SURVEY ECHO",
-                    prompt: "↓ TRACE ECHO",
-                    optional: true,
-                    reward: 1,
-                    complete: false
-                },
-                {
-                    id: "recover-trillian",
-                    x: WESTERN_TRILLIAN_X,
-                    label: "RECOVER TRILLIAN",
-                    prompt: "↓ CALL TRILLIAN",
-                    optional: true,
-                    reward: 0,
-                    complete: false
-                },
-                {
-                    id: "field-harness",
-                    x: WESTERN_HARNESS_X,
-                    label: "FIT FIELD HARNESS",
-                    prompt: "↓ FIT HARNESS",
-                    optional: true,
-                    reward: 1,
-                    complete: false
-                },
-                {
-                    id: "sealed-salvage",
-                    x: WESTERN_SALVAGE_X,
-                    label: "BREACH SEALED SALVAGE",
-                    prompt: "↓ BREACH SALVAGE",
-                    optional: true,
-                    reward: 5,
-                    complete: false
-                }
-            ];
+            // The western landing flats are environmental space in the beta.
+            // Trillian is already Aryn's companion; no discovery-task props
+            // or tutorial assignment chain is authored beside the RD-42.
+            var overworldAssignments = [];
             var signalSweepOwned = false;
             var signalSweepCooldown = 0;
             var signalSweepPulse = 0;
@@ -5341,9 +5624,9 @@
                 facing: 1,
                 onGround: true,
                 supportPlatform: null,
-                joined: false,
+                joined: true,
                 armored: false,
-                state: "waiting",
+                state: "follow",
                 stateElapsed: 0,
                 animationTime: 0,
                 launchApplied: false,
@@ -5937,9 +6220,9 @@
                 hazards = buildEpisodeBetaHazards();
                 uplink = {
                     x: (SCREEN_COUNT - 1) * WIDTH + 1218,
-                    y: 248,
+                    y: 280,
                     width: 132,
-                    height: 312
+                    height: 320
                 };
             }
             if (woundBossPreview) {
@@ -6251,7 +6534,8 @@
                 criticalAssetKeys.push(
                     "armorChange",
                     "flightSuitRun",
-                    "flightSuitJump"
+                    "flightSuitJump",
+                    "shipInteriorRear"
                 );
             }
             if (
@@ -6458,9 +6742,12 @@
                 }
                 shipInteriorActive = shipInteriorPreview;
                 shipHatchArmed =
-                    shipEntryPreview || shipInteriorPreview;
+                    shipEntryPreview ||
+                    shipInteriorPreview ||
+                    overworldPreview;
                 shipTransitionMode = "none";
                 shipTransitionElapsed = 0;
+                shipEntryLoadPending = false;
                 shipServiceKitState = shipServiceKitObjective
                     ? "available"
                     : "rack";
@@ -6548,7 +6835,18 @@
                 woundBossAftermathTime = 0;
                 dialogueActive = false;
                 dialogueIndex = 0;
+                dialogueMode = "arrival";
                 dialogueHasPlayed = false;
+                returnDialogueHasPlayed = false;
+                postFoundryInterlude =
+                    episodeSurfaceReturn
+                        ? "returned"
+                        : "unstarted";
+                primaryBiolabRoute = "unknown";
+                DRAS_WORLD_X =
+                    episodeSurfaceReturn
+                        ? DRAS_RETURN_X
+                        : DRAS_HOME_X;
                 dialogueSkipOpen = false;
                 firstContactSettle = 0;
                 drasAware = false;
@@ -6592,7 +6890,9 @@
                             WESTERN_SURVEY_X
                         ) - 56
                     : episodeSurfaceReturn
-                        ? OVERWORLD_ORIGIN_X + WIDTH * 2 + 960
+                        ? returnReportQa
+                            ? DRAS_RETURN_X + 88
+                            : COREWORKS_TRANSPORT_CENTER_X - 232
                         : arrivalTransportPreview
                         ? COREWORKS_TRANSPORT_DECK_X +
                             COREWORKS_TRANSPORT_DECK_WIDTH * 0.5 -
@@ -6608,6 +6908,8 @@
                             : woundBossIntroQa
                             ? WOUND_BOSS_ENGAGE_X - 56
                             : WOUND_PLAYER_SPAWN_X
+                    : foundryUplinkQa
+                        ? WIDTH * 7 + 1120
                     : foundryGateTrial
                         ? FOUNDRY_REFINERY_GATE_X - 240
                         : stabilizerTrial
@@ -6995,6 +7297,10 @@
                     portalCharge = 1;
                     document.querySelector(".mission span").textContent =
                         "RETURNED TO VEYRA // REPORT TO DRAS";
+                    canvas.dataset.postFoundryInterlude =
+                        postFoundryInterlude;
+                    canvas.dataset.primaryBiolabRoute =
+                        primaryBiolabRoute;
                 }
                 if (episodeArrivalTutorial) {
                     creditCrates = [
@@ -7109,7 +7415,7 @@
                         shipInteriorPreview
                             ? shipServiceKitObjective
                                 ? "RD-42 service-kit review started. Explore the one-plate interior and recover the marked case."
-                                : "RD-42 interior greybox started. Explore the ship and press down at labeled stations."
+                                : "RD-42 production-art interior started. Explore the ship and press down at nearby stations."
                         : overworldPreview
                             ? episodeSurfaceReturn
                                 ? "Veyra surface return is materializing."
@@ -7624,7 +7930,7 @@
             function shipExteriorGreyboxActive() {
                 return (
                     !shipInteriorActive &&
-                    (shipEntryPreview || shipInteriorPreview)
+                    overworldPreview
                 );
             }
 
@@ -7776,6 +8082,7 @@
                     : platforms[0];
                 document.body.classList.add("is-ship-interior");
                 document.body.classList.remove("is-overworld-preview");
+                setAudioScene("interior", false);
                 document.querySelector(".mission strong").textContent =
                     "RD-42 // INTERIOR";
                 document.querySelector(".mission span").textContent =
@@ -7830,6 +8137,7 @@
                 cameraY = 0;
                 document.body.classList.remove("is-ship-interior");
                 document.body.classList.add("is-overworld-preview");
+                setAudioScene("overworld", false);
                 document.querySelector(".mission strong").textContent =
                     "ARYN SOL-MAVI // RD-42";
                 document.querySelector(".mission span").textContent =
@@ -7843,6 +8151,69 @@
 
             function beginShipEntry() {
                 if (!playerNearShipExteriorHatch()) return false;
+                preloadIdleMusicScene("interior");
+                var missingShipAssets = [
+                    "shipInteriorRear",
+                    "armorChange",
+                    "flightSuitRun",
+                    "flightSuitJump"
+                ].filter(function (key) {
+                    return !imageHasPixels(assets[key]);
+                });
+                if (missingShipAssets.length) {
+                    if (shipEntryLoadPending) return true;
+                    shipEntryLoadPending = true;
+                    requestAssetKeys(
+                        missingShipAssets,
+                        "high"
+                    );
+                    popups.push({
+                        x: SHIP_EXTERIOR_HATCH_X,
+                        y: 380,
+                        text: "RD-42 INTERIOR LOADING",
+                        life: 1.2,
+                        color: "#58f5df"
+                    });
+                    announce(
+                        "RD-42 interior systems are loading. Hold position for hatch entry."
+                    );
+                    Promise.all(
+                        missingShipAssets.map(function (
+                            key
+                        ) {
+                            return waitForImage(
+                                assets[key],
+                                key
+                            );
+                        })
+                    ).then(function (results) {
+                        shipEntryLoadPending = false;
+                        var failed = results.some(function (
+                            result
+                        ) {
+                            return !result.ok;
+                        });
+                        if (failed) {
+                            announce(
+                                "RD-42 interior artwork did not finish loading. Try the hatch again."
+                            );
+                            return;
+                        }
+                        if (
+                            state === "running" &&
+                            overworldPreview &&
+                            !shipInteriorActive &&
+                            playerNearShipExteriorHatch()
+                        ) {
+                            beginShipEntry();
+                            return;
+                        }
+                        announce(
+                            "RD-42 interior systems are ready."
+                        );
+                    });
+                    return true;
+                }
                 releaseAllControls();
                 stowRifle();
                 state = "ship-transition";
@@ -8642,7 +9013,7 @@
                     ["wasp", WIDTH * 4 + 780, 720, WIDTH * 4 + 520, WIDTH * 4 + 1120, -108, 2],
                     ["gaunt", WIDTH * 5 + 500, GROUND_Y, WIDTH * 5 + 340, WIDTH * 5 + 700, 66, 4],
                     ["skree", WIDTH * 6 + 520, GROUND_Y, WIDTH * 6 + 330, WIDTH * 6 + 760, 64, 3],
-                    ["seamLurker", WIDTH * 7 + 480, 330, WIDTH * 7 + 290, WIDTH * 7 + 760, 72, 2],
+                    ["seamLurker", WIDTH * 7 + 430, 362, WIDTH * 7 + 110, WIDTH * 7 + 520, 72, 2],
                     ["paleWatcher", WIDTH * 7 + 1300, GROUND_Y, WIDTH * 7 + 1230, WIDTH * 7 + 1510, -62, 3]
                 ].forEach(function (placement) {
                     betaEnemies.push(
@@ -8928,13 +9299,13 @@
                 episodeBridgeMode = "";
                 episodeBridgeNextScene = "";
                 episodeBridgeCompleting = false;
+                episodeBridgeSkip.textContent = "Skip";
             }
 
             function completeEpisodeBridge() {
                 if (
                     episodeBridge.hidden ||
-                    episodeBridgeCompleting ||
-                    !episodeBridgeNextScene
+                    episodeBridgeCompleting
                 ) {
                     return;
                 }
@@ -8946,6 +9317,28 @@
                     "--bridge-progress",
                     "100%"
                 );
+                if (episodeBridgeMode === "cliffhanger") {
+                    hideEpisodeBridge();
+                    state = "running";
+                    document.body.classList.add("is-running");
+                    setPauseButton(false, true);
+                    playBackgroundMusic();
+                    document.querySelector(
+                        ".mission span"
+                    ).textContent =
+                        "CHAPTER ONE COMPLETE // PRIMARY BIOLAB SIGNAL";
+                    canvas.dataset.chapterOne =
+                        "complete";
+                    canvas.dataset.chapterTwoHook =
+                        "primary-biolab-answer";
+                    announce(
+                        "Chapter One complete. A signal below the Primary Biolab answered the Wound-touched Vesperite."
+                    );
+                    return;
+                }
+                if (!episodeBridgeNextScene) {
+                    return;
+                }
                 if (episodeBridgeNextScene === "overworld") {
                     setAudioScene("overworld", false);
                 }
@@ -8989,6 +9382,8 @@
                 canvas.dataset.episodeTransition =
                     "rd42-atmospheric-approach";
                 showEpisodeBridge("approach", "overworld");
+                prefetchEpisodeSceneAssets("overworld");
+                scheduleOverworldCloudTextureBuild();
                 setEpisodeBridgeBeat(
                     "RD-42 // Departure burn",
                     "Veyra",
@@ -9036,6 +9431,7 @@
                 canvas.dataset.episodeTransition =
                     "foundry-to-wound-descent";
                 showEpisodeBridge("wound", "wound");
+                prefetchEpisodeSceneAssets("wound");
                 setEpisodeBridgeBeat(
                     "Uplink Gate // Checkpoint secured",
                     "Descending",
@@ -9076,11 +9472,41 @@
                 );
             }
 
+            function showChapterOneCliffhanger() {
+                state = "transition";
+                releaseAllControls();
+                document.body.classList.remove(
+                    "is-running"
+                );
+                setPauseButton(false, false);
+                showEpisodeBridge(
+                    "cliffhanger",
+                    "chapter-one-complete"
+                );
+                episodeBridgeSkip.textContent =
+                    "Return to Veyra";
+                setEpisodeBridgeBeat(
+                    "VEYRA // CHAPTER ONE COMPLETE",
+                    "THE SIGNAL ANSWERED",
+                    "Without Aryn touching the controls, something below the Primary Biolab answered the Wound-touched Vesperite.",
+                    100
+                );
+                canvas.dataset.chapterOne =
+                    "cliffhanger";
+                canvas.dataset.chapterTwoHook =
+                    "primary-biolab-answer";
+                if (activeMusicChannel) {
+                    activeMusicChannel.volume =
+                        musicVolumes[audioScene] * 0.42;
+                }
+            }
+
             function episodeSceneAssetKeys(scene) {
                 var sceneKeys = sharedAssetKeys.slice();
                 if (scene === "overworld") {
                     return sceneKeys
                         .concat(overworldAssetKeys)
+                        .concat(shipInteriorAssetKeys)
                         .concat(["creditCoin", "creditCrate"]);
                 }
                 if (scene === "wound") {
@@ -9092,13 +9518,76 @@
                     .concat(["foundryLower1"]);
             }
 
+            function episodeSceneCriticalAssetKeys(scene) {
+                var sceneKeys = sharedAssetKeys.slice();
+                if (scene === "overworld") {
+                    return sceneKeys.concat([
+                        "overworldWest",
+                        "overworld0",
+                        "overworld1",
+                        "overworld2",
+                        "ship",
+                        "shipHover",
+                        "dras",
+                        "trillianUnarmored",
+                        "coreworksTransportIdle",
+                        "arynDialoguePortrait",
+                        "drasDialoguePortrait"
+                    ]);
+                }
+                if (scene === "wound") {
+                    return sceneKeys.concat(woundBossAssetKeys);
+                }
+                return sceneKeys
+                    .concat(foundryCoreAssetKeys)
+                    .concat([
+                        "foundryLower1",
+                        "squircle",
+                        "patroller",
+                        "patrollerDeath",
+                        "creditCoin",
+                        "creditCrate",
+                        "jetpackPickup"
+                    ]);
+            }
+
+            var scenePrefetchBatches = {};
+
+            function prefetchEpisodeSceneAssets(scene) {
+                if (scenePrefetchBatches[scene]) return;
+                scenePrefetchBatches[scene] = true;
+                var keys = Array.from(
+                    new Set(episodeSceneAssetKeys(scene))
+                );
+                var batchSize = 6;
+                for (
+                    var batchStart = 0;
+                    batchStart < keys.length;
+                    batchStart += batchSize
+                ) {
+                    (function (startIndex) {
+                        window.setTimeout(function () {
+                            requestAssetKeys(
+                                keys.slice(
+                                    startIndex,
+                                    startIndex + batchSize
+                                ),
+                                "low"
+                            );
+                        }, Math.floor(startIndex / batchSize) * 280);
+                    })(batchStart);
+                }
+                canvas.dataset.prefetchScene = scene;
+            }
+
             function loadAndConfigureEpisodeScene(
                 scene,
                 historyMode,
                 sceneOptions
             ) {
+                prefetchEpisodeSceneAssets(scene);
                 loadCriticalAssets(
-                    episodeSceneAssetKeys(scene),
+                    episodeSceneCriticalAssetKeys(scene),
                     function () {
                         configureEpisodeScene(
                             scene,
@@ -9197,9 +9686,9 @@
                     : isFoundry
                         ? {
                             x: (SCREEN_COUNT - 1) * WIDTH + 1218,
-                            y: 248,
+                            y: 280,
                             width: 132,
-                            height: 312
+                            height: 320
                         }
                         : {
                             x: WOUND_BOSS_WORLD_WIDTH + 200,
@@ -9209,6 +9698,9 @@
                         };
 
                 applyEpisodePresentation(scene);
+                if (isOverworld) {
+                    scheduleOverworldCloudTextureBuild();
+                }
                 if (!fadeFromBlack) {
                     stageShell.classList.remove("is-episode-blackout");
                 }
@@ -9380,6 +9872,12 @@
                     : assets.arynDialoguePortrait.src;
             }
 
+            function activeDialogueCards() {
+                return dialogueMode === "return"
+                    ? returnDialogueCards
+                    : dialogueCards;
+            }
+
             function applyDialogueEffect(card) {
                 if (!card.effect) return;
 
@@ -9407,16 +9905,87 @@
                     playTone(205, 0.12, "square", 0.024, 0.07);
                 } else if (card.effect === "look-portal") {
                     drasLookingEast = true;
+                } else if (
+                    card.effect === "reveal-specimen"
+                ) {
+                    canvas.dataset.returnSpecimen =
+                        "revealed";
+                    spawnBurst(
+                        player.x + 30,
+                        player.y + 48,
+                        "#9b59b6",
+                        prefersReducedMotion ? 4 : 10
+                    );
+                    playTone(
+                        294,
+                        0.16,
+                        "sine",
+                        0.018
+                    );
+                } else if (
+                    card.effect === "scan-specimen"
+                ) {
+                    drasAware = true;
+                    canvas.dataset.returnSpecimenScan =
+                        "unresolved-pulse";
+                    playTone(
+                        440,
+                        0.08,
+                        "sine",
+                        0.018
+                    );
+                    playTone(
+                        294,
+                        0.14,
+                        "sine",
+                        0.016,
+                        0.09
+                    );
+                } else if (
+                    card.effect === "transport-answer"
+                ) {
+                    drasLookingEast = true;
+                    canvas.dataset.returnTransportAnswer =
+                        "violet-harmonic";
+                    spawnBurst(
+                        COREWORKS_TRANSPORT_CENTER_X,
+                        GROUND_Y - 156,
+                        "#9b59b6",
+                        prefersReducedMotion ? 6 : 18
+                    );
+                    playTone(
+                        196,
+                        0.16,
+                        "sine",
+                        0.02
+                    );
+                    playTone(
+                        392,
+                        0.24,
+                        "sine",
+                        0.018,
+                        0.1
+                    );
                 }
             }
 
             function renderDialogueCard() {
-                var card = dialogueCards[dialogueIndex];
+                var cards = activeDialogueCards();
+                var card = cards[dialogueIndex];
                 if (!card) return;
 
                 dialogueProgress.textContent =
-                    "Arrival on Veyra // " + card.id + " // " +
-                    (dialogueIndex + 1) + " of " + dialogueCards.length;
+                    (
+                        dialogueMode === "return"
+                            ? "Return to Dras"
+                            : "Arrival on Veyra"
+                    ) +
+                    " // " +
+                    card.id +
+                    " // " +
+                    (dialogueIndex + 1) +
+                    " of " +
+                    cards.length;
                 dialoguePortrait.src = dialoguePortraitSource(card);
                 dialoguePortrait.dataset.character = card.portrait;
                 dialogueSpeaker.textContent = card.speaker;
@@ -9433,8 +10002,10 @@
                 dialogueStageKicker.textContent = card.stageKicker || "";
                 dialogueStageCopy.textContent = card.stageText || "";
                 dialogueContinue.textContent =
-                    dialogueIndex === dialogueCards.length - 1
-                        ? "Return to surface"
+                    dialogueIndex === cards.length - 1
+                        ? dialogueMode === "return"
+                            ? "Close chapter"
+                            : "Return to surface"
                         : "Continue";
                 applyDialogueEffect(card);
                 announce(
@@ -9449,6 +10020,11 @@
             function startArrivalDialogue() {
                 if (!overworldPreview || dialogueActive) return;
 
+                dialogueMode =
+                    episodeSurfaceReturn &&
+                    !returnDialogueHasPlayed
+                        ? "return"
+                        : "arrival";
                 dialogueActive = true;
                 dialogueIndex = 0;
                 dialogueSkipOpen = false;
@@ -9472,8 +10048,19 @@
             function finishArrivalDialogue(skipped) {
                 if (!dialogueActive) return;
 
+                var finishedMode = dialogueMode;
                 dialogueActive = false;
-                dialogueHasPlayed = true;
+                if (finishedMode === "return") {
+                    returnDialogueHasPlayed = true;
+                    postFoundryInterlude = "briefed";
+                    primaryBiolabRoute = "identified";
+                    canvas.dataset.postFoundryInterlude =
+                        postFoundryInterlude;
+                    canvas.dataset.primaryBiolabRoute =
+                        primaryBiolabRoute;
+                } else {
+                    dialogueHasPlayed = true;
+                }
                 dialogueSkipOpen = false;
                 dialogueLayer.hidden = true;
                 dialogueSkipConfirm.hidden = true;
@@ -9481,7 +10068,28 @@
                 state = "running";
                 document.body.classList.add("is-running");
                 setPauseButton(false, true);
+                if (finishedMode === "return") {
+                    document.querySelector(
+                        ".mission span"
+                    ).textContent =
+                        "WOUND SPECIMEN // PRIMARY BIOLAB SIGNAL";
+                    stageShell.setAttribute(
+                        "tabindex",
+                        "-1"
+                    );
+                    stageShell.focus({
+                        preventScroll: true
+                    });
+                    announce(
+                        skipped
+                            ? "Return report skipped. The Wound specimen has identified a signal below the Primary Biolab."
+                            : "Return report complete. Something below the Primary Biolab answered the Wound-touched Vesperite."
+                    );
+                    showChapterOneCliffhanger();
+                    return;
+                }
                 portalIgniting = true;
+                prefetchEpisodeSceneAssets("foundry");
                 updateEpisodeArrivalTutorialMission();
                 player.facing = 1;
                 stageShell.setAttribute("tabindex", "-1");
@@ -9490,8 +10098,8 @@
                 playTone(484, 0.16, "square", 0.024, 0.08);
                 announce(
                     skipped
-                        ? "First contact skipped. Complete field calibration, then board the Coreworks transport."
-                        : "First contact complete. Complete field calibration while the Coreworks transport powers up."
+                        ? "First contact skipped. Board the Coreworks transport when it finishes charging."
+                        : "First contact complete. The Coreworks transport is powering up."
                 );
             }
 
@@ -9499,7 +10107,10 @@
                 if (!dialogueActive || dialogueSkipOpen) return;
 
                 playSoundEffect("deepSelect", 0.58);
-                if (dialogueIndex >= dialogueCards.length - 1) {
+                if (
+                    dialogueIndex >=
+                    activeDialogueCards().length - 1
+                ) {
                     finishArrivalDialogue(false);
                     return;
                 }
@@ -10161,7 +10772,19 @@
                     if (activateNearbyOverworldAssignment()) {
                         return true;
                     }
-                    if (dialogueHasPlayed && isPlayerNearDras()) {
+                    if (
+                        episodeSurfaceReturn &&
+                        !returnDialogueHasPlayed &&
+                        isPlayerNearDras()
+                    ) {
+                        startArrivalDialogue();
+                        return true;
+                    }
+                    if (
+                        !episodeSurfaceReturn &&
+                        !dialogueHasPlayed &&
+                        isPlayerNearDras()
+                    ) {
                         startArrivalDialogue();
                         return true;
                     }
@@ -10457,8 +11080,10 @@
                 canvas.dataset.assignmentsTotal =
                     String(overworldAssignments.length);
                 canvas.dataset.assignmentsOptional =
+                    "false";
+                canvas.dataset.assignmentsRemoved =
                     "true";
-                canvas.dataset.signalSweep = "locked";
+                canvas.dataset.signalSweep = "removed";
                 canvas.dataset.lastOverworldAssignment = "none";
             }
 
@@ -10477,16 +11102,16 @@
                             platform.x + platform.width
                     );
                 }) || null;
-                trillian.joined = false;
+                trillian.joined = true;
                 trillian.armored = false;
-                trillian.state = "waiting";
+                trillian.state = "follow";
                 trillian.stateElapsed = 0;
                 trillian.animationTime = 0;
                 trillian.launchApplied = false;
                 trillian.breachAssignment = null;
                 canvas.dataset.trillianName = trillian.name;
                 canvas.dataset.trillianState = trillian.state;
-                canvas.dataset.trillianJoined = "false";
+                canvas.dataset.trillianJoined = "true";
                 canvas.dataset.trillianArmored = "false";
                 canvas.dataset.trillianHostile = "false";
                 canvas.dataset.trillianSolid = "false";
@@ -10766,8 +11391,8 @@
                             trillian.onGround = false;
                             trillian.supportPlatform = null;
                             trillian.vy = -950;
-                            trillian.vx =
-                                Math.sign(distanceToPlayer || 1) * 92;
+                        trillian.vx =
+                            Math.sign(distanceToPlayer || 1) * 360;
                             spawnDust(
                                 trillian.x,
                                 trillian.y,
@@ -10789,13 +11414,17 @@
                     } else {
                         var targetDistance =
                             desiredX - trillian.x;
+                        var followSpeed =
+                            Math.abs(targetDistance) > 220
+                                ? TRILLIAN_CATCHUP_SPEED
+                                : TRILLIAN_FOLLOW_SPEED;
                         var targetVelocity =
-                            Math.abs(targetDistance) > 24
+                            Math.abs(targetDistance) > 18
                                 ? Math.sign(targetDistance) *
-                                    TRILLIAN_FOLLOW_SPEED
+                                    followSpeed
                                 : 0;
                         var velocityStep =
-                            (targetVelocity === 0 ? 260 : 210) *
+                            (targetVelocity === 0 ? 620 : 760) *
                             delta;
                         if (
                             Math.abs(
@@ -11018,7 +11647,7 @@
                 var playerDistance = Math.abs(playerCenterX - campDog.x);
 
                 if (!dialogueHasPlayed) {
-                    var campMinimumX = DRAS_WORLD_X + 110;
+                    var campMinimumX = DRAS_HOME_X + 110;
                     var campMaximumX = DOG_WORLD_X + 320;
                     if (
                         campDog.x < campMinimumX - 24 ||
@@ -11517,18 +12146,11 @@
                     rifleDrawTime === 0 &&
                     rifleFireTime === 0
                 ) {
-                    if (woundBossRifleHoldActive()) {
-                        rifleIdleStowTime =
-                            RIFLE_IDLE_STOW_DELAY;
-                    } else {
-                        rifleIdleStowTime = Math.max(
-                            0,
-                            rifleIdleStowTime - delta
-                        );
-                        if (rifleIdleStowTime === 0) {
-                            stowRifle();
-                        }
-                    }
+                    // Once drawn by the first shot, the rifle remains
+                    // shouldered until the player explicitly changes modes
+                    // or leaves the scene.
+                    rifleIdleStowTime =
+                        RIFLE_IDLE_STOW_DELAY;
                 }
                 jetpackPoseTime = Math.max(0, jetpackPoseTime - delta);
                 if (platformDropTimer === 0) {
@@ -11766,7 +12388,19 @@
                 }
 
                 runFrameTime += delta * (Math.abs(player.vx) / maxSpeed);
-                if (overworldPreview && !dialogueHasPlayed) {
+                if (
+                    overworldPreview &&
+                    (
+                        (
+                            !episodeSurfaceReturn &&
+                            !dialogueHasPlayed
+                        ) ||
+                        (
+                            episodeSurfaceReturn &&
+                            !returnDialogueHasPlayed
+                        )
+                    )
+                ) {
                     if (isPlayerNearDras() && player.onGround) {
                         player.vx *= Math.max(0, 1 - delta * 12);
                         firstContactSettle += delta;
@@ -12416,16 +13050,20 @@
                 }
 
                 var message =
-                    objective +
-                    " // R " +
+                    objective;
+                document.querySelector(".mission span").textContent = message;
+                relayProgress.textContent =
                     stabilizersOnline() +
                     "/" +
-                    atmosphericStabilizers.length +
-                    " // S " +
+                    atmosphericStabilizers.length;
+                signalProgress.textContent =
                     collected +
                     "/" +
                     TOTAL_SHARDS;
-                document.querySelector(".mission span").textContent = message;
+                canvas.dataset.foundryRelayProgress =
+                    relayProgress.textContent;
+                canvas.dataset.foundrySignalProgress =
+                    signalProgress.textContent;
             }
 
             function updateEpisodeArrivalTutorialMission() {
@@ -16194,19 +16832,23 @@
                 }
                 ctx.save();
                 ctx.translate(caseX, caseY);
-                ctx.fillStyle = "#10162b";
+                ctx.fillStyle = "#1b365d";
                 ctx.fillRect(0, 0, 76, 48);
                 ctx.strokeStyle =
                     shipServiceKitState === "available" ||
                     shipServiceKitState === "recovering"
-                        ? "#ffd36c"
-                        : "#73829a";
+                        ? "#a0bef5"
+                        : "#91afb3";
                 ctx.lineWidth = 4;
                 ctx.strokeRect(0, 0, 76, 48);
-                ctx.fillStyle = "#58f5df";
-                ctx.fillRect(31, 17, 14, 8);
-                ctx.fillStyle = "#03050d";
+                ctx.fillStyle = "#6395ee";
+                ctx.fillRect(8, 8, 60, 5);
+                ctx.fillStyle = "#eeeeee";
+                ctx.fillRect(31, 20, 14, 8);
+                ctx.fillStyle = "#3d5255";
                 ctx.fillRect(24, -7, 28, 7);
+                ctx.fillStyle = "#0a0a0a";
+                ctx.fillRect(28, -4, 20, 4);
                 ctx.restore();
             }
 
@@ -16358,7 +17000,142 @@
                 ctx.restore();
             }
 
+            function drawShipInteriorProductionArt() {
+                if (!imageHasPixels(assets.shipInteriorRear)) {
+                    canvas.dataset.shipArt = "fallback-greybox";
+                    return false;
+                }
+
+                canvas.dataset.shipArt = "production-v1";
+                ctx.fillStyle = "#0a0a0a";
+                ctx.fillRect(0, 0, viewWidth, HEIGHT);
+
+                ctx.save();
+                ctx.translate(-Math.round(cameraX), 0);
+                ctx.drawImage(
+                    assets.shipInteriorRear,
+                    0,
+                    0,
+                    WIDTH,
+                    HEIGHT
+                );
+
+                if (shipSpecimenActive) {
+                    var specimenPulse =
+                        0.34 +
+                        Math.sin(elapsed * 4.8) * 0.12;
+                    ctx.save();
+                    ctx.globalCompositeOperation = "screen";
+                    ctx.globalAlpha = specimenPulse;
+                    ctx.fillStyle = "#6395ee";
+                    ctx.fillRect(183, 623, 64, 4);
+                    ctx.fillRect(992, 590, 58, 4);
+                    ctx.fillStyle = "#a0bef5";
+                    ctx.fillRect(256, 623, 22, 4);
+                    ctx.fillRect(1058, 590, 24, 4);
+                    ctx.restore();
+                }
+
+                var hatchOpen =
+                    shipInteriorHatchProgress();
+                ctx.fillStyle = "#0a0a0a";
+                ctx.fillRect(622, 218, 124, 56);
+                ctx.fillStyle = "#a0bef5";
+                ctx.fillRect(
+                    622,
+                    222,
+                    62 * (1 - hatchOpen),
+                    42
+                );
+                ctx.fillRect(
+                    684 + 62 * hatchOpen,
+                    222,
+                    62 * (1 - hatchOpen),
+                    42
+                );
+                ctx.strokeStyle = "#1b365d";
+                ctx.lineWidth = 4;
+                ctx.strokeRect(622, 218, 124, 56);
+                ctx.strokeStyle = "#6395ee";
+                ctx.lineWidth = 2;
+                ctx.strokeRect(626, 222, 116, 48);
+
+                if (
+                    shipTrillianPreview &&
+                    imageHasPixels(assets.trillianUnarmored)
+                ) {
+                    ctx.save();
+                    ctx.globalAlpha = 0.22;
+                    ctx.fillStyle = "#1b365d";
+                    ctx.beginPath();
+                    ctx.ellipse(
+                        919,
+                        704,
+                        38,
+                        6,
+                        0,
+                        0,
+                        Math.PI * 2
+                    );
+                    ctx.fill();
+                    ctx.globalAlpha = 1;
+                    ctx.drawImage(
+                        assets.trillianUnarmored,
+                        0,
+                        0,
+                        TRILLIAN_FRAME_WIDTH,
+                        TRILLIAN_FRAME_HEIGHT,
+                        919 -
+                            TRILLIAN_DRAW_WIDTH / 2,
+                        704 -
+                            TRILLIAN_DRAW_HEIGHT,
+                        TRILLIAN_DRAW_WIDTH,
+                        TRILLIAN_DRAW_HEIGHT
+                    );
+                    ctx.restore();
+                    canvas.dataset.trillianAnimation =
+                        "ship-berth";
+                    canvas.dataset.trillianFrame = "0";
+                }
+
+                drawShipServiceKitCase();
+                drawParticles();
+                if (state === "ship-suit") {
+                    drawShipSuitChange();
+                } else if (shipSuitState === "flight-suit") {
+                    drawShipFlightSuitPlayer();
+                } else {
+                    canvas.dataset.shipSuitFrame = "";
+                    drawPlayer();
+                }
+
+                if (
+                    shipTransitionMode === "interior-enter" ||
+                    shipTransitionMode === "interior-exit"
+                ) {
+                    ctx.fillStyle = "#1b365d";
+                    ctx.fillRect(612, 266, 144, 18);
+                    ctx.fillStyle = "#a0bef5";
+                    ctx.fillRect(622, 270, 124, 4);
+                }
+
+                drawPopups();
+                var prompt = currentShipInteriorPrompt();
+                if (prompt) {
+                    drawShipInteractionPrompt(
+                        prompt.text,
+                        prompt.x,
+                        prompt.y
+                    );
+                }
+                ctx.restore();
+                return true;
+            }
+
             function drawShipInteriorGreybox() {
+                if (drawShipInteriorProductionArt()) {
+                    return;
+                }
                 var shellGradient = ctx.createLinearGradient(
                     0,
                     0,
@@ -16798,7 +17575,7 @@
                     "center"
                 );
                 drawShipGreyboxLabel(
-                    "DESIGN GREYBOX // NOT FINAL ART",
+                    "PRODUCTION ART LOAD FAILURE // FALLBACK",
                     836,
                     168,
                     "#73829a",
@@ -17196,6 +17973,307 @@
                 return ((value % span) + span) % span - margin;
             }
 
+            var overworldWispyCloudTexture = null;
+            var overworldStormCloudTexture = null;
+            var overworldCloudTextureBuildScheduled = false;
+
+            function cloudNoiseHash(x, y, seed) {
+                var value =
+                    Math.imul(x + seed * 31, 374761393) +
+                    Math.imul(y + seed * 17, 668265263);
+                value = Math.imul(
+                    value ^ (value >>> 13),
+                    1274126177
+                );
+                return (
+                    (value ^ (value >>> 16)) >>> 0
+                ) / 4294967295;
+            }
+
+            function buildCloudNoiseGrid(
+                cellsX,
+                cellsY,
+                seed
+            ) {
+                var grid = [];
+                for (
+                    var gridY = 0;
+                    gridY <= cellsY;
+                    gridY += 1
+                ) {
+                    var row = [];
+                    for (
+                        var gridX = 0;
+                        gridX <= cellsX;
+                        gridX += 1
+                    ) {
+                        row.push(
+                            cloudNoiseHash(
+                                gridX % cellsX,
+                                gridY,
+                                seed
+                            )
+                        );
+                    }
+                    grid.push(row);
+                }
+                return {
+                    cellsX: cellsX,
+                    cellsY: cellsY,
+                    values: grid
+                };
+            }
+
+            function smoothCloudUnit(value) {
+                return value * value * (3 - 2 * value);
+            }
+
+            function sampleCloudNoise(grid, unitX, unitY) {
+                var scaledX = unitX * grid.cellsX;
+                var scaledY = unitY * grid.cellsY;
+                var cellX = Math.min(
+                    grid.cellsX - 1,
+                    Math.floor(scaledX)
+                );
+                var cellY = Math.min(
+                    grid.cellsY - 1,
+                    Math.floor(scaledY)
+                );
+                var blendX = smoothCloudUnit(
+                    scaledX - cellX
+                );
+                var blendY = smoothCloudUnit(
+                    scaledY - cellY
+                );
+                var top =
+                    grid.values[cellY][cellX] *
+                        (1 - blendX) +
+                    grid.values[cellY][cellX + 1] *
+                        blendX;
+                var bottom =
+                    grid.values[cellY + 1][cellX] *
+                        (1 - blendX) +
+                    grid.values[cellY + 1][cellX + 1] *
+                        blendX;
+                return top * (1 - blendY) + bottom * blendY;
+            }
+
+            function clampCloudUnit(value) {
+                return Math.max(0, Math.min(1, value));
+            }
+
+            function buildOverworldCloudTextures() {
+                if (
+                    overworldWispyCloudTexture &&
+                    overworldStormCloudTexture
+                ) {
+                    return;
+                }
+
+                var textureWidth = 512;
+                var textureHeight = 192;
+                var wispyCanvas =
+                    document.createElement("canvas");
+                var stormCanvas =
+                    document.createElement("canvas");
+                wispyCanvas.width = textureWidth;
+                wispyCanvas.height = textureHeight;
+                stormCanvas.width = textureWidth;
+                stormCanvas.height = textureHeight;
+                var wispyContext =
+                    wispyCanvas.getContext("2d");
+                var stormContext =
+                    stormCanvas.getContext("2d");
+                var wispyPixels =
+                    wispyContext.createImageData(
+                        textureWidth,
+                        textureHeight
+                    );
+                var stormPixels =
+                    stormContext.createImageData(
+                        textureWidth,
+                        textureHeight
+                    );
+                var noiseLayers = [
+                    {
+                        grid: buildCloudNoiseGrid(
+                            6,
+                            9,
+                            11
+                        ),
+                        weight: 0.54
+                    },
+                    {
+                        grid: buildCloudNoiseGrid(
+                            12,
+                            18,
+                            23
+                        ),
+                        weight: 0.29
+                    },
+                    {
+                        grid: buildCloudNoiseGrid(
+                            24,
+                            36,
+                            47
+                        ),
+                        weight: 0.17
+                    }
+                ];
+
+                for (
+                    var cloudY = 0;
+                    cloudY < textureHeight;
+                    cloudY += 1
+                ) {
+                    var unitY =
+                        cloudY / (textureHeight - 1);
+                    var verticalFade =
+                        Math.pow(
+                            Math.sin(Math.PI * unitY),
+                            0.72
+                        );
+                    for (
+                        var cloudX = 0;
+                        cloudX < textureWidth;
+                        cloudX += 1
+                    ) {
+                        var unitX =
+                            cloudX / textureWidth;
+                        var noise = 0;
+                        noiseLayers.forEach(function (layer) {
+                            noise +=
+                                sampleCloudNoise(
+                                    layer.grid,
+                                    unitX,
+                                    unitY
+                                ) *
+                                layer.weight;
+                        });
+                        var streak =
+                            0.5 +
+                            0.5 *
+                                Math.sin(
+                                    unitX * Math.PI * 10 +
+                                    noise * 4.6
+                                );
+                        var wispyDensity =
+                            clampCloudUnit(
+                                (
+                                    noise -
+                                    0.49 +
+                                    streak * 0.055
+                                ) *
+                                    4.4
+                            ) *
+                            verticalFade;
+                        var stormDensity =
+                            clampCloudUnit(
+                                (noise - 0.39) * 2.75
+                            ) *
+                            verticalFade *
+                            (0.72 + unitY * 0.28);
+                        var pixelIndex =
+                            (cloudY * textureWidth + cloudX) *
+                            4;
+
+                        wispyPixels.data[pixelIndex] = 244;
+                        wispyPixels.data[pixelIndex + 1] =
+                            224;
+                        wispyPixels.data[pixelIndex + 2] =
+                            232;
+                        wispyPixels.data[pixelIndex + 3] =
+                            Math.round(wispyDensity * 126);
+
+                        stormPixels.data[pixelIndex] = 64;
+                        stormPixels.data[pixelIndex + 1] =
+                            43;
+                        stormPixels.data[pixelIndex + 2] =
+                            82;
+                        stormPixels.data[pixelIndex + 3] =
+                            Math.round(stormDensity * 112);
+                    }
+                }
+
+                wispyContext.putImageData(
+                    wispyPixels,
+                    0,
+                    0
+                );
+                stormContext.putImageData(
+                    stormPixels,
+                    0,
+                    0
+                );
+                overworldWispyCloudTexture =
+                    wispyCanvas;
+                overworldStormCloudTexture =
+                    stormCanvas;
+                canvas.dataset.overworldCloudRenderer =
+                    "procedural-fbm-v1";
+                canvas.dataset.overworldCloudSprites =
+                    "false";
+            }
+
+            function scheduleOverworldCloudTextureBuild() {
+                if (
+                    overworldCloudTextureBuildScheduled ||
+                    (
+                        overworldWispyCloudTexture &&
+                        overworldStormCloudTexture
+                    )
+                ) {
+                    return;
+                }
+                overworldCloudTextureBuildScheduled = true;
+                window.setTimeout(function () {
+                    buildOverworldCloudTextures();
+                    overworldCloudTextureBuildScheduled =
+                        false;
+                    renderRequested = true;
+                }, 0);
+            }
+
+            function drawWrappedCloudTexture(
+                texture,
+                now,
+                y,
+                drawWidth,
+                drawHeight,
+                speed,
+                parallax,
+                opacity,
+                compositeOperation
+            ) {
+                if (!texture) return;
+                var offset =
+                    (
+                        now * speed -
+                        cameraX * parallax
+                    ) %
+                    drawWidth;
+                if (offset < 0) offset += drawWidth;
+                ctx.save();
+                ctx.globalAlpha = opacity;
+                ctx.globalCompositeOperation =
+                    compositeOperation;
+                ctx.imageSmoothingEnabled = true;
+                for (
+                    var textureX = -offset - drawWidth;
+                    textureX < viewWidth + drawWidth;
+                    textureX += drawWidth
+                ) {
+                    ctx.drawImage(
+                        texture,
+                        Math.round(textureX),
+                        y,
+                        drawWidth,
+                        drawHeight
+                    );
+                }
+                ctx.restore();
+            }
+
             function drawCloudVolume(x, y, scale, variant, opacity) {
                 var puffSets = [
                     [
@@ -17412,8 +18490,52 @@
                 drawOverworldHawk(now);
             }
 
+            function overworldSkyProgression() {
+                var reviewStates = {
+                    arrival: {
+                        state: "atmosphere-suppressed",
+                        restoration: 0
+                    },
+                    "relay-one": {
+                        state: "first-relay-rising",
+                        restoration: 0.34
+                    },
+                    stabilized: {
+                        state: "stabilizers-restored",
+                        restoration: 0.68
+                    },
+                    cleared: {
+                        state: "infestation-receding",
+                        restoration: 0.86
+                    }
+                };
+                if (reviewStates[requestedOverworldSkyState]) {
+                    return reviewStates[requestedOverworldSkyState];
+                }
+                if (episodeSurfaceReturn) {
+                    return returnDialogueHasPlayed
+                        ? {
+                            state: "signal-remnant",
+                            restoration: 0.86
+                        }
+                        : {
+                            state: "infestation-receding",
+                            restoration: 0.76
+                        };
+                }
+                return reviewStates.arrival;
+            }
+
             function drawOverworldAtmosphere() {
                 var now = prefersReducedMotion ? 0 : performance.now() / 1000;
+                var skyProgress = overworldSkyProgression();
+                var restoration = skyProgress.restoration;
+                var infestationPressure =
+                    1 - restoration * 0.58;
+                var stormOpacity =
+                    0.32 - restoration * 0.18;
+                var wispyOpacity =
+                    0.44 - restoration * 0.08;
                 var cloudLayers = [
                     {
                         count: 3,
@@ -17451,33 +18573,157 @@
                 ];
 
                 ctx.save();
-                cloudLayers.forEach(function (layer, layerIndex) {
-                    for (
-                        var cloudIndex = 0;
-                        cloudIndex < layer.count;
-                        cloudIndex += 1
+                canvas.dataset.overworldSkyState =
+                    skyProgress.state;
+                canvas.dataset.overworldSkyRestoration =
+                    restoration.toFixed(2);
+                canvas.dataset.overworldInfestationPressure =
+                    infestationPressure.toFixed(2);
+                canvas.dataset.overworldStormOpacity =
+                    stormOpacity.toFixed(2);
+
+                if (restoration < 1) {
+                    ctx.save();
+                    ctx.globalCompositeOperation = "multiply";
+                    ctx.globalAlpha =
+                        0.075 * (1 - restoration);
+                    ctx.fillStyle = "#25152f";
+                    ctx.fillRect(0, 0, viewWidth, HEIGHT);
+                    ctx.restore();
+                }
+
+                if (
+                    overworldWispyCloudTexture &&
+                    overworldStormCloudTexture
+                ) {
+                    drawWrappedCloudTexture(
+                        overworldWispyCloudTexture,
+                        now,
+                        -12,
+                        1120,
+                        286,
+                        4.2,
+                        0.035,
+                        wispyOpacity,
+                        "screen"
+                    );
+                    drawWrappedCloudTexture(
+                        overworldStormCloudTexture,
+                        now,
+                        118 - restoration * 24,
+                        1320,
+                        382,
+                        2.1,
+                        0.07,
+                        stormOpacity,
+                        "multiply"
+                    );
+                } else {
+                    scheduleOverworldCloudTextureBuild();
+                    cloudLayers.forEach(function (
+                        layer,
+                        layerIndex
                     ) {
-                        var cloudX = wrapAtmosphereX(
-                            cloudIndex * layer.spacing +
-                                now * layer.speed -
-                                cameraX * layer.parallax +
-                                layerIndex * 271,
-                            layer.span,
-                            layer.margin
+                        for (
+                            var cloudIndex = 0;
+                            cloudIndex < layer.count;
+                            cloudIndex += 1
+                        ) {
+                            var cloudX = wrapAtmosphereX(
+                                cloudIndex *
+                                    layer.spacing +
+                                    now * layer.speed -
+                                    cameraX *
+                                        layer.parallax +
+                                    layerIndex * 271,
+                                layer.span,
+                                layer.margin
+                            );
+                            var cloudY =
+                                layer.y +
+                                cloudIndex * 29 +
+                                Math.sin(
+                                    now * 0.12 +
+                                    cloudIndex * 1.7
+                                ) *
+                                    4;
+                            drawCloudVolume(
+                                cloudX,
+                                cloudY,
+                                layer.scale,
+                                cloudIndex + layerIndex,
+                                layer.opacity *
+                                    (1 - restoration * 0.36)
+                            );
+                        }
+                    });
+                }
+
+                if (restoration > 0) {
+                    ctx.save();
+                    ctx.globalCompositeOperation = "screen";
+                    ctx.globalAlpha = 0.1 * restoration;
+                    var clearingLight =
+                        ctx.createLinearGradient(0, 120, 0, 690);
+                    clearingLight.addColorStop(
+                        0,
+                        "rgba(160, 122, 178, 0)"
+                    );
+                    clearingLight.addColorStop(
+                        0.58,
+                        "rgba(236, 150, 133, 0.34)"
+                    );
+                    clearingLight.addColorStop(
+                        1,
+                        "rgba(255, 194, 137, 0)"
+                    );
+                    ctx.fillStyle = clearingLight;
+                    ctx.fillRect(0, 80, viewWidth, 650);
+                    ctx.restore();
+                }
+
+                var remnantX =
+                    COREWORKS_TRANSPORT_CENTER_X -
+                    cameraX -
+                    184;
+                if (
+                    remnantX > -520 &&
+                    remnantX < viewWidth + 520
+                ) {
+                    ctx.save();
+                    ctx.globalCompositeOperation = "multiply";
+                    ctx.globalAlpha =
+                        0.08 + infestationPressure * 0.08;
+                    var infestationRemnant =
+                        ctx.createRadialGradient(
+                            remnantX,
+                            248,
+                            18,
+                            remnantX,
+                            248,
+                            430
                         );
-                        var cloudY =
-                            layer.y +
-                            cloudIndex * 29 +
-                            Math.sin(now * 0.12 + cloudIndex * 1.7) * 4;
-                        drawCloudVolume(
-                            cloudX,
-                            cloudY,
-                            layer.scale,
-                            cloudIndex + layerIndex,
-                            layer.opacity
-                        );
-                    }
-                });
+                    infestationRemnant.addColorStop(
+                        0,
+                        "rgba(63, 30, 91, 0.62)"
+                    );
+                    infestationRemnant.addColorStop(
+                        0.42,
+                        "rgba(49, 30, 75, 0.24)"
+                    );
+                    infestationRemnant.addColorStop(
+                        1,
+                        "rgba(33, 22, 54, 0)"
+                    );
+                    ctx.fillStyle = infestationRemnant;
+                    ctx.fillRect(
+                        remnantX - 430,
+                        0,
+                        860,
+                        620
+                    );
+                    ctx.restore();
+                }
 
                 drawOverworldBirds(now);
 
@@ -17672,14 +18918,51 @@
                     sealed ? 0 : idleFrame,
                     6,
                     sealed
-                        ? 0.2
+                        ? 0.72
                         : 0.54 + portalCharge * 0.46
                 );
 
                 if (!coreworksTransportActive) {
                     if (sealed) {
+                        ctx.save();
+                        ctx.fillStyle =
+                            "rgba(3, 5, 13, 0.82)";
+                        ctx.fillRect(
+                            COREWORKS_TRANSPORT_CENTER_X -
+                                108,
+                            GROUND_Y -
+                                COREWORKS_TRANSPORT_DRAW_HEIGHT -
+                                26,
+                            216,
+                            26
+                        );
+                        ctx.strokeStyle = "#73829a";
+                        ctx.lineWidth = 2;
+                        ctx.strokeRect(
+                            COREWORKS_TRANSPORT_CENTER_X -
+                                108,
+                            GROUND_Y -
+                                COREWORKS_TRANSPORT_DRAW_HEIGHT -
+                                26,
+                            216,
+                            26
+                        );
+                        ctx.font =
+                            "700 12px Fira Code, monospace";
+                        ctx.textAlign = "center";
+                        ctx.fillStyle = "#a0bec1";
+                        ctx.fillText(
+                            "TRANSPORT OFFLINE",
+                            COREWORKS_TRANSPORT_CENTER_X,
+                            GROUND_Y -
+                                COREWORKS_TRANSPORT_DRAW_HEIGHT -
+                                9
+                        );
+                        ctx.restore();
                         canvas.dataset.coreworksTransport =
                             "sealed-after-return";
+                        canvas.dataset.coreworksTransportVisible =
+                            "true";
                     } else {
                         canvas.dataset.coreworksTransport =
                             overworldTransitionReady
@@ -17970,9 +19253,9 @@
                 ctx.beginPath();
                 ctx.ellipse(
                     trillian.x,
-                    trillian.y + 3,
-                    34,
-                    5,
+                    trillian.y + 2,
+                    17,
+                    3,
                     0,
                     0,
                     Math.PI * 2
@@ -18448,19 +19731,24 @@
 
                 drawCoreworksTransport();
 
-                if (dialogueHasPlayed && isPlayerNearDras() && !dialogueActive) {
+                if (
+                    episodeSurfaceReturn &&
+                    !returnDialogueHasPlayed &&
+                    isPlayerNearDras() &&
+                    !dialogueActive
+                ) {
                     ctx.save();
                     ctx.font = "700 16px Fira Code, monospace";
                     ctx.textAlign = "center";
                     ctx.fillStyle = "#03050d";
                     ctx.fillText(
-                        "↓ TALK",
+                        "↓ REPORT",
                         DRAS_WORLD_X + 50,
                         DRAS_DRAW_Y - 36
                     );
                     ctx.fillStyle = "#ffd36c";
                     ctx.fillText(
-                        "↓ TALK",
+                        "↓ REPORT",
                         DRAS_WORLD_X + 48,
                         DRAS_DRAW_Y - 38
                     );
@@ -20311,55 +21599,47 @@
                             }
                         }
                     } else if (active && hazard.kind === "arc") {
-                        ctx.globalCompositeOperation = "screen";
-                        ctx.lineJoin = "miter";
-                        ctx.strokeStyle = "#b9fff5";
-                        ctx.shadowColor = "#58d8e8";
-                        ctx.shadowBlur = 9;
-                        for (
-                            var arcIndex = 0;
-                            arcIndex < 3;
-                            arcIndex += 1
-                        ) {
-                            var arcBaseY =
-                                hazard.y -
-                                25 -
-                                arcIndex * 25;
+                        var discharge =
+                            assets.foundryArcDischarge;
+                        if (imageHasPixels(discharge)) {
+                            var dischargeBeat =
+                                Math.floor(elapsed * 18) % 4;
+                            var dischargeWidth =
+                                dischargeBeat % 2 === 0
+                                    ? 188
+                                    : 182;
+                            var dischargeHeight =
+                                dischargeBeat === 1
+                                    ? 56
+                                    : 54;
+                            ctx.globalCompositeOperation =
+                                "screen";
                             ctx.globalAlpha =
-                                0.78 -
-                                arcIndex * 0.16;
-                            ctx.lineWidth =
-                                arcIndex === 0 ? 4 : 3;
-                            ctx.beginPath();
-                            for (
-                                var arcStep = 0;
-                                arcStep <= 8;
-                                arcStep += 1
-                            ) {
-                                var arcX =
+                                dischargeBeat === 3
+                                    ? 0.78
+                                    : 0.96;
+                            ctx.shadowColor = "#58d8e8";
+                            ctx.shadowBlur = 3;
+                            ctx.drawImage(
+                                discharge,
+                                Math.round(
                                     hazard.x +
-                                    52 +
-                                    arcStep / 8 *
-                                        (hazard.width - 104);
-                                var arcY =
-                                    arcBaseY -
+                                    hazard.width * 0.5 -
+                                    dischargeWidth * 0.5
+                                ),
+                                Math.round(
+                                    hazard.y -
+                                    drawHeight +
+                                    4 +
                                     (
-                                        (arcStep +
-                                            arcIndex +
-                                            Math.floor(
-                                                elapsed * 18
-                                            )) %
-                                        2
-                                            ? 11
-                                            : -7
-                                    );
-                                if (arcStep === 0) {
-                                    ctx.moveTo(arcX, arcY);
-                                } else {
-                                    ctx.lineTo(arcX, arcY);
-                                }
-                            }
-                            ctx.stroke();
+                                        dischargeBeat === 2
+                                            ? 2
+                                            : 0
+                                    )
+                                ),
+                                dischargeWidth,
+                                dischargeHeight
+                            );
                         }
                     }
                     ctx.restore();
@@ -20791,27 +22071,51 @@
                 var color = enemyColor(enemy.type);
 
                 ctx.save();
-                ctx.globalAlpha = spec.ground ? 0.22 : 0.14;
-                ctx.fillStyle = color;
-                ctx.beginPath();
-                ctx.ellipse(
-                    centerX,
-                    spec.ceiling
-                        ? enemy.ceilingY - 3
-                        : spec.ground
-                        ? enemy.floorY + 4
-                        : centerY,
-                    spec.ground || spec.ceiling
-                        ? spec.drawWidth * 0.3
-                        : spec.drawWidth * 0.43,
-                    spec.ground || spec.ceiling
-                        ? 5
-                        : spec.drawHeight * 0.34,
-                    0,
-                    0,
-                    Math.PI * 2
-                );
-                ctx.fill();
+                if (spec.ceiling) {
+                    ctx.globalAlpha = 0.72;
+                    ctx.fillStyle = "#080c17";
+                    ctx.fillRect(
+                        centerX - 34,
+                        enemy.ceilingY - 3,
+                        68,
+                        6
+                    );
+                    ctx.fillStyle = "#46536d";
+                    ctx.fillRect(
+                        centerX - 25,
+                        enemy.ceilingY,
+                        8,
+                        5
+                    );
+                    ctx.fillRect(
+                        centerX + 17,
+                        enemy.ceilingY,
+                        8,
+                        5
+                    );
+                    canvas.dataset.seamLurkerAnchor =
+                        "uplink-catwalk-underside-y362";
+                } else {
+                    ctx.globalAlpha = spec.ground ? 0.22 : 0.14;
+                    ctx.fillStyle = color;
+                    ctx.beginPath();
+                    ctx.ellipse(
+                        centerX,
+                        spec.ground
+                            ? enemy.floorY + 4
+                            : centerY,
+                        spec.ground
+                            ? spec.drawWidth * 0.3
+                            : spec.drawWidth * 0.43,
+                        spec.ground
+                            ? 5
+                            : spec.drawHeight * 0.34,
+                        0,
+                        0,
+                        Math.PI * 2
+                    );
+                    ctx.fill();
+                }
                 ctx.restore();
 
                 ctx.save();
@@ -22067,78 +23371,173 @@
                 var pulse = 0.62 + Math.sin(elapsed * 6.4) * 0.2;
                 var roomStart = Math.floor(uplink.x / WIDTH) * WIDTH;
                 var portalX = roomStart + 1284;
-                var portalY = 408;
-                var portalColor = active ? "#4be36e" : "#b26898";
+                var gateWidth = 444;
+                var gateHeight = 376;
+                var gateBottom = 600;
+                var gateX = portalX - gateWidth / 2;
+                var gateY = gateBottom - gateHeight;
+                var apertureX = portalX - 72;
+                var apertureY = gateY + 96;
+                var apertureWidth = 144;
+                var apertureHeight = 244;
 
                 ctx.save();
-                ctx.translate(portalX, portalY);
-                ctx.globalCompositeOperation = "screen";
+                ctx.imageSmoothingEnabled = false;
 
-                var coreGlow = ctx.createRadialGradient(0, 0, 10, 0, 0, 122);
-                coreGlow.addColorStop(0, active ? "rgba(226, 255, 231, 0.82)" : "rgba(178, 104, 152, 0.08)");
-                coreGlow.addColorStop(0.28, active ? "rgba(75, 227, 110, 0.46)" : "rgba(111, 54, 94, 0.12)");
-                coreGlow.addColorStop(0.72, active ? "rgba(88, 245, 223, 0.2)" : "rgba(88, 245, 223, 0.03)");
-                coreGlow.addColorStop(1, "rgba(0, 0, 0, 0)");
-                ctx.globalAlpha = active ? pulse : 0.52;
-                ctx.fillStyle = coreGlow;
-                ctx.beginPath();
-                ctx.arc(0, 0, 122, 0, Math.PI * 2);
-                ctx.fill();
-
-                ctx.globalAlpha = active ? 0.7 : 0.22;
-                ctx.strokeStyle = portalColor;
-                ctx.lineWidth = 7;
-                ctx.setLineDash([22, 13]);
-                ctx.lineDashOffset = active ? -elapsed * 46 : 0;
-                ctx.beginPath();
-                ctx.arc(0, 0, 135, 0, Math.PI * 2);
-                ctx.stroke();
-
-                ctx.globalAlpha = active ? 0.52 : 0.14;
-                ctx.strokeStyle = active ? "#58f5df" : "#6f365e";
-                ctx.lineWidth = 4;
-                ctx.setLineDash([9, 17]);
-                ctx.lineDashOffset = active ? elapsed * 34 : 0;
-                ctx.beginPath();
-                ctx.arc(0, 0, 151, 0, Math.PI * 2);
-                ctx.stroke();
-                ctx.setLineDash([]);
-
-                for (var shardIndex = 0; shardIndex < TOTAL_SHARDS; shardIndex += 1) {
-                    var angle = -Math.PI / 2 + shardIndex / TOTAL_SHARDS * Math.PI * 2;
-                    var indicatorX = Math.round(Math.cos(angle) * 165);
-                    var indicatorY = Math.round(Math.sin(angle) * 165);
-                    ctx.globalAlpha = shardIndex < collected ? 0.92 : 0.2;
-                    ctx.fillStyle = shardIndex < collected ? "#b8ffc7" : "#7a3d68";
-                    ctx.fillRect(indicatorX - 4, indicatorY - 4, 8, 8);
+                if (!active) {
+                    ctx.fillStyle = "#080c17";
+                    ctx.fillRect(
+                        apertureX,
+                        apertureY,
+                        apertureWidth,
+                        apertureHeight
+                    );
+                    ctx.fillStyle = "#1b2438";
+                    for (
+                        var shutterY = apertureY + 8;
+                        shutterY < apertureY + apertureHeight;
+                        shutterY += 14
+                    ) {
+                        ctx.fillRect(
+                            apertureX + 7,
+                            shutterY,
+                            apertureWidth - 14,
+                            7
+                        );
+                    }
+                    ctx.fillStyle = "#6f365e";
+                    ctx.fillRect(
+                        apertureX + 7,
+                        apertureY + 12,
+                        5,
+                        apertureHeight - 24
+                    );
+                    ctx.fillRect(
+                        apertureX + apertureWidth - 12,
+                        apertureY + 12,
+                        5,
+                        apertureHeight - 24
+                    );
+                } else {
+                    for (
+                        var gateMote = 0;
+                        gateMote < 12;
+                        gateMote += 1
+                    ) {
+                        var moteCycle =
+                            (
+                                elapsed * 0.74 +
+                                gateMote * 0.173
+                            ) % 1;
+                        var moteX =
+                            apertureX +
+                            16 +
+                            (
+                                gateMote * 37
+                            ) %
+                                (apertureWidth - 32);
+                        var moteY =
+                            apertureY +
+                            apertureHeight -
+                            moteCycle *
+                                (apertureHeight - 24);
+                        ctx.globalAlpha =
+                            (1 - moteCycle) *
+                            (0.48 + pulse * 0.18);
+                        ctx.fillStyle =
+                            gateMote % 3 === 0
+                                ? "#dfffe5"
+                                : "#58f5df";
+                        ctx.fillRect(
+                            Math.round(moteX),
+                            Math.round(moteY),
+                            gateMote % 2 === 0 ? 4 : 3,
+                            gateMote % 2 === 0 ? 4 : 3
+                        );
+                    }
+                    ctx.globalAlpha = 1;
                 }
-                ctx.restore();
 
-                ctx.save();
-                ctx.fillStyle = "rgba(0, 0, 0, 0.55)";
-                ctx.fillRect(uplink.x - 12, uplink.y + uplink.height - 7, uplink.width + 24, 14);
-                ctx.fillStyle = "#101728";
-                ctx.fillRect(uplink.x - 3, uplink.y + 14, uplink.width + 6, uplink.height - 20);
-                ctx.fillStyle = "#46536d";
-                ctx.fillRect(uplink.x + 3, uplink.y + 20, uplink.width - 6, uplink.height - 31);
-                ctx.fillStyle = "#1c263b";
-                ctx.fillRect(uplink.x + 9, uplink.y + 27, uplink.width - 18, uplink.height - 45);
-                ctx.fillStyle = portalColor;
-                ctx.globalAlpha = active ? pulse : 0.38;
-                ctx.fillRect(uplink.x + 15, uplink.y + 34, uplink.width - 30, uplink.height - 62);
+                if (imageHasPixels(assets.foundryUplinkBossGate)) {
+                    ctx.drawImage(
+                        assets.foundryUplinkBossGate,
+                        gateX,
+                        gateY,
+                        gateWidth,
+                        gateHeight
+                    );
+                    canvas.dataset.uplinkGateArt =
+                        "sprite-v1";
+                } else {
+                    ctx.fillStyle = "#263242";
+                    ctx.fillRect(
+                        gateX,
+                        gateY,
+                        gateWidth,
+                        34
+                    );
+                    ctx.fillRect(
+                        gateX,
+                        gateY,
+                        54,
+                        gateHeight
+                    );
+                    ctx.fillRect(
+                        gateX + gateWidth - 54,
+                        gateY,
+                        54,
+                        gateHeight
+                    );
+                    canvas.dataset.uplinkGateArt =
+                        "fallback";
+                }
+
+                for (
+                    var shardIndex = 0;
+                    shardIndex < TOTAL_SHARDS;
+                    shardIndex += 1
+                ) {
+                    ctx.globalAlpha =
+                        shardIndex < collected ? 0.96 : 0.24;
+                    ctx.fillStyle =
+                        shardIndex < collected
+                            ? "#58f5df"
+                            : "#6f365e";
+                    ctx.fillRect(
+                        portalX -
+                            58 +
+                            shardIndex * 10,
+                        gateY + 28,
+                        6,
+                        5
+                    );
+                }
+
                 ctx.globalAlpha = 1;
-                ctx.fillStyle = active ? "#dfffe5" : "#c88bb3";
-                ctx.fillRect(uplink.x + 21, uplink.y + 3, uplink.width - 42, 19);
-                ctx.fillStyle = "#080c17";
-                ctx.fillRect(uplink.x + 26, uplink.y + 8, uplink.width - 52, 9);
-                ctx.fillStyle = active ? "#4be36e" : "#6f365e";
-                ctx.fillRect(uplink.x + 8, uplink.y + uplink.height - 19, 8, 6);
-                ctx.fillRect(uplink.x + uplink.width - 16, uplink.y + uplink.height - 19, 8, 6);
                 ctx.font = "700 13px Fira Code, monospace";
                 ctx.textAlign = "center";
-                ctx.fillStyle = active ? "#b8ffc7" : "#bd7da9";
-                ctx.fillText(active ? "GATE OPEN" : "GATE LOCKED", uplink.x + uplink.width / 2, uplink.y - 12);
+                ctx.fillStyle = "#03050d";
+                ctx.fillText(
+                    active
+                        ? "WOUND ACCESS // OPEN"
+                        : "WOUND ACCESS // LOCKED",
+                    portalX + 2,
+                    gateY - 16 + 2
+                );
+                ctx.fillStyle =
+                    active ? "#b8ffc7" : "#bd7da9";
+                ctx.fillText(
+                    active
+                        ? "WOUND ACCESS // OPEN"
+                        : "WOUND ACCESS // LOCKED",
+                    portalX,
+                    gateY - 16
+                );
                 ctx.restore();
+                canvas.dataset.uplinkGateBottom =
+                    String(gateBottom);
+                canvas.dataset.uplinkGateState =
+                    active ? "open" : "locked";
             }
 
             function traceShardSilhouette(scale) {
@@ -22736,6 +24135,11 @@
             function updateHud() {
                 shardCount.textContent = collected;
                 scoreDisplay.textContent = formatScore(score);
+                missionProgress.hidden =
+                    !episodeBetaRun ||
+                    overworldPreview ||
+                    shipInteriorActive ||
+                    woundBossPreview;
                 if (shipInteriorActive) {
                     zoneNameDisplay.textContent = "RD-42 INTERIOR";
                     blasterStatusDisplay.textContent =
@@ -22789,15 +24193,12 @@
                             " // TRANSPORT " +
                             (
                                 surfaceTransportIsSealed()
-                                    ? "SEALED"
+                                    ? "OFFLINE"
                                     : portalCharge >= 1
                                     ? "ONLINE"
                                     : "CHARGING"
                             )
-                        : "SURFACE // ASSIGNMENTS " +
-                            overworldAssignmentCount() +
-                            "/" +
-                            overworldAssignments.length;
+                        : "SURFACE // DRAS LINK PENDING";
                     timerDisplay.textContent = "UNTIMED";
                     timerDisplay.classList.remove("is-low");
                     return;
@@ -22861,9 +24262,11 @@
                 ? "title"
                 : woundBossPreview
                     ? "wound"
-                    : overworldPreview || shipInteriorPreview
-                    ? "overworld"
-                    : "foundry";
+                    : shipInteriorPreview
+                        ? "interior"
+                        : overworldPreview
+                            ? "overworld"
+                            : "foundry";
             var activeMusicChannel = backgroundMusic;
             var idleMusicChannel = backgroundMusicSecondary;
             var musicFadeTimer = 0;
@@ -22871,13 +24274,15 @@
                 title: backgroundMusic.dataset.titleTrack,
                 overworld: backgroundMusic.dataset.overworldTrack,
                 foundry: backgroundMusic.dataset.foundryTrack,
-                wound: backgroundMusic.dataset.woundTrack
+                wound: backgroundMusic.dataset.woundTrack,
+                interior: backgroundMusic.dataset.interiorTrack
             };
             var musicVolumes = {
                 title: 0.3,
                 overworld: 0.29,
                 foundry: 0.32,
-                wound: 0.38
+                wound: 0.38,
+                interior: 0.27
             };
 
             activeMusicChannel.dataset.scene = audioScene;
@@ -22900,9 +24305,85 @@
                     return;
                 }
                 var playback = channel.play();
-                if (playback && typeof playback.catch === "function") {
-                    playback.catch(function () {});
+                if (playback && typeof playback.then === "function") {
+                    playback.then(function () {
+                        delete channel.dataset.playbackBlocked;
+                        canvas.dataset.musicPlayback = "active";
+                    }).catch(function () {
+                        channel.dataset.playbackBlocked = "true";
+                        canvas.dataset.musicPlayback =
+                            "gesture-retry-pending";
+                    });
                 }
+            }
+
+            function primeIdleMusicChannelFromGesture() {
+                if (
+                    !mainTitleScreen ||
+                    !signalInitialized ||
+                    !soundOn ||
+                    !idleMusicChannel
+                ) {
+                    return;
+                }
+                idleMusicChannel.pause();
+                idleMusicChannel.src = musicTracks.overworld;
+                idleMusicChannel.dataset.scene = "overworld";
+                idleMusicChannel.loop = true;
+                idleMusicChannel.currentTime = 0;
+                idleMusicChannel.volume = 0;
+                var priming = idleMusicChannel.play();
+                if (priming && typeof priming.then === "function") {
+                    priming.then(function () {
+                        if (
+                            idleMusicChannel &&
+                            idleMusicChannel.dataset.scene ===
+                                "overworld"
+                        ) {
+                            idleMusicChannel.pause();
+                            idleMusicChannel.currentTime = 0;
+                            idleMusicChannel.volume = 0;
+                        }
+                        canvas.dataset.musicPrimed = "true";
+                    }).catch(function () {
+                        canvas.dataset.musicPrimed =
+                            "gesture-retry-pending";
+                    });
+                }
+            }
+
+            function preloadIdleMusicScene(nextScene) {
+                if (
+                    !idleMusicChannel ||
+                    !musicTracks[nextScene] ||
+                    (
+                        activeMusicChannel &&
+                        activeMusicChannel.dataset.scene ===
+                            nextScene
+                    )
+                ) {
+                    return;
+                }
+                if (
+                    idleMusicChannel.dataset.scene ===
+                        nextScene &&
+                    idleMusicChannel.src
+                ) {
+                    return;
+                }
+                idleMusicChannel.pause();
+                idleMusicChannel.preload = "auto";
+                idleMusicChannel.src =
+                    musicTracks[nextScene];
+                idleMusicChannel.dataset.scene =
+                    nextScene;
+                idleMusicChannel.loop =
+                    nextScene !== "title";
+                idleMusicChannel.currentTime = 0;
+                idleMusicChannel.volume = 0;
+                idleMusicChannel.load();
+                canvas.dataset.musicPreloaded =
+                    nextScene;
             }
 
             function cancelMusicFade() {
@@ -22932,7 +24413,12 @@
                 var outgoing = activeMusicChannel;
                 var incoming = idleMusicChannel;
                 incoming.pause();
-                incoming.src = musicTracks[nextScene];
+                if (
+                    incoming.dataset.scene !== nextScene ||
+                    !incoming.src
+                ) {
+                    incoming.src = musicTracks[nextScene];
+                }
                 incoming.dataset.scene = nextScene;
                 incoming.loop = nextScene !== "title";
                 incoming.currentTime = 0;
@@ -23034,6 +24520,12 @@
                 }
                 if (!musicIsPlaying()) {
                     playBackgroundMusic();
+                } else if (
+                    activeMusicChannel &&
+                    activeMusicChannel.dataset.playbackBlocked ===
+                        "true"
+                ) {
+                    startMusicChannel(activeMusicChannel);
                 }
             }
 
@@ -23271,6 +24763,7 @@
                 }
                 setAudioScene(audioScene, true);
                 playBackgroundMusic();
+                primeIdleMusicChannelFromGesture();
                 playSoundEffect("deepSelect", 0.72);
                 announce("Game loaded. Music and mission controls are online.");
 
@@ -23406,6 +24899,18 @@
                             : (focusIndex + 1) % focusable.length;
                         focusable[nextIndex].focus();
                     }
+                    return;
+                }
+                if (
+                    event.code === "Escape" &&
+                    !event.repeat &&
+                    (
+                        state === "running" ||
+                        state === "paused"
+                    )
+                ) {
+                    event.preventDefault();
+                    togglePause();
                     return;
                 }
                 if (
@@ -23664,6 +25169,7 @@
                     ensureAudio();
                     if (signalInitialized && state !== "paused") {
                         playBackgroundMusic();
+                        primeIdleMusicChannelFromGesture();
                         if (state === "boss-intro") {
                             setWoundBossIntroMusicDucked(true);
                         }

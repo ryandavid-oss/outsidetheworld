@@ -271,19 +271,19 @@ REQUIRED_SNIPPETS = {
         "var WOUND_BOSS_SURGE_SPEED = 160;"
     ),
     "readable turn duration": (
-        "var WOUND_BOSS_TURN_DURATION = 0.7;"
+        "var WOUND_BOSS_TURN_DURATION = 0.54;"
     ),
     "turn-behind confirmation": (
-        "var WOUND_BOSS_TURN_CONFIRM_TIME = 0.16;"
+        "var WOUND_BOSS_TURN_CONFIRM_TIME = 0.1;"
     ),
     "turn braking": (
-        "var WOUND_BOSS_TURN_BRAKE_TIME = 0.22;"
+        "var WOUND_BOSS_TURN_BRAKE_TIME = 0.16;"
     ),
     "single turn flip": (
         "enemy.turnFlipped = true;"
     ),
     "post-turn commitment": (
-        "var WOUND_BOSS_POST_TURN_COMMIT = 0.55;"
+        "var WOUND_BOSS_POST_TURN_COMMIT = 0.38;"
     ),
     "accelerated pursuit": (
         "function approachWoundBossVelocity("
@@ -357,7 +357,22 @@ REQUIRED_SNIPPETS = {
         "var WOUND_BOSS_WATCH_TRACK_DEADZONE = 110;"
     ),
     "gantry watch tracking confirmation": (
-        "var WOUND_BOSS_WATCH_TRACK_CONFIRM = 0.42;"
+        "var WOUND_BOSS_WATCH_TRACK_CONFIRM = 0.2;"
+    ),
+    "gantry watch exit grace": (
+        "var WOUND_BOSS_WATCH_EXIT_GRACE = 0.28;"
+    ),
+    "gantry watch turn cadence": (
+        "var WOUND_BOSS_WATCH_TURN_FRAME_DURATION = 0.045;"
+    ),
+    "main-deck turn confirmation": (
+        "var WOUND_BOSS_TURN_CONFIRM_TIME = 0.1;"
+    ),
+    "main-deck turn duration": (
+        "var WOUND_BOSS_TURN_DURATION = 0.54;"
+    ),
+    "post-turn commitment": (
+        "var WOUND_BOSS_POST_TURN_COMMIT = 0.38;"
     ),
     "heavy-rifle projectile treatment": (
         "function drawHeavyRifleBolt(bolt)"

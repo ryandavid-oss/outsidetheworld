@@ -54,7 +54,7 @@ def main() -> None:
     manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
     layout = json.loads(LAYOUT.read_text(encoding="utf-8"))
 
-    assert manifest["status"] == "integrated-local-review"
+    assert manifest["status"] == "beta-production"
     assert manifest["scene"] == "overworld"
     assert manifest["plate"]["groundY"] == 744
     assert manifest["world"]["plateCount"] == 4
@@ -66,34 +66,21 @@ def main() -> None:
         "dras_outpost",
         "coreworks_threshold",
     ]
-    assert manifest["optional"] is True
+    assert manifest["optional"] is False
     assert manifest["gatesFoundry"] is False
 
-    assignments = {
-        assignment["id"]: assignment
-        for assignment in manifest["assignments"]
-    }
-    assert {
-        key: assignments[key]["x"]
-        for key in assignments
-    } == {
-        "survey_echo": 330,
-        "recover_trillian": 690,
-        "field_harness": 1080,
-        "sealed_salvage": 1430,
-    }
-    assert sum(
-        assignment["rewardCredits"]
-        for assignment in assignments.values()
-    ) == 7
-    assert set(manifest["abilities"]) == {
-        "signal_sweep",
-        "trillian_follow",
-        "trillian_powered_launch",
-        "trillian_salvage_breach",
+    assert manifest["assignments"] == []
+    assert manifest["objectiveProps"] == "removed"
+    assert manifest["abilities"] == ["trillian_follow"]
+    assert manifest["trillian"] == {
+        "availability": "joined-at-surface-start",
+        "drawScale": 0.5,
+        "followSpeed": 410,
+        "catchupSpeed": 480,
+        "combat": "disabled",
     }
 
-    assert layout["version"] == 3
+    assert layout["version"] == 4
     assert layout["coordinate_system"]["world_width"] == 6688
     assert layout["coordinate_system"]["plate_seams_x"] == [
         1672,
@@ -103,6 +90,18 @@ def main() -> None:
     assert [plate["id"] for plate in layout["plates"]] == (
         manifest["world"]["plateOrder"]
     )
+    layout_text = LAYOUT.read_text(encoding="utf-8")
+    for retired_id in (
+        "tutorial_rock",
+        "western_survey_plinth",
+        "trillian_field_harness",
+        "sealed_salvage",
+        "western_survey_echo",
+        "recover_trillian",
+        "fit_field_harness",
+        "breach_sealed_salvage",
+    ):
+        assert retired_id not in layout_text
 
     west = verify_plate(
         ROOT / manifest["plate"]["production"]
@@ -134,16 +133,16 @@ def main() -> None:
         "SCREEN_COUNT = isOverworld",
         "assets.background0 = assets.overworldWest;",
         "overworld-western-signal-flats-v1.png",
-        'id: "survey-echo"',
-        'id: "recover-trillian"',
-        'id: "field-harness"',
-        'id: "sealed-salvage"',
-        "function activateSignalSweep()",
-        "function activateNearbyOverworldAssignment()",
+        "var overworldAssignments = [];",
+        'canvas.dataset.assignmentsRemoved =',
+        '"true";',
+        "var TRILLIAN_DRAW_WIDTH = 48;",
+        "var TRILLIAN_DRAW_HEIGHT = 42;",
+        "var TRILLIAN_FOLLOW_SPEED = 410;",
+        "var TRILLIAN_CATCHUP_SPEED = 480;",
         "function updateTrillian(delta)",
         "function drawTrillian()",
-        "function drawOverworldAssignments()",
-        'canvas.dataset.trillianDamage = "noncombat-breach"',
+        "trillian.joined = true;",
         'canvas.dataset.overworldHawkState =',
         '"world-space-sky-pass"',
     )
@@ -157,9 +156,10 @@ def main() -> None:
     print("SUPER FRGMNTS Western Signal Flats: PASS")
     print("- four exact 1672 x 941 plates form a 6688-pixel world")
     print("- western-to-landing seam passes boundary and landscape checks")
-    print("- four optional assignments award seven surface credits")
-    print("- Signal Sweep and Trillian remain live without ambient-object errands")
-    print("- no western assignment gates the existing Foundry route")
+    print("- all western objective props and assignment rewards are removed")
+    print("- Trillian is half-scale and joined from surface start")
+    print("- companion follow and catch-up speed exceed Aryn's surface pace")
+    print("- no western objective gates the existing Foundry route")
 
 
 if __name__ == "__main__":

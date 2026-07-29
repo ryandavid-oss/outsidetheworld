@@ -57,12 +57,12 @@ def main() -> None:
     assert current["identity"] == "Jane"
     surface = manifest["surfaceRuntime"]
     assert surface["scene"] == "overworld"
-    assert surface["recoverAssignmentX"] == 690
-    assert surface["harnessAssignmentX"] == 1080
-    assert surface["salvageAssignmentX"] == 1430
-    assert surface["followDistance"] == 112
-    assert surface["followSpeed"] == 82
-    assert surface["poweredLaunchVelocityY"] == -950
+    assert surface["availability"] == "joined-at-surface-start"
+    assert surface["drawScale"] == 0.5
+    assert surface["drawSize"] == [48, 42]
+    assert surface["followDistance"] == 86
+    assert surface["followSpeed"] == 410
+    assert surface["catchupSpeed"] == 480
     assert surface["transportLimitX"] == 6276
     assert surface["friendlySeekerSafety"] is True
     assert surface["solid"] is False
@@ -82,9 +82,11 @@ def main() -> None:
         "armoredJumpLaunch",
     }
     assert animations["unarmored"]["source"]["frameCount"] == 36
+    assert animations["unarmored"]["runtimeEligible"] is True
     assert animations["unarmored"]["source"]["frameDurationMs"] == 42
     assert animations["unarmored"]["validation"]["result"] == "pass"
     assert animations["armored"]["source"]["frameCount"] == 25
+    assert animations["armored"]["runtimeEligible"] is False
     assert animations["armored"]["source"]["frameDurationMs"] == 58
     assert animations["armored"]["validation"]["result"] == (
         "pass-with-source-warning"
@@ -95,6 +97,7 @@ def main() -> None:
     assert animations["armoredAttack"]["role"] == (
         "close-range energy lunge"
     )
+    assert animations["armoredAttack"]["runtimeEligible"] is False
     assert animations["armoredAttack"]["playback"] == "one-shot"
     assert animations["armoredAttack"]["source"]["frameCount"] == 36
     assert animations["armoredAttack"]["source"]["frameDurationMs"] == 46
@@ -108,6 +111,7 @@ def main() -> None:
         "unassigned until combat implementation"
     )
     jump = animations["armoredJumpLaunch"]
+    assert jump["runtimeEligible"] is False
     assert jump["role"] == "powered jump charge and launch cue"
     assert jump["playback"] == "one-shot"
     assert jump["source"]["frameCount"] == 36
@@ -222,8 +226,8 @@ def main() -> None:
     print("- clipped 25-frame rear/power-up alternate preserved for review")
     print("- Trillian is explicitly separate from Jane")
     print("- current Jane runtime and transport contract remain unchanged")
-    print("- four approved atlases are loaded only for the Overworld surface")
-    print("- follow, harness, powered launch, and noncombat breach are wired")
+    print("- source atlases remain preserved for future review")
+    print("- only the half-scale unarmored follow state loads in production")
     print("- Trillian is non-solid, friendly-safe, and absent from enemy data")
     print("- Foundry combat handoff and damage timing remain intentionally open")
 

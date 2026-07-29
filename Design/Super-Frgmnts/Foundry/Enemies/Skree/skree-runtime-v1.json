@@ -1,8 +1,8 @@
 {
   "workingName": "Skree",
   "runtimeType": "skree",
-  "status": "runtime-ready-unpopulated",
-  "productionPopulation": false,
+  "status": "production-populated",
+  "productionPopulation": true,
   "role": "large ground patrol",
   "source": {
     "image": "Raw/skree-source-v1.png",
@@ -65,6 +65,8 @@
   },
   "behavior": {
     "locomotion": "ground patrol",
-    "spawned": false
+    "spawned": true,
+    "productionPlacement": "Uplink plate 6 ground patrol",
+    "combatBalance": "three rifle hits"
   }
 }

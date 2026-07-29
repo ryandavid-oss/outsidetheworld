@@ -201,16 +201,20 @@ def main() -> None:
     require(
         "rifleReady &&\n                    player.onGround &&\n"
         in source,
-        "The rifle idle holster is not restricted to grounded time",
+        "The grounded rifle-ready hold is not present",
     )
     require(
         "var RIFLE_IDLE_STOW_DELAY = 2.25;" in source,
-        "Heavy rifle does not have the approved idle stow delay",
+        "Heavy rifle ready-state refresh is not present",
     )
     require(
         "if (rifleIdleStowTime === 0) {\n                            stowRifle();"
-        in source,
-        "Heavy rifle does not return to the stowed traversal state",
+        not in source,
+        "Heavy rifle still auto-holsters after firing",
+    )
+    require(
+        "the player explicitly changes modes" in source,
+        "The explicit weapon-switch holster contract is absent",
     )
     require(
         contract["standing_foresection_shift"] == 14,
@@ -225,7 +229,7 @@ def main() -> None:
     print("- jumping, dropping, and falling preserve the ready rifle")
     print("- airborne heavy-rifle fire uses authored full-body motion")
     print("- standing barrel length is normalized to the running silhouette")
-    print("- rifle stows after 2.25 grounded seconds without firing")
+    print("- once fired, rifle stays shouldered until an explicit weapon switch")
     print("- keyboard fire uses X, avoiding the macOS Control-arrow shortcut")
     print("- firing is a fast direct amber heavy-combat round")
     print("- rifle ammo, damage, boss durability, and armor behavior remain open")

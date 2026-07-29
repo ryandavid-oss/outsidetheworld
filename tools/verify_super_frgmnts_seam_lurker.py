@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Verify the Seam Lurker asset and unpopulated ceiling-patrol type."""
+"""Verify the Seam Lurker asset and populated Uplink ceiling patrol."""
 
 from __future__ import annotations
 
@@ -19,8 +19,8 @@ def main() -> None:
     manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
     assert manifest["workingName"] == "Seam Lurker"
     assert manifest["runtimeType"] == "seamLurker"
-    assert manifest["status"] == "runtime-ready-unpopulated"
-    assert manifest["productionPopulation"] is False
+    assert manifest["status"] == "production-populated"
+    assert manifest["productionPopulation"] is True
     assert manifest["source"]["frameCount"] == 25
     assert manifest["source"]["frameDurationMs"] == 58
     assert manifest["source"]["orientation"] == "ground-facing"
@@ -39,7 +39,13 @@ def main() -> None:
     assert manifest["behavior"]["crawlAnimation"] == "ready"
     assert manifest["behavior"]["dropAttackAnimation"] == "not supplied"
     assert manifest["behavior"]["dropAttackBehavior"] == "unimplemented"
-    assert manifest["behavior"]["spawned"] is False
+    assert manifest["behavior"]["spawned"] is True
+    assert manifest["behavior"]["productionPlacement"] == (
+        "Uplink plate 7 catwalk underside at y=362"
+    )
+    assert manifest["behavior"]["combatBalance"] == (
+        "two rifle hits; horizontal ceiling patrol only"
+    )
 
     atlas = Image.open(ROOT / manifest["runtime"]["image"]).convert("RGBA")
     assert atlas.size == (640, 320), (
@@ -76,6 +82,9 @@ def main() -> None:
         "ceiling: true",
         "enemy.ceilingY +",
         "canvas.dataset.seamLurkerState",
+        '["seamLurker", WIDTH * 7 + 430, 362,',
+        'canvas.dataset.seamLurkerAnchor =',
+        '"uplink-catwalk-underside-y362"',
     )
     for fragment in required_fragments:
         assert fragment in SOURCE, (
@@ -91,13 +100,12 @@ def main() -> None:
         1,
     )[0]
     assert 'type === "seamLurker"' not in flyer_block
-    assert 'makeEnemy("seamLurker"' not in SOURCE
-
     print("SUPER FRGMNTS Seam Lurker enemy type: PASS")
     print("- 25-frame source crawl validates without alpha edge contact")
     print("- vertical normalization produces a stable ceiling anchor")
     print("- horizontal ceiling-patrol runtime type is registered")
-    print("- drop attack and production population remain disabled")
+    print("- Uplink plate 7 population is rooted to the catwalk underside")
+    print("- drop attack remains disabled; the patrol takes two rifle hits")
     print("- 640x320 shipping atlas stays below portability limits")
 
 

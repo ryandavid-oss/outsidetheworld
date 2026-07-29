@@ -34,11 +34,16 @@ rear-only requirement, or pass-through/levitation window.
 On the main deck, Seam Hunter continuously tracks Aryn. He closes long gaps at
 **160 px/s**, transitions through **108 px/s**, and slows to **72 px/s** near
 her. Velocity ramps instead of snapping. Aryn must remain behind him for
-**0.16 seconds** to earn a turn: Seam Hunter brakes for **0.22 seconds**, flips
-once during the **0.7-second** turn, then commits forward for **0.55 seconds**
+**0.10 seconds** to earn a turn: Seam Hunter brakes for **0.16 seconds**, flips
+once during the **0.54-second** turn, then commits forward for **0.38 seconds**
 at up to **126 px/s** before reconsidering. He uses the existing readable sweep
 within 310 px. His body remains solid, so Aryn must disengage toward one of the
 two construction lifts rather than run through him.
+
+On the upper horizontal gantry, the watch turn uses a separate, faster read:
+**0.20 seconds** of directional confirmation, a **0.28-second** exit grace,
+and a complete **19-frame, 0.855-second** animated turn. This keeps him
+responsive to Aryn's crossovers without making his facing snap or oscillate.
 
 Normal jumping does not fool him. If Aryn reaches at least **190 px** above
 the main deck for **0.25 seconds**, Seam Hunter loses her position and enters a

@@ -27,7 +27,9 @@ def main() -> None:
     assert source_manifest["meta"]["size"] == {"w": 4750, "h": 4010}
     assert runtime_manifest["workingName"] == "Skree"
     assert runtime_manifest["runtimeType"] == "skree"
-    assert runtime_manifest["productionPopulation"] is False
+    assert runtime_manifest["status"] == "production-populated"
+    assert runtime_manifest["productionPopulation"] is True
+    assert runtime_manifest["behavior"]["spawned"] is True
     assert runtime_manifest["validation"]["result"] == (
         "pass-with-source-warning"
     )
@@ -56,6 +58,7 @@ def main() -> None:
         'skree: "SKREE"',
         "function drawSkreeEnemy(enemy)",
         'enemy.type === "skree"',
+        '["skree", WIDTH * 6 + 520, GROUND_Y',
     )
     for fragment in required_runtime_fragments:
         assert fragment in SOURCE, (
@@ -66,7 +69,7 @@ def main() -> None:
     print("- source atlas: 25 frames, 5x5, 53 ms each")
     print("- source warning: 19 frames touch the right cell boundary")
     print("- runtime atlas: 800x720 RGBA with per-frame padding")
-    print("- runtime type: skree, ground patrol, not production-populated")
+    print("- runtime type: Skree, three-hit Uplink ground patrol")
 
 
 if __name__ == "__main__":

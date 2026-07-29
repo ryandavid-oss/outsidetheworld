@@ -34,7 +34,9 @@ def verify_enemy(
             == 28
         )
     else:
-        assert manifest["productionPopulation"] is False
+        assert manifest["status"] == "production-populated"
+        assert manifest["productionPopulation"] is True
+        assert manifest["behavior"]["spawned"] is True
     assert manifest["source"]["frameCount"] == 36
     assert manifest["source"]["frameDurationMs"] == frame_duration
     assert manifest["validation"]["result"] == "pass"
@@ -83,6 +85,7 @@ def main() -> None:
         'canvas.dataset.sovaRifleHitbox =',
         '"visual-silhouette"',
         '["sova", WIDTH * 3 + 610, GROUND_Y',
+        '["kihunter", WIDTH * 2 + 950, 1080',
         'enemy.type === "sova"',
         "? 28",
     )
@@ -102,7 +105,7 @@ def main() -> None:
     assert 'type === "kihunter"' in flyer_block
     assert 'type === "sova"' not in flyer_block
     assert '["sova", WIDTH * 3 + 610, GROUND_Y' in SOURCE
-    assert 'makeEnemy("kihunter"' not in SOURCE
+    assert '["kihunter", WIDTH * 2 + 950, 1080' in SOURCE
 
     ground_y = 1604
     grounded_player_y = ground_y - 100
@@ -119,7 +122,7 @@ def main() -> None:
     print("SUPER FRGMNTS Sova and Kihunter enemy types: PASS")
     print("- both 36-frame source atlases validate without edge contact")
     print("- Sova is a ground patrol; Kihunter is a flying patrol")
-    print("- Sova is production-populated; Kihunter remains runtime-ready")
+    print("- Sova and Kihunter are both production-populated")
     print("- Sova's rifle collider covers its visible upper carapace")
     print("- shipping atlases remain below the 2,048px portability limit")
 

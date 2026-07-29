@@ -1,12 +1,15 @@
 # SUPER FRGMNTS // Return to Dras Interlude v1
 
-**Status:** Approved direction; pre-implementation contract
+**Status:** Return report and Chapter 01 cliffhanger integrated; repair arc
+reserved for Chapter 02 preproduction
 
 **Established:** 2026-07-28
 
 **Placement:** After The Wound and before the Primary Biolab
 
-**Runtime impact:** None yet
+**Runtime impact:** Dras relocates to the Coreworks Threshold after the Wound;
+the R01–R31 Field Relay report, specimen scan, Primary Biolab distinction,
+unsolicited transport response, and Chapter 01 closing card are live
 
 This contract defines the first playable story sequence after Aryn defeats Seam
 Hunter and deliberately recovers the Wound-touched Vesperite specimen. It
@@ -82,13 +85,15 @@ Wound-touched Vesperite recovery:
   `wound-touched-vesperite` carry back to the surface; and
 - the mission reads `RETURNED TO VEYRA // REPORT TO DRAS`.
 
-Implementation of the interlude should extend that live endpoint. The Dras
-scan, overload, ship objective, repair, and Primary Biolab departure remain
-outside the beta production run.
+The beta now extends that endpoint through Dras's report and noncontact scan.
+The dormant transport answers the specimen with one restrained violet-blue
+harmonic, then the chapter closes on `THE SIGNAL ANSWERED`. The deterministic
+overload, service-kit objective, collaborative repair, and Primary Biolab
+departure remain reserved for the next production phase.
 
 The approved Arrival on Veyra route remains untouched. Dras stands at his camp
-during first contact, Jane remains his camp dog, and all existing optional
-Western Signal Flats assignments remain available.
+during first contact, Jane remains his camp dog, and the Western Signal Flats
+remain environmental space without objective props.
 
 ## Post-Wound surface staging
 
@@ -155,9 +160,28 @@ processing floors. The Primary Biolab below them retained:
 - sealed drill-team samples; and
 - deeper laboratory records isolated from the production network.
 
-The objective becomes:
+The beta objective becomes:
+
+`WOUND SPECIMEN // PRIMARY BIOLAB SIGNAL`
+
+The eventual repaired-transport objective remains:
 
 `WOUND SPECIMEN // REACH PRIMARY BIOLAB`
+
+### Chapter 01 close // The signal answered
+
+For the beta chapter close, the inert Coreworks transport answers the
+specimen before Aryn touches the controls. Dras confirms that the response
+came from below the Primary Biolab. A full-stage closing card holds:
+
+`VEYRA // CHAPTER ONE COMPLETE`
+
+`THE SIGNAL ANSWERED`
+
+The player deliberately returns to the surface after reading the card. This
+does not consume the specimen, activate the transport, or begin Chapter 02.
+The Chapter 02 planning seed lives at
+[`../Chapter-02/VEYRA-CHAPTER-02-PLAN-v1.md`](../Chapter-02/VEYRA-CHAPTER-02-PLAN-v1.md).
 
 ### Beat 3 // The transport answers
 
@@ -216,10 +240,8 @@ The objective becomes:
 
 During this objective:
 
-- Signal Sweep prioritizes the RD-42 hatch over unfinished optional
-  assignments;
-- the hawk may continue indicating optional western work only when it does not
-  compete with the main-story direction;
+- the main-story objective points directly to the RD-42 hatch;
+- the hawk remains autonomous ambience and never indicates objectives;
 - the surface remains untimed;
 - post-return calibration hazards remain inactive; and
 - no enemies repopulate the Overworld.
@@ -249,7 +271,8 @@ Recovering the case sets:
 
 `SERVICE KIT RECOVERED // RETURN TO DRAS`
 
-Signal Sweep then prioritizes Dras at the Coreworks Threshold.
+The main-story objective then points directly to Dras at the Coreworks
+Threshold.
 
 ### Beat 6 // Collaborative repair
 
@@ -325,81 +348,113 @@ What did you find?
 
 #### R07 // ARYN SOL-MAVI
 
+Both atmospheric stabilizers are online. The Foundry and Biolab processing
+floors are breathing again.
+
+#### R08 // DRAS EHDRE
+
+I felt the pressure change from here. What destroyed them?
+
+#### R09 // ARYN SOL-MAVI
+
+A Seam Hunter. It was nesting over a geological rupture.
+
+#### R10 // DRAS EHDRE
+
+Was?
+
+#### R11 // ARYN SOL-MAVI
+
+It won't break another relay.
+
+#### R12 // ARYN SOL-MAVI
+
 This was beneath the Seam Hunter when it fell.
 
 > Aryn turns enough for the secured specimen to become visible in the pack.
 > Dras raises his field probe but does not touch it.
 
-#### R08 // DRAS EHDRE
+#### R13 // DRAS EHDRE
 
 That's Vesperite.
 
-#### R09 // ARYN SOL-MAVI
+#### R14 // ARYN SOL-MAVI
 
 I gathered that.
 
-#### R10 // DRAS EHDRE
+#### R15 // DRAS EHDRE
 
 No. Vesperite lies still once it leaves the seam.
 
-#### R11 // ARYN SOL-MAVI
+#### R16 // ARYN SOL-MAVI
 
 This one doesn't.
 
 > Dras completes a restrained noncontact scan. The probe repeats the
 > specimen's pulse and fails to resolve it.
 
-#### R12 // DRAS EHDRE
+#### R17 // DRAS EHDRE
 
 It's holding a pulse without losing charge.
 
-#### R13 // ARYN SOL-MAVI
+#### R18 // ARYN SOL-MAVI
 
 Can you read it?
 
-#### R14 // DRAS EHDRE
+#### R19 // DRAS EHDRE
 
-Not here. The primary biolab kept the old assays.
+Not here. The Primary Biolab kept the old assays.
 
-#### R15 // ARYN SOL-MAVI
+#### R20 // ARYN SOL-MAVI
 
 I passed through a biolab.
 
-#### R16 // DRAS EHDRE
+#### R21 // DRAS EHDRE
 
 You crossed its processing floor. The main laboratory is below it.
 
-#### R17 // ARYN SOL-MAVI
+#### R22 // ARYN SOL-MAVI
 
 Sealed?
 
-#### R18 // DRAS EHDRE
+#### R23 // DRAS EHDRE
 
 From production. Not from the portal—if it left us a route.
 
-#### R19 // ARYN SOL-MAVI
+#### R24 // ARYN SOL-MAVI
 
 Then I go back.
 
-#### R20 // DRAS EHDRE
+#### R25 // DRAS EHDRE
 
 You say that as if the first trip went well.
 
-#### R21 // ARYN SOL-MAVI
+#### R26 // ARYN SOL-MAVI
 
 It went forward.
 
-#### R22 // DRAS EHDRE
+#### R27 // DRAS EHDRE
 
 That's not the same thing.
 
-#### R23 // ARYN SOL-MAVI
+#### R28 // ARYN SOL-MAVI
 
 It was enough.
 
-#### R24 // DRAS EHDRE
+#### R29 // DRAS EHDRE
 
-Approach the transport. I'll watch the field.
+Aryn. You didn't touch it.
+
+> The inert Coreworks transport answers the specimen with one thin
+> violet-blue pulse.
+
+#### R30 // ARYN SOL-MAVI
+
+No.
+
+#### R31 // DRAS EHDRE
+
+Then something below the Primary Biolab just answered your pack.
 
 ### Failure conversation
 
@@ -537,8 +592,7 @@ The scene transition must preserve:
 - jet-assist ownership;
 - heavy-rifle ownership and selected weapon, while those rules remain
   provisional;
-- Western Signal Flats assignment state;
-- Trillian recovery and harness state;
+- Trillian follow state;
 - settings, mute state, and accessibility preferences; and
 - whether the service kit has already been recovered or installed.
 
@@ -547,8 +601,8 @@ repair.
 
 ## Interaction priority
 
-During the interlude, the shared Down action resolves the nearest valid
-story interaction before Signal Sweep:
+During the interlude, the shared Down action resolves the nearest valid story
+interaction:
 
 1. Wound return or results action;
 2. `REPORT` to Dras;
@@ -557,9 +611,7 @@ story interaction before Signal Sweep:
 5. RD-42 roof hatch entry;
 6. RD-42 interior interaction;
 7. service-kit delivery;
-8. repaired transport departure;
-9. optional Overworld assignment; and
-10. Signal Sweep.
+8. repaired transport departure.
 
 Only one prompt may be visible at a time.
 
@@ -567,10 +619,8 @@ Only one prompt may be visible at a time.
 
 - Jane remains at Dras's camp throughout the post-Wound threshold scene.
 - Trillian never enters the Coreworks transport.
-- If Trillian was recovered, she may wait at the RD-42 while Aryn is below and
-  appear in her conditional interior berth.
-- If Trillian was not recovered, the berth remains empty and her optional
-  Western Signal Flats assignment remains available.
+- Trillian may wait at the RD-42 while Aryn is below and appear in her
+  conditional interior berth.
 - Neither dog becomes required for the interlude.
 
 ## Accessibility and failure recovery
@@ -599,8 +649,8 @@ The interlude is ready for visual production only when:
   the documented order;
 - Aryn cannot bypass the failure and enter the Primary Biolab early;
 - the service kit cannot be collected twice;
-- Signal Sweep points to the correct main-story target in both directions;
-- the Overworld remains completable when optional western work is unfinished;
+- the main-story objective points to the correct target in both directions;
+- the Western Signal Flats remains optional exploration with no objectives;
 - the route passes at desktop and 390 × 844 portrait-mobile framing;
 - focus loss cannot strand the transport or ship transition; and
 - there are no console errors, missing critical assets, or contradictory

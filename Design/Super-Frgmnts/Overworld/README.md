@@ -14,12 +14,13 @@ runtime origin offset:
 - Dras Outpost — x=3,344;
 - Coreworks Threshold — x=5,016.
 
-The western plate is an optional, untimed surface loop. It adds a survey echo
-that unlocks Signal Sweep, recovery of Trillian, a field-harness upgrade,
-powered companion traversal, and a noncombat sealed-salvage breach. The hawk
-circles the next unfinished western assignment while it is on screen. Dras
-first contact, the calibration route, and the Coreworks transport remain the
-critical path; none of the western assignments gates the Foundry.
+The western plate is optional, untimed exploration space. Its survey plinth,
+Signal Sweep, field harness, salvage cache, tutorial props, and objective
+markers are permanently absent from the production route. Trillian joins from
+surface start at half her former render size and follows fast enough to keep
+up with Aryn. The hawk makes autonomous world-space passes; player and camera
+movement cannot steer it. Dras first contact and the Coreworks transport form
+the clear rightward critical path.
 
 The expansion contract, exact prompt, source plate, seam audit, runtime
 manifest, and four-plate review sheet live in `Western-Signal-Flats/`.
@@ -101,13 +102,10 @@ Overworld runtime.
 
 - isolate Aryn's ship as a transparent overlay;
 - isolate one clean Dras Ehdre master and derive controlled idle/talk frames;
-- add a non-hostile worker droid that drifts above the Outpost ground and
-  periodically performs a low-hover maintenance cycle, plus an optional
-  post-contact service assignment;
-- integrate Trillian as a separate, non-solid surface companion with unarmored
-  and armored follow states, powered launch, and a noncombat breach action;
-- integrate one non-hostile hawk with alternating sky passes and western
-  assignment guidance;
+- add a non-hostile worker droid beside the Coreworks transport with a
+  restrained low-hover service cycle and no current interaction;
+- integrate Trillian as Aryn's separate, non-solid unarmored surface companion;
+- integrate one non-hostile hawk with autonomous alternating sky passes;
 - create Dras's camp, abandoned credit terminal, atmosphere tower accents, and
   Coreworks portal;
 - verify scale beside Aryn's 112-pixel draw height.
@@ -127,7 +125,8 @@ space.
 
 ## Phase 4 — atmosphere and charm
 
-- three drifting cloud-wisp layers;
+- deterministic low-frequency procedural wispy and storm cloud masks with
+  independent parallax, blur, speed, and restrained opacity;
 - slow volcanic smoke and rare crater pulses;
 - dust ribbons and heat shimmer;
 - ship breathing lights;
