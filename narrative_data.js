@@ -1,5 +1,100 @@
 const current_narrative = [
     {
+        "title": "A whole lot of nothing.",
+        "date": "July 29, 2026",
+        "body": "_What do you expect? I'm just one person._\n\n![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-29-a-whole-lot-of-nothing-ms6q2rp6.jpg \"Rain ought to come back. Any day now. We're waiting.\")\n\n**I've been busy**\u00a0elsewhere this week, so I don't have a feature essay or even a rumination to share on this here blog. Instead, I can only share with you the promise that something relatively good is coming, and I am having fun preparing it. I think it is safe to say that it is not a book, not another large essay, and not even a Web site feature or update.\n\nInstead, it is a new app. That's all I will say for now. I mentioned on the frgmnts app that what I am working on is a sort of \"love letter\" to my past, and it truly is. I hope it will all make sense when it is released. You'll see a lot of disparate elements working together in a strange way, and these elements both induce a sense of nostalgia and provoke a sense of newness and opportunity.\n\nI will be releasing it as a web app first, as my time allowed for iOS development is not as available as it was when I was first working on frgmnts. When it releases and feedback is received, I will try wrapping it up into an iOS app before the end of the year.\n\n**MMMM I am really**\u00a0trying to not spoil the surprise. Hard to write about it without actually writing about it. So really what we have now is 230 words of absolutely nothing, which I suppose is nothing new for me.\n\nSide note: I have posted video stories to Instagram two times in the past couple of weeks. That's just not something I do, but I did it because I am so desperate to get the word out about frgmnts and get more users to join. Guess how it went? I got 0 people to join. Goose egg. Zero. I will just remain patient. The product is sound. I have this sneaky feeling that within the next 12 months, something is going down with Meta, and I will be here to capitalize on it.\n\nThey certainly have a way of screwing up their own business for the sake of money, and I will be happy to take any users who swear off their products at their time of collapse.\n\n**I am still well on**\u00a0target for my launch goal of August 1st for this announcement. When it's ready, it will show up front and center here on OTW. Until then, keep your eyes to the stars and intentions on the horizon.",
+        "file": "2026-07-29-a-whole-lot-of-nothing.md",
+        "publisher": {
+            "schema": "otw.publisher.post",
+            "version": 2,
+            "source": "publisher.html",
+            "subhead": "What do you expect? I'm just one person.",
+            "blocks": [
+                {
+                    "id": "image_ms6q2r90_iyhedg",
+                    "type": "image",
+                    "imageRef": "image_ms6q2r90_iyhedg",
+                    "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-29-a-whole-lot-of-nothing-ms6q2rp6.jpg",
+                    "objectKey": "narrative/2026-07-29-a-whole-lot-of-nothing-ms6q2rp6.jpg",
+                    "featureLayout": "natural",
+                    "featureFocal": "center",
+                    "homepageFocal": "center",
+                    "displaySize": "original",
+                    "alignment": "center",
+                    "wrapMode": "none"
+                },
+                {
+                    "id": "paragraph_ms6q91fy_osauth",
+                    "type": "paragraph",
+                    "html": "<strong>I've been busy</strong><span>\u00a0</span>elsewhere this week, so I don't have a feature essay or even a rumination to share on this here blog. Instead, I can only share with you the promise that something relatively good is coming, and I am having fun preparing it. I think it is safe to say that it is not a book, not another large essay, and not even a Web site feature or update.",
+                    "text": "I've been busy\u00a0elsewhere this week, so I don't have a feature essay or even a rumination to share on this here blog. Instead, I can only share with you the promise that something relatively good is coming, and I am having fun preparing it. I think it is safe to say that it is not a book, not another large essay, and not even a Web site feature or update."
+                },
+                {
+                    "id": "paragraph_ms6q91fy_vr6k26",
+                    "type": "paragraph",
+                    "html": "Instead, it is a new app. That's all I will say for now. I mentioned on the frgmnts app that what I am working on is a sort of \"love letter\" to my past, and it truly is. I hope it will all make sense when it is released. You'll see a lot of disparate elements working together in a strange way, and these elements both induce a sense of nostalgia and provoke a sense of newness and opportunity.",
+                    "text": "Instead, it is a new app. That's all I will say for now. I mentioned on the frgmnts app that what I am working on is a sort of \"love letter\" to my past, and it truly is. I hope it will all make sense when it is released. You'll see a lot of disparate elements working together in a strange way, and these elements both induce a sense of nostalgia and provoke a sense of newness and opportunity."
+                },
+                {
+                    "id": "paragraph_ms6q91fy_rr5kwu",
+                    "type": "paragraph",
+                    "html": "I will be releasing it as a web app first, as my time allowed for iOS development is not as available as it was when I was first working on frgmnts. When it releases and feedback is received, I will try wrapping it up into an iOS app before the end of the year.",
+                    "text": "I will be releasing it as a web app first, as my time allowed for iOS development is not as available as it was when I was first working on frgmnts. When it releases and feedback is received, I will try wrapping it up into an iOS app before the end of the year."
+                },
+                {
+                    "id": "paragraph_ms6q91fy_tjdk4o",
+                    "type": "paragraph",
+                    "html": "<strong>MMMM I am really</strong><span>\u00a0</span>trying to not spoil the surprise. Hard to write about it without actually writing about it. So really what we have now is 230 words of absolutely nothing, which I suppose is nothing new for me.",
+                    "text": "MMMM I am really\u00a0trying to not spoil the surprise. Hard to write about it without actually writing about it. So really what we have now is 230 words of absolutely nothing, which I suppose is nothing new for me."
+                },
+                {
+                    "id": "paragraph_ms6q91fy_2pbwb7",
+                    "type": "paragraph",
+                    "html": "Side note: I have posted video stories to Instagram two times in the past couple of weeks. That's just not something I do, but I did it because I am so desperate to get the word out about frgmnts and get more users to join. Guess how it went? I got 0 people to join. Goose egg. Zero. I will just remain patient. The product is sound. I have this sneaky feeling that within the next 12 months, something is going down with Meta, and I will be here to capitalize on it.",
+                    "text": "Side note: I have posted video stories to Instagram two times in the past couple of weeks. That's just not something I do, but I did it because I am so desperate to get the word out about frgmnts and get more users to join. Guess how it went? I got 0 people to join. Goose egg. Zero. I will just remain patient. The product is sound. I have this sneaky feeling that within the next 12 months, something is going down with Meta, and I will be here to capitalize on it."
+                },
+                {
+                    "id": "paragraph_ms6q91fy_jxlhnk",
+                    "type": "paragraph",
+                    "html": "They certainly have a way of screwing up their own business for the sake of money, and I will be happy to take any users who swear off their products at their time of collapse.",
+                    "text": "They certainly have a way of screwing up their own business for the sake of money, and I will be happy to take any users who swear off their products at their time of collapse."
+                },
+                {
+                    "id": "paragraph_ms6q91fy_9xa069",
+                    "type": "paragraph",
+                    "html": "<strong>I am still well on</strong><span>\u00a0</span>target for my launch goal of August 1st for this announcement. When it's ready, it will show up front and center here on OTW. Until then, keep your eyes to the stars and intentions on the horizon.",
+                    "text": "I am still well on\u00a0target for my launch goal of August 1st for this announcement. When it's ready, it will show up front and center here on OTW. Until then, keep your eyes to the stars and intentions on the horizon."
+                }
+            ],
+            "images": [
+                {
+                    "id": "image_ms6q2r90_iyhedg",
+                    "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-29-a-whole-lot-of-nothing-ms6q2rp6.jpg",
+                    "objectKey": "narrative/2026-07-29-a-whole-lot-of-nothing-ms6q2rp6.jpg",
+                    "alt": "Narrative image",
+                    "caption": "Rain ought to come back. Any day now. We're waiting.",
+                    "credit": "",
+                    "featureLayout": "natural",
+                    "featureFocal": "center",
+                    "homepageFocal": "center",
+                    "width": 1400,
+                    "height": 1017,
+                    "displaySize": "original",
+                    "alignment": "center",
+                    "wrapMode": "none"
+                }
+            ],
+            "formatting": {
+                "mode": "otw-enhanced-markdown",
+                "version": 1,
+                "fallback": "markdown"
+            }
+        },
+        "post_id": "July 29, 2026--a-whole-lot-of-nothing",
+        "share_path": "archive/2026-07-29-a-whole-lot-of-nothing.html",
+        "og_image": "Images/og/archive/2026-07-29-a-whole-lot-of-nothing.png"
+    },
+    {
         "title": "Balance is usually a myth",
         "date": "July 26, 2026",
         "body": "_Bednar was right_\n\n![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-26-balance-is-usually-a-myth-ms2mms9t.jpg \"I dunno what this image has to do with the article. Nothing, I guess.\")\n\nAt church today, we were given about 15 minutes to consider a topic together amongst a group of men. Ages in the\u00a0room ranged from late teens to young fathers in their mid 20s and early 30s, several of us in our late 40s and 50s, and a few older still. There were bountiful and sundry opinions and life experiences in that room. Fifteen minutes wasn't enough.\n\nThe question, as best I remember it: How do we find time as providers to also be present with our family? I loved so many of the answers. I really didn't find fault with any of them. Maybe that's the reason to explore it further here: there isn't a definitive answer, for any one life, when it comes to direction, time, presence, and quality.\n\nI felt the question land on some of the other men. A few took longer to answer than they needed to. One or two just nodded along, like they'd rather not go first. It's the type of inquiry that can bring about tender feelings of guilt, regret, and remorse. It can also provide a moment of pride, or solace, or resolution. It all depends.\n\nAs parents, we do our best. Doesn't matter if you are a mom or a dad. Single or married. Divorced, widowed, or adopt without partner. Being a parent is an automatic sacrifice. You must shake off many of the things that once brought you pleasure, distraction, and relief. And it will be frustrating somedays. Guilt plagues your conscious. Are you doing enough? Should you have said more? Less? Were you doing something they'd remember the rest of their lives, for better or worse?\n\nThe point I tried to make during class is that no matter who you are, or how old you are, you will move through seasons as a parent. As a partner. Husband, wife, etc. You will fail a lot. You will also have windfalls of absolute joy. I think that, for those who invest themselves fully in the work of family, there is always reckoning. Unlooked for moments when your children come back to you and do the right thing. They show you how well you did by the lives they lead. I tried to explain that the most important thing to remember when you are deep in the trenches of trying to do it all and be it all, is to have grace and compassion for yourself. To be gentle. To say \"Yes, I made a mess out of that situation. I will return tomorrow and try again.\"\n\nSomedays, all you have is 35% capacity. And that's totally fair. Eventually, your family will understand. And if they don't, again; be gentle with yourself. Being in a family is one of the most difficult things you could possibly undertake. And if you're truly a shitty parent, I'm sorry. That pain *will* come...not maybe, but will actually haunt you in a very real way...and you will be shaken to your core. If you have decent human beings as partners, children, etc, they will explain to you in plain terms what you did to them and how you can remain in their lives. But I think this is the exception to the rule.\n\nOverall, I think the people that are wandering around on planet Earth beside us are truly doing God's work as parents. As providers. As nurturers. As Elder David A. Bednar wisely said, \"There's no such thing as balance.\" Instead, focus on the essentials. Identify the two, three, or four most important priorities in your life, and give your full attention to what's in front of you. When you're home, be home. When you're at work, be at work.\n\nBut afterward, be gentle. Be kind. To others, but most importantly, to yourself. Because how you treat yourself is a reflection of how you feel about others. And that might be the most important lesson that a child can learn from a parent, no matter whether they are there 5% or 75% of the time. Because it's a lesson that can be seen so obviously by virtue of every word that comes out of our mouths.",
