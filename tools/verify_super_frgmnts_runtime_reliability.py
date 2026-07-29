@@ -116,6 +116,20 @@ def main() -> None:
         "var completionCollisionQa =\n                episodeBetaRun &&" in source,
         "The completion-collision seam must remain restricted to the Episode beta",
     )
+    require_tokens(
+        source,
+        "regenerative Wound retry",
+        (
+            "var woundBossRetryQa =",
+            'previewParameters.get("qa") === "retry"',
+            "var regenerateWoundRetry =",
+            'state === "lost"',
+            "hits = regenerateWoundRetry",
+            ': episodeWoundSnapshot.hits',
+            'id: "qa-wound-retry"',
+            'canvas.dataset.woundBossRetryQa =\n                            "regenerated"',
+        ),
+    )
 
     print("SUPER FRGMNTS overnight runtime reliability: PASS")
     print("- legacy hazards render without terminating the animation loop")
@@ -124,6 +138,7 @@ def main() -> None:
     print("- title and boss announcement art load only when selected")
     print("- the Episode-only death-cycle QA route is deterministic")
     print("- the death/completion collision route reproduces update ordering")
+    print("- failed Wound attempts regenerate health without replacing the checkpoint")
 
 
 if __name__ == "__main__":

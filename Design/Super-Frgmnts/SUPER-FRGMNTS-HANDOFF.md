@@ -2,7 +2,7 @@
 
 **Status:** Beta 2 stabilization release approved for production
 
-**Updated:** 2026-07-28
+**Updated:** 2026-07-29
 
 **Checkpoint:** Post-Beta 2 polish approved for commit, `main` deployment, and
 live production verification
@@ -94,7 +94,9 @@ Important constraints:
    authored hazard beats, an eight-minute clock, and the Uplink Gate.
 9. The completed Uplink Gate freezes and preserves the Foundry run, then plays
    a five-second descent beat before opening The Wound at a safe portal-bay
-   boss checkpoint.
+   boss checkpoint. A failed Wound attempt returns Aryn to that safe bay with
+   five regenerated hearts while preserving the checkpoint's score, mission
+   time, collected resources, and equipment.
 10. Seam Hunter's death reveals Wound-touched Vesperite. Deliberate Down-input
    recovery completes the beta, fades the stage to black, and automatically
    returns Aryn beside the Coreworks transport with the specimen and loadout
@@ -187,6 +189,8 @@ Then use:
   `http://127.0.0.1:8765/super_frgmnts.html?episode=01&stage=wound&autostart=1`
 - Production recovery/return QA:
   `http://127.0.0.1:8765/super_frgmnts.html?episode=01&stage=wound&autostart=1&qa=reward`
+- Regenerative Wound retry QA:
+  `http://127.0.0.1:8765/super_frgmnts.html?episode=01&stage=wound&autostart=1&qa=retry`
 - Reloadable surface return:
   `http://127.0.0.1:8765/super_frgmnts.html?episode=01&stage=overworld&autostart=1&return=1`
 - Return report and Chapter 01 close:

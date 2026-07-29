@@ -23,11 +23,12 @@ title-to-Arrival path.
 Three P2 issues were also addressed. Completion can no longer override death
 when both happen in one update; window focus loss now suspends simulation as
 the lifecycle design requires; and the desktop title no longer downloads the
-portrait title plus a Wound-only boss title. The latter removes 2,560,852
-bytes, or 23.93%, from the observed local desktop cold-entry request set.
+portrait title plus a Wound-only boss title. After the approved retry follow-up,
+the final entry still removes 2,558,161 bytes, or 23.91%, from the observed
+local desktop cold-entry request set.
 
 No P1 issue was found. Five P3 concerns remain deliberately deferred: the lack
-of automated behavioral browser tests, the 25,336-line single-file runtime,
+of automated behavioral browser tests, the 25,399-line single-file runtime,
 hot-loop allocations and DOM lookups without demonstrated frame instability,
 one inaccurate pause-screen phrase, and the optional external font
 dependency. There was no redesign, asset mutation, dependency change,
@@ -50,7 +51,7 @@ deployment, publication, or remote write.
 - There is no package manifest, lockfile, framework runtime, bundler,
   typechecker, linter, JavaScript unit runner, or browser test runner for this
   game.
-- The final HTML is 1,010,636 raw bytes, 145,495 bytes at gzip level 9, and
+- The final HTML is 1,013,327 raw bytes, 145,907 bytes at gzip level 9, and
   contains one strict-mode inline JavaScript IIFE.
 - The file is served directly for local review. Query parameters select
   isolated scenes and QA states.
@@ -63,8 +64,9 @@ deployment, publication, or remote write.
 - `configureEpisodeScene()` rebuilds geometry, population, mission state, and
   scene asset bindings in place. History state keeps scene URLs reloadable.
 - The Foundry-to-Wound handoff stores a runtime checkpoint snapshot. Wound
-  retries restore Foundry score, health, time, and equipment. Wound-touched
-  Vesperite is the completion condition for returning to the surface.
+  retries regenerate five hearts while restoring Foundry score, time,
+  collected resources, and equipment. Wound-touched Vesperite is the
+  completion condition for returning to the surface.
 - There is no save-slot or Continue Game feature in Beta 2. Session storage
   persists Episode credits; local storage persists the sound preference.
 
@@ -265,7 +267,7 @@ telemetry value advances over time.
 **Status:** Deferred. The audit adds the smallest static verifier and manual
 browser regression, not a new test framework.
 
-#### P3-02 — The runtime is a 25,336-line mutable single file
+#### P3-02 — The runtime is a 25,399-line mutable single file
 
 The 903 KiB-class inline runtime combines scene configuration, actors, physics,
 audio, assets, UI, and QA seams. It has extensive shared mutable state and
@@ -335,10 +337,10 @@ plates. The matrix records that limitation.
 
 The detailed evidence is in `docs/audit/PERFORMANCE_REPORT.md`.
 
-- Desktop cold-entry local bytes: 10,700,803 → 8,139,951
-  (`-2,560,852`, `-23.93%`).
-- HTML: 1,006,053 → 1,010,636 raw bytes; gzip 144,901 → 145,495.
-  The reliability code adds 594 compressed bytes.
+- Desktop cold-entry local bytes: 10,700,803 → 8,142,642
+  (`-2,558,161`, `-23.91%`).
+- HTML: 1,006,053 → 1,013,327 raw bytes; gzip 144,901 → 145,907.
+  The reliability and approved retry code add 1,006 compressed bytes.
 - Baseline Wound moving-world proxy: 222 changes / 3,002 ms, median 14 ms,
   p95 20 ms, max 29 ms.
 - Final isolated proxy: 352 changes / 3,000 ms, median 10 ms, p95 12 ms,
@@ -350,6 +352,9 @@ The detailed evidence is in `docs/audit/PERFORMANCE_REPORT.md`.
 ## Files changed
 
 - `super_frgmnts.html`
+- `Design/Super-Frgmnts/SUPER-FRGMNTS-HANDOFF.md`
+- `Design/Super-Frgmnts/EPISODE-01-BETA-PRODUCTION-RUN-v1.md`
+- `tools/verify_super_frgmnts_production_run.py`
 - `tools/verify_super_frgmnts_runtime_reliability.py`
 - `docs/audit/OVERNIGHT_PROGRESS.md`
 - `docs/audit/OVERNIGHT_AUDIT.md`
@@ -367,7 +372,14 @@ file changed.
 - `?episode=01&stage=foundry&autostart=1&qa=completion-collision`
   deterministic fatal-damage/completion ordering seam.
 
-Both QA seams require the Episode beta and have no effect on normal routes.
+The two overnight-audit QA seams require the Episode beta and have no effect
+on normal routes.
+
+The approved post-audit regenerative retry rule also adds:
+
+- `?episode=01&stage=wound&autostart=1&qa=retry`, which records a damaged
+  checkpoint, forces one deterministic fatal hit, and verifies that Retry
+  starts a fresh five-heart boss attempt without replacing the checkpoint.
 
 ## Final verification
 
@@ -377,7 +389,8 @@ Both QA seams require the Episode beta and have no effect on normal routes.
 /usr/bin/time -p sh -c 'for test in tools/verify_super_frgmnts_*.py; do python3 "$test" || exit 1; done'
 ```
 
-Result: all 43 contracts passed in 3.20 seconds.
+Result: all 43 contracts passed in 3.43 seconds after the regenerative retry
+follow-up.
 
 ```sh
 sed -n '/^    <script>$/,/^    <\/script>$/p' super_frgmnts.html |
@@ -399,6 +412,11 @@ python3 -m http.server 8768 --bind 127.0.0.1
 
 Result: canonical title, default title→Arrival, Wound art selection, death
 cycles, collision ordering, and transition browser checks launched locally.
+
+The approved follow-up also passed a real Wound death→Retry check: a checkpoint
+with one recorded lost heart regenerated to five hearts, restored the 06:00
+checkpoint clock and score 2400, retained the rifle, and reset Seam Hunter to
+50 health.
 
 There is no project build, typecheck, lint, unit runner, integration runner, or
 automated browser runner to execute.
@@ -456,6 +474,8 @@ below are measurement gaps, not failing commands.
 - `bd6669d7` — `audit: harden runtime reliability`
 - `audit: document overnight review` — documentation commit containing this
   report and the other morning deliverables
+- `gameplay: regenerate Wound boss retries` — approved follow-up implementing
+  fresh five-heart boss attempts
 
 ## Safety confirmation
 

@@ -3247,6 +3247,9 @@
             var woundVesperiteRewardQa =
                 woundBossPreview &&
                 previewParameters.get("qa") === "reward";
+            var woundBossRetryQa =
+                woundBossPreview &&
+                previewParameters.get("qa") === "retry";
             var expansionPreview =
                 previewParameters.get("preview") === "foundry-expansion" ||
                 (episodeOneRun && episodeStage === "foundry");
@@ -4866,6 +4869,7 @@
             var woundBossIntroCueMask = 0;
             var woundBossIntroGamepadHeld = false;
             var woundBossIntroPreviousFocus = null;
+            var woundBossRetryQaConsumed = false;
             var woundVesperiteRewardReady = false;
             var woundVesperiteRevealTime = 0;
             var woundVesperiteRecovered = false;
@@ -6768,6 +6772,27 @@
             );
 
             function resetGame(autostart) {
+                var regenerateWoundRetry =
+                    woundBossPreview &&
+                    state === "lost";
+                if (
+                    woundBossRetryQa &&
+                    !episodeWoundSnapshot
+                ) {
+                    episodeWoundSnapshot = {
+                        score: 2400,
+                        hits: 1,
+                        timeLeft: 360,
+                        collected: 12,
+                        creditsCollected: 0,
+                        vesperiteCollected: 1,
+                        jetpackOwned: true,
+                        heavyRifleOwned: true,
+                        selectedWeapon: "rifle",
+                        blasterTier: 2,
+                        annihilationComplete: false
+                    };
+                }
                 if (woundBossPreview) {
                     resetWoundBossIntro();
                 }
@@ -7320,7 +7345,11 @@
                 }
                 if (woundBossPreview && episodeWoundSnapshot) {
                     score = episodeWoundSnapshot.score;
-                    hits = episodeWoundSnapshot.hits;
+                    // The Uplink preserves progress, but a failed boss
+                    // attempt regenerates Aryn for a fresh encounter.
+                    hits = regenerateWoundRetry
+                        ? 0
+                        : episodeWoundSnapshot.hits;
                     collected = episodeWoundSnapshot.collected;
                     creditsCollected =
                         episodeWoundSnapshot.creditsCollected;
@@ -7348,6 +7377,40 @@
                         );
                     canvas.dataset.episodeCheckpoint =
                         "wound";
+                    canvas.dataset.woundRetryHealth =
+                        regenerateWoundRetry
+                            ? "regenerated"
+                            : "checkpoint";
+                    canvas.dataset.woundRetryCheckpointHits =
+                        String(episodeWoundSnapshot.hits);
+                }
+                if (woundBossRetryQa) {
+                    if (
+                        autostart &&
+                        !woundBossRetryQaConsumed
+                    ) {
+                        hits = MAX_HITS - 1;
+                        invulnerableTime = 0;
+                        hazards = [
+                            {
+                                id: "qa-wound-retry",
+                                kind: "thermal",
+                                x: WOUND_PLAYER_SPAWN_X + 12,
+                                y: GROUND_Y,
+                                width: 180,
+                                baseHeight: 42,
+                                activeHeight: 148,
+                                label: "QA WOUND RETRY"
+                            }
+                        ];
+                        woundBossRetryQaConsumed = true;
+                        canvas.dataset.woundBossRetryQa =
+                            "armed";
+                    } else if (regenerateWoundRetry) {
+                        hazards = [];
+                        canvas.dataset.woundBossRetryQa =
+                            "regenerated";
+                    }
                 }
                 if (episodeSurfaceReturn) {
                     creditsCollected = readEpisodeCredits();

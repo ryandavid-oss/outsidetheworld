@@ -171,10 +171,10 @@ Completed so far:
   10 ms, p95 12 ms, maximum 17 ms). Seventeen completed test tabs were parked
   before this sample, so it demonstrates no final regression but is not a
   controlled optimization comparison.
-- Final fresh-origin desktop entry requested 8,139,951 local bytes before
-  fonts/favicon, down 2,560,852 bytes or 23.93%. The portrait title and Wound
+- Final fresh-origin desktop entry requested 8,142,642 local bytes before
+  fonts/favicon, down 2,558,161 bytes or 23.91%. The portrait title and Wound
   boss title no longer load on the desktop title route.
-- Final HTML is 1,010,636 raw bytes and 145,495 bytes at gzip level 9.
+- Final HTML is 1,013,327 raw bytes and 145,907 bytes at gzip level 9.
 
 ## Phase 5 — Fixes and regression coverage
 
@@ -197,7 +197,8 @@ Completed so far:
 
 **Status:** Complete
 
-- All 43 `tools/verify_super_frgmnts_*.py` contracts passed in 3.20 seconds.
+- All 43 `tools/verify_super_frgmnts_*.py` contracts passed in 3.43 seconds
+  after the regenerative retry follow-up.
 - Inline JavaScript passed bundled Node 24.14.0 syntax checking.
 - `git diff --check` passed.
 - Browser retest passed the canonical title→Arrival route, death cycles,
@@ -209,3 +210,22 @@ Completed so far:
   - `docs/audit/PLAYTEST_MATRIX.md`
 - No deployment, publication, push, production service change, asset rewrite,
   or external communication occurred.
+
+## Approved follow-up — Regenerative Wound retry
+
+**Status:** Implemented
+
+- Product decision: a failed Wound attempt is a regenerative checkpoint, not
+  a player-condition save state.
+- Retry returns Aryn to the safe bay with five hearts.
+- Score, mission time, Signal Shards, Galactic Credits, optional Vesperite,
+  jet assist, heavy rifle, and seeker tier still restore from the Uplink
+  checkpoint.
+- Boss state, projectiles, heat, invulnerability, and temporary combat state
+  continue to reset through the existing encounter reset.
+- Added deterministic `qa=retry` browser coverage with a damaged checkpoint
+  and forced fatal hit.
+- Browser result: Retry restored five hearts, the 06:00 checkpoint clock,
+  score 2400, the rifle, and a 50-health Seam Hunter while retaining the
+  checkpoint's one-hit marker as evidence that health regenerated rather than
+  restoring the snapshot.

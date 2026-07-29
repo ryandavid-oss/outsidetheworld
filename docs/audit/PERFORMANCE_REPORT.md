@@ -47,10 +47,10 @@ authoritative FPS counter.
 
 | Metric | Baseline | Final | Change |
 | --- | ---: | ---: | ---: |
-| Canonical desktop local request bytes, excluding font/favicon | 10,700,803 | 8,139,951 | -2,560,852 (-23.93%) |
+| Canonical desktop local request bytes, excluding font/favicon | 10,700,803 | 8,142,642 | -2,558,161 (-23.91%) |
 | Parser-visible inactive title assets on desktop | 2 | 0 | -2 requests |
-| HTML raw bytes | 1,006,053 | 1,010,636 | +4,583 |
-| HTML gzip-9 bytes | 144,901 | 145,495 | +594 |
+| HTML raw bytes | 1,006,053 | 1,013,327 | +7,274 |
+| HTML gzip-9 bytes | 144,901 | 145,907 | +1,006 |
 | Python verification contracts | 42 | 43 | +1 |
 | Wound proxy changes / observation | 222 / 3,002 ms | 352 / 3,000 ms | Not directly causal; final sample isolated |
 | Wound proxy median interval | 14 ms | 10 ms | No regression observed |
@@ -98,7 +98,8 @@ The fresh-origin server observed:
 - Veyra atmospheric approach painting
 - title audio
 
-Total before fonts and favicon: 8,139,951 bytes.
+Final total before fonts and favicon, including the approved retry follow-up:
+8,142,642 bytes.
 
 The title image completed at its authored 1,672 × 941 dimensions. The boss
 element had no `src`. A separate Wound route loaded the correct 1,400 × 320
@@ -111,7 +112,7 @@ boss title, confirming that route selection deferred rather than removed it.
 | Title audio | 2,881,035 |
 | Desktop title painting | 2,446,925 |
 | Veyra atmospheric approach | 1,800,249 |
-| Final HTML | 1,010,636 |
+| Final HTML | 1,013,327 |
 | Fire control icon | 721 |
 | Jump control icon | 385 |
 
@@ -121,9 +122,9 @@ and art quality.
 
 ## Bundle and code observations
 
-- Final `super_frgmnts.html`: 25,336 lines and 1,010,636 raw bytes.
+- Final `super_frgmnts.html`: 25,399 lines and 1,013,327 raw bytes.
 - Baseline inline JavaScript: approximately 902,830 bytes.
-- Gzip reduces the complete final HTML to 145,495 bytes, so transfer size is
+- Gzip reduces the complete final HTML to 145,907 bytes, so transfer size is
   not proportional to raw source size.
 - The monolith still incurs one large parse/compile unit and makes runtime
   behavior difficult to test independently.

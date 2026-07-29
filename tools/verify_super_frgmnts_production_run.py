@@ -178,6 +178,13 @@ def main() -> None:
         "Boss retry does not restore the Uplink checkpoint",
     )
     require(
+        'state === "lost"' in reset_body
+        and "hits = regenerateWoundRetry" in reset_body
+        and "? 0" in reset_body
+        and ": episodeWoundSnapshot.hits" in reset_body,
+        "Boss retry does not regenerate Aryn's health",
+    )
+    require(
         re.search(
             r"surfaceReturnLoadout\s*\.packUpgradeMaterial",
             reset_body,
@@ -192,7 +199,7 @@ def main() -> None:
         "### Uplink Gate → The Wound",
         "### Wound recovery → surface",
         "The whole stage reaches opaque black before scene replacement.",
-        "Boss retry begins in the safe bay",
+        "Boss retry begins in the safe bay with five hearts",
         "Desktop and 390 × 844 portrait framing",
         "The Coreworks transport remains physically present but sealed",
     )
@@ -206,8 +213,8 @@ def main() -> None:
 
     print("SUPER FRGMNTS Episode 01 beta production run: PASS")
     print("- Arrival, Overworld, Foundry, Wound, recovery, and surface share one runtime")
-    print("- the Uplink Gate establishes a state-preserving boss checkpoint")
-    print("- boss retries restore Foundry score, health, time, and equipment")
+    print("- the Uplink Gate preserves Foundry progress for the boss checkpoint")
+    print("- boss retries regenerate health while restoring score, time, and equipment")
     print("- Wound-touched Vesperite recovery is the completion condition")
     print("- a locked black transition returns Aryn to the Veyra surface")
     print("- the returned player cannot re-enter the Foundry transport")

@@ -56,7 +56,7 @@ The checkpoint carries:
 | State | Foundry → Wound | Wound retry | Wound → surface |
 | --- | --- | --- | --- |
 | Score | preserve | restore | preserve final |
-| Hearts already lost | preserve | restore | clear for safe surface |
+| Hearts already lost | preserve | regenerate to five hearts | clear for safe surface |
 | Remaining mission time | preserve | restore | surface becomes untimed |
 | Signal Shards | preserve all 12 | restore | no longer an objective |
 | Galactic Credits | preserve | restore | preserve |
@@ -129,6 +129,8 @@ the normal title/start-over path.
   `super_frgmnts.html?episode=01&stage=wound&autostart=1`
 - Production recovery and return QA:
   `super_frgmnts.html?episode=01&stage=wound&autostart=1&qa=reward`
+- Regenerative Wound retry QA:
+  `super_frgmnts.html?episode=01&stage=wound&autostart=1&qa=retry`
 - Reloadable surface return:
   `super_frgmnts.html?episode=01&stage=overworld&autostart=1&return=1`
 
@@ -141,7 +143,9 @@ entry. Walk left to Dras and press Down at `REPORT`.
   The Wound, and surface return render without console errors or missing
   critical artwork.
 - The Uplink checkpoint preserves the state matrix above.
-- Boss retry begins in the safe bay with the announcement rearmed.
+- Boss retry begins in the safe bay with five hearts and the announcement
+  rearmed. Score, mission time, collected resources, and equipment still
+  restore from the Uplink checkpoint.
 - Recovery is impossible before the corpse dissolve and material reveal.
 - The black transition cannot expose the scene swap or allow invisible input.
 - The return report names both stabilizers, the Seam Hunter, the Wound, the
