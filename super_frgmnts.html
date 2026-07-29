@@ -311,8 +311,7 @@
         }
 
         .title-screen {
-            --title-art:
-                url("/Images/Game/Super-Frgmnts/super-frgmnts-title-coreworks-v1.png");
+            --title-art: none;
             position: absolute;
             inset: 0;
             z-index: 6;
@@ -403,13 +402,6 @@
                 filter 520ms ease,
                 opacity 520ms ease,
                 transform 900ms cubic-bezier(0.2, 0.72, 0.2, 1);
-        }
-
-        @media (max-width: 720px) and (orientation: portrait) {
-            .title-screen {
-                --title-art:
-                    url("/Images/Game/Super-Frgmnts/super-frgmnts-title-coreworks-mobile-v1.png");
-            }
         }
 
         .title-screen__atmosphere {
@@ -2904,7 +2896,7 @@
                             <img
                                 class="boss-intro__title"
                                 id="bossIntroTitle"
-                                src="/Images/Game/Super-Frgmnts/seam-hunter-encounter-title-runtime-v1.png"
+                                data-source="/Images/Game/Super-Frgmnts/seam-hunter-encounter-title-runtime-v1.png"
                                 alt=""
                                 decoding="async"
                                 draggable="false"
@@ -3009,12 +3001,10 @@
                         <source
                             media="(max-width: 720px) and (orientation: portrait)"
                             data-source="/Images/Game/Super-Frgmnts/super-frgmnts-title-coreworks-mobile-v1.png"
-                            srcset="/Images/Game/Super-Frgmnts/super-frgmnts-title-coreworks-mobile-v1.png"
                         >
                         <img
                             class="title-screen__art"
                             data-source="/Images/Game/Super-Frgmnts/super-frgmnts-title-coreworks-v1.png"
-                            src="/Images/Game/Super-Frgmnts/super-frgmnts-title-coreworks-v1.png"
                             alt="The Super Frgmnts title suspended above the abandoned Veyra Coreworks and its distant sealed gate"
                             decoding="async"
                             fetchpriority="high"
@@ -3261,6 +3251,13 @@
                 previewParameters.get("preview") === "foundry-expansion" ||
                 (episodeOneRun && episodeStage === "foundry");
             var episodeBetaRun = episodeOneRun && expansionPreview;
+            var deathCycleQa =
+                episodeBetaRun &&
+                previewParameters.get("qa") === "death";
+            var completionCollisionQa =
+                episodeBetaRun &&
+                previewParameters.get("qa") ===
+                    "completion-collision";
             var foundryUplinkQa =
                 expansionPreview &&
                 previewParameters.get("qa") === "uplink";
@@ -3397,7 +3394,11 @@
                 ? WOUND_BOSS_WORLD_WIDTH
                 : WIDTH * SCREEN_COUNT;
             var requestedPreviewRoom = parseInt(previewParameters.get("room") || "0", 10);
-            var previewStartRoom = stabilizerTrial || foundryGateTrial
+            var previewStartRoom = completionCollisionQa
+                ? 7
+                : deathCycleQa
+                ? 3
+                : stabilizerTrial || foundryGateTrial
                 ? 1
                 : expansionPreview && Number.isFinite(requestedPreviewRoom)
                     ? Math.max(0, Math.min(SCREEN_COUNT - 1, requestedPreviewRoom))
@@ -3804,6 +3805,8 @@
             var gameApp = document.querySelector(".game-app");
             var stageShell = document.getElementById("stageShell");
             var bossIntro = document.getElementById("bossIntro");
+            var bossIntroTitle =
+                document.getElementById("bossIntroTitle");
             var bossIntroSkip = document.getElementById("bossIntroSkip");
             var bossIntroParticles =
                 document.getElementById("bossIntroParticles");
@@ -3892,23 +3895,27 @@
                 altText,
                 backgroundSource
             ) {
+                var mobileTitleSelected = window.matchMedia(
+                    "(max-width: 720px) and (orientation: portrait)"
+                ).matches;
+                var selectedSource =
+                    mobileTitleSelected && mobileSource
+                        ? mobileSource
+                        : desktopSource;
                 var sourceNode = document.querySelector(
                     ".title-screen__picture source"
                 );
                 if (sourceNode) {
                     sourceNode.dataset.source = mobileSource || desktopSource;
-                    sourceNode.setAttribute(
-                        "srcset",
-                        mobileSource || desktopSource
-                    );
+                    sourceNode.removeAttribute("srcset");
                 }
-                titleArtImage.dataset.source = desktopSource;
-                titleArtImage.src = desktopSource;
+                titleArtImage.dataset.source = selectedSource;
+                titleArtImage.src = selectedSource;
                 titleArtImage.alt = altText || "";
-                if (backgroundSource) {
+                if (backgroundSource !== null) {
                     titleScreen.style.setProperty(
                         "--title-art",
-                        'url("' + backgroundSource + '")'
+                        'url("' + (backgroundSource || selectedSource) + '")'
                     );
                 } else {
                     titleScreen.style.removeProperty("--title-art");
@@ -3941,6 +3948,8 @@
                 titleArtImage.removeAttribute("src");
                 titleScreen.style.setProperty("--title-art", "none");
             }
+
+            restoreTitleArtwork();
 
             function buildBossIntroParticles() {
                 if (!bossIntroParticles || bossIntroParticles.children.length) {
@@ -4803,6 +4812,24 @@
             ];
 
             function applySceneAssets() {
+                if (bossIntroTitle) {
+                    if (woundBossPreview) {
+                        var bossTitleSource =
+                            assets.woundBossAnnouncementTitle &&
+                            assets.woundBossAnnouncementTitle.src
+                                ? assets.woundBossAnnouncementTitle.src
+                                : bossIntroTitle.dataset.source;
+                        if (
+                            bossTitleSource &&
+                            bossIntroTitle.getAttribute("src") !==
+                                bossTitleSource
+                        ) {
+                            bossIntroTitle.src = bossTitleSource;
+                        }
+                    } else {
+                        bossIntroTitle.removeAttribute("src");
+                    }
+                }
                 if (overworldPreview) {
                     assets.background0 = assets.overworldWest;
                     assets.background1 = assets.overworld0;
@@ -4948,6 +4975,7 @@
                 }
             };
             var lastFrame = 0;
+            var runtimeFocused = true;
             var renderRequested = true;
             var runFrameTime = 0;
             var jumpBuffer = 0;
@@ -6448,6 +6476,9 @@
 
                 cameraX = Math.max(0, Math.min(WORLD_WIDTH - viewWidth, cameraX));
                 document.body.classList.toggle("is-portrait-game", portraitMode);
+                if (!titleScreen.hidden) {
+                    restoreTitleArtwork();
+                }
                 renderRequested = true;
             }
 
@@ -6910,6 +6941,10 @@
                             : WOUND_PLAYER_SPAWN_X
                     : foundryUplinkQa
                         ? WIDTH * 7 + 1120
+                    : completionCollisionQa
+                        ? WIDTH * 7 + 1228
+                    : deathCycleQa
+                        ? WIDTH * 3 + 920
                     : foundryGateTrial
                         ? FOUNDRY_REFINERY_GATE_X - 240
                         : stabilizerTrial
@@ -7140,6 +7175,52 @@
                     heartPickups = [];
                 }
                 resetEpisodeBetaPopulation();
+                if (deathCycleQa) {
+                    elapsed = 2.3;
+                    hits = MAX_HITS - 1;
+                    invulnerableTime = 0;
+                    canvas.dataset.deathCycleQa = "armed";
+                } else {
+                    delete canvas.dataset.deathCycleQa;
+                }
+                if (completionCollisionQa) {
+                    collected = TOTAL_SHARDS;
+                    atmosphericStabilizers.forEach(function (stabilizer) {
+                        stabilizer.active = true;
+                        stabilizer.activating = false;
+                        stabilizer.activationElapsed =
+                            STABILIZER_ACTIVATION_DURATION;
+                    });
+                    rifleObstacles.forEach(function (obstacle) {
+                        if (obstacle.routeGate) {
+                            obstacle.destroyed = true;
+                            obstacle.state = "rubble";
+                        }
+                    });
+                    hazards = hazards
+                        .filter(function (hazard) {
+                            return hazard.id !==
+                                "qa-completion-collision";
+                        })
+                        .concat([
+                            {
+                                id: "qa-completion-collision",
+                                kind: "thermal",
+                                x: WIDTH * 7 + 1218,
+                                y: GROUND_Y,
+                                width: 132,
+                                baseHeight: 42,
+                                activeHeight: 148,
+                                label: "QA COMPLETION COLLISION"
+                            }
+                        ]);
+                    hits = MAX_HITS - 1;
+                    invulnerableTime = 0;
+                    canvas.dataset.completionCollisionQa =
+                        "armed";
+                } else {
+                    delete canvas.dataset.completionCollisionQa;
+                }
                 if (woundBossPreview) {
                     document.querySelector(
                         ".mission strong"
@@ -16398,7 +16479,7 @@
             }
 
             function checkUplink() {
-                if (woundBossPreview) return;
+                if (state !== "running" || woundBossPreview) return;
                 if (overworldPreview) {
                     var overworldPlayerCenter = player.x + 56;
                     var overworldPlayerBottom = player.y + 100;
@@ -21643,15 +21724,17 @@
                         }
                     }
                     ctx.restore();
-                    canvas.dataset[
-                        hazard.id
-                            .replace(/-([a-z])/g, function (
-                                _,
-                                letter
-                            ) {
-                                return letter.toUpperCase();
-                            })
-                    ] = state;
+                    if (hazard.id) {
+                        canvas.dataset[
+                            hazard.id
+                                .replace(/-([a-z])/g, function (
+                                    _,
+                                    letter
+                                ) {
+                                    return letter.toUpperCase();
+                                })
+                        ] = state;
+                    }
                 });
             }
 
@@ -24948,21 +25031,42 @@
             });
 
             window.addEventListener("blur", function () {
+                runtimeFocused = false;
+                lastFrame = 0;
                 releaseAllControls();
                 pauseAudioForFocusLoss();
             });
 
-            window.addEventListener("focus", resumeAudioAfterFocusGain);
+            window.addEventListener("focus", function () {
+                runtimeFocused = true;
+                lastFrame = 0;
+                renderRequested = true;
+                resumeAudioAfterFocusGain();
+            });
             window.addEventListener("pagehide", function () {
+                runtimeFocused = false;
+                lastFrame = 0;
                 releaseAllControls();
                 pauseAudioForFocusLoss();
             });
-            window.addEventListener("pageshow", resumeAudioAfterFocusGain);
+            window.addEventListener("pageshow", function () {
+                runtimeFocused = typeof document.hasFocus === "function"
+                    ? document.hasFocus()
+                    : true;
+                lastFrame = 0;
+                renderRequested = true;
+                resumeAudioAfterFocusGain();
+            });
             document.addEventListener("visibilitychange", function () {
                 if (document.visibilityState === "hidden") {
+                    runtimeFocused = false;
+                    lastFrame = 0;
                     releaseAllControls();
                     pauseAudioForFocusLoss();
                 } else {
+                    runtimeFocused = typeof document.hasFocus === "function"
+                        ? document.hasFocus()
+                        : true;
                     lastFrame = 0;
                     renderRequested = true;
                     resumeAudioAfterFocusGain();
@@ -25184,11 +25288,16 @@
 
             function frame(now) {
                 var pageVisible = document.visibilityState !== "hidden";
-                if (pageVisible && state === "boss-intro") {
+                if (
+                    pageVisible &&
+                    runtimeFocused &&
+                    state === "boss-intro"
+                ) {
                     pollWoundBossIntroGamepad();
                 }
                 var simulationActive =
                     pageVisible &&
+                    runtimeFocused &&
                     (
                         state === "running" ||
                         state === "dying" ||
@@ -25211,6 +25320,8 @@
                     draw();
                     renderRequested = false;
                 } else if (!pageVisible) {
+                    lastFrame = 0;
+                } else if (!runtimeFocused) {
                     lastFrame = 0;
                 }
                 window.requestAnimationFrame(frame);
