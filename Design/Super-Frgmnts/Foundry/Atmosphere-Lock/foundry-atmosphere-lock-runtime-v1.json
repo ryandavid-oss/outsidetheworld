@@ -1,0 +1,175 @@
+{
+  "contract": "foundry-atmosphere-lock-runtime-v1",
+  "status": "implemented",
+  "purpose": "A reusable full-height room-divider system at all seven plate seams, with permanent mirrored steel housings, separately retracting pressure membranes, continuous tunnel floors, foreground concrete occlusion, and reversible close-after-crossing behavior.",
+  "generation": {
+    "mode": "built-in image generation",
+    "use_case": "stylized-concept",
+    "prompt_summary": "Original 16-bit side-scroller atmosphere lock viewed edge-on: a tall narrow housing mounted on the right wall, approached horizontally from the left, with a convex pale energy seal projecting left. Flat #ff00ff chroma background, no front-facing arch, no typography, no logos, and no floor.",
+    "wall_prompt_summary": "One continuous load-bearing concrete-and-steel divider spine on flat #ff00ff, front-orthographic and solid from top to bottom, with straight edges and no door or opening. Runtime repeats it at seven seams and places mirrored portal faces against both wall surfaces.",
+    "housing_prompt_summary": "Precise-object edit of the approved side-profile lock: remove only the white projected membrane, preserve the dark steel housing, rail, clamps, brackets, pixel clusters, proportions, and side-on orientation, and replace the removed field with flat #ff00ff chroma.",
+    "membrane_prompt_summary": "Precise-object edit of the approved side-profile lock: isolate only the pale translucent convex pressure membrane, remove every metal housing component, preserve the SNES-era pixel steps and highlights, and place the field on flat #ff00ff chroma.",
+    "rejected_direction": "A front-facing rectangular arch was rejected because it contradicted the side-on approach."
+  },
+  "sources": [
+    {
+      "path": "Design/Super-Frgmnts/Foundry/Atmosphere-Lock/Raw/atmosphere-lock-side-chroma-source-v1.png",
+      "dimensions": [846, 1858],
+      "sha256": "5197b345d1335db8667593eb87f10907a8c4699e969ea07ff1115dba2df4b6e5"
+    },
+    {
+      "path": "Design/Super-Frgmnts/Foundry/Atmosphere-Lock/Raw/atmosphere-lock-side-alpha-source-v1.png",
+      "dimensions": [846, 1858],
+      "sha256": "d22544ac55b2a2827811f35d4843c0443825b3b1fbf36d05f9da2841343abd1d"
+    },
+    {
+      "path": "Design/Super-Frgmnts/Foundry/Atmosphere-Lock/Raw/atmosphere-lock-seam-wall-chroma-source-v1.png",
+      "dimensions": [887, 1774],
+      "sha256": "e8cfb93b2fb7174fc076c5948b7e1e961ada3732e6f91042340e2956fccc6f97"
+    },
+    {
+      "path": "Design/Super-Frgmnts/Foundry/Atmosphere-Lock/Raw/atmosphere-lock-seam-wall-alpha-source-v1.png",
+      "dimensions": [887, 1774],
+      "sha256": "55061c873f04f9ee56a96d57f2d4d8429d915339ea79ea269c3b16b9b4c84ad8"
+    },
+    {
+      "path": "Design/Super-Frgmnts/Foundry/Atmosphere-Lock/Raw/atmosphere-lock-housing-chroma-source-v1.png",
+      "dimensions": [781, 2012],
+      "sha256": "25506acbcb17a3e7f860637021753b0163ef8ef8db8dd74cf50cf9e079f10e40"
+    },
+    {
+      "path": "Design/Super-Frgmnts/Foundry/Atmosphere-Lock/Raw/atmosphere-lock-housing-alpha-source-v1.png",
+      "dimensions": [781, 2012],
+      "sha256": "95ee61e0969c1559584e81e5391caf78db3585e387c698178b4cefd376e29aee"
+    },
+    {
+      "path": "Design/Super-Frgmnts/Foundry/Atmosphere-Lock/Raw/atmosphere-lock-membrane-chroma-source-v1.png",
+      "dimensions": [783, 2009],
+      "sha256": "ba52384c55b14bf4c90e85c9df715790ef638158b46e6458d306e00cff17ba24"
+    },
+    {
+      "path": "Design/Super-Frgmnts/Foundry/Atmosphere-Lock/Raw/atmosphere-lock-membrane-alpha-source-v1.png",
+      "dimensions": [783, 2009],
+      "sha256": "3a0b8a17c25656a83e48d5fee16faa22a867bb3a9f28c3a7e0dc01670416725a"
+    }
+  ],
+  "runtime": {
+    "path": "Images/Game/Super-Frgmnts/foundry-atmosphere-lock-runtime-v1.png",
+    "dimensions": [80, 206],
+    "sha256": "a59a18321554c16b1f3b65c5407a2a29287bb76e4f16683d1995125e995995a8",
+    "source_crop": [229, 420, 616, 1420],
+    "sampling": "nearest-neighbor",
+    "palette": "64-color quantized RGB with soft alpha edge"
+  },
+  "housing_runtime": {
+    "path": "Images/Game/Super-Frgmnts/foundry-atmosphere-lock-housing-runtime-v1.png",
+    "dimensions": [80, 206],
+    "sha256": "8eaefc290bc0074e475ee77ebe1a399378b29fa5279fd87d3ab9d3fc81db7a2e",
+    "source_crop": [223, 64, 690, 1856],
+    "sampling": "nearest-neighbor",
+    "placement": "54×206 crop at x=26 on a transparent 80×206 canvas",
+    "behavior": "Permanent; never retracts or disappears."
+  },
+  "membrane_runtime": {
+    "path": "Images/Game/Super-Frgmnts/foundry-atmosphere-lock-membrane-runtime-v1.png",
+    "dimensions": [80, 206],
+    "sha256": "b24bd90016705d8059e9c0a0b546406d2e86db5102fa4b776d962241888fb563",
+    "source_crop": [121, 115, 629, 1879],
+    "sampling": "nearest-neighbor",
+    "placement": "58×166 crop at x=0, y=20 on a transparent 80×206 canvas",
+    "behavior": "Retracts horizontally into the housing on approach and reforms after Aryn clears the opposite housing."
+  },
+  "seam_wall": {
+    "path": "Images/Game/Super-Frgmnts/foundry-atmosphere-lock-seam-wall-runtime-v1.png",
+    "dimensions": [128, 1882],
+    "sha256": "048bf292115b881b36364c9d60c8393638a44d6f982a82b2cb414f3d74eae9a1",
+    "source_crop": [303, 0, 584, 1774],
+    "sampling": "nearest-neighbor",
+    "palette": "64-color quantized RGB with soft alpha edge"
+  },
+  "placement": {
+    "boundary_x": "WIDTH × seam multiplier",
+    "boundary_multipliers": [1, 2, 3, 4, 5, 6, 7],
+    "wall_x": "boundaryX - 64",
+    "wall_span_y": [0, 1882],
+    "left_door_x": "boundaryX - 144",
+    "right_door_x": "boundaryX + 64",
+    "deck_top_y_by_multiplier": [338, 338, 600, 600, 338, 1604, 600],
+    "door_y": "deckTop + 24 - 206",
+    "door_floor_bottom_y": "deckTop + 24",
+    "tunnel_floor_width": 128,
+    "tunnel_floor_y_by_multiplier": [338, 338, 600, 600, 338, 1604, 600],
+    "approach": "left-to-right",
+    "right_door_transform": "horizontal mirror",
+    "player_occlusion": "The wall sprite is redrawn as a foreground slice from y=156–362 after Aryn, hiding her while she crosses the enclosed divider."
+  },
+  "instances": [
+    {
+      "multiplier": 1,
+      "transition": "Foundry Intake → Breathing Chamber",
+      "deck_top_y": 338,
+      "condition": "always available",
+      "standby_color": "cyan"
+    },
+    {
+      "multiplier": 2,
+      "transition": "Foundry → Refinery",
+      "deck_top_y": 338,
+      "condition": "Foundry atmospheric stabilizer active",
+      "standby_color": "red",
+      "ready_color": "green"
+    },
+    {
+      "multiplier": 3,
+      "transition": "Compression Line → Pressure Exchange",
+      "deck_top_y": 600,
+      "condition": "always available",
+      "standby_color": "cyan"
+    },
+    {
+      "multiplier": 4,
+      "transition": "Refinery → Biolab",
+      "deck_top_y": 600,
+      "condition": "always available",
+      "standby_color": "cyan"
+    },
+    {
+      "multiplier": 5,
+      "transition": "Culture Vats → Specimen Stabilizer",
+      "deck_top_y": 338,
+      "condition": "always available",
+      "standby_color": "cyan"
+    },
+    {
+      "multiplier": 6,
+      "transition": "Biolab → Uplink",
+      "deck_top_y": 1604,
+      "condition": "Biolab atmospheric stabilizer active",
+      "standby_color": "red",
+      "ready_color": "green"
+    },
+    {
+      "multiplier": 7,
+      "transition": "Signal Spine → Uplink Gate plate",
+      "deck_top_y": 600,
+      "condition": "always available",
+      "standby_color": "cyan"
+    }
+  ],
+  "states": {
+    "offline": "The projected seal is tinted red and remains solid.",
+    "standby": "Ordinary unlocked passages use cyan seals and open automatically in 0.58 seconds on approach.",
+    "ready": "An objective-locked seal turns green after its associated Foundry or Biolab atmospheric stabilizer is restored.",
+    "opening": "Near-player approach retracts both opposed membranes horizontally into their fixed wall-face housings; objective locks retain the deliberate 1.25-second opening beat.",
+    "open": "The paired housings remain on the two wall faces. A continuous collision floor carries Aryn through the solid concrete divider while its foreground layer hides her until she emerges.",
+    "closing": "After Aryn crosses and her complete collision body clears the opposite housing, both membranes reform over 0.50 seconds for ordinary passages or 0.78 seconds for objective locks. Returning toward a closing lock reverses it safely.",
+    "rearm": "A completed close remains latched while Aryn is still inside the proximity radius. It rearms only after she leaves that radius or deliberately moves back toward the door, preventing a close-open-close exit loop."
+  },
+  "audio": {
+    "path": "Audio/super-frgmnts-atmosphere-lock-shimmer-v1.wav",
+    "sha256": "8862cfd44215d6ced14c66a2d0ce3c9a168145622e773876e4b7e7f79654e1f5",
+    "format": "48 kHz stereo PCM WAV",
+    "duration_seconds": 1,
+    "cues": ["opening begins", "closing begins", "safe reversal begins"]
+  }
+}

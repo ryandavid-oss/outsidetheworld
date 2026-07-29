@@ -47,16 +47,20 @@ def main() -> None:
             "Deepworks",
             "Uplink",
         ],
-        "signal_shards": 12,
+        "vesperite_fragments": 12,
         "atmospheric_stabilizers": 2,
-        "foundry_enemies": 16,
+        "foundry_enemies": 18,
         "chitin_sentinels": 7,
+        "core_leeches": 3,
     }
     required_stabilization_changes = {
         "production Uplink bulkhead and compact arc-discharge sprites",
         "live RD-42 dorsal-hatch entry and production-art interior",
         "return-to-Dras report and Primary Biolab cliffhanger",
         "stabilizer-driven sky clearing with a persistent infestation remnant",
+        "side-profile red-green Atmosphere Lock and post-lock jet assist",
+        "Vesperite Fragment terminology and Episode 01 objective briefing",
+        "full-width RD-42 deck, unobtrusive hatches, and calm autonomous Trillian",
     }
     assert required_stabilization_changes.issubset(
         set(release["beta_2_changes"])

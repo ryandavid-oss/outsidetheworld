@@ -6,9 +6,9 @@
     <meta name="theme-color" content="#050713" />
     <meta name="color-scheme" content="dark" />
     <meta name="release" content="SUPER FRGMNTS Episode 01 Beta 2" />
-    <meta name="description" content="Guide Aryn Sol-Mavi through The Shard Foundry, recover twelve Signal Shards, and reach the Uplink Gate." />
+    <meta name="description" content="Guide Aryn Sol-Mavi through The Shard Foundry, recover twelve Vesperite Fragments, and reach the Uplink Gate." />
     <meta property="og:title" content="SUPER FRGMNTS // THE SHARD FOUNDRY" />
-    <meta property="og:description" content="Guide Aryn Sol-Mavi across The Shard Foundry, recover twelve Signal Shards, and reach the Uplink Gate." />
+    <meta property="og:description" content="Guide Aryn Sol-Mavi across The Shard Foundry, recover twelve Vesperite Fragments, and reach the Uplink Gate." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://outsidetheworld.com/super_frgmnts.html" />
     <title>SUPER FRGMNTS // Outside The World</title>
@@ -263,7 +263,8 @@
             max-height: calc(100svh - 144px);
             aspect-ratio: 1672 / 941;
             overflow: hidden;
-            border: 3px solid var(--logo-navy);
+            border: 0;
+            outline: 3px solid var(--logo-navy);
             background: #070b18;
             box-shadow:
                 0 0 0 2px var(--warm-plum),
@@ -308,6 +309,75 @@
             height: 100%;
             image-rendering: pixelated;
             touch-action: none;
+        }
+
+        .performance-trial {
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            z-index: 9;
+            padding: 5px 8px;
+            border: 1px solid rgba(160, 190, 245, 0.72);
+            background: rgba(3, 5, 13, 0.86);
+            color: #a0bef5;
+            font: 700 8px/1.35 "Fira Code", monospace;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            transform: translateX(-50%);
+            pointer-events: none;
+        }
+
+        .performance-trial.is-fps-monitor {
+            top: max(8px, env(safe-area-inset-top));
+            right: auto;
+            bottom: auto;
+            left: 8px;
+            padding: 3px 5px;
+            font-size: 7px;
+            transform: none;
+        }
+
+        .zone-eyebrow {
+            position: absolute;
+            top: clamp(76px, 10.5%, 112px);
+            left: 50%;
+            z-index: 5;
+            display: grid;
+            width: min(72%, 760px);
+            justify-items: center;
+            gap: clamp(2px, 0.45vw, 6px);
+            color: var(--cream);
+            text-align: center;
+            text-transform: uppercase;
+            pointer-events: none;
+            transform: translateX(-50%);
+        }
+
+        .zone-eyebrow[hidden] {
+            display: none;
+        }
+
+        .zone-eyebrow.is-entering {
+            animation: zone-eyebrow-enter 2.65s steps(18, end) both;
+        }
+
+        .zone-eyebrow span {
+            color: var(--brand-light-blue);
+            font: 700 clamp(8px, 0.9vw, 12px) var(--font-game);
+            letter-spacing: 0.28em;
+            text-shadow:
+                2px 2px 0 rgba(3, 5, 13, 0.92),
+                0 0 10px rgba(99, 149, 238, 0.36);
+        }
+
+        .zone-eyebrow strong {
+            font: 900 clamp(25px, 3.1vw, 46px) var(--font-display);
+            letter-spacing: 0.055em;
+            line-height: 0.98;
+            text-shadow:
+                3px 4px 0 rgba(3, 5, 13, 0.9),
+                0 0 12px rgba(160, 190, 245, 0.42),
+                0 0 28px rgba(99, 149, 238, 0.22);
         }
 
         .title-screen {
@@ -736,6 +806,17 @@
             display: none;
         }
 
+        .message-card.is-objectives {
+            width: min(90%, 720px);
+            text-align: left;
+        }
+
+        .message-card.is-objectives .message-kicker,
+        .message-card.is-objectives .message-title,
+        .message-card.is-objectives .message-actions {
+            text-align: center;
+        }
+
         .message-kicker {
             margin: 0 0 8px;
             color: var(--brand-light-blue);
@@ -761,6 +842,44 @@
             color: #bac6d7;
             font-size: clamp(9px, 1.2vw, 13px);
             line-height: 1.55;
+        }
+
+        .message-card.is-objectives .message-copy {
+            max-width: 48em;
+        }
+
+        .message-copy__intro {
+            margin: 0 0 8px;
+            color: var(--brand-light-blue);
+            font-weight: 700;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+        }
+
+        .message-objectives {
+            display: grid;
+            gap: 6px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            counter-reset: episode-objective;
+        }
+
+        .message-objectives li {
+            position: relative;
+            min-height: 24px;
+            padding-left: 38px;
+            counter-increment: episode-objective;
+        }
+
+        .message-objectives li::before {
+            position: absolute;
+            top: 0;
+            left: 0;
+            color: var(--pink);
+            content: "0" counter(episode-objective);
+            font-weight: 700;
+            text-shadow: 0 0 8px rgba(255, 105, 180, 0.38);
         }
 
         .message-actions {
@@ -792,6 +911,36 @@
             filter: grayscale(0.5);
             opacity: 0.48;
             transform: none;
+        }
+
+        .message-card.is-paused {
+            padding-block: clamp(28px, 4vw, 46px);
+        }
+
+        .message-card.is-paused .message-kicker {
+            margin-bottom: 0;
+        }
+
+        .message-card.is-paused .message-title {
+            margin-top: clamp(14px, 2vw, 22px);
+            font-size: clamp(48px, 7.6vw, 84px);
+            letter-spacing: -0.055em;
+            line-height: 0.84;
+        }
+
+        .message-card.is-paused .message-copy {
+            display: none;
+        }
+
+        .message-card.is-paused .message-actions {
+            margin-top: clamp(26px, 3vw, 36px);
+        }
+
+        .message-card.is-paused #startButton {
+            min-width: 206px;
+            min-height: 50px;
+            padding: 12px 24px;
+            font-size: clamp(14px, 1.6vw, 18px);
         }
 
         .dialogue-layer {
@@ -2225,6 +2374,22 @@
             }
         }
 
+        @keyframes zone-eyebrow-enter {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -9px);
+            }
+            12%,
+            68% {
+                opacity: 1;
+                transform: translate(-50%, 0);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -3px);
+            }
+        }
+
         @keyframes dialogue-tremor {
             0%, 100% { transform: translate(0, 0); }
             18% { transform: translate(-4px, 2px); }
@@ -2235,6 +2400,11 @@
         }
 
         @media (prefers-reduced-motion: reduce) {
+            .zone-eyebrow.is-entering {
+                animation-duration: 1.7s;
+                animation-timing-function: linear;
+            }
+
             .title-screen__art,
             .title-screen__atmosphere::before,
             .title-screen__signal,
@@ -2320,6 +2490,7 @@
                 height: 100%;
                 max-height: none;
                 border: 0;
+                outline: 0;
                 aspect-ratio: auto;
                 box-shadow: none;
             }
@@ -2874,6 +3045,16 @@
                 <canvas id="gameCanvas" width="1672" height="941">
                     Your browser needs canvas support to play Super Frgmnts.
                 </canvas>
+                <div
+                    class="performance-trial"
+                    id="performanceTrialBadge"
+                    aria-live="off"
+                    hidden
+                >60 Hz trial // measuring</div>
+                <div class="zone-eyebrow" id="zoneEyebrow" aria-hidden="true" hidden>
+                    <span id="zoneEyebrowKicker">Veyra Coreworks // Area</span>
+                    <strong id="zoneEyebrowTitle">The Shard Foundry</strong>
+                </div>
 
                 <section
                     class="boss-intro"
@@ -3027,15 +3208,15 @@
                 <div class="hud" aria-hidden="true">
                     <div class="mission">
                         <strong>ARYN SOL-MAVI // RECOVER</strong>
-                        <span id="missionDetail">SHARDS <b id="shardCount">0</b>/12 → UPLINK GATE</span>
+                        <span id="missionDetail">FRAGMENTS <b id="shardCount">0</b>/12 → UPLINK GATE</span>
                         <div class="mission-progress" id="missionProgress" hidden>
                             <div class="mission-progress__item">
                                 <b id="relayProgress">0/2</b>
-                                <small>RELAYS</small>
+                                <small>STABILIZERS</small>
                             </div>
                             <div class="mission-progress__item">
                                 <b id="signalProgress">0/12</b>
-                                <small>SIGNALS</small>
+                                <small>FRAGMENTS</small>
                             </div>
                         </div>
                     </div>
@@ -3051,9 +3232,9 @@
                 <div class="message-card" id="messageCard" hidden>
                     <p class="message-kicker" id="messageKicker">The Shard Foundry // Online</p>
                     <h2 class="message-title" id="messageTitle">Ready?</h2>
-                    <p class="message-copy" id="messageCopy">
-                        Cross The Shard Foundry, recover twelve Signal Shards, survive the creatures, and reach the Uplink Gate.
-                    </p>
+                    <div class="message-copy" id="messageCopy">
+                        Cross The Shard Foundry, recover twelve Vesperite Fragments, survive the creatures, and reach the Uplink Gate.
+                    </div>
                     <div class="message-actions">
                         <button class="pixel-button" id="startButton" type="button">Start run</button>
                         <button class="pixel-button pixel-button--secondary" id="startOverButton" type="button" hidden>Start over</button>
@@ -3192,6 +3373,41 @@
             "use strict";
 
             var previewParameters = new URLSearchParams(window.location.search);
+            var requestedRenderProfile =
+                previewParameters.get("render-profile") || "default";
+            var mobileRuntime =
+                (
+                    navigator.userAgentData &&
+                    navigator.userAgentData.mobile
+                ) ||
+                /Android|iPhone|iPad|iPod|Mobile/i.test(
+                    navigator.userAgent
+                ) ||
+                (
+                    /Macintosh/i.test(navigator.userAgent) &&
+                    navigator.maxTouchPoints > 1
+                );
+            var desktopOneXRenderTrial =
+                requestedRenderProfile === "desktop-1x" &&
+                !mobileRuntime;
+            var desktopBackgroundCropTrial =
+                requestedRenderProfile === "desktop-crop" &&
+                !mobileRuntime;
+            var requestedFrameProfile =
+                previewParameters.get("frame-profile") || "default";
+            var desktopSixtyFrameTrial =
+                requestedFrameProfile === "desktop-60" &&
+                !mobileRuntime;
+            var frameMeterRequested =
+                requestedFrameProfile === "monitor";
+            var frameTelemetryActive =
+                desktopSixtyFrameTrial ||
+                frameMeterRequested;
+            var requestedEffectsProfile =
+                previewParameters.get("effects-profile") || "default";
+            var desktopNoBlurTrial =
+                requestedEffectsProfile === "desktop-no-blur" &&
+                !mobileRuntime;
             var episodeOneRun = previewParameters.get("episode") === "01";
             var ludoRunPreview =
                 previewParameters.get("aryn") !== "legacy" &&
@@ -3267,6 +3483,10 @@
             var foundryUplinkQa =
                 expansionPreview &&
                 previewParameters.get("qa") === "uplink";
+            var falseAffordanceQa =
+                expansionPreview &&
+                previewParameters.get("qa") ===
+                    "affordance";
             var episodeSurfaceReturn =
                 episodeOneRun &&
                 overworldPreview &&
@@ -3285,6 +3505,21 @@
                 !episodeOneRun &&
                 expansionPreview &&
                 previewParameters.get("gate") === "1";
+            var requestedAtmosphereLockSeam = parseInt(
+                previewParameters.get("seam") || "0",
+                10
+            );
+            var atmosphereLockSeamTrial =
+                !episodeOneRun &&
+                expansionPreview &&
+                Number.isFinite(
+                    requestedAtmosphereLockSeam
+                ) &&
+                requestedAtmosphereLockSeam >= 1 &&
+                requestedAtmosphereLockSeam <= 7;
+            var atmosphereLockCycleQa =
+                atmosphereLockSeamTrial &&
+                previewParameters.get("cycle") === "1";
             var restoredStabilizerTrial =
                 !episodeOneRun &&
                 expansionPreview &&
@@ -3406,6 +3641,8 @@
                 ? 3
                 : stabilizerTrial || foundryGateTrial
                 ? 1
+                : atmosphereLockSeamTrial
+                ? requestedAtmosphereLockSeam - 1
                 : expansionPreview && Number.isFinite(requestedPreviewRoom)
                     ? Math.max(0, Math.min(SCREEN_COUNT - 1, requestedPreviewRoom))
                     : 0;
@@ -3413,10 +3650,10 @@
                 expansionPreview &&
                 (
                     previewParameters.get("layer") === "upper" ||
-                    foundryUplinkQa ||
                     surfaceCrawlerTrial ||
                     vesperMiteTrial ||
                     patrollerTrial ||
+                    atmosphereLockSeamTrial ||
                     riflePreview
                 );
             var viewWidth = WIDTH;
@@ -3808,8 +4045,27 @@
             };
             var canvas = document.getElementById("gameCanvas");
             var ctx = canvas.getContext("2d");
+            var shadowBlurTrialApplied = false;
+            if (desktopNoBlurTrial) {
+                try {
+                    Object.defineProperty(
+                        ctx,
+                        "shadowBlur",
+                        {
+                            configurable: true,
+                            get: function () {
+                                return 0;
+                            },
+                            set: function () {}
+                        }
+                    );
+                    shadowBlurTrialApplied = true;
+                } catch (shadowBlurTrialError) {}
+            }
             var gameApp = document.querySelector(".game-app");
             var stageShell = document.getElementById("stageShell");
+            var performanceTrialBadge =
+                document.getElementById("performanceTrialBadge");
             var bossIntro = document.getElementById("bossIntro");
             var bossIntroTitle =
                 document.getElementById("bossIntroTitle");
@@ -3850,6 +4106,12 @@
                 document.getElementById("relayProgress");
             var signalProgress =
                 document.getElementById("signalProgress");
+            var zoneEyebrow =
+                document.getElementById("zoneEyebrow");
+            var zoneEyebrowKicker =
+                document.getElementById("zoneEyebrowKicker");
+            var zoneEyebrowTitle =
+                document.getElementById("zoneEyebrowTitle");
             var timerDisplay = document.getElementById("timer");
             var scoreDisplay = document.getElementById("score");
             var zoneNameDisplay = document.getElementById("zoneName");
@@ -4494,6 +4756,10 @@
                     source: "/Images/Game/Super-Frgmnts/foundry-platform-module-runtime-v1.png",
                     priority: "high"
                 },
+                foundryFalseBridgeRemoval: {
+                    source: "/Images/Game/Super-Frgmnts/foundry-false-bridge-removal-runtime-v1.png",
+                    priority: "high"
+                },
                 foundryThermalPurgeVent: {
                     source: "/Images/Game/Super-Frgmnts/foundry-thermal-purge-vent-runtime-v1.png",
                     priority: "high"
@@ -4508,6 +4774,22 @@
                 },
                 foundryUplinkBossGate: {
                     source: "/Images/Game/Super-Frgmnts/foundry-uplink-boss-gate-runtime-v1.png",
+                    priority: "high"
+                },
+                foundryAtmosphereLock: {
+                    source: "/Images/Game/Super-Frgmnts/foundry-atmosphere-lock-runtime-v1.png",
+                    priority: "high"
+                },
+                foundryAtmosphereLockHousing: {
+                    source: "/Images/Game/Super-Frgmnts/foundry-atmosphere-lock-housing-runtime-v1.png",
+                    priority: "high"
+                },
+                foundryAtmosphereLockMembrane: {
+                    source: "/Images/Game/Super-Frgmnts/foundry-atmosphere-lock-membrane-runtime-v1.png",
+                    priority: "high"
+                },
+                foundryAtmosphereWall: {
+                    source: "/Images/Game/Super-Frgmnts/foundry-atmosphere-lock-seam-wall-runtime-v1.png",
                     priority: "high"
                 },
                 woundBossBackgroundLeft: {
@@ -4750,10 +5032,15 @@
             var foundryCoreAssetKeys = [
                 "foundryExpanded",
                 "foundryPlatformModule",
+                "foundryFalseBridgeRemoval",
                 "foundryThermalPurgeVent",
                 "foundryArcCoupler",
                 "foundryArcDischarge",
                 "foundryUplinkBossGate",
+                "foundryAtmosphereLock",
+                "foundryAtmosphereLockHousing",
+                "foundryAtmosphereLockMembrane",
+                "foundryAtmosphereWall",
                 "stabilizerDormant",
                 "stabilizerActive",
                 "foundryFanHousing",
@@ -4959,6 +5246,27 @@
                     channels: [],
                     next: 0
                 },
+                jump: {
+                    src: "/Audio/super-frgmnts-jump-v1.wav",
+                    volume: 0.36,
+                    poolSize: 5,
+                    channels: [],
+                    next: 0
+                },
+                landing: {
+                    src: "/Audio/super-frgmnts-landing-v1.wav",
+                    volume: 0.34,
+                    poolSize: 4,
+                    channels: [],
+                    next: 0
+                },
+                atmosphereLockShimmer: {
+                    src: "/Audio/super-frgmnts-atmosphere-lock-shimmer-v1.wav",
+                    volume: 0.28,
+                    poolSize: 4,
+                    channels: [],
+                    next: 0
+                },
                 generatorStartup: {
                     src: "/Audio/super-frgmnts-generator-startup-v1.wav",
                     volume: 0.54,
@@ -4984,6 +5292,14 @@
             var lastFrame = 0;
             var runtimeFocused = true;
             var renderRequested = true;
+            var renderScaleX = 1;
+            var renderScaleY = 1;
+            var renderCameraX = 0;
+            var renderCameraY = 0;
+            var framePacingDeadline = 0;
+            var frameTelemetryStarted = 0;
+            var frameTelemetryCallbacks = 0;
+            var frameTelemetryDraws = 0;
             var runFrameTime = 0;
             var jumpBuffer = 0;
             var coyoteTime = 0;
@@ -5073,6 +5389,8 @@
             var coreworksTransportActive = false;
             var coreworksTransportElapsed = 0;
             var surfaceTransportLockAnnounced = false;
+            var zoneEyebrowLastKey = "";
+            var zoneEyebrowTimer = 0;
             var episodeBridgeMode = "";
             var episodeBridgeNextScene = "";
             var episodeBridgeCompleting = false;
@@ -5339,7 +5657,7 @@
                     speaker: "DRAS EHDRE",
                     role: "COREWORKS FOREMAN",
                     portrait: "dras",
-                    text: "The Foundry. Its atmospheric relay feeds the upper Coreworks. Bring it online. Clear the infestation. Recover whatever evidence survived."
+                    text: "The Foundry. Bring both atmospheric stabilizers online and clear the infestation. The pulse fractures Vesperite along its path. Recover the fragments—their residual harmonics may tell us where it began."
                 },
                 {
                     id: "D33",
@@ -5669,6 +5987,17 @@
                 launchApplied: false,
                 breachAssignment: null
             };
+            var shipTrillian = {
+                x: 930,
+                y: 752,
+                targetX: 930,
+                vx: 0,
+                facing: -1,
+                state: "idle",
+                decisionTime: 2.4,
+                animationTime: 0,
+                decisionIndex: 0
+            };
 
             var platforms = [
                 { x: 0, y: GROUND_Y, width: WORLD_WIDTH, height: WORLD_HEIGHT - GROUND_Y, ground: true },
@@ -5819,8 +6148,8 @@
             var SHIP_INTERIOR_HATCH_X = 684;
             var SHIP_INTERIOR_CEILING_Y = 438;
             var SHIP_INTERIOR_DECK_Y = 744;
-            var SHIP_INTERIOR_LEFT_X = 188;
-            var SHIP_INTERIOR_RIGHT_X = 1340;
+            var SHIP_INTERIOR_LEFT_X = 42;
+            var SHIP_INTERIOR_RIGHT_X = 1518;
             var SHIP_CONSOLE_X = 386;
             var SHIP_SUIT_CRADLE_X = 506;
             var SHIP_TRILLIAN_BERTH_X = 894;
@@ -5836,9 +6165,9 @@
             function buildShipInteriorPlatforms() {
                 return [
                     {
-                        x: 244,
+                        x: 24,
                         y: SHIP_INTERIOR_DECK_Y,
-                        width: 1184,
+                        width: 1624,
                         height: HEIGHT - SHIP_INTERIOR_DECK_Y,
                         ground: true,
                         artIntegrated: true,
@@ -5919,6 +6248,82 @@
             if (woundBossPreview) {
                 platforms = buildWoundBossPlatforms();
             }
+
+            var FOUNDRY_REFINERY_GATE_X = WIDTH * 2;
+            var FOUNDRY_REFINERY_WALL_WIDTH = 128;
+            var FOUNDRY_UPPER_DECK_TOP = 338;
+            var FOUNDRY_UPPER_DECK_BOTTOM = 362;
+            var ATMOSPHERE_LOCK_APPROACH_DISTANCE = 390;
+            var ATMOSPHERE_LOCK_GATE_CLEARANCE = 72;
+            var ATMOSPHERE_LOCK_DOOR_WIDTH = 80;
+            var ATMOSPHERE_LOCK_CLEAR_MARGIN = 8;
+            var atmosphereLockPortals = [
+                {
+                    id: "foundry-intake-breathing",
+                    boundaryX: WIDTH,
+                    deckTop: 338,
+                    requirement: "always",
+                    fromZone: "FOUNDRY INTAKE",
+                    toZone: "BREATHING CHAMBER"
+                },
+                {
+                    id: "foundry-refinery",
+                    boundaryX: WIDTH * 2,
+                    deckTop: 338,
+                    requirement: "foundry-stabilizer",
+                    fromZone: "FOUNDRY",
+                    toZone: "REFINERY"
+                },
+                {
+                    id: "refinery-compression-pressure",
+                    boundaryX: WIDTH * 3,
+                    deckTop: 600,
+                    requirement: "always",
+                    fromZone: "COMPRESSION LINE",
+                    toZone: "PRESSURE EXCHANGE"
+                },
+                {
+                    id: "refinery-biolab",
+                    boundaryX: WIDTH * 4,
+                    deckTop: 600,
+                    requirement: "always",
+                    fromZone: "REFINERY",
+                    toZone: "BIOLAB"
+                },
+                {
+                    id: "biolab-culture-specimen",
+                    boundaryX: WIDTH * 5,
+                    deckTop: 338,
+                    requirement: "always",
+                    fromZone: "CULTURE VATS",
+                    toZone: "SPECIMEN STABILIZER"
+                },
+                {
+                    id: "biolab-uplink",
+                    boundaryX: WIDTH * 6,
+                    deckTop: GROUND_Y,
+                    requirement: "biolab-stabilizer",
+                    fromZone: "BIOLAB",
+                    toZone: "UPLINK"
+                },
+                {
+                    id: "uplink-spine-gate",
+                    boundaryX: WIDTH * 7,
+                    deckTop: 600,
+                    requirement: "always",
+                    fromZone: "SIGNAL SPINE",
+                    toZone: "UPLINK GATE"
+                }
+            ].map(function (portal) {
+                portal.openElapsed = 0;
+                portal.announced = false;
+                portal.approachTriggered = false;
+                portal.phase = "closed";
+                portal.approachSide = 0;
+                portal.crossed = false;
+                portal.rearmRequired = false;
+                return portal;
+            });
 
             function buildExpansionPreviewPlatforms() {
                 var previewPlatforms = [
@@ -6097,6 +6502,20 @@
                     });
                 });
 
+                atmosphereLockPortals.forEach(function (portal) {
+                    previewPlatforms.push({
+                        x:
+                            portal.boundaryX -
+                            FOUNDRY_REFINERY_WALL_WIDTH / 2,
+                        y: portal.deckTop,
+                        width: FOUNDRY_REFINERY_WALL_WIDTH,
+                        height: 24,
+                        artIntegrated: true,
+                        atmosphereLockTunnelFloor: true,
+                        atmosphereLockPortalId: portal.id
+                    });
+                });
+
                 return previewPlatforms;
             }
 
@@ -6169,6 +6588,7 @@
                         width: 280,
                         baseHeight: 100,
                         activeHeight: 122,
+                        visualSink: 52,
                         safeDuration: 1.15,
                         warningDuration: 0.45,
                         activeDuration: 3,
@@ -6188,12 +6608,15 @@
                 { x: WIDTH * 3 + 440, y: GROUND_Y - 15, width: 90, height: 18, phase: 0.4 },
                 { x: WIDTH * 3 + 1110, y: GROUND_Y - 15, width: 82, height: 18, phase: 1.9 }
             ];
+            var ATMOSPHERIC_STABILIZER_VISUAL_WIDTH = 336;
+            var ATMOSPHERIC_STABILIZER_VISUAL_HEIGHT = 588;
+            var ATMOSPHERIC_STABILIZER_VISUAL_SINK = 8;
             var STABILIZER_ACTIVATION_DURATION = 2.35;
-            var FOUNDRY_REFINERY_GATE_X = WIDTH * 2;
             var FOUNDRY_GATE_OPEN_DURATION = 1.25;
+            var ATMOSPHERE_LOCK_TRANSIT_OPEN_DURATION = 0.58;
+            var ATMOSPHERE_LOCK_TRANSIT_CLOSE_DURATION = 0.5;
+            var ATMOSPHERE_LOCK_OBJECTIVE_CLOSE_DURATION = 0.78;
             var FOUNDRY_SEAM_WINDOW_TOP = 850;
-            var FOUNDRY_UPPER_GATE_TOP = 176;
-            var FOUNDRY_UPPER_GATE_BOTTOM = 430;
             var FOUNDRY_LIFT_RELEASE_DELAY = 0.75;
             var FOUNDRY_LIFT_BOTTOM_PAUSE = 0.55;
             var FOUNDRY_LIFT_TRAVEL_DURATION = 2.15;
@@ -6236,8 +6659,6 @@
             }
 
             var atmosphericStabilizers = buildAtmosphericStabilizers();
-            var foundryGateOpenElapsed = 0;
-            var foundryGateAnnounced = false;
             var foundryLiftElapsed = -FOUNDRY_LIFT_RELEASE_DELAY;
             var uplink = { x: WORLD_WIDTH - 126, y: GROUND_Y - 128, width: 68, height: 128 };
             if (shipInteriorPreview) {
@@ -6262,7 +6683,7 @@
                 hazards = buildEpisodeBetaHazards();
                 uplink = {
                     x: (SCREEN_COUNT - 1) * WIDTH + 1218,
-                    y: 280,
+                    y: GROUND_Y - 320,
                     width: 132,
                     height: 320
                 };
@@ -6483,13 +6904,99 @@
                     : WIDTH;
 
                 viewWidth = Math.min(WIDTH, nextViewWidth);
-                if (canvas.width !== viewWidth || canvas.height !== HEIGHT) {
-                    canvas.width = viewWidth;
-                    canvas.height = HEIGHT;
+                document.body.classList.toggle("is-portrait-game", portraitMode);
+
+                var canvasBounds =
+                    canvas.getBoundingClientRect();
+                var renderPixelRatio =
+                    desktopOneXRenderTrial
+                        ? 1
+                        : Math.min(
+                            2,
+                            Math.max(
+                                1,
+                                window.devicePixelRatio || 1
+                            )
+                        );
+                var backingWidth = Math.max(
+                    1,
+                    Math.round(
+                        (canvasBounds.width || viewWidth) *
+                        renderPixelRatio
+                    )
+                );
+                var backingHeight = Math.max(
+                    1,
+                    Math.round(
+                        (canvasBounds.height || HEIGHT) *
+                        renderPixelRatio
+                    )
+                );
+                if (
+                    canvas.width !== backingWidth ||
+                    canvas.height !== backingHeight
+                ) {
+                    canvas.width = backingWidth;
+                    canvas.height = backingHeight;
                 }
+                renderScaleX = backingWidth / viewWidth;
+                renderScaleY = backingHeight / HEIGHT;
+                canvas.dataset.renderBacking =
+                    backingWidth + "x" + backingHeight;
+                canvas.dataset.renderScale =
+                    renderScaleX.toFixed(4) +
+                    "x" +
+                    renderScaleY.toFixed(4);
+                canvas.dataset.renderPixelRatio =
+                    renderPixelRatio.toFixed(2);
+                canvas.dataset.renderGrid =
+                    "display-native-camera-snapped-v1";
+                canvas.dataset.renderProfile =
+                    desktopOneXRenderTrial
+                        ? "desktop-1x-trial"
+                        : desktopBackgroundCropTrial
+                            ? "desktop-crop-trial"
+                        : requestedRenderProfile ===
+                            "desktop-1x" ||
+                            requestedRenderProfile ===
+                            "desktop-crop"
+                            ? "default-mobile-guard"
+                            : "default";
+                canvas.dataset.renderProfileScope =
+                    "desktop-opt-in-only";
+                canvas.dataset.frameProfile =
+                    frameMeterRequested
+                        ? "monitor"
+                        : desktopSixtyFrameTrial
+                        ? "desktop-60-trial"
+                        : requestedFrameProfile ===
+                            "desktop-60"
+                            ? "default-mobile-guard"
+                            : "default";
+                canvas.dataset.frameProfileScope =
+                    frameMeterRequested
+                        ? "query-opt-in-all-devices"
+                        : "desktop-opt-in-only";
+                canvas.dataset.effectsProfile =
+                    desktopNoBlurTrial &&
+                    shadowBlurTrialApplied
+                        ? "desktop-no-blur-trial"
+                        : requestedEffectsProfile ===
+                            "desktop-no-blur"
+                            ? mobileRuntime
+                                ? "default-mobile-guard"
+                                : "desktop-no-blur-unavailable"
+                            : "default";
+                canvas.dataset.effectsProfileScope =
+                    "desktop-opt-in-only";
+                performanceTrialBadge.hidden =
+                    !frameTelemetryActive;
+                performanceTrialBadge.classList.toggle(
+                    "is-fps-monitor",
+                    frameMeterRequested
+                );
 
                 cameraX = Math.max(0, Math.min(WORLD_WIDTH - viewWidth, cameraX));
-                document.body.classList.toggle("is-portrait-game", portraitMode);
                 if (!titleScreen.hidden) {
                     restoreTitleArtwork();
                 }
@@ -6925,12 +7432,17 @@
                 coreworksTransportActive = false;
                 coreworksTransportElapsed = 0;
                 surfaceTransportLockAnnounced = false;
+                zoneEyebrowLastKey = "";
+                zoneEyebrowTimer = 0;
+                zoneEyebrow.hidden = true;
+                zoneEyebrow.classList.remove("is-entering");
                 canvas.dataset.coreworksTransport =
                     episodeSurfaceReturn
                         ? "sealed-after-return"
                         : "idle";
                 resetOverworldAssignments();
                 resetTrillian();
+                resetShipTrillian();
                 resetCampDog();
                 resetWorkerDroid();
                 dialogueLayer.hidden = true;
@@ -6938,6 +7450,11 @@
                 document.body.classList.remove("is-dialogue", "is-dialogue-tremor");
                 delete startButton.dataset.overworldEnter;
                 delete startButton.dataset.surfaceReturn;
+                delete startOverButton.dataset.cancelEpisode;
+                messageCard.classList.remove(
+                    "is-objectives",
+                    "is-paused"
+                );
                 var previewRoomMirror =
                     previewRoomBlueprints[previewStartRoom] &&
                     previewRoomBlueprints[previewStartRoom].mirror;
@@ -6982,6 +7499,15 @@
                         ? WIDTH * 7 + 1228
                     : deathCycleQa
                         ? WIDTH * 3 + 920
+                    : falseAffordanceQa
+                        ? previewStartRoom *
+                            WIDTH +
+                            WIDTH / 2 -
+                            56
+                    : atmosphereLockSeamTrial
+                        ? requestedAtmosphereLockSeam *
+                            WIDTH -
+                            240
                     : foundryGateTrial
                         ? FOUNDRY_REFINERY_GATE_X - 240
                         : stabilizerTrial
@@ -6994,24 +7520,48 @@
                         ? 1000
                         : riflePreview
                         ? 1000
-                        : previewStartUpper
+                    : previewStartUpper
                         ? previewStartRoom * WIDTH + (previewRoomMirror ? 116 : 1488)
                         : previewStartRoom > 0
                             ? previewStartRoom * WIDTH + Math.round(WIDTH * 0.42)
                             : 82;
+                var seamTrialPortal = atmosphereLockSeamTrial
+                    ? atmosphereLockPortals[
+                        requestedAtmosphereLockSeam - 1
+                    ]
+                    : null;
                 cameraX =
                     shipInteriorPreview
                     ? 0
+                    : falseAffordanceQa
+                    ? previewStartRoom * WIDTH
                     : expansionPreview ||
                     overworldPreview ||
                     episodeSurfaceReturn ||
                     arrivalTransportPreview
-                    ? Math.max(0, Math.min(WORLD_WIDTH - viewWidth, previewSpawnX - viewWidth * 0.38))
+                        ? Math.max(0, Math.min(WORLD_WIDTH - viewWidth, previewSpawnX - viewWidth * 0.38))
                     : 0;
                 cameraY = expansionPreview
-                    ? previewStartUpper
-                        ? 0
-                        : WORLD_HEIGHT - HEIGHT
+                    ? falseAffordanceQa
+                        ? Math.max(
+                            0,
+                            Math.min(
+                                WORLD_HEIGHT - HEIGHT,
+                                600 - HEIGHT * 0.42
+                            )
+                        )
+                    : seamTrialPortal
+                        ? Math.max(
+                            0,
+                            Math.min(
+                                WORLD_HEIGHT - HEIGHT,
+                                seamTrialPortal.deckTop -
+                                    HEIGHT * 0.42
+                            )
+                        )
+                        : previewStartUpper
+                            ? 0
+                            : WORLD_HEIGHT - HEIGHT
                     : woundBossPreview
                         ? Math.max(
                             0,
@@ -7047,8 +7597,15 @@
                     stabilizer.activationElapsed = 0;
                     stabilizer.cueMask = 0;
                 });
-                foundryGateOpenElapsed = 0;
-                foundryGateAnnounced = false;
+                atmosphereLockPortals.forEach(function (portal) {
+                    portal.openElapsed = 0;
+                    portal.announced = false;
+                    portal.approachTriggered = false;
+                    portal.phase = "closed";
+                    portal.approachSide = 0;
+                    portal.crossed = false;
+                    portal.rearmRequired = false;
+                });
                 foundryLiftElapsed = -FOUNDRY_LIFT_RELEASE_DELAY;
                 if (restoredStabilizerTrial) {
                     atmosphericStabilizers.forEach(function (stabilizer) {
@@ -7056,14 +7613,24 @@
                         stabilizer.activationElapsed =
                             STABILIZER_ACTIVATION_DURATION;
                     });
-                    foundryGateOpenElapsed = FOUNDRY_GATE_OPEN_DURATION;
-                    foundryGateAnnounced = true;
+                    atmosphereLockPortals.forEach(function (portal) {
+                        portal.openElapsed =
+                            atmosphereLockPortalOpenDuration(
+                                portal
+                            );
+                        portal.announced = true;
+                        portal.approachTriggered = true;
+                        portal.phase = "open";
+                        portal.approachSide = 0;
+                        portal.crossed = false;
+                        portal.rearmRequired = false;
+                    });
                     foundryLiftElapsed = 0;
                 }
                 if (expansionPreview) {
                     document.querySelector(".mission span").textContent =
                         episodeBetaRun
-                            ? "LASER SEEKER ONLINE // RESTORE 2 RELAYS"
+                            ? "LASER SEEKER ONLINE // RESTORE 2 STABILIZERS"
                             : restoredStabilizerTrial
                             ? "FREIGHT LIFT ONLINE // REFINERY ABOVE"
                             : riflePreview
@@ -7072,6 +7639,8 @@
                             ? "TRACK VESPER MITE // STOMP OR FIRE"
                             : patrollerTrial
                             ? "CHITIN SENTINEL ARMOR // 5/5"
+                            : falseAffordanceQa
+                            ? "VISUAL AFFORDANCE // COLLISION TRUTH"
                             : surfaceCrawlerTrial
                             ? "OBSERVE SQUIRCLE // STOMP OR FIRE"
                             : "RESTORE FOUNDRY ATMOSPHERE";
@@ -7148,8 +7717,12 @@
                     ? overworldTransportPreviewPlatform.y - 100
                     : surfaceTrialPlatform
                     ? surfaceTrialPlatform.y - 100
-                    : overworldShipSpawnPlatform
+                        : overworldShipSpawnPlatform
                         ? overworldShipSpawnPlatform.y - 100
+                        : falseAffordanceQa
+                            ? 500
+                        : seamTrialPortal
+                            ? seamTrialPortal.deckTop - 100
                         : previewStartUpper
                             ? 110
                             : GROUND_Y - 100;
@@ -7598,9 +8171,9 @@
                             ? "Chitin Sentinel trial started. Its armor requires five telescopic laser seeker hits."
                             : expansionPreview
                                 ? episodeOneRun
-                                    ? "The Shard Foundry beta started. Restore two atmosphere relays and recover twelve Signal Shards."
+                                    ? "The Shard Foundry beta started. Restore two atmospheric stabilizers and recover twelve Vesperite Fragments."
                                     : "Unified world traversal survey started. Reach the Uplink Gate."
-                                : "Run started. Twelve Signal Shards remain."
+                                : "Run started. Twelve Vesperite Fragments remain."
                     );
                     playTone(260, 0.08, "square", 0.035);
                     if (arrivalDialoguePreview) {
@@ -7834,9 +8407,8 @@
                     makeHeartPickup(WIDTH * 6 + 1340, 970)
                 ];
                 betaPickups = [
-                    makeBetaPickup("jetpack", WIDTH + 1092, 422),
-                    makeBetaPickup("rifle", WIDTH * 2 + 700, 1518),
-                    makeBetaPickup("vesperite", WIDTH * 3 + 500, 1070)
+                    makeBetaPickup("jetpack", WIDTH * 2 + 240, 280),
+                    makeBetaPickup("rifle", WIDTH * 2 + 700, 1518)
                 ];
                 creditCrates = [
                     makeCreditCrate(650, GROUND_Y, 5),
@@ -8162,7 +8734,7 @@
                         ? "partial-restricted"
                         : "offline";
                 canvas.dataset.shipTrillianBerth =
-                    shipTrillianPreview
+                    shipInteriorHasTrillian()
                         ? "occupied"
                         : "empty";
                 canvas.dataset.shipSuitAlcove =
@@ -8199,6 +8771,7 @@
                 shipInteriorActive = true;
                 shipSuitState = "armored";
                 shipSuitElapsed = 0;
+                resetShipTrillian();
                 WORLD_HEIGHT = HEIGHT;
                 SCREEN_COUNT = 1;
                 WORLD_WIDTH = WIDTH;
@@ -8751,9 +9324,9 @@
                     return true;
                 }
                 if (
-                    shipTrillianPreview &&
+                    shipInteriorHasTrillian() &&
                     playerNearShipInteriorAnchor(
-                        SHIP_TRILLIAN_BERTH_X,
+                        shipTrillian.x,
                         74
                     )
                 ) {
@@ -9164,9 +9737,11 @@
 
                 [
                     ["coreLeech", WIDTH + 430, 1180, WIDTH + 260, WIDTH + 720, 58, 2],
+                    ["coreLeech", WIDTH * 2 + 360, 720, WIDTH * 2 + 220, WIDTH * 2 + 540, 46, 2],
                     ["kihunter", WIDTH * 2 + 950, 1080, WIDTH * 2 + 840, WIDTH * 2 + 1150, 76, 2],
                     ["sova", WIDTH * 3 + 610, GROUND_Y, WIDTH * 3 + 390, WIDTH * 3 + 700, 82, 2],
                     ["wasp", WIDTH * 4 + 780, 720, WIDTH * 4 + 520, WIDTH * 4 + 1120, -108, 2],
+                    ["coreLeech", WIDTH * 5 + 250, 680, WIDTH * 5 + 120, WIDTH * 5 + 380, -42, 2],
                     ["gaunt", WIDTH * 5 + 500, GROUND_Y, WIDTH * 5 + 340, WIDTH * 5 + 700, 66, 4],
                     ["skree", WIDTH * 6 + 520, GROUND_Y, WIDTH * 6 + 330, WIDTH * 6 + 760, 64, 3],
                     ["seamLurker", WIDTH * 7 + 430, 362, WIDTH * 7 + 110, WIDTH * 7 + 520, 72, 2],
@@ -9190,6 +9765,7 @@
                 canvas.dataset.betaEnemyRoster =
                     "squircle,chitin-sentinel,core-leech,kihunter,sova,ember-wasp,seam-hunter,skree,seam-lurker,pale-watcher";
                 canvas.dataset.betaSentinelCount = "7";
+                canvas.dataset.betaCoreLeechCount = "3";
                 canvas.dataset.sovaRifleHitbox =
                     "visual-silhouette";
                 canvas.dataset.betaRetiredEnemies =
@@ -9842,7 +10418,7 @@
                     : isFoundry
                         ? {
                             x: (SCREEN_COUNT - 1) * WIDTH + 1218,
-                            y: 280,
+                            y: GROUND_Y - 320,
                             width: 132,
                             height: 320
                         }
@@ -10396,16 +10972,52 @@
                 setPauseButton(false, false);
                 messageKicker.textContent = "Season One // Veyra";
                 messageTitle.textContent = "Episode 01";
-                messageCopy.textContent =
-                    "Transport lock acquired. The eight-minute mission clock begins when Aryn materializes inside The Shard Foundry.";
-                startButton.textContent = "Enter Foundry";
+                messageCopy.innerHTML =
+                    '<p class="message-copy__intro">Mission objectives</p>' +
+                    '<ol class="message-objectives">' +
+                    '<li>Restore both atmospheric stabilizers and breathable air.</li>' +
+                    '<li>Contain the infestation inside the Coreworks.</li>' +
+                    '<li>Recover all 12 Vesperite Fragments as evidence of the pulse.</li>' +
+                    '<li>Trace the pulse toward the source of the infestation.</li>' +
+                    '</ol>';
+                messageCard.classList.add("is-objectives");
+                startButton.textContent = "Begin Episode 01";
                 startButton.disabled = false;
                 startButton.dataset.overworldEnter = "true";
+                startOverButton.textContent = "Cancel";
+                startOverButton.dataset.cancelEpisode = "true";
                 startOverButton.hidden = false;
                 messageCard.hidden = false;
                 announce(
-                    "Transport complete. Episode 01. The Shard Foundry. Enter the Foundry or start over."
+                    "Episode 01 objectives. Restore two atmospheric stabilizers. Contain the infestation. Recover twelve Vesperite Fragments. Trace the pulse toward its source. Begin Episode 01 or cancel."
                 );
+            }
+
+            function cancelEpisodeOneEntry() {
+                if (
+                    startOverButton.dataset.cancelEpisode !==
+                    "true"
+                ) {
+                    return false;
+                }
+                playSoundEffect("deepSelect");
+                delete startButton.dataset.overworldEnter;
+                delete startOverButton.dataset.cancelEpisode;
+                messageCard.classList.remove("is-objectives");
+                messageCard.hidden = true;
+                startOverButton.hidden = true;
+                overworldTransitionReady = false;
+                coreworksTransportElapsed = 0;
+                canvas.dataset.coreworksTransport = "online";
+                state = "running";
+                document.body.classList.add("is-running");
+                setPauseButton(false, true);
+                releaseAllControls();
+                stageShell.focus({ preventScroll: true });
+                announce(
+                    "Episode 01 entry canceled. Aryn remains at the Coreworks Threshold."
+                );
+                return true;
             }
 
             function captureEpisodeWoundSnapshot() {
@@ -10457,7 +11069,7 @@
                     "UPLINK GATE // ROUTE ACQUIRED";
                 messageTitle.textContent = "THE WOUND";
                 messageCopy.textContent =
-                    "Twelve Signal Shards resolve a deeper chamber. Mission time and recovered equipment will carry into the encounter.";
+                    "Twelve Vesperite Fragments tune the Uplink route to a deeper chamber. Mission time and recovered equipment will carry into the encounter.";
                 messageCard.hidden = true;
                 playWinSound();
                 announce(
@@ -10551,13 +11163,8 @@
 
                 messageKicker.textContent = "Transmission Hold // Player Pause";
                 messageTitle.textContent = "Paused";
-                messageCopy.textContent = shipInteriorActive
-                    ? "The RD-42 is holding Aryn’s position."
-                    : overworldPreview
-                    ? "The Veyra surface is holding Aryn’s position."
-                    : expansionPreview
-                        ? "The unified world survey is holding your position."
-                        : "The Shard Foundry is holding your position.";
+                messageCopy.textContent = "";
+                messageCard.classList.add("is-paused");
                 startButton.textContent = "Resume";
                 startButton.disabled = false;
                 startButton.removeAttribute("title");
@@ -10582,6 +11189,7 @@
                 state = "running";
                 document.body.classList.add("is-running");
                 messageCard.hidden = true;
+                messageCard.classList.remove("is-paused");
                 setPauseButton(false, true);
                 if (soundOn) {
                     ensureAudio();
@@ -10661,6 +11269,81 @@
                 }) || null;
             }
 
+            function findBiolabAtmosphericStabilizer() {
+                return atmosphericStabilizers.find(function (stabilizer) {
+                    return stabilizer.id === "biolab-atmospheric-stabilizer";
+                }) || null;
+            }
+
+            function atmosphereLockPortalById(id) {
+                return atmosphereLockPortals.find(function (portal) {
+                    return portal.id === id;
+                }) || null;
+            }
+
+            function atmosphereLockRequirementMet(portal) {
+                if (!portal || portal.requirement === "always") {
+                    return true;
+                }
+                if (portal.requirement === "foundry-stabilizer") {
+                    var foundryStabilizer =
+                        findFoundryAtmosphericStabilizer();
+                    return Boolean(
+                        foundryStabilizer &&
+                        foundryStabilizer.active
+                    );
+                }
+                if (portal.requirement === "biolab-stabilizer") {
+                    var biolabStabilizer =
+                        findBiolabAtmosphericStabilizer();
+                    return Boolean(
+                        biolabStabilizer &&
+                        biolabStabilizer.active
+                    );
+                }
+                return false;
+            }
+
+            function atmosphereLockPortalProgress(portal) {
+                var openDuration =
+                    atmosphereLockPortalOpenDuration(portal);
+                return Math.max(
+                    0,
+                    Math.min(
+                        1,
+                        portal
+                            ? portal.openElapsed /
+                                openDuration
+                            : 0
+                    )
+                );
+            }
+
+            function atmosphereLockPortalOpenDuration(portal) {
+                return (
+                    portal &&
+                    portal.requirement === "always"
+                )
+                    ? ATMOSPHERE_LOCK_TRANSIT_OPEN_DURATION
+                    : FOUNDRY_GATE_OPEN_DURATION;
+            }
+
+            function atmosphereLockPortalCloseDuration(portal) {
+                return (
+                    portal &&
+                    portal.requirement === "always"
+                )
+                    ? ATMOSPHERE_LOCK_TRANSIT_CLOSE_DURATION
+                    : ATMOSPHERE_LOCK_OBJECTIVE_CLOSE_DURATION;
+            }
+
+            function atmosphereLockPortalIsOpen(portal) {
+                return (
+                    atmosphereLockPortalProgress(portal) >=
+                    0.98
+                );
+            }
+
             function findFoundryFreightLift() {
                 return platforms.find(function (platform) {
                     return platform.foundryFreightLift;
@@ -10709,52 +11392,100 @@
             }
 
             function foundryGateProgress() {
-                return Math.max(
-                    0,
-                    Math.min(
-                        1,
-                        foundryGateOpenElapsed / FOUNDRY_GATE_OPEN_DURATION
+                return atmosphereLockPortalProgress(
+                    atmosphereLockPortalById(
+                        "foundry-refinery"
                     )
                 );
             }
 
             function foundryGateIsOpen() {
-                return foundryGateProgress() >= 0.98;
-            }
-
-            function playerIsAtFoundryUpperThreshold() {
-                return (
-                    player.y + 100 >= FOUNDRY_UPPER_GATE_TOP &&
-                    player.y + 100 <= FOUNDRY_UPPER_GATE_BOTTOM
+                return atmosphereLockPortalIsOpen(
+                    atmosphereLockPortalById(
+                        "foundry-refinery"
+                    )
                 );
             }
 
-            function constrainFoundryGateMovement(previousPlayerX) {
+            function playerIsAtAtmosphereLockThreshold(portal) {
+                if (!portal) return false;
+                var playerFeet = player.y + 100;
+                return (
+                    playerFeet >=
+                        portal.deckTop -
+                            ATMOSPHERE_LOCK_GATE_CLEARANCE &&
+                    playerFeet <= portal.deckTop + 2
+                );
+            }
+
+            function playerIsAtFoundryUpperThreshold() {
+                return playerIsAtAtmosphereLockThreshold(
+                    atmosphereLockPortalById(
+                        "foundry-refinery"
+                    )
+                );
+            }
+
+            function constrainAtmosphereLockMovement(
+                previousPlayerX
+            ) {
                 if (!expansionPreview) return;
-                if (
-                    foundryGateIsOpen() &&
-                    playerIsAtFoundryUpperThreshold()
-                ) {
-                    return;
-                }
 
                 var previousCenter = previousPlayerX + 56;
                 var currentBodyLeft = player.x + 34;
                 var currentBodyRight = player.x + 78;
 
-                if (
-                    previousCenter < FOUNDRY_REFINERY_GATE_X &&
-                    currentBodyRight > FOUNDRY_REFINERY_GATE_X - 18
-                ) {
-                    player.x = FOUNDRY_REFINERY_GATE_X - 96;
-                    player.vx = Math.min(0, player.vx);
-                } else if (
-                    previousCenter > FOUNDRY_REFINERY_GATE_X &&
-                    currentBodyLeft < FOUNDRY_REFINERY_GATE_X + 18
-                ) {
-                    player.x = FOUNDRY_REFINERY_GATE_X - 16;
-                    player.vx = Math.max(0, player.vx);
-                }
+                atmosphereLockPortals.forEach(function (portal) {
+                    var atThreshold =
+                        playerIsAtAtmosphereLockThreshold(
+                            portal
+                        );
+                    if (
+                        atmosphereLockPortalIsOpen(portal) &&
+                        atThreshold
+                    ) {
+                        return;
+                    }
+
+                    var wallLeft =
+                        portal.boundaryX -
+                        FOUNDRY_REFINERY_WALL_WIDTH / 2;
+                    var wallRight =
+                        portal.boundaryX +
+                        FOUNDRY_REFINERY_WALL_WIDTH / 2;
+                    var contactLeft = atThreshold
+                        ? wallLeft -
+                            ATMOSPHERE_LOCK_DOOR_WIDTH
+                        : wallLeft;
+                    var contactRight = atThreshold
+                        ? wallRight +
+                            ATMOSPHERE_LOCK_DOOR_WIDTH
+                        : wallRight;
+
+                    if (
+                        previousCenter < portal.boundaryX &&
+                        currentBodyRight > contactLeft &&
+                        previousCenter > contactLeft - 180
+                    ) {
+                        player.x = contactLeft - 78;
+                        player.vx = Math.min(0, player.vx);
+                    } else if (
+                        previousCenter > portal.boundaryX &&
+                        currentBodyLeft < contactRight &&
+                        previousCenter < contactRight + 180
+                    ) {
+                        player.x = contactRight - 34;
+                        player.vx = Math.max(0, player.vx);
+                    }
+                });
+            }
+
+            function constrainFoundryGateMovement(
+                previousPlayerX
+            ) {
+                constrainAtmosphereLockMovement(
+                    previousPlayerX
+                );
             }
 
             function constrainRifleObstacleMovement(previousPlayerX) {
@@ -10977,6 +11708,12 @@
                 if (player.supportPlatform.deepworks) {
                     return false;
                 }
+                if (
+                    player.supportPlatform
+                        .atmosphereLockTunnelFloor
+                ) {
+                    return false;
+                }
 
                 var platform = player.supportPlatform;
                 beginPlatformDrop(platform);
@@ -10990,6 +11727,361 @@
                 playTone(176, 0.07, "square", 0.022);
                 announce("Dropping through catwalk.");
                 return true;
+            }
+
+            function atmosphereLockPortalState(portal) {
+                if (!atmosphereLockRequirementMet(portal)) {
+                    return "locked-red";
+                }
+                if (portal && portal.phase === "closing") {
+                    return "closing";
+                }
+                if (portal && portal.phase === "opening") {
+                    return "opening";
+                }
+                if (
+                    portal &&
+                    (
+                        portal.phase === "open" ||
+                        atmosphereLockPortalIsOpen(portal)
+                    )
+                ) {
+                    return "open";
+                }
+                return portal.requirement === "always"
+                    ? "standby-cyan"
+                    : "ready-green";
+            }
+
+            function announceAtmosphereLockOpen(portal) {
+                if (portal.id === "foundry-refinery") {
+                    document.querySelector(
+                        ".mission span"
+                    ).textContent =
+                        "FREIGHT LIFT ONLINE // REFINERY ABOVE";
+                    popups.push({
+                        x: portal.boundaryX - 170,
+                        y: portal.deckTop - 52,
+                        text: "REFINERY ACCESS // ABOVE",
+                        life: 2.2,
+                        color: "#ffd36c"
+                    });
+                    spawnDust(
+                        portal.boundaryX - 34,
+                        portal.deckTop + 2,
+                        "#ffd36c",
+                        22
+                    );
+                    playTone(188, 0.1, "square", 0.025);
+                    playTone(
+                        282,
+                        0.14,
+                        "square",
+                        0.024,
+                        0.07
+                    );
+                    playTone(
+                        564,
+                        0.22,
+                        "square",
+                        0.022,
+                        0.16
+                    );
+                    announce(
+                        "Foundry atmosphere restored. Freight lift online. Refinery access available above."
+                    );
+                    return;
+                }
+
+                if (portal.id === "biolab-uplink") {
+                    document.querySelector(
+                        ".mission span"
+                    ).textContent =
+                        "UPLINK ACCESS // OPEN";
+                    popups.push({
+                        x: portal.boundaryX - 150,
+                        y: portal.deckTop - 52,
+                        text: "UPLINK ACCESS // OPEN",
+                        life: 2,
+                        color: "#4be36e"
+                    });
+                    spawnDust(
+                        portal.boundaryX - 34,
+                        portal.deckTop + 2,
+                        "#4be36e",
+                        20
+                    );
+                    playTone(224, 0.1, "square", 0.024);
+                    playTone(
+                        448,
+                        0.18,
+                        "square",
+                        0.021,
+                        0.08
+                    );
+                    announce(
+                        "Biolab atmosphere stable. Uplink access open."
+                    );
+                }
+            }
+
+            function updateAtmosphereLockPortals(delta) {
+                atmosphereLockPortals.forEach(function (portal) {
+                    if (!atmosphereLockRequirementMet(portal)) {
+                        portal.openElapsed = 0;
+                        portal.approachTriggered = false;
+                        portal.phase = "closed";
+                        portal.approachSide = 0;
+                        portal.crossed = false;
+                        portal.rearmRequired = false;
+                        return;
+                    }
+
+                    var playerCenter = player.x + 56;
+                    var distance = Math.abs(
+                        playerCenter - portal.boundaryX
+                    );
+                    var atThreshold =
+                        playerIsAtAtmosphereLockThreshold(
+                            portal
+                        );
+                    var openDuration =
+                        atmosphereLockPortalOpenDuration(
+                            portal
+                        );
+                    var playerSide =
+                        playerCenter < portal.boundaryX
+                            ? -1
+                            : 1;
+                    var movingTowardFromCurrentSide =
+                        playerSide < 0
+                            ? player.vx > 10
+                            : player.vx < -10;
+
+                    if (
+                        portal.phase === "closed" &&
+                        portal.rearmRequired
+                    ) {
+                        if (
+                            distance >
+                            ATMOSPHERE_LOCK_APPROACH_DISTANCE
+                        ) {
+                            portal.rearmRequired = false;
+                        } else if (
+                            !(
+                                atThreshold &&
+                                movingTowardFromCurrentSide
+                            )
+                        ) {
+                            return;
+                        }
+                    }
+
+                    if (
+                        portal.phase === "closed" &&
+                        atThreshold &&
+                        distance <=
+                            ATMOSPHERE_LOCK_APPROACH_DISTANCE
+                    ) {
+                        portal.approachTriggered = true;
+                        portal.phase = "opening";
+                        portal.approachSide =
+                            playerCenter < portal.boundaryX
+                                ? -1
+                                : 1;
+                        portal.crossed = false;
+                        portal.rearmRequired = false;
+                        playSoundEffect(
+                            "atmosphereLockShimmer",
+                            portal.requirement === "always"
+                                ? 0.82
+                                : 1
+                        );
+                        if (
+                            portal.id ===
+                                "foundry-refinery" &&
+                            !portal.announced
+                        ) {
+                            announce(
+                                "Atmosphere lock verified. Refinery access opening."
+                            );
+                        }
+                    }
+
+                    if (portal.phase === "opening") {
+                        portal.openElapsed = Math.min(
+                            openDuration,
+                            portal.openElapsed + delta
+                        );
+                        if (
+                            !portal.crossed &&
+                            distance >
+                                ATMOSPHERE_LOCK_APPROACH_DISTANCE +
+                                    120
+                        ) {
+                            portal.phase = "closing";
+                            portal.rearmRequired = true;
+                            playSoundEffect(
+                                "atmosphereLockShimmer",
+                                0.66
+                            );
+                            return;
+                        }
+                        if (
+                            atmosphereLockPortalIsOpen(
+                                portal
+                            )
+                        ) {
+                            portal.phase = "open";
+                            if (!portal.announced) {
+                                portal.announced = true;
+                                announceAtmosphereLockOpen(
+                                    portal
+                                );
+                            }
+                        }
+                        return;
+                    }
+
+                    if (portal.phase === "open") {
+                        if (
+                            portal.approachSide !== 0 &&
+                            (
+                                playerCenter -
+                                portal.boundaryX
+                            ) *
+                                portal.approachSide <
+                                0
+                        ) {
+                            portal.crossed = true;
+                        }
+
+                        var wallHalf =
+                            FOUNDRY_REFINERY_WALL_WIDTH /
+                            2;
+                        var fullyCleared =
+                            portal.approachSide < 0
+                                ? player.x + 34 >=
+                                    portal.boundaryX +
+                                        wallHalf +
+                                        ATMOSPHERE_LOCK_DOOR_WIDTH +
+                                        ATMOSPHERE_LOCK_CLEAR_MARGIN
+                                : portal.approachSide > 0
+                                    ? player.x + 78 <=
+                                        portal.boundaryX -
+                                            wallHalf -
+                                            ATMOSPHERE_LOCK_DOOR_WIDTH -
+                                            ATMOSPHERE_LOCK_CLEAR_MARGIN
+                                    : false;
+                        var abandoned =
+                            !portal.crossed &&
+                            portal.approachSide !== 0 &&
+                            distance >
+                                ATMOSPHERE_LOCK_APPROACH_DISTANCE +
+                                    120;
+
+                        if (
+                            (portal.crossed && fullyCleared) ||
+                            abandoned
+                        ) {
+                            portal.phase = "closing";
+                            portal.rearmRequired = true;
+                            playSoundEffect(
+                                "atmosphereLockShimmer",
+                                0.74
+                            );
+                        }
+                        return;
+                    }
+
+                    if (portal.phase === "closing") {
+                        var returnDistance =
+                            FOUNDRY_REFINERY_WALL_WIDTH /
+                                2 +
+                            ATMOSPHERE_LOCK_DOOR_WIDTH +
+                            36;
+                        if (
+                            atThreshold &&
+                            movingTowardFromCurrentSide &&
+                            distance <= returnDistance
+                        ) {
+                            portal.phase = "opening";
+                            portal.crossed = false;
+                            portal.rearmRequired = false;
+                            portal.approachSide =
+                                playerCenter <
+                                portal.boundaryX
+                                    ? -1
+                                    : 1;
+                            playSoundEffect(
+                                "atmosphereLockShimmer",
+                                0.68
+                            );
+                            return;
+                        }
+
+                        portal.openElapsed = Math.max(
+                            0,
+                            portal.openElapsed -
+                                delta *
+                                    (
+                                        openDuration /
+                                        atmosphereLockPortalCloseDuration(
+                                            portal
+                                        )
+                                    )
+                        );
+                        if (portal.openElapsed === 0) {
+                            portal.phase = "closed";
+                            portal.approachTriggered = false;
+                            portal.approachSide = 0;
+                            portal.crossed = false;
+                        }
+                    }
+                });
+
+                var foundryPortal =
+                    atmosphereLockPortalById(
+                        "foundry-refinery"
+                    );
+                var uplinkPortal =
+                    atmosphereLockPortalById(
+                        "biolab-uplink"
+                    );
+                canvas.dataset.refineryGate =
+                    atmosphereLockPortalState(
+                        foundryPortal
+                    );
+                canvas.dataset.uplinkAtmosphereLock =
+                    atmosphereLockPortalState(
+                        uplinkPortal
+                    );
+                canvas.dataset.atmosphereLockPortals =
+                    atmosphereLockPortals
+                        .map(function (portal) {
+                            return (
+                                portal.id +
+                                ":" +
+                                atmosphereLockPortalState(
+                                    portal
+                                )
+                            );
+                        })
+                        .join("|");
+                canvas.dataset.atmosphereLockRearm =
+                    atmosphereLockPortals
+                        .map(function (portal) {
+                            return (
+                                portal.id +
+                                ":" +
+                                (
+                                    portal.rearmRequired
+                                        ? "latched"
+                                        : "armed"
+                                )
+                            );
+                        })
+                        .join("|");
             }
 
             function updateAtmosphericStabilizers(delta) {
@@ -11086,11 +12178,6 @@
                         : foundryStabilizer.activating
                             ? "activating"
                             : "dormant";
-                canvas.dataset.refineryGate = foundryGateIsOpen()
-                    ? "open"
-                    : foundryStabilizer && foundryStabilizer.active
-                        ? "opening"
-                        : "locked";
                 canvas.dataset.freightLift = !foundryStabilizer ||
                     !foundryStabilizer.active
                     ? "dormant"
@@ -11098,40 +12185,12 @@
                         ? "releasing"
                         : "online";
                 if (!foundryStabilizer || !foundryStabilizer.active) {
-                    foundryGateOpenElapsed = 0;
                     foundryLiftElapsed = -FOUNDRY_LIFT_RELEASE_DELAY;
-                    return;
+                } else {
+                    foundryLiftElapsed += delta;
                 }
 
-                foundryGateOpenElapsed = Math.min(
-                    FOUNDRY_GATE_OPEN_DURATION,
-                    foundryGateOpenElapsed + delta
-                );
-                foundryLiftElapsed += delta;
-                if (!foundryGateIsOpen() || foundryGateAnnounced) return;
-
-                foundryGateAnnounced = true;
-                document.querySelector(".mission span").textContent =
-                    "FREIGHT LIFT ONLINE // REFINERY ABOVE";
-                popups.push({
-                    x: FOUNDRY_REFINERY_GATE_X - 170,
-                    y: 286,
-                    text: "REFINERY ACCESS // ABOVE",
-                    life: 2.2,
-                    color: "#ffd36c"
-                });
-                spawnDust(
-                    FOUNDRY_REFINERY_GATE_X - 34,
-                    340,
-                    "#ffd36c",
-                    22
-                );
-                playTone(188, 0.1, "square", 0.025);
-                playTone(282, 0.14, "square", 0.024, 0.07);
-                playTone(564, 0.22, "square", 0.022, 0.16);
-                announce(
-                    "Foundry atmosphere restored. Freight lift online. Refinery access available above."
-                );
+                updateAtmosphereLockPortals(delta);
             }
 
             function getOverworldAssignment(id) {
@@ -11272,6 +12331,102 @@
                 canvas.dataset.trillianHostile = "false";
                 canvas.dataset.trillianSolid = "false";
                 canvas.dataset.trillianDamage = "disabled";
+            }
+
+            function shipInteriorHasTrillian() {
+                return (
+                    shipTrillianPreview ||
+                    (
+                        !shipInteriorPreview &&
+                        trillian.joined
+                    )
+                );
+            }
+
+            function resetShipTrillian() {
+                shipTrillian.x = SHIP_TRILLIAN_BERTH_X;
+                shipTrillian.y =
+                    SHIP_INTERIOR_DECK_Y + 8;
+                shipTrillian.targetX =
+                    SHIP_TRILLIAN_BERTH_X;
+                shipTrillian.vx = 0;
+                shipTrillian.facing = -1;
+                shipTrillian.state = "idle";
+                shipTrillian.decisionTime = 2.4;
+                shipTrillian.animationTime = 0;
+                shipTrillian.decisionIndex = 0;
+            }
+
+            function updateShipTrillian(delta) {
+                if (
+                    !shipInteriorActive ||
+                    !shipInteriorHasTrillian()
+                ) {
+                    return;
+                }
+
+                shipTrillian.y =
+                    SHIP_INTERIOR_DECK_Y + 8;
+                if (shipTrillian.state === "idle") {
+                    shipTrillian.vx = 0;
+                    shipTrillian.decisionTime -= delta;
+                    if (shipTrillian.decisionTime <= 0) {
+                        var cabinTargets = [
+                            1080,
+                            820,
+                            1190,
+                            940
+                        ];
+                        shipTrillian.targetX =
+                            cabinTargets[
+                                shipTrillian.decisionIndex %
+                                cabinTargets.length
+                            ];
+                        shipTrillian.decisionIndex += 1;
+                        shipTrillian.state = "walk";
+                        shipTrillian.animationTime = 0;
+                    }
+                } else {
+                    var targetDelta =
+                        shipTrillian.targetX -
+                        shipTrillian.x;
+                    var cabinSpeed = 24;
+                    if (Math.abs(targetDelta) <= 3) {
+                        shipTrillian.x =
+                            shipTrillian.targetX;
+                        shipTrillian.vx = 0;
+                        shipTrillian.state = "idle";
+                        shipTrillian.decisionTime =
+                            2.6 +
+                            (
+                                shipTrillian.decisionIndex %
+                                3
+                            ) * 0.7;
+                    } else {
+                        shipTrillian.vx =
+                            Math.sign(targetDelta) *
+                            cabinSpeed;
+                        shipTrillian.facing =
+                            shipTrillian.vx > 0
+                                ? 1
+                                : -1;
+                        shipTrillian.x +=
+                            shipTrillian.vx * delta;
+                        if (!prefersReducedMotion) {
+                            shipTrillian.animationTime +=
+                                delta;
+                        }
+                    }
+                }
+
+                canvas.dataset.shipTrillianState =
+                    shipTrillian.state;
+                canvas.dataset.shipTrillianX =
+                    String(Math.round(shipTrillian.x));
+                canvas.dataset.shipTrillianY =
+                    String(Math.round(shipTrillian.y));
+                canvas.dataset.shipTrillianPlaneOffset =
+                    "8";
             }
 
             function configureWesternAssignmentPreviewState() {
@@ -12257,6 +13412,9 @@
                     updateAtmosphericStabilizers(delta);
                     updateRifleObstacles(delta);
                 }
+                if (shipInteriorActive) {
+                    updateShipTrillian(delta);
+                }
                 if (overworldPreview) {
                     if (portalIgniting && portalCharge < 1) {
                         portalCharge = Math.min(1, portalCharge + delta / 2.25);
@@ -12332,7 +13490,11 @@
                 }
 
                 var requestedDirection =
-                    (keys.right ? 1 : 0) - (keys.left ? 1 : 0);
+                    atmosphereLockCycleQa &&
+                    elapsed < 1.45
+                        ? 1
+                        : (keys.right ? 1 : 0) -
+                            (keys.left ? 1 : 0);
                 var direction =
                     heavyRifleActive() &&
                     player.onGround &&
@@ -12379,7 +13541,7 @@
                     coyoteTime = 0;
                     jumpBuffer = 0;
                     spawnDust(player.x + 56, player.y + 98, "#58f5df", 7);
-                    playTone(330, 0.07, "square", 0.03);
+                    playSoundEffect("jump");
                 } else if (
                     jumpBuffer > 0 &&
                     !player.onGround &&
@@ -12422,7 +13584,9 @@
                     playerMinimumX,
                     Math.min(playerMaximumX, player.x)
                 );
-                constrainFoundryGateMovement(previousPlayerX);
+                constrainAtmosphereLockMovement(
+                    previousPlayerX
+                );
                 constrainRifleObstacleMovement(previousPlayerX);
                 maintainFoundryZoneAssets(false);
                 if (inDeepworks && deepworksRoom) {
@@ -12523,9 +13687,12 @@
                             combatAlertTime = Math.max(combatAlertTime, 0.72);
                             calmIdleTime = 0;
                             spawnDust(player.x + 55, landing.y - 3, "#a86b9d", 9);
-                            if (oldBottom < landing.y - 18) {
-                                playTone(116, 0.045, "square", 0.018);
-                            }
+                            playSoundEffect(
+                                "landing",
+                                oldBottom < landing.y - 18
+                                    ? 1
+                                    : 0.72
+                            );
                         }
                     }
                 }
@@ -12858,6 +14025,7 @@
                 );
                 updateShipTelemetry();
                 updateParticles(delta);
+                updateZoneEyebrow(delta);
                 updateHud();
             }
 
@@ -12875,9 +14043,9 @@
                         score += 250 + Math.max(0, 75 - Math.floor(elapsed));
                         flashTime = 0.12;
                         spawnBurst(shard.x, shard.y, shard.color, 18);
-                        popups.push({ x: shard.x, y: shard.y - 20, text: "+SIGNAL", life: 0.8, color: shard.color });
+                        popups.push({ x: shard.x, y: shard.y - 20, text: "VESPERITE FRAGMENT +1", life: 0.8, color: shard.color });
                         playArpeggio(collected);
-                        announce("Signal Shard " + collected + " of " + TOTAL_SHARDS + " recovered.");
+                        announce("Vesperite Fragment " + collected + " of " + TOTAL_SHARDS + " recovered.");
                         if (collected === TOTAL_SHARDS) {
                             var uplinkReady =
                                 uplinkRequirementsMet();
@@ -12886,7 +14054,7 @@
                                 y: uplink.y - 32,
                                 text: uplinkReady
                                     ? "UPLINK GATE OPEN"
-                                    : "SIGNAL COMPLETE // SYSTEMS REMAIN",
+                                    : "FRAGMENTS SECURED // SYSTEMS REMAIN",
                                 life: 1.8,
                                 color: uplinkReady
                                     ? "#4be36e"
@@ -12896,7 +14064,7 @@
                             announce(
                                 uplinkReady
                                     ? "All Uplink requirements complete. Gate open."
-                                    : "All Signal Shards recovered. Restore remaining systems before entering the Uplink Gate."
+                                    : "All Vesperite Fragments recovered. Restore remaining systems before entering the Uplink Gate."
                             );
                         }
                         var newTier = BLASTER_TIERS.filter(function (threshold) {
@@ -13176,13 +14344,13 @@
                 if (inDeepworks) {
                     objective =
                         deepworksSignalRemaining
-                            ? "DEEPWORKS // RECOVER SIGNAL"
+                            ? "DEEPWORKS // RECOVER FRAGMENT"
                             : "DEEPWORKS // SALVAGE";
                 } else if (
                     foundryStabilizer &&
                     !foundryStabilizer.active
                 ) {
-                    objective = "FOUNDRY // RESTORE RELAY";
+                    objective = "FOUNDRY // RESTORE STABILIZER";
                 } else if (!jetpackOwned) {
                     objective =
                         "FOUNDRY LIFT // RECOVER JET ASSIST";
@@ -13196,13 +14364,13 @@
                 ) {
                     objective =
                         roomIndex >= 4
-                            ? "BIOLAB // RESTORE RELAY"
-                            : "BIOLAB RELAY // AHEAD";
+                            ? "BIOLAB // RESTORE STABILIZER"
+                            : "BIOLAB STABILIZER // AHEAD";
                 } else {
                     objective =
                         collected >= TOTAL_SHARDS
                             ? "UPLINK GATE // OPEN"
-                            : "UPLINK // RECOVER SIGNAL";
+                            : "UPLINK // RECOVER FRAGMENTS";
                 }
 
                 var message =
@@ -16373,29 +17541,8 @@
                             }
                             return;
                         }
-                        document.querySelector(".mission span").textContent =
-                            enemyLabel(enemy.type) +
-                            " ARMOR // " +
-                            enemy.health +
-                            "/" +
-                            enemy.maxHealth;
-                        popups.push({
-                            x: centerX,
-                            y: enemyTop - 16,
-                            text: "ARMOR " + enemy.health + " / " + enemy.maxHealth,
-                            life: 0.82,
-                            color: "#ffd36c"
-                        });
                         playTone(128, 0.045, "square", 0.03);
                         playTone(246, 0.055, "square", 0.02, 0.035);
-                        announce(
-                            enemyLabel(enemy.type) +
-                            " armor " +
-                            enemy.health +
-                            " of " +
-                            enemy.maxHealth +
-                            "."
-                        );
                         return;
                     }
 
@@ -16656,11 +17803,11 @@
                 messageCopy.textContent = episodeBetaRun
                     ? "Foundry recovery complete. " +
                         collected +
-                        " Signal Shards, " +
+                        " Vesperite Fragments, " +
                         creditsCollected +
                         " Galactic Credits, " +
                         stabilizersOnline() +
-                        " atmosphere relays" +
+                        " atmospheric stabilizers" +
                         (annihilationComplete
                             ? ", and full enemy annihilation (+1500)."
                             : ".")
@@ -16952,15 +18099,15 @@
                     };
                 }
                 if (
-                    shipTrillianPreview &&
+                    shipInteriorHasTrillian() &&
                     playerNearShipInteriorAnchor(
-                        SHIP_TRILLIAN_BERTH_X,
+                        shipTrillian.x,
                         74
                     )
                 ) {
                     return {
                         text: "↓ CHECK TRILLIAN",
-                        x: SHIP_TRILLIAN_BERTH_X,
+                        x: shipTrillian.x,
                         y: 548
                     };
                 }
@@ -17006,6 +18153,73 @@
                 ctx.fillStyle = "#0a0a0a";
                 ctx.fillRect(28, -4, 20, 4);
                 ctx.restore();
+            }
+
+            function drawShipTrillian() {
+                if (
+                    !shipInteriorHasTrillian() ||
+                    !imageHasPixels(assets.trillianUnarmored)
+                ) {
+                    return;
+                }
+                var frameIndex =
+                    shipTrillian.state === "walk" &&
+                    !prefersReducedMotion
+                        ? Math.floor(
+                            shipTrillian.animationTime /
+                            0.12
+                        ) % 36
+                        : 0;
+                var sourceX =
+                    frameIndex % 6 *
+                    TRILLIAN_FRAME_WIDTH;
+                var sourceY =
+                    Math.floor(frameIndex / 6) *
+                    TRILLIAN_FRAME_HEIGHT;
+
+                ctx.save();
+                ctx.globalAlpha = 0.2;
+                ctx.fillStyle = "#1b365d";
+                ctx.beginPath();
+                ctx.ellipse(
+                    shipTrillian.x,
+                    shipTrillian.y + 2,
+                    28,
+                    5,
+                    0,
+                    0,
+                    Math.PI * 2
+                );
+                ctx.fill();
+                ctx.restore();
+
+                ctx.save();
+                ctx.translate(
+                    Math.round(shipTrillian.x),
+                    Math.round(shipTrillian.y)
+                );
+                if (shipTrillian.facing > 0) {
+                    ctx.scale(-1, 1);
+                }
+                ctx.imageSmoothingEnabled = false;
+                ctx.drawImage(
+                    assets.trillianUnarmored,
+                    sourceX,
+                    sourceY,
+                    TRILLIAN_FRAME_WIDTH,
+                    TRILLIAN_FRAME_HEIGHT,
+                    -TRILLIAN_DRAW_WIDTH / 2,
+                    -TRILLIAN_DRAW_HEIGHT,
+                    TRILLIAN_DRAW_WIDTH,
+                    TRILLIAN_DRAW_HEIGHT
+                );
+                ctx.restore();
+                canvas.dataset.trillianAnimation =
+                    shipTrillian.state === "walk"
+                        ? "ship-slow-walk"
+                        : "ship-idle";
+                canvas.dataset.trillianFrame =
+                    String(frameIndex);
             }
 
             function currentShipArynDrawScale() {
@@ -17268,7 +18482,7 @@
                 ctx.fillRect(0, 0, viewWidth, HEIGHT);
 
                 ctx.save();
-                ctx.translate(-Math.round(cameraX), 0);
+                ctx.translate(-renderCameraX, 0);
                 ctx.drawImage(
                     assets.shipInteriorRear,
                     0,
@@ -17295,65 +18509,32 @@
 
                 var hatchOpen =
                     shipInteriorHatchProgress();
-                ctx.fillStyle = "#0a0a0a";
-                ctx.fillRect(622, 218, 124, 56);
-                ctx.fillStyle = "#a0bef5";
-                ctx.fillRect(
-                    622,
-                    222,
-                    62 * (1 - hatchOpen),
-                    42
-                );
-                ctx.fillRect(
-                    684 + 62 * hatchOpen,
-                    222,
-                    62 * (1 - hatchOpen),
-                    42
-                );
-                ctx.strokeStyle = "#1b365d";
-                ctx.lineWidth = 4;
-                ctx.strokeRect(622, 218, 124, 56);
-                ctx.strokeStyle = "#6395ee";
-                ctx.lineWidth = 2;
-                ctx.strokeRect(626, 222, 116, 48);
-
-                if (
-                    shipTrillianPreview &&
-                    imageHasPixels(assets.trillianUnarmored)
-                ) {
+                if (hatchOpen > 0.01) {
                     ctx.save();
-                    ctx.globalAlpha = 0.22;
+                    ctx.globalAlpha =
+                        0.9 * hatchOpen;
+                    ctx.fillStyle = "#070c19";
+                    ctx.fillRect(659, 216, 50, 68);
                     ctx.fillStyle = "#1b365d";
-                    ctx.beginPath();
-                    ctx.ellipse(
-                        919,
-                        704,
-                        38,
-                        6,
-                        0,
-                        0,
-                        Math.PI * 2
+                    ctx.fillRect(
+                        659 - 24 * hatchOpen,
+                        216,
+                        24,
+                        58
                     );
-                    ctx.fill();
-                    ctx.globalAlpha = 1;
-                    ctx.drawImage(
-                        assets.trillianUnarmored,
-                        0,
-                        0,
-                        TRILLIAN_FRAME_WIDTH,
-                        TRILLIAN_FRAME_HEIGHT,
-                        919 -
-                            TRILLIAN_DRAW_WIDTH / 2,
-                        704 -
-                            TRILLIAN_DRAW_HEIGHT,
-                        TRILLIAN_DRAW_WIDTH,
-                        TRILLIAN_DRAW_HEIGHT
+                    ctx.fillRect(
+                        709,
+                        216,
+                        24 * hatchOpen,
+                        58
                     );
+                    ctx.fillStyle = "#a0bef5";
+                    ctx.fillRect(657, 222, 2, 48);
+                    ctx.fillRect(709, 222, 2, 48);
                     ctx.restore();
-                    canvas.dataset.trillianAnimation =
-                        "ship-berth";
-                    canvas.dataset.trillianFrame = "0";
                 }
+
+                drawShipTrillian();
 
                 drawShipServiceKitCase();
                 drawParticles();
@@ -17405,7 +18586,7 @@
                 ctx.fillRect(0, 0, viewWidth, HEIGHT);
 
                 ctx.save();
-                ctx.translate(-Math.round(cameraX), 0);
+                ctx.translate(-renderCameraX, 0);
 
                 ctx.save();
                 ctx.strokeStyle =
@@ -17707,17 +18888,17 @@
                 ctx.fillStyle = "#0a1020";
                 ctx.fillRect(854, 640, 130, 32);
                 drawShipGreyboxLabel(
-                    shipTrillianPreview
+                    shipInteriorHasTrillian()
                         ? "TRILLIAN BERTH // OCCUPIED"
                         : "TRILLIAN BERTH // EMPTY",
                     919,
                     566,
-                    shipTrillianPreview
+                    shipInteriorHasTrillian()
                         ? "#ffd36c"
                         : "#73829a",
                     "center"
                 );
-                if (shipTrillianPreview) {
+                if (shipInteriorHasTrillian()) {
                     ctx.fillStyle = "#ffd36c";
                     ctx.beginPath();
                     ctx.arc(
@@ -17878,8 +19059,23 @@
             }
 
             function draw() {
-                ctx.clearRect(0, 0, viewWidth, HEIGHT);
+                ctx.setTransform(1, 0, 0, 1, 0, 0);
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.setTransform(
+                    renderScaleX,
+                    0,
+                    0,
+                    renderScaleY,
+                    0,
+                    0
+                );
                 ctx.imageSmoothingEnabled = false;
+                renderCameraX =
+                    Math.round(cameraX * renderScaleX) /
+                    renderScaleX;
+                renderCameraY =
+                    Math.round(cameraY * renderScaleY) /
+                    renderScaleY;
 
                 ctx.fillStyle = "#050713";
                 ctx.fillRect(0, 0, viewWidth, HEIGHT);
@@ -17893,7 +19089,7 @@
                     drawOverworldVolcano();
                     drawOverworldAtmosphere();
                     ctx.save();
-                    ctx.translate(-Math.round(cameraX), 0);
+                    ctx.translate(-renderCameraX, 0);
                     drawOverworldProps();
                     drawPlatforms();
                     drawElectrifiedPlatforms();
@@ -17915,12 +19111,13 @@
 
                 drawAtmosphere();
                 ctx.save();
-                ctx.translate(-Math.round(cameraX), -Math.round(cameraY));
+                ctx.translate(-renderCameraX, -renderCameraY);
                 drawFoundryRestorationSystems();
                 drawDeepworksPrompt();
                 drawWoundConstructionRig();
                 drawWoundVesperiteReward();
                 drawPlatforms();
+                drawFoundryAtmosphereLock();
                 drawElectrifiedPlatforms();
                 drawAtmosphericStabilizers();
                 drawHazards();
@@ -17934,6 +19131,7 @@
                 drawEnergyOrbs();
                 drawBolts();
                 drawPlayer();
+                drawFoundryAtmosphereLockForeground();
                 drawPopups();
                 ctx.restore();
 
@@ -17956,6 +19154,105 @@
                 mirrored
             ) {
                 if (!image || !image.complete || !image.naturalWidth) return false;
+
+                if (desktopBackgroundCropTrial) {
+                    var visibleLeft = Math.max(
+                        0,
+                        destinationX
+                    );
+                    var visibleTop = Math.max(
+                        0,
+                        destinationY
+                    );
+                    var visibleRight = Math.min(
+                        viewWidth,
+                        destinationX + destinationWidth
+                    );
+                    var visibleBottom = Math.min(
+                        HEIGHT,
+                        destinationY + destinationHeight
+                    );
+                    if (
+                        visibleRight <= visibleLeft ||
+                        visibleBottom <= visibleTop
+                    ) {
+                        return true;
+                    }
+
+                    var visibleWidth =
+                        visibleRight - visibleLeft;
+                    var visibleHeight =
+                        visibleBottom - visibleTop;
+                    var unitLeft =
+                        (
+                            visibleLeft - destinationX
+                        ) /
+                        destinationWidth;
+                    var unitRight =
+                        (
+                            visibleRight - destinationX
+                        ) /
+                        destinationWidth;
+                    var unitTop =
+                        (
+                            visibleTop - destinationY
+                        ) /
+                        destinationHeight;
+                    var unitBottom =
+                        (
+                            visibleBottom - destinationY
+                        ) /
+                        destinationHeight;
+                    var croppedSourceX = mirrored
+                        ? sourceX +
+                            (1 - unitRight) *
+                            sourceWidth
+                        : sourceX +
+                            unitLeft * sourceWidth;
+                    var croppedSourceY =
+                        sourceY +
+                        unitTop * sourceHeight;
+                    var croppedSourceWidth =
+                        (unitRight - unitLeft) *
+                        sourceWidth;
+                    var croppedSourceHeight =
+                        (unitBottom - unitTop) *
+                        sourceHeight;
+
+                    ctx.save();
+                    if (mirrored) {
+                        ctx.translate(
+                            visibleLeft + visibleWidth,
+                            0
+                        );
+                        ctx.scale(-1, 1);
+                        ctx.drawImage(
+                            image,
+                            croppedSourceX,
+                            croppedSourceY,
+                            croppedSourceWidth,
+                            croppedSourceHeight,
+                            0,
+                            visibleTop,
+                            visibleWidth,
+                            visibleHeight
+                        );
+                    } else {
+                        ctx.drawImage(
+                            image,
+                            croppedSourceX,
+                            croppedSourceY,
+                            croppedSourceWidth,
+                            croppedSourceHeight,
+                            visibleLeft,
+                            visibleTop,
+                            visibleWidth,
+                            visibleHeight
+                        );
+                    }
+                    ctx.restore();
+                    return true;
+                }
 
                 ctx.save();
                 if (mirrored) {
@@ -17980,8 +19277,8 @@
 
             function drawExpansionPreviewRoom(room) {
                 var blueprint = previewRoomBlueprints[room];
-                var roomX = Math.round(room * WIDTH - cameraX);
-                var roomY = -Math.round(cameraY);
+                var roomX = room * WIDTH - renderCameraX;
+                var roomY = -renderCameraY;
                 var expandedBackground = assets.background0;
                 if (!imageHasPixels(expandedBackground)) return;
 
@@ -18055,6 +19352,35 @@
                     ctx.fillRect(roomX, blendY - 72, WIDTH, 144);
                 }
 
+                if (
+                    imageHasPixels(
+                        assets.foundryFalseBridgeRemoval
+                    )
+                ) {
+                    var cleanupWidth = 630;
+                    var cleanupHeight = 180;
+                    var cleanupLocalX = blueprint.mirror
+                        ? WIDTH - 520 - cleanupWidth
+                        : 520;
+                    drawBackgroundLayer(
+                        assets.foundryFalseBridgeRemoval,
+                        0,
+                        0,
+                        cleanupWidth,
+                        cleanupHeight,
+                        roomX + cleanupLocalX,
+                        roomY + 520,
+                        cleanupWidth,
+                        cleanupHeight,
+                        blueprint.mirror
+                    );
+                    canvas.dataset.falseAffordanceCleanup =
+                        "eight-shared-y600-gaps-v1";
+                } else {
+                    canvas.dataset.falseAffordanceCleanup =
+                        "fallback-background";
+                }
+
                 ctx.fillStyle = blueprint.tint;
                 ctx.fillRect(roomX, roomY, WIDTH, WORLD_HEIGHT);
             }
@@ -18067,11 +19393,10 @@
                     return;
                 }
 
-                var seamX = WIDTH - cameraX;
-                var windowX = Math.round(seamX - 374);
-                var windowY = Math.round(
-                    FOUNDRY_SEAM_WINDOW_TOP - cameraY
-                );
+                var seamX = WIDTH - renderCameraX;
+                var windowX = seamX - 374;
+                var windowY =
+                    FOUNDRY_SEAM_WINDOW_TOP - renderCameraY;
                 if (
                     windowX > viewWidth + 48 ||
                     windowX + 748 < -48 ||
@@ -18157,6 +19482,10 @@
             }
 
             function drawBackgroundRooms() {
+                canvas.dataset.backgroundRaster =
+                    desktopBackgroundCropTrial
+                        ? "visible-viewport-crop-trial"
+                        : "full-room-default";
                 if (woundBossPreview) {
                     [
                         assets.woundBossBackgroundLeft,
@@ -18168,9 +19497,9 @@
                             Math.round(
                                 sliceIndex *
                                 WOUND_BOSS_RUNTIME_SLICE_WIDTH -
-                                cameraX
+                                renderCameraX
                             ),
-                            -Math.round(cameraY),
+                            -renderCameraY,
                             WOUND_BOSS_RUNTIME_SLICE_WIDTH,
                             WORLD_HEIGHT
                         );
@@ -18189,8 +19518,8 @@
                         if (background && background.complete && background.naturalWidth) {
                             ctx.drawImage(
                                 background,
-                                Math.round(room * WIDTH - cameraX),
-                                -Math.round(cameraY),
+                                room * WIDTH - renderCameraX,
+                                -renderCameraY,
                                 WIDTH,
                                 WORLD_HEIGHT
                             );
@@ -18202,7 +19531,8 @@
                 drawFoundrySeamWindow();
 
                 for (var seam = 1; seam < SCREEN_COUNT; seam += 1) {
-                    var seamX = seam * WIDTH - cameraX;
+                    var seamX =
+                        seam * WIDTH - renderCameraX;
                     if (seamX < -24 || seamX > viewWidth + 24) continue;
                     var gradient = ctx.createLinearGradient(seamX - 20, 0, seamX + 20, 0);
                     gradient.addColorStop(0, "rgba(3, 5, 13, 0)");
@@ -19806,6 +21136,7 @@
             function drawShipExteriorHatchBack() {
                 if (!shipExteriorGreyboxActive()) return;
                 var hatchOpen = shipExteriorHatchProgress();
+                if (hatchOpen <= 0.01) return;
                 var shipOffsetY =
                     Math.sin(
                         elapsed *
@@ -19813,30 +21144,23 @@
                     ) * 3.2;
                 var hatchY = 438 + shipOffsetY;
                 ctx.save();
-                ctx.fillStyle = "#02030a";
+                ctx.globalAlpha = hatchOpen;
+                ctx.fillStyle = "#050813";
                 ctx.fillRect(
-                    SHIP_EXTERIOR_HATCH_X - 48,
-                    hatchY - 9,
-                    96,
-                    22
+                    SHIP_EXTERIOR_HATCH_X - 28,
+                    hatchY - 5,
+                    56,
+                    18
                 );
                 ctx.fillStyle =
                     "rgba(88, 245, 223, " +
-                    (0.12 + hatchOpen * 0.28) +
+                    (0.08 + hatchOpen * 0.18) +
                     ")";
                 ctx.fillRect(
-                    SHIP_EXTERIOR_HATCH_X - 42,
-                    hatchY - 6,
-                    84,
-                    14
-                );
-                ctx.strokeStyle = "#ffd36c";
-                ctx.lineWidth = 3;
-                ctx.strokeRect(
-                    SHIP_EXTERIOR_HATCH_X - 50,
-                    hatchY - 11,
-                    100,
-                    25
+                    SHIP_EXTERIOR_HATCH_X - 23,
+                    hatchY - 3,
+                    46,
+                    10
                 );
                 ctx.restore();
             }
@@ -19851,7 +21175,7 @@
                     ) * 3.2;
                 var hatchY = 438 + shipOffsetY;
                 var panelWidth =
-                    48 * (1 - hatchOpen);
+                    25 * hatchOpen;
                 ctx.save();
                 if (
                     shipTransitionMode === "exterior-enter" ||
@@ -19859,47 +21183,36 @@
                 ) {
                     ctx.fillStyle = "rgba(5, 8, 19, 0.96)";
                     ctx.fillRect(
-                        SHIP_EXTERIOR_HATCH_X - 49,
+                        SHIP_EXTERIOR_HATCH_X - 28,
                         hatchY + 11,
-                        98,
-                        152
-                    );
-                    ctx.strokeStyle = "#263653";
-                    ctx.lineWidth = 3;
-                    ctx.strokeRect(
-                        SHIP_EXTERIOR_HATCH_X - 49,
-                        hatchY + 11,
-                        98,
+                        56,
                         152
                     );
                 }
-                ctx.fillStyle = "#17223a";
-                ctx.fillRect(
-                    SHIP_EXTERIOR_HATCH_X - 48,
-                    hatchY - 8,
-                    panelWidth,
-                    19
-                );
-                ctx.fillRect(
-                    SHIP_EXTERIOR_HATCH_X +
-                        48 -
+                if (hatchOpen > 0.01) {
+                    ctx.globalAlpha = hatchOpen;
+                    ctx.fillStyle = "#1b365d";
+                    ctx.fillRect(
+                        SHIP_EXTERIOR_HATCH_X - 28 -
+                            panelWidth,
+                        hatchY - 6,
                         panelWidth,
-                    hatchY - 8,
-                    panelWidth,
-                    19
-                );
-                ctx.strokeStyle = "#63bfff";
-                ctx.lineWidth = 2;
-                ctx.beginPath();
-                ctx.moveTo(
-                    SHIP_EXTERIOR_HATCH_X - 52,
-                    hatchY + 12
-                );
-                ctx.lineTo(
-                    SHIP_EXTERIOR_HATCH_X + 52,
-                    hatchY + 12
-                );
-                ctx.stroke();
+                        16
+                    );
+                    ctx.fillRect(
+                        SHIP_EXTERIOR_HATCH_X + 28,
+                        hatchY - 6,
+                        panelWidth,
+                        16
+                    );
+                    ctx.fillStyle = "#a0bef5";
+                    ctx.fillRect(
+                        SHIP_EXTERIOR_HATCH_X - 29,
+                        hatchY + 10,
+                        58,
+                        2
+                    );
+                }
                 ctx.restore();
                 if (playerNearShipExteriorHatch()) {
                     drawShipInteractionPrompt(
@@ -20838,24 +22151,6 @@
                             Math.PI * 2
                         );
                         ctx.fill();
-                        ctx.strokeStyle =
-                            "rgba(255, 231, 142, " +
-                            (0.72 * riflePulse).toFixed(3) +
-                            ")";
-                        ctx.lineWidth = 3;
-                        ctx.setLineDash([12, 9]);
-                        ctx.beginPath();
-                        ctx.ellipse(
-                            pickup.x,
-                            pickup.y + bob,
-                            86,
-                            50,
-                            0,
-                            0,
-                            Math.PI * 2
-                        );
-                        ctx.stroke();
-                        ctx.setLineDash([]);
                         ctx.font = "700 15px Fira Code, monospace";
                         ctx.textAlign = "center";
                         ctx.fillStyle = "#fff4c7";
@@ -20868,23 +22163,22 @@
                         );
                         ctx.shadowBlur = 0;
                     }
-                    ctx.globalAlpha =
-                        available ? 0.22 : 0.08;
-                    ctx.fillStyle =
-                        pickup.type === "rifle"
-                            ? "#ffd36c"
-                            : "#58f5df";
-                    ctx.beginPath();
-                    ctx.ellipse(
-                        pickup.x,
-                        pickup.y + drawHeight * 0.44,
-                        drawWidth * 0.42,
-                        10,
-                        0,
-                        0,
-                        Math.PI * 2
-                    );
-                    ctx.fill();
+                    if (pickup.type !== "rifle") {
+                        ctx.globalAlpha =
+                            available ? 0.22 : 0.08;
+                        ctx.fillStyle = "#58f5df";
+                        ctx.beginPath();
+                        ctx.ellipse(
+                            pickup.x,
+                            pickup.y + drawHeight * 0.44,
+                            drawWidth * 0.42,
+                            10,
+                            0,
+                            0,
+                            Math.PI * 2
+                        );
+                        ctx.fill();
+                    }
                     ctx.globalAlpha =
                         available ? 1 : 0.24;
                     if (pickup.type === "rifle") {
@@ -20904,8 +22198,8 @@
                     ) {
                         canvas.dataset.jetpackPickupState =
                             available
-                                ? "post-lift-ready"
-                                : "relay-locked";
+                                ? "beyond-atmosphere-lock"
+                                : "stabilizer-locked";
                     }
                     ctx.restore();
                 });
@@ -20989,11 +22283,7 @@
                         biolabStabilizer
                     )
                     : 0;
-                var gateProgress = foundryGateProgress();
                 var roomEndX = FOUNDRY_REFINERY_GATE_X;
-                var gateTop = FOUNDRY_UPPER_GATE_TOP;
-                var gateBottom = FOUNDRY_UPPER_GATE_BOTTOM;
-                var gateFieldAlpha = Math.max(0, 1 - gateProgress);
                 var flow = (elapsed * 150) % 180;
                 var freightLift = findFoundryFreightLift();
                 var railPower = stabilizer && stabilizer.active
@@ -21353,225 +22643,277 @@
                     });
                 }
 
-                if (gateProgress > 0.01) {
-                    var openThreshold = ctx.createLinearGradient(
-                        FOUNDRY_REFINERY_GATE_X - 58,
-                        0,
-                        FOUNDRY_REFINERY_GATE_X + 58,
-                        0
-                    );
-                    openThreshold.addColorStop(0, "rgba(3, 5, 13, 0)");
-                    openThreshold.addColorStop(
-                        0.22,
-                        "rgba(3, 5, 13, " +
-                            (0.88 * gateProgress).toFixed(3) +
-                            ")"
-                    );
-                    openThreshold.addColorStop(
-                        0.78,
-                        "rgba(3, 5, 13, " +
-                            (0.88 * gateProgress).toFixed(3) +
-                            ")"
-                    );
-                    openThreshold.addColorStop(1, "rgba(3, 5, 13, 0)");
-                    ctx.fillStyle = openThreshold;
-                    ctx.fillRect(
-                        FOUNDRY_REFINERY_GATE_X - 58,
-                        gateTop + 20,
-                        116,
-                        gateBottom - gateTop - 42
-                    );
-                }
+                ctx.restore();
+            }
 
-                ctx.globalAlpha = 1 - gateProgress * 0.9;
-                ctx.fillStyle = "#080d19";
-                ctx.fillRect(
-                    FOUNDRY_REFINERY_GATE_X - 22,
-                    gateTop,
-                    44,
-                    gateBottom - gateTop
-                );
-                ctx.fillStyle = "#31415a";
-                ctx.fillRect(
-                    FOUNDRY_REFINERY_GATE_X - 20,
-                    gateTop,
-                    5,
-                    gateBottom - gateTop
-                );
-                ctx.fillRect(
-                    FOUNDRY_REFINERY_GATE_X + 15,
-                    gateTop,
-                    5,
-                    gateBottom - gateTop
-                );
+            function drawFoundryAtmosphereLock() {
+                if (!expansionPreview) return;
 
-                if (gateFieldAlpha > 0.01) {
-                    var barrier = ctx.createLinearGradient(
-                        FOUNDRY_REFINERY_GATE_X - 18,
-                        0,
-                        FOUNDRY_REFINERY_GATE_X + 18,
-                        0
-                    );
-                    barrier.addColorStop(0, "rgba(255, 105, 180, 0)");
-                    barrier.addColorStop(
-                        0.5,
-                        "rgba(255, 105, 180, " +
-                            (0.48 * gateFieldAlpha).toFixed(3) +
-                            ")"
-                    );
-                    barrier.addColorStop(1, "rgba(255, 105, 180, 0)");
-                    ctx.fillStyle = barrier;
-                    ctx.fillRect(
-                        FOUNDRY_REFINERY_GATE_X - 42,
-                        gateTop + 36,
-                        84,
-                        gateBottom - gateTop - 72
-                    );
-                    ctx.globalAlpha = 0.55 + Math.sin(elapsed * 8) * 0.18;
-                    ctx.fillStyle = "#ff69b4";
-                    for (
-                        var fieldY = gateTop + 54;
-                        fieldY < gateBottom - 44;
-                        fieldY += 88
+                var wallWidth =
+                    FOUNDRY_REFINERY_WALL_WIDTH;
+                var doorWidth =
+                    ATMOSPHERE_LOCK_DOOR_WIDTH;
+                var doorHeight = 206;
+
+                atmosphereLockPortals.forEach(function (portal) {
+                    if (
+                        portal.boundaryX + wallWidth <
+                            cameraX - 180 ||
+                        portal.boundaryX - wallWidth >
+                            cameraX + viewWidth + 180
                     ) {
+                        return;
+                    }
+
+                    var gateProgress =
+                        atmosphereLockPortalProgress(portal);
+                    var lockReady =
+                        atmosphereLockRequirementMet(portal);
+                    var lockColor = !lockReady
+                        ? "#ff5268"
+                        : portal.requirement === "always"
+                            ? "#58f5df"
+                            : "#4be36e";
+                    var deckBottom =
+                        portal.deckTop + 24;
+                    var doorY =
+                        deckBottom - doorHeight;
+                    var wallX =
+                        portal.boundaryX -
+                        wallWidth / 2;
+                    var leftDoorX =
+                        wallX - doorWidth;
+                    var rightDoorX =
+                        wallX + wallWidth;
+
+                    ctx.save();
+                    ctx.imageSmoothingEnabled = false;
+
+                    function drawDoorFace(
+                        doorX,
+                        mirrored
+                    ) {
+                        ctx.save();
+                        if (mirrored) {
+                            ctx.translate(
+                                doorX + doorWidth,
+                                doorY
+                            );
+                            ctx.scale(-1, 1);
+                        } else {
+                            ctx.translate(
+                                doorX,
+                                doorY
+                            );
+                        }
+
+                        var sealScale =
+                            Math.max(
+                                0,
+                                1 - gateProgress
+                            );
+                        if (
+                            sealScale > 0.01 &&
+                            imageHasPixels(
+                                assets
+                                    .foundryAtmosphereLockMembrane
+                            )
+                        ) {
+                            ctx.save();
+                            ctx.translate(58, 103);
+                            ctx.scale(sealScale, 1);
+                            ctx.translate(-58, -103);
+                            ctx.globalAlpha =
+                                0.88 +
+                                Math.sin(
+                                    elapsed * 6.4 +
+                                    portal.boundaryX *
+                                        0.0008
+                                ) *
+                                    0.08;
+                            ctx.shadowColor = lockColor;
+                            ctx.shadowBlur = lockReady
+                                ? 12
+                                : 8;
+                            ctx.drawImage(
+                                assets
+                                    .foundryAtmosphereLockMembrane,
+                                0,
+                                0,
+                                doorWidth,
+                                doorHeight
+                            );
+                            ctx.globalCompositeOperation =
+                                "multiply";
+                            ctx.globalAlpha =
+                                0.62;
+                            ctx.fillStyle = lockColor;
+                            ctx.beginPath();
+                            ctx.ellipse(
+                                29,
+                                103,
+                                29,
+                                82,
+                                0,
+                                0,
+                                Math.PI * 2
+                            );
+                            ctx.fill();
+                            ctx.restore();
+                        }
+
+                        if (
+                            imageHasPixels(
+                                assets
+                                    .foundryAtmosphereLockHousing
+                            )
+                        ) {
+                            ctx.drawImage(
+                                assets
+                                    .foundryAtmosphereLockHousing,
+                                0,
+                                0,
+                                doorWidth,
+                                doorHeight
+                            );
+                        } else if (
+                            imageHasPixels(
+                                assets.foundryAtmosphereLock
+                            )
+                        ) {
+                            ctx.drawImage(
+                                assets.foundryAtmosphereLock,
+                                0,
+                                0,
+                                doorWidth,
+                                doorHeight
+                            );
+                        }
+                        ctx.restore();
+                    }
+
+                    drawDoorFace(leftDoorX, false);
+                    drawDoorFace(rightDoorX, true);
+
+                    ctx.globalAlpha =
+                        0.82 +
+                        Math.sin(
+                            elapsed * 5.2 +
+                            portal.boundaryX * 0.0007
+                        ) * 0.12;
+                    ctx.fillStyle = lockColor;
+                    ctx.shadowColor = lockColor;
+                    ctx.shadowBlur = lockReady ? 12 : 8;
+                    ctx.fillRect(
+                        wallX - 7,
+                        doorY + 46,
+                        5,
+                        12
+                    );
+                    ctx.fillRect(
+                        wallX + wallWidth + 2,
+                        doorY + 46,
+                        5,
+                        12
+                    );
+                    ctx.restore();
+                });
+
+                canvas.dataset.atmosphereWallArt =
+                    imageHasPixels(
+                        assets.foundryAtmosphereWall
+                    )
+                        ? "seven-seam-solid-concrete-v1"
+                        : "fallback";
+                canvas.dataset.atmosphereLockArt =
+                    imageHasPixels(
+                        assets.foundryAtmosphereLockHousing
+                    ) &&
+                    imageHasPixels(
+                        assets.foundryAtmosphereLockMembrane
+                    )
+                        ? "seven-fixed-housings-split-membranes-v1"
+                        : "fallback";
+                canvas.dataset.atmosphereLockState =
+                    atmosphereLockPortalState(
+                        atmosphereLockPortalById(
+                            "foundry-refinery"
+                        )
+                    );
+                canvas.dataset.atmosphereLockFloorBottom =
+                    "362,624,1628";
+                canvas.dataset.atmosphereWallSpan =
+                    "0-" + WORLD_HEIGHT;
+                canvas.dataset.atmosphereLockFloorBridge =
+                    atmosphereLockPortals.length +
+                    "-bridges@upper-middle-ground";
+                canvas.dataset.atmosphereLockLevels =
+                    atmosphereLockPortals
+                        .map(function (portal) {
+                            return (
+                                portal.id +
+                                "@" +
+                                portal.deckTop
+                            );
+                        })
+                        .join("|");
+                canvas.dataset.atmosphereLockCount =
+                    String(atmosphereLockPortals.length);
+            }
+
+            function drawFoundryAtmosphereLockForeground() {
+                if (!expansionPreview) return;
+
+                var wallWidth =
+                    FOUNDRY_REFINERY_WALL_WIDTH;
+
+                atmosphereLockPortals.forEach(function (portal) {
+                    if (
+                        portal.boundaryX + wallWidth <
+                            cameraX - 180 ||
+                        portal.boundaryX - wallWidth >
+                            cameraX + viewWidth + 180
+                    ) {
+                        return;
+                    }
+
+                    var wallX =
+                        portal.boundaryX -
+                        wallWidth / 2;
+                    ctx.save();
+                    ctx.imageSmoothingEnabled = false;
+                    if (
+                        imageHasPixels(
+                            assets.foundryAtmosphereWall
+                        )
+                    ) {
+                        ctx.drawImage(
+                            assets.foundryAtmosphereWall,
+                            wallX,
+                            0,
+                            wallWidth,
+                            WORLD_HEIGHT
+                        );
+                    } else {
+                        ctx.fillStyle = "#252f3d";
                         ctx.fillRect(
-                            FOUNDRY_REFINERY_GATE_X - 12,
-                            fieldY,
-                            24,
-                            4
+                            wallX,
+                            0,
+                            wallWidth,
+                            WORLD_HEIGHT
                         );
                     }
-                }
+                    ctx.restore();
+                });
 
-                ctx.globalAlpha = 1;
-                ctx.fillStyle = gateProgress >= 0.98 ? "#58f5df" : "#ff69b4";
-                ctx.shadowColor = ctx.fillStyle;
-                ctx.shadowBlur = gateProgress >= 0.98 ? 14 : 7;
-                ctx.fillRect(
-                    FOUNDRY_REFINERY_GATE_X - 7,
-                    gateTop + 16,
-                    14,
-                    14
-                );
-                ctx.shadowBlur = 0;
-                ctx.fillStyle = "#0b111e";
-                ctx.fillRect(
-                    FOUNDRY_REFINERY_GATE_X - 54,
-                    gateTop - 4,
-                    108,
-                    20
-                );
-                ctx.fillRect(
-                    FOUNDRY_REFINERY_GATE_X - 62,
-                    gateBottom - 22,
-                    124,
-                    22
-                );
-
-                ctx.globalAlpha = 1;
-                ctx.fillStyle = "#070b15";
-                ctx.fillRect(
-                    FOUNDRY_REFINERY_GATE_X - 46,
-                    gateBottom,
-                    92,
-                    GROUND_Y - gateBottom
-                );
-                ctx.fillStyle = "#27344a";
-                ctx.fillRect(
-                    FOUNDRY_REFINERY_GATE_X - 42,
-                    gateBottom,
-                    8,
-                    GROUND_Y - gateBottom
-                );
-                ctx.fillRect(
-                    FOUNDRY_REFINERY_GATE_X + 34,
-                    gateBottom,
-                    8,
-                    GROUND_Y - gateBottom
-                );
-                ctx.strokeStyle = "#51324e";
-                ctx.lineWidth = 4;
-                for (
-                    var bulkheadY = gateBottom + 28;
-                    bulkheadY < GROUND_Y - 42;
-                    bulkheadY += 84
-                ) {
-                    ctx.beginPath();
-                    ctx.moveTo(
-                        FOUNDRY_REFINERY_GATE_X - 32,
-                        bulkheadY
-                    );
-                    ctx.lineTo(
-                        FOUNDRY_REFINERY_GATE_X + 32,
-                        bulkheadY + 48
-                    );
-                    ctx.moveTo(
-                        FOUNDRY_REFINERY_GATE_X + 32,
-                        bulkheadY
-                    );
-                    ctx.lineTo(
-                        FOUNDRY_REFINERY_GATE_X - 32,
-                        bulkheadY + 48
-                    );
-                    ctx.stroke();
-                }
-                ctx.fillStyle = "#0b111e";
-                ctx.fillRect(
-                    FOUNDRY_REFINERY_GATE_X - 62,
-                    GROUND_Y - 24,
-                    124,
-                    24
-                );
-
-                if (
-                    gateProgress < 0.98 &&
-                    Math.abs(
-                        player.x + 56 - FOUNDRY_REFINERY_GATE_X
-                    ) < 430
-                    &&
-                    playerIsAtFoundryUpperThreshold()
-                ) {
-                    var gateLabelX = FOUNDRY_REFINERY_GATE_X - 178;
-                    var gateLabelY = gateTop + 86;
-                    ctx.globalAlpha = 0.82 + Math.sin(elapsed * 4.8) * 0.12;
-                    ctx.fillStyle = "rgba(3, 5, 13, 0.84)";
-                    ctx.fillRect(gateLabelX - 164, gateLabelY - 22, 328, 31);
-                    ctx.font = "700 16px Fira Code, monospace";
-                    ctx.textAlign = "center";
-                    ctx.fillStyle = "#ff69b4";
-                    ctx.fillText(
-                        "UPPER ACCESS // ATMOSPHERE LOCK",
-                        gateLabelX,
-                        gateLabelY
-                    );
-                }
-                if (
-                    Math.abs(
-                        player.x + 56 - FOUNDRY_REFINERY_GATE_X
-                    ) < 430 &&
-                    !playerIsAtFoundryUpperThreshold()
-                ) {
-                    var deckLabelX = FOUNDRY_REFINERY_GATE_X - 176;
-                    var deckLabelY = GROUND_Y - 82;
-                    ctx.globalAlpha =
-                        0.74 + Math.sin(elapsed * 3.8) * 0.1;
-                    ctx.fillStyle = "rgba(3, 5, 13, 0.88)";
-                    ctx.fillRect(
-                        deckLabelX - 142,
-                        deckLabelY - 22,
-                        284,
-                        31
-                    );
-                    ctx.font = "700 16px Fira Code, monospace";
-                    ctx.textAlign = "center";
-                    ctx.fillStyle = "#ff69b4";
-                    ctx.fillText(
-                        "DECK ROUTE // SEALED",
-                        deckLabelX,
-                        deckLabelY
-                    );
-                }
-                ctx.restore();
+                canvas.dataset.atmosphereLockOcclusion =
+                    imageHasPixels(
+                        assets.foundryAtmosphereWall
+                    )
+                        ? "seven-concrete-foregrounds-single-pass-v2"
+                        : "fallback";
+                canvas.dataset.atmosphereWallCompositing =
+                    "single-full-height-foreground-pass";
             }
 
             function drawAtmosphericStabilizers() {
@@ -21584,14 +22926,22 @@
                 }
 
                 atmosphericStabilizers.forEach(function (stabilizer) {
+                    var drawX = stabilizer.x;
+                    var drawWidth =
+                        ATMOSPHERIC_STABILIZER_VISUAL_WIDTH;
+                    var drawHeight =
+                        ATMOSPHERIC_STABILIZER_VISUAL_HEIGHT;
+                    var drawBaseY =
+                        stabilizer.baseY +
+                        ATMOSPHERIC_STABILIZER_VISUAL_SINK;
                     if (
-                        stabilizer.x + stabilizer.width < cameraX - 160 ||
-                        stabilizer.x > cameraX + viewWidth + 160
+                        drawX + drawWidth < cameraX - 160 ||
+                        drawX > cameraX + viewWidth + 160
                     ) {
                         return;
                     }
 
-                    var top = stabilizer.baseY - stabilizer.height;
+                    var top = drawBaseY - drawHeight;
                     var progress = atmosphericStabilizerProgress(stabilizer);
                     var flicker = stabilizer.activating
                         ? 0.72 + Math.sin(elapsed * 31) * 0.18 +
@@ -21601,8 +22951,8 @@
                         0,
                         Math.min(1, progress * flicker)
                     );
-                    var chamberX = stabilizer.x + stabilizer.width * 0.5;
-                    var chamberY = top + stabilizer.height * 0.43;
+                    var chamberX = drawX + drawWidth * 0.5;
+                    var chamberY = top + drawHeight * 0.43;
                     var labelX = portraitMode
                         ? Math.max(
                             cameraX + 132,
@@ -21614,6 +22964,7 @@
                         : chamberX;
 
                     ctx.save();
+                    ctx.imageSmoothingEnabled = false;
                     if (activeAlpha > 0.02) {
                         var glow = ctx.createRadialGradient(
                             chamberX,
@@ -21621,7 +22972,7 @@
                             12,
                             chamberX,
                             chamberY,
-                            stabilizer.width * 0.55
+                            drawWidth * 0.55
                         );
                         glow.addColorStop(
                             0,
@@ -21638,20 +22989,20 @@
                         glow.addColorStop(1, "rgba(224, 106, 169, 0)");
                         ctx.fillStyle = glow;
                         ctx.fillRect(
-                            stabilizer.x - stabilizer.width * 0.3,
-                            top + stabilizer.height * 0.08,
-                            stabilizer.width * 1.6,
-                            stabilizer.height * 0.72
+                            drawX - drawWidth * 0.3,
+                            top + drawHeight * 0.08,
+                            drawWidth * 1.6,
+                            drawHeight * 0.72
                         );
                     }
 
                     ctx.globalAlpha = Math.max(0, 1 - activeAlpha);
                     ctx.drawImage(
                         assets.stabilizerDormant,
-                        stabilizer.x,
+                        drawX,
                         top,
-                        stabilizer.width,
-                        stabilizer.height
+                        drawWidth,
+                        drawHeight
                     );
 
                     if (activeAlpha > 0) {
@@ -21660,10 +23011,10 @@
                         ctx.shadowBlur = 10 + 18 * activeAlpha;
                         ctx.drawImage(
                             assets.stabilizerActive,
-                            stabilizer.x,
+                            drawX,
                             top,
-                            stabilizer.width,
-                            stabilizer.height
+                            drawWidth,
+                            drawHeight
                         );
                     }
                     ctx.restore();
@@ -21684,13 +23035,13 @@
                         ctx.fillText(
                             "STABILIZING // " + activationPercent + "%",
                             labelX + 2,
-                            top + stabilizer.height * 0.69 + 2
+                            top + drawHeight * 0.69 + 2
                         );
                         ctx.fillStyle = "#ffd36c";
                         ctx.fillText(
                             "STABILIZING // " + activationPercent + "%",
                             labelX,
-                            top + stabilizer.height * 0.69
+                            top + drawHeight * 0.69
                         );
                         ctx.restore();
                         return;
@@ -21717,16 +23068,25 @@
                     ctx.fillText(
                         promptText,
                         labelX + 2,
-                        stabilizer.baseY - 86
+                        drawBaseY - 86
                     );
                     ctx.fillStyle = promptColor;
                     ctx.fillText(
                         promptText,
                         labelX,
-                        stabilizer.baseY - 88
+                        drawBaseY - 88
                     );
                     ctx.restore();
                 });
+
+                canvas.dataset.stabilizerVisualFootprint =
+                    ATMOSPHERIC_STABILIZER_VISUAL_WIDTH +
+                    "x" +
+                    ATMOSPHERIC_STABILIZER_VISUAL_HEIGHT +
+                    "@+" +
+                    ATMOSPHERIC_STABILIZER_VISUAL_SINK;
+                canvas.dataset.stabilizerInteractionFootprint =
+                    "420x735";
             }
 
             function drawHazards() {
@@ -21740,8 +23100,10 @@
                             : assets.foundryThermalPurgeVent;
                     var drawHeight =
                         hazard.baseHeight || 42;
+                    var visualSink =
+                        hazard.visualSink || 5;
                     var drawY =
-                        hazard.y - drawHeight + 5;
+                        hazard.y - drawHeight + visualSink;
 
                     ctx.save();
                     ctx.imageSmoothingEnabled = false;
@@ -21773,14 +23135,14 @@
                         ctx.fillRect(
                             hazard.x +
                                 hazard.width * 0.2,
-                            hazard.y - drawHeight + 10,
+                            drawY + 5,
                             10,
                             5
                         );
                         ctx.fillRect(
                             hazard.x +
                                 hazard.width * 0.8 - 10,
-                            hazard.y - drawHeight + 10,
+                            drawY + 5,
                             10,
                             5
                         );
@@ -21885,8 +23247,7 @@
                                     dischargeWidth * 0.5
                                 ),
                                 Math.round(
-                                    hazard.y -
-                                    drawHeight +
+                                    drawY +
                                     4 +
                                     (
                                         dischargeBeat === 2
@@ -23632,7 +24993,7 @@
                 var portalX = roomStart + 1284;
                 var gateWidth = 444;
                 var gateHeight = 376;
-                var gateBottom = 600;
+                var gateBottom = GROUND_Y;
                 var gateX = portalX - gateWidth / 2;
                 var gateY = gateBottom - gateHeight;
                 var apertureX = portalX - 72;
@@ -24389,6 +25750,71 @@
                     ctx.fillText(popup.text, popup.x, popup.y);
                     ctx.restore();
                 });
+            }
+
+            function updateZoneEyebrow(delta) {
+                if (
+                    !episodeBetaRun ||
+                    overworldPreview ||
+                    shipInteriorActive ||
+                    woundBossPreview
+                ) {
+                    zoneEyebrow.hidden = true;
+                    zoneEyebrowTimer = 0;
+                    return;
+                }
+
+                var roomIndex = Math.max(
+                    0,
+                    Math.min(
+                        SCREEN_COUNT - 1,
+                        Math.floor(
+                            (player.x + 56) / WIDTH
+                        )
+                    )
+                );
+                var zoneIndex = Math.floor(roomIndex / 2);
+                var zoneTitles = [
+                    "Foundry",
+                    "Refinery",
+                    "Biolab",
+                    "Uplink"
+                ];
+                var key = inDeepworks
+                    ? "deepworks-" + roomIndex
+                    : "zone-" + zoneIndex;
+                var title = inDeepworks
+                    ? "Deepworks"
+                    : zoneTitles[zoneIndex];
+
+                if (key !== zoneEyebrowLastKey) {
+                    zoneEyebrowLastKey = key;
+                    zoneEyebrowTimer = 2.65;
+                    zoneEyebrowKicker.textContent =
+                        "Veyra Coreworks // Area";
+                    zoneEyebrowTitle.textContent = title;
+                    zoneEyebrow.hidden = false;
+                    zoneEyebrow.classList.remove(
+                        "is-entering"
+                    );
+                    void zoneEyebrow.offsetWidth;
+                    zoneEyebrow.classList.add(
+                        "is-entering"
+                    );
+                    canvas.dataset.zoneEyebrow =
+                        title.toLowerCase();
+                } else if (zoneEyebrowTimer > 0) {
+                    zoneEyebrowTimer = Math.max(
+                        0,
+                        zoneEyebrowTimer - delta
+                    );
+                    if (zoneEyebrowTimer === 0) {
+                        zoneEyebrow.hidden = true;
+                        zoneEyebrow.classList.remove(
+                            "is-entering"
+                        );
+                    }
+                }
             }
 
             function updateHud() {
@@ -25420,6 +26846,7 @@
                 completeEpisodeBridge
             );
             startOverButton.addEventListener("click", function () {
+                if (cancelEpisodeOneEntry()) return;
                 playSoundEffect("crashSelect");
                 playBackgroundMusic();
                 resetGame(true);
@@ -25462,6 +26889,53 @@
                 }
             });
 
+            function updateFramePacingTelemetry(
+                now,
+                drewFrame
+            ) {
+                if (!frameTelemetryActive) return;
+                if (!frameTelemetryStarted) {
+                    frameTelemetryStarted = now;
+                }
+                frameTelemetryCallbacks += 1;
+                if (drewFrame) {
+                    frameTelemetryDraws += 1;
+                }
+                var telemetryDuration =
+                    now - frameTelemetryStarted;
+                if (telemetryDuration < 1000) return;
+
+                var callbackRate =
+                    frameTelemetryCallbacks *
+                    1000 /
+                    telemetryDuration;
+                var drawRate =
+                    frameTelemetryDraws *
+                    1000 /
+                    telemetryDuration;
+                canvas.dataset.frameCallbackRate =
+                    callbackRate.toFixed(1);
+                canvas.dataset.frameDrawRate =
+                    drawRate.toFixed(1);
+                performanceTrialBadge.textContent =
+                    frameMeterRequested
+                        ? "FPS " + Math.round(drawRate)
+                        : (
+                            desktopNoBlurTrial
+                                ? "No blur"
+                                : desktopBackgroundCropTrial
+                                    ? "Crop"
+                                    : "60 Hz"
+                        ) +
+                        " trial // RAF " +
+                        Math.round(callbackRate) +
+                        " // DRAW " +
+                        Math.round(drawRate);
+                frameTelemetryStarted = now;
+                frameTelemetryCallbacks = 0;
+                frameTelemetryDraws = 0;
+            }
+
             function frame(now) {
                 var pageVisible = document.visibilityState !== "hidden";
                 if (
@@ -25484,22 +26958,54 @@
                         state === "boss-intro" ||
                         dialogueActive
                     );
+                if (
+                    desktopSixtyFrameTrial &&
+                    simulationActive
+                ) {
+                    var targetFrameDuration = 1000 / 60;
+                    if (!framePacingDeadline || !lastFrame) {
+                        framePacingDeadline = now;
+                    }
+                    if (now + 0.25 < framePacingDeadline) {
+                        updateFramePacingTelemetry(
+                            now,
+                            false
+                        );
+                        window.requestAnimationFrame(frame);
+                        return;
+                    }
+                    do {
+                        framePacingDeadline +=
+                            targetFrameDuration;
+                    } while (
+                        framePacingDeadline <= now
+                    );
+                } else {
+                    framePacingDeadline = 0;
+                }
                 var delta = simulationActive && lastFrame
                     ? Math.min(0.033, (now - lastFrame) / 1000)
                     : 0;
                 lastFrame = now;
+                var drewFrame = false;
                 if (simulationActive) {
                     update(delta);
                     draw();
+                    drewFrame = true;
                     renderRequested = false;
                 } else if (pageVisible && renderRequested) {
                     draw();
+                    drewFrame = true;
                     renderRequested = false;
                 } else if (!pageVisible) {
                     lastFrame = 0;
                 } else if (!runtimeFocused) {
                     lastFrame = 0;
                 }
+                updateFramePacingTelemetry(
+                    now,
+                    drewFrame
+                );
                 window.requestAnimationFrame(frame);
             }
 

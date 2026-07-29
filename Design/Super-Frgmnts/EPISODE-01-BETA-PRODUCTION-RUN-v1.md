@@ -19,8 +19,9 @@ Chapter 01 closed on the Primary Biolab response
    Overworld route.
 5. The physical transport locks Aryn in place, fades her out, and hands the
    run to The Shard Foundry without reloading the page.
-6. The eight-plate Foundry run requires twelve Signal Shards, the Foundry and
-   Biolab atmospheric stabilizers, and the cleared three-hit Vesperite lock.
+6. The eight-plate Foundry run requires twelve Vesperite Fragments, the
+   Foundry and Biolab atmospheric stabilizers, and the cleared three-hit
+   Vesperite lock.
 7. Entering the complete Uplink Gate freezes the Foundry state, awards the
    optional annihilation bonus once, establishes the boss checkpoint, and
    plays a skippable five-second descent beat.
@@ -58,9 +59,8 @@ The checkpoint carries:
 | Score | preserve | restore | preserve final |
 | Hearts already lost | preserve | regenerate to five hearts | clear for safe surface |
 | Remaining mission time | preserve | restore | surface becomes untimed |
-| Signal Shards | preserve all 12 | restore | no longer an objective |
+| Vesperite Fragments | preserve all 12 | restore | no longer an objective |
 | Galactic Credits | preserve | restore | preserve |
-| Optional Vesperite count | preserve | restore | preserve |
 | Jet assist | preserve | restore | preserve |
 | Heavy rifle | force ready | restore ready | preserve |
 | Seeker tier | preserve | restore | preserve |

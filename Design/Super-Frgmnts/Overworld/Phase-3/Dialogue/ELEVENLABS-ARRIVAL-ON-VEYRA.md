@@ -257,7 +257,7 @@ remain.
 ### D32 // Speaker 1 // Dras
 
 ```text
-[clear and operational] The Foundry. Its atmospheric relay feeds the upper Coreworks. Bring it online. Clear the infestation. Recover whatever evidence survived.
+[clear and operational] The Foundry. Bring both atmospheric stabilizers online and clear the infestation. The pulse fractures Vesperite along its path. Recover the fragments—their residual harmonics may tell us where it began.
 ```
 
 ### D33 // Speaker 2 // Aryn

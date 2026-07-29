@@ -73,13 +73,29 @@ def main() -> None:
         "FOUNDRY_LIFT_CYCLE_DURATION",
         "function foundryFreightLiftPosition()",
         "function playerIsAtFoundryUpperThreshold()",
+        "ATMOSPHERE_LOCK_GATE_CLEARANCE = 72",
+        "function playerIsAtAtmosphereLockThreshold(portal)",
+        "var wallLeft =",
+        "var wallRight =",
+        "var contactLeft = atThreshold",
+        "wallLeft -\n                            ATMOSPHERE_LOCK_DOOR_WIDTH",
+        "var contactRight = atThreshold",
+        "wallRight +\n                            ATMOSPHERE_LOCK_DOOR_WIDTH",
+        "player.x = contactLeft - 78",
+        "player.x = contactRight - 34",
         "FREIGHT LIFT ONLINE // REFINERY ABOVE",
         "var foundryRoute = foundryTraversalRoutes[roomIndex];",
         "? foundryRoute.platforms",
         ": sharedLowerRoute.concat(sharedUpperTransfers);",
         "paintedCatwalks.forEach",
         "runtimeRoute.forEach",
+        "var atmosphereLockPortals = [",
+        "atmosphereLockPortals.forEach",
+        "atmosphereLockTunnelFloor: true",
         "function buildAtmosphericStabilizers()",
+        "ATMOSPHERIC_STABILIZER_VISUAL_WIDTH = 336",
+        "ATMOSPHERIC_STABILIZER_VISUAL_HEIGHT = 588",
+        "ATMOSPHERIC_STABILIZER_VISUAL_SINK = 8",
         "var atmosphericStabilizers = buildAtmosphericStabilizers();",
         "atmosphericStabilizers = buildAtmosphericStabilizers();",
         'previewParameters.get("stabilizer") === "1"',
@@ -89,6 +105,8 @@ def main() -> None:
         "function activateNearbyAtmosphericStabilizer()",
         "function updateAtmosphericStabilizers(delta)",
         "function drawAtmosphericStabilizers()",
+        "canvas.dataset.stabilizerVisualFootprint",
+        "canvas.dataset.stabilizerInteractionFootprint",
         "function drawFoundryRestorationSystems()",
         "assets.foundryFanHousing",
         "assets.foundryFanRotor",
@@ -101,9 +119,43 @@ def main() -> None:
         "y: 218",
         "var fanAngle = fanRestoration > 0.02",
         "fanRestoration * 2.36",
-        "DECK ROUTE // SEALED",
-        "UPPER ACCESS // ATMOSPHERE LOCK",
-        "function constrainFoundryGateMovement(previousPlayerX)",
+        'source: "/Images/Game/Super-Frgmnts/foundry-atmosphere-lock-runtime-v1.png"',
+        'source: "/Images/Game/Super-Frgmnts/foundry-atmosphere-lock-housing-runtime-v1.png"',
+        'source: "/Images/Game/Super-Frgmnts/foundry-atmosphere-lock-membrane-runtime-v1.png"',
+        'source: "/Images/Game/Super-Frgmnts/foundry-atmosphere-lock-seam-wall-runtime-v1.png"',
+        'source: "/Images/Game/Super-Frgmnts/foundry-false-bridge-removal-runtime-v1.png"',
+        "assets.foundryAtmosphereLock",
+        "assets.foundryAtmosphereLockHousing",
+        "assets.foundryAtmosphereLockMembrane",
+        "assets.foundryAtmosphereWall",
+        "assets.foundryFalseBridgeRemoval",
+        "function drawFoundryAtmosphereLock()",
+        '"seven-fixed-housings-split-membranes-v1"',
+        '"seven-seam-solid-concrete-v1"',
+        "canvas.dataset.atmosphereLockState",
+        "canvas.dataset.atmosphereLockFloorBottom",
+        "canvas.dataset.atmosphereWallSpan",
+        "canvas.dataset.atmosphereLockFloorBridge",
+        "canvas.dataset.atmosphereLockLevels",
+        "canvas.dataset.atmosphereLockPortals",
+        "canvas.dataset.atmosphereLockRearm",
+        "portal.rearmRequired",
+        "var atmosphereLockCycleQa =",
+        'canvas.dataset.falseAffordanceCleanup',
+        "var falseAffordanceQa =",
+        "canvas.dataset.uplinkAtmosphereLock",
+        "drawFoundryAtmosphereLockForeground();",
+        '"seven-concrete-foregrounds-single-pass-v2"',
+        "canvas.dataset.atmosphereWallCompositing",
+        '"single-full-height-foreground-pass"',
+        "function atmosphereLockRequirementMet(portal)",
+        "function atmosphereLockPortalProgress(portal)",
+        "function atmosphereLockPortalCloseDuration(portal)",
+        "function updateAtmosphereLockPortals(delta)",
+        'portal.phase = "closing"',
+        '"atmosphereLockShimmer"',
+        "function constrainAtmosphereLockMovement(",
+        "function constrainFoundryGateMovement(",
         "function foundryGateIsOpen()",
         "drawFoundryRestorationSystems();",
         "drawAtmosphericStabilizers();",
@@ -164,6 +216,14 @@ def main() -> None:
         abs(foundry_lift_cycle_seconds - (0.55 + 2.15 + 0.75 + 2.15)) < 1e-9,
         "The freight lift no longer completes its approved 5.6-second cycle",
     )
+    wall_width = 128
+    door_width = 80
+    left_membrane_contact = -(wall_width / 2 + door_width)
+    right_membrane_contact = wall_width / 2 + door_width
+    require(
+        left_membrane_contact == -144 and right_membrane_contact == 144,
+        "Atmosphere Lock collision no longer meets the visible membrane edges",
+    )
 
     hardest_gap = 170
     player_body_width = 44
@@ -189,7 +249,22 @@ def main() -> None:
         "The Breathing Chamber",
         "175 × 100 world-pixel",
         "2.35-second restart sequence",
-        "Foundry/Refinery containment field",
+        "side-profile upper Foundry/Refinery Atmosphere Lock",
+        "solid concrete-and-steel divider",
+        "mirrored door face",
+        "continuous floor collision",
+        "foreground",
+        "all seven boundaries",
+        "Five ordinary passages",
+        "`WIDTH × 6` Biolab/Uplink",
+        "upper, upper, middle, middle, upper, ground, middle",
+        "permanent steel housing",
+        "membrane reforms",
+        "closed-door collision planes meet the visible outer membrane edges",
+        "challenge, recovery, discovery, and exploration",
+        "The shared upper plate no longer displays the non-collidable center junction",
+        "real 330-pixel gap",
+        "background surface may resemble a walkable deck only when matching collision exists",
         "enter zone → learn its traversal",
         "four-minute initial reserve plus two",
         "intentionally not wired into the runtime yet",
@@ -222,10 +297,15 @@ def main() -> None:
     print("- each room has two deck-mounted ventilation fixtures")
     print("- layered fan housings stay fixed while their illustrated rotors turn")
     print("- the cavern-window patch replaces the mirrored Foundry seam")
-    print("- the deck boundary remains sealed while restored access moves above")
+    print("- seven full-height walls use upper, middle, and ground passages")
+    print("- five cyan transit locks open quickly without interrupting exploration")
+    print("- Foundry and Biolab zone locks remain sealed until restoration")
+    print("- fixed housings remain while membranes retract and reform")
+    print("- closed lock collision meets both visible membrane faces")
+    print("- the shared false bridge is painted out without changing collision")
     print("- restored Foundry machinery and conduit lighting respond room-wide")
     print("- the Refinery route remains gated until restoration completes")
-    print("- three later stabilizer stations remain reserved")
+    print("- the two stabilizers control only their intended zone thresholds")
     print("- timer awards remain deliberately unimplemented")
     print(f"- hardest rise {max(mandatory_rises):.0f}px / jump apex {jump_apex:.1f}px")
     print(

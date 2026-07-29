@@ -46,7 +46,7 @@ deployment approval, then verify GitHub Pages and the production URL.
 - Aryn's surface companion: **Trillian** (separate from Jane)
 - Strategic material: **Vesperite**
 - Currency: **Galactic Credits**
-- Collectibles: **Signal Shards**
+- Collectibles: **Vesperite Fragments**
 - Level exit: **Uplink Gate**
 - Coreworks zones: **Foundry**, **Refinery**, **Biolab**, **Deepworks**, and
   **Uplink**
@@ -88,9 +88,10 @@ Important constraints:
 7. Aryn stands on the physical Coreworks surface transport. Its one-shot
    energy vortex locks controls, fades Aryn, and hands off to the Foundry.
 8. The Shard Foundry provides eight horizontal plates, three traversal layers,
-   two relays, twelve Signal Shards, two curated Deepworks entries, power-ups,
-   a three-hit physical Vesperite containment obstruction, sixteen spaced
-   enemies led by seven recurring Chitin Sentinels, three
+   two atmospheric stabilizers, twelve Vesperite Fragments, two curated
+   Deepworks entries, power-ups, a three-hit physical Vesperite containment
+   obstruction, eighteen spaced enemies led by seven recurring Chitin
+   Sentinels and three Core Leeches, three
    authored hazard beats, an eight-minute clock, and the Uplink Gate.
 9. The completed Uplink Gate freezes and preserves the Foundry run, then plays
    a five-second descent beat before opening The Wound at a safe portal-bay
@@ -208,6 +209,12 @@ Then use:
   `http://127.0.0.1:8765/super_frgmnts.html?preview=overworld&scene=transport&autostart=1`
 - Expanded Foundry review:
   `http://127.0.0.1:8765/super_frgmnts.html?preview=foundry-expansion&autostart=1`
+- Seam portal review (`1–7`; example shows the Biolab/Uplink lock):
+  `http://127.0.0.1:8765/super_frgmnts.html?preview=foundry-expansion&seam=6&autostart=1`
+- Automated cyan-door exit-cycle review:
+  `http://127.0.0.1:8765/super_frgmnts.html?preview=foundry-expansion&seam=4&cycle=1&autostart=1`
+- False-affordance cleanup review (`room=2` normal, `room=3` mirrored):
+  `http://127.0.0.1:8765/super_frgmnts.html?preview=foundry-expansion&room=2&qa=affordance&autostart=1`
 - Uplink gate, arc, and desktop progress review:
   `http://127.0.0.1:8765/super_frgmnts.html?episode=01&stage=foundry&room=7&qa=uplink&autostart=1`
 - Heavy-rifle review:
@@ -445,7 +452,9 @@ Foundry score. See
   unfinished optional surface assignment.
 - Atmospheric stabilizers restore room machinery and gate progression.
 - Pause, mute, focus-loss audio, control cancellation, touch-callout
-  suppression, and mobile camera compensation are active.
+  suppression, and mobile camera compensation are active. The pause card is
+  intentionally minimal: a lowered, enlarged `PAUSED` title and larger
+  `RESUME` action replace the retired position-hold explanation.
 
 ## Episode 01 enemy catalog
 
@@ -495,17 +504,40 @@ The working package represented by this handoff adds or finalizes:
   response, and `THE SIGNAL ANSWERED` Chapter 01 close;
 - the physical Coreworks surface transport, including 36-frame idle and
   25-frame activation atlases;
-- the live normal-route RD-42 dorsal hatch, production-art ship interior, and
-  dedicated two-minute interior score with hatch preload and bidirectional
+- the live normal-route RD-42 dorsal hatch, full-width production-art ship
+  interior, autonomous slow-walking Trillian, unobtrusive hatch transitions,
+  and dedicated two-minute interior score with preload and bidirectional
   crossfade;
 - the unified 16-bit Foundry platform module and restrained zone accents;
-- the Core Leech and Pale Watcher refinements plus Skree, Sova, Seam Lurker,
-  and Kihunter production population;
+- the three Core Leech placements and Pale Watcher refinement plus Skree, Sova,
+  Seam Lurker, and Kihunter production population;
 - the recurring seven-Sentinel encounter grammar and mobile boss assist;
 - the faster Seam Hunter main-deck and gantry-facing response;
-- the post-lift jet-assist placement, rifle-valid Sova silhouette, separated
-  final shard, lift-edge boss trigger, and sealed post-recovery transport;
-- the larger desktop relay/shard indicators, persistent rifle-ready state,
+- the post-lock jet-assist placement, rifle-valid Sova silhouette, separated
+  final fragment, lift-edge boss trigger, and sealed post-recovery transport;
+- the reusable seven-seam concrete divider system: five cyan proximity-open
+  passages, Foundry/Refinery and Biolab/Uplink red-to-green stabilizer locks,
+  permanent mirrored side-profile housings with separately retracting pressure
+  membranes, upper/middle/ground tunnel distribution, bridged local floors,
+  close-after-clear reversible state machines with a directional re-arm latch
+  that prevents close-open-close exit loops, dedicated shimmer audio, and
+  membrane-edge collision that stops Aryn at the visible bubble surface,
+  single-pass full-height foreground concrete that hides Aryn during passage
+  without double-compositing the doorway slice, plus a display-native canvas
+  backing store and physical-pixel camera snap that remove Chrome's fractional
+  concrete resample; area-entry eyebrows,
+  grounded Uplink bulkhead, lower arc-coupler hazard, and revised Episode 01
+  objective card;
+- the two atmospheric stabilizers at a reduced 336 × 588 visual footprint,
+  sunk eight pixels into their decks while retaining the original 420 × 735
+  interaction footprint so the Biolab/Uplink lock remains readable without
+  making activation more exacting;
+- the supplied jump and landing WAV cues, with landing playback limited to a
+  real airborne-to-ground transition rather than repeated grounded frames;
+- the repeated false `y = 600` background bridge removed from all eight normal
+  and mirrored plates, leaving clear ledge endings and allowing only the
+  collision-backed runtime platform to span the 330-pixel gap;
+- the larger desktop stabilizer/fragment indicators, persistent rifle-ready state,
   Escape pause, music gesture priming, and scene-critical incremental loading;
 - the 16-bit thermal purge, broken arc-coupler, compact discharge, and physical
   Uplink bulkhead sprites with distinct wait-versus-route-choice hazard
@@ -514,6 +546,42 @@ The working package represented by this handoff adds or finalizes:
   assets;
 - updated arrival, beta, roster, ambience, post-Foundry, Chapter 02 seed, and
   production-route contracts.
+
+The temporary `?render-profile=desktop-1x` query flag is an opt-in desktop
+performance trial for comparing Safari's normal Retina backing store with a
+1× pixel-art backing store. The default URL remains on the normal renderer;
+removing the flag reverts immediately. The flag is guarded from phones and
+tablets and is not a mobile-support decision. Initial desktop Safari review
+found no fidelity difference and no frame-pacing improvement, so the 1× mode
+has not been adopted.
+
+The separate `?frame-profile=desktop-60` flag is an opt-in desktop pacing
+trial. It caps active simulation draws near 60 Hz while retaining the
+browser's normal canvas resolution and displays measured `requestAnimationFrame`
+and draw rates in a small diagnostic badge. Removing the flag immediately
+restores uncapped frame delivery. It is also guarded from phones and tablets.
+An upper-route Safari test still fell to 41 draws per second, so the pacing cap
+has not been adopted.
+
+The `?render-profile=desktop-crop` flag is the next opt-in desktop diagnostic.
+It retains normal backing resolution and effects but asks each large room
+plate to rasterize only the source rectangle currently visible in the
+viewport. Removing the flag returns the exact full-room draw path. The trial
+is guarded from phones and tablets. This raised the observed upper-route
+Safari minimum from 41 to 50 draws per second, but did not yet hold 60.
+
+The `?effects-profile=desktop-no-blur` flag is an opt-in desktop diagnostic
+that suppresses Canvas `shadowBlur` while leaving sprites, gradients,
+composite modes, animation, collision, and backing resolution intact. It is
+intended only to identify whether Safari's remaining render cost comes from
+live blur effects. Removing the flag restores them immediately, and the flag
+is guarded from phones and tablets.
+
+The production-safe `?frame-profile=monitor` flag changes no rendering,
+effects, compositing, timing, input, or gameplay behavior. It only exposes a
+small measured `FPS` badge and is intentionally available on phones and
+tablets for Safari performance comparison. This is a diagnostic route, not an
+accepted mobile-support baseline; ordinary URLs show no badge.
 
 The transport sources and reviews are in
 `Design/Super-Frgmnts/Overworld/Coreworks-Transport/`. Regenerate derivatives
@@ -558,7 +626,7 @@ direct check of the live GitHub Pages URL.
 
 - final combat damage and credit economy; the first-level placement candidate
   remains subject to its documented desktop and portrait playtest gate;
-- timer awards from atmospheric relays; the active beta still starts at eight
+- timer awards from atmospheric stabilizers; the active beta still starts at eight
   minutes;
 - the between-level Galactic Credit store and start-of-next-level purchases;
 - email gating and the proposed one-time $5 web purchase;

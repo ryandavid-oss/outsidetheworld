@@ -61,16 +61,16 @@ def main() -> None:
         "Electric-platform fairness values drifted",
     )
     require(
-        manifest["population"]["signal_shards"] == 12,
-        "Manifest does not reserve twelve Signal Shards",
+        manifest["population"]["vesperite_fragments"] == 12,
+        "Manifest does not reserve twelve Vesperite Fragments",
     )
     require(
-        manifest["population"]["atmospheric_relays"] == 2,
-        "Manifest does not reserve two beta relays",
+        manifest["population"]["atmospheric_stabilizers"] == 2,
+        "Manifest does not reserve two beta stabilizers",
     )
     require(
-        manifest["population"]["signal_shards_deepworks"] == 1,
-        "Deepworks does not contain its required Signal Shard",
+        manifest["population"]["vesperite_fragments_deepworks"] == 1,
+        "Deepworks does not contain its required Vesperite Fragment",
     )
     require(
         manifest["population"]["deepworks_entries"] == 2,
@@ -81,8 +81,9 @@ def main() -> None:
         "Overworld tutorial cache was not removed",
     )
     require(
-        manifest["population"]["enemy_count"] == 16
-        and manifest["population"]["chitin_sentinel_count"] == 7,
+        manifest["population"]["enemy_count"] == 18
+        and manifest["population"]["chitin_sentinel_count"] == 7
+        and manifest["population"]["core_leech_count"] == 3,
         "Production enemy population drifted",
     )
     require(
@@ -119,7 +120,6 @@ def main() -> None:
         "function resetEpisodeBetaPopulation()",
         'makeBetaPickup("jetpack"',
         'makeBetaPickup("rifle"',
-        'makeBetaPickup("vesperite"',
         "makeShard(WIDTH * 3 + 920, 1748",
         "makeCreditCrate(WIDTH * 5 + 920, 1816, 7)",
         "makeBetaRifleObstacle(",
@@ -176,7 +176,7 @@ def main() -> None:
         "### Uplink // Plates 6–7",
         "## Playtest acceptance",
         "No hostile patrol, projectile, or active hazard begins inside a room link",
-        "The Uplink Gate opens only when twelve Signal Shards, two stabilizers",
+        "The Uplink Gate opens only when twelve Vesperite Fragments, two",
     )
     for token in design_tokens:
         require(token in level_design, f"Missing level-design contract: {token}")
@@ -184,13 +184,13 @@ def main() -> None:
     print("SUPER FRGMNTS Episode 01 early beta: PASS")
     print("- title, atmospheric arrival, Overworld, and Foundry share one in-page route")
     print("- Overworld tutorial platforms, cache, and prompts are disabled")
-    print("- Foundry contains pickups, caches, relays, shards, and obstruction")
+    print("- Foundry contains pickups, caches, stabilizers, fragments, and obstruction")
     print("- moving and forgiving electrified-platform lessons are present")
-    print("- Deepworks has one required shard route and one optional cache route")
-    print("- power-ups, room links, relay aprons, and recovery placements use safe buffers")
+    print("- Deepworks has one required fragment route and one optional cache route")
+    print("- power-ups, room links, stabilizer aprons, and recovery placements use safe buffers")
     print("- seven Chitin Sentinels establish the recurring encounter grammar")
     print("- telescopic laser seeker remains available on every Overworld route")
-    print("- the Uplink checkpoint requires twelve shards, two relays, and the rifle lock")
+    print("- the Uplink checkpoint requires twelve fragments, two stabilizers, and the rifle lock")
 
 
 if __name__ == "__main__":

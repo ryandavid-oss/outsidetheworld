@@ -1,0 +1,54 @@
+{
+  "contract": "foundry-false-bridge-removal-runtime-v1",
+  "status": "implemented",
+  "purpose": "Remove the repeated y=600 background junction that visually promised a walkable bridge across an intentional collision gap.",
+  "generation": {
+    "mode": "built-in image generation",
+    "use_case": "precise-object-edit",
+    "prompt_summary": "Remove only the central elevated steel bridge, braces, raised deck, and upper support from the approved Foundry crop. Replace it with matching dark cavern negative space, preserve the real left and right ledges, and leave no horizontal walkable silhouette.",
+    "invariants": [
+      "Preserve the two collision-backed side ledges.",
+      "Preserve the restrained navy, cyan, and steel 16-bit palette.",
+      "Do not add a bridge, rail, beam, cable, floating platform, or glow band."
+    ]
+  },
+  "sources": [
+    {
+      "path": "Design/Super-Frgmnts/Foundry/Traversal-Cleanup/Raw/false-bridge-original-crop-v1.png",
+      "dimensions": [630, 180],
+      "sha256": "a1307ed4448b8363f52789ae7f1e708bbba77e4a1b2ba6e739a34dfa03b3ab14",
+      "crop_from": "Images/Game/super-frgmnts-foundry-expanded-prototype-v1.png",
+      "crop_box": [520, 520, 1150, 700]
+    },
+    {
+      "path": "Design/Super-Frgmnts/Foundry/Traversal-Cleanup/Raw/false-bridge-removal-imagegen-source-v1.png",
+      "dimensions": [2172, 724],
+      "sha256": "61c55c4f0be6e6c4d3e36567f5aa14da89f26f4b98d2c818a554b9821d9c6f2c"
+    }
+  ],
+  "runtime": {
+    "path": "Images/Game/Super-Frgmnts/foundry-false-bridge-removal-runtime-v1.png",
+    "dimensions": [630, 180],
+    "sha256": "c60914e711ef082244ef51c6e55fc0446637e6cbe63090cc288da077acf9e7b3",
+    "sampling": "nearest-neighbor",
+    "palette": "64-color quantized RGB",
+    "alpha": "4x4 ordered-dither edge transition"
+  },
+  "placement": {
+    "applies_to_rooms": [0, 1, 2, 3, 4, 5, 6, 7],
+    "local_x_normal": 520,
+    "local_x_mirrored": 522,
+    "world_y": 520,
+    "draw_width": 630,
+    "draw_height": 180,
+    "mirroring": "Follows each plate blueprint so normal and mirrored upper plates share one patch."
+  },
+  "traversal_contract": {
+    "collision_left_end_x": 646,
+    "collision_right_start_x": 976,
+    "gap_width": 330,
+    "runtime_platform": "The existing collision-backed platform remains the only horizontal object allowed to occupy the gap.",
+    "collision_changes": "none",
+    "visual_rule": "If a horizontal surface is not collision-backed, it must not read as a walkable deck."
+  }
+}

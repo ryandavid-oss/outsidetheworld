@@ -6,7 +6,7 @@
 
 **Logical plate:** 1,672 × 941
 
-**Playable shell:** x = 220–1,452
+**Playable shell:** x = 42–1,518
 **Main deck:** y = 744
 
 This wireframe defines the first collision, camera, interaction, and art
@@ -31,19 +31,12 @@ Pixel-art rear-plate review:
 Aryn scale check:
 [`Reviews/rd42-interior-rear-plate-scale-check-v2.png`](Reviews/rd42-interior-rear-plate-scale-check-v2.png).
 
-The v2 rear plate is an approved **scale reference**, not approved runtime art.
-It uses the live 112 × 112 Aryn box for prop scale, places its brightest deck
-edge at y 743 against the y 744 gameplay plane, and follows the existing
-Foundry plate's hard-edged 16-bit pixel language. Hatch doors, rails,
-foreground occlusion, Trillian, and the service case remain separate layers.
-The normal occupied volume is y 438–744, or roughly 3.4 of Aryn's 89-pixel
-visible sprite heights. Only the dorsal hatch chimney continues into the
-upper hull.
-
-The next rear-plate pass must preserve this geometry while moving away from
-the Foundry's dark palette and dense pipe identity. Aryn's cobalt, pale cyan,
-violet, pink, warm orange, and lighter blue-gray materials lead instead. That
-pass must also show the flight/suit alcove and the sealed keel-deck hatch.
+The v2 rear plate remains a scale reference. The 1,672 × 941 production-v1
+plate is the runtime authority: its brightest deck edge aligns with y 744,
+its cockpit is the human-scale anchor, and Aryn renders at a 135-pixel visible
+standing height. Its lighter OTW palette, flight/suit alcove, OTW bulkhead
+mosaic, and sealed keel-deck hatch distinguish it from the Foundry. Hatch
+motion, Trillian, and the service case remain separate layers.
 
 ## Whole-room diagram
 
@@ -65,7 +58,7 @@ WORLD x=0                                                                  x=167
 │  |          ◇                         X=684         berth     bench        wall    | │
 │  |                                                                            | │
 │  |____________________________ MAIN DECK y=744 _______________________________| │
-│        x=220   300    548              820             1130            1452      │
+│        x=42          548              820             1130            1518      │
 │                                                                              │
 └──────────────────────────────────────────────────────────────────────────────┘
 ```
@@ -77,12 +70,12 @@ below are authoritative for the greybox.
 
 | Band | X range | Width | Function |
 | --- | ---: | ---: | --- |
-| Left exterior void | 0–220 | 220 | Nonplayable negative space |
-| Cockpit | 220–548 | 328 | Optional flight and local-index interaction |
+| Left hull taper | 0–42 | 42 | Nonplayable shell edge |
+| Cockpit | 42–548 | 506 | Optional flight and local-index interaction |
 | Airlock | 548–820 | 272 | Required entry and exit clear zone |
 | Habitation / pack | 820–1,130 | 310 | Optional character and future-upgrade space |
-| Cargo / engineering | 1,130–1,452 | 322 | Required service-kit objective |
-| Right exterior void | 1,452–1,672 | 220 | Nonplayable negative space |
+| Cargo / engineering | 1,130–1,518 | 388 | Required service-kit objective |
+| Right hull taper | 1,518–1,672 | 154 | Nonplayable shell edge |
 
 Vertical bands:
 
@@ -101,9 +94,9 @@ Vertical bands:
 
 | ID | Type | X | Y | Width | Height | Notes |
 | --- | --- | ---: | ---: | ---: | ---: | --- |
-| `rd42_main_deck` | solid | 244 | 744 | 1,184 | 96 | Continuous mandatory route |
-| `rd42_left_bound` | invisible wall | 220 | 236 | 24 | 604 | Follows the cockpit hull end |
-| `rd42_right_bound` | invisible wall | 1,428 | 236 | 24 | 604 | Follows the engineering hull end |
+| `rd42_main_deck` | solid | 24 | 744 | 1,624 | 197 | Continuous mandatory route |
+| `rd42_left_bound` | invisible wall | 42 | 236 | — | 604 | Follows the cockpit hull end |
+| `rd42_right_bound` | invisible wall | 1,518 | 236 | — | 604 | Follows the engineering hull end |
 | `rd42_ceiling_left` | reserved invisible ceiling | 244 | 438 | 378 | 20 | Ends at the hatch chimney |
 | `rd42_ceiling_right` | reserved invisible ceiling | 746 | 438 | 682 | 20 | Begins after the hatch chimney |
 
@@ -268,9 +261,9 @@ single world origin.
 | Look-ahead | 0 |
 | Vertical pan | none |
 
-The full shell remains visible. The 220-pixel void margins prevent the
-interior from reading as wider than the exterior while retaining the standard
-plate.
+The full shell remains visible. Narrow hull tapers at both edges retain the
+exterior silhouette while allowing Aryn to traverse the artwork's complete
+cockpit-to-engineering deck.
 
 ## Portrait-mobile camera
 
@@ -315,7 +308,7 @@ ceiling y
 744        |_____________________ DECK ____________________|
 840          \___________________________________________/
 
-             220        548      684      820     1130   1452   x
+              42        548      684      820     1130   1518   x
 ```
 
 The cockpit end may taper more sharply than the cargo end, but both sides must

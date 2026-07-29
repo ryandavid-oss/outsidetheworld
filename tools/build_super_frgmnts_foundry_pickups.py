@@ -53,8 +53,8 @@ ASSETS = {
         "runtime": RUNTIME_ROOT / "foundry-vesperite-runtime-v1.png",
         "canvas": (72, 72),
         "visible": (64, 58),
-        "role": "Veyran energy material and mission-economy object",
-        "status": "art ready; collectible role deliberately unassigned",
+        "role": "source-only Veyran energy-material candidate",
+        "status": "not spawned in Episode 01; removed from the Biolab/Foundry route to avoid competing with Vesperite Fragments",
     },
     "heavy_rifle_pickup": {
         "source": RAW_ROOT / "heavy-rifle-pickup-source-v1.png",
@@ -170,8 +170,8 @@ def main() -> None:
         "status": "normalized art only; gameplay integration pending",
         "assets": manifest_assets,
         "design_boundaries": [
-            "Galactic Credits and Signal Shards remain separate systems.",
-            "Vesperite is not assigned a collectible value by this build.",
+            "Galactic Credits and Vesperite Fragments remain separate systems.",
+            "The standalone Vesperite jewel is not assigned a collectible value or Episode 01 placement.",
             "Power-up duration, persistence, and purchase prices remain open.",
             "No runtime game code loads these candidates yet.",
         ],

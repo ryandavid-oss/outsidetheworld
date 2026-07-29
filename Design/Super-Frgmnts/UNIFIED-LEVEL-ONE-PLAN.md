@@ -34,8 +34,8 @@ Episode 01 run. It establishes:
   Aryn from the surface before the Foundry handoff;
 - a shootable credit cache whose coins burst into the world and carry into the
   Foundry scene;
-- two atmospheric relays, twelve Signal Shards, recovery hearts, optional
-  Vesperite, and two credit caches;
+- two atmospheric stabilizers, twelve Vesperite Fragments, recovery hearts,
+  and two credit caches;
 - a jet-assist pickup, heavy-rifle pickup, and mandatory three-shot Vesperite
   obstruction;
 - one cycling electrified platform and representative crawler, flying, and
@@ -70,6 +70,10 @@ than repetitions of the shared provisional route:
 ### Atmospheric-control reservation
 
 - The approved stabilizer artwork has matched dormant and active alpha states.
+- Both machines render at a reduced **336 × 588 world-pixel** art footprint,
+  sunk eight pixels into the deck. Their original **420 × 735** logical
+  interaction footprint remains intact, preserving the generous Down-input
+  activation zone while keeping the Biolab/Uplink lock visually unobstructed.
 - The first Foundry station crossfades through a 2.35-second restart sequence
   when Aryn approaches on the main deck and presses Down.
 - The provisional **175 × 100 world-pixel** footprint refers to the embedded
@@ -85,13 +89,48 @@ than repetitions of the shared provisional route:
   energy resumes, service lamps illuminate, two ventilation fans restart at
   offset beats, the contaminated haze recedes, and the freight-lift rail fills
   from the deck upward.
-- The upper Foundry/Refinery containment field remains physically closed until
-  the restart completes. It then powers down over a short mechanical beat,
-  updates the mission objective to **FREIGHT LIFT ONLINE // REFINERY ABOVE**,
-  and permits traversal into the third plate only from the upper cross tier.
+- A solid concrete-and-steel divider now spans the full Foundry/Refinery seam
+  from ceiling to floor. Its only passage is the side-profile upper
+  Foundry/Refinery Atmosphere Lock: the Foundry face is paired with a mirrored
+  door face on the Refinery side, and both align to the upper floor bottom.
+  Both faces remain red and physically closed until the restart completes.
+  They then turn green and retract sideways on Aryn's approach. This updates
+  the mission objective to **FREIGHT LIFT ONLINE // REFINERY ABOVE** and
+  permits traversal into the third plate only from the upper cross tier. The
+  enclosed wall tunnel supplies continuous floor collision and redraws its
+  concrete as foreground, hiding Aryn during the crossing.
 - This establishes the repeatable two-plate objective cadence:
   **enter zone → learn its traversal → find its stabilizer → restore the
   environment → unlock the next zone**.
+- The concrete seam treatment now repeats at all seven boundaries between the
+  eight plates. Five ordinary passages use cyan proximity-open seals. The
+  `WIDTH × 2` Foundry/Refinery seal requires the Foundry stabilizer, and the
+  `WIDTH × 6` Biolab/Uplink seal requires the Biolab stabilizer; both progress
+  from red to green. Their floor distribution is upper, upper, middle, middle,
+  upper, ground, middle across seams one through seven. Every instance shares
+  a local bridged floor and a single full-height foreground concrete pass that
+  hides Aryn during traversal without double-compositing the doorway slice.
+  The canvas backing store now matches the browser's displayed physical-pixel
+  grid, the decorative frame sits outside the content box, and the rendered
+  camera snaps to that same grid. This removes the second fractional resample
+  that made the concrete texture shimmer during horizontal camera movement.
+- Each door now separates its permanent steel housing from its pressure
+  membrane. Only the membrane retracts; the machinery and indicator remain
+  visible as a navigational landmark. After Aryn fully clears the opposite
+  housing, the membrane reforms, and a return toward a closing door reverses
+  it safely. A dedicated shimmer cue follows each open, close, and reversal.
+- At each tunnel elevation, closed-door collision planes meet the visible
+  outer membrane edges, 80 pixels beyond the concrete wall faces. Aryn stops
+  where her body visibly contacts the bubble instead of overlapping it; away
+  from the tunnel elevation, the full-height concrete wall retains its original
+  collision plane.
+- The pass evaluates traversal against four platformer pillars:
+  **challenge, recovery, discovery, and exploration**. Varying the seam height
+  makes room transitions part of route comprehension rather than a repeated
+  upper-lane convention.
+- Enemy annihilation and fragment recovery do not lock intermediate seam
+  portals. Those systems remain exploration/reward goals until the custom
+  Uplink bulkhead applies its final composite requirement.
 - The current timing candidate is a four-minute initial reserve plus two
   minutes per restored stabilizer; this is intentionally not wired into the
   runtime yet.
@@ -108,20 +147,20 @@ The active shipping candidate is specified in
 It locks the current critical-path encounter order and fairness rules while
 leaving economy values and later-episode combat balance open.
 
-- Foundry teaches movement and guarantees jet-assist before any Deepworks
-  entry.
+- Foundry teaches movement and guarantees jet-assist beyond the restored
+  Atmosphere Lock before any Deepworks entry.
 - Refinery teaches the heavy rifle, makes the three-hit Vesperite lock
-  non-bypassable, and contains the single required Deepworks shard.
+  non-bypassable, and contains the single required Deepworks fragment.
 - Biolab owns the one electrified-platform timing test, places its recovery
   heart afterward, and moves its stabilizer to the end of the mirrored route.
 - Uplink separates the final arc leak from the Pale Watcher and places the last
-  shard at the gate.
+  fragment at the gate.
 - Deepworks has exactly two curated entrances in this pass: a required,
-  enemy-free signal recovery in Refinery and an optional credit-cache route in
+  enemy-free fragment recovery in Refinery and an optional credit-cache route in
   Biolab.
-- Every relay apron, ordinary room link, mandatory landing, and pickup
+- Every stabilizer apron, ordinary room link, mandatory landing, and pickup
   footprint remains free of initial contact damage.
-- The Uplink Gate requires twelve shards, both stabilizers, and the cleared
+- The Uplink Gate requires twelve fragments, both stabilizers, and the cleared
   Vesperite lock. It opens The Wound and establishes the boss checkpoint; it
   is not the Episode 01 completion card.
 
@@ -137,6 +176,12 @@ as isolated coordinates without updating that contract and its verifier.
 - Repeated plates alternate orientation and receive restrained zone color.
 - Replacement art must preserve the existing world coordinates and collision
   surfaces so final artwork can be swapped without redesigning gameplay.
+- The shared upper plate no longer displays the non-collidable center junction
+  at local `y = 600`. A mirrored 16-bit negative-space patch exposes the real
+  330-pixel gap between `x = 646` and `x = 976`; the collision-backed runtime
+  platform is the only horizontal surface allowed to appear there.
+- Visual affordance rule: a background surface may resemble a walkable deck
+  only when matching collision exists.
 
 ## Beta population systems
 

@@ -190,9 +190,9 @@ with the existing renderer and camera.
 
 The actual ship shell occupies only the central portion:
 
-- shell left bound = x 220;
-- shell right bound = x 1,452;
-- playable width = 1,232;
+- playable left bound = x 42;
+- playable right bound = x 1,518;
+- playable width = 1,476;
 - outer dorsal housing reaches approximately y 226–272;
 - normal occupied ceiling = y 438;
 - overhead systems bay = approximately y 320–438;
@@ -432,7 +432,11 @@ Trillian remains distinct from Jane.
 If Trillian has been recovered:
 
 - her berth contains her blanket, fitted harness hook, and water bowl;
-- she may be present in a calm non-solid rest state while Aryn is aboard;
+- she walks slowly and independently among a short deterministic set of
+  habitation/cargo targets, with long calm pauses between trips;
+- her feet render eight pixels below Aryn's main movement plane so the smaller
+  companion reads grounded rather than perched on the deck edge;
+- she remains non-solid and never inherits the skittish surface-follow logic;
 - she cannot block the hatch, cockpit, bench, or service kit; and
 - no interior combat behavior is introduced.
 

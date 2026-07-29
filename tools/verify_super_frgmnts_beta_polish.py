@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Verify the beta-production polish decisions from the July playtest."""
 
+import hashlib
+import wave
 from pathlib import Path
 
 from PIL import Image
@@ -42,10 +44,10 @@ def main() -> None:
         "episodeArrivalTutorial = false;",
         'canvas.dataset.assignmentsOptional =',
         '"OPTIONAL"',
-        'makeBetaPickup("jetpack", WIDTH + 1092, 422)',
+        'makeBetaPickup("jetpack", WIDTH * 2 + 240, 280)',
         "function betaPickupAvailable(pickup)",
-        '"relay-locked"',
-        '"post-lift-ready"',
+        '"stabilizer-locked"',
+        '"beyond-atmosphere-lock"',
         'makeBetaPickup("rifle", WIDTH * 2 + 700, 1518)',
         'makeShard(WIDTH * 7 + 430, 548',
         "makeBetaRifleObstacle(WIDTH * 2 + 1280, GROUND_Y)",
@@ -76,6 +78,12 @@ def main() -> None:
         'enemy.type === "paleWatcher"',
         "var biolabRestoration = biolabStabilizer",
         "canvas.dataset.ventFansMoving",
+        'src: "/Audio/super-frgmnts-jump-v1.wav"',
+        'src: "/Audio/super-frgmnts-landing-v1.wav"',
+        'src: "/Audio/super-frgmnts-atmosphere-lock-shimmer-v1.wav"',
+        'playSoundEffect("jump");',
+        '"landing",',
+        '"atmosphereLockShimmer",',
     )
     for token in required:
         require(token in SOURCE, f"Missing beta-polish contract: {token}")
@@ -152,12 +160,48 @@ def main() -> None:
                 f"{label} sprite alpha is not production-ready",
             )
 
+    audio_assets = {
+        "jump": (
+            ROOT / "Audio/super-frgmnts-jump-v1.wav",
+            "7d310cd85ccdd46fdb8eb2cbddc5b64631dabebfd21c3974248683c320f409bb",
+        ),
+        "landing": (
+            ROOT / "Audio/super-frgmnts-landing-v1.wav",
+            "5708b376f838efc51f26672765c98d61bf88aed7c47b68e79c11433863784de3",
+        ),
+        "atmosphere-lock shimmer": (
+            ROOT / "Audio/super-frgmnts-atmosphere-lock-shimmer-v1.wav",
+            "8862cfd44215d6ced14c66a2d0ce3c9a168145622e773876e4b7e7f79654e1f5",
+        ),
+    }
+    for label, (path, expected_hash) in audio_assets.items():
+        require(path.exists(), f"Missing {label} audio")
+        require(
+            hashlib.sha256(path.read_bytes()).hexdigest() == expected_hash,
+            f"{label} audio hash drifted",
+        )
+        with wave.open(str(path), "rb") as audio:
+            require(audio.getnchannels() == 2, f"{label} must remain stereo")
+            require(
+                audio.getsampwidth() == 2,
+                f"{label} must remain 16-bit PCM",
+            )
+            require(
+                audio.getframerate() == 48000,
+                f"{label} must remain 48 kHz",
+            )
+            require(
+                audio.getnframes() == 48000,
+                f"{label} must remain one second",
+            )
+
     print("SUPER FRGMNTS beta-production polish: PASS")
     print("- opening and boss-room transition beats are explicit")
     print("- Overworld tutorials and droid discovery task are removed")
     print("- hawk flight is autonomous and Aryn-independent")
     print("- item acquisition, obstruction, and combat lanes are separated")
     print("- authored industrial hazards replace abstract colored spikes")
+    print("- jump, real landing, and reversible lock sounds retain source WAVs")
     print("- Sova, boss threshold, and post-return transport states are locked")
     print("- active roster, ventilation restoration, and 16-bit platforms are locked")
     print("- mobile Seam Hunter assist preserves the desktop encounter")

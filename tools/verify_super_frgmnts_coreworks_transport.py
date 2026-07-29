@@ -83,7 +83,11 @@ def main() -> None:
         'state === "transporting"',
         'canvas.dataset.coreworksTransport = "activating"',
         "Coreworks transport engaged.",
-        "Transport lock acquired.",
+        "Mission objectives",
+        "Restore both atmospheric stabilizers and breathable air.",
+        "Recover all 12 Vesperite Fragments as evidence of the pulse.",
+        'startButton.textContent = "Begin Episode 01";',
+        'startOverButton.textContent = "Cancel";',
         "CROSS CALIBRATION CATWALKS // BOARD TRANSPORT",
     )
     for token in required_tokens:

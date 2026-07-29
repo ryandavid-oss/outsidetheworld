@@ -7,7 +7,7 @@ See `WOUND-BOSS-ROOM-BACKGROUND-v2.md`.
 ## Approved encounter context
 
 - The Shard Foundry retains its eight connected traversal plates.
-- Restoring both atmospheric relays and recovering all twelve Signal Shards
+- Restoring both atmospheric stabilizers and recovering all twelve Vesperite Fragments
   activates a portal at the end of the eighth plate.
 - The portal loads a dedicated, isolated boss plate rather than extending the
   continuous Foundry world.

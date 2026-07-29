@@ -1,7 +1,7 @@
 {
   "release": "episode-01-beta-2",
   "status": "approved-production",
-  "stabilization_pass": "2026-07-28",
+  "stabilization_pass": "2026-07-29",
   "source": {
     "branch": "main",
     "release_commit": "this manifest's commit",
@@ -46,10 +46,11 @@
       "Deepworks",
       "Uplink"
     ],
-    "signal_shards": 12,
+    "vesperite_fragments": 12,
     "atmospheric_stabilizers": 2,
-    "foundry_enemies": 16,
-    "chitin_sentinels": 7
+    "foundry_enemies": 18,
+    "chitin_sentinels": 7,
+    "core_leeches": 3
   },
   "beta_2_changes": [
     "separated power-up and item acquisition lanes",
@@ -79,7 +80,14 @@
     "return-to-Dras report and Primary Biolab cliffhanger",
     "scanline-free gameplay compositor",
     "procedural storm and wispy cloud masks",
-    "stabilizer-driven sky clearing with a persistent infestation remnant"
+    "stabilizer-driven sky clearing with a persistent infestation remnant",
+    "side-profile red-green Atmosphere Lock and post-lock jet assist",
+    "grounded Uplink bulkhead and lowered arc-coupler discharge",
+    "Vesperite Fragment terminology and Episode 01 objective briefing",
+    "full-width RD-42 deck, unobtrusive hatches, and calm autonomous Trillian",
+    "seven permanent atmosphere-lock housings with retracting and reforming membranes across upper, middle, and ground routes",
+    "dedicated jump, landing, and atmosphere-lock shimmer cues",
+    "false y=600 background junction removed across all normal and mirrored Foundry plates"
   ],
   "audio": {
     "title": "Audio/super-frgmnts-title-cue.mp3",
@@ -87,7 +95,10 @@
     "foundry": "Audio/super-frgmnts-foundry-loop.mp3",
     "wound": "Audio/super-frgmnts-seam-hunter-boss-v1.m4a",
     "rd42_interior": "Audio/super-frgmnts-rd42-interior-loop-v1.m4a",
-    "generator": "Audio/super-frgmnts-generator-startup-v1.wav"
+    "generator": "Audio/super-frgmnts-generator-startup-v1.wav",
+    "jump": "Audio/super-frgmnts-jump-v1.wav",
+    "landing": "Audio/super-frgmnts-landing-v1.wav",
+    "atmosphere_lock": "Audio/super-frgmnts-atmosphere-lock-shimmer-v1.wav"
   },
   "verification": {
     "all_super_frgmnts_contracts": true,

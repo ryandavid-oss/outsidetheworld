@@ -443,6 +443,8 @@ def main() -> None:
         "var SHIP_INTERIOR_HATCH_X = 684",
         "var SHIP_INTERIOR_CEILING_Y = 438",
         "var SHIP_INTERIOR_DECK_Y = 744",
+        "var SHIP_INTERIOR_LEFT_X = 42",
+        "var SHIP_INTERIOR_RIGHT_X = 1518",
         "var SHIP_SUIT_CRADLE_X = 506",
         "var SHIP_KEEL_HATCH_X = 1024",
         "var SHIP_ARYN_NORMALIZED_HEIGHT = 90",
@@ -454,6 +456,8 @@ def main() -> None:
         'source: "/Images/Game/Super-Frgmnts/aryn-flight-suit-jump-runtime-v1.png"',
         'source: "/Images/Game/Super-Frgmnts/rd42-interior-rear-plate-runtime-v1.png"',
         "function buildShipInteriorPlatforms()",
+        "x: 24",
+        "width: 1624",
         "shipInteriorDeck: true",
         "function playerNearShipExteriorHatch()",
         "function beginShipEntry()",
@@ -484,6 +488,12 @@ def main() -> None:
         "function currentShipFlightSuitFrame()",
         "function drawShipFlightSuitPlayer()",
         "function drawShipInteriorProductionArt()",
+        "function shipInteriorHasTrillian()",
+        "function resetShipTrillian()",
+        "function updateShipTrillian(delta)",
+        "function drawShipTrillian()",
+        "var cabinSpeed = 24;",
+        "SHIP_INTERIOR_DECK_Y + 8",
         'shipServiceKitState = "recovering"',
         'shipServiceKitState = "carried"',
         "function drawShipInteriorGreybox()",
@@ -528,6 +538,24 @@ def main() -> None:
     )
     for token in required_runtime_tokens:
         require(token in source, f"Missing RD-42 runtime contract: {token}")
+
+    production_draw = source[
+        source.index("function drawShipInteriorProductionArt()"):
+        source.index("function drawShipInteriorGreybox()")
+    ]
+    require(
+        "ctx.fillRect(622, 218, 124, 56)" not in production_draw,
+        "Closed interior hatch still paints a portal-like box over the plate",
+    )
+    exterior_hatch_draw = source[
+        source.index("function drawShipExteriorHatchBack()"):
+        source.index("function drawOverworldProps()")
+    ]
+    require(
+        'ctx.strokeStyle = "#ffd36c";\n                ctx.lineWidth = 3;\n                ctx.strokeRect('
+        not in exterior_hatch_draw,
+        "Exterior hatch still paints the distracting yellow portal box",
+    )
 
     drop_function = source[
         source.index("function dropThroughCurrentPlatform()"):
@@ -594,7 +622,9 @@ def main() -> None:
     print("- missing interior art is prefetched before the hatch transition")
     print("- Aryn descends into and re-emerges from the ship")
     print("- one-plate cockpit, airlock, hab, pack, and cargo zones are present")
+    print("- the complete painted deck is traversable from x42 through x1518")
     print("- service-kit, post-Wound, and Trillian review states are wired")
+    print("- Trillian walks slowly on a slightly lower independent interior plane")
     print("- down-interaction priority and no-fire interior controls are present")
     print("- deterministic RD-42 telemetry hooks are present")
     print("- 306 px occupied volume is fixed between y438 and y744")

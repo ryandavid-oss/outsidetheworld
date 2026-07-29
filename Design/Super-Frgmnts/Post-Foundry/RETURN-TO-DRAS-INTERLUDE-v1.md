@@ -587,7 +587,7 @@ The eventual serializable episode state must represent at least:
 The scene transition must preserve:
 
 - Galactic Credits;
-- Signal Shards or their completion accounting;
+- Vesperite Fragments or their completion accounting;
 - Wound-touched Vesperite;
 - jet-assist ownership;
 - heavy-rifle ownership and selected weapon, while those rules remain
