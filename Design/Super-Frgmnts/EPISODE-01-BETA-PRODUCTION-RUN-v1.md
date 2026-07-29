@@ -31,7 +31,8 @@ Vesperite secured
    approaching the exposed Wound-touched Vesperite and pressing Down.
 10. Recovery stores the specimen, applies the final time and health bonuses,
     fades the entire stage to black, and automatically returns Aryn beside the
-    Coreworks transport on the surface.
+    Coreworks transport on the surface. The return route is sealed and cannot
+    send her back into the completed Foundry.
 
 The production-beta endpoint is the stable surface-return state. The planned
 Dras scan, transport overload, RD-42 service-kit objective, and Primary Biolab
@@ -89,6 +90,8 @@ the normal title/start-over path.
 - Reduced-motion mode shortens both fades without bypassing the locked state.
 - The return URL is reloadable:
   `?episode=01&stage=overworld&autostart=1&return=1`.
+- The Coreworks transport remains physically present but sealed. Stepping on
+  its deck produces one clear status message and never starts activation.
 
 ## Failure and input rules
 

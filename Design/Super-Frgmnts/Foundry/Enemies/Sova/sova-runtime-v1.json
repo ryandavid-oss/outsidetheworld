@@ -1,8 +1,8 @@
 {
   "workingName": "Sova",
   "runtimeType": "sova",
-  "status": "runtime-ready-unpopulated",
-  "productionPopulation": false,
+  "status": "production-populated",
+  "productionPopulation": true,
   "role": "low armored ground crawler",
   "source": {
     "image": "Raw/sova-source-v1.png",
@@ -37,6 +37,11 @@
       92,
       48
     ],
+    "projectileHitbox": {
+      "basis": "visible sprite silhouette",
+      "topPadding": 28,
+      "reason": "The grounded heavy-rifle muzzle crosses the visible upper carapace above the compact contact body."
+    },
     "drawSize": [
       116,
       72
@@ -44,6 +49,8 @@
   },
   "behavior": {
     "locomotion": "ground patrol",
-    "spawned": false
+    "spawned": true,
+    "zone": "Refinery Pressure Exchange",
+    "health": 2
   }
 }

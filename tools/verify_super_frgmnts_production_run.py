@@ -55,6 +55,8 @@ def main() -> None:
         'woundBossPreview &&\n                previewParameters.get("qa") === "reward"',
         'canvas.dataset.episodeScene = scene;',
         '"surface-return-complete"',
+        "function surfaceTransportIsSealed()",
+        '"sealed-after-return"',
     )
     for token in required_runtime_tokens:
         require(
@@ -123,6 +125,12 @@ def main() -> None:
         and "beginEpisodeWoundTransition();" in uplink,
         "The production Uplink Gate still ends before The Wound",
     )
+    require(
+        "if (surfaceTransportIsSealed())" in uplink
+        and '"RETURN ROUTE SEALED"' in uplink
+        and "return;" in uplink,
+        "Surface-return transport can reactivate after specimen recovery",
+    )
 
     boss_completion = function_body(
         source,
@@ -186,6 +194,7 @@ def main() -> None:
         "The whole stage reaches opaque black before scene replacement.",
         "Boss retry begins in the safe bay",
         "Desktop and 390 × 844 portrait framing",
+        "The Coreworks transport remains physically present but sealed",
     )
     for token in required_contract_tokens:
         require(token in contract, f"Production contract omits: {token}")
@@ -201,6 +210,7 @@ def main() -> None:
     print("- boss retries restore Foundry score, health, time, and equipment")
     print("- Wound-touched Vesperite recovery is the completion condition")
     print("- a locked black transition returns Aryn to the Veyra surface")
+    print("- the returned player cannot re-enter the Foundry transport")
 
 
 if __name__ == "__main__":

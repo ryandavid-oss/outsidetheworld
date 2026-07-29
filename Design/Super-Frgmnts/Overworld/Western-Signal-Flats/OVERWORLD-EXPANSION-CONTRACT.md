@@ -75,10 +75,13 @@ calibration, the Coreworks transport, or the Foundry.
 
 ### Worker droid
 
-- The existing drift and service cycles remain autonomous.
-- A nearby Down/interact service assignment triggers one immediate maintenance
-  cycle and a small credit recovery.
+- The existing drift and service cycles remain autonomous inside the
+  Coreworks portal apron, away from basecamp.
+- The hover baseline is six pixels above grade; the service cycle nearly
+  touches down.
 - The droid remains non-solid and non-hostile.
+- There is no current discovery hook, prompt, service assignment, or reward.
+  A future talkable repair-bot role is reserved for the broken portal.
 
 ### Hawk
 

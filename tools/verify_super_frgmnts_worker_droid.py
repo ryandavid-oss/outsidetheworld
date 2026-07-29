@@ -55,6 +55,10 @@ def main() -> None:
     assert manifest["behavior"]["optionalAssignment"] is None
     assert manifest["behavior"]["discoveryHook"] is False
     assert manifest["behavior"]["renderScale"] == 0.7
+    assert manifest["behavior"]["talkable"] == "future"
+    assert manifest["behavior"]["hoverAltitude"] == 6
+    assert manifest["behavior"]["serviceDescent"] == 5
+    assert manifest["behavior"]["driftSpeed"] == 18
 
     for animation in animations.values():
         verify_atlas(ROOT / animation["runtime"]["image"])
@@ -72,8 +76,14 @@ def main() -> None:
         'id: "worker-droid"',
         'canvas.dataset.workerDroidHostile = "false"',
         'canvas.dataset.workerDroidRole =',
-        '"ambient-maintenance"',
+        '"portal-repair-standby"',
+        'canvas.dataset.workerDroidTalkable = "future";',
+        'canvas.dataset.workerDroidDiscovery = "false";',
         'canvas.dataset.workerDroidScale = "0.70";',
+        "OVERWORLD_ORIGIN_X + WIDTH * 2 + 1260;",
+        "OVERWORLD_ORIGIN_X + WIDTH * 2 + 1160;",
+        "OVERWORLD_ORIGIN_X + WIDTH * 2 + 1340;",
+        "var WORKER_DROID_HOVER_BOTTOM_Y = GROUND_Y - 6;",
         "var WORKER_DROID_DRAW_WIDTH = 88;",
         "var WORKER_DROID_DRAW_HEIGHT = 85;",
     )
@@ -90,9 +100,10 @@ def main() -> None:
 
     print("SUPER FRGMNTS Overworld worker droid: PASS")
     print("- two validated 25-frame animation states")
-    print("- drift and periodic low-hover service behavior registered")
+    print("- portal-apron drift and near-ground service behavior registered")
     print("- 70% render scale keeps the droid subordinate to the player")
-    print("- no discovery hook, prompt, reward, or service assignment")
+    print("- no discovery hook, prompt, reward, or current conversation")
+    print("- future portal-repair and talk roles are reserved without activating them")
     print("- friendly, non-solid, absent from every enemy system")
     print("- both 720x700 runtime atlases include transparent padding")
 

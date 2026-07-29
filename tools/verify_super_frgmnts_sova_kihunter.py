@@ -26,7 +26,15 @@ def verify_enemy(
         (family / f"{key}-runtime-v1.json").read_text(encoding="utf-8")
     )
     assert manifest["runtimeType"] == key
-    assert manifest["productionPopulation"] is False
+    if key == "sova":
+        assert manifest["productionPopulation"] is True
+        assert manifest["behavior"]["spawned"] is True
+        assert (
+            manifest["runtime"]["projectileHitbox"]["topPadding"]
+            == 28
+        )
+    else:
+        assert manifest["productionPopulation"] is False
     assert manifest["source"]["frameCount"] == 36
     assert manifest["source"]["frameDurationMs"] == frame_duration
     assert manifest["validation"]["result"] == "pass"
@@ -72,6 +80,11 @@ def main() -> None:
         'sova: "SOVA"',
         'kihunter: "KIHUNTER"',
         "function drawIntakeEnemy(enemy)",
+        'canvas.dataset.sovaRifleHitbox =',
+        '"visual-silhouette"',
+        '["sova", WIDTH * 3 + 610, GROUND_Y',
+        'enemy.type === "sova"',
+        "? 28",
     )
     for fragment in required_fragments:
         assert fragment in SOURCE, (
@@ -88,13 +101,26 @@ def main() -> None:
     )[0]
     assert 'type === "kihunter"' in flyer_block
     assert 'type === "sova"' not in flyer_block
-    assert 'makeEnemy("sova"' not in SOURCE
+    assert '["sova", WIDTH * 3 + 610, GROUND_Y' in SOURCE
     assert 'makeEnemy("kihunter"' not in SOURCE
+
+    ground_y = 1604
+    grounded_player_y = ground_y - 100
+    heavy_rifle_muzzle_y = grounded_player_y + 42
+    sova_contact_top = ground_y - 48
+    sova_projectile_top = sova_contact_top + 4 - 28
+    sova_projectile_bottom = ground_y - 4
+    assert (
+        sova_projectile_top
+        < heavy_rifle_muzzle_y
+        < sova_projectile_bottom
+    ), "Grounded heavy-rifle fire still passes above Sova"
 
     print("SUPER FRGMNTS Sova and Kihunter enemy types: PASS")
     print("- both 36-frame source atlases validate without edge contact")
     print("- Sova is a ground patrol; Kihunter is a flying patrol")
-    print("- both types are runtime-ready and not production-populated")
+    print("- Sova is production-populated; Kihunter remains runtime-ready")
+    print("- Sova's rifle collider covers its visible upper carapace")
     print("- shipping atlases remain below the 2,048px portability limit")
 
 

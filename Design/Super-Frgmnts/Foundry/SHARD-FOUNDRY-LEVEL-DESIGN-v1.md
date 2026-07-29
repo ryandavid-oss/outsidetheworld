@@ -37,8 +37,10 @@ Target completion bands:
 4. Primary runtime landings remain at least 170 pixels wide. The smallest
    painted connector is 127 pixels wide and is never paired with contact
    damage.
-5. Baseline-required rises remain at or below 128 pixels. Jet-assist is
-   guaranteed before Deepworks and any route that needs the secondary boost.
+5. Baseline-required rises remain at or below 128 pixels. The first relay and
+   its powered freight lift are completed without jet-assist; the module is
+   then guaranteed on the upper return before Deepworks or any route that
+   needs the secondary boost.
 6. Moving platforms do not carry enemies or mandatory pickups.
 7. The electrified catwalk is safe for 2.35 seconds of every 3.6-second cycle,
    is live for 1.25 seconds, and grants 0.28 seconds of landing grace.
@@ -72,13 +74,13 @@ restore-the-room loop.
 - A recurring three-hit Chitin Sentinel introduces the primary combat grammar
   on a broad deck with retreat space.
 - The second shard leads upward through generous 184–210-pixel platforms.
-- Jet-assist sits alone on the mandatory ascent at world `(1340, 930)`.
 - The moving bridge has only 110 pixels of horizontal travel and no enemy on
   its landing.
 - The Squircle Minion visibly circles the full perimeter of an upper platform
   instead of behaving like a stationary prop.
 
-**Exit state:** player owns jet-assist and understands moving platforms.
+**Exit state:** player understands the baseline jump and moving-platform
+language without bypassing the Breathing Chamber lift.
 
 #### Plate 1 // The Breathing Chamber
 
@@ -91,11 +93,15 @@ restore-the-room loop.
   descent encounter and before the lift return.
 - Restoring the relay clears the chamber, starts the freight lift, and opens
   the upper Refinery threshold.
+- Jet-assist sits alone on the post-lift upper staging platform at world
+  `(WIDTH + 1092, 422)`, more than 240 pixels from the nearest collectible.
+  It is visible but relay-locked during the initial descent and becomes
+  collectible only after the stabilizer powers the freight lift.
 - The first stabilizer progressively starts the ventilation rotors across the
   Foundry and Refinery sectors.
 
-**Exit state:** one relay online; player has performed drop, interaction, lift,
-and assisted return.
+**Exit state:** one relay online; player has performed drop, interaction, and
+lift before receiving the assisted-return verb.
 
 ### Refinery // Plates 2–3
 
@@ -117,10 +123,12 @@ three-shot obstruction.
 
 #### Plate 3 // Pressure Exchange
 
-- Sova and a recurring Chitin Sentinel occupy separate readable ground lanes,
-  away from the late-room descent landing.
-- A 76-pixel thermal vent begins at local `x = 1008`. It is one readable jump
-  with clear runway on both sides.
+- Sova patrols local `x = 390–700`; the recurring Chitin Sentinel begins at
+  local `x = 1210`. Neither can enter the hazard footprint.
+- A 160-pixel thermal purge vent begins at local `x = 900`. Its cycle is
+  1.90 seconds dormant, 0.55 seconds of amber shutter warning, and 0.95 seconds
+  of visible vertical exhaust. The player waits for the purge, then makes one
+  readable jump with stable runway on both sides.
 - The only required Deepworks entrance is inside this plate.
 - The plate's Signal Shard is below the deck at world
   `(WIDTH × 3 + 920, 1748)`.
@@ -185,11 +193,14 @@ and enters the final plate with a recovery opportunity.
 #### Plate 7 // Uplink Gate
 
 - Seam Lurker patrols the ceiling and never shares the deck hazard footprint.
-- A 76-pixel arc leak begins at local `x = 900`.
-- Pale Watcher patrol begins beyond the leak at local `x = 1060`, leaving more
-  than one player-width of stable recovery runway between the two demands.
-- The twelfth Signal Shard sits at the Uplink Gate at world
-  `(WIDTH × 7 + 1284, 286)`.
+- A 280-pixel broken arc coupler begins at local `x = 830`. Its short
+  1.15-second discharged state and 0.45-second warning are followed by a
+  three-second live state. The intended solution is the insulated upper
+  transfer or the earned jet-assist; waiting remains possible.
+- Pale Watcher patrol begins at local `x = 1230`, leaving a full player-width
+  of stable recovery runway beyond the coupler.
+- The twelfth Signal Shard sits in the left Uplink maintenance alcove at world
+  `(WIDTH × 7 + 430, 548)`, 788 pixels before the gate trigger.
 - The gate never claims to be open while a relay or the Vesperite lock remains
   incomplete.
 
@@ -207,7 +218,7 @@ the safe-bay checkpoint for The Wound.
 | Foundry-level credit caches | 2 | Foundry Intake deck and optional Biolab Deepworks |
 | Power-ups | 2 | Jet-assist in Foundry; heavy rifle before Refinery obstruction |
 | Required Vesperite locks | 1 | Refinery plate 2, three direct rifle hits |
-| Static contact hazards | 2 | Refinery thermal vent and final Uplink arc leak |
+| Authored floor hazards | 2 | Timed Refinery thermal purge and route-choice Uplink arc coupler |
 | Electrified platforms | 1 | Biolab plate 4 |
 | Curated Deepworks entrances | 2 | Required signal route in plate 3; optional cache route in plate 5 |
 | Enemies | 16 | Seven recurring Chitin Sentinels plus nine spaced support enemies across ten active families |
@@ -251,6 +262,8 @@ Promotion requires all of the following:
   Uplink Gate with no contradictory HUD or accessibility announcement;
 - the Uplink Gate carries remaining mission time, score, damage, credits, jet
   assist, seeker tier, and heavy rifle into The Wound;
+- the final shard requires deliberate travel before the Uplink Gate and cannot
+  trigger gate contact during its collection;
 - defeating Seam Hunter cannot end the run before Wound-touched Vesperite
   recovery; and
 - recovery fades to black and returns Aryn to the surface without exposing a

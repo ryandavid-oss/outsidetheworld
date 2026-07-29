@@ -197,13 +197,13 @@
     {
       "id": "worker_droid",
       "label": "Worker Droid",
-      "role": "ambient-friendly-npc",
-      "x": 4524,
-      "y": 592,
-      "width": 126,
-      "height": 122,
+      "role": "portal-repair-standby",
+      "x": 6276,
+      "y": 653,
+      "width": 88,
+      "height": 85,
       "z_layer": "actors",
-      "notes": "Non-solid and non-hostile. Drifts above the Outpost ground and periodically descends into a dust-producing maintenance cycle near the abandoned credit terminal."
+      "notes": "Non-solid and non-hostile. Patrols only the Coreworks portal apron, hovers six pixels above grade, has no discovery task, and reserves a future talkable repair-bot role."
     },
     {
       "id": "atmosphere_tower",
@@ -297,15 +297,15 @@
       "enabled_in_phase": false
     },
     {
-      "id": "service_worker_droid",
-      "type": "optional-assignment",
-      "x": 4412,
-      "y": 520,
-      "width": 224,
-      "height": 224,
-      "prompt": "Service worker droid",
-      "prerequisite": "Dras first contact",
-      "reward": "2 Galactic Credits"
+      "id": "worker_droid_future_conversation",
+      "type": "future-dialogue",
+      "x": 6160,
+      "y": 610,
+      "width": 300,
+      "height": 134,
+      "prompt": null,
+      "enabled_in_phase": false,
+      "future_role": "repair the broken Coreworks portal"
     },
     {
       "id": "portal_transition",
@@ -393,7 +393,7 @@
     },
     {
       "id": "worker_droid",
-      "implementation": "Slow horizontal hover drift with a clean manipulation loop and periodic low-hover service animation",
+      "implementation": "Restricted portal-apron hover drift with a clean manipulation loop and near-ground service animation",
       "intensity": "character"
     },
     {
@@ -445,8 +445,8 @@
     },
     {
       "order": 8,
-      "x": 4524,
-      "beat": "The worker droid offers an optional service assignment after Dras clears first contact."
+      "x": 6276,
+      "beat": "A silent worker droid keeps station near the Coreworks portal; a future conversation can establish it as the repair bot after the route breaks."
     },
     {
       "order": 9,

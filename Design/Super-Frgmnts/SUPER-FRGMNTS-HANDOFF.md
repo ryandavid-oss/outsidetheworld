@@ -388,10 +388,12 @@ Foundry score. See
   handoff, combat targeting, hurt, incapacitated, recovery, and damage balance
   remain unimplemented. The clipped 25-frame rear/power-up alternate remains
   review-only and is not used as an airborne or landing continuation.
-- The non-solid, non-hostile Outpost worker droid renders at 70% of its former
-  size, drifts above the ground near the abandoned credit terminal, and
-  periodically descends into its maintenance animation. It is ambient only:
-  there is no discovery hook, prompt, reward, or optional service task.
+- The non-solid, non-hostile worker droid renders at 70% of its former size
+  and is stationed beside the Coreworks transport, far from basecamp. Its
+  hover baseline is six pixels above grade and its service motion nearly
+  touches down. It is a silent portal-repair bot: there is no discovery hook,
+  prompt, reward, or current service task; a future conversation and broken-
+  portal repair role are reserved without being activated.
 - One non-hostile, non-solid, non-targetable hawk makes occasional passes
   through the Overworld sky, alternating direction after every pass. Its
   25-frame source atlas is preserved, while runtime uses a curated 16-frame
@@ -464,6 +466,10 @@ The commit containing this handoff adds or finalizes:
 - the Core Leech and Pale Watcher refinements plus Skree, Sova, Seam Lurker,
   and Kihunter production population;
 - the recurring seven-Sentinel encounter grammar and mobile boss assist;
+- the post-lift jet-assist placement, rifle-valid Sova silhouette, separated
+  final shard, lift-edge boss trigger, and sealed post-recovery transport;
+- the 16-bit thermal purge and broken arc-coupler sprites with distinct
+  wait-versus-route-choice hazard grammar;
 - build scripts, manifests, review GIFs, and feature verifiers for the new
   assets;
 - updated arrival, beta, roster, ambience, and production-route contracts.

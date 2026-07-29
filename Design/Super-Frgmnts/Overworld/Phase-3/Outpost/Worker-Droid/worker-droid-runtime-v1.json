@@ -4,7 +4,7 @@
   "hostile": false,
   "solid": false,
   "scene": "overworld",
-  "role": "ambient maintenance worker near the abandoned credit terminal",
+  "role": "silent portal-repair bot stationed beside the Coreworks transport",
   "animations": [
     {
       "key": "drift",
@@ -124,18 +124,20 @@
     }
   ],
   "behavior": {
-    "driftSpeed": 26,
-    "hoverAltitude": 30,
+    "driftSpeed": 18,
+    "hoverAltitude": 6,
     "patrolRange": [
-      "OVERWORLD_ORIGIN_X + WIDTH + 980",
-      "OVERWORLD_ORIGIN_X + WIDTH + 1500"
+      "OVERWORLD_ORIGIN_X + WIDTH * 2 + 1160",
+      "OVERWORLD_ORIGIN_X + WIDTH * 2 + 1340"
     ],
     "serviceIntervalSeconds": 7.5,
     "serviceDurationSeconds": 1.75,
-    "serviceDescent": 22,
+    "serviceDescent": 5,
     "renderScale": 0.7,
     "friendlySeekerSafety": true,
     "discoveryHook": false,
-    "optionalAssignment": null
+    "optionalAssignment": null,
+    "talkable": "future",
+    "futureFunction": "repair the broken Coreworks transport after the post-Foundry return"
   }
 }

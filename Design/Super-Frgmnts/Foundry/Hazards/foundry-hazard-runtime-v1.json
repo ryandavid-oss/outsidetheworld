@@ -1,0 +1,77 @@
+{
+  "schema": "super-frgmnts-foundry-hazards-v1",
+  "status": "production-runtime",
+  "styleReference": "Images/Game/Super-Frgmnts/foundry-platform-module-runtime-v1.png",
+  "generation": {
+    "method": "built-in image generation with chroma-key removal",
+    "background": "#00ff00",
+    "backgroundRemoval": "remove_chroma_key.py --auto-key border --soft-matte --transparent-threshold 12 --opaque-threshold 220 --despill",
+    "rendering": "nearest-neighbor",
+    "prompts": {
+      "thermalPurge": "Production-ready 16-bit side-view industrial thermal purge vent: dark gunmetal, worn riveted panels, recessed copper-orange heat grille, dormant state, no effects or text, matching the Foundry platform module, centered on a flat #00ff00 background.",
+      "arcCoupler": "Production-ready 16-bit side-view broken arc coupler: dark gunmetal, damaged ceramic power channel, two squat copper conductor posts, dormant state, no effects or text, matching the Foundry platform module, centered on a flat #00ff00 background."
+    }
+  },
+  "assets": {
+    "thermalPurge": {
+      "source": "Design/Super-Frgmnts/Foundry/Hazards/Raw/thermal-purge-vent-source-v1.png",
+      "sourceSize": [
+        1881,
+        836
+      ],
+      "sourceSha256": "6f2c445300fe5de13549fc950e214ab6b929f346f2c8a876cd555d1bd7409b53",
+      "runtime": "Images/Game/Super-Frgmnts/foundry-thermal-purge-vent-runtime-v1.png",
+      "runtimeSize": [
+        512,
+        128
+      ],
+      "runtimeSha256": "0513e16e818d7e50b5a11658411b0aa11df4c2a2d3177ebf05c6515615c42425",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "placement": {
+        "room": 3,
+        "localX": 900,
+        "drawWidth": 160,
+        "drawHeight": 42
+      },
+      "cycleSeconds": {
+        "safe": 1.9,
+        "warning": 0.55,
+        "active": 0.95
+      },
+      "solution": "Wait for the vertical exhaust to stop, then cross."
+    },
+    "arcCoupler": {
+      "source": "Design/Super-Frgmnts/Foundry/Hazards/Raw/arc-coupler-source-v1.png",
+      "sourceSize": [
+        1983,
+        793
+      ],
+      "sourceSha256": "89c3fba7b074a6c86eb492c14201360d669ffbc6506d445eb06fffc8be95302a",
+      "runtime": "Images/Game/Super-Frgmnts/foundry-arc-coupler-runtime-v1.png",
+      "runtimeSize": [
+        512,
+        160
+      ],
+      "runtimeSha256": "b4d2177e384d28a9ccc53e21c14c91562633d76e03d02accc0594b80222e49d5",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "placement": {
+        "room": 7,
+        "localX": 830,
+        "drawWidth": 280,
+        "drawHeight": 100
+      },
+      "cycleSeconds": {
+        "safe": 1.15,
+        "warning": 0.45,
+        "active": 3.0
+      },
+      "solution": "Use the insulated upper transfer or the earned jet-assist; the short discharged phase remains a fallback."
+    }
+  }
+}

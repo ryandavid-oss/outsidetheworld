@@ -20,6 +20,10 @@
     "electric_cycle_seconds": 3.6,
     "electric_live_seconds": 1.25,
     "electric_landing_grace_seconds": 0.28,
+    "thermal_purge_cycle_seconds": 3.4,
+    "thermal_purge_live_seconds": 0.95,
+    "arc_coupler_cycle_seconds": 4.6,
+    "arc_coupler_live_seconds": 3.0,
     "damage_rule": "No damage may begin in a room transition, mandatory landing, relay interaction, or pickup collection footprint.",
     "recovery_rule": "Each recovery heart sits after a challenge beat and never on an ordinary room spawn."
   },
@@ -30,8 +34,8 @@
         0,
         1
       ],
-      "purpose": "Teach the full movement language, guarantee jet-assist, descend through the Breathing Chamber, and restore the first atmospheric stabilizer.",
-      "challenge_peak": "One moving bridge followed by the powered freight-lift return.",
+      "purpose": "Teach baseline movement, descend through the Breathing Chamber, restore the first atmospheric stabilizer, ride the powered freight lift, then award jet-assist.",
+      "challenge_peak": "The visible jet-assist remains relay-locked until the powered freight-lift return makes it collectible.",
       "recovery": "Heart beside the restored relay."
     },
     {
@@ -41,7 +45,7 @@
         3
       ],
       "purpose": "Teach the heavy rifle, clear the mandatory Vesperite lock, then require one readable Deepworks recovery.",
-      "challenge_peak": "A safe rifle acquisition, physical containment obstruction, recurring Sentinel, and one short thermal-vent jump.",
+      "challenge_peak": "A safe rifle acquisition, physical containment obstruction, recurring Sentinel, and one telegraphed thermal-purge crossing.",
       "recovery": "Deepworks is enemy-free and contains the zone's final Signal Shard."
     },
     {
@@ -60,8 +64,8 @@
         6,
         7
       ],
-      "purpose": "Run a short armored final exam, recover the last Signal Shard, and enter the Uplink Gate.",
-      "challenge_peak": "Chitin Sentinel, then a spaced arc-leak jump and Pale Watcher guard.",
+      "purpose": "Run a short armored final exam, recover the last Signal Shard in a maintenance alcove, then deliberately travel to the Uplink Gate.",
+      "challenge_peak": "Chitin Sentinel, then an upper-route or jet-assisted broken arc-coupler crossing and a separated Pale Watcher guard.",
       "recovery": "Heart on the upper route before the final plate."
     },
     {
@@ -145,6 +149,22 @@
     "credit_caches_deepworks": 1,
     "vesperite_obstructions": 1,
     "static_contact_hazards": 2,
+    "authored_hazards": [
+      {
+        "id": "refinery-thermal-vent",
+        "sprite": "Images/Game/Super-Frgmnts/foundry-thermal-purge-vent-runtime-v1.png",
+        "local_x": 900,
+        "width": 160,
+        "solution": "read the warning shutters, wait for the purge to end, then jump"
+      },
+      {
+        "id": "uplink-arc-leak",
+        "sprite": "Images/Game/Super-Frgmnts/foundry-arc-coupler-runtime-v1.png",
+        "local_x": 830,
+        "width": 280,
+        "solution": "take the insulated upper transfer or use earned jet-assist"
+      }
+    ],
     "electrified_platforms": 1,
     "deepworks_entries": 2,
     "powerups": [
@@ -170,17 +190,17 @@
       "Clacker Beetle",
       "Spore Wisp"
     ],
-    "surface_return": "Wound-touched Vesperite recovery fades to black and returns Aryn to Veyra with the recovered loadout"
+    "surface_return": "Wound-touched Vesperite recovery fades to black and returns Aryn to Veyra with the recovered loadout; the completed Coreworks return route is sealed"
   },
   "encounter_order": [
     "Foundry Intake: Chitin Sentinel on the broad ground lane; Squircle Minion visibly circles an upper platform",
     "Breathing Chamber: Core Leech in the air lane, then Chitin Sentinel before the relay apron",
     "Refinery Entry: safe heavy-rifle pickup, Kihunter read, physical obstruction, then Chitin Sentinel",
-    "Refinery Exit: Sova and Chitin Sentinel in separate lanes, thermal vent, then enemy-free Deepworks recovery",
+    "Refinery Exit: rifle-valid Sova and Chitin Sentinel in separated lanes, telegraphed thermal purge, then enemy-free Deepworks recovery",
     "Biolab Entry: guaranteed Ember Wasp above a ground Chitin Sentinel with no shared mandatory landing",
     "Biolab Relay: Seam Hunter and Chitin Sentinel are separated before a safe relay apron",
     "Deepworks Approach: Skree and Chitin Sentinel are separated before the upper-route recovery heart",
-    "Uplink Gate: Seam Lurker above, arc leak on deck, Pale Watcher beyond it, and the final shard at the gate"
+    "Uplink Gate: final shard in the left maintenance alcove, Seam Lurker above, broken arc coupler on deck, Pale Watcher beyond it, then a separate gate approach"
   ],
   "deferred": [
     "credit economy",
