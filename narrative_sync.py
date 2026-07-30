@@ -1387,7 +1387,7 @@ def remove_feature_figure(body_html, feature_url):
 
     return re.sub(r'<figure\b[^>]*>[\s\S]*?</figure>', replace_figure, body_html or '', flags=re.I)
 
-def render_feature_figure(feature):
+def render_feature_figure(feature, tape_text=''):
     if not feature:
         return ''
     caption = feature.get('caption') or ''
@@ -1406,9 +1406,18 @@ def render_feature_figure(feature):
     if credit:
         caption_parts.append(f'<span class="entry-feature-credit">{smartypants_safe(credit)}</span>')
     caption_html = f'\n                <figcaption>{"".join(caption_parts)}</figcaption>' if caption_parts else ''
+    tape_class = ' entry-feature--taped' if tape_text else ''
+    tape_html = ''
+    if tape_text:
+        repeated_tape_text = f'{tape_text}  //  {tape_text}  //  {tape_text}'
+        tape_html = (
+            '<span class="entry-feature-tape" aria-hidden="true">'
+            f'{smartypants_safe(repeated_tape_text)}'
+            '</span>'
+        )
     return f'''
-            <figure class="entry-feature entry-feature--{layout} entry-feature--focal-{focal}">
-                <div class="entry-feature-media"{aspect_style}><img src="{smartypants_safe(feature.get('render_url') or feature.get('url'))}" alt="{smartypants_safe(feature.get('alt'))}" decoding="async" fetchpriority="high"{dimension_attrs}></div>{caption_html}
+            <figure class="entry-feature entry-feature--{layout} entry-feature--focal-{focal}{tape_class}">
+                <div class="entry-feature-media"{aspect_style}><img src="{smartypants_safe(feature.get('render_url') or feature.get('url'))}" alt="{smartypants_safe(feature.get('alt'))}" decoding="async" fetchpriority="high"{dimension_attrs}>{tape_html}</div>{caption_html}
             </figure>'''
 
 def find_font(candidates):
@@ -1535,7 +1544,8 @@ def render_share_page(post, newer_post=None, older_post=None, include_draft_read
     body_reading_tools_attr = ' data-reading-tools="off"' if reading_aids else ''
     body_html = inject_reading_aid_body_notes(body_html, reading_aids)
     reader_nav = render_reader_nav(newer_post, older_post)
-    feature_html = render_feature_figure(feature_image)
+    tape_text = 'DELAYED — STILL COOKING' if update_notice_html and 'delayed' in update_notice_html.lower() else ''
+    feature_html = render_feature_figure(feature_image, tape_text)
     feature_preload = ''
     if feature_image:
         feature_preload = (

@@ -346,9 +346,44 @@ html[data-reader-mode="dark"] .reader-mode-button[aria-pressed="true"] {
 }
 
 .entry-feature-media {
+    position: relative;
     width: 100%;
     aspect-ratio: 4 / 3;
     background: color-mix(in srgb, var(--reader-page) 92%, #000 8%);
+}
+
+.entry-feature--taped .entry-feature-media {
+    overflow: hidden;
+}
+
+.entry-feature-tape {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 2;
+    box-sizing: border-box;
+    width: 132%;
+    border-block: clamp(3px, 0.45vw, 5px) solid #111;
+    padding: clamp(9px, 1.5vw, 15px) 0;
+    overflow: hidden;
+    transform: translate(-50%, -50%) rotate(-9deg);
+    background:
+        repeating-linear-gradient(
+            135deg,
+            #f4d34f 0,
+            #f4d34f 34px,
+            #e8c238 34px,
+            #e8c238 68px
+        );
+    color: #0b0c0d;
+    font: 900 clamp(0.72rem, 1.7vw, 1.2rem)/1 'Fira Code', monospace;
+    letter-spacing: clamp(0.09em, 0.4vw, 0.18em);
+    text-align: center;
+    text-transform: uppercase;
+    white-space: nowrap;
+    box-shadow:
+        0 4px 0 rgba(255, 255, 255, 0.22) inset,
+        0 10px 28px rgba(0, 0, 0, 0.44);
 }
 
 .entry-feature img {
