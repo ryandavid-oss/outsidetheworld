@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Verify that the web-first, iOS-ready SUPER FRGMNTS baseline stays canonical."""
+"""Verify that the native Apple SUPER FRGMNTS baseline stays canonical."""
 
 from pathlib import Path
 
@@ -13,46 +13,68 @@ INDEX = (DESIGN_ROOT / "README.md").read_text(encoding="utf-8")
 LEVEL_PLAN = (DESIGN_ROOT / "UNIFIED-LEVEL-ONE-PLAN.md").read_text(
     encoding="utf-8"
 )
+HANDOFF = (DESIGN_ROOT / "SUPER-FRGMNTS-HANDOFF.md").read_text(encoding="utf-8")
 
 
 def main() -> None:
     required_baseline = (
-        "Web-first, iOS-ready",
-        "Capacitor/WKWebView",
-        "A full SpriteKit or other native-engine rewrite is not the baseline plan.",
+        "Native Apple Platform Baseline 2",
+        "Native iOS, iPadOS, and macOS",
+        "frozen as an executable design",
+        "Do not add web gameplay",
+        "Swift and SpriteKit",
+        "Raw Metal is not the starting point.",
+        "## Architectural boundaries",
         "## Input contract",
         "`switchWeapon`",
-        "`pointercancel`",
+        "controller disconnect",
         "## Rendering and timing contract",
-        "Target smooth 60 Hz presentation without an intentional FPS cap.",
+        "bounded fixed-step simulation",
+        "stable 60 Hz presentation",
+        "120 Hz ProMotion mode",
+        "## Production-load acceptance target",
+        "fifty-four enemies",
+        "twenty-four Vesperite Fragments",
+        "iPad Pro M4",
+        "iPhone 17 Pro",
         "## Asset and memory contract",
         "2,048 pixels",
         "## Audio and lifecycle contract",
-        "vesperite-boulder-impact-runtime-v1.png",
-        "vesperite-boulder-collapse-runtime-v1.png",
-        "Before TestFlight promotion, split",
         "## Persistence contract",
-        "versioned, serializable save model",
+        "versioned, `Codable` save model",
         "## Native integration boundary",
-        "## Feature acceptance gate",
-        "360–390 px portrait touch play",
+        "## First native milestone",
         "## Migration sequence",
+        "## Out of scope",
+        "Canvas renderer optimization",
+        "WebGL renderer development",
+        "Capacitor or WKWebView application packaging",
         "## Decision rule",
     )
     for token in required_baseline:
         assert token in BASELINE, f"Missing platform baseline contract: {token}"
 
+    assert "Web-first, iOS-ready" not in BASELINE
+    assert (
+        "A full SpriteKit or other native-engine rewrite is not the baseline plan."
+        not in BASELINE
+    )
     assert "IOS-PORTABILITY-BASELINE.md" in INDEX
     assert "UNIFIED-LEVEL-ONE-PLAN.md" in INDEX
     assert "IOS-PORTABILITY-BASELINE.md" in LEVEL_PLAN
     assert "super_frgmnts.html" in INDEX
     assert "on `main`" in INDEX
+    assert "native iOS, iPadOS, and macOS" in INDEX
+    assert "native iOS, iPadOS, and macOS" in LEVEL_PLAN
+    assert "Web Beta 2 frozen; native Apple migration authorized" in HANDOFF
+    assert "Do not add features, optimize the browser renderer" in HANDOFF
+    assert "Swift/SpriteKit Foundry vertical slice" in HANDOFF
 
-    print("SUPER FRGMNTS Platform Baseline 1: PASS")
-    print("- the production web game remains canonical")
-    print("- PWA and Capacitor/WKWebView are the planned portability route")
-    print("- input, lifecycle, assets, saves, and native seams are explicit")
-    print("- future feature reviews include desktop and portrait-mobile gates")
+    print("SUPER FRGMNTS Native Apple Platform Baseline 2: PASS")
+    print("- native iOS, iPadOS, and macOS are the sole production targets")
+    print("- the browser runtime is frozen as migration and parity evidence")
+    print("- Swift/SpriteKit owns the first production-load validation path")
+    print("- web, PWA, WebGL, Capacitor, and WKWebView work is out of scope")
 
 
 if __name__ == "__main__":

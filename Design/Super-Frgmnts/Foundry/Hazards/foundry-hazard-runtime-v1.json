@@ -63,16 +63,19 @@
       ],
       "placement": {
         "room": 7,
-        "localX": 830,
-        "drawWidth": 280,
-        "drawHeight": 100
+        "localX": 520,
+        "drawWidth": 240,
+        "drawHeight": 72,
+        "visualSink": 36,
+        "visualClipBottom": 10,
+        "floorTreatment": "recessed collision-backed channel with explicit warning rails"
       },
       "cycleSeconds": {
-        "safe": 1.15,
-        "warning": 0.45,
-        "active": 3.0
+        "safe": 1.6,
+        "warning": 0.6,
+        "active": 1.8
       },
-      "solution": "Use the insulated upper transfer or the earned jet-assist; the short discharged phase remains a fallback."
+      "solution": "Read the recessed rail warning, cross during the discharged phase, or use the earned jet-assist. The challenge resolves before a clear recovery runway to the Wound lock."
     },
     "arcDischarge": {
       "chromaSource": "Design/Super-Frgmnts/Foundry/Hazards/Raw/arc-discharge-chroma-source-v1.png",

@@ -1,56 +1,92 @@
-# SUPER FRGMNTS // Platform Baseline 1
+# SUPER FRGMNTS // Native Apple Platform Baseline 2
 
 **Status:** Active
-**Established:** 2026-07-26
-**Product direction:** Web-first, iOS-ready
+**Established:** 2026-07-29
+**Supersedes:** Platform Baseline 1, established 2026-07-26
+**Product direction:** Native iOS, iPadOS, and macOS
 
-## Purpose
+## Decision
 
-SUPER FRGMNTS remains a first-class web game. Its canonical production runtime
-is `super_frgmnts.html` on `main`, published through GitHub Pages.
+All new SUPER FRGMNTS production development targets a native Apple-platform
+package. The supported product family is:
 
-The long-term platform target is to reuse that runtime in:
+1. iPhone on iOS;
+2. iPad on iPadOS; and
+3. Apple silicon and Intel Macs on macOS, subject to the deployment targets
+   selected when the Xcode project is established.
 
-1. the public web edition;
-2. an installable, offline-capable PWA;
-3. a Capacitor/WKWebView iOS application; and
-4. selective native integrations where they materially improve the game.
+The existing `super_frgmnts.html` game is frozen as an executable design,
+content, timing, and parity reference. It is not the foundation of the native
+shipping runtime. Do not add web gameplay, browser-renderer improvements, PWA
+packaging, WebGL migration, or a Capacitor/WKWebView shell.
 
-A full SpriteKit or other native-engine rewrite is not the baseline plan.
-Artwork, episode data, movement, combat, camera, enemy behavior, dialogue, and
-level logic should remain shared across platforms.
+Do not delete or broadly refactor the frozen web implementation until the
+corresponding native systems and content have passed parity review. It contains
+approved behavior and authored values that must be extracted deliberately.
 
-This document is a direction for future work, not a claim that the current
-single-file runtime is already fully separated. Do not stop useful game work
-for a broad speculative refactor. When a feature touches one of the seams
-below, improve that seam as part of the feature.
+## Why Baseline 1 was superseded
 
-## Product principles
+Baseline 1 assumed the shared browser runtime would provide sufficient
+production performance on Apple devices. Production-scale review challenged
+that assumption before public release. Packaging the same HTML, Canvas, CSS,
+and JavaScript inside WKWebView would preserve the renderer whose performance
+is in question rather than replace it.
 
-- The web edition must never become a lesser demo of the iOS edition.
-- A future iOS package should bundle episode-critical assets locally and remain
-  playable without a network connection after installation.
-- Platform differences belong in small adapters, not duplicated game rules.
-- Native features are enhancements. The game must remain complete without
-  Game Center, iCloud, haptics, controller support, or push notifications.
-- App Store presentation must feel like a complete game, not a remote webpage
-  placed inside an application shell.
+The project is unreleased and its episodic scope will grow. The least risky
+time to change the production architecture is therefore now, before additional
+episodes, enemies, fragments, effects, and native integrations multiply the
+migration cost.
+
+The architectural parts of Baseline 1 remain valuable: explicit game rules,
+versioned content, action-based input, bounded asset ownership, serializable
+saves, and platform-service boundaries. Only the web-first runtime and release
+assumptions are retired.
+
+## Native implementation baseline
+
+The first implementation path is Swift and SpriteKit in one source-controlled
+Xcode project, with shared game modules used by the iOS, iPadOS, and macOS
+application surfaces.
+
+- SpriteKit owns scene presentation, sprites, cameras, effects, and rendering.
+- Swift game-domain types own simulation, collision policy, enemies, weapons,
+  rewards, episode state, and win/loss rules.
+- SwiftUI, UIKit, or AppKit may host menus and platform presentation where
+  appropriate; gameplay rules must not live in those views.
+- Apple frameworks provide lifecycle, controller, audio, persistence, haptic,
+  accessibility, commerce, and Game Center integration behind narrow
+  interfaces.
+- Raw Metal is not the starting point. Introduce a lower-level native renderer
+  only if measured SpriteKit limitations remain after a representative
+  production-load implementation and profiling pass.
+- A third-party engine requires a new written decision. It must not be adopted
+  merely to preserve a web export.
+
+The production-load vertical slice is the commitment gate for this baseline.
+It validates SpriteKit before the full episode is ported; it is not permission
+to resume browser development while validation is underway.
 
 ## Architectural boundaries
 
-Future work should converge toward four boundaries:
+Native work converges toward four boundaries:
 
-1. **Game core** — simulation, collision, enemies, weapons, rewards, camera,
-   episode state, and win/loss rules.
-2. **Content** — versioned manifests for rooms, dialogue, assets, enemy
-   populations, pickups, and tuning values.
+1. **Game domain** — deterministic simulation, collision policy, enemies,
+   weapons, rewards, camera intent, episode state, and win/loss rules.
+2. **Content** — versioned data for rooms, dialogue, assets, enemy populations,
+   pickups, animation timing, and tuning values.
 3. **Platform services** — input, lifecycle, audio focus, persistence, haptics,
    achievements, controllers, sharing, and commerce.
-4. **Presentation** — Canvas rendering, DOM overlays, menus, dialogue, and
-   accessibility announcements.
+4. **Presentation** — SpriteKit scenes and effects plus native menus, dialogue,
+   HUD, and accessibility surfaces.
 
-The game core must not require knowledge of Safari, WKWebView, Capacitor, Swift,
-keyboard key codes, or a particular touch-control layout.
+The game domain must not require knowledge of `SKScene`, SwiftUI, UIKit,
+AppKit, a particular controller, or a particular screen size. Presentation
+reads domain state and emits actions. Platform services satisfy Swift
+protocols owned by the game, not the other way around.
+
+Do not port the monolithic JavaScript runtime line by line. Extract approved
+rules and authored values into native systems and versioned content, then
+verify their behavior against the frozen game.
 
 ## Input contract
 
@@ -66,91 +102,118 @@ Gameplay consumes actions rather than device events:
 - `pause`
 - `restart`
 
-Keyboard, touch, controller, and future native input translate into these same
-actions. A new mechanic must not be available only through one input source.
+Touch, keyboard, mouse where appropriate, and Game Controller input translate
+into the same actions. A mechanic must not be available through only one
+supported input source.
 
 Every held action requires immediate release paths for:
 
-- `pointerup`;
-- `pointercancel`;
-- `touchcancel`;
-- lost pointer capture;
-- window blur;
-- page or application suspension;
-- pause, dialogue, and modal transitions; and
-- control-layout replacement or orientation change.
+- touch or button cancellation;
+- controller disconnect;
+- application resignation or suspension;
+- scene transition;
+- pause, dialogue, and modal presentation; and
+- control-layout or orientation change.
 
-The playable surface must suppress selection, callouts, dragging, accidental
-zoom, and browser gestures without disabling normal behavior elsewhere on the
-site. Visual joystick position must never be the source of truth for movement
-state.
-
-The accepted mobile support floor remains 360 CSS pixels wide. Touch targets
-must remain usable with thumbs, safe-area insets, and browser or native chrome.
+Touch controls must respect safe areas, remain usable with thumbs, and never
+use the joystick's visual position as the source of truth for movement state.
+The macOS package must support keyboard play; controller support is shared
+across the product family.
 
 ## Rendering and timing contract
 
-- Keep a stable logical world and scale it for the display.
-- Simulation and animation use elapsed time, not an assumed frame count.
-- Target smooth 60 Hz presentation without an intentional FPS cap.
-- Cap expensive device-pixel-ratio work when additional resolution does not
-  materially improve the pixel-art presentation.
-- Pixel-art assets use deliberate nearest-neighbor scaling.
-- Gameplay correctness must not depend on a specific viewport, refresh rate,
-  or device orientation.
+- Keep a stable logical world and scale it deliberately for each display.
+- Run gameplay from elapsed time with a bounded fixed-step simulation.
+- The shipping performance floor is a stable 60 Hz presentation at the
+  production-load acceptance target.
+- A 120 Hz ProMotion mode is desirable only when the device can sustain it
+  without unstable pacing, unacceptable thermal load, or gameplay changes.
+- Pixel-art assets use deliberate nearest-neighbor sampling.
+- Batch compatible sprites through texture atlases and avoid unnecessary draw
+  calls, effects, and node traversal.
+- Cull or deactivate rooms, actors, particles, and effects that cannot affect
+  the current simulation or camera.
+- Gameplay correctness must not depend on viewport, refresh rate, device
+  orientation, or display scale.
 - Reduced-motion behavior must preserve all gameplay information.
+
+Performance review records frame-time percentiles rather than relying on a
+single average FPS value. It also records draw count, node count, memory,
+launch time, scene-transition time, suspension/resume behavior, and sustained
+thermal performance on physical devices.
+
+## Production-load acceptance target
+
+The initial native target preserves the already-approved scale forecast:
+
+- fifty-four enemies, representing three times the Beta 2 roster;
+- twenty-four Vesperite Fragments, representing twice the Beta 2 count;
+- the eight-room Shard Foundry scene ownership and traversal model;
+- representative projectiles, particles, glow, HUD, audio, and camera work as
+  soon as their production quantities are defined; and
+- no test-only simplification that removes the expensive presentation features
+  the shipping scene requires.
+
+The frozen browser benchmark at
+`?episode=01&stage=foundry&room=4&autostart=1&load-profile=production-scale&frame-profile=benchmark`
+is the reference workload and telemetry precedent. Native measurements replace
+browser measurements for all promotion decisions.
+
+The first physical-device matrix is:
+
+- iPad Pro M4 with ProMotion enabled and Low Power Mode disabled;
+- iPhone 17 Pro;
+- MacBook Pro with M2 Pro; and
+- Mac mini M4.
+
+Record the exact device identifier, OS build, Xcode version, build
+configuration, resolution, refresh-rate mode, and power state with every
+accepted result.
 
 ## Asset and memory contract
 
-- Assets load by scene or nearby room, not as one global game payload.
-- Inactive scene images and audio must be releasable.
-- New asset families require a manifest, runtime dimensions, frame timing, and
-  a named owning scene.
-- Runtime animation atlases should remain at or below 2,048 pixels on either
-  axis. Larger atlases must be split or carry a documented exception.
+- Bundle episode-critical assets locally; installed play must not require a
+  network connection.
+- Load assets by scene or nearby room rather than as one global payload.
+- Inactive scene textures and audio must be releasable.
+- Every asset family requires a manifest, runtime dimensions, frame timing,
+  color and sampling expectations, and a named owning scene.
+- Runtime texture atlases should remain at or below 2,048 pixels on either
+  axis. Larger atlases require a measured and documented exception.
 - Source masters may be larger, but only normalized runtime derivatives ship.
-- Background plates should remain independently streamable.
+- Background plates remain independently loadable.
 - Audio uses one lifecycle-aware director and bounded effect-channel pools.
-- A feature review records its incremental transfer size and decoded-memory
+- A feature review records its incremental package size and decoded-memory
   effect when it introduces a substantial asset group.
 
+The two existing 2,816 × 184 Vesperite boulder strips must be split into
+native atlases no wider than 2,048 pixels before their native scene is promoted.
+Preserve frame order through versioned content data.
+
 Scene loading must fail visibly and recoverably. A missing optional asset may
-degrade gracefully; a missing critical asset must produce an in-game retry
-path rather than a blank screen.
-
-### Current reviewed atlas exceptions
-
-The shipping web beta currently contains two narrow 2,816 × 184 Vesperite
-boulder strips:
-
-- `vesperite-boulder-impact-runtime-v1.png`
-- `vesperite-boulder-collapse-runtime-v1.png`
-
-They are accepted for the web beta because they are shallow, scene-scoped, and
-do not create an oversized decoded surface. Before TestFlight promotion, split
-each strip into two atlases no wider than 2,048 pixels and preserve its frame
-order through the runtime manifest.
+degrade gracefully; a missing critical asset must produce an in-game recovery
+path rather than a blank or stuck scene.
 
 ## Audio and lifecycle contract
 
-- One intentional user gesture unlocks game audio.
-- Music transitions are owned by the audio director, not individual scenes.
-- Mute state survives scene changes.
-- Backgrounding, focus loss, phone calls, audio-route changes, and application
+- One audio director owns music, ambience, and bounded effect playback.
+- Mute and volume state survive scene and application transitions.
+- Backgrounding, focus loss, calls, audio-route changes, and application
   suspension stop gameplay and sampled effects safely.
 - Resume restores at most one music stream and never duplicates a loop.
-- Pause freezes the mission clock, simulation, animation, and controls
+- Pause freezes mission time, simulation, animation state, and controls
   together.
-- Application restoration must not leave movement, firing, or the analog stick
-  latched.
+- Restoration must not leave movement, firing, or analog input latched.
+- iOS and iPadOS behavior must respect the active audio session; macOS behavior
+  must remain coherent across focus and device changes.
 
 ## Persistence contract
 
-Persistent game data must use a versioned, serializable save model. Web storage
-is an implementation detail behind a save adapter, not the canonical state
-model.
+Persistent state uses a versioned, `Codable` save model. UserDefaults, files,
+Keychain, iCloud, and Game Center are storage or service implementations, not
+the canonical game state.
 
-The save model should be capable of representing:
+The save model must represent:
 
 - episode and checkpoint progress;
 - Galactic Credits and purchases;
@@ -159,74 +222,97 @@ The save model should be capable of representing:
 - achievements and completion bonuses; and
 - schema version and migration history.
 
-The web adapter may initially use local storage or IndexedDB. A future iOS
-adapter may add local native storage and optional iCloud synchronization
-without changing game rules.
+Every schema version requires deterministic decoding, migration tests, and a
+recoverable response to corrupt or unsupported data. Optional iCloud
+synchronization must not make offline local play unavailable.
 
 ## Native integration boundary
 
-The first iOS build should use the shared web runtime inside Capacitor/WKWebView
-with bundled local assets. Swift or native plugins should be introduced only
-for bounded capabilities such as:
+Native capabilities remain behind bounded services:
 
+- Game Controller;
 - haptics;
 - Game Center achievements and leaderboards;
-- iCloud save synchronization;
-- external-controller support;
-- native audio interruption reporting;
-- StoreKit purchases, if ever approved for the game economy; and
-- native sharing, review, and support surfaces.
+- local and optional iCloud save synchronization;
+- audio interruption and route handling;
+- StoreKit purchases, if the economy later authorizes them;
+- native sharing, review, and support surfaces; and
+- platform accessibility APIs.
 
-JavaScript must treat these capabilities as optional and feature-detect them.
+The game remains complete when an optional service such as Game Center,
+iCloud, haptics, or commerce is unavailable.
 
-## Feature acceptance gate
+## First native milestone
 
-A new gameplay or presentation feature is portable when:
+Create a production-representative Foundry slice centered on Room 4:
 
-- desktop keyboard play still works;
-- 360–390 px portrait touch play still works;
-- every held input survives cancellation and focus loss;
-- pause, mute, background, and resume behavior remain coherent;
-- the feature does not require a network request during normal installed play;
-- assets are assigned to a scene and released when inactive;
-- state is serializable rather than trapped only in DOM elements;
-- no browser-specific API is called directly from game rules;
-- accessibility announcements remain meaningful;
-- JavaScript syntax and the relevant SUPER FRGMNTS contracts pass; and
-- at least one desktop and one portrait-mobile browser review show no console
-  errors or blank critical artwork.
+1. establish the Xcode project, shared modules, targets, signing-neutral build
+   settings, and automated tests;
+2. render the approved room art, camera, Aryn, HUD, and representative effects;
+3. implement movement, jump, drop, fire, collision, pause, and one
+   representative enemy behavior through native action and domain boundaries;
+4. instantiate the fifty-four-enemy and twenty-four-fragment workload with the
+   same scene-ownership intent as the browser benchmark;
+5. implement touch, keyboard, and controller mappings plus safe lifecycle
+   release behavior;
+6. run the physical-device matrix and capture frame, memory, thermal, launch,
+   interruption, and restoration results; and
+7. compare motion, timing, collision, framing, art, and atmosphere with the
+   frozen reference.
 
-An iOS/TestFlight promotion adds:
+The milestone passes when the representative build sustains the 60 Hz floor
+on the primary iPad and iPhone targets, behaves correctly on macOS, survives
+lifecycle tests, and reveals no architectural blocker to the projected
+episode scale.
 
-- current-device and lower-memory-device profiling;
-- safe-area and orientation review on physical hardware;
-- interruption tests for calls, Control Center, headphones, and app switching;
-- offline launch and restoration tests;
-- controller and haptic fallback tests when those features exist; and
-- App Store completeness, privacy, and metadata review.
+If SpriteKit misses the gate, profile and document the limiting subsystem
+before changing engines. The next option must still produce native Apple
+packages; returning to a browser runtime is not a fallback.
 
 ## Migration sequence
 
-No migration work is required merely because this baseline exists. When the
-game is ready:
+1. Preserve the current browser build and its production-scale benchmark.
+2. Inventory and classify authored content, rules, assets, audio, and
+   presentation behavior before extraction.
+3. Complete and accept the first native milestone.
+4. Establish native content schemas and port the shared episode shell.
+5. Port systems in bounded vertical slices with behavioral parity tests.
+6. Port and optimize each scene with explicit asset ownership.
+7. Add native services only after the core offline game is stable.
+8. Exercise iOS and iPadOS builds through TestFlight and validate the macOS
+   package independently.
+9. Promote the native package only after the complete Episode 01 route passes
+   performance, lifecycle, save, input, accessibility, and content review.
 
-1. finish the production web episode and stabilize its save model;
-2. add the PWA manifest, offline cache, icons, and install presentation;
-3. create a thin Capacitor iOS shell that bundles the same production files;
-4. profile memory, rendering, audio, and lifecycle behavior in TestFlight;
-5. add only the native integrations justified by testing; and
-6. keep the web, PWA, and iOS editions on the same content and game-core
-   version.
+## Out of scope
+
+The following work is not part of the active product:
+
+- new web gameplay or content;
+- Canvas renderer optimization;
+- WebGL renderer development;
+- PWA packaging or offline-web work;
+- Capacitor or WKWebView application packaging;
+- browser compatibility, responsive-layout, or Gamepad API work; and
+- maintaining feature parity with the frozen browser implementation after its
+  role as a migration reference is complete.
+
+Any exception requires an explicit product-direction change. Preservation work
+must be narrowly scoped and must not become continued web development.
 
 ## Decision rule
 
-When two implementations are equally good for the current web game, prefer the
-one that:
+When choosing between native implementations, prefer the one that:
 
-1. keeps game rules independent of the browser;
-2. makes assets and state explicit;
-3. has a complete interruption and restoration path; and
-4. can be exercised by both touch and non-touch input.
+1. sustains the production workload on the physical-device matrix;
+2. keeps game rules independent of rendering and platform UI;
+3. makes content, assets, and state explicit and testable;
+4. has complete interruption and restoration paths;
+5. supports touch, keyboard, and controller input without duplicated rules;
+6. preserves the atmosphere, fidelity, and joy of SUPER FRGMNTS; and
+7. reduces the cost of adding later episodes rather than optimizing only the
+   current room.
 
-Portability must support the atmosphere, fidelity, and joy of SUPER FRGMNTS.
-It is not permission to flatten the game into the lowest common denominator.
+Native architecture is not permission to flatten the game into the lowest
+common denominator. The platform change exists to give the full game room to
+grow.

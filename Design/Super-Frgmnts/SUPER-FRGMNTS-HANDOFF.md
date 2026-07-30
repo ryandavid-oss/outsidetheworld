@@ -1,27 +1,33 @@
 # SUPER FRGMNTS // Working Handoff
 
-**Status:** Beta 2 stabilization release approved for production
+**Status:** Web Beta 2 frozen; native Apple migration authorized
 
 **Updated:** 2026-07-29
 
-**Checkpoint:** Post-Beta 2 polish approved for commit, `main` deployment, and
-live production verification
+**Checkpoint:** Preserve the current browser game as the executable reference;
+the next production milestone is a Swift/SpriteKit Foundry vertical slice for
+iOS, iPadOS, and macOS
 
 This is the short-form operating context for future SUPER FRGMNTS work. Use it
 with the linked manifests and contracts instead of reconstructing the project
 from old tasks, worktrees, or historical branches.
 
-## Canonical source and release path
+## Canonical source and platform path
 
 - Repository: `/Users/rylee/Projects/outsidetheworld`
 - Branch: `main`
-- Runtime: [`super_frgmnts.html`](../../super_frgmnts.html)
+- Frozen reference runtime:
+  [`super_frgmnts.html`](../../super_frgmnts.html)
+- Native production runtime: not yet established; create it through the first
+  milestone in
+  [`IOS-PORTABILITY-BASELINE.md`](IOS-PORTABILITY-BASELINE.md)
 - Design index: [`Design/Super-Frgmnts/README.md`](README.md)
-- Production URL:
+- Frozen web URL:
   `https://outsidetheworld.com/super_frgmnts.html`
 - Active release manifest:
   [`Releases/episode-01-beta-2.json`](Releases/episode-01-beta-2.json)
-- Hosting: GitHub Pages publishes from `main`.
+- Existing hosting: GitHub Pages publishes the frozen web reference from
+  `main`.
 - Rollback tag: `super-frgmnts-pre-blaster-2026-07-23`
   (commit `6b759e8e`)
 
@@ -30,8 +36,11 @@ Only `main` is a source of truth. The Claude worktree
 `codex/tshirt-builder-frgmnts` branch are historical and must not be used for
 development or deployment.
 
-A local commit is not a production deployment. Push `main` only after explicit
-deployment approval, then verify GitHub Pages and the production URL.
+Do not add features, optimize the browser renderer, create a WebGL replacement,
+package a PWA or WKWebView shell, or otherwise continue web production. Preserve
+the current web files until native parity is established; change them only for
+explicitly authorized preservation or extraction work. Do not deploy a changed
+web build without separate approval.
 
 ## Product canon
 
@@ -57,19 +66,37 @@ story that must resolve in Episode 01.
 
 ## Platform baseline
 
-The production game remains web-first and iOS-ready. Follow
-[`IOS-PORTABILITY-BASELINE.md`](IOS-PORTABILITY-BASELINE.md) for input,
-lifecycle, asset, save-state, and future PWA/Capacitor decisions.
+The production game is native Apple-platform software from 2026-07-29 forward.
+Follow
+[`IOS-PORTABILITY-BASELINE.md`](IOS-PORTABILITY-BASELINE.md) for the
+Swift/SpriteKit baseline, migration sequence, input and lifecycle contracts,
+production-load gate, asset ownership, and save architecture.
 
 Important constraints:
 
-- accepted mobile support floor: 360 CSS pixels;
-- keyboard, touch, and future controllers must map to shared game actions;
-- focus loss must release controls, pause gameplay, and pause audio;
-- no intentional frame-rate cap;
+- ship native packages for iOS, iPadOS, and macOS from shared game modules;
+- touch, keyboard, and Game Controller input map to shared game actions;
+- suspension, focus loss, and controller loss release controls and pause
+  gameplay and audio safely;
+- sustain a 60 Hz production floor; 120 Hz ProMotion is an optional mode that
+  must earn acceptance through device profiling;
 - runtime atlases should remain at or below 2,048 pixels per axis unless an
   exception is documented;
 - episode-critical installed play must not depend on a network request.
+
+The frozen web runtime remains the behavioral and visual parity oracle. Its
+fifty-four-enemy/twenty-four-fragment benchmark defines the first native
+production-load target, but browser measurements no longer approve shipping
+work.
+
+### Local native-toolchain checkpoint
+
+The 2026-07-29 workspace host runs macOS 26.5.2 (build 25F84) on an M2 Pro
+MacBook Pro. Apple Swift 6.2.3 is available, but only
+`/Library/Developer/CommandLineTools` is selected and no Xcode application is
+installed under `/Applications`. Install and select the current full Xcode
+release before creating or validating the iOS, iPadOS, and macOS application
+targets.
 
 ## Current playable flow
 
@@ -217,6 +244,10 @@ Then use:
   `http://127.0.0.1:8765/super_frgmnts.html?preview=foundry-expansion&room=2&qa=affordance&autostart=1`
 - Uplink gate, arc, and desktop progress review:
   `http://127.0.0.1:8765/super_frgmnts.html?episode=01&stage=foundry&room=7&qa=uplink&autostart=1`
+- Production-scale Foundry performance benchmark:
+  `http://127.0.0.1:8765/super_frgmnts.html?episode=01&stage=foundry&room=4&autostart=1&load-profile=production-scale&frame-profile=benchmark`
+- Open Wound-lock and automatic transit review:
+  `http://127.0.0.1:8765/super_frgmnts.html?episode=01&stage=foundry&room=7&qa=uplink&gate=open&transit=1&autostart=1`
 - Heavy-rifle review:
   `http://127.0.0.1:8765/super_frgmnts.html?preview=foundry-expansion&weapon=rifle&autostart=1`
 - The Wound boss trial:
@@ -513,12 +544,18 @@ The working package represented by this handoff adds or finalizes:
   Seam Lurker, and Kihunter production population;
 - the recurring seven-Sentinel encounter grammar and mobile boss assist;
 - the faster Seam Hunter main-deck and gantry-facing response;
+- the Seam Hunter threshold-guard counterattack, which uses the existing
+  telegraphed sweep to prevent the active encounter's portal bay from becoming
+  a risk-free firing pocket;
 - the post-lock jet-assist placement, rifle-valid Sova silhouette, separated
   final fragment, lift-edge boss trigger, and sealed post-recovery transport;
 - the reusable seven-seam concrete divider system: five cyan proximity-open
   passages, Foundry/Refinery and Biolab/Uplink red-to-green stabilizer locks,
   permanent mirrored side-profile housings with separately retracting pressure
-  membranes, upper/middle/ground tunnel distribution, bridged local floors,
+  membranes, upper/middle/lower tunnel distribution, bridged local floors,
+  including the corrected `636 × 24` Biolab/Uplink lower-catwalk approach at
+  `y = 1508`; that portal alone applies a `-24`-pixel art offset so its
+  housings land on the walking plane rather than hanging from the slab bottom,
   close-after-clear reversible state machines with a directional re-arm latch
   that prevents close-open-close exit loops, dedicated shimmer audio, and
   membrane-edge collision that stops Aryn at the visible bubble surface,
@@ -526,8 +563,14 @@ The working package represented by this handoff adds or finalizes:
   without double-compositing the doorway slice, plus a display-native canvas
   backing store and physical-pixel camera snap that remove Chrome's fractional
   concrete resample; area-entry eyebrows,
-  grounded Uplink bulkhead, lower arc-coupler hazard, and revised Episode 01
-  objective card;
+  a room-specific Uplink lower-half environment plate that carries its deck,
+  lower-third terrain, rock, machinery, and narrow side-entry Wound threshold
+  as one artwork layer, with a baked-in weathered `DANGER / ACTIVE WORK`
+  worksite placard above the opening, plus a localized `0.72`-second
+  locked-to-open blend,
+  authored-wall player occlusion, an earlier recessed arc-coupler challenge,
+  a 368-pixel final recovery runway, and the revised Episode 01 objective
+  card;
 - the two atmospheric stabilizers at a reduced 336 × 588 visual footprint,
   sunk eight pixels into their decks while retaining the original 420 × 735
   interaction footprint so the Biolab/Uplink lock remains readable without
@@ -546,6 +589,11 @@ The working package represented by this handoff adds or finalizes:
   assets;
 - updated arrival, beta, roster, ambience, post-Foundry, Chapter 02 seed, and
   production-route contracts.
+
+The browser diagnostics below are frozen migration evidence. Do not extend
+them or use them to justify additional browser-renderer development. Preserve
+their routes until the native production-load slice has replaced them as the
+active performance harness.
 
 The temporary `?render-profile=desktop-1x` query flag is an opt-in desktop
 performance trial for comparing Safari's normal Retina backing store with a
@@ -583,6 +631,40 @@ small measured `FPS` badge and is intentionally available on phones and
 tablets for Safari performance comparison. This is a diagnostic route, not an
 accepted mobile-support baseline; ordinary URLs show no badge.
 
+The opt-in `?render-profile=pixel-budget` trial caps the canvas backing store
+near two million physical pixels while preserving the CSS size, world
+viewport, collision, effects, and gameplay timing. It targets the workload
+gap between smaller iPhones and Retina iPads: a landscape iPad can otherwise
+request roughly three to 4.2 million canvas pixels every frame. Combine it
+with `&frame-profile=monitor` to display `FPS // 2MP`. Removing the render flag
+restores the normal device-pixel-ratio path immediately; it is not yet the
+production default.
+
+The opt-in `?load-profile=production-scale` Foundry benchmark expands the
+actual eighteen-enemy Beta 2 roster to three deterministic cohorts
+(fifty-four enemies total) and doubles the twelve Vesperite Fragments to
+twenty-four. The population remains distributed across the eight-room route,
+so it measures total scene pressure and provides a stable future culling
+comparison rather than inventing an unsupported single-screen density.
+Player damage is suppressed on this route so a benchmark cannot end early;
+ordinary gameplay and mission URLs are unchanged.
+
+Combine that load with `&frame-profile=benchmark` for a two-second warmup and
+ten-second uninterrupted sample. The benchmark records p50, p95, and p99
+frame intervals, 60 Hz and 120 Hz over-budget percentages, and p95
+main-thread update, draw, and combined work. Results are exposed on the game
+canvas as `data-benchmark-result` JSON and individual p95 dataset fields.
+Main-thread draw timing does not claim to include asynchronous GPU completion;
+the frame-interval percentiles remain the end-to-end pacing signal. Losing
+focus, hiding, or pausing the page resets an in-progress sample rather than
+mixing inactive time into the result.
+
+The production-scale load and frame benchmark remain composable with the
+existing `desktop-crop`, `pixel-budget`, and `desktop-no-blur` trials. Do not
+combine it with the `desktop-60` frame profile because both select the same
+`frame-profile` parameter. The v1 load intentionally does not synthesize a
+projectile or particle count before those production targets are defined.
+
 The transport sources and reviews are in
 `Design/Super-Frgmnts/Overworld/Coreworks-Transport/`. Regenerate derivatives
 with `tools/build_super_frgmnts_coreworks_transport.py`; do not hand-edit the
@@ -591,10 +673,12 @@ runtime atlases.
 The three new enemy derivatives are generated by
 `tools/build_super_frgmnts_catalog_enemies.py`.
 
-## Verification levels
+## Frozen-reference verification
 
-During focused development, run the verifier for the system being changed and
-review the relevant desktop and 390 × 844 portrait route.
+Run the browser verifiers only when explicitly authorized preservation or
+content-extraction work touches the frozen reference. Native verification will
+become the active gate when the Xcode project and first milestone are
+established.
 
 The assembled production run is checked with:
 
@@ -608,7 +692,8 @@ The isolated ship-interior contract is checked with:
 python3 tools/verify_super_frgmnts_rd42_interior.py
 ```
 
-Before a commit intended for deployment, run every SUPER FRGMNTS contract:
+Before any authorized commit that changes the frozen reference, run every
+SUPER FRGMNTS contract:
 
 ```sh
 for test in tools/verify_super_frgmnts_*.py; do
@@ -619,8 +704,8 @@ git diff --check
 
 Also check the single inline JavaScript block with `node --check`, then perform
 one desktop and one portrait-mobile browser run with no console errors or
-missing critical artwork. A production deployment additionally requires a
-direct check of the live GitHub Pages URL.
+missing critical artwork. These checks preserve the migration oracle; they do
+not reopen browser development.
 
 ## Deliberately deferred
 
@@ -630,17 +715,17 @@ direct check of the live GitHub Pages URL.
   minutes;
 - the between-level Galactic Credit store and start-of-next-level purchases;
 - email gating and the proposed one-time $5 web purchase;
-- PWA packaging, TestFlight, and the Capacitor iOS shell;
-- desktop fullscreen behind the Fullscreen API and production controller
-  support through the Gamepad API;
-- full separation of the monolithic HTML runtime into game-core, content,
-  platform-service, and presentation modules;
+- all PWA, Capacitor, WKWebView, WebGL, Canvas optimization, browser fullscreen,
+  and browser Gamepad API work is retired rather than deferred;
+- broad separation of the monolithic HTML runtime; extract approved data and
+  behavior into native systems without refactoring the frozen implementation;
 - replacement art for the provisional Refinery, Biolab, and Uplink upper
   plates;
 - split versions of the two documented 2,816-pixel Vesperite animation strips.
 
-Do not implement these merely because they are listed. Treat each as its own
-approved, bounded task.
+Do not implement deferred items merely because they are listed. The native
+Foundry vertical slice, TestFlight path, and macOS package are active platform
+work under the baseline rather than deferred items.
 
 ## Working discipline
 
@@ -648,6 +733,10 @@ approved, bounded task.
 - Batch new asset intake before integration.
 - Preserve raw masters under `Design/`; ship only normalized derivatives from
   `Images/` and `Audio/`.
+- Treat the frozen browser game as read-only unless a bounded preservation or
+  extraction task explicitly requires a change.
+- Put new production rules in native game-domain modules, authored values in
+  versioned content, and Apple services behind protocols.
 - Update this handoff whenever canon, routes, controls, architecture, or the
   production checkpoint materially changes.
 - Never deploy from a worktree or historical branch.

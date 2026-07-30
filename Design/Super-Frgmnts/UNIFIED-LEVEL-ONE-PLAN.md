@@ -1,9 +1,9 @@
 # SUPER FRGMNTS // Unified Level 1 Plan
 
 > Platform baseline: all new systems and promotion reviews follow
-> [Platform Baseline 1](IOS-PORTABILITY-BASELINE.md), preserving the canonical
-> web game while keeping its runtime, content, and controls portable to a
-> future PWA and Capacitor/WKWebView iOS build.
+> [Native Apple Platform Baseline 2](IOS-PORTABILITY-BASELINE.md). The approved
+> level and frozen browser game define migration parity; all new production
+> implementation targets native iOS, iPadOS, and macOS.
 
 ## Locked world target
 
@@ -107,9 +107,11 @@ than repetitions of the shared provisional route:
   `WIDTH × 2` Foundry/Refinery seal requires the Foundry stabilizer, and the
   `WIDTH × 6` Biolab/Uplink seal requires the Biolab stabilizer; both progress
   from red to green. Their floor distribution is upper, upper, middle, middle,
-  upper, ground, middle across seams one through seven. Every instance shares
-  a local bridged floor and a single full-height foreground concrete pass that
-  hides Aryn during traversal without double-compositing the doorway slice.
+  upper, lower, middle across seams one through seven. Every instance shares
+  a local bridged floor; the Biolab/Uplink lock uses a `636 × 24`
+  collision-backed approach at lower-catwalk `y = 1508` to join the visible
+  routes on both sides. A single full-height foreground concrete pass hides
+  Aryn during traversal without double-compositing the doorway slice.
   The canvas backing store now matches the browser's displayed physical-pixel
   grid, the decorative frame sits outside the content box, and the rendered
   camera snaps to that same grid. This removes the second fractional resample
@@ -153,8 +155,10 @@ leaving economy values and later-episode combat balance open.
   non-bypassable, and contains the single required Deepworks fragment.
 - Biolab owns the one electrified-platform timing test, places its recovery
   heart afterward, and moves its stabilizer to the end of the mirrored route.
-- Uplink separates the final arc leak from the Pale Watcher and places the last
-  fragment at the gate.
+- Uplink embeds the final arc leak into an earlier floor channel, separates it
+  from the Pale Watcher, and preserves a 368-pixel recovery runway to a
+  side-entry Wound threshold authored directly into the room-specific lower
+  Uplink environment plate.
 - Deepworks has exactly two curated entrances in this pass: a required,
   enemy-free fragment recovery in Refinery and an optional credit-cache route in
   Biolab.

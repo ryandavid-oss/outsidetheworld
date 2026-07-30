@@ -257,7 +257,8 @@ def main() -> None:
         "all seven boundaries",
         "Five ordinary passages",
         "`WIDTH × 6` Biolab/Uplink",
-        "upper, upper, middle, middle, upper, ground, middle",
+        "upper, upper, middle, middle, upper, lower, middle",
+        "`636 × 24` collision-backed approach",
         "permanent steel housing",
         "membrane reforms",
         "closed-door collision planes meet the visible outer membrane edges",
@@ -297,7 +298,8 @@ def main() -> None:
     print("- each room has two deck-mounted ventilation fixtures")
     print("- layered fan housings stay fixed while their illustrated rotors turn")
     print("- the cavern-window patch replaces the mirrored Foundry seam")
-    print("- seven full-height walls use upper, middle, and ground passages")
+    print("- seven full-height walls use upper, middle, and lower passages")
+    print("- the Biolab/Uplink lock joins the real y=1508 lower catwalk")
     print("- five cyan transit locks open quickly without interrupting exploration")
     print("- Foundry and Biolab zone locks remain sealed until restoration")
     print("- fixed housings remain while membranes retract and reform")

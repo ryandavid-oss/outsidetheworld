@@ -1,63 +1,119 @@
 {
-  "schema": "super-frgmnts-uplink-boss-gate-v1",
-  "status": "beta-production",
-  "purpose": "A physical, main-deck-rooted bulkhead marking the transition from the Uplink to The Wound.",
+  "schema": "super-frgmnts-uplink-wound-threshold-v4",
+  "status": "production-runtime-environment",
+  "purpose": "A room-specific Uplink lower-half environment plate that embeds the side-entry Wound threshold into the cavern, deck, rock, frost, and machinery instead of placing a separate portal sprite over the room.",
   "styleReference": [
-    "Images/Game/Super-Frgmnts/foundry-platform-module-runtime-v1.png",
-    "Images/Game/signal-foundry-uplink.png"
+    "Images/Game/signal-foundry-uplink.png",
+    "Images/Game/Super-Frgmnts/foundry-platform-module-runtime-v1.png"
   ],
   "generation": {
-    "method": "built-in image generation with chroma-key removal",
-    "promptSummary": "Front-orthographic 16-bit industrial boss bulkhead with riveted gunmetal pylons, magenta instrument lamps, restrained cyan wiring, a hollow central passage, and a substantial threshold; no magical ring, vortex, text, environment, or floating parts.",
-    "background": "#ff00ff",
-    "rendering": "nearest-neighbor"
+    "method": "built-in image generation with precise-object environment edits",
+    "lockedPromptSummary": "Preserve the mirrored Uplink plate while rebuilding its lower third and right boundary as one continuous 16-bit cavern-and-machinery environment, with a narrow side-entry blue-violet Wound membrane embedded at the far-right deck edge and a small bolted DANGER / ACTIVE WORK placard mounted above it.",
+    "openPromptSummary": "Change only the embedded membrane to a restrained dark traversable recess while preserving the permanent rock-integrated rim, deck, pipes, crystals, palette, and all unrelated room pixels.",
+    "rendering": "nearest-neighbor source normalization; the generated placard is baked into the shared locked base; the open runtime is composited locally through the doorway interior mask so every pixel outside the membrane remains identical"
   },
-  "assets": {
-    "chromaSource": {
-      "path": "Design/Super-Frgmnts/Foundry/Uplink-Gate/Raw/uplink-boss-gate-chroma-source-v1.png",
+  "integratedEnvironment": {
+    "reference": {
+      "path": "Design/Super-Frgmnts/Foundry/Uplink-Gate/Environment/Raw/uplink-room7-lower-reference-v1.png",
       "size": [
-        1360,
-        1157
+        1672,
+        941
       ],
-      "sha256": "e9d83d337881901171ed2ca4c789dc5f1bf70c2482b55dd4ef7c986cb9353666"
+      "sha256": "af58037ba709bad6ad6bc1c4cd9cfde025dcd5d19f40f080438114b1055e48a0"
     },
-    "alphaSource": {
-      "path": "Design/Super-Frgmnts/Foundry/Uplink-Gate/Raw/uplink-boss-gate-alpha-source-v1.png",
+    "lockedSource": {
+      "path": "Design/Super-Frgmnts/Foundry/Uplink-Gate/Environment/Raw/uplink-room7-lower-locked-source-v3.png",
       "size": [
-        1110,
-        940
+        1671,
+        941
       ],
-      "sha256": "5da6601790cd1b82ea33220243b9137dc9aa51c2e2e8bc32448244790d491911"
+      "sha256": "bc56804bebf42f2f0c04e85d2a11a9dd999abd6c6225b730e672fec0d48537fa"
     },
-    "runtime": {
-      "path": "Images/Game/Super-Frgmnts/foundry-uplink-boss-gate-runtime-v1.png",
+    "signGeneratedSource": {
+      "path": "Design/Super-Frgmnts/Foundry/Uplink-Gate/Environment/Raw/uplink-room7-lower-danger-sign-generated-v1.png",
       "size": [
-        444,
-        376
+        1659,
+        948
       ],
-      "sha256": "502f13e35657be6aa650bf3d2e2d85faf79014763302dacf51ff9aef2ab1da71",
-      "alphaExtrema": [
-        0,
-        255
-      ]
+      "sha256": "64cf906e36fad95598a0d25507e76d59d606750880a4a4651228cf8199fed0be"
+    },
+    "openSource": {
+      "path": "Design/Super-Frgmnts/Foundry/Uplink-Gate/Environment/Raw/uplink-room7-lower-open-source-v2.png",
+      "size": [
+        1668,
+        943
+      ],
+      "sha256": "8e1d8a1564016f047a35c624a374f71136489d00da107c69e59e60a7b6555e2e"
+    },
+    "lockedRuntime": {
+      "path": "Images/Game/Super-Frgmnts/foundry-uplink-room7-lower-locked-runtime-v1.png",
+      "size": [
+        1672,
+        941
+      ],
+      "sha256": "9cf1361aad0144b54a2f498a135fa5578a5718f588707cc9735a246f1e2512c3"
+    },
+    "openRuntime": {
+      "path": "Images/Game/Super-Frgmnts/foundry-uplink-room7-lower-open-runtime-v1.png",
+      "size": [
+        1672,
+        941
+      ],
+      "sha256": "3348553819adeab2120cc51f2702d6d79d834c0b29844c058a51a6194e067054"
+    },
+    "placement": {
+      "room": 7,
+      "worldY": 941,
+      "drawWidth": 1672,
+      "drawHeight": 941,
+      "mirroredAtRuntime": false,
+      "environmentTreatment": "The full lower-half plate carries the main deck, lower-third terrain, cavern-rock transition, machinery, right wall, and Wound opening as one authored image."
     }
   },
-  "placement": {
+  "worksiteSign": {
+    "text": [
+      "DANGER",
+      "ACTIVE WORK"
+    ],
+    "treatment": "A small weathered amber-red metal placard with warm block-pixel lettering, corner bolts, and a slight physical cant.",
+    "placement": "Baked into the pipe-and-rock structure directly above the far-right side-entry threshold.",
+    "stateContinuity": "Identical in locked, opening, and open states; it is environmental storytelling, never floating UI."
+  },
+  "runtimeThreshold": {
+    "orientation": "side-entry-right-boundary",
     "room": 7,
-    "worldCenterX": 12988,
-    "bottomY": 1604,
-    "drawWidth": 444,
-    "drawHeight": 376,
+    "wallLocalX": 1580,
+    "wallWidth": 92,
+    "membraneContactLocalX": 1468,
+    "doorWidth": 112,
+    "doorHeight": 320,
     "trigger": {
-      "localX": 1218,
-      "y": 1284,
-      "width": 132,
-      "height": 320
-    }
+      "localX": 1584,
+      "y": 1364,
+      "width": 90,
+      "height": 240
+    },
+    "openingDurationSeconds": 0.72,
+    "openingSound": "Audio/super-frgmnts-atmosphere-lock-shimmer-v1.wav",
+    "collision": "Locked contact stops Aryn at the generated membrane's visible left edge; passage remains blocked until the localized open-state blend is at least 94 percent complete.",
+    "occlusion": "The far-right 92-pixel environment slice is replayed after Aryn so she disappears into the authored wall before the Wound descent begins.",
+    "runway": {
+      "paleWatcherPatrolEndX": 1100,
+      "membraneContactX": 1468,
+      "clearWidth": 368
+    },
+    "progressLanguage": "The standard HUD, mission line, and unlock announcement communicate requirements; the threshold itself remains environmental rather than becoming a status panel.",
+    "label": "The permanent floating label remains retired; the Uplink room eyebrow and one-time unlock announcement carry location and state."
   },
   "states": {
-    "locked": "A dark mechanical shutter closes the aperture; twelve lintel pips show recovered Vesperite Fragment progress.",
-    "open": "The shutter retracts. Restrained cyan square motes move through the otherwise clear passage."
+    "locked": "A restrained blue-violet membrane is recessed into a narrow rock-and-machinery opening at the far-right deck edge.",
+    "opening": "Only the doorway interior blends over 0.72 seconds; every environment pixel outside the membrane remains fixed.",
+    "open": "The membrane resolves to a dark navy side passage while the rock-integrated rim, deck, pipes, crystals, and wall remain unchanged."
   },
-  "replaces": "floating procedural green rectangle and dashed circular energy barrier"
+  "archivedExperiments": {
+    "frontFacingGate": "Images/Game/Super-Frgmnts/foundry-uplink-boss-gate-runtime-v1.png",
+    "isolatedSideLock": "retired before commit; no runtime asset retained",
+    "reason": "Both separate-sprite treatments were visually abrupt against the Uplink plate and are no longer loaded by the runtime."
+  },
+  "replaces": "the freestanding front-facing gate, the isolated reinforced side-lock sprite, the clean concrete boundary slab, and all runtime-drawn gate framing"
 }

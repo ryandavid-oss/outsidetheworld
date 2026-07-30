@@ -7,7 +7,7 @@ import hashlib
 import json
 from pathlib import Path
 
-from PIL import Image
+from PIL import Image, ImageChops
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -72,6 +72,23 @@ def main() -> None:
     )
 
     assert hazard["status"] == "production-runtime"
+    coupler = hazard["assets"]["arcCoupler"]
+    assert coupler["placement"] == {
+        "room": 7,
+        "localX": 520,
+        "drawWidth": 240,
+        "drawHeight": 72,
+        "visualSink": 36,
+        "visualClipBottom": 10,
+        "floorTreatment": (
+            "recessed collision-backed channel with explicit warning rails"
+        ),
+    }
+    assert coupler["cycleSeconds"] == {
+        "safe": 1.6,
+        "warning": 0.6,
+        "active": 1.8,
+    }
     arc = hazard["assets"]["arcDischarge"]
     verify_image(
         arc["chromaSource"],
@@ -91,36 +108,77 @@ def main() -> None:
     )
     assert arc["replaces"] == "procedural parallel zigzag strokes"
 
-    assert gate["status"] == "beta-production"
-    gate_chroma = gate["assets"]["chromaSource"]
-    verify_image(
-        gate_chroma["path"],
-        gate_chroma["size"],
-        gate_chroma["sha256"],
-        require_transparency=False,
-    )
-    gate_alpha = gate["assets"]["alphaSource"]
-    verify_image(
-        gate_alpha["path"],
-        gate_alpha["size"],
-        gate_alpha["sha256"],
-    )
-    gate_runtime = gate["assets"]["runtime"]
-    verify_image(
-        gate_runtime["path"],
-        gate_runtime["size"],
-        gate_runtime["sha256"],
-    )
-    assert gate["placement"]["room"] == 7
-    assert gate["placement"]["bottomY"] == 1604
-    assert gate["placement"]["drawWidth"] == 444
-    assert gate["placement"]["drawHeight"] == 376
-    assert gate["placement"]["trigger"] == {
-        "localX": 1218,
-        "y": 1284,
-        "width": 132,
-        "height": 320,
+    assert gate["status"] == "production-runtime-environment"
+    environment = gate["integratedEnvironment"]
+    for asset_key in (
+        "reference",
+        "lockedSource",
+        "signGeneratedSource",
+        "openSource",
+        "lockedRuntime",
+        "openRuntime",
+    ):
+        asset = environment[asset_key]
+        verify_image(
+            asset["path"],
+            asset["size"],
+            asset["sha256"],
+            require_transparency=False,
+        )
+    assert environment["placement"] == {
+        "room": 7,
+        "worldY": 941,
+        "drawWidth": 1672,
+        "drawHeight": 941,
+        "mirroredAtRuntime": False,
+        "environmentTreatment": (
+            "The full lower-half plate carries the main deck, lower-third "
+            "terrain, cavern-rock transition, machinery, right wall, and "
+            "Wound opening as one authored image."
+        ),
     }
+    assert gate["worksiteSign"] == {
+        "text": ["DANGER", "ACTIVE WORK"],
+        "treatment": (
+            "A small weathered amber-red metal placard with warm "
+            "block-pixel lettering, corner bolts, and a slight physical cant."
+        ),
+        "placement": (
+            "Baked into the pipe-and-rock structure directly above the "
+            "far-right side-entry threshold."
+        ),
+        "stateContinuity": (
+            "Identical in locked, opening, and open states; it is "
+            "environmental storytelling, never floating UI."
+        ),
+    }
+    threshold = gate["runtimeThreshold"]
+    assert threshold["orientation"] == "side-entry-right-boundary"
+    assert threshold["room"] == 7
+    assert threshold["wallLocalX"] == 1580
+    assert threshold["wallWidth"] == 92
+    assert threshold["membraneContactLocalX"] == 1468
+    assert threshold["doorWidth"] == 112
+    assert threshold["doorHeight"] == 320
+    assert threshold["trigger"] == {
+        "localX": 1584,
+        "y": 1364,
+        "width": 90,
+        "height": 240,
+    }
+    assert threshold["openingDurationSeconds"] == 0.72
+    assert threshold["runway"]["clearWidth"] == 368
+    assert "permanent floating label remains retired" in threshold["label"]
+    locked_plate = Image.open(
+        ROOT / environment["lockedRuntime"]["path"]
+    ).convert("RGB")
+    open_plate = Image.open(
+        ROOT / environment["openRuntime"]["path"]
+    ).convert("RGB")
+    assert ImageChops.difference(
+        locked_plate,
+        open_plate,
+    ).getbbox() == (1447, 370, 1537, 655)
 
     assert atmosphere_lock["status"] == "implemented"
     assert atmosphere_lock["placement"]["approach"] == "left-to-right"
@@ -130,17 +188,19 @@ def main() -> None:
     assert atmosphere_lock["seam_wall"]["dimensions"] == [128, 1882]
     assert atmosphere_lock["placement"]["wall_span_y"] == [0, 1882]
     assert atmosphere_lock["placement"]["door_floor_bottom_y"] == (
-        "deckTop + 24"
+        "deckTop + 24, except Biolab → Uplink lands at deckTop"
     )
     assert atmosphere_lock["placement"]["deck_top_y_by_multiplier"] == [
-        338, 338, 600, 600, 338, 1604, 600
+        338, 338, 600, 600, 338, 1508, 600
     ]
     assert atmosphere_lock["placement"]["boundary_multipliers"] == [
         1, 2, 3, 4, 5, 6, 7
     ]
-    assert atmosphere_lock["placement"]["tunnel_floor_width"] == 128
+    assert atmosphere_lock["placement"][
+        "tunnel_floor_width_by_multiplier"
+    ] == [128, 128, 128, 128, 128, 636, 128]
     assert atmosphere_lock["placement"]["tunnel_floor_y_by_multiplier"] == [
-        338, 338, 600, 600, 338, 1604, 600
+        338, 338, 600, 600, 338, 1508, 600
     ]
     assert len(atmosphere_lock["instances"]) == 7
     assert atmosphere_lock["instances"][1]["condition"] == (
@@ -149,6 +209,8 @@ def main() -> None:
     assert atmosphere_lock["instances"][5]["condition"] == (
         "Biolab atmospheric stabilizer active"
     )
+    assert atmosphere_lock["instances"][5]["visual_offset_y"] == -24
+    assert atmosphere_lock["instances"][5]["housing_bottom_y"] == 1508
     assert (
         atmosphere_lock["placement"]["right_door_transform"]
         == "horizontal mirror"
@@ -212,31 +274,41 @@ def main() -> None:
 
     required_runtime = (
         'source: "/Images/Game/Super-Frgmnts/foundry-arc-discharge-runtime-v1.png"',
-        'source: "/Images/Game/Super-Frgmnts/foundry-uplink-boss-gate-runtime-v1.png"',
         'source: "/Images/Game/Super-Frgmnts/foundry-atmosphere-lock-runtime-v1.png"',
         'source: "/Images/Game/Super-Frgmnts/foundry-atmosphere-lock-housing-runtime-v1.png"',
         'source: "/Images/Game/Super-Frgmnts/foundry-atmosphere-lock-membrane-runtime-v1.png"',
+        'source: "/Images/Game/Super-Frgmnts/foundry-uplink-room7-lower-locked-runtime-v1.png"',
+        'source: "/Images/Game/Super-Frgmnts/foundry-uplink-room7-lower-open-runtime-v1.png"',
         'source: "/Images/Game/Super-Frgmnts/foundry-atmosphere-lock-seam-wall-runtime-v1.png"',
         'source: "/Images/Game/Super-Frgmnts/foundry-false-bridge-removal-runtime-v1.png"',
         '"foundryArcDischarge"',
-        '"foundryUplinkBossGate"',
         '"foundryAtmosphereLock"',
         '"foundryAtmosphereLockHousing"',
         '"foundryAtmosphereLockMembrane"',
+        '"foundryUplinkThresholdLocked"',
+        '"foundryUplinkThresholdOpen"',
         '"foundryAtmosphereWall"',
         '"foundryFalseBridgeRemoval"',
         "assets.foundryArcDischarge",
-        "assets.foundryUplinkBossGate",
         "assets.foundryAtmosphereLock",
         "assets.foundryAtmosphereLockHousing",
         "assets.foundryAtmosphereLockMembrane",
+        "assets.foundryUplinkThresholdLocked",
+        "assets.foundryUplinkThresholdOpen",
         "assets.foundryAtmosphereWall",
         "assets.foundryFalseBridgeRemoval",
         "var foundryUplinkQa =",
         'previewParameters.get("qa") === "uplink"',
         "function drawUplink()",
+        "function drawUplinkForeground()",
+        "function updateUplinkGate(",
+        "function constrainUplinkWoundLockMovement(",
+        "UPLINK_WOUND_OPEN_DURATION = 0.72",
         'canvas.dataset.uplinkGateArt =',
-        '"sprite-v1"',
+        '"integrated-room7-lower-third-v1"',
+        '"side-entry-right-boundary"',
+        '"368px-clear-after-pale-watcher"',
+        '"room-eyebrow-only"',
         "var atmosphereLockPortals = [",
         'id: "foundry-intake-breathing"',
         'id: "foundry-refinery"',
@@ -244,6 +316,8 @@ def main() -> None:
         'id: "refinery-biolab"',
         'id: "biolab-culture-specimen"',
         'id: "biolab-uplink"',
+        "visualOffsetY: -24",
+        "(portal.visualOffsetY || 0)",
         'id: "uplink-spine-gate"',
         'requirement: "always"',
         'requirement: "foundry-stabilizer"',
@@ -261,6 +335,7 @@ def main() -> None:
         "canvas.dataset.atmosphereLockFloorBottom",
         "canvas.dataset.atmosphereWallSpan",
         "canvas.dataset.atmosphereLockFloorBridge",
+        "canvas.dataset.uplinkLockApproach",
         "canvas.dataset.atmosphereLockOcclusion",
         "canvas.dataset.atmosphereLockCount",
         "canvas.dataset.atmosphereLockLevels",
@@ -291,6 +366,11 @@ def main() -> None:
     )
     for fragment in required_runtime:
         assert fragment in SOURCE, f"Missing Foundry art token: {fragment}"
+    assert "foundryUplinkWoundLock" not in SOURCE
+    assert (
+        "foundry-uplink-wound-side-lock-runtime-v1.png"
+        not in SOURCE
+    )
 
     assert (
         SOURCE.count(
@@ -303,8 +383,13 @@ def main() -> None:
         == 1
     ), "Concrete walls must be rasterized in exactly one runtime draw path"
 
-    assert "compact branching cyan-white 16-bit sprite" in LEVEL_CONTRACT
-    assert "444 × 376 physical bulkhead" in LEVEL_CONTRACT
+    assert "compact branching cyan-white 16-bit" in LEVEL_CONTRACT
+    assert "room-specific `1672 × 941` lower-half" in LEVEL_CONTRACT
+    assert "visible contact edge" in LEVEL_CONTRACT
+    assert "368 pixels before the Wound-lock membrane" in LEVEL_CONTRACT
+    assert "Every environment" in LEVEL_CONTRACT
+    assert "far-right `92`-pixel environment slice" in LEVEL_CONTRACT
+    assert "previous freestanding front-facing" in LEVEL_CONTRACT
     assert "No magical ring, floating rectangle, or dashed barrier" in (
         LEVEL_CONTRACT
     )
@@ -316,7 +401,8 @@ def main() -> None:
     assert "single full-height foreground concrete pass" in LEVEL_CONTRACT
     assert "steel housing remains permanently visible" in LEVEL_CONTRACT
     assert "pressure membranes reform" in LEVEL_CONTRACT
-    assert "Ground `y = 1604`" in LEVEL_CONTRACT
+    assert "Lower catwalk `y = 1508`" in LEVEL_CONTRACT
+    assert "`636 × 24` collision-backed approach" in LEVEL_CONTRACT
     assert "exactly one opening and one closing cycle" in LEVEL_CONTRACT
     assert "Horizontal background silhouettes must tell the truth" in (
         LEVEL_CONTRACT
@@ -332,11 +418,15 @@ def main() -> None:
     print("SUPER FRGMNTS Uplink gate and arc art: PASS")
     print("- production source, alpha, and runtime hashes match manifests")
     print("- compact sprite discharge replaces procedural zigzag electricity")
-    print("- 444 × 376 bulkhead is rooted at Uplink main deck y=1604")
-    print("- locked/open gate states use one physical passage silhouette")
+    print("- the Uplink lower-half plate embeds its side-entry Wound threshold")
+    print("- locked collision meets the visible membrane edge")
+    print("- the localized open blend leaves every other room pixel fixed")
+    print("- the authored right-wall slice hides Aryn during entry")
+    print("- HUD and mission language expose all three route requirements")
+    print("- Pale Watcher ends 368px before the recovery runway")
     print("- seven permanent housings and retractable membranes cover all seams")
     print("- five cyan passages and two stabilizer locks share one system")
-    print("- locks are distributed across upper, middle, and ground tiers")
+    print("- locks are distributed across upper, middle, and lower tiers")
     print("- membranes close after clearance and reverse safely on return")
     print("- directional re-arm prevents close-open-close exit loops")
     print("- seven walls use one full-height foreground pass for Aryn occlusion")

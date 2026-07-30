@@ -94,14 +94,14 @@
     "wall_span_y": [0, 1882],
     "left_door_x": "boundaryX - 144",
     "right_door_x": "boundaryX + 64",
-    "deck_top_y_by_multiplier": [338, 338, 600, 600, 338, 1604, 600],
-    "door_y": "deckTop + 24 - 206",
-    "door_floor_bottom_y": "deckTop + 24",
-    "tunnel_floor_width": 128,
-    "tunnel_floor_y_by_multiplier": [338, 338, 600, 600, 338, 1604, 600],
+    "deck_top_y_by_multiplier": [338, 338, 600, 600, 338, 1508, 600],
+    "door_y": "deckTop + 24 - 206, except Biolab → Uplink applies a -24 visual offset",
+    "door_floor_bottom_y": "deckTop + 24, except Biolab → Uplink lands at deckTop",
+    "tunnel_floor_width_by_multiplier": [128, 128, 128, 128, 128, 636, 128],
+    "tunnel_floor_y_by_multiplier": [338, 338, 600, 600, 338, 1508, 600],
     "approach": "left-to-right",
     "right_door_transform": "horizontal mirror",
-    "player_occlusion": "The wall sprite is redrawn as a foreground slice from y=156–362 after Aryn, hiding her while she crosses the enclosed divider."
+    "player_occlusion": "The wall sprite is redrawn full-height after Aryn, hiding her while she crosses the enclosed divider at any of the seven deck heights."
   },
   "instances": [
     {
@@ -143,7 +143,10 @@
     {
       "multiplier": 6,
       "transition": "Biolab → Uplink",
-      "deck_top_y": 1604,
+      "deck_top_y": 1508,
+      "visual_offset_y": -24,
+      "housing_bottom_y": 1508,
+      "approach_width": 636,
       "condition": "Biolab atmospheric stabilizer active",
       "standby_color": "red",
       "ready_color": "green"

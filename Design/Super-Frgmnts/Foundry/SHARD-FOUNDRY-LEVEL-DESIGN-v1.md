@@ -83,7 +83,7 @@ disappear-and-emerge spatial language.
 | `WIDTH × 3` | Compression Line → Pressure Exchange | Middle `y = 600` | Cyan; always available and proximity-open |
 | `WIDTH × 4` | Refinery → Biolab | Middle `y = 600` | Cyan; always available and proximity-open |
 | `WIDTH × 5` | Culture Vats → Specimen Stabilizer | Upper `y = 338` | Cyan; always available and proximity-open |
-| `WIDTH × 6` | Biolab → Uplink | Ground `y = 1604` | Red until the Biolab stabilizer; green and proximity-open afterward |
+| `WIDTH × 6` | Biolab → Uplink | Lower catwalk `y = 1508` | Red until the Biolab stabilizer; green and proximity-open afterward |
 | `WIDTH × 7` | Signal Spine → Uplink Gate plate | Middle `y = 600` | Cyan; always available and proximity-open |
 
 Ordinary cyan portals do not announce themselves and retract in `0.58` seconds,
@@ -101,6 +101,12 @@ Enemy annihilation never locks a seam portal, and Vesperite Fragment recovery
 remains a final Uplink Gate requirement rather than an intermediate door tax.
 The custom Uplink bulkhead remains separate and still requires twelve
 fragments, both stabilizers, and the cleared physical Vesperite lock.
+The Biolab/Uplink objective lock uses a `636 × 24` collision-backed approach
+at `y = 1508`, exactly joining the mirrored Biolab lower catwalk to the Uplink
+lower catwalk. Its paired housings alone render 24 pixels above the generic
+seam anchor so their feet meet that walking plane; the membrane proximity
+threshold, player collision, and tunnel floor remain at `y = 1508` rather
+than the lower world ground at `y = 1604`.
 
 ## Zone-by-zone critical path
 
@@ -260,23 +266,40 @@ and enters the final plate with a recovery opportunity.
 - Seam Lurker patrols the underside of the upper catwalk at `y = 362`,
   physically rooted by two visible attachment brackets. It never shares the
   deck hazard footprint.
-- A 280-pixel broken arc coupler begins at local `x = 830`. Its short
-  1.15-second discharged state and 0.45-second warning are followed by a
-  three-second live state. The intended solution is the insulated upper
-  transfer or the earned jet-assist; waiting remains possible. The active
-  discharge is a compact branching cyan-white 16-bit sprite rather than a
-  procedural parallel waveform.
-- Pale Watcher patrol begins at local `x = 1230`, leaving a full player-width
-  of stable recovery runway beyond the coupler.
+- A 240-pixel broken arc coupler begins at local `x = 520`. It is recessed
+  into the walking surface with explicit end rails rather than resting on the
+  deck like loose machinery. Its 1.6-second discharged state and 0.6-second
+  warning are followed by a 1.8-second live state. The intended solution is
+  the insulated upper transfer, a read-and-run floor crossing, or the earned
+  jet-assist. The active discharge is a compact branching cyan-white 16-bit
+  sprite rather than a procedural parallel waveform.
+- Pale Watcher patrols local `x = 880–1100`, after the coupler but before the
+  final approach. Its patrol ends 368 pixels before the Wound-lock membrane,
+  preserving a calm recovery runway after the room's last threat.
 - The twelfth Vesperite Fragment sits in the left Uplink maintenance alcove at world
   `(WIDTH × 7 + 430, 548)`, 788 pixels before the gate trigger.
 - The gate never claims to be open while a stabilizer or the Vesperite lock remains
   incomplete.
-- The gate is a 444 × 376 physical bulkhead rooted to the main deck at
-  `y = 1604`.
-  Its locked state uses a mechanical shutter and twelve lintel progress pips;
-  its open state retracts the shutter and leaves a clear passage with restrained
-  motes. No magical ring, floating rectangle, or dashed barrier is permitted.
+- Wound access is drawn directly into a room-specific `1672 × 941` lower-half
+  Uplink environment plate at world `y = 941`. The deck, lower-third terrain,
+  rock, frost, crystals, pipes, right wall, and narrow side-entry pressure
+  opening are one authored image rather than layered gate sprites. Aryn always
+  approaches from the left. The blue-violet membrane's visible contact edge
+  is local `x = 1468`; the authored wall occlusion begins at local `x = 1580`.
+- A small weathered `DANGER / ACTIVE WORK` placard is physically bolted into
+  the pipe-and-rock structure above the opening. It remains baked into both
+  doorway states as worksite storytelling, never as a floating status label.
+- Completing all requirements blends only the doorway interior from locked to
+  open over `0.72` seconds with the supplied shimmer cue. Every environment
+  pixel outside the membrane remains fixed. The HUD, mission line, and unlock
+  announcement communicate requirements so the threshold does not become a
+  pasted-on status panel.
+- Aryn passes into the authored boundary and is hidden by replaying the
+  far-right `92`-pixel environment slice as foreground before the Wound
+  descent. The previous freestanding front-facing `444 × 376` frame, isolated
+  side-lock sprite, clean concrete slab, and permanent `WOUND ACCESS` label
+  are retired. No magical ring, floating rectangle, or dashed barrier is
+  permitted.
 
 **Exit state:** clear boss-transition read, no enemy or hazard inside the gate
 footprint. Entering the complete gate freezes Foundry state and establishes

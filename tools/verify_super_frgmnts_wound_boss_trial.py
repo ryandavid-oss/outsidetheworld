@@ -344,6 +344,9 @@ REQUIRED_SNIPPETS = {
     "shaft-sentry guard": (
         'enemy.behavior === "shaft-guard"'
     ),
+    "portal-bay guard counterattack": (
+        "distance <= 360"
+    ),
     "high-gantry pose trigger": (
         "playerOnWoundGantry"
     ),

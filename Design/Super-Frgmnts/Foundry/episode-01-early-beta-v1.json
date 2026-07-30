@@ -22,8 +22,8 @@
     "electric_landing_grace_seconds": 0.28,
     "thermal_purge_cycle_seconds": 3.4,
     "thermal_purge_live_seconds": 0.95,
-    "arc_coupler_cycle_seconds": 4.6,
-    "arc_coupler_live_seconds": 3.0,
+    "arc_coupler_cycle_seconds": 4.0,
+    "arc_coupler_live_seconds": 1.8,
     "damage_rule": "No damage may begin in a room transition, mandatory landing, stabilizer interaction, or pickup collection footprint.",
     "recovery_rule": "Each recovery heart sits after a challenge beat and never on an ordinary room spawn."
   },
@@ -65,8 +65,8 @@
         7
       ],
       "purpose": "Run a short armored final exam, recover the last Vesperite Fragment in a maintenance alcove, then deliberately travel to the Uplink Gate.",
-      "challenge_peak": "Chitin Sentinel, then an upper-route or jet-assisted broken arc-coupler crossing and a separated Pale Watcher guard.",
-      "recovery": "Heart on the upper route before the final plate."
+      "challenge_peak": "Chitin Sentinel, then an embedded read-and-run or jet-assisted arc-coupler crossing and a separated Pale Watcher guard.",
+      "recovery": "Heart on the upper route before the final plate, followed by a 324-pixel calm runway from the Pale Watcher patrol to the Wound lock."
     },
     {
       "zone": "Deepworks",
@@ -178,9 +178,9 @@
       {
         "id": "uplink-arc-leak",
         "sprite": "Images/Game/Super-Frgmnts/foundry-arc-coupler-runtime-v1.png",
-        "local_x": 830,
-        "width": 280,
-        "solution": "take the insulated upper transfer or use earned jet-assist"
+        "local_x": 520,
+        "width": 240,
+        "solution": "read the recessed warning rails and cross during discharge, take the insulated upper transfer, or use earned jet-assist"
       }
     ],
     "electrified_platforms": 1,

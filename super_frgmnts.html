@@ -3393,6 +3393,13 @@
             var desktopBackgroundCropTrial =
                 requestedRenderProfile === "desktop-crop" &&
                 !mobileRuntime;
+            var pixelBudgetRenderTrial =
+                requestedRenderProfile === "pixel-budget";
+            var RENDER_PIXEL_BUDGET = 2000000;
+            var requestedLoadProfile =
+                previewParameters.get("load-profile") || "default";
+            var productionScaleLoadRequested =
+                requestedLoadProfile === "production-scale";
             var requestedFrameProfile =
                 previewParameters.get("frame-profile") || "default";
             var desktopSixtyFrameTrial =
@@ -3400,9 +3407,12 @@
                 !mobileRuntime;
             var frameMeterRequested =
                 requestedFrameProfile === "monitor";
+            var frameBenchmarkRequested =
+                requestedFrameProfile === "benchmark";
             var frameTelemetryActive =
                 desktopSixtyFrameTrial ||
-                frameMeterRequested;
+                frameMeterRequested ||
+                frameBenchmarkRequested;
             var requestedEffectsProfile =
                 previewParameters.get("effects-profile") || "default";
             var desktopNoBlurTrial =
@@ -3483,6 +3493,12 @@
             var foundryUplinkQa =
                 expansionPreview &&
                 previewParameters.get("qa") === "uplink";
+            var foundryUplinkOpenQa =
+                foundryUplinkQa &&
+                previewParameters.get("gate") === "open";
+            var foundryUplinkTransitQa =
+                foundryUplinkQa &&
+                previewParameters.get("transit") === "1";
             var falseAffordanceQa =
                 expansionPreview &&
                 previewParameters.get("qa") ===
@@ -3768,6 +3784,10 @@
             var COREWORKS_TRANSPORT_DURATION = 1.625;
             var prefersReducedMotion =
                 window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+            var PRODUCTION_SCALE_ENEMY_MULTIPLIER = 3;
+            var PRODUCTION_SCALE_SHARD_MULTIPLIER = 2;
+            var FRAME_BENCHMARK_WARMUP_MS = 2000;
+            var FRAME_BENCHMARK_SAMPLE_MS = 10000;
             var START_TIME =
                 overworldPreview || expansionPreview || woundBossPreview
                     ? 480
@@ -3777,7 +3797,11 @@
                 : woundBossPreview
                     ? 0
                 : episodeBetaRun
-                    ? 12
+                    ? 12 * (
+                        productionScaleLoadRequested
+                            ? PRODUCTION_SCALE_SHARD_MULTIPLIER
+                            : 1
+                    )
                     : expansionPreview
                         ? 0
                         : 12;
@@ -4772,10 +4796,6 @@
                     source: "/Images/Game/Super-Frgmnts/foundry-arc-discharge-runtime-v1.png",
                     priority: "high"
                 },
-                foundryUplinkBossGate: {
-                    source: "/Images/Game/Super-Frgmnts/foundry-uplink-boss-gate-runtime-v1.png",
-                    priority: "high"
-                },
                 foundryAtmosphereLock: {
                     source: "/Images/Game/Super-Frgmnts/foundry-atmosphere-lock-runtime-v1.png",
                     priority: "high"
@@ -4786,6 +4806,14 @@
                 },
                 foundryAtmosphereLockMembrane: {
                     source: "/Images/Game/Super-Frgmnts/foundry-atmosphere-lock-membrane-runtime-v1.png",
+                    priority: "high"
+                },
+                foundryUplinkThresholdLocked: {
+                    source: "/Images/Game/Super-Frgmnts/foundry-uplink-room7-lower-locked-runtime-v1.png",
+                    priority: "high"
+                },
+                foundryUplinkThresholdOpen: {
+                    source: "/Images/Game/Super-Frgmnts/foundry-uplink-room7-lower-open-runtime-v1.png",
                     priority: "high"
                 },
                 foundryAtmosphereWall: {
@@ -5036,7 +5064,6 @@
                 "foundryThermalPurgeVent",
                 "foundryArcCoupler",
                 "foundryArcDischarge",
-                "foundryUplinkBossGate",
                 "foundryAtmosphereLock",
                 "foundryAtmosphereLockHousing",
                 "foundryAtmosphereLockMembrane",
@@ -5078,7 +5105,9 @@
             var foundryLowerAssetKeys = [
                 "foundryLower1",
                 "foundryLower2",
-                "foundryLower3"
+                "foundryLower3",
+                "foundryUplinkThresholdLocked",
+                "foundryUplinkThresholdOpen"
             ];
             var woundBossAssetKeys = [
                 "woundBossBackgroundLeft",
@@ -5300,6 +5329,14 @@
             var frameTelemetryStarted = 0;
             var frameTelemetryCallbacks = 0;
             var frameTelemetryDraws = 0;
+            var frameBenchmarkStatus = "idle";
+            var frameBenchmarkPhaseStarted = 0;
+            var frameBenchmarkLastFrame = 0;
+            var frameBenchmarkLastBadge = 0;
+            var frameBenchmarkIntervals = [];
+            var frameBenchmarkUpdateDurations = [];
+            var frameBenchmarkDrawDurations = [];
+            var frameBenchmarkWorkDurations = [];
             var runFrameTime = 0;
             var jumpBuffer = 0;
             var coyoteTime = 0;
@@ -6257,6 +6294,14 @@
             var ATMOSPHERE_LOCK_GATE_CLEARANCE = 72;
             var ATMOSPHERE_LOCK_DOOR_WIDTH = 80;
             var ATMOSPHERE_LOCK_CLEAR_MARGIN = 8;
+            var UPLINK_WOUND_WALL_LOCAL_X = 1580;
+            var UPLINK_WOUND_WALL_WIDTH = 92;
+            var UPLINK_WOUND_DOOR_WIDTH = 112;
+            var UPLINK_WOUND_DOOR_HEIGHT = 320;
+            var UPLINK_WOUND_TRIGGER_LOCAL_X = 1584;
+            var UPLINK_WOUND_OPEN_DURATION = 0.72;
+            var uplinkGateOpenProgress = 0;
+            var uplinkGateOpenSoundPlayed = false;
             var atmosphereLockPortals = [
                 {
                     id: "foundry-intake-breathing",
@@ -6301,7 +6346,9 @@
                 {
                     id: "biolab-uplink",
                     boundaryX: WIDTH * 6,
-                    deckTop: GROUND_Y,
+                    deckTop: 1508,
+                    visualOffsetY: -24,
+                    approachWidth: 636,
                     requirement: "biolab-stabilizer",
                     fromZone: "BIOLAB",
                     toZone: "UPLINK"
@@ -6503,12 +6550,15 @@
                 });
 
                 atmosphereLockPortals.forEach(function (portal) {
+                    var tunnelWidth =
+                        portal.approachWidth ||
+                        FOUNDRY_REFINERY_WALL_WIDTH;
                     previewPlatforms.push({
                         x:
                             portal.boundaryX -
-                            FOUNDRY_REFINERY_WALL_WIDTH / 2,
+                            tunnelWidth / 2,
                         y: portal.deckTop,
-                        width: FOUNDRY_REFINERY_WALL_WIDTH,
+                        width: tunnelWidth,
                         height: 24,
                         artIntegrated: true,
                         atmosphereLockTunnelFloor: true,
@@ -6583,17 +6633,18 @@
                     {
                         id: "uplink-arc-leak",
                         kind: "arc",
-                        x: WIDTH * 7 + 830,
+                        x: WIDTH * 7 + 520,
                         y: GROUND_Y,
-                        width: 280,
-                        baseHeight: 100,
-                        activeHeight: 122,
-                        visualSink: 52,
-                        safeDuration: 1.15,
-                        warningDuration: 0.45,
-                        activeDuration: 3,
+                        width: 240,
+                        baseHeight: 72,
+                        activeHeight: 72,
+                        visualSink: 36,
+                        visualClipBottom: 10,
+                        safeDuration: 1.6,
+                        warningDuration: 0.6,
+                        activeDuration: 1.8,
                         phase: 2.2,
-                        label: "ARC COUPLER"
+                        label: "ARC DISCHARGE"
                     }
                 ];
             }
@@ -6682,10 +6733,12 @@
             if (expansionPreview) {
                 hazards = buildEpisodeBetaHazards();
                 uplink = {
-                    x: (SCREEN_COUNT - 1) * WIDTH + 1218,
-                    y: GROUND_Y - 320,
-                    width: 132,
-                    height: 320
+                    x:
+                        (SCREEN_COUNT - 1) * WIDTH +
+                        UPLINK_WOUND_TRIGGER_LOCAL_X,
+                    y: GROUND_Y - 240,
+                    width: 90,
+                    height: 240
                 };
             }
             if (woundBossPreview) {
@@ -6821,6 +6874,18 @@
                         ? "high"
                         : "low");
                 });
+                if (roomIndex >= 6) {
+                    [
+                        "foundryUplinkThresholdLocked",
+                        "foundryUplinkThresholdOpen"
+                    ].forEach(function (key) {
+                        desired[key] = true;
+                        requestAsset(
+                            key,
+                            roomIndex === 7 ? "high" : "low"
+                        );
+                    });
+                }
 
                 foundryLowerAssetKeys.forEach(function (key) {
                     if (!desired[key]) {
@@ -6908,7 +6973,7 @@
 
                 var canvasBounds =
                     canvas.getBoundingClientRect();
-                var renderPixelRatio =
+                var nativeRenderPixelRatio =
                     desktopOneXRenderTrial
                         ? 1
                         : Math.min(
@@ -6918,6 +6983,25 @@
                                 window.devicePixelRatio || 1
                             )
                         );
+                var cssRenderPixels = Math.max(
+                    1,
+                    (canvasBounds.width || viewWidth) *
+                        (canvasBounds.height || HEIGHT)
+                );
+                var budgetRenderPixelRatio = Math.sqrt(
+                    RENDER_PIXEL_BUDGET /
+                        cssRenderPixels
+                );
+                var renderPixelRatio =
+                    pixelBudgetRenderTrial
+                        ? Math.min(
+                            nativeRenderPixelRatio,
+                            Math.max(
+                                1,
+                                budgetRenderPixelRatio
+                            )
+                        )
+                        : nativeRenderPixelRatio;
                 var backingWidth = Math.max(
                     1,
                     Math.round(
@@ -6949,6 +7033,13 @@
                     renderScaleY.toFixed(4);
                 canvas.dataset.renderPixelRatio =
                     renderPixelRatio.toFixed(2);
+                canvas.dataset.renderPixels = String(
+                    backingWidth * backingHeight
+                );
+                canvas.dataset.renderPixelBudget =
+                    pixelBudgetRenderTrial
+                        ? String(RENDER_PIXEL_BUDGET)
+                        : "none";
                 canvas.dataset.renderGrid =
                     "display-native-camera-snapped-v1";
                 canvas.dataset.renderProfile =
@@ -6956,6 +7047,8 @@
                         ? "desktop-1x-trial"
                         : desktopBackgroundCropTrial
                             ? "desktop-crop-trial"
+                        : pixelBudgetRenderTrial
+                            ? "pixel-budget-trial"
                         : requestedRenderProfile ===
                             "desktop-1x" ||
                             requestedRenderProfile ===
@@ -6963,9 +7056,13 @@
                             ? "default-mobile-guard"
                             : "default";
                 canvas.dataset.renderProfileScope =
-                    "desktop-opt-in-only";
+                    pixelBudgetRenderTrial
+                        ? "query-opt-in-all-devices"
+                        : "desktop-opt-in-only";
                 canvas.dataset.frameProfile =
-                    frameMeterRequested
+                    frameBenchmarkRequested
+                        ? "benchmark"
+                    : frameMeterRequested
                         ? "monitor"
                         : desktopSixtyFrameTrial
                         ? "desktop-60-trial"
@@ -6974,9 +7071,16 @@
                             ? "default-mobile-guard"
                             : "default";
                 canvas.dataset.frameProfileScope =
-                    frameMeterRequested
+                    frameMeterRequested ||
+                    frameBenchmarkRequested
                         ? "query-opt-in-all-devices"
                         : "desktop-opt-in-only";
+                canvas.dataset.loadProfile =
+                    productionScaleLoadRequested
+                        ? episodeBetaRun
+                            ? "production-scale-v1"
+                            : "unavailable-foundry-only"
+                        : "default";
                 canvas.dataset.effectsProfile =
                     desktopNoBlurTrial &&
                     shadowBlurTrialApplied
@@ -6993,7 +7097,8 @@
                     !frameTelemetryActive;
                 performanceTrialBadge.classList.toggle(
                     "is-fps-monitor",
-                    frameMeterRequested
+                    frameMeterRequested ||
+                    frameBenchmarkRequested
                 );
 
                 cameraX = Math.max(0, Math.min(WORLD_WIDTH - viewWidth, cameraX));
@@ -7379,6 +7484,7 @@
                 hits = 0;
                 electricLandingGrace = 0;
                 runFrameTime = 0;
+                resetFrameBenchmark();
                 jumpBuffer = 0;
                 coyoteTime = 0;
                 landPoseTime = 0;
@@ -7496,7 +7602,9 @@
                     : foundryUplinkQa
                         ? WIDTH * 7 + 1120
                     : completionCollisionQa
-                        ? WIDTH * 7 + 1228
+                        ? WIDTH * 7 +
+                            UPLINK_WOUND_TRIGGER_LOCAL_X +
+                            10
                     : deathCycleQa
                         ? WIDTH * 3 + 920
                     : falseAffordanceQa
@@ -7816,9 +7924,11 @@
                             {
                                 id: "qa-completion-collision",
                                 kind: "thermal",
-                                x: WIDTH * 7 + 1218,
+                                x:
+                                    WIDTH * 7 +
+                                    UPLINK_WOUND_TRIGGER_LOCAL_X,
                                 y: GROUND_Y,
-                                width: 132,
+                                width: 90,
                                 baseHeight: 42,
                                 activeHeight: 148,
                                 label: "QA COMPLETION COLLISION"
@@ -7831,6 +7941,33 @@
                 } else {
                     delete canvas.dataset.completionCollisionQa;
                 }
+                if (foundryUplinkOpenQa) {
+                    collected = TOTAL_SHARDS;
+                    atmosphericStabilizers.forEach(function (
+                        stabilizer
+                    ) {
+                        stabilizer.active = true;
+                        stabilizer.activating = false;
+                        stabilizer.activationElapsed =
+                            STABILIZER_ACTIVATION_DURATION;
+                    });
+                    rifleObstacles.forEach(function (obstacle) {
+                        if (obstacle.routeGate) {
+                            obstacle.destroyed = true;
+                            obstacle.state = "rubble";
+                        }
+                    });
+                    canvas.dataset.uplinkGateQa =
+                        "open-review";
+                } else {
+                    delete canvas.dataset.uplinkGateQa;
+                }
+                uplinkGateOpenProgress =
+                    completionCollisionQa
+                        ? 1
+                        : 0;
+                uplinkGateOpenSoundPlayed =
+                    completionCollisionQa;
                 if (woundBossPreview) {
                     document.querySelector(
                         ".mission strong"
@@ -8069,6 +8206,7 @@
                 if (shipInteriorPreview) {
                     enemies = [];
                 }
+                applyProductionScaleLoad();
                 canvas.dataset.enemyRoster = enemies
                     .map(function (enemy) {
                         return enemy.type;
@@ -8171,7 +8309,13 @@
                             ? "Chitin Sentinel trial started. Its armor requires five telescopic laser seeker hits."
                             : expansionPreview
                                 ? episodeOneRun
-                                    ? "The Shard Foundry beta started. Restore two atmospheric stabilizers and recover twelve Vesperite Fragments."
+                                    ? productionScaleLoadActive()
+                                        ? "Production-scale Foundry benchmark started with " +
+                                            enemies.length +
+                                            " enemies and " +
+                                            shards.length +
+                                            " Vesperite Fragments."
+                                        : "The Shard Foundry beta started. Restore two atmospheric stabilizers and recover twelve Vesperite Fragments."
                                     : "Unified world traversal survey started. Reach the Uplink Gate."
                                 : "Run started. Twelve Vesperite Fragments remain."
                     );
@@ -8369,6 +8513,43 @@
                             allStabilizersOnline() &&
                             requiredRouteObstructionsCleared()
                         )
+                    )
+                );
+            }
+
+            function updateUplinkGate(delta) {
+                if (!expansionPreview) {
+                    uplinkGateOpenProgress = 0;
+                    return;
+                }
+                var target = uplinkRequirementsMet() ? 1 : 0;
+                if (uplinkGateOpenProgress === target) return;
+                if (
+                    target === 1 &&
+                    uplinkGateOpenProgress === 0 &&
+                    !uplinkGateOpenSoundPlayed
+                ) {
+                    uplinkGateOpenSoundPlayed = true;
+                    playSoundEffect(
+                        "atmosphereLockShimmer",
+                        0.82
+                    );
+                }
+                var step =
+                    delta /
+                    (
+                        target > uplinkGateOpenProgress
+                            ? UPLINK_WOUND_OPEN_DURATION
+                            : 0.34
+                    );
+                uplinkGateOpenProgress = Math.max(
+                    0,
+                    Math.min(
+                        1,
+                        uplinkGateOpenProgress +
+                            (target > uplinkGateOpenProgress
+                                ? step
+                                : -step)
                     )
                 );
             }
@@ -9745,7 +9926,7 @@
                     ["gaunt", WIDTH * 5 + 500, GROUND_Y, WIDTH * 5 + 340, WIDTH * 5 + 700, 66, 4],
                     ["skree", WIDTH * 6 + 520, GROUND_Y, WIDTH * 6 + 330, WIDTH * 6 + 760, 64, 3],
                     ["seamLurker", WIDTH * 7 + 430, 362, WIDTH * 7 + 110, WIDTH * 7 + 520, 72, 2],
-                    ["paleWatcher", WIDTH * 7 + 1300, GROUND_Y, WIDTH * 7 + 1230, WIDTH * 7 + 1510, -62, 3]
+                    ["paleWatcher", WIDTH * 7 + 990, GROUND_Y, WIDTH * 7 + 880, WIDTH * 7 + 1100, -62, 3]
                 ].forEach(function (placement) {
                     betaEnemies.push(
                         configureBetaEnemy(
@@ -9771,6 +9952,190 @@
                 canvas.dataset.betaRetiredEnemies =
                     "spore-wisp,clacker-beetle,ridge-skitter";
                 return betaEnemies;
+            }
+
+            function productionScaleLoadActive() {
+                return (
+                    productionScaleLoadRequested &&
+                    episodeBetaRun
+                );
+            }
+
+            function distributeProductionScaleEnemy(
+                enemy,
+                cohort,
+                index
+            ) {
+                enemy.benchmarkCohort = cohort;
+                enemy.phase =
+                    (
+                        (cohort * 11 + index * 7) % 24
+                    ) /
+                    24 *
+                    Math.PI *
+                    2;
+                enemy.shootTimer =
+                    3.8 +
+                    (
+                        (cohort * 5 + index * 3) % 9
+                    ) *
+                    0.32;
+
+                if (enemy.surfaceCrawler) {
+                    enemy.edge = cohort % 4;
+                    enemy.edgeProgress =
+                        0.16 +
+                        (
+                            (cohort * 3 + index * 2) % 6
+                        ) *
+                        0.12;
+                    enemy.cornerFrom = null;
+                    enemy.cornerProgress = 0;
+                    updateSurfaceCrawler(enemy, 0);
+                    return enemy;
+                }
+
+                if (
+                    Number.isFinite(enemy.minX) &&
+                    Number.isFinite(enemy.maxX)
+                ) {
+                    var availableTravel = Math.max(
+                        0,
+                        enemy.maxX -
+                            enemy.minX -
+                            enemy.width
+                    );
+                    var laneFraction =
+                        (
+                            (cohort * 7 + index * 3) % 11
+                        ) /
+                        10;
+                    enemy.x =
+                        enemy.minX +
+                        availableTravel *
+                        laneFraction;
+                }
+                if ((cohort + index) % 2 === 1) {
+                    enemy.vx *= -1;
+                }
+                enemy.facing = enemy.vx < 0 ? -1 : 1;
+                return enemy;
+            }
+
+            function makeProductionScaleShardClone(
+                shard,
+                index
+            ) {
+                var roomIndex = Math.max(
+                    0,
+                    Math.min(
+                        SCREEN_COUNT - 1,
+                        Math.floor(shard.x / WIDTH)
+                    )
+                );
+                var roomStart = roomIndex * WIDTH;
+                var localX = shard.x - roomStart;
+                var horizontalDirection =
+                    index % 2 === 0 ? 1 : -1;
+                var clone = makeShard(
+                    roomStart +
+                        Math.max(
+                            80,
+                            Math.min(
+                                WIDTH - 80,
+                                localX +
+                                    horizontalDirection *
+                                    (
+                                        74 +
+                                        index % 3 * 22
+                                    )
+                            )
+                        ),
+                    Math.max(
+                        80,
+                        Math.min(
+                            WORLD_HEIGHT - 80,
+                            shard.y +
+                                (
+                                    index % 2 === 0
+                                        ? 64
+                                        : -64
+                                )
+                        )
+                    ),
+                    shard.color
+                );
+                clone.bob =
+                    (
+                        (index * 5 + 3) % 17
+                    ) /
+                    17 *
+                    Math.PI *
+                    2;
+                clone.benchmarkClone = true;
+                return clone;
+            }
+
+            function applyProductionScaleLoad() {
+                if (!productionScaleLoadActive()) {
+                    delete canvas.dataset.loadProfileBaseEnemies;
+                    delete canvas.dataset.loadProfileEnemyMultiplier;
+                    delete canvas.dataset.loadProfileShardMultiplier;
+                    delete canvas.dataset.loadProfileLayout;
+                    delete canvas.dataset.loadProfileDamage;
+                    return;
+                }
+
+                var baseEnemyCount = enemies.length;
+                for (
+                    var cohort = 1;
+                    cohort < PRODUCTION_SCALE_ENEMY_MULTIPLIER;
+                    cohort += 1
+                ) {
+                    makeEpisodeBetaEnemies().forEach(function (
+                        enemy,
+                        index
+                    ) {
+                        enemies.push(
+                            distributeProductionScaleEnemy(
+                                enemy,
+                                cohort,
+                                index
+                            )
+                        );
+                    });
+                }
+
+                var baseShards = shards.slice();
+                for (
+                    var shardCohort = 1;
+                    shardCohort <
+                        PRODUCTION_SCALE_SHARD_MULTIPLIER;
+                    shardCohort += 1
+                ) {
+                    baseShards.forEach(function (shard, index) {
+                        shards.push(
+                            makeProductionScaleShardClone(
+                                shard,
+                                index
+                            )
+                        );
+                    });
+                }
+
+                TOTAL_SHARDS = shards.length;
+                canvas.dataset.loadProfile =
+                    "production-scale-v1";
+                canvas.dataset.loadProfileBaseEnemies =
+                    String(baseEnemyCount);
+                canvas.dataset.loadProfileEnemyMultiplier =
+                    String(PRODUCTION_SCALE_ENEMY_MULTIPLIER);
+                canvas.dataset.loadProfileShardMultiplier =
+                    String(PRODUCTION_SCALE_SHARD_MULTIPLIER);
+                canvas.dataset.loadProfileLayout =
+                    "distributed-eight-room";
+                canvas.dataset.loadProfileDamage =
+                    "suppressed-for-repeatability";
             }
 
             function surfaceEdgePoint(platform, edge, progress) {
@@ -10392,7 +10757,11 @@
                 DRAS_DRAW_Y = GROUND_Y - 100;
                 START_TIME = 480;
                 TOTAL_SHARDS = isFoundry
-                    ? 12
+                    ? 12 * (
+                        productionScaleLoadRequested
+                            ? PRODUCTION_SCALE_SHARD_MULTIPLIER
+                            : 1
+                    )
                     : isWound && episodeWoundSnapshot
                         ? episodeWoundSnapshot.collected
                         : 0;
@@ -11486,6 +11855,50 @@
                 constrainAtmosphereLockMovement(
                     previousPlayerX
                 );
+            }
+
+            function constrainUplinkWoundLockMovement(
+                previousPlayerX
+            ) {
+                if (
+                    !expansionPreview ||
+                    uplinkGateOpenProgress >= 0.94
+                ) {
+                    return;
+                }
+
+                var roomStart =
+                    (SCREEN_COUNT - 1) * WIDTH;
+                var wallX =
+                    roomStart +
+                    UPLINK_WOUND_WALL_LOCAL_X;
+                var doorX =
+                    wallX -
+                    UPLINK_WOUND_DOOR_WIDTH;
+                var doorY =
+                    GROUND_Y +
+                    24 -
+                    UPLINK_WOUND_DOOR_HEIGHT;
+                var bodyTop = player.y + 18;
+                var bodyBottom = player.y + 100;
+                var overlapsDoor =
+                    bodyBottom > doorY + 8 &&
+                    bodyTop < GROUND_Y + 18;
+                var contactX =
+                    overlapsDoor ? doorX : wallX;
+                var previousCenter =
+                    previousPlayerX + 56;
+                var currentBodyRight =
+                    player.x + 78;
+
+                if (
+                    previousCenter < contactX &&
+                    currentBodyRight > contactX &&
+                    previousCenter > contactX - 220
+                ) {
+                    player.x = contactX - 78;
+                    player.vx = Math.min(0, player.vx);
+                }
             }
 
             function constrainRifleObstacleMovement(previousPlayerX) {
@@ -13411,6 +13824,7 @@
                     updateTrillian(delta);
                     updateAtmosphericStabilizers(delta);
                     updateRifleObstacles(delta);
+                    updateUplinkGate(delta);
                 }
                 if (shipInteriorActive) {
                     updateShipTrillian(delta);
@@ -13493,6 +13907,9 @@
                     atmosphereLockCycleQa &&
                     elapsed < 1.45
                         ? 1
+                        : foundryUplinkTransitQa &&
+                            elapsed < 2.6
+                            ? 1
                         : (keys.right ? 1 : 0) -
                             (keys.left ? 1 : 0);
                 var direction =
@@ -13585,6 +14002,9 @@
                     Math.min(playerMaximumX, player.x)
                 );
                 constrainAtmosphereLockMovement(
+                    previousPlayerX
+                );
+                constrainUplinkWoundLockMovement(
                     previousPlayerX
                 );
                 constrainRifleObstacleMovement(previousPlayerX);
@@ -15839,6 +16259,16 @@
                         );
                     } else if (
                         !playerIsAbove &&
+                        enemy.attackCooldown <= 0 &&
+                        distance <= 360
+                    ) {
+                        // Once the encounter is active, backing into the
+                        // portal bay must not create a risk-free firing
+                        // pocket. The existing telegraphed sweep reaches
+                        // into the threshold before the sentry resets.
+                        beginWoundBossAttack(enemy);
+                    } else if (
+                        !playerIsAbove &&
                         enemy.laserCooldown <= 0 &&
                         distance > 360
                     ) {
@@ -17669,6 +18099,7 @@
             }
 
             function takeHit(label) {
+                if (productionScaleLoadActive()) return;
                 if (invulnerableTime > 0 || state !== "running") return;
                 hits += 1;
                 invulnerableTime =
@@ -19131,6 +19562,7 @@
                 drawEnergyOrbs();
                 drawBolts();
                 drawPlayer();
+                drawUplinkForeground();
                 drawFoundryAtmosphereLockForeground();
                 drawPopups();
                 ctx.restore();
@@ -19309,7 +19741,27 @@
                         blueprint.mirror
                     );
 
-                    var lowerBackground = assets[blueprint.lowerKey];
+                    var usesIntegratedUplinkThreshold =
+                        room === SCREEN_COUNT - 1 &&
+                        imageHasPixels(
+                            assets.foundryUplinkThresholdLocked
+                        );
+                    var uplinkThresholdFullyOpen =
+                        usesIntegratedUplinkThreshold &&
+                        uplinkGateOpenProgress >= 1 &&
+                        imageHasPixels(
+                            assets.foundryUplinkThresholdOpen
+                        );
+                    var lowerBackground =
+                        usesIntegratedUplinkThreshold
+                            ? uplinkThresholdFullyOpen
+                                ? assets.foundryUplinkThresholdOpen
+                                : assets.foundryUplinkThresholdLocked
+                            : assets[blueprint.lowerKey];
+                    var lowerMirrored =
+                        usesIntegratedUplinkThreshold
+                            ? false
+                            : blueprint.mirror;
                     var lowerDrawn = drawBackgroundLayer(
                         lowerBackground,
                         0,
@@ -19324,8 +19776,43 @@
                         HEIGHT + roomY,
                         WIDTH,
                         HEIGHT,
-                        blueprint.mirror
+                        lowerMirrored
                     );
+
+                    if (
+                        usesIntegratedUplinkThreshold &&
+                        uplinkGateOpenProgress > 0 &&
+                        uplinkGateOpenProgress < 1 &&
+                        imageHasPixels(
+                            assets.foundryUplinkThresholdOpen
+                        )
+                    ) {
+                        ctx.save();
+                        ctx.globalAlpha = smoothUnit(
+                            uplinkGateOpenProgress
+                        );
+                        drawBackgroundLayer(
+                            assets.foundryUplinkThresholdOpen,
+                            0,
+                            0,
+                            assets.foundryUplinkThresholdOpen
+                                .naturalWidth,
+                            assets.foundryUplinkThresholdOpen
+                                .naturalHeight,
+                            roomX,
+                            HEIGHT + roomY,
+                            WIDTH,
+                            HEIGHT,
+                            false
+                        );
+                        ctx.restore();
+                    }
+                    if (usesIntegratedUplinkThreshold) {
+                        canvas.dataset.uplinkThresholdEnvironment =
+                            "integrated-room7-lower-third-v1";
+                        canvas.dataset.uplinkThresholdBlend =
+                            uplinkGateOpenProgress.toFixed(2);
+                    }
 
                     if (!lowerDrawn) {
                         drawBackgroundLayer(
@@ -22677,7 +23164,9 @@
                     var deckBottom =
                         portal.deckTop + 24;
                     var doorY =
-                        deckBottom - doorHeight;
+                        deckBottom -
+                        doorHeight +
+                        (portal.visualOffsetY || 0);
                     var wallX =
                         portal.boundaryX -
                         wallWidth / 2;
@@ -22841,12 +23330,14 @@
                         )
                     );
                 canvas.dataset.atmosphereLockFloorBottom =
-                    "362,624,1628";
+                    "362,624,1532";
                 canvas.dataset.atmosphereWallSpan =
                     "0-" + WORLD_HEIGHT;
                 canvas.dataset.atmosphereLockFloorBridge =
                     atmosphereLockPortals.length +
-                    "-bridges@upper-middle-ground";
+                    "-bridges@upper-middle-lower";
+                canvas.dataset.uplinkLockApproach =
+                    "636px@lower-y1508";
                 canvas.dataset.atmosphereLockLevels =
                     atmosphereLockPortals
                         .map(function (portal) {
@@ -23107,7 +23598,66 @@
 
                     ctx.save();
                     ctx.imageSmoothingEnabled = false;
+                    if (hazard.kind === "arc") {
+                        ctx.fillStyle = "#080d17";
+                        ctx.fillRect(
+                            hazard.x - 8,
+                            hazard.y - 14,
+                            hazard.width + 16,
+                            24
+                        );
+                        ctx.fillStyle = "#39465a";
+                        ctx.fillRect(
+                            hazard.x - 5,
+                            hazard.y - 12,
+                            hazard.width + 10,
+                            4
+                        );
+                        ctx.fillStyle = "#172334";
+                        ctx.fillRect(
+                            hazard.x + 8,
+                            hazard.y - 7,
+                            hazard.width - 16,
+                            12
+                        );
+                        ctx.fillStyle =
+                            active
+                                ? "#65f0ff"
+                                : warning
+                                    ? "#ffc060"
+                                    : "#355467";
+                        ctx.fillRect(
+                            hazard.x - 4,
+                            hazard.y - 11,
+                            8,
+                            7
+                        );
+                        ctx.fillRect(
+                            hazard.x + hazard.width - 4,
+                            hazard.y - 11,
+                            8,
+                            7
+                        );
+                    }
                     if (imageHasPixels(sprite)) {
+                        ctx.save();
+                        if (
+                            hazard.kind === "arc" &&
+                            typeof hazard.visualClipBottom ===
+                                "number"
+                        ) {
+                            ctx.beginPath();
+                            ctx.rect(
+                                hazard.x - 10,
+                                drawY - 8,
+                                hazard.width + 20,
+                                hazard.y -
+                                    drawY +
+                                    hazard.visualClipBottom +
+                                    8
+                            );
+                            ctx.clip();
+                        }
                         ctx.drawImage(
                             sprite,
                             Math.round(hazard.x),
@@ -23115,6 +23665,7 @@
                             Math.round(hazard.width),
                             Math.round(drawHeight)
                         );
+                        ctx.restore();
                     } else {
                         ctx.fillStyle = "#171c29";
                         ctx.fillRect(
@@ -23135,14 +23686,18 @@
                         ctx.fillRect(
                             hazard.x +
                                 hazard.width * 0.2,
-                            drawY + 5,
+                            hazard.kind === "arc"
+                                ? hazard.y - 10
+                                : drawY + 5,
                             10,
                             5
                         );
                         ctx.fillRect(
                             hazard.x +
                                 hazard.width * 0.8 - 10,
-                            drawY + 5,
+                            hazard.kind === "arc"
+                                ? hazard.y - 10
+                                : drawY + 5,
                             10,
                             5
                         );
@@ -23247,8 +23802,9 @@
                                     dischargeWidth * 0.5
                                 ),
                                 Math.round(
-                                    drawY +
-                                    4 +
+                                    hazard.y -
+                                    dischargeHeight +
+                                    8 +
                                     (
                                         dischargeBeat === 2
                                             ? 2
@@ -24985,179 +25541,85 @@
             }
 
             function drawUplink() {
-                var active =
-                    collected === TOTAL_SHARDS &&
-                    (!episodeBetaRun || allStabilizersOnline());
-                var pulse = 0.62 + Math.sin(elapsed * 6.4) * 0.2;
-                var roomStart = Math.floor(uplink.x / WIDTH) * WIDTH;
-                var portalX = roomStart + 1284;
-                var gateWidth = 444;
-                var gateHeight = 376;
-                var gateBottom = GROUND_Y;
-                var gateX = portalX - gateWidth / 2;
-                var gateY = gateBottom - gateHeight;
-                var apertureX = portalX - 72;
-                var apertureY = gateY + 96;
-                var apertureWidth = 144;
-                var apertureHeight = 244;
+                canvas.dataset.uplinkGateBottom =
+                    String(GROUND_Y);
+                canvas.dataset.uplinkGateState =
+                    uplinkGateOpenProgress >= 0.94
+                        ? "open"
+                        : uplinkGateOpenProgress > 0
+                            ? "opening"
+                            : "locked";
+                canvas.dataset.uplinkGateArt =
+                    "integrated-room7-lower-third-v1";
+                canvas.dataset.uplinkGateOrientation =
+                    "side-entry-right-boundary";
+                canvas.dataset.uplinkGateRunway =
+                    "368px-clear-after-pale-watcher";
+                canvas.dataset.uplinkGateLabel =
+                    "room-eyebrow-only";
+                canvas.dataset.uplinkGateOpenProgress =
+                    uplinkGateOpenProgress.toFixed(2);
+            }
 
+            function drawUplinkForeground() {
+                if (
+                    !expansionPreview ||
+                    !imageHasPixels(
+                        assets.foundryUplinkThresholdLocked
+                    )
+                ) {
+                    return;
+                }
+                var roomStart =
+                    (SCREEN_COUNT - 1) * WIDTH;
+                var wallX =
+                    roomStart +
+                    UPLINK_WOUND_WALL_LOCAL_X;
+                var foregroundPlate =
+                    uplinkGateOpenProgress >= 1 &&
+                    imageHasPixels(
+                        assets.foundryUplinkThresholdOpen
+                    )
+                        ? assets.foundryUplinkThresholdOpen
+                        : assets.foundryUplinkThresholdLocked;
                 ctx.save();
                 ctx.imageSmoothingEnabled = false;
-
-                if (!active) {
-                    ctx.fillStyle = "#080c17";
-                    ctx.fillRect(
-                        apertureX,
-                        apertureY,
-                        apertureWidth,
-                        apertureHeight
-                    );
-                    ctx.fillStyle = "#1b2438";
-                    for (
-                        var shutterY = apertureY + 8;
-                        shutterY < apertureY + apertureHeight;
-                        shutterY += 14
-                    ) {
-                        ctx.fillRect(
-                            apertureX + 7,
-                            shutterY,
-                            apertureWidth - 14,
-                            7
-                        );
-                    }
-                    ctx.fillStyle = "#6f365e";
-                    ctx.fillRect(
-                        apertureX + 7,
-                        apertureY + 12,
-                        5,
-                        apertureHeight - 24
-                    );
-                    ctx.fillRect(
-                        apertureX + apertureWidth - 12,
-                        apertureY + 12,
-                        5,
-                        apertureHeight - 24
-                    );
-                } else {
-                    for (
-                        var gateMote = 0;
-                        gateMote < 12;
-                        gateMote += 1
-                    ) {
-                        var moteCycle =
-                            (
-                                elapsed * 0.74 +
-                                gateMote * 0.173
-                            ) % 1;
-                        var moteX =
-                            apertureX +
-                            16 +
-                            (
-                                gateMote * 37
-                            ) %
-                                (apertureWidth - 32);
-                        var moteY =
-                            apertureY +
-                            apertureHeight -
-                            moteCycle *
-                                (apertureHeight - 24);
-                        ctx.globalAlpha =
-                            (1 - moteCycle) *
-                            (0.48 + pulse * 0.18);
-                        ctx.fillStyle =
-                            gateMote % 3 === 0
-                                ? "#dfffe5"
-                                : "#58f5df";
-                        ctx.fillRect(
-                            Math.round(moteX),
-                            Math.round(moteY),
-                            gateMote % 2 === 0 ? 4 : 3,
-                            gateMote % 2 === 0 ? 4 : 3
-                        );
-                    }
-                    ctx.globalAlpha = 1;
-                }
-
-                if (imageHasPixels(assets.foundryUplinkBossGate)) {
-                    ctx.drawImage(
-                        assets.foundryUplinkBossGate,
-                        gateX,
-                        gateY,
-                        gateWidth,
-                        gateHeight
-                    );
-                    canvas.dataset.uplinkGateArt =
-                        "sprite-v1";
-                } else {
-                    ctx.fillStyle = "#263242";
-                    ctx.fillRect(
-                        gateX,
-                        gateY,
-                        gateWidth,
-                        34
-                    );
-                    ctx.fillRect(
-                        gateX,
-                        gateY,
-                        54,
-                        gateHeight
-                    );
-                    ctx.fillRect(
-                        gateX + gateWidth - 54,
-                        gateY,
-                        54,
-                        gateHeight
-                    );
-                    canvas.dataset.uplinkGateArt =
-                        "fallback";
-                }
-
-                for (
-                    var shardIndex = 0;
-                    shardIndex < TOTAL_SHARDS;
-                    shardIndex += 1
+                ctx.drawImage(
+                    foregroundPlate,
+                    UPLINK_WOUND_WALL_LOCAL_X,
+                    0,
+                    UPLINK_WOUND_WALL_WIDTH,
+                    HEIGHT,
+                    wallX,
+                    HEIGHT,
+                    UPLINK_WOUND_WALL_WIDTH,
+                    HEIGHT
+                );
+                if (
+                    uplinkGateOpenProgress > 0 &&
+                    uplinkGateOpenProgress < 1 &&
+                    imageHasPixels(
+                        assets.foundryUplinkThresholdOpen
+                    )
                 ) {
-                    ctx.globalAlpha =
-                        shardIndex < collected ? 0.96 : 0.24;
-                    ctx.fillStyle =
-                        shardIndex < collected
-                            ? "#58f5df"
-                            : "#6f365e";
-                    ctx.fillRect(
-                        portalX -
-                            58 +
-                            shardIndex * 10,
-                        gateY + 28,
-                        6,
-                        5
+                    ctx.globalAlpha = smoothUnit(
+                        uplinkGateOpenProgress
+                    );
+                    ctx.drawImage(
+                        assets.foundryUplinkThresholdOpen,
+                        UPLINK_WOUND_WALL_LOCAL_X,
+                        0,
+                        UPLINK_WOUND_WALL_WIDTH,
+                        HEIGHT,
+                        wallX,
+                        HEIGHT,
+                        UPLINK_WOUND_WALL_WIDTH,
+                        HEIGHT
                     );
                 }
-
-                ctx.globalAlpha = 1;
-                ctx.font = "700 13px Fira Code, monospace";
-                ctx.textAlign = "center";
-                ctx.fillStyle = "#03050d";
-                ctx.fillText(
-                    active
-                        ? "WOUND ACCESS // OPEN"
-                        : "WOUND ACCESS // LOCKED",
-                    portalX + 2,
-                    gateY - 16 + 2
-                );
-                ctx.fillStyle =
-                    active ? "#b8ffc7" : "#bd7da9";
-                ctx.fillText(
-                    active
-                        ? "WOUND ACCESS // OPEN"
-                        : "WOUND ACCESS // LOCKED",
-                    portalX,
-                    gateY - 16
-                );
                 ctx.restore();
-                canvas.dataset.uplinkGateBottom =
-                    String(gateBottom);
-                canvas.dataset.uplinkGateState =
-                    active ? "open" : "locked";
+                canvas.dataset.uplinkGateOcclusion =
+                    "integrated-lower-plate-wall-replay";
             }
 
             function traceShardSilhouette(scale) {
@@ -26917,23 +27379,375 @@
                     callbackRate.toFixed(1);
                 canvas.dataset.frameDrawRate =
                     drawRate.toFixed(1);
-                performanceTrialBadge.textContent =
-                    frameMeterRequested
-                        ? "FPS " + Math.round(drawRate)
-                        : (
-                            desktopNoBlurTrial
-                                ? "No blur"
-                                : desktopBackgroundCropTrial
-                                    ? "Crop"
-                                    : "60 Hz"
-                        ) +
-                        " trial // RAF " +
-                        Math.round(callbackRate) +
-                        " // DRAW " +
-                        Math.round(drawRate);
+                if (!frameBenchmarkRequested) {
+                    performanceTrialBadge.textContent =
+                        frameMeterRequested
+                            ? "FPS " +
+                                Math.round(drawRate) +
+                                (
+                                    pixelBudgetRenderTrial
+                                        ? " // 2MP"
+                                        : ""
+                                )
+                            : (
+                                desktopNoBlurTrial
+                                    ? "No blur"
+                                    : desktopBackgroundCropTrial
+                                        ? "Crop"
+                                        : "60 Hz"
+                            ) +
+                            " trial // RAF " +
+                            Math.round(callbackRate) +
+                            " // DRAW " +
+                            Math.round(drawRate);
+                }
                 frameTelemetryStarted = now;
                 frameTelemetryCallbacks = 0;
                 frameTelemetryDraws = 0;
+            }
+
+            function frameBenchmarkPercentile(values, percentile) {
+                if (!values.length) return 0;
+                var ordered = values.slice().sort(function (
+                    first,
+                    second
+                ) {
+                    return first - second;
+                });
+                var rank =
+                    (ordered.length - 1) * percentile;
+                var lowerIndex = Math.floor(rank);
+                var upperIndex = Math.ceil(rank);
+                if (lowerIndex === upperIndex) {
+                    return ordered[lowerIndex];
+                }
+                var fraction = rank - lowerIndex;
+                return (
+                    ordered[lowerIndex] +
+                    (
+                        ordered[upperIndex] -
+                        ordered[lowerIndex]
+                    ) *
+                    fraction
+                );
+            }
+
+            function frameBenchmarkMean(values) {
+                if (!values.length) return 0;
+                return values.reduce(function (total, value) {
+                    return total + value;
+                }, 0) / values.length;
+            }
+
+            function frameBenchmarkOverBudgetRate(
+                values,
+                budget
+            ) {
+                if (!values.length) return 0;
+                return (
+                    values.filter(function (value) {
+                        return value > budget;
+                    }).length /
+                    values.length *
+                    100
+                );
+            }
+
+            function clearFrameBenchmarkSamples() {
+                frameBenchmarkIntervals.length = 0;
+                frameBenchmarkUpdateDurations.length = 0;
+                frameBenchmarkDrawDurations.length = 0;
+                frameBenchmarkWorkDurations.length = 0;
+            }
+
+            function resetFrameBenchmark() {
+                clearFrameBenchmarkSamples();
+                frameBenchmarkPhaseStarted = 0;
+                frameBenchmarkLastFrame = 0;
+                frameBenchmarkLastBadge = 0;
+                frameTelemetryStarted = 0;
+                frameTelemetryCallbacks = 0;
+                frameTelemetryDraws = 0;
+
+                if (!frameBenchmarkRequested) {
+                    frameBenchmarkStatus = "disabled";
+                    delete canvas.dataset.benchmarkStatus;
+                    delete canvas.dataset.benchmarkResult;
+                    return;
+                }
+
+                frameBenchmarkStatus = "armed";
+                canvas.dataset.benchmarkStatus = "armed";
+                canvas.dataset.benchmarkProfile =
+                    "frame-time-v1";
+                canvas.dataset.benchmarkWarmupMs =
+                    String(FRAME_BENCHMARK_WARMUP_MS);
+                canvas.dataset.benchmarkSampleMs =
+                    String(FRAME_BENCHMARK_SAMPLE_MS);
+                delete canvas.dataset.benchmarkResult;
+                delete canvas.dataset.benchmarkFrameP95Ms;
+                delete canvas.dataset.benchmarkFrameP99Ms;
+                delete canvas.dataset.benchmarkUpdateP95Ms;
+                delete canvas.dataset.benchmarkDrawP95Ms;
+                delete canvas.dataset.benchmarkWorkP95Ms;
+                performanceTrialBadge.textContent =
+                    "Benchmark // armed";
+            }
+
+            function completeFrameBenchmark(now) {
+                var sampleDuration =
+                    now - frameBenchmarkPhaseStarted;
+                var frameP50 = frameBenchmarkPercentile(
+                    frameBenchmarkIntervals,
+                    0.5
+                );
+                var frameP95 = frameBenchmarkPercentile(
+                    frameBenchmarkIntervals,
+                    0.95
+                );
+                var frameP99 = frameBenchmarkPercentile(
+                    frameBenchmarkIntervals,
+                    0.99
+                );
+                var updateP95 = frameBenchmarkPercentile(
+                    frameBenchmarkUpdateDurations,
+                    0.95
+                );
+                var drawP95 = frameBenchmarkPercentile(
+                    frameBenchmarkDrawDurations,
+                    0.95
+                );
+                var workP95 = frameBenchmarkPercentile(
+                    frameBenchmarkWorkDurations,
+                    0.95
+                );
+                var medianHz =
+                    frameP50 > 0 ? 1000 / frameP50 : 0;
+                var result = {
+                    profile: "frame-time-v1",
+                    loadProfile:
+                        canvas.dataset.loadProfile ||
+                        "default",
+                    capturedAt: new Date().toISOString(),
+                    userAgent: navigator.userAgent,
+                    devicePixelRatio:
+                        window.devicePixelRatio || 1,
+                    canvas: {
+                        cssWidth:
+                            canvas.getBoundingClientRect().width,
+                        cssHeight:
+                            canvas.getBoundingClientRect().height,
+                        backingWidth: canvas.width,
+                        backingHeight: canvas.height,
+                        backingPixels:
+                            canvas.width * canvas.height,
+                        renderPixelRatio:
+                            canvas.dataset.renderPixelRatio
+                    },
+                    population: {
+                        enemies: enemies.length,
+                        fragments: shards.filter(function (
+                            shard
+                        ) {
+                            return !shard.collected;
+                        }).length,
+                        particles: particles.length,
+                        projectiles:
+                            bolts.length +
+                            energyOrbs.length
+                    },
+                    sample: {
+                        durationMs: sampleDuration,
+                        frames:
+                            frameBenchmarkIntervals.length,
+                        drawsPerSecond:
+                            frameBenchmarkIntervals.length *
+                            1000 /
+                            Math.max(1, sampleDuration)
+                    },
+                    frameIntervalMs: {
+                        mean: frameBenchmarkMean(
+                            frameBenchmarkIntervals
+                        ),
+                        p50: frameP50,
+                        p95: frameP95,
+                        p99: frameP99
+                    },
+                    achievedMedianHz: medianHz,
+                    overBudgetPercent: {
+                        at60Hz:
+                            frameBenchmarkOverBudgetRate(
+                                frameBenchmarkIntervals,
+                                1000 / 60
+                            ),
+                        at120Hz:
+                            frameBenchmarkOverBudgetRate(
+                                frameBenchmarkIntervals,
+                                1000 / 120
+                            )
+                    },
+                    mainThreadMs: {
+                        updateP95: updateP95,
+                        drawP95: drawP95,
+                        workP95: workP95
+                    },
+                    note:
+                        "Main-thread timing excludes asynchronous GPU completion."
+                };
+
+                frameBenchmarkStatus = "complete";
+                canvas.dataset.benchmarkStatus = "complete";
+                canvas.dataset.benchmarkFrameP95Ms =
+                    frameP95.toFixed(2);
+                canvas.dataset.benchmarkFrameP99Ms =
+                    frameP99.toFixed(2);
+                canvas.dataset.benchmarkUpdateP95Ms =
+                    updateP95.toFixed(2);
+                canvas.dataset.benchmarkDrawP95Ms =
+                    drawP95.toFixed(2);
+                canvas.dataset.benchmarkWorkP95Ms =
+                    workP95.toFixed(2);
+                canvas.dataset.benchmarkResult =
+                    JSON.stringify(result);
+                performanceTrialBadge.textContent =
+                    "P95 " +
+                    frameP95.toFixed(1) +
+                    " ms // " +
+                    Math.round(medianHz) +
+                    " Hz";
+            }
+
+            function updateFrameBenchmark(
+                now,
+                simulationActive,
+                drewFrame,
+                updateDuration,
+                drawDuration
+            ) {
+                if (!frameBenchmarkRequested) return;
+                if (
+                    !simulationActive ||
+                    !drewFrame
+                ) {
+                    if (
+                        frameBenchmarkStatus === "warming" ||
+                        frameBenchmarkStatus === "sampling"
+                    ) {
+                        frameBenchmarkStatus = "armed";
+                        frameBenchmarkPhaseStarted = 0;
+                        frameBenchmarkLastFrame = 0;
+                        clearFrameBenchmarkSamples();
+                        canvas.dataset.benchmarkStatus =
+                            "paused-reset";
+                        performanceTrialBadge.textContent =
+                            "Benchmark // paused";
+                    }
+                    return;
+                }
+                if (frameBenchmarkStatus === "complete") return;
+
+                if (
+                    frameBenchmarkStatus === "idle" ||
+                    frameBenchmarkStatus === "disabled" ||
+                    frameBenchmarkStatus === "armed"
+                ) {
+                    frameBenchmarkStatus = "warming";
+                    frameBenchmarkPhaseStarted = now;
+                    frameBenchmarkLastFrame = now;
+                    frameBenchmarkLastBadge = now;
+                    clearFrameBenchmarkSamples();
+                    canvas.dataset.benchmarkStatus = "warming";
+                    performanceTrialBadge.textContent =
+                        "Benchmark // warming";
+                    return;
+                }
+
+                var frameInterval =
+                    frameBenchmarkLastFrame
+                        ? now - frameBenchmarkLastFrame
+                        : 0;
+                frameBenchmarkLastFrame = now;
+
+                if (frameBenchmarkStatus === "warming") {
+                    var warmupElapsed =
+                        now - frameBenchmarkPhaseStarted;
+                    if (
+                        now - frameBenchmarkLastBadge >= 250
+                    ) {
+                        frameBenchmarkLastBadge = now;
+                        performanceTrialBadge.textContent =
+                            "Warmup " +
+                            Math.min(
+                                100,
+                                Math.round(
+                                    warmupElapsed /
+                                    FRAME_BENCHMARK_WARMUP_MS *
+                                    100
+                                )
+                            ) +
+                            "%";
+                    }
+                    if (
+                        warmupElapsed <
+                        FRAME_BENCHMARK_WARMUP_MS
+                    ) {
+                        return;
+                    }
+                    frameBenchmarkStatus = "sampling";
+                    frameBenchmarkPhaseStarted = now;
+                    frameBenchmarkLastFrame = now;
+                    frameBenchmarkLastBadge = now;
+                    clearFrameBenchmarkSamples();
+                    canvas.dataset.benchmarkStatus = "sampling";
+                    performanceTrialBadge.textContent =
+                        "Benchmark // sampling";
+                    return;
+                }
+
+                if (
+                    frameInterval > 0 &&
+                    frameInterval < 1000
+                ) {
+                    frameBenchmarkIntervals.push(frameInterval);
+                    frameBenchmarkUpdateDurations.push(
+                        updateDuration
+                    );
+                    frameBenchmarkDrawDurations.push(
+                        drawDuration
+                    );
+                    frameBenchmarkWorkDurations.push(
+                        updateDuration + drawDuration
+                    );
+                }
+
+                var sampleElapsed =
+                    now - frameBenchmarkPhaseStarted;
+                if (
+                    now - frameBenchmarkLastBadge >= 250
+                ) {
+                    frameBenchmarkLastBadge = now;
+                    performanceTrialBadge.textContent =
+                        "Sample " +
+                        Math.min(
+                            100,
+                            Math.round(
+                                sampleElapsed /
+                                FRAME_BENCHMARK_SAMPLE_MS *
+                                100
+                            )
+                        ) +
+                        "% // " +
+                        enemies.length +
+                        "E " +
+                        shards.length +
+                        "F";
+                }
+                if (
+                    sampleElapsed >=
+                    FRAME_BENCHMARK_SAMPLE_MS
+                ) {
+                    completeFrameBenchmark(now);
+                }
             }
 
             function frame(now) {
@@ -26988,13 +27802,33 @@
                     : 0;
                 lastFrame = now;
                 var drewFrame = false;
+                var updateDuration = 0;
+                var drawDuration = 0;
                 if (simulationActive) {
-                    update(delta);
-                    draw();
+                    if (frameBenchmarkRequested) {
+                        var updateStarted = performance.now();
+                        update(delta);
+                        updateDuration =
+                            performance.now() - updateStarted;
+                        var drawStarted = performance.now();
+                        draw();
+                        drawDuration =
+                            performance.now() - drawStarted;
+                    } else {
+                        update(delta);
+                        draw();
+                    }
                     drewFrame = true;
                     renderRequested = false;
                 } else if (pageVisible && renderRequested) {
-                    draw();
+                    if (frameBenchmarkRequested) {
+                        var renderStarted = performance.now();
+                        draw();
+                        drawDuration =
+                            performance.now() - renderStarted;
+                    } else {
+                        draw();
+                    }
                     drewFrame = true;
                     renderRequested = false;
                 } else if (!pageVisible) {
@@ -27005,6 +27839,13 @@
                 updateFramePacingTelemetry(
                     now,
                     drewFrame
+                );
+                updateFrameBenchmark(
+                    now,
+                    simulationActive,
+                    drewFrame,
+                    updateDuration,
+                    drawDuration
                 );
                 window.requestAnimationFrame(frame);
             }
