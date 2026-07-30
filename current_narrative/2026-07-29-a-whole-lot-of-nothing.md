@@ -15,6 +15,12 @@ Date: July 29, 2026
   "featureImageRef": "",
   "blocks": [
     {
+      "id": "quote_update_20260730",
+      "type": "quote",
+      "html": "\u003cstrong\u003eUpdated July 30, 2026\u003c/strong\u003e\u003cspan\u003e \u2014 \u003c/span\u003eThe project has been delayed. I'll share a new launch date when I have one.",
+      "text": "Updated July 30, 2026 \u2014 The project has been delayed. I'll share a new launch date when I have one."
+    },
+    {
       "id": "image_ms6q2r90_iyhedg",
       "type": "image",
       "imageRef": "image_ms6q2r90_iyhedg",
@@ -92,6 +98,8 @@ Date: July 29, 2026
 -->
 
 _What do you expect? I'm just one person._
+
+> **Updated July 30, 2026** — The project has been delayed. I'll share a new launch date when I have one.
 
 ![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-29-a-whole-lot-of-nothing-ms6q2rp6.jpg "Rain ought to come back. Any day now. We're waiting.")
 

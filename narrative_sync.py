@@ -1282,6 +1282,28 @@ def enhance_reader_body_html(body_html, deck):
         (body_html or '')[first_paragraph.end():],
     ])
 
+ARTICLE_UPDATE_PATTERN = re.compile(
+    r'^Updated\s+(?:[A-Z][a-z]+\s+\d{1,2},\s+\d{4}|\d{1,2}/\d{1,2}/\d{2,4})\b',
+    re.I,
+)
+
+def extract_reader_update_notice(body_html):
+    for match in re.finditer(r'<blockquote\b[^>]*>([\s\S]*?)</blockquote>', body_html or '', flags=re.I):
+        notice_text = normalize_plain_text(plain_text_from_html(match.group(1)))
+        if not ARTICLE_UPDATE_PATTERN.match(notice_text):
+            continue
+        notice_html = (
+            '<aside class="entry-update" aria-label="Article update">'
+            f'{match.group(1)}'
+            '</aside>'
+        )
+        remaining_html = ''.join([
+            (body_html or '')[:match.start()],
+            (body_html or '')[match.end():],
+        ]).strip()
+        return notice_html, remaining_html
+    return '', body_html
+
 def wrap_first_visible_letter(value):
     parts = re.split(r'(<[^>]+>)', value or '')
     for index, part in enumerate(parts):
@@ -1493,6 +1515,8 @@ def render_share_page(post, newer_post=None, older_post=None, include_draft_read
     body_html = promote_major_section_headings(body_html)
     if feature_image:
         body_html = remove_feature_figure(body_html, feature_image.get('render_url') or feature_image['url'])
+    update_notice_html, body_html = extract_reader_update_notice(body_html)
+    update_notice_block = f'\n            {update_notice_html}' if update_notice_html else ''
     paragraph_ids = {paragraph['id'] for paragraph in extract_reader_paragraphs(body_html)}
     reading_aids = load_reading_aids_for_post(post, paragraph_ids, include_draft_reading_aids)
     reading_aids_intro = render_reading_aids_intro(reading_aids)
@@ -1648,7 +1672,7 @@ def render_share_page(post, newer_post=None, older_post=None, include_draft_read
                         </span>
                     </span>
                 </div>
-            </header>{feature_html}{reading_aids_block}
+            </header>{update_notice_block}{feature_html}{reading_aids_block}
             <div class="entry-body" id="entry-body">
 {body_html}
             </div>
