@@ -175,6 +175,30 @@ def essay_image(post: dict[str, Any]) -> tuple[str, dict[str, Any]]:
     return markdown_image(post.get("body")), {}
 
 
+def essay_status(post: dict[str, Any]) -> dict[str, str] | None:
+    publisher = post.get("publisher") if isinstance(post.get("publisher"), dict) else {}
+    blocks = publisher.get("blocks") if isinstance(publisher.get("blocks"), list) else []
+    update_texts = [
+        clean_text(block.get("text") or block.get("html"))
+        for block in blocks
+        if isinstance(block, dict) and block.get("type") == "quote"
+    ]
+    update_texts.extend(
+        clean_text(match.group(0))
+        for match in re.finditer(r"(?m)(?:^>\s?.*(?:\n|$))+", str(post.get("body") or ""))
+    )
+    if any(
+        re.search(r"\bupdated\b", text, flags=re.IGNORECASE)
+        and re.search(r"\bdelayed\b", text, flags=re.IGNORECASE)
+        for text in update_texts
+    ):
+        return {
+            "kind": "delayed",
+            "label": "DELAYED — STILL COOKING",
+        }
+    return None
+
+
 def normalize_essay(post: dict[str, Any]) -> dict[str, Any]:
     publisher = post.get("publisher") if isinstance(post.get("publisher"), dict) else {}
     date = str(post.get("date") or "")
@@ -192,7 +216,7 @@ def normalize_essay(post: dict[str, Any]) -> dict[str, Any]:
         image_alt = meta_alt
     else:
         image_alt = meta_caption or f"Image for {title}"
-    return {
+    normalized = {
         "key": f"essay:{url}",
         "type": "essay",
         "label": "Essay",
@@ -207,6 +231,10 @@ def normalize_essay(post: dict[str, Any]) -> dict[str, Any]:
         "url": url,
         "sourceName": "narrative_data.js",
     }
+    status = essay_status(post)
+    if status:
+        normalized["status"] = status
+    return normalized
 
 
 def display_date(value: Any) -> str:

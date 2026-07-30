@@ -1323,9 +1323,40 @@
             content: "";
             position: absolute;
             inset: 0;
+            z-index: 1;
             background: linear-gradient(180deg, rgba(10, 10, 10, 0.015), rgba(10, 10, 10, 0.38));
             pointer-events: none;
             transition: opacity var(--speed-medium) ease;
+        }
+
+        .frontpage-delay-tape {
+            position: absolute;
+            top: 48%;
+            left: 50%;
+            z-index: 2;
+            width: 132%;
+            border-block: clamp(3px, 0.42vw, 5px) solid #111;
+            padding: clamp(9px, 1.35vw, 14px) 0;
+            overflow: hidden;
+            transform: translate(-50%, -50%) rotate(-9deg);
+            background:
+                repeating-linear-gradient(
+                    135deg,
+                    #f4d34f 0,
+                    #f4d34f 34px,
+                    #e8c238 34px,
+                    #e8c238 68px
+                );
+            color: #0b0c0d;
+            font: 900 clamp(0.72rem, 1.6vw, 1.15rem)/1 var(--font-mono);
+            letter-spacing: clamp(0.09em, 0.38vw, 0.18em);
+            text-align: center;
+            text-transform: uppercase;
+            white-space: nowrap;
+            box-shadow:
+                0 4px 0 rgba(255, 255, 255, 0.22) inset,
+                0 10px 28px rgba(0, 0, 0, 0.44);
+            pointer-events: none;
         }
 
         .lead-art:hover img,
@@ -2810,16 +2841,17 @@
                         <div class="lead-copy">
                             <div>
                                 <span class="eyebrow" data-frontpage-tag>Latest essay</span>
-                                <h2 id="lead-title"><a data-frontpage-link href="archive/2026-07-14-the-midweek-weather.html">The Midweek Weather</a></h2>
+                                <h2 id="lead-title"><a data-frontpage-link href="archive/2026-07-29-a-whole-lot-of-nothing.html">A whole lot of nothing.</a></h2>
                             </div>
-                            <p class="lead-dek" data-frontpage-description>The Skipping Stone</p>
+                            <p class="lead-dek" data-frontpage-description>What do you expect? I'm just one person.</p>
                             <div class="story-meta" data-frontpage-meta>
-                                <span>July 14, 2026</span>
+                                <span>July 29, 2026</span>
                             </div>
-                            <a class="story-link" data-frontpage-cta href="archive/2026-07-14-the-midweek-weather.html">Continue reading The Midweek Weather &rarr;</a>
+                            <a class="story-link" data-frontpage-cta href="archive/2026-07-29-a-whole-lot-of-nothing.html">Continue reading A whole lot of nothing. &rarr;</a>
                         </div>
-                        <a class="lead-art" data-frontpage-art href="archive/2026-07-14-the-midweek-weather.html" aria-label="Continue reading The Midweek Weather">
-                            <img data-frontpage-image alt="Image for The Midweek Weather" loading="eager" fetchpriority="high" decoding="async" width="1600" height="1000" />
+                        <a class="lead-art" data-frontpage-art href="archive/2026-07-29-a-whole-lot-of-nothing.html" aria-label="Continue reading A whole lot of nothing. Project delayed; still cooking.">
+                            <img data-frontpage-image alt="Rain ought to come back. Any day now. We're waiting." loading="eager" fetchpriority="high" decoding="async" width="1600" height="1000" />
+                            <span class="frontpage-delay-tape" data-frontpage-delay-tape aria-hidden="true">DELAYED — STILL COOKING  //  DELAYED — STILL COOKING  //  DELAYED — STILL COOKING</span>
                         </a>
                     </article>
 
@@ -3527,6 +3559,19 @@
             const sourceImage = extractEssayImage(post);
             const usesEditorialFallback = !sourceImage;
             const imageCandidates = uniqueStrings([sourceImage, HOMEPAGE_ARTICLE_FALLBACK]);
+            const bodyUpdateText = String(post && post.body ? post.body : '')
+                .split('\n')
+                .filter((line) => /^\s*>\s?/.test(line))
+                .join(' ');
+            const updateText = [
+                ...publisherBlocks
+                    .filter((block) => block && block.type === 'quote')
+                    .map((block) => cleanText(block.text || block.html || '')),
+                cleanText(bodyUpdateText)
+            ].join(' ');
+            const status = /\bupdated\b/i.test(updateText) && /\bdelayed\b/i.test(updateText)
+                ? { kind: 'delayed', label: 'DELAYED — STILL COOKING' }
+                : null;
 
             return {
                 key: `essay:${url}`,
@@ -3546,7 +3591,8 @@
                 homepageFocal: normalizeHomepageFocal(imageMeta.homepageFocal),
                 usesEditorialFallback,
                 url,
-                sourceName: 'narrative_data.js'
+                sourceName: 'narrative_data.js',
+                ...(status ? { status } : {})
             };
         }
 
@@ -3943,6 +3989,17 @@
             }
             root.hidden = false;
             root.dataset.contentType = item.type || 'item';
+            const delayTape = root.querySelector('[data-frontpage-delay-tape]');
+            const showDelayTape = slot === 'leadStory' && item.status && item.status.kind === 'delayed';
+            if (delayTape) {
+                const tapeLabel = item.status && item.status.label
+                    ? item.status.label
+                    : 'DELAYED — STILL COOKING';
+                delayTape.textContent = showDelayTape
+                    ? `${tapeLabel}  //  ${tapeLabel}  //  ${tapeLabel}`
+                    : '';
+                delayTape.hidden = !showDelayTape;
+            }
 
             setText(root, '[data-frontpage-tag]', tagForSlot(slot, item, context));
             setText(root, '[data-frontpage-link]', item.title);
@@ -3969,7 +4026,10 @@
             const art = root.querySelector('[data-frontpage-art]');
             if (art) {
                 art.href = item.url;
-                art.setAttribute('aria-label', `Continue reading ${item.title}`);
+                art.setAttribute(
+                    'aria-label',
+                    `Continue reading ${item.title}${showDelayTape ? '. Project delayed; still cooking.' : ''}`
+                );
                 art.hidden = false;
             }
 

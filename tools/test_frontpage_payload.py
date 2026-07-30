@@ -78,6 +78,16 @@ def run_tests() -> None:
             assert "publisher" not in item
             assert "sourceData" not in item
 
+    delayed_essay = next(
+        item
+        for item in output["sources"]["essays"]
+        if item["url"] == "archive/2026-07-29-a-whole-lot-of-nothing.html"
+    )
+    assert delayed_essay["status"] == {
+        "kind": "delayed",
+        "label": "DELAYED — STILL COOKING",
+    }
+
     selected = builder.selected_frontpage_items(output["manifest"], output["sources"])
     selected_candidates = {
         candidate
