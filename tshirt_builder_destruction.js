@@ -3,12 +3,13 @@
 
     var trigger = document.getElementById("destroyPageButton");
     var overlay = document.getElementById("pageDestruction");
+    var facade = document.getElementById("pageDestructionFacade");
     var canvas = document.getElementById("pageDestructionCanvas");
     var statusText = document.getElementById("pageDestructionStatus");
     var meterText = document.getElementById("pageDestructionMeter");
     var restoreButton = document.getElementById("restoreTimelineButton");
     var pageMain = document.querySelector("main");
-    if (!trigger || !overlay || !canvas || !statusText || !meterText || !restoreButton) return;
+    if (!trigger || !overlay || !facade || !canvas || !statusText || !meterText || !restoreButton) return;
 
     var context = canvas.getContext("2d");
     var Beam = window.SuperFrgmntsBeam;
@@ -16,11 +17,24 @@
     var animationFrame = 0;
     var firingTimer = 0;
     var shakeTimer = 0;
+    var startTimer = 0;
+    var preparing = false;
+    var pendingScrollY = 0;
     var encounter = null;
     var deviceScale = 1;
 
-    var shotTimes = [3.0, 5.2, 7.4, 9.6, 11.8, 14.0, 16.2, 18.4, 20.6];
-    var hitShotIndexes = new Set([6, 7, 8]);
+    var shotTimes = [2.3, 3.75, 5.2, 6.65, 8.1, 9.55, 11.0, 12.45, 13.9, 15.35, 17.0, 18.65, 20.3];
+    var hitShotIndexes = new Set([10, 11, 12]);
+    var shardClips = [
+        "polygon(0 0, 50% 0, 0 50%)",
+        "polygon(50% 0, 50% 50%, 0 50%)",
+        "polygon(50% 0, 100% 0, 100% 50%)",
+        "polygon(50% 0, 100% 50%, 50% 50%)",
+        "polygon(0 50%, 50% 50%, 0 100%)",
+        "polygon(50% 50%, 50% 100%, 0 100%)",
+        "polygon(50% 50%, 100% 50%, 100% 100%)",
+        "polygon(50% 50%, 100% 100%, 50% 100%)"
+    ];
     var emitterAnchors = [
         { x: 61, y: 13 },
         { x: 61, y: 14 },
@@ -109,80 +123,172 @@
         };
     }
 
-    function visibleDamageCandidates() {
-        var selectors = [
-            "main .readout-cell",
-            "main .color-button",
-            "main .phrase-button",
-            "main .view-controls .pixel-button",
-            "main .control-section",
-            "main .pixel-panel",
-            "main .intro-brand"
-        ];
-        var seen = new Set();
-        return selectors.reduce(function (items, selector) {
-            document.querySelectorAll(selector).forEach(function (element) {
-                if (seen.has(element) || element === trigger || element.contains(trigger)) return;
-                seen.add(element);
-                var rect = element.getBoundingClientRect();
-                if (
-                    rect.width < 18 ||
-                    rect.height < 16 ||
-                    rect.right < 0 ||
-                    rect.bottom < 0 ||
-                    rect.left > window.innerWidth ||
-                    rect.top > window.innerHeight
-                ) return;
-                items.push(element);
-            });
-            return items;
-        }, []).sort(function (first, second) {
-            var firstRect = first.getBoundingClientRect();
-            var secondRect = second.getBoundingClientRect();
-            return firstRect.top - secondRect.top || firstRect.left - secondRect.left;
+    function copyCanvasPixels(source, clone) {
+        var sourceCanvases = [];
+        var cloneCanvases = [];
+        if (source instanceof HTMLCanvasElement) sourceCanvases.push(source);
+        if (clone instanceof HTMLCanvasElement) cloneCanvases.push(clone);
+        source.querySelectorAll("canvas").forEach(function (item) {
+            sourceCanvases.push(item);
+        });
+        clone.querySelectorAll("canvas").forEach(function (item) {
+            cloneCanvases.push(item);
+        });
+        sourceCanvases.forEach(function (sourceCanvas, index) {
+            var cloneCanvas = cloneCanvases[index];
+            if (!cloneCanvas) return;
+            cloneCanvas.width = sourceCanvas.width;
+            cloneCanvas.height = sourceCanvas.height;
+            cloneCanvas.style.position = "relative";
+            cloneCanvas.style.zIndex = "1";
+            cloneCanvas.style.display = "block";
+            cloneCanvas.style.width = "100%";
+            cloneCanvas.style.height = "100%";
+            var cloneContext = cloneCanvas.getContext("2d");
+            if (!cloneContext) return;
+            try {
+                cloneContext.drawImage(sourceCanvas, 0, 0);
+            } catch (error) {
+                // The façade remains usable even if an optional canvas cannot be copied.
+            }
         });
     }
 
-    function nextDamageTarget() {
-        var candidates = visibleDamageCandidates().filter(function (element) {
-            return !element.hasAttribute("data-page-damage");
+    function cloneWithCanvasPixels(source) {
+        var clone = source.cloneNode(true);
+        copyCanvasPixels(source, clone);
+        clone.querySelectorAll("[id]").forEach(function (element) {
+            element.removeAttribute("id");
         });
-        if (!candidates.length) return null;
+        if (clone.hasAttribute && clone.hasAttribute("id")) clone.removeAttribute("id");
+        clone.querySelectorAll("a, button, input, select, textarea, [tabindex]").forEach(function (element) {
+            element.setAttribute("tabindex", "-1");
+            if (element.matches("a")) element.removeAttribute("href");
+        });
+        clone.querySelectorAll("[aria-labelledby], [aria-describedby], [aria-controls], label[for]").forEach(function (element) {
+            element.removeAttribute("aria-labelledby");
+            element.removeAttribute("aria-describedby");
+            element.removeAttribute("aria-controls");
+            element.removeAttribute("for");
+        });
+        return clone;
+    }
+
+    function captureFacade() {
+        facade.replaceChildren();
+        var scene = document.createElement("main");
+        scene.className = "page-destruction__scene";
+        scene.setAttribute("aria-hidden", "true");
+        scene.setAttribute("inert", "");
+        facade.appendChild(scene);
+
+        var selectors = [
+            ".intro",
+            ".preview-panel",
+            ".controls-panel > .surprise-zone",
+            ".controls-panel > .control-section",
+            ".controls-panel > .action-stack",
+            ".controls-panel > .system-message",
+            ".controls-panel > .tiny-truth"
+        ];
+        var sources = Array.from(pageMain.querySelectorAll(selectors.join(",")));
+        var fragments = sources.map(function (source, index) {
+            var rect = source.getBoundingClientRect();
+            if (
+                rect.width < 24 ||
+                rect.height < 20 ||
+                rect.right < 0 ||
+                rect.bottom < 0 ||
+                rect.left > window.innerWidth ||
+                rect.top > window.innerHeight
+            ) return null;
+
+            var fragment = document.createElement("div");
+            fragment.className = "page-fragment";
+            fragment.dataset.fragmentIndex = String(index);
+            fragment.style.left = rect.left + "px";
+            fragment.style.top = rect.top + "px";
+            fragment.style.width = rect.width + "px";
+            fragment.style.height = rect.height + "px";
+            fragment.appendChild(cloneWithCanvasPixels(source));
+            scene.appendChild(fragment);
+            return {
+                element: fragment,
+                rect: {
+                    left: rect.left,
+                    top: rect.top,
+                    width: rect.width,
+                    height: rect.height
+                },
+                destroyed: false
+            };
+        }).filter(Boolean);
+
+        document.body.classList.add("page-destruction-facade-ready");
+        return fragments;
+    }
+
+    function nextDamageTarget() {
+        var candidates = encounter.fragments.filter(function (fragment) {
+            return !fragment.destroyed;
+        });
+        if (!candidates.length) {
+            encounter.damageCursor += 1;
+            return null;
+        }
         var index = (encounter.damageCursor * 5 + 2) % candidates.length;
         encounter.damageCursor += 1;
         return candidates[index];
     }
 
-    function targetPoint(element) {
-        if (!element) {
+    function targetPoint(fragment) {
+        if (!fragment) {
             return {
                 x: window.innerWidth * (0.24 + (encounter.damageCursor % 4) * 0.16),
                 y: window.innerHeight * (0.28 + (encounter.damageCursor % 3) * 0.16)
             };
         }
-        var rect = element.getBoundingClientRect();
+        var rect = fragment.rect;
         return {
             x: clamp(rect.left + rect.width * 0.52, 24, window.innerWidth - 24),
             y: clamp(rect.top + rect.height * 0.48, 70, window.innerHeight - 24)
         };
     }
 
-    function markDamaged(element, ordinal) {
-        if (!element || element.hasAttribute("data-page-damage")) return;
-        var wide = element.matches(".pixel-panel, .control-section, .intro-brand");
-        var direction = ordinal % 2 === 0 ? -1 : 1;
-        var horizontal = direction * (wide ? 22 + ordinal * 2 : 34 + ordinal * 7);
-        var vertical = wide ? 12 + ordinal * 3 : 18 + ordinal * 9;
-        element.dataset.pageDamage = "true";
-        element.style.setProperty("--damage-x", horizontal + "px");
-        element.style.setProperty("--damage-y", vertical + "px");
-        element.style.setProperty("--damage-rotate", direction * (wide ? 2.5 + ordinal : 7 + ordinal * 2) + "deg");
-        element.style.setProperty("--damage-scale", wide ? "0.985" : String(Math.max(0.78, 0.98 - ordinal * 0.025)));
-        element.style.setProperty("--damage-opacity", wide ? "0.72" : String(Math.max(0.28, 0.72 - ordinal * 0.055)));
-        element.style.setProperty("--damage-hue", direction * (12 + ordinal * 7) + "deg");
-        element.style.setProperty("--damage-origin", direction < 0 ? "left center" : "right center");
-        encounter.damaged.push(element);
-        overlay.dataset.damageCount = String(encounter.damaged.length);
+    function shatterFragment(fragment, point) {
+        if (!fragment || fragment.destroyed) return;
+        fragment.destroyed = true;
+        var source = fragment.element;
+        var impactX = clamp((point.x - fragment.rect.left) / fragment.rect.width * 100, 0, 100);
+        var impactY = clamp((point.y - fragment.rect.top) / fragment.rect.height * 100, 0, 100);
+
+        shardClips.forEach(function (clip, index) {
+            var shard = cloneWithCanvasPixels(source);
+            var columnDirection = index % 4 < 2 ? -1 : 1;
+            var rowDirection = index < 4 ? -1 : 1;
+            var force = 68 + index * 13 + encounter.damageCursor * 4;
+            shard.className = "page-shard";
+            shard.removeAttribute("data-fragment-index");
+            shard.style.setProperty("--shard-clip", clip);
+            shard.style.setProperty("--impact-x", impactX + "%");
+            shard.style.setProperty("--impact-y", impactY + "%");
+            shard.style.setProperty("--shard-x", columnDirection * force + "px");
+            shard.style.setProperty("--shard-y", (rowDirection * force * 0.52 + 118 + index * 9) + "px");
+            shard.style.setProperty("--shard-rotate", columnDirection * (18 + index * 9) + "deg");
+            shard.style.setProperty("--shard-scale", String(0.62 + index % 3 * 0.07));
+            shard.style.setProperty("--shard-duration", (reducedMotion ? 340 : 900 + index * 58) + "ms");
+            source.parentNode.insertBefore(shard, source.nextSibling);
+            window.setTimeout(function () {
+                shard.remove();
+            }, reducedMotion ? 420 : 1600);
+        });
+
+        source.classList.add("page-fragment--struck");
+        window.setTimeout(function () {
+            source.remove();
+        }, 40);
+        encounter.destroyedCount += 1;
+        overlay.dataset.damageCount = String(encounter.destroyedCount);
     }
 
     function addBurst(x, y, color, amount) {
@@ -213,17 +319,13 @@
         }, 190);
     }
 
-    function damagePage(element, point) {
-        markDamaged(element, encounter.damageCursor);
-        var secondary = nextDamageTarget();
-        if (secondary && encounter.damaged.length < 12) {
-            markDamaged(secondary, encounter.damageCursor + 1);
-        }
+    function damagePage(fragment, point) {
+        shatterFragment(fragment, point);
         addBurst(point.x, point.y, "#ff4c88", reducedMotion ? 5 : 16);
         shakePage();
         setStatus(
-            "Miss // Page integrity failure",
-            "Collateral damage // " + encounter.damaged.length + " elements"
+            "Miss // Scenery disintegrating",
+            "Collateral damage // " + encounter.destroyedCount + " sections shattered"
         );
     }
 
@@ -244,8 +346,8 @@
 
     function fireShot(hit, now) {
         var origin = emitterPoint(now);
-        var damagedElement = hit ? null : nextDamageTarget();
-        var staticTarget = hit ? null : targetPoint(damagedElement);
+        var damagedFragment = hit ? null : nextDamageTarget();
+        var staticTarget = hit ? null : targetPoint(damagedFragment);
         var firstTarget = hit ? enemyCenter() : staticTarget;
         var direction = firstTarget.x < origin.x ? -1 : 1;
         var projectile;
@@ -268,7 +370,7 @@
         encounter.projectiles.push({
             projectile: projectile,
             hit: hit,
-            element: damagedElement,
+            fragment: damagedFragment,
             staticTarget: staticTarget,
             done: false
         });
@@ -321,7 +423,7 @@
                 );
             }
         } else {
-            damagePage(shot.element, target);
+            damagePage(shot.fragment, target);
         }
     }
 
@@ -349,23 +451,24 @@
         if (enemy.dyingAt !== null) return;
         var elapsed = encounter.canonicalElapsed;
         var width = window.innerWidth;
-        var targetX;
-        if (elapsed < 2.2) {
-            targetX = width * 0.78;
-        } else {
-            targetX = width * (
-                0.50 +
-                Math.sin(elapsed * 0.74) * 0.27 +
-                Math.sin(elapsed * 1.67 + 0.9) * 0.09
-            );
-        }
+        var route = [0.78, 0.14, 0.88, 0.26, 0.72, 0.09, 0.91, 0.33, 0.67, 0.18];
+        var segmentDuration = 2.08;
+        var routeElapsed = Math.max(0, elapsed - 0.45);
+        var segment = Math.floor(routeElapsed / segmentDuration);
+        var progress = clamp((routeElapsed % segmentDuration) / segmentDuration, 0, 1);
+        var eased = progress * progress * (3 - 2 * progress);
+        var from = segment === 0 ? 1.08 : route[(segment - 1) % route.length];
+        var to = route[segment % route.length];
+        var targetX = width * (from + (to - from) * eased);
         targetX = clamp(targetX, enemy.size * 0.56, width - enemy.size * 0.56);
         var previousX = enemy.x;
-        enemy.x += (targetX - enemy.x) * Math.min(1, delta * 3.1);
+        enemy.x = targetX;
         if (Math.abs(enemy.x - previousX) > 0.1) enemy.facing = enemy.x < previousX ? -1 : 1;
-        var dodgeWave = Math.sin(elapsed * 1.46 - 0.8);
-        var dodge = Math.pow(Math.max(0, (dodgeWave - 0.62) / 0.38), 2);
-        enemy.feetY = window.innerHeight * 0.725 - dodge * Math.min(96, window.innerHeight * 0.18);
+        var leap = Math.pow(Math.sin(progress * Math.PI), 1.7);
+        var leapHeight = segment % 2 === 0
+            ? Math.min(92, window.innerHeight * 0.16)
+            : Math.min(138, window.innerHeight * 0.23);
+        enemy.feetY = window.innerHeight * 0.725 - leap * leapHeight;
     }
 
     function drawEnemy() {
@@ -463,9 +566,21 @@
         });
     }
 
+    function obliterateRemainingFacade() {
+        if (!encounter) return;
+        encounter.fragments.forEach(function (fragment, index) {
+            if (fragment.destroyed) return;
+            shatterFragment(fragment, {
+                x: fragment.rect.left + fragment.rect.width * (0.35 + index % 3 * 0.15),
+                y: fragment.rect.top + fragment.rect.height * 0.5
+            });
+        });
+    }
+
     function completeEncounter() {
         if (!encounter || encounter.complete) return;
         encounter.complete = true;
+        obliterateRemainingFacade();
         overlay.dataset.encounterState = "complete";
         document.body.classList.add("page-destruction-complete");
         setStatus(
@@ -527,23 +642,34 @@
         animationFrame = window.requestAnimationFrame(tick);
     }
 
-    function startEncounter() {
-        if (encounter) return;
+    function beginEncounter() {
+        if (!preparing || encounter) return;
+        preparing = false;
+        window.scrollTo({ top: 0, left: 0, behavior: "auto" });
         loadEncounterSprites();
         resizeCanvas();
+        restoreButton.hidden = true;
+        overlay.hidden = false;
+        overlay.dataset.encounterState = "active";
+        overlay.dataset.shotCount = "0";
+        overlay.dataset.damageCount = "0";
+        var fragments = captureFacade();
+        var startedAt = performance.now();
         encounter = {
-            startedAt: performance.now(),
-            lastFrame: performance.now(),
+            startedAt: startedAt,
+            lastFrame: startedAt,
             canonicalElapsed: 0,
             timeScale: reducedMotion ? 0.4 : 1,
             nextShot: 0,
             damageCursor: 0,
-            damaged: [],
+            destroyedCount: 0,
+            fragments: fragments,
             projectiles: [],
             particles: [],
             particleSeed: 1,
             runnerEngaged: false,
             complete: false,
+            originalScrollY: pendingScrollY,
             enemy: {
                 x: window.innerWidth + 180,
                 feetY: window.innerHeight * 0.725,
@@ -553,12 +679,6 @@
                 dyingAt: null
             }
         };
-        trigger.disabled = true;
-        restoreButton.hidden = true;
-        overlay.hidden = false;
-        overlay.dataset.encounterState = "active";
-        overlay.dataset.shotCount = "0";
-        overlay.dataset.damageCount = "0";
         document.body.classList.add("page-destruction-active");
         document.body.classList.remove("page-destruction-complete");
         pageMain.setAttribute("inert", "");
@@ -568,50 +688,59 @@
         animationFrame = window.requestAnimationFrame(tick);
     }
 
-    function clearDamage() {
-        document.querySelectorAll("[data-page-damage]").forEach(function (element) {
-            delete element.dataset.pageDamage;
-            [
-                "--damage-x",
-                "--damage-y",
-                "--damage-rotate",
-                "--damage-scale",
-                "--damage-opacity",
-                "--damage-hue",
-                "--damage-origin"
-            ].forEach(function (property) {
-                element.style.removeProperty(property);
-            });
+    function startEncounter() {
+        if (encounter || preparing) return;
+        preparing = true;
+        pendingScrollY = window.scrollY;
+        trigger.disabled = true;
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: reducedMotion ? "auto" : "smooth"
         });
+        window.clearTimeout(startTimer);
+        startTimer = window.setTimeout(beginEncounter, reducedMotion ? 40 : 560);
     }
 
     function restoreTimeline() {
+        if (preparing && !encounter) {
+            preparing = false;
+            window.clearTimeout(startTimer);
+            trigger.disabled = false;
+            window.scrollTo({ top: pendingScrollY, left: 0, behavior: "auto" });
+            trigger.focus({ preventScroll: true });
+            return;
+        }
         if (!encounter) return;
+        var restoreScrollY = encounter.originalScrollY;
         window.cancelAnimationFrame(animationFrame);
+        window.clearTimeout(startTimer);
         window.clearTimeout(firingTimer);
         window.clearTimeout(shakeTimer);
         if (window.arynPageRunner) window.arynPageRunner.disengage();
-        clearDamage();
         context.clearRect(0, 0, window.innerWidth, window.innerHeight);
         document.body.classList.remove(
             "page-destruction-active",
             "page-destruction-impact",
-            "page-destruction-complete"
+            "page-destruction-complete",
+            "page-destruction-facade-ready"
         );
         overlay.hidden = true;
+        facade.replaceChildren();
         pageMain.removeAttribute("inert");
         delete overlay.dataset.encounterState;
         delete overlay.dataset.shotCount;
         delete overlay.dataset.damageCount;
         encounter = null;
         trigger.disabled = false;
+        window.scrollTo({ top: restoreScrollY, left: 0, behavior: "auto" });
         trigger.focus({ preventScroll: true });
     }
 
     trigger.addEventListener("click", startEncounter);
     restoreButton.addEventListener("click", restoreTimeline);
     document.addEventListener("keydown", function (event) {
-        if (event.key === "Escape" && encounter) restoreTimeline();
+        if (event.key === "Escape" && (encounter || preparing)) restoreTimeline();
     });
     window.addEventListener("resize", function () {
         if (!encounter) return;
@@ -628,6 +757,7 @@
         start: startEncounter,
         restore: restoreTimeline,
         state: function () {
+            if (preparing) return "preparing";
             if (!encounter) return "idle";
             return encounter.complete ? "complete" : "active";
         }
