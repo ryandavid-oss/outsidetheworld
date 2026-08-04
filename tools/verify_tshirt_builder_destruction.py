@@ -58,6 +58,9 @@ for fragment, label in [
     ("motion.combatJumpRequested", "authored combat jump queue"),
     ("cueJump: function", "encounter jump choreography API"),
     ("function activeRunSpeed()", "faster combat pursuit"),
+    ("var combatHoldDistance = runnerWidth * 0.34", "pursuit stopping distance"),
+    ("var combatResumeDistance = runnerWidth * 0.58", "pursuit hysteresis"),
+    ("var combatStep = Math.min", "overshoot-safe chase step"),
     ("page-shard-fly", "page fragment flight animation"),
 ]:
     require(html, fragment, label)

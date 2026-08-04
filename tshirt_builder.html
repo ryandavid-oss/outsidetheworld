@@ -4108,7 +4108,10 @@
                     if (frameEncounterTarget) {
                         motion.nextPauseAt = Infinity;
                         var encounterDeltaX = frameEncounterTarget.x - (motion.x + runnerWidth / 2);
-                        if (motion.mode === "idle") {
+                        if (
+                            motion.mode === "idle" &&
+                            (!encounterActive || Math.abs(encounterDeltaX) > runnerWidth * 0.58)
+                        ) {
                             setFacing(encounterDeltaX < 0 ? -1 : 1);
                             motion.vx = runSpeed * motion.direction;
                             setMotion("run");
@@ -4127,18 +4130,19 @@
                             ? frameEncounterTarget.x
                             : window.innerWidth * 0.72;
                         var combatDeltaX = combatTargetX - (motion.x + runnerWidth / 2);
+                        var combatDistance = Math.abs(combatDeltaX);
+                        var combatHoldDistance = runnerWidth * 0.34;
+                        var combatResumeDistance = runnerWidth * 0.58;
 
                         if (motion.mode === "run") {
-                            if (
-                                Math.abs(combatDeltaX) > runnerWidth * 0.22 &&
-                                Math.sign(combatDeltaX) !== motion.direction
-                            ) {
-                                setFacing(combatDeltaX < 0 ? -1 : 1);
-                            }
                             motion.feetY = groundY();
-                            motion.vx = combatSpeed * motion.direction;
-                            motion.x += motion.vx * delta;
                             if (motion.combatJumpRequested > 0) {
+                                if (
+                                    combatDistance > combatHoldDistance &&
+                                    Math.sign(combatDeltaX) !== motion.direction
+                                ) {
+                                    setFacing(combatDeltaX < 0 ? -1 : 1);
+                                }
                                 motion.vy = -Math.min(
                                     520,
                                     (370 + window.innerHeight * 0.08) * motion.combatJumpRequested
@@ -4148,6 +4152,27 @@
                                 setMotion("jump");
                                 setJumpPhase("takeoff");
                                 motion.jumpPhaseUntil = now + 150;
+                            } else if (combatDistance <= combatHoldDistance) {
+                                motion.vx = 0;
+                                setMotion("idle");
+                            } else {
+                                if (Math.sign(combatDeltaX) !== motion.direction) {
+                                    setFacing(combatDeltaX < 0 ? -1 : 1);
+                                }
+                                var combatStep = Math.min(
+                                    combatSpeed * delta,
+                                    Math.max(0, combatDistance - combatHoldDistance)
+                                );
+                                motion.vx = combatSpeed * motion.direction;
+                                motion.x += combatStep * motion.direction;
+                            }
+                        } else if (motion.mode === "idle") {
+                            motion.feetY = groundY();
+                            motion.vx = 0;
+                            if (combatDistance >= combatResumeDistance) {
+                                setFacing(combatDeltaX < 0 ? -1 : 1);
+                                motion.vx = combatSpeed * motion.direction;
+                                setMotion("run");
                             }
                         } else if (motion.mode === "jump" || motion.mode === "fall") {
                             if (
