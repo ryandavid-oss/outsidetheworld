@@ -1656,7 +1656,7 @@
         }
 
         .export-dialog {
-            width: min(620px, 100%);
+            width: min(760px, 100%);
         }
 
         .export-description {
@@ -1667,20 +1667,167 @@
             line-height: 1.65;
         }
 
-        .export-size-list {
+        .export-design-summary {
             display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+            align-items: center;
+            gap: 18px;
+            margin-bottom: 18px;
+            border: 2px solid rgba(99, 149, 238, 0.30);
+            border-radius: 12px;
+            background: rgba(99, 149, 238, 0.08);
+            padding: 14px 16px;
+        }
+
+        .export-design-summary__title {
+            margin: 0 0 9px;
+            color: var(--light-blue);
+            font-family: var(--font-game);
+            font-size: 11px;
+            letter-spacing: 0.10em;
+            text-transform: uppercase;
+        }
+
+        .export-design-summary dl {
+            display: grid;
+            grid-template-columns: auto minmax(0, 1fr);
+            gap: 5px 12px;
+            margin: 0;
+            font-family: var(--font-mono);
+            font-size: 13px;
+            line-height: 1.45;
+        }
+
+        .export-design-summary dt {
+            color: rgba(247, 242, 247, 0.48);
+        }
+
+        .export-design-summary dd {
+            overflow-wrap: anywhere;
+            margin: 0;
+            color: var(--ink);
+            font-weight: 700;
+        }
+
+        .export-colorway-list {
+            display: grid;
+            gap: 14px;
+        }
+
+        .export-colorway {
+            display: grid;
+            gap: 13px;
+            border: 2px solid rgba(160, 190, 245, 0.24);
+            border-radius: 13px;
+            background: rgba(0, 0, 0, 0.20);
+            padding: 14px;
+        }
+
+        .export-colorway[data-invalid="true"] {
+            border-color: rgba(240, 74, 142, 0.68);
+        }
+
+        .export-colorway__header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .export-colorway__title {
+            margin: 0;
+            color: var(--green);
+            font-family: var(--font-game);
+            font-size: 12px;
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+        }
+
+        .export-color-choice {
+            display: grid;
+            grid-template-columns: 52px minmax(0, 1fr);
+            align-items: end;
             gap: 10px;
         }
 
-        .export-size-row {
-            display: grid;
-            grid-template-columns: minmax(0, 1fr) minmax(108px, 0.42fr) auto;
-            align-items: end;
-            gap: 10px;
+        .export-color-swatch {
+            width: 52px;
+            height: 52px;
+            border: 2px solid rgba(247, 242, 247, 0.34);
+            border-radius: 9px;
+            background-color: #242733;
+            background-image: var(--swatch-image);
+            background-position: center;
+            background-size: cover;
+            box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.18);
+        }
+
+        .export-colorway-preview {
+            display: block;
+            width: 100%;
+            height: auto;
             border: 2px solid rgba(160, 190, 245, 0.18);
-            border-radius: 11px;
-            background: rgba(0, 0, 0, 0.16);
-            padding: 12px;
+            border-radius: 10px;
+            background: #09090b;
+        }
+
+        .export-preview-labels {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            margin-top: -8px;
+            color: rgba(145, 175, 179, 0.80);
+            font-family: var(--font-game);
+            font-size: 9px;
+            letter-spacing: 0.10em;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .export-size-grid {
+            display: grid;
+            grid-template-columns: repeat(6, minmax(0, 1fr));
+            gap: 8px;
+        }
+
+        .export-size-field {
+            display: grid;
+            gap: 6px;
+            color: rgba(247, 242, 247, 0.68);
+            font-family: var(--font-game);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-align: center;
+        }
+
+        .export-size-input {
+            min-width: 0;
+            padding-inline: 7px;
+            text-align: center;
+        }
+
+        .export-colorway__footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            color: rgba(247, 242, 247, 0.58);
+            font-family: var(--font-mono);
+            font-size: 13px;
+        }
+
+        .export-colorway__footer strong {
+            color: var(--green);
+            font-family: var(--font-game);
+            font-size: 13px;
+        }
+
+        .export-colorway-warning {
+            margin: 0;
+            color: var(--pink);
+            font-family: var(--font-mono);
+            font-size: 13px;
+            line-height: 1.45;
         }
 
         .export-remove {
@@ -1695,7 +1842,7 @@
             text-transform: none;
         }
 
-        .export-add-size {
+        .export-add-colorway {
             justify-self: start;
         }
 
@@ -2361,9 +2508,16 @@
                 gap: 4px;
             }
 
-            .export-size-row {
-                grid-template-columns: minmax(0, 1fr) 92px auto;
-                padding: 10px;
+            .export-design-summary {
+                grid-template-columns: 1fr;
+            }
+
+            .export-design-summary .pixel-button {
+                justify-self: start;
+            }
+
+            .export-size-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
             }
         }
     </style>
@@ -2534,18 +2688,37 @@
                     aria-label="Close print package form">×</button>
             </div>
 
-            <p class="export-description" id="exportDescription">Add the sizes and quantities that belong with this
-                design. They will be written into the print-spec.txt file inside your ZIP.</p>
+            <p class="export-description" id="exportDescription">This design applies to every colorway. Choose each
+                garment color, enter its size quantities, and the ZIP will include the correct proofs and artwork.</p>
+
+            <div class="export-design-summary">
+                <div>
+                    <p class="export-design-summary__title">Design applied to every colorway</p>
+                    <dl>
+                        <dt>Shirt</dt>
+                        <dd id="exportDesignShirt"></dd>
+                        <dt>Front</dt>
+                        <dd id="exportDesignFront"></dd>
+                        <dt>Back</dt>
+                        <dd id="exportDesignBack"></dd>
+                        <dt>Back text</dt>
+                        <dd id="exportDesignText"></dd>
+                    </dl>
+                </div>
+                <button class="pixel-button pixel-button--quiet" id="exportEditDesignButton" type="button">
+                    Edit design
+                </button>
+            </div>
 
             <form class="order-form" id="exportForm">
-                <div class="export-size-list" id="exportSizeRows"></div>
+                <div class="export-colorway-list" id="exportColorwayList"></div>
 
-                <button class="pixel-button pixel-button--quiet export-add-size" id="exportAddSizeButton"
-                    type="button">+ Add another size</button>
+                <button class="pixel-button pixel-button--quiet export-add-colorway" id="exportAddColorwayButton"
+                    type="button">+ Add another colorway</button>
 
                 <div class="export-total" aria-live="polite">
-                    <span>Total shirts</span>
-                    <strong id="exportTotalQuantity">1</strong>
+                    <span id="exportColorwayCount">1 colorway</span>
+                    <span>Total shirts: <strong id="exportTotalQuantity">0</strong></span>
                 </div>
 
                 <button class="pixel-button order-submit" id="exportSubmitButton" type="submit">
@@ -2933,6 +3106,10 @@
             var orderSubmitting = false;
             var exportTrigger = null;
             var exportSubmitting = false;
+            var exportDesignSnapshot = null;
+            var exportColorways = [];
+            var exportColorwaySequence = 0;
+            var exportPreviewGeneration = 0;
 
             var canvas = document.getElementById("preview");
             var ctx = canvas.getContext("2d");
@@ -2953,8 +3130,14 @@
             var exportModal = document.getElementById("exportModal");
             var exportCloseButton = document.getElementById("exportCloseButton");
             var exportForm = document.getElementById("exportForm");
-            var exportSizeRows = document.getElementById("exportSizeRows");
-            var exportAddSizeButton = document.getElementById("exportAddSizeButton");
+            var exportDesignShirt = document.getElementById("exportDesignShirt");
+            var exportDesignFront = document.getElementById("exportDesignFront");
+            var exportDesignBack = document.getElementById("exportDesignBack");
+            var exportDesignText = document.getElementById("exportDesignText");
+            var exportEditDesignButton = document.getElementById("exportEditDesignButton");
+            var exportColorwayList = document.getElementById("exportColorwayList");
+            var exportAddColorwayButton = document.getElementById("exportAddColorwayButton");
+            var exportColorwayCount = document.getElementById("exportColorwayCount");
             var exportTotalQuantity = document.getElementById("exportTotalQuantity");
             var exportSubmitButton = document.getElementById("exportSubmitButton");
             var exportStatus = document.getElementById("exportStatus");
@@ -3865,6 +4048,22 @@
                 return "OTW-" + simpleHash(signature);
             }
 
+            function printPackageCode(designState, orderDetails) {
+                var orderSignature = orderDetails.colorways.map(function (colorway) {
+                    return colorway.color + ":" + colorway.items.map(function (item) {
+                        return item.size + "x" + item.quantity;
+                    }).join(",");
+                }).join(";");
+                var signature = [
+                    designState.style,
+                    designState.frontArt,
+                    designState.backArt,
+                    designState.wordsOn ? designState.slogan : "none",
+                    orderSignature
+                ].join("|");
+                return "OTW-" + simpleHash(signature);
+            }
+
             function updateHash() {
                 var params = new URLSearchParams();
                 params.set("body", state.style);
@@ -4329,7 +4528,7 @@
                 };
             }
 
-            async function createBuildSheet(designState, designCanvases) {
+            async function createBuildSheet(designState, designCanvases, buildCodeOverride) {
                 var source = designState || state;
                 var views = designCanvases || await createDesignCanvases(source);
                 var sheet = document.createElement("canvas");
@@ -4350,7 +4549,7 @@
                 sheetContext.fillStyle = "#91afb3";
                 sheetContext.font = "700 40px \"Fira Code\", monospace";
                 sheetContext.textAlign = "right";
-                sheetContext.fillText(designCode(source), 3920, 2110);
+                sheetContext.fillText(buildCodeOverride || designCode(source), 3920, 2110);
 
                 return sheet;
             }
@@ -4392,14 +4591,15 @@
                     .replace(/(^-|-$)/g, "");
             }
 
-            function createPrintPackagePlan(designState) {
+            function createPrintPackagePlan(designState, rootPath) {
                 var product = garmentDetails(designState.style);
+                var prefix = rootPath ? rootPath.replace(/\/$/, "") + "/" : "";
                 var garment = ["front", "back"].map(function (side) {
                     var sourcePath = shirtImagePath(designState.color, designState.style, side);
                     return {
                         side: side,
                         sourcePath: sourcePath,
-                        relativePath: "garment/" +
+                        relativePath: prefix + "garment/" +
                             product.styleNumber.toLowerCase() + "-" +
                             designState.color + "-" + side + "." + assetExtension(sourcePath)
                     };
@@ -4419,7 +4619,7 @@
                         side: side,
                         kind: kind,
                         sourcePath: sourcePath,
-                        relativePath: "artwork/" + side + "-" + safeAssetBasename(sourcePath)
+                        relativePath: prefix + "artwork/" + side + "-" + safeAssetBasename(sourcePath)
                     };
                 });
 
@@ -4432,87 +4632,142 @@
 
             function placementDescription(side, kind) {
                 if (kind === "none") return "No artwork";
-                var placement = PLACEMENT[side];
-                var scale = kind === "full"
-                    ? placement.logoScaleFull
-                    : kind === "frgmnts"
-                        ? placement.logoScaleFrgmnts
-                        : placement.logoScaleMark;
-                var width = Math.round(Math.min(
-                    2000 * scale,
-                    side === "front" ? 2000 * 0.22 : 2000 * 0.62
-                ));
-                return (side === "front" ? "Left chest" : "Centered back") +
-                    "; mockup center " + placement.logoCenter.x + ", " + placement.logoCenter.y +
-                    " on a 2000 × 2000 canvas; rendered width " + width + " px";
+                return side === "front" ? "Left chest" : "Centered back";
             }
 
-            function buildPrintSpec(designState, code, plan, orderDetails) {
-                var ink = LIGHT_SHIRTS.has(designState.color) ? "dark" : "light";
+            function buildPrintSpec(designState, code, colorwayPlans, orderDetails) {
+                var product = colorwayPlans[0].plan.product;
                 var lines = [
                     "OUTSIDE THE WORLD / PRINT PACKAGE",
                     "=================================",
                     "",
-                    "Build code: " + code,
-                    "Exported: " + new Date().toISOString(),
-                    "Build link: " + location.href,
-                    "",
-                    "GARMENT",
-                    "-------",
-                    "Style number: " + plan.product.styleNumber,
-                    "Style: " + plan.product.productName,
-                    "Sleeve: " + plan.product.sleeve,
-                    "Color: " + colorLabel(designState.color),
-                    "Color ID: " + designState.color,
-                    "Front garment reference: " + plan.garment[0].relativePath,
-                    "Back garment reference: " + plan.garment[1].relativePath,
-                    "",
-                    "ORDER REQUEST",
+                    "ORDER SUMMARY",
                     "-------------",
-                    "Size breakdown:"
+                    "Total quantity: " + orderDetails.totalQuantity,
+                    "Colorways: " + orderDetails.colorways.length,
+                    "",
+                    "COLOR / SIZE BREAKDOWN",
+                    "----------------------"
                 ];
 
-                orderDetails.items.forEach(function (item) {
-                    lines.push(item.size + ": " + item.quantity);
-                });
-                lines.push("Total quantity: " + orderDetails.totalQuantity);
-                lines.push("");
-                lines.push("ARTWORK");
-                lines.push("-------");
-
-                plan.artwork.forEach(function (entry) {
-                    lines.push(entry.side.toUpperCase());
-                    lines.push("Selection: " + artworkLabel(entry.kind));
-                    lines.push("Asset: " + (entry.relativePath || "None"));
-                    lines.push("Placement: " + placementDescription(entry.side, entry.kind));
-                    if (entry.sourcePath) {
-                        lines.push(
-                            "Format: " + assetExtension(entry.sourcePath).toUpperCase() +
-                            (assetExtension(entry.sourcePath) === "svg" ? " vector" : " original raster")
-                        );
-                    }
+                orderDetails.colorways.forEach(function (colorway) {
+                    lines.push(colorLabel(colorway.color).toUpperCase());
+                    colorway.items.forEach(function (item) {
+                        lines.push(item.size + ": " + item.quantity);
+                    });
+                    lines.push("Color total: " + colorway.totalQuantity);
                     lines.push("");
                 });
 
-                lines.push("BACK TEXT");
-                lines.push("---------");
-                lines.push("Enabled: " + (designState.wordsOn ? "Yes" : "No"));
-                lines.push("Phrase: " + (designState.wordsOn ? designState.slogan.toUpperCase() : "None"));
-                lines.push("Typeface: Fira Code Bold (700), uppercase, tracked");
-                lines.push("Ink: " + ink + " artwork treatment");
+                lines.push("GARMENT");
+                lines.push("-------");
+                lines.push(product.styleNumber + " - " + product.productName);
+                lines.push("Sleeve: " + product.sleeve);
                 lines.push("");
-                lines.push("PROOFS");
-                lines.push("------");
-                lines.push("Front: proofs/front.png");
-                lines.push("Back: proofs/back.png");
-                lines.push("Combined: proofs/front-and-back.jpg");
+                lines.push("PRINT LOCATIONS");
+                lines.push("---------------");
+                lines.push(
+                    "Front: " + artworkLabel(designState.frontArt) +
+                    (designState.frontArt === "none" ? "" : " - " + placementDescription("front", designState.frontArt))
+                );
+                lines.push(
+                    "Back: " + artworkLabel(designState.backArt) +
+                    (designState.backArt === "none" ? "" : " - " + placementDescription("back", designState.backArt))
+                );
+                lines.push("Back text: " + (designState.wordsOn ? designState.slogan.toUpperCase() : "None"));
                 lines.push("");
-                lines.push("PRODUCTION NOTES");
-                lines.push("----------------");
-                lines.push("Use the proof files to confirm side, placement, relative scale, and text treatment.");
-                lines.push("Use the original artwork files for production; do not print artwork from the garment proofs.");
-                lines.push("Mockup coordinates are reference values, not physical print dimensions.");
-                lines.push("Confirm final print size and placement with the printer before production.");
+                lines.push("PRIMARY VISUAL PROOFS");
+                lines.push("---------------------");
+                colorwayPlans.forEach(function (colorwayPlan) {
+                    lines.push(
+                        colorLabel(colorwayPlan.colorway.color) + ": " +
+                        colorwayPlan.root + "/proofs/front-and-back.jpg"
+                    );
+                });
+                lines.push("");
+
+                lines.push("PRODUCTION ARTWORK");
+                lines.push("------------------");
+                colorwayPlans.forEach(function (colorwayPlan, colorwayIndex) {
+                    var colorway = colorwayPlan.colorway;
+                    var contrast = LIGHT_SHIRTS.has(colorway.color)
+                        ? "Dark artwork for light garment"
+                        : "Light artwork for dark garment";
+
+                    lines.push(
+                        "COLORWAY " + (colorwayIndex + 1) + " - " +
+                        colorLabel(colorway.color).toUpperCase()
+                    );
+                    lines.push("Contrast treatment: " + contrast);
+                    lines.push("Primary proof: " + colorwayPlan.root + "/proofs/front-and-back.jpg");
+                    lines.push("");
+
+                    colorwayPlan.plan.artwork.forEach(function (entry) {
+                        if (entry.kind === "none") return;
+                        lines.push(
+                            entry.side.toUpperCase() + " - " +
+                            placementDescription(entry.side, entry.kind).toUpperCase()
+                        );
+                        lines.push("Artwork: " + artworkLabel(entry.kind));
+                        lines.push("Production file: " + (entry.relativePath || "None"));
+                        if (entry.sourcePath) {
+                            lines.push(
+                                "Format: " + assetExtension(entry.sourcePath).toUpperCase() +
+                                (assetExtension(entry.sourcePath) === "svg" ? " vector" : " original raster")
+                            );
+                            lines.push("Physical print size: Not specified - confirm before production");
+                            lines.push("Visual placement: Match the supplied proof");
+                        }
+                        lines.push("");
+                    });
+
+                    if (designState.wordsOn) {
+                        lines.push("BACK TEXT");
+                        lines.push("Phrase: " + designState.slogan.toUpperCase());
+                        lines.push("Typeface: Fira Code Bold (700), uppercase, tracked");
+                        lines.push("Treatment: " + contrast);
+                        lines.push("Production source: Recreate from this specification and match the supplied proof");
+                        lines.push("Physical print size: Not specified - confirm before production");
+                        lines.push("");
+                    }
+                });
+
+                lines.push("PROOF FILES");
+                lines.push("-----------");
+                colorwayPlans.forEach(function (colorwayPlan) {
+                    lines.push(colorLabel(colorwayPlan.colorway.color).toUpperCase());
+                    lines.push("Combined: " + colorwayPlan.root + "/proofs/front-and-back.jpg");
+                    lines.push("Front: " + colorwayPlan.root + "/proofs/front.png");
+                    lines.push("Back: " + colorwayPlan.root + "/proofs/back.png");
+                    lines.push("");
+                });
+
+                lines.push("GARMENT REFERENCES");
+                lines.push("------------------");
+                colorwayPlans.forEach(function (colorwayPlan) {
+                    lines.push(colorLabel(colorwayPlan.colorway.color).toUpperCase());
+                    lines.push("Front: " + colorwayPlan.plan.garment[0].relativePath);
+                    lines.push("Back: " + colorwayPlan.plan.garment[1].relativePath);
+                    lines.push("");
+                });
+
+                lines.push("IMPORTANT PRODUCTION NOTES");
+                lines.push("--------------------------");
+                lines.push("Print from the production artwork files, not the proof images.");
+                lines.push("Use the proofs to confirm location, proportion, orientation, and artwork colorway.");
+                lines.push("Garment images are references only.");
+                lines.push("Confirm physical print dimensions before production.");
+                lines.push("");
+                lines.push("PACKAGE REFERENCE");
+                lines.push("-----------------");
+                lines.push("Build code: " + code);
+                lines.push("Exported: " + new Date().toISOString());
+                lines.push("Build link: " + location.href);
+                lines.push(
+                    "Color IDs: " + orderDetails.colorways.map(function (colorway) {
+                        return colorway.color;
+                    }).join(", ")
+                );
                 lines.push("");
 
                 return lines.join("\n");
@@ -4647,118 +4902,317 @@
                 }, 1000);
             }
 
-            function addExportSizeRow(size, quantity) {
-                var row = document.createElement("div");
-                row.className = "export-size-row";
-
-                var sizeLabel = document.createElement("label");
-                sizeLabel.className = "order-field";
-                sizeLabel.appendChild(document.createTextNode("Shirt size"));
-
-                var select = document.createElement("select");
-                select.className = "order-input";
-                select.name = "export_size";
-                select.required = true;
-
-                var placeholder = document.createElement("option");
-                placeholder.value = "";
-                placeholder.textContent = "Choose a size";
-                select.appendChild(placeholder);
-                SHIRT_SIZES.forEach(function (shirtSize) {
-                    var option = document.createElement("option");
-                    option.value = shirtSize;
-                    option.textContent = shirtSize;
-                    option.selected = shirtSize === size;
-                    select.appendChild(option);
+            function availableExportColors(style) {
+                return COLOR_OPTIONS.filter(function (color) {
+                    return isValidCombo(style, color.id);
                 });
-                sizeLabel.appendChild(select);
-
-                var quantityLabel = document.createElement("label");
-                quantityLabel.className = "order-field";
-                quantityLabel.appendChild(document.createTextNode("Quantity"));
-
-                var quantityInput = document.createElement("input");
-                quantityInput.className = "order-input";
-                quantityInput.type = "number";
-                quantityInput.name = "export_quantity";
-                quantityInput.inputMode = "numeric";
-                quantityInput.min = "1";
-                quantityInput.max = "99";
-                quantityInput.step = "1";
-                quantityInput.value = String(quantity || 1);
-                quantityInput.required = true;
-                quantityLabel.appendChild(quantityInput);
-
-                var removeButton = document.createElement("button");
-                removeButton.className = "pixel-button export-remove";
-                removeButton.type = "button";
-                removeButton.textContent = "×";
-                removeButton.setAttribute("aria-label", "Remove this size");
-                removeButton.addEventListener("click", function () {
-                    row.remove();
-                    syncExportSizeRows();
-                });
-
-                row.appendChild(sizeLabel);
-                row.appendChild(quantityLabel);
-                row.appendChild(removeButton);
-                exportSizeRows.appendChild(row);
-                syncExportSizeRows();
-                return row;
             }
 
-            function syncExportSizeRows() {
-                var rows = Array.from(exportSizeRows.querySelectorAll(".export-size-row"));
-                var selects = rows.map(function (row) {
-                    return row.querySelector("select");
-                });
-                var selectedSizes = selects.map(function (select) {
-                    return select.value;
-                }).filter(Boolean);
-                var totalQuantity = 0;
+            function emptyExportQuantities() {
+                return SHIRT_SIZES.reduce(function (quantities, size) {
+                    quantities[size] = 0;
+                    return quantities;
+                }, {});
+            }
 
-                selects.forEach(function (select) {
-                    Array.from(select.options).forEach(function (option) {
-                        option.disabled = Boolean(
-                            option.value &&
-                            option.value !== select.value &&
-                            selectedSizes.includes(option.value)
-                        );
-                    });
-                });
+            function createExportColorway(color) {
+                exportColorwaySequence += 1;
+                return {
+                    id: exportColorwaySequence,
+                    color: color,
+                    quantities: emptyExportQuantities(),
+                    error: ""
+                };
+            }
 
-                rows.forEach(function (row) {
-                    var quantity = Number(row.querySelector("input").value);
-                    if (Number.isInteger(quantity) && quantity > 0) {
-                        totalQuantity += quantity;
+            function exportColorwayTotal(colorway) {
+                return SHIRT_SIZES.reduce(function (total, size) {
+                    var quantity = Number(colorway.quantities[size]);
+                    return total + (Number.isInteger(quantity) && quantity > 0 ? quantity : 0);
+                }, 0);
+            }
+
+            function exportDesignSignature(designState) {
+                return [
+                    designState.style,
+                    designState.frontArt,
+                    designState.backArt,
+                    designState.wordsOn ? designState.slogan : "none"
+                ].join("|");
+            }
+
+            function updateExportDesignSummary() {
+                var product = garmentDetails(exportDesignSnapshot.style);
+                exportDesignShirt.textContent = product.productName + " (" + product.styleNumber + ")";
+                exportDesignFront.textContent = artworkLabel(exportDesignSnapshot.frontArt) +
+                    (exportDesignSnapshot.frontArt === "none" ? "" : " — left chest");
+                exportDesignBack.textContent = artworkLabel(exportDesignSnapshot.backArt) +
+                    (exportDesignSnapshot.backArt === "none" ? "" : " — centered back");
+                exportDesignText.textContent = exportDesignSnapshot.wordsOn
+                    ? exportDesignSnapshot.slogan.toUpperCase()
+                    : "None";
+            }
+
+            async function renderExportColorwayPreview(card, colorway, previewGeneration) {
+                var canvas = card.querySelector("canvas");
+                var context = canvas.getContext("2d");
+                var revision = String(Date.now()) + "-" + Math.random();
+                canvas.dataset.revision = revision;
+                context.fillStyle = "#09090b";
+                context.fillRect(0, 0, canvas.width, canvas.height);
+                context.fillStyle = "#91afb3";
+                context.font = "700 16px monospace";
+                context.textAlign = "center";
+                context.fillText("RENDERING COLORWAY…", canvas.width / 2, canvas.height / 2);
+
+                if (previewGeneration !== exportPreviewGeneration) return;
+                if (!isValidCombo(exportDesignSnapshot.style, colorway.color)) {
+                    context.fillStyle = "#f04a8e";
+                    context.fillText("CHOOSE AN AVAILABLE COLOR", canvas.width / 2, canvas.height / 2 + 28);
+                    return;
+                }
+
+                try {
+                    var previewState = cloneState(exportDesignSnapshot);
+                    previewState.color = colorway.color;
+                    var views = await createDesignCanvases(previewState);
+                    if (
+                        previewGeneration !== exportPreviewGeneration ||
+                        canvas.dataset.revision !== revision ||
+                        !canvas.isConnected
+                    ) return;
+                    context.fillStyle = "#09090b";
+                    context.fillRect(0, 0, canvas.width, canvas.height);
+                    context.drawImage(views.front, 0, 0, canvas.width / 2, canvas.height);
+                    context.drawImage(views.back, canvas.width / 2, 0, canvas.width / 2, canvas.height);
+                } catch (error) {
+                    if (canvas.dataset.revision !== revision || !canvas.isConnected) return;
+                    context.fillStyle = "#09090b";
+                    context.fillRect(0, 0, canvas.width, canvas.height);
+                    context.fillStyle = "#f04a8e";
+                    context.fillText("PREVIEW UNAVAILABLE", canvas.width / 2, canvas.height / 2);
+                }
+            }
+
+            function renderExportColorways() {
+                var availableColors = availableExportColors(exportDesignSnapshot.style);
+                var selectedColors = exportColorways.map(function (colorway) {
+                    return colorway.color;
+                });
+                var previewGeneration = ++exportPreviewGeneration;
+                var previewJobs = [];
+                exportColorwayList.innerHTML = "";
+
+                exportColorways.forEach(function (colorway, index) {
+                    var validColor = isValidCombo(exportDesignSnapshot.style, colorway.color);
+                    var card = document.createElement("section");
+                    card.className = "export-colorway";
+                    card.dataset.colorwayId = String(colorway.id);
+                    card.dataset.invalid = String(!validColor || Boolean(colorway.error));
+
+                    var header = document.createElement("div");
+                    header.className = "export-colorway__header";
+                    var title = document.createElement("h3");
+                    title.className = "export-colorway__title";
+                    title.textContent = "Colorway " + (index + 1);
+                    var removeButton = document.createElement("button");
+                    removeButton.className = "pixel-button export-remove";
+                    removeButton.type = "button";
+                    removeButton.dataset.removeColorway = String(colorway.id);
+                    removeButton.textContent = "×";
+                    removeButton.setAttribute("aria-label", "Remove colorway " + (index + 1));
+                    removeButton.disabled = exportColorways.length === 1 || exportSubmitting;
+                    header.appendChild(title);
+                    header.appendChild(removeButton);
+
+                    var colorChoice = document.createElement("div");
+                    colorChoice.className = "export-color-choice";
+                    var swatch = document.createElement("span");
+                    swatch.className = "export-color-swatch";
+                    swatch.setAttribute("aria-hidden", "true");
+                    swatch.style.setProperty(
+                        "--swatch-image",
+                        "url(\"" + BASE_PATH + "DM130/swatches/" + colorway.color + ".gif\")"
+                    );
+                    var colorLabelElement = document.createElement("label");
+                    colorLabelElement.className = "order-field";
+                    colorLabelElement.appendChild(document.createTextNode("Garment color"));
+                    var colorSelect = document.createElement("select");
+                    colorSelect.className = "order-input export-color-select";
+                    colorSelect.dataset.colorwayId = String(colorway.id);
+                    colorSelect.required = true;
+
+                    if (!validColor) {
+                        var unavailableOption = document.createElement("option");
+                        unavailableOption.value = colorway.color;
+                        unavailableOption.textContent = colorLabel(colorway.color) + " — unavailable";
+                        unavailableOption.selected = true;
+                        colorSelect.appendChild(unavailableOption);
                     }
-                    row.querySelector(".export-remove").disabled = rows.length === 1 || exportSubmitting;
+
+                    availableColors.forEach(function (color) {
+                        var option = document.createElement("option");
+                        option.value = color.id;
+                        option.textContent = color.label;
+                        option.selected = color.id === colorway.color;
+                        option.disabled = color.id !== colorway.color && selectedColors.includes(color.id);
+                        colorSelect.appendChild(option);
+                    });
+                    colorSelect.setCustomValidity(validColor ? "" : "Choose a color available for this shirt style.");
+                    colorLabelElement.appendChild(colorSelect);
+                    colorChoice.appendChild(swatch);
+                    colorChoice.appendChild(colorLabelElement);
+
+                    var preview = document.createElement("canvas");
+                    preview.className = "export-colorway-preview";
+                    preview.width = 600;
+                    preview.height = 300;
+                    preview.setAttribute(
+                        "aria-label",
+                        "Front and back preview for " + colorLabel(colorway.color)
+                    );
+                    var previewLabels = document.createElement("div");
+                    previewLabels.className = "export-preview-labels";
+                    var frontLabel = document.createElement("span");
+                    frontLabel.textContent = "Front";
+                    var backLabel = document.createElement("span");
+                    backLabel.textContent = "Back";
+                    previewLabels.appendChild(frontLabel);
+                    previewLabels.appendChild(backLabel);
+
+                    var sizeGrid = document.createElement("div");
+                    sizeGrid.className = "export-size-grid";
+                    SHIRT_SIZES.forEach(function (size) {
+                        var sizeField = document.createElement("label");
+                        sizeField.className = "export-size-field";
+                        sizeField.appendChild(document.createTextNode(size));
+                        var quantityInput = document.createElement("input");
+                        quantityInput.className = "order-input export-size-input";
+                        quantityInput.type = "number";
+                        quantityInput.inputMode = "numeric";
+                        quantityInput.min = "0";
+                        quantityInput.max = "99";
+                        quantityInput.step = "1";
+                        quantityInput.value = String(colorway.quantities[size] || 0);
+                        quantityInput.dataset.colorwayId = String(colorway.id);
+                        quantityInput.dataset.size = size;
+                        quantityInput.setAttribute(
+                            "aria-label",
+                            colorLabel(colorway.color) + " " + size + " quantity"
+                        );
+                        sizeField.appendChild(quantityInput);
+                        sizeGrid.appendChild(sizeField);
+                    });
+
+                    var footer = document.createElement("div");
+                    footer.className = "export-colorway__footer";
+                    var colorName = document.createElement("span");
+                    colorName.textContent = colorLabel(colorway.color);
+                    var subtotal = document.createElement("span");
+                    subtotal.appendChild(document.createTextNode("Colorway quantity: "));
+                    var subtotalValue = document.createElement("strong");
+                    subtotalValue.dataset.colorwayTotal = String(colorway.id);
+                    subtotalValue.textContent = String(exportColorwayTotal(colorway));
+                    subtotal.appendChild(subtotalValue);
+                    footer.appendChild(colorName);
+                    footer.appendChild(subtotal);
+
+                    card.appendChild(header);
+                    card.appendChild(colorChoice);
+                    card.appendChild(preview);
+                    card.appendChild(previewLabels);
+                    card.appendChild(sizeGrid);
+                    card.appendChild(footer);
+
+                    if (!validColor || colorway.error) {
+                        var warning = document.createElement("p");
+                        warning.className = "export-colorway-warning";
+                        warning.textContent = !validColor
+                            ? "This color is unavailable for " + garmentDetails(exportDesignSnapshot.style).sleeve.toLowerCase() + ". Choose another color."
+                            : colorway.error;
+                        card.appendChild(warning);
+                    }
+
+                    exportColorwayList.appendChild(card);
+                    previewJobs.push({ card: card, colorway: colorway });
+                });
+
+                syncExportColorwayTotals();
+                (async function () {
+                    for (var index = 0; index < previewJobs.length; index += 1) {
+                        if (previewGeneration !== exportPreviewGeneration) return;
+                        await renderExportColorwayPreview(
+                            previewJobs[index].card,
+                            previewJobs[index].colorway,
+                            previewGeneration
+                        );
+                    }
+                })();
+            }
+
+            function syncExportColorwayTotals() {
+                var totalQuantity = 0;
+                exportColorways.forEach(function (colorway) {
+                    var subtotal = exportColorwayTotal(colorway);
+                    totalQuantity += subtotal;
+                    var output = exportColorwayList.querySelector(
+                        "[data-colorway-total=\"" + colorway.id + "\"]"
+                    );
+                    if (output) output.textContent = String(subtotal);
                 });
 
                 exportTotalQuantity.textContent = String(totalQuantity);
-                exportAddSizeButton.disabled = rows.length >= SHIRT_SIZES.length || exportSubmitting;
+                exportColorwayCount.textContent = exportColorways.length +
+                    (exportColorways.length === 1 ? " colorway" : " colorways");
+
+                var availableColors = availableExportColors(exportDesignSnapshot.style);
+                exportAddColorwayButton.disabled = exportSubmitting || exportColorways.length >= availableColors.length;
+                exportColorwayList.querySelectorAll("[data-remove-colorway]").forEach(function (button) {
+                    button.disabled = exportSubmitting || exportColorways.length === 1;
+                });
+            }
+
+            function addExportColorway(preferredColor) {
+                var usedColors = exportColorways.map(function (colorway) {
+                    return colorway.color;
+                });
+                var availableColors = availableExportColors(exportDesignSnapshot.style);
+                var color = preferredColor &&
+                    isValidCombo(exportDesignSnapshot.style, preferredColor) &&
+                    !usedColors.includes(preferredColor)
+                    ? preferredColor
+                    : (availableColors.find(function (candidate) {
+                        return !usedColors.includes(candidate.id);
+                    }) || {}).id;
+
+                if (!color) return null;
+                var colorway = createExportColorway(color);
+                exportColorways.push(colorway);
+                renderExportColorways();
+                return colorway;
             }
 
             function readExportOrderDetails() {
-                var quantities = new Map();
-
-                Array.from(exportSizeRows.querySelectorAll(".export-size-row")).forEach(function (row) {
-                    var size = row.querySelector("select").value;
-                    var quantity = Number(row.querySelector("input").value);
-                    if (!SHIRT_SIZES.includes(size) || !Number.isInteger(quantity) || quantity < 1) return;
-                    quantities.set(size, (quantities.get(size) || 0) + quantity);
-                });
-
-                var items = SHIRT_SIZES.filter(function (size) {
-                    return quantities.has(size);
-                }).map(function (size) {
-                    return { size: size, quantity: quantities.get(size) };
+                var colorways = exportColorways.map(function (colorway) {
+                    var items = SHIRT_SIZES.filter(function (size) {
+                        return Number(colorway.quantities[size]) > 0;
+                    }).map(function (size) {
+                        return { size: size, quantity: Number(colorway.quantities[size]) };
+                    });
+                    return {
+                        id: colorway.id,
+                        color: colorway.color,
+                        items: items,
+                        totalQuantity: items.reduce(function (total, item) {
+                            return total + item.quantity;
+                        }, 0)
+                    };
                 });
 
                 return {
-                    items: items,
-                    totalQuantity: items.reduce(function (total, item) {
-                        return total + item.quantity;
+                    colorways: colorways,
+                    totalQuantity: colorways.reduce(function (total, colorway) {
+                        return total + colorway.totalQuantity;
                     }, 0)
                 };
             }
@@ -4770,18 +5224,31 @@
 
             function openExportModal() {
                 exportTrigger = document.activeElement;
-                if (!exportSizeRows.children.length) addExportSizeRow("", 1);
+                var nextSnapshot = cloneState(state);
+                var designChanged = !exportDesignSnapshot ||
+                    exportDesignSignature(exportDesignSnapshot) !== exportDesignSignature(nextSnapshot);
+                exportDesignSnapshot = nextSnapshot;
+                if (!exportColorways.length) {
+                    exportColorways.push(createExportColorway(state.color));
+                }
                 exportSubmitting = false;
                 setExportStatus("");
-                syncExportSizeRows();
+                updateExportDesignSummary();
+                if (designChanged) {
+                    exportColorways.forEach(function (colorway) {
+                        colorway.error = "";
+                    });
+                }
+                renderExportColorways();
                 exportModal.hidden = false;
                 document.body.classList.add("order-modal-open");
                 pageMain.setAttribute("inert", "");
-                exportSizeRows.querySelector("select").focus();
+                exportColorwayList.querySelector("select").focus();
             }
 
             function closeExportModal() {
                 if (exportSubmitting) return;
+                exportPreviewGeneration += 1;
                 exportModal.hidden = true;
                 document.body.classList.remove("order-modal-open");
                 pageMain.removeAttribute("inert");
@@ -4795,9 +5262,30 @@
                 event.preventDefault();
                 if (exportSubmitting || !exportForm.reportValidity()) return;
 
+                var invalidColorway = null;
+                exportColorways.forEach(function (colorway) {
+                    colorway.error = "";
+                    if (!isValidCombo(exportDesignSnapshot.style, colorway.color)) {
+                        invalidColorway = invalidColorway || colorway;
+                    } else if (!exportColorwayTotal(colorway)) {
+                        colorway.error = "Enter a quantity for at least one size in this colorway.";
+                        invalidColorway = invalidColorway || colorway;
+                    }
+                });
+
+                if (invalidColorway) {
+                    renderExportColorways();
+                    setExportStatus("Every colorway needs an available color and at least one shirt.", "bad");
+                    var invalidCard = exportColorwayList.querySelector(
+                        "[data-colorway-id=\"" + invalidColorway.id + "\"]"
+                    );
+                    if (invalidCard) invalidCard.scrollIntoView({ block: "nearest", behavior: "smooth" });
+                    return;
+                }
+
                 var orderDetails = readExportOrderDetails();
-                if (!orderDetails.items.length || !orderDetails.totalQuantity) {
-                    setExportStatus("Choose at least one size and quantity.", "bad");
+                if (!orderDetails.colorways.length || !orderDetails.totalQuantity) {
+                    setExportStatus("Add at least one colorway with a size quantity.", "bad");
                     return;
                 }
 
@@ -4807,63 +5295,91 @@
             async function exportPrintPackage(orderDetails) {
                 if (exportSubmitting) return false;
 
-                var designState = cloneState(state);
-                var code = designCode(designState);
+                var designState = cloneState(exportDesignSnapshot);
+                designState.color = orderDetails.colorways[0].color;
+                var code = printPackageCode(designState, orderDetails);
                 var packageRoot = code.toLowerCase() + "-print-package";
-                var plan = createPrintPackagePlan(designState);
+                var colorwayPlans = orderDetails.colorways.map(function (colorway) {
+                    var colorwayState = cloneState(designState);
+                    var root = "colorways/" + colorway.color;
+                    colorwayState.color = colorway.color;
+                    return {
+                        colorway: colorway,
+                        designState: colorwayState,
+                        root: root,
+                        plan: createPrintPackagePlan(colorwayState, root)
+                    };
+                });
                 var originalLabel = exportSubmitButton.textContent;
                 exportSubmitting = true;
                 exportButton.disabled = true;
                 exportCloseButton.disabled = true;
+                exportEditDesignButton.disabled = true;
                 exportSubmitButton.disabled = true;
                 exportSubmitButton.setAttribute("aria-busy", "true");
                 exportSubmitButton.textContent = "Packing print files…";
-                syncExportSizeRows();
+                exportColorwayList.querySelectorAll("input, select, button").forEach(function (field) {
+                    field.disabled = true;
+                });
+                syncExportColorwayTotals();
                 setExportStatus("Gathering artwork, garment assets, and proofs.");
                 setMessage("Gathering original art, garment assets, and proofs.");
                 updateHash();
 
                 try {
                     if (document.fonts && document.fonts.ready) await document.fonts.ready;
-
-                    var sourceEntries = plan.garment.concat(plan.artwork.filter(function (entry) {
-                        return Boolean(entry.sourcePath);
-                    }));
-                    var assetsPromise = Promise.all(sourceEntries.map(async function (entry) {
-                        return {
-                            name: packageRoot + "/" + entry.relativePath,
-                            data: await fetchPrintAsset(entry)
-                        };
-                    }));
-                    var views = await createDesignCanvases(designState);
-                    var sheet = await createBuildSheet(designState, views);
-                    var proofBlobs = await Promise.all([
-                        canvasBlob(views.front, "image/png"),
-                        canvasBlob(views.back, "image/png"),
-                        canvasBlob(sheet, "image/jpeg", 0.92)
-                    ]);
-                    if (proofBlobs.some(function (blob) { return !blob; })) {
-                        throw new Error("Could not render the proof files");
-                    }
-
                     var files = [
                         {
                             name: packageRoot + "/print-spec.txt",
-                            data: buildPrintSpec(designState, code, plan, orderDetails)
-                        },
-                        {
-                            name: packageRoot + "/proofs/front.png",
-                            data: proofBlobs[0]
-                        },
-                        {
-                            name: packageRoot + "/proofs/back.png",
-                            data: proofBlobs[1]
-                        },
-                        {
-                            name: packageRoot + "/proofs/front-and-back.jpg",
-                            data: proofBlobs[2]
+                            data: buildPrintSpec(designState, code, colorwayPlans, orderDetails)
                         }
-                    ].concat(await assetsPromise);
+                    ];
+
+                    for (var index = 0; index < colorwayPlans.length; index += 1) {
+                        var colorwayPlan = colorwayPlans[index];
+                        setExportStatus(
+                            "Rendering colorway " + (index + 1) + " of " + colorwayPlans.length + ": " +
+                            colorLabel(colorwayPlan.colorway.color) + "."
+                        );
+                        var sourceEntries = colorwayPlan.plan.garment.concat(
+                            colorwayPlan.plan.artwork.filter(function (entry) {
+                                return Boolean(entry.sourcePath);
+                            })
+                        );
+                        var assets = await Promise.all(sourceEntries.map(async function (entry) {
+                            return {
+                                name: packageRoot + "/" + entry.relativePath,
+                                data: await fetchPrintAsset(entry)
+                            };
+                        }));
+                        files = files.concat(assets);
+
+                        var views = await createDesignCanvases(colorwayPlan.designState);
+                        var sheet = await createBuildSheet(colorwayPlan.designState, views, code);
+                        var proofBlobs = await Promise.all([
+                            canvasBlob(views.front, "image/png"),
+                            canvasBlob(views.back, "image/png"),
+                            canvasBlob(sheet, "image/jpeg", 0.92)
+                        ]);
+                        if (proofBlobs.some(function (blob) { return !blob; })) {
+                            throw new Error("Could not render the proof files");
+                        }
+                        files.push(
+                            {
+                                name: packageRoot + "/" + colorwayPlan.root + "/proofs/front.png",
+                                data: proofBlobs[0]
+                            },
+                            {
+                                name: packageRoot + "/" + colorwayPlan.root + "/proofs/back.png",
+                                data: proofBlobs[1]
+                            },
+                            {
+                                name: packageRoot + "/" + colorwayPlan.root + "/proofs/front-and-back.jpg",
+                                data: proofBlobs[2]
+                            }
+                        );
+                    }
+
                     var zip = await createStoredZip(files);
                     downloadBlob(zip, packageRoot + ".zip");
                     setMessage("Print package exported: " + code + ".", "ok");
@@ -4877,10 +5393,11 @@
                     exportSubmitting = false;
                     exportButton.disabled = false;
                     exportCloseButton.disabled = false;
+                    exportEditDesignButton.disabled = false;
                     exportSubmitButton.disabled = false;
                     exportSubmitButton.removeAttribute("aria-busy");
                     exportSubmitButton.textContent = originalLabel;
-                    syncExportSizeRows();
+                    renderExportColorways();
                 }
             }
 
@@ -5194,12 +5711,63 @@
                 document.getElementById("copyButton").addEventListener("click", copyBuildLink);
                 document.getElementById("resetButton").addEventListener("click", resetBuild);
                 exportCloseButton.addEventListener("click", closeExportModal);
-                exportAddSizeButton.addEventListener("click", function () {
-                    var row = addExportSizeRow("", 1);
-                    row.querySelector("select").focus();
+                exportEditDesignButton.addEventListener("click", function () {
+                    closeExportModal();
+                    setMessage("Edit the shared design, then reopen the print package. Your colorways will wait here.");
                 });
-                exportSizeRows.addEventListener("input", syncExportSizeRows);
-                exportSizeRows.addEventListener("change", syncExportSizeRows);
+                exportAddColorwayButton.addEventListener("click", function () {
+                    var colorway = addExportColorway(state.color);
+                    if (!colorway) return;
+                    var select = exportColorwayList.querySelector(
+                        "select[data-colorway-id=\"" + colorway.id + "\"]"
+                    );
+                    if (select) select.focus();
+                });
+                exportColorwayList.addEventListener("click", function (event) {
+                    var removeButton = event.target.closest("[data-remove-colorway]");
+                    if (!removeButton || exportSubmitting || exportColorways.length === 1) return;
+                    var colorwayId = Number(removeButton.dataset.removeColorway);
+                    exportColorways = exportColorways.filter(function (colorway) {
+                        return colorway.id !== colorwayId;
+                    });
+                    renderExportColorways();
+                    exportAddColorwayButton.focus();
+                });
+                exportColorwayList.addEventListener("change", function (event) {
+                    var select = event.target.closest(".export-color-select");
+                    if (!select || exportSubmitting) return;
+                    var colorwayId = Number(select.dataset.colorwayId);
+                    var colorway = exportColorways.find(function (candidate) {
+                        return candidate.id === colorwayId;
+                    });
+                    if (!colorway) return;
+                    colorway.color = select.value;
+                    colorway.error = "";
+                    renderExportColorways();
+                    var replacement = exportColorwayList.querySelector(
+                        "select[data-colorway-id=\"" + colorwayId + "\"]"
+                    );
+                    if (replacement) replacement.focus();
+                });
+                exportColorwayList.addEventListener("input", function (event) {
+                    var input = event.target.closest(".export-size-input");
+                    if (!input || exportSubmitting) return;
+                    var colorwayId = Number(input.dataset.colorwayId);
+                    var colorway = exportColorways.find(function (candidate) {
+                        return candidate.id === colorwayId;
+                    });
+                    if (!colorway || !SHIRT_SIZES.includes(input.dataset.size)) return;
+                    var quantity = Number(input.value);
+                    colorway.quantities[input.dataset.size] = Number.isInteger(quantity) && quantity > 0
+                        ? Math.min(quantity, 99)
+                        : 0;
+                    colorway.error = "";
+                    var card = input.closest(".export-colorway");
+                    var warning = card.querySelector(".export-colorway-warning");
+                    if (warning && isValidCombo(exportDesignSnapshot.style, colorway.color)) warning.remove();
+                    card.dataset.invalid = String(!isValidCombo(exportDesignSnapshot.style, colorway.color));
+                    syncExportColorwayTotals();
+                });
                 exportForm.addEventListener("submit", submitExportPackage);
                 exportModal.addEventListener("click", function (event) {
                     if (event.target === exportModal) closeExportModal();
