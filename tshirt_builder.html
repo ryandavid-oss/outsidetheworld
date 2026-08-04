@@ -5074,6 +5074,7 @@
             function exportDesignSignature(designState) {
                 return [
                     designState.style,
+                    designState.color,
                     designState.frontArt,
                     designState.backArt,
                     designState.wordsOn ? designState.slogan : "none"
@@ -5367,17 +5368,15 @@
                 var designChanged = !exportDesignSnapshot ||
                     exportDesignSignature(exportDesignSnapshot) !== exportDesignSignature(nextSnapshot);
                 exportDesignSnapshot = nextSnapshot;
-                if (!exportColorways.length) {
-                    exportColorways.push(createExportColorway(state.color));
+                if (!exportColorways.length || designChanged) {
+                    exportColorways = [createExportColorway(nextSnapshot.color)];
                 }
                 exportSubmitting = false;
                 setExportStatus("");
                 updateExportDesignSummary();
-                if (designChanged) {
-                    exportColorways.forEach(function (colorway) {
-                        colorway.error = "";
-                    });
-                }
+                exportColorways.forEach(function (colorway) {
+                    colorway.error = "";
+                });
                 renderExportColorways();
                 exportModal.hidden = false;
                 document.body.classList.add("order-modal-open");
