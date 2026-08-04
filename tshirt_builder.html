@@ -1655,6 +1655,71 @@
             gap: 14px;
         }
 
+        .export-dialog {
+            width: min(620px, 100%);
+        }
+
+        .export-description {
+            margin: -4px 0 20px;
+            color: rgba(247, 242, 247, 0.72);
+            font-family: var(--font-mono);
+            font-size: 15px;
+            line-height: 1.65;
+        }
+
+        .export-size-list {
+            display: grid;
+            gap: 10px;
+        }
+
+        .export-size-row {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(108px, 0.42fr) auto;
+            align-items: end;
+            gap: 10px;
+            border: 2px solid rgba(160, 190, 245, 0.18);
+            border-radius: 11px;
+            background: rgba(0, 0, 0, 0.16);
+            padding: 12px;
+        }
+
+        .export-remove {
+            min-width: 46px;
+            min-height: 46px;
+            padding: 8px;
+            color: var(--pink);
+            font-family: var(--font-mono);
+            font-size: 22px;
+            letter-spacing: 0;
+            line-height: 1;
+            text-transform: none;
+        }
+
+        .export-add-size {
+            justify-self: start;
+        }
+
+        .export-total {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            border: 2px solid rgba(75, 227, 110, 0.34);
+            border-radius: 11px;
+            background: rgba(75, 227, 110, 0.08);
+            padding: 13px 15px;
+            color: rgba(247, 242, 247, 0.76);
+            font-family: var(--font-game);
+            font-size: 12px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .export-total strong {
+            color: var(--green);
+            font-size: 19px;
+        }
+
         .order-form-grid {
             display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2295,6 +2360,11 @@
                 grid-template-columns: 1fr;
                 gap: 4px;
             }
+
+            .export-size-row {
+                grid-template-columns: minmax(0, 1fr) 92px auto;
+                padding: 10px;
+            }
         }
     </style>
 </head>
@@ -2452,6 +2522,40 @@
         </div>
     </main>
 
+    <div class="order-modal" id="exportModal" hidden>
+        <section class="order-dialog export-dialog" role="dialog" aria-modal="true" aria-labelledby="exportTitle"
+            aria-describedby="exportDescription">
+            <div class="order-dialog__header">
+                <div>
+                    <p class="order-dialog__eyebrow">Print package // Order details</p>
+                    <h2 id="exportTitle">What should we make?</h2>
+                </div>
+                <button class="pixel-button order-close" id="exportCloseButton" type="button"
+                    aria-label="Close print package form">×</button>
+            </div>
+
+            <p class="export-description" id="exportDescription">Add the sizes and quantities that belong with this
+                design. They will be written into the print-spec.txt file inside your ZIP.</p>
+
+            <form class="order-form" id="exportForm">
+                <div class="export-size-list" id="exportSizeRows"></div>
+
+                <button class="pixel-button pixel-button--quiet export-add-size" id="exportAddSizeButton"
+                    type="button">+ Add another size</button>
+
+                <div class="export-total" aria-live="polite">
+                    <span>Total shirts</span>
+                    <strong id="exportTotalQuantity">1</strong>
+                </div>
+
+                <button class="pixel-button order-submit" id="exportSubmitButton" type="submit">
+                    Download print package (.zip)
+                </button>
+                <p class="order-status" id="exportStatus" role="status" aria-live="polite"></p>
+            </form>
+        </section>
+    </div>
+
     <div class="order-modal" id="orderModal" hidden>
         <section class="order-dialog" role="dialog" aria-modal="true" aria-labelledby="orderTitle"
             aria-describedby="orderDescription">
@@ -2514,6 +2618,7 @@
                         Shirt size
                         <select class="order-input" name="size" required>
                             <option value="">Choose a size</option>
+                            <option value="XS">X-Small</option>
                             <option value="S">Small</option>
                             <option value="M">Medium</option>
                             <option value="L">Large</option>
@@ -2636,6 +2741,7 @@
             var ORDER_ENDPOINT = "https://otw-private-intake.ryandavid.workers.dev/submit-shirt-order";
             var SHIRT_PRICE_CENTS = 2900;
             var NON_ARIZONA_SHIPPING_CENTS = 500;
+            var SHIRT_SIZES = ["XS", "S", "M", "L", "XL", "2XL"];
             var STORAGE_KEY = "otw-frgmnts-shirt-build-v1";
             var DM130_COLORS = [
                 { id: "apricot", label: "Apricot" },
@@ -2825,6 +2931,8 @@
             var orderPreviewUrl = "";
             var orderTrigger = null;
             var orderSubmitting = false;
+            var exportTrigger = null;
+            var exportSubmitting = false;
 
             var canvas = document.getElementById("preview");
             var ctx = canvas.getContext("2d");
@@ -2842,6 +2950,14 @@
             var surpriseButton = document.getElementById("surpriseButton");
             var buyButton = document.getElementById("buyButton");
             var exportButton = document.getElementById("exportButton");
+            var exportModal = document.getElementById("exportModal");
+            var exportCloseButton = document.getElementById("exportCloseButton");
+            var exportForm = document.getElementById("exportForm");
+            var exportSizeRows = document.getElementById("exportSizeRows");
+            var exportAddSizeButton = document.getElementById("exportAddSizeButton");
+            var exportTotalQuantity = document.getElementById("exportTotalQuantity");
+            var exportSubmitButton = document.getElementById("exportSubmitButton");
+            var exportStatus = document.getElementById("exportStatus");
             var orderModal = document.getElementById("orderModal");
             var orderCloseButton = document.getElementById("orderCloseButton");
             var orderForm = document.getElementById("orderForm");
@@ -4331,7 +4447,7 @@
                     " on a 2000 × 2000 canvas; rendered width " + width + " px";
             }
 
-            function buildPrintSpec(designState, code, plan) {
+            function buildPrintSpec(designState, code, plan, orderDetails) {
                 var ink = LIGHT_SHIRTS.has(designState.color) ? "dark" : "light";
                 var lines = [
                     "OUTSIDE THE WORLD / PRINT PACKAGE",
@@ -4351,9 +4467,18 @@
                     "Front garment reference: " + plan.garment[0].relativePath,
                     "Back garment reference: " + plan.garment[1].relativePath,
                     "",
-                    "ARTWORK",
-                    "-------"
+                    "ORDER REQUEST",
+                    "-------------",
+                    "Size breakdown:"
                 ];
+
+                orderDetails.items.forEach(function (item) {
+                    lines.push(item.size + ": " + item.quantity);
+                });
+                lines.push("Total quantity: " + orderDetails.totalQuantity);
+                lines.push("");
+                lines.push("ARTWORK");
+                lines.push("-------");
 
                 plan.artwork.forEach(function (entry) {
                     lines.push(entry.side.toUpperCase());
@@ -4522,17 +4647,179 @@
                 }, 1000);
             }
 
-            async function exportPrintPackage() {
-                if (exportButton.disabled) return;
+            function addExportSizeRow(size, quantity) {
+                var row = document.createElement("div");
+                row.className = "export-size-row";
+
+                var sizeLabel = document.createElement("label");
+                sizeLabel.className = "order-field";
+                sizeLabel.appendChild(document.createTextNode("Shirt size"));
+
+                var select = document.createElement("select");
+                select.className = "order-input";
+                select.name = "export_size";
+                select.required = true;
+
+                var placeholder = document.createElement("option");
+                placeholder.value = "";
+                placeholder.textContent = "Choose a size";
+                select.appendChild(placeholder);
+                SHIRT_SIZES.forEach(function (shirtSize) {
+                    var option = document.createElement("option");
+                    option.value = shirtSize;
+                    option.textContent = shirtSize;
+                    option.selected = shirtSize === size;
+                    select.appendChild(option);
+                });
+                sizeLabel.appendChild(select);
+
+                var quantityLabel = document.createElement("label");
+                quantityLabel.className = "order-field";
+                quantityLabel.appendChild(document.createTextNode("Quantity"));
+
+                var quantityInput = document.createElement("input");
+                quantityInput.className = "order-input";
+                quantityInput.type = "number";
+                quantityInput.name = "export_quantity";
+                quantityInput.inputMode = "numeric";
+                quantityInput.min = "1";
+                quantityInput.max = "99";
+                quantityInput.step = "1";
+                quantityInput.value = String(quantity || 1);
+                quantityInput.required = true;
+                quantityLabel.appendChild(quantityInput);
+
+                var removeButton = document.createElement("button");
+                removeButton.className = "pixel-button export-remove";
+                removeButton.type = "button";
+                removeButton.textContent = "×";
+                removeButton.setAttribute("aria-label", "Remove this size");
+                removeButton.addEventListener("click", function () {
+                    row.remove();
+                    syncExportSizeRows();
+                });
+
+                row.appendChild(sizeLabel);
+                row.appendChild(quantityLabel);
+                row.appendChild(removeButton);
+                exportSizeRows.appendChild(row);
+                syncExportSizeRows();
+                return row;
+            }
+
+            function syncExportSizeRows() {
+                var rows = Array.from(exportSizeRows.querySelectorAll(".export-size-row"));
+                var selects = rows.map(function (row) {
+                    return row.querySelector("select");
+                });
+                var selectedSizes = selects.map(function (select) {
+                    return select.value;
+                }).filter(Boolean);
+                var totalQuantity = 0;
+
+                selects.forEach(function (select) {
+                    Array.from(select.options).forEach(function (option) {
+                        option.disabled = Boolean(
+                            option.value &&
+                            option.value !== select.value &&
+                            selectedSizes.includes(option.value)
+                        );
+                    });
+                });
+
+                rows.forEach(function (row) {
+                    var quantity = Number(row.querySelector("input").value);
+                    if (Number.isInteger(quantity) && quantity > 0) {
+                        totalQuantity += quantity;
+                    }
+                    row.querySelector(".export-remove").disabled = rows.length === 1 || exportSubmitting;
+                });
+
+                exportTotalQuantity.textContent = String(totalQuantity);
+                exportAddSizeButton.disabled = rows.length >= SHIRT_SIZES.length || exportSubmitting;
+            }
+
+            function readExportOrderDetails() {
+                var quantities = new Map();
+
+                Array.from(exportSizeRows.querySelectorAll(".export-size-row")).forEach(function (row) {
+                    var size = row.querySelector("select").value;
+                    var quantity = Number(row.querySelector("input").value);
+                    if (!SHIRT_SIZES.includes(size) || !Number.isInteger(quantity) || quantity < 1) return;
+                    quantities.set(size, (quantities.get(size) || 0) + quantity);
+                });
+
+                var items = SHIRT_SIZES.filter(function (size) {
+                    return quantities.has(size);
+                }).map(function (size) {
+                    return { size: size, quantity: quantities.get(size) };
+                });
+
+                return {
+                    items: items,
+                    totalQuantity: items.reduce(function (total, item) {
+                        return total + item.quantity;
+                    }, 0)
+                };
+            }
+
+            function setExportStatus(message, level) {
+                exportStatus.textContent = message;
+                exportStatus.dataset.level = level || "";
+            }
+
+            function openExportModal() {
+                exportTrigger = document.activeElement;
+                if (!exportSizeRows.children.length) addExportSizeRow("", 1);
+                exportSubmitting = false;
+                setExportStatus("");
+                syncExportSizeRows();
+                exportModal.hidden = false;
+                document.body.classList.add("order-modal-open");
+                pageMain.setAttribute("inert", "");
+                exportSizeRows.querySelector("select").focus();
+            }
+
+            function closeExportModal() {
+                if (exportSubmitting) return;
+                exportModal.hidden = true;
+                document.body.classList.remove("order-modal-open");
+                pageMain.removeAttribute("inert");
+                setExportStatus("");
+                if (exportTrigger && typeof exportTrigger.focus === "function") {
+                    exportTrigger.focus();
+                }
+            }
+
+            async function submitExportPackage(event) {
+                event.preventDefault();
+                if (exportSubmitting || !exportForm.reportValidity()) return;
+
+                var orderDetails = readExportOrderDetails();
+                if (!orderDetails.items.length || !orderDetails.totalQuantity) {
+                    setExportStatus("Choose at least one size and quantity.", "bad");
+                    return;
+                }
+
+                if (await exportPrintPackage(orderDetails)) closeExportModal();
+            }
+
+            async function exportPrintPackage(orderDetails) {
+                if (exportSubmitting) return false;
 
                 var designState = cloneState(state);
                 var code = designCode(designState);
                 var packageRoot = code.toLowerCase() + "-print-package";
                 var plan = createPrintPackagePlan(designState);
-                var originalLabel = exportButton.textContent;
+                var originalLabel = exportSubmitButton.textContent;
+                exportSubmitting = true;
                 exportButton.disabled = true;
-                exportButton.setAttribute("aria-busy", "true");
-                exportButton.textContent = "Packing print files…";
+                exportCloseButton.disabled = true;
+                exportSubmitButton.disabled = true;
+                exportSubmitButton.setAttribute("aria-busy", "true");
+                exportSubmitButton.textContent = "Packing print files…";
+                syncExportSizeRows();
+                setExportStatus("Gathering artwork, garment assets, and proofs.");
                 setMessage("Gathering original art, garment assets, and proofs.");
                 updateHash();
 
@@ -4562,7 +4849,7 @@
                     var files = [
                         {
                             name: packageRoot + "/print-spec.txt",
-                            data: buildPrintSpec(designState, code, plan)
+                            data: buildPrintSpec(designState, code, plan, orderDetails)
                         },
                         {
                             name: packageRoot + "/proofs/front.png",
@@ -4580,13 +4867,20 @@
                     var zip = await createStoredZip(files);
                     downloadBlob(zip, packageRoot + ".zip");
                     setMessage("Print package exported: " + code + ".", "ok");
+                    return true;
                 } catch (error) {
                     setMessage("The print package could not be exported. Please try again.", "bad");
+                    setExportStatus("The ZIP could not be created. Please try again.", "bad");
                     console.error(error);
+                    return false;
                 } finally {
+                    exportSubmitting = false;
                     exportButton.disabled = false;
-                    exportButton.removeAttribute("aria-busy");
-                    exportButton.textContent = originalLabel;
+                    exportCloseButton.disabled = false;
+                    exportSubmitButton.disabled = false;
+                    exportSubmitButton.removeAttribute("aria-busy");
+                    exportSubmitButton.textContent = originalLabel;
+                    syncExportSizeRows();
                 }
             }
 
@@ -4895,10 +5189,21 @@
 
                 surpriseButton.addEventListener("click", shuffleDesign);
                 buyButton.addEventListener("click", openOrderModal);
-                exportButton.addEventListener("click", exportPrintPackage);
+                exportButton.addEventListener("click", openExportModal);
                 document.getElementById("keepButton").addEventListener("click", keepBuild);
                 document.getElementById("copyButton").addEventListener("click", copyBuildLink);
                 document.getElementById("resetButton").addEventListener("click", resetBuild);
+                exportCloseButton.addEventListener("click", closeExportModal);
+                exportAddSizeButton.addEventListener("click", function () {
+                    var row = addExportSizeRow("", 1);
+                    row.querySelector("select").focus();
+                });
+                exportSizeRows.addEventListener("input", syncExportSizeRows);
+                exportSizeRows.addEventListener("change", syncExportSizeRows);
+                exportForm.addEventListener("submit", submitExportPackage);
+                exportModal.addEventListener("click", function (event) {
+                    if (event.target === exportModal) closeExportModal();
+                });
                 orderCloseButton.addEventListener("click", closeOrderModal);
                 orderForm.addEventListener("submit", submitOrder);
                 orderShippingState.addEventListener("change", updateOrderPricing);
@@ -4906,10 +5211,17 @@
                     if (event.target === orderModal) closeOrderModal();
                 });
                 document.addEventListener("keydown", function (event) {
-                    if (event.key === "Escape" && !orderModal.hidden) closeOrderModal();
-                    if (event.key !== "Tab" || orderModal.hidden) return;
+                    var activeModal = !exportModal.hidden
+                        ? exportModal
+                        : (!orderModal.hidden ? orderModal : null);
 
-                    var focusable = Array.from(orderModal.querySelectorAll(
+                    if (event.key === "Escape" && activeModal) {
+                        if (activeModal === exportModal) closeExportModal();
+                        else closeOrderModal();
+                    }
+                    if (event.key !== "Tab" || !activeModal) return;
+
+                    var focusable = Array.from(activeModal.querySelectorAll(
                         "button:not([disabled]), input:not([disabled]):not([tabindex=\"-1\"]), " +
                         "select:not([disabled]), textarea:not([disabled]), a[href]"
                     ));
