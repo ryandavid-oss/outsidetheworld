@@ -4377,6 +4377,79 @@
                 });
             }
 
+            function backTextColor(designState) {
+                return LIGHT_SHIRTS.has(designState.color) ? "#000000" : "#ffffff";
+            }
+
+            function backTextLayout(targetContext, designState) {
+                var lines = toPrintableLines(designState.slogan, 18);
+                if (!lines) return null;
+
+                var maxWidth = 2000 * 0.74;
+                var fontSize = Math.round(2000 * 0.034);
+                var tracking = Math.round(2000 * 0.002);
+                var longest = lines.reduce(function (winner, line) {
+                    return line.length > winner.length ? line : winner;
+                }, "");
+
+                while (fontSize > 18) {
+                    targetContext.font = "700 " + fontSize + "px \"Fira Code\", monospace";
+                    if (measureTrackedWidth(targetContext, longest.toUpperCase(), tracking) <= maxWidth) break;
+                    fontSize -= 2;
+                    tracking = Math.max(1, tracking - 1);
+                }
+
+                return {
+                    lines: lines.map(function (line) { return line.toUpperCase(); }),
+                    fontSize: fontSize,
+                    tracking: tracking,
+                    lineHeight: fontSize * 1.18
+                };
+            }
+
+            function createBackTextArtworkCanvas(designState) {
+                var measureCanvas = document.createElement("canvas");
+                var measureContext = measureCanvas.getContext("2d");
+                var layout = backTextLayout(measureContext, designState);
+                if (!layout) return null;
+
+                var textWidth = layout.lines.reduce(function (widest, line) {
+                    return Math.max(
+                        widest,
+                        measureTrackedWidth(measureContext, line, layout.tracking)
+                    );
+                }, 0);
+                var padding = Math.max(32, Math.round(layout.fontSize * 0.55));
+                var logicalWidth = Math.ceil(textWidth + padding * 2);
+                var logicalHeight = Math.ceil(
+                    layout.fontSize + (layout.lines.length - 1) * layout.lineHeight + padding * 2
+                );
+                var productionScale = 4;
+                var artworkCanvas = document.createElement("canvas");
+                artworkCanvas.width = logicalWidth * productionScale;
+                artworkCanvas.height = logicalHeight * productionScale;
+                var artworkContext = artworkCanvas.getContext("2d");
+                artworkContext.scale(productionScale, productionScale);
+                artworkContext.fillStyle = backTextColor(designState);
+                artworkContext.textAlign = "center";
+                artworkContext.textBaseline = "middle";
+                artworkContext.font = "700 " + layout.fontSize + "px \"Fira Code\", monospace";
+
+                var centerX = logicalWidth / 2;
+                var baseY = padding + layout.fontSize / 2;
+                layout.lines.forEach(function (line, index) {
+                    drawTrackedText(
+                        artworkContext,
+                        line,
+                        centerX,
+                        baseY + index * layout.lineHeight,
+                        layout.tracking
+                    );
+                });
+
+                return artworkCanvas;
+            }
+
             function drawShirtBase(targetContext, shirtImage, designState) {
                 targetContext.save();
                 targetContext.fillStyle = "#fff";
@@ -4452,45 +4525,28 @@
                 }
 
                 if (side === "back" && source.wordsOn) {
-                    var lines = toPrintableLines(source.slogan, 18);
-                    if (lines) {
-                        targetContext.save();
-                        targetContext.fillStyle = LIGHT_SHIRTS.has(source.color)
-                            ? "rgba(0,0,0,0.92)"
-                            : "rgba(255,255,255,0.94)";
+                    targetContext.save();
+                    var textLayout = backTextLayout(targetContext, source);
+                    if (textLayout) {
+                        targetContext.fillStyle = backTextColor(source);
                         targetContext.textAlign = "center";
                         targetContext.textBaseline = "middle";
-
-                        var maxWidth = 2000 * 0.74;
-                        var fontSize = Math.round(2000 * 0.034);
-                        var tracking = Math.round(2000 * 0.002);
-                        var longest = lines.reduce(function (winner, line) {
-                            return line.length > winner.length ? line : winner;
-                        }, "");
-
-                        while (fontSize > 18) {
-                            targetContext.font = "700 " + fontSize + "px \"Fira Code\", monospace";
-                            if (measureTrackedWidth(targetContext, longest.toUpperCase(), tracking) <= maxWidth) break;
-                            fontSize -= 2;
-                            tracking = Math.max(1, tracking - 1);
-                        }
-
-                        var lineHeight = fontSize * 1.18;
                         var gap = art === "none" ? 50 : PLACEMENT.back.sloganGap;
-                        var baseY = logoBottom + gap + (lines.length === 2 ? lineHeight * 0.5 : 0);
+                        var baseY = logoBottom + gap +
+                            (textLayout.lines.length === 2 ? textLayout.lineHeight * 0.5 : 0);
                         var centerX = PLACEMENT.back.shirtCenterX + PLACEMENT.back.sloganXOffset;
 
-                        lines.forEach(function (line, index) {
+                        textLayout.lines.forEach(function (line, index) {
                             drawTrackedText(
                                 targetContext,
-                                line.toUpperCase(),
+                                line,
                                 centerX,
-                                baseY + index * lineHeight,
-                                tracking
+                                baseY + index * textLayout.lineHeight,
+                                textLayout.tracking
                             );
                         });
-                        targetContext.restore();
                     }
+                    targetContext.restore();
                 }
             }
 
@@ -4685,6 +4741,12 @@
                 return side === "front" ? "Left chest" : "Centered back";
             }
 
+            function printerSizingInstruction(side) {
+                return side === "front"
+                    ? "Printer discretion - use a conventional left-chest size and preserve the scale and position shown in the proof"
+                    : "Printer discretion - use a conventional centered full-back size while preserving the margins and proportions shown in the proof";
+            }
+
             function buildPrintSpec(designState, code, colorwayPlans, orderDetails, packageName) {
                 var product = colorwayPlans[0].plan.product;
                 var lines = [
@@ -4736,6 +4798,15 @@
                 });
                 lines.push("");
 
+                lines.push("PHYSICAL SIZE AUTHORIZATION");
+                lines.push("---------------------------");
+                lines.push("Final physical print dimensions are intentionally left to the printer's professional discretion.");
+                lines.push("Use the supplied mockups as the authoritative reference for relative scale, placement, spacing, and visual balance.");
+                lines.push("Use standard professional print dimensions appropriate to each garment size.");
+                lines.push("Preserve all artwork proportions. Do not stretch, crop, or materially reposition any element.");
+                lines.push("No additional physical-size approval is required unless the artwork cannot fit the printable area or production would require a material departure from the supplied mockups.");
+                lines.push("");
+
                 lines.push("PRODUCTION ARTWORK");
                 lines.push("------------------");
                 colorwayPlans.forEach(function (colorwayPlan, colorwayIndex) {
@@ -4765,7 +4836,7 @@
                                 "Format: " + assetExtension(entry.sourcePath).toUpperCase() +
                                 (assetExtension(entry.sourcePath) === "svg" ? " vector" : " original raster")
                             );
-                            lines.push("Physical print size: Not specified - confirm before production");
+                            lines.push("Sizing: " + printerSizingInstruction(entry.side));
                             lines.push("Visual placement: Match the supplied proof");
                         }
                         lines.push("");
@@ -4774,10 +4845,13 @@
                     if (designState.wordsOn) {
                         lines.push("BACK TEXT");
                         lines.push("Phrase: " + designState.slogan.toUpperCase());
-                        lines.push("Typeface: Fira Code Bold (700), uppercase, tracked");
-                        lines.push("Treatment: " + contrast);
-                        lines.push("Production source: Recreate from this specification and match the supplied proof");
-                        lines.push("Physical print size: Not specified - confirm before production");
+                        lines.push("Production file: " + colorwayPlan.backTextRelativePath);
+                        lines.push("Format: High-resolution transparent PNG");
+                        lines.push("Typeface reference: Fira Code Bold, weight 700");
+                        lines.push("Treatment: Uppercase with the supplied tracking, wrapping, and line spacing");
+                        lines.push("Color treatment: " + contrast);
+                        lines.push("Production instruction: Use the supplied flattened text artwork. Do not retype or substitute the font.");
+                        lines.push("Sizing: Scale as part of the complete back composition. Keep it centered beneath the back artwork and preserve the relative width and vertical gap shown in the proof.");
                         lines.push("");
                     }
                 });
@@ -4806,7 +4880,7 @@
                 lines.push("Print from the production artwork files, not the proof images.");
                 lines.push("Use the proofs to confirm location, proportion, orientation, and artwork colorway.");
                 lines.push("Garment images are references only.");
-                lines.push("Confirm physical print dimensions before production.");
+                lines.push("The printer is authorized to choose standard professional physical sizing without additional approval unless production requires a material departure from the proofs.");
                 lines.push("");
                 lines.push("PACKAGE REFERENCE");
                 lines.push("-----------------");
@@ -5373,7 +5447,11 @@
                         colorway: colorway,
                         designState: colorwayState,
                         root: root,
-                        plan: createPrintPackagePlan(colorwayState, root)
+                        plan: createPrintPackagePlan(colorwayState, root),
+                        backTextRelativePath: colorwayState.wordsOn
+                            ? root + "/artwork/back-text-" +
+                                (LIGHT_SHIRTS.has(colorway.color) ? "dark" : "light") + ".png"
+                            : ""
                     };
                 });
                 var originalLabel = exportSubmitButton.textContent;
@@ -5430,6 +5508,19 @@
                         ]);
                         if (proofBlobs.some(function (blob) { return !blob; })) {
                             throw new Error("Could not render the proof files");
+                        }
+                        if (colorwayPlan.designState.wordsOn) {
+                            var textArtworkCanvas = createBackTextArtworkCanvas(colorwayPlan.designState);
+                            var textArtworkBlob = textArtworkCanvas
+                                ? await canvasBlob(textArtworkCanvas, "image/png")
+                                : null;
+                            if (!textArtworkBlob) {
+                                throw new Error("Could not render the back text artwork");
+                            }
+                            files.push({
+                                name: packageRoot + "/" + colorwayPlan.backTextRelativePath,
+                                data: textArtworkBlob
+                            });
                         }
                         files.push(
                             {
