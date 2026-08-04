@@ -3595,7 +3595,7 @@
 
                 function activeRunSpeed() {
                     if (!encounterActive) return runSpeed;
-                    return Math.max(170, Math.min(240, window.innerWidth * 0.18));
+                    return Math.max(210, Math.min(320, window.innerWidth * 0.23));
                 }
 
                 function collisionHullWidth() {
@@ -4138,10 +4138,13 @@
                             motion.feetY = groundY();
                             motion.vx = combatSpeed * motion.direction;
                             motion.x += motion.vx * delta;
-                            if (now >= motion.nextCombatHopAt) {
-                                motion.vy = -Math.min(470, 360 + window.innerHeight * 0.08);
+                            if (motion.combatJumpRequested > 0) {
+                                motion.vy = -Math.min(
+                                    520,
+                                    (370 + window.innerHeight * 0.08) * motion.combatJumpRequested
+                                );
                                 motion.vx = combatSpeed * 1.18 * motion.direction;
-                                motion.nextCombatHopAt = now + 1500 + Math.random() * 1200;
+                                motion.combatJumpRequested = 0;
                                 setMotion("jump");
                                 setJumpPhase("takeoff");
                                 motion.jumpPhaseUntil = now + 150;
@@ -4407,7 +4410,7 @@
                         motion.climbTarget = null;
                         motion.hangUntil = 0;
                         motion.wallSlideUntil = 0;
-                        motion.nextCombatHopAt = performance.now() + 900;
+                        motion.combatJumpRequested = 0;
                         var target = currentEncounterTarget();
                         if (target) {
                             setFacing(target.x < motion.x + runnerWidth / 2 ? -1 : 1);
@@ -4432,6 +4435,13 @@
                     setFiring: function (active) {
                         if (active) pixelRunner.dataset.firing = "true";
                         else delete pixelRunner.dataset.firing;
+                    },
+                    cueJump: function (power) {
+                        if (!encounterActive || reducedMotion) return;
+                        motion.combatJumpRequested = Math.max(
+                            motion.combatJumpRequested || 0,
+                            Math.max(0.85, Math.min(1.25, Number(power) || 1))
+                        );
                     },
                     position: function () {
                         return {
@@ -6533,7 +6543,7 @@
         })();
     </script>
     <script src="/beam_system.js?v=20260804-page-destruction-1"></script>
-    <script src="/tshirt_builder_destruction.js?v=20260804-2"></script>
+    <script src="/tshirt_builder_destruction.js?v=20260804-3"></script>
 </body>
 
 </html>

@@ -55,7 +55,8 @@ for fragment, label in [
     ("motion.jumpPhaseUntil = performance.now() + 150", "three-frame launch timing"),
     ("motion.landUntil = now + 180", "three-frame landing timing"),
     ("motion.feetY = groundY()", "combat ground reset"),
-    ("motion.nextCombatHopAt", "combat traversal hops"),
+    ("motion.combatJumpRequested", "authored combat jump queue"),
+    ("cueJump: function", "encounter jump choreography API"),
     ("function activeRunSpeed()", "faster combat pursuit"),
     ("page-shard-fly", "page fragment flight animation"),
 ]:
@@ -65,8 +66,10 @@ if "aryn-drop-ludo-runtime" in html:
     raise AssertionError("Front-facing drop animation must not be used by the T-shirt runner")
 
 for fragment, label in [
-    ("var shotTimes = [2.3, 3.75, 5.2, 6.65, 8.1, 9.55, 11.0, 12.45, 13.9, 15.35, 17.0, 18.65, 20.3]", "thirteen-shot encounter cadence"),
-    ("var hitShotIndexes = new Set([10, 11, 12])", "three-hit finish"),
+    ("var shotTimes = [1.6, 3.0, 4.4, 5.8, 7.2, 8.6, 10.0, 11.4, 12.8, 14.2, 15.6, 17.0, 18.4, 21.2]", "fourteen-shot encounter cadence"),
+    ("var killShotIndex = 13", "fourteenth-shot kill"),
+    ("fireShot(encounter.nextShot === killShotIndex", "single final direct hit"),
+    ('setStatus("Shot 14 // Direct hit", "Seam Hunter // Eliminated")', "explicit kill confirmation"),
     ("encounter.canonicalElapsed >= 26", "sub-30-second ceiling"),
     ("Beam.createVolley", "beam creation"),
     ("Beam.updateProjectile", "beam guidance"),
@@ -76,12 +79,20 @@ for fragment, label in [
     ("function captureFacade()", "live-DOM façade capture"),
     ("cloneWithCanvasPixels", "shirt preview canvas cloning"),
     ("function shatterFragment", "independent shard construction"),
-    ("var shardClips", "eight-piece fracture map"),
+    ("var shardClips", "twelve-piece fracture map"),
     ("obliterateRemainingFacade", "complete façade destruction"),
     ('window.scrollTo({\n            top: 0', "scroll-to-top prologue"),
     ('facade.replaceChildren()', "reversible façade cleanup"),
     ('"page-destruction-facade-ready"', "real builder restoration"),
-    ("var route = [0.78, 0.14, 0.88", "full-screen Seam Hunter route"),
+    ("var enemyRoute = [", "authored Seam Hunter route"),
+    ("var runnerJumpTimes = [4.05, 8.05, 12.35, 16.35]", "authored pursuit jumps"),
+    ("return chasePoint()", "Aryn chase-line targeting"),
+    ('kind: "debris"', "small impact debris"),
+    ('kind: "dust"', "impact dust"),
+    ('kind: "smoke"', "impact smoke"),
+    ('kind: "fire"', "impact fire"),
+    ('kind: "ring"', "lethal blast ring"),
+    ("drawImpactFlash", "lethal impact flash"),
     ("window.OTWPageDestruction", "QA control surface"),
 ]:
     require(encounter, fragment, label)

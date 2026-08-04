@@ -23,17 +23,43 @@
     var encounter = null;
     var deviceScale = 1;
 
-    var shotTimes = [2.3, 3.75, 5.2, 6.65, 8.1, 9.55, 11.0, 12.45, 13.9, 15.35, 17.0, 18.65, 20.3];
-    var hitShotIndexes = new Set([10, 11, 12]);
+    var shotTimes = [1.6, 3.0, 4.4, 5.8, 7.2, 8.6, 10.0, 11.4, 12.8, 14.2, 15.6, 17.0, 18.4, 21.2];
+    var killShotIndex = 13;
+    var runnerJumpTimes = [4.05, 8.05, 12.35, 16.35];
+    var enemyRoute = [
+        { time: 0, x: 0.62 },
+        { time: 2.7, x: 0.86 },
+        { time: 3.35, x: 0.82 },
+        { time: 6.1, x: 0.16 },
+        { time: 6.85, x: 0.22 },
+        { time: 10.2, x: 0.88 },
+        { time: 10.95, x: 0.82 },
+        { time: 14.3, x: 0.12 },
+        { time: 15.05, x: 0.2 },
+        { time: 18.3, x: 0.86 },
+        { time: 19.2, x: 0.72 },
+        { time: 21.0, x: 0.64 },
+        { time: 24.8, x: 0.64 }
+    ];
+    var enemyLeapWindows = [
+        { start: 3.75, end: 5.25, height: 0.18 },
+        { start: 7.7, end: 9.25, height: 0.22 },
+        { start: 12.0, end: 13.55, height: 0.18 },
+        { start: 16.0, end: 17.6, height: 0.22 }
+    ];
     var shardClips = [
-        "polygon(0 0, 50% 0, 0 50%)",
-        "polygon(50% 0, 50% 50%, 0 50%)",
-        "polygon(50% 0, 100% 0, 100% 50%)",
-        "polygon(50% 0, 100% 50%, 50% 50%)",
-        "polygon(0 50%, 50% 50%, 0 100%)",
-        "polygon(50% 50%, 50% 100%, 0 100%)",
-        "polygon(50% 50%, 100% 50%, 100% 100%)",
-        "polygon(50% 50%, 100% 100%, 50% 100%)"
+        "polygon(0 0, 33.34% 0, 0 50%)",
+        "polygon(33.34% 0, 33.34% 50%, 0 50%)",
+        "polygon(33.33% 0, 66.67% 0, 33.33% 50%)",
+        "polygon(66.67% 0, 66.67% 50%, 33.33% 50%)",
+        "polygon(66.66% 0, 100% 0, 100% 50%)",
+        "polygon(66.66% 0, 100% 50%, 66.66% 50%)",
+        "polygon(0 50%, 33.34% 50%, 0 100%)",
+        "polygon(33.34% 50%, 33.34% 100%, 0 100%)",
+        "polygon(33.33% 50%, 66.67% 50%, 33.33% 100%)",
+        "polygon(66.67% 50%, 66.67% 100%, 33.33% 100%)",
+        "polygon(66.66% 50%, 100% 50%, 100% 100%)",
+        "polygon(66.66% 50%, 100% 100%, 66.66% 100%)"
     ];
     var emitterAnchors = [
         { x: 61, y: 13 },
@@ -123,6 +149,17 @@
         };
     }
 
+    function chasePoint() {
+        var target = enemyCenter();
+        if (!encounter) return target;
+        var gap = Math.min(150, Math.max(86, window.innerWidth * 0.115));
+        return {
+            id: "seam-hunter-chase-line",
+            x: clamp(target.x - encounter.enemy.facing * gap, 32, window.innerWidth - 32),
+            y: target.y
+        };
+    }
+
     function copyCanvasPixels(source, clone) {
         var sourceCanvases = [];
         var cloneCanvases = [];
@@ -137,19 +174,30 @@
         sourceCanvases.forEach(function (sourceCanvas, index) {
             var cloneCanvas = cloneCanvases[index];
             if (!cloneCanvas) return;
-            cloneCanvas.width = sourceCanvas.width;
-            cloneCanvas.height = sourceCanvas.height;
-            cloneCanvas.style.position = "relative";
-            cloneCanvas.style.zIndex = "1";
-            cloneCanvas.style.display = "block";
-            cloneCanvas.style.width = "100%";
-            cloneCanvas.style.height = "100%";
-            var cloneContext = cloneCanvas.getContext("2d");
-            if (!cloneContext) return;
             try {
-                cloneContext.drawImage(sourceCanvas, 0, 0);
+                var still = document.createElement("img");
+                still.src = sourceCanvas.toDataURL("image/png");
+                still.alt = "";
+                still.style.position = "relative";
+                still.style.zIndex = "1";
+                still.style.display = "block";
+                still.style.width = "100%";
+                still.style.height = "100%";
+                cloneCanvas.replaceWith(still);
             } catch (error) {
-                // The façade remains usable even if an optional canvas cannot be copied.
+                cloneCanvas.width = sourceCanvas.width;
+                cloneCanvas.height = sourceCanvas.height;
+                cloneCanvas.style.position = "relative";
+                cloneCanvas.style.zIndex = "1";
+                cloneCanvas.style.display = "block";
+                cloneCanvas.style.width = "100%";
+                cloneCanvas.style.height = "100%";
+                var cloneContext = cloneCanvas.getContext("2d");
+                try {
+                    if (cloneContext) cloneContext.drawImage(sourceCanvas, 0, 0);
+                } catch (drawError) {
+                    // A blank clone is preferable to interrupting the reversible encounter.
+                }
             }
         });
     }
@@ -264,19 +312,22 @@
 
         shardClips.forEach(function (clip, index) {
             var shard = cloneWithCanvasPixels(source);
-            var columnDirection = index % 4 < 2 ? -1 : 1;
-            var rowDirection = index < 4 ? -1 : 1;
-            var force = 68 + index * 13 + encounter.damageCursor * 4;
+            var cell = Math.floor(index / 2);
+            var column = cell % 3;
+            var row = Math.floor(cell / 3);
+            var columnDirection = column === 1 ? (index % 2 ? 1 : -1) : column - 1;
+            var rowDirection = row === 0 ? -1 : 1;
+            var force = 56 + index * 9 + encounter.damageCursor * 3;
             shard.className = "page-shard";
             shard.removeAttribute("data-fragment-index");
             shard.style.setProperty("--shard-clip", clip);
             shard.style.setProperty("--impact-x", impactX + "%");
             shard.style.setProperty("--impact-y", impactY + "%");
             shard.style.setProperty("--shard-x", columnDirection * force + "px");
-            shard.style.setProperty("--shard-y", (rowDirection * force * 0.52 + 118 + index * 9) + "px");
-            shard.style.setProperty("--shard-rotate", columnDirection * (18 + index * 9) + "deg");
-            shard.style.setProperty("--shard-scale", String(0.62 + index % 3 * 0.07));
-            shard.style.setProperty("--shard-duration", (reducedMotion ? 340 : 900 + index * 58) + "ms");
+            shard.style.setProperty("--shard-y", (rowDirection * force * 0.46 + 102 + index * 7) + "px");
+            shard.style.setProperty("--shard-rotate", columnDirection * (24 + index * 7) + "deg");
+            shard.style.setProperty("--shard-scale", String(0.38 + index % 3 * 0.055));
+            shard.style.setProperty("--shard-duration", (reducedMotion ? 340 : 780 + index * 44) + "ms");
             source.parentNode.insertBefore(shard, source.nextSibling);
             window.setTimeout(function () {
                 shard.remove();
@@ -296,17 +347,120 @@
             var angle = index / amount * Math.PI * 2 + encounter.particleSeed * 0.31;
             var speed = 48 + (index % 5) * 26;
             encounter.particles.push({
+                kind: "spark",
                 x: x,
                 y: y,
                 vx: Math.cos(angle) * speed,
                 vy: Math.sin(angle) * speed - 34,
                 size: 2 + index % 4,
                 color: color,
+                gravity: 220,
+                grow: 0,
                 life: 0.42 + (index % 4) * 0.09,
                 maxLife: 0.42 + (index % 4) * 0.09
             });
         }
         encounter.particleSeed += 1;
+    }
+
+    function particleNoise(index, salt) {
+        var raw = Math.sin((encounter.particleSeed + index * 1.73 + salt) * 12.9898) * 43758.5453;
+        return raw - Math.floor(raw);
+    }
+
+    function addImpactCloud(x, y, lethal) {
+        var debrisColors = ["#f2edf5", "#9eb0c7", "#4b5368", "#191c28", "#ff6b43"];
+        var debrisCount = reducedMotion ? 7 : lethal ? 42 : 26;
+        var dustCount = reducedMotion ? 3 : lethal ? 16 : 10;
+        var smokeCount = reducedMotion ? 2 : lethal ? 12 : 7;
+        var fireCount = reducedMotion ? 2 : lethal ? 18 : 8;
+
+        for (var index = 0; index < debrisCount; index += 1) {
+            var angle = particleNoise(index, 1) * Math.PI * 2;
+            var speed = 70 + particleNoise(index, 2) * (lethal ? 270 : 185);
+            var life = 0.7 + particleNoise(index, 3) * 0.75;
+            encounter.particles.push({
+                kind: "debris",
+                x: x,
+                y: y,
+                vx: Math.cos(angle) * speed,
+                vy: Math.sin(angle) * speed - 80,
+                size: 1.5 + particleNoise(index, 4) * 4.5,
+                color: debrisColors[index % debrisColors.length],
+                gravity: 360,
+                grow: -0.7,
+                life: life,
+                maxLife: life
+            });
+        }
+
+        for (var dustIndex = 0; dustIndex < dustCount; dustIndex += 1) {
+            var dustLife = 0.85 + particleNoise(dustIndex, 7) * 0.7;
+            encounter.particles.push({
+                kind: "dust",
+                x: x + (particleNoise(dustIndex, 8) - 0.5) * 36,
+                y: y + (particleNoise(dustIndex, 9) - 0.5) * 22,
+                vx: (particleNoise(dustIndex, 10) - 0.5) * 72,
+                vy: -24 - particleNoise(dustIndex, 11) * 42,
+                size: 7 + particleNoise(dustIndex, 12) * 13,
+                color: dustIndex % 2 ? "#c5b6a4" : "#7d7984",
+                gravity: -4,
+                grow: 13,
+                life: dustLife,
+                maxLife: dustLife
+            });
+        }
+
+        for (var smokeIndex = 0; smokeIndex < smokeCount; smokeIndex += 1) {
+            var smokeLife = 1.25 + particleNoise(smokeIndex, 14) * 1.05;
+            encounter.particles.push({
+                kind: "smoke",
+                x: x + (particleNoise(smokeIndex, 15) - 0.5) * 24,
+                y: y + (particleNoise(smokeIndex, 16) - 0.5) * 16,
+                vx: (particleNoise(smokeIndex, 17) - 0.5) * 34,
+                vy: -32 - particleNoise(smokeIndex, 18) * 38,
+                size: 10 + particleNoise(smokeIndex, 19) * 17,
+                color: smokeIndex % 2 ? "#252635" : "#10121b",
+                gravity: -7,
+                grow: 9,
+                life: smokeLife,
+                maxLife: smokeLife
+            });
+        }
+
+        for (var fireIndex = 0; fireIndex < fireCount; fireIndex += 1) {
+            var fireLife = 0.38 + particleNoise(fireIndex, 22) * 0.52;
+            encounter.particles.push({
+                kind: "fire",
+                x: x + (particleNoise(fireIndex, 23) - 0.5) * (lethal ? 58 : 28),
+                y: y + (particleNoise(fireIndex, 24) - 0.5) * 24,
+                vx: (particleNoise(fireIndex, 25) - 0.5) * 90,
+                vy: -55 - particleNoise(fireIndex, 26) * 90,
+                size: 3 + particleNoise(fireIndex, 27) * 7,
+                color: fireIndex % 3 === 0 ? "#fff2a8" : fireIndex % 2 ? "#ff9b38" : "#ff365f",
+                gravity: -35,
+                grow: -1.8,
+                life: fireLife,
+                maxLife: fireLife
+            });
+        }
+
+        if (lethal) {
+            encounter.particles.push({
+                kind: "ring",
+                x: x,
+                y: y,
+                vx: 0,
+                vy: 0,
+                size: 8,
+                color: "#ecffff",
+                gravity: 0,
+                grow: 150,
+                life: 0.6,
+                maxLife: 0.6
+            });
+        }
+        encounter.particleSeed += 3;
     }
 
     function shakePage() {
@@ -322,6 +476,7 @@
     function damagePage(fragment, point) {
         shatterFragment(fragment, point);
         addBurst(point.x, point.y, "#ff4c88", reducedMotion ? 5 : 16);
+        addImpactCloud(point.x, point.y, false);
         shakePage();
         setStatus(
             "Miss // Scenery disintegrating",
@@ -360,8 +515,8 @@
                 direction: direction,
                 idBase: 4000 + encounter.nextShot * 4
             })[0];
-            projectile.velocityX *= 1.65;
-            projectile.velocityY *= 1.65;
+            projectile.velocityX *= hit ? 2.15 : 1.65;
+            projectile.velocityY *= hit ? 2.15 : 1.65;
             projectile.lifetime = 2.2;
         } else {
             projectile = createFallbackProjectile(origin, firstTarget);
@@ -370,6 +525,7 @@
         encounter.projectiles.push({
             projectile: projectile,
             hit: hit,
+            final: hit,
             fragment: damagedFragment,
             staticTarget: staticTarget,
             done: false
@@ -377,7 +533,7 @@
         overlay.dataset.shotCount = String(encounter.nextShot + 1);
         setStatus(
             "Pack fire // Shot " + (encounter.nextShot + 1),
-            hit ? "Tracking solution locked" : "Seam Hunter evading"
+            hit ? "Kill solution locked" : "Seam Hunter evading"
         );
         if (window.arynPageRunner) {
             window.arynPageRunner.setFiring(true);
@@ -410,28 +566,24 @@
 
         shot.done = true;
         if (shot.hit) {
-            encounter.enemy.hits += 1;
-            addBurst(target.x, target.y, "#72fff0", reducedMotion ? 7 : 22);
+            encounter.enemy.hits = 1;
+            encounter.enemy.killed = true;
+            encounter.enemy.dyingAt = encounter.canonicalElapsed;
+            encounter.impactFlash = reducedMotion ? 0.16 : 0.38;
+            addBurst(target.x, target.y, "#72fff0", reducedMotion ? 9 : 34);
+            addImpactCloud(target.x, target.y, true);
             shakePage();
-            if (encounter.enemy.hits >= 3) {
-                encounter.enemy.dyingAt = encounter.canonicalElapsed;
-                setStatus("Direct hit // Target collapsing", "Seam Hunter // Integrity zero");
-            } else {
-                setStatus(
-                    "Direct hit // " + encounter.enemy.hits + " of 3",
-                    "Seam Hunter // Integrity " + (3 - encounter.enemy.hits)
-                );
-            }
+            setStatus("Shot 14 // Direct hit", "Seam Hunter // Eliminated");
         } else {
             damagePage(shot.fragment, target);
         }
     }
 
-    function drawFallbackProjectile(projectile) {
+    function drawFallbackProjectile(projectile, finalShot) {
         context.save();
         context.globalCompositeOperation = "lighter";
         context.strokeStyle = "rgba(62, 231, 218, 0.72)";
-        context.lineWidth = 3;
+        context.lineWidth = finalShot ? 7 : 3;
         context.shadowColor = "#43fff1";
         context.shadowBlur = reducedMotion ? 0 : 8;
         context.beginPath();
@@ -442,32 +594,47 @@
         context.lineTo(projectile.x, projectile.y);
         context.stroke();
         context.fillStyle = "#fff";
-        context.fillRect(projectile.x - 7, projectile.y - 2, 14, 4);
+        context.fillRect(
+            projectile.x - (finalShot ? 12 : 7),
+            projectile.y - (finalShot ? 4 : 2),
+            finalShot ? 24 : 14,
+            finalShot ? 8 : 4
+        );
         context.restore();
     }
 
-    function updateEnemy(delta) {
+    function updateEnemy() {
         var enemy = encounter.enemy;
         if (enemy.dyingAt !== null) return;
         var elapsed = encounter.canonicalElapsed;
         var width = window.innerWidth;
-        var route = [0.78, 0.14, 0.88, 0.26, 0.72, 0.09, 0.91, 0.33, 0.67, 0.18];
-        var segmentDuration = 2.08;
-        var routeElapsed = Math.max(0, elapsed - 0.45);
-        var segment = Math.floor(routeElapsed / segmentDuration);
-        var progress = clamp((routeElapsed % segmentDuration) / segmentDuration, 0, 1);
+        var routeIndex = 0;
+        while (
+            routeIndex < enemyRoute.length - 2 &&
+            elapsed > enemyRoute[routeIndex + 1].time
+        ) {
+            routeIndex += 1;
+        }
+        var from = enemyRoute[routeIndex];
+        var to = enemyRoute[Math.min(routeIndex + 1, enemyRoute.length - 1)];
+        var progress = clamp((elapsed - from.time) / Math.max(0.01, to.time - from.time), 0, 1);
         var eased = progress * progress * (3 - 2 * progress);
-        var from = segment === 0 ? 1.08 : route[(segment - 1) % route.length];
-        var to = route[segment % route.length];
-        var targetX = width * (from + (to - from) * eased);
+        var targetX = width * (from.x + (to.x - from.x) * eased);
         targetX = clamp(targetX, enemy.size * 0.56, width - enemy.size * 0.56);
         var previousX = enemy.x;
         enemy.x = targetX;
         if (Math.abs(enemy.x - previousX) > 0.1) enemy.facing = enemy.x < previousX ? -1 : 1;
-        var leap = Math.pow(Math.sin(progress * Math.PI), 1.7);
-        var leapHeight = segment % 2 === 0
-            ? Math.min(92, window.innerHeight * 0.16)
-            : Math.min(138, window.innerHeight * 0.23);
+        var leap = 0;
+        var leapHeight = 0;
+        enemyLeapWindows.forEach(function (windowSpec) {
+            if (elapsed < windowSpec.start || elapsed > windowSpec.end) return;
+            var leapProgress = (elapsed - windowSpec.start) / (windowSpec.end - windowSpec.start);
+            leap = Math.max(leap, Math.pow(Math.sin(leapProgress * Math.PI), 1.45));
+            leapHeight = Math.max(
+                leapHeight,
+                Math.min(150, window.innerHeight * windowSpec.height)
+            );
+        });
         enemy.feetY = window.innerHeight * 0.725 - leap * leapHeight;
     }
 
@@ -531,35 +698,73 @@
     function updateParticles(delta) {
         encounter.particles.forEach(function (particle) {
             particle.life -= delta;
-            particle.vy += 220 * delta;
+            particle.vy += (particle.gravity === undefined ? 220 : particle.gravity) * delta;
             particle.x += particle.vx * delta;
             particle.y += particle.vy * delta;
+            particle.size = Math.max(0.5, particle.size + (particle.grow || 0) * delta);
         });
         encounter.particles = encounter.particles.filter(function (particle) {
             return particle.life > 0;
         });
+        encounter.impactFlash = Math.max(0, encounter.impactFlash - delta);
     }
 
     function drawParticles() {
         context.save();
-        context.globalCompositeOperation = "lighter";
         encounter.particles.forEach(function (particle) {
-            context.globalAlpha = Math.max(0, particle.life / particle.maxLife);
+            var lifeRatio = Math.max(0, particle.life / particle.maxLife);
+            context.globalCompositeOperation = (
+                particle.kind === "smoke" || particle.kind === "dust" || particle.kind === "debris"
+            ) ? "source-over" : "lighter";
+            context.globalAlpha = lifeRatio * (
+                particle.kind === "smoke" ? 0.54 : particle.kind === "dust" ? 0.42 : 1
+            );
             context.fillStyle = particle.color;
             context.shadowColor = particle.color;
-            context.shadowBlur = reducedMotion ? 0 : 6;
-            context.fillRect(particle.x, particle.y, particle.size, particle.size);
+            context.shadowBlur = reducedMotion || particle.kind === "smoke" || particle.kind === "dust" ? 0 : 6;
+
+            if (particle.kind === "ring") {
+                context.strokeStyle = particle.color;
+                context.lineWidth = Math.max(1, 5 * lifeRatio);
+                context.beginPath();
+                context.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+                context.stroke();
+            } else if (particle.kind === "smoke" || particle.kind === "dust") {
+                var block = Math.max(2, Math.round(particle.size / 3));
+                context.fillRect(particle.x - block, particle.y - block, block * 2, block * 2);
+                context.fillRect(particle.x - particle.size * 0.5, particle.y, particle.size, block);
+                context.fillRect(particle.x, particle.y - particle.size * 0.5, block, particle.size);
+            } else if (particle.kind === "debris") {
+                context.fillRect(
+                    Math.round(particle.x),
+                    Math.round(particle.y),
+                    Math.max(1, Math.round(particle.size * 1.7)),
+                    Math.max(1, Math.round(particle.size * 0.72))
+                );
+            } else {
+                context.fillRect(particle.x, particle.y, particle.size, particle.size);
+            }
         });
+        context.restore();
+    }
+
+    function drawImpactFlash() {
+        if (encounter.impactFlash <= 0) return;
+        context.save();
+        context.globalCompositeOperation = "screen";
+        context.globalAlpha = Math.min(0.46, encounter.impactFlash * 1.2);
+        context.fillStyle = "#b9ffff";
+        context.fillRect(0, 0, window.innerWidth, window.innerHeight);
         context.restore();
     }
 
     function drawProjectiles() {
         encounter.projectiles.forEach(function (shot) {
             if (shot.projectile.fallback) {
-                drawFallbackProjectile(shot.projectile);
+                drawFallbackProjectile(shot.projectile, shot.final);
             } else {
                 Beam.drawProjectile(context, shot.projectile, {
-                    visualScale: 0.82,
+                    visualScale: shot.final ? 1.5 : 0.82,
                     softShadows: !reducedMotion
                 });
             }
@@ -599,7 +804,7 @@
             !window.arynPageRunner
         ) return;
         window.arynPageRunner.engage(function () {
-            return enemyCenter();
+            return chasePoint();
         });
         encounter.runnerEngaged = true;
     }
@@ -610,13 +815,23 @@
         var realDelta = Math.min(0.04, Math.max(0, (now - encounter.lastFrame) / 1000));
         encounter.lastFrame = now;
         encounter.canonicalElapsed = (now - encounter.startedAt) / 1000 / encounter.timeScale;
-        updateEnemy(realDelta / encounter.timeScale);
+        updateEnemy();
+
+        while (
+            encounter.nextJumpCue < runnerJumpTimes.length &&
+            encounter.canonicalElapsed >= runnerJumpTimes[encounter.nextJumpCue]
+        ) {
+            if (window.arynPageRunner && typeof window.arynPageRunner.cueJump === "function") {
+                window.arynPageRunner.cueJump(encounter.nextJumpCue % 2 ? 1.12 : 1);
+            }
+            encounter.nextJumpCue += 1;
+        }
 
         while (
             encounter.nextShot < shotTimes.length &&
             encounter.canonicalElapsed >= shotTimes[encounter.nextShot]
         ) {
-            fireShot(hitShotIndexes.has(encounter.nextShot), now);
+            fireShot(encounter.nextShot === killShotIndex, now);
             encounter.nextShot += 1;
         }
 
@@ -632,6 +847,7 @@
         drawEnemy();
         drawProjectiles();
         drawParticles();
+        drawImpactFlash();
 
         var deathFinished = encounter.enemy.dyingAt !== null &&
             encounter.canonicalElapsed >= encounter.enemy.dyingAt + 2.9;
@@ -661,21 +877,24 @@
             canonicalElapsed: 0,
             timeScale: reducedMotion ? 0.4 : 1,
             nextShot: 0,
+            nextJumpCue: 0,
             damageCursor: 0,
             destroyedCount: 0,
             fragments: fragments,
             projectiles: [],
             particles: [],
             particleSeed: 1,
+            impactFlash: 0,
             runnerEngaged: false,
             complete: false,
             originalScrollY: pendingScrollY,
             enemy: {
-                x: window.innerWidth + 180,
+                x: window.innerWidth * enemyRoute[0].x,
                 feetY: window.innerHeight * 0.725,
                 size: clamp(window.innerWidth * 0.15, 112, 178),
                 facing: -1,
                 hits: 0,
+                killed: false,
                 dyingAt: null
             }
         };
