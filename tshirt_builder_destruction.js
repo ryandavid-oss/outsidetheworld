@@ -61,6 +61,12 @@
         "polygon(66.66% 50%, 100% 50%, 100% 100%)",
         "polygon(66.66% 50%, 100% 100%, 66.66% 100%)"
     ];
+    var denseShardClips = [
+        "polygon(0 0, 52% 0, 48% 52%, 0 48%)",
+        "polygon(52% 0, 100% 0, 100% 48%, 48% 52%)",
+        "polygon(0 48%, 48% 52%, 52% 100%, 0 100%)",
+        "polygon(48% 52%, 100% 48%, 100% 100%, 52% 100%)"
+    ];
     var emitterAnchors = [
         { x: 61, y: 13 },
         { x: 61, y: 14 },
@@ -307,31 +313,46 @@
         if (!fragment || fragment.destroyed) return;
         fragment.destroyed = true;
         var source = fragment.element;
+        var parent = source.parentNode;
+        var insertionPoint = source.nextSibling;
+        var currentEncounter = encounter;
+        var elementCount = source.querySelectorAll("*").length;
+        var clips = elementCount > 45 ? denseShardClips : shardClips;
         var impactX = clamp((point.x - fragment.rect.left) / fragment.rect.width * 100, 0, 100);
         var impactY = clamp((point.y - fragment.rect.top) / fragment.rect.height * 100, 0, 100);
 
-        shardClips.forEach(function (clip, index) {
-            var shard = cloneWithCanvasPixels(source);
-            var cell = Math.floor(index / 2);
-            var column = cell % 3;
-            var row = Math.floor(cell / 3);
-            var columnDirection = column === 1 ? (index % 2 ? 1 : -1) : column - 1;
-            var rowDirection = row === 0 ? -1 : 1;
-            var force = 56 + index * 9 + encounter.damageCursor * 3;
-            shard.className = "page-shard";
-            shard.removeAttribute("data-fragment-index");
-            shard.style.setProperty("--shard-clip", clip);
-            shard.style.setProperty("--impact-x", impactX + "%");
-            shard.style.setProperty("--impact-y", impactY + "%");
-            shard.style.setProperty("--shard-x", columnDirection * force + "px");
-            shard.style.setProperty("--shard-y", (rowDirection * force * 0.46 + 102 + index * 7) + "px");
-            shard.style.setProperty("--shard-rotate", columnDirection * (24 + index * 7) + "deg");
-            shard.style.setProperty("--shard-scale", String(0.38 + index % 3 * 0.055));
-            shard.style.setProperty("--shard-duration", (reducedMotion ? 340 : 780 + index * 44) + "ms");
-            source.parentNode.insertBefore(shard, source.nextSibling);
-            window.setTimeout(function () {
-                shard.remove();
-            }, reducedMotion ? 420 : 1600);
+        clips.forEach(function (clip, index) {
+            function createShard() {
+                if (encounter !== currentEncounter || !parent || !parent.isConnected) return;
+                var shard = cloneWithCanvasPixels(source);
+                var cell = clips === denseShardClips ? index : Math.floor(index / 2);
+                var columnCount = clips === denseShardClips ? 2 : 3;
+                var column = cell % columnCount;
+                var row = Math.floor(cell / columnCount);
+                var columnDirection = column === 0 ? -1 : column === columnCount - 1 ? 1 : (index % 2 ? 1 : -1);
+                var rowDirection = row === 0 ? -1 : 1;
+                var force = 56 + index * 9 + currentEncounter.damageCursor * 3;
+                shard.className = "page-shard";
+                shard.removeAttribute("data-fragment-index");
+                shard.style.setProperty("--shard-clip", clip);
+                shard.style.setProperty("--impact-x", impactX + "%");
+                shard.style.setProperty("--impact-y", impactY + "%");
+                shard.style.setProperty("--shard-x", columnDirection * force + "px");
+                shard.style.setProperty("--shard-y", (rowDirection * force * 0.46 + 102 + index * 7) + "px");
+                shard.style.setProperty("--shard-rotate", columnDirection * (24 + index * 7) + "deg");
+                shard.style.setProperty("--shard-scale", String(0.38 + index % 3 * 0.055));
+                shard.style.setProperty("--shard-duration", (reducedMotion ? 340 : 780 + index * 44) + "ms");
+                parent.insertBefore(
+                    shard,
+                    insertionPoint && insertionPoint.parentNode === parent ? insertionPoint : null
+                );
+                window.setTimeout(function () {
+                    shard.remove();
+                }, reducedMotion ? 420 : 1600);
+            }
+
+            if (index === 0 || reducedMotion) createShard();
+            else window.setTimeout(createShard, index * 16);
         });
 
         source.classList.add("page-fragment--struck");
