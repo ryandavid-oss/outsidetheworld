@@ -132,16 +132,20 @@ def main() -> int:
     )
     velocity = number(
         game_source,
-        r"if \(jumpBuffer > 0 && coyoteTime > 0\) \{\s+"
-        r"player\.vy = -(\d+);",
+        r"var MOVEMENT_JUMP_VELOCITY = (\d+);",
         "normal jump velocity",
     )
-    gravity = number(game_source, r"player\.vy \+= (\d+) \* delta;", "gravity")
-    delta_cap = number(
+    gravity = number(
         game_source,
-        r"Math\.min\((0\.\d+), \(now - lastFrame\)",
-        "frame delta cap",
+        r"var MOVEMENT_GRAVITY = (\d+);",
+        "gravity",
     )
+    fixed_hz = number(
+        game_source,
+        r"var MOVEMENT_FIXED_STEP = 1 / (\d+);",
+        "fixed-step frequency",
+    )
+    delta_cap = 1 / fixed_hz if fixed_hz else 0
 
     check((width, height) == (PLATE_WIDTH, PLATE_HEIGHT), "live game and plate dimensions differ")
     check(anchors["concrete_deck_y"] == ground_y, "deck coordinate is not direct")
@@ -241,7 +245,7 @@ def main() -> int:
         "  deck / Deepworks      "
         f"y={anchors['concrete_deck_y']} / y={anchors['deepworks_floor_y']}"
     )
-    print(f"  worst-frame jump      {worst_rise:.2f}px")
+    print(f"  fixed-step jump       {worst_rise:.2f}px")
     print(f"  normal route rise     {normal_rise}px")
     print(f"  route safety margin   {worst_rise - normal_rise:.2f}px")
     print(f"  transition elevation  y={anchors['room_transition_y']}")

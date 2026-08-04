@@ -198,7 +198,7 @@ REQUIRED_SNIPPETS = {
     "right lift boundary": (
         "WOUND_COMBAT_LANE_X + WOUND_COMBAT_LANE_WIDTH"
     ),
-    "50 hit points": "var WOUND_BOSS_HEALTH = 50;",
+    "200 hit points": "var WOUND_BOSS_HEALTH = 200;",
     "walk render size": (
         "var WOUND_BOSS_WALK_RENDER_SIZE = 448;"
     ),
@@ -225,20 +225,58 @@ REQUIRED_SNIPPETS = {
     "platform surface anchor": (
         "var WOUND_LIFT_PLATFORM_SURFACE_Y = 12;"
     ),
+    "fifteen percent faster lifts": (
+        "var WOUND_LIFT_SPEED = 0.5 * 1.15;"
+    ),
+    "entrance lift encounter gate": (
+        "woundEncounterGateLift: true"
+    ),
+    "entrance lift parked at top": (
+        '"parked-top"'
+    ),
+    "entrance lift combat release": (
+        '"combat-cycle"'
+    ),
     "gantry surface anchor": (
         "var WOUND_GANTRY_CAR_SURFACE_Y = 86;"
     ),
     "preview-only boss marker": "boss.woundBoss = true;",
+    "four damage phases": "function woundBossDamagePhase(enemy)",
+    "threshold phase synchronization": (
+        "function syncWoundBossDamagePhase("
+    ),
+    "pink damage tinge": '"pink-tinge"',
+    "blinking pink damage state": '"pink-blink"',
+    "critical redline state": '"redline-blink"',
+    "phase-scaled pursuit": "function woundBossEffectiveSpeedScale(enemy)",
+    "phase-scaled recovery": "function woundBossRecoveryScale(enemy)",
+    "phase-scaled laser cadence": (
+        "function woundBossLaserCooldownForPhase(enemy)"
+    ),
+    "one-time opening laser lock": (
+        "var WOUND_BOSS_OPENING_LASER_LOCK = 0.5;"
+    ),
+    "mobile opening laser lock": (
+        "var WOUND_BOSS_MOBILE_OPENING_LASER_LOCK = 0.65;"
+    ),
+    "opening laser armed": "boss.openingLaserPending = true;",
+    "opening target lock behavior": '"opening-lock"',
+    "opening laser telemetry": (
+        'canvas.dataset.woundBossOpeningLaser ='
+    ),
+    "phase-scaled high-ground response": (
+        "function woundBossConfusionDurationForPhase(enemy)"
+    ),
     "grounded sprite compensation": (
         "WOUND_BOSS_WALK_BOTTOM_PADS"
     ),
     "rifle granted": "heavyRifleOwned = true;",
-    "rifle selected": 'selectedWeapon = "rifle";',
+    "PACK selected": 'selectedWeapon = "pack";',
     "boss-lane rifle travel": (
         "var WOUND_BOSS_RIFLE_BOLT_LIFE = 1.8;"
     ),
     "boss-lane world culling": (
-        "woundBossPreview && bolt.direct"
+        "woundBossPreview &&\n                        activeBolt.direct"
     ),
     "boss rifle-ready hold": (
         "function woundBossRifleHoldActive()"
@@ -262,13 +300,13 @@ REQUIRED_SNIPPETS = {
         'canvas.dataset.woundBossVulnerable =\n                        "true";'
     ),
     "aggressive near pursuit": (
-        "var WOUND_BOSS_STALK_SPEED = 72;"
+        "var WOUND_BOSS_STALK_SPEED = 88;"
     ),
     "aggressive mid pursuit": (
-        "var WOUND_BOSS_MID_SPEED = 108;"
+        "var WOUND_BOSS_MID_SPEED = 132;"
     ),
     "aggressive far pursuit": (
-        "var WOUND_BOSS_SURGE_SPEED = 160;"
+        "var WOUND_BOSS_SURGE_SPEED = 196;"
     ),
     "readable turn duration": (
         "var WOUND_BOSS_TURN_DURATION = 0.54;"
@@ -383,8 +421,8 @@ REQUIRED_SNIPPETS = {
     "laser asset": (
         "enemy-tall-gaunt-alien-laser-eyes-sheet-v1.png"
     ),
-    "five-second laser cadence": (
-        "var WOUND_BOSS_LASER_COOLDOWN = 5;"
+    "aggressive laser cadence": (
+        "var WOUND_BOSS_LASER_COOLDOWN = 4.4;"
     ),
     "laser visible damage start": (
         "var WOUND_BOSS_LASER_FIRST_ACTIVE_FRAME = 15;"
@@ -571,11 +609,11 @@ REQUIRED_SNIPPETS = {
     "enter-only keyboard skip": (
         'event.code === "NumpadEnter"'
     ),
-    "controller Start skip": (
-        "gamepad.buttons[9].pressed"
+    "controller confirm or pause skip": (
+        "if (confirmPressed || pausePressed) {"
     ),
-    "held controller guard": (
-        "woundBossIntroGamepadHeld"
+    "edge-triggered controller guard": (
+        "function gamepadButtonJustPressed(buttons, index)"
     ),
     "mobile safe-area skip": (
         "env(safe-area-inset-right)"
@@ -906,21 +944,20 @@ def main() -> int:
 
     print("PASS: The Wound boss trial is wired")
     print("- isolated ?preview=wound-boss route")
-    print("- Aryn starts with the heavy rifle")
-    print("- rifle remains shouldered while Seam Hunter is active")
-    print("- trial rifle bolts can cross the full combat runway")
-    print("- Seam Hunter starts at 50 HP")
+    print("- Aryn enters with the modular PACK chassis")
+    print("- Seam Hunter starts at 200 HP (136 with mobile assist)")
+    print("- each quarter-health threshold changes color and aggression")
     print("- 448 px walk and 560 × 448 px sweep renders")
     print("- 2,580 px room with a 1,420 px clear combat runway")
     print("- split background textures stay within the 2,048 px ceiling")
     print("- three-platform construction rig and grounded art baseline")
     print("- exact modular construction-lift artwork and surface anchors")
-    print("- the full boss body accepts rifle damage")
-    print("- trial rifle cadence is increased to a 0.30-second cycle")
-    print("- continuous, slightly slower construction lifts")
-    print("- laser-eye secondary attack fires once every five seconds")
+    print("- the full boss body accepts modular PACK damage")
+    print("- 15% faster construction lifts with a top-parked entrance gate")
+    print("- laser cadence accelerates from 4.4 to 2.73 seconds")
+    print("- one-time opening laser reaches its active frame after 1.25 seconds")
     print("- laser damage is limited to visible frames 15–30")
-    print("- accelerated three-speed ground pursuit")
+    print("- four-stage speed, recovery, range, and pursuit escalation")
     print("- confirmed, braked turns with short post-turn commitment")
     print("- lift-height perception break, bounded confusion, and blind search")
     print("- stable direction-aware search reversals at both lift boundaries")
@@ -948,7 +985,7 @@ def main() -> int:
     print("- dedicated 120-second Seam Hunter combat score")
     print("- louder boss music handoff on reveal and explicit skip")
     print("- explicit Enter, Start, and mobile-safe Skip controls")
-    print("- combatants locked while construction platforms keep moving")
+    print("- combatants lock while the entrance lift stays parked through the announcement")
     print("- mission clock held exactly for the full announcement")
     print("- shared production/preview sweep damage and victory flow")
     return 0

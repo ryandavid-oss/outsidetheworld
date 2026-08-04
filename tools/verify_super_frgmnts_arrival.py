@@ -14,12 +14,21 @@ GAME = ROOT / "super_frgmnts.html"
 DIALOGUE_DIR = (
     ROOT / "Design" / "Super-Frgmnts" / "Overworld" / "Phase-3" / "Dialogue"
 )
-CANON = DIALOGUE_DIR / "CANON-ARRIVAL-ON-VEYRA.md"
-MANIFEST = DIALOGUE_DIR / "dialogue-revision-3c-manifest.json"
+DIALOGUE_SOURCE = ROOT / "super_frgmnts_dialogue.md"
 PLATES = (
     ROOT / "Design" / "Super-Frgmnts" / "Overworld" / "Production" / "Plates"
 )
 OVERWORLD_MUSIC = ROOT / "Audio" / "super-frgmnts-overworld-loop.mp3"
+PLANET_TITLE = (
+    ROOT / "Images/Game/Super-Frgmnts/planet-veyra-title-v1.png"
+)
+DESCENT_ASSETS = {
+    "veyra-descent-deep-space-v1.png": (1672, 941),
+    "veyra-descent-first-light-v1.png": (1672, 941),
+    "veyra-descent-starry-night-v1.png": (1672, 941),
+    "veyra-descent-low-approach-v1.png": (1672, 941),
+    "aryn-ship-v2.png": (1008, 396),
+}
 
 
 def require(condition: bool, message: str) -> None:
@@ -36,43 +45,74 @@ def png_size(path: Path) -> tuple[int, int]:
 
 def main() -> None:
     source = GAME.read_text(encoding="utf-8")
-    canon = CANON.read_text(encoding="utf-8")
-    manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
-
-    canon_sections = re.findall(
-        r"^### (D\d{2}) // ([^\n]+)\n\n(.*?)(?=^### D\d{2} // |^## Canon holds)",
-        canon,
+    dialogue_source = DIALOGUE_SOURCE.read_text(encoding="utf-8")
+    source_sections = re.findall(
+        r"^\*\*(D\d{2}) · ([A-Z -]+)\*\* — [^\n]+\s*\n"
+        r"(.*?)(?=^\*\*[DR]\d{2} · |^## |\Z)",
+        dialogue_source,
         flags=re.MULTILINE | re.DOTALL,
     )
-    card_ids = [card_id for card_id, _speaker, _body in canon_sections]
+    card_ids = [card_id for card_id, _speaker, _body in source_sections]
+    expected_ids = (
+        [f"D{index:02d}" for index in range(1, 7)]
+        + ["D09", "D10"]
+        + [f"D{index:02d}" for index in range(19, 37)]
+    )
     require(
-        card_ids == [f"D{index:02d}" for index in range(1, 37)],
-        "Canon dialogue must contain sequential D01–D36 cards",
+        card_ids == expected_ids,
+        "Revised arrival dialogue must preserve its intentional card cuts",
     )
 
-    runtime_cards = {
-        card_id: (speaker, json.loads(f'"{text}"'))
+    runtime_deck = source.split(
+        "var dialogueCards = [",
+        1,
+    )[1].split("var returnDialogueCards = [", 1)[0]
+    runtime_cards = [
+        (card_id, speaker, json.loads(f'"{text}"'))
         for card_id, speaker, text in re.findall(
             r'id:\s*"(D\d{2})",\s*speaker:\s*"([^"]+)",.*?text:\s*"((?:\\.|[^"])*)"',
-            source,
+            runtime_deck,
             flags=re.DOTALL,
         )
-    }
-    for card_id, speaker, body in canon_sections:
-        dialogue_paragraph = body.split("\n\n", 1)[0]
-        dialogue_text = " ".join(dialogue_paragraph.split())
-        require(card_id in runtime_cards, f"{card_id} is missing from runtime")
+    ]
+    expected_cards = []
+    for card_id, speaker, body in source_sections:
+        dialogue_text = " ".join(
+            line.strip()
+            for line in body.splitlines()
+            if line.strip() and not line.strip().startswith("*")
+        )
+        expected_cards.append((card_id, speaker, dialogue_text))
+    require(
+        [card[0] for card in runtime_cards] == expected_ids,
+        "Runtime arrival card order drifted from the revised source",
+    )
+    for runtime_card, expected_card in zip(runtime_cards, expected_cards):
         require(
-            runtime_cards[card_id] == (speaker, dialogue_text),
-            f"{card_id} runtime copy drifted from the canon document",
+            runtime_card == expected_card,
+            f"{expected_card[0]} runtime copy drifted from the revised source",
         )
 
     required_runtime_tokens = (
         'previewParameters.get("preview") === "overworld"',
         "startArrivalDialogue()",
         "finishArrivalDialogue(false)",
+        "beginPlanetVeyraInterstitial()",
+        "PLANET OF VEYRA",
+        "ARRIVAL_DESCENT_REDUCED_DURATION = 3.2",
+        "arrivalDescentReducedMotion",
+        "ARRIVAL_DESCENT_DURATION /",
+        "ARRIVAL_DESCENT_REDUCED_DURATION",
+        "if (!arrivalDescentReducedMotion)",
+        "@media (max-width: 720px) and (orientation: portrait)",
+        ".episode-bridge__descent",
+        "transform: translate(-50%, -50%);",
+        'mode === "planet-title"',
+        "beginOverworldArrivalReveal()",
+        'state = "arrival-emerge";',
+        'canvas.dataset.arrivalEmergence = "rising";',
+        'playSoundEffect("shipOpen")',
         'effect: "tremor"',
-        'effect: "disconnect"',
         'effect: "look-portal"',
         'effect: "prime-portal"',
         'role="dialog"',
@@ -105,12 +145,10 @@ def main() -> None:
         "portalCharge",
         "invisibleStep: true",
         "OVERWORLD_ORIGIN_X + 516",
-        "function shipSurface(x, y, width)",
-        "shipSurface(500, 448, 144)",
-        "shipSurface(340, 438, 116)",
-        "shipSurface(688, 438, 116)",
-        "shipSurface(176, 648, 64)",
-        "shipSurface(904, 648, 64)",
+        "var SHIP_HULL_TRACE = [",
+        "function shipHullSurfaceYAt(platform, worldX)",
+        "function platformSurfaceYAt(platform, worldX)",
+        "shipHull: true",
         "var overworldShipSpawnPlatform =",
         "player.supportPlatform =",
         "overworldShipSpawnPlatform ||",
@@ -136,6 +174,19 @@ def main() -> None:
         OVERWORLD_MUSIC.stat().st_size > 1_000_000,
         "Overworld music asset is unexpectedly small",
     )
+    require(PLANET_TITLE.exists(), "Missing Planet of Veyra title artwork")
+    require(
+        png_size(PLANET_TITLE) == (1400, 320),
+        "Unexpected Planet of Veyra title artwork size",
+    )
+    descent_asset_root = ROOT / "Images/Game/Super-Frgmnts"
+    for asset_name, expected_size in DESCENT_ASSETS.items():
+        asset = descent_asset_root / asset_name
+        require(asset.exists(), f"Missing Veyra descent asset: {asset_name}")
+        require(
+            png_size(asset) == expected_size,
+            f"Unexpected Veyra descent asset size: {asset}",
+        )
     require(
         "drawOverworldGangway" not in source and "gangway: true" not in source,
         "The rejected visible ship staircase is still present",
@@ -191,15 +242,8 @@ def main() -> None:
             f"Unexpected portrait size: {portrait}",
         )
 
-    require(
-        manifest["status"] == "approved-production",
-        "Dialogue manifest is not marked as an approved production integration",
-    )
-    require(manifest["canon_cards"] == 36, "Manifest canon card count drifted")
-    require(manifest["scope"]["deployed"] is True, "Production dialogue is not deployed")
-
     print("Arrival on Veyra contract passed.")
-    print("- runtime speaker and copy match canon D01 through D36 exactly")
+    print("- runtime speaker and copy match all 26 revised arrival cards exactly")
     print("- Field Relay, skip confirmation, and accessibility hooks are present")
     print("- purpose-built close portraits and narrated tremor context are present")
     print("- Dras's boots align with Aryn's visible running plane")
@@ -207,9 +251,11 @@ def main() -> None:
     print("- volumetric clouds, birds, readable dog gait, and restrained volcano heat are present")
     print("- Arrival on Veyra selects its dedicated overworld music track")
     print("- the stray Landing Flats collider is absent")
-    print("- overlapping ship-slope collision spans both wings and raised engine crowns")
+    print("- traced ship-hull collision spans both wings and raised engine crowns")
     print("- Aryn begins grounded on the ship's true central roof perch")
-    print("- Fleet disconnect, Dras reaction, and transport ignition are staged")
+    print("- PLANET OF VEYRA separates touchdown from Aryn's hatch emergence")
+    print("- full mobile descent remains visible, with a calm animated reduced-motion path")
+    print("- tremor, portal look, and transport ignition remain staged")
     print("- the physical Coreworks transport has a walkable activation deck")
     print("- its one-shot vortex fades Aryn before the Foundry handoff")
     print("- all four 1672 × 941 overworld plates are present")

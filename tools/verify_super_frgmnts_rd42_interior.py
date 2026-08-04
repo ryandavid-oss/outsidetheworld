@@ -467,10 +467,12 @@ def main() -> None:
         "missingShipAssets.map(function",
         "RD-42 interior systems are ready.",
         'shipTransitionMode = "exterior-enter"',
-        'shipTransitionMode = "interior-enter"',
+        "shipTransitionElapsed / 0.52",
+        "configureShipInteriorWorld(false)",
         "function beginShipExit()",
         'shipTransitionMode = "interior-exit"',
-        'shipTransitionMode = "exterior-exit"',
+        "shipTransitionElapsed >= 0.34",
+        "configureShipExteriorWorld(false)",
         "function configureShipInteriorWorld(descending)",
         "function configureShipExteriorWorld(emerging)",
         'setAudioScene("interior", false);',
@@ -620,7 +622,7 @@ def main() -> None:
     print("RD-42 ship-interior contract passed.")
     print("- dorsal hatch entry is active throughout the production Overworld")
     print("- missing interior art is prefetched before the hatch transition")
-    print("- Aryn descends into and re-emerges from the ship")
+    print("- Aryn sinks through the dorsal hatch without a second forced movement beat")
     print("- one-plate cockpit, airlock, hab, pack, and cargo zones are present")
     print("- the complete painted deck is traversable from x42 through x1518")
     print("- service-kit, post-Wound, and Trillian review states are wired")

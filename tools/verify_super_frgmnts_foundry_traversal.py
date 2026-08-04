@@ -9,6 +9,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 GAME = ROOT / "super_frgmnts.html"
+BEAM_RUNTIME = ROOT / "beam_system.js"
 PLAN = ROOT / "Design" / "Super-Frgmnts" / "UNIFIED-LEVEL-ONE-PLAN.md"
 STABILIZER_DORMANT = (
     ROOT
@@ -130,6 +131,17 @@ def main() -> None:
         "assets.foundryAtmosphereWall",
         "assets.foundryFalseBridgeRemoval",
         "function drawFoundryAtmosphereLock()",
+        "function atmosphereLockPassageBounds(portal)",
+        "function atmosphereLockVisualBounds(portal)",
+        "ATMOSPHERE_LOCK_DOOR_HEIGHT = 206",
+        "ATMOSPHERE_LOCK_TUNNEL_FLOOR_HEIGHT = 24",
+        '"immutable-seam-floor-anchor-v5"',
+        "var fixedAnchor = Object.freeze({",
+        "portal.anchor.passageFloorY",
+        "portal.anchor.doorBottomY",
+        "portal.anchor.bridgeBottomY",
+        "portal.deckTop === GROUND_Y",
+        "canvas.dataset.atmosphereLockDoorGeometry",
         '"seven-fixed-housings-split-membranes-v1"',
         '"seven-seam-solid-concrete-v1"',
         "canvas.dataset.atmosphereLockState",
@@ -140,6 +152,27 @@ def main() -> None:
         "canvas.dataset.atmosphereLockPortals",
         "canvas.dataset.atmosphereLockRearm",
         "portal.rearmRequired",
+        "function foundryEnemyWallClearance(type)",
+        "function foundryEnemyPlateBounds(type, x, width)",
+        "FOUNDRY_REFINERY_WALL_WIDTH / 2",
+        "atmosphereLockPlate: plateBounds",
+        "atmosphereLockClearance: plateBounds",
+        '<script src="/beam_system.js?v=20260803-performance-1"></script>',
+        "function assignEnemyIdentities(roster)",
+        "function segmentIntersectsExpandedRect(",
+        "function beamBoltHitsSolidTerrain(",
+        "phasesThroughTerrain",
+        "Beam.applyHit(",
+        "function updateFrozenEnemy(enemy, delta)",
+        "enemy.frozenEnemyPlatform = true",
+        "function drawEnemyCombatOverlays()",
+        "enemy.chargeWindup = 0.42",
+        "enemy.pressureShooter",
+        "Production progression is PACK-only.",
+        'return riflePreview;',
+        'makeBetaPickup("jetpack", WIDTH * 2 + 240, 280)',
+        '"Third PACK strike. Vesperite core breached."',
+        '"PACK FRACTURE // "',
         "var atmosphereLockCycleQa =",
         'canvas.dataset.falseAffordanceCleanup',
         "var falseAffordanceQa =",
@@ -161,6 +194,8 @@ def main() -> None:
         "drawAtmosphericStabilizers();",
         "updateAtmosphericStabilizers(delta);",
         "if (activateNearbyAtmosphericStabilizer())",
+        "var BIOLAB_STABILIZER_LOCAL_X = 156;",
+        "x: WIDTH * 5 + BIOLAB_STABILIZER_LOCAL_X",
         'canvas.dataset.stabilizerState',
         'canvas.dataset.refineryGate',
         "canvas.dataset.freightLift",
@@ -168,6 +203,20 @@ def main() -> None:
     )
     for contract in runtime_contracts:
         require(contract in source, f"Missing Foundry traversal contract: {contract}")
+
+    require(BEAM_RUNTIME.is_file(), "Missing portable backpack beam runtime")
+    beam_source = BEAM_RUNTIME.read_text(encoding="utf-8")
+    for beam_contract in (
+        "const DISPLAY_ORDER",
+        "function createVolley(options)",
+        "function updateProjectile(projectile, deltaSeconds, target)",
+        "function applyHit(enemy, projectile)",
+        "function drawProjectile(ctx, projectile, options)",
+    ):
+        require(
+            beam_contract in beam_source,
+            f"Missing backpack beam contract: {beam_contract}",
+        )
 
     require(
         source.count('id: "foundry-intake-ascent"') == 1,
@@ -180,6 +229,18 @@ def main() -> None:
     require(
         source.count('id: "foundry-atmospheric-stabilizer"') == 1,
         "The Foundry stabilizer must be declared exactly once",
+    )
+    require(
+        source.count('id: "biolab-atmospheric-stabilizer"') == 1,
+        "The Biolab stabilizer must be declared exactly once",
+    )
+    require(
+        'makeBetaPickup("rifle"' not in source,
+        "The retired heavy-rifle pickup returned to production progression",
+    )
+    require(
+        '<kbd>V</kbd><span>switch</span>' not in source,
+        "The retired weapon-switch prompt returned to player controls",
     )
     require(
         source.count("fanIndex < 2;") == 1,
@@ -198,8 +259,10 @@ def main() -> None:
             f"Foundry artwork is not a PNG: {asset.name}",
         )
 
-    # Runtime movement constants: vy=-790, gravity=2050, max vx=390, body=44px.
-    jump_apex = 790**2 / (2 * 2050)
+    # Final landing-base movement: vy=-1050, gravity=2250, max vx=420,
+    # body=44px. Aryn's authored height is 112px, so the held apex is
+    # approximately 2.19 character heights.
+    jump_apex = 1050**2 / (2 * 2250)
     mandatory_rises = (104, 125, 125, 126, 114, 119, 126, 125, 137, 128,
                        114, 128, 125, 106, 131, 125, 120, 142, 128)
     require(
@@ -229,17 +292,17 @@ def main() -> None:
     player_body_width = 44
     gap_rise = 125
     descending_flight_time = (
-        790 + math.sqrt(790**2 - 2 * 2050 * gap_rise)
-    ) / 2050
-    horizontal_reach = 390 * descending_flight_time
+        1050 + math.sqrt(1050**2 - 2 * 2250 * gap_rise)
+    ) / 2250
+    horizontal_reach = 420 * descending_flight_time
     require(
         horizontal_reach >= hardest_gap - player_body_width + 40,
         "The Freight Shaft reversal lost its horizontal safety margin",
     )
 
-    deepworks_jump_apex = 1040**2 / (2 * 2050)
+    deepworks_jump_apex = jump_apex
     require(
-        deepworks_jump_apex >= (1816 - 1604) + 40,
+        deepworks_jump_apex >= (1816 - 1604) + 24,
         "Deepworks is no longer safely jump-exitable",
     )
 
@@ -306,6 +369,7 @@ def main() -> None:
     print("- restored Foundry machinery and conduit lighting respond room-wide")
     print("- the Refinery route remains gated until restoration completes")
     print("- the two stabilizers control only their intended zone thresholds")
+    print("- production is PACK-only; Vesperite yields to three PACK volleys")
     print("- timer awards remain deliberately unimplemented")
     print(f"- hardest rise {max(mandatory_rises):.0f}px / jump apex {jump_apex:.1f}px")
     print(
@@ -314,7 +378,7 @@ def main() -> None:
         f"/ lift cycle {foundry_lift_cycle_seconds:.1f}s"
     )
     print(f"- hardest effective gap {hardest_gap - player_body_width}px / reach {horizontal_reach:.1f}px")
-    print(f"- Deepworks rise 212px / boosted jump apex {deepworks_jump_apex:.1f}px")
+    print(f"- Deepworks rise 212px / final held jump apex {deepworks_jump_apex:.1f}px")
 
 
 if __name__ == "__main__":

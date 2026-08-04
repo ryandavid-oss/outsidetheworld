@@ -220,16 +220,16 @@ before the second stabilizer.
 
 #### Plate 5 // Specimen Stabilizer
 
-- Seam Hunter owns the early ground lane; Chitin Sentinel guards the later
-  approach without entering the stabilizer apron.
+- The Biolab stabilizer owns the far-left ground apron. Seam Hunter and the
+  Chitin Sentinel occupy separated center and late lanes without entering it.
 - A third Core Leech patrols the early upper lane, separated vertically from
   Seam Hunter and the ground Sentinel.
-- The far-right stabilizer apron remains enemy-free.
+- The far-left stabilizer apron remains enemy-free.
 - The second curated Deepworks entrance is optional.
 - A seven-credit cache sits below at world
   `(WIDTH × 5 + 920, floor 1816)`.
-- The Biolab stabilizer begins at local `x = 1180`, after the mirrored descent
-  rather than at the room entrance.
+- The Biolab stabilizer begins at local `x = 156`, separated from the exit seal
+  so the ground-level doorway remains visually unmistakable.
 - Activation reports **Biolab**, authorizes Uplink access, and leaves a clear
   recovery pause before the final zone.
 - The second stabilizer starts every remaining Deepworks and Uplink ventilation

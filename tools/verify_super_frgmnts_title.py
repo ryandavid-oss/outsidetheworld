@@ -56,13 +56,30 @@ def main() -> None:
         'media="(max-width: 720px) and (orientation: portrait)"',
         'meta name="release" content="SUPER FRGMNTS Episode 01 Beta 2"',
         'body data-release="beta-2"',
-        "Season One // Veyra // Beta 2",
-        "Episode 01 // <strong>Arrival on Veyra</strong>",
+        '<p class="title-screen__season" id="titleSeason" hidden></p>',
+        '<p class="title-screen__hero"><strong>Arrival on Veyra</strong></p>',
         "A distress signal from a world the Fleet abandoned.",
-        "Begin episode",
+        ': "Start"',
+        'id="titleControllerHint"',
+        "function updateTitleInputHint(gamepad)",
+        '? "Cross"',
+        ': "A"',
+        '"Cross / A"',
         "title-screen__atmosphere",
         "title-screen__signal",
         "title-screen__vesperite",
+        "@keyframes title-panel-arrival",
+        "@keyframes title-item-arrival",
+        "@keyframes title-start-wake",
+        "function replayTitleEntrance()",
+        "function beginTitleLaunchTransition()",
+        'canvas.dataset.titleLaunchTransition = "fading-to-black";',
+        '"fading-from-black"',
+        ".stage-shell.is-title-transition::after",
+        'document.body.classList.add("is-title-launching")',
+        'class="sound-button__icon"',
+        "function renderSoundButton()",
+        "body.is-main-title #soundButton",
         "@keyframes title-scene-breathe",
         "@keyframes title-dust-drift",
         "@keyframes title-signal-pulse",
@@ -77,7 +94,7 @@ def main() -> None:
         'showEpisodeBridge("approach", "overworld")',
         "loadAndConfigureEpisodeScene(\"foundry\")",
         'event.code === "Enter" || event.code === "Space"',
-        "Opening Episode 01. Arrival on Veyra.",
+        "Opening Arrival on Veyra.",
         'data-title-track="/Audio/super-frgmnts-title-cue.mp3"',
         "var selectedMusicTrack = mainTitleScreen",
         "backgroundMusic.loop = !mainTitleScreen",
@@ -88,11 +105,19 @@ def main() -> None:
         "function setAudioScene(nextScene, immediate)",
         'playSoundEffect("deepSelect");',
         "signalBoot.hidden = true",
+        'id="masterResetButton"',
+        'id="pauseTitleButton"',
+        "function masterResetToTitle()",
+        '{ superFrgmntsScene: "title" }',
+        'canvas.dataset.menuScreen = "title";',
+        'masterResetButton.addEventListener(',
+        'pauseTitleButton.addEventListener(',
     )
     for token in required_tokens:
         assert token in source, f"Missing title-screen contract: {token}"
 
     assert "/Images/Game/super-frgmnts-title-art.png" not in source
+    assert "title-prompt 1.15s steps(2, end) infinite" not in source
     assert manifest["launch"]["duplicate_title"] is False
     assert manifest["launch"]["route"].endswith(
         "?episode=01&stage=overworld&autostart=1"
@@ -105,10 +130,13 @@ def main() -> None:
 
     print("SUPER FRGMNTS title-screen Revision 1A: PASS")
     print("- native 1672 x 941 Coreworks title artwork is integrated")
-    print("- Season One, Episode 01, and Beta 2 identity are present")
-    print("- keyboard, pointer, and in-page arrival handoff are present")
+    print("- Arrival on Veyra stands alone as the title-card identity")
+    print("- keyboard, touch, PlayStation, and standard controller entry prompts are present")
+    print("- the title card stages once, START settles, and title sound control stays compact")
+    print("- START fades through black before revealing the Veyra descent")
     print("- atmospheric motion and reduced-motion safeguards are present")
     print("- dedicated title cue starts from an intentional audio handshake")
+    print("- top-bar and Pause master reset controls return to the title route")
     print("- production integration and deployment scope is recorded")
 
 

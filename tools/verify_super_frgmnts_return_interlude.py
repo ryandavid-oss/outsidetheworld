@@ -45,16 +45,13 @@ def main() -> None:
         "Seam Hunter": "A Seam Hunter.",
         "geological Wound": "geological rupture",
         "Wound-touched Vesperite behavior": (
-            "Vesperite lies still once it leaves the seam."
+            "True vesperite lies still once it leaves the seam."
         ),
         "Primary Biolab distinction": (
             "The main laboratory is below it."
         ),
-        "unsolicited transport response": (
-            "COREWORKS TRANSPORT // UNSOLICITED RESPONSE"
-        ),
-        "Chapter 02 hook": (
-            "something below the Primary Biolab just answered your pack."
+        "Seam Hunter warning": (
+            "If there's a true Seam Hunter on Veyra, it's not alone."
         ),
     }
     for label, fragment in required_story.items():
@@ -79,16 +76,25 @@ def main() -> None:
         "briefed state": 'postFoundryInterlude = "briefed";',
         "identified route": 'primaryBiolabRoute = "identified";',
         "return report label": '"Return to Dras"',
-        "final dialogue action": '"Close chapter"',
-        "chapter card kicker": (
-            '"VEYRA // CHAPTER ONE COMPLETE"'
+        "final dialogue action": '"End transmission"',
+        "chapter card title": '"TRANSMISSION ENDS HERE"',
+        "chapter card has no kicker": (
+            'episodeBridgeKicker.textContent = "";'
         ),
-        "chapter card title": '"THE SIGNAL ANSWERED"',
+        "chapter card has no explanatory copy": (
+            'episodeBridgeCopy.textContent = "";'
+        ),
+        "chapter card restores generated Veyra art": (
+            'veyra-atmospheric-approach-runtime-v1.png'
+        ),
+        "chapter card hides secondary interface": (
+            ".episode-bridge.is-transmission-end .episode-bridge__skip"
+        ),
         "chapter completion state": (
-            '"chapter-one-complete"'
+            '"transmission-ended"'
         ),
-        "chapter hook telemetry": (
-            '"primary-biolab-answer"'
+        "no sequel hook telemetry": (
+            'canvas.dataset.chapterTwoHook =\n                    "none";'
         ),
         "visible sealed portal": '"TRANSPORT OFFLINE"',
     }
@@ -132,8 +138,6 @@ def main() -> None:
     assert "putImageData" in cloud_block
 
     assert "Return report and Chapter 01 cliffhanger integrated" in INTERLUDE
-    assert "`VEYRA // CHAPTER ONE COMPLETE`" in INTERLUDE
-    assert "`THE SIGNAL ANSWERED`" in INTERLUDE
     assert "The Primary Biolab" in CHAPTER_TWO
     assert "Desktop fullscreen" in CHAPTER_TWO
     assert "Controller support" in CHAPTER_TWO
@@ -141,7 +145,8 @@ def main() -> None:
 
     print("SUPER FRGMNTS return interlude and atmosphere: PASS")
     print("- R01-R31 report covers stabilizers, Seam Hunter, and the Wound")
-    print("- Wound-touched Vesperite points Chapter 02 to Primary Biolab")
+    print("- Wound-touched Vesperite can be examined in the Primary Biolab")
+    print("- the release closes honestly on TRANSMISSION ENDS HERE")
     print("- sealed surface transport stays visible and cannot reactivate")
     print("- procedural wispy/storm masks replace gameplay-wide scanlines")
     print("- fullscreen and controller support remain planned future work")

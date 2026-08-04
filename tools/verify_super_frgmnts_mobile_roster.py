@@ -10,11 +10,12 @@ SOURCE = (ROOT / "super_frgmnts.html").read_text(encoding="utf-8")
 
 def main() -> None:
     required = (
-        'id="weaponToggle"',
-        'id="weaponToggleMode"',
-        'event.code === "KeyV"',
-        "function toggleWeaponMode()",
-        'selectedWeapon === "rifle"',
+        'id="pausePackLayer"',
+        'id="pausePackButton"',
+        'id="packConfigScreen"',
+        "function openPackConfiguration()",
+        'event.code === "KeyE"',
+        'id="pauseButton"',
         "function releaseDirectionPad(pointerId)",
         '["pointerup", "pointercancel"].forEach',
         'document.addEventListener("touchcancel"',
@@ -42,15 +43,19 @@ def main() -> None:
         'type === "sova"',
         'type === "seamLurker"',
         'type === "kihunter"',
-        "var WOUND_BOSS_MOBILE_HEALTH = 34;",
+        "var WOUND_BOSS_MOBILE_HEALTH = 136;",
         "var WOUND_BOSS_MOBILE_SPEED_SCALE = 0.72;",
         "var WOUND_BOSS_MOBILE_LASER_COOLDOWN = 6.6;",
         "var WOUND_BOSS_MOBILE_INVULNERABILITY = 1.65;",
         'canvas.dataset.woundBossAssist =',
-        "HEAVY RIFLE",
+        "BACKPACK BASE",
     )
     for token in required:
         assert token in SOURCE, f"Missing mobile/roster contract: {token}"
+
+    assert 'id="weaponToggle"' not in SOURCE
+    assert 'id="weaponToggleMode"' not in SOURCE
+    assert 'makeBetaPickup("rifle"' not in SOURCE
 
     roster = (
         '"squircle"',
@@ -101,7 +106,7 @@ def main() -> None:
 
     print("- all ten active enemy families are populated and loaded")
     print("- mobile boss assist narrows damage windows without changing desktop")
-    print("- rifle and pack laser can be switched on touch or keyboard")
+    print("- touch and keyboard open the modular PACK configuration")
     print("- the Uplink Gate returns Aryn with her recovered loadout")
 
 

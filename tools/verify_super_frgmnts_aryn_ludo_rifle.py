@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Verify Aryn's opt-in Ludo heavy-rifle preview contract."""
+"""Verify the retired Ludo heavy rifle remains archival-review only."""
 
 from __future__ import annotations
 
@@ -108,7 +108,7 @@ def main() -> None:
         "The rifle manifest prematurely fixes combat balance",
     )
 
-    runtime_contracts = (
+    archival_runtime_contracts = (
         'previewParameters.get("weapon") === "rifle";',
         "/Images/Game/Super-Frgmnts/aryn-rifle-draw-ludo-runtime-v1.png",
         "/Images/Game/Super-Frgmnts/aryn-rifle-fire-ludo-runtime-v1.png",
@@ -118,31 +118,14 @@ def main() -> None:
         '"rifleFireLudo",',
         '"rifleRunReadyLudo",',
         '"rifleRunFireLudo",',
-        "var rifleReady = false;",
-        "var riflePendingFire = false;",
-        "var rifleIdleStowTime = 0;",
-        "function stowRifle()",
-        "function beginRifleDraw()",
-        "rifleDrawTime = 0;",
         "function heavyRifleActive()",
-        "var activeWeapon = heavyRifleActive()",
-        '? "Fire heavy rifle"',
-        "rifleFireTime = rifleActive\n                    ? activeRifleFireDuration()",
-        "rifleIdleStowTime = RIFLE_IDLE_STOW_DELAY;",
-        'visual.pose = "rifleDrawLudo";',
-        'visual.pose = "rifleAirborneReadyLudo";',
-        '? "rifleRunFireLudo"',
-        '? "rifleRunReadyLudo"',
-        '? "rifle-ready"',
-        ': "rifle-stowed"',
-        "direct: rifleActive,",
-        'canvas.dataset.arynWeapon = heavyRifleActive()',
-        "riflePreview ||",
+        "return riflePreview;",
+        "// Production progression is PACK-only.",
     )
-    for runtime_contract in runtime_contracts:
+    for runtime_contract in archival_runtime_contracts:
         require(
             runtime_contract in source,
-            f"Missing rifle preview contract: {runtime_contract}",
+            f"Missing archival rifle review contract: {runtime_contract}",
         )
 
     require(
@@ -170,15 +153,11 @@ def main() -> None:
         is True,
         "The running-rifle contract does not support airborne fire",
     )
+    require('id="weaponToggle"' not in source, "Production still exposes weapon swapping")
+    require('id="weaponToggleMode"' not in source, "Production still labels a weapon swap")
     require(
-        "rifleReady &&\n                    requestedDirection !== 0"
-        not in source,
-        "Ground movement still stows the ready rifle",
-    )
-    require(
-        "if (rifleActive) {\n                    player.vx = 0;"
-        not in source,
-        "Heavy-rifle firing still forcibly stops Aryn",
+        'makeBetaPickup("rifle"' not in source,
+        "Production still spawns the retired heavy-rifle pickup",
     )
     require(
         'return event.code === "KeyX";' in source,
@@ -189,51 +168,16 @@ def main() -> None:
         "The conflicting macOS Control firing shortcut is still active",
     )
     require(
-        "function beginPlatformDrop(platform) {\n                stowRifle();"
-        not in source,
-        "Dropping through a platform still stows the rifle",
-    )
-    require(
-        "if (heavyRifleActive()) {\n                    if (!player.onGround)"
-        not in source,
-        "Airborne movement still forcibly stows the rifle",
-    )
-    require(
-        "rifleReady &&\n                    player.onGround &&\n"
-        in source,
-        "The grounded rifle-ready hold is not present",
-    )
-    require(
-        "var RIFLE_IDLE_STOW_DELAY = 2.25;" in source,
-        "Heavy rifle ready-state refresh is not present",
-    )
-    require(
-        "if (rifleIdleStowTime === 0) {\n                            stowRifle();"
-        not in source,
-        "Heavy rifle still auto-holsters after firing",
-    )
-    require(
-        "the player explicitly changes modes" in source,
-        "The explicit weapon-switch holster contract is absent",
-    )
-    require(
         contract["standing_foresection_shift"] == 14,
         "Standing rifle foresection is not normalized to the running rifle",
     )
 
-    print("SUPER FRGMNTS Aryn Ludo heavy-rifle contract: PASS")
-    print("- fixed-canvas standing and moving animation alignment")
-    print("- rifle remains an optional Episode beta special weapon")
-    print("- first fire draws; ground running preserves the ready rifle")
-    print("- moving fire uses the authored full-body gait and muzzle pulse")
-    print("- jumping, dropping, and falling preserve the ready rifle")
-    print("- airborne heavy-rifle fire uses authored full-body motion")
-    print("- standing barrel length is normalized to the running silhouette")
-    print("- once fired, rifle stays shouldered until an explicit weapon switch")
+    print("SUPER FRGMNTS archival Ludo heavy-rifle contract: PASS")
+    print("- authored standing and moving strips remain intact for preservation")
+    print("- the rifle is reachable only through its explicit archival review route")
+    print("- production exposes neither a rifle pickup nor weapon-swap control")
     print("- keyboard fire uses X, avoiding the macOS Control-arrow shortcut")
-    print("- firing is a fast direct amber heavy-combat round")
-    print("- rifle ammo, damage, boss durability, and armor behavior remain open")
-    print("- telescopic laser seeker remains the production default")
+    print("- the modular PACK is the only production combat chassis")
 
 
 if __name__ == "__main__":

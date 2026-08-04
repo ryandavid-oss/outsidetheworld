@@ -78,6 +78,7 @@ def main() -> None:
         )
 
     assert 'canvas.dataset.betaSentinelCount = "7";' in placements
+    assert 'canvas.dataset.betaSquircleCount = "5";' in placements
     assert (
         '"spore-wisp,clacker-beetle,ridge-skitter"' in placements
     )
@@ -94,6 +95,7 @@ def main() -> None:
     print("SUPER FRGMNTS active enemy population: PASS")
     print("- ten active families are populated and preloaded")
     print("- seven Chitin Sentinels establish the recurring combat grammar")
+    print("- five Squircles recur across elevated Foundry routes")
     print("- Ridge Skitter, Clacker Beetle, and Spore Wisp are retired")
     print("- Core Leech is 15% larger without an aura or sprite glow")
     print("- Pale Watcher orientation follows its authored source direction")

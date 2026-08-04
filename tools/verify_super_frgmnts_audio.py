@@ -125,7 +125,7 @@ def main() -> None:
     )
 
     blaster_body = re.search(
-        r"function fireBlaster\(\) \{(.*?)\n            \}\n\n"
+        r"function fireBlaster\(chargeFraction\) \{(.*?)\n            \}\n\n"
         r"            function enemyCenter",
         source,
         flags=re.DOTALL,

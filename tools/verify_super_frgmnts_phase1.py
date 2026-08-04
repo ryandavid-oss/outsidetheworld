@@ -49,14 +49,18 @@ def main() -> None:
         "overworld0: {",
         "foundryExpanded: {",
         "function loadCriticalAssets(keys, completion)",
-        '.message-card.is-paused .message-title',
-        '.message-card.is-paused #startButton',
-        'messageCard.classList.add("is-paused")',
-        'messageCopy.textContent = "";',
-        'messageCard.classList.remove("is-paused")',
+        'id="pausePackLayer"',
+        'id="pauseRootScreen"',
+        'id="packConfigScreen"',
+        "function pauseGame(initialScreen)",
+        'setPauseMenuScreen("pause", pausePackButton);',
         'previewParameters.get("render-profile") || "default"',
         'requestedRenderProfile === "desktop-1x"',
         '"desktop-1x-trial"',
+        'requestedRenderProfile === "desktop-2x"',
+        '"desktop-1x-default"',
+        '"desktop-2x-compat"',
+        '"desktop-default-mobile-native"',
         'requestedRenderProfile === "desktop-crop"',
         '"desktop-crop-trial"',
         '"visible-viewport-crop-trial"',
@@ -108,8 +112,8 @@ def main() -> None:
     print("- episode scenes change in-page and preserve a reloadable URL")
     print("- both playable environments preload before the first handoff")
     print("- pause, mute, visibility, and preference safeguards are retained")
-    print("- the pause card uses a larger title and Resume action without helper copy")
-    print("- optional 1x render trial is desktop-only and URL-reversible")
+    print("- the pause layer exposes Resume, PACK Configuration, and checkpoint restart")
+    print("- 1x rendering is the desktop default with a URL-reversible 2x compatibility path")
     print("- optional room-plate crop trial preserves the visible destination")
     print("- optional 60 Hz pacing trial reports callback and draw rates")
     print("- optional no-blur trial isolates Safari Canvas shadow cost")

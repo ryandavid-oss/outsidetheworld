@@ -72,13 +72,16 @@ def main() -> None:
     required_tokens = (
         'meta name="release" content="SUPER FRGMNTS Episode 01 Beta 2"',
         'body data-release="beta-2"',
-        "Season One // Veyra // Beta 2",
+        '<p class="title-screen__season" id="titleSeason" hidden></p>',
+        '<p class="title-screen__hero"><strong>Arrival on Veyra</strong></p>',
+        ': "Start"',
     )
     for token in required_tokens:
         assert token in source, f"Missing Beta 2 release token: {token}"
+    assert "Season One // Veyra // Beta 2" not in source
 
     print("SUPER FRGMNTS Episode 01 Beta 2 release: PASS")
-    print("- live title and machine-readable release identity are present")
+    print("- clean live title and machine-readable release identity are present")
     print("- Arrival through the Dras report and Chapter 01 cliffhanger is locked")
     print("- Beta 2 world, encounter, audio, and verification scope is recorded")
 

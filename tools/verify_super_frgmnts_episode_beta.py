@@ -115,13 +115,16 @@ def main() -> None:
         '"refinery-thermal-vent"',
         '"uplink-arc-leak"',
         "electricLandingGrace = 0.28;",
-        "% 3.6",
-        ") < 1.25;",
+        "var cycleDuration = platform.electricCycleDuration || 3.6;",
+        "var activeDuration = platform.electricActiveDuration || 1.25;",
         "function resetEpisodeBetaPopulation()",
+        "function makeFoundryCreditCrates()",
         'makeBetaPickup("jetpack"',
-        'makeBetaPickup("rifle"',
         "makeShard(WIDTH * 3 + 920, 1748",
-        "makeCreditCrate(WIDTH * 5 + 920, 1816, 7)",
+        "WIDTH * 5 + 920,",
+        '"upper-left"',
+        '"lower-deck"',
+        '"deepworks"',
         "makeBetaRifleObstacle(",
         "routeGate: true",
         "hitsRequired: RIFLE_BOULDER_HITS_REQUIRED",
@@ -138,7 +141,7 @@ def main() -> None:
         "canvas.dataset.requiredRouteLocks",
         "function makeEpisodeBetaEnemies()",
         '["wasp", WIDTH * 4 + 780',
-        '["gaunt", WIDTH * 5 + 500',
+        '["gaunt", WIDTH * 5 + 760',
         'canvas.dataset.betaSentinelCount = "7";',
         '"spore-wisp,clacker-beetle,ridge-skitter"',
         "foundryPlatformModule: {",
@@ -159,8 +162,8 @@ def main() -> None:
         "Runtime does not include the twelve-shard population",
     )
     require(
-        source.count("makeCreditCrate(") >= 2,
-        "Runtime does not include the two Foundry credit caches",
+        source.count("makeCreditCrate(") >= 9,
+        "Runtime does not include the eight Foundry credit caches",
     )
     require(
         "body.is-overworld-preview:not(.is-arrival-tutorial) "
@@ -184,7 +187,7 @@ def main() -> None:
     print("SUPER FRGMNTS Episode 01 early beta: PASS")
     print("- title, atmospheric arrival, Overworld, and Foundry share one in-page route")
     print("- Overworld tutorial platforms, cache, and prompts are disabled")
-    print("- Foundry contains pickups, caches, stabilizers, fragments, and obstruction")
+    print("- Foundry contains eight main, elevated, and lower-route credit caches")
     print("- moving and forgiving electrified-platform lessons are present")
     print("- Deepworks has one required fragment route and one optional cache route")
     print("- power-ups, room links, stabilizer aprons, and recovery placements use safe buffers")

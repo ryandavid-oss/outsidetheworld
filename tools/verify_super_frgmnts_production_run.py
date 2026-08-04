@@ -77,8 +77,10 @@ def main() -> None:
         "creditsCollected: creditsCollected",
         "vesperiteCollected: vesperiteCollected",
         "jetpackOwned: jetpackOwned",
-        "heavyRifleOwned: heavyRifleOwned",
-        "selectedWeapon: selectedWeapon",
+        "heavyRifleOwned: false",
+        'selectedWeapon: "pack"',
+        "beamModules: orderedBeamModules(",
+        "beamLoadout.enabled",
         "blasterTier: blasterTier",
     ):
         require(field in checkpoint, f"Wound checkpoint omits {field}")
@@ -214,7 +216,7 @@ def main() -> None:
     print("SUPER FRGMNTS Episode 01 beta production run: PASS")
     print("- Arrival, Overworld, Foundry, Wound, recovery, and surface share one runtime")
     print("- the Uplink Gate preserves Foundry progress for the boss checkpoint")
-    print("- boss retries regenerate health while restoring score, time, and equipment")
+    print("- boss retries regenerate health while restoring score, time, and PACK configuration")
     print("- Wound-touched Vesperite recovery is the completion condition")
     print("- a locked black transition returns Aryn to the Veyra surface")
     print("- the returned player cannot re-enter the Foundry transport")

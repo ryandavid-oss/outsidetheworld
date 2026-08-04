@@ -34,7 +34,8 @@ def main() -> None:
         "steerBoltAwayFromFriendlies(bolt, stats, delta);",
         "bolt.friendlyAvoidance = safetyZone.id;",
         "canvas.dataset.lastSeekerAvoidance = safetyZone.id;",
-        "player.vy = -790;",
+        "var MOVEMENT_JUMP_VELOCITY = 1050;",
+        "player.vy = -MOVEMENT_JUMP_VELOCITY;",
         "jetpackOwned &&",
         "jetpackBoostAvailable",
         "function damageEnemy(\n                enemy,\n                enemyTop,\n                bolt,\n                woundHitZone",
@@ -105,7 +106,7 @@ def main() -> None:
     print("- backpack is the persistent power-up chassis")
     print("- telescopic laser seeker is always equipped, including Overworld")
     print("- seeker bends toward enemies and away from Dras and Jane")
-    print("- heavy rifle roles are set while combat balance remains open")
+    print("- the modular PACK remains the production combat chassis")
     print("- higher jumps require the backpack jet-assist module")
 
 

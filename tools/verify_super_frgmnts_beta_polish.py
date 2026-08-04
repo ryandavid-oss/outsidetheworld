@@ -26,7 +26,7 @@ def main() -> None:
         '"foundry-to-wound-descent"',
         'setAudioScene(isWound ? "wound" : scene);',
         'setAudioScene("wound", false);',
-        "var WOUND_BOSS_MOBILE_HEALTH = 34;",
+        "var WOUND_BOSS_MOBILE_HEALTH = 136;",
         "var WOUND_BOSS_MOBILE_SPEED_SCALE = 0.72;",
         "var WOUND_BOSS_MOBILE_LASER_COOLDOWN = 6.6;",
         "var WOUND_BOSS_MOBILE_INVULNERABILITY = 1.65;",
@@ -48,7 +48,8 @@ def main() -> None:
         "function betaPickupAvailable(pickup)",
         '"stabilizer-locked"',
         '"beyond-atmosphere-lock"',
-        'makeBetaPickup("rifle", WIDTH * 2 + 700, 1518)',
+        "heavyRifleOwned = false;",
+        'selectedWeapon = "pack";',
         'makeShard(WIDTH * 7 + 430, 548',
         "makeBetaRifleObstacle(WIDTH * 2 + 1280, GROUND_Y)",
         "var cageLeft = obstacle.x + 12;",
@@ -58,7 +59,8 @@ def main() -> None:
         "foundryArcCoupler: {",
         "function hazardCycleState(hazard)",
         "safeDuration: 1.9",
-        "activeDuration: 3",
+        "safeDuration: 2.25",
+        "activeDuration: 1.1",
         'kind: "thermal"',
         'kind: "arc"',
         'canvas.dataset.sovaRifleHitbox =',
@@ -78,10 +80,12 @@ def main() -> None:
         'enemy.type === "paleWatcher"',
         "var biolabRestoration = biolabStabilizer",
         "canvas.dataset.ventFansMoving",
-        'src: "/Audio/super-frgmnts-jump-v1.wav"',
-        'src: "/Audio/super-frgmnts-landing-v1.wav"',
+        'src: "/Audio/super-frgmnts-aryn-jump-v2.wav"',
+        'src: "/Audio/super-frgmnts-aryn-land-v2.wav"',
+        'src: "/Audio/super-frgmnts-aryn-footstep-v1.wav"',
         'src: "/Audio/super-frgmnts-atmosphere-lock-shimmer-v1.wav"',
-        'playSoundEffect("jump");',
+        'recordMovementAudio("jump");',
+        'recordMovementAudio("footstep");',
         '"landing",',
         '"atmosphereLockShimmer",',
     )
@@ -99,6 +103,10 @@ def main() -> None:
     )
     for token in forbidden:
         require(token not in SOURCE, f"Retired behavior remains: {token}")
+    require(
+        'makeBetaPickup("rifle"' not in SOURCE,
+        "The retired production heavy-rifle pickup is still spawned",
+    )
 
     episode_assets = SOURCE.split(
         "var episodeBetaAssetKeys = [",
@@ -162,19 +170,31 @@ def main() -> None:
 
     audio_assets = {
         "jump": (
-            ROOT / "Audio/super-frgmnts-jump-v1.wav",
-            "7d310cd85ccdd46fdb8eb2cbddc5b64631dabebfd21c3974248683c320f409bb",
+            ROOT / "Audio/super-frgmnts-aryn-jump-v2.wav",
+            "4cc651857aa31156869d70fac42610edf1b03818dbc43587cb48039d7eeb602e",
+            44100,
+            14208,
         ),
         "landing": (
-            ROOT / "Audio/super-frgmnts-landing-v1.wav",
-            "5708b376f838efc51f26672765c98d61bf88aed7c47b68e79c11433863784de3",
+            ROOT / "Audio/super-frgmnts-aryn-land-v2.wav",
+            "02a8675ab02fd0cff86a9580a4c2b8919e611c1ebb6c019642a7f155e48917ac",
+            44100,
+            4736,
+        ),
+        "footstep": (
+            ROOT / "Audio/super-frgmnts-aryn-footstep-v1.wav",
+            "911e5849683e090c83263d1adc2ff071c262d1a3a79ceb83c674112ea10469fb",
+            44100,
+            2560,
         ),
         "atmosphere-lock shimmer": (
             ROOT / "Audio/super-frgmnts-atmosphere-lock-shimmer-v1.wav",
             "8862cfd44215d6ced14c66a2d0ce3c9a168145622e773876e4b7e7f79654e1f5",
+            48000,
+            48000,
         ),
     }
-    for label, (path, expected_hash) in audio_assets.items():
+    for label, (path, expected_hash, expected_rate, expected_frames) in audio_assets.items():
         require(path.exists(), f"Missing {label} audio")
         require(
             hashlib.sha256(path.read_bytes()).hexdigest() == expected_hash,
@@ -187,21 +207,21 @@ def main() -> None:
                 f"{label} must remain 16-bit PCM",
             )
             require(
-                audio.getframerate() == 48000,
-                f"{label} must remain 48 kHz",
+                audio.getframerate() == expected_rate,
+                f"{label} sample rate drifted",
             )
             require(
-                audio.getnframes() == 48000,
-                f"{label} must remain one second",
+                audio.getnframes() == expected_frames,
+                f"{label} duration drifted",
             )
 
     print("SUPER FRGMNTS beta-production polish: PASS")
     print("- opening and boss-room transition beats are explicit")
     print("- Overworld tutorials and droid discovery task are removed")
     print("- hawk flight is autonomous and Aryn-independent")
-    print("- item acquisition, obstruction, and combat lanes are separated")
+    print("- PACK acquisition, obstruction, and combat lanes are separated")
     print("- authored industrial hazards replace abstract colored spikes")
-    print("- jump, real landing, and reversible lock sounds retain source WAVs")
+    print("- jump, landing, footsteps, and reversible lock sounds retain source WAVs")
     print("- Sova, boss threshold, and post-return transport states are locked")
     print("- active roster, ventilation restoration, and 16-bit platforms are locked")
     print("- mobile Seam Hunter assist preserves the desktop encounter")

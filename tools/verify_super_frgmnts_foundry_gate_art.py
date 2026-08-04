@@ -256,6 +256,17 @@ def main() -> None:
         'previewParameters.get("seam") || "0"',
         "atmosphereLockSeamTrial",
         "function drawFoundryAtmosphereLock()",
+        "function atmosphereLockPassageBounds(portal)",
+        "function atmosphereLockVisualBounds(portal)",
+        "ATMOSPHERE_LOCK_DOOR_HEIGHT = 206",
+        "ATMOSPHERE_LOCK_TUNNEL_FLOOR_HEIGHT = 24",
+        '"immutable-seam-floor-anchor-v5"',
+        "var fixedAnchor = Object.freeze({",
+        "portal.anchor.passageFloorY",
+        "portal.anchor.doorBottomY",
+        "portal.anchor.bridgeBottomY",
+        "portal.deckTop === GROUND_Y",
+        "canvas.dataset.atmosphereLockDoorGeometry",
         '"seven-fixed-housings-split-membranes-v1"',
         '"seven-seam-solid-concrete-v1"',
         "canvas.dataset.atmosphereLockFloorBottom",
@@ -291,6 +302,24 @@ def main() -> None:
     )
     for fragment in required_runtime:
         assert fragment in SOURCE, f"Missing Foundry art token: {fragment}"
+
+    assert SOURCE.count("atmosphereLockVisualBounds(") >= 2, (
+        "Atmosphere Lock drawing bypasses its dedicated visual anchor"
+    )
+    assert (
+        "portal.deckTop +\n"
+        "                    ATMOSPHERE_LOCK_TUNNEL_FLOOR_HEIGHT"
+        in SOURCE
+    ), "Atmosphere Lock fixed anchor no longer includes the 24px bridge"
+    assert (
+        "? portal.anchor.doorBottomY" in SOURCE
+    ), "Atmosphere Lock drawing no longer uses the immutable door bottom"
+    assert (
+        "portal.deckTop === GROUND_Y\n"
+        "                            ? portal.deckTop\n"
+        "                            : bridgeBottomY"
+        in SOURCE
+    ), "The ground-level Biolab lock still inherits the elevated catwalk sink"
 
     assert (
         SOURCE.count(

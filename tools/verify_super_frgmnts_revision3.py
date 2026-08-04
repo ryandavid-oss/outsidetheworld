@@ -66,7 +66,7 @@ def verify_local_integration() -> None:
     source = require(ROOT / "super_frgmnts.html").read_text(encoding="utf-8")
     for token in (
         'previewParameters.get("preview") === "overworld"',
-        "aryn-ship-v1.png",
+        "aryn-ship-v2.png",
         "dras-ehdre-runtime-v1.png",
         "aryn-command-rest-runtime-v1.png",
         "aryn-dialogue-portrait-runtime-v3.png",
