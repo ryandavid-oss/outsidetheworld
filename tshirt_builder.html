@@ -546,12 +546,12 @@
             position: absolute;
             inset: 0;
             display: block;
-            background: url("/Images/Builder/aryn-run-10pose-balanced-gait-sheet.png") 0 center / 1000% 100% no-repeat;
+            background: url("/Images/Game/Super-Frgmnts/aryn-run-ludo-runtime-v2.png") 0 center / 800% 100% no-repeat;
             image-rendering: pixelated;
             scale: 1 1;
             transform-origin: center bottom;
             animation:
-                ranger-run-frames 720ms steps(9, end) infinite,
+                ranger-run-frames 667ms steps(7, end) infinite,
                 foundry-stride 600ms steps(2, end) infinite;
         }
 
@@ -605,27 +605,34 @@
         }
 
         .pixel-runner[data-motion="jump"] .pixel-runner__sprite {
-            animation: none;
-            background-image: url("/Images/Builder/signal-ranger-jump-takeoff.png");
-            background-position: center;
-            background-size: 100% 100%;
+            animation: ranger-jump-launch 150ms linear 1 both;
+            background-image: url("/Images/Game/Super-Frgmnts/aryn-jump-ludo-runtime-v1.png");
+            background-position: 0 center;
+            background-size: 700% 100%;
             transform: translateY(-1px);
         }
 
         .pixel-runner[data-motion="jump"][data-jump-phase="airborne"] .pixel-runner__sprite,
         .pixel-runner[data-motion="fall"] .pixel-runner__sprite {
-            background-image: url("/Images/Builder/signal-ranger-jump-airborne.png");
-            background-position: center;
-            background-size: 100% 100%;
+            animation: none;
+            background-image: url("/Images/Game/Super-Frgmnts/aryn-jump-ludo-runtime-v1.png");
+            background-position: 50% center;
+            background-size: 700% 100%;
             transform: translateY(-2px);
         }
 
-        .pixel-runner[data-motion="crouch"] .pixel-runner__sprite,
-        .pixel-runner[data-motion="land"] .pixel-runner__sprite {
+        .pixel-runner[data-motion="crouch"] .pixel-runner__sprite {
             animation: ranger-crouch-settle 160ms steps(2, end) infinite alternate;
-            background-image: url("/Images/Builder/signal-ranger-crouch.png");
-            background-position: center;
-            background-size: 100% 100%;
+            background-image: url("/Images/Game/Super-Frgmnts/aryn-jump-ludo-runtime-v1.png");
+            background-position: 0 center;
+            background-size: 700% 100%;
+        }
+
+        .pixel-runner[data-motion="land"] .pixel-runner__sprite {
+            animation: ranger-jump-land 180ms linear 1 both;
+            background-image: url("/Images/Game/Super-Frgmnts/aryn-jump-ludo-runtime-v1.png");
+            background-position: 66.667% center;
+            background-size: 700% 100%;
         }
 
         .pixel-runner[data-motion="climb"] .pixel-runner__sprite {
@@ -643,12 +650,16 @@
 
         .pixel-runner[data-motion="wall-slide"] .pixel-runner__sprite {
             animation: ranger-wall-slide 320ms steps(2, end) infinite alternate;
-            background-position: 44.444% center;
+            background-image: url("/Images/Game/Super-Frgmnts/aryn-jump-ludo-runtime-v1.png");
+            background-position: 50% center;
+            background-size: 700% 100%;
         }
 
         .pixel-runner[data-motion="hang"] .pixel-runner__sprite {
             animation: none;
-            background-position: 55.556% center;
+            background-image: url("/Images/Game/Super-Frgmnts/aryn-jump-ludo-runtime-v1.png");
+            background-position: 50% center;
+            background-size: 700% 100%;
             transform: translate(5px, 5px) rotate(-14deg);
         }
 
@@ -660,7 +671,7 @@
 
         .pixel-runner[data-motion="idle"] .pixel-runner__sprite {
             animation: ranger-focused-idle 760ms steps(2, end) infinite alternate;
-            background-image: url("/Images/Builder/signal-ranger-idle-focused-v2.png");
+            background-image: url("/Images/Game/Super-Frgmnts/aryn-command-rest-runtime-v1.png");
             background-position: center;
             background-size: 100% 100%;
         }
@@ -1478,6 +1489,189 @@
             color: var(--void-deep);
         }
 
+        .action-stack .pixel-button--danger {
+            grid-column: 1 / -1;
+            border-color: #ff9ab5;
+            background: linear-gradient(180deg, #8f2948, #5e1832 52%, #310d20);
+            color: #ffd7e2;
+            text-shadow: 2px 2px 0 #220914;
+        }
+
+        .action-stack .pixel-button--danger:hover:not(:disabled),
+        .action-stack .pixel-button--danger:focus-visible {
+            border-color: #fff0f4;
+            background: linear-gradient(180deg, #ff718f, #c92f5c 52%, #6f1736);
+            color: #fff;
+        }
+
+        .page-destruction[hidden] {
+            display: none;
+        }
+
+        .page-destruction {
+            position: fixed;
+            z-index: 118;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .page-destruction::before {
+            position: absolute;
+            z-index: 1;
+            inset: 0;
+            background:
+                repeating-linear-gradient(
+                    180deg,
+                    transparent 0 5px,
+                    rgba(255, 54, 105, 0.07) 5px 6px
+                ),
+                radial-gradient(circle at 50% 50%, transparent 42%, rgba(1, 2, 8, 0.38));
+            content: "";
+            mix-blend-mode: screen;
+            opacity: 0.72;
+        }
+
+        .page-destruction__canvas {
+            position: absolute;
+            z-index: 2;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            image-rendering: pixelated;
+        }
+
+        .page-destruction__hud {
+            position: absolute;
+            z-index: 3;
+            top: max(12px, env(safe-area-inset-top));
+            left: 50%;
+            width: min(92vw, 720px);
+            transform: translateX(-50%);
+            border: 2px solid rgba(255, 103, 143, 0.88);
+            border-radius: 10px;
+            background: rgba(6, 8, 18, 0.90);
+            box-shadow:
+                inset 0 0 0 2px rgba(115, 35, 81, 0.48),
+                0 6px 0 rgba(1, 2, 8, 0.72),
+                0 0 24px rgba(255, 58, 117, 0.30);
+            padding: 9px 12px;
+            color: #ff9fba;
+            font-family: var(--font-game);
+            font-size: clamp(0.48rem, 1.6vw, 0.64rem);
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            line-height: 1.45;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .page-destruction__status {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            min-height: 22px;
+        }
+
+        .page-destruction__status::before {
+            width: 7px;
+            height: 7px;
+            background: currentColor;
+            box-shadow: 0 0 10px currentColor;
+            content: "";
+            animation: status-blink 480ms steps(2, end) infinite;
+        }
+
+        .page-destruction__meter {
+            display: block;
+            margin-top: 4px;
+            color: #73f4ff;
+            font-size: 0.82em;
+        }
+
+        .page-destruction__restore {
+            display: inline-flex;
+            margin-top: 9px;
+            pointer-events: auto;
+        }
+
+        body.page-destruction-active {
+            overflow: hidden;
+        }
+
+        body.page-destruction-active main {
+            pointer-events: none;
+            user-select: none;
+        }
+
+        body.page-destruction-active .pixel-runner {
+            z-index: 122;
+            opacity: 1;
+            filter:
+                drop-shadow(0 0 7px rgba(69, 244, 255, 0.92))
+                drop-shadow(7px 8px 0 rgba(0, 0, 0, 0.42));
+        }
+
+        body.page-destruction-active .pixel-runner[data-firing="true"] .pixel-runner__sprite {
+            filter: brightness(1.42) saturate(1.28);
+        }
+
+        [data-page-damage="true"] {
+            transform:
+                translate3d(var(--damage-x, 0), var(--damage-y, 0), 0)
+                rotate(var(--damage-rotate, 0deg))
+                scale(var(--damage-scale, 0.96));
+            transform-origin: var(--damage-origin, center);
+            filter:
+                saturate(0.38)
+                contrast(1.42)
+                hue-rotate(var(--damage-hue, 0deg));
+            opacity: var(--damage-opacity, 0.58);
+            transition:
+                transform 520ms cubic-bezier(0.22, 0.76, 0.24, 1),
+                filter 220ms steps(2, end),
+                opacity 420ms ease;
+            will-change: transform, filter, opacity;
+        }
+
+        body.page-destruction-impact main {
+            animation: page-destruction-shake 170ms steps(3, end) 1;
+        }
+
+        body.page-destruction-complete .page-destruction::before {
+            background:
+                repeating-linear-gradient(
+                    180deg,
+                    transparent 0 5px,
+                    rgba(80, 255, 231, 0.06) 5px 6px
+                ),
+                radial-gradient(circle at 50% 50%, transparent 32%, rgba(1, 2, 8, 0.52));
+        }
+
+        body.page-destruction-complete .page-destruction__hud {
+            border-color: rgba(91, 242, 216, 0.88);
+            color: #8effdf;
+            box-shadow:
+                inset 0 0 0 2px rgba(29, 112, 103, 0.46),
+                0 6px 0 rgba(1, 2, 8, 0.72),
+                0 0 24px rgba(74, 255, 219, 0.24);
+        }
+
+        @keyframes page-destruction-shake {
+            0%, 100% {
+                translate: 0 0;
+            }
+
+            33% {
+                translate: -7px 2px;
+            }
+
+            66% {
+                translate: 6px -3px;
+            }
+        }
+
         body.order-modal-open {
             overflow: hidden;
         }
@@ -2220,6 +2414,34 @@
             }
         }
 
+        @keyframes ranger-jump-launch {
+            0%, 33.32% {
+                background-position: 0 center;
+            }
+
+            33.33%, 66.65% {
+                background-position: 16.667% center;
+            }
+
+            66.66%, 100% {
+                background-position: 33.333% center;
+            }
+        }
+
+        @keyframes ranger-jump-land {
+            0%, 33.32% {
+                background-position: 66.667% center;
+            }
+
+            33.33%, 66.65% {
+                background-position: 83.333% center;
+            }
+
+            66.66%, 100% {
+                background-position: 100% center;
+            }
+        }
+
         @keyframes ranger-focused-idle {
             from {
                 transform: translateY(0);
@@ -2569,6 +2791,18 @@
         <span class="pixel-runner__sprite"></span>
     </div>
 
+    <div class="page-destruction" id="pageDestruction" hidden>
+        <canvas class="page-destruction__canvas" id="pageDestructionCanvas" aria-hidden="true"></canvas>
+        <div class="page-destruction__hud" role="region" aria-live="polite"
+            aria-label="Page destruction encounter status">
+            <span class="page-destruction__status" id="pageDestructionStatus">Anomaly detected</span>
+            <span class="page-destruction__meter" id="pageDestructionMeter">Seam Hunter // Signal acquired</span>
+            <button class="pixel-button page-destruction__restore" id="restoreTimelineButton" type="button" hidden>
+                Restore timeline
+            </button>
+        </div>
+    </div>
+
     <main>
         <section class="intro" aria-labelledby="page-title">
             <div>
@@ -2703,6 +2937,9 @@
                     <button class="pixel-button" id="keepButton" type="button">Keep this mess</button>
                     <button class="pixel-button" id="copyButton" type="button">Copy build link</button>
                     <button class="pixel-button" id="resetButton" type="button">Start over</button>
+                    <button class="pixel-button pixel-button--danger" id="destroyPageButton" type="button">
+                        Destroy this page
+                    </button>
                 </div>
 
                 <p class="system-message" id="systemMessage" data-level="ok" role="status" aria-live="polite">
@@ -3261,6 +3498,17 @@
                     canCatch: Math.random() < 0.42,
                     wallSlideUntil: 0
                 };
+                var encounterActive = false;
+                var encounterTargetProvider = null;
+
+                function currentEncounterTarget() {
+                    if (!encounterActive || typeof encounterTargetProvider !== "function") return null;
+                    try {
+                        return encounterTargetProvider() || null;
+                    } catch (error) {
+                        return null;
+                    }
+                }
 
                 function chooseLapRoute() {
                     var roll = Math.random();
@@ -3426,7 +3674,7 @@
                     motion.climbTarget = null;
                     setMotion("jump");
                     setJumpPhase("takeoff");
-                    motion.jumpPhaseUntil = performance.now() + 95;
+                    motion.jumpPhaseUntil = performance.now() + 150;
                 }
 
                 function beginTargetedJump(target) {
@@ -3457,7 +3705,7 @@
                     motion.routeTriggered = true;
                     setMotion("jump");
                     setJumpPhase("takeoff");
-                    motion.jumpPhaseUntil = performance.now() + 95;
+                    motion.jumpPhaseUntil = performance.now() + 150;
                     return true;
                 }
 
@@ -3615,7 +3863,7 @@
                     motion.climbTarget = null;
                     setMotion("jump");
                     setJumpPhase("takeoff");
-                    motion.jumpPhaseUntil = performance.now() + 95;
+                    motion.jumpPhaseUntil = performance.now() + 150;
                 }
 
                 function maybeStartButtonRoute() {
@@ -3728,6 +3976,15 @@
 
                 function beginTurn(now) {
                     motion.vx = 0;
+                    var encounterTarget = currentEncounterTarget();
+                    if (encounterTarget) {
+                        var runnerCenter = motion.x + runnerWidth / 2;
+                        setFacing(encounterTarget.x < runnerCenter ? -1 : 1);
+                        motion.vx = runSpeed * motion.direction;
+                        setMotion("run");
+                        return;
+                    }
+
                     setFacing(-motion.direction);
 
                     if (motion.direction > 0) {
@@ -3747,7 +4004,7 @@
                     motion.vy = 0;
                     motion.vx = 0;
                     motion.support = surface ? surface.element : null;
-                    motion.landUntil = now + 105;
+                    motion.landUntil = now + 180;
                     setMotion("land");
                 }
 
@@ -3778,6 +4035,23 @@
                     var measuredWidth = pixelRunner.getBoundingClientRect().width;
                     if (measuredWidth && Math.abs(measuredWidth - runnerWidth) > 0.5) {
                         runnerWidth = measuredWidth;
+                    }
+
+                    var frameEncounterTarget = currentEncounterTarget();
+                    if (frameEncounterTarget) {
+                        motion.nextPauseAt = Infinity;
+                        var encounterDeltaX = frameEncounterTarget.x - (motion.x + runnerWidth / 2);
+                        if (motion.mode === "idle") {
+                            setFacing(encounterDeltaX < 0 ? -1 : 1);
+                            motion.vx = runSpeed * motion.direction;
+                            setMotion("run");
+                        } else if (
+                            motion.mode === "run" &&
+                            Math.abs(encounterDeltaX) > runnerWidth * 0.24 &&
+                            Math.sign(encounterDeltaX) !== motion.direction
+                        ) {
+                            setFacing(encounterDeltaX < 0 ? -1 : 1);
+                        }
                     }
 
                     if (motion.mode === "idle") {
@@ -3879,11 +4153,11 @@
                                 motion.x < window.innerWidth - runnerWidth * 1.15
                             );
 
-                            if (canPauseHere && now >= motion.nextPauseAt) {
+                            if (!encounterActive && canPauseHere && now >= motion.nextPauseAt) {
                                 beginIdle(now);
-                            } else if (maybeStartExploreRoute()) {
+                            } else if (!encounterActive && maybeStartExploreRoute()) {
                                 supportRect = null;
-                            } else if (maybeStartButtonRoute()) {
+                            } else if (!encounterActive && maybeStartButtonRoute()) {
                                 supportRect = null;
                             } else {
                                 var travel = runSpeed * delta;
@@ -3959,6 +4233,20 @@
                     }
 
                     if (
+                        encounterActive &&
+                        motion.mode === "run" &&
+                        motion.x <= -runnerWidth * 0.08
+                    ) {
+                        motion.x = -runnerWidth * 0.08;
+                        setFacing(1);
+                    } else if (
+                        encounterActive &&
+                        motion.mode === "run" &&
+                        motion.x >= window.innerWidth - runnerWidth * 0.92
+                    ) {
+                        motion.x = window.innerWidth - runnerWidth * 0.92;
+                        setFacing(-1);
+                    } else if (
                         motion.direction < 0 &&
                         motion.x <= -runnerWidth * 0.08 &&
                         motion.mode === "run"
@@ -3975,6 +4263,48 @@
                     paintRunner();
                     window.requestAnimationFrame(frame);
                 }
+
+                window.arynPageRunner = Object.freeze({
+                    engage: function (targetProvider) {
+                        encounterActive = true;
+                        encounterTargetProvider = targetProvider;
+                        motion.nextPauseAt = Infinity;
+                        motion.routeTriggered = true;
+                        var target = currentEncounterTarget();
+                        if (target) {
+                            setFacing(target.x < motion.x + runnerWidth / 2 ? -1 : 1);
+                        }
+                        if (!reducedMotion) {
+                            motion.vx = runSpeed * motion.direction;
+                            setMotion("run");
+                        }
+                    },
+                    disengage: function () {
+                        encounterActive = false;
+                        encounterTargetProvider = null;
+                        delete pixelRunner.dataset.firing;
+                        motion.routeTriggered = false;
+                        if (!reducedMotion) {
+                            schedulePause(performance.now());
+                            motion.vx = runSpeed * motion.direction;
+                            setMotion("run");
+                        }
+                    },
+                    setFiring: function (active) {
+                        if (active) pixelRunner.dataset.firing = "true";
+                        else delete pixelRunner.dataset.firing;
+                    },
+                    position: function () {
+                        return {
+                            x: motion.x,
+                            top: motion.feetY - runnerWidth,
+                            feetY: motion.feetY,
+                            width: runnerWidth,
+                            facing: motion.direction,
+                            motion: motion.mode
+                        };
+                    }
+                });
 
                 window.addEventListener("resize", markTerrainDirty, { passive: true });
                 window.addEventListener("scroll", markTerrainDirty, { passive: true, capture: true });
@@ -6063,6 +6393,8 @@
             init();
         })();
     </script>
+    <script src="/beam_system.js?v=20260804-page-destruction-1"></script>
+    <script src="/tshirt_builder_destruction.js?v=20260804-1"></script>
 </body>
 
 </html>
