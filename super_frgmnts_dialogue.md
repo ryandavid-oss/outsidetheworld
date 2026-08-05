@@ -7,25 +7,28 @@ The card IDs (`D01`, `R01`, and so on) map directly to the game runtime. Please 
 ## Encounter One — First Contact on Veyra
 
 **D01 · DRAS EHDRE** — Coreworks Foreman
-Greetings.
+Thank the maker. I thought nobody was coming.
 
 **D02 · ARYN SOL-MAVI** — Signal Ranger
 You must be Dras Ehdre.
 
 **D03 · DRAS EHDRE** — Coreworks Foreman
-I am. I was beginning to think no one beyond Veyra had heard us.
+I am. And you are?
 
 **D04 · ARYN SOL-MAVI** — Signal Ranger
-We heard you…The fleet classified Veyra as a Class Six containment risk. No deployment. The Fleet rejected your call. I was in the room when they buried it.
+Aryn Sol-Mavi.
 
 **D05 · DRAS EHDRE** — Coreworks Foreman
-And yet here you are.
+Where is everybody else? We are barely containing the disaster below.
 
 **D06 · ARYN SOL-MAVI** — Signal Ranger
-I have my own ship, and my authority. Central Comm doesn’t know I landed.
+CentCom buried your request. I was in the room when it happened. They don't consider this a priority.
+
+**D07 · ARYN SOL-MAVI** — Signal Ranger
+I came in my own ship, and my authority is my own. No one knows I'm here.
 
 **D09 · DRAS EHDRE** — Coreworks Foreman
-Veyra supplied half the Arca System with Vesperite. If that doesn’t qualify as a priority, the Fleet has forgotten what keeps its lights on.
+Veyra supplies half the Arca System with Vesperite! If that doesn’t qualify as a priority, the Fleet has forgotten what keeps its lights on.
 
 **D10 · ARYN SOL-MAVI** — Signal Ranger
 *Stage direction — VEYRA // SUBSURFACE TREMOR: Dust slips from the outpost canopy.*
@@ -72,16 +75,16 @@ My mind was made up before the credits.
 Where do I start?
 
 **D32 · DRAS EHDRE** — Coreworks Foreman
-The Foundry. But not with your pack in its present state. Half the old routes are sealed behind plating and collapsed decks.
+The Foundry. But not with your weaponry in its present state. Half the old routes are sealed behind plating and collapsed decks.
 
 **D33 · ARYN SOL-MAVI** — Signal Ranger
-My beam was designed not to pass through bulkheads. Most crews consider that a feature.
+My weaponry was designed not to pass through bulkheads. Most people consider that a blessing.
 
 **D34 · DRAS EHDRE** — Coreworks Foreman
-The survey rigs used a phase lattice called Ghost Vector. It let a cutting beam slip through dead material before it resolved. I kept the pattern and enough lattice grain for one installation.
+I have an idea. The survey rigs used a phase lattice. They nicknamed it "The Ghost". It let a cutting beam slip through material like butter. I have enough lattice grain for one more implementation.
 
 **D35 · ARYN SOL-MAVI** — Signal Ranger
-You want to rebuild my pack before I step through your homicidal portal.
+You want to rebuild my pack before I step through your homicidal portal?
 
 **D36 · DRAS EHDRE** — Coreworks Foreman
 I want to give you the material and let you rebuild it. Your ship has a cleaner bench than anything left here.
@@ -91,11 +94,11 @@ Good answer. I trust my own hands.
 
 **D38 · DRAS EHDRE** — Coreworks Foreman
 *Runtime cue: look toward portal*
-Install Ghost Vector aboard the RD-42. Then bring both atmospheric stabilizers online, recover the twelve loose fragments, and follow their pulse to its source.
+Take the grain and get to work. Return to your ship and I'll work on getting this portal ready for you.
 
 **D39 · ARYN SOL-MAVI** — Signal Ranger
 *Runtime cue: prime portal*
-Hold the portal. I’ll bring it a better gun.
+On it.
 
 ## Encounter Two — Return from the Coreworks
 

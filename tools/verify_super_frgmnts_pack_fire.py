@@ -41,7 +41,7 @@ def main() -> None:
         "Unguided composite shots still run seeker updates every frame",
     )
     require(
-        '<script src="/beam_system.js?v=20260803-performance-1"></script>' in source,
+        '<script src="/beam_system.js?v=20260805-mobile-performance-1"></script>' in source,
         "The optimized beam renderer is not cache-versioned",
     )
     require("PACK_EMITTER_ANCHORS" in source, "Animation-specific antenna anchors are missing")

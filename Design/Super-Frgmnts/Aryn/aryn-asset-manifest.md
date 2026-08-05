@@ -87,14 +87,14 @@ The five approved-reference beats are ready, reach, grasp, attach, and activated
 
 This generated sheet is a choreography reference only. Its figures are larger and more detailed than the live 112 × 112 sprite family and must not be connected to `super_frgmnts.html`. After Rylee approves the movement, each pose must be rebuilt on the Command Rest 112 × 112 grid with the live palette and silhouette.
 
-## Full-screen comic sequence v1
+## Full-screen comic sequence v2
 
-Rylee selected a large comic-panel treatment instead of an in-world 112 × 112 stop-motion sequence. Three review panels now live in `Design/Super-Frgmnts/Aryn/Prism-Cutscene/`:
+Rylee selected a large comic-panel treatment instead of an in-world 112 × 112 stop-motion sequence. The approved production sequence lives in `Design/Super-Frgmnts/Aryn/Prism-Diet-Coke-Cutscene/`:
 
-1. `aryn-prism-comic-panel-01-reach-v1.png` — Aryn reaches toward the hovering Prism Splinter.
-2. `aryn-prism-comic-panel-02-install-v1.png` — mechanical close-up of the module seating beside the PACK antenna base.
-3. `aryn-prism-comic-panel-03-activate-v1.png` — installed module energizes the PACK and refracts three controlled rays.
+1. `aryn-prism-comic-panel-01-diet-coke-discover-v1.png` — helmeted Aryn discovers the improbably preserved can.
+2. `aryn-prism-comic-panel-02-diet-coke-drink-v1.png` — one unhelmeted frame establishes Aryn's face while she drinks it.
+3. `aryn-prism-comic-panel-03-diet-coke-activate-v3.png` — the cleanly mounted can powers three Prism rays transmitted from the top of the PACK antenna.
 
-All three panels are exactly 1672 × 941, matching the native game canvas. `aryn-prism-comic-sequence-review-v1.png` presents the sequence together for approval.
+All three production panels are exactly 1672 × 941, matching the native game canvas. Earlier Prism and Diet Coke variants remain preserved as review history.
 
-The panel files remain design assets only. They have not been added to the production asset registry, preloader, progression state, or render loop. Integration requires a separate approval after visual review.
+The sequence is registered in the production preloader and render loop. It plays once, during the first Foundry run, when Aryn reaches the Prism pickup at the far side of the first underground intake room after clearing its defenders. `episodeProgress.prismInstalled` prevents replays on later visits and checkpoint returns.

@@ -54,7 +54,7 @@ def main() -> None:
     )
     card_ids = [card_id for card_id, _speaker, _body in source_sections]
     expected_ids = (
-        [f"D{index:02d}" for index in range(1, 7)]
+        [f"D{index:02d}" for index in range(1, 8)]
         + ["D09", "D10"]
         + [f"D{index:02d}" for index in range(19, 40)]
     )
@@ -243,7 +243,7 @@ def main() -> None:
         )
 
     print("Arrival on Veyra contract passed.")
-    print("- runtime speaker and copy match all 29 revised arrival cards exactly")
+    print("- runtime speaker and copy match all 30 revised arrival cards exactly")
     print("- Field Relay, skip confirmation, and accessibility hooks are present")
     print("- purpose-built close portraits and narrated tremor context are present")
     print("- Dras's boots align with Aryn's visible running plane")

@@ -157,7 +157,7 @@ def main() -> None:
         "FOUNDRY_REFINERY_WALL_WIDTH / 2",
         "atmosphereLockPlate: plateBounds",
         "atmosphereLockClearance: plateBounds",
-        '<script src="/beam_system.js?v=20260803-performance-1"></script>',
+        '<script src="/beam_system.js?v=20260805-mobile-performance-1"></script>',
         "function assignEnemyIdentities(roster)",
         "function segmentIntersectsExpandedRect(",
         "function beamBoltHitsSolidTerrain(",
@@ -170,9 +170,7 @@ def main() -> None:
         "enemy.pressureShooter",
         "Production progression is PACK-only.",
         'return riflePreview;',
-        'makeBetaPickup("jetpack", WIDTH * 2 + 240, 280)',
-        '"Third PACK strike. Vesperite core breached."',
-        '"PACK FRACTURE // "',
+        'makeBetaPickup("jetpack", WIDTH * 2 + 470, 280)',
         "var atmosphereLockCycleQa =",
         'canvas.dataset.falseAffordanceCleanup',
         "var falseAffordanceQa =",
@@ -369,7 +367,7 @@ def main() -> None:
     print("- restored Foundry machinery and conduit lighting respond room-wide")
     print("- the Refinery route remains gated until restoration completes")
     print("- the two stabilizers control only their intended zone thresholds")
-    print("- production is PACK-only; Vesperite yields to three PACK volleys")
+    print("- production progression remains PACK-only")
     print("- timer awards remain deliberately unimplemented")
     print(f"- hardest rise {max(mandatory_rises):.0f}px / jump apex {jump_apex:.1f}px")
     print(

@@ -81,6 +81,11 @@
     [MODULES.SOLAR]: Object.freeze({ body: "#ff3d12", glow: "#ff5a1f", trail: "#e23810" }),
   });
 
+  const PROJECTILE_POOL_LIMIT = 48;
+  const TRAIL_POINT_POOL_LIMIT = PROJECTILE_POOL_LIMIT * CONSTANTS.trailPoints;
+  const projectilePool = [];
+  const trailPointPool = [];
+
   function clamp(value, minimum, maximum) {
     return Math.min(maximum, Math.max(minimum, value));
   }
@@ -150,6 +155,46 @@
     return { x: (dx / distance) * speed, y: (dy / distance) * speed };
   }
 
+  function acquireTrailPoint(x, y) {
+    const point = trailPointPool.length ? trailPointPool.pop() : {};
+    point.x = x;
+    point.y = y;
+    return point;
+  }
+
+  function releaseTrailPoint(point) {
+    if (trailPointPool.length < TRAIL_POINT_POOL_LIMIT) {
+      trailPointPool.push(point);
+    }
+  }
+
+  function acquireProjectile() {
+    const projectile = projectilePool.length
+      ? projectilePool.pop()
+      : { trail: [], hitEnemyIDs: new Set() };
+    projectile.trail = projectile.trail || [];
+    projectile.hitEnemyIDs = projectile.hitEnemyIDs || new Set();
+    while (projectile.trail.length) {
+      releaseTrailPoint(projectile.trail.pop());
+    }
+    projectile.hitEnemyIDs.clear();
+    return projectile;
+  }
+
+  function releaseProjectile(projectile) {
+    if (!projectile) return;
+    while (projectile.trail && projectile.trail.length) {
+      releaseTrailPoint(projectile.trail.pop());
+    }
+    if (projectile.hitEnemyIDs) projectile.hitEnemyIDs.clear();
+    projectile.recipe = null;
+    projectile.targetID = null;
+    projectile.lifetime = 0;
+    if (projectilePool.length < PROJECTILE_POOL_LIMIT) {
+      projectilePool.push(projectile);
+    }
+  }
+
   function createVolley(options) {
     const opts = options || {};
     const recipe = resolveRecipe(opts.enabledModules, opts.chargeFraction);
@@ -163,25 +208,23 @@
     return recipe.laneOffsets.map((laneOffset, laneIndex) => {
       const origin = { x: originX, y: originY + laneOffset };
       const velocity = initialVelocity(origin, opts.target, direction, speed, canAim);
-      return {
-        id: baseID + laneIndex + 1,
-        x: origin.x,
-        y: origin.y,
-        velocityX: velocity.x,
-        velocityY: velocity.y,
-        direction,
-        lifetime: CONSTANTS.lifetime,
-        age: 0,
-        trail: [],
-        recipe,
-        targetID: opts.target ? opts.target.id || null : null,
-        prismLane: recipe.laneOffsets.length === 3 ? laneIndex - 1 : 0,
-        prismInitialOffset: laneOffset,
-        prismTerminalOffset: recipe.laneTerminalOffsets[laneIndex],
-        prismSpreadDistance: recipe.laneSpreadDistance,
-        distanceTravelled: 0,
-        hitEnemyIDs: new Set(),
-      };
+      const projectile = acquireProjectile();
+      projectile.id = baseID + laneIndex + 1;
+      projectile.x = origin.x;
+      projectile.y = origin.y;
+      projectile.velocityX = velocity.x;
+      projectile.velocityY = velocity.y;
+      projectile.direction = direction;
+      projectile.lifetime = CONSTANTS.lifetime;
+      projectile.age = 0;
+      projectile.recipe = recipe;
+      projectile.targetID = opts.target ? opts.target.id || null : null;
+      projectile.prismLane = recipe.laneOffsets.length === 3 ? laneIndex - 1 : 0;
+      projectile.prismInitialOffset = laneOffset;
+      projectile.prismTerminalOffset = recipe.laneTerminalOffsets[laneIndex];
+      projectile.prismSpreadDistance = recipe.laneSpreadDistance;
+      projectile.distanceTravelled = 0;
+      return projectile;
     });
   }
 
@@ -218,7 +261,7 @@
 
   function appendReusableTrailPoint(trail, x, y, limit) {
     if (trail.length < limit) {
-      trail.push({ x, y });
+      trail.push(acquireTrailPoint(x, y));
       return;
     }
     const oldestPoint = trail.shift();
@@ -655,6 +698,7 @@
     CONSTANTS,
     resolveRecipe,
     createVolley,
+    releaseProjectile,
     updateProjectile,
     clearanceFraction,
     projectileBounds,

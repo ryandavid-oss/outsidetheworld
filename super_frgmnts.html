@@ -4124,6 +4124,22 @@
                 height: 32px;
             }
         }
+        /* Mobile release profile: preserve the composition while removing
+           GPU blur passes that are disproportionately expensive on phones. */
+        body.is-mobile-runtime .title-screen::before,
+        body.is-mobile-runtime .title-screen__signal,
+        body.is-mobile-runtime .title-screen__vesperite {
+            filter: none !important;
+        }
+
+        body.is-mobile-runtime .title-screen__controls,
+        body.is-mobile-runtime .pause-pack-layer,
+        body.is-mobile-runtime .episode-bridge__content,
+        body.is-mobile-runtime .top-actions .pixel-button,
+        body.is-mobile-runtime .touch-key {
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+        }
     </style>
 </head>
 <body data-release="beta-2">
@@ -4642,7 +4658,7 @@
     ></audio>
     <audio id="backgroundMusicSecondary" preload="none" aria-hidden="true"></audio>
 
-    <script src="/beam_system.js?v=20260803-performance-1"></script>
+    <script src="/beam_system.js?v=20260805-mobile-performance-1"></script>
     <script>
         var render_game_to_text;
         var __superFrgmntsHealthQA;
@@ -4770,6 +4786,14 @@
                     /Macintosh/i.test(navigator.userAgent) &&
                     navigator.maxTouchPoints > 1
                 );
+            var mobilePerformanceMode = Boolean(
+                mobileRuntime ||
+                requestedRenderProfile === "mobile-safe"
+            );
+            document.body.classList.toggle(
+                "is-mobile-runtime",
+                mobilePerformanceMode
+            );
             var desktopOneXRenderTrial =
                 requestedRenderProfile === "desktop-1x" &&
                 !mobileRuntime;
@@ -4930,6 +4954,8 @@
             var returnReportQa =
                 episodeSurfaceReturn &&
                 previewParameters.get("qa") === "report";
+            var requestedDialogueQaPhase =
+                previewParameters.get("dialogue") || "";
             var episodeArrivalTutorial = false;
             var stabilizerTrial =
                 !episodeOneRun &&
@@ -5699,7 +5725,9 @@
             var canvas = document.getElementById("gameCanvas");
             var ctx = canvas.getContext("2d");
             var shadowBlurTrialApplied = false;
-            if (desktopNoBlurTrial) {
+            var suppressCanvasBlur =
+                desktopNoBlurTrial || mobilePerformanceMode;
+            if (suppressCanvasBlur) {
                 try {
                     Object.defineProperty(
                         ctx,
@@ -6714,15 +6742,15 @@
                     priority: "high"
                 },
                 prismComicReach: {
-                    source: "/Images/Game/Super-Frgmnts/aryn-prism-comic-panel-01-reach-v1.png",
+                    source: "/Images/Game/Super-Frgmnts/aryn-prism-comic-panel-01-diet-coke-discover-v1.png",
                     priority: "high"
                 },
                 prismComicInstall: {
-                    source: "/Images/Game/Super-Frgmnts/aryn-prism-comic-panel-02-install-v1.png",
+                    source: "/Images/Game/Super-Frgmnts/aryn-prism-comic-panel-02-diet-coke-drink-v1.png",
                     priority: "high"
                 },
                 prismComicActivate: {
-                    source: "/Images/Game/Super-Frgmnts/aryn-prism-comic-panel-03-activate-v1.png",
+                    source: "/Images/Game/Super-Frgmnts/aryn-prism-comic-panel-03-diet-coke-activate-v3.png",
                     priority: "high"
                 },
                 heavyRiflePickup: {
@@ -7196,6 +7224,12 @@
             var frameTelemetryStarted = 0;
             var frameTelemetryCallbacks = 0;
             var frameTelemetryDraws = 0;
+            var frameTelemetryLastDraw = 0;
+            var frameTelemetryTimeTotal = 0;
+            var frameTelemetryTimeSamples = 0;
+            var frameTelemetryWorst = 0;
+            var frameTelemetryLongFrames = 0;
+            var frameTelemetrySevereFrames = 0;
             var runFrameTime = 0;
             var lastFootstepFrame = -1;
             var movementAudioCounts = {
@@ -7279,7 +7313,8 @@
             var scriptedWoundReturnStarted = false;
             var surfaceRecoveryElapsed = 0;
             var surfaceRecoveryDialogueStarted = false;
-            var PARTICLE_BUDGET = 360;
+            var PARTICLE_BUDGET = mobilePerformanceMode ? 180 : 300;
+            var POPUP_BUDGET = mobilePerformanceMode ? 12 : 24;
             var particles = [];
             var particlePool = [];
             var particleBudgetDrops = 0;
@@ -7288,12 +7323,24 @@
             var popups = [];
             var enemies = [];
             var energyOrbs = [];
+            var energyOrbPool = [];
+            var boltPool = [];
+            var PLAYER_PROJECTILE_BUDGET =
+                mobilePerformanceMode ? 12 : 24;
+            var playerProjectileBudgetDrops = 0;
             var EPISODE_ENEMY_ACTIVE_BUDGET = 3;
             var EPISODE_HOSTILE_PROJECTILE_BUDGET = 2;
-            var ENEMY_WAKE_MARGIN_X = 240;
-            var ENEMY_WAKE_MARGIN_Y = 190;
-            var ENEMY_DRAW_MARGIN_X = 130;
-            var ENEMY_DRAW_MARGIN_Y = 110;
+            var ENEMY_WAKE_MARGIN_X =
+                mobilePerformanceMode ? 110 : 240;
+            var ENEMY_WAKE_MARGIN_Y =
+                mobilePerformanceMode ? 90 : 190;
+            var ENEMY_DRAW_MARGIN_X =
+                mobilePerformanceMode ? 48 : 130;
+            var ENEMY_DRAW_MARGIN_Y =
+                mobilePerformanceMode ? 44 : 110;
+            canvas.dataset.playerProjectileBudget = String(
+                PLAYER_PROJECTILE_BUDGET
+            );
             var heartPickups = [];
             var nextHealthPickupId = 0;
             var lastDisplayedEnergy = null;
@@ -7348,8 +7395,11 @@
             var ARRIVAL_DESCENT_DURATION = 18.8;
             var ARRIVAL_DESCENT_REDUCED_DURATION = 3.2;
             var ARRIVAL_DESCENT_STAGE_DURATION = 3.7;
-            var ARRIVAL_DESCENT_PARTICLE_COUNT = 112;
-            var ARRIVAL_DESCENT_BACKGROUND_PARTICLES = 88;
+            var ARRIVAL_DESCENT_PARTICLE_COUNT =
+                mobilePerformanceMode ? 72 : 112;
+            var ARRIVAL_DESCENT_BACKGROUND_PARTICLES =
+                mobilePerformanceMode ? 54 : 88;
+            var ARRIVAL_DESCENT_CANVAS_SCALE = 1;
             var ARRIVAL_REVEAL_DURATION = 1.45;
             var ARRIVAL_DESCENT_PLATE_KEYS = [
                 "descentDeepSpace",
@@ -7448,6 +7498,36 @@
 
             function readEpisodeProgress() {
                 var fallback = defaultEpisodeProgress();
+                if (
+                    overworldPreview &&
+                    [
+                        "arrival",
+                        "retreat-report",
+                        "catalyst-report",
+                        "solar-installed",
+                        "final-report"
+                    ].indexOf(requestedDialogueQaPhase) >= 0
+                ) {
+                    var dialogueQaHasGhost =
+                        requestedDialogueQaPhase !== "arrival";
+                    var dialogueQaHasPrism = [
+                        "retreat-report",
+                        "catalyst-report",
+                        "solar-installed",
+                        "final-report"
+                    ].indexOf(requestedDialogueQaPhase) >= 0;
+                    var dialogueQaHasSolar = [
+                        "solar-installed",
+                        "final-report"
+                    ].indexOf(requestedDialogueQaPhase) >= 0;
+                    return {
+                        version: 2,
+                        phase: requestedDialogueQaPhase,
+                        ghostInstalled: dialogueQaHasGhost,
+                        prismInstalled: dialogueQaHasPrism,
+                        solarInstalled: dialogueQaHasSolar
+                    };
+                }
                 if (woundFirstDefeatQa) {
                     return {
                         version: 2,
@@ -7601,7 +7681,7 @@
                     speaker: "DRAS EHDRE",
                     role: "COREWORKS FOREMAN",
                     portrait: "dras",
-                    text: "Greetings."
+                    text: "Thank the maker. I thought nobody was coming."
                 },
                 {
                     id: "D02",
@@ -7615,35 +7695,42 @@
                     speaker: "DRAS EHDRE",
                     role: "COREWORKS FOREMAN",
                     portrait: "dras",
-                    text: "I am. I was beginning to think no one beyond Veyra had heard us."
+                    text: "I am. And you are?"
                 },
                 {
                     id: "D04",
                     speaker: "ARYN SOL-MAVI",
                     role: "SIGNAL RANGER",
                     portrait: "aryn",
-                    text: "We heard you…The fleet classified Veyra as a Class Six containment risk. No deployment. The Fleet rejected your call. I was in the room when they buried it."
+                    text: "Aryn Sol-Mavi."
                 },
                 {
                     id: "D05",
                     speaker: "DRAS EHDRE",
                     role: "COREWORKS FOREMAN",
                     portrait: "dras",
-                    text: "And yet here you are."
+                    text: "Where is everybody else? We are barely containing the disaster below."
                 },
                 {
                     id: "D06",
                     speaker: "ARYN SOL-MAVI",
                     role: "SIGNAL RANGER",
                     portrait: "aryn",
-                    text: "I have my own ship, and my authority. Central Comm doesn’t know I landed."
+                    text: "CentCom buried your request. I was in the room when it happened. They don't consider this a priority."
+                },
+                {
+                    id: "D07",
+                    speaker: "ARYN SOL-MAVI",
+                    role: "SIGNAL RANGER",
+                    portrait: "aryn",
+                    text: "I came in my own ship, and my authority is my own. No one knows I'm here."
                 },
                 {
                     id: "D09",
                     speaker: "DRAS EHDRE",
                     role: "COREWORKS FOREMAN",
                     portrait: "dras",
-                    text: "Veyra supplied half the Arca System with Vesperite. If that doesn’t qualify as a priority, the Fleet has forgotten what keeps its lights on."
+                    text: "Veyra supplies half the Arca System with Vesperite! If that doesn’t qualify as a priority, the Fleet has forgotten what keeps its lights on."
                 },
                 {
                     id: "D10",
@@ -7751,28 +7838,28 @@
                     speaker: "DRAS EHDRE",
                     role: "COREWORKS FOREMAN",
                     portrait: "dras",
-                    text: "The Foundry. But not with your pack in its present state. Half the old routes are sealed behind plating and collapsed decks."
+                    text: "The Foundry. But not with your weaponry in its present state. Half the old routes are sealed behind plating and collapsed decks."
                 },
                 {
                     id: "D33",
                     speaker: "ARYN SOL-MAVI",
                     role: "SIGNAL RANGER",
                     portrait: "aryn",
-                    text: "My beam was designed not to pass through bulkheads. Most crews consider that a feature."
+                    text: "My weaponry was designed not to pass through bulkheads. Most people consider that a blessing."
                 },
                 {
                     id: "D34",
                     speaker: "DRAS EHDRE",
                     role: "COREWORKS FOREMAN",
                     portrait: "dras",
-                    text: "The survey rigs used a phase lattice called Ghost Vector. It let a cutting beam slip through dead material before it resolved. I kept the pattern and enough lattice grain for one installation."
+                    text: "I have an idea. The survey rigs used a phase lattice. They nicknamed it \"The Ghost\". It let a cutting beam slip through material like butter. I have enough lattice grain for one more implementation."
                 },
                 {
                     id: "D35",
                     speaker: "ARYN SOL-MAVI",
                     role: "SIGNAL RANGER",
                     portrait: "aryn",
-                    text: "You want to rebuild my pack before I step through your homicidal portal."
+                    text: "You want to rebuild my pack before I step through your homicidal portal?"
                 },
                 {
                     id: "D36",
@@ -7794,7 +7881,7 @@
                     role: "COREWORKS FOREMAN",
                     portrait: "dras",
                     effect: "look-portal",
-                    text: "Install Ghost Vector aboard the RD-42. Then bring both atmospheric stabilizers online, recover the twelve loose fragments, and follow their pulse to its source."
+                    text: "Take the grain and get to work. Return to your ship and I'll work on getting this portal ready for you."
                 },
                 {
                     id: "D39",
@@ -7802,7 +7889,7 @@
                     role: "SIGNAL RANGER",
                     portrait: "aryn",
                     effect: "prime-portal",
-                    text: "Hold the portal. I’ll bring it a better gun."
+                    text: "On it."
                 }
             ];
 
@@ -8038,14 +8125,14 @@
                     speaker: "DRAS EHDRE",
                     role: "COREWORKS FOREMAN",
                     portrait: "dras",
-                    text: "Aryn? You're bleeding."
+                    text: "Aryn? Your signal was fading. Thank Zarquon I locked onto you. What happened?"
                 },
                 {
                     id: "S02",
                     speaker: "ARYN SOL-MAVI",
                     role: "SIGNAL RANGER",
                     portrait: "aryn",
-                    text: "Seal the route first."
+                    text: "Quick. Seal the portal first."
                 },
                 {
                     id: "S03",
@@ -8053,14 +8140,14 @@
                     role: "COREWORKS FOREMAN",
                     portrait: "dras",
                     effect: "look-portal",
-                    text: "Sealed. What followed you to the threshold?"
+                    text: "Already done...Tell me what the hell happened!"
                 },
                 {
                     id: "S04",
                     speaker: "ARYN SOL-MAVI",
                     role: "SIGNAL RANGER",
                     portrait: "aryn",
-                    text: "Nothing followed me. It didn't need to. There's a Seam Hunter in the Wound."
+                    text: "There's a Seam Hunter in the Coreworks."
                 },
                 {
                     id: "S05",
@@ -8070,7 +8157,7 @@
                     effect: "tremor",
                     stageKicker: "COREWORKS THRESHOLD // SILENCE",
                     stageText: "For once, Dras has no answer ready.",
-                    text: "A true Seam Hunter? Here? They don't nest in worked seams. They empty them."
+                    text: "A Seam Hunter? Here? They don't nest in worked seams. They empty them."
                 },
                 {
                     id: "S06",
@@ -8084,56 +8171,63 @@
                     speaker: "DRAS EHDRE",
                     role: "COREWORKS FOREMAN",
                     portrait: "dras",
-                    text: "Then I sent you below with a lamp."
+                    text: "This is worse than I imagined."
                 },
                 {
                     id: "S08",
                     speaker: "ARYN SOL-MAVI",
                     role: "SIGNAL RANGER",
                     portrait: "aryn",
-                    text: "You sent me with what you had. Now tell me what you forgot."
+                    text: "Send me back. Give me a Diet Coke and send me back."
                 },
                 {
                     id: "S09",
                     speaker: "DRAS EHDRE",
                     role: "COREWORKS FOREMAN",
                     portrait: "dras",
-                    text: "Solar Needle. A thermal carrier made for cutting pressure-vessel scars from the inside. Split the beam, seed every ray, and the Hunter's own armor will hold the heat against it."
+                    text: "You're insane. And Diet Coke doesn't exist on Veyra."
                 },
                 {
                     id: "S10",
-                    speaker: "ARYN SOL-MAVI",
-                    role: "SIGNAL RANGER",
-                    portrait: "aryn",
-                    text: "You have one?"
+                    speaker: "DRAS EHDRE",
+                    role: "COREWORKS FOREMAN",
+                    portrait: "dras",
+                    text: "What you need is a bigger gun. Our crews had a thermal extender made for cutting pressure-vessel scars from the inside. Split the beam, seed every ray, and the Hunter's own armor will hold the heat against it."
                 },
                 {
                     id: "S11",
-                    speaker: "DRAS EHDRE",
-                    role: "COREWORKS FOREMAN",
-                    portrait: "dras",
-                    text: "I have the pattern. The catalyst is in a quarantined materials vault three levels deep. Clinical storage—cleaner than the Foundry, but not empty."
+                    speaker: "ARYN SOL-MAVI",
+                    role: "SIGNAL RANGER",
+                    portrait: "aryn",
+                    text: "That does sound better than Diet Coke."
                 },
                 {
                     id: "S12",
-                    speaker: "ARYN SOL-MAVI",
-                    role: "SIGNAL RANGER",
-                    portrait: "aryn",
-                    text: "Tune the portal."
-                },
-                {
-                    id: "S13",
                     speaker: "DRAS EHDRE",
                     role: "COREWORKS FOREMAN",
                     portrait: "dras",
-                    text: "You just escaped one impossible room."
+                    text: "The bad news is, you'll need material. The catalyst is in a quarantined materials vault three levels deep. Clinical storage area. Cleaner than the Foundry, but not empty."
                 },
                 {
-                    id: "S14",
+                    id: "S13",
                     speaker: "ARYN SOL-MAVI",
                     role: "SIGNAL RANGER",
                     portrait: "aryn",
-                    text: "Then send me somewhere possible."
+                    text: "Get the portal ready."
+                },
+                {
+                    id: "S14",
+                    speaker: "DRAS EHDRE",
+                    role: "COREWORKS FOREMAN",
+                    portrait: "dras",
+                    text: "Aryn, you barely escaped with your life."
+                },
+                {
+                    id: "S15",
+                    speaker: "ARYN SOL-MAVI",
+                    role: "SIGNAL RANGER",
+                    portrait: "aryn",
+                    text: "This isn't a request. I'm dancing with that Seam Hunter again."
                 }
             ];
 
@@ -8154,21 +8248,21 @@
                     role: "COREWORKS FOREMAN",
                     portrait: "dras",
                     effect: "scan-specimen",
-                    text: "Coherent under open air. No thermal bleed. Yes—this is the carrier."
+                    text: "Hmm...light orange, no thermal bleed. Yes. This is enough."
                 },
                 {
                     id: "C03",
                     speaker: "ARYN SOL-MAVI",
                     role: "SIGNAL RANGER",
                     portrait: "aryn",
-                    text: "Instructions."
+                    text: "Then all I need are your instructions for the retrofit."
                 },
                 {
                     id: "C04",
                     speaker: "DRAS EHDRE",
                     role: "COREWORKS FOREMAN",
                     portrait: "dras",
-                    text: "Seat it behind the emitter collar. Let the pack find the resonance before you close the housing. If the light turns white, cut power."
+                    text: "You must seat it behind the emitter collar. Then let your pack find the resonance before you close the housing. If the light turns white, cut power."
                 },
                 {
                     id: "C05",
@@ -8223,24 +8317,10 @@
                     effect: "solar-test",
                     stageKicker: "SOLAR NEEDLE // RESONANCE LOCK",
                     stageText: "A narrow orange line blooms at Aryn's emitter, then folds back into the pack.",
-                    text: "Stable. Hot. Eager."
+                    text: "The light is orange. I'm going in hot."
                 },
                 {
                     id: "N03",
-                    speaker: "DRAS EHDRE",
-                    role: "COREWORKS FOREMAN",
-                    portrait: "dras",
-                    text: "It will seed every Prism ray. Don't fight the armor now. Fill it with heat until it betrays him."
-                },
-                {
-                    id: "N04",
-                    speaker: "ARYN SOL-MAVI",
-                    role: "SIGNAL RANGER",
-                    portrait: "aryn",
-                    text: "Route?"
-                },
-                {
-                    id: "N05",
                     speaker: "DRAS EHDRE",
                     role: "COREWORKS FOREMAN",
                     portrait: "dras",
@@ -8297,7 +8377,7 @@
                     speaker: "ARYN SOL-MAVI",
                     role: "SIGNAL RANGER",
                     portrait: "aryn",
-                    text: "The Wound is open. The stabilizers are holding. And the pulse is still moving beneath both of us."
+                    text: "Yes. But the Wound is still open. The stabilizers are holding, but the seams are still collapsing."
                 },
                 {
                     id: "F05",
@@ -8322,21 +8402,21 @@
                     role: "COREWORKS FOREMAN",
                     portrait: "dras",
                     effect: "scan-specimen",
-                    text: "The old Primary Biolab could read this. The main laboratory—not the processing floor you crossed."
+                    text: "I can't believe what I'm seeing."
                 },
                 {
                     id: "F08",
                     speaker: "ARYN SOL-MAVI",
                     role: "SIGNAL RANGER",
                     portrait: "aryn",
-                    text: "Can the portal reach it?"
+                    text: "What is it?"
                 },
                 {
                     id: "F09",
                     speaker: "DRAS EHDRE",
                     role: "COREWORKS FOREMAN",
                     portrait: "dras",
-                    text: "I believe so. Give me until morning to build the route."
+                    text: "Stay here. I have to send a call to the other side of the planet."
                 },
                 {
                     id: "F10",
@@ -9526,7 +9606,7 @@
                 var canvasBounds =
                     canvas.getBoundingClientRect();
                 var renderPixelRatio =
-                    desktopOneXRenderEnabled
+                    mobilePerformanceMode || desktopOneXRenderEnabled
                         ? 1
                         : Math.min(
                             2,
@@ -9569,7 +9649,9 @@
                 canvas.dataset.renderGrid =
                     "display-native-camera-snapped-v1";
                 canvas.dataset.renderProfile =
-                    desktopOneXRenderTrial
+                    mobilePerformanceMode
+                        ? "mobile-1x-release"
+                        : desktopOneXRenderTrial
                         ? "desktop-1x-trial"
                         : desktopOneXRenderDefault
                         ? "desktop-1x-default"
@@ -9586,8 +9668,10 @@
                         ? "default-mobile-guard"
                         : "default";
                 canvas.dataset.renderProfileScope =
-                    desktopOneXRenderEnabled
-                        ? "desktop-default-mobile-native"
+                    mobilePerformanceMode
+                        ? "mobile-release"
+                        : desktopOneXRenderEnabled
+                        ? "desktop-default-1x"
                         : "desktop-opt-in-only";
                 canvas.dataset.frameProfile =
                     frameMeterRequested
@@ -9603,7 +9687,10 @@
                         ? "query-opt-in-all-devices"
                         : "desktop-opt-in-only";
                 canvas.dataset.effectsProfile =
-                    desktopNoBlurTrial &&
+                    mobilePerformanceMode &&
+                    shadowBlurTrialApplied
+                        ? "mobile-no-blur-release"
+                        : desktopNoBlurTrial &&
                     shadowBlurTrialApplied
                         ? "desktop-no-blur-trial"
                         : requestedEffectsProfile ===
@@ -9613,7 +9700,13 @@
                                 : "desktop-no-blur-unavailable"
                             : "default";
                 canvas.dataset.effectsProfileScope =
-                    "desktop-opt-in-only";
+                    mobilePerformanceMode
+                        ? "mobile-release"
+                        : "desktop-opt-in-only";
+                canvas.dataset.performanceProfile =
+                    mobilePerformanceMode
+                        ? "mobile-safe-v1"
+                        : "desktop-balanced-v1";
                 performanceTrialBadge.hidden =
                     !frameTelemetryActive;
                 performanceTrialBadge.classList.toggle(
@@ -10167,7 +10260,9 @@
                         ? SHIP_PACK_BENCH_X - 56
                         : SHIP_INTERIOR_HATCH_X - 56
                     : overworldPreview
-                    ? westernAssignmentPreview
+                    ? requestedDialogueQaPhase
+                        ? DRAS_WORLD_X - 160
+                    : westernAssignmentPreview
                         ? (
                             {
                                 survey: WESTERN_SURVEY_X,
@@ -10309,8 +10404,10 @@
                 particleBudgetDrops = 0;
                 canvas.dataset.particleBudgetDrops = "0";
                 popups.length = 0;
-                energyOrbs.length = 0;
-                bolts.length = 0;
+                recycleAllEnergyOrbs();
+                recycleAllBolts();
+                playerProjectileBudgetDrops = 0;
+                canvas.dataset.playerProjectileBudgetDrops = "0";
                 blasterTier = 1;
                 blasterHeat = 0;
                 blasterOverheated = false;
@@ -10419,7 +10516,8 @@
                     overworldPreview &&
                     !episodeSurfaceReturn &&
                     !arrivalTransportPreview &&
-                    !arrivalDialoguePreview
+                    !arrivalDialoguePreview &&
+                    !requestedDialogueQaPhase
                         ? platforms.find(function (platform) {
                             return (
                                 platform.shipSurface &&
@@ -11028,7 +11126,10 @@
                                 : "Run started. Twelve Vesperite Fragments remain."
                     );
                     playTone(260, 0.08, "square", 0.035);
-                    if (arrivalDialoguePreview) {
+                    if (
+                        arrivalDialoguePreview ||
+                        requestedDialogueQaPhase
+                    ) {
                         window.setTimeout(startArrivalDialogue, 80);
                     }
                 }
@@ -11578,8 +11679,8 @@
                 inDeepworks = false;
                 deepworksRoom = null;
                 enemies = [];
-                energyOrbs = [];
-                bolts = [];
+                recycleAllEnergyOrbs();
+                recycleAllBolts();
                 shards = [];
                 heartPickups = [];
                 betaPickups = [];
@@ -13172,6 +13273,40 @@
                 }
             }
 
+            function configureArrivalDescentCanvas() {
+                var canvasBounds =
+                    episodeBridgeDescentCanvas.getBoundingClientRect();
+                var backingWidth = mobilePerformanceMode
+                    ? Math.max(
+                        1,
+                        Math.round(canvasBounds.width || 836)
+                    )
+                    : 1672;
+                var backingHeight = mobilePerformanceMode
+                    ? Math.max(
+                        1,
+                        Math.round(canvasBounds.height || 471)
+                    )
+                    : 941;
+                ARRIVAL_DESCENT_CANVAS_SCALE = Math.min(
+                    backingWidth / 1672,
+                    backingHeight / 941
+                );
+                if (
+                    episodeBridgeDescentCanvas.width !== backingWidth ||
+                    episodeBridgeDescentCanvas.height !== backingHeight
+                ) {
+                    episodeBridgeDescentCanvas.width = backingWidth;
+                    episodeBridgeDescentCanvas.height = backingHeight;
+                }
+                episodeBridgeDescentCanvas.dataset.renderBacking =
+                    backingWidth + "x" + backingHeight;
+                episodeBridgeDescentCanvas.dataset.renderProfile =
+                    mobilePerformanceMode
+                        ? "mobile-css-1x"
+                        : "desktop-native-backing";
+            }
+
             function drawArrivalDescentPlate(
                 key,
                 localProgress,
@@ -13333,7 +13468,20 @@
                     arrivalDescentElapsed
                 );
                 context.setTransform(1, 0, 0, 1, 0, 0);
-                context.clearRect(0, 0, 1672, 941);
+                context.clearRect(
+                    0,
+                    0,
+                    episodeBridgeDescentCanvas.width,
+                    episodeBridgeDescentCanvas.height
+                );
+                context.setTransform(
+                    ARRIVAL_DESCENT_CANVAS_SCALE,
+                    0,
+                    0,
+                    ARRIVAL_DESCENT_CANVAS_SCALE,
+                    0,
+                    0
+                );
                 context.imageSmoothingEnabled = false;
                 context.fillStyle = "#02040d";
                 context.fillRect(0, 0, 1672, 941);
@@ -13479,6 +13627,7 @@
             }
 
             function startArrivalDescentPresentation(reducedMotion) {
+                configureArrivalDescentCanvas();
                 initializeArrivalDescentParticles();
                 arrivalDescentActive = true;
                 arrivalDescentReducedMotion = reducedMotion;
@@ -13502,11 +13651,19 @@
                 }
                 pauseArrivalDescentLoop(true);
                 if (clearCanvas) {
+                    episodeBridgeDescentContext.setTransform(
+                        1,
+                        0,
+                        0,
+                        1,
+                        0,
+                        0
+                    );
                     episodeBridgeDescentContext.clearRect(
                         0,
                         0,
-                        1672,
-                        941
+                        episodeBridgeDescentCanvas.width,
+                        episodeBridgeDescentCanvas.height
                     );
                     canvas.dataset.arrivalDescent = "inactive";
                     canvas.dataset.arrivalDescentStage = "none";
@@ -13516,6 +13673,13 @@
                     renderArrivalDescentFrame();
                 }
                 arrivalDescentReducedMotion = false;
+            }
+
+            function releaseArrivalDescentResources() {
+                arrivalDescentParticles.length = 0;
+                releaseAssetKeys(arrivalDescentAssetKeys);
+                canvas.dataset.arrivalDescentAssets = "released";
+                canvas.dataset.arrivalDescentParticles = "0";
             }
 
             function clearEpisodeBridgeTimers() {
@@ -13795,6 +13959,8 @@
             function beginEpisodeApproach() {
                 state = "transition";
                 releaseAllControls();
+                requestAssetKeys(arrivalDescentAssetKeys, "high");
+                canvas.dataset.arrivalDescentAssets = "active";
                 document.body.classList.remove("is-running");
                 setPauseButton(false, false);
                 titleScreen.hidden = true;
@@ -14200,6 +14366,7 @@
                 titleScreen.hidden = true;
                 releaseTitleArtwork();
                 hideEpisodeBridge();
+                releaseArrivalDescentResources();
                 messageCard.hidden = true;
                 if (historyMode === "replace") {
                     window.history.replaceState(
@@ -14358,6 +14525,8 @@
                 surfaceReturnLoadout = null;
                 stageShell.classList.remove("is-episode-blackout");
                 hideEpisodeBridge();
+                requestAssetKeys(arrivalDescentAssetKeys, "high");
+                canvas.dataset.arrivalDescentAssets = "preloading";
                 state = "ready";
                 releaseInactiveSceneAssets("title");
                 document.body.classList.add("is-main-title");
@@ -14545,7 +14714,10 @@
             function episodeDialoguePending() {
                 var mode = dialogueModeForEpisodePhase();
                 if (mode === "arrival") {
-                    return !dialogueHasPlayed;
+                    return (
+                        episodeProgress.phase === "arrival" &&
+                        !dialogueHasPlayed
+                    );
                 }
                 return !returnDialogueHasPlayed;
             }
@@ -16288,7 +16460,7 @@
                 inDeepworks = true;
                 deepworksRoom = room;
                 beginPlatformDrop(player.supportPlatform);
-                energyOrbs.length = 0;
+                recycleAllEnergyOrbs();
                 popups.push({
                     x: player.x + 56,
                     y: GROUND_Y - 142,
@@ -18938,7 +19110,7 @@
 
                 if (healthQaStep === 0) {
                     enemies = [];
-                    energyOrbs = [];
+                    recycleAllEnergyOrbs();
                     heartPickups = [];
                     hits = 0;
                     invulnerableTime = 0;
@@ -19042,7 +19214,7 @@
 
                 if (movementQaStep === 0) {
                     enemies = [];
-                    energyOrbs = [];
+                    recycleAllEnergyOrbs();
                     hazards = [];
                     player.y = GROUND_Y - 100;
                     player.vx = 0;
@@ -20191,8 +20363,8 @@
                 scriptedWoundReturnStarted = false;
                 releaseAllControls();
                 clearPendingPackFire();
-                bolts = [];
-                energyOrbs = [];
+                recycleAllBolts();
+                recycleAllEnergyOrbs();
                 player.vx = 0;
                 player.vy = 0;
                 player.onGround = true;
@@ -23112,6 +23284,87 @@
                 });
             }
 
+            function acquireEnergyOrb() {
+                return energyOrbPool.length
+                    ? energyOrbPool.pop()
+                    : {};
+            }
+
+            function releaseEnergyOrb(orb) {
+                orb.sourceEnemyId = "";
+                if (
+                    energyOrbPool.length <
+                    EPISODE_HOSTILE_PROJECTILE_BUDGET
+                ) {
+                    energyOrbPool.push(orb);
+                }
+            }
+
+            function recycleAllEnergyOrbs() {
+                while (energyOrbs.length) {
+                    releaseEnergyOrb(energyOrbs.pop());
+                }
+            }
+
+            function acquireBolt(definition) {
+                var bolt = boltPool.length
+                    ? boltPool.pop()
+                    : {};
+                var reusableTrail = bolt.trail || [];
+                reusableTrail.length = 0;
+                bolt.x = definition.x;
+                bolt.y = definition.y;
+                bolt.vx = definition.vx;
+                bolt.vy = definition.vy;
+                bolt.life = definition.life;
+                bolt.tier = definition.tier;
+                bolt.color = definition.color;
+                bolt.size = definition.size;
+                bolt.heading = definition.heading;
+                bolt.target = definition.target || null;
+                bolt.direct = Boolean(definition.direct);
+                bolt.portable = definition.portable || null;
+                bolt.trail = definition.trail || reusableTrail;
+                bolt.ricochetGrace = 0;
+                bolt.ricocheted = false;
+                bolt.friendlyAvoidance = 0;
+                return bolt;
+            }
+
+            function releaseBolt(bolt) {
+                if (
+                    bolt.portable &&
+                    Beam &&
+                    typeof Beam.releaseProjectile === "function"
+                ) {
+                    Beam.releaseProjectile(bolt.portable);
+                } else if (bolt.trail) {
+                    bolt.trail.length = 0;
+                }
+                bolt.portable = null;
+                bolt.target = null;
+                bolt.life = 0;
+                if (boltPool.length < PLAYER_PROJECTILE_BUDGET) {
+                    boltPool.push(bolt);
+                }
+            }
+
+            function registerBolt(definition) {
+                if (bolts.length >= PLAYER_PROJECTILE_BUDGET) {
+                    releaseBolt(bolts.shift());
+                    playerProjectileBudgetDrops += 1;
+                    canvas.dataset.playerProjectileBudgetDrops =
+                        String(playerProjectileBudgetDrops);
+                }
+                bolts.push(acquireBolt(definition));
+            }
+
+            function recycleAllBolts() {
+                while (bolts.length) {
+                    releaseBolt(bolts.pop());
+                }
+            }
+
             function shootEnergyOrb(enemy) {
                 if (
                     episodeBetaRun &&
@@ -23131,15 +23384,15 @@
                         : 188
                     : 148;
 
-                energyOrbs.push({
-                    x: startX,
-                    y: startY,
-                    vx: dx / distance * speed,
-                    vy: dy / distance * speed,
-                    life: 7,
-                    sourceEnemyId: enemy.id || "",
-                    phase: Math.random() * Math.PI * 2
-                });
+                var orb = acquireEnergyOrb();
+                orb.x = startX;
+                orb.y = startY;
+                orb.vx = dx / distance * speed;
+                orb.vy = dy / distance * speed;
+                orb.life = 7;
+                orb.sourceEnemyId = enemy.id || "";
+                orb.phase = Math.random() * Math.PI * 2;
+                energyOrbs.push(orb);
 
                 spawnBurst(startX, startY, "#74ffd8", 5);
                 if (Math.abs(startX - player.x) < WIDTH * 0.72) {
@@ -23203,13 +23456,27 @@
                     }
                 });
 
-                energyOrbs = energyOrbs.filter(function (orb) {
-                    return orb.life > 0 &&
-                        orb.x > -80 &&
-                        orb.x < WORLD_WIDTH + 80 &&
-                        orb.y > -80 &&
-                        orb.y < WORLD_HEIGHT + 80;
-                });
+                var orbWriteIndex = 0;
+                for (
+                    var orbIndex = 0;
+                    orbIndex < energyOrbs.length;
+                    orbIndex += 1
+                ) {
+                    var activeOrb = energyOrbs[orbIndex];
+                    var keepOrb =
+                        activeOrb.life > 0 &&
+                        activeOrb.x > cameraX - 100 &&
+                        activeOrb.x < cameraX + viewWidth + 100 &&
+                        activeOrb.y > cameraY - 100 &&
+                        activeOrb.y < cameraY + HEIGHT + 100;
+                    if (keepOrb) {
+                        energyOrbs[orbWriteIndex] = activeOrb;
+                        orbWriteIndex += 1;
+                    } else {
+                        releaseEnergyOrb(activeOrb);
+                    }
+                }
+                energyOrbs.length = orbWriteIndex;
                 canvas.dataset.hostileProjectileCount = String(
                     energyOrbs.length
                 );
@@ -23426,7 +23693,7 @@
                     });
                     nextBeamBoltId += portableVolley.length;
                     portableVolley.forEach(function (portable) {
-                        bolts.push({
+                        registerBolt({
                             x: portable.x,
                             y: portable.y,
                             vx: portable.velocityX,
@@ -23449,7 +23716,7 @@
                         beamRecipe.damagePerProjectile
                     );
                 } else {
-                    bolts.push({
+                    registerBolt({
                         x: muzzleX,
                         y: muzzleY,
                         vx: stats.speed * player.facing,
@@ -24272,9 +24539,14 @@
                     if (keepBolt) {
                         bolts[boltWriteIndex] = activeBolt;
                         boltWriteIndex += 1;
+                    } else {
+                        releaseBolt(activeBolt);
                     }
                 }
                 bolts.length = boltWriteIndex;
+                canvas.dataset.playerProjectileCount = String(
+                    bolts.length
+                );
             }
 
             function damageEnemy(
@@ -24922,7 +25194,15 @@
                     particle.x += particle.vx * delta;
                     particle.y += particle.vy * delta;
                     particle.vy += 680 * delta;
-                    if (particle.life > 0) {
+                    var particleRetained =
+                        !mobilePerformanceMode ||
+                        (
+                            particle.x >= cameraX - 280 &&
+                            particle.x <= cameraX + viewWidth + 280 &&
+                            particle.y >= cameraY - 220 &&
+                            particle.y <= cameraY + HEIGHT + 220
+                        );
+                    if (particle.life > 0 && particleRetained) {
                         particles[particleWriteIndex] = particle;
                         particleWriteIndex += 1;
                     } else {
@@ -24946,6 +25226,20 @@
                     }
                 }
                 popups.length = popupWriteIndex;
+                if (popups.length > POPUP_BUDGET) {
+                    var popupOverflow =
+                        popups.length - POPUP_BUDGET;
+                    for (
+                        var retainedPopupIndex = 0;
+                        retainedPopupIndex < POPUP_BUDGET;
+                        retainedPopupIndex += 1
+                    ) {
+                        popups[retainedPopupIndex] =
+                            popups[retainedPopupIndex + popupOverflow];
+                    }
+                    popups.length = POPUP_BUDGET;
+                }
+                canvas.dataset.popupCount = String(popups.length);
             }
 
             function acquireParticle() {
@@ -33551,6 +33845,14 @@
 
             function drawPopups() {
                 popups.forEach(function (popup) {
+                    if (
+                        popup.x < renderCameraX - 80 ||
+                        popup.x > renderCameraX + viewWidth + 80 ||
+                        popup.y < renderCameraY - 80 ||
+                        popup.y > renderCameraY + HEIGHT + 80
+                    ) {
+                        return;
+                    }
                     ctx.save();
                     ctx.globalAlpha = Math.min(1, popup.life * 2);
                     ctx.font = "700 19px Fira Code, monospace";
@@ -35689,13 +35991,35 @@
                 now,
                 drewFrame
             ) {
-                if (!frameTelemetryActive) return;
                 if (!frameTelemetryStarted) {
                     frameTelemetryStarted = now;
                 }
                 frameTelemetryCallbacks += 1;
                 if (drewFrame) {
                     frameTelemetryDraws += 1;
+                    if (frameTelemetryLastDraw) {
+                        var drawFrameTime =
+                            now - frameTelemetryLastDraw;
+                        if (
+                            drawFrameTime > 0 &&
+                            drawFrameTime < 250
+                        ) {
+                            frameTelemetryTimeTotal +=
+                                drawFrameTime;
+                            frameTelemetryTimeSamples += 1;
+                            frameTelemetryWorst = Math.max(
+                                frameTelemetryWorst,
+                                drawFrameTime
+                            );
+                            if (drawFrameTime > 20) {
+                                frameTelemetryLongFrames += 1;
+                            }
+                            if (drawFrameTime > 34) {
+                                frameTelemetrySevereFrames += 1;
+                            }
+                        }
+                    }
+                    frameTelemetryLastDraw = now;
                 }
                 var telemetryDuration =
                     now - frameTelemetryStarted;
@@ -35709,13 +36033,40 @@
                     frameTelemetryDraws *
                     1000 /
                     telemetryDuration;
+                var averageFrameTime =
+                    frameTelemetryTimeSamples
+                        ? frameTelemetryTimeTotal /
+                            frameTelemetryTimeSamples
+                        : 0;
+                var frameQuality =
+                    frameTelemetrySevereFrames > 2 ||
+                    averageFrameTime > 24
+                        ? "poor"
+                        : frameTelemetryLongFrames > 5 ||
+                            averageFrameTime > 18.5
+                            ? "strained"
+                            : "good";
                 canvas.dataset.frameCallbackRate =
                     callbackRate.toFixed(1);
                 canvas.dataset.frameDrawRate =
                     drawRate.toFixed(1);
+                canvas.dataset.frameAverageMs =
+                    averageFrameTime.toFixed(2);
+                canvas.dataset.frameWorstMs =
+                    frameTelemetryWorst.toFixed(2);
+                canvas.dataset.frameLongFrames = String(
+                    frameTelemetryLongFrames
+                );
+                canvas.dataset.frameSevereFrames = String(
+                    frameTelemetrySevereFrames
+                );
+                canvas.dataset.frameQuality = frameQuality;
                 performanceTrialBadge.textContent =
                     frameMeterRequested
-                        ? "FPS " + Math.round(drawRate)
+                        ? "FPS " + Math.round(drawRate) +
+                            " // " + averageFrameTime.toFixed(1) +
+                            "ms // MAX " +
+                            frameTelemetryWorst.toFixed(1)
                         : (
                             desktopNoBlurTrial
                                 ? "No blur"
@@ -35730,6 +36081,11 @@
                 frameTelemetryStarted = now;
                 frameTelemetryCallbacks = 0;
                 frameTelemetryDraws = 0;
+                frameTelemetryTimeTotal = 0;
+                frameTelemetryTimeSamples = 0;
+                frameTelemetryWorst = 0;
+                frameTelemetryLongFrames = 0;
+                frameTelemetrySevereFrames = 0;
             }
 
             function frame(now) {
@@ -35976,6 +36332,48 @@
                             state === "prism-install" ||
                             state === "scripted-wound-defeat" ||
                             state === "surface-recovery"
+                    },
+                    performance: {
+                        profile:
+                            canvas.dataset.performanceProfile ||
+                            "unknown",
+                        mobileRuntime: Boolean(mobileRuntime),
+                        mobileProfileActive: mobilePerformanceMode,
+                        renderPixelRatio: Number(
+                            canvas.dataset.renderPixelRatio || 1
+                        ),
+                        effectsProfile:
+                            canvas.dataset.effectsProfile ||
+                            "default",
+                        drawRate: Number(
+                            canvas.dataset.frameDrawRate || 0
+                        ),
+                        averageFrameMs: Number(
+                            canvas.dataset.frameAverageMs || 0
+                        ),
+                        worstFrameMs: Number(
+                            canvas.dataset.frameWorstMs || 0
+                        ),
+                        longFrames: Number(
+                            canvas.dataset.frameLongFrames || 0
+                        ),
+                        severeFrames: Number(
+                            canvas.dataset.frameSevereFrames || 0
+                        ),
+                        quality:
+                            canvas.dataset.frameQuality ||
+                            "sampling",
+                        particles: particles.length,
+                        particleBudget: PARTICLE_BUDGET,
+                        particleBudgetDrops: particleBudgetDrops,
+                        playerProjectiles: bolts.length,
+                        playerProjectileBudget:
+                            PLAYER_PROJECTILE_BUDGET,
+                        playerProjectileBudgetDrops:
+                            playerProjectileBudgetDrops,
+                        arrivalAssets:
+                            canvas.dataset.arrivalDescentAssets ||
+                            "unreported"
                     },
                     menuScreen:
                         !titleScreen.hidden && state === "ready"

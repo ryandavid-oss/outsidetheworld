@@ -28,7 +28,7 @@ def main() -> None:
         "episodeBetaRun && !enemy.runtimeActive",
         "EPISODE_HOSTILE_PROJECTILE_BUDGET",
         "beamBoltHitsAtmosphereWall(\n                            orb,",
-        "orb.y < WORLD_HEIGHT + 80;",
+        "activeOrb.y < cameraY + HEIGHT + 100;",
         '"foundry-crossfire"',
         '"refinery-livewire"',
         '"pressure-purge"',
