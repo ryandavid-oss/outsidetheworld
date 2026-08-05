@@ -554,7 +554,7 @@ REQUIRED_SNIPPETS = {
         "Return this to Dras for further study."
     ),
     "laser damage": (
-        'takeHit("SEAM LASER")'
+        '"SEAM LASER",\n                                    hardMode'
     ),
     "boss-aware camera framing": (
         "woundBossPreview && framedWoundBoss"

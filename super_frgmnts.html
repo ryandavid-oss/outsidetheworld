@@ -646,6 +646,45 @@
             animation: none;
         }
 
+        .title-screen__controls .title-screen__difficulty {
+            min-width: 0;
+            margin: 0;
+            padding: 5px 10px;
+            border-color: rgba(119, 163, 255, 0.62);
+            background: rgba(5, 10, 25, 0.82);
+            color: var(--brand-light-blue);
+            font-size: clamp(7px, 0.78vw, 9px);
+            letter-spacing: 0.14em;
+        }
+
+        body.is-hard-mode .title-screen__controls .title-screen__difficulty {
+            border-color: var(--pink);
+            background:
+                linear-gradient(90deg, rgba(255, 105, 180, 0.18), rgba(255, 71, 26, 0.12)),
+                rgba(16, 4, 16, 0.9);
+            color: #ffd1e8;
+            box-shadow:
+                0 3px 0 var(--pixel-shadow),
+                0 0 18px rgba(255, 105, 180, 0.24);
+        }
+
+        .title-screen__difficulty-copy {
+            min-height: 1.45em;
+            margin: -2px 0 0;
+            color: var(--index-teal);
+            font-size: clamp(6px, 0.68vw, 8px);
+            letter-spacing: 0.1em;
+            line-height: 1.45;
+            text-align: center;
+            text-transform: uppercase;
+            opacity: 0.74;
+        }
+
+        body.is-hard-mode .title-screen__difficulty-copy {
+            color: #ff9acb;
+            opacity: 0.92;
+        }
+
         .title-screen__hint {
             margin: 0;
             max-width: 34em;
@@ -663,6 +702,7 @@
             margin: 2px 0 0;
             align-items: center;
             justify-content: center;
+            flex-wrap: wrap;
             gap: 5px;
             color: var(--index-teal);
             font-size: clamp(6px, 0.72vw, 8px);
@@ -691,6 +731,10 @@
         .title-screen__input-hint kbd[data-layout="standard"] {
             border-color: var(--index-teal);
             color: #b8fff4;
+        }
+
+        #titleDifficultyControllerHint {
+            flex-basis: 100%;
         }
 
         .title-screen.is-entering .title-screen__controls {
@@ -4350,10 +4394,22 @@
                         <p class="title-screen__season" id="titleSeason" hidden></p>
                         <p class="title-screen__hero"><strong>Arrival on Veyra</strong></p>
                         <button class="pixel-button" id="titleStartButton" type="button" disabled>Loading signal…</button>
+                        <button
+                            class="pixel-button title-screen__difficulty"
+                            id="titleDifficultyButton"
+                            type="button"
+                            aria-pressed="false"
+                        >Mode // Normal</button>
+                        <p
+                            class="title-screen__difficulty-copy"
+                            id="titleDifficultyCopy"
+                            aria-live="polite"
+                        >Standard hostile integrity</p>
                         <p class="title-screen__hint">A distress signal from a world the Fleet abandoned.</p>
                         <p class="title-screen__input-hint">
                             <kbd id="titleControllerHint">Cross / A</kbd>
                             <span>Enter / Space / Tap to start</span>
+                            <kbd id="titleDifficultyControllerHint">Triangle / Y mode</kbd>
                         </p>
                     </div>
                 </div>
@@ -4683,6 +4739,25 @@
             };
             var PACK_MODULES_STORAGE_KEY =
                 "super-frgmnts-pack-modules-v1";
+            var DIFFICULTY_STORAGE_KEY =
+                "super-frgmnts-difficulty-v1";
+
+            function readHardModePreference() {
+                var requestedDifficulty = (
+                    previewParameters.get("difficulty") || ""
+                ).toLowerCase();
+                if (requestedDifficulty === "hard") return true;
+                if (requestedDifficulty === "normal") return false;
+                try {
+                    return window.sessionStorage.getItem(
+                        DIFFICULTY_STORAGE_KEY
+                    ) === "hard";
+                } catch (error) {
+                    return false;
+                }
+            }
+
+            var hardMode = readHardModePreference();
 
             function normalizedBeamModuleSet(modules) {
                 if (!Beam) return new Set();
@@ -5281,6 +5356,9 @@
             // Seam Hunter is a four-stage duel. Each 50 damage removes a
             // quarter of its integrity and advances its aggression profile.
             var WOUND_BOSS_HEALTH = 200;
+            var HARD_MODE_ENEMY_HEALTH_MULTIPLIER = 3;
+            var HARD_MODE_WOUND_BOSS_BONUS_HEALTH = 200;
+            var HARD_MODE_WOUND_BOSS_DAMAGE = 2;
             var WOUND_BOSS_WALK_RENDER_SIZE = 448;
             var WOUND_BOSS_ATTACK_RENDER_WIDTH = 560;
             var WOUND_BOSS_ATTACK_DURATION = 1.65;
@@ -5772,12 +5850,22 @@
             var titleScreen = document.getElementById("titleScreen");
             var titleArtImage = document.querySelector(".title-screen__art");
             var titleStartButton = document.getElementById("titleStartButton");
+            var titleDifficultyButton = document.getElementById(
+                "titleDifficultyButton"
+            );
+            var titleDifficultyCopy = document.getElementById(
+                "titleDifficultyCopy"
+            );
             var titleSeason = document.getElementById("titleSeason");
             var titleInputHint = document.querySelector(
                 ".title-screen__input-hint"
             );
             var titleControllerHint =
                 document.getElementById("titleControllerHint");
+            var titleDifficultyControllerHint =
+                document.getElementById(
+                    "titleDifficultyControllerHint"
+                );
             var signalBoot = document.getElementById("signalBoot");
             var signalBootButton = document.getElementById("signalBootButton");
             var messageCard = document.getElementById("messageCard");
@@ -7343,6 +7431,14 @@
             );
             var heartPickups = [];
             var nextHealthPickupId = 0;
+            var ENEMY_HEALTH_DROP_CHANCE = 0.3;
+            var ENEMY_HEALTH_CORE_CHANCE = 0.12;
+            var ENEMY_HEALTH_DROP_BUDGET = mobilePerformanceMode
+                ? 5
+                : 8;
+            var enemyHealthDropRolls = 0;
+            var enemyHealthDropsSpawned = 0;
+            var enemyHealthDropsAbsorbed = 0;
             var lastDisplayedEnergy = null;
             var lastDisplayedMaximumEnergy = null;
             var healthQaStep = 0;
@@ -7796,7 +7892,7 @@
                     speaker: "ARYN SOL-MAVI",
                     role: "SIGNAL RANGER",
                     portrait: "aryn",
-                    text: "I won’t say no to honest money."
+                    text: "I won’t say no to honest money. Or a cold Diet Coke, if your emergency stores are feeling generous."
                 },
                 {
                     id: "D27",
@@ -9154,6 +9250,11 @@
                 platforms = buildExpansionPreviewPlatforms();
             }
 
+            // The painted vault catwalk decks sit below their bright handrail
+            // lines. Keep collision on the deck surface so Aryn's boots do not
+            // appear to rest on the rail or float above the artwork.
+            var MATERIAL_VAULT_CATWALK_COLLISION_SINK = 30;
+
             function buildMaterialVaultPlatforms() {
                 var vaultPlatforms = [
                     {
@@ -9173,7 +9274,9 @@
                 ].forEach(function (spec) {
                     vaultPlatforms.push({
                         x: spec[0],
-                        y: spec[1],
+                        y:
+                            spec[1] +
+                            MATERIAL_VAULT_CATWALK_COLLISION_SINK,
                         width: spec[2],
                         height: 24,
                         artIntegrated: true,
@@ -10153,6 +10256,13 @@
                 collected = 0;
                 hits = 0;
                 nextHealthPickupId = 0;
+                enemyHealthDropRolls = 0;
+                enemyHealthDropsSpawned = 0;
+                enemyHealthDropsAbsorbed = 0;
+                canvas.dataset.enemyHealthDropRolls = "0";
+                canvas.dataset.enemyHealthDrops = "0";
+                canvas.dataset.enemyHealthDropsAbsorbed = "0";
+                canvas.dataset.lastEnemyHealthDrop = "none";
                 lastDisplayedEnergy = null;
                 lastDisplayedMaximumEnergy = null;
                 healthQaStep = 0;
@@ -10987,6 +11097,7 @@
                 }
                 if (woundBossPreview) {
                     enemies = [makeWoundBoss()];
+                    applyEnemyDifficultyToRoster(enemies);
                     if (woundBossDamageQa && enemies[0]) {
                         enemies[0].health = Math.max(
                             1,
@@ -11019,6 +11130,7 @@
                     enemies = [];
                 }
                 assignEnemyIdentities(enemies);
+                applyEnemyDifficultyToRoster(enemies);
                 canvas.dataset.enemyRoster = enemies
                     .map(function (enemy) {
                         return enemy.type;
@@ -11139,8 +11251,9 @@
                 return { x: x, y: y, color: color, collected: false, bob: Math.random() * Math.PI * 2 };
             }
 
-            function makeHealthPickup(x, y, kind) {
+            function makeHealthPickup(x, y, kind, options) {
                 var pickupKind = kind === "core" ? "core" : "cell";
+                var pickupOptions = options || {};
                 nextHealthPickupId += 1;
                 return {
                     id: "health-pickup-" + nextHealthPickupId,
@@ -11149,8 +11262,97 @@
                     x: x,
                     y: y,
                     collected: false,
-                    bob: Math.random() * Math.PI * 2
+                    bob: Math.random() * Math.PI * 2,
+                    enemyDrop: Boolean(pickupOptions.enemyDrop),
+                    sourceEnemyId: pickupOptions.sourceEnemyId || "",
+                    age: 0,
+                    vx: Number(pickupOptions.vx) || 0,
+                    vy: Number(pickupOptions.vy) || 0
                 };
+            }
+
+            function activeEnemyHealthDropCount() {
+                return heartPickups.filter(function (pickup) {
+                    return pickup.enemyDrop && !pickup.collected;
+                }).length;
+            }
+
+            function maybeDropEnemyHealthPickup(enemy, forcedKind) {
+                if (
+                    !enemy ||
+                    enemy.woundBoss ||
+                    enemy.healthDropResolved
+                ) {
+                    return false;
+                }
+                enemy.healthDropResolved = true;
+                enemyHealthDropRolls += 1;
+                canvas.dataset.enemyHealthDropRolls = String(
+                    enemyHealthDropRolls
+                );
+                if (
+                    !forcedKind &&
+                    Math.random() >= ENEMY_HEALTH_DROP_CHANCE
+                ) {
+                    return false;
+                }
+                if (
+                    activeEnemyHealthDropCount() >=
+                    ENEMY_HEALTH_DROP_BUDGET
+                ) {
+                    return false;
+                }
+
+                var pickupKind = forcedKind === "core"
+                    ? "core"
+                    : forcedKind === "cell"
+                        ? "cell"
+                        : Math.random() < ENEMY_HEALTH_CORE_CHANCE
+                            ? "core"
+                            : "cell";
+                var pickup = makeHealthPickup(
+                    enemy.x + enemy.width / 2,
+                    enemy.y + enemy.height * 0.42,
+                    pickupKind,
+                    {
+                        enemyDrop: true,
+                        sourceEnemyId: enemy.id || "",
+                        vx: (Math.random() - 0.5) * 150,
+                        vy: -250 - Math.random() * 90
+                    }
+                );
+                heartPickups.push(pickup);
+                enemyHealthDropsSpawned += 1;
+                canvas.dataset.enemyHealthDrops = String(
+                    enemyHealthDropsSpawned
+                );
+                canvas.dataset.lastEnemyHealthDrop =
+                    pickup.kind + ":" + pickup.sourceEnemyId;
+                spawnBurst(
+                    pickup.x,
+                    pickup.y,
+                    pickup.kind === "core"
+                        ? "#4ec8ff"
+                        : "#65f27c",
+                    8
+                );
+                return true;
+            }
+
+            function placeQaEnemyHealthDrop(kind) {
+                return maybeDropEnemyHealthPickup(
+                    {
+                        id: "qa-health-drop-" +
+                            (enemyHealthDropRolls + 1),
+                        x: player.x + 180,
+                        y: player.y + 18,
+                        width: 72,
+                        height: 72,
+                        woundBoss: false,
+                        healthDropResolved: false
+                    },
+                    kind === "core" ? "core" : "cell"
+                );
             }
 
             function makeHeartPickup(x, y) {
@@ -12365,6 +12567,66 @@
                 });
                 canvas.dataset.enemyIdentityCount = String(
                     roster.length
+                );
+            }
+
+            function applyEnemyDifficulty(enemy) {
+                if (!enemy || enemy.difficultyConfigured) return;
+                var normalMaximum = Math.max(
+                    1,
+                    Number(enemy.maxHealth) || 1
+                );
+                var normalHealth = Math.max(
+                    0,
+                    Math.min(
+                        normalMaximum,
+                        Number.isFinite(enemy.health)
+                            ? enemy.health
+                            : normalMaximum
+                    )
+                );
+                enemy.normalMaxHealth = normalMaximum;
+                enemy.difficultyConfigured = true;
+                if (!hardMode) return;
+
+                var hardMaximum = enemy.woundBoss
+                    ? normalMaximum +
+                        HARD_MODE_WOUND_BOSS_BONUS_HEALTH
+                    : normalMaximum *
+                        HARD_MODE_ENEMY_HEALTH_MULTIPLIER;
+                var missingHealth = normalMaximum - normalHealth;
+                enemy.maxHealth = hardMaximum;
+                enemy.health = Math.max(
+                    0,
+                    hardMaximum - missingHealth
+                );
+                enemy.hardMode = true;
+                if (enemy.woundBoss) {
+                    canvas.dataset.woundBossHealth = String(
+                        enemy.health
+                    );
+                }
+                if (enemy.type === "patroller") {
+                    canvas.dataset.patrollerHealth = String(
+                        enemy.health
+                    );
+                }
+            }
+
+            function applyEnemyDifficultyToRoster(roster) {
+                roster.forEach(applyEnemyDifficulty);
+                canvas.dataset.difficulty = hardMode
+                    ? "hard"
+                    : "normal";
+                canvas.dataset.hardModeEnemyMultiplier = String(
+                    hardMode
+                        ? HARD_MODE_ENEMY_HEALTH_MULTIPLIER
+                        : 1
+                );
+                canvas.dataset.hardModeWoundBonus = String(
+                    hardMode
+                        ? HARD_MODE_WOUND_BOSS_BONUS_HEALTH
+                        : 0
                 );
             }
 
@@ -14545,6 +14807,7 @@
                     "<strong>Arrival on Veyra</strong>";
                 document.querySelector(".title-screen__hint").textContent =
                     "A distress signal from a world the Fleet abandoned.";
+                renderTitleDifficulty();
                 updateTitleInputHint(availableGamepad());
                 restoreTitleArtwork();
                 titleScreen.classList.remove("is-launching");
@@ -14594,7 +14857,10 @@
                 titleEntranceTimer = 0;
                 titleScreen.classList.remove("is-entering");
                 titleScreen.classList.add("is-launching");
-                announce("Opening Arrival on Veyra.");
+                announce(
+                    "Opening Arrival on Veyra. " +
+                    (hardMode ? "Hard Mode." : "Normal Mode.")
+                );
                 playSoundEffect("deepSelect");
                 if (soundOn) {
                     ensureAudio();
@@ -18673,6 +18939,7 @@
                     }
                 }
                 checkShards();
+                updateEnemyHealthPickups(delta);
                 checkHeartPickups();
                 updateEpisodeBetaItems(delta);
                 if (state !== "running") return;
@@ -19055,6 +19322,34 @@
                 });
             }
 
+            function updateEnemyHealthPickups(delta) {
+                var targetX = player.x + 56;
+                var targetY = player.y + 50;
+                heartPickups.forEach(function (pickup) {
+                    if (!pickup.enemyDrop || pickup.collected) return;
+                    pickup.age += delta;
+                    if (pickup.age < 0.28) {
+                        pickup.vy += 560 * delta;
+                        pickup.x += pickup.vx * delta;
+                        pickup.y += pickup.vy * delta;
+                        return;
+                    }
+
+                    var dx = targetX - pickup.x;
+                    var dy = targetY - pickup.y;
+                    var distance = Math.max(
+                        1,
+                        Math.sqrt(dx * dx + dy * dy)
+                    );
+                    var speed = Math.min(
+                        980,
+                        260 + (pickup.age - 0.28) * 620
+                    );
+                    pickup.x += dx / distance * speed * delta;
+                    pickup.y += dy / distance * speed * delta;
+                });
+            }
+
             function checkHeartPickups() {
                 var centerX = player.x + 56;
                 var centerY = player.y + 52;
@@ -19070,15 +19365,16 @@
                         MAX_HITS,
                         previousEnergy + pickup.restore
                     );
-                    if (restoredEnergy <= previousEnergy) {
-                        canvas.dataset.lastHealthPickup =
-                            pickup.kind + "-waiting-full";
-                        return;
-                    }
+                    var restoredPoints =
+                        restoredEnergy - previousEnergy;
 
                     pickup.collected = true;
                     hits = MAX_HITS - restoredEnergy;
-                    score += pickup.kind === "core" ? 500 : 150;
+                    score += restoredPoints > 0
+                        ? pickup.kind === "core"
+                            ? 500
+                            : 150
+                        : 40;
                     flashTime = Math.max(flashTime, 0.08);
                     spawnBurst(
                         pickup.x,
@@ -19089,19 +19385,43 @@
                     popups.push({
                         x: pickup.x,
                         y: pickup.y - 20,
-                        text: "+" + (restoredEnergy - previousEnergy) + " ENERGY",
+                        text: restoredPoints > 0
+                            ? "+" + restoredPoints + " ENERGY"
+                            : "ENERGY FULL // ABSORBED",
                         life: 1,
                         color: pickup.kind === "core" ? "#4ec8ff" : "#65f27c"
                     });
                     playSoundEffect("healthPickup");
-                    updateEnergyHud(true);
+                    if (restoredPoints > 0) {
+                        updateEnergyHud(true);
+                    }
                     canvas.dataset.lastHealthPickup =
-                        pickup.kind + "+" + (restoredEnergy - previousEnergy);
+                        pickup.kind +
+                        (restoredPoints > 0
+                            ? "+" + restoredPoints
+                            : "-absorbed-full");
+                    if (pickup.enemyDrop) {
+                        enemyHealthDropsAbsorbed += 1;
+                        canvas.dataset.enemyHealthDropsAbsorbed = String(
+                            enemyHealthDropsAbsorbed
+                        );
+                    }
                     announce(
                         (pickup.kind === "core" ? "Vitality Core" : "Vitality Cell") +
-                        " restored Energy. " + restoredEnergy + " of " + MAX_HITS + "."
+                        (restoredPoints > 0
+                            ? " restored Energy. " + restoredEnergy +
+                                " of " + MAX_HITS + "."
+                            : " absorbed. Energy is already full.")
                     );
                 });
+                heartPickups = heartPickups.filter(function (pickup) {
+                    return !(pickup.enemyDrop && pickup.collected);
+                });
+                canvas.dataset.visibleHealthPickups = String(
+                    heartPickups.filter(function (pickup) {
+                        return !pickup.collected;
+                    }).length
+                );
             }
 
             function updateHealthQaScenario() {
@@ -19165,6 +19485,11 @@
                     return;
                 }
 
+                if (healthQaMode === "manual") {
+                    canvas.dataset.healthQaComplete = "true";
+                    return;
+                }
+
                 if (healthQaStep !== 1 || elapsed < 0.12) return;
                 if (
                     healthQaMode === "critical" ||
@@ -19206,6 +19531,74 @@
                 );
                 canvas.dataset.healthQaComplete = "true";
                 healthQaStep = 2;
+            }
+
+            function handleHealthQaKey(event) {
+                if (!healthQaEnabled || event.repeat) return false;
+                if (event.code === "Digit1") {
+                    event.preventDefault();
+                    takeHit("QA CONTACT");
+                    return true;
+                }
+                if (event.code === "Digit0") {
+                    event.preventDefault();
+                    takeHit(
+                        "QA SEAM LASER",
+                        hardMode
+                            ? HARD_MODE_WOUND_BOSS_DAMAGE
+                            : 1
+                    );
+                    return true;
+                }
+                if (event.code === "Digit2") {
+                    event.preventDefault();
+                    invulnerableTime = 0;
+                    canvas.dataset.energyInvulnerability = "0.00";
+                    return true;
+                }
+                if (
+                    event.code === "Digit3" ||
+                    event.code === "Digit4"
+                ) {
+                    event.preventDefault();
+                    heartPickups = [
+                        makeHealthPickup(
+                            player.x + 56,
+                            player.y + 52,
+                            event.code === "Digit4" ? "core" : "cell"
+                        )
+                    ];
+                    checkHeartPickups();
+                    renderRequested = true;
+                    return true;
+                }
+                if (
+                    event.code === "Digit5" ||
+                    event.code === "Digit6" ||
+                    event.code === "Digit7"
+                ) {
+                    event.preventDefault();
+                    heartPickups = [];
+                    hits = event.code === "Digit5"
+                        ? 0
+                        : event.code === "Digit6"
+                            ? 2
+                            : 5;
+                    updateEnergyHud(true);
+                    return true;
+                }
+                if (
+                    event.code === "Digit8" ||
+                    event.code === "Digit9"
+                ) {
+                    event.preventDefault();
+                    placeQaEnemyHealthDrop(
+                        event.code === "Digit9" ? "core" : "cell"
+                    );
+                    renderRequested = true;
+                    return true;
+                }
+                return false;
             }
 
             function updateMovementQaScenario() {
@@ -23214,7 +23607,12 @@
                                 enemy.attackLanded = true;
                                 player.facing =
                                     player.x < woundCenterX ? 1 : -1;
-                                takeHit("SEAM SWEEP");
+                                takeHit(
+                                    "SEAM SWEEP",
+                                    hardMode
+                                        ? HARD_MODE_WOUND_BOSS_DAMAGE
+                                        : 1
+                                );
                             }
                         }
                         if (
@@ -23240,7 +23638,12 @@
                                     woundLaserEye.x
                                         ? 1
                                         : -1;
-                                takeHit("SEAM LASER");
+                                takeHit(
+                                    "SEAM LASER",
+                                    hardMode
+                                        ? HARD_MODE_WOUND_BOSS_DAMAGE
+                                        : 1
+                                );
                             }
                         }
                         if (overlaps) {
@@ -24739,6 +25142,9 @@
                 if (enemy.woundBoss) {
                     syncWoundBossDamagePhase(enemy, true);
                 }
+                if (enemy.health <= 0 && !enemy.woundBoss) {
+                    maybeDropEnemyHealthPickup(enemy);
+                }
 
                 if (enemy.maxHealth > 1 || enemy.woundBoss) {
                     enemy.hurtFlash = 0.14;
@@ -24941,9 +25347,13 @@
                 );
             }
 
-            function takeHit(label) {
+            function takeHit(label, damage) {
                 if (invulnerableTime > 0 || state !== "running") return;
-                hits = Math.min(MAX_HITS, hits + 1);
+                var damagePoints = Math.max(
+                    1,
+                    Math.round(Number(damage) || 1)
+                );
+                hits = Math.min(MAX_HITS, hits + damagePoints);
                 if (firstWoundEncounterActive()) {
                     hits = Math.min(MAX_HITS - 2, hits);
                 }
@@ -24955,10 +25365,23 @@
                 void stageShell.offsetWidth;
                 stageShell.classList.add("is-hit");
                 spawnBurst(player.x + 56, player.y + 68, "#ff69b4", 22);
-                popups.push({ x: player.x + 22, y: player.y - 8, text: label + " -4 SEC", life: 1.1, color: "#ff69b4" });
+                popups.push({
+                    x: player.x + 22,
+                    y: player.y - 8,
+                    text:
+                        label +
+                        " -" +
+                        damagePoints +
+                        " ENERGY",
+                    life: 1.1,
+                    color: "#ff69b4"
+                });
                 playTone(74, 0.18, "sawtooth", 0.05);
                 updateEnergyHud(true);
                 canvas.dataset.lastEnergyDamage = label;
+                canvas.dataset.lastEnergyDamagePoints = String(
+                    damagePoints
+                );
                 canvas.dataset.energyInvulnerability = invulnerableTime.toFixed(2);
                 announce(
                     label + ". " + currentEnergyPoints() +
@@ -33230,7 +33653,10 @@
                 heartPickups.forEach(function (pickup) {
                     if (pickup.collected) return;
 
-                    var bobY = pickup.y + Math.sin(elapsed * 3.6 + pickup.bob) * 7;
+                    var bobY = pickup.enemyDrop
+                        ? pickup.y
+                        : pickup.y +
+                            Math.sin(elapsed * 3.6 + pickup.bob) * 7;
                     var pulse = 0.72 + Math.sin(elapsed * 6.2 + pickup.bob) * 0.18;
                     var image = pickup.kind === "core"
                         ? assets.healthCore
@@ -33243,7 +33669,9 @@
                     ctx.translate(Math.round(pickup.x), Math.round(bobY));
 
                     ctx.globalCompositeOperation = "screen";
-                    ctx.globalAlpha = (hits > 0 ? 0.18 : 0.08) * pulse;
+                    ctx.globalAlpha =
+                        (pickup.enemyDrop || hits > 0 ? 0.18 : 0.08) *
+                        pulse;
                     ctx.fillStyle = pickupColor;
                     ctx.shadowColor = pickupColor;
                     ctx.shadowBlur = pickup.kind === "core" ? 22 : 18;
@@ -33251,7 +33679,10 @@
                     ctx.arc(0, 0, drawSize * 0.52, 0, Math.PI * 2);
                     ctx.fill();
                     ctx.globalCompositeOperation = "source-over";
-                    ctx.globalAlpha = hits > 0 ? 1 : 0.58;
+                    ctx.globalAlpha =
+                        pickup.enemyDrop || hits > 0
+                            ? 1
+                            : 0.58;
                     ctx.shadowBlur = 0;
 
                     if (image && image.complete && image.naturalWidth) {
@@ -33269,7 +33700,10 @@
                         ctx.fill();
                     }
 
-                    ctx.globalAlpha = hits > 0 ? 0.8 : 0.34;
+                    ctx.globalAlpha =
+                        pickup.enemyDrop || hits > 0
+                            ? 0.8
+                            : 0.34;
                     ctx.fillStyle = "#ffffff";
                     ctx.fillRect(drawSize * 0.54, -drawSize * 0.48, 4, 4);
                     ctx.fillRect(drawSize * 0.66, -drawSize * 0.6, 2, 2);
@@ -34276,50 +34710,6 @@
                 ) {
                     return;
                 }
-                if (healthQaEnabled && !event.repeat) {
-                    if (event.code === "Digit1") {
-                        event.preventDefault();
-                        takeHit("QA CONTACT");
-                        return;
-                    }
-                    if (event.code === "Digit2") {
-                        event.preventDefault();
-                        invulnerableTime = 0;
-                        canvas.dataset.energyInvulnerability = "0.00";
-                        return;
-                    }
-                    if (
-                        event.code === "Digit3" ||
-                        event.code === "Digit4"
-                    ) {
-                        event.preventDefault();
-                        heartPickups = [
-                            makeHealthPickup(
-                                player.x + 56,
-                                player.y + 52,
-                                event.code === "Digit4" ? "core" : "cell"
-                            )
-                        ];
-                        checkHeartPickups();
-                        renderRequested = true;
-                        return;
-                    }
-                    if (
-                        event.code === "Digit5" ||
-                        event.code === "Digit6" ||
-                        event.code === "Digit7"
-                    ) {
-                        event.preventDefault();
-                        heartPickups = [];
-                        hits = event.code === "Digit5"
-                            ? 0
-                            : event.code === "Digit6"
-                                ? 2
-                                : 5;
-                        updateEnergyHud(true);
-                        return;
-                    }
-                }
                 if (
                     idleMusicChannel.dataset.scene ===
                         nextScene &&
@@ -34903,7 +35293,11 @@
             }
 
             function updateTitleInputHint(gamepad) {
-                if (!titleInputHint || !titleControllerHint) return;
+                if (
+                    !titleInputHint ||
+                    !titleControllerHint ||
+                    !titleDifficultyControllerHint
+                ) return;
                 var controllerLabel = gamepad
                     ? gamepadIsPlayStation(gamepad)
                         ? "Cross"
@@ -34916,11 +35310,77 @@
                     : "universal";
                 titleControllerHint.textContent = controllerLabel;
                 titleControllerHint.dataset.layout = controllerLayout;
+                titleDifficultyControllerHint.textContent = gamepad
+                    ? gamepadIsPlayStation(gamepad)
+                        ? "Triangle mode"
+                        : "Y mode"
+                    : "Triangle / Y mode";
+                titleDifficultyControllerHint.dataset.layout =
+                    controllerLayout;
                 titleInputHint.setAttribute(
                     "aria-label",
                     controllerLabel +
-                        ", Enter, Space, or tap to start"
+                        ", Enter, Space, or tap to start. Triangle or Y changes difficulty."
                 );
+            }
+
+            function persistDifficulty() {
+                try {
+                    window.sessionStorage.setItem(
+                        DIFFICULTY_STORAGE_KEY,
+                        hardMode ? "hard" : "normal"
+                    );
+                } catch (error) {}
+            }
+
+            function renderTitleDifficulty() {
+                document.body.classList.toggle(
+                    "is-hard-mode",
+                    hardMode
+                );
+                canvas.dataset.difficulty = hardMode
+                    ? "hard"
+                    : "normal";
+                if (!titleDifficultyButton || !titleDifficultyCopy) {
+                    return;
+                }
+                titleDifficultyButton.textContent = hardMode
+                    ? "Mode // Hard"
+                    : "Mode // Normal";
+                titleDifficultyButton.setAttribute(
+                    "aria-pressed",
+                    String(hardMode)
+                );
+                titleDifficultyButton.setAttribute(
+                    "aria-label",
+                    hardMode
+                        ? "Hard Mode selected. Activate to choose Normal Mode."
+                        : "Normal Mode selected. Activate to choose Hard Mode."
+                );
+                titleDifficultyCopy.textContent = hardMode
+                    ? "3× hostile integrity // Seam Hunter +200"
+                    : "Standard hostile integrity";
+            }
+
+            function setHardMode(enabled, shouldAnnounce) {
+                hardMode = Boolean(enabled);
+                persistDifficulty();
+                renderTitleDifficulty();
+                if (!shouldAnnounce) return;
+                playSoundEffect("packMenuSwitch", 0.72);
+                announce(
+                    hardMode
+                        ? "Hard Mode selected. Hostiles have triple integrity. Seam Hunter integrity and damage are amplified."
+                        : "Normal Mode selected."
+                );
+            }
+
+            function toggleHardMode() {
+                if (titleScreen.hidden || state !== "ready") {
+                    return false;
+                }
+                setHardMode(!hardMode, true);
+                return true;
             }
 
             function updateControllerHelp(gamepad) {
@@ -35248,7 +35708,9 @@
                     gamepadInput.right = false;
                     gamepadInput.down = false;
                     gamepadInput.shoot = false;
-                    if (confirmPressed) {
+                    if (packPressed) {
+                        toggleHardMode();
+                    } else if (confirmPressed) {
                         activateTitleAction();
                     }
                 } else if (state === "boss-intro") {
@@ -35512,6 +35974,7 @@
             });
 
             window.addEventListener("keydown", function (event) {
+                if (handleHealthQaKey(event)) return;
                 if (!episodeBridge.hidden) {
                     if (
                         !event.repeat &&
@@ -35553,6 +36016,9 @@
                     state === "ready" &&
                     (event.code === "Enter" || event.code === "Space")
                 ) {
+                    if (document.activeElement === titleDifficultyButton) {
+                        return;
+                    }
                     event.preventDefault();
                     if (!event.repeat) activateTitleAction();
                     return;
@@ -35845,7 +36311,12 @@
                 });
             });
 
+            renderTitleDifficulty();
             titleStartButton.addEventListener("click", activateTitleAction);
+            titleDifficultyButton.addEventListener(
+                "click",
+                toggleHardMode
+            );
             startButton.addEventListener("click", function () {
                 if (startButton.dataset.surfaceReturn === "true") {
                     returnToSurfaceAfterMission();
@@ -36192,6 +36663,12 @@
                         id: pickup.id,
                         kind: pickup.kind,
                         restoration: pickup.restore,
+                        source: pickup.enemyDrop
+                            ? "enemy-drop"
+                            : "placed",
+                        homing: Boolean(
+                            pickup.enemyDrop && !pickup.collected
+                        ),
                         visible: visible,
                         inViewport:
                             visible &&
@@ -36380,6 +36857,18 @@
                             ? pauseMenuScreen
                             : "gameplay",
                     menuFocus: focusedMenuControl,
+                    difficulty: {
+                        mode: hardMode ? "hard" : "normal",
+                        enemyHealthMultiplier: hardMode
+                            ? HARD_MODE_ENEMY_HEALTH_MULTIPLIER
+                            : 1,
+                        seamHunterBonusHealth: hardMode
+                            ? HARD_MODE_WOUND_BOSS_BONUS_HEALTH
+                            : 0,
+                        seamHunterDamage: hardMode
+                            ? HARD_MODE_WOUND_BOSS_DAMAGE
+                            : 1
+                    },
                     discoveredModules: discoveredBeamModules,
                     enabledModules: enabledBeamModules,
                     Energy: currentEnergyPoints(),
@@ -36514,6 +37003,12 @@
                     visibleHealthPickups: pickupState.filter(function (pickup) {
                         return pickup.visible;
                     }),
+                    enemyHealthDrops: {
+                        chance: ENEMY_HEALTH_DROP_CHANCE,
+                        active: activeEnemyHealthDropCount(),
+                        spawned: enemyHealthDropsSpawned,
+                        absorbed: enemyHealthDropsAbsorbed
+                    },
                     creditCrates: creditCrates.map(function (crate) {
                         return {
                             id: crate.id,
@@ -36574,6 +37069,11 @@
                         );
                         renderRequested = true;
                         return pickup.id;
+                    },
+                    placeEnemyDrop: function (kind) {
+                        var spawned = placeQaEnemyHealthDrop(kind);
+                        renderRequested = true;
+                        return spawned;
                     }
                 };
             }

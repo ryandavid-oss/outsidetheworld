@@ -49,6 +49,8 @@ def main() -> None:
         "? buildWoundBossPlatforms()",
         'var isVault = scene === "vault";',
         'isVault\n                            ? "foundry"',
+        "var MATERIAL_VAULT_CATWALK_COLLISION_SINK = 30;",
+        "spec[1] +\n                            MATERIAL_VAULT_CATWALK_COLLISION_SINK",
         "function beginEpisodeApproach()",
         "function beginWoundDescentBridge()",
         'routeStage === "wound"',
@@ -221,6 +223,7 @@ def main() -> None:
     print("- Wound-touched Vesperite recovery is the completion condition")
     print("- a locked black transition returns Aryn to the Veyra surface")
     print("- the returned player cannot re-enter the Foundry transport")
+    print("- painted vault catwalk collision rests on the visible deck surface")
 
 
 if __name__ == "__main__":
