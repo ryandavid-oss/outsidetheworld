@@ -15,6 +15,7 @@ PANELS = (
     "aryn-prism-comic-panel-02-diet-coke-drink-v1.png",
     "aryn-prism-comic-panel-03-diet-coke-activate-v3.png",
 )
+PICKUP = "prism-diet-coke-pickup-runtime-v1.png"
 
 
 def require(condition: bool, message: str) -> None:
@@ -32,6 +33,17 @@ def png_size(path: Path) -> tuple[int, int]:
 def main() -> None:
     source = GAME.read_text(encoding="utf-8")
 
+    pickup_path = ASSET_ROOT / PICKUP
+    require(pickup_path.exists(), f"Missing Diet Coke pickup: {PICKUP}")
+    require(
+        png_size(pickup_path) == (256, 256),
+        f"Unexpected Diet Coke pickup size: {PICKUP}",
+    )
+    require(
+        f'/Images/Game/Super-Frgmnts/{PICKUP}' in source,
+        "Diet Coke pickup is not wired into the runtime",
+    )
+
     for panel in PANELS:
         path = ASSET_ROOT / panel
         require(path.exists(), f"Missing approved Prism panel: {panel}")
@@ -45,7 +57,9 @@ def main() -> None:
         )
 
     required_runtime_tokens = (
-        'makeBetaPickup("prism", 1338, 1450)',
+        'makeBetaPickup("prism", WIDTH + 520, 1318)',
+        'makeShard(1338, 1450, "#ff69b4")',
+        'makeBetaPickup("jetpack", WIDTH * 2 + 810, 280)',
         'enemy.encounterId === "intake-sweep"',
         "intakeDefenders.every(function (enemy)",
         "return !enemy.alive;",
@@ -56,6 +70,9 @@ def main() -> None:
         'syncEpisodeBeamProgression("prismSplinter");',
         'canvas.dataset.prismInstallPanel = "reach";',
         "PRISM_INSTALL_PANEL_NAMES",
+        '? "DIET COKE"',
+        '"Diet Coke acquired. Prism Splinter installation sequence.',
+        'playSoundEffect("packLaserShot");',
     )
     for token in required_runtime_tokens:
         require(token in source, f"Missing Prism cinematic contract: {token}")
@@ -71,9 +88,20 @@ def main() -> None:
             f"Obsolete Prism panel is still wired into the runtime: {panel}",
         )
 
+    require(
+        'makeShard(WIDTH + 720, 1318, "#ff69b4")' not in source,
+        "The old lower-deck jewel still occupies the Diet Coke pickup location",
+    )
+    require(
+        ': blasterTier >= 2' not in source,
+        "Seeker tier still changes the normal PACK firing cue",
+    )
+
     print("SUPER FRGMNTS first-run Prism cinematic: PASS")
+    print("- the lower-deck jewel is now a recognizable Diet Coke pickup")
+    print("- the pickup is encountered after intake without backtracking")
+    print("- Vesperite tier changes no longer swap the normal PACK firing cue")
     print("- all three approved Diet Coke panels are wired at 1672 x 941")
-    print("- the pickup remains beyond the first underground intake fight")
     print("- the cinematic freezes gameplay and commits Prism progression once")
     print("- later visits cannot replay the acquisition sequence")
 

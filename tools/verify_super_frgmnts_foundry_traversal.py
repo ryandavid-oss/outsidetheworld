@@ -170,7 +170,7 @@ def main() -> None:
         "enemy.pressureShooter",
         "Production progression is PACK-only.",
         'return riflePreview;',
-        'makeBetaPickup("jetpack", WIDTH * 2 + 470, 280)',
+        'makeBetaPickup("jetpack", WIDTH * 2 + 810, 280)',
         "var atmosphereLockCycleQa =",
         'canvas.dataset.falseAffordanceCleanup',
         "var falseAffordanceQa =",

@@ -6738,7 +6738,7 @@
                     priority: "high"
                 },
                 prismPickup: {
-                    source: "/Images/Game/Super-Frgmnts/prism-splinter-pickup-v1.png",
+                    source: "/Images/Game/Super-Frgmnts/prism-diet-coke-pickup-runtime-v1.png",
                     priority: "high"
                 },
                 prismComicReach: {
@@ -10301,9 +10301,9 @@
                                 ? 1110
                             : 134
                     : prismInstallQa
-                        ? 1240
+                        ? WIDTH + 420
                     : prismPickupQa
-                        ? 1160
+                        ? WIDTH + 342
                     : foundryUplinkQa
                         ? WIDTH * 7 + 1120
                     : completionCollisionQa
@@ -11390,7 +11390,7 @@
                 shards = [
                     makeShard(438, 1462, "#58f5df"),
                     makeShard(966, 1200, "#ffd36c"),
-                    makeShard(WIDTH + 720, 1318, "#ff69b4"),
+                    makeShard(1338, 1450, "#ff69b4"),
                     makeShard(WIDTH + 740, 584, "#58f5df"),
                     makeShard(WIDTH * 2 + 420, 1456, "#ffd36c"),
                     makeShard(WIDTH * 2 + 1160, 1078, "#58f5df"),
@@ -11407,11 +11407,11 @@
                     makeHeartPickup(WIDTH * 6 + 1340, 970)
                 ];
                 betaPickups = [
-                    makeBetaPickup("jetpack", WIDTH * 2 + 470, 280)
+                    makeBetaPickup("jetpack", WIDTH * 2 + 810, 280)
                 ];
                 if (!episodeProgress.prismInstalled) {
                     betaPickups.push(
-                        makeBetaPickup("prism", 1338, 1450)
+                        makeBetaPickup("prism", WIDTH + 520, 1318)
                     );
                 }
                 creditCrates = makeFoundryCreditCrates();
@@ -19599,7 +19599,7 @@
                 playTone(196, 0.18, "sine", 0.024);
                 playTone(294, 0.24, "sine", 0.018, 0.08);
                 announce(
-                    "Prism Splinter installation sequence. Press jump or fire to advance; Escape or controller back skips."
+                    "Diet Coke acquired. Prism Splinter installation sequence. Press jump or fire to advance; Escape or controller back skips."
                 );
             }
 
@@ -19955,7 +19955,7 @@
                             ? "DEEPWORKS // RECOVER FRAGMENT"
                             : "DEEPWORKS // SALVAGE";
                 } else if (prismPickupReady) {
-                    objective = "INTAKE // RECOVER PRISM SPLINTER";
+                    objective = "INTAKE // RECOVER DIET COKE";
                 } else if (
                     foundryStabilizer &&
                     !foundryStabilizer.active
@@ -23754,13 +23754,9 @@
                             : "heavyRifleShot"
                     );
                 } else {
-                    playSoundEffect(
-                        (chargeFraction || 0) >= 0.34
-                            ? "packLaserShot"
-                            : blasterTier >= 2
-                            ? "packLaserQuick"
-                            : "packLaserShot"
-                    );
+                    // Fragment tiers may improve the beam, but they should not
+                    // make Aryn's familiar PACK report change mid-run.
+                    playSoundEffect("packLaserShot");
                 }
             }
 
@@ -30007,7 +30003,7 @@
                         ctx.shadowBlur = available ? 8 : 0;
                         ctx.fillText(
                             available
-                                ? "PRISM SPLINTER"
+                                ? "DIET COKE"
                                 : "CLEAR INTAKE DEFENDERS",
                             pickup.x,
                             pickup.y - 54 + bob
