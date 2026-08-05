@@ -92,7 +92,7 @@ def main() -> None:
         "activateTitleAction()",
         "function beginEpisodeApproach()",
         'showEpisodeBridge("approach", "overworld")',
-        "loadAndConfigureEpisodeScene(\"foundry\")",
+        "beginTitleLaunchTransition()",
         'event.code === "Enter" || event.code === "Space"',
         "Opening Arrival on Veyra.",
         'data-title-track="/Audio/super-frgmnts-title-cue.mp3"',

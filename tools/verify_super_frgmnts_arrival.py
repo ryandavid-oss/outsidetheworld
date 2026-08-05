@@ -56,7 +56,7 @@ def main() -> None:
     expected_ids = (
         [f"D{index:02d}" for index in range(1, 7)]
         + ["D09", "D10"]
-        + [f"D{index:02d}" for index in range(19, 37)]
+        + [f"D{index:02d}" for index in range(19, 40)]
     )
     require(
         card_ids == expected_ids,
@@ -66,7 +66,7 @@ def main() -> None:
     runtime_deck = source.split(
         "var dialogueCards = [",
         1,
-    )[1].split("var returnDialogueCards = [", 1)[0]
+    )[1].split("var legacyReturnDialogueCards = [", 1)[0]
     runtime_cards = [
         (card_id, speaker, json.loads(f'"{text}"'))
         for card_id, speaker, text in re.findall(
@@ -139,7 +139,7 @@ def main() -> None:
         "overworld: 0.29",
         "foundry: 0.32",
         "function configureEpisodeScene(scene, historyMode, sceneOptions)",
-        'loadAndConfigureEpisodeScene("foundry")',
+        "loadAndConfigureEpisodeScene(destination);",
         "var overworldAnchor",
         "(0.48 - 0.7)",
         "portalCharge",
@@ -243,7 +243,7 @@ def main() -> None:
         )
 
     print("Arrival on Veyra contract passed.")
-    print("- runtime speaker and copy match all 26 revised arrival cards exactly")
+    print("- runtime speaker and copy match all 29 revised arrival cards exactly")
     print("- Field Relay, skip confirmation, and accessibility hooks are present")
     print("- purpose-built close portraits and narrated tremor context are present")
     print("- Dras's boots align with Aryn's visible running plane")

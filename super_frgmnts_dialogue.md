@@ -72,21 +72,30 @@ My mind was made up before the credits.
 Where do I start?
 
 **D32 · DRAS EHDRE** — Coreworks Foreman
-The Foundry. Bring both atmospheric stabilizers online and clear the infestation. Recover any lingering Vesperite fragments—their residual harmonics may tell us where it began.
+The Foundry. But not with your pack in its present state. Half the old routes are sealed behind plating and collapsed decks.
 
 **D33 · ARYN SOL-MAVI** — Signal Ranger
-And the portal?
+My beam was designed not to pass through bulkheads. Most crews consider that a feature.
 
 **D34 · DRAS EHDRE** — Coreworks Foreman
+The survey rigs used a phase lattice called Ghost Vector. It let a cutting beam slip through dead material before it resolved. I kept the pattern and enough lattice grain for one installation.
+
+**D35 · ARYN SOL-MAVI** — Signal Ranger
+You want to rebuild my pack before I step through your homicidal portal.
+
+**D36 · DRAS EHDRE** — Coreworks Foreman
+I want to give you the material and let you rebuild it. Your ship has a cleaner bench than anything left here.
+
+**D37 · ARYN SOL-MAVI** — Signal Ranger
+Good answer. I trust my own hands.
+
+**D38 · DRAS EHDRE** — Coreworks Foreman
 *Runtime cue: look toward portal*
-It still opens.
+Install Ghost Vector aboard the RD-42. Then bring both atmospheric stabilizers online, recover the twelve loose fragments, and follow their pulse to its source.
 
-**D35 · DRAS EHDRE** — Coreworks Foreman
-It just hasn’t brought anyone back.
-
-**D36 · ARYN SOL-MAVI** — Signal Ranger
+**D39 · ARYN SOL-MAVI** — Signal Ranger
 *Runtime cue: prime portal*
-Then let’s improve its record.
+Hold the portal. I’ll bring it a better gun.
 
 ## Encounter Two — Return from the Coreworks
 
