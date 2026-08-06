@@ -287,6 +287,8 @@ def main() -> None:
         "FOUNDRY_REFINERY_WALL_WIDTH = 128",
         "function drawFoundryAtmosphereLockForeground()",
         "drawFoundryAtmosphereLockForeground();",
+        'if (portal.id === "biolab-uplink")',
+        '"THIS DAMN DOOR"',
         '"seven-concrete-foregrounds-single-pass-v2"',
         "canvas.dataset.atmosphereWallCompositing",
         '"single-full-height-foreground-pass"',

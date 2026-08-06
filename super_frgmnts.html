@@ -1575,6 +1575,15 @@
             outline-offset: 3px;
         }
 
+        .message-actions .pixel-button.is-menu-focus,
+        .dialogue-skip-confirm .pixel-button.is-menu-focus {
+            border-color: var(--cyan);
+            color: var(--cream);
+            outline: 3px solid rgba(88, 245, 223, 0.82);
+            outline-offset: 4px;
+            transform: translateY(-1px);
+        }
+
         @media (max-width: 1000px) {
             .pack-module-grid {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1966,6 +1975,32 @@
             flex-wrap: wrap;
             justify-content: center;
             gap: 10px;
+        }
+
+        .dialogue-skip-confirm .dialogue-skip-controls {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 7px 14px;
+            color: var(--brand-teal);
+            font-size: clamp(7px, 0.8vw, 9px);
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .dialogue-skip-controls span {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .dialogue-skip-controls kbd {
+            padding: 3px 6px;
+            border: 1px solid rgba(160, 190, 245, 0.62);
+            background: rgba(27, 54, 93, 0.52);
+            color: var(--brand-light-blue);
+            font: inherit;
         }
 
         body.is-dialogue .touch-controls {
@@ -4305,7 +4340,7 @@
                         aria-keyshortcuts="Enter"
                     >
                         Skip
-                        <span>Enter / Start</span>
+                        <span>Cross / Options / Enter</span>
                     </button>
                 </section>
 
@@ -4480,6 +4515,9 @@
                                 <button class="pause-menu-button" id="pausePackButton" type="button">
                                     PACK Configuration
                                 </button>
+                                <button class="pause-menu-button" id="pauseSoundButton" type="button" aria-pressed="true">
+                                    Sound // On
+                                </button>
                                 <button class="pause-menu-button pause-menu-button--danger" id="pauseRestartButton" type="button">
                                     Restart Checkpoint
                                 </button>
@@ -4643,6 +4681,11 @@
                                     Keep listening
                                 </button>
                             </div>
+                            <p class="dialogue-skip-controls" aria-label="Controller controls">
+                                <span><kbd>D-PAD</kbd> Select</span>
+                                <span><kbd>CROSS</kbd> Confirm</span>
+                                <span><kbd>CIRCLE</kbd> Back</span>
+                            </p>
                         </div>
                     </section>
                 </div>
@@ -5888,6 +5931,8 @@
                 document.getElementById("pauseResumeButton");
             var pausePackButton =
                 document.getElementById("pausePackButton");
+            var pauseSoundButton =
+                document.getElementById("pauseSoundButton");
             var pauseRestartButton =
                 document.getElementById("pauseRestartButton");
             var pauseTitleButton =
@@ -7057,6 +7102,7 @@
             var gamepadMenuRepeatStartedAt = 0;
             var gamepadMenuRepeatLastAt = 0;
             var gamepadMenuReleaseRequired = false;
+            var gamepadChoiceContext = "";
             var gamepadGameplayReleaseRequired = false;
             var connectedGamepadId = "";
             var controllerHelpKey = "";
@@ -7160,6 +7206,20 @@
                 soundButton.title = soundOn
                     ? "Mute sound"
                     : "Enable sound";
+                if (pauseSoundButton) {
+                    pauseSoundButton.textContent =
+                        "Sound // " + (soundOn ? "On" : "Off");
+                    pauseSoundButton.setAttribute(
+                        "aria-pressed",
+                        String(soundOn)
+                    );
+                    pauseSoundButton.setAttribute(
+                        "aria-label",
+                        soundOn
+                            ? "Sound on. Mute sound"
+                            : "Sound off. Enable sound"
+                    );
+                }
             }
             renderSoundButton();
             var resumeMusicAfterFocus = false;
@@ -10246,6 +10306,8 @@
                     ? "gameplay"
                     : "ready";
                 canvas.dataset.packMenuFocus = "none";
+                canvas.dataset.dialogueSkipFocus = "none";
+                canvas.dataset.messageMenuFocus = "none";
                 renderPackConfiguration();
                 document.body.classList.toggle("is-running", autostart);
                 setPauseButton(false, autostart);
@@ -15086,6 +15148,8 @@
                 dialogueSignal.textContent = "Fleet link // Secure";
                 dialogueSignal.classList.remove("is-disconnected");
                 dialogueSkipConfirm.hidden = true;
+                clearControllerChoiceFocus(dialogueSkipConfirm);
+                canvas.dataset.dialogueSkipFocus = "none";
                 dialogueLayer.hidden = false;
                 setPauseButton(false, false);
                 renderDialogueCard();
@@ -15107,6 +15171,8 @@
                 dialogueSkipOpen = false;
                 dialogueLayer.hidden = true;
                 dialogueSkipConfirm.hidden = true;
+                clearControllerChoiceFocus(dialogueSkipConfirm);
+                canvas.dataset.dialogueSkipFocus = "none";
                 document.body.classList.remove("is-dialogue", "is-dialogue-tremor");
                 state = "running";
                 document.body.classList.add("is-running");
@@ -15217,9 +15283,13 @@
                         ? "Skip the surface report and continue to the ending?"
                         : "Skip this conversation and continue the current objective?";
                 dialogueSkipConfirm.hidden = false;
-                dialogueReturn.focus();
+                controllerHelpKey = "";
+                gamepadMenuReleaseRequired = true;
+                resetGamepadMenuRepeat();
+                focusDialogueSkipControl(dialogueReturn);
                 announce(
-                    "Skip " + dialogueModeTitle() + "?"
+                    "Skip " + dialogueModeTitle() +
+                        "? Keep listening selected. Use the directional pad to choose and Cross to confirm."
                 );
             }
 
@@ -15228,6 +15298,10 @@
                 playSoundEffect("deepSelect");
                 dialogueSkipOpen = false;
                 dialogueSkipConfirm.hidden = true;
+                clearControllerChoiceFocus(dialogueSkipConfirm);
+                canvas.dataset.dialogueSkipFocus = "none";
+                controllerHelpKey = "";
+                resetGamepadMenuRepeat();
                 dialogueContinue.focus();
             }
 
@@ -15775,6 +15849,114 @@
                         nextControl.id ||
                         "unknown";
                 }
+            }
+
+            function controllerChoiceFocusableElements(scope) {
+                if (!scope) return [];
+                return Array.from(
+                    scope.querySelectorAll("button:not([disabled])")
+                ).filter(function (button) {
+                    return !button.hidden;
+                });
+            }
+
+            function clearControllerChoiceFocus(scope) {
+                if (!scope) return;
+                scope
+                    .querySelectorAll(".is-menu-focus")
+                    .forEach(function (control) {
+                        control.classList.remove("is-menu-focus");
+                    });
+            }
+
+            function focusControllerChoiceControl(
+                scope,
+                preferredControl,
+                fallbackControl
+            ) {
+                var focusable =
+                    controllerChoiceFocusableElements(scope);
+                var nextControl = preferredControl &&
+                    focusable.indexOf(preferredControl) >= 0
+                    ? preferredControl
+                    : fallbackControl &&
+                        focusable.indexOf(fallbackControl) >= 0
+                        ? fallbackControl
+                        : focusable[0];
+                clearControllerChoiceFocus(scope);
+                if (nextControl) {
+                    nextControl.focus({ preventScroll: true });
+                    nextControl.classList.add("is-menu-focus");
+                }
+                return nextControl || null;
+            }
+
+            function focusDialogueSkipControl(preferredControl) {
+                var nextControl = focusControllerChoiceControl(
+                    dialogueSkipConfirm,
+                    preferredControl,
+                    dialogueReturn
+                );
+                canvas.dataset.dialogueSkipFocus = nextControl
+                    ? nextControl.id
+                    : "none";
+                return nextControl;
+            }
+
+            function moveDialogueSkipFocus(direction) {
+                var focusable = controllerChoiceFocusableElements(
+                    dialogueSkipConfirm
+                );
+                if (!focusable.length) return;
+                var currentIndex = focusable.indexOf(
+                    document.activeElement
+                );
+                var step =
+                    direction === "up" || direction === "left"
+                        ? -1
+                        : 1;
+                var nextIndex = currentIndex < 0
+                    ? focusable.indexOf(dialogueReturn)
+                    : (
+                        currentIndex + step + focusable.length
+                    ) % focusable.length;
+                focusDialogueSkipControl(
+                    focusable[Math.max(0, nextIndex)]
+                );
+            }
+
+            function messageCardFocusableElements() {
+                return controllerChoiceFocusableElements(messageCard);
+            }
+
+            function focusMessageCardControl(preferredControl) {
+                var nextControl = focusControllerChoiceControl(
+                    messageCard,
+                    preferredControl,
+                    startButton
+                );
+                canvas.dataset.messageMenuFocus = nextControl
+                    ? nextControl.id
+                    : "none";
+                return nextControl;
+            }
+
+            function moveMessageCardFocus(direction) {
+                var focusable = messageCardFocusableElements();
+                if (!focusable.length) return;
+                var currentIndex = focusable.indexOf(
+                    document.activeElement
+                );
+                var step =
+                    direction === "up" || direction === "left"
+                        ? -1
+                        : 1;
+                var nextIndex = currentIndex < 0
+                    ? 0
+                    : (
+                        currentIndex + step + focusable.length
+                    ) % focusable.length;
+                focusMessageCardControl(focusable[nextIndex]);
             }
 
             function setPauseMenuScreen(nextScreen, preferredControl) {
@@ -31264,6 +31446,75 @@
                             WORLD_HEIGHT
                         );
                     }
+
+                    if (portal.id === "biolab-uplink") {
+                        var signBounds =
+                            atmosphereLockVisualBounds(portal);
+                        var signWidth = 154;
+                        var signHeight = 34;
+                        var signX =
+                            portal.anchor.boundaryX -
+                            signWidth / 2;
+                        var signY = Math.max(
+                            18,
+                            signBounds.top - 50
+                        );
+                        var signFlash =
+                            Math.floor(elapsed * 3.2) % 5 !== 4;
+                        var neonColor = signFlash
+                            ? "#ff69b4"
+                            : "#673654";
+
+                        ctx.fillStyle = "#050713";
+                        ctx.fillRect(
+                            signX,
+                            signY,
+                            signWidth,
+                            signHeight
+                        );
+                        ctx.fillStyle = "#152138";
+                        ctx.fillRect(
+                            signX + 4,
+                            signY + 4,
+                            signWidth - 8,
+                            signHeight - 8
+                        );
+                        ctx.strokeStyle = neonColor;
+                        ctx.lineWidth = 3;
+                        ctx.strokeRect(
+                            signX + 1.5,
+                            signY + 1.5,
+                            signWidth - 3,
+                            signHeight - 3
+                        );
+                        ctx.fillStyle = signFlash
+                            ? "#ffd9ee"
+                            : "#8f607a";
+                        ctx.font =
+                            '700 14px "Fira Code", monospace';
+                        ctx.textAlign = "center";
+                        ctx.textBaseline = "middle";
+                        ctx.fillText(
+                            "THIS DAMN DOOR",
+                            portal.anchor.boundaryX,
+                            signY + signHeight / 2 + 1
+                        );
+                        ctx.fillStyle = signFlash
+                            ? "#58f5df"
+                            : "#285d62";
+                        ctx.fillRect(
+                            signX + 9,
+                            signY + signHeight - 7,
+                            4,
+                            3
+                        );
+                        ctx.fillRect(
+                            signX + signWidth - 13,
+                            signY + signHeight - 7,
+                            4,
+                            3
+                        );
+                    }
                     ctx.restore();
                 });
 
@@ -35400,26 +35651,48 @@
 
                 if (!signalBoot.hidden) {
                     controllerHelp.innerHTML =
-                        "<kbd>MOUSE</kbd><span>load once for audio</span>";
+                        "<kbd>" + confirmLabel +
+                        "</kbd><span>load game</span>";
                     controllerHelp.setAttribute(
                         "aria-label",
-                        "Click Load Game once to enable browser audio. Controller play begins at the title screen."
+                        "Press " + confirmLabel +
+                            " to load the game. Browser audio may remain muted until the page receives a trusted activation."
                     );
                     return;
                 }
                 if (dialogueActive) {
-                    controllerHelp.innerHTML =
-                        "<kbd>" + confirmLabel + "</kbd><span>continue</span>" +
-                        "<kbd>" + (playStation ? "CIRCLE" : "B") +
-                        "</kbd><span>skip menu or back</span>";
-                    controllerHelp.setAttribute(
-                        "aria-label",
-                        "Controller dialogue controls: " +
-                            confirmLabel +
-                            " continues, " +
-                            (playStation ? "Circle" : "B") +
-                            " opens the skip menu or goes back"
-                    );
+                    if (dialogueSkipOpen) {
+                        controllerHelp.innerHTML =
+                            "<kbd>D-PAD</kbd><span>select</span>" +
+                            "<kbd>" + confirmLabel +
+                            "</kbd><span>confirm</span>" +
+                            "<kbd>" +
+                            (playStation ? "CIRCLE" : "B") +
+                            "</kbd><span>back</span>";
+                        controllerHelp.setAttribute(
+                            "aria-label",
+                            "Skip confirmation controls: directional pad or left stick selects, " +
+                                confirmLabel +
+                                " confirms, and " +
+                                (playStation ? "Circle" : "B") +
+                                " goes back"
+                        );
+                    } else {
+                        controllerHelp.innerHTML =
+                            "<kbd>" + confirmLabel +
+                            "</kbd><span>continue</span>" +
+                            "<kbd>" +
+                            (playStation ? "CIRCLE" : "B") +
+                            "</kbd><span>skip menu</span>";
+                        controllerHelp.setAttribute(
+                            "aria-label",
+                            "Controller dialogue controls: " +
+                                confirmLabel +
+                                " continues, and " +
+                                (playStation ? "Circle" : "B") +
+                                " opens the skip menu"
+                        );
+                    }
                     return;
                 }
                 if (
@@ -35448,15 +35721,48 @@
                     );
                     return;
                 }
-                if (
-                    (!titleScreen.hidden && state === "ready") ||
-                    (!messageCard.hidden && !startButton.disabled)
-                ) {
+                if (!titleScreen.hidden && state === "ready") {
                     controllerHelp.innerHTML =
                         "<kbd>" + confirmLabel + "</kbd><span>continue</span>";
                     controllerHelp.setAttribute(
                         "aria-label",
                         "Press " + confirmLabel + " to continue"
+                    );
+                    return;
+                }
+                if (!messageCard.hidden) {
+                    var messageControls =
+                        messageCardFocusableElements();
+                    var messageHasChoices = messageControls.length > 1;
+                    controllerHelp.innerHTML =
+                        (messageHasChoices
+                            ? "<kbd>D-PAD</kbd><span>select</span>"
+                            : "") +
+                        "<kbd>" + confirmLabel +
+                        "</kbd><span>confirm</span>" +
+                        (
+                            startOverButton.dataset.cancelEpisode ===
+                            "true"
+                                ? "<kbd>" +
+                                    (playStation ? "CIRCLE" : "B") +
+                                    "</kbd><span>cancel</span>"
+                                : ""
+                        );
+                    controllerHelp.setAttribute(
+                        "aria-label",
+                        (messageHasChoices
+                            ? "Directional pad or left stick selects. "
+                            : "") +
+                            "Press " + confirmLabel +
+                            " to confirm" +
+                            (
+                                startOverButton.dataset.cancelEpisode ===
+                                "true"
+                                    ? ", or " +
+                                        (playStation ? "Circle" : "B") +
+                                        " to cancel"
+                                    : ""
+                            )
                     );
                     return;
                 }
@@ -35538,7 +35844,9 @@
                     !signalBoot.hidden
                         ? "boot"
                         : dialogueActive
-                            ? "dialogue"
+                            ? dialogueSkipOpen
+                                ? "dialogue-skip-confirm"
+                                : "dialogue"
                             : !episodeBridge.hidden
                                 ? "bridge"
                                 : !titleScreen.hidden && state === "ready"
@@ -35549,9 +35857,21 @@
                                             ? "prism-install"
                                         : state === "paused"
                                             ? "paused-" + pauseMenuScreen
-                                            : !messageCard.hidden &&
-                                                !startButton.disabled
-                                                ? "message"
+                                            : !messageCard.hidden
+                                                ? "message-" +
+                                                    messageCardFocusableElements()
+                                                        .map(function (button) {
+                                                            return button.id;
+                                                        })
+                                                        .join("-") +
+                                                    "-" +
+                                                    (
+                                                        startOverButton.dataset
+                                                            .cancelEpisode ===
+                                                        "true"
+                                                            ? "cancel"
+                                                            : "standard"
+                                                    )
                                                 : state
                 ].join(":");
                 if (controllerHelpKey !== nextHelpKey) {
@@ -35591,6 +35911,7 @@
                 previousGamepadMenuDirection = "";
                 resetGamepadMenuRepeat();
                 gamepadMenuReleaseRequired = false;
+                gamepadChoiceContext = "";
                 gamepadGameplayReleaseRequired = false;
                 gamepadInput.left = false;
                 gamepadInput.right = false;
@@ -35652,8 +35973,35 @@
                         axisX,
                         axisY
                     );
+                var nextChoiceContext = state === "paused"
+                    ? "paused-" + pauseMenuScreen
+                    : dialogueActive && dialogueSkipOpen
+                        ? "dialogue-skip"
+                        : !messageCard.hidden &&
+                            messageCardFocusableElements().length
+                            ? "message"
+                            : "";
+                if (nextChoiceContext !== gamepadChoiceContext) {
+                    if (gamepadChoiceContext === "dialogue-skip") {
+                        clearControllerChoiceFocus(
+                            dialogueSkipConfirm
+                        );
+                    } else if (gamepadChoiceContext === "message") {
+                        clearControllerChoiceFocus(messageCard);
+                    }
+                    gamepadChoiceContext = nextChoiceContext;
+                    resetGamepadMenuRepeat();
+                    gamepadMenuReleaseRequired = Boolean(
+                        nextChoiceContext
+                    );
+                    if (nextChoiceContext === "dialogue-skip") {
+                        focusDialogueSkipControl(dialogueReturn);
+                    } else if (nextChoiceContext === "message") {
+                        focusMessageCardControl(startButton);
+                    }
+                }
                 var menuDirectionPressed = false;
-                if (state === "paused") {
+                if (nextChoiceContext) {
                     if (gamepadMenuReleaseRequired) {
                         resetGamepadMenuRepeat();
                         if (!menuDirection) {
@@ -35680,17 +36028,7 @@
                     gamepadInput.down = false;
                     gamepadInput.shoot = false;
                     if (confirmPressed) {
-                        if (
-                            !navigator.userActivation ||
-                            navigator.userActivation.hasBeenActive
-                        ) {
-                            signalBootButton.click();
-                        } else {
-                            signalBootButton.focus({ preventScroll: true });
-                            announce(
-                                "Controller detected. Click Load Game once to allow browser audio; controller play begins at the title screen."
-                            );
-                        }
+                        signalBootButton.click();
                     }
                 } else if (!episodeBridge.hidden) {
                     gamepadInput.left = false;
@@ -35746,9 +36084,24 @@
                         } else {
                             openDialogueSkipConfirmation();
                         }
+                    } else if (
+                        dialogueSkipOpen &&
+                        menuDirectionPressed
+                    ) {
+                        moveDialogueSkipFocus(menuDirection);
                     } else if (confirmPressed) {
                         if (dialogueSkipOpen) {
-                            closeDialogueSkipConfirmation();
+                            var dialogueSkipControl =
+                                controllerChoiceFocusableElements(
+                                    dialogueSkipConfirm
+                                ).indexOf(document.activeElement) >= 0
+                                    ? document.activeElement
+                                    : focusDialogueSkipControl(
+                                        dialogueReturn
+                                    );
+                            if (dialogueSkipControl) {
+                                dialogueSkipControl.click();
+                            }
                         } else {
                             advanceArrivalDialogue();
                         }
@@ -35787,14 +36140,26 @@
                     }
                 } else if (
                     !messageCard.hidden &&
-                    !startButton.disabled
+                    messageCardFocusableElements().length
                 ) {
                     gamepadInput.left = false;
                     gamepadInput.right = false;
                     gamepadInput.down = false;
                     gamepadInput.shoot = false;
-                    if (confirmPressed) {
-                        startButton.click();
+                    var messageControl =
+                        messageCardFocusableElements().indexOf(
+                            document.activeElement
+                        ) >= 0
+                            ? document.activeElement
+                            : focusMessageCardControl(startButton);
+                    if (cancelPressed &&
+                        startOverButton.dataset.cancelEpisode ===
+                            "true") {
+                        startOverButton.click();
+                    } else if (menuDirectionPressed) {
+                        moveMessageCardFocus(menuDirection);
+                    } else if (confirmPressed && messageControl) {
+                        messageControl.click();
                     }
                 } else if (state === "running") {
                     if (pausePressed) {
@@ -36048,13 +36413,36 @@
                         event.code === "Enter" ||
                         event.code === "Space" ||
                         event.code === "Escape" ||
-                        event.code === "Tab"
+                        event.code === "Tab" ||
+                        (
+                            dialogueSkipOpen &&
+                            (
+                                event.code === "ArrowLeft" ||
+                                event.code === "ArrowRight" ||
+                                event.code === "ArrowUp" ||
+                                event.code === "ArrowDown"
+                            )
+                        )
                     ) {
                         event.preventDefault();
                     }
                     if (event.repeat) return;
                     if (event.code === "Enter" || event.code === "Space") {
-                        if (!dialogueSkipOpen) advanceArrivalDialogue();
+                        if (dialogueSkipOpen) {
+                            var keyboardSkipControl =
+                                controllerChoiceFocusableElements(
+                                    dialogueSkipConfirm
+                                ).indexOf(document.activeElement) >= 0
+                                    ? document.activeElement
+                                    : focusDialogueSkipControl(
+                                        dialogueReturn
+                                    );
+                            if (keyboardSkipControl) {
+                                keyboardSkipControl.click();
+                            }
+                        } else {
+                            advanceArrivalDialogue();
+                        }
                     } else if (event.code === "Escape") {
                         if (dialogueSkipOpen) {
                             closeDialogueSkipConfirmation();
@@ -36069,7 +36457,31 @@
                         var nextIndex = event.shiftKey
                             ? (focusIndex <= 0 ? focusable.length - 1 : focusIndex - 1)
                             : (focusIndex + 1) % focusable.length;
-                        focusable[nextIndex].focus();
+                        if (dialogueSkipOpen) {
+                            focusDialogueSkipControl(
+                                focusable[nextIndex]
+                            );
+                        } else {
+                            focusable[nextIndex].focus();
+                        }
+                    } else if (
+                        dialogueSkipOpen &&
+                        (
+                            event.code === "ArrowLeft" ||
+                            event.code === "ArrowRight" ||
+                            event.code === "ArrowUp" ||
+                            event.code === "ArrowDown"
+                        )
+                    ) {
+                        moveDialogueSkipFocus(
+                            event.code === "ArrowLeft"
+                                ? "left"
+                                : event.code === "ArrowRight"
+                                    ? "right"
+                                    : event.code === "ArrowUp"
+                                        ? "up"
+                                        : "down"
+                        );
                     }
                     return;
                 }
@@ -36391,6 +36803,11 @@
                 "click",
                 openPackConfiguration
             );
+            pauseSoundButton.addEventListener("click", function () {
+                soundButton.click();
+                focusPauseMenuControl(pauseSoundButton);
+                announce("Sound " + (soundOn ? "on." : "off."));
+            });
             pauseRestartButton.addEventListener(
                 "click",
                 restartPauseCheckpoint
@@ -36701,6 +37118,13 @@
                         ? document.activeElement.dataset.packModule ||
                             document.activeElement.id ||
                             "none"
+                        : dialogueActive &&
+                            dialogueSkipOpen &&
+                            document.activeElement
+                            ? document.activeElement.id || "none"
+                            : !messageCard.hidden &&
+                                document.activeElement
+                                ? document.activeElement.id || "none"
                         : "none";
                 return {
                     state: state,
@@ -36849,7 +37273,15 @@
                             "unreported"
                     },
                     menuScreen:
-                        !titleScreen.hidden && state === "ready"
+                        !signalBoot.hidden
+                            ? "load-game"
+                            : dialogueActive && dialogueSkipOpen
+                            ? "dialogue-skip-confirm"
+                            : dialogueActive
+                            ? "dialogue"
+                            : !messageCard.hidden
+                            ? "message"
+                            : !titleScreen.hidden && state === "ready"
                             ? "title"
                             : state === "prism-install"
                             ? "prism-install-cinematic"
