@@ -1,5 +1,471 @@
 const current_narrative = [
     {
+        "title": "Level One",
+        "date": "August 3, 2026",
+        "body": "_What a 47-year-old solo dev learns the hard way._\n\n![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-08-03-level-one-msi23qi5.jpg \"Come on, you can picture this at Toys R Us, right?\")\n\nI\u2019ve\u00a0always wanted to make a video game, and\u00a0I\u2019m pretty envious of people who have the know-how. Come to think of it, I\u2019m envious of any kind of artistic know-how.\u00a0When I was really young, I remember being incredibly jealous of my oldest brother, Adam, who had a knack for sketching and drawing.\u00a0One in particular burned itself into my memory: a picture of a helicopter hanging on his wall just above the doorway. I\u2019m not sure if he knew, but I would sneak downstairs often to stare at all of his creations.\n\nBut for me, when it came to drawing, I fell short. I knew I had other skills, maybe just as valuable. They just weren\u2019t the ones I wanted.\n\n\u201cKnack.\u201d\u00a0I really do love that word. It has always felt unusually precise to me.\n\nIn Orson Scott Card\u2019s fantasy series\u00a0_The Tales of Alvin Maker_, characters have \u201cknacks\". These are minor, involuntary magical abilities that allow them to perform specific tasks with near-perfect precision.\u00a0That is how I feel about people who sing, draw, or dance well. It seems like magic to me when someone dreams up something within their mind and translates it through their hands, feet, or voice.\n\nI\u2019ve watched people doodle mindlessly, their attention otherwise occupied. There seems to be no disconnect between the firing of synapses in their brain and the movement of their hands across the paper. \u00a0It is staggeringly beautiful.\n\nI\u2019ve never quite lost the desire to draw.\u00a0And that missing skill set bit me in the ass these past few weeks. Because if I knew how to draw, maybe I would have had an easier time with the project I'm about to describe.\n\n---\n\nOver the past couple of months, I used some of my spare time to sit down and plan a video game.\n\nI described it elsewhere as a kind of \u201clove letter\u201d to my past. I wanted to take the best aspects of the games I loved as a kid..._Super Mario Bros._,\u00a0_The Legend of Zelda_,\u00a0_Super Metroid_, and others, and make something that might be enjoyed by people my age.\n\nThe proof of concept came quickly. It was so much fun! But I ran into hard limits with a browser based game.\u00a0I started encountering frame-rate and memory problems. Frustrated, I asked Codex point-blank:\n\n_\u201cShould I just make a native iOS game instead? That was my ultimate goal.\u201d_\n\nCodex responded:\n\n_\u201cOh yes, you should make an iOS game instead.\u201d_\n\nSo I abandoned the browser prototype and began rebuilding the game natively for iOS.\n\nSpoiler: It went so, so poorly.\n\n![Aryn animation sprite study](https://outsidetheworld.com/media/narrative/2026-08-03-level-one/super-frgmnts-aryn-runtime-motion-study-v1.png \"Some fun with sprite animation\")\n\n---\n\nLife being what it is, I am a 47-year-old without a full development team beside me.\n\nAs I dove into iOS game development, I failed to respect the sheer scope of it all. A video game is not just software. It is an overwhelming orchestra of disciplines.\n\nA studio distributes the work among systems designers, programmers, artists, animators, audio engineers, writers, and testers. I've learned that those disciplines act as a system of checks and balances. One person\u2019s exciting idea becomes another person\u2019s warning about physics, memory, scope, or time.\n\nAnd it's important to note that I did not have anyone pushing back on my ideas. No one questioning my judgement, or my assumptions. I only had the confirmation bias in my own head.\n\nSo when I say that I was acting as a one-man band, not only did it mean playing every instrument at once, it meant playing them all wrong. With earplugs in.\n\nEvery apparent breakthrough uncovered a different and unforeseen problem. I would fix one behavior only to destabilize another. Something that looked perfect in isolation could break animation, collision, camera movement, performance, or some other system I had not realized was connected to it.\n\n![The bubble door moved again](https://outsidetheworld.com/media/narrative/2026-08-03-level-one/super-frgmnts-bubble-door-regression-v1.webp \"There's an easter egg in the game when this door is encountered.\")\n\nEach night, the game became technically more elaborate and somehow less playable.\n\nWhat makes this difficult to admit is that I wasn\u2019t a novice blindly handing the reins to a machine.\u00a0I already built and successfully launched (and maintain!) a social-media platform on iOS. And besides, I had a background in web development, coding, and hardware. I thought I \u00a0knew enough to call BS when the AI became sloppy.\n\nWith my social media app, I \u00a0regularly caught its hallucinations, challenged its bad logic, and pushed back when its enthusiasm got out of hand.\u00a0But that prior success bred a quiet hubris when it came to the game.\n\nI badly misjudged my own general software competence for game-development acumen. Because I could audit line-by-line code changes, I thought I could be in command. I did not appreciate that building a game involved much more than writing software. It required maintaining a delicate, real-time balance among spatial math, frame budgets, physics loops, animation systems, and asset pipelines.\n\nMy technical background gave me just enough guardrails to feel safe while the AI coddled me right off the cliff.\n\n---\n\nSitting in the wreckage of the native iOS attempt, I finally had a realization:\u00a0I needed to make like Elsa and let it go.\n\nI was going to end up spending hundreds of dollars and dozens more hours making an increasingly elaborate piece of garbage.\u00a0That realization felt like waking up.\n\nSo, I said goodbye to the native iOS build. I was incredibly sad. But in a very real way, I was also relieved. I had been banging my head against a wall, convinced that I was just two steps away from a breakthrough. But my head was already split open, and I didn't realize it.\n\nThe next morning, I spent my 45-minute commute to work in relative silence. No music, no audiobooks, no podcasts. Just me and my thoughts, which somehow, kept returning to the game. To the failure.\u00a0Somewhere along the drive, I remembered my first effort. The one that worked, inside the web browser.\n\n![The RD-42 descending toward Veyra](https://outsidetheworld.com/media/narrative/2026-08-03-level-one/super-frgmnts-rd42-descent-v1.webp \"Descent into Veyra\")\n\nI could return to that, polish it up, and show it to you.\u00a0I just needed to make that one solid, atmospheric experience.\u00a0So when I did return to that version later that night, and began polishing it, something incredible happened.\n\nI discovered that while I might lack the ability to sketch something beautifully with my hands, I have my own knack. I can build a pretty cool world.\u00a0I have a knack for creating believable characters and giving a place a true sense of mood. And I enjoy the process of doing it.\n\nI knew what the planet should feel like before I knew how to build every part of it. I knew how my two main characters should speak to one another. As I wrote their dialogue, the story began unfolding naturally. The world developed a personality that I genuinely loved.\n\n![Aryn and Dras in conversation](https://outsidetheworld.com/media/narrative/2026-08-03-level-one/super-frgmnts-aryn-dras-dialogue-v1.webp \"Yes. Diet Coke FTW.\")\n\nThe writing wasn\u2019t filler between pieces of gameplay, it became the story and drive of the game.\n\n---\n\nSo here it is: the finished browser prototype.\u00a0I cleaned up the code, tuned the controls, polished the sprites, and tried to let the narrative shine.\n\nAnd you know what?\u00a0It kind of kicks ass.\u00a0I am proud of what I built. And I am happy to show it to you.\n\n![Aryn fighting through the Shard Foundry](https://outsidetheworld.com/media/narrative/2026-08-03-level-one/super-frgmnts-foundry-action-v1.webp \"Combat comes fast.\")\n\nIt was a labor of love, crafted line by line and bug by bug, with a bit of AI muscle helping me cross technical gaps I could not have crossed alone. And\u00a0I will not be expanding it into a full release. I now know my limitations and what my time is worth.\n\n[Level One is complete](https://outsidetheworld.com/super_frgmnts.html), self-contained, and fully functional.\u00a0It runs right now, directly in your web browser. Chrome is recommended. Controllers are supported! But you can also just play it on your phone with touch controls.\u00a0No App Store download is required.\n\n[Just a smol, playable piece of a world I brought to life.](https://outsidetheworld.com/super_frgmnts.html)\n\n![A small playable piece of Veyra](https://outsidetheworld.com/media/narrative/2026-08-03-level-one/super-frgmnts-landing-invitation-v1.webp)",
+        "file": "2026-08-03-level-one.md",
+        "publisher": {
+            "schema": "otw.publisher.post",
+            "version": 2,
+            "source": "publisher.html",
+            "subhead": "What a 47-year-old solo dev learns the hard way.",
+            "blocks": [
+                {
+                    "id": "image_msi23pqt_15sqlz",
+                    "type": "image",
+                    "imageRef": "image_msi23pqt_15sqlz",
+                    "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-08-03-level-one-msi23qi5.jpg",
+                    "objectKey": "narrative/2026-08-03-level-one-msi23qi5.jpg",
+                    "featureLayout": "natural",
+                    "featureFocal": "center",
+                    "homepageFocal": "center",
+                    "displaySize": "medium",
+                    "alignment": "center",
+                    "wrapMode": "none"
+                },
+                {
+                    "id": "paragraph_msgpfcec_ipa5kv",
+                    "type": "paragraph",
+                    "html": "I\u2019ve\u00a0<span>always wanted to make a video gam</span><span>e, and\u00a0</span><span>I\u2019m pretty envious of people who have the know-how. Come to think of it, I\u2019m envious of any kind of artistic know-how.\u00a0</span><span>When I was really young, I remember being incredibly jealous of my oldest brother, Adam, who had a knack for sketching and drawing.\u00a0</span><span>One in particular burned itself into my memory: a picture of a helicopter hanging on his wall just above the doorway. I\u2019m not sure if he knew, but I would sneak downstairs often to stare at all of his creations.</span>",
+                    "text": "I\u2019ve\u00a0always wanted to make a video game, and\u00a0I\u2019m pretty envious of people who have the know-how. Come to think of it, I\u2019m envious of any kind of artistic know-how.\u00a0When I was really young, I remember being incredibly jealous of my oldest brother, Adam, who had a knack for sketching and drawing.\u00a0One in particular burned itself into my memory: a picture of a helicopter hanging on his wall just above the doorway. I\u2019m not sure if he knew, but I would sneak downstairs often to stare at all of his creations."
+                },
+                {
+                    "id": "paragraph_msgpfcec_yt4uld",
+                    "type": "paragraph",
+                    "html": "But for me, when it came to drawing, I fell short. I knew I had other skills, maybe just as valuable. They just weren\u2019t the ones I wanted.",
+                    "text": "But for me, when it came to drawing, I fell short. I knew I had other skills, maybe just as valuable. They just weren\u2019t the ones I wanted."
+                },
+                {
+                    "id": "paragraph_msgpfcec_boukfb",
+                    "type": "paragraph",
+                    "html": "\u201cKnack.\u201d\u00a0<span>I really do love that word. It has always felt unusually precise to me.</span>",
+                    "text": "\u201cKnack.\u201d\u00a0I really do love that word. It has always felt unusually precise to me."
+                },
+                {
+                    "id": "paragraph_msgpfced_4e3miv",
+                    "type": "paragraph",
+                    "html": "In Orson Scott Card\u2019s fantasy series<span>\u00a0</span><em>The Tales of Alvin Maker</em>, characters have \u201cknacks\". These are minor, involuntary magical abilities that allow them to perform specific tasks with near-perfect precision.\u00a0<span>That is how I feel about people who sing, draw, or dance well. It seems like magic to me when someone dreams up something within their mind and translates it through their hands, feet, or voice.</span>",
+                    "text": "In Orson Scott Card\u2019s fantasy series\u00a0The Tales of Alvin Maker, characters have \u201cknacks\". These are minor, involuntary magical abilities that allow them to perform specific tasks with near-perfect precision.\u00a0That is how I feel about people who sing, draw, or dance well. It seems like magic to me when someone dreams up something within their mind and translates it through their hands, feet, or voice."
+                },
+                {
+                    "id": "paragraph_msgpfced_ztm6x7",
+                    "type": "paragraph",
+                    "html": "I\u2019ve watched people doodle mindlessly, their attention otherwise occupied. There seems to be no disconnect between the firing of synapses in their brain and the movement of their hands across the paper. \u00a0<span>It is staggeringly beautiful.</span>",
+                    "text": "I\u2019ve watched people doodle mindlessly, their attention otherwise occupied. There seems to be no disconnect between the firing of synapses in their brain and the movement of their hands across the paper. \u00a0It is staggeringly beautiful."
+                },
+                {
+                    "id": "paragraph_msgpfced_qluwvz",
+                    "type": "paragraph",
+                    "html": "I\u2019ve never quite lost the desire to draw.\u00a0<span>And that missing skill set bit me in the ass these past few weeks. Because if I knew how to draw, maybe I would have had an easier time with the project I'm about to describe.</span>",
+                    "text": "I\u2019ve never quite lost the desire to draw.\u00a0And that missing skill set bit me in the ass these past few weeks. Because if I knew how to draw, maybe I would have had an easier time with the project I'm about to describe."
+                },
+                {
+                    "id": "divider_msgpfced_ym01w9",
+                    "type": "divider"
+                },
+                {
+                    "id": "paragraph_msgpfced_ptfj73",
+                    "type": "paragraph",
+                    "html": "Over the past couple of months, I used some of my spare time to sit down and plan a video game.",
+                    "text": "Over the past couple of months, I used some of my spare time to sit down and plan a video game."
+                },
+                {
+                    "id": "paragraph_msgpfced_t9ehp7",
+                    "type": "paragraph",
+                    "html": "I described it elsewhere as a kind of \u201clove letter\u201d to my past. I wanted to take the best aspects of the games I loved as a kid...<em>Super Mario Bros.</em>,<span>\u00a0</span><em>The Legend of Zelda</em>,<span>\u00a0</span><em>Super Metroid</em>, and others, and make something that might be enjoyed by people my age.",
+                    "text": "I described it elsewhere as a kind of \u201clove letter\u201d to my past. I wanted to take the best aspects of the games I loved as a kid...Super Mario Bros.,\u00a0The Legend of Zelda,\u00a0Super Metroid, and others, and make something that might be enjoyed by people my age."
+                },
+                {
+                    "id": "paragraph_msgpfced_zuhrte",
+                    "type": "paragraph",
+                    "html": "The proof of concept came quickly. It was so much fun! But I ran into hard limits with a browser based game.\u00a0<span>I started encountering frame-rate and memory problems. Frustrated, I asked Codex point-blank:</span>",
+                    "text": "The proof of concept came quickly. It was so much fun! But I ran into hard limits with a browser based game.\u00a0I started encountering frame-rate and memory problems. Frustrated, I asked Codex point-blank:"
+                },
+                {
+                    "id": "paragraph_msgpfced_m3hw2m",
+                    "type": "paragraph",
+                    "html": "<em>\u201cShould I just make a native iOS game instead? That was my ultimate goal.\u201d</em>",
+                    "text": "\u201cShould I just make a native iOS game instead? That was my ultimate goal.\u201d"
+                },
+                {
+                    "id": "paragraph_msgpfced_32ism3",
+                    "type": "paragraph",
+                    "html": "Codex responded:",
+                    "text": "Codex responded:"
+                },
+                {
+                    "id": "paragraph_msgpfced_139zix",
+                    "type": "paragraph",
+                    "html": "<em>\u201cOh yes, you should make an iOS game instead.\u201d</em>",
+                    "text": "\u201cOh yes, you should make an iOS game instead.\u201d"
+                },
+                {
+                    "id": "paragraph_msgpfced_oni003",
+                    "type": "paragraph",
+                    "html": "So I abandoned the browser prototype and began rebuilding the game natively for iOS.",
+                    "text": "So I abandoned the browser prototype and began rebuilding the game natively for iOS."
+                },
+                {
+                    "id": "paragraph_msgpfced_7y6dwo",
+                    "type": "paragraph",
+                    "html": "Spoiler: It went so, so poorly.",
+                    "text": "Spoiler: It went so, so poorly."
+                },
+                {
+                    "id": "image_mshudmlg_7lukuw",
+                    "type": "image",
+                    "imageRef": "image_mshudmlg_7lukuw",
+                    "url": "https://outsidetheworld.com/media/narrative/2026-08-03-level-one/super-frgmnts-aryn-runtime-motion-study-v1.png",
+                    "featureLayout": "natural",
+                    "featureFocal": "center",
+                    "homepageFocal": "center",
+                    "displaySize": "large",
+                    "alignment": "center",
+                    "wrapMode": "none"
+                },
+                {
+                    "id": "divider_msgpfced_w5vosc",
+                    "type": "divider"
+                },
+                {
+                    "id": "paragraph_msgpfced_5ic3nu",
+                    "type": "paragraph",
+                    "html": "Life being what it is, I am a 47-year-old without a full development team beside me.",
+                    "text": "Life being what it is, I am a 47-year-old without a full development team beside me."
+                },
+                {
+                    "id": "paragraph_msgpfced_cfgrji",
+                    "type": "paragraph",
+                    "html": "As I dove into iOS game development, I failed to respect the sheer scope of it all. A video game is not just software. It is an overwhelming orchestra of disciplines.",
+                    "text": "As I dove into iOS game development, I failed to respect the sheer scope of it all. A video game is not just software. It is an overwhelming orchestra of disciplines."
+                },
+                {
+                    "id": "paragraph_msgpfced_fsbvfg",
+                    "type": "paragraph",
+                    "html": "A studio distributes the work among systems designers, programmers, artists, animators, audio engineers, writers, and testers. I've learned that those disciplines act as a system of checks and balances. One person\u2019s exciting idea becomes another person\u2019s warning about physics, memory, scope, or time.",
+                    "text": "A studio distributes the work among systems designers, programmers, artists, animators, audio engineers, writers, and testers. I've learned that those disciplines act as a system of checks and balances. One person\u2019s exciting idea becomes another person\u2019s warning about physics, memory, scope, or time."
+                },
+                {
+                    "id": "paragraph_msgq0e5v_ylcbco",
+                    "type": "paragraph",
+                    "html": "And it's important to note that I did not have anyone pushing back on my ideas. No one questioning my judgement, or my assumptions. I only had the confirmation bias in my own head.",
+                    "text": "And it's important to note that I did not have anyone pushing back on my ideas. No one questioning my judgement, or my assumptions. I only had the confirmation bias in my own head."
+                },
+                {
+                    "id": "paragraph_msgpfced_vk49i4",
+                    "type": "paragraph",
+                    "html": "So when I say that I was acting as a one-man band, not only did it mean playing every instrument at once, it meant playing them all wrong. With earplugs in.",
+                    "text": "So when I say that I was acting as a one-man band, not only did it mean playing every instrument at once, it meant playing them all wrong. With earplugs in."
+                },
+                {
+                    "id": "paragraph_msgpfced_rlih1k",
+                    "type": "paragraph",
+                    "html": "Every apparent breakthrough uncovered a different and unforeseen problem. I would fix one behavior only to destabilize another. Something that looked perfect in isolation could break animation, collision, camera movement, performance, or some other system I had not realized was connected to it.",
+                    "text": "Every apparent breakthrough uncovered a different and unforeseen problem. I would fix one behavior only to destabilize another. Something that looked perfect in isolation could break animation, collision, camera movement, performance, or some other system I had not realized was connected to it."
+                },
+                {
+                    "id": "image_mshuf0dq_91ol7e",
+                    "type": "image",
+                    "imageRef": "image_mshuf0dq_91ol7e",
+                    "url": "https://outsidetheworld.com/media/narrative/2026-08-03-level-one/super-frgmnts-bubble-door-regression-v1.webp",
+                    "featureLayout": "natural",
+                    "featureFocal": "center",
+                    "homepageFocal": "center",
+                    "displaySize": "large",
+                    "alignment": "center",
+                    "wrapMode": "none"
+                },
+                {
+                    "id": "paragraph_msgpfced_x0z6cc",
+                    "type": "paragraph",
+                    "html": "Each night, the game became technically more elaborate and somehow less playable.",
+                    "text": "Each night, the game became technically more elaborate and somehow less playable."
+                },
+                {
+                    "id": "paragraph_msgpfced_52geri",
+                    "type": "paragraph",
+                    "html": "What makes this difficult to admit is that I wasn\u2019t a novice blindly handing the reins to a machine.\u00a0<span>I already built and successfully launched (and maintain!) a social-media platform on iOS. And besides, I had a background in web development, coding, and hardware. I thought I \u00a0knew enough to call BS when the AI became sloppy.</span>",
+                    "text": "What makes this difficult to admit is that I wasn\u2019t a novice blindly handing the reins to a machine.\u00a0I already built and successfully launched (and maintain!) a social-media platform on iOS. And besides, I had a background in web development, coding, and hardware. I thought I \u00a0knew enough to call BS when the AI became sloppy."
+                },
+                {
+                    "id": "paragraph_msgpfced_96ke5s",
+                    "type": "paragraph",
+                    "html": "With my social media app, I \u00a0regularly caught its hallucinations, challenged its bad logic, and pushed back when its enthusiasm got out of hand.\u00a0<span>But that prior success bred a quiet hubris when it came to the game.</span>",
+                    "text": "With my social media app, I \u00a0regularly caught its hallucinations, challenged its bad logic, and pushed back when its enthusiasm got out of hand.\u00a0But that prior success bred a quiet hubris when it came to the game."
+                },
+                {
+                    "id": "paragraph_msgpfced_at0pt6",
+                    "type": "paragraph",
+                    "html": "I badly misjudged my own general software competence for game-development acumen. Because I could audit line-by-line code changes, I thought I could be in command. I did not appreciate that building a game involved much more than writing software. It required maintaining a delicate, real-time balance among spatial math, frame budgets, physics loops, animation systems, and asset pipelines.",
+                    "text": "I badly misjudged my own general software competence for game-development acumen. Because I could audit line-by-line code changes, I thought I could be in command. I did not appreciate that building a game involved much more than writing software. It required maintaining a delicate, real-time balance among spatial math, frame budgets, physics loops, animation systems, and asset pipelines."
+                },
+                {
+                    "id": "paragraph_msgpfced_m499nt",
+                    "type": "paragraph",
+                    "html": "My technical background gave me just enough guardrails to feel safe while the AI coddled me right off the cliff.",
+                    "text": "My technical background gave me just enough guardrails to feel safe while the AI coddled me right off the cliff."
+                },
+                {
+                    "id": "divider_msgpfced_5idhij",
+                    "type": "divider"
+                },
+                {
+                    "id": "paragraph_msgpfced_toi41c",
+                    "type": "paragraph",
+                    "html": "Sitting in the wreckage of the native iOS attempt, I finally had a realization:\u00a0<span>I needed to make like Elsa and let it go.</span>",
+                    "text": "Sitting in the wreckage of the native iOS attempt, I finally had a realization:\u00a0I needed to make like Elsa and let it go."
+                },
+                {
+                    "id": "paragraph_msgpfced_eys8f5",
+                    "type": "paragraph",
+                    "html": "I was going to end up spending hundreds of dollars and dozens more hours making an increasingly elaborate piece of garbage.\u00a0<span>That realization felt like waking up.</span>",
+                    "text": "I was going to end up spending hundreds of dollars and dozens more hours making an increasingly elaborate piece of garbage.\u00a0That realization felt like waking up."
+                },
+                {
+                    "id": "paragraph_msgpfced_pq558p",
+                    "type": "paragraph",
+                    "html": "So, I said goodbye to the native iOS build. I was incredibly sad. But in a very real way, I was also relieved. I had been banging my head against a wall, convinced that I was just two steps away from a breakthrough. But my head was already split open, and I didn't realize it.",
+                    "text": "So, I said goodbye to the native iOS build. I was incredibly sad. But in a very real way, I was also relieved. I had been banging my head against a wall, convinced that I was just two steps away from a breakthrough. But my head was already split open, and I didn't realize it."
+                },
+                {
+                    "id": "paragraph_msgpfced_i1udwo",
+                    "type": "paragraph",
+                    "html": "The next morning, I spent my 45-minute commute to work in relative silence. No music, no audiobooks, no podcasts. Just me and my thoughts, which somehow, kept returning to the game. To the failure.\u00a0<span>Somewhere along the drive, I remembered my first effort. The one that worked, inside the web browser.</span>",
+                    "text": "The next morning, I spent my 45-minute commute to work in relative silence. No music, no audiobooks, no podcasts. Just me and my thoughts, which somehow, kept returning to the game. To the failure.\u00a0Somewhere along the drive, I remembered my first effort. The one that worked, inside the web browser."
+                },
+                {
+                    "id": "image_mshug7e0_tj0nug",
+                    "type": "image",
+                    "imageRef": "image_mshug7e0_tj0nug",
+                    "url": "https://outsidetheworld.com/media/narrative/2026-08-03-level-one/super-frgmnts-rd42-descent-v1.webp",
+                    "featureLayout": "natural",
+                    "featureFocal": "center",
+                    "homepageFocal": "center",
+                    "displaySize": "medium",
+                    "alignment": "center",
+                    "wrapMode": "none"
+                },
+                {
+                    "id": "paragraph_mshug7e4_n45oz4",
+                    "type": "paragraph",
+                    "html": "<span>I could return to that, polish it up, and show it to you.\u00a0</span><span>I just needed to make that one solid, atmospheric experience.\u00a0</span><span>So when I did return to that version later that night, and began polishing it, something incredible happened.</span><br>",
+                    "text": "I could return to that, polish it up, and show it to you.\u00a0I just needed to make that one solid, atmospheric experience.\u00a0So when I did return to that version later that night, and began polishing it, something incredible happened."
+                },
+                {
+                    "id": "paragraph_msgpfcee_026ozl",
+                    "type": "paragraph",
+                    "html": "I discovered that while I might lack the ability to sketch something beautifully with my hands, I have my own knack. I can build a pretty cool world.\u00a0<span>I have a knack for creating believable characters and giving a place a true sense of mood. And I enjoy the process of doing it.</span>",
+                    "text": "I discovered that while I might lack the ability to sketch something beautifully with my hands, I have my own knack. I can build a pretty cool world.\u00a0I have a knack for creating believable characters and giving a place a true sense of mood. And I enjoy the process of doing it."
+                },
+                {
+                    "id": "paragraph_msgpfcee_jqobai",
+                    "type": "paragraph",
+                    "html": "I knew what the planet should feel like before I knew how to build every part of it. I knew how my two main characters should speak to one another. As I wrote their dialogue, the story began unfolding naturally. The world developed a personality that I genuinely loved.",
+                    "text": "I knew what the planet should feel like before I knew how to build every part of it. I knew how my two main characters should speak to one another. As I wrote their dialogue, the story began unfolding naturally. The world developed a personality that I genuinely loved."
+                },
+                {
+                    "id": "image_mshugmrw_s06chu",
+                    "type": "image",
+                    "imageRef": "image_mshugmrw_s06chu",
+                    "url": "https://outsidetheworld.com/media/narrative/2026-08-03-level-one/super-frgmnts-aryn-dras-dialogue-v1.webp",
+                    "featureLayout": "natural",
+                    "featureFocal": "center",
+                    "homepageFocal": "center",
+                    "displaySize": "medium",
+                    "alignment": "center",
+                    "wrapMode": "none"
+                },
+                {
+                    "id": "paragraph_msgpfcee_i7qfqg",
+                    "type": "paragraph",
+                    "html": "The writing wasn\u2019t filler between pieces of gameplay, i<span>t became the story and drive of the game.\u00a0</span>",
+                    "text": "The writing wasn\u2019t filler between pieces of gameplay, it became the story and drive of the game."
+                },
+                {
+                    "id": "divider_msgpfcee_lsl1y4",
+                    "type": "divider"
+                },
+                {
+                    "id": "p_msgni58u_2zvn7w",
+                    "type": "paragraph",
+                    "html": "<span></span><span>So here it is: the finished browser prototype.\u00a0</span><span>I cleaned up the code, tuned the controls, polished the sprites, and tried to let the narrative shine.</span>",
+                    "text": "So here it is: the finished browser prototype.\u00a0I cleaned up the code, tuned the controls, polished the sprites, and tried to let the narrative shine."
+                },
+                {
+                    "id": "paragraph_msgpfcee_3sq7gc",
+                    "type": "paragraph",
+                    "html": "And you know what?\u00a0<span>It kind of kicks ass.\u00a0</span><span>I am proud of what I built. And I am happy to show it to you.</span>",
+                    "text": "And you know what?\u00a0It kind of kicks ass.\u00a0I am proud of what I built. And I am happy to show it to you."
+                },
+                {
+                    "id": "image_mshugz87_bowuw6",
+                    "type": "image",
+                    "imageRef": "image_mshugz87_bowuw6",
+                    "url": "https://outsidetheworld.com/media/narrative/2026-08-03-level-one/super-frgmnts-foundry-action-v1.webp",
+                    "featureLayout": "natural",
+                    "featureFocal": "center",
+                    "homepageFocal": "center",
+                    "displaySize": "medium",
+                    "alignment": "center",
+                    "wrapMode": "none"
+                },
+                {
+                    "id": "paragraph_msgpfcee_kfxym3",
+                    "type": "paragraph",
+                    "html": "It was a labor of love, crafted line by line and bug by bug, with a bit of AI muscle helping me cross technical gaps I could not have crossed alone. And\u00a0<span>I will not be expanding it into a full release. I now know my limitations and what my time is worth.\u00a0</span>",
+                    "text": "It was a labor of love, crafted line by line and bug by bug, with a bit of AI muscle helping me cross technical gaps I could not have crossed alone. And\u00a0I will not be expanding it into a full release. I now know my limitations and what my time is worth."
+                },
+                {
+                    "id": "paragraph_msgpfcee_vxvnc4",
+                    "type": "paragraph",
+                    "html": "<a href=\"https://outsidetheworld.com/super_frgmnts.html\">Level One is complete</a>, self-contained, and fully functional.\u00a0<span>It runs right now, directly in your web browser. Chrome is recommended. Controllers are supported! But you can also just play it on your phone with touch controls.\u00a0</span><span>No App Store download is required.</span><span>\u00a0</span>",
+                    "text": "Level One is complete, self-contained, and fully functional.\u00a0It runs right now, directly in your web browser. Chrome is recommended. Controllers are supported! But you can also just play it on your phone with touch controls.\u00a0No App Store download is required."
+                },
+                {
+                    "id": "paragraph_mse3asgg_lf1lr7",
+                    "type": "paragraph",
+                    "html": "<span><a href=\"https://outsidetheworld.com/super_frgmnts.html\">Just a smol, playable piece of a world I brought to life.</a></span>",
+                    "text": "Just a smol, playable piece of a world I brought to life."
+                },
+                {
+                    "id": "image_mshuh8xq_gekw1a",
+                    "type": "image",
+                    "imageRef": "image_mshuh8xq_gekw1a",
+                    "url": "https://outsidetheworld.com/media/narrative/2026-08-03-level-one/super-frgmnts-landing-invitation-v1.webp",
+                    "featureLayout": "natural",
+                    "featureFocal": "center",
+                    "homepageFocal": "center",
+                    "displaySize": "medium",
+                    "alignment": "center",
+                    "wrapMode": "none"
+                }
+            ],
+            "images": [
+                {
+                    "id": "image_msi23pqt_15sqlz",
+                    "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-08-03-level-one-msi23qi5.jpg",
+                    "objectKey": "narrative/2026-08-03-level-one-msi23qi5.jpg",
+                    "alt": "Narrative image",
+                    "caption": "Come on, you can picture this at Toys R Us, right?",
+                    "credit": "",
+                    "featureLayout": "natural",
+                    "featureFocal": "center",
+                    "homepageFocal": "center",
+                    "width": 1400,
+                    "height": 1050,
+                    "displaySize": "medium",
+                    "alignment": "center",
+                    "wrapMode": "none"
+                },
+                {
+                    "id": "image_mshudmlg_7lukuw",
+                    "url": "https://outsidetheworld.com/media/narrative/2026-08-03-level-one/super-frgmnts-aryn-runtime-motion-study-v1.png",
+                    "objectKey": "",
+                    "alt": "Aryn animation sprite study",
+                    "caption": "Some fun with sprite animation",
+                    "credit": "",
+                    "featureLayout": "natural",
+                    "featureFocal": "center",
+                    "homepageFocal": "center",
+                    "width": 1400,
+                    "height": 900,
+                    "displaySize": "large",
+                    "alignment": "center",
+                    "wrapMode": "none"
+                },
+                {
+                    "id": "image_mshuf0dq_91ol7e",
+                    "url": "https://outsidetheworld.com/media/narrative/2026-08-03-level-one/super-frgmnts-bubble-door-regression-v1.webp",
+                    "objectKey": "",
+                    "alt": "The bubble door moved again",
+                    "caption": "There's an easter egg in the game when this door is encountered.",
+                    "credit": "",
+                    "featureLayout": "natural",
+                    "featureFocal": "center",
+                    "homepageFocal": "center",
+                    "width": 960,
+                    "height": 540,
+                    "displaySize": "large",
+                    "alignment": "center",
+                    "wrapMode": "none"
+                },
+                {
+                    "id": "image_mshug7e0_tj0nug",
+                    "url": "https://outsidetheworld.com/media/narrative/2026-08-03-level-one/super-frgmnts-rd42-descent-v1.webp",
+                    "objectKey": "",
+                    "alt": "The RD-42 descending toward Veyra",
+                    "caption": "Descent into Veyra",
+                    "credit": "",
+                    "featureLayout": "natural",
+                    "featureFocal": "center",
+                    "homepageFocal": "center",
+                    "width": 960,
+                    "height": 540,
+                    "displaySize": "medium",
+                    "alignment": "center",
+                    "wrapMode": "none"
+                },
+                {
+                    "id": "image_mshugmrw_s06chu",
+                    "url": "https://outsidetheworld.com/media/narrative/2026-08-03-level-one/super-frgmnts-aryn-dras-dialogue-v1.webp",
+                    "objectKey": "",
+                    "alt": "Aryn and Dras in conversation",
+                    "caption": "Yes. Diet Coke FTW.",
+                    "credit": "",
+                    "featureLayout": "natural",
+                    "featureFocal": "center",
+                    "homepageFocal": "center",
+                    "width": 960,
+                    "height": 540,
+                    "displaySize": "medium",
+                    "alignment": "center",
+                    "wrapMode": "none"
+                },
+                {
+                    "id": "image_mshugz87_bowuw6",
+                    "url": "https://outsidetheworld.com/media/narrative/2026-08-03-level-one/super-frgmnts-foundry-action-v1.webp",
+                    "objectKey": "",
+                    "alt": "Aryn fighting through the Shard Foundry",
+                    "caption": "Combat comes fast.",
+                    "credit": "",
+                    "featureLayout": "natural",
+                    "featureFocal": "center",
+                    "homepageFocal": "center",
+                    "width": 960,
+                    "height": 540,
+                    "displaySize": "medium",
+                    "alignment": "center",
+                    "wrapMode": "none"
+                },
+                {
+                    "id": "image_mshuh8xq_gekw1a",
+                    "url": "https://outsidetheworld.com/media/narrative/2026-08-03-level-one/super-frgmnts-landing-invitation-v1.webp",
+                    "objectKey": "",
+                    "alt": "A small playable piece of Veyra",
+                    "caption": "",
+                    "credit": "",
+                    "featureLayout": "natural",
+                    "featureFocal": "center",
+                    "homepageFocal": "center",
+                    "width": 960,
+                    "height": 540,
+                    "displaySize": "medium",
+                    "alignment": "center",
+                    "wrapMode": "none"
+                }
+            ],
+            "featureImageRef": "image_msi23pqt_15sqlz",
+            "formatting": {
+                "mode": "otw-enhanced-markdown",
+                "version": 1,
+                "fallback": "markdown"
+            }
+        },
+        "post_id": "August 3, 2026--level-one",
+        "share_path": "archive/2026-08-03-level-one.html",
+        "og_image": "Images/og/archive/2026-08-03-level-one.png"
+    },
+    {
         "title": "A whole lot of nothing.",
         "date": "July 29, 2026",
         "body": "_What do you expect? I'm just one person._\n\n> **Updated July 30, 2026** \u2014 The project has been delayed. I'll share a new launch date when I have one.\n\n![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-07-29-a-whole-lot-of-nothing-ms6q2rp6.jpg \"Rain ought to come back. Any day now. We're waiting.\")\n\n**I've been busy**\u00a0elsewhere this week, so I don't have a feature essay or even a rumination to share on this here blog. Instead, I can only share with you the promise that something relatively good is coming, and I am having fun preparing it. I think it is safe to say that it is not a book, not another large essay, and not even a Web site feature or update.\n\nInstead, it is a new app. That's all I will say for now. I mentioned on the frgmnts app that what I am working on is a sort of \"love letter\" to my past, and it truly is. I hope it will all make sense when it is released. You'll see a lot of disparate elements working together in a strange way, and these elements both induce a sense of nostalgia and provoke a sense of newness and opportunity.\n\nI will be releasing it as a web app first, as my time allowed for iOS development is not as available as it was when I was first working on frgmnts. When it releases and feedback is received, I will try wrapping it up into an iOS app before the end of the year.\n\n**MMMM I am really**\u00a0trying to not spoil the surprise. Hard to write about it without actually writing about it. So really what we have now is 230 words of absolutely nothing, which I suppose is nothing new for me.\n\nSide note: I have posted video stories to Instagram two times in the past couple of weeks. That's just not something I do, but I did it because I am so desperate to get the word out about frgmnts and get more users to join. Guess how it went? I got 0 people to join. Goose egg. Zero. I will just remain patient. The product is sound. I have this sneaky feeling that within the next 12 months, something is going down with Meta, and I will be here to capitalize on it.\n\nThey certainly have a way of screwing up their own business for the sake of money, and I will be happy to take any users who swear off their products at their time of collapse.\n\n**I am still well on**\u00a0target for my launch goal of August 1st for this announcement. When it's ready, it will show up front and center here on OTW. Until then, keep your eyes to the stars and intentions on the horizon.",
