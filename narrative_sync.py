@@ -92,6 +92,39 @@ def safe_link_url(value):
         return url
     return ''
 
+def sanitize_reader_callout(value):
+    if not isinstance(value, dict):
+        return {}
+
+    actions = []
+    raw_actions = value.get('actions') if isinstance(value.get('actions'), list) else []
+    for action in raw_actions:
+        if not isinstance(action, dict):
+            continue
+        label = str(action.get('label') or '').strip()[:80]
+        url = safe_link_url(action.get('url'))
+        if not label or not url:
+            continue
+        actions.append({
+            'label': label,
+            'url': url,
+            'download': bool(action.get('download')),
+        })
+        if len(actions) == 2:
+            break
+
+    title = str(value.get('title') or '').strip()[:160]
+    if not title or not actions:
+        return {}
+
+    return {
+        'ariaLabel': str(value.get('ariaLabel') or title).strip()[:160],
+        'kicker': str(value.get('kicker') or '').strip()[:120],
+        'title': title,
+        'body': str(value.get('body') or '').strip()[:300],
+        'actions': actions,
+    }
+
 def safe_image_url(value):
     url = str(value or '').strip()
     if not url:
@@ -728,6 +761,9 @@ def sanitize_publisher_metadata(metadata):
     feature_image_ref = str(metadata.get('featureImageRef') or '')[:120]
     if feature_image_ref:
         cleaned['featureImageRef'] = feature_image_ref
+    reader_callout = sanitize_reader_callout(metadata.get('readerCallout'))
+    if reader_callout:
+        cleaned['readerCallout'] = reader_callout
     if version >= 2:
         cleaned['formatting'] = {
             'mode': 'otw-enhanced-markdown',
@@ -1420,6 +1456,41 @@ def render_feature_figure(feature, tape_text=''):
                 <div class="entry-feature-media"{aspect_style}><img src="{smartypants_safe(feature.get('render_url') or feature.get('url'))}" alt="{smartypants_safe(feature.get('alt'))}" decoding="async" fetchpriority="high"{dimension_attrs}>{tape_html}</div>{caption_html}
             </figure>'''
 
+def render_reader_callout(post, after_feature=False):
+    publisher = post.get('publisher') if isinstance(post.get('publisher'), dict) else {}
+    callout = sanitize_reader_callout(publisher.get('readerCallout'))
+    if not callout:
+        return ''
+
+    kicker_html = ''
+    if callout.get('kicker'):
+        kicker_html = f'<p class="entry-callout__kicker">{smartypants_safe(callout["kicker"])}</p>'
+    body_html = ''
+    if callout.get('body'):
+        body_html = f'<p class="entry-callout__body">{smartypants_safe(callout["body"])}</p>'
+
+    actions_html = []
+    for index, action in enumerate(callout['actions']):
+        action_class = 'entry-callout__action--primary' if index == 0 else 'entry-callout__action--secondary'
+        download_attr = ' download' if action.get('download') else ''
+        icon = '\u2192' if index == 0 else '\u2193'
+        actions_html.append(
+            f'<a class="entry-callout__action {action_class}" href="{smartypants_safe(action["url"])}"{download_attr}>'
+            f'<span>{smartypants_safe(action["label"])}</span>'
+            f'<span class="entry-callout__action-icon" aria-hidden="true">{icon}</span>'
+            '</a>'
+        )
+
+    placement_class = ' entry-callout--after-feature' if after_feature else ''
+    return f'''
+            <aside class="entry-callout{placement_class}" aria-label="{smartypants_safe(callout['ariaLabel'])}">
+                <span class="entry-callout__rail" aria-hidden="true"></span>
+                <div class="entry-callout__copy">{kicker_html}
+                    <p class="entry-callout__title">{smartypants_safe(callout['title'])}</p>{body_html}
+                </div>
+                <div class="entry-callout__actions">{"".join(actions_html)}</div>
+            </aside>'''
+
 def find_font(candidates):
     for candidate in candidates:
         if os.path.exists(candidate):
@@ -1546,6 +1617,7 @@ def render_share_page(post, newer_post=None, older_post=None, include_draft_read
     reader_nav = render_reader_nav(newer_post, older_post)
     tape_text = 'DELAYED — STILL COOKING' if update_notice_html and 'delayed' in update_notice_html.lower() else ''
     feature_html = render_feature_figure(feature_image, tape_text)
+    reader_callout_html = render_reader_callout(post, after_feature=bool(feature_image))
     feature_preload = ''
     if feature_image:
         feature_preload = (
@@ -1627,7 +1699,7 @@ def render_share_page(post, newer_post=None, older_post=None, include_draft_read
             }} catch (error) {{}}
         }}());
     </script>
-    <link href="../archive_reader.css?v=20260722-typography-foundation" rel="stylesheet" />
+    <link href="../archive_reader.css?v=20260807-player-guide" rel="stylesheet" />
     <meta name="description" content="{smartypants_safe(description)}" />
     <meta name="theme-color" content="#060809" />
     <meta property="og:site_name" content="Outside The World" />
@@ -1682,7 +1754,7 @@ def render_share_page(post, newer_post=None, older_post=None, include_draft_read
                         </span>
                     </span>
                 </div>
-            </header>{update_notice_block}{feature_html}{reading_aids_block}
+            </header>{update_notice_block}{feature_html}{reader_callout_html}{reading_aids_block}
             <div class="entry-body" id="entry-body">
 {body_html}
             </div>

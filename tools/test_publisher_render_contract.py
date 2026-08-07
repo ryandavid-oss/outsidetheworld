@@ -372,7 +372,7 @@ def test_archive_reader_fonts_are_local_preloaded_and_first_paint_stable():
     assert "fonts.googleapis.com" not in rendered
     assert "fonts.gstatic.com" not in rendered
     assert "assets/fonts/otw-fonts.css?v=20260722a" in rendered
-    assert "archive_reader.css?v=20260722-typography-foundation" in rendered
+    assert "archive_reader.css?v=20260807-player-guide" in rendered
     assert "archive_reader.js?v=20260722-typography-foundation" in rendered
 
     for filename in font_files:
@@ -768,6 +768,43 @@ def test_explicit_feature_image_drives_opening_and_is_not_duplicated_in_body():
     assert body.count(IMAGE_TWO) == 0
     assert body.count(IMAGE_ONE) == 1
     assert narrative_sync.first_article_image({"title": "Feature", "publisher": metadata})["url"] == IMAGE_TWO
+
+
+def test_reader_callout_is_sanitized_and_rendered_below_the_feature_image():
+    metadata = fixture_metadata()
+    metadata["version"] = 2
+    metadata["featureImageRef"] = "image_one"
+    metadata["readerCallout"] = {
+        "ariaLabel": "Play the game or download the guide",
+        "kicker": "SUPER FRGMNTS // ARRIVAL ON VEYRA",
+        "title": "Your descent starts here.",
+        "body": "Play in your browser, or read the field guide first.",
+        "actions": [
+            {"label": "Play the game now", "url": "https://outsidetheworld.com/super_frgmnts.html"},
+            {"label": "Unsafe action", "url": "javascript:alert(1)"},
+            {"label": "Download player’s guide", "url": "/output/pdf/player-guide.pdf", "download": True},
+        ],
+    }
+    metadata = narrative_sync.sanitize_publisher_metadata(metadata)
+    share_html = narrative_sync.render_share_page({
+        "title": "Reader Callout Fixture",
+        "date": "August 3, 2026",
+        "file": "2026-08-03-reader-callout-fixture.md",
+        "body": f'![Feature]({IMAGE_ONE})\n\nOpening paragraph.',
+        "publisher": metadata,
+    })
+
+    assert len(metadata["readerCallout"]["actions"]) == 2
+    assert 'class="entry-callout entry-callout--after-feature"' in share_html
+    assert 'href="https://outsidetheworld.com/super_frgmnts.html"' in share_html
+    assert 'href="/output/pdf/player-guide.pdf" download' in share_html
+    assert "javascript:" not in share_html
+    assert share_html.index('class="entry-feature ') < share_html.index('class="entry-callout ')
+    assert share_html.index('class="entry-callout ') < share_html.index('class="entry-body"')
+
+    reader_css = (ROOT / "archive_reader.css").read_text(encoding="utf-8")
+    assert ".entry-callout" in reader_css
+    assert "#FF69B4" in reader_css
 
 
 def test_article_shell_has_home_identity_schema_and_consistent_section_levels():

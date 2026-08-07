@@ -153,7 +153,7 @@ def check_typography_contracts() -> None:
         if "archive_reader.css" not in source:
             continue
         require("../assets/fonts/otw-fonts.css?v=20260722a" in source, f"{archive_path.name} lacks stable reader fonts")
-        require("archive_reader.css?v=20260722-typography-foundation" in source, f"{archive_path.name} has stale reader CSS")
+        require("archive_reader.css?v=20260807-player-guide" in source, f"{archive_path.name} has stale reader CSS")
         require("archive_reader.js?v=20260722-typography-foundation" in source, f"{archive_path.name} has stale reader JavaScript")
 
     generated_groups = ["wayback", "poems", "iotd", "fragments"]

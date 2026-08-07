@@ -455,6 +455,24 @@ const current_narrative = [
                 }
             ],
             "featureImageRef": "image_msi23pqt_15sqlz",
+            "readerCallout": {
+                "ariaLabel": "Play Super Frgmnts or download the player\u2019s guide",
+                "kicker": "SUPER FRGMNTS // ARRIVAL ON VEYRA",
+                "title": "Your descent starts here.",
+                "body": "Play Episode 01 in your browser, or download the field guide before you land.",
+                "actions": [
+                    {
+                        "label": "Play the game now",
+                        "url": "https://outsidetheworld.com/super_frgmnts.html",
+                        "download": false
+                    },
+                    {
+                        "label": "Download player\u2019s guide",
+                        "url": "/output/pdf/super-frgmnts-arrival-on-veyra-player-guide.pdf",
+                        "download": true
+                    }
+                ]
+            },
             "formatting": {
                 "mode": "otw-enhanced-markdown",
                 "version": 1,
