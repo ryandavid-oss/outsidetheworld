@@ -4,10 +4,11 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#0a0a0a" />
-  <title>OTW Palette | Outside The World</title>
+  <meta name="theme-color" content="#272e39" />
+  <meta name="color-scheme" content="dark" />
+  <title>OTW Brand System | Outside The World</title>
   <meta name="description"
-    content="A visual palette board for Outside The World, including core colors, supporting accents, and logo specimens across dark and light themes." />
+    content="The shared visual language for Outside The World and frgmnts, including color, typography, surfaces, and current identity assets." />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -38,6 +39,13 @@
       --index-blue: #77A3FF;
       --index-teal: #9EC5C1;
 
+      --chrome-slate: #272E39;
+      --surface-ink: #101114;
+      --deep-void: #050505;
+      --muted-text: #B9B9B9;
+      --frgmnts-paper: #F8F1E6;
+      --hairline: rgba(238, 238, 238, 0.14);
+
       --wp-cream: #F7F0EA;
       --wp-parchment: #EFE3D8;
       --wp-soft-charcoal: #2E2831;
@@ -45,29 +53,22 @@
       --wp-warm-plum: #675168;
       --wp-gold: #C9A96F;
 
-      --page-bg: #090A0D;
-      --page-bg-deep: #050608;
-      --surface: rgba(255, 255, 255, 0.05);
-      --surface-strong: rgba(255, 255, 255, 0.08);
-      --border: rgba(255, 255, 255, 0.12);
-      --text: #F5F7FB;
-      --text-soft: rgba(245, 247, 251, 0.74);
-      --shadow: 0 30px 80px rgba(0, 0, 0, 0.32);
-      --radius-xl: 34px;
-      --radius-lg: 26px;
-      --radius-md: 20px;
+      --page-bg: #1A1C20;
+      --page-bg-deep: #050505;
+      --surface: rgba(16, 17, 20, 0.78);
+      --surface-strong: rgba(26, 28, 32, 0.92);
+      --border: rgba(238, 238, 238, 0.14);
+      --text: #EEEEEE;
+      --text-soft: rgba(238, 238, 238, 0.72);
+      --shadow: 0 14px 36px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(238, 238, 238, 0.035);
+      --radius-feature: 28px;
+      --radius-xl: 18px;
+      --radius-lg: 14px;
+      --radius-md: 8px;
+      --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --font-serif: Georgia, "Times New Roman", serif;
+      --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
       --ease: cubic-bezier(0.23, 1, 0.32, 1);
-    }
-
-    html[data-theme="light"] {
-      --page-bg: #F5F0E9;
-      --page-bg-deep: #EAE3DA;
-      --surface: rgba(255, 255, 255, 0.72);
-      --surface-strong: rgba(255, 255, 255, 0.9);
-      --border: rgba(27, 54, 93, 0.12);
-      --text: #1A1C20;
-      --text-soft: rgba(26, 28, 32, 0.68);
-      --shadow: 0 24px 60px rgba(41, 38, 33, 0.12);
     }
 
     * {
@@ -87,19 +88,16 @@
 
     body {
       min-height: 100vh;
-      font-family: "IBM Plex Sans", sans-serif;
+      font-family: var(--font-sans);
       color: var(--text);
       padding-top: var(--safe-top);
       padding-bottom: var(--safe-bottom);
       padding-left: var(--safe-left);
       padding-right: var(--safe-right);
       background:
-        radial-gradient(720px 460px at 12% 10%, rgba(119, 163, 255, 0.12), transparent 62%),
-        radial-gradient(640px 420px at 86% 12%, rgba(158, 197, 193, 0.10), transparent 58%),
-        radial-gradient(520px 320px at 18% 78%, rgba(255, 105, 180, 0.09), transparent 58%),
-        radial-gradient(460px 300px at 82% 82%, rgba(224, 191, 184, 0.09), transparent 56%),
+        linear-gradient(118deg, rgba(99, 149, 238, 0.13) 0%, rgba(99, 149, 238, 0.025) 28%, transparent 47%),
+        linear-gradient(242deg, rgba(145, 175, 179, 0.075) 0%, transparent 34%),
         linear-gradient(180deg, var(--page-bg) 0%, var(--page-bg-deep) 100%);
-      transition: background 0.35s var(--ease), color 0.35s var(--ease);
     }
 
     body::before {
@@ -108,98 +106,185 @@
       inset: 0;
       pointer-events: none;
       background:
-        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
-      background-size: 68px 68px;
-      mask-image: radial-gradient(circle at 50% 18%, black 0%, transparent 74%);
-      opacity: 0.35;
+        radial-gradient(540px 360px at 10% 8%, rgba(119, 163, 255, 0.08), transparent 70%),
+        radial-gradient(520px 340px at 92% 12%, rgba(145, 175, 179, 0.07), transparent 70%);
+      opacity: 0.8;
     }
 
     .shell {
       width: min(1220px, calc(100% - 28px));
       margin: 0 auto;
-      padding: 24px 0 72px;
+      padding: 14px 0 72px;
       position: relative;
       z-index: 1;
     }
 
-    .hero {
+    .brand-masthead {
+      position: sticky;
+      top: max(10px, calc(var(--safe-top) + 10px));
+      z-index: 30;
+      min-height: 62px;
+      padding: 10px 12px;
       display: grid;
-      grid-template-columns: 1.4fr minmax(220px, 320px);
-      gap: 22px;
-      align-items: stretch;
-      margin-bottom: 28px;
+      grid-template-columns: auto auto minmax(0, 1fr);
+      align-items: center;
+      gap: 16px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      background: rgba(26, 28, 32, 0.82);
+      backdrop-filter: blur(22px) saturate(1.18);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.28);
     }
 
-    .hero-card,
-    .control-card,
+    .brand-home {
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .brand-home img {
+      width: clamp(146px, 18vw, 220px);
+      height: auto;
+    }
+
+    .brand-system-label {
+      padding-left: 16px;
+      border-left: 1px solid var(--border);
+      color: var(--text-soft);
+      font: 600 0.68rem/1.2 var(--font-mono);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .section-nav {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 4px;
+      min-width: 0;
+    }
+
+    .section-nav a {
+      min-height: 40px;
+      padding: 0 11px;
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid transparent;
+      border-radius: var(--radius-md);
+      color: var(--text-soft);
+      font: 600 0.72rem/1 var(--font-mono);
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+    }
+
+    .section-nav a:hover,
+    .section-nav a:focus-visible {
+      border-color: rgba(160, 190, 245, 0.24);
+      background: rgba(160, 190, 245, 0.08);
+      color: var(--text);
+    }
+
+    .masthead-jump {
+      display: none;
+      min-width: 0;
+    }
+
+    .brand-intro {
+      position: relative;
+      padding: clamp(58px, 9vw, 112px) clamp(4px, 1vw, 12px) clamp(42px, 6vw, 72px);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(240px, 360px);
+      align-items: end;
+      gap: clamp(32px, 6vw, 88px);
+    }
+
+    .brand-intro::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(99, 149, 238, 0.62), rgba(145, 175, 179, 0.3) 42%, var(--border) 76%, transparent);
+    }
+
+    .intro-kicker,
+    .family-label {
+      margin: 0;
+      color: var(--brand-light-blue);
+      font: 600 0.72rem/1.4 var(--font-mono);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .intro-title {
+      max-width: 840px;
+      margin: 14px 0 0;
+      font: 700 clamp(3rem, 7vw, 6.5rem)/0.93 var(--font-serif);
+      letter-spacing: -0.055em;
+      text-wrap: balance;
+    }
+
+    .intro-dek {
+      max-width: 760px;
+      margin: 24px 0 0;
+      color: var(--text-soft);
+      font-size: clamp(1rem, 1.7vw, 1.25rem);
+      line-height: 1.65;
+      text-wrap: pretty;
+    }
+
+    .family-panel {
+      padding: 20px;
+      display: grid;
+      gap: 18px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      background: rgba(16, 17, 20, 0.7);
+      box-shadow: var(--shadow);
+    }
+
+    .family-marks {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .family-mark {
+      min-height: 110px;
+      padding: 16px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.035);
+    }
+
+    .family-mark img {
+      max-width: 100%;
+      max-height: 76px;
+    }
+
+    .family-mark .frgmnts-family-mark {
+      max-width: 88px;
+    }
+
+    .family-note {
+      margin: 0;
+      color: var(--text-soft);
+      font-size: 0.9rem;
+      line-height: 1.55;
+    }
+
     .section-card,
     .logo-card {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius-xl);
-      backdrop-filter: blur(18px);
       box-shadow: var(--shadow);
-    }
-
-    .hero-card {
-      padding: 30px 30px 26px;
-      min-height: 250px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .hero-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      margin-bottom: 22px;
-    }
-
-    .hero-logo {
-      width: clamp(180px, 26vw, 260px);
-      height: auto;
-      display: block;
-      filter: drop-shadow(0 0 28px rgba(99, 149, 238, 0.16));
-    }
-
-    .hero-title {
-      margin: 0;
-      font-family: "IBM Plex Serif", serif;
-      font-size: clamp(2.2rem, 5vw, 4.4rem);
-      line-height: 0.96;
-      letter-spacing: -0.05em;
-    }
-
-    .control-card {
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      min-height: 250px;
-      gap: 20px;
-    }
-
-    .theme-label {
-      margin: 0;
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 0.68rem;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--text-soft);
-      text-align: center;
-    }
-
-    .jump-wrap {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      width: 100%;
-      max-width: 240px;
-      margin-top: 2px;
     }
 
     .jump-select {
@@ -225,41 +310,12 @@
       background: rgba(255, 255, 255, 0.08);
     }
 
-    .toggle-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      width: 100%;
-      max-width: 240px;
-      margin: 0 auto;
-    }
-
-    .theme-btn {
-      border: 1px solid var(--border);
-      background: rgba(255, 255, 255, 0.05);
-      color: var(--text);
-      border-radius: 999px;
-      min-height: 84px;
-      padding: 18px 14px;
-      font: 700 0.96rem/1.15 "IBM Plex Sans", sans-serif;
-      cursor: pointer;
-      text-align: center;
-      transition: transform 0.18s var(--ease), border-color 0.18s var(--ease), background 0.18s var(--ease), box-shadow 0.18s var(--ease);
-    }
-
-    .theme-btn:hover {
-      transform: translateY(-1px);
-    }
-
-    .theme-btn.is-active {
-      border-color: rgba(160, 190, 245, 0.34);
-      background: linear-gradient(135deg, rgba(119, 163, 255, 0.16), rgba(158, 197, 193, 0.12));
-      box-shadow: 0 0 0 1px rgba(160, 190, 245, 0.12) inset;
-    }
-
     .section-card {
-      padding: 26px;
+      padding: clamp(20px, 2.4vw, 30px);
       margin-bottom: 22px;
+      background: var(--surface);
+      backdrop-filter: none;
+      scroll-margin-top: 94px;
     }
 
     .section-header {
@@ -272,14 +328,14 @@
 
     .section-title {
       margin: 0;
-      font-family: "IBM Plex Serif", serif;
+      font-family: var(--font-serif);
       font-size: clamp(1.5rem, 3vw, 2.15rem);
       letter-spacing: -0.03em;
     }
 
     .section-meta {
       margin: 0;
-      font-family: "IBM Plex Mono", monospace;
+      font-family: var(--font-mono);
       font-size: 0.68rem;
       letter-spacing: 3px;
       text-transform: uppercase;
@@ -299,17 +355,23 @@
 
     .pantone-card {
       overflow: hidden;
-      border-radius: 18px;
+      border-radius: var(--radius-lg);
       background: rgba(255, 255, 255, 0.86);
       border: 1px solid rgba(0, 0, 0, 0.08);
       box-shadow: 0 12px 34px rgba(0, 0, 0, 0.14);
       min-height: 320px;
       display: flex;
       flex-direction: column;
+      cursor: pointer;
+      transition: transform 0.18s var(--ease), box-shadow 0.18s var(--ease), border-color 0.18s var(--ease);
     }
 
-    html[data-theme="light"] .pantone-card {
-      box-shadow: 0 16px 32px rgba(22, 18, 14, 0.08);
+    .pantone-card:hover,
+    .pantone-card:focus-visible {
+      transform: translateY(-2px);
+      border-color: rgba(99, 149, 238, 0.4);
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.24);
+      outline: none;
     }
 
     .swatch {
@@ -327,7 +389,7 @@
 
     .swatch-code {
       margin: 0 0 6px;
-      font-family: "IBM Plex Sans", sans-serif;
+      font-family: var(--font-sans);
       font-weight: 700;
       font-size: 1.05rem;
       letter-spacing: -0.02em;
@@ -353,7 +415,7 @@
 
     .type-card {
       padding: 22px;
-      border-radius: 24px;
+      border-radius: var(--radius-lg);
       background:
         radial-gradient(220px 120px at 84% 0%, rgba(160, 190, 245, 0.08), transparent 68%),
         rgba(255, 255, 255, 0.03);
@@ -366,7 +428,7 @@
 
     .type-kicker {
       margin: 0;
-      font-family: "IBM Plex Mono", monospace;
+      font-family: var(--font-mono);
       font-size: 0.68rem;
       letter-spacing: 3px;
       text-transform: uppercase;
@@ -420,11 +482,14 @@
 
     .logo-card {
       padding: 22px;
+      border-radius: var(--radius-xl);
+      background: var(--surface);
+      backdrop-filter: none;
     }
 
     .logo-kicker {
       margin: 0 0 14px;
-      font-family: "IBM Plex Mono", monospace;
+      font-family: var(--font-mono);
       font-size: 0.68rem;
       letter-spacing: 3px;
       text-transform: uppercase;
@@ -432,7 +497,7 @@
     }
 
     .logo-surface {
-      border-radius: 22px;
+      border-radius: var(--radius-lg);
       padding: 28px;
       min-height: 162px;
       display: flex;
@@ -477,7 +542,7 @@
 
     .ledger {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 18px 26px;
       margin-top: 10px;
     }
@@ -499,13 +564,9 @@
       gap: 18px;
       padding: 9px 0;
       border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-      font-family: "IBM Plex Mono", monospace;
+      font-family: var(--font-mono);
       font-size: 0.82rem;
       letter-spacing: 0.02em;
-    }
-
-    html[data-theme="light"] .ledger-item {
-      border-bottom-color: rgba(27, 54, 93, 0.08);
     }
 
     .ledger-name {
@@ -516,17 +577,297 @@
       color: var(--text);
     }
 
-    @media (max-width: 980px) {
-      .hero {
-        grid-template-columns: 1fr;
-      }
+    .type-family + .type-family {
+      margin-top: 28px;
+      padding-top: 26px;
+      border-top: 1px solid var(--border);
+    }
 
+    .type-family-header {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(220px, 0.75fr);
+      gap: 18px;
+      align-items: end;
+      margin-bottom: 16px;
+    }
+
+    .type-family-title {
+      margin: 0;
+      font-size: 1.05rem;
+      letter-spacing: -0.02em;
+    }
+
+    .type-family-description {
+      margin: 0;
+      color: var(--text-soft);
+      font-size: 0.88rem;
+      line-height: 1.55;
+      text-align: right;
+    }
+
+    @media (min-width: 981px) {
+      .type-family-wide .type-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    .token-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.025);
+    }
+
+    .token-card {
+      min-height: 142px;
+      padding: 18px;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 14px;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      transition: background 0.18s ease;
+    }
+
+    .token-card:hover,
+    .token-card:focus-visible {
+      background: rgba(160, 190, 245, 0.07);
+      outline: none;
+    }
+
+    .token-card:nth-child(4n) {
+      border-right: 0;
+    }
+
+    .token-card:nth-last-child(-n + 4) {
+      border-bottom: 0;
+    }
+
+    .token-chip {
+      width: 42px;
+      height: 42px;
+      border: 1px solid rgba(238, 238, 238, 0.18);
+      border-radius: var(--radius-md);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+
+    .token-name {
+      margin: 0;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .token-use {
+      margin: 4px 0 0;
+      color: var(--text-soft);
+      font-size: 0.84rem;
+      line-height: 1.45;
+    }
+
+    .token-code {
+      margin: 0;
+      color: var(--brand-light-blue);
+      font: 500 0.74rem/1.4 var(--font-mono);
+      letter-spacing: 0.04em;
+    }
+
+    .usage-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .usage-card {
+      min-height: 210px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.025);
+    }
+
+    .usage-kicker {
+      margin: 0;
+      color: var(--text-soft);
+      font: 600 0.68rem/1.4 var(--font-mono);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .editorial-sample {
+      margin-top: auto;
+    }
+
+    .editorial-sample strong {
+      display: block;
+      font: 700 1.8rem/1.05 var(--font-serif);
+      letter-spacing: -0.04em;
+    }
+
+    .editorial-sample span {
+      display: block;
+      margin-top: 10px;
+      color: var(--text-soft);
+      font-family: var(--font-serif);
+    }
+
+    .editorial-rule {
+      height: 1px;
+      margin-top: 18px;
+      background: linear-gradient(90deg, var(--brand-blue), var(--brand-teal) 52%, transparent);
+    }
+
+    .product-sample {
+      margin-top: auto;
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border: 1px solid rgba(238, 238, 238, 0.12);
+      border-radius: var(--radius-xl);
+      background: rgba(26, 28, 32, 0.88);
+      backdrop-filter: blur(16px);
+    }
+
+    .product-sample img {
+      width: 92px;
+      height: auto;
+    }
+
+    .product-control {
+      min-height: 36px;
+      padding: 0 12px;
+      display: inline-flex;
+      align-items: center;
+      border-radius: var(--radius-md);
+      background: var(--text-main);
+      color: var(--logo-ink);
+      font: 700 0.78rem/1 "IBM Plex Sans", sans-serif;
+    }
+
+    .signal-sample {
+      margin-top: auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .signal-chip {
+      min-height: 34px;
+      padding: 0 11px;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.035);
+      font: 600 0.72rem/1 var(--font-mono);
+    }
+
+    .signal-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: currentColor;
+      box-shadow: 0 0 14px currentColor;
+    }
+
+    .signal-chip.available {
+      color: var(--signal-green);
+    }
+
+    .signal-chip.attention {
+      color: var(--brand-orange);
+    }
+
+    .signal-chip.identity {
+      color: var(--brand-pink);
+    }
+
+    .companion-section {
+      background:
+        linear-gradient(135deg, rgba(224, 191, 184, 0.045), transparent 46%),
+        var(--surface);
+    }
+
+    .copy-toast {
+      position: fixed;
+      right: max(18px, var(--safe-right));
+      bottom: max(18px, calc(var(--safe-bottom) + 18px));
+      z-index: 80;
+      max-width: min(320px, calc(100vw - 36px));
+      padding: 12px 14px;
+      border: 1px solid rgba(160, 190, 245, 0.28);
+      border-radius: var(--radius-md);
+      background: rgba(26, 28, 32, 0.94);
+      color: var(--text);
+      font: 600 0.78rem/1.4 var(--font-mono);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.32);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(8px);
+      transition: opacity 0.18s ease, transform 0.18s ease;
+    }
+
+    .copy-toast.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 980px) {
       .cards-grid,
       .cards-grid.compact,
       .type-grid,
       .logos-grid,
       .ledger {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .section-nav a {
+        padding-inline: 8px;
+        font-size: 0.66rem;
+      }
+
+      .brand-system-label {
+        display: none;
+      }
+
+      .brand-masthead {
+        grid-template-columns: auto minmax(0, 1fr);
+      }
+
+      .brand-intro {
+        grid-template-columns: minmax(0, 1fr) minmax(220px, 0.55fr);
+      }
+
+      .token-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .token-card:nth-child(odd) {
+        border-right: 1px solid var(--border);
+      }
+
+      .token-card:nth-child(even) {
+        border-right: 0;
+      }
+
+      .token-card:nth-last-child(-n + 4) {
+        border-bottom: 1px solid var(--border);
+      }
+
+      .token-card:nth-last-child(-n + 2) {
+        border-bottom: 0;
+      }
+
+      .usage-grid {
+        grid-template-columns: 1fr;
       }
     }
 
@@ -536,38 +877,19 @@
         padding-top: 14px;
       }
 
-      .hero-card,
-      .control-card,
       .section-card,
       .logo-card {
-        border-radius: 26px;
+        border-radius: var(--radius-xl);
       }
 
-      .hero-card,
       .section-card,
       .logo-card {
         padding: 20px;
       }
 
-      .hero-card,
-      .control-card {
-        min-height: 0;
-      }
-
-      .hero-top {
-        justify-content: center;
-        margin-bottom: 18px;
-      }
-
-      .hero-card {
-        align-items: center;
-        text-align: center;
-      }
-
       .logos-grid,
       .type-grid,
-      .ledger,
-      .toggle-row {
+      .ledger {
         grid-template-columns: 1fr;
       }
 
@@ -580,19 +902,6 @@
       .section-header {
         flex-direction: column;
         align-items: flex-start;
-      }
-
-      .control-card {
-        padding: 20px;
-      }
-
-      .toggle-row {
-        max-width: none;
-      }
-
-      .theme-btn {
-        min-height: 64px;
-        font-size: 0.9rem;
       }
 
       .swatch {
@@ -617,38 +926,123 @@
         font-size: 0.76rem;
         line-height: 1.25;
       }
+
+      .brand-masthead {
+        top: max(8px, calc(var(--safe-top) + 8px));
+        grid-template-columns: auto minmax(0, 1fr);
+        min-height: 58px;
+        padding: 8px 10px;
+      }
+
+      .brand-home img {
+        width: 142px;
+      }
+
+      .section-nav {
+        display: none;
+      }
+
+      .masthead-jump {
+        display: block;
+      }
+
+      .masthead-jump .jump-select {
+        min-height: 40px;
+        padding: 8px 10px;
+        border-radius: var(--radius-md);
+        font-size: 0.68rem;
+      }
+
+      .brand-intro {
+        padding: 52px 4px 40px;
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      .intro-title {
+        font-size: clamp(2.85rem, 15vw, 4.2rem);
+      }
+
+      .intro-dek {
+        margin-top: 18px;
+        font-size: 1rem;
+      }
+
+      .family-panel {
+        padding: 16px;
+      }
+
+      .family-mark {
+        min-height: 92px;
+      }
+
+      .type-family-header {
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
+
+      .type-family-description {
+        text-align: left;
+      }
+
+      .token-card {
+        min-height: 132px;
+        padding: 14px;
+      }
+
+      .token-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
     }
   </style>
 </head>
 
 <body>
   <div class="shell">
-    <section class="hero">
-      <div class="hero-card">
-        <div class="hero-top">
-          <img id="heroLogo" class="hero-logo" src="Images/Equal.svg" alt="Outside The World logo" />
-        </div>
-        <h1 class="hero-title">The OTW Brand.</h1>
+    <header class="brand-masthead">
+      <a class="brand-home" href="./" aria-label="Outside The World home">
+        <img src="Images/Equal.svg" alt="Outside The World" />
+      </a>
+      <span class="brand-system-label">Brand System</span>
+      <nav class="section-nav" aria-label="Brand system sections">
+        <a href="#core-palette">Color</a>
+        <a href="#surface-palette">Surfaces</a>
+        <a href="#type-system">Type</a>
+        <a href="#usage-examples">In use</a>
+        <a href="#logos-brandmarks">Marks</a>
+      </nav>
+      <div class="masthead-jump">
+        <select class="jump-select" id="jumpSelect" aria-label="Jump to brand system section">
+          <option value="">Sections</option>
+          <option value="core-palette">Core colors</option>
+          <option value="supporting-palette">Supporting colors</option>
+          <option value="surface-palette">Surfaces and text</option>
+          <option value="type-system">Typography by surface</option>
+          <option value="usage-examples">Colors in use</option>
+          <option value="logos-brandmarks">Logos and brandmarks</option>
+          <option value="wordperson-palette">Companion palette</option>
+          <option value="palette-ledger">Token ledger</option>
+        </select>
       </div>
+    </header>
 
-      <aside class="control-card">
-        <p class="theme-label">View Mode</p>
-        <div class="toggle-row">
-          <button class="theme-btn is-active" type="button" data-theme-target="dark">Dark Surface</button>
-          <button class="theme-btn" type="button" data-theme-target="light">Light Surface</button>
+    <section class="brand-intro" aria-labelledby="page-title">
+      <div>
+        <p class="intro-kicker">Outside The World / Brand System</p>
+        <h1 class="intro-title" id="page-title">One family.<br />Distinct voices.</h1>
+        <p class="intro-dek">Shared color and atmosphere across Outside The World and frgmnts, with typography and rhythm tuned to each surface.</p>
+      </div>
+      <aside class="family-panel" aria-label="OTW family identity">
+        <p class="family-label">Shared family</p>
+        <div class="family-marks">
+          <div class="family-mark">
+            <img src="Images/OTW_Brandmark_Main.svg" alt="Outside The World brandmark" />
+          </div>
+          <div class="family-mark">
+            <img class="frgmnts-family-mark" src="Images/assets/frgmnts-lockup-light.svg" alt="frgmnts mark" />
+          </div>
         </div>
-        <div class="jump-wrap">
-          <p class="theme-label">Jump To</p>
-          <select class="jump-select" id="jumpSelect" aria-label="Jump to palette section">
-            <option value="">Select section</option>
-            <option value="core-palette">Core OTW palette</option>
-            <option value="supporting-palette">Supporting OTW colors</option>
-            <option value="wordperson-palette">Word.person palette</option>
-            <option value="type-system">Typography system</option>
-            <option value="logos-brandmarks">Logos and brandmarks</option>
-            <option value="palette-ledger">Palette ledger</option>
-          </select>
-        </div>
+        <p class="family-note">OTW is editorial and expansive. frgmnts is personal and product-led. Both stay human-scale.</p>
       </aside>
     </section>
 
@@ -683,35 +1077,21 @@
           <div class="swatch" style="background:#1B365D;"></div>
           <div class="swatch-meta">
             <p class="swatch-code">#1B365D</p>
-            <p class="swatch-name">Logo Navy</p>
+            <p class="swatch-name">Heritage Navy</p>
           </div>
         </article>
         <article class="pantone-card">
           <div class="swatch" style="background:#3D5255;"></div>
           <div class="swatch-meta">
             <p class="swatch-code">#3D5255</p>
-            <p class="swatch-name">Logo Teal</p>
+            <p class="swatch-name">Deep Slate</p>
           </div>
         </article>
         <article class="pantone-card">
           <div class="swatch" style="background:#1A1C20;"></div>
           <div class="swatch-meta">
             <p class="swatch-code">#1A1C20</p>
-            <p class="swatch-name">Logo Ink</p>
-          </div>
-        </article>
-        <article class="pantone-card">
-          <div class="swatch" style="background:#0A0A0A;"></div>
-          <div class="swatch-meta">
-            <p class="swatch-code">#0A0A0A</p>
-            <p class="swatch-name">Void Dark</p>
-          </div>
-        </article>
-        <article class="pantone-card">
-          <div class="swatch" style="background:#EEEEEE;"></div>
-          <div class="swatch-meta">
-            <p class="swatch-code">#EEEEEE</p>
-            <p class="swatch-name">Text Main</p>
+            <p class="swatch-name">Midnight Ink</p>
           </div>
         </article>
       </div>
@@ -782,10 +1162,59 @@
       </div>
     </section>
 
-    <section class="section-card" id="wordperson-palette">
+    <section class="section-card" id="surface-palette">
       <div class="section-header">
-        <h2 class="section-title">Word.person companion palette</h2>
-        <p class="section-meta">Emily lane / OTW-adjacent</p>
+        <h2 class="section-title">Surfaces and text</h2>
+        <p class="section-meta">Shared foundation tokens</p>
+      </div>
+      <div class="token-grid">
+        <article class="token-card">
+          <span class="token-chip" style="background:#272E39;"></span>
+          <div><p class="token-name">Chrome Slate</p><p class="token-use">Browser chrome and compact header canvas.</p></div>
+          <p class="token-code">#272E39</p>
+        </article>
+        <article class="token-card">
+          <span class="token-chip" style="background:#101114;"></span>
+          <div><p class="token-name">Surface Ink</p><p class="token-use">Editorial panels and grounded card surfaces.</p></div>
+          <p class="token-code">#101114</p>
+        </article>
+        <article class="token-card">
+          <span class="token-chip" style="background:#1A1C20;"></span>
+          <div><p class="token-name">Midnight Ink</p><p class="token-use">Primary product and identity canvas.</p></div>
+          <p class="token-code">#1A1C20</p>
+        </article>
+        <article class="token-card">
+          <span class="token-chip" style="background:#0A0A0A;"></span>
+          <div><p class="token-name">Void Dark</p><p class="token-use">Deep contrast behind media and marks.</p></div>
+          <p class="token-code">#0A0A0A</p>
+        </article>
+        <article class="token-card">
+          <span class="token-chip" style="background:#050505;"></span>
+          <div><p class="token-name">Deep Void</p><p class="token-use">Lowest page depth and atmospheric edge.</p></div>
+          <p class="token-code">#050505</p>
+        </article>
+        <article class="token-card">
+          <span class="token-chip" style="background:#EEEEEE;"></span>
+          <div><p class="token-name">Text Main</p><p class="token-use">Primary text on dark OTW surfaces.</p></div>
+          <p class="token-code">#EEEEEE</p>
+        </article>
+        <article class="token-card">
+          <span class="token-chip" style="background:#B9B9B9;"></span>
+          <div><p class="token-name">Muted Text</p><p class="token-use">Secondary copy, labels, and context.</p></div>
+          <p class="token-code">#B9B9B9</p>
+        </article>
+        <article class="token-card">
+          <span class="token-chip" style="background:#F8F1E6;"></span>
+          <div><p class="token-name">frgmnts Paper</p><p class="token-use">Warm light reference for product moments.</p></div>
+          <p class="token-code">#F8F1E6</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-card companion-section" id="wordperson-palette">
+      <div class="section-header">
+        <h2 class="section-title">Companion palette</h2>
+        <p class="section-meta">Word.person / Archive</p>
       </div>
       <div class="cards-grid compact">
         <article class="pantone-card">
@@ -835,75 +1264,145 @@
 
     <section class="section-card" id="type-system">
       <div class="section-header">
-        <h2 class="section-title">Typography system</h2>
-        <p class="section-meta">Current OTW type voices</p>
+        <h2 class="section-title">Typography by surface</h2>
+        <p class="section-meta">Hierarchy before font inventory</p>
       </div>
-      <div class="type-grid">
-        <article class="type-card">
-          <p class="type-kicker">Primary Sans</p>
-          <h3 class="type-name">Inter</h3>
-          <p class="type-role">Clean public-facing body copy, modern UI text, and readable utility language across OTW and Professional.</p>
-          <p class="type-sample body" style="font-family:'Inter', sans-serif;">A quarter-century of digital residue keeps finding its way back to the signal.</p>
-          <p class="type-note">Best for: body copy, navigation, modern utility text, calmer public surfaces.</p>
-        </article>
+      <div class="type-family type-family-wide">
+        <div class="type-family-header">
+          <h3 class="type-family-title">OTW editorial</h3>
+          <p class="type-family-description">The public site’s current rhythm: direct sans, literary serif, and quiet system notation.</p>
+        </div>
+        <div class="type-grid">
+          <article class="type-card">
+            <p class="type-kicker">Interface and body</p>
+            <h4 class="type-name">System Sans</h4>
+            <p class="type-role">Fast, familiar, and deliberately neutral across navigation and public-facing copy.</p>
+            <p class="type-sample body" style="font-family:var(--font-sans);">A quarter-century of digital residue keeps finding its way back to the signal.</p>
+            <p class="type-note">Use for: navigation, body copy, controls, and compact utility text.</p>
+          </article>
+          <article class="type-card">
+            <p class="type-kicker">Editorial voice</p>
+            <h4 class="type-name">Georgia</h4>
+            <p class="type-role">A grounded, human serif for major titles, dek copy, and reflective editorial moments.</p>
+            <p class="type-sample display" style="font-family:var(--font-serif);">Returned signal from the sleeping mind.</p>
+            <p class="type-note">Use for: page titles, article framing, pull quotes, and authored moments.</p>
+          </article>
+          <article class="type-card">
+            <p class="type-kicker">Metadata</p>
+            <h4 class="type-name">System Mono</h4>
+            <p class="type-role">A restrained operational layer for labels and signal language without over-styling the page.</p>
+            <p class="type-sample code" style="font-family:var(--font-mono);">LIVE_NOW // OTW_SIGNAL
+ARCHIVE_STATUS // OPEN</p>
+            <p class="type-note">Use for: section labels, timestamps, coordinates, and small readouts.</p>
+          </article>
+        </div>
+      </div>
 
-        <article class="type-card">
-          <p class="type-kicker">Signal Mono</p>
-          <h3 class="type-name">Fira Code</h3>
-          <p class="type-role">Instrument-panel text, timestamps, coordinates, labels, and anything that should feel live, coded, or operational.</p>
-          <p class="type-sample code" style="font-family:'Fira Code', monospace;">LIVE_NOW // QUEEN_CREEK_SIGNAL
-03_31_2026 // BROADCAST_LOCKED</p>
-          <p class="type-note">Best for: metadata, system labels, OTW signal language, technical framing.</p>
-        </article>
+      <div class="type-family">
+        <div class="type-family-header">
+          <h3 class="type-family-title">frgmnts product</h3>
+          <p class="type-family-description">A precise product voice for the private social app and its companion web surface.</p>
+        </div>
+        <div class="type-grid">
+          <article class="type-card">
+            <p class="type-kicker">Product sans</p>
+            <h4 class="type-name">IBM Plex Sans</h4>
+            <p class="type-role">Calm, structured, and authored enough to distinguish the product from generic interface typography.</p>
+            <p class="type-sample body" style="font-family:'IBM Plex Sans', sans-serif;">A private place for the people and moments you choose to keep close.</p>
+            <p class="type-note">Use for: app shells, navigation, settings, and structured product copy.</p>
+          </article>
+          <article class="type-card">
+            <p class="type-kicker">Product mono</p>
+            <h4 class="type-name">IBM Plex Mono</h4>
+            <p class="type-role">The compact technical counterpoint used for labels, tokens, and small product states.</p>
+            <p class="type-sample code" style="font-family:'IBM Plex Mono', monospace;">FRGMNTS // PRIVATE
+SEAT_STATUS // READY</p>
+            <p class="type-note">Use for: chips, metadata, launcher language, and compact controls.</p>
+          </article>
+        </div>
+      </div>
 
-        <article class="type-card">
-          <p class="type-kicker">Brand Sans</p>
-          <h3 class="type-name">IBM Plex Sans</h3>
-          <p class="type-role">More authored and technical than Inter. Used heavily in core OTW brand pages, fragments surfaces, and private app lanes.</p>
-          <p class="type-sample body" style="font-family:'IBM Plex Sans', sans-serif;">The suite stays calm, precise, and atmospheric even when the work itself is complicated.</p>
-          <p class="type-note">Best for: OTW-branded UI, denser layouts, app shells, and structured editorial surfaces.</p>
-        </article>
+      <div class="type-family type-family-wide">
+        <div class="type-family-header">
+          <h3 class="type-family-title">Supporting voices</h3>
+          <p class="type-family-description">Purposeful alternates for campaigns, archives, poetry, and moments that need a distinct temperature.</p>
+        </div>
+        <div class="type-grid">
+          <article class="type-card">
+            <p class="type-kicker">Supporting sans</p>
+            <h4 class="type-name">Saira</h4>
+            <p class="type-role">A compact, technical voice that adds focused energy without replacing either primary system.</p>
+            <p class="type-sample display" style="font-family:'Saira', sans-serif;">The signal moves beyond the expected.</p>
+            <p class="type-note">Use for: display accents, event language, concise headlines, and energetic moments.</p>
+          </article>
+          <article class="type-card">
+            <p class="type-kicker">Warm display</p>
+            <h4 class="type-name">Fraunces</h4>
+            <p class="type-role">Intimate, devotional, and image-led for Word.person and poetry-adjacent surfaces.</p>
+            <p class="type-sample display" style="font-family:'Fraunces', serif;">A room made of light, paper, and wanting.</p>
+            <p class="type-note">Use for: emotional display copy, poetry titles, and companion editorial lanes.</p>
+          </article>
+          <article class="type-card">
+            <p class="type-kicker">Archive serif</p>
+            <h4 class="type-name">Merriweather</h4>
+            <p class="type-role">A quieter literary voice for archive reading and longer reflective passages.</p>
+            <p class="type-sample body" style="font-family:'Merriweather', serif;">The archive does not just remember; it re-frames, softens, and returns.</p>
+            <p class="type-note">Use for: archive reading, literary bodies, and slower text.</p>
+          </article>
+          <article class="type-card">
+            <p class="type-kicker">Campaign sans</p>
+            <h4 class="type-name">Inter</h4>
+            <p class="type-role">A clean neutral option for utility-heavy or externally partnered surfaces.</p>
+            <p class="type-sample body" style="font-family:'Inter', sans-serif;">Clear language leaves more room for the work itself.</p>
+            <p class="type-note">Use for: campaigns, utilities, and contexts where neutrality is the priority.</p>
+          </article>
+          <article class="type-card">
+            <p class="type-kicker">Signal mono</p>
+            <h4 class="type-name">Fira Code</h4>
+            <p class="type-role">A more expressive coded voice for broadcasts and instrument-panel treatments.</p>
+            <p class="type-sample code" style="font-family:'Fira Code', monospace;">QUEEN_CREEK_SIGNAL
+BROADCAST // LOCKED</p>
+            <p class="type-note">Use for: broadcast metadata, technical framing, and live signal language.</p>
+          </article>
+          <article class="type-card">
+            <p class="type-kicker">Supporting serif</p>
+            <h4 class="type-name">IBM Plex Serif</h4>
+            <p class="type-role">A precise reflective serif that bridges editorial warmth and technical structure.</p>
+            <p class="type-sample display" style="font-family:'IBM Plex Serif', serif;">A human note inside the machine.</p>
+            <p class="type-note">Use for: structured editorial intros and authored supporting moments.</p>
+          </article>
+        </div>
+      </div>
+    </section>
 
-        <article class="type-card">
-          <p class="type-kicker">Supporting Sans</p>
-          <h3 class="type-name">Saira</h3>
-          <p class="type-role">A compact, technical supporting voice that brings focused energy to the OTW system without replacing its primary typefaces.</p>
-          <p class="type-sample display" style="font-family:'Saira', sans-serif;">The signal moves beyond the expected.</p>
-          <p class="type-note">Best for: display accents, event language, concise headlines, and energetic supporting moments.</p>
+    <section class="section-card" id="usage-examples">
+      <div class="section-header">
+        <h2 class="section-title">Colors in use</h2>
+        <p class="section-meta">Tokens with a job</p>
+      </div>
+      <div class="usage-grid">
+        <article class="usage-card">
+          <p class="usage-kicker">OTW editorial</p>
+          <div class="editorial-sample">
+            <strong>Notes from outside.</strong>
+            <span>Brand Blue and Brand Teal carry atmosphere; the type does the talking.</span>
+            <div class="editorial-rule"></div>
+          </div>
         </article>
-
-        <article class="type-card">
-          <p class="type-kicker">Brand Mono</p>
-          <h3 class="type-name">IBM Plex Mono</h3>
-          <p class="type-role">The strongest OTW coded identity font. Carries panel labels, chips, toggles, queue states, and launcher language.</p>
-          <p class="type-sample code" style="font-family:'IBM Plex Mono', monospace;">QUEUE_STATUS: CLEAR
-GHOST_WRITER // READY
-FRAGMENTS // LIVE</p>
-          <p class="type-note">Best for: OTW app chrome, cards, section labels, control surfaces, internal tools.</p>
+        <article class="usage-card">
+          <p class="usage-kicker">frgmnts product</p>
+          <div class="product-sample">
+            <img src="Images/assets/frgmnts-lockup-light.png" alt="frgmnts wordmark and mark" />
+            <span class="product-control">Open app</span>
+          </div>
         </article>
-
-        <article class="type-card">
-          <p class="type-kicker">Editorial Serif</p>
-          <h3 class="type-name">IBM Plex Serif</h3>
-          <p class="type-role">Reflective OTW serif voice. It adds gravity and humanity without drifting out of the system.</p>
-          <p class="type-sample display" style="font-family:'IBM Plex Serif', serif;">Returned signal from the sleeping mind.</p>
-          <p class="type-note">Best for: article titles, reflective intros, pull-quote energy, public OTW editorial moments.</p>
-        </article>
-
-        <article class="type-card">
-          <p class="type-kicker">Word.Person Display</p>
-          <h3 class="type-name">Fraunces</h3>
-          <p class="type-role">Warm, intimate, devotional, and image-led. This is the signature display voice for Word.Person and Drift-adjacent poetry surfaces.</p>
-          <p class="type-sample display" style="font-family:'Fraunces', serif;">A room made of light, paper, and wanting.</p>
-          <p class="type-note">Best for: emotional display copy, poetry titles, sanctuary/editorial lanes, feminine warmth.</p>
-        </article>
-
-        <article class="type-card">
-          <p class="type-kicker">Archive Serif</p>
-          <h3 class="type-name">Merriweather</h3>
-          <p class="type-role">Used most clearly in the modern residue archive. It gives archive reading a quieter literary depth than the main OTW serif set.</p>
-          <p class="type-sample body" style="font-family:'Merriweather', serif;">The archive does not just remember; it re-frames, softens, and returns.</p>
-          <p class="type-note">Best for: archive reading surfaces, longer-form literary bodies, slower reflective text.</p>
+        <article class="usage-card">
+          <p class="usage-kicker">Status signals</p>
+          <div class="signal-sample" aria-label="Example product status colors">
+            <span class="signal-chip available"><span class="signal-dot"></span>Available</span>
+            <span class="signal-chip attention"><span class="signal-dot"></span>Attention</span>
+            <span class="signal-chip identity"><span class="signal-dot"></span>Identity</span>
+          </div>
         </article>
       </div>
     </section>
@@ -955,11 +1454,19 @@ FRAGMENTS // LIVE</p>
         </article>
 
         <article class="logo-card">
-          <p class="logo-kicker">frgmnts Logo</p>
+          <p class="logo-kicker">frgmnts Mark</p>
           <div class="logo-surface dark">
-            <img class="logo-lockup" src="Images/assets/frgmnts-lockup-light.svg" alt="frgmnts logo" />
+            <img class="logo-mark" src="Images/assets/frgmnts-lockup-light.svg" alt="frgmnts five-piece mark" />
           </div>
-          <p class="logo-label">Primary frgmnts logo for app, web, and branded surfaces across the OTW family.</p>
+          <p class="logo-label">Current five-piece mark for compact app, web, and family identity use.</p>
+        </article>
+
+        <article class="logo-card">
+          <p class="logo-kicker">frgmnts Lockup</p>
+          <div class="logo-surface dark">
+            <img class="logo-lockup" src="Images/assets/frgmnts-lockup-light.png" alt="frgmnts wordmark and five-piece mark" />
+          </div>
+          <p class="logo-label">Current mark-and-name lockup for moments that need the full frgmnts identity.</p>
         </article>
 
         <article class="logo-card">
@@ -974,8 +1481,8 @@ FRAGMENTS // LIVE</p>
 
     <section class="section-card" id="palette-ledger">
       <div class="section-header">
-        <h2 class="section-title">Palette ledger</h2>
-        <p class="section-meta">Quick readout</p>
+        <h2 class="section-title">Token ledger</h2>
+        <p class="section-meta">Quick reference</p>
       </div>
 
       <div class="ledger">
@@ -984,11 +1491,9 @@ FRAGMENTS // LIVE</p>
           <div class="ledger-item"><span class="ledger-name">Brand Blue</span><span class="ledger-code">#6395EE</span></div>
           <div class="ledger-item"><span class="ledger-name">Brand Light Blue</span><span class="ledger-code">#A0BEF5</span></div>
           <div class="ledger-item"><span class="ledger-name">Brand Teal</span><span class="ledger-code">#91AFB3</span></div>
-          <div class="ledger-item"><span class="ledger-name">Logo Navy</span><span class="ledger-code">#1B365D</span></div>
-          <div class="ledger-item"><span class="ledger-name">Logo Teal</span><span class="ledger-code">#3D5255</span></div>
-          <div class="ledger-item"><span class="ledger-name">Logo Ink</span><span class="ledger-code">#1A1C20</span></div>
-          <div class="ledger-item"><span class="ledger-name">Void Dark</span><span class="ledger-code">#0A0A0A</span></div>
-          <div class="ledger-item"><span class="ledger-name">Text Main</span><span class="ledger-code">#EEEEEE</span></div>
+          <div class="ledger-item"><span class="ledger-name">Heritage Navy</span><span class="ledger-code">#1B365D</span></div>
+          <div class="ledger-item"><span class="ledger-name">Deep Slate</span><span class="ledger-code">#3D5255</span></div>
+          <div class="ledger-item"><span class="ledger-name">Midnight Ink</span><span class="ledger-code">#1A1C20</span></div>
         </div>
 
         <div class="ledger-group">
@@ -1002,31 +1507,28 @@ FRAGMENTS // LIVE</p>
           <div class="ledger-item"><span class="ledger-name">Index Blue</span><span class="ledger-code">#77A3FF</span></div>
           <div class="ledger-item"><span class="ledger-name">Index Teal</span><span class="ledger-code">#9EC5C1</span></div>
         </div>
+
+        <div class="ledger-group">
+          <h3>Surfaces and text</h3>
+          <div class="ledger-item"><span class="ledger-name">Chrome Slate</span><span class="ledger-code">#272E39</span></div>
+          <div class="ledger-item"><span class="ledger-name">Surface Ink</span><span class="ledger-code">#101114</span></div>
+          <div class="ledger-item"><span class="ledger-name">Midnight Ink</span><span class="ledger-code">#1A1C20</span></div>
+          <div class="ledger-item"><span class="ledger-name">Void Dark</span><span class="ledger-code">#0A0A0A</span></div>
+          <div class="ledger-item"><span class="ledger-name">Deep Void</span><span class="ledger-code">#050505</span></div>
+          <div class="ledger-item"><span class="ledger-name">Text Main</span><span class="ledger-code">#EEEEEE</span></div>
+          <div class="ledger-item"><span class="ledger-name">Muted Text</span><span class="ledger-code">#B9B9B9</span></div>
+          <div class="ledger-item"><span class="ledger-name">frgmnts Paper</span><span class="ledger-code">#F8F1E6</span></div>
+        </div>
       </div>
     </section>
   </div>
 
+  <div class="copy-toast" id="copyToast" role="status" aria-live="polite"></div>
+
   <script>
-    const root = document.documentElement;
-    const heroLogo = document.getElementById('heroLogo');
-    const themeButtons = Array.from(document.querySelectorAll('.theme-btn'));
     const jumpSelect = document.getElementById('jumpSelect');
-
-    function applyTheme(theme) {
-      root.dataset.theme = theme;
-      heroLogo.src = theme === 'light' ? 'Images/Equal_dark.svg' : 'Images/Equal.svg';
-      themeButtons.forEach((button) => {
-        button.classList.toggle('is-active', button.dataset.themeTarget === theme);
-      });
-      localStorage.setItem('otw_palette_theme', theme);
-    }
-
-    const savedTheme = localStorage.getItem('otw_palette_theme') || 'dark';
-    applyTheme(savedTheme);
-
-    themeButtons.forEach((button) => {
-      button.addEventListener('click', () => applyTheme(button.dataset.themeTarget));
-    });
+    const copyToast = document.getElementById('copyToast');
+    let toastTimer;
 
     jumpSelect?.addEventListener('change', (event) => {
       const targetId = event.target.value;
@@ -1034,6 +1536,56 @@ FRAGMENTS // LIVE</p>
       const section = document.getElementById(targetId);
       section?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       event.target.value = '';
+    });
+
+    function showCopyToast(message) {
+      copyToast.textContent = message;
+      copyToast.classList.add('is-visible');
+      window.clearTimeout(toastTimer);
+      toastTimer = window.setTimeout(() => copyToast.classList.remove('is-visible'), 1600);
+    }
+
+    async function copyText(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return;
+      }
+
+      const fallback = document.createElement('textarea');
+      fallback.value = text;
+      fallback.setAttribute('readonly', '');
+      fallback.style.position = 'fixed';
+      fallback.style.opacity = '0';
+      document.body.appendChild(fallback);
+      fallback.select();
+      document.execCommand('copy');
+      fallback.remove();
+    }
+
+    document.querySelectorAll('.pantone-card, .token-card').forEach((card) => {
+      const code = card.querySelector('.swatch-code, .token-code')?.textContent.trim();
+      const name = card.querySelector('.swatch-name, .token-name')?.textContent.trim();
+      if (!code) return;
+
+      card.tabIndex = 0;
+      card.setAttribute('role', 'button');
+      card.setAttribute('aria-label', `Copy ${name || 'color'} ${code}`);
+
+      const copyColor = async () => {
+        try {
+          await copyText(code);
+          showCopyToast(`Copied ${code}`);
+        } catch (error) {
+          showCopyToast(`Could not copy ${code}`);
+        }
+      };
+
+      card.addEventListener('click', copyColor);
+      card.addEventListener('keydown', (event) => {
+        if (event.key !== 'Enter' && event.key !== ' ') return;
+        event.preventDefault();
+        copyColor();
+      });
     });
   </script>
 </body>
