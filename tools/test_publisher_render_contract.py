@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 from pathlib import Path
+import hashlib
 import importlib.util
 import json
 import re
@@ -22,6 +23,7 @@ atom_feed = load_module(ROOT / "tools" / "generate_atom_feed.py")
 
 IMAGE_ONE = "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/fixture-one.png"
 IMAGE_TWO = "https://pub-fd35040d2a3b40af985b8aa67b98eaa8.r2.dev/narrative/fixture-two.png"
+AUDIO_ONE = "/media/narrative/fixture/essay-narration.mp3"
 PUBLISHER_KEY_SENTINEL = "publisher-key-should-not-render"
 
 
@@ -807,6 +809,87 @@ def test_reader_callout_is_sanitized_and_rendered_below_the_feature_image():
     assert "#FF69B4" in reader_css
 
 
+def test_optional_narration_is_sanitized_rendered_and_structured():
+    metadata = fixture_metadata()
+    metadata["version"] = 2
+    metadata["featureImageRef"] = "image_one"
+    metadata["audio"] = {
+        "kind": "narration",
+        "src": AUDIO_ONE,
+        "title": "A narrated field note",
+        "label": "Audio narration",
+        "prompt": "Press play and stay awhile.",
+        "durationSeconds": 800.541,
+        "chapters": [
+            {"label": "Opening", "startSeconds": 0, "target": "p-001"},
+            {"label": "Later", "startSeconds": 96.25, "target": "unsafe-target"},
+        ],
+        "waveform": [4, 48, 130, "bad"],
+    }
+    metadata = narrative_sync.sanitize_publisher_metadata(metadata)
+    narration = metadata["audio"]
+
+    assert narration["src"] == AUDIO_ONE
+    assert narration["durationSeconds"] == 800.541
+    assert narration["chapters"][0]["target"] == "p-001"
+    assert narration["chapters"][1]["target"] == ""
+    assert narration["waveform"] == [12, 48, 100]
+
+    share_html = narrative_sync.render_share_page({
+        "title": "Narration Fixture",
+        "date": "August 14, 2026",
+        "file": "2026-08-14-narration-fixture.md",
+        "body": f"![Feature]({IMAGE_ONE})\n\nOpening paragraph.\n\nLater paragraph.",
+        "publisher": metadata,
+    })
+
+    assert 'class="narration-player narration-player--after-feature"' in share_html
+    assert 'data-narration-player' in share_html
+    assert f'<source src="{AUDIO_ONE}" type="audio/mpeg">' in share_html
+    assert 'controls preload="metadata"' in share_html
+    assert "autoplay" not in share_html
+    assert 'href="../narration_player.css?v=20260814a"' in share_html
+    assert 'src="../narration_player.js?v=20260814a"' in share_html
+    assert '"@type": "AudioObject"' in share_html
+    assert '"duration": "PT13M20.541S"' in share_html
+    assert share_html.index('class="entry-feature ') < share_html.index('data-narration-player')
+    assert share_html.index('data-narration-player') < share_html.index('class="entry-body"')
+
+    player_css = (ROOT / "narration_player.css").read_text(encoding="utf-8")
+    player_js = (ROOT / "narration_player.js").read_text(encoding="utf-8")
+    for token in [
+        ".narration-player.is-docked",
+        ".entry-body.is-narration-following",
+        "prefers-reduced-motion",
+    ]:
+        assert token in player_css
+    for token in [
+        "otw_narration_position:",
+        "Still out there with you",
+        "navigator.mediaSession",
+        "scrollToChapter",
+    ]:
+        assert token in player_js
+
+    unsafe = fixture_metadata()
+    unsafe["audio"] = {"src": "javascript:alert(1)", "durationSeconds": 5}
+    assert "audio" not in narrative_sync.sanitize_publisher_metadata(unsafe)
+
+
+def test_still_out_there_narration_asset_is_stable_and_rendered():
+    audio_path = ROOT / "media" / "narrative" / "2026-08-14-still-out-there" / "still-out-there.mp3"
+    assert audio_path.is_file()
+    assert hashlib.sha256(audio_path.read_bytes()).hexdigest() == "c635a34a28f731fb18eab07820ce042464725a4a3b28477fd082b79f43b5f83c"
+
+    source = (ROOT / "current_narrative" / "2026-08-14-still-out-there.md").read_text(encoding="utf-8")
+    metadata, _body = narrative_sync.extract_publisher_metadata("\n".join(source.splitlines()[2:]))
+    assert metadata["audio"]["src"] == "/media/narrative/2026-08-14-still-out-there/still-out-there.mp3"
+
+    generated = (ROOT / "archive" / "2026-08-14-still-out-there.html").read_text(encoding="utf-8")
+    assert 'data-narration-id="2026-08-14-still-out-there"' in generated
+    assert 'data-narration-target="p-050"' in generated
+
+
 def test_article_shell_has_home_identity_schema_and_consistent_section_levels():
     share_html = narrative_sync.render_share_page({
         "title": "Branded Reader Fixture",
@@ -1246,6 +1329,8 @@ def run():
         test_canonical_archive_page_emits_full_preview_metadata,
         test_canonical_archive_page_prefers_first_article_image_when_present,
         test_explicit_feature_image_drives_opening_and_is_not_duplicated_in_body,
+        test_optional_narration_is_sanitized_rendered_and_structured,
+        test_still_out_there_narration_asset_is_stable_and_rendered,
         test_article_shell_has_home_identity_schema_and_consistent_section_levels,
         test_article_shell_adapts_to_length_media_and_opening_structure,
         test_opening_dropcap_wraps_first_visible_letter_inside_markup,

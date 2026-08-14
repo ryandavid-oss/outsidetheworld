@@ -81,6 +81,29 @@ def test_modified_serialization_keeps_slug_path_and_date_style():
     assert document.archive_path == "archive/2026-02-19-it-s-a-straight-vibe.html"
 
 
+def test_published_revision_preserves_optional_narration_metadata():
+    path = ROOT / "current_narrative" / "2026-08-14-still-out-there.md"
+    document = contract.parse_source(path)
+    narration = document.metadata.get("audio")
+
+    assert narration
+    assert narration["src"] == "/media/narrative/2026-08-14-still-out-there/still-out-there.mp3"
+    assert len(narration["chapters"]) == 6
+
+    patched = contract.serialize_document(
+        document,
+        {
+            "title": document.title,
+            "date": document.date,
+            "subhead": document.subhead + " revised",
+            "blocks": [block.to_json() for block in document.blocks],
+        },
+    )
+    reparsed = contract.document_from_source_text(path, patched)
+
+    assert reparsed.metadata["audio"] == narration
+
+
 if __name__ == "__main__":
     for name, value in sorted(globals().items()):
         if name.startswith("test_") and callable(value):

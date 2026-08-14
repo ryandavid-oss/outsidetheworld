@@ -148,6 +148,74 @@ def safe_image_url(value):
         return ''
     return f"/{url}"
 
+def safe_audio_url(value):
+    url = safe_image_url(value)
+    if not url:
+        return ''
+
+    path = unquote(re.split(r'[?#]', url, maxsplit=1)[0]).lower()
+    if not re.search(r'\.(?:aac|m4a|mp3|ogg|opus|wav)$', path):
+        return ''
+    return url
+
+def sanitize_narration(value):
+    if not isinstance(value, dict):
+        return {}
+
+    src = safe_audio_url(value.get('src') or value.get('url'))
+    if not src:
+        return {}
+
+    try:
+        duration_seconds = max(1.0, min(float(value.get('durationSeconds') or 0), 86400.0))
+    except (TypeError, ValueError):
+        duration_seconds = 0.0
+
+    chapters = []
+    raw_chapters = value.get('chapters') if isinstance(value.get('chapters'), list) else []
+    for chapter in raw_chapters:
+        if not isinstance(chapter, dict):
+            continue
+        label = str(chapter.get('label') or '').strip()[:80]
+        try:
+            start_seconds = max(0.0, float(chapter.get('startSeconds') or 0))
+        except (TypeError, ValueError):
+            continue
+        if duration_seconds:
+            start_seconds = min(start_seconds, duration_seconds)
+        target = str(chapter.get('target') or '').strip()
+        if target and not re.fullmatch(r'p-\d{3}', target):
+            target = ''
+        if not label:
+            continue
+        chapters.append({
+            'label': label,
+            'startSeconds': round(start_seconds, 3),
+            'target': target,
+        })
+        if len(chapters) == 12:
+            break
+    chapters.sort(key=lambda item: item['startSeconds'])
+
+    waveform = []
+    raw_waveform = value.get('waveform') if isinstance(value.get('waveform'), list) else []
+    for sample in raw_waveform[:96]:
+        try:
+            waveform.append(max(12, min(int(round(float(sample))), 100)))
+        except (TypeError, ValueError):
+            continue
+
+    return {
+        'kind': 'narration',
+        'src': src,
+        'title': str(value.get('title') or '').strip()[:160],
+        'label': str(value.get('label') or 'Audio narration').strip()[:80] or 'Audio narration',
+        'prompt': str(value.get('prompt') or 'Press play and stay awhile.').strip()[:180] or 'Press play and stay awhile.',
+        'durationSeconds': round(duration_seconds, 3) if duration_seconds else 0,
+        'chapters': chapters,
+        'waveform': waveform,
+    }
+
 def normalize_choice(value, allowed, fallback):
     value = str(value or '').strip().lower()
     return value if value in allowed else fallback
@@ -764,6 +832,9 @@ def sanitize_publisher_metadata(metadata):
     reader_callout = sanitize_reader_callout(metadata.get('readerCallout'))
     if reader_callout:
         cleaned['readerCallout'] = reader_callout
+    narration = sanitize_narration(metadata.get('audio'))
+    if narration:
+        cleaned['audio'] = narration
     if version >= 2:
         cleaned['formatting'] = {
             'mode': 'otw-enhanced-markdown',
@@ -1456,6 +1527,136 @@ def render_feature_figure(feature, tape_text=''):
                 <div class="entry-feature-media"{aspect_style}><img src="{smartypants_safe(feature.get('render_url') or feature.get('url'))}" alt="{smartypants_safe(feature.get('alt'))}" decoding="async" fetchpriority="high"{dimension_attrs}>{tape_html}</div>{caption_html}
             </figure>'''
 
+def narration_for_post(post):
+    publisher = post.get('publisher') if isinstance(post.get('publisher'), dict) else {}
+    return sanitize_narration(publisher.get('audio'))
+
+def narration_clock(seconds):
+    total = max(0, int(float(seconds or 0)))
+    return f'{total // 60}:{total % 60:02d}'
+
+def narration_iso_duration(seconds):
+    total = max(0.0, float(seconds or 0))
+    minutes = int(total // 60)
+    remainder = total - (minutes * 60)
+    if abs(remainder - round(remainder)) < 0.001:
+        seconds_text = str(int(round(remainder)))
+    else:
+        seconds_text = f'{remainder:.3f}'.rstrip('0').rstrip('.')
+    return f'PT{minutes}M{seconds_text}S'
+
+def narration_mime_type(src):
+    extension = Path(unquote(re.split(r'[?#]', src or '', maxsplit=1)[0])).suffix.lower()
+    return {
+        '.aac': 'audio/aac',
+        '.m4a': 'audio/mp4',
+        '.mp3': 'audio/mpeg',
+        '.ogg': 'audio/ogg',
+        '.opus': 'audio/ogg; codecs=opus',
+        '.wav': 'audio/wav',
+    }.get(extension, 'audio/mpeg')
+
+def narration_waveform_points(samples):
+    values = samples or [44, 62, 35, 70, 54, 82, 48, 66, 38, 58, 76, 46, 68, 52, 72, 42]
+    width = 640.0
+    center = 50.0
+    step = width / max(1, len(values) - 1)
+    top = []
+    bottom = []
+    for index, sample in enumerate(values):
+        x = round(index * step, 2)
+        amplitude = max(5.0, min(float(sample), 100.0) * 0.42)
+        top.append(f'{x:g},{center - amplitude:g}')
+        bottom.append(f'{x:g},{center + amplitude:g}')
+    return ' '.join(top + list(reversed(bottom)))
+
+def render_narration_player(post, after_feature=False):
+    narration = narration_for_post(post)
+    if not narration:
+        return ''
+
+    stem = post_stem(post.get('file') or '') or slugify(post.get('title') or 'essay')
+    player_id = f'narration-{slugify(stem)}'
+    title_id = f'{player_id}-title'
+    clip_id = f'{player_id}-waveform-clip'
+    duration_seconds = narration.get('durationSeconds') or 0
+    duration_label = narration_clock(duration_seconds)
+    title = narration.get('title') or post.get('title') or 'Essay narration'
+    src = narration['src']
+    mime_type = narration_mime_type(src)
+    waveform_points = narration_waveform_points(narration.get('waveform'))
+    placement_class = ' narration-player--after-feature' if after_feature else ''
+
+    chapters_html = ''
+    if narration.get('chapters'):
+        chapter_buttons = []
+        for index, chapter in enumerate(narration['chapters'], start=1):
+            target_attr = f' data-narration-target="{smartypants_safe(chapter["target"])}"' if chapter.get('target') else ''
+            chapter_buttons.append(
+                '<button class="narration-chapter" type="button" '
+                f'data-narration-chapter="{chapter["startSeconds"]:g}"{target_attr} aria-current="false">'
+                f'<span class="narration-chapter__index">{index:02d}</span>'
+                f'<span class="narration-chapter__label">{smartypants_safe(chapter["label"])}</span>'
+                '</button>'
+            )
+        chapters_html = f'''
+                    <div class="narration-chapters">
+                        <p class="narration-chapters__title">Choose a passage</p>
+                        <div class="narration-chapters__list">{"".join(chapter_buttons)}</div>
+                    </div>'''
+
+    follow_button_html = ''
+    if any(chapter.get('target') for chapter in narration.get('chapters') or []):
+        follow_button_html = (
+            '<button class="narration-control narration-follow" type="button" '
+            'data-narration-follow aria-pressed="false">Follow along</button>'
+        )
+
+    return f'''
+            <section class="narration-player{placement_class}" data-narration-player data-narration-id="{smartypants_safe(stem)}" data-narration-duration="{duration_seconds:g}" aria-labelledby="{title_id}">
+                <audio class="narration-native-audio" data-narration-audio controls preload="metadata">
+                    <source src="{smartypants_safe(src)}" type="{smartypants_safe(mime_type)}">
+                    <a href="{smartypants_safe(src)}">Open the audio narration</a>
+                </audio>
+                <div class="narration-player__surface">
+                    <span class="narration-player__glow" aria-hidden="true"></span>
+                    <div class="narration-player__header">
+                        <button class="narration-play" type="button" data-narration-play aria-label="Play {smartypants_safe(title)}">
+                            <svg viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+                                <path class="narration-play__triangle" d="M19 14.5 35 24 19 33.5Z"></path>
+                                <path class="narration-play__pause" d="M17 14h5v20h-5zM27 14h5v20h-5z"></path>
+                            </svg>
+                        </button>
+                        <div class="narration-player__copy">
+                            <p class="narration-player__kicker">Listen to the essay</p>
+                            <h2 class="narration-player__title" id="{title_id}">{smartypants_safe(title)}</h2>
+                            <p class="narration-player__meta"><span data-narration-status>{smartypants_safe(narration['label'])}</span><span aria-hidden="true"> / </span><span data-narration-duration-label>{duration_label}</span></p>
+                        </div>
+                        <button class="narration-dock-dismiss" type="button" data-narration-dock-dismiss aria-label="Pause and close the floating player">Close</button>
+                    </div>
+                    <div class="narration-timeline">
+                        <div class="narration-waveform" aria-hidden="true">
+                            <svg viewBox="0 0 640 100" preserveAspectRatio="none" focusable="false">
+                                <defs><clipPath id="{clip_id}"><rect data-narration-waveform-clip x="0" y="0" width="0" height="100"></rect></clipPath></defs>
+                                <polygon class="narration-waveform__base" points="{waveform_points}"></polygon>
+                                <polygon class="narration-waveform__played" points="{waveform_points}" clip-path="url(#{clip_id})"></polygon>
+                            </svg>
+                            <input class="narration-scrubber" data-narration-scrubber type="range" min="0" max="{duration_seconds or 1:g}" value="0" step="0.1" aria-label="Narration position">
+                        </div>
+                        <div class="narration-time" aria-hidden="true">
+                            <span data-narration-current>0:00</span>
+                            <span data-narration-total>{duration_label}</span>
+                        </div>
+                    </div>
+                    <div class="narration-controls">
+                        <button class="narration-control" type="button" data-narration-skip="-15" aria-label="Go back 15 seconds">Back 15</button>
+                        {follow_button_html}
+                        <button class="narration-control narration-speed" type="button" data-narration-speed aria-label="Change playback speed">1×</button>
+                    </div>{chapters_html}
+                    <p class="narration-player__prompt" data-narration-prompt>{smartypants_safe(narration['prompt'])}</p>
+                </div>
+            </section>'''
+
 def render_reader_callout(post, after_feature=False):
     publisher = post.get('publisher') if isinstance(post.get('publisher'), dict) else {}
     callout = sanitize_reader_callout(publisher.get('readerCallout'))
@@ -1617,7 +1818,12 @@ def render_share_page(post, newer_post=None, older_post=None, include_draft_read
     reader_nav = render_reader_nav(newer_post, older_post)
     tape_text = 'DELAYED — STILL COOKING' if update_notice_html and 'delayed' in update_notice_html.lower() else ''
     feature_html = render_feature_figure(feature_image, tape_text)
-    reader_callout_html = render_reader_callout(post, after_feature=bool(feature_image))
+    narration = narration_for_post(post)
+    narration_html = render_narration_player(post, after_feature=bool(feature_image))
+    reader_callout_html = render_reader_callout(post, after_feature=bool(feature_image and not narration))
+    narration_style = '\n    <link href="../narration_player.css?v=20260814a" rel="stylesheet" />' if narration else ''
+    narration_script = '\n    <script src="../narration_player.js?v=20260814a" defer></script>' if narration else ''
+    narration_body_class = ' article-has-narration' if narration else ''
     feature_preload = ''
     if feature_image:
         feature_preload = (
@@ -1654,6 +1860,15 @@ def render_share_page(post, newer_post=None, older_post=None, include_draft_read
             }
         else:
             article_schema['image'] = feature_image['url']
+    if narration:
+        article_schema['audio'] = {
+            '@type': 'AudioObject',
+            'name': narration.get('title') or f'{post["title"]} audio narration',
+            'contentUrl': absolute_url(narration['src']),
+            'encodingFormat': narration_mime_type(narration['src']),
+        }
+        if narration.get('durationSeconds'):
+            article_schema['audio']['duration'] = narration_iso_duration(narration['durationSeconds'])
     article_schema_json = json.dumps(article_schema, ensure_ascii=False).replace('<', '\\u003c')
     reader_dock = ''
     if length_tier == 'long':
@@ -1699,7 +1914,7 @@ def render_share_page(post, newer_post=None, older_post=None, include_draft_read
             }} catch (error) {{}}
         }}());
     </script>
-    <link href="../archive_reader.css?v=20260807-player-guide" rel="stylesheet" />
+    <link href="../archive_reader.css?v=20260807-player-guide" rel="stylesheet" />{narration_style}
     <meta name="description" content="{smartypants_safe(description)}" />
     <meta name="theme-color" content="#060809" />
     <meta property="og:site_name" content="Outside The World" />
@@ -1715,9 +1930,9 @@ def render_share_page(post, newer_post=None, older_post=None, include_draft_read
     <meta name="twitter:description" content="{smartypants_safe(description)}" />
     <meta name="twitter:image" content="{smartypants_safe(og_image)}" />
     <script type="application/ld+json">{article_schema_json}</script>
-    <script src="../archive_reader.js?v=20260722-typography-foundation" defer></script>
+    <script src="../archive_reader.js?v=20260722-typography-foundation" defer></script>{narration_script}
 </head>
-<body class="archive-reader-page article-length-{length_tier} article-media-{media_tier}"{body_reading_tools_attr}>
+<body class="archive-reader-page article-length-{length_tier} article-media-{media_tier}{narration_body_class}"{body_reading_tools_attr}>
     <a class="reader-skip-link" href="#entry-body">Skip to essay</a>
     <div class="reading-progress" aria-hidden="true"><span data-reading-progress></span></div>{reader_dock}
     <main class="archive-reader">
@@ -1754,7 +1969,7 @@ def render_share_page(post, newer_post=None, older_post=None, include_draft_read
                         </span>
                     </span>
                 </div>
-            </header>{update_notice_block}{feature_html}{reader_callout_html}{reading_aids_block}
+            </header>{update_notice_block}{feature_html}{narration_html}{reader_callout_html}{reading_aids_block}
             <div class="entry-body" id="entry-body">
 {body_html}
             </div>

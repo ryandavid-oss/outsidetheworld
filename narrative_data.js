@@ -440,6 +440,112 @@ const current_narrative = [
                     "wrapMode": "none"
                 }
             ],
+            "audio": {
+                "kind": "narration",
+                "src": "/media/narrative/2026-08-14-still-out-there/still-out-there.mp3",
+                "title": "Still Out There",
+                "label": "Audio narration",
+                "prompt": "Press play and stay awhile.",
+                "durationSeconds": 800.541,
+                "chapters": [
+                    {
+                        "label": "Forty-seven",
+                        "startSeconds": 0.0,
+                        "target": "p-001"
+                    },
+                    {
+                        "label": "A little age-related trivia",
+                        "startSeconds": 66.397,
+                        "target": "p-010"
+                    },
+                    {
+                        "label": "Living in the past",
+                        "startSeconds": 171.16,
+                        "target": "p-017"
+                    },
+                    {
+                        "label": "The Simpsons",
+                        "startSeconds": 291.02,
+                        "target": "p-025"
+                    },
+                    {
+                        "label": "Still playing",
+                        "startSeconds": 417.041,
+                        "target": "p-033"
+                    },
+                    {
+                        "label": "Who\u2019s still here",
+                        "startSeconds": 627.783,
+                        "target": "p-050"
+                    }
+                ],
+                "waveform": [
+                    55,
+                    68,
+                    50,
+                    59,
+                    48,
+                    52,
+                    37,
+                    66,
+                    86,
+                    92,
+                    55,
+                    49,
+                    46,
+                    47,
+                    49,
+                    52,
+                    31,
+                    53,
+                    80,
+                    57,
+                    53,
+                    60,
+                    58,
+                    25,
+                    35,
+                    73,
+                    62,
+                    54,
+                    50,
+                    32,
+                    22,
+                    47,
+                    40,
+                    69,
+                    46,
+                    66,
+                    68,
+                    82,
+                    57,
+                    46,
+                    59,
+                    50,
+                    71,
+                    47,
+                    35,
+                    51,
+                    68,
+                    35,
+                    58,
+                    77,
+                    62,
+                    44,
+                    88,
+                    91,
+                    77,
+                    44,
+                    41,
+                    42,
+                    89,
+                    87,
+                    30,
+                    28,
+                    78,
+                    62
+                ]
+            },
             "formatting": {
                 "mode": "otw-enhanced-markdown",
                 "version": 1,
