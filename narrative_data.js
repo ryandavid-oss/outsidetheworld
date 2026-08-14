@@ -1,5 +1,456 @@
 const current_narrative = [
     {
+        "title": "Still Out There",
+        "date": "August 14, 2026",
+        "body": "_I\u2019m not sitting still long enough_\n\n![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-08-12-still-out-there-mstexhmy.jpg)\n\nIt\u2019s fine.\n\nIt\u2019s honestly just\u2026fine.\n\nSay what you will about life. Think what you will about the passing of time, about the rotation of the Earth on its axis, of the orbital jurisdictions we undergo as human beings. Gravity has its hold on us, and we are not flung into space. That\u2019s something grand to celebrate.\n\nIt just boggles my mind to comprehend that I am 47 years old.\n\nThose precious memories I created as a teenager are becoming distant memories. My hips always hurt. My physical therapist is half my age.\n\nSide note: I did go to the dentist yesterday and passed with flying colors. Small victories for an aging body largely outside most rational control.\n\nSo yes. Forty-seven years old.\n\nMy mind, thankfully, is not the least bit slow. But each year, I feel the pull of nature just a bit more upon my body.\n\nDamn, but it feels good to be writing again after a brief hiatus.\n\n---\n\nHow about a little more age-related trivia?\n\nIf you\u2019re anywhere near my age, you probably have cultural touchstones that feel especially relevant to you. Things that feel timeless, or, at the very least, things that surely couldn\u2019t have happened\u00a0_that_\u00a0long ago.\n\nOne of those for me is\u00a0_The Lord of the Rings_\u00a0movies. It feels like yesterday when I was watching them in theaters. But\u00a0_The Fellowship of the Ring_\u00a0was released in December 2001.\n\nAlmost 25 years ago. A freaking quarter of a century. A silver anniversary, for crying out loud. Shivers down my spine as I realize it\u2019s now more than half a lifetime ago.\n\nI remember something else that got under my skin years ago. Madonna\u2019s song \u201cVogue\u201d rattled off a list of old Hollywood royalty. Greta Garbo, Marilyn Monroe, Marlene Dietrich, Marlon Brando, Grace Kelly, Fred Astaire, Ginger Rogers, Katharine Hepburn, Lauren Bacall and the rest. Sixteen people whose names represented a vaunted age of Hollywood.\n\nI read an article about what had happened to that list over time. One by one, the people Madonna sang about, passed. Some were already gone when the song was released, while others lived for decades afterward. Eventually there was only one left, Lauren Bacall. Then, in 2014, she died too.\n\nThat was it. The entire list was gone. \u00a0And there was something about that which stayed with me. A song released during my childhood had survived every human being it was celebrating. And while I was still there, that particular generation of people had slipped the confines of Earth and were borne\u00a0into the cosmos.\n\n---\n\nBah. None of this is new for me. Even as I was writing this post, my mind wandered to an entry I wrote on June 8, 2002. I was 23. Never been married, let alone become a father. Or a grandfather.\n\nThe post was called\u00a0**\u201cLiving in the past.\u201d**\u00a0That night, I had watched Lennox Lewis thoroughly dismantle Mike Tyson. I didn\u2019t particularly like Tyson. I didn\u2019t expect him to win. By my own admission, he was a deeply troubled person who probably didn\u2019t deserve the nostalgic affection I had for him.\n\nAnd yet, watching him lose made me sad, and I tried to figure out why.\n\nI realized then that Tyson was part of my childhood. His name conjured Nintendo games, newspaper headlines and the mythical aura he had when I was a kid. Watching him get beat down and fail to get back up somehow felt like watching a little piece of childhood stay down with him.\n\nThen I wrote about Michael Jordan. Jordan had returned from retirement to play for the Washington Wizards, and I loved it! Not necessarily because I thought it was the wisest career decision (it wasn't), but because one of the permanent fixtures of my childhood had come back.\n\nHe could still score 50 points. He could still take over a basketball game.\u00a0**He was still out there**. And every time he did it, 23-year-old me felt some small sense of victory.\n\nThen, near the end of that 2002 post, I rattled off a few more examples of my inability to let go of old things. My music lived in the eighties. My favorite basketball player had been drafted in 1984.\n\nAnd my favorite television show?\u00a0_The Simpsons._\u00a0Which brings us neatly back to 2026.\n\n---\n\nThe first time I remember seeing\u00a0_The Simpsons_, I was ten years old. It was Christmas time, 1989. We were gathered at a family Christmas party at my Mimi and Papa\u2019s condo. At some point,\u00a0_The Simpsons_\u00a0came on television.\n\nAnd when the parents realized what we kids were watching, they promptly ordered us to turn it off.\u00a0_The Simpsons_\u00a0was\u00a0_taboo_. Vile. Inappropriate.\n\nBart Simpson was disrespectful. The show was crude. In retrospect, it all seems so absurd; I guess the entire moral fabric of America was hanging by a thread, and Bart telling someone to eat his shorts might have been enough to finish the job. The mere fact that the adults were barring us from watching it made it that much more tempting to do so. Hell, I still encounter people who forbid their children from watching it.\n\nFor years I\u2019ve carried that memory around without knowing exactly when it happened. But with a little internet sleuthing, it turns out the Christmas episode, \u201cSimpsons Roasting on an Open Fire,\u201d aired on\u00a0**December 17, 1989**. And it was the series premiere.\n\nWhich means there is a very real possibility that my first memory of\u00a0_The Simpsons_\u00a0is a memory of watching\u00a0**the first full-length episode of\u00a0_The Simpsons_**\u00a0when it originally aired.\n\nThat was 1989. I am now 47.\u00a0_The Simpsons_\u00a0is still on television. Crazy comfort is wrought upon my soul because of that fact. Because unwillingly,\u00a0but very much so capably,\u00a0_The Simpsons_\u00a0became a little piece of ongoing inertia in my life.\n\nIt was there when I was ten. It was there when I was 23, writing a blog post about how difficult I found it to watch the cultural symbols of my childhood disappear.\n\nAnd even though I don't catch new episodes regularly, or even admit to any sort of anticipation for them,\u00a0_The Simpsons\u00a0_is still here now. And to me, that hits just fine in my heart.\n\n---\n\nAs I am wont to do, I\u2019ve recently started watching\u00a0_The Simpsons_\u00a0again from the beginning. For the Nth time. Well, last night, I reached season 16, episode 8.\n\nIt originally aired on February 6, 2005, immediately following Super Bowl XXXIX. The title was \u201cHomer and Ned\u2019s Hail Mary Pass.\u201d The episode featured five established athletes playing themselves: Tom Brady, LeBron James, Michelle Kwan, Yao Ming and Warren Sapp.\n\nWhen LeBron came on the screen midway through the episode, I was immediately struck by a sense of awe. That episode aired\u00a0**21 years, 6 months and 8 days ago.**\u00a0Of those five athletes, LeBron James is still playing professional sports.\n\nWarren Sapp retired from the NFL in 2008. Michelle Kwan\u2019s final competitive figure-skating event came shortly after the episode aired. Yao Ming retired in 2011.\n\nTom Brady, whose career (as a quarterback no less) already seemed impossibly long...finally retired for good on February 1, 2023.\n\nBut LeBron James? He\u2019s 41 years old and preparing for NBA season number 24, now with the Philadelphia 76ers.\n\nThat right there blows my mind.\u00a0When this episode aired, LeBron was 20 years old and in his second NBA season. Brady had just won his third Super Bowl that very night. Yao was 24. Michelle Kwan was still competing. Warren Sapp still had years of football ahead of him.\n\n_The Simpsons_, already considered a touchstone of longevity in and of itself, gathered them together as a snapshot of the sports world of 2005.\n\nBut then, the snapshot aged. One by one, those athletes retired. Some pretty quickly afterward. Some stuck around for an almost absurd amount of time. But somehow, LeBron James is still an active professional athlete. And I realized I had been here before, written these words before.\n\nIn 2002, I was 23 years old, watching Michael Jordan play for the Wizards and feeling strangely reassured that one of the heroes of my childhood could still step onto a basketball court and take over a game.\n\nTwenty-four years later, I\u2019m doing essentially the same thing with LeBron James. The difference, of course, is that LeBron wasn\u2019t one of my childhood heroes. I was already an adult when his career began.\n\nAnd maybe that\u2019s what makes this feel different, because LeBron isn\u2019t keeping my childhood alive. That role is filled by nostalgia and pop icons who have aged out completely or were buried far too soon.\n\nNo, LeBron's job is much harder; more finely honed and sharp. He\u2019s keeping\u00a0**my adulthood**\u00a0connected. He is a human bridge between a version of me who was barely out of his teens and the 47-year-old whose hips now hurt when he gets out of bed.\n\nThat\u2019s an unexpectedly comforting thing.\n\nThere are episodes of\u00a0_The Simpsons_\u00a0that make me feel old because the technology is obsolete, the cultural references are forgotten or the celebrities have disappeared. But this one hits different.\n\nThe entire sports era it captured has come and gone, except for one guy.\n\nI suppose this fascination with who is still out there has become more personal for me, too.\n\n---\n\nMy dad was born in 1944, and he is still kicking around. My mom passed away in 2024. So did my brother, from complications of diabetes. There are photographs of my own family now that have already started to lose that earthly sense of continuity. People who were once simply there, standing beside us, have become people we remember standing there.\n\nNot long ago I was doing some genealogy work online and found a census record for my dad\u2019s childhood home. It must have been the 1950 census. There were five people listed in the household: my grandparents, my dad, his brother Brent and his sister JoEllen.\n\nFive names. One little household, frozen in place by the federal government in 1950.\u00a0My grandparents are gone. Brent and JoEllen both died prematurely about six years ago.\n\nI looked at my dad and said, \u201cYou\u2019re all that\u2019s left of this record.\u201d\n\nAnd he is.\n\nI think about that\u00a0_Vogue_\u00a0article differently now. It is one thing to watch a roster of movie stars disappear from a song, or athletes slowly retire from an old episode of\u00a0_The Simpsons_. Those things give us a safe way to watch time work. Then eventually you find the census record with your own family on it, or look at a photograph and realize some of the people in it no longer exist anywhere except in memory.\n\nSuddenly the idea of someone still being out there carries a little more weight.\n\nAnd meanwhile, the television show containing that snapshot has managed an even more ridiculous feat.\u00a0_It was there_ at my grandparents\u2019 condo when I was ten years old and somebody\u2019s parent frantically ordered us to turn off this dangerous new cartoon.\n\n_It was there _when I was 23, writing about Michael Jordan and my inability to let go of the past. _It was there_ in 2005, putting a 20-year-old LeBron James into an episode. _And it is still here_ while I sit at 47 and write about all of them.\n\nMaybe that\u2019s what I\u2019m actually looking for when I get nostalgic. It's not a way back; it's perhaps a little evidence of continuity. It is literally something familiar moving forward beside me.\n\nAt 23, Michael Jordan gave me that.\u00a0At 47, apparently it\u2019s LeBron James. He\u2019s still out there, enjoying his life.\n\n_The Simpsons_\u00a0is still out there, too. My dad is still out there. And, come to think of it, so am I.\n\nEventually, every photograph loses its last living person. Every roster becomes a list of names from another time. Maybe that\u2019s why I find so much comfort in the few things that refuse to become photographs without inertia. Not yet, anyway.\n\nAlso, I\u2019m pretty sure I\u2019m a 76ers fan now.",
+        "file": "2026-08-14-still-out-there.md",
+        "publisher": {
+            "schema": "otw.publisher.post",
+            "version": 2,
+            "source": "publisher.html",
+            "subhead": "I\u2019m not sitting still long enough",
+            "blocks": [
+                {
+                    "id": "image_mstexhbg_9hmlp6",
+                    "type": "image",
+                    "imageRef": "image_mstexhbg_9hmlp6",
+                    "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-08-12-still-out-there-mstexhmy.jpg",
+                    "objectKey": "narrative/2026-08-12-still-out-there-mstexhmy.jpg",
+                    "featureLayout": "natural",
+                    "featureFocal": "center",
+                    "homepageFocal": "center",
+                    "displaySize": "large",
+                    "alignment": "center",
+                    "wrapMode": "none"
+                },
+                {
+                    "id": "paragraph_mstez52w_l8x3b6",
+                    "type": "paragraph",
+                    "html": "<span>It\u2019s fine.</span>",
+                    "text": "It\u2019s fine."
+                },
+                {
+                    "id": "paragraph_mstez52w_qesx4d",
+                    "type": "paragraph",
+                    "html": "It\u2019s honestly just\u2026fine.",
+                    "text": "It\u2019s honestly just\u2026fine."
+                },
+                {
+                    "id": "paragraph_mstez52w_68zn1u",
+                    "type": "paragraph",
+                    "html": "Say what you will about life. Think what you will about the passing of time, about the rotation of the Earth on its axis, of the orbital jurisdictions we undergo as human beings. Gravity has its hold on us, and we are not flung into space. That\u2019s something grand to celebrate.",
+                    "text": "Say what you will about life. Think what you will about the passing of time, about the rotation of the Earth on its axis, of the orbital jurisdictions we undergo as human beings. Gravity has its hold on us, and we are not flung into space. That\u2019s something grand to celebrate."
+                },
+                {
+                    "id": "paragraph_mstez52w_wudoi7",
+                    "type": "paragraph",
+                    "html": "It just boggles my mind to comprehend that I am 47 years old.",
+                    "text": "It just boggles my mind to comprehend that I am 47 years old."
+                },
+                {
+                    "id": "paragraph_mstez52w_tlksgq",
+                    "type": "paragraph",
+                    "html": "Those precious memories I created as a teenager are becoming distant memories. My hips always hurt. My physical therapist is half my age.",
+                    "text": "Those precious memories I created as a teenager are becoming distant memories. My hips always hurt. My physical therapist is half my age."
+                },
+                {
+                    "id": "paragraph_mstez52w_81vjfd",
+                    "type": "paragraph",
+                    "html": "Side note: I did go to the dentist yesterday and passed with flying colors. Small victories for an aging body largely outside most rational control.",
+                    "text": "Side note: I did go to the dentist yesterday and passed with flying colors. Small victories for an aging body largely outside most rational control."
+                },
+                {
+                    "id": "paragraph_mstez52w_f7t7rh",
+                    "type": "paragraph",
+                    "html": "So yes. Forty-seven years old.",
+                    "text": "So yes. Forty-seven years old."
+                },
+                {
+                    "id": "paragraph_mstez52w_qk0m57",
+                    "type": "paragraph",
+                    "html": "My mind, thankfully, is not the least bit slow. But each year, I feel the pull of nature just a bit more upon my body.",
+                    "text": "My mind, thankfully, is not the least bit slow. But each year, I feel the pull of nature just a bit more upon my body."
+                },
+                {
+                    "id": "paragraph_mstdqsv9_yl9qtf",
+                    "type": "paragraph",
+                    "html": "Damn, but it feels good to be writing again after a brief hiatus.",
+                    "text": "Damn, but it feels good to be writing again after a brief hiatus."
+                },
+                {
+                    "id": "divider_mstez52w_944o6s",
+                    "type": "divider"
+                },
+                {
+                    "id": "paragraph_mstez52w_wyalqn",
+                    "type": "paragraph",
+                    "html": "How about a little more age-related trivia?",
+                    "text": "How about a little more age-related trivia?"
+                },
+                {
+                    "id": "paragraph_mstez52w_wni7ld",
+                    "type": "paragraph",
+                    "html": "If you\u2019re anywhere near my age, you probably have cultural touchstones that feel especially relevant to you. Things that feel timeless, or, at the very least, things that surely couldn\u2019t have happened<span>\u00a0</span><em>that</em><span>\u00a0</span>long ago.",
+                    "text": "If you\u2019re anywhere near my age, you probably have cultural touchstones that feel especially relevant to you. Things that feel timeless, or, at the very least, things that surely couldn\u2019t have happened\u00a0that\u00a0long ago."
+                },
+                {
+                    "id": "paragraph_mstez52w_hjfnac",
+                    "type": "paragraph",
+                    "html": "One of those for me is<span>\u00a0</span><em>The Lord of the Rings</em><span>\u00a0</span>movies. It feels like yesterday when I was watching them in theaters. But<span>\u00a0</span><em>The Fellowship of the Ring</em><span>\u00a0</span>was released in December 2001.",
+                    "text": "One of those for me is\u00a0The Lord of the Rings\u00a0movies. It feels like yesterday when I was watching them in theaters. But\u00a0The Fellowship of the Ring\u00a0was released in December 2001."
+                },
+                {
+                    "id": "paragraph_mstez52w_yn0eq7",
+                    "type": "paragraph",
+                    "html": "Almost 25 years ago. A freaking quarter of a century. A silver anniversary, for crying out loud. Shivers down my spine as I realize it\u2019s now more than half a lifetime ago.",
+                    "text": "Almost 25 years ago. A freaking quarter of a century. A silver anniversary, for crying out loud. Shivers down my spine as I realize it\u2019s now more than half a lifetime ago."
+                },
+                {
+                    "id": "paragraph_mstez52w_zu608n",
+                    "type": "paragraph",
+                    "html": "I remember something else that got under my skin years ago. Madonna\u2019s song \u201cVogue\u201d rattled off a list of old Hollywood royalty. Greta Garbo, Marilyn Monroe, Marlene Dietrich, Marlon Brando, Grace Kelly, Fred Astaire, Ginger Rogers, Katharine Hepburn, Lauren Bacall and the rest. Sixteen people whose names represented a vaunted age of Hollywood.",
+                    "text": "I remember something else that got under my skin years ago. Madonna\u2019s song \u201cVogue\u201d rattled off a list of old Hollywood royalty. Greta Garbo, Marilyn Monroe, Marlene Dietrich, Marlon Brando, Grace Kelly, Fred Astaire, Ginger Rogers, Katharine Hepburn, Lauren Bacall and the rest. Sixteen people whose names represented a vaunted age of Hollywood."
+                },
+                {
+                    "id": "paragraph_mstez52w_q45ju6",
+                    "type": "paragraph",
+                    "html": "I read an article about what had happened to that list over time. One by one, the people Madonna sang about, passed. Some were already gone when the song was released, while others lived for decades afterward. Eventually there was only one left, Lauren Bacall. Then, in 2014, she died too.",
+                    "text": "I read an article about what had happened to that list over time. One by one, the people Madonna sang about, passed. Some were already gone when the song was released, while others lived for decades afterward. Eventually there was only one left, Lauren Bacall. Then, in 2014, she died too."
+                },
+                {
+                    "id": "paragraph_mstez52x_2uqtpw",
+                    "type": "paragraph",
+                    "html": "That was it. The entire list was gone. \u00a0And t<span>here was something about that which stayed with me. A song released during my childhood had survived every human being it was celebrating. And while I was still there, that particular generation of people had slipped the confines of Earth and were b</span>orne<span>\u00a0into the cosmos.</span>",
+                    "text": "That was it. The entire list was gone. \u00a0And there was something about that which stayed with me. A song released during my childhood had survived every human being it was celebrating. And while I was still there, that particular generation of people had slipped the confines of Earth and were borne\u00a0into the cosmos."
+                },
+                {
+                    "id": "divider_mstez52x_jz6hrz",
+                    "type": "divider"
+                },
+                {
+                    "id": "paragraph_mstez52x_xqb0pl",
+                    "type": "paragraph",
+                    "html": "<span>Bah. None of this is new for me. Even as I was writing this post, my mind wandered to an entry I wrote on June 8, 2002. I was 23. Never been married, let alone become a father. Or a grandfather.</span><br>",
+                    "text": "Bah. None of this is new for me. Even as I was writing this post, my mind wandered to an entry I wrote on June 8, 2002. I was 23. Never been married, let alone become a father. Or a grandfather."
+                },
+                {
+                    "id": "paragraph_mstez52x_3u6uw4",
+                    "type": "paragraph",
+                    "html": "The post was called<span>\u00a0</span><strong>\u201cLiving in the past.\u201d</strong><span>\u00a0</span>That night, I had watched Lennox Lewis thoroughly dismantle Mike Tyson. I didn\u2019t particularly like Tyson. I didn\u2019t expect him to win. By my own admission, he was a deeply troubled person who probably didn\u2019t deserve the nostalgic affection I had for him.",
+                    "text": "The post was called\u00a0\u201cLiving in the past.\u201d\u00a0That night, I had watched Lennox Lewis thoroughly dismantle Mike Tyson. I didn\u2019t particularly like Tyson. I didn\u2019t expect him to win. By my own admission, he was a deeply troubled person who probably didn\u2019t deserve the nostalgic affection I had for him."
+                },
+                {
+                    "id": "paragraph_mstez52x_j621mo",
+                    "type": "paragraph",
+                    "html": "And yet, watching him lose made me sad, and I tried to figure out why.",
+                    "text": "And yet, watching him lose made me sad, and I tried to figure out why."
+                },
+                {
+                    "id": "paragraph_mstez52x_0nalg9",
+                    "type": "paragraph",
+                    "html": "I realized then that Tyson was part of my childhood. His name conjured Nintendo games, newspaper headlines and the mythical aura he had when I was a kid. Watching him get beat down and fail to get back up somehow felt like watching a little piece of childhood stay down with him.",
+                    "text": "I realized then that Tyson was part of my childhood. His name conjured Nintendo games, newspaper headlines and the mythical aura he had when I was a kid. Watching him get beat down and fail to get back up somehow felt like watching a little piece of childhood stay down with him."
+                },
+                {
+                    "id": "paragraph_mstez52x_simza3",
+                    "type": "paragraph",
+                    "html": "Then I wrote about Michael Jordan. Jordan had returned from retirement to play for the Washington Wizards, and I loved it! Not necessarily because I thought it was the wisest career decision (it wasn't), but because one of the permanent fixtures of my childhood had come back.",
+                    "text": "Then I wrote about Michael Jordan. Jordan had returned from retirement to play for the Washington Wizards, and I loved it! Not necessarily because I thought it was the wisest career decision (it wasn't), but because one of the permanent fixtures of my childhood had come back."
+                },
+                {
+                    "id": "paragraph_mstez52x_rkbmae",
+                    "type": "paragraph",
+                    "html": "He could still score 50 points. He could still take over a basketball game.<span>\u00a0</span><strong>He was still out there</strong>. And every time he did it, 23-year-old me felt some small sense of victory.",
+                    "text": "He could still score 50 points. He could still take over a basketball game.\u00a0He was still out there. And every time he did it, 23-year-old me felt some small sense of victory."
+                },
+                {
+                    "id": "paragraph_mstez52x_we2rzh",
+                    "type": "paragraph",
+                    "html": "Then, near the end of that 2002 post, I rattled off a few more examples of my inability to let go of old things. My music lived in the eighties. My favorite basketball player had been drafted in 1984.",
+                    "text": "Then, near the end of that 2002 post, I rattled off a few more examples of my inability to let go of old things. My music lived in the eighties. My favorite basketball player had been drafted in 1984."
+                },
+                {
+                    "id": "paragraph_mstez52x_jarubs",
+                    "type": "paragraph",
+                    "html": "And my favorite television show?<span>\u00a0</span><em>The Simpsons.</em><span>\u00a0</span>Which brings us neatly back to 2026.",
+                    "text": "And my favorite television show?\u00a0The Simpsons.\u00a0Which brings us neatly back to 2026."
+                },
+                {
+                    "id": "divider_mstez52x_awe6qz",
+                    "type": "divider"
+                },
+                {
+                    "id": "paragraph_mstez52x_gv4ng2",
+                    "type": "paragraph",
+                    "html": "The first time I remember seeing<span>\u00a0</span><em>The Simpsons</em>, I was ten years old. It was Christmas time, 1989. We were gathered at a family Christmas party at my Mimi and Papa\u2019s condo. At some point,<span>\u00a0</span><em>The Simpsons</em><span>\u00a0</span>came on television.",
+                    "text": "The first time I remember seeing\u00a0The Simpsons, I was ten years old. It was Christmas time, 1989. We were gathered at a family Christmas party at my Mimi and Papa\u2019s condo. At some point,\u00a0The Simpsons\u00a0came on television."
+                },
+                {
+                    "id": "paragraph_mstez52x_9wkxdo",
+                    "type": "paragraph",
+                    "html": "And when the parents realized what we kids were watching, they promptly ordered us to turn it off.<span>\u00a0</span><em>The Simpsons</em><span>\u00a0</span>was<span>\u00a0</span><em>taboo</em>. Vile. Inappropriate.",
+                    "text": "And when the parents realized what we kids were watching, they promptly ordered us to turn it off.\u00a0The Simpsons\u00a0was\u00a0taboo. Vile. Inappropriate."
+                },
+                {
+                    "id": "paragraph_mstez52x_r3d40v",
+                    "type": "paragraph",
+                    "html": "Bart Simpson was disrespectful. The show was crude. In retrospect, it all seems so absurd; I guess the entire moral fabric of America was hanging by a thread, and Bart telling someone to eat his shorts might have been enough to finish the job. The mere fact that the adults were barring us from watching it made it that much more tempting to do so. Hell, I still encounter people who forbid their children from watching it.",
+                    "text": "Bart Simpson was disrespectful. The show was crude. In retrospect, it all seems so absurd; I guess the entire moral fabric of America was hanging by a thread, and Bart telling someone to eat his shorts might have been enough to finish the job. The mere fact that the adults were barring us from watching it made it that much more tempting to do so. Hell, I still encounter people who forbid their children from watching it."
+                },
+                {
+                    "id": "paragraph_mstez52x_76z3mt",
+                    "type": "paragraph",
+                    "html": "For years I\u2019ve carried that memory around without knowing exactly when it happened. But with a little internet sleuthing, it turns out the Christmas episode, \u201cSimpsons Roasting on an Open Fire,\u201d aired on<span>\u00a0</span><strong>December 17, 1989</strong>. And it was the series premiere.",
+                    "text": "For years I\u2019ve carried that memory around without knowing exactly when it happened. But with a little internet sleuthing, it turns out the Christmas episode, \u201cSimpsons Roasting on an Open Fire,\u201d aired on\u00a0December 17, 1989. And it was the series premiere."
+                },
+                {
+                    "id": "paragraph_mstez52x_xgkupl",
+                    "type": "paragraph",
+                    "html": "Which means there is a very real possibility that my first memory of<span>\u00a0</span><em>The Simpsons</em><span>\u00a0</span>is a memory of watching<span>\u00a0</span><strong>the first full-length episode of<span>\u00a0</span><em>The Simpsons</em></strong><span>\u00a0</span>when it originally aired.",
+                    "text": "Which means there is a very real possibility that my first memory of\u00a0The Simpsons\u00a0is a memory of watching\u00a0the first full-length episode of\u00a0The Simpsons\u00a0when it originally aired."
+                },
+                {
+                    "id": "paragraph_mstez52x_4svwic",
+                    "type": "paragraph",
+                    "html": "That was 1989. I am now 47.<span>\u00a0</span><em>The Simpsons</em><span>\u00a0</span>is still on television. Crazy comfort is wrought upon my soul because of that fact. Because unwillingly,<span>\u00a0but very much so capably,\u00a0</span><em>The Simpsons</em><span>\u00a0</span>became a little piece of ongoing inertia in my life.",
+                    "text": "That was 1989. I am now 47.\u00a0The Simpsons\u00a0is still on television. Crazy comfort is wrought upon my soul because of that fact. Because unwillingly,\u00a0but very much so capably,\u00a0The Simpsons\u00a0became a little piece of ongoing inertia in my life."
+                },
+                {
+                    "id": "paragraph_mstez52x_zf9w9w",
+                    "type": "paragraph",
+                    "html": "It was there when I was ten. It was there when I was 23, writing a blog post about how difficult I found it to watch the cultural symbols of my childhood disappear.",
+                    "text": "It was there when I was ten. It was there when I was 23, writing a blog post about how difficult I found it to watch the cultural symbols of my childhood disappear."
+                },
+                {
+                    "id": "paragraph_mstez52x_whyqv9",
+                    "type": "paragraph",
+                    "html": "And even though I don't catch new episodes regularly, or even admit to any sort of anticipation for them,<span>\u00a0</span><em>The Simpsons\u00a0</em>is still here now. And to me, that hits just fine in my heart.",
+                    "text": "And even though I don't catch new episodes regularly, or even admit to any sort of anticipation for them,\u00a0The Simpsons\u00a0is still here now. And to me, that hits just fine in my heart."
+                },
+                {
+                    "id": "divider_mstez52x_rqxii6",
+                    "type": "divider"
+                },
+                {
+                    "id": "paragraph_mstez52x_cw8ljm",
+                    "type": "paragraph",
+                    "html": "As I am wont to do, I\u2019ve recently started watching<span>\u00a0</span><em>The Simpsons</em><span>\u00a0</span>again from the beginning. For the Nth time. Well, last night, I reached season 16, episode 8.",
+                    "text": "As I am wont to do, I\u2019ve recently started watching\u00a0The Simpsons\u00a0again from the beginning. For the Nth time. Well, last night, I reached season 16, episode 8."
+                },
+                {
+                    "id": "paragraph_mstez52x_tr8o89",
+                    "type": "paragraph",
+                    "html": "It originally aired on February 6, 2005, immediately following Super Bowl XXXIX. The title was \u201cHomer and Ned\u2019s Hail Mary Pass.\u201d The episode featured five established athletes playing themselves: Tom Brady, LeBron James, Michelle Kwan, Yao Ming and Warren Sapp.",
+                    "text": "It originally aired on February 6, 2005, immediately following Super Bowl XXXIX. The title was \u201cHomer and Ned\u2019s Hail Mary Pass.\u201d The episode featured five established athletes playing themselves: Tom Brady, LeBron James, Michelle Kwan, Yao Ming and Warren Sapp."
+                },
+                {
+                    "id": "paragraph_mstez52y_b7u6a1",
+                    "type": "paragraph",
+                    "html": "When LeBron came on the screen midway through the episode, I was immediately struck by a sense of awe. That episode aired<span>\u00a0</span><strong>21 years, 6 months and 8 days ago.</strong><span>\u00a0</span>Of those five athletes, LeBron James is still playing professional sports.",
+                    "text": "When LeBron came on the screen midway through the episode, I was immediately struck by a sense of awe. That episode aired\u00a021 years, 6 months and 8 days ago.\u00a0Of those five athletes, LeBron James is still playing professional sports."
+                },
+                {
+                    "id": "paragraph_mstez52y_ebeppw",
+                    "type": "paragraph",
+                    "html": "Warren Sapp retired from the NFL in 2008. Michelle Kwan\u2019s final competitive figure-skating event came shortly after the episode aired. Yao Ming retired in 2011.",
+                    "text": "Warren Sapp retired from the NFL in 2008. Michelle Kwan\u2019s final competitive figure-skating event came shortly after the episode aired. Yao Ming retired in 2011."
+                },
+                {
+                    "id": "paragraph_mstez52y_vre9uc",
+                    "type": "paragraph",
+                    "html": "Tom Brady, whose career (as a quarterback no less) already seemed impossibly long...finally retired for good on February 1, 2023.",
+                    "text": "Tom Brady, whose career (as a quarterback no less) already seemed impossibly long...finally retired for good on February 1, 2023."
+                },
+                {
+                    "id": "paragraph_mstez52y_kjnv44",
+                    "type": "paragraph",
+                    "html": "But LeBron James? He\u2019s 41 years old and preparing for NBA season number 24, now with the Philadelphia 76ers.",
+                    "text": "But LeBron James? He\u2019s 41 years old and preparing for NBA season number 24, now with the Philadelphia 76ers."
+                },
+                {
+                    "id": "paragraph_mstez52y_acb969",
+                    "type": "paragraph",
+                    "html": "That right there blows my mind.\u00a0<span>When this episode aired, LeBron was 20 years old and in his second NBA season. Brady had just won his third Super Bowl that very night. Yao was 24. Michelle Kwan was still competing. Warren Sapp still had years of football ahead of him.</span>",
+                    "text": "That right there blows my mind.\u00a0When this episode aired, LeBron was 20 years old and in his second NBA season. Brady had just won his third Super Bowl that very night. Yao was 24. Michelle Kwan was still competing. Warren Sapp still had years of football ahead of him."
+                },
+                {
+                    "id": "paragraph_mstez52y_05xtlm",
+                    "type": "paragraph",
+                    "html": "<em>The Simpsons</em>, already considered a touchstone of longevity in and of itself, gathered them together as a snapshot of the sports world of 2005.",
+                    "text": "The Simpsons, already considered a touchstone of longevity in and of itself, gathered them together as a snapshot of the sports world of 2005."
+                },
+                {
+                    "id": "paragraph_mstez52y_xg94x1",
+                    "type": "paragraph",
+                    "html": "But then, the snapshot aged. One by one, those athletes retired. Some pretty quickly afterward. Some stuck around for an almost absurd amount of time. But somehow, LeBron James is still an active professional athlete. And I realized I had been here before, written these words before.",
+                    "text": "But then, the snapshot aged. One by one, those athletes retired. Some pretty quickly afterward. Some stuck around for an almost absurd amount of time. But somehow, LeBron James is still an active professional athlete. And I realized I had been here before, written these words before."
+                },
+                {
+                    "id": "paragraph_mstez52y_bwlcns",
+                    "type": "paragraph",
+                    "html": "In 2002, I was 23 years old, watching Michael Jordan play for the Wizards and feeling strangely reassured that one of the heroes of my childhood could still step onto a basketball court and take over a game.",
+                    "text": "In 2002, I was 23 years old, watching Michael Jordan play for the Wizards and feeling strangely reassured that one of the heroes of my childhood could still step onto a basketball court and take over a game."
+                },
+                {
+                    "id": "paragraph_mstez52y_in11bh",
+                    "type": "paragraph",
+                    "html": "Twenty-four years later, I\u2019m doing essentially the same thing with LeBron James. The difference, of course, is that LeBron wasn\u2019t one of my childhood heroes. I was already an adult when his career began.",
+                    "text": "Twenty-four years later, I\u2019m doing essentially the same thing with LeBron James. The difference, of course, is that LeBron wasn\u2019t one of my childhood heroes. I was already an adult when his career began."
+                },
+                {
+                    "id": "paragraph_mstez52y_avrdat",
+                    "type": "paragraph",
+                    "html": "And maybe that\u2019s what makes this feel different, because LeBron isn\u2019t keeping my childhood alive. That role is filled by nostalgia and pop icons who have aged out completely or were buried far too soon.",
+                    "text": "And maybe that\u2019s what makes this feel different, because LeBron isn\u2019t keeping my childhood alive. That role is filled by nostalgia and pop icons who have aged out completely or were buried far too soon."
+                },
+                {
+                    "id": "paragraph_mstez52y_d4j17n",
+                    "type": "paragraph",
+                    "html": "No, LeBron's job is much harder; more finely honed and sharp. He\u2019s keeping<span>\u00a0</span><strong>my adulthood</strong><span>\u00a0</span>connected. He is a human bridge between a version of me who was barely out of his teens and the 47-year-old whose hips now hurt when he gets out of bed.",
+                    "text": "No, LeBron's job is much harder; more finely honed and sharp. He\u2019s keeping\u00a0my adulthood\u00a0connected. He is a human bridge between a version of me who was barely out of his teens and the 47-year-old whose hips now hurt when he gets out of bed."
+                },
+                {
+                    "id": "paragraph_mstez52y_a7kr6l",
+                    "type": "paragraph",
+                    "html": "That\u2019s an unexpectedly comforting thing.",
+                    "text": "That\u2019s an unexpectedly comforting thing."
+                },
+                {
+                    "id": "paragraph_mstez52y_dyc1e6",
+                    "type": "paragraph",
+                    "html": "There are episodes of<span>\u00a0</span><em>The Simpsons</em><span>\u00a0</span>that make me feel old because the technology is obsolete, the cultural references are forgotten or the celebrities have disappeared. But this one hits different.",
+                    "text": "There are episodes of\u00a0The Simpsons\u00a0that make me feel old because the technology is obsolete, the cultural references are forgotten or the celebrities have disappeared. But this one hits different."
+                },
+                {
+                    "id": "paragraph_mstez52y_j5tnd6",
+                    "type": "paragraph",
+                    "html": "The entire sports era it captured has come and gone, except for one guy.",
+                    "text": "The entire sports era it captured has come and gone, except for one guy."
+                },
+                {
+                    "id": "paragraph_mstez52y_qc5cgh",
+                    "type": "paragraph",
+                    "html": "I suppose this fascination with who is still out there has become more personal for me, too.",
+                    "text": "I suppose this fascination with who is still out there has become more personal for me, too."
+                },
+                {
+                    "id": "divider_mstez52y_zy5n0b",
+                    "type": "divider"
+                },
+                {
+                    "id": "paragraph_mstez52y_n9qng3",
+                    "type": "paragraph",
+                    "html": "<span>My dad was born in 1944, and he is still kicking around. My mom passed away in 2024. So did my brother, from complications of diabetes. There are photographs of my own family now that have already started to lose that earthly sense of continuity. People who were once simply there, standing beside us, have become people we remember standing there.</span><br>",
+                    "text": "My dad was born in 1944, and he is still kicking around. My mom passed away in 2024. So did my brother, from complications of diabetes. There are photographs of my own family now that have already started to lose that earthly sense of continuity. People who were once simply there, standing beside us, have become people we remember standing there."
+                },
+                {
+                    "id": "paragraph_mstez52y_b17eol",
+                    "type": "paragraph",
+                    "html": "Not long ago I was doing some genealogy work online and found a census record for my dad\u2019s childhood home. It must have been the 1950 census. There were five people listed in the household: my grandparents, my dad, his brother Brent and his sister JoEllen.",
+                    "text": "Not long ago I was doing some genealogy work online and found a census record for my dad\u2019s childhood home. It must have been the 1950 census. There were five people listed in the household: my grandparents, my dad, his brother Brent and his sister JoEllen."
+                },
+                {
+                    "id": "paragraph_mstez52y_5k88ht",
+                    "type": "paragraph",
+                    "html": "Five names. One little household, frozen in place by the federal government in 1950.\u00a0<span>My grandparents are gone. Brent and JoEllen both died prematurely about six years ago.</span>",
+                    "text": "Five names. One little household, frozen in place by the federal government in 1950.\u00a0My grandparents are gone. Brent and JoEllen both died prematurely about six years ago."
+                },
+                {
+                    "id": "paragraph_mstez52y_8iaq2j",
+                    "type": "paragraph",
+                    "html": "I looked at my dad and said, \u201cYou\u2019re all that\u2019s left of this record.\u201d",
+                    "text": "I looked at my dad and said, \u201cYou\u2019re all that\u2019s left of this record.\u201d"
+                },
+                {
+                    "id": "paragraph_mstez52y_j0dd8n",
+                    "type": "paragraph",
+                    "html": "And he is.",
+                    "text": "And he is."
+                },
+                {
+                    "id": "paragraph_mstez52y_kduxzz",
+                    "type": "paragraph",
+                    "html": "I think about that<span>\u00a0</span><em>Vogue</em><span>\u00a0</span>article differently now. It is one thing to watch a roster of movie stars disappear from a song, or athletes slowly retire from an old episode of<span>\u00a0</span><em>The Simpsons</em>. Those things give us a safe way to watch time work. Then eventually you find the census record with your own family on it, or look at a photograph and realize some of the people in it no longer exist anywhere except in memory.",
+                    "text": "I think about that\u00a0Vogue\u00a0article differently now. It is one thing to watch a roster of movie stars disappear from a song, or athletes slowly retire from an old episode of\u00a0The Simpsons. Those things give us a safe way to watch time work. Then eventually you find the census record with your own family on it, or look at a photograph and realize some of the people in it no longer exist anywhere except in memory."
+                },
+                {
+                    "id": "paragraph_mstez52y_nv4zjc",
+                    "type": "paragraph",
+                    "html": "Suddenly the idea of someone still being out there carries a little more weight.",
+                    "text": "Suddenly the idea of someone still being out there carries a little more weight."
+                },
+                {
+                    "id": "paragraph_mste2x12_dtluh3",
+                    "type": "paragraph",
+                    "html": "<span>And meanwhile, the television show containing that snapshot has managed an even more ridiculous feat.\u00a0</span><span><i>It was there</i> at my grandparents\u2019 condo when I was ten years old and somebody\u2019s parent frantically ordered us to turn off this dangerous new cartoon.</span>",
+                    "text": "And meanwhile, the television show containing that snapshot has managed an even more ridiculous feat.\u00a0It was there at my grandparents\u2019 condo when I was ten years old and somebody\u2019s parent frantically ordered us to turn off this dangerous new cartoon."
+                },
+                {
+                    "id": "paragraph_mstez52y_nhjp1v",
+                    "type": "paragraph",
+                    "html": "<i>It was there </i>when I was 23, writing about Michael Jordan and my inability to let go of the past. <i>It was there</i> in 2005, putting a 20-year-old LeBron James into an episode. <i>And it is still here</i> while I sit at 47 and write about all of them.",
+                    "text": "It was there when I was 23, writing about Michael Jordan and my inability to let go of the past. It was there in 2005, putting a 20-year-old LeBron James into an episode. And it is still here while I sit at 47 and write about all of them."
+                },
+                {
+                    "id": "paragraph_mstez52y_mu3qhg",
+                    "type": "paragraph",
+                    "html": "Maybe that\u2019s what I\u2019m actually looking for when I get nostalgic. It's not a way back; it's perhaps a little evidence of continuity. It is literally something familiar moving forward beside me.",
+                    "text": "Maybe that\u2019s what I\u2019m actually looking for when I get nostalgic. It's not a way back; it's perhaps a little evidence of continuity. It is literally something familiar moving forward beside me."
+                },
+                {
+                    "id": "paragraph_mstez52y_ikrbt9",
+                    "type": "paragraph",
+                    "html": "At 23, Michael Jordan gave me that.\u00a0<span>At 47, apparently it\u2019s LeBron James. He\u2019s still out there, enjoying his life.</span>",
+                    "text": "At 23, Michael Jordan gave me that.\u00a0At 47, apparently it\u2019s LeBron James. He\u2019s still out there, enjoying his life."
+                },
+                {
+                    "id": "paragraph_mstez52y_u3g7ap",
+                    "type": "paragraph",
+                    "html": "<em>The Simpsons</em><span>\u00a0</span>is still out there, too. My dad is still out there. And, come to think of it, so am I.",
+                    "text": "The Simpsons\u00a0is still out there, too. My dad is still out there. And, come to think of it, so am I."
+                },
+                {
+                    "id": "paragraph_mstez52y_o0wvb7",
+                    "type": "paragraph",
+                    "html": "Eventually, every photograph loses its last living person. Every roster becomes a list of names from another time. Maybe that\u2019s why I find so much comfort in the few things that refuse to become photographs without inertia. Not yet, anyway.",
+                    "text": "Eventually, every photograph loses its last living person. Every roster becomes a list of names from another time. Maybe that\u2019s why I find so much comfort in the few things that refuse to become photographs without inertia. Not yet, anyway."
+                },
+                {
+                    "id": "paragraph_mste9v8h_5e8wzu",
+                    "type": "paragraph",
+                    "html": "Also, I\u2019m pretty sure I\u2019m a 76ers fan now.",
+                    "text": "Also, I\u2019m pretty sure I\u2019m a 76ers fan now."
+                }
+            ],
+            "images": [
+                {
+                    "id": "image_mstexhbg_9hmlp6",
+                    "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-08-12-still-out-there-mstexhmy.jpg",
+                    "objectKey": "narrative/2026-08-12-still-out-there-mstexhmy.jpg",
+                    "alt": "Narrative image",
+                    "caption": "",
+                    "credit": "",
+                    "featureLayout": "natural",
+                    "featureFocal": "center",
+                    "homepageFocal": "center",
+                    "width": 1400,
+                    "height": 788,
+                    "displaySize": "large",
+                    "alignment": "center",
+                    "wrapMode": "none"
+                }
+            ],
+            "formatting": {
+                "mode": "otw-enhanced-markdown",
+                "version": 1,
+                "fallback": "markdown"
+            }
+        },
+        "post_id": "August 14, 2026--still-out-there",
+        "share_path": "archive/2026-08-14-still-out-there.html",
+        "og_image": "Images/og/archive/2026-08-14-still-out-there.png"
+    },
+    {
         "title": "Level One",
         "date": "August 3, 2026",
         "body": "_What a 47-year-old solo dev learns the hard way._\n\n![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-08-03-level-one-msi23qi5.jpg \"Come on, you can picture this at Toys R Us, right?\")\n\nI\u2019ve\u00a0always wanted to make a video game, and\u00a0I\u2019m pretty envious of people who have the know-how. Come to think of it, I\u2019m envious of any kind of artistic know-how.\u00a0When I was really young, I remember being incredibly jealous of my oldest brother, Adam, who had a knack for sketching and drawing.\u00a0One in particular burned itself into my memory: a picture of a helicopter hanging on his wall just above the doorway. I\u2019m not sure if he knew, but I would sneak downstairs often to stare at all of his creations.\n\nBut for me, when it came to drawing, I fell short. I knew I had other skills, maybe just as valuable. They just weren\u2019t the ones I wanted.\n\n\u201cKnack.\u201d\u00a0I really do love that word. It has always felt unusually precise to me.\n\nIn Orson Scott Card\u2019s fantasy series\u00a0_The Tales of Alvin Maker_, characters have \u201cknacks\". These are minor, involuntary magical abilities that allow them to perform specific tasks with near-perfect precision.\u00a0That is how I feel about people who sing, draw, or dance well. It seems like magic to me when someone dreams up something within their mind and translates it through their hands, feet, or voice.\n\nI\u2019ve watched people doodle mindlessly, their attention otherwise occupied. There seems to be no disconnect between the firing of synapses in their brain and the movement of their hands across the paper. \u00a0It is staggeringly beautiful.\n\nI\u2019ve never quite lost the desire to draw.\u00a0And that missing skill set bit me in the ass these past few weeks. Because if I knew how to draw, maybe I would have had an easier time with the project I'm about to describe.\n\n---\n\nOver the past couple of months, I used some of my spare time to sit down and plan a video game.\n\nI described it elsewhere as a kind of \u201clove letter\u201d to my past. I wanted to take the best aspects of the games I loved as a kid..._Super Mario Bros._,\u00a0_The Legend of Zelda_,\u00a0_Super Metroid_, and others, and make something that might be enjoyed by people my age.\n\nThe proof of concept came quickly. It was so much fun! But I ran into hard limits with a browser based game.\u00a0I started encountering frame-rate and memory problems. Frustrated, I asked Codex point-blank:\n\n_\u201cShould I just make a native iOS game instead? That was my ultimate goal.\u201d_\n\nCodex responded:\n\n_\u201cOh yes, you should make an iOS game instead.\u201d_\n\nSo I abandoned the browser prototype and began rebuilding the game natively for iOS.\n\nSpoiler: It went so, so poorly.\n\n![Aryn animation sprite study](https://outsidetheworld.com/media/narrative/2026-08-03-level-one/super-frgmnts-aryn-runtime-motion-study-v1.png \"Some fun with sprite animation\")\n\n---\n\nLife being what it is, I am a 47-year-old without a full development team beside me.\n\nAs I dove into iOS game development, I failed to respect the sheer scope of it all. A video game is not just software. It is an overwhelming orchestra of disciplines.\n\nA studio distributes the work among systems designers, programmers, artists, animators, audio engineers, writers, and testers. I've learned that those disciplines act as a system of checks and balances. One person\u2019s exciting idea becomes another person\u2019s warning about physics, memory, scope, or time.\n\nAnd it's important to note that I did not have anyone pushing back on my ideas. No one questioning my judgement, or my assumptions. I only had the confirmation bias in my own head.\n\nSo when I say that I was acting as a one-man band, not only did it mean playing every instrument at once, it meant playing them all wrong. With earplugs in.\n\nEvery apparent breakthrough uncovered a different and unforeseen problem. I would fix one behavior only to destabilize another. Something that looked perfect in isolation could break animation, collision, camera movement, performance, or some other system I had not realized was connected to it.\n\n![The bubble door moved again](https://outsidetheworld.com/media/narrative/2026-08-03-level-one/super-frgmnts-bubble-door-regression-v1.webp \"There's an easter egg in the game when this door is encountered.\")\n\nEach night, the game became technically more elaborate and somehow less playable.\n\nWhat makes this difficult to admit is that I wasn\u2019t a novice blindly handing the reins to a machine.\u00a0I already built and successfully launched (and maintain!) a social-media platform on iOS. And besides, I had a background in web development, coding, and hardware. I thought I \u00a0knew enough to call BS when the AI became sloppy.\n\nWith my social media app, I \u00a0regularly caught its hallucinations, challenged its bad logic, and pushed back when its enthusiasm got out of hand.\u00a0But that prior success bred a quiet hubris when it came to the game.\n\nI badly misjudged my own general software competence for game-development acumen. Because I could audit line-by-line code changes, I thought I could be in command. I did not appreciate that building a game involved much more than writing software. It required maintaining a delicate, real-time balance among spatial math, frame budgets, physics loops, animation systems, and asset pipelines.\n\nMy technical background gave me just enough guardrails to feel safe while the AI coddled me right off the cliff.\n\n---\n\nSitting in the wreckage of the native iOS attempt, I finally had a realization:\u00a0I needed to make like Elsa and let it go.\n\nI was going to end up spending hundreds of dollars and dozens more hours making an increasingly elaborate piece of garbage.\u00a0That realization felt like waking up.\n\nSo, I said goodbye to the native iOS build. I was incredibly sad. But in a very real way, I was also relieved. I had been banging my head against a wall, convinced that I was just two steps away from a breakthrough. But my head was already split open, and I didn't realize it.\n\nThe next morning, I spent my 45-minute commute to work in relative silence. No music, no audiobooks, no podcasts. Just me and my thoughts, which somehow, kept returning to the game. To the failure.\u00a0Somewhere along the drive, I remembered my first effort. The one that worked, inside the web browser.\n\n![The RD-42 descending toward Veyra](https://outsidetheworld.com/media/narrative/2026-08-03-level-one/super-frgmnts-rd42-descent-v1.webp \"Descent into Veyra\")\n\nI could return to that, polish it up, and show it to you.\u00a0I just needed to make that one solid, atmospheric experience.\u00a0So when I did return to that version later that night, and began polishing it, something incredible happened.\n\nI discovered that while I might lack the ability to sketch something beautifully with my hands, I have my own knack. I can build a pretty cool world.\u00a0I have a knack for creating believable characters and giving a place a true sense of mood. And I enjoy the process of doing it.\n\nI knew what the planet should feel like before I knew how to build every part of it. I knew how my two main characters should speak to one another. As I wrote their dialogue, the story began unfolding naturally. The world developed a personality that I genuinely loved.\n\n![Aryn and Dras in conversation](https://outsidetheworld.com/media/narrative/2026-08-03-level-one/super-frgmnts-aryn-dras-dialogue-v1.webp \"Yes. Diet Coke FTW.\")\n\nThe writing wasn\u2019t filler between pieces of gameplay, it became the story and drive of the game.\n\n---\n\nSo here it is: the finished browser prototype.\u00a0I cleaned up the code, tuned the controls, polished the sprites, and tried to let the narrative shine.\n\nAnd you know what?\u00a0It kind of kicks ass.\u00a0I am proud of what I built. And I am happy to show it to you.\n\n![Aryn fighting through the Shard Foundry](https://outsidetheworld.com/media/narrative/2026-08-03-level-one/super-frgmnts-foundry-action-v1.webp \"Combat comes fast.\")\n\nIt was a labor of love, crafted line by line and bug by bug, with a bit of AI muscle helping me cross technical gaps I could not have crossed alone. And\u00a0I will not be expanding it into a full release. I now know my limitations and what my time is worth.\n\n[Level One is complete](https://outsidetheworld.com/super_frgmnts.html), self-contained, and fully functional.\u00a0It runs right now, directly in your web browser. Chrome is recommended. Controllers are supported! But you can also just play it on your phone with touch controls.\u00a0No App Store download is required.\n\n[Just a smol, playable piece of a world I brought to life.](https://outsidetheworld.com/super_frgmnts.html)\n\n![A small playable piece of Veyra](https://outsidetheworld.com/media/narrative/2026-08-03-level-one/super-frgmnts-landing-invitation-v1.webp)",
