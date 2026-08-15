@@ -18,7 +18,7 @@ ROUTE_BUDGETS = {
     "poetry": (20_000, ["drift_poetry.html", "theme.css", "assets/fonts/otw-fonts.css", "new_poetry_data.js"]),
     "professional": (18_000, ["professional.html", "theme.css", "assets/fonts/otw-fonts.css"]),
     "current-essay": (
-        34_000,
+        24_000,
         [
             "@current-essay",
             "theme.css",
@@ -54,6 +54,7 @@ def check_route_budgets() -> list[str]:
             current_essay = (ROOT / current_url).read_text(encoding="utf-8")
             if "narration_player.css" in current_essay:
                 resolved_files.extend(["narration_player.css", "narration_player.js"])
+                budget += 10_000
         actual = sum(compressed_size(path) for path in resolved_files)
         require(actual <= budget, f"{route} route grew to {actual:,} compressed bytes (budget {budget:,})")
         lines.append(f"{route}: {actual:,}/{budget:,} compressed bytes")

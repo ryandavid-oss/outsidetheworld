@@ -84,11 +84,17 @@ def test_modified_serialization_keeps_slug_path_and_date_style():
 def test_published_revision_preserves_optional_narration_metadata():
     path = ROOT / "current_narrative" / "2026-08-14-still-out-there.md"
     document = contract.parse_source(path)
-    narration = document.metadata.get("audio")
-
-    assert narration
-    assert narration["src"] == "/media/narrative/2026-08-14-still-out-there/still-out-there.mp3"
-    assert len(narration["chapters"]) == 6
+    narration = {
+        "kind": "narration",
+        "src": "/media/narrative/fixture/essay-narration.mp3",
+        "title": "Narration fixture",
+        "label": "Audio narration",
+        "prompt": "Press play and stay awhile.",
+        "durationSeconds": 12.5,
+        "chapters": [{"label": "Opening", "startSeconds": 0, "target": "p-001"}],
+        "waveform": [12, 48, 91],
+    }
+    document.metadata["audio"] = narration
 
     patched = contract.serialize_document(
         document,

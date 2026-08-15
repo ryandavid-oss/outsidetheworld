@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 from pathlib import Path
-import hashlib
 import importlib.util
 import json
 import re
@@ -876,18 +875,20 @@ def test_optional_narration_is_sanitized_rendered_and_structured():
     assert "audio" not in narrative_sync.sanitize_publisher_metadata(unsafe)
 
 
-def test_still_out_there_narration_asset_is_stable_and_rendered():
+def test_revised_still_out_there_has_no_obsolete_narration():
     audio_path = ROOT / "media" / "narrative" / "2026-08-14-still-out-there" / "still-out-there.mp3"
-    assert audio_path.is_file()
-    assert hashlib.sha256(audio_path.read_bytes()).hexdigest() == "c635a34a28f731fb18eab07820ce042464725a4a3b28477fd082b79f43b5f83c"
+    assert not audio_path.exists()
 
     source = (ROOT / "current_narrative" / "2026-08-14-still-out-there.md").read_text(encoding="utf-8")
     metadata, _body = narrative_sync.extract_publisher_metadata("\n".join(source.splitlines()[2:]))
-    assert metadata["audio"]["src"] == "/media/narrative/2026-08-14-still-out-there/still-out-there.mp3"
+    assert "audio" not in metadata
 
     generated = (ROOT / "archive" / "2026-08-14-still-out-there.html").read_text(encoding="utf-8")
-    assert 'data-narration-id="2026-08-14-still-out-there"' in generated
-    assert 'data-narration-target="p-050"' in generated
+    assert "data-narration-player" not in generated
+    assert "narration_player.css" not in generated
+    assert "narration_player.js" not in generated
+    assert '"@type": "AudioObject"' not in generated
+    assert "Of those five athletes, he's the only one still out there." in generated
 
 
 def test_article_shell_has_home_identity_schema_and_consistent_section_levels():
@@ -1330,7 +1331,7 @@ def run():
         test_canonical_archive_page_prefers_first_article_image_when_present,
         test_explicit_feature_image_drives_opening_and_is_not_duplicated_in_body,
         test_optional_narration_is_sanitized_rendered_and_structured,
-        test_still_out_there_narration_asset_is_stable_and_rendered,
+        test_revised_still_out_there_has_no_obsolete_narration,
         test_article_shell_has_home_identity_schema_and_consistent_section_levels,
         test_article_shell_adapts_to_length_media_and_opening_structure,
         test_opening_dropcap_wraps_first_visible_letter_inside_markup,
