@@ -58,7 +58,9 @@
     { question: "Which idea belongs at the heart of this week’s lesson?", choices: ["Faith removes every question", "Questions can coexist with faith", "Trials prove God is absent", "We should understand everything now"], correct: 1, reference: "Come, Follow Me introduction" }
   ];
 
-  const storageKey = "trials-and-trust-game-v1";
+  const storageKey = location.pathname.includes("cfm816-otw")
+    ? "trials-and-trust-game-otw-v1"
+    : "trials-and-trust-game-v1";
   const state = {
     mode: "board",
     teams: [{ name: "Team Olive", score: 0 }, { name: "Team Gold", score: 0 }],
