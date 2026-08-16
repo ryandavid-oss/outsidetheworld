@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#e9eff4">
+  <meta name="color-scheme" content="light dark">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Teacher answer key for Trials & Trust, an Outside the World Come, Follow Me game about Job.">
+  <title>Trials &amp; Trust Teacher Key | Outside the World</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&amp;family=IBM+Plex+Serif:wght@400;500;600;700&amp;family=Inter:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet">
+  <script>
+    try {
+      if (localStorage.getItem("cfm816-otw-theme") === "dark") document.documentElement.dataset.theme = "dark";
+    } catch (_) {}
+  </script>
+  <link rel="stylesheet" href="media/cfm816/teacher.css?v=teacher1">
+  <script defer src="media/cfm816/teacher.js?v=teacher1"></script>
+</head>
+<body>
+  <main class="teacher-shell">
+    <header class="teacher-topbar">
+      <a class="teacher-brand" href="cfm816-otw.html" aria-label="Open the Trials and Trust class game">
+        <img class="teacher-brandmark light-mark" src="Images/otw_brandmark_dark.svg" alt="Outside the World">
+        <img class="teacher-brandmark dark-mark" src="Images/OTW_Brandmark_Main.svg" alt="Outside the World">
+        <span><strong>TRIALS &amp; TRUST</strong><small>Teacher Answer Key</small></span>
+      </a>
+      <div class="teacher-actions">
+        <button class="teacher-theme" id="teacher-theme" type="button" aria-pressed="false"><span aria-hidden="true">◐</span><span class="theme-label">Dark mode</span></button>
+        <a class="open-game" href="cfm816-otw.html">Class game <span aria-hidden="true">→</span></a>
+      </div>
+    </header>
+
+    <section class="teacher-intro" aria-labelledby="teacher-title">
+      <div>
+        <p class="teacher-kicker">IPAD COMPANION • JOB 1–3 • 12–14 • 19 • 21–24 • 38–40 • 42</p>
+        <h1 id="teacher-title">Teacher’s answer key</h1>
+      </div>
+      <p>Tap the same clue your class selects. The question, scripture text, and answer will open together on your screen.</p>
+    </section>
+
+    <section class="teacher-board" aria-labelledby="board-title">
+      <div class="teacher-board-head">
+        <div><p class="teacher-kicker">ALL 25 CLUES</p><h2 id="board-title">Choose a clue</h2></div>
+        <div class="teacher-progress" id="teacher-progress" aria-live="polite"></div>
+      </div>
+      <div class="teacher-grid-wrap">
+        <div class="teacher-grid" id="teacher-grid" aria-label="Teacher clue board"></div>
+      </div>
+      <div class="teacher-board-footer">
+        <p><span aria-hidden="true">✦</span> Viewed clues stay marked on this iPad.</p>
+        <button id="clear-viewed" type="button">Clear viewed clues</button>
+      </div>
+    </section>
+
+    <footer class="teacher-footer">
+      <p>Unofficial teaching aid • Scripture links open in Gospel Library.</p>
+      <a href="https://www.churchofjesuschrist.org/study/manual/come-follow-me-for-home-and-church-old-testament-2026/33?lang=eng" target="_blank" rel="noreferrer">Open this week’s lesson</a>
+    </footer>
+  </main>
+  <div id="teacher-modal-root"></div>
+</body>
+</html>
