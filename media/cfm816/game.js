@@ -63,7 +63,7 @@
     : "trials-and-trust-game-v1";
   const state = {
     mode: "board",
-    teams: [{ name: "Team Olive", score: 0 }, { name: "Team Gold", score: 0 }],
+    teams: [{ name: "Job Seekers", score: 0 }, { name: "Trial Blazers", score: 0 }],
     activeTeam: 0,
     used: new Set(),
     selected: null,
@@ -238,7 +238,7 @@
   }
 
   function resetGame() {
-    state.teams = [{ name: "Team Olive", score: 0 }, { name: "Team Gold", score: 0 }];
+    state.teams = [{ name: "Job Seekers", score: 0 }, { name: "Trial Blazers", score: 0 }];
     state.activeTeam = 0;
     state.used = new Set();
     state.selected = null;
