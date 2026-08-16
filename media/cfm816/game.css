@@ -137,6 +137,8 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--gold); outline-
 .team-label i { display: inline-block; width: 7px; height: 7px; margin-right: 6px; border-radius: 50%; background: var(--sage); }
 .team-1 .team-label i { background: var(--gold); }
 .team-card b { display: inline-block; margin-top: 5px; color: var(--gold-light); font: 700 24px Georgia, serif; }
+.score-readout { display: flex; align-items: baseline; gap: 5px; }
+.score-readout em { color: #9eada1; font-size: 8px; font-style: normal; font-weight: 800; letter-spacing: .12em; }
 .team-card small { float: right; margin-top: 11px; color: #9eada1; font-size: 9px; }
 .team-card.is-active small { color: var(--gold-light); }
 .score-tools {
@@ -144,6 +146,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--gold); outline-
   border-radius: 12px; background: rgba(0,0,0,.1);
 }
 .score-tools > span { display: block; margin-bottom: 8px; color: #9eada1; font-size: 9px; text-transform: uppercase; letter-spacing: .08em; }
+.score-tools > strong { display: block; margin-bottom: 8px; color: var(--gold-light); font: 700 20px Georgia, serif; }
 .score-tools > div { display: flex; gap: 5px; }
 .score-tools button { border: 0; border-radius: 6px; padding: 7px 8px; color: #dce4dc; background: rgba(255,255,255,.09); font-size: 9px; font-weight: 700; }
 .score-tools button:hover { background: rgba(255,255,255,.15); }

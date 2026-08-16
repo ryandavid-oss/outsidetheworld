@@ -142,27 +142,51 @@ footer {
 .board-progress div { background: rgba(27,54,93,.09); }
 .board-progress i { background: linear-gradient(90deg, var(--otw-blue), var(--otw-teal)); }
 
+.score-row {
+  grid-template-columns: minmax(0, 1fr) 150px minmax(0, 1fr); gap: 14px; align-items: stretch; margin-bottom: 22px;
+}
+.team-0 { grid-column: 1; grid-row: 1; }
+.score-tools { grid-column: 2; grid-row: 1; }
+.team-1 { grid-column: 3; grid-row: 1; }
 .team-card {
-  color: var(--otw-ink); border-color: rgba(27,54,93,.22); background: rgba(238,242,246,.82);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.72);
+  min-height: 148px; padding: 29px 24px 18px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  overflow: hidden; text-align: center; color: var(--otw-ink); border-color: rgba(27,54,93,.28); border-radius: 16px;
+  background: linear-gradient(155deg, rgba(242,245,248,.96), rgba(222,230,236,.90));
+  box-shadow: 0 12px 28px rgba(27,54,93,.10), inset 0 1px 0 rgba(255,255,255,.78), inset 0 -1px 0 rgba(27,54,93,.08);
 }
 .team-card:hover { background: rgba(160,190,245,.17); }
 .team-card.is-active {
   color: white; border-color: var(--otw-navy); background: var(--otw-navy);
-  box-shadow: 0 12px 26px rgba(27,54,93,.20), inset 0 1px 0 rgba(255,255,255,.08);
+  box-shadow: 0 17px 34px rgba(27,54,93,.28), inset 0 1px 0 rgba(255,255,255,.10), inset 0 0 0 1px rgba(160,190,245,.10);
 }
-.team-card.is-active::after { background: var(--otw-blue); }
-.team-label { color: var(--otw-dark-teal); }
+.team-card.is-active::before {
+  content: "NOW PLAYING"; position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
+  color: var(--otw-light-blue); font: 700 8px/1 "Fira Code", monospace; letter-spacing: .18em; white-space: nowrap;
+}
+.team-card.is-active::after { left: 18px; right: 18px; top: auto; bottom: 0; width: auto; height: 4px; border-radius: 4px 4px 0 0; background: var(--otw-blue); }
+.team-label {
+  display: flex; align-items: center; justify-content: center; gap: 8px; color: var(--otw-dark-teal);
+  font-size: 13px; letter-spacing: .11em; text-transform: uppercase;
+}
 .team-label i { background: var(--otw-teal); }
 .team-1 .team-label i { background: var(--otw-blue); }
-.team-card b { color: var(--otw-navy); }
-.team-card small { color: #748493; }
+.score-readout { margin-top: 6px; justify-content: center; gap: 8px; }
+.team-card b { margin: 0; color: var(--otw-navy); font-size: clamp(45px, 4vw, 62px); line-height: 1; letter-spacing: -.04em; }
+.score-readout em { color: #687987; font: 700 9px/1 "Fira Code", monospace; letter-spacing: .14em; }
+.team-card small { float: none; margin-top: 9px; color: #687987; font-size: 9px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
 .team-card.is-active .team-label { color: #dce6ed; }
 .team-card.is-active .team-label i { box-shadow: 0 0 0 3px rgba(255,255,255,.12); }
 .team-card.is-active b { color: var(--otw-light-blue); }
+.team-card.is-active .score-readout em { color: #bdcad2; }
 .team-card.is-active small { color: #eef3f6; }
-.score-tools { border-color: rgba(27,54,93,.18); background: rgba(145,175,179,.17); }
-.score-tools > span { color: #71808d; }
+.score-tools {
+  min-width: 0; padding: 13px 12px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  border-color: rgba(27,54,93,.24); border-radius: 16px; background: rgba(207,218,226,.82);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.65);
+}
+.score-tools > span { margin-bottom: 5px; color: #647684; font-size: 8px; letter-spacing: .12em; }
+.score-tools > strong { margin: 0 0 10px; color: var(--otw-navy); font-size: 25px; line-height: 1; }
+.score-tools > div { width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
 .score-tools button { color: var(--otw-navy); background: rgba(255,255,255,.8); border: 1px solid rgba(27,54,93,.1); }
 .score-tools button:hover { background: rgba(160,190,245,.28); }
 
@@ -339,7 +363,8 @@ footer a { color: var(--otw-blue); }
   color: #eeeeee; border-color: rgba(160,190,245,.20); background: rgba(16,17,20,.94); box-shadow: var(--otw-shadow);
 }
 :root[data-theme="dark"] .team-card {
-  color: #eeeeee; border-color: rgba(160,190,245,.16); background: rgba(26,28,32,.9); box-shadow: inset 0 1px 0 rgba(255,255,255,.035);
+  color: #eeeeee; border-color: rgba(160,190,245,.18); background: linear-gradient(155deg, #1c222a, #15181d);
+  box-shadow: 0 13px 30px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.04);
 }
 :root[data-theme="dark"] .team-card:hover { background: #202a36; }
 :root[data-theme="dark"] .team-card.is-active {
@@ -350,10 +375,12 @@ footer a { color: var(--otw-blue); }
 :root[data-theme="dark"] .team-card b,
 :root[data-theme="dark"] .team-card.is-active small,
 :root[data-theme="dark"] .quiz-score b { color: var(--otw-light-blue); }
+:root[data-theme="dark"] .score-readout em { color: #9eabb1; }
 :root[data-theme="dark"] .team-card small,
 :root[data-theme="dark"] .score-tools > span,
 :root[data-theme="dark"] .quiz-score span { color: #9eabb1; }
-:root[data-theme="dark"] .score-tools { border-color: rgba(160,190,245,.14); background: rgba(145,175,179,.08); }
+:root[data-theme="dark"] .score-tools { border-color: rgba(160,190,245,.18); background: #111418; box-shadow: inset 0 1px 0 rgba(255,255,255,.035); }
+:root[data-theme="dark"] .score-tools > strong { color: var(--otw-light-blue); }
 :root[data-theme="dark"] .score-tools button { color: #eeeeee; border-color: rgba(160,190,245,.14); background: rgba(255,255,255,.07); }
 :root[data-theme="dark"] .score-tools button:hover { background: rgba(99,149,238,.22); }
 :root[data-theme="dark"] .category-title { color: #eeeeee; border-color: rgba(160,190,245,.2); background: linear-gradient(145deg, rgba(27,54,93,.95), rgba(61,82,85,.78)); }

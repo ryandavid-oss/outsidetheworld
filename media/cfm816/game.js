@@ -175,9 +175,9 @@
     dom.scoreRow.innerHTML = state.teams.map(function (team, index) {
       const active = state.activeTeam === index;
       return '<button type="button" class="team-card team-' + index + (active ? ' is-active' : '') + '" data-team="' + index + '" aria-pressed="' + active + '">' +
-        '<span class="team-label"><i></i> ' + escapeHtml(team.name) + '</span><b>' + team.score.toLocaleString() + '</b>' +
-        '<small>' + (active ? "Choosing now" : "Tap to choose") + '</small></button>';
-    }).join("") + '<div class="score-tools" aria-label="Manual score controls"><span>Score fix</span><div>' +
+        '<span class="team-label"><i></i><span>' + escapeHtml(team.name) + '</span></span><span class="score-readout"><b>' + team.score.toLocaleString() + '</b><em>PTS</em></span>' +
+        '<small>' + (active ? "Now playing" : "Tap to activate") + '</small></button>';
+    }).join("") + '<div class="score-tools" aria-label="Manual score controls"><span>Score control</span><strong aria-hidden="true">VS</strong><div>' +
       '<button type="button" data-score="-100" aria-label="Subtract 100 from ' + escapeHtml(state.teams[state.activeTeam].name) + '">−100</button>' +
       '<button type="button" data-score="100" aria-label="Add 100 to ' + escapeHtml(state.teams[state.activeTeam].name) + '">+100</button></div></div>';
 
