@@ -219,6 +219,39 @@ footer {
 .reset-confirm button { color: var(--otw-navy); border-color: rgba(27,54,93,.16); background: white; }
 .reset-confirm button:first-of-type { color: white; border-color: var(--otw-navy); background: var(--otw-navy); }
 
+@media (min-width: 801px) {
+  .board-wrap {
+    width: calc(100% - clamp(48px, 4vw, 96px));
+    padding: clamp(30px, 2.15vw, 44px);
+    border-radius: clamp(24px, 1.7vw, 34px);
+  }
+  .board-topline { margin-bottom: clamp(22px, 1.6vw, 32px); }
+  .board-topline h2 { font-size: clamp(38px, 2.8vw, 56px); }
+  .board-topline .section-kicker { font-size: clamp(11px, .78vw, 14px); }
+  .board-progress { width: clamp(175px, 12vw, 240px); }
+  .board-progress span { font-size: clamp(10px, .68vw, 12px); }
+  .score-row {
+    grid-template-columns: minmax(0, 1fr) clamp(150px, 9vw, 190px) minmax(0, 1fr);
+    gap: clamp(14px, 1vw, 20px); margin-bottom: clamp(22px, 1.5vw, 30px);
+  }
+  .team-card { min-height: clamp(158px, 9.5vw, 196px); padding: 32px 28px 22px; }
+  .team-label { font-size: clamp(13px, .92vw, 17px); }
+  .team-card b { font-size: clamp(58px, 4.4vw, 84px); }
+  .team-card small { font-size: clamp(9px, .62vw, 12px); }
+  .score-tools > span { font-size: clamp(8px, .55vw, 10px); }
+  .score-tools > strong { font-size: clamp(27px, 2vw, 38px); }
+  .score-tools button { min-height: 42px; font-size: clamp(9px, .62vw, 12px); }
+  .game-board { gap: clamp(10px, .85vw, 17px); }
+  .category-column {
+    grid-template-rows: clamp(68px, 4.2vw, 86px) repeat(5, clamp(88px, 5.1vw, 106px));
+    gap: clamp(10px, .85vw, 17px);
+  }
+  .category-title { padding: 14px; font-size: clamp(13px, 1vw, 18px); }
+  .clue-tile { min-height: 88px; font-size: clamp(32px, 2.35vw, 46px); }
+  .board-footer { margin-top: clamp(18px, 1.35vw, 27px); font-size: clamp(10px, .68vw, 12px); }
+  .reset-link { font-size: clamp(10px, .68vw, 12px); }
+}
+
 .quiz-score span { color: #71808d; }
 .quiz-score b { color: var(--otw-navy); }
 .quiz-progress { background: rgba(27,54,93,.09); }
