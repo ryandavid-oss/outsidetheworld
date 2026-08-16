@@ -18,7 +18,7 @@
       ["11", "But put forth thine hand now, and touch all that he hath, and he will curse thee to thy face."]
     ]),
     job1_20: scripture("Job 1:20", churchBase + "ot/job/1?id=p20&lang=eng#p20", [
-      ["20", "Then Job arose, and rent his mantle, and shaved his head, and fell down upon the ground, and worshipped."]
+      ["20", "Then Job arose, and rent his mantle, and shaved his head, and fell down upon the ground, and worshipped,"]
     ]),
     job1_21: scripture("Job 1:21", churchBase + "ot/job/1?id=p21&lang=eng#p21", [
       ["21", "And said, Naked came I out of my mother’s womb, and naked shall I return thither: the Lord gave, and the Lord hath taken away; blessed be the name of the Lord."]
@@ -50,7 +50,7 @@
       ["5", "But I would strengthen you with my mouth, and the moving of my lips should assuage your grief."]
     ]),
     job19_25: scripture("Job 19:25", churchBase + "ot/job/19?id=p25&lang=eng#p25", [
-      ["25", "For I know that my redeemer liveth, and that he shall stand at the latter day upon the earth."]
+      ["25", "For I know that my redeemer liveth, and that he shall stand at the latter day upon the earth:"]
     ]),
     job19_25_27: scripture("Job 19:25–27", churchBase + "ot/job/19?id=p25-p27&lang=eng#p25", [
       ["25", "For I know that my redeemer liveth, and that he shall stand at the latter day upon the earth:"],
