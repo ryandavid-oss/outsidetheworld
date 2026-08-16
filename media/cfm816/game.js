@@ -203,8 +203,9 @@
 
     dom.scoreRow.innerHTML = state.teams.map(function (team, index) {
       const active = state.activeTeam === index;
+      const stackedName = team.name.trim().split(/\s+/).map(function (word) { return "<span>" + escapeHtml(word) + "</span>"; }).join("");
       return '<button type="button" class="team-card team-' + index + (active ? ' is-active' : '') + '" data-team="' + index + '" aria-pressed="' + active + '">' +
-        '<span class="team-label"><i></i><span>' + escapeHtml(team.name) + '</span></span><span class="score-readout"><b>' + team.score.toLocaleString() + '</b><em>PTS</em></span>' +
+        '<span class="team-label"><i></i><span class="team-name">' + stackedName + '</span></span><span class="score-readout"><b>' + team.score.toLocaleString() + '</b><em>PTS</em></span>' +
         '<small>' + (active ? "Now playing" : "Tap to activate") + '</small></button>';
     }).join("") + '<div class="score-tools" aria-label="Manual score controls"><span>Score control</span><strong aria-hidden="true">VS</strong><div>' +
       '<button type="button" data-score="-100" aria-label="Subtract 100 from ' + escapeHtml(state.teams[state.activeTeam].name) + '">−100</button>' +

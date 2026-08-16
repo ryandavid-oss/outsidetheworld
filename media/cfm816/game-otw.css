@@ -53,6 +53,7 @@ footer {
 .board-topline h2,
 .quiz-header h2,
 .category-title,
+.team-name,
 .team-card b,
 .clue-tile,
 .quiz-question,
@@ -156,8 +157,9 @@ footer {
 .score-tools { grid-column: 2; grid-row: 1; }
 .team-1 { grid-column: 3; grid-row: 1; }
 .team-card {
-  min-height: 148px; padding: 29px 24px 18px; display: flex; flex-direction: column; align-items: center; justify-content: center;
-  overflow: hidden; text-align: center; color: var(--otw-ink); border-color: rgba(27,54,93,.28); border-radius: 16px;
+  min-height: 148px; padding: 24px 28px; display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: auto auto;
+  align-items: center; column-gap: clamp(16px, 2vw, 34px); row-gap: 8px; overflow: hidden; text-align: left;
+  color: var(--otw-ink); border-color: rgba(27,54,93,.28); border-radius: 16px;
   background: linear-gradient(155deg, rgba(242,245,248,.96), rgba(222,230,236,.90));
   box-shadow: 0 12px 28px rgba(27,54,93,.10), inset 0 1px 0 rgba(255,255,255,.78), inset 0 -1px 0 rgba(27,54,93,.08);
 }
@@ -166,21 +168,20 @@ footer {
   color: white; border-color: var(--otw-navy); background: var(--otw-navy);
   box-shadow: 0 17px 34px rgba(27,54,93,.28), inset 0 1px 0 rgba(255,255,255,.10), inset 0 0 0 1px rgba(160,190,245,.10);
 }
-.team-card.is-active::before {
-  content: "NOW PLAYING"; position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
-  color: var(--otw-light-blue); font: 700 8px/1 "Fira Code", monospace; letter-spacing: .18em; white-space: nowrap;
-}
+.team-card.is-active::before { content: none; }
 .team-card.is-active::after { left: 18px; right: 18px; top: auto; bottom: 0; width: auto; height: 4px; border-radius: 4px 4px 0 0; background: var(--otw-blue); }
 .team-label {
-  display: flex; align-items: center; justify-content: center; gap: 8px; color: var(--otw-dark-teal);
-  font-size: 13px; letter-spacing: .11em; text-transform: uppercase;
+  grid-column: 1; grid-row: 1; min-width: 0; display: flex; align-items: center; justify-content: flex-start; gap: 12px;
+  color: var(--otw-dark-teal); text-transform: uppercase;
 }
-.team-label i { background: var(--otw-teal); }
+.team-label i { width: 10px; height: 10px; margin: 0; flex: 0 0 auto; background: var(--otw-teal); }
 .team-1 .team-label i { background: var(--otw-blue); }
-.score-readout { margin-top: 6px; justify-content: center; gap: 8px; }
+.team-name { display: flex; min-width: 0; flex-direction: column; font-size: clamp(30px, 2.8vw, 56px); font-weight: 700; line-height: .82; letter-spacing: -.045em; }
+.team-name > span { display: block; white-space: nowrap; }
+.score-readout { grid-column: 2; grid-row: 1 / 3; margin: 0; flex-direction: column; align-items: flex-end; justify-content: center; gap: 4px; text-align: right; }
 .team-card b { margin: 0; color: var(--otw-navy); font-size: clamp(45px, 4vw, 62px); line-height: 1; letter-spacing: -.04em; }
 .score-readout em { color: #687987; font: 700 9px/1 "Fira Code", monospace; letter-spacing: .14em; }
-.team-card small { float: none; margin-top: 9px; color: #687987; font-size: 9px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.team-card small { grid-column: 1; grid-row: 2; justify-self: start; float: none; margin: 0 0 0 22px; color: #687987; font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
 .team-card.is-active .team-label { color: #dce6ed; }
 .team-card.is-active .team-label i { box-shadow: 0 0 0 3px rgba(255,255,255,.12); }
 .team-card.is-active b { color: var(--otw-light-blue); }
@@ -201,6 +202,7 @@ footer {
   color: var(--otw-navy); border: 1px solid rgba(27,54,93,.25);
   background: linear-gradient(145deg, rgba(160,190,245,.46), rgba(145,175,179,.32));
 }
+.category-title .desktop-title { white-space: nowrap; }
 .clue-tile {
   color: var(--otw-navy); border-color: rgba(27,54,93,.30); background: #eef2f5;
   box-shadow: 0 7px 18px rgba(27,54,93,.09), inset 0 1px 0 rgba(255,255,255,.72);
@@ -234,8 +236,8 @@ footer {
     grid-template-columns: minmax(0, 1fr) clamp(150px, 9vw, 190px) minmax(0, 1fr);
     gap: clamp(14px, 1vw, 20px); margin-bottom: clamp(22px, 1.5vw, 30px);
   }
-  .team-card { min-height: clamp(158px, 9.5vw, 196px); padding: 32px 28px 22px; }
-  .team-label { font-size: clamp(13px, .92vw, 17px); }
+  .team-card { min-height: clamp(158px, 9.5vw, 196px); padding: clamp(24px, 1.8vw, 36px) clamp(25px, 2vw, 40px); }
+  .team-name { font-size: clamp(32px, 2.9vw, 58px); }
   .team-card b { font-size: clamp(58px, 4.4vw, 84px); }
   .team-card small { font-size: clamp(9px, .62vw, 12px); }
   .score-tools > span { font-size: clamp(8px, .55vw, 10px); }
@@ -246,7 +248,7 @@ footer {
     grid-template-rows: clamp(68px, 4.2vw, 86px) repeat(5, clamp(88px, 5.1vw, 106px));
     gap: clamp(10px, .85vw, 17px);
   }
-  .category-title { padding: 14px; font-size: clamp(13px, 1vw, 18px); }
+  .category-title { padding: 8px clamp(4px, .6vw, 12px); font-size: clamp(13px, 1.5vw, 30px); letter-spacing: -.025em; }
   .clue-tile { min-height: 88px; font-size: clamp(32px, 2.35vw, 46px); }
   .board-footer { margin-top: clamp(18px, 1.35vw, 27px); font-size: clamp(10px, .68vw, 12px); }
   .reset-link { font-size: clamp(10px, .68vw, 12px); }
@@ -463,6 +465,11 @@ footer a { color: var(--otw-blue); }
   .hero { width: min(100% - 24px, 1180px); }
   .hero h1 { font-size: clamp(58px, 11vw, 82px); }
   .hero-copy { font-size: clamp(20px, 3.5vw, 25px); }
+  .team-card { padding: 22px 18px; column-gap: 10px; }
+  .team-name { font-size: 26px; }
+  .team-card small { margin-left: 22px; }
+  .category-title .desktop-title { display: none; }
+  .category-title .mobile-title { display: inline; white-space: nowrap; }
 }
 
 @media (max-width: 560px) {
