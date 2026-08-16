@@ -87,7 +87,8 @@
     boardFinish: document.getElementById("board-finish"),
     resetControl: document.getElementById("reset-control"),
     modalRoot: document.getElementById("modal-root"),
-    themeToggle: document.getElementById("theme-toggle")
+    themeToggle: document.getElementById("theme-toggle"),
+    fullscreenToggle: document.getElementById("fullscreen-toggle")
   };
 
   function applyTheme(theme, persist) {
@@ -102,6 +103,34 @@
     if (persist) {
       try { localStorage.setItem("cfm816-otw-theme", dark ? "dark" : "light"); } catch (_) {}
     }
+  }
+
+  function fullscreenElement() {
+    return document.fullscreenElement || document.webkitFullscreenElement || null;
+  }
+
+  function updateFullscreenButton() {
+    if (!dom.fullscreenToggle) return;
+    const active = Boolean(fullscreenElement());
+    dom.fullscreenToggle.setAttribute("aria-pressed", String(active));
+    dom.fullscreenToggle.setAttribute("aria-label", active ? "Exit fullscreen" : "Enter fullscreen");
+    dom.fullscreenToggle.querySelector(".fullscreen-toggle-label").textContent = active ? "Exit fullscreen" : "Fullscreen";
+  }
+
+  async function toggleFullscreen() {
+    try {
+      if (fullscreenElement()) {
+        if (document.exitFullscreen) await document.exitFullscreen();
+        else if (document.webkitExitFullscreen) await document.webkitExitFullscreen();
+      } else if (document.documentElement.requestFullscreen) {
+        await document.documentElement.requestFullscreen();
+      } else if (document.documentElement.webkitRequestFullscreen) {
+        await document.documentElement.webkitRequestFullscreen();
+      }
+    } catch (_) {
+      // The browser may block fullscreen when it was not initiated by a user gesture.
+    }
+    updateFullscreenButton();
   }
 
   function escapeHtml(value) {
@@ -342,6 +371,17 @@
       applyTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark", true);
     });
   }
+  if (dom.fullscreenToggle) {
+    const fullscreenSupported = Boolean(document.documentElement.requestFullscreen || document.documentElement.webkitRequestFullscreen);
+    if (!fullscreenSupported) {
+      dom.fullscreenToggle.hidden = true;
+    } else {
+      updateFullscreenButton();
+      dom.fullscreenToggle.addEventListener("click", toggleFullscreen);
+      document.addEventListener("fullscreenchange", updateFullscreenButton);
+      document.addEventListener("webkitfullscreenchange", updateFullscreenButton);
+    }
+  }
 
   dom.scoreRow.addEventListener("click", function (event) {
     const teamButton = event.target.closest("[data-team]");
@@ -392,7 +432,9 @@
     if (event.target.closest("#grade-no")) gradeClue(false);
     if (event.target.closest("#grade-yes")) gradeClue(true);
   });
-  document.addEventListener("keydown", function (event) { if (event.key === "Escape" && state.selected) closeClue(); });
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape" && state.selected && !fullscreenElement()) closeClue();
+  });
 
   loadState();
   setMode("board", false);

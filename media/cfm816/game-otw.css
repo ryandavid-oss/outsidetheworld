@@ -90,14 +90,18 @@ footer {
 .brand strong { color: var(--otw-navy); font-size: 12px; font-weight: 700; letter-spacing: .12em; }
 .brand small { color: var(--otw-dark-teal); font-size: 10px; letter-spacing: .02em; }
 .header-actions { display: flex; align-items: center; gap: 8px; }
-.theme-toggle {
+.theme-toggle,
+.fullscreen-toggle {
   min-height: 38px; padding: 8px 13px; display: inline-flex; align-items: center; gap: 8px;
   color: var(--otw-navy); border: 1px solid rgba(27,54,93,.24); border-radius: 999px;
   background: rgba(225,232,238,.88); font-size: 11px; font-weight: 700; box-shadow: 0 8px 22px rgba(27,54,93,.07);
 }
 .theme-toggle > span:first-child { color: var(--otw-blue); font-size: 16px; line-height: 1; }
-.theme-toggle:hover { color: white; background: var(--otw-navy); }
+.fullscreen-toggle svg { width: 16px; height: 16px; color: var(--otw-blue); }
+.theme-toggle:hover,
+.fullscreen-toggle:hover { color: white; background: var(--otw-navy); }
 .theme-toggle:hover > span:first-child { color: var(--otw-light-blue); }
+.fullscreen-toggle:hover svg { color: var(--otw-light-blue); }
 .header-action {
   color: var(--otw-navy); border-color: rgba(99,149,238,.32); background: rgba(247,249,251,.78);
   box-shadow: 0 8px 24px rgba(27,54,93,.06);
@@ -350,11 +354,13 @@ footer a { color: var(--otw-blue); }
 :root[data-theme="dark"] .topbar,
 :root[data-theme="dark"] footer { border-color: rgba(160,190,245,.16); }
 :root[data-theme="dark"] .theme-toggle,
+:root[data-theme="dark"] .fullscreen-toggle,
 :root[data-theme="dark"] .header-action,
 :root[data-theme="dark"] .mode-tabs {
   color: #eeeeee; border-color: rgba(160,190,245,.22); background: rgba(26,28,32,.84); box-shadow: 0 10px 28px rgba(0,0,0,.22);
 }
 :root[data-theme="dark"] .theme-toggle:hover,
+:root[data-theme="dark"] .fullscreen-toggle:hover,
 :root[data-theme="dark"] .header-action:hover { background: var(--otw-navy); }
 :root[data-theme="dark"] .mode-tabs button { color: #b9c2c7; }
 :root[data-theme="dark"] .mode-tabs button.active { color: white; background: var(--otw-blue); }
@@ -414,11 +420,16 @@ footer a { color: var(--otw-blue); }
 :root[data-theme="dark"] .clue-insight { color: #c7d0d4; background: rgba(145,175,179,.10); }
 :root[data-theme="dark"] .not-quite { color: #c7d0d4; border-color: rgba(160,190,245,.16); background: rgba(255,255,255,.05); }
 
+:fullscreen .game-shell,
+:-webkit-full-screen .game-shell { min-height: 100vh; }
+
 @media (max-width: 560px) {
   .otw-brandmark { width: 40px; height: 40px; }
   .brand { gap: 10px; }
   .brand strong { font-size: 10px; }
   .brand small { font-size: 8px; }
-  .theme-toggle-label { display: none; }
-  .theme-toggle { width: 38px; padding: 8px; justify-content: center; }
+  .theme-toggle-label,
+  .fullscreen-toggle-label { display: none; }
+  .theme-toggle,
+  .fullscreen-toggle { width: 38px; padding: 8px; justify-content: center; }
 }
