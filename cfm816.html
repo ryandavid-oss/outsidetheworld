@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#123527">
+  <meta name="description" content="Trials & Trust: an interactive Come, Follow Me game about Job, faith, and trusting God through trials.">
+  <title>Trials & Trust | A Come, Follow Me Game</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="media/cfm816/game.css">
+  <script defer src="media/cfm816/game.js"></script>
+</head>
+<body>
+  <main class="game-shell">
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="Trials and Trust home">
+        <span class="brand-mark" aria-hidden="true">J</span>
+        <span><strong>TRIALS &amp; TRUST</strong><small>A Come, Follow Me game</small></span>
+      </a>
+      <button class="header-action" id="header-quiz" type="button">Lightning quiz <span>→</span></button>
+    </header>
+
+    <section class="hero" id="top">
+      <p class="eyebrow">JOB 1–3 • 12–14 • 19 • 21–24 • 38–40 • 42</p>
+      <h1>“Yet will I <em>trust</em> in Him.”</h1>
+      <p class="hero-copy">Choose a clue, search the scriptures, and discover what Job teaches us about trusting God when life is hard.</p>
+      <button class="start-button" id="start-game" type="button">Start the game <span aria-hidden="true">→</span></button>
+    </section>
+
+    <section class="how-to" aria-label="How to play">
+      <div><span>1</span><p><strong>Choose</strong> a point value</p></div><i aria-hidden="true">→</i>
+      <div><span>2</span><p><strong>Discuss</strong> as a team</p></div><i aria-hidden="true">→</i>
+      <div><span>3</span><p><strong>Reveal</strong> and score</p></div>
+    </section>
+
+    <section class="game-section" id="game">
+      <div class="mode-tabs" role="tablist" aria-label="Game mode">
+        <button id="board-tab" type="button" role="tab" aria-selected="true" class="active">Game board</button>
+        <button id="quiz-tab" type="button" role="tab" aria-selected="false">Lightning quiz</button>
+      </div>
+
+      <div class="board-wrap" id="board-view" role="tabpanel" aria-labelledby="board-tab">
+        <div class="board-topline">
+          <div><p class="section-kicker">ROUND ONE</p><h2>Choose a clue</h2></div>
+          <div class="board-progress" id="board-progress" aria-label="0 of 25 clues complete"><span>0/25 complete</span><div><i></i></div></div>
+        </div>
+        <div class="score-row" id="score-row"></div>
+        <div class="game-board" id="game-board" aria-label="Jeopardy-style clue board"></div>
+        <div class="board-finish" id="board-finish" role="status" hidden></div>
+        <div class="board-footer">
+          <p><span aria-hidden="true">✦</span> Teacher tip: invite the team to find the verse before revealing the answer.</p>
+          <div id="reset-control"></div>
+        </div>
+      </div>
+
+      <div class="quiz-wrap" id="quiz-view" role="tabpanel" aria-labelledby="quiz-tab" hidden></div>
+    </section>
+
+    <section class="reflection">
+      <p class="section-kicker">FINAL REFLECTION</p>
+      <blockquote>“What do I know about God that helps me face challenges?”</blockquote>
+      <p>Invite each person to share one truth they want to remember this week.</p>
+    </section>
+
+    <footer>
+      <div class="footer-brand"><span class="brand-mark" aria-hidden="true">J</span><div><strong>TRIALS &amp; TRUST</strong><small>August 10–16, 2026</small></div></div>
+      <p>Based on <a href="https://www.churchofjesuschrist.org/study/manual/come-follow-me-for-home-and-church-old-testament-2026/33?lang=eng" target="_blank" rel="noreferrer">Come, Follow Me: Job</a> <span>•</span> Unofficial teaching aid</p>
+    </footer>
+  </main>
+  <div id="modal-root"></div>
+</body>
+</html>
