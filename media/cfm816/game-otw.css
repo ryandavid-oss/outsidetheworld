@@ -84,11 +84,11 @@ footer {
 }
 
 .topbar { border-color: var(--otw-line); }
-.brand { gap: 18px; }
-.otw-brandmark { display: block; width: clamp(56px, 3.8vw, 66px); height: clamp(56px, 3.8vw, 66px); flex: 0 0 auto; }
+.brand { gap: 14px; }
+.otw-brandmark { display: block; width: 46px; height: 46px; flex: 0 0 auto; }
 .dark-mark { display: none; }
-.brand strong { color: var(--otw-navy); font-size: clamp(17px, 1.25vw, 20px); font-weight: 700; letter-spacing: .11em; line-height: 1.15; }
-.brand small { margin-top: 7px; color: var(--otw-dark-teal); font-size: clamp(11px, .78vw, 13px); font-weight: 500; letter-spacing: .025em; line-height: 1.25; }
+.brand strong { color: var(--otw-navy); font-size: 12px; font-weight: 700; letter-spacing: .12em; }
+.brand small { color: var(--otw-dark-teal); font-size: 10px; letter-spacing: .02em; }
 .header-actions { display: flex; align-items: center; gap: 8px; }
 .theme-toggle,
 .fullscreen-toggle {
@@ -109,11 +109,14 @@ footer {
 .header-action span { color: var(--otw-blue); }
 .header-action:hover { color: var(--otw-white); background: var(--otw-navy); }
 
-.hero { padding-top: 82px; }
+.hero { width: min(1180px, calc(100% - 48px)); padding-top: 82px; }
 .eyebrow { color: var(--otw-dark-teal); }
-.hero h1 { color: var(--otw-navy); font-weight: 500; letter-spacing: -.042em; }
+.hero h1 {
+  max-width: 1040px; color: var(--otw-navy); font-size: clamp(70px, 7.6vw, 112px);
+  font-weight: 500; line-height: .94; letter-spacing: -.048em;
+}
 .hero h1 em { color: var(--otw-blue); font-weight: 500; }
-.hero-copy { color: #536575; font-size: 17px; font-weight: 400; }
+.hero-copy { max-width: 880px; color: #536575; font-size: clamp(23px, 1.8vw, 29px); line-height: 1.48; font-weight: 400; }
 .start-button,
 .reveal-button,
 .continue-clue-button,
@@ -423,11 +426,19 @@ footer a { color: var(--otw-blue); }
 :fullscreen .game-shell,
 :-webkit-full-screen .game-shell { min-height: 100vh; }
 
+@media (max-width: 800px) {
+  .hero { width: min(100% - 24px, 1180px); }
+  .hero h1 { font-size: clamp(58px, 11vw, 82px); }
+  .hero-copy { font-size: clamp(20px, 3.5vw, 25px); }
+}
+
 @media (max-width: 560px) {
   .otw-brandmark { width: 40px; height: 40px; }
   .brand { gap: 10px; }
   .brand strong { font-size: 10px; }
   .brand small { font-size: 8px; }
+  .hero h1 { font-size: clamp(48px, 14vw, 68px); }
+  .hero-copy { font-size: 19px; }
   .theme-toggle-label,
   .fullscreen-toggle-label { display: none; }
   .theme-toggle,
