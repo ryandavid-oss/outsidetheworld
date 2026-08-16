@@ -3,14 +3,19 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f6f9fc">
-  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#e9eff4">
+  <meta name="color-scheme" content="light dark">
   <meta name="description" content="Trials & Trust: a calm, interactive Outside the World edition of the Come, Follow Me game about Job.">
   <title>Trials & Trust | An Outside the World Game</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&amp;family=IBM+Plex+Serif:wght@400;500;600;700&amp;family=Inter:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet">
+  <script>
+    try {
+      if (localStorage.getItem("cfm816-otw-theme") === "dark") document.documentElement.dataset.theme = "dark";
+    } catch (_) {}
+  </script>
   <link rel="stylesheet" href="media/cfm816/game-otw.css">
   <script defer src="media/cfm816/game.js"></script>
 </head>
@@ -18,10 +23,14 @@
   <main class="game-shell">
     <header class="topbar">
       <a class="brand" href="#top" aria-label="Trials and Trust home">
-        <img class="otw-brandmark" src="Images/otw_brandmark_dark.svg" alt="Outside the World">
+        <img class="otw-brandmark light-mark" src="Images/otw_brandmark_dark.svg" alt="Outside the World">
+        <img class="otw-brandmark dark-mark" src="Images/OTW_Brandmark_Main.svg" alt="Outside the World">
         <span><strong>TRIALS &amp; TRUST</strong><small>An Outside the World Game</small></span>
       </a>
-      <button class="header-action" id="header-quiz" type="button">Lightning quiz <span>→</span></button>
+      <div class="header-actions">
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-pressed="false"><span aria-hidden="true">◐</span><span class="theme-toggle-label">Dark mode</span></button>
+        <button class="header-action" id="header-quiz" type="button">Lightning quiz <span>→</span></button>
+      </div>
     </header>
 
     <section class="hero" id="top">
@@ -67,7 +76,7 @@
     </section>
 
     <footer>
-      <div class="footer-brand"><img class="otw-brandmark" src="Images/otw_brandmark_dark.svg" alt=""><div><strong>TRIALS &amp; TRUST</strong><small>An Outside the World Game • August 10–16, 2026</small></div></div>
+      <div class="footer-brand"><img class="otw-brandmark light-mark" src="Images/otw_brandmark_dark.svg" alt=""><img class="otw-brandmark dark-mark" src="Images/OTW_Brandmark_Main.svg" alt=""><div><strong>TRIALS &amp; TRUST</strong><small>An Outside the World Game • August 10–16, 2026</small></div></div>
       <p>Based on <a href="https://www.churchofjesuschrist.org/study/manual/come-follow-me-for-home-and-church-old-testament-2026/33?lang=eng" target="_blank" rel="noreferrer">Come, Follow Me: Job</a> <span>•</span> Unofficial teaching aid</p>
     </footer>
   </main>

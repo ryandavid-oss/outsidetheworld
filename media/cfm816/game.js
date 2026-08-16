@@ -86,8 +86,23 @@
     gameBoard: document.getElementById("game-board"),
     boardFinish: document.getElementById("board-finish"),
     resetControl: document.getElementById("reset-control"),
-    modalRoot: document.getElementById("modal-root")
+    modalRoot: document.getElementById("modal-root"),
+    themeToggle: document.getElementById("theme-toggle")
   };
+
+  function applyTheme(theme, persist) {
+    if (!dom.themeToggle) return;
+    const dark = theme === "dark";
+    document.documentElement.dataset.theme = dark ? "dark" : "light";
+    dom.themeToggle.setAttribute("aria-pressed", String(dark));
+    dom.themeToggle.setAttribute("aria-label", dark ? "Switch to light mode" : "Switch to dark mode");
+    dom.themeToggle.querySelector(".theme-toggle-label").textContent = dark ? "Light mode" : "Dark mode";
+    const themeColor = document.querySelector('meta[name="theme-color"]');
+    if (themeColor) themeColor.content = dark ? "#0a0a0a" : "#e9eff4";
+    if (persist) {
+      try { localStorage.setItem("cfm816-otw-theme", dark ? "dark" : "light"); } catch (_) {}
+    }
+  }
 
   function escapeHtml(value) {
     return String(value).replace(/[&<>"']/g, function (character) {
@@ -308,6 +323,12 @@
   dom.quizTab.addEventListener("click", function () { setMode("quiz", false); });
   document.getElementById("start-game").addEventListener("click", function () { setMode("board", true); });
   document.getElementById("header-quiz").addEventListener("click", function () { setMode("quiz", true); });
+  if (dom.themeToggle) {
+    applyTheme(document.documentElement.dataset.theme === "dark" ? "dark" : "light", false);
+    dom.themeToggle.addEventListener("click", function () {
+      applyTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark", true);
+    });
+  }
 
   dom.scoreRow.addEventListener("click", function (event) {
     const teamButton = event.target.closest("[data-team]");
