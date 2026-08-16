@@ -140,6 +140,19 @@
     return Math.floor(totalSeconds / 60) + ":" + String(totalSeconds % 60).padStart(2, "0");
   }
 
+  function qrCodeUrl(categoryIndex, clueIndex) {
+    return "/media/cfm816/qr/clue-" + (categoryIndex + 1) + "-" + (clueIndex + 1) + ".png";
+  }
+
+  function preloadQrCodes() {
+    categories.forEach(function (category, categoryIndex) {
+      category.clues.forEach(function (_, clueIndex) {
+        const image = new Image();
+        image.src = qrCodeUrl(categoryIndex, clueIndex);
+      });
+    });
+  }
+
   function setMode(mode, shouldScroll) {
     state.mode = mode;
     const boardActive = mode === "board";
@@ -264,7 +277,7 @@
         '<div class="video-frame">' + player + '</div><div class="media-footer"><p><span aria-hidden="true">▶</span> Press play, then continue when the excerpt finishes.</p>' +
         '<button type="button" class="continue-clue-button" id="continue-clue">Continue to clue <span>→</span></button></div></div>';
     } else {
-      const qrSource = "media/cfm816/qr/clue-" + (categoryIndex + 1) + "-" + (clueIndex + 1) + ".png";
+      const qrSource = qrCodeUrl(categoryIndex, clueIndex);
       const clueBody = !state.showAnswer ?
         '<div class="clue-search-reference" aria-label="Find the answer in ' + escapeHtml(clue.reference) + '"><span>FIND IT IN</span><strong>' + escapeHtml(clue.reference) + '</strong></div>' +
         '<p class="clue-question">' + escapeHtml(clue.clue) + '</p><div class="think-strip"><span aria-hidden="true">⌛</span><p><strong>Think together.</strong> Scan, read, and discuss your answer.</p></div>' +
@@ -274,7 +287,7 @@
         '<div class="grade-actions"><button type="button" class="not-quite" id="grade-no">Not quite</button><button type="button" class="got-it" id="grade-yes">Correct <span>+' + clue.value + '</span></button></div>' +
         '<small class="turn-note">After scoring, it will be ' + escapeHtml(state.teams[state.activeTeam === 0 ? 1 : 0].name) + '’s turn.</small>';
       content = '<div class="clue-presentation-layout"><a class="qr-panel" href="' + escapeHtml(clue.scriptureUrl) + '" target="_blank" rel="noreferrer" aria-label="Open ' + escapeHtml(clue.reference) + ' on this device">' +
-        '<span>SCAN WITH YOUR PHONE</span><img src="' + qrSource + '" alt="QR code for ' + escapeHtml(clue.reference) + '" width="900" height="900"><strong>Open the passage</strong>' +
+        '<span>SCAN WITH YOUR PHONE</span><img src="' + qrSource + '" alt="QR code for ' + escapeHtml(clue.reference) + '" width="900" height="900" loading="eager" decoding="sync"><strong>Open the passage</strong>' +
         '<small>churchofjesuschrist.org <i aria-hidden="true">↗</i></small></a><div class="clue-content"><span class="clue-value">' + clue.value + '</span>' + clueBody + '</div></div>';
     }
 
@@ -383,4 +396,8 @@
 
   loadState();
   setMode("board", false);
+  if (location.pathname.includes("cfm816-otw")) {
+    if ("requestIdleCallback" in window) window.requestIdleCallback(preloadQrCodes);
+    else window.setTimeout(preloadQrCodes, 200);
+  }
 })();
