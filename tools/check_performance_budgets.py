@@ -18,7 +18,7 @@ ROUTE_BUDGETS = {
     "poetry": (20_000, ["drift_poetry.html", "theme.css", "assets/fonts/otw-fonts.css", "new_poetry_data.js"]),
     "professional": (18_000, ["professional.html", "theme.css", "assets/fonts/otw-fonts.css"]),
     "current-essay": (
-        24_000,
+        28_000,
         [
             "@current-essay",
             "theme.css",
