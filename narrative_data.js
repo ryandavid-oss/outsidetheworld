@@ -1,5 +1,474 @@
 const current_narrative = [
     {
+        "title": "Knowledge That Becomes Love",
+        "date": "August 23, 2026",
+        "body": "_Sacrament Meeting | Aug 23, 2026 | Estimated 17\u201318 minutes_\n\n> **Core thought:** Christlike knowledge begins in humility, sees people mercifully, and proves itself in love.\n\n![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-08-23-knowledge-that-becomes-love-mt6e509u.jpg \"Arnold B\u00f6cklin, The Road to Emmaus \u2014 1870\")\n\nI last had the opportunity to speak in church back in 2022, when I was on the cusp of my first wedding anniversary. It\u2019s a testament to the rapid nature of life that four years have already passed us by, bringing with it the natural highs and lows of an ordinary mortal life. By virtue of the recent combination of wards, I wanted to briefly introduce my family to y\u2019all. My name is RyanDavid Burningham, I also go by Rylee or RD. My wife Emily and I were married on April 17th, 2021, after meeting online in March of 2020, a mere week before the pandemic interrupted everyone\u2019s life on earth.\n\nTogether, we have seven children, six girls and one boy. And before you think, \u201cThat poor boy\u201d, there\u2019s no one luckier on earth to have lived with such amazing women. So lucky, he married one of them.\n\nAnd before you get too grossed out by that, context is key; my oldest son married Emily\u2019s oldest daughter. It\u2019s a polarizing statement, but far more normal than first glance ever gets credit for. They first met on our wedding day, remaining true to themselves as bratty independent teenagers who wanted no truck with our second marriage. Lucky for them, and for us.\n\nBecause of their marriage, Emily and I have our first grandchild, and we have the bizarre and unlooked-for opportunity to see, without all that unnecessary mucking about with pregnancy, what a child of ours may have actually looked like.\n\n---\n\nBrother Weitz sent me a text message just over two weeks ago, asking me to speak in sacrament meeting today about the Christlike attribute of knowledge. He went on to say that the topic could obviously be taken in several directions, for the which I am grateful, as I am nothing without my rabbit holes and diversions. I promptly answered, \"Of course, my friend.\", in my usual overly confident-while-texting bravado. As per usual, that is where my confidence remained, as life continued unabated after the invitation.\n\nUnusually tight deadlines at work caused me to work close to 80 hours a week lately. So by the time I actually sat down to prepare this talk, there was no part of me that felt wise or spiritual. What I did feel was tired and behind. I felt acutely aware of my own limits and what I could produce. As it turns out, that was just the right place to begin.\n\nHumans tend to speak about knowledge as though it were possession. For me, it feels like facts I have collected, or maybe a doctrine I can explain tidily, or a ready answer I can give a child.\n\nBut a Christlike attribute is not something Christ calls a possession. Rather, it is part of His nature. So Christlike knowledge must be more than having correct information. It must describe a way of seeking truth, a way of seeing people, and a way of living in response to what we learn.\n\nMy central thought today is this: **Christlike knowledge begins in humility, sees people mercifully, and proves itself in love.**\n\nDoctrine and Covenants chapter 93 says that truth is _\"knowledge of things as they are, and as they were, and as they are to come.\"_ To me, that means truth is not merely knowledge of things as I would _prefer_ them to be. It is not the version of events that protects my pride or leaves my existing beliefs undisturbed. Truth asks us to receive reality as it is and what it will become. That requires humility, because no one sees the whole of reality.\n\nThe same section of the Doctrine and Covenants describes Jesus Christ in mortality as receiving \"grace for grace\" until He received a fullness. Luke likewise says that Jesus \"increased in wisdom and stature, and in favour with God and man.\" Even the Savior's mortal life included growth. Preach My Gospel teaches that becoming like Him is a gradual, lifelong process.\n\nIf the scriptural account of Christ's mortal life includes increase, growth, and grace for grace, then we should not be ashamed to be learners. The willingness to learn is itself one of the ways we become like Him.\n\nFor much of my life, I treated spiritual knowledge almost like a final examination. Every statement seemed to come with two circles: TRUE and FALSE. I thought my truest self should be able to circle TRUE immediately, confidently, and permanently. If I hesitated, hesitation was a failure. Thank heaven I do not experience faith quite that neatly anymore.\n\nMy own knowledge gaps are not small. They concern history, revelation, pain, and the explanations we receive are inadequate to that pain. Others concern what we do when God feels absent and prayer does not bring clarity, or when an old answer no longer seems satisfactory enough for the question. I mention these gaps because I suspect I am not the only person who has sat in a church pew, loving the gospel yet finding that some things no longer fit together neatly.\n\n---\n\nAs mentioned before, I have given talks from this very place and from others like it, during different eras of my life. For example, a much younger version of myself inferred how a faithful person was supposed to look. So, I wore the white shirt and navy suit. I repeated words that made me recognizable to the lay clergy. At my core, I wanted to belong, to be seen as worthy, and to feel safe. At 19, I went on a mission faithfully. Yet, I came home six months later. I then married young, believing I had found stability and managed to escape the shadows of my childhood home. But in reality, I carried those shadows with me. Over and over, I brought fear, anxiety, and unnamed wounds into relationships with people who carried histories of their own.\n\nIn a more tender light, I can see each version of me was sincere. They were proof of my own survival. And they were yet a more preparatory truth; I spent much of my life carrying an impossible burden: the burden of proving that my life was under control.\n\nBecause isn\u2019t it a fact that a good missionary endures? Certainly, a loving and faithful husband keeps his marriage intact. An attentive father provides stability. A life-long Church member knows what he believes. And a good sacrament speaker stands at the pulpit and makes the story coherent. I may get there today ;)\n\nSymbolically, that old era is dying. But I have not figured everything out. These are not admirable confessions, and I am not claiming that I no longer care what anyone thinks. What is dying is the person who believed that caring for others required controlling every possible response to his presence.\n\nI still want to speak carefully and accept responsibility for what I say. But I am learning that I can care about another person's response without shrinking in an attempt to control their response.\n\nTo button up this portion of my story, I know that age and context do not absolve me of the ways my fear, avoidance, anxiety, or unexamined wounds have affected others. But accountability does not require me to flatten my entire life into a guilty verdict either. To know more fully is not to excuse. It is to tell my truth with greater precision.\n\n---\n\nAlma chapter 32 offers a humane description of that kind of knowledge. When the seed begins to grow, Alma says, \"your knowledge is perfect in that thing.\" Those final words matter: **_in that thing_**. He does not say that one spiritual experience settles every historical, doctrinal, or personal question. We can know something real without claiming to know everything. A measured testimony is still a testimony. Honest faith is not inferior faith.\n\nMaybe this is sometimes what faith looks like: not knowing exactly where to go, but refusing to lie about where we are, and continuing to turn toward Christ.\n\nThere is a story near the end of Luke. Two disciples are walking from Jerusalem to Emmaus after the Crucifixion. Their understanding of everything that has happened is broken. Jesus draws near and walks with them, but they do not recognize Him.\n\nOf course Jesus already knows what has happened. He knows who He is. He knows the tomb is empty. Yet He asks them what they are talking about.\n\nThey stop. Luke says they are sad. They tell Him about the prophet they believed would redeem Israel. They tell Him about the Crucifixion, the empty tomb, and the bewildering report of angels. They possess many of the facts, but they do not yet know what those facts mean. Then they say, \u201cBut we trusted that it had been he which should have redeemed Israel.\u201d\n\nWe trusted.\n\nTheir hope shifted into the past tense. They are speaking of redemption to the Redeemer as though redemption has already failed. They are mourning the loss of Christ while the living Christ walks beside them. And He lets them speak.\n\nChrist does not reveal Himself immediately and He does not interrupt their grief with the triumphant ending. He listens as they tell Him an incomplete account of His own story.\n\nNor does He wait in Jerusalem for them to return with corrected theology. He joins them on the road they are already walking\u2014even though, for the moment, it is a road leading away from the place where they expected redemption to occur.\n\nHe walks with them. He opens the scriptures. He accepts their invitation to remain. And at the table, He takes bread, blesses it, breaks it, and gives it to them.\n\nOnly then are their eyes opened.\n\nOnly then do they recognize that the person they believed they had lost had been accompanying them all along.\n\n_Not Christ waiting at the end, after they finally understand._\n\n_Christ drawing near and going with them._\n\nThat brings us to the part of Christlike knowledge that feels central to me.\n\n---\n\nAlma chapter 7 says that Christ would suffer \"pains and afflictions and temptations of every kind.\" He would take upon Him the pains, sicknesses, death, and infirmities of His people.\n\nAlma goes on to tell us why, explaining: \"that his bowels may be filled with mercy, according to the flesh, that he may know according to the flesh how to succor his people according to their infirmities.\" Replace the word infirmities with any mortal experience you want.\n\nThe next verse creates an undeniable tension, which is exactly what wrestling with the word means: \"The Spirit knoweth all things; nevertheless the Son of God suffereth according to the flesh.\"\n\nThe tension is introduced because Christ is described as already possessing divine knowledge. But his mortal ministry was essential, He entered the body. He suffered. His knowledge is not remote observation. It is knowledge according to the flesh.\n\nAnd what is that knowledge for?\n\nTo succor. To run toward. To support. To accompany. Christlike knowledge is not merely the power to describe another person's pain correctly. It is the willingness to meet that person where they are, on the road to Emmaus, when they believe their Savior is lost.\n\nIn John 4, Jesus meets a Samaritan woman at a well. He knows her complicated history, but He does not reduce her to it. He asks her for a drink. He speaks with her seriously about worship, truth, and living water. While other disciples marvel that He is speaking with her at all, she becomes a witness who brings others to Him.\n\n_Christ\u2019s knowledge meant he knew the whole of her story without letting the hardest and most obvious part of it define how he saw her._\n\nThen, in the parable of the good Samaritan, a lawyer asks Jesus a knowledge question: \"Who is my neighbour?\" A priest sees the wounded man, as does a Levite. Both pass by. Then comes the Samaritan, but he allows what he knows to materialize into responsibility. He crosses the distance between observation and love.\n\nThose two Samaritan stories teach me that information is not the same as understanding. We can know something about a person and still be deeply wrong about them. Christlike knowledge asks: What has this person lived through? What are they carrying that I cannot see? What part of their story have I not yet earned the right to hear? And then: What does what I know ask me to do?\n\n---\n\nThis also changes the way I think about Christ as judge. In John chapter 5, Jesus says the Father has committed judgment to the Son and has given Him authority to execute judgment \"because he is the Son of man.\"\n\nThen Jesus says something beautiful: \"As I hear, I judge.\"\n\n_As I hear._ The judge is also the listener; the one who has entered humanity, who knows according to the flesh, and who gives life to the dead.\n\nHebrews chapter 4 says that the word of God is a discerner of \"the thoughts and intents of the heart\" and that all things are \"naked and opened\" before Him. That image could be terrifying. With nothing hidden, there is no ability to massage the evidence. There is no white shirt or navy suit on earth convincing Him that our lives are more orderly than they are.\n\nBut the passage does not end there. It immediately tells us that our great high priest is \"touched with the feeling of our infirmities.\" And then it says, \"Let us therefore come boldly unto the throne of grace.\"\n\nThe beautiful irony is that complete exposure should not drive us from Christ. Because the one who sees us in our nakedness is also the one who knows infirmity, we can approach. Because in reality, he has walked beside us in our anxiety.\n\nFor a long while, I found comfort in saying, \"Christ knows I am trying. He knows my heart. He knows where I have been.\" And yet I still believe that. But \"He knows my heart\" is not an excuse I issue to myself. It is my consent to be known and seen beyond my own arguments.\n\nJesus Christ knows when I was trying. He also knows when I was avoiding or assigning blame. He saw me seeking control, loving sincerely, acting from fear, causing harm, or doing the best I could with capacities I did not yet possess. His knowledge makes both intention and consequence visible at the same time. It dismantles both easy self-exoneration and total self-condemnation. Christ knows too much to permit any of us to distill our lives into either of those resolutions.\n\nPaul warned that \"knowledge puffeth up, but charity edifieth.\" Doctrine and Covenants 121 places \"pure knowledge\" beside persuasion, long-suffering, gentleness, meekness, love unfeigned, and kindness. Christlike knowledge does not use truth as ammunition. It becomes humility, repentance, compassion, and service. It becomes love.\n\nThere is one question I carry in my mind almost constantly, and it\u2019s this: Which version of myself have I judged from partial evidence?\n\nAnd while time travel is not possible, I can reach behind me within the landscape of my own mind. I can reach toward the 19-year-old missionary who came home after six months, believing failure had become his name; the young person searching for a perfect Latter-day Saint marriage because he wanted a home without the shadows of the one in which he grew up; the husband who blamed outward because inward examination felt unbearable; the divorced father who mistook survival for miraculous healing; and the newly remarried man who stood at a pulpit four years ago trying to convince himself and the people he loved that his life was under control.\n\nI do not want to reach back to my younger selves to correct them, or to say that they did nothing wrong. That person, that version of me, made choices. Those choices caused harm. Those versions of me were also frightened, sincere, loving, limited people who did not yet have all the words they needed.\n\nI want to guide them home. I want to bring them with me. And when I imagine Christ in those memories, I no longer imagine Him waiting at the end of my understanding, ready to receive whichever version of me finally figures everything out.\n\nI see Christ beside the frightened and overwhelmed missionary. Jesus beside the young husband reaching for certainty by repeating what they saw others do. Christ beside the person assigning blame because he did not yet know how to look inward safely. Christ beside the father being carried through stormy weather. Christ beside the exhausted person speaking today without knowing who they will become.\n\nNot Christ as the reward for finally producing an accurate account of myself. _Christ as the companion who can withstand every revision._\n\nChrist remains the ultimate goal. I no longer believe I must arrive as Christ in mortality before I am permitted to walk with Him. Perhaps becoming like Him begins here: when I stop issuing final judgments from partial knowledge about the stranger, the person who hurt me, the person I hurt, and the unfinished person I meet in the mirror.\n\n_Today I cannot offer a testimony made impressive by the absence of questions. I can offer something more honest: I know enough to continue._\n\nI know grace is real because I have needed it. I know that repentance is not simply punishment because I have felt the relief of turning again toward God. I know that when I try to see another person through the eyes of Christ, my heart changes. I know that the teachings of Jesus continue to reveal hardness in me and invite me to become gentler.\n\nI believe Jesus Christ is the Son of God and the Redeemer of the world. I believe His Resurrection means that death, grief, failure, and estrangement will not have the final word. I believe He knows us completely; our faith and our fear, our devotion and our contradiction, the questions we can articulate and the ones we can only feel. And He does not turn away.\n\nOur knowledge can become more like Christ's: humble enough to keep learning, honest enough to receive truth as it is, merciful enough to see a whole person, and brave enough to become love. Jesus Christ knows us and loves us. Because He knows us, we can come to Him without disguise. Because He loves us, we do not have to remain as we are. In the name of Jesus Christ, amen.",
+        "file": "2026-08-23-knowledge-that-becomes-love.md",
+        "publisher": {
+            "schema": "otw.publisher.post",
+            "version": 2,
+            "source": "publisher.html",
+            "subhead": "Sacrament Meeting | Aug 23, 2026 | Estimated 17\u201318 minutes",
+            "blocks": [
+                {
+                    "id": "quote_mt6e8l1y_nkgsyt",
+                    "type": "quote",
+                    "html": "<strong>Core thought:</strong> Christlike knowledge begins in humility, sees people mercifully, and proves itself in love.",
+                    "text": "Core thought: Christlike knowledge begins in humility, sees people mercifully, and proves itself in love."
+                },
+                {
+                    "id": "image_mt6e4zqn_2ol051",
+                    "type": "image",
+                    "imageRef": "image_mt6e4zqn_2ol051",
+                    "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-08-23-knowledge-that-becomes-love-mt6e509u.jpg",
+                    "objectKey": "narrative/2026-08-23-knowledge-that-becomes-love-mt6e509u.jpg",
+                    "featureLayout": "natural",
+                    "featureFocal": "center",
+                    "homepageFocal": "center",
+                    "displaySize": "large",
+                    "alignment": "center",
+                    "wrapMode": "none"
+                },
+                {
+                    "id": "p_mt6e4zrj_qstihy",
+                    "type": "paragraph",
+                    "html": "I last had the opportunity to speak in church back in 2022, when I was on the cusp of my first wedding anniversary. It\u2019s a testament to the rapid nature of life that four years have already passed us by, bringing with it the natural highs and lows of an ordinary mortal life. By virtue of the recent combination of wards, I wanted to briefly introduce my family to y\u2019all. My name is RyanDavid Burningham, I also go by Rylee or RD. My wife Emily and I were married on April 17th, 2021, after meeting online in March of 2020, a mere week before the pandemic interrupted everyone\u2019s life on earth.",
+                    "text": "I last had the opportunity to speak in church back in 2022, when I was on the cusp of my first wedding anniversary. It\u2019s a testament to the rapid nature of life that four years have already passed us by, bringing with it the natural highs and lows of an ordinary mortal life. By virtue of the recent combination of wards, I wanted to briefly introduce my family to y\u2019all. My name is RyanDavid Burningham, I also go by Rylee or RD. My wife Emily and I were married on April 17th, 2021, after meeting online in March of 2020, a mere week before the pandemic interrupted everyone\u2019s life on earth."
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_spe7qv",
+                    "type": "paragraph",
+                    "html": "Together, we have seven children, six girls and one boy. And before you think, \u201cThat poor boy\u201d, there\u2019s no one luckier on earth to have lived with such amazing women. So lucky, he married one of them.",
+                    "text": "Together, we have seven children, six girls and one boy. And before you think, \u201cThat poor boy\u201d, there\u2019s no one luckier on earth to have lived with such amazing women. So lucky, he married one of them."
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_yitm6t",
+                    "type": "paragraph",
+                    "html": "And before you get too grossed out by that, context is key; my oldest son married Emily\u2019s oldest daughter. It\u2019s a polarizing statement, but far more normal than first glance ever gets credit for. They first met on our wedding day, remaining true to themselves as bratty independent teenagers who wanted no truck with our second marriage. Lucky for them, and for us.",
+                    "text": "And before you get too grossed out by that, context is key; my oldest son married Emily\u2019s oldest daughter. It\u2019s a polarizing statement, but far more normal than first glance ever gets credit for. They first met on our wedding day, remaining true to themselves as bratty independent teenagers who wanted no truck with our second marriage. Lucky for them, and for us."
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_6j1tvm",
+                    "type": "paragraph",
+                    "html": "Because of their marriage, Emily and I have our first grandchild, and we have the bizarre and unlooked-for opportunity to see, without all that unnecessary mucking about with pregnancy, what a child of ours may have actually looked like.",
+                    "text": "Because of their marriage, Emily and I have our first grandchild, and we have the bizarre and unlooked-for opportunity to see, without all that unnecessary mucking about with pregnancy, what a child of ours may have actually looked like."
+                },
+                {
+                    "id": "divider_mt6e8l1y_tyd1c7",
+                    "type": "divider"
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_ooq3bd",
+                    "type": "paragraph",
+                    "html": "Brother Weitz sent me a text message just over two weeks ago, asking me to speak in sacrament meeting today about the Christlike attribute of knowledge. He went on to say that the topic could obviously be taken in several directions, for the which I am grateful, as I am nothing without my rabbit holes and diversions. I promptly answered, \"Of course, my friend.\", in my usual overly confident-while-texting bravado. As per usual, that is where my confidence remained, as life continued unabated after the invitation.",
+                    "text": "Brother Weitz sent me a text message just over two weeks ago, asking me to speak in sacrament meeting today about the Christlike attribute of knowledge. He went on to say that the topic could obviously be taken in several directions, for the which I am grateful, as I am nothing without my rabbit holes and diversions. I promptly answered, \"Of course, my friend.\", in my usual overly confident-while-texting bravado. As per usual, that is where my confidence remained, as life continued unabated after the invitation."
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_n9c9ad",
+                    "type": "paragraph",
+                    "html": "Unusually tight deadlines at work caused me to work close to 80 hours a week lately. So by the time I actually sat down to prepare this talk, there was no part of me that felt wise or spiritual. What I did feel was tired and behind. I felt acutely aware of my own limits and what I could produce. As it turns out, that was just the right place to begin.",
+                    "text": "Unusually tight deadlines at work caused me to work close to 80 hours a week lately. So by the time I actually sat down to prepare this talk, there was no part of me that felt wise or spiritual. What I did feel was tired and behind. I felt acutely aware of my own limits and what I could produce. As it turns out, that was just the right place to begin."
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_5wq3vz",
+                    "type": "paragraph",
+                    "html": "Humans tend to speak about knowledge as though it were possession. For me, it feels like facts I have collected, or maybe a doctrine I can explain tidily, or a ready answer I can give a child.",
+                    "text": "Humans tend to speak about knowledge as though it were possession. For me, it feels like facts I have collected, or maybe a doctrine I can explain tidily, or a ready answer I can give a child."
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_vr8uba",
+                    "type": "paragraph",
+                    "html": "But a Christlike attribute is not something Christ calls a possession. Rather, it is part of His nature. So Christlike knowledge must be more than having correct information. It must describe a way of seeking truth, a way of seeing people, and a way of living in response to what we learn.",
+                    "text": "But a Christlike attribute is not something Christ calls a possession. Rather, it is part of His nature. So Christlike knowledge must be more than having correct information. It must describe a way of seeking truth, a way of seeing people, and a way of living in response to what we learn."
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_x5sxb4",
+                    "type": "paragraph",
+                    "html": "My central thought today is this: <strong>Christlike knowledge begins in humility, sees people mercifully, and proves itself in love.</strong>",
+                    "text": "My central thought today is this: Christlike knowledge begins in humility, sees people mercifully, and proves itself in love."
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_16pwtb",
+                    "type": "paragraph",
+                    "html": "Doctrine and Covenants chapter 93 says that truth is <em>\"knowledge of things as they are, and as they were, and as they are to come.\"</em> To me, that means truth is not merely knowledge of things as I would <em>prefer</em> them to be. It is not the version of events that protects my pride or leaves my existing beliefs undisturbed. Truth asks us to receive reality as it is and what it will become. That requires humility, because no one sees the whole of reality.",
+                    "text": "Doctrine and Covenants chapter 93 says that truth is \"knowledge of things as they are, and as they were, and as they are to come.\" To me, that means truth is not merely knowledge of things as I would prefer them to be. It is not the version of events that protects my pride or leaves my existing beliefs undisturbed. Truth asks us to receive reality as it is and what it will become. That requires humility, because no one sees the whole of reality."
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_tn4uc6",
+                    "type": "paragraph",
+                    "html": "The same section of the Doctrine and Covenants describes Jesus Christ in mortality as receiving \"grace for grace\" until He received a fullness. Luke likewise says that Jesus \"increased in wisdom and stature, and in favour with God and man.\" Even the Savior's mortal life included growth. Preach My Gospel teaches that becoming like Him is a gradual, lifelong process.",
+                    "text": "The same section of the Doctrine and Covenants describes Jesus Christ in mortality as receiving \"grace for grace\" until He received a fullness. Luke likewise says that Jesus \"increased in wisdom and stature, and in favour with God and man.\" Even the Savior's mortal life included growth. Preach My Gospel teaches that becoming like Him is a gradual, lifelong process."
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_kguxla",
+                    "type": "paragraph",
+                    "html": "If the scriptural account of Christ's mortal life includes increase, growth, and grace for grace, then we should not be ashamed to be learners. The willingness to learn is itself one of the ways we become like Him.",
+                    "text": "If the scriptural account of Christ's mortal life includes increase, growth, and grace for grace, then we should not be ashamed to be learners. The willingness to learn is itself one of the ways we become like Him."
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_detxzd",
+                    "type": "paragraph",
+                    "html": "For much of my life, I treated spiritual knowledge almost like a final examination. Every statement seemed to come with two circles: TRUE and FALSE. I thought my truest self should be able to circle TRUE immediately, confidently, and permanently. If I hesitated, hesitation was a failure. Thank heaven I do not experience faith quite that neatly anymore.",
+                    "text": "For much of my life, I treated spiritual knowledge almost like a final examination. Every statement seemed to come with two circles: TRUE and FALSE. I thought my truest self should be able to circle TRUE immediately, confidently, and permanently. If I hesitated, hesitation was a failure. Thank heaven I do not experience faith quite that neatly anymore."
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_jfvx8x",
+                    "type": "paragraph",
+                    "html": "My own knowledge gaps are not small. They concern history, revelation, pain, and the explanations we receive are inadequate to that pain. Others concern what we do when God feels absent and prayer does not bring clarity, or when an old answer no longer seems satisfactory enough for the question. I mention these gaps because I suspect I am not the only person who has sat in a church pew, loving the gospel yet finding that some things no longer fit together neatly.",
+                    "text": "My own knowledge gaps are not small. They concern history, revelation, pain, and the explanations we receive are inadequate to that pain. Others concern what we do when God feels absent and prayer does not bring clarity, or when an old answer no longer seems satisfactory enough for the question. I mention these gaps because I suspect I am not the only person who has sat in a church pew, loving the gospel yet finding that some things no longer fit together neatly."
+                },
+                {
+                    "id": "divider_mt6e8l1y_0t56w8",
+                    "type": "divider"
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_ykun0i",
+                    "type": "paragraph",
+                    "html": "As mentioned before, I have given talks from this very place and from others like it, during different eras of my life. For example, a much younger version of myself inferred how a faithful person was supposed to look. So, I wore the white shirt and navy suit. I repeated words that made me recognizable to the lay clergy. At my core, I wanted to belong, to be seen as worthy, and to feel safe. At 19, I went on a mission faithfully. Yet, I came home six months later. I then married young, believing I had found stability and managed to escape the shadows of my childhood home. But in reality, I carried those shadows with me. Over and over, I brought fear, anxiety, and unnamed wounds into relationships with people who carried histories of their own.",
+                    "text": "As mentioned before, I have given talks from this very place and from others like it, during different eras of my life. For example, a much younger version of myself inferred how a faithful person was supposed to look. So, I wore the white shirt and navy suit. I repeated words that made me recognizable to the lay clergy. At my core, I wanted to belong, to be seen as worthy, and to feel safe. At 19, I went on a mission faithfully. Yet, I came home six months later. I then married young, believing I had found stability and managed to escape the shadows of my childhood home. But in reality, I carried those shadows with me. Over and over, I brought fear, anxiety, and unnamed wounds into relationships with people who carried histories of their own."
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_11c0wq",
+                    "type": "paragraph",
+                    "html": "In a more tender light, I can see each version of me was sincere. They were proof of my own survival. And they were yet a more preparatory truth; I spent much of my life carrying an impossible burden: the burden of proving that my life was under control.",
+                    "text": "In a more tender light, I can see each version of me was sincere. They were proof of my own survival. And they were yet a more preparatory truth; I spent much of my life carrying an impossible burden: the burden of proving that my life was under control."
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_8el19j",
+                    "type": "paragraph",
+                    "html": "Because isn\u2019t it a fact that a good missionary endures? Certainly, a loving and faithful husband keeps his marriage intact. An attentive father provides stability. A life-long Church member knows what he believes. And a good sacrament speaker stands at the pulpit and makes the story coherent. I may get there today ;)",
+                    "text": "Because isn\u2019t it a fact that a good missionary endures? Certainly, a loving and faithful husband keeps his marriage intact. An attentive father provides stability. A life-long Church member knows what he believes. And a good sacrament speaker stands at the pulpit and makes the story coherent. I may get there today ;)"
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_wf4dv7",
+                    "type": "paragraph",
+                    "html": "Symbolically, that old era is dying. But I have not figured everything out. These are not admirable confessions, and I am not claiming that I no longer care what anyone thinks. What is dying is the person who believed that caring for others required controlling every possible response to his presence.",
+                    "text": "Symbolically, that old era is dying. But I have not figured everything out. These are not admirable confessions, and I am not claiming that I no longer care what anyone thinks. What is dying is the person who believed that caring for others required controlling every possible response to his presence."
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_kikdkm",
+                    "type": "paragraph",
+                    "html": "I still want to speak carefully and accept responsibility for what I say. But I am learning that I can care about another person's response without shrinking in an attempt to control their response.",
+                    "text": "I still want to speak carefully and accept responsibility for what I say. But I am learning that I can care about another person's response without shrinking in an attempt to control their response."
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_xawpny",
+                    "type": "paragraph",
+                    "html": "To button up this portion of my story, I know that age and context do not absolve me of the ways my fear, avoidance, anxiety, or unexamined wounds have affected others. But accountability does not require me to flatten my entire life into a guilty verdict either. To know more fully is not to excuse. It is to tell my truth with greater precision.",
+                    "text": "To button up this portion of my story, I know that age and context do not absolve me of the ways my fear, avoidance, anxiety, or unexamined wounds have affected others. But accountability does not require me to flatten my entire life into a guilty verdict either. To know more fully is not to excuse. It is to tell my truth with greater precision."
+                },
+                {
+                    "id": "divider_mt6e8l1y_avy845",
+                    "type": "divider"
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_xl2t3e",
+                    "type": "paragraph",
+                    "html": "Alma chapter 32 offers a humane description of that kind of knowledge. When the seed begins to grow, Alma says, \"your knowledge is perfect in that thing.\" Those final words matter: <strong><em>in that thing</em></strong>. He does not say that one spiritual experience settles every historical, doctrinal, or personal question. We can know something real without claiming to know everything. A measured testimony is still a testimony. Honest faith is not inferior faith.",
+                    "text": "Alma chapter 32 offers a humane description of that kind of knowledge. When the seed begins to grow, Alma says, \"your knowledge is perfect in that thing.\" Those final words matter: in that thing. He does not say that one spiritual experience settles every historical, doctrinal, or personal question. We can know something real without claiming to know everything. A measured testimony is still a testimony. Honest faith is not inferior faith."
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_bbnohu",
+                    "type": "paragraph",
+                    "html": "Maybe this is sometimes what faith looks like: not knowing exactly where to go, but refusing to lie about where we are, and continuing to turn toward Christ.",
+                    "text": "Maybe this is sometimes what faith looks like: not knowing exactly where to go, but refusing to lie about where we are, and continuing to turn toward Christ."
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_mjlyvw",
+                    "type": "paragraph",
+                    "html": "There is a story near the end of Luke. Two disciples are walking from Jerusalem to Emmaus after the Crucifixion. Their understanding of everything that has happened is broken. Jesus draws near and walks with them, but they do not recognize Him.",
+                    "text": "There is a story near the end of Luke. Two disciples are walking from Jerusalem to Emmaus after the Crucifixion. Their understanding of everything that has happened is broken. Jesus draws near and walks with them, but they do not recognize Him."
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_alm4mx",
+                    "type": "paragraph",
+                    "html": "Of course Jesus already knows what has happened. He knows who He is. He knows the tomb is empty. Yet He asks them what they are talking about.",
+                    "text": "Of course Jesus already knows what has happened. He knows who He is. He knows the tomb is empty. Yet He asks them what they are talking about."
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_y3hi7i",
+                    "type": "paragraph",
+                    "html": "They stop. Luke says they are sad. They tell Him about the prophet they believed would redeem Israel. They tell Him about the Crucifixion, the empty tomb, and the bewildering report of angels. They possess many of the facts, but they do not yet know what those facts mean. Then they say, \u201cBut we trusted that it had been he which should have redeemed Israel.\u201d",
+                    "text": "They stop. Luke says they are sad. They tell Him about the prophet they believed would redeem Israel. They tell Him about the Crucifixion, the empty tomb, and the bewildering report of angels. They possess many of the facts, but they do not yet know what those facts mean. Then they say, \u201cBut we trusted that it had been he which should have redeemed Israel.\u201d"
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_jn38my",
+                    "type": "paragraph",
+                    "html": "We trusted.",
+                    "text": "We trusted."
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_g5xics",
+                    "type": "paragraph",
+                    "html": "Their hope shifted into the past tense. They are speaking of redemption to the Redeemer as though redemption has already failed. They are mourning the loss of Christ while the living Christ walks beside them. And He lets them speak.",
+                    "text": "Their hope shifted into the past tense. They are speaking of redemption to the Redeemer as though redemption has already failed. They are mourning the loss of Christ while the living Christ walks beside them. And He lets them speak."
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_hfa5pd",
+                    "type": "paragraph",
+                    "html": "Christ does not reveal Himself immediately and He does not interrupt their grief with the triumphant ending. He listens as they tell Him an incomplete account of His own story.",
+                    "text": "Christ does not reveal Himself immediately and He does not interrupt their grief with the triumphant ending. He listens as they tell Him an incomplete account of His own story."
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_d8qmgn",
+                    "type": "paragraph",
+                    "html": "Nor does He wait in Jerusalem for them to return with corrected theology. He joins them on the road they are already walking\u2014even though, for the moment, it is a road leading away from the place where they expected redemption to occur.",
+                    "text": "Nor does He wait in Jerusalem for them to return with corrected theology. He joins them on the road they are already walking\u2014even though, for the moment, it is a road leading away from the place where they expected redemption to occur."
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_6ye3fp",
+                    "type": "paragraph",
+                    "html": "He walks with them. He opens the scriptures. He accepts their invitation to remain. And at the table, He takes bread, blesses it, breaks it, and gives it to them.",
+                    "text": "He walks with them. He opens the scriptures. He accepts their invitation to remain. And at the table, He takes bread, blesses it, breaks it, and gives it to them."
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_t8w9rt",
+                    "type": "paragraph",
+                    "html": "Only then are their eyes opened.",
+                    "text": "Only then are their eyes opened."
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_tw71nu",
+                    "type": "paragraph",
+                    "html": "Only then do they recognize that the person they believed they had lost had been accompanying them all along.",
+                    "text": "Only then do they recognize that the person they believed they had lost had been accompanying them all along."
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_mswivl",
+                    "type": "paragraph",
+                    "html": "<em>Not Christ waiting at the end, after they finally understand.</em>",
+                    "text": "Not Christ waiting at the end, after they finally understand."
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_30y4fq",
+                    "type": "paragraph",
+                    "html": "<em>Christ drawing near and going with them.</em>",
+                    "text": "Christ drawing near and going with them."
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_m4ji8a",
+                    "type": "paragraph",
+                    "html": "That brings us to the part of Christlike knowledge that feels central to me.",
+                    "text": "That brings us to the part of Christlike knowledge that feels central to me."
+                },
+                {
+                    "id": "divider_mt6e8l1y_l9to0e",
+                    "type": "divider"
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_yvqh1j",
+                    "type": "paragraph",
+                    "html": "Alma chapter 7 says that Christ would suffer \"pains and afflictions and temptations of every kind.\" He would take upon Him the pains, sicknesses, death, and infirmities of His people.",
+                    "text": "Alma chapter 7 says that Christ would suffer \"pains and afflictions and temptations of every kind.\" He would take upon Him the pains, sicknesses, death, and infirmities of His people."
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_4l25ht",
+                    "type": "paragraph",
+                    "html": "Alma goes on to tell us why, explaining: \"that his bowels may be filled with mercy, according to the flesh, that he may know according to the flesh how to succor his people according to their infirmities.\" Replace the word infirmities with any mortal experience you want.",
+                    "text": "Alma goes on to tell us why, explaining: \"that his bowels may be filled with mercy, according to the flesh, that he may know according to the flesh how to succor his people according to their infirmities.\" Replace the word infirmities with any mortal experience you want."
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_okoudt",
+                    "type": "paragraph",
+                    "html": "The next verse creates an undeniable tension, which is exactly what wrestling with the word means: \"The Spirit knoweth all things; nevertheless the Son of God suffereth according to the flesh.\"",
+                    "text": "The next verse creates an undeniable tension, which is exactly what wrestling with the word means: \"The Spirit knoweth all things; nevertheless the Son of God suffereth according to the flesh.\""
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_no6nrd",
+                    "type": "paragraph",
+                    "html": "The tension is introduced because Christ is described as already possessing divine knowledge. But his mortal ministry was essential, He entered the body. He suffered. His knowledge is not remote observation. It is knowledge according to the flesh.",
+                    "text": "The tension is introduced because Christ is described as already possessing divine knowledge. But his mortal ministry was essential, He entered the body. He suffered. His knowledge is not remote observation. It is knowledge according to the flesh."
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_0c1q8q",
+                    "type": "paragraph",
+                    "html": "And what is that knowledge for?",
+                    "text": "And what is that knowledge for?"
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_ukapg8",
+                    "type": "paragraph",
+                    "html": "To succor. To run toward. To support. To accompany. Christlike knowledge is not merely the power to describe another person's pain correctly. It is the willingness to meet that person where they are, on the road to Emmaus, when they believe their Savior is lost.",
+                    "text": "To succor. To run toward. To support. To accompany. Christlike knowledge is not merely the power to describe another person's pain correctly. It is the willingness to meet that person where they are, on the road to Emmaus, when they believe their Savior is lost."
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_44q7xa",
+                    "type": "paragraph",
+                    "html": "In John 4, Jesus meets a Samaritan woman at a well. He knows her complicated history, but He does not reduce her to it. He asks her for a drink. He speaks with her seriously about worship, truth, and living water. While other disciples marvel that He is speaking with her at all, she becomes a witness who brings others to Him.",
+                    "text": "In John 4, Jesus meets a Samaritan woman at a well. He knows her complicated history, but He does not reduce her to it. He asks her for a drink. He speaks with her seriously about worship, truth, and living water. While other disciples marvel that He is speaking with her at all, she becomes a witness who brings others to Him."
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_y9kuof",
+                    "type": "paragraph",
+                    "html": "<em>Christ\u2019s knowledge meant he knew the whole of her story without letting the hardest and most obvious part of it define how he saw her.</em>",
+                    "text": "Christ\u2019s knowledge meant he knew the whole of her story without letting the hardest and most obvious part of it define how he saw her."
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_h364eg",
+                    "type": "paragraph",
+                    "html": "Then, in the parable of the good Samaritan, a lawyer asks Jesus a knowledge question: \"Who is my neighbour?\" A priest sees the wounded man, as does a Levite. Both pass by. Then comes the Samaritan, but he allows what he knows to materialize into responsibility. He crosses the distance between observation and love.",
+                    "text": "Then, in the parable of the good Samaritan, a lawyer asks Jesus a knowledge question: \"Who is my neighbour?\" A priest sees the wounded man, as does a Levite. Both pass by. Then comes the Samaritan, but he allows what he knows to materialize into responsibility. He crosses the distance between observation and love."
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_5tlrte",
+                    "type": "paragraph",
+                    "html": "Those two Samaritan stories teach me that information is not the same as understanding. We can know something about a person and still be deeply wrong about them. Christlike knowledge asks: What has this person lived through? What are they carrying that I cannot see? What part of their story have I not yet earned the right to hear? And then: What does what I know ask me to do?",
+                    "text": "Those two Samaritan stories teach me that information is not the same as understanding. We can know something about a person and still be deeply wrong about them. Christlike knowledge asks: What has this person lived through? What are they carrying that I cannot see? What part of their story have I not yet earned the right to hear? And then: What does what I know ask me to do?"
+                },
+                {
+                    "id": "divider_mt6e8l1y_silv2k",
+                    "type": "divider"
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_zq1nyq",
+                    "type": "paragraph",
+                    "html": "This also changes the way I think about Christ as judge. In John chapter 5, Jesus says the Father has committed judgment to the Son and has given Him authority to execute judgment \"because he is the Son of man.\"",
+                    "text": "This also changes the way I think about Christ as judge. In John chapter 5, Jesus says the Father has committed judgment to the Son and has given Him authority to execute judgment \"because he is the Son of man.\""
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_ja8p3s",
+                    "type": "paragraph",
+                    "html": "Then Jesus says something beautiful: \"As I hear, I judge.\"",
+                    "text": "Then Jesus says something beautiful: \"As I hear, I judge.\""
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_w1s7l6",
+                    "type": "paragraph",
+                    "html": "<em>As I hear.</em> The judge is also the listener; the one who has entered humanity, who knows according to the flesh, and who gives life to the dead.",
+                    "text": "As I hear. The judge is also the listener; the one who has entered humanity, who knows according to the flesh, and who gives life to the dead."
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_1fwqfm",
+                    "type": "paragraph",
+                    "html": "Hebrews chapter 4 says that the word of God is a discerner of \"the thoughts and intents of the heart\" and that all things are \"naked and opened\" before Him. That image could be terrifying. With nothing hidden, there is no ability to massage the evidence. There is no white shirt or navy suit on earth convincing Him that our lives are more orderly than they are.",
+                    "text": "Hebrews chapter 4 says that the word of God is a discerner of \"the thoughts and intents of the heart\" and that all things are \"naked and opened\" before Him. That image could be terrifying. With nothing hidden, there is no ability to massage the evidence. There is no white shirt or navy suit on earth convincing Him that our lives are more orderly than they are."
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_qrt3va",
+                    "type": "paragraph",
+                    "html": "But the passage does not end there. It immediately tells us that our great high priest is \"touched with the feeling of our infirmities.\" And then it says, \"Let us therefore come boldly unto the throne of grace.\"",
+                    "text": "But the passage does not end there. It immediately tells us that our great high priest is \"touched with the feeling of our infirmities.\" And then it says, \"Let us therefore come boldly unto the throne of grace.\""
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_f1w9og",
+                    "type": "paragraph",
+                    "html": "The beautiful irony is that complete exposure should not drive us from Christ. Because the one who sees us in our nakedness is also the one who knows infirmity, we can approach. Because in reality, he has walked beside us in our anxiety.",
+                    "text": "The beautiful irony is that complete exposure should not drive us from Christ. Because the one who sees us in our nakedness is also the one who knows infirmity, we can approach. Because in reality, he has walked beside us in our anxiety."
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_gczkq3",
+                    "type": "paragraph",
+                    "html": "For a long while, I found comfort in saying, \"Christ knows I am trying. He knows my heart. He knows where I have been.\" And yet I still believe that. But \"He knows my heart\" is not an excuse I issue to myself. It is my consent to be known and seen beyond my own arguments.",
+                    "text": "For a long while, I found comfort in saying, \"Christ knows I am trying. He knows my heart. He knows where I have been.\" And yet I still believe that. But \"He knows my heart\" is not an excuse I issue to myself. It is my consent to be known and seen beyond my own arguments."
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_5ed4ar",
+                    "type": "paragraph",
+                    "html": "Jesus Christ knows when I was trying. He also knows when I was avoiding or assigning blame. He saw me seeking control, loving sincerely, acting from fear, causing harm, or doing the best I could with capacities I did not yet possess. His knowledge makes both intention and consequence visible at the same time. It dismantles both easy self-exoneration and total self-condemnation. Christ knows too much to permit any of us to distill our lives into either of those resolutions.",
+                    "text": "Jesus Christ knows when I was trying. He also knows when I was avoiding or assigning blame. He saw me seeking control, loving sincerely, acting from fear, causing harm, or doing the best I could with capacities I did not yet possess. His knowledge makes both intention and consequence visible at the same time. It dismantles both easy self-exoneration and total self-condemnation. Christ knows too much to permit any of us to distill our lives into either of those resolutions."
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_lalgck",
+                    "type": "paragraph",
+                    "html": "Paul warned that \"knowledge puffeth up, but charity edifieth.\" Doctrine and Covenants 121 places \"pure knowledge\" beside persuasion, long-suffering, gentleness, meekness, love unfeigned, and kindness. Christlike knowledge does not use truth as ammunition. It becomes humility, repentance, compassion, and service. It becomes love.",
+                    "text": "Paul warned that \"knowledge puffeth up, but charity edifieth.\" Doctrine and Covenants 121 places \"pure knowledge\" beside persuasion, long-suffering, gentleness, meekness, love unfeigned, and kindness. Christlike knowledge does not use truth as ammunition. It becomes humility, repentance, compassion, and service. It becomes love."
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_cz8e0o",
+                    "type": "paragraph",
+                    "html": "There is one question I carry in my mind almost constantly, and it\u2019s this: Which version of myself have I judged from partial evidence?",
+                    "text": "There is one question I carry in my mind almost constantly, and it\u2019s this: Which version of myself have I judged from partial evidence?"
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_skts7z",
+                    "type": "paragraph",
+                    "html": "And while time travel is not possible, I can reach behind me within the landscape of my own mind. I can reach toward the 19-year-old missionary who came home after six months, believing failure had become his name; the young person searching for a perfect Latter-day Saint marriage because he wanted a home without the shadows of the one in which he grew up; the husband who blamed outward because inward examination felt unbearable; the divorced father who mistook survival for miraculous healing; and the newly remarried man who stood at a pulpit four years ago trying to convince himself and the people he loved that his life was under control.",
+                    "text": "And while time travel is not possible, I can reach behind me within the landscape of my own mind. I can reach toward the 19-year-old missionary who came home after six months, believing failure had become his name; the young person searching for a perfect Latter-day Saint marriage because he wanted a home without the shadows of the one in which he grew up; the husband who blamed outward because inward examination felt unbearable; the divorced father who mistook survival for miraculous healing; and the newly remarried man who stood at a pulpit four years ago trying to convince himself and the people he loved that his life was under control."
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_6tdg39",
+                    "type": "paragraph",
+                    "html": "I do not want to reach back to my younger selves to correct them, or to say that they did nothing wrong. That person, that version of me, made choices. Those choices caused harm. Those versions of me were also frightened, sincere, loving, limited people who did not yet have all the words they needed.",
+                    "text": "I do not want to reach back to my younger selves to correct them, or to say that they did nothing wrong. That person, that version of me, made choices. Those choices caused harm. Those versions of me were also frightened, sincere, loving, limited people who did not yet have all the words they needed."
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_457zmx",
+                    "type": "paragraph",
+                    "html": "I want to guide them home. I want to bring them with me. And when I imagine Christ in those memories, I no longer imagine Him waiting at the end of my understanding, ready to receive whichever version of me finally figures everything out.",
+                    "text": "I want to guide them home. I want to bring them with me. And when I imagine Christ in those memories, I no longer imagine Him waiting at the end of my understanding, ready to receive whichever version of me finally figures everything out."
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_jal6g4",
+                    "type": "paragraph",
+                    "html": "I see Christ beside the frightened and overwhelmed missionary. Jesus beside the young husband reaching for certainty by repeating what they saw others do. Christ beside the person assigning blame because he did not yet know how to look inward safely. Christ beside the father being carried through stormy weather. Christ beside the exhausted person speaking today without knowing who they will become.",
+                    "text": "I see Christ beside the frightened and overwhelmed missionary. Jesus beside the young husband reaching for certainty by repeating what they saw others do. Christ beside the person assigning blame because he did not yet know how to look inward safely. Christ beside the father being carried through stormy weather. Christ beside the exhausted person speaking today without knowing who they will become."
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_sht1uo",
+                    "type": "paragraph",
+                    "html": "Not Christ as the reward for finally producing an accurate account of myself. <em>Christ as the companion who can withstand every revision.</em>",
+                    "text": "Not Christ as the reward for finally producing an accurate account of myself. Christ as the companion who can withstand every revision."
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_0h9v35",
+                    "type": "paragraph",
+                    "html": "Christ remains the ultimate goal. I no longer believe I must arrive as Christ in mortality before I am permitted to walk with Him. Perhaps becoming like Him begins here: when I stop issuing final judgments from partial knowledge about the stranger, the person who hurt me, the person I hurt, and the unfinished person I meet in the mirror.",
+                    "text": "Christ remains the ultimate goal. I no longer believe I must arrive as Christ in mortality before I am permitted to walk with Him. Perhaps becoming like Him begins here: when I stop issuing final judgments from partial knowledge about the stranger, the person who hurt me, the person I hurt, and the unfinished person I meet in the mirror."
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_7wgls1",
+                    "type": "paragraph",
+                    "html": "<em>Today I cannot offer a testimony made impressive by the absence of questions. I can offer something more honest: I know enough to continue.</em>",
+                    "text": "Today I cannot offer a testimony made impressive by the absence of questions. I can offer something more honest: I know enough to continue."
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_nk75a3",
+                    "type": "paragraph",
+                    "html": "I know grace is real because I have needed it. I know that repentance is not simply punishment because I have felt the relief of turning again toward God. I know that when I try to see another person through the eyes of Christ, my heart changes. I know that the teachings of Jesus continue to reveal hardness in me and invite me to become gentler.",
+                    "text": "I know grace is real because I have needed it. I know that repentance is not simply punishment because I have felt the relief of turning again toward God. I know that when I try to see another person through the eyes of Christ, my heart changes. I know that the teachings of Jesus continue to reveal hardness in me and invite me to become gentler."
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_bdy1h4",
+                    "type": "paragraph",
+                    "html": "I believe Jesus Christ is the Son of God and the Redeemer of the world. I believe His Resurrection means that death, grief, failure, and estrangement will not have the final word. I believe He knows us completely; our faith and our fear, our devotion and our contradiction, the questions we can articulate and the ones we can only feel. And He does not turn away.",
+                    "text": "I believe Jesus Christ is the Son of God and the Redeemer of the world. I believe His Resurrection means that death, grief, failure, and estrangement will not have the final word. I believe He knows us completely; our faith and our fear, our devotion and our contradiction, the questions we can articulate and the ones we can only feel. And He does not turn away."
+                },
+                {
+                    "id": "paragraph_mt6e8l1y_y0zx5q",
+                    "type": "paragraph",
+                    "html": "Our knowledge can become more like Christ's: humble enough to keep learning, honest enough to receive truth as it is, merciful enough to see a whole person, and brave enough to become love. Jesus Christ knows us and loves us. Because He knows us, we can come to Him without disguise. Because He loves us, we do not have to remain as we are. In the name of Jesus Christ, amen.",
+                    "text": "Our knowledge can become more like Christ's: humble enough to keep learning, honest enough to receive truth as it is, merciful enough to see a whole person, and brave enough to become love. Jesus Christ knows us and loves us. Because He knows us, we can come to Him without disguise. Because He loves us, we do not have to remain as we are. In the name of Jesus Christ, amen."
+                }
+            ],
+            "images": [
+                {
+                    "id": "image_mt6e4zqn_2ol051",
+                    "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-08-23-knowledge-that-becomes-love-mt6e509u.jpg",
+                    "objectKey": "narrative/2026-08-23-knowledge-that-becomes-love-mt6e509u.jpg",
+                    "alt": "Narrative image",
+                    "caption": "Arnold B\u00f6cklin, The Road to Emmaus \u2014 1870",
+                    "credit": "Arnold B\u00f6cklin, Der Gang nach Emmaus, 1870. Bayerische Staatsgem\u00e4ldesammlungen \u2013 Sammlung Schack M\u00fcnchen. CC BY-SA 4.0.",
+                    "featureLayout": "natural",
+                    "featureFocal": "center",
+                    "homepageFocal": "center",
+                    "width": 1200,
+                    "height": 813,
+                    "displaySize": "large",
+                    "alignment": "center",
+                    "wrapMode": "none"
+                }
+            ],
+            "formatting": {
+                "mode": "otw-enhanced-markdown",
+                "version": 1,
+                "fallback": "markdown"
+            }
+        },
+        "post_id": "August 23, 2026--knowledge-that-becomes-love",
+        "share_path": "archive/2026-08-23-knowledge-that-becomes-love.html",
+        "og_image": "Images/og/archive/2026-08-23-knowledge-that-becomes-love.png"
+    },
+    {
         "title": "Still Out There",
         "date": "August 14, 2026",
         "body": "_I\u2019m not sitting still long enough_\n\n![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-08-12-still-out-there-mstexhmy.jpg)\n\nIt\u2019s fine.\n\nIt\u2019s honestly just\u2026fine.\n\nSay what you will about life. Think what you will about the passing of time, about the rotation of the Earth on its axis, of the orbital jurisdictions we undergo as human beings. Gravity has its hold on us, and we are not flung into space. That\u2019s something grand to celebrate.\n\nIt just boggles my mind to comprehend that I am 47 years old.\n\nThose precious memories I created as a teenager are becoming distant memories. My hips always hurt. My physical therapist is half my age.\n\nSide note: I did go to the dentist yesterday and passed with flying colors. Small victories for an aging body largely outside most rational control.\n\nSo yes. Forty-seven years old.\n\nMy mind, thankfully, is not the least bit slow. But each year, I feel the pull of nature just a bit more upon my body.\n\nDamn, but it feels good to be writing again after a brief hiatus.\n\n---\n\nHow about a little more age-related trivia?\n\nIf you\u2019re anywhere near my age, you probably have cultural touchstones that feel especially relevant to you. Things that feel timeless, or, at the very least, things that surely couldn\u2019t have happened\u00a0_that_\u00a0long ago.\n\nOne of those for me is\u00a0_The Lord of the Rings_\u00a0movies. It feels like yesterday when I was watching them in theaters. But\u00a0_The Fellowship of the Ring_\u00a0was released in December 2001.\n\nAlmost 25 years ago. A freaking quarter of a century. A silver anniversary, for crying out loud. Shivers down my spine as I realize it\u2019s now more than half a lifetime ago.\n\nI remember something else that got under my skin years ago. Madonna\u2019s song \u201cVogue\u201d rattled off a list of old Hollywood royalty. Greta Garbo, Marilyn Monroe, Marlene Dietrich, Marlon Brando, Grace Kelly, Fred Astaire, Ginger Rogers, Katharine Hepburn, Lauren Bacall and the rest. Sixteen people whose names represented a vaunted age of Hollywood.\n\nI read an article about what had happened to that list over time. One by one, the people Madonna sang about, passed. Some were already gone when the song was released, while others lived for decades afterward. Eventually there was only one left, Lauren Bacall. Then, in 2014, she died too.\n\nThat was it. The entire list was gone. \u00a0And there was something about that which stayed with me. A song released during my childhood had survived every human being it was celebrating. And while I was still there, that particular generation of people had slipped the confines of Earth and were borne\u00a0into the cosmos.\n\n---\n\nBah. None of this is new for me. Even as I was writing this post, my mind wandered to an entry I wrote on June 8, 2002. I was 23. Never been married, let alone become a father. Or a grandfather.\n\nThe post was called\u00a0**\u201cLiving in the past.\u201d**\u00a0That night, I had watched Lennox Lewis thoroughly dismantle Mike Tyson. I didn\u2019t particularly like Tyson. I didn\u2019t expect him to win. By my own admission, he was a deeply troubled person who probably didn\u2019t deserve the nostalgic affection I had for him.\n\nAnd yet, watching him lose made me sad, and I tried to figure out why.\n\nI realized then that Tyson was part of my childhood. His name conjured Nintendo games, newspaper headlines and the mythical aura he had when I was a kid. Watching him get beat down and fail to get back up somehow felt like watching a little piece of childhood stay down with him.\n\nThen I wrote about Michael Jordan. Jordan had returned from retirement to play for the Washington Wizards, and I loved it! Not necessarily because I thought it was the wisest career decision (it wasn't), but because one of the permanent fixtures of my childhood had come back.\n\nHe could still score 50 points. He could still take over a basketball game.\u00a0**He was still out there**. And every time he did it, 23-year-old me felt some small sense of victory.\n\nThen, near the end of that 2002 post, I rattled off a few more examples of my inability to let go of old things. My music lived in the eighties. My favorite basketball player had been drafted in 1984.\n\nAnd my favorite television show?\u00a0_The Simpsons._\u00a0Which brings us neatly back to 2026.\n\n---\n\nThe first time I remember seeing\u00a0_The Simpsons_, I was ten years old. It was Christmas time, 1989. We were gathered at a family Christmas party at my Mimi and Papa\u2019s condo. At some point,\u00a0_The Simpsons_\u00a0came on television.\n\nAnd when the parents realized what we kids were watching, they promptly ordered us to turn it off.\u00a0_The Simpsons_\u00a0was\u00a0_taboo_. Vile. Inappropriate.\n\nBart Simpson was disrespectful. The show was crude. In retrospect, it all seems so absurd; I guess the entire moral fabric of America was hanging by a thread, and Bart telling someone to eat his shorts might have been enough to finish the job. The mere fact that the adults were barring us from watching it made it that much more tempting to do so. Hell, I still encounter people who forbid their children from watching it.\n\nFor years I\u2019ve carried that memory around without knowing exactly when it happened. But with a little internet sleuthing, it turns out the Christmas episode, \u201cSimpsons Roasting on an Open Fire,\u201d aired on\u00a0**December 17, 1989**. And it was the series premiere.\n\nWhich means there is a very real possibility that my first memory of\u00a0_The Simpsons_\u00a0is a memory of watching\u00a0**the first full-length episode of\u00a0_The Simpsons_**\u00a0when it originally aired.\n\nThat was 1989. I am now 47.\u00a0_The Simpsons_\u00a0is still on television. Crazy comfort is wrought upon my soul because of that fact. Because unwillingly,\u00a0but very much so capably,\u00a0_The Simpsons_\u00a0became a little piece of ongoing inertia in my life.\n\nIt was there when I was ten. It was there when I was 23, writing a blog post about how difficult I found it to watch the cultural symbols of my childhood disappear.\n\nAnd even though I don't catch new episodes regularly, or even admit to any sort of anticipation for them,\u00a0_The Simpsons\u00a0_is still here now. And to me, that hits just fine in my heart.\n\n---\n\nAs I am wont to do, I\u2019ve recently started watching\u00a0_The Simpsons_\u00a0again from the beginning. For the Nth time. Well, last night, I reached season 16, episode 8.\n\nIt originally aired on February 6, 2005, immediately following Super Bowl XXXIX. The title was \u201cHomer and Ned\u2019s Hail Mary Pass.\u201d The episode featured five established athletes playing themselves: Tom Brady, LeBron James, Michelle Kwan, Yao Ming and Warren Sapp.\n\nWhen LeBron came on the screen midway through the episode, I was immediately struck by a sense of awe. That episode aired\u00a0**21 years, 6 months and 8 days ago.**\n\nWarren Sapp, who still had years of football ahead of him that night, retired from the NFL in 2008. Michelle Kwan, then still competing, skated her final competitive event shortly after the episode aired. Yao Ming, 24 years old at the time, retired in 2011. Tom Brady, who'd just won his third Super Bowl that very night, retired for good on February 1, 2023.\n\nBut LeBron James, who was 20 years old and in his second NBA season when the episode aired? He's 41 now, preparing for NBA season number 24, with the Philadelphia 76ers. Of those five athletes, he's the only one still out there.\n\n_The Simpsons_, already considered a touchstone of longevity in and of itself, gathered them together as a snapshot of the sports world of 2005.\n\nBut then, the snapshot aged. One by one, those athletes retired. Some pretty quickly afterward. Some stuck around for an almost absurd amount of time. But somehow, LeBron James is still an active professional athlete. And I realized I had been here before, written these words before.\n\nIn 2002, I was 23 years old, watching Michael Jordan play for the Wizards and feeling strangely reassured that one of the heroes of my childhood could still step onto a basketball court and take over a game.\n\nTwenty-four years later, I\u2019m doing essentially the same thing with LeBron James. The difference, of course, is that LeBron wasn\u2019t one of my childhood heroes. I was already an adult when his career began.\n\nAnd maybe that\u2019s what makes this feel different, because LeBron isn\u2019t keeping my childhood alive. That role is filled by nostalgia and pop icons who have aged out completely or were buried far too soon.\n\nNo, LeBron's job is much harder; more finely honed and sharp. He\u2019s keeping\u00a0**my adulthood**\u00a0connected. He is a human bridge between a version of me who was barely out of his teens and the 47-year-old whose hips now hurt when he gets out of bed.\n\nThat\u2019s an unexpectedly comforting thing.\n\nThere are episodes of\u00a0_The Simpsons_\u00a0that make me feel old because the technology is obsolete, the cultural references are forgotten or the celebrities have disappeared. But this one hits different.\n\nThe entire sports era it captured has come and gone, except for one guy.\n\nI suppose this fascination with who is still out there has become more personal for me, too.\n\n---\n\nMy dad was born in 1944, and he is still kicking around. My mom passed away in 2024. So did my brother, from complications of diabetes. There are photographs of my own family now that have already started to lose that earthly sense of continuity. People who were once simply there, standing beside us, have become people we remember standing there.\n\nNot long ago I was doing some genealogy work online and found a census record for my dad\u2019s childhood home. It must have been the 1950 census. There were five people listed in the household: my grandparents, my dad, his brother Brent and his sister JoEllen.\n\nFive names. One little household, frozen in place by the federal government in 1950.\u00a0My grandparents are gone. Brent and JoEllen both died prematurely about six years ago.\n\nI looked at my dad and said, \u201cYou\u2019re all that\u2019s left of this record.\u201d\n\nAnd he is.\n\nI think about that\u00a0_Vogue_\u00a0article differently now. It is one thing to watch a roster of movie stars disappear from a song, or athletes slowly retire from an old episode of\u00a0_The Simpsons_. Those things give us a safe way to watch time work. Then eventually you find the census record with your own family on it, or look at a photograph and realize some of the people in it no longer exist anywhere except in memory.\n\nSuddenly the idea of someone still being out there carries a little more weight.\n\nAnd meanwhile, the television show containing that snapshot has managed an even more ridiculous feat.\u00a0_It was there_ at my grandparents\u2019 condo when I was ten years old and somebody\u2019s parent frantically ordered us to turn off this dangerous new cartoon.\n\n_It was there _when I was 23, writing about Michael Jordan and my inability to let go of the past. _It was there_ in 2005, putting a 20-year-old LeBron James into an episode. _And it is still here_ while I sit at 47 and write about all of them.\n\nMaybe that\u2019s what I\u2019m actually looking for when I get nostalgic. It's not a way back; it's perhaps a little evidence of continuity. It is literally something familiar moving forward beside me.\n\nAt 23, Michael Jordan gave me that.\u00a0At 47, apparently it\u2019s LeBron James. He\u2019s still out there, enjoying his life.\n\n_The Simpsons_\u00a0is still out there, too. My dad is still out there. And, come to think of it, so am I.\n\nEventually, every photograph loses its last living person. Every roster becomes a list of names from another time. Maybe that\u2019s why I find so much comfort in the few things that refuse to become photographs without inertia. Not yet, anyway.\n\nAlso, I\u2019m pretty sure I\u2019m a 76ers fan now.",
