@@ -713,36 +713,6 @@
             height: 31px;
         }
 
-        .internal-tool-visual.is-product-logo {
-            position: relative;
-            display: block;
-            width: 178px;
-            height: 64px;
-            overflow: hidden;
-            border-color: rgba(var(--tool-accent-rgb), 0.35);
-            border-radius: 4px;
-            background: rgba(0, 0, 0, 0.18);
-        }
-
-        .fleet-product-logo,
-        .greet-product-logo {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 154px;
-            max-width: none;
-            transform: translate(-50%, -50%);
-        }
-
-        .current-product-logo {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 184px;
-            max-width: none;
-            transform: translate(-50%, -50%) scale(1.15);
-        }
-
         .internal-tool-card h3 {
             margin-bottom: 14px;
             font-size: clamp(1.45rem, 2.2vw, 1.8rem);
@@ -1311,7 +1281,8 @@
                         <h2 id="work-heading">Apps and systems</h2>
                         <p>
                             I have taken consumer apps from idea through design, development, and release on the App
-                            Store. I also build private tools that help organizations manage everyday work.
+                            Store. In my professional role, I have also designed and developed private systems that
+                            support everyday organizational work.
                         </p>
                     </div>
 
@@ -1366,28 +1337,33 @@
                     <div class="work-group internal-tools">
                         <div class="internal-tools-intro">
                             <div>
-                                <p class="internal-tools-kicker">Internal software</p>
-                                <h3>Custom software for complex operations.</h3>
+                                <p class="internal-tools-kicker">Professional experience</p>
+                                <h3>Internal systems developed in my professional role.</h3>
                             </div>
                             <p>
-                                I designed and developed these products from the ground up with advanced, modern web
-                                technologies. Each one is shaped around real organizational workflows and rivals the
-                                capability and polish of industry-standard platforms that can cost thousands of dollars.
+                                In my salaried technology role, I have designed and developed custom inventory,
+                                project-management, and visitor-welcome systems using modern web technologies. These are
+                                private organizational tools, so their interfaces and implementation details are not
+                                publicly available.
                             </p>
                         </div>
                         <div class="work-grid work-grid-three">
                             <article class="work-card internal-tool-card is-inventory">
-                                <div class="internal-tool-visual is-product-logo">
-                                    <img class="fleet-product-logo" src="Images/assets/fleet-product-logo.png" alt=""
-                                        width="900" height="300" loading="lazy" />
+                                <div class="internal-tool-visual" aria-hidden="true">
+                                    <svg viewBox="0 0 32 32" fill="none">
+                                        <path d="M6 8.5 16 4l10 4.5-10 4.7L6 8.5Z" stroke="currentColor"
+                                            stroke-width="1.7" stroke-linejoin="round" />
+                                        <path d="M6 8.5v7L16 20l10-4.5v-7M6 15.5V23L16 28l10-5v-7.5M16 13.2V28"
+                                            stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" />
+                                    </svg>
                                 </div>
                                 <p class="internal-tool-kicker">Inventory and asset operations</p>
-                                <h3>Fleet</h3>
+                                <h3>Inventory and asset system</h3>
                                 <p>
-                                    A purpose-built inventory platform for tracking organizational equipment,
-                                    assignments, status, ownership, returns, and the full lifecycle of important assets.
+                                    An internal system for tracking organizational equipment, assignments, status,
+                                    ownership, returns, and asset lifecycles.
                                 </p>
-                                <ul class="internal-tool-details" aria-label="Fleet capabilities">
+                                <ul class="internal-tool-details" aria-label="Inventory and asset system capabilities">
                                     <li>Asset lifecycle</li>
                                     <li>Assignments</li>
                                     <li>Accountability</li>
@@ -1395,17 +1371,23 @@
                             </article>
 
                             <article class="work-card internal-tool-card is-current">
-                                <div class="internal-tool-visual is-product-logo">
-                                    <img class="current-product-logo" src="Images/assets/current-product-logo.png" alt=""
-                                        width="768" height="768" loading="lazy" />
+                                <div class="internal-tool-visual" aria-hidden="true">
+                                    <svg viewBox="0 0 32 32" fill="none">
+                                        <rect x="5" y="5" width="22" height="22" rx="3" stroke="currentColor"
+                                            stroke-width="1.7" />
+                                        <path d="m10 12 2 2 4-4M19 12h4M10 20l2 2 4-4M19 20h4"
+                                            stroke="currentColor" stroke-width="1.7" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                    </svg>
                                 </div>
                                 <p class="internal-tool-kicker">Project and operations management</p>
-                                <h3>CFSS Current</h3>
+                                <h3>Project and operations system</h3>
                                 <p>
-                                    A secure shared operating system for projects, work items, owners, priorities,
-                                    target dates, progress, intake, recurring responsibilities, and leadership visibility.
+                                    An internal platform for coordinating projects, work items, owners, priorities,
+                                    target dates, progress, intake, and recurring responsibilities.
                                 </p>
-                                <ul class="internal-tool-details" aria-label="CFSS Current capabilities">
+                                <ul class="internal-tool-details"
+                                    aria-label="Project and operations system capabilities">
                                     <li>Projects and work</li>
                                     <li>Operational intake</li>
                                     <li>Shared visibility</li>
@@ -1413,17 +1395,22 @@
                             </article>
 
                             <article class="work-card internal-tool-card is-greeter">
-                                <div class="internal-tool-visual is-product-logo">
-                                    <img class="greet-product-logo" src="Images/assets/greet-product-logo.png" alt=""
-                                        width="900" height="300" loading="lazy" />
+                                <div class="internal-tool-visual" aria-hidden="true">
+                                    <svg viewBox="0 0 32 32" fill="none">
+                                        <path d="M7 27V5h14v22M21 9h4v18H4" stroke="currentColor" stroke-width="1.7"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                        <circle cx="14" cy="13" r="3" stroke="currentColor" stroke-width="1.7" />
+                                        <path d="M9.5 22c.6-3 2.1-4.5 4.5-4.5s3.9 1.5 4.5 4.5" stroke="currentColor"
+                                            stroke-width="1.7" stroke-linecap="round" />
+                                    </svg>
                                 </div>
                                 <p class="internal-tool-kicker">Tablet-first visitor experience</p>
-                                <h3>Greet</h3>
+                                <h3>Visitor welcome system</h3>
                                 <p>
-                                    A welcoming front-desk application that guides visitor arrival, presents important
-                                    information clearly, and gives staff a simpler, more consistent handoff.
+                                    A tablet-first internal application that guides visitor arrival, presents important
+                                    information clearly, and supports a consistent front-desk handoff.
                                 </p>
-                                <ul class="internal-tool-details" aria-label="Guest greeter app capabilities">
+                                <ul class="internal-tool-details" aria-label="Visitor welcome system capabilities">
                                     <li>Tablet-first</li>
                                     <li>Guided arrival</li>
                                     <li>Front-desk handoff</li>
