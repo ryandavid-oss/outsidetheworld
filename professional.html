@@ -2,1515 +2,1141 @@
 <html lang="en">
 
 <head>
-    <!-- Core -->
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta content="#0a0a0a" name="theme-color" />
-    <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style" />
-
-    <!-- Primary SEO -->
-    <title>Professional Archive | Web Development, Design & Systems Practice | Outside The World</title>
-    <meta name="description"
-        content="A professional archive documenting web development, iOS app development, digital design, systems practice, and brand architecture from Queen Creek, Arizona. Outside The World serves as a record of professional capabilities, research, and long-form technical observation.">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="color-scheme" content="dark" />
     <meta name="robots" content="index,follow,max-image-preview:large" />
-    <meta name="author" content="Outside the World is New, LLC" />
+    <meta name="author" content="RyanDavid Burningham" />
+
+    <title>RyanDavid Burningham | Technology Consultant, Web &amp; App Developer</title>
+    <meta name="description"
+        content="RyanDavid Burningham is a technology consultant, web developer, and iOS app developer in Queen Creek, Arizona. Available for consulting, development, design, and digital operations work." />
     <link rel="canonical" href="https://outsidetheworld.com/professional.html" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 
-    <!-- Icons -->
-    <link href="favicon.svg" rel="icon" type="image/svg+xml" />
-
-    <!-- Performance: Fonts -->
-    <link rel="preload" as="font" href="/assets/fonts/inter-latin-variable.woff2" type="font/woff2" crossorigin="anonymous" />
-    <link rel="preload" as="font" href="/assets/fonts/fira-code-latin-variable.woff2" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" as="font" href="/assets/fonts/inter-latin-variable.woff2" type="font/woff2"
+        crossorigin="anonymous" />
+    <link rel="preload" as="image" href="Images/Profile.jpg" />
     <link rel="stylesheet" href="assets/fonts/otw-fonts.css?v=20260722a" />
+    <link rel="stylesheet" href="theme.css" />
 
-    <!-- Social -->
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content="profile" />
     <meta property="og:site_name" content="Outside The World" />
     <meta property="og:locale" content="en_US" />
-    <meta property="og:title" content="Outside The World | Professional Archive & Systems Practice">
+    <meta property="og:title" content="RyanDavid Burningham | Technology Consultant, Web &amp; App Developer" />
     <meta property="og:description"
-        content="A professional archive of web development, iOS app development, digital design, systems practice, and brand architecture from Queen Creek, Arizona.">
-    <meta property="og:image" content="https://outsidetheworld.com/Images/SocialPreview.jpg">
-    <meta property="og:url" content="https://outsidetheworld.com/professional.html">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Outside The World | Professional Archive & Systems Practice">
+        content="Technology consulting, web development, iOS app development, digital design, and technology operations." />
+    <meta property="og:url" content="https://outsidetheworld.com/professional.html" />
+    <meta property="og:image" content="https://outsidetheworld.com/Images/SocialPreview.jpg" />
+    <meta property="og:image:alt" content="Outside The World" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="RyanDavid Burningham | Technology Consultant, Web &amp; App Developer" />
     <meta name="twitter:description"
-        content="A professional archive of web development, iOS app development, digital design, systems practice, and brand architecture from Queen Creek, Arizona.">
-    <meta name="twitter:image" content="https://outsidetheworld.com/Images/SocialPreview.jpg">
+        content="Technology consulting, web development, iOS app development, digital design, and technology operations." />
+    <meta name="twitter:image" content="https://outsidetheworld.com/Images/SocialPreview.jpg" />
 
-    <!-- Analytics -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "@id": "https://outsidetheworld.com/professional.html#service",
+      "name": "Outside the World is New, LLC",
+      "url": "https://outsidetheworld.com/professional.html",
+      "image": "https://outsidetheworld.com/Images/Equal.svg",
+      "description": "Technology consulting, web development, iOS app development, digital design, and technology operations by RyanDavid Burningham.",
+      "serviceType": [
+        "Technology Consulting",
+        "Web Development",
+        "iOS App Development",
+        "Digital Design",
+        "Technology Operations"
+      ],
+      "areaServed": [
+        {
+          "@type": "Country",
+          "name": "United States"
+        },
+        {
+          "@type": "City",
+          "name": "Queen Creek, Arizona"
+        }
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Queen Creek",
+        "addressRegion": "AZ",
+        "postalCode": "85142",
+        "addressCountry": "US"
+      },
+      "provider": {
+        "@type": "Person",
+        "@id": "https://outsidetheworld.com/ryandavid-burningham.html#person",
+        "name": "RyanDavid Burningham",
+        "url": "https://outsidetheworld.com/ryandavid-burningham.html",
+        "jobTitle": "Technology Consultant, Web and App Developer",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Outside the World is New, LLC",
+          "url": "https://outsidetheworld.com"
+        }
+      }
+    }
+    </script>
 
-    <!-- Page CSS -->
     <style>
         :root {
-            /* Brand */
-            --brand-blue: #6395ee;
-            --brand-teal: #91afb3;
-            --brand-light-blue: #a3c2ff;
-            --brand-magenta: #9b59b6;
-
-            /* Surfaces */
-            --bg-dark: #0a0a0a;
-            --bg-deeper: #070707;
-            --card-bg: rgba(255, 255, 255, 0.03);
-
-            /* Borders / glow */
-            --border: rgba(255, 255, 255, 0.08);
-            --border-soft: rgba(255, 255, 255, 0.06);
-            --glow-blue: rgba(99, 149, 238, 0.35);
-            --glow-teal: rgba(145, 175, 179, 0.25);
-
-            /* Layout */
-            --container: 1120px;
-            --container-wide: 1200px;
-            --pad-x: clamp(18px, 4vw, 56px);
-
-            /* Type */
-            --font-sans: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-            --font-mono: 'Fira Code', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-
-            /* Radius / shadow */
-            --r-sm: 10px;
-            --r-md: 16px;
-            --r-lg: 22px;
-
-            --shadow-1: 0 18px 45px rgba(0, 0, 0, 0.55);
-            --shadow-2: 0 25px 70px rgba(0, 0, 0, 0.7);
-
-            /* Motion */
-            --ease: cubic-bezier(0.23, 1, 0.32, 1);
+            --page-bg: #0a0a0a;
+            --surface: #111214;
+            --surface-raised: #17181b;
+            --text: #f4f4f2;
+            --muted: #b7b9bd;
+            --faint: #888b91;
+            --rule: rgba(255, 255, 255, 0.13);
+            --rule-strong: rgba(255, 255, 255, 0.22);
+            --blue: #6395ee;
+            --light-blue: #a0bef5;
+            --teal: #91afb3;
+            --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --content: 1160px;
+            --gutter: clamp(20px, 5vw, 64px);
         }
 
-        /* Harden layout */
         *,
         *::before,
         *::after {
             box-sizing: border-box;
         }
 
-        html,
-        body {
-            width: 100%;
-            max-width: 100%;
-            overflow-x: hidden;
+        html {
+            scroll-behavior: smooth;
+            background: var(--page-bg);
         }
 
-        @supports (overflow-x: clip) {
+        body {
+            min-width: 320px;
+            margin: 0;
+            overflow-x: hidden;
+            background:
+                radial-gradient(circle at 88% 4%, rgba(99, 149, 238, 0.09), transparent 29rem),
+                var(--page-bg);
+            color: var(--text);
+            font-family: var(--font-sans);
+            font-size: 16px;
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+        }
 
-            html,
-            body {
-                overflow-x: clip;
-            }
+        body::after {
+            opacity: 0.16;
+        }
+
+        a {
+            color: inherit;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 0.2em;
+        }
+
+        a:hover {
+            color: var(--light-blue);
         }
 
         img {
+            display: block;
             max-width: 100%;
             height: auto;
-            display: block;
         }
 
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: var(--bg-dark);
-            color: #fff;
-            font-family: var(--font-sans);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-            position: relative;
+        button,
+        input,
+        select,
+        textarea {
+            font: inherit;
         }
 
-        /* Cinematic background field */
-        body::before {
-            content: "";
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 0;
-            background:
-                radial-gradient(900px 700px at 15% 18%, rgba(99, 149, 238, 0.14), transparent 55%),
-                radial-gradient(900px 700px at 85% 12%, rgba(145, 175, 179, 0.10), transparent 55%),
-                radial-gradient(900px 700px at 50% 85%, rgba(99, 149, 238, 0.10), transparent 60%),
-                linear-gradient(to bottom, rgba(255, 255, 255, 0.03), transparent 28%, rgba(0, 0, 0, 0.45) 100%);
-            opacity: 1;
-        }
-
-        /* Subtle grid + noise */
-        body::after {
-            content: "";
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 0;
-            background:
-                linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-            background-size: 70px 70px;
-            mask-image: radial-gradient(circle at 50% 25%, black 0%, transparent 60%);
-            opacity: 0.15;
-        }
-
-        /* Skip link (a11y, no content removed) */
-        .skip {
-            position: absolute;
-            left: -999px;
-            top: 10px;
-            background: #fff;
-            color: #000;
-            padding: 10px 14px;
-            border-radius: 8px;
-            z-index: 9999;
-            text-decoration: none;
-            font-weight: 800;
-        }
-
-        .skip:focus {
-            left: 12px;
-        }
-
-        /* Cursor elements kept as-is; give safe defaults */
-        #cursor-ring,
-        #cursor-dot {
-            position: fixed;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            z-index: 9999;
-        }
-
-        /* Site wrapper ensures content sits above background layers */
-        .site {
+        .page {
             position: relative;
             z-index: 1;
         }
 
         .container {
-            width: min(var(--container), 100%);
+            width: min(100%, calc(var(--content) + (var(--gutter) * 2)));
             margin: 0 auto;
-            padding: 0 var(--pad-x);
+            padding-inline: var(--gutter);
         }
 
-        .container-wide {
-            width: min(var(--container-wide), 100%);
-            margin: 0 auto;
-            padding: 0 var(--pad-x);
+        .skip-link {
+            position: fixed;
+            top: 12px;
+            left: 12px;
+            z-index: 100;
+            padding: 10px 14px;
+            transform: translateY(-150%);
+            border-radius: 4px;
+            background: #fff;
+            color: #000;
+            font-weight: 700;
         }
 
-        /* Header / Nav — archive header with stronger OTW continuity */
-        nav {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            padding: 18px 0;
-            background:
-                linear-gradient(to bottom, rgba(10, 10, 10, 0.72), rgba(10, 10, 10, 0.28)),
-                radial-gradient(720px 120px at 10% 0%, rgba(99, 149, 238, 0.12), transparent 60%);
-            backdrop-filter: blur(12px);
+        .skip-link:focus {
+            transform: translateY(0);
         }
 
-        .nav-shell {
+        .site-header {
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .header-inner {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 28px;
+            gap: 32px;
+            min-height: 104px;
         }
 
-        .nav-logo {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .nav-logo a {
+        .brand {
             display: inline-flex;
             align-items: center;
-            gap: 16px;
+            flex: 0 1 250px;
             text-decoration: none;
-            max-width: 540px;
         }
 
-        .nav-logo img {
-            height: 62px;
-            width: auto;
-            opacity: 1;
+        .brand img {
+            width: 250px;
         }
 
-        .nav-copy {
-            display: grid;
-            gap: 4px;
-            min-width: 0;
-        }
-
-        .nav-kicker,
-        .nav-meta {
-            font-family: var(--font-mono);
-            text-transform: uppercase;
-        }
-
-        .nav-kicker {
-            margin: 0;
-            color: #eef4ff;
-            letter-spacing: 0.2em;
-            font-size: 0.62rem;
-            line-height: 1.6;
-        }
-
-        .nav-subline {
-            margin: 0;
-            color: #90a2b8;
-            font-size: 0.76rem;
-            letter-spacing: 0.02em;
-            line-height: 1.55;
-            max-width: 28ch;
-        }
-
-        .nav-meta {
+        .site-nav {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: flex-end;
-            gap: 10px;
-            color: var(--brand-teal);
-            font-size: 0.64rem;
-            letter-spacing: 0.22em;
-            flex-shrink: 0;
-        }
-
-        .nav-meta span {
-            display: inline-flex;
             align-items: center;
-            gap: 10px;
+            justify-content: flex-end;
+            gap: clamp(18px, 3vw, 34px);
+            color: var(--muted);
+            font-size: 0.9rem;
         }
 
-        .nav-meta span:not(:last-child)::after {
-            content: "/";
-            color: rgba(145, 175, 179, 0.45);
+        .site-nav a {
+            text-decoration: none;
         }
 
-        /* Hero — more authored and less service-page */
         .hero {
-            padding: clamp(34px, 6vw, 56px) 0 clamp(42px, 6vw, 72px);
+            padding: clamp(72px, 11vw, 132px) 0 clamp(72px, 9vw, 112px);
+            border-bottom: 1px solid var(--rule);
         }
 
-        .hero-shell {
+        .hero-grid {
             display: grid;
-            grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.85fr);
-            gap: clamp(28px, 4vw, 56px);
-            align-items: start;
+            grid-template-columns: minmax(0, 1.5fr) minmax(260px, 0.5fr);
+            align-items: end;
+            gap: clamp(48px, 8vw, 112px);
+        }
+
+        .hero-name {
+            margin: 0 0 22px;
+            color: var(--light-blue);
+            font-size: 0.95rem;
+            font-weight: 650;
+            letter-spacing: 0.02em;
+        }
+
+        h1,
+        h2,
+        h3,
+        p {
+            margin-top: 0;
+        }
+
+        h1 {
+            max-width: 900px;
+            margin-bottom: 32px;
+            font-size: clamp(3rem, 7.2vw, 6.7rem);
+            font-weight: 580;
+            letter-spacing: -0.055em;
+            line-height: 0.98;
+        }
+
+        .hero-lede {
+            max-width: 780px;
+            margin-bottom: 22px;
+            color: var(--text);
+            font-size: clamp(1.25rem, 2vw, 1.65rem);
+            line-height: 1.45;
         }
 
         .hero-copy {
             max-width: 760px;
+            margin-bottom: 38px;
+            color: var(--muted);
+            font-size: 1.05rem;
         }
 
-        .hero-eyebrow {
-            font-family: var(--font-mono);
-            font-size: 0.64rem;
-            color: var(--brand-teal);
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            margin: 0 0 20px;
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .hero-eyebrow::before {
-            content: "";
-            width: 54px;
-            height: 1px;
-            background: linear-gradient(to right, rgba(145, 175, 179, 0.05), rgba(145, 175, 179, 0.65));
-        }
-
-        .hero h1 {
-            font-size: clamp(3.2rem, 9vw, 6.9rem);
-            line-height: 0.9;
-            font-weight: 900;
-            letter-spacing: -0.06em;
-            margin: 0;
-            max-width: 9ch;
-            background: linear-gradient(110deg, #ffffff 0%, var(--brand-light-blue) 52%, rgba(145, 175, 179, 0.96) 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 34px rgba(99, 149, 238, 0.1);
-        }
-
-        .hero-lede {
-            margin: 22px 0 0;
-            font-size: clamp(1.08rem, 2vw, 1.26rem);
-            color: #bcc6d1;
-            line-height: 1.85;
-            max-width: 58ch;
-            font-weight: 300;
-        }
-
-        .hero-manifest {
-            position: relative;
-            overflow: hidden;
-            padding: 24px 24px 22px;
-            border-radius: var(--r-lg);
-            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.025));
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: var(--shadow-1);
-        }
-
-        .hero-manifest::before {
-            content: "";
-            position: absolute;
-            inset: -2px;
-            background:
-                radial-gradient(560px 160px at 15% 0%, rgba(99, 149, 238, 0.22), transparent 62%),
-                radial-gradient(560px 180px at 100% 0%, rgba(145, 175, 179, 0.16), transparent 62%);
-            opacity: 0.85;
-            pointer-events: none;
-        }
-
-        .hero-manifest > * {
-            position: relative;
-            z-index: 1;
-        }
-
-        .manifest-kicker {
-            margin: 0 0 12px;
-            font-family: var(--font-mono);
-            font-size: 0.64rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--brand-teal);
-        }
-
-        .manifest-title {
-            margin: 0 0 12px;
-            font-size: 1.3rem;
-            line-height: 1.2;
-            letter-spacing: 0.02em;
-            text-transform: uppercase;
-            color: #fff;
-        }
-
-        .manifest-copy {
-            margin: 0;
-            color: #aeb8c4;
-            line-height: 1.8;
-            font-size: 0.98rem;
-        }
-
-        .manifest-tags {
+        .actions {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 18px;
+            gap: 12px;
         }
 
-        .manifest-tag {
+        .button {
             display: inline-flex;
             align-items: center;
-            padding: 9px 12px;
-            border-radius: 999px;
-            border: 1px solid rgba(255, 255, 255, 0.09);
-            background: rgba(255, 255, 255, 0.03);
-            color: #d5dce4;
-            font-family: var(--font-mono);
-            font-size: 0.68rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-        }
-
-        .hero-band {
-            margin-top: clamp(30px, 4vw, 48px);
-            height: 1px;
-            background: linear-gradient(to right, transparent, rgba(99, 149, 238, 0.3), rgba(145, 175, 179, 0.22), transparent);
-            opacity: 0.95;
-        }
-
-        .professional-main {
-            display: grid;
-            gap: 30px;
-            padding-bottom: 92px;
-        }
-
-        .section-panel {
-            position: relative;
-            overflow: hidden;
-            border-radius: var(--r-lg);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
-            box-shadow: var(--shadow-1);
-        }
-
-        .section-panel::before {
-            content: "";
-            position: absolute;
-            inset: -2px;
-            background:
-                radial-gradient(840px 260px at 10% 0%, rgba(99, 149, 238, 0.15), transparent 60%),
-                radial-gradient(720px 240px at 100% 0%, rgba(145, 175, 179, 0.11), transparent 58%);
-            opacity: 0.75;
-            pointer-events: none;
-        }
-
-        .section-panel > * {
-            position: relative;
-            z-index: 1;
-        }
-
-        .section-inner {
-            padding: clamp(24px, 4vw, 38px);
-        }
-
-        .section-kicker {
-            margin: 0 0 14px;
-            font-family: var(--font-mono);
-            font-size: 0.64rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--brand-teal);
-        }
-
-        .section-title {
-            margin: 0;
-            font-size: clamp(1.6rem, 3.2vw, 2.5rem);
-            line-height: 1.04;
-            letter-spacing: -0.04em;
-            color: #fff;
-        }
-
-        .section-copy {
-            margin: 16px 0 0;
-            color: #aab3be;
-            line-height: 1.9;
-            font-size: 1rem;
-            max-width: 62ch;
-        }
-
-        .thesis-layout {
-            display: grid;
-            grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.2fr);
-            gap: clamp(24px, 4vw, 44px);
-            align-items: start;
-        }
-
-        .thesis-marks {
-            display: grid;
-            gap: 12px;
-            margin-top: 24px;
-        }
-
-        .thesis-mark {
-            display: grid;
-            grid-template-columns: 68px 1fr;
-            gap: 16px;
-            align-items: start;
-            padding-top: 12px;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-        }
-
-        .thesis-mark span {
-            font-family: var(--font-mono);
-            font-size: 0.68rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--brand-light-blue);
-        }
-
-        .thesis-mark p {
-            margin: 0;
-            color: #c8d0d8;
-            line-height: 1.7;
-        }
-
-        .signal-grid {
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            gap: 18px;
-        }
-
-        .signal-card,
-        .signal-link {
-            grid-column: span 4;
-            position: relative;
-            overflow: hidden;
-            border-radius: var(--r-lg);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            background: rgba(255, 255, 255, 0.03);
-            padding: 26px 26px 24px;
+            justify-content: center;
+            min-height: 50px;
+            padding: 12px 20px;
+            border: 1px solid var(--rule-strong);
+            border-radius: 4px;
+            background: transparent;
+            color: var(--text);
+            font-size: 0.95rem;
+            font-weight: 650;
             text-decoration: none;
-            transition: transform 0.35s var(--ease), border-color 0.35s var(--ease), background 0.35s var(--ease), box-shadow 0.35s var(--ease);
+            transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease;
         }
 
-        .signal-card::before,
-        .signal-link::before {
-            content: "";
-            position: absolute;
-            inset: -2px;
-            background:
-                radial-gradient(520px 180px at 15% 0%, rgba(99, 149, 238, 0.16), transparent 60%),
-                radial-gradient(520px 180px at 100% 0%, rgba(145, 175, 179, 0.12), transparent 60%);
-            opacity: 0.72;
-            pointer-events: none;
+        .button:hover {
+            border-color: var(--text);
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--text);
         }
 
-        .signal-card > *,
-        .signal-link > * {
-            position: relative;
-            z-index: 1;
+        .button-primary {
+            border-color: var(--text);
+            background: var(--text);
+            color: #0a0a0a;
         }
 
-        .signal-link:hover,
-        .signal-card:hover {
-            transform: translateY(-6px);
-            border-color: rgba(99, 149, 238, 0.42);
-            background: rgba(99, 149, 238, 0.05);
-            box-shadow: var(--shadow-1);
+        .button-primary:hover {
+            border-color: var(--light-blue);
+            background: var(--light-blue);
+            color: #0a0a0a;
         }
 
-        .signal-card.signal-magenta {
-            background: linear-gradient(to bottom, rgba(155, 89, 182, 0.12), rgba(155, 89, 182, 0.05));
-            border-color: rgba(155, 89, 182, 0.22);
-        }
-
-        .signal-card.signal-magenta::before {
-            background:
-                radial-gradient(520px 180px at 15% 0%, rgba(155, 89, 182, 0.28), transparent 60%),
-                radial-gradient(520px 180px at 100% 0%, rgba(99, 149, 238, 0.12), transparent 60%);
-            opacity: 0.88;
-        }
-
-        .signal-card.signal-magenta:hover {
-            border-color: rgba(155, 89, 182, 0.5);
-            background: linear-gradient(to bottom, rgba(155, 89, 182, 0.15), rgba(155, 89, 182, 0.06));
-        }
-
-        .signal-card.signal-magenta .signal-badge {
-            border-color: rgba(155, 89, 182, 0.4);
-            background: rgba(155, 89, 182, 0.16);
-            color: #f0d8fb;
-        }
-
-        .signal-meta {
-            margin: 0 0 10px;
-            font-family: var(--font-mono);
-            font-size: 0.64rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--brand-teal);
-        }
-
-        .signal-title {
+        .portrait {
             margin: 0;
-            font-size: 1.2rem;
-            line-height: 1.2;
-            letter-spacing: 0.02em;
-            text-transform: uppercase;
-            color: #fff;
         }
 
-        .signal-copy {
-            margin: 12px 0 0;
-            color: #b9c3cc;
-            line-height: 1.8;
-            font-size: 0.98rem;
-        }
-
-        .signal-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            margin-top: 20px;
-        }
-
-        .signal-badge,
-        .signal-arrow {
-            font-family: var(--font-mono);
-            font-size: 0.68rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        .signal-badge {
-            display: inline-flex;
-            align-items: center;
-            padding: 10px 12px;
-            border-radius: 999px;
-            border: 1px solid rgba(99, 149, 238, 0.28);
-            background: rgba(99, 149, 238, 0.08);
-            color: var(--brand-light-blue);
-        }
-
-        .signal-arrow {
-            color: var(--brand-light-blue);
-            transition: transform 0.35s var(--ease);
-        }
-
-        .signal-link:hover .signal-arrow {
-            transform: translateX(8px);
-        }
-
-        .fields-grid {
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            gap: 18px;
-            margin-top: 24px;
-        }
-
-        .field-card {
-            grid-column: span 6;
-            position: relative;
-            overflow: hidden;
-            border-radius: var(--r-lg);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            background: rgba(255, 255, 255, 0.03);
-            padding: 26px 26px 24px;
-        }
-
-        .field-card::before {
-            content: "";
-            position: absolute;
-            inset: -2px;
-            background:
-                radial-gradient(540px 180px at 12% 0%, rgba(99, 149, 238, 0.12), transparent 62%),
-                radial-gradient(540px 180px at 100% 0%, rgba(145, 175, 179, 0.1), transparent 62%);
-            opacity: 0.74;
-            pointer-events: none;
-        }
-
-        .field-card > * {
-            position: relative;
-            z-index: 1;
-        }
-
-        .field-index {
-            margin: 0 0 12px;
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--brand-light-blue);
-        }
-
-        .field-card h3 {
-            margin: 0;
-            font-size: 1.16rem;
-            letter-spacing: 0.04em;
-            text-transform: uppercase;
-            color: #fff;
-        }
-
-        .field-card p {
-            margin: 12px 0 0;
-            color: #c1cad3;
-            line-height: 1.8;
-        }
-
-        .memo-layout {
-            display: grid;
-            grid-template-columns: minmax(0, 1.05fr) minmax(360px, 0.95fr);
-            gap: clamp(24px, 4vw, 42px);
-            align-items: start;
-        }
-
-        .memo-side {
-            display: grid;
-            gap: 18px;
-        }
-
-        .memo-quote {
-            margin: 0 0 20px;
-            font-size: clamp(1.35rem, 3vw, 2.2rem);
-            line-height: 1.25;
-            color: #edf1f5;
-            max-width: 24ch;
-        }
-
-        .memo-body {
-            display: grid;
-            gap: 18px;
-            color: #aab3be;
-            line-height: 1.92;
-            font-size: 1rem;
-        }
-
-        .signature {
+        .portrait img {
             width: 100%;
-            border-radius: var(--r-md);
-            padding: 26px;
-            background: rgba(145, 175, 179, 0.03);
-            border: 1px solid rgba(145, 175, 179, 0.10);
-            display: flex;
-            align-items: center;
-            gap: 22px;
-        }
-
-        .signature > div {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .signature img {
-            width: 110px;
-            height: 110px;
-            border-radius: 50%;
-            border: 2px solid var(--brand-teal);
+            aspect-ratio: 4 / 5;
+            border: 1px solid var(--rule);
+            border-radius: 4px;
             object-fit: cover;
-            box-shadow: 0 0 30px rgba(145, 175, 179, 0.08);
+            object-position: center 28%;
         }
 
-        .signature-name {
-            margin: 0;
-            font-weight: 900;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            font-size: clamp(1.05rem, 2vw, 1.4rem);
-            color: #fff;
-            line-height: 1.35;
-            overflow-wrap: anywhere;
+        .portrait figcaption {
+            margin-top: 14px;
+            color: var(--faint);
+            font-size: 0.82rem;
         }
 
-        .signature-name a {
-            color: inherit;
-            text-decoration-color: rgba(160, 190, 245, 0.38);
-            text-decoration-thickness: 1px;
-            text-underline-offset: 0.22em;
+        .section {
+            padding: clamp(68px, 9vw, 108px) 0;
+            border-bottom: 1px solid var(--rule);
         }
 
-        .signature-name a:hover,
-        .signature-name a:focus-visible {
-            color: var(--brand-light-blue);
-        }
-
-        .signature-meta {
-            margin: 8px 0 0;
-            font-family: var(--font-mono);
-            font-size: 0.72rem;
-            color: var(--brand-teal);
-            letter-spacing: 3px;
-        }
-
-        .profile-rail {
+        .section-intro {
             display: grid;
-            gap: 14px;
+            grid-template-columns: minmax(180px, 0.38fr) minmax(0, 1fr);
+            gap: clamp(36px, 7vw, 96px);
+            margin-bottom: clamp(48px, 7vw, 78px);
         }
 
-        .profile-fact {
-            position: relative;
-            overflow: hidden;
-            border-radius: var(--r-md);
-            border: 1px solid rgba(255, 255, 255, 0.07);
-            background: rgba(255, 255, 255, 0.025);
-            padding: 18px 20px;
+        .section h2 {
+            margin-bottom: 0;
+            font-size: clamp(2rem, 4vw, 3.7rem);
+            font-weight: 580;
+            letter-spacing: -0.045em;
+            line-height: 1.05;
         }
 
-        .profile-fact::before {
-            content: "";
-            position: absolute;
-            inset: -2px;
-            background:
-                radial-gradient(420px 140px at 10% 0%, rgba(99, 149, 238, 0.1), transparent 62%),
-                radial-gradient(420px 140px at 100% 0%, rgba(145, 175, 179, 0.08), transparent 62%);
-            opacity: 0.75;
-            pointer-events: none;
+        .section-intro p {
+            max-width: 720px;
+            margin-bottom: 0;
+            color: var(--muted);
+            font-size: clamp(1.05rem, 1.6vw, 1.25rem);
         }
 
-        .profile-fact > * {
-            position: relative;
-            z-index: 1;
+        .services {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            border-top: 1px solid var(--rule);
         }
 
-        .profile-fact-label {
-            margin: 0 0 8px;
-            font-family: var(--font-mono);
-            font-size: 0.62rem;
-            letter-spacing: 0.22em;
-            text-transform: uppercase;
-            color: var(--brand-teal);
+        .service {
+            min-height: 260px;
+            padding: 34px 38px 38px 0;
+            border-bottom: 1px solid var(--rule);
         }
 
-        .profile-fact-value {
-            margin: 0;
-            color: #eef2f6;
+        .service:nth-child(odd) {
+            padding-right: clamp(32px, 5vw, 72px);
+            border-right: 1px solid var(--rule);
+        }
+
+        .service:nth-child(even) {
+            padding-left: clamp(32px, 5vw, 72px);
+        }
+
+        .service h3,
+        .work-card h3,
+        .experience-item h3 {
+            margin-bottom: 14px;
+            font-size: clamp(1.35rem, 2vw, 1.7rem);
+            font-weight: 620;
+            letter-spacing: -0.025em;
+            line-height: 1.2;
+        }
+
+        .service p,
+        .work-card p,
+        .experience-item p {
+            margin-bottom: 0;
+            color: var(--muted);
+        }
+
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .work-group + .work-group {
+            margin-top: 58px;
+        }
+
+        .work-group-title {
+            margin-bottom: 20px;
+            color: var(--muted);
             font-size: 1rem;
-            line-height: 1.6;
+            font-weight: 620;
         }
 
-        .profile-fact-value strong {
-            color: #fff;
-            font-weight: 700;
+        .work-grid-three {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
         }
 
-        .cta-section {
-            padding: 0 0 12px;
+        .work-grid-single {
+            grid-template-columns: minmax(0, 1fr);
         }
 
-        .cta-panel {
+        .work-card {
+            display: flex;
+            flex-direction: column;
+            min-height: 330px;
+            padding: clamp(28px, 4vw, 44px);
+            border: 1px solid var(--rule);
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.018);
+        }
+
+        .work-card-compact {
+            min-height: 245px;
+        }
+
+        .work-card p {
+            max-width: 510px;
+        }
+
+        .work-card .text-link {
+            align-self: flex-start;
+            margin-top: auto;
+            padding-top: 42px;
+            font-weight: 650;
+        }
+
+        .proof {
             display: grid;
-            grid-template-columns: minmax(0, 1fr) minmax(320px, 420px);
-            align-items: start;
-            gap: 26px;
-            padding: clamp(24px, 4vw, 34px);
-            border-radius: var(--r-lg);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.02));
-            box-shadow: var(--shadow-1);
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            border-top: 1px solid var(--rule);
+            border-bottom: 1px solid var(--rule);
         }
 
-        .cta-kicker {
-            margin: 0 0 14px;
-            font-weight: 900;
-            letter-spacing: 5px;
-            font-size: 0.78rem;
-            color: var(--brand-teal);
+        .proof-item {
+            padding: 28px clamp(20px, 3vw, 38px);
+            border-right: 1px solid var(--rule);
         }
 
-        .cta-sub {
-            color: #9ea8b4;
-            font-size: 0.96rem;
-            margin: 0;
-            font-family: var(--font-mono);
-            line-height: 1.9;
-            max-width: 64ch;
+        .proof-item:first-child {
+            padding-left: 0;
         }
 
-        .contact-copy {
+        .proof-item:last-child {
+            border-right: 0;
+        }
+
+        .proof-value {
+            display: block;
+            margin-bottom: 7px;
+            color: var(--light-blue);
+            font-size: clamp(1.45rem, 2.5vw, 2.1rem);
+            font-weight: 620;
+            letter-spacing: -0.035em;
+        }
+
+        .proof-label {
+            color: var(--muted);
+            font-size: 0.92rem;
+            line-height: 1.45;
+        }
+
+        .experience-list {
+            margin-top: 70px;
+        }
+
+        .experience-item {
             display: grid;
-            gap: 14px;
+            grid-template-columns: minmax(160px, 0.32fr) minmax(0, 1fr);
+            gap: clamp(30px, 6vw, 82px);
+            padding: 34px 0;
+            border-top: 1px solid var(--rule);
+        }
+
+        .experience-item:last-child {
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .experience-meta {
+            color: var(--faint);
+            font-size: 0.9rem;
+        }
+
+        .experience-item h3 {
+            margin-bottom: 8px;
+        }
+
+        .experience-company {
+            margin-bottom: 12px;
+            color: var(--text);
+            font-weight: 560;
+        }
+
+        .experience-actions {
+            margin-top: 36px;
+        }
+
+        .about-copy {
+            max-width: 820px;
+        }
+
+        .about-copy p {
+            color: var(--muted);
+            font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+        }
+
+        .about-copy p:last-child {
+            margin-bottom: 0;
+        }
+
+        .contact-section {
+            padding: clamp(72px, 10vw, 118px) 0;
+        }
+
+        .contact-layout {
+            display: grid;
+            grid-template-columns: minmax(230px, 0.64fr) minmax(0, 1fr);
+            gap: clamp(52px, 9vw, 120px);
+        }
+
+        .contact-copy h2 {
+            margin-bottom: 24px;
+            font-size: clamp(2.3rem, 5vw, 4.8rem);
+            font-weight: 580;
+            letter-spacing: -0.05em;
+            line-height: 1;
+        }
+
+        .contact-copy p {
+            max-width: 470px;
+            color: var(--muted);
+            font-size: 1.05rem;
         }
 
         .contact-form {
             display: grid;
-            gap: 12px;
-            padding: 20px;
-            border-radius: var(--r-md);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            background: rgba(255, 255, 255, 0.028);
+            gap: 20px;
         }
 
-        .contact-form-grid {
+        .form-row {
             display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 10px;
+            gap: 18px;
         }
 
-        .contact-field,
-        .contact-form label {
+        .field {
             display: grid;
             gap: 8px;
-            min-width: 0;
         }
 
-        .contact-form label span,
-        .contact-helper,
-        .contact-legal,
-        .contact-status {
-            font-family: var(--font-mono);
+        .field span {
+            color: var(--muted);
+            font-size: 0.86rem;
+            font-weight: 600;
         }
 
-        .contact-form label span {
-            color: rgba(245, 247, 251, 0.76);
-            font-size: 0.68rem;
-            letter-spacing: 0.14em;
-            text-transform: uppercase;
-        }
-
-        .contact-form input,
-        .contact-form select,
-        .contact-form textarea {
+        .field input,
+        .field select,
+        .field textarea {
             width: 100%;
-            min-width: 0;
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            background: rgba(0, 0, 0, 0.24);
-            color: #eef2f6;
-            border-radius: 14px;
-            padding: 14px 16px;
-            font: inherit;
-            transition: border-color 0.25s var(--ease), box-shadow 0.25s var(--ease), background 0.25s var(--ease);
-        }
-
-        .contact-form textarea {
-            min-height: 132px;
-            resize: vertical;
-            line-height: 1.7;
-        }
-
-        .contact-form input:focus,
-        .contact-form select:focus,
-        .contact-form textarea:focus {
+            border: 1px solid var(--rule-strong);
+            border-radius: 4px;
             outline: none;
-            border-color: rgba(99, 149, 238, 0.72);
-            box-shadow: 0 0 0 4px rgba(99, 149, 238, 0.12);
-            background: rgba(0, 0, 0, 0.34);
+            background: var(--surface);
+            color: var(--text);
         }
 
-        .contact-submit {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
+        .field input,
+        .field select {
             min-height: 52px;
-            padding: 0 24px;
-            text-decoration: none;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            border-radius: 12px;
-            transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease), border-color 0.35s var(--ease), background 0.35s var(--ease), color 0.35s var(--ease);
-            background: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.85);
-            color: #fff;
+            padding: 0 14px;
+        }
+
+        .field textarea {
+            min-height: 150px;
+            padding: 13px 14px;
+            resize: vertical;
+        }
+
+        .field input:focus,
+        .field select:focus,
+        .field textarea:focus {
+            border-color: var(--light-blue);
+            box-shadow: 0 0 0 3px rgba(160, 190, 245, 0.12);
+        }
+
+        .field input::placeholder,
+        .field textarea::placeholder {
+            color: #74777d;
+        }
+
+        .form-submit {
+            justify-self: start;
+            min-width: 148px;
+            border: 1px solid var(--text);
+            border-radius: 4px;
+            background: var(--text);
+            color: #0a0a0a;
             cursor: pointer;
         }
 
-        .contact-submit:hover,
-        .contact-submit:focus-visible {
-            transform: translateY(-2px);
-            background: rgba(99, 149, 238, 0.18);
-            border-color: rgba(99, 149, 238, 0.65);
-            box-shadow: 0 0 35px rgba(99, 149, 238, 0.18);
-            outline: none;
+        .form-submit:disabled {
+            cursor: wait;
+            opacity: 0.6;
         }
 
-        .contact-helper {
+        .contact-status {
+            min-height: 1.5em;
             margin: 0;
-            color: rgba(245, 247, 251, 0.48);
-            font-size: 0.68rem;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            line-height: 1.6;
+            color: var(--light-blue);
+            font-size: 0.92rem;
         }
 
         .contact-legal {
             margin: 0;
-            color: rgba(245, 247, 251, 0.48);
-            font-size: 0.68rem;
-            line-height: 1.7;
+            color: var(--faint);
+            font-size: 0.78rem;
+            line-height: 1.55;
         }
 
-        .contact-legal a {
-            color: inherit;
-        }
-
-        .contact-status {
-            min-height: 1.4rem;
-            margin: 0;
-            color: rgba(160, 190, 245, 0.9);
-            font-size: 0.74rem;
-            line-height: 1.7;
-        }
-
-        .contact-form .sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            white-space: nowrap;
-            border: 0;
+        .honeypot {
+            position: absolute !important;
+            width: 1px !important;
+            height: 1px !important;
+            overflow: hidden !important;
+            clip: rect(1px, 1px, 1px, 1px) !important;
+            white-space: nowrap !important;
         }
 
         .site-footer {
-            margin-top: 34px;
-            padding: 22px 0 58px;
-            border-top: 1px solid rgba(255, 255, 255, 0.06);
-            text-align: center;
+            border-top: 1px solid var(--rule);
+            padding: 32px 0 40px;
         }
 
-        .legal {
-            margin: 0;
-            font-size: 0.76rem;
-            line-height: 1.8;
-            letter-spacing: 0.05em;
-            color: rgba(245, 247, 251, 0.36);
+        .footer-inner {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 28px;
+            color: var(--faint);
+            font-size: 0.82rem;
         }
 
-        .site-footer a {
-            color: inherit;
-            text-decoration: none;
+        .footer-inner p {
+            margin-bottom: 0;
         }
 
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .hero-shell,
-            .thesis-layout,
-            .memo-layout,
-            .cta-panel {
-                grid-template-columns: 1fr;
-            }
-
-            .signal-card,
-            .signal-link {
-                grid-column: span 6;
-            }
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            gap: 12px 22px;
         }
 
-        @media (max-width: 768px) {
-
-            /* ✅ Background/shade spans full screen */
-            nav {
-                width: 100% !important;
-                margin: 0 !important;
-                padding: 22px 0;
-            }
-
-            /* ✅ The content (logo block) is 80% wide and centered */
-            nav .container-wide {
-                width: 80% !important;
-                margin: 0 auto !important;
-                padding: 0 !important;
-            }
-
-            .nav-shell {
-                flex-direction: column;
+        @media (max-width: 850px) {
+            .header-inner {
                 align-items: flex-start;
-                gap: 14px;
-            }
-
-            .nav-logo a {
-                max-width: none;
-            }
-
-            .nav-subline {
-                max-width: none;
-            }
-
-            .hero-manifest,
-            .section-inner,
-            .field-card,
-            .signal-card,
-            .signal-link {
-                padding: 22px;
-            }
-
-            .signal-card,
-            .signal-link,
-            .field-card {
-                grid-column: span 12;
-            }
-
-            .signature {
                 flex-direction: column;
-                text-align: center;
+                gap: 22px;
+                padding-block: 28px;
             }
 
-            .contact-form-grid {
+            .brand {
+                flex-basis: auto;
+            }
+
+            .site-nav {
+                flex-wrap: wrap;
+                justify-content: flex-start;
+            }
+
+            .hero-grid,
+            .contact-layout {
                 grid-template-columns: 1fr;
             }
 
-            .nav-meta {
-                justify-content: flex-start;
-                gap: 8px;
+            .portrait {
+                display: grid;
+                grid-template-columns: minmax(180px, 300px) 1fr;
+                align-items: end;
+                gap: 20px;
+            }
+
+            .services {
+                grid-template-columns: 1fr;
+            }
+
+            .work-grid-three {
+                grid-template-columns: 1fr;
+            }
+
+            .service,
+            .service:nth-child(odd),
+            .service:nth-child(even) {
+                min-height: 0;
+                padding: 30px 0;
+                border-right: 0;
+            }
+
+            .contact-copy p {
+                max-width: 660px;
+            }
+        }
+
+        @media (max-width: 660px) {
+            .site-nav {
+                gap: 10px 14px;
+                font-size: 0.84rem;
+            }
+
+            .site-nav a {
+                min-height: 28px;
             }
 
             .hero {
-                padding-top: 52px;
+                padding-top: 62px;
             }
 
-            .hero h1 {
-                max-width: none;
+            .hero-grid {
+                gap: 54px;
+            }
+
+            .section-intro,
+            .experience-item {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+
+            .work-grid,
+            .proof,
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .work-card {
+                min-height: 280px;
+            }
+
+            .proof-item,
+            .proof-item:first-child {
+                padding: 24px 0;
+                border-right: 0;
+                border-bottom: 1px solid var(--rule);
+            }
+
+            .proof-item:last-child {
+                border-bottom: 0;
+            }
+
+            .experience-list {
+                margin-top: 52px;
+            }
+
+            .portrait {
+                display: block;
+                max-width: 320px;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+            }
+
+            .footer-links {
+                justify-content: flex-start;
             }
         }
 
         @media (prefers-reduced-motion: reduce) {
-            * {
-                transition: none !important;
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition-duration: 0.01ms !important;
             }
         }
     </style>
-
-    <!-- Your site-wide chassis -->
-    <link href="theme.css" rel="stylesheet" />
-
-    <!-- Page-specific overrides (must be after theme.css) -->
-    <style>
-        nav img.hero-logo {
-            height: clamp(56px, 5vw, 72px);
-            width: auto;
-            max-width: none;
-        }
-
-        @media (max-width: 768px) {
-            nav img.hero-logo {
-                height: 54px;
-            }
-        }
-    </style>
-
-    <!-- Structured Data -->
-    <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  "name": "Outside the World is New, LLC",
-  "url": "https://outsidetheworld.com/professional.html",
-  "image": "https://outsidetheworld.com/Images/Equal.svg",
-  "description": "A professional archive documenting web development, iOS app development, digital design, systems practice, and brand architecture from Queen Creek, Arizona.",
-  "serviceType": [
-    "Web Development",
-    "iOS App Development",
-    "Web Design",
-    "Technical Consulting",
-    "Brand Architecture"
-  ],
-  "areaServed": {
-    "@type": "AdministrativeArea",
-    "name": "Queen Creek, AZ"
-  },
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Queen Creek",
-    "addressRegion": "AZ",
-    "postalCode": "85142",
-    "addressCountry": "US"
-  },
-  "provider": {
-    "@type": "Organization",
-    "name": "Outside the World is New, LLC",
-    "url": "https://outsidetheworld.com",
-    "logo": "https://outsidetheworld.com/Images/Equal.svg",
-    "founder": {
-      "@type": "Person",
-      "@id": "https://outsidetheworld.com/ryandavid-burningham.html#person",
-      "name": "RyanDavid Burningham",
-      "url": "https://outsidetheworld.com/ryandavid-burningham.html"
-    }
-  }
-}
-    </script>
 </head>
 
 <body>
-    <a class="skip" href="#main">Skip to content</a>
+    <a class="skip-link" href="#main">Skip to content</a>
 
-    <div id="cursor-ring"></div>
-    <div id="cursor-dot"></div>
-
-    <div class="site">
-        <nav>
-            <div class="container-wide">
-                <div class="nav-shell">
-                    <div class="nav-logo">
-                        <a href="index.html">
-                            <img alt="Outside The World" class="hero-logo" src="Images/Equal.svg" />
-                            <div class="nav-copy">
-                                <p class="nav-kicker">Outside The World // Professional Archive</p>
-                                <p class="nav-subline">Systems, product, identity, and long-form technical practice.</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="nav-meta" aria-label="Professional archive metadata">
-                        <span>Queen Creek, AZ</span>
-                        <span>Systems</span>
-                        <span>Product</span>
-                        <span>Identity</span>
-                    </div>
-                </div>
-            </div>
-        </nav>
-
-        <header class="hero">
-            <div class="container-wide">
-                <div class="hero-shell">
-                    <div class="hero-copy">
-                        <div class="hero-eyebrow">
-                            FIELD_RECORD // SYSTEMS_IDENTITY_PRODUCT
-                        </div>
-                        <h1>Built to endure. Built with intent.</h1>
-                        <p class="hero-lede">
-                            Outside The World is where digital architecture, product direction, and authored design
-                            converge. The work centers on web systems, iOS app development, brand coherence, and the
-                            careful shaping of software that should still feel lucid years from now.
-                        </p>
-                    </div>
-
-                    <aside class="hero-manifest" aria-label="Practice overview">
-                        <p class="manifest-kicker">Operating Thesis //</p>
-                        <h2 class="manifest-title">Clear systems. Distinct identity. Software with a pulse.</h2>
-                        <p class="manifest-copy">
-                            I build for longevity rather than launch theater, treating every interface, workflow, and
-                            narrative layer as part of the same underlying structure.
-                        </p>
-                        <div class="manifest-tags" aria-label="Practice signals">
-                            <span class="manifest-tag">Web Systems</span>
-                            <span class="manifest-tag">iOS Product</span>
-                            <span class="manifest-tag">Brand Direction</span>
-                            <span class="manifest-tag">Technical Stewardship</span>
-                        </div>
-                    </aside>
-                </div>
-                <div class="hero-band"></div>
+    <div class="page">
+        <header class="site-header">
+            <div class="container header-inner">
+                <a class="brand" href="index.html" aria-label="Outside The World home">
+                    <img src="Images/Equal.svg" alt="Outside The World" width="1409" height="347" />
+                </a>
+                <nav class="site-nav" aria-label="Professional page">
+                    <a href="#services">Services</a>
+                    <a href="#work">Work</a>
+                    <a href="#experience">Experience</a>
+                    <a href="#about">About</a>
+                    <a href="#contact">Contact</a>
+                </nav>
             </div>
         </header>
 
-        <main id="main" class="professional-main">
-            <section>
-                <div class="container-wide">
-                    <div class="section-panel">
-                        <div class="section-inner thesis-layout">
-                            <div>
-                                <p class="section-kicker">Practice Thesis //</p>
-                                <h2 class="section-title">Not a menu of services. A way of building.</h2>
-                            </div>
-                            <div>
-                                <p class="section-copy">
-                                    The strongest digital work holds together at every layer: strategy, naming,
-                                    interface behavior, publishing systems, engineering choices, and the emotional tone
-                                    of the experience itself. My practice is built around that continuity.
-                                </p>
-                                <div class="thesis-marks">
-                                    <div class="thesis-mark">
-                                        <span>01</span>
-                                        <p>Systems should clarify, not sprawl. The goal is durable structure with minimal drag.</p>
-                                    </div>
-                                    <div class="thesis-mark">
-                                        <span>02</span>
-                                        <p>Identity is part of the product surface, not decoration applied after the fact.</p>
-                                    </div>
-                                    <div class="thesis-mark">
-                                        <span>03</span>
-                                        <p>Software should feel intentional on first contact and coherent over time.</p>
-                                    </div>
-                                </div>
-                            </div>
+        <main id="main">
+            <section class="hero" aria-labelledby="page-title">
+                <div class="container hero-grid">
+                    <div>
+                        <p class="hero-name">RyanDavid Burningham</p>
+                        <h1 id="page-title">Technology consulting, web development, and app development.</h1>
+                        <p class="hero-lede">
+                            I help people and organizations plan, build, improve, and maintain useful digital products
+                            and the technology behind them.
+                        </p>
+                        <p class="hero-copy">
+                            My work includes websites, iPhone and iPad apps, internal business tools, digital
+                            operations, brand systems, and long-term technical direction. Sometimes that means building
+                            something new. Sometimes it means making an existing system work better.
+                        </p>
+                        <div class="actions">
+                            <a class="button button-primary" href="#contact">Start a conversation</a>
+                            <a class="button" href="resume.html">View my experience</a>
                         </div>
                     </div>
+
+                    <figure class="portrait">
+                        <img src="Images/Profile.jpg" alt="Portrait of RyanDavid Burningham" width="1023" height="1043" />
+                        <figcaption>Queen Creek, Arizona · Available for remote work</figcaption>
+                    </figure>
                 </div>
             </section>
 
-            <section>
-                <div class="container-wide">
-                    <div class="section-panel">
-                        <div class="section-inner">
-                            <p class="section-kicker">Active Signals //</p>
-                            <h2 class="section-title">Current signals, open files, and what is taking shape.</h2>
-                            <p class="section-copy">
-                                A brief record of the work currently in motion.
+            <section class="section" id="services" aria-labelledby="services-heading">
+                <div class="container">
+                    <div class="section-intro">
+                        <h2 id="services-heading">What I do</h2>
+                        <p>
+                            I work across strategy and execution. I can help define the right direction, build the
+                            product, improve the systems around it, or stay involved as the work evolves.
+                        </p>
+                    </div>
+
+                    <div class="services">
+                        <article class="service">
+                            <h3>Technology consulting</h3>
+                            <p>
+                                Practical guidance for technology decisions, digital operations, infrastructure,
+                                workflows, vendors, and systems that have become difficult to manage.
                             </p>
-                            <div class="signal-grid" style="margin-top: 24px;">
-                                <a href="resume.html" class="signal-link">
-                                    <p class="signal-meta">File Enclosure //</p>
-                                    <h3 class="signal-title">Access Professional Dossier</h3>
-                                    <p class="signal-copy">
-                                        A concise record of experience, direction, and the operating history behind the work.
-                                    </p>
-                                    <div class="signal-row">
-                                        <span class="signal-badge">Open File</span>
-                                        <span class="signal-arrow">→</span>
-                                    </div>
-                                </a>
+                        </article>
 
-                                <div class="signal-card signal-magenta">
-                                    <p class="signal-meta">Product Signal //</p>
-                                    <h3 class="signal-title">frgmnts.app for iOS</h3>
-                                    <p class="signal-copy">
-                                        A quieter, more private social product is currently in development for iPhone.
-                                        The app is taking shape carefully and will be coming soon.
-                                    </p>
-                                    <div class="signal-row">
-                                        <span class="signal-badge">Coming Soon</span>
-                                    </div>
-                                </div>
-
-                                <div class="signal-card">
-                                    <p class="signal-meta">Operating Range //</p>
-                                    <h3 class="signal-title">Queen Creek, Arizona</h3>
-                                    <p class="signal-copy">
-                                        Web systems, product direction, authored interfaces, technical stewardship, and
-                                        digital structures that need to last longer than a launch cycle.
-                                    </p>
-                                    <div class="signal-row">
-                                        <span class="signal-badge">Remote Friendly</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section>
-                <div class="container-wide">
-                    <div class="section-panel">
-                        <div class="section-inner">
-                            <p class="section-kicker">Fields of Practice //</p>
-                            <h2 class="section-title">The work moves across product, interface, and architecture at once.</h2>
-                            <div class="fields-grid">
-                                <article class="field-card">
-                                    <p class="field-index">01 // Web Systems</p>
-                                    <h3>Web development with long memory.</h3>
-                                    <p>
-                                        Standards-aware web experiences built to balance visual identity, performance,
-                                        maintainability, and editorial clarity across desktop and mobile contexts.
-                                    </p>
-                                </article>
-
-                                <article class="field-card">
-                                    <p class="field-index">02 // iOS Product</p>
-                                    <h3>Mobile software shaped for focus.</h3>
-                                    <p>
-                                        iOS app development that treats usability, behavior, and emotional tone as part
-                                        of the same product system rather than separate concerns.
-                                    </p>
-                                </article>
-
-                                <article class="field-card">
-                                    <p class="field-index">03 // Identity Systems</p>
-                                    <h3>Brand architecture with structural discipline.</h3>
-                                    <p>
-                                        Naming, visual language, and digital identity frameworks that remain coherent
-                                        as products evolve, audiences shift, and platforms multiply.
-                                    </p>
-                                </article>
-
-                                <article class="field-card">
-                                    <p class="field-index">04 // Technical Direction</p>
-                                    <h3>Decision-making that survives scale and time.</h3>
-                                    <p>
-                                        Information architecture, publishing strategy, implementation guidance, and
-                                        long-term stewardship for systems that should remain legible under pressure.
-                                    </p>
-                                </article>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="cta-section">
-                <div class="container-wide">
-                    <div class="cta-panel">
-                        <div class="contact-copy">
-                            <h2 class="cta-kicker">
-                                KNOWLEDGE_EXCHANGE
-                            </h2>
-                            <p class="cta-sub">
-                                Open to focused professional dialogue around web systems, iOS product work, digital
-                                design, and selected collaborations. Base of operations: Queen Creek, Arizona.
+                        <article class="service">
+                            <h3>Web development</h3>
+                            <p>
+                                Websites and web applications designed and built for clarity, accessibility,
+                                performance, and straightforward long-term maintenance.
                             </p>
-                            <p class="contact-helper">Structured inquiries land in a private OTW ledger instead of an exposed inbox.</p>
-                        </div>
-                        <form class="contact-form" id="professionalInquiryForm">
-                            <div class="contact-form-grid">
-                                <label class="contact-field" for="inquiryName">
-                                    <span>Name</span>
-                                    <input id="inquiryName" name="name" type="text" autocomplete="name" required />
-                                </label>
-                                <label class="contact-field" for="inquiryContact">
-                                    <span>Contact Information</span>
-                                    <input id="inquiryContact" name="contact" type="text" autocomplete="email" placeholder="Email, phone, or preferred contact path" required />
-                                </label>
-                            </div>
+                        </article>
 
-                            <label class="contact-field" for="inquiryType">
-                                <span>Inquiry Type</span>
-                                <select id="inquiryType" name="inquiry_type" required>
-                                    <option value="web_systems">Web Systems</option>
-                                    <option value="ios_product_work">iOS Product Work</option>
-                                    <option value="design">Digital Design</option>
-                                    <option value="collaboration">Collaboration</option>
-                                    <option value="other">Other</option>
-                                </select>
-                            </label>
+                        <article class="service">
+                            <h3>App development</h3>
+                            <p>
+                                Product planning, interface design, and development for focused iOS applications and
+                                connected digital services.
+                            </p>
+                        </article>
 
-                            <label class="contact-field" for="inquiryComment">
-                                <span>Brief Comment</span>
-                                <textarea id="inquiryComment" name="comment" placeholder="Describe the project, problem, or collaboration you have in mind." required></textarea>
-                            </label>
-
-                            <div class="sr-only" aria-hidden="true">
-                                <label for="inquiryWebsite">Website</label>
-                                <input id="inquiryWebsite" name="website" type="text" tabindex="-1" autocomplete="off" />
-                            </div>
-
-                            <button class="contact-submit" id="professionalInquirySubmit" type="submit">Send Inquiry</button>
-                            <p class="contact-status" id="professionalInquiryStatus" role="status" aria-live="polite"></p>
-                            <p class="contact-legal">We use these details to review and respond to your inquiry and ordinarily retain them for no more than two years. Please do not include sensitive or confidential information. See the <a href="privacy.html">Privacy Notice</a> and <a href="terms.html">Terms of Use</a>.</p>
-                        </form>
+                        <article class="service">
+                            <h3>Brand and digital systems</h3>
+                            <p>
+                                Identity, design, content structure, and technical implementation brought together so
+                                the public experience and the underlying system make sense as one whole.
+                            </p>
+                        </article>
                     </div>
                 </div>
             </section>
 
-            <section>
-                <div class="container-wide">
-                    <div class="section-panel">
-                        <div class="section-inner memo-layout">
-                            <div>
-                                <p class="section-kicker">Founder Memo //</p>
-                                <p class="memo-quote">
-                                    Outside The World has functioned as a vantage point since 2000: a place to observe,
-                                    test, build, and keep refining the shape of digital environments.
+            <section class="section" id="work" aria-labelledby="work-heading">
+                <div class="container">
+                    <div class="section-intro">
+                        <h2 id="work-heading">Apps and systems</h2>
+                        <p>
+                            I have taken consumer apps from idea through design, development, and release on the App
+                            Store. I also build private tools that help organizations manage everyday work.
+                        </p>
+                    </div>
+
+                    <div class="work-group">
+                        <h3 class="work-group-title">Available on the App Store</h3>
+                        <div class="work-grid">
+                            <article class="work-card">
+                                <h3>frgmnts</h3>
+                                <p>
+                                    A private social app for family and friends. I founded, designed, and developed the
+                                    iPhone and iPad app and its supporting services.
                                 </p>
-                                <div class="memo-body">
-                                    <p>
-                                        I do not think of infrastructure and identity as separate disciplines. The
-                                        strongest work treats code, structure, naming, and interface tone as parts of a
-                                        single environment that either holds together or does not.
-                                    </p>
-                                    <p>
-                                        My focus is the structural resilience of digital systems and the authored
-                                        feeling of the experiences built on top of them. Execution is not production
-                                        labor after strategy. It is the architecture made visible.
-                                    </p>
-                                </div>
-                            </div>
+                                <a class="text-link" href="https://apps.apple.com/us/app/frgmnts/id6761584849">View
+                                    frgmnts on the App Store →</a>
+                            </article>
 
-                            <div class="memo-side">
-                                <div class="signature">
-                                    <img alt="RyanDavid Burningham" src="Images/Profile.jpg" loading="lazy" decoding="async" />
-                                    <div>
-                                        <p class="signature-name">
-                                            <a href="ryandavid-burningham.html">RyanDavid Burningham</a>
-                                        </p>
-                                        <p class="signature-meta">
-                                            STRATEGIC_OVERSIGHT // ID_8402.RYN
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div class="profile-rail" aria-label="Founder profile data">
-                                    <div class="profile-fact">
-                                        <p class="profile-fact-label">Founder //</p>
-                                        <p class="profile-fact-value">
-                                            Founder of <strong>Outside the World is New, LLC</strong>.
-                                        </p>
-                                    </div>
-
-                                    <div class="profile-fact">
-                                        <p class="profile-fact-label">Current Tenure //</p>
-                                        <p class="profile-fact-value">
-                                            Asst. Director of Brand Strategy &amp; Tech Logistics at
-                                            <strong>Child &amp; Family Support Services</strong>, 2014 to present.
-                                        </p>
-                                    </div>
-
-                                    <div class="profile-fact">
-                                        <p class="profile-fact-label">Operating Range //</p>
-                                        <p class="profile-fact-value">
-                                            Queen Creek, Arizona. Background includes <strong>Apple</strong>,
-                                            <strong>Cox Communications</strong>, brand strategy, technology logistics,
-                                            and digital operations leadership.
-                                        </p>
-                                    </div>
-
-                                    <div class="profile-fact">
-                                        <p class="profile-fact-label">Systems Scale //</p>
-                                        <p class="profile-fact-value">
-                                            Experience supporting a <strong>500+ member workforce</strong> and
-                                            maintaining <strong>99.9% uptime</strong> for critical systems.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
+                            <article class="work-card">
+                                <h3>Precaria</h3>
+                                <p>
+                                    A 20-stage puzzle game for iPhone. I designed and developed the game, its interface,
+                                    progression, visual world, sound, and release.
+                                </p>
+                                <a class="text-link" href="https://apps.apple.com/us/app/precaria/id6801955490">View
+                                    Precaria on the App Store →</a>
+                            </article>
                         </div>
                     </div>
+
+                    <div class="work-group">
+                        <h3 class="work-group-title">Internal tools</h3>
+                        <div class="work-grid work-grid-three">
+                            <article class="work-card work-card-compact">
+                                <h3>Inventory system</h3>
+                                <p>
+                                    A custom system for keeping organizational inventory, status, and ownership easier
+                                    to track and maintain.
+                                </p>
+                            </article>
+
+                            <article class="work-card work-card-compact">
+                                <h3>Project tracker</h3>
+                                <p>
+                                    A shared tool for organizing active projects, responsibilities, progress, and the
+                                    work that needs attention next.
+                                </p>
+                            </article>
+
+                            <article class="work-card work-card-compact">
+                                <h3>Guest greeter app</h3>
+                                <p>
+                                    A tablet app that welcomes visitors and supports a simpler, clearer front-desk
+                                    arrival process.
+                                </p>
+                            </article>
+                        </div>
+                    </div>
+
+                    <div class="work-group">
+                        <h3 class="work-group-title">Independent web work</h3>
+                        <div class="work-grid work-grid-single">
+                            <article class="work-card work-card-compact">
+                                <h3>Outside The World</h3>
+                                <p>
+                                    An independent publishing and archival website I have designed, built, and
+                                    maintained since 2000. It brings together writing, photography, software, and more
+                                    than two decades of material.
+                                </p>
+                                <a class="text-link" href="index.html">Explore Outside The World →</a>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="experience" aria-labelledby="experience-heading">
+                <div class="container">
+                    <div class="section-intro">
+                        <h2 id="experience-heading">Experience</h2>
+                        <p>
+                            My background spans hands-on development, technology operations, brand strategy, team
+                            leadership, and the daily responsibility of keeping important systems working.
+                        </p>
+                    </div>
+
+                    <div class="proof" aria-label="Professional experience highlights">
+                        <div class="proof-item">
+                            <span class="proof-value">Since 2000</span>
+                            <span class="proof-label">Building and publishing on the web</span>
+                        </div>
+                        <div class="proof-item">
+                            <span class="proof-value">500+ people</span>
+                            <span class="proof-label">Supported through organizational technology systems</span>
+                        </div>
+                        <div class="proof-item">
+                            <span class="proof-value">99.9% uptime</span>
+                            <span class="proof-label">Maintained for critical systems</span>
+                        </div>
+                    </div>
+
+                    <div class="experience-list">
+                        <article class="experience-item">
+                            <p class="experience-meta">2014–present</p>
+                            <div>
+                                <h3>Assistant Director of Brand Strategy &amp; Technology Logistics</h3>
+                                <p class="experience-company">Child &amp; Family Support Services</p>
+                                <p>
+                                    I lead work across technology logistics, digital operations, systems reliability,
+                                    and brand strategy for a behavioral health organization supporting a workforce of
+                                    more than 500 people.
+                                </p>
+                            </div>
+                        </article>
+
+                        <article class="experience-item">
+                            <p class="experience-meta">2009–2014</p>
+                            <div>
+                                <h3>Inventory Control Lead &amp; Trainer</h3>
+                                <p class="experience-company">Apple</p>
+                                <p>
+                                    I managed high-volume inventory operations, supported major product launches, and
+                                    trained teams across the Southwest market.
+                                </p>
+                            </div>
+                        </article>
+
+                        <article class="experience-item">
+                            <p class="experience-meta">2002–2008</p>
+                            <div>
+                                <h3>E-Care Team Leader &amp; E-Business Strategist</h3>
+                                <p class="experience-company">Cox Communications</p>
+                                <p>
+                                    I led digital customer operations and worked with web and marketing teams to improve
+                                    online service, commerce, and support.
+                                </p>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="experience-actions">
+                        <a class="button" href="resume.html">Read the full résumé</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="about" aria-labelledby="about-heading">
+                <div class="container">
+                    <div class="section-intro">
+                        <h2 id="about-heading">How I work</h2>
+                        <div class="about-copy">
+                            <p>
+                                I care about making technology understandable. Good work should solve the actual problem,
+                                respect the people using it, and remain manageable after launch.
+                            </p>
+                            <p>
+                                I am comfortable moving between planning and implementation. I can advise on direction,
+                                design an interface, write the code, improve a workflow, or help a team make better
+                                decisions about the systems it already has.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="contact-section" id="contact" aria-labelledby="contact-heading">
+                <div class="container contact-layout">
+                    <div class="contact-copy">
+                        <h2 id="contact-heading">Tell me what you’re working on.</h2>
+                        <p>
+                            If you need help with a website, an app, a technology problem, or a larger digital system,
+                            send a short note. I’ll review it and respond directly.
+                        </p>
+                    </div>
+
+                    <form class="contact-form" id="professionalInquiryForm">
+                        <div class="form-row">
+                            <label class="field" for="inquiryName">
+                                <span>Name</span>
+                                <input id="inquiryName" name="name" type="text" autocomplete="name" required />
+                            </label>
+                            <label class="field" for="inquiryContact">
+                                <span>How should I contact you?</span>
+                                <input id="inquiryContact" name="contact" type="text" autocomplete="email"
+                                    placeholder="Email or phone" required />
+                            </label>
+                        </div>
+
+                        <label class="field" for="inquiryType">
+                            <span>What do you need help with?</span>
+                            <select id="inquiryType" name="inquiry_type" required>
+                                <option value="collaboration">Technology consulting</option>
+                                <option value="web_systems">Web development</option>
+                                <option value="ios_product_work">App development</option>
+                                <option value="design">Brand and digital design</option>
+                                <option value="other">Something else</option>
+                            </select>
+                        </label>
+
+                        <label class="field" for="inquiryComment">
+                            <span>Tell me a little about the work</span>
+                            <textarea id="inquiryComment" name="comment"
+                                placeholder="What are you building, improving, or trying to solve?" required></textarea>
+                        </label>
+
+                        <div class="honeypot" aria-hidden="true">
+                            <label for="inquiryWebsite">Website</label>
+                            <input id="inquiryWebsite" name="website" type="text" tabindex="-1" autocomplete="off" />
+                        </div>
+
+                        <button class="button form-submit" id="professionalInquirySubmit" type="submit">Send inquiry</button>
+                        <p class="contact-status" id="professionalInquiryStatus" role="status" aria-live="polite"></p>
+                        <p class="contact-legal">
+                            I use these details to review and respond to your inquiry and ordinarily retain them for no
+                            more than two years. Please do not include sensitive or confidential information. Read the
+                            <a href="privacy.html">Privacy Notice</a> and <a href="terms.html">Terms of Use</a>.
+                        </p>
+                    </form>
                 </div>
             </section>
         </main>
 
         <footer class="site-footer">
-            <p class="legal">© 2026 Outside the World is New, LLC. All rights reserved.</p>
-            <p class="legal"><a href="privacy.html">Privacy</a> &nbsp; | &nbsp; <a href="terms.html">Terms</a> &nbsp; | &nbsp; <a href="trademarks.html">Trademarks</a> &nbsp; | &nbsp; <a href="support.html">Support</a></p>
+            <div class="container footer-inner">
+                <p>© 2026 Outside the World is New, LLC.</p>
+                <div class="footer-links">
+                    <a href="ryandavid-burningham.html">RyanDavid Burningham</a>
+                    <a href="privacy.html">Privacy</a>
+                    <a href="terms.html">Terms</a>
+                    <a href="trademarks.html">Trademarks</a>
+                    <a href="support.html">Support</a>
+                </div>
+            </div>
         </footer>
     </div>
+
     <script>
         const PROFESSIONAL_INQUIRY_ENDPOINT = "https://otw-private-intake.ryandavid.workers.dev/submit-professional-inquiry";
         const professionalInquiryForm = document.getElementById("professionalInquiryForm");
@@ -1529,16 +1155,16 @@
                 const website = String(formData.get("website") || "").trim();
 
                 if (!name || !contact || !inquiryType || !comment) {
-                    professionalInquiryStatus.textContent = "Please complete each field before sending the inquiry.";
+                    professionalInquiryStatus.textContent = "Please complete each field before sending your inquiry.";
                     return;
                 }
 
                 if (professionalInquirySubmit) {
                     professionalInquirySubmit.disabled = true;
-                    professionalInquirySubmit.textContent = "Sending...";
+                    professionalInquirySubmit.textContent = "Sending…";
                 }
 
-                professionalInquiryStatus.textContent = "Sending your inquiry...";
+                professionalInquiryStatus.textContent = "Sending your inquiry…";
 
                 try {
                     const response = await fetch(PROFESSIONAL_INQUIRY_ENDPOINT, {
@@ -1558,17 +1184,18 @@
 
                     const payload = await response.json().catch(() => ({}));
                     if (!response.ok || !payload.ok) {
-                        throw new Error(payload.error || `Inquiry failed with status ${response.status}`);
+                        throw new Error("The inquiry could not be sent right now.");
                     }
 
                     professionalInquiryForm.reset();
                     professionalInquiryStatus.textContent = payload.message || "Your inquiry has been received.";
                 } catch (error) {
-                    professionalInquiryStatus.textContent = error.message || "The inquiry could not be sent right now.";
+                    professionalInquiryStatus.textContent =
+                        error.message || "The inquiry could not be sent right now. Please try again later.";
                 } finally {
                     if (professionalInquirySubmit) {
                         professionalInquirySubmit.disabled = false;
-                        professionalInquirySubmit.textContent = "Send Inquiry";
+                        professionalInquirySubmit.textContent = "Send inquiry";
                     }
                 }
             });
