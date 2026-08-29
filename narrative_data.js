@@ -1,5 +1,244 @@
 const current_narrative = [
     {
+        "title": "The Theology of Clouds",
+        "date": "August 27, 2026",
+        "body": "_What remains from the faith my mother gave me_\n\n![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-08-27-the-theology-of-clouds-mtc8rk56.jpg \"Even the Circle K parking lot can be sacred\")\n\nWhen I was very little, my nascent view of theology came from my mother. But it wasn't any instruction rooted in the Bible or any other religious text, or even from her anecdotal experience.\n\nNo, she taught me to look up at the clouds to see God. That's where he lived.\n\nIn retrospect, it's a beautiful perspective to impress upon a child. God and Jesus amongst the clouds, not separate from my world, just higher in the sky so they could look down and take care of me. My prayers didn't need to stretch the cosmos to be heard; instead, they simply needed careful amplification (usually through tears).\n\n![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-08-27-the-theology-of-clouds-mtc8seen.jpg)\n\nThe clouds this morning were pink, dusty, and just right for deity. They brought to my recollection one of those conversations with my mom where we talked about Jesus. I know I haven't posited much positivity about my religious upbringing on this site, but I think this morning's memory paints a clear path of preserved spiritual amicability.\n\nI think it might be one of the reasons why I don't place much stock or emphasis on the boxes we create as humans to give shape to our gods. I feel much closer spiritually to my maker when I stare up at the Rocky Mountains or dip my feet in the waters of a cold stream. The pages of a dusty old book rarely provide the right impetus to challenge my negative points of view, but the clouds this morning reminded me that God is real and He is working. It set me on the right path.\n\nI am grateful, upon silent recollection, that my mom did indeed instill in me an innate appreciation for nature. \u00a0Be it clouds or mountains, a cascading river or the rolling hills toward Payson, nature draws me close to my heavenly parentage, but she is not my god. She is simply proof of their residence, creation, and power.\n\n---\n\nIn other thoughts today...\n\nI've noticed that I carry an imaginary map of how things are supposed to happen. I've had it my whole life, and it was affected by both desire and external pressure/societal expectations: married by this age, established career by that age, financially secure, spiritually certain, kids raised a certain way, body still working a certain way, some dream accomplished before forty or fifty or sixty.\n\nIt's hard not to look around at life and wonder, right? A million tangential avenues missed, avoided, or ignored. An infinite number of unseen territories where another version of yourself exists, perhaps wandering existentially into the position of jealous thought as well.\n\nWe all give up sometimes. We turn around instead of plodding forward. We berate ourselves for mistakes, for misunderstanding a temporary trial as a permanent life sentence. It's rather normal, in fact. Our brains: they lie to us often and expertly.\n\nBut think about your map application of choice. Google Maps, Apple Maps, Waze, whatever you use...you miss a turn? No worries. The machine does not shame you.\n\n![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-08-27-the-theology-of-clouds-mtc8t2rf.jpg)\n\nIt does not badger you that the original route was shorter, or point out how much time you have wasted, or suggest that because you failed to follow the directions you might as well go home.\n\nIt simply recalculates. Your present location becomes the fact that matters, and from there it quietly begins providing another path toward your goal\n\nThere is something theological in that. I spend so much of my life judging myself according to coordinates I no longer occupy.\u00a0I imagine the person I should have been at thirty and forty and the person I hope to be at fifty, and then measure the current self against an abandoned route.\n\nBut is there any useful navigation available from a place where we are no longer standing? No. Whatever wisdom exists must begin with the little blue dot as it presently appears on the map. Here. Now. After the missed turns, the detours, the closed roads, the years we would perhaps travel differently if given another chance.\n\nMaybe I\u2019ve been looking at failure the wrong way. Recalculating doesn\u2019t mean giving up. It\u2019s not saying the goal is out of reach. Sometimes the new path is longer. Sometimes it makes us go back through places we thought we\u2019d left behind.\n\nAnd with time, we might realize that the destination we were aiming for was already taken by someone else, and we get to pick a new one. But the map doesn\u2019t need to tell us how we got here before it starts helping us move forward again. It just wants to know where we are.\n\n---\n\nThat's all for now. If you've been around here lately, know my appreciation remains. I hope it provides a diversion and a bit of understanding about where I come from. I hope you have a chance to check out [frgmnts, my social media app](https://apps.apple.com/us/app/frgmnts/id6761584849%20frgmnts).\u00a0It's a nice, quiet place; the polar opposite of Instagram/Facebook. It's growing every day, and I'm loving the development work. It deserves more users. You belong there.\n\nI also have a few new games coming out on the App Store soon, so stay tuned for those.\n\nHave a nice, tidy, adventurous weekend. Till next time!",
+        "file": "2026-08-27-the-theology-of-clouds.md",
+        "publisher": {
+            "schema": "otw.publisher.post",
+            "version": 2,
+            "source": "publisher.html",
+            "subhead": "What remains from the faith my mother gave me",
+            "blocks": [
+                {
+                    "id": "image_mtc8rjo1_7hl2dt",
+                    "type": "image",
+                    "imageRef": "image_mtc8rjo1_7hl2dt",
+                    "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-08-27-the-theology-of-clouds-mtc8rk56.jpg",
+                    "objectKey": "narrative/2026-08-27-the-theology-of-clouds-mtc8rk56.jpg",
+                    "featureLayout": "natural",
+                    "featureFocal": "center",
+                    "homepageFocal": "center",
+                    "displaySize": "medium",
+                    "alignment": "center",
+                    "wrapMode": "none"
+                },
+                {
+                    "id": "paragraph_mtdlt2rf_moi6fq",
+                    "type": "paragraph",
+                    "html": "When I was very little, my nascent view of theology came from my mother. But it wasn't any instruction rooted in the Bible or any other religious text, or even from her anecdotal experience.",
+                    "text": "When I was very little, my nascent view of theology came from my mother. But it wasn't any instruction rooted in the Bible or any other religious text, or even from her anecdotal experience."
+                },
+                {
+                    "id": "paragraph_mtbvayo8_o1sx00",
+                    "type": "paragraph",
+                    "html": "No, she taught me to look up at the clouds to see God. That's where he lived.",
+                    "text": "No, she taught me to look up at the clouds to see God. That's where he lived."
+                },
+                {
+                    "id": "paragraph_mtbvbdxi_0u1dyi",
+                    "type": "paragraph",
+                    "html": "In retrospect, it's a beautiful perspective to impress upon a child. God and Jesus amongst the clouds, not separate from my world, just higher in the sky so they could look down and take care of me. My prayers didn't need to stretch the cosmos to be heard; instead, they simply needed careful amplification (usually through tears).",
+                    "text": "In retrospect, it's a beautiful perspective to impress upon a child. God and Jesus amongst the clouds, not separate from my world, just higher in the sky so they could look down and take care of me. My prayers didn't need to stretch the cosmos to be heard; instead, they simply needed careful amplification (usually through tears)."
+                },
+                {
+                    "id": "image_mtc8se7a_o0klcx",
+                    "type": "image",
+                    "imageRef": "image_mtc8se7a_o0klcx",
+                    "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-08-27-the-theology-of-clouds-mtc8seen.jpg",
+                    "objectKey": "narrative/2026-08-27-the-theology-of-clouds-mtc8seen.jpg",
+                    "featureLayout": "natural",
+                    "featureFocal": "center",
+                    "homepageFocal": "center",
+                    "displaySize": "medium",
+                    "alignment": "center",
+                    "wrapMode": "wrap-right"
+                },
+                {
+                    "id": "paragraph_mtbvdet3_anvcjw",
+                    "type": "paragraph",
+                    "html": "The clouds this morning were pink, dusty, and just right for deity. They brought to my recollection one of those conversations with my mom where we talked about Jesus. I know I haven't posited much positivity about my religious upbringing on this site, but I think this morning's memory paints a clear path of preserved spiritual amicability.",
+                    "text": "The clouds this morning were pink, dusty, and just right for deity. They brought to my recollection one of those conversations with my mom where we talked about Jesus. I know I haven't posited much positivity about my religious upbringing on this site, but I think this morning's memory paints a clear path of preserved spiritual amicability."
+                },
+                {
+                    "id": "paragraph_mtbvipg9_v3yqmv",
+                    "type": "paragraph",
+                    "html": "I think it might be one of the reasons why I don't place much stock or emphasis on the boxes we create as humans to give shape to our gods. I feel much closer spiritually to my maker when I stare up at the Rocky Mountains or dip my feet in the waters of a cold stream. The pages of a dusty old book rarely provide the right impetus to challenge my negative points of view, but the clouds this morning reminded me that God is real and He is working. It set me on the right path.",
+                    "text": "I think it might be one of the reasons why I don't place much stock or emphasis on the boxes we create as humans to give shape to our gods. I feel much closer spiritually to my maker when I stare up at the Rocky Mountains or dip my feet in the waters of a cold stream. The pages of a dusty old book rarely provide the right impetus to challenge my negative points of view, but the clouds this morning reminded me that God is real and He is working. It set me on the right path."
+                },
+                {
+                    "id": "paragraph_mtbvn4ym_387b5q",
+                    "type": "paragraph",
+                    "html": "I am grateful, upon silent recollection, that my mom did indeed instill in me an innate appreciation for nature. \u00a0Be it clouds or mountains, a cascading river or the rolling hills toward Payson, nature draws me close to my heavenly parentage, but she is not my god. She is simply proof of their residence, creation, and power.",
+                    "text": "I am grateful, upon silent recollection, that my mom did indeed instill in me an innate appreciation for nature. \u00a0Be it clouds or mountains, a cascading river or the rolling hills toward Payson, nature draws me close to my heavenly parentage, but she is not my god. She is simply proof of their residence, creation, and power."
+                },
+                {
+                    "id": "divider_mtdlt2ro_d95k3o",
+                    "type": "divider"
+                },
+                {
+                    "id": "paragraph_mtdlt2ro_wakd2x",
+                    "type": "paragraph",
+                    "html": "In other thoughts today...",
+                    "text": "In other thoughts today..."
+                },
+                {
+                    "id": "paragraph_mtd6uqey_1b29ds",
+                    "type": "paragraph",
+                    "html": "I've noticed that I carry an imaginary map of how things are supposed to happen. I've had it my whole life, and it was affected by both desire and external pressure/societal expectations: married by this age, established career by that age, financially secure, spiritually certain, kids raised a certain way, body still working a certain way, some dream accomplished before forty or fifty or sixty.",
+                    "text": "I've noticed that I carry an imaginary map of how things are supposed to happen. I've had it my whole life, and it was affected by both desire and external pressure/societal expectations: married by this age, established career by that age, financially secure, spiritually certain, kids raised a certain way, body still working a certain way, some dream accomplished before forty or fifty or sixty."
+                },
+                {
+                    "id": "paragraph_mtd6xfqw_x3ngfy",
+                    "type": "paragraph",
+                    "html": "It's hard not to look around at life and wonder, right? A million tangential avenues missed, avoided, or ignored. An infinite number of unseen territories where another version of yourself exists, perhaps wandering existentially into the position of jealous thought as well.",
+                    "text": "It's hard not to look around at life and wonder, right? A million tangential avenues missed, avoided, or ignored. An infinite number of unseen territories where another version of yourself exists, perhaps wandering existentially into the position of jealous thought as well."
+                },
+                {
+                    "id": "paragraph_mtdx6wwq_skujwo",
+                    "type": "paragraph",
+                    "html": "We all give up sometimes. We turn around instead of plodding forward. We berate ourselves for mistakes, for misunderstanding a temporary trial as a permanent life sentence. It's rather normal, in fact. Our brains: they lie to us often and expertly.",
+                    "text": "We all give up sometimes. We turn around instead of plodding forward. We berate ourselves for mistakes, for misunderstanding a temporary trial as a permanent life sentence. It's rather normal, in fact. Our brains: they lie to us often and expertly."
+                },
+                {
+                    "id": "paragraph_mtdxe9l9_olfs3b",
+                    "type": "paragraph",
+                    "html": "But think about your map application of choice. Google Maps, Apple Maps, Waze, whatever you use...y<span>ou miss a turn? No worries. The machine does not shame you.\u00a0</span>",
+                    "text": "But think about your map application of choice. Google Maps, Apple Maps, Waze, whatever you use...you miss a turn? No worries. The machine does not shame you."
+                },
+                {
+                    "id": "image_mtc8t2ks_vfp5e4",
+                    "type": "image",
+                    "imageRef": "image_mtc8t2ks_vfp5e4",
+                    "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-08-27-the-theology-of-clouds-mtc8t2rf.jpg",
+                    "objectKey": "narrative/2026-08-27-the-theology-of-clouds-mtc8t2rf.jpg",
+                    "featureLayout": "natural",
+                    "featureFocal": "center",
+                    "homepageFocal": "center",
+                    "displaySize": "medium",
+                    "alignment": "center",
+                    "wrapMode": "wrap-left"
+                },
+                {
+                    "id": "paragraph_mtdxfyhf_t2lb64",
+                    "type": "paragraph",
+                    "html": "It does not badger you that the original route was shorter, or point out how much time you have wasted, or suggest that because you failed to follow the directions you might as well go home.",
+                    "text": "It does not badger you that the original route was shorter, or point out how much time you have wasted, or suggest that because you failed to follow the directions you might as well go home."
+                },
+                {
+                    "id": "paragraph_mtdxgn6d_50cdoy",
+                    "type": "paragraph",
+                    "html": "It simply recalculates. Your present location becomes the fact that matters, and from there it quietly begins providing another path toward your goal",
+                    "text": "It simply recalculates. Your present location becomes the fact that matters, and from there it quietly begins providing another path toward your goal"
+                },
+                {
+                    "id": "paragraph_mtdxhkuf_qsn1lp",
+                    "type": "paragraph",
+                    "html": "<span>There is something theological in that. I spend so much of my life judging myself according to coordinates I no longer occupy.\u00a0</span><span>I imagine the person I should have been at thirty and forty and the person I hope to be at fifty, and then measure the current self against an abandoned route.</span>",
+                    "text": "There is something theological in that. I spend so much of my life judging myself according to coordinates I no longer occupy.\u00a0I imagine the person I should have been at thirty and forty and the person I hope to be at fifty, and then measure the current self against an abandoned route."
+                },
+                {
+                    "id": "paragraph_mtdxicqh_pixhi9",
+                    "type": "paragraph",
+                    "html": "<span>But is there any useful navigation available from a place where we are no longer standing? No. Whatever wisdom exists must begin with the little blue dot as it presently appears on the map. Here. Now. After the missed turns, the detours, the closed roads, the years we would perhaps travel differently if given another chance.</span>",
+                    "text": "But is there any useful navigation available from a place where we are no longer standing? No. Whatever wisdom exists must begin with the little blue dot as it presently appears on the map. Here. Now. After the missed turns, the detours, the closed roads, the years we would perhaps travel differently if given another chance."
+                },
+                {
+                    "id": "paragraph_mtdxyzyq_8b5uju",
+                    "type": "paragraph",
+                    "html": "Maybe I\u2019ve been looking at failure the wrong way. Recalculating doesn\u2019t mean giving up. It\u2019s not saying the goal is out of reach. Sometimes the new path is longer. Sometimes it makes us go back through places we thought we\u2019d left behind.",
+                    "text": "Maybe I\u2019ve been looking at failure the wrong way. Recalculating doesn\u2019t mean giving up. It\u2019s not saying the goal is out of reach. Sometimes the new path is longer. Sometimes it makes us go back through places we thought we\u2019d left behind."
+                },
+                {
+                    "id": "paragraph_mtdxkluz_n5ga5k",
+                    "type": "paragraph",
+                    "html": "And with time, we might realize that the destination we were aiming for was already taken by someone else, and we get to pick a new one. But the map doesn\u2019t need to tell us how we got here before it starts helping us move forward again. It just wants to know where we are.",
+                    "text": "And with time, we might realize that the destination we were aiming for was already taken by someone else, and we get to pick a new one. But the map doesn\u2019t need to tell us how we got here before it starts helping us move forward again. It just wants to know where we are."
+                },
+                {
+                    "id": "divider_mtdxyzyq_xiehog",
+                    "type": "divider"
+                },
+                {
+                    "id": "paragraph_mtdxyzyq_wzyz9u",
+                    "type": "paragraph",
+                    "html": "That's all for now. If you've been around here lately, know my appreciation remains. I hope it provides a diversion and a bit of understanding about where I come from. I hope you have a chance to check out <a href=\"https://apps.apple.com/us/app/frgmnts/id6761584849\nfrgmnts\">frgmnts, my social media app</a>.\u00a0It's a nice, quiet place; the polar opposite of Instagram/Facebook. It's growing every day, and I'm loving the development work. It deserves more users. You belong there.",
+                    "text": "That's all for now. If you've been around here lately, know my appreciation remains. I hope it provides a diversion and a bit of understanding about where I come from. I hope you have a chance to check out frgmnts, my social media app.\u00a0It's a nice, quiet place; the polar opposite of Instagram/Facebook. It's growing every day, and I'm loving the development work. It deserves more users. You belong there."
+                },
+                {
+                    "id": "paragraph_mtdxqxm9_puiq55",
+                    "type": "paragraph",
+                    "html": "I also have a few new games coming out on the App Store soon, so stay tuned for those.",
+                    "text": "I also have a few new games coming out on the App Store soon, so stay tuned for those."
+                },
+                {
+                    "id": "paragraph_mtdxsat8_10iy0u",
+                    "type": "paragraph",
+                    "html": "Have a nice, tidy, adventurous weekend. Till next time!",
+                    "text": "Have a nice, tidy, adventurous weekend. Till next time!"
+                }
+            ],
+            "images": [
+                {
+                    "id": "image_mtc8rjo1_7hl2dt",
+                    "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-08-27-the-theology-of-clouds-mtc8rk56.jpg",
+                    "objectKey": "narrative/2026-08-27-the-theology-of-clouds-mtc8rk56.jpg",
+                    "alt": "Narrative image",
+                    "caption": "Even the Circle K parking lot can be sacred",
+                    "credit": "",
+                    "featureLayout": "natural",
+                    "featureFocal": "center",
+                    "homepageFocal": "center",
+                    "width": 1400,
+                    "height": 1050,
+                    "displaySize": "medium",
+                    "alignment": "center",
+                    "wrapMode": "none"
+                },
+                {
+                    "id": "image_mtc8se7a_o0klcx",
+                    "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-08-27-the-theology-of-clouds-mtc8seen.jpg",
+                    "objectKey": "narrative/2026-08-27-the-theology-of-clouds-mtc8seen.jpg",
+                    "alt": "Narrative image",
+                    "caption": "",
+                    "credit": "",
+                    "featureLayout": "natural",
+                    "featureFocal": "center",
+                    "homepageFocal": "center",
+                    "width": 1050,
+                    "height": 1400,
+                    "displaySize": "medium",
+                    "alignment": "center",
+                    "wrapMode": "wrap-right"
+                },
+                {
+                    "id": "image_mtc8t2ks_vfp5e4",
+                    "url": "https://otw-media.ryandavid.workers.dev/o/narrative/2026-08-27-the-theology-of-clouds-mtc8t2rf.jpg",
+                    "objectKey": "narrative/2026-08-27-the-theology-of-clouds-mtc8t2rf.jpg",
+                    "alt": "Narrative image",
+                    "caption": "",
+                    "credit": "",
+                    "featureLayout": "natural",
+                    "featureFocal": "center",
+                    "homepageFocal": "center",
+                    "width": 1050,
+                    "height": 1400,
+                    "displaySize": "medium",
+                    "alignment": "center",
+                    "wrapMode": "wrap-left"
+                }
+            ],
+            "formatting": {
+                "mode": "otw-enhanced-markdown",
+                "version": 1,
+                "fallback": "markdown"
+            }
+        },
+        "post_id": "August 27, 2026--the-theology-of-clouds",
+        "share_path": "archive/2026-08-27-the-theology-of-clouds.html",
+        "og_image": "Images/og/archive/2026-08-27-the-theology-of-clouds.png"
+    },
+    {
         "title": "Knowledge That Becomes Love",
         "date": "August 23, 2026",
         "body": "_Sacrament Meeting | Aug 23, 2026 | Estimated 17\u201318 minutes_\n\n> **Core thought:** Christlike knowledge begins in humility, sees people mercifully, and proves itself in love.\n\n![Narrative image](https://otw-media.ryandavid.workers.dev/o/narrative/2026-08-23-knowledge-that-becomes-love-mt6e509u.jpg \"Arnold B\u00f6cklin, The Road to Emmaus \u2014 1870\")\n\nI last had the opportunity to speak in church back in 2022, when I was on the cusp of my first wedding anniversary. It\u2019s a testament to the rapid nature of life that four years have already passed us by, bringing with it the natural highs and lows of an ordinary mortal life. By virtue of the recent combination of wards, I wanted to briefly introduce my family to y\u2019all. My name is RyanDavid Burningham, I also go by Rylee or RD. My wife Emily and I were married on April 17th, 2021, after meeting online in March of 2020, a mere week before the pandemic interrupted everyone\u2019s life on earth.\n\nTogether, we have seven children, six girls and one boy. And before you think, \u201cThat poor boy\u201d, there\u2019s no one luckier on earth to have lived with such amazing women. So lucky, he married one of them.\n\nAnd before you get too grossed out by that, context is key; my oldest son married Emily\u2019s oldest daughter. It\u2019s a polarizing statement, but far more normal than first glance ever gets credit for. They first met on our wedding day, remaining true to themselves as bratty independent teenagers who wanted no truck with our second marriage. Lucky for them, and for us.\n\nBecause of their marriage, Emily and I have our first grandchild, and we have the bizarre and unlooked-for opportunity to see, without all that unnecessary mucking about with pregnancy, what a child of ours may have actually looked like.\n\n---\n\nBrother Weitz sent me a text message just over two weeks ago, asking me to speak in sacrament meeting today about the Christlike attribute of knowledge. He went on to say that the topic could obviously be taken in several directions, for the which I am grateful, as I am nothing without my rabbit holes and diversions. I promptly answered, \"Of course, my friend.\", in my usual overly confident-while-texting bravado. As per usual, that is where my confidence remained, as life continued unabated after the invitation.\n\nUnusually tight deadlines at work caused me to work close to 80 hours a week lately. So by the time I actually sat down to prepare this talk, there was no part of me that felt wise or spiritual. What I did feel was tired and behind. I felt acutely aware of my own limits and what I could produce. As it turns out, that was just the right place to begin.\n\nHumans tend to speak about knowledge as though it were possession. For me, it feels like facts I have collected, or maybe a doctrine I can explain tidily, or a ready answer I can give a child.\n\nBut a Christlike attribute is not something Christ calls a possession. Rather, it is part of His nature. So Christlike knowledge must be more than having correct information. It must describe a way of seeking truth, a way of seeing people, and a way of living in response to what we learn.\n\nMy central thought today is this: **Christlike knowledge begins in humility, sees people mercifully, and proves itself in love.**\n\nDoctrine and Covenants chapter 93 says that truth is _\"knowledge of things as they are, and as they were, and as they are to come.\"_ To me, that means truth is not merely knowledge of things as I would _prefer_ them to be. It is not the version of events that protects my pride or leaves my existing beliefs undisturbed. Truth asks us to receive reality as it is and what it will become. That requires humility, because no one sees the whole of reality.\n\nThe same section of the Doctrine and Covenants describes Jesus Christ in mortality as receiving \"grace for grace\" until He received a fullness. Luke likewise says that Jesus \"increased in wisdom and stature, and in favour with God and man.\" Even the Savior's mortal life included growth. Preach My Gospel teaches that becoming like Him is a gradual, lifelong process.\n\nIf the scriptural account of Christ's mortal life includes increase, growth, and grace for grace, then we should not be ashamed to be learners. The willingness to learn is itself one of the ways we become like Him.\n\nFor much of my life, I treated spiritual knowledge almost like a final examination. Every statement seemed to come with two circles: TRUE and FALSE. I thought my truest self should be able to circle TRUE immediately, confidently, and permanently. If I hesitated, hesitation was a failure. Thank heaven I do not experience faith quite that neatly anymore.\n\nMy own knowledge gaps are not small. They concern history, revelation, pain, and the explanations we receive are inadequate to that pain. Others concern what we do when God feels absent and prayer does not bring clarity, or when an old answer no longer seems satisfactory enough for the question. I mention these gaps because I suspect I am not the only person who has sat in a church pew, loving the gospel yet finding that some things no longer fit together neatly.\n\n---\n\nAs mentioned before, I have given talks from this very place and from others like it, during different eras of my life. For example, a much younger version of myself inferred how a faithful person was supposed to look. So, I wore the white shirt and navy suit. I repeated words that made me recognizable to the lay clergy. At my core, I wanted to belong, to be seen as worthy, and to feel safe. At 19, I went on a mission faithfully. Yet, I came home six months later. I then married young, believing I had found stability and managed to escape the shadows of my childhood home. But in reality, I carried those shadows with me. Over and over, I brought fear, anxiety, and unnamed wounds into relationships with people who carried histories of their own.\n\nIn a more tender light, I can see each version of me was sincere. They were proof of my own survival. And they were yet a more preparatory truth; I spent much of my life carrying an impossible burden: the burden of proving that my life was under control.\n\nBecause isn\u2019t it a fact that a good missionary endures? Certainly, a loving and faithful husband keeps his marriage intact. An attentive father provides stability. A life-long Church member knows what he believes. And a good sacrament speaker stands at the pulpit and makes the story coherent. I may get there today ;)\n\nSymbolically, that old era is dying. But I have not figured everything out. These are not admirable confessions, and I am not claiming that I no longer care what anyone thinks. What is dying is the person who believed that caring for others required controlling every possible response to his presence.\n\nI still want to speak carefully and accept responsibility for what I say. But I am learning that I can care about another person's response without shrinking in an attempt to control their response.\n\nTo button up this portion of my story, I know that age and context do not absolve me of the ways my fear, avoidance, anxiety, or unexamined wounds have affected others. But accountability does not require me to flatten my entire life into a guilty verdict either. To know more fully is not to excuse. It is to tell my truth with greater precision.\n\n---\n\nAlma chapter 32 offers a humane description of that kind of knowledge. When the seed begins to grow, Alma says, \"your knowledge is perfect in that thing.\" Those final words matter: **_in that thing_**. He does not say that one spiritual experience settles every historical, doctrinal, or personal question. We can know something real without claiming to know everything. A measured testimony is still a testimony. Honest faith is not inferior faith.\n\nMaybe this is sometimes what faith looks like: not knowing exactly where to go, but refusing to lie about where we are, and continuing to turn toward Christ.\n\nThere is a story near the end of Luke. Two disciples are walking from Jerusalem to Emmaus after the Crucifixion. Their understanding of everything that has happened is broken. Jesus draws near and walks with them, but they do not recognize Him.\n\nOf course Jesus already knows what has happened. He knows who He is. He knows the tomb is empty. Yet He asks them what they are talking about.\n\nThey stop. Luke says they are sad. They tell Him about the prophet they believed would redeem Israel. They tell Him about the Crucifixion, the empty tomb, and the bewildering report of angels. They possess many of the facts, but they do not yet know what those facts mean. Then they say, \u201cBut we trusted that it had been he which should have redeemed Israel.\u201d\n\nWe trusted.\n\nTheir hope shifted into the past tense. They are speaking of redemption to the Redeemer as though redemption has already failed. They are mourning the loss of Christ while the living Christ walks beside them. And He lets them speak.\n\nChrist does not reveal Himself immediately and He does not interrupt their grief with the triumphant ending. He listens as they tell Him an incomplete account of His own story.\n\nNor does He wait in Jerusalem for them to return with corrected theology. He joins them on the road they are already walking\u2014even though, for the moment, it is a road leading away from the place where they expected redemption to occur.\n\nHe walks with them. He opens the scriptures. He accepts their invitation to remain. And at the table, He takes bread, blesses it, breaks it, and gives it to them.\n\nOnly then are their eyes opened.\n\nOnly then do they recognize that the person they believed they had lost had been accompanying them all along.\n\n_Not Christ waiting at the end, after they finally understand._\n\n_Christ drawing near and going with them._\n\nThat brings us to the part of Christlike knowledge that feels central to me.\n\n---\n\nAlma chapter 7 says that Christ would suffer \"pains and afflictions and temptations of every kind.\" He would take upon Him the pains, sicknesses, death, and infirmities of His people.\n\nAlma goes on to tell us why, explaining: \"that his bowels may be filled with mercy, according to the flesh, that he may know according to the flesh how to succor his people according to their infirmities.\" Replace the word infirmities with any mortal experience you want.\n\nThe next verse creates an undeniable tension, which is exactly what wrestling with the word means: \"The Spirit knoweth all things; nevertheless the Son of God suffereth according to the flesh.\"\n\nThe tension is introduced because Christ is described as already possessing divine knowledge. But his mortal ministry was essential, He entered the body. He suffered. His knowledge is not remote observation. It is knowledge according to the flesh.\n\nAnd what is that knowledge for?\n\nTo succor. To run toward. To support. To accompany. Christlike knowledge is not merely the power to describe another person's pain correctly. It is the willingness to meet that person where they are, on the road to Emmaus, when they believe their Savior is lost.\n\nIn John 4, Jesus meets a Samaritan woman at a well. He knows her complicated history, but He does not reduce her to it. He asks her for a drink. He speaks with her seriously about worship, truth, and living water. While other disciples marvel that He is speaking with her at all, she becomes a witness who brings others to Him.\n\n_Christ\u2019s knowledge meant he knew the whole of her story without letting the hardest and most obvious part of it define how he saw her._\n\nThen, in the parable of the good Samaritan, a lawyer asks Jesus a knowledge question: \"Who is my neighbour?\" A priest sees the wounded man, as does a Levite. Both pass by. Then comes the Samaritan, but he allows what he knows to materialize into responsibility. He crosses the distance between observation and love.\n\nThose two Samaritan stories teach me that information is not the same as understanding. We can know something about a person and still be deeply wrong about them. Christlike knowledge asks: What has this person lived through? What are they carrying that I cannot see? What part of their story have I not yet earned the right to hear? And then: What does what I know ask me to do?\n\n---\n\nThis also changes the way I think about Christ as judge. In John chapter 5, Jesus says the Father has committed judgment to the Son and has given Him authority to execute judgment \"because he is the Son of man.\"\n\nThen Jesus says something beautiful: \"As I hear, I judge.\"\n\n_As I hear._ The judge is also the listener; the one who has entered humanity, who knows according to the flesh, and who gives life to the dead.\n\nHebrews chapter 4 says that the word of God is a discerner of \"the thoughts and intents of the heart\" and that all things are \"naked and opened\" before Him. That image could be terrifying. With nothing hidden, there is no ability to massage the evidence. There is no white shirt or navy suit on earth convincing Him that our lives are more orderly than they are.\n\nBut the passage does not end there. It immediately tells us that our great high priest is \"touched with the feeling of our infirmities.\" And then it says, \"Let us therefore come boldly unto the throne of grace.\"\n\nThe beautiful irony is that complete exposure should not drive us from Christ. Because the one who sees us in our nakedness is also the one who knows infirmity, we can approach. Because in reality, he has walked beside us in our anxiety.\n\nFor a long while, I found comfort in saying, \"Christ knows I am trying. He knows my heart. He knows where I have been.\" And yet I still believe that. But \"He knows my heart\" is not an excuse I issue to myself. It is my consent to be known and seen beyond my own arguments.\n\nJesus Christ knows when I was trying. He also knows when I was avoiding or assigning blame. He saw me seeking control, loving sincerely, acting from fear, causing harm, or doing the best I could with capacities I did not yet possess. His knowledge makes both intention and consequence visible at the same time. It dismantles both easy self-exoneration and total self-condemnation. Christ knows too much to permit any of us to distill our lives into either of those resolutions.\n\nPaul warned that \"knowledge puffeth up, but charity edifieth.\" Doctrine and Covenants 121 places \"pure knowledge\" beside persuasion, long-suffering, gentleness, meekness, love unfeigned, and kindness. Christlike knowledge does not use truth as ammunition. It becomes humility, repentance, compassion, and service. It becomes love.\n\nThere is one question I carry in my mind almost constantly, and it\u2019s this: Which version of myself have I judged from partial evidence?\n\nAnd while time travel is not possible, I can reach behind me within the landscape of my own mind. I can reach toward the 19-year-old missionary who came home after six months, believing failure had become his name; the young person searching for a perfect Latter-day Saint marriage because he wanted a home without the shadows of the one in which he grew up; the husband who blamed outward because inward examination felt unbearable; the divorced father who mistook survival for miraculous healing; and the newly remarried man who stood at a pulpit four years ago trying to convince himself and the people he loved that his life was under control.\n\nI do not want to reach back to my younger selves to correct them, or to say that they did nothing wrong. That person, that version of me, made choices. Those choices caused harm. Those versions of me were also frightened, sincere, loving, limited people who did not yet have all the words they needed.\n\nI want to guide them home. I want to bring them with me. And when I imagine Christ in those memories, I no longer imagine Him waiting at the end of my understanding, ready to receive whichever version of me finally figures everything out.\n\nI see Christ beside the frightened and overwhelmed missionary. Jesus beside the young husband reaching for certainty by repeating what they saw others do. Christ beside the person assigning blame because he did not yet know how to look inward safely. Christ beside the father being carried through stormy weather. Christ beside the exhausted person speaking today without knowing who they will become.\n\nNot Christ as the reward for finally producing an accurate account of myself. _Christ as the companion who can withstand every revision._\n\nChrist remains the ultimate goal. I no longer believe I must arrive as Christ in mortality before I am permitted to walk with Him. Perhaps becoming like Him begins here: when I stop issuing final judgments from partial knowledge about the stranger, the person who hurt me, the person I hurt, and the unfinished person I meet in the mirror.\n\n_Today I cannot offer a testimony made impressive by the absence of questions. I can offer something more honest: I know enough to continue._\n\nI know grace is real because I have needed it. I know that repentance is not simply punishment because I have felt the relief of turning again toward God. I know that when I try to see another person through the eyes of Christ, my heart changes. I know that the teachings of Jesus continue to reveal hardness in me and invite me to become gentler.\n\nI believe Jesus Christ is the Son of God and the Redeemer of the world. I believe His Resurrection means that death, grief, failure, and estrangement will not have the final word. I believe He knows us completely; our faith and our fear, our devotion and our contradiction, the questions we can articulate and the ones we can only feel. And He does not turn away.\n\nOur knowledge can become more like Christ's: humble enough to keep learning, honest enough to receive truth as it is, merciful enough to see a whole person, and brave enough to become love. Jesus Christ knows us and loves us. Because He knows us, we can come to Him without disguise. Because He loves us, we do not have to remain as we are. In the name of Jesus Christ, amen.",
