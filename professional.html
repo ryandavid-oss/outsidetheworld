@@ -606,6 +606,175 @@
             min-height: 245px;
         }
 
+        .internal-tools-intro {
+            position: relative;
+            display: grid;
+            grid-template-columns: minmax(260px, 0.8fr) minmax(0, 1.2fr);
+            gap: clamp(34px, 7vw, 88px);
+            margin-bottom: 22px;
+            padding: clamp(30px, 5vw, 52px);
+            overflow: hidden;
+            border: 1px solid rgba(160, 190, 245, 0.26);
+            border-radius: 4px;
+            background:
+                linear-gradient(135deg, rgba(99, 149, 238, 0.16), transparent 46%),
+                linear-gradient(315deg, rgba(145, 175, 179, 0.11), transparent 48%),
+                var(--surface);
+        }
+
+        .internal-tools-intro::before {
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--blue), var(--light-blue), var(--teal));
+            content: '';
+        }
+
+        .internal-tools-kicker,
+        .internal-tool-kicker {
+            margin-bottom: 10px !important;
+            color: var(--light-blue) !important;
+            font-size: 0.76rem;
+            font-weight: 680;
+            letter-spacing: 0.075em;
+            line-height: 1.45;
+            text-transform: uppercase;
+        }
+
+        .internal-tools-intro h3 {
+            max-width: 450px;
+            margin-bottom: 0;
+            font-size: clamp(1.8rem, 3.3vw, 3rem);
+            font-weight: 590;
+            letter-spacing: -0.045em;
+            line-height: 1.08;
+        }
+
+        .internal-tools-intro > p {
+            align-self: end;
+            max-width: 650px;
+            margin-bottom: 0;
+            color: var(--muted);
+            font-size: clamp(1.02rem, 1.6vw, 1.18rem);
+            line-height: 1.7;
+        }
+
+        .internal-tool-card {
+            --tool-accent: var(--blue);
+            --tool-accent-rgb: 99, 149, 238;
+            position: relative;
+            min-height: 430px;
+            padding: clamp(26px, 3.3vw, 38px);
+            overflow: hidden;
+            border-color: rgba(var(--tool-accent-rgb), 0.34);
+            background:
+                radial-gradient(circle at 100% 0, rgba(var(--tool-accent-rgb), 0.17), transparent 45%),
+                linear-gradient(160deg, rgba(var(--tool-accent-rgb), 0.07), transparent 58%),
+                var(--surface);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.025);
+        }
+
+        .internal-tool-card::before {
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            height: 3px;
+            background: var(--tool-accent);
+            content: '';
+        }
+
+        .internal-tool-card.is-current {
+            --tool-accent: var(--light-blue);
+            --tool-accent-rgb: 160, 190, 245;
+        }
+
+        .internal-tool-card.is-greeter {
+            --tool-accent: var(--teal);
+            --tool-accent-rgb: 145, 175, 179;
+        }
+
+        .internal-tool-visual {
+            display: grid;
+            place-items: center;
+            width: 64px;
+            height: 64px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(var(--tool-accent-rgb), 0.48);
+            border-radius: 16px;
+            background: rgba(var(--tool-accent-rgb), 0.11);
+            color: var(--tool-accent);
+        }
+
+        .internal-tool-visual svg {
+            width: 31px;
+            height: 31px;
+        }
+
+        .internal-tool-visual.is-product-logo {
+            position: relative;
+            display: block;
+            width: 178px;
+            height: 64px;
+            overflow: hidden;
+            border-color: rgba(var(--tool-accent-rgb), 0.35);
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.18);
+        }
+
+        .fleet-product-logo,
+        .greet-product-logo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 154px;
+            max-width: none;
+            transform: translate(-50%, -50%);
+        }
+
+        .current-product-logo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 184px;
+            max-width: none;
+            transform: translate(-50%, -50%) scale(1.15);
+        }
+
+        .internal-tool-card h3 {
+            margin-bottom: 14px;
+            font-size: clamp(1.45rem, 2.2vw, 1.8rem);
+        }
+
+        .internal-tool-card > p:not(.internal-tool-kicker) {
+            color: var(--muted);
+            font-size: 1rem;
+            line-height: 1.68;
+        }
+
+        .internal-tool-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: auto 0 0;
+            padding: 28px 0 0;
+            list-style: none;
+        }
+
+        .internal-tool-details li {
+            padding: 6px 9px;
+            border: 1px solid rgba(var(--tool-accent-rgb), 0.25);
+            border-radius: 999px;
+            background: rgba(var(--tool-accent-rgb), 0.07);
+            color: #d5d8db;
+            font-size: 0.72rem;
+            font-weight: 590;
+            letter-spacing: 0.015em;
+            line-height: 1.25;
+        }
+
         .work-card p {
             max-width: 510px;
         }
@@ -888,6 +1057,19 @@
                 grid-template-columns: 1fr;
             }
 
+            .internal-tools-intro {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .internal-tools-intro > p {
+                max-width: 720px;
+            }
+
+            .internal-tool-card {
+                min-height: 370px;
+            }
+
             .service,
             .service:nth-child(odd),
             .service:nth-child(even) {
@@ -933,6 +1115,18 @@
 
             .work-card {
                 min-height: 280px;
+            }
+
+            .internal-tools-intro {
+                padding: 28px 24px;
+            }
+
+            .internal-tool-card {
+                min-height: 0;
+            }
+
+            .internal-tool-details {
+                margin-top: 6px;
             }
 
             .proof-item,
@@ -1169,31 +1363,71 @@
                         </div>
                     </div>
 
-                    <div class="work-group">
-                        <h3 class="work-group-title">Internal tools</h3>
+                    <div class="work-group internal-tools">
+                        <div class="internal-tools-intro">
+                            <div>
+                                <p class="internal-tools-kicker">Internal software</p>
+                                <h3>Custom software for complex operations.</h3>
+                            </div>
+                            <p>
+                                I designed and developed these products from the ground up with advanced, modern web
+                                technologies. Each one is shaped around real organizational workflows and rivals the
+                                capability and polish of industry-standard platforms that can cost thousands of dollars.
+                            </p>
+                        </div>
                         <div class="work-grid work-grid-three">
-                            <article class="work-card work-card-compact">
-                                <h3>Inventory system</h3>
+                            <article class="work-card internal-tool-card is-inventory">
+                                <div class="internal-tool-visual is-product-logo">
+                                    <img class="fleet-product-logo" src="Images/assets/fleet-product-logo.png" alt=""
+                                        width="900" height="300" loading="lazy" />
+                                </div>
+                                <p class="internal-tool-kicker">Inventory and asset operations</p>
+                                <h3>Fleet</h3>
                                 <p>
-                                    A custom system for keeping organizational inventory, status, and ownership easier
-                                    to track and maintain.
+                                    A purpose-built inventory platform for tracking organizational equipment,
+                                    assignments, status, ownership, returns, and the full lifecycle of important assets.
                                 </p>
+                                <ul class="internal-tool-details" aria-label="Fleet capabilities">
+                                    <li>Asset lifecycle</li>
+                                    <li>Assignments</li>
+                                    <li>Accountability</li>
+                                </ul>
                             </article>
 
-                            <article class="work-card work-card-compact">
-                                <h3>Project tracker</h3>
+                            <article class="work-card internal-tool-card is-current">
+                                <div class="internal-tool-visual is-product-logo">
+                                    <img class="current-product-logo" src="Images/assets/current-product-logo.png" alt=""
+                                        width="768" height="768" loading="lazy" />
+                                </div>
+                                <p class="internal-tool-kicker">Project and operations management</p>
+                                <h3>CFSS Current</h3>
                                 <p>
-                                    A shared tool for organizing active projects, responsibilities, progress, and the
-                                    work that needs attention next.
+                                    A secure shared operating system for projects, work items, owners, priorities,
+                                    target dates, progress, intake, recurring responsibilities, and leadership visibility.
                                 </p>
+                                <ul class="internal-tool-details" aria-label="CFSS Current capabilities">
+                                    <li>Projects and work</li>
+                                    <li>Operational intake</li>
+                                    <li>Shared visibility</li>
+                                </ul>
                             </article>
 
-                            <article class="work-card work-card-compact">
-                                <h3>Guest greeter app</h3>
+                            <article class="work-card internal-tool-card is-greeter">
+                                <div class="internal-tool-visual is-product-logo">
+                                    <img class="greet-product-logo" src="Images/assets/greet-product-logo.png" alt=""
+                                        width="900" height="300" loading="lazy" />
+                                </div>
+                                <p class="internal-tool-kicker">Tablet-first visitor experience</p>
+                                <h3>Greet</h3>
                                 <p>
-                                    A tablet app that welcomes visitors and supports a simpler, clearer front-desk
-                                    arrival process.
+                                    A welcoming front-desk application that guides visitor arrival, presents important
+                                    information clearly, and gives staff a simpler, more consistent handoff.
                                 </p>
+                                <ul class="internal-tool-details" aria-label="Guest greeter app capabilities">
+                                    <li>Tablet-first</li>
+                                    <li>Guided arrival</li>
+                                    <li>Front-desk handoff</li>
+                                </ul>
                             </article>
                         </div>
                     </div>
