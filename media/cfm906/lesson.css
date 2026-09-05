@@ -211,6 +211,22 @@ video::cue { font-family: Arial, sans-serif; font-size: 1.15em; background: #000
 .praise-form .primary:hover:not(:disabled) { background: var(--heritage-navy); }
 .praise-form .quiet-button { grid-column: 1 / -1; justify-self: start; padding: 6px 0; min-height: 36px; font-size: .8rem; }
 .praise-slide .moment-reference { grid-area: reference; margin-top: 0; font-size: .95rem; }
+.scripture-reading { overflow: hidden; }
+.scripture-reader { width: min(1280px, calc(100vw - 48px)); height: min(88svh, 1060px); max-width: none; max-height: calc(100svh - 32px); padding: 0; margin: auto; color: var(--white); background: var(--night); border: 1px solid var(--deep-slate); border-radius: 10px; box-shadow: 0 24px 100px #0008; }
+.scripture-reader[open] { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; }
+.scripture-reader::backdrop { background: #000c; backdrop-filter: blur(7px); }
+.scripture-reader-header { display: flex; justify-content: space-between; align-items: start; gap: 24px; padding: clamp(22px, 3vw, 40px) clamp(24px, 4vw, 60px); border-bottom: 1px solid var(--line); }
+.scripture-reader-header .eyebrow { margin: 0 0 12px; }
+.scripture-reader-header h2 { margin: 0; font: 300 clamp(1.8rem, 3vw, 3rem)/1.25 'Merriweather', Georgia, serif; letter-spacing: -.035em; color: var(--brand-light-blue); outline: none; }
+.scripture-reader-header button { flex-shrink: 0; }
+.scripture-reader-body { min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: clamp(24px, 4vw, 56px) clamp(24px, 4vw, 60px); scrollbar-color: var(--deep-slate) var(--night); }
+.scripture-reader-body:focus-visible { outline: 2px solid var(--brand-teal); outline-offset: -4px; }
+.scripture-reader-body p { display: grid; grid-template-columns: 2.2ch minmax(0, 1fr); gap: 16px; margin: 0; font: 300 clamp(1.8rem, 3.2vw, 3.3rem)/1.55 'Merriweather', Georgia, serif; overflow-wrap: break-word; }
+.scripture-reader-body p + p { margin-top: 30px; }
+.scripture-verse-number { color: var(--brand-teal); font: 400 .42em/1.5 'Fira Code', monospace; padding-top: .85em; }
+.scripture-reader-footer { display: flex; justify-content: space-between; gap: 14px; padding: 18px clamp(24px, 4vw, 60px); border-top: 1px solid var(--line); font-size: .875rem; line-height: 1.5; color: var(--muted); }
+.scripture-reader-footer a { color: var(--brand-teal); }
+a[data-scripture] { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .25em; }
 .lamp-verse { min-height: 215px; display: flex; align-items: center; margin: 28px 0 12px; }
 .lamp-verse blockquote { font: 300 clamp(1.85rem, 3.15vw, 3.5rem)/1.45 'Merriweather', Georgia, serif; margin: 0; letter-spacing: -.025em; }
 .lamp-verse blockquote span { display: block; }
@@ -261,6 +277,14 @@ video::cue { font-family: Arial, sans-serif; font-size: 1.15em; background: #000
   .praise-form { width: min(100%, 430px); }
 }
 @media (max-width: 720px) {
+  .scripture-reader { width: calc(100vw - 20px); height: calc(100svh - 24px); }
+  .scripture-reader-header { padding: 22px; gap: 14px; }
+  .scripture-reader-header .eyebrow { font-size: .75rem; }
+  .scripture-reader-header h2 { font-size: 1.7rem; }
+  .scripture-reader-header button { padding: 10px 12px; }
+  .scripture-reader-body { padding: 26px 20px; }
+  .scripture-reader-body p { font-size: 1.65rem; gap: 10px; }
+  .scripture-reader-footer { padding: 16px 22px; flex-wrap: wrap; }
   .header { gap: 4px 12px; }
   .header-actions { flex-wrap: wrap; max-width: 100%; }
   .moments-panel { left: 50%; right: auto; transform: translateX(-50%); width: 300px; }
@@ -273,6 +297,7 @@ video::cue { font-family: Arial, sans-serif; font-size: 1.15em; background: #000
   .connection-passage { padding-left: 18px; }
 }
 @media print {
+  .scripture-reader { display: none !important; }
   .presentation { background: white; }
   .lesson-art { max-width: 400px; }
   .lesson-art img { max-height: none; }

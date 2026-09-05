@@ -7,6 +7,8 @@
   const slides = Array.from(document.querySelectorAll(".slide"));
   const videos = Array.from(document.querySelectorAll("video"));
   const guide = $("lesson-guide");
+  const scriptureReader = $("scripture-reader");
+  let scriptureOpener = null;
   let current = "welcome";
   let returnFromMoment = "welcome";
   let noticeTimeout;
@@ -30,6 +32,7 @@
 
   function show(id, updateHash = true) {
     if (!Object.hasOwn(labels, id)) return;
+    if (scriptureReader.open) scriptureReader.close();
     const isOptional = optionalMoments.includes(id);
     if (isOptional && sequence.includes(current)) returnFromMoment = current;
     const focusWasInSlide = $("stage").contains(document.activeElement) || $("moments-menu").contains(document.activeElement);
@@ -83,6 +86,128 @@
     if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) guide.close();
   });
 
+  // KJV verse text checked against the linked Church scripture pages, September 5, 2026.
+  // Chapter headings and study notes are excluded; passages are included locally for immediate reading.
+  const scriptureChapters = {
+  "ot/ps/103": {
+    "title": "Psalm 103",
+    "verses": {
+      "1": "Bless the Lord, O my soul: and all that is within me, bless his holy name.",
+      "2": "Bless the Lord, O my soul, and forget not all his benefits:",
+      "3": "Who forgiveth all thine iniquities; who healeth all thy diseases;",
+      "4": "Who redeemeth thy life from destruction; who crowneth thee with lovingkindness and tender mercies;",
+      "5": "Who satisfieth thy mouth with good things; so that thy youth is renewed like the eagle’s.",
+      "8": "The Lord is merciful and gracious, slow to anger, and plenteous in mercy.",
+      "9": "He will not always chide: neither will he keep his anger for ever.",
+      "10": "He hath not dealt with us after our sins; nor rewarded us according to our iniquities.",
+      "11": "For as the heaven is high above the earth, so great is his mercy toward them that fear him.",
+      "12": "As far as the east is from the west, so far hath he removed our transgressions from us.",
+      "13": "Like as a father pitieth his children, so the Lord pitieth them that fear him.",
+      "14": "For he knoweth our frame; he remembereth that we are dust."
+    }
+  },
+  "ot/ps/119": {
+    "title": "Psalm 119",
+    "verses": {
+      "105": "Thy word is a lamp unto my feet, and a light unto my path."
+    }
+  },
+  "ot/ps/118": {
+    "title": "Psalm 118",
+    "verses": {
+      "22": "The stone which the builders refused is become the head stone of the corner.",
+      "25": "Save now, I beseech thee, O Lord: O Lord, I beseech thee, send now prosperity.",
+      "26": "Blessed be he that cometh in the name of the Lord: we have blessed you out of the house of the Lord."
+    }
+  },
+  "ot/ps/110": {
+    "title": "Psalm 110",
+    "verses": {
+      "4": "The Lord hath sworn, and will not repent, Thou art a priest for ever after the order of Melchizedek."
+    }
+  },
+  "nt/matt/21": {
+    "title": "Matthew 21",
+    "verses": {
+      "9": "And the multitudes that went before, and that followed, cried, saying, Hosanna to the Son of David: Blessed is he that cometh in the name of the Lord; Hosanna in the highest.",
+      "42": "Jesus saith unto them, Did ye never read in the scriptures, The stone which the builders rejected, the same is become the head of the corner: this is the Lord’s doing, and it is marvellous in our eyes?"
+    }
+  },
+  "nt/heb/5": {
+    "title": "Hebrews 5",
+    "verses": {
+      "4": "And no man taketh this honour unto himself, but he that is called of God, as was Aaron.",
+      "5": "So also Christ glorified not himself to be made an high priest; but he that said unto him, Thou art my Son, to day have I begotten thee.",
+      "6": "As he saith also in another place, Thou art a priest for ever after the order of Melchisedec.",
+      "7": "Who in the days of his flesh, when he had offered up prayers and supplications with strong crying and tears unto him that was able to save him from death, and was heard in that he feared;",
+      "8": "Though he were a Son, yet learned he obedience by the things which he suffered;",
+      "9": "And being made perfect, he became the author of eternal salvation unto all them that obey him;",
+      "10": "Called of God an high priest after the order of Melchisedec."
+    }
+  }
+};
+
+  function scriptureFor(href) {
+    let url;
+    try { url = new URL(href); } catch (_) { return null; }
+    if (url.origin !== "https://www.churchofjesuschrist.org") return null;
+    const chapterId = url.pathname.replace("/study/scriptures/", "");
+    if (!Object.hasOwn(scriptureChapters, chapterId)) return null;
+    const chapter = scriptureChapters[chapterId];
+    const range = /^p(\d+)(?:-p(\d+))?$/.exec(url.searchParams.get("id") || url.hash.slice(1));
+    if (!chapter || !range) return null;
+    const first = Number(range[1]);
+    const last = Number(range[2] || range[1]);
+    if (first > last || last - first > 30) return null;
+    const verses = [];
+    for (let number = first; number <= last; number += 1) {
+      if (!Object.hasOwn(chapter.verses, number)) return null;
+      verses.push({ number, text: chapter.verses[number] });
+    }
+    return { title: chapter.title + ":" + first + (last === first ? "" : "–" + last), verses };
+  }
+
+  document.querySelectorAll("[data-scripture]").forEach((link) => {
+    link.addEventListener("click", (event) => {
+      if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || (event.button !== undefined && event.button !== 0)) return;
+      const passage = scriptureFor(link.href);
+      if (!passage) return; // Keep the original Church link usable if a passage is not included.
+      event.preventDefault();
+      scriptureOpener = link;
+      videos.forEach((video) => video.pause());
+      $("scripture-reader-title").textContent = passage.title;
+      $("scripture-reader-source").href = link.href;
+      const content = $("scripture-reader-body");
+      content.replaceChildren();
+      passage.verses.forEach((verse) => {
+        const paragraph = document.createElement("p");
+        const number = document.createElement("span");
+        number.className = "scripture-verse-number";
+        number.textContent = String(verse.number);
+        number.setAttribute("aria-label", "Verse " + verse.number);
+        const text = document.createElement("span");
+        text.textContent = verse.text;
+        paragraph.append(number, text);
+        content.append(paragraph);
+      });
+      scriptureReader.showModal();
+      document.body.classList.toggle("scripture-reading", true);
+      content.scrollTop = 0;
+      $("scripture-reader-title").focus({ preventScroll: true });
+    });
+  });
+  $("scripture-reader-close").addEventListener("click", () => scriptureReader.close());
+  scriptureReader.addEventListener("cancel", (event) => { event.preventDefault(); scriptureReader.close(); });
+  scriptureReader.addEventListener("click", (event) => {
+    if (event.target !== scriptureReader) return;
+    const rect = scriptureReader.getBoundingClientRect();
+    if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) scriptureReader.close();
+  });
+  scriptureReader.addEventListener("close", () => {
+    document.body.classList.toggle("scripture-reading", false);
+    if (scriptureOpener && document.contains(scriptureOpener) && !scriptureOpener.closest(".slide")?.hidden) scriptureOpener.focus({ preventScroll: true });
+  });
+
   document.querySelectorAll("[data-reveal]").forEach((button) => {
     button.addEventListener("click", () => {
       const content = $(button.dataset.reveal);
@@ -103,7 +228,7 @@
     selectedScenario = id;
     const scenario = scenarios[id];
     document.querySelectorAll("[data-scenario]").forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.scenario === id)));
-    $("activity-reference").textContent = scenario.reference + " ↗";
+    $("activity-reference").textContent = scenario.reference;
     $("activity-reference").href = scenario.url;
     $("activity-verse").textContent = scenario.verse;
     $("activity-verse").hidden = true;
@@ -204,10 +329,10 @@
     const item = connections[connectionIndex];
     connectionRevealed = false;
     $("connection-count").textContent = "Connection " + (connectionIndex + 1) + " of 3";
-    $("connection-reference").textContent = "Read " + item.reference + " ↗";
+    $("connection-reference").textContent = "Read " + item.reference;
     $("connection-reference").href = "https://www.churchofjesuschrist.org/study/scriptures/" + item.url;
     $("connection-verse").textContent = item.verse;
-    $("connection-answer-reference").textContent = "Read " + item.answer + " ↗";
+    $("connection-answer-reference").textContent = "Read " + item.answer;
     $("connection-answer-reference").href = "https://www.churchofjesuschrist.org/study/scriptures/" + item.answerUrl;
     $("connection-explanation").textContent = item.explanation;
     $("connection-answer").hidden = true;
@@ -312,7 +437,7 @@
   });
   document.addEventListener("visibilitychange", () => { paintTimer(); requestWakeLock(); });
   window.addEventListener("keydown", (event) => {
-    if (event.defaultPrevented || event.altKey || event.ctrlKey || event.metaKey || guide.open) return;
+    if (event.defaultPrevented || event.altKey || event.ctrlKey || event.metaKey || guide.open || scriptureReader.open) return;
     if (event.key === "Escape" && $("moments-menu").open) { $("moments-menu").open = false; $("moments-menu").querySelector("summary").focus(); return; }
     if (event.target instanceof Element && event.target.closest("input, select, textarea, video, summary, [contenteditable]")) return;
     if (event.key === "ArrowRight" || event.key === "PageDown") { event.preventDefault(); advance(1); }
