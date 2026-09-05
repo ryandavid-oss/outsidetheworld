@@ -192,17 +192,25 @@ video::cue { font-family: Arial, sans-serif; font-size: 1.15em; background: #000
 .moment-reference { border-top: 1px solid var(--line); margin: 24px 0 0; padding-top: 20px; line-height: 1.6; font-size: 1rem; display: flex; flex-wrap: wrap; gap: 10px 24px; }
 .moment-reference a { color: var(--accent); }
 .moment-reference span { color: var(--muted); }
-.praise-wall { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; justify-content: center; min-height: 150px; padding: 24px 0; }
+.praise-slide { display: grid; grid-template-columns: minmax(250px, .85fr) minmax(0, 1.65fr); grid-template-areas: "prompt words" "entry words" "reference reference"; grid-template-rows: 1fr auto auto; gap: 24px clamp(28px, 4vw, 64px); }
+.praise-prompt { grid-area: prompt; align-self: center; }
+.praise-prompt .moment-title { font-size: clamp(2.2rem, 3.3vw, 4rem); }
+.praise-prompt .eyebrow { font-size: .8rem; line-height: 1.7; }
+.praise-display { grid-area: words; container-type: inline-size; min-width: 0; min-height: clamp(360px, 53svh, 620px); display: grid; align-items: center; }
+.praise-wall { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; align-content: center; justify-content: center; min-width: 0; width: 100%; padding: 12px 0; }
 .praise-wall:empty { display: none; }
 .praise-wall > div { min-width: 0; max-width: 100%; }
-.praise-word { display: block; max-width: 100%; overflow-wrap: anywhere; color: var(--brand-light-blue); border: 1px solid var(--deep-slate); background: #1b365d66; padding: 12px 20px; border-radius: 5px; font: 300 clamp(1.3rem, 2vw, 2.1rem)/1.4 'Merriweather', Georgia, serif; }
+.praise-word { display: block; max-width: 100%; overflow-wrap: anywhere; color: var(--brand-light-blue); border: 1px solid var(--deep-slate); background: #1b365d66; padding: 10px 14px; border-radius: 5px; font: 300 clamp(1.5rem, 5vw, 8rem)/1.15 'Merriweather', Georgia, serif; font-size: clamp(1.5rem, calc(var(--praise-scale, 26) * 1cqw), 12rem); letter-spacing: -.035em; transition: font-size .25s ease, background .18s, border-color .18s; }
 .praise-wall > div:nth-child(3n + 2) .praise-word { color: var(--brand-teal); background: #3d52552e; }
 .praise-wall > div:nth-child(3n + 3) .praise-word { color: var(--white); background: var(--panel); }
-.praise-empty { display: flex; align-items: center; justify-content: center; min-height: 150px; margin: 0 0 18px; padding: 20px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); color: var(--muted); font-size: 1.2rem; text-align: center; }
-.praise-form { display: flex; align-items: center; gap: 12px; }
-.praise-form input { flex: 1; min-width: 0; border: 1px solid var(--line); border-radius: 5px; background: var(--panel); color: var(--white); padding: 15px 18px; font-size: 1rem; }
+.praise-empty { margin: 0; padding: 20px; color: var(--muted); font-size: 1.1rem; line-height: 1.6; text-align: center; }
+.praise-form { grid-area: entry; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 4px 8px; align-self: end; }
+.praise-form input { width: 100%; min-width: 0; min-height: 44px; border: 1px solid var(--line); border-radius: 5px; background: transparent; color: var(--white); padding: 9px 10px; font-size: 1rem; }
 .praise-form input::placeholder { color: var(--muted); }
-.praise-slide .activity-question { font-size: .875rem; margin-top: 12px; }
+.praise-form .primary { min-height: 44px; min-width: 0; padding: 9px 12px; font-size: .875rem; font-weight: 500; background: transparent; color: var(--brand-teal); border-color: var(--line); }
+.praise-form .primary:hover:not(:disabled) { background: var(--heritage-navy); }
+.praise-form .quiet-button { grid-column: 1 / -1; justify-self: start; padding: 6px 0; min-height: 36px; font-size: .8rem; }
+.praise-slide .moment-reference { grid-area: reference; margin-top: 0; font-size: .95rem; }
 .lamp-verse { min-height: 215px; display: flex; align-items: center; margin: 28px 0 12px; }
 .lamp-verse blockquote { font: 300 clamp(1.85rem, 3.15vw, 3.5rem)/1.45 'Merriweather', Georgia, serif; margin: 0; letter-spacing: -.025em; }
 .lamp-verse blockquote span { display: block; }
@@ -247,6 +255,10 @@ video::cue { font-family: Arial, sans-serif; font-size: 1.15em; background: #000
   .moment-heading > .scripture-reference, .moment-heading > .moment-count { display: inline-block; margin-top: 20px; }
   .connection-choices { grid-template-columns: 1fr; gap: 8px; }
   .connection-choices .scenario { padding: 16px; }
+  .praise-slide { grid-template-columns: 1fr; grid-template-areas: "prompt" "words" "entry" "reference"; gap: 22px; }
+  .praise-prompt .moment-title { font-size: clamp(2.1rem, 7vw, 3.3rem); }
+  .praise-display { min-height: 300px; }
+  .praise-form { width: min(100%, 430px); }
 }
 @media (max-width: 720px) {
   .header { gap: 4px 12px; }
@@ -254,9 +266,6 @@ video::cue { font-family: Arial, sans-serif; font-size: 1.15em; background: #000
   .moments-panel { left: 50%; right: auto; transform: translateX(-50%); width: 300px; }
   .moments-panel .small-label { font-size: .75rem; }
   .moment-title { font-size: clamp(2.1rem, 7vw, 3.3rem); }
-  .praise-form { flex-wrap: wrap; }
-  .praise-form input { flex-basis: 100%; }
-  .praise-form .primary { flex: 1; }
   .lamp-verse { min-height: 185px; margin-top: 24px; }
   .lamp-verse blockquote { font-size: clamp(1.65rem, 5vw, 2.5rem); }
   .moment-actions { gap: 10px; }

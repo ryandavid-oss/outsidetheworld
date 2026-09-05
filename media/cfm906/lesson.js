@@ -125,6 +125,9 @@
   const praiseWords = [];
   function paintPraise() {
     const wall = $("praise-wall");
+    // Keep the first response prominent; allow more room for longer phrases and a fuller wall.
+    const wordWeight = praiseWords.reduce((total, word) => total + Math.max(6, Array.from(word).length) / 6, 0);
+    wall.style.setProperty("--praise-scale", (26 / Math.sqrt(Math.max(1, wordWeight))).toFixed(3));
     wall.replaceChildren();
     praiseWords.forEach((word, index) => {
       const item = document.createElement("div");
