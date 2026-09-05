@@ -3,7 +3,7 @@
   const $ = (id) => document.getElementById(id);
   const sequence = ["welcome", "worship", "renewal", "learning", "together", "take-home"];
   const optionalMoments = ["psalms", "praise", "lamp", "connections"];
-  const labels = { welcome: "Welcome", worship: "Watch: our worship", renewal: "Discuss: renewal", learning: "Watch: our learning", together: "Discuss: learning", "take-home": "Take it home", psalms: "A moment in the Psalms", praise: "Gather our praise", lamp: "A light for the next step", connections: "Find Christ in the Psalms" };
+  const labels = { welcome: "Welcome", worship: "Sacrament meeting", renewal: "Discuss worship", learning: "Sunday School", together: "Discuss learning", "take-home": "At home", psalms: "Psalms moment", praise: "Praise wall", lamp: "Psalm 119:105", connections: "Find Christ in the Psalms" };
   const slides = Array.from(document.querySelectorAll(".slide"));
   const videos = Array.from(document.querySelectorAll("video"));
   const guide = $("lesson-guide");
@@ -213,7 +213,7 @@
       const content = $(button.dataset.reveal);
       content.hidden = !content.hidden;
       button.setAttribute("aria-expanded", String(!content.hidden));
-      button.innerHTML = content.hidden ? 'Go a little deeper <span aria-hidden="true">+</span>' : 'Hide follow-up <span aria-hidden="true">−</span>';
+      button.innerHTML = content.hidden ? 'Another question <span aria-hidden="true">+</span>' : 'Hide question <span aria-hidden="true">−</span>';
     });
   });
 
@@ -233,7 +233,7 @@
     $("activity-verse").textContent = scenario.verse;
     $("activity-verse").hidden = true;
     $("activity-invitation").hidden = false;
-    $("reveal-scripture").textContent = "Reveal a verse";
+    $("reveal-scripture").textContent = "Show one verse";
     $("reveal-scripture").setAttribute("aria-expanded", "false");
   }
   document.querySelectorAll("[data-scenario]").forEach((button) => button.addEventListener("click", () => chooseScenario(button.dataset.scenario)));
@@ -241,7 +241,7 @@
     const revealed = $("activity-verse").hidden;
     $("activity-verse").hidden = !revealed;
     $("activity-invitation").hidden = revealed;
-    $("reveal-scripture").textContent = revealed ? "Hide verse" : "Reveal a verse";
+    $("reveal-scripture").textContent = revealed ? "Hide verse" : "Show one verse";
     $("reveal-scripture").setAttribute("aria-expanded", String(revealed));
     if (revealed) $("slide-announcement").textContent = scenarios[selectedScenario].verseNumber + ". " + scenarios[selectedScenario].verse;
   });
@@ -279,8 +279,8 @@
     event.preventDefault();
     const word = Array.from($("praise-word").value.trim().replace(/\s+/g, " ")).slice(0, 32).join("");
     if (!word) { $("praise-word").focus(); return; }
-    if (praiseWords.length >= 12) { notify("Our wall is full. Remove a word to make room for another."); return; }
-    if (praiseWords.some((existing) => existing.toLocaleLowerCase() === word.toLocaleLowerCase())) { notify("That word is already part of our praise."); return; }
+    if (praiseWords.length >= 12) { notify("12 words added. Remove one to add another."); return; }
+    if (praiseWords.some((existing) => existing.toLocaleLowerCase() === word.toLocaleLowerCase())) { notify("That word is already on the wall."); return; }
     praiseWords.push(word);
     paintPraise();
     $("praise-word").value = "";
@@ -292,11 +292,11 @@
     paintPraise();
     $("praise-word").value = "";
     $("praise-word").focus();
-    $("slide-announcement").textContent = "The praise wall is clear.";
+    $("slide-announcement").textContent = "Words cleared.";
   });
 
   const lampPhrases = ["Thy word", "is a lamp unto my feet,", "and a light unto my path."];
-  const lampQuestions = ["What word stands out to you?", "Where have you heard the Lord’s word this week?", "What is one next step His word can help you take?", "How can that next step bring you closer to Jesus Christ?"];
+  const lampQuestions = ["What word stands out to you?", "Which scripture has helped you recently?", "When has a scripture helped you make a decision?", "What will you do this week to follow Jesus Christ?"];
   let lampStep = 0;
   function paintLamp() {
     lampPhrases.forEach((_, index) => { $("lamp-phrase-" + (index + 1)).hidden = index >= lampStep; });
@@ -305,7 +305,7 @@
     $("lamp-question").textContent = lampQuestions[lampStep];
     $("lamp-count").textContent = lampStep + " of 3 phrases";
     $("lamp-reveal").disabled = lampStep === 3;
-    $("lamp-reveal").textContent = lampStep === 3 ? "Verse revealed" : lampStep === 0 ? "Reveal first phrase" : "Reveal next phrase";
+    $("lamp-reveal").textContent = lampStep === 3 ? "Full verse shown" : lampStep === 0 ? "Show first phrase" : "Show next phrase";
     $("lamp-reset").disabled = lampStep === 0;
   }
   $("lamp-reveal").addEventListener("click", () => {
@@ -319,8 +319,8 @@
 
   const connections = [
     { reference: "Psalm 118:22", url: "ot/ps/118?lang=eng&id=p22#p22", verse: "“The stone which the builders refused is become the head stone of the corner.”", answer: "Matthew 21:42", answerUrl: "nt/matt/21?lang=eng&id=p42#p42", explanation: "Jesus quotes this psalm as He teaches about the rejected stone. What does it mean to build your life on Him?" },
-    { reference: "Psalm 118:25–26", url: "ot/ps/118?lang=eng&id=p25-p26#p25", verse: "“Blessed be he that cometh in the name of the Lord.” (verse 26)", answer: "Matthew 21:9", answerUrl: "nt/matt/21?lang=eng&id=p9#p9", explanation: "The crowd uses these words as Jesus enters Jerusalem. How can our worship welcome Him into our lives?" },
-    { reference: "Psalm 110:4", url: "ot/ps/110?lang=eng&id=p4#p4", verse: "“Thou art a priest for ever after the order of Melchizedek.”", answer: "Hebrews 5:4–10", answerUrl: "nt/heb/5?lang=eng&id=p4-p10#p4", explanation: "Hebrews applies this psalm to Christ’s calling as a high priest. What do these verses help you understand about His saving work?" },
+    { reference: "Psalm 118:25–26", url: "ot/ps/118?lang=eng&id=p25-p26#p25", verse: "“Blessed be he that cometh in the name of the Lord.” (verse 26)", answer: "Matthew 21:9", answerUrl: "nt/matt/21?lang=eng&id=p9#p9", explanation: "The crowd uses these words as Jesus enters Jerusalem. How can we show our love for Him?" },
+    { reference: "Psalm 110:4", url: "ot/ps/110?lang=eng&id=p4#p4", verse: "“Thou art a priest for ever after the order of Melchizedek.”", answer: "Hebrews 5:4–10", answerUrl: "nt/heb/5?lang=eng&id=p4-p10#p4", explanation: "Hebrews identifies Jesus Christ as the high priest described in this psalm. What do these verses teach about His obedience and power to save?" },
   ];
   const connectionChoices = Array.from(document.querySelectorAll("[data-connection]"));
   let connectionIndex = 0;
@@ -328,7 +328,7 @@
   function paintConnection() {
     const item = connections[connectionIndex];
     connectionRevealed = false;
-    $("connection-count").textContent = "Connection " + (connectionIndex + 1) + " of 3";
+    $("connection-count").textContent = "Passage " + (connectionIndex + 1) + " of 3";
     $("connection-reference").textContent = "Read " + item.reference;
     $("connection-reference").href = "https://www.churchofjesuschrist.org/study/scriptures/" + item.url;
     $("connection-verse").textContent = item.verse;
@@ -339,13 +339,13 @@
     $("connection-feedback").textContent = "";
     $("connection-reveal").hidden = false;
     $("connection-next").hidden = true;
-    $("connection-next").textContent = connectionIndex === connections.length - 1 ? "Return to lesson →" : "Next connection →";
+    $("connection-next").textContent = connectionIndex === connections.length - 1 ? "Return to lesson →" : "Next passage →";
     connectionChoices.forEach((button) => { button.disabled = false; button.setAttribute("aria-pressed", "false"); button.classList.toggle("is-match", false); });
   }
   function revealConnection() {
     connectionRevealed = true;
     $("connection-answer").hidden = false;
-    $("connection-feedback").textContent = "Here is the connection from this week’s lesson.";
+    $("connection-feedback").textContent = "";
     $("connection-reveal").hidden = true;
     $("connection-next").hidden = false;
     connectionChoices.forEach((button, index) => { button.disabled = true; button.classList.toggle("is-match", index === connectionIndex); button.setAttribute("aria-pressed", String(index === connectionIndex)); });
@@ -356,7 +356,7 @@
     if (connectionRevealed) return;
     connectionChoices.forEach((choice) => choice.setAttribute("aria-pressed", String(choice === button)));
     if (index === connectionIndex) revealConnection();
-    else $("connection-feedback").textContent = "Look again at the passage, or reveal the connection together.";
+    else $("connection-feedback").textContent = "Try another answer, or select Show answer.";
   }));
   $("connection-reveal").addEventListener("click", revealConnection);
   $("connection-next").addEventListener("click", () => {
@@ -454,7 +454,7 @@
     video.querySelector("source").addEventListener("error", () => { errorFor(video).hidden = false; });
     video.addEventListener("loadeddata", () => { errorFor(video).hidden = true; });
     video.addEventListener("play", () => { videos.forEach((other) => { if (other !== video) other.pause(); }); });
-    video.addEventListener("ended", () => { $("slide-announcement").textContent = "Video complete. Continue to discussion when ready."; });
+    video.addEventListener("ended", () => { $("slide-announcement").textContent = "Video finished. Select Discuss to continue."; });
   });
   document.querySelectorAll("[data-for-video]").forEach((input) => {
     input.addEventListener("change", () => {
