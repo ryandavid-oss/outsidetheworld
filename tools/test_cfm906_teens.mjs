@@ -24,10 +24,13 @@ class E {
  constructor(raw,parent=null){
   this.tagName=raw.tag;this.attrs=raw.attrs;this.parent=parent;this.children=raw.children.map(c=>new E(c,this));this.dataset={};
   for(const [k,v]of Object.entries(this.attrs))if(k.startsWith('data-'))this.dataset[k.slice(5).replace(/-([a-z])/g,(_,c)=>c.toUpperCase())]=v;
-  this.id=this.attrs.id;this.hidden=Object.hasOwn(this.attrs,'hidden');this.disabled=Object.hasOwn(this.attrs,'disabled');this.checked=Object.hasOwn(this.attrs,'checked');this.handlers={};this.style={};
+  this.id=this.attrs.id;this.hidden=Object.hasOwn(this.attrs,'hidden');this.disabled=Object.hasOwn(this.attrs,'disabled');this.checked=Object.hasOwn(this.attrs,'checked');this.handlers={};this.style={setProperty(k,v){this[k]=v;}};
   this.classes=new Set((this.attrs.class||'').split(' '));this.classList={add:name=>this.classes.add(name),remove:name=>this.classes.delete(name),toggle:(name,on)=>{if(on)this.classes.add(name);else this.classes.delete(name);}};
   this.paused=true;this.seeking=false;this.currentTime=0;this.value='';this.open=false;
  }
+ append(...children){for(const child of children){child.parent=this;this.children.push(child);}}
+ replaceChildren(){this.children=[];}
+ get href(){return this.attrs.href||'';}set href(v){this.attrs.href=v;}
  get src(){return this.attrs.src||'';}set src(v){this.attrs.src=v;}
  matches(selector){selector=selector.trim();if(selector.includes(' ')){const split=selector.lastIndexOf(' ');return this.matches(selector.slice(split+1))&&this.parent?.closest(selector.slice(0,split));}if(selector.startsWith('.'))return this.classes.has(selector.slice(1));if(selector==='[hidden]')return this.hidden;if(selector.startsWith('[')){const m=selector.match(/^\[([^=\]]+)(?:="([^"]*)")?\]$/);return m&&Object.hasOwn(this.attrs,m[1])&&(m[2]===undefined||this.attrs[m[1]]===m[2]);}return this.tagName===selector;}
  querySelectorAll(selector){return this.children.flatMap(c=>[...(selector.split(',').some(s=>c.matches(s))?[c]:[]),...c.querySelectorAll(selector)]);}
@@ -50,10 +53,14 @@ doc=new E(JSON.parse(parsed));
 const all=doc.querySelectorAll('[id]'),ids=new Map(all.map(e=>[e.id,e]));assert.equal(ids.size,all.length,'unique IDs');
 doc.getElementById=id=>ids.get(id)||null;doc.body=doc.querySelector('body');doc.activeElement=doc.body;
 doc.exitFullscreen=()=>{doc.fullscreenElement=null;doc.fire('fullscreenchange');return Promise.resolve();};
+doc.createElement=tag=>new E({tag,attrs:{},children:[]});
 const w=new E({tag:'window',attrs:{},children:[]});w.scrollTo=()=>{};
 const location={hash:''};let now=1000000;let tick;const revoked=[];
-const context=vm.createContext({document:doc,window:w,location,history:{replaceState:(_,__,hash)=>{location.hash=hash;}},Date:{now:()=>now},URL:{createObjectURL:()=> 'blob:local-video',revokeObjectURL:x=>revoked.push(x)},setInterval:fn=>{tick=fn;return 1;},setTimeout:()=>1,clearTimeout:()=>{},console});
-vm.runInContext(fs.readFileSync(root+'/media/cfm906-teens/lesson.js','utf8'),context);
+const context=vm.createContext({document:doc,window:w,location,history:{replaceState:(_,__,hash)=>{location.hash=hash;}},Date:{now:()=>now},URL:Object.assign(class extends URL {},{createObjectURL:()=> 'blob:local-video',revokeObjectURL:x=>revoked.push(x)}),setInterval:fn=>{tick=fn;return 1;},setTimeout:()=>1,clearTimeout:()=>{},console});
+for(const script of doc.querySelectorAll('script')){
+ const src=script.getAttribute('src');
+ if(src)vm.runInContext(fs.readFileSync(root+'/'+src.split('?')[0],'utf8'),context,{filename:src});
+}
 const get=id=>doc.getElementById(id),flush=()=>{while(closeEvents.length)closeEvents.shift()();};
 const click=id=>{get(id).focus();get(id).fire('click');flush();};
 const select=selector=>doc.querySelector(selector);

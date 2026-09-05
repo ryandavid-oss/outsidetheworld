@@ -62,7 +62,10 @@ doc.exitFullscreen=()=>{doc.fullscreenElement=null;doc.fire('fullscreenchange');
 const w=new E({tag:'window',attrs:{},children:[]});
 const location={hash:''};let now=1000000;const ticks=new Map();let timerID=0;let blockHistory=false;
 const context=vm.createContext({document:doc,window:w,location,history:{replaceState:(_,__,hash)=>{if(blockHistory)throw new Error('History unavailable');location.hash=hash;}},navigator:{},Element:E,Date:{now:()=>now},URL,setInterval:fn=>{ticks.set(++timerID,fn);return timerID;},clearInterval:id=>ticks.delete(id),setTimeout:()=>1,clearTimeout:()=>{},console});
-vm.runInContext(fs.readFileSync(root+config.script,'utf8'),context);
+for(const script of doc.querySelectorAll('script')){
+ const src=script.getAttribute('src');
+ if(src)vm.runInContext(fs.readFileSync(root+'/'+src.split('?')[0],'utf8'),context,{filename:src});
+}
 const get=id=>doc.getElementById(id);
 const flush=()=>{while(closeEvents.length)closeEvents.shift()();};
 const click=element=>{if(typeof element==='string')element=get(element);element.focus();element.fire('click');flush();};

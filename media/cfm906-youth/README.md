@@ -14,11 +14,11 @@ The [official September 6 instructions](https://www.churchofjesuschrist.org/stud
 
 Checkpoint labels round to the nearest second. English captions are reused from `../cfm906/sabbath-en.vtt` and `../cfm906/sunday-school-en.vtt`. Timing was checked against those supplied captions. A checkpoint fires once during normal playback. Seeking past it or disabling guided pauses skips it. Teacher previews do not consume checkpoints or resume playback. Timers never resume a video automatically.
 
-The plan totals 21:30, leaving 3:30 for arrivals and transitions within the 25-minute class. The Psalm 119:105 activity is optional and comes from [this week's Come, Follow Me lesson](https://www.churchofjesuschrist.org/study/manual/come-follow-me-for-home-and-church-old-testament-2026/36?lang=eng). Scripture uses the King James Version.
+The plan totals 21:30, leaving 3:30 for arrivals and transitions within the 25-minute class. All six optional activities are available through Extras & activities: Psalms moment, praise wall, phrase reveal, New Testament matching, verse puzzle, and phrase reflection. They draw on [this week's Come, Follow Me lesson](https://www.churchofjesuschrist.org/study/manual/come-follow-me-for-home-and-church-old-testament-2026/36?lang=eng) and use KJV scripture text.
 
 ## Media and design
 
-Reuses the existing lesson's `reverential-return.jpg` and `family-scripture-study.jpg`, with permission confirmed by the teacher. See `../cfm906/images/README.md` for original sources and credits. Adult lesson files are unchanged. The palette uses the [Core OTW colors](https://outsidetheworld.com/palette.html) on a light background.
+Reuses the existing lesson's `reverential-return.jpg`, `family-scripture-study.jpg`, and `light-and-trees.jpg`, with permission confirmed by the teacher. See `../cfm906/images/README.md` for original sources and credits. The palette uses the [Core OTW colors](https://outsidetheworld.com/palette.html) on a light background.
 
 ## Handout and checks
 
@@ -29,3 +29,7 @@ Reuses the existing lesson's `reverential-return.jpg` and `family-scripture-stud
 - Local asset audit: `python3 tools/audit_public_site.py --strict`.
 
 The PDF was rendered and visually checked. The video and page controls still benefit from a sound check on the classroom computer before class.
+
+Shared activity behavior and scripture passages live in `../cfm906/extras.js`; shared layouts are in `../cfm906/extras.css`. Each page loads them before its own controller. Existing `#psalm` links still open this edition’s original activity.
+
+Run `node tools/test_cfm906_extras.mjs` for all six activities across the three lessons, and `node tools/test_cfm906_start.mjs` for return-to-start behavior. Both use a simulated DOM.

@@ -16,7 +16,7 @@ The adaptations follow [Invite Diligent Learning](https://www.churchofjesuschris
 
 Stops fall in gaps between sentences in the supplied captions. Labels round to the nearest second. They fire once in normal playback; seeking past a stop skips it. Teachers can disable all guided stops or preview prompts without consuming them. Activity timers never resume video playback.
 
-The suggested plan totals 22 minutes, including 75 seconds of discussion after each video. Three minutes remain for arrivals and transitions. The optional Psalm 119:105 reflection comes from [this week's Come, Follow Me lesson](https://www.churchofjesuschrist.org/study/manual/come-follow-me-for-home-and-church-old-testament-2026/36?lang=eng). It uses the complete KJV verse and open-ended application prompts.
+The suggested plan totals 22 minutes, including 75 seconds of discussion after each video. Three minutes remain for arrivals and transitions. All six optional activities are available through Extras & activities: Psalms moment, praise wall, phrase reveal, New Testament matching, verse puzzle, and phrase reflection. They draw on [this week's Come, Follow Me lesson](https://www.churchofjesuschrist.org/study/manual/come-follow-me-for-home-and-church-old-testament-2026/36?lang=eng) and use KJV scripture text.
 
 ## Media and handout
 
@@ -29,3 +29,7 @@ The handout has two identical half-sheet cards on one US Letter page. Print one 
 - Local reference audit: `python3 tools/audit_public_site.py --strict`.
 
 The PDF is rendered and visually reviewed separately. Test classroom sound before teaching.
+
+Shared activity behavior and scripture passages live in `../cfm906/extras.js`; shared layouts are in `../cfm906/extras.css`. Each page loads them before its own controller. Existing `#psalm` links still open this edition’s original activity.
+
+Run `node tools/test_cfm906_extras.mjs` for all six activities across the three lessons, and `node tools/test_cfm906_start.mjs` for return-to-start behavior. Both use a simulated DOM.

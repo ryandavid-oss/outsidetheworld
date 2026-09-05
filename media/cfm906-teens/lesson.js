@@ -3,6 +3,7 @@
   const $ = id => document.getElementById(id);
   const all = selector => [...document.querySelectorAll(selector)];
   const order = ["start", "worship", "discuss", "learning", "home-study", "finish"];
+  const optional = ["psalm", "psalms", "praise", "lamp", "connections", "puzzle"];
   const scenes = all(".scene"), videos = all("video"), dialogs = all("dialog");
   const notes = {
     start: ["Welcome · 1 minute", "Give everyone a few quiet seconds to think about their week. One student may share if they want to. Use the choices only to help begin a conversation, then invite an opening prayer. Start the class timer when class begins."],
@@ -11,7 +12,12 @@
     learning: ["Second video · 5:07 with stop", "Play the complete video. At the partner stop, students can share a question or just where they would begin looking for an answer. Keep pairs seated and give both people a turn within 45 seconds."],
     "home-study": ["Discuss learning at home · 75 seconds", "Ask what students would choose to study and how they could begin. Invite one or two ideas. Ask how someone else could help them think it through. An unanswered question can be a worthwhile starting point."],
     finish: ["Choose a step and close · 1 minute", "Invite each student to choose something small enough to do this week and write when they will do it. The cards stay with students. Close with prayer and help everyone move to the next class on time."],
-    psalm: ["Psalms extra · 60–90 seconds", "Use only if time remains. Read Psalm 119:105, then choose one phrase to explore. Ask what the image of a lamp suggests. A personal application can stay private; do not promise that every answer will come on a particular schedule."]
+    psalm: ["A lamp for our feet · 1 minute", "Read the verse and choose a phrase. Give students a moment to think before inviting responses."],
+    psalms: ["Psalms moment · 1 minute", "Choose a situation. Read the passage and ask which words could help."],
+    praise: ["Praise wall · 30–60 seconds", "Type a few words from the class. Click a word to remove it."],
+    lamp: ["One phrase at a time · 1 minute", "Reveal the verse slowly. Choose one question to discuss."],
+    connections: ["Find Christ · 1–2 minutes", "Match a psalm to the New Testament. One passage is enough if time is short."],
+    puzzle: ["Finish the verse · 1 minute", "Read the verse first, then invite the class to fill in the blanks."]
   };
   // Suggested stops in the gaps between sentences in the English captions.
   const cues = {
@@ -60,12 +66,13 @@
     if (!source.getAttribute("src")) { source.src = source.dataset.src; video.load(); }
   }
   function show(id) {
-    if (![...order, "psalm"].includes(id)) return;
-    if (id === "psalm" && order.includes(current)) returnTo = current;
-    const moveFocus = Boolean(document.activeElement?.closest(".scene"));
+    if (![...order, ...optional].includes(id)) return;
+    if (optional.includes(id) && order.includes(current)) returnTo = current;
+    const moveFocus = Boolean(document.activeElement?.closest(".scene")) || $("moments-menu").contains(document.activeElement);
     pauseVideos();
     dialogs.forEach(dialog => { if (dialog.open) dialog.close(); });
     clearShortClock();
+    $("moments-menu").open = false;
     all(".video-tools details").forEach(details => { details.open = false; });
     current = id;
     scenes.forEach(scene => { scene.hidden = scene.id !== id; });
@@ -73,10 +80,9 @@
     const index = order.indexOf(id);
     $("y-previous").disabled = index === 0;
     $("y-next").disabled = false;
-    $("y-next").textContent = id === "psalm" ? "Return to lesson →" : id === "start" ? "Let’s watch →" : ["worship", "learning"].includes(id) ? "Let’s talk →" : id === "finish" ? "Back to start" : "Next →";
+    $("y-next").textContent = optional.includes(id) ? "Return to lesson →" : id === "start" ? "Let’s watch →" : ["worship", "learning"].includes(id) ? "Let’s talk →" : id === "finish" ? "Back to start" : "Next →";
     $("y-step-count").textContent = index < 0 ? "Extra" : `${index + 1} / 6`;
     $("y-progress").style.width = `${((index < 0 ? order.indexOf(returnTo) : index) + 1) / order.length * 100}%`;
-    $("y-psalm-open").textContent = id === "psalm" ? "Back to lesson" : "Psalms extra";
     $("teacher-section").textContent = notes[id][0];
     $("teacher-note").textContent = notes[id][1];
     const video = $(id).querySelector("video");
@@ -99,13 +105,16 @@
   all("[data-lesson-start]").forEach(button => button.addEventListener("click", backToStart));
   function advance(direction) {
     if (current === "finish" && direction > 0) return backToStart();
-    if (current === "psalm") return show(returnTo);
+    if (optional.includes(current)) return show(returnTo);
     show(order[Math.max(0, Math.min(order.length - 1, order.indexOf(current) + direction))]);
   }
   $("y-next").addEventListener("click", () => advance(1));
   $("y-previous").addEventListener("click", () => advance(-1));
   $("y-section").addEventListener("change", event => show(event.target.value));
-  $("y-psalm-open").addEventListener("click", () => show(current === "psalm" ? returnTo : "psalm"));
+  all("[data-moment]").forEach(button => button.addEventListener("click", () => show(button.dataset.moment)));
+  document.addEventListener("click", event => {
+    if (!$("moments-menu").contains(event.target)) $("moments-menu").open = false;
+  });
   window.addEventListener("hashchange", () => show(location.hash.slice(1)));
 
   function choose(selector, attribute, responseID, prompts) {
@@ -130,20 +139,15 @@
     $("home-examples").hidden = !expanded;
     $("home-ideas").textContent = expanded ? "Hide ideas" : "Ways to get started";
   });
-  const reflectionPrompts = {
-    word: "Where could you turn to hear God’s word as you think about this decision?",
-    lamp: "What might a lamp help you see? What might still be out of sight?",
-    path: "What is one step you could take without knowing how everything will turn out?"
-  };
-  choose("[data-reflection]", "reflection", "psalm-feedback", reflectionPrompts);
-  function resetReflection() {
-    all("[data-reflection]").forEach(button => button.setAttribute("aria-pressed", "false"));
-    $("psalm-feedback").textContent = "Choose a phrase to talk about.";
-  }
-  $("psalm-reset").addEventListener("click", resetReflection);
+  window.CFMExtras.init({ announce, notify: toast, returnToLesson: () => show(returnTo) });
   all("[data-scripture]").forEach(link => link.addEventListener("click", event => {
     if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button > 0) return;
+    const passage = window.CFMExtras.scriptureFor(link.href);
+    if (!passage) return;
     event.preventDefault();
+    $("y-scripture-title").textContent = passage.title;
+    $("y-scripture-source").href = link.href;
+    window.CFMExtras.renderScripture($("y-scripture-body"), passage);
     openDialog($("y-scripture"), $("y-scripture-title"), link);
   }));
   $("y-scripture-close").addEventListener("click", () => $("y-scripture").close());
@@ -304,7 +308,6 @@
     if (["f", "F"].includes(event.key)) toggleFullscreen();
   });
   window.addEventListener("pagehide", pauseVideos);
-  resetReflection();
   renderClassClock();
-  show([...order, "psalm"].includes(location.hash.slice(1)) ? location.hash.slice(1) : "start");
+  show([...order, ...optional].includes(location.hash.slice(1)) ? location.hash.slice(1) : "start");
 })();

@@ -15,7 +15,9 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/fonts/otw-fonts.css">
   <link rel="stylesheet" href="media/cfm906/lesson.css?v=6">
-  <script defer src="media/cfm906/lesson.js?v=6"></script>
+  <link rel="stylesheet" href="media/cfm906/extras.css?v=1">
+  <script defer src="media/cfm906/extras.js?v=1"></script>
+  <script defer src="media/cfm906/lesson.js?v=7"></script>
 </head>
 <body>
   <a class="skip-link" href="#stage">Skip to lesson</a>
@@ -25,7 +27,7 @@
       <span class="lesson-date">SEPTEMBER 6, 2026</span>
       <div class="header-actions"><button id="lesson-start" class="quiet-button lesson-start" data-lesson-start type="button">Back to start</button>
         <button class="quiet-button" id="psalms-toggle" type="button" aria-pressed="false">Psalms moment</button>
-        <details class="moments-menu" id="moments-menu"><summary class="quiet-button">More activities</summary><div class="moments-panel"><p class="small-label">Choose one if time allows</p><button type="button" data-moment="praise"><span>Praise wall</span><small>30–60 seconds · Name a blessing</small></button><button type="button" data-moment="lamp"><span>Psalm 119:105</span><small>1 minute · Read one phrase at a time</small></button><button type="button" data-moment="connections"><span>Find Christ in the Psalms</span><small>1–2 minutes · Match the passages</small></button></div></details>
+        <details class="moments-menu" id="moments-menu"><summary class="quiet-button">Extras &amp; activities</summary><div class="moments-panel"><button type="button" data-moment="psalms">Psalms moment</button><button type="button" data-moment="praise">Praise wall</button><button type="button" data-moment="lamp">One phrase at a time</button><button type="button" data-moment="connections">Find Christ</button><button type="button" data-moment="puzzle">Finish the verse</button><button type="button" data-moment="reflection">A lamp for our feet</button></div></details>
         <button class="quiet-button" id="guide-toggle" type="button">Lesson guide</button>
         <button class="quiet-button fullscreen-button" id="fullscreen-toggle" type="button" aria-label="Enter fullscreen" aria-pressed="false"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M8 3H3v5m13-5h5v5m0 8v5h-5M3 16v5h5"/></svg><span>Fullscreen</span></button>
       </div>
@@ -86,9 +88,9 @@
         <a class="reading-link" href="https://www.churchofjesuschrist.org/study/manual/come-follow-me-for-home-and-church-old-testament-2026/36?lang=eng" target="_blank" rel="noreferrer">Read this week’s Come, Follow Me lesson <span aria-hidden="true">↗</span></a>
       </section>
 
-      <section class="slide psalms-slide" id="psalms" aria-labelledby="psalms-title" hidden>
+      <section class="slide extra-activity psalms-slide" id="psalms" aria-labelledby="psalms-title" hidden>
         <div class="psalms-heading"><div><p class="eyebrow">Psalms moment</p><h2 id="psalms-title">Who could this<br><em>psalm help?</em></h2></div><p class="history-note"><span>Tehillim <span lang="he" dir="rtl">תהילים</span></span>The Hebrew title of Psalms means “praises.” The word hallelujah calls us to praise the Lord.</p></div>
-        <p class="activity-intro">Think of someone you know. Choose a situation.</p>
+        <p class="activity-intro">Choose a situation.</p>
         <div class="scenario-choices" role="group" aria-label="Choose a situation"><button type="button" class="scenario" data-scenario="weary" aria-pressed="true"><span>01</span>Someone who is weary</button><button type="button" class="scenario" data-scenario="forgiveness" aria-pressed="false"><span>02</span>Someone seeking forgiveness</button><button type="button" class="scenario" data-scenario="direction" aria-pressed="false"><span>03</span>Someone who needs direction</button></div>
         <div class="scripture-activity">
           <div class="scripture-topline"><div><span class="small-label">Read the passage</span><a data-scripture aria-haspopup="dialog" aria-controls="scripture-reader" class="scripture-reference" id="activity-reference" href="https://www.churchofjesuschrist.org/study/scriptures/ot/ps/103?lang=eng&amp;id=p13-p14#p13" target="_blank" rel="noreferrer">Psalm 103:13–14</a></div><button type="button" class="secondary" id="reveal-scripture" aria-expanded="false" aria-controls="activity-verse">Show one verse</button></div>
@@ -97,24 +99,25 @@
           <p class="activity-question">What does this passage teach us about the Savior?</p>
         </div>
       </section>
-      <section class="slide praise-slide" id="praise" aria-labelledby="praise-title" hidden>
+
+      <section class="slide extra-activity praise-slide" id="praise" aria-labelledby="praise-title" hidden>
         <div class="praise-prompt"><p class="eyebrow">Praise wall · 30–60 seconds</p><h2 class="moment-title" id="praise-title">What has the Savior<br>given <em>you?</em></h2></div>
         <div class="praise-display"><div class="praise-wall" id="praise-wall" role="list" aria-label="Words of praise from our class"></div><p class="praise-empty" id="praise-empty">No words yet</p></div>
         <form class="praise-form" id="praise-form"><label class="sr-only" for="praise-word">Add a word or short phrase from the class</label><input id="praise-word" type="text" maxlength="32" autocomplete="off" placeholder="Add a word…"><button class="primary" id="praise-add" type="submit">Add word</button><button class="quiet-button" id="praise-reset" type="button" disabled>Clear words</button></form>
         <p class="moment-reference"><a data-scripture aria-haspopup="dialog" aria-controls="scripture-reader" href="https://www.churchofjesuschrist.org/study/scriptures/ot/ps/103?lang=eng&amp;id=p1-p5#p1" target="_blank" rel="noreferrer">Read Psalm 103:1–5</a><span>What do these blessings tell you about the Savior?</span></p>
       </section>
 
-      <section class="slide lamp-slide" id="lamp" aria-labelledby="lamp-title" hidden>
+      <section class="slide extra-activity lamp-slide" id="lamp" aria-labelledby="lamp-title" hidden>
         <div class="moment-heading"><div><p class="eyebrow">Psalm 119:105 · 1 minute</p><h2 class="moment-title" id="lamp-title">How do the scriptures<br><em>guide us?</em></h2></div><a data-scripture aria-haspopup="dialog" aria-controls="scripture-reader" class="scripture-reference" href="https://www.churchofjesuschrist.org/study/scriptures/ot/ps/119?lang=eng&amp;id=p105#p105" target="_blank" rel="noreferrer">Read Psalm 119:105</a></div>
         <div class="lamp-layout"><div>
-        <div class="lamp-verse" aria-label="Psalm 119:105, revealed one phrase at a time"><p class="lamp-placeholder" id="lamp-placeholder">Read the verse, then show one phrase at a time.</p><blockquote><span id="lamp-phrase-1" hidden>Thy word</span><span id="lamp-phrase-2" hidden>is a lamp unto my feet,</span><span id="lamp-phrase-3" hidden>and a light unto my path.</span></blockquote></div>
+        <div class="lamp-verse" aria-label="Psalm 119:105, revealed one phrase at a time"><p class="lamp-placeholder" id="lamp-placeholder">Read one phrase at a time.</p><blockquote><span id="lamp-phrase-1" hidden>Thy word</span><span id="lamp-phrase-2" hidden>is a lamp unto my feet,</span><span id="lamp-phrase-3" hidden>and a light unto my path.</span></blockquote></div>
         <div class="lamp-progress" aria-hidden="true"><span data-lamp-step="1"></span><span data-lamp-step="2"></span><span data-lamp-step="3"></span></div>
         <p class="lamp-question" id="lamp-question" aria-live="polite">What word stands out to you?</p>
         <div class="moment-actions"><button class="primary" id="lamp-reveal" type="button">Show first phrase</button><button class="quiet-button" id="lamp-reset" type="button" disabled>Start again</button><span class="moment-count" id="lamp-count">0 of 3 phrases</span></div>
         </div><figure class="lesson-art lamp-art"><a href="https://www.churchofjesuschrist.org/study/manual/come-follow-me-for-home-and-church-old-testament-2026/36?lang=eng" target="_blank" rel="noreferrer"><img src="media/cfm906/images/light-and-trees.jpg" width="640" height="480" loading="lazy" alt="Sunlight illuminates a path through a dark forest."></a><figcaption><cite>Light and Trees</cite><span>The Church of Jesus Christ of Latter-day Saints</span></figcaption></figure></div>
       </section>
 
-      <section class="slide connections-slide" id="connections" aria-labelledby="connections-title" hidden>
+      <section class="slide extra-activity connections-slide" id="connections" aria-labelledby="connections-title" hidden>
         <div class="moment-heading"><div><p class="eyebrow">Find Christ in the Psalms · 1–2 minutes</p><h2 class="moment-title" id="connections-title">How do these psalms<br><em>point to Jesus Christ?</em></h2></div><span class="moment-count" id="connection-count">Passage 1 of 3</span></div>
         <div class="connection-passage"><a data-scripture aria-haspopup="dialog" aria-controls="scripture-reader" class="scripture-reference" id="connection-reference" href="https://www.churchofjesuschrist.org/study/scriptures/ot/ps/118?lang=eng&amp;id=p22#p22" target="_blank" rel="noreferrer">Read Psalm 118:22</a><blockquote id="connection-verse">“The stone which the builders refused is become the head stone of the corner.”</blockquote></div>
         <p class="activity-intro">Where are these words used in the New Testament?</p>
@@ -123,10 +126,25 @@
         <div class="connection-answer" id="connection-answer" hidden><a data-scripture aria-haspopup="dialog" aria-controls="scripture-reader" class="scripture-reference" id="connection-answer-reference" target="_blank" rel="noreferrer">Read the connection</a><p id="connection-explanation"></p></div>
         <div class="moment-actions"><button class="secondary" id="connection-reveal" type="button">Show answer</button><button class="primary" id="connection-next" type="button" hidden>Next passage →</button><button class="quiet-button" id="connection-reset" type="button">Start again</button></div>
       </section>
+
+      <section class="slide psalm-scene extra-activity" id="puzzle" aria-labelledby="puzzle-title" hidden>
+        <p class="eyebrow">Optional · 60–90 seconds</p><div class="scene-heading"><h2 class="big-question" id="puzzle-title">Can you finish<br><em>this verse?</em></h2><a data-scripture="119" href="https://www.churchofjesuschrist.org/study/scriptures/ot/ps/119?lang=eng&amp;id=p105#p105" aria-haspopup="dialog" aria-controls="scripture-reader" target="_blank" rel="noreferrer">Read Psalm 119:105</a></div>
+        <p class="lead">Read the verse, then fill in the blanks.</p><blockquote class="fill-verse">Thy <span class="blank" id="blank-0">_____</span> is a <span class="blank" id="blank-1">_____</span> unto my feet,<br>and a light unto my <span class="blank" id="blank-2">_____</span>.</blockquote>
+        <div class="word-bank" role="group" aria-label="Words for Psalm 119:105"><button data-word="path" type="button">path</button><button data-word="word" type="button">word</button><button data-word="lamp" type="button">lamp</button></div><p id="puzzle-feedback" data-puzzle-feedback class="response" role="status">Which word goes first?</p><div class="psalm-bottom"><button id="puzzle-reset" data-puzzle-reset type="button">Start again</button><p>When has a scripture helped you know what to do?</p></div>
+      </section>
+
+      <section class="slide psalm-scene extra-activity" id="reflection" aria-labelledby="reflection-title" hidden>
+        <p class="eyebrow">Optional · 60–90 seconds</p>
+        <div class="scene-heading"><h2 class="big-question" id="reflection-title">Why a lamp<br><em>for our feet?</em></h2><a data-scripture="119" href="https://www.churchofjesuschrist.org/study/scriptures/ot/ps/119?lang=eng&amp;id=p105#p105" aria-haspopup="dialog" aria-controls="scripture-reader" target="_blank" rel="noreferrer">Read Psalm 119:105</a></div>
+        <p class="lead">Think about a decision you’re facing as we read.</p>
+        <blockquote class="fill-verse">Thy word is a lamp unto my feet,<br>and a light unto my path.</blockquote>
+        <div class="choices reflection-choices" role="group" aria-label="Choose a phrase to explore"><button data-reflection="word" type="button" aria-pressed="false">“Thy word”</button><button data-reflection="lamp" type="button" aria-pressed="false">“A lamp”</button><button data-reflection="path" type="button" aria-pressed="false">“My path”</button></div>
+        <p id="reflection-feedback" data-reflection-feedback class="action-response" role="status">Choose a phrase to talk about.</p><div class="psalm-bottom"><button id="reflection-reset" data-reflection-reset type="button">Clear selection</button></div>
+      </section>
     </div>
 
     <footer class="footer">
-      <div class="footer-left"><label class="sr-only" for="moment-select">Choose a lesson section</label><select id="moment-select" aria-label="Choose a lesson section"><option value="welcome">01 · Welcome</option><option value="worship">02 · Sacrament meeting</option><option value="renewal">03 · Discuss worship</option><option value="learning">04 · Sunday School</option><option value="together">05 · Discuss learning</option><option value="take-home">06 · At home</option><option value="psalms">Optional · Psalms moment</option><option value="praise">Optional · Praise wall</option><option value="lamp">Optional · Psalm 119:105</option><option value="connections">Optional · Find Christ</option></select><div class="timer-group"><button class="timer" id="timer-toggle" type="button" aria-label="Start 25-minute class timer"><span class="timer-symbol" id="timer-symbol" aria-hidden="true">▶</span><span id="timer-display">25:00</span></button><button class="reset-timer" id="timer-reset" type="button" aria-label="Reset class timer to 25 minutes" title="Reset timer">↺</button></div></div>
+      <div class="footer-left"><label class="sr-only" for="moment-select">Choose a lesson section</label><select id="moment-select" aria-label="Choose a lesson section"><option value="welcome">01 · Welcome</option><option value="worship">02 · Sacrament meeting</option><option value="renewal">03 · Discuss worship</option><option value="learning">04 · Sunday School</option><option value="together">05 · Discuss learning</option><option value="take-home">06 · At home</option><option value="psalms">Optional · Psalms moment</option><option value="praise">Optional · Praise wall</option><option value="lamp">Optional · One phrase at a time</option><option value="connections">Optional · Find Christ</option><option value="puzzle">Optional · Finish the verse</option><option value="reflection">Optional · A lamp for our feet</option></select><div class="timer-group"><button class="timer" id="timer-toggle" type="button" aria-label="Start 25-minute class timer"><span class="timer-symbol" id="timer-symbol" aria-hidden="true">▶</span><span id="timer-display">25:00</span></button><button class="reset-timer" id="timer-reset" type="button" aria-label="Reset class timer to 25 minutes" title="Reset timer">↺</button></div></div>
       <div class="controls"><span class="keyboard-hint" aria-hidden="true">← → to navigate</span><button class="secondary" id="previous" type="button" disabled><span aria-hidden="true">←</span><span class="previous-label"> Previous</span></button><button class="primary" id="next" type="button">Begin <span aria-hidden="true">→</span></button></div>
     </footer>
     <div class="progress-track" aria-hidden="true"><span id="lesson-progress"></span></div>
@@ -143,7 +161,7 @@
     <p>The Church asks youth and adult Sunday School classes to watch two instruction videos and discuss them on September 6. The six main sections follow that plan. The Psalms activities are optional.</p>
     <dl class="rundown"><div><dt>Welcome and opening prayer</dt><dd>1:00</dd></div><div><dt>Sabbath and sacrament meeting video</dt><dd>11:23</dd></div><div><dt>Discuss worship and renewal</dt><dd>2:00</dd></div><div><dt>Sunday School video</dt><dd>4:22</dd></div><div><dt>Discuss learning together</dt><dd>3:00</dd></div><div><dt>Invitation and closing prayer</dt><dd>1:00</dd></div><div class="rundown-total"><dt>Time for arrivals and transitions</dt><dd>2:15</dd></div></dl>
     <p class="guide-note">This suggested plan leaves 2:15 for arrivals and transitions. Use an optional activity only if time remains. Finish at 25 minutes.</p>
-    <h3>Optional activities</h3><ul class="source-list"><li><strong>Praise wall · 30–60 seconds.</strong> Type a few responses from the class. Refreshing the page clears the words.</li><li><strong>Psalm 119:105 · 1 minute.</strong> Show one phrase at a time and discuss one of the questions.</li><li><strong>Find Christ in the Psalms · 1–2 minutes.</strong> Match a psalm with a New Testament passage. Use one of the three examples if time is short.</li><li><strong>Psalms moment.</strong> Choose a situation, read the passage, and ask which words might help someone.</li></ul><p class="guide-note">Select Return to lesson to go back to the section you left.</p>
+    <h3>Extras &amp; activities</h3><p>Choose one if time remains.</p><ul class="extra-notes"><li><strong>Psalms moment · 1 minute.</strong> Find words that could help someone.</li><li><strong>Praise wall · 30–60 seconds.</strong> Add a few words from the class.</li><li><strong>One phrase at a time · 1 minute.</strong> Reveal the verse and discuss one question.</li><li><strong>Find Christ · 1–2 minutes.</strong> Match a psalm with the New Testament.</li><li><strong>Finish the verse · 1 minute.</strong> Read, then fill in the blanks.</li><li><strong>A lamp for our feet · 1 minute.</strong> Choose a phrase to talk about.</li></ul><p class="guide-note">Return to lesson takes you back to where you left off.</p>
     <h3>Before class</h3><p>Test the sound and save both videos. Under Video options, choose Open video file and use your browser’s save command. Then choose Use downloaded video to select the saved file. Use the linked videos so the captions match.</p>
     <h3>During class</h3><p>Start the timer when class begins. It keeps running during videos, scripture reading, and time in other tabs. Select the timer to pause it. Refreshing the page resets it.</p><p>Select a scripture reference to read the passage here. Close or Escape returns to the lesson. Use ← and → to change sections, Home for the welcome, and F for fullscreen.</p>
     <h3>If a video will not play</h3><p>The Church’s instructions direct teachers to the Implementation Guide if technical difficulties prevent showing the videos. Its discussion topics cover worship, belonging, and learning at home.</p>

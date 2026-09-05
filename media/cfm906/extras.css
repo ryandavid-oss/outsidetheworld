@@ -1,0 +1,136 @@
+/* Shared extras follow each lesson's existing OTW theme. */
+#presentation { --extra-ink:var(--white); --extra-muted:var(--muted); --extra-accent:var(--brand-light-blue); --extra-soft:var(--heritage-navy); --extra-teal:var(--brand-teal); --extra-panel:var(--panel); }
+#y-app { --extra-ink:var(--navy); --extra-muted:var(--slate); --extra-accent:#315AA0; --extra-soft:#DCE8FD; --extra-teal:#3D646B; --extra-panel:white; }
+.moments-menu { position:relative; }
+.moments-menu > summary { display:flex; align-items:center; gap:8px; list-style:none; min-height:44px; }
+.moments-menu > summary::-webkit-details-marker { display:none; }
+.moments-menu > summary::after { content:"⌄"; }
+.moments-panel { position:absolute; top:calc(100% + 8px); right:0; width:280px; max-width:calc(100vw - 40px); max-height:65svh; overflow:auto; padding:10px; background:var(--extra-panel); color:var(--extra-ink); border:1px solid var(--line); border-radius:12px; box-shadow:0 12px 36px #0003; z-index:10; }
+.moments-panel button,.top-actions .moments-panel button { display:block; width:100%; padding:14px; min-height:44px; border:0; border-radius:6px; background:transparent; color:inherit; text-align:left; font-size:.95rem; line-height:1.35; }
+.moments-panel button:hover:not(:disabled),.top-actions .moments-panel button:hover:not(:disabled) { background:var(--extra-soft); }
+.top-actions .moments-menu > summary { font-size:.875rem; font-weight:600; padding:10px 12px; border-radius:10px; }
+.extra-notes { padding-left:22px; line-height:1.65; }
+.extra-notes li + li { margin-top:8px; }
+.extra-activity { min-width:0; }
+.extra-activity .scene-heading { display:flex; justify-content:space-between; align-items:end; gap:26px; }
+.extra-activity .scene-heading a { font-size:1.1rem; flex-shrink:0; color:var(--extra-accent); }
+.extra-activity .fill-verse { font:400 clamp(1.7rem,3vw,3.3rem)/1.7 Merriweather,Georgia,serif; margin:32px 0; }
+.extra-activity .blank { color:var(--extra-accent); background:var(--extra-soft); padding:2px 9px; border-radius:8px; white-space:nowrap; }
+.extra-activity .blank.current { outline:3px solid var(--extra-accent); outline-offset:3px; }
+.extra-activity .blank.filled { color:var(--extra-teal); }
+.extra-activity .word-bank { display:flex; gap:14px; flex-wrap:wrap; }
+.extra-activity .word-bank button { min-width:130px; font-size:1.5rem; padding:15px 26px; border:2px solid var(--extra-accent); border-radius:10px; background:var(--extra-panel); color:var(--extra-ink); }
+.extra-activity .word-bank button:hover:not(:disabled) { background:var(--extra-soft); }
+.extra-activity .psalm-bottom { display:flex; align-items:center; flex-wrap:wrap; gap:25px; margin-top:22px; }
+.extra-activity .psalm-bottom button { padding:12px 16px; min-height:44px; border:1px solid var(--line); border-radius:10px; background:var(--extra-panel); color:var(--extra-ink); }
+.extra-activity .psalm-bottom p { font-size:1.25rem; line-height:1.5; }
+.extra-activity .response { margin-top:22px; font-size:1.15rem; line-height:1.5; min-height:1.6em; color:var(--extra-muted); }
+.extra-activity .action-response { font-size:clamp(1.25rem,1.9vw,2rem); line-height:1.5; margin-top:30px; max-width:1000px; }
+.slide.psalm-scene .big-question { font:300 clamp(2.3rem,3.8vw,4.5rem)/1.22 Merriweather,Georgia,serif; margin:0; letter-spacing:-.04em; }
+.slide.psalm-scene .lead { margin:24px 0 0; font-size:1.25rem; line-height:1.5; color:var(--extra-muted); }
+.slide .reflection-choices { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; margin-top:28px; }
+.slide .reflection-choices button { padding:22px; min-height:80px; font-size:1.5rem; color:var(--extra-ink); background:var(--extra-panel); border:1px solid var(--line); border-radius:10px; }
+.slide .reflection-choices button[aria-pressed="true"] { background:var(--extra-soft); border-color:var(--extra-accent); }
+/* The four original adult activities, adapted to the two lighter youth editions. */
+.scene .moment-heading,.scene .psalms-heading { display:flex; justify-content:space-between; align-items:end; gap:28px; }
+.scene .moment-heading > a { flex-shrink:0; }
+.scene .moment-title { font-size:clamp(2.3rem,3.8vw,4.5rem); line-height:1.2; }
+.scene .history-note { max-width:340px; color:var(--slate); font-size:1rem; line-height:1.6; }
+.scene .history-note > span { display:block; color:var(--navy); font-size:1.1rem; margin-bottom:8px; }
+.scene .activity-intro { font-size:1.2rem; line-height:1.5; margin:24px 0 18px; color:var(--slate); }
+.scene .scenario-choices,.scene .connection-choices { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+.scene .scenario { padding:20px; font-size:clamp(1.05rem,1.6vw,1.6rem); text-align:left; line-height:1.4; background:#DCE8FD; border:2px solid transparent; }
+.scene .scenario:nth-child(2) { background:#DCE9EA; }
+.scene .scenario:nth-child(3) { background:#EEE4CE; }
+.scene .scenario > span { display:block; font:500 .875rem 'Fira Code',monospace; margin-bottom:10px; }
+.scene .scenario[aria-pressed="true"] { border-color:var(--navy); }
+.scene .scenario.is-match { opacity:1; border-color:var(--navy); }
+.scene .scripture-activity { margin-top:25px; border-top:1px solid var(--line); padding-top:24px; }
+.scene .scripture-topline { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:18px; }
+.scene .small-label { display:block; font-size:.8rem; color:var(--slate); margin-bottom:8px; }
+.scene .scripture-reference { font-size:1.2rem; font-weight:600; color:var(--extra-accent); }
+.scene .scripture-invitation,.scene .activity-question { font-size:clamp(1.2rem,1.7vw,1.8rem); line-height:1.5; margin-top:24px; }
+.scene .activity-verse { font:400 clamp(1.7rem,2.5vw,2.8rem)/1.5 Merriweather,Georgia,serif; margin:24px 0; }
+.scene .moment-count { color:var(--slate); font:.875rem/1.6 'Fira Code',monospace; }
+.scene .moment-actions { display:flex; align-items:center; gap:16px; margin-top:20px; flex-wrap:wrap; }
+.scene .moment-reference { border-top:1px solid var(--line); padding-top:20px; line-height:1.6; font-size:1rem; display:flex; flex-wrap:wrap; gap:10px 24px; }
+.scene .moment-reference a { color:var(--extra-accent); }
+.scene .moment-reference span { color:var(--slate); }
+.scene.praise-slide { display:grid; grid-template-columns:minmax(250px,.85fr) minmax(0,1.65fr); grid-template-areas:"prompt words" "entry words" "reference reference"; grid-template-rows:1fr auto auto; gap:24px clamp(28px,4vw,64px); }
+.scene .praise-prompt { grid-area:prompt; align-self:center; }
+.scene .praise-prompt .moment-title { font-size:clamp(2.2rem,3.3vw,4rem); }
+.scene .praise-display { grid-area:words; container-type:inline-size; min-width:0; min-height:clamp(360px,53svh,620px); display:grid; align-items:center; }
+.scene .praise-wall { display:flex; flex-wrap:wrap; gap:14px; align-items:center; align-content:center; justify-content:center; min-width:0; width:100%; padding:12px 0; }
+.scene .praise-wall:empty { display:none; }
+.scene .praise-wall > div { min-width:0; max-width:100%; }
+.scene .praise-word { display:block; max-width:100%; overflow-wrap:anywhere; padding:10px 14px; color:#315AA0; background:#DCE8FD; border:0; border-radius:12px; font:400 clamp(1.5rem,5vw,8rem)/1.15 Merriweather,Georgia,serif; font-size:clamp(1.5rem,calc(var(--praise-scale,26) * 1cqw),12rem); letter-spacing:-.035em; transition:font-size .25s; }
+.scene .praise-wall > div:nth-child(3n + 2) .praise-word { color:#3D646B; background:#DCE9EA; }
+.scene .praise-wall > div:nth-child(3n + 3) .praise-word { color:#69562E; background:#EEE4CE; }
+.scene .praise-empty { text-align:center; color:var(--slate); font-size:1.1rem; }
+.scene .praise-form { grid-area:entry; display:grid; grid-template-columns:minmax(0,1fr) auto; gap:4px 8px; align-self:end; }
+.scene .praise-form input { width:100%; min-width:0; min-height:44px; padding:9px 10px; font-size:1rem; border:1px solid var(--line); border-radius:8px; color:var(--navy); background:transparent; }
+.scene .praise-form .primary { min-height:44px; padding:9px 12px; font-size:.875rem; background:transparent; color:var(--slate); border:1px solid var(--line); }
+.scene .praise-form .quiet-button { grid-column:1 / -1; justify-self:start; padding:6px 0; font-size:.8rem; border:0; background:transparent; }
+.scene.praise-slide .moment-reference { grid-area:reference; }
+.scene .lamp-layout { display:grid; grid-template-columns:1.15fr 1fr; align-items:center; gap:clamp(28px,4vw,60px); margin-top:28px; }
+.scene .lamp-layout > div { min-width:0; }
+.scene .lamp-verse { min-height:190px; display:flex; align-items:center; }
+.scene .lamp-verse blockquote { font:400 clamp(1.65rem,2.5vw,2.8rem)/1.5 Merriweather,Georgia,serif; margin:0; }
+.scene .lamp-verse blockquote span { display:block; }
+.scene .lamp-verse blockquote span:first-child { color:var(--extra-accent); }
+.scene .lamp-verse blockquote span:last-child { color:var(--extra-teal); }
+.scene .lamp-placeholder { color:var(--slate); font-size:1.2rem; line-height:1.6; }
+.scene .lamp-progress { display:flex; gap:10px; max-width:360px; margin-top:14px; }
+.scene .lamp-progress span { flex:1; height:4px; border-radius:2px; background:var(--line); }
+.scene .lamp-progress .is-lit { background:var(--blue); }
+.scene .lamp-question { font-size:clamp(1.2rem,1.7vw,1.8rem); line-height:1.5; margin-top:24px; }
+.scene .lesson-art img { display:block; width:100%; height:auto; max-height:42svh; object-fit:contain; border-radius:16px; }
+.scene .lesson-art figcaption { color:var(--slate); margin-top:14px; font-size:.8rem; line-height:1.6; }
+.scene .lesson-art figcaption span { display:block; }
+.scene .connection-passage { border-left:3px solid var(--teal); padding-left:22px; margin-top:26px; }
+.scene .connection-passage blockquote { font:400 clamp(1.4rem,2vw,2.1rem)/1.5 Merriweather,Georgia,serif; margin:14px 0 0; }
+.scene .connection-choices .scenario { font-size:clamp(1rem,1.4vw,1.3rem); }
+.scene .connection-feedback { margin-top:16px; color:var(--slate); line-height:1.5; }
+.scene .connection-feedback:empty { display:none; }
+.scene .connection-answer { border-top:1px solid var(--line); padding-top:16px; margin-top:16px; }
+.scene .connection-answer p { font-size:clamp(1.1rem,1.5vw,1.5rem); line-height:1.6; margin-top:10px; }
+/* Keep multi-verse passages large, with the close controls always in reach. */
+.scripture-dialog { height:min(88svh,1060px); padding:0; }
+.scripture-dialog[open] { display:grid; grid-template-rows:auto auto minmax(0,1fr) auto; }
+.scripture-dialog .dialog-top { padding:24px 28px 0; }
+.scripture-dialog h2 { padding:0 28px; margin:18px 0; }
+.scripture-passages { min-height:0; overflow:auto; overscroll-behavior:contain; padding:24px 28px; }
+.scripture-passages p { display:grid; grid-template-columns:2.2ch minmax(0,1fr); gap:16px; font:400 clamp(1.8rem,3.2vw,3.3rem)/1.55 Merriweather,Georgia,serif; overflow-wrap:break-word; }
+.scripture-passages p + p { margin-top:30px; }
+.scripture-passages .scripture-verse-number { font:400 .42em/1.5 'Fira Code',monospace; padding-top:.85em; color:var(--slate); }
+.scripture-dialog > a { padding:20px 28px; border-top:1px solid var(--line); line-height:1.5; }
+@media (max-width:900px) {
+  .extra-activity .scene-heading,.scene .moment-heading,.scene .psalms-heading { display:block; }
+  .extra-activity .scene-heading a,.scene .moment-heading > a { display:inline-block; margin-top:20px; }
+  .scene .history-note { margin-top:20px; }
+  .scene .lamp-layout { grid-template-columns:1fr; }
+  .scene .lesson-art { max-width:540px; }
+  .scene.praise-slide { grid-template-columns:1fr; grid-template-areas:"prompt" "words" "entry" "reference"; }
+  .scene .praise-display { min-height:300px; }
+  .scene .praise-form { width:min(100%,430px); }
+}
+@media (max-width:720px) {
+  .moments-menu { position:static; }
+  .header,.topbar { position:relative; }
+  .moments-panel { top:100%; left:0; right:auto; transform:none; }
+  .scene .scenario-choices,.scene .connection-choices { grid-template-columns:1fr; gap:8px; }
+  .scene .scenario { padding:14px; }
+  .scene .scenario > span { display:inline; margin-right:12px; }
+  .extra-activity .fill-verse { font-size:1.7rem; }
+  .extra-activity .fill-verse br { display:none; }
+  .extra-activity .word-bank { gap:10px; }
+  .extra-activity .word-bank button { min-width:0; flex:1; padding:12px; font-size:1.2rem; }
+  .slide .reflection-choices { grid-template-columns:1fr; gap:8px; }
+  .slide .reflection-choices button { min-height:44px; padding:14px; font-size:1.2rem; }
+  .scripture-dialog { height:calc(100svh - 24px); }
+  .scripture-dialog .dialog-top { padding:18px 20px 0; }
+  .scripture-dialog h2 { padding:0 20px; font-size:1.7rem; }
+  .scripture-passages { padding:24px 20px; }
+  .scripture-passages p { font-size:1.65rem; gap:10px; }
+}
+@media print { .moments-menu,.praise-form,.praise-empty,.moment-actions,.lamp-progress { display:none; } .scene .lamp-verse blockquote span[hidden] { display:block!important; } }
