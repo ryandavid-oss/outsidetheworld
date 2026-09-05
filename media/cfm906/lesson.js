@@ -45,8 +45,8 @@
     $("psalms-toggle").setAttribute("aria-pressed", String(id === "psalms"));
     const index = sequence.indexOf(id);
     $("previous").disabled = index === 0;
-    $("next").disabled = index === sequence.length - 1;
-    $("next").textContent = isOptional ? "Return to lesson →" : id === "welcome" ? "Begin →" : (id === "worship" || id === "learning") ? "Discuss →" : id === "take-home" ? "Complete" : "Next →";
+    $("next").disabled = false;
+    $("next").textContent = isOptional ? "Return to lesson →" : id === "welcome" ? "Begin →" : (id === "worship" || id === "learning") ? "Discuss →" : id === "take-home" ? "Back to start" : "Next →";
     $("lesson-progress").style.width = (isOptional ? (sequence.indexOf(returnFromMoment) + 1) : index + 1) / sequence.length * 100 + "%";
     $("slide-announcement").textContent = (index >= 0 ? `${index + 1} of ${sequence.length}. ` : "Optional. ") + labels[id];
     activateVideo($(id).querySelector("video"));
@@ -57,7 +57,19 @@
     window.scrollTo({ top: 0, behavior: "instant" });
   }
 
+  function backToStart() {
+    const heading = $("welcome-title");
+    scriptureOpener = heading;
+    videos.forEach((video) => video.pause());
+    if (guide.open) guide.close();
+    returnFromMoment = "welcome";
+    show("welcome");
+    $("presentation").scrollTo?.({ top: 0, left: 0, behavior: "instant" });
+    heading.focus({ preventScroll: true });
+  }
+  document.querySelectorAll("[data-lesson-start]").forEach((button) => button.addEventListener("click", backToStart));
   function advance(direction) {
+    if (current === "take-home" && direction > 0) { backToStart(); return; }
     if (optionalMoments.includes(current)) { show(returnFromMoment); return; }
     const index = Math.max(0, Math.min(sequence.length - 1, sequence.indexOf(current) + direction));
     if (sequence[index] !== current) show(sequence[index]);
@@ -442,7 +454,7 @@
     if (event.target instanceof Element && event.target.closest("input, select, textarea, video, summary, [contenteditable]")) return;
     if (event.key === "ArrowRight" || event.key === "PageDown") { event.preventDefault(); advance(1); }
     else if (event.key === "ArrowLeft" || event.key === "PageUp") { event.preventDefault(); advance(-1); }
-    else if (event.key === "Home") { event.preventDefault(); show("welcome"); }
+    else if (event.key === "Home") { event.preventDefault(); backToStart(); }
     else if (event.key === "End") { event.preventDefault(); show("take-home"); }
     else if (event.key.toLowerCase() === "f") { event.preventDefault(); toggleFullscreen(); }
   });

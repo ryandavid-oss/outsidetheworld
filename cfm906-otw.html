@@ -14,8 +14,8 @@
   <title>Remember His Goodness | An Outside the World Lesson</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/fonts/otw-fonts.css">
-  <link rel="stylesheet" href="media/cfm906/lesson.css?v=5">
-  <script defer src="media/cfm906/lesson.js?v=5"></script>
+  <link rel="stylesheet" href="media/cfm906/lesson.css?v=6">
+  <script defer src="media/cfm906/lesson.js?v=6"></script>
 </head>
 <body>
   <a class="skip-link" href="#stage">Skip to lesson</a>
@@ -23,7 +23,7 @@
     <header class="header">
       <a class="brand" href="index.html" aria-label="Outside the World home"><img src="Images/OTW_Brandmark_Main.svg" alt="Outside the World" width="136" height="32"></a>
       <span class="lesson-date">SEPTEMBER 6, 2026</span>
-      <div class="header-actions">
+      <div class="header-actions"><button id="lesson-start" class="quiet-button lesson-start" data-lesson-start type="button">Back to start</button>
         <button class="quiet-button" id="psalms-toggle" type="button" aria-pressed="false">Psalms moment</button>
         <details class="moments-menu" id="moments-menu"><summary class="quiet-button">More activities</summary><div class="moments-panel"><p class="small-label">Choose one if time allows</p><button type="button" data-moment="praise"><span>Praise wall</span><small>30–60 seconds · Name a blessing</small></button><button type="button" data-moment="lamp"><span>Psalm 119:105</span><small>1 minute · Read one phrase at a time</small></button><button type="button" data-moment="connections"><span>Find Christ in the Psalms</span><small>1–2 minutes · Match the passages</small></button></div></details>
         <button class="quiet-button" id="guide-toggle" type="button">Lesson guide</button>
@@ -35,7 +35,7 @@
       <section class="slide welcome-slide" id="welcome" aria-labelledby="welcome-title">
         <div class="content">
           <p class="eyebrow">Come, Follow Me · Psalms</p>
-          <h1 class="title" id="welcome-title">Forget not<br>all his <em>benefits.</em></h1>
+          <h1 class="title" id="welcome-title" tabindex="-1">Forget not<br>all his <em>benefits.</em></h1>
           <p class="reference"><a data-scripture aria-haspopup="dialog" aria-controls="scripture-reader" href="https://www.churchofjesuschrist.org/study/scriptures/ot/ps/103?lang=eng&amp;id=p2#p2" target="_blank" rel="noreferrer">Psalm 103:2</a></p>
           <div class="opening-question"><span class="small-label">As we gather</span><p class="question">What has the Savior done for you<br class="desktop-break"> that you want to remember?</p></div>
           <button type="button" class="text-button gathering-link" data-moment="praise">Open praise wall <span aria-hidden="true">→</span></button>
@@ -133,12 +133,12 @@
     <p class="sr-only" id="slide-announcement" aria-live="polite" aria-atomic="true"></p>
     <p class="toast" id="status-message" role="status" hidden></p>
     <dialog class="scripture-reader" id="scripture-reader" aria-labelledby="scripture-reader-title">
-      <div class="scripture-reader-header"><div><p class="eyebrow">Read together</p><h2 id="scripture-reader-title" tabindex="-1">Scripture</h2></div><button class="secondary" id="scripture-reader-close" type="button" aria-label="Close scripture and return to the lesson">Close ×</button></div>
+      <div class="scripture-reader-header"><div><p class="eyebrow">Read together</p><h2 id="scripture-reader-title" tabindex="-1">Scripture</h2></div><div class="dialog-actions"><button class="secondary" data-lesson-start type="button">Back to start</button><button class="secondary" id="scripture-reader-close" type="button" aria-label="Close scripture and return to the lesson">Close ×</button></div></div>
       <div class="scripture-reader-body" id="scripture-reader-body" role="region" aria-label="Scripture verses" tabindex="0"></div>
       <div class="scripture-reader-footer"><span>King James Version</span><a id="scripture-reader-source" href="https://www.churchofjesuschrist.org/study/scriptures/ot/ps/103?lang=eng" target="_blank" rel="noreferrer">Open on Church website ↗</a></div>
     </dialog>
   <dialog class="guide" id="lesson-guide" aria-labelledby="guide-title">
-    <div class="guide-topline"><p class="eyebrow">For Sunday, September 6</p><button type="button" class="quiet-button" id="guide-close" aria-label="Close lesson guide">Close ×</button></div>
+    <div class="guide-topline"><p class="eyebrow">For Sunday, September 6</p><div class="dialog-actions"><button class="secondary" data-lesson-start type="button">Back to start</button><button type="button" class="quiet-button" id="guide-close" aria-label="Close lesson guide">Close ×</button></div></div>
     <h2 id="guide-title">September 6 lesson plan</h2>
     <p>The Church asks youth and adult Sunday School classes to watch two instruction videos and discuss them on September 6. The six main sections follow that plan. The Psalms activities are optional.</p>
     <dl class="rundown"><div><dt>Welcome and opening prayer</dt><dd>1:00</dd></div><div><dt>Sabbath and sacrament meeting video</dt><dd>11:23</dd></div><div><dt>Discuss worship and renewal</dt><dd>2:00</dd></div><div><dt>Sunday School video</dt><dd>4:22</dd></div><div><dt>Discuss learning together</dt><dd>3:00</dd></div><div><dt>Invitation and closing prayer</dt><dd>1:00</dd></div><div class="rundown-total"><dt>Time for arrivals and transitions</dt><dd>2:15</dd></div></dl>

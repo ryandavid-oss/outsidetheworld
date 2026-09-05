@@ -72,8 +72,8 @@
     $("y-section").value = id;
     const index = order.indexOf(id);
     $("y-previous").disabled = index === 0;
-    $("y-next").disabled = index === order.length - 1;
-    $("y-next").textContent = id === "psalm" ? "Return to lesson →" : id === "start" ? "Let’s watch →" : ["worship", "learning"].includes(id) ? "Let’s talk →" : id === "finish" ? "Finished" : "Next →";
+    $("y-next").disabled = false;
+    $("y-next").textContent = id === "psalm" ? "Return to lesson →" : id === "start" ? "Let’s watch →" : ["worship", "learning"].includes(id) ? "Let’s talk →" : id === "finish" ? "Back to start" : "Next →";
     $("y-step-count").textContent = index < 0 ? "Extra" : `${index + 1} / 6`;
     $("y-progress").style.width = `${((index < 0 ? order.indexOf(returnTo) : index) + 1) / order.length * 100}%`;
     $("y-psalm-open").textContent = id === "psalm" ? "Back to lesson" : "Psalms extra";
@@ -81,12 +81,24 @@
     $("teacher-note").textContent = notes[id][1];
     const video = $(id).querySelector("video");
     if (video && !videoState.get(video.id).localURL) loadOnline(video);
-    history.replaceState(null, "", `#${id}`);
+    try { history.replaceState(null, "", `#${id}`); } catch { /* Keep navigation usable when history is unavailable. */ }
     announce(notes[id][0]);
     window.scrollTo({ top: 0, behavior: "instant" });
     if (moveFocus) focusVisible($("y-stage"));
   }
+  function backToStart() {
+    const heading = $("start-title");
+    // Dialog close events run later; send their focus back to the opening screen too.
+    dialogs.forEach(dialog => { dialog.returnFocus = heading; });
+    activeCue = null;
+    returnTo = "start";
+    show("start");
+    $("y-app").scrollTo?.({ top: 0, left: 0, behavior: "instant" });
+    heading.focus({ preventScroll: true });
+  }
+  all("[data-lesson-start]").forEach(button => button.addEventListener("click", backToStart));
   function advance(direction) {
+    if (current === "finish" && direction > 0) return backToStart();
     if (current === "psalm") return show(returnTo);
     show(order[Math.max(0, Math.min(order.length - 1, order.indexOf(current) + direction))]);
   }
@@ -287,7 +299,7 @@
     if (["ArrowRight", "PageDown", "ArrowLeft", "PageUp", "Home", "End", "f", "F"].includes(event.key)) event.preventDefault();
     if (["ArrowRight", "PageDown"].includes(event.key)) advance(1);
     if (["ArrowLeft", "PageUp"].includes(event.key)) advance(-1);
-    if (event.key === "Home") show("start");
+    if (event.key === "Home") backToStart();
     if (event.key === "End") show("finish");
     if (["f", "F"].includes(event.key)) toggleFullscreen();
   });

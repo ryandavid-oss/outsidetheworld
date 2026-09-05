@@ -47,3 +47,11 @@ dialog { border-radius:8px; }
 .current-note { background:#E3EBED; }
 .cue-dialog h2 { font-size:clamp(2rem,3.8vw,4.2rem); }
 @media (max-width:650px) { .choices:not(.reflection-choices) { grid-template-columns:1fr; } .choices button,.warmup button { min-height:64px; padding:15px 18px; font-size:1.1rem; } .reflection-choices button { padding:12px 8px; font-size:1rem; } h1 { font-size:2.7rem; } .big-question { font-size:2.3rem; } .cue-dialog h2 { font-size:2rem; } }
+
+.top-actions { flex-wrap:wrap; justify-content:flex-end; min-width:0; }
+.top-actions .lesson-start { background:var(--navy); color:white; border:1px solid var(--navy); white-space:nowrap; }
+.top-actions .lesson-start:hover { background:#2C4C78; }
+.dialog-actions { display:flex; align-items:center; justify-content:flex-end; gap:8px; flex-wrap:wrap; }
+.dialog-actions button { white-space:nowrap; }
+.dialog-top { flex-wrap:wrap; }
+@media (max-width:650px) { .top-actions { justify-content:flex-start; } }

@@ -66,7 +66,7 @@ click('y-next');assert.deepEqual(active(),['worship']);assert.equal(video.loaded
 jump('start');jump('worship');assert.equal(video.loaded,1,'lazy media only loads once');
 video.paused=false;click('y-next');assert.equal(video.paused,true);assert.deepEqual(active(),['discuss']);
 click('y-psalm-open');assert.deepEqual(active(),['psalm']);assert.equal(get('y-progress').style.width,'50%');click('y-next');assert.deepEqual(active(),['discuss']);
-jump('finish');assert.equal(get('y-next').disabled,true);click('y-next');assert.deepEqual(active(),['finish']);
+jump('finish');assert.equal(get('y-next').disabled,false);assert.equal(get('y-next').textContent,'Back to start');click('y-next');assert.deepEqual(active(),['start']);
 key('Home');assert.deepEqual(active(),['start']);key('ArrowRight');assert.deepEqual(active(),['worship']);key('ArrowRight',video);assert.deepEqual(active(),['worship']);
 location.hash='#invalid';w.fire('hashchange');assert.deepEqual(active(),['worship']);
 location.hash='#home-study';w.fire('hashchange');assert.deepEqual(active(),['home-study']);click('home-ideas');assert.equal(get('home-examples').hidden,false);click('home-ideas');assert.equal(get('home-examples').hidden,true);

@@ -320,3 +320,10 @@ a[data-scripture] { text-decoration: underline; text-decoration-thickness: 1px; 
   .praise-form, .praise-empty, .moment-actions, .lamp-progress { display: none; }
   .lamp-verse blockquote span[hidden] { display: block !important; color: black; }
 }
+
+.header-actions { flex-wrap:wrap; justify-content:flex-end; min-width:0; }
+.header-actions .lesson-start { background:var(--heritage-navy); color:var(--white); border:1px solid var(--brand-blue); white-space:nowrap; }
+.dialog-actions { display:flex; align-items:center; justify-content:flex-end; gap:8px; flex-wrap:wrap; }
+.dialog-actions button { white-space:nowrap; }
+.guide-topline,.scripture-reader-header { flex-wrap:wrap; }
+@media (max-width:720px) { .header-actions { justify-content:flex-start; } }

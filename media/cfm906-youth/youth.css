@@ -16,3 +16,11 @@ dialog { color:var(--navy); background:var(--paper); border:2px solid var(--navy
 @media (prefers-reduced-motion:reduce) { *,*::before,*::after { transition:none!important; animation:none!important; } }
 @media print { .topbar,.lesson-footer,.progress,dialog,.toast,.skip,.video-tools { display:none!important; } #y-app { display:block; padding:0; } .scene,.scene[hidden] { display:block!important; break-after:page; padding:24px; } .scene button { display:none; } }
 #y-app:fullscreen { height:100%; overflow:auto; background:var(--paper); }
+
+.top-actions { flex-wrap:wrap; justify-content:flex-end; min-width:0; }
+.top-actions .lesson-start { background:var(--navy); color:white; border:1px solid var(--navy); white-space:nowrap; }
+.top-actions .lesson-start:hover { background:#2C4C78; }
+.dialog-actions { display:flex; align-items:center; justify-content:flex-end; gap:8px; flex-wrap:wrap; }
+.dialog-actions button { white-space:nowrap; }
+.dialog-top { flex-wrap:wrap; }
+@media (max-width:650px) { .top-actions { justify-content:flex-start; } }
