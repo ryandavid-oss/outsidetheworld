@@ -23,11 +23,11 @@ def card(pdf, bottom):
     pdf.drawString(left, top - 61, "Sunday notes")
     pdf.setFillColor(SLATE)
     pdf.setFont("Helvetica", 10)
-    pdf.drawRightString(right, top - 59, "Write a few words or draw.")
+    pdf.drawRightString(right, top - 59, "A few words or a drawing is fine.")
     prompts = [
-        "What did you hear about Jesus Christ and forgiveness?",
-        "During sacrament meeting, I can...",
-        "At home, I can learn about Jesus by...",
+        "What did they say about Jesus forgiving us?",
+        "To think about Jesus in sacrament meeting, I could...",
+        "To learn about Jesus at home, I could...",
     ]
     for index, prompt in enumerate(prompts):
         y = top - 91 - index * 66
@@ -44,7 +44,7 @@ def card(pdf, bottom):
         pdf.line(left + 28, y - 35, right, y - 35)
     pdf.setFillColor(NAVY)
     pdf.setFont("Helvetica-Bold", 12)
-    pdf.drawString(left, top - 291, "Before next Sunday, I will...")
+    pdf.drawString(left, top - 291, "This week, I'll try...")
     pdf.setStrokeColor(LINE)
     pdf.setLineWidth(0.5)
     pdf.line(left, top - 316, right, top - 316)

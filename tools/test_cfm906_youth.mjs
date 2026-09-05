@@ -73,7 +73,7 @@ location.hash='#home-study';w.fire('hashchange');assert.deepEqual(active(),['hom
 for(const attribute of ['warmup','action']){
  const choices=doc.querySelectorAll(`[data-${attribute}]`);for(const choice of choices){choice.fire('click');assert.equal(choices.filter(c=>c.attrs['aria-pressed']==='true').length,1);assert.equal(choice.attrs['aria-pressed'],'true');}
 }
-jump('psalm');select('[data-word="path"]').fire('click');assert.match(get('psalm-feedback').textContent,/Try another/);assert.equal(get('blank-0').textContent,'_____');
+jump('psalm');select('[data-word="path"]').fire('click');assert.match(get('psalm-feedback').textContent,/Not quite/);assert.equal(get('blank-0').textContent,'_____');
 for(const [index,word]of ['word','lamp','path'].entries()){select(`[data-word="${word}"]`).fire('click');assert.equal(get('blank-'+index).textContent,word);assert.equal(select(`[data-word="${word}"]`).disabled,true);}
 assert.match(get('psalm-feedback').textContent,/read the whole verse/);click('psalm-reset');assert.equal(get('blank-0').textContent,'_____');assert.equal(select('[data-word="word"]').disabled,false);
 const scripture=select('[data-scripture]');scripture.fire('click',{metaKey:true});assert.equal(get('y-scripture').open,false);scripture.fire('click');assert.equal(get('y-scripture').open,true);assert.equal(doc.activeElement.id,'y-scripture-title');key('ArrowRight');assert.deepEqual(active(),['psalm']);click('y-scripture-close');assert.equal(doc.activeElement,scripture);
@@ -81,11 +81,11 @@ const scripture=select('[data-scripture]');scripture.fire('click',{metaKey:true}
 jump('worship');video.paused=false;click('y-teacher-open');assert.equal(get('y-teacher').open,true);assert.equal(video.paused,true);assert.match(get('teacher-section').textContent,/First video/);
 select('[data-preview-cue="forgiveness"]').fire('click');flush();assert.equal(get('y-cue').open,true);assert.equal(get('y-teacher').open,false);assert.equal(doc.activeElement.id,'cue-title');assert.equal(get('cue-continue').textContent,'Close preview');click('cue-continue');assert.equal(video.playCount,undefined);assert.equal(doc.activeElement.id,'y-teacher-open');
 function playback(v,time){v.paused=false;v.currentTime=time;v.fire('timeupdate');}
-playback(video,187.8);assert.equal(get('y-cue').open,false);playback(video,188.05);assert.equal(get('y-cue').open,true);assert.equal(video.paused,true);assert.match(get('cue-title').textContent,/forgiveness/);assert.equal(get('cue-time').textContent,'0:30');
+playback(video,187.8);assert.equal(get('y-cue').open,false);playback(video,188.05);assert.equal(get('y-cue').open,true);assert.equal(video.paused,true);assert.match(get('cue-title').textContent,/forgiving us/);assert.equal(get('cue-time').textContent,'0:30');
 click('cue-timer');now+=10000;tick();assert.equal(get('cue-time').textContent,'0:20');click('cue-timer');now+=10000;tick();assert.equal(get('cue-time').textContent,'0:20');click('cue-timer');now+=25000;tick();assert.equal(get('cue-time').textContent,'0:00');assert.equal(video.paused,true);assert.equal(get('y-cue').open,true,'timer never closes cue or resumes video');
 click('cue-continue');assert.equal(video.paused,false);assert.equal(video.playCount,1);assert.equal(doc.activeElement,video);
 playback(video,187);playback(video,189);assert.equal(get('y-cue').open,false,'each checkpoint fires once');
-playback(video,440.4);assert.equal(get('y-cue').open,false);playback(video,440.7);assert.equal(get('y-cue').open,true);assert.match(get('cue-title').textContent,/focus on Jesus/);click('cue-close');assert.equal(video.paused,true);assert.equal(video.playCount,1,'closing does not resume');
+playback(video,440.4);assert.equal(get('y-cue').open,false);playback(video,440.7);assert.equal(get('y-cue').open,true);assert.match(get('cue-title').textContent,/think about Jesus/);click('cue-close');assert.equal(video.paused,true);assert.equal(video.playCount,1,'closing does not resume');
 
 jump('learning');get('guided-pauses').checked=false;playback(learning,154);assert.equal(get('y-cue').open,false);get('guided-pauses').checked=true;playback(learning,155);assert.equal(get('y-cue').open,false,'enabling does not fire a missed cue');
 const local=select('[data-local-video="y-learning-video"]');local.files=[{name:'sunday.mp4',type:'video/mp4'}];local.fire('change');assert.equal(learning.src,'blob:local-video');assert.match(get('y-learning-file').textContent,/stays on your device/);

@@ -9,15 +9,15 @@
     worship: ["First video · 12:23 with stops", "Play the complete video. The first stop is for box 1 on the handout; the second is for box 2. Keep each to about 30 seconds. You choose when to continue."],
     discuss: ["Discuss sacrament meeting · 1 minute", "Ask how sacrament meeting can help us come closer to Jesus. Use the choices if students need a starting point. Take two or three brief answers."],
     learning: ["Second video · 5:07 with stop", "Play the complete video. At the partner stop, keep everyone seated: 22 students make 11 pairs. Each person shares one idea. Allow 45 seconds for both people together."],
-    "home-study": ["Discuss learning at home · 1 minute", "Ask what students could learn about Jesus at home and bring back to class. Take two short ideas. Use Show a few ideas only if the class needs help getting started."],
+    "home-study": ["Discuss learning at home · 1 minute", "Ask what students could learn about Jesus at home and bring back to class. Take two short ideas. Use Need an idea? if the class needs help getting started."],
     finish: ["Write a plan and close · 1 minute", "Give students a quiet moment to finish the last line. They do not need to share it. Close with prayer and help everyone move to the next class on time."],
     psalm: ["Psalms extra · 60–90 seconds", "Use only if time remains. Open the verse, read it together, then let students choose the missing words. Ask for one example of how a scripture has helped someone."]
   };
   // Checkpoints fall in gaps between sentences in the supplied English captions.
   const cues = {
-    forgiveness: { video: "y-worship-video", at: 188, label: "Video 1 · 3:08 · Write or draw", seconds: 30, title: "What did you hear about Jesus Christ and forgiveness?", instruction: "Write or draw a few words in box 1 on your handout.", note: "If cards are not already on chairs, ask two helpers to pass them out here. Take one or two general thoughts. Students can keep personal experiences private." },
-    worship: { video: "y-worship-video", at: 440.5, label: "Video 1 · 7:21 · Choose one", seconds: 30, title: "What could you do during sacrament meeting to focus on Jesus?", instruction: "Sing, pray, listen, or welcome someone. Choose one and write it in box 2.", note: "Invite a quick show of hands or two brief answers. Ask how that choice could help them remember Jesus. Keep this stop to about 30 seconds." },
-    partner: { video: "y-learning-video", at: 153.2, label: "Video 2 · 2:33 · Talk with a partner", seconds: 45, title: "What could you do at home to learn about Jesus?", instruction: "Tell the person beside you. Then listen to their idea. Use box 3 to keep a thought.", note: "Keep students seated in 11 nearby pairs. Give both people a turn within 45 seconds. If attendance is odd, use one group of three. A student may write instead of speaking." }
+    forgiveness: { video: "y-worship-video", at: 188, label: "Video 1 · 3:08 · Write or draw", seconds: 30, title: "What did they say about Jesus forgiving us?", instruction: "Jot down a few words or draw something in box 1.", note: "If cards are not already on chairs, ask two helpers to pass them out here. Ask one or two students what they noticed. No one needs to share a personal story." },
+    worship: { video: "y-worship-video", at: 440.5, label: "Video 1 · 7:21 · Choose one", seconds: 30, title: "What could help you think about Jesus during sacrament meeting?", instruction: "You could sing, pray, listen, or help someone feel welcome. Pick one for box 2.", note: "Invite a quick show of hands or two brief answers. Ask how that choice could help them remember Jesus. Keep this stop to about 30 seconds." },
+    partner: { video: "y-learning-video", at: 153.2, label: "Video 2 · 2:33 · Talk with a partner", seconds: 45, title: "What’s one way you could learn about Jesus at home?", instruction: "Turn to the person next to you. Share an idea, then let them have a turn. Jot one down in box 3.", note: "Keep students seated in 11 nearby pairs. Give both people a turn within 45 seconds. If attendance is odd, use one group of three. A student may write instead of speaking." }
   };
   let current = "start", returnTo = "start", activeCue = null, shortClock = null;
   let classRemaining = 25 * 60 * 1000, classDeadline = 0, toastTimeout;
@@ -73,7 +73,7 @@
     const index = order.indexOf(id);
     $("y-previous").disabled = index === 0;
     $("y-next").disabled = index === order.length - 1;
-    $("y-next").textContent = id === "psalm" ? "Return to lesson →" : id === "start" ? "Begin →" : ["worship", "learning"].includes(id) ? "Discuss →" : id === "finish" ? "Finished" : "Next →";
+    $("y-next").textContent = id === "psalm" ? "Return to lesson →" : id === "start" ? "Let’s watch →" : ["worship", "learning"].includes(id) ? "Let’s talk →" : id === "finish" ? "Finished" : "Next →";
     $("y-step-count").textContent = index < 0 ? "Extra" : `${index + 1} / 6`;
     $("y-progress").style.width = `${((index < 0 ? order.indexOf(returnTo) : index) + 1) / order.length * 100}%`;
     $("y-psalm-open").textContent = id === "psalm" ? "Back to lesson" : "Psalms extra";
@@ -102,13 +102,13 @@
       $(responseID).textContent = prompts[button.dataset[attribute]];
     }));
   }
-  choose("[data-warmup]", "warmup", "warmup-response", { song: "What song came to mind?", scripture: "What do you remember from that scripture?", kindness: "How can someone’s kindness help us feel Jesus’s love?" });
-  choose("[data-action]", "action", "action-response", { prepare: "What could you do before Sunday to prepare for the sacrament?", listen: "What could you listen for that would help you remember Jesus?", welcome: "How could you help someone feel included at church?" });
+  choose("[data-warmup]", "warmup", "warmup-response", { song: "Which song did you think of?", scripture: "What stood out to you in that scripture?", kindness: "What did that person do?" });
+  choose("[data-action]", "action", "action-response", { prepare: "What could help you get ready for the sacrament?", listen: "What could help you listen when it’s hard to pay attention?", welcome: "What could you say to someone who’s sitting alone?" });
   $("home-ideas").addEventListener("click", () => {
     const expanded = $("home-ideas").getAttribute("aria-expanded") !== "true";
     $("home-ideas").setAttribute("aria-expanded", String(expanded));
     $("home-examples").hidden = !expanded;
-    $("home-ideas").textContent = expanded ? "Hide ideas" : "Show a few ideas";
+    $("home-ideas").textContent = expanded ? "Hide ideas" : "Need an idea?";
   });
   let wordIndex = 0;
   const verseWords = ["word", "lamp", "path"];
@@ -120,12 +120,12 @@
       $(`blank-${index}`).classList.toggle("current", index === 0);
     });
     all("[data-word]").forEach(button => { button.disabled = false; });
-    $("psalm-feedback").textContent = "Choose the first missing word.";
+    $("psalm-feedback").textContent = "Which word goes first?";
   }
   all("[data-word]").forEach(button => button.addEventListener("click", () => {
     if (wordIndex >= verseWords.length) return;
     if (button.dataset.word !== verseWords[wordIndex]) {
-      $("psalm-feedback").textContent = "Try another word. You can open the verse for a hint.";
+      $("psalm-feedback").textContent = "Not quite. Take another look at the verse.";
       return;
     }
     $(`blank-${wordIndex}`).textContent = verseWords[wordIndex];
@@ -134,7 +134,7 @@
     button.disabled = true;
     wordIndex++;
     if (wordIndex < verseWords.length) $(`blank-${wordIndex}`).classList.add("current");
-    $("psalm-feedback").textContent = wordIndex < verseWords.length ? "That fits. Choose the next word." : "Now read the whole verse together.";
+    $("psalm-feedback").textContent = wordIndex < verseWords.length ? "That’s it. What comes next?" : "Let’s read the whole verse together.";
   }));
   $("psalm-reset").addEventListener("click", resetVerse);
   all("[data-scripture]").forEach(link => link.addEventListener("click", event => {
@@ -183,7 +183,7 @@
   function updateShortClock() {
     if (!shortClock?.deadline) return;
     shortClock.remaining = Math.max(0, shortClock.deadline - Date.now());
-    if (!shortClock.remaining) { shortClock.deadline = 0; announce("Time is up. Finish the thought you are sharing."); }
+    if (!shortClock.remaining) { shortClock.deadline = 0; announce("Time’s up. Finish your thought."); }
     renderShortClock();
   }
   function toggleShortClock(button, output, seconds) {
@@ -247,7 +247,7 @@
       passed.forEach(([key]) => state.seen.add(key));
       if (passed.length && $("guided-pauses").checked && !dialogs.some(dialog => dialog.open)) openCue(passed[0][0]);
     });
-    video.addEventListener("ended", () => { markPastCues(video); announce("Video finished. Choose Discuss to continue."); });
+    video.addEventListener("ended", () => { markPastCues(video); announce("Video finished. Choose Let’s talk to continue."); });
     const error = $(video.id.replace("-video", "-error"));
     video.addEventListener("error", () => { error.hidden = false; });
     video.querySelector("source").addEventListener("error", () => { error.hidden = false; });
