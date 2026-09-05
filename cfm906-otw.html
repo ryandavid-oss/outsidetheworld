@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#0c1926">
+  <meta name="theme-color" content="#1A1C20">
   <meta name="description" content="Remember His Goodness: a Sunday School presentation with Psalms, September 6 Church instruction videos, and shared reflection.">
   <link rel="canonical" href="https://outsidetheworld.com/cfm906-otw.html">
   <meta property="og:type" content="website">
@@ -14,8 +14,8 @@
   <title>Remember His Goodness | An Outside the World Lesson</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/fonts/otw-fonts.css">
-  <link rel="stylesheet" href="media/cfm906/lesson.css?v=1">
-  <script defer src="media/cfm906/lesson.js?v=1"></script>
+  <link rel="stylesheet" href="media/cfm906/lesson.css?v=2">
+  <script defer src="media/cfm906/lesson.js?v=2"></script>
 </head>
 <body>
   <a class="skip-link" href="#stage">Skip to lesson</a>
@@ -25,6 +25,7 @@
       <span class="lesson-date">SEPTEMBER 6, 2026</span>
       <div class="header-actions">
         <button class="quiet-button" id="psalms-toggle" type="button" aria-pressed="false">Psalms moment</button>
+        <details class="moments-menu" id="moments-menu"><summary class="quiet-button">More moments</summary><div class="moments-panel"><p class="small-label">Choose one if time allows</p><button type="button" data-moment="praise"><span>Gather our praise</span><small>30–60 seconds · Words from the room</small></button><button type="button" data-moment="lamp"><span>A light for the next step</span><small>1 minute · Reveal and reflect</small></button><button type="button" data-moment="connections"><span>Find Christ in the Psalms</span><small>1–2 minutes · Connect the scriptures</small></button></div></details>
         <button class="quiet-button" id="guide-toggle" type="button">Lesson guide</button>
         <button class="quiet-button fullscreen-button" id="fullscreen-toggle" type="button" aria-label="Enter fullscreen" aria-pressed="false"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M8 3H3v5m13-5h5v5m0 8v5h-5M3 16v5h5"/></svg><span>Fullscreen</span></button>
       </div>
@@ -37,8 +38,9 @@
           <h1 class="title" id="welcome-title">Forget not<br>all his <em>benefits.</em></h1>
           <p class="reference"><a href="https://www.churchofjesuschrist.org/study/scriptures/ot/ps/103?lang=eng&amp;id=p2#p2" target="_blank" rel="noreferrer">Psalm 103:2 <span aria-hidden="true">↗</span></a></p>
           <div class="opening-question"><span class="small-label">As we gather</span><p class="question">What has the Savior done for you<br class="desktop-break"> that you want to remember today?</p></div>
+          <button type="button" class="text-button gathering-link" data-moment="praise">Gather our praise <span aria-hidden="true">↗</span></button>
         </div>
-        <span class="chapter" aria-hidden="true">103</span>
+        <figure class="lesson-art"><a href="https://www.churchofjesuschrist.org/media/image/pool-of-bethesda-carl-bloch-5b6576e?lang=eng" target="_blank" rel="noreferrer"><img src="media/cfm906/images/christ-healing-at-bethesda.jpg" width="1920" height="1543" alt="Jesus draws back a covering to reach a sick man at the pool of Bethesda, in a painting by Carl Heinrich Bloch."></a><figcaption><cite>Christ Healing the Sick at Bethesda</cite><span>Carl Heinrich Bloch, 1883 · BYU Museum of Art</span><a href="https://www.churchofjesuschrist.org/media/image/pool-of-bethesda-carl-bloch-5b6576e?lang=eng" target="_blank" rel="noreferrer">Artwork from this week’s lesson ↗</a></figcaption></figure>
       </section>
 
       <section class="slide video-slide" id="worship" aria-labelledby="worship-title" hidden>
@@ -97,10 +99,38 @@
           <p class="activity-question">What does this passage help you understand about the Savior?</p>
         </div>
       </section>
+      <section class="slide praise-slide" id="praise" aria-labelledby="praise-title" hidden>
+        <p class="eyebrow">Gather our praise · 30–60 seconds</p>
+        <h2 class="moment-title" id="praise-title">What has the Savior<br>given <em>you?</em></h2>
+        <p class="moment-intro">Share one word or a short phrase. Let’s remember His goodness together.</p>
+        <div class="praise-wall" id="praise-wall" role="list" aria-label="Words of praise from our class"></div>
+        <p class="praise-empty" id="praise-empty">A word from you can begin our praise.</p>
+        <form class="praise-form" id="praise-form"><label class="sr-only" for="praise-word">Add a word or short phrase from the class</label><input id="praise-word" type="text" maxlength="32" autocomplete="off" placeholder="A word from the room…" aria-describedby="praise-help"><button class="primary" id="praise-add" type="submit">Add word</button><button class="quiet-button" id="praise-reset" type="button" disabled>Clear words</button></form>
+        <p class="activity-question" id="praise-help">The teacher types the words we share. Click a word to remove it. Refreshing clears the wall.</p>
+        <p class="moment-reference"><a href="https://www.churchofjesuschrist.org/study/scriptures/ot/ps/103?lang=eng&amp;id=p1-p5#p1" target="_blank" rel="noreferrer">Read Psalm 103:1–5 ↗</a><span>Which of these gifts helps you turn toward Him?</span></p>
+      </section>
+
+      <section class="slide lamp-slide" id="lamp" aria-labelledby="lamp-title" hidden>
+        <div class="moment-heading"><div><p class="eyebrow">A light for the next step · 1 minute</p><h2 class="moment-title" id="lamp-title">How does His word<br><em>guide us?</em></h2></div><a class="scripture-reference" href="https://www.churchofjesuschrist.org/study/scriptures/ot/ps/119?lang=eng&amp;id=p105#p105" target="_blank" rel="noreferrer">Find Psalm 119:105 ↗</a></div>
+        <div class="lamp-verse" aria-label="Psalm 119:105, revealed one phrase at a time"><p class="lamp-placeholder" id="lamp-placeholder">Read the verse. Then pause over each phrase.</p><blockquote><span id="lamp-phrase-1" hidden>Thy word</span><span id="lamp-phrase-2" hidden>is a lamp unto my feet,</span><span id="lamp-phrase-3" hidden>and a light unto my path.</span></blockquote></div>
+        <div class="lamp-progress" aria-hidden="true"><span data-lamp-step="1"></span><span data-lamp-step="2"></span><span data-lamp-step="3"></span></div>
+        <p class="lamp-question" id="lamp-question" aria-live="polite">What word stands out to you?</p>
+        <div class="moment-actions"><button class="primary" id="lamp-reveal" type="button">Reveal first phrase</button><button class="quiet-button" id="lamp-reset" type="button" disabled>Start again</button><span class="moment-count" id="lamp-count">0 of 3 phrases</span></div>
+      </section>
+
+      <section class="slide connections-slide" id="connections" aria-labelledby="connections-title" hidden>
+        <div class="moment-heading"><div><p class="eyebrow">Find Christ in the Psalms · 1–2 minutes</p><h2 class="moment-title" id="connections-title">An ancient song.<br><em>A familiar Savior.</em></h2></div><span class="moment-count" id="connection-count">Connection 1 of 3</span></div>
+        <div class="connection-passage"><a class="scripture-reference" id="connection-reference" href="https://www.churchofjesuschrist.org/study/scriptures/ot/ps/118?lang=eng&amp;id=p22#p22" target="_blank" rel="noreferrer">Read Psalm 118:22 ↗</a><blockquote id="connection-verse">“The stone which the builders refused is become the head stone of the corner.”</blockquote></div>
+        <p class="activity-intro">Where do you recognize Jesus Christ? Choose a connection together.</p>
+        <div class="connection-choices" role="group" aria-label="Choose a New Testament connection"><button class="scenario" type="button" data-connection="0" aria-pressed="false">Jesus teaches about the rejected cornerstone</button><button class="scenario" type="button" data-connection="1" aria-pressed="false">The crowd welcomes Jesus into Jerusalem</button><button class="scenario" type="button" data-connection="2" aria-pressed="false">Christ is called a high priest</button></div>
+        <p class="connection-feedback" id="connection-feedback" role="status"></p>
+        <div class="connection-answer" id="connection-answer" hidden><a class="scripture-reference" id="connection-answer-reference" target="_blank" rel="noreferrer">Read the connection</a><p id="connection-explanation"></p></div>
+        <div class="moment-actions"><button class="secondary" id="connection-reveal" type="button">Reveal connection</button><button class="primary" id="connection-next" type="button" hidden>Next connection →</button><button class="quiet-button" id="connection-reset" type="button">Start again</button></div>
+      </section>
     </div>
 
     <footer class="footer">
-      <div class="footer-left"><label class="sr-only" for="moment-select">Jump to a lesson moment</label><select id="moment-select" aria-label="Jump to a lesson moment"><option value="welcome">01 · Welcome</option><option value="worship">02 · Watch: our worship</option><option value="renewal">03 · Discuss: renewal</option><option value="learning">04 · Watch: our learning</option><option value="together">05 · Discuss: learning</option><option value="take-home">06 · Take it home</option><option value="psalms">Optional · Psalms moment</option></select><div class="timer-group"><button class="timer" id="timer-toggle" type="button" aria-label="Start 25-minute class timer"><span class="timer-symbol" id="timer-symbol" aria-hidden="true">▶</span><span id="timer-display">25:00</span></button><button class="reset-timer" id="timer-reset" type="button" aria-label="Reset class timer to 25 minutes" title="Reset timer">↺</button></div></div>
+      <div class="footer-left"><label class="sr-only" for="moment-select">Jump to a lesson moment</label><select id="moment-select" aria-label="Jump to a lesson moment"><option value="welcome">01 · Welcome</option><option value="worship">02 · Watch: our worship</option><option value="renewal">03 · Discuss: renewal</option><option value="learning">04 · Watch: our learning</option><option value="together">05 · Discuss: learning</option><option value="take-home">06 · Take it home</option><option value="psalms">Optional · Psalms moment</option><option value="praise">Optional · Gather our praise</option><option value="lamp">Optional · A light for the next step</option><option value="connections">Optional · Find Christ</option></select><div class="timer-group"><button class="timer" id="timer-toggle" type="button" aria-label="Start 25-minute class timer"><span class="timer-symbol" id="timer-symbol" aria-hidden="true">▶</span><span id="timer-display">25:00</span></button><button class="reset-timer" id="timer-reset" type="button" aria-label="Reset class timer to 25 minutes" title="Reset timer">↺</button></div></div>
       <div class="controls"><span class="keyboard-hint" aria-hidden="true">← → to navigate</span><button class="secondary" id="previous" type="button" disabled><span aria-hidden="true">←</span><span class="previous-label"> Previous</span></button><button class="primary" id="next" type="button">Begin <span aria-hidden="true">→</span></button></div>
     </footer>
     <div class="progress-track" aria-hidden="true"><span id="lesson-progress"></span></div>
@@ -111,12 +141,14 @@
   <dialog class="guide" id="lesson-guide" aria-labelledby="guide-title">
     <div class="guide-topline"><p class="eyebrow">For Sunday, September 6</p><button type="button" class="quiet-button" id="guide-close" aria-label="Close lesson guide">Close ×</button></div>
     <h2 id="guide-title">A little room to breathe.</h2>
-    <p>The Church has assigned two instruction videos and discussion for this Sunday. The main sequence follows that plan. The Psalms moment is optional.</p>
+    <p>The Church has assigned two instruction videos and discussion for this Sunday. The main sequence follows that plan. All additional moments are optional.</p>
     <dl class="rundown"><div><dt>Welcome and opening prayer</dt><dd>1:00</dd></div><div><dt>Sabbath and sacrament meeting video</dt><dd>11:23</dd></div><div><dt>Discuss worship and renewal</dt><dd>2:00</dd></div><div><dt>Sunday School video</dt><dd>4:22</dd></div><div><dt>Discuss learning together</dt><dd>3:00</dd></div><div><dt>Invitation and closing prayer</dt><dd>1:00</dd></div><div class="rundown-total"><dt>Cushion for arrivals and transitions</dt><dd>2:15</dd></div></dl>
-    <p class="guide-note">Timing is a suggested teaching plan. If time is short, keep the discussion focused and finish on time. The Psalms moment uses the remaining cushion; it adds no time to the class.</p>
+    <p class="guide-note">Timing is a suggested teaching plan. If time is short, keep the discussion focused and finish on time. Use one optional moment only if the remaining cushion allows. The class still ends at 25 minutes.</p>
+    <h3>Choose a moment</h3><ul class="source-list"><li><strong>Gather our praise · 30–60 seconds.</strong> Type a few spoken responses as people arrive. Words stay in this page only and disappear on refresh.</li><li><strong>A light for the next step · 1 minute.</strong> Read Psalm 119:105, then reveal each phrase and take one brief response.</li><li><strong>Find Christ in the Psalms · 1–2 minutes.</strong> Let the class make a scripture connection. One round is enough; two more are available.</li><li><strong>Psalms moment.</strong> Keep the original scenario activity ready for a short reflection or study at home.</li></ul><p class="guide-note">Each optional moment returns to the place you left in the lesson. There are no scores or sign-ins.</p>
     <h3>Before class</h3><p>Test sound and save the videos ahead of time. Each video’s options let you select a downloaded copy from your device. It stays on your device. Selecting the same video keeps the supplied captions in sync.</p>
     <p>Start the timer when class begins. It continues while videos play and while another tab is open. It pauses only when you pause it; refreshing the page resets it. Use ← and → to navigate, Home to return to the welcome, and F for fullscreen.</p>
     <h3>If a video will not play</h3><p>The Church’s instructions direct teachers to the Implementation Guide if technical difficulties prevent showing the videos. Its discussion topics cover worship, belonging, and learning at home.</p>
+    <h3>Art and media from the lesson</h3><p>The opening artwork is the complete <cite>Christ Healing the Sick at Bethesda</cite> by Carl Heinrich Bloch (1883), from the Brigham Young University Museum of Art, shared through Gospel Media.</p><ul class="source-list"><li><a href="https://www.churchofjesuschrist.org/media/image/pool-of-bethesda-carl-bloch-5b6576e?lang=eng" target="_blank" rel="noreferrer">View the painting and its source ↗</a></li><li><a href="https://www.churchofjesuschrist.org/study/manual/come-follow-me-for-home-and-church-old-testament-2026/36?lang=eng" target="_blank" rel="noreferrer">View the lesson’s other pictures: Reverential Return, the forest path, and a father reading with his son ↗</a></li><li><a href="https://www.churchofjesuschrist.org/study/general-conference/2023/04/42johnson?lang=eng" target="_blank" rel="noreferrer">Additional study: “Christ Is Relief,” Camille N. Johnson ↗</a></li></ul>
     <h3>Sources</h3>
     <ul class="source-list">
       <li><a href="https://www.churchofjesuschrist.org/study/manual/changes-to-the-sunday-class-meeting-schedule-instruction-2026/youth-and-adult-sunday-instruction-materials?lang=eng" target="_blank" rel="noreferrer">September 6 instruction and original discussion questions ↗</a></li>
@@ -124,7 +156,8 @@
       <li><a href="https://www.churchofjesuschrist.org/study/manual/come-follow-me-for-home-and-church-old-testament-2026/36?lang=eng" target="_blank" rel="noreferrer">Come, Follow Me · August 31–September 6 ↗</a></li>
       <li><a href="https://www.churchofjesuschrist.org/feature/sunday-meeting-schedule?lang=eng" target="_blank" rel="noreferrer">Guidance for 25-minute Sunday School classes ↗</a></li>
     </ul>
-    <p class="guide-note">Videos and captions: The Church of Jesus Christ of Latter-day Saints. Discussion prompts are adapted for this presentation; original questions are linked above. Scripture quotations: King James Version. Historical note: this week’s Come, Follow Me introduction.</p>
+    <p class="guide-note">Videos and captions: The Church of Jesus Christ of Latter-day Saints. Discussion prompts and optional activities are adapted for this presentation; original questions and scripture pairings are linked above. Scripture quotations: King James Version. Historical note: this week’s Come, Follow Me introduction.</p>
+    <p class="guide-note">An independent, noncommercial lesson by Outside the World. Artwork use follows the <a href="https://www.churchofjesuschrist.org/tools/help/frequently-asked-questions-about-gospel-media?lang=eng" target="_blank" rel="noreferrer">Gospel Media sharing guidance</a> and <a href="https://www.churchofjesuschrist.org/learn/legal/terms-of-use/go?lang=eng" target="_blank" rel="noreferrer">Church terms of use</a>. <a href="palette.html#core-palette" target="_blank" rel="noreferrer">Core OTW palette ↗</a></p>
   </dialog>
   <noscript><p class="noscript-note">Enable JavaScript to navigate the lesson. You can also <a href="https://www.churchofjesuschrist.org/study/manual/changes-to-the-sunday-class-meeting-schedule-instruction-2026/youth-and-adult-sunday-instruction-materials?lang=eng">open the Church’s videos and discussion guide</a>.</p></noscript>
 </body>
