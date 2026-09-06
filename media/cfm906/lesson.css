@@ -167,11 +167,11 @@ video::cue { font-family: Arial, sans-serif; font-size: 1.15em; background: #000
 .moments-panel button:hover { background: var(--heritage-navy); }
 .moments-panel button span { display: block; font-size: 1rem; }
 .moments-panel small { display: block; color: var(--muted); font-size: .8rem; line-height: 1.5; margin-top: 6px; }
-.welcome-slide { display: grid; grid-template-columns: 1.12fr 1fr; gap: clamp(32px, 4vw, 72px); min-height: 0; }
+.welcome-slide { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: clamp(32px, 4vw, 72px); min-height: 0; }
 .welcome-slide .content { min-width: 0; }
-.welcome-slide .title { font-size: clamp(3rem, 4.7vw, 5.8rem); }
+.welcome-slide .title { font-size: clamp(3.4rem, 5.35vw, 6.6rem); }
 .welcome-slide .eyebrow { margin-bottom: 22px; }
-.welcome-slide .question { font-size: clamp(1.3rem, 1.65vw, 1.85rem); }
+.welcome-slide .question { font-size: clamp(1.5rem, 1.95vw, 2.2rem); }
 .welcome-slide .desktop-break { display: none; }
 .welcome-slide .opening-question { margin-top: 30px; padding-left: 22px; border-left-color: var(--brand-teal); }
 .gathering-link { margin: 22px 0 0 24px; min-height: 44px; font-size: .95rem; }
@@ -260,7 +260,7 @@ a[data-scripture] { text-decoration: underline; text-decoration-thickness: 1px; 
 .connection-answer .scripture-reference { font-size: 1.25rem; }
 .connection-answer p { margin: 10px 0 0; font-size: clamp(1.1rem, 1.5vw, 1.5rem); line-height: 1.6; }
 @media (max-height: 800px) and (min-width: 900px) {
-  .welcome-slide .title { font-size: clamp(3rem, 4.3vw, 5rem); }
+  .welcome-slide .title { font-size: clamp(3.2rem, 4.9vw, 5.8rem); }
   .welcome-slide .eyebrow { margin-bottom: 16px; }
   .welcome-slide .opening-question { margin-top: 22px; }
   .gathering-link { margin-top: 12px; }
@@ -278,7 +278,7 @@ a[data-scripture] { text-decoration: underline; text-decoration-thickness: 1px; 
   .discussion-art img, .lamp-art img { max-height: none; }
   .lamp-layout .lamp-verse blockquote { font-size: clamp(1.65rem, 5vw, 2.5rem); }
   .welcome-slide { grid-template-columns: 1fr; gap: 32px; }
-  .welcome-slide .title { font-size: clamp(3rem, 8vw, 4.8rem); }
+  .welcome-slide .title { font-size: clamp(3.2rem, 9vw, 5.4rem); }
   .lesson-art { max-width: 540px; }
   .lesson-art img { max-height: none; }
   .moment-heading { display: block; }
@@ -327,3 +327,30 @@ a[data-scripture] { text-decoration: underline; text-decoration-thickness: 1px; 
 .dialog-actions button { white-space:nowrap; }
 .guide-topline,.scripture-reader-header { flex-wrap:wrap; }
 @media (max-width:720px) { .header-actions { justify-content:flex-start; } }
+
+/* Adult video pauses: large prompts with optional notes and a manual resume. */
+.stop-summary { display:block; margin-top:7px; color:var(--brand-teal); font-size:.8rem; }
+.pause-dialog { width:min(1120px,calc(100vw - 32px)); max-width:none; max-height:calc(100svh - 32px); padding:clamp(24px,4vw,52px); border:1px solid var(--line); border-radius:12px; color:var(--white); background:var(--night); box-shadow:0 24px 100px #0008; }
+.pause-dialog::backdrop { background:#000c; backdrop-filter:blur(7px); }
+.cue-topline { display:flex; justify-content:space-between; align-items:center; gap:18px; flex-wrap:wrap; }
+.cue-topline .eyebrow { margin:0; }
+.pause-dialog h2 { font:300 clamp(2.2rem,4.2vw,4.5rem)/1.24 Merriweather,Georgia,serif; letter-spacing:-.04em; margin:32px 0 22px; }
+.cue-instruction { font-size:clamp(1.2rem,1.8vw,1.8rem); line-height:1.55; color:var(--muted); margin:0; }
+.cue-clock { display:flex; align-items:center; flex-wrap:wrap; gap:24px; margin:28px 0; }
+.cue-clock output { font:400 clamp(2rem,4vw,3.5rem) 'Fira Code',monospace; color:var(--brand-light-blue); }
+.cue-teacher { color:var(--muted); line-height:1.6; font-size:1rem; }
+.cue-teacher summary { padding:8px 0; cursor:pointer; }
+.cue-teacher p { margin:8px 0 0; }
+.cue-bottom { display:flex; justify-content:flex-end; border-top:1px solid var(--line); margin-top:24px; padding-top:24px; }
+.pause-switch { display:flex; align-items:center; gap:12px; line-height:1.5; }
+.pause-switch input { width:22px; height:22px; accent-color:var(--brand-blue); flex-shrink:0; }
+.pause-list { display:grid; gap:12px; margin-top:20px; }
+.pause-list > div { padding:18px; border:1px solid var(--line); border-radius:6px; }
+.pause-list p { margin:10px 0 14px; }
+.pause-list .secondary { font-size:.875rem; padding:10px 14px; }
+@media (max-width:720px) {
+  .pause-dialog { padding:22px; }
+  .pause-dialog h2 { font-size:2.1rem; }
+  .cue-topline .eyebrow { font-size:.75rem; }
+}
+@media print { .pause-dialog { display:none!important; } }

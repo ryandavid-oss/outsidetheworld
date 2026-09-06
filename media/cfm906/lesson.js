@@ -8,6 +8,7 @@
   const videos = Array.from(document.querySelectorAll("video"));
   const guide = $("lesson-guide");
   const scriptureReader = $("scripture-reader");
+  const cueDialog = $("lesson-cue");
   let scriptureOpener = null;
   let current = "welcome";
   let returnFromMoment = "welcome";
@@ -22,6 +23,132 @@
     noticeTimeout = setTimeout(() => { $("status-message").hidden = true; }, 6000);
   }
 
+  // Stops fall between sentences in the supplied English captions.
+  const cues = {
+    forgiveness: { video: "sabbath-video", at: 188, label: "Video 1 · 3:08 · A moment to think", seconds: 30, title: "What did you hear about the Savior’s willingness to forgive?", instruction: "Take a quiet moment to think.", note: "Allow 30 seconds. Invite one brief thought if someone wants to share." },
+    worship: { video: "sabbath-video", at: 440.5, label: "Video 1 · 7:21 · Looking ahead", seconds: 30, title: "What could help you worship more fully next Sunday?", instruction: "Think of one change you could make.", note: "Take one or two brief responses." },
+    partner: { video: "school-video", at: 153.2, label: "Video 2 · 2:33 · Talk with someone nearby", seconds: 45, title: "What could you study at home and bring to class?", instruction: "Share one idea with someone nearby.", note: "Give each person a turn. Keep the whole conversation to 45 seconds." }
+  };
+  const pauseState = new Map(videos.map(video => [video.id, { seen: new Set(), last: 0 }]));
+  let activeCue = null, cueRequest = 0, cueInterval = null, cueDeadline = null, cueRemaining = 0;
+  const formatCueTime = milliseconds => {
+    const seconds = Math.max(0, Math.ceil(milliseconds / 1000));
+    return `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, "0")}`;
+  };
+  function stopCueClock() {
+    clearInterval(cueInterval);
+    cueInterval = null;
+    cueDeadline = null;
+  }
+  function closeCue() {
+    cueRequest += 1; // Also cancel a prompt waiting for native fullscreen to exit.
+    stopCueClock();
+    activeCue = null;
+    if (cueDialog.open) cueDialog.close();
+  }
+  function paintCueClock() {
+    if (!activeCue) return;
+    if (cueDeadline !== null) {
+      cueRemaining = Math.max(0, cueDeadline - Date.now());
+      if (!cueRemaining) {
+        stopCueClock();
+        $("slide-announcement").textContent = "Finish your thought when you’re ready.";
+      }
+    }
+    $("cue-time").textContent = formatCueTime(cueRemaining);
+    const total = cues[activeCue.key].seconds * 1000;
+    $("cue-timer").textContent = cueDeadline !== null ? "Pause timer" : !cueRemaining ? "Start again" : cueRemaining === total ? `Start ${total / 1000} seconds` : "Resume timer";
+  }
+  $("cue-timer").addEventListener("click", () => {
+    if (!activeCue) return;
+    const wasRunning = cueDeadline !== null;
+    paintCueClock();
+    if (wasRunning) stopCueClock();
+    else {
+      if (!cueRemaining) cueRemaining = cues[activeCue.key].seconds * 1000;
+      cueDeadline = Date.now() + cueRemaining;
+      cueInterval = setInterval(paintCueClock, 250);
+    }
+    paintCueClock();
+  });
+  async function openCue(key, preview = false) {
+    const cue = cues[key], video = $(cue.video), section = current;
+    const request = ++cueRequest;
+    videos.forEach(item => item.pause());
+    // Native video fullscreen cannot contain the prompt; page fullscreen can.
+    if (document.fullscreenElement === video) {
+      try { await document.exitFullscreen(); } catch (_) { notify("Exit video fullscreen to see the prompt."); }
+    }
+    if (video.webkitDisplayingFullscreen && video.webkitExitFullscreen) video.webkitExitFullscreen();
+    if (request !== cueRequest || current !== section || guide.open || scriptureReader.open || cueDialog.open) return;
+    stopCueClock();
+    video.pause();
+    activeCue = { key, preview };
+    cueRemaining = cue.seconds * 1000;
+    $("cue-label").textContent = `${preview ? "Preview · " : ""}${cue.label}`;
+    $("cue-title").textContent = cue.title;
+    $("cue-instruction").textContent = cue.instruction;
+    $("cue-note").textContent = cue.note;
+    $("cue-continue").textContent = preview ? "Close preview" : "Continue video →";
+    cueDialog.querySelector("details").open = false;
+    cueDialog.returnFocus = preview ? $("guide-toggle") : video;
+    paintCueClock();
+    if (!cueDialog.open) cueDialog.showModal();
+    $("cue-title").focus({ preventScroll: true });
+  }
+  $("cue-close").addEventListener("click", closeCue);
+  $("cue-continue").addEventListener("click", () => {
+    const resume = activeCue;
+    closeCue();
+    if (resume && !resume.preview) {
+      const video = $(cues[resume.key].video);
+      if (!video.closest(".slide").hidden) video.play().catch(() => notify("Press Play on the video to continue."));
+    }
+  });
+  cueDialog.addEventListener("cancel", event => { event.preventDefault(); closeCue(); });
+  cueDialog.addEventListener("click", event => {
+    if (event.target !== cueDialog) return;
+    const bounds = cueDialog.getBoundingClientRect();
+    if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) closeCue();
+  });
+  cueDialog.addEventListener("close", () => {
+    if (cueDialog.open) return;
+    closeCue();
+    const opener = cueDialog.returnFocus;
+    if (opener && !opener.closest(".slide")?.hidden) opener.focus({ preventScroll: true });
+    else $("stage").focus({ preventScroll: true });
+  });
+  document.querySelectorAll("[data-preview-cue]").forEach(button => button.addEventListener("click", () => {
+    guide.close();
+    openCue(button.dataset.previewCue, true);
+  }));
+  function resetVideoCues(video) {
+    const state = pauseState.get(video.id);
+    state.seen.clear();
+    state.last = 0;
+    closeCue();
+  }
+  function markPastCues(video) {
+    const state = pauseState.get(video.id);
+    Object.entries(cues).forEach(([key, cue]) => {
+      if (cue.video === video.id && cue.at <= video.currentTime) state.seen.add(key);
+    });
+    state.last = video.currentTime;
+  }
+  videos.forEach(video => {
+    const state = pauseState.get(video.id);
+    video.addEventListener("seeked", () => markPastCues(video));
+    video.addEventListener("timeupdate", () => {
+      const previous = state.last;
+      state.last = video.currentTime;
+      if (video.seeking || video.paused || video.closest(".slide").hidden) return;
+      const passed = Object.entries(cues).filter(([key, cue]) => cue.video === video.id && !state.seen.has(key) && previous < cue.at && video.currentTime >= cue.at);
+      passed.forEach(([key]) => state.seen.add(key));
+      if (passed.length && $("guided-pauses").checked && !guide.open && !scriptureReader.open && !cueDialog.open) openCue(passed[0][0]);
+    });
+    video.addEventListener("ended", () => markPastCues(video));
+  });
+
   function activateVideo(video) {
     if (!video || video.dataset.initialized) return;
     const source = video.querySelector("source");
@@ -32,6 +159,7 @@
 
   function show(id, updateHash = true) {
     if (!Object.hasOwn(labels, id)) return;
+    closeCue();
     if (scriptureReader.open) scriptureReader.close();
     const isOptional = optionalMoments.includes(id);
     if (isOptional && sequence.includes(current)) returnFromMoment = current;
@@ -60,6 +188,7 @@
   function backToStart() {
     const heading = $("welcome-title");
     scriptureOpener = heading;
+    cueDialog.returnFocus = heading;
     videos.forEach((video) => video.pause());
     if (guide.open) guide.close();
     returnFromMoment = "welcome";
@@ -87,6 +216,7 @@
   });
 
   $("guide-toggle").addEventListener("click", () => {
+    closeCue();
     videos.forEach((video) => video.pause());
     $("moments-menu").open = false;
     guide.showModal();
@@ -106,6 +236,7 @@
       const passage = scriptureFor(link.href);
       if (!passage) return; // Keep the original Church link usable if a passage is not included.
       event.preventDefault();
+      closeCue();
       scriptureOpener = link;
       videos.forEach((video) => video.pause());
       $("scripture-reader-title").textContent = passage.title;
@@ -213,7 +344,7 @@
   });
   document.addEventListener("visibilitychange", () => { paintTimer(); requestWakeLock(); });
   window.addEventListener("keydown", (event) => {
-    if (event.defaultPrevented || event.altKey || event.ctrlKey || event.metaKey || guide.open || scriptureReader.open) return;
+    if (event.defaultPrevented || event.altKey || event.ctrlKey || event.metaKey || guide.open || scriptureReader.open || cueDialog.open) return;
     if (event.key === "Escape" && $("moments-menu").open) { $("moments-menu").open = false; $("moments-menu").querySelector("summary").focus(); return; }
     if (event.target instanceof Element && event.target.closest("input, select, textarea, video, summary, [contenteditable]")) return;
     if (event.key === "ArrowRight" || event.key === "PageDown") { event.preventDefault(); advance(1); }
@@ -229,7 +360,7 @@
     video.addEventListener("error", () => { errorFor(video).hidden = false; });
     video.querySelector("source").addEventListener("error", () => { errorFor(video).hidden = false; });
     video.addEventListener("loadeddata", () => { errorFor(video).hidden = true; });
-    video.addEventListener("play", () => { videos.forEach((other) => { if (other !== video) other.pause(); }); });
+    video.addEventListener("play", () => { if (guide.open || scriptureReader.open || cueDialog.open) video.pause(); videos.forEach((other) => { if (other !== video) other.pause(); }); });
     video.addEventListener("ended", () => { $("slide-announcement").textContent = "Video finished. Select Discuss to continue."; });
   });
   document.querySelectorAll("[data-for-video]").forEach((input) => {
@@ -242,6 +373,7 @@
       if (localVideos.has(video.id)) URL.revokeObjectURL(localVideos.get(video.id));
       const url = URL.createObjectURL(file);
       localVideos.set(video.id, url);
+      resetVideoCues(video);
       video.src = url;
       video.dataset.initialized = "true";
       errorFor(video).hidden = true;
@@ -254,6 +386,7 @@
     button.addEventListener("click", () => {
       const video = $(button.dataset.restoreVideo);
       video.pause();
+      resetVideoCues(video);
       video.removeAttribute("src");
       if (localVideos.has(video.id)) { URL.revokeObjectURL(localVideos.get(video.id)); localVideos.delete(video.id); }
       video.querySelector("source").src = video.querySelector("source").dataset.src;
@@ -264,7 +397,7 @@
       button.hidden = true;
     });
   });
-  window.addEventListener("pagehide", () => { videos.forEach((video) => video.pause()); });
+  window.addEventListener("pagehide", () => { closeCue(); videos.forEach((video) => video.pause()); });
   paintTimer();
   const initialId = location.hash.slice(1);
   show(Object.hasOwn(labels, initialId) ? initialId : "welcome", false);
