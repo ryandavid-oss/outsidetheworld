@@ -3,6 +3,32 @@
   const OFFICIAL = 'https://www.churchofjesuschrist.org/study/manual/come-follow-me-for-home-and-church-old-testament-2026/37?lang=eng';
   const GONG = 'https://www.churchofjesuschrist.org/study/general-conference/2021/10/51gong?lang=eng';
   const scriptureURL = (book, chapter, verses) => `https://www.churchofjesuschrist.org/study/scriptures/ot/${book}/${chapter}?lang=eng&id=${verses}#${verses.split('-')[0]}`;
+  const readingSummaries = [
+    {
+      book: 'Proverbs', code: 'prov', chapters: [1, 2, 3, 4], title: 'Learning to live wisely',
+      text: 'These chapters sound like a parent teaching a child how to live. Listen, keep learning, and refuse invitations to hurt others. Seek wisdom as carefully as you would search for something valuable. Trust God with your decisions, welcome correction, and treat people honestly and generously. Pay attention to what you let into your heart and where your choices are taking you. Wisdom grows as you put it into practice.'
+    },
+    {
+      book: 'Proverbs', code: 'prov', chapters: [15, 16], title: 'Words, anger, and humility',
+      text: 'The way we speak can calm a conflict or make it worse. Wise people listen to correction, think before answering, and learn to govern their anger. Pride can lead us into trouble, even when we feel certain we are right. Bring your plans to God and be willing to have them directed. Honesty, humility, and self-control are worth more than wealth or power.'
+    },
+    {
+      book: 'Proverbs', code: 'prov', chapters: [22], title: 'Character in everyday life',
+      text: 'A good reputation matters more than riches. Rich and poor alike belong to God. Teach children, share with people in need, and never use someone’s poverty to take advantage of them. Notice how angry companions can shape your own behavior. Be careful about debts and commitments, respect what belongs to others, and take your work seriously.'
+    },
+    {
+      book: 'Proverbs', code: 'prov', chapters: [31], title: 'Strength that blesses others',
+      text: 'A mother counsels a king to use good judgment and speak up for people who cannot defend themselves. The chapter then praises a capable woman who works, plans, provides, helps the poor, and speaks with wisdom and kindness. Her family and community benefit from her strength. Her reverence for God and the good she does deserve lasting praise.'
+    },
+    {
+      book: 'Ecclesiastes', code: 'eccl', chapters: [1, 2, 3], title: 'When life refuses to add up',
+      text: 'The writer looks at life’s repeating patterns and asks what all our effort amounts to. He tries pleasure, wealth, achievement, and learning, but none lets him escape loss or death. Wisdom is valuable, yet it can bring painful awareness. Life includes seasons of grief and joy, holding on and letting go. We cannot see everything God is doing. We can still do good and enjoy food, work, and ordinary life as His gifts.'
+    },
+    {
+      book: 'Ecclesiastes', code: 'eccl', chapters: [11, 12], title: 'Live faithfully with the time you have',
+      text: 'Keep planting and working even when you cannot predict the outcome. Waiting for perfect conditions can keep you from doing anything at all. Enjoy the life you have, and remember that your choices matter to God. Turn to your Creator while you are young, before the difficulties of aging come. The book closes by calling us to revere God and keep His commandments, knowing that He will judge our actions.'
+    }
+  ];
   const passages = {
     wisdom: { title: 'Proverbs 2:2, 6', url: scriptureURL('prov', 2, 'p2-p6'), verses: [
       ['2', 'So that thou incline thine ear unto wisdom, and apply thine heart to understanding;'],
@@ -37,7 +63,7 @@
       passage: 'wisdom', reading: 'What do these verses ask of us? Where does wisdom come from?',
       questions: ['How do you turn to God on a day when you have very little to give?', 'How would you offer counsel to someone who is worn out?', 'What helps you hear the Savior when everything feels like another demand?'],
       christ: 'How would Jesus Christ receive this person? What could we learn from Him?',
-      invitation: 'Try a prayer, a few verses, or asking someone for help. What would help you turn toward God this week?',
+      invitation: 'What would help you turn toward God this week?',
       carry: 'A phrase I could return to when I feel worn out is…',
       teacher: 'Let people describe what exhaustion can feel like. Ask what they notice in the passage before offering an explanation. Receiving care can be part of a thoughtful next step.'
     },
@@ -113,7 +139,7 @@
     if (studyStep === 0) content = `<p class="eyebrow">PICTURE THIS</p><p class="situation">${escape(s.situation)}</p><div class="reflection-prompt"><span class="eyebrow">PAUSE HERE</span><h3>${escape(s.notice)}</h3><details><summary>A few places to begin</summary><ul class="starting-points">${s.cues.map(c => `<li>${escape(c)}</li>`).join('')}</ul></details></div>`;
     if (studyStep === 1) content = `<p class="reading-invitation">${escape(s.reading)}</p>${passageHTML(s.passage)}${s.companion ? `<details class="companion"><summary>Read alongside ${passages[s.companion].title}</summary>${passageHTML(s.companion)}</details>` : ''}<div class="christ-connection"><span class="eyebrow">CONSIDER THE SAVIOR</span><p>${escape(s.christ)}</p>${s.extra ? external(s.extra.url, s.extra.title) : ''}</div>${['trust','stumble'].includes(s.id) ? `<details class="companion"><summary>Continue with “Trust Again”</summary><p class="quiet">Elder Gerrit W. Gong · Linked in this week’s lesson</p>${external(GONG, 'Read the full talk')}</details>` : ''}`;
     if (studyStep === 2) content = `<p class="eyebrow">THINK IT THROUGH</p><h3 class="main-question" id="study-question">${escape(s.questions[0])}</h3><p class="question-counter" id="study-question-count">Question 1 of ${s.questions.length}</p><button type="button" class="text-button" data-action="another-study">Try another question ↻</button><div class="reflection-prompt"><h3>Which words in the passage shape your answer?</h3><p>Think it over, talk with someone, or write in your journal.</p><button class="button secondary" type="button" data-read="${s.passage}">Return to the passage</button></div>`;
-    if (studyStep === 3) content = `<p class="eyebrow">THIS WEEK</p><h3 class="main-question">What will you carry into the week?</h3><p class="invitation">${escape(s.invitation)}</p><div class="carry-card"><p class="eyebrow">FINISH THE THOUGHT</p><p>${escape(s.carry)}</p></div><p>Bring a verse or question on Sunday, if you’d like.</p><div class="study-end-links">${external(OFFICIAL, 'Continue the official study', 'text-button')}<button type="button" class="text-button" data-action="home">Explore another moment →</button></div>`;
+    if (studyStep === 3) content = `<p class="eyebrow">THIS WEEK</p><h3 class="main-question">What will you carry into the week?</h3><p class="invitation">${escape(s.invitation)}</p><div class="carry-card"><p class="eyebrow">FINISH THE THOUGHT</p><p>${escape(s.carry)}</p></div><p>This is the kind of stuff we can discuss on Sunday</p><div class="study-end-links">${external(OFFICIAL, 'Continue the official study', 'text-button')}<button type="button" class="text-button" data-action="home">Explore another moment →</button></div>`;
     $('study').innerHTML = `<div class="study-top"><button type="button" class="text-button" data-action="home">← All four moments</button><button type="button" class="text-button" data-action="share">Share this path ↗</button></div><div class="study-layout"><aside class="study-heading"><p class="eyebrow">${String(scenarios.indexOf(s) + 1).padStart(2,'0')} / FOUR FAMILIAR MOMENTS</p><h2 id="study-title" tabindex="-1">${escape(s.title)}</h2><nav class="step-nav" aria-label="Study steps">${steps.map((label, i) => `<button type="button" data-step="${i}"${i === studyStep ? ' aria-current="step"' : ''}><span>${i + 1}</span>${label}</button>`).join('')}</nav></aside><div class="study-content">${content}<nav class="study-navigation" aria-label="Continue studying"><button type="button" class="button secondary" data-action="study-back">${studyStep === 0 ? 'All moments' : '← ' + steps[studyStep - 1]}</button><span class="quiet">${studyStep + 1} of 4</span><button type="button" class="button" data-action="study-next">${studyStep === 3 ? 'All moments' : steps[studyStep + 1] + ' →'}</button></nav><p class="local-status" id="share-status" role="status"></p></div></div>`;
   }
   function slideOrder() { return ['opening', ...selected.flatMap(id => [`${id}-notice`, `${id}-read`, `${id}-reflect`]), 'closing']; }
@@ -143,6 +169,15 @@
     readerReturn = document.activeElement;
     $('scripture-reader').innerHTML = `<div class="dialog-top"><h2 id="reader-title">${escape(title)}</h2><button type="button" class="button secondary small" data-close="scripture-reader">Close</button></div>${content}`;
     $('scripture-reader').showModal();
+  }
+  function showReadingSummary() {
+    const sections = readingSummaries.map(s => {
+      const range = s.chapters.length === 1 ? String(s.chapters[0]) : `${s.chapters[0]}–${s.chapters.at(-1)}`;
+      const chapterLinks = s.chapters.map(chapter => external(`https://www.churchofjesuschrist.org/study/scriptures/ot/${s.code}/${chapter}?lang=eng`, `${s.book} ${chapter}`)).join('');
+      return `<section class="chapter-summary"><p class="eyebrow">${s.book} ${range}</p><h3>${s.title}</h3><p>${s.text}</p><div class="chapter-links" aria-label="Read the scripture text">${chapterLinks}</div></section>`;
+    }).join('');
+    showReader('The readings in plain language', `<p class="summary-intro">Summaries of this week’s readings. Each section links to the scripture text.</p><div class="chapter-summaries">${sections}</div><div class="summary-source">${external(OFFICIAL, 'This week’s Come, Follow Me lesson')}<button type="button" class="button secondary small" data-close="scripture-reader">Back to the lesson</button></div>`);
+    $('scripture-reader').scrollTop = 0;
   }
   function planText(count, length) {
     if (!count) return 'Choose at least one moment to build a plan.';
@@ -176,7 +211,7 @@
       else status.textContent = `Copy this link: ${url.href}`;
     } catch (error) { if (error.name !== 'AbortError') status.textContent = `Copy this link: ${url.href}`; }
   }
-  function readRoute() {
+  function readRoute(initialLoad = false) {
     const [path, query = ''] = location.hash.slice(1).split('?'), parts = path.split('/');
     if (parts[0] === 'study' && Object.hasOwn(byId, parts[1])) { openStudy(parts[1], Number(parts[2]), false); return; }
     if (parts[0] === 'discuss') {
@@ -185,7 +220,8 @@
       if ([15,25,40].includes(requestedMinutes)) minutes = requestedMinutes;
       startDiscussion(parts[1], false); return;
     }
-    home(false);
+    if (initialLoad === true) { mode = 'home'; visibility(); }
+    else home(false);
   }
   $('scenario-list').innerHTML = scenarios.map((s, i) => `<button type="button" class="scenario-card" data-scenario="${s.id}"><span class="scenario-number">0${i + 1}</span><span><strong>${escape(s.title)}</strong><small>${escape(s.subtitle)}</small></span><span class="scenario-arrow" aria-hidden="true">↗</span></button>`).join('');
   $('mode-toggle').addEventListener('click', () => mode === 'discuss' ? home() : startDiscussion());
@@ -196,6 +232,7 @@
     if (button.dataset.read && Object.hasOwn(passages, button.dataset.read)) return showReader(passages[button.dataset.read].title, passageHTML(button.dataset.read));
     if (button.dataset.close) return $(button.dataset.close)?.close();
     switch (button.dataset.action) {
+      case 'reading-summary': return showReadingSummary();
       case 'home': return home();
       case 'study-back': return studyStep === 0 ? home() : openStudy(currentScenario.id, studyStep - 1);
       case 'study-next': return studyStep === 3 ? home() : openStudy(currentScenario.id, studyStep + 1);
@@ -231,5 +268,5 @@
   document.addEventListener('fullscreenchange', () => { const button = $('fullscreen-button'); if (button) button.textContent = document.fullscreenElement ? 'Exit fullscreen' : 'Fullscreen'; });
   $('scripture-reader').addEventListener('close', () => { if (readerReturn?.isConnected) readerReturn.focus({preventScroll:true}); });
   $('leader-guide').addEventListener('close', () => { if (guideReturn?.isConnected) guideReturn.focus({preventScroll:true}); });
-  window.addEventListener('popstate', readRoute); window.addEventListener('hashchange', readRoute); readRoute();
+  window.addEventListener('popstate', readRoute); window.addEventListener('hashchange', readRoute); readRoute(true);
 })();

@@ -79,6 +79,20 @@ function structure(){
   for(const b of doc.querySelectorAll('button'))assert.ok(b.textContent.trim()||b.attrs['aria-label'],'button has an accessible name');
 }
 assert.equal(get('welcome').hidden,false);assert.equal(get('presentation').hidden,true);structure();
+assert.equal(doc.activeElement,doc.body,'opening the page does not move focus to the title');
+// Plain-language summaries cover the assigned chapters and return readers to the opener.
+const welcomeHash=location.hash;
+click('[data-action="reading-summary"]');
+assert.equal(get('scripture-reader').open,true);assert.equal(get('welcome').hidden,false);
+assert.equal(get('scripture-reader').querySelectorAll('.chapter-summary').length,6);
+const chapterLinks=get('scripture-reader').querySelectorAll('.chapter-links').flatMap(section=>section.querySelectorAll('a'));
+assert.deepEqual(chapterLinks.map(a=>a.attrs.href),[
+  ...[1,2,3,4,15,16,22,31].map(chapter=>`https://www.churchofjesuschrist.org/study/scriptures/ot/prov/${chapter}?lang=eng`),
+  ...[1,2,3,11,12].map(chapter=>`https://www.churchofjesuschrist.org/study/scriptures/ot/eccl/${chapter}?lang=eng`)
+]);
+structure();click('[data-close="scripture-reader"]');
+assert.equal(get('scripture-reader').open,false);assert.equal(location.hash,welcomeHash);
+assert.equal(doc.activeElement.dataset.action,'reading-summary');
 for(const id of ['weary','anger','trust','stumble']){
   route('#welcome');click(`[data-scenario="${id}"]`);
   assert.equal(location.hash,`#study/${id}/0`);assert.equal(doc.activeElement.id,'study-title');
@@ -124,4 +138,4 @@ click('[data-action="pause"]');click('#mode-toggle');assert.equal(get('welcome')
 // Share fallback always sends readers to the start of the selected personal path.
 route('#study/anger/3');click('[data-action="share"]');assert.match(get('share-status').textContent,/#study\/anger\/0/);
 structure();
-console.log('PASS: 16 study steps, all discussion slides, deep links, alternate questions, scripture dialogs, empty/custom plans, timer controls, keyboard guards, share fallback, and HTML contracts.');
+console.log('PASS: initial focus, summaries for all 13 assigned chapters, modal focus return, 16 study steps, all discussion slides, deep links, alternate questions, scripture dialogs, empty/custom plans, timer controls, keyboard guards, share fallback, and HTML contracts.');
