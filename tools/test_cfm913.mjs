@@ -62,14 +62,15 @@ doc.getElementById=id=>doc.querySelector('#'+id);doc.body=doc.querySelector('bod
 doc.documentElement.requestFullscreen=()=>{doc.fullscreenElement=doc.documentElement;return Promise.resolve();};doc.exitFullscreen=()=>{doc.fullscreenElement=null;return Promise.resolve();};
 const location={hash:'',href:'https://outsidetheworld.com/cfm913-otw.html'};
 const window=new Element({tag:'window',attrs:{},children:[]});window.scrollTo=()=>{};
-let now=1000000,serial=0;const timers=new Map(),history=[];
-const sandbox={document:doc,window,location,history:{pushState:(_,__,hash)=>{location.hash=hash;history.push(hash);},replaceState:(_,__,hash)=>{location.hash=hash;}},navigator:{},URL,URLSearchParams,Date:{now:()=>now},setInterval:fn=>{timers.set(++serial,fn);return serial;},clearInterval:id=>timers.delete(id),console};
+let now=Date.parse('2026-09-10T12:00:00-07:00'),serial=0;const timers=new Map(),timeouts=new Map(),history=[];
+assert.equal(doc.getElementById('mode-toggle').hidden,true,'discussion button is hidden before JavaScript loads');
+const sandbox={document:doc,window,location,history:{pushState:(_,__,hash)=>{location.hash=hash;history.push(hash);},replaceState:(_,__,hash)=>{location.hash=hash;}},navigator:{},URL,URLSearchParams,Date:{now:()=>now,parse:Date.parse},setTimeout:(fn,delay)=>{timeouts.set(++serial,{fn,at:now+delay});return serial;},setInterval:fn=>{timers.set(++serial,fn);return serial;},clearInterval:id=>timers.delete(id),console};
 vm.runInNewContext(fs.readFileSync(root+'media/cfm913/lesson.js','utf8'),sandbox);
 const get=id=>doc.getElementById(id);
 const click=selector=>{const e=selector.startsWith('#')?get(selector.slice(1)):doc.querySelector(selector);assert.ok(e,selector+' exists');e.focus();e.fire('click');};
 const route=hash=>{location.hash=hash;window.fire('hashchange');};
 const key=(name,target=doc.body)=>doc.fire('keydown',{target,key:name});
-const elapse=ms=>{now+=ms;for(const fn of [...timers.values()])fn();};
+const elapse=ms=>{now+=ms;for(const [id,timer]of [...timeouts])if(timer.at<=now){timeouts.delete(id);timer.fn();}for(const fn of [...timers.values()])fn();};
 function structure(){
   const ids=doc.querySelectorAll('[id]').map(e=>e.id);assert.equal(new Set(ids).size,ids.length,'unique IDs');
   for(const a of doc.querySelectorAll('a')){
@@ -80,6 +81,7 @@ function structure(){
 }
 assert.equal(get('welcome').hidden,false);assert.equal(get('presentation').hidden,true);structure();
 assert.equal(doc.activeElement,doc.body,'opening the page does not move focus to the title');
+assert.equal(get('mode-toggle').hidden,true,'discussion button stays hidden before Sunday');
 // Plain-language summaries cover the assigned chapters and return readers to the opener.
 const welcomeHash=location.hash;
 click('[data-action="reading-summary"]');
@@ -107,7 +109,15 @@ for(const id of ['weary','anger','trust','stumble']){
     click('[data-action="study-next"]');
   }
   assert.equal(get('welcome').hidden,false);
+  assert.equal(get('mode-toggle').hidden,true,'finishing a study path does not reveal the discussion button early');
 }
+// A teacher can still preview a direct discussion link and return to the study page.
+route('#discuss/opening');assert.equal(get('mode-toggle').hidden,false);click('#mode-toggle');assert.equal(get('mode-toggle').hidden,true);
+// The button appears at midnight in Arizona, without changing the page or focus.
+now=Date.parse('2026-09-13T06:59:59.999Z');elapse(0);assert.equal(get('mode-toggle').hidden,true);
+const beforeReveal=doc.activeElement,revealHash=location.hash;
+elapse(1);assert.equal(get('mode-toggle').hidden,false);assert.equal(doc.activeElement,beforeReveal);assert.equal(location.hash,revealHash);
+assert.equal(timeouts.size,0,'release timer finishes once Sunday arrives');
 // Deep links and malformed/prototype routes fail closed without rendering untrusted HTML.
 route('#study/trust/1');assert.match(get('study').textContent,/Ecclesiastes 1:17/);
 route('#study/anger/999');assert.equal(get('study').querySelector('[aria-current="step"]').dataset.step,'0');
@@ -138,4 +148,4 @@ click('[data-action="pause"]');click('#mode-toggle');assert.equal(get('welcome')
 // Share fallback always sends readers to the start of the selected personal path.
 route('#study/anger/3');click('[data-action="share"]');assert.match(get('share-status').textContent,/#study\/anger\/0/);
 structure();
-console.log('PASS: initial focus, summaries for all 13 assigned chapters, modal focus return, 16 study steps, all discussion slides, deep links, alternate questions, scripture dialogs, empty/custom plans, timer controls, keyboard guards, share fallback, and HTML contracts.');
+console.log('PASS: Sunday button timing, initial focus, summaries for all 13 assigned chapters, modal focus return, 16 study steps, all discussion slides, deep links, alternate questions, scripture dialogs, empty/custom plans, timer controls, keyboard guards, share fallback, and HTML contracts.');

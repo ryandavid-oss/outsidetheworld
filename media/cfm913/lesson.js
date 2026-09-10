@@ -1,5 +1,6 @@
 (() => {
   'use strict';
+  const DISCUSSION_OPENS_AT = Date.parse('2026-09-13T00:00:00-07:00'); // Midnight in Arizona.
   const OFFICIAL = 'https://www.churchofjesuschrist.org/study/manual/come-follow-me-for-home-and-church-old-testament-2026/37?lang=eng';
   const GONG = 'https://www.churchofjesuschrist.org/study/general-conference/2021/10/51gong?lang=eng';
   const scriptureURL = (book, chapter, verses) => `https://www.churchofjesuschrist.org/study/scriptures/ot/${book}/${chapter}?lang=eng&id=${verses}#${verses.split('-')[0]}`;
@@ -120,10 +121,17 @@
   }
   function setHash(replace = false) { try { history[replace ? 'replaceState' : 'pushState'](null, '', makeHash()); } catch { /* Navigation works without history. */ } }
   function focusHeading(id) { window.scrollTo({top: 0, behavior: 'instant'}); $(id)?.focus({preventScroll: true}); }
+  function updateDiscussionButton() { $('mode-toggle').hidden = mode !== 'discuss' && Date.now() < DISCUSSION_OPENS_AT; }
+  function scheduleDiscussionButton() {
+    updateDiscussionButton();
+    const remaining = DISCUSSION_OPENS_AT - Date.now();
+    if (remaining > 0) setTimeout(scheduleDiscussionButton, Math.min(remaining, 2147483647));
+  }
   function visibility() {
     $('welcome').hidden = mode !== 'home'; $('study').hidden = mode !== 'study'; $('presentation').hidden = mode !== 'discuss'; $('resources').hidden = mode !== 'home';
     document.body.classList.toggle('discuss-mode', mode === 'discuss');
     $('mode-toggle').innerHTML = mode === 'discuss' ? 'Return to personal study' : 'Lead the discussion <span aria-hidden="true">↗</span>';
+    updateDiscussionButton();
   }
   function stopClock() { if (clockHandle !== null) clearInterval(clockHandle); clockHandle = null; clockEnd = 0; clockRemaining = 0; }
   function closeDialogs() { for (const id of ['leader-guide', 'scripture-reader']) if ($(id).open) $(id).close(); }
@@ -268,5 +276,6 @@
   document.addEventListener('fullscreenchange', () => { const button = $('fullscreen-button'); if (button) button.textContent = document.fullscreenElement ? 'Exit fullscreen' : 'Fullscreen'; });
   $('scripture-reader').addEventListener('close', () => { if (readerReturn?.isConnected) readerReturn.focus({preventScroll:true}); });
   $('leader-guide').addEventListener('close', () => { if (guideReturn?.isConnected) guideReturn.focus({preventScroll:true}); });
-  window.addEventListener('popstate', readRoute); window.addEventListener('hashchange', readRoute); readRoute(true);
+  window.addEventListener('pageshow', updateDiscussionButton); document.addEventListener('visibilitychange', updateDiscussionButton);
+  window.addEventListener('popstate', readRoute); window.addEventListener('hashchange', readRoute); readRoute(true); scheduleDiscussionButton();
 })();
