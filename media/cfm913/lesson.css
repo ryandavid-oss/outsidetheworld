@@ -48,3 +48,26 @@
  .chapter-summary{padding:23px 0}
  .chapter-summary h3{font-size:1.25rem}
 }
+
+/* Artwork and discussion emphasis. */
+.welcome-art{display:block;width:100%;max-width:560px;height:auto;border-radius:12px;margin:0 0 28px}
+.discussion-opening{display:grid;grid-template-columns:1.1fr 1fr;align-items:center;gap:clamp(28px,4vw,64px)}
+.discussion-opening>div{min-width:0}
+.discussion-opening .opening-title{font-size:clamp(3rem,5vw,5.25rem)}
+.discussion-art{display:block;width:100%;height:auto;border-radius:14px}
+.class-question-actions{align-items:center;gap:18px 24px}
+.class-question-actions .discussion-action{font-size:clamp(1.1rem,1.65vw,1.6rem);line-height:1.35;min-height:64px;padding:18px 28px;border-radius:14px;gap:12px}
+.class-question-actions [data-read]{order:1}
+.closing-question{max-width:1200px;font-size:clamp(3rem,6vw,6.5rem);line-height:1.2}
+@media(max-width:900px){
+ .discussion-opening{grid-template-columns:1fr;gap:28px}
+ .discussion-art{max-width:640px}
+}
+@media(max-width:760px){
+ .welcome-art{margin-bottom:24px;border-radius:10px}
+ .discussion-opening .opening-title{font-size:3rem}
+ .class-question-actions{display:grid;grid-template-columns:1fr;gap:14px}
+ .class-question-actions .discussion-action{width:100%;font-size:1.125rem;min-height:60px;padding:16px 20px}
+ .class-question-actions [data-read]{justify-self:start}
+ .closing-question{font-size:clamp(2.65rem,8.5vw,4rem);line-height:1.25}
+}
