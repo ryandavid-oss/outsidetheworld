@@ -4,14 +4,16 @@
   const PAGE_SIZE = 10;
   const PUBLIC_FEED_URL = 'https://api.frgmnts.app/v1/public/fragments/outsidetheworld?limit=200';
   const REQUEST_TIMEOUT_MS = 6000;
-  const CACHE_KEY = 'otwFounderFragmentsCacheV2';
-  const CACHE_MAX_AGE_MS = 24 * 60 * 60 * 1000;
-  const FORCE_LOCAL = new URLSearchParams(window.location.search).get('source') === 'local';
+  // Earlier browser copies cannot establish current public visibility.
+  try {
+    localStorage.removeItem('otwFounderFragmentsCacheV1');
+    localStorage.removeItem('otwFounderFragmentsCacheV2');
+  } catch (_) { /* Storage is optional. */ }
 
   let allFragments = [];
   let userRegistry = [];
   let visibleCount = PAGE_SIZE;
-  let feedSource = 'loading';
+  let loadGeneration = 0;
   let loadActive = false;
   let fragmentImageObserver = null;
 
@@ -159,110 +161,23 @@
     return null;
   }
 
-  function saveCache(items) {
-    if (!Array.isArray(items) || !items.length) return;
-    try {
-      window.localStorage.setItem(CACHE_KEY, JSON.stringify({
-        version: 2,
-        savedAt: Date.now(),
-        items
-      }));
-    } catch (error) {
-      console.warn('Could not preserve the founder feed in this browser.', error);
-    }
-  }
-
-  function loadCache() {
-    try {
-      const raw = window.localStorage.getItem(CACHE_KEY);
-      if (!raw) return null;
-      const cached = JSON.parse(raw);
-      const fresh = Number(cached.savedAt) > 0 && Date.now() - Number(cached.savedAt) <= CACHE_MAX_AGE_MS;
-      if (cached.version !== 2 || !fresh || !Array.isArray(cached.items) || !cached.items.length) {
-        window.localStorage.removeItem(CACHE_KEY);
-        return null;
-      }
-      return cached.items;
-    } catch (error) {
-      try {
-        window.localStorage.removeItem(CACHE_KEY);
-      } catch (storageError) {
-        // Storage can be unavailable in privacy-restricted browsing modes.
-      }
-      return null;
-    }
-  }
-
-  async function fetchLiveItems(forceReload = false) {
+  async function fetchLiveItems() {
     const controller = new AbortController();
     const timeoutId = window.setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
     try {
       const response = await fetch(PUBLIC_FEED_URL, {
-        cache: forceReload ? 'reload' : 'default',
+        cache: 'no-store',
         credentials: 'omit',
         headers: { Accept: 'application/json' },
         signal: controller.signal
       });
       if (!response.ok) throw new Error(`Live founder feed returned ${response.status}`);
       const items = extractItems(await response.json());
-      if (!Array.isArray(items) || !items.length) throw new Error('Live founder feed was empty');
-      saveCache(items);
+      if (!Array.isArray(items) || !items.every(isRecord)) throw new Error('Invalid public feed response');
       return items;
     } finally {
       window.clearTimeout(timeoutId);
     }
-  }
-
-  function isFounderFragment(fragment) {
-    const author = embeddedAuthor(fragment);
-    const authorID = firstString(fragment.author_id, fragment.authorId, author.id).toLowerCase();
-    const handle = firstString(
-      fragment.author_handle,
-      fragment.authorHandle,
-      author.handle,
-      author.username
-    ).toLowerCase().replace(/^@+/, '');
-    const name = firstString(
-      typeof fragment.author === 'string' ? fragment.author : '',
-      fragment.author_name,
-      fragment.authorName,
-      author.name,
-      author.display_name,
-      author.displayName
-    ).toLowerCase();
-
-    if (!authorID && !handle && !name) return true;
-    return authorID === 'ryan' ||
-      authorID === 'outsidetheworld' ||
-      handle === 'outsidetheworld' ||
-      name === 'the_ryandavid' ||
-      name === 'ryandavid' ||
-      name === 'ryan david';
-  }
-
-  async function loadLocalItems() {
-    const response = await fetch(`fragments_data.js?ts=${Date.now()}`, { cache: 'no-store' });
-    if (!response.ok) throw new Error(`Founder archive returned ${response.status}`);
-    const scriptText = await response.text();
-    const evaluate = new Function(
-      'window',
-      `${scriptText}; return Array.isArray(window.otw_fragments) ? window.otw_fragments : [];`
-    );
-    return evaluate({}).filter(isFounderFragment);
-  }
-
-  async function loadItems(forceReload = false) {
-    if (!FORCE_LOCAL) {
-      try {
-        return { items: await fetchLiveItems(forceReload), source: 'live' };
-      } catch (error) {
-        console.warn('Live founder feed unavailable.', error);
-      }
-    }
-
-    const cached = !forceReload ? loadCache() : null;
-    if (cached) return { items: cached, source: 'cache' };
-    return { items: await loadLocalItems(), source: 'local' };
   }
 
   async function loadUserRegistry() {
@@ -521,6 +436,9 @@
     const signalStyle = signalPresentation(tag);
     const signal = slugify(signalStyle.label) || 'fragment';
     const timestamp = formatTimestamp(fragmentTimestamp(fragment));
+    const editedAt = new Date(fragment.edited_at || '');
+    const edited = Number.isFinite(editedAt.getTime())
+      ? `<span class="fragment-edited" title="${escapeHtml(`Edited ${editedAt.toLocaleString()}`)}">Edited</span>` : '';
     const author = authorProfile(fragment);
     const id = fragmentID(fragment);
     const bodyText = fragmentText(fragment);
@@ -552,7 +470,7 @@
               <div class="fragment-handle">${escapeHtml(author.handle)}</div>
             </div>
           </div>
-          <div class="fragment-time">${timestamp}</div>
+          <div class="fragment-time">${timestamp}${edited}</div>
         </div>
         <div class="fragment-content${contentClass}">
           ${mediaMarkup}
@@ -591,16 +509,6 @@
     document.body.dataset.feedState = 'ready';
   }
 
-  function feedStatus() {
-    if (feedSource === 'cache') {
-      return '<p class="feed-status">Live feed is taking a moment. Showing the most recent saved copy.</p>';
-    }
-    if (feedSource === 'local') {
-      return '<p class="feed-status">Live feed is taking a moment. Showing the founder archive.</p>';
-    }
-    return '';
-  }
-
   function updateLoadMore() {
     const controls = document.getElementById('feedControls');
     const button = document.getElementById('loadMoreBtn');
@@ -636,7 +544,7 @@
     const container = document.getElementById('fragmentsFeed');
     const items = allFragments.slice(0, visibleCount);
     fragmentImageObserver?.disconnect();
-    container.innerHTML = items.map(buildCard).join('') + feedStatus();
+    container.innerHTML = items.map(buildCard).join('');
     document.body.dataset.feedState = 'ready';
     queueFragmentImages(container);
     bindMediaButtons();
@@ -648,29 +556,34 @@
     }
   }
 
-  async function renderFragments({ forceReload = false } = {}) {
+  async function renderFragments() {
     if (loadActive) return;
     const container = document.getElementById('fragmentsFeed');
     const refreshButton = document.getElementById('refreshFeedBtn');
     loadActive = true;
+    const generation = ++loadGeneration;
+    clearPublicFeed();
     container.setAttribute('aria-busy', 'true');
     refreshButton.disabled = true;
     if (!allFragments.length) renderLoading(container);
 
     try {
-      const [loaded, users] = await Promise.all([
-        loadItems(forceReload),
+      const [items, users] = await Promise.all([
+        fetchLiveItems(),
         loadUserRegistry().catch(() => [])
       ]);
-      feedSource = loaded.source;
+      if (generation !== loadGeneration) return;
       userRegistry = users;
-      allFragments = loaded.items.filter((fragment) => {
+      allFragments = items.filter((fragment) => {
         return fragment && (fragmentText(fragment) || fragmentMedia(fragment).length || fragmentLinkPreview(fragment));
       });
     } catch (error) {
-      renderEmpty(container, error.message || 'Could not load frgmnts right now.');
+      if (generation !== loadGeneration) return;
+      clearPublicFeed();
+      renderEmpty(container, 'Please try Refresh again in a moment.');
       return;
     } finally {
+      if (generation !== loadGeneration) return;
       loadActive = false;
       container.setAttribute('aria-busy', 'false');
       refreshButton.disabled = false;
@@ -691,8 +604,33 @@
     renderVisible(requestedID);
   }
 
+  function clearPublicFeed() {
+    allFragments = [];
+    fragmentImageObserver?.disconnect();
+    document.getElementById('fragmentsFeed').replaceChildren();
+    document.getElementById('mediaViewer').close();
+    document.getElementById('mediaViewerImage').removeAttribute('src');
+    document.getElementById('mediaViewerCaption').textContent = '';
+    updateLoadMore();
+  }
+
+  function suspendPublicFeed() {
+    ++loadGeneration;
+    loadActive = false;
+    clearPublicFeed();
+  }
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) suspendPublicFeed();
+    else void renderFragments();
+  });
+  window.addEventListener('pagehide', suspendPublicFeed);
+  window.addEventListener('pageshow', (event) => {
+    if (event.persisted) void renderFragments();
+  });
+
   document.getElementById('refreshFeedBtn').addEventListener('click', () => {
-    void renderFragments({ forceReload: true });
+    void renderFragments();
   });
   document.getElementById('loadMoreBtn').addEventListener('click', () => {
     visibleCount += PAGE_SIZE;

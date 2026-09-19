@@ -166,7 +166,7 @@ Date: August 27, 2026
     {
       "id": "paragraph_mtdxyzyq_wzyz9u",
       "type": "paragraph",
-      "html": "That's all for now. If you've been around here lately, know my appreciation remains. I hope it provides a diversion and a bit of understanding about where I come from. I hope you have a chance to check out \u003ca href=\"https://apps.apple.com/us/app/frgmnts/id6761584849\nfrgmnts\"\u003efrgmnts, my social media app\u003c/a\u003e.\u0026nbsp;It's a nice, quiet place; the polar opposite of Instagram/Facebook. It's growing every day, and I'm loving the development work. It deserves more users. You belong there.",
+      "html": "That's all for now. If you've been around here lately, know my appreciation remains. I hope it provides a diversion and a bit of understanding about where I come from. I hope you have a chance to check out \u003ca href=\"https://apps.apple.com/us/app/frgmnts/id6761584849\"\u003efrgmnts, my social media app\u003c/a\u003e.\u0026nbsp;It's a nice, quiet place; the polar opposite of Instagram/Facebook. It's growing every day, and I'm loving the development work. It deserves more users. You belong there.",
       "text": "That's all for now. If you've been around here lately, know my appreciation remains. I hope it provides a diversion and a bit of understanding about where I come from. I hope you have a chance to check out frgmnts, my social media app. It's a nice, quiet place; the polar opposite of Instagram/Facebook. It's growing every day, and I'm loving the development work. It deserves more users. You belong there."
     },
     {
@@ -281,7 +281,7 @@ And with time, we might realize that the destination we were aiming for was alre
 
 ---
 
-That's all for now. If you've been around here lately, know my appreciation remains. I hope it provides a diversion and a bit of understanding about where I come from. I hope you have a chance to check out [frgmnts, my social media app](https://apps.apple.com/us/app/frgmnts/id6761584849%20frgmnts). It's a nice, quiet place; the polar opposite of Instagram/Facebook. It's growing every day, and I'm loving the development work. It deserves more users. You belong there.
+That's all for now. If you've been around here lately, know my appreciation remains. I hope it provides a diversion and a bit of understanding about where I come from. I hope you have a chance to check out [frgmnts, my social media app](https://apps.apple.com/us/app/frgmnts/id6761584849). It's a nice, quiet place; the polar opposite of Instagram/Facebook. It's growing every day, and I'm loving the development work. It deserves more users. You belong there.
 
 I also have a few new games coming out on the App Store soon, so stay tuned for those.
 

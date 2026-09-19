@@ -1716,6 +1716,7 @@
             background: rgba(255, 255, 255, 0.025);
         }
 
+        .latest-fragment[hidden],
         .latest-fragment__media[hidden],
         .latest-fragment__link-preview[hidden],
         .latest-fragment__text[hidden],
@@ -2911,15 +2912,15 @@
                         <h2><a data-frontpage-link href="drift_poetry.html?poem=living-poem-2026-06-29-terrible-nothing">Terrible Nothing</a></h2>
                         <p data-frontpage-description>June 29, 2026</p>
                     </article>
-                    <article class="rail-item latest-fragment" id="latestFragment" data-frontpage-slot="railFragments">
+                    <article class="rail-item latest-fragment" id="latestFragment" data-frontpage-slot="railFragments" hidden>
                         <div class="latest-fragment__head">
                             <div class="latest-fragment__brand">
                                 <img class="latest-fragment__mark" src="Images/assets/frgmnts-mark.svg" alt="" width="27" height="19" />
                                 <span class="tag">Latest frgmnt</span>
                             </div>
-                            <time class="latest-fragment__date" id="latestFragmentDate" datetime="2026-03-28T19:17:00.000Z">March 28, 2026</time>
+                            <time class="latest-fragment__date" id="latestFragmentDate"></time>
                         </div>
-                        <a class="latest-fragment__card" id="latestFragmentLink" href="fragments.html?entry=20260328191700000--definitely-not-me-at-costco" aria-label="Open latest frgmnt by The_RyanDavid">
+                        <a class="latest-fragment__card" id="latestFragmentLink" href="fragments.html" aria-label="Open latest frgmnt">
                             <div class="latest-fragment__identity">
                                 <img class="latest-fragment__avatar" src="Images/Profile.jpg" alt="" width="38" height="38" />
                                 <span class="latest-fragment__identity-copy">
@@ -2930,7 +2931,7 @@
                             <span class="latest-fragment__media" id="latestFragmentMedia">
                                 <img id="latestFragmentImage" alt="Image shared with the latest frgmnt" loading="lazy" decoding="async" width="800" height="500" />
                             </span>
-                            <p class="latest-fragment__text" id="latestFragmentText">Definitely not me at Costco.</p>
+                            <p class="latest-fragment__text" id="latestFragmentText"></p>
                             <span class="latest-fragment__link-preview" id="latestFragmentLinkPreview" hidden>
                                 <span class="latest-fragment__link-host" id="latestFragmentLinkHost"></span>
                                 <strong class="latest-fragment__link-title" id="latestFragmentLinkTitle"></strong>
@@ -2996,8 +2997,12 @@
         const LASTFM_PROFILE_URL = `https://www.last.fm/user/${encodeURIComponent(LASTFM_USER)}`;
         const FRGMNTS_PUBLIC_FEED_URL = 'https://api.frgmnts.app/v1/public/fragments/outsidetheworld?limit=10';
         const FRGMNTS_PUBLIC_TIMEOUT_MS = 6000;
-        const FRGMNTS_PUBLIC_CACHE_KEY = 'otwFounderFragmentsCacheV1';
-        const FRGMNTS_PUBLIC_CACHE_MAX_AGE_MS = 24 * 60 * 60 * 1000;
+        let publicFragmentGeneration = 0;
+        let siteSearchGeneration = 0;
+        try {
+            localStorage.removeItem('otwFounderFragmentsCacheV1');
+            localStorage.removeItem('otwFounderFragmentsCacheV2');
+        } catch (_) { /* Storage is optional. */ }
 
         function escapeHtml(value) {
             return String(value ?? '')
@@ -3461,7 +3466,7 @@
         }
 
         function activateFrontpageImage(image) {
-            if (!image || image.dataset.frontpageLoaded === 'true') return;
+            if (!image || !image.dataset.frontpageSrc || image.dataset.frontpageLoaded === 'true') return;
             image.dataset.frontpageLoaded = 'true';
             if (image.dataset.frontpageSrcset) image.srcset = image.dataset.frontpageSrcset;
             if (image.dataset.frontpageSizes) image.sizes = image.dataset.frontpageSizes;
@@ -3690,7 +3695,8 @@
                 imageAlt: image ? `Image shared by ${author}` : '',
                 linkPreview,
                 url,
-                sourceName: 'fragments_data.js'
+                editedAt: fragment && fragment.edited_at || '',
+                sourceName: 'public frgmnts feed'
             };
         }
 
@@ -4321,13 +4327,6 @@
             updateFrontPageStructuredData(renderedItems);
         }
 
-        async function loadLocalFragments() {
-            return loadArrayFromScript(
-                'fragments_data.js',
-                'typeof window !== "undefined" && Array.isArray(window.otw_fragments) ? window.otw_fragments : []'
-            );
-        }
-
         async function initFrontPageContent() {
             initHomepageImageGuards();
             const frontPage = document.querySelector('.front-page');
@@ -4340,7 +4339,8 @@
                         : {};
                     renderFrontPage(
                         normalizeFrontpageManifest(payload.manifest),
-                        normalizePreparedSources(payload.sources)
+                        normalizePreparedSources({ ...payload.sources, fragments: [] }),
+                        { renderFragments: false }
                     );
                     window.__otwFrontpageDataMode = 'compact';
                     window.__otwFrontpagePayloadHash = String(payload.contentHash || '');
@@ -4351,7 +4351,7 @@
                     const narrativesPromise = loadFrontpageSource('narrative_data.js', () => loadArrayFromScript('narrative_data.js', 'typeof current_narrative !== "undefined" ? current_narrative : []'));
                     const imageManifestPromise = loadFrontpageSource('image_manifest.json', loadImageManifest);
                     const livingVersePromise = loadFrontpageSource('new_poetry_data.js', () => loadArrayFromScript('new_poetry_data.js', 'typeof livingVerse !== "undefined" ? livingVerse : []'));
-                    const fragmentsPromise = loadFrontpageSource('fragments_data.js', loadLocalFragments);
+                    const fragmentsPromise = Promise.resolve([]);
                     const responsiveMediaPromise = loadResponsiveMedia();
                     const [manifest, narratives, imageManifest, livingVerse, fragments, responsiveMedia] = await Promise.all([
                         manifestPromise,
@@ -4362,12 +4362,10 @@
                         responsiveMediaPromise
                     ]);
                     responsiveMediaSources = responsiveMedia;
-                    renderFrontPage(manifest, normalizeSources(narratives, imageManifest, livingVerse, fragments));
+                    renderFrontPage(manifest, normalizeSources(narratives, imageManifest, livingVerse, fragments), { renderFragments: false });
                     window.__otwFrontpageDataMode = 'legacy';
                     frontPage?.setAttribute('data-frontpage-data', 'legacy');
                 }
-                hydrateLatestFragmentFromCache();
-                void refreshLatestFragmentFromPublicFeed();
             } finally {
                 window.requestAnimationFrame(() => {
                     frontPage?.removeAttribute('data-hydrating');
@@ -4377,6 +4375,7 @@
         }
 
         initFrontPageContent();
+        void refreshLatestFragmentFromPublicFeed();
 
         function normalizeRailFragment(fragment) {
             if (fragment && fragment.type === 'fragment' && fragment.key && fragment.url) return fragment;
@@ -4388,11 +4387,11 @@
             return (Array.isArray(fragmentItems) ? fragmentItems : [])
                 .filter((fragment) => fragment && isFounderFragment(fragment))
                 .map(normalizeRailFragment)
-                .filter((fragment) => (fragment.text || fragment.linkPreview) && fragment.url)
+                .filter((fragment) => (fragment.text || fragment.linkPreview || fragment.image) && fragment.url)
                 .sort((a, b) => b.dateSort - a.dateSort || String(b.date).localeCompare(String(a.date)))[0] || null;
         }
 
-        function renderLatestFragment(fragmentItems, options = {}) {
+        function renderLatestFragment(fragmentItems) {
             const root = document.getElementById('latestFragment');
             const link = document.getElementById('latestFragmentLink');
             const text = document.getElementById('latestFragmentText');
@@ -4407,10 +4406,8 @@
             const previewDescription = document.getElementById('latestFragmentLinkDescription');
             const fragment = latestFounderFragment(fragmentItems);
 
+            clearLatestFragment();
             if (!root || !link || !text || !date || !author || !handle || !media || !image || !preview || !fragment) return;
-
-            const currentDateSort = Number(root.dataset.fragmentDateSort || 0);
-            if (options.onlyIfNewer && fragment.dateSort < currentDateSort) return;
 
             root.hidden = false;
             root.dataset.fragmentDateSort = String(fragment.dateSort || 0);
@@ -4418,7 +4415,10 @@
             link.setAttribute('aria-label', `Open latest frgmnt by ${fragment.author}`);
             text.textContent = fragment.text;
             text.hidden = !fragment.text;
-            date.textContent = fragment.date || 'Latest';
+            const editedAt = new Date(fragment.editedAt);
+            const edited = Number.isFinite(editedAt.getTime());
+            date.textContent = `${fragment.date || 'Latest'}${edited ? ' · Edited' : ''}`;
+            date.title = edited ? `Edited ${editedAt.toLocaleString()}` : '';
             if (fragment.timestamp) date.dateTime = fragment.timestamp;
             else date.removeAttribute('datetime');
             author.textContent = fragment.author || 'The_RyanDavid';
@@ -4479,63 +4479,73 @@
             return null;
         }
 
-        function readLatestFragmentCache() {
-            try {
-                const raw = window.localStorage.getItem(FRGMNTS_PUBLIC_CACHE_KEY);
-                if (!raw) return null;
-                const cached = JSON.parse(raw);
-                const savedAt = Number(cached.savedAt || 0);
-                const isFresh = savedAt > 0 && Date.now() - savedAt <= FRGMNTS_PUBLIC_CACHE_MAX_AGE_MS;
-                if (cached.version !== 1 || !isFresh || !Array.isArray(cached.items) || !cached.items.length) {
-                    window.localStorage.removeItem(FRGMNTS_PUBLIC_CACHE_KEY);
-                    return null;
-                }
-                return cached.items;
-            } catch (error) {
-                return null;
+        function clearLatestFragment() {
+            const root = document.getElementById('latestFragment');
+            if (root) root.hidden = true;
+            ['latestFragmentText', 'latestFragmentDate', 'latestFragmentLinkHost',
+                'latestFragmentLinkTitle', 'latestFragmentLinkDescription'].forEach((id) => {
+                const node = document.getElementById(id);
+                if (node) node.textContent = '';
+            });
+            const image = document.getElementById('latestFragmentImage');
+            if (image) {
+                image.onerror = null;
+                frontpageImageObserver?.unobserve(image);
+                image.removeAttribute('src');
+                image.removeAttribute('srcset');
+                delete image.dataset.frontpageSrc;
+                delete image.dataset.frontpageSrcset;
             }
         }
 
-        function writeLatestFragmentCache(items) {
-            if (!Array.isArray(items) || !items.length) return;
-            try {
-                window.localStorage.setItem(FRGMNTS_PUBLIC_CACHE_KEY, JSON.stringify({
-                    version: 1,
-                    savedAt: Date.now(),
-                    items
-                }));
-            } catch (error) {
-                // The homepage remains fully usable when browser storage is unavailable.
-            }
-        }
-
-        function hydrateLatestFragmentFromCache() {
-            const cachedItems = readLatestFragmentCache();
-            if (cachedItems) renderLatestFragment(cachedItems, { onlyIfNewer: true });
-        }
-
-        async function refreshLatestFragmentFromPublicFeed() {
+        async function fetchPublicFragments(limit = 10) {
             const controller = new AbortController();
             const timeoutId = window.setTimeout(() => controller.abort(), FRGMNTS_PUBLIC_TIMEOUT_MS);
             try {
-                const response = await fetch(FRGMNTS_PUBLIC_FEED_URL, {
-                    cache: 'default',
+                const url = new URL(FRGMNTS_PUBLIC_FEED_URL);
+                url.searchParams.set('limit', String(limit));
+                const response = await fetch(url, {
+                    cache: 'no-store',
                     credentials: 'omit',
                     headers: { Accept: 'application/json' },
                     signal: controller.signal
                 });
                 if (!response.ok) throw new Error(`Public frgmnts request failed: ${response.status}`);
-                const payload = await response.json();
-                const items = extractPublicFragmentItems(payload);
-                if (!Array.isArray(items) || !items.length) throw new Error('Public frgmnts response was empty');
-                writeLatestFragmentCache(items);
-                renderLatestFragment(items, { onlyIfNewer: true });
-            } catch (error) {
-                console.warn('Latest public frgmnt unavailable; keeping the last reliable homepage copy.', error);
+                const items = extractPublicFragmentItems(await response.json());
+                if (!Array.isArray(items) || !items.every(isObjectRecord)) throw new Error('Invalid public frgmnts response');
+                return items;
             } finally {
                 window.clearTimeout(timeoutId);
             }
         }
+
+        async function refreshLatestFragmentFromPublicFeed() {
+            const generation = ++publicFragmentGeneration;
+            clearLatestFragment();
+            try {
+                const items = await fetchPublicFragments();
+                if (generation === publicFragmentGeneration) renderLatestFragment(items);
+            } catch (error) {
+                if (generation === publicFragmentGeneration) clearLatestFragment();
+                console.warn('Latest public frgmnt unavailable.', error);
+            }
+        }
+
+        function suspendPublicFragments() {
+            ++publicFragmentGeneration;
+            ++siteSearchGeneration;
+            searchIndexPromise = undefined;
+            clearLatestFragment();
+            document.getElementById('siteSearchResults')?.replaceChildren();
+        }
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) suspendPublicFragments();
+            else void refreshLatestFragmentFromPublicFeed();
+        });
+        window.addEventListener('pagehide', suspendPublicFragments);
+        window.addEventListener('pageshow', (event) => {
+            if (event.persisted) void refreshLatestFragmentFromPublicFeed();
+        });
 
         function initPopoverEscapeDismissal() {
             ['search-panel', 'destinations', 'mobile-menu'].forEach((id) => {
@@ -4917,7 +4927,7 @@
                 ['narrative_data.js', () => loadArrayFromScript('narrative_data.js', 'typeof current_narrative !== "undefined" ? current_narrative : []')],
                 ['poetry_data.js', () => loadArrayFromScript('poetry_data.js', 'typeof archive !== "undefined" ? archive : []')],
                 ['new_poetry_data.js', () => loadArrayFromScript('new_poetry_data.js', 'typeof livingVerse !== "undefined" ? livingVerse : []')],
-                ['fragments_data.js', () => loadArrayFromScript('fragments_data.js', 'typeof window !== "undefined" && Array.isArray(window.otw_fragments) ? window.otw_fragments : []')],
+                ['public frgmnts', () => fetchPublicFragments(200)],
                 ['wayback_purified.js', () => loadArrayFromScript('wayback_purified.js', 'typeof wayback_raw_dump !== "undefined" ? wayback_raw_dump : []')]
             ];
 
@@ -4969,7 +4979,7 @@
                 });
 
                 fragments.forEach((fragment) => {
-                    const body = cleanText(fragment.text || '');
+                    const body = cleanFragmentText(fragmentTextValue(fragment));
                     entries.push({
                         kind: fragment.author === 'OTW_Bot' ? 'OTW_Bot' : 'frgmnt',
                         title: buildFragmentTitle(fragment),
@@ -5102,6 +5112,7 @@
         }
 
         async function runSiteSearch(query) {
+            const generation = ++siteSearchGeneration;
             const normalizedQuery = query.trim().toLowerCase();
             const resultsContainer = document.getElementById('siteSearchResults');
 
@@ -5114,6 +5125,7 @@
 
             try {
                 const index = await buildSearchIndex();
+                if (generation !== siteSearchGeneration) return;
                 const tokens = normalizedQuery.split(/\s+/).filter(Boolean);
                 const allMatches = index
                     .map((entry) => ({ ...entry, score: scoreEntry(entry, normalizedQuery, tokens) }))
@@ -5132,6 +5144,7 @@
                     remaining: Math.max(0, allMatches.length - results.length)
                 });
             } catch (error) {
+                if (generation !== siteSearchGeneration) return;
                 renderSearchResults(resultsContainer, {
                     mode: 'error',
                     message: error.message || 'Could not load the search index right now.'
@@ -5149,6 +5162,7 @@
             let searchDebounce;
 
             input.addEventListener('focus', () => {
+                searchIndexPromise = undefined;
                 buildSearchIndex().catch(() => {});
             });
 
