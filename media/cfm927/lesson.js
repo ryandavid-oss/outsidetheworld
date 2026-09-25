@@ -106,7 +106,7 @@
   function renderPresentation() {
     const path = paths[selectedPath], steps = stepsFor(), index = steps.indexOf(currentStep);
     let content;
-    if (currentStep === 'opening') content = `<p class="eyebrow">As we gather · September 27</p><h2 id="slide-title" tabindex="-1">What did you learn this week about <em>the Savior?</em></h2><p class="slide-hint">A verse. An experience. A question you’re still thinking about.</p><div class="reflection-pause"><button class="button secondary" id="think-toggle" type="button" aria-pressed="false">Take 30 seconds to think</button><span class="pause-clock" id="pause-clock" role="status"></span></div>`;
+    if (currentStep === 'opening') content = `<p class="eyebrow">As we gather · September 27</p><h2 id="slide-title" tabindex="-1">What did you learn this week about <em>the Savior?</em></h2><p class="slide-hint">Take a minute to think. What stood out to you?</p><div class="reflection-pause"><button class="button secondary" id="think-toggle" type="button" aria-pressed="false">Take 30 seconds to think</button><span class="pause-clock" id="pause-clock" role="status"></span></div>`;
     else if (currentStep.startsWith('read-')) {
       const group = path.groups[Number(currentStep.slice(5))-1];
       content = `<p class="eyebrow">Read together · ${path.name}</p><h2 id="slide-title" tabindex="-1">${path.reference}</h2>${verseHTML(group.map(i => path.verses[i]))}${sourceHTML(path)}`;
@@ -137,9 +137,9 @@
     updateClock();
   }
   function renderGuide() {
-    $('guide').innerHTML = `<p class="eyebrow">For the person leading · September 27, 2026</p><h1 id="guide-title" tabindex="-1">A little structure.<br>Room to listen.</h1><p class="guide-intro">One opening question, one passage to explore, and one invitation to take home. Stay with a meaningful conversation; the other passages are there if you need them.</p>
+    $('guide').innerHTML = `<p class="eyebrow">For the person leading · September 27, 2026</p><h1 id="guide-title" tabindex="-1">September 27<br>discussion guide</h1><p class="guide-intro">Start with the question below and see what people have to say. Isaiah 35 gives you somewhere to go if you need it. There is no need to cover every passage.</p>
       <div class="guide-actions"><a class="button" href="#discuss/opening">Open discussion →</a><a class="button secondary" href="#">Return to study</a><button class="button secondary" id="print-guide" type="button">Print guide</button></div>
-      <h2>Begin here</h2><blockquote>What did you learn this week about the Savior?</blockquote><p>“Take a moment to look back through your scriptures or notes. A phrase, an experience, or a question you’re still thinking about would be welcome.”</p>
+      <h2>Begin here</h2><blockquote>What did you learn this week about the Savior?</blockquote><p>“Take a minute to look back through what you read this week. What stood out to you?”</p>
       <h2>Your 25 minutes</h2><ol class="rundown">
       <li><time>0–2</time><div><strong>Welcome and opening prayer</strong><p>Put up the opening question. Give people a moment to settle.</p></div></li>
       <li><time>2–7</time><div><strong>Listen to what people brought</strong><p>Allow quiet thinking time, then invite responses. Try: “What helped you see that?” or “Could we read that verse together?”</p></div></li>
