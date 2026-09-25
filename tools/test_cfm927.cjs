@@ -18,7 +18,7 @@ if (shots) fs.mkdirSync(shots, {recursive:true});
     await page.clock.install({time:new Date('2026-09-25T12:00:00-07:00')});
     await page.goto(base);
     await page.evaluate(() => document.fonts.ready);
-    assert.equal(await page.locator('h1').textContent(), 'What did you learn this week about the Savior?');
+    assert.equal(await page.locator('h1').textContent(), '“He will come and save you.”');
     assert.equal(await page.locator('#lead-link').isVisible(), false, 'Sunday control is hidden before Sunday');
     assert.equal(await page.locator('.passage').count(), 3);
     await page.getByRole('link', {name:'Begin with Isaiah 35'}).click();
