@@ -62,6 +62,14 @@
   let selectedPath = 'hope', currentStep = 'opening', presenting = false;
   let timer = { remaining: duration, deadline: null };
   let pauseDeadline = null;
+  const reflectionDialog = $('reflection-dialog');
+  const reflectionPassages = [
+    { chapter:35, verse:4, tone:'courage', lead:'Be strong,', emphasis:['fear not:'], ending:'… he will come and save you.' },
+    { chapter:25, verse:4, tone:'refuge', lead:'… a strength to the needy in his distress,', emphasis:['a refuge','from the storm …'], ending:'' },
+    { chapter:25, verse:8, tone:'comfort', lead:'… the Lord God will', emphasis:['wipe away tears'], ending:'from off all faces …' }
+  ];
+  let reflectionRemaining = 30000, reflectionClosing = false;
+  let reflectionCloseTimer;
   let toastTimeout;
   // This is the live audio source used by the Church's Tabernacle Choir player.
   // Keep it unloaded until the leader clicks Play music.
@@ -72,11 +80,12 @@
   const musicVolume = 0.35;
   let musicState = 'idle', musicRequest = 0, musicFade, musicTimeout;
   function updateMusic() {
-    const button = $('music-toggle');
-    if (!button) return;
-    button.textContent = musicState === 'loading' ? 'Connecting…' : musicState === 'fading' ? 'Fading out…' : musicState === 'playing' ? 'Stop music' : 'Play music';
-    button.setAttribute('aria-pressed', String(musicState !== 'idle'));
-    button.setAttribute('aria-label', musicState === 'loading' ? 'Cancel music connection' : musicState === 'idle' ? 'Play music from the Tabernacle Choir stream' : 'Stop music');
+    for (const button of [$('music-toggle'), $('reflection-music-toggle')].filter(Boolean)) {
+      button.textContent = musicState === 'loading' ? 'Connecting…' : musicState === 'fading' ? 'Fading out…' : musicState === 'playing' ? 'Stop music' : 'Play music';
+      button.setAttribute('aria-pressed', String(musicState !== 'idle'));
+      button.setAttribute('aria-label', musicState === 'loading' ? 'Cancel music connection' : musicState === 'idle' ? 'Play music from the Tabernacle Choir stream' : 'Stop music');
+    }
+    $('reflection-volume').disabled = musicState === 'fading';
   }
   function releaseMusic() {
     clearInterval(musicFade); clearTimeout(musicTimeout);
@@ -99,13 +108,15 @@
   }
   function musicFailed() {
     stopMusic();
+    $('reflection-music-status').textContent = 'The Choir stream couldn’t connect. You can try Play music again.';
     notify('The Choir stream couldn’t connect. Try Play music again, or use the Tabernacle Choir link.');
   }
   async function toggleMusic() {
     if (musicState !== 'idle') { stopMusic(); return; }
     const request = ++musicRequest;
     musicState = 'loading'; updateMusic();
-    music.volume = musicVolume; music.src = musicURL;
+    $('reflection-music-status').textContent = '';
+    music.volume = reflectionDialog.open ? Number($('reflection-volume').value) : musicVolume; music.src = musicURL;
     musicTimeout = setTimeout(() => { if (request === musicRequest) musicFailed(); }, 20000);
     try {
       await music.play();
@@ -119,7 +130,7 @@
   document.addEventListener('play', event => {
     if (event.target instanceof HTMLMediaElement && event.target !== music) stopMusic();
   }, true);
-  window.addEventListener('pagehide', () => stopMusic());
+  window.addEventListener('pagehide', () => { closeReflection(true, false); stopMusic(); });
   try {
     const saved = JSON.parse(sessionStorage.getItem(timerKey));
     if (saved && Number.isFinite(saved.remaining) && saved.remaining >= 0 && saved.remaining <= duration && (saved.deadline === null || Number.isFinite(saved.deadline))) timer = saved;
@@ -144,12 +155,94 @@
       $('timer-toggle').setAttribute('aria-pressed', String(timer.deadline !== null));
       $('timer-toggle').disabled = value === 0;
     }
-    if (pauseDeadline !== null) {
-      const left = Math.max(0, pauseDeadline - Date.now());
+    if (reflectionDialog.open && !reflectionClosing) {
+      const left = pauseDeadline === null ? reflectionRemaining : Math.max(0, pauseDeadline - Date.now());
       if ($('pause-clock')) $('pause-clock').textContent = left ? timeString(left) : 'Continue when you’re ready.';
-      if (left === 0) { pauseDeadline = null; if ($('think-toggle')) { $('think-toggle').textContent = 'Another 30 seconds'; $('think-toggle').setAttribute('aria-pressed', 'false'); } }
+      $('reflection-time').textContent = left ? timeString(left) : 'Take your time';
+      $('reflection-progress').style.width = `${left / 30000 * 100}%`;
+      if (pauseDeadline !== null) {
+        if (left === 0) {
+          pauseDeadline = null; reflectionRemaining = 0;
+          $('reflection-status').textContent = 'The 30 seconds are complete. Keep reading or return to the discussion when you’re ready.';
+        }
+      }
+      $('reflection-hold').textContent = left === 0 ? '30 more seconds' : pauseDeadline === null ? 'Resume' : 'Hold';
+      $('reflection-hold').setAttribute('aria-label', left === 0 ? 'Start another 30 seconds' : pauseDeadline === null ? 'Resume the reading timer' : 'Pause the reading timer');
     }
   }
+  function renderReflection() {
+    $('reflection-stage').innerHTML = reflectionPassages.map(passage => `<figure class="reflection-passage reflection-${passage.tone}"><blockquote><p class="reflection-lead">${escape(passage.lead)}</p><p class="reflection-emphasis">${passage.emphasis.map(line => `<span>${escape(line)}</span>`).join('')}</p>${passage.ending ? `<p class="reflection-ending">${escape(passage.ending)}</p>` : ''}</blockquote><figcaption><a class="reflection-citation" href="${scripture(passage.chapter, 'p'+passage.verse)}" target="_blank" rel="noopener noreferrer">Isaiah ${passage.chapter}:${passage.verse}<span> · KJV excerpt ↗</span></a></figcaption></figure>`).join('');
+  }
+  function openReflection() {
+    if (reflectionDialog.open) return;
+    clearTimeout(reflectionCloseTimer);
+    reflectionClosing = false; reflectionRemaining = 30000;
+    pauseDeadline = Date.now() + reflectionRemaining;
+    $('reflection-status').textContent = ''; $('reflection-music-status').textContent = '';
+    renderReflection();
+    reflectionDialog.showModal();
+    reflectionDialog.scrollTop = 0;
+    document.body.classList.add('reflection-open');
+    $('think-toggle').setAttribute('aria-expanded','true');
+    $('reflection-heading').focus({preventScroll:true});
+    requestAnimationFrame(() => { if (reflectionDialog.open && !reflectionClosing) reflectionDialog.classList.add('is-visible'); });
+    // Continue music only if the leader already started it; ease it down under the reading.
+    if (musicState === 'playing' || musicState === 'loading') {
+      clearInterval(musicFade);
+      const initial = music.volume, target = Number($('reflection-volume').value), started = Date.now();
+      musicFade = setInterval(() => {
+        const progress = Math.min(1, (Date.now() - started) / 800);
+        music.volume = initial + (target - initial) * progress;
+        if (progress === 1) clearInterval(musicFade);
+      }, 30);
+    }
+    updateMusic(); updateClock();
+  }
+  function closeReflection(immediate = false, restoreFocus = true) {
+    if (!reflectionDialog.open) return;
+    if (reflectionClosing && !immediate) return;
+    clearTimeout(reflectionCloseTimer);
+    reflectionClosing = true; pauseDeadline = null;
+    reflectionDialog.classList.remove('is-visible');
+    stopMusic(immediate ? 0 : 700);
+    const finish = () => {
+      reflectionDialog.close(); reflectionClosing = false;
+      document.body.classList.remove('reflection-open');
+      if ($('think-toggle')) {
+        $('think-toggle').setAttribute('aria-expanded','false');
+        if (restoreFocus) $('think-toggle').focus({preventScroll:true});
+      }
+    };
+    if (immediate || matchMedia('(prefers-reduced-motion: reduce)').matches) finish();
+    else reflectionCloseTimer = setTimeout(finish, 500);
+  }
+  $('reflection-close').addEventListener('click', () => closeReflection());
+  $('reflection-return').addEventListener('click', () => closeReflection());
+  reflectionDialog.addEventListener('cancel', event => { event.preventDefault(); closeReflection(); });
+  reflectionDialog.addEventListener('keydown', event => {
+    if (event.key !== 'Tab') return;
+    const controls = [...reflectionDialog.querySelectorAll('a[href],button:not(:disabled),input:not(:disabled)')].filter(element => element.getClientRects().length);
+    const first = controls[0], last = controls.at(-1);
+    if (event.shiftKey && (document.activeElement === first || document.activeElement === $('reflection-heading'))) {
+      event.preventDefault(); last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault(); first.focus();
+    }
+  });
+  $('reflection-hold').addEventListener('click', () => {
+    if (pauseDeadline !== null) { reflectionRemaining = Math.max(0, pauseDeadline - Date.now()); pauseDeadline = null; }
+    else {
+      if (reflectionRemaining === 0) { reflectionRemaining = 30000; $('reflection-status').textContent = ''; }
+      pauseDeadline = Date.now() + reflectionRemaining;
+    }
+    updateClock();
+  });
+  $('reflection-music-toggle').addEventListener('click', toggleMusic);
+  $('reflection-volume').addEventListener('input', event => {
+    const value = Number(event.target.value);
+    event.target.setAttribute('aria-valuetext', `${Math.round(value*100)} percent`);
+    if (musicState === 'playing' || musicState === 'loading') { clearInterval(musicFade); music.volume = value; }
+  });
   function openDiscussion(step = 'opening') {
     location.hash = ['opening', 'closing'].includes(step) ? `discuss/${step}` : `discuss/${selectedPath}/${step}`;
   }
@@ -164,7 +257,7 @@
     if ($('lesson-video')) $('lesson-video').pause();
     const path = paths[selectedPath], steps = stepsFor(), index = steps.indexOf(currentStep);
     let content;
-    if (currentStep === 'opening') content = `<p class="eyebrow">As we gather · September 27</p><h2 id="slide-title" tabindex="-1">What did you learn this week about <em>the Savior?</em></h2><p class="slide-hint">Take a minute to think. What stood out to you?</p><div class="reflection-pause"><button class="button secondary" id="think-toggle" type="button" aria-pressed="false">Take 30 seconds to think</button><span class="pause-clock" id="pause-clock" role="status"></span></div>`;
+    if (currentStep === 'opening') content = `<p class="eyebrow">As we gather · September 27</p><h2 id="slide-title" tabindex="-1">What did you learn this week about <em>the Savior?</em></h2><p class="slide-hint">Take a minute to think. What stood out to you?</p><div class="reflection-pause"><button class="button secondary" id="think-toggle" type="button" aria-haspopup="dialog" aria-controls="reflection-dialog" aria-expanded="false">Take 30 seconds to think</button><span class="pause-clock" id="pause-clock" role="status"></span></div>`;
     else if (currentStep.startsWith('read-')) {
       const group = path.groups[Number(currentStep.slice(5))-1];
       content = `<p class="eyebrow">Read together · ${path.name}</p><h2 id="slide-title" tabindex="-1">${path.reference}</h2>${verseHTML(group.map(i => path.verses[i]))}${sourceHTML(path)}`;
@@ -189,10 +282,7 @@
     $('fullscreen').addEventListener('click', async () => {
       try { if (document.fullscreenElement) await document.exitFullscreen(); else if (document.documentElement.requestFullscreen) await document.documentElement.requestFullscreen(); else notify('Fullscreen is unavailable in this browser. The discussion still works here.'); } catch { notify('Fullscreen is unavailable. You can continue in this window.'); }
     });
-    if ($('think-toggle')) $('think-toggle').addEventListener('click', () => {
-      if (pauseDeadline !== null) { pauseDeadline = null; $('pause-clock').textContent = ''; $('think-toggle').textContent = 'Take 30 seconds to think'; $('think-toggle').setAttribute('aria-pressed','false'); }
-      else { stopMusic(1200); pauseDeadline = Date.now()+30000; $('think-toggle').textContent = 'Stop reflection timer'; $('think-toggle').setAttribute('aria-pressed','true'); updateClock(); }
-    });
+    if ($('think-toggle')) $('think-toggle').addEventListener('click', openReflection);
     if ($('music-toggle')) $('music-toggle').addEventListener('click', toggleMusic);
     if ($('lesson-video')) {
       const video = $('lesson-video'), errorMessage = $('video-error');
@@ -219,7 +309,7 @@
       <h2>A short video if you’d like it</h2><p>A 75-second excerpt from Amy A. Wright’s “Christ Heals That Which Is Broken” follows the scripture reading. She speaks about waiting for healing and keeping our focus on Jesus Christ. Select Play when you’re ready, or Next to skip it. Afterward, you could ask: “What did you notice about the Savior?”</p><p><a class="text-link" href="#discuss/watch">Open the excerpt →</a></p><h2>A few words when you need them</h2><ul class="guide-tips"><li><strong>If it’s quiet:</strong> “Which word or phrase caught your attention?” Give people a little time to look.</li><li><strong>After a meaningful comment:</strong> “What does that help the rest of us notice?” Let another person respond.</li><li><strong>If the conversation wanders:</strong> “Let’s bring that back to the passage. What does it help us understand about the Savior?”</li><li><strong>If you don’t know:</strong> “I’d like to study that more before giving you an answer.”</li><li><strong>To make room for others:</strong> “Thank you. Let’s hear from someone who hasn’t had a chance yet.”</li></ul>
       <h2>Follow the conversation</h2><p>The passage menu in discussion mode lets you change direction. Choose one; you do not need to cover all three.</p><div class="guide-options">${Object.entries(paths).map(([id,path]) => `<a class="text-link" href="#discuss/${id}/read-1">${path.short} →</a>`).join('')}</div>
       ${Object.values(paths).map(path => `<details class="plain-language"><summary>${path.name} · Leader note</summary><p>${path.note}</p></details>`).join('')}
-      <div class="guide-note"><p><strong>On the screen:</strong> use the discussion view. This guide is a separate view you can keep open on your phone. It is a public page, with no sign-in.</p><p><strong>Music:</strong> select “Play music” on the opening screen as people arrive. The Tabernacle Choir stream fades out and stops when you select “Start class,” start the reflection timer, or move to another screen. It stays off until you choose to play it again.</p><p><strong>Time:</strong> select “Start class” when class begins. The timer continues as you move between slides and survives a refresh in the same tab. Pause or reset it yourself. The 30-second reflection timer also waits for you to continue.</p><p><strong>Navigation:</strong> use the buttons or ← / →. Home returns to the opening; End goes to the closing invitation. F toggles fullscreen. Nothing advances automatically.</p></div>
+      <div class="guide-note"><p><strong>On the screen:</strong> use the discussion view. This guide is a separate view you can keep open on your phone. It is a public page, with no sign-in.</p><p><strong>Music:</strong> select “Play music” on the opening screen as people arrive. The Tabernacle Choir stream fades out and stops when you select “Start class” or move to another screen. During the reading popover, music you already started continues more quietly. You can play or stop it there and adjust the volume. Returning to the discussion fades it out.</p><p><strong>Time:</strong> select “Start class” when class begins. The timer continues as you move between slides and survives a refresh in the same tab. Pause or reset it yourself. “Take 30 seconds to think” opens the Savior’s image with three short excerpts from this week’s reading. Everyone can read them together. Hold pauses that timer; all three passages stay visible until you select “Back to discussion.”</p><p><strong>Navigation:</strong> use the buttons or ← / →. Home returns to the opening; End goes to the closing invitation. F toggles fullscreen. Nothing advances automatically.</p></div>
       <h2>Keep the official study close</h2><p><a href="${official}" target="_blank" rel="noopener noreferrer">September 21–27: “A Marvellous Work and a Wonder” ↗</a></p><p><a href="https://www.churchofjesuschrist.org/feature/sunday-meeting-schedule?lang=eng" target="_blank" rel="noopener noreferrer">Guidance for a 25-minute Sunday School class ↗</a></p>`;
     $('print-guide').addEventListener('click', () => window.print());
   }
@@ -229,6 +319,7 @@
     $('guide-link').hidden = !sunday;
   }
   function route(initial = false) {
+    closeReflection(true, false);
     if ($('lesson-video')) $('lesson-video').pause();
     const parts = location.hash.slice(1).split('/');
     presenting = parts[0] === 'discuss';
@@ -255,9 +346,13 @@
   }
   window.addEventListener('hashchange', () => route());
   window.addEventListener('pageshow', () => { updateAvailability(); updateClock(); });
-  document.addEventListener('visibilitychange', () => { updateAvailability(); updateClock(); if (document.hidden && musicState === 'fading') stopMusic(); });
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden && reflectionDialog.open && pauseDeadline !== null) { reflectionRemaining = Math.max(0, pauseDeadline - Date.now()); pauseDeadline = null; }
+    updateAvailability(); updateClock(); if (document.hidden && musicState === 'fading') stopMusic();
+  });
   document.addEventListener('fullscreenchange', () => { if ($('fullscreen')) $('fullscreen').textContent = document.fullscreenElement ? 'Exit fullscreen' : 'Fullscreen'; });
   document.addEventListener('keydown', event => {
+    if (reflectionDialog.open) return;
     if (!presenting || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey || event.target.closest('input,textarea,select,button,a,summary,video,audio,[contenteditable="true"]')) return;
     const steps = stepsFor(), index = steps.indexOf(currentStep);
     if (event.key === 'ArrowRight' && index < steps.length-1) { event.preventDefault(); openDiscussion(steps[index+1]); }
