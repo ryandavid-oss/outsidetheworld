@@ -63,6 +63,63 @@
   let timer = { remaining: duration, deadline: null };
   let pauseDeadline = null;
   let toastTimeout;
+  // This is the live audio source used by the Church's Tabernacle Choir player.
+  // Keep it unloaded until the leader clicks Play music.
+  const music = document.createElement('audio');
+  music.id = 'arrival-music'; music.preload = 'none'; music.hidden = true;
+  document.body.append(music);
+  const musicURL = 'https://lds.msvdn.net/icecastRelay/101158/3nGepF3/icecast?rnd=637109879815090752';
+  const musicVolume = 0.35;
+  let musicState = 'idle', musicRequest = 0, musicFade, musicTimeout;
+  function updateMusic() {
+    const button = $('music-toggle');
+    if (!button) return;
+    button.textContent = musicState === 'loading' ? 'Connecting…' : musicState === 'fading' ? 'Fading out…' : musicState === 'playing' ? 'Stop music' : 'Play music';
+    button.setAttribute('aria-pressed', String(musicState !== 'idle'));
+    button.setAttribute('aria-label', musicState === 'loading' ? 'Cancel music connection' : musicState === 'idle' ? 'Play music from the Tabernacle Choir stream' : 'Stop music');
+  }
+  function releaseMusic() {
+    clearInterval(musicFade); clearTimeout(musicTimeout);
+    musicState = 'idle';
+    music.pause(); music.removeAttribute('src'); music.load();
+    music.volume = musicVolume;
+    updateMusic();
+  }
+  function stopMusic(fadeMilliseconds = 0) {
+    if (musicState === 'idle') return;
+    musicRequest++; clearInterval(musicFade); clearTimeout(musicTimeout);
+    if (!fadeMilliseconds || music.paused || music.readyState < 3) { releaseMusic(); return; }
+    const started = Date.now(), volume = music.volume;
+    musicState = 'fading'; updateMusic();
+    musicFade = setInterval(() => {
+      const fraction = Math.min(1, Math.max(0, (Date.now() - started) / fadeMilliseconds));
+      music.volume = volume * (1 - fraction);
+      if (fraction === 1) releaseMusic();
+    }, 30);
+  }
+  function musicFailed() {
+    stopMusic();
+    notify('The Choir stream couldn’t connect. Try Play music again, or use the Tabernacle Choir link.');
+  }
+  async function toggleMusic() {
+    if (musicState !== 'idle') { stopMusic(); return; }
+    const request = ++musicRequest;
+    musicState = 'loading'; updateMusic();
+    music.volume = musicVolume; music.src = musicURL;
+    musicTimeout = setTimeout(() => { if (request === musicRequest) musicFailed(); }, 20000);
+    try {
+      await music.play();
+      if (request !== musicRequest) return;
+      clearTimeout(musicTimeout); musicState = 'playing'; updateMusic();
+    } catch { if (request === musicRequest) musicFailed(); }
+  }
+  music.addEventListener('error', () => { if (musicState !== 'idle') musicFailed(); });
+  music.addEventListener('ended', () => stopMusic());
+  // Native lesson media takes priority. Only the Choir audio is stopped.
+  document.addEventListener('play', event => {
+    if (event.target instanceof HTMLMediaElement && event.target !== music) stopMusic();
+  }, true);
+  window.addEventListener('pagehide', () => stopMusic());
   try {
     const saved = JSON.parse(sessionStorage.getItem(timerKey));
     if (saved && Number.isFinite(saved.remaining) && saved.remaining >= 0 && saved.remaining <= duration && (saved.deadline === null || Number.isFinite(saved.deadline))) timer = saved;
@@ -113,7 +170,7 @@
     } else if (currentStep === 'reflect') content = `<p class="eyebrow">What do you notice? · ${path.reference}</p><h2 id="slide-title" tabindex="-1">${path.question}</h2><details class="alternate"><summary>Another question</summary><p>${path.alternate}</p></details>`;
     else if (currentStep === 'apply') content = `<p class="eyebrow">Living what we learn</p><h2 id="slide-title" tabindex="-1">${path.application}</h2><p class="slide-hint">${path.applicationHint}</p>`;
     else content = `<p class="eyebrow">Before we finish</p><h2 id="slide-title" tabindex="-1">What did you learn about the Savior today that you’d like to <em>remember?</em></h2><p class="slide-hint">You could read these verses again during the week.</p>`;
-    $('discuss/opening').innerHTML = `<div class="presentation-top"><label class="path-control" for="path-select"><span>Our passage</span><select id="path-select" aria-label="Choose discussion passage">${Object.entries(paths).map(([id,p]) => `<option value="${id}" ${id === selectedPath ? 'selected' : ''}>${p.short}</option>`).join('')}</select></label><div class="presentation-tools"><a href="#guide">Leader guide</a><button class="quiet-button" id="fullscreen" type="button">${document.fullscreenElement ? 'Exit fullscreen' : 'Fullscreen'}</button></div></div>
+    $('discuss/opening').innerHTML = `<div class="presentation-top"><label class="path-control" for="path-select"><span>Our passage</span><select id="path-select" aria-label="Choose discussion passage">${Object.entries(paths).map(([id,p]) => `<option value="${id}" ${id === selectedPath ? 'selected' : ''}>${p.short}</option>`).join('')}</select></label>${currentStep === 'opening' ? '<div class="music-controls"><button class="quiet-button" id="music-toggle" type="button" aria-pressed="false" title="Music fades out when you select Start class.">Play music</button><a href="https://www.churchofjesuschrist.org/media/radio?lang=eng" target="_blank" rel="noopener noreferrer">Tabernacle Choir ↗</a></div>' : ''}<div class="presentation-tools"><a href="#guide">Leader guide</a><button class="quiet-button" id="fullscreen" type="button">${document.fullscreenElement ? 'Exit fullscreen' : 'Fullscreen'}</button></div></div>
       <div class="slide ${currentStep.startsWith('read-') ? 'reading-slide' : ''}">${content}</div>
       <nav class="presentation-controls" aria-label="Discussion controls"><div class="timer-controls"><button class="timer" id="timer-toggle" type="button"><span id="timer-display">25:00</span><span class="timer-label" id="timer-label">Start class</span></button><button class="quiet-button timer-reset" id="timer-reset" type="button" aria-label="Reset class timer to 25 minutes">↺</button></div><div class="navigation"><button class="button secondary" id="previous" type="button" ${index === 0 ? 'disabled' : ''}>← <span>Back</span></button><span class="slide-count" aria-label="Slide ${index+1} of ${steps.length}">${index+1} / ${steps.length}</span><button class="button" id="next" type="button">${index === steps.length-1 ? 'Back to start' : 'Next'} <span aria-hidden="true">→</span></button></div></nav><div class="progress" aria-hidden="true"><span style="width:${((index+1)/steps.length)*100}%"></span></div>`;
     $('path-select').addEventListener('change', event => {
@@ -125,15 +182,17 @@
     });
     $('previous').addEventListener('click', () => openDiscussion(steps[Math.max(0,index-1)]));
     $('next').addEventListener('click', () => openDiscussion(steps[(index+1)%steps.length]));
-    $('timer-toggle').addEventListener('click', () => { const left = remaining(); if (!left) return; timer = timer.deadline !== null ? {remaining:left,deadline:null} : {remaining:left,deadline:Date.now()+left}; saveTimer(); updateClock(); });
+    $('timer-toggle').addEventListener('click', () => { const left = remaining(); if (!left) return; if (timer.deadline === null) stopMusic(1200); timer = timer.deadline !== null ? {remaining:left,deadline:null} : {remaining:left,deadline:Date.now()+left}; saveTimer(); updateClock(); });
     $('timer-reset').addEventListener('click', () => { timer = {remaining:duration,deadline:null}; saveTimer(); updateClock(); notify('Class timer reset to 25:00.'); });
     $('fullscreen').addEventListener('click', async () => {
       try { if (document.fullscreenElement) await document.exitFullscreen(); else if (document.documentElement.requestFullscreen) await document.documentElement.requestFullscreen(); else notify('Fullscreen is unavailable in this browser. The discussion still works here.'); } catch { notify('Fullscreen is unavailable. You can continue in this window.'); }
     });
     if ($('think-toggle')) $('think-toggle').addEventListener('click', () => {
       if (pauseDeadline !== null) { pauseDeadline = null; $('pause-clock').textContent = ''; $('think-toggle').textContent = 'Take 30 seconds to think'; $('think-toggle').setAttribute('aria-pressed','false'); }
-      else { pauseDeadline = Date.now()+30000; $('think-toggle').textContent = 'Stop reflection timer'; $('think-toggle').setAttribute('aria-pressed','true'); updateClock(); }
+      else { stopMusic(1200); pauseDeadline = Date.now()+30000; $('think-toggle').textContent = 'Stop reflection timer'; $('think-toggle').setAttribute('aria-pressed','true'); updateClock(); }
     });
+    if ($('music-toggle')) $('music-toggle').addEventListener('click', toggleMusic);
+    updateMusic();
     updateClock();
   }
   function renderGuide() {
@@ -149,7 +208,7 @@
       <h2>A few words when you need them</h2><ul class="guide-tips"><li><strong>If it’s quiet:</strong> “Which word or phrase caught your attention?” Give people a little time to look.</li><li><strong>After a meaningful comment:</strong> “What does that help the rest of us notice?” Let another person respond.</li><li><strong>If the conversation wanders:</strong> “Let’s bring that back to the passage. What does it help us understand about the Savior?”</li><li><strong>If you don’t know:</strong> “I’d like to study that more before giving you an answer.”</li><li><strong>To make room for others:</strong> “Thank you. Let’s hear from someone who hasn’t had a chance yet.”</li></ul>
       <h2>Follow the conversation</h2><p>The passage menu in discussion mode lets you change direction. Choose one; you do not need to cover all three.</p><div class="guide-options">${Object.entries(paths).map(([id,path]) => `<a class="text-link" href="#discuss/${id}/read-1">${path.short} →</a>`).join('')}</div>
       ${Object.values(paths).map(path => `<details class="plain-language"><summary>${path.name} · Leader note</summary><p>${path.note}</p></details>`).join('')}
-      <div class="guide-note"><p><strong>On the screen:</strong> use the discussion view. This guide is a separate view you can keep open on your phone. It is a public page, with no sign-in.</p><p><strong>Time:</strong> select “Start class” when class begins. The timer continues as you move between slides and survives a refresh in the same tab. Pause or reset it yourself. The 30-second reflection timer also waits for you to continue.</p><p><strong>Navigation:</strong> use the buttons or ← / →. Home returns to the opening; End goes to the closing invitation. F toggles fullscreen. Nothing advances automatically.</p></div>
+      <div class="guide-note"><p><strong>On the screen:</strong> use the discussion view. This guide is a separate view you can keep open on your phone. It is a public page, with no sign-in.</p><p><strong>Music:</strong> select “Play music” on the opening screen as people arrive. The Tabernacle Choir stream fades out and stops when you select “Start class,” start the reflection timer, or move to another screen. It stays off until you choose to play it again.</p><p><strong>Time:</strong> select “Start class” when class begins. The timer continues as you move between slides and survives a refresh in the same tab. Pause or reset it yourself. The 30-second reflection timer also waits for you to continue.</p><p><strong>Navigation:</strong> use the buttons or ← / →. Home returns to the opening; End goes to the closing invitation. F toggles fullscreen. Nothing advances automatically.</p></div>
       <h2>Keep the official study close</h2><p><a href="${official}" target="_blank" rel="noopener noreferrer">September 21–27: “A Marvellous Work and a Wonder” ↗</a></p><p><a href="https://www.churchofjesuschrist.org/feature/sunday-meeting-schedule?lang=eng" target="_blank" rel="noopener noreferrer">Guidance for a 25-minute Sunday School class ↗</a></p>`;
     $('print-guide').addEventListener('click', () => window.print());
   }
@@ -180,10 +239,11 @@
       const passage = $('passage-'+parts[1]); passage.open = true;
       requestAnimationFrame(() => { passage.scrollIntoView({block:'start'}); passage.querySelector('summary').focus({preventScroll:true}); });
     } else if (!initial) focusTitle('main');
+    if (!presenting || currentStep !== 'opening') stopMusic(1200);
   }
   window.addEventListener('hashchange', () => route());
   window.addEventListener('pageshow', () => { updateAvailability(); updateClock(); });
-  document.addEventListener('visibilitychange', () => { updateAvailability(); updateClock(); });
+  document.addEventListener('visibilitychange', () => { updateAvailability(); updateClock(); if (document.hidden && musicState === 'fading') stopMusic(); });
   document.addEventListener('fullscreenchange', () => { if ($('fullscreen')) $('fullscreen').textContent = document.fullscreenElement ? 'Exit fullscreen' : 'Fullscreen'; });
   document.addEventListener('keydown', event => {
     if (!presenting || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey || event.target.closest('input,textarea,select,button,a,summary,[contenteditable="true"]')) return;
