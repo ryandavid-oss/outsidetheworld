@@ -49,8 +49,8 @@ const base = process.env.OTW_TEST_URL || 'http://127.0.0.1:8927/cfm927-otw.html'
     await video.evaluate(v=>{v.currentTime=0;v.playbackRate=1;return v.play();});
     await video.evaluate(v=>{window.excerpt=v;});
     await page.locator('#next').click();
-    await page.waitForURL('**#discuss/hope/reflect');
-    await page.locator('.alternate').waitFor();
+    await page.waitForURL('**#discuss/hope/apply');
+    await page.waitForFunction(()=>document.querySelector('.slide .eyebrow').textContent==='Living what we learn');
     assert.equal(await page.evaluate(()=>window.excerpt.paused),true,'next stops video');
     assert.deepEqual(errors,[]);
     console.log('PASS: 75.2-second 720p clip, retimed captions, lazy loading, projector fit, manual playback, keyboard guards, pause on navigation, and no auto advance.');
