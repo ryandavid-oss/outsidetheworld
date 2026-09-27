@@ -56,7 +56,7 @@
   const escape = text => String(text).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const verseHTML = verses => `<div class="verse-list">${verses.map(([number, text]) => `<p class="verse"><span class="verse-number">${number}</span>${escape(text)}</p>`).join('')}</div>`;
   const sourceHTML = path => `<a class="source-link" href="${escape(path.url)}" target="_blank" rel="noopener noreferrer">${path.reference} · King James Version · Read on the Church website ↗</a>`;
-  const stepsFor = () => ['opening', ...paths[selectedPath].groups.map((_,index) => `read-${index+1}`), 'reflect', 'apply', 'closing'];
+  const stepsFor = () => ['opening', ...paths[selectedPath].groups.map((_,index) => `read-${index+1}`), 'watch', 'reflect', 'apply', 'closing'];
   const timerKey = 'otw-cfm927-class-timer';
   const duration = 25 * 60 * 1000;
   let selectedPath = 'hope', currentStep = 'opening', presenting = false;
@@ -161,17 +161,19 @@
     </details>`).join('');
   }
   function renderPresentation() {
+    if ($('lesson-video')) $('lesson-video').pause();
     const path = paths[selectedPath], steps = stepsFor(), index = steps.indexOf(currentStep);
     let content;
     if (currentStep === 'opening') content = `<p class="eyebrow">As we gather · September 27</p><h2 id="slide-title" tabindex="-1">What did you learn this week about <em>the Savior?</em></h2><p class="slide-hint">Take a minute to think. What stood out to you?</p><div class="reflection-pause"><button class="button secondary" id="think-toggle" type="button" aria-pressed="false">Take 30 seconds to think</button><span class="pause-clock" id="pause-clock" role="status"></span></div>`;
     else if (currentStep.startsWith('read-')) {
       const group = path.groups[Number(currentStep.slice(5))-1];
       content = `<p class="eyebrow">Read together · ${path.name}</p><h2 id="slide-title" tabindex="-1">${path.reference}</h2>${verseHTML(group.map(i => path.verses[i]))}${sourceHTML(path)}`;
-    } else if (currentStep === 'reflect') content = `<p class="eyebrow">What do you notice? · ${path.reference}</p><h2 id="slide-title" tabindex="-1">${path.question}</h2><details class="alternate"><summary>Another question</summary><p>${path.alternate}</p></details>`;
+    } else if (currentStep === 'watch') content = `<p class="eyebrow">Watch together · 1:15 excerpt</p><h2 id="slide-title" tabindex="-1">Christ Heals That Which Is Broken</h2><video id="lesson-video" controls playsinline preload="none" poster="/media/cfm927/amy-wright-excerpt.jpg" aria-label="Amy A. Wright: Christ Heals That Which Is Broken, 75-second excerpt"><source src="/media/cfm927/amy-wright-excerpt.mp4" type="video/mp4"><track kind="captions" src="/media/cfm927/amy-wright-excerpt-en.vtt" srclang="en" label="English" default></video><p class="video-caption">Amy A. Wright · April 2022<br><a href="https://www.churchofjesuschrist.org/study/general-conference/2022/04/42wright?lang=eng" target="_blank" rel="noopener noreferrer">Full message ↗</a><span aria-hidden="true"> · </span><a href="/media/cfm927/amy-wright-excerpt.mp4" download="Amy Wright - Christ Heals That Which Is Broken - excerpt.mp4">Save excerpt</a></p><p class="video-error" id="video-error" role="status" hidden>The video couldn’t load. You can use the full message link and begin at 7:56.</p>`;
+    else if (currentStep === 'reflect') content = `<p class="eyebrow">What do you notice? · ${path.reference}</p><h2 id="slide-title" tabindex="-1">${path.question}</h2><details class="alternate"><summary>Another question</summary><p>${path.alternate}</p></details>`;
     else if (currentStep === 'apply') content = `<p class="eyebrow">Living what we learn</p><h2 id="slide-title" tabindex="-1">${path.application}</h2><p class="slide-hint">${path.applicationHint}</p>`;
     else content = `<p class="eyebrow">Before we finish</p><h2 id="slide-title" tabindex="-1">What did you learn about the Savior today that you’d like to <em>remember?</em></h2><p class="slide-hint">You could read these verses again during the week.</p>`;
     $('discuss/opening').innerHTML = `<div class="presentation-top"><label class="path-control" for="path-select"><span>Our passage</span><select id="path-select" aria-label="Choose discussion passage">${Object.entries(paths).map(([id,p]) => `<option value="${id}" ${id === selectedPath ? 'selected' : ''}>${p.short}</option>`).join('')}</select></label>${currentStep === 'opening' ? '<div class="music-controls"><button class="quiet-button" id="music-toggle" type="button" aria-pressed="false" title="Music fades out when you select Start class.">Play music</button><a href="https://www.churchofjesuschrist.org/media/radio?lang=eng" target="_blank" rel="noopener noreferrer">Tabernacle Choir ↗</a></div>' : ''}<div class="presentation-tools"><a href="#guide">Leader guide</a><button class="quiet-button" id="fullscreen" type="button">${document.fullscreenElement ? 'Exit fullscreen' : 'Fullscreen'}</button></div></div>
-      <div class="slide ${currentStep.startsWith('read-') ? 'reading-slide' : ''}">${content}</div>
+      <div class="slide ${currentStep.startsWith('read-') ? 'reading-slide' : currentStep === 'watch' ? 'video-slide' : ''}">${content}</div>
       <nav class="presentation-controls" aria-label="Discussion controls"><div class="timer-controls"><button class="timer" id="timer-toggle" type="button"><span id="timer-display">25:00</span><span class="timer-label" id="timer-label">Start class</span></button><button class="quiet-button timer-reset" id="timer-reset" type="button" aria-label="Reset class timer to 25 minutes">↺</button></div><div class="navigation"><button class="button secondary" id="previous" type="button" ${index === 0 ? 'disabled' : ''}>← <span>Back</span></button><span class="slide-count" aria-label="Slide ${index+1} of ${steps.length}">${index+1} / ${steps.length}</span><button class="button" id="next" type="button">${index === steps.length-1 ? 'Back to start' : 'Next'} <span aria-hidden="true">→</span></button></div></nav><div class="progress" aria-hidden="true"><span style="width:${((index+1)/steps.length)*100}%"></span></div>`;
     $('path-select').addEventListener('change', event => {
       selectedPath = event.target.value;
@@ -192,6 +194,15 @@
       else { stopMusic(1200); pauseDeadline = Date.now()+30000; $('think-toggle').textContent = 'Stop reflection timer'; $('think-toggle').setAttribute('aria-pressed','true'); updateClock(); }
     });
     if ($('music-toggle')) $('music-toggle').addEventListener('click', toggleMusic);
+    if ($('lesson-video')) {
+      const video = $('lesson-video'), errorMessage = $('video-error');
+      const showError = () => { errorMessage.hidden = false; };
+      video.addEventListener('error', showError);
+      video.querySelector('source').addEventListener('error', showError);
+      video.addEventListener('loadeddata', () => { errorMessage.hidden = true; });
+      video.addEventListener('play', () => { if (!presenting || currentStep !== 'watch') video.pause(); });
+      video.addEventListener('ended', () => { $('announcement').textContent = 'The excerpt has finished. Select Next when you’re ready to continue.'; });
+    }
     updateMusic();
     updateClock();
   }
@@ -205,7 +216,7 @@
       <li><time>7–17</time><div><strong>Explore one passage</strong><p>Begin with Isaiah 35:3–6 if the conversation needs a starting point. Read slowly and ask what people notice about the Savior. Follow a useful contribution.</p></div></li>
       <li><time>17–22</time><div><strong>Connect it with daily life</strong><p>“How could these verses shape the way we respond to someone who feels afraid or worn down?” Invite a specific, practical thought.</p></div></li>
       <li><time>22–25</time><div><strong>Finish the discussion</strong><p>Ask what people would like to remember. Share a brief testimony connected to the discussion, encourage continued home study, and close with prayer.</p></div></li></ol>
-      <h2>A few words when you need them</h2><ul class="guide-tips"><li><strong>If it’s quiet:</strong> “Which word or phrase caught your attention?” Give people a little time to look.</li><li><strong>After a meaningful comment:</strong> “What does that help the rest of us notice?” Let another person respond.</li><li><strong>If the conversation wanders:</strong> “Let’s bring that back to the passage. What does it help us understand about the Savior?”</li><li><strong>If you don’t know:</strong> “I’d like to study that more before giving you an answer.”</li><li><strong>To make room for others:</strong> “Thank you. Let’s hear from someone who hasn’t had a chance yet.”</li></ul>
+      <h2>A short video if you’d like it</h2><p>A 75-second excerpt from Amy A. Wright’s “Christ Heals That Which Is Broken” follows the scripture reading. She speaks about waiting for healing and keeping our focus on Jesus Christ. Select Play when you’re ready, or Next to skip it. Afterward, you could ask: “What did you notice about the Savior?”</p><p><a class="text-link" href="#discuss/watch">Open the excerpt →</a></p><h2>A few words when you need them</h2><ul class="guide-tips"><li><strong>If it’s quiet:</strong> “Which word or phrase caught your attention?” Give people a little time to look.</li><li><strong>After a meaningful comment:</strong> “What does that help the rest of us notice?” Let another person respond.</li><li><strong>If the conversation wanders:</strong> “Let’s bring that back to the passage. What does it help us understand about the Savior?”</li><li><strong>If you don’t know:</strong> “I’d like to study that more before giving you an answer.”</li><li><strong>To make room for others:</strong> “Thank you. Let’s hear from someone who hasn’t had a chance yet.”</li></ul>
       <h2>Follow the conversation</h2><p>The passage menu in discussion mode lets you change direction. Choose one; you do not need to cover all three.</p><div class="guide-options">${Object.entries(paths).map(([id,path]) => `<a class="text-link" href="#discuss/${id}/read-1">${path.short} →</a>`).join('')}</div>
       ${Object.values(paths).map(path => `<details class="plain-language"><summary>${path.name} · Leader note</summary><p>${path.note}</p></details>`).join('')}
       <div class="guide-note"><p><strong>On the screen:</strong> use the discussion view. This guide is a separate view you can keep open on your phone. It is a public page, with no sign-in.</p><p><strong>Music:</strong> select “Play music” on the opening screen as people arrive. The Tabernacle Choir stream fades out and stops when you select “Start class,” start the reflection timer, or move to another screen. It stays off until you choose to play it again.</p><p><strong>Time:</strong> select “Start class” when class begins. The timer continues as you move between slides and survives a refresh in the same tab. Pause or reset it yourself. The 30-second reflection timer also waits for you to continue.</p><p><strong>Navigation:</strong> use the buttons or ← / →. Home returns to the opening; End goes to the closing invitation. F toggles fullscreen. Nothing advances automatically.</p></div>
@@ -218,6 +229,7 @@
     $('guide-link').hidden = !sunday;
   }
   function route(initial = false) {
+    if ($('lesson-video')) $('lesson-video').pause();
     const parts = location.hash.slice(1).split('/');
     presenting = parts[0] === 'discuss';
     const guide = parts[0] === 'guide';
@@ -246,7 +258,7 @@
   document.addEventListener('visibilitychange', () => { updateAvailability(); updateClock(); if (document.hidden && musicState === 'fading') stopMusic(); });
   document.addEventListener('fullscreenchange', () => { if ($('fullscreen')) $('fullscreen').textContent = document.fullscreenElement ? 'Exit fullscreen' : 'Fullscreen'; });
   document.addEventListener('keydown', event => {
-    if (!presenting || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey || event.target.closest('input,textarea,select,button,a,summary,[contenteditable="true"]')) return;
+    if (!presenting || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey || event.target.closest('input,textarea,select,button,a,summary,video,audio,[contenteditable="true"]')) return;
     const steps = stepsFor(), index = steps.indexOf(currentStep);
     if (event.key === 'ArrowRight' && index < steps.length-1) { event.preventDefault(); openDiscussion(steps[index+1]); }
     if (event.key === 'ArrowLeft' && index > 0) { event.preventDefault(); openDiscussion(steps[index-1]); }

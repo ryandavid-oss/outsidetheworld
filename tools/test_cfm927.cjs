@@ -91,7 +91,7 @@ if (shots) fs.mkdirSync(shots, {recursive:true});
     // Every discussion path fits both common projector sizes, and narrow phones do not overflow.
     for (const viewport of [{width:1440,height:900},{width:1280,height:720},{width:390,height:844},{width:320,height:640}]) {
       await page.setViewportSize(viewport);
-      const routes = ['', '#guide', ...['hope','refuge','mercy'].flatMap(path => ['read-1','read-2',...(path === 'mercy' ? ['read-3'] : []),'reflect','apply'].map(step=>`#discuss/${path}/${step}`)), '#discuss/opening', '#discuss/closing'];
+      const routes = ['', '#guide', ...['hope','refuge','mercy'].flatMap(path => ['read-1','read-2',...(path === 'mercy' ? ['read-3'] : []),'watch','reflect','apply'].map(step=>`#discuss/${path}/${step}`)), '#discuss/opening', '#discuss/closing'];
       for (const route of routes) {
         await page.goto(base+route);
         await page.evaluate(() => document.fonts.ready);
