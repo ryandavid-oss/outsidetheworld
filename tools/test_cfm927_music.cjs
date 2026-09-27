@@ -70,9 +70,7 @@ for (let i = 0; i < samples; i++) wav.writeInt16LE(Math.round(500 * Math.sin(i *
       return !audio.paused && Math.abs(audio.volume - 0.14) < 0.001;
     });
     assert.equal(requests, 3, 'reflection continues existing music without reconnecting');
-    await page.locator('#reflection-volume').fill('0.08');
-    assert.equal(await page.locator('#arrival-music').evaluate(audio => audio.volume), 0.08);
-    await page.locator('#reflection-return').click();
+    await page.keyboard.press('Escape');
     await stopped();
     await page.waitForFunction(() => !document.querySelector('#reflection-dialog').open);
     await play();
@@ -105,15 +103,20 @@ for (let i = 0; i < samples; i++) wav.writeInt16LE(Math.round(500 * Math.sin(i *
     await stopped();
 
     await page.locator('#think-toggle').click();
-    const beforeReadingMusic = requests;
     assert.equal(await page.locator('#arrival-music').getAttribute('src'), null, 'reading opens silently after music has stopped');
-    await page.locator('#reflection-music-toggle').click();
-    await page.waitForFunction(() => document.querySelector('#arrival-music').currentTime > 0.1);
-    assert.equal(requests, beforeReadingMusic + 1, 'music can be started inside the reading');
-    assert.equal(await page.locator('#arrival-music').evaluate(audio => audio.volume), 0.08, 'reading uses the selected quiet volume');
     await page.keyboard.press('Escape');
-    await stopped();
     await page.waitForFunction(() => !document.querySelector('#reflection-dialog').open);
+
+    // The automatic return fades and releases existing audio, without restarting it.
+    await play();
+    await page.clock.install();
+    await page.locator('#think-toggle').click();
+    await page.clock.fastForward(60000);
+    await page.clock.fastForward(1300);
+    await stopped();
+    assert.equal(await page.locator('#reflection-dialog').evaluate(d => d.open), false);
+    assert.equal(await page.locator('#music-toggle').textContent(), 'Play music');
+    await page.clock.resume();
 
     let pendingRoute;
     held = route => { pendingRoute = route; };

@@ -15,8 +15,8 @@
   <meta property="og:image" content="https://outsidetheworld.com/media/cfm906/images/christ-healing-at-bethesda.jpg">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/fonts/otw-fonts.css">
-  <link rel="stylesheet" href="media/cfm927/lesson.css?v=7">
-  <script defer src="media/cfm927/lesson.js?v=7"></script>
+  <link rel="stylesheet" href="media/cfm927/lesson.css?v=8">
+  <script defer src="media/cfm927/lesson.js?v=8"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to study</a>
@@ -58,30 +58,15 @@
     <section id="guide" class="guide-view" aria-labelledby="guide-title" hidden></section>
   </main>
   <footer class="site-footer" id="site-footer"><span>A companion to the official Come, Follow Me study.</span><a id="guide-link" href="#guide" hidden>Leader guide</a></footer>
-  <dialog class="reflection-dialog" id="reflection-dialog" aria-labelledby="reflection-heading">
+  <dialog class="reflection-dialog" id="reflection-dialog" aria-label="Scripture reflection" aria-describedby="reflection-instructions" tabindex="-1">
     <div class="reflection-shell">
       <figure class="reflection-art">
-        <img src="media/cfm906/images/christ-healing-at-bethesda.jpg" width="1920" height="1543" alt="The Savior reaches toward a man at the pool of Bethesda." loading="lazy">
-        <figcaption><a href="https://www.churchofjesuschrist.org/media/image/pool-of-bethesda-carl-bloch-5b6576e?lang=eng" target="_blank" rel="noopener noreferrer">Carl Bloch · Christ Healing the Sick at Bethesda ↗</a></figcaption>
+        <img src="media/cfm906/images/christ-healing-at-bethesda.jpg" width="1920" height="1543" alt="Christ Healing the Sick at Bethesda, by Carl Bloch. The Savior reaches toward a man at the pool." loading="lazy">
       </figure>
-      <header class="reflection-top">
-        <div><p class="reflection-eyebrow">This week in Isaiah</p><h2 id="reflection-heading" tabindex="-1">What do you notice about the Savior?</h2></div>
-        <button id="reflection-close" class="reflection-close" type="button" aria-label="Close reading">×</button>
-      </header>
       <div class="reflection-reading">
         <div id="reflection-stage" class="reflection-stage"></div>
       </div>
-      <footer class="reflection-controls">
-        <div class="reflection-progress" aria-hidden="true"><span id="reflection-progress"></span></div>
-        <div class="reflection-music">
-          <button class="reflection-control" id="reflection-music-toggle" type="button" aria-pressed="false">Play music</button>
-          <label for="reflection-volume" class="sr-only">Background music volume</label>
-          <input id="reflection-volume" type="range" min="0" max="0.4" step="0.01" value="0.14" aria-valuetext="14 percent">
-          <span class="reflection-music-status" id="reflection-music-status" role="status"></span>
-        </div>
-        <div class="reflection-timing"><span id="reflection-time" role="timer" aria-live="off">0:30</span><button class="reflection-control" id="reflection-hold" type="button">Hold</button></div>
-        <button class="reflection-return" id="reflection-return" type="button">Back to discussion <span aria-hidden="true">→</span></button>
-      </footer>
+      <p class="sr-only" id="reflection-instructions">Scripture excerpts change gently during this 60-second reading, then return to the opening question. Press Escape or tap to return sooner.</p>
       <p class="sr-only" id="reflection-status" role="status"></p>
     </div>
   </dialog>
