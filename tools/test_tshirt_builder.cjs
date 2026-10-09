@@ -46,7 +46,7 @@ function unzipStored(bytes) {
     const page = await context.newPage();
     const errors = [];
     page.on('pageerror', error => errors.push(error.message));
-    const ready = () => page.waitForFunction(() => document.querySelector('#renderState').textContent === 'Ready to play');
+    const ready = () => page.waitForFunction(() => document.querySelector('#renderState').textContent === 'Ready');
     const side = async value => { await page.locator(`[data-side="${value}"]`).first().click(); await ready(); };
     const size = async value => {
       await page.locator('#artSizeInput').evaluate((input, value) => {
@@ -59,6 +59,19 @@ function unzipStored(bytes) {
     const backText = 'Made for friends\nArizona, 2026.';
 
     await page.goto(base); await ready();
+    assert.equal(await page.locator('[data-side]').count(), 2, 'one side selector edits artwork and text');
+    assert.equal(await page.locator('.pixel-runner, .mode7-world, #destroyPageButton, #surpriseButton, [data-lock]').count(), 0, 'arcade controls and scenery are retired');
+    assert.equal(await page.locator('#quickColors [data-color]:visible').count(), 4);
+    assert.equal(await page.locator('#colorPicker').evaluate(picker => picker.open), false);
+    await page.locator('#colorPicker summary').click();
+    assert.equal(await page.locator('#colorGrid [data-color]:visible').count(), 51, 'the complete short-sleeve collection remains available');
+    await page.locator('#colorSearch').fill('eucalyptus');
+    assert.equal(await page.locator('#colorGrid [data-color]:visible').count(), 1);
+    await page.locator('#colorGrid [data-color="eucalyptus-blue"]').click(); await ready();
+    assert.equal(await page.locator('#selectedColor').textContent(), 'Eucalyptus Blue');
+    assert.equal(await page.locator('#colorPicker').evaluate(picker => picker.open), false);
+    await page.locator('#quickColors [data-color="black"]').click(); await ready();
+    await page.locator('#colorSearch').evaluate(input => { input.value = ''; input.dispatchEvent(new Event('input', { bubbles: true })); });
     assert.equal(await page.locator('#artSizeInput').inputValue(), '100');
     await size(75);
     assert.equal((await drawing()).find(entry => entry.image?.startsWith('blob:')).box[2], 210);
@@ -138,7 +151,9 @@ function unzipStored(bytes) {
     assert.ok(logo.box[1] >= 200, 'large graphics stay below the collar');
     await page.locator('#customTextInput').fill('X'.repeat(80)); await ready();
     assert.equal((await drawing()).filter(entry => entry.text).length, 80, 'long custom text is rendered, not dropped');
+    await page.locator('#phrasePicker summary').click();
     await page.locator('#phraseGrid [data-words-off]').click(); await ready();
+    assert.equal(await page.locator('#phrasePicker').evaluate(picker => picker.open), false);
     assert.equal((await drawing()).filter(entry => entry.text).length, 0);
     await page.locator('[data-art="none"]').click();
     assert.equal(await page.locator('#artSizeInput').isDisabled(), true);
