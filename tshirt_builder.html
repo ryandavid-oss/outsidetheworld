@@ -853,6 +853,22 @@
             gap: 24px;
         }
 
+        .builder-nav {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+
+        .builder-nav a {
+            min-width: 140px;
+            text-decoration: none;
+        }
+
+        .builder-nav [aria-current="page"] {
+            color: var(--light-blue);
+            border-color: var(--blue);
+        }
+
         .pixel-panel {
             position: relative;
             overflow: hidden;
@@ -1448,7 +1464,7 @@
         }
 
         .words-help {
-            margin: -4px 0 12px;
+            margin: 14px 0 12px;
             color: rgba(247, 242, 247, 0.60);
             font-family: var(--font-game);
             font-size: 0.53rem;
@@ -1465,6 +1481,65 @@
             display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 8px;
+        }
+
+        .design-field {
+            display: grid;
+            gap: 10px;
+            margin-top: 18px;
+            min-width: 0;
+        }
+
+        .design-field__label {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            color: var(--light-blue);
+            font-family: var(--font-game);
+            font-size: 0.75rem;
+            line-height: 1.5;
+        }
+
+        .design-field__label output {
+            color: var(--ink);
+            white-space: nowrap;
+        }
+
+        .art-size-input {
+            width: 100%;
+            min-height: 44px;
+            margin: 0;
+            accent-color: var(--blue);
+            cursor: pointer;
+        }
+
+        .art-size-input:disabled {
+            opacity: 0.4;
+            cursor: default;
+        }
+
+        .art-size-input:focus-visible {
+            outline: 2px solid var(--light-blue);
+            outline-offset: 4px;
+        }
+
+        .design-field .tiny-truth {
+            margin: 0;
+            font-size: 0.65rem;
+            letter-spacing: 0;
+            line-height: 1.6;
+            text-transform: none;
+        }
+
+        .custom-text-input {
+            width: 100%;
+            min-height: 100px;
+            resize: vertical;
+            text-transform: none;
+        }
+
+        .text-side-switch {
+            margin-bottom: 16px;
         }
 
         .phrase-button {
@@ -2880,6 +2955,11 @@
             </div>
         </section>
 
+        <nav class="builder-nav" aria-label="Choose what to make">
+            <a class="pixel-button" href="/tshirt_builder.html" aria-current="page">T-shirts</a>
+            <a class="pixel-button" href="/sticker_builder.html">Stickers</a>
+        </nav>
+
         <div class="game-grid">
             <section class="pixel-panel preview-panel" aria-label="Shirt design preview">
                 <div class="panel-bar">
@@ -2973,6 +3053,15 @@
                             </span>
                         </button>
                     </div>
+                    <div class="design-field">
+                        <label class="design-field__label" for="artSizeInput">
+                            <span><span id="artSizeSide">Front</span> graphic size</span>
+                            <output id="artSizeValue" for="artSizeInput">100%</output>
+                        </label>
+                        <input class="art-size-input" id="artSizeInput" type="range" min="25" max="150"
+                            step="5" value="100" aria-describedby="artSizeHelp" />
+                        <p class="tiny-truth" id="artSizeHelp">Resize this side. Each side keeps its own size.</p>
+                    </div>
                     <p class="tiny-truth" aria-live="polite">Changes apply to the <strong
                             id="editingSide">front</strong> of the shirt.</p>
                 </section>
@@ -2984,8 +3073,28 @@
                             aria-pressed="false">Lock</button>
                     </div>
 
-                    <p class="words-help"><strong>Back only.</strong> Choose a phrase now; flip the shirt to see it
-                        misbehave.</p>
+                    <div class="art-side-switch text-side-switch">
+                        <span class="art-side-switch__label">Text side</span>
+                        <div class="button-grid" aria-label="Choose which side to add text to">
+                            <button class="pixel-button" type="button" data-side="front"
+                                aria-pressed="true">Front</button>
+                            <button class="pixel-button" type="button" data-side="back"
+                                aria-pressed="false">Back</button>
+                        </div>
+                    </div>
+
+                    <label class="design-field" for="customTextInput">
+                        <span class="design-field__label">
+                            <span><span id="customTextSide">Front</span> custom text</span>
+                            <span id="customTextCount">0 / 80</span>
+                        </span>
+                        <textarea class="order-input custom-text-input" id="customTextInput" rows="3"
+                            maxlength="80" placeholder="Your words here" aria-describedby="customTextHelp"></textarea>
+                        <span class="tiny-truth" id="customTextHelp">Up to 80 characters per side. Your capitalization
+                            and line breaks are kept. Text sits beneath the graphic.</span>
+                    </label>
+
+                    <p class="words-help">Or choose a phrase for this side.</p>
 
                     <div class="phrase-grid" id="phraseGrid">
                         <button class="pixel-button phrase-button" type="button" data-words-off
@@ -3038,6 +3147,8 @@
                         <dd id="exportDesignFront"></dd>
                         <dt>Back</dt>
                         <dd id="exportDesignBack"></dd>
+                        <dt>Front text</dt>
+                        <dd id="exportDesignFrontText"></dd>
                         <dt>Back text</dt>
                         <dd id="exportDesignText"></dd>
                     </dl>
@@ -3216,7 +3327,9 @@
                     <label class="order-field order-field--wide">
                         Optional note
                         <textarea class="order-input" name="note" maxlength="1000"
-                            placeholder="Fit questions, delivery notes, or anything Ryan should know."></textarea>
+                            placeholder="Fit questions, delivery notes, or anything Ryan should know."
+                            aria-describedby="orderNoteHelp"></textarea>
+                        <small class="export-field-hint" id="orderNoteHelp">Your design details are included automatically.</small>
                     </label>
                 </div>
 
@@ -3434,6 +3547,10 @@
                 side: "front",
                 frontArt: "brandmark",
                 backArt: "full",
+                frontArtSize: 100,
+                backArtSize: 100,
+                frontWordsOn: false,
+                frontSlogan: "",
                 wordsOn: true,
                 slogan: "THE ANALOG DAWN",
                 locks: {
@@ -3451,6 +3568,7 @@
             var pendingOrderState = null;
             var pendingOrderCode = "";
             var orderPreviewUrl = "";
+            var orderPreviewGeneration = 0;
             var orderTrigger = null;
             var orderSubmitting = false;
             var exportTrigger = null;
@@ -3469,6 +3587,12 @@
             var artReadout = document.getElementById("artReadout");
             var wordsReadout = document.getElementById("wordsReadout");
             var editingSide = document.getElementById("editingSide");
+            var artSizeInput = document.getElementById("artSizeInput");
+            var artSizeValue = document.getElementById("artSizeValue");
+            var artSizeSide = document.getElementById("artSizeSide");
+            var customTextInput = document.getElementById("customTextInput");
+            var customTextSide = document.getElementById("customTextSide");
+            var customTextCount = document.getElementById("customTextCount");
             var phraseGrid = document.getElementById("phraseGrid");
             var colorGrid = document.getElementById("colorGrid");
             var colorAvailability = document.getElementById("colorAvailability");
@@ -3482,6 +3606,7 @@
             var exportDesignShirt = document.getElementById("exportDesignShirt");
             var exportDesignFront = document.getElementById("exportDesignFront");
             var exportDesignBack = document.getElementById("exportDesignBack");
+            var exportDesignFrontText = document.getElementById("exportDesignFrontText");
             var exportDesignText = document.getElementById("exportDesignText");
             var exportEditDesignButton = document.getElementById("exportEditDesignButton");
             var exportColorwayList = document.getElementById("exportColorwayList");
@@ -4499,8 +4624,12 @@
                     side: source.side,
                     frontArt: source.frontArt,
                     backArt: source.backArt,
+                    frontArtSize: normalizeArtSize(source.frontArtSize),
+                    backArtSize: normalizeArtSize(source.backArtSize),
+                    frontWordsOn: Boolean(source.frontWordsOn),
+                    frontSlogan: cleanCustomText(source.frontSlogan),
                     wordsOn: source.wordsOn,
-                    slogan: source.slogan,
+                    slogan: cleanCustomText(source.slogan),
                     locks: {
                         garment: source.locks.garment,
                         art: source.locks.art,
@@ -4514,6 +4643,48 @@
                     .replace(/_/g, " ")
                     .replace(/\s+/g, " ")
                     .trim();
+            }
+
+            function cleanCustomText(value) {
+                return String(value || "")
+                    .replace(/\r\n?/g, "\n")
+                    .replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, "")
+                    .replace(/[^\S\n]+/g, " ")
+                    .slice(0, 80)
+                    .trim();
+            }
+
+            function normalizeArtSize(value) {
+                if (value === null || value === undefined || value === "") return 100;
+                var size = Number(value);
+                return Number.isFinite(size) ? Math.max(25, Math.min(150, Math.round(size / 5) * 5)) : 100;
+            }
+
+            function sideText(designState, side) {
+                var enabled = side === "front" ? designState.frontWordsOn : designState.wordsOn;
+                return enabled ? cleanCustomText(side === "front" ? designState.frontSlogan : designState.slogan) : "";
+            }
+
+            function setSideText(side, value, enabled) {
+                if (side === "front") {
+                    state.frontSlogan = cleanCustomText(value);
+                    state.frontWordsOn = enabled;
+                } else {
+                    state.slogan = cleanCustomText(value);
+                    state.wordsOn = enabled;
+                }
+            }
+
+            function designSignature(designState) {
+                return [
+                    designState.style,
+                    designState.frontArt,
+                    designState.backArt,
+                    normalizeArtSize(designState.frontArtSize),
+                    normalizeArtSize(designState.backArtSize),
+                    sideText(designState, "front"),
+                    sideText(designState, "back")
+                ].join("|");
             }
 
             function normalizeColor(value) {
@@ -4593,13 +4764,7 @@
 
             function designCode(designState) {
                 var source = designState || state;
-                var signature = [
-                    source.style,
-                    source.color,
-                    source.frontArt,
-                    source.backArt,
-                    source.wordsOn ? source.slogan : "none"
-                ].join("|");
+                var signature = designSignature(source) + "|" + source.color;
                 return "OTW-" + simpleHash(signature);
             }
 
@@ -4609,13 +4774,7 @@
                         return item.size + "x" + item.quantity;
                     }).join(",");
                 }).join(";");
-                var signature = [
-                    designState.style,
-                    designState.frontArt,
-                    designState.backArt,
-                    designState.wordsOn ? designState.slogan : "none",
-                    orderSignature
-                ].join("|");
+                var signature = designSignature(designState) + "|" + orderSignature;
                 return "OTW-" + simpleHash(signature);
             }
 
@@ -4625,7 +4784,12 @@
                 params.set("color", state.color);
                 params.set("front", state.frontArt);
                 params.set("back", state.backArt);
+                params.set("frontSize", state.frontArtSize);
+                params.set("backSize", state.backArtSize);
+                params.set("textVersion", "2");
+                params.set("frontWords", state.frontWordsOn ? state.frontSlogan : "");
                 params.set("words", state.wordsOn ? state.slogan : "off");
+                params.set("wordsOn", state.wordsOn ? "1" : "0");
                 history.replaceState(null, "", "#" + params.toString());
             }
 
@@ -4645,11 +4809,14 @@
                     }
                     if (ART_OPTIONS.includes(front)) state.frontArt = front;
                     if (ART_OPTIONS.includes(back)) state.backArt = back;
-                    if (words === "off") {
+                    state.frontArtSize = normalizeArtSize(params.get("frontSize"));
+                    state.backArtSize = normalizeArtSize(params.get("backSize"));
+                    setSideText("front", params.get("frontWords"), Boolean(params.get("frontWords")));
+                    if (params.get("wordsOn") === "0" || (words === "off" && params.get("wordsOn") !== "1")) {
                         state.wordsOn = false;
                     } else if (words) {
                         state.wordsOn = true;
-                        state.slogan = cleanPhrase(words);
+                        state.slogan = params.get("textVersion") === "2" ? cleanCustomText(words) : cleanPhrase(words);
                     }
                     return true;
                 } catch (error) {
@@ -4668,8 +4835,12 @@
                         side: saved.side === "back" ? "back" : "front",
                         frontArt: ART_OPTIONS.includes(saved.frontArt) ? saved.frontArt : "brandmark",
                         backArt: ART_OPTIONS.includes(saved.backArt) ? saved.backArt : "full",
+                        frontArtSize: saved.frontArtSize,
+                        backArtSize: saved.backArtSize,
+                        frontWordsOn: Boolean(saved.frontWordsOn),
+                        frontSlogan: saved.frontSlogan,
                         wordsOn: Boolean(saved.wordsOn),
-                        slogan: cleanPhrase(saved.slogan || defaultState.slogan),
+                        slogan: cleanCustomText(saved.slogan || defaultState.slogan),
                         locks: {
                             garment: false,
                             art: false,
@@ -4749,21 +4920,31 @@
                 });
 
                 document.querySelectorAll("[data-words-off]").forEach(function (button) {
-                    button.setAttribute("aria-pressed", String(!state.wordsOn));
+                    button.setAttribute("aria-pressed", String(!sideText(state, state.side)));
                 });
 
                 document.querySelectorAll("[data-phrase]").forEach(function (button) {
                     button.setAttribute(
                         "aria-pressed",
-                        String(state.wordsOn && cleanPhrase(button.dataset.phrase) === cleanPhrase(state.slogan))
+                        String(sideText(state, state.side) === button.dataset.phrase)
                     );
                 });
 
                 buildCode.textContent = "BUILD " + designCode();
                 bodyReadout.textContent = colorLabel(state.color) + " " + titleCase(state.style);
                 artReadout.textContent = titleCase(activeArt(state.side));
-                wordsReadout.textContent = state.wordsOn ? state.slogan : "None";
+                wordsReadout.textContent = sideText(state, state.side) || "None";
                 editingSide.textContent = state.side;
+                artSizeSide.textContent = titleCase(state.side);
+                artSizeInput.value = state[state.side + "ArtSize"];
+                artSizeInput.disabled = activeArt(state.side) === "none";
+                artSizeValue.textContent = artSizeInput.value + "%";
+                customTextSide.textContent = titleCase(state.side);
+                customTextInput.setAttribute("aria-label", titleCase(state.side) + " custom text");
+                if (document.activeElement !== customTextInput) {
+                    customTextInput.value = sideText(state, state.side);
+                }
+                customTextCount.textContent = customTextInput.value.length + " / 80";
                 colorAvailability.textContent = state.style === "short"
                     ? "DM130 · " + DM130_COLORS.length + " SanMar colors"
                     : "DM132 · " + DM132_PRODUCT.colors.length + " SanMar colors";
@@ -4836,7 +5017,7 @@
             }
 
             function toPrintableLines(raw, maxLength) {
-                var clean = cleanPhrase(raw);
+                var clean = cleanCustomText(raw);
                 var limit = maxLength || 18;
                 if (!clean) return null;
                 if (clean.length <= limit) return [clean];
@@ -4886,36 +5067,67 @@
                 return LIGHT_SHIRTS.has(designState.color) ? "#000000" : "#ffffff";
             }
 
-            function backTextLayout(targetContext, designState) {
-                var lines = toPrintableLines(designState.slogan, 18);
-                if (!lines) return null;
+            function printableTextLines(text) {
+                var lines = [];
+                text.split("\n").forEach(function (paragraph) {
+                    var balanced = toPrintableLines(paragraph, 18);
+                    if (balanced) {
+                        lines = lines.concat(balanced);
+                        return;
+                    }
+                    var line = "";
+                    paragraph.split(" ").forEach(function (word) {
+                        var characters = Array.from(word);
+                        while (characters.length > 18) {
+                            if (line) lines.push(line);
+                            lines.push(characters.splice(0, 18).join(""));
+                            line = "";
+                        }
+                        word = characters.join("");
+                        var next = line ? line + " " + word : word;
+                        if (Array.from(next).length > 18 && line) {
+                            lines.push(line);
+                            line = word;
+                        } else {
+                            line = next;
+                        }
+                    });
+                    lines.push(line);
+                });
+                return lines;
+            }
 
-                var maxWidth = 2000 * 0.74;
-                var fontSize = Math.round(2000 * 0.034);
+            function sideTextLayout(targetContext, designState, side) {
+                var text = sideText(designState, side);
+                if (!text) return null;
+                var lines = printableTextLines(text);
+                var maxWidth = side === "front" ? 550 : 1480;
+                var maxHeight = side === "front" ? 480 : 500;
+                var fontSize = side === "front" ? 44 : 68;
                 var tracking = Math.round(2000 * 0.002);
-                var longest = lines.reduce(function (winner, line) {
-                    return line.length > winner.length ? line : winner;
-                }, "");
 
-                while (fontSize > 18) {
+                while (fontSize >= 4) {
                     targetContext.font = "700 " + fontSize + "px \"Fira Code\", monospace";
-                    if (measureTrackedWidth(targetContext, longest.toUpperCase(), tracking) <= maxWidth) break;
+                    var widest = Math.max.apply(null, lines.map(function (line) {
+                        return measureTrackedWidth(targetContext, line, tracking);
+                    }));
+                    if (widest <= maxWidth && lines.length * fontSize * 1.18 <= maxHeight) break;
                     fontSize -= 2;
-                    tracking = Math.max(1, tracking - 1);
+                    tracking = Math.max(0, tracking - 1);
                 }
 
                 return {
-                    lines: lines.map(function (line) { return line.toUpperCase(); }),
+                    lines: lines,
                     fontSize: fontSize,
                     tracking: tracking,
                     lineHeight: fontSize * 1.18
                 };
             }
 
-            function createBackTextArtworkCanvas(designState) {
+            function createTextArtworkCanvas(designState, side) {
                 var measureCanvas = document.createElement("canvas");
                 var measureContext = measureCanvas.getContext("2d");
-                var layout = backTextLayout(measureContext, designState);
+                var layout = sideTextLayout(measureContext, designState, side);
                 if (!layout) return null;
 
                 var textWidth = layout.lines.reduce(function (widest, line) {
@@ -4936,7 +5148,7 @@
                 var artworkContext = artworkCanvas.getContext("2d");
                 artworkContext.scale(productionScale, productionScale);
                 artworkContext.fillStyle = backTextColor(designState);
-                artworkContext.textAlign = "center";
+                artworkContext.textAlign = "left";
                 artworkContext.textBaseline = "middle";
                 artworkContext.font = "700 " + layout.fontSize + "px \"Fira Code\", monospace";
 
@@ -4996,7 +5208,7 @@
             }
 
             async function drawDesign(targetContext, side, designState) {
-                var source = designState || state;
+                var source = cloneState(designState || state);
                 var art = side === "front" ? source.frontArt : source.backArt;
                 var shirtUrl = shirtImagePath(source.color, source.style, side);
                 var logoUrl = resolveLogoPath(art, source.color);
@@ -5009,7 +5221,7 @@
                 targetContext.clearRect(0, 0, 2000, 2000);
                 drawShirtBase(targetContext, shirtImage, source);
 
-                var logoBottom = side === "back" ? 650 : 0;
+                var logoBottom = 650;
 
                 if (logoImage) {
                     var placement = PLACEMENT[side];
@@ -5019,27 +5231,28 @@
                             ? placement.logoScaleFrgmnts
                             : placement.logoScaleMark;
                     var targetWidth = Math.min(
-                        2000 * scale,
-                        side === "front" ? 2000 * 0.22 : 2000 * 0.62
+                        2000 * scale * source[side + "ArtSize"] / 100,
+                        side === "front" ? 600 : 1240
                     );
                     var targetHeight = targetWidth * (logoImage.height / logoImage.width);
                     var x = placement.logoCenter.x - targetWidth / 2;
-                    var y = placement.logoCenter.y - targetHeight / 2;
+                    var y = Math.max(200, placement.logoCenter.y - targetHeight / 2);
                     targetContext.drawImage(logoImage, x, y, targetWidth, targetHeight);
                     logoBottom = y + targetHeight;
                 }
 
-                if (side === "back" && source.wordsOn) {
+                if (sideText(source, side)) {
                     targetContext.save();
-                    var textLayout = backTextLayout(targetContext, source);
+                    var textLayout = sideTextLayout(targetContext, source, side);
                     if (textLayout) {
                         targetContext.fillStyle = backTextColor(source);
-                        targetContext.textAlign = "center";
+                        targetContext.textAlign = "left";
                         targetContext.textBaseline = "middle";
-                        var gap = art === "none" ? 50 : PLACEMENT.back.sloganGap;
+                        var gap = side === "front" ? 40 : (art === "none" ? 50 : PLACEMENT.back.sloganGap);
                         var baseY = logoBottom + gap +
-                            (textLayout.lines.length === 2 ? textLayout.lineHeight * 0.5 : 0);
-                        var centerX = PLACEMENT.back.shirtCenterX + PLACEMENT.back.sloganXOffset;
+                            (textLayout.lines.length > 1 ? textLayout.lineHeight * 0.5 : 0);
+                        var centerX = side === "front" ? PLACEMENT.front.logoCenter.x
+                            : PLACEMENT.back.shirtCenterX + PLACEMENT.back.sloganXOffset;
 
                         textLayout.lines.forEach(function (line, index) {
                             drawTrackedText(
@@ -5063,7 +5276,9 @@
                     var buffer = document.createElement("canvas");
                     buffer.width = 2000;
                     buffer.height = 2000;
-                    await drawDesign(buffer.getContext("2d"), state.side);
+                    if (document.fonts && document.fonts.ready) await document.fonts.ready;
+                    var snapshot = cloneState(state);
+                    await drawDesign(buffer.getContext("2d"), snapshot.side, snapshot);
                     if (revision !== renderRevision) return;
                     ctx.clearRect(0, 0, canvas.width, canvas.height);
                     ctx.drawImage(buffer, 0, 0);
@@ -5106,6 +5321,8 @@
                 }
 
                 if (!state.locks.words) {
+                    state.frontWordsOn = false;
+                    state.frontSlogan = "";
                     state.wordsOn = Math.random() > 0.18;
                     state.slogan = pick(slogans);
                 }
@@ -5246,159 +5463,49 @@
                 return side === "front" ? "Left chest" : "Centered back";
             }
 
-            function printerSizingInstruction(side) {
-                return side === "front"
-                    ? "Printer discretion - use a conventional left-chest size and preserve the scale and position shown in the proof"
-                    : "Printer discretion - use a conventional centered full-back size while preserving the margins and proportions shown in the proof";
-            }
-
-            function buildPrintSpec(designState, code, colorwayPlans, orderDetails, packageName) {
+            function buildPrintSpec(designState, code, colorwayPlans, orderDetails) {
                 var product = colorwayPlans[0].plan.product;
                 var lines = [
-                    "OUTSIDE THE WORLD / PRINT PACKAGE",
-                    "=================================",
+                    "OUTSIDE THE WORLD / PRINT PACKAGE / " + code,
                     "",
-                    "ORDER SUMMARY",
-                    "-------------",
-                    "Total quantity: " + orderDetails.totalQuantity,
-                    "Colorways: " + orderDetails.colorways.length,
+                    "Garment: " + product.styleNumber + " - " + product.productName,
+                    "Total shirts: " + orderDetails.totalQuantity,
                     "",
-                    "COLOR / SIZE BREAKDOWN",
-                    "----------------------"
+                    "PRINTING",
+                    "Match the front/back proofs for artwork size, placement, spacing, and color.",
+                    "Choose standard print dimensions appropriate to each garment size. Keep all proportions.",
+                    "Print from the artwork files, not the proofs or garment photos.",
+                    "Use the text PNGs as supplied; do not retype them.",
+                    ""
                 ];
 
-                orderDetails.colorways.forEach(function (colorway) {
-                    lines.push(colorLabel(colorway.color).toUpperCase());
-                    colorway.items.forEach(function (item) {
-                        lines.push(item.size + ": " + item.quantity);
-                    });
-                    lines.push("Color total: " + colorway.totalQuantity);
+                ["front", "back"].forEach(function (side) {
+                    var kind = designState[side + "Art"];
+                    lines.push(side.toUpperCase());
+                    lines.push("Graphic: " + artworkLabel(kind) +
+                        (kind === "none" ? "" : " (" + placementDescription(side, kind).toLowerCase() + ")"));
+                    var text = sideText(designState, side);
+                    lines.push(text ? "Text:\n" + text : "Text: None");
                     lines.push("");
                 });
 
-                lines.push("GARMENT");
-                lines.push("-------");
-                lines.push(product.styleNumber + " - " + product.productName);
-                lines.push("Sleeve: " + product.sleeve);
-                lines.push("");
-                lines.push("PRINT LOCATIONS");
-                lines.push("---------------");
-                lines.push(
-                    "Front: " + artworkLabel(designState.frontArt) +
-                    (designState.frontArt === "none" ? "" : " - " + placementDescription("front", designState.frontArt))
-                );
-                lines.push(
-                    "Back: " + artworkLabel(designState.backArt) +
-                    (designState.backArt === "none" ? "" : " - " + placementDescription("back", designState.backArt))
-                );
-                lines.push("Back text: " + (designState.wordsOn ? designState.slogan.toUpperCase() : "None"));
-                lines.push("");
-                lines.push("PRIMARY VISUAL PROOFS");
-                lines.push("---------------------");
                 colorwayPlans.forEach(function (colorwayPlan) {
-                    lines.push(
-                        colorLabel(colorwayPlan.colorway.color) + ": " +
-                        colorwayPlan.root + "/proofs/front-and-back.jpg"
-                    );
-                });
-                lines.push("");
-
-                lines.push("PHYSICAL SIZE AUTHORIZATION");
-                lines.push("---------------------------");
-                lines.push("Final physical print dimensions are intentionally left to the printer's professional discretion.");
-                lines.push("Use the supplied mockups as the authoritative reference for relative scale, placement, spacing, and visual balance.");
-                lines.push("Use standard professional print dimensions appropriate to each garment size.");
-                lines.push("Preserve all artwork proportions. Do not stretch, crop, or materially reposition any element.");
-                lines.push("No additional physical-size approval is required unless the artwork cannot fit the printable area or production would require a material departure from the supplied mockups.");
-                lines.push("");
-
-                lines.push("PRODUCTION ARTWORK");
-                lines.push("------------------");
-                colorwayPlans.forEach(function (colorwayPlan, colorwayIndex) {
                     var colorway = colorwayPlan.colorway;
-                    var contrast = LIGHT_SHIRTS.has(colorway.color)
-                        ? "Dark artwork for light garment"
-                        : "Light artwork for dark garment";
-
-                    lines.push(
-                        "COLORWAY " + (colorwayIndex + 1) + " - " +
-                        colorLabel(colorway.color).toUpperCase()
-                    );
-                    lines.push("Contrast treatment: " + contrast);
-                    lines.push("Primary proof: " + colorwayPlan.root + "/proofs/front-and-back.jpg");
-                    lines.push("");
-
+                    lines.push(colorLabel(colorway.color).toUpperCase() + " - " +
+                        colorway.items.map(function (item) {
+                            return item.size + " x " + item.quantity;
+                        }).join(", "));
+                    lines.push("Proof: " + colorwayPlan.root + "/proofs/front-and-back.jpg");
                     colorwayPlan.plan.artwork.forEach(function (entry) {
-                        if (entry.kind === "none") return;
-                        lines.push(
-                            entry.side.toUpperCase() + " - " +
-                            placementDescription(entry.side, entry.kind).toUpperCase()
-                        );
-                        lines.push("Artwork: " + artworkLabel(entry.kind));
-                        lines.push("Production file: " + (entry.relativePath || "None"));
-                        if (entry.sourcePath) {
-                            lines.push(
-                                "Format: " + assetExtension(entry.sourcePath).toUpperCase() +
-                                (assetExtension(entry.sourcePath) === "svg" ? " vector" : " original raster")
-                            );
-                            lines.push("Sizing: " + printerSizingInstruction(entry.side));
-                            lines.push("Visual placement: Match the supplied proof");
-                        }
-                        lines.push("");
+                        if (entry.relativePath) lines.push(titleCase(entry.side) + " graphic: " + entry.relativePath);
                     });
-
-                    if (designState.wordsOn) {
-                        lines.push("BACK TEXT");
-                        lines.push("Phrase: " + designState.slogan.toUpperCase());
-                        lines.push("Production file: " + colorwayPlan.backTextRelativePath);
-                        lines.push("Format: High-resolution transparent PNG");
-                        lines.push("Typeface reference: Fira Code Bold, weight 700");
-                        lines.push("Treatment: Uppercase with the supplied tracking, wrapping, and line spacing");
-                        lines.push("Color treatment: " + contrast);
-                        lines.push("Production instruction: Use the supplied flattened text artwork. Do not retype or substitute the font.");
-                        lines.push("Sizing: Scale as part of the complete back composition. Keep it centered beneath the back artwork and preserve the relative width and vertical gap shown in the proof.");
-                        lines.push("");
-                    }
-                });
-
-                lines.push("PROOF FILES");
-                lines.push("-----------");
-                colorwayPlans.forEach(function (colorwayPlan) {
-                    lines.push(colorLabel(colorwayPlan.colorway.color).toUpperCase());
-                    lines.push("Combined: " + colorwayPlan.root + "/proofs/front-and-back.jpg");
-                    lines.push("Front: " + colorwayPlan.root + "/proofs/front.png");
-                    lines.push("Back: " + colorwayPlan.root + "/proofs/back.png");
+                    ["front", "back"].forEach(function (side) {
+                        if (colorwayPlan.textRelativePaths[side]) {
+                            lines.push(titleCase(side) + " text: " + colorwayPlan.textRelativePaths[side]);
+                        }
+                    });
                     lines.push("");
                 });
-
-                lines.push("GARMENT REFERENCES");
-                lines.push("------------------");
-                colorwayPlans.forEach(function (colorwayPlan) {
-                    lines.push(colorLabel(colorwayPlan.colorway.color).toUpperCase());
-                    lines.push("Front: " + colorwayPlan.plan.garment[0].relativePath);
-                    lines.push("Back: " + colorwayPlan.plan.garment[1].relativePath);
-                    lines.push("");
-                });
-
-                lines.push("IMPORTANT PRODUCTION NOTES");
-                lines.push("--------------------------");
-                lines.push("Print from the production artwork files, not the proof images.");
-                lines.push("Use the proofs to confirm location, proportion, orientation, and artwork colorway.");
-                lines.push("Garment images are references only.");
-                lines.push("The printer is authorized to choose standard professional physical sizing without additional approval unless production requires a material departure from the proofs.");
-                lines.push("");
-                lines.push("PACKAGE REFERENCE");
-                lines.push("-----------------");
-                lines.push("Build code: " + code);
-                lines.push("Package filename: " + packageName + ".zip");
-                lines.push("Exported: " + new Date().toISOString());
-                lines.push("Build link: " + location.href);
-                lines.push(
-                    "Color IDs: " + orderDetails.colorways.map(function (colorway) {
-                        return colorway.color;
-                    }).join(", ")
-                );
-                lines.push("");
 
                 return lines.join("\n");
             }
@@ -5576,25 +5683,18 @@
             }
 
             function exportDesignSignature(designState) {
-                return [
-                    designState.style,
-                    designState.color,
-                    designState.frontArt,
-                    designState.backArt,
-                    designState.wordsOn ? designState.slogan : "none"
-                ].join("|");
+                return designSignature(designState) + "|" + designState.color;
             }
 
             function updateExportDesignSummary() {
                 var product = garmentDetails(exportDesignSnapshot.style);
                 exportDesignShirt.textContent = product.productName + " (" + product.styleNumber + ")";
                 exportDesignFront.textContent = artworkLabel(exportDesignSnapshot.frontArt) +
-                    (exportDesignSnapshot.frontArt === "none" ? "" : " — left chest");
+                    (exportDesignSnapshot.frontArt === "none" ? "" : " — " + exportDesignSnapshot.frontArtSize + "%");
                 exportDesignBack.textContent = artworkLabel(exportDesignSnapshot.backArt) +
-                    (exportDesignSnapshot.backArt === "none" ? "" : " — centered back");
-                exportDesignText.textContent = exportDesignSnapshot.wordsOn
-                    ? exportDesignSnapshot.slogan.toUpperCase()
-                    : "None";
+                    (exportDesignSnapshot.backArt === "none" ? "" : " — " + exportDesignSnapshot.backArtSize + "%");
+                exportDesignFrontText.textContent = sideText(exportDesignSnapshot, "front") || "None";
+                exportDesignText.textContent = sideText(exportDesignSnapshot, "back") || "None";
             }
 
             async function renderExportColorwayPreview(card, colorway, previewGeneration) {
@@ -5952,10 +6052,13 @@
                         designState: colorwayState,
                         root: root,
                         plan: createPrintPackagePlan(colorwayState, root),
-                        backTextRelativePath: colorwayState.wordsOn
-                            ? root + "/artwork/back-text-" +
-                                (LIGHT_SHIRTS.has(colorway.color) ? "dark" : "light") + ".png"
-                            : ""
+                        textRelativePaths: ["front", "back"].reduce(function (paths, side) {
+                            paths[side] = sideText(colorwayState, side)
+                                ? root + "/artwork/" + side + "-text-" +
+                                    (LIGHT_SHIRTS.has(colorway.color) ? "dark" : "light") + ".png"
+                                : "";
+                            return paths;
+                        }, {})
                     };
                 });
                 var originalLabel = exportSubmitButton.textContent;
@@ -5980,7 +6083,7 @@
                     var files = [
                         {
                             name: packageRoot + "/print-spec.txt",
-                            data: buildPrintSpec(designState, code, colorwayPlans, orderDetails, packageRoot)
+                            data: buildPrintSpec(designState, code, colorwayPlans, orderDetails)
                         }
                     ];
 
@@ -6013,16 +6116,17 @@
                         if (proofBlobs.some(function (blob) { return !blob; })) {
                             throw new Error("Could not render the proof files");
                         }
-                        if (colorwayPlan.designState.wordsOn) {
-                            var textArtworkCanvas = createBackTextArtworkCanvas(colorwayPlan.designState);
+                        for (var textSide of ["front", "back"]) {
+                            if (!sideText(colorwayPlan.designState, textSide)) continue;
+                            var textArtworkCanvas = createTextArtworkCanvas(colorwayPlan.designState, textSide);
                             var textArtworkBlob = textArtworkCanvas
                                 ? await canvasBlob(textArtworkCanvas, "image/png")
                                 : null;
                             if (!textArtworkBlob) {
-                                throw new Error("Could not render the back text artwork");
+                                throw new Error("Could not render the " + textSide + " text artwork");
                             }
                             files.push({
-                                name: packageRoot + "/" + colorwayPlan.backTextRelativePath,
+                                name: packageRoot + "/" + colorwayPlan.textRelativePaths[textSide],
                                 data: textArtworkBlob
                             });
                         }
@@ -6119,12 +6223,27 @@
                 orderSubmitButton.disabled = !pricing || !pendingOrderArtwork || orderSubmitting;
             }
 
+            function orderDesignDetails(designState) {
+                return ["front", "back"].map(function (side) {
+                    return titleCase(side) + " graphic: " + artworkLabel(designState[side + "Art"]) +
+                        " at " + normalizeArtSize(designState[side + "ArtSize"]) + "%\n" +
+                        titleCase(side) + " text: " + (sideText(designState, side) || "None");
+                }).join("\n");
+            }
+
             async function openOrderModal() {
+                var previewGeneration = ++orderPreviewGeneration;
                 orderTrigger = document.activeElement;
                 orderSubmitting = false;
                 pendingOrderArtwork = null;
                 pendingOrderState = cloneState(state);
                 pendingOrderCode = designCode();
+                var designSnapshot = cloneState(pendingOrderState);
+                var codeSnapshot = pendingOrderCode;
+                var noteField = orderForm.elements.namedItem("note");
+                noteField.maxLength = 1000 - orderDesignDetails(designSnapshot).length - 2;
+                document.getElementById("orderNoteHelp").textContent = "Up to " + noteField.maxLength +
+                    " characters. Your design details are included automatically.";
                 clearOrderPreview();
                 setOrderFormDisabled(false);
                 orderPreviewLoading.hidden = false;
@@ -6137,10 +6256,11 @@
                 orderCloseButton.focus();
 
                 try {
-                    var sheet = await createBuildSheet();
+                    if (document.fonts && document.fonts.ready) await document.fonts.ready;
+                    var sheet = await createBuildSheet(designSnapshot, null, codeSnapshot);
                     var blob = await canvasBlob(sheet, "image/jpeg", 0.90);
                     if (!blob) throw new Error("Artwork export failed");
-                    if (orderModal.hidden) return;
+                    if (orderModal.hidden || previewGeneration !== orderPreviewGeneration) return;
 
                     pendingOrderArtwork = blob;
                     orderPreviewUrl = URL.createObjectURL(blob);
@@ -6150,6 +6270,7 @@
                     updateOrderPricing();
                     setOrderStatus("Artwork ready. Confirm the price and enter your details.", "ok");
                 } catch (error) {
+                    if (orderModal.hidden || previewGeneration !== orderPreviewGeneration) return;
                     orderPreviewLoading.textContent = "The artwork preview could not be prepared.";
                     setOrderStatus("Please close this window and try Buy Now again.", "bad");
                     console.error(error);
@@ -6158,6 +6279,7 @@
 
             function closeOrderModal() {
                 if (orderSubmitting) return;
+                orderPreviewGeneration += 1;
                 orderModal.hidden = true;
                 document.body.classList.remove("order-modal-open");
                 pageMain.removeAttribute("inert");
@@ -6180,6 +6302,12 @@
                 }
 
                 var fields = new FormData(orderForm);
+                var orderNote = String(fields.get("note") || "").trim();
+                var designDetails = orderDesignDetails(pendingOrderState);
+                if (orderNote.length > 1000 - designDetails.length - 2) {
+                    setOrderStatus("Please shorten the optional note to leave room for your design details.", "bad");
+                    return;
+                }
                 var pricing = currentOrderPricing();
                 if (!pricing) {
                     setOrderStatus("Please choose a U.S. shipping state.", "bad");
@@ -6196,7 +6324,7 @@
                     size: fields.get("size"),
                     shipping_address: fields.get("shipping_address"),
                     shipping_state: pricing.shippingState,
-                    note: fields.get("note"),
+                    note: (orderNote ? orderNote + "\n\n" : "") + designDetails,
                     website: fields.get("website"),
                     price_acknowledged: fields.get("price_acknowledged") === "on",
                     order_terms_acknowledged: fields.get("order_terms_acknowledged") === "on",
@@ -6208,7 +6336,7 @@
                     color: pendingOrderState.color,
                     front_art: pendingOrderState.frontArt,
                     back_art: pendingOrderState.backArt,
-                    slogan: pendingOrderState.wordsOn ? pendingOrderState.slogan : "",
+                    slogan: sideText(pendingOrderState, "back"),
                     source: "tshirt_builder"
                 };
                 var submission = new FormData();
@@ -6343,6 +6471,21 @@
                     });
                 });
 
+                artSizeInput.addEventListener("input", function () {
+                    state[state.side + "ArtSize"] = normalizeArtSize(artSizeInput.value);
+                    commit();
+                });
+
+                customTextInput.addEventListener("input", function (event) {
+                    if (event.isComposing) return;
+                    setSideText(state.side, customTextInput.value, Boolean(cleanCustomText(customTextInput.value)));
+                    commit();
+                });
+                customTextInput.addEventListener("compositionend", function () {
+                    setSideText(state.side, customTextInput.value, Boolean(cleanCustomText(customTextInput.value)));
+                    commit();
+                });
+
                 document.querySelectorAll("[data-lock]").forEach(function (button) {
                     button.addEventListener("click", function () {
                         var key = button.dataset.lock;
@@ -6357,12 +6500,11 @@
                     if (!button) return;
 
                     if (button.hasAttribute("data-words-off")) {
-                        state.wordsOn = false;
+                        setSideText(state.side, "", false);
                         setMessage("Words removed. An uncommon show of restraint.");
                     } else if (button.dataset.phrase) {
-                        state.wordsOn = true;
-                        state.slogan = cleanPhrase(button.dataset.phrase);
-                        setMessage("Words selected. Flip to the back if necessary.");
+                        setSideText(state.side, button.dataset.phrase, true);
+                        setMessage("Words selected for the " + state.side + ".");
                     }
                     commit();
                 });
@@ -6549,7 +6691,6 @@
 
                 var restoredFromLink = restoreFromHash();
                 var restoredFromDevice = !restoredFromLink && restoreSavedBuild();
-                if (!slogans.includes(state.slogan)) slogans.unshift(state.slogan);
                 renderPhraseButtons();
                 bindControls();
                 syncUI();
